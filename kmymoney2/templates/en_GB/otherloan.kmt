@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+
+        accounts/en_GB/acctchrt_otherloan.gnucash-xea
+
+     Please check the source file for possible copyright
+     and licence information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Other Loans</title>
+ <shortdesc>Accounts for tracking other loans and associated interest</shortdesc>
+ <longdesc>You would want to select this set of accounts if you have something other than a home loan (other loan, other loan interest).</longdesc>
+ <accounts>
+  <account type="13" name="">
+   <account type="13" name="Interest">
+    <account type="13" name="Other Interest"/>
+   </account>
+  </account>
+  <account type="10" name=""/>
+  <account type="10" name="">
+   <account type="10" name="Other Loan"/>
+  </account>
+ </accounts>
+</kmymoney-account-template>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+<title>ScheduleF farming</title>
+ <shortdesc>Categories from IRS Schedule F</shortdesc>
+ <longdesc>Use this group if you farm. The categories in this group correspond with IRS Schedule F which should make preparing your taxes easier.</longdesc> 
+ <accounts>
+  <account type="12" name="" >
+   <account type="12" name="Farming" >
+    <account type="12" name="Sales of produced goods" />
+    <account type="12" name="Cooperative distributions" />
+    <account type="12" name="Agricultural program payments" />
+    <account type="12" name="Commodity Credit Corporation loans" />
+    <account type="12" name="Crop insurance proceeds/Crop disaster payments" />
+    <account type="12" name="Custom hire income" />
+    <account type="12" name="Other income" />
+   </account>
+  </account>
+  <account type="13" name="" >
+   <account type="13" name="Farming" >
+    <account type="13" name="Car and Truck" />
+    <account type="13" name="Chemicals" />
+    <account type="13" name="Conservation" />
+    <account type="13" name="Custom hire" />
+    <account type="13" name="Employee benefits" />
+    <account type="13" name="Feed" />
+    <account type="13" name="Fertilizers and Lime" />
+    <account type="13" name="Freight and Trucking" />
+    <account type="13" name="Fuel and Oil" />
+    <account type="13" name="Insurance" />
+    <account type="13" name="Mortgage" />
+    <account type="13" name="Hired Labor" />
+    <account type="13" name="Pension and profit sharing plans" />
+    <account type="13" name="Repairs and Maintenance" />
+    <account type="13" name="Seeds and Plants" />
+    <account type="13" name="Storage and Warehousing" />
+    <account type="13" name="Supplies" />
+    <account type="13" name="Taxes" />
+    <account type="13" name="Utilities" />
+    <account type="13" name="Veterinary, breeding, and medicine" />
+    <account type="13" name="Other" />
+    <account type="13" name="Rent or Lease" >
+     <account type="13" name="Vehicles, Macinery, Equipment" />
+     <account type="13" name="Other" />
+    </account>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

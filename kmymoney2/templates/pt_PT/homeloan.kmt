@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+
+        accounts/pt_PT/acctchrt_homeloan.gnucash-xea
+
+     Please check the source file for possible copyright
+     and licence information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Empréstimo para Habitação</title>
+ <shortdesc>Contas para empréstimo de habitação e juros associados</shortdesc>
+ <longdesc>Desejará seleccionar este conjunto de contas caso tenha contraido um empréstimo para habitação (emprétimo habitação, juro do empréstimo).</longdesc>
+ <accounts>
+  <account type="13" name="">
+   <account type="13" name="Juros">
+    <account type="13" name="Juros Empréstimo"/>
+   </account>
+  </account>
+  <account type="10" name="">
+   <account type="10" name="Empréstimos">
+    <account type="10" name="Empréstimo Habitação"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

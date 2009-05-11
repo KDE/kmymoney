@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Pets</title>
+ <shortdesc>Categories for pets</shortdesc>
+ <longdesc>Some categories that can be used if you have a pet.  Use with one of the base category groups.</longdesc>
+ <accounts>
+  <account type="12" name="" />
+  <account type="13" name="" >
+   <account type="13" name="Pets" >
+    <account type="13" name="Pet Food" />
+    <account type="13" name="Pet Supplies" />
+    <account type="13" name="Veterinary" />
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

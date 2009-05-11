@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+
+        accounts/fr_CA/acctchrt_conjointrev.gnucash-xea
+
+     Please check the source file for possible copyright
+     and licence information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Revenus - Conjoint(e)</title>
+ <shortdesc>Comptes pour le suivi distinct des revenus du (de la) conjoint(e)</shortdesc>
+ <longdesc>Sélectionnez ce groupe de comptes si vous voulez suivre séparément les revenus et dépenses d'emploi du (de la) conjoint(e).</longdesc>
+ <accounts>
+  <account type="13" name="">
+   <account type="13" name="Taxes et impôts">
+    <account type="13" name="Emploi - Conjoint(e)">
+     <account type="13" name="Fédéral"/>
+     <account type="13" name="Assurance emploi"/>
+     <account type="13" name="RRQ/RCP"/>
+     <account type="13" name="RAMQ/Medicare"/>
+     <account type="13" name="Provincial"/>
+    </account>
+   </account>
+  </account>
+  <account type="12" name="">
+   <account type="12" name="Emploi - Conjoint(e)">
+    <account type="12" name="Frais remboursés"/>
+    <account type="12" name="Primes"/>
+    <account type="12" name="Salaire"/>
+    <account type="12" name="Commissions"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

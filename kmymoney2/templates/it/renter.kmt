@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+
+        accounts/it/acctchrt_renter.gnucash-xea
+
+     Please check the source file for possible copyright
+     and licence information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Uscite affitto</title>
+ <shortdesc>Uscite associate all'affitto di una casa</shortdesc>
+ <longdesc>Selezionare questo insieme di conti se si ha in affitto una casa o un appartamento.</longdesc>
+ <accounts>
+  <account type="13" name="">
+   <account type="13" name="Affitto"/>
+  </account>
+ </accounts>
+</kmymoney-account-template>

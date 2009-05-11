@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>ScheduleB and D</title>
+ <shortdesc>Categories from IRS Schedules B and D</shortdesc>
+ <longdesc>Use this group if you want some categories that correspond to IRS Schedules B and D for reporting Interest earned, Dividends, and Capital Gains and Losses. Use with one of the base category groups.</longdesc>
+ <accounts>
+  <account type="12" name="" >
+   <account type="12" name="Capital Gains" >
+    <account type="12" name="Long Term" />
+    <account type="12" name="Short Term" />
+   </account>
+   <account type="12" name="Interest Earned" />
+   <account type="12" name="Dividends" />
+   <account type="12" name="Foreign Accounts/Trusts" />
+  </account>
+  <account type="13" name="" >
+   <account type="13" name="Capital Losses" >
+    <account type="13" name="Long Term" />
+    <account type="13" name="Short Term" />
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

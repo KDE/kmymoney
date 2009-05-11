@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Base -Detail</title>
+ <shortdesc>A little bit more detail</shortdesc>
+ <longdesc> Use this group if you like to see more detail and do not want to take the time to create all of the categories yourself. You may wish to add some additional groups if you own a home, have kids, etc.</longdesc>
+
+ <accounts>
+  <account type="12" name="" >
+   <account type="12" name="Job" >
+    <account type="12" name="Bonus" />
+    <account type="12" name="Wages or Salary" />
+   </account>
+   <account type="12" name="Other income" />
+  </account>
+  <account type="13" name="" >
+   <account type="13" name="Food" >
+    <account type="13" name="Dining out" />
+    <account type="13" name="Groceries" />
+   </account>
+   <account type="13" name="Housing" >
+    <account type="13" name="Rent" />
+    <account type="13" name="Repairs and Maintenance" />
+    <account type="13" name="Furnishings" />
+   </account>
+   <account type="13" name="Miscellaneous/Other" >
+    <account type="13" name="Accountant/Tax Preparation" />
+   </account>
+   <account type="13" name="Health/Medical" >
+    <account type="13" name="Dental" />
+    <account type="13" name="Doctor" />
+    <account type="13" name="Hospital" />
+    <account type="13" name="Prescriptions" />
+    <account type="13" name="Chiropractic" />
+    <account type="13" name="Optometrist" />
+    <account type="13" name="Health Insurance" />
+    <account type="13" name="Disability Insurance" />
+   </account>
+   <account type="13" name="Transportation" >
+    <account type="13" name="Car/Auto" >
+     <account type="13" name="Fuel" />
+     <account type="13" name="Service/Repairs" />
+     <account type="13" name="Auto Insurance" />
+     <account type="13" name="Registration/Taxes" />
+     <account type="13" name="Maintenance" />
+     <account type="13" name="Payment" />
+    </account>
+    <account type="13" name="Public Transportation" />
+   </account>
+   <account type="13" name="Personal" >
+    <account type="13" name="Life Insurance" />
+    <account type="13" name="Education/School" />
+    <account type="13" name="Fitness/Gym" />
+    <account type="13" name="Appearance/Grooming" />
+    <account type="13" name="Miscellaneous/Other" />
+    <account type="13" name="Gifts" />
+   </account>
+   <account type="13" name="Recreation" >
+    <account type="13" name="Vacation" />
+    <account type="13" name="Entertainment" />
+    <account type="13" name="Hobbies" />
+   </account>
+   <account type="13" name="Utilities" >
+    <account type="13" name="Electricity" />
+    <account type="13" name="Water" />
+    <account type="13" name="Natural Gas" />
+    <account type="13" name="Phone" >
+     <account type="13" name="Wireless" />
+     <account type="13" name="Local" />
+     <account type="13" name="Long Distance" />
+    </account>
+    <account type="13" name="Cable/Satellite" />
+    <account type="13" name="Internet" />
+    <account type="13" name="Garbage/Recycling" />
+   </account>
+   <account type="13" name="Charity" />
+   <account type="13" name="Clothing" >
+    <account type="13" name="Cleaning/Laundry" />
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

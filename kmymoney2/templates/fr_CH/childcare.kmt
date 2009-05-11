@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+
+        accounts/fr_CH/acctchrt_childcare.gnucash-xea
+
+     Please check the source file for possible copyright
+     and licence information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Dépenses de garderie</title>
+ <shortdesc>Un compte de suivi des coûts de garderie d'enfants</shortdesc>
+ <longdesc>Vous devriez sélectionner cet ensemble de comptes si vous avez des dépenses de garderie.</longdesc>
+ <accounts>
+  <account type="13" name="">
+   <account type="13" name="Garderie"/>
+  </account>
+ </accounts>
+</kmymoney-account-template>

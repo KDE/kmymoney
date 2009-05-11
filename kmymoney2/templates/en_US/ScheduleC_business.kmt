@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>ScheduleC business</title>
+ <shortdesc>Categories from IRS Schedule C</shortdesc>
+ <longdesc>Use this group if you plan to use KMyMoney for a simple business or to track business expenses. This group contains categories that correspond to IRS Schedule C and will make preparing your taxes easier.  Can be used alone or with one of the base category groups.</longdesc> 
+
+ <accounts>
+  <account type="12" name="" >
+   <account type="12" name="Business" >
+    <account type="12" name="Revenue" />
+    <account type="12" name="Interest Income" />
+    <account type="12" name="Services Income" />
+   </account>
+  </account>
+  <account type="13" name="" >
+   <account type="13" name="Business" >
+    <account type="13" name="Auto" >
+     <account type="13" name="Fuel" />
+     <account type="13" name="Service" />
+     <account type="13" name="Insurance" />
+     <account type="13" name="Registration" />
+    </account>
+    <account type="13" name="Cost of Goods Sold" />
+    <account type="13" name="Legal And Professional" />
+    <account type="13" name="Taxes" >
+     <account type="13" name="Federal Taxes" />
+     <account type="13" name="State Taxes" />
+     <account type="13" name="Local Taxes" />
+     <account type="13" name="Social Security" />
+     <account type="13" name="Property Taxes" />
+    </account>
+    <account type="13" name="Travel, Meals, and Entertainment" >
+     <account type="13" name="Travel" />
+     <account type="13" name="Fares" />
+     <account type="13" name="Meals" />
+    </account>
+    <account type="13" name="Rent or Lease" >
+     <account type="13" name="Vehicles, Machinery, Equipment" />
+     <account type="13" name="Other Business Property" />
+    </account>
+    <account type="13" name="Supplies" >
+     <account type="13" name="Hardware" />
+     <account type="13" name="Software" />
+     <account type="13" name="Office" />
+    </account>
+    <account type="13" name="Other" />
+    <account type="13" name="Utilities" >
+     <account type="13" name="Electricity" />
+     <account type="13" name="Gas" />
+     <account type="13" name="Telephone/Internet/Fax" />
+     <account type="13" name="Water" />
+     <account type="13" name="Sewer" />
+     <account type="13" name="Garbage/Recycling" />
+    </account>
+    <account type="13" name="Wages/Salary" />
+    <account type="13" name="Advertising" />
+    <account type="13" name="Contract Labor" />
+    <account type="13" name="Commisions and Fees" />
+    <account type="13" name="Employee Benefit Programs" />
+    <account type="13" name="Insurance (other than Health)" />
+    <account type="13" name="Interest" >
+     <account type="13" name="Mortgage" />
+     <account type="13" name="Other" />
+    </account>
+    <account type="13" name="Pension and Profit-Sharing Plans" />
+    <account type="13" name="Repairs and Maintenance" />
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

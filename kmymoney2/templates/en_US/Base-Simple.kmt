@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+<title>Base -Simple</title>
+ <shortdesc>Small and simple set of categories</shortdesc>
+ <longdesc>If you just want to keep things as basic and easy as possible, you should choose this category group.</longdesc> 
+
+ <accounts>
+  <account type="12" name="" >
+   <account type="12" name="Job" />
+  </account>
+  <account type="13" name="" >
+   <account type="13" name="Food" />
+   <account type="13" name="Housing" />
+   <account type="13" name="Miscellaneous/Other" />
+   <account type="13" name="Health/Medical" />
+   <account type="13" name="Transportation" />
+   <account type="13" name="Personal" />
+   <account type="13" name="Recreation" />
+   <account type="13" name="Utilities" />
+   <account type="13" name="Charity" />
+   <account type="13" name="Clothing" />
+  </account>
+ </accounts>
+</kmymoney-account-template>

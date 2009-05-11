@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+
+        accounts/pt_PT/acctchrt_carloan.gnucash-xea
+
+     Please check the source file for possible copyright
+     and licence information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Empréstimo para Automóvel</title>
+ <shortdesc>Contas para empréstimo para automóvel e juros associados</shortdesc>
+ <longdesc>Você desejará seleccionar este conjunto de contas caso tenha um empréstimo para automóvel (empréstimo para automóvel, juro do empréstimo).</longdesc>
+ <accounts>
+  <account type="13" name="">
+   <account type="13" name="Juro">
+    <account type="13" name="Juro Empréstimo Automóvel"/>
+   </account>
+  </account>
+  <account type="10" name="">
+   <account type="10" name="Empréstimos">
+    <account type="10" name="Empréstimo Automóvel"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

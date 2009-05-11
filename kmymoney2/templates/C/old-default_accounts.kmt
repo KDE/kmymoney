@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+  <title></title>
+  <shortdesc></shortdesc>
+  <longdesc></longdesc>
+  <accounts>
+    <account name="" type="13">
+      <account name="Bills" type="13">
+        <account name="Telephone" type="13"/>
+        <account name="Rent" type="13"/>
+        <account name="Electricity" type="13"/>
+        <account name="TV" type="13"/>
+        <account name="SKY" type="13"/>
+        <account name="Council Tax" type="13"/>
+        <account name="Fuel Oil" type="13"/>
+        <account name="Gas" type="13"/>
+        <account name="Mortgage Interest" type="13"/>
+        <account name="Water &amp; Sewage" type="13"/>
+      </account>
+      <account name="Bank Charges" type="13">
+        <account name="Interest Paid" type="13"/>
+        <account name="Service Charge" type="13"/>
+      </account>
+      <account name="Car" type="13">
+        <account name="Car Maintenance" type="13"/>
+        <account name="Petrol" type="13"/>
+      </account>
+      <account name="Cash Withdrawal" type="13"/>
+      <account name="Charity" type="13">
+        <account name="Covenants" type="13"/>
+        <account name="Donations" type="13"/>
+        <account name="Settlements" type="13"/>
+      </account>
+      <account name="Child Care" type="13"/>
+      <account name="Christmas" type="13"/>
+      <account name="Clothing" type="13"/>
+      <account name="Education" type="13">
+        <account name="Books" type="13"/>
+        <account name="Fees" type="13"/>
+        <account name="Tuition" type="13"/>
+      </account>
+      <account name="Food" type="13">
+        <account name="Dining Out" type="13"/>
+        <account name="Groceries" type="13"/>
+      </account>
+      <account name="Gardening" type="13"/>
+      <account name="Healthcare" type="13">
+        <account name="Dental" type="13"/>
+        <account name="Doctor" type="13"/>
+        <account name="Hospital" type="13"/>
+        <account name="Optician" type="13"/>
+        <account name="Prescriptions" type="13"/>
+      </account>
+      <account name="Holidays" type="13">
+        <account name="Accomodation" type="13"/>
+        <account name="Travel" type="13"/>
+      </account>
+      <account name="Household" type="13">
+        <account name="Furnishings" type="13"/>
+      </account>
+      <account name="Insurance" type="13">
+        <account name="Home and Contents" type="13"/>
+        <account name="Life" type="13"/>
+        <account name="Medical" type="13"/>
+        <account name="Motor" type="13"/>
+      </account>
+      <account name="Job Expense" type="13">
+        <account name="Non-Reimbursed" type="13"/>
+        <account name="Reimbursed" type="13"/>
+      </account>
+      <account name="Leisure" type="13">
+        <account name="Books &amp; Magazines" type="13"/>
+        <account name="Entertaining" type="13"/>
+        <account name="Films &amp; Video Rentals" type="13"/>
+        <account name="Sporting Events" type="13"/>
+        <account name="Sports Goods" type="13"/>
+        <account name="Tapes &amp; CDs" type="13"/>
+        <account name="Theatre &amp; Concerts etc" type="13"/>
+        <account name="Toys &amp; Games" type="13"/>
+      </account>
+      <account name="Loan" type="13">
+        <account name="Loan Interest" type="13"/>
+      </account>
+      <account name="Motor" type="13">
+        <account name="Fuel" type="13"/>
+        <account name="Loan" type="13"/>
+        <account name="Service" type="13"/>
+      </account>
+      <account name="Other Expense" type="13">
+        <account name="Unknown" type="13"/>
+      </account>
+      <account name="Pet Care" type="13">
+        <account name="Food" type="13"/>
+        <account name="Supplies" type="13"/>
+        <account name="Vet's Bills" type="13"/>
+      </account>
+      <account name="Recreation" type="13"/>
+      <account name="Taxes" type="13">
+        <account name="1st option" type="13"/>
+        <account name="Foreign savings" type="13"/>
+        <account name="Income Tax" type="13"/>
+        <account name="Interest" type="13"/>
+        <account name="Local Tax" type="13"/>
+        <account name="Nat Ins" type="13"/>
+        <account name="Other Invest" type="13"/>
+        <account name="Other Tax" type="13"/>
+        <account name="Unit trust" type="13"/>
+      </account>
+      <account name="Utilities" type="13">
+        <account name="Electricity" type="13"/>
+        <account name="Gas" type="13"/>
+        <account name="Telephone" type="13"/>
+        <account name="Water" type="13"/>
+      </account>
+    </account>
+    <account name="" type="12">
+      <account name="Alimony" type="12"/>
+      <account name="Bonus" type="12"/>
+      <account name="Capital gains" type="12"/>
+      <account name="Child Benefit" type="12"/>
+      <account name="Div Income" type="12">
+        <account name="Ord dividend" type="12"/>
+        <account name="Stock dividend" type="12"/>
+      </account>
+      <account name="Employment" type="12">
+        <account name="Benefits" type="12"/>
+        <account name="Foreign" type="12"/>
+        <account name="Lump sums" type="12"/>
+        <account name="Other employ" type="12"/>
+        <account name="Salary &amp; wages" type="12"/>
+      </account>
+      <account name="Gift Received" type="12"/>
+      <account name="Int Inc" type="12">
+        <account name="Bank Interest" type="12"/>
+        <account name="Gross" type="12"/>
+        <account name="Net" type="12"/>
+        <account name="Other savings" type="12"/>
+      </account>
+      <account name="Invest. income" type="12">
+        <account name="1st option" type="12"/>
+        <account name="Dividend" type="12"/>
+        <account name="Foreign" type="12"/>
+        <account name="Other savings" type="12"/>
+        <account name="Other trusts" type="12"/>
+        <account name="Other trusts#Capital" type="12"/>
+        <account name="Other trusts#Dist. rec'd" type="12"/>
+        <account name="Other trusts#Estate" type="12"/>
+        <account name="UK other" type="12"/>
+        <account name="UK other#Unit trusts" type="12"/>
+      </account>
+      <account name="Investment Income" type="12">
+        <account name="Capital Gains" type="12"/>
+        <account name="Dividends" type="12"/>
+        <account name="Interest" type="12"/>
+        <account name="Tax-Exempt Interest" type="12"/>
+      </account>
+      <account name="Nat. Savings" type="12">
+        <account name="Capital bonds" type="12"/>
+        <account name="Deposit bonds" type="12"/>
+        <account name="Income bonds" type="12"/>
+        <account name="Invest. account" type="12"/>
+        <account name="Ord. account" type="12"/>
+      </account>
+      <account name="Old Age Pension" type="12">
+        <account name="Employer" type="12"/>
+        <account name="State" type="12"/>
+      </account>
+      <account name="Other Income" type="12">
+        <account name="Student loan" type="12"/>
+        <account name="Child Support" type="12"/>
+        <account name="Employee Share Option" type="12"/>
+        <account name="Gifts Received" type="12"/>
+        <account name="Loan Principal Received" type="12"/>
+        <account name="Lottery or Premium Bond Prizes" type="12"/>
+        <account name="Tax Refund" type="12"/>
+        <account name="Unemployment Benefit" type="12"/>
+      </account>
+      <account name="Retirement Income" type="12">
+        <account name="Pensions &amp; Annuities" type="12"/>
+        <account name="State Pension Benefits" type="12"/>
+      </account>
+      <account name="Social security" type="12">
+        <account name="Industrial" type="12"/>
+        <account name="Invalid" type="12"/>
+        <account name="Widowed" type="12"/>
+      </account>
+      <account name="Wages &amp; Salary" type="12">
+        <account name="Bonus" type="12"/>
+        <account name="Commission" type="12"/>
+        <account name="Employer Pension Contributions" type="12"/>
+        <account name="Gross Pay" type="12"/>
+        <account name="Net Pay" type="12"/>
+        <account name="Overtime" type="12"/>
+      </account>
+    </account>
+  </accounts>
+</kmymoney-account-template>

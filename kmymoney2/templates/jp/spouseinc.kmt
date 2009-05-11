@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+
+        accounts/ja/acctchrt_spouseinc.gnucash-xea
+
+     Please check the source file for possible copyright
+     and licence information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>配偶者収益</title>
+ <shortdesc>配偶者の収益を分離して管理するための勘定科目集</shortdesc>
+ <longdesc>配偶者が働いている場合はこの勘定科目セットを選ぶとよいでしょう。</longdesc>
+ <accounts>
+  <account type="12" name="">
+   <account type="12" name="給与（配偶者）"/>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="税金（配偶者）">
+    <account type="13" name="公的年金"/>
+    <account type="13" name="健康保険"/>
+    <account type="13" name="地方税"/>
+    <account type="13" name="国税"/>
+    <account type="13" name="その他の税"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

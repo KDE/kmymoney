@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+
+        accounts/it/acctchrt_carloan.gnucash-xea
+
+     Please check the source file for possible copyright
+     and licence information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Mutuo auto</title>
+ <shortdesc>Conti per il mutuo dell'auto e relativi interessi</shortdesc>
+ <longdesc>Selezionare questo insieme di conti se si possiede un mutuo per l'automobile (mutuo automobile, interessi sul mutuo).</longdesc>
+ <accounts>
+  <account type="13" name="">
+   <account type="13" name="Interessi">
+    <account type="13" name="Interessi mutuo automobile"/>
+   </account>
+  </account>
+  <account type="10" name="">
+   <account type="10" name="Mutui">
+    <account type="10" name="Mutuo automobile"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

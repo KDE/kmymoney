@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>ScheduleE rental property</title>
+ <shortdesc>Categories from IRS Schedule E</shortdesc>
+ <longdesc>Use this group if you own rental properties or receive royalties and are required to use IRS Schedule E</longdesc> 
+
+ <accounts>
+  <account type="12" name="" >
+   <account type="12" name="Rental Income" >
+    <account type="12" name="Rent" />
+    <account type="12" name="Security Deposit" />
+    <account type="12" name="Late Fee" />
+    <account type="12" name="Damages Paid" />
+    <account type="12" name="Application Fee" />
+    <account type="12" name="Pet Fee" />
+   </account>
+  </account>
+  <account type="13" name="" >
+   <account type="13" name="Rental Expense" >
+    <account type="13" name="Advertising" />
+    <account type="13" name="Auto and Travel" />
+    <account type="13" name="Cleaning and Maintenance" />
+    <account type="13" name="Commissions" />
+    <account type="13" name="Property Insurance" />
+    <account type="13" name="Legal and Professional" />
+    <account type="13" name="Management Fees" >
+     <account type="13" name="Office Rent" />
+    </account>
+    <account type="13" name="Rental Mortgage Interest" />
+    <account type="13" name="Other Interest" />
+    <account type="13" name="Repairs" />
+    <account type="13" name="Supplies" />
+    <account type="13" name="Utilities" />
+    <account type="13" name="Other" >
+     <account type="13" name="Office Supplies" />
+     <account type="13" name="Postage" />
+    </account>
+    <account type="13" name="Property Taxes" />
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

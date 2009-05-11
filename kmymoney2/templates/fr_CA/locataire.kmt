@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+
+        accounts/fr_CA/acctchrt_locataire.gnucash-xea
+
+     Please check the source file for possible copyright
+     and licence information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Location d'un logis</title>
+ <shortdesc>Frais associés à la location d'une résidence ou d'un logis.</shortdesc>
+ <longdesc>Sélectionnez ce groupe de compte si vous louez une résidence ou un logis (Loyer, assurances, ...).</longdesc>
+ <accounts>
+  <account type="13" name="">
+   <account type="13" name="Assurances">
+    <account type="13" name="Locataire"/>
+   </account>
+   <account type="13" name="Loyer"/>
+  </account>
+ </accounts>
+</kmymoney-account-template>

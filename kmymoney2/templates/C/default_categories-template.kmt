@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>KMyMoney 0.8 default</title>
+ <shortdesc/>
+ <longdesc/>
+ <accounts>
+  <account type="12" name="" >
+   <account type="12" name="Employment" >
+    <account type="12" name="Benefits" />
+    <account type="12" name="Bonus" />
+    <account type="12" name="Other employment income" />
+    <account type="12" name="Pension" />
+    <account type="12" name="Wages &amp; Salary" />
+   </account>
+   <account type="12" name="Investment Income" >
+    <account type="12" name="Short-Term Capital Gains" />
+    <account type="12" name="Long-Term Capital Gains" />
+    <account type="12" name="Dividends" />
+    <account type="12" name="Interest" />
+    <account type="12" name="Tax-Exempt Interest" />
+   </account>
+   <account type="12" name="Banking" >
+    <account type="12" name="Interest Earned" />
+    <account type="12" name="Loan Principal Received" />
+   </account>
+   <account type="12" name="Other Income" >
+    <account type="12" name="Alimony" />
+    <account type="12" name="Child Support" />
+    <account type="12" name="Disability" />
+    <account type="12" name="Gifts Received" />
+    <account type="12" name="Lottery or Premium Bond Prizes" />
+    <account type="12" name="Tax Refund" />
+    <account type="12" name="Unemployment Benefit" />
+   </account>
+   <account type="12" name="Retirement Income" />
+  </account>
+  <account type="13" name="" >
+   <account type="13" name="Bills &amp; monthly payments" >
+    <account type="13" name="Utilities" >
+     <account type="13" name="Electricity" />
+     <account type="13" name="Fuel Oil" />
+     <account type="13" name="Natural Gas" />
+     <account type="13" name="Water &amp; Sewage" />
+     <account type="13" name="Garbage &amp; Recycling" />
+    </account>
+    <account type="13" name="Telephone" >
+     <account type="13" name="Local" />
+     <account type="13" name="Long Distance" />
+     <account type="13" name="Wireless" />
+    </account>
+    <account type="13" name="Rent" />
+    <account type="13" name="Mortgage" >
+     <account type="13" name="Interest" />
+     <account type="13" name="Principal" />
+    </account>
+    <account type="13" name="Cable / Satelite TV" />
+    <account type="13" name="Internet" />
+   </account>
+   <account type="13" name="Bank Charges" >
+    <account type="13" name="Interest Paid" />
+    <account type="13" name="Service Charges" />
+    <account type="13" name="Insufficient Funds fee" />
+   </account>
+   <account type="13" name="Cash Withdrawal" />
+   <account type="13" name="Child Care/Sitters" />
+   <account type="13" name="Clothing" />
+   <account type="13" name="Education" >
+    <account type="13" name="Books" />
+    <account type="13" name="Fees" />
+    <account type="13" name="Tuition" />
+    <account type="13" name="Loans" />
+   </account>
+   <account type="13" name="Food" >
+    <account type="13" name="Dining Out" />
+    <account type="13" name="Groceries" />
+   </account>
+   <account type="13" name="Home Maintainance" >
+    <account type="13" name="Repairs" />
+    <account type="13" name="Improvements" />
+    <account type="13" name="Yard &amp; Garden" />
+   </account>
+   <account type="13" name="Home Furnishing" >
+    <account type="13" name="Furniture" />
+    <account type="13" name="Decorating" />
+   </account>
+   <account type="13" name="Gifts" />
+   <account type="13" name="Healthcare" >
+    <account type="13" name="Dental" />
+    <account type="13" name="Doctor" />
+    <account type="13" name="Hospital" />
+    <account type="13" name="Prescriptions" />
+    <account type="13" name="Chiropractic" />
+    <account type="13" name="Other" />
+   </account>
+   <account type="13" name="Personal Care" />
+   <account type="13" name="Vacation &amp; Holiday" >
+    <account type="13" name="Accomodations" />
+    <account type="13" name="Travel" />
+    <account type="13" name="Other" />
+    <account type="13" name="Meals" />
+   </account>
+   <account type="13" name="Insurance" >
+    <account type="13" name="Home and Contents" />
+    <account type="13" name="Life" />
+    <account type="13" name="Medical" />
+    <account type="13" name="Auto" />
+    <account type="13" name="Disability" />
+   </account>
+   <account type="13" name="Job Expense" >
+    <account type="13" name="Non-Reimbursed" />
+    <account type="13" name="Reimbursed" />
+   </account>
+   <account type="13" name="Recreation &amp; Leisure" >
+    <account type="13" name="Entertainment" />
+    <account type="13" name="Hobbies" />
+    <account type="13" name="Sports" />
+   </account>
+   <account type="13" name="Legal Fees" />
+   <account type="13" name="Other Misc. Expenses" />
+   <account type="13" name="Pet Care" >
+    <account type="13" name="Food" />
+    <account type="13" name="Supplies" />
+    <account type="13" name="Vet's Bills" />
+   </account>
+   <account type="13" name="Retirement Accounts" />
+   <account type="13" name="Taxes" />
+   <account type="13" name="Transportation" >
+    <account type="13" name="Car / Auto" >
+     <account type="13" name="Fuel" />
+     <account type="13" name="Service" />
+     <account type="13" name="Insurance" />
+     <account type="13" name="Lease" />
+     <account type="13" name="Loan" />
+     <account type="13" name="Registration" />
+    </account>
+    <account type="13" name="Public Transportation" />
+   </account>
+   <account type="13" name="Household" />
+   <account type="13" name="Charity" />
+   <account type="13" name="Accountant &amp; Tax Preparation" />
+  </account>
+ </accounts>
+</kmymoney-account-template>

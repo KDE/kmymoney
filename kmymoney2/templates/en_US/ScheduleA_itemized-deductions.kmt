@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>ScheduleA Itemized Deductions</title>
+ <shortdesc>If you file an itemized tax return</shortdesc>
+ <longdesc>Use this group if you file an itemized tax return. This group contains categories that correspond to IRS Schedule A and will hopefully make preparing your taxes easier. Use it with one of the base category groups.</longdesc>
+ <accounts>
+  <account type="12" name="" >
+  </account>
+  <account type="13" name="" >
+   <account type="13" name="Housing" >
+    <account type="13" name="Mortgage or Rent" />
+    <account type="13" name="Property taxes" />
+    <account type="13" name="Mortgage Insurance" />
+    <account type="13" name="Mortgage Interest/Points" />
+   </account>
+   <account type="13" name="Miscellaneous/Other" >
+    <account type="13" name="Accountant/Tax Preparation" />
+    <account type="13" name="Casualty/Theft loss" />
+    <account type="13" name="Unreimbursed Employee Expenses" >
+     <account type="13" name="Safety Equipment" />
+     <account type="13" name="Tools/Supplies" />
+     <account type="13" name="Uniforms" />
+     <account type="13" name="Protective Clothing" />
+     <account type="13" name="Physical Exams" />
+     <account type="13" name="Dues" />
+     <account type="13" name="Subscriptions" />
+     <account type="13" name="job Search Costs" />
+     <account type="13" name="Business use of home" />
+     <account type="13" name="Educational Expenses" />
+    </account>
+    <account type="13" name="Taxes" >
+     <account type="13" name="Other Taxes" />
+     <account type="13" name="State and Local" />
+    </account>
+   </account>
+   <account type="13" name="Health/Medical" >
+    <account type="13" name="Dental" />
+   </account>
+   <account type="13" name="Transportation" >
+    <account type="13" name="Car/Auto" >
+     <account type="13" name="Registration/Taxes" />
+    </account>
+   </account>
+   <account type="13" name="Charity" >
+    <account type="13" name="Gifts by Cash/Check" />
+    <account type="13" name="Other (non-cash/check)" />
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

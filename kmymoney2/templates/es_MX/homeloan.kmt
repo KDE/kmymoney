@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+
+        accounts/es_MX/acctchrt_homeloan.gnucash-xea
+
+     Please check the source file for possible copyright
+     and licence information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Préstamo hipotecario</title>
+ <shortdesc>Cuentas para préstamo hipotecario e interés asociado</shortdesc>
+ <longdesc>Deseará escoger este juego de cuentas si tiene contratado un préstamo hipotecario (préstamo hipotecario, interés hipoteca).</longdesc>
+ <accounts>
+  <account type="13" name="">
+   <account type="13" name="Intereses">
+    <account type="13" name="Interés de hipoteca"/>
+   </account>
+  </account>
+  <account type="10" name="">
+   <account type="10" name="Préstamos">
+    <account type="10" name="Préstamo hipotecario"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

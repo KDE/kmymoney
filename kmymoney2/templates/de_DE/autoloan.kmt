@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+
+        accounts/de_DE/acctchrt_autoloan.gnucash-xea
+
+     Please check the source file for possible copyright
+     and licence information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Kredit Auto</title>
+ <shortdesc>Kredit für Autokauf</shortdesc>
+ <longdesc>Falls Sie einen Kredit zum Autokauf besitzen, können Sie mit dieser Auswahl die passenden Konten bekommen.</longdesc>
+ <accounts>
+  <account type="13" name="">
+   <account type="13" name="Fahrtkosten">
+    <account type="13" name="Auto">
+     <account type="13" name="Kreditzinsen"/>
+    </account>
+   </account>
+  </account>
+  <account type="10" name="">
+   <account type="10" name="Kredite">
+    <account type="10" name="Auto"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

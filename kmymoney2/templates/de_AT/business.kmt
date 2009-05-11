@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+
+        accounts/de_AT/acctchrt_business.gnucash-xea
+
+     Please check the source file for possible copyright
+     and licence information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Kleinunternehmen</title>
+ <shortdesc>Grundlegende Konten für Kleinunternehmen</shortdesc>
+ <longdesc>Kleinunternehmer können diesen Kontorahmen anstelle der anderen Kontorahmen verwenden. Sie finden hier die grundlegenden Konten für ein Kleinunternehmen wie Forderungen, Verbindlichkeiten, Steuer, Aufwendungen und Erträge.</longdesc>
+ <accounts>
+  <account type="10" name="">
+   <account type="10" name="Barverbindlichkeiten">
+    <account type="4" name="Kreditkarte"/>
+   </account>
+   <account type="10" name="Umsatzsteuer"/>
+  </account>
+  <account type="12" name="">
+   <account type="12" name="Sonstiges"/>
+   <account type="12" name="Zurückerstattete Aufwendungen"/>
+   <account type="12" name="Zinsen">
+    <account type="12" name="Girokonto"/>
+    <account type="12" name="Sonstige"/>
+   </account>
+  </account>
+  <account type="9" name="">
+   <account type="9" name="Vorsteuer"/>
+   <account type="9" name="Sachanlagen">
+    <account type="9" name="Sonstige"/>
+   </account>
+   <account type="9" name="Barvermögen">
+    <account type="1" name="Girokonto"/>
+    <account type="3" name="Bargeld"/>
+   </account>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="Postgebühren"/>
+   <account type="13" name="Büro">
+    <account type="13" name="Nebenkosten">
+     <account type="13" name="Strom"/>
+     <account type="13" name="Rundfunkgebühren"/>
+     <account type="13" name="Hausverwaltung"/>
+     <account type="13" name="Gas"/>
+     <account type="13" name="Wasser"/>
+     <account type="13" name="Abfall"/>
+    </account>
+    <account type="13" name="Miete"/>
+    <account type="13" name="Möbel"/>
+   </account>
+   <account type="13" name="Abschreibungen"/>
+   <account type="13" name="Beratungskosten">
+    <account type="13" name="Rechtskosten"/>
+    <account type="13" name="Steuerberatung"/>
+    <account type="13" name="Buchhaltung"/>
+   </account>
+   <account type="13" name="Fahrtkosten">
+    <account type="13" name="Netzkarten"/>
+    <account type="13" name="Fahrkarten"/>
+    <account type="13" name="Auto">
+     <account type="13" name="Parkgebühren"/>
+     <account type="13" name="Abgaben"/>
+     <account type="13" name="Wartung und Reparaturen"/>
+     <account type="13" name="Treibstoff"/>
+    </account>
+   </account>
+   <account type="13" name="Steuern">
+    <account type="13" name="Sonstige"/>
+    <account type="13" name="Einkommenssteuer"/>
+    <account type="13" name="Körperschaftssteuer"/>
+    <account type="13" name="Umsatzsteuer Zahllast"/>
+   </account>
+   <account type="13" name="Interessensvertretung"/>
+   <account type="13" name="Lohnkosten"/>
+   <account type="13" name="Druck- und Kopierkosten"/>
+   <account type="13" name="EDV">
+    <account type="13" name="Software"/>
+    <account type="13" name="Hardware"/>
+   </account>
+   <account type="13" name="Fachliteratur"/>
+   <account type="13" name="Sonstiges"/>
+   <account type="13" name="Spenden"/>
+   <account type="13" name="Büromaterialien"/>
+   <account type="13" name="Restaurant"/>
+   <account type="13" name="Versicherungen">
+    <account type="13" name="Haftpflichtversicherung"/>
+    <account type="13" name="Sozialversicherung"/>
+   </account>
+   <account type="13" name="Telekommunikation">
+    <account type="13" name="Telefon"/>
+    <account type="13" name="Online-Dienste"/>
+   </account>
+  </account>
+  <account type="16" name=""/>
+ </accounts>
+</kmymoney-account-template>

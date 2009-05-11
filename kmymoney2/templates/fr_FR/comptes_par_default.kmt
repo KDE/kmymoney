@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+  <title>KMyMoney 0.8 default</title>
+  <shortdesc></shortdesc>
+  <longdesc></longdesc>
+  <accounts>
+    <account name="" type="13">
+      <account name="Alimentation" type="13">
+        <account name="Restaurant" type="13"/>
+        <account name="Epicerie" type="13"/>
+        <account name="Supermarché" type="13"/>
+        <account name="Cantine" type="13"/>
+      </account>
+      <account name="Animaux" type="13">
+        <account name="Alimentation" type="13"/>
+        <account name="Fournitures" type="13"/>
+        <account name="Vétérinaire" type="13"/>
+        <account name="Toilettage" type="13"/>
+      </account>
+      <account name="Assurance" type="13">
+        <account name="Automobile" type="13"/>
+        <account name="Habitation" type="13"/>
+        <account name="Responsabilité civile" type="13"/>
+        <account name="Santé" type="13"/>
+        <account name="Vie" type="13"/>
+      </account>
+      <account name="Automobile" type="13">
+        <account name="Achat" type="13"/>
+        <account name="Amendes" type="13"/>
+        <account name="Assurance" type="13"/>
+        <account name="Carburant" type="13"/>
+        <account name="Contrôle technique" type="13"/>
+        <account name="Péage" type="13"/>
+        <account name="Réparations" type="13"/>
+        <account name="Stationnement" type="13"/>
+      </account>
+      <account name="Dépenses professionelles" type="13">
+        <account name="Non-remboursées" type="13"/>
+        <account name="Remboursées" type="13"/>
+      </account>
+      <account name="Dons" type="13">
+        <account name="Cadeaux" type="13"/>
+        <account name="Donations" type="13"/>
+        <account name="Caritatif" type="13"/>
+      </account>
+      <account name="Education" type="13">
+        <account name="Frais scolaires" type="13"/>
+        <account name="Leçons" type="13"/>
+        <account name="Fournitures" type="13"/>
+      </account>
+      <account name="Enfants" type="13">
+        <account name="Crêche et nourrice" type="13"/>
+      </account>
+      <account name="Frais bancaires" type="13">
+        <account name="Intérêts" type="13"/>
+        <account name="Services bancaires" type="13"/>
+        <account name="Pénalités bancaires" type="13"/>
+      </account>
+      <account name="Frais généraux" type="13">
+        <account name="Charges de loyer" type="13"/>
+        <account name="Chauffage" type="13"/>
+        <account name="Eau" type="13"/>
+        <account name="Electricité" type="13"/>
+        <account name="Gaz" type="13"/>
+        <account name="Internet" type="13"/>
+        <account name="Loyer" type="13"/>
+        <account name="Rembousement de prêt" type="13"/>
+        <account name="Téléphone" type="13"/>
+        <account name="Téléphone portable" type="13"/>
+        <account name="Câble et satellite" type="13"/>
+      </account>
+      <account name="Soins" type="13">
+        <account name="Coiffeur" type="13"/>
+        <account name="Esthétique" type="13"/>
+        <account name="Habillement" type="13"/>
+      </account>
+      <account name="Loisirs" type="13">
+        <account name="Billard" type="13"/>
+        <account name="Bowling" type="13"/>
+        <account name="Cassettes et CDs" type="13"/>
+        <account name="Cinéma" type="13"/>
+        <account name="Discothèque" type="13"/>
+        <account name="Divertissement" type="13"/>
+        <account name="Equipements sportifs" type="13"/>
+        <account name="Informatique" type="13"/>
+        <account name="Jeux et jouets" type="13"/>
+        <account name="Livres et Magazines" type="13"/>
+        <account name="Musées et expositions" type="13"/>
+        <account name="Parc d'attraction" type="13"/>
+        <account name="Spectacles" type="13"/>
+        <account name="Sport" type="13"/>
+        <account name="Vidéo" type="13"/>
+      </account>
+      <account name="Maison" type="13">
+        <account name="Ameublement" type="13"/>
+        <account name="Entretien" type="13"/>
+        <account name="Equipement" type="13"/>
+        <account name="Jardinage" type="13"/>
+        <account name="Personnel de maison" type="13"/>
+        <account name="Travaux" type="13"/>
+      </account>
+      <account name="Prêt" type="13">
+        <account name="Intérêts de prêt" type="13"/>
+        <account name="Amortissement de prêt" type="13"/>
+        <account name="Remboursement anticipé de prêt" type="13"/>
+        <account name="Frais de remboursement anticipé" type="13"/>
+        <account name="Assurance" type="13"/>
+        <account name="Frais de dossier" type="13"/>
+      </account>
+      <account name="Retrait d'espèces" type="13"/>
+      <account name="Santé" type="13">
+        <account name="Dentiste" type="13"/>
+        <account name="Hôpital" type="13"/>
+        <account name="Médecin généraliste" type="13"/>
+        <account name="Médecin spécialiste" type="13"/>
+        <account name="Opticien" type="13"/>
+        <account name="Pharmacie" type="13"/>
+      </account>
+      <account name="Taxes et impôts" type="13">
+        <account name="Autres taxes" type="13"/>
+        <account name="Intérêts de retard" type="13"/>
+        <account name="Impôts sur le revenu" type="13"/>
+        <account name="Redevance télévisuelle" type="13"/>
+        <account name="Taxe foncière" type="13"/>
+        <account name="Taxe d'habitation" type="13"/>
+        <account name="ISF" type="13"/>
+      </account>
+      <account name="Transport" type="13">
+        <account name="Train" type="13"/>
+        <account name="Transports en commun" type="13"/>
+      </account>
+      <account name="Vacances" type="13">
+        <account name="Logement" type="13"/>
+        <account name="Frais divers" type="13"/>
+        <account name="Voyage" type="13"/>
+      </account>
+      <account name="Retenues sur salaire" type="13">
+        <account name="Véhicule de fonction" type="13"/>
+        <account name="Chèques déjeuner" type="13"/>
+        <account name="Autres avantages en nature" type="13"/>
+        <account name="Remboursement d'acompte" type="13"/>
+        <account name="Remboursement d'avance" type="13"/>
+        <account name="Saisie Opposition" type="13"/>
+      </account>
+      <account name="Autres dépenses" type="13">
+        <account name="Cadeaux" type="13"/>
+      </account>
+    </account>
+    <account name="" type="12">
+      <account name="Revenus du travail" type="12">
+        <account name="Salaire brut" type="12"/>
+        <account name="Salaire net" type="12"/>
+        <account name="Commissions" type="12"/>
+        <account name="Prime" type="12"/>
+        <account name="Avance sur paie" type="12"/>
+        <account name="Acompte sur paie" type="12"/>
+        <account name="Heures supplémentaires" type="12"/>
+        <account name="Participation aux bénéfices" type="12"/>
+        <account name="Participation aux résultats" type="12"/>
+        <account name="Plus-values de Stock-Options" type="12"/>
+        <account name="Remboursements de frais professionnels" type="12"/>
+      </account>
+      <account name="Rentes et pensions" type="12">
+        <account name="Retraite du régime général" type="12"/>
+        <account name="Retraite complémentaire" type="12"/>
+        <account name="Rentes viagères" type="12"/>
+        <account name="Rentes temporaires" type="12"/>
+      </account>
+      <account name="Allocations et Sécurité sociale" type="12">
+        <account name="Remboursement de frais de santé" type="12"/>
+        <account name="Allocations familiales" type="12"/>
+        <account name="ASSEDICs" type="12"/>
+        <account name="Indemnités Journalières" type="12"/>
+        <account name="Veuvage" type="12"/>
+        <account name="Invalidité" type="12"/>
+        <account name="Bourses d'étude" type="12"/>
+        <account name="Allocations de logement" type="12"/>
+        <account name="Prêts d'honneur" type="12"/>
+      </account>
+      <account name="Revenus d'investissement" type="12">
+        <account name="Plus-values Boursières" type="12"/>
+        <account name="Intérêts de livret A et Bleu" type="12"/>
+        <account name="Intérêts de livret B" type="12"/>
+        <account name="Intérêts de CoDevI" type="12"/>
+        <account name="Intérêts de LEP" type="12"/>
+        <account name="Intérêts de livrets bancaires" type="12"/>
+        <account name="Coupon" type="12"/>
+        <account name="Dividende" type="12"/>
+        <account name="Prime d'Etat sur Epargne Logement" type="12"/>
+      </account>
+      <account name="Autres revenus" type="12">
+        <account name="Cadeaux recus" type="12"/>
+        <account name="Déblocage de prêt" type="12"/>
+        <account name="Gains aux jeux" type="12"/>
+        <account name="Crédits d'impôts" type="12"/>
+      </account>
+    </account>
+  </accounts>
+</kmymoney-account-template>

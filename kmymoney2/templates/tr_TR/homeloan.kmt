@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+
+        accounts/tr_TR/acctchrt_homeloan.gnucash-xea
+
+     Please check the source file for possible copyright
+     and licence information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Ev Kredisi</title>
+ <shortdesc>Ev Kredisi ve faizleri</shortdesc>
+ <longdesc>Ev kredisi ve faizlerini takip etmenizi sağlayan hesaplar (ev kredisi, kredi faizleri).</longdesc>
+ <accounts>
+  <account type="13" name="">
+   <account type="13" name="Faiz">
+    <account type="13" name="Kredi Faizi"/>
+   </account>
+  </account>
+  <account type="10" name="">
+   <account type="10" name="Krediler">
+    <account type="10" name="Ev Kredisi"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

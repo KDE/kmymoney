@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+
+        accounts/tr_TR/acctchrt_carloan.gnucash-xea
+
+     Please check the source file for possible copyright
+     and licence information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Taşıt Kredisi</title>
+ <shortdesc>Taşıt Kredisi ve faizleri</shortdesc>
+ <longdesc>Taşıt kredisi ve faizlerini takip etmenizi sağlayan hesaplar (taşıt kredisi, kredi faizleri).</longdesc>
+ <accounts>
+  <account type="13" name="">
+   <account type="13" name="Faiz">
+    <account type="13" name="Taşıt Kredi Faizi"/>
+   </account>
+  </account>
+  <account type="10" name="">
+   <account type="10" name="Krediler">
+    <account type="10" name="Taşıt Kredisi"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

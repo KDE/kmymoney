@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+
+        accounts/C/acctchrt_carloan.gnucash-xea
+
+     Please check the source file for possible copyright
+     and licence information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Credit auto</title>
+ <shortdesc>Conturi pentru un credid auto şi dobânda aferentăs</shortdesc>
+ <longdesc>Aţi avea nevoie de acest set de conturi dacă aveţi un credit auto (creditul auto, dobânda).</longdesc>
+ <accounts>
+  <account type="13" name="">
+   <account type="13" name="Dobândă">
+    <account type="13" name="Dobândă pentru credit auto"/>
+   </account>
+  </account>
+  <account type="10" name="">
+   <account type="10" name="Credite">
+    <account type="10" name="Credit auto"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

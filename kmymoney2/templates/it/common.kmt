@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+
+        accounts/it/acctchrt_common.gnucash-xea
+
+     Please check the source file for possible copyright
+     and licence information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Conti comuni</title>
+ <shortdesc>Un insieme basilare comprendente i conti più comunemente usati</shortdesc>
+ <longdesc>Questo insieme di conti è selezionato dalla maggior parte degli utenti. L'insieme comprende i conti usati più comunemente (conto corrente, di risparmio, contanti, carta di credito, entrate, uscite comuni).</longdesc>
+ <accounts>
+  <account type="12" name="">
+   <account type="12" name="Entrate extra"/>
+   <account type="12" name="Altre entrate"/>
+   <account type="12" name="Regali ricevuti"/>
+   <account type="12" name="Stipendio"/>
+   <account type="12" name="Entrate interessi">
+    <account type="12" name="Altri interessi"/>
+    <account type="12" name="Interessi conto risparmio"/>
+    <account type="12" name="Interessi conto corrente"/>
+   </account>
+  </account>
+  <account type="16" name="">
+   <account type="16" name="Bilanci d'apertura"/>
+  </account>
+  <account type="9" name="">
+   <account type="9" name="Attività correnti">
+    <account type="1" name="Conto corrente"/>
+    <account type="3" name="Liquidità"/>
+    <account type="1" name="Conto risparmio"/>
+   </account>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="Intrattenimento">
+    <account type="13" name="Musica/Film"/>
+    <account type="13" name="Viaggi"/>
+    <account type="13" name="Divertimento"/>
+   </account>
+   <account type="13" name="Libri"/>
+   <account type="13" name="Ristoranti"/>
+   <account type="13" name="Regali"/>
+   <account type="13" name="Spese mediche"/>
+   <account type="13" name="Donazioni"/>
+   <account type="13" name="Trasporti pubblici"/>
+   <account type="13" name="Auto">
+    <account type="13" name="Benzina"/>
+    <account type="13" name="Parcheggio"/>
+    <account type="13" name="Riparazioni e manutenzione"/>
+    <account type="13" name="Varie"/>
+   </account>
+   <account type="13" name="Servizi bancari"/>
+   <account type="13" name="Educazione"/>
+   <account type="13" name="Servizi">
+    <account type="13" name="Acqua"/>
+    <account type="13" name="Gas"/>
+    <account type="13" name="Rifiuti"/>
+    <account type="13" name="Elettricità"/>
+   </account>
+   <account type="13" name="Prima necessità"/>
+   <account type="13" name="Abbigliamento"/>
+   <account type="13" name="Abbonamenti"/>
+   <account type="13" name="Telefono"/>
+   <account type="13" name="Assicurazione">
+    <account type="13" name="Assicurazione auto"/>
+    <account type="13" name="Assicurazione vita"/>
+    <account type="13" name="Assicurazione medica"/>
+   </account>
+   <account type="13" name="Servizi Internet"/>
+   <account type="13" name="Correzioni"/>
+   <account type="13" name="Imposte">
+    <account type="13" name="Pensione"/>
+    <account type="13" name="Regionali/provinciali"/>
+    <account type="13" name="Statali"/>
+    <account type="13" name="Cure mediche"/>
+    <account type="13" name="Altre imposte"/>
+   </account>
+   <account type="13" name="Computer"/>
+   <account type="13" name="Lavanderia"/>
+   <account type="13" name="Varie"/>
+   <account type="13" name="Alimentari"/>
+   <account type="13" name="TV"/>
+   <account type="13" name="Hobby"/>
+  </account>
+  <account type="10" name="">
+   <account type="4" name="Carta credito"/>
+  </account>
+ </accounts>
+</kmymoney-account-template>

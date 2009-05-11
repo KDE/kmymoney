@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+<title>Base -Blank</title>
+ <shortdesc>No Categories</shortdesc>
+ <longdesc>Use this group if you plan on importing all your categories from another program or you want to create all of your categories from scratch.</longdesc> 
+ <accounts>
+  <account type="12" name="" />
+  <account type="13" name="" />
+ </accounts>
+</kmymoney-account-template>

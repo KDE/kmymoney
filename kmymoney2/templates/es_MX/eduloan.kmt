@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+
+        accounts/es_MX/acctchrt_eduloan.gnucash-xea
+
+     Please check the source file for possible copyright
+     and licence information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Préstamo para educación</title>
+ <shortdesc>Cuentas para préstamos para estudios e intereses asociados</shortdesc>
+ <longdesc>Deseará seleccionar este conjunto de cuentas si posee un préstamo para educación (préstamo para educación, intereses de préstamo para educación)</longdesc>
+ <accounts>
+  <account type="13" name="">
+   <account type="13" name="Intereses">
+    <account type="13" name="Intereses de préstamo para educación"/>
+   </account>
+  </account>
+  <account type="10" name="">
+   <account type="10" name="Préstamos">
+    <account type="10" name="Préstamo para educación"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

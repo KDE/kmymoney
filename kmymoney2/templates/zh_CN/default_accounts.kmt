@@ -1,0 +1,162 @@
+<?xml version = '1.0' encoding = 'utf-8'?>
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+  <title>KMyMoney 0.8 default</title>
+  <shortdesc/>
+  <longdesc/>
+  <accounts>
+    <account type="13" name="" >
+      <account type="13" name="账单" >
+        <account type="13" name="电话费" />
+        <account type="13" name="Rent" />
+        <account type="13" name="电费" />
+        <account type="13" name="有线电视费" />
+        <account type="13" name="燃气费" />
+        <account type="13" name="抵押贷款" >
+          <account type="13" name="利息" >
+          </account>
+          <account type="13" name="本金" >
+          </account>
+        </account>
+        <account type="13" name="水费与污水处理费" />
+	<account type="13" name="物业费" />	
+      </account>
+      <account type="13" name="银行费用" >
+        <account type="13" name="支付利息" />
+        <account type="13" name="手续费" />
+      </account>
+      <account type="13" name="汽车" >
+        <account type="13" name="汽油" />
+        <account type="13" name="维护" />
+        <account type="13" name="保险" />
+        <account type="13" name="租金" />
+        <account type="13" name="车贷" />
+        <account type="13" name="上路费用"  />
+      </account>
+      <account type="13" name="现金提款" />
+      <account type="13" name="慈善事业" >
+        <account type="13" name="捐款"  />
+      </account>
+      <account type="13" name="儿童看护"  />
+      <account type="13" name="服装" />
+      <account type="13" name="教育" >
+        <account type="13" name="书籍" />
+        <account type="13" name="其他费用" />
+        <account type="13" name="学费" />
+        <account type="13" name="助学贷款" />
+      </account>
+      <account type="13" name="吃喝" >
+        <account type="13" name="下馆子" />
+        <account type="13" name="食品饮料" />
+      </account>
+      <account type="13" name="礼物" />
+      <account type="13" name="健康支出" >
+        <account type="13" name="牙科" />
+        <account type="13" name="看病" />
+        <account type="13" name="住院" />
+        <account type="13" name="眼镜" />
+        <account type="13" name="买药" />
+      </account>
+      <account type="13" name="渡假" >
+        <account type="13" name="食宿" />
+        <account type="13" name="旅行" />
+      </account>
+      <account type="13" name="日常家务" >
+        <account type="13" name="家具" />
+        <account type="13" name="日常维修" />
+	<account type="13" name="日用品" />	
+      </account>
+      <account type="13" name="保险" >
+        <account type="13" name="家庭财产保险" />
+        <account type="13" name="寿险" />
+        <account type="13" name="健康险" />
+        <account type="13" name="车辆保险" />
+        <account type="13" name="伤残险" />
+      </account>
+      <account type="13" name="工作开销" >
+        <account type="13" name="工作失误赔偿" />
+	<account type="13" name="其他" />
+      </account>
+      <account type="13" name="休闲娱乐" >
+        <account type="13" name="书籍报纸杂志" />
+        <account type="13" name="娱乐" />
+        <account type="13" name="租碟、看电影"  />
+        <account type="13" name="嗜好" />
+        <account type="13" name="体育活动" />
+        <account type="13" name="体育用品" />
+        <account type="13" name="CD磁带" />
+        <account type="13" name="剧院、音乐厅等" />
+        <account type="13" name="玩具、游戏等" />
+      </account>
+      <account type="13" name="法务支出" />
+      <account type="13" name="贷款" >
+        <account type="13" name="贷款利息"  />
+      </account>
+      <account type="13" name="自行车" >
+        <account type="13" name="购置费用" />
+        <account type="13" name="维护费用" />
+      </account>
+      <account type="13" name="交通费用" >
+	      <account type="13" name="计程车" />
+	      <account type="13" name="公共交通" />
+      </account>
+      <account type="13" name="其他支出" >
+        <account type="13" name="未知" />
+      </account>
+      <account type="13" name="个人看护" />
+      <account type="13" name="饲养宠物" >
+        <account type="13" name="食物" />
+        <account type="13" name="各种用品" />
+        <account type="13" name="兽医账单" />
+	<account type="13" name="合法饲养手续" />
+     </account>
+      <account type="13" name="疗养" />
+      <account type="13" name="退休账户" >
+	 <account type="13" name="养老保险" />	
+      </account>
+      <account type="13" name="税" >
+        <account type="13" name="个人所得税"  />
+      </account>
+    </account>
+    <account type="12" name="" >
+      <account type="12" name="赡养费"  />
+      <account type="12" name="奖金"  />
+      <account type="12" name="红利"  />
+      <account type="12" name="独生子女费"  />
+      <account type="12" name="投资收入" >
+        <account type="12" name="股票分红" />
+      </account>
+      <account type="12" name="工资" >
+        <account type="12" name="工资"  />
+	<account type="12" name="奖金"  />
+	<account type="12" name="加班费"  />
+      </account>
+      <account type="12" name="礼金" />
+      <account type="12" name="银行" >
+        <account type="12" name="银行利息"  />
+      </account>
+      <account type="12" name="投资收入" >
+        <account type="12" name="期权"  />
+        <account type="12" name="红利"  />
+        <account type="12" name="外汇"  />
+	<account type="12" name="利息"  />
+      </account>
+      <account type="12" name="退休金"  />
+      <account type="12" name="其他收入" >
+        <account type="12" name="助学贷款"  />
+        <account type="12" name="收到的贷款本金"  />
+        <account type="12" name="彩票、抽奖" />
+        <account type="12" name="退税"  />
+        <account type="12" name="离职补偿金"  />
+      </account>
+      <account type="12" name="退休计划收入" >
+        <account type="12" name="养老保险"  />
+      </account>
+      <account type="12" name="社保收入"  >
+         <account type="12" name="养老保险"  />
+	 <account type="12" name="公积金"  />
+	 <account type="12" name="医疗保险"  />
+      </account>
+    </account>
+  </accounts>
+</kmymoney-account-template>

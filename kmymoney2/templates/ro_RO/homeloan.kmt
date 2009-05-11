@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+
+        accounts/C/acctchrt_homeloan.gnucash-xea
+
+     Please check the source file for possible copyright
+     and licence information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Credit ipotecar</title>
+ <shortdesc>Conturi pentru un credit ipotecar şi dobânzile aferente</shortdesc>
+ <longdesc>Aţi avea nevoie de acest set de conturi dacă aveţi un credit ipotecar (creditul ipotecar, dobânda).</longdesc>
+ <accounts>
+  <account type="10" name="">
+   <account type="10" name="Credit ipotecar"/>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="Dobândă">
+    <account type="13" name="Dobândă ipotecară"/>
+   </account>
+  </account>
+  <account type="10" name=""/>
+ </accounts>
+</kmymoney-account-template>

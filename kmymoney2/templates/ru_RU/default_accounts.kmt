@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+  <title>Персональные финансы</title>
+  <shortdesc>Учёт персональных финансов</shortdesc>
+  <longdesc>Статьи доходов и затрат для учёта персональных финансов</longdesc>
+  <accounts>
+    <account name="" type="13">
+      <account name="Оплата счетов" type="13">
+        <account name="Телефон" type="13"/>
+        <account name="Квартира" type="13"/>
+        <account name="Электричество" type="13"/>
+        <account name="Интернет" type="13"/>
+        <account name="ТВ" type="13"/>
+        <account name="Газ" type="13"/>
+        <account name="Отопление" type="13"/>
+        <account name="Водоснабжение" type="13"/>
+      </account>
+      <account name="Транспорт" type="13">
+        <account name="Содержание автомобиля" type="13"/>
+        <account name="Бензин" type="13"/>
+        <account name="Общественный транспорт" type="13"/>
+      </account>
+      <account name="Питание" type="13">
+        <account name="Продукты" type="13"/>
+        <account name="Общественное питание" type="13"/>
+      </account>
+      <account name="Товары" type="13">
+		<account name="Косметика и парфюмерия" type="13"/>
+        <account name="Одежда и обувь" type="13"/>
+		<account name="Бытовая техника" type="13"/>
+	  </account> 
+      <account name="Услуги" type="13">
+ 	    <account name="Уход за ребёнком" type="13"/>
+        <account name="Образование" type="13"/>
+        <account name="Медицина" type="13"/>
+	    <account name="Прочие услуги" type="13"/>
+	  </account> 
+      <account name="Домашнее хозяйство" type="13"/>
+      <account name="Досуг" type="13">
+        <account name="Книги и журналы" type="13"/>
+        <account name="Театр и кино" type="13"/>
+        <account name="Спорт" type="13"/>
+        <account name="Музыка" type="13"/>
+        <account name="Развлечения" type="13"/>
+      </account>
+      <account name="Прочее" type="13">
+        <account name="Отпуск" type="13"/>
+        <account name="Подарки" type="13"/>
+        <account name="Страхование" type="13"/>
+        <account name="Выплата процентов" type="13"/>
+		<account name="Налоги" type="13"/>
+		<account name="Другие расходы" type="13"/>
+      </account>
+    </account>
+    
+    <account name="" type="12">
+      <account name="Работа" type="12">
+        <account name="Заработная плата" type="12"/>
+        <account name="Премиальные" type="12"/>
+        <account name="Подработка" type="12"/>
+      </account>
+      <account name="Инвестиции" type="12">
+        <account name="Банковские проценты" type="12"/>
+        <account name="Доход по ценным бумагам" type="12"/>
+        <account name="Сдача жилья в аренду" type="12"/>
+      </account>
+      <account name="Прочее" type="12">
+        <account name="Стипендия" type="12"/>
+        <account name="Пенсия" type="12"/>
+        <account name="Помощь родственников" type="12"/>
+        <account name="Налоговые льготы" type="12"/>
+        <account name="Пособия" type="12"/>
+        <account name="Другие доходы" type="12"/>
+      </account>
+    </account>
+    
+  </accounts>
+</kmymoney-account-template>

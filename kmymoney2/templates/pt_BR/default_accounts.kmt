@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+  <title>KMyMoney 0.8 default</title>
+  <shortdesc></shortdesc>
+  <longdesc></longdesc>
+  <accounts>
+    <account name="" type="13">
+      <account name="Contas a Pagar" type="13">
+        <account name="Telefone" type="13"/>
+        <account name="Aluguel" type="13"/>
+        <account name="Eletricidade" type="13"/>
+        <account name="TV" type="13"/>
+        <account name="Taxas Locais" type="13"/>
+        <account name="Óleo Combustível" type="13"/>
+        <account name="Gás Natural" type="13"/>
+        <account name="Hipoteca" type="13"/>
+        <account name="Água e Esgoto" type="13"/>
+        <account name="Condomínio" type="13"/>
+      </account>
+      <account name="Taxas Bancárias" type="13">
+        <account name="Juros Pagos" type="13"/>
+        <account name="Taxa de Serviço" type="13"/>
+      </account>
+      <account name="Empresa" type="13">
+        <account name="Automóvel" type="13">
+          <account name="Combustível" type="13"/>
+          <account name="Manutenção" type="13"/>
+          <account name="Seguro" type="13"/>
+          <account name="Leasing" type="13"/>
+          <account name="Financiamento" type="13"/>
+          <account name="Documentação" type="13"/>
+        </account>
+        <account name="Despesas Legais" type="13"/>
+        <account name="Taxas" type="13">
+          <account name="Taxas Federais" type="13"/>
+          <account name="Taxax Estaduais" type="13"/>
+          <account name="Taxas Locais" type="13"/>
+          <account name="Seguridade Social" type="13"/>
+          <account name="Taxas de Propriedade" type="13"/>
+        </account>
+        <account name="Viagem" type="13">
+          <account name="Acomodações" type="13"/>
+          <account name="Passagens" type="13"/>
+          <account name="Alimentação" type="13"/>
+          <account name="Aluguel de Carro" type="13"/>
+        </account>
+        <account name="Aluguel de Escritório" type="13"/>
+        <account name="Suprimentos de Escritório" type="13"/>
+        <account name="Outros" type="13"/>
+        <account name="Utilidades" type="13">
+          <account name="Eletricidade" type="13"/>
+          <account name="Gás" type="13"/>
+          <account name="Telefone" type="13"/>
+          <account name="Água" type="13"/>
+          <account name="Esgoto" type="13"/>
+          <account name="Lixo e Reciclagem" type="13"/>
+        </account>
+        <account name="Salário e Ordenado" type="13"/>
+      </account>
+      <account name="Automóvel" type="13">
+        <account name="Combustível" type="13"/>
+        <account name="Acessórios" type="13"/>
+        <account name="Serviços" type="13"/>
+        <account name="Seguro" type="13"/>
+        <account name="Leasing" type="13"/>
+        <account name="Financiamento" type="13"/>
+        <account name="Impostos e documentação" type="13"/>
+      </account>
+      <account name="Retirada em Dinheiro" type="13"/>
+      <account name="Caridade" type="13">
+        <account name="Doações" type="13"/>
+      </account>
+      <account name="Despesas com filhos" type="13"/>
+      <account name="Vestuário" type="13"/>
+      <account name="Educação" type="13">
+        <account name="Livros" type="13"/>
+        <account name="Taxas" type="13"/>
+        <account name="Financiamento" type="13"/>
+        <account name="Mensalidade Escolar" type="13"/>
+        <account name="Outros" type="13"/>
+      </account>
+      <account name="Alimentação" type="13">
+        <account name="Restaurante" type="13"/>
+        <account name="Mercado" type="13"/>
+      </account>
+      <account name="Jardinagem" type="13"/>
+      <account name="Presentes" type="13"/>
+      <account name="Saúde" type="13">
+        <account name="Dentista" type="13"/>
+        <account name="Médico" type="13"/>
+        <account name="Hospital" type="13"/>
+        <account name="Oculista" type="13"/>
+        <account name="Remédios" type="13"/>
+      </account>
+      <account name="Viagens" type="13">
+        <account name="Acomodações" type="13"/>
+        <account name="Alimentação" type="13"/>
+        <account name="Passagens" type="13"/>
+      </account>
+      <account name="Casa" type="13">
+        <account name="Mobília" type="13"/>
+        <account name="Reparos" type="13"/>
+      </account>
+      <account name="Seguro" type="13">
+        <account name="Casa" type="13"/>
+        <account name="Vida" type="13"/>
+        <account name="Médico" type="13"/>
+        <account name="Automóvel" type="13"/>
+        <account name="Invalidez" type="13"/>
+      </account>
+      <account name="Despesas de Trabalho" type="13">
+        <account name="Não reembolsadas" type="13"/>
+        <account name="Reembolsadas" type="13"/>
+      </account>
+      <account name="Lazer" type="13">
+        <account name="Livros e Revistas" type="13"/>
+        <account name="Diversão" type="13"/>
+        <account name="Cinemas e Aluguel de Vídeos" type="13"/>
+        <account name="Eventos Esportivos" type="13"/>
+        <account name="Fitas &amp; CDs" type="13"/>
+        <account name="Eventos Culturais" type="13"/>
+        <account name="Brinquedos e Jogos" type="13"/>
+      </account>
+      <account name="Taxas Legais" type="13"/>
+      <account name="Financiamento" type="13">
+        <account name="Juros de Financiamento" type="13"/>
+      </account>
+      <account name="Cuidados Pessoais" type="13"/>
+      <account name="Animal de Estimação" type="13">
+        <account name="Alimentação" type="13"/>
+        <account name="Suprimentos" type="13"/>
+        <account name="Veterinário" type="13"/>
+      </account>
+      <account name="Taxas" type="13">
+        <account name="Taxas Federais" type="13"/>
+        <account name="Taxas Estaduais" type="13"/>
+        <account name="Taxas Locais" type="13"/>
+        <account name="Outras Taxas" type="13"/>
+        <account name="Taxas sobre propriedade" type="13"/>
+      </account>
+      <account name="Utilidades" type="13">
+        <account name="Eletricidade" type="13"/>
+        <account name="Gás" type="13"/>
+        <account name="Telefone" type="13"/>
+        <account name="Água" type="13"/>
+        <account name="Esgoto" type="13"/>
+        <account name="Lixo e Reciclagem" type="13"/>
+      </account>
+    </account>
+    <account name="" type="12">
+      <account name="Outros Rendimentos" type="12">
+        <account name="Financiamento de Estudos" type="12"/>
+        <account name="Ações de Funcionário" type="12"/>
+        <account name="Presentes Recebidos" type="12"/>
+        <account name="Principal do Financiamento Recebido" type="12"/>
+        <account name="Loterias" type="12"/>
+        <account name="Devolução de Impostos" type="12"/>
+        <account name="Seguro Desemprego" type="12"/>
+        <account name="Pensão Recebida para Filhos" type="12"/>
+      </account>
+      <account name="Rendimentos de Aposentadoria" type="12">
+        <account name="Benefícios" type="12"/>
+        <account name="Pensões" type="12"/>
+      </account>
+      <account name="Rendimentos de Investimentos" type="12">
+        <account name="Dividendos" type="12"/>
+        <account name="Ganhos de Capital de curto-prazo" type="12"/>
+        <account name="Ganhos de Capital de longo-prazo" type="12"/>
+        <account name="Juros" type="12"/>
+        <account name="Juros não Tributáveis" type="12"/>
+      </account>
+      <account name="Salário e Ordenado" type="12">
+        <account name="Bônus" type="12"/>
+        <account name="Comissão" type="12"/>
+        <account name="Contribuição do Empregador" type="12"/>
+        <account name="Pagamento Bruto" type="12"/>
+        <account name="Pagamento Líquido" type="12"/>
+        <account name="Horas Extras" type="12"/>
+      </account>
+    </account>
+  </accounts>
+</kmymoney-account-template>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+
+        accounts/pt_BR/acctchrt_spouseinc.gnucash-xea
+
+     Please check the source file for possible copyright
+     and licence information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Receitas do Cônjuge</title>
+ <shortdesc>Contas para registar separadamente as receitas do cônjuge</shortdesc>
+ <longdesc>Deverá selecionar este conjunto de contas caso tenha um cônjuge que tenha emprego (salário, impostos).</longdesc>
+ <accounts>
+  <account type="12" name="">
+   <account type="12" name="Salário (Cônjuge)"/>
+   <account type="13" name="Impostos (Cônjuge)">
+    <account type="13" name="Outros Impostos"/>
+    <account type="13" name="IRF"/>
+    <account type="13" name="Seguro Saúde"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

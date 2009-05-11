@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+<title>Retirement</title>
+ <shortdesc>Categories for retirement.</shortdesc>
+ <longdesc>If you are retired and receive retirement income this group contains various kinds of retirement income categories. Use it with one of the base category groups.</longdesc>
+ <accounts>
+  <account type="12" name="" >
+   <account type="12" name="Retirement" >
+    <account type="12" name="Pensions" />
+    <account type="12" name="State Pension Benefits" />
+    <account type="12" name="401(k)/403(b) Distributions" />
+    <account type="12" name="IRA Distributions" />
+    <account type="12" name="Social Security Benefits" />
+    <account type="12" name="Annuities" />
+   </account>
+  </account>
+  <account type="13" name="" />
+ </accounts>
+</kmymoney-account-template>

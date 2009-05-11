@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+  <title>KMyMoney 0.8 Standardvorlage</title>
+  <shortdesc></shortdesc>
+  <longdesc></longdesc>
+  <accounts>
+    <account name="" type="12">
+      <account name="Eigenverbrauch" type="12">
+        <account name="Eigenverbrauch 16%" type="12"/>
+        <account name="Eigenverbrauch 7%" type="12"/>
+        <account name="Eigenverbrauch steuerfrei" type="12"/>
+      </account>
+      <account name="Einkünfte aus Kapitalanlagen" type="12">
+        <account name="Dividenden" type="12"/>
+        <account name="Kapitalgewinne" type="12"/>
+        <account name="Zinsen" type="12"/>
+        <account name="Zinsen (steuerfrei)" type="12"/>
+      </account>
+      <account name="Lohn und Gehalt" type="12">
+        <account name="Arbeitgeberanteil" type="12"/>
+        <account name="Bonus" type="12"/>
+        <account name="Bruttovergütung" type="12"/>
+        <account name="Dienstwagen" type="12"/>
+        <account name="Direktversicherung" type="12"/>
+        <account name="Geldwerte Vorteile" type="12"/>
+        <account name="Kindergeld" type="12"/>
+        <account name="Nettovergütung" type="12"/>
+        <account name="Provision" type="12"/>
+        <account name="Steuerfreie Einkünfte" type="12"/>
+        <account name="Überstundenvergütung" type="12"/>
+        <account name="Vermögenswirksame Leistungen" type="12"/>
+      </account>
+      <account name="Renten" type="12">
+        <account name="Betriebsrente" type="12"/>
+        <account name="Gesetzliche Rente" type="12"/>
+        <account name="Private Altersvorsorge" type="12"/>
+      </account>
+      <account name="Sonstige Einkünfte" type="12">
+        <account name="Aktienoptionsrecht" type="12"/>
+        <account name="Arbeitslosengeld" type="12"/>
+        <account name="Erhaltene Geschenke" type="12"/>
+        <account name="Erhaltene Tilgungszahlungen" type="12"/>
+        <account name="Lottogewinne" type="12"/>
+        <account name="Steuererstattung" type="12"/>
+        <account name="Unterhalt für Kinder" type="12"/>
+      </account>
+      <account name="Umsatzerlöse" type="12">
+        <account name="Erlöse 0%" type="12"/>
+        <account name="Erlöse 16%" type="12"/>
+        <account name="Erlöse 7%" type="12"/>
+        <account name="Erlöse aus Anlagenverkäufen 16%" type="12"/>
+        <account name="Provisionserlöse" type="12"/>
+      </account>
+      <account name="Umsatzsteuer" type="12">
+        <account name="Vorjahr" type="12"/>
+        <account name="Vorauszahlung" type="12"/>
+      </account>
+      <account name="Zinsertrag" type="12">
+        <account name="Sonstige Zinsen und ähnliche Erträge" type="12"/>
+      </account>
+    </account>
+    <account name="" type="13">
+      <account name="Abschreibungen" type="13">
+        <account name="Abschr. auf geringwertige Güter" type="13"/>
+        <account name="Abschr. auf Sachanlagen" type="13"/>
+      </account>
+      <account name="Anlagenabgänge" type="13">
+        <account name="Anlagenabgänge bei Buchgewinn" type="13"/>
+        <account name="Anlagenabgänge bei Buchverlust" type="13"/>
+      </account>
+      <account name="Anlagevermögen" type="13">
+        <account name="Andere Anlagen" type="13"/>
+        <account name="Betriebsausstattung" type="13"/>
+        <account name="Büroeinrichtung" type="13"/>
+        <account name="EDV-Software" type="13"/>
+        <account name="Geringwertige Wirtschaftsgüter" type="13"/>
+        <account name="Geschäftsausstattung" type="13"/>
+        <account name="Geschäftsbauten" type="13"/>
+        <account name="Maschinen" type="13"/>
+        <account name="Pkw" type="13"/>
+        <account name="Sonst. Betr.- u. Gesch.-Ausstat." type="13"/>
+        <account name="Technische Anlagen und Maschinen" type="13"/>
+        <account name="Werkzeuge" type="13"/>
+      </account>
+      <account name="Ausbildung" type="13">
+        <account name="Fachbücher" type="13"/>
+        <account name="Nachhilfe" type="13"/>
+        <account name="Schulgeld" type="13"/>
+      </account>
+      <account name="Auto" type="13">
+        <account name="Kraftstoff" type="13"/>
+        <account name="Wartung" type="13"/>
+      </account>
+      <account name="Bankgebühren" type="13">
+        <account name="Kontoführungsgebühren" type="13"/>
+        <account name="Sollzinsen" type="13"/>
+      </account>
+      <account name="Barentnahme" type="13"/>
+      <account name="Beiträge und Vers." type="13">
+        <account name="Beiträge" type="13"/>
+        <account name="Sonstige Abgaben" type="13"/>
+        <account name="Versicherungen" type="13"/>
+      </account>
+      <account name="Bürobedarf" type="13">
+        <account name="Porto" type="13"/>
+        <account name="Telefax" type="13"/>
+        <account name="Telefon" type="13"/>
+        <account name="Internet" type="13"/>
+      </account>
+      <account name="Essen" type="13">
+        <account name="Lebensmittel" type="13"/>
+        <account name="Restaurants" type="13"/>
+      </account>
+      <account name="Freizeit" type="13">
+        <account name="Bücher/Zeitschriften" type="13"/>
+        <account name="Film-/Videoverleihgebühren" type="13"/>
+        <account name="Gästebewirtung" type="13"/>
+        <account name="Kassetten/CDs/DVDs" type="13"/>
+        <account name="Spielzeug/Spiele" type="13"/>
+        <account name="Sportartikel" type="13"/>
+        <account name="Sportveranstaltungen" type="13"/>
+        <account name="Theater/Oper" type="13"/>
+      </account>
+      <account name="Geldwerte Vorteile" type="13">
+        <account name="Dienstwagen" type="13"/>
+        <account name="Sonstige" type="13"/>
+      </account>
+      <account name="Geschenke" type="13"/>
+      <account name="Gesundheit" type="13">
+        <account name="Arzneimittel" type="13"/>
+        <account name="Krankengymnastik" type="13"/>
+        <account name="Krankenhaus" type="13"/>
+        <account name="Sehhilfe" type="13"/>
+        <account name="Zahnbehandlung/Zahnersatz" type="13"/>
+      </account>
+      <account name="Haushalt" type="13">
+        <account name="Einrichtung" type="13"/>
+      </account>
+      <account name="Haustiere" type="13">
+        <account name="Futter" type="13"/>
+        <account name="Sonstiges" type="13"/>
+        <account name="Tierarzt" type="13"/>
+      </account>
+      <account name="Kfz-Kosten" type="13">
+        <account name="Fremdfahrzeuge" type="13"/>
+        <account name="Garagenmiete" type="13"/>
+        <account name="Kfz-Steuern" type="13"/>
+        <account name="Kfz-Versicherungen" type="13"/>
+        <account name="Lfd. Kfz-Betriebskosten" type="13"/>
+        <account name="Sonstige Kfz-Kosten" type="13"/>
+      </account>
+      <account name="Kinderbetreuung" type="13"/>
+      <account name="Kleidung" type="13"/>
+      <account name="Körperpflege" type="13"/>
+      <account name="Kredit" type="13">
+        <account name="Kreditzinsen" type="13"/>
+      </account>
+      <account name="Personalkosten" type="13">
+        <account name="Aushilfslöhne" type="13"/>
+        <account name="Beiträge Berufsgenossenschaft" type="13"/>
+        <account name="Gehälter" type="13"/>
+        <account name="Gesetzliche soz. Aufwendungen" type="13"/>
+        <account name="Löhne" type="13"/>
+        <account name="Lohnsteuer Aushilfen" type="13"/>
+        <account name="Vermögenswirksame Leistungen" type="13"/>
+      </account>
+      <account name="Raumkosten" type="13">
+        <account name="Gas, Strom, Wasser" type="13"/>
+        <account name="Heizung" type="13"/>
+        <account name="Instandhaltung betr. Räume" type="13"/>
+        <account name="Miete" type="13"/>
+        <account name="Reinigung" type="13"/>
+        <account name="Sonstige Raumkosten" type="13"/>
+      </account>
+      <account name="Rechts- und Beratungskosten" type="13">
+        <account name="Abschluss- und Prüfungskosten" type="13"/>
+      </account>
+      <account name="Reisekosten" type="13">
+        <account name="km-Geld-Erstattung 8,7%" type="13"/>
+        <account name="Reisekosten 0%" type="13"/>
+        <account name="Reisekosten Arbeitnehmer 10,5%" type="13"/>
+        <account name="Reisekosten Arbeitnehmer 13,1%" type="13"/>
+        <account name="Reisekosten Unternehmer 6,1%" type="13"/>
+      </account>
+      <account name="Repräsentationskosten" type="13">
+        <account name="Bewirtungskosten" type="13"/>
+        <account name="Geschenke bis xx Euro" type="13"/>
+        <account name="Werbekosten" type="13"/>
+      </account>
+      <account name="Sonstige Kosten" type="13">
+        <account name="Ausgangsfrachten" type="13"/>
+        <account name="Betriebsbedarf" type="13"/>
+        <account name="Fremdarbeiten" type="13"/>
+        <account name="Kaufleasing" type="13"/>
+        <account name="Kosten des Geldverkehrs" type="13"/>
+        <account name="Mieten für Einrichtungen" type="13"/>
+        <account name="Mietleasing" type="13"/>
+        <account name="Reparatur und Instandhaltung" type="13"/>
+        <account name="Sonstige betriebl. Aufwendungen" type="13"/>
+        <account name="Sonstige Betriebssteuern" type="13"/>
+        <account name="Transportversicherungen" type="13"/>
+        <account name="Verkaufsprovisionen" type="13"/>
+        <account name="Verpackungsmaterial" type="13"/>
+        <account name="Werkzeug und Kleingeräte" type="13"/>
+        <account name="Zeitschriften/Bücher" type="13"/>
+      </account>
+      <account name="Sozialversicherung" type="13">
+        <account name="Arbeitslosenversicherung" type="13"/>
+        <account name="Krankenversicherung" type="13"/>
+        <account name="Pflegeversicherung" type="13"/>
+        <account name="Rentenversicherung" type="13"/>
+      </account>
+      <account name="Spenden" type="13"/>
+      <account name="Steuern" type="13">
+        <account name="Erbschaftsteuer" type="13"/>
+        <account name="Gewerbesteuer" type="13"/>
+        <account name="Grundsteuern" type="13"/>
+        <account name="Kapitalertragssteuer" type="13"/>
+        <account name="Kirchensteuer" type="13"/>
+        <account name="Lohn-/Einkommensteuer" type="13"/>
+        <account name="Solidaritätszuschlag" type="13"/>
+        <account name="Sonstige Steuern" type="13"/>
+      </account>
+      <account name="Umsatzsteuer" type="13">
+        <account name="Vorjahr" type="13"/>
+        <account name="Vorauszahlung" type="13"/>
+      </account>
+      <account name="Urlaub" type="13">
+        <account name="An- und Abreise" type="13"/>
+        <account name="Unterkunft" type="13"/>
+      </account>
+      <account name="Verschiedenes" type="13"/>
+      <account name="Versicherung" type="13">
+        <account name="Kraftfahrzeug" type="13"/>
+        <account name="Hausrat" type="13"/>
+        <account name="Krankenversicherung" type="13"/>
+        <account name="Lebensversicherung" type="13"/>
+      </account>
+      <account name="Wareneinsatz" type="13">
+        <account name="Wareneingang 16%" type="13"/>
+        <account name="Wareneingang 7%" type="13"/>
+      </account>
+      <account name="Werbungskosten" type="13">
+        <account name="Fachliteratur" type="13"/>
+        <account name="Fahrten ÖPNV" type="13"/>
+      </account>
+      <account name="Zahlungen" type="13">
+        <account name="Gas" type="13"/>
+        <account name="Haus- und Grundbesitzabgaben" type="13"/>
+        <account name="Hypothekenzinsen" type="13"/>
+        <account name="Kabelfernsehen" type="13"/>
+        <account name="Fernseh- und Rundfunkgebühren (GEZ)" type="13"/>
+        <account name="Miete" type="13"/>
+        <account name="Müllgebühren" type="13"/>
+        <account name="Strom" type="13"/>
+        <account name="Telefon" type="13"/>
+        <account name="Wasser/Abwasser" type="13"/>
+      </account>
+      <account name="Zinsaufwand" type="13"/>
+    </account>
+  </accounts>
+</kmymoney-account-template>

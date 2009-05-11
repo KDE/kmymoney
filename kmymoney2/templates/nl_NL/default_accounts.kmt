@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>KMyMoney 0.8 default</title>
+ <shortdesc/>
+ <longdesc/>
+ <accounts>
+  <account type="12" name="" >
+   <account type="12" name="Allimentatie" />
+   <account type="12" name="Werkgever" >
+    <account type="12" name="Bonus" />
+    <account type="12" name="Buitenlandse inkomsten" />
+    <account type="12" name="Anders" />
+    <account type="12" name="Salaris / Loon" />
+    <account type="12" name="Overwerk" />
+    <account type="12" name="Bijdrage pensioenpremie" />
+    <account type="12" name="Bijdrage ziektekostenverzekering" />
+    <account type="12" name="Commissie" />
+   </account>
+   <account type="12" name="Bank" >
+    <account type="12" name="Rente" />
+    <account type="12" name="Service kosten" />
+   </account>
+   <account type="12" name="Beleggingen / Investeringen" >
+    <account type="12" name="Verkoop opties" />
+    <account type="12" name="Dividend" />
+    <account type="12" name="Stock dividend" />
+    <account type="12" name="Rente" />
+    <account type="12" name="Verkoop aandelen" />
+   </account>
+   <account type="12" name="Andere inkomsten" >
+    <account type="12" name="Bedrijfsopties en -aandelen" />
+    <account type="12" name="Giften" />
+    <account type="12" name="Aflossingen" />
+    <account type="12" name="Loterijen" />
+    <account type="12" name="Belasting teruggaaf" />
+    <account type="12" name="Uitkeringen" >
+     <account type="12" name="Studiebeurs" />
+     <account type="12" name="Kinderbijslag" />
+     <account type="12" name="WW" />
+     <account type="12" name="AOW" />
+     <account type="12" name="WIA" />
+     <account type="12" name="Lijfrente" />
+     <account type="12" name="Pensioen" />
+     <account type="12" name="Levensverzekering" />
+     <account type="12" name="Ziektekostenverzekering" />
+     <account type="12" name="Stakingskas" />
+     <account type="12" name="Huur subsidie" />
+    </account>
+   </account>
+  </account>
+  <account type="13" name="" >
+   <account type="13" name="Rekeningen" >
+    <account type="13" name="Telefoon" />
+    <account type="13" name="Huur" />
+    <account type="13" name="Elektriciteit" />
+    <account type="13" name="TV" />
+    <account type="13" name="Lokale belastingen en heffingen" />
+    <account type="13" name="Gas" />
+    <account type="13" name="Hypotheek" >
+     <account type="13" name="Rente" />
+     <account type="13" name="Aflossingsverzekering" />
+     <account type="13" name="Aflossing" />
+    </account>
+    <account type="13" name="Water" />
+    <account type="13" name="Stookolie" />
+    <account type="13" name="Afvalstoffenheffing" />
+    <account type="13" name="Rioolrecht" />
+    <account type="13" name="Abonnementen" />
+    <account type="13" name="Stadsverwarming" />
+   </account>
+   <account type="13" name="Bank kosten" >
+    <account type="13" name="Rente" />
+    <account type="13" name="Service kosten" />
+   </account>
+   <account type="13" name="Zakelijke uitgaven" >
+    <account type="13" name="Auto" >
+     <account type="13" name="Brandstof" />
+     <account type="13" name="Onderhoud" />
+     <account type="13" name="Verzekering" />
+     <account type="13" name="Leasekosten" />
+     <account type="13" name="Lening" />
+    </account>
+    <account type="13" name="Investeringen" />
+    <account type="13" name="Juridische uitgaven" />
+    <account type="13" name="Reis- en verblijfskosten" >
+     <account type="13" name="Accomodatie" />
+     <account type="13" name="Tolgelden" />
+     <account type="13" name="Auto huur" />
+    </account>
+    <account type="13" name="Kantoor huur" />
+    <account type="13" name="Office Supplies" />
+    <account type="13" name="Divers" />
+    <account type="13" name="Loon en salaris" >
+     <account type="13" name="Toelagen" />
+     <account type="13" name="Vakbond" />
+    </account>
+    <account type="13" name="Rente" />
+   </account>
+   <account type="13" name="Auto" >
+    <account type="13" name="Brandstof" />
+    <account type="13" name="Onderhoud" />
+    <account type="13" name="Verzekering" />
+    <account type="13" name="Lease" />
+    <account type="13" name="Lening" />
+    <account type="13" name="Tol gelden en veerdiensten" />
+    <account type="13" name="Parkeer kosten" />
+    <account type="13" name="Rijles" />
+   </account>
+   <account type="13" name="Opname kas" />
+   <account type="13" name="Goede doelen" >
+    <account type="13" name="Giften" />
+   </account>
+   <account type="13" name="Allimentatie (uitgaven)" />
+   <account type="13" name="Onderwijs" >
+    <account type="13" name="Boeken" />
+    <account type="13" name="Lesgeld" />
+    <account type="13" name="Studie lening" />
+   </account>
+   <account type="13" name="Tuin" />
+   <account type="13" name="Gezondheid" >
+    <account type="13" name="Tandarts" />
+    <account type="13" name="Huisarts" />
+    <account type="13" name="Ziekenhuis" />
+    <account type="13" name="Opticien" />
+    <account type="13" name="Medicijnen" />
+    <account type="13" name="Fysiotherapie" />
+   </account>
+   <account type="13" name="Vakantie" >
+    <account type="13" name="Accomodatie" />
+    <account type="13" name="Reiskosten" />
+   </account>
+   <account type="13" name="Huishoudelijk" >
+    <account type="13" name="Boodschappen" />
+    <account type="13" name="Stoffering" />
+    <account type="13" name="Reparatie" />
+    <account type="13" name="Bloemen en planten" />
+    <account type="13" name="Cadeaus" />
+    <account type="13" name="Levensmiddelen" />
+    <account type="13" name="Reiskosten" />
+    <account type="13" name="Divers" />
+    <account type="13" name="Speelgoed" />
+    <account type="13" name="Zakgeld" />
+    <account type="13" name="Kleding" />
+    <account type="13" name="Persoonlijke verzorging" />
+   </account>
+   <account type="13" name="Verzekeringen" >
+    <account type="13" name="Wettelijke aansprakelijkheid" />
+    <account type="13" name="Levensverzekering" />
+    <account type="13" name="Ziektekosten verzekering" />
+    <account type="13" name="Auto verzekering" />
+    <account type="13" name="Arbeidsongeschiktheidsverzekering" />
+    <account type="13" name="Uitvaart verzekering" />
+    <account type="13" name="Rechtsbijstand verzekering" />
+    <account type="13" name="Inboedel verzekering" />
+    <account type="13" name="Pensioen gat verzekering" />
+   </account>
+   <account type="13" name="Werk gerelateerde uitgaven" >
+    <account type="13" name="Vergoedde uitgaven" />
+    <account type="13" name="Niet vergoedde uitgaven" />
+   </account>
+   <account type="13" name="Ontspanning" >
+    <account type="13" name="Boeken en tijdschriften" />
+    <account type="13" name="Uitgaan" />
+    <account type="13" name="Films &amp; videotheek" />
+    <account type="13" name="Hobbies" />
+    <account type="13" name="Sport" />
+    <account type="13" name="Sportkleding" />
+    <account type="13" name="Muziek cassettes, CD's en DVD's" />
+    <account type="13" name="Theater &amp; concerten" />
+    <account type="13" name="Speelgoed" />
+   </account>
+   <account type="13" name="Rechtsbijstand" />
+   <account type="13" name="Lening" >
+    <account type="13" name="Rente" />
+    <account type="13" name="Auto lening" />
+    <account type="13" name="Boot lening" />
+    <account type="13" name="Hypotheek" >
+     <account type="13" name="Aflossing" />
+     <account type="13" name="Rente" />
+     <account type="13" name="Aflossingsverzekering" />
+    </account>
+    <account type="13" name="Studie lening" />
+    <account type="13" name="Motor lening" />
+    <account type="13" name="Doorlopend krediet" />
+   </account>
+   <account type="13" name="Andere uitgaven" >
+    <account type="13" name="Divers" />
+   </account>
+   <account type="13" name="Huisdieren" >
+    <account type="13" name="Voeding" />
+    <account type="13" name="Benodigdheden" />
+    <account type="13" name="Dierenarts" />
+   </account>
+   <account type="13" name="Pensioen voorziening" >
+    <account type="13" name="Lijfrente" />
+    <account type="13" name="Extra pensioen storting" />
+    <account type="13" name="Pensioen premie" />
+   </account>
+   <account type="13" name="Belastingen" >
+    <account type="13" name="Inkomsten belasting" />
+    <account type="13" name="Omzet belasting" />
+    <account type="13" name="Onroerend goed belasting" />
+    <account type="13" name="Anders" />
+    <account type="13" name="Lokale belastingen" />
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

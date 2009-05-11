@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+  <title>KMyMoney</title>
+  <shortdesc>Cuentas predeterminadas</shortdesc>
+  <longdesc>Estas son cuentas y categorías que vienen de manera predeterminada para esta versión de KMyMoney</longdesc>
+  <accounts>
+    <account name="" type="13">
+        <account name="Alimentos y bebidas no alcohólicas" type="13">
+            <account name="Alimentos" type="13"/>
+            <account name="Bebidas no alcohólicas" type="13"/>
+        </account>
+        <account name="Bebidas alcohólicas, tabaco y estupefacientes" type="13">
+            <account name="Bebidas alcohólicas" type="13"/>
+            <account name="Tabaco" type="13"/>
+            <account name="Estupefacientes" type="13"/>
+        </account>
+        <account name="Ropa y calzado" type="13">
+            <account name="Ropa" type="13"/>
+            <account name="Calzado" type="13"/>
+        </account>
+        <account name="Alojamiento, agua, electricidad, gas y otros combustibles" type="13">
+            <account name="Alquileres efectivos de la vivienda" type="13"/>
+            <account name="Alquileres imputados a la vivienda" type="13"/>
+            <account name="Conservación y reparación de la vivienda" type="13"/>
+            <account name="Suministro de agua, y servicios diversos" type="13"/>
+            <account name="Electricidad, gas y otros combustibles" type="13"/>
+        </account>
+        <account name="Muebles, cosas del hogar y mantenimiento de la casa" type="13">
+            <account name="Muebles y accesorios, alfombras y otros materiales para pisos" type="13"/>
+            <account name="Productos textiles para el hogar" type="13"/>
+            <account name="Artefactos para el hogar" type="13"/>
+            <account name="Mercancías de vidrio y cristal, vajilla y utensilios para el hogar" type="13"/>
+            <account name="Herramientas y útiles para el hogar y jardín" type="13"/>
+            <account name="Bienes y servicios para la conservación ordinaria del hogar" type="13"/>
+        </account>
+        <account name="Salud" type="13">
+            <account name="Productos, artefactos y equipo médico" type="13"/>
+            <account name="Servicios para pacientes externos" type="13"/>
+            <account name="Servicios de hospital" type="13"/>
+        </account>
+        <account name="Transporte" type="13">
+            <account name="Adquisición de vehículos" type="13"/>
+            <account name="Funcionamiento de equipos de transporte personal" type="13"/>
+            <account name="Servicios de transporte" type="13"/>
+        </account>
+        <account name="Comunicaciones" type="13">
+            <account name="Servicios postales" type="13"/>
+            <account name="Equipo telefónico y de fax" type="13"/>
+            <account name="Servicios telefónicos y de fax" type="13"/>
+        </account>
+        <account name="Ocio y cultura" type="13">
+            <account name="Equipos audiovisuales, fotográficos y de procesamiento de información" type="13"/>
+            <account name="Otros productos duraderos importantes para ocio y cultura" type="13"/>
+            <account name="Otros artículos y equipo para ocio, jardines y animales domésticos" type="13"/>
+            <account name="Servicios de ocio y culturales" type="13"/>
+            <account name="Periódicos, libros y papeles y utiles de oficina" type="13"/>
+            <account name="Paquetes turísticos" type="13"/>
+        </account>
+        <account name="Educación" type="13">
+            <account name="Enseñanza preescolar y primaria" type="13"/>
+            <account name="Enseñanza secundaria" type="13"/>
+            <account name="Enseñanza postsecundaria, no terciaria" type="13"/>
+            <account name="Enseñanza terciaria" type="13"/>
+            <account name="Enseñanza no atribuible a ningún nivel" type="13"/>
+        </account>
+        <account name="Restaurantes y hoteles" type="13">
+            <account name="Servicios de catering" type="13"/>
+            <account name="Servicios de alojamiento" type="13"/>
+        </account>
+        <account name="Bienes y servicios diversos" type="13">
+            <account name="Cuidado personal" type="13"/>
+            <account name="Efectos personales n.e.p." type="13"/>
+            <account name="Protección social" type="13"/>
+            <account name="Seguros" type="13"/>
+            <account name="Servicios financieros n.e.p." type="13"/>
+            <account name="Otros servicios n.e.p." type="13"/>
+        </account> 
+    </account>
+    
+    <account name="" type="12">
+      <account name="Otros Ingresos" type="12">
+        <account name="Becas" type="12"/>
+        <account name="Regalos Recibidos" type="12"/>
+        <account name="Loterías" type="12"/>
+        <account name="Devolución de Impuestos" type="12"/>
+        <account name="Pensión Recibida para Hijos" type="12"/>
+      </account>
+      <account name="Seguridad Social" type="12">
+        <account name="Pensión de Jubilación" type="12"/>
+        <account name="Pensión no Contributiva" type="12"/>
+        <account name="Bajas laborales" type="12"/>
+        <account name="Seguro Desempleo" type="12"/>
+      </account>
+      <account name="Rendimientos de Inversiones" type="12">
+        <account name="Dividendos" type="12"/>
+        <account name="Ganancias de Capital" type="12"/>
+        <account name="Intereses" type="12"/>
+      </account>
+      <account name="Salario" type="12">
+        <account name="Bonus" type="12"/>
+        <account name="Comisiones" type="12"/>
+        <account name="Primas de Producción" type="12"/>
+        <account name="Salario Bruto" type="12"/>
+        <account name="Salario Neto" type="12"/>
+        <account name="Horas Extras" type="12"/>
+      </account>
+    </account>
+    <account name="" type="9">
+        <account name="Activo líquido" type="1">
+            <account name="Dinero en mano" type="1"/>
+            <account name="Cuenta corriente" type="1"/>
+        </account>
+        <account name="Activo fijo" type="1">
+            <account name="Coche" type="9"/>
+            <account name="Casa" type="9"/>
+        </account>
+    </account>
+  </accounts>
+</kmymoney-account-template>
