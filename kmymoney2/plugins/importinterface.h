@@ -57,5 +57,5 @@ public:
 signals:
 };
 
-}; // namespace
+} // namespace
 #endif

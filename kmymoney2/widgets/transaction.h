@@ -44,7 +44,7 @@ class TransactionEditorContainer;
 
 namespace KMyMoneyTransactionForm {
   class TransactionForm;
-}; // namespace
+} // namespace
 
 namespace KMyMoneyRegister {
 
@@ -415,7 +415,7 @@ private:
   MyMoneyMoney              m_totalAmount;
 };
 
-}; // namespace
+} // namespace
 
 #endif
 // vim:cin:si:ai:et:ts=2:sw=2:

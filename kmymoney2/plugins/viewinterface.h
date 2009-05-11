@@ -45,7 +45,7 @@ class KMenu;
 class KMyMoneyViewBase;
 namespace KMyMoneyRegister {
   class SelectedTransactions;
-};
+}
 
 namespace KMyMoneyPlugin {
 
@@ -120,5 +120,5 @@ signals:
   void kmmFilePlugin(unsigned int);
 };
 
-}; // namespace
+} // namespace
 #endif

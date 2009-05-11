@@ -80,8 +80,8 @@ typedef enum {
 } TransactionSortField;
 
 typedef enum {
-  Qt::AscendingOrder = 0,        //< sort in ascending order
-  Qt::DescendingOrder            //< sort in descending order
+  AscendingOrder = 0,        //< sort in ascending order
+  DescendingOrder            //< sort in descending order
 } SortDirection;
 
 class Register;
