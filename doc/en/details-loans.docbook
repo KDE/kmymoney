@@ -1,0 +1,137 @@
+<chapter id="details.loans">
+
+<chapterinfo>
+<authorgroup>
+<author>
+<firstname>Darin</firstname>
+<surname>Strait</surname>
+<affiliation><address><email>darin.strait@ashdar-partners.com</email></address></affiliation>
+</author>
+</authorgroup>
+<date>2009-05-05</date>
+<releaseinfo>0.9</releaseinfo>
+</chapterinfo>
+
+<title>Loans</title>
+
+<sect1 id="details.loans.general">
+<title>Understanding Loans</title>
+
+<para>
+This section is intended to provide a very brief overview of loans.  Loan regulations and customs vary from locality to locality. For detailed explanations of loans as well as information on local regulations and customs, please see other resources.
+</para>
+
+<para>
+A loan is an agreement under which a borrower receives money from a lender and agrees to repay the money at some future date. &kappname; allows you to track loans by which you, as borrower, borrow money from or, as lender, lend money to someone else. Most individuals borrow more than they lend. So you will generally be the borrower and a finance company will generally be the lender. If you lend money to a family member or a friend, you can use &kappname; to keep track of this loan as well.
+</para>
+<para>This guide will assume that you are borrowing from some sort of finance company, but the topics discussed here apply equally well to loans that you might make to a person. The main difference between borrowing and lending money is that an expense category is used to keep track of interest when borrowing money and an income category is used to keep track of interest when lending money.
+</para>
+
+<formalpara><title>Loan Principal</title>
+<para>
+The amount that is lent out is called the &quot;loan amount&quot; or &quot;principal&quot;. 
+</para>
+</formalpara>
+
+<formalpara><title>Term</title>
+<para>The period of a loan is called its &quot;term&quot; of the loan. At the end of the term, the entirety of the principal will have been returned to the borrower. Terms are generally expressed in weeks, months or years. A term can also be expressed by the number of payments. For example, a one year loan with weekly repayments could be described as a one year loan or a loan with 52 repayments.
+</para>
+</formalpara>
+
+<formalpara><title>Repayments</title>
+<para>
+The repayment of the principal to the lender is generally not done as a lump sum. Instead, a series of repayments each representing a portion of the principal are made. Such repayments are sometimes known as &quot;amortization payments&quot; and in &kappname; &quot;Amortization&quot; is defined as the act of paying off a loan in installments.
+</para>
+</formalpara>
+
+<formalpara><title>Payment Frequency</title>
+<para>
+The frequency of installments is referred to as &quot;Payment Frequency&quot;in &kappname;. Examples of period might be weekly, bi-weekly, monthly, quarterly or yearly. In the US, periodic payments are normally made every month, therefore the loan's period is one month.
+</para>
+</formalpara>
+
+<formalpara><title>Interest Rate</title>
+<para>
+For the privilege of being able to use the money, the borrower will pay the lender a fee called the &quot;interest&quot;, normally expressed as a percentage of the amount of the principal over a defined period.  Interest rates can be fixed, where the interest rate does not change over the lifetime of the loan or variable, where the interest rate can change over time. Typically, interest payments are included with each periodical repayment.
+</para>
+</formalpara>
+
+<formalpara><title>Periodical Repayments</title>
+<para>
+Since these repayments are generally made on some sort of scheduled basis, such as weekly, monthly, quarterly or yearly, they are referred to as &quot;periodical repayments&quot;. The sum of all periodical repayments plus the final repayment will add up to the loan principal plus the interest.
+</para>
+</formalpara>
+
+<formalpara><title>Fees</title>
+<para>
+There may be other fees besides interest that are required to be paid with every installment. These are called &quot;recurring fees&quot;. Examples of recurring fees include (but are not necessarily limited to): 
+<itemizedlist>
+<listitem><para>&quot;Impound&quot; or &quot;escrow&quot; account payments. (Payments of this sort are commonly used to hold funds to pay annual or bi-annual property taxes.)</para></listitem>
+<listitem><para>Mortgage insurance</para></listitem>
+<listitem><para>Disability insurance</para></listitem>
+<listitem><para>Loan account maintenance fees</para></listitem>
+</itemizedlist>
+
+</para>
+</formalpara>
+
+<formalpara><title>Summary</title>
+<para>
+In summary, the borrower receives a lump sum from the lender at the start of the loan. The borrower makes a periodic payment to the lender. The periodic payment is the sum of the principal payment (which is used to pay down the balance of the loan) plus the interest payment (which rewards the lender for allowing the use of the money by the borrower) plus any recurring fees (which cover any incidentals.) At the end of the loan, the borrower has paid back the entire principal.
+</para>
+</formalpara>
+</sect1>
+
+<sect1 id="details.loans.example"><title>Example</title>
+<para>
+For an example, you might borrow $25,000.00 for a new auto and agree to pay the bank one payment each month for 60 months. The interest rate on the loan might be 5.5%. 
+</para>
+
+<para>
+In this scenario, the loan amount is $25,000.00. The term of the loan is 60 months or 5 years.  The term of the loan could also be described as 60 payments since there will be one payment per month for 5 years. The repayment frequency is one month since periodical repayments will be made once a month. The periodical repayment, which is calculated by &kappname;, would be $477.53. 
+</para>
+
+<para>
+A &quot;loan schedule&quot; is a chart or table that shows the date that a repayment should be made and the amount of each periodic repayment.  Often, these schedules break the periodic payment down into its constituent parts: the principal repayment and the interest payment and the recurring fees payment.
+</para>
+
+</sect1>
+
+<sect1 id="details.loans.creation">
+<title>Creating a New Loan</title>
+
+<para>
+In &kappname;, a loan is a type of account. Therefore, to create a new loan, you begin by selecting <menuchoice><guimenu>Account</guimenu><guimenuitem>New Account</guimenuitem></menuchoice>. Continue by answering the questions that the wizard poses to you.
+</para>
+
+<para>
+Optionally, a loan can be associated with a particular institution. If you are borrowing from a mortgage company or a car loan company, you could create an institution entry that describes this firm and associate the institution with your loan. If you are borrowing from your Uncle Ted, there is no requirement to set up an institution.
+</para>
+
+</sect1>
+
+<sect1 id="details.loans.extra-payments">
+<title>Making Extra Principle Repayments On Loans</title>
+
+<para>
+If you would like to make an extra principal repayment, you can do so.  Simply <link linkend="details.ledger.transactions">enter a transaction</link> using the ledgers.  This extra repayment of principal will be taken into account for the interest calculation that happens for the next periodic payment. 
+</para>
+
+<para>Examples of extra principal payments include (but are not necessarily limited to): 
+
+<itemizedlist>
+<listitem><para>Contributing an extra $50 a month</para></listitem>
+<listitem><para>Doubling the periodic principal repayment for every period. (The principal repayment can be found for any particular period by referring to the loan schedule.)</para></listitem>
+<listitem><para>Making a 13th principal repayment every year (This assumes a loan that is repaid in monthly installments.)</para></listitem>
+</itemizedlist>
+
+</para>
+
+<para>
+Note: If you are doubling the principal repaid with every periodic payment, you will need to recalculate the loan schedule for each installment. This will allow there to be an accurate value for the required principal repayment with each installment.
+</para>
+
+</sect1>
+
+</chapter>
+

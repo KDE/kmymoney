@@ -1,0 +1,778 @@
+<chapter id="reference">
+<title>Reference</title>
+
+<sect1 id="reference.menus">
+<sect1info>
+<author>
+<firstname>Roger</firstname>
+<surname>Lum</surname>
+<affiliation><address><email>rogerlum@gmail.com</email></address></affiliation>
+</author>
+</sect1info>
+<title>Menus</title>
+
+<sect2 id="reference.menus.file"><title>File Menu</title>
+<para>
+<variablelist>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo><keycap>Ctrl</keycap><keycap>n</keycap></keycombo>
+</shortcut>
+<guimenu>File</guimenu>
+<guimenuitem>New</guimenuitem>
+</menuchoice></term>
+<listitem><para>
+<action>
+  Creates a new empty file.
+  Only one &kappname; file can be open at once, so this will close your current file first.  
+</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo><keycap>Ctrl</keycap><keycap>o</keycap></keycombo>
+</shortcut>
+<guimenu>File</guimenu>
+<guimenuitem>Open</guimenuitem>
+</menuchoice></term>
+<listitem><para>
+<action>
+  Opens an existing file. 
+</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>File</guimenu>
+<guimenuitem>Open Recent</guimenuitem>
+</menuchoice></term>
+<listitem><para>
+<action>
+  Allows quick access to recently opened files. 
+</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>File</guimenu>
+<guimenuitem>Open Database</guimenuitem>
+</menuchoice></term>
+<listitem><para>
+<action>
+  Opens an existing database.
+</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo><keycap>Ctrl</keycap><keycap>s</keycap></keycombo>
+</shortcut>
+<guimenu>File</guimenu>
+<guimenuitem>Save</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Saves the currently open file.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>File</guimenu>
+<guimenuitem>Save As...</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Saves the currently open file as a different filename. </action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>File</guimenu>
+<guimenuitem>Import</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Import other file types, such as QIF and Gnucash.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>File</guimenu>
+<guimenuitem>Export</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Export current file as a different file type, such as QIF.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo><keycap>Ctrl</keycap><keycap>p</keycap></keycombo>
+</shortcut>
+<guimenu>File</guimenu>
+<guimenuitem>Print</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Prints the current file.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>File</guimenu>
+<guimenuitem>Backup</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Backup current file.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>File</guimenu>
+<guimenuitem>Personal Data</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Edit personal data.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>File</guimenu>
+<guimenuitem>File information</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Displays information about your &kappname; file</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo><keycap>Ctrl</keycap><keycap>w</keycap></keycombo>
+</shortcut>
+<guimenu>File</guimenu>
+<guimenuitem>Close</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Closes the current file.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo><keycap>Ctrl</keycap><keycap>q</keycap></keycombo>
+</shortcut>
+<guimenu>File</guimenu>
+<guimenuitem>Quit</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Quits</action> &kappname;</para></listitem>
+</varlistentry>
+
+</variablelist>
+</para>
+</sect2>
+
+<sect2 id="reference.menus.edit"><title>Edit Menu</title>
+<para>
+<variablelist>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo><keycap>Ctrl</keycap><keycap>f</keycap></keycombo>
+</shortcut>
+<guimenu>Edit</guimenu>
+<guimenuitem>Find transactions...</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Search transactions.</action></para></listitem>
+</varlistentry>
+
+</variablelist>
+</para>
+</sect2>
+
+<sect2 id="reference.menus.view"><title>View Menu</title>
+<para>
+<variablelist>
+
+<varlistentry id="reference.menus.settings.transactiondetail">
+<term><menuchoice>
+<shortcut>
+<keycombo><keycap>Ctrl</keycap><keycap>t</keycap></keycombo>
+</shortcut>
+<guimenu>Settings</guimenu>
+<guimenuitem>Show Transaction Detail</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Show transaction detail in <link linkend="details.ledgers">Ledgers</link> view.  With this option turned on, all lines of the transaction will be shown in the ledger.  When it is turned off, only one line will be shown.</action></para><para>If you only want to see details for the currently selected transaction, but only one line for the others, you can turn on the <link linkend="details.settings.register.lens">Ledger Lens</link>.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo><keycap>Ctrl</keycap><keycap>r</keycap></keycombo>
+</shortcut>
+<guimenu>View</guimenu>
+<guimenuitem>Hide reconciled transactions</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Hide reconciled transactions on the register</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo><keycap>Ctrl</keycap><keycap>u</keycap></keycombo>
+</shortcut>
+<guimenu>View</guimenu>
+<guimenuitem>Hide unused categories</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Hide unused categories on the views</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo><keycap>Ctrl</keycap><keycap>Shift</keycap><keycap>a</keycap></keycombo>
+</shortcut>
+<guimenu>View</guimenu>
+<guimenuitem>Show all accounts</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Show all accounts on the views</action></para></listitem>
+</varlistentry>
+
+</variablelist>
+</para>
+</sect2>
+
+<sect2 id="reference.menus.institution"><title>Institution Menu</title>
+<para>
+<variablelist>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Institution</guimenu>
+<guimenuitem>Add new institution...</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Add a new institution.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Institution</guimenu>
+<guimenuitem>Edit institution...</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Edit an institution.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Institution</guimenu>
+<guimenuitem>Delete institution...</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Delete an institution.</action></para></listitem>
+</varlistentry>
+
+</variablelist>
+</para>
+</sect2>
+
+
+<sect2 id="reference.menus.account"><title>Account Menu</title>
+<para>
+<variablelist>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Account</guimenu>
+<guimenuitem>Add new account...</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Add a new account.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Account</guimenu>
+<guimenuitem>Edit account...</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Edit an account.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Account</guimenu>
+<guimenuitem>Delete account...</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Delete an account.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Account</guimenu>
+<guimenuitem>Open ledger</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Go to the ledger view of an account.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo><keycap>Ctrl</keycap><keycap>Shift</keycap><keycap>r</keycap></keycombo>
+</shortcut>
+<guimenu>Account</guimenu>
+<guimenuitem>Reconcile...</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Reconcile an account through the reconciliation wizard.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Account</guimenu>
+<guimenuitem>Postpone</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Postpone reconciliation of an account.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Account</guimenu>
+<guimenuitem>Finish</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Finish reconciliation of an account.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Account</guimenu>
+<guimenuitem>Transaction report</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Open a transaction report of an account.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Account</guimenu>
+<guimenuitem>Close account</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Close an account.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Account</guimenu>
+<guimenuitem>Reopen account</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Reopen an account, if closed.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Account</guimenu>
+<guimenuitem>Unmap account</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Unmap online account.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Account</guimenu>
+<guimenuitem>Map to online account</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Map account to online account.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Account</guimenu>
+<guimenuitem>Update account...</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Import transactions from online banking for an account</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Account</guimenu>
+<guimenuitem>Update all accounts...</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Import transactions from online banking for all accounts.</action></para></listitem>
+</varlistentry>
+
+</variablelist>
+</para>
+</sect2>
+
+<sect2 id="reference.menus.category"><title>Category Menu</title>
+<para>
+<variablelist>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Category</guimenu>
+<guimenuitem>Add new category...</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Add a new category.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Category</guimenu>
+<guimenuitem>Edit category...</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Edit a category.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Category</guimenu>
+<guimenuitem>Delete category...</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Delete a category.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Category</guimenu>
+<guimenuitem>Open ledger</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Go to the ledger view of a category.</action></para></listitem>
+</varlistentry>
+
+</variablelist>
+</para>
+</sect2>
+
+<sect2 id="reference.menus.transaction"><title>Transaction Menu</title>
+<para>
+<variablelist>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo><keycap>Ctrl</keycap><keycap>Insert</keycap></keycombo>
+</shortcut>
+<guimenu>Transaction</guimenu>
+<guimenuitem>New</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Add a new transaction.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Transaction</guimenu>
+<guimenuitem>Edit</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Edit a transaction.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Transaction</guimenu>
+<guimenuitem>Edit splits</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Edit the splits of a transaction.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Transaction</guimenu>
+<guimenuitem>Delete</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Delete a transaction.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Transaction</guimenu>
+<guimenuitem>Duplicate</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Duplicate a transaction.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Transaction</guimenu>
+<guimenuitem>Mark transaction as Not Reconciled</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Change a transaction to Not Reconciled status.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo><keycap>Ctrl</keycap><keycap>Shift</keycap><keycap>Space</keycap></keycombo>
+</shortcut>
+<guimenu>Transaction</guimenu>
+<guimenuitem>Mark transaction as Cleared</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Change a transaction to Cleared status.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo><keycap>Alt</keycap><keycap>Ctrl</keycap><keycap>Space</keycap></keycombo>
+</shortcut>
+<guimenu>Transaction</guimenu>
+<guimenuitem>Mark transaction as Reconciled</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Change a transaction to Reconciled status.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Transaction</guimenu>
+<guimenuitem>Go to account</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Go to the other account of the transaction.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Transaction</guimenu>
+<guimenuitem>Go to payee</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Go to the payees view and focus on the payee of the selected transaction.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Transaction</guimenu>
+<guimenuitem>Create schedule</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Create a new scheduled transaction.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Transaction</guimenu>
+<guimenuitem>Match</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Match imported transactions,</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Transaction</guimenu>
+<guimenuitem>Accept</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Accept imported transactions.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Transaction</guimenu>
+<guimenuitem>Combine</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Merge the selected transactions.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Transaction</guimenu>
+<guimenuitem>Select all</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Select all transactions on the register.</action></para></listitem>
+</varlistentry>
+
+</variablelist>
+</para>
+</sect2>
+
+<sect2 id="reference.menus.tools"><title>Tools Menu</title>
+<para>
+<variablelist>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Tools</guimenu>
+<guimenuitem>QIF Profile Editor...</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Modifies the QIF profile used to import or export QIF files.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Tools</guimenu>
+<guimenuitem>Securities...</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Lists all the current securities.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Tools</guimenu>
+<guimenuitem>Currencies...</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>List currencies.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Tools</guimenu>
+<guimenuitem>Prices...</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>List stock and currency prices.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Tools</guimenu>
+<guimenuitem>Update Stock and Currency prices...</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Updates stock and currency prices from online sources using the <link linkend="details.investments.onlinequotes">Online Price Quotes</link> feature.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Tools</guimenu>
+<guimenuitem>Consistency Check</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Runs a check on your file and tries to fix any problem it finds, if possible.</action></para><para>Make a backup of your file before running this option.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Tools</guimenu>
+<guimenuitem>Performance-Check</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Runs a performance test on your file and displays the results.</action></para></listitem>
+</varlistentry>
+
+</variablelist>
+</para>
+</sect2>
+
+
+<sect2 id="reference.menus.settings"><title>Settings Menu</title>
+<para>
+<variablelist>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Settings</guimenu>
+<guimenuitem>Hide/Show Toolbar</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Toggles toolbar on or off.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Settings</guimenu>
+<guimenuitem>Hide/Show Statusbar </guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Toggles bottom status bar on or off.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Settings</guimenu>
+<guimenuitem>Enable all messages</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Re-enables any messages you may have turned off by checking <guimenuitem>Don't tell me about this again</guimenuitem> in a dialog box.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Settings</guimenu>
+<guimenuitem>Configure Shortcuts...</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Configure custom shortcuts.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Settings</guimenu>
+<guimenuitem>Configure Toolbars...</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Customize toolbars.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Settings</guimenu>
+<guimenuitem>Configure &kappname;...</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Configure <link linkend="details.settings">&kappname; settings</link>.</action></para></listitem>
+</varlistentry>
+</variablelist>
+</para>
+</sect2>
+
+<sect2 id="reference.menus.help"><title>Help Menu</title>
+<para>
+<variablelist>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo><keycap>F1</keycap></keycombo>
+</shortcut>
+<guimenu>Help</guimenu>
+<guimenuitem>&kappname; Handbook</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Access the &kappname; Handbook.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo><keycap>Shift</keycap><keycap>F1</keycap></keycombo>
+</shortcut>
+<guimenu>Help</guimenu>
+<guimenuitem>What's This?</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Activate "What's This?" cursor for pop-up help.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Help</guimenu>
+<guimenuitem>Show tip of the day</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Show tip of the day.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Help</guimenu>
+<guimenuitem>Report Bug...</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Report a found bug.  Please refer to the section on <link linkend="firsttime.bugs.quality">Writing High Quality Bugs</link> for guidance on how to write the most useful bugs.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Help</guimenu>
+<guimenuitem>Switch application language...</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Select the language used in &kappname;</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Help</guimenu>
+<guimenuitem>About &kappname;</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Show About &kappname; information, including the version number and the credits.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Help</guimenu>
+<guimenuitem>About KDE</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Show KDE information.</action></para></listitem>
+</varlistentry>
+
+</variablelist>
+</para>
+</sect2>
+
+</sect1>
+
+<sect1 id="reference.widgets">
+<sect1info>
+<author>
+<firstname>Thomas</firstname>
+<surname>Baumgart</surname>
+<affiliation><address><email>ipwizard@users.sourceforge.net</email></address></affiliation>
+</author>
+</sect1info>
+
+<title>Widgets</title>
+<para>
+&kappname; has some specific widgets not found in other applications. The usage of these widgets are explained in this chapter.
+</para>
+
+&details-widgets;
+
+</sect1>
+</chapter>

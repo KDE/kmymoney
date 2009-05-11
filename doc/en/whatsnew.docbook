@@ -1,0 +1,25 @@
+<chapter id="whatsnew">
+<title>What's new in this release</title>
+
+<para>We have been working hard to make this release better and easier to use in every way. We have added a lot of new features to this version and have also made quite a few improvements. We are confident you will like what you see.</para>
+
+<para>Here are some of the new features found in this release:</para>
+
+<itemizedlist>
+<listitem><para><link linkend="details.investments">Investments</link></para></listitem>
+<listitem><para><link linkend="details.reports">Reports</link></para></listitem>
+<listitem><para><link linkend="details.currencies">Multiple currencies</link></para></listitem>
+<listitem><para><link linkend="details.impexp.gnucash">GnuCash File Converter</link></para></listitem>
+<listitem><para><link linkend="details.impexp.ofx">OFX Import</link></para></listitem>
+<listitem><para><link linkend="details.impexp.webconnect">Web Connect</link></para></listitem>
+<listitem><para><link linkend="firsttime.mainwindow">An improved look and feel -including a new icon set</link></para></listitem> 
+<listitem><para><link linkend="details.formats.encrypted">Encryption of the Data File</link></para></listitem>
+<listitem><para><link linkend="reference.widgets">Widgets for entering dates, values, payees &amp; categories</link></para></listitem>
+<listitem><para><link linkend="details.investments.onlinequotes">Online Quotes for Stocks &amp; Currencies</link></para></listitem>
+<listitem><para><link linkend="details.categories.vat">Support for VAT</link></para></listitem>
+<listitem><para><link linkend="details.impexp.plugins">Ability to write importer plugins</link></para></listitem>
+<listitem><para><link linkend="details.formats.anonymous">&quot;Anonymous&quot; File Format to assist debugging</link> </para></listitem>
+</itemizedlist>
+
+</chapter>
+

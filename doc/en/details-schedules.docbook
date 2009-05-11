@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<chapter id="details.schedules">
+
+<chapterinfo>
+<authorgroup>
+<author>
+	<firstname>Roger</firstname>
+	<surname>Lum</surname>
+	<affiliation>
+		<address><email>rogerlum@gmail.com</email></address>
+	</affiliation>
+</author>
+<author>
+	<firstname>Michael</firstname>
+	<othername>T.</othername>
+	<surname>Edwardes</surname>
+	<affiliation>
+		<address><email>mte@users.sourceforge.net</email></address>
+	</affiliation>
+</author>
+</authorgroup>
+</chapterinfo>
+
+<title>Schedules</title>
+
+<sect1 id="details.schedules.intro">
+<title>Introduction</title>
+
+<para>
+	<quote>Schedules maintain information about transactions that occur one or more times over a period time.</quote>
+</para>
+<para>
+	Sometimes called recurring transactions, schedules provide a means to record information about transactions that happen on a regular basis.  A common schedule is your salary.  Once a month, or even weekly, the company you work for pays you for services rendered.  This payment can happen in many different ways but each month or week you will receive a payment that needs to be recorded.
+</para>
+<para>
+	Because you know these payments are regularly made to you, a Schedule can be created to record information about the payment and even create the transaction for you when pay day arrives.
+</para>
+<para>
+	Other types of schedule can also be recorded to reflect money coming in and out of your account.  Common expenses such as utility bills or money transfers can be recorded with schedules along with loan repayments.
+</para>
+
+<para>
+The schedule consists of two main parts; the scheduling data and the transaction itself.  The scheduling data records the occurrence of the schedule, ie. when the transaction is to be entered into the ledger and how.  The transaction data records normal transaction information and will be entered in to the ledger as-is.
+</para>
+
+</sect1>
+
+<sect1 id="details.schedules.type">
+<title>The types of schedules</title>
+
+<para>
+There are four different types of schedule at the moment:
+</para>
+
+<itemizedlist>
+	<listitem><para>Bills</para></listitem>
+	<listitem><para>Deposits</para></listitem>
+	<listitem><para>Transfers</para></listitem>
+	<listitem><para>Loans</para></listitem>
+</itemizedlist>
+
+<sect2>
+<title>Bills</title>
+<para>
+	A Bill Schedule is used to create a schedule for money going out of your account such as a Gym membership.
+</para>
+</sect2>
+
+<sect2>
+<title>Deposits</title>
+<para>
+	A Deposit Schedule is used to create a schedule for money coming into your account such as a pay check.
+</para>
+</sect2>
+
+<sect2>
+<title>Transfers</title>
+<para>
+	A Transfer Schedule is used to create a schedule for money coming out of one account and into another.  A typical example is a credit card payment.
+</para>
+</sect2>
+
+<sect2>
+<title>Loans</title>
+<para>	
+	A Loan Schedule is a special type of schedule and is created when dealing with <link linkend="details.loans">Loan</link> accounts.
+</para>
+
+<para>
+	Open the schedule view by clicking on the  <guiicon>Schedule <inlinemediaobject><imageobject><imagedata fileref="schedule.png"/></imageobject></inlinemediaobject></guiicon> icon in the view selector.
+</para>
+</sect2>
+</sect1>
+
+<sect1 id="details.schedules.view">
+<title>The schedule view</title>
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="scheduleview.png" format="PNG" />
+	</imageobject>
+	<textobject>
+	<phrase>Schedule View</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+	
+<para>
+	The schedule view consists of a tabbed list view along with a create button above it. To create a new schedule click on the <guibutton>New Schedule</guibutton> button and select the type of schedule you wish to create.
+</para>
+</sect1>
+
+<sect1 id="details.schedules.new">
+<title>The new schedule dialog</title>
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newsched_numbered.png" format="PNG" />
+	</imageobject>
+	<textobject>
+	<phrase>New Schedule</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+	
+<para>
+A new dialog window is now shown prompting for the schedule and transaction data.  The schedule data includes the following fields:
+</para>
+
+<orderedlist numeration="upperalpha">
+	<listitem><para>Schedule Name</para></listitem>
+	<listitem><para>Next due date</para></listitem>
+	<listitem><para>Frequency</para></listitem>
+	<listitem><para>Estimated amount</para></listitem>
+	<listitem><para>Schedule options</para></listitem>
+</orderedlist>
+
+<sect2>
+<title>Filling in the fields</title>
+<para>
+	Enter the schedule name and the next occurrence of this schedule into their respective fields.  Select the frequency from the <guibutton>Frequency</guibutton> drop down list.  If the amount varies transaction to transaction make sure to check the <guilabel>Estimate</guilabel> check box and you will be prompted for the correct amount when it is entered into the ledger.  Fill in all the transaction fields as you would normally with the ledger view.
+</para>
+</sect2>
+
+<sect2>
+<title>Modifying the schedule behavior</title>
+<para>
+At the bottom of the dialog are some optional fields that can modify how the schedule behaves.  If the schedule occurs on a weekend you can choose whether to enter the transaction the previous Friday or the next Monday.  Typically this option is used to replicate some real world operation such as a bank transaction.
+</para>
+</sect2>
+
+<sect2>
+<title>Letting &kappname; enter the transaction into the register</title>
+<para>
+	To let &kappname; enter the transaction for you when needed make sure that the check box labeled <guilabel>Enter this into the ledger automatically</guilabel> is checked otherwise when the transaction is due to be entered, &kappname; will open a dialog box asking you to confirm that you want it to be entered.  This behavior is configurable and more information can be found in the Settings section.
+</para>
+</sect2>
+
+<sect2>
+<title>Letting &kappname; know when the schedule will finish</title>
+<para>
+If you know how many transactions are left or when they are due to finish this information can be entered so the transactions are not entered indefinitely.  Check the appropriate tick box and enter the information you have.  Only the date or the number of transactions remaining is needed because the other can be calculated.
+</para>
+
+<para>
+	Enter the required information and click on <guibutton>OK</guibutton> to continue.
+</para>
+</sect2>
+
+</sect1>
+
+<sect1 id="details.schedules.edit">
+<title>Editing schedules</title>
+<para>
+	To edit the schedule simply select the entry in the list and right click to bring up the context menu and select <guimenuitem>Edit</guimenuitem>.
+</para>
+</sect1>
+
+<sect1 id="details.schedules.delete">
+<title>Deleting schedules</title>
+<para>
+	To delete the schedule simply select the entry in the list and right click to bring up the context menu and select <guimenuitem>Delete</guimenuitem>.
+</para>
+</sect1>
+
+<sect1 id="details.schedules.calendar">
+<title>The calendar view</title>
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="calendarview.png" format="PNG" />
+	</imageobject>
+	<textobject>
+	<phrase>Calendar View</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+	
+<para>
+	The calendar tab presents the schedules in a calendar format so it is easier to see when they occur.  To switch to the calendar view click on the <guibutton>Calendar View</guibutton> tab.
+</para>
+
+<para>
+	The calendar type can be changed using the <guibutton>Select Style</guibutton> button.  Currently only two types exist; Week and Month.  The monthly view is the default and is usually the most useful.  Navigate through the dates using the controls as you would with the date input control.
+</para>
+
+<para>
+	The number of transactions scheduled for each day is displayed on the calendar.
+</para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="schedmonthday.png" format="PNG" />
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para>
+To view the schedule(s) that fall on that day move the mouse cursor over the highlight and a popup window
+</para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="schedpopup.png" format="PNG" />
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para>
+will be displayed allowing you to view the schedule summary.
+</para>
+
+<para>
+	If more than one schedule falls on that day you can cycle through them using the buttons at the top of the window.
+</para>
+
+<para>
+	If you find that the display is cluttered with schedules and you only want to view one type of schedule, then this is possible from the <guibutton>Select Schedules</guibutton> button.  After clicking on this button the different schedule types are listed and are checked by default
+</para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="schedcaltypes.png" format="PNG" />
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para>
+To remove a type from the calendar view simply uncheck it in the list.
+</para>
+</sect1>
+
+<sect1 id="details.schedules.entering">
+<title>Entering scheduled transactions</title>
+<para>
+Scheduled transactions can be entered in one of three different ways
+</para>
+
+<itemizedlist>
+	<listitem><para>Manually by right clicking on the list entry</para></listitem>
+	<listitem><para>Manually via the popup window in the calendar view</para></listitem>
+	<listitem><para>&kappname; can enter them with or without your interaction upon startup</para></listitem>
+</itemizedlist>
+
+<sect2>
+<title>Manually entering scheduled transactions</title>
+<para>	
+	You can enter a scheduled transaction manually be right clicking on the list entry and selecting <guimenuitem>Enter</guimenuitem> from the popup menu or by clicking on the <guibutton>Enter</guibutton> button on the popup window in the calendar view.
+</para>
+</sect2>
+
+<sect2>
+<title>Confirming the transaction to enter</title>
+<para>
+	After selecting either method the Enter Scheduled Transaction dialog window is shown prompting you with the required information, entered when creating the schedule.
+</para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="enterschedule.png" format="PNG" />
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para>		
+	This information can be changed and can be applied to just this one instance of the schedule or to all subsequent transactions.  After checking that all the data is correct clicking on <guibutton>OK</guibutton> will add the transaction to the ledger.  If you have changed any of the transaction data a further confirmation of what you intend will be displayed.
+</para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="confirmenter.png" format="PNG" />
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para>	
+	Select what you want to do with the information presented and click <guibutton>OK</guibutton> or <guibutton>Cancel</guibutton>.
+</para>
+</sect2>
+
+<sect2>
+<title>Letting &kappname; enter the scheduled transaction(s) for you</title>
+<para>	
+	Alternatively &kappname; can check which schedules are due upon startup and enter them for you if the appropriate option was checked when setting up the schedule.
+</para>
+
+<para>
+	If the option was not checked then &kappname; will open the previously mentioned dialog and you can follow the steps mentioned there.  &kappname; will also open the dialog if the amount is an estimate so you can enter the real amount.
+</para>
+
+<para>
+	You can also opt to have &kappname; not check which transactions are scheduled on startup by deselecting the option in the Settings dialog and any overdue transaction or transactions due 'today' will be shown in the Home view for you to enter manually.
+</para>
+</sect2>
+</sect1>
+
+</chapter>

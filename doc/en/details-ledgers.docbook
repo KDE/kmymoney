@@ -1,0 +1,491 @@
+<chapter id="details.ledgers">
+
+<chapterinfo>
+<authorgroup>
+<author>
+	<firstname>Michael</firstname>
+	<othername>T.</othername>
+	<surname>Edwardes</surname>
+	<affiliation>
+		<address><email>mte@users.sourceforge.net</email></address>
+	</affiliation>
+</author>
+<author>
+<firstname>Roger</firstname>
+<surname>Lum</surname>
+<affiliation><address><email>rogerlum@gmail.com</email></address></affiliation>
+</author>
+</authorgroup>
+<date>2006-02-11</date>
+<releaseinfo>0.9</releaseinfo>
+</chapterinfo>
+
+<title>Ledgers</title>
+
+<sect1 id="details.ledgers.view">
+<title>The Ledger View</title>
+<para>
+The Ledgers view is where most of the functionality of &kappname; lies.  
+  This view is for entering transaction data into the various accounts. The view is split into two main areas: the transaction list, and the input area. In the transactions list, the transactions are arranged by date with the most recent transaction on the bottom. 
+</para>
+
+<para>
+  It allows for several key actions: viewing transactions, entering transactions, and editing or deleting existing transactions. Other functionality includes modifying account details, or reconciling the account. 
+</para>
+  
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="ledgerview-numbered.png" format="PNG" />
+	</imageobject>
+	<textobject>
+	<phrase>Ledger View</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+  <para>The view has three elements:
+</para>
+
+<orderedlist numeration="upperalpha">
+	<listitem><para>The account drop down list</para></listitem>
+	<listitem><para>The transaction list</para></listitem>
+	<listitem><para>The transaction input form</para></listitem>
+</orderedlist>
+
+<sect2>
+<title>The account drop down list</title>
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="accountdropdown.png" format="PNG" />
+	</imageobject>
+	<textobject>
+	<phrase>Account Drop Down</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+	
+<para>
+	You can select an account via the account drop down list.  Note that depending upon the type of the account the <link linkend="details.ledger.transactionform">transaction input form</link> at the bottom of the view changes.
+</para>
+</sect2>
+
+<sect2>
+<title>The transaction list</title>
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="translist.png" format="PNG" />
+	</imageobject>
+	<textobject>
+	<phrase>Transaction list</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+	
+<para>
+	After you have entered some transactions they are displayed in the transaction list.  From here you can also  change transaction properties or even create new transactions directly in the list.
+	Using the Right Mouse Button on the header of the transaction list allows you to change the sort order of the transactions.
+</para>
+</sect2>
+
+</sect1>
+
+<sect1 id="details.ledger.transactions"><title>Entering Transactions</title>
+<para>
+Two methods of entering transactions into the ledger are available; using the transaction input form and entering the data directly into the transaction list.  The transaction input form is displayed by default and this is the method we will discuss first.
+</para>
+<para>
+The fields in the input area match the information fields in the transactions list. Additional fields include the Memo field, for a more detailed description of the transaction and a Category selection. The Split button allows for the transaction to be split into multiple categories. 
+</para>
+</sect1>
+
+<sect1 id="details.ledger.transactionform">
+<title>Using the transaction input form</title>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="transactionform.png" format="PNG" />
+	</imageobject>
+	<textobject>
+	<phrase>Transaction Form</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+	
+<para>
+        The transaction input form at the bottom of the view is the interface for creating transactions.
+</para>
+
+<para>
+	Depending upon the transaction you wish to enter there are several different tabs available in the transaction form.  Click on the tab that best describes your transaction and the transaction form will load several fields ready for your input.
+</para>
+
+<para>
+	Please note that the actual transaction method is not used directly by &kappname; but is purely for grouping/reporting purposes.
+</para>
+
+<para>
+	If you are unsure which method to choose simply use Deposit for any money going into the account and Withdrawal for money coming out of the account.  The transaction methods and the differences between them are discussed in more detail elsewhere.
+</para>
+
+<para>
+        Select the transaction method by clicking on one of the tabs.
+</para>
+
+<sect2>
+<title>The fields of a transaction</title>
+<para>
+	Enter the information using the following notes on the available fields.  Note that many fields have 'Auto Completion' turned on.  That is, if you start typing, &kappname; will offer alternatives matching the characters you have entered so far.  To select an entry click on it using the mouse or keyboard, or if your entry is not listed keep typing to add the new value.  The next time you type the value in, &kappname; will find it for you after the first few characters have been input.
+</para>
+
+<sect3>
+<title>The Payee</title>
+<para>
+	The Payee is who the money came from/to.  If the payee is a new entry &kappname; will ask if you wish to add this to the Payees view.  Any other information related to a payee or payer, such as address details can be updated in the Payees view later.
+</para>
+</sect3>
+
+<sect3>
+<title>The Category</title>
+<para>
+	The Category associates a transaction with an income or expense category for accounting and reporting purposes and enables you to group certain transactions. Type the name of the category into the required field.  If you have entered the category and it does not exist then &kappname; will prompt you to create a new one.
+</para>
+<para>
+	If you wish to associate parts of the transaction with different categories, &kappname; can let you do that.  An example transaction might be a cash machine withdrawal of 50 of which you use 10 on food, 20 on beer and 20 as spare cash.  The transaction will therefore be assigned three categories, Food, Beer and Cash.  To assign these three parts to the three categories, Food, Beer and Cash, click on the <guibutton>Split</guibutton> button.  This brings up the <link linkend="details.ledgers.split">Split Editor</link>. Enter the categories, creating any new ones as needed, and input the amount per category.  Click on <guibutton>OK</guibutton> to save the assignments.  Note that the category field in the transaction input form now displays <emphasis>Split transaction</emphasis>
+</para>
+</sect3>
+
+<sect3>
+<title>The Memo</title>
+<para>
+A one line memo can be entered if you wish to help you remember what the transaction was for.
+</para>
+</sect3>
+
+<sect3>
+<title>The Check Number</title>
+<para>
+	The check number can be entered if needed.  Note that the check number can always be visible if desired.  This is configured in the Settings dialog.
+</para>
+</sect3>
+
+<sect3>
+<title>The Date</title>
+<para>
+	The transaction date can also be entered to specify when the transaction took place.  See the special &kappname; fields section for more information on how the date input field can be used to make entering dates quicker and easier.
+</para>
+</sect3>
+
+<sect3>
+<title>The Amount</title>
+<para>
+	Finally enter the transaction amount into the required field.  Note that a simple calculator can be displayed by entering the % character into the field.
+</para>
+
+<para>
+	When you are satisfied that all the fields have been filled in correctly, click on <guibutton>Enter</guibutton>. If you accidentally press or click on <guibutton>Enter</guibutton> before you have finished entering all the data, click on <guibutton>Edit</guibutton> to resume entering the data.
+</para>
+
+</sect3>
+</sect2>
+<sect2 id="details.ledger.transactionform.split"><title id="details.ledger.transactionform.split.title">Split Transactions</title>
+
+<para>
+  Split transactions allows you to divide up a transaction into multiple categories, representing, for example, the different items purchased with a single purchase at a store.
+</para> 
+
+<para>
+  To enter a split transaction, start a new transaction as normal, including entering the total amount. Instead of selecting a category, click the <guibutton>Split</guibutton> button. If you have selected a category, that becomes the first entry in the split editor screen.
+</para> 
+ 
+<para>
+  In the split editor screen, double-click an empty line to enter a new sub-transaction or press <keycombo action="simul">&Ctrl;&Insert;</keycombo>. Specify the category, add a memo, and enter the amount. To save this part of the split, press the green check mark under the category. To cancel, press the red cross.  
+</para> 
+ 
+<para>
+  After entering a split, the bottom of the split editor shows how much of the total transaction is still unassigned. After entering all the splits, press the Finish button to save the entire transaction. If there are still unassigned amounts, you will be prompted to either return to editing the splits, change the total transaction amount, or leave part of the transaction unassigned. 
+</para> 
+
+<para>
+<screenshot>
+	<screeninfo>Split transactions</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="split_transaction.png" format="PNG" />
+	</imageobject>
+	<textobject>
+	<phrase>Split transaction</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+</sect2>
+</sect1>
+
+<sect1 id="details.ledger.direct">
+<title>Directly inputting transactions into the list</title>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="transactionform-off.png" format="PNG" />
+	</imageobject>
+	<textobject>
+	<phrase>Direct Transaction Entry</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para>
+	The second method of entering transactions into the ledger involves editing the transaction list itself directly.
+</para>
+
+<para>
+	To do this you must first let &kappname; know that you don't want to use the transaction from by opening the settings dialog and unchecking the <guilabel>Use transaction form</guilabel> option.
+</para>
+
+<para>
+	This is performed by selecting <guimenu>Settings</guimenu><guimenuitem>Configure &kappname;</guimenuitem> from the menu bar and selecting the <guiicon><inlinemediaobject><imageobject><imagedata fileref="register.png"></imagedata></imageobject></inlinemediaobject>Register</guiicon> icon from the list on left.  The option to uncheck is labeled <guilabel>Show transaction form</guilabel>.  When finished click on <guibutton>OK</guibutton> to be ready to directly enter transactions.
+</para>
+
+<sect2>
+<title>Starting the edit</title>
+<para>	
+	To enter a transaction into the register you can now either double click on the entry or press <keycombo action="simul">&Ctrl;&Insert;</keycombo> when the transaction is highlighted.  The <keycap>Up</keycap> and <keycap>Down</keycap> arrow keys let you navigate through the list.  After pressing <keycap>Enter</keycap> or double clicking on an entry, the transaction list displays the fields required to enter the transaction and waits for input.
+</para>
+
+<para>
+	To move through the fields press the <keycap>Tab</keycap> key and when done press <keycap>Enter</keycap> to save the changes or <keycap>Esc</keycap> to cancel.
+</para>
+
+<para>
+Which method you use to enter transactions is up to you and is a matter of personal preference.
+</para>
+</sect2>
+</sect1>
+
+<sect1 id="details.ledger.edit">
+<title>Editing transactions</title>
+<para>
+	To edit a transaction select it in the list view and either click on <guibutton>Edit</guibutton> in the transaction input form or right click on the entry and select <guimenuitem>Edit</guimenuitem> from the popup menu.  If you are editing transactions directly in the list you can edit the transaction simply by double clicking on an entry or by pressing <keycap>Enter</keycap> when a transaction is highlighted.
+</para>
+</sect1>
+
+<sect1 id="details.ledger.delete">
+<title>Deleting transactions</title>
+<para>
+	To delete the transaction select it in the list view and right click on the entry selecting <guimenuitem>Delete</guimenuitem> from the popup menu when it appears or press the <keycap>Delete</keycap> button on the keyboard.
+</para>
+</sect1>
+
+<sect1 id="details.ledgers.split"><title id="details.ledgers.split.title">Split Transactions</title>
+
+<para>
+  Split transactions allows you to divide up a transaction into multiple categories, representing, for example, the different items purchased with a single purchase at a store.
+</para> 
+
+<para>
+  To enter a split transaction, start a new transaction as normal, including entering the total amount. Instead of selecting a category, click the <guibutton>Split</guibutton> button. If you have selected a category, that becomes the first entry in the split editor screen.
+</para> 
+ 
+<para>
+  In the split editor screen, double-click an empty line to enter a new sub-transaction or press <keycombo action="simul">&Ctrl;&Insert;</keycombo>. Specify the category, add a memo, and enter the amount. To save this part of the split, press the green check mark under the category. To cancel, press the red cross.  
+</para> 
+ 
+<para>
+  After entering a split, the bottom of the split editor shows how much of the total transaction is still unassigned. After entering all the splits, press the Finish button to save the entire transaction. If there are still unassigned amounts, you will be prompted to either return to editing the splits, change the total transaction amount, or leave part of the transaction unassigned. 
+</para> 
+
+<para>
+<screenshot>
+	<screeninfo>Split transactions</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="split_transaction.png" format="PNG" />
+	</imageobject>
+	<textobject>
+	<phrase>Split transaction</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+</sect1>
+
+<sect1 id="details.ledgers.match"><title id="details.ledgers.match.title">Matching Transactions</title>
+
+<para>
+When importing transactions via OFX or HBCI, those transactions will sometimes already be in your register.
+If you simply delete the imported transaction, you will find that the next time you import your transactions, the deleted transaction shows up again.
+This is because modern import formats like OFX and HBCI use a &quot;Transaction ID&quot; to identify transactions.
+When you deleted the imported transaction, the transaction ID went with it, so the importer has no way to know this transaction was already imported.
+</para> 
+
+<para>
+The solution is to tell &kappname; that the transactions are the same, using the manual matching interface.  
+This allows you to match an imported transaction with a hand-entered (non-imported) transaction.
+</para>
+<para>
+To do so, right-click on one of the transactions to be matched.  Choose <guimenuitem>Match Transactions...</guimenuitem> from the context menu.  This flags the selected transaction, and changes the background color to a nice pale green.
+</para>
+<para>
+Next, right-click on the other transaction to be matched.  Choose <guimenuitem>Match with this Transaction</guimenuitem>.  This will match the two transactions together.  The values of both transactions must be the same for the match to work.
+</para>
+
+<para>
+In the future, matching will be made more automatic.
+The importer will automatically match transactions which look like the same, and give you the option to un-match them.
+</para>
+<note><para>
+The matching interface will not allow you to match two transactions which have both been imported.
+Likewise, it won't allow matching between two transactions which have both been entered by hand.
+</para></note>
+
+</sect1>
+
+<sect1 id="details.ledgers.cleared"><title>Understanding the Cleared State</title>
+
+<para>
+A transaction can have three states: non-reconciled (N), cleared (C) and 
+reconciled (R). When you enter a transaction, it has state (N). Once the 
+the bank posts the transaction, the user can clear it and thus transform 
+it to state (C). When you receive a statement from the bank, all cleared 
+transactions should be on the statement. 
+</para>
+
+<para>
+<screenshot>
+	<screeninfo>Understanding the cleared state</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="cleared_state.png" format="PNG" />
+	</imageobject>
+	<textobject>
+	<phrase>cleared state</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+When you <link linkend="details.reconcile"> reconcile your account </link>, 
+you actually mark the statements as cleared and check that 
+the difference between the beginning balance and the cleared transactions 
+equals the ending balance of the statement. When this is the case, you can 
+'finish reconciling' which actually turns the state of all transactions in 
+(C) to (R).
+</para>
+
+<para>
+If you try to edit a transaction with at least one split in (R), you will be warned.
+</para>
+
+<para>
+A fourth state is defined (frozen (F)) but there's currently no way to set 
+it. It is reserved for future use. Nevertheless, if a transaction has at 
+least one split in state frozen it cannot be edited anymore.
+</para>
+
+</sect1>
+
+<sect1 id="details.ledgers.settings"><title id="details.ledgers.settings.title">Changing Transaction Settings</title>
+
+<para>
+  There are several settings options to change the view and behaviour of the ledgers view in terms of transactions. These settings are found under "Configure KMyMoney..." under the Settings menu, and in the Register settings page. 
+</para> 
+
+<para>
+  Most of the settings are self explanatory. For clarity, several of the settings are explained below.
+  <itemizedlist>
+
+  <listitem>
+    <para>Keep changes when selecting a different transaction/split - by selecting the next line in the transaction list or split editor, the changes are kept, instead of the default behaviour where you have to push the green check mark to save changes.</para>
+  </listitem>
+
+  <listitem>
+    <para>Show transaction form - toggle to hide the transaction input area at the bottom of this screen. Transactions can still be entered directly into an empty line at the end of the transaction list, through an automatic compact entry area.</para>
+  </listitem>
+
+  </itemizedlist>
+</para> 
+
+<para>These images show what direct transaction entry looks like compared to the transaction form.</para>
+<para>The transaction input form</para>
+
+<para>
+<screenshot>
+	<screeninfo>The transaction form</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="transactionform.png" format="PNG" />
+	</imageobject>
+	<textobject>
+	<phrase>Transaction form</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>Transactions entered directly</para>
+
+<para>
+<screenshot>
+	<screeninfo>Transactions entered directly</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="transactionform-off.png" format="PNG" />
+	</imageobject>
+	<textobject>
+	<phrase>Direct input</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+ 
+</sect1>
+
+<sect1 id="details.ledgers.other"><title id="details.ledgers.other.title">Other Functionality</title>
+
+<para>
+  Additional options are available from the Transaction Options menu, accessed either by right-clicking a transaction in the list or pressing the More button in the bottom input area. 
+</para>
+
+<para>
+<screenshot>
+	<screeninfo>The transaction options sub-menu</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="ledger_more.png" format="PNG" />
+	</imageobject>
+	<textobject>
+	<phrase>Transaction options</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+  Options include jumping to the Payee's page, creating a schedule, and changing reconciled or cleared indication. 
+</para>
+
+<para>
+  To edit the account information from this view, press the Account button to bring up the Account Options menu. From this menu, you can change the account details, or bring up the Reconcile menu, which allows you to match transactions against an official bank statement or credit card notice. 
+</para>
+
+</sect1>
+
+</chapter>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<chapter id="views.schedule">
+<title>Schedule View - Under development - MTE</title>
+
+<sect1 id="views.schedule.overview"><title>Overview</title>
+<para>
+	<screenshot>
+	<screeninfo>Schedule View</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="scheduleview.png" format="PNG" />
+	</imageobject>
+	<textobject>
+	<phrase>Schedule View</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+<para>
+	Some intro to the view
+</para>
+
+<sect2 id="views.schedule.overview.creating"><title>The New Schedule button</title>
+<para>
+</para>
+</sect2>
+
+<sect2 id="views.schedule.overview.filter"><title>The Account Filter</title>
+<para>
+</para>
+</sect2>
+
+<sect2 id="views.schedule.overview.views"><title>The List View and the Calendar View</title>
+<para>
+</para>
+</sect2>
+</sect1>
+
+
+<sect1 id="views.schedule.listtab"><title>The List View</title>
+<para>
+</para>
+
+<sect2 id="views.schedule.listtab.groups"><title>The Schedule groups</title>
+<para>
+</para>
+</sect2>
+
+<sect2 id="views.schedule.listtab.columns"><title>The list columns</title>
+<para>
+</para>
+</sect2>
+</sect1>
+
+
+<sect1 id="views.schedule.calendartab"><title>The Calendar Tab</title>
+<para>
+</para>
+
+<sect2 id="views.schedule.calendartab.nav"><title>Date Navigation</title>
+<para>
+</para>
+</sect2>
+
+<sect2 id="views.schedule.calendartab.type"><title>Calendar types</title>
+<para>
+</para>
+</sect2>
+
+<sect2 id="views.schedule.calendartab.schedule"><title>Schedule types</title>
+<para>
+</para>
+</sect2>
+</sect1>
+
+<sect1 id="views.schedule.create"><title>Creating schedules</title>
+<para>
+</para>
+</sect1>
+
+<sect1 id="views.schedule.edit"><title>Editing schedules</title>
+<para>
+</para>
+</sect1>
+
+<sect1 id="views.schedule.enter"><title>Entering schedules</title>
+<para>
+</para>
+
+<sect2 id="views.schedule.manualenter"><title>Manually entering schedules</title>
+<para>
+</para>
+</sect2>
+
+<sect2 id="views.schedule.autoenter"><title>Letting &kappname; enter the schedules</title>
+<para>
+</para>
+</sect2>
+</sect1>
+
+<sect1 id="views.schedule.delete"><title>Deleting schedules</title>
+<para>
+</para>
+</sect1>
+</chapter>

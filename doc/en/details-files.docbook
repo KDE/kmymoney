@@ -1,0 +1,19 @@
+<chapter id="details.files">
+<title>KMyMoney Files</title>
+<sect1 id="details.files.kmy"><title>Your .KMY data file</title>
+<para>
+All of your financial information that KMyMoney knows about is stored in a file ending in .KMY.  You may have as many of these files as you like, each named differently.  When you launch the program, it will automatically load the file you had open last time you exited.
+</para>
+</sect1>
+<sect1 id="details.files.hackingkmy"><title>Hacking the .KMY data file</title>
+<para>The .KMY file is a gzipped XML file.  If you wish to learn about the structure of the file, you can gunzip it and load it in your favorite text editor.</para>
+</sect1>
+<sect1 id="details.files.anonymous"><title>Making an Anonymous data file</title>
+<para>If you should encounter a bug, it's sometimes useful for the developers to have your data file in order to reproduce it and fix the problem.  Obviously, this presents a problem because you do not want to send the developers your private financial details.</para>
+<para>To solve this, KMM allows you to save an &quot;anonymized&quot; version of your data.  This removes all personal information from the file, but keeps the structure intact.</para>
+	<para>To save a copy of your file in this way, open the File menu from the application menu bar, and choose &quot;Save as...&quot;.  For the file type, choose &quot;Anonymous (.ANON.XML)&quot;.  This will save off a copy of your data in anonymous form.</para>
+<para>Next, you will need to verify that the problem still exists with your file in this form.  Not all problems still occur with an anonymous file.  Close your file, and load the anonymous file.  Try the same actions that caused the problem initially.  Hopefully the problem still happens.</para>
+<para>If it does, you can now report the problem to the developer's list, and mention that you have anonymous file that reproduces the problem.  When requested, send the anonymous file via private e-mail to whichever developer requests it.</para>
+</sect1>
+</chapter>
+

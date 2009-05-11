@@ -1,0 +1,117 @@
+<chapter id="details.categories">
+<chapterinfo>
+<authorgroup>
+<author>
+<firstname>Roger</firstname>
+<surname>Lum</surname>
+<affiliation><address><email>rogerlum@gmail.com</email></address></affiliation>
+</author>
+</authorgroup>
+<date>2005-06-01</date>
+<releaseinfo>0.7</releaseinfo>
+</chapterinfo>
+
+<title id="details.categories.title">Categories</title>
+
+<para>
+  The Categories screen provides a summary of all the existing categories under which transactions are filed. The categories are split into income and expense, and a balance is displayed for each category.
+</para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="categories.png" format="PNG" />
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<sect1 id="details.categories.create">
+<title>Creating categories</title>
+<para>
+	To create a new category select a parent in the tree and right click to bring up the popup menu.  Once open select the <guimenuitem>New Category</guimenuitem> option.  This will open the account details dialog with the parent account selected.
+</para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="categoryedit.png" format="PNG" />
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para>
+	Enter the category name any notes and click on <guibutton>OK</guibutton> to save the new category. To create a complete hierarchy of accounts, separate
+the names by colons (:) as in <emphasis>Bills:Car:Gasoline</emphasis>.
+</para>
+</sect1>
+
+<sect1 id="details.categories.edit"><title id="details.categories.edit.title">Editing a Category</title>
+
+<para>
+  To edit a category, right-click on a category name, and choose "Edit". A  window comes up, with two tabs, "General" and "Tax". The General tab  allows you to edit the name of the category and change its parent category. Changing the parent category is also possible from the main category page by dragging the category to a different parent. The Tax tab enables automatic VAT assignment. 
+</para>
+
+</sect1>
+
+<sect1 id="details.categories.vat">
+
+<sect1info>
+<author>
+<firstname>Thomas</firstname>
+<surname>Baumgart</surname>
+<affiliation><address><email>ipwizard@users.sourceforge.net</email></address></affiliation>
+</author>
+</sect1info>
+
+<title>VAT Support</title>
+	
+<para>
+ You can turn an expense/income category into a VAT 
+ category, which means that it receives all the splits that actually make 
+ up the VAT payment towards the government. The percentage rate can be 
+ entered.
+</para>
+ 
+<para>
+ Categories can be assigned a VAT category, which allows KMyMoney to split 
+ up a transaction for a category into two splits, one for the category and 
+ one for the VAT. Depending on the setting of the gross/net amount switch, 
+ the amount you enter for the transaction is the gross or net amount.
+</para>
+ 
+<para>
+ Example: In Germany, there are three VAT percentages (0, 7 and 19%). So I 
+ have a main category "VAT paid" and three subcategories, one for each 
+ percentage rate. I create these on both the income and the expense sides so
+ that I have eight categories in total.  For the goods I buy, I select one 
+ of the above mentioned categories as the "VAT category assignment".
+</para>
+ 
+<para>
+ When I buy goods, I enter them into a transaction. Let's assume I have 
+ selected the gross amount entry method, once I enter the category and 
+ amount, KMyMoney will recognize that there's a VAT assignment and 
+ calculate the VAT part, create a second split with the VAT account and 
+ VAT amount and reduce the category amount.
+</para>
+ 
+<para>
+ The same applies to income categories but the other way around. Hope that 
+ makes sense.
+</para>
+
+</sect1>
+
+<sect1 id="details.categories.delete">
+<title>Deleting categories</title>
+<para>
+	To delete a category select it in the tree and right click to bring up the popup menu and select <guimenuitem>Delete</guimenuitem>.  Deleting is only possible if there are no transactions under that category. If you try to delete a parent category, a dialog explains that, if you delete the parent category, its sub-categories are moved up one level and asks if you want to delete them all at the same time.
+</para>
+
+</sect1>
+
+</chapter>

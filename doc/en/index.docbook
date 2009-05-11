@@ -1,0 +1,201 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
+	<!ENTITY kappname "KMyMoney">
+	<!ENTITY devlist "<email>kmymoney2-developer@lists.sourceforge.net</email>">
+	<!ENTITY userlist "<email>kmymoney2-user@lists.sourceforge.net</email>">
+	<!ENTITY % addindex "IGNORE">
+	<!ENTITY % English "INCLUDE"><!-- change language only here -->
+
+<!-- the chapters -->
+	<!ENTITY introduction SYSTEM "introduction.docbook">
+	<!ENTITY makemostof SYSTEM "makemostof.docbook">
+	<!ENTITY firsttime SYSTEM "firsttime.docbook">
+	<!ENTITY whatsnew SYSTEM "whatsnew.docbook">
+	<!ENTITY details-institutions SYSTEM "details-institutions.docbook">
+	<!ENTITY details-accounts SYSTEM "details-accounts.docbook">
+	<!ENTITY details-loans SYSTEM "details-loans.docbook">
+	<!ENTITY details-budgets SYSTEM "details-budgets.docbook">
+	<!ENTITY details-forecast SYSTEM "details-forecast.docbook">
+	<!ENTITY details-categories SYSTEM "details-categories.docbook">
+	<!ENTITY details-payees SYSTEM "details-payees.docbook">
+	<!ENTITY details-schedules SYSTEM "details-schedules.docbook">
+	<!ENTITY details-ledgers SYSTEM "details-ledgers.docbook">
+	<!ENTITY details-investments SYSTEM "details-investments.docbook">
+	<!ENTITY details-currencies SYSTEM "details-currencies.docbook">
+	<!ENTITY details-impexp SYSTEM "details-impexp.docbook">
+	<!ENTITY details-reconciliation SYSTEM "details-reconciliation.docbook">
+	<!ENTITY details-search SYSTEM "details-search.docbook">
+	<!ENTITY details-reports SYSTEM "details-reports.docbook">
+	<!ENTITY details-settings SYSTEM "details-settings.docbook">
+	<!ENTITY details-widgets SYSTEM "details-widgets.docbook">
+	<!ENTITY details-formats SYSTEM "details-formats.docbook">
+	<!ENTITY details-database SYSTEM "details-database.docbook">
+	<!ENTITY details-hbciofx SYSTEM "details-hbciofx.docbook">
+	<!ENTITY reference SYSTEM "reference.docbook">
+	<!ENTITY credits SYSTEM "credits.docbook">
+
+<!-- i18n for keys -->
+	<!ENTITY Ctrl "<keycap>Ctrl</keycap>">
+	<!ENTITY Insert "<keycap>Ins</keycap>">
+]>
+
+<book lang="&language;">
+
+<bookinfo>
+<title>The KMyMoney Handbook</title>
+<subtitle>for &kappname; version 0.9</subtitle>
+
+<authorgroup>
+<author>
+	<firstname>Michael</firstname>
+	<othername>T.</othername>
+	<surname>Edwardes</surname>
+	<affiliation>
+		<address><email>mte@users.sourceforge.net</email></address>
+	</affiliation>
+</author>
+
+<author>
+	<firstname>Thomas</firstname>
+	<surname>Baumgart</surname>
+	<affiliation>
+		<address><email>ipwizard@users.sourceforge.net</email></address>
+	</affiliation>
+</author>
+
+<author>
+	<firstname>Ace</firstname>
+	<surname>Jones</surname>
+	<affiliation>
+		<address><email>acejones@users.sourceforge.net</email></address>
+	</affiliation>
+</author>
+
+<author>
+	<firstname>Tony</firstname>
+	<surname>Bloomfield</surname>
+	<affiliation>
+		<address><email>tonybloom@users.sourceforge.net</email></address>
+	</affiliation>
+</author>
+
+<author>
+	<firstname>Robert</firstname>
+	<surname>Wadley</surname>
+	<affiliation>
+		<address><email>robntina@users.sourceforge.net</email></address>
+	</affiliation>
+</author>
+
+<author>
+	<firstname>Darin</firstname>
+	<surname>Strait</surname>
+	<affiliation>
+		<address><email>darin.strait@ashdar-partners.com</email></address>
+	</affiliation>
+</author>
+
+<author>
+	<firstname>Roger</firstname>
+	<surname>Lum</surname>
+	<affiliation>
+		<address><email>rogerlum@gmail.com</email></address>
+	</affiliation>
+</author>
+
+</authorgroup>
+
+<!-- TRANS:ROLES_OF_TRANSLATORS -->
+
+<copyright>
+<year>2000</year>
+<year>2001</year>
+<year>2003</year>
+<year>2004</year>
+<year>2005</year>
+<year>2006</year>
+<year>2007</year>
+<year>2008</year>
+<year>2009</year>
+<holder>The KMyMoney Development Team</holder>
+</copyright>
+
+<!-- Translators: put here the copyright notice of the translation -->
+<!-- Put here the FDL notice.  Read the explanation in fdl-notice.docbook
+     and in the FDL itself on how to use it. -->
+<!-- <legalnotice>&FDLNotice;</legalnotice> -->
+
+<!-- Date and version information of the documentation
+Don't forget to include this last date and this last revision number, we
+need them for translation coordination !
+Please respect the format of the date (DD/MM/YYYY) and of the version
+(V.MM.LL), it could be used by automation scripts.
+Do NOT change these in the translation. -->
+
+<date>08/05/2009</date>
+<releaseinfo>0.9</releaseinfo>
+
+<!-- Abstract about this handbook -->
+
+<abstract>
+<para>
+&kappname;, the personal finance manager for KDE.
+</para>
+<para>
+	This handbook describes &kappname; version 0.9.
+</para>
+</abstract>
+
+<keywordset>
+<keyword>KDE</keyword>
+<keyword>KMyMoney2</keyword>
+<keyword>KMyMoney</keyword>
+<keyword>kmymoney2</keyword>
+<keyword>kmymoney</keyword>
+<keyword>finance</keyword>
+<keyword>accounts</keyword>
+<keyword>accounting</keyword>
+<keyword>financial</keyword>
+</keywordset>
+
+</bookinfo>
+
+<!--
+	the main book
+-->
+&introduction;
+&whatsnew;
+&makemostof;
+&firsttime;
+&details-institutions;
+&details-accounts;
+&details-categories;
+&details-payees;
+&details-schedules;
+&details-ledgers;
+&details-investments;
+&details-currencies;
+&details-reconciliation;
+&details-reports;
+&details-impexp;
+&details-loans;
+&details-budgets;
+&details-forecast;
+&details-settings;
+&details-search;
+&details-formats;
+&details-database;
+&reference;
+&credits;
+
+&documentation.index;
+</book>
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes: nil
+sgml-general-insert-case: lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+-->

@@ -1,0 +1,83 @@
+<chapter id="details.institutions">
+
+<chapterinfo>
+<authorgroup>
+<author>
+<firstname>Roger</firstname>
+<surname>Lum</surname>
+<affiliation><address><email>rogerlum@gmail.com</email></address></affiliation>
+</author>
+</authorgroup>
+<date>2005-07-09</date>
+<releaseinfo>0.8</releaseinfo>
+</chapterinfo>
+
+<title id="details.institutions.title">Institutions</title>
+
+<para>
+  The Institutions screen provides a summary of all the accounts filed under their respective institutions. Asset accounts are symbolized with a black arrow, while liability accounts are symbolized with a red arrow. 
+</para>
+
+<para>
+  The Institutions screen also shows the value of each account and the total number of transactions in each account. 
+</para>
+
+<para>
+<screenshot>
+    	<screeninfo>institution view</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="institution_view.png" format="PNG" />
+	</imageobject>
+	<textobject>
+	<phrase>institution view</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<sect1 id="details.institutions.institution"><title id="details.institutions.institution.title">Institution Options</title>
+
+<para>
+  Right-clicking an institution name brings up an Institution Options sub-menu, providing you with several options. Selecting "New account" steps you through the new account process, where you specify institution, type, date, name and opening balance. In the new account setup, you are able to create a new institution. Selecting "Edit" brings up an editable window with institution details such as name and address. Selecting "Delete" removes the entire institution and all its associated accounts. Keep in mind that you will only be able to delete the associated accounts if the accounts have no transactions and no schedules refer to them. 
+</para>
+
+<para>
+<screenshot>
+	<screeninfo>Institution options sub-menu</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="institution_options.png" format="PNG" />
+	</imageobject>
+	<textobject>
+	<phrase>Institution options sub-menu</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+</sect1>
+
+<sect1 id="details.institutions.account"><title id="details.institutions.account.title">Account Options</title>
+
+<para>
+  Right-clicking an account name brings up an Account Options sub-menu. Selecting "New account" steps you through the new account process.  Selecting "Open" brings you directly to the Ledgers view or Investments view, depending on the account type. Simply double-clicking an account name also opens the account.  Selecting "Reconcile" opens up the Reconcile Wizard, which steps you through the process of comparing your bank account statements to your electronic entries. Selecting "Edit" brings up a window allowing you to change an account's name, start date, associated banking institution, and parent account. Deleting an account is only possible if there are no transactions associated with that account.  
+</para>
+
+<para>
+<screenshot>
+	<screeninfo>account options sub-menu</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="account_options.png" format="PNG" />
+	</imageobject>
+	<textobject>
+	<phrase>account options sub-menu</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+</sect1>
+
+</chapter>

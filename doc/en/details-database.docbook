@@ -1,0 +1,279 @@
+<chapter id="details.database">
+  <chapterinfo>
+  <authorgroup>
+  <author>
+  <firstname>Tony</firstname>
+  <surname>Bloomfield</surname>
+  <affiliation><address><email></email></address></affiliation>
+  </author>
+  </authorgroup>
+  <date>2009-05-08</date>
+  <releaseinfo>0.9</releaseinfo>
+  </chapterinfo>
+  <title>Database</title>
+<sect1 id="details.database.usage">
+<title>Caution when using the database</title>
+<para>
+<caution>
+<para>
+At the time of writing, the software described in this chapter is still in an experimental stage, and loss of data is possible. Please ensure that you have an alternative backup copy of your data before committing to database usage.
+</para>
+</caution>
+</para>
+<sect2><title>Introduction</title>
+  <para>As of release 1.0, &kappname; allows you to hold your data in a relational database. One of the advantages of using this industry-standard format is that it may allow you to view your data using one of the graphic front ends such as OpenOffice.org<trademark class="copyright"/>, perhaps in some format that &kappname; currently doesn't provide. Also, a little knowledge of SQL (Structured Query Language, the language used world-wide to access relational databases) should enable you more easily to export data to an external program, for example, a budgeting application.</para>
+  <para/>
+</sect2>
+
+<sect2><title>Preparation</title>
+  <para/>
+  <para>To access the database, &kappname; uses the SQL module supplied by Trolltech<trademark class="registered"/> as part of their Qt<trademark class="registered"/> programming system. This module supports a number of different database systems through a collection of drivers. Among the more popular open-source systems for which drivers are available are MySQL<trademark class="registered"/>, SQLite and PostgreSQL The module also supports the 'heavier', more industrial, systems such as Oracle<trademark class="registered"/> and IBM DB2<trademark class="registered"/></para>
+  <para/>
+  <para>With the exception of SQLite, these systems use a client/server model, where the 'client' software sits on 'your' machine, whilst the server lives on the same machine as the database itself, which may be elsewhere on a network. Of course, in the normal scenario for a personal finance application such as &kappname;, 'your' machine acts as both client and server. Your first task therefore, having decided which database system you wish to use, is to install the client, and most probably server, software.</para>
+  <para/>
+  <para>(SQLite does not operate on a client/server model; each database is held in a regular file, local or remote, accessed using the normal methods supplied by the underlying operating system. In this case, therefore, there is only one software package to install. Also, some of the following information, particularly that related to administration, may not apply to SQLite.)</para>
+  <para/>
+  <para>In addition to the database software itself, you must also install the corresponding Qt<trademark class="registered"/> driver module. Most distributions will include driver modules for the more popular databases. Otherwise, check with the <ulink url="http://www.trolltech.com">Trolltech web site </ulink> and search for 'SQL drivers'</para>
+  <para/>
+  <para>
+  NOTE: Due to the limitations in prior releases, only version 3 of SQLite is supported. Unfortunately, the release of the Qt<trademark class="registered"/> toolkit used by &kappname; does not provide a driver for this version. However, an unofficial, extensively tested, driver is available; if you wish to use SQLite, ask on &devlist; for further information.
+  </para>
+  <para/>
+</sect2>
+
+<sect2><title>Administration</title>
+  <para/>
+  <para>Looking after databases is a little more complex than dealing with regular files. Each system has different methods for performing those necessary administrative tasks such as creating databases, assigning permissions to various users, producing backups etc. Describing these is outside the scope of this manual, but all of the supported products provide comprehensive reference documentation, and a quick search of the web will point you at many tutorials on the subject.</para>
+  <para/>
+
+<sect3><title>Creating the database</title>
+  <para/>
+  <para>Code has been included to create an initial database to hold your data if one doesn't exist. However it is strongly recommended that you pre-create a database, because most of the products provide a number of options which may be relevant. One that may be of particular importance to some would be the designation of the character set (e.g. UTF-8) to be used for text fields.</para>
+  <para/>
+  <para>You will also need at this time to specify permissions for various users to perform different operations on the database. In most systems, the user who creates the database will be automatically assigned all permissions, but this is an area in which the documentation should be consulted.</para>
+  <para/>
+  <para>For your first usage of the database, and occasionally at other times when the database layout changes, you will need permission (also called privileges) to create and alter tables and views (see next paragraph). There may be different names for the permission/privilege in different systems, but something like CREATE and ALTER should be commonplace. For normal running, you will need to be able to read and write records; these are normally defined in SQL as SELECT, INSERT, UPDATE and DELETE permissions.</para>
+</sect3>
+<sect3><title>Creating Tables</title>
+  <para/>
+  <para>On your first usage, &kappname; will attempt to create the necessary table structures. In order to achieve the maximum compatibility between various database types, only a subset of common data types are used. There may nevertheless be situations where a particular type is not supported, and in this case, provision has been made to generate the SQL code necessary to create tables. This code can then be modified as required and used to create the tables outside of &kappname;. Should you find yourself in this situation, help can usually be obtained from &devlist;.</para>
+  <para/>
+</sect3>
+</sect2>
+
+<sect2 id="details.database.selectdatabase"><title>Initialisation</title>
+  <para/>
+  <para>Using &kappname;, open or import an existing data file, or create a new one. Then select 'Save as Database' from the File menu. This will present the following dialog:</para>
+  <para/>
+
+<sect3><title>Database Type</title>
+<para>
+This box lists all Qt SQL drivers installed on your system. Select the driver for your database type. If the one you want is not in the list, you need to install the appropriate driver. See your distro documentation, or visit the <ulink url="http://www.trolltech.com/" type="">Trolltech web site</ulink> and search for 'SQL drivers'.
+</para>
+</sect3>
+<sect3><title>Database name</title>
+<para>The default database name is KMyMoney, but you may choose some other name if you like. SQLite has one database per file; selecting this driver will open the standard 'Open File' dialog from which a file may be selected or created. For some database types, &kappname; may not be able to create the database, so it must be pre-created using the appropriate administration procedure. However, &kappname; will create all table structures where necessary.</para>
+        <screenshot>
+        <mediaobject>
+        <imageobject>
+        <imagedata fileref="select_database.png" format="PNG" />
+        </imageobject>
+        </mediaobject>
+        </screenshot>
+  <para/>
+</sect3>
+<sect3><title>Host name</title>
+  <para>For the average user, the default name of localhost, being the machine you are currently using, is correct. For networked databases, enter the connected host name.</para>
+  <para>
+  NOTE: For SQLite databases, the Host name, User name and Password fields are not relevant. The SQLite file must have the appropriate read/write permissions set by the underlying file system to enable the appropriate access for the currently logged-in user.
+  </para>
+  <para/>
+</sect3>
+<sect3><title>User name and password</title>
+  <para>Check the permissions set up on your database, or contact the database administrator, for the correct values to use here. The user name must be capable of selecting, deleting, inserting and updating records. If the user name is the same as your login name, a password is not normally required.</para>
+  <para/>
+</sect3>
+<sect3><title>Generate SQL</title>
+  <para>This button will generate the CREATE TABLE commands to a text file, which may be edited if the in-built commands do not work for your database system (see previous paragraph)..</para>
+  <para/>
+</sect3>
+</sect2>
+
+<sect2><title>Accessing your data</title>
+
+<sect3><title>Table design</title>
+  <para/>
+  <para>To access your data in &kappname;, use the Open Database entry in the File menu. This will open a dialog similar to the above.</para>
+  <para/>
+  <para>To access your data in other formats, you will need to know a little about how it is held in relational databases. By far the easiest way to get a feel for this is to open the database in a front-end such as OpenOffice.org. This provides a list of the various tables which go to make up the database, and enables you to see the layout of each of them.</para>
+  <para/>
+  <para>To extract data, e.g. into a spreadsheet or external file, it is almost invariably necessary to select linked data from one or more tables. This is done by 'joining' the tables, using a field which is common to each. You can find a lot more information about how this is done from the online tutorials mentioned above. The following table lists the fields used to define these inter-table relationships.</para>
+  <para/>
+  <informaltable>
+    <tgroup cols="3">
+      <colspec colname="c1" colwidth="4.5cm"/>
+      <colspec colname="c2" colwidth="6.2cm"/>
+      <colspec colname="c3" colwidth="6.3cm"/>
+      <thead>
+        <row>
+          <entry valign="top">
+            <para>Relationship</para>
+          </entry>
+          <entry valign="top">
+            <para>Match</para>
+          </entry>
+          <entry valign="top">
+            <para>With</para>
+          </entry>
+        </row>
+      </thead>
+      <tbody>
+        <row>
+          <entry valign="top">
+            <para>Institutions and Accounts</para>
+          </entry>
+          <entry valign="top">
+            <para>kmmInstitutions.id</para>
+          </entry>
+          <entry valign="top">
+            <para>kmmAccounts.institutionId</para>
+          </entry>
+        </row>
+        <row>
+          <entry valign="top">
+            <para>Accounts Parent/Child</para>
+          </entry>
+          <entry valign="top">
+            <para>kmmAccounts.id</para>
+          </entry>
+          <entry valign="top">
+            <para>kmmAccounts.parentId</para>
+          </entry>
+        </row>
+        <row>
+          <entry valign="top">
+            <para>Transactions and Splits (see Note 1)</para>
+          </entry>
+          <entry valign="top">
+            <para>kmmTransactions.id</para>
+          </entry>
+          <entry valign="top">
+            <para>kmmSplits.transactionId</para>
+          </entry>
+        </row>
+        <row>
+          <entry valign="top">
+            <para>Accounts and Splits</para>
+          </entry>
+          <entry valign="top">
+            <para>kmmAccounts.id</para>
+          </entry>
+          <entry valign="top">
+            <para>kmmSplits.accountId</para>
+          </entry>
+        </row>
+        <row>
+          <entry valign="top">
+            <para>Payees and Splits</para>
+          </entry>
+          <entry valign="top">
+            <para>kmmPayees.id</para>
+          </entry>
+          <entry valign="top">
+            <para>kmmSplits.payeeId</para>
+          </entry>
+        </row>
+        <row>
+          <entry valign="top">
+            <para>Schedules and Transactions</para>
+          </entry>
+          <entry valign="top">
+            <para>kmmSchedules.id</para>
+          </entry>
+          <entry valign="top">
+            <para>kmmTransactions.id</para>
+          </entry>
+        </row>
+        <row>
+          <entry valign="top">
+            <para>Transactions and Currencies</para>
+          </entry>
+          <entry valign="top">
+            <para>kmmTransactions.currencyId</para>
+          </entry>
+          <entry valign="top">
+            <para>kmmCurrencies.ISOCode</para>
+          </entry>
+        </row>
+        <row>
+          <entry valign="top">
+            <para>Accounts and Securities (see Note 2)</para>
+          </entry>
+          <entry valign="top">
+            <para>kmmAccounts.currencyId</para>
+          </entry>
+          <entry valign="top">
+            <para>kmmSecurities.id</para>
+          </entry>
+        </row>
+        <row>
+          <entry valign="top">
+            <para>Securities and Prices</para>
+          </entry>
+          <entry valign="top">
+            <para>kmmSecurities.id</para>
+          </entry>
+          <entry valign="top">
+            <para>kmmPrices.fromId or kmmPrices.toId</para>
+          </entry>
+        </row>
+        <row>
+          <entry valign="top">
+            <para>Currency Rates</para>
+          </entry>
+          <entry valign="top">
+            <para>kmmCurrencies.ISOCode</para>
+          </entry>
+          <entry valign="top">
+            <para>kmmPrices.fromId or kmmPrices.toId</para>
+          </entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </informaltable>
+  <para/>
+  <para>Notes:- </para>
+  <para>1 &#x2013; txType = &#x201C;N&#x201D; for normal transactions, &#x201C;S&#x201D; for scheduled transactions</para>
+  <para>2 &#x2013; if kmmAccounts.isStockAccount = &#x201C;Y&#x201D;</para>
+  <para/>
+</sect3>
+<sect3><title>Field formats</title>
+  <para/>
+  <para>Several of the data fields are held in an internal format which may not be immediately useful to external programs. In these cases, the information has been duplicated in both internal and external formats.</para>
+  <para/>
+  <para>Monetary amounts and share values are shown both in numerator/denominator format, and, with a field name suffixed with 'Formatted', in the form as shown on your screens.</para>
+  <para/>
+  <para>Similarly, some fields such as account type appear both as a numeric code, and in a field suffixed 'String' in the form and language of the application.</para>
+  <para/>
+</sect3>
+<sect3><title>Updating your data</title>
+  <para/>
+  <para>Having data in an industry standard format does give you the ability to modify it outside the &kappname; application. DON'T DO IT unless you really know what you're doing, and always be certain to make a backup copy of your data first. If you get it wrong, &kappname; may not be able to access your data, and you could even end up losing it altogether. You have been warned!</para>
+  <para/>
+</sect3>
+
+<sect3><title>Stored queries</title>
+  <para/>
+  <para>Most database systems allow you to store commonly used queries and procedures, and in some cases, these may be held as tables within your database itself. As you will have guessed from the above, all the tables used by &kappname; begin with the lower-case letters 'kmm'. This standard will be maintained, and only tables beginning with these letters will be updated. Thus provided you avoid these in the naming of your queries etc., you should not experience any problems.</para>
+  <para/>
+</sect3>
+</sect2>
+
+<sect2><title>Encryption</title>
+  <para/>
+  <para>Encryption of data in your database is not currently supported.</para>
+  <para/>
+</sect2>
+</sect1>
+</chapter>
+
