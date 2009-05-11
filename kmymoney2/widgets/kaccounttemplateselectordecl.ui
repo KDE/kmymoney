@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0" stdsetdef="1">
+  <author></author>
+  <comment></comment>
+  <exportmacro></exportmacro>
+  <class>KAccountTemplateSelectorDecl</class>
+  <widget class="QWidget" name="KAccountTemplateSelectorDecl">
+    <property name="geometry">
+      <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>546</width>
+        <height>346</height>
+      </rect>
+    </property>
+    <layout class="QVBoxLayout">
+      <property name="margin">
+        <number>0</number>
+      </property>
+      <item>
+        <widget class="K3ListView" name="m_groupList">
+          <property name="sizePolicy">
+            <sizepolicy>
+              <hsizetype>7</hsizetype>
+              <vsizetype>7</vsizetype>
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+            </sizepolicy>
+          </property>
+          <property name="minimumSize">
+            <size>
+              <width>0</width>
+              <height>150</height>
+            </size>
+          </property>
+          <property name="selectionMode" stdset="0">
+            <enum>Extended</enum>
+          </property>
+          <property name="allColumnsShowFocus">
+            <bool>true</bool>
+          </property>
+          <property name="rootIsDecorated">
+            <bool>true</bool>
+          </property>
+          <property name="fullWidth">
+            <bool>true</bool>
+          </property>
+          <column>
+            <property name="text">
+              <string>Account Types</string>
+            </property>
+            <property name="clickable">
+              <bool>true</bool>
+            </property>
+            <property name="resizable">
+              <bool>true</bool>
+            </property>
+          </column>
+          <column>
+            <property name="text">
+              <string>Description</string>
+            </property>
+            <property name="clickable">
+              <bool>true</bool>
+            </property>
+            <property name="resizable">
+              <bool>true</bool>
+            </property>
+          </column>
+        </widget>
+      </item>
+      <item>
+        <layout class="QHBoxLayout">
+          <item>
+            <widget class="Q3GroupBox" name="groupBox1">
+              <property name="sizePolicy">
+                <sizepolicy>
+                  <hsizetype>5</hsizetype>
+                  <vsizetype>5</vsizetype>
+                  <horstretch>0</horstretch>
+                  <verstretch>2</verstretch>
+                </sizepolicy>
+              </property>
+              <property name="title">
+                <string>Detailed description</string>
+              </property>
+              <layout class="QVBoxLayout">
+                <item>
+                  <widget class="KTextEdit" name="m_description">
+                    <property name="sizePolicy">
+                      <sizepolicy>
+                        <hsizetype>7</hsizetype>
+                        <vsizetype>7</vsizetype>
+                        <horstretch>0</horstretch>
+                        <verstretch>3</verstretch>
+                      </sizepolicy>
+                    </property>
+                    <property name="readOnly">
+                      <bool>true</bool>
+                    </property>
+                  </widget>
+                </item>
+              </layout>
+            </widget>
+          </item>
+          <item>
+            <widget class="Q3GroupBox" name="groupBox2">
+              <property name="sizePolicy">
+                <sizepolicy>
+                  <hsizetype>5</hsizetype>
+                  <vsizetype>5</vsizetype>
+                  <horstretch>1</horstretch>
+                  <verstretch>2</verstretch>
+                </sizepolicy>
+              </property>
+              <property name="title">
+                <string>Accounts</string>
+              </property>
+              <layout class="QVBoxLayout">
+                <item>
+                  <widget class="K3ListView" name="m_accountList">
+                    <property name="sizePolicy">
+                      <sizepolicy>
+                        <hsizetype>7</hsizetype>
+                        <vsizetype>7</vsizetype>
+                        <horstretch>0</horstretch>
+                        <verstretch>3</verstretch>
+                      </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                      <size>
+                        <width>0</width>
+                        <height>150</height>
+                      </size>
+                    </property>
+                    <property name="selectionMode" stdset="0">
+                      <enum>NoSelection</enum>
+                    </property>
+                    <property name="allColumnsShowFocus">
+                      <bool>true</bool>
+                    </property>
+                    <property name="rootIsDecorated">
+                      <bool>true</bool>
+                    </property>
+                    <property name="fullWidth">
+                      <bool>true</bool>
+                    </property>
+                    <column>
+                      <property name="text">
+                        <string>Name</string>
+                      </property>
+                      <property name="clickable">
+                        <bool>true</bool>
+                      </property>
+                      <property name="resizable">
+                        <bool>true</bool>
+                      </property>
+                    </column>
+                  </widget>
+                </item>
+              </layout>
+            </widget>
+          </item>
+        </layout>
+      </item>
+    </layout>
+  </widget>
+  <layoutdefault spacing="6" margin="11"/>
+  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
+  <customwidgets>
+    <customwidget>
+      <class>K3ListView</class>
+      <extends>Q3ListView</extends>
+      <header location="global">k3listview.h</header>
+    </customwidget>
+  </customwidgets>
+</ui>

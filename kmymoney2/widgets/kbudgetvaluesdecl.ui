@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0" stdsetdef="1">
+  <author></author>
+  <comment></comment>
+  <exportmacro></exportmacro>
+  <class>KBudgetValuesDecl</class>
+  <widget class="QWidget" name="KBudgetValuesDecl">
+    <property name="geometry">
+      <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>553</width>
+        <height>188</height>
+      </rect>
+    </property>
+    <layout class="QGridLayout">
+      <property name="margin">
+        <number>0</number>
+      </property>
+      <item row="3" column="5">
+        <widget class="kMyMoneyEdit" name="m_amount10">
+          <property name="resetButtonVisibility" stdset="0">
+            <bool>false</bool>
+          </property>
+        </widget>
+      </item>
+      <item row="5" column="3">
+        <widget class="kMyMoneyEdit" name="m_amount6">
+          <property name="resetButtonVisibility" stdset="0">
+            <bool>false</bool>
+          </property>
+        </widget>
+      </item>
+      <item row="4" column="3">
+        <widget class="kMyMoneyEdit" name="m_amount5">
+          <property name="resetButtonVisibility" stdset="0">
+            <bool>false</bool>
+          </property>
+        </widget>
+      </item>
+      <item row="5" column="2">
+        <widget class="QLabel" name="m_label6">
+          <property name="text">
+            <string>xxx</string>
+          </property>
+          <property name="wordWrap">
+            <bool>false</bool>
+          </property>
+        </widget>
+      </item>
+      <item row="1" column="4">
+        <widget class="QLabel" name="m_label8">
+          <property name="text">
+            <string>xxx</string>
+          </property>
+          <property name="wordWrap">
+            <bool>false</bool>
+          </property>
+        </widget>
+      </item>
+      <item row="2" column="5">
+        <widget class="kMyMoneyEdit" name="m_amount9">
+          <property name="resetButtonVisibility" stdset="0">
+            <bool>false</bool>
+          </property>
+        </widget>
+      </item>
+      <item row="4" column="5">
+        <widget class="kMyMoneyEdit" name="m_amount11">
+          <property name="resetButtonVisibility" stdset="0">
+            <bool>false</bool>
+          </property>
+        </widget>
+      </item>
+      <item row="5" column="4">
+        <widget class="QLabel" name="m_label12">
+          <property name="text">
+            <string>xxx</string>
+          </property>
+          <property name="wordWrap">
+            <bool>false</bool>
+          </property>
+        </widget>
+      </item>
+      <item row="3" column="4">
+        <widget class="QLabel" name="m_label10">
+          <property name="text">
+            <string>xxx</string>
+          </property>
+          <property name="wordWrap">
+            <bool>false</bool>
+          </property>
+        </widget>
+      </item>
+      <item row="0" column="4">
+        <widget class="QLabel" name="m_label7">
+          <property name="text">
+            <string>xxx</string>
+          </property>
+          <property name="wordWrap">
+            <bool>false</bool>
+          </property>
+        </widget>
+      </item>
+      <item row="2" column="3">
+        <widget class="kMyMoneyEdit" name="m_amount3">
+          <property name="resetButtonVisibility" stdset="0">
+            <bool>false</bool>
+          </property>
+        </widget>
+      </item>
+      <item row="3" column="2">
+        <widget class="QLabel" name="m_label4">
+          <property name="text">
+            <string>xxx</string>
+          </property>
+          <property name="wordWrap">
+            <bool>false</bool>
+          </property>
+        </widget>
+      </item>
+      <item row="5" column="5">
+        <widget class="kMyMoneyEdit" name="m_amount12">
+          <property name="resetButtonVisibility" stdset="0">
+            <bool>false</bool>
+          </property>
+        </widget>
+      </item>
+      <item row="2" column="2">
+        <widget class="QLabel" name="m_label3">
+          <property name="text">
+            <string>xxx</string>
+          </property>
+          <property name="wordWrap">
+            <bool>false</bool>
+          </property>
+        </widget>
+      </item>
+      <item row="0" column="2">
+        <widget class="QLabel" name="m_label1">
+          <property name="text">
+            <string>xxx</string>
+          </property>
+          <property name="wordWrap">
+            <bool>false</bool>
+          </property>
+        </widget>
+      </item>
+      <item row="1" column="2">
+        <widget class="QLabel" name="m_label2">
+          <property name="text">
+            <string>xxx</string>
+          </property>
+          <property name="wordWrap">
+            <bool>false</bool>
+          </property>
+        </widget>
+      </item>
+      <item row="4" column="2">
+        <widget class="QLabel" name="m_label5">
+          <property name="text">
+            <string>xxx</string>
+          </property>
+          <property name="wordWrap">
+            <bool>false</bool>
+          </property>
+        </widget>
+      </item>
+      <item row="4" column="4">
+        <widget class="QLabel" name="m_label11">
+          <property name="text">
+            <string>xxx</string>
+          </property>
+          <property name="wordWrap">
+            <bool>false</bool>
+          </property>
+        </widget>
+      </item>
+      <item row="3" column="3">
+        <widget class="kMyMoneyEdit" name="m_amount4">
+          <property name="resetButtonVisibility" stdset="0">
+            <bool>false</bool>
+          </property>
+        </widget>
+      </item>
+      <item row="2" column="4">
+        <widget class="QLabel" name="m_label9">
+          <property name="text">
+            <string>xxx</string>
+          </property>
+          <property name="wordWrap">
+            <bool>false</bool>
+          </property>
+        </widget>
+      </item>
+      <item row="1" column="5">
+        <widget class="kMyMoneyEdit" name="m_amount8">
+          <property name="resetButtonVisibility" stdset="0">
+            <bool>false</bool>
+          </property>
+        </widget>
+      </item>
+      <item row="1" column="3">
+        <widget class="kMyMoneyEdit" name="m_amount2">
+          <property name="resetButtonVisibility" stdset="0">
+            <bool>false</bool>
+          </property>
+        </widget>
+      </item>
+      <item row="0" column="5">
+        <widget class="kMyMoneyEdit" name="m_amount7">
+          <property name="resetButtonVisibility" stdset="0">
+            <bool>false</bool>
+          </property>
+        </widget>
+      </item>
+      <item row="0" column="3">
+        <widget class="Q3WidgetStack" name="m_firstItemStack">
+          <widget class="QWidget" name="m_monthlyPage">
+            <attribute name="id">
+              <number>0</number>
+            </attribute>
+            <layout class="QHBoxLayout">
+              <property name="margin">
+                <number>0</number>
+              </property>
+              <item>
+                <widget class="kMyMoneyEdit" name="m_amountMonthly">
+                  <property name="resetButtonVisibility" stdset="0">
+                    <bool>false</bool>
+                  </property>
+                </widget>
+              </item>
+            </layout>
+          </widget>
+          <widget class="QWidget" name="m_yearlyPage">
+            <attribute name="id">
+              <number>1</number>
+            </attribute>
+            <layout class="QHBoxLayout">
+              <property name="margin">
+                <number>0</number>
+              </property>
+              <item>
+                <widget class="kMyMoneyEdit" name="m_amountYearly">
+                  <property name="resetButtonVisibility" stdset="0">
+                    <bool>false</bool>
+                  </property>
+                </widget>
+              </item>
+            </layout>
+          </widget>
+          <widget class="QWidget" name="m_individualPage">
+            <attribute name="id">
+              <number>2</number>
+            </attribute>
+            <layout class="QHBoxLayout">
+              <property name="margin">
+                <number>0</number>
+              </property>
+              <item>
+                <widget class="kMyMoneyEdit" name="m_amount1">
+                  <property name="resetButtonVisibility" stdset="0">
+                    <bool>false</bool>
+                  </property>
+                </widget>
+              </item>
+            </layout>
+          </widget>
+        </widget>
+      </item>
+      <item row="0" column="1" rowspan="6" colspan="1">
+        <layout class="QVBoxLayout">
+          <item>
+            <widget class="KPushButton" name="m_clearButton">
+              <property name="text">
+                <string/>
+              </property>
+            </widget>
+          </item>
+          <item>
+            <spacer name="spacer7">
+              <property name="sizeHint">
+                <size>
+                  <width>20</width>
+                  <height>21</height>
+                </size>
+              </property>
+              <property name="sizeType">
+                <enum>QSizePolicy::Expanding</enum>
+              </property>
+              <property name="orientation">
+                <enum>Qt::Vertical</enum>
+              </property>
+            </spacer>
+          </item>
+        </layout>
+      </item>
+      <item row="0" column="0" rowspan="6" colspan="1">
+        <widget class="Q3ButtonGroup" name="m_periodGroup">
+          <property name="title">
+            <string>Period</string>
+          </property>
+          <layout class="QVBoxLayout">
+            <item>
+              <widget class="QRadioButton" name="m_monthlyButton">
+                <property name="text">
+                  <string>Monthly</string>
+                </property>
+              </widget>
+            </item>
+            <item>
+              <widget class="QRadioButton" name="m_yearlyButton">
+                <property name="text">
+                  <string>Yearly</string>
+                </property>
+              </widget>
+            </item>
+            <item>
+              <widget class="QRadioButton" name="m_individualButton">
+                <property name="text">
+                  <string>Individual</string>
+                </property>
+              </widget>
+            </item>
+            <item>
+              <spacer name="spacer10">
+                <property name="sizeHint">
+                  <size>
+                    <width>20</width>
+                    <height>21</height>
+                  </size>
+                </property>
+                <property name="sizeType">
+                  <enum>QSizePolicy::Expanding</enum>
+                </property>
+                <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                </property>
+              </spacer>
+            </item>
+          </layout>
+        </widget>
+      </item>
+    </layout>
+  </widget>
+  <layoutdefault spacing="6" margin="11"/>
+  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
+  <tabstops>
+    <tabstop>m_monthlyButton</tabstop>
+    <tabstop>m_yearlyButton</tabstop>
+    <tabstop>m_individualButton</tabstop>
+    <tabstop>m_clearButton</tabstop>
+    <tabstop>m_amount1</tabstop>
+    <tabstop>m_amountMonthly</tabstop>
+    <tabstop>m_amountYearly</tabstop>
+    <tabstop>m_amount2</tabstop>
+    <tabstop>m_amount3</tabstop>
+    <tabstop>m_amount4</tabstop>
+    <tabstop>m_amount5</tabstop>
+    <tabstop>m_amount6</tabstop>
+    <tabstop>m_amount7</tabstop>
+    <tabstop>m_amount8</tabstop>
+    <tabstop>m_amount9</tabstop>
+    <tabstop>m_amount10</tabstop>
+    <tabstop>m_amount11</tabstop>
+    <tabstop>m_amount12</tabstop>
+  </tabstops>
+</ui>
