@@ -43,6 +43,7 @@ include( KDE4Defaults )
 include( MacroLibrary )
 
 add_definitions( ${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
+add_definitions (-DQT3_SUPPORT -DQT3_SUPPORT_WARNINGS)
 include_directories( ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES} )
 
 # check for JPEG
