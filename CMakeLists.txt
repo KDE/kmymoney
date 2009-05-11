@@ -229,9 +229,6 @@ SET(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
 # which point to directories outside the build tree to the install RPATH
 SET(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 
-SET(MAN_INSTALL_DIR "/usr/share/man" CACHE PATH "Install path for manpages")
-
-
 # remark: these directories are used to find libs and .h files.
 # they are set globally after this point. no need to add everywhere.
 LINK_DIRECTORIES( ${KDE4_LIB_DIR} )
