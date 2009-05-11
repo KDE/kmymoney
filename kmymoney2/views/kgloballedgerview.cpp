@@ -42,7 +42,7 @@
 #include <kmessagebox.h>
 #include <kiconloader.h>
 #include <ktoolbar.h>
-#include <ktoolbarbutton.h>
+
 #include <kpassivepopup.h>
 
 // ----------------------------------------------------------------------------
@@ -178,8 +178,8 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name )
   // the account button at the right of the toolbar
   // I leave the code commented here for a while, so that I see
   // how I can add other  widgets at this point
-  KIconLoader *il = KGlobal::iconLoader();
-  m_toolbar->insertButton(il->loadIcon("document", KIcon::Small, KIcon::SizeSmall),
+  KIconLoader *il = KIconLoader::global();
+  m_toolbar->insertButton(il->loadIcon("document", KIcon::Small, KIconLoader::SizeSmall),
                         1,true,i18n("Account"));
   //m_toolbar->setMaximumSize(50,20);
   m_toolbar->alignItemRight(1);
@@ -1041,7 +1041,7 @@ TransactionEditor* KGlobalLedgerView::startEdit(const KMyMoneyRegister::Selected
           "At least one split of the selected transactions has been reconciled. "
           "Do you wish to continue to edit the transactions anyway?"
         ),
-        i18n("Transaction already reconciled"), KStdGuiItem::cont(),
+        i18n("Transaction already reconciled"), KStandardGuiItem::cont(),
         "EditReconciledTransaction") == KMessageBox::Cancel) {
         warnLevel = 2;
       }

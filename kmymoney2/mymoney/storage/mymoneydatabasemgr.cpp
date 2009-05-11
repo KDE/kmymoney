@@ -1652,7 +1652,7 @@ void MyMoneyDatabaseMgr::rollbackTransaction(void)
 void MyMoneyDatabaseMgr::setCreationDate(const QDate& val)
 { m_creationDate = val; }
 
-KSharedPtr <MyMoneyStorageSql> MyMoneyDatabaseMgr::connectToDatabase(const KURL& url) {
+KSharedPtr <MyMoneyStorageSql> MyMoneyDatabaseMgr::connectToDatabase(const KUrl& url) {
   m_sql = new MyMoneyStorageSql (this, url);
   return m_sql;
 }

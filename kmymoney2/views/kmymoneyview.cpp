@@ -55,7 +55,7 @@
 #include <kmessagebox.h>
 #include <kurl.h>
 #include <kio/netaccess.h>
-#include <ktempfile.h>
+#include <ktemporaryfile.h>
 #include <ksavefile.h>
 #include <kfilterdev.h>
 #include <kfilterbase.h>
@@ -181,7 +181,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
     DesktopIcon("schedule", iconSize));
   addTitleBar(m_scheduleViewFrame, i18n("Scheduled transactions"));
   m_scheduledView = new KScheduledView(m_scheduleViewFrame, "ScheduledView");
-  connect(kmymoney2, SIGNAL(fileLoaded(const KURL&)), m_scheduledView, SLOT(slotReloadView()));
+  connect(kmymoney2, SIGNAL(fileLoaded(const KUrl&)), m_scheduledView, SLOT(slotReloadView()));
   connect(m_scheduledView, SIGNAL(scheduleSelected(const MyMoneySchedule&)), kmymoney2, SLOT(slotSelectSchedule(const MyMoneySchedule&)));
   connect(m_scheduledView, SIGNAL(openContextMenu()), kmymoney2, SLOT(slotShowScheduleContextMenu()));
   connect(m_scheduledView, SIGNAL(enterSchedule()), kmymoney2, SLOT(slotScheduleEnter()));
@@ -246,7 +246,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
     DesktopIcon("budget", iconSize));
   addTitleBar(m_budgetViewFrame, i18n("Budgets"));
   m_budgetView = new KBudgetView(m_budgetViewFrame, "BudgetView");
-  connect(kmymoney2, SIGNAL(fileLoaded(const KURL&)), m_budgetView, SLOT(slotRefreshView()));
+  connect(kmymoney2, SIGNAL(fileLoaded(const KUrl&)), m_budgetView, SLOT(slotRefreshView()));
   connect(m_budgetView, SIGNAL(openContextMenu(const MyMoneyObject&)), kmymoney2, SLOT(slotShowBudgetContextMenu()));
   connect(m_budgetView, SIGNAL(selectObjects(const Q3ValueList<MyMoneyBudget>&)), kmymoney2, SLOT(slotSelectBudget(const Q3ValueList<MyMoneyBudget>&)));
   connect(kmymoney2, SIGNAL(budgetRename()), m_budgetView, SLOT(slotStartRename()));
@@ -552,7 +552,7 @@ void KMyMoneyView::ungetString(QIODevice *qfile, char *buf, int len)
   }
 }
 
-bool KMyMoneyView::readFile(const KURL& url)
+bool KMyMoneyView::readFile(const KUrl& url)
 {
   QString filename;
 
@@ -576,7 +576,7 @@ bool KMyMoneyView::readFile(const KURL& url)
     MyMoneyFile::instance()->detachStorage();
     m_fileType = KmmDb;
     // get rid of the mode parameter which is now redundant
-    KURL newUrl(url);
+    KUrl newUrl(url);
     if (!url.queryItem("mode").isNull()) {
       newUrl.removeQueryItem("mode");
     }
@@ -793,7 +793,7 @@ void KMyMoneyView::checkAccountName(const MyMoneyAccount& _acc, const QString& n
   }
 }
 
-bool KMyMoneyView::openDatabase (const KURL& url) {
+bool KMyMoneyView::openDatabase (const KUrl& url) {
   ::timetrace("start opening database");
   m_fileOpen = false;
 
@@ -805,7 +805,7 @@ bool KMyMoneyView::openDatabase (const KURL& url) {
     pStorage = dynamic_cast<IMyMoneySerialize*> (pDBMgr);
   }
   KSharedPtr <MyMoneyStorageSql> reader = pStorage->connectToDatabase (url);
-  KURL dbURL (url);
+  KUrl dbURL (url);
   bool retry = true;
   while (retry) {
     switch (reader->open(dbURL, QIODevice::ReadWrite)) {
@@ -813,7 +813,7 @@ bool KMyMoneyView::openDatabase (const KURL& url) {
       retry = false;
       break;
     case 1: // permanent error
-      KMessageBox::detailedError (this, i18n("Can't open database %1\n").arg(dbURL.prettyURL()), reader->lastError());
+      KMessageBox::detailedError (this, i18n("Can't open database %1\n").arg(dbURL.prettyUrl()), reader->lastError());
       if (pDBMgr) {
         removeStorage();
         delete pDBMgr;
@@ -1009,7 +1009,7 @@ void KMyMoneyView::saveToLocalFile(QFile* qfile, IMyMoneyStorageFormat* pWriter,
     if(encryptedOk == true) {
       QString msg = QString("<p>") + i18n("You have configured to save your data in encrypted form using GPG. Please be aware, that this is a brand new feature which is yet untested. Make sure, you have the necessary understanding that you might loose all your data if you store it encrypted and cannot decrypt it later on! If unsure, answer <b>No</b>.");
 
-      if(KMessageBox::questionYesNo(this, msg, i18n("Store GPG encrypted"), KStdGuiItem::yes(), KStdGuiItem::no(), "StoreEncrypted") == KMessageBox::No) {
+      if(KMessageBox::questionYesNo(this, msg, i18n("Store GPG encrypted"), KStandardGuiItem::yes(), KStandardGuiItem::no(), "StoreEncrypted") == KMessageBox::No) {
         encryptedOk = false;
       }
     }
@@ -1082,7 +1082,7 @@ void KMyMoneyView::saveToLocalFile(QFile* qfile, IMyMoneyStorageFormat* pWriter,
     qfile->close();
 }
 
-bool KMyMoneyView::saveFile(const KURL& url, const QString& keyList)
+bool KMyMoneyView::saveFile(const KUrl& url, const QString& keyList)
 {
   QString filename = url.path();
 
@@ -1098,7 +1098,7 @@ bool KMyMoneyView::saveFile(const KURL& url, const QString& keyList)
       "If you still want to use older versions of KMyMoney with your data files, "
       "please make sure you keep a backup-file of your finance data. "
       "If you want to abort this operation, please press Cancel now"),
-      QString::null, KStdGuiItem::cont(), "WarningNewFileVersion0.5") == KMessageBox::Cancel)
+      QString::null, KStandardGuiItem::cont(), "WarningNewFileVersion0.5") == KMessageBox::Cancel)
     return false;
 #endif
 
@@ -1160,7 +1160,7 @@ bool KMyMoneyView::saveFile(const KURL& url, const QString& keyList)
       }
       chown(filename, static_cast<uid_t>(-1), gid);
     } else {
-      KTempFile tmpfile;
+      KTemporaryFile tmpfile;
       saveToLocalFile(tmpfile.file(), pWriter, plaintext, keyList);
       if(!KIO::NetAccess::upload(tmpfile.name(), url, NULL))
         throw new MYMONEYEXCEPTION(i18n("Unable to upload to '%1'").arg(url.url()));
@@ -1178,7 +1178,7 @@ bool KMyMoneyView::saveFile(const KURL& url, const QString& keyList)
   return rc;
 }
 
-bool KMyMoneyView::saveAsDatabase(const KURL& url)
+bool KMyMoneyView::saveAsDatabase(const KUrl& url)
 {
   bool rc = false;
   if (!fileOpen()) {
@@ -1218,7 +1218,7 @@ bool KMyMoneyView::saveAsDatabase(const KURL& url)
     KMessageBox::detailedError (this,
       i18n("Can't open or create database %1\n"
           "Retry SaveAsDatabase and click Help"
-          " for further info").arg(url.prettyURL()), writer->lastError());
+          " for further info").arg(url.prettyUrl()), writer->lastError());
   }
   delete writer;
   return (rc);
@@ -1802,7 +1802,7 @@ void KMyMoneyView::fixFile_0(void)
         // can re-parent it
         acc.setParentAccountId(QString());
         file->reparentAccount(acc, equity);
-        kdDebug(2) << __func__ << " fixed account " << acc.id() << " reparented to " << equity.id() << endl;
+        kDebug(2) << __func__ << " fixed account " << acc.id() << " reparented to " << equity.id();
       }
     }
   }
@@ -1831,7 +1831,7 @@ void KMyMoneyView::fixSchedule_0(MyMoneySchedule sched)
       // the first split is always the account on which this transaction operates
       // and if the transaction commodity is not set, we take this
       if(it_s == splitList.begin() && t.commodity().isEmpty()) {
-        kdDebug(2) << __func__ << " " << t.id() << " has no commodity" << endl;
+        kDebug(2) << __func__ << " " << t.id() << " has no commodity";
         try {
           MyMoneyAccount acc = MyMoneyFile::instance()->account((*it_s).accountId());
           t.setCommodity(acc.currencyId());
@@ -1844,13 +1844,13 @@ void KMyMoneyView::fixSchedule_0(MyMoneySchedule sched)
       try {
         MyMoneyFile::instance()->account((*it_s).accountId());
       } catch(MyMoneyException *e) {
-        kdDebug(2) << __func__ << " " << sched.id() << " " << (*it_s).id() << " removed, because account '" << (*it_s).accountId() << "' does not exist." << endl;
+        kDebug(2) << __func__ << " " << sched.id() << " " << (*it_s).id() << " removed, because account '" << (*it_s).accountId() << "' does not exist.";
         t.removeSplit(*it_s);
         updated = true;
         delete e;
       }
       if((*it_s).reconcileFlag() != MyMoneySplit::NotReconciled) {
-        kdDebug(2) << __func__ << " " << sched.id() << " " << (*it_s).id() << " should be 'not reconciled'" << endl;
+        kDebug(2) << __func__ << " " << sched.id() << " " << (*it_s).id() << " should be 'not reconciled'";
         MyMoneySplit split = *it_s;
         split.setReconcileDate(QDate());
         split.setReconcileFlag(MyMoneySplit::NotReconciled);
@@ -1985,7 +1985,7 @@ void KMyMoneyView::fixTransactions_0(void)
     for(it_s = t.splits().begin(); it_s != t.splits().end(); ++it_s) {
       if(accounts.contains((*it_s).accountId())) {
         hasDuplicateAccounts = true;
-        kdDebug(2) << __func__ << " " << t.id() << " has multiple splits with account " << (*it_s).accountId() << endl;
+        kDebug(2) << __func__ << " " << t.id() << " has multiple splits with account " << (*it_s).accountId();
       } else {
         accounts << (*it_s).accountId();
       }
@@ -2015,7 +2015,7 @@ void KMyMoneyView::fixTransactions_0(void)
 
     // check if base commodity is set. if not, set baseCurrency
     if((*it_t).commodity().isEmpty()) {
-      kdDebug(2) << __func__ << " " << (*it_t).id() << " has no base currency" << endl;
+      kDebug(2) << __func__ << " " << (*it_t).id() << " has no base currency";
       (*it_t).setCommodity(file->baseCurrency().id());
       file->modifyTransaction(*it_t);
     }
@@ -2108,7 +2108,7 @@ void KMyMoneyView::fixTransactions_0(void)
       // must be of type ActionInterest
       if(interestAccounts.contains((*it_s).accountId())) {
         if((*it_s).action() != MyMoneySplit::ActionInterest) {
-          kdDebug(2) << __func__ << " " << (*it_t).id() << " contains an interest account (" << (*it_s).accountId() << ") but does not have ActionInterest" << endl;
+          kDebug(2) << __func__ << " " << (*it_t).id() << " contains an interest account (" << (*it_s).accountId() << ") but does not have ActionInterest";
           (*it_s).setAction(MyMoneySplit::ActionInterest);
           (*it_t).modifySplit(*it_s);
           file->modifyTransaction(*it_t);
@@ -2118,7 +2118,7 @@ void KMyMoneyView::fixTransactions_0(void)
       // of type ActionInterest
       } else {
         if((*it_s).action() == MyMoneySplit::ActionInterest) {
-          kdDebug(2) << __func__ << " " << (*it_t).id() << " does not contain an interest account so it should not have ActionInterest" << endl;
+          kDebug(2) << __func__ << " " << (*it_t).id() << " does not contain an interest account so it should not have ActionInterest";
           (*it_s).setAction(defaultAction);
           (*it_t).modifySplit(*it_s);
           file->modifyTransaction(*it_t);
@@ -2131,7 +2131,7 @@ void KMyMoneyView::fixTransactions_0(void)
       // and shares field are the same.
       if((*it_t).commodity() == splitAccount.currencyId()
       && (*it_s).value() != (*it_s).shares()) {
-        kdDebug(2) << __func__ << " " << (*it_t).id() << " " << (*it_s).id() << " uses the transaction currency, but shares != value" << endl;
+        kDebug(2) << __func__ << " " << (*it_t).id() << " " << (*it_s).id() << " uses the transaction currency, but shares != value";
         (*it_s).setShares((*it_s).value());
         (*it_t).modifySplit(*it_s);
         file->modifyTransaction(*it_t);
@@ -2186,7 +2186,7 @@ void KMyMoneyView::slotPrintView(void)
 KMyMoneyViewBase* KMyMoneyView::addPage(const QString& title, const QString& icon)
 {
   const int iconSize = (KMyMoneyGlobalSettings::iconSize()+1)*16;
-  Q3Frame* frm = KJanusWidget::addVBoxPage(title, title, DesktopIcon(icon, iconSize));
+  KVBox* frm = KJanusWidget::addVBoxPage(title, title, DesktopIcon(icon, iconSize));
   return new KMyMoneyViewBase(frm, title.toLatin1(), title);
 }
 

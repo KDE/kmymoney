@@ -5006,7 +5006,7 @@ void KMyMoney2App::updateCaption(bool skipActions)
   caption += QString(" (%1 x %2)").arg(width()).arg(height());
 #endif
 
-  caption = KInstance::makeStandardCaption(caption, false, modified);
+  caption = KDialog::makeStandardCaption(caption, false, modified);
   if(caption.length() > 0)
     caption += " - ";
   caption += "KMyMoney";
