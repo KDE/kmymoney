@@ -23,9 +23,7 @@
 #ifndef MYMONEYSPLIT_H
 #define MYMONEYSPLIT_H
 
-#ifdef HAVE_CONFIG_H
 #include <config-kmymoney.h>
-#endif
 
 // ----------------------------------------------------------------------------
 // QT Includes

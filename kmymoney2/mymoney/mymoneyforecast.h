@@ -18,9 +18,7 @@
 #ifndef MYMONEYFORECAST_H
 #define MYMONEYFORECAST_H
 
-#ifdef HAVE_CONFIG_H
 #include <config-kmymoney.h>
-#endif
 
 // ----------------------------------------------------------------------------
 // QT Includes
