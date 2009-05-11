@@ -1,0 +1,550 @@
+<appendix id="src-examples">
+<title>Source and Header Examples</title>
+<para>
+This appendix contains an example of a 
+<link linkend="header-example">header file listing</link> and a 
+<link linkend="source-example">source file listing</link>.
+</para>
+
+<section id="header-example">
+<title>Header File Example</title>
+<screen>
+
+/***************************************************************************
+                          ksettingsdlg.h
+                        -------------------
+    copyright            : (C) 2000,2001 by Michael Edwardes
+    email                : mte@users.sourceforge.net
+ ***************************************************************************/
+
+/***************************************************************************
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ ***************************************************************************/
+#ifndef KSETTINGSDLG_H
+#define KSETTINGSDLG_H
+
+// ----------------------------------------------------------------------------
+// QT Includes
+#include &lt;qcheckbox.h&gt;
+#include &lt;qradiobutton.h&gt;
+#include &lt;qbuttongroup.h&gt;
+#include &lt;qcolor.h&gt;
+#include &lt;qfont.h&gt;
+
+// ----------------------------------------------------------------------------
+// KDE Includes
+#include &lt;kdialogbase.h&gt;
+#include &lt;kfontdialog.h&gt;
+#include &lt;kcolorbutton.h&gt;
+#include &lt;klineedit.h&gt;
+
+// ----------------------------------------------------------------------------
+// Project Includes
+
+/**
+  * This class is used to manipulate all the settings available for
+  * KMyMoney2. It currently stores the values for the list settings
+  * and whether to show the start dialog when KMyMoney2 starts.
+  *
+  * It uses KDialogBase to implement it's interface.
+  *
+  * It uses the global KConfig object to read and write the application
+  * settings.
+  *
+  * @see KDialogBase
+  *
+  * @author Michael Edwardes 2000-2001
+  * $Id: src-examples.docbook,v 1.3 2005/05/27 19:05:18 ipwizard Exp $
+  *
+  * @short A class to manipulate the settings needed for running KMyMoney2
+**/
+class KSettingsDlg : public KDialogBase  {
+   Q_OBJECT
+
+private:
+  /** Start prompt dialog */
+  QRadioButton *m_qradiobuttonStartPrompt;
+  /** Start file */
+  QRadioButton *m_qradiobuttonStartFile;
+  /** Color list */
+  KColorButton *m_kcolorbuttonList;
+  /** Color background */
+  KColorButton *m_kcolorbuttonBack;
+  /** Select font header */
+  KFontChooser *m_kfontchooserHeader;
+  /** Font cell setting */
+  KFontChooser *m_kfontchooserCell;
+
+  /** No rows to show in register */
+  KLineEdit *m_klineeditRowCount;
+
+  /** Show grid in register ? */
+  QCheckBox *m_qcheckboxShowGrid;
+
+  QRadioButton *m_qradiobuttonPerTransaction;
+  QRadioButton *m_qradiobuttonOtherRow;
+
+  /** Set page general */
+  void setPageGeneral();
+  /** Set page list settings */
+  void setPageList();
+  /** Write settings */
+  void configWrite();
+  /** Read settings */
+  void configRead();
+
+  /** Attributes to store the variables so they can be undone when
+    * cancelling the apply.
+  **/
+  QColor m_qcolorTempList;
+  QColor m_qcolorTempListBG;
+  QFont m_qfontTempHeader;
+  QFont m_qfontTempCell;
+  QString m_qstringTempRowCount;
+  bool m_bTempShowGrid;
+  bool m_bTempColourPerTransaction;
+  bool m_bTempStartPrompt;
+  bool m_bDoneApply;
+
+
+private slots:
+  /** Called when OK pressed */
+  void slotOk();
+
+  /** Called when Apply pressed */
+  void slotApply();
+
+  /** Called when Cancel pressed */
+  void slotCancel();
+
+  /** Called when Reset pressed */
+  void slotUser1();
+
+public:
+  /**
+    * Standard constructor.
+    *
+    * @param parent The QWidget this is used in.
+    * @param name The QT name.
+    * @param modal True if we want the dialog to be application modal.
+    *
+    * @return An object of type KSettingsDlg.
+    *
+    * @see ~KSettingsDlg
+  **/
+  KSettingsDlg(QWidget *parent=0, const char *name=0, bool modal=true);
+
+  /**
+    * Standard destructor.
+    *
+    * @return Nothing.
+    *
+    * @see KSettingsDlg
+  **/
+  ~KSettingsDlg();
+
+signals:
+  /**
+    * Emitted when the Apply button is clicked to allow the application to
+    * show the changes without having to close the dialog.
+    *
+    * @return Nothing
+  **/
+  void signalApply();
+};
+
+#endif
+</screen>
+</section>
+
+<section id="source-example">
+<title>Source File Example</title>
+
+<screen>
+/***************************************************************************
+                          ksettingsdlg.cpp
+                             -------------------
+    copyright            : (C) 2000,2001 by Michael Edwardes
+    email                : mte@users.sourceforge.net
+ ***************************************************************************/
+
+/***************************************************************************
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify
+ *   *
+ *   it under the terms of the GNU General Public License as published by
+ *   *
+ *   the Free Software Foundation; either version 2 of the License, or
+ *   *
+ *   (at your option) any later version.
+ *   *
+ *                                                                         *
+ ***************************************************************************/
+
+// ----------------------------------------------------------------------------
+// QT Includes
+#include &lt;qlayout.h&gt;
+#include &lt;qvbox.h&gt;
+#include &lt;qlabel.h&gt;
+#include &lt;qgroupbox.h&gt;
+#include &lt;qtabwidget.h&gt;
+#include &lt;qvalidator.h&gt;
+
+// ----------------------------------------------------------------------------
+// KDE Includes
+#include &lt;klocale.h&gt;
+#include &lt;kstddirs.h&gt;
+#include &lt;kiconloader.h&gt;
+#include &lt;kconfig.h&gt;
+#include &lt;kcolorbutton.h&gt;
+#include &lt;kmessagebox.h&gt;
+
+// ----------------------------------------------------------------------------
+// Project Includes
+#include "ksettingsdlg.h"
+
+/** Standard constructor for the class.
+  * The constructor passes some additional parameters to the base class
+  * KDialogBase
+  * to set the buttons to be showed and the type of dialog to be shown.
+**/
+KSettingsDlg::KSettingsDlg(QWidget *parent, const char *name, bool modal)
+ : KDialogBase(IconList, i18n("Configure"), Ok|Cancel|Apply|User1, Ok, parent,
+    name, modal, true, i18n("&amp;Reset"))
+{
+  // Setup the pages and then read the configuration object.
+  setPageGeneral();
+  setPageList();
+  configRead();
+  m_bDoneApply=false;
+}
+
+/** Standard destructor for the class.
+**/
+KSettingsDlg::~KSettingsDlg()
+{
+}
+
+/** Called to create the General page to be shown in the dialog.
+**/
+void KSettingsDlg::setPageGeneral()
+{
+  // Create the main frame to hold the widgets
+  QVBox *qvboxMainFrame = addVBoxPage( i18n("General"), i18n("General settings"),
+    DesktopIcon("misc"));
+
+  // Create a group box to hold the available options
+  QButtonGroup *qbuttongroup = new QButtonGroup(qvboxMainFrame, "GroupBox1");
+  qbuttongroup->setTitle( i18n( "Startup options" ) );
+  qbuttongroup->setColumnLayout(0, Qt::Vertical );
+  qbuttongroup->layout()->setSpacing( 0 );
+  qbuttongroup->layout()->setMargin( 0 );
+
+  // Create a layout to organize the widgets.
+  QVBoxLayout *qvboxlayout = new QVBoxLayout(qbuttongroup->layout());
+  qvboxlayout->setAlignment( Qt::AlignTop );
+  qvboxlayout->setSpacing( 6 );
+  qvboxlayout->setMargin( 11 );
+
+  // Create a check box to be in the group box
+  m_qradiobuttonStartPrompt = new QRadioButton("start_prompt", qbuttongroup);
+  m_qradiobuttonStartPrompt->setText( i18n( "Start with dialog prompt (default)" ) );
+  qvboxlayout->addWidget(m_qradiobuttonStartPrompt);
+
+  // Create another check box to the group box
+  m_qradiobuttonStartFile = new QRadioButton("start_file", qbuttongroup);
+  m_qradiobuttonStartFile->setText( i18n( "Start with last file used" ) );
+  qvboxlayout->addWidget(m_qradiobuttonStartFile);
+}
+
+/** Called to create the Main List page shown in the dialog.
+**/
+void KSettingsDlg::setPageList()
+{
+  // Create the page.
+  QVBox *qvboxMainFrame = addVBoxPage( i18n("Main List"), i18n("List settings"),
+    locate("appdata", "pics/setting_list.png"));
+
+  // Create the tab widget
+  QTabWidget *qtabwidget = new QTabWidget(qvboxMainFrame, "TabWidget2");
+
+  // Create the first page
+  QWidget *qwidgetPage = new QWidget(this);
+
+  // Create the layout for the page
+  QVBoxLayout *qvboxlayoutPage = new QVBoxLayout(qwidgetPage);
+  qvboxlayoutPage->setSpacing( 6 );
+  qvboxlayoutPage->setMargin( 11 );
+
+  // Create a horizontal layout to hold two widgets
+  QHBoxLayout *qhboxlayout = new QHBoxLayout;
+  qhboxlayout->setSpacing( 6 );
+  qhboxlayout->setMargin( 0 );
+
+  // Create the first widget
+  QLabel *qlabel = new QLabel(i18n("Number of lines in the register view:"),
+    qwidgetPage);
+  qhboxlayout->addWidget(qlabel);
+
+  // Create the second widget
+  m_klineeditRowCount = new KLineEdit(qwidgetPage);
+  QIntValidator *qintvalidator = new QIntValidator(1, 3, m_klineeditRowCount);
+  m_klineeditRowCount->setValidator(qintvalidator);
+  qhboxlayout->addWidget(m_klineeditRowCount);
+
+  // Add the horizontal layout
+  qvboxlayoutPage->addLayout(qhboxlayout);
+
+  // Ceate another widget
+  m_qcheckboxShowGrid = new QCheckBox(i18n("Show a grid in the register view"),
+    qwidgetPage);
+  qvboxlayoutPage->addWidget(m_qcheckboxShowGrid);
+
+  // Create a group to hold two radio buttons
+  QButtonGroup *qbuttongroup = new QButtonGroup(qwidgetPage, "ButtonGroup1");
+  qbuttongroup->setTitle(i18n("Row Colour options"));
+  qbuttongroup->setColumnLayout(0, Qt::Vertical );
+  qbuttongroup->layout()->setSpacing( 0 );
+  qbuttongroup->layout()->setMargin( 0 );
+
+  // Create a layout
+  QVBoxLayout *qvboxlayout = new QVBoxLayout(qbuttongroup->layout());
+  qvboxlayout->setAlignment( Qt::AlignTop );
+  qvboxlayout->setSpacing( 6 );
+  qvboxlayout->setMargin( 11 );
+
+  // Add the first radio button
+  m_qradiobuttonPerTransaction = new QRadioButton(qbuttongroup, "m_per_trans");
+  m_qradiobuttonPerTransaction->setText( i18n("Use one colour per transaction") );
+  qvboxlayout->addWidget(m_qradiobuttonPerTransaction);
+
+  // Add the second radio button
+  m_qradiobuttonOtherRow = new QRadioButton(qbuttongroup, "m_every_other");
+  m_qradiobuttonOtherRow->setText( i18n( "Change colour every other row" ));
+  qvboxlayout->addWidget(m_qradiobuttonOtherRow);
+  qvboxlayoutPage->addWidget(qbuttongroup);
+
+  // Add a vertical spacer to take up the remaining available space
+  QSpacerItem* spacer = new QSpacerItem( 20, 20, QSizePolicy::Minimum,
+    QSizePolicy::Expanding );
+  qvboxlayoutPage->addItem( spacer );
+
+  // Add the page to the tab
+  qtabwidget->insertTab(qwidgetPage, i18n("General"));
+
+  // Create a new tab for the colour options
+  QWidget *qwidgetColour = new QWidget(qtabwidget, "tab");
+
+  // Create a vertical layout
+  QVBoxLayout *qvboxlayoutColour = new QVBoxLayout(qwidgetColour);
+  qvboxlayoutColour->setSpacing( 6 );
+  qvboxlayoutColour->setMargin( 11 );
+
+  // Create a horizontal layout to include the label and button
+  QHBoxLayout *qhboxlayoutColour = new QHBoxLayout;
+  qhboxlayoutColour->setSpacing( 6 );
+  qhboxlayoutColour->setMargin( 0 );
+
+  // Add the label and button
+  QLabel *qlabelListColour = new QLabel(i18n( "List view colour :" ),
+    qwidgetColour);
+  qhboxlayoutColour->addWidget(qlabelListColour);
+  m_kcolorbuttonList = new KColorButton(qwidgetColour, "colour_list");
+  qhboxlayoutColour->addWidget(m_kcolorbuttonList);
+
+  // Add the horizontal layout
+  qvboxlayoutColour->addLayout(qhboxlayoutColour);
+
+  // Create another horizontal layout to include the label and button
+  QHBoxLayout *qhboxlayoutBGColour = new QHBoxLayout;
+  qhboxlayoutBGColour->setSpacing( 6 );
+  qhboxlayoutBGColour->setMargin( 0 );
+
+  // Add the label and button
+  QLabel *qlabelListBGColour = new QLabel(i18n( "List background colour :"),
+    qwidgetColour);
+  qhboxlayoutBGColour->addWidget(qlabelListBGColour);
+  m_kcolorbuttonBack = new KColorButton(qwidgetColour, "colour_back");
+  qhboxlayoutBGColour->addWidget(m_kcolorbuttonBack);
+
+  // Add the horizontal layout
+  qvboxlayoutColour->addLayout(qhboxlayoutBGColour);
+
+  // Add a vertical spacer to take up the remaining available space
+  QSpacerItem* qspaceritemColour = new QSpacerItem( 20, 20,
+    QSizePolicy::Minimum, QSizePolicy::Expanding );
+  qvboxlayoutColour->addItem( qspaceritemColour );
+
+  // Add the page to the tab widget
+  qtabwidget->insertTab(qwidgetColour, i18n( "Color"));
+
+  // Create another tab adding a font chooser widget
+  QVBox *qvboxInsideTab1 = new QVBox( this, "tab1" );
+  qvboxInsideTab1->setSpacing( 6 );
+  qvboxInsideTab1->setMargin( 11 );
+  m_kfontchooserHeader = new KFontChooser(qvboxInsideTab1);
+  qtabwidget->insertTab(qvboxInsideTab1, i18n("Header Font"));
+
+  // Create another tab adding a font chooser widget
+  QVBox *qvboxInsideTab2 = new QVBox( this, "tab2" );
+  qvboxInsideTab2->setSpacing( 6 );
+  qvboxInsideTab2->setMargin( 11 );
+  m_kfontchooserCell = new KFontChooser(qvboxInsideTab2);
+  qtabwidget->addTab(qvboxInsideTab2, i18n("Cell Font"));
+}
+
+/** Read all the settings in from the global KConfig object and set all the
+  * widgets appropriately.
+**/
+void KSettingsDlg::configRead()
+{
+  KConfig *kconfig = KGlobal::config();
+  kconfig->setGroup("Settings Dialog");
+  QSize *qsizeDefaultSize = new QSize(470,470);
+  this->resize(kconfig->readSizeEntry("Geometry", qsizeDefaultSize));
+
+  kconfig->setGroup("General Options");
+  m_bTempStartPrompt = kconfig->readBoolEntry("StartDialog", true);
+  m_qradiobuttonStartPrompt->setChecked(m_bTempStartPrompt);
+  m_qradiobuttonStartFile->setChecked(!m_bTempStartPrompt);
+
+  kconfig->setGroup("List Options");
+
+  QFont qfontDefault = QFont("helvetica", 12);
+  QColor qcolorDefault = Qt::white;
+  QColor qcolorDefaultBG = Qt::gray;
+
+  m_qcolorTempList = kconfig->readColorEntry("listColor", &amp;qcolorDefault);
+  m_kcolorbuttonList->setColor(m_qcolorTempList);
+
+  m_qcolorTempListBG = kconfig->readColorEntry("listBGColor",
+    &amp;qcolorDefaultBG);
+  m_kcolorbuttonBack->setColor(m_qcolorTempListBG);
+
+  m_qfontTempHeader = kconfig->readFontEntry("listHeaderFont",
+    &amp;qfontDefault);
+  m_kfontchooserHeader->setFont(m_qfontTempHeader);
+
+  m_qfontTempCell = kconfig->readFontEntry("listCellFont", &amp;qfontDefault);
+  m_kfontchooserCell->setFont(m_qfontTempCell);
+
+  m_qstringTempRowCount = kconfig->readEntry("RowCount", "2");
+  m_klineeditRowCount->setText(m_qstringTempRowCount);
+
+  m_bTempShowGrid = kconfig->readBoolEntry("ShowGrid", true);
+  m_qcheckboxShowGrid->setChecked(m_bTempShowGrid);
+
+  m_bTempColourPerTransaction =
+    kconfig->readBoolEntry("ColourPerTransaction", true);
+  m_qradiobuttonPerTransaction->setChecked(m_bTempColourPerTransaction);
+  m_qradiobuttonOtherRow->setChecked(!m_bTempColourPerTransaction);
+}
+
+/** Write out all the settings to the global KConfig object.
+**/
+void KSettingsDlg::configWrite()
+{
+  KConfig *kconfig = KGlobal::config();
+  kconfig->setGroup("Settings Dialog");
+  kconfig->writeEntry("Geometry", this->size() );
+
+  kconfig->setGroup("List Options");
+  kconfig->writeEntry("listColor", m_kcolorbuttonList->color());
+  kconfig->writeEntry("listBGColor", m_kcolorbuttonBack->color());
+  kconfig->writeEntry("listHeaderFont", m_kfontchooserHeader->font());
+  kconfig->writeEntry("listCellFont", m_kfontchooserCell->font());
+  kconfig->writeEntry("RowCount", m_klineeditRowCount->text());
+  kconfig->writeEntry("ShowGrid", m_qcheckboxShowGrid->isChecked());
+  kconfig->writeEntry("ColourPerTransaction",
+    m_qradiobuttonPerTransaction->isChecked());
+
+  kconfig->setGroup("General Options");
+  kconfig->writeEntry("StartDialog",
+    m_qradiobuttonStartPrompt->isChecked());
+
+  kconfig->sync();
+}
+
+/** Called on OK being pressed */
+void KSettingsDlg::slotOk()
+{
+  int nCount = m_klineeditRowCount->text().toInt();
+  if (nCount &lt;= 0 || nCount &gt;= 4) {
+    KMessageBox::information(this, i18n("The row count has to be between 1
+and 3"));
+    m_klineeditRowCount->setFocus();
+    return;
+  }
+  configWrite();
+  this->accept();
+}
+
+/** Called on Apply being pressed */
+void KSettingsDlg::slotApply()
+{
+  int nCount = m_klineeditRowCount->text().toInt();
+  if (nCount &lt;= 0 || nCount &gt;= 4) {
+    KMessageBox::information(this, i18n("The row count has to be between 1
+and 3"));
+    m_klineeditRowCount->setFocus();
+    return;
+  }
+  m_bDoneApply = true;
+  configWrite();
+  emit signalApply();
+}
+
+/** Called on Cancel being pressed.
+  * It writes out all the original settings read when it was created.
+**/
+void KSettingsDlg::slotCancel()
+{
+  // make sure the config object is the same as we left it
+  KConfig *kconfig = KGlobal::config();
+  kconfig->setGroup("List Options");
+  kconfig->writeEntry("listColor", m_qcolorTempList);
+  kconfig->writeEntry("listBGColor", m_qcolorTempListBG);
+  kconfig->writeEntry("listHeaderFont", m_qfontTempHeader);
+  kconfig->writeEntry("listCellFont", m_qfontTempCell);
+  kconfig->writeEntry("RowCount", m_qstringTempRowCount);
+  kconfig->writeEntry("ShowGrid", m_bTempShowGrid);
+  kconfig->writeEntry("ColourPerTransaction", m_bTempColourPerTransaction);
+
+  kconfig->setGroup("General Options");
+  kconfig->writeEntry("StartDialog", m_bTempStartPrompt);
+
+  kconfig->sync();
+
+  if (m_bDoneApply)
+    accept();
+  else
+    reject();
+}
+
+/** Called when the user presses the User1 button.  In our case that is the
+  * reset button.
+  *
+  * It just resets all the attributes to the values read on creation.
+**/
+void KSettingsDlg::slotUser1()
+{
+  m_qradiobuttonStartPrompt->setChecked(m_bTempStartPrompt);
+  m_kcolorbuttonList->setColor(m_qcolorTempList);
+  m_kcolorbuttonBack->setColor(m_qcolorTempListBG);
+  m_kfontchooserHeader->setFont(m_qfontTempHeader);
+  m_kfontchooserCell->setFont(m_qfontTempCell);
+  m_klineeditRowCount->setText(m_qstringTempRowCount);
+  m_qcheckboxShowGrid->setChecked(m_bTempShowGrid);
+  m_qradiobuttonPerTransaction->setChecked(m_bTempColourPerTransaction);
+  m_qradiobuttonOtherRow->setChecked(!m_bTempColourPerTransaction);
+}
+
+</screen>
+
+</section>
+</appendix>

@@ -1,0 +1,231 @@
+<appendix id="test-examples">
+<title>Unit Test Examples</title>
+<para>
+This appendix contains an example of a 
+<link linkend="test-header-example">unit test header file listing</link> and a 
+<link linkend="test-source-example">unit test source file listing</link> as well
+as a
+<link linkend="test-container-example">unit test container source file listing</link>.
+</para>
+
+<section id="test-header-example">
+<title>Unit Test Header File Example</title>
+<screen>
+
+/***************************************************************************
+                          mymoneyexceptiontest.h
+                          -------------------
+    copyright            : (C) 2002 by Thomas Baumgart
+    email                : ipwizard@users.sourceforge.net
+ ***************************************************************************/
+
+/***************************************************************************
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ ***************************************************************************/
+
+#ifndef __MYMONEYEXCEPTIONTEST_H__
+#define __MYMONEYEXCEPTIONTEST_H__
+
+#include &lt;cppunit/extensions/HelperMacros.h&gt;
+
+#define private public
+#include "mymoneyutils.h"
+#include "mymoneyexception.h"
+#undef private
+
+class MyMoneyExceptionTest : public CppUnit::TestFixture  {
+	CPPUNIT_TEST_SUITE(MyMoneyExceptionTest);
+	CPPUNIT_TEST(testDefaultConstructor);
+	CPPUNIT_TEST(testConstructor);
+	CPPUNIT_TEST_SUITE_END();
+
+protected:
+public:
+	MyMoneyExceptionTest();
+
+
+	void setUp();
+
+	void tearDown();
+
+	void testDefaultConstructor();
+
+	void testConstructor();
+
+};
+#endif
+</screen>
+</section>
+
+<section id="test-source-example">
+<title>Unit Test Source File Example</title>
+
+<screen>
+
+/***************************************************************************
+                          mymoneyexceptiontest.cpp
+                          -------------------
+    copyright            : (C) 2002 by Thomas Baumgart
+    email                : ipwizard@users.sourceforge.net
+ ***************************************************************************/
+
+/***************************************************************************
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ ***************************************************************************/
+
+#include "mymoneyexceptiontest.h"
+
+MyMoneyExceptionTest::MyMoneyExceptionTest()
+{
+}
+
+
+void MyMoneyExceptionTest::setUp()
+{
+}
+
+void MyMoneyExceptionTest::tearDown()
+{
+}
+
+void MyMoneyExceptionTest::testDefaultConstructor()
+{
+	MyMoneyException *e = new MYMONEYEXCEPTION("Message");
+	CPPUNIT_ASSERT(e-&gt;what() == "Message");
+	CPPUNIT_ASSERT(e-&gt;line() == __LINE__-2);
+	CPPUNIT_ASSERT(e-&gt;file() == __FILE__);
+	delete e;
+}
+
+void MyMoneyExceptionTest::testConstructor()
+{
+	MyMoneyException *e = new MyMoneyException("New message",
+						 "Joe's file", 1234);
+	CPPUNIT_ASSERT(e-&gt;what() == "New message");
+	CPPUNIT_ASSERT(e-&gt;line() == 1234);
+	CPPUNIT_ASSERT(e-&gt;file() == "Joe's file");
+	delete e;
+}
+
+</screen>
+
+</section>
+
+<section id="test-container-example">
+<title>Unit Test Container Source File Example</title>
+<para>
+This test environment also contains a reference to a memory usage checker
+which can safely be ignored. It is also contained in the &app; environment
+and is a great help if looking for memory leaks. Also notice the usage of
+the C++ preprocessor directive <emphasis>#ifdef HAVE_LIBCPPUNIT</emphasis>
+to avoid compile errors when CPPUNIT is not installed.
+</para>
+<para>
+Another specialty that is not required by CPPUNIT is the specific
+TestProgressListener. It is used here to print the name of the fixture that
+is currently running. Since this method is called upon start of each
+test case, some logic is necessary to print the name only once.
+</para>
+<screen>
+
+
+/***************************************************************************
+                          autotest.cpp
+                          -------------------
+    copyright            : (C) 2002 by Thomas Baumgart
+    email                : ipwizard@users.sourceforge.net
+ ***************************************************************************/
+
+/***************************************************************************
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ ***************************************************************************/
+
+#include "config.h"
+
+#include &lt;iostream&gt;
+
+#ifdef HAVE_LIBCPPUNIT
+
+#include "cppunit/TextTestRunner.h"
+#include "cppunit/TextTestResult.h"
+#include "cppunit/TestSuite.h"
+#include "cppunit/extensions/HelperMacros.h"
+
+#include "mymoneyexceptiontest.h"
+
+#include "cppunit/TextTestProgressListener.h"
+
+class MyProgressListener : public CppUnit::TextTestProgressListener
+{
+	void startTest(CppUnit::Test *test) {
+		QString name = test-&gt;getName().c_str();
+		name = name.mid(2);		// cut off first 2 chars
+		name = name.left(name.find('.'));
+		if(m_name != name) {
+			if(m_name != "")
+				cout &lt;&lt; endl;
+			cout &lt;&lt; "Running: " &lt;&lt; name &lt;&lt; endl;
+			m_name = name;
+		}
+	}
+private:
+	QString m_name;
+};
+
+#endif
+
+
+int
+main(int argc, char** argv)
+{
+#ifdef HAVE_LIBCPPUNIT
+
+#ifdef _CHECK_MEMORY
+  _CheckMemory_Init(0);
+#endif
+
+  CPPUNIT_TEST_SUITE_REGISTRATION(MyMoneyExceptionTest); 
+
+  CppUnit::TestFactoryRegistry &amp;registry =
+    CppUnit::TestFactoryRegistry::getRegistry();
+  CppUnit::Test *suite = registry.makeTest();
+
+  CppUnit::TextTestRunner* runner = new CppUnit::TextTestRunner();
+  runner-&gt;addTest(suite);
+
+  MyProgressListener progress;
+  runner-&gt;eventManager().addListener(&amp;progress);
+  runner-&gt;run();
+
+  delete runner;
+
+#ifdef _CHECK_MEMORY
+  chkmem.CheckMemoryLeak( true );
+  _CheckMemory_End();
+#endif // _CHECK_MEMORY
+
+#else
+  std::cout &lt;&lt; "libcppunit not installed. no automatic tests available."
+		 &lt;&lt; std::endl;
+#endif // HAVE_LIBCPPUNIT
+  return 0;
+}
+</screen>
+
+</section>
+</appendix>

@@ -1,0 +1,474 @@
+<chapter id="unit-test">
+<title>Unit Testing</title>
+<para>
+If this project handbook would have been for a professional project (with
+professional I mean, a project that people make money with), I would have
+written
+</para>
+
+<caution>
+<para>
+<emphasis>Unit tests must be supplied by the developer
+with the classes/source-code he checks into the repository!</emphasis>.
+</para>
+</caution>
+
+<para>
+Since this is
+the handbook for a voluntary work (which is not less professional than any
+other project), I replace the above sentence with
+</para>
+
+<note>
+<para>
+<emphasis>Each developer in this project is strongly encouraged to develop
+unit tests for the code he or she develops and make them available to
+ the project team!</emphasis>.
+</para>
+</note>
+
+<sect1 id="why-unit-testing">
+<title>Why unit testing?</title>
+
+<para>
+Before I can give an answer to this question, I should explain what unit
+testing is about. I do not cover all relevant aspects here nor do I start a
+discussion of the various aspects of unit testing. If you want to read more
+about the details of unit testing, the philosophy behind it and about the
+various tools available, please visit the project pages of JUnit and
+<ulink url="http://cppunit.sourceforge.net/">CPPUNIT</ulink>.
+The following explanation describes what unit testing is:
+</para>
+
+<para>
+For each class developed in a project, an accompanying test container
+is developed when the interface of
+the class is defined but before the implementation of the class starts. The
+test container consists out of testcases that perform all necessary tests
+on the class while verifying the results. One or more of these test
+containers (for more than one class) form a test suite.
+</para>
+
+<para>
+Your might think, that it is strange to first define the interface, then
+develop the tests and then start the development of the actual code, but it
+has shown, that this approach has a couple of interesting side-effects:
+
+<itemizedlist>
+<listitem>
+<para>
+The developer spends time to think about how to test his implementation
+before he actually works on the implementation. This leads to the fact,
+that while working on the implementation, he already knows how his code
+will be tested.
+</para>
+</listitem>
+
+<listitem>
+<para>
+A clear definition of the <emphasis>end of implementation</emphasis> exists
+due to the fact, that the testcases will all fail before the beginning of
+the implementation phase. Once implementation proceeds, more and more
+testcases will pass. When they all pass, the development is finished.
+</para>
+</listitem>
+
+<listitem>
+<para>
+Since the tests will run automated and will be re-run very often during the
+development cycle, a lot of problems will be caught very early on. This
+reduces the number of problems found during integration of the project.
+Believe me, there will be plenty left!
+</para>
+</listitem>
+</itemizedlist>
+</para>
+
+<para>
+Now, the list of all these side-effects is actually the answer to the
+question <emphasis>Why unit testing?</emphasis> or does anyone have a
+argument against it? I agree, that in some cases automated unit testing is
+hard to achieve (e.g. for GUI related code) but I found, that whenever it
+is possible to introduce automated unit tests, the benefit is huge.
+</para>
+</sect1>
+
+<sect1 id="unit-testing-in-kmm">
+<title>Unit testing in &app;</title>
+<para>
+Just about the time, when the &app; project underwent a radical change of
+it's inner business logic (the KMyMoney engine), I read an article about
+the existance of a unit test container for C++ projects named 
+<ulink url="http://cppunit.sourceforge.net/">CPPUNIT</ulink>.
+In
+discussions with my colleagues at work, I got the impression, that this
+would be something worth to look into. So I sat down and wrote the first
+test cases for existing code to get a feeling for what is required.
+</para>
+
+<para>
+I found it annoying to write test cases for code that existed and was
+believed to work (version 0.4 of the project). When the decission was made
+to start with the 0.5 development branch, I started working on the new
+engine code that should introduce a clear interface between the business
+logic and the user interface. Another design goal was to write the engine
+in such a way, that it is not based on any KDE code which the old one was.
+The second goal to free it from Qt based code was not that easy and was
+skipped by the project team at that time.
+</para>
+
+<para>
+Even if it was hard for me at first to follow the above laid out principle
+to design the interface, write the test code and then start with the
+implementation, I followed this trail. It has proven to be very valuable.
+Once the interface was designed, I started thinking in a different manner:
+How can I get this class to fail? What strange things could I do to the
+code from the outside? Those were the design drivers for the test code. And
+in fact, this thinking changed the way I actually implemented the code, as
+I knew there was something that would check all these things over and over
+again automatically.
+</para>
+
+<para>
+A lot of code was implemented and when I was almost done with the first
+shot of the implementation, discussion came up on the developers mailing
+list about a feature called <emphasis>double entry accounting</emphasis>
+that was requested for &app; by a few people. The engine I wrote up to that
+point in time did not cover the aspects of double entry accounting at all,
+though a few things matched. After some time of discussions, we became a
+better understanding of the matter and I changed the code to cover double
+entry accounting. Some of the classes remained as they were, others had to
+be adopted and yet others rewritten entirely. The testcode had to be
+changed as well due to the change in the interfaces, but not the logic
+of the tests. Most of the thoughts how to uncover flaws remained.
+</para>
+
+<para>
+And that is another reason, why unit testing is so useful: You can change
+your internal implementation and still get a feeling, if your code is
+working or not. And believe me: even if some changes are small, one usually
+oversees a little side-effect here and there. If one has good unit tests
+this is not a problem anymore, as those side-effects will be uncovered and
+tested.
+</para>
+
+<para>
+During the course of implementing the engine, I wrote more than 100
+testcases. Each testcase sets up a testenvironment for the class and tests
+various parameters against the class' methods in this environment in so
+called test steps.
+Exceptions are also tested to be thrown. The testcases handle unexpected
+exceptions as well as expected exceptions that do not occur.
+</para>
+</sect1>
+
+<sect1 id="unit-testing-howto">
+<title>Unit testing HOWTO</title>
+<para>
+This section of the developer handbook should give some examples on how to
+organize test cases and how to setup a test environment.
+</para>
+
+<para>
+My examples will all be based on the code of the &app; engine found in the
+subdirectory <command>kmymoney2/kmymoney2/mymoney</command> and it's
+ subdirectory <command>storage</command>. A
+single executable exists that contains all the test code for the engine.
+It's called <command>autotest</command> and resides in the mymoney
+subdirectory.
+</para>
+
+<sect2 id="unit-test-integration">
+<title>Integration of CPPUNIT into the &app; project</title>
+<para>
+The information included in the following is based on version 1.8.0 of
+CPPUNIT. The &app; build system has been enhanced to check for it's
+presence. Certain definitions setup by
+<emphasis>automake/configure</emphasis> allow to compile the project
+without unit testing support.
+<caution>
+<para>
+This is not the recommended way for developers!
+</para>
+</caution>
+</para>
+
+<para>
+If code within test environments is specific to the presence of CPPUNIT it
+can be included in the following #ifdef primitive:
+
+<screen>
+
+#ifdef HAVE_LIBCPPUNIT
+// specific code that should only be compiled,
+// if CPPUNIT >= 1.8.0 is present
+#endif
+
+
+</screen>
+For an example see the
+<link linkend="test-container-example">Unit Test Container Source File
+Example</link>.
+</para>
+
+<para>
+The same applies for directives that are used in
+<command>Makefile.am</command> files. The primitive to be used there is as
+follows:
+
+<screen>
+
+if CPPUNIT
+
+# include automake-directives here, that should be evaluated
+# only, when CPPUNIT is present
+
+else
+
+# include automake directives here, that should be evaluated
+# only, when CPPUNIT is not present.
+
+endif
+
+
+</screen>
+For an example see <command>kmymoney2/mymoney/Makefile.am</command>.
+</para>
+</sect2>
+
+<sect2 id="unit-test-naming">
+<title>Naming conventions</title>
+<para>
+The test containers are also classes. Throughout CPPUNIT, the test
+containers are referred to as <emphasis>test fixtures</emphasis>. In the
+following, I use both terms.
+For a given class <emphasis>MyMoneyAbc</emphasis>, which
+resides in the files <command>mymoneyabc.h</command> and
+<command>mymoneyabc.cpp</command>, 
+the test container is named <emphasis>MyMoneyAbcTest</emphasis> and resides
+in the files 
+<command>mymoneyabctest.h</command> and
+<command>mymoneyabctest.cpp</command> in the same directory.
+The test container must be derived
+publicaly from <command>CppUnit::TestFixture</command>.
+Each testcase is given a
+descriptive name (e.g. EmptyConstructor) and I found it useful to prefix
+this name with the literal 'test' resulting into something like
+testEmptyConstructor.
+</para>
+
+</sect2>
+<sect2 id="unit-test-includes">
+<title>Necessary include files</title>
+<para>
+In order to use the functionality provided by CPPUNIT, one has to include
+some information provided with CPPUNIT in the test environment. This is
+done with the following include primitive as one of the first things in the
+header file of the test case container (e.g. mymoneyabctest.h):
+
+<screen>
+
+#include &lt;cppunit/extensions/HelperMacros.h&gt;
+
+</screen>
+</para>
+</sect2>
+
+<sect2 id="unit-test-private">
+<title>Accessing private members</title>
+<para>
+For the verification process it is sometimes necessary to look at some
+internal states of the object under test. Usually, all this information is
+declared private in the class and only accessible through setter and getter
+methods. Cases exist, where these methods are not implemented on purpose
+and thus accessing the information from the test container is not possible. 
+</para>
+
+<para>
+Various mechanism have been developed all with pros and cons. Throughout
+the test containers I wrote, I used the method of redefining the specifier
+<emphasis>private</emphasis> through <emphasis>public</emphasis> but only
+for the time when reading the header file of the object under test. This can
+easily be done by the C++ preprocessor. The following example shows how to
+do this:
+
+<screen>
+
+#define private public
+#include "mymoneyabc.h"
+#undef private
+
+
+</screen>
+
+The same applies to protected members. Just add a line containing
+<emphasis>#define protected public</emphasis> before including the class
+definition and a line containing <emphasis>#undef protected</emphasis>
+right after the inclusion line.
+</para>
+</sect2>
+
+<sect2 id="unit-test-methods">
+<title>Standard methods for each testcase</title>
+<para>
+Three methods must exist for each test fixture. These are a default
+constructor, setUp and tearDown. I think, it is not necessary to explain
+the default constructor here. SetUp and tearDown have a special function
+within the test cases. setUp() will be called before the execution of any
+test case in the test fixture. tearDown() will be called after the execution
+of the test case, no matter if the test case passes or fails. Thus setUp()
+is used to perform initialization necessary for each test case in the
+fixture and tearDown() is used to clean things up. setUp() and tearDown()
+should be written in such a way, that all objects created
+through a test case should be removed by tearDown(), i.e. the environment
+is restored exactly to the state it was before the call to setUp().
+
+<note>
+<para>
+This is not always the case within the testcase for &app;. Espacially when
+using a database as the permanent storage things have to be overhauled for
+e.g. MyMoneyFileTest.
+</para>
+</note>
+
+</para>
+
+<para>
+CPPUNIT comes with a set of macros that help writing testcases. I cover
+them here briefly. If you wish a more detailed description, please visit
+the
+<ulink url="http://cppunit.sourceforge.net/">CPPUNIT</ulink> project
+homepage.
+</para>
+</sect2>
+
+<sect2 id="test-macro-assert">
+<title>CPPUNIT_ASSERT</title>
+<para>
+This is the macro used at most throughout the test cases. It checks, that a
+given assumption is true. If it is not, the test case fails and a
+respective message will be printed at the end of the testrun.
+</para>
+
+<para>
+CPPUNIT_ASSERT has a single argument which is a boolean expression. The
+expression must be true in order to pass the test. If it is false, the test
+case fails and no more code of the test case is executed. The following
+example shows how the macro is used:
+<screen>
+
+  int a, b;
+  a = 0, b = 1;
+  CPPUNIT_ASSERT(a != b);
+  a = 1;
+  CPPUNIT_ASSERT(a == b);
+
+
+</screen>
+The example shows, how two test steps are combined. One checks the
+inequality of two integers, one the equality of them. If either one does
+not work, the test case fails.
+</para>
+<para>
+See the
+<link linkend="test-source-example">Unit Test Source File Example</link>
+for a demonstration of it's use.
+</para>
+
+</sect2>
+
+<sect2 id="test-macro-fail">
+<title>CPPUNIT_FAIL</title>
+<para>
+This is the macro used when the execution of a test case reaches a point it
+should not. This usually happens, if exceptions are thrown or not thrown.
+</para>
+
+<para>
+CPPUNIT_FAIL has a single argument which is the error message to be
+displayed.  The following example shows how the macro is used:
+<screen>
+
+  int a = 1, b = 0;
+  try {
+    a = a / b;
+    CPPUNIT_FAIL("Expected exception missing!");
+  } catch (exception *e) {
+    delete e;
+  }
+
+  try {
+    a = a / a;
+  } catch (exception *e) {
+    delete e;
+    CPPUNIT_FAIL("Unexpected exception!");
+  }
+  
+
+</screen>
+The example shows, how two test steps are combined. One checks the
+occurance of an exception, the other one that no exception is thrown.
+If either one does not work, the test case fails.
+</para>
+
+</sect2>
+
+<sect2 id="test-macro-testsuite-start">
+<title>CPPUNIT_TEST_SUITE</title>
+<para>
+This macro is used as the first thing in the declaration of the test fixture.
+ A single argument is the name of the class for the test fixture. It starts
+the list of test cases in this fixture defined by the 
+<link linkend="test-macro-testcase">CPPUNIT_TEST</link> macro. The list must be
+terminated using the <link
+linkend="test-macro-testsuite-end">CPPUNIT_TEST_SUITE_END</link> macro.
+</para>
+<para>
+See the
+<link linkend="test-header-example">Unit Test Header File Example</link>
+for a demonstration of it's use.
+</para>
+</sect2>
+
+<sect2 id="test-macro-testsuite-end">
+<title>CPPUNIT_TEST_SUITE_END</title>
+<para>
+This macro terminates the list of test cases in a test fixture. It has no
+arguments.
+</para>
+<para>
+See the
+<link linkend="test-header-example">Unit Test Header File Example</link>
+for a demonstration of it's use.
+</para>
+</sect2>
+
+<sect2 id="test-macro-testcase">
+<title>CPPUNIT_TEST</title>
+<para>
+This macro defines a new test case within a test fixture. As argument it
+takes the name of the test case.
+</para>
+<para>
+See the
+<link linkend="test-header-example">Unit Test Header File Example</link>
+for a demonstration of it's use.
+</para>
+</sect2>
+
+<sect2 id="test-macro-registration">
+<title>CPPUNIT_TEST_SUITE_REGISTRATION</title>
+<para>
+This macro registers a test fixture within a test suite. It takes the name
+of the test fixture as argument.
+</para>
+<para>
+See the
+<link linkend="test-container-example">Unit Test Container Source File
+Example</link>
+for a demonstration of it's use.
+</para>
+</sect2>
+
+</sect1>
+</chapter>

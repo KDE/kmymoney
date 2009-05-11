@@ -1,0 +1,320 @@
+<chapter id="cfg-mgmt">
+<title>Configuration Management</title>
+<para>
+Whenever a project is developed in stages, it is very important for the
+people working on the project to know, which version of the project is used
+by the users and how it was built and what the components of this project
+are. This applies to hardware (e.g. automobiles) as well as software.
+Think of the times, when a car manufacturer calls certain cars to be
+repaired due to production problems. The manufacturer
+can track down the relevant cars because he is using a
+configuration management system and knows each car that contains e.g.
+faulty parts.
+</para>
+
+<para>
+The same applies to software development projects: whenever a version (stage of
+development) of the project is made
+public, it has to be given a distinct name or tag - usually the version number -
+and the development team must keep a snapshot of all components that made
+up that stage of the software project. This does not only include the
+source code of the project, but all libraries in their relevant stage as
+well as compilers and tools and all their installation/configuration
+information.  If all this information is present, the software development
+team is capable to exactly reproduce each delivered version to search for
+problems occuring with this version. If this capability is not available,
+the development team has a hard time to find these problems.
+</para>
+
+<para>
+CVS helps us in our project to cover one aspect of configuration
+management: version control of the source code. It helps us to keep the
+snapshots of all the files the project team is responsible for in a
+central repository. Another aspect of CVS is concurrent development which
+allows us that some of us can develop
+new features of the project while others fix problems with previous
+versions even if both tasks modify the same source file. This feature is
+called branching. How branches will be organized in our project is
+explained in the chapter about 
+<link linkend="version-mgmt">Version management</link>.
+</para>
+
+<para>
+The configuration management also regulates how the development team passes
+information among the members. This includes things like naming
+conventions, how errors are reported, rated and fixed and who is
+responsible for which task. The emphasis on this document though is the
+management of the version control system and how things are handled in this
+area. This does not mean, that the other important issues of configuration
+management are left outside. They are just not in the focus of this
+document.
+</para>
+
+<para>
+Throughout this document a few terms are used. In order to avoid confusion
+because these terms might be used differently in other documents, they are
+defined here.
+
+<table>
+<title>Definition of version control related terms</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry>Term</entry>
+<entry>Definition</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+<entry>Revision</entry>
+<entry>
+A <emphasis>revision</emphasis> is the stage of a single file in the
+repository. <emphasis>Revisions</emphasis> start with the value 1.1 upon
+the initial check-in and are incremented with each check-in of that file.
+After the third check-in, the <emphasis>revision</emphasis> of a file has
+the numeric value of 1.3.
+
+Once branches are made, <emphasis>revisions</emphasis> can have values like
+1.6.2.2.  Since the <emphasis>revisions</emphasis> differ for all files,
+the revision number is only necessary for certain administrative tasks on 
+single files (e.g.
+<link linkend="promoting-changes">merging data from another branch</link>).
+</entry>
+</row>
+
+<row>
+<entry>Tag, Label</entry>
+<entry>
+A <emphasis>tag</emphasis> is a string that represents a single revision of
+a file. Multiple tags can point to the same revision of a file.
+Sometimes, <emphasis>label</emphasis> is used as a synonym for tag.
+</entry>
+</row>
+
+<row>
+<entry>Version</entry>
+<entry>
+A <emphasis>version</emphasis> is the stage of the whole project in the
+repository. As already mentioned, the revisions for the files contained in
+the project differ from each other for a specific
+<emphasis>version</emphasis>. Therefor, each revision contained in a
+<emphasis>version</emphasis> receives the same tag.
+This tag can be used
+to checkout an exact copy of the version of the project.
+</entry>
+</row>
+
+<row>
+<entry>Repository</entry>
+<entry>
+The repository is the central database containing all revisions of all
+files of the &app; project. It is located on the SourceForge.net and can
+be accessed via &cvs;.
+</entry>
+</row>
+
+<row>
+<entry>Sandbox</entry>
+<entry>
+The sandbox is the local work area for the developer. Initially, a sandbox
+is filled by checking out a specific stage of the repository. Changes made
+to the sandbox are moved to the repository by the checkin process. Changes
+made by other developers are transferred to one's own sandbox by the update
+process.  
+
+A developer can maintain different sandboxes of the same project in
+different directories on the same machine. This requires thorough attention
+of the developer which sandbox he is modifying. Using several sandboxes is
+usually meaningful if a developer works on changes on a release branch
+(stable release) and on the main-branch (development release) at the same
+time. See <link linkend="multiple-branches">the appendix</link> for an
+example.
+</entry>
+</row>
+
+</tbody>
+</tgroup>
+</table>
+</para>
+<!-- SECTION =================================================== -->
+<sect1 id="vc-tool">
+<title>Version Control Tool</title>
+<para>
+Since the &app; project is hosted on the <ulink
+url="http://www.sourceforge.net/">SourceForge</ulink> platform, <ulink
+url="http://www.cvshome.org">CVS</ulink> is used as the version control
+tool. &cvs; is widely accepted as version control tool in the open source
+community and covers our needs pretty well.
+</para>
+<para>
+The &app; project's central repository is handled on the
+SourceForge platform. Developers do not edit files directly in the
+repository, but rather checkout a working copy into their local
+sandbox. This local sandbox can then be modified without the necessity of
+a direct link to the central repository.
+Once the developer is confident with the changes made, he checks the files
+back into repository.
+</para>
+
+<para>
+During the checkin process, &cvs; keeps track of all the changes made. This
+allows to review a complete history of all modifications ever made to the
+project.
+As mentioned above, it is very important in certain circumstances to have
+such a history.
+</para>
+</sect1>
+
+<!-- SECTION =================================================== -->
+
+<sect1 id="repo-access">
+<title>Access to the repository</title>
+<para>
+Access to the repository is available in two different forms
+<itemizedlist>
+<listitem><para>Read-Only access</para></listitem>
+<listitem><para>Read-Write access</para></listitem>
+</itemizedlist>
+</para>
+
+<sect2>
+<title>Read-Only access</title>
+<para>
+Read-Only access is granted to anybody anonymously to the repository. For
+this type of access you do not need a user account on the SourceForge
+platform. Access is made through the <emphasis>pserver</emphasis>-protocol
+of &cvs;: See <ulink
+url="http://sourceforge.net/">the description on SourceForge</ulink> for more details.
+</para>
+</sect2>
+
+<sect2>
+<title>Read-Write access</title>
+<para>
+In order to get read-write access to the repository, two things are
+necessary. First you need a user account on the SourceForge platform.
+Second you need to qualifiy as a developer with the &app; project
+administrator(s). Once they have added you to the list of developers, you
+can access the repository through an <emphasis>SSH</emphasis> encrypted
+tunnel.
+
+See <ulink
+url="http://sourceforge.net/">the description on SourceForge</ulink> for more details.
+
+</para>
+</sect2>
+</sect1>
+
+<sect1 id="version-controlled-files">
+<title>Version controlled files</title>
+<para>
+This chapter explains which files have to be version controlled. It also
+explains how to configure &cvs; to skip certain files that are generated by
+the compile/build process but should not be stored in the repository.
+</para>
+
+<sect2>
+<title>Files that must be stored in the repository</title>
+<para>
+All files that form an application (e.g. source code, header files, icons,
+documentation, etc.) that are necessary to compile, build and run the
+application <command>must</command> be checked into the central repository.
+</para>
+
+<caution>
+<para>
+Before you add a file to the repository you must check it's format. If it's
+a binary format the special option <command>-kb</command> must be appended
+to the <command>cvs add</command> in order to inform the central repository
+to leave the file as it is
+</para>
+</caution>
+</sect2>
+
+<sect2>
+<title>Files that should not be stored in the repository</title>
+
+<para>
+All files that are automatically generated by the build process (e.g.
+object files, libraries, executables, Makefiles, etc.) should not be checked
+into the repository because they can easily be reconstructed by the
+developer. In very rare circumstances it might be necessary to checkin an
+automatically generated file. This is always an exception.
+
+<note>
+<para>
+I mentioned Makefiles above because I assume that &ac; and &am; are used.
+Using &ac; and &am; supplies the project with a
+<command>configure</command> script that creates the Makefiles. The
+necessary input files are called <command>Makefile.am</command> that must
+be checked into the repository as source to the Makefiles. 
+</para>
+<para>
+If you do not use &ac; and &am; and write your Makefiles directly, they
+have to be checked in as they are not automatically generated. Nevertheless,
+using non &am; generated Makefiles should be avoided.
+</para>
+</note>
+</para>
+</sect2>
+</sect1>
+
+
+<sect1 id="version-mgmt">
+<title>Version management</title>
+<para>
+At certain times to be defined by the project's administrators (actually
+configuration manager) a snapshot is taken from the repository. In order to
+fix the stage of this snapshot in the repository, a
+<emphasis>tag</emphasis> is placed on this stage. Tagging the repository
+creates a version of the project.
+</para>
+
+<sect2>
+<title>Layout of the version numbers</title>
+<para>
+The version number is made out of three numeric fields. These are:
+
+<orderedlist>
+<listitem><para>The major release number</para></listitem>
+<listitem><para>The minor release number</para></listitem>
+<listitem><para>The micro release number</para></listitem>
+</orderedlist>
+
+In order to serve as a tag for &cvs;, the text <command>rel-</command> is
+prepended to the version numbers and the three fields are seperated with a
+dash (e.g. rel-0-3-7).
+</para>
+
+<para>
+The major release number will be changed when all the proposed features
+mentioned in the release plan (available on the 
+<ulink url="http://kmymoney2.sourceforge.net/">project web-site</ulink>)
+are designedi, coded and tested.
+</para>
+
+<para>
+One of the objectives of the minor release number is to differentiate
+between stable and unstable versions of the project. As a widely accepted
+procedure, odd numbers are used for development versions, even numbers
+identify stable versions. Whenever the configuration manager decides that
+to create a new stable release, this will also bump the version number of
+the unstable release by two.
+</para>
+
+<para>
+The micro release number is reset to 0 when the minor release number is
+incremented and then incremented with each version following until the
+minor release number is modified again. Versions tagged between the
+creation of a stable branch and the actual release -0 of this branch will
+be identified by a micro release number of
+<emphasis>pre<subscript>n</subscript></emphasis>, where
+<emphasis>n</emphasis> is incremented each time a version is tagged.
+</para>
+
+</sect2>
+
+</sect1>
+
+</chapter>

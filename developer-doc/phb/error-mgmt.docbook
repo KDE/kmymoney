@@ -1,0 +1,330 @@
+<chapter id="problem-mgmt">
+<title>Problem Management</title>
+<para>
+This chapter is a first draft. It contains some ideas that have to be 
+validated by the developer community.
+</para>
+
+<sect1 id="problem-reporting">
+<title>Reporting problems</title>
+<para>
+Problems (that covers errors, enhancement request, etc.) concerning the
+&app; project are maintained
+using the SourceForge.net platform. This is the sole location, where
+problems have to be reported. The source for such a problem report can be
+one of the developers or any other user of &app;.
+</para>
+
+<sect2 id="problem-reference">
+<title>Referencing problems</title>
+<para>
+Once added to the database, the problem will be assigned a unique problem
+number. This number must be mentioned whenever the problem is referenced
+(e.g. in the subject of a mail to the developer mailing-list, a checkin
+comment or an entry in the ChangeLog file). To allow searches for the number,
+a specific format has to be used for these references.
+
+The format is
+<command>#<emphasis>assigned-number</emphasis></command>, e.g. #481229.
+</para>
+</sect2>
+</sect1>
+
+
+<sect1 id="problem-attributes">
+<title>Problem attributes</title>
+<para>
+Besides the fixed problem number which is created when the report is filed,
+ each
+problem has a couple of attributes that might change during the
+life-cycle of the problem. They will be described in the following
+chapters.
+</para>
+
+<sect2 id="problem-reported-by">
+<title>Reported By</title>
+<para>
+As the problem number, this field is fix. It represents the SourceForge
+username of the individual who filed the report.
+</para>
+</sect2>
+
+<sect2 id="problem-severity-level">
+<title>Severity level</title>
+<para>
+The SourceForge.net platform allows to assign a severity level to each
+problem. It ranges from 1 to 10. The meaning in our project and the
+consequences are defined as follows:
+
+</para> <para> FIXME: A more detailed description of the prios needs to be given
+
+<orderedlist>
+<listitem>
+<para>
+Lowest priority
+</para>
+</listitem>
+
+<listitem>
+<para>
+TBD!
+</para>
+</listitem>
+
+<listitem>
+<para>
+TBD!
+</para>
+</listitem>
+
+<listitem>
+<para>
+TBD!
+</para>
+</listitem>
+
+<listitem>
+<para>
+Medium priority (default)
+</para>
+</listitem>
+
+<listitem>
+<para>
+TBD!
+</para>
+</listitem>
+
+<listitem>
+<para>
+TBD!
+</para>
+</listitem>
+
+<listitem>
+<para>
+TBD!
+</para>
+</listitem>
+
+<listitem>
+<para>
+TBD!
+</para>
+</listitem>
+
+<listitem>
+<para>
+Highest priority
+</para>
+</listitem>
+
+</orderedlist>
+</para>
+</sect2>
+
+<sect2 id="problem-area">
+<title>Area</title>
+<para>
+TBD!
+</para>
+</sect2>
+
+<sect2 id="problem-assignee">
+<title>Assignee</title>
+<para>
+This field represents the SourceForge.net username of the individual
+working on the problem. Each developer should pick problems he feels
+competent to work on. The possibility to assign another developer to a
+problem should be used only to gather a comment from this developer. This
+should be clearly marked as comment with the report.
+</para>
+
+<note>
+<para>
+The number of unassigned problem reports should be 0 most of the time to
+give clear signal to the world that the developers are working on the
+project!
+</para>
+</note>
+</sect2>
+
+<sect2 id="problem-status">
+<title>Status</title>
+<para>
+Each problem has a status. Right after filing a report, it will be assigned
+the status 'open' automatically by the SourceForge.net platform. Whenever a
+developer is working on the problem, he will have to modifiy the value of
+this field to reflect the current status. The following values are
+available and have the associated meaning:
+</para>
+
+<para>
+
+<table>
+<title>Available problem status values</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry>Status</entry>
+<entry>Meaning</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+<entry>open</entry>
+<entry>
+The problem is not yet fixed. A developer might be working on it.
+</entry>
+</row>
+
+<row>
+<entry>closed</entry>
+<entry>
+The problem has been closed. No further action is required.
+</entry>
+</row>
+
+<row>
+<entry>deleted</entry>
+<entry>
+???
+</entry>
+</row>
+
+<row>
+<entry>pending</entry>
+<entry>
+The problem has been modified solved and feedback from the original poster
+is required. Pending entries will turn into closed entries after 14 days.
+</entry>
+</row>
+
+</tbody>
+</tgroup>
+</table>
+
+</para>
+</sect2>
+
+
+<sect2 id="problem-resolution">
+<title>Resolution</title>
+<para>
+The following values are available and have the associated meaning:
+</para>
+<para>
+
+<table>
+<title>Available problem resolution values</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry>Resolution</entry>
+<entry>Meaning</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+<entry>Accepted</entry>
+<entry>
+The problem report has been accepted by the developers. Nevertheless, it
+has not yet been duplicated but from the initial report it could well
+be a problem with &app;
+</entry>
+</row>
+
+<row>
+<entry>Duplicated</entry>
+<entry>
+The problem has been duplicated by one of the developers.
+</entry>
+</row>
+
+<row>
+<entry>Fixed</entry>
+<entry>
+The problem has been fixed. The code is available via CVS.
+</entry>
+</row>
+
+<row>
+<entry>Invalid</entry>
+<entry>
+The report is not valid. It's not a problem related to &app;.
+</entry>
+</row>
+
+<row>
+<entry>Later</entry>
+<entry>
+???
+</entry>
+</row>
+
+<row>
+<entry>None</entry>
+<entry>
+???
+</entry>
+</row>
+
+<row>
+<entry>Out of date</entry>
+<entry>
+The report is based on an older version of &app; and has been resolved
+in the meantime in a newer release which is available for download or CVS.
+</entry>
+</row>
+
+<row>
+<entry>Postponed</entry>
+<entry>
+The problem has been acknowledged but will be postponed until later. The
+developer changeing the state to Postponed should leave a comment with the
+entry why it is postponed.
+</entry>
+</row>
+
+<row>
+<entry>Rejected</entry>
+<entry>
+The problem has been rejected by the development team. The developer
+changing the state to Rejected should leave a comment with the entry
+nameing the reasons for rejection.
+</entry>
+</row>
+
+<row>
+<entry>Remind</entry>
+<entry>
+???
+</entry>
+</row>
+
+<row>
+<entry>Wont fix</entry>
+<entry>
+???
+</entry>
+</row>
+
+<row>
+<entry>Works for me</entry>
+<entry>
+The problem cannot be duplicated but seems to be a valid problem. The
+entry needs more investigation.
+</entry>
+</row>
+
+</tbody>
+</tgroup>
+</table>
+
+</para>
+</sect2>
+
+</sect1>
+</chapter>
