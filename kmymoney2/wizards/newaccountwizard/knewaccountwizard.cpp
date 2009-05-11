@@ -23,7 +23,7 @@
 #include <qcheckbox.h>
 #include <qfocusdata.h>
 #include <qtooltip.h>
-#include <q3whatsthis.h>
+
 #include <qlabel.h>
 //Added by qt3to4:
 #include <Q3ValueList>
@@ -576,13 +576,13 @@ bool AccountTypePage::isComplete(void) const
   // check that the conversion rate is positive if enabled
   bool rc = !m_conversionRate->isVisible() || (!m_conversionRate->value().isZero() && !m_conversionRate->value().isNegative());
   if(!rc) {
-    QToolTip::add(m_wizard->m_nextButton, i18n("Conversion rate is not positive"));
+    m_wizard->m_nextButton->setToolTip( i18n("Conversion rate is not positive"));
 
   } else {
     rc = KMyMoneyWizardPage::isComplete();
 
     if(!rc) {
-      QToolTip::add(m_wizard->m_nextButton, i18n("No account name supplied"));
+      m_wizard->m_nextButton->setToolTip( i18n("No account name supplied"));
     }
   }
   hideShowPages(accountType());
@@ -726,7 +726,7 @@ bool CreditCardSchedulePage::isComplete(void) const
       msg = i18n("No name assigned for schedule");
     }
   }
-  QToolTip::add(m_wizard->m_finishButton, msg);
+  m_wizard->m_finishButton->setToolTip( msg);
 
   return rc;
 }
@@ -804,7 +804,7 @@ bool GeneralLoanInfoPage::isComplete(void) const
   m_wizard->setStepHidden(StepPayout, !m_wizard->openingBalance().isZero());
   bool rc = KMyMoneyWizardPage::isComplete();
   if(!rc) {
-    QToolTip::add(m_wizard->m_nextButton, i18n("No payee supplied"));
+    m_wizard->m_nextButton->setToolTip( i18n("No payee supplied"));
   }
 
   // fixup availability of items on this page
@@ -818,14 +818,14 @@ bool GeneralLoanInfoPage::isComplete(void) const
 
   if(m_openingBalance->isEnabled() && m_openingBalance->lineedit()->text().length() == 0) {
     rc = false;
-    QToolTip::add(m_wizard->m_nextButton, i18n("No opening balance supplied"));
+    m_wizard->m_nextButton->setToolTip( i18n("No opening balance supplied"));
   }
 
   if(rc
   && (m_interestType->currentItem() != 0)
   && (m_interestChangeDateEdit->date() <= m_firstPaymentDate->date())) {
     rc = false;
-    QToolTip::add(m_wizard->m_nextButton, i18n("An interest change can only happen after the first payment"));
+    m_wizard->m_nextButton->setToolTip( i18n("An interest change can only happen after the first payment"));
   }
   return rc;
 }
@@ -1189,11 +1189,11 @@ bool LoanDetailsPage::isComplete(void) const
   m_calculateButton->setAutoDefault(false);
   m_calculateButton->setDefault(false);
   if(m_needCalculate && fieldCnt == 4) {
-    QToolTip::add(m_wizard->m_nextButton, i18n("Press Calculate to verify the values"));
+    m_wizard->m_nextButton->setToolTip( i18n("Press Calculate to verify the values"));
     m_calculateButton->setAutoDefault(true);
     m_calculateButton->setDefault(true);
   } else if(fieldCnt != 5) {
-    QToolTip::add(m_wizard->m_nextButton, i18n("Not all details supplied"));
+    m_wizard->m_nextButton->setToolTip( i18n("Not all details supplied"));
     m_calculateButton->setAutoDefault(true);
     m_calculateButton->setDefault(true);
   }
@@ -1385,8 +1385,8 @@ LoanPayoutPage::LoanPayoutPage(Wizard* wizard, const char* name) :
                                   i18n("Create a new asset account"),
                                   i18n("If the asset account does not yet exist, press this button to create it."));
   m_createAssetButton->setGuiItem(createAssetButtenItem);
-  QToolTip::add(m_createAssetButton, createAssetButtenItem.toolTip());
-  Q3WhatsThis::add(m_createAssetButton, createAssetButtenItem.whatsThis());
+  m_createAssetButton->setToolTip( createAssetButtenItem.toolTip());
+  m_createAssetButton->setWhatsThis( createAssetButtenItem.whatsThis());
   connect(m_createAssetButton, SIGNAL(clicked()), this, SLOT(slotCreateAssetAccount()));
 
   connect(m_noPayoutTransaction, SIGNAL(toggled(bool)), this, SLOT(slotButtonsToggled()));

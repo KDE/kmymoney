@@ -19,7 +19,7 @@
 
 #include <qlayout.h>
 #include <qlabel.h>
-#include <q3whatsthis.h>
+
 //Added by qt3to4:
 #include <Q3HBoxLayout>
 #include <Q3VBoxLayout>
@@ -51,7 +51,7 @@ KGpgKeySelectionDlg::KGpgKeySelectionDlg(QWidget *parent, const char *name) :
   m_listBox = new KEditListBox(page);
   m_listBox->setTitle(i18n("User identification"));
   m_listBox->setButtons( int( KEditListBox::Remove | KEditListBox::Add ) );
-  Q3WhatsThis::add( m_listBox, i18n( "Enter the id of the key you want to use for data encryption. This can either be an e-mail address or the hexadecimal key id. In case of the key id don't forget the leading 0x." ) );
+  m_listBox->setWhatsThis( i18n( "Enter the id of the key you want to use for data encryption. This can either be an e-mail address or the hexadecimal key id. In case of the key id don't forget the leading 0x." ) );
 
   topLayout->addWidget(m_listBox);
 
