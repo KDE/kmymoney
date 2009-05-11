@@ -247,13 +247,13 @@ ADD_SUBDIRECTORY( kmymoney2 )
 ADD_SUBDIRECTORY( doc ) 
 ADD_SUBDIRECTORY( developer-doc ) 
 
-CONFIGURE_FILE(
-  "${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in"
-  "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
-  IMMEDIATE @ONLY)
+#CONFIGURE_FILE(
+#  "${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in"
+#  "${CMAKE_BINARY_DIR}/cmake_uninstall.cmake"
+#  IMMEDIATE @ONLY)
 
-ADD_CUSTOM_TARGET(uninstall
-  "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake")
+#ADD_CUSTOM_TARGET(uninstall
+#  "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake")
 
 # This command will extract and merge the translations.
 # Note that this will modify the source tree.

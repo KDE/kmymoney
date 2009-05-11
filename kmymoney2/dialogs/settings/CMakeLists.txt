@@ -11,8 +11,10 @@ SET (libsettings_a_SOURCES
   ${KMyMoney2_BINARY_DIR}/kmymoneysettings.h ksettingscolors.cpp
   ksettingsfonts.cpp ksettingsforecast.cpp ksettingsgeneral.cpp
   ksettingsgpg.cpp ksettingshome.cpp ksettingsonlinequotes.cpp
-  ksettingsplugins.cpp ksettingsregister.cpp ksettingsschedules.cpp 
+  ksettingsregister.cpp ksettingsschedules.cpp 
   )
+#missing it
+#ksettingsplugins.cpp
 
 SET (libsettings_a_UI 
   ksettingscolorsdecl.ui ksettingsfontsdecl.ui
