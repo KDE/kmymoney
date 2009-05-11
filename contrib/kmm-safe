@@ -1,0 +1,49 @@
+#!/bin/bash
+#
+# make a copy of KMyMoney files in a 'safe' directory whenever
+# the contents of the orignal changed since the last run of this program.
+# In order to make it work for you, please modify the parameters
+# and erase the line following it.
+#
+# in order to automate the process, I entered the following two lines
+# into my crontab using 'crontab -e'
+#
+#   # make a copy of the valuable KMyMoney data every 20 minutes
+#   */20 * * * * /home/thb/bin/kmm-safe
+#
+# (C) 2005 by Thomas Baumgart (ipwizard at users.sourceforge.net)
+
+# DATA_FILES="$HOME/thb.xml $HOME/thb.kmy"
+DATA_FILES="$HOME/thb.kmy"
+SAFE_DIR="$HOME/kmymoney-safe"
+DATE_FORM="%Y-%m-%d-%H-%M-%S"
+
+echo "Please configure to your likings and comment these two lines"
+exit 1
+
+for i in $DATA_FILES; do
+  NEWFN=$SAFE_DIR/`basename $i`-`date +$DATE_FORM`
+  OLDFN=$SAFE_DIR/`basename $i`-last
+
+  # check if we need to keep a copy
+  NEEDSAVE=0
+  if test ! -e $OLDFN; then
+    NEEDSAVE=1
+  fi
+  if test $NEEDSAVE -eq 0; then
+    CS1=`md5sum $i | cut -d' ' -f1`
+    CS2=`md5sum $OLDFN | cut -d' ' -f1`
+    if test $CS1 != $CS2; then
+      NEEDSAVE=1
+    fi
+  fi 
+
+  if test $NEEDSAVE -eq 1; then
+    cp $i $NEWFN
+    if test -e $OLDFN; then
+      rm $OLDFN
+    fi
+    ln -s $NEWFN $OLDFN
+  fi
+done
+

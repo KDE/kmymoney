@@ -1,0 +1,6 @@
+This directory contains various tools around KMyMoney. They
+are not part of the installation and contained here for your
+reference.
+
+@Developers: Make sure to add new files in this directory
+             to the EXTRA_DIST target in Makefile.am

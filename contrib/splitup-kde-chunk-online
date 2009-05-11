@@ -1,0 +1,88 @@
+#!/usr/bin/perl
+#
+# split up an HTML file generated with e.g.
+#
+#   /opt/kde3/bin/meinproc --check \
+#      --stylesheet `dirname $(KDE_XSL_STYLESHEET)`/kde-chunk-online.xsl \
+#      $(srcdir)/index.docbook -o index.xml;
+#
+# into several HTML files. While processing the input file - which
+# must be named index.xml - replace the following occurences:
+#
+# source                                      destination
+# ---------------------------------------------------------------------------
+# HEAD/common                                 ../common
+# <a href=\"/search_form.html\">Search</a>    -literally nothing-
+# <a href=\"/\">docs.kde.org</a>              <a href=\"index.html\">Home</a>
+#
+# The script should be started in the directory where the file index.xml
+# is located. The output files will be generated in the same directory.
+#
+# (C) 2007,2009 by Thomas Baumgart (ipwizard at users.sourceforge.net)
+#
+#***************************************************************************
+#*   This program is free software; you can redistribute it and/or modify  *
+#*   it under the terms of the GNU General Public License as published by  *
+#*   the Free Software Foundation; either version 2 of the License, or     *
+#*   (at your option) any later version.                                   *
+#***************************************************************************/
+
+
+sub endFile
+{
+	close OUT;
+	$fileIdx--;
+	if($fileIdx > 0) {
+		open(OUT, ">> $fname[$fileIdx]") or die("Unable to open file");
+	}
+}
+
+sub startFile
+{
+	$fileIdx++;
+	my $node = shift;
+	$node =~ /FILENAME filename="(.*)"/;
+	my $name = $1;
+	$fname[$fileIdx] = $name;
+	open(OUT, "> $fname[$fileIdx]") or die("Unable to open file");
+}
+
+sub processLine
+{
+	my $line = shift;
+	# .....</FILENAME>....
+	if($line =~ /(.*)(<\/FILENAME>)(.*)/) {
+		my $s = $1;
+		my $e = $3;
+		processLine($s);
+		endFile();
+		processLine($e);
+	}
+	# .....<FILENAME filename="index.html">....
+	elsif($line =~ /(.*)(<FILENAME filename="[^>\"]*">)(.*)/) {
+		my $s = $1;
+		my $f = $2;
+		my $e = $3;
+		processLine($s);
+		startFile($f);
+		processLine($e);
+	}
+	else {
+		# replace HEAD/common with ../common
+		$line =~ s#/HEAD/common#../common#g;
+		# don't show access to search form
+		$line =~ s#<a href=\"/search_form.html\">Search</a>##g;
+		# don't link to docs.kde.org
+		$line =~ s#<a href=\"/\">docs.kde.org</a>#<a href=\"index.html\">Home</a>#g;
+		print OUT "$line\n";
+	}
+}
+
+$fileIdx = 0;
+open(IN, "< index.xml");
+while(<IN>) {
+	chomp($_);
+	my $line = $_;
+	processLine($line);
+}
+close IN;

@@ -1,0 +1,121 @@
+/*                     functions.mysql
+   Some functions for use with a KMyMoney MySql database.
+   Load them into your database with command:
+   mysql KMyMoney < this_file
+   To preserve them in backups, remember to add the -R flag to mysqldump.
+*/
+
+delimiter //
+
+DROP FUNCTION IF EXISTS toDecimal//
+CREATE
+ FUNCTION toDecimal(mymoneymoney VARCHAR(32))
+ RETURNS DECIMAL(12,6)
+  BEGIN
+   /* Converts a MyMoneyMoney numerator/denominator string to a decimal number */
+   DECLARE result DECIMAL (12,6);
+   SELECT SUBSTRING_INDEX(mymoneymoney, '/', 1) / SUBSTRING_INDEX(mymoneymoney, '/', -1) INTO result;
+   RETURN result;
+  END
+//
+delimiter ;
+
+delimiter //
+DROP FUNCTION IF EXISTS cashBalance//
+CREATE
+ FUNCTION cashBalance(acctId VARCHAR(32))
+ RETURNS DECIMAL(12,2)
+  BEGIN
+  /* Returns the cash balance as of today of an account specified by internal id.*/
+  /* to determine id - SELECT id FROM kmmAccounts WHERE accountName = 'whatever';
+     Sample usage - SELECT cashBalance('A000001');  */
+   DECLARE result DECIMAL (12,2);
+     SELECT SUM(toDecimal(shares)) INTO result
+       FROM kmmSplits
+         WHERE accountId = acctId
+          AND postDate <= NOW()
+          AND txType = 'N';
+   RETURN result;
+  END
+//
+delimiter ;
+
+delimiter //
+DROP PROCEDURE IF EXISTS listBalances//
+CREATE
+ PROCEDURE listBalances(IN parent varchar(32))
+ BEGIN
+  /* Lists the balances of all accounts subsidiary to a named account. NOTE: not recursive 
+     Sample usage: - CALL listBalances('Asset'); */
+  SELECT accountName, cashBalance(id) FROM kmmAccounts where parentId = 
+    (SELECT id from kmmAccounts WHERE accountName = parent)
+   ORDER by 1;
+ END
+//
+delimiter ;
+
+delimiter //
+DROP FUNCTION IF EXISTS latestPrice//
+CREATE
+ FUNCTION latestPrice(secId VARCHAR(32))
+ RETURNS DECIMAL(12,6)
+  BEGIN
+   /* Returns the latest price for a security identified by internal id. */
+   /* to determine id - SELECT id FROM kmmSecurities WHERE name = 'whatever'; */
+   DECLARE result DECIMAL (12,6);
+   SELECT toDecimal(price) INTO result
+     FROM kmmPrices WHERE fromId = secId AND priceDate =
+      (SELECT MAX(priceDate) FROM kmmPrices WHERE fromId = secId);
+   RETURN result;
+END
+//
+delimiter ;
+
+delimiter //
+DROP FUNCTION IF EXISTS shareBalance//
+CREATE
+ FUNCTION shareBalance(acctId VARCHAR(32))
+ RETURNS DECIMAL(12,6)
+  BEGIN
+  /* Returns the share balance for an Stock account identified by internal id.
+     NOTE: similar to cashBalance but with greater precision */
+   DECLARE result DECIMAL (12,6);
+   SELECT SUM(toDecimal(shares)) INTO result
+     FROM kmmSplits WHERE accountId = acctId AND txType = 'N';
+   RETURN result;
+  END
+//
+delimiter ;
+
+delimiter //
+DROP FUNCTION IF EXISTS valuation//
+CREATE
+ FUNCTION valuation(acctId VARCHAR(32))
+ RETURNS DECIMAL(12,2)
+  BEGIN
+   /* Returns the current value of a Stock account identified by internal id */
+   DECLARE result DECIMAL(12,2);
+   DECLARE secId VARCHAR(32);
+   SELECT currencyId FROM kmmAccounts WHERE id = acctId INTO secId;
+   SELECT shareBalance(acctId) * latestPrice(secId) INTO result;
+   RETURN result;
+  END
+//
+delimiter ;
+
+
+delimiter //
+DROP PROCEDURE IF EXISTS listValues//
+CREATE
+ PROCEDURE listValues(IN parent varchar(32))
+ BEGIN
+  /* Lists the current values of all stocks subsidiary to a named Investment account. NOTE: not recursive */
+  SELECT parent AS 'Portfolio';
+  SELECT accountName, valuation(id) AS 'Value' FROM kmmAccounts where parentId = 
+    (SELECT id from kmmAccounts WHERE accountName = parent)
+   ORDER by 1;
+  SELECT SUM(valuation(id)) AS 'Total Value' FROM kmmAccounts where parentId = 
+    (SELECT id from kmmAccounts WHERE accountName = parent);
+ END
+//
+delimiter ;
