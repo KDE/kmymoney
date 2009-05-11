@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0" stdsetdef="1">
+  <author></author>
+  <comment></comment>
+  <exportmacro></exportmacro>
+  <class>KPluginDlg</class>
+  <widget class="QDialog" name="KPluginDlg">
+    <property name="geometry">
+      <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>503</width>
+        <height>285</height>
+      </rect>
+    </property>
+    <property name="windowTitle">
+      <string>PluginDlg</string>
+    </property>
+    <property name="sizeGripEnabled">
+      <bool>true</bool>
+    </property>
+    <layout class="QGridLayout">
+      <item row="0" column="0" rowspan="1" colspan="4">
+        <widget class="K3ListView" name="m_listView">
+          <property name="allColumnsShowFocus">
+            <bool>true</bool>
+          </property>
+          <property name="rootIsDecorated">
+            <bool>false</bool>
+          </property>
+          <property name="fullWidth">
+            <bool>true</bool>
+          </property>
+          <property name="shadeSortColumn">
+            <bool>false</bool>
+          </property>
+          <column>
+            <property name="text">
+              <string>PlugIn</string>
+            </property>
+            <property name="clickable">
+              <bool>true</bool>
+            </property>
+            <property name="resizable">
+              <bool>true</bool>
+            </property>
+          </column>
+          <column>
+            <property name="text">
+              <string>Status</string>
+            </property>
+            <property name="clickable">
+              <bool>true</bool>
+            </property>
+            <property name="resizable">
+              <bool>true</bool>
+            </property>
+          </column>
+          <column>
+            <property name="text">
+              <string>Feature</string>
+            </property>
+            <property name="clickable">
+              <bool>true</bool>
+            </property>
+            <property name="resizable">
+              <bool>true</bool>
+            </property>
+          </column>
+        </widget>
+      </item>
+      <item row="1" column="0">
+        <spacer name="spacer2">
+          <property name="sizeHint">
+            <size>
+              <width>180</width>
+              <height>20</height>
+            </size>
+          </property>
+          <property name="sizeType">
+            <enum>QSizePolicy::Expanding</enum>
+          </property>
+          <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+          </property>
+        </spacer>
+      </item>
+      <item row="1" column="1">
+        <widget class="KPushButton" name="buttonOk">
+          <property name="text">
+            <string>&amp;OK</string>
+          </property>
+          <property name="autoDefault">
+            <bool>true</bool>
+          </property>
+          <property name="default">
+            <bool>true</bool>
+          </property>
+          <property name="stdItem" stdset="0">
+            <number>1</number>
+          </property>
+        </widget>
+      </item>
+      <item row="1" column="2">
+        <widget class="KPushButton" name="buttonCancel">
+          <property name="text">
+            <string>&amp;Cancel</string>
+          </property>
+          <property name="stdItem" stdset="0">
+            <number>2</number>
+          </property>
+        </widget>
+      </item>
+      <item row="1" column="3">
+        <widget class="KPushButton" name="closeButton">
+          <property name="text">
+            <string>&amp;Close</string>
+          </property>
+          <property name="stdItem" stdset="0">
+            <number>13</number>
+          </property>
+        </widget>
+      </item>
+    </layout>
+  </widget>
+  <layoutdefault spacing="6" margin="11"/>
+  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
+  <customwidgets>
+    <customwidget>
+      <class>K3ListView</class>
+      <extends>Q3ListView</extends>
+      <header location="global">k3listview.h</header>
+    </customwidget>
+  </customwidgets>
+  <connections>
+    <connection>
+      <sender>closeButton</sender>
+      <signal>clicked()</signal>
+      <receiver>KPluginDlg</receiver>
+      <slot>reject()</slot>
+    </connection>
+    <connection>
+      <sender>buttonOk</sender>
+      <signal>clicked()</signal>
+      <receiver>KPluginDlg</receiver>
+      <slot>accept()</slot>
+    </connection>
+    <connection>
+      <sender>buttonCancel</sender>
+      <signal>clicked()</signal>
+      <receiver>KPluginDlg</receiver>
+      <slot>reject()</slot>
+    </connection>
+  </connections>
+</ui>

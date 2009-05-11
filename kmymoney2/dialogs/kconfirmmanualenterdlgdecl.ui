@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0" stdsetdef="1">
+  <author></author>
+  <comment></comment>
+  <exportmacro></exportmacro>
+  <class>KConfirmManualEnterDlgDecl</class>
+  <widget class="QDialog" name="KConfirmManualEnterDlgDecl">
+    <property name="geometry">
+      <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>578</width>
+        <height>384</height>
+      </rect>
+    </property>
+    <property name="windowTitle">
+      <string>Confirm Manual Enter</string>
+    </property>
+    <property name="sizeGripEnabled">
+      <bool>true</bool>
+    </property>
+    <layout class="QVBoxLayout">
+      <property name="margin">
+        <number>11</number>
+      </property>
+      <property name="spacing">
+        <number>6</number>
+      </property>
+      <item>
+        <widget class="QLabel" name="m_message">
+          <property name="text">
+            <string>The following changes have been made to the transaction data:</string>
+          </property>
+          <property name="textFormat">
+            <enum>Qt::RichText</enum>
+          </property>
+          <property name="wordWrap">
+            <bool>false</bool>
+          </property>
+        </widget>
+      </item>
+      <item>
+        <widget class="KTextEdit" name="m_details">
+          <property name="readOnly">
+            <bool>true</bool>
+          </property>
+        </widget>
+      </item>
+      <item>
+        <widget class="Q3ButtonGroup" name="buttonGroup1">
+          <property name="font">
+            <font/>
+          </property>
+          <property name="title">
+            <string>Please choose what you wish to do with the above changes</string>
+          </property>
+          <property name="selectedId" stdset="0">
+            <number>1</number>
+          </property>
+          <layout class="QVBoxLayout">
+            <item>
+              <widget class="QRadioButton" name="m_discardRadio">
+                <property name="text">
+                  <string>Discard the changes and enter the original transaction into the register.</string>
+                </property>
+              </widget>
+            </item>
+            <item>
+              <widget class="QRadioButton" name="m_onceRadio">
+                <property name="text">
+                  <string>Enter these new values this one time, for this occurence only.</string>
+                </property>
+              </widget>
+            </item>
+            <item>
+              <widget class="QRadioButton" name="m_setRadio">
+                <property name="text">
+                  <string>Set all further occurences in this schedule to be these values.</string>
+                </property>
+              </widget>
+            </item>
+          </layout>
+        </widget>
+      </item>
+      <item>
+        <layout class="QHBoxLayout">
+          <item>
+            <spacer name="Horizontal Spacing2">
+              <property name="sizeHint">
+                <size>
+                  <width>180</width>
+                  <height>16</height>
+                </size>
+              </property>
+              <property name="sizeType">
+                <enum>QSizePolicy::Expanding</enum>
+              </property>
+              <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+              </property>
+            </spacer>
+          </item>
+          <item>
+            <widget class="KPushButton" name="buttonOk">
+              <property name="text">
+                <string>OK</string>
+              </property>
+              <property name="autoDefault">
+                <bool>true</bool>
+              </property>
+              <property name="default">
+                <bool>true</bool>
+              </property>
+            </widget>
+          </item>
+          <item>
+            <widget class="KPushButton" name="buttonCancel">
+              <property name="text">
+                <string>Cancel</string>
+              </property>
+            </widget>
+          </item>
+        </layout>
+      </item>
+    </layout>
+  </widget>
+  <layoutdefault spacing="6" margin="11"/>
+  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
+  <connections>
+    <connection>
+      <sender>buttonOk</sender>
+      <signal>clicked()</signal>
+      <receiver>KConfirmManualEnterDlgDecl</receiver>
+      <slot>accept()</slot>
+    </connection>
+    <connection>
+      <sender>buttonCancel</sender>
+      <signal>clicked()</signal>
+      <receiver>KConfirmManualEnterDlgDecl</receiver>
+      <slot>reject()</slot>
+    </connection>
+  </connections>
+</ui>

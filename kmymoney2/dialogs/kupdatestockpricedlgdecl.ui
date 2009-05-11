@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0" stdsetdef="1">
+  <author></author>
+  <comment></comment>
+  <exportmacro></exportmacro>
+  <class>kUpdateStockPriceDecl</class>
+  <widget class="QDialog" name="kUpdateStockPriceDecl">
+    <property name="geometry">
+      <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>457</width>
+        <height>194</height>
+      </rect>
+    </property>
+    <property name="windowTitle">
+      <string>New price entry</string>
+    </property>
+    <layout class="QVBoxLayout">
+      <item>
+        <layout class="QGridLayout">
+          <item row="2" column="1">
+            <layout class="QHBoxLayout">
+              <item>
+                <widget class="kMyMoneyDateInput" name="m_date"/>
+              </item>
+              <item>
+                <spacer name="spacer25">
+                  <property name="sizeHint">
+                    <size>
+                      <width>71</width>
+                      <height>21</height>
+                    </size>
+                  </property>
+                  <property name="sizeType">
+                    <enum>QSizePolicy::Expanding</enum>
+                  </property>
+                  <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                  </property>
+                </spacer>
+              </item>
+            </layout>
+          </item>
+          <item row="1" column="1">
+            <layout class="QHBoxLayout">
+              <item>
+                <widget class="KMyMoneySecuritySelector" name="m_currency">
+                  <property name="sizePolicy">
+                    <sizepolicy>
+                      <hsizetype>3</hsizetype>
+                      <vsizetype>1</vsizetype>
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                    </sizepolicy>
+                  </property>
+                </widget>
+              </item>
+              <item>
+                <spacer name="spacer26">
+                  <property name="sizeHint">
+                    <size>
+                      <width>40</width>
+                      <height>20</height>
+                    </size>
+                  </property>
+                  <property name="sizeType">
+                    <enum>QSizePolicy::Expanding</enum>
+                  </property>
+                  <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                  </property>
+                </spacer>
+              </item>
+            </layout>
+          </item>
+          <item row="1" column="0">
+            <widget class="QLabel" name="textLabel2">
+              <property name="text">
+                <string>Currency</string>
+              </property>
+              <property name="wordWrap">
+                <bool>false</bool>
+              </property>
+            </widget>
+          </item>
+          <item row="2" column="0">
+            <widget class="QLabel" name="lblDate">
+              <property name="text">
+                <string>Date:</string>
+              </property>
+              <property name="wordWrap">
+                <bool>false</bool>
+              </property>
+            </widget>
+          </item>
+          <item row="0" column="0">
+            <widget class="QLabel" name="textLabel1">
+              <property name="text">
+                <string>Security</string>
+              </property>
+              <property name="wordWrap">
+                <bool>false</bool>
+              </property>
+            </widget>
+          </item>
+          <item row="0" column="1">
+            <layout class="QHBoxLayout">
+              <item>
+                <widget class="KMyMoneySecuritySelector" name="m_security">
+                  <property name="sizePolicy">
+                    <sizepolicy>
+                      <hsizetype>3</hsizetype>
+                      <vsizetype>1</vsizetype>
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                    </sizepolicy>
+                  </property>
+                </widget>
+              </item>
+              <item>
+                <spacer name="spacer27">
+                  <property name="sizeHint">
+                    <size>
+                      <width>40</width>
+                      <height>20</height>
+                    </size>
+                  </property>
+                  <property name="sizeType">
+                    <enum>QSizePolicy::Expanding</enum>
+                  </property>
+                  <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                  </property>
+                </spacer>
+              </item>
+            </layout>
+          </item>
+        </layout>
+      </item>
+      <item>
+        <spacer name="spacer8">
+          <property name="sizeHint">
+            <size>
+              <width>31</width>
+              <height>40</height>
+            </size>
+          </property>
+          <property name="sizeType">
+            <enum>QSizePolicy::Expanding</enum>
+          </property>
+          <property name="orientation">
+            <enum>Qt::Vertical</enum>
+          </property>
+        </spacer>
+      </item>
+      <item>
+        <widget class="Line" name="line6">
+          <property name="frameShape">
+            <enum>QFrame::HLine</enum>
+          </property>
+          <property name="frameShadow">
+            <enum>QFrame::Sunken</enum>
+          </property>
+        </widget>
+      </item>
+      <item>
+        <layout class="QHBoxLayout">
+          <item>
+            <spacer name="spacer7">
+              <property name="sizeHint">
+                <size>
+                  <width>71</width>
+                  <height>21</height>
+                </size>
+              </property>
+              <property name="sizeType">
+                <enum>QSizePolicy::Expanding</enum>
+              </property>
+              <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+              </property>
+            </spacer>
+          </item>
+          <item>
+            <widget class="KPushButton" name="m_okButton">
+              <property name="text">
+                <string>&amp;OK</string>
+              </property>
+              <property name="autoDefault">
+                <bool>true</bool>
+              </property>
+              <property name="default">
+                <bool>true</bool>
+              </property>
+              <property name="stdItem" stdset="0">
+                <number>1</number>
+              </property>
+            </widget>
+          </item>
+          <item>
+            <widget class="KPushButton" name="m_cancelButton">
+              <property name="text">
+                <string>&amp;Cancel</string>
+              </property>
+              <property name="stdItem" stdset="0">
+                <number>2</number>
+              </property>
+            </widget>
+          </item>
+        </layout>
+      </item>
+    </layout>
+  </widget>
+  <layoutdefault spacing="6" margin="11"/>
+  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
+</ui>

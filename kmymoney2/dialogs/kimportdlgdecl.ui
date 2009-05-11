@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0" stdsetdef="1">
+  <author></author>
+  <comment></comment>
+  <exportmacro></exportmacro>
+  <class>KImportDlgDecl</class>
+  <widget class="QDialog" name="KImportDlgDecl">
+    <property name="geometry">
+      <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>619</width>
+        <height>378</height>
+      </rect>
+    </property>
+    <property name="windowTitle">
+      <string>QIF Import</string>
+    </property>
+    <property name="sizeGripEnabled">
+      <bool>true</bool>
+    </property>
+    <layout class="QVBoxLayout">
+      <property name="margin">
+        <number>11</number>
+      </property>
+      <property name="spacing">
+        <number>6</number>
+      </property>
+      <item>
+        <widget class="K3ActiveLabel" name="kActiveLabel1">
+          <property name="focusPolicy">
+            <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="resizePolicy">
+            <enum>Manual</enum>
+          </property>
+          <property name="text">
+            <string>From this dialog you are able to import transactions from a Quicken&lt;b&gt;&amp;trade;&lt;/b&gt; compatible file, (known as a QIF file, because of the extension).&lt;p&gt;
+
+Please enter the path to the QIF file or select it by clicking on the Browse button. Once you have the file's path press the Import button and KMyMoney will import all the transactions, categories and payees it finds.</string>
+          </property>
+          <property name="wordWrap">
+            <enum>WidgetWidth</enum>
+          </property>
+          <property name="autoFormatting">
+            <set>AutoAll</set>
+          </property>
+        </widget>
+      </item>
+      <item>
+        <layout class="QGridLayout">
+          <item row="0" column="0">
+            <widget class="QLabel" name="lblImportFile">
+              <property name="sizePolicy">
+                <sizepolicy>
+                  <hsizetype>0</hsizetype>
+                  <vsizetype>1</vsizetype>
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                </sizepolicy>
+              </property>
+              <property name="text">
+                <string>QIF File to Import:</string>
+              </property>
+              <property name="wordWrap">
+                <bool>false</bool>
+              </property>
+            </widget>
+          </item>
+          <item row="1" column="0" rowspan="1" colspan="3">
+            <widget class="Q3GroupBox" name="m_optionGroupBox">
+              <property name="title">
+                <string>Import options</string>
+              </property>
+              <layout class="QGridLayout">
+                <item row="1" column="1">
+                  <widget class="KComboBox" name="m_typeComboBox">
+                    <property name="whatsThis" stdset="0">
+                      <string>Select &lt;b&gt;Bank statement&lt;/b&gt; turns on automatic category matching which is turned off in case of &lt;b&gt;Historic data&lt;/b&gt;. Use the latter if you import files from other Personal Finance Management software.</string>
+                    </property>
+                    <item>
+                      <property name="text">
+                        <string>Bank statement</string>
+                      </property>
+                    </item>
+                    <item>
+                      <property name="text">
+                        <string>Other application</string>
+                      </property>
+                    </item>
+                  </widget>
+                </item>
+                <item row="1" column="0">
+                  <widget class="QLabel" name="textLabel1">
+                    <property name="text">
+                      <string>Source of QIF</string>
+                    </property>
+                    <property name="wordWrap">
+                      <bool>false</bool>
+                    </property>
+                  </widget>
+                </item>
+                <item row="0" column="0">
+                  <widget class="QLabel" name="TextLabel3_2">
+                    <property name="text">
+                      <string>QIF Profile</string>
+                    </property>
+                    <property name="wordWrap">
+                      <bool>false</bool>
+                    </property>
+                  </widget>
+                </item>
+                <item row="0" column="1">
+                  <widget class="KComboBox" name="m_profileComboBox">
+                    <property name="sizePolicy">
+                      <sizepolicy>
+                        <hsizetype>3</hsizetype>
+                        <vsizetype>0</vsizetype>
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                      </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                      <size>
+                        <width>200</width>
+                        <height>0</height>
+                      </size>
+                    </property>
+                    <property name="duplicatesEnabled">
+                      <bool>false</bool>
+                    </property>
+                  </widget>
+                </item>
+                <item row="0" column="2">
+                  <widget class="KPushButton" name="m_profileEditorButton">
+                    <property name="text">
+                      <string>New...</string>
+                    </property>
+                  </widget>
+                </item>
+              </layout>
+            </widget>
+          </item>
+          <item row="0" column="2">
+            <widget class="KPushButton" name="m_qbuttonBrowse">
+              <property name="text">
+                <string>Browse...</string>
+              </property>
+            </widget>
+          </item>
+          <item row="0" column="1">
+            <widget class="QLineEdit" name="m_qlineeditFile"/>
+          </item>
+        </layout>
+      </item>
+      <item>
+        <widget class="Line" name="Line1">
+          <property name="frameShape">
+            <enum>QFrame::HLine</enum>
+          </property>
+          <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+          </property>
+        </widget>
+      </item>
+      <item>
+        <layout class="QHBoxLayout">
+          <property name="margin">
+            <number>0</number>
+          </property>
+          <property name="spacing">
+            <number>6</number>
+          </property>
+          <item>
+            <spacer name="Spacer1">
+              <property name="sizeHint">
+                <size>
+                  <width>411</width>
+                  <height>0</height>
+                </size>
+              </property>
+              <property name="sizeType">
+                <enum>QSizePolicy::Expanding</enum>
+              </property>
+              <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+              </property>
+            </spacer>
+          </item>
+          <item>
+            <widget class="KPushButton" name="m_qbuttonOk">
+              <property name="text">
+                <string>Import</string>
+              </property>
+              <property name="autoDefault">
+                <bool>true</bool>
+              </property>
+              <property name="default">
+                <bool>true</bool>
+              </property>
+            </widget>
+          </item>
+          <item>
+            <widget class="KPushButton" name="m_qbuttonCancel">
+              <property name="text">
+                <string>Cancel</string>
+              </property>
+              <property name="autoDefault">
+                <bool>true</bool>
+              </property>
+            </widget>
+          </item>
+        </layout>
+      </item>
+    </layout>
+  </widget>
+  <layoutdefault spacing="6" margin="11"/>
+  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
+  <customwidgets>
+    <customwidget>
+      <class>KComboBox</class>
+      <extends>QComboBox</extends>
+      <header location="global">kcombobox.h</header>
+    </customwidget>
+  </customwidgets>
+</ui>

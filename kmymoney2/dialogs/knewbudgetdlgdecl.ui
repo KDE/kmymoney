@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0" stdsetdef="1">
+  <author></author>
+  <comment></comment>
+  <exportmacro></exportmacro>
+  <class>KNewBudgetDlgDecl</class>
+  <widget class="QDialog" name="KNewBudgetDlgDecl">
+    <property name="geometry">
+      <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>283</width>
+        <height>116</height>
+      </rect>
+    </property>
+    <property name="windowTitle">
+      <string>New Budget</string>
+    </property>
+    <property name="modal">
+      <bool>true</bool>
+    </property>
+    <layout class="QGridLayout">
+      <item row="0" column="0">
+        <layout class="QVBoxLayout">
+          <item>
+            <layout class="QHBoxLayout">
+              <item>
+                <layout class="QVBoxLayout">
+                  <item>
+                    <widget class="QLabel" name="textLabel2">
+                      <property name="text">
+                        <string>Name</string>
+                      </property>
+                      <property name="wordWrap">
+                        <bool>false</bool>
+                      </property>
+                    </widget>
+                  </item>
+                  <item>
+                    <widget class="QLabel" name="textLabel1">
+                      <property name="text">
+                        <string>Year</string>
+                      </property>
+                      <property name="wordWrap">
+                        <bool>false</bool>
+                      </property>
+                    </widget>
+                  </item>
+                </layout>
+              </item>
+              <item>
+                <layout class="QVBoxLayout">
+                  <item>
+                    <widget class="QLineEdit" name="m_leBudgetName"/>
+                  </item>
+                  <item>
+                    <widget class="QComboBox" name="m_cbYear">
+                      <property name="sizePolicy">
+                        <sizepolicy>
+                          <hsizetype>7</hsizetype>
+                          <vsizetype>0</vsizetype>
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                        </sizepolicy>
+                      </property>
+                      <property name="currentIndex">
+                        <number>0</number>
+                      </property>
+                    </widget>
+                  </item>
+                </layout>
+              </item>
+            </layout>
+          </item>
+          <item>
+            <layout class="QHBoxLayout">
+              <item>
+                <widget class="KPushButton" name="m_pbOk">
+                  <property name="sizePolicy">
+                    <sizepolicy>
+                      <hsizetype>5</hsizetype>
+                      <vsizetype>5</vsizetype>
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                    </sizepolicy>
+                  </property>
+                  <property name="text">
+                    <string>OK</string>
+                  </property>
+                </widget>
+              </item>
+              <item>
+                <widget class="KPushButton" name="m_pbCancel">
+                  <property name="sizePolicy">
+                    <sizepolicy>
+                      <hsizetype>5</hsizetype>
+                      <vsizetype>5</vsizetype>
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                    </sizepolicy>
+                  </property>
+                  <property name="text">
+                    <string>Cancel</string>
+                  </property>
+                </widget>
+              </item>
+            </layout>
+          </item>
+        </layout>
+      </item>
+    </layout>
+  </widget>
+  <layoutdefault spacing="6" margin="11"/>
+  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
+  <connections>
+    <connection>
+      <sender>m_pbOk</sender>
+      <signal>clicked()</signal>
+      <receiver>KNewBudgetDlgDecl</receiver>
+      <slot>m_pbOk_clicked()</slot>
+    </connection>
+    <connection>
+      <sender>m_pbCancel</sender>
+      <signal>clicked()</signal>
+      <receiver>KNewBudgetDlgDecl</receiver>
+      <slot>m_pbCancel_clicked()</slot>
+    </connection>
+  </connections>
+</ui>

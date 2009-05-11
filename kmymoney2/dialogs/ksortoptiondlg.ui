@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0" stdsetdef="1">
+  <author></author>
+  <comment></comment>
+  <exportmacro></exportmacro>
+  <class>KSortOptionDlg</class>
+  <widget class="QDialog" name="KSortOptionDlg">
+    <property name="geometry">
+      <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>511</width>
+        <height>348</height>
+      </rect>
+    </property>
+    <property name="windowTitle">
+      <string>Sort options</string>
+    </property>
+    <property name="sizeGripEnabled">
+      <bool>true</bool>
+    </property>
+    <layout class="QVBoxLayout">
+      <item>
+        <widget class="QCheckBox" name="m_useDefault">
+          <property name="text">
+            <string>Use default</string>
+          </property>
+        </widget>
+      </item>
+      <item>
+        <widget class="TransactionSortOption" name="m_sortOption"/>
+      </item>
+      <item>
+        <layout class="QHBoxLayout">
+          <item>
+            <widget class="KPushButton" name="m_helpButton">
+              <property name="text">
+                <string>Help</string>
+              </property>
+            </widget>
+          </item>
+          <item>
+            <spacer name="Horizontal Spacing2">
+              <property name="sizeHint">
+                <size>
+                  <width>237</width>
+                  <height>20</height>
+                </size>
+              </property>
+              <property name="sizeType">
+                <enum>QSizePolicy::Expanding</enum>
+              </property>
+              <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+              </property>
+            </spacer>
+          </item>
+          <item>
+            <widget class="KPushButton" name="m_okButton">
+              <property name="text">
+                <string>OK</string>
+              </property>
+              <property name="autoDefault">
+                <bool>true</bool>
+              </property>
+              <property name="default">
+                <bool>true</bool>
+              </property>
+            </widget>
+          </item>
+          <item>
+            <widget class="KPushButton" name="m_cancelButton">
+              <property name="text">
+                <string>Cancel</string>
+              </property>
+            </widget>
+          </item>
+        </layout>
+      </item>
+    </layout>
+  </widget>
+  <layoutdefault spacing="6" margin="11"/>
+  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
+  <connections>
+    <connection>
+      <sender>m_okButton</sender>
+      <signal>clicked()</signal>
+      <receiver>KSortOptionDlg</receiver>
+      <slot>accept()</slot>
+    </connection>
+    <connection>
+      <sender>m_cancelButton</sender>
+      <signal>clicked()</signal>
+      <receiver>KSortOptionDlg</receiver>
+      <slot>reject()</slot>
+    </connection>
+    <connection>
+      <sender>m_useDefault</sender>
+      <signal>toggled(bool)</signal>
+      <receiver>m_sortOption</receiver>
+      <slot>setDisabled(bool)</slot>
+    </connection>
+  </connections>
+</ui>
