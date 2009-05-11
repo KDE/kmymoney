@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0" stdsetdef="1">
+  <author></author>
+  <comment></comment>
+  <exportmacro></exportmacro>
+  <class>KPreferencePageDecl</class>
+  <widget class="QWidget" name="KPreferencePageDecl">
+    <property name="geometry">
+      <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>600</width>
+        <height>288</height>
+      </rect>
+    </property>
+    <layout class="QVBoxLayout">
+      <item>
+        <widget class="K3ActiveLabel" name="kActiveLabel1">
+          <property name="focusPolicy">
+            <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="text">
+            <string>If you would like to review or change any preference settings for KMyMoney at this time, you can do so here. If not just click &lt;b&gt;Next&lt;/b&gt;.</string>
+          </property>
+        </widget>
+      </item>
+      <item>
+        <layout class="QHBoxLayout">
+          <item>
+            <spacer name="spacer1">
+              <property name="sizeHint">
+                <size>
+                  <width>51</width>
+                  <height>20</height>
+                </size>
+              </property>
+              <property name="sizeType">
+                <enum>QSizePolicy::Expanding</enum>
+              </property>
+              <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+              </property>
+            </spacer>
+          </item>
+          <item>
+            <widget class="KPushButton" name="m_openConfigButton">
+              <property name="text">
+                <string>Configure preferences now</string>
+              </property>
+            </widget>
+          </item>
+        </layout>
+      </item>
+      <item>
+        <spacer name="spacer2">
+          <property name="sizeHint">
+            <size>
+              <width>20</width>
+              <height>31</height>
+            </size>
+          </property>
+          <property name="sizeType">
+            <enum>QSizePolicy::Expanding</enum>
+          </property>
+          <property name="orientation">
+            <enum>Qt::Vertical</enum>
+          </property>
+        </spacer>
+      </item>
+      <item>
+        <widget class="K3ActiveLabel" name="kActiveLabel2">
+          <property name="focusPolicy">
+            <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="text">
+            <string>You can change the configuration options at any time using the configuration dialog. Just select the &lt;b&gt;Configure KMyMoney...&lt;/b&gt; option in the &lt;b&gt;Settings&lt;/b&gt; menu.</string>
+          </property>
+        </widget>
+      </item>
+    </layout>
+  </widget>
+  <layoutdefault spacing="6" margin="11"/>
+  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
+</ui>
