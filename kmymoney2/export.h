@@ -1,6 +1,5 @@
-/*
-    This file is part of kmymoney2 project
-    Copyright (c) 2005 Laurent Montel <montel@kde.org>
+/*  This file is part of the KDE project
+    Copyright (C) 2007 David Faure <faure@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -14,24 +13,28 @@
 
     You should have received a copy of the GNU Library General Public License
     along with this library; see the file COPYING.LIB.  If not, write to
-    the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-    Boston, MA 02111-1307, USA.
+    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+    Boston, MA 02110-1301, USA.
 */
 
-#ifndef _KMYMONEY_EXPORT_H
-#define _KMYMONEY_EXPORT_H
+#ifndef EXPORT_H
+#define EXPORT_H
 
-#include <kdeversion.h>
+/* needed for KDE_EXPORT and KDE_IMPORT macros */
+#include <kdemacros.h>
 
-#if KDE_IS_VERSION(3,2,90)
-  #ifdef __KDE_HAVE_GCC_VISIBILITY
-    #include <kdemacros.h>
-    #define KMYMONEY_EXPORT KDE_EXPORT
-  #else
-    #define KMYMONEY_EXPORT
-  #endif
-#else
-  #define KMYMONEY_EXPORT
+#ifndef KMYMONEY_EXPORT
+# if defined(MAKE_KMYMONEY_LIB)
+   /* We are building this library */ 
+#  define KMYMONEY_EXPORT KDE_EXPORT
+# else
+   /* We are using this library */ 
+#  define KMYMONEY_EXPORT KDE_IMPORT
+# endif
 #endif
-#endif /* _KMYMONEY_EXPORT_H */
 
+# ifndef KMYMONEY_EXPORT_DEPRECATED
+#  define KMYMONEY_EXPORT_DEPRECATED KDE_DEPRECATED KMYMONEY_EXPORT
+# endif
+
+#endif
