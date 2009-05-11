@@ -1,0 +1,50 @@
+KMyMoney README.ofx
+Author: Ace Jones <acejones@users.sf.net>
+Date  : Jan 19 2006
+
+This README covers how to compile with OFX support.
+
+-----------------------------------------------------------------------------
+OFX Plugin
+-----------------------------------------------------------------------------
+
+Building the OFX Plugin allows you to import OFX files from your bank.  For
+more information on using the feature, see the "OFX Import" section of the
+user manual.
+
+To build it:
+
+1. Get the required version of libofx.  For CVS version of KMM, get at least
+version 0.9.0 of libofx.  Please ensure you have at least this version
+before requesting support for any problem building with OFX.
+
+For released versions of KMM, the configure script will tell you which version
+is needed if it cannot find the right one.
+
+2. Ensure you have pkg-config installed, and that your PKG_CONFIG_PATH includes
+the location of libofx.pc.
+
+3. Add --enable-ofxplugin to the options you pass to the configure script.
+
+-----------------------------------------------------------------------------
+OFX Direct Connect
+-----------------------------------------------------------------------------
+
+OFX Direct Connect enables you to contact your bank directly from within
+KMyMoney to download your statements.  Many US banks support this protocol,
+but not all.  For information on how to set up your accounts and connect to
+your bank, please see the "Direct Connect" section in the "OFX Import"
+section of the user's manual.
+
+1. Build and install the correct version of libofx.  For CVS version of KMM, 
+get the latest CVS version of libofx.  Please ensure you have the absolute 
+latest version before requesting support for any problem building with OFX.
+
+For released versions of KMM, the configure script will tell you which version
+is needed if it cannot find the right one.
+
+2. Ensure you have pkg-config installed, and that your PKG_CONFIG_PATH includes
+the location of libofx.pc.
+
+3. Add --enable-ofxbanking to the options you pass to the configure script.
+
