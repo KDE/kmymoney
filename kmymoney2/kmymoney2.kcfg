@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE kcfg SYSTEM "http://www.kde.org/standards/kcfg/1.0/kcfg.dtd">
+<kcfg>
+ <kcfgfile name="kmymoney2rc" />
+ <group name="General Options">
+  <entry name="AlwaysShowNrField" type="Bool">
+   <label>Always show a No. field in transaction form</label>
+   <default>false</default>
+  </entry>
+  <entry name="AutoFillTransaction" type="Int">
+   <label>Auto fill with previous transaction data</label>
+   <default>1</default>
+  </entry>
+  <entry name="AutoFillDifference" type="Int">
+    <label>Treat two transactions as identical, if amount differs less than</label>
+    <default>10</default>
+  </entry>
+  <entry name="AutoIncCheckNumber" type="Bool">
+   <label>Auto increment check number</label>
+   <default>true</default>
+  </entry>
+  <entry name="AutoSaveFile" type="Bool">
+   <label>Autosave file periodically</label>
+   <default>false</default>
+  </entry>
+  <entry name="AutoSavePeriod" type="Int">
+   <label>Autosave interval in minutes</label>
+   <default>10</default>
+   <min>0</min>
+   <max>60</max>
+  </entry>
+  <entry name="CheckSchedule" type="Bool">
+   <label>Check schedules upon startup</label>
+   <default>false</default>
+  </entry>
+  <entry name="CheckSchedulePreview" type="Int">
+   <label>Enter transactions this number of days in advance</label>
+   <default>0</default>
+   <min>0</min>
+   <max>999</max>
+  </entry>
+  <entry name="SchedulePreview" type="Int">
+   <label>Number of days to preview schedules in ledger</label>
+   <default>0</default>
+   <min>0</min>
+   <max>999</max>
+  </entry>
+  <entry name="CopyTypeToNr" type="Bool">
+   <label>Insert transaction type into No. field for new transactions</label>
+   <default>false</default>
+  </entry>
+  <entry name="FocusChangeIsEnter" type="Bool">
+   <label>Keep changes when selecting a different transaction/split</label>
+   <default>false</default>
+  </entry>
+  <entry name="EnterMovesBetweenFields" type="Bool">
+   <label>Using the Enter key moves between the fields</label>
+   <default>false</default>
+  </entry>
+  <entry name="LedgerLens" type="Bool">
+   <label>Use the ledger lens</label>
+   <default>false</default>
+  </entry>
+  <entry name="PricePrecision" type="Int">
+   <label>Price Precision</label>
+   <default>4</default>
+   <min>4</min>
+   <max>10</max>
+  </entry>
+  <entry name="PriceHistoryUpdate" type="Bool">
+   <label>Update price history</label>
+   <default>true</default>
+  </entry>
+  <entry name="TransactionForm" type="Bool">
+   <label>Show transaction form</label>
+   <default>true</default>
+  </entry>
+  <entry name="StartLastViewSelected" type="Int">
+   <label>Start with last selected view or homepage</label>
+   <default>0</default>
+  </entry>
+  <entry name="WriteDataEncrypted" type="Bool">
+   <label>Use GPG to encrypt data file</label>
+   <default>false</default>
+  </entry>
+  <entry name="EncryptRecover" type="Bool">
+   <label>Also encrypt against recover key</label>
+   <default>false</default>
+  </entry>
+  <entry name="GpgRecipient" type="String">
+   <label>GPG User ID (deprecated)</label>
+  </entry>
+  <entry name="GpgRecipientList" type="StringList">
+   <label>GPG User ID</label>
+  </entry>
+  <entry name="ExpertMode" type="Bool">
+   <label>Run in expert (accountant) mode</label>
+   <default>false</default>
+  </entry>
+  <entry name="ShowSplash" type="Bool">
+   <label>Show splash screen during startup</label>
+   <default>true</default>
+  </entry>
+  <entry name="syncLedgerInvestment" type="Bool">
+   <label>Synchronize account in ledger and investment view</label>
+   <default>true</default>
+  </entry>
+  <entry name="iconSize" type="Int">
+   <label>Icon size for view selection</label>
+   <default>2</default>
+  </entry>
+  <entry name="hiddenViews" type="String">
+   <label>list of hidden views</label>
+   <default/>
+  </entry>
+  <entry name="firstTimeRun" type="Bool">
+   <label>Firsttime switch to start new user wizard</label>
+   <default>true</default>
+  </entry>
+  <entry name="showTitleBar" type="Bool">
+   <label>Show title bar on each view</label>
+   <default>true</default>
+  </entry>
+  <entry name="stringMatchFromStart" type="Bool">
+   <label>Start string matches for e.g. payees at start of string</label>
+   <default>false</default>
+  </entry>
+ </group>
+ <group name="Homepage Options">
+  <entry name="ItemList" type="String">
+  <label>Order of items on homepage</label>
+  <default>8,1,2,3,4,5,6,7,-9,10</default>
+  </entry>
+  <entry name="FontSizePercentage" type="Int">
+   <label>Percentage of default font size used for home view HTML page</label>
+   <default>100</default>
+  </entry>
+  <entry name="RememberFontSize" type="Bool">
+   <label>Remember (manually adjusted) font size in home view on program end.</label>
+   <default>true</default>
+  </entry>
+  <entry name="ShowLimitInfo" type="Bool">
+   <label>Show account limit information on the Homepage</label>
+   <default>true</default>
+  </entry>
+ </group>
+ <group name="Investment Settings">
+ </group>
+ <group name="List Options">
+  <entry name="HideUnusedCategory" type="Bool">
+   <label>Hide unused categories</label>
+   <default>false</default>
+  </entry>
+  <entry name="HideClosedAccounts" type="Bool">
+   <label>Hide closed accounts</label>
+   <default>false</default>
+  </entry>
+  <entry name="HideFinishedSchedules" type="Bool">
+   <label>Hide finished schedules</label>
+   <default>false</default>
+  </entry>
+  <entry name="HideReconciledTransactions" type="Bool">
+   <label>Hide reconciled transactions</label>
+   <default>false</default>
+  </entry>
+  <entry name="ShowRegisterDetailed" type="Bool">
+   <label>Show all register entries in full detail</label>
+   <default>false</default>
+  </entry>
+  <entry name="ShowGrid" type="Bool">
+   <label>Show a grid in the register</label>
+   <default>true</default>
+  </entry>
+  <entry name="ShowFancyMarker" type="Bool">
+   <label>Show fancy group markers</label>
+   <default>true</default>
+  </entry>
+  <entry name="ShowFiscalMarker" type="Bool">
+   <label>Show fancy markers for previous and current fiscal year</label>
+   <default>true</default>
+  </entry>
+  <entry name="FiscalYearBegin" type="Int">
+   <label>Starting month of the fiscal year</label>
+   <default>0</default>
+   <min>0</min>
+   <max>11</max>
+  </entry>
+  <entry name="FiscalYearBeginDay" type="Int">
+   <label>Starting day of the fiscal year</label>
+   <default>1</default>
+   <min>1</min>
+   <max>28</max>
+  </entry>
+  <entry name="StartDate" type="DateTime">
+   <label>Start date</label>
+   <default>QDateTime::fromString("1900-01-01T00:00:00", Qt::ISODate)</default>
+  </entry>
+  <entry name="useSystemColors" type="Bool">
+   <label>Use system colors</label>
+   <default>false</default>
+  </entry>
+  <entry name="listColor" type="Color">
+   <label>List color</label>
+   <default>240,240,240</default>
+  </entry>
+  <entry name="listBGColor" type="Color">
+   <label>List background color</label>
+   <default>255,255,255</default>
+  </entry>
+  <entry name="listGridColor" type="Color">
+   <label>List grid color</label>
+   <default>154,154,154</default>
+  </entry>
+  <entry name="importedTransactionColor" type="Color">
+   <label>Background color for imported transactions</label>
+   <default>255,255,0</default>
+  </entry>
+  <entry name="matchedTransactionColor" type="Color">
+   <label>Background color for matched transactions</label>
+   <default>152,251,152</default>
+  </entry>
+  <entry name="listErronousTransactionColor" type="Color">
+   <label>List color for erronous transactions</label>
+   <default>255,0,0</default>
+  </entry>
+  <entry name="listMissingConversionRate" type="Color">
+   <label>List color for missing conversion rate</label>
+   <default>0,0,255</default>
+  </entry>
+  <entry name="listNegativeValueColor" type="Color">
+   <label>List color for negative values</label>
+   <default>255,0,0</default>
+  </entry>
+  <entry name="groupMarkerColor" type="Color">
+   <label>Background color for group marker</label>
+   <default>255,242,155</default> 
+  </entry>
+  <entry name="requiredFieldColor" type="Color">
+   <label>Background color for required fields</label>
+   <default>255,255,221</default> 
+  </entry>
+  <entry name="useSystemFont" type="Bool">
+   <label>Use system font</label>
+   <default>false</default>
+  </entry>
+  <entry name="listCellFont" type="Font">
+   <label>Cell font</label>
+  </entry>
+  <entry name="listHeaderFont" type="Font">
+   <label>Header font</label>
+  </entry>
+  <entry name="sortNormalView" type="String">
+   <label>Sort order of register in normal view</label>
+   <default>1,-9,-4</default>
+  </entry>
+  <entry name="sortReconcileView" type="String">
+   <label>Sort order of register in normal view</label>
+   <default>1,-4</default>
+  </entry>
+  <entry name="sortSearchView" type="String">
+   <label>Sort order of register in search dialog</label>
+   <default>1,-9,-4</default>
+  </entry>
+  <entry name="defaultReconciliationState" type="Int">
+   <label>Default reconciliation state for transactions entered during reconciliation</label>
+   <default>0</default>
+  </entry>
+ </group>
+ <group name="Import options">
+  <entry name="matchInterval" type="Int">
+   <label>Number of days (plus/minus) to search for matching transactions</label>
+   <default>4</default>
+  </entry>
+  <entry name="askForPayeeCategory" type="Bool">
+   <label>During import, ask for a new payee's default category</label>
+   <default>false</default>
+  </entry>
+ </group>
+ <group name="Schedule Options">
+ </group>
+ <group name="Forecast Options">
+  <entry name="forecastMethod" type="Int">
+   <label>Method to calculate forecast</label>
+   <default>0</default>
+  </entry>
+  <entry name="forecastDays" type="Int">
+   <label>Days to forecast</label>
+   <default>90</default>
+   <min>1</min>
+   <max>999</max>
+  </entry>
+  <entry name="forecastAccountCycle" type="Int">
+   <label>Days of normal account cycle</label>
+   <default>30</default>
+   <min>1</min>
+   <max>999</max>
+  </entry>
+  <entry name="forecastCycles" type="Int">
+   <label>Number of historic cycles to use in forecast</label>
+   <default>3</default>
+   <min>1</min>
+   <max>999</max>
+  </entry>
+  <entry name="beginForecastDay" type="Int">
+   <label>Day of month to start forecast</label>
+   <default>0</default>
+   <min>0</min>
+   <max>31</max>
+  </entry>
+  <entry name="historyMethod" type="Int">
+   <label>Method to calculate history-based forecast</label>
+   <default>1</default>
+  </entry>
+  <entry name="skipOpeningDate" type="Bool">
+   <label>Skip opening date when fetching transactions</label>
+   <default>true</default>
+  </entry>
+  <entry name="includeFutureTransactions" type="Bool">
+   <label>Include future transaction when using Schedule Forecast</label>
+   <default>true</default>
+  </entry>
+  <entry name="includeScheduledTransactions" type="Bool">
+   <label>Include scheduled transactions when using Schedule Forecast</label>
+   <default>true</default>
+  </entry>
+ </group>
+ <group name="QIF Options">
+  <entry name="qifCash" type="String">
+   <label>additional names for cash account</label>
+   <default>Bar</default>
+  </entry>
+  <entry name="qifBank" type="String">
+   <label>additional names for checking account</label>
+   <default>Banca,Banque</default>
+  </entry>
+  <entry name="qifCreditCard" type="String">
+   <label>additional names for credit card account</label>
+   <default>Kreditkarte</default>
+  </entry>
+  <entry name="qifAsset" type="String">
+   <label>additional names for asset account</label>
+   <default>And. Kto.</default>
+  </entry>
+  <entry name="qifOpeningBalance" type="String">
+   <label>additional names for opening balance payee</label>
+   <default>Eröffnungssaldo</default>
+  </entry>
+  <entry name="qifInvoice" type="String">
+   <label>additional names for invoice accounts</label>
+   <default>Rechnung</default>
+  </entry>
+ </group>
+</kcfg>
+<!-- 
+  <entry name="" type="">
+   <label>...</label>
+   <default>...</default>
+  </entry>
+-->

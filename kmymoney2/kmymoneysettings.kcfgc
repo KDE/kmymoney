@@ -1,0 +1,4 @@
+File=kmymoney2.kcfg
+ClassName=KMyMoneySettings
+Singleton=true
+Mutators=true
