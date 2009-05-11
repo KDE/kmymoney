@@ -37,7 +37,6 @@
 #include <kaboutdata.h>
 #include <klocale.h>
 #include <ktip.h>
-#include <dcopclient.h>
 #include <kmessagebox.h>
 
 // ----------------------------------------------------------------------------

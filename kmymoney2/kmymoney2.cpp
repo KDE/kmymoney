@@ -71,7 +71,6 @@
 #include <kkeydialog.h>
 #include <kprogressdialog.h>
 #include <kio/netaccess.h>
-#include <dcopclient.h>
 #include <kstartupinfo.h>
 #include <kparts/componentfactory.h>
 #include <krun.h>
