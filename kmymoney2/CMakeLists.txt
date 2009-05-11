@@ -153,9 +153,10 @@ INSTALL(FILES kmymoney2ui.rc tips
 INSTALL(FILES ${_HEADERS}
   DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney
   )
-INSTALL(FILES x-kmymoney2.desktop
-  DESTINATION ${KDE4MIMEDIR}/applications
-  )
+#INSTALL(FILES x-kmymoney2.desktop
+#  DESTINATION ${KDE4MIMEDIR}/applications
+#  )
+
 INSTALL(FILES kmymoney2.desktop
   DESTINATION ${XDG_APPS_INSTALL_DIR}/kde
   )
@@ -166,9 +167,8 @@ INSTALL(FILES misc/financequote.pl
 ########## Application Icons #############
 INSTALL(DIRECTORY icons/hicolor
   DESTINATION ${DATA_INSTALL_DIR}/kmymoney2/icons
-  PATTERN "CVS" EXCLUDE
-  PATTERN ".cvsignore" EXCLUDE
   PATTERN "*Make*" EXCLUDE
+  PATTERN ".svn" EXCLUDE
   )
 INSTALL(FILES hi16-app-kmymoney2.png
   DESTINATION ${ICON_INSTALL_DIR}/hicolor/16x16/apps
