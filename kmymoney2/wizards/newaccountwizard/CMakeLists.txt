@@ -17,8 +17,6 @@ SET (libnewaccountwizard_a_UI
 KMM_ADD_UI_FILES(libnewaccountwizard_a_SOURCES ${libnewaccountwizard_a_UI}
   DEPENDS kmymoney)
 
-#KDE3_AUTOMOC(${libnewaccountwizard_a_SOURCES})
-
-KDE4_ADD_MOC_FILES(libnewaccountwizard_a_SOURCES knewaccountwizard_p.h)
+#KDE4_ADD_MOC_FILES(libnewaccountwizard_a_SOURCES knewaccountwizard_p.h)
 
 KDE4_ADD_LIBRARY(newaccountwizard STATIC ${libnewaccountwizard_a_SOURCES})
