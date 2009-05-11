@@ -17,8 +17,7 @@
  ***************************************************************************/
 
 
-# include <config.h>
-#endif
+# include <config-kmymoney.h>
 
 #include <unistd.h>
 
