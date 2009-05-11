@@ -5,7 +5,6 @@ INSTALL(DIRECTORY
   fr_CH fr_FR gl_ES hu_HU it jp nl_NL pt_BR pt_PT ro_RO ru_RU sk tr_TR
   zh_CN zh_HK zh_TW
   DESTINATION ${DATA_INSTALL_DIR}/kmymoney2/templates
-  PATTERN "CVS" EXCLUDE
-  PATTERN ".cvsignore" EXCLUDE
+  PATTERN ".svn" EXCLUDE
   PATTERN "*Make*" EXCLUDE
   )
