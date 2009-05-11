@@ -66,5 +66,5 @@ public:
 
 };
 
-}; // namespace
+} // namespace
 #endif
