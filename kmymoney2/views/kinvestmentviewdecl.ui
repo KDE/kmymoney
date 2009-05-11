@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0" stdsetdef="1">
+  <author></author>
+  <comment></comment>
+  <exportmacro></exportmacro>
+  <class>KInvestmentViewDecl</class>
+  <widget class="QWidget" name="KInvestmentViewDecl">
+    <property name="geometry">
+      <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>707</width>
+        <height>346</height>
+      </rect>
+    </property>
+    <property name="windowTitle">
+      <string>Investment Summary</string>
+    </property>
+    <layout class="QVBoxLayout">
+      <property name="margin">
+        <number>0</number>
+      </property>
+      <item>
+        <layout class="QHBoxLayout">
+          <item>
+            <widget class="QLabel" name="textLabel1">
+              <property name="text">
+                <string>Select Account:</string>
+              </property>
+              <property name="wordWrap">
+                <bool>false</bool>
+              </property>
+            </widget>
+          </item>
+          <item>
+            <widget class="KMyMoneyAccountCombo" name="m_accountComboBox"/>
+          </item>
+          <item>
+            <spacer name="spacer1">
+              <property name="sizeHint">
+                <size>
+                  <width>280</width>
+                  <height>20</height>
+                </size>
+              </property>
+              <property name="sizeType">
+                <enum>QSizePolicy::Expanding</enum>
+              </property>
+              <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+              </property>
+            </spacer>
+          </item>
+        </layout>
+      </item>
+      <item>
+        <widget class="K3ListView" name="m_table">
+          <property name="font">
+            <font/>
+          </property>
+          <property name="shadeSortColumn">
+            <bool>false</bool>
+          </property>
+          <property name="toolTip" stdset="0">
+            <string>Summary of the equities contained in this account, showing your holdings and their most recent price.</string>
+          </property>
+        </widget>
+      </item>
+    </layout>
+  </widget>
+  <layoutdefault spacing="6" margin="11"/>
+  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
+  <customwidgets>
+    <customwidget>
+      <class>K3ListView</class>
+      <extends>Q3ListView</extends>
+      <header location="global">k3listview.h</header>
+    </customwidget>
+  </customwidgets>
+</ui>

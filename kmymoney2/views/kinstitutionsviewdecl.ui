@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0" stdsetdef="1">
+  <author></author>
+  <comment></comment>
+  <exportmacro></exportmacro>
+  <class>KInstitutionsViewDecl</class>
+  <widget class="QWidget" name="KInstitutionsViewDecl">
+    <property name="geometry">
+      <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>610</width>
+        <height>378</height>
+      </rect>
+    </property>
+    <layout class="QVBoxLayout">
+      <property name="margin">
+        <number>0</number>
+      </property>
+      <item>
+        <widget class="KMyMoneyAccountTree" name="m_accountTree">
+          <property name="shadeSortColumn">
+            <bool>false</bool>
+          </property>
+        </widget>
+      </item>
+      <item>
+        <layout class="QHBoxLayout">
+          <item>
+            <spacer name="Spacer1_2">
+              <property name="sizeHint">
+                <size>
+                  <width>20</width>
+                  <height>20</height>
+                </size>
+              </property>
+              <property name="sizeType">
+                <enum>QSizePolicy::Expanding</enum>
+              </property>
+              <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+              </property>
+            </spacer>
+          </item>
+          <item>
+            <widget class="QLabel" name="m_totalProfitsLabel">
+              <property name="minimumSize">
+                <size>
+                  <width>150</width>
+                  <height>0</height>
+                </size>
+              </property>
+              <property name="text">
+                <string>Total Profits:</string>
+              </property>
+              <property name="textFormat">
+                <enum>Qt::RichText</enum>
+              </property>
+              <property name="alignment">
+                <set>Qt::AlignVCenter|Qt::AlignRight</set>
+              </property>
+              <property name="wordWrap">
+                <bool>true</bool>
+              </property>
+            </widget>
+          </item>
+        </layout>
+      </item>
+    </layout>
+  </widget>
+  <layoutdefault spacing="6" margin="11"/>
+  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
+</ui>
