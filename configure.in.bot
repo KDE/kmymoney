@@ -1,0 +1,57 @@
+echo ""
+echo ""
+echo "Configure results (user options):"
+echo "------------------------------------------"
+echo "OFX plugin:                            $enable_ofxplugin"
+
+echo ""
+
+echo "OFX direct connect:                    $enable_ofxbanking"
+
+echo ""
+
+echo "Chart support:                         yes"
+
+echo ""
+
+echo "SQLITE3 support:                       $enable_sqlite3"
+
+echo "------------------------------------------"
+echo ""
+echo ""
+echo "Configure results (developer options):"
+echo "------------------------------------------"
+if test "x$use_memory_leak_check" != "xno"; then
+	echo "Memory leak check support:             yes"
+else
+	echo "Memory leak check support:             no"
+fi
+
+echo ""
+
+if test "$enable_qtdesigner" = "yes"; then
+	echo "Qt-Designer library support:           yes"
+else
+	echo "Qt-Designer library support:           no"
+fi
+
+echo ""
+
+echo "PDF document generation:               $enable_pdfdocs"
+
+echo ""
+
+if test x$no_cppunit = x; then
+	echo "CPPUNIT support:                       yes"
+	echo "        online tests:                  "$enable_online_tests;
+elif test x$no_cppunit = xuser; then
+	echo "CPPUNIT support:                       disabled"
+else
+	echo "CPPUNIT support:                       no"
+	echo "    You are missing the CPPUNIT headers and libraries"
+	echo "    The unit test framework support won't be compiled."
+	echo "    This is not relevant for the usage of the application.";
+	echo "    Unit tests are only required by the developers.";
+fi
+
+echo "------------------------------------------"

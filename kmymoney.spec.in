@@ -1,0 +1,498 @@
+# Copyright (c) 2005-2009 oc2pus
+# This file and all modifications and additions to the pristine
+# package are under the same license as the package itself.
+#
+# Please submit bugfixes or comments to toni@links2linux.de
+
+# norootforbuild
+
+%define _prefix /opt/kde3
+%define _cvs @RPM_VERSION_SUFFIX@
+
+Name:           @RPM_NAME@
+URL:            http://kmymoney2.sourceforge.net/
+License:        GPL
+Group:			    Productivity/Office/Finance
+Summary:		    A Personal Finance Manager
+Version:        @CPACK_PACKAGE_VERSION@
+Release:        0.pm.%{_cvs}
+Source:         @CPACK_SOURCE_PACKAGE_FILE_NAME@.tar.bz2
+BuildRoot:		%{_tmppath}/%{name}-%{version}-build
+Requires:		curl >= 7.9.7
+Requires:		kdelibs3 >= 3.4
+Requires:		opensp
+Requires:		zlib
+Requires:		libsqlite3-0
+BuildRequires:	curl-devel >= 7.9.7
+BuildRequires:	gamin-devel
+BuildRequires:	kdelibs3-devel >= 3.4
+BuildRequires:	libacl-devel
+BuildRequires:	libjack-devel
+BuildRequires:	libktoblzcheck-devel >= 1.15
+BuildRequires:	libofx-devel >= 0.8.3
+BuildRequires:	libxml2-devel >= 2.0
+BuildRequires:	libxml++-devel >= 2.0
+BuildRequires:	opensp-devel
+BuildRequires:	qt3-devel >= 3.3
+BuildRequires:	update-desktop-files
+BuildRequires:	zlib-devel
+Conflicts:      @RPM_CONFLICTING@
+
+# pmbs ...
+BuildRequires:	mDNSResponder-devel
+
+%description
+KMyMoney is a personal finance manager.
+
+THIS IS AN UNOFFICIAL BUILD, with charts and libofx!
+It is based on CVS-Head from @LAST_CHANGE@.
+
+This package can be enhanced with the kmm_banking plugin.
+
+Additional note: this program is compiled and linked against the
+original SuSE-KDE packages. So if you updated your KDE, there
+could be some problems! You've be warned...
+
+Authors:
+Michael Edwardes <mte@users.sourceforge.net>
+Javier Campos Morales <javi_c@users.sourceforge.net>
+Felix Rodriguez <frodriguez@users.sourceforge.net>
+John C <thetacoturtle@users.sourceforge.net>
+Thomas Baumgart <ipwizard@users.sourceforge.net>
+
+%package devel
+Group:		Development/Libraries/C and C++
+Summary:	Include files and libraries mandatory for development
+Requires:	%{name} = %{version}
+Requires:	curl-devel >= 7.9.7
+Requires:	kdelibs3-devel >= 3.4
+Requires:	libacl-devel
+Requires:	libktoblzcheck-devel >= 1.15
+Requires:	libofx-devel >= 0.9.0
+Requires:	libxml2-devel >= 2.0
+Requires:	libxml++-devel >= 2.0
+Requires:	mDNSResponder-devel
+Requires:	opensp-devel
+Requires:	qt3-devel >= 3.3
+
+%description devel
+Include files and libraries mandatory for development.
+
+%lang_package
+
+%debug_package
+
+## Extract the tar.bz2 file
+%prep
+%setup -q -n @CPACK_SOURCE_PACKAGE_FILE_NAME@
+%{?suse_update_config:%{suse_update_config -f}}
+
+## Build it in the subdirectory build/
+%build
+mkdir build
+cd build
+cmake .. -DMAN_INSTALL_DIR=%{_mandir} -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=%{_prefix}
+
+%__make %{?jobs:-j%{jobs}}
+
+## Install it to _tmpdir
+%install
+cd build
+%makeinstall
+cd ..
+%{?suse_update_desktop_file:%{suse_update_desktop_file -n kmymoney2 Finance}}
+%find_lang kmymoney2
+
+## Post-install scripts (update_menus only used on Mandriva)
+%post
+/sbin/ldconfig
+%{?update_menus:%{update_menus}}
+
+## Post-uninstall scripts (clean_menus only used on Mandriva)
+%postun
+/sbin/ldconfig
+%{?clean_menus:%{clean_menus}}
+
+%clean
+[ "%{buildroot}" != "/" ] && [ -d %{buildroot} ] && %__rm -rf "%{buildroot}"
+
+%files
+%defattr(-,root,root)
+%doc AUTHORS COPYING ChangeLog* README* TODO
+%{_bindir}/*
+%{_libdir}/libkmm_storage.so
+%{_libdir}/libkmm_kdchart.so
+%{_libdir}/*.so.*
+%{_libdir}/kde3/libkmm_ofximport_dialogs.so
+%{_libdir}/kde3/kmm_ofximport.so
+%{_libdir}/kde3/kmm_ofximport.la
+%{_datadir}/applications/kde/kmymoney2.desktop
+%{_datadir}/apps/*
+%{_datadir}/icons/*
+%{_datadir}/mimelnk/*/*.desktop
+%{_datadir}/services/*
+%{_datadir}/servicetypes/*
+%{_datadir}/config.kcfg/kmymoney2.kcfg
+/usr/lib/qt3/plugins/sqldrivers/*.so
+%{_mandir}/man1/kmymoney2.*
+
+%files devel
+%defattr(-,root,root)
+%dir %{_includedir}/kmymoney
+%{_includedir}/kmymoney/*
+%{_libdir}/*.so
+
+%files lang -f kmymoney2.lang
+
+%changelog
+* Thu Feb 19 2009 Holger <yllohy@googlemail.com> 0.9.2-0.pm.cvs
+- added dependency to libsqlite3-0 and file libqsqlite3.so
+- date suffix cvsYYYYMMDD is now set by CMake
+* Sun Feb 08 2009 Holger <yllohy@googlemail.com> 0.9.2-0.pm.cvs20090211
+- updated to 0.9.2 (cvs20090211)
+- switched to the CMake build system
+* Wed Dec 31 2008 Toni Graffy <toni@links2linux.de> - 0.9.2-0.pm.cvs20081231
+- updated to 0.9.2 (cvs20081231)
+- added lang-subpackage
+* Sat Sep 13 2008 Toni Graffy <toni@links2linux.de> - 0.9.2-0.pm.cvs20080913
+- updated to 0.9.2 (cvs20080913)
+* Sat Aug 23 2008 Toni Graffy <toni@links2linux.de> - 0.9.1-0.pm.cvs20080823
+- updated to 0.9.1 (cvs20080823)
+* Sun Aug 17 2008 Toni Graffy <toni@links2linux.de> - 0.9.1-0.pm.cvs20080817
+- updated to 0.9.1 (cvs20080817)
+* Sun Jul 27 2008 Toni Graffy <toni@links2linux.de> - 0.9.1-0.pm.cvs20080727
+- updated to 0.9.1 (cvs20080727)
+* Sun Jun 08 2008 Toni Graffy <toni@links2linux.de> - 0.9.1-0.pm.cvs20080608
+- updated to 0.9.1 (cvs20080608)
+* Sun May 25 2008 Toni Graffy <toni@links2linux.de> - 0.9.1-0.pm.cvs20080525
+- updated to 0.9.1 (cvs20080525)
+* Fri May 23 2008 Toni Graffy <toni@links2linux.de> - 0.9.1-0.pm.cvs20080523
+- updated to 0.9.1 (cvs20080523)
+* Wed May 14 2008 Toni Graffy <toni@links2linux.de> - 0.9.1-0.pm.cvs20080514
+- updated to 0.9.1 (cvs20080514)
+* Sun May 04 2008 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20080504
+- updated to 0.9 (cvs20080504)
+* Tue Apr 29 2008 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20080429
+- updated to 0.9 (cvs20080429)
+* Sat Apr 19 2008 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20080419
+- updated to 0.9 (cvs20080419)
+* Thu Apr 10 2008 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20080410
+- updated to 0.9 (cvs20080410)
+* Fri Apr 04 2008 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20080403
+- updated to 0.9 (cvs20080403)
+- dropped dependency to koffice-* (kdchart is included in kmymoney)
+* Tue Apr 01 2008 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20080401
+- updated to 0.9 (cvs20080401)
+* Sun Mar 16 2008 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20080316
+- updated to 0.9 (cvs20080316)
+* Sat Mar 01 2008 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20080301
+- updated to 0.9 (cvs20080301)
+* Fri Feb 15 2008 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20080215
+- updated to 0.9 (cvs20080215)
+* Tue Jan 29 2008 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20080129
+- updated to 0.9 (cvs20080129)
+- libofx-0.9.0, libktoblzcheck1-1.16
+* Fri Jan 18 2008 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20080118
+- updated to 0.9 (cvs20080118)
+- libofx-0.9.0, libktoblzcheck1-1.16
+* Thu Jan 03 2008 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20080103
+- updated to 0.9 (cvs20080103)
+- moved kmm_ofximport.la  from devel to regular package
+- libofx-0.9.0, libktoblzcheck1-1.16
+* Mon Dec 31 2007 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20071231
+- updated to 0.9 (cvs20071231)
+- libofx-0.9.0, libktoblzcheck1-1.16
+* Sun Dec 30 2007 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20071230
+- updated to 0.9 (cvs20071230)
+- libofx-0.9.0 is now mandatory for kmymoney
+- libofx-0.9.0, libktoblzcheck1-1.16
+* Tue Dec 25 2007 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20071224
+- updated to 0.9 (cvs20071224)
+- libofx-0.8.3, libktoblzcheck1-1.16
+* Sun Dec 23 2007 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20071223
+- updated to 0.9 (cvs20071223)
+- libofx-0.8.3, libktoblzcheck1-1.16
+* Wed Dec 19 2007 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20071219
+- updated to 0.9 (cvs20071219)
+- libofx-0.8.3, libktoblzcheck1-1.16
+* Mon Dec 17 2007 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20071217
+- updated to 0.9 (cvs20071217)
+- libofx-0.8.3, libktoblzcheck1-1.16
+* Sun Dec 09 2007 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20071211
+- updated to 0.9 (cvs20071211)
+- libofx-0.8.3, aqbanking-*-2.3.3, gwenhywfar-*-2.6.2, libktoblzcheck1-1.16
+- added sub-package kmymoney-devel
+- removed KBanking plugin and deps to aqbanking framework
+* Tue Dec 04 2007 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20071204
+- updated to 0.9 (cvs20071204)
+- libofx-0.8.3, aqbanking-*-2.3.3, gwenhywfar-*-2.6.2, libktoblzcheck1-1.16
+* Fri Nov 30 2007 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20071127
+- updated to 0.9 (cvs20071127)
+- libofx-0.8.3, aqbanking-*-2.3.3, gwenhywfar-*-2.6.2, libktoblzcheck1-1.16
+* Sat Nov 17 2007 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20071116
+- updated to 0.9 (cvs20071116)
+- libofx-0.8.3, aqbanking-*-2.3.3, gwenhywfar-*-2.6.2, libktoblzcheck1-1.16
+- added reversed path for pivottables for SuSE <= 1010
+* Sat Oct 27 2007 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20071027
+- updated to 0.9 (cvs20071027)
+- libofx-0.8.3, aqbanking-*-2.3.3, gwenhywfar-*-2.6.2, libktoblzcheck1-1.15
+* Fri Oct 19 2007 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20071019
+- updated to 0.9 (cvs20071019)
+- libofx-0.8.3, aqbanking-*-2.3.3, gwenhywfar-*-2.6.2, libktoblzcheck1-1.15
+* Sat Oct 13 2007 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20071013
+- updated to 0.9 (cvs20071013)
+- libofx-0.8.3, aqbanking-*-2.3.3, gwenhywfar-*-2.6.2, libktoblzcheck1-1.15
+* Sat Oct 06 2007 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20071006
+- updated to 0.9 (cvs20071006)
+- libofx-0.8.3, aqbanking-*-2.3.2, gwenhywfar-*-2.6.1, libktoblzcheck1-1.15
+* Wed Sep 26 2007 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20070925
+- updated to 0.9 (cvs20070925)
+- libofx-0.8.3, aqbanking-*-2.3.2, gwenhywfar-*-2.6.1, libktoblzcheck1-1.15
+* Fri Sep 21 2007 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20070918
+- updated to 0.9 (cvs20070918)
+- libofx-0.8.3, aqbanking-*-2.3.2, gwenhywfar-*-2.6.1, libktoblzcheck1-1.15
+* Wed Sep 05 2007 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20070905
+- updated to 0.9 (cvs20070905)
+- libofx-0.8.3, aqbanking-*-2.3.2, gwenhywfar-*-2.6.1, libktoblzcheck1-1.15
+* Thu Aug 23 2007 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20070823
+- updated to 0.9 (cvs20070823)
+- libofx-0.8.3, aqbanking-*-2.3.2, gwenhywfar-*-2.6.1, libktoblzcheck1-1.14
+* Wed Aug 15 2007 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20070815
+- updated to 0.9 (cvs20070815)
+- libofx-0.8.3, aqbanking-*-2.3.2, gwenhywfar-*-2.6.1, libktoblzcheck1-1.14
+* Sun Jul 08 2007 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20070706
+- updated to 0.9 (cvs20070706)
+- libofx-0.8.3, aqbanking-*-2.3.2, gwenhywfar-*-2.6.1, libktoblzcheck1-1.14
+* Mon Jul 02 2007 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20070702
+- updated to 0.9 (cvs20070702)
+- libofx-0.8.3, aqbanking-*-2.3.1, gwenhywfar-*-2.6.0, ktoblzcheck-1.13
+* Thu Jun 28 2007 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20070628
+- updated to 0.9 (cvs20070628)
+- libofx-0.8.3, aqbanking-*-2.3.1, gwenhywfar-*-2.6.0, ktoblzcheck-1.13
+* Wed Jun 13 2007 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20070612
+- updated to 0.9 (cvs20070612)
+- libofx-0.8.3, aqbanking-*-2.3.0, gwenhywfar-*-2.6.0, ktoblzcheck-1.13
+* Mon May 28 2007 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20070527
+- updated to 0.9 (cvs20070527)
+- libofx-0.8.3, aqbanking-*-2.2.9, gwenhywfar-*-2.5.4, ktoblzcheck-1.13
+* Thu May 03 2007 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20070502
+- updated to 0.9 (cvs20070502)
+- libofx-0.8.3, aqbanking-*-2.2.9, gwenhywfar-*-2.5.4, ktoblzcheck-1.13
+* Sun Apr 15 2007 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20070414
+- updated to 0.9 (cvs20070414)
+- libofx-0.8.3, aqbanking-*-2.2.9, gwenhywfar-*-2.5.4, ktoblzcheck-1.13
+* Sun Mar 18 2007 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20070318
+- updated to 0.9 (cvs20070318)
+- libofx-0.8.3, aqbanking-*-2.2.9, gwenhywfar-*-2.5.4, ktoblzcheck-1.13
+* Sun Mar 04 2007 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20070304
+- updated to 0.9 (cvs20070304)
+- libofx-0.8.3, aqbanking-*-2.2.8, gwenhywfar-*-2.5.4, ktoblzcheck-1.13
+* Wed Feb 07 2007 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20070207
+- updated to 0.9 (cvs20070207)
+- libofx-0.8.3, aqbanking-*-2.2.7, gwenhywfar-*-2.5.2, ktoblzcheck-1.12
+* Sun Jan 28 2007 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20070128
+- updated to 0.9 (cvs20070128)
+- libofx-0.8.3, aqbanking-*-2.2.6, gwenhywfar-*-2.5.2, ktoblzcheck-1.12
+* Fri Jan 19 2007 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20070119
+- updated to 0.9 (cvs20070119)
+- libofx-0.8.3, aqbanking-*-2.2.6, gwenhywfar-*-2.5.2, ktoblzcheck-1.12
+* Sat Jan 06 2007 Toni Graffy <toni@links2linux.de> - 0.9-0.pm.cvs20070106
+- updated to 0.9 (cvs20070106)
+- acording to kmymoney-mailinglist, this version should be named 0.9-cvsYYYYMMDD
+- patching in chroot for SuSE-10.2 is not necessary anymore
+- libofx-0.8.2, aqbanking-*-2.2.4, gwenhywfar-*-2.5.0, ktoblzcheck-1.12
+* Sat Dec 30 2006 Toni Graffy <toni@links2linux.de> - 0.8.5-99.pm.cvs20061230
+- updated to 0.8.5 (cvs20061230)
+- libofx-0.8.2, aqbanking-*-2.2.4, gwenhywfar-*-2.5.0, ktoblzcheck-1.12
+* Fri Dec 22 2006 Toni Graffy <toni@links2linux.de> - 0.8.5-99.pm.cvs20061222
+- updated to 0.8.5 (cvs20061222)
+* Sun Nov 05 2006 Toni Graffy <toni@links2linux.de> - 0.8.5-99.pm.cvs20061129
+- updated to 0.8.5 (cvs20061129)
+- libofx0.8.2-42.pm.cvs20060927, aqbanking-*-2.2.3, gwenhywfar-*-2.4.1, ktoblzcheck-1.12
+* Sun Nov 05 2006 Toni Graffy <toni@links2linux.de> - 0.8.5-99.pm.cvs20061105
+- updated to 0.8.5 (cvs20061105)
+- libofx0.8.2-42.pm.cvs20060927, aqbanking-*-2.2.3, gwenhywfar-*-2.4.1, ktoblzcheck-1.11
+* Sat Oct 28 2006 Toni Graffy <toni@links2linux.de> - 0.8.5-99.pm.cvs20061028
+- updated to 0.8.5 (cvs20061028)
+- libofx0.8.2-42.pm.cvs20060927, aqbanking-*-2.2.3, gwenhywfar-*-2.4.1, ktoblzcheck-1.11
+* Tue Oct 24 2006 Toni Graffy <toni@links2linux.de> - 0.8.5-99.pm.cvs20061024
+- updated to 0.8.5 (cvs20061024)
+- libofx0.8.2-42.pm.cvs20060927, aqbanking-*-2.2.3, gwenhywfar-*-2.4.1, ktoblzcheck-1.11
+* Tue Oct 17 2006 Toni Graffy <toni@links2linux.de> - 0.8.5-99.pm.cvs20061017
+- updated to 0.8.5 (cvs20061017)
+- libofx0.8.2-42.pm.cvs20060927, aqbanking-*-2.2.3, gwenhywfar-*-2.4.1, ktoblzcheck-1.11
+- included patches for building against koffice >= 1.5
+* Tue Oct 10 2006 Toni Graffy <toni@links2linux.de> - 0.8.5-99.pm.cvs20061010
+- updated to 0.8.5 (cvs20061010)
+- libofx0.8.2-42.pm.cvs20060927, aqbanking-*-2.2.3, gwenhywfar-*-2.4.1, ktoblzcheck-1.11
+* Wed Oct 04 2006 Toni Graffy <toni@links2linux.de> - 0.8.5-99.pm.cvs20061004
+- updated to 0.8.5 (cvs20061004)
+- libofx0.8.2-42.pm.cvs20060927, aqbanking-*-2.2.1, gwenhywfar-*-2.4.1, ktoblzcheck-1.11
+* Wed Sep 20 2006 Toni Graffy <toni@links2linux.de> - 0.8.5-99.pm.cvs20060912
+- build for packman
+- libofx0.8.2-42.pm.cvs20060826, aqbanking-*-2.2.1, gwenhywfar-*-2.4.0, ktoblzcheck-1.11
+* Tue Sep 12 2006 - oc2pus <oc2pus@arcor.de> 0.8.5-99.oc2pus.cvs20060912
+- updated to 0.8.5 (cvs20060912)
+- libofx0.8.2-42.oc2pus.cvs20060826, aqbanking-*-2.2.1, gwenhywfar-*-2.4.0, ktoblzcheck-1.11
+* Mon Sep 04 2006 - oc2pus <oc2pus@arcor.de> 0.8.5-99.oc2pus.cvs20060904
+- updated to 0.8.5 (cvs20060904)
+- libofx0.8.2-42.oc2pus.cvs20060826, aqbanking-*-2.2.1, gwenhywfar-*-2.4.0, ktoblzcheck-1.11
+* Sat Aug 26 2006 - oc2pus <oc2pus@arcor.de> 0.8.4-99.oc2pus.cvs20060826
+- updated to 0.8.4 (cvs20060826)
+- libofx0.8.2-42.oc2pus.cvs20060826, aqbanking-*-2.2.1, gwenhywfar-*-2.4.0, ktoblzcheck-1.11
+* Sat Aug 19 2006 - oc2pus <oc2pus@arcor.de> 0.8.4-99.oc2pus.cvs20060819
+- updated to 0.8.4 (cvs20060819)
+- libofx-0.8.1-1.oc2pus.cvs20060802, aqbanking-*-2.2.0, gwenhywfar-*-2.3.1, ktoblzcheck-1.11
+* Sat Aug 12 2006 - oc2pus <oc2pus@arcor.de> 0.8.4-99.oc2pus.cvs20060812
+- updated to 0.8.4 (cvs20060812)
+- libofx-0.8.1-1.oc2pus.cvs20060802, aqbanking-*-2.2.0, gwenhywfar-*-2.3.1, ktoblzcheck-1.10
+* Sun Aug 06 2006 - oc2pus <oc2pus@arcor.de> 0.8.4-99.oc2pus.cvs20060806
+- updated to 0.8.4 (cvs20060806)
+- libofx-0.8.1-1.oc2pus.cvs20060802, aqbanking-*-2.2.0, gwenhywfar-*-2.3.1, ktoblzcheck-1.10
+* Sat Jul 29 2006 - oc2pus <oc2pus@arcor.de> 0.8.4-99.oc2pus.cvs20060729
+- updated to 0.8.4 (cvs20060729)
+- aqbanking-*-2.2.0, gwenhywfar-*-2.3.1, ktoblzcheck-1.10
+- removed neededforbuild-tag
+* Mon Jul 10 2006 - oc2pus <oc2pus@arcor.de> 0.8.4-99.oc2pus.cvs20060710
+- updated to 0.8.4 (cvs20060710)
+- aqbanking-*-2.1.0, gwenhywfar-*-2.3.0, ktoblzcheck-1.10
+* Sat Jul 01 2006 - oc2pus <oc2pus@arcor.de> 0.8.4-99.oc2pus.cvs20060701
+- updated to 0.8.4 (cvs20060701)
+- aqbanking-*-2.1.0, gwenhywfar-*-2.3.0, ktoblzcheck-1.10
+* Mon Jun 19 2006 - oc2pus <oc2pus@arcor.de> 0.8.4-99.oc2pus.cvs20060619
+- updated to 0.8.4 (cvs20060619)
+- aqbanking-*-2.1.0, gwenhywfar-*-2.3.0, ktoblzcheck-1.10
+* Fri Jun 16 2006 - oc2pus <oc2pus@arcor.de> 0.8.4-99.oc2pus.cvs20060616
+- updated to 0.8.4 (cvs20060616)
+- aqbanking-*-2.1.0, gwenhywfar-*-2.3.0, ktoblzcheck-1.10
+* Wed Jun 14 2006 - oc2pus <oc2pus@arcor.de> 0.8.4-99.oc2pus.cvs20060614
+- updated to 0.8.4 (cvs20060614)
+- aqbanking-*-2.0.0, gwenhywfar-*-2.2.0, ktoblzcheck-1.10
+* Mon Jun 12 2006 - oc2pus <oc2pus@arcor.de> 0.8.4-8.oc2pus.cvs20060612
+- updated to 0.8.4 (cvs20060612)
+- aqbanking-*-2.0.0, gwenhywfar-*-2.2.0, ktoblzcheck-1.10
+- added opensp(-devel) to (Build)Requires
+* Thu Jun 01 2006 - oc2pus <oc2pus@arcor.de> 0.8.4-8.oc2pus.cvs20060601
+- updated to 0.8.4 (cvs20060601)
+* Wed May 31 2006 - oc2pus <oc2pus@arcor.de> 0.8.4-8.oc2pus.cvs20060531
+- updated to 0.8.4 (cvs20060531)
+* Sun May 28 2006 - oc2pus <oc2pus@arcor.de> 0.8.4-8.oc2pus.cvs20060528
+- updated to 0.8.4 (cvs20060528)
+* Wed May 24 2006 - oc2pus <oc2pus@arcor.de> 0.8.4-8.oc2pus.cvs20060524
+- updated to 0.8.4
+- aqbanking-*-2.0.0, gwenhywfar-*-2.2.0, ktoblzcheck-1.10
+* Mon May 22 2006 - oc2pus <oc2pus@arcor.de> 0.8.4-8.oc2pus.cvs20060522
+- updated to 0.8.4
+- aqbanking-*-2.0.0, gwenhywfar-*-2.2.0, ktoblzcheck-1.10
+* Wed May 03 2006 - oc2pus <oc2pus@arcor.de> 0.8.3-8.oc2pus.cvs20060503
+- removed patch %{name}-dialogs-knewaccountdlg.cpp.diff
+- http://marge.propbot.com/~kmymoney/devel/kmymoney-cvshead-2006-05-03.tar.bz2
+- aqbanking-*-2.0.0, gwenhywfar-*-2.2.0, ktoblzcheck-1.10
+* Sat Apr 29 2006 - oc2pus <oc2pus@arcor.de> 0.8.3-8.oc2pus.cvs20060428
+- http://marge.propbot.com/~kmymoney/devel/kmymoney-cvshead-2006-04-28.tar.bz2
+- aqbanking-*-2.0.0, gwenhywfar-*-2.2.0, ktoblzcheck-1.10
+* Tue Apr 25 2006 - oc2pus <oc2pus@arcor.de> 0.8.3-8.oc2pus.cvs20060425
+- http://marge.propbot.com/~kmymoney/devel/kmymoney-cvshead-2006-04-25.tar.bz2
+- aqbanking-*-2.0.0, gwenhywfar-*-2.2.0, ktoblzcheck-1.10
+* Sun Apr 16 2006 - oc2pus <oc2pus@arcor.de> 0.8.3-8.oc2pus.cvs20060416
+- patched for koffice-*-1.5*
+- modified some headers from koffice: kdchart_export.h, KDChartPropertySet.h
+  and KDChartVectorTable.h
+  http://lists.kde.org/?l=kde-commits&m=114347919120545&w=2
+  http://lists.kde.org/?l=kde-commits&m=108024446323273&w=2
+  http://sourceforge.net/mailarchive/forum.php?thread_id=10167885&forum_id=7103
+- aqbanking-*-2.0.0, gwenhywfar-*-2.2.0, ktoblzcheck-1.10
+* Fri Apr 14 2006 - oc2pus <oc2pus@arcor.de> 0.8.3-8.oc2pus.cvs20060414
+- updated to cvs-version 0.8.3 (cvs 14.04.2006)
+- aqbanking-*-2.0.0, gwenhywfar-*-2.2.0, ktoblzcheck-1.10
+* Sat Apr 01 2006 - oc2pus <oc2pus@arcor.de> 0.8.3-8.oc2pus.cvs20060401
+- updated to cvs-version 0.8.3 (cvs 01.04.2006)
+- aqbanking-*-1.9.11rc1, gwenhywfar-*-2.1.1, ktoblzcheck-1.10
+* Wed Mar 22 2006 - oc2pus <oc2pus@arcor.de> 0.8.3-8.oc2pus.cvs20060322
+- updated to cvs-version 0.8.3 (cvs 22.03.2006)
+- aqbanking-*-1.9.9, gwenhywfar-*-2.1, ktoblzcheck-1.10
+* Sun Mar 19 2006 - oc2pus <oc2pus@arcor.de> 0.8.3-8.oc2pus.cvs20060319
+- updated to cvs-version 0.8.3 (cvs 19.03.2006)
+- aqbanking-*-1.9.8, gwenhywfar-*-2.0, ktoblzcheck-1.10
+* Fri Mar 10 2006 - oc2pus <oc2pus@arcor.de> 0.8.3-8.oc2pus.cvs20060310
+- updated to cvs-version 0.8.3 (cvs 10.03.2006)
+- aqbanking-*-1.9.8, gwenhywfar-*-2.0, ktoblzcheck-1.10
+* Sun Mar 05 2006 - oc2pus <oc2pus@arcor.de> 0.8.3-8.oc2pus.cvs20060305
+- updated to cvs-version 0.8.3 (cvs 05.03.2006)
+- aqbanking-*-1.9.7, gwenhywfar-*-2.0, ktoblzcheck-1.10
+* Wed Feb 22 2006 - oc2pus <oc2pus@arcor.de> 0.8.3-8.oc2pus.cvs20060222
+- updated to cvs-version 0.8.3 (cvs 22.02.2006)
+- aqbanking-*-1.9.7
+* Sun Feb 12 2006 - oc2pus <oc2pus@arcor.de> 0.8.2-8.oc2pus.cvs20060212
+- updated to cvs-version 0.8.2 (cvs 12.02.2006)
+- aqbanking-*-1.9.7
+- added UNSERMAKE=no
+- removed patch1
+- adjusted Requirements koffice* >= 1.4.2, koffice* < 1.4.90
+* Thu Jan 26 2006 - oc2pus <oc2pus@arcor.de> 0.8.2-8.oc2pus.cvs20060128
+- updated to cvs-version 0.8.2 (cvs 28.01.2006)
+- aqbanking-*-1.9.4
+* Wed Jan 18 2006 - oc2pus <oc2pus@arcor.de> 0.8.2-8.oc2pus.cvs20060118
+- updated to cvs-version 0.8.2 (cvs 18.01.2006)
+- aqbanking-*-1.9.1
+- new dependency libxml++(-devel) needed patch kmymoney-configure.diff
+* Sun Jan 08 2006 - oc2pus <oc2pus@arcor.de> 0.8.2-8.oc2pus.cvs20060108
+- updated to cvs-version 0.8.2 (cvs 08.01.2006)
+* Mon Jan 02 2006 - oc2pus <oc2pus@arcor.de> 0.8.2-8.oc2pus.cvs20060102
+- updated to cvs-version 0.8.2 (cvs 02.01.2006)
+* Tue Dec 27 2005 - oc2pus <oc2pus@arcor.de> 0.8.1-8.oc2pus.cvs20051227
+- updated to cvs-version 0.8.1 (cvs 27.12.2005)
+* Sun Dec 18 2005 - oc2pus <oc2pus@arcor.de> 0.8.1-8.oc2pus.cvs20051218
+- updated to cvs-version 0.8.1 (cvs 18.12.2005)
+* Mon Dec 05 2005 - oc2pus <oc2pus@arcor.de> 0.8.1-8.oc2pus.cvs20051207
+- updated to cvs-version 0.8.1 (cvs 07.12.2005)
+- included patch %{name}-disable_hidden_visibility.patch
+* Thu Nov 17 2005 - oc2pus <oc2pus@arcor.de> 0.8.1-8.oc2pus.cvs20051119
+- updated to cvs-version 0.8.1 (cvs 19.11.2005)
+- --enable-pdfdocs, --enable-charts
+* Sun Sep 11 2005 - oc2pus <oc2pus@arcor.de> 0.8.0-8.oc2pus.cvs20050911
+- updated to cvs-version 0.8.0 (cvs 11.09.2005)
+* Sun Aug 28 2005 - oc2pus <oc2pus@arcor.de> 0.8.0-8.oc2pus.cvs20050828
+- updated to cvs-version 0.8.0 (cvs 28.08.2005)
+* Fri Aug 19 2005 - oc2pus <oc2pus@arcor.de> 0.8.0-8.oc2pus.cvs20050819
+- updated to cvs-version 0.8.0 (cvs 19.08.2005)
+* Sun Aug 14 2005 - oc2pus <oc2pus@arcor.de> 0.8.0-8.oc2pus.cvs20050814
+- updated to cvs-version 0.8.0 (cvs 14.08.2005)
+* Tue Aug 09 2005 - oc2pus <oc2pus@arcor.de> 0.7.5-0.oc2pus.cvs20050809
+- updated to cvs-version 0.7.5 (cvs 09.08.2005)
+* Sat Jul 30 2005 - oc2pus <oc2pus@arcor.de> 0.7.5-0.oc2pus.cvs20050730
+- updated to cvs-version 0.7.5 (cvs 30.07.2005)
+* Tue Jul 26 2005 - oc2pus <oc2pus@arcor.de> 0.7.4-0.oc2pus.cvs20050726
+- updated to cvs-version 0.7.4 (cvs 26.07.2005)
+* Tue Jul 19 2005 - oc2pus <oc2pus@arcor.de> 0.7.4-0.oc2pus.cvs20050719
+- updated to cvs-version 0.7.4 (cvs 19.07.2005)
+* Wed Jun 29 2005 - oc2pus <oc2pus@arcor.de> 0.7.3-0.oc2pus.cvs20050628
+- updated to cvs-version 0.7.3 (cvs 28.06.2005)
+* Thu Jun 02 2005 - oc2pus <oc2pus@arcor.de> 0.7.2-0.oc2pus.cvs20050610
+- updated to cvs-version 0.7.2 (cvs 10.06.2005)
+* Sat May 21 2005 - oc2pus <oc2pus@arcor.de> 0.7.1-0.oc2pus.cvs20050521
+- updated to cvs-version 0.7.1 (cvs 21.05.2005)
+* Sat May 14 2005 - oc2pus <oc2pus@arcor.de> 0.7.0-0.oc2pus.1
+- updated to 0.7.0
+* Sat May 07 2005 - oc2pus <oc2pus@arcor.de> 0.7.0-0.oc2pus.cvs20050507
+- updated to cvs-version 0.7.0 (cvs 07.05.2005)
+* Sun Apr 24 2005 - oc2pus <oc2pus@arcor.de> 0.7.0-0.oc2pus.cvs20050424
+- updated to cvs-version 0.7.0 (cvs 24.04.2005)
+* Mon Apr 11 2005 - oc2pus <oc2pus@arcor.de> 0.7.0-0.oc2pus.cvs20050411
+- updated to cvs-version 0.7.0 (cvs 11.04.2005)
+* Mon Apr 04 2005 - oc2pus <oc2pus@arcor.de> 0.7.0-0.oc2pus.cvs20050404
+- updated to cvs-version 0.7.0 (cvs 04.04.2005)
+* Sun Mar 27 2005 - oc2pus <oc2pus@arcor.de> 0.7.0-0.oc2pus.cvs20050327
+- updated to cvs-version 0.7.0 (cvs 27.03.2005)
+* Fri Mar 18 2005 - oc2pus <oc2pus@arcor.de> 0.7.0-0.oc2pus.cvs20050318
+- updated to cvs-version 0.7.0 (cvs 18.03.2005)
+- switched to tar.bz2
+- added SuSE-macros (find_lang, update_desktop_files,..)
+- moved man-page to /usr/share/man/man1
+* Wed Feb 16 2005 - oc2pus <oc2pus@arcor.de> 0.7.0-0.oc2pus.2
+- updated to cvs-version 0.7.0 (cvs 16.02.2005)
+* Sat Jan 29 2005 - oc2pus <oc2pus@arcor.de> 0.7.0-0.oc2pus.1
+- updated to cvs-version 0.7.0 (cvs 29.01.2005)
+* Fri Nov 12 2004 - Thibaut Cousin <linux@thibaut-cousin.net>
+- updated to version 0.6.4 for SUSE 9.2 from SUSE specfile
+

@@ -1,0 +1,111 @@
+#MIN_CONFIG(3.3.1)
+
+AM_INIT_AUTOMAKE(kmymoney2,0.9.3)
+
+KDE_ENABLE_HIDDEN_VISIBILITY
+
+AM_KDE_MIN_VERSION(3, 4, 0)
+
+dnl
+dnl check for a recent autoconf version
+dnl
+AC_PREREQ(2.53)
+
+dnl
+dnl check for atoll and strtoll
+dnl
+AC_FUNC_CHECK(atoll, [AC_DEFINE_UNQUOTED(HAVE_ATOLL, 1, [define if you have atoll])])
+AC_FUNC_CHECK(strtoll, [AC_DEFINE_UNQUOTED(HAVE_STRTOLL, 1, [define if you have strtoll])])
+AC_CHECK_LIB(m, round, [AC_DEFINE_UNQUOTED(HAVE_ROUND, 1, [define if you have round])]
+)
+
+dnl
+dnl add check for project's memory leak checker
+dnl
+AC_MEMORY_LEAK_CHECK()
+
+dnl
+dnl add checks for cppunit
+dnl
+AM_PATH_CPPUNIT(1.8.0,
+	AM_CONDITIONAL(CPPUNIT, test "x$no_cppunit" = x)
+	AC_DEFINE_UNQUOTED(HAVE_LIBCPPUNIT, 1, [Define if you have libcppunit])
+	AC_SUBST(CPPUNIT_LIBS),
+	AM_CONDITIONAL(CPPUNIT, test "x$no_cppunit" = x)
+	AC_SUBST(CPPUNIT_LIBS)
+	)
+
+dnl
+dnl check for tools required for generation of PDF documentation 
+dnl
+AC_PDF_GENERATION()
+
+dnl
+dnl check for kdchart
+dnl 
+dnl AC_KDCHART()
+AC_DEFINE_UNQUOTED(HAVE_KDCHART, "1", [Define if you have libkdchart])
+AC_DEFINE_UNQUOTED(HAVE_KDCHART_SETPROP, "1", [Define if you have KDChartListTableData::setProp method])
+
+
+dnl
+dnl check for libofx
+dnl 
+AC_LIBOFX()
+
+dnl
+dnl check for library build for Qt-Designer
+dnl
+AC_QTDESIGNER_SUPPORT()
+
+dnl
+dnl check for sqlite3 support
+dnl
+AC_SQLITE3()
+
+dnl CXXFLAGS="$NOOPT_CXXFLAGS" dnl __kdevelop[noopt]__
+CXXFLAGS="$CXXFLAGS $USE_EXCEPTIONS" dnl __kdevelop[exc]__
+dnl KDE_NEED_FLEX dnl __kdevelop__
+dnl AC_PROG_YACC dnl __kdevelop__
+
+#
+# make sure the UIC compiler uses our own widget lib
+#
+X=`echo $UIC | grep -- -L`
+if test "x$X" = "x"; then
+	echo "UIC does not support -L option!!";
+fi
+UIC=`echo $UIC -L \$\(top_builddir\)/kmymoney2/widgets/.libs`
+
+#
+# create header directory, make symlinks
+#
+
+rm -rf kmymoney
+mkdir kmymoney
+
+echo Generating symlinks to header files
+CURDIR=
+if test "x${srcdir}" = "x${srcdir#/}"; then
+  CURDIR=`pwd`/
+fi
+BASEDIR=$CURDIR$srcdir
+
+
+while read a; do
+  MFILES=$(find $BASEDIR/$a -name Makefile.am);
+  for MFILE in $MFILES; do
+    DIR=$(dirname $MFILE)
+    HFILES=$(grep -v noinst_HEADERS $MFILE | grep _HEADERS)
+    for HFILE in $HFILES; do
+      case $HFILE in
+        =|*_HEADERS|\\)
+          ;;
+        *)
+          ln -s $DIR/$HFILE kmymoney/$HFILE
+          ;;
+      esac
+    done
+  done
+done < $srcdir/inst-apps
+
