@@ -6,7 +6,6 @@ SET (libconverter_a_SOURCES
   webpricequote.cpp
 	)
 
-#KDE3_AUTOMOC(${libconverter_a_SOURCES})
 
 KMM_CREATE_LINKS( mymoneytemplate.h )
 

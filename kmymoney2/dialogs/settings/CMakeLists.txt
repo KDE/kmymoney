@@ -25,6 +25,4 @@ SET (libsettings_a_UI
 # on libkmymoney.so (the widgets library)
 KMM_ADD_UI_FILES(libsettings_a_SOURCES ${libsettings_a_UI} DEPENDS kmymoney)
 
-#KDE3_AUTOMOC(${libsettings_a_SOURCES})
-
 KDE4_ADD_LIBRARY(settings STATIC ${libsettings_a_SOURCES})

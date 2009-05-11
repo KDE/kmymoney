@@ -30,7 +30,6 @@ SET( kmymoney_common_SRCS
   kmymoneyutils.cpp kstartuplogo.cpp kmymoneyglobalsettings.cpp )
 
 KDE4_ADD_KCFG_FILES( kmymoney_common_SRCS kmymoneysettings.kcfgc )
-#KDE3_AUTOMOC( ${kmymoney_common_SRCS} )
 
 ADD_LIBRARY(kmymoney_common STATIC ${kmymoney_common_SRCS})
 TARGET_LINK_LIBRARIES(kmymoney_common
@@ -52,7 +51,6 @@ SET( kmymoney2_SRCS main.cpp kmymoney2.cpp )
 
 KDE4_ADD_DCOP_SKELS( kmymoney2_SRCS kmymoney2.h )
 KDE4_ADD_DCOP_STUBS( kmymoney2_SRCS kmymoney2.h )
-#KDE3_AUTOMOC( ${kmymoney2_SRCS} )
 
 KDE4_ADD_EXECUTABLE( kmymoney2 ${kmymoney2_SRCS} )
 TARGET_LINK_LIBRARIES( kmymoney2 ${kmymoney_link_LIBS} )
@@ -80,7 +78,6 @@ IF( KDE4_BUILD_TESTS )
   ENDFOREACH(cpp_FILE)
 
   SET( kmymoneytest_SRCS ${kmymoneytest_SRCS} reports/reportstestcommon.cpp )
-  #KDE3_AUTOMOC( ${kmymoneytest_SRCS} )
 
   KDE4_ADD_EXECUTABLE( kmymoneytest ${kmymoneytest_SRCS} )
   TARGET_LINK_LIBRARIES( kmymoneytest
