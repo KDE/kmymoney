@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=KMyMoney OFX
+Comment=Add OFX importing to KMyMoney
+ServiceTypes=KMyMoneyPlugin
+Type=Service
+Icon=connect_creating
+X-KDE-Library=kmm_ofximport
+X-KDE-PluginInfo-Name=OFX
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true

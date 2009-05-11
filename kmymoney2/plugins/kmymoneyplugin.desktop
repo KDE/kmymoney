@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=ServiceType
+Name=KMyMoney Plugin
+X-KDE-ServiceType=KMyMoneyPlugin
+Comment=A KMyMoney plugin
+
