@@ -14,7 +14,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "config.h"
+#include "config-kmymoney.h"
 
 #include <iostream>
 #include <string>

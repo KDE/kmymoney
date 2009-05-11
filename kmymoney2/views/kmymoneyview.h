@@ -14,9 +14,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
+#include "config-kmymoney.h"
 
 #ifndef KMYMONEYVIEW_H
 #define KMYMONEYVIEW_H

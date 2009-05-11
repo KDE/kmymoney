@@ -314,7 +314,7 @@ ENDIF(RPMTools_FOUND)
 ######################### Output Results #############################
 
 # create the config.h file out of the config.h.cmake
-CONFIGURE_FILE  (config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h )
+CONFIGURE_FILE  (config-kmymoney.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-kmymoney.h )
 
 # this macro maps the boolean variable ${_varname} to "yes"/"no"
 # and writes the output to the variable nice_${_varname}

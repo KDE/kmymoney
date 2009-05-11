@@ -23,9 +23,7 @@
 #ifndef _MYMONEYUTILS_H_
 #define _MYMONEYUTILS_H_
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
+#include <config-kmymoney.h>
 
 #include <qstring.h>
 #include <qdatetime.h>

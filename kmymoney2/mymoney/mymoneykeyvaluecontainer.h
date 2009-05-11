@@ -23,9 +23,7 @@
   * @author Thomas Baumgart
   */
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
+#include <config-kmymoney.h>
 
 // ----------------------------------------------------------------------------
 // QT Includes

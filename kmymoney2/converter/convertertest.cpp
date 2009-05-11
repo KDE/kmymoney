@@ -15,9 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
+#include <config-kmymoney.h>
 
 #include <q3valuelist.h>
 #include <q3valuevector.h>

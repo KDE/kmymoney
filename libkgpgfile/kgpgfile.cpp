@@ -16,7 +16,7 @@
  ***************************************************************************/
 
 #ifdef HAVE_CONFIG
-#include <config.h>
+#include <config-kmymoney.h>
 #endif
 
 #include "kdecompat.h"

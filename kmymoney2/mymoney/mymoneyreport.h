@@ -18,9 +18,7 @@
 #ifndef MYMONEYREPORT_H
 #define MYMONEYREPORT_H
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
+#include <config-kmymoney.h>
 
 // ----------------------------------------------------------------------------
 // QT Includes

@@ -21,7 +21,7 @@
 #ifndef KREPORTCHARTVIEW_H
 #define KREPORTCHARTVIEW_H
 
-#ifdef HAVE_CONFIG_H
+
 #include "../../config.h"
 #endif
 #ifdef HAVE_KDCHART
