@@ -166,25 +166,3 @@ MACRO(KMM_CREATE_UI_HEADER_FILES _sources )
   ENDFOREACH (_current_FILE)
 ENDMACRO(KMM_CREATE_UI_HEADER_FILES)
 
-MACRO(KMM_KDE3_ADD_KCFG_FILES  _sources _kcfg_DIR _kcfgc_FILES)
-  FOREACH (_current_FILE ${_kcfgc_FILES} )
-
-    GET_FILENAME_COMPONENT(_tmp_FILE ${_current_FILE} ABSOLUTE)
-    GET_FILENAME_COMPONENT(_basename ${_tmp_FILE} NAME_WE)
-
-    FILE(READ ${_tmp_FILE} _contents)
-    STRING(REGEX REPLACE "^(.*\n)?File=([^\n]+)\n.*$" "\\2"  _kcfg_FILE "${_contents}")
-
-    SET(_src_FILE  ${KMyMoney2_BINARY_DIR}/${_basename}.cpp)
-    SET(_header_FILE ${KMyMoney2_BINARY_DIR}/${_basename}.h)
-
-    ADD_CUSTOM_COMMAND(OUTPUT ${_src_FILE}
-      COMMAND ${KDE3_KCFGC_EXECUTABLE}
-      ARGS -d ${KMyMoney2_BINARY_DIR}/ ${_kcfg_DIR}/${_kcfg_FILE} ${_tmp_FILE}
-      DEPENDS ${_tmp_FILE} ${_kcfg_DIR}/${_kcfg_FILE} )
-
-    SET(${_sources} ${${_sources}} ${_src_FILE})
-
-  ENDFOREACH (_current_FILE)
-
-ENDMACRO(KMM_KDE3_ADD_KCFG_FILES)
