@@ -6,7 +6,6 @@ ADD_SUBDIRECTORY( dialogs )
 ########### next target ###############
 
 SET(kmm_ofximport_PART_SRCS ofximporterplugin.cpp ofxpartner.cpp)
-#KDE3_AUTOMOC(${kmm_ofximport_PART_SRCS})
 
 KDE4_ADD_KPART(kmm_ofximport SHARED ${kmm_ofximport_PART_SRCS})
 TARGET_LINK_LIBRARIES(kmm_ofximport

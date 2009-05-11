@@ -6,6 +6,4 @@ SET (libreports_a_SOURCES
   pivottable.cpp querytable.cpp reportaccount.cpp
   )
 
-#KDE3_AUTOMOC(${libreports_a_SOURCES})
-
 KDE4_ADD_LIBRARY(reports STATIC ${libreports_a_SOURCES})
