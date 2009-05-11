@@ -49,8 +49,8 @@ SET( kmymoney_common_LIBS
 
 SET( kmymoney2_SRCS main.cpp kmymoney2.cpp )
 
-KDE4_ADD_DCOP_SKELS( kmymoney2_SRCS kmymoney2.h )
-KDE4_ADD_DCOP_STUBS( kmymoney2_SRCS kmymoney2.h )
+#KDE4_ADD_DCOP_SKELS( kmymoney2_SRCS kmymoney2.h )
+#KDE4_ADD_DCOP_STUBS( kmymoney2_SRCS kmymoney2.h )
 
 KDE4_ADD_EXECUTABLE( kmymoney2 ${kmymoney2_SRCS} )
 TARGET_LINK_LIBRARIES( kmymoney2 ${kmymoney_link_LIBS} )
