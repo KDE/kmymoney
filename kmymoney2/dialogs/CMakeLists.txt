@@ -31,8 +31,6 @@ SET(libdialogs_a_SOURCES
   transactioneditor.cpp transactionmatcher.cpp
   )
 
-#KDE3_AUTOMOC(${libdialogs_a_SOURCES})
-
 SET(dialogs_HEADERS
   investtransactioneditor.h kcurrencycalculator.h transactioneditor.h
   )
@@ -78,4 +76,4 @@ ADD_DEPENDENCIES(dialogs generate_widgets_ui_srcs)
 ########### install files ###############
 
 INSTALL(FILES  ${dialogs_HEADERS}
-  DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney)
+  DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney COMPONENT Devel)

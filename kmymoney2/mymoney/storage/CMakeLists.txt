@@ -22,4 +22,4 @@ KDE4_ADD_LIBRARY( kmm_storage STATIC ${storage_a_SOURCES} )
 ########### install files ###############
 
 INSTALL(FILES ${storage_HEADERS} 
-	DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney )
+	DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney COMPONENT Devel )

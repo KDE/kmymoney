@@ -14,4 +14,4 @@ KDE4_ADD_LIBRARY(converter STATIC ${libconverter_a_SOURCES})
 ########### install files ###############
 
 INSTALL(FILES mymoneytemplate.h
-  DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney)
+  DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney COMPONENT Devel)

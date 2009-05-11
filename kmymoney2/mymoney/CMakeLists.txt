@@ -27,8 +27,6 @@ SET(mymoney_HEADERS
   mymoneyutils.h mymoneybudget.h mymoneyobjectcontainer.h mymoneyforecast.h
   )
 
-#KDE3_AUTOMOC(${kmm_mymoney_LIB_SRCS})
-
 KMM_CREATE_LINKS( ${mymoney_HEADERS} )
 
 KDE4_ADD_LIBRARY(kmm_mymoney SHARED ${kmm_mymoney_LIB_SRCS})
@@ -43,4 +41,4 @@ INSTALL(TARGETS kmm_mymoney
 	${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 INSTALL(FILES ${mymoney_HEADERS}
-	DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney )
+	DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney COMPONENT Devel)
