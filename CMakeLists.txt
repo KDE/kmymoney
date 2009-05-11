@@ -36,7 +36,14 @@ SET(VERSION_SUFFIX "cvs${CMAKE_MATCH_1}${CMAKE_MATCH_2}${CMAKE_MATCH_3}")
 
 ######################### General Requirements ##########################
 FIND_PACKAGE(KDE4 REQUIRED)
+
 FIND_PACKAGE(Perl REQUIRED)
+
+include( KDE4Defaults )
+include( MacroLibrary )
+
+add_definitions( ${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
+include_directories( ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES} )
 
 # check for JPEG
 FIND_PACKAGE(JPEG)
