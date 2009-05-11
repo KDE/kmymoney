@@ -280,7 +280,7 @@ bool kMyMoneySplitTable::eventFilter(QObject *o, QEvent *e)
 
       default:
         rc = true;
-        KShortcut copySplit(i18n("Duplicate split", "CTRL+c"));
+        KShortcut copySplit(i18n("Duplicate split", "Qt::CTRL+c"));
         KShortcut newSplit(QKeySequence(Qt::CTRL | Qt::Key_Insert));
         if(copySplit.contains(KKey(k))) {
           slotDuplicateSplit();
@@ -841,7 +841,7 @@ QWidget* kMyMoneySplitTable::createEditWidgets(void)
   connect(m_editCategory, SIGNAL(createItem(const QString&, QString&)), this, SIGNAL(createCategory(const QString&, QString&)));
   connect(m_editCategory, SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
 
-  m_editMemo = new kMyMoneyLineEdit(0, 0, false, AlignLeft|AlignVCenter);
+  m_editMemo = new kMyMoneyLineEdit(0, 0, false, Qt::AlignLeft|Qt::AlignVCenter);
   m_editMemo->setHint(i18n("Memo"));
   m_editMemo->setFont(cellFont);
 
@@ -974,7 +974,7 @@ bool kMyMoneySplitTable::focusNextPrevChild(bool next)
       }
 
       if(w != currentWidget
-      && ((w->focusPolicy() & TabFocus) == TabFocus)
+      && ((w->focusPolicy() & Qt::TabFocus) == Qt::TabFocus)
       && w->isVisible() && w->isEnabled()) {
         w->setFocus();
         rc = true;

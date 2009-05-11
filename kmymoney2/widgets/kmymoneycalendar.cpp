@@ -167,8 +167,8 @@ kMyMoneyCalendar::eventFilter(QObject *o, QEvent *e )
    if ( e->type() == QEvent::KeyPress ) {
       QKeyEvent *k = (QKeyEvent *)e;
 
-      if ( (k->key() == Qt::Key_Prior) ||
-           (k->key() == Qt::Key_Next)  ||
+      if ( (k->key() == Qt::Key_PageUp) ||
+           (k->key() == Qt::Key_PageDown)  ||
            (k->key() == Qt::Key_Up)    ||
            (k->key() == Qt::Key_Down) )
        {

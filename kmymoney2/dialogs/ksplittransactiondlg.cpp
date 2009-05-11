@@ -92,9 +92,9 @@ KSplitTransactionDlg::KSplitTransactionDlg(const MyMoneyTransaction& t,
   finishBtn->setDefault(true);
 
   // setup the focus
-  cancelBtn->setFocusPolicy(QWidget::NoFocus);
-  finishBtn->setFocusPolicy(QWidget::NoFocus);
-  clearAllBtn->setFocusPolicy(QWidget::NoFocus);
+  cancelBtn->setFocusPolicy(Qt::NoFocus);
+  finishBtn->setFocusPolicy(Qt::NoFocus);
+  clearAllBtn->setFocusPolicy(Qt::NoFocus);
 
   // connect signals with slots
   connect(transactionsTable, SIGNAL(transactionChanged(const MyMoneyTransaction&)),

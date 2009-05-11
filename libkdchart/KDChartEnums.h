@@ -244,7 +244,7 @@ public:
       to their graphical representations (which might be a bar, line, pie slice,...) --
       is specified by two parameters: a \c PositionFlag and a uint holding a combination of \c Qt::AlignmentFlags.
       Remember that Qt::AlignmentFlags are used to specify <b>with which edge</b> something
-      is to be aligned to its anchor, e.g. \c AlignLeft means align with the left edge.
+      is to be aligned to its anchor, e.g. \c Qt::AlignLeft means align with the left edge.
 
       The position of content and the way it is aligned to this
       position is shown in the following drawing, note that annotation #2 and annotation #3

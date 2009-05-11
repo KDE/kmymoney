@@ -359,7 +359,7 @@ void KDDrawText::drawRotatedTxt( QPainter* painter,
             QBitmap mask;
             mask = pm;
             pm.setMask( mask );
-            QWMatrix m;
+            QMatrix m;
             m.rotate( degrees );
             QPixmap theRotatedPixmap = pm.transformed(m);
 

@@ -48,7 +48,7 @@ class KDCHART_EXPORT KDChartSeriesCollection : public KDChartTableDataBase,
 #if COMPAT_QT_VERSION >= 0x030000
     public QValueVector<KDChartBaseSeries *>
 #else
-    public QArray<KDChartBaseSeries *>
+    public Q3MemArray<KDChartBaseSeries *>
 #endif
 {
     // Standard KDChartTableDataBase interface

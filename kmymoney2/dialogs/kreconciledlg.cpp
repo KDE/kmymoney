@@ -49,11 +49,11 @@ KReconcileDlg::KReconcileDlg(const MyMoneyMoney /* previousBal */, const MyMoney
   m_endingDate = endingDate;
 	
 
-	totalCreditsLabel->setAlignment(AlignRight | AlignVCenter | ExpandTabs | SingleLine);
-	totalDebitsLabel->setAlignment(AlignRight | AlignVCenter | ExpandTabs | SingleLine);
-	previousLabel->setAlignment(AlignRight | AlignVCenter | ExpandTabs | SingleLine);
-	endingLabel->setAlignment(AlignRight | AlignVCenter | ExpandTabs | SingleLine);
-	differenceLabel->setAlignment(AlignRight | AlignVCenter | ExpandTabs | SingleLine);
+	totalCreditsLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter | ExpandTabs | SingleLine);
+	totalDebitsLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter | ExpandTabs | SingleLine);
+	previousLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter | ExpandTabs | SingleLine);
+	endingLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter | ExpandTabs | SingleLine);
+	differenceLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter | ExpandTabs | SingleLine);
 
 	
 	debitListView->setRootIsDecorated(false);
@@ -319,11 +319,11 @@ void KReconcileDlg::resetData(const MyMoneyMoney /* previousBal */, const MyMone
   m_endingDate = endingDate;
 	
 
-	//totalCreditsLabel->setAlignment(AlignRight | AlignVCenter | ExpandTabs | SingleLine);
-	//totalDebitsLabel->setAlignment(AlignRight | AlignVCenter | ExpandTabs | SingleLine);
-	//previousLabel->setAlignment(AlignRight | AlignVCenter | ExpandTabs | SingleLine);
-	//endingLabel->setAlignment(AlignRight | AlignVCenter | ExpandTabs | SingleLine);
-	//differenceLabel->setAlignment(AlignRight | AlignVCenter | ExpandTabs | SingleLine);
+	//totalCreditsLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter | ExpandTabs | SingleLine);
+	//totalDebitsLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter | ExpandTabs | SingleLine);
+	//previousLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter | ExpandTabs | SingleLine);
+	//endingLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter | ExpandTabs | SingleLine);
+	//differenceLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter | ExpandTabs | SingleLine);
 
 	
 	endingLabel->setText(KGlobal::locale()->formatMoney(m_clearedBalance.amount(),""));

@@ -294,7 +294,7 @@ void KMyMoneyView::addTitleBar(QWidget* parent, const QString& title)
 
 void KMyMoneyView::showTitleBar(bool show)
 {
-  QObjectList *l = queryList( 0, "titleLabel" );
+  QObjectList l = queryList( 0, "titleLabel" );
   QObjectListIterator it( *l ); // iterate over the labels
   QObject *obj;
 

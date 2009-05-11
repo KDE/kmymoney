@@ -79,7 +79,7 @@ void KOfxDirectConnectDlg::init(void)
   // For debugging, dump out the request
 #if 0
   QFile g( "request.ofx" );
-  g.open( IO_WriteOnly );
+  g.open( QIODevice::WriteOnly );
   QTextStream(&g) << m_connector.url() << "\n" << QString(request);
   g.close();
 #endif
@@ -87,7 +87,7 @@ void KOfxDirectConnectDlg::init(void)
   QDir homeDir(QDir::home());
   if(homeDir.exists("ofxlog.txt")) {
     d->m_fpTrace.setName(QString("%1/ofxlog.txt").arg(QDir::homePath()));
-    d->m_fpTrace.open(IO_WriteOnly | IO_Append);
+    d->m_fpTrace.open(QIODevice::WriteOnly | QIODevice::Append);
   }
 
   m_job = KIO::http_post(
@@ -179,7 +179,7 @@ void KOfxDirectConnectDlg::slotOfxFinished(KIO::Job* /* e */)
   {
     QString details;
     QFile f( m_tmpfile->name() );
-    if ( f.open( IO_ReadOnly ) )
+    if ( f.open( QIODevice::ReadOnly ) )
     {
       QTextStream stream( &f );
       QString line;

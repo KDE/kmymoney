@@ -150,7 +150,7 @@ namespace KDXML {
             // conforms to the file format Qt Designer uses.
             QByteArray ba;
             QBuffer buffer( ba );
-            buffer.open( IO_WriteOnly );
+            buffer.open( QIODevice::WriteOnly );
             QImageIO imgio( &buffer, "XPM" );
             QImage image = pixmap.convertToImage();
             imgio.setImage( image );
@@ -284,7 +284,7 @@ namespace KDXML {
             case Qt::NoPen:
                 return "NoPen";
             case Qt::SolidLine:
-                return "SolidLine";
+                return "Qt::SolidLine";
             case Qt::DashLine:
                 return "DashLine";
             case Qt::DotLine:
@@ -294,7 +294,7 @@ namespace KDXML {
             case Qt::DashDotDotLine:
                 return "DashDotDotLine";
             default: // should not happen
-                return "SolidLine";
+                return "Qt::SolidLine";
         }
     }
 
@@ -307,35 +307,35 @@ namespace KDXML {
             case Qt::NoBrush:
                 return "NoBrush";
             case Qt::SolidPattern:
-                return "SolidPattern";
+                return "Qt::SolidPattern";
             case Qt::Dense1Pattern:
-                return "Dense1Pattern";
+                return "Qt::Dense1Pattern";
             case Qt::Dense2Pattern:
-                return "Dense2Pattern";
+                return "Qt::Dense2Pattern";
             case Qt::Dense3Pattern:
-                return "Dense3Pattern";
+                return "Qt::Dense3Pattern";
             case Qt::Dense4Pattern:
-                return "Dense4Pattern";
+                return "Qt::Dense4Pattern";
             case Qt::Dense5Pattern:
-                return "Dense5Pattern";
+                return "Qt::Dense5Pattern";
             case Qt::Dense6Pattern:
-                return "Dense6Pattern";
+                return "Qt::Dense6Pattern";
             case Qt::Dense7Pattern:
-                return "Dense7Pattern";
+                return "Qt::Dense7Pattern";
             case Qt::HorPattern:
-                return "HorPattern";
+                return "Qt::HorPattern";
             case Qt::VerPattern:
-                return "VerPattern";
+                return "Qt::VerPattern";
             case Qt::CrossPattern:
-                return "CrossPattern";
+                return "Qt::CrossPattern";
             case Qt::BDiagPattern:
-                return "BDiagPattern";
+                return "Qt::BDiagPattern";
             case Qt::FDiagPattern:
-                return "FDiagPattern";
+                return "Qt::FDiagPattern";
             case Qt::DiagCrossPattern:
-                return "DiagCrossPattern";
+                return "Qt::DiagCrossPattern";
             default: // should not happen (but can for a custom pattern)
-                return "SolidPattern";
+                return "Qt::SolidPattern";
         }
     }
 
@@ -754,7 +754,7 @@ namespace KDXML {
     {
         if( style == "NoPen" )
             return Qt::NoPen;
-        else if( style == "SolidLine" )
+        else if( style == "Qt::SolidLine" )
             return Qt::SolidLine;
         else if( style == "DashLine" )
             return Qt::DashLine;
@@ -774,33 +774,33 @@ namespace KDXML {
         // PENDING(kalle) Support custom patterns
         if( style == "NoBrush" )
             return Qt::NoBrush;
-        else if( style == "SolidPattern" )
+        else if( style == "Qt::SolidPattern" )
             return Qt::SolidPattern;
-        else if( style == "Dense1Pattern" )
+        else if( style == "Qt::Dense1Pattern" )
             return Qt::Dense1Pattern;
-        else if( style == "Dense2Pattern" )
+        else if( style == "Qt::Dense2Pattern" )
             return Qt::Dense2Pattern;
-        else if( style == "Dense3Pattern" )
+        else if( style == "Qt::Dense3Pattern" )
             return Qt::Dense3Pattern;
-        else if( style == "Dense4Pattern" )
+        else if( style == "Qt::Dense4Pattern" )
             return Qt::Dense4Pattern;
-        else if( style == "Dense5Pattern" )
+        else if( style == "Qt::Dense5Pattern" )
             return Qt::Dense5Pattern;
-        else if( style == "Dense6Pattern" )
+        else if( style == "Qt::Dense6Pattern" )
             return Qt::Dense6Pattern;
-        else if( style == "Dense7Pattern" )
+        else if( style == "Qt::Dense7Pattern" )
             return Qt::Dense7Pattern;
-        else if( style == "HorPattern" )
+        else if( style == "Qt::HorPattern" )
             return Qt::HorPattern;
-        else if( style == "VerPattern" )
+        else if( style == "Qt::VerPattern" )
             return Qt::VerPattern;
-        else if( style == "CrossPattern" )
+        else if( style == "Qt::CrossPattern" )
             return Qt::CrossPattern;
-        else if( style == "BDiagPattern" )
+        else if( style == "Qt::BDiagPattern" )
             return Qt::BDiagPattern;
-        else if( style == "FDiagPattern" )
+        else if( style == "Qt::FDiagPattern" )
             return Qt::FDiagPattern;
-        else if( style == "DiagCrossPattern" )
+        else if( style == "Qt::DiagCrossPattern" )
             return Qt::DiagCrossPattern;
         else // should not happen (but can with custom patterns)
             return Qt::SolidPattern;

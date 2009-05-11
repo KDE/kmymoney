@@ -340,7 +340,7 @@ protected:
   * {
   *   Q_OBJECT
   * public:
-  *   KNewUserWizard(QWidget* parent = 0, const char* name = 0, bool modal = false, WFlags flags = 0);
+  *   KNewUserWizard(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WFlags flags = 0);
   *
   * private:
   *   KNewUserGeneral*  m_generalPage;
@@ -358,7 +358,7 @@ protected:
   * The implementation is also easy and looks like this:
   *
   * @code
-  * KNewUserWizard::KNewUserWizard(QWidget* parent, const char* name, bool modal, WFlags flags) :
+  * KNewUserWizard::KNewUserWizard(QWidget* parent, const char* name, bool modal, Qt::WFlags flags) :
   *   KMyMoneyWizard(parent, name, modal, flags)
   * {
   *   setTitle("KMyMoney New User Setup");

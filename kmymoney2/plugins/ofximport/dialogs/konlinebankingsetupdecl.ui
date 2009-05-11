@@ -59,7 +59,7 @@
                             <string>Please select your financial institution from the list below...</string>
                         </property>
                         <property name="alignment">
-                            <set>WordBreak|AlignVCenter</set>
+                            <set>WordBreak|Qt::AlignVCenter</set>
                         </property>
                     </widget>
                     <widget class="QTabWidget">
@@ -362,7 +362,7 @@
                             <string>Please select the account from your financial institution from the list below which matches this account.</string>
                         </property>
                         <property name="alignment">
-                            <set>WordBreak|AlignVCenter</set>
+                            <set>WordBreak|Qt::AlignVCenter</set>
                         </property>
                     </widget>
                     <widget class="QListView">
@@ -462,7 +462,7 @@
                             <string>Congratulations!  You have successfully set up your bank for online banking via OFX.</string>
                         </property>
                         <property name="alignment">
-                            <set>WordBreak|AlignVCenter</set>
+                            <set>WordBreak|Qt::AlignVCenter</set>
                         </property>
                     </widget>
                 </vbox>

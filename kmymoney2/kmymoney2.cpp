@@ -1674,7 +1674,7 @@ void KMyMoney2App::slotStatementImport(void)
     result = slotStatementImport(dialog->selectedURL().path());
 
 /*    QFile f( dialog->selectedURL().path() );
-    f.open( IO_ReadOnly );
+    f.open( QIODevice::ReadOnly );
     QString error = "Unable to parse file";
     QDomDocument* doc = new QDomDocument;
     if(doc->setContent(&f, FALSE))

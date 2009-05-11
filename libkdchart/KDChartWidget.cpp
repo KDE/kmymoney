@@ -170,10 +170,10 @@ void KDChartWidget::mousePressEvent( QMouseEvent* event )
     //while ( ( current = it.current() ) ) {
         if ( current->contains( event->pos() ) ) {
             _mousePressedOnRegion = current;
-            if ( event->button() == LeftButton ){
+            if ( event->button() == Qt::LeftButton ){
                 emit dataLeftPressed( current->row, current->col );
                 emit dataLeftPressed( event->pos() );
-            }else if ( event->button() == MidButton ){
+            }else if ( event->button() == Qt::MidButton ){
                 emit dataMiddlePressed( current->row, current->col );
                 emit dataMiddlePressed( event->pos() );
             }else{
@@ -199,14 +199,14 @@ void KDChartWidget::mouseReleaseEvent( QMouseEvent* event )
     while ( ( current = it.current() ) ) {
         ++it;
         if ( current->contains( event->pos() ) ) {
-            if ( event->button() == LeftButton ) {
+            if ( event->button() == Qt::LeftButton ) {
                 emit dataLeftReleased( current->row, current->col );
                 emit dataLeftReleased( event->pos() );
                 if ( _mousePressedOnRegion == current ){
                     emit dataLeftClicked( current->row, current->col );
                     emit dataLeftClicked( event->pos() );
                 }
-            } else if ( event->button() == MidButton ) {
+            } else if ( event->button() == Qt::MidButton ) {
                 emit dataMiddleReleased( current->row, current->col );
                 emit dataMiddleReleased( event->pos() );
                 if ( _mousePressedOnRegion == current ){

@@ -908,7 +908,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
         payee.setName(payeename);
         payee.setMatchData(MyMoneyPayee::matchName, true, QStringList());
         if (m_askPayeeCategory) {
-          // We use a QGuardedPtr because the dialog may get deleted
+          // We use a QPointer because the dialog may get deleted
           // during exec() if the parent of the dialog gets deleted.
           // In that case the guarded ptr will reset to 0.
           QPointer<KDialogBase> dialog = new KDialogBase(

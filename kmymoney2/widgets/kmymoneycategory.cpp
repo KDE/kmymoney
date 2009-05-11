@@ -66,7 +66,7 @@ KMyMoneyCategory::KMyMoneyCategory(QWidget* parent, const char * name, bool spli
     d->frame->setFocusProxy(this);
     Q3HBoxLayout* layout = new Q3HBoxLayout(d->frame);
     // make sure not to use our own overridden version of reparent() here
-    KMyMoneyCombo::reparent(d->frame, getWFlags() & ~WType_Mask, QPoint(0, 0), true);
+    KMyMoneyCombo::reparent(d->frame, getWFlags() & ~Qt::WType_Mask, QPoint(0, 0), true);
     if(parent)
       d->frame->reparent(parent, QPoint(0, 0), true);
 

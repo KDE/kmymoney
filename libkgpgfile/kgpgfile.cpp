@@ -517,7 +517,7 @@ bool KGPGFile::GPGAvailable(void)
   Q_LONG len;
 
   KGPGFile file;
-  file.open(IO_ReadOnly, "--version", true);
+  file.open(QIODevice::ReadOnly, "--version", true);
   while((len = file.read(buffer, sizeof(buffer)-1)) != EOF) {
     buffer[len] = 0;
     output += QString(buffer);
@@ -534,7 +534,7 @@ bool KGPGFile::keyAvailable(const QString& name)
 
   KGPGFile file;
   QString args = QString("--list-keys --list-options no-show-photos %1").arg(name);
-  file.open(IO_ReadOnly, args, true);
+  file.open(QIODevice::ReadOnly, args, true);
   while((len = file.read(buffer, sizeof(buffer)-1)) != EOF) {
     buffer[len] = 0;
     output += QString(buffer);
@@ -552,7 +552,7 @@ void KGPGFile::publicKeyList(QStringList& list)
 
   list.clear();
   KGPGFile file;
-  file.open(IO_ReadOnly, "--list-keys --with-colons", true);
+  file.open(QIODevice::ReadOnly, "--list-keys --with-colons", true);
   while((len = file.read(buffer, sizeof(buffer)-1)) != EOF) {
     buffer[len] = 0;
     output += QString(buffer);
@@ -595,7 +595,7 @@ void KGPGFile::secretKeyList(QStringList& list)
 
   list.clear();
   KGPGFile file;
-  file.open(IO_ReadOnly, "--list-secret-keys --with-colons", true);
+  file.open(QIODevice::ReadOnly, "--list-secret-keys --with-colons", true);
   while((len = file.read(buffer, sizeof(buffer)-1)) != EOF) {
     buffer[len] = 0;
     output += QString(buffer);

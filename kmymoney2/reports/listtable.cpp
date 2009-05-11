@@ -30,6 +30,7 @@
 
 #include <klocale.h>
 #include <kdebug.h>
+#include <q3tl.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes

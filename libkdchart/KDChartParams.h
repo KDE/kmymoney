@@ -2098,7 +2098,7 @@ public:
 #if COMPAT_QT_VERSION >= 0x030000
     typedef QValueVector<uint> AxesArray;
 #else
-    typedef QArray<uint> AxesArray;
+    typedef Q3MemArray<uint> AxesArray;
 #endif
 
 public slots:

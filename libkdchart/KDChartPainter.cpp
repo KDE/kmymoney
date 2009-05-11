@@ -783,7 +783,7 @@ void KDChartPainter::paintDataValues( QPainter* painter,
                            //Pending Michel Painting data value labels rotated.
                            painter->drawText( infosKDD.x , infosKDD.y ,
                                                infosKDD.width, infosKDD.height,
-                                               Qt::AlignHCenter | Qt::AlignVCenter | Qt::SingleLine,
+                                               Qt::AlignHCenter | Qt::AlignVCenter | Qt::TextSingleLine,
                                                region->text );
 
                         }
@@ -1386,7 +1386,7 @@ void KDChartPainter::paintLegend( QPainter* painter,
 
     // start out with a rectangle around the legend
     //painter->setPen( QPen( Qt::black, 1 ) );
-    //painter->setBrush( QBrush::NoBrush );
+    //painter->setBrush( Qt::NoBrush );
     //Pending Michel: let us paint the frame at the end of the drawmarker
     //and draw text process, in case we need to resize it then
     /*
@@ -1465,7 +1465,7 @@ void KDChartPainter::paintLegend( QPainter* painter,
                 bFirstLF = false;
             }
             painter->setBrush( QBrush( params()->dataColor( dataset ),
-                               QBrush::SolidPattern ) );
+                               QBrush::Qt::SolidPattern ) );
 
             if( params()->legendShowLines() ){
                 painter->setPen( QPen( params()->dataColor( dataset ), 2,
@@ -1524,7 +1524,7 @@ void KDChartPainter::paintLegend( QPainter* painter,
     }
 
     painter->setPen( QPen( Qt::black, 1 ) );
-    painter->setBrush( QBrush::NoBrush );
+    painter->setBrush( Qt::NoBrush );
     if( !bFrameFound )
       painter->drawRect( _legendRect );
 
@@ -1652,7 +1652,7 @@ void KDChartPainter::paintHeaderFooter( QPainter* painter,
             painter->setFont( actFont );
             // Note: The alignment flags used here match the rect calculation
             //       done in KDChartPainter::setupGeometry().
-            //       AlignTop is done to ensure that the hd/ft texts of the same
+            //       Qt::AlignTop is done to ensure that the hd/ft texts of the same
             //       group (e.g. Hd2L and Hd2 and Hd2R) have the same baselines.
 
             QRect rect( params()->headerFooterRect( iHdFt ) );
@@ -1663,7 +1663,7 @@ void KDChartPainter::paintHeaderFooter( QPainter* painter,
             rect.setWidth(  rect.width() -2*dXY +1 );
             rect.setHeight( rect.height()-2*dXY +1 );
             painter->drawText( rect,
-                    Qt::AlignLeft | Qt::AlignTop | Qt::SingleLine,
+                    Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine,
                     txt );
         }
     }

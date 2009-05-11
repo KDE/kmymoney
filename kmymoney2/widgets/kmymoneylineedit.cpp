@@ -78,7 +78,7 @@ void kMyMoneyLineEdit::focusOutEvent(QFocusEvent *ev)
 void kMyMoneyLineEdit::keyReleaseEvent(QKeyEvent* k)
 {
   if(m_forceMonetaryDecimalSymbol) {
-    if(k->state() & Qt::KeypadModifierModifierModifier) {
+    if(k->state() & Qt::KeypadModifierModifierModifierModifier) {
       if(k->key() == Qt::Key_Comma
       || k->key() == Qt::Key_Period) {
         if(KGlobal::locale()->monetaryDecimalSymbol() == ",") {
@@ -103,7 +103,7 @@ void kMyMoneyLineEdit::keyReleaseEvent(QKeyEvent* k)
 void kMyMoneyLineEdit::keyPressEvent(QKeyEvent* k)
 {
   if(m_forceMonetaryDecimalSymbol) {
-    if(k->state() & Qt::KeypadModifierModifierModifier) {
+    if(k->state() & Qt::KeypadModifierModifierModifierModifier) {
       if(k->key() == Qt::Key_Comma
       || k->key() == Qt::Key_Period) {
         if(KGlobal::locale()->monetaryDecimalSymbol() == ",") {

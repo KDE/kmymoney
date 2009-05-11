@@ -289,7 +289,7 @@ void KDChartLinesPainter::specificPaintData( QPainter* painter,
 #if COMPAT_QT_VERSION >= 0x030000
     QValueVector<MyPoint> allPoints(
 #else
-    QArray<MyPoint> allPoints(
+    Q3MemArray<MyPoint> allPoints(
 #endif
                               arrayNumDatasets * arrayNumValues );
                                     

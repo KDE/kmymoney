@@ -183,7 +183,7 @@
 #define QPtrList QList
 #define QPtrListIterator QListIterator
 #define QPtrVector QVector
-#define QMemArray QArray
+#define QMemArray Q3MemArray
 
 #include <qlist.h>
 #include <qvector.h>

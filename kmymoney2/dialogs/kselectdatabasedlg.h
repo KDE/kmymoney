@@ -42,7 +42,7 @@ public:
   KSelectDatabaseDlg(KUrl openURL, QWidget *parent = 0, const char *name = 0);
   ~KSelectDatabaseDlg();
   /** Set the mode of this dialog
-    * @param - openMode (IO_ReadWrite = open database; IO_WriteOnly = saveas database)
+    * @param - openMode (QIODevice::ReadWrite = open database; QIODevice::WriteOnly = saveas database)
   **/
   void setMode(int openMode);
   /** Return URL of database

@@ -89,7 +89,7 @@ kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, const char *name, Qt::Alig
   m_datePopup->setTimeout(DATE_POPUP_TIMEOUT);
   m_datePopup->setView(new QLabel(KGlobal::locale()->formatDate(m_date), m_datePopup, "datePopupLabel"));
 
-  m_dateFrame = new Q3VBox(this, 0, WType_Popup);
+  m_dateFrame = new Q3VBox(this, 0, Qt::WType_Popup);
   m_dateFrame->setFrameStyle(Q3Frame::PopupPanel | Q3Frame::Raised);
   m_dateFrame->setLineWidth(3);
   m_dateFrame->hide();
@@ -240,17 +240,17 @@ void kMyMoneyDateInput::keyPressEvent(QKeyEvent * k)
   KShortcut today(i18n("Enter todays date into date input widget", "T"));
 
   switch(k->key()) {
-    case Key_Equal:
-    case Key_Plus:
+    case Qt::Key_Equal:
+    case Qt::Key_Plus:
       slotDateChosen(m_date.addDays(1));
       break;
 
-    case Key_Minus:
+    case Qt::Key_Minus:
       slotDateChosen(m_date.addDays(-1));
       break;
 
     default:
-      if(today.contains(KKey(k)) || k->key() == Key_T) {
+      if(today.contains(KKey(k)) || k->key() == Qt::Key_T) {
         slotDateChosen(QDate::currentDate());
       }
       break;
@@ -276,7 +276,7 @@ bool kMyMoneyDateInput::eventFilter(QObject *, QEvent *e)
     m_datePopup->hide();
   else if (e->type() == QEvent::KeyPress) {
     if (QKeyEvent *k = dynamic_cast<QKeyEvent*>(e)) {
-      if (k->key() == Key_Minus) {
+      if (k->key() == Qt::Key_Minus) {
         keyPressEvent(k);
         return true;
       }

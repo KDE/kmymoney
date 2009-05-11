@@ -89,7 +89,7 @@ void KDChartPiePainter::paintData( QPainter* painter,
     QRect ourClipRect( _dataRect );
     ourClipRect.addCoords( -1,-1,1,1 );
 
-    const QWMatrix & world = painter->worldMatrix();
+    const QMatrix & world = painter->worldMatrix();
     ourClipRect =
 #if COMPAT_QT_VERSION >= 0x030000
         world.mapRect( ourClipRect );

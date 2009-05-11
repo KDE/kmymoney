@@ -237,8 +237,8 @@ void qt_leave_modal( QWidget *widget );
 
 void WebPriceQuote::enter_loop(void)
 {
-  QWidget dummy(0,0,WType_Dialog | WShowModal);
-  dummy.setFocusPolicy( QWidget::NoFocus );
+  QWidget dummy(0,0,Qt::WType_Dialog | WShowModal);
+  dummy.setFocusPolicy( Qt::NoFocus );
   qt_enter_modal(&dummy);
   qApp->enter_loop();
   qt_leave_modal(&dummy);

@@ -1309,7 +1309,7 @@ void KDChartAxesPainter::paintAxes( QPainter* painter,
                         QPoint( p1X+pXD + pXDelta, p1Y+pYD + pYDelta ) );
                         painter->drawText( p1X+pXD-orgXD, p1Y+pYD-orgYD,
                         pTextsW, pTextsH,
-                        textAlign | Qt::DontClip,
+                        textAlign | Qt::TextDontClip,
                         QString::number( dt.time().second() ) );
                         pXD += orgXD;
                         pYD += orgYD;
@@ -1327,7 +1327,7 @@ void KDChartAxesPainter::paintAxes( QPainter* painter,
                                                    static_cast<int>( pSecY+pYD-orgYD ),
                                                    static_cast<int>( fabs((0.0 == pXDelta) ? cv.pTextsW : (p2X - pSecX))),
                                                    static_cast<int>( fabs((0.0 == pYDelta) ? cv.pTextsH : (p2Y - pSecY))),
-                                        cv.textAlign | Qt::DontClip,
+                                        cv.textAlign | Qt::TextDontClip,
                                         QString::number( dt.time().second() ) );
                                 painter->setPen( oldPen );
                                 if ( para.axisShowGrid() ){
@@ -1369,7 +1369,7 @@ void KDChartAxesPainter::paintAxes( QPainter* painter,
                                                    static_cast<int>( pMinY+pYD-orgYD ),
                                                    static_cast<int>( fabs((0.0 == pXDelta) ? cv.pTextsW : (p2X - pMinX)) ),
                                                    static_cast<int>( fabs((0.0 == pYDelta) ? cv.pTextsH : (p2Y - pMinY)) ),
-                                                   cv.textAlign | Qt::DontClip,
+                                                   cv.textAlign | Qt::TextDontClip,
                                                    QString::number( dt.time().minute() ) );
                                 painter->setPen( oldPen );
                                 if ( para.axisShowGrid() ){
@@ -1431,7 +1431,7 @@ void KDChartAxesPainter::paintAxes( QPainter* painter,
                                                    static_cast<int>( pHourY+pYD-orgYD ),
                                                    static_cast<int>( fabs((0.0 == pXDelta) ? cv.pTextsW : (p2X - pHourX))),
                                                    static_cast<int>( fabs((0.0 == pYDelta) ? cv.pTextsH : (p2Y - pHourY))),
-                                                   cv.textAlign | Qt::DontClip,
+                                                   cv.textAlign | Qt::TextDontClip,
                                                    QString::number( dt.time().hour() ) );
                                 painter->setPen( oldPen );
                                 if ( para.axisShowGrid() ){
@@ -1480,7 +1480,7 @@ void KDChartAxesPainter::paintAxes( QPainter* painter,
                                                    static_cast<int>( pDayY+pYD-orgYD ),
                                                    static_cast<int>( fabs((0.0 == pXDelta) ? cv.pTextsW : (p2X - pDayX)) ),
                                                    static_cast<int>( fabs((0.0 == pYDelta) ? cv.pTextsH : (p2Y - pDayY)) ),
-                                        cv.textAlign | Qt::DontClip,
+                                        cv.textAlign | Qt::TextDontClip,
                                         QString::number( dt.date().day() ) );
                                 painter->setPen( oldPen );
                                 /* khz: currently not used
@@ -1534,7 +1534,7 @@ void KDChartAxesPainter::paintAxes( QPainter* painter,
                            painter->setPen( oldPen );
                            fabs((0.0 == pXDelta) ? pTextsW : (p2X - pWeekX)),
                            fabs((0.0 == pYDelta) ? pTextsH : (p2Y - pWeekY)),
-                           textAlign | Qt::DontClip,
+                           textAlign | Qt::TextDontClip,
                            QString::number( dt.date().week() ) );
                            if ( para.axisShowGrid() ){
                            if( !dayPaint && 40 < pXYDelta  ){
@@ -1578,7 +1578,7 @@ void KDChartAxesPainter::paintAxes( QPainter* painter,
                                                    static_cast<int>( pMonthY+pYD-orgYD ),
                                                    static_cast<int>( fabs((0.0 == pXDelta) ? cv.pTextsW : (p2X - pMonthX)) ),
                                                    static_cast<int>( fabs((0.0 == pYDelta) ? cv.pTextsH : (p2Y - pMonthY)) ),
-                                        cv.textAlign | Qt::DontClip,
+                                        cv.textAlign | Qt::TextDontClip,
                                         QString::number( dt.date().month() ) );
                                 painter->setPen( oldPen );
                                 if ( para.axisShowGrid() ){
@@ -1630,7 +1630,7 @@ void KDChartAxesPainter::paintAxes( QPainter* painter,
                                                    static_cast<int>( pYearY+pYD-orgYD ),
                                                    static_cast<int>( fabs((0.0 == pXDelta) ? cv.pTextsW : (p2X - pYearX)) ),
                                                    static_cast<int>( fabs((0.0 == pYDelta) ? cv.pTextsH : (p2Y - pYearY)) ),
-                                        cv.textAlign | Qt::DontClip,
+                                        cv.textAlign | Qt::TextDontClip,
                                         QString::number( dt.date().year() ) );
                                 painter->setPen( oldPen );
                                 if ( para.axisShowGrid() ){
@@ -1778,7 +1778,7 @@ void KDChartAxesPainter::paintAxes( QPainter* painter,
                                                            static_cast<int>( cv.pTextsY ),
                                                            static_cast<int>( cv.pTextsW ),
                                                            static_cast<int>( cv.pTextsH ),
-                                                           cv.textAlign | Qt::DontClip,
+                                                           cv.textAlign | Qt::TextDontClip,
                                                            label );
 
                                         // debugging text rect
@@ -1964,10 +1964,10 @@ qDebug("done\n" );
             painter->setPen( QPen( para.axisLineColor(),
                              para.axisTrueLineWidth() ) );
             int x =         cv.dest.x();
-            if( 2.0 >= QABS(cv.pLastX - x) )
+            if( 2.0 >= qAbs(cv.pLastX - x) )
                 x = static_cast < int > ( cv.pLastX );
             int y =         cv.dest.y();
-            if( 2.0 >= QABS(cv.pLastY - y) )
+            if( 2.0 >= qAbs(cv.pLastY - y) )
                 y = static_cast < int > ( cv.pLastY );
             painter->drawLine( cv.orig, QPoint(x,y) );
         }
@@ -3029,16 +3029,16 @@ void KDChartAxesPainter::calculateLabelTexts(
                 if( isLogarithmic ){
                     if( bIsDouble ) {
                         //qDebug("\n[L--] nLow: %f,  nHigh: %f,  nDelta: %f", nLow, nHigh, nDelta );
-                        if( 0.0 == QABS( nLow ) )
+                        if( 0.0 == qAbs( nLow ) )
                             nLow = -5;
                         else{
                             // find the Low / High values for the log. axis
-                            nLow = log10( QABS( nLow ) );
+                            nLow = log10( qAbs( nLow ) );
                             //if( 0.0 >= nLow ){
                                 //nLow = fastPow10( -nLow );
                             //}
                         }
-                        nHigh = log10( QABS( nHigh ) );
+                        nHigh = log10( qAbs( nHigh ) );
 
                         //qDebug("[L-0] nLow: %f,  nHigh: %f", nLow, nHigh );
                         double intPart=0.0; // initialization necessary for Borland C++
@@ -3741,7 +3741,7 @@ QString KDChartAxesPainter::applyLabelsFormat( const double nVal_,
     double valLog10 = 0.0;
     if( notation == KDChartEnums::NumberNotationScientific ||
         notation == KDChartEnums::NumberNotationScientificBig ){
-        valLog10 = (nVal != 0.0) ? trunc( log10(QABS(nVal)) ) : 0.0;
+        valLog10 = (nVal != 0.0) ? trunc( log10(qAbs(nVal)) ) : 0.0;
         //qDebug("nVal old: %f   valLog10: %f",nVal,valLog10);
         nVal   /= fastPow10( valLog10 );
         nDelta /= fastPow10( valLog10 );
@@ -4424,7 +4424,7 @@ void KDChartAxesPainter::paintData( QPainter* painter,
     //ourClipRect.setLeft( ourClipRect.left() + 1 );
     //ourClipRect.setRight( ourClipRect.right() - 1 );
 
-    const QWMatrix & world = painter->worldMatrix();
+    const QMatrix & world = painter->worldMatrix();
     ourClipRect =
 #if COMPAT_QT_VERSION >= 0x030000
     world.mapRect( ourClipRect );

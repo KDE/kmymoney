@@ -167,7 +167,7 @@ void KMyMoneyCombo::setPaletteBackgroundColor(const QColor& color)
 void KMyMoneyCombo::mousePressEvent(QMouseEvent *e)
 {
   // mostly copied from QCombo::mousePressEvent() and adjusted for our needs
-  if(e->button() != LeftButton)
+  if(e->button() != Qt::LeftButton)
     return;
 
   if(((!editable() || isInArrowArea(mapToGlobal(e->pos()))) && selector()->itemList().count()) && !m_completion->isVisible()) {
@@ -203,9 +203,9 @@ bool KMyMoneyCombo::isInArrowArea(const QPoint& pos) const
 
 void KMyMoneyCombo::keyPressEvent(QKeyEvent* e)
 {
-  if((e->key() == Key_F4 && e->state() == 0 ) ||
-     (e->key() == Key_Down && (e->state() & AltButton)) ||
-     (!editable() && e->key() == Key_Space)) {
+  if((e->key() == Qt::Key_F4 && e->state() == 0 ) ||
+     (e->key() == Qt::Key_Down && (e->state() & Qt::AltModifier)) ||
+     (!editable() && e->key() == Qt::Key_Space)) {
     // if we have at least one item in the list, we open the dropdown
     if(selector()->listView()->firstChild())
       m_completion->show();

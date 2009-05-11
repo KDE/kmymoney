@@ -320,7 +320,7 @@ bool KEnterScheduleDlg::focusNextPrevChild(bool next)
     }
 
     if(w != currentWidget
-    && ((w->focusPolicy() & TabFocus) == TabFocus)
+    && ((w->focusPolicy() & Qt::TabFocus) == Qt::TabFocus)
     && w->isVisible() && w->isEnabled()) {
       // qDebug("Selecting '%s' as focus", w->className());
       w->setFocus();

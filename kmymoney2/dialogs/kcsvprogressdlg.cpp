@@ -104,7 +104,7 @@ void KCsvProgressDlg::performExport(void)
   }
 
   QFile qfile(m_qlineeditFile->text());
-  if (!qfile.open(IO_WriteOnly)) {
+  if (!qfile.open(QIODevice::WriteOnly)) {
     KMessageBox::error(this, i18n("Unable to open export file for writing."));
     return;
   }
@@ -151,7 +151,7 @@ void KCsvProgressDlg::performImport(void)
   }
 
   QFile qfile(m_qlineeditFile->text());
-  if (!qfile.open(IO_ReadOnly)) {
+  if (!qfile.open(QIODevice::ReadOnly)) {
     KMessageBox::error(this, i18n("Unable to open import file for reading."));
     return;
   }

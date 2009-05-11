@@ -35,7 +35,7 @@
 #include <qmemarray.h>
 #else
 #include <qarray.h>
-#define QMemArray QArray
+#define QMemArray Q3MemArray
 #endif
 
 #include <stdlib.h>

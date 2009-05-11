@@ -124,7 +124,7 @@ void kMandatoryFieldGroup::changed(void)
       continue;
     }
     if (widget->inherits("QCheckBox")) {
-      if (((QCheckBox*)widget->qt_cast("QCheckBox"))->state() == QButton::NoChange) {
+      if (((QCheckBox*)widget->qt_cast("QCheckBox"))->state() == QCheckBox::NoChange) {
         enable = false;
         break;
       } else

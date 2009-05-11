@@ -89,7 +89,7 @@ void KDChartPolarPainter::paintData( QPainter* painter,
     // PENDING(khz) adjust the clip rect if neccessary...
     //
 
-    const QWMatrix & world = painter->worldMatrix();
+    const QMatrix & world = painter->worldMatrix();
     ourClipRect =
 #if COMPAT_QT_VERSION >= 0x030000
         world.mapRect( ourClipRect );

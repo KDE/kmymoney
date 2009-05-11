@@ -216,9 +216,9 @@ void kMyMoneyEdit::init(void)
   // Yes, just a simple double validator !
   kMyMoneyMoneyValidator *validator = new kMyMoneyMoneyValidator(this);
   m_edit->setValidator(validator);
-  m_edit->setAlignment(AlignRight | AlignVCenter);
+  m_edit->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
-  m_calculatorFrame = new Q3VBox(this, 0, WType_Popup);
+  m_calculatorFrame = new Q3VBox(this, 0, Qt::WType_Popup);
 
   m_calculatorFrame->setFrameStyle(Q3Frame::PopupPanel | Q3Frame::Raised);
   m_calculatorFrame->setLineWidth(3);

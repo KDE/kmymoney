@@ -280,11 +280,11 @@ kMyMoneyDateTbl::paintCell(QPainter *painter, int row, int col)
 void
 kMyMoneyDateTbl::keyPressEvent( QKeyEvent *e )
 {
-    if ( e->key() == Qt::Key_Prior ) {
+    if ( e->key() == Qt::Key_PageUp ) {
         setDate(date.addMonths(-1));
         return;
     }
-    if ( e->key() == Qt::Key_Next ) {
+    if ( e->key() == Qt::Key_PageDown ) {
         setDate(date.addMonths(1));
         return;
     }

@@ -135,7 +135,7 @@ double KDChartSeriesCollection::maxValue( int coordinate ) const
 #if COMPAT_QT_VERSION >= 0x030000
     QValueVector<KDChartBaseSeries *>::const_iterator i;
 #else
-    QArray<KDChartBaseSeries *>::ConstIterator i;
+    Q3MemArray<KDChartBaseSeries *>::ConstIterator i;
 #endif
     for ( i = (*this).begin(); i != (*this).end(); i ++ )
     {
@@ -166,7 +166,7 @@ double KDChartSeriesCollection::minValue( int coordinate ) const
 #if COMPAT_QT_VERSION >= 0x030000
     QValueVector<KDChartBaseSeries *>::const_iterator i;
 #else
-    QArray<KDChartBaseSeries *>::ConstIterator i;
+    Q3MemArray<KDChartBaseSeries *>::ConstIterator i;
 #endif
     for ( i = (*this).begin(); !ok && i != (*this).end(); i ++ )
         result = (*i)->minValue(coordinate, ok);
@@ -189,7 +189,7 @@ unsigned int KDChartSeriesCollection::indexOf( KDChartBaseSeries *series )
 #if COMPAT_QT_VERSION >= 0x030000
     QValueVector<KDChartBaseSeries *>::const_iterator i;
 #else
-    QArray<KDChartBaseSeries *>::ConstIterator i;
+    Q3MemArray<KDChartBaseSeries *>::ConstIterator i;
 #endif
     for ( i = (*this).begin(); i != (*this).end(); i ++, index ++ )
         if ( *i == series )
