@@ -79,8 +79,7 @@ SET (_critial_common_sources
   register.cpp
   )
 
-#KDE3_AUTOMOC(${_uncritial_common_sources} ${_critial_common_sources})
-KDE4_ADD_MOC_FILES(_uncritial_common_sources kmymoneywizard_p.h)
+#KDE4_ADD_MOC_FILES(_uncritial_common_sources kmymoneywizard_p.h)
 
 SET (kmymoney_base_UI
   kbudgetvaluesdecl.ui transactionsortoption.ui kaccounttemplateselectordecl.ui
@@ -106,17 +105,9 @@ KDE4_ADD_LIBRARY(kmymoney_base STATIC ${_uncritial_common_sources})
 # we never link against this library,
 # but it is needed for uic and QtDesigner
 
-<<<<<<< CMakeLists.txt
 KDE4_ADD_LIBRARY(kmymoney SHARED
  ${_critial_common_sources} ${_uncritial_common_sources} kmmwidgets.cpp)
 TARGET_LINK_LIBRARIES(kmymoney kmm_mymoney ${KDE4_KDEUI_LIBS})
-=======
-ADD_LIBRARY(kmymoney SHARED
- ${_critial_common_sources}
- # ${_uncritial_common_sources}
- kmmwidgets.cpp)
-TARGET_LINK_LIBRARIES(kmymoney kmymoney_base kmm_mymoney kdeui)
->>>>>>> 1.9
 
 # Build directly with INSTALL_RPATH.
 # This avoids relinking (and rerunning uic) on 'make install'
@@ -161,16 +152,6 @@ SET(libwidgets_a_UI
   kmymoneyonlinequoteconfigdecl.ui kmymoneygpgconfigdecl.ui 
   )
 
-<<<<<<< CMakeLists.txt
-# this one is important: uic DEPENDS on libkmymoney.so. If uic does
-# not find libkmymoney.so, gcc will fail compiling
-# kmymoneyreportconfigtab2decl.cpp and throw errors like
-# "invalid use of undefined type `struct KMyMoneyGeneralCombo'"
-KMM_ADD_UI_FILES(libwidgets_a_SOURCES ${libwidgets_a_UI}
-  DEPENDS kmymoney)
-
-KD4_ADD_LIBRARY(widgets STATIC ${libwidgets_a_SOURCES})
-=======
 # using uic on the above UI files DEPENDS on libkmymoney.so. If uic
 # does not find libkmymoney.so, gcc will fail compiling
 # kmymoneyreportconfigtab2decl.cpp and throw errors like "invalid use
@@ -183,7 +164,6 @@ ADD_LIBRARY(widgets STATIC
   ${widgets_ui_srcs}
   #  ${_uncritial_common_sources}
   )
->>>>>>> 1.9
 TARGET_LINK_LIBRARIES(widgets kmymoney_base)
 
 ########### install files ###############
