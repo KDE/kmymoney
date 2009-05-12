@@ -117,12 +117,12 @@ public:
     return QMap<Key,T>::values();
   }
 
-  inline Q3ValueList<Qt::Key> keys(void) const
+  inline Q3ValueList<Key> keys(void) const
   {
     return QMap<Key,T>::keys();
   }
 
-  const T& operator[] ( const Qt::Key& k ) const
+  const T& operator[] ( const Key& k ) const
         { /*QT_CHECK_INVALID_MAP_ELEMENT;*/ /*PORT ME KDE4*/ return QMap<Key,T>::operator[](k); }
 
   inline Q_TYPENAME QMap<Key, T>::const_iterator find(const Key& k) const
@@ -137,7 +137,7 @@ public:
 
   inline Q_TYPENAME QMap<Key, T>::const_iterator end(void) const
   {
-    return QMap<Qt::Key,T>::end();
+    return QMap<Key,T>::end();
   }
 
   inline bool contains(const Key& k) const

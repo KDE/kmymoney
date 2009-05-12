@@ -200,7 +200,7 @@ QString GncObject::hide (QString data, unsigned int anonClass) {
       result = i18n("Stock%1").arg(++nextEquity, -6);
       anonStocks.insert (data, result);
     } else {
-      result = (*it).data();
+      result = (*it);
     }
     break;
   case NXTPAY:   // genearet/return a payee name
@@ -209,7 +209,7 @@ QString GncObject::hide (QString data, unsigned int anonClass) {
       result = i18n("Payee%1").arg(++nextPayee, -6);
       anonPayees.insert (data, result);
     } else {
-      result = (*it).data();
+      result = (*it);
     }
     break;
   case NXTSCHD: result = i18n("Schedule%1").arg(++nextSched, -6); break; // generate a schedule name
@@ -2111,7 +2111,7 @@ bool MyMoneyGncReader::writeReportToFile (const Q3ValueList<QString>& sectionsTo
   }
   Q3TextStream stream (&reportFile);
   for (i = 0; i < sectionsToReport.count(); i++) {
-    stream << buildReportSection (*sectionsToReport.at(i)).toLatin1() << endl;
+    stream << buildReportSection (*sectionsToReport.at(i)) << endl;
   }
   reportFile.close();
   delete fd;
@@ -2152,7 +2152,7 @@ QString MyMoneyGncReader::createOrphanAccount (const QString& gncName) {
   m_storage->addAccount (acc);
   // assign the gnucash id as the key into the map to find our id
   m_mapIds[gncName.utf8()] = acc.id();
-  postMessage ("OR", 1, acc.name().data());
+  postMessage (QString("OR"), 1, acc.name().data());
   return (acc.id());
 }
 //****************************** incrDate *********************************************

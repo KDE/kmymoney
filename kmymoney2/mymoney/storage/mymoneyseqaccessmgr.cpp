@@ -498,7 +498,7 @@ void MyMoneySeqAccessMgr::modifyAccount(const MyMoneyAccount& account, const boo
         institution(account.institutionId());
 
       Q3ValueList<QString>::ConstIterator it_a;
-      for(it_a = account.accountList().begin(); it_a != account.accountList().end(); ++it_a) {
+      for(it_a = account.accountList().constBegin(); it_a != account.accountList().constEnd(); ++it_a) {
         this->account(*it_a);
       }
 
@@ -1023,7 +1023,7 @@ void MyMoneySeqAccessMgr::loadAccounts(const QMap<QString, MyMoneyAccount>& map)
 
   int pos = lastId.find(QRegExp("\\d+"), 0);
   if(pos != -1) {
-    m_nextAccountID = atol(lastId.mid(pos));
+    m_nextAccountID = lastId.mid(pos).toInt();
   }
 }
 
@@ -1046,7 +1046,7 @@ void MyMoneySeqAccessMgr::loadTransactions(const QMap<QString, MyMoneyTransactio
 
   int pos = lastId.find(QRegExp("\\d+"), 0);
   if(pos != -1) {
-    m_nextTransactionID = atol(lastId.mid(pos));
+    m_nextTransactionID = lastId.mid(pos).toInt();
   }
 }
 
@@ -1064,7 +1064,7 @@ void MyMoneySeqAccessMgr::loadInstitutions(const QMap<QString, MyMoneyInstitutio
 
   int pos = lastId.find(QRegExp("\\d+"), 0);
   if(pos != -1) {
-    m_nextInstitutionID = atol(lastId.mid(pos));
+    m_nextInstitutionID = lastId.mid(pos).toInt();
   }
 }
 
@@ -1085,7 +1085,7 @@ void MyMoneySeqAccessMgr::loadPayees(const QMap<QString, MyMoneyPayee>& map)
 
   int pos = lastId.find(QRegExp("\\d+"), 0);
   if(pos != -1) {
-    m_nextPayeeID = atol(lastId.mid(pos));
+    m_nextPayeeID = lastId.mid(pos).toInt();
   }
 }
 
@@ -1103,7 +1103,7 @@ void MyMoneySeqAccessMgr::loadSecurities(const QMap<QString, MyMoneySecurity>& m
 
   int pos = lastId.find(QRegExp("\\d+"), 0);
   if(pos != -1) {
-    m_nextSecurityID = atol(lastId.mid(pos));
+    m_nextSecurityID = lastId.mid(pos).toInt();
   }
 }
 
@@ -1327,7 +1327,7 @@ void MyMoneySeqAccessMgr::loadSchedules(const QMap<QString, MyMoneySchedule>& ma
 
   int pos = lastId.find(QRegExp("\\d+"), 0);
   if(pos != -1) {
-    m_nextScheduleID = atol(lastId.mid(pos));
+    m_nextScheduleID = lastId.mid(pos).toInt();
   }
 }
 
@@ -1448,7 +1448,7 @@ void MyMoneySeqAccessMgr::addCurrency(const MyMoneySecurity& currency)
 
   it = m_currencyList.find(currency.id());
   if(it != m_currencyList.end()) {
-    throw new MYMONEYEXCEPTION(QString("Cannot add currency with existing id %1").arg(currency.id().data()));
+    throw new MYMONEYEXCEPTION(QString("Cannot add currency with existing id %1").arg(currency.id()));
   }
 
   m_currencyList.insert(currency.id(), currency);
@@ -1460,7 +1460,7 @@ void MyMoneySeqAccessMgr::modifyCurrency(const MyMoneySecurity& currency)
 
   it = m_currencyList.find(currency.id());
   if(it == m_currencyList.end()) {
-    throw new MYMONEYEXCEPTION(QString("Cannot modify currency with unknown id %1").arg(currency.id().data()));
+    throw new MYMONEYEXCEPTION(QString("Cannot modify currency with unknown id %1").arg(currency.id()));
   }
 
   m_currencyList.modify(currency.id(), currency);
@@ -1474,7 +1474,7 @@ void MyMoneySeqAccessMgr::removeCurrency(const MyMoneySecurity& currency)
 
   it = m_currencyList.find(currency.id());
   if(it == m_currencyList.end()) {
-    throw new MYMONEYEXCEPTION(QString("Cannot remove currency with unknown id %1").arg(currency.id().data()));
+    throw new MYMONEYEXCEPTION(QString("Cannot remove currency with unknown id %1").arg(currency.id()));
   }
 
   m_currencyList.remove(currency.id());
@@ -1489,7 +1489,7 @@ const MyMoneySecurity MyMoneySeqAccessMgr::currency(const QString& id) const
 
   it = m_currencyList.find(id);
   if(it == m_currencyList.end()) {
-    throw new MYMONEYEXCEPTION(QString("Cannot retrieve currency with unknown id '%1'").arg(id.data()));
+    throw new MYMONEYEXCEPTION(QString("Cannot retrieve currency with unknown id '%1'").arg(id));
   }
 
   return *it;
@@ -1529,7 +1529,7 @@ void MyMoneySeqAccessMgr::loadReports(const QMap<QString, MyMoneyReport>& map)
 
   int pos = lastId.find(QRegExp("\\d+"), 0);
   if(pos != -1) {
-    m_nextReportID = atol(lastId.mid(pos));
+    m_nextReportID = lastId.mid(pos).toInt();
   }
 }
 
@@ -1603,7 +1603,7 @@ void MyMoneySeqAccessMgr::loadBudgets(const QMap<QString, MyMoneyBudget>& map)
 
   int pos = lastId.find(QRegExp("\\d+"), 0);
   if(pos != -1) {
-    m_nextBudgetID = atol(lastId.mid(pos));
+    m_nextBudgetID = lastId.mid(pos).toInt();
   }
 }
 
