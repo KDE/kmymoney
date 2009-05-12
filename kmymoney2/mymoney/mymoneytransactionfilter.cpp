@@ -587,7 +587,7 @@ bool MyMoneyTransactionFilter::payees(QStringList& list) const
 
   if ( result )
   {
-    Q3AsciiDictIterator<char> it_payee( m_payees );
+    Q3DictIterator<char> it_payee( m_payees );
     while ( it_payee.current() )
     {
       list += it_payee.currentKey();
@@ -603,7 +603,7 @@ bool MyMoneyTransactionFilter::accounts(QStringList& list) const
 
   if ( result )
   {
-    Q3AsciiDictIterator<char> it_account( m_accounts );
+    Q3DictIterator<char> it_account( m_accounts );
     while ( it_account.current() )
     {
       QString account = it_account.currentKey();
@@ -620,7 +620,7 @@ bool MyMoneyTransactionFilter::categories(QStringList& list) const
 
   if ( result )
   {
-    Q3AsciiDictIterator<char> it_category( m_categories );
+    Q3DictIterator<char> it_category( m_categories );
     while ( it_category.current() )
     {
       list += it_category.currentKey();

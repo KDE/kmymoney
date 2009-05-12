@@ -11,8 +11,6 @@ SET (libwizardpages_a_UI
   accountsdecl.ui currencydecl.ui userinfodecl.ui
   )
 
-#KDE3_AUTOMOC(${libwizardpages_a_SOURCES})
-
 # The handling of these ui files depends
 # on libkmymoney.so (the widgets library)
 KMM_ADD_UI_FILES(wizardpages_ui_srcs ${libwizardpages_a_UI}

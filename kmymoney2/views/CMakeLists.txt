@@ -35,8 +35,6 @@ SET(libviews_a_UI
 
 KMM_CREATE_LINKS( ${libviews_a_HEADER} )
 
-#KDE3_AUTOMOC(${libviews_a_SOURCES})
-
 # The handling of these ui files depends
 # on libkmymoney.so (the widgets library)
 KMM_ADD_UI_FILES(libviews_a_SOURCES ${libviews_a_UI} DEPENDS kmymoney)

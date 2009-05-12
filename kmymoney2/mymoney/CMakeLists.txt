@@ -7,15 +7,15 @@ INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} )
 
 SET(kmm_mymoney_LIB_SRCS
   mymoneymoney.cpp mymoneyfinancialcalculator.cpp 
-  #mymoneytransactionfilter.cpp
+  mymoneytransactionfilter.cpp
   mymoneyobject.cpp mymoneykeyvaluecontainer.cpp mymoneyobserver.cpp
   mymoneysubject.cpp mymoneysplit.cpp mymoneyinstitution.cpp
   mymoneyexception.cpp mymoneyinvesttransaction.cpp mymoneyutils.cpp
   mymoneysecurity.cpp mymoneytransaction.cpp mymoneyscheduled.cpp
   mymoneypayee.cpp 
-  #mymoneyfile.cpp 
+  mymoneyfile.cpp 
   mymoneycategory.cpp 
-  #mymoneyaccount.cpp
+  mymoneyaccount.cpp
   mymoneyreport.cpp mymoneystatement.cpp mymoneyprice.cpp mymoneybudget.cpp
   mymoneyobjectcontainer.cpp 
   #mymoneyforecast.cpp

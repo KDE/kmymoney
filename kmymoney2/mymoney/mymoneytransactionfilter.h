@@ -36,7 +36,7 @@
 #include <qregexp.h>
 //Added by qt3to4:
 #include <Q3ValueList>
-
+#include <Q3Dict>
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -563,9 +563,9 @@ protected:
 
   QRegExp             m_text;
   bool                m_invertText;
-  Q3AsciiDict<char>    m_accounts;
-  Q3AsciiDict<char>    m_payees;
-  Q3AsciiDict<char>    m_categories;
+  Q3Dict<char>    m_accounts;
+  Q3Dict<char>    m_payees;
+  Q3Dict<char>    m_categories;
   Q3IntDict<char>      m_states;
   Q3IntDict<char>      m_types;
   Q3IntDict<char>      m_validity;

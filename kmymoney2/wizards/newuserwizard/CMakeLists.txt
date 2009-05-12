@@ -15,8 +15,6 @@ SET (libnewuserwizard_a_UI
 KMM_ADD_UI_FILES(libnewuserwizard_a_SOURCES ${libnewuserwizard_a_UI}
   DEPENDS kmymoney)
 
-#KDE4_ADD_MOC_FILES(libnewuserwizard_a_SOURCES knewuserwizard_p.h)
-
 KDE4_ADD_LIBRARY(newuserwizard STATIC ${libnewuserwizard_a_SOURCES})
 ADD_DEPENDENCIES(newuserwizard generate_wizardpages_ui_srcs)
 
