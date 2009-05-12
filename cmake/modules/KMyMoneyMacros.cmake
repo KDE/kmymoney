@@ -109,7 +109,7 @@ MACRO(KMM_ADD_UI_FILES _sources )
     ADD_CUSTOM_COMMAND(OUTPUT ${_header}
       COMMAND ${QT_UIC_EXECUTABLE}
       ARGS
-        -L ${KDE3_LIB_DIR}/kde3/plugins/designer -nounload
+        -L ${KDE4_LIB_DIR}/kde4/plugins/designer -nounload
         -L ${_kmm_plugin_path} -o ${_header}
         ${CMAKE_CURRENT_SOURCE_DIR}/${_current_FILE}
       DEPENDS ${_this_DEPENDS} ${_tmp_FILE}
@@ -119,7 +119,7 @@ MACRO(KMM_ADD_UI_FILES _sources )
     ADD_CUSTOM_COMMAND(OUTPUT ${_src}
       COMMAND ${CMAKE_COMMAND}
       ARGS
-        -DKDE_UIC_PLUGIN_DIR:FILEPATH=${KDE3_LIB_DIR}/kde3/plugins/designer
+        -DKDE_UIC_PLUGIN_DIR:FILEPATH=${KDE4_LIB_DIR}/kde4/plugins/designer
         -DKMM_UIC_PLUGIN_DIR:FILEPATH=${_kmm_plugin_path}
         -DKDE_UIC_EXECUTABLE:FILEPATH=${QT_UIC_EXECUTABLE}
         -DKDE_UIC_FILE:FILEPATH=${_tmp_FILE}
@@ -156,7 +156,7 @@ MACRO(KMM_CREATE_UI_HEADER_FILES _sources )
 
     ADD_CUSTOM_COMMAND(OUTPUT ${_header}
       COMMAND ${QT_UIC_EXECUTABLE}
-      ARGS -L ${KDE3_LIB_DIR}/kde3/plugins/designer -nounload
+      ARGS -L ${KDE4_LIB_DIR}/kde4/plugins/designer -nounload
            -L ${_kmm_plugin_path} -o ${_header} ${_absolute_current_FILE}
       DEPENDS ${_absolute_current_FILE} ${_this_DEPENDS}
       )
