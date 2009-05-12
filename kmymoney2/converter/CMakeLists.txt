@@ -7,7 +7,7 @@ SET (libconverter_a_SOURCES
 
   	mymoneyqifwriter.cpp 
 	#mymoneystatementreader.cpp 
-	mymoneytemplate.cpp
+	#mymoneytemplate.cpp
   webpricequote.cpp
 	)
 

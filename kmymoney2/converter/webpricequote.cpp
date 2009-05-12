@@ -237,7 +237,7 @@ void qt_leave_modal( QWidget *widget );
 
 void WebPriceQuote::enter_loop(void)
 {
-  QWidget dummy(0,0,Qt::WType_Dialog | WShowModal);
+  QWidget dummy(0,0,Qt::WType_Dialog | Qt::WShowModal);
   dummy.setFocusPolicy( Qt::NoFocus );
   qt_enter_modal(&dummy);
   qApp->enter_loop();
@@ -615,21 +615,21 @@ QStringList WebPriceQuote::quoteSourcesNative()
   // time to remove that entry and convert it to the new system.
   if ( ! groups.count() && kconfig->hasGroup("Online Quotes Options") )
   {
-    kconfig->setGroup("Online Quotes Options");
-    QString url(kconfig->readEntry("URL","http://finance.yahoo.com/d/quotes.csv?s=%1&f=sl1d1"));
-    QString symbolRegExp(kconfig->readEntry("SymbolRegex","\"([^,\"]*)\",.*"));
-    QString priceRegExp(kconfig->readEntry("PriceRegex","[^,]*,([^,]*),.*"));
-    QString dateRegExp(kconfig->readEntry("DateRegex","[^,]*,[^,]*,\"([^\"]*)\""));
+    KConfigGroup grp = kconfig->group("Online Quotes Options");
+    QString url(grp.readEntry("URL","http://finance.yahoo.com/d/quotes.csv?s=%1&f=sl1d1"));
+    QString symbolRegExp(grp.readEntry("SymbolRegex","\"([^,\"]*)\",.*"));
+    QString priceRegExp(grp.readEntry("PriceRegex","[^,]*,([^,]*),.*"));
+    QString dateRegExp(grp.readEntry("DateRegex","[^,]*,[^,]*,\"([^\"]*)\""));
     kconfig->deleteGroup("Online Quotes Options");
 
     groups += "Old Source";
-    kconfig->setGroup(QString("Online-Quote-Source-%1").arg("Old Source"));
-    kconfig->writeEntry("URL", url);
-    kconfig->writeEntry("SymbolRegex", symbolRegExp);
-    kconfig->writeEntry("PriceRegex",priceRegExp);
-    kconfig->writeEntry("DateRegex", dateRegExp);
-    kconfig->writeEntry("DateFormatRegex", "%m %d %y");
-    kconfig->sync();
+    grp = kconfig->group(QString("Online-Quote-Source-%1").arg("Old Source"));
+    grp.writeEntry("URL", url);
+    grp.writeEntry("SymbolRegex", symbolRegExp);
+    grp.writeEntry("PriceRegex",priceRegExp);
+    grp.writeEntry("DateRegex", dateRegExp);
+    grp.writeEntry("DateFormatRegex", "%m %d %y");
+    grp.sync();
   }
 
   // Set up each of the default sources.  These are done piecemeal so that
@@ -683,28 +683,28 @@ WebPriceQuoteSource::WebPriceQuoteSource(const QString& name)
 {
   m_name = name;
   KConfig *kconfig = KGlobal::config();
-  kconfig->setGroup(QString("Online-Quote-Source-%1").arg(m_name));
-  m_sym = kconfig->readEntry("SymbolRegex");
-  m_date = kconfig->readEntry("DateRegex");
-  m_dateformat = kconfig->readEntry("DateFormatRegex","%m %d %y");
-  m_price = kconfig->readEntry("PriceRegex");
-  m_url = kconfig->readEntry("URL");
-  m_skipStripping = kconfig->readBoolEntry("SkipStripping", false);
+  KConfigGroup grp = kconfig->group(QString("Online-Quote-Source-%1").arg(m_name));
+  m_sym = grp.readEntry("SymbolRegex");
+  m_date = grp.readEntry("DateRegex");
+  m_dateformat = grp.readEntry("DateFormatRegex","%m %d %y");
+  m_price = grp.readEntry("PriceRegex");
+  m_url = grp.readEntry("URL");
+  m_skipStripping = grp.readEntry("SkipStripping", false);
 }
 
 void WebPriceQuoteSource::write(void) const
 {
   KConfig *kconfig = KGlobal::config();
-  kconfig->setGroup(QString("Online-Quote-Source-%1").arg(m_name));
-  kconfig->writeEntry("URL", m_url);
-  kconfig->writeEntry("PriceRegex", m_price);
-  kconfig->writeEntry("DateRegex", m_date);
-  kconfig->writeEntry("DateFormatRegex", m_dateformat);
-  kconfig->writeEntry("SymbolRegex", m_sym);
+  KConfigGroup grp = kconfig->group(QString("Online-Quote-Source-%1").arg(m_name));
+  grp.writeEntry("URL", m_url);
+  grp.writeEntry("PriceRegex", m_price);
+  grp.writeEntry("DateRegex", m_date);
+  grp.writeEntry("DateFormatRegex", m_dateformat);
+  grp.writeEntry("SymbolRegex", m_sym);
   if(m_skipStripping)
-    kconfig->writeEntry("SkipStripping", m_skipStripping);
+    grp.writeEntry("SkipStripping", m_skipStripping);
   else
-    kconfig->deleteEntry("SkipStripping");
+    grp.deleteEntry("SkipStripping");
 }
 
 void WebPriceQuoteSource::rename(const QString& name)
