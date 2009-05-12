@@ -1,12 +1,6 @@
 [Desktop Entry]
 Encoding=UTF-8
 Comment=KMyMoney File
-Comment[de]=KMyMoney-Datei
-Comment[fr]=Fichier KMyMoney
-Comment[tr]=KMyMoney Dosyası
-Comment[ro]=Fișier KMyMoney
-Comment[ru]=Финансовые данные KMyMoney
-Comment[zh_CN]=KMyMoney文件
 Icon=kmy
 Type=MimeType
 MimeType=application/x-kmymoney
