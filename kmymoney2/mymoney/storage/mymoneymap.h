@@ -123,9 +123,9 @@ public:
   }
 
   const T& operator[] ( const Qt::Key& k ) const
-        { QT_CHECK_INVALID_MAP_ELEMENT; return QMap<Key,T>::operator[](k); }
+        { /*QT_CHECK_INVALID_MAP_ELEMENT;*/ /*PORT ME KDE4*/ return QMap<Key,T>::operator[](k); }
 
-  inline Q_TYPENAME QMap<Key, T>::const_iterator find(const Qt::Key& k) const
+  inline Q_TYPENAME QMap<Key, T>::const_iterator find(const Key& k) const
   {
     return QMap<Key,T>::find(k);
   }

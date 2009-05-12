@@ -87,8 +87,7 @@ public:
   virtual bool ignorableWhitespace(const QString & ch);
   virtual bool processingInstruction(const QString & target, const QString & data);
   virtual bool skippedEntity(const QString & name);
-  virtual QString errorString(void);
-
+  virtual QString errorString() const ;
 private:
   MyMoneyStorageXML* m_reader;
   QXmlLocator*       m_loc;
@@ -352,7 +351,7 @@ bool MyMoneyXmlContentHandler::processingInstruction(const QString& /* target */
   return true;
 }
 
-QString MyMoneyXmlContentHandler::errorString(void)
+QString MyMoneyXmlContentHandler::errorString() const
 {
   return m_errMsg;
 }

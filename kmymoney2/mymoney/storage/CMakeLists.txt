@@ -13,7 +13,7 @@ SET(storage_a_SOURCES
   )
 
 KDE4_ADD_KCFG_FILES(storage_a_SOURCES
-  ${KMyMoney2_SOURCE_DIR} ${KMyMoney2_SOURCE_DIR}/kmymoneysettings.kcfgc )
+  ${KMyMoney2_SOURCE_DIR}/kmymoneysettings.kcfgc )
 
 # This library is actually not needed. It is built just for
 # convenience, and then linked into kmm_mymoney.
