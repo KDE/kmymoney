@@ -4,7 +4,7 @@ INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
 ADD_DOCS(kmymoney2 en)
 
 # Manpages we have to handle manually
-SET(_in ${CMAKE_CURRENT_SOURCE_DIR}/en/kmymoney2.1)
+SET(_in ${CMAKE_CURRENT_SOURCE_DIR}/kmymoney2.1)
 SET(_out ${CMAKE_CURRENT_BINARY_DIR}/kmymoney2.1.gz)
 
 ADD_CUSTOM_COMMAND(OUTPUT ${_out}
