@@ -194,7 +194,6 @@ class MyMoneyGncReader;
 class GncObject {
 public:
   GncObject();
-  ; // to save delete loop when finished
   virtual ~GncObject() {}  // make sure to have impl  of all virtual rtns to avoid vtable errors?
 protected:
   friend class XmlReader;

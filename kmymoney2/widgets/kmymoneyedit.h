@@ -94,9 +94,9 @@ public:
 class kMyMoneyEdit : public Q3HBox
 {
   Q_OBJECT
-  Q_PROPERTY(bool calculatorButtonVisibility READ isCalculatorButtonVisible WRITE setCalculatorButtonVisible);
-  Q_PROPERTY(bool resetButtonVisibility READ isResetButtonVisible WRITE setResetButtonVisible);
-  Q_PROPERTY(bool allowEmpty READ isEmptyAllowed WRITE setAllowEmpty);
+  Q_PROPERTY(bool calculatorButtonVisibility READ isCalculatorButtonVisible WRITE setCalculatorButtonVisible)
+  Q_PROPERTY(bool resetButtonVisibility READ isResetButtonVisible WRITE setResetButtonVisible)
+  Q_PROPERTY(bool allowEmpty READ isEmptyAllowed WRITE setAllowEmpty)
   Q_PROPERTY(bool readOnly READ isReadOnly WRITE setReadOnly )
 
 private:

@@ -862,7 +862,7 @@ void XmlReader::processFile (QIODevice* pDevice) {
   m_reader->setContentHandler (this);
   // go read the file
   if (!m_reader->parse (m_source)) {
-    throw new MYMONEYEXCEPTION (i18n("Input file cannot be parsed; may be corrupt\n%s", errorString().toLatin1()));
+    throw new MYMONEYEXCEPTION (i18n("Input file cannot be parsed; may be corrupt\n%1", errorString()));
   }
   delete m_reader;
   delete m_source;

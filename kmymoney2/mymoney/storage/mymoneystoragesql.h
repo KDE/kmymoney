@@ -405,21 +405,21 @@ private:
   MyMoneyDbDrivers m_drivers;
 #define TABLE(name) void name();
 #define VIEW(name) void name();
-  TABLE(FileInfo);
-  TABLE(Institutions);
-  TABLE(Payees);
-  TABLE(Accounts);
-  TABLE(Transactions);
-  TABLE(Splits);
-  TABLE(KeyValuePairs);
-  TABLE(Schedules);
-  TABLE(SchedulePaymentHistory);
-  TABLE(Securities);
-  TABLE(Prices);
-  TABLE(Currencies);
-  TABLE(Reports);
-  TABLE(Budgets);
-  VIEW(Balances);
+  TABLE(FileInfo)
+  TABLE(Institutions)
+  TABLE(Payees)
+  TABLE(Accounts)
+  TABLE(Transactions)
+  TABLE(Splits)
+  TABLE(KeyValuePairs)
+  TABLE(Schedules)
+  TABLE(SchedulePaymentHistory)
+  TABLE(Securities)
+  TABLE(Prices)
+  TABLE(Currencies)
+  TABLE(Reports)
+  TABLE(Budgets)
+  VIEW(Balances)
 protected:
   QMap<QString, MyMoneyDbTable> m_tables;
   QMap<QString, MyMoneyDbView> m_views;

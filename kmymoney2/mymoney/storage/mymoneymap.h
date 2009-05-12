@@ -26,13 +26,13 @@
   * The implementation is based on the command pattern, in case
   * someone is interested.
   */
-template <class Qt::Key, class T>
-class MyMoneyMap : protected QMap<Qt::Key, T>
+template <class Key, class T>
+class MyMoneyMap : protected QMap<Key, T>
 {
 public:
   // typedef QMapConstIterator<Key, T> const_iterator;
 
-  MyMoneyMap() : QMap<Qt::Key, T>() {}
+  MyMoneyMap() : QMap<Key, T>() {}
   virtual ~MyMoneyMap() {}
 
   void startTransaction(unsigned long* id = 0)
@@ -65,7 +65,7 @@ public:
     return rc;
   }
 
-  void insert(const Qt::Key& key, const T& obj)
+  void insert(const Key& key, const T& obj)
   {
     if(m_stack.count() == 0)
       throw new MYMONEYEXCEPTION("No transaction started to insert new element into container");
@@ -74,7 +74,7 @@ public:
     m_stack.push(new MyMoneyMapInsert(this, key, obj));
   }
 
-  void modify(const Qt::Key& key, const T& obj)
+  void modify(const Key& key, const T& obj)
   {
     if(m_stack.count() == 0)
       throw new MYMONEYEXCEPTION("No transaction started to modify element in container");
@@ -88,7 +88,7 @@ public:
     m_stack.push(new MyMoneyMapModify(this, key, obj));
   }
 
-  void remove(const Qt::Key& key)
+  void remove(const Key& key)
   {
     if(m_stack.count() == 0)
       throw new MYMONEYEXCEPTION("No transaction started to remove element from container");
@@ -102,59 +102,59 @@ public:
     m_stack.push(new MyMoneyMapRemove(this, key));
   }
 
-  MyMoneyMap<Qt::Key, T>& operator= (const QMap<Qt::Key, T>& m)
+  MyMoneyMap<Key, T>& operator= (const QMap<Key, T>& m)
   {
     if(m_stack.count() != 0) {
       throw new MYMONEYEXCEPTION("Cannot assign whole container during transaction");
     }
-    QMap<Qt::Key, T>::operator=(m);
+    QMap<Key, T>::operator=(m);
     return *this;
   }
 
 
   inline Q3ValueList<T> values(void) const
   {
-    return QMap<Qt::Key,T>::values();
+    return QMap<Key,T>::values();
   }
 
   inline Q3ValueList<Qt::Key> keys(void) const
   {
-    return QMap<Qt::Key,T>::keys();
+    return QMap<Key,T>::keys();
   }
 
   const T& operator[] ( const Qt::Key& k ) const
-        { QT_CHECK_INVALID_MAP_ELEMENT; return QMap<Qt::Key,T>::operator[](k); }
+        { QT_CHECK_INVALID_MAP_ELEMENT; return QMap<Key,T>::operator[](k); }
 
-  inline Q_TYPENAME QMap<Qt::Key, T>::const_iterator find(const Qt::Key& k) const
+  inline Q_TYPENAME QMap<Key, T>::const_iterator find(const Qt::Key& k) const
   {
-    return QMap<Qt::Key,T>::find(k);
+    return QMap<Key,T>::find(k);
   }
 
-  inline Q_TYPENAME QMap<Qt::Key, T>::const_iterator begin(void) const
+  inline Q_TYPENAME QMap<Key, T>::const_iterator begin(void) const
   {
-    return QMap<Qt::Key,T>::begin();
+    return QMap<Key,T>::begin();
   }
 
-  inline Q_TYPENAME QMap<Qt::Key, T>::const_iterator end(void) const
+  inline Q_TYPENAME QMap<Key, T>::const_iterator end(void) const
   {
     return QMap<Qt::Key,T>::end();
   }
 
-  inline bool contains(const Qt::Key& k) const
+  inline bool contains(const Key& k) const
   {
     return find(k) != end();
   }
 
-  inline void map(QMap<Qt::Key, T>& that) const
+  inline void map(QMap<Key, T>& that) const
   {
     //QMap<Key, T>* ptr = dynamic_cast<QMap<Key, T>* >(this);
     //that = *ptr;
-    that = *(dynamic_cast<QMap<Qt::Key, T>* >(const_cast<MyMoneyMap<Qt::Key, T>* >(this)));
+    that = *(dynamic_cast<QMap<Key, T>* >(const_cast<MyMoneyMap<Key, T>* >(this)));
   }
 
   inline size_t count(void) const
   {
-    return QMap<Qt::Key, T>::count();
+    return QMap<Key, T>::count();
   }
 
 #if MY_OWN_DEBUG
@@ -175,10 +175,10 @@ private:
   class MyMoneyMapAction
   {
     public:
-      MyMoneyMapAction(QMap<Qt::Key, T>* container) :
+      MyMoneyMapAction(QMap<Key, T>* container) :
         m_container(container) {}
 
-      MyMoneyMapAction(QMap<Qt::Key, T>* container, const Qt::Key& key, const T& obj) :
+      MyMoneyMapAction(QMap<Key, T>* container, const Key& key, const T& obj) :
         m_container(container),
         m_obj(obj),
         m_key(key) {}
@@ -187,7 +187,7 @@ private:
       virtual void undo(void) = 0;
 
     protected:
-      QMap<Qt::Key, T>* m_container;
+      QMap<Key, T>* m_container;
       T m_obj;
       Key m_key;
   };
@@ -195,7 +195,7 @@ private:
   class MyMoneyMapStart : public MyMoneyMapAction
   {
     public:
-      MyMoneyMapStart(QMap<Qt::Key, T>* container, unsigned long* id) :
+      MyMoneyMapStart(QMap<Key, T>* container, unsigned long* id) :
         MyMoneyMapAction(container),
         m_idPtr(id)
       {
@@ -217,7 +217,7 @@ private:
   class MyMoneyMapInsert : public MyMoneyMapAction
   {
     public:
-      MyMoneyMapInsert(QMap<Qt::Key, T>* container, const Qt::Key& key, const T& obj) :
+      MyMoneyMapInsert(QMap<Key, T>* container, const Key& key, const T& obj) :
         MyMoneyMapAction(container, key, obj)
       {
         (*container)[key] = obj;
@@ -235,7 +235,7 @@ private:
   class MyMoneyMapRemove : public MyMoneyMapAction
   {
     public:
-      MyMoneyMapRemove(QMap<Qt::Key, T>* container, const Qt::Key& key) :
+      MyMoneyMapRemove(QMap<Key, T>* container, const Key& key) :
         MyMoneyMapAction(container, key, (*container)[key])
       {
         container->remove(key);
@@ -251,7 +251,7 @@ private:
   class MyMoneyMapModify : public MyMoneyMapAction
   {
     public:
-      MyMoneyMapModify(QMap<Qt::Key, T>* container, const Qt::Key& key, const T& obj) :
+      MyMoneyMapModify(QMap<Key, T>* container, const Key& key, const T& obj) :
         MyMoneyMapAction(container, key, (*container)[key])
       {
         (*container)[key] = obj;
