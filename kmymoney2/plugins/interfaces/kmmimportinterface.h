@@ -54,5 +54,5 @@ private:
   KMyMoney2App*    m_app;
 };
 
-}; // namespace
+} // namespace
 #endif

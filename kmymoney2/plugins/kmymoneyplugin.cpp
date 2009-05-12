@@ -24,7 +24,8 @@
 #include <kcomponentdata.h>
 #include <kaboutdata.h>
 #include <kaction.h>
-
+#include <KToggleAction>
+#include <KActionCollection>
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -58,7 +59,7 @@ KToggleAction* KMyMoneyPlugin::Plugin::toggleAction(const QString& actionName) c
   static KShortcut shortcut("");
   static KToggleAction dummyAction(QString("Dummy"), QString(), shortcut, static_cast<const QObject*>(this), 0, static_cast<KActionCollection*>(0), "");
 
-  KAction* q = actionCollection()->action(actionName.toLatin1());
+  KAction* q = actionCollection()->action(actionName);
 
   if(q) {
     KToggleAction* p = dynamic_cast<KToggleAction*>(q);

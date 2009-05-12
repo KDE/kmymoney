@@ -181,7 +181,7 @@ public:
 
 KMyMoney2App::KMyMoney2App(QWidget * /*parent*/ , const char* name) :
   KMainWindow(0, name),
-  DCOPObject("kmymoney2app"),
+  //DCOPObject("kmymoney2app"),
   d(new Private),
   myMoneyView(0),
   m_searchDlg(0),

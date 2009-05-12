@@ -67,6 +67,7 @@ class KFindTransactionDlg;
 class TransactionEditor;
 class KEndingBalanceDlg;
 class KPluginInfo;
+class Q3ListViewItem;
 
 namespace KMyMoneyPlugin { class ImporterPlugin; }
 
@@ -96,10 +97,10 @@ namespace KMyMoneyPlugin { class ImporterPlugin; }
   *
   * @short Main application class.
   */
-class KMyMoney2App : public KMainWindow, public DCOPObject
+class KMyMoney2App : public KMainWindow
+		     //, public DCOPObject
 {
   Q_OBJECT
-  K_DCOP
 
 protected slots:
   void slotFileSaveAsFilterChanged(const QString& filter);
@@ -543,7 +544,7 @@ public:
 
   void createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal);
 
-k_dcop:
+//k_dcop:
   // Note: Don't use e.g. filename(void) but use filename() because
   // otherwise the kidl compiler produces uncompilable results.
   const QString filename() const;
