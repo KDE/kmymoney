@@ -81,7 +81,7 @@
 
 #include "kmymoney2.h"
 #include "kmymoneyglobalsettings.h"
-#include "kmymoney2_stub.h"
+//#include "kmymoney2_stub.h"
 
 #include "dialogs/kstartdlg.h"
 #include "dialogs/settings/ksettingsgeneral.h"
@@ -936,7 +936,8 @@ void KMyMoney2App::slotFileOpenRecent(const KUrl& url)
   Q3ValueList<Q3CString> list = instanceList();
   Q3ValueList<Q3CString>::ConstIterator it;
   bool duplicate = false;
-
+#warning "port kde4"
+#if 0
   for(it = list.begin(); duplicate == false && it != list.end(); ++it) {
     KMyMoney2App_stub* remoteApp = new KMyMoney2App_stub(kapp->dcopClient(), (*it), "kmymoney2app");
     QString remoteFile = remoteApp->filename();
@@ -949,14 +950,10 @@ void KMyMoney2App::slotFileOpenRecent(const KUrl& url)
     }
     delete remoteApp;
   }
-
+#endif
   if(!duplicate) {
 
-#if KDE_IS_VERSION(3,2,0)
     if((url.protocol() == "sql") || (url.isValid() && KIO::NetAccess::exists(url, true, this))) {
-#else
-    if((url.protocol() == "sql") || (url.isValid() && KIO::NetAccess::exists(url))) {
-#endif
       KUrl dburl = url;
       // check if a password is needed. it may be if the URL came from the last/recent file list
       if ((dburl.queryItem("secure") == "yes") && dburl.pass().isEmpty()) {

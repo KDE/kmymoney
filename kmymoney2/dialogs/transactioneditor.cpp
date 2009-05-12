@@ -208,7 +208,7 @@ void TransactionEditor::slotNumberChanged(const QString& txt)
 
   if(number) {
     if(MyMoneyFile::instance()->checkNoUsed(m_account.id(), txt)) {
-      if(KMessageBox::questionYesNo(m_regForm, QString("<qt>")+i18n("The number <b>%1</b> has already been used in account <b>%2</b>. Do you want to replace it with the next available number?").arg(txt).arg(m_account.name())+QString("</qt>"), i18n("Duplicate number")) == KMessageBox::Yes) {
+      if(KMessageBox::questionYesNo(m_regForm, QString("<qt>")+i18n("The number <b>%1</b> has already been used in account <b>%2</b>. Do you want to replace it with the next available number?",txt,m_account.name())+QString("</qt>"), i18n("Duplicate number")) == KMessageBox::Yes) {
         number->loadText(KMyMoneyUtils::nextCheckNumber(m_account));
       }
     }
@@ -396,9 +396,9 @@ bool TransactionEditor::fixTransactionCommodity(const MyMoneyAccount& account)
             if(firstTimeMultiCurrency) {
               firstTimeMultiCurrency = false;
               if(!isMultiSelection()) {
-                msg = i18n("This transaction has more than two splits and is originally based on a different currency (%1). Using this account to modify the transaction may result in rounding errors. Do you want to continue?").arg(osec.name());
+                msg = i18n("This transaction has more than two splits and is originally based on a different currency (%1). Using this account to modify the transaction may result in rounding errors. Do you want to continue?",osec.name());
               } else {
-                msg = i18n("At least one of the selected transactions has more than two splits and is originally based on a different currency (%1). Using this account to modify the transactions may result in rounding errors. Do you want to continue?").arg(osec.name());
+                msg = i18n("At least one of the selected transactions has more than two splits and is originally based on a different currency (%1). Using this account to modify the transactions may result in rounding errors. Do you want to continue?",osec.name());
               }
 
               if(KMessageBox::warningContinueCancel(0, QString("<qt>%1</qt>").arg(msg)) == KMessageBox::Cancel) {
@@ -657,13 +657,13 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
           key = "minBalanceEarly";
           if(!acc.value(key).isEmpty()) {
             if(minBalanceEarly[acc.id()] == false && balance < MyMoneyMoney(acc.value(key))) {
-              msg = QString("<qt>%1</qt>").arg(i18n("The balance of account <b>%1</b> dropped below the warning balance of %2.").arg(acc.name(), MyMoneyMoney(acc.value(key)).formatMoney(acc, sec)));
+              msg = QString("<qt>%1</qt>").arg(i18n("The balance of account <b>%1</b> dropped below the warning balance of %2.",acc.name(), MyMoneyMoney(acc.value(key)).formatMoney(acc, sec)));
             }
           }
           key = "minBalanceAbsolute";
           if(!acc.value(key).isEmpty()) {
             if(minBalanceAbsolute[acc.id()] == false && balance < MyMoneyMoney(acc.value(key))) {
-              msg = QString("<qt>%1</qt>").arg(i18n("The balance of account <b>%1</b> dropped below the minimum balance of %2.").arg(acc.name(), MyMoneyMoney(acc.value(key)).formatMoney(acc, sec)));
+              msg = QString("<qt>%1</qt>").arg(i18n("The balance of account <b>%1</b> dropped below the minimum balance of %2.",acc.name(), MyMoneyMoney(acc.value(key)).formatMoney(acc, sec)));
             }
           }
           key = "maxCreditEarly";

@@ -39,11 +39,15 @@
 #include <ktoolinvocation.h>
 
 KGpgKeySelectionDlg::KGpgKeySelectionDlg(QWidget *parent, const char *name) :
-  KDialogBase(parent, name, true, i18n("Select additional keys"), Ok | Cancel),
+  KDialog(parent),
   m_needCheckList(true),
   m_listOk(false),
   m_checkCount(0)
 {
+    setCaption( i18n("Select additional keys") );
+    setButtons( KDialog::Ok|KDialog::Cancel );
+    setDefaultButton( KDialog::Ok );
+    setModal( true );
   QWidget* page = new QWidget(this);
   setMainWidget(page);
   Q3VBoxLayout* topLayout = new Q3VBoxLayout(page, 0, spacingHint());

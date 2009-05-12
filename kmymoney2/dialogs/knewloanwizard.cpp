@@ -710,15 +710,13 @@ int KNewLoanWizard::calculateLoan(void)
       // calculate the amount of the loan out of the other information
       val = calc.presentValue();
       m_loanAmountEdit->loadText(MyMoneyMoney(static_cast<double>(val)).abs().formatMoney(fraction));
-      result = i18n("KMyMoney has calculated the amount of the loan as %1.")
-                        .arg(m_loanAmountEdit->lineedit()->text());
+      result = i18n("KMyMoney has calculated the amount of the loan as %1.",m_loanAmountEdit->lineedit()->text());
 
     } else if(m_interestRateEdit->lineedit()->text().isEmpty()) {
       // calculate the interest rate out of the other information
       val = calc.interestRate();
       m_interestRateEdit->loadText(MyMoneyMoney(static_cast<double>(val)).abs().formatMoney("", 3));
-      result = i18n("KMyMoney has calculated the interest rate to %1%.")
-                        .arg(m_interestRateEdit->lineedit()->text());
+      result = i18n("KMyMoney has calculated the interest rate to %1%.",m_interestRateEdit->lineedit()->text());
 
     } else if(m_paymentEdit->lineedit()->text().isEmpty()) {
       // calculate the periodical amount of the payment out of the other information
@@ -730,8 +728,7 @@ int KNewLoanWizard::calculateLoan(void)
         val = -val;
       calc.setPmt(val);
 
-      result = i18n("KMyMoney has calculated a periodic payment of %1 to cover principal and interest.")
-                      .arg(m_paymentEdit->lineedit()->text());
+      result = i18n("KMyMoney has calculated a periodic payment of %1 to cover principal and interest.",m_paymentEdit->lineedit()->text());
 
       val = calc.futureValue();
       if((m_borrowButton->isChecked() && val < 0 && fabsl(val) >= fabsl(calc.payment()))
@@ -742,16 +739,14 @@ int KNewLoanWizard::calculateLoan(void)
         MyMoneyMoney refVal(static_cast<double>(val));
         m_finalPaymentEdit->loadText(refVal.abs().formatMoney(fraction));
         result += QString(" ");
-        result += i18n("The number of payments has been decremented and the final payment has been modified to %1.")
-                      .arg(m_finalPaymentEdit->lineedit()->text());
+        result += i18n("The number of payments has been decremented and the final payment has been modified to %1.",m_finalPaymentEdit->lineedit()->text());
       } else if((m_borrowButton->isChecked() && val < 0 && fabsl(val) < fabsl(calc.payment()))
              || (m_lendButton->isChecked() && val > 0 && fabs(val) < fabs(calc.payment()))) {
         m_finalPaymentEdit->loadText(MyMoneyMoney(0,1).formatMoney(fraction));
       } else {
         MyMoneyMoney refVal(static_cast<double>(val));
         m_finalPaymentEdit->loadText(refVal.abs().formatMoney(fraction));
-        result += i18n("The final payment has been modified to %1.")
-                      .arg(m_finalPaymentEdit->lineedit()->text());
+        result += i18n("The final payment has been modified to %1.",m_finalPaymentEdit->lineedit()->text());
       }
 
     } else if(m_durationValueEdit->value() == 0) {
@@ -762,16 +757,14 @@ int KNewLoanWizard::calculateLoan(void)
 
       // if the number of payments has a fractional part, then we
       // round it to the smallest integer and calculate the balloon payment
-      result = i18n("KMyMoney has calculated the term of your loan as %1. ")
-                        .arg(updateTermWidgets(floorl(val)));
+      result = i18n("KMyMoney has calculated the term of your loan as %1. ",updateTermWidgets(floorl(val)));
 
       if(val != floorl(val)) {
         calc.setNpp(floorl(val));
         val = calc.futureValue();
         MyMoneyMoney refVal(static_cast<double>(val));
         m_finalPaymentEdit->loadText(refVal.abs().formatMoney(fraction));
-        result += i18n("The final payment has been modified to %1.")
-                      .arg(m_finalPaymentEdit->lineedit()->text());
+        result += i18n("The final payment has been modified to %1.",m_finalPaymentEdit->lineedit()->text());
       }
 
     } else {
@@ -801,8 +794,7 @@ int KNewLoanWizard::calculateLoan(void)
       }
 
       MyMoneyMoney refVal(static_cast<double>(val));
-      result = i18n("KMyMoney has calculated a final payment of %1 for this loan.")
-                        .arg(refVal.abs().formatMoney(fraction));
+      result = i18n("KMyMoney has calculated a final payment of %1 for this loan.",refVal.abs().formatMoney(fraction));
 
       if(!m_finalPaymentEdit->lineedit()->text().isEmpty()) {
         if((m_finalPaymentEdit->value().abs() - refVal.abs()).abs().toDouble() > 1) {

@@ -103,11 +103,7 @@ databaseTypeE MyMoneyDbDrivers::driverToType (const QString& driver) const {
   else if (driver == "QODBC3") return(ODBC3);
   else if (driver == "QPSQL7") return(Postgresql);
   else if (driver == "QTDS7") return(Sybase);
-#if QT_VERSION < 0x040000
-  else if (driver == "QSQLITE3") return(Sqlite3);
-#else
   else if (driver == "QSQLITE") return(Sqlite3);
-#endif
   else throw new MYMONEYEXCEPTION (QString("Unknown database driver type").arg(driver));
 }
 

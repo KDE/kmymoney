@@ -60,7 +60,7 @@ SET(dialogs_UI
 
 # The handling of these ui files depends
 # on libkmymoney.so (the widgets library)
-KMM_ADD_UI_FILES(dialogs_ui_srcs ${dialogs_UI} DEPENDS kmymoney)
+#KMM_ADD_UI_FILES(dialogs_ui_srcs ${dialogs_UI} DEPENDS kmymoney)
 
 # in order to use add_dependencies, we need to add this custom target
 # for all generated header files.

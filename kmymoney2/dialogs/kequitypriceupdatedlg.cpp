@@ -424,9 +424,9 @@ void KEquityPriceUpdateDlg::slotQuoteFailed(const QString& _id, const QString& _
   // Give the user some options
   int result;
   if(_id.contains(" ")) {
-    result = KMessageBox::warningContinueCancel(this, i18n("Failed to retrieve an exchange rate for %1 from %2. It will be skipped this time.").arg(_symbol, item->text(SOURCE_COL)), i18n("Price Update  Failed"));
+    result = KMessageBox::warningContinueCancel(this, i18n("Failed to retrieve an exchange rate for %1 from %2. It will be skipped this time.",_symbol, item->text(SOURCE_COL)), i18n("Price Update  Failed"));
   } else {
-    result = KMessageBox::questionYesNoCancel(this, QString("<qt>%1</qt>").arg(i18n("Failed to retrieve a quote for %1 from %2.  Press <b>No</b> to remove the online price source from this security permanently, <b>Yes</b> to continue updating this security during future price updates or <b>Cancel</b> to stop the current update operation.").arg(_symbol, item->text(SOURCE_COL))), i18n("Price Update Failed"), KStandardGuiItem::yes(), KStandardGuiItem::no());
+    result = KMessageBox::questionYesNoCancel(this, QString("<qt>%1</qt>").arg(i18n("Failed to retrieve a quote for %1 from %2.  Press <b>No</b> to remove the online price source from this security permanently, <b>Yes</b> to continue updating this security during future price updates or <b>Cancel</b> to stop the current update operation.",_symbol, item->text(SOURCE_COL))), i18n("Price Update Failed"), KStandardGuiItem::yes(), KStandardGuiItem::no());
   }
 
   if ( result == KMessageBox::No )
@@ -446,7 +446,7 @@ void KEquityPriceUpdateDlg::slotQuoteFailed(const QString& _id, const QString& _
       MyMoneyFile::instance()->modifySecurity(security);
       ft.commit();
     } catch(MyMoneyException* e) {
-      KMessageBox::error(this, QString("<qt>")+i18n("Cannot update security <b>%1</b>: %2").arg(_symbol, e->what())+QString("</qt>"), i18n("Price Update Failed"));
+      KMessageBox::error(this, QString("<qt>")+i18n("Cannot update security <b>%1</b>: %2",_symbol, e->what())+QString("</qt>"), i18n("Price Update Failed"));
       delete e;
     }
   }
@@ -527,13 +527,13 @@ void KEquityPriceUpdateDlg::slotReceivedQuote(const QString& _id, const QString&
       }
       item->setText(PRICE_COL, KGlobal::locale()->formatMoney(price, sec.tradingSymbol(), KMyMoneyGlobalSettings::pricePrecision()));
       item->setText(DATE_COL, date.toString(Qt::ISODate));
-      logStatusMessage(i18n("Price for %1 updated (id %2)").arg(_symbol,_id));
+      logStatusMessage(i18n("Price for %1 updated (id %2)",_symbol,_id));
       // make sure to make OK button available
       btnOK->setEnabled(true);
     }
     else
     {
-      logErrorMessage(i18n("Received an invalid price for %1, unable to update.").arg(_symbol));
+      logErrorMessage(i18n("Received an invalid price for %1, unable to update.",_symbol));
     }
 
     prgOnlineProgress->advance(1);
@@ -553,7 +553,7 @@ void KEquityPriceUpdateDlg::slotReceivedQuote(const QString& _id, const QString&
   }
   else
   {
-    logErrorMessage(i18n("Received a price for %1 (id %2), but this symbol is not on the list!  Aborting entire update.").arg(_symbol,_id));
+    logErrorMessage(i18n("Received a price for %1 (id %2), but this symbol is not on the list!  Aborting entire update.",_symbol,_id));
   }
 
   if (next)

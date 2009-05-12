@@ -911,7 +911,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           // We use a QPointer because the dialog may get deleted
           // during exec() if the parent of the dialog gets deleted.
           // In that case the guarded ptr will reset to 0.
-          QPointer<KDialogBase> dialog = new KDialogBase(
+          QPointer<KDialog> dialog = new KDialog(
               "Default Category for Payee",
               KDialogBase::Yes | KDialogBase::No | KDialogBase::Cancel,
               KDialogBase::Yes, KDialogBase::Cancel,
@@ -919,13 +919,15 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
               KGuiItem(i18n("Save Category")),
               KGuiItem(i18n("No Category")),
               KGuiItem(i18n("Abort")));
+	  dialog->setCaption(i18n("Default Category for Payee"));
+	  dialog->setButtons(KDialog::Yes | KDialog::No | KDialog::Cancel);
           Q3VBox *topcontents = new Q3VBox (dialog);
           topcontents->setSpacing(KDialog::spacingHint()*2);
           topcontents->setMargin(KDialog::marginHint());
 
           //add in caption? and account combo here
           QLabel *label1 = new QLabel( topcontents);
-          label1->setText(i18n("Please select a default category for payee '%1':").arg(payee.name().data()));
+          label1->setText(i18n("Please select a default category for payee '%1':",payee.name()));
 
           QPointer<KMyMoneyAccountCombo> accountCombo = new KMyMoneyAccountCombo(topcontents);
           dialog->setMainWidget(topcontents);
@@ -940,7 +942,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
             delete dialog;
           }
           //if they hit yes instead of no, then grab setting of account combo
-          if (result == KDialogBase::Yes) {
+          if (result == KDialog::Yes) {
             payee.setDefaultAccountId(accountId);
           }
           else if (result != KDialogBase::No) {

@@ -71,7 +71,7 @@ KEndingBalanceDlg::KEndingBalanceDlg(const MyMoneyAccount& account, QWidget *par
   d->m_account = account;
 
   MyMoneySecurity currency = MyMoneyFile::instance()->security(account.currencyId());
-  m_enterInformationLabel->setText(QString("<qt>")+i18n("Please enter the following fields with the information as you find them on your statement. Make sure to enter all values in <b>%1</b>.").arg(currency.name())+QString("</qt>"));
+  m_enterInformationLabel->setText(QString("<qt>")+i18n("Please enter the following fields with the information as you find them on your statement. Make sure to enter all values in <b>%1</b>.",currency.name())+QString("</qt>"));
 
   m_statementDate->setDate(QDate::currentDate());
 

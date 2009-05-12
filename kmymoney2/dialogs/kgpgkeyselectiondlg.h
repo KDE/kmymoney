@@ -23,7 +23,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kdialogbase.h>
+#include <kdialog.h>
 class KEditListBox;
 class KLed;
 
@@ -33,7 +33,7 @@ class KLed;
 /**
   * @author Thomas Baumgart
   */
-class KGpgKeySelectionDlg : public KDialogBase
+class KGpgKeySelectionDlg : public KDialog
 {
   Q_OBJECT
 public:

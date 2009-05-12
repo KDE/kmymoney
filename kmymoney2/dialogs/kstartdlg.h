@@ -18,7 +18,7 @@
 
 #include "config-kmymoney.h"
 
-#include <kdialogbase.h>
+#include <kdialog.h>
 
 #include <klocale.h>
 #include <kfontdialog.h>
@@ -36,7 +36,7 @@
 /**KMyMoney 2 start dialog
   */
 
-class KStartDlg : public KDialogBase  {
+class KStartDlg : public KDialog  {
    Q_OBJECT
 public:
 	KStartDlg( QWidget *parent=0, const char *name=0, bool modal=true );

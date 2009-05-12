@@ -73,7 +73,7 @@ bool MyMoneyTemplate::loadTemplate(const KUrl& url)
     rc = KIO::NetAccess::download(url, filename, qApp->mainWidget());
     if(!rc) {
       KMessageBox::detailedError(qApp->mainWidget(),
-             i18n("Error while loading file '%1'!").arg(url.url()),
+             i18n("Error while loading file '%1'!",url.url()),
              KIO::NetAccess::lastErrorString(),
              i18n("File access error"));
       return false;
@@ -84,7 +84,7 @@ bool MyMoneyTemplate::loadTemplate(const KUrl& url)
   QFile file(filename);
   QFileInfo info(file);
   if(!info.isFile()) {
-    QString msg=i18n("<b>%1</b> is not a template file.").arg(filename);
+    QString msg=i18n("<b>%1</b> is not a template file.",filename);
     KMessageBox::error(qApp->mainWidget(), QString("<p>")+msg, i18n("Filetype Error"));
     return false;
   }
@@ -93,7 +93,7 @@ bool MyMoneyTemplate::loadTemplate(const KUrl& url)
     QString errMsg;
     int errLine, errColumn;
     if(!m_doc.setContent(&file, &errMsg, &errLine, &errColumn)) {
-      QString msg=i18n("Error while reading template file <b>%1</b> in line %2, column %3").arg(filename).arg(errLine).arg(errColumn);
+      QString msg=i18n("Error while reading template file <b>%1</b> in line %2, column %3",filename,errLine,errColumn);
       KMessageBox::detailedError(qApp->mainWidget(), QString("<p>")+msg, errMsg, i18n("Template Error"));
       rc = false;
     } else {
@@ -101,7 +101,7 @@ bool MyMoneyTemplate::loadTemplate(const KUrl& url)
     }
     file.close();
   } else {
-    KMessageBox::sorry(qApp->mainWidget(), i18n("File '%1' not found!").arg(filename));
+    KMessageBox::sorry(qApp->mainWidget(), i18n("File '%1' not found!",filename));
     rc = false;
   }
 
@@ -142,7 +142,7 @@ bool MyMoneyTemplate::loadDescription(void)
         m_longDesc = childElement.text();
         validMask |= validLong;
       } else {
-        KMessageBox::error(qApp->mainWidget(), QString("<p>")+i18n("Invalid tag <b>%1</b> in template file <b>%2</b>!").arg(childElement.tagName()).arg(m_source.prettyUrl()));
+        KMessageBox::error(qApp->mainWidget(), QString("<p>")+i18n("Invalid tag <b>%1</b> in template file <b>%2</b>!",childElement.tagName(),m_source.prettyUrl()));
         validMask |= invalid;
       }
       child = child.nextSibling();
@@ -214,7 +214,7 @@ bool MyMoneyTemplate::importTemplate(void(*callback)(int, int, const QString&))
   m_progressCallback = callback;
   bool rc = !m_accounts.isNull();
   MyMoneyFile* file = MyMoneyFile::instance();
-  signalProgress(0, m_doc.elementsByTagName("account").count(), i18n("Loading template %1").arg(m_source.url()));
+  signalProgress(0, m_doc.elementsByTagName("account").count(), i18n("Loading template %1",m_source.url()));
   m_accountsRead = 0;
 
   while(rc == true && !m_accounts.isNull() && m_accounts.isElement()) {
@@ -241,7 +241,7 @@ bool MyMoneyTemplate::importTemplate(void(*callback)(int, int, const QString&))
           break;
 
         default:
-          KMessageBox::error(qApp->mainWidget(), QString("<p>")+i18n("Invalid top-level account type <b>%1</b> in template file <b>%2</b>!").arg(childElement.attribute("type")).arg(m_source.prettyUrl()));
+          KMessageBox::error(qApp->mainWidget(), QString("<p>")+i18n("Invalid top-level account type <b>%1</b> in template file <b>%2</b>!",childElement.attribute("type"),m_source.prettyUrl()));
           rc = false;
       }
 
@@ -309,7 +309,7 @@ bool MyMoneyTemplate::setFlags(MyMoneyAccount& acc, QDomNode flags)
         if(value == "Tax") {
           acc.setValue(value.toLatin1(), "Yes");
         } else {
-           KMessageBox::error(qApp->mainWidget(), QString("<p>")+i18n("Invalid flag type <b>%1</b> for account <b>%3</b> in template file <b>%2</b>!").arg(flagElement.attribute("name")).arg(m_source.prettyUrl()).arg(acc.name()));
+           KMessageBox::error(qApp->mainWidget(), QString("<p>")+i18n("Invalid flag type <b>%1</b> for account <b>%3</b> in template file <b>%2</b>!",flagElement.attribute("name"),m_source.prettyUrl(),acc.name()));
           rc = false;
        }
       }
@@ -398,16 +398,16 @@ bool MyMoneyTemplate::saveTemplate(const KUrl& url)
     if(qfile.status() == 0) {
       saveToLocalFile(qfile.file());
       if(!qfile.close()) {
-        throw new MYMONEYEXCEPTION(i18n("Unable to write changes to '%1'").arg(filename));
+        throw new MYMONEYEXCEPTION(i18n("Unable to write changes to '%1'",filename));
       }
     } else {
-      throw new MYMONEYEXCEPTION(i18n("Unable to write changes to '%1'").arg(filename));
+      throw new MYMONEYEXCEPTION(i18n("Unable to write changes to '%1'",filename));
     }
   } else {
     KTemporaryFile tmpfile;
     saveToLocalFile(tmpfile.file());
     if(!KIO::NetAccess::upload(tmpfile.name(), url, NULL))
-      throw new MYMONEYEXCEPTION(i18n("Unable to upload to '%1'").arg(url.url()));
+      throw new MYMONEYEXCEPTION(i18n("Unable to upload to '%1'",url.url()));
     tmpfile.unlink();
   }
   return true;
