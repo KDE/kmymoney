@@ -30,6 +30,7 @@
 #include <kconfig.h>
 #include <klocale.h>
 #include <kcalendarsystem.h>
+#include <KConfigGroup>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -191,30 +192,30 @@ void MyMoneyQifProfile::clear(void)
 void MyMoneyQifProfile::loadProfile(const QString& name)
 {
   KConfig* config = KGlobal::config();
-  config->setGroup(name);
+  KConfigGroup grp = config->group(name);
 
   clear();
 
   m_profileName = name;
-  m_profileDescription = config->readEntry("Description", m_profileDescription);
-  m_profileType = config->readEntry("Type", m_profileType);
-  m_dateFormat = config->readEntry("DateFormat", m_dateFormat);
-  m_apostropheFormat = config->readEntry("ApostropheFormat", m_apostropheFormat);
-  m_accountDelimiter = config->readEntry("AccountDelimiter", m_accountDelimiter);
-  m_openingBalanceText = config->readEntry("OpeningBalance", m_openingBalanceText);
-  m_voidMark = config->readEntry("VoidMark", m_voidMark);
-  m_filterScriptImport = config->readEntry("FilterScriptImport", m_filterScriptImport);
-  m_filterScriptExport = config->readEntry("FilterScriptExport", m_filterScriptExport);
-  m_filterFileType = config->readEntry("FilterFileType",m_filterFileType);
+  m_profileDescription = grp.readEntry("Description", m_profileDescription);
+  m_profileType = grp.readEntry("Type", m_profileType);
+  m_dateFormat = grp.readEntry("DateFormat", m_dateFormat);
+  m_apostropheFormat = grp.readEntry("ApostropheFormat", m_apostropheFormat);
+  m_accountDelimiter = grp.readEntry("AccountDelimiter", m_accountDelimiter);
+  m_openingBalanceText = grp.readEntry("OpeningBalance", m_openingBalanceText);
+  m_voidMark = grp.readEntry("VoidMark", m_voidMark);
+  m_filterScriptImport = grp.readEntry("FilterScriptImport", m_filterScriptImport);
+  m_filterScriptExport = grp.readEntry("FilterScriptExport", m_filterScriptExport);
+  m_filterFileType = grp.readEntry("FilterFileType",m_filterFileType);
 
-  m_attemptMatchDuplicates = config->readBoolEntry("AttemptMatchDuplicates", m_attemptMatchDuplicates);
+  m_attemptMatchDuplicates = grp.readEntry("AttemptMatchDuplicates", m_attemptMatchDuplicates);
 
   // make sure, we remove any old stuff for now
-  config->deleteEntry("FilterScript");
+  grp.deleteEntry("FilterScript");
 
   QString tmp = QString(m_decimal['Q']) + m_decimal['T'] + m_decimal['I'] +
                 m_decimal['$'] + m_decimal['O'];
-  tmp = config->readEntry("Decimal", tmp);
+  tmp = grp.readEntry("Decimal", tmp);
   m_decimal['Q'] = tmp[0];
   m_decimal['T'] = tmp[1];
   m_decimal['I'] = tmp[2];
@@ -223,7 +224,7 @@ void MyMoneyQifProfile::loadProfile(const QString& name)
 
   tmp = QString(m_thousands['Q']) + m_thousands['T'] + m_thousands['I'] +
                 m_thousands['$'] + m_thousands['O'];
-  tmp = config->readEntry("Thousand", tmp);
+  tmp = grp.readEntry("Thousand", tmp);
   m_thousands['Q'] = tmp[0];
   m_thousands['T'] = tmp[1];
   m_thousands['I'] = tmp[2];
@@ -236,29 +237,29 @@ void MyMoneyQifProfile::loadProfile(const QString& name)
 void MyMoneyQifProfile::saveProfile(void)
 {
   if(m_isDirty == true) {
-    KConfig* config = KGlobal::config();
-    config->setGroup(m_profileName);
+    KSharedConfigPtr config = KGlobal::config();
+    KConfigGroup grp = config->group(m_profileName);
 
-    config->writeEntry("Description", m_profileDescription);
-    config->writeEntry("Type", m_profileType);
-    config->writeEntry("DateFormat", m_dateFormat);
-    config->writeEntry("ApostropheFormat", m_apostropheFormat);
-    config->writeEntry("AccountDelimiter", m_accountDelimiter);
-    config->writeEntry("OpeningBalance", m_openingBalanceText);
-    config->writeEntry("VoidMark", m_voidMark);
-    config->writeEntry("FilterScriptImport", m_filterScriptImport);
-    config->writeEntry("FilterScriptExport", m_filterScriptExport);
-    config->writeEntry("FilterFileType", m_filterFileType);
-    config->writeEntry("AttemptMatchDuplicates", m_attemptMatchDuplicates);
+    grp.writeEntry("Description", m_profileDescription);
+    grp.writeEntry("Type", m_profileType);
+    grp.writeEntry("DateFormat", m_dateFormat);
+    grp.writeEntry("ApostropheFormat", m_apostropheFormat);
+    grp.writeEntry("AccountDelimiter", m_accountDelimiter);
+    grp.writeEntry("OpeningBalance", m_openingBalanceText);
+    grp.writeEntry("VoidMark", m_voidMark);
+    grp.writeEntry("FilterScriptImport", m_filterScriptImport);
+    grp.writeEntry("FilterScriptExport", m_filterScriptExport);
+    grp.writeEntry("FilterFileType", m_filterFileType);
+    grp.writeEntry("AttemptMatchDuplicates", m_attemptMatchDuplicates);
 
     QString tmp;
 
     tmp = QString(m_decimal['Q']) + m_decimal['T'] + m_decimal['I'] +
                   m_decimal['$'] + m_decimal['O'];
-    config->writeEntry("Decimal", tmp);
+    grp.writeEntry("Decimal", tmp);
     tmp = QString(m_thousands['Q']) + m_thousands['T'] + m_thousands['I'] +
                 m_thousands['$'] + m_thousands['O'];
-    config->writeEntry("Thousand", tmp);
+    grp.writeEntry("Thousand", tmp);
   }
   m_isDirty = false;
 }

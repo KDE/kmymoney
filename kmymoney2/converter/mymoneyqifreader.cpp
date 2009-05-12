@@ -46,7 +46,7 @@
 #include <kprogressdialog.h>
 #include <kinputdialog.h>
 #include <kio/netaccess.h>
-
+#include <KConfigGroup>
 // ----------------------------------------------------------------------------
 // Project Headers
 
@@ -454,13 +454,13 @@ bool MyMoneyQifReader::finishImport(void)
 
   // remove the Don't ask again entries
   KConfig* config = KGlobal::config();
-  config->setGroup(QString::fromLatin1("Notification Messages"));
+  KConfigGroup grp = config->group(QString::fromLatin1("Notification Messages"));
   QStringList::ConstIterator it;
 
   for(it = m_dontAskAgain.begin(); it != m_dontAskAgain.end(); ++it) {
-    config->deleteEntry(*it);
+    grp.deleteEntry(*it);
   }
-  config->sync();
+  grp.sync();
   m_dontAskAgain.clear();
   m_accountTranslation.clear();
 
@@ -474,13 +474,13 @@ bool MyMoneyQifReader::finishImport(void)
 
     // remove the Don't ask again entries
     KConfig* config = KGlobal::config();
-    config->setGroup(QString::fromLatin1("Notification Messages"));
+    KConfigGroup grp = config->group(QString::fromLatin1("Notification Messages"));
     QStringList::ConstIterator it;
 
     for(it = m_dontAskAgain.begin(); it != m_dontAskAgain.end(); ++it) {
-      config->deleteEntry(*it);
+      grp.deleteEntry(*it);
     }
-    config->sync();
+    grp.sync();
     m_dontAskAgain.clear();
     m_accountTranslation.clear();
 
@@ -694,7 +694,7 @@ void MyMoneyQifReader::extractSplits(Q3ValueList<qSplit>& listqSplits) const
 
   QStringList::ConstIterator it;
 
-  for(it = m_qifEntry.begin(); it != m_qifEntry.end(); ++it) {
+  for(it = m_qifEntry.constBegin(); it != m_qifEntry.constEnd(); ++it) {
     if((*it)[0] == "S") {
       qSplit q;
       q.m_strCategoryName = (*it++).mid(1);       //   'S'

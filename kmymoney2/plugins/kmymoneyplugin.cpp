@@ -46,11 +46,11 @@ KAction* KMyMoneyPlugin::Plugin::action(const QString& actionName) const
   static KShortcut shortcut("");
   static KAction dummyAction(QString("Dummy"), QString(), shortcut, static_cast<const QObject*>(this), 0, static_cast<KActionCollection*>(0), "");
 
-  KAction* p = actionCollection()->action(actionName.toLatin1());
+  KAction* p = actionCollection()->action(actionName);
   if(p)
     return p;
 
-  qWarning("Action with name '%s' not found!", actionName.toLatin1());
+  qWarning("Action with name '%s' not found!", actionName);
   return &dummyAction;
 }
 
@@ -64,13 +64,13 @@ KToggleAction* KMyMoneyPlugin::Plugin::toggleAction(const QString& actionName) c
   if(q) {
     KToggleAction* p = dynamic_cast<KToggleAction*>(q);
     if(!p) {
-      qWarning("Action '%s' is not of type KToggleAction", actionName.toLatin1());
+      qWarning("Action '%1' is not of type KToggleAction", actionName));
       p = &dummyAction;
     }
     return p;
   }
 
-  qWarning("Action with name '%s' not found!", actionName.toLatin1());
+  qWarning("Action with name '%s' not found!", actionName);
   return &dummyAction;
 }
 

@@ -186,6 +186,8 @@ int main(int argc, char *argv[])
 #endif
 
   int rc = 0;
+#warning "port me to kde4"
+#if 0  
   try {
     do {
       // connect to DCOP server
@@ -235,7 +237,6 @@ int main(int argc, char *argv[])
       } else {
         qDebug("DCOP registration failed. Some functions are not available.");
       }
-    
       kmymoney2->show();
       kmymoney2->setEnabled(false);
     
@@ -290,7 +291,7 @@ int main(int argc, char *argv[])
                                QString("%1 in file %2 line %3").arg(e->what()).arg(e->file()).arg(e->line()));
     throw e;
   }
-
+#endif
   delete a;
 
   return rc;

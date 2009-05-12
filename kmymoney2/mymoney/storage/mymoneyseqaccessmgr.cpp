@@ -114,7 +114,7 @@ MyMoneySeqAccessMgr const * MyMoneySeqAccessMgr::duplicate(void)
    */
 KSharedPtr <MyMoneyStorageSql> MyMoneySeqAccessMgr::connectToDatabase
       (const KUrl& /*url*/) {
-  return 0;
+  return KSharedPtr <MyMoneyStorageSql>();
 }
 
 bool MyMoneySeqAccessMgr::isStandardAccount(const QString& id) const
@@ -497,11 +497,13 @@ void MyMoneySeqAccessMgr::modifyAccount(const MyMoneyAccount& account, const boo
       if(!account.institutionId().isEmpty())
         institution(account.institutionId());
 
+#warning "KDE4 port me"
+#if 0
       Q3ValueList<QString>::ConstIterator it_a;
       for(it_a = account.accountList().constBegin(); it_a != account.accountList().constEnd(); ++it_a) {
         this->account(*it_a);
       }
-
+#endif
       // update information in account list
       m_accountList.modify(account.id(), account);
 

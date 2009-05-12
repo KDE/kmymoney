@@ -47,7 +47,9 @@ SET( kmymoney_common_LIBS
 
 ########### kmymoney2 executable ###############
 
-SET( kmymoney2_SRCS main.cpp kmymoney2.cpp )
+SET( kmymoney2_SRCS 
+	#main.cpp 
+	kmymoney2.cpp )
 
 #KDE4_ADD_DCOP_SKELS( kmymoney2_SRCS kmymoney2.h )
 #KDE4_ADD_DCOP_STUBS( kmymoney2_SRCS kmymoney2.h )
