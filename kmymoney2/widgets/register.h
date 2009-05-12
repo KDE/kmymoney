@@ -57,7 +57,7 @@
 #include <kmymoney/transaction.h>
 #include <kmymoney/transactioneditorcontainer.h>
 #include <kmymoney/selectedtransaction.h>
-#include <kmymoney/transactionsortoption.h>
+//#include <kmymoney/transactionsortoption.h>
 
 class RegisterToolTip;
 

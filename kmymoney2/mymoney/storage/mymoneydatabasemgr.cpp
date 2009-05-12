@@ -524,7 +524,7 @@ void MyMoneyDatabaseMgr::modifyAccount(const MyMoneyAccount& account, const bool
         institution(account.institutionId());
 
       Q3ValueList<QString>::ConstIterator it_a;
-      for(it_a = account.accountList().begin(); it_a != account.accountList().end(); ++it_a) {
+      for(it_a = account.accountList().constBegin(); it_a != account.accountList().constEnd(); ++it_a) {
         this->account(*it_a);
       }
 
@@ -1343,7 +1343,7 @@ void MyMoneyDatabaseMgr::addCurrency(const MyMoneySecurity& currency)
 
     it = currencyList.find(currency.id());
     if(it != currencyList.end()) {
-      throw new MYMONEYEXCEPTION(QString("Cannot add currency with existing id %1").arg(currency.id().data()));
+      throw new MYMONEYEXCEPTION(QString("Cannot add currency with existing id %1").arg(currency.id()));
     }
 
     m_sql->addCurrency(currency);
@@ -1357,7 +1357,7 @@ void MyMoneyDatabaseMgr::modifyCurrency(const MyMoneySecurity& currency)
 
   it = currencyList.find(currency.id());
   if(it == currencyList.end()) {
-    throw new MYMONEYEXCEPTION(QString("Cannot modify currency with unknown id %1").arg(currency.id().data()));
+    throw new MYMONEYEXCEPTION(QString("Cannot modify currency with unknown id %1").arg(currency.id()));
   }
 
   m_sql->modifyCurrency(currency);
@@ -1372,7 +1372,7 @@ void MyMoneyDatabaseMgr::removeCurrency(const MyMoneySecurity& currency)
 
   it = currencyList.find(currency.id());
   if(it == currencyList.end()) {
-    throw new MYMONEYEXCEPTION(QString("Cannot remove currency with unknown id %1").arg(currency.id().data()));
+    throw new MYMONEYEXCEPTION(QString("Cannot remove currency with unknown id %1").arg(currency.id()));
   }
 
   m_sql->removeCurrency(currency);
@@ -1388,7 +1388,7 @@ const MyMoneySecurity MyMoneyDatabaseMgr::currency(const QString& id) const
 
   it = currencyList.find(id);
   if(it == currencyList.end()) {
-    throw new MYMONEYEXCEPTION(QString("Cannot retrieve currency with unknown id '%1'").arg(id.data()));
+    throw new MYMONEYEXCEPTION(QString("Cannot retrieve currency with unknown id '%1'").arg(id));
   }
 
   return *it;

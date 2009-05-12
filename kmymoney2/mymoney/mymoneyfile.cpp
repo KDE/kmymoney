@@ -785,7 +785,7 @@ const MyMoneyAccount MyMoneyFile::createOpeningBalanceAccount(const MyMoneySecur
   checkTransaction(__PRETTY_FUNCTION__);
 
   MyMoneyAccount acc;
-  QString name(i18n(MyMoneyFile::OpeningBalancesPrefix));
+  QString name(MyMoneyFile::OpeningBalancesPrefix);
   if(security.id() != baseCurrency().id()) {
     name += QString(" (%1)").arg(security.id());
   }

@@ -73,5 +73,5 @@ private:
   KMyMoneyView*    m_view;
 };
 
-}; // namespace
+} // namespace
 #endif

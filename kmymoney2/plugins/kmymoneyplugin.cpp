@@ -64,7 +64,7 @@ KToggleAction* KMyMoneyPlugin::Plugin::toggleAction(const QString& actionName) c
   if(q) {
     KToggleAction* p = dynamic_cast<KToggleAction*>(q);
     if(!p) {
-      qWarning("Action '%1' is not of type KToggleAction", actionName));
+      qWarning("Action '%1' is not of type KToggleAction", actionName);
       p = &dummyAction;
     }
     return p;

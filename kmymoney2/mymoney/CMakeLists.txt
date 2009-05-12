@@ -6,7 +6,8 @@ INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} )
 ########### next target ###############
 
 SET(kmm_mymoney_LIB_SRCS
-  mymoneymoney.cpp mymoneyfinancialcalculator.cpp mymoneytransactionfilter.cpp
+  mymoneymoney.cpp mymoneyfinancialcalculator.cpp 
+  #mymoneytransactionfilter.cpp
   mymoneyobject.cpp mymoneykeyvaluecontainer.cpp mymoneyobserver.cpp
   mymoneysubject.cpp mymoneysplit.cpp mymoneyinstitution.cpp
   mymoneyexception.cpp mymoneyinvesttransaction.cpp mymoneyutils.cpp

@@ -177,7 +177,7 @@ MyMoneyMoney::MyMoneyMoney(const QString& pszAmount)
   }
   // qDebug("4: '%s'", res.data());
   if(res.length() > 0)
-    m_num = atoll( res );
+    m_num =  res .toLong();
 
   if(isNegative)
     m_num = -m_num;
@@ -346,8 +346,8 @@ void MyMoneyMoney::fromString(const QString& str)
   QRegExp regExp("(\\-?\\d+)/(\\d+)");
   int pos = regExp.search(str);
   if(pos > -1) {
-    m_num = atoll(regExp.cap(1));
-    m_denom = atoll(regExp.cap(2));
+    m_num = regExp.cap(1).toLong();
+    m_denom = regExp.cap(2).toLong();
   }
 }
 

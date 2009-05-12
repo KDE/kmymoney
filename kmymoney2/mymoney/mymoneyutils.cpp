@@ -243,7 +243,7 @@ MyMoneyTracer::MyMoneyTracer(const char* name)
     }
     QString indent;
     indent.fill(' ', m_indentLevel);
-    std::cerr << indent.toLatin1() << "ENTER: " << m_className.toLatin1() << "::" << m_memberName.toLatin1() << std::endl;
+    std::cerr << qPrintable(indent) << "ENTER: " << qPrintable(m_className) << "::" << qPrintable(m_memberName) << std::endl;
   }
   m_indentLevel += 2;
 }
@@ -255,7 +255,7 @@ MyMoneyTracer::MyMoneyTracer(const QString& className, const QString& memberName
   if(m_onoff) {
     QString indent;
     indent.fill(' ', m_indentLevel);
-    std::cerr << indent.toLatin1() << "ENTER: " << m_className.toLatin1() << "::" << m_memberName.toLatin1() << std::endl;
+    std::cerr << qPrintable(indent) << "ENTER: " << qPrintable(m_className) << "::" << qPrintable(m_memberName) << std::endl;
   }
   m_indentLevel += 2;
 }
@@ -266,7 +266,7 @@ MyMoneyTracer::~MyMoneyTracer()
   if(m_onoff) {
     QString indent;
     indent.fill(' ', m_indentLevel);
-    std::cerr << indent.toLatin1() << "LEAVE: " << m_className.toLatin1() << "::" << m_memberName.toLatin1() << std::endl;
+    std::cerr << qPrintable(indent) << "LEAVE: " << qPrintable(m_className) << "::" << qPrintable(m_memberName) << std::endl;
   }
 }
 
@@ -277,7 +277,7 @@ void MyMoneyTracer::printf(const char *format, ...) const
     va_start(args, format);
     QString indent;
     indent.fill(' ', m_indentLevel);
-    std::cerr << indent.toLatin1();
+    std::cerr << qPrintable(indent);
 
     vfprintf(stderr,format,args);
     putc('\n', stderr);
@@ -333,7 +333,7 @@ unsigned long extractId(const QString& txt)
 
   pos = txt.find(QRegExp("\\d+"), 0);
   if(pos != -1) {
-    rc = atol(txt.mid(pos));
+    rc = txt.mid(pos).toInt();
   }
   return rc;
 }
