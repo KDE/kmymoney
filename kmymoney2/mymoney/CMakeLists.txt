@@ -12,9 +12,13 @@ SET(kmm_mymoney_LIB_SRCS
   mymoneysubject.cpp mymoneysplit.cpp mymoneyinstitution.cpp
   mymoneyexception.cpp mymoneyinvesttransaction.cpp mymoneyutils.cpp
   mymoneysecurity.cpp mymoneytransaction.cpp mymoneyscheduled.cpp
-  mymoneypayee.cpp mymoneyfile.cpp mymoneycategory.cpp mymoneyaccount.cpp
+  mymoneypayee.cpp 
+  #mymoneyfile.cpp 
+  mymoneycategory.cpp 
+  #mymoneyaccount.cpp
   mymoneyreport.cpp mymoneystatement.cpp mymoneyprice.cpp mymoneybudget.cpp
-  mymoneyobjectcontainer.cpp mymoneyforecast.cpp
+  mymoneyobjectcontainer.cpp 
+  #mymoneyforecast.cpp
   )
 
 
@@ -32,7 +36,7 @@ KMM_CREATE_LINKS( ${mymoney_HEADERS} )
 
 KDE4_ADD_LIBRARY(kmm_mymoney SHARED ${kmm_mymoney_LIB_SRCS})
 
-TARGET_LINK_LIBRARIES(kmm_mymoney ${QT_AND_KDECORE_LIBS} kmm_storage)
+TARGET_LINK_LIBRARIES(kmm_mymoney ${QT_QTGUI_LIBRARY} ${QT_QT3SUPPORT_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTCORE_LIBRARY} ${KDE4_KDECORE_LIBS} kmm_storage)
 
 SET_TARGET_PROPERTIES(kmm_mymoney PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
 

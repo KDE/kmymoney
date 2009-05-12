@@ -142,7 +142,7 @@ bool MyMoneyStatement::read(const QDomElement& _e)
     m_dateEnd = QDate::fromString(_e.attribute("enddate"),Qt::ISODate);
     m_closingBalance = MyMoneyMoney(_e.attribute("closingbalance"));
     m_accountId = _e.attribute("accountid");
-    m_skipCategoryMatching = _e.attribute("skipCategoryMatching");
+    m_skipCategoryMatching = _e.attribute("skipCategoryMatching").isEmpty();
 
     int i = kAccountTypeTxt.findIndex(_e.attribute("type",kAccountTypeTxt[1]));
     if ( i != -1 )
