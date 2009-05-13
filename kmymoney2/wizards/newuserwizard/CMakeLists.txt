@@ -12,8 +12,7 @@ SET (libnewuserwizard_a_UI
 
 # The handling of these ui files depends
 # on libkmymoney.so (the widgets library)
-KMM_ADD_UI_FILES(libnewuserwizard_a_SOURCES ${libnewuserwizard_a_UI}
-  DEPENDS kmymoney)
+kde4_add_ui_files(libnewuserwizard_a_SOURCES ${libnewuserwizard_a_UI})
 
 KDE4_ADD_LIBRARY(newuserwizard STATIC ${libnewuserwizard_a_SOURCES})
 ADD_DEPENDENCIES(newuserwizard generate_wizardpages_ui_srcs)

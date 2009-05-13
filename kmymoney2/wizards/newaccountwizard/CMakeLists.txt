@@ -14,9 +14,9 @@ SET (libnewaccountwizard_a_UI
 
 # The handling of these ui files depends
 # on libkmymoney.so (the widgets library)
-KMM_ADD_UI_FILES(libnewaccountwizard_a_SOURCES ${libnewaccountwizard_a_UI}
-  DEPENDS kmymoney)
 
-#KDE4_ADD_MOC_FILES(libnewaccountwizard_a_SOURCES knewaccountwizard_p.h)
+
+kde4_add_ui_files(libnewaccountwizard_a_SOURCES ${libnewaccountwizard_a_UI} )
+
 
 KDE4_ADD_LIBRARY(newaccountwizard STATIC ${libnewaccountwizard_a_SOURCES})
