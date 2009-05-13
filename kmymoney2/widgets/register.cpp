@@ -44,7 +44,7 @@
 #include <klocale.h>
 #include <kglobal.h>
 #include <kdebug.h>
-#include <kurldrag.h>
+#include <k3urldrag.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes

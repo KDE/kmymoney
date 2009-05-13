@@ -28,7 +28,8 @@
 #include <Q3Frame>
 #include <QKeyEvent>
 #include <QEvent>
-
+#include <QDesktopWidget>
+#include <QLineEdit>
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -51,7 +52,7 @@ kMyMoneyCompletion::kMyMoneyCompletion(QWidget *parent, const char *name ) :
   m_selector->listView()->setFocusProxy(this);
 
   m_parent = parent;
-  setFocusProxy((parent) ? parent : (QWidget*) NoFocus);
+  setFocusProxy((parent) ? parent : (QWidget*) Qt::NoFocus);
   setFrameStyle(Q3Frame::PopupPanel | Q3Frame::Raised);
   connectSignals(m_selector, m_selector->listView());
 }

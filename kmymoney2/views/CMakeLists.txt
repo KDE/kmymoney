@@ -2,12 +2,12 @@ INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} )
 
 ############# next target (views) STATIC ###################
 SET(libviews_a_SOURCES
-  kaccountsview.cpp
-  kbudgetview.cpp
-  kcategoriesview.cpp
-  kforecastview.cpp
-  kgloballedgerview.cpp
-  khomeview.cpp
+	#kaccountsview.cpp
+	#kbudgetview.cpp
+	#kcategoriesview.cpp
+	#kforecastview.cpp
+	#kgloballedgerview.cpp
+	#khomeview.cpp
   kinstitutionsview.cpp
   kinvestmentlistitem.cpp
   kinvestmentview.cpp
@@ -37,7 +37,7 @@ KMM_CREATE_LINKS( ${libviews_a_HEADER} )
 
 # The handling of these ui files depends
 # on libkmymoney.so (the widgets library)
-KMM_ADD_UI_FILES(libviews_a_SOURCES ${libviews_a_UI} DEPENDS kmymoney)
+#KMM_ADD_UI_FILES(libviews_a_SOURCES ${libviews_a_UI} DEPENDS kmymoney)
 
 KDE4_ADD_LIBRARY(views STATIC ${libviews_a_SOURCES})
 

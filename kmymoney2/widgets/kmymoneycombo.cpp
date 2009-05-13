@@ -50,7 +50,7 @@
 #include "../kmymoneyutils.h"
 
 KMyMoneyCombo::KMyMoneyCombo(QWidget *w, const char *name) :
-  KComboBox(w, name),
+  KComboBox(w),
   m_completion(0),
   m_edit(0),
   m_canCreateObjects(false),
@@ -59,7 +59,7 @@ KMyMoneyCombo::KMyMoneyCombo(QWidget *w, const char *name) :
 }
 
 KMyMoneyCombo::KMyMoneyCombo(bool rw, QWidget *w, const char *name) :
-  KComboBox(rw, w, name),
+  KComboBox(rw, w),
   m_completion(0),
   m_edit(0),
   m_canCreateObjects(false),
@@ -599,7 +599,7 @@ public:
 };
 
 KMyMoneyGeneralCombo::KMyMoneyGeneralCombo(QWidget* w, const char* name) :
-  KComboBox(w, name),
+  KComboBox(w),
   d(new Private)
 {
   connect(this, SIGNAL(highlighted(int)), this, SLOT(slotChangeItem(int)));

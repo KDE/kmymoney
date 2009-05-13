@@ -35,7 +35,7 @@
 #include <Q3Frame>
 #include <QKeyEvent>
 #include <QEvent>
-
+#include <Q3VBox>
 // ----------------------------------------------------------------------------
 // KDE Includes
 #include "kdecompat.h"
@@ -85,7 +85,8 @@ kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, const char *name, Qt::Alig
   focusWidget()->installEventFilter(this); // To get dateEdit's FocusIn/Out and some KeyPress events
   dateEdit->installEventFilter(this); // To get dateEdit's FocusIn/Out and some KeyPress events
 
-  m_datePopup = new KPassivePopup(dateEdit, "datePopup");
+  m_datePopup = new KPassivePopup(dateEdit);
+  m_datePopup->setObjectName("datePopup");
   m_datePopup->setTimeout(DATE_POPUP_TIMEOUT);
   m_datePopup->setView(new QLabel(KGlobal::locale()->formatDate(m_date), m_datePopup, "datePopupLabel"));
 
@@ -130,14 +131,16 @@ kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, const char *name, Qt::Alig
   }
   dateEdit->setSeparator(separator);
 
-  m_datePicker = new KDatePicker(m_dateFrame, m_date);
-#if KDE_IS_VERSION(3,1,0)
+  m_datePicker = new KDatePicker(m_date, m_dateFrame);
   // Let the date picker have a close button (Added in 3.1)
   m_datePicker->setCloseButton(true);
-#endif
 
   // the next line is a try to add an icon to the button
+  m_dateButton = new KPushButton;
+#warning "port to kde4"
+#if 0
   m_dateButton = new KPushButton(QIcon(QPixmap(KIconLoader::global()->iconPath("date", -KIconLoader::SizeSmall))), QString(""), this);
+#endif
   m_dateButton->setMinimumWidth(30);
 
   connect(m_dateButton,SIGNAL(clicked()),SLOT(toggleDatePicker()));

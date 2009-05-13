@@ -63,19 +63,23 @@ kMyMoneyAccountSelector::kMyMoneyAccountSelector(QWidget *parent, const char *na
   if(createButtons) {
     Q3VBoxLayout* buttonLayout = new Q3VBoxLayout( 0, 0, 6, "accountSelectorButtonLayout");
 
-    m_allAccountsButton = new KPushButton( this, "m_allAccountsButton" );
+    m_allAccountsButton = new KPushButton( this );
+    m_allAccountsButton->setObjectName( "m_allAccountsButton" );
     m_allAccountsButton->setText( i18n( "All" ) );
     buttonLayout->addWidget( m_allAccountsButton );
 
-    m_incomeCategoriesButton = new KPushButton( this, "m_incomeCategoriesButton" );
+    m_incomeCategoriesButton = new KPushButton( this);
+    m_incomeCategoriesButton->setObjectName( "m_incomeCategoriesButton" );
     m_incomeCategoriesButton->setText( i18n( "Income" ) );
     buttonLayout->addWidget( m_incomeCategoriesButton );
 
-    m_expenseCategoriesButton = new KPushButton( this, "m_expenseCategoriesButton" );
+    m_expenseCategoriesButton = new KPushButton( this );
+    m_expenseCategoriesButton->setObjectName("m_expenseCategoriesButton" );
     m_expenseCategoriesButton->setText( i18n( "Expense" ) );
     buttonLayout->addWidget( m_expenseCategoriesButton );
 
-    m_noAccountButton = new KPushButton( this, "m_noAccountButton" );
+    m_noAccountButton = new KPushButton( this);
+    m_noAccountButton->setObjectName( "m_noAccountButton" );
     m_noAccountButton->setText( i18n( "None" ) );
     buttonLayout->addWidget( m_noAccountButton );
 

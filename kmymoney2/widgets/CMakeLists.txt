@@ -42,18 +42,18 @@ KMM_CREATE_LINKS_BIN( transactionsortoption.h )
 # Common sources for libkmymoney.so and libwidgets.a that do not
 # contain the KMM_DESIGNER flag
 SET(_uncritial_common_sources
-  kbudgetvalues.cpp
-  kguiutils.cpp
+	#kbudgetvalues.cpp
+	#kguiutils.cpp
   kmymoneyaccountselector.cpp
   kmymoneyaccounttreebudget.cpp
   kmymoneyaccounttree.cpp
   kmymoneyaccounttreeforecast.cpp
   kmymoneycalculator.cpp
   kmymoneychecklistitem.cpp
-  kmymoneycombo.cpp
+  #kmymoneycombo.cpp
   kmymoneycompletion.cpp
-  kmymoneycurrencyselector.cpp
-  kmymoneydateinput.cpp
+   #kmymoneycurrencyselector.cpp
+   #kmymoneydateinput.cpp
   kmymoneydatetbl.cpp
   kmymoneyedit.cpp
   kmymoneylineedit.cpp
@@ -76,7 +76,7 @@ SET (_critial_common_sources
   kmymoneyaccounttreebase.cpp
   kmymoneycategory.cpp
   kmymoneyselector.cpp
-  register.cpp
+  #register.cpp
   )
 
 

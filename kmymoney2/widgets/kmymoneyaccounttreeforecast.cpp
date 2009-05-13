@@ -87,7 +87,7 @@ void KMyMoneyAccountTreeForecast::showDetailed(MyMoneyForecast& forecast)
 
   for(int i = 1; i <= forecast.forecastDays(); ++i) {
     QDate forecastDate = QDate::currentDate().addDays(i);
-    QString columnName =  KGlobal::locale()->formatDate(forecastDate, true);
+    QString columnName =  KGlobal::locale()->formatDate(forecastDate, KLocale::LongDate);
     addColumn(columnName, -1);
   }
 
