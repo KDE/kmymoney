@@ -27,14 +27,22 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoney2/dialogs/settings/ksettingsgpgdecl.h"
+#include "ui_ksettingsgpgdecl.h"
+
+class KSettingsGpgDecl : public QWidget, public Ui::KSettingsGpgDecl
+{
+public:
+  KSettingsGpgDecl( QWidget *parent ) : QWidget( parent ) {
+    setupUi( this );
+  }
+};
 
 class KSettingsGpg : public KSettingsGpgDecl
 {
   Q_OBJECT
 
 public:
-  KSettingsGpg(QWidget* parent = 0, const char* name = 0);
+  KSettingsGpg(QWidget* parent = 0);
   ~KSettingsGpg();
 
 public slots:

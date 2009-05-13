@@ -27,16 +27,24 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoney2/dialogs/settings/ksettingsonlinequotesdecl.h"
+#include "ui_ksettingsonlinequotesdecl.h"
 #include "kmymoney2/converter/webpricequote.h"
 //Added by qt3to4:
 #include <Q3ValueList>
+
+class KSettingsOnlineQuotesDecl : public QWidget, public Ui::KSettingsOnlineQuotesDecl
+{
+public:
+  KSettingsOnlineQuotesDecl( QWidget *parent ) : QWidget( parent ) {
+    setupUi( this );
+  }
+};
 
 class KSettingsOnlineQuotes : public KSettingsOnlineQuotesDecl
 {
   Q_OBJECT
 public:
-  KSettingsOnlineQuotes(QWidget* parent = 0, const char *name = 0);
+  KSettingsOnlineQuotes(QWidget* parent = 0);
   virtual ~KSettingsOnlineQuotes() {}
 
   void writeConfig(void) {}

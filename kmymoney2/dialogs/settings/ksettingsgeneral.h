@@ -26,14 +26,22 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoney2/dialogs/settings/ksettingsgeneraldecl.h"
+#include "ui_ksettingsgeneraldecl.h"
+
+class KSettingsGeneralDecl : public QWidget, public Ui::KSettingsGeneralDecl
+{
+public:
+  KSettingsGeneralDecl( QWidget *parent ) : QWidget( parent ) {
+    setupUi( this );
+  }
+};
 
 class KSettingsGeneral : public KSettingsGeneralDecl
 {
   Q_OBJECT
 
 public:
-  KSettingsGeneral(QWidget* parent = 0, const char* name = 0);
+  KSettingsGeneral(QWidget* parent = 0);
   ~KSettingsGeneral();
 
 protected slots:

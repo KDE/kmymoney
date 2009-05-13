@@ -40,8 +40,8 @@
 #define RECOVER_KEY_ID      "0xD2B08440"
 #define RECOVER_KEY_ID_FULL "59B0F826D2B08440"
 
-KSettingsGpg::KSettingsGpg(QWidget* parent, const char* name) :
-  KSettingsGpgDecl(parent, name),
+KSettingsGpg::KSettingsGpg(QWidget* parent) :
+  KSettingsGpgDecl(parent),
   m_checkCount(0),
   m_needCheckList(true),
   m_listOk(false)

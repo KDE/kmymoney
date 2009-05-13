@@ -38,8 +38,8 @@
 #include "kmymoney2/kmymoneyglobalsettings.h"
 #include "kmymoney2/kmymoneyutils.h"
 
-KSettingsHome::KSettingsHome(QWidget* parent, const char* name) :
-  KSettingsHomeDecl(parent, name),
+KSettingsHome::KSettingsHome(QWidget* parent) :
+  KSettingsHomeDecl(parent),
   m_noNeedToUpdateList(false)
 {
   m_homePageList->addColumn("");
@@ -53,7 +53,7 @@ KSettingsHome::KSettingsHome(QWidget* parent, const char* name) :
                     i18n("Move selected item up"),
                     i18n("Use this to move the selected item up by one position in the list."));
   KGuiItem downButtonItem( i18n( "&Down" ),
-                    QIcon(il->loadIcon("down", KIcon::Small, KIconLoader::SizeSmall)),
+                    QIcon(il->loadIcon("down", KIconLoader::Small, KIconLoader::SizeSmall)),
                     i18n("Move selected item down"),
                     i18n("Use this to move the selected item down by one position in the list."));
 

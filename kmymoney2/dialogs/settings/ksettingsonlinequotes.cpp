@@ -41,8 +41,8 @@
 #include "ksettingsonlinequotes.h"
 #include "kmymoney2/converter/webpricequote.h"
 
-KSettingsOnlineQuotes::KSettingsOnlineQuotes(QWidget *parent, const char *name )
-  : KSettingsOnlineQuotesDecl(parent, name)
+KSettingsOnlineQuotes::KSettingsOnlineQuotes(QWidget *parent)
+  : KSettingsOnlineQuotesDecl(parent)
 {
   QStringList groups = WebPriceQuote::quoteSources();
 

@@ -31,8 +31,8 @@
 #include <kmymoney/kmymoneydateinput.h>
 #include "ksettingsgeneral.h"
 
-KSettingsGeneral::KSettingsGeneral(QWidget* parent, const char* name) :
-  KSettingsGeneralDecl(parent, name)
+KSettingsGeneral::KSettingsGeneral(QWidget* parent) :
+  KSettingsGeneralDecl(parent)
 {
   // hide the internally used date field
   kcfg_StartDate->hide();

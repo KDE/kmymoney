@@ -28,14 +28,23 @@ class Q3ListViewItem;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoney2/dialogs/settings/ksettingshomedecl.h"
+#include "ui_ksettingshomedecl.h"
+
+class KSettingsHomeDecl : public QWidget, public Ui::KSettingsHomeDecl
+{                                                                                    
+public:
+  KSettingsHomeDecl( QWidget *parent ) : QWidget( parent ) {
+    setupUi( this );
+  }
+};
+
 
 class KSettingsHome : public KSettingsHomeDecl
 {
   Q_OBJECT
 
 public:
-  KSettingsHome(QWidget* parent = 0, const char* name = 0);
+  KSettingsHome(QWidget* parent = 0);
   ~KSettingsHome();
 
 protected slots:
