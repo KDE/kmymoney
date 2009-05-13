@@ -33,6 +33,15 @@
 #include <kmymoney/mymoneytransaction.h>
 #include "ui_kconfirmmanualenterdlgdecl.h"
 
+class KConfirmManualEnterDlgDecl : public QWidget, public Ui::KConfirmManualEnterDlgDecl
+{
+public:
+  KConfirmManualEnterDlgDecl( QWidget *parent ) : QWidget( parent ) {
+    setupUi( this );
+  }
+};
+
+
 class KConfirmManualEnterDlg : public Ui::KConfirmManualEnterDlgDecl
 {
   Q_OBJECT

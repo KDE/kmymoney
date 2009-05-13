@@ -17,7 +17,7 @@ SET (libsettings_a_SOURCES
   #ksettingshome.cpp 
   #ksettingsonlinequotes.cpp
   #ksettingsregister.cpp 
-  ksettingsschedules.cpp 
+  #ksettingsschedules.cpp 
   )
 #missing it
 #ksettingsplugins.cpp

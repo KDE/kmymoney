@@ -16,7 +16,7 @@ SET(libdialogs_a_SOURCES
   kbalancewarning.cpp 
   #kcategoryreassigndlg.cpp
   #kchooseimportexportdlg.cpp 
-  kconfirmmanualenterdlg.cpp
+  #kconfirmmanualenterdlg.cpp
   kcsvprogressdlg.cpp kcurrencycalculator.cpp kcurrencyeditdlg.cpp
   keditequityentrydlg.cpp keditloanwizard.cpp keditscheduledlg.cpp
   kendingbalancedlg.cpp kenterscheduledlg.cpp

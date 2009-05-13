@@ -52,7 +52,7 @@
 
 /** Simple constructor */
 KCsvProgressDlg::KCsvProgressDlg(int type, MyMoneyAccount *account, QWidget *parent, const char *name )
- : KCsvProgressDlgDecl(parent,name, true)
+ : KCsvProgressDlgDecl(parent)
 {
   m_nType = type;
   if (m_nType==0)
@@ -218,11 +218,11 @@ void KCsvProgressDlg::slotFileTextChanged(const QString& text)
 
 void KCsvProgressDlg::readConfig(void)
 {
-  KConfig *kconfig = KGlobal::config();
-  kconfig->setGroup("Last Use Settings");
-  m_kmymoneydateStart->setDate(kconfig->readDateTimeEntry("KCsvProgressDlg_StartDate").date());
-  m_kmymoneydateEnd->setDate(kconfig->readDateTimeEntry("KCsvProgressDlg_EndDate").date());
-  m_qlineeditFile->setText(kconfig->readEntry("KCsvProgressDlg_LastFile", ""));
+  KSharedConfigPtr kconfig = KGlobal::config();
+  KConfigGroup grp = kconfig->group("Last Use Settings");
+  m_kmymoneydateStart->setDate(grp.readDateTimeEntry("KCsvProgressDlg_StartDate").date());
+  m_kmymoneydateEnd->setDate(grp.readDateTimeEntry("KCsvProgressDlg_EndDate").date());
+  m_qlineeditFile->setText(grp.readEntry("KCsvProgressDlg_LastFile", ""));
   if (m_qlineeditFile->text().length()>=1)
     m_qbuttonRun->setEnabled(true);
   else
@@ -231,12 +231,12 @@ void KCsvProgressDlg::readConfig(void)
 
 void KCsvProgressDlg::writeConfig(void)
 {
-  KConfig *kconfig = KGlobal::config();
-  kconfig->setGroup("Last Use Settings");
-  kconfig->writeEntry("KCsvProgressDlg_LastFile", m_qlineeditFile->text());
-  kconfig->writeEntry("KCsvProgressDlg_StartDate", QDateTime(m_kmymoneydateStart->date()));
-  kconfig->writeEntry("KCsvProgressDlg_EndDate", QDateTime(m_kmymoneydateEnd->date()));
-  kconfig->sync();
+  KSharedConfigPtr kconfig = KGlobal::config();
+  KConfigGroup grp = kconfig->group("Last Use Settings");
+  grp.writeEntry("KCsvProgressDlg_LastFile", m_qlineeditFile->text());
+  grp.writeEntry("KCsvProgressDlg_StartDate", QDateTime(m_kmymoneydateStart->date()));
+  grp.writeEntry("KCsvProgressDlg_EndDate", QDateTime(m_kmymoneydateEnd->date()));
+  grp.sync();
 }
 
 /** Update the progress bar, and update the transaction count indicator. */

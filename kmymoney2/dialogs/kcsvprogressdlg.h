@@ -30,7 +30,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 #include "../mymoney/mymoneyaccount.h"
-#include "../dialogs/kcsvprogressdlgdecl.h"
+#include "ui_kcsvprogressdlgdecl.h"
 
 /**
   * This class is used to show the progress of an import or export of type
@@ -42,6 +42,16 @@
   *
   * @short A class to show the progress of a CSV import or export.
 **/
+
+class KCsvProgressDlgDecl : public QWidget, public Ui::KCsvProgressDlgDecl
+{
+public:
+  KCsvProgressDlgDecl( QWidget *parent ) : QWidget( parent ) {
+    setupUi( this );
+  }
+};
+
+
 class KCsvProgressDlg : public KCsvProgressDlgDecl  {
    Q_OBJECT
 private:
