@@ -25,6 +25,8 @@ SET (libsettings_a_UI
   ksettingsregisterdecl.ui ksettingsschedulesdecl.ui
   )
 
+kde4_add_ui_files(libsettings_a_SOURCES ${libsettings_a_UI} )
+
 # The handling of these ui files depends
 # on libkmymoney.so (the widgets library)
 #KMM_ADD_UI_FILES(libsettings_a_SOURCES ${libsettings_a_UI} DEPENDS kmymoney)

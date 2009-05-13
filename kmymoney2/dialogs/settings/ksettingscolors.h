@@ -26,14 +26,22 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoney2/dialogs/settings/ksettingscolorsdecl.h"
+#include "ui_ksettingscolorsdecl.h"
+
+class KSettingsColorsDecl : public QWidget, public Ui::KSettingsColorsDecl
+{
+public:
+  KSettingsColorsDecl( QWidget *parent ) : QWidget( parent ) {
+    setupUi( this );
+  }
+};
 
 class KSettingsColors : public KSettingsColorsDecl
 {
   Q_OBJECT
 
 public:
-  KSettingsColors(QWidget* parent = 0, const char* name = 0);
+  KSettingsColors(QWidget* parent = 0);
   ~KSettingsColors();
 };
 #endif

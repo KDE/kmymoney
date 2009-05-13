@@ -27,14 +27,23 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoney2/dialogs/settings/ksettingsforecastdecl.h"
+#include "ui_ksettingsforecastdecl.h"
+
+class KSettingsForecastDecl : public QWidget, public Ui::KSettingsForecastDecl
+{
+public:
+  KSettingsForecastDecl( QWidget *parent ) : QWidget( parent ) {
+    setupUi( this );
+  }
+};
+
 
 class KSettingsForecast : public KSettingsForecastDecl
 {
   Q_OBJECT
 
 public:
-  KSettingsForecast(QWidget* parent = 0, const char* name = 0);
+  KSettingsForecast(QWidget* parent = 0);
   ~KSettingsForecast();
 };
 #endif

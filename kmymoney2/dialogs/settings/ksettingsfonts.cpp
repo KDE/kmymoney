@@ -25,8 +25,8 @@
 
 #include "ksettingsfonts.h"
 
-KSettingsFonts::KSettingsFonts(QWidget* parent, const char* name) :
-  KSettingsFontsDecl(parent, name)
+KSettingsFonts::KSettingsFonts(QWidget* parent) :
+  KSettingsFontsDecl(parent)
 {
 }
 

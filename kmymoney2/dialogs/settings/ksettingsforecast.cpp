@@ -25,8 +25,8 @@
 
 #include "ksettingsforecast.h"
 
-KSettingsForecast::KSettingsForecast(QWidget* parent, const char* name) :
-  KSettingsForecastDecl(parent, name)
+KSettingsForecast::KSettingsForecast(QWidget* parent) :
+  KSettingsForecastDecl(parent)
 {
 }
 

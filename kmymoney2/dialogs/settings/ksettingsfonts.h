@@ -26,14 +26,22 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoney2/dialogs/settings/ksettingsfontsdecl.h"
+#include "ui_ksettingsfontsdecl.h"
+
+class KSettingsFontsDecl : public QWidget, public Ui::KSettingsFontsDecl
+{                                                                                                                                          
+public:                                                                                                                                    
+  KSettingsFontsDecl( QWidget *parent ) : QWidget( parent ) {                                                                             
+    setupUi( this );                                                                                                                       
+  }                                                                                                                                        
+};     
 
 class KSettingsFonts : public KSettingsFontsDecl
 {
   Q_OBJECT
 
 public:
-  KSettingsFonts(QWidget* parent = 0, const char* name = 0);
+  KSettingsFonts(QWidget* parent = 0);
   ~KSettingsFonts();
 };
 #endif

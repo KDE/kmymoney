@@ -25,8 +25,8 @@
 
 #include "ksettingscolors.h"
 
-KSettingsColors::KSettingsColors(QWidget* parent, const char* name) :
-  KSettingsColorsDecl(parent, name)
+KSettingsColors::KSettingsColors(QWidget* parent) :
+  KSettingsColorsDecl(parent)
 {
 }
 
