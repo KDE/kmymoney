@@ -32,7 +32,7 @@
 
 namespace KMyMoneyTransactionForm {
   class TransactionForm;
-}; // namespace
+} // namespace
 
 namespace KMyMoneyRegister {
 

@@ -66,14 +66,20 @@ KMyMoneyCategory::KMyMoneyCategory(QWidget* parent, const char * name, bool spli
     d->frame->setFocusProxy(this);
     Q3HBoxLayout* layout = new Q3HBoxLayout(d->frame);
     // make sure not to use our own overridden version of reparent() here
-    KMyMoneyCombo::reparent(d->frame, getWFlags() & ~Qt::WType_Mask, QPoint(0, 0), true);
+
+#warning "port to kde4"
+    //KMyMoneyCombo::reparent(d->frame, getWFlags() & ~Qt::WType_Mask, QPoint(0, 0), true);
     if(parent)
       d->frame->reparent(parent, QPoint(0, 0), true);
 
     // create button
+#warning "port to kde4"    
+#if 0
     KGuiItem splitButtonItem("",
-        QIcon(KIconLoader::global()->loadIcon("split_transaction", KIcon::Small,
+        QIcon(KIconLoader::global()->loadIcon("split_transaction", KIconLoader::Small,
         KIconLoader::SizeSmall)), "", "");
+#endif
+    KGuiItem splitButtonItem;
     d->splitButton = new KPushButton( splitButtonItem, d->frame );
     d->splitButton->setObjectName( "splitButton" );
 

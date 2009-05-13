@@ -663,7 +663,11 @@ void KMyMoneySelector::slotListRightMouse(Q3ListViewItem* it_v, const QPoint& po
     KMyMoneyCheckListItem* it_c = static_cast<KMyMoneyCheckListItem*>(it_v);
     if(it_c->type() == Q3CheckListItem::CheckBox) {
       // the following is copied from QCheckListItem::activate() et al
+      int boxsize = 0;
+#warning "port to kde4"
+#if 0
       int boxsize = m_listView->style().pixelMetric(QStyle::PM_CheckListButtonSize, m_listView);
+#endif
       int align = m_listView->columnAlignment( 0 );
       int marg = m_listView->itemMargin();
       int y = 0;

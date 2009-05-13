@@ -43,7 +43,7 @@
 #include "kmymoneyaccountcompletion.h"
 
 KMyMoneyAccountCombo::KMyMoneyAccountCombo( QWidget* parent, const char* name ) :
-  KComboBox( parent, name ),
+  KComboBox( parent ),
   m_completion(0),
   m_mlbDown(false)
 {
@@ -199,7 +199,7 @@ int KMyMoneyAccountCombo::count(void) const
 QStringList KMyMoneyAccountCombo::accountList(const Q3ValueList<MyMoneyAccount::accountTypeE>& list) const
 {
   return m_completion->selector()->accountList(list);
-};
+}
 
 int KMyMoneyAccountCombo::loadList(const Q3ValueList<int>& list)
 {
@@ -210,13 +210,13 @@ int KMyMoneyAccountCombo::loadList(const Q3ValueList<int>& list)
     set.addAccountType(static_cast<MyMoneyAccount::accountTypeE>(*it));
   }
   return set.load(m_completion->selector());
-};
+}
 
 QStringList KMyMoneyAccountCombo::selectedAccounts(void) const
 {
   QStringList list;
   m_completion->selector()->selectedItems(list);
   return list;
-};
+}
 
 #include "kmymoneyaccountcombo.moc"

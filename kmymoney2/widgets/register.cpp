@@ -1860,7 +1860,7 @@ void Register::slotEnsureItemVisible(void)
 TransactionSortField KMyMoneyRegister::textToSortOrder(const QString& text)
 {
   for(int idx = 1; idx < static_cast<int>(MaxSortFields); ++idx) {
-    if(text == i18n(sortOrderText[idx])) {
+    if(text == /*i18n*/(sortOrderText[idx])) {
       return static_cast<TransactionSortField>(idx);
     }
   }
@@ -1871,7 +1871,7 @@ const QString KMyMoneyRegister::sortOrderToText(TransactionSortField idx)
 {
   if(idx < PostDateSort || idx >= MaxSortFields)
     idx = UnknownSort;
-  return i18n(sortOrderText[idx]);
+  return /*i18n*/(sortOrderText[idx]);
 }
 
 QString Register::text(int /*row*/, int /*col*/) const

@@ -70,7 +70,7 @@ SET(_uncritial_common_sources
 
 # sources that contain the KMM_DESIGNER flag
 SET (_critial_common_sources
-  kaccounttemplateselector.cpp
+	#kaccounttemplateselector.cpp
   kmymoneyaccountcombo.cpp
   kmymoneyaccountcompletion.cpp
   kmymoneyaccounttreebase.cpp
@@ -79,7 +79,6 @@ SET (_critial_common_sources
   register.cpp
   )
 
-#KDE4_ADD_MOC_FILES(_uncritial_common_sources kmymoneywizard_p.h)
 
 SET (kmymoney_base_UI
   kbudgetvaluesdecl.ui transactionsortoption.ui kaccounttemplateselectordecl.ui
@@ -156,7 +155,7 @@ SET(libwidgets_a_UI
 # does not find libkmymoney.so, gcc will fail compiling
 # kmymoneyreportconfigtab2decl.cpp and throw errors like "invalid use
 # of undefined type `struct KMyMoneyGeneralCombo'"
-KMM_ADD_UI_FILES(widgets_ui_srcs ${libwidgets_a_UI} DEPENDS kmymoney)
+#KMM_ADD_UI_FILES(widgets_ui_srcs ${libwidgets_a_UI} DEPENDS kmymoney)
 ADD_CUSTOM_TARGET(generate_widgets_ui_srcs DEPENDS ${widgets_ui_srcs})
 
 ADD_LIBRARY(widgets STATIC

@@ -52,7 +52,7 @@
 #include <kmymoney/kmymoneyutils.h>
 
 KMyMoneyAccountTreeBase::KMyMoneyAccountTreeBase(QWidget* parent, const char* name) :
-  K3ListView(parent, name),
+  K3ListView(parent),
   m_accountConnections(false),
   m_institutionConnections(false),
   m_queuedSort(0)
@@ -98,8 +98,11 @@ KMyMoneyAccountTreeBase::KMyMoneyAccountTreeBase(QWidget* parent, const char* na
 
 KMyMoneyAccountTreeBase::~KMyMoneyAccountTreeBase()
 {
+#warning "port to kde4"
+#if 0	
   if (!m_configGroup.isEmpty())
     saveLayout(KGlobal::config(), m_configGroup);
+#endif
 }
 
 void KMyMoneyAccountTreeBase::restoreLayout(const QString& group)
@@ -110,7 +113,10 @@ void KMyMoneyAccountTreeBase::restoreLayout(const QString& group)
   // we use equal distribution of all fields as an initial setting
   // TODO this only makes the first column invisible if settings exist setColumnWidth(0, 0);
   m_configGroup = group;
-  K3ListView::restoreLayout(KGlobal::config(), m_configGroup);
+#warning "port to kde4"
+#if 0
+  //K3ListView::restoreLayout(KGlobal::config(), m_configGroup);
+#endif
 }
 
 void KMyMoneyAccountTreeBase::showType(void)
@@ -514,7 +520,8 @@ void KMyMoneyAccountTreeBase::cleanItemHighlighter(void)
 void KMyMoneyAccountTreeBase::viewportPaintEvent(QPaintEvent* e)
 {
   Q3ListView::viewportPaintEvent(e);
-
+#warning "port to kde4"
+#if 0
   if (m_lastDropHighlighter.isValid() && e->rect().intersects(m_lastDropHighlighter)) {
     QPainter painter(viewport());
 
@@ -522,6 +529,7 @@ void KMyMoneyAccountTreeBase::viewportPaintEvent(QPaintEvent* e)
     style().drawPrimitive(QStyle::PE_FocusRect, &painter, m_lastDropHighlighter, colorGroup(),
                           QStyle::State_FocusAtBorder);
   }
+#endif  
 }
 
 
