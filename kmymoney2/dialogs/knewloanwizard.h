@@ -34,7 +34,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <../dialogs/knewloanwizarddecl.h>
+#include <ui_knewloanwizarddecl.h>
 #include <kmymoney/mymoneyscheduled.h>
 #include <kmymoney/kmymoneyaccountselector.h>
 #include <kmymoney/kmymoneydateinput.h>
@@ -50,12 +50,20 @@
   * wizard when accept() has been called. A MyMoneySchedule is also
   * available to create a schedule entry for the payments to the newly
   * created loan.
+  *
   */
+class KNewLoanWizardDecl : public QDialog, public Ui::KNewLoanWizardDecl
+{
+public:
+  KNewLoanWizardDecl( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
 class KNewLoanWizard : public KNewLoanWizardDecl
 {
   Q_OBJECT
 public:
-  KNewLoanWizard(QWidget *parent=0, const char *name=0);
+  KNewLoanWizard(QWidget *parent=0);
   ~KNewLoanWizard();
 
   /**

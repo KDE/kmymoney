@@ -37,18 +37,25 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "../dialogs/keditequityentrydecl.h"
+#include "ui_keditequityentrydecl.h"
 #include "../mymoney/mymoneysecurity.h"
 
 /**
   * @author Kevin Tambascio
   */
+class KEditEquityEntryDecl : public QDialog, public Ui::KEditEquityEntryDecl
+{
+public:
+  KEditEquityEntryDecl( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
 
 class KEditEquityEntryDlg : public KEditEquityEntryDecl
 {
   Q_OBJECT
 public:
-  KEditEquityEntryDlg(const MyMoneySecurity& selectedSecurity, QWidget *parent = NULL, const char *name = NULL);
+  KEditEquityEntryDlg(const MyMoneySecurity& selectedSecurity, QWidget *parent = NULL);
   ~KEditEquityEntryDlg();
 
   void updatedEquity(MyMoneySecurity& security) { security = m_selectedSecurity; }

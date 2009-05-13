@@ -112,7 +112,7 @@ bool KCurrencyCalculator::setupSplitPrice(MyMoneyMoney& shares, const MyMoneyTra
 }
 
 KCurrencyCalculator::KCurrencyCalculator(const MyMoneySecurity& from, const MyMoneySecurity& to, const MyMoneyMoney& value, const MyMoneyMoney& shares, const QDate& date, const signed64 resultFraction, QWidget *parent, const char *name ) :
-  KCurrencyCalculatorDecl(parent, name),
+  KCurrencyCalculatorDecl(parent),
   m_fromCurrency(from),
   m_toCurrency(to),
   m_result(shares.abs()),
@@ -129,7 +129,7 @@ KCurrencyCalculator::KCurrencyCalculator(const MyMoneySecurity& from, const MyMo
 
   m_fromAmount->setText(m_value.formatMoney("", MyMoneyMoney::denomToPrec(m_fromCurrency.smallestAccountFraction())));
 
-  m_dateText->setText(KGlobal::locale()->formatDate(date, true));
+  m_dateText->setText(KGlobal::locale()->formatDate(date));
 
   m_fromType->setText(KMyMoneyUtils::securityTypeToString(m_fromCurrency.securityType()));
   m_toType->setText(KMyMoneyUtils::securityTypeToString(m_toCurrency.securityType()));

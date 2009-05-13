@@ -68,7 +68,7 @@ KMyMoneyPriceItem::KMyMoneyPriceItem(K3ListView *view, const MyMoneyPrice& pr) :
   m_pr(pr)
 {
   MyMoneySecurity from, to;
-  KConfig *kconfig = KGlobal::config();
+  KSharedConfigPtr kconfig = KGlobal::config();
   kconfig->setGroup("General Options");
   int prec = kconfig->readNumEntry("PricePrecision", 4);
 

@@ -61,9 +61,10 @@
 
 #include "../kmymoney2.h"
 
-KNewLoanWizard::KNewLoanWizard(QWidget *parent, const char *name ) :
-  KNewLoanWizardDecl(parent, name, true)
+KNewLoanWizard::KNewLoanWizard(QWidget *parent) :
+  KNewLoanWizardDecl(parent)
 {
+    setModal( true );
   connect(m_borrowButton, SIGNAL(clicked()), this, SLOT(slotLiabilityLoan()));
   connect(m_lendButton, SIGNAL(clicked()), this, SLOT(slotAssetLoan()));
 

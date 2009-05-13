@@ -172,7 +172,7 @@ KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent, const QString& sec
   // previous versions of this dialog allowed to store a "Don't ask again" switch.
   // Since we don't support it anymore, we just get rid of it
   KConfig* config = KGlobal::config();
-  config->setGroup("Notification Messages");
+  config->group("Notification Messages");
   config->deleteEntry("KEquityPriceUpdateDlg::slotQuoteFailed::Price Update Failed");
 }
 

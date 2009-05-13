@@ -32,7 +32,7 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include "../dialogs/kgncimportoptionsdlgdecl.h"
+#include "ui_kgncimportoptionsdlgdecl.h"
 
 typedef QPair<int, QTextCodec*> codecData;
 
@@ -41,11 +41,20 @@ class codecDataList : public Q3PtrList<codecData> {
     int compareItems (Q3PtrCollection::Item a, Q3PtrCollection::Item b);
 };
 
+
+class KGncImportOptionsDlgDecl : public QDialog, public Ui::KGncImportOptionsDlgDecl
+{
+public:
+  KGncImportOptionsDlgDecl( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
+
 class KGncImportOptionsDlg : public KGncImportOptionsDlgDecl
 {
 Q_OBJECT
 public:
-  KGncImportOptionsDlg(QWidget *parent = 0, const char *name = 0);
+  KGncImportOptionsDlg(QWidget *parent = 0);
   ~KGncImportOptionsDlg();
 
   int investmentOption () const {return (buttonInvestGroup->selectedId());};

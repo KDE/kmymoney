@@ -36,8 +36,8 @@
 #include "kgncimportoptionsdlg.h"
 
 // dialog constructor
-KGncImportOptionsDlg::KGncImportOptionsDlg(QWidget *parent, const char *name)
- : KGncImportOptionsDlgDecl(parent, name)
+KGncImportOptionsDlg::KGncImportOptionsDlg(QWidget *parent)
+ : KGncImportOptionsDlgDecl(parent)
 {
   buttonInvestGroup->setRadioButtonExclusive (true);
   buttonInvestGroup->setButton (0);
@@ -79,9 +79,11 @@ void KGncImportOptionsDlg::buildCodecList () {
   unsigned int i;
   for (i = 0; (codec = QTextCodec::codecForIndex(i)); i++) {
     int rank;
+#warning "port to kde4"
+#if 0
     if (codec == m_localeCodec) rank = 999; // ensure locale rank comes first
     else rank = codec->heuristicNameMatch(m_localeCodec->name());
-
+#endif
     codecData *p = new codecData(rank, codec);
     m_codecList.append (p);
   }

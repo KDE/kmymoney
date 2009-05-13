@@ -59,8 +59,8 @@ MyMoneyQifProfileNameValidator::~MyMoneyQifProfileNameValidator()
 QValidator::State MyMoneyQifProfileNameValidator::validate(QString& name, int&) const
 {
   KConfig* config = KGlobal::config();
-  config->setGroup("Profiles");
-  QStringList list = config->readListEntry("profiles");
+  config->group("Profiles");
+  QStringList list = grp.readEntry("profiles");
 
   // invalid character?
   if(name.contains(",") != 0)
@@ -227,16 +227,16 @@ void MyMoneyQifProfileEditor::loadProfileListFromConfig(void)
 
   QStringList list;
   KConfig* config = KGlobal::config();
-  config->setGroup("Profiles");
-  list = config->readListEntry("profiles");
+  config->group("Profiles");
+  list = grp.readEntry("profiles");
 
   if(list.count() == 0) {
     m_profile.clear();
     m_profile.setProfileDescription(i18n("The default QIF profile"));
     addProfile("Default");
 
-    config->setGroup("Profiles");
-    list = config->readListEntry("profiles");
+    config->group("Profiles");
+    list = grp.readEntry("profiles");
   }
 
   list.sort();
@@ -316,8 +316,8 @@ void MyMoneyQifProfileEditor::deleteProfile(const QString& name)
 
   config->deleteGroup("Profile-" + name);
 
-  config->setGroup("Profiles");
-  QStringList list = config->readListEntry("profiles");
+  config->group("Profiles");
+  QStringList list = grp.readEntry("profiles");
   list.remove(name);
 
   config->writeEntry("profiles", list);
@@ -327,8 +327,8 @@ void MyMoneyQifProfileEditor::deleteProfile(const QString& name)
 void MyMoneyQifProfileEditor::addProfile(const QString& name)
 {
   KConfig* config = KGlobal::config();
-  config->setGroup("Profiles");
-  QStringList list = config->readListEntry("profiles");
+  config->group("Profiles");
+  QStringList list = grp.readEntry("profiles");
 
   list += name;
   list.sort();

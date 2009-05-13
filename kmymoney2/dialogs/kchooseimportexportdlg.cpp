@@ -93,14 +93,14 @@ QString KChooseImportExportDlg::importExportType(void)
 void KChooseImportExportDlg::readConfig(void)
 {
   KConfig *config = KGlobal::config();
-  config->setGroup("Last Use Settings");
-  m_lastType = config->readEntry("KChooseImportExportDlg_LastType");
+  config->group("Last Use Settings");
+  m_lastType = grp.readEntry("KChooseImportExportDlg_LastType");
 }
 
 void KChooseImportExportDlg::writeConfig(void)
 {
   KConfig *config = KGlobal::config();
-  config->setGroup("Last Use Settings");
+  config->group("Last Use Settings");
   config->writeEntry("KChooseImportExportDlg_LastType", typeCombo->currentText());
   config->sync();
 }

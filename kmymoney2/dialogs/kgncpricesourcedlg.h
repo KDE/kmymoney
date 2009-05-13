@@ -29,13 +29,22 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "../dialogs/kgncpricesourcedlgdecl.h"
+#include "ui_kgncpricesourcedlgdecl.h"
+
+
+class KGncPriceSourceDlgDecl : public QDialog, public Ui::KGncPriceSourceDlgDecl
+{
+public:
+  KGncPriceSourceDlgDecl( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
 
 class KGncPriceSourceDlg : public KGncPriceSourceDlgDecl
 {
   Q_OBJECT
 public:
-  KGncPriceSourceDlg(QWidget *parent = 0, const char *name = 0);
+  KGncPriceSourceDlg(QWidget *parent = 0);
   KGncPriceSourceDlg(const QString &stockName, const QString &gncSource);
   ~KGncPriceSourceDlg();
 

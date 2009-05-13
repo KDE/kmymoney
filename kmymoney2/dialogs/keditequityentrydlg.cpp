@@ -40,8 +40,8 @@
 #include "kupdatestockpricedlg.h"
 #include "../widgets/kmymoneypriceview.h"
 
-KEditEquityEntryDlg::KEditEquityEntryDlg(const MyMoneySecurity& selectedSecurity, QWidget *parent, const char *name)
-  : KEditEquityEntryDecl(parent, name, true)
+KEditEquityEntryDlg::KEditEquityEntryDlg(const MyMoneySecurity& selectedSecurity, QWidget *parent)
+  : KEditEquityEntryDecl(parent)
 {
   m_selectedSecurity = selectedSecurity;
 

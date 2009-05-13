@@ -38,7 +38,7 @@
 class kMyMoneyEdit;
 #include <kmymoney/kmymoneydateinput.h>
 #include <kmymoney/mymoneyaccount.h>
-#include "../dialogs/kendingbalancedlgdecl.h"
+#include "ui_kendingbalancedlgdecl.h"
 
 /**
   * This dialog is wizard based and used to enter additional
@@ -48,11 +48,18 @@ class kMyMoneyEdit;
   *
   * @author Thomas Baumgart
   */
+class KEndingBalanceDlgDecl : public QDialog, public Ui::KEndingBalanceDlgDecl
+{
+public:
+  KEndingBalanceDlgDecl( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
 class KEndingBalanceDlg : public KEndingBalanceDlgDecl
 {
   Q_OBJECT
 public:
-  KEndingBalanceDlg(const MyMoneyAccount& account, QWidget *parent=0, const char *name=0);
+  KEndingBalanceDlg(const MyMoneyAccount& account, QWidget *parent=0);
   ~KEndingBalanceDlg();
 
   const MyMoneyMoney endingBalance(void) const;

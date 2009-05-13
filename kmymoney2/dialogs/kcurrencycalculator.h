@@ -34,12 +34,19 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "../dialogs/kcurrencycalculatordecl.h"
+#include "ui_kcurrencycalculatordecl.h"
 #include <kmymoney/mymoneyfile.h>
 
 /**
   * @author Thomas Baumgart
   */
+class KCurrencyCalculatorDecl : public QDialog, public Ui::KCurrencyCalculatorDecl
+{
+public:
+  KCurrencyCalculatorDecl( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
 
 class KCurrencyCalculator : public KCurrencyCalculatorDecl
 {

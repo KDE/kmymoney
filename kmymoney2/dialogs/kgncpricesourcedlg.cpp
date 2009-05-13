@@ -37,8 +37,8 @@
 #include "kgncpricesourcedlg.h"
 #include "../converter/webpricequote.h"
 
-KGncPriceSourceDlg::KGncPriceSourceDlg(QWidget *parent, const char *name)
- : KGncPriceSourceDlgDecl(parent, name)
+KGncPriceSourceDlg::KGncPriceSourceDlg(QWidget *parent)
+ : KGncPriceSourceDlgDecl(parent)
 {
 }
 KGncPriceSourceDlg::KGncPriceSourceDlg(const QString &stockName, const QString &gncSource){

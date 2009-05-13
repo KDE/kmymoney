@@ -69,7 +69,7 @@ class kMyMoneyDateInput : public Q3HBox
   Q_OBJECT
 
 public:
-  kMyMoneyDateInput(QWidget *parent=0, const char *name=0, Qt::AlignmentFlags flags=Qt::AlignLeft);
+  kMyMoneyDateInput(QWidget *parent=0, const char *name=0, Qt::AlignmentFlag flags=Qt::AlignLeft);
   ~kMyMoneyDateInput();
 
   // Replace calls to this with the new date() method
@@ -115,7 +115,7 @@ private:
   KDatePicker *m_datePicker;
   QDate m_date;  // The date !
   QDate m_prevDate;
-  Qt::AlignmentFlags m_qtalignment;
+  Qt::AlignmentFlag m_qtalignment;
   Q3VBox *m_dateFrame;
   KPushButton *m_dateButton;
   KPassivePopup *m_datePopup;

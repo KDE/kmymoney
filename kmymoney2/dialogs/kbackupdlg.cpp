@@ -84,15 +84,15 @@ void KBackupDlg::chooseButtonClicked()
 void KBackupDlg::readConfig(void)
 {
   KConfig *config = KGlobal::config();
-  config->setGroup("Last Use Settings");
-  mountCheckBox->setChecked(config->readBoolEntry("KBackupDlg_mountDevice", false));
-  txtMountPoint->setText(config->readEntry("KBackupDlg_BackupMountPoint", "/mnt/floppy"));
+  config->group("Last Use Settings");
+  mountCheckBox->setChecked(grp.readEntry("KBackupDlg_mountDevice", false));
+  txtMountPoint->setText(grp.readEntry("KBackupDlg_BackupMountPoint", "/mnt/floppy"));
 }
 
 void KBackupDlg::writeConfig(void)
 {
   KConfig *config = KGlobal::config();
-  config->setGroup("Last Use Settings");
+  config->group("Last Use Settings");
   config->writeEntry("KBackupDlg_mountDevice", mountCheckBox->isChecked());
   config->writeEntry("KBackupDlg_BackupMountPoint", txtMountPoint->text());
   config->sync();

@@ -63,10 +63,11 @@ public:
   kMandatoryFieldGroup*          m_requiredFields;
 };
 
-KEditScheduleDlg::KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget *parent, const char *name) :
-  KEditScheduleDlgDecl(parent, name, true),
+KEditScheduleDlg::KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget *parent) :
+  KEditScheduleDlgDecl(parent),
   d(new Private)
 {
+    setModal( true );
   d->m_schedule = schedule;
   d->m_editor = 0;
 

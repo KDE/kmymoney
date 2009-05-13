@@ -38,7 +38,7 @@
 #include <kmymoney/mymoneyutils.h>
 #include <kmymoney/mymoneytransactionfilter.h>
 
-#include "../dialogs/kfindtransactiondlgdecl.h"
+#include "ui_kfindtransactiondlgdecl.h"
 
 class Q3ListView;
 class Q3ListViewItem;
@@ -46,6 +46,15 @@ class Q3ListViewItem;
 /**
   * @author Thomas Baumgart
   */
+
+class KFindTransactionDlgDecl : public QDialog, public Ui::KFindTransactionDlgDecl
+{
+public:
+  KFindTransactionDlgDecl( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
+
 class KFindTransactionDlg : public KFindTransactionDlgDecl
 {
   Q_OBJECT
@@ -81,7 +90,7 @@ public:
     dateOptionCount
   };
 */
-  KFindTransactionDlg(QWidget *parent=0, const char *name=0);
+  KFindTransactionDlg(QWidget *parent=0);
   ~KFindTransactionDlg() {}
 
   virtual bool eventFilter( QObject *o, QEvent *e );

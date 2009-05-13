@@ -59,8 +59,8 @@
 
 #include "../widgets/kmymoneypriceview.h"
 
-KCurrencyEditDlg::KCurrencyEditDlg(QWidget *parent, const char *name ) :
-  KCurrencyEditDlgDecl(parent,name)
+KCurrencyEditDlg::KCurrencyEditDlg(QWidget *parent) :
+  KCurrencyEditDlgDecl(parent)
 {
   m_currencyList->addColumn(i18n("Currency"));
   m_currencyList->header()->hide();
@@ -143,7 +143,7 @@ void KCurrencyEditDlg::slotLoadCurrencies(void)
     p->setRenameEnabled(0, true);
 
     if((*it).id() == baseCurrency) {
-      p->setPixmap(0, QPixmap( locate("icon","hicolor/16x16/apps/kmymoney2.png")));
+        p->setPixmap(0, QPixmap( KStandardDirs::locate("icon","hicolor/16x16/apps/kmymoney2.png")));
       if(m_currency.id().isEmpty())
         first = p;
     } else {

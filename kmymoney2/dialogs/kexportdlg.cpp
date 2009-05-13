@@ -52,7 +52,7 @@
 #include "../kmymoneyutils.h"
 
 KExportDlg::KExportDlg(QWidget *parent)
-  : KExportDlgDecl(parent, 0, true)
+  : KExportDlgDecl(parent)
 {
   // Set (almost) all the last used options
   readConfig();
@@ -65,19 +65,19 @@ KExportDlg::KExportDlg(QWidget *parent)
   m_qbuttonCancel->setGuiItem(KStandardGuiItem::cancel());
 
   KGuiItem okButtenItem( i18n( "&Export" ),
-                      QIcon(il->loadIcon("fileexport", KIcon::Small, KIconLoader::SizeSmall)),
+                      KIcon(il->loadIcon("fileexport", KIconLoader::Small, KIconLoader::SizeSmall)),
                       i18n("Start operation"),
                       i18n("Use this to start the export operation"));
   m_qbuttonOk->setGuiItem(okButtenItem);
 
   KGuiItem browseButtenItem( i18n( "&Browse..." ),
-                      QIcon(il->loadIcon("fileopen", KIcon::Small, KIconLoader::SizeSmall)),
+                      KIcon(il->loadIcon("fileopen", KIconLoader::Small, KIconLoader::SizeSmall)),
                       i18n("Select filename"),
                       i18n("Use this to select a filename to export to"));
   m_qbuttonBrowse->setGuiItem(browseButtenItem);
 
   KGuiItem newButtenItem( i18n( "&New..." ),
-                      QIcon(il->loadIcon("filenew", KIcon::Small, KIconLoader::SizeSmall)),
+                      KIcon(il->loadIcon("filenew", KIconLoader::Small, KIconLoader::SizeSmall)),
                       i18n("Create a new profile"),
                       i18n("Use this to open the profile editor"));
   m_profileEditorButton->setGuiItem(newButtenItem);
@@ -136,16 +136,16 @@ void KExportDlg::loadProfiles(const bool selectLast)
   m_profileComboBox->clear();
 
   QStringList list;
-  KConfig* config = KGlobal::config();
-  config->setGroup("Profiles");
+  KSharedConfigPtr config = KGlobal::config();
+  KConfigGroup grp = config->group("Profiles");
 
-  list = config->readListEntry("profiles");
+  list = grp.readEntry("profiles");
   list.sort();
   m_profileComboBox->insertStringList(list);
 
   if(selectLast == true) {
-    config->setGroup("Last Use Settings");
-    current = config->readEntry("KExportDlg_LastProfile");
+    grp = config->group("Last Use Settings");
+    current = grp.readEntry("KExportDlg_LastProfile");
   }
 
   m_profileComboBox->setCurrentItem(0);
@@ -162,27 +162,27 @@ void KExportDlg::slotOkClicked()
 
 void KExportDlg::readConfig(void)
 {
-  KConfig *kconfig = KGlobal::config();
-  kconfig->setGroup("Last Use Settings");
-  m_qlineeditFile->setText(kconfig->readEntry("KExportDlg_LastFile"));
-  m_qcheckboxAccount->setChecked(kconfig->readBoolEntry("KExportDlg_AccountOpt", true));
-  m_qcheckboxCategories->setChecked(kconfig->readBoolEntry("KExportDlg_CatOpt", true));
-  m_kmymoneydateStart->setDate(kconfig->readDateTimeEntry("KExportDlg_StartDate").date());
-  m_kmymoneydateEnd->setDate(kconfig->readDateTimeEntry("KExportDlg_EndDate").date());
+  KSharedConfigPtr kconfig = KGlobal::config();
+  KConfigGroup kgrp = kconfig->group("Last Use Settings");
+  m_qlineeditFile->setText(kgrp.readEntry("KExportDlg_LastFile"));
+  m_qcheckboxAccount->setChecked(kgrp.readEntry("KExportDlg_AccountOpt", true));
+  m_qcheckboxCategories->setChecked(kgrp.readEntry("KExportDlg_CatOpt", true));
+  m_kmymoneydateStart->setDate(kgrp.readEntry("KExportDlg_StartDate").date());
+  m_kmymoneydateEnd->setDate(kgrp.readEntry("KExportDlg_EndDate").date());
   // m_profileComboBox is loaded in loadProfiles(), so we don't worry here
   // m_accountComboBox is loaded in loadAccounts(), so we don't worry here
 }
 
 void KExportDlg::writeConfig(void)
 {
-  KConfig *kconfig = KGlobal::config();
-  kconfig->setGroup("Last Use Settings");
-  kconfig->writeEntry("KExportDlg_LastFile", m_qlineeditFile->text());
-  kconfig->writeEntry("KExportDlg_AccountOpt", m_qcheckboxAccount->isChecked());
-  kconfig->writeEntry("KExportDlg_CatOpt", m_qcheckboxCategories->isChecked());
-  kconfig->writeEntry("KExportDlg_StartDate", QDateTime(m_kmymoneydateStart->date()));
-  kconfig->writeEntry("KExportDlg_EndDate", QDateTime(m_kmymoneydateEnd->date()));
-  kconfig->writeEntry("KExportDlg_LastProfile", m_profileComboBox->currentText());
+  KSharedConfigPtr kconfig = KGlobal::config();
+  kconfig->group("Last Use Settings");
+  grp.writeEntry("KExportDlg_LastFile", m_qlineeditFile->text());
+  grp.writeEntry("KExportDlg_AccountOpt", m_qcheckboxAccount->isChecked());
+  grp.writeEntry("KExportDlg_CatOpt", m_qcheckboxCategories->isChecked());
+  grp.writeEntry("KExportDlg_StartDate", QDateTime(m_kmymoneydateStart->date()));
+  grp.writeEntry("KExportDlg_EndDate", QDateTime(m_kmymoneydateEnd->date()));
+  grp.writeEntry("KExportDlg_LastProfile", m_profileComboBox->currentText());
   kconfig->sync();
 }
 

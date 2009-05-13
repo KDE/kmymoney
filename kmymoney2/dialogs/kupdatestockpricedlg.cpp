@@ -34,9 +34,10 @@
 #include "kupdatestockpricedlg.h"
 #include "../widgets/kmymoneycurrencyselector.h"
 
-KUpdateStockPriceDlg::KUpdateStockPriceDlg(QWidget* parent,  const char* name) :
-  kUpdateStockPriceDecl(parent, name, true)
+KUpdateStockPriceDlg::KUpdateStockPriceDlg(QWidget* parent) :
+  kUpdateStockPriceDecl(parent)
 {
+    setModal( true );
   m_date->setDate(QDate::currentDate());
   init();
 }

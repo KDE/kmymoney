@@ -597,7 +597,7 @@ QStringList WebPriceQuote::quoteSources (const _quoteSystemE _system) {
 
 QStringList WebPriceQuote::quoteSourcesNative()
 {
-  KConfig *kconfig = KGlobal::config();
+  KSharedConfigPtr kconfig = KGlobal::config();
   QStringList groups = kconfig->groupList();
 
   QStringList::Iterator it;
@@ -682,7 +682,7 @@ WebPriceQuoteSource::WebPriceQuoteSource(const QString& name, const QString& url
 WebPriceQuoteSource::WebPriceQuoteSource(const QString& name)
 {
   m_name = name;
-  KConfig *kconfig = KGlobal::config();
+  KSharedConfigPtr kconfig = KGlobal::config();
   KConfigGroup grp = kconfig->group(QString("Online-Quote-Source-%1").arg(m_name));
   m_sym = grp.readEntry("SymbolRegex");
   m_date = grp.readEntry("DateRegex");
@@ -694,7 +694,7 @@ WebPriceQuoteSource::WebPriceQuoteSource(const QString& name)
 
 void WebPriceQuoteSource::write(void) const
 {
-  KConfig *kconfig = KGlobal::config();
+  KSharedConfigPtr kconfig = KGlobal::config();
   KConfigGroup grp = kconfig->group(QString("Online-Quote-Source-%1").arg(m_name));
   grp.writeEntry("URL", m_url);
   grp.writeEntry("PriceRegex", m_price);
@@ -716,7 +716,7 @@ void WebPriceQuoteSource::rename(const QString& name)
 
 void WebPriceQuoteSource::remove(void) const
 {
-  KConfig *kconfig = KGlobal::config();
+  KSharedConfigPtr kconfig = KGlobal::config();
   kconfig->deleteGroup(QString("Online-Quote-Source-%1").arg(m_name));
 }
 

@@ -31,13 +31,20 @@
 
 class TransactionEditor;
 
-#include "../dialogs/kenterscheduledlgdecl.h"
+#include "ui_kenterscheduledlgdecl.h"
 #include <kmymoney/mymoneyscheduled.h>
 #include <kmymoney/kmymoneyutils.h>
 
 /**
   * @author Thomas Baumgart
   */
+class KEnterScheduleDlgDecl : public QDialog, public Ui::KEnterScheduleDlgDecl
+{
+public:
+  KEnterScheduleDlgDecl( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
 class KEnterScheduleDlg : public KEnterScheduleDlgDecl
 {
   Q_OBJECT

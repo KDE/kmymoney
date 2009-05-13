@@ -130,17 +130,17 @@ void KImportDlg::slotOkClicked()
 
 void KImportDlg::readConfig(void)
 {
-  KConfig *kconfig = KGlobal::config();
-  kconfig->setGroup("Last Use Settings");
-  m_qlineeditFile->setText(kconfig->readEntry("KImportDlg_LastFile"));
+  KSharedConfigPtr kconfig = KGlobal::config();
+  kconfig->group("Last Use Settings");
+  m_qlineeditFile->setText(kgrp.readEntry("KImportDlg_LastFile"));
 }
 
 void KImportDlg::writeConfig(void)
 {
-  KConfig *kconfig = KGlobal::config();
-  kconfig->setGroup("Last Use Settings");
-  kconfig->writeEntry("KImportDlg_LastFile", m_qlineeditFile->text());
-  kconfig->writeEntry("KImportDlg_LastProfile", m_profileComboBox->currentText());
+  KSharedConfigPtr kconfig = KGlobal::config();
+  kconfig->group("Last Use Settings");
+  grp.writeEntry("KImportDlg_LastFile", m_qlineeditFile->text());
+  grp.writeEntry("KImportDlg_LastProfile", m_profileComboBox->currentText());
   kconfig->sync();
 }
 
@@ -189,15 +189,15 @@ void KImportDlg::loadProfiles(const bool selectLast)
 
   QStringList list;
   KConfig* config = KGlobal::config();
-  config->setGroup("Profiles");
+  config->group("Profiles");
 
-  list = config->readListEntry("profiles");
+  list = grp.readEntry("profiles");
   list.sort();
   m_profileComboBox->insertStringList(list);
 
   if(selectLast == true) {
-    config->setGroup("Last Use Settings");
-    current = config->readEntry("KImportDlg_LastProfile");
+    config->group("Last Use Settings");
+    current = grp.readEntry("KImportDlg_LastProfile");
   }
 
   m_profileComboBox->setCurrentItem(0);

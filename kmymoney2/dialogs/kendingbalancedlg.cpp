@@ -61,10 +61,11 @@ public:
   QMap<QWidget*, QString>   m_helpAnchor;
 };
 
-KEndingBalanceDlg::KEndingBalanceDlg(const MyMoneyAccount& account, QWidget *parent, const char *name) :
-  KEndingBalanceDlgDecl(parent, name, true),
+KEndingBalanceDlg::KEndingBalanceDlg(const MyMoneyAccount& account, QWidget *parent) :
+  KEndingBalanceDlgDecl(parent),
   d(new Private)
 {
+    setModal( true );
   QString value;
   MyMoneyMoney endBalance, startBalance;
 

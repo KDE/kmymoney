@@ -220,8 +220,8 @@ void KCsvProgressDlg::readConfig(void)
 {
   KSharedConfigPtr kconfig = KGlobal::config();
   KConfigGroup grp = kconfig->group("Last Use Settings");
-  m_kmymoneydateStart->setDate(grp.readDateTimeEntry("KCsvProgressDlg_StartDate").date());
-  m_kmymoneydateEnd->setDate(grp.readDateTimeEntry("KCsvProgressDlg_EndDate").date());
+  m_kmymoneydateStart->setDate(grp.readEntry("KCsvProgressDlg_StartDate").date());
+  m_kmymoneydateEnd->setDate(grp.readEntry("KCsvProgressDlg_EndDate").date());
   m_qlineeditFile->setText(grp.readEntry("KCsvProgressDlg_LastFile", ""));
   if (m_qlineeditFile->text().length()>=1)
     m_qbuttonRun->setEnabled(true);

@@ -38,18 +38,26 @@ class KMenu;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "../dialogs/kcurrencyeditdlgdecl.h"
+#include "ui_kcurrencyeditdlgdecl.h"
 #include "../mymoney/mymoneysecurity.h"
 
 /**
   * @author Thomas Baumgart
   */
 
+class KCurrencyEditDlgDecl : public QDialog, public Ui::KCurrencyEditDlgDecl
+{
+public:
+  KCurrencyEditDlgDecl( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
+
 class KCurrencyEditDlg : public KCurrencyEditDlgDecl
 {
   Q_OBJECT
 public:
-  KCurrencyEditDlg(QWidget *parent=0, const char *name=0);
+  KCurrencyEditDlg(QWidget *parent=0);
   ~KCurrencyEditDlg();
 
 public slots:

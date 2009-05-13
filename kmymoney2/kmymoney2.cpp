@@ -5635,7 +5635,7 @@ void KMyMoney2App::slotCheckSchedules(void)
 void KMyMoney2App::writeLastUsedDir(const QString& directory)
 {
   //get global config object for our app.
-  KConfig *kconfig = KGlobal::config();
+  KSharedConfigPtr kconfig = KGlobal::config();
   if(kconfig)
   {
     kconfig->setGroup("General Options");
@@ -5648,7 +5648,7 @@ void KMyMoney2App::writeLastUsedDir(const QString& directory)
 void KMyMoney2App::writeLastUsedFile(const QString& fileName)
 {
   //get global config object for our app.
-  KConfig *kconfig = KGlobal::config();
+  KSharedConfigPtr kconfig = KGlobal::config();
   if(kconfig)
   {
     kconfig->setGroup("General Options");
@@ -5665,7 +5665,7 @@ QString KMyMoney2App::readLastUsedDir(void) const
   QString str;
 
   //get global config object for our app.
-  KConfig *kconfig = KGlobal::config();
+  KSharedConfigPtr kconfig = KGlobal::config();
   if(kconfig)
   {
     kconfig->setGroup("General Options");
@@ -5685,7 +5685,7 @@ QString KMyMoney2App::readLastUsedFile(void) const
   QString str;
 
   // get global config object for our app.
-  KConfig *kconfig = KGlobal::config();
+  KSharedConfigPtr kconfig = KGlobal::config();
   if(kconfig)
   {
     kconfig->setGroup("General Options");

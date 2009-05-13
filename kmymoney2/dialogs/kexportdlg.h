@@ -35,7 +35,7 @@
 // Project Headers
 
 #include "../widgets/kmymoneydateinput.h"
-#include "../dialogs/kexportdlgdecl.h"
+#include "ui_kexportdlgdecl.h"
 
 /**
   * This class is used to select the required user input to export
@@ -52,6 +52,15 @@
   *
   * @short A class to select user data required to export a specified account to the popular QIF format.
   **/
+
+class KExportDlgDecl : public QDialog, public Ui::KExportDlgDecl
+{
+public:
+  KExportDlgDecl( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
+
 class KExportDlg : public KExportDlgDecl
 {
   Q_OBJECT

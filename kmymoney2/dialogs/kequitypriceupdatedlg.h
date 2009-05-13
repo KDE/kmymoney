@@ -42,11 +42,18 @@ class Q3ListViewItem;
 #include "../converter/webpricequote.h"
 #include "../mymoney/mymoneysecurity.h"
 #include "../mymoney/mymoneyprice.h"
-#include "../dialogs/kequitypriceupdatedlgdecl.h"
+#include "ui_kequitypriceupdatedlgdecl.h"
 
 /**
   * @author Kevin Tambascio & Ace Jones
   */
+class KEquityPriceUpdateDlgDecl  : public QDialog, public Ui::KEquityPriceUpdateDlgDecl
+{
+public:
+  KEquityPriceUpdateDlgDecl( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
 
 class KEquityPriceUpdateDlg : public KEquityPriceUpdateDlgDecl
 {

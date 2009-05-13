@@ -141,8 +141,8 @@ void KStartDlg::readConfig()
     // after program startup. If the wizard was opened the second time,
     // it does not make a difference, if you call setGroup() outside of
     // this loop. The first time it does make a difference!
-    config->setGroup("Recent Files");
-    value = config->readEntry( QString( "File%1" ).arg( i ), QString::null );
+    config->group("Recent Files");
+    value = grp.readEntry( QString( "File%1" ).arg( i ), QString::null );
     if( !value.isNull() && fileExists(value) )
     {
       QString file_name = value.mid(value.findRev('/')+1);
@@ -151,7 +151,7 @@ void KStartDlg::readConfig()
     i++;
   } while( !value.isNull() );
 
-  config->setGroup("Start Dialog");
+  config->group("Start Dialog");
   QSize *defaultSize = new QSize(400,300);
   this->resize( config->readSizeEntry("Geometry", defaultSize ) );
 
@@ -171,7 +171,7 @@ void KStartDlg::writeConfig()
 {
   KConfig *config = KGlobal::config();
 
-  config->setGroup("Start Dialog");
+  config->group("Start Dialog");
   config->writeEntry("Geometry", this->size() );
   config->writeEntry("LastPage", this->activePageIndex());
   config->sync();

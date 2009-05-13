@@ -34,14 +34,13 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kdialogbase.h>
 #include <klocale.h>
 #include <kpushbutton.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "../dialogs/kupdatestockpricedlgdecl.h"
+#include "ui_kupdatestockpricedlgdecl.h"
 
 #include <kmymoney/mymoneyprice.h>
 #include <kmymoney/kmymoneydateinput.h>
@@ -50,12 +49,20 @@
 /**
   * @author Kevin Tambascio
   */
+class kUpdateStockPriceDecl : public QDialog, public Ui::kUpdateStockPriceDecl
+{
+public:
+  kUpdateStockPriceDecl( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
+
 class KUpdateStockPriceDlg : public kUpdateStockPriceDecl
 {
   Q_OBJECT
 
 public:
-  KUpdateStockPriceDlg(QWidget* parent = NULL,  const char* name = NULL);
+  KUpdateStockPriceDlg(QWidget* parent = NULL);
   ~KUpdateStockPriceDlg();
 
   const QDate date() const { return m_date->date(); };

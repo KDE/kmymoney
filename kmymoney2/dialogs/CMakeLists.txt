@@ -17,23 +17,48 @@ SET(libdialogs_a_SOURCES
   #kcategoryreassigndlg.cpp
   #kchooseimportexportdlg.cpp 
   #kconfirmmanualenterdlg.cpp
-  kcsvprogressdlg.cpp kcurrencycalculator.cpp kcurrencyeditdlg.cpp
-  keditequityentrydlg.cpp keditloanwizard.cpp keditscheduledlg.cpp
-  kendingbalancedlg.cpp kenterscheduledlg.cpp
-  kequitypriceupdatedlg.cpp kexportdlg.cpp kfindtransactiondlg.cpp
-  kgncimportoptionsdlg.cpp kgncpricesourcedlg.cpp
-  kgpgkeyselectiondlg.cpp kimportdlg.cpp kloadtemplatedlg.cpp
-  kmergetransactionsdlg.cpp kmymoneyfileinfodlg.cpp
-  kmymoneypricedlg.cpp kmymoneysplittable.cpp knewaccountdlg.cpp
-  knewbankdlg.cpp knewbudgetdlg.cpp knewequityentrydlg.cpp
-  knewfiledlg.cpp knewinvestmentwizard.cpp knewinvestmentwizard.h
-  knewloanwizard.cpp konlinequoteconfigurationdlg.cpp
-  kpayeereassigndlg.cpp krecentfileitem.cpp kreconciledlg.cpp
-  kreconcilelistitem.cpp kreportconfigurationfilterdlg.cpp
-  ksecuritylisteditor.cpp kselectdatabasedlg.cpp
-  kselecttransactionsdlg.cpp ksplittransactiondlg.cpp kstartdlg.cpp
-  kupdatestockpricedlg.cpp mymoneyqifprofileeditor.cpp
-  transactioneditor.cpp transactionmatcher.cpp
+  #kcsvprogressdlg.cpp 
+  kcurrencycalculator.cpp kcurrencyeditdlg.cpp
+  #keditequityentrydlg.cpp 
+  #keditloanwizard.cpp 
+  #keditscheduledlg.cpp
+  #kendingbalancedlg.cpp 
+  #kenterscheduledlg.cpp
+  #kequitypriceupdatedlg.cpp 
+  #kexportdlg.cpp 
+  #kfindtransactiondlg.cpp
+  kgncimportoptionsdlg.cpp 
+  kgncpricesourcedlg.cpp
+  kgpgkeyselectiondlg.cpp 
+  kimportdlg.cpp 
+  kloadtemplatedlg.cpp
+  kmergetransactionsdlg.cpp 
+  kmymoneyfileinfodlg.cpp
+  kmymoneypricedlg.cpp 
+  kmymoneysplittable.cpp 
+  knewaccountdlg.cpp
+  knewbankdlg.cpp 
+  knewbudgetdlg.cpp 
+  knewequityentrydlg.cpp
+  knewfiledlg.cpp 
+  knewinvestmentwizard.cpp 
+  knewinvestmentwizard.h
+  knewloanwizard.cpp 
+  konlinequoteconfigurationdlg.cpp
+  kpayeereassigndlg.cpp 
+  krecentfileitem.cpp 
+  kreconciledlg.cpp
+  kreconcilelistitem.cpp 
+  kreportconfigurationfilterdlg.cpp
+  ksecuritylisteditor.cpp 
+  kselectdatabasedlg.cpp
+  kselecttransactionsdlg.cpp 
+  ksplittransactiondlg.cpp 
+  kstartdlg.cpp
+  kupdatestockpricedlg.cpp 
+  mymoneyqifprofileeditor.cpp
+  transactioneditor.cpp 
+  transactionmatcher.cpp
   )
 
 SET(dialogs_HEADERS

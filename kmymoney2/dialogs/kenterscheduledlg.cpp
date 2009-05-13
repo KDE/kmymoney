@@ -66,7 +66,7 @@ public:
 };
 
 KEnterScheduleDlg::KEnterScheduleDlg(QWidget *parent, const MyMoneySchedule& schedule) :
-  KEnterScheduleDlgDecl(parent, "kenterscheduledlg"),
+  KEnterScheduleDlgDecl(parent),
   d(new Private)
 {
   d->m_schedule = schedule;

@@ -62,8 +62,8 @@
 
 #include "ksortoptiondlg.h"
 
-KFindTransactionDlg::KFindTransactionDlg(QWidget *parent, const char *name) :
-  KFindTransactionDlgDecl(parent, name, false),
+KFindTransactionDlg::KFindTransactionDlg(QWidget *parent) :
+  KFindTransactionDlgDecl(parent),
   m_needReload(false)
 {
   m_register->installEventFilter(this);

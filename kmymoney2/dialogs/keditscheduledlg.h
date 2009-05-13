@@ -29,14 +29,20 @@
 
 #include <kmymoney/mymoneyfile.h>
 #include <kmymoney/mymoneyscheduled.h>
-#include "../dialogs/keditscheduledlgdecl.h"
+#include "ui_keditscheduledlgdecl.h"
 
 class TransactionEditor;
 
 /**
   * @author Thomas Baumgart
   */
-
+class KEditScheduleDlgDecl : public QDialog, public Ui::KEditScheduleDlgDecl
+{
+public:
+  KEditScheduleDlgDecl( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
 class KEditScheduleDlg : public KEditScheduleDlgDecl
 {
   Q_OBJECT
@@ -44,7 +50,7 @@ public:
   /**
     * Standard QWidget constructor.
     **/
-  KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget *parent=0, const char *name=0);
+  KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget *parent=0);
 
   /**
     * Standard destructor.
