@@ -37,7 +37,7 @@
 #include "kconfirmmanualenterdlg.h"
 
 KConfirmManualEnterDlg::KConfirmManualEnterDlg(const MyMoneySchedule& schedule, QWidget* parent, const char* name) :
-  KConfirmManualEnterDlgDecl(parent, name)
+  KConfirmManualEnterDlgDecl(parent)
 {
   buttonOk->setGuiItem(KStandardGuiItem::ok());
   buttonCancel->setGuiItem(KStandardGuiItem::cancel());

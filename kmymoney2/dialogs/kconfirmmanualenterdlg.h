@@ -31,9 +31,9 @@
 // Project Includes
 
 #include <kmymoney/mymoneytransaction.h>
-#include "../dialogs/kconfirmmanualenterdlgdecl.h"
+#include "ui_kconfirmmanualenterdlgdecl.h"
 
-class KConfirmManualEnterDlg : public KConfirmManualEnterDlgDecl
+class KConfirmManualEnterDlg : public Ui::KConfirmManualEnterDlgDecl
 {
   Q_OBJECT
 public:

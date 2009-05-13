@@ -59,7 +59,7 @@ KBackupDlg::KBackupDlg( QWidget* parent,  const char* name/*, bool modal*/)
   btnCancel->setGuiItem(KStandardGuiItem::cancel());
 
   KGuiItem chooseButtenItem( i18n("C&hoose..."),
-                    QIcon(il->loadIcon("folder", KIcon::Small, KIconLoader::SizeSmall)),
+                    QIcon(il->loadIcon("folder", KIconLoader::Small, KIconLoader::SizeSmall)),
                     i18n("Select mount point"),
                     i18n("Use this to browse to the mount point."));
   chooseButton->setGuiItem(chooseButtenItem);

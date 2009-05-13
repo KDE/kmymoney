@@ -8,10 +8,15 @@ ADD_SUBDIRECTORY( settings )
 ########### next target ###############
 
 SET(libdialogs_a_SOURCES
-  investactivities.cpp investtransactioneditor.cpp
-  kaccountselectdlg.cpp kbackupdlg.cpp kbalancechartdlg.cpp
-  kbalancewarning.cpp kcategoryreassigndlg.cpp
-  kchooseimportexportdlg.cpp kconfirmmanualenterdlg.cpp
+  investactivities.cpp 
+  #investtransactioneditor.cpp
+  #kaccountselectdlg.cpp 
+  #kbackupdlg.cpp 
+  #kbalancechartdlg.cpp
+  kbalancewarning.cpp 
+  #kcategoryreassigndlg.cpp
+  #kchooseimportexportdlg.cpp 
+  kconfirmmanualenterdlg.cpp
   kcsvprogressdlg.cpp kcurrencycalculator.cpp kcurrencyeditdlg.cpp
   keditequityentrydlg.cpp keditloanwizard.cpp keditscheduledlg.cpp
   kendingbalancedlg.cpp kenterscheduledlg.cpp
@@ -58,6 +63,8 @@ SET(dialogs_UI
   kupdatestockpricedlgdecl.ui mymoneyqifprofileeditordecl.ui
 )
 
+kde4_add_ui_files(libdialogs_a_SOURCES ${dialogs_UI} )
+
 # The handling of these ui files depends
 # on libkmymoney.so (the widgets library)
 #KMM_ADD_UI_FILES(dialogs_ui_srcs ${dialogs_UI} DEPENDS kmymoney)
@@ -71,7 +78,7 @@ KDE4_ADD_LIBRARY(dialogs STATIC ${libdialogs_a_SOURCES} ${dialogs_ui_srcs})
 
 # Must build widgets/kmymoneyreportconfigtab1decl.h from .ui
 # before kreportconfigurationfilterdlg.cpp can be compiled.
-#ADD_DEPENDENCIES(dialogs generate_widgets_ui_srcs)
+ADD_DEPENDENCIES(dialogs generate_widgets_ui_srcs)
 
 ########### install files ###############
 
