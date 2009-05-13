@@ -26,14 +26,23 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoney2/dialogs/settings/ksettingsregisterdecl.h"
+#include "ui_ksettingsregisterdecl.h"
+
+class KSettingsRegisterDecl : public QWidget, public Ui::KSettingsRegisterDecl
+{
+public:
+  KSettingsRegisterDecl( QWidget *parent ) : QWidget( parent ) {
+    setupUi( this );
+  }
+};
+
 
 class KSettingsRegister : public KSettingsRegisterDecl
 {
   Q_OBJECT
 
 public:
-  KSettingsRegister(QWidget* parent = 0, const char* name = 0);
+  KSettingsRegister(QWidget* parent = 0);
   ~KSettingsRegister();
 
 protected slots:

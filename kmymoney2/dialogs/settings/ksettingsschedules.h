@@ -27,7 +27,16 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoney2/dialogs/settings/ksettingsschedulesdecl.h"
+#include "ui_ksettingsschedulesdecl.h"
+
+class KSettingsSchedulesDecl : public QWidget, public Ui::KSettingsSchedulesDecl
+{
+public:
+  KSettingsSchedulesDecl( QWidget *parent ) : QWidget( parent ) {
+    setupUi( this );
+  }
+};
+
 
 class KSettingsSchedules : public KSettingsSchedulesDecl
 {

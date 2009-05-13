@@ -28,8 +28,8 @@
 #include "ksettingsregister.h"
 #include <kmymoney/transactionsortoption.h>
 
-KSettingsRegister::KSettingsRegister(QWidget* parent, const char* name) :
-  KSettingsRegisterDecl(parent, name)
+KSettingsRegister::KSettingsRegister(QWidget* parent) :
+  KSettingsRegisterDecl(parent)
 {
   // hide the internally used text fields
   kcfg_sortNormalView->hide();
