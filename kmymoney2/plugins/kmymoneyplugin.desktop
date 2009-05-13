@@ -1,6 +1,14 @@
 [Desktop Entry]
 Type=ServiceType
 Name=KMyMoney Plugin
+Name[pt]='Plugin' do KMyMoney
+Name[pt_BR]='Plugin' do KMyMoney
+Name[sv]=Kmymoney insticksprogram
+Name[uk]=Додаток KMyMoney
 X-KDE-ServiceType=KMyMoneyPlugin
 Comment=A KMyMoney plugin
+Comment[pt]=Um 'plugin' do KMyMoney
+Comment[pt_BR]=Um 'plugin' do KMyMoney
+Comment[sv]=Ett Kmymoney insticksprogram
+Comment[uk]=Додаток KMyMoney
 
