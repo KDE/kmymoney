@@ -54,18 +54,18 @@ SET(_uncritial_common_sources
   kmymoneycompletion.cpp
    #kmymoneycurrencyselector.cpp
    #kmymoneydateinput.cpp
-  kmymoneydatetbl.cpp
+   #kmymoneydatetbl.cpp
   kmymoneyedit.cpp
-  kmymoneylineedit.cpp
+  #kmymoneylineedit.cpp
   kmymoneylistviewitem.cpp
-  kmymoneytitlelabel.cpp
+  #kmymoneytitlelabel.cpp
   kmymoneywizard.cpp
   registeritem.cpp
   scheduledtransaction.cpp
   stdtransactiondownloaded.cpp
   stdtransactionmatched.cpp 
-  transaction.cpp
-  transactionform.cpp
+  #transaction.cpp
+  #transactionform.cpp
   )
 
 # sources that contain the KMM_DESIGNER flag

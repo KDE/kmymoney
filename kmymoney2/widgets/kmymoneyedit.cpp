@@ -38,6 +38,7 @@
 #include <klineedit.h>
 #include <kiconloader.h>
 #include <kconfig.h>
+#include <KConfigGroup>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -140,7 +141,8 @@ QValidator::State kMyMoneyMoneyValidator::validate( QString & input, int & _p ) 
     return Acceptable;
 
   QValidator::State rc = QDoubleValidator::validate( s, _p );
-
+#warning "port to kde4"
+#if 0
   if(rc == Acceptable) {
     // If the numeric value is acceptable, we check if the parens
     // are ok. If only the lead-in is present, the return value
@@ -156,6 +158,7 @@ QValidator::State kMyMoneyMoneyValidator::validate( QString & input, int & _p ) 
         rc = Invalid;
     }
   }
+#endif  
   return rc;
 }
 
@@ -227,22 +230,22 @@ void kMyMoneyEdit::init(void)
   m_calculatorFrame->setFixedSize(m_calculator->width()+3, m_calculator->height()+3);
   m_calculatorFrame->hide();
 
-  m_calcButton = new KPushButton(QIcon(QPixmap(KIconLoader::global()->iconPath("kcalc", -KIconLoader::SizeSmall))), QString(""), this);
+  m_calcButton = new KPushButton(KIcon(QPixmap(KIconLoader::global()->iconPath("kcalc", -KIconLoader::SizeSmall))), QString(""), this);
   m_calcButton->setFixedWidth( m_calcButton->sizeHint().width() );
   m_calcButton->setFixedHeight(m_edit->sizeHint().height());
   m_calcButton->setFocusProxy(m_edit);
 
   QPixmap pixmap;
   pixmap.loadFromData(resetButtonImage, sizeof(resetButtonImage), "PNG", 0);
-  m_resetButton = new KPushButton(QIcon(pixmap), QString(""), this);
+  m_resetButton = new KPushButton(KIcon(pixmap), QString(""), this);
   m_resetButton->setFixedWidth( m_resetButton->sizeHint().width() );
   m_resetButton->setFixedHeight(m_edit->sizeHint().height());
   m_resetButton->setEnabled(false);
   m_resetButton->setFocusProxy(m_edit);
 
-  KConfig *kconfig = KGlobal::config();
-  kconfig->setGroup("General Options");
-  if(kconfig->readBoolEntry("DontShowCalculatorButton", false) == true)
+  KSharedConfigPtr kconfig = KGlobal::config();
+  KConfigGroup grp = kconfig->group("General Options");
+  if(grp.readEntry("DontShowCalculatorButton", false) == true)
     setCalculatorButtonVisible(false);
 
   setSpacing(0);

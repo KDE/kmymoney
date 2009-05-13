@@ -39,10 +39,11 @@
 #include "kmymoneylineedit.h"
 
 kMyMoneyLineEdit::kMyMoneyLineEdit(QWidget *w, const char* name, bool forceMonetaryDecimalSymbol, int alignment) :
-  KLineEdit(w, name),
+  KLineEdit(w),
   m_forceMonetaryDecimalSymbol(forceMonetaryDecimalSymbol)
 {
-  setAlignment(alignment);
+#warning "port to kde4"	
+  //setAlignment(alignment);
 }
 
 kMyMoneyLineEdit::~kMyMoneyLineEdit()
