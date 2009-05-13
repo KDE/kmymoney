@@ -830,7 +830,7 @@ void FinanceQuoteProcess::slotProcessExited(K3Process*)
 void FinanceQuoteProcess::launch (const QString& scriptPath) {
   clearArguments();
   arguments.append(Q3CString("perl"));
-  arguments.append (Q3CString(scriptPath));
+  arguments.append (scriptPath);
   arguments.append (Q3CString("-l"));
   if (!start(K3Process::NotifyOnExit, K3Process::Stdout)) qFatal ("Unable to start FQ script");
   return;

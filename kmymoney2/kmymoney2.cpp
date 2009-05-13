@@ -67,7 +67,6 @@
 #include <kstandarddirs.h>
 #include <kstatusbar.h>
 #include <ktip.h>
-#include <kkeydialog.h>
 #include <kprogressdialog.h>
 #include <kio/netaccess.h>
 #include <kstartupinfo.h>

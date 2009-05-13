@@ -32,7 +32,7 @@
 #include <k3process.h>
 namespace KIO {
   class Job;
-};
+}
 
 // ----------------------------------------------------------------------------
 // Project Headers
