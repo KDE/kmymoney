@@ -176,9 +176,9 @@ private:
 
   K3ShellProcess* m_process;
 
-  Q3ValueList<Q3CString> m_recipient;
-  Q3CString m_ungetchBuffer;
-  Q3CString m_errmsg;
+  QLinkedList<QByteArray> m_recipient;
+  QByteArray m_ungetchBuffer;
+  QByteArray m_errmsg;
   int      m_exitStatus;
   Q_LONG  m_readRemain;
   char*   m_ptrRemain;

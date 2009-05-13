@@ -42,7 +42,7 @@
 #include <kapplication.h>
 #include <klocale.h>
 #include <k3process.h>
-#include <kpassworddialog.h>
+#include <k3passworddialog.h>
 #include <klibloader.h>
 
 // ----------------------------------------------------------------------------
@@ -89,9 +89,10 @@ KGPGFile::~KGPGFile()
 
 void KGPGFile::init(void)
 {
-  setFlags(IO_Sequential);
-  setStatus(IO_Ok);
-  setState(0);
+//FIXME:Port to Qt4
+//setFlags(IO_Sequential);
+//setStatus(IO_Ok);
+//setState(0);
 }
 
 void KGPGFile::setName(const QString& fn)
@@ -139,7 +140,9 @@ bool KGPGFile::open(int mode, const QString& cmdArgs, bool skipPasswd)
 
   // qDebug("setup file structures");
   init();
-  setMode(mode);
+
+//FIXME:Port to Qt4
+  //setMode(mode);
 
   // qDebug("check valid access mode");
   if(!(isReadable() || isWritable()))
@@ -150,8 +153,9 @@ bool KGPGFile::open(int mode, const QString& cmdArgs, bool skipPasswd)
     if(m_recipient.count() == 0)
       return false;
     // qDebug("check access rights");
-    if(!checkAccess(m_fn, W_OK))
-      return false;
+    //FIXME:Port to Qt4
+    //if(!checkAccess(m_fn, W_OK))
+    //  return false;
   }
 
   QStringList args;
@@ -166,9 +170,9 @@ bool KGPGFile::open(int mode, const QString& cmdArgs, bool skipPasswd)
           << "--comment" << QString("\"%1\"").arg(m_comment)
           << "--trust-model=always"
           << "-o" << QString("\"%1\"").arg(m_fn);
-      Q3ValueList<Q3CString>::Iterator it;
+      QLinkedList<QByteArray>::Iterator it;
       for(it = m_recipient.begin(); it != m_recipient.end(); ++it)
-        args << "-r" << QString("\"%1\"").arg(*it);
+        args << "-r" << QString("\"%1\"").arg(QString(*it));
 
       // some versions of GPG had trouble to replace a file
       // so we delete it first
@@ -187,7 +191,7 @@ bool KGPGFile::open(int mode, const QString& cmdArgs, bool skipPasswd)
 
   Q3CString pwd;
   if(isReadable() && useOwnPassphrase && !skipPasswd) {
-    KPasswordDialog dlg(KPasswordDialog::Password,false,0);
+    K3PasswordDialog dlg(K3PasswordDialog::Password,false,0);
     dlg.setPrompt(i18n("Enter passphrase"));
     dlg.addLine(i18n("File"), m_fn);
     dlg.adjustSize();
@@ -222,8 +226,9 @@ bool KGPGFile::open(int mode, const QString& cmdArgs, bool skipPasswd)
     m_process->closeStdin();
   }
 
-  setState( IO_Open );
-  ioIndex = 0;
+//FIXME: Port to Qt4
+//  setState( IO_Open );
+//  ioIndex = 0;
   // qDebug("File open");
   return true;
 }
@@ -294,7 +299,9 @@ void KGPGFile::close(void)
     }
   }
   m_ungetchBuffer = Q3CString();
-  setState(0);
+
+//FIXME: Port to Qt4
+//  setState(0);
   m_recipient.clear();
   // qDebug("File closed");
 }
@@ -449,7 +456,10 @@ void KGPGFile::slotGPGExited(K3Process* )
     if(m_process->normalExit()) {
       m_exitStatus = m_process->exitStatus();
       if(m_exitStatus != 0)
-        setStatus(IO_UnspecifiedError);
+        {
+//FIXME: Port to Qt4
+//        setStatus(IO_UnspecifiedError);
+        }
     } else {
       m_exitStatus = -1;
     }
