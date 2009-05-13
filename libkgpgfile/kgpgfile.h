@@ -22,6 +22,9 @@
 #include <qobject.h>
 #include <qstring.h>
 #include <qstringlist.h>
+//Added by qt3to4:
+#include <Q3CString>
+#include <Q3ValueList>
 
 /**
   * @author Thomas Baumgart
@@ -89,7 +92,7 @@ public:
     *
     * @param recipient recipients identification (e.g. e-mail address)
     */
-  void addRecipient(const QCString& recipient);
+  void addRecipient(const Q3CString& recipient);
 
   /**
     * sets the name of the file to @p fn. This method must be
@@ -98,7 +101,7 @@ public:
   void setName(const QString& fn);
   void setComment(const QString& txt);
 
-  const QCString errmsg(void) const { return m_errmsg; };
+  const Q3CString errmsg(void) const { return m_errmsg; };
   int exitStatus(void) const { return m_exitStatus; };
 
   /**
@@ -173,9 +176,9 @@ private:
 
   K3ShellProcess* m_process;
 
-  QValueList<QCString> m_recipient;
-  QCString m_ungetchBuffer;
-  QCString m_errmsg;
+  Q3ValueList<Q3CString> m_recipient;
+  Q3CString m_ungetchBuffer;
+  Q3CString m_errmsg;
   int      m_exitStatus;
   Q_LONG  m_readRemain;
   char*   m_ptrRemain;

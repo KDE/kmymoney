@@ -30,6 +30,9 @@
 
 #if QT_IS_VERSION(3,3,0)
 #include <qeventloop.h>
+//Added by qt3to4:
+#include <Q3CString>
+#include <Q3ValueList>
 #endif
 
 
@@ -109,7 +112,7 @@ void KGPGFile::flush(void)
   // no functionality
 }
 
-void KGPGFile::addRecipient(const QCString& recipient)
+void KGPGFile::addRecipient(const Q3CString& recipient)
 {
   m_recipient << recipient;
 }
@@ -163,7 +166,7 @@ bool KGPGFile::open(int mode, const QString& cmdArgs, bool skipPasswd)
           << "--comment" << QString("\"%1\"").arg(m_comment)
           << "--trust-model=always"
           << "-o" << QString("\"%1\"").arg(m_fn);
-      QValueList<QCString>::Iterator it;
+      Q3ValueList<Q3CString>::Iterator it;
       for(it = m_recipient.begin(); it != m_recipient.end(); ++it)
         args << "-r" << QString("\"%1\"").arg(*it);
 
@@ -182,7 +185,7 @@ bool KGPGFile::open(int mode, const QString& cmdArgs, bool skipPasswd)
     args = QStringList::split(" ", cmdArgs);
   }
 
-  QCString pwd;
+  Q3CString pwd;
   if(isReadable() && useOwnPassphrase && !skipPasswd) {
     KPasswordDialog dlg(KPasswordDialog::Password,false,0);
     dlg.setPrompt(i18n("Enter passphrase"));
@@ -190,7 +193,7 @@ bool KGPGFile::open(int mode, const QString& cmdArgs, bool skipPasswd)
     dlg.adjustSize();
     if (dlg.exec() == QDialog::Rejected)
       return false;
-    pwd = QCString(dlg.password());
+    pwd = Q3CString(dlg.password());
   }
 
   // qDebug("starting GPG process");
@@ -290,7 +293,7 @@ void KGPGFile::close(void)
         m_process->kill();
     }
   }
-  m_ungetchBuffer = QCString();
+  m_ungetchBuffer = Q3CString();
   setState(0);
   m_recipient.clear();
   // qDebug("File closed");
@@ -495,7 +498,7 @@ void KGPGFile::slotDataFromGPG(K3Process* proc, char* buf, int len)
 void KGPGFile::slotErrorFromGPG(K3Process *, char *buf, int len)
 {
   // qDebug("Received %d bytes on stderr", len);
-  QCString msg;
+  Q3CString msg;
   msg.setRawData(buf, len);
   m_errmsg += msg;
   msg.resetRawData(buf, len);
