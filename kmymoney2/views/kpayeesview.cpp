@@ -319,8 +319,8 @@ const QColor KTransactionListItem::backgroundColor(void)
 
 // *** KPayeesView Implementation ***
 
-KPayeesView::KPayeesView(QWidget *parent, const char *name ) :
-  KPayeesViewDecl(parent,name),
+KPayeesView::KPayeesView(QWidget *parent) :
+  KPayeesViewDecl(parent),
   m_needReload(false),
   m_needConnection(true),
   m_updatesQueued(0),

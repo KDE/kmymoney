@@ -38,8 +38,8 @@
 #include "../kmymoneyglobalsettings.h"
 #include "../kmymoney2.h"
 
-KInstitutionsView::KInstitutionsView(QWidget *parent, const char *name) :
-  KInstitutionsViewDecl(parent,name),
+KInstitutionsView::KInstitutionsView(QWidget *parent) :
+  KInstitutionsViewDecl(parent),
   m_needReload(false)
 {
   m_accountTree->header()->setLabel(0, i18n("Institution/Account"));

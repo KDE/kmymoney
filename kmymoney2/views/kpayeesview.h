@@ -29,6 +29,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <Q3PtrVector>
 #include <qwidget.h>
 //Added by qt3to4:
 #include <QResizeEvent>
@@ -44,7 +45,7 @@ class QSplitter;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kpayeesviewdecl.h"
+#include "ui_kpayeesviewdecl.h"
 #include "kmymoneytransaction.h"
 #include <kmymoney/mymoneypayee.h>
 
@@ -200,12 +201,21 @@ private:
   QString m_accountId;
 };
 
+
+class KPayeesViewDecl : public QWidget, public Ui::KPayeesViewDecl
+{
+public:
+  KPayeesViewDecl( QWidget *parent ) : QWidget( parent ) {
+    setupUi( this );
+  }
+};
+
 class KPayeesView : public KPayeesViewDecl
 {
   Q_OBJECT
 
 public:
-  KPayeesView(QWidget *parent=0, const char *name=0);
+  KPayeesView(QWidget *parent=0);
   ~KPayeesView();
   void show(void);
 

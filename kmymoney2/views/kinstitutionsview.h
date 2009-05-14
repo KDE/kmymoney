@@ -30,7 +30,7 @@
 #include <kmymoney/kmymoneyaccounttree.h>
 #include <kmymoney/mymoneyutils.h>
 
-#include "../views/kinstitutionsviewdecl.h"
+#include "ui_kinstitutionsviewdecl.h"
 //Added by qt3to4:
 #include <QPixmap>
 
@@ -41,13 +41,21 @@
 /**
   * This class implements the institutions hierarchical 'view'.
   */
+
+class KInstitutionsViewDecl : public QWidget, public Ui::KInstitutionsViewDecl
+{
+public:
+  KInstitutionsViewDecl( QWidget *parent ) : QWidget( parent ) {
+    setupUi( this );
+  }
+};
 class KInstitutionsView : public KInstitutionsViewDecl
 {
   Q_OBJECT
 private:
 
 public:
-  KInstitutionsView(QWidget *parent=0, const char *name=0);
+  KInstitutionsView(QWidget *parent=0);
   virtual ~KInstitutionsView();
 
 public slots:

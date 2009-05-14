@@ -53,10 +53,10 @@ SET(libdialogs_a_SOURCES
   kselectdatabasedlg.cpp
   #kselecttransactionsdlg.cpp 
   #ksplittransactiondlg.cpp 
-  kstartdlg.cpp
-  kupdatestockpricedlg.cpp 
-  mymoneyqifprofileeditor.cpp
-  transactioneditor.cpp 
+  #kstartdlg.cpp
+  #kupdatestockpricedlg.cpp 
+  #mymoneyqifprofileeditor.cpp
+  #transactioneditor.cpp 
   transactionmatcher.cpp
   )
 
