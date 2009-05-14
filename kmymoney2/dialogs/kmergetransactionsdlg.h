@@ -37,13 +37,22 @@ class QResizeEvent;
 #include <kmymoney/register.h>
 #include <kmymoney/mymoneyaccount.h>
 
-#include "../dialogs/kselecttransactionsdlg.h"
+#include "ui_kselecttransactionsdlg.h"
+
+
+class KSelectTransactionsDlg : public QDialog, public Ui::KSelectTransactionsDlg
+{
+public:
+  KSelectTransactionsDlg( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
 
 class KMergeTransactionsDlg: public KSelectTransactionsDlg
 {
   Q_OBJECT
 public:
-  KMergeTransactionsDlg(const MyMoneyAccount& account, QWidget* parent = 0, const char* name = 0);
+  KMergeTransactionsDlg(const MyMoneyAccount& account, QWidget* parent = 0);
 
   bool eventFilter(QObject* , QEvent* ) { return false; }
 

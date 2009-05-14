@@ -161,8 +161,8 @@ Q3ValueList<MyMoneyTemplate> KAccountTemplateSelector::Private::selectedTemplate
 #endif
 
 
-KAccountTemplateSelector::KAccountTemplateSelector(QWidget* parent, const char* name) :
-  KAccountTemplateSelectorDecl(parent, name),
+KAccountTemplateSelector::KAccountTemplateSelector(QWidget* parent) :
+  KAccountTemplateSelectorDecl(parent),
   d(new Private(this))
 {
   m_accountList->header()->hide();

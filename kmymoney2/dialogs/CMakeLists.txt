@@ -30,8 +30,8 @@ SET(libdialogs_a_SOURCES
   kgncimportoptionsdlg.cpp 
   kgncpricesourcedlg.cpp
   kgpgkeyselectiondlg.cpp 
-  kimportdlg.cpp 
-  kloadtemplatedlg.cpp
+  #kimportdlg.cpp 
+  #kloadtemplatedlg.cpp
   kmergetransactionsdlg.cpp 
   kmymoneyfileinfodlg.cpp
   kmymoneypricedlg.cpp 

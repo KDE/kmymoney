@@ -32,8 +32,8 @@
 
 #include "kmergetransactionsdlg.h"
 
-KMergeTransactionsDlg::KMergeTransactionsDlg(const MyMoneyAccount& account, QWidget* parent, const char* name) :
-  KSelectTransactionsDlg(account, parent, name)
+KMergeTransactionsDlg::KMergeTransactionsDlg(const MyMoneyAccount& account, QWidget* parent) :
+  KSelectTransactionsDlg(account, parent)
 {
 
   // setup descriptive texts

@@ -34,7 +34,7 @@
 //Added by qt3to4:
 #include <Q3ValueList>
 
-KLoadTemplateDlg::KLoadTemplateDlg(QWidget* parent, const char* name) :
+KLoadTemplateDlg::KLoadTemplateDlg(QWidget* parent) :
   KLoadTemplateDlgDecl(parent, name)
 {
   buttonOk->setGuiItem(KStandardGuiItem::ok());

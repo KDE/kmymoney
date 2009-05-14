@@ -27,9 +27,18 @@
 // Project Includes
 
 #include <kmymoney/mymoneytemplate.h>
-#include "../dialogs/kloadtemplatedlgdecl.h"
+#include "ui_kloadtemplatedlgdecl.h"
 //Added by qt3to4:
 #include <Q3ValueList>
+
+
+class KLoadTemplateDlgDecl : public QDialog, public Ui::KLoadTemplateDlgDecl
+{
+public:
+  KLoadTemplateDlgDecl( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
 
 /// This dialog lets the user load more account templates
 class KLoadTemplateDlg : public KLoadTemplateDlgDecl
@@ -37,7 +46,7 @@ class KLoadTemplateDlg : public KLoadTemplateDlgDecl
   Q_OBJECT
 
   public:
-    KLoadTemplateDlg(QWidget *parent = 0, const char *name = 0);
+    KLoadTemplateDlg(QWidget *parent = 0);
 
     Q3ValueList<MyMoneyTemplate> templates(void) const;
 

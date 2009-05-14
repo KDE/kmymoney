@@ -27,7 +27,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney2/widgets/kaccounttemplateselectordecl.h>
+#include <ui_kaccounttemplateselectordecl.h>
 //Added by qt3to4:
 #include <Q3ValueList>
 class MyMoneyTemplate;
@@ -35,11 +35,21 @@ class MyMoneyTemplate;
 /**
  * @author Thomas Baumgart <ipwizard@users.sourceforge.net>
  */
+
+
+
+class KAccountTemplateSelectorDecl : public QWidget, public Ui::KAccountTemplateSelectorDecl
+{
+public:
+  KAccountTemplateSelectorDecl( QWidget *parent ) : QWidget( parent ) {
+    setupUi( this );
+  }
+};
 class KAccountTemplateSelector : public KAccountTemplateSelectorDecl
 {
   Q_OBJECT
   public:
-    KAccountTemplateSelector(QWidget* parent = 0, const char* name = 0);
+    KAccountTemplateSelector(QWidget* parent = 0);
     ~KAccountTemplateSelector();
 
     Q3ValueList<MyMoneyTemplate> selectedTemplates(void) const;

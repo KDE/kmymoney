@@ -128,14 +128,15 @@ void KImportDlg::slotOkClicked()
 void KImportDlg::readConfig(void)
 {
   KSharedConfigPtr kconfig = KGlobal::config();
-  kconfig->group("Last Use Settings");
+  KConfigGroup kgrp = kconfig->group("Last Use Settings");
   m_qlineeditFile->setText(kgrp.readEntry("KImportDlg_LastFile"));
+
 }
 
 void KImportDlg::writeConfig(void)
 {
   KSharedConfigPtr kconfig = KGlobal::config();
-  kconfig->group("Last Use Settings");
+  KConfigGroup grp = kconfig->group("Last Use Settings");
   grp.writeEntry("KImportDlg_LastFile", m_qlineeditFile->text());
   grp.writeEntry("KImportDlg_LastProfile", m_profileComboBox->currentText());
   kconfig->sync();
@@ -186,7 +187,7 @@ void KImportDlg::loadProfiles(const bool selectLast)
 
   QStringList list;
   KConfig* config = KGlobal::config();
-  config->group("Profiles");
+  KConfigGroup grp = config->group("Profiles");
 
   list = grp.readEntry("profiles");
   list.sort();
