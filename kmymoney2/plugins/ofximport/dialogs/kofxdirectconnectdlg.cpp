@@ -52,8 +52,8 @@ public:
   QFile    m_fpTrace;
 };
 
-KOfxDirectConnectDlg::KOfxDirectConnectDlg(const MyMoneyAccount& account, QWidget *parent, const char *name) :
-  KOfxDirectConnectDlgDecl(parent, name),
+KOfxDirectConnectDlg::KOfxDirectConnectDlg(const MyMoneyAccount& account, QWidget *parent) :
+  KOfxDirectConnectDlgDecl(parent),
   d(new Private),
   m_tmpfile(NULL),
   m_connector(account),

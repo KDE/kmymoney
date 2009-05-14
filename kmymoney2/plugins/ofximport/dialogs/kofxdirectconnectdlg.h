@@ -39,16 +39,25 @@ class TransferJob;
 // Project Includes
 
 #include "mymoneyofxconnector.h"
-#include "kofxdirectconnectdlgdecl.h"
+#include "ui_kofxdirectconnectdlgdecl.h"
 
 /**
 @author ace jones
 */
+
+class KOfxDirectConnectDlgDecl : public QDialog, public Ui::KOfxDirectConnectDlgDecl
+{
+public:
+  KOfxDirectConnectDlgDecl( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+}
+
 class KOfxDirectConnectDlg : public KOfxDirectConnectDlgDecl
 {
 Q_OBJECT
 public:
-  KOfxDirectConnectDlg(const MyMoneyAccount&, QWidget *parent = 0, const char *name = 0);
+  KOfxDirectConnectDlg(const MyMoneyAccount&, QWidget *parent = 0);
   ~KOfxDirectConnectDlg();
 
   void init(void);

@@ -112,11 +112,7 @@ private:
   QString username(void) const;
   QString password(void) const;
   QString accountnum(void) const;
-#if LIBOFX_IS_VERSION(0,9,0)
   OfxAccountData::AccountType accounttype(void) const;
-#else
-  AccountType accounttype(void) const;
-#endif
 
 private:
   const MyMoneyAccount& m_account;

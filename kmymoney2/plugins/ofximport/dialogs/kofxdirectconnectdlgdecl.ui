@@ -1,109 +1,97 @@
-<!DOCTYPE UI><UI version="3.0" stdsetdef="1">
-<class>KOfxDirectConnectDlgDecl</class>
-<widget class="QDialog">
-    <property name="name">
-        <cstring>KOfxDirectConnectDlgDecl</cstring>
-    </property>
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0" stdsetdef="1">
+  <author></author>
+  <comment></comment>
+  <exportmacro></exportmacro>
+  <class>KOfxDirectConnectDlgDecl</class>
+  <widget class="QDialog" name="KOfxDirectConnectDlgDecl">
     <property name="geometry">
-        <rect>
-            <x>0</x>
-            <y>0</y>
-            <width>511</width>
-            <height>108</height>
-        </rect>
+      <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>511</width>
+        <height>108</height>
+      </rect>
     </property>
-    <property name="caption">
-        <string>OFX Direct Connect</string>
+    <property name="windowTitle">
+      <string>OFX Direct Connect</string>
     </property>
     <property name="sizeGripEnabled">
-        <bool>true</bool>
+      <bool>true</bool>
     </property>
-    <vbox>
-        <property name="name">
-            <cstring>unnamed</cstring>
-        </property>
-        <widget class="QLabel">
-            <property name="name">
-                <cstring>textLabel1</cstring>
-            </property>
-            <property name="text">
-                <string>Contacting bank...</string>
-            </property>
+    <layout class="QVBoxLayout">
+      <item>
+        <widget class="QLabel" name="textLabel1">
+          <property name="text">
+            <string>Contacting bank...</string>
+          </property>
+          <property name="wordWrap">
+            <bool>false</bool>
+          </property>
         </widget>
-        <widget class="KProgress">
-            <property name="name">
-                <cstring>kProgress1</cstring>
-            </property>
-        </widget>
-        <widget class="QLayoutWidget">
-            <property name="name">
-                <cstring>layout2</cstring>
-            </property>
-            <hbox>
-                <property name="name">
-                    <cstring>unnamed</cstring>
-                </property>
-                <spacer>
-                    <property name="name">
-                        <cstring>spacer4</cstring>
-                    </property>
-                    <property name="orientation">
-                        <enum>Horizontal</enum>
-                    </property>
-                    <property name="sizeType">
-                        <enum>Expanding</enum>
-                    </property>
-                    <property name="sizeHint">
-                        <size>
-                            <width>51</width>
-                            <height>20</height>
-                        </size>
-                    </property>
-                </spacer>
-                <widget class="QPushButton">
-                    <property name="name">
-                        <cstring>buttonCancel</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Cancel</string>
-                    </property>
-                    <property name="accel">
-                        <string></string>
-                    </property>
-                    <property name="autoDefault">
-                        <bool>true</bool>
-                    </property>
-                </widget>
-                <spacer>
-                    <property name="name">
-                        <cstring>spacer3</cstring>
-                    </property>
-                    <property name="orientation">
-                        <enum>Horizontal</enum>
-                    </property>
-                    <property name="sizeType">
-                        <enum>Expanding</enum>
-                    </property>
-                    <property name="sizeHint">
-                        <size>
-                            <width>61</width>
-                            <height>20</height>
-                        </size>
-                    </property>
-                </spacer>
-            </hbox>
-        </widget>
-    </vbox>
-</widget>
-<customwidgets>
-</customwidgets>
-<connections>
+      </item>
+      <item>
+        <widget class="KProgress" name="kProgress1"/>
+      </item>
+      <item>
+        <layout class="QHBoxLayout">
+          <item>
+            <spacer name="spacer4">
+              <property name="sizeHint">
+                <size>
+                  <width>51</width>
+                  <height>20</height>
+                </size>
+              </property>
+              <property name="sizeType">
+                <enum>QSizePolicy::Expanding</enum>
+              </property>
+              <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+              </property>
+            </spacer>
+          </item>
+          <item>
+            <widget class="QPushButton" name="buttonCancel">
+              <property name="text">
+                <string>Cancel</string>
+              </property>
+              <property name="shortcut">
+                <string/>
+              </property>
+              <property name="autoDefault">
+                <bool>true</bool>
+              </property>
+            </widget>
+          </item>
+          <item>
+            <spacer name="spacer3">
+              <property name="sizeHint">
+                <size>
+                  <width>61</width>
+                  <height>20</height>
+                </size>
+              </property>
+              <property name="sizeType">
+                <enum>QSizePolicy::Expanding</enum>
+              </property>
+              <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+              </property>
+            </spacer>
+          </item>
+        </layout>
+      </item>
+    </layout>
+  </widget>
+  <layoutdefault spacing="6" margin="11"/>
+  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
+  <connections>
     <connection>
-        <sender>buttonCancel</sender>
-        <signal>clicked()</signal>
-        <receiver>KOfxDirectConnectDlgDecl</receiver>
-        <slot>reject()</slot>
+      <sender>buttonCancel</sender>
+      <signal>clicked()</signal>
+      <receiver>KOfxDirectConnectDlgDecl</receiver>
+      <slot>reject()</slot>
     </connection>
-</connections>
-<layoutdefaults spacing="6" margin="11"/>
-</UI>
+  </connections>
+</ui>
