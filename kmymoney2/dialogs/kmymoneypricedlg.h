@@ -35,7 +35,7 @@ class QListViewItem;
 // Project Includes
 
 #include "kmymoneypricedlgdecl.h"
-#include "kmymoney/mymoneyprice.h"
+#include "mymoneyprice.h"
 
 
 class KMyMoneyPriceDlgDecl : public QDialog, public Ui::KMyMoneyPriceDlgDecl

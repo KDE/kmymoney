@@ -32,7 +32,7 @@
 // Project Includes
 #include "ui_kselectdatabasedlgdecl.h"
 #include "../mymoney/storage/mymoneystoragesql.h"
-#include "kmymoney/kguiutils.h"
+#include "kguiutils.h"
 
 
 class KSelectDatabaseDlgDecl : public QDialog, public Ui::KSelectDatabaseDlgDecl
