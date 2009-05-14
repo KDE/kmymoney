@@ -32,9 +32,9 @@
 // Project Includes
 
 #include "kmymoneyfileinfodlg.h"
-#include <kmymoney/imymoneystorage.h>
-#include <kmymoney/mymoneyfile.h>
-#include <kmymoney/kmymoneyutils.h>
+#include <imymoneystorage.h>
+#include <mymoneyfile.h>
+#include <kmymoneyutils.h>
 
 KMyMoneyFileInfoDlg::KMyMoneyFileInfoDlg(QWidget *parent)
  : KMyMoneyFileInfoDlgDecl(parent)

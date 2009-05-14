@@ -30,11 +30,11 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/kmymoneycategory.h>
-#include <kmymoney/kmymoneyedit.h>
-#include <kmymoney/kmymoneyaccountselector.h>
-#include <kmymoney/kmymoneycompletion.h>
-#include <kmymoney/mymoneyfile.h>
+#include <kmymoneycategory.h>
+#include <kmymoneyedit.h>
+#include <kmymoneyaccountselector.h>
+#include <kmymoneycompletion.h>
+#include <mymoneyfile.h>
 
 #include "investactivities.h"
 

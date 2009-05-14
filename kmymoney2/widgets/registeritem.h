@@ -31,9 +31,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneymoney.h>
-#include <kmymoney/mymoneysplit.h>
-#include <kmymoney/mymoneyobject.h>
+#include <mymoneymoney.h>
+#include <mymoneysplit.h>
+#include <mymoneyobject.h>
 
 namespace KMyMoneyRegister {
 

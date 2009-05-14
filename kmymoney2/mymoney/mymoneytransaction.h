@@ -38,7 +38,7 @@
 #include "mymoneymoney.h"
 #include "mymoneykeyvaluecontainer.h"
 #include "mymoneysplit.h"
-#include <kmymoney/export.h>
+#include <export.h>
 
 /**
   * This class represents a transaction within the MyMoneyEngine. A transaction

@@ -37,7 +37,7 @@ class Q3ListViewItem;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/kmymoneyaccountselector.h>
+#include <kmymoneyaccountselector.h>
 #include "kmymoneycompletion.h"
 
 /**

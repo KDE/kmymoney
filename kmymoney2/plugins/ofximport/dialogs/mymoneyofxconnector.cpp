@@ -38,10 +38,10 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneyfile.h>
-#include <kmymoney/mymoneyaccount.h>
-#include <kmymoney/mymoneyinstitution.h>
-#include <kmymoney/mymoneykeyvaluecontainer.h>
+#include <mymoneyfile.h>
+#include <mymoneyaccount.h>
+#include <mymoneyinstitution.h>
+#include <mymoneykeyvaluecontainer.h>
 #include "mymoneyofxconnector.h"
 
 OfxHeaderVersion::OfxHeaderVersion(KComboBox* combo, const QString& headerVersion) :

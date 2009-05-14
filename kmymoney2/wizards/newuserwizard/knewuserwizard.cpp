@@ -51,17 +51,17 @@
 
 #include "knewuserwizard.h"
 #include "knewuserwizard_p.h"
-#include <kmymoney/mymoneysecurity.h>
-#include <kmymoney/mymoneyfile.h>
-#include <kmymoney/kguiutils.h>
-#include <kmymoney/kmymoneyaccounttree.h>
-#include <kmymoney/mymoneypayee.h>
-#include <kmymoney/mymoneymoney.h>
-#include <kmymoney/mymoneyinstitution.h>
-#include <kmymoney/mymoneyaccount.h>
-#include <kmymoney/kmymoneydateinput.h>
-#include <kmymoney/kmymoneyedit.h>
-#include <kmymoney/kaccounttemplateselector.h>
+#include <mymoneysecurity.h>
+#include <mymoneyfile.h>
+#include <kguiutils.h>
+#include <kmymoneyaccounttree.h>
+#include <mymoneypayee.h>
+#include <mymoneymoney.h>
+#include <mymoneyinstitution.h>
+#include <mymoneyaccount.h>
+#include <kmymoneydateinput.h>
+#include <kmymoneyedit.h>
+#include <kaccounttemplateselector.h>
 
 #include "../../kmymoney2.h"
 #include "../../kmymoneyglobalsettings.h"

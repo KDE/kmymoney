@@ -27,7 +27,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/transaction.h>
+#include <transaction.h>
 
 namespace KMyMoneyTransactionForm {
   class TransactionForm;

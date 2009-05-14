@@ -28,9 +28,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneyaccount.h>
-#include <kmymoney/kmymoneyaccounttree.h>
-#include <kmymoney/mymoneyutils.h>
+#include <mymoneyaccount.h>
+#include <kmymoneyaccounttree.h>
+#include <mymoneyutils.h>
 class K3ListViewSearchLineWidget;
 
 #include "../views/kaccountsviewdecl.h"

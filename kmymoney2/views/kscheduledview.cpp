@@ -52,8 +52,8 @@
 #include "kscheduledlistitem.h"
 #include "../widgets/kmymoneyscheduleddatetbl.h"
 // #include "../dialogs/kenterscheduledialog.h"
-#include <kmymoney/kmymoneyutils.h>
-#include <kmymoney/kmymoneyglobalsettings.h>
+#include <kmymoneyutils.h>
+#include <kmymoneyglobalsettings.h>
 
 #include "../kmymoney2.h"
 

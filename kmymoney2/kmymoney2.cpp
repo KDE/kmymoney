@@ -149,8 +149,8 @@
 
 #include <libkgpgfile/kgpgfile.h>
 
-#include <kmymoney/transactioneditor.h>
-#include <kmymoney/kmymoneylistviewitem.h>
+#include <transactioneditor.h>
+#include <kmymoneylistviewitem.h>
 #include <ktoolinvocation.h>
 
 #include "kmymoneyutils.h"

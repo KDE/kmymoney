@@ -49,13 +49,13 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/kmymoneydateinput.h>
-#include <kmymoney/kmymoneyedit.h>
-#include <kmymoney/kmymoneycategory.h>
-#include <kmymoney/register.h>
-#include <kmymoney/transactionform.h>
-#include <kmymoney/stdtransactiondownloaded.h>
-#include <kmymoney/stdtransactionmatched.h>
+#include <kmymoneydateinput.h>
+#include <kmymoneyedit.h>
+#include <kmymoneycategory.h>
+#include <register.h>
+#include <transactionform.h>
+#include <stdtransactiondownloaded.h>
+#include <stdtransactionmatched.h>
 #include "scheduledtransaction.h"
 #include "../kmymoneyglobalsettings.h"
 

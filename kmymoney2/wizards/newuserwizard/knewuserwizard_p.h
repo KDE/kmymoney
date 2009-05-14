@@ -24,7 +24,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/kmymoneywizard.h>
+#include <kmymoneywizard.h>
 
 #include "kintropagedecl.h"
 #include "kaccountpagedecl.h"
@@ -35,7 +35,7 @@
 #include "../wizardpages/currency.h"
 #include "../wizardpages/accounts.h"
 
-#include <kmymoney/mymoneytemplate.h>
+#include <mymoneytemplate.h>
 //Added by qt3to4:
 #include <Q3ValueList>
 

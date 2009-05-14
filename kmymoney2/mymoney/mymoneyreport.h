@@ -30,10 +30,10 @@ class QDomDocument;
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include <kmymoney/mymoneyobject.h>
-#include <kmymoney/mymoneyaccount.h>
-#include <kmymoney/mymoneytransactionfilter.h>
-#include <kmymoney/export.h>
+#include <mymoneyobject.h>
+#include <mymoneyaccount.h>
+#include <mymoneytransactionfilter.h>
+#include <export.h>
 
 /**
   * This class defines a report within the MyMoneyEngine.  The report class

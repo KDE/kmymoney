@@ -42,9 +42,9 @@
 
 #include "ui_kupdatestockpricedlgdecl.h"
 
-#include <kmymoney/mymoneyprice.h>
-#include <kmymoney/kmymoneydateinput.h>
-#include <kmymoney/kmymoneyedit.h>
+#include <mymoneyprice.h>
+#include <kmymoneydateinput.h>
+#include <kmymoneyedit.h>
 
 /**
   * @author Kevin Tambascio

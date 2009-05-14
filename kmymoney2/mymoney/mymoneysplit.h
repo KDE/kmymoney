@@ -37,9 +37,9 @@
 #include "mymoneyexception.h"
 #include "mymoneyutils.h"
 #include "mymoneymoney.h"
-#include <kmymoney/export.h>
-#include <kmymoney/mymoneyobject.h>
-#include <kmymoney/mymoneykeyvaluecontainer.h>
+#include <export.h>
+#include <mymoneyobject.h>
+#include <mymoneykeyvaluecontainer.h>
 class MyMoneyTransaction;
 
 /**

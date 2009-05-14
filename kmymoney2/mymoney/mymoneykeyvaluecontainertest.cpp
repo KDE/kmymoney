@@ -15,7 +15,7 @@
  ***************************************************************************/
 
 #include "mymoneykeyvaluecontainertest.h"
-#include <kmymoney/mymoneyexception.h>
+#include <mymoneyexception.h>
 
 MyMoneyKeyValueContainerTest::MyMoneyKeyValueContainerTest()
 {

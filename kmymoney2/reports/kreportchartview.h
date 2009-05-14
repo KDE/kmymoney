@@ -45,7 +45,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 #ifdef _CHECK_MEMORY
-  #include <kmymoney/mymoneyutils.h>
+  #include <mymoneyutils.h>
 #endif
 
 namespace reports {

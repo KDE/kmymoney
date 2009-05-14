@@ -41,7 +41,7 @@
 // Project Includes
 
 #include "kmymoneycategory.h"
-#include <kmymoney/mymoneyfile.h>
+#include <mymoneyfile.h>
 #include "kmymoneyaccountcompletion.h"
 
 class KMyMoneyCategory::Private

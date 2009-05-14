@@ -35,10 +35,10 @@
 #include "../reports/reportstestcommon.h"
 using namespace test;
 
-#include <kmymoney/mymoneysecurity.h>
-#include <kmymoney/mymoneyprice.h>
-#include <kmymoney/mymoneyreport.h>
-#include <kmymoney/mymoneystatement.h>
+#include <mymoneysecurity.h>
+#include <mymoneyprice.h>
+#include <mymoneyreport.h>
+#include <mymoneystatement.h>
 #include "../mymoney/storage/mymoneystoragexml.h"
 #include "../mymoney/storage/mymoneystoragedump.h"
 

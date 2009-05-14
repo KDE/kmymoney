@@ -41,15 +41,15 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/register.h>
-#include <kmymoney/transactionform.h>
-#include <kmymoney/transaction.h>
-#include <kmymoney/transactioneditor.h>
-#include <kmymoney/kmymoneylineedit.h>
-#include <kmymoney/kmymoneydateinput.h>
-#include <kmymoney/kmymoneycombo.h>
-#include <kmymoney/kguiutils.h>
-#include <kmymoney/kmymoneyutils.h>
+#include <register.h>
+#include <transactionform.h>
+#include <transaction.h>
+#include <transactioneditor.h>
+#include <kmymoneylineedit.h>
+#include <kmymoneydateinput.h>
+#include <kmymoneycombo.h>
+#include <kguiutils.h>
+#include <kmymoneyutils.h>
 
 #include "keditscheduledlg.h"
 #include "../kmymoney2.h"

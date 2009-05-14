@@ -28,7 +28,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/kmymoneydateinput.h>
+#include <kmymoneydateinput.h>
 #include "ksettingsgeneral.h"
 
 KSettingsGeneral::KSettingsGeneral(QWidget* parent) :

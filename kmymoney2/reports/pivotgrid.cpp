@@ -52,7 +52,7 @@
 #include "kreportchartview.h"
 #include "../kmymoneyglobalsettings.h"
 
-#include <kmymoney/kmymoneyutils.h>
+#include <kmymoneyutils.h>
 
 namespace reports {
 

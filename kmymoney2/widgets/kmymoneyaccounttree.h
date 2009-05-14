@@ -19,7 +19,7 @@
 #define KMYMONEYACCOUNTTREE_H
 
 
-#include <kmymoney/kmymoneyaccounttreebase.h>
+#include <kmymoneyaccounttreebase.h>
 //Added by qt3to4:
 #include <Q3ValueList>
 

@@ -29,15 +29,15 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneyfile.h>
-#include <kmymoney/mymoneyutils.h>
-#include <kmymoney/mymoneysecurity.h>
-#include <kmymoney/mymoneytransaction.h>
-#include <kmymoney/mymoneyinvesttransaction.h>
-#include <kmymoney/mymoneyaccount.h>
-#include <kmymoney/kmymoneyglobalsettings.h>
-#include <kmymoney/kmymoneyaccountcombo.h>
-#include <kmymoney/kmymoneycurrencyselector.h>
+#include <mymoneyfile.h>
+#include <mymoneyutils.h>
+#include <mymoneysecurity.h>
+#include <mymoneytransaction.h>
+#include <mymoneyinvesttransaction.h>
+#include <mymoneyaccount.h>
+#include <kmymoneyglobalsettings.h>
+#include <kmymoneyaccountcombo.h>
+#include <kmymoneycurrencyselector.h>
 
 #include "../kmymoney2.h"
 

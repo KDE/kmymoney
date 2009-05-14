@@ -37,8 +37,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneyinstitution.h>
-#include <kmymoney/kguiutils.h>
+#include <mymoneyinstitution.h>
+#include <kguiutils.h>
 
 #include "knewbankdlg.h"
 

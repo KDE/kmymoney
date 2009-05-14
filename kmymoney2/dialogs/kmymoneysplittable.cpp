@@ -58,13 +58,13 @@
 // Project Includes
 
 #include "kmymoneysplittable.h"
-#include <kmymoney/mymoneyfile.h>
-#include <kmymoney/kmymoneyedit.h>
-#include <kmymoney/kmymoneycategory.h>
-#include <kmymoney/kmymoneyaccountselector.h>
-#include <kmymoney/kmymoneylineedit.h>
-#include <kmymoney/mymoneysecurity.h>
-#include <kmymoney/kmymoneyglobalsettings.h>
+#include <mymoneyfile.h>
+#include <kmymoneyedit.h>
+#include <kmymoneycategory.h>
+#include <kmymoneyaccountselector.h>
+#include <kmymoneylineedit.h>
+#include <mymoneysecurity.h>
+#include <kmymoneyglobalsettings.h>
 
 #include "../dialogs/kcurrencycalculator.h"
 

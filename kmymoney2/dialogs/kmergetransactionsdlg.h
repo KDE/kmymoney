@@ -34,8 +34,8 @@ class QResizeEvent;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/register.h>
-#include <kmymoney/mymoneyaccount.h>
+#include <register.h>
+#include <mymoneyaccount.h>
 
 #include "ui_kselecttransactionsdlg.h"
 

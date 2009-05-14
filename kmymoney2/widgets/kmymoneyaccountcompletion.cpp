@@ -35,7 +35,7 @@
 // Project Includes
 
 #include "kmymoneyaccountcompletion.h"
-#include <kmymoney/mymoneyfile.h>
+#include <mymoneyfile.h>
 
 kMyMoneyAccountCompletion::kMyMoneyAccountCompletion(QWidget *parent, const char *name ) :
   kMyMoneyCompletion(parent, name)

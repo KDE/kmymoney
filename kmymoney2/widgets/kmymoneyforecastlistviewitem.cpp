@@ -31,7 +31,7 @@
 
 #include "kmymoneyforecastlistviewitem.h"
 
-#include <kmymoney/kmymoneyglobalsettings.h>
+#include <kmymoneyglobalsettings.h>
 
 KMyMoneyForecastListViewItem::KMyMoneyForecastListViewItem (Q3ListView* parent, Q3ListViewItem* after, bool isNegative) :
   K3ListViewItem(parent, after),

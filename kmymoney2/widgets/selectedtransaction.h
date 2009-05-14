@@ -27,9 +27,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneytransaction.h>
-#include <kmymoney/mymoneyscheduled.h>
-#include <kmymoney/mymoneysplit.h>
+#include <mymoneytransaction.h>
+#include <mymoneyscheduled.h>
+#include <mymoneysplit.h>
 //Added by qt3to4:
 #include <Q3ValueList>
 

@@ -38,8 +38,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneyfile.h>
-#include <kmymoney/kmymoneyaccountcombo.h>
+#include <mymoneyfile.h>
+#include <kmymoneyaccountcombo.h>
 #include "kmymoneyaccountcompletion.h"
 
 KMyMoneyAccountCombo::KMyMoneyAccountCombo( QWidget* parent, const char* name ) :

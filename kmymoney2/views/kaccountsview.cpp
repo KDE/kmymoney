@@ -38,7 +38,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneyfile.h>
+#include <mymoneyfile.h>
 #include "kaccountsview.h"
 #include "kmymoneyview.h"
 #include "../widgets/klistviewsearchline.h"

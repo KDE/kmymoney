@@ -47,7 +47,7 @@ class QSplitter;
 
 #include "ui_kpayeesviewdecl.h"
 #include "kmymoneytransaction.h"
-#include <kmymoney/mymoneypayee.h>
+#include <mymoneypayee.h>
 
 class K3ListViewSearchLineWidget;
 

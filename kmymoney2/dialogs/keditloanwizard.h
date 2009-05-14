@@ -35,7 +35,7 @@
 // Project Includes
 
 
-#include <kmymoney/mymoneyaccount.h>
+#include <mymoneyaccount.h>
 
 /**
   * @author Thomas Baumgart

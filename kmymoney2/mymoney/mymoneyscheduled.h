@@ -36,8 +36,8 @@
 
 #include "mymoneytransaction.h"
 #include "mymoneyaccount.h"
-#include <kmymoney/export.h>
-#include <kmymoney/mymoneyobject.h>
+#include <export.h>
+#include <mymoneyobject.h>
 
 /**
   * @author Michael Edwardes

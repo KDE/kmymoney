@@ -39,8 +39,8 @@
 // So we can save this object
 #include <qstring.h>
 #include <qdatastream.h>
-#include <kmymoney/export.h>
-#include <kmymoney/mymoneyexception.h>
+#include <export.h>
+#include <mymoneyexception.h>
 
 // Check for standard definitions
 #ifdef HAVE_STDINT_H

@@ -32,8 +32,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneyfile.h>
-#include <kmymoney/kmymoneyutils.h>
+#include <mymoneyfile.h>
+#include <kmymoneyutils.h>
 #include "kconfirmmanualenterdlg.h"
 
 KConfirmManualEnterDlg::KConfirmManualEnterDlg(const MyMoneySchedule& schedule, QWidget* parent, const char* name) :

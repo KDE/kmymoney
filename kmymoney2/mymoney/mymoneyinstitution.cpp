@@ -28,7 +28,7 @@
 // Project Includes
 
 #include "mymoneyinstitution.h"
-#include <kmymoney/mymoneyexception.h>
+#include <mymoneyexception.h>
 //Added by qt3to4:
 #include <QPixmap>
 

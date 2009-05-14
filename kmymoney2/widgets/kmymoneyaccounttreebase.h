@@ -37,11 +37,11 @@ class Q3DragObject;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneyaccount.h>
-#include <kmymoney/mymoneyinstitution.h>
-#include <kmymoney/mymoneyprice.h>
-#include <kmymoney/mymoneysecurity.h>
-#include <kmymoney/mymoneybudget.h>
+#include <mymoneyaccount.h>
+#include <mymoneyinstitution.h>
+#include <mymoneyprice.h>
+#include <mymoneysecurity.h>
+#include <mymoneybudget.h>
 
 class KMyMoneyAccountTreeBaseItem;
 

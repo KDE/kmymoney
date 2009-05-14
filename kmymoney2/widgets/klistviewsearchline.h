@@ -25,7 +25,7 @@
 //Added by qt3to4:
 #include <Q3PopupMenu>
 #include <Q3ValueList>
-#include <kmymoney/export.h>
+#include <export.h>
 
 class K3ListView;
 class Q3ListViewItem;

@@ -31,9 +31,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneystatement.h>
-#include <kmymoney/mymoneyaccount.h>
-#include <kmymoney/export.h>
+#include <mymoneystatement.h>
+#include <mymoneyaccount.h>
+#include <export.h>
 
 namespace KMyMoneyPlugin {
 

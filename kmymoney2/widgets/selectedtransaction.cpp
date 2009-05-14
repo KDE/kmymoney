@@ -18,8 +18,8 @@
 #include "selectedtransaction.h"
 
 #include "register.h"
-#include <kmymoney/mymoneysplit.h>
-#include <kmymoney/mymoneyfile.h>
+#include <mymoneysplit.h>
+#include <mymoneyfile.h>
 //Added by qt3to4:
 #include <Q3ValueList>
 

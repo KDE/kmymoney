@@ -27,8 +27,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneyaccount.h>
-#include <kmymoney/mymoneyutils.h>
+#include <mymoneyaccount.h>
+#include <mymoneyutils.h>
 
 #include "../views/kforecastviewdecl.h"
 #include "../widgets/kmymoneyaccounttreeforecast.h"

@@ -33,7 +33,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneyfile.h>
+#include <mymoneyfile.h>
 #include "kinstitutionsview.h"
 #include "../kmymoneyglobalsettings.h"
 #include "../kmymoney2.h"

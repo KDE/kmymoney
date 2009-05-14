@@ -33,9 +33,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneyexception.h>
-#include <kmymoney/mymoneyaccount.h>
-#include <kmymoney/mymoneysplit.h>
+#include <mymoneyexception.h>
+#include <mymoneyaccount.h>
+#include <mymoneysplit.h>
 
 MyMoneyAccount::MyMoneyAccount() :
   m_fraction(-1)

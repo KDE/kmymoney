@@ -42,8 +42,8 @@
 #include "kcurrencycalculator.h"
 #include "../widgets/kmymoneypriceview.h"
 #include "kequitypriceupdatedlg.h"
-#include <kmymoney/kmymoneycurrencyselector.h>
-#include <kmymoney/mymoneyfile.h>
+#include <kmymoneycurrencyselector.h>
+#include <mymoneyfile.h>
 
 #include "../kmymoneyglobalsettings.h"
 

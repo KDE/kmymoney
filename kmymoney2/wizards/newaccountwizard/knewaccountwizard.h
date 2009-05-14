@@ -26,7 +26,7 @@ class QString;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/kmymoneywizard.h>
+#include <kmymoneywizard.h>
 class MyMoneyPrice;
 
 /**

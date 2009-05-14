@@ -24,6 +24,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/transactioneditorcontainer.h>
+#include <transactioneditorcontainer.h>
 
 

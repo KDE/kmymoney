@@ -35,7 +35,7 @@
 // Project Includes
 
 #include "kgpgkeyselectiondlg.h"
-#include <kmymoney/kgpgfile.h>
+#include <kgpgfile.h>
 #include <ktoolinvocation.h>
 
 KGpgKeySelectionDlg::KGpgKeySelectionDlg(QWidget *parent, const char *name) :

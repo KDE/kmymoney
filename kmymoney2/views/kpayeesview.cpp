@@ -62,9 +62,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneyfile.h>
-#include <kmymoney/kmymoneyaccounttree.h>
-#include <kmymoney/kmymoneyglobalsettings.h>
+#include <mymoneyfile.h>
+#include <kmymoneyaccounttree.h>
+#include <kmymoneyglobalsettings.h>
 #include <ktoolinvocation.h>
 #include "../widgets/klistviewsearchline.h"
 

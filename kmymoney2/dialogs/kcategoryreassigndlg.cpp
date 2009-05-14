@@ -31,10 +31,10 @@
 // Project Includes
 
 #include "kcategoryreassigndlg.h"
-#include <kmymoney/mymoneyfile.h>
-#include <kmymoney/kmymoneycategory.h>
-#include <kmymoney/kmymoneyaccountselector.h>
-#include <kmymoney/kguiutils.h>
+#include <mymoneyfile.h>
+#include <kmymoneycategory.h>
+#include <kmymoneyaccountselector.h>
+#include <kguiutils.h>
 
 KCategoryReassignDlg::KCategoryReassignDlg( QWidget* parent, const char* name) :
   KCategoryReassignDlgDecl( parent, name)

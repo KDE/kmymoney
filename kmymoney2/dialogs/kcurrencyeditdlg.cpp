@@ -51,11 +51,11 @@
 
 #include "kcurrencyeditdlg.h"
 
-#include <kmymoney/mymoneysecurity.h>
-#include <kmymoney/mymoneyfile.h>
-#include <kmymoney/kmymoneylistviewitem.h>
-#include <kmymoney/kmymoneyaccountselector.h>
-#include <kmymoney/kmymoneylineedit.h>
+#include <mymoneysecurity.h>
+#include <mymoneyfile.h>
+#include <kmymoneylistviewitem.h>
+#include <kmymoneyaccountselector.h>
+#include <kmymoneylineedit.h>
 
 #include "../widgets/kmymoneypriceview.h"
 

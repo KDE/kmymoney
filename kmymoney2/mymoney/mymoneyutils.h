@@ -28,7 +28,7 @@
 #include <qstring.h>
 #include <qdatetime.h>
 #include <q3valuelist.h>
-#include <kmymoney/export.h>
+#include <export.h>
 #if 0
 
 //Includes for STL support below

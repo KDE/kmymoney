@@ -28,8 +28,8 @@ class QString;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/kmymoneywizard.h>
-#include <kmymoney/mymoneysecurity.h>
+#include <kmymoneywizard.h>
+#include <mymoneysecurity.h>
 class MyMoneyPayee;
 class MyMoneyInstitution;
 class MyMoneyAccount;

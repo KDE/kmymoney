@@ -32,8 +32,8 @@
 // Project Includes
 
 #include <stdtransactionmatched.h>
-#include <kmymoney/kmymoneyglobalsettings.h>
-#include <kmymoney/register.h>
+#include <kmymoneyglobalsettings.h>
+#include <register.h>
 
 using namespace KMyMoneyRegister;
 using namespace KMyMoneyTransactionForm;

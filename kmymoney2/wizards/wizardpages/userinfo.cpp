@@ -28,7 +28,7 @@
 // Project Includes
 
 #include "userinfo.h"
-#include <kmymoney/mymoneypayee.h>
+#include <mymoneypayee.h>
 
 UserInfo::UserInfo(QWidget* parent, const char* name) :
   UserInfoDecl(parent, name)

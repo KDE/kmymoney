@@ -38,11 +38,11 @@
 
 #include "knewinvestmentwizard.h"
 
-#include <kmymoney/kmymoneylineedit.h>
-#include <kmymoney/kmymoneyedit.h>
-#include <kmymoney/mymoneysecurity.h>
-#include <kmymoney/mymoneyfile.h>
-#include <kmymoney/kmymoneycombo.h>
+#include <kmymoneylineedit.h>
+#include <kmymoneyedit.h>
+#include <mymoneysecurity.h>
+#include <mymoneyfile.h>
+#include <kmymoneycombo.h>
 #include <ktoolinvocation.h>
 #include "../widgets/kmymoneycurrencyselector.h"
 #include "../converter/webpricequote.h"

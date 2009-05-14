@@ -39,10 +39,10 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneyaccount.h>
-#include <kmymoney/mymoneysecurity.h>
-#include <kmymoney/mymoneyscheduled.h>
-#include <kmymoney/mymoneytransaction.h>
+#include <mymoneyaccount.h>
+#include <mymoneysecurity.h>
+#include <mymoneyscheduled.h>
+#include <mymoneytransaction.h>
 
 /**
   * @author Thomas Baumgart

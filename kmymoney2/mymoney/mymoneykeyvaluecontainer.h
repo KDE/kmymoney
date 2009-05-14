@@ -31,7 +31,7 @@
 #include <qstring.h>
 #include <qmap.h>
 #include <qdom.h>
-#include <kmymoney/export.h>
+#include <export.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes

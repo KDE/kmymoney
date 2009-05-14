@@ -36,8 +36,8 @@
 // Project Includes
 
 class kMyMoneyEdit;
-#include <kmymoney/kmymoneydateinput.h>
-#include <kmymoney/mymoneyaccount.h>
+#include <kmymoneydateinput.h>
+#include <mymoneyaccount.h>
 #include "ui_kendingbalancedlgdecl.h"
 
 /**

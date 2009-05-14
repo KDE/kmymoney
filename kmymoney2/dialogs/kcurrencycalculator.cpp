@@ -42,12 +42,12 @@
 
 #include "kcurrencycalculator.h"
 
-#include <kmymoney/kmymoneyedit.h>
-#include <kmymoney/kmymoneydateinput.h>
-#include <kmymoney/kmymoneycurrencyselector.h>
-#include <kmymoney/mymoneyprice.h>
-#include <kmymoney/mymoneytransaction.h>
-#include <kmymoney/kmymoneyglobalsettings.h>
+#include <kmymoneyedit.h>
+#include <kmymoneydateinput.h>
+#include <kmymoneycurrencyselector.h>
+#include <mymoneyprice.h>
+#include <mymoneytransaction.h>
+#include <kmymoneyglobalsettings.h>
 
 #include "../kmymoneyutils.h"
 

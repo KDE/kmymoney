@@ -34,11 +34,11 @@
 // Project Includes
 
 #include "kendingbalancedlg.h"
-#include <kmymoney/kmymoneyedit.h>
-#include <kmymoney/mymoneysplit.h>
-#include <kmymoney/mymoneyfile.h>
-#include <kmymoney/kmymoneycategory.h>
-#include <kmymoney/kmymoneyaccountselector.h>
+#include <kmymoneyedit.h>
+#include <mymoneysplit.h>
+#include <mymoneyfile.h>
+#include <kmymoneycategory.h>
+#include <kmymoneyaccountselector.h>
 #include <ktoolinvocation.h>
 
 #include "../dialogs/kcurrencycalculator.h"

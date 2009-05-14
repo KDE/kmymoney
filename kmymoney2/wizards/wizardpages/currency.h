@@ -27,7 +27,7 @@ class K3ListViewItem;
 // Project Includes
 
 #include "currencydecl.h"
-#include <kmymoney/mymoneysecurity.h>
+#include <mymoneysecurity.h>
 
 /**
   * @author Thomas Baumgart

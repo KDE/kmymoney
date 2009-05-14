@@ -41,10 +41,10 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/kmymoneywizard.h>
+#include <kmymoneywizard.h>
 #include "kmymoneywizard_p.h"
-#include <kmymoney/kmymoneytitlelabel.h>
-#include <kmymoney/kguiutils.h>
+#include <kmymoneytitlelabel.h>
+#include <kguiutils.h>
 #include <ktoolinvocation.h>
 
 KMyMoneyWizardPagePrivate::KMyMoneyWizardPagePrivate(QObject* parent, const char* name) :

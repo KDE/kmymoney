@@ -37,11 +37,11 @@
 
 #include "kbalancechartdlg.h"
 
-#include <kmymoney/mymoneyreport.h>
+#include <mymoneyreport.h>
 #include "../reports/kreportchartview.h"
 #include "../reports/pivottable.h"
 
-#include <kmymoney/kmymoneyglobalsettings.h>
+#include <kmymoneyglobalsettings.h>
 
 
 // in KOffice version < 1.5 KDCHART_PROPSET_NORMAL_DATA was a static const

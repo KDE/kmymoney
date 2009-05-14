@@ -52,12 +52,12 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneyfile.h>
+#include <mymoneyfile.h>
 
-#include <kmymoney/kmymoneyglobalsettings.h>
-#include <kmymoney/kmymoneytitlelabel.h>
-#include <kmymoney/kmymoneyedit.h>
-#include <kmymoney/kbudgetvalues.h>
+#include <kmymoneyglobalsettings.h>
+#include <kmymoneytitlelabel.h>
+#include <kmymoneyedit.h>
+#include <kbudgetvalues.h>
 #include "../widgets/kmymoneyaccounttreebudget.h"
 #include "kbudgetview.h"
 #include "../dialogs/knewbudgetdlg.h"

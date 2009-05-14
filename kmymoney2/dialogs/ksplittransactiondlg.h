@@ -35,9 +35,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneymoney.h>
-#include <kmymoney/mymoneyaccount.h>
-#include <kmymoney/mymoneytransaction.h>
+#include <mymoneymoney.h>
+#include <mymoneyaccount.h>
+#include <mymoneytransaction.h>
 
 class kMyMoneyEdit;
 class kMyMoneyLineEdit;

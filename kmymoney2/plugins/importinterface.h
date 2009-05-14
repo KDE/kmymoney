@@ -36,7 +36,7 @@ class KMenu;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/export.h>
+#include <export.h>
 
 namespace KMyMoneyPlugin {
 

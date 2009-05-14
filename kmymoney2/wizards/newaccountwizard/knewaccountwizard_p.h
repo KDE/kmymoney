@@ -35,13 +35,13 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/kmymoneywizard.h>
-#include <kmymoney/kmymoneydateinput.h>
-#include <kmymoney/kmymoneycurrencyselector.h>
-#include <kmymoney/mymoneyaccount.h>
-#include <kmymoney/kmymoneyedit.h>
-#include <kmymoney/kmymoneycategory.h>
-#include <kmymoney/kmymoneyaccounttreebase.h>
+#include <kmymoneywizard.h>
+#include <kmymoneydateinput.h>
+#include <kmymoneycurrencyselector.h>
+#include <mymoneyaccount.h>
+#include <kmymoneyedit.h>
+#include <kmymoneycategory.h>
+#include <kmymoneyaccounttreebase.h>
 
 #include "kinstitutionpagedecl.h"
 #include "kaccounttypepagedecl.h"

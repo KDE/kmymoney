@@ -29,7 +29,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/export.h>
+#include <export.h>
 
 /**
   * @author Thomas Baumgart

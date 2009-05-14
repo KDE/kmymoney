@@ -30,9 +30,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneyfile.h>
-#include <kmymoney/mymoneytransaction.h>
-#include <kmymoney/kmymoneyglobalsettings.h>
+#include <mymoneyfile.h>
+#include <mymoneytransaction.h>
+#include <kmymoneyglobalsettings.h>
 
 #include "kmergetransactionsdlg.h"
 //Added by qt3to4:

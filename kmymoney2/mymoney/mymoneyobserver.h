@@ -31,7 +31,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/export.h>
+#include <export.h>
 class MyMoneySubject;
 class QString;
 

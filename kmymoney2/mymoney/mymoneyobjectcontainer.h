@@ -30,14 +30,14 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/export.h>
-#include <kmymoney/mymoneytransaction.h>
-#include <kmymoney/mymoneyaccount.h>
-#include <kmymoney/mymoneyinstitution.h>
-#include <kmymoney/mymoneypayee.h>
-#include <kmymoney/mymoneyobject.h>
-#include <kmymoney/mymoneysecurity.h>
-#include <kmymoney/imymoneystorage.h>
+#include <export.h>
+#include <mymoneytransaction.h>
+#include <mymoneyaccount.h>
+#include <mymoneyinstitution.h>
+#include <mymoneypayee.h>
+#include <mymoneyobject.h>
+#include <mymoneysecurity.h>
+#include <imymoneystorage.h>
 
 /**
   * @author Thomas Baumgart

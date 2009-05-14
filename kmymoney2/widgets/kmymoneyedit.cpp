@@ -43,7 +43,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/kmymoneylineedit.h>
+#include <kmymoneylineedit.h>
 #include "kmymoneyedit.h"
 #include "kmymoneycalculator.h"
 #include "../mymoney/mymoneymoney.h"

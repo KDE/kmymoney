@@ -37,11 +37,11 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/export.h>
-#include <kmymoney/mymoneymoney.h>
-#include <kmymoney/mymoneyutils.h>
-#include <kmymoney/mymoneyobject.h>
-#include <kmymoney/mymoneykeyvaluecontainer.h>
+#include <export.h>
+#include <mymoneymoney.h>
+#include <mymoneyutils.h>
+#include <mymoneyobject.h>
+#include <mymoneykeyvaluecontainer.h>
 
 /**
   * Class that holds all the required information about a security that the user

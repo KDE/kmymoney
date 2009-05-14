@@ -37,10 +37,10 @@ class KToggleAction;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/viewinterface.h>
-#include <kmymoney/statementinterface.h>
-#include <kmymoney/importinterface.h>
-#include <kmymoney/export.h>
+#include <viewinterface.h>
+#include <statementinterface.h>
+#include <importinterface.h>
+#include <export.h>
 
 namespace KMyMoneyPlugin {
 

@@ -35,7 +35,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/export.h>
+#include <export.h>
 
 #ifdef _GLIBCPP_HAVE_MODFL
 #define HAVE_LONG_DOUBLE  1

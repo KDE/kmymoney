@@ -52,12 +52,12 @@ class Q3ListViewItem;
 // ----------------------------------------------------------------------------
 // Project Includes
 #ifdef _CHECK_MEMORY
-  #include <kmymoney/mymoneyutils.h>
+  #include <mymoneyutils.h>
 #endif
 
-#include <kmymoney/mymoneyscheduled.h>
-#include <kmymoney/mymoneyaccount.h>
-#include <kmymoney/mymoneyreport.h>
+#include <mymoneyscheduled.h>
+#include <mymoneyaccount.h>
+#include <mymoneyreport.h>
 #include "../reports/pivottable.h"
 #include "../reports/querytable.h"
 #include "../widgets/kmymoneyreportcontroldecl.h"

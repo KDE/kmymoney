@@ -39,9 +39,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/kmymoneydateinput.h>
-#include <kmymoney/kmymoneyedit.h>
-#include <kmymoney/kmymoneycategory.h>
+#include <kmymoneydateinput.h>
+#include <kmymoneyedit.h>
+#include <kmymoneycategory.h>
 
 #include "transactionform.h"
 #include "../kmymoneyutils.h"

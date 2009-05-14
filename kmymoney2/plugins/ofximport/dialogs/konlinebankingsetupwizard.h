@@ -37,7 +37,7 @@
 // Project Includes
 
 #include "konlinebankingsetupdecl.h"
-#include <kmymoney/mymoneykeyvaluecontainer.h>
+#include <mymoneykeyvaluecontainer.h>
 class OfxAppVersion;
 class OfxHeaderVersion;
 

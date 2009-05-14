@@ -41,9 +41,9 @@
 // Project Includes
 
 #include "kaccountselectdlg.h"
-#include <kmymoney/mymoneyinstitution.h>
-#include <kmymoney/mymoneyfile.h>
-#include <kmymoney/kmymoneycategory.h>
+#include <mymoneyinstitution.h>
+#include <mymoneyfile.h>
+#include <kmymoneycategory.h>
 #include "../widgets/kmymoneyaccountselector.h"
 
 #include <../kmymoney2.h>

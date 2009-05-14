@@ -47,7 +47,7 @@
 // Project Headers
 
 #include "kimportdlg.h"
-#include <kmymoney/mymoneyfile.h>
+#include <mymoneyfile.h>
 #include "mymoneyqifprofileeditor.h"
 #include "../converter/mymoneyqifprofile.h"
 

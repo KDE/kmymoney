@@ -28,7 +28,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/kmymoneysettings.h>
+#include <kmymoneysettings.h>
 
 class KMyMoneyGlobalSettings : public KMyMoneySettings
 {

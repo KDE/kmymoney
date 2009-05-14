@@ -32,10 +32,10 @@ class QDomDocument;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneyobject.h>
-#include <kmymoney/mymoneyaccount.h>
-#include <kmymoney/mymoneymoney.h>
-#include <kmymoney/export.h>
+#include <mymoneyobject.h>
+#include <mymoneyaccount.h>
+#include <mymoneymoney.h>
+#include <export.h>
 
 /**
   * This class defines a Budget within the MyMoneyEngine.  The Budget class

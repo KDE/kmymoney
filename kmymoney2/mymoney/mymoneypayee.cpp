@@ -26,7 +26,7 @@
 
 #include "mymoneypayee.h"
 #include "mymoneyutils.h"
-#include <kmymoney/mymoneyexception.h>
+#include <mymoneyexception.h>
 
 MyMoneyPayee MyMoneyPayee::null;
 

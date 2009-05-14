@@ -5170,6 +5170,13 @@ This page summarizes the data you entered. If you need to modify anything, pleas
   </widget>
   <layoutdefault spacing="6" margin="11"/>
   <customwidgets>
+  <customwidget>
+   <class>KIntNumInput</class>
+   <extends>QWidget</extends>
+   <header>knuminput.h</header>
+   <container>1</container>
+  </customwidget>
+
     <customwidget>
       <class>kMyMoneyLineEdit</class>
       <extends>QWidget</extends>

@@ -40,23 +40,23 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/kmymoneycombo.h>
-#include <kmymoney/kmymoneyedit.h>
-#include <kmymoney/kmymoneycategory.h>
-#include <kmymoney/mymoneyfile.h>
-#include <kmymoney/kmymoneycurrencyselector.h>
-#include <kmymoney/kmymoneyaccountselector.h>
-#include <kmymoney/kmymoneyaccounttree.h>
-#include <kmymoney/mymoneyfinancialcalculator.h>
-#include <kmymoney/kmymoneychecklistitem.h>
-#include <kmymoney/kmymoneylistviewitem.h>
-#include <kmymoney/kcurrencycalculator.h>
-#include <kmymoney/mymoneyaccount.h>
-#include <kmymoney/kmymoneyglobalsettings.h>
+#include <kmymoneycombo.h>
+#include <kmymoneyedit.h>
+#include <kmymoneycategory.h>
+#include <mymoneyfile.h>
+#include <kmymoneycurrencyselector.h>
+#include <kmymoneyaccountselector.h>
+#include <kmymoneyaccounttree.h>
+#include <mymoneyfinancialcalculator.h>
+#include <kmymoneychecklistitem.h>
+#include <kmymoneylistviewitem.h>
+#include <kcurrencycalculator.h>
+#include <mymoneyaccount.h>
+#include <kmymoneyglobalsettings.h>
 
 #include "knewaccountwizard.h"
 #include "knewaccountwizard_p.h"
-#include <kmymoney/kguiutils.h>
+#include <kguiutils.h>
 
 #include "../../dialogs/ksplittransactiondlg.h"
 #include "../../dialogs/kequitypriceupdatedlg.h"

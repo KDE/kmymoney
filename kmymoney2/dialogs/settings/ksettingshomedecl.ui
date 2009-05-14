@@ -204,5 +204,11 @@ Use the buttons and checkboxes to customize the layout of the home page.</string
       <extends>Q3ListView</extends>
       <header location="global">k3listview.h</header>
     </customwidget>
+  <customwidget>
+   <class>KIntNumInput</class>
+   <extends>QWidget</extends>
+   <header>knuminput.h</header>
+   <container>1</container>
+  </customwidget>
   </customwidgets>
 </ui>

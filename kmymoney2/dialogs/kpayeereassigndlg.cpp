@@ -33,8 +33,8 @@
 // Project Includes
 
 #include "kpayeereassigndlg.h"
-#include <kmymoney/kmymoneycombo.h>
-#include <kmymoney/kguiutils.h>
+#include <kmymoneycombo.h>
+#include <kguiutils.h>
 //Added by qt3to4:
 #include <Q3ValueList>
 

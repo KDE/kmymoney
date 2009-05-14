@@ -35,7 +35,7 @@
 // Project Includes
 
 #include "ksettingsgpg.h"
-#include <kmymoney/kgpgfile.h>
+#include <kgpgfile.h>
 
 #define RECOVER_KEY_ID      "0xD2B08440"
 #define RECOVER_KEY_ID_FULL "59B0F826D2B08440"

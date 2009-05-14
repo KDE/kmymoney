@@ -28,8 +28,8 @@
 // Project Includes
 
 #include "ui_knewinvestmentwizarddecl.h"
-#include <kmymoney/mymoneyaccount.h>
-#include <kmymoney/mymoneysecurity.h>
+#include <mymoneyaccount.h>
+#include <mymoneysecurity.h>
 
 /**
   * This class contains the implementation of the new investment wizard.

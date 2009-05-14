@@ -48,16 +48,16 @@
 // Project Headers
 
 #include "mymoneystatementreader.h"
-#include <kmymoney/mymoneyfile.h>
-#include <kmymoney/mymoneystatement.h>
-#include <kmymoney/kmymoneyglobalsettings.h>
-#include <kmymoney/transactioneditor.h>
-#include <kmymoney/kmymoneyedit.h>
+#include <mymoneyfile.h>
+#include <mymoneystatement.h>
+#include <kmymoneyglobalsettings.h>
+#include <transactioneditor.h>
+#include <kmymoneyedit.h>
 #include "../dialogs/kaccountselectdlg.h"
 #include "../dialogs/transactionmatcher.h"
 #include "../dialogs/kenterscheduledlg.h"
 #include "../kmymoney2.h"
-#include <kmymoney/kmymoneyaccountcombo.h>
+#include <kmymoneyaccountcombo.h>
 
 class MyMoneyStatementReader::Private
 {

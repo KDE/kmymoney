@@ -48,16 +48,16 @@
 
 #include "kfindtransactiondlg.h"
 
-#include <kmymoney/kmymoneydateinput.h>
-#include <kmymoney/kmymoneyedit.h>
-#include <kmymoney/kmymoneylineedit.h>
-#include <kmymoney/kmymoneyaccountselector.h>
-#include <kmymoney/mymoneyfile.h>
-#include <kmymoney/kmymoneychecklistitem.h>
-#include <kmymoney/kmymoneyglobalsettings.h>
-#include <kmymoney/register.h>
-#include <kmymoney/transaction.h>
-#include <kmymoney/kmymoneycombo.h>
+#include <kmymoneydateinput.h>
+#include <kmymoneyedit.h>
+#include <kmymoneylineedit.h>
+#include <kmymoneyaccountselector.h>
+#include <mymoneyfile.h>
+#include <kmymoneychecklistitem.h>
+#include <kmymoneyglobalsettings.h>
+#include <register.h>
+#include <transaction.h>
+#include <kmymoneycombo.h>
 #include <ktoolinvocation.h>
 
 #include "ksortoptiondlg.h"

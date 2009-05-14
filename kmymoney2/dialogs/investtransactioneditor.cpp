@@ -41,15 +41,15 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/investtransactioneditor.h>
-#include <kmymoney/kmymoneycategory.h>
-#include <kmymoney/kmymoneydateinput.h>
-#include <kmymoney/kmymoneyedit.h>
-#include <kmymoney/kmymoneylineedit.h>
-#include <kmymoney/kmymoneyaccountcompletion.h>
-#include <kmymoney/kmymoneyaccountselector.h>
-#include <kmymoney/mymoneyfile.h>
-#include <kmymoney/transactionform.h>
+#include <investtransactioneditor.h>
+#include <kmymoneycategory.h>
+#include <kmymoneydateinput.h>
+#include <kmymoneyedit.h>
+#include <kmymoneylineedit.h>
+#include <kmymoneyaccountcompletion.h>
+#include <kmymoneyaccountselector.h>
+#include <mymoneyfile.h>
+#include <transactionform.h>
 
 #include "../dialogs/ksplittransactiondlg.h"
 #include "../dialogs/kcurrencycalculator.h"

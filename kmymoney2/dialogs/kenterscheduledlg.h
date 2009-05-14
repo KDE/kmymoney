@@ -32,8 +32,8 @@
 class TransactionEditor;
 
 #include "ui_kenterscheduledlgdecl.h"
-#include <kmymoney/mymoneyscheduled.h>
-#include <kmymoney/kmymoneyutils.h>
+#include <mymoneyscheduled.h>
+#include <kmymoneyutils.h>
 
 /**
   * @author Thomas Baumgart

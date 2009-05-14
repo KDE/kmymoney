@@ -39,9 +39,9 @@ class KMenu;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneyaccount.h>
-#include <kmymoney/mymoneyinstitution.h>
-#include <kmymoney/export.h>
+#include <mymoneyaccount.h>
+#include <mymoneyinstitution.h>
+#include <export.h>
 class KMyMoneyViewBase;
 namespace KMyMoneyRegister {
   class SelectedTransactions;

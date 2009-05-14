@@ -40,8 +40,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneyinstitution.h>
-#include <kmymoney/mymoneyfile.h>
+#include <mymoneyinstitution.h>
+#include <mymoneyfile.h>
 #include "mymoneyofxconnector.h"
 #include "kofxdirectconnectdlg.h"
 

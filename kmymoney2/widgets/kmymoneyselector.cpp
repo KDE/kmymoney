@@ -32,9 +32,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/kmymoneyselector.h>
-#include <kmymoney/kmymoneylistviewitem.h>
-#include <kmymoney/kmymoneychecklistitem.h>
+#include <kmymoneyselector.h>
+#include <kmymoneylistviewitem.h>
+#include <kmymoneychecklistitem.h>
 
 #include "../kmymoneyglobalsettings.h"
 

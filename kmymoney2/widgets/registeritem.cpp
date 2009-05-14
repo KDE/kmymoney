@@ -24,8 +24,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/registeritem.h>
-#include <kmymoney/register.h>
+#include <registeritem.h>
+#include <register.h>
 
 #include "../kmymoneyglobalsettings.h"
 

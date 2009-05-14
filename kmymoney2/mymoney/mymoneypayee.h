@@ -30,8 +30,8 @@ class QStringList;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/export.h>
-#include <kmymoney/mymoneyobject.h>
+#include <export.h>
+#include <mymoneyobject.h>
 
 /**
   * This class represents a payee or receiver within the MyMoney engine.

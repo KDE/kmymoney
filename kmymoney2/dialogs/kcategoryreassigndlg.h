@@ -29,7 +29,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneyaccount.h>
+#include <mymoneyaccount.h>
 #include "kmymoney2/dialogs/kcategoryreassigndlgdecl.h"
 
 /**

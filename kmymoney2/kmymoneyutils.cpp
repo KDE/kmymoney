@@ -36,10 +36,10 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneyfile.h>
-#include <kmymoney/mymoneyforecast.h>
-#include <kmymoney/kmymoneyglobalsettings.h>
-#include <kmymoney/investtransactioneditor.h>
+#include <mymoneyfile.h>
+#include <mymoneyforecast.h>
+#include <kmymoneyglobalsettings.h>
+#include <investtransactioneditor.h>
 
 #include "kmymoneyutils.h"
 //Added by qt3to4:

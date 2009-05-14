@@ -27,7 +27,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/kmymoneyglobalsettings.h>
+#include <kmymoneyglobalsettings.h>
 
 QFont KMyMoneyGlobalSettings::listCellFont(void)
 {

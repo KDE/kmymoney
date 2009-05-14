@@ -31,8 +31,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/register.h>
-#include <kmymoney/export.h>
+#include <register.h>
+#include <export.h>
 
 namespace KMyMoneyRegister {
 

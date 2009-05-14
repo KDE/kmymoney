@@ -30,7 +30,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneytransaction.h>
+#include <mymoneytransaction.h>
 #include "ui_kconfirmmanualenterdlgdecl.h"
 
 class KConfirmManualEnterDlgDecl : public QWidget, public Ui::KConfirmManualEnterDlgDecl

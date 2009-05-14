@@ -41,8 +41,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneyfile.h>
-#include <kmymoney/kmymoneyaccounttree.h>
+#include <mymoneyfile.h>
+#include <kmymoneyaccounttree.h>
 #include "kcategoriesview.h"
 #include "../widgets/klistviewsearchline.h"
 #include "../kmymoneyglobalsettings.h"

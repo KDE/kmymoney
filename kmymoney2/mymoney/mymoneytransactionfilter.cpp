@@ -29,7 +29,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneyfile.h>
+#include <mymoneyfile.h>
 #include "mymoneytransactionfilter.h"
 //Added by qt3to4:
 #include <Q3ValueList>

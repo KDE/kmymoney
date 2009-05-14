@@ -28,7 +28,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/transactioneditor.h>
+#include <transactioneditor.h>
 
 class InvestTransactionEditor : public TransactionEditor
 {

@@ -47,7 +47,7 @@ class KComboBox;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneykeyvaluecontainer.h>
+#include <mymoneykeyvaluecontainer.h>
 
 class MyMoneyAccount;
 class MyMoneyInstitution;

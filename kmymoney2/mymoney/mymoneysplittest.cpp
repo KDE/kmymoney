@@ -15,7 +15,7 @@
  ***************************************************************************/
 
 #include "mymoneysplittest.h"
-#include <kmymoney/mymoneyexception.h>
+#include <mymoneyexception.h>
 
 MyMoneySplitTest::MyMoneySplitTest()
 {

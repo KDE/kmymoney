@@ -44,10 +44,10 @@
 // Project Includes
 
 #include "kmymoneyaccountselector.h"
-#include <kmymoney/mymoneyutils.h>
-#include <kmymoney/mymoneyfile.h>
-#include <kmymoney/kmymoneylistviewitem.h>
-#include <kmymoney/kmymoneychecklistitem.h>
+#include <mymoneyutils.h>
+#include <mymoneyfile.h>
+#include <kmymoneylistviewitem.h>
+#include <kmymoneychecklistitem.h>
 
 #include "../kmymoneyutils.h"
 #include "../kmymoneyglobalsettings.h"

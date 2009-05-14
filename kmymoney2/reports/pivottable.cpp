@@ -60,7 +60,7 @@
 #include "../mymoney/mymoneyforecast.h"
 
 
-#include <kmymoney/kmymoneyutils.h>
+#include <kmymoneyutils.h>
 
 namespace reports {
 

@@ -36,9 +36,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/export.h>
-#include <kmymoney/mymoneymoney.h>
-#include <kmymoney/mymoneysplit.h>
+#include <export.h>
+#include <mymoneymoney.h>
+#include <mymoneysplit.h>
 
 class QDomElement;
 class QDomDocument;

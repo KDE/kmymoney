@@ -96,8 +96,8 @@
 #include "../converter/mymoneygncreader.h"
 #include "../mymoney/storage/mymoneystorageanon.h"
 
-#include <kmymoney/transactioneditor.h>
-#include <kmymoney/kmymoneyglobalsettings.h>
+#include <transactioneditor.h>
+#include <kmymoneyglobalsettings.h>
 
 #include "kmymoneyview.h"
 #include "khomeview.h"
@@ -112,7 +112,7 @@
 #include "kbudgetview.h"
 #include "kforecastview.h"
 
-#include <kmymoney/kmymoneytitlelabel.h>
+#include <kmymoneytitlelabel.h>
 
 
 #include "../kmymoney2.h"

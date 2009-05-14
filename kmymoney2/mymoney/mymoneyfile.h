@@ -30,20 +30,20 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/imymoneystorage.h>
-#include <kmymoney/mymoneyexception.h>
-#include <kmymoney/mymoneyutils.h>
-#include <kmymoney/mymoneyinstitution.h>
-#include <kmymoney/mymoneyaccount.h>
-#include <kmymoney/mymoneytransaction.h>
-#include <kmymoney/mymoneypayee.h>
-#include <kmymoney/mymoneykeyvaluecontainer.h>
-#include <kmymoney/mymoneysecurity.h>
-#include <kmymoney/mymoneyprice.h>
-#include <kmymoney/mymoneyreport.h>
-#include <kmymoney/mymoneybudget.h>
-#include <kmymoney/mymoneyscheduled.h>
-#include <kmymoney/export.h>
+#include <imymoneystorage.h>
+#include <mymoneyexception.h>
+#include <mymoneyutils.h>
+#include <mymoneyinstitution.h>
+#include <mymoneyaccount.h>
+#include <mymoneytransaction.h>
+#include <mymoneypayee.h>
+#include <mymoneykeyvaluecontainer.h>
+#include <mymoneysecurity.h>
+#include <mymoneyprice.h>
+#include <mymoneyreport.h>
+#include <mymoneybudget.h>
+#include <mymoneyscheduled.h>
+#include <export.h>
 
 /**
   * @author Thomas Baumgart, Michael Edwardes, Kevin Tambascio

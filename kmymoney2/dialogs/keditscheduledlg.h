@@ -27,8 +27,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneyfile.h>
-#include <kmymoney/mymoneyscheduled.h>
+#include <mymoneyfile.h>
+#include <mymoneyscheduled.h>
 #include "ui_keditscheduledlgdecl.h"
 
 class TransactionEditor;

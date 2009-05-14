@@ -35,9 +35,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/kmymoneycombo.h>
-#include <kmymoney/mymoneyaccount.h>
-#include <kmymoney/kmymoneyutils.h>
+#include <kmymoneycombo.h>
+#include <mymoneyaccount.h>
+#include <kmymoneyutils.h>
 #include "../dialogs/kaccountselectdlgdecl.h"
 
 /**

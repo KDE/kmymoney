@@ -27,8 +27,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/register.h>
-#include <kmymoney/investtransactioneditor.h>
+#include <register.h>
+#include <investtransactioneditor.h>
 //Added by qt3to4:
 #include <Q3ValueList>
 

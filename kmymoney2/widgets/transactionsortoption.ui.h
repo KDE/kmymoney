@@ -20,7 +20,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/register.h>
+#include <register.h>
 #include "sortoptionlistitem.h"
 
 

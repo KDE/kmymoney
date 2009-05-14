@@ -35,12 +35,12 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/kmymoneyglobalsettings.h>
+#include <kmymoneyglobalsettings.h>
 
 #include "kinvestmentlistitem.h"
 
-#include <kmymoney/mymoneysecurity.h>
-#include <kmymoney/mymoneyfile.h>
+#include <mymoneysecurity.h>
+#include <mymoneyfile.h>
 
 KInvestmentListItem::KInvestmentListItem(K3ListView* parent, const MyMoneyAccount& account)
   : K3ListViewItem(parent)

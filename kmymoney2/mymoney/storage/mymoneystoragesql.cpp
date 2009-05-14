@@ -42,7 +42,7 @@
 
 #include "mymoneystoragesql.h"
 #include "imymoneyserialize.h"
-#include <kmymoney/kmymoneyglobalsettings.h>
+#include <kmymoneyglobalsettings.h>
 
 #define TRY try {
 #define CATCH } catch (MyMoneyException *e) {

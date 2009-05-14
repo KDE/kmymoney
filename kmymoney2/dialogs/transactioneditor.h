@@ -34,9 +34,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneyscheduled.h>
-#include <kmymoney/transactioneditorcontainer.h>
-#include <kmymoney/register.h>
+#include <mymoneyscheduled.h>
+#include <transactioneditorcontainer.h>
+#include <register.h>
 
 class KCurrencyExchange;
 class KMyMoneyCategory;

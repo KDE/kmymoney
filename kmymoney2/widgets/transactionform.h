@@ -37,9 +37,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneyaccount.h>
-#include <kmymoney/mymoneyobject.h>
-#include <kmymoney/register.h>
+#include <mymoneyaccount.h>
+#include <mymoneyobject.h>
+#include <register.h>
 
 #include "../kmymoneysettings.h"
 

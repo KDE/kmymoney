@@ -3,7 +3,7 @@
 #include <q3ptrstack.h>
 //Added by qt3to4:
 #include <Q3ValueList>
-#include <kmymoney/mymoneyexception.h>
+#include <mymoneyexception.h>
 
 #ifndef MYMONEYMAP_H
 #define MYMONEYMAP_H
@@ -269,8 +269,8 @@ protected:
 };
 
 #if MY_OWN_DEBUG
-#include <kmymoney/mymoneyaccount.h>
-#include <kmymoney/mymoneytransaction.h>
+#include <mymoneyaccount.h>
+#include <mymoneytransaction.h>
 main()
 {
   MyMoneyMap<QString, MyMoneyAccount> container;

@@ -31,12 +31,12 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/registeritem.h>
-#include <kmymoney/mymoneytransaction.h>
-#include <kmymoney/mymoneysplit.h>
-#include <kmymoney/mymoneysecurity.h>
-#include <kmymoney/selectedtransaction.h>
-#include <kmymoney/mymoneyaccount.h>
+#include <registeritem.h>
+#include <mymoneytransaction.h>
+#include <mymoneysplit.h>
+#include <mymoneysecurity.h>
+#include <selectedtransaction.h>
+#include <mymoneyaccount.h>
 
 class Q3Table;
 class TransactionEditor;

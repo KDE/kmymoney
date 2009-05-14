@@ -21,8 +21,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneykeyvaluecontainer.h>
-#include <kmymoney/mymoneyexception.h>
+#include <mymoneykeyvaluecontainer.h>
+#include <mymoneyexception.h>
 
 MyMoneyKeyValueContainer::MyMoneyKeyValueContainer()
 {

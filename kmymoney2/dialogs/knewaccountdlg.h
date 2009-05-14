@@ -32,9 +32,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneyaccount.h>
-#include <kmymoney/mymoneymoney.h>
-#include <kmymoney/kmymoneyedit.h>
+#include <mymoneyaccount.h>
+#include <mymoneymoney.h>
+#include <kmymoneyedit.h>
 
 #include "../dialogs/knewaccountdlgdecl.h"
 //Added by qt3to4:

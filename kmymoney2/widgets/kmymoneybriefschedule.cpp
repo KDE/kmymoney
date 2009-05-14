@@ -41,7 +41,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneyscheduled.h>
+#include <mymoneyscheduled.h>
 #include "kmymoneybriefschedule.h"
 #include "../kmymoneyutils.h"
 

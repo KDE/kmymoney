@@ -38,14 +38,14 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneyutils.h>
-#include <kmymoney/mymoneysplit.h>
-#include <kmymoney/register.h>
-#include <kmymoney/mymoneyaccount.h>
-#include <kmymoney/transaction.h>
-#include <kmymoney/mymoneypayee.h>
-#include <kmymoney/mymoneytransactionfilter.h>
-#include <kmymoney/mymoneyscheduled.h>
+#include <mymoneyutils.h>
+#include <mymoneysplit.h>
+#include <register.h>
+#include <mymoneyaccount.h>
+#include <transaction.h>
+#include <mymoneypayee.h>
+#include <mymoneytransactionfilter.h>
+#include <mymoneyscheduled.h>
 
 class kMyMoneyCompletion;
 class KMyMoneySelector;

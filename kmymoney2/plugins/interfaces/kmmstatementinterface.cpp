@@ -28,8 +28,8 @@
 
 #include "kmmstatementinterface.h"
 #include "../../kmymoney2.h"
-#include <kmymoney/mymoneyaccount.h>
-#include <kmymoney/mymoneykeyvaluecontainer.h>
+#include <mymoneyaccount.h>
+#include <mymoneykeyvaluecontainer.h>
 
 KMyMoneyPlugin::KMMStatementInterface::KMMStatementInterface(KMyMoney2App* app, QObject* parent, const char* name) :
   StatementInterface(parent, name),

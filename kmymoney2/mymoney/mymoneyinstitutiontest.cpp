@@ -15,7 +15,7 @@
  ***************************************************************************/
 
 #include "mymoneyinstitutiontest.h"
-#include <kmymoney/mymoneyexception.h>
+#include <mymoneyexception.h>
 
 MyMoneyInstitutionTest::MyMoneyInstitutionTest()
 {

@@ -37,7 +37,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneyfile.h>
+#include <mymoneyfile.h>
 #include "kforecastview.h"
 #include "../kmymoneyglobalsettings.h"
 #include "../kmymoney2.h"

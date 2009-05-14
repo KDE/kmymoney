@@ -37,8 +37,8 @@ class K3ListViewSearchLineWidget;
 // Project Includes
 
 #include "kscheduledviewdecl.h"
-#include <kmymoney/mymoneyfile.h>
-#include <kmymoney/mymoneyaccount.h>
+#include <mymoneyfile.h>
+#include <mymoneyaccount.h>
 #include "../widgets/kmymoneyscheduledcalendar.h"
 
 class KMenu;

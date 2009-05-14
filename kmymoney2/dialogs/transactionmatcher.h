@@ -27,8 +27,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneytransaction.h>
-#include <kmymoney/mymoneyaccount.h>
+#include <mymoneytransaction.h>
+#include <mymoneyaccount.h>
 class MyMoneySchedule;
 
 class TransactionMatcher

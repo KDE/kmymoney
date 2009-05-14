@@ -41,8 +41,8 @@
 // Project Includes
 
 #include "konlinebankingstatus.h"
-#include <kmymoney/mymoneykeyvaluecontainer.h>
-#include <kmymoney/mymoneyaccount.h>
+#include <mymoneykeyvaluecontainer.h>
+#include <mymoneyaccount.h>
 #include <libofx/libofx.h>
 #include "mymoneyofxconnector.h"
 

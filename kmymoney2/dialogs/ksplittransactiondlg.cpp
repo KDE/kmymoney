@@ -50,9 +50,9 @@
 // Project Includes
 
 #include "ksplittransactiondlg.h"
-#include <kmymoney/kmymoneyedit.h>
-#include <kmymoney/kmymoneylineedit.h>
-#include <kmymoney/mymoneyfile.h>
+#include <kmymoneyedit.h>
+#include <kmymoneylineedit.h>
+#include <mymoneyfile.h>
 
 #include "kmymoneysplittable.h"
 #include "../dialogs/ksplitcorrectiondlg.h"

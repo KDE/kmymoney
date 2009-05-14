@@ -46,14 +46,14 @@ class KPushButton;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneyaccount.h>
-#include <kmymoney/mymoneyscheduled.h>
-#include <kmymoney/mymoneyinstitution.h>
-#include <kmymoney/mymoneypayee.h>
-#include <kmymoney/mymoneybudget.h>
-#include <kmymoney/kmymoneyplugin.h>
-#include <kmymoney/register.h>
-#include <kmymoney/kmymoneyutils.h>
+#include <mymoneyaccount.h>
+#include <mymoneyscheduled.h>
+#include <mymoneyinstitution.h>
+#include <mymoneypayee.h>
+#include <mymoneybudget.h>
+#include <kmymoneyplugin.h>
+#include <register.h>
+#include <kmymoneyutils.h>
 
 class QSignalMapper;
 class KProgress;

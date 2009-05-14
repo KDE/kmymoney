@@ -437,6 +437,12 @@
       <extends>QComboBox</extends>
       <header location="global">kcombobox.h</header>
     </customwidget>
+  <customwidget>
+   <class>KIntNumInput</class>
+   <extends>QWidget</extends>
+   <header>knuminput.h</header>
+   <container>1</container>
+  </customwidget>
   </customwidgets>
   <connections>
     <connection>

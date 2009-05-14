@@ -44,7 +44,7 @@
 // Project Includes
 
 #include "kbudgetvalues.h"
-#include <kmymoney/kmymoneyedit.h>
+#include <kmymoneyedit.h>
 
 KBudgetValues::KBudgetValues(QWidget* parent, const char* name) :
   KBudgetValuesDecl(parent, name),

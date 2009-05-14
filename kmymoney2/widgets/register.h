@@ -49,15 +49,15 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 #ifdef _CHECK_MEMORY
-  #include <kmymoney/mymoneyutils.h>
+  #include <mymoneyutils.h>
 #endif
 
-#include <kmymoney/mymoneyaccount.h>
-#include <kmymoney/registeritem.h>
-#include <kmymoney/transaction.h>
-#include <kmymoney/transactioneditorcontainer.h>
-#include <kmymoney/selectedtransaction.h>
-//#include <kmymoney/transactionsortoption.h>
+#include <mymoneyaccount.h>
+#include <registeritem.h>
+#include <transaction.h>
+#include <transactioneditorcontainer.h>
+#include <selectedtransaction.h>
+//#include <transactionsortoption.h>
 
 class RegisterToolTip;
 

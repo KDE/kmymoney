@@ -36,7 +36,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneytemplate.h>
+#include <mymoneytemplate.h>
 
 #include "kaccounttemplateselector.h"
 

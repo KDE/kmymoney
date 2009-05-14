@@ -58,15 +58,15 @@
 
 #include "knewaccountdlg.h"
 
-#include <kmymoney/kmymoneyedit.h>
-#include <kmymoney/kmymoneydateinput.h>
-#include <kmymoney/mymoneyexception.h>
-#include <kmymoney/mymoneyfile.h>
-#include <kmymoney/kmymoneyaccounttree.h>
-#include <kmymoney/kmymoneyglobalsettings.h>
-#include <kmymoney/mymoneyreport.h>
-#include <kmymoney/kguiutils.h>
-#include <kmymoney/kmymoneycombo.h>
+#include <kmymoneyedit.h>
+#include <kmymoneydateinput.h>
+#include <mymoneyexception.h>
+#include <mymoneyfile.h>
+#include <kmymoneyaccounttree.h>
+#include <kmymoneyglobalsettings.h>
+#include <mymoneyreport.h>
+#include <kguiutils.h>
+#include <kmymoneycombo.h>
 
 #include "../widgets/kmymoneycurrencyselector.h"
 #include "../widgets/kmymoneyaccountselector.h"

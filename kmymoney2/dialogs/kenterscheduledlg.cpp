@@ -38,16 +38,16 @@
 
 #include "kenterscheduledlg.h"
 #include "../dialogs/kcurrencycalculator.h"
-#include <kmymoney/register.h>
-#include <kmymoney/transactionform.h>
-#include <kmymoney/transaction.h>
-#include <kmymoney/transactioneditor.h>
-#include <kmymoney/kmymoneyutils.h>
-#include <kmymoney/mymoneyfinancialcalculator.h>
-#include <kmymoney/kmymoneylineedit.h>
-#include <kmymoney/kmymoneycategory.h>
-#include <kmymoney/kmymoneyaccountselector.h>
-#include <kmymoney/kmymoneydateinput.h>
+#include <register.h>
+#include <transactionform.h>
+#include <transaction.h>
+#include <transactioneditor.h>
+#include <kmymoneyutils.h>
+#include <mymoneyfinancialcalculator.h>
+#include <kmymoneylineedit.h>
+#include <kmymoneycategory.h>
+#include <kmymoneyaccountselector.h>
+#include <kmymoneydateinput.h>
 #include <ktoolinvocation.h>
 
 #include "../kmymoney2.h"

@@ -35,8 +35,8 @@
 // Project Includes
 
 // #include "../views/kledgerview.h"
-#include <kmymoney/mymoneyutils.h>
-#include <kmymoney/mymoneytransactionfilter.h>
+#include <mymoneyutils.h>
+#include <mymoneytransactionfilter.h>
 
 #include "ui_kfindtransactiondlgdecl.h"
 

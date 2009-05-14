@@ -49,11 +49,11 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneyutils.h>
-#include <kmymoney/mymoneyaccount.h>
-#include <kmymoney/kmymoneyview.h>
-#include <kmymoney/register.h>
-#include <kmymoney/transactionform.h>
+#include <mymoneyutils.h>
+#include <mymoneyaccount.h>
+#include <kmymoneyview.h>
+#include <register.h>
+#include <transactionform.h>
 
 class Q3VBoxLayout;
 class Q3HBoxLayout;

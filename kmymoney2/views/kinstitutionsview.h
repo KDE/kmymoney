@@ -26,9 +26,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneyinstitution.h>
-#include <kmymoney/kmymoneyaccounttree.h>
-#include <kmymoney/mymoneyutils.h>
+#include <mymoneyinstitution.h>
+#include <kmymoneyaccounttree.h>
+#include <mymoneyutils.h>
 
 #include "ui_kinstitutionsviewdecl.h"
 //Added by qt3to4:

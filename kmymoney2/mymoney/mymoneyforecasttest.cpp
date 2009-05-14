@@ -21,7 +21,7 @@
 
 #include "mymoneybudget.h"
 
-#include <kmymoney/mymoneyexception.h>
+#include <mymoneyexception.h>
 
 #include "../kmymoneyglobalsettings.h"
 #include "../mymoney/storage/mymoneystoragedump.h"

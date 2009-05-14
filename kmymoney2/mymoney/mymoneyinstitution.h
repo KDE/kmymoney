@@ -31,9 +31,9 @@
 // Project Includes
 
 #include "mymoneyutils.h"
-#include <kmymoney/mymoneyobject.h>
-#include <kmymoney/mymoneykeyvaluecontainer.h>
-#include <kmymoney/export.h>
+#include <mymoneyobject.h>
+#include <mymoneykeyvaluecontainer.h>
+#include <export.h>
 
 class MyMoneyFile;
 class MyMoneyMoney;

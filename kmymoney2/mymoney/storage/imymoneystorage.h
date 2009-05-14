@@ -34,18 +34,18 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneyutils.h>
-#include <kmymoney/mymoneyinstitution.h>
-#include <kmymoney/mymoneyaccount.h>
-#include <kmymoney/mymoneytransaction.h>
-#include <kmymoney/mymoneypayee.h>
-#include <kmymoney/mymoneyscheduled.h>
-#include <kmymoney/mymoneyobserver.h>
-#include <kmymoney/mymoneytransactionfilter.h>
-#include <kmymoney/mymoneysecurity.h>
-#include <kmymoney/mymoneyprice.h>
-#include <kmymoney/mymoneyreport.h>
-#include <kmymoney/mymoneybudget.h>
+#include <mymoneyutils.h>
+#include <mymoneyinstitution.h>
+#include <mymoneyaccount.h>
+#include <mymoneytransaction.h>
+#include <mymoneypayee.h>
+#include <mymoneyscheduled.h>
+#include <mymoneyobserver.h>
+#include <mymoneytransactionfilter.h>
+#include <mymoneysecurity.h>
+#include <mymoneyprice.h>
+#include <mymoneyreport.h>
+#include <mymoneybudget.h>
 
 /**
   * @author Thomas Baumgart

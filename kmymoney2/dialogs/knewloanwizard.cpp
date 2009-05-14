@@ -47,10 +47,10 @@
 #include "knewloanwizard.h"
 
 #include "../kmymoneyutils.h"
-#include <kmymoney/kmymoneylineedit.h>
-#include <kmymoney/kmymoneydateinput.h>
-#include <kmymoney/kmymoneyedit.h>
-#include <kmymoney/kmymoneyaccountselector.h>
+#include <kmymoneylineedit.h>
+#include <kmymoneydateinput.h>
+#include <kmymoneyedit.h>
+#include <kmymoneyaccountselector.h>
 #include "../widgets/kmymoneycombo.h"
 
 #include "../dialogs/knewaccountdlg.h"

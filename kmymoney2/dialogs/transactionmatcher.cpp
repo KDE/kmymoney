@@ -27,9 +27,9 @@
 // Project Includes
 
 #include "transactionmatcher.h"
-#include <kmymoney/mymoneyfile.h>
-#include <kmymoney/mymoneyscheduled.h>
-#include <kmymoney/kmymoneyutils.h>
+#include <mymoneyfile.h>
+#include <mymoneyscheduled.h>
+#include <kmymoneyutils.h>
 //Added by qt3to4:
 #include <Q3ValueList>
 

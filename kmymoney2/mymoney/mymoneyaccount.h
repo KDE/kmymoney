@@ -32,11 +32,11 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneymoney.h>
-#include <kmymoney/mymoneyobject.h>
-#include <kmymoney/mymoneykeyvaluecontainer.h>
-#include <kmymoney/mymoneysecurity.h>
-#include <kmymoney/export.h>
+#include <mymoneymoney.h>
+#include <mymoneyobject.h>
+#include <mymoneykeyvaluecontainer.h>
+#include <mymoneysecurity.h>
+#include <export.h>
 #include "mymoneyutils.h"
 class MyMoneyTransaction;
 class MyMoneyInstitution;

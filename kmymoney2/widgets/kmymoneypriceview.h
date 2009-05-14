@@ -35,9 +35,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/kmymoneylistviewitem.h>
-//#include <kmymoney/mymoneymoney.h>
-#include <kmymoney/mymoneyprice.h>
+#include <kmymoneylistviewitem.h>
+//#include <mymoneymoney.h>
+#include <mymoneyprice.h>
 
 /**
   * @author Thomas Baumgart

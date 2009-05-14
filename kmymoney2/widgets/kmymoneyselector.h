@@ -35,7 +35,7 @@ class K3ListView;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneyutils.h>
+#include <mymoneyutils.h>
 
 /**
   * This class implements a general selector for id based objects. It is based

@@ -30,11 +30,11 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneyobject.h>
-#include <kmymoney/mymoneyaccount.h>
-#include <kmymoney/mymoneymoney.h>
-#include <kmymoney/mymoneyscheduled.h>
-#include <kmymoney/export.h>
+#include <mymoneyobject.h>
+#include <mymoneyaccount.h>
+#include <mymoneymoney.h>
+#include <mymoneyscheduled.h>
+#include <export.h>
 #include "mymoneybudget.h"
 
 /**

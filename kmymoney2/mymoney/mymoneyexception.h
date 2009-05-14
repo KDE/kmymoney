@@ -29,7 +29,7 @@
 // QT Includes
 
 #include <qstring.h>
-#include <kmymoney/export.h>
+#include <export.h>
 /**
   * @file
   * @author Thomas Baumgart

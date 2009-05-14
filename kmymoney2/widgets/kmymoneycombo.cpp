@@ -42,11 +42,11 @@
 
 #include "kmymoneycombo.h"
 #include "kmymoneyselector.h"
-#include <kmymoney/kmymoneycompletion.h>
-#include <kmymoney/kmymoneylineedit.h>
-#include <kmymoney/mymoneysplit.h>
-#include <kmymoney/registeritem.h>
-#include <kmymoney/mymoneyscheduled.h>
+#include <kmymoneycompletion.h>
+#include <kmymoneylineedit.h>
+#include <mymoneysplit.h>
+#include <registeritem.h>
+#include <mymoneyscheduled.h>
 #include "../kmymoneyutils.h"
 
 KMyMoneyCombo::KMyMoneyCombo(QWidget *w, const char *name) :

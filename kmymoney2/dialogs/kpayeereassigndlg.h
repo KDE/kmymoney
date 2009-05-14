@@ -32,7 +32,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneypayee.h>
+#include <mymoneypayee.h>
 #include "ui_kpayeereassigndlgdecl.h"
 
 /**

@@ -24,7 +24,7 @@
 // KDE Includes
 
 #include <k3listview.h>
-#include <kmymoney/kmymoneyaccounttree.h>
+#include <kmymoneyaccounttree.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes

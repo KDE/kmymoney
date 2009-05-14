@@ -41,12 +41,12 @@ class Q3VBoxLayout;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneyaccount.h>
-#include <kmymoney/mymoneyinstitution.h>
-#include <kmymoney/mymoneytransaction.h>
-#include <kmymoney/mymoneyscheduled.h>
-#include <kmymoney/mymoneysecurity.h>
-#include <kmymoney/selectedtransaction.h>
+#include <mymoneyaccount.h>
+#include <mymoneyinstitution.h>
+#include <mymoneytransaction.h>
+#include <mymoneyscheduled.h>
+#include <mymoneysecurity.h>
+#include <selectedtransaction.h>
 
 class KHomeView;
 class KAccountsView;

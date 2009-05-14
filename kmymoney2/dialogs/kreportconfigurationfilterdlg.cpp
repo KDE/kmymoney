@@ -63,13 +63,13 @@
 // Project Includes
 
 #include "kreportconfigurationfilterdlg.h"
-#include <kmymoney/kmymoneydateinput.h>
-#include <kmymoney/kmymoneyedit.h>
-#include <kmymoney/kmymoneylineedit.h>
-#include <kmymoney/kmymoneyaccountselector.h>
-#include <kmymoney/mymoneyfile.h>
-#include <kmymoney/mymoneyreport.h>
-#include <kmymoney/kmymoneycombo.h>
+#include <kmymoneydateinput.h>
+#include <kmymoneyedit.h>
+#include <kmymoneylineedit.h>
+#include <kmymoneyaccountselector.h>
+#include <mymoneyfile.h>
+#include <mymoneyreport.h>
+#include <kmymoneycombo.h>
 #include <ktoolinvocation.h>
 #include "../widgets/kmymoneyreportconfigtab1decl.h"
 #include "../widgets/kmymoneyreportconfigtab2decl.h"

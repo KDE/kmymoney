@@ -43,8 +43,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneytransaction.h>
-#include <kmymoney/export.h>
+#include <mymoneytransaction.h>
+#include <export.h>
 
 /**
   * @author Thomas Baumgart

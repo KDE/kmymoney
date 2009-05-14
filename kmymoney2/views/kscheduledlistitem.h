@@ -36,7 +36,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneyscheduled.h>
+#include <mymoneyscheduled.h>
 
 /**
   * The list view item that describes a scheduled transaction.

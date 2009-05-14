@@ -32,8 +32,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneysecurity.h>
-#include <kmymoney/mymoneyaccount.h>
+#include <mymoneysecurity.h>
+#include <mymoneyaccount.h>
 #include "kinvestmentviewdecl.h"
 #include "kinvestmentlistitem.h"
 

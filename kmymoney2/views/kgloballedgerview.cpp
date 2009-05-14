@@ -50,15 +50,15 @@
 
 #include "kgloballedgerview.h"
 
-#include <kmymoney/mymoneyaccount.h>
-#include <kmymoney/mymoneyfile.h>
-#include <kmymoney/kmymoneyaccountcombo.h>
-#include <kmymoney/kmymoneytitlelabel.h>
-#include <kmymoney/register.h>
-#include <kmymoney/transactioneditor.h>
-#include <kmymoney/selectedtransaction.h>
+#include <mymoneyaccount.h>
+#include <mymoneyfile.h>
+#include <kmymoneyaccountcombo.h>
+#include <kmymoneytitlelabel.h>
+#include <register.h>
+#include <transactioneditor.h>
+#include <selectedtransaction.h>
 
-#include <kmymoney/kmymoneyglobalsettings.h>
+#include <kmymoneyglobalsettings.h>
 
 #include "../widgets/registersearchline.h"
 #include "../dialogs/ksortoptiondlg.h"

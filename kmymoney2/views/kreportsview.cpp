@@ -67,9 +67,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/mymoneyfile.h>
-#include <kmymoney/mymoneyreport.h>
-#include <kmymoney/kmymoneyglobalsettings.h>
+#include <mymoneyfile.h>
+#include <mymoneyreport.h>
+#include <kmymoneyglobalsettings.h>
 
 #include "kreportsview.h"
 #include "../reports/querytable.h"

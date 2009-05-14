@@ -45,8 +45,8 @@
 // Project Includes
 
 #include "kmymoneypriceview.h"
-#include <kmymoney/mymoneysecurity.h>
-#include <kmymoney/mymoneyfile.h>
+#include <mymoneysecurity.h>
+#include <mymoneyfile.h>
 #include "../kmymoneyglobalsettings.h"
 #if 0
 #include "../widgets/kmymoneycurrencyselector.h"
