@@ -54,7 +54,7 @@ KForecastView::KForecastView(QWidget *parent, const char *name) :
   for(int i=0; i < MaxViewTabs; ++i)
     m_needReload[i] = false;
 
-  KConfig *config = KGlobal::config();
+  KSharedConfigPtr config = KGlobal::config();
   config->setGroup("Last Use Settings");
   m_tab->setCurrentPage(config->readNumEntry("KForecastView_LastType", 0));
 
@@ -85,7 +85,7 @@ void KForecastView::slotTabChanged(QWidget* _tab)
   ForecastViewTab tab = static_cast<ForecastViewTab>(m_tab->indexOf(_tab));
 
   // remember this setting for startup
-  KConfig *config = KGlobal::config();
+  KSharedConfigPtr config = KGlobal::config();
   config->setGroup("Last Use Settings");
   config->writeEntry("KForecastView_LastType", tab);
 

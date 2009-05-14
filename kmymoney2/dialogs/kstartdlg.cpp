@@ -132,7 +132,7 @@ void KStartDlg::readConfig()
   QString value;
   unsigned int i = 1;
 
-  KConfig *config = KGlobal::config();
+  KSharedConfigPtr config = KGlobal::config();
   KIconLoader *il = KIconLoader::global();
 
   // read file list
@@ -169,7 +169,7 @@ void KStartDlg::readConfig()
 /** Write config window */
 void KStartDlg::writeConfig()
 {
-  KConfig *config = KGlobal::config();
+  KSharedConfigPtr config = KGlobal::config();
  
   KConfigGroup grp = config->group("Start Dialog");
   grp.writeEntry("Geometry", this->size() );

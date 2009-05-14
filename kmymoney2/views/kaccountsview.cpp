@@ -100,7 +100,7 @@ KAccountsView::KAccountsView(QWidget *parent, const char *name) :
   for(int i=0; i < MaxViewTabs; ++i)
     m_needReload[i] = false;
 
-  KConfig *config = KGlobal::config();
+  KSharedConfigPtr config = KGlobal::config();
   config->setGroup("Last Use Settings");
   m_tab->setCurrentPage(config->readNumEntry("KAccountsView_LastType", 0));
 
@@ -137,7 +137,7 @@ void KAccountsView::slotTabChanged(QWidget* _tab)
   AccountsViewTab tab = static_cast<AccountsViewTab>(m_tab->indexOf(_tab));
 
   // remember this setting for startup
-  KConfig *config = KGlobal::config();
+  KSharedConfigPtr config = KGlobal::config();
   config->setGroup("Last Use Settings");
   config->writeEntry("KAccountsView_LastType", tab);
 

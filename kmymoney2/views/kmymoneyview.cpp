@@ -898,7 +898,7 @@ bool KMyMoneyView::initializeStorage()
     selectBaseCurrency();
   }
 
-  KConfig *config = KGlobal::config();
+  KSharedConfigPtr config = KGlobal::config();
   int page;
   config->setGroup("General Options");
   if(KMyMoneyGlobalSettings::startLastViewSelected() != 0) {
@@ -1638,7 +1638,7 @@ void KMyMoneyView::progressCallback(int current, int total, const QString& msg)
 
 void KMyMoneyView::slotRememberPage(QWidget* w)
 {
-  KConfig *config = KGlobal::config();
+  KSharedConfigPtr config = KGlobal::config();
   config->setGroup("Last Use Settings");
   config->writeEntry("LastViewSelected", pageIndex(w));
   config->sync();

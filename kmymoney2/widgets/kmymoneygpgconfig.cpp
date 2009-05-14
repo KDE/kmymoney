@@ -63,7 +63,7 @@ void kMyMoneyGPGConfig::resetConfig(void)
 
 void kMyMoneyGPGConfig::readConfig(void)
 {
-  KConfig *config = KGlobal::config();
+  KSharedConfigPtr config = KGlobal::config();
   config->setGroup("General Options");
   m_resetUseEncryption = config->readBoolEntry("WriteDataEncrypted", false);
   m_resetRecover = config->readBoolEntry("EncryptRecover", false);
@@ -74,7 +74,7 @@ void kMyMoneyGPGConfig::readConfig(void)
 
 void kMyMoneyGPGConfig::writeConfig(void)
 {
-  KConfig *config = KGlobal::config();
+  KSharedConfigPtr config = KGlobal::config();
   config->setGroup("General Options");
   config->writeEntry("WriteDataEncrypted", m_useEncryption->isChecked());
   config->writeEntry("EncryptRecover", m_recover->isChecked());
