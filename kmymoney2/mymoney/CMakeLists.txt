@@ -18,7 +18,7 @@ SET(kmm_mymoney_LIB_SRCS
   mymoneyaccount.cpp
   mymoneyreport.cpp mymoneystatement.cpp mymoneyprice.cpp mymoneybudget.cpp
   mymoneyobjectcontainer.cpp 
-  #mymoneyforecast.cpp
+  mymoneyforecast.cpp
   )
 
 

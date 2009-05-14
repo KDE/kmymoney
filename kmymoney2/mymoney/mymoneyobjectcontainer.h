@@ -59,7 +59,7 @@ public:
   const MyMoneyInstitution& institution(const QString& id);
   const MyMoneySchedule& schedule(const QString& id);
 
-  void account(Q3ValueList<MyMoneyAccount>& list);
+  void account(QLinkedList<MyMoneyAccount>& list);
   void payee(Q3ValueList<MyMoneyPayee>& list);
   void institution(Q3ValueList<MyMoneyInstitution>& list);
 

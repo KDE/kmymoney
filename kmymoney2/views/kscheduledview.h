@@ -36,7 +36,7 @@ class K3ListViewSearchLineWidget;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kscheduledviewdecl.h"
+#include "ui_kscheduledviewdecl.h"
 #include <mymoneyfile.h>
 #include <mymoneyaccount.h>
 #include "../widgets/kmymoneyscheduledcalendar.h"
@@ -53,6 +53,15 @@ class KMenu;
   *
   * @short A class to encapsulate recurring transaction operations.
   */
+
+class KScheduledViewDecl : public QDialog, public Ui::KScheduledViewDecl
+{
+public:
+  KScheduledViewDecl( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
+
 class KScheduledView : public KScheduledViewDecl
 {
   Q_OBJECT

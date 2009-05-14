@@ -311,13 +311,13 @@ void KScheduledView::slotRearrange(void)
 
 void KScheduledView::readConfig(void)
 {
-  KConfig *config = KGlobal::config();
-  config->setGroup("Last Use Settings");
-  m_openBills = config->readBoolEntry("KScheduleView_openBills", true);
-  m_openDeposits = config->readBoolEntry("KScheduleView_openDeposits", true);
-  m_openTransfers = config->readBoolEntry("KScheduleView_openTransfers", true);
-  m_openLoans = config->readBoolEntry("KScheduleView_openLoans", true);
-  m_tabWidget->setCurrentPage(config->readNumEntry("KScheduleView_tab", 0));
+  KSharedConfigPtr config = KGlobal::config();
+  KConfigGroup grp = config->group("Last Use Settings");
+  m_openBills = grp.readEntry("KScheduleView_openBills", true);
+  m_openDeposits = grp.readEntry("KScheduleView_openDeposits", true);
+  m_openTransfers = grp.readEntry("KScheduleView_openTransfers", true);
+  m_openLoans = grp.readEntry("KScheduleView_openLoans", true);
+  m_tabWidget->setCurrentPage(grp.readEntry("KScheduleView_tab", 0));
 
   m_qlistviewScheduled->header()->setFont(KMyMoneyGlobalSettings::listHeaderFont());
   m_qlistviewScheduled->restoreLayout(KGlobal::config(), "Schedule View Settings");
@@ -326,13 +326,13 @@ void KScheduledView::readConfig(void)
 
 void KScheduledView::writeConfig(void)
 {
-  KConfig *config = KGlobal::config();
-  config->setGroup("Last Use Settings");
-  config->writeEntry("KScheduleView_openBills", m_openBills);
-  config->writeEntry("KScheduleView_openDeposits", m_openDeposits);
-  config->writeEntry("KScheduleView_openTransfers", m_openTransfers);
-  config->writeEntry("KScheduleView_openLoans", m_openLoans);
-  config->writeEntry("KScheduleView_tab", m_tabWidget->currentPageIndex());
+  KSharedConfigPtr config = KGlobal::config();
+  KConfigGroup grp = config->group("Last Use Settings");
+  grp.writeEntry("KScheduleView_openBills", m_openBills);
+  grp.writeEntry("KScheduleView_openDeposits", m_openDeposits);
+  grp.writeEntry("KScheduleView_openTransfers", m_openTransfers);
+  grp.writeEntry("KScheduleView_openLoans", m_openLoans);
+  grp.writeEntry("KScheduleView_tab", m_tabWidget->currentPageIndex());
   config->sync();
 
   m_qlistviewScheduled->saveLayout(KGlobal::config(), "Schedule View Settings");

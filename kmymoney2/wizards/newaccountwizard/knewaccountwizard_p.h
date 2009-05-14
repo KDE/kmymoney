@@ -43,23 +43,32 @@
 #include <kmymoneycategory.h>
 #include <kmymoneyaccounttreebase.h>
 
-#include "kinstitutionpagedecl.h"
-#include "kaccounttypepagedecl.h"
-#include "kbrokeragepagedecl.h"
-#include "kschedulepagedecl.h"
-#include "kgeneralloaninfopagedecl.h"
-#include "kloandetailspagedecl.h"
-#include "kloanpaymentpagedecl.h"
-#include "kloanschedulepagedecl.h"
-#include "kloanpayoutpagedecl.h"
-#include "khierarchypagedecl.h"
-#include "kaccountsummarypagedecl.h"
+#include "ui_kinstitutionpagedecl.h"
+#include "ui_kaccounttypepagedecl.h"
+#include "ui_kbrokeragepagedecl.h"
+#include "ui_kschedulepagedecl.h"
+#include "ui_kgeneralloaninfopagedecl.h"
+#include "ui_kloandetailspagedecl.h"
+#include "ui_kloanpaymentpagedecl.h"
+#include "ui_kloanschedulepagedecl.h"
+#include "ui_kloanpayoutpagedecl.h"
+#include "ui_khierarchypagedecl.h"
+#include "ui_kaccountsummarypagedecl.h"
 
 class Wizard;
 class MyMoneyInstitution;
 class KMyMoneyAccountTreeItem;
 
 namespace NewAccountWizard {
+
+
+class KInstitutionPageDecl : public QDialog, public Ui::KInstitutionPageDecl
+{
+public:
+  KInstitutionPageDecl( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
 
 class InstitutionPage : public KInstitutionPageDecl, public WizardPage<Wizard>
 {

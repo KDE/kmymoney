@@ -656,7 +656,8 @@ void MyMoneyForecast::addScheduledTransactions (void)
   if(schedule.count() > 0) {
     Q3ValueList<MyMoneySchedule>::Iterator it;
     do {
-      qBubbleSort(schedule);
+#warning "port it to kde4"	    
+      //qBubbleSort(schedule);
       it = schedule.begin();
       if(it == schedule.end())
         break;

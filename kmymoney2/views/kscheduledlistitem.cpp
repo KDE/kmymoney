@@ -140,9 +140,9 @@ KScheduledListItem::KScheduledListItem(KScheduledListItem *parent, const MyMoney
       setText(4, i18n("Finished"));
     }
     else
-      setText(4, KGlobal::locale()->formatDate(schedule.nextDueDate(), true));
+      setText(4, KGlobal::locale()->formatDate(schedule.nextDueDate()));
 
-    setText(5, i18n(schedule.occurenceToString()));
+    setText(5, i18n(schedule.occurenceToString().toLatin1()));
     setText(6, KMyMoneyUtils::paymentMethodToString(schedule.paymentType()));
   }
   catch (MyMoneyException *e)
@@ -161,7 +161,9 @@ void KScheduledListItem::paintCell(QPainter* p, const QColorGroup& cg, int colum
 {
   QColorGroup cg2(cg);
 
-  QColor textColour = KGlobalSettings::textColor();
+  QColor textColour;
+#warning "port to kde4";  
+  //QColor textColour = KGlobalSettings::textColor();
   QFont cellFont = KMyMoneyGlobalSettings::listCellFont();
 
   // avoid colorizing lines that do not contain a schedule

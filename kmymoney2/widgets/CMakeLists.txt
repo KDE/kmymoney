@@ -41,7 +41,7 @@ KMM_CREATE_LINKS_BIN( transactionsortoption.h )
 # Common sources for libkmymoney.so and libwidgets.a that do not
 # contain the KMM_DESIGNER flag
 SET(_uncritial_common_sources
-	#kbudgetvalues.cpp
+	kbudgetvalues.cpp
 	#kguiutils.cpp
   kmymoneyaccountselector.cpp
   kmymoneyaccounttreebudget.cpp
@@ -105,7 +105,7 @@ KDE4_ADD_LIBRARY(kmymoney_base STATIC ${_uncritial_common_sources})
 
 KDE4_ADD_LIBRARY(kmymoney SHARED
  ${_critial_common_sources} ${_uncritial_common_sources} kmmwidgets.cpp)
-TARGET_LINK_LIBRARIES(kmymoney kmm_mymoney ${KDE4_KDEUI_LIBS})
+TARGET_LINK_LIBRARIES(kmymoney kmm_mymoney ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS})
 
 # Build directly with INSTALL_RPATH.
 # This avoids relinking (and rerunning uic) on 'make install'

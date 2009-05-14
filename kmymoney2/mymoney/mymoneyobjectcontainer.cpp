@@ -104,7 +104,7 @@ const T& MyMoneyObjectContainer::a(const QString& id) \
   return dynamic_cast<const T&>(*(*it)); \
 }
 
-void MyMoneyObjectContainer::account(Q3ValueList<MyMoneyAccount>& list)
+void MyMoneyObjectContainer::account(QLinkedList<MyMoneyAccount>& list)
 {
   QMap<QString, const MyMoneyObject*>::const_iterator it;
   for(it = m_map.begin(); it != m_map.end(); ++it) {
