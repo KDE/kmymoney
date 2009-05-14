@@ -562,6 +562,12 @@ You can use &lt;b&gt;View/Show all accounts&lt;/b&gt; to temporarily show hidden
       <extends>QComboBox</extends>
       <header location="global">kcombobox.h</header>
     </customwidget>
+  <customwidget>
+   <class>KIntSpinBox</class>
+   <extends>QSpinBox</extends>
+   <header>knuminput.h</header>
+  </customwidget>
+
   </customwidgets>
   <connections>
     <connection>

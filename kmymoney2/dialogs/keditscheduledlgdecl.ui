@@ -443,6 +443,12 @@
    <header>knuminput.h</header>
    <container>1</container>
   </customwidget>
+  <customwidget>
+   <class>KIntSpinBox</class>
+   <extends>QSpinBox</extends>
+   <header>knuminput.h</header>
+  </customwidget>
+
   </customwidgets>
   <connections>
     <connection>

@@ -114,6 +114,14 @@
   </widget>
   <layoutdefault spacing="6" margin="11"/>
   <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
+ <customwidgets>
+  </customwidget>
+  <customwidget>
+   <class>KIntSpinBox</class>
+   <extends>QSpinBox</extends>
+   <header>knuminput.h</header>
+  </customwidget>
+  </customwidgets>
   <connections>
     <connection>
       <sender>kcfg_CheckSchedule</sender>
