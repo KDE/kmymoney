@@ -43,7 +43,12 @@ include( MacroLibrary )
 
 add_definitions( ${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
 add_definitions (-DQT3_SUPPORT -DQT3_SUPPORT_WARNINGS)
-include_directories( ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR}/kmymoney2/dialogs/)
+include_directories( ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES} 
+	${CMAKE_CURRENT_BINARY_DIR}/kmymoney2/dialogs/ 
+	${CMAKE_CURRENT_SOURCE_DIR}/kmymoney2/widgets/
+	${CMAKE_CURRENT_SOURCE_DIR}/kmymoney2/mymoney/
+	${CMAKE_CURRENT_SOURCE_DIR}/kmymoney2/mymoney/storage/
+        ${CMAKE_CURRENT_SOURCE_DIR}/libkgpgfile/ )
 set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${KDE4_ENABLE_EXCEPTIONS}" )
 
 # check for JPEG
