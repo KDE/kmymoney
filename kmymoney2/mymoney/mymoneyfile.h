@@ -725,7 +725,7 @@ public:
     *
     * @param recursive if @p true, then recurse in all found accounts. The default is @p false
     */
-  void accountList(Q3ValueList<MyMoneyAccount>& list, const QStringList& idlist = QStringList(), const bool recursive = false) const;
+  void accountList(QLinkedList<MyMoneyAccount>& list, const QStringList& idlist = QStringList(), const bool recursive = false) const;
 
   /**
     * This method is used to convert an account id to a string representation
