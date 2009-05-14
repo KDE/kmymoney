@@ -58,7 +58,7 @@ class K3Process;
   * GPGAvailable(). Other, more general methods such as open(), close() and flush() are
   * not shown in the above picture.
   */
-class KGPGFile : public QObject, public QFile
+class KGPGFile : public QFile
 {
   Q_OBJECT
 

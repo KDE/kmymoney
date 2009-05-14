@@ -263,7 +263,7 @@ bool KGPGFile::startProcess(const QStringList& args)
   }
 
   // let the process settle and see if it starts and survives ;-)
-  kapp->processEvents(100);
+  kapp->processEvents(QEventLoop::AllEvents, 100);
   return true;
 }
 
