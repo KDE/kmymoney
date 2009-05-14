@@ -53,8 +53,8 @@
 #define PRICE_COL         3
 #define SOURCE_COL        4
 
-KMyMoneyPriceDlg::KMyMoneyPriceDlg(QWidget* parent, const char *name) :
-  KMyMoneyPriceDlgDecl(parent, name)
+KMyMoneyPriceDlg::KMyMoneyPriceDlg(QWidget* parent) :
+  KMyMoneyPriceDlgDecl(parent)
 {
   KIconLoader *il = KIconLoader::global();
   KGuiItem removeButtenItem( i18n( "&Delete" ),

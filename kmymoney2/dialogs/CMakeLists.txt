@@ -32,10 +32,10 @@ SET(libdialogs_a_SOURCES
   kgpgkeyselectiondlg.cpp 
   #kimportdlg.cpp 
   #kloadtemplatedlg.cpp
-  kmergetransactionsdlg.cpp 
+  #kmergetransactionsdlg.cpp 
   kmymoneyfileinfodlg.cpp
-  kmymoneypricedlg.cpp 
-  kmymoneysplittable.cpp 
+  #kmymoneypricedlg.cpp 
+  #kmymoneysplittable.cpp 
   knewaccountdlg.cpp
   knewbankdlg.cpp 
   knewbudgetdlg.cpp 

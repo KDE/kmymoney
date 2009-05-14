@@ -36,8 +36,8 @@
 #include <kmymoney/mymoneyfile.h>
 #include <kmymoney/kmymoneyutils.h>
 
-KMyMoneyFileInfoDlg::KMyMoneyFileInfoDlg(QWidget *parent, const char *name )
- : KMyMoneyFileInfoDlgDecl(parent, name)
+KMyMoneyFileInfoDlg::KMyMoneyFileInfoDlg(QWidget *parent)
+ : KMyMoneyFileInfoDlgDecl(parent)
 {
   // Hide the unused buttons.
   buttonCancel->hide();

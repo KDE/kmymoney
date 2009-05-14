@@ -37,11 +37,20 @@ class QListViewItem;
 #include "kmymoneypricedlgdecl.h"
 #include "kmymoney/mymoneyprice.h"
 
+
+class KMyMoneyPriceDlgDecl : public QDialog, public Ui::KMyMoneyPriceDlgDecl
+{
+public:
+  KMyMoneyPriceDlgDecl( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
+
 class KMyMoneyPriceDlg : public KMyMoneyPriceDlgDecl
 {
   Q_OBJECT
 public:
-  KMyMoneyPriceDlg(QWidget* parent, const char *name);
+  KMyMoneyPriceDlg(QWidget* parent);
   ~KMyMoneyPriceDlg();
 
 protected slots:

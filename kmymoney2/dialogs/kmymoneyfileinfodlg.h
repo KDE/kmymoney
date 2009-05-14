@@ -27,17 +27,24 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "../dialogs/kmymoneyfileinfodlgdecl.h"
+#include "ui_kmymoneyfileinfodlgdecl.h"
 
 /**
   * @author Thomas Baumgart
   */
 
+class KMyMoneyFileInfoDlgDecl : public QDialog, public Ui::KMyMoneyFileInfoDlgDecl
+{
+public:
+  KMyMoneyFileInfoDlgDecl( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
 class KMyMoneyFileInfoDlg : public KMyMoneyFileInfoDlgDecl
 {
    Q_OBJECT
-public: 
-  KMyMoneyFileInfoDlg(QWidget *parent=0, const char *name=0);
+public:
+  KMyMoneyFileInfoDlg(QWidget *parent=0);
   virtual ~KMyMoneyFileInfoDlg();
 };
 
