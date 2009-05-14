@@ -151,10 +151,10 @@ Use the buttons and checkboxes to customize the layout of the home page.</string
                 <property name="value">
                   <number>100</number>
                 </property>
-                <property name="minValue">
+                <property name="minimum">
                   <number>1</number>
                 </property>
-                <property name="maxValue">
+                <property name="maximum">
                   <number>1000</number>
                 </property>
               </widget>

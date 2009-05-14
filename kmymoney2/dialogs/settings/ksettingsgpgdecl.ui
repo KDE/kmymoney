@@ -79,7 +79,7 @@ The &lt;i&gt;additional recovery encryption&lt;/i&gt; is only accessible, if the
                   <bool>false</bool>
                 </property>
                 <property name="buttons">
-                  <set>Remove|Add</set>
+                  <set>KEditListBox::Remove|KEditListBox::Add</set>
                 </property>
                 <property name="whatsThis" stdset="0">
                   <string>Enter the id of the key you want to use for data encryption. This can either be an e-mail address or the hexadecimal key id. In case of the key id don't forget the leading 0x.</string>

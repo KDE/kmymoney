@@ -12,15 +12,14 @@ SET (libsettings_a_SOURCES
 	ksettingscolors.cpp
 	ksettingsfonts.cpp 
   ksettingsforecast.cpp 
-  #ksettingsgeneral.cpp
-  #ksettingsgpg.cpp 
-  #ksettingshome.cpp 
-  #ksettingsonlinequotes.cpp
-  #ksettingsregister.cpp 
-  #ksettingsschedules.cpp 
+  ksettingsgeneral.cpp
+  ksettingsgpg.cpp 
+  ksettingshome.cpp 
+  ksettingsonlinequotes.cpp
+  ksettingsregister.cpp 
+  ksettingsschedules.cpp 
+  ksettingsplugins.cpp
   )
-#missing it
-#ksettingsplugins.cpp
 
 SET (libsettings_a_UI 
   ksettingscolorsdecl.ui ksettingsfontsdecl.ui
