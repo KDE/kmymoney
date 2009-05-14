@@ -371,7 +371,7 @@ void KMyMoney2App::initActions(void)
 #endif
   new KAction(i18n("Map to online account"), "news_subscribe", 0, this, SLOT(slotAccountMapOnline()), actionCollection(), "account_online_map");
   new KAction(i18n("Unmap account"), "", 0, this, SLOT(slotAccountUnmapOnline()), actionCollection(), "account_online_unmap");
-  KActionMenu* menu = new KActionMenu(i18n("Update"), QIcon(KIconLoader::global()->loadIcon("reload", KIconLoader::Small,
+  KActionMenu* menu = new KActionMenu(i18n("Update"), KIcon(KIconLoader::global()->loadIcon("reload", KIconLoader::Small,
                                       KIconLoader::SizeSmall)), actionCollection(), "account_online_update_menu");
   // activating the menu button is the same as selecting the current account
   connect( menu, SIGNAL( activated() ), this, SLOT(slotAccountUpdateOnline()));

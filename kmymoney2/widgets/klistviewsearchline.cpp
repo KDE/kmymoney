@@ -454,7 +454,7 @@ void K3ListViewSearchLineWidget::createWidgets()
 
     if(!d->clearButton) {
         d->clearButton = new QToolButton(this);
-        QIcon icon = SmallIconSet(QApplication::isRightToLeft() ? "clear_left" : "locationbar_erase");
+        KIcon icon = SmallIconSet(QApplication::isRightToLeft() ? "clear_left" : "locationbar_erase");
         d->clearButton->setIconSet(icon);
     }
 

@@ -97,8 +97,8 @@ KScheduledView::KScheduledView(QWidget *parent, const char *name ) :
   m_accountsCombo->setGuiItem(KMyMoneyUtils::accountsFilterGuiItem());
 
   KIconLoader *il = KIconLoader::global();
-  m_tabWidget->setTabIcon(m_listTab, QIcon(il->loadIcon("contents", KIconLoader::Small, KIconLoader::SizeSmall)));
-  m_tabWidget->setTabIcon(m_calendarTab, QIcon(il->loadIcon("calendartab", KIcon::User, KIconLoader::SizeSmall)));
+  m_tabWidget->setTabIcon(m_listTab, KIcon(il->loadIcon("contents", KIconLoader::Small, KIconLoader::SizeSmall)));
+  m_tabWidget->setTabIcon(m_calendarTab, KIcon(il->loadIcon("calendartab", KIcon::User, KIconLoader::SizeSmall)));
 
   connect(m_qlistviewScheduled, SIGNAL(contextMenu(K3ListView*, Q3ListViewItem*, const QPoint&)),
     this, SLOT(slotListViewContextMenu(K3ListView*, Q3ListViewItem*, const QPoint&)));

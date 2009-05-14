@@ -67,25 +67,25 @@ KSecurityListEditor::KSecurityListEditor(QWidget *parent, const char *name) :
 
   KIconLoader *il = KIconLoader::global();
   KGuiItem removeButtenItem( i18n( "&Delete" ),
-                    QIcon(il->loadIcon("delete", KIconLoader::Small, KIconLoader::SizeSmall)),
+                    KIcon(il->loadIcon("delete", KIconLoader::Small, KIconLoader::SizeSmall)),
                     i18n("Delete this entry"),
                     i18n("Remove this security item from the file"));
   m_deleteButton->setGuiItem(removeButtenItem);
 
   KGuiItem addButtenItem( i18n( "&Add" ),
-                    QIcon(il->loadIcon("file_new", KIconLoader::Small, KIconLoader::SizeSmall)),
+                    KIcon(il->loadIcon("file_new", KIconLoader::Small, KIconLoader::SizeSmall)),
                     i18n("Add a new entry"),
                     i18n("Create a new security entry."));
   m_addButton->setGuiItem(addButtenItem);
 
   KGuiItem editButtenItem( i18n( "&Edit" ),
-                    QIcon(il->loadIcon("edit", KIconLoader::Small, KIconLoader::SizeSmall)),
+                    KIcon(il->loadIcon("edit", KIconLoader::Small, KIconLoader::SizeSmall)),
                     i18n("Modify the selected entry"),
                     i18n("Change the security information of the selected entry."));
   m_editButton->setGuiItem(editButtenItem);
 
   KGuiItem okButtenItem( i18n("&Close" ),
-                    QIcon(il->loadIcon("button_ok", KIconLoader::Small, KIconLoader::SizeSmall)),
+                    KIcon(il->loadIcon("button_ok", KIconLoader::Small, KIconLoader::SizeSmall)),
                     i18n("Close the dialog"),
                     i18n("Use this to close the dialog and return to the application."));
   m_closeButton->setGuiItem(okButtenItem);

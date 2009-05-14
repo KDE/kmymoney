@@ -139,7 +139,7 @@ kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, const char *name, Qt::Alig
   m_dateButton = new KPushButton;
 #warning "port to kde4"
 #if 0
-  m_dateButton = new KPushButton(QIcon(QPixmap(KIconLoader::global()->iconPath("date", -KIconLoader::SizeSmall))), QString(""), this);
+  m_dateButton = new KPushButton(KIcon(QPixmap(KIconLoader::global()->iconPath("date", -KIconLoader::SizeSmall))), QString(""), this);
 #endif
   m_dateButton->setMinimumWidth(30);
 

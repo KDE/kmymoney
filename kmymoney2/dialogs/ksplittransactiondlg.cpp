@@ -78,14 +78,14 @@ KSplitTransactionDlg::KSplitTransactionDlg(const MyMoneyTransaction& t,
   KIconLoader *il = KIconLoader::global();
 
   KGuiItem clearButtenItem( i18n( "Clear &All" ),
-                    QIcon(il->loadIcon("edittrash", KIconLoader::Small, KIconLoader::SizeSmall)),
+                    KIcon(il->loadIcon("edittrash", KIconLoader::Small, KIconLoader::SizeSmall)),
                     i18n("Clear all splits"),
                     i18n("Use this to clear all splits of this transaction"));
   clearAllBtn->setGuiItem(clearButtenItem);
 
 
   KGuiItem mergeButtenItem( i18n( "&Merge" ),
-                             QIcon(il->loadIcon("math_sum", KIconLoader::Small, KIconLoader::SizeSmall)),
+                             KIcon(il->loadIcon("math_sum", KIconLoader::Small, KIconLoader::SizeSmall)),
                                       "", "");
   mergeBtn->setGuiItem(mergeButtenItem);
 

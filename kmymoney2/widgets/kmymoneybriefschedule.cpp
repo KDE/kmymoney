@@ -59,13 +59,13 @@ KMyMoneyBriefSchedule::KMyMoneyBriefSchedule(QWidget *parent, const char *name )
   connect(m_buttonEnter, SIGNAL(clicked()), this, SLOT(slotEnterClicked()));
 
   KGuiItem skipGuiItem(  i18n("&Skip"),
-                          QIcon(ic->loadIcon("player_fwd", KIconLoader::Small, KIconLoader::SizeSmall)),
+                          KIcon(ic->loadIcon("player_fwd", KIconLoader::Small, KIconLoader::SizeSmall)),
                           i18n("Skip this transaction"),
                           i18n("Use this button to skip this transaction"));
   m_skipButton->setGuiItem(skipGuiItem);
 
   KGuiItem enterGuiItem(  i18n("&Enter"),
-                          QIcon(ic->loadIcon("key_enter", KIconLoader::Small, KIconLoader::SizeSmall)),
+                          KIcon(ic->loadIcon("key_enter", KIconLoader::Small, KIconLoader::SizeSmall)),
                           i18n("Record this transaction into the register"),
                           i18n("Use this button to record this transaction"));
   m_buttonEnter->setGuiItem(enterGuiItem);

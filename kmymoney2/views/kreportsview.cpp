@@ -120,7 +120,7 @@ KReportsView::KReportTab::KReportTab(KTabWidget* parent, const MyMoneyReport& re
   if ( icon == QString::null )
     icon = KGlobal::dirs()->findResource("icon", "hicolor/16x16/apps/kmymoney2.png");
 
-  parent->insertTab( this, QIcon(QPixmap(icon)), report.name() );
+  parent->insertTab( this, KIcon(QPixmap(icon)), report.name() );
   parent->setTabEnabled( this, true );
 
 #ifdef HAVE_KDCHART

@@ -301,7 +301,7 @@ Selecting 0% will list all transactions.</string>
                         </item>
                         <item>
                           <widget class="KIntSpinBox" name="kcfg_AutoFillDifference">
-                            <property name="maxValue">
+                            <property name="maximum">
                               <number>100</number>
                             </property>
                             <property name="value">
@@ -377,10 +377,10 @@ Selecting 0% will list all transactions.</string>
                       <property name="buttonSymbols">
                         <enum>UpDownArrows</enum>
                       </property>
-                      <property name="maxValue">
+                      <property name="maximum">
                         <number>99</number>
                       </property>
-                      <property name="minValue">
+                      <property name="minimum">
                         <number>0</number>
                       </property>
                       <property name="value">

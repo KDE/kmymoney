@@ -58,25 +58,25 @@ KMyMoneyPriceDlg::KMyMoneyPriceDlg(QWidget* parent) :
 {
   KIconLoader *il = KIconLoader::global();
   KGuiItem removeButtenItem( i18n( "&Delete" ),
-                    QIcon(il->loadIcon("delete", KIconLoader::Small, KIconLoader::SizeSmall)),
+                    KIcon(il->loadIcon("delete", KIconLoader::Small, KIconLoader::SizeSmall)),
                     i18n("Delete this entry"),
                     i18n("Remove this price item from the file"));
   m_deleteButton->setGuiItem(removeButtenItem);
 
   KGuiItem newButtenItem( i18n( "&New" ),
-                    QIcon(il->loadIcon("file_new", KIconLoader::Small, KIconLoader::SizeSmall)),
+                    KIcon(il->loadIcon("file_new", KIconLoader::Small, KIconLoader::SizeSmall)),
                     i18n("Add a new entry"),
                     i18n("Create a new price entry."));
   m_newButton->setGuiItem(newButtenItem);
 
   KGuiItem editButtenItem( i18n( "&Edit" ),
-                    QIcon(il->loadIcon("edit", KIconLoader::Small, KIconLoader::SizeSmall)),
+                    KIcon(il->loadIcon("edit", KIconLoader::Small, KIconLoader::SizeSmall)),
                     i18n("Modify the selected entry"),
                     i18n("Change the details of selected price information."));
   m_editButton->setGuiItem(editButtenItem);
 
   KGuiItem okButtenItem( i18n("&Close" ),
-                    QIcon(il->loadIcon("button_ok", KIconLoader::Small, KIconLoader::SizeSmall)),
+                    KIcon(il->loadIcon("button_ok", KIconLoader::Small, KIconLoader::SizeSmall)),
                     i18n("Close the dialog"),
                     i18n("Use this to close the dialog and return to the application."));
   m_closeButton->setGuiItem(okButtenItem);

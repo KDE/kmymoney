@@ -53,10 +53,10 @@
               </item>
               <item>
                 <widget class="KIntNumInput" name="m_frequencyNoEdit">
-                  <property name="maxValue">
+                  <property name="maximum">
                     <number>999</number>
                   </property>
-                  <property name="minValue">
+                  <property name="minimum">
                     <number>1</number>
                   </property>
                   <property name="toolTip" stdset="0">
@@ -327,10 +327,10 @@
                   </item>
                   <item>
                     <widget class="KIntNumInput" name="m_RemainingEdit">
-                      <property name="minValue">
+                      <property name="minimum">
                         <number>0</number>
                       </property>
-                      <property name="maxValue">
+                      <property name="maximum">
                         <number>9999</number>
                       </property>
                     </widget>

@@ -76,7 +76,7 @@ KMyMoneyCategory::KMyMoneyCategory(QWidget* parent, const char * name, bool spli
 #warning "port to kde4"    
 #if 0
     KGuiItem splitButtonItem("",
-        QIcon(KIconLoader::global()->loadIcon("split_transaction", KIconLoader::Small,
+        KIcon(KIconLoader::global()->loadIcon("split_transaction", KIconLoader::Small,
         KIconLoader::SizeSmall)), "", "");
 #endif
     KGuiItem splitButtonItem;

@@ -1381,7 +1381,7 @@ LoanPayoutPage::LoanPayoutPage(Wizard* wizard, const char* name) :
 
   KIconLoader* il = KIconLoader::global();
   KGuiItem createAssetButtenItem( i18n( "&Create..." ),
-                                  QIcon(il->loadIcon("filenew", KIconLoader::Small, KIconLoader::SizeSmall)),
+                                  KIcon(il->loadIcon("filenew", KIconLoader::Small, KIconLoader::SizeSmall)),
                                   i18n("Create a new asset account"),
                                   i18n("If the asset account does not yet exist, press this button to create it."));
   m_createAssetButton->setGuiItem(createAssetButtenItem);

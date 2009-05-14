@@ -1996,8 +1996,8 @@ void MyMoneyGncReader::terminate () {
     QString button0Text = i18n("More");
     if (i + 1 == sectionsToReport.count())
       button0Text = i18n("Done"); // last section
-    KGuiItem yesItem(button0Text, QIcon(), "", "");
-    KGuiItem noItem(i18n("Save Report"), QIcon(), "", "");
+    KGuiItem yesItem(button0Text, KIcon(), "", "");
+    KGuiItem noItem(i18n("Save Report"), KIcon(), "", "");
 
     switch(KMessageBox::questionYesNoCancel(0,
            buildReportSection (*sectionsToReport.at(i)),
