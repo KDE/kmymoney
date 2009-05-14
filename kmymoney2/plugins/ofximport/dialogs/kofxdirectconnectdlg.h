@@ -51,7 +51,7 @@ public:
   KOfxDirectConnectDlgDecl( QWidget *parent ) : QDialog( parent ) {
     setupUi( this );
   }
-}
+};
 
 class KOfxDirectConnectDlg : public KOfxDirectConnectDlgDecl
 {

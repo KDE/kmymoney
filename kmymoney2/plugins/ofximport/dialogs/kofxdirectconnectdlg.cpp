@@ -112,8 +112,8 @@ void KOfxDirectConnectDlg::init(void)
   connect(m_job,SIGNAL(connected(KIO::Job*)),this,SLOT(slotOfxConnected(KIO::Job*)));
 
   setStatus(QString("Contacting %1...").arg(m_connector.url()));
-  kProgress1->setTotalSteps(3);
-  kProgress1->setProgress(1);
+  kProgress1->setMaximum(3);
+  kProgress1->setValue(1);
 }
 
 void KOfxDirectConnectDlg::setStatus(const QString& _status)
@@ -157,7 +157,7 @@ void KOfxDirectConnectDlg::slotOfxData(KIO::Job*,const QByteArray& _ba)
 
 void KOfxDirectConnectDlg::slotOfxFinished(KIO::Job* /* e */)
 {
-  kProgress1->advance(1);
+  kProgress1->setValue(kProgress1->value()+1);
   setStatus("Completed.");
 
   if(d->m_fpTrace.isOpen()) {

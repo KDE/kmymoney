@@ -31,7 +31,7 @@
         </widget>
       </item>
       <item>
-        <widget class="KProgress" name="kProgress1"/>
+        <widget class="QProgressBar" name="kProgress1"/>
       </item>
       <item>
         <layout class="QHBoxLayout">

@@ -104,7 +104,7 @@
         </widget>
       </item>
       <item>
-        <widget class="KProgress" name="prgOnlineProgress"/>
+        <widget class="QProgressBar" name="prgOnlineProgress"/>
       </item>
       <item>
         <layout class="QHBoxLayout">
