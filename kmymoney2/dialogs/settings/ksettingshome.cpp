@@ -49,7 +49,7 @@ KSettingsHome::KSettingsHome(QWidget* parent) :
 
   KIconLoader* il = KIconLoader::global();
   KGuiItem upButtonItem( i18n( "&Up" ),
-                    QIcon(il->loadIcon("up", KIcon::Small, KIconLoader::SizeSmall)),
+                    QIcon(il->loadIcon("up", KIconLoader::Small, KIconLoader::SizeSmall)),
                     i18n("Move selected item up"),
                     i18n("Use this to move the selected item up by one position in the list."));
   KGuiItem downButtonItem( i18n( "&Down" ),

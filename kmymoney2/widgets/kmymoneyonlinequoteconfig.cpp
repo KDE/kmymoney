@@ -52,19 +52,19 @@ kMyMoneyOnlineQuoteConfig::kMyMoneyOnlineQuoteConfig(QWidget *parent, const char
 
   KIconLoader* il = KIconLoader::global();
   KGuiItem updateButtenItem( i18n("&Update" ),
-                    QIcon(il->loadIcon("button_ok", KIcon::Small, KIconLoader::SizeSmall)),
+                    QIcon(il->loadIcon("button_ok", KIconLoader::Small, KIconLoader::SizeSmall)),
                     i18n("Accepts the entered data and stores it"),
                     i18n("Use this to accept the modified data."));
   m_updateButton->setGuiItem(updateButtenItem);
 
   KGuiItem deleteButtenItem( i18n( "&Delete" ),
-                      QIcon(il->loadIcon("editdelete", KIcon::Small, KIconLoader::SizeSmall)),
+                      QIcon(il->loadIcon("editdelete", KIconLoader::Small, KIconLoader::SizeSmall)),
                       i18n("Delete the selected source entry"),
                       i18n("Use this to delete the selected online source entry"));
   m_deleteButton->setGuiItem(deleteButtenItem);
 
   KGuiItem newButtenItem( i18n( "&New..." ),
-                      QIcon(il->loadIcon("filenew", KIcon::Small, KIconLoader::SizeSmall)),
+                      QIcon(il->loadIcon("filenew", KIconLoader::Small, KIconLoader::SizeSmall)),
                       i18n("Create a new source entry for online quotes"),
                       i18n("Use this to create a new entry for online quotes"));
   m_newButton->setGuiItem(newButtenItem);

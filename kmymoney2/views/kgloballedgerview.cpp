@@ -179,7 +179,7 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name )
   // I leave the code commented here for a while, so that I see
   // how I can add other  widgets at this point
   KIconLoader *il = KIconLoader::global();
-  m_toolbar->insertButton(il->loadIcon("document", KIcon::Small, KIconLoader::SizeSmall),
+  m_toolbar->insertButton(il->loadIcon("document", KIconLoader::Small, KIconLoader::SizeSmall),
                         1,true,i18n("Account"));
   //m_toolbar->setMaximumSize(50,20);
   m_toolbar->alignItemRight(1);

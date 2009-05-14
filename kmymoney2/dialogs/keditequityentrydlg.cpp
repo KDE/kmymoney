@@ -73,7 +73,7 @@ KEditEquityEntryDlg::KEditEquityEntryDlg(const MyMoneySecurity& selectedSecurity
   btnAddEntry->setGuiItem(KStandardGuiItem::add());
 
   KGuiItem editButtenItem( i18n( "&Edit" ),
-                    QIcon(il->loadIcon("edit", KIcon::Small, KIconLoader::SizeSmall)),
+                    KIcon(il->loadIcon("edit", KIconLoader::Small, KIconLoader::SizeSmall)),
                     i18n("Modify the selected entry"),
                     i18n("Change the price information of the selected entry."));
   btnEditEntry->setGuiItem(editButtenItem);

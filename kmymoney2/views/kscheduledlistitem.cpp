@@ -59,7 +59,7 @@ KScheduledListItem::KScheduledListItem(KScheduledListItem *parent, const MyMoney
 {
   m_schedule = schedule;
   m_sortKey = schedule.name();
-  setPixmap(0, KMyMoneyUtils::scheduleIcon(KIcon::Small));
+  setPixmap(0, KMyMoneyUtils::scheduleIcon(KIconLoader::Small));
 
   try
   {

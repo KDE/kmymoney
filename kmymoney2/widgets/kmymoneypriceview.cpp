@@ -143,19 +143,19 @@ KMyMoneyPriceView::KMyMoneyPriceView(QWidget *parent, const char *name ) :
 
   m_contextMenu = new KMenu(this);
   m_contextMenu->insertTitle(i18n("Price Options"));
-  m_contextMenu->insertItem(kiconloader->loadIcon("filenew", KIcon::Small),
+  m_contextMenu->insertItem(kiconloader->loadIcon("filenew", KIconLoader::Small),
                         i18n("New..."),
                         this, SIGNAL(newPrice()));
 
-  m_contextMenu->insertItem(kiconloader->loadIcon("edit", KIcon::Small),
+  m_contextMenu->insertItem(kiconloader->loadIcon("edit", KIconLoader::Small),
                         i18n("Edit..."),
                         this, SIGNAL(editPrice()));
 
-  m_contextMenu->insertItem(kiconloader->loadIcon("connect_creating", KIcon::Small),
+  m_contextMenu->insertItem(kiconloader->loadIcon("connect_creating", KIconLoader::Small),
                         i18n("Online Price Update..."),
                         this, SIGNAL(onlinePriceUpdate()));
 
-  m_contextMenu->insertItem(kiconloader->loadIcon("delete", KIcon::Small),
+  m_contextMenu->insertItem(kiconloader->loadIcon("delete", KIconLoader::Small),
                         i18n("Delete..."),
                         this, SIGNAL(deletePrice()));
 

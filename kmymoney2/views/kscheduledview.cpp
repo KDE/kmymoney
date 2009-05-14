@@ -97,7 +97,7 @@ KScheduledView::KScheduledView(QWidget *parent, const char *name ) :
   m_accountsCombo->setGuiItem(KMyMoneyUtils::accountsFilterGuiItem());
 
   KIconLoader *il = KIconLoader::global();
-  m_tabWidget->setTabIcon(m_listTab, QIcon(il->loadIcon("contents", KIcon::Small, KIconLoader::SizeSmall)));
+  m_tabWidget->setTabIcon(m_listTab, QIcon(il->loadIcon("contents", KIconLoader::Small, KIconLoader::SizeSmall)));
   m_tabWidget->setTabIcon(m_calendarTab, QIcon(il->loadIcon("calendartab", KIcon::User, KIconLoader::SizeSmall)));
 
   connect(m_qlistviewScheduled, SIGNAL(contextMenu(K3ListView*, Q3ListViewItem*, const QPoint&)),
@@ -170,10 +170,10 @@ void KScheduledView::refresh(bool full, const QString& schedId)
     if (scheduledItems.count() == 0)
       return;
 
-    KScheduledListItem *itemBills = new KScheduledListItem(m_qlistviewScheduled, i18n("Bills"), KMyMoneyUtils::billScheduleIcon(KIcon::Small), "0");
-    KScheduledListItem *itemDeposits = new KScheduledListItem(m_qlistviewScheduled, i18n("Deposits"), KMyMoneyUtils::depositScheduleIcon(KIcon::Small), "1");
-    KScheduledListItem *itemLoans = new KScheduledListItem(m_qlistviewScheduled, i18n("Loans"), KMyMoneyUtils::transferScheduleIcon(KIcon::Small), "2");
-    KScheduledListItem *itemTransfers = new KScheduledListItem(m_qlistviewScheduled, i18n("Transfers"), KMyMoneyUtils::transferScheduleIcon(KIcon::Small), "3");
+    KScheduledListItem *itemBills = new KScheduledListItem(m_qlistviewScheduled, i18n("Bills"), KMyMoneyUtils::billScheduleIcon(KIconLoader::Small), "0");
+    KScheduledListItem *itemDeposits = new KScheduledListItem(m_qlistviewScheduled, i18n("Deposits"), KMyMoneyUtils::depositScheduleIcon(KIconLoader::Small), "1");
+    KScheduledListItem *itemLoans = new KScheduledListItem(m_qlistviewScheduled, i18n("Loans"), KMyMoneyUtils::transferScheduleIcon(KIconLoader::Small), "2");
+    KScheduledListItem *itemTransfers = new KScheduledListItem(m_qlistviewScheduled, i18n("Transfers"), KMyMoneyUtils::transferScheduleIcon(KIconLoader::Small), "3");
 
     Q3ValueList<MyMoneySchedule>::Iterator it;
 

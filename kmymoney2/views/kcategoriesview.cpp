@@ -66,11 +66,11 @@ KCategoriesView::KCategoriesView(QWidget *parent, const char *name ) :
   // setup icons for collapse and expand button
   KIconLoader *ic = KIconLoader::global();
   KGuiItem collapseGuiItem("",
-                          QIcon(ic->loadIcon("viewmag-", KIcon::Small, KIconLoader::SizeSmall)),
+                          QIcon(ic->loadIcon("viewmag-", KIconLoader::Small, KIconLoader::SizeSmall)),
                           QString(),
                           QString());
   KGuiItem expandGuiItem("",
-                          QIcon(ic->loadIcon("viewmag+", KIcon::Small, KIconLoader::SizeSmall)),
+                          QIcon(ic->loadIcon("viewmag+", KIconLoader::Small, KIconLoader::SizeSmall)),
                           QString(),
                           QString());
   m_collapseButton->setGuiItem(collapseGuiItem);

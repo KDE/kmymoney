@@ -20,7 +20,7 @@ SET(libdialogs_a_SOURCES
   kconfirmmanualenterdlg.cpp
   #kcsvprogressdlg.cpp 
   kcurrencycalculator.cpp kcurrencyeditdlg.cpp
-  #keditequityentrydlg.cpp 
+  keditequityentrydlg.cpp 
   #keditloanwizard.cpp 
   #keditscheduledlg.cpp
   #kendingbalancedlg.cpp 

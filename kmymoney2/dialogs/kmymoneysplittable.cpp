@@ -104,9 +104,9 @@ kMyMoneySplitTable::kMyMoneySplitTable(QWidget *parent, const char *name ) :
   m_contextMenu = new KMenu(this);
   KIconLoader *il = KIconLoader::global();
   m_contextMenu->insertTitle(il->loadIcon("transaction", KIcon::MainToolbar), i18n("Split Options"));
-  m_contextMenu->insertItem(il->loadIcon("edit", KIcon::Small), i18n("Edit..."), this, SLOT(slotStartEdit()));
-  m_contextMenuDuplicate = m_contextMenu->insertItem(il->loadIcon("editcopy", KIcon::Small), i18n("Duplicate"), this, SLOT(slotDuplicateSplit()));
-  m_contextMenuDelete = m_contextMenu->insertItem(il->loadIcon("delete", KIcon::Small),
+  m_contextMenu->insertItem(il->loadIcon("edit", KIconLoader::Small), i18n("Edit..."), this, SLOT(slotStartEdit()));
+  m_contextMenuDuplicate = m_contextMenu->insertItem(il->loadIcon("editcopy", KIconLoader::Small), i18n("Duplicate"), this, SLOT(slotDuplicateSplit()));
+  m_contextMenuDelete = m_contextMenu->insertItem(il->loadIcon("delete", KIconLoader::Small),
                         i18n("Delete ..."),
                         this, SLOT(slotDeleteSplit()));
 
@@ -853,9 +853,9 @@ QWidget* kMyMoneySplitTable::createEditWidgets(void)
   m_registerButtonFrame->setPalette(palette);
 
   Q3HBoxLayout* l = new Q3HBoxLayout(m_registerButtonFrame);
-  m_registerEnterButton = new KPushButton(il->loadIcon("button_ok", KIcon::Small, KIconLoader::SizeSmall), QString(), m_registerButtonFrame, "EnterButton");
+  m_registerEnterButton = new KPushButton(il->loadIcon("button_ok", KIconLoader::Small, KIconLoader::SizeSmall), QString(), m_registerButtonFrame, "EnterButton");
 
-  m_registerCancelButton = new KPushButton(il->loadIcon("button_cancel", KIcon::Small, KIconLoader::SizeSmall), QString(), m_registerButtonFrame, "CancelButton");
+  m_registerCancelButton = new KPushButton(il->loadIcon("button_cancel", KIconLoader::Small, KIconLoader::SizeSmall), QString(), m_registerButtonFrame, "CancelButton");
 
   l->addWidget(m_registerEnterButton);
   l->addWidget(m_registerCancelButton);

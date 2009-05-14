@@ -215,7 +215,7 @@ void Transaction::markAttachment(QPainter* painter, int /* row */, int /* col */
 
   painter->save();
   if(clip.isNull()) {
-    clip = KIconLoader::global()->loadIcon("attach", KIcon::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState);
+    clip = KIconLoader::global()->loadIcon("attach", KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState);
     if(clip.height() > h) {
       clip.resize(h, h);
     }
