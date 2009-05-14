@@ -22,11 +22,19 @@
 #define KCHOOSEIMPORTEXPORTDLG_H
 
 #include <qwidget.h>
-#include "../dialogs/kchooseimportexportdlgdecl.h"
+#include "ui_kchooseimportexportdlgdecl.h"
 
 /**
   *@author Michael Edwardes
   */
+
+class KChooseImportExportDlgDecl : public QDialog, public Ui::KChooseImportExportDlgDecl
+{
+public:
+  KChooseImportExportDlgDecl( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
 
 class KChooseImportExportDlg : public KChooseImportExportDlgDecl  {
    Q_OBJECT
@@ -39,7 +47,7 @@ protected slots:
   void slotTypeActivated(const QString& text);
 
 public:
-	KChooseImportExportDlg(int type, QWidget *parent=0, const char *name=0);
+	KChooseImportExportDlg(int type, QWidget *parent=0);
 	~KChooseImportExportDlg();
 	QString importExportType(void);
 };

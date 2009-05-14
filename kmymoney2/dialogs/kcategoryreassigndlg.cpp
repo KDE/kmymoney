@@ -36,8 +36,8 @@
 #include <kmymoneyaccountselector.h>
 #include <kguiutils.h>
 
-KCategoryReassignDlg::KCategoryReassignDlg( QWidget* parent, const char* name) :
-  KCategoryReassignDlgDecl( parent, name)
+KCategoryReassignDlg::KCategoryReassignDlg( QWidget* parent) :
+  KCategoryReassignDlgDecl( parent)
 {
   buttonOk->setGuiItem(KStandardGuiItem::ok());
   buttonCancel->setGuiItem(KStandardGuiItem::cancel());

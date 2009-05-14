@@ -38,17 +38,26 @@
 #include <kmymoneycombo.h>
 #include <mymoneyaccount.h>
 #include <kmymoneyutils.h>
-#include "../dialogs/kaccountselectdlgdecl.h"
+#include "ui_kaccountselectdlgdecl.h"
 
 /**
   * @author Thomas Baumgart
   */
 
+
+class KAccountSelectDlgDecl : public QDialog, public Ui::KAccountSelectDlgDecl
+{
+public:
+  KAccountSelectDlgDecl( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
+
 class KAccountSelectDlg : public KAccountSelectDlgDecl
 {
    Q_OBJECT
 public:
-  KAccountSelectDlg(const KMyMoneyUtils::categoryTypeE type, const QString& purpose = "General", QWidget *parent=0, const char *name=0);
+  KAccountSelectDlg(const KMyMoneyUtils::categoryTypeE type, const QString& purpose = "General", QWidget *parent=0);
   ~KAccountSelectDlg();
 
   /**

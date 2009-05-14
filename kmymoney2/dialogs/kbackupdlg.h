@@ -21,11 +21,20 @@
 #define KBACKUPDIALOG_H
 
 #include <qwidget.h>
-#include "../dialogs/kbackupdlgdecl.h"
+#include "ui_kbackupdlgdecl.h"
 
 /**
   *@author Michael Edwardes
   */
+
+
+class kbackupdlgdecl : public QDialog, public Ui::kbackupdlgdecl
+{
+public:
+  kbackupdlgdecl( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
 
 class KBackupDlg : public kbackupdlgdecl  {
 	Q_OBJECT
@@ -37,7 +46,7 @@ protected slots:
   void chooseButtonClicked();
 
 public:
-	KBackupDlg( QWidget* parent,  const char* name/*, bool modal*/);
+	KBackupDlg( QWidget* parent);
 	~KBackupDlg();
 };
 

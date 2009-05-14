@@ -48,8 +48,8 @@
 
 #include "kbackupdlg.h"
 
-KBackupDlg::KBackupDlg( QWidget* parent,  const char* name/*, bool modal*/)
-  : kbackupdlgdecl( parent,  name , true)
+KBackupDlg::KBackupDlg( QWidget* parent)
+  : kbackupdlgdecl( parent)
 {
   readConfig();
 
@@ -59,11 +59,11 @@ KBackupDlg::KBackupDlg( QWidget* parent,  const char* name/*, bool modal*/)
   btnCancel->setGuiItem(KStandardGuiItem::cancel());
 
   KGuiItem chooseButtenItem( i18n("C&hoose..."),
-                    QIcon(il->loadIcon("folder", KIconLoader::Small, KIconLoader::SizeSmall)),
+                    KIcon(il->loadIcon("folder", KIconLoader::Small, KIconLoader::SizeSmall)),
                     i18n("Select mount point"),
                     i18n("Use this to browse to the mount point."));
   chooseButton->setGuiItem(chooseButtenItem);
-  
+
   connect(chooseButton, SIGNAL(clicked()), this, SLOT(chooseButtonClicked()));
   connect(btnOK,SIGNAL(clicked()),this,SLOT(accept()));
   connect(btnCancel,SIGNAL(clicked()),this,SLOT(reject()));
@@ -83,18 +83,18 @@ void KBackupDlg::chooseButtonClicked()
 
 void KBackupDlg::readConfig(void)
 {
-  KConfig *config = KGlobal::config();
-  config->group("Last Use Settings");
+  KSharedConfigPtr config = KGlobal::config();
+  KConfigGroup grp = config->group("Last Use Settings");
   mountCheckBox->setChecked(grp.readEntry("KBackupDlg_mountDevice", false));
   txtMountPoint->setText(grp.readEntry("KBackupDlg_BackupMountPoint", "/mnt/floppy"));
 }
 
 void KBackupDlg::writeConfig(void)
 {
-  KConfig *config = KGlobal::config();
-  config->group("Last Use Settings");
-  config->writeEntry("KBackupDlg_mountDevice", mountCheckBox->isChecked());
-  config->writeEntry("KBackupDlg_BackupMountPoint", txtMountPoint->text());
+  KSharedConfigPtr config = KGlobal::config();
+  KConfigGroup grp = config->group("Last Use Settings");
+  grp.writeEntry("KBackupDlg_mountDevice", mountCheckBox->isChecked());
+  grp.writeEntry("KBackupDlg_BackupMountPoint", txtMountPoint->text());
   config->sync();
 }
 

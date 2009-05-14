@@ -48,8 +48,8 @@
 
 #include <../kmymoney2.h>
 
-KAccountSelectDlg::KAccountSelectDlg(const KMyMoneyUtils::categoryTypeE accountType, const QString& purpose, QWidget *parent, const char *name )
- : KAccountSelectDlgDecl(parent, name),
+KAccountSelectDlg::KAccountSelectDlg(const KMyMoneyUtils::categoryTypeE accountType, const QString& purpose, QWidget *parent )
+ : KAccountSelectDlgDecl(parent),
    m_purpose(purpose),
    m_accountType(accountType),
    m_aborted(false)
@@ -62,20 +62,20 @@ KAccountSelectDlg::KAccountSelectDlg(const KMyMoneyUtils::categoryTypeE accountT
 
   KIconLoader* il = KIconLoader::global();
   KGuiItem skipButtonItem( i18n( "&Skip" ),
-                    QIcon(il->loadIcon("redo", KIcon::Small, KIconLoader::SizeSmall)),
+                    KIcon(il->loadIcon("redo", KIconLoader::Small, KIconLoader::SizeSmall)),
                     i18n("Skip this transaction"),
                     i18n("Use this to skip importing this transaction and proceed with the next one."));
   m_qbuttonCancel->setGuiItem(skipButtonItem);
 
   KGuiItem createButtenItem( i18n( "&Create..." ),
-                      QIcon(il->loadIcon("filenew", KIcon::Small, KIconLoader::SizeSmall)),
+                      KIcon(il->loadIcon("filenew", KIconLoader::Small, KIconLoader::SizeSmall)),
                       i18n("Create a new account/category"),
                       i18n("Use this to add a new account/category to the file"));
   m_createButton->setGuiItem(createButtenItem);
   m_qbuttonOk->setGuiItem(KStandardGuiItem::ok());
 
   KGuiItem abortButtenItem( i18n("&Abort" ),
-                    QIcon(il->loadIcon("stop", KIcon::Small, KIconLoader::SizeSmall)),
+                    KIcon(il->loadIcon("stop", KIconLoader::Small, KIconLoader::SizeSmall)),
                     i18n("Abort the import operation and dismiss all changes"),
                     i18n("Use this to abort the import. Your financial data will be in the state before you started the QIF import."));
   m_kButtonAbort->setGuiItem(abortButtenItem);

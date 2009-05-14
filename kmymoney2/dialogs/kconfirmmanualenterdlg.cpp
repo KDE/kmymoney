@@ -36,7 +36,7 @@
 #include <kmymoneyutils.h>
 #include "kconfirmmanualenterdlg.h"
 
-KConfirmManualEnterDlg::KConfirmManualEnterDlg(const MyMoneySchedule& schedule, QWidget* parent, const char* name) :
+KConfirmManualEnterDlg::KConfirmManualEnterDlg(const MyMoneySchedule& schedule, QWidget* parent) :
   KConfirmManualEnterDlgDecl(parent)
 {
   buttonOk->setGuiItem(KStandardGuiItem::ok());
@@ -74,9 +74,9 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
   try
   {
     QString po, pn;
-    if(to.splits()[0].payeeId())
+    if(!to.splits()[0].payeeId().isEmpty())
       po = file->payee(to.splits()[0].payeeId()).name();
-    if(tn.splits()[0].payeeId())
+    if(!tn.splits()[0].payeeId().isEmpty())
       pn = file->payee(tn.splits()[0].payeeId()).name();
 
     if (po != pn) {

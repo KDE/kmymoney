@@ -33,20 +33,20 @@
 #include <mymoneytransaction.h>
 #include "ui_kconfirmmanualenterdlgdecl.h"
 
-class KConfirmManualEnterDlgDecl : public QWidget, public Ui::KConfirmManualEnterDlgDecl
+class KConfirmManualEnterDlgDecl : public QDialog, public Ui::KConfirmManualEnterDlgDecl
 {
 public:
-  KConfirmManualEnterDlgDecl( QWidget *parent ) : QWidget( parent ) {
+  KConfirmManualEnterDlgDecl( QWidget *parent ) : QDialog( parent ) {
     setupUi( this );
   }
 };
 
 
-class KConfirmManualEnterDlg : public Ui::KConfirmManualEnterDlgDecl
+class KConfirmManualEnterDlg : public KConfirmManualEnterDlgDecl
 {
   Q_OBJECT
 public:
-  KConfirmManualEnterDlg(const MyMoneySchedule& schedule, QWidget* parent = 0, const char* name = 0);
+  KConfirmManualEnterDlg(const MyMoneySchedule& schedule, QWidget* parent = 0);
 
   typedef enum {
     UseOriginal = 0,

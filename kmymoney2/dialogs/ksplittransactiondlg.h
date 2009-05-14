@@ -42,7 +42,7 @@
 class kMyMoneyEdit;
 class kMyMoneyLineEdit;
 
-#include "../dialogs/ksplittransactiondlgdecl.h"
+#include "ui_ksplittransactiondlgdecl.h"
 
 /**
   * @author Thomas Baumgart

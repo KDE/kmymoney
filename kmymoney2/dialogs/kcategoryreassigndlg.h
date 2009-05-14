@@ -30,18 +30,27 @@
 // Project Includes
 
 #include <mymoneyaccount.h>
-#include "kmymoney2/dialogs/kcategoryreassigndlgdecl.h"
+#include "ui_kcategoryreassigndlgdecl.h"
 
 /**
  *  Implementation of the dialog that lets the user select a payee in order
  *  to re-assign transactions (for instance, if payees are deleted).
  */
+
+class KCategoryReassignDlgDecl : public QDialog, public Ui::KCategoryReassignDlgDecl
+{
+public:
+  KCategoryReassignDlgDecl( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
+
 class KCategoryReassignDlg : public KCategoryReassignDlgDecl
 {
   Q_OBJECT
 public:
   /** Default constructor */
-  KCategoryReassignDlg( QWidget* parent = 0, const char* name = 0);
+  KCategoryReassignDlg( QWidget* parent = 0);
 
   /** Destructor */
   ~KCategoryReassignDlg();

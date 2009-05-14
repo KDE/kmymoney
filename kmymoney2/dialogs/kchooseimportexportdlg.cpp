@@ -37,10 +37,11 @@
 
 #include "kchooseimportexportdlg.h"
 
-KChooseImportExportDlg::KChooseImportExportDlg(int type, QWidget *parent, const char *name )
- : KChooseImportExportDlgDecl(parent,name, true)
+KChooseImportExportDlg::KChooseImportExportDlg(int type, QWidget *parent)
+ : KChooseImportExportDlgDecl(parent)
 {
   QString filename;
+  setModal( true );
 
   if (type==0) { // import
     topLabel->setText(i18n("Please choose the type of import you wish to perform.  A simple explanation\n"
@@ -92,16 +93,16 @@ QString KChooseImportExportDlg::importExportType(void)
 
 void KChooseImportExportDlg::readConfig(void)
 {
-  KConfig *config = KGlobal::config();
-  config->group("Last Use Settings");
+  KSharedConfigPtr config = KGlobal::config();
+  KConfigGroup grp = config->group("Last Use Settings");
   m_lastType = grp.readEntry("KChooseImportExportDlg_LastType");
 }
 
 void KChooseImportExportDlg::writeConfig(void)
 {
-  KConfig *config = KGlobal::config();
-  config->group("Last Use Settings");
-  config->writeEntry("KChooseImportExportDlg_LastType", typeCombo->currentText());
+  KSharedConfigPtr config = KGlobal::config();
+  KConfigGroup grp = config->group("Last Use Settings");
+  grp.writeEntry("KChooseImportExportDlg_LastType", typeCombo->currentText());
   config->sync();
 }
 
