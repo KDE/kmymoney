@@ -20,7 +20,6 @@ INCLUDE_DIRECTORIES( ${Dialogs_BINARY_DIR} )
 SET( _HEADERS export.h kmymoneyutils.h kmymoneyglobalsettings.h )
 
 # we call a macro that creates symbolic links in kmymoney/
-KMM_CREATE_LINKS( ${_HEADERS} )
 KMM_CREATE_LINKS_BIN( kmymoneysettings.h )
 
 ########### common code (kmymoney_common) STATIC ###############

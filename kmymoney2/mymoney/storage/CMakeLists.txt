@@ -4,8 +4,6 @@ SET(storage_HEADERS
   imymoneystorage.h imymoneyserialize.h imymoneystorageformat.h
   )
 
-KMM_CREATE_LINKS(${storage_HEADERS})
-
 SET(storage_a_SOURCES
   imymoneystorageformat.cpp mymoneystoragexml.cpp mymoneystoragedump.cpp
   mymoneyseqaccessmgr.cpp imymoneystorage.cpp imymoneyserialize.cpp

@@ -43,7 +43,7 @@ include( MacroLibrary )
 
 add_definitions( ${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
 add_definitions (-DQT3_SUPPORT -DQT3_SUPPORT_WARNINGS)
-include_directories( ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES} )
+include_directories( ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR}/kmymoney2/dialogs/)
 set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${KDE4_ENABLE_EXCEPTIONS}" )
 
 # check for JPEG

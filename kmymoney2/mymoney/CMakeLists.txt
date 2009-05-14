@@ -32,8 +32,6 @@ SET(mymoney_HEADERS
   mymoneyutils.h mymoneybudget.h mymoneyobjectcontainer.h mymoneyforecast.h
   )
 
-KMM_CREATE_LINKS( ${mymoney_HEADERS} )
-
 KDE4_ADD_LIBRARY(kmm_mymoney SHARED ${kmm_mymoney_LIB_SRCS})
 
 TARGET_LINK_LIBRARIES(kmm_mymoney ${QT_QTGUI_LIBRARY} ${QT_QT3SUPPORT_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTCORE_LIBRARY} ${KDE4_KDECORE_LIBS} kmm_storage)

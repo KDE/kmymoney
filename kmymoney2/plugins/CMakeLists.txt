@@ -1,7 +1,7 @@
 ADD_SUBDIRECTORY( interfaces ) 
 
 if(USE_OFX_DIRECTCONNECT)
-	#ADD_SUBDIRECTORY( ofximport )
+	ADD_SUBDIRECTORY( ofximport )
 endif(USE_OFX_DIRECTCONNECT)
 
 INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} )
@@ -19,8 +19,6 @@ SET(plugins_HEADERS
   importinterface.h kmymoneyplugin.h pluginloader.h
   statementinterface.h viewinterface.h)
 
-# here we call the module wich creates us the given links
-KMM_CREATE_LINKS(${plugins_HEADERS})
 
 KDE4_ADD_LIBRARY(kmm_plugin SHARED ${kmm_plugin_LIB_SRCS})
 TARGET_LINK_LIBRARIES(kmm_plugin ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} ${KDE4_KUTILS_LIBS})
