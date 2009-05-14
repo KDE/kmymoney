@@ -41,13 +41,15 @@ KGncPriceSourceDlg::KGncPriceSourceDlg(QWidget *parent)
  : KGncPriceSourceDlgDecl(parent)
 {
 }
-KGncPriceSourceDlg::KGncPriceSourceDlg(const QString &stockName, const QString &gncSource){
+KGncPriceSourceDlg::KGncPriceSourceDlg(const QString &stockName, const QString &gncSource,QWidget * parent)
+: KGncPriceSourceDlgDecl(parent)
+{
   // signals and slots connections
   connect( buttonGroup5, SIGNAL( released(int) ), this, SLOT( buttonPressed(int) ) );
   connect( buttonHelp, SIGNAL( clicked() ), this, SLOT( slotHelp() ) );
   // initialize data fields
-  textStockName->setText (i18n ("Investment: %1").arg(stockName));
-  textGncSource->setText (i18n ("Quote source: %1").arg(gncSource));
+  textStockName->setText (i18n ("Investment: %1",stockName));
+  textGncSource->setText (i18n ("Quote source: %1",gncSource));
   listKnownSource->insertStringList (WebPriceQuote::quoteSources());
   lineUserSource->setText (gncSource);
   checkAlwaysUse->setChecked(true);

@@ -45,7 +45,7 @@ class KGncPriceSourceDlg : public KGncPriceSourceDlgDecl
   Q_OBJECT
 public:
   KGncPriceSourceDlg(QWidget *parent = 0);
-  KGncPriceSourceDlg(const QString &stockName, const QString &gncSource);
+  KGncPriceSourceDlg(const QString &stockName, const QString &gncSource ,QWidget * parent = 0);
   ~KGncPriceSourceDlg();
 
   QString selectedSource () const;

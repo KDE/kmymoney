@@ -51,9 +51,10 @@
 #include "mymoneyqifprofileeditor.h"
 #include "../converter/mymoneyqifprofile.h"
 
-KImportDlg::KImportDlg(QWidget *parent, const char * name)
-  : KImportDlgDecl(parent, name, TRUE)
+KImportDlg::KImportDlg(QWidget *parent)
+  : KImportDlgDecl(parent)
 {
+    setModal( true );
   // Set all the last used options
   readConfig();
 
@@ -64,19 +65,19 @@ KImportDlg::KImportDlg(QWidget *parent, const char * name)
 
   KIconLoader* il = KIconLoader::global();
   KGuiItem okButtenItem( i18n( "&Import" ),
-                      QIcon(il->loadIcon("fileimport", KIcon::Small, KIconLoader::SizeSmall)),
+                      KIcon(il->loadIcon("fileimport", KIconLoader::Small, KIconLoader::SizeSmall)),
                       i18n("Start operation"),
                       i18n("Use this to start the import operation"));
   m_qbuttonOk->setGuiItem(okButtenItem);
 
   KGuiItem browseButtenItem( i18n( "&Browse..." ),
-                      QIcon(il->loadIcon("fileopen", KIcon::Small, KIconLoader::SizeSmall)),
+                      KIcon(il->loadIcon("fileopen", KIconLoader::Small, KIconLoader::SizeSmall)),
                       i18n("Select filename"),
                       i18n("Use this to select a filename to export to"));
   m_qbuttonBrowse->setGuiItem(browseButtenItem);
 
   KGuiItem newButtenItem( i18n( "&New..." ),
-                      QIcon(il->loadIcon("filenew", KIcon::Small, KIconLoader::SizeSmall)),
+                      KIcon(il->loadIcon("filenew", KIconLoader::Small, KIconLoader::SizeSmall)),
                       i18n("Create a new profile"),
                       i18n("Use this to open the profile editor"));
   m_profileEditorButton->setGuiItem(newButtenItem);
@@ -112,11 +113,7 @@ void KImportDlg::slotBrowse()
   dialog.setMode(KFile::File | KFile::ExistingOnly);
 
   if(dialog.exec() == QDialog::Accepted) {
-#if KDE_IS_VERSION(3,4,0)
     m_qlineeditFile->setText(dialog.selectedURL().pathOrUrl());
-#else
-    m_qlineeditFile->setText(dialog.selectedURL().prettyUrl(0, KUrl::StripFileProtocol));
-#endif
   }
 }
 

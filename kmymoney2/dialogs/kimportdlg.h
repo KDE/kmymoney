@@ -35,7 +35,7 @@
 // ----------------------------------------------------------------------------
 // Project Headers
 
-#include "../dialogs/kimportdlgdecl.h"
+#include "ui_kimportdlgdecl.h"
 
 /**
   * This class is used to import a qif file to an account.
@@ -51,6 +51,15 @@
   *
   * @short A class to import a qif file to an account.
 **/
+
+class KImportDlgDecl : public QDialog, public Ui::KImportDlgDecl
+{
+public:
+  KImportDlgDecl( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
+
 class KImportDlg : public KImportDlgDecl
 {
   Q_OBJECT
@@ -59,7 +68,7 @@ public:
   /**
     * Standard constructor
     */
-  KImportDlg(QWidget *parent, const char *name = 0);
+  KImportDlg(QWidget *parent);
 
   /** Standard destructor */
   ~KImportDlg();
