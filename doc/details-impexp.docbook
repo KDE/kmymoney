@@ -102,7 +102,7 @@ amended after the import is complete.
 <para>
 &kappname; uses the term Category to denote an account of an Income or
 Expense type. Unlike GnuCash, these are not considered as 'ledger'
-accounts and eentry of transactions directly into categories is not supported; 
+accounts and entry of transactions directly into categories is not supported; 
 allocations are made during transaction entry into other account types.
 </para>
 </sect4>

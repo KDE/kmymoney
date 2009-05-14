@@ -92,7 +92,7 @@ If you check the <guilabel>Case Sensitive</guilabel> box, the search will be cas
 
 <para>
 If you check the <guilabel>Treat Text as regular expression</guilabel> box, the text will be treated as a 
-regular expresssion.  For details on how to craft a regular expression, visit the Qt documentation at doc.trolltech.com, and look for the QRegExp class.
+regular expression.  For details on how to craft a regular expression, visit the Qt documentation at doc.trolltech.com, and look for the QRegExp class.
 </para>
 
 </sect2>

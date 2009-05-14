@@ -214,7 +214,7 @@ transaction register for entering and editing transactions.  With this option tu
 <para>Select the desired behavior for autofill or deactivate it</para>
 <itemizedlist>
 <listitem><para>No Autofill</para></listitem>
-<listitem><para>Same transaction if amount differs less than X percent</para><para>When entering a new transaction with this option, &kappname; will display a list of previous transaction for the payee and account. If previous transactions differ in less than X percent, they will be considered identical. If the percentage is 0, all previous transactions for the payee and account will be displayed. Whend selecting a transaction, all transactions details except the date will be autofilled with those of the selected transaction.</para></listitem>
+<listitem><para>Same transaction if amount differs less than X percent</para><para>When entering a new transaction with this option, &kappname; will display a list of previous transaction for the payee and account. If previous transactions differ in less than X percent, they will be considered identical. If the percentage is 0, all previous transactions for the payee and account will be displayed. When selecting a transaction, all transactions details except the date will be autofilled with those of the selected transaction.</para></listitem>
 <listitem><para>With previously most often used transaction for the payee</para><para>When entering a new transaction with this option enabled, &kappname; will fill in all the transaction details based on the previously most often used transaction with the selected payee.</para></listitem>
 </itemizedlist>
 </listitem>
