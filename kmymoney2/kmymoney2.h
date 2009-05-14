@@ -34,7 +34,7 @@ class QLabel;
 // KDE Includes
 
 #include <kapplication.h>
-#include <kmainwindow.h>
+#include <kxmlguiwindow.h>
 #include <kaction.h>
 #include <k3process.h>
 #include <kurl.h>
@@ -96,7 +96,7 @@ namespace KMyMoneyPlugin { class ImporterPlugin; }
   *
   * @short Main application class.
   */
-class KMyMoney2App : public KMainWindow
+class KMyMoney2App : public KXmlGuiWindow
 		     //, public DCOPObject
 {
   Q_OBJECT

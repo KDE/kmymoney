@@ -48,7 +48,7 @@
 #include <QResizeEvent>
 #include <QLabel>
 #include <Q3PopupMenu>
-#include <Q3ValueList>
+//#include <Q3ValueList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -63,6 +63,7 @@
 #include <klocale.h>
 #include <kconfig.h>
 #include <kstandardaction.h>
+#include <kactioncollection.h>
 #include <kglobal.h>
 #include <kstandarddirs.h>
 #include <kstatusbar.h>
@@ -74,6 +75,7 @@
 #include <krun.h>
 #include <kconfigdialog.h>
 #include <kinputdialog.h>
+#include <kxmlguifactory.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -460,20 +462,70 @@ void KMyMoney2App::initActions(void)
   new KAction(i18n("Rename payee"), "edit", 0, this, SIGNAL(payeeRename()), actionCollection(), "payee_rename");
   new KAction(i18n("Delete payee"), "delete", 0, this, SLOT(slotPayeeDelete()), actionCollection(), "payee_delete");
 
-  new KAction(i18n("New budget"), "filenew", 0, this, SLOT(slotBudgetNew()), actionCollection(), "budget_new");
-  new KAction(i18n("Rename budget"), "edit", 0, this, SIGNAL(budgetRename()), actionCollection(), "budget_rename");
-  new KAction(i18n("Delete budget"), "delete", 0, this, SLOT(slotBudgetDelete()), actionCollection(), "budget_delete");
-  new KAction(i18n("Copy budget"), "editcopy", 0, this, SLOT(slotBudgetCopy()), actionCollection(), "budget_copy");
-  new KAction(i18n("Change budget year"), "", 0, this, SLOT(slotBudgetChangeYear()), actionCollection(), "budget_change_year");
-  new KAction(i18nc("Budget based on forecast", "Forecast"), "forcast", 0, this, SLOT(slotBudgetForecast()), actionCollection(), "budget_forecast");
+  //new KAction(i18n("New budget"), "filenew", 0, this, SLOT(slotBudgetNew()), actionCollection(), "budget_new");
+  KAction *budget_new = actionCollection()->addAction("budget_new");
+  budget_new->setText(i18n("New budget"));
+  budget_new->setIcon(KIcon("filenew"));
+  connect(budget_new, SIGNAL(triggered()), this, SLOT(slotBudgetNew()));
+
+  //new KAction(i18n("Rename budget"), "edit", 0, this, SIGNAL(budgetRename()), actionCollection(), "budget_rename");
+  KAction *budget_rename = actionCollection()->addAction("budget_rename");
+  budget_rename->setText(i18n("Rename budget"));
+  budget_rename->setIcon(KIcon("edit"));
+  connect(budget_rename, SIGNAL(triggered()), this, SIGNAL(budgetRename()));
+
+  //new KAction(i18n("Delete budget"), "delete", 0, this, SLOT(slotBudgetDelete()), actionCollection(), "budget_delete");
+  KAction *budget_delete = actionCollection()->addAction("budget_delete");
+  budget_delete->setText(i18n("Delete budget"));
+  budget_delete->setIcon(KIcon("delete"));
+  connect(budget_delete, SIGNAL(triggered()), this, SLOT(slotBudgetDelete()));
+
+  //new KAction(i18n("Copy budget"), "editcopy", 0, this, SLOT(slotBudgetCopy()), actionCollection(), "budget_copy");
+  KAction *budget_copy = actionCollection()->addAction("budget_copy");
+  budget_copy->setText(i18n("Copy budget"));
+  budget_copy->setIcon(KIcon("editcopy"));
+  connect(budget_copy, SIGNAL(triggered()), this, SLOT(slotBudgetCopy()));
+
+  //new KAction(i18n("Change budget year"), "", 0, this, SLOT(slotBudgetChangeYear()), actionCollection(), "budget_change_year");
+  KAction *budget_change_year = actionCollection()->addAction("budget_change_year");
+  budget_change_year->setText(i18n("Change budget year"));
+  //budget_change_year->setIcon(KIcon(""));
+  connect(budget_change_year, SIGNAL(triggered()), this, SLOT(slotBudgetChangeYear()));
+
+  //new KAction(i18nc("Budget based on forecast", "Forecast"), "forcast", 0, this, SLOT(slotBudgetForecast()), actionCollection(), "budget_forecast");
+  KAction *budget_forecast = actionCollection()->addAction("budget_forecast");
+  budget_forecast->setText(i18n("Budget based on forecast"));
+  budget_forecast->setIcon(KIcon("forcast"));
+  connect(budget_forecast, SIGNAL(triggered()), this, SLOT(slotBudgetForecast()));
 
   // ************************
   // Currency actions
   // ************************
-  new KAction(i18n("New currency"), "filenew", 0, this, SLOT(slotCurrencyNew()), actionCollection(), "currency_new");
-  new KAction(i18n("Rename currency"), "edit", 0, this, SIGNAL(currencyRename()), actionCollection(), "currency_rename");
-  new KAction(i18n("Delete currency"), "delete", 0, this, SLOT(slotCurrencyDelete()), actionCollection(), "currency_delete");
-  new KAction(i18n("Select as base currency"), "kmymoney2", 0, this, SLOT(slotCurrencySetBase()), actionCollection(), "currency_setbase");
+  //new KAction(i18n("New currency"), "filenew", 0, this, SLOT(slotCurrencyNew()), actionCollection(), "currency_new");
+  KAction *currency_new = actionCollection()->addAction("currency_new");
+  currency_new->setText(i18n("New currency"));
+  currency_new->setIcon(KIcon("filenew"));
+  connect(currency_new, SIGNAL(triggered()), this, SLOT(slotCurrencyNew()));
+  
+
+  //new KAction(i18n("Rename currency"), "edit", 0, this, SIGNAL(currencyRename()), actionCollection(), "currency_rename");
+  KAction *currency_rename = actionCollection()->addAction("currency_rename");
+  currency_rename->setText(i18n("Rename currency"));
+  currency_rename->setIcon(KIcon("delete"));
+  connect(currency_rename, SIGNAL(triggered()), this, SIGNAL(currencyRename()));
+
+
+  //new KAction(i18n("Delete currency"), "delete", 0, this, SLOT(slotCurrencyDelete()), actionCollection(), "currency_delete");
+  KAction *currency_delete = actionCollection()->addAction("currency_delete");
+  currency_delete->setText(i18n("Delete currency"));
+  currency_delete->setIcon(KIcon("delete"));
+  connect(currency_delete, SIGNAL(triggered()), this, SLOT(slotCurrencyDelete()));
+
+  KAction *currency_setbase = actionCollection()->addAction("currency_setbase");
+  currency_setbase->setText(i18n("Select as base currency"));
+  currency_setbase->setIcon(KIcon("kmymoney2"));  
+  connect(currency_setbase, SIGNAL(triggered()), this, SLOT(slotCurrencySetBase()));
+  //new KAction(i18n("Select as base currency"), "kmymoney2", 0, this, SLOT(slotCurrencySetBase()), actionCollection(), "currency_setbase");
 
 #ifdef KMM_DEBUG
   new KAction("Test new feature", "", KShortcut("Ctrl+G"), this, SLOT(slotNewFeature()), actionCollection(), "new_user_wizard");
