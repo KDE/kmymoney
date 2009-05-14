@@ -1,12 +1,14 @@
 [Desktop Entry]
 Type=ServiceType
 Name=KMyMoney Importer Plugin
+Name[gl]=Extensión de importación de KMyMoney
 Name[pt]='Plugin' de Importação do KMyMoney
 Name[pt_BR]='Plugin' de Importação do KMyMoney
 Name[sv]=Kmymoney importinsticksprogram
 Name[uk]=Додаток імпортування KMyMoney
 X-KDE-ServiceType=KMyMoneyImporterPlugin
 Comment=A KMyMoney plugin
+Comment[gl]=Unha extensión de KMyMoney
 Comment[pt]=Um 'plugin' do KMyMoney
 Comment[pt_BR]=Um 'plugin' do KMyMoney
 Comment[sv]=Ett Kmymoney insticksprogram
