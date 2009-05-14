@@ -453,7 +453,7 @@ bool MyMoneyQifReader::finishImport(void)
   m_file = 0;
 
   // remove the Don't ask again entries
-  KConfig* config = KGlobal::config();
+  KSharedConfigPtr config = KGlobal::config();
   KConfigGroup grp = config->group(QString::fromLatin1("Notification Messages"));
   QStringList::ConstIterator it;
 
@@ -473,7 +473,7 @@ bool MyMoneyQifReader::finishImport(void)
     m_file = 0;
 
     // remove the Don't ask again entries
-    KConfig* config = KGlobal::config();
+    KSharedConfigPtr config = KGlobal::config();
     KConfigGroup grp = config->group(QString::fromLatin1("Notification Messages"));
     QStringList::ConstIterator it;
 

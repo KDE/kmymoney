@@ -58,7 +58,7 @@ MyMoneyQifProfileNameValidator::~MyMoneyQifProfileNameValidator()
 
 QValidator::State MyMoneyQifProfileNameValidator::validate(QString& name, int&) const
 {
-  KConfig* config = KGlobal::config();
+  KSharedConfigPtr config = KGlobal::config();
   config->group("Profiles");
   QStringList list = grp.readEntry("profiles");
 
@@ -134,7 +134,7 @@ MyMoneyQifProfileEditor::MyMoneyQifProfileEditor(const bool edit, QWidget *paren
 MyMoneyQifProfileEditor::~MyMoneyQifProfileEditor()
 {
   if(m_inEdit && m_isDirty && m_isAccepted) {
-    KConfig* config = KGlobal::config();
+    KSharedConfigPtr config = KGlobal::config();
     config->sync();
   } else {
     slotReset();
@@ -226,7 +226,7 @@ void MyMoneyQifProfileEditor::loadProfileListFromConfig(void)
   m_profileListBox->clear();
 
   QStringList list;
-  KConfig* config = KGlobal::config();
+  KSharedConfigPtr config = KGlobal::config();
   config->group("Profiles");
   list = grp.readEntry("profiles");
 
@@ -312,7 +312,7 @@ void MyMoneyQifProfileEditor::showProfile(void)
 
 void MyMoneyQifProfileEditor::deleteProfile(const QString& name)
 {
-  KConfig* config = KGlobal::config();
+  KSharedConfigPtr config = KGlobal::config();
 
   config->deleteGroup("Profile-" + name);
 
@@ -326,7 +326,7 @@ void MyMoneyQifProfileEditor::deleteProfile(const QString& name)
 
 void MyMoneyQifProfileEditor::addProfile(const QString& name)
 {
-  KConfig* config = KGlobal::config();
+  KSharedConfigPtr config = KGlobal::config();
   config->group("Profiles");
   QStringList list = grp.readEntry("profiles");
 
@@ -347,7 +347,7 @@ void MyMoneyQifProfileEditor::slotOk(void)
 
   m_profile.saveProfile();
 
-  KConfig* config = KGlobal::config();
+  KSharedConfigPtr config = KGlobal::config();
   config->sync();
 
   m_isAccepted = true;
@@ -359,7 +359,7 @@ void MyMoneyQifProfileEditor::slotReset(void)
   // first flush any changes
   m_profile.saveProfile();
 
-  KConfig* config = KGlobal::config();
+  KSharedConfigPtr config = KGlobal::config();
   config->rollback();
   config->reparseConfiguration();
 

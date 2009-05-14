@@ -398,7 +398,7 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
   messages += QString();
 
   // remove the Don't ask again entries
-  KConfig* config = KGlobal::config();
+  KSharedConfigPtr config = KGlobal::config();
   config->setGroup(QString::fromLatin1("Notification Messages"));
   QStringList::ConstIterator it;
 

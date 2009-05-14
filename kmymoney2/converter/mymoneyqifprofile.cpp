@@ -191,7 +191,7 @@ void MyMoneyQifProfile::clear(void)
 
 void MyMoneyQifProfile::loadProfile(const QString& name)
 {
-  KConfig* config = KGlobal::config();
+  KSharedConfigPtr config = KGlobal::config();
   KConfigGroup grp = config->group(name);
 
   clear();

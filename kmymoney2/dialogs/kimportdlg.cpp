@@ -186,7 +186,7 @@ void KImportDlg::loadProfiles(const bool selectLast)
   m_profileComboBox->clear();
 
   QStringList list;
-  KConfig* config = KGlobal::config();
+  KSharedConfigPtr config = KGlobal::config();
   KConfigGroup grp = config->group("Profiles");
 
   list = grp.readEntry("profiles");
