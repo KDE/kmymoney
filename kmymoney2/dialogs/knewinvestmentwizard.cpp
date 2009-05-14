@@ -48,8 +48,8 @@
 #include "../converter/webpricequote.h"
 #include "../kmymoneyutils.h"
 
-KNewInvestmentWizard::KNewInvestmentWizard( QWidget *parent, const char *name ) :
-  KNewInvestmentWizardDecl( parent, name )
+KNewInvestmentWizard::KNewInvestmentWizard( QWidget *parent ) :
+  KNewInvestmentWizardDecl( parent )
 {
   init1();
   slotCheckPage(QString());
@@ -58,8 +58,8 @@ KNewInvestmentWizard::KNewInvestmentWizard( QWidget *parent, const char *name ) 
   connect(m_investmentSymbol, SIGNAL(lineChanged(const QString&)), this, SLOT(slotCheckForExistingSymbol(const QString&)));
 }
 
-KNewInvestmentWizard::KNewInvestmentWizard( const MyMoneyAccount& acc, QWidget *parent, const char *name ) :
-  KNewInvestmentWizardDecl( parent, name ),
+KNewInvestmentWizard::KNewInvestmentWizard( const MyMoneyAccount& acc, QWidget *parent ) :
+  KNewInvestmentWizardDecl( parent ),
   m_account(acc)
 {
   setCaption(i18n("Investment detail wizard"));

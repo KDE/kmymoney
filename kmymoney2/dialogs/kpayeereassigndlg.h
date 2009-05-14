@@ -33,18 +33,28 @@
 // Project Includes
 
 #include <kmymoney/mymoneypayee.h>
-#include "kmymoney2/dialogs/kpayeereassigndlgdecl.h"
+#include "ui_kpayeereassigndlgdecl.h"
 
 /**
  *  Implementation of the dialog that lets the user select a payee in order
  *  to re-assign transactions (for instance, if payees are deleted).
  */
+
+
+class KPayeeReassignDlgDecl : public QDialog, public Ui::KPayeeReassignDlgDecl
+{
+public:
+  KPayeeReassignDlgDecl( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
+
 class KPayeeReassignDlg : public KPayeeReassignDlgDecl
 {
   Q_OBJECT
 public:
   /** Default constructor */
-  KPayeeReassignDlg( QWidget* parent = 0, const char* name = 0);
+  KPayeeReassignDlg( QWidget* parent = 0);
 
   /** Destructor */
   ~KPayeeReassignDlg();

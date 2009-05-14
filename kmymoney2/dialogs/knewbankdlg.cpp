@@ -42,9 +42,10 @@
 
 #include "knewbankdlg.h"
 
-KNewBankDlg::KNewBankDlg(MyMoneyInstitution& institution, QWidget *parent, const char *name)
-  : KNewBankDlgDecl(parent,name,true), m_institution(institution)
+KNewBankDlg::KNewBankDlg(MyMoneyInstitution& institution, QWidget *parent)
+  : KNewBankDlgDecl(parent), m_institution(institution)
 {
+    setModal( true );
   okBtn->setGuiItem(KStandardGuiItem::ok());
   cancelBtn->setGuiItem(KStandardGuiItem::cancel());
 

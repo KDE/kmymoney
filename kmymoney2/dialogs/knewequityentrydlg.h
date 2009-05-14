@@ -26,7 +26,7 @@
 #include <qdialog.h>
 #include <klocale.h>
 
-#include "../dialogs/knewequityentrydecl.h"
+#include "ui_knewequityentrydecl.h"
 
 /**
   *
@@ -36,11 +36,19 @@
   *
   */
 
+class kNewEquityEntryDecl : public QDialog, public Ui::kNewEquityEntryDecl
+{
+public:
+  kNewEquityEntryDecl( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
+
 class KNewEquityEntryDlg : public kNewEquityEntryDecl
 {
   Q_OBJECT
 public:
-  KNewEquityEntryDlg(QWidget *parent = NULL, const char *name = NULL);
+  KNewEquityEntryDlg(QWidget *parent = NULL);
   virtual ~KNewEquityEntryDlg();
 
   void setSymbolName(const QString& str);

@@ -34,13 +34,12 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "konlinequoteconfigurationdecl.h"
 #include "konlinequoteconfigurationdlg.h"
 
 
 KOnlineQuoteConfigurationDlg::KOnlineQuoteConfigurationDlg(QWidget *parent) : kOnlineQuoteConfigurationDecl(parent)
 {
-  
+
 }
 
 KOnlineQuoteConfigurationDlg::~KOnlineQuoteConfigurationDlg()

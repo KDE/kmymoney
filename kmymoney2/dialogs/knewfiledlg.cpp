@@ -44,16 +44,18 @@
 #include "knewfiledlg.h"
 
 KNewFileDlg::KNewFileDlg(QWidget *parent, const char *name, const QString& title)
-  : KNewFileDlgDecl(parent,name,true)
+  : KNewFileDlgDecl(parent)
 {
+    setModal( true );
   init(title);
 }
 
 KNewFileDlg::KNewFileDlg(QString userName, QString userStreet,
   QString userTown, QString userCounty, QString userPostcode, QString userTelephone,
   QString userEmail, QWidget *parent, const char *name, const QString& title)
-  : KNewFileDlgDecl(parent,name,true)
+  : KNewFileDlgDecl(parent)
 {
+    setModal( true );
   userNameEdit->setText(userName);
   streetEdit->setText(userStreet);
   townEdit->setText(userTown);

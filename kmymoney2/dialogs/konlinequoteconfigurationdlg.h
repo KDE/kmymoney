@@ -29,14 +29,19 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "konlinequoteconfigurationdecl.h"
-//#include "../mymoney/mymoneyonlinepriceupdate.h"
-
+#include "ui_konlinequoteconfigurationdecl.h"
 
 /**
   * @author Kevin Tambascio
   */
 
+class kOnlineQuoteConfigurationDecl : public QDialog, public Ui::kOnlineQuoteConfigurationDecl
+{
+public:
+  kOnlineQuoteConfigurationDecl( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
 class KOnlineQuoteConfigurationDlg : public kOnlineQuoteConfigurationDecl
 {
   Q_OBJECT

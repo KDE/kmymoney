@@ -27,7 +27,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "../dialogs/knewinvestmentwizarddecl.h"
+#include "ui_knewinvestmentwizarddecl.h"
 #include <kmymoney/mymoneyaccount.h>
 #include <kmymoney/mymoneysecurity.h>
 
@@ -36,6 +36,14 @@
   *
   * @author Thomas Baumgart
   */
+
+class KNewInvestmentWizardDecl : public QDialog, public Ui::KNewInvestmentWizardDecl
+{
+public:
+  KNewInvestmentWizardDecl( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
 class KNewInvestmentWizard : public KNewInvestmentWizardDecl
 {
   Q_OBJECT
@@ -43,12 +51,12 @@ public:
   /**
     * Use this constructor for the creation of a new investment
     */
-  KNewInvestmentWizard( QWidget *parent = 0, const char *name = 0 );
+  KNewInvestmentWizard( QWidget *parent = 0 );
 
   /**
     * Use this constructor for the modification of an existing investment
     */
-  KNewInvestmentWizard( const MyMoneyAccount& acc, QWidget *parent = 0, const char *name = 0 );
+  KNewInvestmentWizard( const MyMoneyAccount& acc, QWidget *parent = 0 );
 
   /**
     * Use this constructor for the modification of an existing security

@@ -36,16 +36,15 @@ SET(libdialogs_a_SOURCES
   kmymoneyfileinfodlg.cpp
   #kmymoneypricedlg.cpp 
   #kmymoneysplittable.cpp 
-  knewaccountdlg.cpp
+  #knewaccountdlg.cpp
   knewbankdlg.cpp 
   knewbudgetdlg.cpp 
   knewequityentrydlg.cpp
   knewfiledlg.cpp 
-  knewinvestmentwizard.cpp 
-  knewinvestmentwizard.h
-  knewloanwizard.cpp 
+  #knewinvestmentwizard.cpp 
+  #knewloanwizard.cpp 
   konlinequoteconfigurationdlg.cpp
-  kpayeereassigndlg.cpp 
+  #kpayeereassigndlg.cpp 
   krecentfileitem.cpp 
   kreconciledlg.cpp
   kreconcilelistitem.cpp 

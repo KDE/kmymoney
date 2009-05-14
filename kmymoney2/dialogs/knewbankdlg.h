@@ -33,7 +33,16 @@
 #include "../mymoney/mymoneyinstitution.h"
 #include "../mymoney/mymoneykeyvaluecontainer.h"
 
-#include "../dialogs/knewbankdlgdecl.h"
+#include "ui_knewbankdlgdecl.h"
+
+
+class KNewBankDlgDecl : public QDialog, public Ui::KNewBankDlgDecl
+{
+public:
+  KNewBankDlgDecl( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
 
 /// This dialog lets the user create or edit an institution
 class KNewBankDlg : public KNewBankDlgDecl
@@ -41,7 +50,7 @@ class KNewBankDlg : public KNewBankDlgDecl
   Q_OBJECT
 
 public:
-  KNewBankDlg(MyMoneyInstitution& institution, QWidget *parent = 0, const char *name = 0);
+  KNewBankDlg(MyMoneyInstitution& institution, QWidget *parent = 0);
   ~KNewBankDlg();
   const MyMoneyInstitution& institution(void);
 

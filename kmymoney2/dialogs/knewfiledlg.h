@@ -27,10 +27,19 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include "../dialogs/knewfiledlgdecl.h"
+#include "ui_knewfiledlgdecl.h"
 
 // This dialog lets the user create/edit a file.
 // Use the second constructor to edit a file.
+
+class KNewFileDlgDecl : public QDialog, public Ui::KNewFileDlgDecl
+{
+public:
+  KNewFileDlgDecl( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
+
 class KNewFileDlg : public KNewFileDlgDecl  {
    Q_OBJECT
 public:

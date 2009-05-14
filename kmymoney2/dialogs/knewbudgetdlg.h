@@ -31,13 +31,22 @@ class Q3ListViewItem;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "../dialogs/knewbudgetdlgdecl.h"
+#include "ui_knewbudgetdlgdecl.h"
+
+
+class KNewBudgetDlgDecl : public QDialog, public Ui::KNewBudgetDlgDecl
+{
+public:
+  KNewBudgetDlgDecl( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
 
 class KNewBudgetDlg : public KNewBudgetDlgDecl
 {
   Q_OBJECT
 public:
-  KNewBudgetDlg(QWidget* parent, const char *name);
+  KNewBudgetDlg(QWidget* parent);
   ~KNewBudgetDlg();
 
   QString& getYear() {return m_year;};

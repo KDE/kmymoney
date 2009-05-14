@@ -37,8 +37,8 @@
 const int KNewBudgetDlg::m_icFutureYears = 5;
 const int KNewBudgetDlg::m_icPastYears = 2;
 
-KNewBudgetDlg::KNewBudgetDlg(QWidget* parent, const char *name) :
-  KNewBudgetDlgDecl(parent, name)
+KNewBudgetDlg::KNewBudgetDlg(QWidget* parent) :
+  KNewBudgetDlgDecl(parent)
 {
   QStringList slYear;
   QDate dToday = QDate::currentDate();

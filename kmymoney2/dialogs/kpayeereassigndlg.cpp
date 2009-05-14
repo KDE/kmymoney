@@ -38,8 +38,8 @@
 //Added by qt3to4:
 #include <Q3ValueList>
 
-KPayeeReassignDlg::KPayeeReassignDlg( QWidget* parent, const char* name) :
-  KPayeeReassignDlgDecl( parent, name)
+KPayeeReassignDlg::KPayeeReassignDlg( QWidget* parent) :
+  KPayeeReassignDlgDecl( parent)
 {
   buttonOk->setGuiItem(KStandardGuiItem::ok());
   buttonCancel->setGuiItem(KStandardGuiItem::cancel());
