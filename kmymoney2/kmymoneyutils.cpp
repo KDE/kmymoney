@@ -169,25 +169,25 @@ KGuiItem KMyMoneyUtils::accountsFilterGuiItem(void)
 QPixmap KMyMoneyUtils::billScheduleIcon(int size)
 {
   KIconLoader *ic = KIconLoader::global();
-  return ic->loadIcon("billschedule", KIcon::User, size);
+  return ic->loadIcon("billschedule", KIconLoader::User, size);
 }
 
 QPixmap KMyMoneyUtils::depositScheduleIcon(int size)
 {
   KIconLoader *ic = KIconLoader::global();
-  return ic->loadIcon("depositschedule", KIcon::User, size);
+  return ic->loadIcon("depositschedule", KIconLoader::User, size);
 }
 
 QPixmap KMyMoneyUtils::transferScheduleIcon(int size)
 {
   KIconLoader *ic = KIconLoader::global();
-  return ic->loadIcon("transferschedule", KIcon::User, size);
+  return ic->loadIcon("transferschedule", KIconLoader::User, size);
 }
 
 QPixmap KMyMoneyUtils::scheduleIcon(int size)
 {
   KIconLoader *ic = KIconLoader::global();
-  return ic->loadIcon("schedule", KIcon::User, size);
+  return ic->loadIcon("schedule", KIconLoader::User, size);
 }
 
 const char* homePageItems[] = {

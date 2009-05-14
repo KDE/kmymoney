@@ -98,7 +98,7 @@ KScheduledView::KScheduledView(QWidget *parent, const char *name ) :
 
   KIconLoader *il = KIconLoader::global();
   m_tabWidget->setTabIcon(m_listTab, KIcon(il->loadIcon("contents", KIconLoader::Small, KIconLoader::SizeSmall)));
-  m_tabWidget->setTabIcon(m_calendarTab, KIcon(il->loadIcon("calendartab", KIcon::User, KIconLoader::SizeSmall)));
+  m_tabWidget->setTabIcon(m_calendarTab, KIcon(il->loadIcon("calendartab", KIconLoader::User, KIconLoader::SizeSmall)));
 
   connect(m_qlistviewScheduled, SIGNAL(contextMenu(K3ListView*, Q3ListViewItem*, const QPoint&)),
     this, SLOT(slotListViewContextMenu(K3ListView*, Q3ListViewItem*, const QPoint&)));
@@ -320,7 +320,8 @@ void KScheduledView::readConfig(void)
   m_tabWidget->setCurrentPage(grp.readEntry("KScheduleView_tab", 0));
 
   m_qlistviewScheduled->header()->setFont(KMyMoneyGlobalSettings::listHeaderFont());
-  m_qlistviewScheduled->restoreLayout(KGlobal::config(), "Schedule View Settings");
+  grp = config->group("Schedule View Settings");
+  m_qlistviewScheduled->restoreLayout(grp);
 
 }
 
@@ -335,7 +336,8 @@ void KScheduledView::writeConfig(void)
   grp.writeEntry("KScheduleView_tab", m_tabWidget->currentPageIndex());
   config->sync();
 
-  m_qlistviewScheduled->saveLayout(KGlobal::config(), "Schedule View Settings");
+  grp = config->group("Schedule View Settings");
+  m_qlistviewScheduled->saveLayout(grp);
 }
 
 void KScheduledView::slotListViewContextMenu(K3ListView* /* view */, Q3ListViewItem *item, const QPoint& /* pos */)
