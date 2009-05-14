@@ -48,8 +48,8 @@
 
 #include "kselectdatabasedlg.h"
 
-KSelectDatabaseDlg::KSelectDatabaseDlg(QWidget *parent, const char *name)
- : KSelectDatabaseDlgDecl(parent, name) {
+KSelectDatabaseDlg::KSelectDatabaseDlg(QWidget *parent)
+ : KSelectDatabaseDlgDecl(parent) {
   listDrivers->clear();
   // list drivers supported by KMM
   QMap<QString, QString> map = m_map.driverMap();
@@ -90,8 +90,8 @@ KSelectDatabaseDlg::KSelectDatabaseDlg(QWidget *parent, const char *name)
   checkPreLoad->setChecked(false);
 }
 
-KSelectDatabaseDlg::KSelectDatabaseDlg(KUrl openURL, QWidget *parent, const char *name)
- : KSelectDatabaseDlgDecl(parent, name) {
+KSelectDatabaseDlg::KSelectDatabaseDlg(KUrl openURL, QWidget *parent)
+ : KSelectDatabaseDlgDecl(parent) {
   // here we are re-opening a database from a URL
   // probably taken from the last-used or recent file list
   listDrivers->clear();

@@ -26,12 +26,21 @@
 #include "../mymoney/mymoneyfile.h"
 #include "../mymoney/mymoneymoney.h"
 
-#include "kreconciledlgdecl.h"
+#include "ui_kreconciledlgdecl.h"
+
+
+class KReconcileDlgDecl : public QDialog, public Ui::KReconcileDlgDecl
+{
+public:
+  KReconcileDlgDecl( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
 
 // This dialog is used for reconciliation.
 class KReconcileDlg : public KReconcileDlgDecl  {
    Q_OBJECT
-public: 
+public:
 	KReconcileDlg(const MyMoneyMoney previousBal, const MyMoneyMoney endingBal, const QDate endingDate, MyMoneyAccount *accountIndex, const MyMoneyFile* file, QWidget *parent=0, const char *name=0);
 	~KReconcileDlg();
 //  void updateData(void);
@@ -58,7 +67,7 @@ private:
 	MyMoneyMoney m_clearedBalance;
   MyMoneyMoney m_debitBalance;
   MyMoneyMoney m_creditBalance;
-	
+
 	MyMoneyFile* m_file;
 	//MyMoneyBank m_bankIndex;
 	MyMoneyAccount *m_accountIndex;

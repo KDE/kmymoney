@@ -48,6 +48,13 @@ class kMyMoneyLineEdit;
   * @author Thomas Baumgart
   */
 
+class KSplitTransactionDlgDecl : public QDialog, public Ui::KSplitTransactionDlgDecl
+{
+public:
+  KSplitTransactionDlgDecl( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
 class KSplitTransactionDlg : public KSplitTransactionDlgDecl
 {
   Q_OBJECT
@@ -60,7 +67,7 @@ public:
                        const bool deposit,
                        const MyMoneyMoney& calculatedValue,
                        const QMap<QString, MyMoneyMoney>& priceInfo,
-                       QWidget* parent = 0, const char* name = 0);
+                       QWidget* parent = 0);
 
   virtual ~KSplitTransactionDlg();
 

@@ -30,16 +30,25 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include "kselectdatabasedlgdecl.h"
+#include "ui_kselectdatabasedlgdecl.h"
 #include "../mymoney/storage/mymoneystoragesql.h"
 #include "kmymoney/kguiutils.h"
+
+
+class KSelectDatabaseDlgDecl : public QDialog, public Ui::KSelectDatabaseDlgDecl
+{
+public:
+  KSelectDatabaseDlgDecl( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
 
 class KSelectDatabaseDlg : public KSelectDatabaseDlgDecl
 {
 Q_OBJECT
 public:
-  KSelectDatabaseDlg(QWidget *parent = 0, const char *name = 0);
-  KSelectDatabaseDlg(KUrl openURL, QWidget *parent = 0, const char *name = 0);
+  KSelectDatabaseDlg(QWidget *parent = 0);
+  KSelectDatabaseDlg(KUrl openURL, QWidget *parent = 0);
   ~KSelectDatabaseDlg();
   /** Set the mode of this dialog
     * @param - openMode (QIODevice::ReadWrite = open database; QIODevice::WriteOnly = saveas database)

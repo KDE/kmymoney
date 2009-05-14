@@ -151,17 +151,17 @@ void KStartDlg::readConfig()
     i++;
   } while( !value.isNull() );
 
-  config->group("Start Dialog");
+  KConfigGroup grp = config->group("Start Dialog");
   QSize *defaultSize = new QSize(400,300);
-  this->resize( config->readSizeEntry("Geometry", defaultSize ) );
+  this->resize( grp.readEntry("Geometry", defaultSize ) );
 
   // Restore the last page viewed
   // default to the recent files page if no entry exists but files have been found
   // otherwise, default to template page
   if(view_recent->count() > 0)
-    showPage(config->readNumEntry("LastPage", this->pageIndex(recentMainFrame)));
+    showPage(grp.readEntry("LastPage", this->pageIndex(recentMainFrame)));
   else {
-    showPage(config->readNumEntry("LastPage", this->pageIndex(templateMainFrame)));
+    showPage(grp.readEntry("LastPage", this->pageIndex(templateMainFrame)));
     slotAboutToShowPage(templateMainFrame);
   }
 }
@@ -170,10 +170,10 @@ void KStartDlg::readConfig()
 void KStartDlg::writeConfig()
 {
   KConfig *config = KGlobal::config();
-
-  config->group("Start Dialog");
-  config->writeEntry("Geometry", this->size() );
-  config->writeEntry("LastPage", this->activePageIndex());
+ 
+  KConfigGroup grp = config->group("Start Dialog");
+  grp.writeEntry("Geometry", this->size() );
+  grp.writeEntry("LastPage", this->activePageIndex());
   config->sync();
 }
 

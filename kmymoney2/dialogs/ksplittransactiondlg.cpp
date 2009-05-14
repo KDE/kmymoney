@@ -64,8 +64,8 @@ KSplitTransactionDlg::KSplitTransactionDlg(const MyMoneyTransaction& t,
                                            const bool deposit,
                                            const MyMoneyMoney& calculatedValue,
                                            const QMap<QString, MyMoneyMoney>& priceInfo,
-                                           QWidget* parent, const char* name) :
-  KSplitTransactionDlgDecl(parent, name, true),
+                                           QWidget* parent) :
+  KSplitTransactionDlgDecl(parent),
   m_account(acc),
   m_split(s),
   m_precision(2),
@@ -73,6 +73,7 @@ KSplitTransactionDlg::KSplitTransactionDlg(const MyMoneyTransaction& t,
   m_isDeposit(deposit),
   m_calculatedValue(calculatedValue)
 {
+    setModal( true );
   // add icons to buttons
   KIconLoader *il = KIconLoader::global();
 

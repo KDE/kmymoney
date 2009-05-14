@@ -46,7 +46,7 @@ public:
   KSelectTransactionsDlg( QWidget *parent ) : QDialog( parent ) {
     setupUi( this );
   }
-};
+}
 
 class KMergeTransactionsDlg: public KSelectTransactionsDlg
 {

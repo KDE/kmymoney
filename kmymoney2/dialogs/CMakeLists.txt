@@ -48,11 +48,11 @@ SET(libdialogs_a_SOURCES
   krecentfileitem.cpp 
   kreconciledlg.cpp
   kreconcilelistitem.cpp 
-  kreportconfigurationfilterdlg.cpp
-  ksecuritylisteditor.cpp 
+  #kreportconfigurationfilterdlg.cpp
+  #ksecuritylisteditor.cpp 
   kselectdatabasedlg.cpp
-  kselecttransactionsdlg.cpp 
-  ksplittransactiondlg.cpp 
+  #kselecttransactionsdlg.cpp 
+  #ksplittransactiondlg.cpp 
   kstartdlg.cpp
   kupdatestockpricedlg.cpp 
   mymoneyqifprofileeditor.cpp

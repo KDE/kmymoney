@@ -56,7 +56,7 @@ KRecentFileItem::~KRecentFileItem()
 bool KRecentFileItem::move( int x, int y )
 {
   QRect r = rect();
-  QToolTip::remove(m_parent, rect());
+  QToolTip::remove(m_parent);
   r.moveTopLeft(QPoint(x,y));
   QToolTip::add(m_parent, r, m_url);
   return Q3IconViewItem::move(x,y);

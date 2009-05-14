@@ -17,11 +17,7 @@
 #include <kmessagebox.h>
 #include <kglobal.h>
 #include <klocale.h>
-#if QT_VERSION > 300
 #include <kstandarddirs.h>
-#else
-#include <kstandarddirs.h>
-#endif
 
 
 #include "kreconciledlg.h"
@@ -31,8 +27,9 @@
 KReconcileDlg::KReconcileDlg(const MyMoneyMoney /* previousBal */, const MyMoneyMoney /* endingBal */,
   const QDate /* endingDate */, MyMoneyAccount* /*accountIndex */,
   const MyMoneyFile* /* file */, QWidget *parent, const char *name)
- : KReconcileDlgDecl(parent,name,true)
+ : KReconcileDlgDecl(parent)
 {
+    setModal( true );
 /*
   m_balanced = false;
   m_debitsQList.setAutoDelete(false);
@@ -47,7 +44,7 @@ KReconcileDlg::KReconcileDlg(const MyMoneyMoney /* previousBal */, const MyMoney
   m_debitBalance.setAmount(0.0);
   m_creditBalance.setAmount(0.0);
   m_endingDate = endingDate;
-	
+
 
 	totalCreditsLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter | ExpandTabs | SingleLine);
 	totalDebitsLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter | ExpandTabs | SingleLine);
@@ -55,7 +52,7 @@ KReconcileDlg::KReconcileDlg(const MyMoneyMoney /* previousBal */, const MyMoney
 	endingLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter | ExpandTabs | SingleLine);
 	differenceLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter | ExpandTabs | SingleLine);
 
-	
+
 	debitListView->setRootIsDecorated(false);
 	debitListView->addColumn(i18n("Date"));
 	debitListView->addColumn(i18n("Number"));
@@ -66,7 +63,7 @@ KReconcileDlg::KReconcileDlg(const MyMoneyMoney /* previousBal */, const MyMoney
   debitListView->setAllColumnsShowFocus(true);
   // never show a horizontal scroll bar
   debitListView->setHScrollBarMode(QScrollView::AlwaysOff);
-	
+
 	creditListView->setRootIsDecorated(false);
 	creditListView->addColumn(i18n("Date"));
 	creditListView->addColumn(i18n("Number"));
@@ -79,19 +76,19 @@ KReconcileDlg::KReconcileDlg(const MyMoneyMoney /* previousBal */, const MyMoney
   creditListView->setHScrollBarMode(QScrollView::AlwaysOff);
 
 	endingLabel->setText(KGlobal::locale()->formatMoney(m_clearedBalance.amount(),""));
-	
+
 	previousLabel->setText(KGlobal::locale()->formatMoney(m_endingBalance.amount(),""));
-	
+
 	broughtForwardLabel->setText(KGlobal::locale()->formatMoney(m_previousBalance.amount(),""));
 
 	totalCreditsLabel->setText(i18n("Deposits: ") + KGlobal::locale()->formatMoney(m_creditBalance.amount(),""));
-	
+
 	totalDebitsLabel->setText(i18n("Withdrawals: ") + KGlobal::locale()->formatMoney(m_debitBalance.amount(),""));
 
 
 	loadLists();
 	insertTransactions();
-	
+
   connect(debitListView, SIGNAL(clicked(QListViewItem*, const QPoint&, int)), this, SLOT(slotDebitSelected(QListViewItem*, const QPoint&, int)));
   connect(creditListView, SIGNAL(clicked(QListViewItem*, const QPoint&, int)), this, SLOT(slotCreditSelected(QListViewItem*, const QPoint&, int)));
 	connect(buttonCancel, SIGNAL(clicked()), this, SLOT(cancelClicked()));
@@ -108,7 +105,7 @@ KReconcileDlg::~KReconcileDlg()
 
 void KReconcileDlg::clearReconcile()
 {
-/*	
+/*
   MyMoneyTransaction *temp_transaction;
  	for(temp_transaction = m_creditsQList.first();temp_transaction;temp_transaction = m_creditsQList.next())
   {
@@ -237,7 +234,7 @@ void KReconcileDlg::slotCreditSelected(Q3ListViewItem* /* item */, const QPoint&
 			reconcileItem->setReconciled(false);
 			m_reconciledTransactions.remove(reconcileItem->transaction());
     }
-		
+
 		totalCreditsLabel->setText(i18n("Deposits: ") + KGlobal::locale()->formatMoney(m_creditBalance.amount(),""));
 
 		endingLabel->setText(KGlobal::locale()->formatMoney(m_clearedBalance.amount(),""));
@@ -317,7 +314,7 @@ void KReconcileDlg::resetData(const MyMoneyMoney /* previousBal */, const MyMone
   m_debitBalance.setAmount(0.0);
   m_creditBalance.setAmount(0.0);
   m_endingDate = endingDate;
-	
+
 
 	//totalCreditsLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter | ExpandTabs | SingleLine);
 	//totalDebitsLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter | ExpandTabs | SingleLine);
@@ -325,15 +322,15 @@ void KReconcileDlg::resetData(const MyMoneyMoney /* previousBal */, const MyMone
 	//endingLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter | ExpandTabs | SingleLine);
 	//differenceLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter | ExpandTabs | SingleLine);
 
-	
+
 	endingLabel->setText(KGlobal::locale()->formatMoney(m_clearedBalance.amount(),""));
-	
+
 	previousLabel->setText(KGlobal::locale()->formatMoney(m_endingBalance.amount(),""));
 
 	broughtForwardLabel->setText(KGlobal::locale()->formatMoney(m_previousBalance.amount(),""));
 
 	totalCreditsLabel->setText(i18n("Deposits: ") + KGlobal::locale()->formatMoney(m_creditBalance.amount(),""));
-	
+
 	totalDebitsLabel->setText(i18n("Withdrawals: ") + KGlobal::locale()->formatMoney(m_debitBalance.amount(),""));
 
 	loadLists();
@@ -401,7 +398,7 @@ bool KReconcileDlg::inTransactions(MyMoneyTransaction * /*credittrans */)
   int i = 0;
   for ( i=0, transaction=m_accountIndex->transactionFirst(); transaction; transaction=m_accountIndex->transactionNext(), i++) {
     if( credittrans == transaction)
-      return true;  	
+      return true;
   }
 */
   return false;
