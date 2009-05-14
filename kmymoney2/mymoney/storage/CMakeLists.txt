@@ -8,7 +8,7 @@ SET(storage_a_SOURCES
   imymoneystorageformat.cpp mymoneystoragexml.cpp mymoneystoragedump.cpp
   mymoneyseqaccessmgr.cpp imymoneystorage.cpp imymoneyserialize.cpp
   mymoneystorageanon.cpp 
-  #mymoneystoragesql.cpp 
+  mymoneystoragesql.cpp 
   #mymoneydatabasemgr.cpp
   )
 

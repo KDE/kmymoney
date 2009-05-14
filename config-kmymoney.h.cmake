@@ -153,11 +153,6 @@
 /* whether to use OFX directconnect */
 #cmakedefine USE_OFX_DIRECTCONNECT 
 
-/* Defined if compiling without arts */
-#cmakedefine WITHOUT_ARTS 1
-
-/* define to 1 if -fvisibility is supported */
-#cmakedefine __KDE_HAVE_GCC_VISIBILITY 
 
 /* type to use in place of socklen_t if not defined */
 #cmakedefine kde_socklen_t socklen_t
