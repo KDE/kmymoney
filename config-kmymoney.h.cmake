@@ -43,10 +43,10 @@
 #cmakedefine HAVE_INTTYPES_H 1
 
 /* Define if you have libkdchart */
-#define HAVE_KDCHART 1
+#define HAVE_KDCHART 0
 
 /* Define if you have KDChartListTableData::setProp method */
-#define HAVE_KDCHART_SETPROP 1
+#define HAVE_KDCHART_SETPROP 0
 
 /* Define if you have libcppunit */
 #cmakedefine HAVE_LIBCPPUNIT 1
