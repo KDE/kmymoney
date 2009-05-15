@@ -404,37 +404,104 @@ void KMyMoney2App::initActions(void)
   // The settings menu
   // *****************
   KStandardAction::preferences(this, SLOT( slotSettings() ), actionCollection());
-  new KAction(i18n("Enable all messages"), "", 0, this, SLOT(slotEnableMessages()), actionCollection(), "settings_enable_messages");
-  new KAction(i18n("KDE language settings..."), "", 0, this, SLOT(slotKDELanguageSettings()), actionCollection(), "settings_language");
+  //new KAction(i18n("Enable all messages"), "", 0, this, SLOT(slotEnableMessages()), actionCollection(), "settings_enable_messages");
+  KAction *settings_enable_messages = actionCollection()->addAction("settings_enable_messages");
+  settings_enable_messages->setText(i18n("Enable all messages"));
+  connect(settings_enable_messages, SIGNAL(triggered()), this, SLOT(slotEnableMessages()));
+
+  //new KAction(i18n("KDE language settings..."), "", 0, this, SLOT(slotKDELanguageSettings()), actionCollection(), "settings_language");
+  KAction *settings_language = actionCollection()->addAction("settings_language");
+  settings_language->setText(i18n("KDE language settings..."));
+  connect(settings_language, SIGNAL(triggered()), this, SLOT(slotKDELanguageSettings()));
 
   // *************
   // The help menu
   // *************
-  new KAction(i18n("&Show tip of the day"), "idea", 0, this, SLOT(slotShowTipOfTheDay()), actionCollection(), "help_show_tip");
+  //new KAction(i18n("&Show tip of the day"), "idea", 0, this, SLOT(slotShowTipOfTheDay()), actionCollection(), "help_show_tip");
+  KAction *help_show_tip = actionCollection()->addAction("help_show_tip");
+  help_show_tip->setText(i18n("&Show tip of the day"));
+  help_show_tip->setIcon(KIcon("idea"));
+  connect(help_show_tip, SIGNAL(triggered()), this, SLOT(slotShowTipOfTheDay()));
 
   // ***************************
   // Actions w/o main menu entry
   // ***************************
-  new KAction(i18nc("New transaction button", "New"), "filenew", QKeySequence(Qt::CTRL | Qt::Key_Insert), this, SLOT(slotTransactionsNew()), actionCollection(), "transaction_new");
+  //new KAction(i18nc("New transaction button", "New"), "filenew", QKeySequence(Qt::CTRL | Qt::Key_Insert), this, SLOT(slotTransactionsNew()), actionCollection(), "transaction_new");
+  KAction *transaction_new = actionCollection()->addAction("transaction_new");
+  transaction_new->setText(i18nc("New transaction button", "New"));
+  transaction_new->setIcon(KIcon("filenew"));
+  transaction_mark_cleared->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_Insert));
+  connect(transaction_new, SIGNAL(triggered()), this, SLOT(slotTransactionsNew()));
+
 
   // we use Return as the same shortcut for Edit and Enter. Therefore, we don't allow
   // to change them (The standard KDE dialog complains anyway if you want to assign
   // the same shortcut to two actions)
-  p = new KAction(i18nc("Edit transaction button", "Edit"), "edit", 0, this, SLOT(slotTransactionsEdit()), actionCollection(), "transaction_edit");
-  p->setShortcutConfigurable(false);
-  p = new KAction(i18nc("Enter transaction", "Enter"), "button_ok", 0, this, SLOT(slotTransactionsEnter()), actionCollection(), "transaction_enter");
-  p->setShortcutConfigurable(false);
+  //p = new KAction(i18nc("Edit transaction button", "Edit"), "edit", 0, this, SLOT(slotTransactionsEdit()), actionCollection(), "transaction_edit");
+  //p->setShortcutConfigurable(false);
+  KAction *transaction_edit = actionCollection()->addAction("transaction_edit");
+  transaction_edit->setText(i18nc("Edit transaction button", "Edit"));
+  transaction_edit->setIcon(KIcon("edit"));
+  transaction_edit->setShortcutConfigurable(false);
+  connect(transaction_edit, SIGNAL(triggered()), this, SLOT(slotTransactionsEdit()));
 
-  new KAction(i18nc("Edit split button", "Edit splits"), "split_transaction", 0, this, SLOT(slotTransactionsEditSplits()), actionCollection(), "transaction_editsplits");
-  new KAction(i18nc("Cancel transaction edit", "Cancel"), "button_cancel", 0, this, SLOT(slotTransactionsCancel()), actionCollection(), "transaction_cancel");
-  new KAction(i18nc("Delete transaction", "Delete"), "delete", 0, this, SLOT(slotTransactionsDelete()), actionCollection(), "transaction_delete");
-  new KAction(i18nc("Duplicate transaction", "Duplicate"), "editcopy", 0, this, SLOT(slotTransactionDuplicate()), actionCollection(), "transaction_duplicate");
 
-  new KAction(i18nc("Button text for match transaction", "Match"), "stop", 0, this, SLOT(slotTransactionMatch()), actionCollection(), "transaction_match");
-  new KAction(i18nc("Accept 'imported' and 'matched' transaction", "Accept"), "apply", 0, this, SLOT(slotTransactionsAccept()), actionCollection(), "transaction_accept");
+  //p = new KAction(i18nc("Enter transaction", "Enter"), "button_ok", 0, this, SLOT(slotTransactionsEnter()), actionCollection(), "transaction_enter");
+  //p->setShortcutConfigurable(false);
+  KAction *transaction_enter = actionCollection()->addAction("transaction_enter");
+  transaction_enter->setText(i18nc("Enter transaction", "Enter"));
+  transaction_enter->setIcon(KIcon("button_ok"));
+  transaction_enter->setShortcutConfigurable(false);
+  connect(transaction_enter, SIGNAL(triggered()), this, SLOT(slotTransactionsEnter()));
 
-  new KAction(i18nc("Toggle reconciliation flag", "Toggle"), 0, KShortcut("Ctrl+Space"), this, SLOT(slotToggleReconciliationFlag()), actionCollection(), "transaction_mark_toggle");
-  new KAction(i18nc("Mark transaction cleared", "Cleared"), 0, KShortcut("Ctrl+Alt+Space"), this, SLOT(slotMarkTransactionCleared()), actionCollection(), "transaction_mark_cleared");
+  //new KAction(i18nc("Edit split button", "Edit splits"), "split_transaction", 0, this, SLOT(slotTransactionsEditSplits()), actionCollection(), "transaction_editsplits");
+  KAction *transaction_editsplits = actionCollection()->addAction("transaction_editsplits");
+  transaction_editsplits->setText(i18nc("Edit split button", "Edit splits"));
+  transaction_editsplits->setIcon(KIcon("split_transaction"));
+  connect(transaction_editsplits, SIGNAL(triggered()), this, SLOT(slotTransactionsEditSplits()));
+
+  //new KAction(i18nc("Cancel transaction edit", "Cancel"), "button_cancel", 0, this, SLOT(slotTransactionsCancel()), actionCollection(), "transaction_cancel");
+  KAction *transaction_cancel = actionCollection()->addAction("transaction_cancel");
+  transaction_cancel->setText(i18nc("Cancel transaction edit", "Cancel"));
+  transaction_cancel->setIcon(KIcon("button_cancel"));
+  connect(transaction_cancel, SIGNAL(triggered()), this, SLOT(slotTransactionsCancel()));
+
+  //new KAction(i18nc("Delete transaction", "Delete"), "delete", 0, this, SLOT(slotTransactionsDelete()), actionCollection(), "transaction_delete");
+  KAction *transaction_delete = actionCollection()->addAction("transaction_delete");
+  transaction_delete->setText(i18nc("Delete transaction", "Delete"));
+  transaction_delete->setIcon(KIcon("delete"));
+  connect(transaction_delete, SIGNAL(triggered()), this, SLOT(slotTransactionDelete()));
+
+  //new KAction(i18nc("Duplicate transaction", "Duplicate"), "editcopy", 0, this, SLOT(slotTransactionDuplicate()), actionCollection(), "transaction_duplicate");
+  KAction *transaction_duplicate = actionCollection()->addAction("transaction_duplicate");
+  transaction_duplicate->setText(i18nc("Duplicate transaction", "Duplicate"));
+  transaction_duplicate->setIcon(KIcon("editcopy"));
+  connect(transaction_duplicate, SIGNAL(triggered()), this, SLOT(slotTransactionDuplicate()));
+
+  //new KAction(i18nc("Button text for match transaction", "Match"), "stop", 0, this, SLOT(slotTransactionMatch()), actionCollection(), "transaction_match");
+  KAction *transaction_match = actionCollection()->addAction("transaction_match");
+  transaction_match->setText(i18nc("Button text for match transaction", "Match"));
+  transaction_match->setIcon(KIcon("stop"));
+  connect(transaction_match, SIGNAL(triggered()), this, SLOT(slotTransactionMatch()));
+
+  //new KAction(i18nc("Accept 'imported' and 'matched' transaction", "Accept"), "apply", 0, this, SLOT(slotTransactionsAccept()), actionCollection(), "transaction_accept");
+  KAction *transaction_accept = actionCollection()->addAction("transaction_accept");
+  transaction_accept->setText(i18nc("Accept 'imported' and 'matched' transaction", "Accept"));
+  transaction_accept->setIcon(KIcon("apply"));
+  connect(transaction_accept, SIGNAL(triggered()), this, SLOT(slotTransactionsAccept()));
+
+  //new KAction(i18nc("Toggle reconciliation flag", "Toggle"), 0, KShortcut("Ctrl+Space"), this, SLOT(slotToggleReconciliationFlag()), actionCollection(), "transaction_mark_toggle");
+  KAction *transaction_mark_cleared = actionCollection()->addAction("transaction_mark_cleared");
+  transaction_mark_toggle->setText(i18nc("Toggle reconciliation flag", "Toggle"));
+  transaction_mark_toggle->setShortcut(KShortcut("Ctrl+Space"));
+  connect(transaction_mark_toggle, SIGNAL(triggered()), this, SLOT(slotToggleReconciliationFlag()));
+
+  //new KAction(i18nc("Mark transaction cleared", "Cleared"), 0, KShortcut("Ctrl+Alt+Space"), this, SLOT(slotMarkTransactionCleared()), actionCollection(), "transaction_mark_cleared");
+  KAction *transaction_mark_cleared = actionCollection()->addAction("transaction_mark_cleared");
+  transaction_mark_cleared->setText(i18nc("Mark transaction cleared", "Cleared"));
+  transaction_mark_cleared->setShortcut(KShortcut("Ctrl+Alt+Space"));
+  connect(transaction_mark_cleared, SIGNAL(triggered()), this, SLOT(slotMarkTransactionCleared()));
+
   //new KAction(i18nc("Mark transaction reconciled", "Reconciled"), "", KShortcut("Ctrl+Shift+Space"), this, SLOT(slotMarkTransactionReconciled()), actionCollection(), "transaction_mark_reconciled");
   KAction *transaction_mark_reconciled = actionCollection()->addAction("transaction_mark_reconciled");
   transaction_mark_notreconciled->setText(i18nc("Mark transaction reconciled", "Reconciled"));
