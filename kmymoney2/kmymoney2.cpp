@@ -435,33 +435,138 @@ void KMyMoney2App::initActions(void)
 
   new KAction(i18nc("Toggle reconciliation flag", "Toggle"), 0, KShortcut("Ctrl+Space"), this, SLOT(slotToggleReconciliationFlag()), actionCollection(), "transaction_mark_toggle");
   new KAction(i18nc("Mark transaction cleared", "Cleared"), 0, KShortcut("Ctrl+Alt+Space"), this, SLOT(slotMarkTransactionCleared()), actionCollection(), "transaction_mark_cleared");
-  new KAction(i18nc("Mark transaction reconciled", "Reconciled"), "", KShortcut("Ctrl+Shift+Space"), this, SLOT(slotMarkTransactionReconciled()), actionCollection(), "transaction_mark_reconciled");
-  new KAction(i18nc("Mark transaction not reconciled", "Not reconciled"), "", 0, this, SLOT(slotMarkTransactionNotReconciled()), actionCollection(), "transaction_mark_notreconciled");
-  new KAction(i18nc("Select all transactions", "Select all"), 0, KShortcut("Ctrl+A"), this, SIGNAL(selectAllTransactions()), actionCollection(), "transaction_select_all");
+  //new KAction(i18nc("Mark transaction reconciled", "Reconciled"), "", KShortcut("Ctrl+Shift+Space"), this, SLOT(slotMarkTransactionReconciled()), actionCollection(), "transaction_mark_reconciled");
+  KAction *transaction_mark_reconciled = actionCollection()->addAction("transaction_mark_reconciled");
+  transaction_mark_notreconciled->setText(i18nc("Mark transaction reconciled", "Reconciled"));
+  connect(transaction_mark_reconciled, SIGNAL(triggered()), this, SLOT(slotMarkTransactionReconciled()));
 
-  new KAction(i18n("Goto account"), "goto", 0, this, SLOT(slotTransactionGotoAccount()), actionCollection(), "transaction_goto_account");
-  new KAction(i18n("Goto payee"), "goto", 0, this, SLOT(slotTransactionGotoPayee()), actionCollection(), "transaction_goto_payee");
-  new KAction(i18n("Create scheduled transaction..."), "bookmark_add", 0, this, SLOT(slotTransactionCreateSchedule()), actionCollection(), "transaction_create_schedule");
-  new KAction(i18n("Assign next number"), "", KShortcut("Ctrl+Shift+N"), this, SLOT(slotTransactionAssignNumber()), actionCollection(), "transaction_assign_number");
-  new KAction(i18nc("Combine transactions", "Combine"), "", 0, this, SLOT(slotTransactionCombine()), actionCollection(), "transaction_combine");
+  //new KAction(i18nc("Mark transaction not reconciled", "Not reconciled"), "", 0, this, SLOT(slotMarkTransactionNotReconciled()), actionCollection(), "transaction_mark_notreconciled");
+  KAction *transaction_mark_notreconciled = actionCollection()->addAction("transaction_mark_notreconciled");
+  transaction_mark_notreconciled->setText(i18nc("Mark transaction not reconciled", "Not reconciled"));
+  connect(transaction_mark_notreconciled, SIGNAL(triggered()), this, SLOT(slotMarkTransactionNotReconciled()));
 
-  new KAction(i18n("New investment"), "filenew", 0, this, SLOT(slotInvestmentNew()), actionCollection(), "investment_new");
-  new KAction(i18n("Edit investment..."), "edit", 0, this, SLOT(slotInvestmentEdit()), actionCollection(), "investment_edit");
-  new KAction(i18n("Delete investment..."), "delete", 0, this, SLOT(slotInvestmentDelete()), actionCollection(), "investment_delete");
-  new KAction(i18n("Online price update..."), "", 0, this, SLOT(slotOnlinePriceUpdate()), actionCollection(), "investment_online_price_update");
-  new KAction(i18n("Manual price update..."), "", 0, this, SLOT(slotManualPriceUpdate()), actionCollection(), "investment_manual_price_update");
+  //new KAction(i18nc("Select all transactions", "Select all"), 0, KShortcut("Ctrl+A"), this, SIGNAL(selectAllTransactions()), actionCollection(), "transaction_select_all");
+  KAction *transaction_select_all = actionCollection()->addAction("transaction_select_all");
+  transaction_select_all->setText(i18nc("Select all transactions", "Select all"));
+  transaction_select_all->setShortcut(KShortcut("Ctrl+A"));
+  connect(transaction_select_all, SIGNAL(triggered()), this, SIGNAL(selectAllTransactions()));
 
-  new KAction(i18n("New scheduled transaction..."), "filenew", 0, this, SLOT(slotScheduleNew()), actionCollection(), "schedule_new");
-  new KAction(i18n("Edit scheduled transaction..."), "edit", 0, this, SLOT(slotScheduleEdit()), actionCollection(), "schedule_edit");
-  new KAction(i18n("Delete scheduled transaction..."), "delete", 0, this, SLOT(slotScheduleDelete()), actionCollection(), "schedule_delete");
-  new KAction(i18n("Duplicate scheduled transaction"), "editcopy", 0, this, SLOT(slotScheduleDuplicate()), actionCollection(), "schedule_duplicate");
-  new KAction(i18n("Enter next transaction..."), "key_enter", 0, this, SLOT(slotScheduleEnter()), actionCollection(), "schedule_enter");
-  new KAction(i18n("Skip next transaction..."), "player_fwd", 0, this, SLOT(slotScheduleSkip()), actionCollection(), "schedule_skip");
 
-  new KAction(i18n("New payee"), "filenew", 0, this, SLOT(slotPayeeNew()), actionCollection(), "payee_new");
-  new KAction(i18n("Rename payee"), "edit", 0, this, SIGNAL(payeeRename()), actionCollection(), "payee_rename");
-  new KAction(i18n("Delete payee"), "delete", 0, this, SLOT(slotPayeeDelete()), actionCollection(), "payee_delete");
+  //new KAction(i18n("Goto account"), "goto", 0, this, SLOT(slotTransactionGotoAccount()), actionCollection(), "transaction_goto_account");
+  KAction *transaction_goto_account = actionCollection()->addAction("transaction_goto_account");
+  transaction_goto_account->setText(i18n("Goto account"));
+  transaction_goto_account->setIcon(KIcon("goto"));
+  connect(transaction_goto_account, SIGNAL(triggered()), this, SLOT(slotTransactionGotoAccount()));
 
+  //new KAction(i18n("Goto payee"), "goto", 0, this, SLOT(slotTransactionGotoPayee()), actionCollection(), "transaction_goto_payee");
+  KAction *transaction_goto_payee = actionCollection()->addAction("transaction_goto_payee");
+  transaction_goto_payee->setText(i18n("Goto payee"));
+  transaction_goto_payee->setIcon(KIcon("goto"));
+  connect(transaction_goto_payee, SIGNAL(triggered()), this, SLOT(slotTransactionGotoPayee()));
+
+  //new KAction(i18n("Create scheduled transaction..."), "bookmark_add", 0, this, SLOT(slotTransactionCreateSchedule()), actionCollection(), "transaction_create_schedule");
+  KAction *transaction_create_schedule = actionCollection()->addAction("transaction_create_schedule");
+  transaction_create_schedule->setText(i18n("Create scheduled transaction..."));
+  transaction_create_schedule->setIcon(KIcon("bookmark_add"));
+  connect(transaction_create_schedule, SIGNAL(triggered()), this, SLOT(slotTransactionCreateSchedule()));
+
+  //new KAction(i18n("Assign next number"), "", KShortcut("Ctrl+Shift+N"), this, SLOT(slotTransactionAssignNumber()), actionCollection(), "transaction_assign_number");
+  KAction *transaction_assign_number = actionCollection()->addAction("transaction_assign_number");
+  transaction_assign_number->setText(i18n("Assign next number"));
+  transaction_assign_number->setShortcut(KShortcut("Ctrl+Shift+N"));
+  connect(transaction_assign_number, SIGNAL(triggered()), this, SLOT(slotTransactionAssignNumber()));
+
+  //new KAction(i18nc("Combine transactions", "Combine"), "", 0, this, SLOT(slotTransactionCombine()), actionCollection(), "transaction_combine");
+  KAction *transaction_combine = actionCollection()->addAction("transaction_combine");
+  transaction_combine->setText(i18nc("Combine transactions", "Combine"));
+  connect(transaction_combine, SIGNAL(triggered()), this, SLOT(slotTransactionCombine()));
+
+  //Investment
+  //new KAction(i18n("New investment"), "filenew", 0, this, SLOT(slotInvestmentNew()), actionCollection(), "investment_new");
+  KAction *investment_new = actionCollection()->addAction("investment_new");
+  investment_new->setText(i18n("New investment..."));
+  investment_new->setIcon(KIcon("filenew"));
+  connect(investment_new, SIGNAL(triggered()), this, SLOT(slotInvestmentNew()));
+
+  //new KAction(i18n("Edit investment..."), "edit", 0, this, SLOT(slotInvestmentEdit()), actionCollection(), "investment_edit");
+  KAction *investment_edit = actionCollection()->addAction("investment_edit");
+  investment_edit->setText(i18n("Edit investment..."));
+  investment_edit->setIcon(KIcon("edit"));
+  connect(investment_edit, SIGNAL(triggered()), this, SLOT(slotInvestmentEdit()));
+
+  //new KAction(i18n("Delete investment..."), "delete", 0, this, SLOT(slotInvestmentDelete()), actionCollection(), "investment_delete");
+  KAction *investment_delete = actionCollection()->addAction("investment_delete");
+  investment_delete->setText(i18n("Delete investment..."));
+  investment_delete->setIcon(KIcon("delete"));
+  connect(investment_delete, SIGNAL(triggered()), this, SLOT(slotInvestmentDelete()));
+
+  //new KAction(i18n("Online price update..."), "", 0, this, SLOT(slotOnlinePriceUpdate()), actionCollection(), "investment_online_price_update");
+  KAction *investment_online_price_update = actionCollection()->addAction("investment_online_price_update");
+  investment_online_price_update->setText(i18n("Online price update..."));
+  connect(investment_online_price_update, SIGNAL(triggered()), this, SLOT(slotOnlinelPriceUpdate()));
+
+  //new KAction(i18n("Manual price update..."), "", 0, this, SLOT(slotManualPriceUpdate()), actionCollection(), "investment_manual_price_update");
+  KAction *investment_manual_price_update = actionCollection()->addAction("investment_manual_price_update");
+  investment_manual_price_update->setText(i18n("Manual price update..."));
+  connect(investment_manual_price_update, SIGNAL(triggered()), this, SLOT(slotManualPriceUpdate()));
+
+  //Schedule
+  //new KAction(i18n("New scheduled transaction..."), "filenew", 0, this, SLOT(slotScheduleNew()), actionCollection(), "schedule_new");
+  KAction *schedule_new = actionCollection()->addAction("schedule_new");
+  schedule_new->setText(i18n("New scheduled transaction"));
+  schedule_new->setIcon(KIcon("filenew"));
+  connect(schedule_new, SIGNAL(triggered()), this, SLOT(slotScheduleNew()));
+
+  //new KAction(i18n("Edit scheduled transaction..."), "edit", 0, this, SLOT(slotScheduleEdit()), actionCollection(), "schedule_edit");
+  KAction *schedule_edit = actionCollection()->addAction("schedule_edit");
+  schedule_edit->setText(i18n("Edit scheduled transaction"));
+  schedule_edit->setIcon(KIcon("edit"));
+  connect(schedule_edit, SIGNAL(triggered()), this, SLOT(slotScheduleEdit()));
+
+  //new KAction(i18n("Delete scheduled transaction..."), "delete", 0, this, SLOT(slotScheduleDelete()), actionCollection(), "schedule_delete");
+  KAction *schedule_delete = actionCollection()->addAction("schedule_delete");
+  schedule_delete->setText(i18n("Delete scheduled transaction"));
+  schedule_delete->setIcon(KIcon("delete"));
+  connect(schedule_delete, SIGNAL(triggered()), this, SLOT(slotScheduleDelete()));
+
+  //new KAction(i18n("Duplicate scheduled transaction"), "editcopy", 0, this, SLOT(slotScheduleDuplicate()), actionCollection(), "schedule_duplicate");
+  KAction *schedule_duplicate = actionCollection()->addAction("schedule_duplicate");
+  schedule_duplicate->setText(i18n("Duplicate scheduled transaction"));
+  schedule_duplicate->setIcon(KIcon("editcopy"));
+  connect(schedule_duplicate, SIGNAL(triggered()), this, SLOT(slotScheduleDuplicate()));
+
+  //new KAction(i18n("Enter next transaction..."), "key_enter", 0, this, SLOT(slotScheduleEnter()), actionCollection(), "schedule_enter");
+  KAction *schedule_enter = actionCollection()->addAction("schedule_enter");
+  schedule_enter->setText(i18n("Enter next transaction..."));
+  schedule_enter->setIcon(KIcon("key_enter"));
+  connect(schedule_enter, SIGNAL(triggered()), this, SLOT(slotScheduleEnter()));
+
+  //new KAction(i18n("Skip next transaction..."), "player_fwd", 0, this, SLOT(slotScheduleSkip()), actionCollection(), "schedule_skip");
+  KAction *schedule_skip = actionCollection()->addAction("schedule_skip");
+  schedule_skip->setText(i18n("Skip next transaction..."));
+  schedule_skip->setIcon(KIcon("player_fwd"));
+  connect(schedule_skip, SIGNAL(triggered()), this, SLOT(slotScheduleSkip()));
+
+  //Payees
+  //new KAction(i18n("New payee"), "filenew", 0, this, SLOT(slotPayeeNew()), actionCollection(), "payee_new");
+  KAction *payee_new = actionCollection()->addAction("payee_new");
+  payee_new->setText(i18n("New payee"));
+  payee_new->setIcon(KIcon("filenew"));
+  connect(payee_new, SIGNAL(triggered()), this, SLOT(slotPayeeNew()));
+
+  //new KAction(i18n("Rename payee"), "edit", 0, this, SIGNAL(payeeRename()), actionCollection(), "payee_rename");
+  KAction *payee_rename = actionCollection()->addAction("payee_rename");
+  payee_rename->setText(i18n("Rename payee"));
+  payee_rename->setIcon(KIcon("delete"));
+  connect(payee_rename, SIGNAL(triggered()), this, SLOT(slotPayeeRename()));
+
+  //new KAction(i18n("Delete payee"), "delete", 0, this, SLOT(slotPayeeDelete()), actionCollection(), "payee_delete");
+  KAction *payee_delete = actionCollection()->addAction("payee_delete");
+  payee_delete->setText(i18n("Delete payee"));
+  payee_delete->setIcon(KIcon("delete"));
+  connect(payee_delete, SIGNAL(triggered()), this, SLOT(slotPayeeDelete()));
+
+  //Budget
   //new KAction(i18n("New budget"), "filenew", 0, this, SLOT(slotBudgetNew()), actionCollection(), "budget_new");
   KAction *budget_new = actionCollection()->addAction("budget_new");
   budget_new->setText(i18n("New budget"));
