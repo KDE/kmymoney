@@ -1,11 +1,11 @@
 SET (libconverter_a_SOURCES 
 	#mymoneygncreader.cpp 
 	#mymoneyqifprofile.cpp 
-	mymoneyqifreader.cpp
+	#mymoneyqifreader.cpp
 
   	mymoneyqifwriter.cpp 
 	mymoneystatementreader.cpp 
-	#mymoneytemplate.cpp
+	mymoneytemplate.cpp
   webpricequote.cpp
 	)
 

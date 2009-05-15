@@ -40,7 +40,7 @@
 #include <kmessagebox.h>
 #include <kconfig.h>
 #include <kdebug.h>
-#include <kdialogbase.h>
+#include <kdialog.h>
 #include <q3vbox.h>
 #include <qlabel.h>
 
@@ -399,11 +399,11 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
 
   // remove the Don't ask again entries
   KSharedConfigPtr config = KGlobal::config();
-  config->setGroup(QString::fromLatin1("Notification Messages"));
+  KConfigGroup grp = config->group(QString::fromLatin1("Notification Messages"));
   QStringList::ConstIterator it;
 
   for(it = m_dontAskAgain.begin(); it != m_dontAskAgain.end(); ++it) {
-    config->deleteEntry(*it);
+    grp.deleteEntry(*it);
   }
   config->sync();
   m_dontAskAgain.clear();
@@ -892,7 +892,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           m_dontAskAgain += askKey;
         }
         rc = KMessageBox::questionYesNoCancel(0, msg, i18n("New payee/receiver"),
-                  KStandardGuiItem::yes(), KStandardGuiItem::no(), askKey);
+                  KStandardGuiItem::yes(), KStandardGuiItem::no(), KStandardGuiItem::cancel(),askKey);
       }
       delete e;
 
@@ -911,16 +911,14 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           // We use a QPointer because the dialog may get deleted
           // during exec() if the parent of the dialog gets deleted.
           // In that case the guarded ptr will reset to 0.
-          QPointer<KDialog> dialog = new KDialog(
-              "Default Category for Payee",
-              KDialogBase::Yes | KDialogBase::No | KDialogBase::Cancel,
-              KDialogBase::Yes, KDialogBase::Cancel,
-              0, "questionYesNoCancel", true, true,
-              KGuiItem(i18n("Save Category")),
-              KGuiItem(i18n("No Category")),
-              KGuiItem(i18n("Abort")));
+          QPointer<KDialog> dialog = new KDialog(0);
 	  dialog->setCaption(i18n("Default Category for Payee"));
 	  dialog->setButtons(KDialog::Yes | KDialog::No | KDialog::Cancel);
+	  dialog->setModal(true);
+	  dialog->setButtonGuiItem(KDialog::Yes, KGuiItem(i18n("Save Category")));
+	  dialog->setButtonGuiItem(KDialog::No, KGuiItem(i18n("No Category")));
+	  dialog->setButtonGuiItem(KDialog::Cancel, KGuiItem(i18n("Abort")));
+
           Q3VBox *topcontents = new Q3VBox (dialog);
           topcontents->setSpacing(KDialog::spacingHint()*2);
           topcontents->setMargin(KDialog::marginHint());
@@ -945,7 +943,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           if (result == KDialog::Yes) {
             payee.setDefaultAccountId(accountId);
           }
-          else if (result != KDialogBase::No) {
+          else if (result != KDialog::No) {
             //add cancel button? and throw exception like below
             throw new MYMONEYEXCEPTION("USERABORT");
           }
