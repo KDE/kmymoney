@@ -565,7 +565,7 @@ void KNewAccountDlg::okClicked()
     newName += accountNameText;
     if(!file->categoryToAccount(newName, acctype).isEmpty()
     && (file->categoryToAccount(newName, acctype) != m_account.id())) {
-      KMessageBox::error(this, QString("<qt>")+i18n("A category named <b>%1</b> already exists. You cannot create a second category with the same name.").arg(newName)+QString("</qt>"));
+      KMessageBox::error(this, QString("<qt>")+i18n("A category named <b>%1</b> already exists. You cannot create a second category with the same name.",newName)+QString("</qt>"));
       return;
     }
   }
@@ -925,7 +925,7 @@ void KNewAccountDlg::initParentWidget(QString parentId, const QString& accountId
 
   if (m_parentItem)
   {
-    m_subAccountLabel->setText(i18n("Is a sub account of %1").arg(m_parentAccount.name()));
+    m_subAccountLabel->setText(i18n("Is a sub account of %1",m_parentAccount.name()));
     m_parentItem->setOpen(true);
     m_qlistviewParentAccounts->setSelected(m_parentItem, true);
   }
@@ -977,7 +977,7 @@ void KNewAccountDlg::slotSelectionChanged(Q3ListViewItem *item)
 
     //qDebug("Selected account id: %s", accountItem->accountID().data());
     m_parentAccount = file->account(accountItem->id());
-    m_subAccountLabel->setText(i18n("Is a sub account of %1").arg(m_parentAccount.name()));
+    m_subAccountLabel->setText(i18n("Is a sub account of %1",m_parentAccount.name()));
     if(m_qlistviewParentAccounts->isEnabled()) {
       m_bSelectedParentAccount = true;
     }

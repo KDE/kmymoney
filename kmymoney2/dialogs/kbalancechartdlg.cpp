@@ -57,7 +57,7 @@ KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* paren
   KDialog(parent, name)
 {
 #ifdef HAVE_KDCHART
-  setCaption(i18n("Balance of %1").arg(account.name()));
+  setCaption(i18n("Balance of %1",account.name()));
   setSizeGripEnabled( TRUE );
   setModal( TRUE );
 
@@ -68,7 +68,7 @@ KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* paren
                                           MyMoneyReport::eMonths,
                                           MyMoneyTransactionFilter::userDefined, // overridden by the setDateFilter() call below
                                           MyMoneyReport::eDetailTotal,
-                                          i18n("%1 Balance History").arg(account.name()),
+                                          i18n("%1 Balance History",account.name()),
                                                i18n("Generated Report")
                                          );
   reportCfg.setChartByDefault(true);

@@ -108,7 +108,7 @@ void KImportDlg::slotBrowse()
   tmpprofile.loadProfile("Profile-" + profile());
 
   KFileDialog dialog(KGlobalSettings::documentPath(),
-                     i18n("%1|Import files\n%2|All files (*.*)").arg(tmpprofile.filterFileType()).arg("*"),
+                     i18n("%1|Import files\n%2|All files (*.*)",tmpprofile.filterFileType(),"*"),
                      this, i18n("Import File..."), true);
   dialog.setMode(KFile::File | KFile::ExistingOnly);
 

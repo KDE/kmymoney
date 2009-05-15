@@ -84,6 +84,9 @@ void KOfxDirectConnectDlg::init(void)
   g.close();
 #endif
 
+#warning "port to kde4"
+#if 0
+
   QDir homeDir(QDir::home());
   if(homeDir.exists("ofxlog.txt")) {
     d->m_fpTrace.setName(QString("%1/ofxlog.txt").arg(QDir::homePath()));
@@ -114,6 +117,7 @@ void KOfxDirectConnectDlg::init(void)
   setStatus(QString("Contacting %1...").arg(m_connector.url()));
   kProgress1->setMaximum(3);
   kProgress1->setValue(1);
+#endif
 }
 
 void KOfxDirectConnectDlg::setStatus(const QString& _status)
@@ -138,11 +142,13 @@ void KOfxDirectConnectDlg::slotOfxConnected(KIO::Job*)
   m_tmpfile = new KTemporaryFile();
   setStatus("Connection established, retrieving data...");
   setDetails(QString("Downloading data to %1...").arg(m_tmpfile->name()));
-  kProgress1->advance(1);
+  kProgress1->setValue(kProgress1->value()+1);
 }
 
 void KOfxDirectConnectDlg::slotOfxData(KIO::Job*,const QByteArray& _ba)
 {
+#warning "port to kde4"	
+#if 0	
   if ( !m_tmpfile )
 //     throw new MYMONEYEXCEPTION("Not currently connected!!");
     kDebug(2) << "void ofxdcon::slotOfxData():: Not currently connected!";
@@ -153,6 +159,7 @@ void KOfxDirectConnectDlg::slotOfxData(KIO::Job*,const QByteArray& _ba)
   }
 
   setDetails(QString("Got %1 bytes").arg(_ba.size()));
+#endif
 }
 
 void KOfxDirectConnectDlg::slotOfxFinished(KIO::Job* /* e */)

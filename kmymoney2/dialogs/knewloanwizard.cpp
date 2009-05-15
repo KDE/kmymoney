@@ -884,7 +884,7 @@ void KNewLoanWizard::slotCreateCategory(void)
       m_interestAccountEdit->setSelected(id);
 
     } catch (MyMoneyException *e) {
-      KMessageBox::information(this, i18n("Unable to add account: %1").arg(e->what()));
+      KMessageBox::information(this, i18n("Unable to add account: %1",e->what()));
       delete e;
     }
   }
