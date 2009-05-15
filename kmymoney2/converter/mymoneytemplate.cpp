@@ -34,7 +34,7 @@
 #include <kmessagebox.h>
 #include <kio/netaccess.h>
 #include <ksavefile.h>
-
+#include <KTemporaryFile>
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -396,8 +396,8 @@ bool MyMoneyTemplate::saveTemplate(const KUrl& url)
     filename = url.path();
     KSaveFile qfile(filename/*, 0600*/);
     if(qfile.status() == 0) {
-      saveToLocalFile(qfile.file());
-      if(!qfile.close()) {
+      saveToLocalFile(&qfile);
+      if(!qfile.open()) {
         throw new MYMONEYEXCEPTION(i18n("Unable to write changes to '%1'",filename));
       }
     } else {
@@ -405,10 +405,10 @@ bool MyMoneyTemplate::saveTemplate(const KUrl& url)
     }
   } else {
     KTemporaryFile tmpfile;
-    saveToLocalFile(tmpfile.file());
-    if(!KIO::NetAccess::upload(tmpfile.name(), url, NULL))
+    saveToLocalFile(&tmpfile);
+    if(!KIO::NetAccess::upload(tmpfile.fileName(), url, NULL))
       throw new MYMONEYEXCEPTION(i18n("Unable to upload to '%1'",url.url()));
-    tmpfile.unlink();
+    //tmpfile.unlink();
   }
   return true;
 }

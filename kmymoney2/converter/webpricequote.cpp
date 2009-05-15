@@ -40,7 +40,7 @@
 #include <kcalendarsystem.h>
 #include <ktemporaryfile.h>
 #include <kshell.h>
-
+#include <KConfigGroup>
 // ----------------------------------------------------------------------------
 // Project Headers
 
@@ -949,8 +949,8 @@ QDate MyMoneyDateFormat::convertString(const QString& _in, bool _strict, unsigne
         unsigned i = 1;
         while ( i <= 12 )
         {
-          if(KGlobal::locale()->calendar()->monthName(i, 2000, true).toLower() == *it_scanned
-          || KGlobal::locale()->calendar()->monthName(i, 2000, false).toLower() == *it_scanned)
+          if(KGlobal::locale()->calendar()->monthName(i, 2000).toLower() == *it_scanned
+          || KGlobal::locale()->calendar()->monthName(i, 2000, KLocale::shortname).toLower() == *it_scanned)
             month = i;
           ++i;
         }
