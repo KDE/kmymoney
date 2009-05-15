@@ -288,7 +288,7 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
 
 
   if(!m_account.name().isEmpty())
-    messages += i18n("Importing statement for account %1").arg(m_account.name());
+    messages += i18n("Importing statement for account %1",m_account.name());
   else if(s.m_listTransactions.count() == 0)
     messages += i18n("Importing statement without transactions");
 
@@ -386,15 +386,15 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
   if(s.m_closingBalance.isAutoCalc()) {
     messages += i18n("  Statement balance is not contained in statement.");
   } else {
-    messages += i18n("  Statement balance on %1 is reported to be %2").arg(s.m_dateEnd.toString(Qt::ISODate)).arg(s.m_closingBalance.formatMoney("",2));
+    messages += i18n("  Statement balance on %1 is reported to be %2",s.m_dateEnd.toString(Qt::ISODate),s.m_closingBalance.formatMoney("",2));
   }
   messages += i18n("  Transactions");
-  messages += i18n("    %1 processed").arg(d->transactionsCount);
-  messages += i18n("    %1 added").arg(d->transactionsAdded);
-  messages += i18n("    %1 matched").arg(d->transactionsMatched);
-  messages += i18n("    %1 duplicates").arg(d->transactionsDuplicate);
+  messages += i18n("    %1 processed",d->transactionsCount);
+  messages += i18n("    %1 added",d->transactionsAdded);
+  messages += i18n("    %1 matched",d->transactionsMatched);
+  messages += i18n("    %1 duplicates",d->transactionsDuplicate);
   messages += i18n("  Payees");
-  messages += i18n("    %1 created").arg(payeeCount);
+  messages += i18n("    %1 created",payeeCount);
   messages += QString();
 
   // remove the Don't ask again entries
@@ -643,7 +643,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
             // This should be rare.  A statement should have a security entry for any
             // of the securities referred to in the transactions.  The only way to get
             // here is if that's NOT the case.
-            KMessageBox::information(0, i18n("This investment account does not contain the \"%1\" security.  Transactions involving this security will be ignored.").arg(t_in.m_strSecurity),i18n("Security not found"),QString("MissingSecurity%1").arg(t_in.m_strSecurity.trimmed()));
+            KMessageBox::information(0, i18n("This investment account does not contain the \"%1\" security.  Transactions involving this security will be ignored.",t_in.m_strSecurity),i18n("Security not found"),QString("MissingSecurity%1").arg(t_in.m_strSecurity.trimmed()));
             return;
           }
         }
@@ -879,13 +879,13 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
 
       if(m_autoCreatePayee == false) {
         // Ask the user if that is what he intended to do?
-        QString msg = i18n("Do you want to add \"%1\" as payee/receiver?\n\n").arg(payeename);
+        QString msg = i18n("Do you want to add \"%1\" as payee/receiver?\n\n",payeename);
         msg += i18n("Selecting \"Yes\" will create the payee, \"No\" will skip "
                     "creation of a payee record and remove the payee information "
                     "from this transaction. Selecting \"Cancel\" aborts the import "
                     "operation.\n\nIf you select \"No\" here and mark the \"Don't ask "
                     "again\" checkbox, the payee information for all following transactions "
-                    "referencing \"%1\" will be removed.").arg(payeename);
+                    "referencing \"%1\" will be removed.",payeename);
 
         QString askKey = QString("Statement-Import-Payee-")+payeename;
         if(!m_dontAskAgain.contains(askKey)) {
@@ -1217,7 +1217,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
     }
     delete o;
   } catch (MyMoneyException *e) {
-    QString message(i18n("Problem adding or matching imported transaction with id '%1': %2").arg(t_in.m_strBankID).arg(e->what()));
+    QString message(i18n("Problem adding or matching imported transaction with id '%1': %2",t_in.m_strBankID,e->what()));
     qDebug("%s", message.data());
     delete e;
 
@@ -1267,9 +1267,9 @@ bool MyMoneyStatementReader::selectOrCreateAccount(const SelectCreateMode /*mode
   }
 
   QString msg = i18n("<b>You have downloaded a statement for the following account:</b><br><br>");
-  msg += i18n(" - Account Name: %1").arg(account.name()) + "<br>";
-  msg += i18n(" - Account Type: %1").arg(KMyMoneyUtils::accountTypeToString(account.accountType())) + "<br>";
-  msg += i18n(" - Account Number: %1").arg(account.number()) + "<br>";
+  msg += i18n(" - Account Name: %1",account.name()) + "<br>";
+  msg += i18n(" - Account Type: %1",KMyMoneyUtils::accountTypeToString(account.accountType())) + "<br>";
+  msg += i18n(" - Account Number: %1",account.number()) + "<br>";
   msg += "<br>";
 
   QString header;

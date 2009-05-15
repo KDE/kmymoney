@@ -368,7 +368,7 @@ void WebPriceQuote::slotParseQuote(const QString& _quotedata)
       }
 
       m_price = pricestr.toDouble();
-      emit status(i18n("Price found: %1 (%2)").arg(pricestr).arg(m_price));
+      emit status(i18n("Price found: %1 (%2)",pricestr,m_price));
     }
 
     if(dateRegExp.search(quotedata) > -1)
@@ -380,7 +380,7 @@ void WebPriceQuote::slotParseQuote(const QString& _quotedata)
       {
         m_date = dateparse.convertString( datestr,false /*strict*/ );
         gotdate = true;
-        emit status(i18n("Date found: %1").arg(m_date.toString()));;
+        emit status(i18n("Date found: %1",m_date.toString()));;
       }
       catch (MyMoneyException* e)
       {
@@ -397,13 +397,13 @@ void WebPriceQuote::slotParseQuote(const QString& _quotedata)
     }
     else
     {
-      emit error(i18n("Unable to update price for %1").arg(m_symbol));
+      emit error(i18n("Unable to update price for %1",m_symbol));
       emit failed( m_id, m_symbol );
     }
   }
   else
   {
-    emit error(i18n("Unable to update price for %1").arg(m_symbol));
+    emit error(i18n("Unable to update price for %1",m_symbol));
     emit failed( m_id, m_symbol );
   }
 }
