@@ -1,8 +1,5 @@
 ADD_SUBDIRECTORY( storage )
 
-INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} )
-
-
 ########### next target ###############
 
 SET(kmm_mymoney_LIB_SRCS

@@ -1,5 +1,3 @@
-Project(Dialogs)
-
 INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}
  ${KMyMoney_BINARY_DIR}/kmymoney )
 
@@ -87,10 +85,6 @@ SET(dialogs_UI
 )
 
 kde4_add_ui_files(libdialogs_a_SOURCES ${dialogs_UI} )
-
-# The handling of these ui files depends
-# on libkmymoney.so (the widgets library)
-#KMM_ADD_UI_FILES(dialogs_ui_srcs ${dialogs_UI} DEPENDS kmymoney)
 
 # in order to use add_dependencies, we need to add this custom target
 # for all generated header files.

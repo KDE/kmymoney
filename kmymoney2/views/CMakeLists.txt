@@ -1,5 +1,3 @@
-INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} )
-
 ############# next target (views) STATIC ###################
 SET(libviews_a_SOURCES
 	#kaccountsview.cpp

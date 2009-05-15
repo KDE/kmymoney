@@ -1,7 +1,5 @@
 PROJECT(widgets)
 
-INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} )
-
 ########### custom command #############
 
 # create the makekdewidgets file out of the makewidgets.in
@@ -141,8 +139,6 @@ SET(libwidgets_a_SOURCES
   transactioneditorcontainer.cpp
   )
 
-#KDE3_AUTOMOC(${libwidgets_a_SOURCES})
-
 SET(libwidgets_a_UI
   kschedulebriefwidget.ui kmymoneyreportcontroldecl.ui
   kmymoneyreportconfigtab1decl.ui kmymoneyreportconfigtab2decl.ui
@@ -154,7 +150,9 @@ SET(libwidgets_a_UI
 # does not find libkmymoney.so, gcc will fail compiling
 # kmymoneyreportconfigtab2decl.cpp and throw errors like "invalid use
 # of undefined type `struct KMyMoneyGeneralCombo'"
-#KMM_ADD_UI_FILES(widgets_ui_srcs ${libwidgets_a_UI} DEPENDS kmymoney)
+
+
+kde4_add_ui_files(widgets_ui_srcs ${libwidgets_a_UI})
 ADD_CUSTOM_TARGET(generate_widgets_ui_srcs DEPENDS ${widgets_ui_srcs})
 
 ADD_LIBRARY(widgets STATIC
