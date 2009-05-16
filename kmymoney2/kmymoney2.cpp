@@ -63,6 +63,7 @@
 #include <klocale.h>
 #include <kconfig.h>
 #include <kstandardaction.h>
+#include <ktoggleaction.h>
 #include <kactioncollection.h>
 #include <kglobal.h>
 #include <kstandarddirs.h>
@@ -308,14 +309,30 @@ void KMyMoney2App::initActions(void)
   // *************
   // The File menu
   // *************
-  KStandardAction::openNew(this, SLOT(slotFileNew()), actionCollection());
-  KStandardAction::open(this, SLOT(slotFileOpen()), actionCollection());
-  KStandardAction::openRecent(this, SLOT(slotFileOpenRecent(const KUrl&)), actionCollection());
-  KStandardAction::save(this, SLOT(slotFileSave()), actionCollection());
-  KStandardAction::saveAs(this, SLOT(slotFileSaveAs()), actionCollection());
-  KStandardAction::close(this, SLOT(slotFileClose()), actionCollection());
-  KStandardAction::quit(this, SLOT(slotFileQuit()), actionCollection());
-  KStandardAction::print(this, SLOT(slotPrintView()), actionCollection());
+
+  //KStandardAction::openNew(this, SLOT(slotFileNew()), actionCollection());
+  actionCollection()->addAction( KStandardAction::openNew, this, SLOT(slotFileNew()) );
+
+  //KStandardAction::open(this, SLOT(slotFileOpen()), actionCollection());
+  actionCollection()->addAction( KStandardAction::open, this, SLOT(slotFileOpen()) );
+
+  //KStandardAction::openRecent(this, SLOT(slotFileOpenRecent(const KUrl&)), actionCollection());
+  actionCollection()->addAction( KStandardAction::openRecent, this, SLOT(slotFileOpenRecent(const KUrl&)) );
+
+  //KStandardAction::save(this, SLOT(slotFileSave()), actionCollection());
+  actionCollection()->addAction( KStandardAction::save, this, SLOT(slotFileSave()) );
+
+  //KStandardAction::saveAs(this, SLOT(slotFileSaveAs()), actionCollection());
+  actionCollection()->addAction( KStandardAction::saveAs, this, SLOT(slotFileSaveAs()) );
+
+  //KStandardAction::close(this, SLOT(slotFileClose()), actionCollection());
+  actionCollection()->addAction( KStandardAction::close, this, SLOT(slotFileClose()) );
+
+  //KStandardAction::quit(this, SLOT(slotFileQuit()), actionCollection());
+  actionCollection()->addAction( KStandardAction::quit, this, SLOT(slotFileQuit()) );
+
+  //KStandardAction::print(this, SLOT(slotPrintView()), actionCollection());
+  actionCollection()->addAction( KStandardAction::print, this, SLOT(slotPrintView()) );
 
   //new KAction(i18n("Open database..."), "",0,this,SLOT(slotOpenDatabase()),actionCollection(),"open_database");
   KAction *open_database = actionCollection()->addAction("open_database");
@@ -395,10 +412,30 @@ void KMyMoney2App::initActions(void)
   // *************
   // The View menu
   // *************
-  new KToggleAction(i18n("Show Transaction Detail"), KShortcut("Ctrl+T"), actionCollection(), "view_show_transaction_detail");
-  new KToggleAction(i18n("Hide reconciled transactions"), "hide_reconciled", KShortcut("Ctrl+R"), this, SLOT(slotHideReconciledTransactions()), actionCollection(), "view_hide_reconciled_transactions");
-  new KToggleAction(i18n("Hide unused categories"), "hide_categories", KShortcut("Ctrl+U"), this, SLOT(slotHideUnusedCategories()), actionCollection(), "view_hide_unused_categories");
+  //new KToggleAction(i18n("Show Transaction Detail"), KShortcut("Ctrl+T"), actionCollection(), "view_show_transaction_detail");
+  KToggleAction *view_show_transaction_detail = actionCollection()->addAction("view_show_transaction_detail");
+  view_show_transaction_detail->setText(i18n("Show Transaction Detail"));
+  view_show_transaction_detail->setShortcut(KShortcut("Ctrl+T"));
+
+  //new KToggleAction(i18n("Hide reconciled transactions"), "hide_reconciled", KShortcut("Ctrl+R"), this, SLOT(slotHideReconciledTransactions()), actionCollection(), "view_hide_reconciled_transactions");
+  KToggleAction *view_hide_reconciled_transactions = actionCollection()->addAction("view_hide_reconciled_transactions");
+  view_hide_reconciled_transactions->setText(i18n("Hide reconciled transactions"));
+  view_hide_reconciled_transactions->setIcon(KIcon("hide_reconciled"));
+  view_hide_reconciled_transactions->setShortcut(KShortcut("Ctrl+R"));
+  connect(view_hide_reconciled_transactions, SIGNAL(triggered()), this, SLOT(slotHideReconciledTransactions()));
+
+  //new KToggleAction(i18n("Hide unused categories"), "hide_categories", KShortcut("Ctrl+U"), this, SLOT(slotHideUnusedCategories()), actionCollection(), "view_hide_unused_categories");
+  KToggleAction *view_hide_unused_categories = actionCollection()->addAction("view_hide_unused_categories");
+  view_hide_unused_categories->setText(i18n("Hide unused categories"));
+  view_hide_unused_categories->setIcon(KIcon("hide_categories"));
+  view_hide_unused_categories->setShortcut(KShortcut("Ctrl+U"));
+  connect(view_hide_unused_categories, SIGNAL(triggered()), this, SLOT(slotHideUnusedCategories()));
+
   new KToggleAction(i18n("Show all accounts"), "", KShortcut("Ctrl+Shift+A"), this, SLOT(slotShowAllAccounts()), actionCollection(), "view_show_all_accounts");
+  KToggleAction *view_show_all_accounts = actionCollection()->addAction("view_show_all_accounts");
+  view_show_all_accounts->setText(i18n("Show all accounts"));
+  view_show_all_accounts->setShortcut(KShortcut("Ctrl+Shift+A"));
+  connect(view_show_all_accounts, SIGNAL(triggered()), this, SLOT(slotShowAllAccounts()));
 
   // *********************
   // The institutions menu
@@ -489,7 +526,7 @@ void KMyMoney2App::initActions(void)
   account_chart->setIcon(KIcon("kchart_chrt"));
   connect(account_chart, SIGNAL(triggered()), this, SLOT(slotAccountChart()));
 #endif
-  new KAction(i18n("Map to online account"), "news_subscribe", 0, this, SLOT(slotAccountMapOnline()), actionCollection(), "account_online_map");
+  //new KAction(i18n("Map to online account"), "news_subscribe", 0, this, SLOT(slotAccountMapOnline()), actionCollection(), "account_online_map");
   KAction *account_online_map = actionCollection()->addAction("account_online_map");
   account_online_map->setText(i18n("Map to online account"));
   account_online_map->setIcon(KIcon("news_subscribe"));
@@ -587,7 +624,9 @@ void KMyMoney2App::initActions(void)
   // *****************
   // The settings menu
   // *****************
-  KStandardAction::preferences(this, SLOT( slotSettings() ), actionCollection());
+  //KStandardAction::preferences(this, SLOT( slotSettings() ), actionCollection());
+  actionCollection()->addAction( KStandardAction::preferences, this, SLOT(slotSettings()) );
+
   //new KAction(i18n("Enable all messages"), "", 0, this, SLOT(slotEnableMessages()), actionCollection(), "settings_enable_messages");
   KAction *settings_enable_messages = actionCollection()->addAction("settings_enable_messages");
   settings_enable_messages->setText(i18n("Enable all messages"));
@@ -688,7 +727,7 @@ void KMyMoney2App::initActions(void)
 
   //new KAction(i18nc("Mark transaction reconciled", "Reconciled"), "", KShortcut("Ctrl+Shift+Space"), this, SLOT(slotMarkTransactionReconciled()), actionCollection(), "transaction_mark_reconciled");
   KAction *transaction_mark_reconciled = actionCollection()->addAction("transaction_mark_reconciled");
-  transaction_mark_notreconciled->setText(i18nc("Mark transaction reconciled", "Reconciled"));
+  transaction_mark_reconciled->setText(i18nc("Mark transaction reconciled", "Reconciled"));
   connect(transaction_mark_reconciled, SIGNAL(triggered()), this, SLOT(slotMarkTransactionReconciled()));
 
   //new KAction(i18nc("Mark transaction not reconciled", "Not reconciled"), "", 0, this, SLOT(slotMarkTransactionNotReconciled()), actionCollection(), "transaction_mark_notreconciled");
@@ -884,9 +923,22 @@ void KMyMoney2App::initActions(void)
   //new KAction(i18n("Select as base currency"), "kmymoney2", 0, this, SLOT(slotCurrencySetBase()), actionCollection(), "currency_setbase");
 
 #ifdef KMM_DEBUG
-  new KAction("Test new feature", "", KShortcut("Ctrl+G"), this, SLOT(slotNewFeature()), actionCollection(), "new_user_wizard");
-  new KToggleAction("Debug Traces", "", 0, this, SLOT(slotToggleTraces()), actionCollection(), "debug_traces");
-  new KToggleAction("Debug Timers", "", 0, this, SLOT(slotToggleTimers()), actionCollection(), "debug_timers");
+  //new KAction("Test new feature", "", KShortcut("Ctrl+G"), this, SLOT(slotNewFeature()), actionCollection(), "new_user_wizard");
+  KAction *new_user_wizard = actionCollection()->addAction("new_user_wizard");
+  new_user_wizard->setText(i18n("Test new feature"));
+  new_user_wizard->setShortcut(KShortcut("Ctrl+G"));
+  connect(new_user_wizard, SIGNAL(triggered()), this, SLOT(slotNewFeature()));
+
+  //new KToggleAction("Debug Traces", "", 0, this, SLOT(slotToggleTraces()), actionCollection(), "debug_traces");
+  KToggleAction *debug_traces = actionCollection()->addAction("debug_traces");
+  debug_traces->setText(i18n("Debug Traces"));
+  connect(debug_traces, SIGNAL(triggered()), this, SLOT(slotToggleTraces()));
+
+  //new KToggleAction("Debug Timers", "", 0, this, SLOT(slotToggleTimers()), actionCollection(), "debug_timers");
+  KToggleAction *debug_timers = actionCollection()->addAction("debug_timers");
+  debug_timers->setText(i18n("Debug Timers"));
+  connect(debug_timers, SIGNAL(triggered()), this, SLOT(slotToggleTimers()));
+
 #endif
   // ************************
   // Currently unused actions
