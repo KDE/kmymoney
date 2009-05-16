@@ -317,27 +317,80 @@ void KMyMoney2App::initActions(void)
   KStandardAction::quit(this, SLOT(slotFileQuit()), actionCollection());
   KStandardAction::print(this, SLOT(slotPrintView()), actionCollection());
 
-  new KAction(i18n("Open database..."), "",0,this,SLOT(slotOpenDatabase()),actionCollection(),"open_database");
-  new KAction(i18n("Save as database..."), "",0,this,SLOT(slotSaveAsDatabase()),actionCollection(),"saveas_database");
-  new KAction(i18n("Backup..."), "backup",0,this,SLOT(slotFileBackup()),actionCollection(),"file_backup");
-  new KAction(i18n("QIF..."), "", 0, this, SLOT(slotQifImport()), actionCollection(), "file_import_qif");
-  new KAction(i18n("Gnucash..."), "", 0, this, SLOT(slotGncImport()), actionCollection(), "file_import_gnc");
-  new KAction(i18n("Statement file..."), "", 0, this, SLOT(slotStatementImport()), actionCollection(), "file_import_statement");
+  //new KAction(i18n("Open database..."), "",0,this,SLOT(slotOpenDatabase()),actionCollection(),"open_database");
+  KAction *open_database = actionCollection()->addAction("open_database");
+  open_database->setText(i18n("Open database..."));
+  connect(open_database, SIGNAL(triggered()), this, SLOT(slotOpenDatabase()));
 
-  new KAction(i18n("Account Template..."), "", 0, this, SLOT(slotLoadAccountTemplates()), actionCollection(), "file_import_template");
-  new KAction(i18n("Account Template..."), "", 0, this, SLOT(slotSaveAccountTemplates()), actionCollection(), "file_export_template");
-  new KAction(i18n("QIF..."), "", 0, this, SLOT(slotQifExport()), actionCollection(), "file_export_qif");
-  new KAction(i18n("Personal Data..."), "personal_data", 0, this, SLOT(slotFileViewPersonal()), actionCollection(), "view_personal_data");
+  //new KAction(i18n("Save as database..."), "",0,this,SLOT(slotSaveAsDatabase()),actionCollection(),"saveas_database");
+  KAction *saveas_database = actionCollection()->addAction("saveas_database");
+  saveas_database->setText(i18n("Save as database..."));
+  connect(saveas_database, SIGNAL(triggered()), this, SLOT(slotSaveAsDatabase()));
+
+  //new KAction(i18n("Backup..."), "backup",0,this,SLOT(slotFileBackup()),actionCollection(),"file_backup");
+  KAction *file_backup = actionCollection()->addAction("file_backup");
+  file_backup->setText(i18n("QIF..."));
+  file_backup->setIcon(KIcon("backup"));
+  connect(file_backup, SIGNAL(triggered()), this, SLOT(slotFileBackup()));
+
+  //new KAction(i18n("QIF..."), "", 0, this, SLOT(slotQifImport()), actionCollection(), "file_import_qif");
+  KAction *file_import_qif = actionCollection()->addAction("file_import_qif");
+  file_import_qif->setText(i18n("QIF..."));
+  connect(file_import_qif, SIGNAL(triggered()), this, SLOT(slotQifImport()));
+
+  //new KAction(i18n("Gnucash..."), "", 0, this, SLOT(slotGncImport()), actionCollection(), "file_import_gnc");
+  KAction *file_import_gnc = actionCollection()->addAction("file_import_gnc");
+  file_import_gnc->setText(i18n("Gnucash..."));
+  connect(file_import_gnc, SIGNAL(triggered()), this, SLOT(slotGncImport()));
+
+  //new KAction(i18n("Statement file..."), "", 0, this, SLOT(slotStatementImport()), actionCollection(), "file_import_statement");
+  KAction *file_import_statement = actionCollection()->addAction("file_import_statement");
+  file_import_statement->setText(i18n("Statement file..."));
+  connect(file_import_statement, SIGNAL(triggered()), this, SLOT(slotStatementImport()));
+
+  //new KAction(i18n("Account Template..."), "", 0, this, SLOT(slotLoadAccountTemplates()), actionCollection(), "file_import_template");
+  KAction *file_import_template = actionCollection()->addAction("file_import_template");
+  file_import_template->setText(i18n("Account Template..."));
+  connect(file_import_template, SIGNAL(triggered()), this, SLOT(slotLoadAccountTemplates()));
+
+  //new KAction(i18n("Account Template..."), "", 0, this, SLOT(slotSaveAccountTemplates()), actionCollection(), "file_export_template");
+  KAction *file_export_template = actionCollection()->addAction("file_export_template");
+  file_export_template->setText(i18n("Account Template..."));
+  connect(file_export_template, SIGNAL(triggered()), this, SLOT(slotSaveAccountTemplates()));
+
+
+  //new KAction(i18n("QIF..."), "", 0, this, SLOT(slotQifExport()), actionCollection(), "file_export_qif");
+  KAction *file_export_qif = actionCollection()->addAction("file_export_qif");
+  file_export_qif->setText(i18n("QIF..."));
+  connect(file_export_qif, SIGNAL(triggered()), this, SLOT(slotQifExport()));
+
+  //new KAction(i18n("Personal Data..."), "personal_data", 0, this, SLOT(slotFileViewPersonal()), actionCollection(), "view_personal_data");
+  KAction *view_personal_data = actionCollection()->addAction("view_personal_data");
+  view_personal_data->setText(i18n("Personal Data..."));
+  view_personal_data->setIcon(KIcon("personal_data"));
+  connect(view_personal_data, SIGNAL(triggered()), this, SLOT(slotFileViewPersonal()));
 
 #if KMM_DEBUG
-  new KAction(i18n("Dump Memory"), "", 0, this, SLOT(slotFileFileInfo()),  actionCollection(), "file_dump");
+  //new KAction(i18n("Dump Memory"), "", 0, this, SLOT(slotFileFileInfo()),  actionCollection(), "file_dump");
+  KAction *file_dump = actionCollection()->addAction("file_dump");
+  file_dump->setText(i18n("Dump Memory"));
+  connect(file_dump, SIGNAL(triggered()), this, SLOT(slotFileFileInfo()));
 #endif
-  new KAction(i18n("File-Information..."), "info", 0, this, SLOT(slotFileInfoDialog()), actionCollection(), "view_file_info");
+  //new KAction(i18n("File-Information..."), "info", 0, this, SLOT(slotFileInfoDialog()), actionCollection(), "view_file_info");
+  KAction *view_file_info = actionCollection()->addAction("view_file_info");
+  view_file_info->setText(i18n("File-Information..."));
+  view_file_info->setIcon(KIcon("info"));
+  connect(view_file_info, SIGNAL(triggered()), this, SLOT(slotFileInfoDialog()));
 
   // *************
   // The Edit menu
   // *************
-  new KAction(i18n("Find transaction..."), "transaction_find", KShortcut("Ctrl+F"), this, SLOT(slotFindTransaction()), actionCollection(), "edit_find_transaction");
+  //new KAction(i18n("Find transaction..."), "transaction_find", KShortcut("Ctrl+F"), this, SLOT(slotFindTransaction()), actionCollection(), "edit_find_transaction");
+  KAction *edit_find_transaction = actionCollection()->addAction("edit_find_transaction");
+  edit_find_transaction->setText(i18n("Find transaction..."));
+  edit_find_transaction->setIcon(KIcon("transaction_find"));
+  edit_find_transaction->setShortcut(KShortcut("Ctrl+F"));
+  connect(edit_find_transaction, SIGNAL(triggered()), this, SLOT(slotFindTransaction()));
 
   // *************
   // The View menu
@@ -350,55 +403,186 @@ void KMyMoney2App::initActions(void)
   // *********************
   // The institutions menu
   // *********************
-  new KAction(i18n("New institution..."), "institution_add", 0, this, SLOT(slotInstitutionNew()), actionCollection(), "institution_new");
-  new KAction(i18n("Edit institution..."), "edit", 0, this, SLOT(slotInstitutionEdit()), actionCollection(), "institution_edit");
-  new KAction(i18n("Delete institution..."), "delete", 0, this, SLOT(slotInstitutionDelete()), actionCollection(), "institution_delete");
+  //new KAction(i18n("New institution..."), "institution_add", 0, this, SLOT(slotInstitutionNew()), actionCollection(), "institution_new");
+  KAction *institution_new = actionCollection()->addAction("institution_new");
+  institution_new->setText(i18n("New institution..."));
+  institution_new->setIcon(KIcon("institution_add"));
+  connect(institution_new, SIGNAL(triggered()), this, SLOT(slotInstitutionNew()));
+
+  //new KAction(i18n("Edit institution..."), "edit", 0, this, SLOT(slotInstitutionEdit()), actionCollection(), "institution_edit");
+  KAction *institution_edit = actionCollection()->addAction("institution_edit");
+  institution_edit->setText(i18n("Edit institution..."));
+  institution_edit->setIcon(KIcon("edit"));
+  connect(institution_edit, SIGNAL(triggered()), this, SLOT(slotInstitutionEdit()));
+
+  //new KAction(i18n("Delete institution..."), "delete", 0, this, SLOT(slotInstitutionDelete()), actionCollection(), "institution_delete");
+  KAction *institution_delete = actionCollection()->addAction("institution_delete");
+  institution_delete->setText(i18n("Delete institution..."));
+  institution_delete->setIcon(KIcon("delete"));
+  connect(institution_delete, SIGNAL(triggered()), this, SLOT(slotInstitutionDelete()));
 
   // *****************
   // The accounts menu
   // *****************
-  new KAction(i18n("New account..."), "account_add", 0, this, SLOT(slotAccountNew()), actionCollection(), "account_new");
+  //new KAction(i18n("New account..."), "account_add", 0, this, SLOT(slotAccountNew()), actionCollection(), "account_new");
+  KAction *account_new = actionCollection()->addAction("account_new");
+  account_new->setText(i18n("New account..."));
+  account_new->setIcon(KIcon("account_add"));
+  connect(account_new, SIGNAL(triggered()), this, SLOT(slotAccountNew()));
+
   // note : action "category_new" is included in this menu but defined below
-  new KAction(i18n("Open ledger"), "account", 0, this, SLOT(slotAccountOpen()), actionCollection(), "account_open");
-  new KAction(i18n("Reconcile..."), "reconcile", KShortcut("Ctrl+Shift+R"), this, SLOT(slotAccountReconcileStart()), actionCollection(), "account_reconcile");
-  new KAction(i18nc("Finish reconciliation", "Finish"), "player_end", 0, this, SLOT(slotAccountReconcileFinish()), actionCollection(), "account_reconcile_finish");
-  new KAction(i18nc("Postpone reconciliation", "Postpone"), "player_pause", 0, this, SLOT(slotAccountReconcilePostpone()), actionCollection(), "account_reconcile_postpone");
-  new KAction(i18n("Edit account..."), "edit", 0, this, SLOT(slotAccountEdit()), actionCollection(), "account_edit");
-  new KAction(i18n("Delete account..."), "delete", 0, this, SLOT(slotAccountDelete()), actionCollection(), "account_delete");
-  new KAction(i18n("Close account"), "", 0, this, SLOT(slotAccountClose()), actionCollection(), "account_close");
-  new KAction(i18n("Reopen account"), "", 0, this, SLOT(slotAccountReopen()), actionCollection(), "account_reopen");
-  new KAction(i18n("Transaction report"), "view_info", 0, this, SLOT(slotAccountTransactionReport()), actionCollection(), "account_transaction_report");
+  //new KAction(i18n("Open ledger"), "account", 0, this, SLOT(slotAccountOpen()), actionCollection(), "account_open");
+  KAction *account_open = actionCollection()->addAction("account_open");
+  account_open->setText(i18n("Open ledger"));
+  account_open->setIcon(KIcon("account"));
+  connect(account_open, SIGNAL(triggered()), this, SLOT(slotAccountOpen()));
+
+  //new KAction(i18n("Reconcile..."), "reconcile", KShortcut("Ctrl+Shift+R"), this, SLOT(slotAccountReconcileStart()), actionCollection(), "account_reconcile");
+  KAction *account_reconcile = actionCollection()->addAction("account_reconcile");
+  account_reconcile->setText(i18n("Reconcile..."));
+  account_reconcile->setIcon(KIcon("reconcile"));
+  account_reconcile->setShortcut(KShortcut("Ctrl+Shift+R"));
+  connect(account_reconcile, SIGNAL(triggered()), this, SLOT(slotAccountReconcileStart()));
+
+  //new KAction(i18nc("Finish reconciliation", "Finish"), "player_end", 0, this, SLOT(slotAccountReconcileFinish()), actionCollection(), "account_reconcile_finish");
+  KAction *account_reconcile_finish = actionCollection()->addAction("account_reconcile_finish");
+  account_reconcile_finish->setText(i18nc("Finish reconciliation", "Finish"));
+  account_reconcile_finish->setIcon(KIcon("player_end"));
+  connect(account_reconcile_finish, SIGNAL(triggered()), this, SLOT(slotAccountReconcileFinish()));
+
+  //new KAction(i18nc("Postpone reconciliation", "Postpone"), "player_pause", 0, this, SLOT(slotAccountReconcilePostpone()), actionCollection(), "account_reconcile_postpone");
+  KAction *account_reconcile_postpone = actionCollection()->addAction("account_reconcile_postpone");
+  account_reconcile_postpone->setText(i18n("Postpone reconciliation"));
+  account_reconcile_postpone->setIcon(KIcon("player_pause"));
+  connect(account_reconcile_postpone, SIGNAL(triggered()), this, SLOT(slotAccountReconcilePostpone()));
+
+  //new KAction(i18n("Edit account..."), "edit", 0, this, SLOT(slotAccountEdit()), actionCollection(), "account_edit");
+  KAction *account_edit = actionCollection()->addAction("account_edit");
+  account_edit->setText(i18n("Edit account..."));
+  account_edit->setIcon(KIcon("edit"));
+  connect(account_edit, SIGNAL(triggered()), this, SLOT(slotAccountEdit()));
+
+  //new KAction(i18n("Delete account..."), "delete", 0, this, SLOT(slotAccountDelete()), actionCollection(), "account_delete");
+  KAction *account_delete = actionCollection()->addAction("account_delete");
+  account_delete->setText(i18n("Delete account..."));
+  connect(account_delete, SIGNAL(triggered()), this, SLOT(slotAccountDelete()));
+
+  //new KAction(i18n("Close account"), "", 0, this, SLOT(slotAccountClose()), actionCollection(), "account_close");
+  KAction *account_close = actionCollection()->addAction("account_close");
+  account_close->setText(i18n("Close account"));
+  connect(account_close, SIGNAL(triggered()), this, SLOT(slotAccountClose()));
+
+  //new KAction(i18n("Reopen account"), "", 0, this, SLOT(slotAccountReopen()), actionCollection(), "account_reopen");
+  KAction *account_reopen = actionCollection()->addAction("account_reopen");
+  account_reopen->setText(i18n("Reopen account"));
+  connect(account_reopen, SIGNAL(triggered()), this, SLOT(slotAccountReopen()));
+
+  //new KAction(i18n("Transaction report"), "view_info", 0, this, SLOT(slotAccountTransactionReport()), actionCollection(), "account_transaction_report");
+  KAction *account_transaction_report = actionCollection()->addAction("account_transaction_report");
+  account_transaction_report->setText(i18n("Transaction report"));
+  account_transaction_report->setIcon(KIcon("view_info"));
+  connect(account_transaction_report, SIGNAL(triggered()), this, SLOT(slotAccountTransactionReport()));
 #ifdef HAVE_KDCHART
-  new KAction(i18n("Show balance chart..."), "kchart_chrt", 0, this, SLOT(slotAccountChart()), actionCollection(), "account_chart");
+  //new KAction(i18n("Show balance chart..."), "kchart_chrt", 0, this, SLOT(slotAccountChart()), actionCollection(), "account_chart");
+  KAction *account_chart = actionCollection()->addAction("account_chart");
+  account_chart->setText(i18n("Show balance chart..."));
+  account_chart->setIcon(KIcon("kchart_chrt"));
+  connect(account_chart, SIGNAL(triggered()), this, SLOT(slotAccountChart()));
 #endif
   new KAction(i18n("Map to online account"), "news_subscribe", 0, this, SLOT(slotAccountMapOnline()), actionCollection(), "account_online_map");
-  new KAction(i18n("Unmap account"), "", 0, this, SLOT(slotAccountUnmapOnline()), actionCollection(), "account_online_unmap");
+  KAction *account_online_map = actionCollection()->addAction("account_online_map");
+  account_online_map->setText(i18n("Map to online account"));
+  account_online_map->setIcon(KIcon("news_subscribe"));
+  connect(account_online_map, SIGNAL(triggered()), this, SLOT(slotAccountMapOnline()));
+
+  //new KAction(i18n("Unmap account"), "", 0, this, SLOT(slotAccountUnmapOnline()), actionCollection(), "account_online_unmap");
+  KAction *account_online_unmap = actionCollection()->addAction("account_online_unmap");
+  account_online_unmap->setText(i18n("Unmap account..."));
+  connect(account_online_unmap, SIGNAL(triggered()), this, SLOT(slotAccountUnmapOnline()));
+
   KActionMenu* menu = new KActionMenu(i18n("Update"), KIcon(KIconLoader::global()->loadIcon("reload", KIconLoader::Small,
                                       KIconLoader::SizeSmall)), actionCollection(), "account_online_update_menu");
   // activating the menu button is the same as selecting the current account
   connect( menu, SIGNAL( activated() ), this, SLOT(slotAccountUpdateOnline()));
-  menu->insert(new KAction(i18n("Update account..."), "", 0, this, SLOT(slotAccountUpdateOnline()), actionCollection(), "account_online_update"));
-  menu->insert(new KAction(i18n("Update all accounts..."), "", 0, this, SLOT(slotAccountUpdateOnlineAll()), actionCollection(), "account_online_update_all"));
+  //menu->insert(new KAction(i18n("Update account..."), "", 0, this, SLOT(slotAccountUpdateOnline()), actionCollection(), "account_online_update"));
+  KAction *account_online_update = actionCollection()->addAction("account_online_update");
+  account_online_update->setText(i18n("Update account..."));
+  connect(account_online_update, SIGNAL(triggered()), this, SLOT(slotAccountUpdateOnline()));
+  menu->insert(account_online_update);
+
+  //menu->insert(new KAction(i18n("Update all accounts..."), "", 0, this, SLOT(slotAccountUpdateOnlineAll()), actionCollection(), "account_online_update_all"));
+  KAction *account_online_update_all = actionCollection()->addAction("account_online_update_all");
+  account_online_update_all->setText(i18n("Update all accounts..."));
+  connect(account_online_update_all, SIGNAL(triggered()), this, SLOT(slotAccountUpdateOnlineAll()));
+  menu->insert(account_online_update_all);
 
   // *******************
   // The categories menu
   // *******************
-  new KAction(i18n("New category..."), "account_add", 0, this, SLOT(slotCategoryNew()), actionCollection(), "category_new");
-  new KAction(i18n("Edit category..."), "edit", 0, this, SLOT(slotAccountEdit()), actionCollection(), "category_edit");
-  new KAction(i18n("Delete category..."), "delete", 0, this, SLOT(slotAccountDelete()), actionCollection(), "category_delete");
+  //new KAction(i18n("New category..."), "account_add", 0, this, SLOT(slotCategoryNew()), actionCollection(), "category_new");
+  KAction *category_new = actionCollection()->addAction("category_edit");
+  category_new->setText(i18n("New category..."));
+  category_new->setIcon(KIcon("account_add"));
+  connect(category_new, SIGNAL(triggered()), this, SLOT(slotCategoryNew()));
+
+  //new KAction(i18n("Edit category..."), "edit", 0, this, SLOT(slotAccountEdit()), actionCollection(), "category_edit");
+  KAction *category_edit = actionCollection()->addAction("category_edit");
+  category_edit->setText(i18n("Edit category..."));
+  category_edit->setIcon(KIcon("edit"));
+  connect(category_edit, SIGNAL(triggered()), this, SLOT(slotAccountEdit()));
+
+  //new KAction(i18n("Delete category..."), "delete", 0, this, SLOT(slotAccountDelete()), actionCollection(), "category_delete");
+  KAction *category_delete = actionCollection()->addAction("category_delete");
+  category_delete->setText(i18n("Delete category..."));
+  category_delete->setIcon(KIcon("delete"));
+  connect(category_delete, SIGNAL(triggered()), this, SLOT(slotAccountDelete()));
 
 
   // **************
   // The tools menu
   // **************
-  new KAction(i18n("QIF Profile Editor..."), "edit", 0, this, SLOT(slotQifProfileEditor()), actionCollection(), "tools_qif_editor");
-  new KAction(i18n("Securities..."), "", 0, this, SLOT(slotSecurityEditor()), actionCollection(), "tools_security_editor");
-  new KAction(i18n("Currencies..."), "", 0, this, SLOT(slotCurrencyDialog()), actionCollection(), "tools_currency_editor");
-  new KAction(i18n("Prices..."), "", 0, this, SLOT(slotPriceDialog()), actionCollection(), "tools_price_editor");
-  new KAction(i18n("Update Stock and Currency Prices..."), "", 0, this, SLOT(slotEquityPriceUpdate()), actionCollection(), "tools_update_prices");
-  new KAction(i18n("Consistency Check"), "", 0, this, SLOT(slotFileConsitencyCheck()), actionCollection(), "tools_consistency_check");
-  new KAction(i18n("Performance-Test"), "fork", 0, this, SLOT(slotPerformanceTest()), actionCollection(), "tools_performancetest");
-  new KAction(i18n("KCalc..."), "kcalc", 0, this, SLOT(slotToolsStartKCalc()), actionCollection(), "tools_kcalc");
+  //new KAction(i18n("QIF Profile Editor..."), "edit", 0, this, SLOT(slotQifProfileEditor()), actionCollection(), "tools_qif_editor");
+  KAction *tools_qif_editor = actionCollection()->addAction("tools_qif_editor");
+  tools_qif_editor->setText(i18n("QIF Profile Editor..."));
+  tools_qif_editor->setIcon(KIcon("edit"));
+  connect(tools_qif_editor, SIGNAL(triggered()), this, SLOT(slotQifProfileEditor()));
+
+  //new KAction(i18n("Securities..."), "", 0, this, SLOT(slotSecurityEditor()), actionCollection(), "tools_security_editor");
+  KAction *tools_security_editor = actionCollection()->addAction("tools_security_editor");
+  tools_security_editor->setText(i18n("Securities..."));
+  connect(tools_security_editor, SIGNAL(triggered()), this, SLOT(slotSecurityEditor()))
+
+  //new KAction(i18n("Currencies..."), "", 0, this, SLOT(slotCurrencyDialog()), actionCollection(), "tools_currency_editor");
+  KAction *tools_currency_editor = actionCollection()->addAction("tools_currency_editor");
+  tools_currency_editor->setText(i18n("Currencies..."));
+  connect(tools_currency_editor, SIGNAL(triggered()), this, SLOT(slotCurrencyDialog()));
+
+  //new KAction(i18n("Prices..."), "", 0, this, SLOT(slotPriceDialog()), actionCollection(), "tools_price_editor");
+  KAction *tools_price_editor = actionCollection()->addAction("tools_price_editor");
+  tools_price_editor->setText(i18n("Prices..."));
+  connect(tools_price_editor, SIGNAL(triggered()), this, SLOT(slotPriceDialog()));
+
+  //new KAction(i18n("Update Stock and Currency Prices..."), "", 0, this, SLOT(slotEquityPriceUpdate()), actionCollection(), "tools_update_prices");
+  KAction *tools_update_prices = actionCollection()->addAction("tools_update_prices");
+  tools_update_prices->setText(i18n("Update Stock and Currency Prices..."));
+  connect(tools_update_prices, SIGNAL(triggered()), this, SLOT(slotEquityPriceUpdate()));
+
+  //new KAction(i18n("Consistency Check"), "", 0, this, SLOT(slotFileConsitencyCheck()), actionCollection(), "tools_consistency_check");
+  KAction *tools_consistency_check = actionCollection()->addAction("tools_consistency_check");
+  tools_consistency_check->setText(i18n("Consistency Check"));
+  connect(tools_consistency_check, SIGNAL(triggered()), this, SLOT(slotFileConsitencyCheck()));
+
+  //new KAction(i18n("Performance-Test"), "fork", 0, this, SLOT(slotPerformanceTest()), actionCollection(), "tools_performancetest");
+  KAction *tools_performancetest = actionCollection()->addAction("tools_performancetest");
+  tools_performancetest->setText(i18n("Performance-Test"));
+  tools_performancetest->setIcon(KIcon("fork"));
+  connect(tools_performancetest, SIGNAL(triggered()), this, SLOT(slotPerformanceTest()));
+
+  //new KAction(i18n("KCalc..."), "kcalc", 0, this, SLOT(slotToolsStartKCalc()), actionCollection(), "tools_kcalc");
+  KAction *tools_kcalc = actionCollection()->addAction("tools_kcalc");
+  tools_kcalc->setText(i18n("KCalc..."));
+  tools_kcalc->setIcon(KIcon("kcalc"));
+  connect(tools_kcalc, SIGNAL(triggered()), this, SLOT(slotToolsStartKCalc()));
 
   // *****************
   // The settings menu
