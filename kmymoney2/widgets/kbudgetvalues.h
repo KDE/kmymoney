@@ -40,11 +40,20 @@ class kMyMoneyEdit;
 /**
  * @author Thomas Baumgart <ipwizard@users.sourceforge.net>
  */
+
+class KBudgetValuesDecl : public QWidget, public Ui::KBudgetValuesDecl
+{
+public:
+  KBudgetValuesDecl( QWidget *parent ) : QWidget( parent ) {
+    setupUi( this );
+  }
+};
+
 class KBudgetValues : public KBudgetValuesDecl
 {
   Q_OBJECT
   public:
-    KBudgetValues(QWidget* parent = 0, const char* name = 0);
+    KBudgetValues(QWidget* parent = 0);
     ~KBudgetValues();
 
     void setBudgetValues(const MyMoneyBudget& budget, const MyMoneyBudget::AccountGroup& budgetAccount);

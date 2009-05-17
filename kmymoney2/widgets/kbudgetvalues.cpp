@@ -46,8 +46,8 @@
 #include "kbudgetvalues.h"
 #include <kmymoneyedit.h>
 
-KBudgetValues::KBudgetValues(QWidget* parent, const char* name) :
-  KBudgetValuesDecl(parent, name),
+KBudgetValues::KBudgetValues(QWidget* parent) :
+  KBudgetValuesDecl(parent),
   m_currentTab(m_monthlyButton)
 {
   m_budgetDate = QDate(2007,1,1);
@@ -256,7 +256,7 @@ void KBudgetValues::fillMonthLabels(void)
 {
   QDate date(m_budgetDate);
   for(int i = 0; i < 12; ++i) {
-    m_label[i]->setText(KGlobal::locale()->calendar()->monthName(date, true));
+    m_label[i]->setText(KGlobal::locale()->calendar()->monthName(date));
     date = date.addMonths(1);
   }
 }

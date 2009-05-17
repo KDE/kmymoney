@@ -47,11 +47,11 @@ SET(_uncritial_common_sources
   kmymoneyaccounttreeforecast.cpp
   kmymoneycalculator.cpp
   kmymoneychecklistitem.cpp
-  #kmymoneycombo.cpp
+  kmymoneycombo.cpp
   kmymoneycompletion.cpp
-   #kmymoneycurrencyselector.cpp
-   #kmymoneydateinput.cpp
-   #kmymoneydatetbl.cpp
+  #kmymoneycurrencyselector.cpp
+  #kmymoneydateinput.cpp
+  #kmymoneydatetbl.cpp
   kmymoneyedit.cpp
   #kmymoneylineedit.cpp
   kmymoneylistviewitem.cpp
