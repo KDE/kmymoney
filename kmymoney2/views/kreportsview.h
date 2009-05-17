@@ -60,14 +60,11 @@ class Q3ListViewItem;
 #include <mymoneyreport.h>
 #include "../reports/pivottable.h"
 #include "../reports/querytable.h"
-#include "../widgets/kmymoneyreportcontroldecl.h"
+#include "ui_kmymoneyreportcontroldecl.h"
 #include "../reports/kreportchartview.h"
 #include "../views/kmymoneyview.h"
 
 class MyMoneyReport;
-
-namespace KReportView {
-};
 
 
 /**

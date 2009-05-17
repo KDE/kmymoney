@@ -720,30 +720,30 @@ void KPayeesView::showTransactions(void)
 
     item = new KTransactionListItem(m_transactionView, item, s.accountId(), t->id());
     item->setText(0, s.number());
-    item->setText(1, KGlobal::locale()->formatDate(t->postDate(), true));
+    item->setText(1, KGlobal::locale()->formatDate(t->postDate()));
 
     QString txt;
     if(s.action() == MyMoneySplit::ActionAmortization) {
       if(acc.accountType() == MyMoneyAccount::Loan) {
         if(s.value().isPositive()) {
-          txt = i18n("Amortization of %1").arg(acc.name());
+          txt = i18n("Amortization of %1",acc.name());
         } else {
-          txt = i18n("Payment to %1").arg(acc.name());
+          txt = i18n("Payment to %1",acc.name());
         }
       } else if(acc.accountType() == MyMoneyAccount::AssetLoan) {
         if(s.value().isNegative()) {
-          txt = i18n("Amortization of %1").arg(acc.name());
+          txt = i18n("Amortization of %1",acc.name());
         } else {
-          txt = i18n("Payment to %1").arg(acc.name());
+          txt = i18n("Payment to %1",acc.name());
         }
       } else {
-        txt = i18n("Loan payment from %1").arg(acc.name());
+        txt = i18n("Loan payment from %1",acc.name());
       }
     } else if (file->isTransfer(*t)) {
       if(!s.value().isNegative()) {
-        txt = i18n("Transfer to %1").arg(acc.name());
+        txt = i18n("Transfer to %1",acc.name());
       } else {
-        txt = i18n("Transfer from %1").arg(acc.name());
+        txt = i18n("Transfer from %1",acc.name());
       }
     } else if(t->splitCount() > 2) {
       txt = i18n("Split transaction (category replacement)", "Split transaction");
@@ -754,7 +754,7 @@ void KPayeesView::showTransactions(void)
     item->setText(2, txt);
     item->setText(3, s.value().formatMoney(acc.fraction()));
   }
-  m_balanceLabel->setText(i18n("Balance: %1").arg(balance.formatMoney(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction())));
+  m_balanceLabel->setText(i18n("Balance: %1",balance.formatMoney(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction())));
 
   // Trick: it seems, that the initial sizing of the view does
   // not work correctly. At least, the columns do not get displayed
