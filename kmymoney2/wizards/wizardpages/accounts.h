@@ -24,16 +24,25 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "accountsdecl.h"
+#include "ui_accountsdecl.h"
 
 /**
   * @author Thomas Baumgart
   */
+
+class AccountsDecl : public QWidget, public Ui::AccountsDecl
+{
+public:
+  AccountsDecl( QWidget *parent ) : QWidget( parent ) {
+    setupUi( this );
+  }
+};
+
 class Accounts : public AccountsDecl
 {
   Q_OBJECT
 public:
-  Accounts(QWidget* parent = 0, const char* name = 0);
+  Accounts(QWidget* parent = 0);
 
 private:
 };

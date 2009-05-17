@@ -31,8 +31,8 @@
 
 #include "accounts.h"
 
-Accounts::Accounts(QWidget* parent, const char* name) :
-  AccountsDecl(parent, name)
+Accounts::Accounts(QWidget* parent) :
+  AccountsDecl(parent)
 {
 }
 

@@ -30,8 +30,9 @@
 #include "userinfo.h"
 #include <mymoneypayee.h>
 
-UserInfo::UserInfo(QWidget* parent, const char* name) :
-  UserInfoDecl(parent, name)
+
+UserInfo::UserInfo(QWidget* parent) :
+  UserInfoDecl(parent)
 {
   m_userNameEdit->setFocus();
 }

@@ -26,17 +26,25 @@ class K3ListViewItem;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "currencydecl.h"
+#include "ui_currencydecl.h"
 #include <mymoneysecurity.h>
 
 /**
   * @author Thomas Baumgart
   */
+
+class CurrencyDecl : public QWidget, public Ui::CurrencyDecl
+{
+public:
+  CurrencyDecl( QWidget *parent ) : QWidget( parent ) {
+    setupUi( this );
+  }
+};
 class Currency : public CurrencyDecl
 {
   Q_OBJECT
 public:
-  Currency(QWidget* parent = 0, const char* name = 0);
+  Currency(QWidget* parent = 0);
   Q3ListViewItem* insertCurrency(const MyMoneySecurity& sec);
   void selectCurrency(const MyMoneySecurity& sec);
   QString selectedCurrency(void) const;

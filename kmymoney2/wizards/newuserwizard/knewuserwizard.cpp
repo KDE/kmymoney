@@ -168,9 +168,9 @@ KMyMoneyWizardPage* IntroPage::nextPage(void) const
   return m_wizard->m_generalPage;
 }
 
-GeneralPage::GeneralPage(Wizard* wizard, const char* name) :
+GeneralPage::GeneralPage(Wizard* wizard) :
   UserInfo(wizard),
-  WizardPage<Wizard>(stepCount++, this, wizard, name)
+  WizardPage<Wizard>(stepCount++, this, wizard)
 {
   m_userNameEdit->setFocus();
   KABC::StdAddressBook *ab = KABC::StdAddressBook::self(true);
@@ -221,9 +221,9 @@ KMyMoneyWizardPage* GeneralPage::nextPage(void) const
   return m_wizard->m_currencyPage;
 }
 
-CurrencyPage::CurrencyPage(Wizard* wizard, const char* name) :
+CurrencyPage::CurrencyPage(Wizard* wizard) :
   Currency(wizard),
-  WizardPage<Wizard>(stepCount++, this, wizard, name)
+  WizardPage<Wizard>(stepCount++, this, wizard)
 {
   Q3ListViewItem *first = 0;
   Q3ValueList<MyMoneySecurity> list = MyMoneyFile::instance()->currencyList();
@@ -273,9 +273,9 @@ KMyMoneyWizardPage* CurrencyPage::nextPage(void) const
   return m_wizard->m_accountPage;
 }
 
-AccountPage::AccountPage(Wizard* wizard, const char* name) :
-  KAccountPageDecl(wizard, name),
-  WizardPage<Wizard>(stepCount, this, wizard, name)       // don't inc. the step count here
+AccountPage::AccountPage(Wizard* wizard) :
+  KAccountPageDecl(wizard),
+  WizardPage<Wizard>(stepCount, this, wizard)       // don't inc. the step count here
 {
   m_mandatoryGroup->add(m_accountNameEdit);
   connect(m_mandatoryGroup, SIGNAL(stateChanged()), object(), SIGNAL(completeStateChanged()));
@@ -322,9 +322,9 @@ KMyMoneyWizardPage* PreferencePage::nextPage(void) const
   return m_wizard->m_filePage;
 }
 
-FilePage::FilePage(Wizard* wizard, const char* name) :
+FilePage::FilePage(Wizard* wizard) :
   KFilePageDecl(wizard),
-  WizardPage<Wizard>(stepCount++, this, wizard, name)
+  WizardPage<Wizard>(stepCount++, this, wizard)
 {
   m_mandatoryGroup->add(m_dataFileEdit->lineEdit());
   connect(m_mandatoryGroup, SIGNAL(stateChanged()), object(), SIGNAL(completeStateChanged()));

@@ -26,10 +26,10 @@
 
 #include <kmymoneywizard.h>
 
-#include "kintropagedecl.h"
-#include "kaccountpagedecl.h"
-#include "kpreferencepagedecl.h"
-#include "kfilepagedecl.h"
+#include "ui_kintropagedecl.h"
+#include "ui_kaccountpagedecl.h"
+#include "ui_kpreferencepagedecl.h"
+#include "ui_kfilepagedecl.h"
 
 #include "../wizardpages/userinfo.h"
 #include "../wizardpages/currency.h"
@@ -43,11 +43,19 @@ class Wizard;
 
 namespace NewUserWizard {
 
+class KIntroPageDecl : public QWidget, public Ui::KIntroPageDecl
+{
+public:
+  KIntroPageDecl( QWidget *parent ) : QWidget( parent ) {
+    setupUi( this );
+  }
+};
+
 class IntroPage : public KIntroPageDecl, public WizardPage<Wizard>
 {
   Q_OBJECT
 public:
-  IntroPage(Wizard* parent, const char* name = 0);
+  IntroPage(Wizard* parent );
   KMyMoneyWizardPage* nextPage(void) const;
 };
 
@@ -60,7 +68,7 @@ class GeneralPage : public UserInfo, public WizardPage<Wizard>
 {
   Q_OBJECT
 public:
-  GeneralPage(Wizard* parent, const char* name = 0);
+  GeneralPage(Wizard* parent );
   KMyMoneyWizardPage* nextPage(void) const;
 
 protected slots:
@@ -78,7 +86,7 @@ class CurrencyPage : public Currency, public WizardPage<Wizard>
 {
   Q_OBJECT
 public:
-  CurrencyPage(Wizard* parent, const char* name = 0);
+  CurrencyPage(Wizard* parent );
   void enterPage(void);
   KMyMoneyWizardPage* nextPage(void) const;
 };
@@ -86,11 +94,19 @@ public:
 /**
   * Wizard page collecting information about the checking account
   */
+
+class KAccountPageDecl : public QWidget, public Ui::KAccountPageDecl
+{
+public:
+  KAccountPageDecl( QWidget *parent ) : QWidget( parent ) {
+    setupUi( this );
+  }
+};
 class AccountPage : public KAccountPageDecl, public WizardPage<Wizard>
 {
   Q_OBJECT
 public:
-  AccountPage(Wizard* parent, const char* name = 0);
+  AccountPage(Wizard* parent );
   KMyMoneyWizardPage* nextPage(void) const;
 
   virtual bool isComplete(void) const;
@@ -105,7 +121,7 @@ class CategoriesPage : public Accounts, public WizardPage<Wizard>
 {
   Q_OBJECT
 public:
-  CategoriesPage(Wizard* parent, const char* name = 0);
+  CategoriesPage(Wizard* parent );
   KMyMoneyWizardPage* nextPage(void) const;
   Q3ValueList<MyMoneyTemplate> selectedTemplates(void) const;
 };
@@ -115,11 +131,19 @@ public:
   *
   * @author Thomas Baumgart
   */
+
+class KPreferencePageDecl : public QWidget, public Ui::KPreferencePageDecl
+{
+public:
+  KPreferencePageDecl( QWidget *parent ) : QWidget( parent ) {
+    setupUi( this );
+  }
+};
 class PreferencePage : public KPreferencePageDecl, public WizardPage<Wizard>
 {
   Q_OBJECT
 public:
-  PreferencePage(Wizard* parent, const char* name = 0);
+  PreferencePage(Wizard* parent );
   KMyMoneyWizardPage* nextPage(void) const;
 };
 
@@ -128,11 +152,19 @@ public:
   *
   * @author Thomas Baumgart
   */
+
+class KFilePageDecl : public QWidget, public Ui::KFilePageDecl
+{
+public:
+  KFilePageDecl( QWidget *parent ) : QWidget( parent ) {
+    setupUi( this );
+  }
+};
 class FilePage : public KFilePageDecl, public WizardPage<Wizard>
 {
   Q_OBJECT
 public:
-  FilePage(Wizard* parent, const char* name = 0);
+  FilePage(Wizard* parent);
 
   virtual bool isComplete(void) const;
 };

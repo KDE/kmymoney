@@ -24,17 +24,25 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "userinfodecl.h"
+#include "ui_userinfodecl.h"
 class MyMoneyPayee;
 
 /**
   * @author Thomas Baumgart
   */
+
+class UserInfoDecl : public QWidget, public Ui::UserInfoDecl
+{
+public:
+  UserInfoDecl( QWidget *parent ) : QWidget( parent ) {
+    setupUi( this );
+  }
+};
 class UserInfo : public UserInfoDecl
 {
   Q_OBJECT
 public:
-  UserInfo(QWidget* parent = 0, const char* name = 0);
+  UserInfo(QWidget* parent = 0);
   MyMoneyPayee user(void) const;
 
 private:

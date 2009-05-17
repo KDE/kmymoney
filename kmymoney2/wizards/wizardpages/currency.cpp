@@ -29,8 +29,8 @@
 
 #include "currency.h"
 
-Currency::Currency(QWidget* parent, const char* name) :
-  CurrencyDecl(parent, name)
+Currency::Currency(QWidget* parent) :
+  CurrencyDecl(parent)
 {
   m_currencyList->setAllColumnsShowFocus(true);
   m_currencyList->setMultiSelection(false);
