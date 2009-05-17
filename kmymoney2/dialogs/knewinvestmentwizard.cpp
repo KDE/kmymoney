@@ -78,8 +78,8 @@ KNewInvestmentWizard::KNewInvestmentWizard( const MyMoneyAccount& acc, QWidget *
 
 }
 
-KNewInvestmentWizard::KNewInvestmentWizard( const MyMoneySecurity& security, QWidget *parent, const char *name ) :
-  KNewInvestmentWizardDecl( parent, name ),
+KNewInvestmentWizard::KNewInvestmentWizard( const MyMoneySecurity& security, QWidget *parent) :
+  KNewInvestmentWizardDecl( parent ),
   m_security(security)
 {
   setCaption(i18n("Security detail wizard"));

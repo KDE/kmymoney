@@ -90,7 +90,7 @@
 #endif
 
 KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bool categoryEditor, QWidget *parent, const char *name, const QString& title)
-  : KNewAccountDlgDecl(parent,name,true),
+  : KNewAccountDlgDecl(parent),
     m_account(account),
     m_bSelectedParentAccount(false),
     m_categoryEditor(categoryEditor),

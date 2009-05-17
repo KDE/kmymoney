@@ -37,10 +37,10 @@
   * @author Thomas Baumgart
   */
 
-class KNewInvestmentWizardDecl : public QDialog, public Ui::KNewInvestmentWizardDecl
+class KNewInvestmentWizardDecl : public Q3Wizard, public Ui::KNewInvestmentWizardDecl
 {
 public:
-  KNewInvestmentWizardDecl( QWidget *parent ) : QDialog( parent ) {
+  KNewInvestmentWizardDecl( QWidget *parent ) : Q3Wizard( parent ) {
     setupUi( this );
   }
 };
@@ -61,7 +61,7 @@ public:
   /**
     * Use this constructor for the modification of an existing security
     */
-  KNewInvestmentWizard( const MyMoneySecurity& sec, QWidget *parent = 0, const char *name = 0 );
+  KNewInvestmentWizard( const MyMoneySecurity& sec, QWidget *parent = 0 );
 
   ~KNewInvestmentWizard();
 

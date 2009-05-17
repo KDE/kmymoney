@@ -37,7 +37,7 @@
 #include <mymoneymoney.h>
 #include <kmymoneyedit.h>
 
-#include "../dialogs/knewaccountdlgdecl.h"
+#include "ui_knewaccountdlgdecl.h"
 //Added by qt3to4:
 #include <QResizeEvent>
 class KMyMoneyAccountTreeBaseItem;
@@ -48,6 +48,14 @@ namespace reports {
 /**
   * This dialog lets you create/edit an account.
   */
+
+class KNewAccountDlgDecl : public QDialog, public Ui::KNewAccountDlgDecl
+{
+public:
+  KNewAccountDlgDecl( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
 class KNewAccountDlg : public KNewAccountDlgDecl
 {
   Q_OBJECT
