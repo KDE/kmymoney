@@ -35,7 +35,7 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include "../widgets/kschedulebriefwidget.h"
+#include "ui_kschedulebriefwidget.h"
 #include "../mymoney/mymoneyfile.h"
 
 /**
@@ -44,7 +44,7 @@
 
 class KMyMoneyBriefSchedule : public kScheduleBriefWidget  {
    Q_OBJECT
-public: 
+public:
   KMyMoneyBriefSchedule(QWidget *parent=0, const char *name=0);
   ~KMyMoneyBriefSchedule();
   void setSchedules(Q3ValueList<MyMoneySchedule> list, const QDate& date);

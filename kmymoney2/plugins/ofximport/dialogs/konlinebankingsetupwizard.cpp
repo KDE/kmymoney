@@ -76,7 +76,7 @@ KOnlineBankingSetupWizard::KOnlineBankingSetupWizard(QWidget *parent):
   dlg->setMinimumDuration(0);
   kapp->processEvents();
 
-  tabLayout->insertWidget(0, new K3ListViewSearchLineWidget(m_listFi, tab, 0));
+  tabLayout->insertWidget(0, new K3ListViewSearchLineWidget(m_listFi, tab));
 
   OfxPartner::setDirectory(KStandardDirs::locateLocal("appdata", ""));
   QStringList banks = OfxPartner::BankNames();
@@ -185,7 +185,7 @@ bool KOnlineBankingSetupWizard::finishFiPage(void)
     memset(&info, 0, sizeof(OfxFiServiceInfo));
     strncpy(info.fid, m_fid->text().data(), OFX_FID_LENGTH-1);
     strncpy(info.org, m_bankName->text().toLatin1(), OFX_ORG_LENGTH-1);
-    strncpy(info.url, m_url->url().data(), OFX_URL_LENGTH-1);
+    strncpy(info.url, m_url->url(), OFX_URL_LENGTH-1);
     info.accountlist = 1;
     info.statements = 1;
     info.billpay = 1;

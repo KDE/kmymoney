@@ -57,8 +57,8 @@
 
 #include "../kmymoney2.h"
 
-KScheduledView::KScheduledView(QWidget *parent, const char *name ) :
-  KScheduledViewDecl(parent,name, false),
+KScheduledView::KScheduledView(QWidget *parent) :
+  KScheduledViewDecl(parent),
   m_openBills(true),
   m_openDeposits(true),
   m_openTransfers(true),
