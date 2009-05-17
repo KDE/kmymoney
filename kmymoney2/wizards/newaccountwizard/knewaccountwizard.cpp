@@ -21,7 +21,7 @@
 // QT Includes
 
 #include <qcheckbox.h>
-#include <qfocusdata.h>
+//#include <qfocusdata.h>
 #include <qtooltip.h>
 
 #include <qlabel.h>
@@ -369,9 +369,9 @@ public:
   Q3ValueList<MyMoneyInstitution>  m_list;
 };
 
-InstitutionPage::InstitutionPage(Wizard* wizard, const char* name) :
+InstitutionPage::InstitutionPage(Wizard* wizard) :
   KInstitutionPageDecl(wizard),
-  WizardPage<Wizard>(StepInstitution, this, wizard, name),
+  WizardPage<Wizard>(StepInstitution, this, wizard),
   d(new Private())
 {
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadWidgets()));
@@ -445,9 +445,9 @@ KMyMoneyWizardPage* InstitutionPage::nextPage(void) const
   return m_wizard->m_accountTypePage;
 }
 
-AccountTypePage::AccountTypePage(Wizard* wizard, const char* name) :
+AccountTypePage::AccountTypePage(Wizard* wizard) :
   KAccountTypePageDecl(wizard),
-  WizardPage<Wizard>(StepAccount, this, wizard, name),
+  WizardPage<Wizard>(StepAccount, this, wizard),
   m_showPriceWarning(true)
 {
   m_typeSelection->insertItem(i18n("Checking"), MyMoneyAccount::Checkings);
@@ -627,9 +627,9 @@ bool AccountTypePage::allowsParentAccount(void) const
   return accountType() != MyMoneyAccount::Loan;
 }
 
-BrokeragePage::BrokeragePage(Wizard* wizard, const char* name) :
+BrokeragePage::BrokeragePage(Wizard* wizard) :
   KBrokeragePageDecl(wizard),
-  WizardPage<Wizard>(StepBroker, this, wizard, name)
+  WizardPage<Wizard>(StepBroker, this, wizard)
 {
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadWidgets()));
 }
@@ -660,9 +660,9 @@ KMyMoneyWizardPage* BrokeragePage::nextPage(void) const
   return m_wizard->m_hierarchyPage;
 }
 
-CreditCardSchedulePage::CreditCardSchedulePage(Wizard* wizard, const char* name) :
+CreditCardSchedulePage::CreditCardSchedulePage(Wizard* wizard) :
   KSchedulePageDecl(wizard),
-  WizardPage<Wizard>(StepSchedule, this, wizard, name)
+  WizardPage<Wizard>(StepSchedule, this, wizard)
 {
   m_mandatoryGroup->add(m_name);
   m_mandatoryGroup->add(m_payee);
@@ -745,9 +745,9 @@ KMyMoneyWizardPage* CreditCardSchedulePage::nextPage(void) const
   return m_wizard->m_hierarchyPage;
 }
 
-GeneralLoanInfoPage::GeneralLoanInfoPage(Wizard* wizard, const char* name) :
+GeneralLoanInfoPage::GeneralLoanInfoPage(Wizard* wizard) :
   KGeneralLoanInfoPageDecl(wizard),
-  WizardPage<Wizard>(StepDetails, this, wizard, name),
+  WizardPage<Wizard>(StepDetails, this, wizard),
   m_firstTime(true)
 {
   m_mandatoryGroup->add(m_payee);
@@ -842,9 +842,9 @@ void GeneralLoanInfoPage::slotLoadWidgets(void)
   m_payee->loadPayees(MyMoneyFile::instance()->payeeList());
 }
 
-LoanDetailsPage::LoanDetailsPage(Wizard* wizard, const char* name) :
+LoanDetailsPage::LoanDetailsPage(Wizard* wizard) :
   KLoanDetailsPageDecl(wizard),
-  WizardPage<Wizard>(StepPayments, this, wizard, name),
+  WizardPage<Wizard>(StepPayments, this, wizard),
   m_needCalculate(true)
 {
   // force the balloon payment to zero (default)
@@ -1218,9 +1218,9 @@ public:
   MyMoneyMoney        additionalFees;
 };
 
-LoanPaymentPage::LoanPaymentPage(Wizard* wizard, const char* name) :
+LoanPaymentPage::LoanPaymentPage(Wizard* wizard) :
   KLoanPaymentPageDecl(wizard),
-  WizardPage<Wizard>(StepFees, this, wizard, name),
+  WizardPage<Wizard>(StepFees, this, wizard),
   d(new Private)
 {
   d->phonyAccount = MyMoneyAccount(QString("Phony-ID"), MyMoneyAccount());
@@ -1308,9 +1308,9 @@ KMyMoneyWizardPage* LoanPaymentPage::nextPage(void) const
 }
 
 
-LoanSchedulePage::LoanSchedulePage(Wizard* wizard, const char* name) :
+LoanSchedulePage::LoanSchedulePage(Wizard* wizard) :
   KLoanSchedulePageDecl(wizard),
-  WizardPage<Wizard>(StepSchedule, this, wizard, name)
+  WizardPage<Wizard>(StepSchedule, this, wizard)
 {
   m_mandatoryGroup->add(m_interestCategory->lineEdit());
   m_mandatoryGroup->add(m_paymentAccount->lineEdit());
@@ -1372,9 +1372,9 @@ KMyMoneyWizardPage* LoanSchedulePage::nextPage(void) const
   return m_wizard->m_accountSummaryPage;
 }
 
-LoanPayoutPage::LoanPayoutPage(Wizard* wizard, const char* name) :
+LoanPayoutPage::LoanPayoutPage(Wizard* wizard) :
   KLoanPayoutPageDecl(wizard),
-  WizardPage<Wizard>(StepPayout, this, wizard, name)
+  WizardPage<Wizard>(StepPayout, this, wizard)
 {
   m_mandatoryGroup->add(m_assetAccount->lineEdit());
   m_mandatoryGroup->add(m_loanAccount->lineEdit());
@@ -1459,9 +1459,9 @@ const QString& LoanPayoutPage::payoutAccountId(void) const
   }
 }
 
-HierarchyPage::HierarchyPage(Wizard* wizard, const char* name) :
+HierarchyPage::HierarchyPage(Wizard* wizard) :
   KHierarchyPageDecl(wizard),
-  WizardPage<Wizard>(StepParentAccount, this, wizard, name)
+  WizardPage<Wizard>(StepParentAccount, this, wizard)
 {
   // the next line causes a warning to be shown in the console output
   // since at least one of the major groups is selected, and the user
@@ -1570,9 +1570,9 @@ const MyMoneyAccount& HierarchyPage::parentAccount(void)
   return dynamic_cast<const MyMoneyAccount&>(item->itemObject());
 }
 
-AccountSummaryPage::AccountSummaryPage(Wizard* wizard, const char* name) :
+AccountSummaryPage::AccountSummaryPage(Wizard* wizard) :
   KAccountSummaryPageDecl(wizard),
-  WizardPage<Wizard>(StepFinish, this, wizard, name)
+  WizardPage<Wizard>(StepFinish, this, wizard)
 {
   m_dataList->setSorting(-1);
   m_dataList->setColumnWidthMode(1, Q3ListView::Maximum);

@@ -62,10 +62,10 @@ class KMyMoneyAccountTreeItem;
 namespace NewAccountWizard {
 
 
-class KInstitutionPageDecl : public QDialog, public Ui::KInstitutionPageDecl
+class KInstitutionPageDecl : public QWidget, public Ui::KInstitutionPageDecl
 {
 public:
-  KInstitutionPageDecl( QWidget *parent ) : QDialog( parent ) {
+  KInstitutionPageDecl( QWidget *parent ) : QWidget( parent ) {
     setupUi( this );
   }
 };
@@ -74,7 +74,7 @@ class InstitutionPage : public KInstitutionPageDecl, public WizardPage<Wizard>
 {
   Q_OBJECT
 public:
-  InstitutionPage(Wizard* parent, const char* name = 0);
+  InstitutionPage(Wizard* parent);
   ~InstitutionPage();
   KMyMoneyWizardPage* nextPage(void) const;
 
@@ -99,11 +99,20 @@ private:
   Private* const d;
 };
 
+
+class KAccountTypePageDecl : public QWidget, public Ui::KAccountTypePageDecl
+{
+public:
+  KAccountTypePageDecl( QWidget *parent ) : QWidget( parent ) {
+    setupUi( this );
+  }
+};
+
 class AccountTypePage : public KAccountTypePageDecl, public WizardPage<Wizard>
 {
   Q_OBJECT
 public:
-  AccountTypePage(Wizard* parent, const char* name = 0);
+  AccountTypePage(Wizard* parent);
   virtual bool isComplete(void) const;
   KMyMoneyWizardPage* nextPage(void) const;
 
@@ -132,11 +141,20 @@ private:
   bool m_showPriceWarning;
 };
 
+
+class KBrokeragePageDecl : public QWidget, public Ui::KBrokeragePageDecl
+{
+public:
+  KBrokeragePageDecl( QWidget *parent ) : QWidget( parent ) {
+    setupUi( this );
+  }
+};
+
 class BrokeragePage : public KBrokeragePageDecl, public WizardPage<Wizard>
 {
   Q_OBJECT
 public:
-  BrokeragePage(Wizard* parent, const char* name = 0);
+  BrokeragePage(Wizard* parent);
   KMyMoneyWizardPage* nextPage(void) const;
   void enterPage(void);
 
@@ -146,11 +164,20 @@ private slots:
   void slotLoadWidgets(void);
 };
 
+
+class KSchedulePageDecl : public QWidget, public Ui::KSchedulePageDecl
+{
+public:
+  KSchedulePageDecl( QWidget *parent ) : QWidget( parent ) {
+    setupUi( this );
+  }
+};
+
 class CreditCardSchedulePage : public KSchedulePageDecl, public WizardPage<Wizard>
 {
   Q_OBJECT
 public:
-  CreditCardSchedulePage(Wizard* parent, const char* name = 0);
+  CreditCardSchedulePage(Wizard* parent);
   KMyMoneyWizardPage* nextPage(void) const;
   virtual bool isComplete(void) const;
   void enterPage(void);
@@ -161,11 +188,20 @@ private slots:
   void slotLoadWidgets(void);
 };
 
+
+class KGeneralLoanInfoPageDecl : public QWidget, public Ui::KGeneralLoanInfoPageDecl
+{
+public:
+  KGeneralLoanInfoPageDecl( QWidget *parent ) : QWidget( parent ) {
+    setupUi( this );
+  }
+};
+
 class GeneralLoanInfoPage : public KGeneralLoanInfoPageDecl, public WizardPage<Wizard>
 {
   Q_OBJECT
 public:
-  GeneralLoanInfoPage(Wizard* parent, const char* name = 0);
+  GeneralLoanInfoPage(Wizard* parent);
   KMyMoneyWizardPage* nextPage(void) const;
   virtual bool isComplete(void) const;
   void enterPage(void);
@@ -185,11 +221,20 @@ private:
   bool      m_firstTime;
 };
 
+
+class KLoanDetailsPageDecl : public QWidget, public Ui::KLoanDetailsPageDecl
+{
+public:
+  KLoanDetailsPageDecl( QWidget *parent ) : QWidget( parent ) {
+    setupUi( this );
+  }
+};
+
 class LoanDetailsPage : public KLoanDetailsPageDecl, public WizardPage<Wizard>
 {
   Q_OBJECT
 public:
-  LoanDetailsPage(Wizard* parent, const char* name = 0);
+  LoanDetailsPage(Wizard* parent);
   void enterPage(void);
   KMyMoneyWizardPage* nextPage(void) const;
   virtual bool isComplete(void) const;
@@ -218,11 +263,20 @@ private slots:
   void slotCalculate(void);
 };
 
+
+class KLoanPaymentPageDecl : public QWidget, public Ui::KLoanPaymentPageDecl
+{
+public:
+  KLoanPaymentPageDecl( QWidget *parent ) : QWidget( parent ) {
+    setupUi( this );
+  }
+};
+
 class LoanPaymentPage : public KLoanPaymentPageDecl, public WizardPage<Wizard>
 {
   Q_OBJECT
 public:
-  LoanPaymentPage(Wizard* parent, const char* name = 0);
+  LoanPaymentPage(Wizard* parent);
   ~LoanPaymentPage();
 
   KMyMoneyWizardPage* nextPage(void) const;
@@ -259,11 +313,20 @@ private:
   Private* const d;
 };
 
+
+class KLoanSchedulePageDecl  : public QWidget, public Ui::KLoanSchedulePageDecl
+{
+public:
+  KLoanSchedulePageDecl( QWidget *parent ) : QWidget( parent ) {
+    setupUi( this );
+  }
+};
+
 class LoanSchedulePage : public KLoanSchedulePageDecl, public WizardPage<Wizard>
 {
   Q_OBJECT
 public:
-  LoanSchedulePage(Wizard* parent, const char* name = 0);
+  LoanSchedulePage(Wizard* parent);
   void enterPage(void);
 
   KMyMoneyWizardPage* nextPage(void) const;
@@ -281,11 +344,19 @@ private slots:
 };
 
 
+class KLoanPayoutPageDecl : public QWidget, public Ui::KLoanPayoutPageDecl
+{
+public:
+  KLoanPayoutPageDecl( QWidget *parent ) : QWidget( parent ) {
+    setupUi( this );
+  }
+};
+
 class LoanPayoutPage : public KLoanPayoutPageDecl, public WizardPage<Wizard>
 {
   Q_OBJECT
 public:
-  LoanPayoutPage(Wizard* parent, const char* name = 0);
+  LoanPayoutPage(Wizard* parent);
   void enterPage(void);
   virtual bool isComplete(void) const;
 
@@ -301,11 +372,20 @@ private slots:
   void slotButtonsToggled(void);
 };
 
+
+class KHierarchyPageDecl : public QWidget, public Ui::KHierarchyPageDecl
+{
+public:
+  KHierarchyPageDecl( QWidget *parent ) : QWidget( parent ) {
+    setupUi( this );
+  }
+};
+
 class HierarchyPage : public KHierarchyPageDecl, public WizardPage<Wizard>
 {
   Q_OBJECT
 public:
-  HierarchyPage(Wizard* parent, const char* name = 0);
+  HierarchyPage(Wizard* parent);
   void enterPage(void);
   KMyMoneyWizardPage* nextPage(void) const;
   QWidget* initialFocusWidget(void) const { return m_qlistviewParentAccounts; }
@@ -324,11 +404,20 @@ private:
   bool bFirstTime;
 };
 
+
+class KAccountSummaryPageDecl : public QWidget, public Ui::KAccountSummaryPageDecl
+{
+public:
+  KAccountSummaryPageDecl( QWidget *parent ) : QWidget( parent ) {
+    setupUi( this );
+  }
+};
+
 class AccountSummaryPage : public KAccountSummaryPageDecl, public WizardPage<Wizard>
 {
   Q_OBJECT
 public:
-  AccountSummaryPage(Wizard* parent, const char* name = 0);
+  AccountSummaryPage(Wizard* parent);
   void enterPage(void);
   QWidget* initialFocusWidget(void) const { return m_dataList; }
 };
