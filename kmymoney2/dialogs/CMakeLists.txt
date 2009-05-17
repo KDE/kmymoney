@@ -30,10 +30,10 @@ SET(libdialogs_a_SOURCES
   kgncpricesourcedlg.cpp
   kgpgkeyselectiondlg.cpp 
   #kimportdlg.cpp 
-  #kloadtemplatedlg.cpp
-  #kmergetransactionsdlg.cpp 
+  kloadtemplatedlg.cpp
+  kmergetransactionsdlg.cpp 
   kmymoneyfileinfodlg.cpp
-  kmymoneypricedlg.cpp 
+  #kmymoneypricedlg.cpp 
   #kmymoneysplittable.cpp 
   #knewaccountdlg.cpp
   knewbankdlg.cpp 
@@ -43,7 +43,7 @@ SET(libdialogs_a_SOURCES
   #knewinvestmentwizard.cpp 
   #knewloanwizard.cpp 
   konlinequoteconfigurationdlg.cpp
-  #kpayeereassigndlg.cpp 
+  kpayeereassigndlg.cpp 
   krecentfileitem.cpp 
   kreconciledlg.cpp
   kreconcilelistitem.cpp 
@@ -82,6 +82,7 @@ SET(dialogs_UI
   kselectdatabasedlgdecl.ui kselecttransactionsdlgdecl.ui
   ksortoptiondlg.ui ksplitcorrectiondlg.ui ksplittransactiondlgdecl.ui
   kupdatestockpricedlgdecl.ui mymoneyqifprofileeditordecl.ui
+  ../widgets/kaccounttemplateselectordecl.ui
 )
 
 kde4_add_ui_files(libdialogs_a_SOURCES ${dialogs_UI} )

@@ -37,13 +37,21 @@ class QResizeEvent;
 #include <register.h>
 #include <mymoneyaccount.h>
 
-#include "../dialogs/kselecttransactionsdlgdecl.h"
+#include "ui_kselecttransactionsdlgdecl.h"
 
+
+class KSelectTransactionsDlgDecl : public QDialog, public Ui::KSelectTransactionsDlgDecl
+{
+public:
+  KSelectTransactionsDlgDecl( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
 class KSelectTransactionsDlg: public KSelectTransactionsDlgDecl
 {
   Q_OBJECT
 public:
-  KSelectTransactionsDlg(const MyMoneyAccount& account, QWidget* parent = 0, const char* name = 0);
+  KSelectTransactionsDlg(const MyMoneyAccount& account, QWidget* parent = 0);
 
   /**
    * Adds the transaction @a t to the dialog

@@ -35,7 +35,7 @@
 #include <Q3ValueList>
 
 KLoadTemplateDlg::KLoadTemplateDlg(QWidget* parent) :
-  KLoadTemplateDlgDecl(parent, name)
+  KLoadTemplateDlgDecl(parent)
 {
   buttonOk->setGuiItem(KStandardGuiItem::ok());
   buttonCancel->setGuiItem(KStandardGuiItem::cancel());

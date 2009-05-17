@@ -50,7 +50,8 @@ include_directories( ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES}
 	${CMAKE_CURRENT_SOURCE_DIR}/kmymoney2/mymoney/storage/
         ${CMAKE_CURRENT_SOURCE_DIR}/libkgpgfile/ 
 	${CMAKE_CURRENT_SOURCE_DIR}/kmymoney2/plugins/
-	${CMAKE_CURRENT_SOURCE_DIR}/kmymoney2/dialogs/)
+	${CMAKE_CURRENT_SOURCE_DIR}/kmymoney2/dialogs/
+	${CMAKE_CURRENT_SOURCE_DIR}/kmymoney2/converter/)
 set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${KDE4_ENABLE_EXCEPTIONS}" )
 
 # check for JPEG

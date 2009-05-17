@@ -42,8 +42,8 @@
 #include <QKeyEvent>
 #include <ktoolinvocation.h>
 
-KSelectTransactionsDlg::KSelectTransactionsDlg(const MyMoneyAccount& _account, QWidget* parent, const char* name) :
-  KSelectTransactionsDlgDecl(parent, name),
+KSelectTransactionsDlg::KSelectTransactionsDlg(const MyMoneyAccount& _account, QWidget* parent) :
+  KSelectTransactionsDlgDecl(parent),
   m_account(_account)
 {
   // setup descriptive texts

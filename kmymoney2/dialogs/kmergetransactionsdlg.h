@@ -37,16 +37,8 @@ class QResizeEvent;
 #include <register.h>
 #include <mymoneyaccount.h>
 
-#include "ui_kselecttransactionsdlg.h"
+#include "kselecttransactionsdlg.h"
 
-
-class KSelectTransactionsDlg : public QDialog, public Ui::KSelectTransactionsDlg
-{
-public:
-  KSelectTransactionsDlg( QWidget *parent ) : QDialog( parent ) {
-    setupUi( this );
-  }
-}
 
 class KMergeTransactionsDlg: public KSelectTransactionsDlg
 {

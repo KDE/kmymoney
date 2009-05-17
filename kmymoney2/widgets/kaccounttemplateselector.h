@@ -27,7 +27,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <ui_kaccounttemplateselectordecl.h>
+#include "ui_kaccounttemplateselectordecl.h"
 //Added by qt3to4:
 #include <Q3ValueList>
 class MyMoneyTemplate;
