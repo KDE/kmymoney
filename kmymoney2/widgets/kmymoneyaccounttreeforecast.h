@@ -34,7 +34,7 @@ class Q3DragObject;
 // ----------------------------------------------------------------------------
 // Project Includes
 #include "kmymoneyaccounttree.h"
-#include "../../kmymoney/mymoneyforecast.h"
+#include "mymoneyforecast.h"
 
 class KMyMoneyAccountTreeForecastItem;
 

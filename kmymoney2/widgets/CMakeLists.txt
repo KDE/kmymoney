@@ -6,15 +6,15 @@ PROJECT(widgets)
 CONFIGURE_FILE (${CMAKE_CURRENT_SOURCE_DIR}/makekdewidgets.in
   ${CMAKE_CURRENT_BINARY_DIR}/makekdewidgets @ONLY)
 
-ADD_CUSTOM_COMMAND(
-  OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/kmmwidgets.cpp
-  COMMAND ${CMAKE_CURRENT_BINARY_DIR}/makekdewidgets -g KMyMoney
-    -n CustomWidgetPlugin -o kmmwidgets.cpp -i kmymoney
-    ${CMAKE_CURRENT_SOURCE_DIR}/kmymoney.widgets
-  DEPENDS
-    ${CMAKE_CURRENT_SOURCE_DIR}/kmymoney.widgets
-    ${CMAKE_CURRENT_BINARY_DIR}/makekdewidgets
-  )
+#ADD_CUSTOM_COMMAND(
+#  OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/kmmwidgets.cpp
+#  COMMAND ${CMAKE_CURRENT_BINARY_DIR}/makekdewidgets -g KMyMoney
+#    -n CustomWidgetPlugin -o kmmwidgets.cpp -i kmymoney
+#    ${CMAKE_CURRENT_SOURCE_DIR}/kmymoney.widgets
+#  DEPENDS
+#    ${CMAKE_CURRENT_SOURCE_DIR}/kmymoney.widgets
+#    ${CMAKE_CURRENT_BINARY_DIR}/makekdewidgets
+#  )
 
 ########### create links ###############
 SET(kmymoney_STAT_HEADERS
@@ -102,8 +102,9 @@ KDE4_ADD_LIBRARY(kmymoney_base STATIC ${_uncritial_common_sources})
 # but it is needed for uic and QtDesigner
 
 KDE4_ADD_LIBRARY(kmymoney SHARED
- ${_critial_common_sources} ${_uncritial_common_sources} kmmwidgets.cpp)
-TARGET_LINK_LIBRARIES(kmymoney kmm_mymoney ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS})
+ ${_critial_common_sources} ${_uncritial_common_sources} )
+# kmmwidgets.cpp)
+TARGET_LINK_LIBRARIES(kmymoney kmm_mymoney ${KDE4_KDE3SUPPORT_LIBS} ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS})
 
 # Build directly with INSTALL_RPATH.
 # This avoids relinking (and rerunning uic) on 'make install'
@@ -158,7 +159,7 @@ ADD_CUSTOM_TARGET(generate_widgets_ui_srcs DEPENDS ${widgets_ui_srcs})
 ADD_LIBRARY(widgets STATIC
   ${libwidgets_a_SOURCES}
   ${widgets_ui_srcs}
-  #  ${_uncritial_common_sources}
+  ${_uncritial_common_sources}
   )
 TARGET_LINK_LIBRARIES(widgets kmymoney_base)
 
