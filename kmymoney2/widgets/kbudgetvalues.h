@@ -33,7 +33,7 @@ class QLabel;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "../widgets/kbudgetvaluesdecl.h"
+#include "ui_kbudgetvaluesdecl.h"
 #include <mymoneybudget.h>
 class kMyMoneyEdit;
 

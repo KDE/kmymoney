@@ -16,16 +16,16 @@ SET(libdialogs_a_SOURCES
   kcategoryreassigndlg.cpp
   kchooseimportexportdlg.cpp 
   kconfirmmanualenterdlg.cpp
-  #kcsvprogressdlg.cpp 
+  kcsvprogressdlg.cpp 
   kcurrencycalculator.cpp kcurrencyeditdlg.cpp
-  #keditequityentrydlg.cpp 
-  #keditloanwizard.cpp 
+  keditequityentrydlg.cpp 
+  keditloanwizard.cpp 
   #keditscheduledlg.cpp
   kendingbalancedlg.cpp 
-  #kenterscheduledlg.cpp
-  #kequitypriceupdatedlg.cpp 
+  kenterscheduledlg.cpp
+  kequitypriceupdatedlg.cpp 
   #kexportdlg.cpp 
-  #kfindtransactiondlg.cpp
+  kfindtransactiondlg.cpp
   kgncimportoptionsdlg.cpp 
   kgncpricesourcedlg.cpp
   kgpgkeyselectiondlg.cpp 

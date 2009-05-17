@@ -50,8 +50,8 @@
 #include "../mymoney/mymoneyfile.h"
 #include "../kmymoneyutils.h"
 
-KEditLoanWizard::KEditLoanWizard(const MyMoneyAccount& account, QWidget *parent, const char *name ) :
-  KNewLoanWizard(parent, name)
+KEditLoanWizard::KEditLoanWizard(const MyMoneyAccount& account, QWidget *parent ) :
+  KNewLoanWizard(parent)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
@@ -59,7 +59,7 @@ KEditLoanWizard::KEditLoanWizard(const MyMoneyAccount& account, QWidget *parent,
   m_effectiveDateLabel->setText(QString("\n") + i18n(
             "Please enter the date from which on the following changes will be effective. "
             "The date entered must be later than the opening date of this account (%1), but must "
-            "not be in the future. The default will be today.").arg(KGlobal::locale()->formatDate(account.openingDate(), true)));
+            "not be in the future. The default will be today.",KGlobal::locale()->formatDate(account.openingDate())));
   m_account = account;
   try {
     QString id = m_account.value("schedule");
@@ -76,8 +76,7 @@ KEditLoanWizard::KEditLoanWizard(const MyMoneyAccount& account, QWidget *parent,
   if(m_account.openingDate() > QDate::currentDate()) {
     m_effectiveDateNoteLabel->setText(QString("\n") + i18n(
             "Note: you will not be able to modify this account today, because the opening date \"%1\" is in the future. "
-            "Please revisit this dialog when the time has come."
-            ).arg(KGlobal::locale()->formatDate(m_account.openingDate(), true)));
+            "Please revisit this dialog when the time has come.",KGlobal::locale()->formatDate(m_account.openingDate())));
   } else {
     m_effectiveDateNoteLabel->hide();
   }
@@ -135,7 +134,7 @@ void KEditLoanWizard::loadWidgets(const MyMoneyAccount& /* account */)
   m_newInterestRateEdit->setPrecision(3);
   m_interestRateLabel->setText(QString(" ") + ir.formatMoney("", 3) + QString("%"));
 
-  m_paymentFrequencyUnitEdit->setCurrentItem(i18n(m_schedule.occurenceToString()));
+  m_paymentFrequencyUnitEdit->setCurrentItem(i18n(m_schedule.occurenceToString().latin1()));
   updateTermWidgets(m_account.term());
 
   // the base payment (amortization and interest) is determined
@@ -236,7 +235,7 @@ void KEditLoanWizard::loadWidgets(const MyMoneyAccount& /* account */)
 void KEditLoanWizard::next()
 {
   bool dontLeavePage = false;
-  QButton* button = m_selectionButtonGroup->find(m_lastSelection);
+  QAbstractButton* button = m_selectionButtonGroup->find(m_lastSelection);
 
   if(currentPage() == m_editSelectionPage) {
 
@@ -436,7 +435,7 @@ void KEditLoanWizard::updateEditSummary(void)
   m_additionalFees7->setText(m_summaryAdditionalFees->text());
   m_totalPayment7->setText(m_summaryTotalPeriodicPayment->text());
   m_interestRate7->setText(m_summaryInterestRate->text());
-  m_startDateChanges->setText(KGlobal::locale()->formatDate(m_effectiveChangeDateEdit->date(), true));
+  m_startDateChanges->setText(KGlobal::locale()->formatDate(m_effectiveChangeDateEdit->date()));
 
   // calculate the number of affected transactions
   MyMoneyTransactionFilter filter(m_account.id());

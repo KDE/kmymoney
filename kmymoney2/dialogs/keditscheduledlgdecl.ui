@@ -454,6 +454,12 @@
    <header>kmymoneycombo.h</header>                                 
    <container>1</container>                                         
   </customwidget>  
+  <customwidget>
+   <class>KMyMoneyOccurencePeriodCombo</class>
+   <extends>QWidget</extends>
+   <header>kmymoneycombo.h</header>
+   <container>1</container>
+  </customwidget>
 
   </customwidgets>
   <connections>

@@ -273,13 +273,14 @@ TransactionEditor* KEnterScheduleDlg::startEdit(void)
     d->m_tabOrderWidgets.append(buttonOk);
     d->m_tabOrderWidgets.append(buttonCancel);
     d->m_tabOrderWidgets.append(buttonHelp);
-
+#warning "port to kde4"
+#if 0
     // install event filter in all taborder widgets
     for(QWidget* w = d->m_tabOrderWidgets.first(); w; w = d->m_tabOrderWidgets.next()) {
       w->installEventFilter(this);
       w->installEventFilter(editor);
     }
-
+#endif
     // Check if the editor has some preference on where to set the focus
     // If not, set the focus to the first widget in the tab order
     QWidget* focusWidget = editor->firstWidget();
@@ -300,7 +301,8 @@ TransactionEditor* KEnterScheduleDlg::startEdit(void)
 bool KEnterScheduleDlg::focusNextPrevChild(bool next)
 {
   bool  rc = false;
-
+#warning "port to kde4"
+#if 0
   // qDebug("KGlobalLedgerView::focusNextPrevChild(editmode=%s)", m_inEditMode ? "true" : "false");
   QWidget *w = 0;
   QWidget *currentWidget;
@@ -329,7 +331,7 @@ bool KEnterScheduleDlg::focusNextPrevChild(bool next)
     }
     w = next ? d->m_tabOrderWidgets.next() : d->m_tabOrderWidgets.prev();
   } while(w != currentWidget);
-
+#endif
   return rc;
 }
 

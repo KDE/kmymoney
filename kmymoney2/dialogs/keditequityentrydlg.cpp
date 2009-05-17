@@ -61,7 +61,7 @@ KEditEquityEntryDlg::KEditEquityEntryDlg(const MyMoneySecurity& selectedSecurity
   edtFraction->setPrecision(0);
   edtFraction->setCalculatorButtonVisible(false);
   edtFraction->loadText(QString::number(m_selectedSecurity.smallestAccountFraction()));
-  cmbInvestmentType->setCurrentItem((int)m_selectedSecurity.securityType());
+  cmbInvestmentType->setCurrentIndex((int)m_selectedSecurity.securityType());
   // FIXME PRICE
   // kpvPriceHistory->setHistory(m_selectedSecurity.priceHistory());
 

@@ -60,7 +60,7 @@
 #include <kmymoneycombo.h>
 #include <ktoolinvocation.h>
 
-#include "ksortoptiondlg.h"
+#include "ui_ksortoptiondlg.h"
 
 KFindTransactionDlg::KFindTransactionDlg(QWidget *parent) :
   KFindTransactionDlgDecl(parent),

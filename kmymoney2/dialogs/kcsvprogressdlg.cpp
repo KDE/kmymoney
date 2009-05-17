@@ -186,7 +186,7 @@ void KCsvProgressDlg::performImport(void)
 /** Called when the user clicks on the Browser button */
 void KCsvProgressDlg::slotBrowseClicked()
 {
-  QString newName = KFileDialog::getSaveFileName(QString::null,"*.CSV");
+  QString newName = KFileDialog::getSaveFileName(KUrl(),"*.CSV",this);
   if (!newName.isEmpty())
   {
     m_qlineeditFile->setText(newName);
@@ -220,8 +220,9 @@ void KCsvProgressDlg::readConfig(void)
 {
   KSharedConfigPtr kconfig = KGlobal::config();
   KConfigGroup grp = kconfig->group("Last Use Settings");
-  m_kmymoneydateStart->setDate(grp.readEntry("KCsvProgressDlg_StartDate").date());
-  m_kmymoneydateEnd->setDate(grp.readEntry("KCsvProgressDlg_EndDate").date());
+#warning "port to kde4"
+  //m_kmymoneydateStart->setDate(grp.readEntry("KCsvProgressDlg_StartDate").date());
+  //m_kmymoneydateEnd->setDate(grp.readEntry("KCsvProgressDlg_EndDate").date());
   m_qlineeditFile->setText(grp.readEntry("KCsvProgressDlg_LastFile", ""));
   if (m_qlineeditFile->text().length()>=1)
     m_qbuttonRun->setEnabled(true);

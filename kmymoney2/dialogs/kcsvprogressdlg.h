@@ -43,10 +43,10 @@
   * @short A class to show the progress of a CSV import or export.
 **/
 
-class KCsvProgressDlgDecl : public QWidget, public Ui::KCsvProgressDlgDecl
+class KCsvProgressDlgDecl : public QDialog, public Ui::KCsvProgressDlgDecl
 {
 public:
-  KCsvProgressDlgDecl( QWidget *parent ) : QWidget( parent ) {
+  KCsvProgressDlgDecl( QWidget *parent ) : QDialog( parent ) {
     setupUi( this );
   }
 };

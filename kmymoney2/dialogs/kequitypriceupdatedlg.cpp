@@ -172,8 +172,8 @@ KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent, const QString& sec
   // previous versions of this dialog allowed to store a "Don't ask again" switch.
   // Since we don't support it anymore, we just get rid of it
   KSharedConfigPtr config = KGlobal::config();
-  config->group("Notification Messages");
-  config->deleteEntry("KEquityPriceUpdateDlg::slotQuoteFailed::Price Update Failed");
+  KConfigGroup grp = config->group("Notification Messages");
+  grp.deleteEntry("KEquityPriceUpdateDlg::slotQuoteFailed::Price Update Failed");
 }
 
 KEquityPriceUpdateDlg::~KEquityPriceUpdateDlg()
@@ -187,7 +187,7 @@ void KEquityPriceUpdateDlg::addPricePair(const MyMoneySecurityPair& pair, bool d
 
   QString symbol = QString("%1 > %2").arg(pair.first,pair.second);
   QString id = QString("%1 %2").arg(pair.first,pair.second);
-  if ( ! lvEquityList->findItem(id,ID_COL,Qt::ExactMatch) )
+  if ( ! lvEquityList->findItem(id,ID_COL,Q3ListView::ExactMatch) )
   {
     MyMoneyPrice pr = file->price(pair.first,pair.second);
     if(pr.source() != "KMyMoney") {
@@ -239,7 +239,7 @@ void KEquityPriceUpdateDlg::addInvestment(const MyMoneySecurity& inv)
 
   QString symbol = inv.tradingSymbol();
   QString id = inv.id();
-  if ( ! lvEquityList->findItem(id, ID_COL, Qt::ExactMatch) )
+  if ( ! lvEquityList->findItem(id, ID_COL, Q3ListView::ExactMatch) )
   {
     // check that the security is still in use
     Q3ValueList<MyMoneyAccount>::const_iterator it_a;
@@ -292,7 +292,7 @@ MyMoneyPrice KEquityPriceUpdateDlg::price(const QString& id) const
   MyMoneyPrice price;
   Q3ListViewItem* item;
 
-  if((item = lvEquityList->findItem(id, ID_COL, Qt::ExactMatch)) != 0) {
+  if((item = lvEquityList->findItem(id, ID_COL, Q3ListView::ExactMatch)) != 0) {
     MyMoneyMoney rate(item->text(PRICE_COL));
     if ( !rate.isZero() )
     {
@@ -395,8 +395,8 @@ void KEquityPriceUpdateDlg::slotUpdateSelectedClicked(void)
   }
 
   if(item) {
-    prgOnlineProgress->setTotalSteps(1+lvEquityList->childCount());
-    prgOnlineProgress->setProgress(skipCnt);
+    prgOnlineProgress->setMaximum(1+lvEquityList->childCount());
+    prgOnlineProgress->setValue(skipCnt);
     m_webQuote.launch(item->text(SYMBOL_COL),item->text(ID_COL),item->text(SOURCE_COL));
   }
   else
@@ -408,8 +408,8 @@ void KEquityPriceUpdateDlg::slotUpdateAllClicked(void)
   Q3ListViewItem* item = lvEquityList->firstChild();
   if ( item )
   {
-    prgOnlineProgress->setTotalSteps(1+lvEquityList->childCount());
-    prgOnlineProgress->setProgress(1);
+    prgOnlineProgress->setMaximum(1+lvEquityList->childCount());
+    prgOnlineProgress->setValue(1);
     m_fUpdateAll = true;
     m_webQuote.launch(item->text(SYMBOL_COL),item->text(ID_COL),item->text(SOURCE_COL));
   }
@@ -419,7 +419,7 @@ void KEquityPriceUpdateDlg::slotUpdateAllClicked(void)
 
 void KEquityPriceUpdateDlg::slotQuoteFailed(const QString& _id, const QString& _symbol)
 {
-  Q3ListViewItem* item = lvEquityList->findItem(_id,ID_COL,Qt::ExactMatch);
+  Q3ListViewItem* item = lvEquityList->findItem(_id,ID_COL,Q3ListView::ExactMatch);
 
   // Give the user some options
   int result;
@@ -455,7 +455,7 @@ void KEquityPriceUpdateDlg::slotQuoteFailed(const QString& _id, const QString& _
   if ( result != KMessageBox::Cancel )
   {
     Q3ListViewItem* next = NULL;
-    prgOnlineProgress->advance(1);
+    prgOnlineProgress->setValue(prgOnlineProgress->value()+1);
     item->listView()->setSelected(item, false);
 
     // launch the NEXT one ... in case of m_fUpdateAll == false, we
@@ -465,7 +465,7 @@ void KEquityPriceUpdateDlg::slotQuoteFailed(const QString& _id, const QString& _
     {
       while(next && !next->isSelected())
       {
-        prgOnlineProgress->advance(1);
+        prgOnlineProgress->setValue(prgOnlineProgress->value()+1);
         next = next->nextSibling();
       }
     }
@@ -486,7 +486,7 @@ void KEquityPriceUpdateDlg::slotQuoteFailed(const QString& _id, const QString& _
 
 void KEquityPriceUpdateDlg::slotReceivedQuote(const QString& _id, const QString& _symbol,const QDate& _date, const double& _price)
 {
-  Q3ListViewItem* item = lvEquityList->findItem(_id,ID_COL,Qt::ExactMatch);
+  Q3ListViewItem* item = lvEquityList->findItem(_id,ID_COL,Q3ListView::ExactMatch);
   Q3ListViewItem* next = NULL;
 
   if ( item )
@@ -536,7 +536,7 @@ void KEquityPriceUpdateDlg::slotReceivedQuote(const QString& _id, const QString&
       logErrorMessage(i18n("Received an invalid price for %1, unable to update.",_symbol));
     }
 
-    prgOnlineProgress->advance(1);
+    prgOnlineProgress->setValue(prgOnlineProgress->value()+1);
     item->listView()->setSelected(item, false);
 
     // launch the NEXT one ... in case of m_fUpdateAll == false, we
@@ -546,7 +546,7 @@ void KEquityPriceUpdateDlg::slotReceivedQuote(const QString& _id, const QString&
     {
       while(next && !next->isSelected())
       {
-        prgOnlineProgress->advance(1);
+        prgOnlineProgress->setValue(prgOnlineProgress->value()+1);
         next = next->nextSibling();
       }
     }
@@ -571,7 +571,7 @@ void KEquityPriceUpdateDlg::finishUpdate(void)
   // we've run past the end, reset to the default value.
   m_fUpdateAll = false;
   // force progress bar to show 100%
-  prgOnlineProgress->setProgress(prgOnlineProgress->totalSteps());
+  prgOnlineProgress->setValue(prgOnlineProgress->maximum());
 }
 
 // Make sure, that these definitions are only used within this file
