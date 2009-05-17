@@ -59,8 +59,8 @@ MyMoneyQifProfileNameValidator::~MyMoneyQifProfileNameValidator()
 QValidator::State MyMoneyQifProfileNameValidator::validate(QString& name, int&) const
 {
   KSharedConfigPtr config = KGlobal::config();
-  config->group("Profiles");
-  QStringList list = grp.readEntry("profiles");
+  KConfigGroup grp = config->group("Profiles");
+  QStringList list = grp.readEntry("profiles", QStringList());
 
   // invalid character?
   if(name.contains(",") != 0)
@@ -121,12 +121,12 @@ MyMoneyQifProfileEditor::MyMoneyQifProfileEditor(const bool edit, QWidget *paren
   connect(m_thousandsBox, SIGNAL(activated(const QString&)), this, SLOT(slotThousandsChanged(const QString&)));
 
   connect(m_editInputFilterLocation, SIGNAL(textChanged(const QString&)), &m_profile, SLOT(setFilterScriptImport(const QString&)));
-  connect(m_editInputFilterLocation, SIGNAL(urlSelected(const QString&)), m_editInputFilterLocation, SLOT(setURL(const QString&)));
+  connect(m_editInputFilterLocation, SIGNAL(urlSelected(const QString&)), m_editInputFilterLocation, SLOT(setUrl(const QString&)));
 
   connect(m_editInputFilterFileType, SIGNAL(textChanged(const QString&)), &m_profile, SLOT(setFilterFileType(const QString&)));
 
   connect(m_editOutputFilterLocation, SIGNAL(textChanged(const QString&)), &m_profile, SLOT(setFilterScriptExport(const QString&)));
-  connect(m_editOutputFilterLocation, SIGNAL(urlSelected(const QString&)), m_editOutputFilterLocation, SLOT(setURL(const QString&)));
+  connect(m_editOutputFilterLocation, SIGNAL(urlSelected(const QString&)), m_editOutputFilterLocation, SLOT(setUrl(const QString&)));
 
   connect(m_attemptMatch, SIGNAL(toggled(bool)), &m_profile, SLOT(setAttemptMatchDuplicates(bool)));
 }
@@ -227,16 +227,16 @@ void MyMoneyQifProfileEditor::loadProfileListFromConfig(void)
 
   QStringList list;
   KSharedConfigPtr config = KGlobal::config();
-  config->group("Profiles");
-  list = grp.readEntry("profiles");
+  KConfigGroup grp = config->group("Profiles");
+  list = grp.readEntry("profiles", QStringList());
 
   if(list.count() == 0) {
     m_profile.clear();
     m_profile.setProfileDescription(i18n("The default QIF profile"));
     addProfile("Default");
 
-    config->group("Profiles");
-    list = grp.readEntry("profiles");
+    grp = config->group("Profiles");
+    list = grp.readEntry("profiles", QStringList());
   }
 
   list.sort();
@@ -263,13 +263,13 @@ void MyMoneyQifProfileEditor::slotLoadProfileFromConfig(const QString& profile)
     m_isDirty = true;
   }
 
-  if(m_profileListBox->findItem(profileName, Qt::ExactMatch | Qt::CaseSensitive) == NULL) {
+  if(m_profileListBox->findItem(profileName, Q3ListView::ExactMatch | Qt::CaseSensitive) == NULL) {
     profileName = m_profileListBox->text(0);
   }
 
   m_profile.loadProfile("Profile-" + profileName);
 
-  Q3ListBoxItem *lbi = m_profileListBox->findItem(profileName, Qt::ExactMatch | Qt::CaseSensitive);
+  Q3ListBoxItem *lbi = m_profileListBox->findItem(profileName, Q3ListView::ExactMatch | Qt::CaseSensitive);
   int idx = m_profileListBox->index(lbi);
   showProfile();
   if(idx >= 0) {
@@ -284,8 +284,8 @@ void MyMoneyQifProfileEditor::showProfile(void)
   m_editOpeningBalance->setText(m_profile.openingBalanceText());
   m_editAccountDelimiter->setText(m_profile.accountDelimiter());
   m_editVoidMark->setText(m_profile.voidMark());
-  m_editInputFilterLocation->setURL(m_profile.filterScriptImport());
-  m_editOutputFilterLocation->setURL(m_profile.filterScriptExport());
+  m_editInputFilterLocation->setUrl(m_profile.filterScriptImport());
+  m_editOutputFilterLocation->setUrl(m_profile.filterScriptExport());
   m_editInputFilterFileType->setText(m_profile.filterFileType());
 
   m_editDateFormat->setCurrentText(m_profile.outputDateFormat());
@@ -316,23 +316,23 @@ void MyMoneyQifProfileEditor::deleteProfile(const QString& name)
 
   config->deleteGroup("Profile-" + name);
 
-  config->group("Profiles");
-  QStringList list = grp.readEntry("profiles");
+  KConfigGroup grp = config->group("Profiles");
+  QStringList list = grp.readEntry("profiles", QStringList());
   list.remove(name);
 
-  config->writeEntry("profiles", list);
+  grp.writeEntry("profiles", list);
   m_isDirty = true;
 }
 
 void MyMoneyQifProfileEditor::addProfile(const QString& name)
 {
   KSharedConfigPtr config = KGlobal::config();
-  config->group("Profiles");
-  QStringList list = grp.readEntry("profiles");
+  KConfigGroup grp = config->group("Profiles");
+  QStringList list = grp.readEntry("profiles", QStringList());
 
   list += name;
   list.sort();
-  config->writeEntry("profiles", list);
+  grp.writeEntry("profiles", list);
 
   m_profile.setProfileName("Profile-" + name);
   m_profile.saveProfile();
@@ -360,7 +360,8 @@ void MyMoneyQifProfileEditor::slotReset(void)
   m_profile.saveProfile();
 
   KSharedConfigPtr config = KGlobal::config();
-  config->rollback();
+#warning "port to kde4"
+  //config->rollback();
   config->reparseConfiguration();
 
   QString currentProfile = m_profile.profileName().mid(8);
@@ -398,34 +399,14 @@ void MyMoneyQifProfileEditor::slotNew(void)
 const QString MyMoneyQifProfileEditor::enterName(bool& ok)
 {
   MyMoneyQifProfileNameValidator val(this, "Validator");
-#if KDE_IS_VERSION(3,2,0)
   return KInputDialog::getText(i18n("QIF Profile Editor"),
                                i18n("Enter new profile name"),
                                QString::null,
                                &ok,
                                this,
-                               0,
+
                                &val,
                                0);
-#else
-  QString rc;
-
-  // the blank in the next line as the value for the edit box is
-  // there on purpose, so that with the following call to validateAndSet
-  // the state is changed and the OK-Button is greyed
-  KLineEditDlg* dlg = new KLineEditDlg(i18n("Enter new profile name"), " ", this);
-  dlg->lineEdit()->setValidator(&val);
-  dlg->lineEdit()->validateAndSet("", 0, 0, 0);
-
-  ok = false;
-  if(dlg->exec()) {
-    ok = true;
-  }
-  rc = dlg->lineEdit()->text();
-  delete dlg;
-
-  return rc;
-#endif
 }
 
 void MyMoneyQifProfileEditor::slotDelete(void)

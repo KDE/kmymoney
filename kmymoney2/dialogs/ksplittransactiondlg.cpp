@@ -55,7 +55,7 @@
 #include <mymoneyfile.h>
 
 #include "kmymoneysplittable.h"
-#include "../dialogs/ksplitcorrectiondlg.h"
+#include "ui_ksplitcorrectiondlg.h"
 
 KSplitTransactionDlg::KSplitTransactionDlg(const MyMoneyTransaction& t,
                                            const MyMoneySplit& s,
@@ -126,8 +126,8 @@ KSplitTransactionDlg::KSplitTransactionDlg(const MyMoneyTransaction& t,
   transactionsTable->setup(priceInfo);
 
   QSize size(width(), height());
-  KGlobal::config()->setGroup("SplitTransactionEditor");
-  size = KGlobal::config()->readSizeEntry("Geometry", &size);
+  KConfigGroup grp = KGlobal::config()->group("SplitTransactionEditor");
+  size = grp.readEntry("Geometry", &size);
   size.setHeight(size.height()-1);
   QDialog::resize( size.expandedTo(minimumSizeHint()) );
 
@@ -142,8 +142,8 @@ KSplitTransactionDlg::KSplitTransactionDlg(const MyMoneyTransaction& t,
 
 KSplitTransactionDlg::~KSplitTransactionDlg()
 {
-  KGlobal::config()->setGroup("SplitTransactionEditor");
-  KGlobal::config()->writeEntry("Geometry", size());
+  KConfigGroup grp =  KGlobal::config()->group("SplitTransactionEditor");
+  grp.writeEntry("Geometry", size());
 }
 
 int KSplitTransactionDlg::exec(void)
@@ -210,7 +210,7 @@ int KSplitTransactionDlg::exec(void)
         corrDlg->leaveBtn->setText(q);
 
         if((rc = corrDlg->exec()) == QDialog::Accepted) {
-          QButton* button = corrDlg->buttonGroup->selected();
+          QAbstractButton* button = corrDlg->buttonGroup->selected();
           if(button != 0) {
             switch(corrDlg->buttonGroup->id(button)) {
               case 0:       // continue to edit

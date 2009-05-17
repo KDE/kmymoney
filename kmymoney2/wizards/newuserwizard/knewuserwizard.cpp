@@ -331,7 +331,7 @@ FilePage::FilePage(Wizard* wizard) :
 
   KUser user;
   m_dataFileEdit->setShowLocalProtocol(false);
-  m_dataFileEdit->setURL(QString("%1/%2.kmy").arg(QDir::homePath(), user.loginName()));
+  m_dataFileEdit->setUrl(QString("%1/%2.kmy").arg(QDir::homePath(), user.loginName()));
 }
 
 bool FilePage::isComplete(void) const

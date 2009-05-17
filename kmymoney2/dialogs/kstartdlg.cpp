@@ -95,7 +95,7 @@ void KStartDlg::setPage_Documents()
   //allow user to select either a .kmy file, or any generic file.
   kurlrequest->fileDialog()->setFilter( i18n("%1|KMyMoney files (*.kmy)\n" "%2|All files (*.*)").arg("*.kmy").arg("*.*") );
   kurlrequest->fileDialog()->setMode(KFile::File || KFile::ExistingOnly);
-  kurlrequest->fileDialog()->setURL(KUrl(kmymoney2->readLastUsedDir()));//kurlrequest->fileDialog()->setURL(KUrl(KGlobalSettings::documentPath()));
+  kurlrequest->fileDialog()->setUrl(KUrl(kmymoney2->readLastUsedDir()));//kurlrequest->fileDialog()->setURL(KUrl(KGlobalSettings::documentPath()));
   mainLayout->addWidget( kurlrequest );
 
   QLabel *label1 = new QLabel( recentMainFrame, "label1" );
@@ -184,7 +184,7 @@ void KStartDlg::slotRecentClicked(Q3IconViewItem *item)
   if(!kitem) return;
 
   isopenfile = true;
-  kurlrequest->setURL( kitem->fileURL() );
+  kurlrequest->setUrl( kitem->fileURL() );
   // Close the window if the user press an icon
   slotOk();
 }
