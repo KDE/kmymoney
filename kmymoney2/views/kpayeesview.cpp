@@ -341,8 +341,8 @@ KPayeesView::KPayeesView(QWidget *parent) :
 
   // use the size settings of the last run (if any)
   KSharedConfigPtr config = KGlobal::config();
-  config->setGroup("Last Use Settings");
-  Q3ValueList<int> sizes = config->readIntListEntry("KPayeesViewSplitterSize");
+  KConfigGroup grp = config->group("Last Use Settings");
+  Q3ValueList<int> sizes = gr.readEntry("KPayeesViewSplitterSize", Q3ValueList<int>());
   if(sizes.size() == 2)
     m_splitter->setSizes(sizes);
 
@@ -409,8 +409,8 @@ KPayeesView::~KPayeesView()
 {
   // remember the splitter settings for startup
   KSharedConfigPtr config = KGlobal::config();
-  config->setGroup("Last Use Settings");
-  config->writeEntry("KPayeesViewSplitterSize", m_splitter->sizes());
+  KConfigGroup grp =  config->group("Last Use Settings");
+  grp.writeEntry("KPayeesViewSplitterSize", m_splitter->sizes());
 }
 
 void KPayeesView::slotQueueUpdate(void)

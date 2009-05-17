@@ -49,8 +49,8 @@
 #include "../kmymoney2.h"
 
 
-KCategoriesView::KCategoriesView(QWidget *parent, const char *name ) :
-  KCategoriesViewDecl(parent, name),
+KCategoriesView::KCategoriesView(QWidget *parent) :
+  KCategoriesViewDecl(parent),
   m_incomeItem(0),
   m_expenseItem(0),
   m_needReload(false)

@@ -98,8 +98,8 @@ void KBudgetListItem::paintCell(QPainter *p, const QColorGroup & cg, int column,
 const int KBudgetView::m_iBudgetYearsAhead = 5;
 const int KBudgetView::m_iBudgetYearsBack = 3;
 
-KBudgetView::KBudgetView(QWidget *parent, const char *name ) :
-  KBudgetViewDecl(parent,name),
+KBudgetView::KBudgetView(QWidget *parent) :
+  KBudgetViewDecl(parent),
   m_needReload(false),
   m_inSelection(false)
 {
@@ -727,7 +727,8 @@ void KBudgetView::cb_includesSubaccounts_clicked()
 void KBudgetView::slotNewBudget(void)
 {
   askSave();
-  kmymoney2->action("budget_new")->activate();
+#warning "port to kde4"
+  //kmymoney2->action("budget_new")->activate();
 }
 
 void KBudgetView::slotResetBudget(void)

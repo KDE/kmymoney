@@ -25,6 +25,7 @@
 
 #include "kdecompat.h"
 #include <klocale.h>
+#include <KToggleAction>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -62,8 +63,8 @@ public:
 
 
 
-KInvestmentView::KInvestmentView(QWidget *parent, const char *name) :
-  KInvestmentViewDecl(parent,name),
+KInvestmentView::KInvestmentView(QWidget *parent) :
+  KInvestmentViewDecl(parent),
   d(new Private)
 {
   m_table->setRootIsDecorated(false);
@@ -85,7 +86,8 @@ KInvestmentView::KInvestmentView(QWidget *parent, const char *name) :
   m_table->header()->setResizeEnabled(true);
   m_table->setAllColumnsShowFocus(true);
   m_table->setShowSortIndicator(true);
-  m_table->restoreLayout(KGlobal::config(), "Investment Settings");
+  KConfigGroup grp = KGlobal::config()->group( "Investment Settings");
+  m_table->restoreLayout(grp);
 
   connect(m_table, SIGNAL(contextMenu(K3ListView*, Q3ListViewItem* , const QPoint&)),
     this, SLOT(slotListContextMenu(K3ListView*, Q3ListViewItem*, const QPoint&)));
@@ -101,7 +103,8 @@ KInvestmentView::KInvestmentView(QWidget *parent, const char *name) :
 
 KInvestmentView::~KInvestmentView()
 {
-  m_table->saveLayout(KGlobal::config(), "Investment Settings");
+    KConfigGroup grp = KGlobal::config()->group( "Investment Settings");
+  m_table->saveLayout(grp);
   delete d;
 }
 

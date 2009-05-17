@@ -40,7 +40,7 @@
 #include <QPixmap>
 class K3ListViewSearchLineWidget;
 
-#include "kcategoriesviewdecl.h"
+#include "ui_kcategoriesviewdecl.h"
 
 /**
   * @brief  This class contains the implementation of the categories view.
@@ -62,11 +62,20 @@ class K3ListViewSearchLineWidget;
   * kmymoney2.cpp): category_new, category_edit and category_delete. They are
   * accessible from either the main menu or the context menu.
   */
+
+class KCategoriesViewDecl : public QDialog, public Ui::KCategoriesViewDecl
+{
+public:
+  KCategoriesViewDecl( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
+
 class KCategoriesView : public KCategoriesViewDecl
 {
   Q_OBJECT
 public:
-  KCategoriesView(QWidget *parent=0, const char *name=0);
+  KCategoriesView(QWidget *parent=0);
   virtual ~KCategoriesView();
 
 

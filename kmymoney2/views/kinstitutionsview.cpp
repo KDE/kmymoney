@@ -29,7 +29,7 @@
 #include <kdebug.h>
 #include <klocale.h>
 #include <kstandarddirs.h>
-
+#include <KToggleAction>
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -207,7 +207,9 @@ void KInstitutionsView::loadSubAccounts(KMyMoneyAccountTreeItem* parent)
   const MyMoneyAccount& account = dynamic_cast<const MyMoneyAccount&>(parent->itemObject());
   Q3ValueList<QString>::const_iterator it_a;
   MyMoneyFile* file = MyMoneyFile::instance();
-  for(it_a = account.accountList().begin(); it_a != account.accountList().end(); ++it_a) {
+#warning "port to kde4"
+#if 0
+  for(it_a = account.accountList().constBegin(); it_a != account.accountList().constEnd(); ++it_a) {
     MyMoneyAccount acc = m_accountMap[(*it_a)];
     if(!acc.isInvest())
       continue;
@@ -224,6 +226,7 @@ void KInstitutionsView::loadSubAccounts(KMyMoneyAccountTreeItem* parent)
     if(acc.id() == m_reconciliationAccount.id())
       item->setReconciliation(true);
   }
+#endif
 }
 
 void KInstitutionsView::loadSubAccounts(KMyMoneyAccountTreeItem* parent, const QString& institutionId)

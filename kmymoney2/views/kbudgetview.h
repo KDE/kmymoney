@@ -35,7 +35,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kbudgetviewdecl.h"
+#include "ui_kbudgetviewdecl.h"
 #include "../mymoney/mymoneybudget.h"
 #include "../mymoney/mymoneysecurity.h"
 class KMyMoneyAccountTreeBudgetItem;
@@ -79,11 +79,20 @@ private:
   * @author Darren Gould
   * @author Thomas Baumgart
   */
+
+class KBudgetViewDecl : public QDialog, public Ui::KBudgetViewDecl
+{
+public:
+  KBudgetViewDecl( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
+
 class KBudgetView : public KBudgetViewDecl
 {
    Q_OBJECT
 public:
-  KBudgetView(QWidget *parent=0, const char *name=0);
+  KBudgetView(QWidget *parent=0);
   ~KBudgetView();
   void show();
 

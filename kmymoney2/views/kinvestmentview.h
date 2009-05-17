@@ -34,7 +34,7 @@
 
 #include <mymoneysecurity.h>
 #include <mymoneyaccount.h>
-#include "kinvestmentviewdecl.h"
+#include "ui_kinvestmentviewdecl.h"
 #include "kinvestmentlistitem.h"
 
 class MyMoneyTransaction;
@@ -44,12 +44,21 @@ class MyMoneyInvestTransaction;
   * @author Kevin Tambascio
   */
 
+
+class KInvestmentViewDecl : public QDialog, public Ui::KInvestmentViewDecl
+{
+public:
+  KInvestmentViewDecl( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
+
 class KInvestmentView : public KInvestmentViewDecl
 {
   Q_OBJECT
 
 public:
-  KInvestmentView(QWidget *parent=0, const char *name=0);
+  KInvestmentView(QWidget *parent=0);
   ~KInvestmentView();
 
   /**
