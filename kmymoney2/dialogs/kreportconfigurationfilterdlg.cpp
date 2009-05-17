@@ -71,10 +71,10 @@
 #include <mymoneyreport.h>
 #include <kmymoneycombo.h>
 #include <ktoolinvocation.h>
-#include "../widgets/kmymoneyreportconfigtab1decl.h"
-#include "../widgets/kmymoneyreportconfigtab2decl.h"
-#include "../widgets/kmymoneyreportconfigtab3decl.h"
-#include "../widgets/kmymoneyreportconfigtabchartdecl.h"
+#include "ui_kmymoneyreportconfigtab1decl.h"
+#include "ui_kmymoneyreportconfigtab2decl.h"
+#include "ui_kmymoneyreportconfigtab3decl.h"
+#include "ui_kmymoneyreportconfigtabchartdecl.h"
 
 KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
   MyMoneyReport report, QWidget *parent, const char *name)
@@ -204,7 +204,7 @@ void KReportConfigurationFilterDlg::slotSearch(void)
     } else {
       m_currentState.setBudget(QString(), false);
     }
-    
+
     //set moving average days
     if(m_tab2->m_movingAverageDays->isEnabled()) {
       m_currentState.setMovingAverageDays( m_tab2->m_movingAverageDays->value() );

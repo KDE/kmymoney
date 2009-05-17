@@ -74,8 +74,8 @@ QValidator::State MyMoneyQifProfileNameValidator::validate(QString& name, int&) 
   return QValidator::Acceptable;
 }
 
-MyMoneyQifProfileEditor::MyMoneyQifProfileEditor(const bool edit, QWidget *parent, const char *name )
-  : MyMoneyQifProfileEditorDecl(parent,name),
+MyMoneyQifProfileEditor::MyMoneyQifProfileEditor(const bool edit, QWidget *parent)
+  : MyMoneyQifProfileEditorDecl(parent),
   m_inEdit(edit),
   m_isDirty(false),
   m_isAccepted(false),

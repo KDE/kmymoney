@@ -107,13 +107,14 @@ void KImportDlg::slotBrowse()
   MyMoneyQifProfile tmpprofile;
   tmpprofile.loadProfile("Profile-" + profile());
 
-  KFileDialog dialog(KGlobalSettings::documentPath(),
+  KFileDialog dialog(KUrl(KGlobalSettings::documentPath()),
                      i18n("%1|Import files\n%2|All files (*.*)",tmpprofile.filterFileType(),"*"),
-                     this, i18n("Import File..."), true);
+                     this);
+  dialog.setCaption(i18n("Import File..."));
   dialog.setMode(KFile::File | KFile::ExistingOnly);
 
   if(dialog.exec() == QDialog::Accepted) {
-    m_qlineeditFile->setText(dialog.selectedURL().pathOrUrl());
+    m_qlineeditFile->setText(dialog.selectedUrl().pathOrUrl());
   }
 }
 
@@ -157,7 +158,8 @@ void KImportDlg::slotFileTextChanged(const QString& text)
 
 void KImportDlg::slotNewProfile(void)
 {
-  MyMoneyQifProfileEditor* editor = new MyMoneyQifProfileEditor(true, this, "QIF Profile Editor");
+  MyMoneyQifProfileEditor* editor = new MyMoneyQifProfileEditor(true, this);
+  editor->setObjectName("QIF Profile Editor");
 
   if(editor->exec()) {
     m_profileComboBox->setCurrentText(editor->selectedProfile());
@@ -177,7 +179,7 @@ void KImportDlg::loadProfiles(const bool selectLast)
 {
   // Creating an editor object here makes sure that
   // we have at least the default profile available
-  MyMoneyQifProfileEditor* edit = new MyMoneyQifProfileEditor(true, 0, 0);
+  MyMoneyQifProfileEditor* edit = new MyMoneyQifProfileEditor(true, 0);
   edit->slotOk();
   delete edit;
 
@@ -189,7 +191,7 @@ void KImportDlg::loadProfiles(const bool selectLast)
   KSharedConfigPtr config = KGlobal::config();
   KConfigGroup grp = config->group("Profiles");
 
-  list = grp.readEntry("profiles");
+  list = grp.readEntry("profiles",QStringList());
   list.sort();
   m_profileComboBox->insertStringList(list);
 

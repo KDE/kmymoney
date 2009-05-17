@@ -31,7 +31,7 @@ class Q3ListViewItem;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyqifprofileeditordecl.h"
+#include "ui_mymoneyqifprofileeditordecl.h"
 #include "../converter/mymoneyqifprofile.h"
 
 /**
@@ -50,12 +50,20 @@ public:
 };
 
 
+class MyMoneyQifProfileEditorDecl : public QDialog, public Ui::MyMoneyQifProfileEditorDecl
+{
+public:
+  MyMoneyQifProfileEditorDecl( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
+
 class MyMoneyQifProfileEditor : public MyMoneyQifProfileEditorDecl
 {
   Q_OBJECT
 
 public:
-  MyMoneyQifProfileEditor(const bool edit = false, QWidget *parent=0, const char *name=0);
+  MyMoneyQifProfileEditor(const bool edit = false, QWidget *parent=0);
   virtual ~MyMoneyQifProfileEditor();
 
   /**

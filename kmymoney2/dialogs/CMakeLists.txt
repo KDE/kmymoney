@@ -24,16 +24,16 @@ SET(libdialogs_a_SOURCES
   kendingbalancedlg.cpp 
   kenterscheduledlg.cpp
   kequitypriceupdatedlg.cpp 
-  #kexportdlg.cpp 
-  kfindtransactiondlg.cpp
+  kexportdlg.cpp 
+  #kfindtransactiondlg.cpp
   kgncimportoptionsdlg.cpp 
   kgncpricesourcedlg.cpp
   kgpgkeyselectiondlg.cpp 
-  #kimportdlg.cpp 
+  kimportdlg.cpp 
   kloadtemplatedlg.cpp
   kmergetransactionsdlg.cpp 
   kmymoneyfileinfodlg.cpp
-  #kmymoneypricedlg.cpp 
+  kmymoneypricedlg.cpp 
   #kmymoneysplittable.cpp 
   #knewaccountdlg.cpp
   knewbankdlg.cpp 
@@ -47,7 +47,7 @@ SET(libdialogs_a_SOURCES
   krecentfileitem.cpp 
   kreconciledlg.cpp
   kreconcilelistitem.cpp 
-  #kreportconfigurationfilterdlg.cpp
+  kreportconfigurationfilterdlg.cpp
   #ksecuritylisteditor.cpp 
   kselectdatabasedlg.cpp
   #kselecttransactionsdlg.cpp 

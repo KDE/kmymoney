@@ -107,7 +107,7 @@ KExportDlg::~KExportDlg()
 
 void KExportDlg::slotBrowse()
 {
-  QString newName(KFileDialog::getSaveFileName(QString::null,"*.QIF"));
+  QString newName(KFileDialog::getSaveFileName(KUrl(),"*.QIF", this));
   KMyMoneyUtils::appendCorrectFileExt(newName, QString("qif"));
   if (!newName.isEmpty())
     m_qlineeditFile->setText(newName);
@@ -115,7 +115,8 @@ void KExportDlg::slotBrowse()
 
 void KExportDlg::slotNewProfile(void)
 {
-  MyMoneyQifProfileEditor* editor = new MyMoneyQifProfileEditor(true, this, "QIF Profile Editor");
+  MyMoneyQifProfileEditor* editor = new MyMoneyQifProfileEditor(true, this);
+  editor->setObjectName( "QIF Profile Editor");
   if(editor->exec()) {
     m_profileComboBox->setCurrentText(editor->selectedProfile());
     loadProfiles();
@@ -127,7 +128,7 @@ void KExportDlg::loadProfiles(const bool selectLast)
 {
   // Creating an editor object here makes sure that
   // we have at least the default profile available
-  MyMoneyQifProfileEditor* edit = new MyMoneyQifProfileEditor(true, 0, 0);
+  MyMoneyQifProfileEditor* edit = new MyMoneyQifProfileEditor(true, 0);
   edit->slotOk();
   delete edit;
 
@@ -139,7 +140,7 @@ void KExportDlg::loadProfiles(const bool selectLast)
   KSharedConfigPtr config = KGlobal::config();
   KConfigGroup grp = config->group("Profiles");
 
-  list = grp.readEntry("profiles");
+  list = grp.readEntry("profiles",QStringList());
   list.sort();
   m_profileComboBox->insertStringList(list);
 
@@ -167,8 +168,9 @@ void KExportDlg::readConfig(void)
   m_qlineeditFile->setText(kgrp.readEntry("KExportDlg_LastFile"));
   m_qcheckboxAccount->setChecked(kgrp.readEntry("KExportDlg_AccountOpt", true));
   m_qcheckboxCategories->setChecked(kgrp.readEntry("KExportDlg_CatOpt", true));
-  m_kmymoneydateStart->setDate(kgrp.readEntry("KExportDlg_StartDate").date());
-  m_kmymoneydateEnd->setDate(kgrp.readEntry("KExportDlg_EndDate").date());
+#warning "port to kde4"
+  //m_kmymoneydateStart->setDate(kgrp.readEntry("KExportDlg_StartDate").date());
+  //m_kmymoneydateEnd->setDate(kgrp.readEntry("KExportDlg_EndDate").date());
   // m_profileComboBox is loaded in loadProfiles(), so we don't worry here
   // m_accountComboBox is loaded in loadAccounts(), so we don't worry here
 }
@@ -176,7 +178,7 @@ void KExportDlg::readConfig(void)
 void KExportDlg::writeConfig(void)
 {
   KSharedConfigPtr kconfig = KGlobal::config();
-  kconfig->group("Last Use Settings");
+  KConfigGroup grp = kconfig->group("Last Use Settings");
   grp.writeEntry("KExportDlg_LastFile", m_qlineeditFile->text());
   grp.writeEntry("KExportDlg_AccountOpt", m_qcheckboxAccount->isChecked());
   grp.writeEntry("KExportDlg_CatOpt", m_qcheckboxCategories->isChecked());
