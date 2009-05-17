@@ -26,7 +26,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-class QListViewItem;
+class Q3ListViewItem;
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -34,7 +34,7 @@ class QListViewItem;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneypricedlgdecl.h"
+#include "ui_kmymoneypricedlgdecl.h"
 #include "mymoneyprice.h"
 
 
@@ -54,7 +54,7 @@ public:
   ~KMyMoneyPriceDlg();
 
 protected slots:
-  void slotSelectPrice(QListViewItem* item);
+  void slotSelectPrice(Q3ListViewItem* item);
   void slotNewPrice(void);
   void slotDeletePrice(void);
   int slotEditPrice(void);
@@ -62,7 +62,7 @@ protected slots:
   void slotOnlinePriceUpdate(void);
 
 private:
-  QListViewItem*    m_currentItem;
+  Q3ListViewItem*    m_currentItem;
 };
 
 #endif // KMYMONEYPRICEDLG_H

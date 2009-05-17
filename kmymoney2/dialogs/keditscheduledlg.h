@@ -30,6 +30,8 @@
 #include <mymoneyfile.h>
 #include <mymoneyscheduled.h>
 #include "ui_keditscheduledlgdecl.h"
+//Added by qt3to4:
+#include <QResizeEvent>
 
 class TransactionEditor;
 

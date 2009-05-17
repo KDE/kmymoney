@@ -20,18 +20,18 @@
 #if 0 // currently, this object is unused
 
 #include <qwidget.h>
-#include <qlistview.h>
+#include <q3listview.h>
 #include "../mymoney/mymoneytransaction.h"
 
 /**
   *@author Michael Edwardes
   */
 
-class KReconcileListItem : public QListViewItem  {
+class KReconcileListItem : public Q3ListViewItem  {
 //   Q_OBJECT
   MyMoneyTransaction *m_transaction;
 public:
-  KReconcileListItem(QListView *parent, MyMoneyTransaction *transaction );
+  KReconcileListItem(Q3ListView *parent, MyMoneyTransaction *transaction );
   ~KReconcileListItem();
   MyMoneyTransaction* transaction(void);
   void setReconciled(bool rec);

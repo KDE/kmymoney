@@ -29,6 +29,8 @@
 // Project Includes
 
 #include <transactioneditor.h>
+//Added by qt3to4:
+#include <Q3ValueList>
 
 class InvestTransactionEditor : public TransactionEditor
 {
