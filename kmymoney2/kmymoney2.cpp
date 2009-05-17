@@ -901,7 +901,7 @@ void KMyMoney2App::initActions(void)
   currency_new->setText(i18n("New currency"));
   currency_new->setIcon(KIcon("filenew"));
   connect(currency_new, SIGNAL(triggered()), this, SLOT(slotCurrencyNew()));
-  
+
 
   //new KAction(i18n("Rename currency"), "edit", 0, this, SIGNAL(currencyRename()), actionCollection(), "currency_rename");
   KAction *currency_rename = actionCollection()->addAction("currency_rename");
@@ -918,7 +918,7 @@ void KMyMoney2App::initActions(void)
 
   KAction *currency_setbase = actionCollection()->addAction("currency_setbase");
   currency_setbase->setText(i18n("Select as base currency"));
-  currency_setbase->setIcon(KIcon("kmymoney2"));  
+  currency_setbase->setIcon(KIcon("kmymoney2"));
   connect(currency_setbase, SIGNAL(triggered()), this, SLOT(slotCurrencySetBase()));
   //new KAction(i18n("Select as base currency"), "kmymoney2", 0, this, SLOT(slotCurrencySetBase()), actionCollection(), "currency_setbase");
 
@@ -1028,7 +1028,7 @@ void KMyMoney2App::initStatusBar(void)
 
 void KMyMoney2App::saveOptions(void)
 {
-  config->setGroup("General Options");
+  KConfigGroup grp = config->group("General Options");
   config->writeEntry("Geometry", size());
   // config->writeEntry("Show Statusbar", toggleAction("options_show_statusbar")->isChecked());
   // toolBar("mainToolBar")->saveSettings(config, "mainToolBar");
@@ -1039,7 +1039,7 @@ void KMyMoney2App::saveOptions(void)
 
 void KMyMoney2App::readOptions(void)
 {
-  config->setGroup("General Options");
+  KConfigGroup grp = config->group("General Options");
 
   toggleAction("view_hide_reconciled_transactions")->setChecked(KMyMoneyGlobalSettings::hideReconciledTransactions());
   toggleAction("view_hide_unused_categories")->setChecked(KMyMoneyGlobalSettings::hideUnusedCategory());
@@ -1049,17 +1049,17 @@ void KMyMoney2App::readOptions(void)
   if(p)
     p->loadEntries(config,"Recent Files");
 
-  QSize size=config->readSizeEntry("Geometry");
+  QSize size=grp.readEntry("Geometry");
   if(!size.isEmpty())
   {
     resize(size);
   }
 
   // Startdialog is written in the settings dialog
-  m_startDialog = config->readBoolEntry("StartDialog", true);
+  m_startDialog = grp.readEntry("StartDialog", true);
 
-  config->setGroup("Schedule Options");
-  m_bCheckSchedules = config->readBoolEntry("CheckSchedules", true);
+  KConfigGroup grp = config->group("Schedule Options");
+  m_bCheckSchedules = grp.readEntry("CheckSchedules", true);
 }
 
 void KMyMoney2App::resizeEvent(QResizeEvent* ev)
@@ -6098,7 +6098,7 @@ void KMyMoney2App::writeLastUsedDir(const QString& directory)
   KSharedConfigPtr kconfig = KGlobal::config();
   if(kconfig)
   {
-    kconfig->setGroup("General Options");
+    KConfigGroup grp = config->group("General Options");
 
     //write path entry, no error handling since its void.
     kconfig->writePathEntry("LastUsedDirectory", directory);
@@ -6111,7 +6111,7 @@ void KMyMoney2App::writeLastUsedFile(const QString& fileName)
   KSharedConfigPtr kconfig = KGlobal::config();
   if(kconfig)
   {
-    kconfig->setGroup("General Options");
+    KConfigGroup grp = config->group("General Options");
 
     // write path entry, no error handling since its void.
     // use a standard string, as fileName could contain a protocol
@@ -6128,10 +6128,10 @@ QString KMyMoney2App::readLastUsedDir(void) const
   KSharedConfigPtr kconfig = KGlobal::config();
   if(kconfig)
   {
-    kconfig->setGroup("General Options");
+    KConfigGroup grp = config->group("General Options");
 
     //read path entry.  Second parameter is the default if the setting is not found, which will be the default document path.
-    str = kconfig->readPathEntry("LastUsedDirectory", KGlobalSettings::documentPath());
+    str = kconfig->readEntry("LastUsedDirectory", KGlobalSettings::documentPath());
     // if the path stored is empty, we use the default nevertheless
     if(str.isEmpty())
       str = KGlobalSettings::documentPath();
@@ -6148,10 +6148,10 @@ QString KMyMoney2App::readLastUsedFile(void) const
   KSharedConfigPtr kconfig = KGlobal::config();
   if(kconfig)
   {
-    kconfig->setGroup("General Options");
+    KConfigGroup grp = config->group("General Options");
 
     // read filename entry.
-    str = kconfig->readEntry("LastUsedFile", "");
+    str = grp.readEntry("LastUsedFile", "");
   }
 
   return str;

@@ -88,11 +88,7 @@ MyMoneyDbDrivers::MyMoneyDbDrivers () {
   m_driverMap["QODBC3"] = QString("Open Database Connectivity");
   m_driverMap["QPSQL7"] = QString("PostgreSQL v6.x and v7.x");
   m_driverMap["QTDS7"] = QString("Sybase Adaptive Server and Microsoft SQL Server");
-#if QT_VERSION < 0x040000
-  m_driverMap["QSQLITE3"] = QString("SQLite Version 3");
-#else
   m_driverMap["QSQLITE"] = QString("SQLite Version 3");
-#endif
 }
 
 databaseTypeE MyMoneyDbDrivers::driverToType (const QString& driver) const {
@@ -636,12 +632,12 @@ int MyMoneyStorageSql::createTables () {
     (*i) = (*i).toLower();
   }
 
-  for (QMapConstIterator<QString, MyMoneyDbTable> tt = m_db.tableBegin(); tt != m_db.tableEnd(); ++tt) {
+  for (QMap<QString, MyMoneyDbTable>::Iterator tt = m_db.tableBegin(); tt != m_db.tableEnd(); ++tt) {
     if (!lowerTables.contains(tt.key().toLower())) createTable (tt.data());
   }
 
   MyMoneySqlQuery q(this);
-  for (QMapConstIterator<QString, MyMoneyDbView> tt = m_db.viewBegin(); tt != m_db.viewEnd(); ++tt) {
+  for (QMap<QString, MyMoneyDbView>::Iterator tt = m_db.viewBegin(); tt != m_db.viewEnd(); ++tt) {
     if (!lowerTables.contains(tt.key().toLower())) {
       q.prepare (tt.data().createString());
       if (!q.exec()) throw new MYMONEYEXCEPTION(buildError (q, __func__, QString ("creating view %1").arg(tt.key())));
@@ -668,7 +664,7 @@ void MyMoneyStorageSql::createTable (const MyMoneyDbTable& t) {
 int MyMoneyStorageSql::isEmpty () {
   DBG("*** Entering MyMoneyStorageSql::isEmpty");
   // check all tables are empty
-  QMapConstIterator<QString, MyMoneyDbTable> tt = m_db.tableBegin();
+  QMap<QString, MyMoneyDbTable>::Iterator tt = m_db.tableBegin();
   int recordCount = 0;
   MyMoneySqlQuery q(this);
   while ((tt != m_db.tableEnd()) && (recordCount == 0)) {
@@ -689,7 +685,7 @@ int MyMoneyStorageSql::isEmpty () {
 void MyMoneyStorageSql::clean() {
   DBG("*** Entering MyMoneyStorageSql::clean");
 // delete all existing records
-  QMapConstIterator<QString, MyMoneyDbTable> it = m_db.tableBegin();
+  QMap<QString, MyMoneyDbTable>::Iterator it = m_db.tableBegin();
   MyMoneySqlQuery q(this);
   while (it != m_db.tableEnd()) {
     q.prepare(QString("DELETE from %1;").arg(it.key()));
@@ -2445,8 +2441,8 @@ const QMap<QString, MyMoneyAccount> MyMoneyStorageSql::fetchAccounts (const QStr
     signalProgress(++progress, 0);
   }
 
-    QMapIterator<QString, MyMoneyAccount> it_acc;
-    QMapIterator<QString, MyMoneyAccount> accListEnd = accList.end();
+  QMap<QString, MyMoneyAccount>::Iterator it_acc;
+    QMap<QString, MyMoneyAccount>::Iterator accListEnd = accList.end();
     while (sq.next()) {
       it_acc = accList.find(sq.value(1).toString());
       if (it_acc != accListEnd && it_acc.data().id() == sq.value(1).toString()) {
@@ -2621,8 +2617,8 @@ const QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions (co
   }
   QMap <QString, MyMoneyKeyValueContainer> kvpMap = readKeyValuePairs("TRANSACTION", txList);
   QMap<QString, MyMoneyTransaction> tList;
-  QMapIterator<QString, MyMoneyTransaction> txMapEnd = txMap.end();
-  for (QMapIterator<QString, MyMoneyTransaction> i = txMap.begin();
+  QMap<QString, MyMoneyTransaction>::Iterator txMapEnd = txMap.end();
+  for (QMap<QString, MyMoneyTransaction>::Iterator i = txMap.begin();
        i != txMapEnd; ++i) {
          i.data().setPairs(kvpMap[i.data().id()].pairs());
 
@@ -3968,7 +3964,7 @@ void MyMoneyDbDef::Balances(void){
 const QString MyMoneyDbDef::generateSQL (const QString& driver) const {
   QString retval;
   databaseTypeE dbType = m_drivers.driverToType(driver);
-  QMapConstIterator<QString, MyMoneyDbTable> tt = m_tables.begin();
+  QMap<QString, MyMoneyDbTable>::Iterator tt = m_tables.begin();
   while (tt != m_tables.end()) {
     retval += (*tt).generateCreateSQL(dbType) + '\n';
     ++tt;
