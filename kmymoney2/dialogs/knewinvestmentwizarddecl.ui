@@ -516,6 +516,18 @@
       <extends>QComboBox</extends>
       <header location="global">kcombobox.h</header>
     </customwidget>
+  <customwidget>
+   <class>KMyMoneyGeneralCombo</class>
+   <extends>QWidget</extends>
+   <header>kmymoneycombo.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>KMyMoneySecuritySelector</class>
+   <extends>QWidget</extends>
+   <header>kmymoneycurrencyselector.h</header>
+   <container>1</container>
+  </customwidget>
   </customwidgets>
   <tabstops>
     <tabstop>m_securityType</tabstop>

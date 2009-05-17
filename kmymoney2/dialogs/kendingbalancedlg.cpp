@@ -125,8 +125,7 @@ KEndingBalanceDlg::KEndingBalanceDlg(const MyMoneyAccount& account, QWidget *par
 
   m_lastStatementDate->setText(QString());
   if(account.lastReconciliationDate().isValid()) {
-    m_lastStatementDate->setText(i18n("Last reconciled statement: %1")
-      .arg(KGlobal::locale()->formatDate(account.lastReconciliationDate(), true)));
+    m_lastStatementDate->setText(i18n("Last reconciled statement: %1",KGlobal::locale()->formatDate(account.lastReconciliationDate())));
   }
 
   // remove all unwanted pages
@@ -385,9 +384,10 @@ void KEndingBalanceDlg::help(void)
 }
 
 KEndingBalanceLoanDlg::KEndingBalanceLoanDlg(const MyMoneyAccount& account, QWidget *parent, const char *name) :
-  KEndingBalanceDlgDecl(parent, name, true),
+  KEndingBalanceDlgDecl(parent),
   d(new Private)
 {
+  setModal(true);
   d->m_account = account;
   QDate value = account.lastReconciliationDate();
   if(value.isValid())
@@ -513,9 +513,7 @@ void KEndingBalanceLoanDlg::next(void)
 
     m_loanOverview->setText(i18n("KMyMoney has calculated the following amounts for "
                                  "interest and amortization according to recorded payments "
-                                 "between %1 and %2.")
-                                 .arg(KGlobal::locale()->formatDate(m_startDateEdit->date(), true))
-                                 .arg(KGlobal::locale()->formatDate(m_endDateEdit->date(), true)));
+                                 "between %1 and %2.",KGlobal::locale()->formatDate(m_startDateEdit->date()),KGlobal::locale()->formatDate(m_endDateEdit->date())));
 
     // preload widgets with calculated values if they are empty
     if(m_amortizationTotalEdit->value().isZero() && !amortization.isZero())

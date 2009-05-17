@@ -5212,6 +5212,19 @@ This page summarizes the data you entered. If you need to modify anything, pleas
       <extends>QComboBox</extends>
       <header location="global">kcombobox.h</header>
     </customwidget>
+  <customwidget>
+   <class>KMyMoneyPayeeCombo</class>
+   <extends>QWidget</extends>
+   <header>kmymoneycombo.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>KMyMoneyGeneralCombo</class>
+   <extends>QWidget</extends>
+   <header>kmymoneycombo.h</header>
+   <container>1</container>
+  </customwidget>
+
   </customwidgets>
   <images>
     <image name="image0">

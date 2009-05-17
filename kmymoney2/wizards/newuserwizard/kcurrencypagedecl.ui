@@ -65,6 +65,14 @@
       </item>
     </layout>
   </widget>
+  <customwidgets>
+  <customwidget>
+   <class>KMyMoneySecuritySelector</class>
+   <extends>QWidget</extends>
+   <header>kmymoneycurrencyselector.h</header>
+   <container>1</container>
+  </customwidget>
+  </customwidgets>
   <layoutdefault spacing="6" margin="11"/>
   <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
 </ui>

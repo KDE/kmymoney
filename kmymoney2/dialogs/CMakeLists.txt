@@ -21,7 +21,7 @@ SET(libdialogs_a_SOURCES
   #keditequityentrydlg.cpp 
   #keditloanwizard.cpp 
   #keditscheduledlg.cpp
-  #kendingbalancedlg.cpp 
+  kendingbalancedlg.cpp 
   #kenterscheduledlg.cpp
   #kequitypriceupdatedlg.cpp 
   #kexportdlg.cpp 
@@ -41,7 +41,7 @@ SET(libdialogs_a_SOURCES
   knewequityentrydlg.cpp
   knewfiledlg.cpp 
   #knewinvestmentwizard.cpp 
-  #knewloanwizard.cpp 
+  knewloanwizard.cpp 
   konlinequoteconfigurationdlg.cpp
   kpayeereassigndlg.cpp 
   krecentfileitem.cpp 

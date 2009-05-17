@@ -52,10 +52,10 @@
   * created loan.
   *
   */
-class KNewLoanWizardDecl : public QDialog, public Ui::KNewLoanWizardDecl
+class KNewLoanWizardDecl : public Q3Wizard, public Ui::KNewLoanWizardDecl
 {
 public:
-  KNewLoanWizardDecl( QWidget *parent ) : QDialog( parent ) {
+  KNewLoanWizardDecl( QWidget *parent ) : Q3Wizard( parent ) {
     setupUi( this );
   }
 };

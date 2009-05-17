@@ -48,10 +48,10 @@ class kMyMoneyEdit;
   *
   * @author Thomas Baumgart
   */
-class KEndingBalanceDlgDecl : public QDialog, public Ui::KEndingBalanceDlgDecl
+class KEndingBalanceDlgDecl : public Q3Wizard, public Ui::KEndingBalanceDlgDecl
 {
 public:
-  KEndingBalanceDlgDecl( QWidget *parent ) : QDialog( parent ) {
+  KEndingBalanceDlgDecl( QWidget *parent ) : Q3Wizard( parent ) {
     setupUi( this );
   }
 };
