@@ -28,7 +28,7 @@
 #include <qpushbutton.h>
 #include <qradiobutton.h>
 #include <qspinbox.h>
-#include <qdatetimeedit.h>
+#include <q3datetimeedit.h>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

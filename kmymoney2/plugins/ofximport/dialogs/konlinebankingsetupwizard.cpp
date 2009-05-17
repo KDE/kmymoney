@@ -20,13 +20,15 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qtextbrowser.h>
+#include <q3textbrowser.h>
 #include <qlineedit.h>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qregexp.h>
 #include <qcheckbox.h>
 #include <qtabwidget.h>
+//Added by qt3to4:
+#include <Q3TextStream>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -53,11 +55,11 @@ class KOnlineBankingSetupWizard::Private
 {
 public:
   QFile       m_fpTrace;
-  QTextStream m_trace;
+  Q3TextStream m_trace;
 };
 
-KOnlineBankingSetupWizard::KOnlineBankingSetupWizard(QWidget *parent, const char *name):
-  KOnlineBankingSetupDecl(parent,name),
+KOnlineBankingSetupWizard::KOnlineBankingSetupWizard(QWidget *parent):
+  KOnlineBankingSetupDecl(parent),
   d(new Private),
   m_fDone(false),
   m_fInit(false),
@@ -127,7 +129,7 @@ bool KOnlineBankingSetupWizard::finishFiPage(void)
   if(m_selectionTab->currentPageIndex() == 0) {
 
     // Get the fipids for the selected bank
-    QListViewItem* item = m_listFi->currentItem();
+    Q3ListViewItem* item = m_listFi->currentItem();
     if ( item )
     {
       QString bank = item->text(0);
@@ -346,7 +348,7 @@ int KOnlineBankingSetupWizard::ofxAccountCallback(struct OfxAccountData data, vo
   kvps.setValue("fid",(*(pthis->m_it_info)).fid);
   kvps.setValue("org",(*(pthis->m_it_info)).org);
   kvps.setValue("fipid","");
-  QListViewItem* item = pthis->m_listFi->currentItem();
+  Q3ListViewItem* item = pthis->m_listFi->currentItem();
   if ( item )
     kvps.setValue("bankname",item->text(0));
 
@@ -402,7 +404,7 @@ bool KOnlineBankingSetupWizard::chosenSettings( MyMoneyKeyValueContainer& settin
 
   if ( m_fDone )
   {
-    QListViewItem* qitem = m_listAccount->currentItem();
+    Q3ListViewItem* qitem = m_listAccount->currentItem();
     ListViewItem* item = dynamic_cast<ListViewItem*>(qitem);
     if ( item )
     {
@@ -422,8 +424,8 @@ bool KOnlineBankingSetupWizard::chosenSettings( MyMoneyKeyValueContainer& settin
   return result;
 }
 
-KOnlineBankingSetupWizard::ListViewItem::ListViewItem( QListView* parent, const MyMoneyKeyValueContainer& kvps ):
-  MyMoneyKeyValueContainer( kvps ), QListViewItem( parent )
+KOnlineBankingSetupWizard::ListViewItem::ListViewItem( Q3ListView* parent, const MyMoneyKeyValueContainer& kvps ):
+  MyMoneyKeyValueContainer( kvps ), Q3ListViewItem( parent )
 {
   setText( 0, value("accountid") );
   setText( 1, value("type") );

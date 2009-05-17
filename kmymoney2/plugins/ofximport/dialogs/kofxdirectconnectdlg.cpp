@@ -23,7 +23,7 @@
 #include <qlabel.h>
 #include <qdir.h>
 #include <qfile.h>
-#include <qtextstream.h>
+#include <q3textstream.h>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -80,7 +80,7 @@ void KOfxDirectConnectDlg::init(void)
 #if 0
   QFile g( "request.ofx" );
   g.open( QIODevice::WriteOnly );
-  QTextStream(&g) << m_connector.url() << "\n" << QString(request);
+  Q3TextStream(&g) << m_connector.url() << "\n" << QString(request);
   g.close();
 #endif
 
@@ -188,7 +188,7 @@ void KOfxDirectConnectDlg::slotOfxFinished(KIO::Job* /* e */)
     QFile f( m_tmpfile->name() );
     if ( f.open( QIODevice::ReadOnly ) )
     {
-      QTextStream stream( &f );
+      Q3TextStream stream( &f );
       QString line;
       while ( !stream.atEnd() ) {
           details += stream.readLine(); // line of text excluding '\n'

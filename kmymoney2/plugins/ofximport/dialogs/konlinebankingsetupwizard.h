@@ -27,8 +27,8 @@
 // QT Includes
 
 #include <qwidget.h>
-#include <qvaluelist.h>
-#include <qlistview.h>
+#include <q3valuelist.h>
+#include <q3listview.h>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -36,7 +36,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "konlinebankingsetupdecl.h"
+#include "ui_konlinebankingsetupdecl.h"
 #include <mymoneykeyvaluecontainer.h>
 class OfxAppVersion;
 class OfxHeaderVersion;
@@ -58,18 +58,27 @@ class OfxHeaderVersion;
   * they wanted.
   *
   */
+
+class KOnlineBankingSetupDecl : public Q3Wizard, public Ui::KOnlineBankingSetupDecl
+{
+public:
+  KOnlineBankingSetupDecl( QWidget *parent ) : Q3Wizard( parent ) {
+    setupUi( this );
+  }
+};
+
 class KOnlineBankingSetupWizard : public KOnlineBankingSetupDecl
 {
   Q_OBJECT
 public:
-  class ListViewItem: public MyMoneyKeyValueContainer, public QListViewItem
+  class ListViewItem: public MyMoneyKeyValueContainer, public Q3ListViewItem
   {
   public:
-    ListViewItem( QListView* parent, const MyMoneyKeyValueContainer& kvps );
+    ListViewItem( Q3ListView* parent, const MyMoneyKeyValueContainer& kvps );
     virtual void x(void);
   };
 
-  KOnlineBankingSetupWizard(QWidget *parent=0, const char *name=0);
+  KOnlineBankingSetupWizard(QWidget *parent=0);
   ~KOnlineBankingSetupWizard();
 
   bool chosenSettings( MyMoneyKeyValueContainer& settings );
@@ -94,8 +103,8 @@ private:
   /// \internal d-pointer instance.
   Private* const d;
 
-  QValueList<OfxFiServiceInfo> m_bankInfo;
-  QValueList<OfxFiServiceInfo>::const_iterator m_it_info;
+  Q3ValueList<OfxFiServiceInfo> m_bankInfo;
+  Q3ValueList<OfxFiServiceInfo>::const_iterator m_it_info;
   bool m_fDone;
   bool m_fInit;
   OfxAppVersion* m_appId;

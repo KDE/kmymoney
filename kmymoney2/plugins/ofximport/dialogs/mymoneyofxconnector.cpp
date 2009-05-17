@@ -27,6 +27,9 @@
 
 #include <qdatetime.h>
 #include <qregexp.h>
+//Added by qt3to4:
+#include <Q3CString>
+#include <Q3ValueList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -500,8 +503,8 @@ MyMoneyOfxConnector::Tag MyMoneyOfxConnector::bankStatementResponse(const QDate&
   MyMoneyTransactionFilter filter;
   filter.setDateFilter(_dtstart,QDate::currentDate());
   filter.addAccount(m_account.id());
-  QValueList<MyMoneyTransaction> transactions = file->transactionList(filter);
-  QValueList<MyMoneyTransaction>::const_iterator it_transaction = transactions.begin();
+  Q3ValueList<MyMoneyTransaction> transactions = file->transactionList(filter);
+  Q3ValueList<MyMoneyTransaction>::const_iterator it_transaction = transactions.begin();
   while ( it_transaction != transactions.end() )
   {
     transactionlist += transaction( *it_transaction );
@@ -527,8 +530,8 @@ MyMoneyOfxConnector::Tag MyMoneyOfxConnector::creditCardStatementResponse(const 
   MyMoneyTransactionFilter filter;
   filter.setDateFilter(_dtstart,QDate::currentDate());
   filter.addAccount(m_account.id());
-  QValueList<MyMoneyTransaction> transactions = file->transactionList(filter);
-  QValueList<MyMoneyTransaction>::const_iterator it_transaction = transactions.begin();
+  Q3ValueList<MyMoneyTransaction> transactions = file->transactionList(filter);
+  Q3ValueList<MyMoneyTransaction>::const_iterator it_transaction = transactions.begin();
   while ( it_transaction != transactions.end() )
   {
     transactionlist += transaction( *it_transaction );
@@ -555,8 +558,8 @@ QString MyMoneyOfxConnector::investmentStatementResponse(const QDate& _dtstart) 
   filter.setDateFilter(_dtstart,QDate::currentDate());
   filter.addAccount(m_account.id());
   filter.addAccount(m_account.accountList());
-  QValueList<MyMoneyTransaction> transactions = file->transactionList(filter);
-  QValueList<MyMoneyTransaction>::const_iterator it_transaction = transactions.begin();
+  Q3ValueList<MyMoneyTransaction> transactions = file->transactionList(filter);
+  Q3ValueList<MyMoneyTransaction>::const_iterator it_transaction = transactions.begin();
   while ( it_transaction != transactions.end() )
   {
     transactionlist += investmentTransaction( *it_transaction );
@@ -637,7 +640,7 @@ MyMoneyOfxConnector::Tag MyMoneyOfxConnector::investmentTransaction(const MyMone
   //Use this version for inv transactions
   MyMoneySplit s = _t.splitByAccount( m_account.accountList(), true );
 
-  QCString stockid = file->account(s.accountId()).currencyId();
+  Q3CString stockid = file->account(s.accountId()).currencyId();
 
   Tag invtran("INVTRAN");
   invtran.element("FITID",_t.id()).element("DTTRADE",_t.postDate().toString(Qt::ISODate).remove(QRegExp("[^0-9]")));
@@ -690,12 +693,12 @@ MyMoneyOfxConnector::Tag MyMoneyOfxConnector::investmentTransaction(const MyMone
   else if ( s.action() == MyMoneySplit::ActionDividend )
   {
     // find the split with the category, which has the actual amount of the dividend
-    QValueList<MyMoneySplit> splits = _t.splits();
-    QValueList<MyMoneySplit>::const_iterator it_split = splits.begin();
+    Q3ValueList<MyMoneySplit> splits = _t.splits();
+    Q3ValueList<MyMoneySplit>::const_iterator it_split = splits.begin();
     bool found = false;
     while( it_split != splits.end() )
     {
-      QCString accid = (*it_split).accountId();
+      Q3CString accid = (*it_split).accountId();
       MyMoneyAccount acc = file->account(accid);
       if ( acc.accountType() == MyMoneyAccount::Income || acc.accountType() == MyMoneyAccount::Expense )
       {
