@@ -63,8 +63,7 @@ static KCmdLineOptions options[] =
 #endif
 
   // INSERT YOUR COMMANDLINE OPTIONS HERE
-  { "+[File]", I18N_NOOP("file to open"), 0 },
-  KCmdLineLastOption
+  { "+[File]", I18N_NOOP("file to open"), 0 }
 };
 
 QTime timer;
@@ -95,26 +94,26 @@ int main(int argc, char *argv[])
   if(!feature.isEmpty())
     feature = I18N_NOOP("Compiled with the following settings:\n") + feature;
 
-  KAboutData aboutData( "kmymoney2", I18N_NOOP("KMyMoney"),
+  KAboutData aboutData( "kmymoney2",0, ki18n("KMyMoney"),
     VERSION, description, KAboutData::License_GPL,
-    "(c) 2000-2009 The KMyMoney development team", feature,
-    "http://kmymoney2.sourceforge.net/",
+    ki18n( "(c) 2000-2009 The KMyMoney development team" ), feature,
+    I18N_NOOP( "http://kmymoney2.sourceforge.net/" ),
     "kmymoney2-developer@lists.sourceforge.net");
 
-  aboutData.addAuthor("Michael Edwardes.", I18N_NOOP("Initial idea, much initial source code, Project admin"), "mte@users.sourceforge.net");
-  aboutData.addAuthor("Thomas Baumgart", I18N_NOOP("Core engine, Release Manager, Project admin"), "ipwizard@users.sourceforge.net");
-  aboutData.addAuthor("Ace Jones", I18N_NOOP("Reporting logic, OFX Import"), "acejones@users.sourceforge.net");
-  aboutData.addAuthor("Tony Bloomfield", I18N_NOOP("Database backend, maintainer stable branch"), "tonybloom@users.sourceforge.net");
-  aboutData.addAuthor("Alvaro Soliverez", I18N_NOOP("Forecast, Reports"), "asoliverez@gmail.com");
-  aboutData.addAuthor("Felix Rodriguez", I18N_NOOP("Project Admin"), "frodriguez@users.sourceforge.net");
-  aboutData.addAuthor("John C", I18N_NOOP("Developer"), "tacoturtle@users.sourceforge.net");
-  aboutData.addAuthor("Fernando Vilas", I18N_NOOP("Database backend"), "fvilas@iname.com");
+  aboutData.addAuthor(ki18n( "Michael Edwardes." ), ki18n("Initial idea, much initial source code, Project admin"), "mte@users.sourceforge.net");
+  aboutData.addAuthor(ki18n( "Thomas Baumgart" ), ki18n("Core engine, Release Manager, Project admin"), "ipwizard@users.sourceforge.net");
+  aboutData.addAuthor(ki18n("Ace Jones" ), ki18n("Reporting logic, OFX Import"), "acejones@users.sourceforge.net");
+  aboutData.addAuthor(ki18n("Tony Bloomfield" ), ki18n("Database backend, maintainer stable branch"), "tonybloom@users.sourceforge.net");
+  aboutData.addAuthor(ki18n("Alvaro Soliverez" ), ki18n("Forecast, Reports"), "asoliverez@gmail.com");
+  aboutData.addAuthor(ki18n("Felix Rodriguez" ), ki18n("Project Admin"), "frodriguez@users.sourceforge.net");
+  aboutData.addAuthor(ki18n("John C" ), ki18n("Developer"), "tacoturtle@users.sourceforge.net");
+  aboutData.addAuthor(ki18n("Fernando Vilas" ), ki18n("Database backend"), "fvilas@iname.com");
 
-  aboutData.addCredit("Kevin Tambascio", I18N_NOOP("Initial investment support"), "ktambascio@users.sourceforge.net");
-  aboutData.addCredit("Javier Campos Morales", I18N_NOOP("Developer & Artist"), "javi_c@users.sourceforge.net");
-  aboutData.addCredit("Robert Wadley", I18N_NOOP("Icons & splash screen"), "rob@robntina.fastmail.us");
-  aboutData.addCredit("Laurent Montel", I18N_NOOP("Patches"), "montel@kde.org");
-  aboutData.addCredit("Wolfgang Rohdewald", I18N_NOOP("Patches"), "woro@users.sourceforge.net");
+  aboutData.addCredit(ki18n("Kevin Tambascio" ), ki18n("Initial investment support"), "ktambascio@users.sourceforge.net");
+  aboutData.addCredit(ki18n("Javier Campos Morales" ), ki18n("Developer & Artist"), "javi_c@users.sourceforge.net");
+  aboutData.addCredit(ki18n("Robert Wadley" ), ki18n("Icons & splash screen"), "rob@robntina.fastmail.us");
+  aboutData.addCredit(ki18n("Laurent Montel" ),ki18n("Patches"), "montel@kde.org");
+  aboutData.addCredit(ki18n("Wolfgang Rohdewald" ), ki18n("Patches"), "woro@users.sourceforge.net");
 
   KCmdLineArgs::init( argc, argv, &aboutData );
   KCmdLineArgs::addCmdLineOptions( options ); // Add our own options.
@@ -152,9 +151,9 @@ int main(int argc, char *argv[])
   MyMoneyMoney::setNegativePrefixCurrencySymbol(KGlobal::locale()->negativePrefixCurrencySymbol());
   MyMoneyMoney::setPositivePrefixCurrencySymbol(KGlobal::locale()->positivePrefixCurrencySymbol());
 
-  Q3CString language = args->getOption("lang");
+  QString language = args->getOption("lang");
   if(!language.isEmpty()) {
-    if(!KGlobal::locale()->setLanguage(language)) {
+      if(!KGlobal::locale()->setLanguage(QStringList()<<language)) {
       qWarning("Unable to select language '%s'. This has one of two reasons:\n\ta) the standard KDE message catalogue is not installed\n\tb) the KMyMoney message catalogue is not installed", language.data());
     }
   }
@@ -187,7 +186,7 @@ int main(int argc, char *argv[])
 
   int rc = 0;
 #warning "port me to kde4"
-#if 0  
+#if 0
   try {
     do {
       // connect to DCOP server
@@ -195,19 +194,19 @@ int main(int argc, char *argv[])
       if(client->registerAs("kmymoney", true) != false) {
         const QCStringList instances = kmymoney2->instanceList();
         if(instances.count() > 0) {
-    
+
           // If the user launches a second copy of the app and includes a file to
           // open, they are probably attempting a "WebConnect" session.  In this case,
           // we'll check to make sure it's an importable file that's passed in, and if so, we'll
           // notify the primary instance of the file and kill ourselves.
-    
+
           if(args->count() > 0) {
             KUrl url = args->url(0);
             if ( kmymoney2->isImportableFile( url.path() ) )
             {
               // if there are multiple instances, we'll send this to the first one
               Q3CString primary = instances[0];
-    
+
               // send a message to the primary client to import this file
               QByteArray data;
               QDataStream arg(data, QIODevice::WriteOnly);
@@ -215,18 +214,18 @@ int main(int argc, char *argv[])
               arg << kapp->startupId();
               if (!client->send(primary, "kmymoney2app", "webConnect(QString,QCString)",data))
                 qDebug("Unable to launch WebConnect via DCOP.");
-    
+
               // Before we delete the application, we make sure that we destroy all
               // widgets by running the event loop for some time to catch all those
               // widgets that are requested to be destroyed using the deleteLater() method.
               QApplication::eventLoop()->processEvents(QEventLoop::ExcludeUserInput, 10);
-    
+
               delete kmymoney2;
               delete splash;
               break;
             }
           }
-    
+
           if(KMessageBox::questionYesNo(0, i18n("Another instance of KMyMoney is already running. Do you want to quit?")) == KMessageBox::Yes) {
             rc = 1;
             delete kmymoney2;
@@ -239,35 +238,35 @@ int main(int argc, char *argv[])
       }
       kmymoney2->show();
       kmymoney2->setEnabled(false);
-    
+
       delete splash;
-    
+
       // force complete paint of widgets
       qApp->processEvents();
-    
+
       QString importfile;
       KUrl url;
       // make sure, we take the file provided on the command
       // line before we go and open the last one used
       if(args->count() > 0) {
         url = args->url(0);
-    
+
         // Check to see if this is an importable file, as opposed to a loadable
         // file.  If it is importable, what we really want to do is load the
         // last used file anyway and then immediately import this file.  This
         // implements a "web connect" session where there is not already an
         // instance of the program running.
-    
+
         if ( kmymoney2->isImportableFile( url.path() ) )
         {
           importfile = url.path();
           url = kmymoney2->readLastUsedFile();
         }
-    
+
       } else {
         url = kmymoney2->readLastUsedFile();
       }
-    
+
       KTipDialog::showTip(kmymoney2, "", false);
       if(url.isValid() && !args->isSet("n")) {
         kmymoney2->slotFileOpenRecent(url);
@@ -275,10 +274,10 @@ int main(int argc, char *argv[])
         kmymoney2->slotFileNew();
       }
       KMyMoneyGlobalSettings::setFirstTimeRun(false);
-    
+
       if ( ! importfile.isEmpty() )
         kmymoney2->webConnect( importfile, kapp->startupId() );
-    
+
       if(kmymoney2 != 0) {
         kmymoney2->updateCaption();
         args->clear();

@@ -57,7 +57,9 @@ KAction* KMyMoneyPlugin::Plugin::action(const QString& actionName) const
 KToggleAction* KMyMoneyPlugin::Plugin::toggleAction(const QString& actionName) const
 {
   static KShortcut shortcut("");
-  static KToggleAction dummyAction(QString("Dummy"), QString(), shortcut, static_cast<const QObject*>(this), 0, static_cast<KActionCollection*>(0), "");
+  static KToggleAction dummyAction( QString("Dummy"), static_cast<const QObject*>(this ) );
+  dummyAction.setShortcut( shortcut );
+  //static KToggleAction dummyAction(QString("Dummy"), QString(), shortcut, static_cast<const QObject*>(this), 0, static_cast<KActionCollection*>(0), "");
 
   KAction* q = actionCollection()->action(actionName);
 
