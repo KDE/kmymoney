@@ -210,7 +210,7 @@ A one line memo can be entered if you wish to help you remember what the transac
 </para> 
  
 <para>
-  In the split editor screen, double-click an empty line to enter a new sub-transaction or press <keycombo action="simul">&Ctrl;&Insert;</keycombo>. Specify the category, add a memo, and enter the amount. To save this part of the split, press the green check mark under the category. To cancel, press the red cross.  
+  In the split editor screen, double-click an empty line to enter a new sub-transaction or press <keycombo action="simul">&Ctrl;<keycap>Ins</keycap></keycombo>. Specify the category, add a memo, and enter the amount. To save this part of the split, press the green check mark under the category. To cancel, press the red cross.  
 </para> 
  
 <para>
@@ -265,7 +265,7 @@ A one line memo can be entered if you wish to help you remember what the transac
 <sect2>
 <title>Starting the edit</title>
 <para>	
-	To enter a transaction into the register you can now either double click on the entry or press <keycombo action="simul">&Ctrl;&Insert;</keycombo> when the transaction is highlighted.  The <keycap>Up</keycap> and <keycap>Down</keycap> arrow keys let you navigate through the list.  After pressing <keycap>Enter</keycap> or double clicking on an entry, the transaction list displays the fields required to enter the transaction and waits for input.
+	To enter a transaction into the register you can now either double click on the entry or press <keycombo action="simul">&Ctrl;<keycap>Ins</keycap></keycombo> when the transaction is highlighted.  The <keycap>Up</keycap> and <keycap>Down</keycap> arrow keys let you navigate through the list.  After pressing <keycap>Enter</keycap> or double clicking on an entry, the transaction list displays the fields required to enter the transaction and waits for input.
 </para>
 
 <para>
@@ -303,7 +303,7 @@ Which method you use to enter transactions is up to you and is a matter of perso
 </para> 
  
 <para>
-  In the split editor screen, double-click an empty line to enter a new sub-transaction or press <keycombo action="simul">&Ctrl;&Insert;</keycombo>. Specify the category, add a memo, and enter the amount. To save this part of the split, press the green check mark under the category. To cancel, press the red cross.  
+  In the split editor screen, double-click an empty line to enter a new sub-transaction or press <keycombo action="simul">&Ctrl;<keycap>Ins</keycap></keycombo>. Specify the category, add a memo, and enter the amount. To save this part of the split, press the green check mark under the category. To cancel, press the red cross.  
 </para> 
  
 <para>

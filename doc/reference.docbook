@@ -18,7 +18,7 @@
 <varlistentry>
 <term><menuchoice>
 <shortcut>
-<keycombo><keycap>Ctrl</keycap><keycap>n</keycap></keycombo>
+<keycombo>&Ctrl;<keycap>n</keycap></keycombo>
 </shortcut>
 <guimenu>File</guimenu>
 <guimenuitem>New</guimenuitem>
@@ -33,7 +33,7 @@
 <varlistentry>
 <term><menuchoice>
 <shortcut>
-<keycombo><keycap>Ctrl</keycap><keycap>o</keycap></keycombo>
+<keycombo>&Ctrl;<keycap>o</keycap></keycombo>
 </shortcut>
 <guimenu>File</guimenu>
 <guimenuitem>Open</guimenuitem>
@@ -69,7 +69,7 @@
 <varlistentry>
 <term><menuchoice>
 <shortcut>
-<keycombo><keycap>Ctrl</keycap><keycap>s</keycap></keycombo>
+<keycombo>&Ctrl;<keycap>s</keycap></keycombo>
 </shortcut>
 <guimenu>File</guimenu>
 <guimenuitem>Save</guimenuitem>
@@ -104,7 +104,7 @@
 <varlistentry>
 <term><menuchoice>
 <shortcut>
-<keycombo><keycap>Ctrl</keycap><keycap>p</keycap></keycombo>
+<keycombo>&Ctrl;<keycap>p</keycap></keycombo>
 </shortcut>
 <guimenu>File</guimenu>
 <guimenuitem>Print</guimenuitem>
@@ -139,7 +139,7 @@
 <varlistentry>
 <term><menuchoice>
 <shortcut>
-<keycombo><keycap>Ctrl</keycap><keycap>w</keycap></keycombo>
+<keycombo>&Ctrl;<keycap>w</keycap></keycombo>
 </shortcut>
 <guimenu>File</guimenu>
 <guimenuitem>Close</guimenuitem>
@@ -150,7 +150,7 @@
 <varlistentry>
 <term><menuchoice>
 <shortcut>
-<keycombo><keycap>Ctrl</keycap><keycap>q</keycap></keycombo>
+<keycombo>&Ctrl;<keycap>q</keycap></keycombo>
 </shortcut>
 <guimenu>File</guimenu>
 <guimenuitem>Quit</guimenuitem>
@@ -169,7 +169,7 @@
 <varlistentry>
 <term><menuchoice>
 <shortcut>
-<keycombo><keycap>Ctrl</keycap><keycap>f</keycap></keycombo>
+<keycombo>&Ctrl;<keycap>f</keycap></keycombo>
 </shortcut>
 <guimenu>Edit</guimenu>
 <guimenuitem>Find transactions...</guimenuitem>
@@ -188,7 +188,7 @@
 <varlistentry id="reference.menus.settings.transactiondetail">
 <term><menuchoice>
 <shortcut>
-<keycombo><keycap>Ctrl</keycap><keycap>t</keycap></keycombo>
+<keycombo>&Ctrl;<keycap>t</keycap></keycombo>
 </shortcut>
 <guimenu>Settings</guimenu>
 <guimenuitem>Show Transaction Detail</guimenuitem>
@@ -199,7 +199,7 @@
 <varlistentry>
 <term><menuchoice>
 <shortcut>
-<keycombo><keycap>Ctrl</keycap><keycap>r</keycap></keycombo>
+<keycombo>&Ctrl;<keycap>r</keycap></keycombo>
 </shortcut>
 <guimenu>View</guimenu>
 <guimenuitem>Hide reconciled transactions</guimenuitem>
@@ -210,7 +210,7 @@
 <varlistentry>
 <term><menuchoice>
 <shortcut>
-<keycombo><keycap>Ctrl</keycap><keycap>u</keycap></keycombo>
+<keycombo>&Ctrl;<keycap>u</keycap></keycombo>
 </shortcut>
 <guimenu>View</guimenu>
 <guimenuitem>Hide unused categories</guimenuitem>
@@ -221,7 +221,7 @@
 <varlistentry>
 <term><menuchoice>
 <shortcut>
-<keycombo><keycap>Ctrl</keycap><keycap>Shift</keycap><keycap>a</keycap></keycombo>
+<keycombo>&Ctrl;&Shift;<keycap>a</keycap></keycombo>
 </shortcut>
 <guimenu>View</guimenu>
 <guimenuitem>Show all accounts</guimenuitem>
@@ -305,7 +305,7 @@
 <varlistentry>
 <term><menuchoice>
 <shortcut>
-<keycombo><keycap>Ctrl</keycap><keycap>Shift</keycap><keycap>r</keycap></keycombo>
+<keycombo>&Ctrl;&Shift;<keycap>r</keycap></keycombo>
 </shortcut>
 <guimenu>Account</guimenu>
 <guimenuitem>Reconcile...</guimenuitem>
@@ -436,7 +436,7 @@
 <varlistentry>
 <term><menuchoice>
 <shortcut>
-<keycombo><keycap>Ctrl</keycap><keycap>Insert</keycap></keycombo>
+<keycombo>&Ctrl;<keycap>Insert</keycap></keycombo>
 </shortcut>
 <guimenu>Transaction</guimenu>
 <guimenuitem>New</guimenuitem>
@@ -487,7 +487,7 @@
 <varlistentry>
 <term><menuchoice>
 <shortcut>
-<keycombo><keycap>Ctrl</keycap><keycap>Shift</keycap><keycap>Space</keycap></keycombo>
+<keycombo>&Ctrl;&Shift;<keycap>Space</keycap></keycombo>
 </shortcut>
 <guimenu>Transaction</guimenu>
 <guimenuitem>Mark transaction as Cleared</guimenuitem>
@@ -498,7 +498,7 @@
 <varlistentry>
 <term><menuchoice>
 <shortcut>
-<keycombo><keycap>Alt</keycap><keycap>Ctrl</keycap><keycap>Space</keycap></keycombo>
+<keycombo>&Alt;&Ctrl;<keycap>Space</keycap></keycombo>
 </shortcut>
 <guimenu>Transaction</guimenu>
 <guimenuitem>Mark transaction as Reconciled</guimenuitem>
@@ -704,7 +704,7 @@
 <varlistentry>
 <term><menuchoice>
 <shortcut>
-<keycombo><keycap>Shift</keycap><keycap>F1</keycap></keycombo>
+<keycombo>&Shift;<keycap>F1</keycap></keycombo>
 </shortcut>
 <guimenu>Help</guimenu>
 <guimenuitem>What's This?</guimenuitem>

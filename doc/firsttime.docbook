@@ -426,7 +426,7 @@ Once finished, press <guibutton>Next</guibutton> to proceed.
 
 
 <para>
-	Choose the appropriate country and account template(s). Multiple templates, even from multiple countries can be selected using a combination of <keycap>Ctrl</keycap> and <keycap>Shift</keycap> together with the left mouse button.  The account hierarchy to be setup will be shown in a preview part of the wizard. In case you cannot find a template that suits your needs, don't select a template.
+	Choose the appropriate country and account template(s). Multiple templates, even from multiple countries can be selected using a combination of &Ctrl; and &Shift; together with the left mouse button.  The account hierarchy to be setup will be shown in a preview part of the wizard. In case you cannot find a template that suits your needs, don't select a template.
 </para>
 <para>
 Once finished with the template selection press <guibutton>Next</guibutton> to proceed.

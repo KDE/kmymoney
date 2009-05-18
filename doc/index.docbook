@@ -34,9 +34,11 @@
 	<!ENTITY reference SYSTEM "reference.docbook">
 	<!ENTITY credits SYSTEM "credits.docbook">
 
-<!-- i18n for keys -->
+<!-- i18n for keys 
 	<!ENTITY Ctrl "<keycap>Ctrl</keycap>">
 	<!ENTITY Insert "<keycap>Ins</keycap>">
+entities defined in the header are untranslatable, so remove them
+-->
 ]>
 
 <book lang="&language;">
@@ -103,9 +105,9 @@
 	</affiliation>
 </author>
 
-</authorgroup>
-
 <!-- TRANS:ROLES_OF_TRANSLATORS -->
+
+</authorgroup>
 
 <copyright>
 <year>2000</year>
@@ -139,7 +141,7 @@ Do NOT change these in the translation. -->
 
 <abstract>
 <para>
-&kappname;, the personal finance manager for KDE.
+&kappname;, the personal finance manager for &kde;.
 </para>
 <para>
 	This handbook describes &kappname; version 0.9.
