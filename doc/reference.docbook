@@ -18,7 +18,7 @@
 <varlistentry>
 <term><menuchoice>
 <shortcut>
-<keycombo>&Ctrl;<keycap>n</keycap></keycombo>
+<keycombo>&Ctrl;<keycap>N</keycap></keycombo>
 </shortcut>
 <guimenu>File</guimenu>
 <guimenuitem>New</guimenuitem>
@@ -33,7 +33,7 @@
 <varlistentry>
 <term><menuchoice>
 <shortcut>
-<keycombo>&Ctrl;<keycap>o</keycap></keycombo>
+<keycombo>&Ctrl;<keycap>O</keycap></keycombo>
 </shortcut>
 <guimenu>File</guimenu>
 <guimenuitem>Open</guimenuitem>
@@ -69,7 +69,7 @@
 <varlistentry>
 <term><menuchoice>
 <shortcut>
-<keycombo>&Ctrl;<keycap>s</keycap></keycombo>
+<keycombo>&Ctrl;<keycap>S</keycap></keycombo>
 </shortcut>
 <guimenu>File</guimenu>
 <guimenuitem>Save</guimenuitem>
@@ -104,7 +104,7 @@
 <varlistentry>
 <term><menuchoice>
 <shortcut>
-<keycombo>&Ctrl;<keycap>p</keycap></keycombo>
+<keycombo>&Ctrl;<keycap>P</keycap></keycombo>
 </shortcut>
 <guimenu>File</guimenu>
 <guimenuitem>Print</guimenuitem>
@@ -139,7 +139,7 @@
 <varlistentry>
 <term><menuchoice>
 <shortcut>
-<keycombo>&Ctrl;<keycap>w</keycap></keycombo>
+<keycombo>&Ctrl;<keycap>W</keycap></keycombo>
 </shortcut>
 <guimenu>File</guimenu>
 <guimenuitem>Close</guimenuitem>
@@ -150,7 +150,7 @@
 <varlistentry>
 <term><menuchoice>
 <shortcut>
-<keycombo>&Ctrl;<keycap>q</keycap></keycombo>
+<keycombo>&Ctrl;<keycap>Q</keycap></keycombo>
 </shortcut>
 <guimenu>File</guimenu>
 <guimenuitem>Quit</guimenuitem>
@@ -169,7 +169,7 @@
 <varlistentry>
 <term><menuchoice>
 <shortcut>
-<keycombo>&Ctrl;<keycap>f</keycap></keycombo>
+<keycombo>&Ctrl;<keycap>F</keycap></keycombo>
 </shortcut>
 <guimenu>Edit</guimenu>
 <guimenuitem>Find transactions...</guimenuitem>
@@ -188,7 +188,7 @@
 <varlistentry id="reference.menus.settings.transactiondetail">
 <term><menuchoice>
 <shortcut>
-<keycombo>&Ctrl;<keycap>t</keycap></keycombo>
+<keycombo>&Ctrl;<keycap>T</keycap></keycombo>
 </shortcut>
 <guimenu>Settings</guimenu>
 <guimenuitem>Show Transaction Detail</guimenuitem>
@@ -199,7 +199,7 @@
 <varlistentry>
 <term><menuchoice>
 <shortcut>
-<keycombo>&Ctrl;<keycap>r</keycap></keycombo>
+<keycombo>&Ctrl;<keycap>R</keycap></keycombo>
 </shortcut>
 <guimenu>View</guimenu>
 <guimenuitem>Hide reconciled transactions</guimenuitem>
@@ -210,7 +210,7 @@
 <varlistentry>
 <term><menuchoice>
 <shortcut>
-<keycombo>&Ctrl;<keycap>u</keycap></keycombo>
+<keycombo>&Ctrl;<keycap>U</keycap></keycombo>
 </shortcut>
 <guimenu>View</guimenu>
 <guimenuitem>Hide unused categories</guimenuitem>
@@ -221,7 +221,7 @@
 <varlistentry>
 <term><menuchoice>
 <shortcut>
-<keycombo>&Ctrl;&Shift;<keycap>a</keycap></keycombo>
+<keycombo>&Ctrl;&Shift;<keycap>A</keycap></keycombo>
 </shortcut>
 <guimenu>View</guimenu>
 <guimenuitem>Show all accounts</guimenuitem>
@@ -305,7 +305,7 @@
 <varlistentry>
 <term><menuchoice>
 <shortcut>
-<keycombo>&Ctrl;&Shift;<keycap>r</keycap></keycombo>
+<keycombo>&Ctrl;&Shift;<keycap>R</keycap></keycombo>
 </shortcut>
 <guimenu>Account</guimenu>
 <guimenuitem>Reconcile...</guimenuitem>

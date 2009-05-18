@@ -26,7 +26,7 @@ characters depending on your locale settings. The button - if pressed - opens th
 The left/right cursor keys can be used to switch between the <emphasis>day</emphasis>, the <emphasis>month</emphasis>
 and the <emphasis>year</emphasis> field. Using the up/down cursor keys, the value of the selected field can be incremented/decremented.
 The <keycap>+</keycap> and <keycap>-</keycap> key can be used to increment/decrement for one day.
-Month and year boundaries are considered and incremented/decremented if necessary. Pressing <keycap>t</keycap> will set the date to today's
+Month and year boundaries are considered and incremented/decremented if necessary. Pressing <keycap>T</keycap> will set the date to today's
 date.
 </para>
 <para>
