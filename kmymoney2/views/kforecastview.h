@@ -30,7 +30,7 @@
 #include <mymoneyaccount.h>
 #include <mymoneyutils.h>
 
-#include "../views/kforecastviewdecl.h"
+#include "ui_kforecastviewdecl.h"
 #include "../widgets/kmymoneyaccounttreeforecast.h"
 #include "../reports/kreportchartview.h"
 //Added by qt3to4:
@@ -45,13 +45,21 @@ using namespace reports;
 /**
   * This class implements the forecast 'view'.
   */
+
+class KForecastViewDecl : public QWidget, public Ui::KForecastViewDecl
+{
+public:
+  KForecastViewDecl( QWidget *parent ) : QWidget( parent ) {
+    setupUi( this );
+  }
+};
 class KForecastView : public KForecastViewDecl
 {
   Q_OBJECT
 private:
 
 public:
-  KForecastView(QWidget *parent=0, const char *name=0);
+  KForecastView(QWidget *parent=0);
   virtual ~KForecastView();
 
   void show(void);

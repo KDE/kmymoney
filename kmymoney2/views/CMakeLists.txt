@@ -1,9 +1,9 @@
 ############# next target (views) STATIC ###################
 SET(libviews_a_SOURCES
-	kaccountsview.cpp
+	#kaccountsview.cpp
 	kbudgetview.cpp
 	kcategoriesview.cpp
-	#kforecastview.cpp
+	kforecastview.cpp
 	#kgloballedgerview.cpp
 	#khomeview.cpp
    kinstitutionsview.cpp

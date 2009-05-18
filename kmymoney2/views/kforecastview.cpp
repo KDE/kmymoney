@@ -48,8 +48,8 @@
 #include "../reports/pivottable.h"
 #include "../reports/pivotgrid.h"
 
-KForecastView::KForecastView(QWidget *parent, const char *name) :
-  KForecastViewDecl(parent,name)
+KForecastView::KForecastView(QWidget *parent) :
+  KForecastViewDecl(parent)
 {
   for(int i=0; i < MaxViewTabs; ++i)
     m_needReload[i] = false;
