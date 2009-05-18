@@ -30,7 +30,7 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include "kreportchartview.h"
+//#include "kreportchartview.h"
 #include "../mymoney/mymoneyfile.h"
 #include "../mymoney/mymoneyreport.h"
 #include "reporttable.h"

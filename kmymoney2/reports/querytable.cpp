@@ -81,7 +81,8 @@ MyMoneyMoney CashFlowListItem::NPV( double _rate ) const
 const CashFlowListItem& CashFlowList::mostRecent(void) const
 {
   CashFlowList dupe( *this );
-  qSort( dupe );
+#warning "port to kde4"
+  //qSort( dupe );
 
   //kDebug(2) << " CashFlowList::mostRecent() == " << dupe.back().date().toString(Qt::ISODate);
 
@@ -378,7 +379,8 @@ void QueryTable::init(void)
     m_postcolumns = "balance";
 
   TableRow::setSortCriteria(sort);
-  qSort(m_rows);
+#warning "port to kde4"
+  //qSort(m_rows);
 }
 
 void QueryTable::constructTransactionTable(void)

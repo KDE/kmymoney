@@ -45,8 +45,8 @@
 #include "../mymoney/mymoneyforecast.h"
 #include "../widgets/kmymoneyforecastlistviewitem.h"
 #include "../widgets/kmymoneyaccounttreeforecast.h"
-#include "../reports/pivottable.h"
-#include "../reports/pivotgrid.h"
+//#include "../reports/pivottable.h"
+//#include "../reports/pivotgrid.h"
 
 KForecastView::KForecastView(QWidget *parent) :
   KForecastViewDecl(parent)
@@ -55,8 +55,8 @@ KForecastView::KForecastView(QWidget *parent) :
     m_needReload[i] = false;
 
   KSharedConfigPtr config = KGlobal::config();
-  config->setGroup("Last Use Settings");
-  m_tab->setCurrentPage(config->readNumEntry("KForecastView_LastType", 0));
+  KConfigGroup grp = config->group("Last Use Settings");
+  m_tab->setCurrentPage(grp.readEntry("KForecastView_LastType", 0));
 
   connect(m_tab, SIGNAL(currentChanged(QWidget*)), this, SLOT(slotTabChanged(QWidget*)));
 
@@ -86,8 +86,8 @@ void KForecastView::slotTabChanged(QWidget* _tab)
 
   // remember this setting for startup
   KSharedConfigPtr config = KGlobal::config();
-  config->setGroup("Last Use Settings");
-  config->writeEntry("KForecastView_LastType", tab);
+  KConfigGroup grp = config->group("Last Use Settings");
+  grp.writeEntry("KForecastView_LastType", tab);
 
   loadForecast(tab);
 
@@ -449,7 +449,7 @@ void KForecastView::loadAdvancedView(void)
       advancedItem->setText(it_c, amount, amountMM.isNegative());
       it_c++;
 
-      QString dateString = KGlobal::locale()->formatDate(minDate, true);
+      QString dateString = KGlobal::locale()->formatDate(minDate);
       advancedItem->setText(it_c, dateString, amountMM.isNegative());
       it_c++;
     }
@@ -466,7 +466,7 @@ void KForecastView::loadAdvancedView(void)
       advancedItem->setText(it_c, amount, amountMM.isNegative());
       it_c++;
 
-      QString dateString = KGlobal::locale()->formatDate(maxDate, true);
+      QString dateString = KGlobal::locale()->formatDate(maxDate);
       advancedItem->setText(it_c, dateString, amountMM.isNegative());
       it_c++;
     }

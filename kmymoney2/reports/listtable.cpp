@@ -157,11 +157,11 @@ namespace reports {
       //actual dates of the report
     result += QString("<div class=\"subtitle\">");
     if(!m_config.fromDate().isNull()) {
-      result += i18n("Report date range", "%1 through %2").arg(KGlobal::locale()->formatDate(m_config.fromDate(), true)).arg(KGlobal::locale()->formatDate(m_config.toDate(), true));
+      result += i18n("Report date range", "%1 through %2",KGlobal::locale()->formatDate(m_config.fromDate()),KGlobal::locale()->formatDate(m_config.toDate()));
       result += QString("</div>\n");
       result += QString("<div class=\"gap\">&nbsp;</div>\n");
 
-      csv += i18n("Report date range", "%1 through %2").arg(KGlobal::locale()->formatDate(m_config.fromDate(), true)).arg(KGlobal::locale()->formatDate(m_config.toDate(), true));
+      csv += i18n("Report date range", "%1 through %2",KGlobal::locale()->formatDate(m_config.fromDate()),KGlobal::locale()->formatDate(m_config.toDate()));
       csv += QString("\n");
     }
 
@@ -169,13 +169,13 @@ namespace reports {
     result += QString ( "<div class=\"subtitle\">" );
     if ( m_config.isConvertCurrency() )
     {
-      result += i18n ( "All currencies converted to %1" ).arg ( file->baseCurrency().name() );
-      csv += i18n ( "All currencies converted to %1\n" ).arg ( file->baseCurrency().name() );
+      result += i18n ( "All currencies converted to %1" , file->baseCurrency().name() );
+      csv += i18n ( "All currencies converted to %1\n" , file->baseCurrency().name() );
     }
     else
     {
-      result += i18n ( "All values shown in %1 unless otherwise noted" ).arg ( file->baseCurrency().name() );
-      csv += i18n ( "All values shown in %1 unless otherwise noted\n" ).arg ( file->baseCurrency().name() );
+      result += i18n ( "All values shown in %1 unless otherwise noted" , file->baseCurrency().name() );
+      csv += i18n ( "All values shown in %1 unless otherwise noted\n" , file->baseCurrency().name() );
     }
     result += QString ( "</div>\n" );
     result += QString ( "<div class=\"gap\">&nbsp;</div>\n" );
@@ -512,7 +512,7 @@ namespace reports {
           // if we have a locale() then use its date formatter
           if ( KGlobal::locale() && ! data.isEmpty() ) {
             QDate qd = QDate::fromString ( data, Qt::ISODate );
-            data = KGlobal::locale()->formatDate ( qd, true );
+            data = KGlobal::locale()->formatDate ( qd );
           }
           result += QString ( "<td class=\"left\">%1</td>" ).arg ( data );
         }
