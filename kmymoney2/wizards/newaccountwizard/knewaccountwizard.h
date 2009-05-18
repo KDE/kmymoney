@@ -176,7 +176,7 @@ private:
   MyMoneySchedule          m_schedule;
 };
 
-}; // namespace
+} // namespace
 
 
 #endif

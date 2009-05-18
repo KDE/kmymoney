@@ -119,7 +119,7 @@ private:
   FilePage*         m_filePage;
 };
 
-}; // namespace
+} // namespace
 
 
 #endif
