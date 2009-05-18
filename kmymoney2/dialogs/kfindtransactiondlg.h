@@ -39,6 +39,7 @@
 #include <mymoneytransactionfilter.h>
 
 #include "ui_kfindtransactiondlgdecl.h"
+#include "ui_ksortoptiondlg.h"
 
 class Q3ListView;
 class Q3ListViewItem;
@@ -46,6 +47,17 @@ class Q3ListViewItem;
 /**
   * @author Thomas Baumgart
   */
+
+
+class KSortOptionDlg : public QDialog, public Ui::KSortOptionDlg
+{
+public:
+  KSortOptionDlg( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
+
+
 
 class KFindTransactionDlgDecl : public QDialog, public Ui::KFindTransactionDlgDecl
 {

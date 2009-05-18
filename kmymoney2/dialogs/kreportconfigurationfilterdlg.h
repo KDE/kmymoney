@@ -26,7 +26,7 @@
 
 #include <q3valuevector.h>
 
-#include "../dialogs/kfindtransactiondlg.h"
+#include "kfindtransactiondlg.h"
 #include "../mymoney/mymoneyreport.h"
 #include "../mymoney/mymoneybudget.h"
 
@@ -43,7 +43,7 @@ class KReportConfigurationFilterDlg : public KFindTransactionDlg
 {
 Q_OBJECT
 public:
-    KReportConfigurationFilterDlg(MyMoneyReport report, QWidget *parent = 0, const char *name = 0);
+    KReportConfigurationFilterDlg(MyMoneyReport report, QWidget *parent = 0);
     ~KReportConfigurationFilterDlg();
 
     const MyMoneyReport& getConfig(void) const { return m_currentState; }

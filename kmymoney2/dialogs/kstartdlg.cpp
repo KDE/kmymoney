@@ -170,7 +170,7 @@ void KStartDlg::readConfig()
 void KStartDlg::writeConfig()
 {
   KSharedConfigPtr config = KGlobal::config();
- 
+
   KConfigGroup grp = config->group("Start Dialog");
   grp.writeEntry("Geometry", this->size() );
   grp.writeEntry("LastPage", this->activePageIndex());
@@ -198,11 +198,7 @@ void KStartDlg::slotOk()
 
 bool KStartDlg::fileExists(KUrl url)
 {
-#if KDE_IS_VERSION(3,2,0)
   return KIO::NetAccess::exists(url, true, this);
-#else
-  return KIO::NetAccess::exists(url);
-#endif
 }
 
 void KStartDlg::slotTemplateSelectionChanged(Q3IconViewItem* item)

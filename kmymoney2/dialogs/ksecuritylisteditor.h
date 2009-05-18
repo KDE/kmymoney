@@ -29,7 +29,7 @@ class Q3ListViewItem;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ksecuritylisteditordecl.h"
+#include "ui_ksecuritylisteditordecl.h"
 
 #include "../mymoney/mymoneysecurity.h"
 
@@ -37,11 +37,19 @@ class Q3ListViewItem;
   * @author Thomas Baumgart
   */
 
+class KSecurityListEditorDecl : public QDialog, public Ui::KSecurityListEditorDecl
+{
+public:
+  KSecurityListEditorDecl( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
+
 class KSecurityListEditor : public KSecurityListEditorDecl
 {
   Q_OBJECT
 public:
-  KSecurityListEditor(QWidget *parent, const char* name = 0);
+  KSecurityListEditor(QWidget *parent);
   ~KSecurityListEditor();
 
 protected slots:

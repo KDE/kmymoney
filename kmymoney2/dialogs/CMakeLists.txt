@@ -25,7 +25,7 @@ SET(libdialogs_a_SOURCES
   kenterscheduledlg.cpp
   kequitypriceupdatedlg.cpp 
   kexportdlg.cpp 
-  #kfindtransactiondlg.cpp
+  kfindtransactiondlg.cpp
   kgncimportoptionsdlg.cpp 
   kgncpricesourcedlg.cpp
   kgpgkeyselectiondlg.cpp 
@@ -47,8 +47,8 @@ SET(libdialogs_a_SOURCES
   krecentfileitem.cpp 
   kreconciledlg.cpp
   kreconcilelistitem.cpp 
-  kreportconfigurationfilterdlg.cpp
-  #ksecuritylisteditor.cpp 
+  #kreportconfigurationfilterdlg.cpp
+  ksecuritylisteditor.cpp 
   kselectdatabasedlg.cpp
   kselecttransactionsdlg.cpp 
   #ksplittransactiondlg.cpp 

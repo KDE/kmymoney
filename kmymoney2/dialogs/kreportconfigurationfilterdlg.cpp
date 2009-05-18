@@ -77,8 +77,8 @@
 #include "ui_kmymoneyreportconfigtabchartdecl.h"
 
 KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
-  MyMoneyReport report, QWidget *parent, const char *name)
- : KFindTransactionDlg(parent, name),
+  MyMoneyReport report, QWidget *parent)
+ : KFindTransactionDlg(parent),
  m_tab2(0),
  m_tab3(0),
  m_tabChart(0),

@@ -55,8 +55,8 @@
 
 #define CURRENCY_MARKET    QString("ISO 4217")
 
-KSecurityListEditor::KSecurityListEditor(QWidget *parent, const char *name) :
-  KSecurityListEditorDecl(parent, name)
+KSecurityListEditor::KSecurityListEditor(QWidget *parent) :
+  KSecurityListEditorDecl(parent)
 {
   m_listView->setColumnWidth(ID_COL, 0);
   m_listView->setColumnWidthMode(NAME_COL, Q3ListView::Maximum);
@@ -166,7 +166,8 @@ void KSecurityListEditor::slotEditSecurity(void)
   if(item) {
     MyMoneySecurity security = MyMoneyFile::instance()->security(item->text(ID_COL).toLatin1());
 
-    KNewInvestmentWizard dlg(security, this, "KNewInvestmentWizard");
+    KNewInvestmentWizard dlg(security, this );
+    dlg.setObjectName( "KNewInvestmentWizard");
     if(dlg.exec() == QDialog::Accepted) {
       dlg.createObjects(QString());
       security = MyMoneyFile::instance()->security(item->text(ID_COL).toLatin1());

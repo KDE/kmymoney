@@ -81,6 +81,13 @@
   </widget>
   <layoutdefault spacing="6" margin="11"/>
   <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
+  <customwidgets>
+    <customwidget>
+      <class>TransactionSortOption</class>
+      <extends>QWidget</extends>
+      <header location="locale">ui_transactionsortoption.h</header>
+    </customwidget>
+  </customwidgets>
   <connections>
     <connection>
       <sender>m_okButton</sender>
