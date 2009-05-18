@@ -34,6 +34,7 @@
 #include <k3iconview.h>
 #include <kguiitem.h>
 #include <kpushbutton.h>
+#include <KToggleAction>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -71,8 +72,8 @@ void KMyMoneyAccountIconItem::updateAccount(const MyMoneyAccount& account)
   setPixmap(account.accountPixmap(m_reconcileFlag));
 }
 
-KAccountsView::KAccountsView(QWidget *parent, const char *name) :
-  KAccountsViewDecl(parent,name),
+KAccountsView::KAccountsView(QWidget *parent) :
+  KAccountsViewDecl(parent),
   m_assetItem(0),
   m_liabilityItem(0)
 {
@@ -101,8 +102,8 @@ KAccountsView::KAccountsView(QWidget *parent, const char *name) :
     m_needReload[i] = false;
 
   KSharedConfigPtr config = KGlobal::config();
-  config->setGroup("Last Use Settings");
-  m_tab->setCurrentPage(config->readNumEntry("KAccountsView_LastType", 0));
+  KConfigGroup grp^= config->group("Last Use Settings");
+  m_tab->setCurrentPage(grp.readEntry("KAccountsView_LastType", 0));
 
   connect(m_tab, SIGNAL(currentChanged(QWidget*)), this, SLOT(slotTabChanged(QWidget*)));
 
@@ -138,8 +139,8 @@ void KAccountsView::slotTabChanged(QWidget* _tab)
 
   // remember this setting for startup
   KSharedConfigPtr config = KGlobal::config();
-  config->setGroup("Last Use Settings");
-  config->writeEntry("KAccountsView_LastType", tab);
+  KConfigGroup grp =config->group("Last Use Settings");
+  grp.writeEntry("KAccountsView_LastType", tab);
 
   loadAccounts(tab);
 

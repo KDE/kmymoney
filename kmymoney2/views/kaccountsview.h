@@ -33,7 +33,7 @@
 #include <mymoneyutils.h>
 class K3ListViewSearchLineWidget;
 
-#include "../views/kaccountsviewdecl.h"
+#include "ui_kaccountsviewdecl.h"
 
 /**
   * @author Thomas Baumgart
@@ -84,13 +84,21 @@ private:
 /**
   * This class implements the accounts hierarchical and iconic 'view'.
   */
+
+class KAccountsViewDecl : public QWidget, public Ui::KAccountsViewDecl
+{
+public:
+  KAccountsViewDecl( QWidget *parent ) : QWidget( parent ) {
+    setupUi( this );
+  }
+};
 class KAccountsView : public KAccountsViewDecl
 {
   Q_OBJECT
 private:
 
 public:
-  KAccountsView(QWidget *parent=0, const char *name=0);
+  KAccountsView(QWidget *parent=0);
   virtual ~KAccountsView();
 
 public slots:
