@@ -47,24 +47,6 @@
 #include "kmymoneyutils.h"
 #include "kmymoneyglobalsettings.h"
 
-static const char *description =
-  I18N_NOOP("\nKMyMoney, the Personal Finance Manager for KDE.\n\nPlease consider contributing to this project with code and/or suggestions.");
-
-static KCmdLineOptions options[] =
-{
-  { "lang <lang-code>", I18N_NOOP("language to be used"), 0 },
-  { "n", I18N_NOOP("don't open last used file"), 0},
-  { "timers", I18N_NOOP("enable performance timers"), 0},
-
-#if KMM_DEBUG
-  // The following options are only available when compiled in debug mode
-  { "trace", I18N_NOOP("turn on program traces"), 0},
-  { "dump-actions", I18N_NOOP("dump the names of all defined KAction objects to stdout and quit"), 0},
-#endif
-
-  // INSERT YOUR COMMANDLINE OPTIONS HERE
-  { "+[File]", I18N_NOOP("file to open"), 0 }
-};
 
 QTime timer;
 bool timersOn = false;
@@ -95,10 +77,10 @@ int main(int argc, char *argv[])
     feature = I18N_NOOP("Compiled with the following settings:\n") + feature;
 
   KAboutData aboutData( "kmymoney2",0, ki18n("KMyMoney"),
-    VERSION, description, KAboutData::License_GPL,
-    ki18n( "(c) 2000-2009 The KMyMoney development team" ), feature,
-    I18N_NOOP( "http://kmymoney2.sourceforge.net/" ),
-    "kmymoney2-developer@lists.sourceforge.net");
+    VERSION, ki18n( "\nKMyMoney, the Personal Finance Manager for KDE.\n\nPlease consider contributing to this project with code and/or suggestions." ), KAboutData::License_GPL,
+                        ki18n( "(c) 2000-2009 The KMyMoney development team" ), /*feature*/KLocalizedString(),
+    I18N_NOOP( "http://kmymoney2.sourceforge.net/" )/*,
+                                                      "kmymoney2-developer@lists.sourceforge.net")*/ );
 
   aboutData.addAuthor(ki18n( "Michael Edwardes." ), ki18n("Initial idea, much initial source code, Project admin"), "mte@users.sourceforge.net");
   aboutData.addAuthor(ki18n( "Thomas Baumgart" ), ki18n("Core engine, Release Manager, Project admin"), "ipwizard@users.sourceforge.net");
@@ -114,6 +96,19 @@ int main(int argc, char *argv[])
   aboutData.addCredit(ki18n("Robert Wadley" ), ki18n("Icons & splash screen"), "rob@robntina.fastmail.us");
   aboutData.addCredit(ki18n("Laurent Montel" ),ki18n("Patches"), "montel@kde.org");
   aboutData.addCredit(ki18n("Wolfgang Rohdewald" ), ki18n("Patches"), "woro@users.sourceforge.net");
+  KCmdLineOptions options;
+  options.add( "lang <lang-code>", ki18n("language to be used") );
+  options.add( "n", ki18n("don't open last used file") );
+  options.add( "timers", ki18n("enable performance timers") );
+
+#if KMM_DEBUG
+  // The following options are only available when compiled in debug mode
+  options.add( "trace", ki18n("turn on program traces") );
+  options.add(  "dump-actions", ki18n("dump the names of all defined KAction objects to stdout and quit") );
+#endif
+
+  // INSERT YOUR COMMANDLINE OPTIONS HERE
+  options.add("+[File]", ki18n("file to open") );
 
   KCmdLineArgs::init( argc, argv, &aboutData );
   KCmdLineArgs::addCmdLineOptions( options ); // Add our own options.
