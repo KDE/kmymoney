@@ -123,7 +123,7 @@
 #include "dialogs/kmergetransactionsdlg.h"
 #include "dialogs/kendingbalancedlg.h"
 #include "dialogs/kbalancechartdlg.h"
-#include "dialogs/kplugindlg.h"
+#include "ui_kplugindlg.h"
 #include "dialogs/kloadtemplatedlg.h"
 #include "dialogs/kgpgkeyselectiondlg.h"
 #include "dialogs/transactionmatcher.h"
@@ -4845,7 +4845,7 @@ void KMyMoney2App::doDeleteTransactions(void)
     }
     ft.commit();
   } catch(MyMoneyException* e) {
-      KMessageBox::detailedSorry(0, i18n("Error"), i18n("Unable to delete transaction(s): %1, thrown in %2:%3").arg(e->what()).arg(e->file()).arg(e->line()));
+      KMessageBox::detailedSorry(0, i18n("Error"), i18n("Unable to delete transaction(s): %1, thrown in %2:%3",e->what(),e->file(),e->line()));
     delete e;
   }
   slotStatusProgressBar(-1, -1);
@@ -4919,7 +4919,7 @@ void KMyMoney2App::slotTransactionsEditSplits(void)
           m_transactionEditor->enterTransactions(id);
           ft.commit();
         } catch(MyMoneyException* e) {
-          KMessageBox::detailedSorry(0, i18n("Error"), i18n("Unable to modify transaction: %1, thrown in %2:%3").arg(e->what()).arg(e->file()).arg(e->line()));
+          KMessageBox::detailedSorry(0, i18n("Error"), i18n("Unable to modify transaction: %1, thrown in %2:%3",e->what(),e->file(),e->line()));
           delete e;
         }
       }
@@ -5089,7 +5089,7 @@ void KMyMoney2App::markTransaction(MyMoneySplit::reconcileFlagE flag)
     slotStatusProgressBar(-1, -1);
     ft.commit();
   } catch(MyMoneyException* e) {
-    KMessageBox::detailedSorry(0, i18n("Error"), i18n("Unable to modify transaction: %1, thrown in %2:%3").arg(e->what()).arg(e->file()).arg(e->line()));
+    KMessageBox::detailedSorry(0, i18n("Error"), i18n("Unable to modify transaction: %1, thrown in %2:%3",e->what(),e->file(),e->line()));
     delete e;
   }
 }
@@ -5134,7 +5134,7 @@ void KMyMoney2App::slotTransactionsAccept(void)
     slotStatusProgressBar(-1, -1);
     ft.commit();
   } catch(MyMoneyException* e) {
-    KMessageBox::detailedSorry(0, i18n("Error"), i18n("Unable to accept transaction: %1, thrown in %2:%3").arg(e->what()).arg(e->file()).arg(e->line()));
+    KMessageBox::detailedSorry(0, i18n("Error"), i18n("Unable to accept transaction: %1, thrown in %2:%3",e->what(),e->file(),e->line()));
     delete e;
   }
 }
@@ -6395,7 +6395,7 @@ void KMyMoney2App::slotAccountUnmapOnline(void)
   if(m_selectedAccount.onlineBankingSettings().value("provider").isEmpty())
     return;
 
-  if(KMessageBox::warningYesNo(this, QString("<qt>%1</qt>").arg(i18n("Do you really want to remove the mapping of account <b>%1</b> to an online account? Depending on the details of the online banking method used, this action cannot be reverted.").arg(m_selectedAccount.name())), i18n("Remove mapping to online account")) == KMessageBox::Yes) {
+  if(KMessageBox::warningYesNo(this, QString("<qt>%1</qt>").arg(i18n("Do you really want to remove the mapping of account <b>%1</b> to an online account? Depending on the details of the online banking method used, this action cannot be reverted.",m_selectedAccount.name())), i18n("Remove mapping to online account")) == KMessageBox::Yes) {
     MyMoneyFileTransaction ft;
     try {
       m_selectedAccount.setOnlineBankingSettings(MyMoneyKeyValueContainer());
@@ -6406,7 +6406,7 @@ void KMyMoney2App::slotAccountUnmapOnline(void)
       MyMoneyFile::instance()->modifyAccount(m_selectedAccount);
       ft.commit();
     } catch(MyMoneyException* e) {
-      KMessageBox::error(this, i18n("Unable to unmap account from online account: %1").arg(e->what()));
+      KMessageBox::error(this, i18n("Unable to unmap account from online account: %1",e->what()));
       delete e;
     }
   }
@@ -6472,7 +6472,7 @@ void KMyMoney2App::slotAccountMapOnline(void)
         MyMoneyFile::instance()->modifyAccount(acc);
         ft.commit();
       } catch(MyMoneyException* e) {
-        KMessageBox::error(this, i18n("Unable to map account to online account: %1").arg(e->what()));
+        KMessageBox::error(this, i18n("Unable to map account to online account: %1",e->what()));
         delete e;
       }
     }
