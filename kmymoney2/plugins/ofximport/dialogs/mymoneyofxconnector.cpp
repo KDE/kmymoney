@@ -46,7 +46,7 @@
 #include <mymoneyinstitution.h>
 #include <mymoneykeyvaluecontainer.h>
 #include "mymoneyofxconnector.h"
-
+#include <kdeversion.h>
 OfxHeaderVersion::OfxHeaderVersion(KComboBox* combo, const QString& headerVersion) :
   m_combo(combo)
 {
@@ -296,7 +296,7 @@ const QByteArray MyMoneyOfxConnector::statementRequest(void) const
   OfxAccountData account;
   memset(&account,0,sizeof(OfxAccountData));
 
-  if(iban().toLatin1() != 0) {
+  if(!iban().toLatin1().isEmpty()) {
     strncpy(account.bank_id,iban().toLatin1(),OFX_BANKID_LENGTH-1);
     strncpy(account.broker_id,iban().toLatin1(),OFX_BROKERID_LENGTH-1);
   }

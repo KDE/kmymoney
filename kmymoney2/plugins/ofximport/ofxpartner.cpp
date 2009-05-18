@@ -134,7 +134,7 @@ static void ParseFile(QMap<QString, QString>& result, const QString& fileName, c
   }
 }
 
-Q3ValueList<QString> BankNames(void)
+QStringList BankNames(void)
 {
   QMap<QString, QString> result;
 
@@ -148,10 +148,10 @@ Q3ValueList<QString> BankNames(void)
   // Add Innovision
   result["Innovision"] = QString();
 
-  return result.keys();
+  return QStringList()<<result.keys();
 }
 
-Q3ValueList<QString> FipidForBank(const QString& bank)
+QStringList FipidForBank(const QString& bank)
 {
   QMap<QString, QString> result;
 
@@ -163,7 +163,7 @@ Q3ValueList<QString> FipidForBank(const QString& bank)
   if ( bank == "Innovision" )
     result["1"] = QString();
 
-  return result.keys();
+  return QStringList()<<result.keys();
 }
 
 QString extractNodeText(QDomElement& node, const QString& name)

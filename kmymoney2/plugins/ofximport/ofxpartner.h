@@ -55,8 +55,8 @@ namespace OfxPartner
 
   void ValidateIndexCache(void);
   OfxFiServiceInfo ServiceInfo(const QString& fipid);
-  Q3ValueList<QString> BankNames(void);
-  Q3ValueList<QString> FipidForBank(const QString& bank);
+  QStringList BankNames(void);
+  QStringList FipidForBank(const QString& bank);
 
 }
 

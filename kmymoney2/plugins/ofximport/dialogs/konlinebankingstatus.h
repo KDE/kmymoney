@@ -32,7 +32,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "konlinebankingstatusdecl.h"
+#include "ui_konlinebankingstatusdecl.h"
 class MyMoneyAccount;
 class OfxAppVersion;
 class OfxHeaderVersion;
@@ -41,11 +41,19 @@ class OfxHeaderVersion;
   * @author Thomas Baumgart
   */
 
+class KOnlineBankingStatusDecl : public QWidget, public Ui::KOnlineBankingStatusDecl
+{
+public:
+  KOnlineBankingStatusDecl( QWidget *parent ) : QWidget( parent ) {
+    setupUi( this );
+  }
+};
+
 class KOnlineBankingStatus : public KOnlineBankingStatusDecl
 {
   Q_OBJECT
 public:
-  KOnlineBankingStatus(const MyMoneyAccount& acc, QWidget *parent=0, const char *name=0);
+  KOnlineBankingStatus(const MyMoneyAccount& acc, QWidget *parent=0);
   ~KOnlineBankingStatus();
   const QString& appId(void) const;
   QString headerVersion(void) const;

@@ -69,15 +69,18 @@ KOnlineBankingSetupWizard::KOnlineBankingSetupWizard(QWidget *parent):
   m_headerVersion = new OfxHeaderVersion(m_headerVersionCombo, "");
 
   // fill the list view with banks
-  KProgressDialog* dlg = new KProgressDialog(this, 0, i18n("Loading banklist"), i18n("Getting list of banks from http://moneycentral.msn.com/\nThis may take some time depending on the available bandwidth."), true);
+  KProgressDialog* dlg = new KProgressDialog(this, i18n("Loading banklist"), i18n("Getting list of banks from http://moneycentral.msn.com/\nThis may take some time depending on the available bandwidth."));
+  dlg->setModal( true );
   dlg->setAllowCancel(false);
   // force to show immediately as the call to OfxPartner::BankNames()
   // does not call the processEvents() loop
   dlg->setMinimumDuration(0);
   kapp->processEvents();
 
+  #warning "port to kde4"
+#if 0
   tabLayout->insertWidget(0, new K3ListViewSearchLineWidget(m_listFi, tab));
-
+#endif
   OfxPartner::setDirectory(KStandardDirs::locateLocal("appdata", ""));
   QStringList banks = OfxPartner::BankNames();
   QStringList::const_iterator it_bank = banks.begin();
@@ -183,9 +186,9 @@ bool KOnlineBankingSetupWizard::finishFiPage(void)
     m_textDetails->append(QString("<p>Details for %1:</p>").arg(m_bankName->text()));
 
     memset(&info, 0, sizeof(OfxFiServiceInfo));
-    strncpy(info.fid, m_fid->text().data(), OFX_FID_LENGTH-1);
+    strncpy(info.fid, m_fid->text().latin1(), OFX_FID_LENGTH-1);
     strncpy(info.org, m_bankName->text().toLatin1(), OFX_ORG_LENGTH-1);
-    strncpy(info.url, m_url->url(), OFX_URL_LENGTH-1);
+    strncpy(info.url, m_url->url().path().latin1(), OFX_URL_LENGTH-1);
     info.accountlist = 1;
     info.statements = 1;
     info.billpay = 1;
@@ -251,7 +254,7 @@ bool KOnlineBankingSetupWizard::finishLoginPage(void)
     KUrl filename(QString("%1response.ofx").arg(KStandardDirs::locateLocal("appdata", "")));
     QByteArray req;
     req.setRawData(request, strlen(request));
-    OfxHttpsRequest("POST", (*m_it_info).url, req, QMap<QString, QString>(), filename, true);
+    OfxHttpsRequest(QString( "POST" ), KUrl( (*m_it_info).url ), req, QMap<QString, QString>(), filename, true);
     req.resetRawData(request, strlen(request));
 
     LibofxContextPtr ctx = libofx_get_new_context();
@@ -260,7 +263,7 @@ bool KOnlineBankingSetupWizard::finishLoginPage(void)
     ofx_set_account_cb(ctx, ofxAccountCallback, this);
     ofx_set_status_cb(ctx, ofxStatusCallback, this);
     // Add resulting accounts to the account list
-    libofx_proc_file(ctx, filename.path(), AUTODETECT);
+    libofx_proc_file(ctx, filename.path().latin1(), AUTODETECT);
     libofx_free_context(ctx);
 
     ++m_it_info;

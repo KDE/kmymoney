@@ -46,8 +46,8 @@
 #include <libofx/libofx.h>
 #include "mymoneyofxconnector.h"
 
-KOnlineBankingStatus::KOnlineBankingStatus(const MyMoneyAccount& acc, QWidget *parent, const char *name) :
-  KOnlineBankingStatusDecl(parent,name),
+KOnlineBankingStatus::KOnlineBankingStatus(const MyMoneyAccount& acc, QWidget *parent) :
+  KOnlineBankingStatusDecl(parent),
   m_appId(0)
 {
   m_ledOnlineStatus->off();
