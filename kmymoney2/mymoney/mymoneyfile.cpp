@@ -1137,7 +1137,7 @@ void MyMoneyFile::clearNotification()
   d->m_notificationList.clear();
 }
 
-void MyMoneyFile::transactionList(Q3ValueList<QPair<MyMoneyTransaction, MyMoneySplit> >& list, MyMoneyTransactionFilter& filter) const
+void MyMoneyFile::transactionList(QLinkedList<QPair<MyMoneyTransaction, MyMoneySplit> >& list, MyMoneyTransactionFilter& filter) const
 {
   checkStorage();
   m_storage->transactionList(list, filter);

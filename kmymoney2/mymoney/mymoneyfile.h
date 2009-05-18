@@ -578,7 +578,7 @@ public:
     *
     * @return set of transactions in form of a QValueList<MyMoneyTransaction>
     */
-  const Q3ValueList<MyMoneyTransaction> transactionList(MyMoneyTransactionFilter& filter) const;
+  const QLinkedList<MyMoneyTransaction> transactionList(MyMoneyTransactionFilter& filter) const;
 
   void transactionList(Q3ValueList<MyMoneyTransaction>& list, MyMoneyTransactionFilter& filter) const;
 

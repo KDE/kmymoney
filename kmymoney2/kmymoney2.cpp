@@ -65,6 +65,7 @@
 #include <kstandardaction.h>
 #include <ktoggleaction.h>
 #include <kactioncollection.h>
+#include <kactionmenu.h>
 #include <kglobal.h>
 #include <kstandarddirs.h>
 #include <kstatusbar.h>
@@ -311,28 +312,28 @@ void KMyMoney2App::initActions(void)
   // *************
 
   //KStandardAction::openNew(this, SLOT(slotFileNew()), actionCollection());
-  actionCollection()->addAction( KStandardAction::openNew, this, SLOT(slotFileNew()) );
+  actionCollection()->addAction( KStandardAction::New, this, SLOT(slotFileNew()) );
 
   //KStandardAction::open(this, SLOT(slotFileOpen()), actionCollection());
-  actionCollection()->addAction( KStandardAction::open, this, SLOT(slotFileOpen()) );
+  actionCollection()->addAction( KStandardAction::Open, this, SLOT(slotFileOpen()) );
 
   //KStandardAction::openRecent(this, SLOT(slotFileOpenRecent(const KUrl&)), actionCollection());
-  actionCollection()->addAction( KStandardAction::openRecent, this, SLOT(slotFileOpenRecent(const KUrl&)) );
+  actionCollection()->addAction( KStandardAction::OpenRecent, this, SLOT(slotFileOpenRecent(const KUrl&)) );
 
   //KStandardAction::save(this, SLOT(slotFileSave()), actionCollection());
-  actionCollection()->addAction( KStandardAction::save, this, SLOT(slotFileSave()) );
+  actionCollection()->addAction( KStandardAction::Save, this, SLOT(slotFileSave()) );
 
   //KStandardAction::saveAs(this, SLOT(slotFileSaveAs()), actionCollection());
-  actionCollection()->addAction( KStandardAction::saveAs, this, SLOT(slotFileSaveAs()) );
+  actionCollection()->addAction( KStandardAction::SaveAs, this, SLOT(slotFileSaveAs()) );
 
   //KStandardAction::close(this, SLOT(slotFileClose()), actionCollection());
-  actionCollection()->addAction( KStandardAction::close, this, SLOT(slotFileClose()) );
+  actionCollection()->addAction( KStandardAction::Close, this, SLOT(slotFileClose()) );
 
   //KStandardAction::quit(this, SLOT(slotFileQuit()), actionCollection());
-  actionCollection()->addAction( KStandardAction::quit, this, SLOT(slotFileQuit()) );
+  actionCollection()->addAction( KStandardAction::Quit, this, SLOT(slotFileQuit()) );
 
   //KStandardAction::print(this, SLOT(slotPrintView()), actionCollection());
-  actionCollection()->addAction( KStandardAction::print, this, SLOT(slotPrintView()) );
+  actionCollection()->addAction( KStandardAction::Print, this, SLOT(slotPrintView()) );
 
   //new KAction(i18n("Open database..."), "",0,this,SLOT(slotOpenDatabase()),actionCollection(),"open_database");
   KAction *open_database = actionCollection()->addAction("open_database");
@@ -413,26 +414,30 @@ void KMyMoney2App::initActions(void)
   // The View menu
   // *************
   //new KToggleAction(i18n("Show Transaction Detail"), KShortcut("Ctrl+T"), actionCollection(), "view_show_transaction_detail");
-  KToggleAction *view_show_transaction_detail = actionCollection()->addAction("view_show_transaction_detail");
+  KToggleAction *view_show_transaction_detail;
+  actionCollection()->addAction("view_show_transaction_detail", view_show_transaction_detail);
   view_show_transaction_detail->setText(i18n("Show Transaction Detail"));
   view_show_transaction_detail->setShortcut(KShortcut("Ctrl+T"));
 
   //new KToggleAction(i18n("Hide reconciled transactions"), "hide_reconciled", KShortcut("Ctrl+R"), this, SLOT(slotHideReconciledTransactions()), actionCollection(), "view_hide_reconciled_transactions");
-  KToggleAction *view_hide_reconciled_transactions = actionCollection()->addAction("view_hide_reconciled_transactions");
+  KToggleAction *view_hide_reconciled_transactions;
+  actionCollection()->addAction("view_hide_reconciled_transactions", view_hide_reconciled_transactions);
   view_hide_reconciled_transactions->setText(i18n("Hide reconciled transactions"));
   view_hide_reconciled_transactions->setIcon(KIcon("hide_reconciled"));
   view_hide_reconciled_transactions->setShortcut(KShortcut("Ctrl+R"));
   connect(view_hide_reconciled_transactions, SIGNAL(triggered()), this, SLOT(slotHideReconciledTransactions()));
 
   //new KToggleAction(i18n("Hide unused categories"), "hide_categories", KShortcut("Ctrl+U"), this, SLOT(slotHideUnusedCategories()), actionCollection(), "view_hide_unused_categories");
-  KToggleAction *view_hide_unused_categories = actionCollection()->addAction("view_hide_unused_categories");
+  KToggleAction *view_hide_unused_categories;
+  actionCollection()->addAction("view_hide_unused_categories", view_hide_unused_categories);
   view_hide_unused_categories->setText(i18n("Hide unused categories"));
   view_hide_unused_categories->setIcon(KIcon("hide_categories"));
   view_hide_unused_categories->setShortcut(KShortcut("Ctrl+U"));
   connect(view_hide_unused_categories, SIGNAL(triggered()), this, SLOT(slotHideUnusedCategories()));
 
-  new KToggleAction(i18n("Show all accounts"), "", KShortcut("Ctrl+Shift+A"), this, SLOT(slotShowAllAccounts()), actionCollection(), "view_show_all_accounts");
-  KToggleAction *view_show_all_accounts = actionCollection()->addAction("view_show_all_accounts");
+  //new KToggleAction(i18n("Show all accounts"), "", KShortcut("Ctrl+Shift+A"), this, SLOT(slotShowAllAccounts()), actionCollection(), "view_show_all_accounts");
+  KToggleAction *view_show_all_accounts;
+  actionCollection()->addAction("view_show_all_accounts", view_show_all_accounts);
   view_show_all_accounts->setText(i18n("Show all accounts"));
   view_show_all_accounts->setShortcut(KShortcut("Ctrl+Shift+A"));
   connect(view_show_all_accounts, SIGNAL(triggered()), this, SLOT(slotShowAllAccounts()));
@@ -537,21 +542,20 @@ void KMyMoney2App::initActions(void)
   account_online_unmap->setText(i18n("Unmap account..."));
   connect(account_online_unmap, SIGNAL(triggered()), this, SLOT(slotAccountUnmapOnline()));
 
-  KActionMenu* menu = new KActionMenu(i18n("Update"), KIcon(KIconLoader::global()->loadIcon("reload", KIconLoader::Small,
-                                      KIconLoader::SizeSmall)), actionCollection(), "account_online_update_menu");
+  KActionMenu* menu = new KActionMenu(KIcon(KIconLoader::global()->loadIcon("reload", KIconLoader::Small,                                      KIconLoader::SizeSmall)), i18n("Update"), actionCollection()); //, "account_online_update_menu");
   // activating the menu button is the same as selecting the current account
   connect( menu, SIGNAL( activated() ), this, SLOT(slotAccountUpdateOnline()));
   //menu->insert(new KAction(i18n("Update account..."), "", 0, this, SLOT(slotAccountUpdateOnline()), actionCollection(), "account_online_update"));
   KAction *account_online_update = actionCollection()->addAction("account_online_update");
   account_online_update->setText(i18n("Update account..."));
   connect(account_online_update, SIGNAL(triggered()), this, SLOT(slotAccountUpdateOnline()));
-  menu->insert(account_online_update);
+  menu->addAction(account_online_update);
 
   //menu->insert(new KAction(i18n("Update all accounts..."), "", 0, this, SLOT(slotAccountUpdateOnlineAll()), actionCollection(), "account_online_update_all"));
   KAction *account_online_update_all = actionCollection()->addAction("account_online_update_all");
   account_online_update_all->setText(i18n("Update all accounts..."));
   connect(account_online_update_all, SIGNAL(triggered()), this, SLOT(slotAccountUpdateOnlineAll()));
-  menu->insert(account_online_update_all);
+  menu->addAction(account_online_update_all);
 
   // *******************
   // The categories menu
@@ -587,7 +591,7 @@ void KMyMoney2App::initActions(void)
   //new KAction(i18n("Securities..."), "", 0, this, SLOT(slotSecurityEditor()), actionCollection(), "tools_security_editor");
   KAction *tools_security_editor = actionCollection()->addAction("tools_security_editor");
   tools_security_editor->setText(i18n("Securities..."));
-  connect(tools_security_editor, SIGNAL(triggered()), this, SLOT(slotSecurityEditor()))
+  connect(tools_security_editor, SIGNAL(triggered()), this, SLOT(slotSecurityEditor()));
 
   //new KAction(i18n("Currencies..."), "", 0, this, SLOT(slotCurrencyDialog()), actionCollection(), "tools_currency_editor");
   KAction *tools_currency_editor = actionCollection()->addAction("tools_currency_editor");
@@ -625,7 +629,7 @@ void KMyMoney2App::initActions(void)
   // The settings menu
   // *****************
   //KStandardAction::preferences(this, SLOT( slotSettings() ), actionCollection());
-  actionCollection()->addAction( KStandardAction::preferences, this, SLOT(slotSettings()) );
+  actionCollection()->addAction( KStandardAction::Preferences, this, SLOT(slotSettings()) );
 
   //new KAction(i18n("Enable all messages"), "", 0, this, SLOT(slotEnableMessages()), actionCollection(), "settings_enable_messages");
   KAction *settings_enable_messages = actionCollection()->addAction("settings_enable_messages");
@@ -653,7 +657,7 @@ void KMyMoney2App::initActions(void)
   KAction *transaction_new = actionCollection()->addAction("transaction_new");
   transaction_new->setText(i18nc("New transaction button", "New"));
   transaction_new->setIcon(KIcon("filenew"));
-  transaction_mark_cleared->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_Insert));
+  transaction_new->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_Insert));
   connect(transaction_new, SIGNAL(triggered()), this, SLOT(slotTransactionsNew()));
 
 
@@ -714,7 +718,7 @@ void KMyMoney2App::initActions(void)
   connect(transaction_accept, SIGNAL(triggered()), this, SLOT(slotTransactionsAccept()));
 
   //new KAction(i18nc("Toggle reconciliation flag", "Toggle"), 0, KShortcut("Ctrl+Space"), this, SLOT(slotToggleReconciliationFlag()), actionCollection(), "transaction_mark_toggle");
-  KAction *transaction_mark_cleared = actionCollection()->addAction("transaction_mark_cleared");
+  KAction *transaction_mark_toggle = actionCollection()->addAction("transaction_mark_toggle");
   transaction_mark_toggle->setText(i18nc("Toggle reconciliation flag", "Toggle"));
   transaction_mark_toggle->setShortcut(KShortcut("Ctrl+Space"));
   connect(transaction_mark_toggle, SIGNAL(triggered()), this, SLOT(slotToggleReconciliationFlag()));
@@ -964,10 +968,13 @@ void KMyMoney2App::initActions(void)
 
 void KMyMoney2App::dumpActions(void) const
 {
-  KActionPtrList list = actionCollection()->actions();
-  KActionPtrList::const_iterator it;
+  const QList<QAction*> list = actionCollection()->actions();
+  QList<QAction*>::const_iterator it;
   for(it = list.begin(); it != list.end(); ++it) {
+    #warning "port kde4"
+    #if 0
     std::cout << (*it)->name() << ": " << (*it)->text() << std::endl;
+    #endif
   }
 }
 
@@ -2334,8 +2341,8 @@ bool KMyMoney2App::initWizard(void)
     //save off directory as the last one used.
     if(m_fileName.isLocalFile() && m_fileName.hasPath())
     {
-      writeLastUsedDir(m_fileName.path(0));
-      writeLastUsedFile(m_fileName.path(0));
+      writeLastUsedDir(m_fileName.path(KUrl::LeaveTrailingSlash));
+      writeLastUsedFile(m_fileName.path(KUrl::LeaveTrailingSlash));
     }
 
     return true;
@@ -2448,7 +2455,7 @@ void KMyMoney2App::slotProcessExited(void)
 
         if(m_backupResult == 0) {
           progressCallback(50, 0, i18n("Writing %1").arg(backupfile));
-          proc << "cp" << "-f" << m_fileName.path(0) << backupfile;
+          proc << "cp" << "-f" << m_fileName.path(KUrl::LeaveTrailingSlash) << backupfile;
           m_backupState = BACKUP_COPYING;
           proc.start();
         }
@@ -3949,7 +3956,7 @@ void KMyMoney2App::slotScheduleEdit(void)
                   // than previous payment.  Date would be
                   // updated automatically so we probably
                   // want to clear it.  Let's ask the user.
-                  if(KMessageBox::questionYesNo(this, QString("<qt>")+i18n("You have entered a scheduled transaction date of <b>%1</b>.  Because the scheduled transaction was last paid on <b>%2</b>, KMyMoney will automatically adjust the scheduled transaction date to the next date unless the last payment date is reset.  Do you want to reset the last payment date?").arg(KGlobal::locale()->formatDate(next, true)).arg(KGlobal::locale()->formatDate(last, true))+QString("</qt>"),i18n("Reset Last Payment Date" ), KStandardGuiItem::yes(), KStandardGuiItem::no()) == KMessageBox::Yes) {
+                  if(KMessageBox::questionYesNo(this, QString("<qt>")+i18n("You have entered a scheduled transaction date of <b>%1</b>.  Because the scheduled transaction was last paid on <b>%2</b>, KMyMoney will automatically adjust the scheduled transaction date to the next date unless the last payment date is reset.  Do you want to reset the last payment date?").arg(KGlobal::locale()->formatDate(next, KLocale::ShortDate)).arg(KGlobal::locale()->formatDate(last, KLocale::ShortDate))+QString("</qt>"),i18n("Reset Last Payment Date" ), KStandardGuiItem::yes(), KStandardGuiItem::no()) == KMessageBox::Yes) {
                     sched.setLastPayment( QDate() );
                   }
                 }
