@@ -43,4 +43,4 @@ ADD_DEPENDENCIES(views generate_dialogs_ui_srcs generate_base_ui_srcs
 ########### install files ###############
 
 INSTALL(FILES ${libviews_a_HEADER}
-  DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney)
+  DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney COMPONENT Devel)

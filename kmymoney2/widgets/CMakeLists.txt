@@ -164,7 +164,7 @@ TARGET_LINK_LIBRARIES(widgets kmymoney_base)
 ########### install files ###############
 
 INSTALL(FILES ${kmymoney_STAT_HEADERS} 
-  DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney)
+  DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney COMPONENT Devel)
 
 IF( USE_QT_DESIGNER )
   INSTALL(TARGETS kmymoney
