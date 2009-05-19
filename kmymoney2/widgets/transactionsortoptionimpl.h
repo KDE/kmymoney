@@ -27,6 +27,7 @@ class TransactionSortOption : public QWidget, public Ui::TransactionSortOption
     Q_OBJECT
 public:
     TransactionSortOption( QWidget *parent );
+    void settings( void ) const;
 public slots:
     void setSettings(const QString& settings);
     void toggleDirection( Q3ListViewItem * item );
