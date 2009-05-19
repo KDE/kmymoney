@@ -34,8 +34,8 @@ public slots:
 protected:
     void addEntry( K3ListView * p, Q3ListViewItem * after, int idx );
 protected slots:
-    void slotAvailableSelected( QListViewItem * item );
-    void slotSelectedSelected( QListViewItem * item );
+    void slotAvailableSelected( Q3ListViewItem * item );
+    void slotSelectedSelected( Q3ListViewItem * item );
     void slotAddItem( void );
     void slotRemoveItem( void );
     void slotUpItem( void );
