@@ -40,7 +40,7 @@ SET(libdialogs_a_SOURCES
   knewbudgetdlg.cpp 
   knewequityentrydlg.cpp
   knewfiledlg.cpp 
-  #knewinvestmentwizard.cpp 
+  knewinvestmentwizard.cpp 
   knewloanwizard.cpp 
   konlinequoteconfigurationdlg.cpp
   kpayeereassigndlg.cpp 
@@ -51,7 +51,7 @@ SET(libdialogs_a_SOURCES
   ksecuritylisteditor.cpp 
   kselectdatabasedlg.cpp
   kselecttransactionsdlg.cpp 
-  #ksplittransactiondlg.cpp 
+  ksplittransactiondlg.cpp 
   #kstartdlg.cpp
   kupdatestockpricedlg.cpp 
   mymoneyqifprofileeditor.cpp

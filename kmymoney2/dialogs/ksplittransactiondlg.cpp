@@ -55,7 +55,7 @@
 #include <mymoneyfile.h>
 
 #include "kmymoneysplittable.h"
-#include "ui_ksplitcorrectiondlg.h"
+
 
 KSplitTransactionDlg::KSplitTransactionDlg(const MyMoneyTransaction& t,
                                            const MyMoneySplit& s,
@@ -127,7 +127,7 @@ KSplitTransactionDlg::KSplitTransactionDlg(const MyMoneyTransaction& t,
 
   QSize size(width(), height());
   KConfigGroup grp = KGlobal::config()->group("SplitTransactionEditor");
-  size = grp.readEntry("Geometry", &size);
+  size = grp.readEntry("Geometry", size);
   size.setHeight(size.height()-1);
   QDialog::resize( size.expandedTo(minimumSizeHint()) );
 
@@ -171,8 +171,8 @@ int KSplitTransactionDlg::exec(void)
 
     if(rc == QDialog::Accepted) {
       if(!diffAmount().isZero()) {
-        KSplitCorrectionDlgDecl* corrDlg = new KSplitCorrectionDlgDecl(this, 0, true);
-
+        KSplitCorrectionDlgDecl* corrDlg = new KSplitCorrectionDlgDecl(this);
+        corrDlg->setModal( true );
         // add icons to buttons
         corrDlg->okBtn->setGuiItem(KStandardGuiItem::ok());
         corrDlg->cancelBtn->setGuiItem(KStandardGuiItem::cancel());
@@ -278,7 +278,7 @@ void KSplitTransactionDlg::slotClearAllSplits(void)
      i18n("You are about to delete all splits of this transaction. "
           "Do you really want to continue?"),
      i18n("KMyMoney"),
-     i18n("Continue")
+     KGuiItem( i18n("Continue") )
      );
 
   if(answer == KMessageBox::Continue) {

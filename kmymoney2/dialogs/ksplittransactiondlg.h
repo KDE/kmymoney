@@ -43,6 +43,17 @@ class kMyMoneyEdit;
 class kMyMoneyLineEdit;
 
 #include "ui_ksplittransactiondlgdecl.h"
+#include "ui_ksplitcorrectiondlg.h"
+
+
+
+class KSplitCorrectionDlgDecl : public QDialog, public Ui::KSplitCorrectionDlgDecl
+{
+public:
+  KSplitCorrectionDlgDecl( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
 
 /**
   * @author Thomas Baumgart
