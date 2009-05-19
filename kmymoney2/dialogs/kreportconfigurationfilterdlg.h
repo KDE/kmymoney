@@ -29,6 +29,8 @@
 #include "kfindtransactiondlg.h"
 #include "../mymoney/mymoneyreport.h"
 #include "../mymoney/mymoneybudget.h"
+#include "kmymoneyreportconfigtabimpl.h"
+
 
 class kMyMoneyReportConfigTab1Decl;
 class kMyMoneyReportConfigTab2Decl;

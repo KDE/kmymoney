@@ -47,7 +47,7 @@ SET(libdialogs_a_SOURCES
   krecentfileitem.cpp 
   kreconciledlg.cpp
   kreconcilelistitem.cpp 
-  #kreportconfigurationfilterdlg.cpp
+  kreportconfigurationfilterdlg.cpp
   ksecuritylisteditor.cpp 
   kselectdatabasedlg.cpp
   kselecttransactionsdlg.cpp 

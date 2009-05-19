@@ -71,10 +71,6 @@
 #include <mymoneyreport.h>
 #include <kmymoneycombo.h>
 #include <ktoolinvocation.h>
-#include "ui_kmymoneyreportconfigtab1decl.h"
-#include "ui_kmymoneyreportconfigtab2decl.h"
-#include "ui_kmymoneyreportconfigtab3decl.h"
-#include "ui_kmymoneyreportconfigtabchartdecl.h"
 
 KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
   MyMoneyReport report, QWidget *parent)
@@ -109,12 +105,14 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
     // Add new tabs
     //
 
-    m_tab1 = new kMyMoneyReportConfigTab1Decl( m_criteriaTab, "kMyMoneyReportConfigTab1" );
+    m_tab1 = new kMyMoneyReportConfigTab1Decl( m_criteriaTab);
+    m_tab1->setObjectName("kMyMoneyReportConfigTab1" );
     m_criteriaTab->insertTab( m_tab1, i18n("Report"), 0 );
 
     if ( m_initialState.reportType() == MyMoneyReport::ePivotTable )
     {
-      m_tab2 = new kMyMoneyReportConfigTab2Decl( m_criteriaTab, "kMyMoneyReportConfigTab2" );
+      m_tab2 = new kMyMoneyReportConfigTab2Decl( m_criteriaTab );
+     m_tab2->setObjectName( "kMyMoneyReportConfigTab2" );
       m_criteriaTab->insertTab( m_tab2, i18n( "Rows/Columns"), 1 );
       connect(m_tab2->m_comboRows, SIGNAL(highlighted(int)), this, SLOT(slotRowTypeChanged(int)));
       connect(m_tab2->m_comboColumns, SIGNAL(activated(int)), this, SLOT(slotColumnTypeChanged(int)));
@@ -122,7 +120,8 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
       connect(m_categoriesView, SIGNAL(stateChanged()), this, SLOT(slotUpdateCheckTransfers()));
 
 #ifdef HAVE_KDCHART
-      m_tabChart = new kMyMoneyReportConfigTabChartDecl( m_criteriaTab, "kMyMoneyReportConfigTabChart" );
+      m_tabChart = new kMyMoneyReportConfigTabChartDecl( m_criteriaTab);
+      m_tabChart->setObjectName("kMyMoneyReportConfigTabChart" );
       m_criteriaTab->insertTab( m_tabChart, i18n( "Chart"), 2 );
 #endif
     }
@@ -132,7 +131,8 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
       // rows & columns of that report.
       if ( m_initialState.rowType() < MyMoneyReport::eAccountByTopAccount )
       {
-        m_tab3 = new kMyMoneyReportConfigTab3Decl( m_criteriaTab, "kMyMoneyReportConfigTab3" );
+        m_tab3 = new kMyMoneyReportConfigTab3Decl( m_criteriaTab);
+       	m_tab3->setObjectName("kMyMoneyReportConfigTab3" );
         m_criteriaTab->insertTab( m_tab3, i18n("Rows/Columns"), 1 );
       }
     }
@@ -484,7 +484,7 @@ void KReportConfigurationFilterDlg::slotReset(void)
     m_textEdit->setText(textfilter.pattern());
     m_caseSensitive->setChecked(textfilter.caseSensitive());
     m_regExp->setChecked(!textfilter.wildcard());
-    m_textNegate->setCurrentItem(m_initialState.isInvertingText());
+    m_textNegate->setCurrentIndex(m_initialState.isInvertingText());
   }
 
   //
@@ -493,11 +493,11 @@ void KReportConfigurationFilterDlg::slotReset(void)
 
   int type;
   if ( m_initialState.firstType(type) )
-    m_typeBox->setCurrentItem(type);
+    m_typeBox->setCurrentIndex(type);
 
   int state;
   if ( m_initialState.firstState(state) )
-    m_stateBox->setCurrentItem(state);
+    m_stateBox->setCurrentIndex(state);
 
   //
   // Number Filter

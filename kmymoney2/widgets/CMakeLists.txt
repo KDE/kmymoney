@@ -30,6 +30,7 @@ SET(kmymoney_STAT_HEADERS
   selectedtransaction.h stdtransactiondownloaded.h
   stdtransactionmatched.h transactioneditorcontainer.h
   transactionform.h transaction.h transactionsortoptionimpl.h
+  kmymoneyreportconfigtabimpl.h
   )
 
 ########### Basic Widget Library (kmymoney_base) STATIC #################
@@ -61,6 +62,7 @@ SET(_uncritial_common_sources
   stdtransactionmatched.cpp 
   #transaction.cpp
   #transactionform.cpp
+  kmymoneyreportconfigtabimpl.cpp
   )
 
 # sources that contain the KMM_DESIGNER flag
