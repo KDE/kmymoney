@@ -181,9 +181,9 @@ void KFindTransactionDlg::slotReset(void)
   m_emptyPayeesButton->setChecked(false);
   selectAllItems(m_payeesView, true);
 
-  m_typeBox->setCurrentItem(MyMoneyTransactionFilter::allTypes);
-  m_stateBox->setCurrentItem(MyMoneyTransactionFilter::allStates);
-  m_validityBox->setCurrentItem(MyMoneyTransactionFilter::anyValidity);
+  m_typeBox->setCurrentIndex(MyMoneyTransactionFilter::allTypes);
+  m_stateBox->setCurrentIndex(MyMoneyTransactionFilter::allStates);
+  m_validityBox->setCurrentIndex(MyMoneyTransactionFilter::anyValidity);
 
   m_nrEdit->setEnabled(true);
   m_nrFromEdit->setEnabled(false);
