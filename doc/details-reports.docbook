@@ -29,7 +29,7 @@
 	</screenshot>
 </para>
 
-<para>@Rob: Pls update Screenshot to include new Charts section</para>
+<!--para>@Rob: Pls update Screenshot to include new Charts section</para-->
 
 <sect2><title>Income and Expenses</title>
 
@@ -213,7 +213,7 @@
 <para>On this tab, you configure how you'd like the rows and columns to be selected and organized.
 This tab presents different configuration options depending on the style of report you have selected.</para>
 
-<para>@Rob: Screenshot of rows/columns tab from an income/expense report</para>
+<!--para>@Rob: Screenshot of rows/columns tab from an income/expense report</para-->
 
 <para>For income/expense and net worth reports:</para>
 <itemizedlist>
@@ -258,7 +258,7 @@ This tab presents different configuration options depending on the style of repo
 <para>This tab allows you to configure what the report should look like when it is displayed as a chart.  
 See the <link linkend="details.reports.charts">Graphs &amp; Charts</link> section for more explanation of the charting functions.</para>
 
-<para>@Rob: Screenshot of chart tab</para>
+<!--para>@Rob: Screenshot of chart tab</para-->
 
 <itemizedlist>
 <listitem><para>Chart Type: The visual format of chart desired.</para></listitem>
@@ -310,7 +310,7 @@ Please refer to the <link linkend="details.search">documentation</link> on that 
 <sect2><title>Available Chart Types</title>
 
 <sect3><title>Line Graph</title>
-<para>@Rob: Screenshot of a simple line graph</para>
+<!--para>@Rob: Screenshot of a simple line graph</para-->
 <para>
 A line graph is the most simple form of a chart.
 There is one line for each series (usually a series is a single account or category; see below for more details on that)
@@ -324,14 +324,14 @@ If you choose &quot;Groups&quot; it will instead show one line each for Income, 
 </sect3>
 
 <sect3><title>Bar Graph</title>
-<para>@Rob: Screenshot of a simple bar graph</para>
+<!--para>@Rob: Screenshot of a simple bar graph</para-->
 <para>
 The bar graph works exactly the same as the line graph, except there is one bar for each series in each time slice.
 </para>
 </sect3>
 
 <sect3><title>Pie Chart</title>
-<para>@Rob: Screenshot of a simple pie chart</para>
+<!--para>@Rob: Screenshot of a simple pie chart</para-->
 <para>
 The pie chart is the most simple chart available.  
 It shows only one time slice, as opposed to showing the values across time.
@@ -341,7 +341,7 @@ If your report is configured to NOT convert values to the base currency, there w
 </sect3>
 
 <sect3><title>Ring Chart</title>
-<para>@Rob: Screenshot of a simple ring chart</para>
+<!--para>@Rob: Screenshot of a simple ring chart</para-->
 <para>
 The ring chart is just like a pie chart, except there is one &quot;ring&quot; for each time slice in the report.
 </para>
