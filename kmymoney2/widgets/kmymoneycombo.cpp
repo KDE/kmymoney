@@ -751,33 +751,33 @@ MyMoneySchedule::occurenceE KMyMoneyOccurenceCombo::currentItem(void) const
 KMyMoneyOccurencePeriodCombo::KMyMoneyOccurencePeriodCombo(QWidget* parent, const char* name) :
   KMyMoneyOccurenceCombo(parent, name)
 {
-  insertItem(i18n(MyMoneySchedule::occurencePeriodToString(MyMoneySchedule::OCCUR_ONCE).latin1()), MyMoneySchedule::OCCUR_ONCE);
-  insertItem(i18n(MyMoneySchedule::occurencePeriodToString(MyMoneySchedule::OCCUR_DAILY).latin1()), MyMoneySchedule::OCCUR_DAILY);
-  insertItem(i18n(MyMoneySchedule::occurencePeriodToString(MyMoneySchedule::OCCUR_WEEKLY).latin1()), MyMoneySchedule::OCCUR_WEEKLY);
-  insertItem(i18n(MyMoneySchedule::occurencePeriodToString(MyMoneySchedule::OCCUR_EVERYHALFMONTH).latin1()), MyMoneySchedule::OCCUR_EVERYHALFMONTH);
-  insertItem(i18n(MyMoneySchedule::occurencePeriodToString(MyMoneySchedule::OCCUR_MONTHLY).latin1()), MyMoneySchedule::OCCUR_MONTHLY);
-  insertItem(i18n(MyMoneySchedule::occurencePeriodToString(MyMoneySchedule::OCCUR_YEARLY).latin1()), MyMoneySchedule::OCCUR_YEARLY);
+  insertItem(i18n(MyMoneySchedule::occurencePeriodToString(MyMoneySchedule::OCCUR_ONCE).toLatin1()), MyMoneySchedule::OCCUR_ONCE);
+  insertItem(i18n(MyMoneySchedule::occurencePeriodToString(MyMoneySchedule::OCCUR_DAILY).toLatin1()), MyMoneySchedule::OCCUR_DAILY);
+  insertItem(i18n(MyMoneySchedule::occurencePeriodToString(MyMoneySchedule::OCCUR_WEEKLY).toLatin1()), MyMoneySchedule::OCCUR_WEEKLY);
+  insertItem(i18n(MyMoneySchedule::occurencePeriodToString(MyMoneySchedule::OCCUR_EVERYHALFMONTH).toLatin1()), MyMoneySchedule::OCCUR_EVERYHALFMONTH);
+  insertItem(i18n(MyMoneySchedule::occurencePeriodToString(MyMoneySchedule::OCCUR_MONTHLY).toLatin1()), MyMoneySchedule::OCCUR_MONTHLY);
+  insertItem(i18n(MyMoneySchedule::occurencePeriodToString(MyMoneySchedule::OCCUR_YEARLY).toLatin1()), MyMoneySchedule::OCCUR_YEARLY);
 }
 
 KMyMoneyFrequencyCombo::KMyMoneyFrequencyCombo(QWidget* parent, const char* name) :
   KMyMoneyOccurenceCombo(parent, name)
 {
-  insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_ONCE).latin1()), MyMoneySchedule::OCCUR_ONCE);
-  insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_DAILY).latin1()), MyMoneySchedule::OCCUR_DAILY);
-  insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_WEEKLY).latin1()), MyMoneySchedule::OCCUR_WEEKLY);
-  insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_EVERYOTHERWEEK).latin1()), MyMoneySchedule::OCCUR_EVERYOTHERWEEK);
-  insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_EVERYHALFMONTH).latin1()), MyMoneySchedule::OCCUR_EVERYHALFMONTH);
-  insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_EVERYTHREEWEEKS).latin1()), MyMoneySchedule::OCCUR_EVERYTHREEWEEKS);
-  insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_EVERYTHIRTYDAYS).latin1()), MyMoneySchedule::OCCUR_EVERYTHIRTYDAYS);
-  insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_EVERYFOURWEEKS).latin1()), MyMoneySchedule::OCCUR_EVERYFOURWEEKS);
-  insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_MONTHLY).latin1()), MyMoneySchedule::OCCUR_MONTHLY);
-  insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_EVERYEIGHTWEEKS).latin1()), MyMoneySchedule::OCCUR_EVERYEIGHTWEEKS);
-  insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_EVERYOTHERMONTH).latin1()), MyMoneySchedule::OCCUR_EVERYOTHERMONTH);
-  insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_EVERYTHREEMONTHS).latin1()), MyMoneySchedule::OCCUR_EVERYTHREEMONTHS);
-  insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_EVERYFOURMONTHS).latin1()), MyMoneySchedule::OCCUR_EVERYFOURMONTHS);
-  insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_TWICEYEARLY).latin1()), MyMoneySchedule::OCCUR_TWICEYEARLY);
-  insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_YEARLY).latin1()), MyMoneySchedule::OCCUR_YEARLY);
-  insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_EVERYOTHERYEAR).latin1()), MyMoneySchedule::OCCUR_EVERYOTHERYEAR);
+  insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_ONCE).toLatin1()), MyMoneySchedule::OCCUR_ONCE);
+  insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_DAILY).toLatin1()), MyMoneySchedule::OCCUR_DAILY);
+  insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_WEEKLY).toLatin1()), MyMoneySchedule::OCCUR_WEEKLY);
+  insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_EVERYOTHERWEEK).toLatin1()), MyMoneySchedule::OCCUR_EVERYOTHERWEEK);
+  insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_EVERYHALFMONTH).toLatin1()), MyMoneySchedule::OCCUR_EVERYHALFMONTH);
+  insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_EVERYTHREEWEEKS).toLatin1()), MyMoneySchedule::OCCUR_EVERYTHREEWEEKS);
+  insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_EVERYTHIRTYDAYS).toLatin1()), MyMoneySchedule::OCCUR_EVERYTHIRTYDAYS);
+  insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_EVERYFOURWEEKS).toLatin1()), MyMoneySchedule::OCCUR_EVERYFOURWEEKS);
+  insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_MONTHLY).toLatin1()), MyMoneySchedule::OCCUR_MONTHLY);
+  insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_EVERYEIGHTWEEKS).toLatin1()), MyMoneySchedule::OCCUR_EVERYEIGHTWEEKS);
+  insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_EVERYOTHERMONTH).toLatin1()), MyMoneySchedule::OCCUR_EVERYOTHERMONTH);
+  insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_EVERYTHREEMONTHS).toLatin1()), MyMoneySchedule::OCCUR_EVERYTHREEMONTHS);
+  insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_EVERYFOURMONTHS).toLatin1()), MyMoneySchedule::OCCUR_EVERYFOURMONTHS);
+  insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_TWICEYEARLY).toLatin1()), MyMoneySchedule::OCCUR_TWICEYEARLY);
+  insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_YEARLY).toLatin1()), MyMoneySchedule::OCCUR_YEARLY);
+  insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_EVERYOTHERYEAR).toLatin1()), MyMoneySchedule::OCCUR_EVERYOTHERYEAR);
 }
 
 int KMyMoneyFrequencyCombo::daysBetweenEvents(void) const

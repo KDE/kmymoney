@@ -186,9 +186,9 @@ bool KOnlineBankingSetupWizard::finishFiPage(void)
     m_textDetails->append(QString("<p>Details for %1:</p>").arg(m_bankName->text()));
 
     memset(&info, 0, sizeof(OfxFiServiceInfo));
-    strncpy(info.fid, m_fid->text().latin1(), OFX_FID_LENGTH-1);
+    strncpy(info.fid, m_fid->text().toLatin1(), OFX_FID_LENGTH-1);
     strncpy(info.org, m_bankName->text().toLatin1(), OFX_ORG_LENGTH-1);
-    strncpy(info.url, m_url->url().path().latin1(), OFX_URL_LENGTH-1);
+    strncpy(info.url, m_url->url().path().toLatin1(), OFX_URL_LENGTH-1);
     info.accountlist = 1;
     info.statements = 1;
     info.billpay = 1;
@@ -263,7 +263,7 @@ bool KOnlineBankingSetupWizard::finishLoginPage(void)
     ofx_set_account_cb(ctx, ofxAccountCallback, this);
     ofx_set_status_cb(ctx, ofxStatusCallback, this);
     // Add resulting accounts to the account list
-    libofx_proc_file(ctx, filename.path().latin1(), AUTODETECT);
+    libofx_proc_file(ctx, filename.path().toLatin1(), AUTODETECT);
     libofx_free_context(ctx);
 
     ++m_it_info;
