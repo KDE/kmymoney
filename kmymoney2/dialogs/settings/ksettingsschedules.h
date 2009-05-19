@@ -43,7 +43,7 @@ class KSettingsSchedules : public KSettingsSchedulesDecl
   Q_OBJECT
 
 public:
-  KSettingsSchedules(QWidget* parent = 0, const char* name = 0);
+  KSettingsSchedules(QWidget* parent = 0);
   ~KSettingsSchedules();
 };
 #endif

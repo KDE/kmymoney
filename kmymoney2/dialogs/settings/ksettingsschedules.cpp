@@ -25,8 +25,8 @@
 
 #include "ksettingsschedules.h"
 
-KSettingsSchedules::KSettingsSchedules(QWidget* parent, const char* name) :
-  KSettingsSchedulesDecl(parent, name)
+KSettingsSchedules::KSettingsSchedules(QWidget* parent) :
+  KSettingsSchedulesDecl(parent)
 {
 }
 

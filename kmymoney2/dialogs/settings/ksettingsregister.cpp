@@ -26,8 +26,6 @@
 // Project Includes
 
 #include "ksettingsregister.h"
-#include <transactionsortoption.h>
-
 KSettingsRegister::KSettingsRegister(QWidget* parent) :
   KSettingsRegisterDecl(parent)
 {

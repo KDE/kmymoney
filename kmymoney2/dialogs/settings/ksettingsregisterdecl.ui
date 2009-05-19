@@ -452,6 +452,11 @@ Selecting 0% will list all transactions.</string>
    <extends>QSpinBox</extends>
    <header>knuminput.h</header>
   </customwidget>
+    <customwidget>
+      <class>TransactionSortOption</class>
+      <extends>QWidget</extends>
+      <header location="locale">transactionsortoptionimpl.h</header>
+    </customwidget>
       
 	  <customwidget>
       <class>KComboBox</class>
