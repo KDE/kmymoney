@@ -52,9 +52,11 @@ class Q3ListViewItem;
 class KSortOptionDlg : public QDialog, public Ui::KSortOptionDlg
 {
 public:
-  KSortOptionDlg( QWidget *parent ) : QDialog( parent ) {
-    setupUi( this );
-  }
+    KSortOptionDlg( QWidget *parent );
+    void init();
+    void setSortOption(const QString& option, const QString& def);
+    QString sortOption() const;
+    void hideDefaultButton();
 };
 
 

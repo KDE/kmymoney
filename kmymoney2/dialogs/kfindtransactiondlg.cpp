@@ -61,6 +61,46 @@
 #include <ktoolinvocation.h>
 
 
+KSortOptionDlg::KSortOptionDlg( QWidget *parent )
+    :QDialog( parent )
+{
+    setupUi( this );
+    init();
+}
+
+void KSortOptionDlg::init()
+{
+  m_okButton->setGuiItem(KStandardGuiItem::ok());
+  m_cancelButton->setGuiItem(KStandardGuiItem::cancel());
+  m_helpButton->setGuiItem(KStandardGuiItem::help());
+}
+
+void KSortOptionDlg::setSortOption(const QString& option, const QString& def)
+{
+  if(option.isEmpty()) {
+    m_sortOption->setSettings(def);
+    m_useDefault->setChecked(true);
+  } else {
+    m_sortOption->setSettings(option);
+    m_useDefault->setChecked(false);
+  }
+}
+
+QString KSortOptionDlg::sortOption(void) const
+{
+  QString rc;
+  if(!m_useDefault->isChecked()) {
+    rc = m_sortOption->settings();
+  }
+  return rc;
+}
+
+void KSortOptionDlg::hideDefaultButton(void)
+{
+  m_useDefault->hide();
+}
+
+
 KFindTransactionDlg::KFindTransactionDlg(QWidget *parent) :
   KFindTransactionDlgDecl(parent),
   m_needReload(false)
