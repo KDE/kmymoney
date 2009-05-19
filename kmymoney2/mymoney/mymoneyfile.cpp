@@ -1143,7 +1143,7 @@ void MyMoneyFile::transactionList(QLinkedList<QPair<MyMoneyTransaction, MyMoneyS
   m_storage->transactionList(list, filter);
 }
 
-void MyMoneyFile::transactionList(Q3ValueList<MyMoneyTransaction>& list, MyMoneyTransactionFilter& filter) const
+void MyMoneyFile::transactionList(QLinkedList<MyMoneyTransaction>& list, MyMoneyTransactionFilter& filter) const
 {
   checkStorage();
   m_storage->transactionList(list, filter);
