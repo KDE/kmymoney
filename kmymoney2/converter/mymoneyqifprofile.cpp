@@ -382,7 +382,8 @@ void MyMoneyQifProfile::setVoidMark(const QString& txt)
 QString MyMoneyQifProfile::accountDelimiter(void) const
 {
   QString rc;
-
+#warning "port to kde4"
+#if 0
   switch(m_accountDelimiter[0]) {
     case ' ':
       rc = "  ";
@@ -391,11 +392,14 @@ QString MyMoneyQifProfile::accountDelimiter(void) const
       rc = "[]";
       break;
   }
+#endif  
   return rc;
 }
 
 QString MyMoneyQifProfile::date(const QDate& datein) const
 {
+#warning "port to kde4"	
+#if 0	
   const char* format = m_dateFormat.toLatin1();
   QString buffer;
   QChar delim;
@@ -452,6 +456,8 @@ QString MyMoneyQifProfile::date(const QDate& datein) const
     }
   }
   return buffer;
+#endif
+  return QString();
 }
 
 const QDate MyMoneyQifProfile::date(const QString& datein) const
@@ -459,7 +465,7 @@ const QDate MyMoneyQifProfile::date(const QString& datein) const
   // in case we don't know the format, we return an invalid date
   if(d->m_partPos.count() != 3)
     return QDate();
-
+#if 0
   Q3ValueVector<QString> scannedParts(3);
   d->dissectDate(scannedParts, datein);
 
@@ -491,7 +497,8 @@ const QDate MyMoneyQifProfile::date(const QString& datein) const
       yr += 1900;
   }
   return QDate(yr, mon, day);
-
+#endif
+  return QDate();
 #if 0
   QString scannedDelim[2];
   QString formatParts[3];
@@ -671,7 +678,8 @@ QString MyMoneyQifProfile::twoDigitYear(const QChar delim, int yr) const
 {
   QChar realDelim = delim;
   QString buffer;
-
+#warning "port to kde4"
+#if 0
   if(delim) {
     if((m_apostropheFormat == "1900-1949" && yr <= 1949)
     || (m_apostropheFormat == "1900-1999" && yr <= 1999)
@@ -687,6 +695,7 @@ QString MyMoneyQifProfile::twoDigitYear(const QChar delim, int yr) const
     buffer += "0";
 
   buffer += QString::number(yr);
+#endif
   return buffer;
 }
 
@@ -695,7 +704,8 @@ QString MyMoneyQifProfile::value(const QChar& def, const MyMoneyMoney& valuein) 
   unsigned char _decimalSeparator;
   unsigned char _thousandsSeparator;
   QString res;
-
+#warning "port to kde4"
+#if 0
   _decimalSeparator = MyMoneyMoney::decimalSeparator();
   _thousandsSeparator = MyMoneyMoney::thousandSeparator();
   MyMoneyMoney::signPosition _signPosition = MyMoneyMoney::negativeMonetarySignPosition();
@@ -709,16 +719,18 @@ QString MyMoneyQifProfile::value(const QChar& def, const MyMoneyMoney& valuein) 
   MyMoneyMoney::setDecimalSeparator(_decimalSeparator);
   MyMoneyMoney::setThousandSeparator(_thousandsSeparator);
   MyMoneyMoney::setNegativeMonetarySignPosition(_signPosition);
-
+#endif
   return res;
 }
 
 MyMoneyMoney MyMoneyQifProfile::value(const QChar& def, const QString& valuein) const
 {
+	
   unsigned char _decimalSeparator;
   unsigned char _thousandsSeparator;
   MyMoneyMoney res;
-
+#warning "port to kde4"
+#if 0
   _decimalSeparator = MyMoneyMoney::decimalSeparator();
   _thousandsSeparator = MyMoneyMoney::thousandSeparator();
   MyMoneyMoney::signPosition _signPosition = MyMoneyMoney::negativeMonetarySignPosition();
@@ -732,7 +744,7 @@ MyMoneyMoney MyMoneyQifProfile::value(const QChar& def, const QString& valuein) 
   MyMoneyMoney::setDecimalSeparator(_decimalSeparator);
   MyMoneyMoney::setThousandSeparator(_thousandsSeparator);
   MyMoneyMoney::setNegativeMonetarySignPosition(_signPosition);
-
+#endif
   return res;
 }
 

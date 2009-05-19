@@ -695,13 +695,13 @@ void MyMoneyQifReader::extractSplits(Q3ValueList<qSplit>& listqSplits) const
   QStringList::ConstIterator it;
 
   for(it = m_qifEntry.constBegin(); it != m_qifEntry.constEnd(); ++it) {
-    if((*it)[0] == "S") {
+    if((*it)[0] == 'S') {
       qSplit q;
       q.m_strCategoryName = (*it++).mid(1);       //   'S'
-      if((*it)[0] == "E") {
+      if((*it)[0] == 'E') {
         q.m_strMemo =  (*it++).mid(1);//           'E'
       }
-      if((*it)[0] == "$") {
+      if((*it)[0] == '$') {
         q.m_amount =  (*it).mid(1);//              '$'
       }
       listqSplits += q;

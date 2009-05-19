@@ -166,9 +166,13 @@ bool GncObject::isDataElement (const QString &elName, const QXmlAttributes& elAt
 
 // return the variable string, decoded if required
 QString GncObject::var (int i) const {
-  return (pMain->m_decoder == 0
+#warning "port to kde4"
+#if 0
+      	return (pMain->m_decoder == 0
       ? *(m_v.at(i))
       : pMain->m_decoder->toUnicode (*(m_v.at(i))));
+#endif
+	return QString();
 }
 
 void GncObject::adjustHideFactor () {
@@ -2152,7 +2156,7 @@ QString MyMoneyGncReader::createOrphanAccount (const QString& gncName) {
   m_storage->addAccount (acc);
   // assign the gnucash id as the key into the map to find our id
   m_mapIds[gncName.utf8()] = acc.id();
-  postMessage (QString("OR"), 1, acc.name().data());
+  postMessage (QString("OR"), 1, acc.name().latin1());
   return (acc.id());
 }
 //****************************** incrDate *********************************************

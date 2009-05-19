@@ -192,10 +192,13 @@ bool WebPriceQuote::launchNative( const QString& _symbol, const QString& _id, co
 
 void WebPriceQuote::removeTempFile(const QString& tmpFile)
 {
+#warning "port to kde4"	
+#if 0	
   if(tmpFile == m_tmpFile) {
     unlink(tmpFile);
     m_tmpFile = QString();
   }
+#endif  
 }
 
 bool WebPriceQuote::download(const KUrl& u, QString & target, QWidget* window)
@@ -216,7 +219,8 @@ bool WebPriceQuote::download(const KUrl& u, QString & target, QWidget* window)
 
   // the following code taken and adapted from KIO::NetAccess::filecopyInternal()
   bJobOK = true; // success unless further error occurs
-
+#warning "port to kde4"
+#if 0
   KIO::Scheduler::checkSlaveOnHold(true);
   KIO::Job * job = KIO::file_copy( u, dest, -1, KIO::Overwrite | KIO::HideProgressInfo );
   job->setWindow (window);
@@ -225,6 +229,7 @@ bool WebPriceQuote::download(const KUrl& u, QString & target, QWidget* window)
            this, SLOT( slotResult (KIO::Job *) ) );
 
   enter_loop();
+#endif
   return bJobOK;
 
 }
@@ -828,12 +833,16 @@ void FinanceQuoteProcess::slotProcessExited(K3Process*)
 }
 
 void FinanceQuoteProcess::launch (const QString& scriptPath) {
-  clearArguments();
+#warning "port to kde4"
+#if 0
+      	clearArguments();
+  
   arguments.append(Q3CString("perl"));
-  arguments.append (scriptPath);
+  arguments.append(scriptPath);
   arguments.append (Q3CString("-l"));
   if (!start(K3Process::NotifyOnExit, K3Process::Stdout)) qFatal ("Unable to start FQ script");
   return;
+#endif
 }
 
 QStringList FinanceQuoteProcess::getSourceList() {
@@ -923,7 +932,8 @@ QDate MyMoneyDateFormat::convertString(const QString& _in, bool _strict, unsigne
   //
   // Convert the scanned parts into actual date components
   //
-
+#warning "port to kde4"
+#if 0
   unsigned day = 0, month = 0, year = 0;
   bool ok;
   QRegExp digitrex("(\\d+)");
@@ -949,8 +959,9 @@ QDate MyMoneyDateFormat::convertString(const QString& _in, bool _strict, unsigne
         unsigned i = 1;
         while ( i <= 12 )
         {
+#warning "port it to kde4"		
           if(KGlobal::locale()->calendar()->monthName(i, 2000).toLower() == *it_scanned
-          || KGlobal::locale()->calendar()->monthName(i, 2000, KLocale::shortname).toLower() == *it_scanned)
+          || KGlobal::locale()->calendar()->monthName(i, 2000/*, KLocale::ShortDate*/).toLower() == *it_scanned)
             month = i;
           ++i;
         }
@@ -997,12 +1008,13 @@ QDate MyMoneyDateFormat::convertString(const QString& _in, bool _strict, unsigne
     ++it_scanned;
     ++it_format;
   }
-
   QDate result(year,month,day);
   if ( ! result.isValid() )
     throw new MYMONEYEXCEPTION(QString("Invalid date (yr%1 mo%2 dy%3)").arg(year).arg(month).arg(day));
 
   return result;
+#endif  
+  return QDate();
 }
 
 //

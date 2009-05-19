@@ -1,7 +1,7 @@
 SET (libconverter_a_SOURCES 
-	#mymoneygncreader.cpp 
-	#mymoneyqifprofile.cpp 
-	#mymoneyqifreader.cpp
+	mymoneygncreader.cpp 
+	mymoneyqifprofile.cpp 
+	mymoneyqifreader.cpp
 
   	mymoneyqifwriter.cpp 
 	mymoneystatementreader.cpp 

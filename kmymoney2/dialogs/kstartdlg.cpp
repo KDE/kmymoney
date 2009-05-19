@@ -90,10 +90,10 @@ void KStartDlg::setPage_Documents()
   recentMainFrame = addPage( i18n("Open"), i18n("Open a KMyMoney document"), DesktopIcon("fileopen"));
   Q3VBoxLayout *mainLayout = new Q3VBoxLayout( recentMainFrame );
 
-  kurlrequest = new KUrlRequester( recentMainFrame, "kurlrequest" );
+  kurlrequest = new KUrlRequester( recentMainFrame );
 
   //allow user to select either a .kmy file, or any generic file.
-  kurlrequest->fileDialog()->setFilter( i18n("%1|KMyMoney files (*.kmy)\n" "%2|All files (*.*)").arg("*.kmy").arg("*.*") );
+  kurlrequest->fileDialog()->setFilter( i18n("%1|KMyMoney files (*.kmy)\n" "%2|All files (*.*)","*.kmy","*.*") );
   kurlrequest->fileDialog()->setMode(KFile::File || KFile::ExistingOnly);
   kurlrequest->fileDialog()->setUrl(KUrl(kmymoney2->readLastUsedDir()));//kurlrequest->fileDialog()->setURL(KUrl(KGlobalSettings::documentPath()));
   mainLayout->addWidget( kurlrequest );
@@ -153,7 +153,7 @@ void KStartDlg::readConfig()
 
   KConfigGroup grp = config->group("Start Dialog");
   QSize *defaultSize = new QSize(400,300);
-  this->resize( grp.readEntry("Geometry", defaultSize ) );
+  this->resize( grp.readEntry("Geometry", *defaultSize ) );
 
   // Restore the last page viewed
   // default to the recent files page if no entry exists but files have been found
@@ -228,7 +228,7 @@ void KStartDlg::slotRecentSelectionChanged(Q3IconViewItem* item)
 
   isnewfile = false;
   isopenfile = true;
-  kurlrequest->setURL( kitem->fileURL() );
+  kurlrequest->setUrl( kitem->fileURL() );
 }
 
 void KStartDlg::slotAboutToShowPage(QWidget* page)
