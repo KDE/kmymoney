@@ -49,6 +49,7 @@
 #include <QLabel>
 #include <Q3PopupMenu>
 //#include <Q3ValueList>
+#include <QProgressBar>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -295,7 +296,8 @@ void KMyMoney2App::initDynamicMenus(void)
   Q3PopupMenu *menu = dynamic_cast<Q3PopupMenu*>(w);
   if(menu) {
     d->m_moveToAccountSelector = new kMyMoneyAccountSelector(menu, 0, 0, false);
-    menu->insertItem(d->m_moveToAccountSelector);
+    //FIXME: Port to KDE4
+    //menu->insertItem(d->m_moveToAccountSelector);
     connect(d->m_moveToAccountSelector, SIGNAL(itemSelected(const QString&)), this, SLOT(slotMoveToAccount(const QString&)));
     connect(this, SIGNAL(accountSelected(const MyMoneyAccount&)), this, SLOT(slotUpdateMoveToAccountMenu()));
     connect(this, SIGNAL(transactionsSelected(const KMyMoneyRegister::SelectedTransactions&)), this, SLOT(slotUpdateMoveToAccountMenu()));
@@ -305,7 +307,7 @@ void KMyMoney2App::initDynamicMenus(void)
 
 void KMyMoney2App::initActions(void)
 {
-  KAction* p;
+  //KAction* p;
 
   // *************
   // The File menu
@@ -318,7 +320,7 @@ void KMyMoney2App::initActions(void)
   actionCollection()->addAction( KStandardAction::Open, this, SLOT(slotFileOpen()) );
 
   //KStandardAction::openRecent(this, SLOT(slotFileOpenRecent(const KUrl&)), actionCollection());
-  actionCollection()->addAction( KStandardAction::OpenRecent, this, SLOT(slotFileOpenRecent(const KUrl&)) );
+  m_recentFiles* = KStandardAction::openRecent(this, SLOT(slotFileOpenRecent(const KUrl&)), this);
 
   //KStandardAction::save(this, SLOT(slotFileSave()), actionCollection());
   actionCollection()->addAction( KStandardAction::Save, this, SLOT(slotFileSave()) );
@@ -978,37 +980,40 @@ void KMyMoney2App::dumpActions(void) const
   }
 }
 
-KAction* KMyMoney2App::action(const QString& actionName) const
+QAction* KMyMoney2App::action(const QString& actionName) const
 {
-  static KShortcut shortcut("");
-  static KAction dummyAction(QString("Dummy"), QString(), shortcut, static_cast<const QObject*>(this), 0, static_cast<KActionCollection*>(0), "");
+  //static KShortcut shortcut("");
+  //FIXME: Port to KDE4
+  //static QAction dummyAction(QString("Dummy"), static_cast<QObject*>(this));
 
-  KAction* p = actionCollection()->action(actionName.toLatin1());
+  //FIXME: Port to KDE4
+  QAction* p = actionCollection()->action(QString(actionName.toLatin1()));
   if(p)
     return p;
 
   qWarning("Action with name '%s' not found!", actionName.toLatin1());
-  return &dummyAction;
+  return p;
 }
 
 KToggleAction* KMyMoney2App::toggleAction(const QString& actionName) const
 {
-  static KShortcut shortcut("");
-  static KToggleAction dummyAction(QString("Dummy"), QString(), shortcut, static_cast<const QObject*>(this), 0, static_cast<KActionCollection*>(0), "");
+  //FIXME: Port to KDE4
+  //static KShortcut shortcut("");
+  //static KToggleAction dummyAction(QString("Dummy"), QString(), shortcut, static_cast<const QObject*>(this), 0, static_cast<KActionCollection*>(0), "");
 
-  KAction* q = actionCollection()->action(actionName.toLatin1());
+  QAction* q = actionCollection()->action(QString(actionName.toLatin1()));
 
   if(q) {
     KToggleAction* p = dynamic_cast<KToggleAction*>(q);
     if(!p) {
       qWarning("Action '%s' is not of type KToggleAction", actionName.toLatin1());
-      p = &dummyAction;
+      //p = &dummyAction;
     }
     return p;
   }
 
   qWarning("Action with name '%s' not found!", actionName.toLatin1());
-  return &dummyAction;
+  return dynamic_cast<KToggleAction*>(q);
 }
 
 
@@ -1021,11 +1026,12 @@ void KMyMoney2App::initStatusBar(void)
   ready();
 
   // Initialization of progress bar taken from KDevelop ;-)
-  progressBar = new KProgress(statusBar());
-  progressBar->setFrameStyle(Q3Frame::NoFrame | Q3Frame::Plain);
-  progressBar->setMargin(0);
-  progressBar->setLineWidth(0);
-  progressBar->setBackgroundMode(QWidget::PaletteBackground);
+  progressBar = new QProgressBar(statusBar());
+  //FIXME: Port to KDE4
+  //progressBar->setFrameStyle(Q3Frame::NoFrame | Q3Frame::Plain);
+  //progressBar->setMargin(0);
+  //progressBar->setLineWidth(0);
+  //progressBar->setBackgroundMode(QWidget::PaletteBackground);
   statusBar()->addWidget(progressBar);
   progressBar->setFixedHeight(progressBar->sizeHint().height() - 8);
 
@@ -1037,10 +1043,12 @@ void KMyMoney2App::saveOptions(void)
 {
   KConfigGroup grp = config->group("General Options");
   config->writeEntry("Geometry", size());
+  //FIXME: Port to KDE4
   // config->writeEntry("Show Statusbar", toggleAction("options_show_statusbar")->isChecked());
   // toolBar("mainToolBar")->saveSettings(config, "mainToolBar");
 
-  dynamic_cast<KRecentFilesAction*>(action("file_open_recent"))->saveEntries(config,"Recent Files");
+  //dynamic_cast<KRecentFilesAction*>(action("file_open_recent"))->saveEntries(config,"Recent Files");
+
 }
 
 
@@ -1051,22 +1059,23 @@ void KMyMoney2App::readOptions(void)
   toggleAction("view_hide_reconciled_transactions")->setChecked(KMyMoneyGlobalSettings::hideReconciledTransactions());
   toggleAction("view_hide_unused_categories")->setChecked(KMyMoneyGlobalSettings::hideUnusedCategory());
 
-  // initialize the recent file list
-  KRecentFilesAction *p = dynamic_cast<KRecentFilesAction*>(action("file_open_recent"));
-  if(p)
-    p->loadEntries(config,"Recent Files");
+  //FIXME: Port to KDE4
+// initialize the recent file list
+  //KRecentFilesAction *p = dynamic_cast<KRecentFilesAction*>(action("file_open_recent"));
+  //if(p)
+  //  p->loadEntries(config,"Recent Files");
 
-  QSize size=grp.readEntry("Geometry");
-  if(!size.isEmpty())
-  {
-    resize(size);
-  }
+  //QSize size=grp.readEntry("Geometry");
+  //if(!size.isEmpty())
+  //{
+  //  resize(size);
+  //}
 
   // Startdialog is written in the settings dialog
   m_startDialog = grp.readEntry("StartDialog", true);
 
-  KConfigGroup grp = config->group("Schedule Options");
-  m_bCheckSchedules = grp.readEntry("CheckSchedules", true);
+  KConfigGroup schedGrp = config->group("Schedule Options");
+  m_bCheckSchedules = schedGrp.readEntry("CheckSchedules", true);
 }
 
 void KMyMoney2App::resizeEvent(QResizeEvent* ev)
@@ -1435,8 +1444,8 @@ void KMyMoney2App::slotFileOpenRecent(const KUrl& url)
             m_fileName = dburl;
             KRecentFilesAction *p = dynamic_cast<KRecentFilesAction*>(action("file_open_recent"));
             if(p)
-              p->addUrl(dburl.prettyUrl(0, KUrl::StripFileProtocol));
-            writeLastUsedFile(dburl.prettyUrl(0, KUrl::StripFileProtocol));
+              p->addUrl(dburl.pathOrUrl());
+            writeLastUsedFile(dburl.pathOrUrl());
           } else {
             m_fileName = KUrl(); // imported files have no filename
           }
@@ -1453,10 +1462,10 @@ void KMyMoney2App::slotFileOpenRecent(const KUrl& url)
       }
     } else {
       slotFileClose();
-      KMessageBox::sorry(this, QString("<p>")+i18n("<b>%1</b> is either an invalid filename or the file does not exist. You can open another file or create a new one.").arg(url.prettyUrl(0, KUrl::StripFileProtocol)), i18n("File not found"));
+      KMessageBox::sorry(this, QString("<p>")+i18n("<b>%1</b> is either an invalid filename or the file does not exist. You can open another file or create a new one.").arg(url.pathOrUrl()), i18n("File not found"));
     }
   } else {
-    KMessageBox::sorry(this, QString("<p>")+i18n("File <b>%1</b> is already opened in another instance of KMyMoney").arg(url.prettyUrl(0, KUrl::StripFileProtocol)), i18n("Duplicate open"));
+    KMessageBox::sorry(this, QString("<p>")+i18n("File <b>%1</b> is already opened in another instance of KMyMoney").arg(url.pathOrUrl()), i18n("Duplicate open"));
   }
 }
 
@@ -1586,7 +1595,7 @@ bool KMyMoney2App::slotFileSaveAs(void)
 
     KUrl newURL = dlg.selectedURL();
     if (!newURL.isEmpty()) {
-      QString newName = newURL.prettyUrl(0, KUrl::StripFileProtocol);
+      QString newName = newURL.pathOrUrl();
 
   // end of copy
 
@@ -1682,8 +1691,8 @@ bool KMyMoney2App::slotSaveAsDatabase(void)
   if (rc) {
     KRecentFilesAction *p = dynamic_cast<KRecentFilesAction*>(action("file_open_recent"));
     if(p)
-      p->addUrl(url.prettyUrl(0, KUrl::StripFileProtocol));
-    writeLastUsedFile(url.prettyUrl(0, KUrl::StripFileProtocol));
+      p->addUrl(url.pathOrUrl());
+    writeLastUsedFile(url.pathOrUrl());
   }
   m_autoSaveTimer->stop();
   updateCaption();
@@ -2253,7 +2262,7 @@ bool KMyMoney2App::okToWriteFile(const KUrl& url)
   bool reallySaveFile = true;
 
   if(KIO::NetAccess::exists(url, true, this)) {
-    if(KMessageBox::warningYesNo(this, QString("<qt>")+i18n("The file <b>%1</b> already exists. Do you really want to override it?").arg(url.prettyUrl(0, KUrl::StripFileProtocol))+QString("</qt>"), i18n("File already exists")) != KMessageBox::Yes)
+    if(KMessageBox::warningYesNo(this, QString("<qt>")+i18n("The file <b>%1</b> already exists. Do you really want to override it?").arg(url.pathOrUrl())+QString("</qt>"), i18n("File already exists")) != KMessageBox::Yes)
       reallySaveFile = false;
   }
   return reallySaveFile;

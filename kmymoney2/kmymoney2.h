@@ -27,6 +27,7 @@
 #include <QLabel>
 #include <Q3CString>
 #include <QResizeEvent>
+#include <QProgressBar>
 class QTimer;
 class QLabel;
 
@@ -39,6 +40,7 @@ class QLabel;
 #include <k3process.h>
 #include <kurl.h>
 #include <kfile.h>
+#include <krecentfilesaction.h>
 
 class KComboBox;
 class KPushButton;
@@ -1164,15 +1166,15 @@ signals:
 
 public:
   /**
-    * This method retrieves a pointer to a KAction object from actionCollection().
+    * This method retrieves a pointer to a QAction object from actionCollection().
     * If the action with the name @p actionName is not found, a pointer to
-    * a static non-configured KAction object is returned and a warning is
+    * a static non-configured QAction object is returned and a warning is
     * printed to stderr.
     *
     * @param actionName name of the action to be retrieved
-    * @return pointer to KAction object (or derivative)
+    * @return pointer to QAction object (or derivative)
     */
-  KAction* action(const QString& actionName) const;
+  QAction* action(const QString& actionName) const;
 
   /**
     * This method is implemented for convenience. It returns a dynamic_cast-ed
@@ -1241,7 +1243,7 @@ private:
   bool m_startDialog;
   QString m_mountpoint;
 
-  KProgress* progressBar;
+  QProgressBar* progressBar;
 
   QString m_statusMsg;
 
@@ -1292,6 +1294,8 @@ private:
   QStringList           m_additionalGpgKeys;
   QLabel*               m_additionalKeyLabel;
   KPushButton*          m_additionalKeyButton;
+  
+  KRecentFilesAction*    m_recentFiles;
 };
 
 extern  KMyMoney2App *kmymoney2;
