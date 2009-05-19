@@ -50,6 +50,7 @@
 #include <Q3PopupMenu>
 //#include <Q3ValueList>
 #include <QProgressBar>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -320,7 +321,7 @@ void KMyMoney2App::initActions(void)
   actionCollection()->addAction( KStandardAction::Open, this, SLOT(slotFileOpen()) );
 
   //KStandardAction::openRecent(this, SLOT(slotFileOpenRecent(const KUrl&)), actionCollection());
-  m_recentFiles* = KStandardAction::openRecent(this, SLOT(slotFileOpenRecent(const KUrl&)), this);
+  m_recentFiles = KStandardAction::openRecent(this, SLOT(slotFileOpenRecent(const KUrl&)), this);
 
   //KStandardAction::save(this, SLOT(slotFileSave()), actionCollection());
   actionCollection()->addAction( KStandardAction::Save, this, SLOT(slotFileSave()) );
@@ -1334,11 +1335,11 @@ KUrl KMyMoney2App::selectFile(const QString& title, const QString& _path, const 
   if(path.isEmpty())
     path = KGlobalSettings::documentPath();
 
-  KFileDialog* dialog = new KFileDialog(path, mask, this, title, true);
+  KFileDialog* dialog = new KFileDialog(KUrl(path), mask, this);
   dialog->setMode(mode);
 
   if(dialog->exec() == QDialog::Accepted) {
-    url = dialog->selectedURL();
+    url = dialog->selectedUrl();
   }
   delete dialog;
 
@@ -1350,13 +1351,13 @@ void KMyMoney2App::slotFileOpen(void)
 {
   KMSTATUS(i18n("Open a file."));
 
-  KFileDialog* dialog = new KFileDialog(KGlobalSettings::documentPath(),
-                            i18n("%1|KMyMoney files\n%2|All files (*.*)").arg("*.kmy *.xml").arg("*"),
-                            this, i18n("Open File..."), true);
+  KFileDialog* dialog = new KFileDialog(KUrl(KGlobalSettings::documentPath()),
+                            i18n("*.kmy *.xml|KMyMoney files\n *|All files (*.*)"),
+                            this);
   dialog->setMode(KFile::File | KFile::ExistingOnly);
 
   if(dialog->exec() == QDialog::Accepted) {
-    slotFileOpenRecent(dialog->selectedURL());
+    slotFileOpenRecent(dialog->selectedUrl());
   }
   delete dialog;
 }
@@ -1368,7 +1369,7 @@ void KMyMoney2App::slotOpenDatabase(void)
   dialog.setMode(QIODevice::ReadWrite);
 
   if(dialog.exec() == QDialog::Accepted) {
-    slotFileOpenRecent(dialog.selectedURL());
+    slotFileOpenRecent(dialog.selectedUrl());
   }
 }
 
@@ -1435,7 +1436,7 @@ void KMyMoney2App::slotFileOpenRecent(const KUrl& url)
         KSelectDatabaseDlg dialog(dburl);
         dialog.setMode(QIODevice::ReadWrite);
 
-        if(dialog.exec() == QDialog::Accepted) dburl = dialog.selectedURL();
+        if(dialog.exec() == QDialog::Accepted) dburl = dialog.selectedUrl();
       }
       slotFileClose();
       if(!myMoneyView->fileOpen()) {
@@ -1593,7 +1594,7 @@ bool KMyMoney2App::slotFileSaveAs(void)
 
   if(dlg.exec() == QDialog::Accepted) {
 
-    KUrl newURL = dlg.selectedURL();
+    KUrl newURL = dlg.selectedUrl();
     if (!newURL.isEmpty()) {
       QString newName = newURL.pathOrUrl();
 
@@ -1676,7 +1677,7 @@ bool KMyMoney2App::slotSaveAsDatabase(void)
   KUrl url = oldUrl;
 
   while (oldUrl == url && dialog.exec() == QDialog::Accepted) {
-    url = dialog.selectedURL();
+    url = dialog.selectedUrl();
     // If the protocol is SQL for the old and new, and the hostname and database names match
     // Let the user know that the current database cannot be saved on top of itself.
     if (url.protocol() == "sql" && oldUrl.protocol() == "sql"
@@ -2104,7 +2105,7 @@ void KMyMoney2App::slotGncImport(void)
 //      return;
 
     // call the importer
-    myMoneyView->readFile(dialog->selectedURL());
+    myMoneyView->readFile(dialog->selectedUrl());
     // imported files don't have a name
     m_fileName = KUrl();
 
@@ -2143,7 +2144,7 @@ void KMyMoney2App::slotStatementImport(void)
 
   if(dialog->exec() == QDialog::Accepted)
   {
-    result = slotStatementImport(dialog->selectedURL().path());
+    result = slotStatementImport(dialog->selectedUrl().path());
 
 /*    QFile f( dialog->selectedURL().path() );
     f.open( QIODevice::ReadOnly );

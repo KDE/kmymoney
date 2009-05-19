@@ -580,9 +580,9 @@ public:
     */
   const QLinkedList<MyMoneyTransaction> transactionList(MyMoneyTransactionFilter& filter) const;
 
-  void transactionList(Q3ValueList<MyMoneyTransaction>& list, MyMoneyTransactionFilter& filter) const;
+  void transactionList(QLinkedList<MyMoneyTransaction>& list, MyMoneyTransactionFilter& filter) const;
 
-  void transactionList(Q3ValueList<QPair<MyMoneyTransaction, MyMoneySplit> >& list, MyMoneyTransactionFilter& filter) const;
+  void transactionList(QLinkedList<QPair<MyMoneyTransaction, MyMoneySplit> >& list, MyMoneyTransactionFilter& filter) const;
 
   /**
     * This method is used to remove a transaction from the transaction
