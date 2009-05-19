@@ -64,7 +64,7 @@ public:
   virtual ~TabBar() {}
 
   SignalEmissionE setSignalEmission(SignalEmissionE type);
-
+#if 0
   void copyTabs(const TabBar* otabbar);
 
   void addTab(QTab* tab, int id);
@@ -96,7 +96,7 @@ protected slots:
 
 signals:
   void tabSelected(int id);
-
+#endif
 private:
   SignalEmissionE    m_signalType;
   

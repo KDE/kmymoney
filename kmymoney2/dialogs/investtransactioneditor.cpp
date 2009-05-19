@@ -350,7 +350,7 @@ int InvestTransactionEditor::editSplits(const QString& categoryWidgetName, const
 
     MyMoneyTransaction transaction;
     transaction.setCommodity(m_currency.id());
-    if(splits.count() == 0 && category->selectedItem()) {
+    if(splits.count() == 0 && category->selectedItem().isEmpty()) {
       MyMoneySplit s;
       s.setAccountId(category->selectedItem());
       s.setShares(amount->value());

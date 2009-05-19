@@ -7,8 +7,7 @@ ADD_SUBDIRECTORY( settings )
 
 SET(libdialogs_a_SOURCES
   investactivities.cpp 
-  #investtransactioneditor.cpp
-
+  investtransactioneditor.cpp
   kaccountselectdlg.cpp 
   kbackupdlg.cpp 
   #kbalancechartdlg.cpp
@@ -17,10 +16,11 @@ SET(libdialogs_a_SOURCES
   kchooseimportexportdlg.cpp 
   kconfirmmanualenterdlg.cpp
   kcsvprogressdlg.cpp 
-  kcurrencycalculator.cpp kcurrencyeditdlg.cpp
+  kcurrencycalculator.cpp 
+  kcurrencyeditdlg.cpp
   keditequityentrydlg.cpp 
   keditloanwizard.cpp 
-  #keditscheduledlg.cpp
+  keditscheduledlg.cpp
   kendingbalancedlg.cpp 
   kenterscheduledlg.cpp
   kequitypriceupdatedlg.cpp 

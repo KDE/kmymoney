@@ -50,6 +50,7 @@
 #include <kmymoneycombo.h>
 #include <kguiutils.h>
 #include <kmymoneyutils.h>
+#include <KToolInvocation>
 
 #include "keditscheduledlg.h"
 #include "../kmymoney2.h"
@@ -77,11 +78,12 @@ KEditScheduleDlg::KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget *par
 
   d->m_requiredFields = new kMandatoryFieldGroup (this);
   d->m_requiredFields->setOkButton(buttonOk); // button to be enabled when all fields present
-
+#warning "port to kde4"
+#if 0
   // make sure, we have a tabbar with the form
   // insert it after the horizontal line
   m_paymentInformationLayout->insertWidget(2, m_form->tabBar(m_form->parentWidget()));
-
+#endif
   // we never need to see the register
   m_register->hide();
 
@@ -125,13 +127,13 @@ KEditScheduleDlg::KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget *par
 
   switch(d->m_schedule.weekendOption()) {
     case MyMoneySchedule::MoveNothing:
-      m_weekendOptionEdit->setCurrentItem(0);
+      m_weekendOptionEdit->setCurrentIndex(0);
       break;
     case MyMoneySchedule::MoveFriday:
-      m_weekendOptionEdit->setCurrentItem(1);
+      m_weekendOptionEdit->setCurrentIndex(1);
       break;
     case MyMoneySchedule::MoveMonday:
-      m_weekendOptionEdit->setCurrentItem(2);
+      m_weekendOptionEdit->setCurrentIndex(2);
       break;
   }
   m_estimateEdit->setChecked(!d->m_schedule.isFixed());
@@ -270,14 +272,15 @@ TransactionEditor* KEditScheduleDlg::startEdit(void)
     d->m_tabOrderWidgets.append(m_frequencyEdit);
     d->m_tabOrderWidgets.append(m_paymentMethodEdit);
     d->m_tabOrderWidgets.append(m_form);
-
+#warning "port to kde4"
+#if 0
     // install event filter in all taborder widgets
     QWidget* w;
     for(w = d->m_tabOrderWidgets.first(); w; w = d->m_tabOrderWidgets.next()) {
       w->installEventFilter(this);
       w->installEventFilter(editor);
     }
-
+#endif
     // connect the postdate modification signal to our update routine
     kMyMoneyDateInput* dateEdit = dynamic_cast<kMyMoneyDateInput*>(editor->haveWidget("postdate"));
     if(dateEdit)
@@ -347,6 +350,8 @@ const MyMoneySchedule& KEditScheduleDlg::schedule(void) const
     }
 
     d->m_schedule.setType(MyMoneySchedule::TYPE_BILL);
+#warning "port to kde4"
+#if 0
     KMyMoneyTransactionForm::TabBar* tabbar = dynamic_cast<KMyMoneyTransactionForm::TabBar*>(d->m_editor->haveWidget("tabbar"));
     if(tabbar) {
       switch(static_cast<KMyMoneyRegister::Action>(tabbar->currentTab())) {
@@ -364,7 +369,7 @@ const MyMoneySchedule& KEditScheduleDlg::schedule(void) const
     } else {
       qDebug("No tabbar found in KEditScheduleDlg::schedule(). Defaulting type to BILL");
     }
-
+#endif
     d->m_schedule.setAutoEnter(m_autoEnterEdit->isChecked());
     d->m_schedule.setPaymentType(static_cast<MyMoneySchedule::paymentTypeE>(m_paymentMethodEdit->currentItem()));
     if(m_endSeriesEdit->isEnabled() && m_endSeriesEdit->isChecked()) {
@@ -415,7 +420,8 @@ QDate KEditScheduleDlg::adjustDate(const QDate& _date) const
 bool KEditScheduleDlg::focusNextPrevChild(bool next)
 {
   bool  rc = false;
-
+#warning "port to kde4"
+#if 0
   // qDebug("KEditScheduleDlg::focusNextPrevChild(editmode=%s)", m_inEditMode ? "true" : "false");
   QWidget *w = 0;
   QWidget *currentWidget;
@@ -444,7 +450,7 @@ bool KEditScheduleDlg::focusNextPrevChild(bool next)
     }
     w = next ? d->m_tabOrderWidgets.next() : d->m_tabOrderWidgets.prev();
   } while(w != currentWidget);
-
+#endif
   return rc;
 }
 
