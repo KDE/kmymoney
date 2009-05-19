@@ -34,7 +34,7 @@ class Q3VBoxLayout;
 // KDE Includes
 
 #include <kmenu.h>
-#include <kjanuswidget.h>
+#include <KPageWidget>
 
 #include <kurl.h>
 
@@ -75,7 +75,7 @@ class KForecastView;
   *
   * @short Handles the view of the MyMoneyFile.
   */
-class KMyMoneyView : public KJanusWidget
+class KMyMoneyView : public KPageWidget
 {
   Q_OBJECT
 

@@ -125,7 +125,7 @@
 
 
 KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
-  : KJanusWidget(parent, name, KJanusWidget::IconList),
+  : KPageWidget(parent, name, KJanusWidget::IconList),
   // m_bankRightClick(false),
   m_inConstructor(true),
   m_fileOpen(false),

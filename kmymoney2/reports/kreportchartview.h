@@ -22,9 +22,7 @@
 #define KREPORTCHARTVIEW_H
 
 
-#include "../../config.h"
 #ifdef HAVE_KDCHART
-
 // ----------------------------------------------------------------------------
 // QT Includes
 

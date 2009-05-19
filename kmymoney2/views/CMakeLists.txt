@@ -3,9 +3,10 @@ SET(libviews_a_SOURCES
 	#kaccountsview.cpp
 	kbudgetview.cpp
 	kcategoriesview.cpp
-	kforecastview.cpp
+	#kforecastview.cpp
+
 	#kgloballedgerview.cpp
-	#khomeview.cpp
+	khomeview.cpp
    kinstitutionsview.cpp
   kinvestmentlistitem.cpp
   kinvestmentview.cpp
