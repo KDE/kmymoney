@@ -156,7 +156,7 @@ SET(libwidgets_a_UI
 kde4_add_ui_files(widgets_ui_srcs ${libwidgets_a_UI})
 ADD_CUSTOM_TARGET(generate_widgets_ui_srcs DEPENDS ${widgets_ui_srcs})
 
-ADD_LIBRARY(widgets STATIC
+KDE4_ADD_LIBRARY(widgets STATIC
   ${libwidgets_a_SOURCES}
   ${widgets_ui_srcs}
   ${_uncritial_common_sources}

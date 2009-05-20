@@ -72,7 +72,7 @@ void RegisterSearchLine::init(Register *reg)
   d->reg = reg;
   connect(this, SIGNAL(textChanged(const QString&)), this, SLOT(queueSearch(const QString&)));
 
-  QLabel* label = new QLabel(i18n("label for status combo", "Stat&us"), parentWidget());
+  QLabel* label = new QLabel(i18nc("label for status combo", "Stat&us"), parentWidget());
   d->combo = new QComboBox(parentWidget());
   // don't change the order of the following lines unless updating
   // the case labels in RegisterSearchLine::itemMatches() at the same time

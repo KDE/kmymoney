@@ -168,13 +168,13 @@ void KMyMoneyCategory::focusInEvent(QFocusEvent *ev)
 
 void KMyMoneyCategory::setSplitTransaction(void)
 {
-  setCurrentText(i18n("Split transaction (category replacement)", "Split transaction"));
+  setCurrentText(i18nc("Split transaction (category replacement)", "Split transaction"));
   setSuppressObjectCreation(true);
 }
 
 bool KMyMoneyCategory::isSplitTransaction(void) const
 {
-  return currentText() == i18n("Split transaction (category replacement)", "Split transaction");
+  return currentText() == i18nc("Split transaction (category replacement)", "Split transaction");
 }
 
 void KMyMoneyCategory::setEnabled(bool enable)
