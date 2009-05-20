@@ -32,7 +32,7 @@
 #include <q3header.h>
 //Added by qt3to4:
 #include <Q3ValueList>
-
+#include <QToolButton>
 #define KLISTVIEWSEARCHLINE_ALLVISIBLECOLUMNS_ID 2004
 
 class K3ListViewSearchLine::KListViewSearchLinePrivate

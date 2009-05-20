@@ -1198,7 +1198,7 @@ private:
   Private* d;
 
   /** the configuration object of the application */
-  KConfig *config;
+  KSharedConfigPtr config;
 
   QMap<QString,KMyMoneyPlugin::ImporterPlugin*> m_importerPlugins;
 
@@ -1294,7 +1294,7 @@ private:
   QStringList           m_additionalGpgKeys;
   QLabel*               m_additionalKeyLabel;
   KPushButton*          m_additionalKeyButton;
-  
+
   KRecentFilesAction*    m_recentFiles;
 };
 

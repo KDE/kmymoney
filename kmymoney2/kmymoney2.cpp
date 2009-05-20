@@ -1371,7 +1371,8 @@ void KMyMoney2App::slotOpenDatabase(void)
   dialog.setMode(QIODevice::ReadWrite);
 
   if(dialog.exec() == QDialog::Accepted) {
-    slotFileOpenRecent(dialog.selectedUrl());
+#warning "port to kde4"
+      //slotFileOpenRecent(dialog.selectedUrl());
   }
 }
 
@@ -1437,8 +1438,8 @@ void KMyMoney2App::slotFileOpenRecent(const KUrl& url)
       if ((dburl.queryItem("secure") == "yes") && dburl.pass().isEmpty()) {
         KSelectDatabaseDlg dialog(dburl);
         dialog.setMode(QIODevice::ReadWrite);
-
-        if(dialog.exec() == QDialog::Accepted) dburl = dialog.selectedUrl();
+#warning "port to kde4"
+        //if(dialog.exec() == QDialog::Accepted) dburl = dialog.selectedUrl();
       }
       slotFileClose();
       if(!myMoneyView->fileOpen()) {
@@ -1679,7 +1680,8 @@ bool KMyMoney2App::slotSaveAsDatabase(void)
   KUrl url = oldUrl;
 
   while (oldUrl == url && dialog.exec() == QDialog::Accepted) {
-    url = dialog.selectedUrl();
+#warning "port to kde4"
+      //url = dialog.selectedUrl();
     // If the protocol is SQL for the old and new, and the hostname and database names match
     // Let the user know that the current database cannot be saved on top of itself.
     if (url.protocol() == "sql" && oldUrl.protocol() == "sql"
@@ -2279,6 +2281,8 @@ bool KMyMoney2App::okToWriteFile(const KUrl& url)
 
 void KMyMoney2App::slotSettings(void)
 {
+#warning "port to kde4"
+#if 0
   // if we already have an instance of the settings dialog, then use it
   if(KConfigDialog::showDialog("KMyMoney-Settings"))
     return;
@@ -2316,6 +2320,7 @@ void KMyMoney2App::slotSettings(void)
   connect(dlg, SIGNAL(defaultClicked()), pluginsPage, SLOT(slotDefaultsPlugins()));
 
   dlg->show();
+#endif
 }
 
 void KMyMoney2App::slotUpdateConfiguration(void)
@@ -2584,7 +2589,7 @@ void KMyMoney2App::slotShowNextView(void)
 void KMyMoney2App::slotQifProfileEditor(void)
 {
     MyMoneyQifProfileEditor* editor = new MyMoneyQifProfileEditor(true, this );
-    editior->setObjectName( "QIF Profile Editor");
+    editor->setObjectName( "QIF Profile Editor");
 
 
   editor->exec();
