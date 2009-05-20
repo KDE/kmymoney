@@ -185,7 +185,7 @@ public:
 };
 
 KMyMoney2App::KMyMoney2App(QWidget * /*parent*/ , const char* name) :
-  KMainWindow(0, name),
+  KXmlGuiWindow(0),
   //DCOPObject("kmymoney2app"),
   d(new Private),
   myMoneyView(0),
@@ -197,6 +197,7 @@ KMyMoney2App::KMyMoney2App(QWidget * /*parent*/ , const char* name) :
 {
   ::timetrace("start kmymoney2app constructor");
   // preset the pointer because we need it during the course of this constructor
+  setObjectName(name);
   kmymoney2 = this;
   config = KGlobal::config();
 
@@ -1042,9 +1043,10 @@ void KMyMoney2App::initStatusBar(void)
 
 void KMyMoney2App::saveOptions(void)
 {
-  KConfigGroup grp = config->group("General Options");
-  config->writeEntry("Geometry", size());
   //FIXME: Port to KDE4
+  //KConfigGroup grp = config->group("General Options");
+  //config->writeEntry("Geometry", size());
+
   // config->writeEntry("Show Statusbar", toggleAction("options_show_statusbar")->isChecked());
   // toolBar("mainToolBar")->saveSettings(config, "mainToolBar");
 
@@ -1352,7 +1354,7 @@ void KMyMoney2App::slotFileOpen(void)
   KMSTATUS(i18n("Open a file."));
 
   KFileDialog* dialog = new KFileDialog(KUrl(KGlobalSettings::documentPath()),
-                            i18n("*.kmy *.xml|KMyMoney files\n *|All files (*.*)"),
+                            i18n("*.kmy *.xml|KMyMoney files\n *.*|All files (*.*)"),
                             this);
   dialog->setMode(KFile::File | KFile::ExistingOnly);
 
@@ -1582,8 +1584,8 @@ bool KMyMoney2App::slotFileSaveAs(void)
                    QString("%1|%2\n").arg("*.kmy").arg(i18nc("KMyMoney (Filefilter)", "KMyMoney files")) +
                    QString("%1|%2\n").arg("*.xml").arg(i18nc("XML (Filefilter)", "XML files")) +
                    QString("%1|%2\n").arg("*.anon.xml").arg(i18nc("Anonymous (Filefilter)", "Anonymous files")) +
-                   QString("%1|%2\n").arg("*").arg(i18nc("All files")),
-                   this, "filedialog", true, vbox);
+                   QString("%1|%2\n").arg("*").arg(i18nc("All files (Filefilter)", "All files")),
+                   this);
   connect(&dlg, SIGNAL(filterChanged(const QString&)), this, SLOT(slotFileSaveAsFilterChanged(const QString&)));
 
   if ( !specialDir )
@@ -1763,14 +1765,19 @@ void KMyMoney2App::slotFileQuit(void)
 
   KMainWindow* w = 0;
 
-  if(memberList) {
 
-    for(w=memberList->first(); w!=0; w=memberList->next()) {
+  QList<KMainWindow*> memberList = KMainWindow::memberList();
+  if(!memberList.isEmpty()) {
+
+    QList<KMainWindow*>::const_iterator w_it = memberList.begin();
+    for(; w_it != memberList.end(); ++w_it) {
       // only close the window if the closeEvent is accepted. If the user presses Cancel on the saveModified() dialog,
 
       // the window and the application stay open.
-      if(!w->close())
+      if(!(*w_it)->close()) {
+        w = (*w_it);
         break;
+      }
     }
     // We will only quit if all windows were processed and not cancelled
     if(w == 0)
@@ -1840,7 +1847,7 @@ void KMyMoney2App::slotStatusProgressBar(int current, int total)
     m_nextUpdate = 0;
 
   } else if(total != 0) {                 // init
-    progressBar->setTotalSteps(total);
+    progressBar->setMaximum(total);
     progressBar->show();
 
     // make sure, we don't waste too much time for updateing the screen.
@@ -1856,8 +1863,9 @@ void KMyMoney2App::slotStatusProgressBar(int current, int total)
 
   } else {                                // update
     if(current > m_nextUpdate) {
-      progressBar->setProgress(current);
-      QApplication::eventLoop()->processEvents(QEventLoop::ExcludeUserInput, 10);
+      progressBar->setValue(current);
+      //QApplication::eventLoop()->processEvents(QEventLoop::ExcludeUserInput, 10);
+      QCoreApplication::processEvents(QEventLoop::ExcludeUserInput, 10);
       m_nextUpdate += m_progressUpdate;
     }
   }
@@ -2094,9 +2102,9 @@ void KMyMoney2App::slotGncImport(void)
 
   KMSTATUS(i18n("Importing a Gnucash file."));
 
-  KFileDialog* dialog = new KFileDialog(KGlobalSettings::documentPath(),
-                            i18n("%1|Gnucash files\n%2|All files (*.*)").arg("*").arg("*"),
-                            this, i18n("Import Gnucash file..."), true);
+  KFileDialog* dialog = new KFileDialog(KUrl(KGlobalSettings::documentPath()),
+                            i18n(" * |Gnucash files\n * |All files (*.*)"),
+                            this);
   dialog->setMode(KFile::File | KFile::ExistingOnly);
 
   if(dialog->exec() == QDialog::Accepted) {
@@ -2137,9 +2145,9 @@ void KMyMoney2App::slotStatementImport(void)
   bool result = false;
   KMSTATUS(i18n("Importing an XML Statement."));
 
-  KFileDialog* dialog = new KFileDialog(KGlobalSettings::documentPath(),
-                            i18n("%1|XML files\n%2|All files (*.*)").arg("*.xml").arg("*.*"),
-                            this, i18n("Import XML Statement..."), true);
+  KFileDialog* dialog = new KFileDialog(KUrl(KGlobalSettings::documentPath()),
+                            i18n("*.xml|XML files\n *.*|All files (*.*)"),
+                            this);
   dialog->setMode(KFile::File | KFile::ExistingOnly);
 
   if(dialog->exec() == QDialog::Accepted)
@@ -2276,8 +2284,7 @@ void KMyMoney2App::slotSettings(void)
     return;
 
   // otherwise, we have to create it
-  KConfigDialog* dlg = new KConfigDialog(this, "KMyMoney-Settings", KMyMoneyGlobalSettings::self(),
-    KDialogBase::IconList, KDialogBase::Default | KDialogBase::Ok | KDialogBase::Cancel | KDialogBase::Help, KDialogBase::Ok, true);
+  KConfigDialog* dlg = new KConfigDialog(this, "KMyMoney-Settings", KMyMoneyGlobalSettings::self(), KDialog::Default | KDialog::Ok | KDialog::Cancel | KDialog::Help, KDialog::Ok, true);
 
   // create the pages ...
   KSettingsGeneral* generalPage = new KSettingsGeneral();
@@ -2292,16 +2299,17 @@ void KMyMoney2App::slotSettings(void)
   KSettingsPlugins* pluginsPage = new KSettingsPlugins();
 
   // ... and add them to the dialog
-  dlg->addPage(generalPage, i18n("General"), "misc");
-  dlg->addPage(registerPage, i18n("Register"), "ledger");
-  dlg->addPage(homePage, i18n("Home"), "home");
-  dlg->addPage(schedulesPage, i18n("Scheduled\ntransactions"), "schedule");
-  dlg->addPage(encryptionPage, i18n("Encryption"), "kgpg");
-  dlg->addPage(colorsPage, i18n("Colors"), "colorscm");
-  dlg->addPage(fontsPage, i18n("Fonts"), "font");
-  dlg->addPage(onlineQuotesPage, i18n("Online Quotes"), "network_local");
-  dlg->addPage(forecastPage, i18n("Forecast"), "forcast");
-  dlg->addPage(pluginsPage, i18n("Plugins"), "connect_no");
+  //FIXME: Port to KDE4
+//   dlg->addPage(generalPage, QString("misc"), QString(), i18n("General"), true);
+//   dlg->addPage(registerPage, i18n("Register"), "ledger");
+//   dlg->addPage(homePage, i18n("Home"), "home");
+//   dlg->addPage(schedulesPage, i18n("Scheduled\ntransactions"), "schedule");
+//   dlg->addPage(encryptionPage, i18n("Encryption"), "kgpg");
+//   dlg->addPage(colorsPage, i18n("Colors"), "colorscm");
+//   dlg->addPage(fontsPage, i18n("Fonts"), "font");
+//   dlg->addPage(onlineQuotesPage, i18n("Online Quotes"), "network_local");
+//   dlg->addPage(forecastPage, i18n("Forecast"), "forcast");
+//   dlg->addPage(pluginsPage, i18n("Plugins"), "connect_no");
 
   connect(dlg, SIGNAL(settingsChanged()), this, SLOT(slotUpdateConfiguration()));
   connect(dlg, SIGNAL(okClicked()), pluginsPage, SLOT(slotSavePlugins()));
@@ -2444,7 +2452,7 @@ void KMyMoney2App::slotProcessExited(void)
         m_backupResult = 0;
         QFile f(backupfile);
         if (f.exists()) {
-          int answer = KMessageBox::warningContinueCancel(this, i18n("Backup file for today exists on that device.  Replace ?"), i18n("Backup"), i18n("&Replace"));
+          int answer = KMessageBox::warningContinueCancel(this, i18n("Backup file for today exists on that device.  Replace ?"), i18n("Backup"), KGuiItem(i18n("&Replace")));
           if (answer == KMessageBox::Cancel) {
             m_backupResult = 1;
 
@@ -2586,7 +2594,7 @@ void KMyMoney2App::slotQifProfileEditor(void)
 
 void KMyMoney2App::slotToolsStartKCalc(void)
 {
-  KRun::runCommand("kcalc");
+  KRun::runCommand("kcalc", this);
 }
 
 void KMyMoney2App::slotFindTransaction(void)
@@ -4072,7 +4080,7 @@ void KMyMoney2App::slotScheduleSkip(void)
       if(!schedule.isFinished()) {
         if(schedule.occurence() != MyMoneySchedule::OCCUR_ONCE) {
           QDate next = schedule.nextDueDate();
-          if(!schedule.isFinished() && (KMessageBox::questionYesNo(this, QString("<qt>")+i18n("Do you really want to skip the <b>%1</b> transaction scheduled for <b>%2</b>?").arg(schedule.name(), KGlobal::locale()->formatDate(next, true))+QString("</qt>"))) == KMessageBox::Yes) {
+          if(!schedule.isFinished() && (KMessageBox::questionYesNo(this, QString("<qt>")+i18n("Do you really want to skip the <b>%1</b> transaction scheduled for <b>%2</b>?").arg(schedule.name(), KGlobal::locale()->formatDateTime(QDateTime(next), KLocale::ShortDate, false))+QString("</qt>"))) == KMessageBox::Yes) {
             MyMoneyFileTransaction ft;
             schedule.setLastPayment(next);
             schedule.setNextDueDate(schedule.nextPayment(next));
@@ -4609,7 +4617,7 @@ void KMyMoney2App::slotBudgetCopy(void)
   if(m_selectedBudgets.size() == 1) {
     MyMoneyFileTransaction ft;
     try {
-      MyMoneyBudget budget = m_selectedBudgets[0];
+      MyMoneyBudget budget = m_selectedBudgets.first();
       budget.clearId();
       budget.setName(i18n("Copy of %1").arg(budget.name()));
 
@@ -4666,7 +4674,7 @@ void KMyMoney2App::slotBudgetForecast(void)
   if(m_selectedBudgets.size() == 1) {
     MyMoneyFileTransaction ft;
     try {
-      MyMoneyBudget budget = m_selectedBudgets[0];
+      MyMoneyBudget budget = m_selectedBudgets.first();
       bool calcBudget = budget.getaccounts().count() == 0;
       if(!calcBudget) {
         if(KMessageBox::warningContinueCancel(0, i18n("The current budget already contains data. Continuing will replace all current values of this budget."), i18n("Warning")) == KMessageBox::Continue)
@@ -4768,12 +4776,10 @@ void KMyMoney2App::slotTransactionsDelete(void)
     return;
   if(m_selectedTransactions.warnLevel() == 1) {
     if(KMessageBox::warningContinueCancel(0,
-        i18n(
-            "At least one split of the selected transactions has been reconciled. "
-            "Do you wish to delete the transactions anyway?"
-            ),
+        i18n("At least one split of the selected transactions has been reconciled. "
+            "Do you wish to delete the transactions anyway?"),
             i18n("Transaction already reconciled"), KStandardGuiItem::cont(),
-                "DeleteReconciledTransaction") == KMessageBox::Cancel)
+                KGuiItem("DeleteReconciledTransaction")) == KMessageBox::Cancel)
                  return;
   }
   QString msg;
@@ -4991,7 +4997,7 @@ void KMyMoney2App::slotTransactionsCancelOrEnter(bool& okToSelect)
         // okToSelect is preset to true if a cancel of the dialog is useful and false if it is not
         int rc;
         if(okToSelect == true) {
-          rc = KMessageBox::warningYesNoCancel(0, QString("<p>")+i18n("Do you really want to cancel editing this transaction without saving it?<p>- <b>Yes</b> cancels editing the transaction<br>- <b>No</b> saves the transaction prior to cancelling and<br>- <b>Cancel</b> returns to the transaction editor.<p>You can also select an option to save the transaction automatically when e.g. selecting another transaction."), i18n("Cancel transaction edit"), KStandardGuiItem::yes(), KStandardGuiItem::no(), dontShowAgain);
+          rc = KMessageBox::warningYesNoCancel(0, QString("<p>")+i18n("Do you really want to cancel editing this transaction without saving it?<p>- <b>Yes</b> cancels editing the transaction<br>- <b>No</b> saves the transaction prior to cancelling and<br>- <b>Cancel</b> returns to the transaction editor.<p>You can also select an option to save the transaction automatically when e.g. selecting another transaction."), i18n("Cancel transaction edit"), KStandardGuiItem::yes(), KStandardGuiItem::no(), KGuiItem(dontShowAgain));
 
         } else {
           rc = KMessageBox::warningYesNo(0, QString("<p>")+i18n("Do you really want to cancel editing this transaction without saving it?<p>- <b>Yes</b> cancels editing the transaction<br>- <b>No</b> saves the transaction prior to cancelling.<p>You can also select an option to save the transaction automatically when e.g. selecting another transaction."), i18n("Cancel transaction edit"), KStandardGuiItem::yes(), KStandardGuiItem::no(), dontShowAgain);
@@ -5457,7 +5463,7 @@ void KMyMoney2App::updateCaption(bool skipActions)
 {
   QString caption;
 
-  caption = m_fileName.filename(false);
+  caption = m_fileName.fileName(false);
 
   if(caption.isEmpty() && myMoneyView && myMoneyView->fileOpen())
     caption = i18n("Untitled");
@@ -5478,8 +5484,13 @@ void KMyMoney2App::updateCaption(bool skipActions)
 #if KMM_DEBUG
   caption += QString(" (%1 x %2)").arg(width()).arg(height());
 #endif
+//FIXME: Port to KDE4
+  if(modified) {
+    caption = KDialog::makeStandardCaption(caption, false, KDialog::ModifiedCaption);
+  } else {
+    caption = KDialog::makeStandardCaption(caption, false, KDialog::NoCaptionFlags);
+  }
 
-  caption = KDialog::makeStandardCaption(caption, false, modified);
   if(caption.length() > 0)
     caption += " - ";
   caption += "KMyMoney";
@@ -5585,7 +5596,7 @@ void KMyMoney2App::slotUpdateActions(void)
   action("transaction_delete")->setEnabled(false);
   action("transaction_match")->setEnabled(false);
   action("transaction_match")->setText(i18nc("Button text for match transaction", "Match"));
-  action("transaction_match")->setIcon("connect_creating");
+  action("transaction_match")->setIcon(QIcon("connect_creating"));
 
   action("transaction_accept")->setEnabled(false);
   action("transaction_duplicate")->setEnabled(false);
@@ -5701,7 +5712,7 @@ void KMyMoney2App::slotUpdateActions(void)
       if(matchedCount != 0) {
         action("transaction_match")->setEnabled(true);
         action("transaction_match")->setText(i18nc("Button text for unmatch transaction", "Unmatch"));
-        action("transaction_match")->setIcon("stop");
+        action("transaction_match")->setIcon(QIcon("stop"));
       }
 
       if(m_selectedTransactions.count() > 1) {
@@ -6038,7 +6049,7 @@ void KMyMoney2App::slotDataChanged(void)
 
 void KMyMoney2App::slotCurrencyDialog(void)
 {
-  KCurrencyEditDlg dlg(this, "Currency Editor");
+  KCurrencyEditDlg dlg(this);
   connect(&dlg, SIGNAL(selectObject(const MyMoneySecurity&)), this, SLOT(slotSelectCurrency(const MyMoneySecurity&)));
   connect(&dlg, SIGNAL(openContextMenu(const MyMoneySecurity&)), this, SLOT(slotShowCurrencyContextMenu()));
   connect(this, SIGNAL(currencyRename()), &dlg, SLOT(slotStartRename()));
@@ -6053,7 +6064,7 @@ void KMyMoney2App::slotCurrencyDialog(void)
 
 void KMyMoney2App::slotPriceDialog(void)
 {
-  KMyMoneyPriceDlg dlg(this, "Price Editor");
+  KMyMoneyPriceDlg dlg(this);
   dlg.exec();
 }
 
@@ -6067,7 +6078,7 @@ void KMyMoney2App::slotFileConsitencyCheck(void)
     msg = MyMoneyFile::instance()->consistencyCheck();
     ft.commit();
   } catch(MyMoneyException *e) {
-    msg = i18n("Consistency check failed: %1").arg(e->what());
+    msg.append(i18n("Consistency check failed: %1",e->what()));
     delete e;
   }
 
@@ -6182,17 +6193,18 @@ const QString KMyMoney2App::filename(void) const
 const QLinkedList<Q3CString> KMyMoney2App::instanceList(void) const
 {
   QLinkedList<Q3CString> list;
-  QLinkedList<Q3CString> apps = kapp->dcopClient()->registeredApplications();
-  QLinkedList<Q3CString>::ConstIterator it;
-
-  for(it = apps.begin(); it != apps.end(); ++it) {
-    // skip over myself
-    if((*it) == kapp->dcopClient()->appId())
-      continue;
-    if((*it).find("kmymoney-") == 0) {
-      list += (*it);
-    }
-  }
+  //FIXME: Port to KDE4
+//   QLinkedList<Q3CString> apps = kapp->dcopClient()->registeredApplications();
+//   QLinkedList<Q3CString>::ConstIterator it;
+// 
+//   for(it = apps.begin(); it != apps.end(); ++it) {
+//     // skip over myself
+//     if((*it) == kapp->dcopClient()->appId())
+//       continue;
+//     if((*it).find("kmymoney-") == 0) {
+//       list += (*it);
+//     }
+//   }
   return list;
 }
 
@@ -6262,7 +6274,7 @@ void KMyMoney2App::slotEnableMessages(void)
 
 void KMyMoney2App::slotSecurityEditor(void)
 {
-  KSecurityListEditor dlg(this, "KSecurityListEditor");
+  KSecurityListEditor dlg(this);
   dlg.exec();
 }
 
