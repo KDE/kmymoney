@@ -38,8 +38,8 @@
 
 #define RECOVER_KEY_ID  "0xD2B08440"
 
-kMyMoneyGPGConfig::kMyMoneyGPGConfig(QWidget *parent, const char *name )
-  : kMyMoneyGPGConfigDecl(parent, name),
+kMyMoneyGPGConfig::kMyMoneyGPGConfig(QWidget *parent)
+  : kMyMoneyGPGConfigDecl(parent),
   m_checkCount(0)
 {
   m_idGroup->setEnabled(KGPGFile::GPGAvailable());
@@ -64,10 +64,10 @@ void kMyMoneyGPGConfig::resetConfig(void)
 void kMyMoneyGPGConfig::readConfig(void)
 {
   KSharedConfigPtr config = KGlobal::config();
-  config->setGroup("General Options");
-  m_resetUseEncryption = config->readBoolEntry("WriteDataEncrypted", false);
-  m_resetRecover = config->readBoolEntry("EncryptRecover", false);
-  m_resetUserId = config->readEntry("GPG-Recipient");
+  KConfigGroup grp = config->group("General Options");
+  m_resetUseEncryption = grp.readEntry("WriteDataEncrypted", false);
+  m_resetRecover = grp.readEntry("EncryptRecover", false);
+  m_resetUserId = grp.readEntry("GPG-Recipient");
 
   resetConfig();
 }
@@ -75,10 +75,10 @@ void kMyMoneyGPGConfig::readConfig(void)
 void kMyMoneyGPGConfig::writeConfig(void)
 {
   KSharedConfigPtr config = KGlobal::config();
-  config->setGroup("General Options");
-  config->writeEntry("WriteDataEncrypted", m_useEncryption->isChecked());
-  config->writeEntry("EncryptRecover", m_recover->isChecked());
-  config->writeEntry("GPG-Recipient", m_userId->text());
+  KConfigGroup grp = config->group("General Options");
+  grp.writeEntry("WriteDataEncrypted", m_useEncryption->isChecked());
+  grp.writeEntry("EncryptRecover", m_recover->isChecked());
+  grp.writeEntry("GPG-Recipient", m_userId->text());
 }
 
 void kMyMoneyGPGConfig::slotIdChanged(const QString& /*txt*/)
@@ -127,4 +127,3 @@ void kMyMoneyGPGConfig::slotStatusChanged(bool state)
   }
 }
 
-#include "kmymoneygpgconfig.moc"

@@ -27,7 +27,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "../widgets/kmymoneygpgconfigdecl.h"
+#include "ui_kmymoneygpgconfigdecl.h"
 
 /**
   * @author Thomas Baumgart
@@ -37,11 +37,19 @@
   * This class provides the necessary user interface to
   * setup the parameters required for data encryption
   */
+
+class kMyMoneyGPGConfigDecl : public QWidget, public Ui::kMyMoneyGPGConfigDecl
+{
+public:
+  kMyMoneyGPGConfigDecl( QWidget *parent ) : QWidget( parent ) {
+    setupUi( this );
+  }
+};
 class kMyMoneyGPGConfig : public kMyMoneyGPGConfigDecl
 {
   Q_OBJECT
 public:
-  kMyMoneyGPGConfig(QWidget* parent, const char *name);
+  kMyMoneyGPGConfig(QWidget* parent);
   virtual ~kMyMoneyGPGConfig() {}
 
   void writeConfig(void);

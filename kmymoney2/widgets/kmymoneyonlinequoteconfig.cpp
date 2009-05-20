@@ -40,8 +40,8 @@
 #include "kmymoneyonlinequoteconfig.h"
 #include "../converter/webpricequote.h"
 
-kMyMoneyOnlineQuoteConfig::kMyMoneyOnlineQuoteConfig(QWidget *parent, const char *name )
-  : kMyMoneyOnlineQuoteConfigDecl(parent, name)
+kMyMoneyOnlineQuoteConfig::kMyMoneyOnlineQuoteConfig(QWidget *parent )
+  : kMyMoneyOnlineQuoteConfigDecl(parent)
 {
 #if 1
   QStringList groups = WebPriceQuote::quoteSources();
@@ -90,7 +90,7 @@ kMyMoneyOnlineQuoteConfig::kMyMoneyOnlineQuoteConfig(QWidget *parent, const char
 void kMyMoneyOnlineQuoteConfig::loadList(const bool updateResetList)
 {
   QStringList groups = WebPriceQuote::quoteSources();
-  
+
   if(updateResetList)
     m_resetList.clear();
   m_quoteSourceList->clear();
@@ -213,4 +213,3 @@ void kMyMoneyOnlineQuoteConfig::slotEntryRenamed(Q3ListViewItem* item, const QSt
   m_newButton->setEnabled(m_quoteSourceList->findItem(i18n("New Quote Source"), 0) == 0);
 }
 
-#include "kmymoneyonlinequoteconfig.moc"

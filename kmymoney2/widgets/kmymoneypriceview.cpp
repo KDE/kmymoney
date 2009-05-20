@@ -69,8 +69,8 @@ KMyMoneyPriceItem::KMyMoneyPriceItem(K3ListView *view, const MyMoneyPrice& pr) :
 {
   MyMoneySecurity from, to;
   KSharedConfigPtr kconfig = KGlobal::config();
-  kconfig->setGroup("General Options");
-  int prec = kconfig->readNumEntry("PricePrecision", 4);
+  KConfigGroup grp =  kconfig->group("General Options");
+  int prec = grp.readEntry("PricePrecision", 4);
 
   if(!m_pr.isValid())
     m_pr = MyMoneyFile::instance()->price(m_pr.from(), m_pr.to(), m_pr.date());
@@ -87,7 +87,7 @@ KMyMoneyPriceItem::KMyMoneyPriceItem(K3ListView *view, const MyMoneyPrice& pr) :
 
     setText(COMMODITY_COL, (from.isCurrency()) ? from.id() : from.tradingSymbol());
     setText(CURRENCY_COL, to.id());
-    setText(DATE_COL, KGlobal::locale()->formatDate(m_pr.date(), true));
+    setText(DATE_COL, KGlobal::locale()->formatDate(m_pr.date()));
     setText(PRICE_COL, m_pr.rate(priceBase).formatMoney("", prec));
     setText(SOURCE_COL, m_pr.source());
   }
@@ -121,7 +121,7 @@ int KMyMoneyPriceItem::compare(Q3ListViewItem* i, int col, bool ascending) const
 }
 
 KMyMoneyPriceView::KMyMoneyPriceView(QWidget *parent, const char *name ) :
-  K3ListView(parent,name),
+  K3ListView(parent),
   m_contextMenu(0),
   m_showAll(false)
 {
@@ -142,7 +142,7 @@ KMyMoneyPriceView::KMyMoneyPriceView(QWidget *parent, const char *name ) :
   KIconLoader *kiconloader = KIconLoader::global();
 
   m_contextMenu = new KMenu(this);
-  m_contextMenu->insertTitle(i18n("Price Options"));
+  m_contextMenu->addTitle(i18n("Price Options"));
   m_contextMenu->insertItem(kiconloader->loadIcon("filenew", KIconLoader::Small),
                         i18n("New..."),
                         this, SIGNAL(newPrice()));
@@ -342,4 +342,3 @@ void KMyMoneyPriceView::slotOnlinePriceUpdate(void)
 
 #endif
 
-#include "kmymoneypriceview.moc"

@@ -21,6 +21,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QMap>
 #include <qobject.h>
 
 // ----------------------------------------------------------------------------
@@ -40,13 +41,13 @@
 class KMyMoneyForecastListViewItem : public K3ListViewItem
 {
 public:
-  
+
   KMyMoneyForecastListViewItem(Q3ListView* parent, Q3ListViewItem* after, bool isNegative);
-  
+
   ~KMyMoneyForecastListViewItem();
-  
+
   void setNegative(bool isNegative);
-  
+
   void setText( int column, const QString &text, const bool &negative = false );
 
   /**
@@ -56,9 +57,9 @@ public:
 
 
 private:
-  
+
   bool m_negative;
-  
+
   QMap<int, QColor> m_columnsColor;
 };
 

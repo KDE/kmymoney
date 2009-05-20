@@ -42,10 +42,18 @@
   *@author Michael Edwardes
   */
 
+class kScheduleBriefWidget : public QWidget, public Ui::kScheduleBriefWidget
+{
+public:
+  kScheduleBriefWidget( QWidget *parent ) : QWidget( parent ) {
+    setupUi( this );
+  }
+};
+
 class KMyMoneyBriefSchedule : public kScheduleBriefWidget  {
    Q_OBJECT
 public:
-  KMyMoneyBriefSchedule(QWidget *parent=0, const char *name=0);
+  KMyMoneyBriefSchedule(QWidget *parent=0);
   ~KMyMoneyBriefSchedule();
   void setSchedules(Q3ValueList<MyMoneySchedule> list, const QDate& date);
 

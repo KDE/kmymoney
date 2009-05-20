@@ -45,8 +45,8 @@
 #include "kmymoneybriefschedule.h"
 #include "../kmymoneyutils.h"
 
-KMyMoneyBriefSchedule::KMyMoneyBriefSchedule(QWidget *parent, const char *name )
-  : kScheduleBriefWidget(parent,name, Qt::WStyle_Customize | Qt::WStyle_NoBorder)
+KMyMoneyBriefSchedule::KMyMoneyBriefSchedule(QWidget *parent)
+    : kScheduleBriefWidget(parent/*,name, Qt::WStyle_Customize | Qt::WStyle_NoBorder*/)
 {
   KIconLoader *ic = KIconLoader::global();
   m_nextButton->setPixmap(BarIcon(QString::fromLatin1("1rightarrow")));
@@ -108,16 +108,16 @@ void KMyMoneyBriefSchedule::loadSchedule()
       if (sched.willEnd())
       {
         int transactions = sched.paymentDates(m_date, sched.endDate()).count()-1;
-        text = i18n("Payment on %1 for %2 with %3 transactions remaining occuring %4.")
-                .arg(KGlobal::locale()->formatDate(m_date, true))
-                .arg(amount.formatMoney(sched.account().fraction()))
-                .arg(QString::number(transactions))
-                .arg(i18n(sched.occurenceToString()));
+        text = i18n("Payment on %1 for %2 with %3 transactions remaining occuring %4.",
+                KGlobal::locale()->formatDate(m_date),
+                amount.formatMoney(sched.account().fraction()),
+                QString::number(transactions),
+                i18n(sched.occurenceToString().toLatin1()));
       } else {
-        text = i18n("Payment on %1 for %2 occuring %4.")
-                .arg(KGlobal::locale()->formatDate(m_date, true))
-                .arg(amount.formatMoney(sched.account().fraction()))
-                .arg(i18n(sched.occurenceToString()));
+        text = i18n("Payment on %1 for %2 occuring %4.",
+                KGlobal::locale()->formatDate(m_date),
+                amount.formatMoney(sched.account().fraction()),
+                i18n(sched.occurenceToString().toLatin1()));
       }
 
       if (m_date < QDate::currentDate())
@@ -135,9 +135,9 @@ void KMyMoneyBriefSchedule::loadSchedule()
           int transactions = sched.paymentDates(startD, QDate::currentDate()).count();
 
           text += "<br><font color=red>";
-          text += i18n("%1 days overdue (%2 occurences).")
-                      .arg(QString::number(days))
-                      .arg(QString::number(transactions));
+          text += i18n("%1 days overdue (%2 occurences).",
+                      QString::number(days),
+                      QString::number(transactions));
           text += "</color>";
         }
       }
@@ -190,4 +190,3 @@ void KMyMoneyBriefSchedule::slotSkipClicked()
   emit skipClicked(m_scheduleList[m_index], m_date);
 }
 
-#include "kmymoneybriefschedule.moc"

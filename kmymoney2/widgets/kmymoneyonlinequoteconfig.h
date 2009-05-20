@@ -27,16 +27,24 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "../widgets/kmymoneyonlinequoteconfigdecl.h"
+#include "ui_kmymoneyonlinequoteconfigdecl.h"
 #include "../converter/webpricequote.h"
 //Added by qt3to4:
 #include <Q3ValueList>
 
+
+class kMyMoneyOnlineQuoteConfigDecl : public QWidget, public Ui::kMyMoneyOnlineQuoteConfigDecl
+{
+public:
+  kMyMoneyOnlineQuoteConfigDecl( QWidget *parent ) : QWidget( parent ) {
+    setupUi( this );
+  }
+};
 class kMyMoneyOnlineQuoteConfig : public kMyMoneyOnlineQuoteConfigDecl
 {
   Q_OBJECT
 public:
-  kMyMoneyOnlineQuoteConfig(QWidget* parent, const char *name);
+  kMyMoneyOnlineQuoteConfig(QWidget* parent);
   virtual ~kMyMoneyOnlineQuoteConfig() {}
 
   void writeConfig(void) {}

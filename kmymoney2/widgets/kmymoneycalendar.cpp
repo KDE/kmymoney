@@ -214,8 +214,11 @@ kMyMoneyCalendar::resizeEvent(QResizeEvent*)
     // ----- calculate size of the month button:
     for(count=0; count<NoOfButtons; ++count) {
   if(buttons[count]==selectMonth) {
+#warning "port to kde4"
+#if 0
       QSize metricBound = style().sizeFromContents(QStyle::CT_ToolButton, selectMonth, maxMonthRect);
       sizes[count].setWidth(qMax(metricBound.width(), maxMonthRect.width()+2*QApplication::style().pixelMetric(QStyle::PM_ButtonMargin)));
+#endif
   }
     }
     // ----- place the buttons:
@@ -264,9 +267,12 @@ void
 kMyMoneyCalendar::dateChangedSlot(QDate date)
 {
     kDebug() << "kMyMoneyCalendar::dateChangedSlot: date changed (" << date.year() << "/" << date.month() << "/" << date.day() << ").";
-    line->setText(KGlobal::locale()->formatDate(date, true));
+    line->setText(KGlobal::locale()->formatDate(date));
     d->selectWeek->setText(i18n("Week %1").arg(weekOfYear(date)));
+#warning "port to kde4"
+#if 0
     selectMonth->setText(MONTH_NAME(date.month(), date.year(), false));
+#endif
     selectYear->setText(date.toString("yyyy"));
     emit(dateChanged(date));
 }
@@ -302,10 +308,13 @@ kMyMoneyCalendar::setDate(const QDate& date)
   // -----
   table->setDate(date);
   d->selectWeek->setText(i18n("Week %1").arg(weekOfYear(date)));
+#warning "port to kde4"
+#if 0
   selectMonth->setText(MONTH_NAME(date.month(), date.year(), false));
+#endif
   temp.setNum(date.year());
   selectYear->setText(temp);
-  line->setText(KGlobal::locale()->formatDate(date, true));
+  line->setText(KGlobal::locale()->formatDate(date));
   return true;
     } else {
   kDebug() << "kMyMoneyCalendar::setDate: refusing to set invalid date.";
@@ -468,7 +477,10 @@ kMyMoneyCalendar::lineEnterPressed()
   emit(dateEntered(temp));
   setDate(temp);
     } else {
+#warning "port to kde4"
+#if 0
       KNotifyClient::beep();
+#endif
       kDebug() << "kMyMoneyCalendar::lineEnterPressed: invalid date entered.";
     }
 }
@@ -502,8 +514,11 @@ kMyMoneyCalendar::sizeHint() const
 
       if(buttons[count]==selectMonth)
   {
+#warning "port to kde4"
+#if 0
     QSize metricBound = style().sizeFromContents(QStyle::CT_ToolButton, selectMonth, maxMonthRect);
     cx+=qMax(metricBound.width(), maxMonthRect.width()+2*QApplication::style().pixelMetric(QStyle::PM_ButtonMargin));
+#endif
   } else {
     cx+=sizes[count].width();
   }
@@ -545,8 +560,11 @@ kMyMoneyCalendar::setFontSize(int s)
     QFontMetrics metrics(selectMonth->fontMetrics());
     for(int i=1; i <= 12; ++i)
       { // maxMonthRect is used by sizeHint()
-        r=metrics.boundingRect(MONTH_NAME(i, 2000, false));
-        maxMonthRect.setWidth(qMax(r.width(), maxMonthRect.width()));
+#warning "port to kde4"
+#if 0
+          r=metrics.boundingRect(MONTH_NAME(i, 2000, false));
+#endif
+          maxMonthRect.setWidth(qMax(r.width(), maxMonthRect.width()));
         maxMonthRect.setHeight(qMax(r.height(),  maxMonthRect.height()));
       }
     table->setFontSize(s);
@@ -662,4 +680,3 @@ void kMyMoneyCalendar::setUserButton2(bool enable, QPushButton* pb)
     updateGeometry();
 }
 
-#include "kmymoneycalendar.moc"
