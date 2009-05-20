@@ -78,7 +78,7 @@ SET (_critial_common_sources
 
 
 SET (kmymoney_base_UI
-  kbudgetvaluesdecl.ui transactionsortoption.ui kaccounttemplateselectordecl.ui
+  kbudgetvaluesdecl.ui transactionsortoptiondecl.ui kaccounttemplateselectordecl.ui
   )
 
 KDE4_ADD_UI_FILES(kmymoney_base_ui_srcs ${kmymoney_base_UI})

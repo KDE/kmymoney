@@ -3,8 +3,8 @@
   <author>Thomas Baumgart &lt;ipwizard@users.sourceforge.net&gt;</author>
   <comment></comment>
   <exportmacro></exportmacro>
-  <class>TransactionSortOption</class>
-  <widget class="QWidget" name="TransactionSortOption">
+  <class>TransactionSortOptionDecl</class>
+  <widget class="QWidget" name="TransactionSortOptionDecl">
     <property name="geometry">
       <rect>
         <x>0</x>

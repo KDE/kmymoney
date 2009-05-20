@@ -20,9 +20,17 @@
 #ifndef TRANSACTIONSORTOPTIONIMPL_H
 #define TRANSACTIONSORTOPTIONIMPL_H
 
-#include "ui_transactionsortoption.h"
+#include "ui_transactionsortoptiondecl.h"
 
-class TransactionSortOption : public QWidget, public Ui::TransactionSortOption
+class TransactionSortOptionDecl : public QWidget, public Ui::TransactionSortOptionDecl
+{
+public:
+  TransactionSortOptionDecl( QWidget *parent ) : QWidget( parent ) {
+    setupUi( this );
+  }
+};
+
+class TransactionSortOption : public TransactionSortOptionDecl
 {
     Q_OBJECT
 public:
