@@ -126,7 +126,6 @@ SET_TARGET_PROPERTIES(kmymoney PROPERTIES
  
 SET(libwidgets_a_SOURCES
   ${_critial_common_sources}
-  klistviewsearchline.cpp
   kmymoneybriefschedule.cpp
   kmymoneycalendar.cpp
   kmymoneyforecastlistviewitem.cpp
