@@ -52,7 +52,7 @@
 //Added by qt3to4:
 #include <Q3ValueList>
 #include <QMouseEvent>
-
+#include <QDesktopWidget>
 // ----------------------------------------------------------------------------
 // KDE Includes
 #include "kdecompat.h"
@@ -529,5 +529,3 @@ void kMyMoneyScheduledDateTbl::filterTransfers(bool enable)
   m_filterTransfers = enable;
   repaintContents(false);
 }
-
-#include "kmymoneyscheduleddatetbl.moc"
