@@ -82,7 +82,7 @@ SET(dialogs_UI
   kselectdatabasedlgdecl.ui kselecttransactionsdlgdecl.ui
   ksortoptiondlg.ui ksplitcorrectiondlg.ui ksplittransactiondlgdecl.ui
   kupdatestockpricedlgdecl.ui mymoneyqifprofileeditordecl.ui
-  ../widgets/kaccounttemplateselectordecl.ui
+  ../widgets/kaccounttemplateselectordecl.ui ../widgets/transactionsortoptiondecl.ui
 )
 
 kde4_add_ui_files(libdialogs_a_SOURCES ${dialogs_UI} )
