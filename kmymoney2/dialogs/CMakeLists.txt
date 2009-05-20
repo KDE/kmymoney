@@ -34,7 +34,7 @@ SET(libdialogs_a_SOURCES
   kmergetransactionsdlg.cpp 
   kmymoneyfileinfodlg.cpp
   kmymoneypricedlg.cpp 
-  #kmymoneysplittable.cpp 
+  kmymoneysplittable.cpp 
   #knewaccountdlg.cpp
   knewbankdlg.cpp 
   knewbudgetdlg.cpp 

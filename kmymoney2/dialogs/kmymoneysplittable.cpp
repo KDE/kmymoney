@@ -48,7 +48,7 @@
 #include <klocale.h>
 #include <kiconloader.h>
 #include <kmessagebox.h>
-#include <k3completionbox.h>
+#include <kcompletionbox.h>
 #include <kpushbutton.h>
 #include <kmenu.h>
 #include <kstdaccel.h>
@@ -103,7 +103,8 @@ kMyMoneySplitTable::kMyMoneySplitTable(QWidget *parent, const char *name ) :
   // setup the context menu
   m_contextMenu = new KMenu(this);
   KIconLoader *il = KIconLoader::global();
-  m_contextMenu->insertTitle(il->loadIcon("transaction", KIcon::MainToolbar), i18n("Split Options"));
+#warning "port to kde4"
+  //m_contextMenu->insertTitle(il->loadIcon("transaction", KIcon::MainToolbar), i18n("Split Options"));
   m_contextMenu->insertItem(il->loadIcon("edit", KIconLoader::Small), i18n("Edit..."), this, SLOT(slotStartEdit()));
   m_contextMenuDuplicate = m_contextMenu->insertItem(il->loadIcon("editcopy", KIconLoader::Small), i18n("Duplicate"), this, SLOT(slotDuplicateSplit()));
   m_contextMenuDelete = m_contextMenu->insertItem(il->loadIcon("delete", KIconLoader::Small),
@@ -282,6 +283,8 @@ bool kMyMoneySplitTable::eventFilter(QObject *o, QEvent *e)
         rc = true;
         KShortcut copySplit(i18n("Duplicate split", "Qt::CTRL+c"));
         KShortcut newSplit(QKeySequence(Qt::CTRL | Qt::Key_Insert));
+#warning "port to kde4"
+#if 0
         if(copySplit.contains(KKey(k))) {
           slotDuplicateSplit();
 
@@ -294,6 +297,7 @@ bool kMyMoneySplitTable::eventFilter(QObject *o, QEvent *e)
           // make sure, the widget receives the key again
           QApplication::sendEvent(w, e);
         }
+#endif
         break;
     }
 
@@ -320,7 +324,7 @@ bool kMyMoneySplitTable::eventFilter(QObject *o, QEvent *e)
         // do not end editing of the transaction.
         if(o->inherits("KLineEdit")) {
           KLineEdit* le = dynamic_cast<KLineEdit*> (o);
-          K3CompletionBox* box = le->completionBox(false);
+          KCompletionBox* box = le->completionBox(false);
           if(box && box->isVisible()) {
             terminate = false;
             le->completionBox(false)->hide();
@@ -656,7 +660,7 @@ void kMyMoneySplitTable::slotDeleteSplit(void)
         i18n("You are about to delete the selected split. "
             "Do you really want to continue?"),
         i18n("KMyMoney"),
-        i18n("Continue")
+        KGuiItem( i18n("Continue") )
         ) == KMessageBox::Continue) {
       try {
         m_transaction.removeSplit(list[m_currentRow]);
@@ -819,8 +823,10 @@ void kMyMoneySplitTable::destroyEditWidgets(void)
   clearCellWidget(m_currentRow, 2);
   clearCellWidget(m_currentRow+1, 0);
   m_editMode = false;
-
+#warning "port to kde4"
+#if 0
   QApplication::eventLoop()->processEvents(QEventLoop::ExcludeUserInput, 100);
+#endif
 }
 
 QWidget* kMyMoneySplitTable::createEditWidgets(void)
@@ -853,9 +859,9 @@ QWidget* kMyMoneySplitTable::createEditWidgets(void)
   m_registerButtonFrame->setPalette(palette);
 
   Q3HBoxLayout* l = new Q3HBoxLayout(m_registerButtonFrame);
-  m_registerEnterButton = new KPushButton(il->loadIcon("button_ok", KIconLoader::Small, KIconLoader::SizeSmall), QString(), m_registerButtonFrame, "EnterButton");
+  m_registerEnterButton = new KPushButton(KIcon( il->loadIcon("button_ok", KIconLoader::Small, KIconLoader::SizeSmall) ), QString(), m_registerButtonFrame);
 
-  m_registerCancelButton = new KPushButton(il->loadIcon("button_cancel", KIconLoader::Small, KIconLoader::SizeSmall), QString(), m_registerButtonFrame, "CancelButton");
+  m_registerCancelButton = new KPushButton(KIcon( il->loadIcon("button_cancel", KIconLoader::Small, KIconLoader::SizeSmall) ), QString(), m_registerButtonFrame);
 
   l->addWidget(m_registerEnterButton);
   l->addWidget(m_registerCancelButton);
@@ -902,12 +908,13 @@ QWidget* kMyMoneySplitTable::createEditWidgets(void)
   // load e.g. the category widget with the account list
   slotLoadEditWidgets();
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadEditWidgets()));
-
+#warning "port to kde4"
+#if 0
   // setup the keyboard filter for all widgets
   for(QWidget* w = m_tabOrderWidgets.first(); w; w = m_tabOrderWidgets.next()) {
     w->installEventFilter(this);
   }
-
+#endif
   m_editCategory->setFocus();
   m_editCategory->lineEdit()->selectAll();
   m_editMode = true;
@@ -959,7 +966,8 @@ bool kMyMoneySplitTable::focusNextPrevChild(bool next)
 {
   MYMONEYTRACER(tracer);
   bool  rc = false;
-
+#warning "port to kde4"
+#if 0
   if(m_editCategory) {
     QWidget *w = 0;
     QWidget *currentWidget;
@@ -985,7 +993,7 @@ bool kMyMoneySplitTable::focusNextPrevChild(bool next)
 
   } else
     rc = Q3Table::focusNextPrevChild(next);
-
+#endif
   return rc;
 }
 
