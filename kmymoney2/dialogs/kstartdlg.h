@@ -43,7 +43,7 @@ public:
 	virtual ~KStartDlg();
   bool isNewFile(void)  const        { return isnewfile;           }
   bool isOpenFile(void) const        { return !kurlrequest->url().isEmpty();          }
-  const QString getURL(void) const { return kurlrequest->url(); }
+  const QString getURL(void) const { return kurlrequest->url().path(); }
   QString getTemplateName(void) const { return templatename;    }
 
 private: // Private methods

@@ -2402,7 +2402,7 @@ void KMyMoney2App::slotFileBackup(void)
     return;
   }
 
-  KBackupDlg *backupDlg = new KBackupDlg(this,0/*,true*/);
+  KBackupDlg *backupDlg = new KBackupDlg(this);
   int returncode = backupDlg->exec();
   if(returncode)
   {
@@ -2583,7 +2583,8 @@ void KMyMoney2App::slotShowNextView(void)
 
 void KMyMoney2App::slotQifProfileEditor(void)
 {
-  MyMoneyQifProfileEditor* editor = new MyMoneyQifProfileEditor(true, this, "QIF Profile Editor");
+    MyMoneyQifProfileEditor* editor = new MyMoneyQifProfileEditor(true, this );
+    editior->setObjectName( "QIF Profile Editor");
 
 
   editor->exec();
@@ -6126,10 +6127,10 @@ void KMyMoney2App::writeLastUsedDir(const QString& directory)
   KSharedConfigPtr kconfig = KGlobal::config();
   if(kconfig)
   {
-    KConfigGroup grp = config->group("General Options");
+    KConfigGroup grp = kconfig->group("General Options");
 
     //write path entry, no error handling since its void.
-    kconfig->writePathEntry("LastUsedDirectory", directory);
+    grp.writeEntry("LastUsedDirectory", directory);
   }
 }
 
@@ -6144,7 +6145,7 @@ void KMyMoney2App::writeLastUsedFile(const QString& fileName)
     // write path entry, no error handling since its void.
     // use a standard string, as fileName could contain a protocol
     // e.g. file:/home/thb/....
-    kconfig->writeEntry("LastUsedFile", fileName);
+    grp.writeEntry("LastUsedFile", fileName);
   }
 }
 
@@ -6159,7 +6160,7 @@ QString KMyMoney2App::readLastUsedDir(void) const
     KConfigGroup grp = config->group("General Options");
 
     //read path entry.  Second parameter is the default if the setting is not found, which will be the default document path.
-    str = kconfig->readEntry("LastUsedDirectory", KGlobalSettings::documentPath());
+    str = grp.readEntry("LastUsedDirectory", KGlobalSettings::documentPath());
     // if the path stored is empty, we use the default nevertheless
     if(str.isEmpty())
       str = KGlobalSettings::documentPath();
@@ -6196,7 +6197,7 @@ const QLinkedList<Q3CString> KMyMoney2App::instanceList(void) const
   //FIXME: Port to KDE4
 //   QLinkedList<Q3CString> apps = kapp->dcopClient()->registeredApplications();
 //   QLinkedList<Q3CString>::ConstIterator it;
-// 
+//
 //   for(it = apps.begin(); it != apps.end(); ++it) {
 //     // skip over myself
 //     if((*it) == kapp->dcopClient()->appId())
@@ -6436,6 +6437,8 @@ void KMyMoney2App::slotAccountUnmapOnline(void)
 
 void KMyMoney2App::slotAccountMapOnline(void)
 {
+    #warning "port to kde4"
+#if 0
   // no account selected
   if(m_selectedAccount.id().isEmpty())
     return;
@@ -6499,6 +6502,7 @@ void KMyMoney2App::slotAccountMapOnline(void)
       }
     }
   }
+#endif
 }
 
 void KMyMoney2App::slotAccountUpdateOnlineAll(void)
