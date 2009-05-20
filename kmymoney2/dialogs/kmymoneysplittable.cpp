@@ -281,7 +281,7 @@ bool kMyMoneySplitTable::eventFilter(QObject *o, QEvent *e)
 
       default:
         rc = true;
-        KShortcut copySplit(i18n("Duplicate split", "Qt::CTRL+c"));
+        KShortcut copySplit(i18nc("Duplicate split", "Qt::CTRL+c"));
         KShortcut newSplit(QKeySequence(Qt::CTRL | Qt::Key_Insert));
 #warning "port to kde4"
 #if 0

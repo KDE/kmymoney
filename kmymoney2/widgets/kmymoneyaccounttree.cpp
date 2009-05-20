@@ -53,11 +53,11 @@ KMyMoneyAccountTree::KMyMoneyAccountTree(QWidget* parent, const char *name) :
 {
   showType();
 
-  m_taxReportColumn = addColumn(i18n("Column heading for category in tax report", "Tax"));
+  m_taxReportColumn = addColumn(i18nc("Column heading for category in tax report", "Tax"));
   setColumnWidthMode(m_taxReportColumn, Q3ListView::Manual);
   setColumnAlignment(m_taxReportColumn, Qt::AlignHCenter);
 
-  m_vatCategoryColumn = addColumn(i18n("Column heading for VAT category", "VAT"));
+  m_vatCategoryColumn = addColumn(i18nc("Column heading for VAT category", "VAT"));
   setColumnWidthMode(m_vatCategoryColumn, Q3ListView::Manual);
   setColumnAlignment(m_vatCategoryColumn, Qt::AlignHCenter);
 

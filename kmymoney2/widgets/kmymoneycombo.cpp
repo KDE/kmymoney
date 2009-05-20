@@ -480,8 +480,8 @@ KMyMoneyCashFlowCombo::KMyMoneyCashFlowCombo(QWidget* w, const char* name, MyMon
   // add the items in reverse order of appearance (see KMyMoneySelector::newItem() for details)
   if(accountType == MyMoneyAccount::Income || accountType == MyMoneyAccount::Expense) {
     // this is used for income/expense accounts to just show the reverse sense
-    selector()->newTopItem(i18n("Activity for expense categories", "Paid"), QString(), num.setNum(KMyMoneyRegister::Deposit));
-    selector()->newTopItem(i18n("Activity for income categories", "Received"), QString(), num.setNum(KMyMoneyRegister::Payment));
+    selector()->newTopItem(i18nc("Activity for expense categories", "Paid"), QString(), num.setNum(KMyMoneyRegister::Deposit));
+    selector()->newTopItem(i18nc("Activity for income categories", "Received"), QString(), num.setNum(KMyMoneyRegister::Payment));
   } else {
     selector()->newTopItem(i18n("From"), QString(), num.setNum(KMyMoneyRegister::Deposit));
     selector()->newTopItem(i18n("Pay to"), QString(), num.setNum(KMyMoneyRegister::Payment));

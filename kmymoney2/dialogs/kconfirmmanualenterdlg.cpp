@@ -120,7 +120,7 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
       QString co, cn;
       switch(to.splitCount()) {
         default:
-          co = i18n("Split transaction (category replacement)", "Split transaction");
+          co = i18nc("Split transaction (category replacement)", "Split transaction");
           break;
         case 2:
           co = file->accountToCategory(to.splits()[1].accountId());
@@ -130,7 +130,7 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
 
       switch(tn.splitCount()) {
         default:
-          cn = i18n("Split transaction (category replacement)", "Split transaction");
+          cn = i18nc("Split transaction (category replacement)", "Split transaction");
           break;
         case 2:
           cn = file->accountToCategory(tn.splits()[1].accountId());
@@ -140,7 +140,7 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
       if (co != cn)
       {
         noItemsChanged++;
-        messageDetail += i18n("Category changed.<br>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b><p>").arg(co).arg(cn);
+        messageDetail += i18n("Category changed.<br>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b><p>", co, cn);
       }
     }
 
@@ -154,7 +154,7 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
     if (mo != mn)
     {
       noItemsChanged++;
-      messageDetail += i18n("Memo changed.<br>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b><p>").arg(mo).arg(mn);
+      messageDetail += i18n("Memo changed.<br>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b><p>", mo, mn);
     }
 
     const MyMoneySecurity& sec = MyMoneyFile::instance()->security(to.commodity());
@@ -163,8 +163,7 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
     an = tn.splits()[0].value();
     if (ao != an) {
       noItemsChanged++;
-      messageDetail += i18n("Amount changed.<br>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b><p>")
-        .arg(ao.formatMoney(sec.smallestAccountFraction())).arg(an.formatMoney(sec.smallestAccountFraction()));
+      messageDetail += i18n("Amount changed.<br>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b><p>", ao.formatMoney(sec.smallestAccountFraction()), an.formatMoney(sec.smallestAccountFraction()));
     }
 
     MyMoneySplit::reconcileFlagE fo, fn;
@@ -172,9 +171,7 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
     fn = tn.splits()[0].reconcileFlag();
     if(fo != fn) {
       noItemsChanged++;
-      messageDetail += i18n("Reconciliation flag changed.<br>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b><p>")
-        .arg(KMyMoneyUtils::reconcileStateToString(fo, true))
-        .arg(KMyMoneyUtils::reconcileStateToString(fn, true));
+      messageDetail += i18n("Reconciliation flag changed.<br>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b><p>",    KMyMoneyUtils::reconcileStateToString(fo, true), KMyMoneyUtils::reconcileStateToString(fn, true));
     }
   }
   catch (MyMoneyException *e)
