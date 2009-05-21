@@ -50,7 +50,7 @@
 using namespace KMyMoneyTransactionForm;
 
 TabBar::TabBar(QWidget* parent, const char* name) :
-  QTabBar(parent, name),
+  QTabBar(parent),
   m_signalType(SignalNormal)
 {
   connect(this, SIGNAL(selected(int)), this, SLOT(slotTabSelected(int)));
@@ -301,41 +301,53 @@ void TransactionForm::setupForm(const MyMoneyAccount& acc)
   // a different value
   switch(acc.accountType()) {
     default:
+#warning "port to kde4"
+#if 0	    
       tab = new QTab(i18n("&Deposit"));
       m_tabBar->addTab(tab, KMyMoneyRegister::ActionDeposit);
       tab = new QTab(i18n("&Transfer"));
       m_tabBar->addTab(tab, KMyMoneyRegister::ActionTransfer);
       tab = new QTab(i18n("&Withdrawal"));
       m_tabBar->addTab(tab, KMyMoneyRegister::ActionWithdrawal);
+#endif
       break;
 
     case MyMoneyAccount::CreditCard:
+#warning "port to kde4"
+#if 0
       tab = new QTab(i18n("&Payment"));
       m_tabBar->addTab(tab, KMyMoneyRegister::ActionDeposit);
       tab = new QTab(i18n("&Transfer"));
       m_tabBar->addTab(tab, KMyMoneyRegister::ActionTransfer);
       tab = new QTab(i18n("&Charge"));
       m_tabBar->addTab(tab, KMyMoneyRegister::ActionWithdrawal);
+#endif
       break;
 
     case MyMoneyAccount::Liability:
     case MyMoneyAccount::Loan:
+#warning "port to kde4"
+#if 0      
       tab = new QTab(i18n("&Decrease"));
       m_tabBar->addTab(tab, KMyMoneyRegister::ActionDeposit);
       tab = new QTab(i18n("&Transfer"));
       m_tabBar->addTab(tab, KMyMoneyRegister::ActionTransfer);
       tab = new QTab(i18n("&Increase"));
       m_tabBar->addTab(tab, KMyMoneyRegister::ActionWithdrawal);
+#endif
       break;
 
     case MyMoneyAccount::Asset:
     case MyMoneyAccount::AssetLoan:
+#warning "port to kde4"
+#if 0
       tab = new QTab(i18n("&Increase"));
       m_tabBar->addTab(tab, KMyMoneyRegister::ActionDeposit);
       tab = new QTab(i18n("&Transfer"));
       m_tabBar->addTab(tab, KMyMoneyRegister::ActionTransfer);
       tab = new QTab(i18n("&Decrease"));
       m_tabBar->addTab(tab, KMyMoneyRegister::ActionWithdrawal);
+#endif
       break;
 
     case MyMoneyAccount::Income:

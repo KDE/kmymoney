@@ -349,7 +349,8 @@ void Transaction::paintRegisterCellFocus(QPainter* painter, int row, int col, co
         end.rx()--;
       }
       // painter->drawLine(start, end);
-      painter->drawWinFocusRect(QRect(start, end));
+#warning "port to kde4"
+      //painter->drawWinFocusRect(QRect(start, end));
     }
     // for the last Row, we need to paint the bottom
     if(row == numRowsRegister() - 1) {
@@ -361,7 +362,8 @@ void Transaction::paintRegisterCellFocus(QPainter* painter, int row, int col, co
         end.rx()--;
       }
       // painter->drawLine(start, end);
-      painter->drawWinFocusRect(QRect(start, end));
+#warning "port to kde4"
+      //painter->drawWinFocusRect(QRect(start, end));
     }
     // for the first col, we need to paint the left
     if(col == 0) {
@@ -373,7 +375,8 @@ void Transaction::paintRegisterCellFocus(QPainter* painter, int row, int col, co
         end.ry()--;
       }
       //painter->drawLine(start, end);
-      painter->drawWinFocusRect(QRect(start, end));
+#warning "port to kde4"
+      //painter->drawWinFocusRect(QRect(start, end));
     }
     // for the last col, we need to paint the left
     if(col == m_parent->lastCol()) {
@@ -385,7 +388,8 @@ void Transaction::paintRegisterCellFocus(QPainter* painter, int row, int col, co
         end.ry()--;
       }
       //painter->drawLine(start, end);
-      painter->drawWinFocusRect(QRect(start, end));
+#warning "port to kde4"
+      //painter->drawWinFocusRect(QRect(start, end));
     }
     painter->setPen(oldPen);
   }
@@ -932,7 +936,8 @@ void StdTransaction::loadTab(TransactionForm* form)
   TabBar* bar = form->tabBar();
   bar->setSignalEmission(TabBar::SignalNever);
   for(int i = 0; i < bar->count(); ++i) {
-    bar->setTabEnabled(bar->tabAt(i)->identifier(), true);
+#warning "port to kde4"
+      	  //bar->setTabEnabled(bar->tabAt(i)->identifier(), true);
   }
 
   if(m_transaction.splitCount() > 0) {
@@ -1023,7 +1028,7 @@ bool StdTransaction::formCellText(QString& txt, int& align, int row, int col, QP
           case ValueColumn2:
             align |= Qt::AlignRight;
             if(m_transaction != MyMoneyTransaction())
-              txt = KGlobal::locale()->formatDate(m_transaction.postDate(), true);
+              txt = KGlobal::locale()->formatDate(m_transaction.postDate());
             break;
         }
         break;
@@ -1090,7 +1095,7 @@ void StdTransaction::registerCellText(QString& txt, int& align, int row, int col
 
         case DateColumn:
           align |= Qt::AlignLeft;
-          txt = KGlobal::locale()->formatDate(m_transaction.postDate(), true);
+          txt = KGlobal::locale()->formatDate(m_transaction.postDate());
           break;
 
         case DetailColumn:
@@ -1481,7 +1486,7 @@ bool InvestTransaction::formCellText(QString& txt, int& align, int row, int col,
           align |= Qt::AlignRight;
           fieldEditable = true;
           if(m_transaction != MyMoneyTransaction())
-            txt = KGlobal::locale()->formatDate(m_transaction.postDate(), true);
+            txt = KGlobal::locale()->formatDate(m_transaction.postDate());
           break;
       }
       break;
@@ -1669,7 +1674,7 @@ void InvestTransaction::registerCellText(QString& txt, int& align, int row, int 
       switch(col) {
         case DateColumn:
           align |= Qt::AlignLeft;
-          txt = KGlobal::locale()->formatDate(m_transaction.postDate(), true);
+          txt = KGlobal::locale()->formatDate(m_transaction.postDate());
           break;
 
         case DetailColumn:

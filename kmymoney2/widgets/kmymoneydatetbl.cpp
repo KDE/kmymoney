@@ -68,9 +68,8 @@
 #include <klocale.h>
 #include <kdebug.h>
 #include <knotification.h>
-#if KDE_IS_VERSION(3,2,0)
 #include <kcalendarsystem.h>
-#endif
+#include <KColorScheme>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -92,7 +91,7 @@ kMyMoneyDateTbl::kMyMoneyDateTbl(QWidget *parent, QDate date_, const char* name,
   setFocusPolicy( Qt::StrongFocus );
 
 
-  viewport()->setEraseColor(KGlobalSettings::baseColor());
+  viewport()->setEraseColor(KColorScheme::NormalBackground);
 
   setDate(date_); // this initializes firstday, numdays, numDaysPrevMonth
 
@@ -104,6 +103,7 @@ kMyMoneyDateTbl::kMyMoneyDateTbl(QWidget *parent, QDate date_, const char* name,
 void
 kMyMoneyDateTbl::paintCell(QPainter *painter, int row, int col)
 {
+#if 0
   QRect rect;
   QString text;
   QPen pen;
@@ -116,11 +116,7 @@ kMyMoneyDateTbl::paintCell(QPainter *painter, int row, int col)
   // -----
   font.setPointSize(fontsize);
 
-#if KDE_VERSION < 310
-  int firstWeekDay = KGlobal::locale()->weekStartsMonday() ? 1 : 0;
-#else
   int firstWeekDay = KGlobal::locale()->weekStartDay();
-#endif
 
   if (row==0)
   { // we are drawing the headline
@@ -275,6 +271,7 @@ kMyMoneyDateTbl::paintCell(QPainter *painter, int row, int col)
 
     drawCellContents(painter, row, col, drawDate);
   }
+#endif  
 }
 
 void
@@ -326,8 +323,8 @@ kMyMoneyDateTbl::keyPressEvent( QKeyEvent *e )
         setDate(QDate::currentDate());
         return;
     }
-
-    KNotifyClient::beep();
+#warning "port to kde4"
+    //KNotifyClient::beep();
 }
 
 void
@@ -356,7 +353,9 @@ kMyMoneyDateTbl::setFontSize(int size)
 
   for(count=0; count<m_colCount; ++count)
   {
-    rect=metrics.boundingRect(WEEK_DAY_NAME(count+1, true));
+#warning "port to kde4"	  
+    //rect=metrics.boundingRect(WEEK_DAY_NAME(count+1/*, true*/));
+ 
     maxCell.setWidth(qMax(maxCell.width(), rect.width()));
     maxCell.setHeight(qMax(maxCell.height(), rect.height()));
   }
@@ -390,15 +389,12 @@ kMyMoneyDateTbl::contentsMouseReleaseEvent(QMouseEvent *e)
 
   if(!isEnabled())
   {
-    KNotifyClient::beep();
+#warning "port to kde4"	  
+    //KNotifyClient::beep();
     return;
   }
 
-#if KDE_VERSION < 310
-  int dayoff = KGlobal::locale()->weekStartsMonday() ? 1 : 0;
-#else
   int dayoff = KGlobal::locale()->weekStartDay();
-#endif
 
   // -----
   int row, col, pos, temp;

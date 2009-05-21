@@ -25,7 +25,7 @@ SET( kmymoney_common_SRCS
 
 KDE4_ADD_KCFG_FILES( kmymoney_common_SRCS kmymoneysettings.kcfgc )
 
-ADD_LIBRARY(kmymoney_common STATIC ${kmymoney_common_SRCS})
+KDE4_ADD_LIBRARY(kmymoney_common STATIC ${kmymoney_common_SRCS})
 TARGET_LINK_LIBRARIES(kmymoney_common
   ${QT_AND_KDECORE_LIBS} kmm_mymoney)
 

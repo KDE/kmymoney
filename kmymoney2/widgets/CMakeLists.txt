@@ -54,13 +54,13 @@ SET(_uncritial_common_sources
   kmymoneyedit.cpp
   kmymoneylineedit.cpp
   kmymoneylistviewitem.cpp
-  #kmymoneytitlelabel.cpp
+  kmymoneytitlelabel.cpp
   kmymoneywizard.cpp
   registeritem.cpp
   scheduledtransaction.cpp
   stdtransactiondownloaded.cpp
   stdtransactionmatched.cpp 
-  #transaction.cpp
+  transaction.cpp
   #transactionform.cpp
   kmymoneyreportconfigtabimpl.cpp
   )

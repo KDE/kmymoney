@@ -33,6 +33,7 @@
 #include <kstandarddirs.h>
 #include <kdebug.h>
 #include <kglobalsettings.h>
+#include <KColorScheme>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -41,8 +42,8 @@
 
 KMyMoneyTitleLabel::KMyMoneyTitleLabel(QWidget *parent, const char *name) :
   QLabel(parent, name),
-  m_bgColor( KGlobalSettings::highlightColor() ),
-  m_textColor( KGlobalSettings::highlightedTextColor() )
+  m_bgColor( KColorScheme::ActiveBackground ),
+  m_textColor( KColorScheme::ActiveText )
 {
   setFont(KGlobalSettings::windowTitleFont());
 }
@@ -75,6 +76,8 @@ void KMyMoneyTitleLabel::setRightImageFile(const QString& _file)
 
 void KMyMoneyTitleLabel::resizeEvent ( QResizeEvent * )
 {
+#warning "port to kde4"	
+#if 0	
   QRect cr = contentsRect();
   QImage output( cr.width(), cr.height(), 32 );
   output.fill( m_bgColor.rgb() );
@@ -86,16 +89,20 @@ void KMyMoneyTitleLabel::resizeEvent ( QResizeEvent * )
   pix.convertFromImage(output);
   setPixmap(pix);
   setMinimumWidth( m_rightImage.width() );
+#endif
 }
 
 void KMyMoneyTitleLabel::drawContents(QPainter *p)
 {
+#warning "port to kde4"	
+#if 0	
   // first draw pixmap
   QLabel::drawContents(p);
 
   // then draw text on top
   style().drawItem( p, contentsRect(), alignment(), colorGroup(), isEnabled(),
                           0, QString("   ")+m_text, -1, &m_textColor );
+#endif
 }
 
 void KMyMoneyTitleLabel::setText(const QString& txt)
