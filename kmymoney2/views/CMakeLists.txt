@@ -6,7 +6,7 @@ SET(libviews_a_SOURCES
 	#kforecastview.cpp
 
 	#kgloballedgerview.cpp
-	khomeview.cpp
+	#khomeview.cpp
    kinstitutionsview.cpp
   kinvestmentlistitem.cpp
   kinvestmentview.cpp
@@ -16,7 +16,7 @@ SET(libviews_a_SOURCES
   #kpayeesview.cpp
   #kreportsview.cpp
   kscheduledlistitem.cpp
-  kscheduledview.cpp
+  #kscheduledview.cpp
   )
 
 SET(libviews_a_HEADER kmymoneyview.h)

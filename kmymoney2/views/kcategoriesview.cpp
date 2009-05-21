@@ -44,10 +44,9 @@
 #include <mymoneyfile.h>
 #include <kmymoneyaccounttree.h>
 #include "kcategoriesview.h"
-#include "../widgets/klistviewsearchline.h"
 #include "../kmymoneyglobalsettings.h"
 #include "../kmymoney2.h"
-
+#include <K3ListViewSearchLineWidget>
 
 KCategoriesView::KCategoriesView(QWidget *parent) :
   KCategoriesViewDecl(parent),
