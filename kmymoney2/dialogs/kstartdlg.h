@@ -18,7 +18,6 @@
 
 #include "config-kmymoney.h"
 
-#include <kdialog.h>
 
 #include <klocale.h>
 #include <kfontdialog.h>
@@ -32,11 +31,12 @@
 #include <qpushbutton.h>
 //Added by qt3to4:
 #include <Q3Frame>
+#include <KPageDialog>
 
 /**KMyMoney 2 start dialog
   */
 
-class KStartDlg : public KDialog  {
+class KStartDlg : public KPageDialog  {
    Q_OBJECT
 public:
 	KStartDlg( QWidget *parent=0, const char *name=0, bool modal=true );

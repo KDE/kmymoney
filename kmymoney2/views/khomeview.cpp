@@ -59,15 +59,15 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 #include "khomeview.h"
-#include "../kmymoneyutils.h"
-#include "../kmymoneyglobalsettings.h"
-#include "../mymoney/mymoneyfile.h"
-#include "../mymoney/mymoneyforecast.h"
-#include "../kmymoney2.h"
-#include "../reports/kreportchartview.h"
-#include "../reports/pivottable.h"
-#include "../reports/pivotgrid.h"
-#include "../reports/reportaccount.h"
+#include "kmymoneyutils.h"
+#include "kmymoneyglobalsettings.h"
+#include "mymoneyfile.h"
+#include "mymoneyforecast.h"
+#include "kmymoney2.h"
+//#include "../reports/kreportchartview.h"
+//#include "../reports/pivottable.h"
+//#include "../reports/pivotgrid.h"
+//#include "../reports/reportaccount.h"
 #include "../kmymoneyglobalsettings.h"
 
 
@@ -86,7 +86,7 @@
 #define KMM_KDCHART_PROPSET_NORMAL_DATA KDCHART_PROPSET_NORMAL_DATA
 #endif
 
-using namespace reports;
+//using namespace reports;
 
 KHomeView::KHomeView(QWidget *parent, const char *name ) :
   KMyMoneyViewBase(parent, name, i18n("Home")),

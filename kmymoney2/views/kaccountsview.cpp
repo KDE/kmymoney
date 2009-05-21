@@ -42,10 +42,9 @@
 #include <mymoneyfile.h>
 #include "kaccountsview.h"
 #include "kmymoneyview.h"
-#include "../widgets/klistviewsearchline.h"
-#include "../kmymoneyglobalsettings.h"
-#include "../kmymoney2.h"
-
+#include "kmymoneyglobalsettings.h"
+#include "kmymoney2.h"
+#include <K3ListViewSearchLineWidget>
 
 KMyMoneyAccountIconItem::KMyMoneyAccountIconItem(Q3IconView *parent, const MyMoneyAccount& account) :
   K3IconViewItem(parent, account.name()),
@@ -102,7 +101,7 @@ KAccountsView::KAccountsView(QWidget *parent) :
     m_needReload[i] = false;
 
   KSharedConfigPtr config = KGlobal::config();
-  KConfigGroup grp^= config->group("Last Use Settings");
+  KConfigGroup grp= config->group("Last Use Settings");
   m_tab->setCurrentPage(grp.readEntry("KAccountsView_LastType", 0));
 
   connect(m_tab, SIGNAL(currentChanged(QWidget*)), this, SLOT(slotTabChanged(QWidget*)));
@@ -140,7 +139,8 @@ void KAccountsView::slotTabChanged(QWidget* _tab)
   // remember this setting for startup
   KSharedConfigPtr config = KGlobal::config();
   KConfigGroup grp =config->group("Last Use Settings");
-  grp.writeEntry("KAccountsView_LastType", tab);
+#warning "port to kde4"
+  //grp.writeEntry("KAccountsView_LastType", tab);
 
   loadAccounts(tab);
 

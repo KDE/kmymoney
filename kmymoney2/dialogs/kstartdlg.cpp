@@ -30,11 +30,7 @@
 
 #include "kdecompat.h"
 
-#if QT_VERSION > 300
 #include <kstandarddirs.h>
-#else
-#include <kstandarddirs.h>
-#endif
 
 #include <kiconloader.h>
 #include <kconfig.h>
@@ -51,12 +47,18 @@
 
 #include "kstartdlg.h"
 #include "krecentfileitem.h"
-#include "../kmymoney2.h"
+#include "kmymoney2.h"
 
 #include <qtooltip.h>
 
-KStartDlg::KStartDlg(QWidget *parent, const char *name, bool modal) : KDialogBase(IconList,i18n("Start Dialog"),Help|Ok|Cancel,Ok, parent, name, modal, true)
+KStartDlg::KStartDlg(QWidget *parent, const char *name, bool modal)
+    : KPageDialog(parent)
 {
+    setCaption( i18n("Start Dialog") );
+    setModal( true );
+    setFaceType( List );
+    setButtons( Ok | Cancel|Help );
+    setDefaultButton( Ok );
   setPage_Template();
   setPage_Documents();
 
@@ -74,7 +76,14 @@ KStartDlg::~KStartDlg()
 void KStartDlg::setPage_Template()
 {
   KIconLoader *ic = KIconLoader::global();
-  templateMainFrame = addVBoxPage( i18n("Templates"), i18n("Select templates"), DesktopIcon("wizard"));
+  templateMainFrame = new Q3VBox;
+
+  KPageWidgetItem *page = new KPageWidgetItem( templateMainFrame , i18n("Select templates") );
+  page->setHeader( i18n("Templates") );
+  page->setIcon( KIcon("wizard"));
+  addPage(page);
+
+
   view_wizard = new K3IconView( templateMainFrame, "view_options" );
   (void)new Q3IconViewItem( view_wizard, i18n("New KMyMoney document"), ic->loadIcon("mime_empty.png", KIconLoader::Desktop, KIconLoader::SizeLarge)/*QPixmap( locate("icon","hicolor/48x48/mimetypes/mime_empty.png") )*/ );
   connect(view_wizard, SIGNAL(executed(Q3IconViewItem *) ), this, SLOT(slotTemplateClicked(Q3IconViewItem *) ) );
@@ -86,14 +95,22 @@ void KStartDlg::setPage_Template()
 /** Set the Misc options Page of the preferences dialog */
 void KStartDlg::setPage_Documents()
 {
-  recentMainFrame = addPage( i18n("Open"), i18n("Open a KMyMoney document"), DesktopIcon("fileopen"));
+
+
+  recentMainFrame = new Q3VBox;
+
+  KPageWidgetItem *page = new KPageWidgetItem( recentMainFrame , i18n("Open a KMyMoney document") );
+  page->setHeader( i18n("Open") );
+  page->setIcon( KIcon("fileopen"));
+  addPage(page);
+
   Q3VBoxLayout *mainLayout = new Q3VBoxLayout( recentMainFrame );
 
   kurlrequest = new KUrlRequester( recentMainFrame );
 
   //allow user to select either a .kmy file, or any generic file.
   kurlrequest->fileDialog()->setFilter( i18n("%1|KMyMoney files (*.kmy)\n" "%2|All files (*.*)","*.kmy","*.*") );
-  kurlrequest->fileDialog()->setMode(KFile::File || KFile::ExistingOnly);
+  kurlrequest->fileDialog()->setMode(KFile::File | KFile::ExistingOnly);
   kurlrequest->fileDialog()->setUrl(KUrl(kmymoney2->readLastUsedDir()));//kurlrequest->fileDialog()->setURL(KUrl(KGlobalSettings::documentPath()));
   mainLayout->addWidget( kurlrequest );
 
@@ -140,8 +157,8 @@ void KStartDlg::readConfig()
     // after program startup. If the wizard was opened the second time,
     // it does not make a difference, if you call setGroup() outside of
     // this loop. The first time it does make a difference!
-    config->group("Recent Files");
-    value = grp.readEntry( QString( "File%1" ).arg( i ), QString::null );
+    KConfigGroup grp= config->group("Recent Files");
+    value = grp.readEntry( QString( "File%1" ).arg( i ));
     if( !value.isNull() && fileExists(value) )
     {
       QString file_name = value.mid(value.findRev('/')+1);
@@ -151,18 +168,21 @@ void KStartDlg::readConfig()
   } while( !value.isNull() );
 
   KConfigGroup grp = config->group("Start Dialog");
-  QSize *defaultSize = new QSize(400,300);
-  this->resize( grp.readEntry("Geometry", *defaultSize ) );
+  QSize defaultSize(400,300);
+  this->resize( grp.readEntry("Geometry", defaultSize ) );
 
   // Restore the last page viewed
   // default to the recent files page if no entry exists but files have been found
   // otherwise, default to template page
+#warning "port to kde4"
+#if 0
   if(view_recent->count() > 0)
-    showPage(grp.readEntry("LastPage", this->pageIndex(recentMainFrame)));
+    setCurrentPage(grp.readEntry("LastPage", this->pageIndex(recentMainFrame)));
   else {
-    showPage(grp.readEntry("LastPage", this->pageIndex(templateMainFrame)));
+    setCurrentPage(grp.readEntry("LastPage", this->pageIndex(templateMainFrame)));
     slotAboutToShowPage(templateMainFrame);
   }
+#endif
 }
 
 /** Write config window */
@@ -172,7 +192,8 @@ void KStartDlg::writeConfig()
 
   KConfigGroup grp = config->group("Start Dialog");
   grp.writeEntry("Geometry", this->size() );
-  grp.writeEntry("LastPage", this->activePageIndex());
+#warning "port to kde4"
+  //grp.writeEntry("LastPage", this->activePageIndex());
   config->sync();
 }
 

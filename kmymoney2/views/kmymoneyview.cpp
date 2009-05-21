@@ -125,7 +125,7 @@
 
 
 KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
-  : KPageWidget(parent, name, KJanusWidget::IconList),
+    : KPageWidget(parent),
   // m_bankRightClick(false),
   m_inConstructor(true),
   m_fileOpen(false),
@@ -1639,8 +1639,8 @@ void KMyMoneyView::progressCallback(int current, int total, const QString& msg)
 void KMyMoneyView::slotRememberPage(QWidget* w)
 {
   KSharedConfigPtr config = KGlobal::config();
-  config->setGroup("Last Use Settings");
-  config->writeEntry("LastViewSelected", pageIndex(w));
+  KConfigGroup grp = config->group("Last Use Settings");
+  grp.writeEntry("LastViewSelected", pageIndex(w));
   config->sync();
 }
 
