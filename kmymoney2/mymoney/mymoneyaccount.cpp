@@ -597,7 +597,7 @@ bool MyMoneyAccount::isCategory(void) const
 QString MyMoneyAccount::brokerageName(void) const
 {
   if(m_accountType == Investment)
-    return QString("%1 (%2)").arg(m_name, i18n("Brokerage (suffix for account names)", "Brokerage"));
+    return QString("%1 (%2)").arg(m_name, i18nc("Brokerage (suffix for account names)", "Brokerage"));
   return m_name;
 }
 
