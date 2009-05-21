@@ -157,11 +157,11 @@ namespace reports {
       //actual dates of the report
     result += QString("<div class=\"subtitle\">");
     if(!m_config.fromDate().isNull()) {
-      result += i18n("Report date range", "%1 through %2",KGlobal::locale()->formatDate(m_config.fromDate()),KGlobal::locale()->formatDate(m_config.toDate()));
+      result += i18nc("Report date range", "%1 through %2",KGlobal::locale()->formatDate(m_config.fromDate()),KGlobal::locale()->formatDate(m_config.toDate()));
       result += QString("</div>\n");
       result += QString("<div class=\"gap\">&nbsp;</div>\n");
 
-      csv += i18n("Report date range", "%1 through %2",KGlobal::locale()->formatDate(m_config.fromDate()),KGlobal::locale()->formatDate(m_config.toDate()));
+      csv += i18nc("Report date range", "%1 through %2",KGlobal::locale()->formatDate(m_config.fromDate()),KGlobal::locale()->formatDate(m_config.toDate()));
       csv += QString("\n");
     }
 
