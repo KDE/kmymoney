@@ -274,8 +274,8 @@ template <class T>
     class WizardPage : public KMyMoneyWizardPage
 {
 public:
-  WizardPage(unsigned int step, QWidget* widget, T* parent, const char* name) :
-    KMyMoneyWizardPage(step, widget, name),
+  WizardPage(unsigned int step, QWidget* widget, T* parent) :
+    KMyMoneyWizardPage(step, widget),
     m_wizard(parent),
     m_wizardBase(parent)
     {

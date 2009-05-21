@@ -112,7 +112,7 @@ MyMoneyPayee NewUserWizard::Wizard::user(void) const
 
 QString NewUserWizard::Wizard::url(void) const
 {
-  return m_filePage->m_dataFileEdit->url();
+  return m_filePage->m_dataFileEdit->url().path();
 }
 
 MyMoneyInstitution NewUserWizard::Wizard::institution(void) const
@@ -157,9 +157,9 @@ Q3ValueList<MyMoneyTemplate> NewUserWizard::Wizard::templates(void) const
   return m_categoriesPage->selectedTemplates();
 }
 
-IntroPage::IntroPage(Wizard* wizard, const char* name) :
+IntroPage::IntroPage(Wizard* wizard) :
   KIntroPageDecl(wizard),
-  WizardPage<Wizard>(stepCount++, this, wizard, name)
+  WizardPage<Wizard>(stepCount++, this, wizard)
 {
 }
 
@@ -243,7 +243,7 @@ CurrencyPage::CurrencyPage(Wizard* wizard) :
     Q3ListViewItem* p = insertCurrency(*it);
     if((*it).id() == baseCurrency) {
       first = p;
-      p->setPixmap(0, QPixmap( locate("icon","hicolor/16x16/apps/kmymoney2.png")));
+      p->setPixmap(0, QPixmap( KStandardDirs::locate("icon","hicolor/16x16/apps/kmymoney2.png")));
     } else {
       p->setPixmap(0, empty);
     }
@@ -294,9 +294,9 @@ bool AccountPage::isComplete(void) const
   return !m_haveCheckingAccountButton->isChecked() || m_mandatoryGroup->isEnabled();
 }
 
-CategoriesPage::CategoriesPage(Wizard* wizard, const char* name) :
+CategoriesPage::CategoriesPage(Wizard* wizard) :
   Accounts(wizard),
-  WizardPage<Wizard>(stepCount++, this, wizard, name)
+  WizardPage<Wizard>(stepCount++, this, wizard)
 {
 }
 
@@ -310,9 +310,9 @@ Q3ValueList<MyMoneyTemplate> CategoriesPage::selectedTemplates(void) const
   return m_templateSelector->selectedTemplates();
 }
 
-PreferencePage::PreferencePage(Wizard* wizard, const char* name) :
+PreferencePage::PreferencePage(Wizard* wizard) :
   KPreferencePageDecl(wizard),
-  WizardPage<Wizard>(stepCount++, this, wizard, name)
+  WizardPage<Wizard>(stepCount++, this, wizard)
 {
   connect(m_openConfigButton, SIGNAL(clicked()), kmymoney2, SLOT(slotSettings()));
 }
@@ -330,7 +330,8 @@ FilePage::FilePage(Wizard* wizard) :
   connect(m_mandatoryGroup, SIGNAL(stateChanged()), object(), SIGNAL(completeStateChanged()));
 
   KUser user;
-  m_dataFileEdit->setShowLocalProtocol(false);
+#warning "port to kde4"
+  //m_dataFileEdit->setShowLocalProtocol(false);
   m_dataFileEdit->setUrl(QString("%1/%2.kmy").arg(QDir::homePath(), user.loginName()));
 }
 
@@ -347,7 +348,7 @@ bool FilePage::isComplete(void) const
     if(rc) {
       QRegExp exp("(.*)/(.*)");
       rc = false;
-      if(exp.search(m_dataFileEdit->url()) != -1) {
+      if(exp.search(m_dataFileEdit->url().path()) != -1) {
         if(exp.cap(2).length() > 0) {
           rc = KIO::NetAccess::exists(exp.cap(1), true, m_wizard);
         }

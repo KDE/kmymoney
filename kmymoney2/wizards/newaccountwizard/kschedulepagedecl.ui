@@ -185,6 +185,13 @@ from account</string>
    <header>kmymoneycombo.h</header>
    <container>1</container>
   </customwidget>
+  <customwidget>
+   <class>KMyMoneyPayeeCombo</class>
+   <extends>QWidget</extends>
+   <header>kmymoneycombo.h</header>
+   <container>1</container>
+  </customwidget>
+
   </customwidgets>
 
 </ui>

@@ -37,8 +37,8 @@ SET( kmymoney_common_LIBS
   ${QT_AND_KDECORE_LIBS} views reports kmymoney_common newuserwizard
   newaccountwizard wizardpages dialogs settings widgets converter
   kmm_storage kmm_mymoney kgpgfile interfaces kmm_plugin dialogs
-  kmm_kdchart ${KDE4_KHTML_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KABC_LIBS})
-
+  ${KDE4_KHTML_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KABC_LIBS})
+#kmm_kdchart
 ########### kmymoney2 executable ###############
 
 SET( kmymoney2_SRCS 
@@ -49,7 +49,7 @@ SET( kmymoney2_SRCS
 #KDE4_ADD_DCOP_STUBS( kmymoney2_SRCS kmymoney2.h )
 
 KDE4_ADD_EXECUTABLE( kmymoney2 ${kmymoney2_SRCS} )
-TARGET_LINK_LIBRARIES( kmymoney2 kgpgfile converter kmymoney_base views kmymoney_common kmm_mymoney widgets dialogs ${kmymoney_link_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QT3SUPPORT_LIBRARY})
+TARGET_LINK_LIBRARIES( kmymoney2 ${kmymoney_common_LIBS} kmm_plugin kgpgfile converter kmymoney_base views kmymoney_common kmm_mymoney widgets dialogs ${kmymoney_link_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QT3SUPPORT_LIBRARY} ${KDE4_KDE3SUPPORT_LIBS})
 
 ########### kmymoneytest executable ###############
 

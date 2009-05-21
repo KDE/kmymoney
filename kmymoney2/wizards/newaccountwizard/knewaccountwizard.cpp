@@ -77,7 +77,7 @@ namespace NewAccountWizard {
     StepParentAccount,
     StepFinish
   };
-};
+}
 NewAccountWizard::Wizard::Wizard(QWidget *parent, const char *name, bool modal, Qt::WFlags flags)
   : KMyMoneyWizard(parent, name, modal, flags)
 {
@@ -394,7 +394,8 @@ void InstitutionPage::slotLoadWidgets(void)
 
   d->m_list.clear();
   MyMoneyFile::instance()->institutionList(d->m_list);
-  qSort(d->m_list);
+#warning "port to kde4"
+  //qSort(d->m_list);
 
   Q3ValueList<MyMoneyInstitution>::const_iterator it_l;
   m_institutionComboBox->insertItem("");
@@ -415,7 +416,7 @@ void InstitutionPage::slotNewInstitution(void)
     for(it_l = d->m_list.begin(); it_l != d->m_list.end(); ++it_l) {
       if((*it_l).id() == institution.id()) {
         // select the item and remember that the very first one is the empty item
-        m_institutionComboBox->setCurrentItem(i+1);
+        m_institutionComboBox->setCurrentIndex(i+1);
         slotSelectInstitution(i+1);
         m_accountNumber->setFocus();
         break;
@@ -501,7 +502,7 @@ void AccountTypePage::hideShowPages(MyMoneyAccount::accountTypeE accountType) co
   m_wizard->setStepHidden(StepParentAccount, accountType == MyMoneyAccount::Loan);
   // Force an update of the steps in case the list has changed
   m_wizard->reselectStep();
-};
+}
 
 KMyMoneyWizardPage* AccountTypePage::nextPage(void) const
 {

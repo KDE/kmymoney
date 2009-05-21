@@ -266,6 +266,11 @@
    <extends>QSpinBox</extends>
    <header>knuminput.h</header>
   </customwidget>
-
-  </customwidgets>
+  <customwidget>                                                                                                                           
+   <class>KMyMoneyFrequencyCombo</class>                                                                                                   
+   <extends>QWidget</extends>                                                                                                              
+   <header>kmymoneycombo.h</header>                                                                                                        
+   <container>1</container>                                                                                                                
+  </customwidget>   
+ </customwidgets>
 </ui>
