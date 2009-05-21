@@ -41,7 +41,7 @@ public slots:
     void toggleDirection( Q3ListViewItem * item );
 
 protected:
-    void addEntry( K3ListView * p, Q3ListViewItem * after, int idx );
+    Q3ListViewItem * addEntry( K3ListView * p, Q3ListViewItem * after, int idx );
 protected slots:
     void slotAvailableSelected( Q3ListViewItem * item );
     void slotSelectedSelected( Q3ListViewItem * item );

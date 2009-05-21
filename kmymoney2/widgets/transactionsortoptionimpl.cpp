@@ -19,8 +19,8 @@
 
 #include "transactionsortoptionimpl.h"
 #include <kiconloader.h>
-
-
+#include "register.h"
+#include "sortoptionlistitem.h"
 
 TransactionSortOption::TransactionSortOption( QWidget *parent )
     :TransactionSortOptionDecl( parent )
