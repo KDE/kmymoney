@@ -12,7 +12,7 @@ SET(libviews_a_SOURCES
   kinvestmentview.cpp
   kmymoneyfile.cpp
   kmymoneytransaction.cpp
-  kmymoneyview.cpp
+  #kmymoneyview.cpp
   #kpayeesview.cpp
   #kreportsview.cpp
   kscheduledlistitem.cpp

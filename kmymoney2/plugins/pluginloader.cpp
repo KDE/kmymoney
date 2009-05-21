@@ -34,7 +34,8 @@
 #include <kconfig.h>
 #include <kpluginselector.h>
 #include <klocale.h>
-
+#include <KServiceTypeTrader>
+#include <KService>
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -69,11 +70,12 @@ PluginLoader::PluginLoader(QObject* parent)
 
   d->m_parent = parent;
 
-  KTrader::OfferList offers = KTrader::self()->query("KMyMoneyPlugin");
+  KService::List offers = KServiceTypeTrader::self()->query("KMyMoneyPlugin");
   d->m_pluginList = KPluginInfo::fromServices(offers);
 
   d->m_pluginSelector = new KPluginSelector(NULL);
-  d->m_pluginSelector->setShowEmptyConfigPage(false);
+#warning "port to kde4"
+  //d->m_pluginSelector->setShowEmptyConfigPage(false);
   d->m_pluginSelector->addPlugins(d->m_pluginList);
   d->m_pluginSelector->load();
 
@@ -89,7 +91,7 @@ PluginLoader::~PluginLoader()
 void PluginLoader::loadPlugins()
 {
   for( KPluginInfo::List::Iterator it = d->m_pluginList.begin(); it != d->m_pluginList.end(); ++it )
-    loadPlugin( *it );
+    loadPlugin( &(*it) );
 }
 
 void PluginLoader::loadPlugin(KPluginInfo* info)
@@ -101,8 +103,9 @@ void PluginLoader::loadPlugin(KPluginInfo* info)
       // the plugin is enabled but it is not loaded
       KService::Ptr service = info->service();
       int error = 0;
-      Plugin* plugin = KParts::ComponentFactory
-                ::createInstanceFromService<Plugin>(service, d->m_parent, info->name(), QStringList(), &error);
+#warning "port to kde4"
+#if 0
+      Plugin* plugin = KService::createInstance<Plugin>(service, d->m_parent, info->name(), QStringList(), &error);
       if (plugin) {
         kDebug() << "KMyMoneyPlugin::PluginLoader: Loaded plugin " << plugin->name();
         d->m_loadedPlugins.insert(info->name(), plugin);
@@ -113,10 +116,14 @@ void PluginLoader::loadPlugin(KPluginInfo* info)
                     << info->name()
                     << " with error number "
                     << error << endl;
-        if (error == KParts::ComponentFactory::ErrNoLibrary)
+#warning "port to kde4"
+#if 0
+	if (error == KParts::ComponentFactory::ErrNoLibrary)
           kWarning() << "KLibLoader says: "
                       << KLibLoader::self()->lastErrorMessage() << endl;
+#endif
       }
+#endif      
     }
   }
   else {

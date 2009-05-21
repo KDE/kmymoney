@@ -12,7 +12,7 @@ INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} )
 SET(kmm_plugin_LIB_SRCS
   importinterface.cpp 
   #kmymoneyplugin.cpp 
-  #pluginloader.cpp
+  pluginloader.cpp
   statementinterface.cpp viewinterface.cpp)
 
 SET(plugins_HEADERS
