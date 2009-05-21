@@ -10,8 +10,7 @@ SET(storage_a_SOURCES
   #mymoneydatabasemgr.cpp
   )
 
-KDE4_ADD_KCFG_FILES(storage_a_SOURCES
-  ${KMyMoney2_SOURCE_DIR}/kmymoneysettings.kcfgc )
+KDE4_ADD_KCFG_FILES(storage_a_SOURCES  ../../kmymoneysettings.kcfgc )
 
 # This library is actually not needed. It is built just for
 # convenience, and then linked into kmm_mymoney.

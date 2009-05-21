@@ -91,8 +91,7 @@ SET(_uncritial_common_sources ${_uncritial_common_sources}
 ADD_CUSTOM_TARGET(generate_base_ui_srcs DEPENDS
   ${kmymoney_base_ui_srcs})
 
-KDE4_ADD_KCFG_FILES(_uncritial_common_sources
-  ${KMyMoney2_SOURCE_DIR}/kmymoneysettings.kcfgc)
+KDE4_ADD_KCFG_FILES(_uncritial_common_sources ../kmymoneysettings.kcfgc)
 
 # We can compile the uncritical sources without KMM_DESIGNER flags
 KDE4_ADD_LIBRARY(kmymoney_base STATIC ${_uncritial_common_sources})
