@@ -39,7 +39,7 @@
 #include "kmymoneycurrencyselector.h"
 
 KMyMoneySecuritySelector::KMyMoneySecuritySelector(QWidget *parent, const char *name ) :
-  KComboBox(parent, name),
+  KComboBox(parent),
   m_displayItem(FullName),
   m_displayOnly(false),
   m_displayType(TypeAll)
@@ -48,7 +48,7 @@ KMyMoneySecuritySelector::KMyMoneySecuritySelector(QWidget *parent, const char *
 }
 
 KMyMoneySecuritySelector::KMyMoneySecuritySelector(displayTypeE type, QWidget *parent, const char *name ) :
-  KComboBox(parent,name),
+  KComboBox(parent),
   m_displayItem(FullName),
   m_displayOnly(false),
   m_displayType(type)
@@ -82,7 +82,8 @@ void KMyMoneySecuritySelector::update(const QString& id)
     m_list += MyMoneyFile::instance()->securityList();
 
   // sort
-  qSort(m_list);
+#warning "port to kde4"
+  //qSort(m_list);
 
   Q3ValueList<MyMoneySecurity>::ConstIterator it;
 
@@ -112,7 +113,7 @@ void KMyMoneySecuritySelector::update(const QString& id)
         break;
     }
     if((*it).id() == baseCurrency) {
-      insertItem(QPixmap( locate("icon","hicolor/16x16/apps/kmymoney2.png")),
+      insertItem(QPixmap( KStandardDirs::locate("icon","hicolor/16x16/apps/kmymoney2.png")),
                           display, itemId);
     } else {
       insertItem(empty, display, itemId);
@@ -125,7 +126,7 @@ void KMyMoneySecuritySelector::update(const QString& id)
 
     itemId++;
   }
-  setCurrentItem(m_selectedItemId);
+  setCurrentIndex(m_selectedItemId);
 }
 
 void KMyMoneySecuritySelector::setDisplayOnly(const bool disp)
@@ -146,7 +147,7 @@ void KMyMoneySecuritySelector::setDisplayOnly(const bool disp)
 
 void KMyMoneySecuritySelector::slotSetInitialSecurity(void)
 {
-  setCurrentItem(m_selectedItemId);
+  setCurrentIndex(m_selectedItemId);
 }
 
 const MyMoneySecurity& KMyMoneySecuritySelector::security(void) const

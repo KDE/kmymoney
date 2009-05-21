@@ -79,7 +79,7 @@ void kMyMoneyLineEdit::focusOutEvent(QFocusEvent *ev)
 void kMyMoneyLineEdit::keyReleaseEvent(QKeyEvent* k)
 {
   if(m_forceMonetaryDecimalSymbol) {
-    if(k->state() & Qt::KeypadModifierModifierModifierModifier) {
+    if(k->state() & Qt::KeypadModifier) {
       if(k->key() == Qt::Key_Comma
       || k->key() == Qt::Key_Period) {
         if(KGlobal::locale()->monetaryDecimalSymbol() == ",") {
@@ -104,7 +104,7 @@ void kMyMoneyLineEdit::keyReleaseEvent(QKeyEvent* k)
 void kMyMoneyLineEdit::keyPressEvent(QKeyEvent* k)
 {
   if(m_forceMonetaryDecimalSymbol) {
-    if(k->state() & Qt::KeypadModifierModifierModifierModifier) {
+    if(k->state() & Qt::KeypadModifier) {
       if(k->key() == Qt::Key_Comma
       || k->key() == Qt::Key_Period) {
         if(KGlobal::locale()->monetaryDecimalSymbol() == ",") {
@@ -128,7 +128,8 @@ void kMyMoneyLineEdit::keyPressEvent(QKeyEvent* k)
 
 void kMyMoneyLineEdit::drawContents( QPainter *p)
 {
-  KLineEdit::drawContents(p);
+#warning "port to kde4"	
+  //KLineEdit::drawContents(p);
 
   if(text().isEmpty() && !m_hint.isEmpty() && !hasFocus()) {
     const int innerMargin = 1;

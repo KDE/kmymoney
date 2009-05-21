@@ -54,12 +54,12 @@ void kMandatoryFieldGroup::add(QWidget *widget)
 {
   if (!widgets.contains(widget)) {
     if (widget->inherits("QCheckBox"))
-      connect((QCheckBox*)widget->qt_cast("QCheckBox"),
+      connect(qobject_cast<QCheckBox*>(widget),
                SIGNAL(clicked()),
                this, SLOT(changed()));
 
     else if (widget->inherits("QComboBox")) {
-      QComboBox* combo = (QComboBox*)widget->qt_cast("QComboBox");
+      QComboBox* combo = qobject_cast<QComboBox*>(widget);
       QLineEdit* lineedit = combo->lineEdit();
       if(lineedit) {
         connect(lineedit, SIGNAL(textChanged(const QString&)), this, SLOT(changed()));
@@ -69,17 +69,17 @@ void kMandatoryFieldGroup::add(QWidget *widget)
     }
 
     else if (widget->inherits("QLineEdit"))
-      connect((QLineEdit*)widget->qt_cast("QLineEdit"),
+      connect(qobject_cast<QLineEdit*>(widget),
                SIGNAL(textChanged(const QString&)),
                this, SLOT(changed()));
 
     else if (widget->inherits("QSpinBox"))
-      connect((QSpinBox*)widget->qt_cast("QSpinBox"),
+      connect(qobject_cast<QSpinBox*>(widget),
                SIGNAL(valueChanged(const QString&)),
                       this, SLOT(changed()));
 
     else if (widget->inherits("QListBox"))
-      connect((Q3ListBox*)widget->qt_cast("QListBox"),
+      connect(qobject_cast<Q3ListBox*>(widget),
                SIGNAL(selectionChanged()),
                       this, SLOT(changed()));
 
@@ -124,28 +124,28 @@ void kMandatoryFieldGroup::changed(void)
       continue;
     }
     if (widget->inherits("QCheckBox")) {
-      if (((QCheckBox*)widget->qt_cast("QCheckBox"))->state() == QCheckBox::NoChange) {
+      if ((qobject_cast<QCheckBox*>(widget))->state() == QCheckBox::NoChange) {
         enable = false;
         break;
       } else
         continue;
     }
     if (widget->inherits("QComboBox")) {
-      if (((QComboBox*)widget->qt_cast("QComboBox"))->currentText().isEmpty()) {
+      if ((qobject_cast<QComboBox*>(widget))->currentText().isEmpty()) {
         enable = false;
         break;
       } else
         continue;
     }
     if (widget->inherits("QLineEdit")) {
-      if (((QLineEdit*)widget->qt_cast("QLineEdit"))->text().isEmpty()) {
+      if ((qobject_cast<QLineEdit*>(widget))->text().isEmpty()) {
         enable = false;
         break;
       } else
         continue;
     }
     if (widget->inherits("QListBox")) {
-      if (((Q3ListBox*)widget->qt_cast("QListBox"))->selectedItem() == 0) {
+      if ((qobject_cast<Q3ListBox*>(widget))->selectedItem() == 0) {
         enable = false;
         break;
       } else

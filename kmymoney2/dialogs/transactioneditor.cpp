@@ -507,7 +507,8 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
 
   // make sure to run through all stuff that is tied to 'focusout events'.
   m_regForm->parentWidget()->setFocus();
-  QApplication::eventLoop()->processEvents(QEventLoop::ExcludeUserInput, 10);
+#warning "port to kde4"
+  //QApplication::eventLoop()->processEvents(QEventLoop::ExcludeUserInput, 10);
 
   // we don't need to update our widgets anymore, so we just disconnect the signal
   disconnect(file, SIGNAL(dataChanged()), this, SLOT(slotReloadEditWidgets()));
@@ -823,7 +824,8 @@ void StdTransactionEditor::createEditWidgets(void)
   QLabel* label;
   m_editWidgets["category-label"] = label = new QLabel(i18n("Category"), 0);
   label->setAlignment(Qt::AlignVCenter | Qt::TextDontClip);
-
+#warning "port to kde4"
+#if 0
   // create a copy of tabbar above the form (if we are created for a form)
   KMyMoneyTransactionForm::TransactionForm* form = dynamic_cast<KMyMoneyTransactionForm::TransactionForm*>(m_regForm);
   if(form) {
@@ -833,7 +835,7 @@ void StdTransactionEditor::createEditWidgets(void)
     tabbar->copyTabs(form->tabBar());
     connect(tabbar, SIGNAL(tabSelected(int)), this, SLOT(slotUpdateAction(int)));
   }
-
+#endif
   label = new QLabel(i18n("Date"), 0);
   label->setAlignment(Qt::AlignVCenter | Qt::TextDontClip);
   m_editWidgets["date-label"] = label;
@@ -861,6 +863,8 @@ bool StdTransactionEditor::isTransfer(const QString& accId1, const QString& accI
 
 void StdTransactionEditor::loadEditWidgets(KMyMoneyRegister::Action action)
 {
+#warning "port to kde4"	
+#if 0	
   // don't kick off VAT processing from here
   m_inUpdateVat = true;
 
@@ -1058,6 +1062,7 @@ void StdTransactionEditor::loadEditWidgets(KMyMoneyRegister::Action action)
 
   // allow kick off VAT processing again
   m_inUpdateVat = false;
+#endif
 }
 
 QWidget* StdTransactionEditor::firstWidget(void) const
@@ -1402,6 +1407,8 @@ void StdTransactionEditor::slotUpdateCashFlow(KMyMoneyRegister::CashFlowDirectio
 
 void StdTransactionEditor::slotUpdateCategory(const QString& id)
 {
+#warning "port to kde4"
+#if 0	
   QLabel *categoryLabel = dynamic_cast<QLabel*>(haveWidget("category-label"));
   // qDebug("Update category to %s", id.data());
 
@@ -1450,6 +1457,7 @@ void StdTransactionEditor::slotUpdateCategory(const QString& id)
       tabbar->update();
   }
   updateVAT(false);
+#endif
 }
 
 void StdTransactionEditor::slotUpdatePayment(const QString& txt)

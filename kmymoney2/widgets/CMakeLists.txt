@@ -39,7 +39,7 @@ SET(kmymoney_STAT_HEADERS
 # contain the KMM_DESIGNER flag
 SET(_uncritial_common_sources
 	kbudgetvalues.cpp
-	#kguiutils.cpp
+	kguiutils.cpp
   kmymoneyaccountselector.cpp
   kmymoneyaccounttreebudget.cpp
   kmymoneyaccounttree.cpp
@@ -48,11 +48,11 @@ SET(_uncritial_common_sources
   kmymoneychecklistitem.cpp
   kmymoneycombo.cpp
   kmymoneycompletion.cpp
-  #kmymoneycurrencyselector.cpp
-  #kmymoneydateinput.cpp
-  #kmymoneydatetbl.cpp
+  kmymoneycurrencyselector.cpp
+  kmymoneydateinput.cpp
+  kmymoneydatetbl.cpp
   kmymoneyedit.cpp
-  #kmymoneylineedit.cpp
+  kmymoneylineedit.cpp
   kmymoneylistviewitem.cpp
   #kmymoneytitlelabel.cpp
   kmymoneywizard.cpp
@@ -67,13 +67,13 @@ SET(_uncritial_common_sources
 
 # sources that contain the KMM_DESIGNER flag
 SET (_critial_common_sources
-	#kaccounttemplateselector.cpp
+	kaccounttemplateselector.cpp
   kmymoneyaccountcombo.cpp
   kmymoneyaccountcompletion.cpp
   kmymoneyaccounttreebase.cpp
   kmymoneycategory.cpp
   kmymoneyselector.cpp
-  #register.cpp
+  register.cpp
   )
 
 

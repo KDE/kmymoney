@@ -74,7 +74,7 @@ bool KMyMoneyDateEdit::event(QEvent* e)
   return rc;
 }
 
-kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, const char *name, Qt::AlignmentFlags flags)
+kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, const char *name, Qt::AlignmentFlag flags)
  : Q3HBox(parent,name)
 {
   m_qtalignment = flags;
@@ -253,9 +253,12 @@ void kMyMoneyDateInput::keyPressEvent(QKeyEvent * k)
       break;
 
     default:
+#warning "port to kde4"
+#if 0
       if(today.contains(KKey(k)) || k->key() == Qt::Key_T) {
         slotDateChosen(QDate::currentDate());
       }
+#endif      
       break;
   }
 }

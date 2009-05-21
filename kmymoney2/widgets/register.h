@@ -601,7 +601,7 @@ private:
   Column                       m_lastCol;
   Q3ValueList<TransactionSortField> m_sortOrder;
   QMap<QPair<int, int>, QWidget*> m_cellWidgets;
-  RegisterToolTip*             m_tooltip;
+  //RegisterToolTip*             m_tooltip;
   QRect                        m_lastRepaintRect;
   unsigned int                 m_drawCounter;
 };

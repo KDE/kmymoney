@@ -195,7 +195,7 @@ bool ItemPtrVector::item_cmp(RegisterItem* i1, RegisterItem* i2)
         break;
 
       case EntryOrderSort:
-        rc = qstrcmp(i1->sortEntryOrder(), i2->sortEntryOrder());
+        rc = qstrcmp(i1->sortEntryOrder().latin1(), i2->sortEntryOrder().latin1());
         break;
 
       case TypeSort:
@@ -225,7 +225,7 @@ bool ItemPtrVector::item_cmp(RegisterItem* i1, RegisterItem* i2)
   }
 
   if(rc == 0) {
-    rc = qstrcmp(i1->sortEntryOrder(), i2->sortEntryOrder());
+    rc = qstrcmp(i1->sortEntryOrder().toLatin1(), i2->sortEntryOrder().toLatin1());
   }
 
   return rc < 0;
@@ -351,7 +351,7 @@ void GroupMarker::paintRegisterCell(QPainter* painter, int row, int /* col */, c
 
     font.setBold(false);
     painter->setFont(font);
-    painter->drawText(cellRect, Qt::AlignVCenter | Qt::AlignCenter, KGlobal::locale()->formatDate(sortPostDate(), true));
+    painter->drawText(cellRect, Qt::AlignVCenter | Qt::AlignCenter, KGlobal::locale()->formatDate(sortPostDate()));
   }
 
   painter->restore();
@@ -497,7 +497,7 @@ ReconcileGroupMarker::ReconcileGroupMarker(Register* parent, MyMoneySplit::recon
       break;
   }
 }
-
+#if 0
 class RegisterToolTip : public QToolTip
 {
 public:
@@ -545,6 +545,7 @@ void RegisterToolTip::maybeTip(const QPoint& pos)
   tip(r, msg);
   return;
 }
+#endif
 
 Register::Register(QWidget *parent, const char *name ) :
   TransactionEditorContainer(parent, name),
@@ -564,7 +565,8 @@ Register::Register(QWidget *parent, const char *name ) :
   m_buttonState(Qt::ButtonState(0)),
   m_drawCounter(0)
 {
-  m_tooltip = new RegisterToolTip(viewport(), this);
+#warning "port to kde4"	
+  //m_tooltip = new RegisterToolTip(viewport(), this);
 
   setNumCols(MaxColumns);
   setCurrentCell(0, 1);
@@ -655,8 +657,8 @@ void Register::dropEvent(QDropEvent* event)
 Register::~Register()
 {
   clear();
-  delete m_tooltip;
-  m_tooltip = 0;
+  //delete m_tooltip;
+  //m_tooltip = 0;
 }
 
 void Register::slotAutoColumnSizing(int section)
@@ -1063,8 +1065,9 @@ void Register::drawContents( QPainter *p, int cx, int cy, int cw, int ch )
 {
   // the QTable::drawContents() method does not honor the block update flag
   // so we take care of it here
-  if ( testWState(WState_Visible|WState_BlockUpdates) != WState_Visible )
-    return;
+#warning "port to kde4"
+  //if ( testWState(WState_Visible|WState_BlockUpdates) != WState_Visible )
+    //return;
 
   if(m_listsDirty) {
     updateRegister(KMyMoneyGlobalSettings::ledgerLens() | !KMyMoneyGlobalSettings::transactionForm());
@@ -1365,7 +1368,8 @@ void Register::adjustColumn(int col)
   Q_UNUSED(col)
 #else
   QString msg = "%1 adjusting column %2";
-  ::timetrace((msg.arg("Start").arg(col)).data());
+#warning "port to kde4"
+  //::timetrace((msg.arg("Start").arg(col)).data());
   Q3Header *topHeader = horizontalHeader();
   QFontMetrics cellFontMetrics(KMyMoneyGlobalSettings::listCellFont());
 
@@ -1385,7 +1389,7 @@ void Register::adjustColumn(int col)
 
   // check for date column
   if(col == DateColumn) {
-    QString txt = KGlobal::locale()->formatDate(QDate(6999,12,29), true);
+    QString txt = KGlobal::locale()->formatDate(QDate(6999,12,29));
     int nw = cellFontMetrics.width(txt+"  ");
     w = qMax( w, nw );
   } else {
@@ -1442,10 +1446,12 @@ void Register::repaintItems(RegisterItem* first, RegisterItem* last)
     // make sure that the previously triggered repaint has been done before we
     // trigger the next. Not having this used to cause some trouble when changing
     // the focus within a 2000 item ledger from the last to the first item.
-    QApplication::eventLoop()->processEvents(QEventLoop::ExcludeUserInput, 10);
+#warning "port to kde4"
+    //QApplication::eventLoop()->processEvents(QEventLoop::ExcludeUserInput, 10);
   }
   m_lastRepaintRect = r;
-  QApplication::postEvent( viewport(), new QPaintEvent( r, FALSE ) );
+#warning "port to kde4"
+  //QApplication::postEvent( viewport(), new QPaintEvent( r, FALSE ) );
 
 }
 

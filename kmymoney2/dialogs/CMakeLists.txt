@@ -55,7 +55,7 @@ SET(libdialogs_a_SOURCES
   #kstartdlg.cpp
   kupdatestockpricedlg.cpp 
   mymoneyqifprofileeditor.cpp
-  #transactioneditor.cpp 
+  transactioneditor.cpp 
   transactionmatcher.cpp
   )
 
