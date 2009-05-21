@@ -845,7 +845,7 @@ StdTransaction::StdTransaction(Register *parent, const MyMoneyTransaction& trans
     m_categoryHeader = i18n("Category");
     switch(transaction.splitCount()) {
       default:
-        m_category = i18n("Split transaction (category replacement)", "Split transaction");
+        m_category = i18nc("Split transaction (category replacement)", "Split transaction");
         break;
 
       case 0: // the empty transaction
@@ -1392,7 +1392,7 @@ InvestTransaction::InvestTransaction(Register *parent, const MyMoneyTransaction&
       break;
 
     default:
-      m_feeCategory = i18n("Split transaction (category replacement)", "Split transaction");
+      m_feeCategory = i18nc("Split transaction (category replacement)", "Split transaction");
       break;
   }
 
@@ -1406,7 +1406,7 @@ InvestTransaction::InvestTransaction(Register *parent, const MyMoneyTransaction&
       break;
 
     default:
-      m_interestCategory = i18n("Split transaction (category replacement)", "Split transaction");
+      m_interestCategory = i18nc("Split transaction (category replacement)", "Split transaction");
       break;
   }
 

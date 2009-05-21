@@ -240,7 +240,7 @@ void kMyMoneyDateInput::resizeEvent(QResizeEvent* ev)
   */
 void kMyMoneyDateInput::keyPressEvent(QKeyEvent * k)
 {
-  KShortcut today(i18n("Enter todays date into date input widget", "T"));
+  KShortcut today(i18nc("Enter todays date into date input widget", "T"));
 
   switch(k->key()) {
     case Qt::Key_Equal:

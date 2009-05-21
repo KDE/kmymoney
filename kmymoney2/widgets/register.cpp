@@ -448,15 +448,15 @@ TypeGroupMarker::TypeGroupMarker(Register* parent, CashFlowDirection dir, MyMone
 {
   switch(dir) {
     case Deposit:
-      m_txt = i18n("Deposits onto account", "Deposits");
+      m_txt = i18nc("Deposits onto account", "Deposits");
       if(accType == MyMoneyAccount::CreditCard) {
-        m_txt = i18n("Payments towards credit card", "Payments");
+        m_txt = i18nc("Payments towards credit card", "Payments");
       }
       break;
     case Payment:
-      m_txt = i18n("Payments made from account", "Payments");
+      m_txt = i18nc("Payments made from account", "Payments");
       if(accType == MyMoneyAccount::CreditCard) {
-        m_txt = i18n("Payments made with credit card", "Charges");
+        m_txt = i18nc("Payments made with credit card", "Charges");
       }
       break;
     default:
@@ -481,16 +481,16 @@ ReconcileGroupMarker::ReconcileGroupMarker(Register* parent, MyMoneySplit::recon
 {
   switch(state) {
     case MyMoneySplit::NotReconciled:
-      m_txt = i18n("Reconcile state 'Not reconciled'", "Not reconciled");
+      m_txt = i18nc("Reconcile state 'Not reconciled'", "Not reconciled");
       break;
     case MyMoneySplit::Cleared:
-      m_txt = i18n("Reconcile state 'Cleared'", "Cleared");
+      m_txt = i18nc("Reconcile state 'Cleared'", "Cleared");
       break;
     case MyMoneySplit::Reconciled:
-      m_txt = i18n("Reconcile state 'Reconciled'", "Reconciled");
+      m_txt = i18nc("Reconcile state 'Reconciled'", "Reconciled");
       break;
     case MyMoneySplit::Frozen:
-      m_txt = i18n("Reconcile state 'Frozen'", "Frozen");
+      m_txt = i18nc("Reconcile state 'Frozen'", "Frozen");
       break;
     default:
       m_txt = i18n("Unknown");
@@ -746,8 +746,8 @@ void Register::setupRegister(const MyMoneyAccount& account, bool showAccountColu
   for(int i = 0; i < MaxColumns; ++i)
     hideColumn(i);
 
-  horizontalHeader()->setLabel(PaymentColumn, i18n("Payment made from account", "Payment"));
-  horizontalHeader()->setLabel(DepositColumn, i18n("Deposit into account", "Deposit"));
+  horizontalHeader()->setLabel(PaymentColumn, i18nc("Payment made from account", "Payment"));
+  horizontalHeader()->setLabel(DepositColumn, i18nc("Deposit into account", "Deposit"));
 
   if(account.id().isEmpty()) {
     setUpdatesEnabled(enabled);
@@ -823,18 +823,18 @@ void Register::setupRegister(const MyMoneyAccount& account, bool showAccountColu
   // headings
   switch(account.accountType()) {
     case MyMoneyAccount::CreditCard:
-      horizontalHeader()->setLabel(PaymentColumn, i18n("Payment made with credit card", "Charge"));
-      horizontalHeader()->setLabel(DepositColumn, i18n("Payment towards credit card", "Payment"));
+      horizontalHeader()->setLabel(PaymentColumn, i18nc("Payment made with credit card", "Charge"));
+      horizontalHeader()->setLabel(DepositColumn, i18nc("Payment towards credit card", "Payment"));
       break;
     case MyMoneyAccount::Asset:
     case MyMoneyAccount::AssetLoan:
-      horizontalHeader()->setLabel(PaymentColumn, i18n("Decrease of asset/liability value", "Decrease"));
-      horizontalHeader()->setLabel(DepositColumn, i18n("Increase of asset/liability value", "Increase"));
+      horizontalHeader()->setLabel(PaymentColumn, i18nc("Decrease of asset/liability value", "Decrease"));
+      horizontalHeader()->setLabel(DepositColumn, i18nc("Increase of asset/liability value", "Increase"));
       break;
     case MyMoneyAccount::Liability:
     case MyMoneyAccount::Loan:
-      horizontalHeader()->setLabel(PaymentColumn, i18n("Increase of asset/liability value", "Increase"));
-      horizontalHeader()->setLabel(DepositColumn, i18n("Decrease of asset/liability value", "Decrease"));
+      horizontalHeader()->setLabel(PaymentColumn, i18nc("Increase of asset/liability value", "Increase"));
+      horizontalHeader()->setLabel(DepositColumn, i18nc("Decrease of asset/liability value", "Decrease"));
       break;
     case MyMoneyAccount::Income:
     case MyMoneyAccount::Expense:
@@ -2363,7 +2363,7 @@ void Register::addGroupMarkers(void)
         for(it = list.begin(); it != list.end(); ++it) {
           name = it.key();
           if(name.isEmpty()) {
-            name = i18n("Unknown payee", "Unknown");
+            name = i18nc("Unknown payee", "Unknown");
           }
           new KMyMoneyRegister::PayeeGroupMarker(this, name);
         }
@@ -2382,7 +2382,7 @@ void Register::addGroupMarkers(void)
         for(it = list.begin(); it != list.end(); ++it) {
           name = it.key();
           if(name.isEmpty()) {
-            name = i18n("Unknown category", "Unknown");
+            name = i18nc("Unknown category", "Unknown");
           }
           new KMyMoneyRegister::CategoryGroupMarker(this, name);
         }
@@ -2401,7 +2401,7 @@ void Register::addGroupMarkers(void)
         for(it = list.begin(); it != list.end(); ++it) {
           name = it.key();
           if(name.isEmpty()) {
-            name = i18n("Unknown security", "Unknown");
+            name = i18nc("Unknown security", "Unknown");
           }
           new KMyMoneyRegister::CategoryGroupMarker(this, name);
         }

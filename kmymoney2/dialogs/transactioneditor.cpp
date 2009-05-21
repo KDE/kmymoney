@@ -599,7 +599,7 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
                     i18n("Accepts the entered data and stores it as schedule"),
                     i18n("Use this to schedule the transaction for later entry into the ledger."));
 
-            enter = KMessageBox::questionYesNo(m_regForm, QString("<qt>%1</qt>").arg(i18n("The transaction you are about to enter has a post date in the future.<br/><br/>Do you want to enter it in the ledger or add it to the schedules?")), i18n("Dialog caption for 'Enter or schedule' dialog", "Enter or schedule?"), enterButton, scheduleButton, "EnterOrScheduleTransactionInFuture") == KMessageBox::Yes;
+            enter = KMessageBox::questionYesNo(m_regForm, QString("<qt>%1</qt>").arg(i18n("The transaction you are about to enter has a post date in the future.<br/><br/>Do you want to enter it in the ledger or add it to the schedules?")), i18nc("Dialog caption for 'Enter or schedule' dialog", "Enter or schedule?"), enterButton, scheduleButton, "EnterOrScheduleTransactionInFuture") == KMessageBox::Yes;
           }
           if(enter) {
             // add new transaction

@@ -119,7 +119,7 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
   MyMoneyFile *file = MyMoneyFile::instance();
 
   // load the price mode combo
-  m_priceMode->insertItem(i18n("default price mode", "<default>"), 0);
+  m_priceMode->insertItem(i18nc("default price mode", "<default>"), 0);
   m_priceMode->insertItem(i18n("Price per share"), 1);
   m_priceMode->insertItem(i18n("Total for all shares"), 2);
 

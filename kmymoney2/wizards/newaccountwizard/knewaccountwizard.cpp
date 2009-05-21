@@ -1129,15 +1129,15 @@ QString LoanDetailsPage::updateTermWidgets(const long double val)
 
   switch(unit) {
     case MyMoneySchedule::OCCUR_MONTHLY:
-      valString = i18n("one month", "%n months", vl);
+      valString = i18np("one month", "%n months", vl);
       m_termUnit->setCurrentItem(MyMoneySchedule::OCCUR_MONTHLY);
       break;
     case MyMoneySchedule::OCCUR_YEARLY:
-      valString = i18n("one year", "%n years", vl);
+      valString = i18np("one year", "%n years", vl);
       m_termUnit->setCurrentItem(MyMoneySchedule::OCCUR_YEARLY);
       break;
     default:
-      valString = i18n("one payment", "%n payments", vl);
+      valString = i18np("one payment", "%n payments", vl);
       m_termUnit->setCurrentItem(MyMoneySchedule::OCCUR_ONCE);
       break;
   }

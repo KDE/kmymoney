@@ -161,42 +161,42 @@ QString MyMoneyQifReader::Private::accountTypeToQif(MyMoneyAccount::accountTypeE
 QString MyMoneyQifReader::Private::typeToAccountName(const QString& type) const
 {
   if(type == "reinvdiv")
-    return i18n("Category name", "Reinvested dividend");
+    return i18nc("Category name", "Reinvested dividend");
 
   if(type == "reinvlg")
-    return i18n("Category name", "Reinvested dividend (long term)");
+    return i18nc("Category name", "Reinvested dividend (long term)");
 
   if(type == "reinvsh")
-    return i18n("Category name", "Reinvested dividend (short term)");
+    return i18nc("Category name", "Reinvested dividend (short term)");
 
   if (type == "div")
-    return i18n("Category name", "Dividend");
+    return i18nc("Category name", "Dividend");
 
   if(type == "intinc")
-    return i18n("Category name", "Interest");
+    return i18nc("Category name", "Interest");
 
   if(type == "cgshort")
-    return i18n("Category name", "Capital Gain (short term)");
+    return i18nc("Category name", "Capital Gain (short term)");
 
   if( type == "cgmid")
-    return i18n("Category name", "Capital Gain (mid term)");
+    return i18nc("Category name", "Capital Gain (mid term)");
 
   if(type == "cglong")
-    return i18n("Category name", "Capital Gain (long term)");
+    return i18nc("Category name", "Capital Gain (long term)");
 
   if(type == "rtrncap")
-    return i18n("Category name", "Returned capital");
+    return i18nc("Category name", "Returned capital");
 
   if(type == "miscinc")
-    return i18n("Category name", "Miscellaneous income");
+    return i18nc("Category name", "Miscellaneous income");
 
   if(type == "miscexp")
-    return i18n("Category name", "Miscellaneous expense");
+    return i18nc("Category name", "Miscellaneous expense");
 
   if(type == "sell" || type == "buy")
-    return i18n("Category name", "Investment fees");
+    return i18nc("Category name", "Investment fees");
 
-  return i18n("Unknown QIF type %1").arg(type);
+  return i18n("Unknown QIF type %1", type);
 }
 
 bool MyMoneyQifReader::Private::isTransfer(QString& tmp, const QString& leftDelim, const QString& rightDelim)
@@ -558,21 +558,21 @@ void MyMoneyQifReader::processQifSpecial(const QString& _line)
       d->firstTransaction = true;
       d->transactionType = m_entryType = EntryTransaction;
 
-    } else if(line.toLower() == "oth l" || line.toLower() == i18n("QIF tag for liability account", "Oth L").toLower()) {
+    } else if(line.toLower() == "oth l" || line.toLower() == i18nc("QIF tag for liability account", "Oth L").toLower()) {
       d->accountType = MyMoneyAccount::Liability;
       d->firstTransaction = true;
       d->transactionType = m_entryType = EntryTransaction;
 
-    } else if(line.toLower() == "cat" || line.toLower() == i18n("QIF tag for category", "Cat").toLower()) {
+    } else if(line.toLower() == "cat" || line.toLower() == i18nc("QIF tag for category", "Cat").toLower()) {
       m_entryType = EntryCategory;
 
-    } else if(line.toLower() == "security" || line.toLower() == i18n("QIF tag for security", "Security").toLower()) {
+    } else if(line.toLower() == "security" || line.toLower() == i18nc("QIF tag for security", "Security").toLower()) {
       m_entryType = EntrySecurity;
 
-    } else if(line.toLower() == "invst" || line.toLower() == i18n("QIF tag for investment account", "Invst").toLower()) {
+    } else if(line.toLower() == "invst" || line.toLower() == i18nc("QIF tag for investment account", "Invst").toLower()) {
       d->transactionType = m_entryType = EntryInvestmentTransaction;
 
-    } else if(line.toLower() == "prices" || line.toLower() == i18n("QIF tag for prices", "Prices").toLower()) {
+    } else if(line.toLower() == "prices" || line.toLower() == i18nc("QIF tag for prices", "Prices").toLower()) {
       m_entryType = EntryPrice;
 
     } else if(line.toLower() == "bank" || KMyMoneyGlobalSettings::qifBank().toLower().contains(line.toLower())) {
@@ -590,7 +590,7 @@ void MyMoneyQifReader::processQifSpecial(const QString& _line)
       m_entryType = EntryMemorizedTransaction;
 
 #endif
-    } else if(line.toLower() == "class" || line.toLower() == i18n("QIF tag for a class", "Class").toLower()) {
+    } else if(line.toLower() == "class" || line.toLower() == i18nc("QIF tag for a class", "Class").toLower()) {
       m_entryType = EntryClass;
 
     } else {
