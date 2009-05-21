@@ -69,8 +69,8 @@ KForecastView::KForecastView(QWidget *parent) :
   //m_adviceList->setAllColumnsShowFocus(true);
   m_advancedList->setAllColumnsShowFocus(true);
 
-  m_forecastChart = new KReportChartView(m_tabChart, "forecastChart" );
-  m_forecastChart->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );
+  //m_forecastChart = new KReportChartView(m_tabChart, "forecastChart" );
+  //m_forecastChart->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );
 
   loadForecastSettings();
 
@@ -86,8 +86,9 @@ void KForecastView::slotTabChanged(QWidget* _tab)
 
   // remember this setting for startup
   KSharedConfigPtr config = KGlobal::config();
-  KConfigGroup grp = config->group("Last Use Settings");
-  grp.writeEntry("KForecastView_LastType", tab);
+#warning "port to kde4"
+  //KConfigGroup grp = config->group("Last Use Settings");
+  //grp.writeEntry("KForecastView_LastType", tab);
 
   loadForecast(tab);
 
@@ -661,17 +662,18 @@ void KForecastView::loadChartView(void)
   reportCfg.setConvertCurrency( true );
   reportCfg.setIncludingForecast( true );
   reportCfg.setDateFilter(QDate::currentDate(),QDate::currentDate().addDays(m_forecastDays->value()));
-
+#warning "port to kde4"
+#if 0
   reports::PivotTable table(reportCfg);
 
   table.drawChart(*m_forecastChart);
-
+#endif
   // Adjust the size
   int nh;
   nh = (width()*0.5);
-  m_forecastChart->resize(width()-60, nh);
+  //m_forecastChart->resize(width()-60, nh);
 
-  m_forecastChart->update();
+  //m_forecastChart->update();
 }
 
 #include "kforecastview.moc"

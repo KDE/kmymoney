@@ -38,8 +38,8 @@
 #include "kbalancechartdlg.h"
 
 #include <mymoneyreport.h>
-#include "../reports/kreportchartview.h"
-#include "../reports/pivottable.h"
+//#include "../reports/kreportchartview.h"
+//#include "../reports/pivottable.h"
 
 #include <kmymoneyglobalsettings.h>
 
@@ -54,7 +54,7 @@
 #endif
 
 KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* parent, const char* name) :
-  KDialog(parent, name)
+  KDialog(parent)
 {
 #ifdef HAVE_KDCHART
   setCaption(i18n("Balance of %1",account.name()));
@@ -85,7 +85,8 @@ KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* paren
   reportCfg.setColumnsAreDays( true );
   reportCfg.setConvertCurrency( false );
   reportCfg.setDateFilter(QDate::currentDate().addDays(-90),QDate::currentDate().addDays(+90));
-
+#warning "port to kde4"
+#if 0  
   reports::PivotTable table(reportCfg);
 
   reports::KReportChartView* chartWidget = new reports::KReportChartView(this, 0);
@@ -155,7 +156,8 @@ KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* paren
     haveMinBalance = true;
     minBalance = MyMoneyMoney(account.value("minBalanceAbsolute"));
   }
-
+#warning "port to kde4"  
+#if 0
   KDChartTableDataBase* data = chartWidget->data();
   if(!needRow && data->usedRows() == 2) {
     data->expand( data->usedRows()-1, data->usedCols() );
@@ -173,7 +175,7 @@ KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* paren
       chartWidget->setProperty(1, 1, m_idPropMaxCredit);
     }
   }
-
+#endif
   for(int iCell = 90; iCell < 180; ++iCell) {
     chartWidget->setProperty(0, iCell, m_idPropFutureValue);
   }
@@ -205,7 +207,7 @@ KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* paren
   buttonOk->setText(i18n("&OK"));
   Layout1->addWidget( buttonOk );
 #endif
-  KPushButton* buttonClose = new KPushButton( this, "buttonClose" );
+  KPushButton* buttonClose = new KPushButton( this );
   buttonClose->setEnabled( TRUE );
   buttonClose->setAutoDefault( TRUE );
   buttonClose->setGuiItem(KStandardGuiItem::Close);
@@ -215,7 +217,8 @@ KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* paren
   connect( buttonClose, SIGNAL( clicked() ), this, SLOT( accept() ) );
 
   resize( QSize(700, 500).expandedTo(minimumSizeHint()) );
-  clearWState( WState_Polished );
+  //clearWState( WState_Polished );
+#endif
 #endif
 }
 

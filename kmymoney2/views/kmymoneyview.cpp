@@ -108,7 +108,7 @@
 #include "kscheduledview.h"
 #include "kgloballedgerview.h"
 #include "kinvestmentview.h"
-#include "kreportsview.h"
+//#include "kreportsview.h"
 #include "kbudgetview.h"
 #include "kforecastview.h"
 
@@ -900,10 +900,10 @@ bool KMyMoneyView::initializeStorage()
 
   KSharedConfigPtr config = KGlobal::config();
   int page;
-  config->setGroup("General Options");
+  KConfigGroup grp = config->group("General Options");
   if(KMyMoneyGlobalSettings::startLastViewSelected() != 0) {
-    config->setGroup("Last Use Settings");
-    page = config->readNumEntry("LastViewSelected", 0);
+    KConfigGroup grp2 = config->group("Last Use Settings");
+    page = grp2readEntry("LastViewSelected", 0);
   } else {
     page = pageIndex(m_homeViewFrame);
   }
@@ -912,8 +912,8 @@ bool KMyMoneyView::initializeStorage()
 
   // For debugging purposes, we can turn off the automatic fix manually
   // by setting the entry in kmymoney2rc to true
-  config->setGroup("General Options");
-  if(config->readBoolEntry("SkipFix", false) != true) {
+  grp = config->group("General Options");
+  if(grp.readEntry("SkipFix", false) != true) {
     MyMoneyFileTransaction ft;
     try {
       // Check if we have to modify the file before we allow to work with it

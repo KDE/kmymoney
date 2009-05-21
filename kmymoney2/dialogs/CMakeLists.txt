@@ -10,7 +10,7 @@ SET(libdialogs_a_SOURCES
   investtransactioneditor.cpp
   kaccountselectdlg.cpp 
   kbackupdlg.cpp 
-  #kbalancechartdlg.cpp
+  kbalancechartdlg.cpp
   kbalancewarning.cpp 
   kcategoryreassigndlg.cpp
   kchooseimportexportdlg.cpp 
@@ -35,7 +35,7 @@ SET(libdialogs_a_SOURCES
   kmymoneyfileinfodlg.cpp
   kmymoneypricedlg.cpp 
   kmymoneysplittable.cpp 
-  #knewaccountdlg.cpp
+  knewaccountdlg.cpp
   knewbankdlg.cpp 
   knewbudgetdlg.cpp 
   knewequityentrydlg.cpp

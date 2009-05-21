@@ -59,7 +59,7 @@ class KGlobalLedgerView;
 class IMyMoneyStorageFormat;
 class MyMoneyTransaction;
 class KInvestmentView;
-class KReportsView;
+//class KReportsView;
 class KMyMoneyViewBase;
 class MyMoneyReport;
 class TransactionEditor;
@@ -125,7 +125,7 @@ private:
   KScheduledView *m_scheduledView;
   KGlobalLedgerView *m_ledgerView;
   KInvestmentView *m_investmentView;
-  KReportsView* m_reportsView;
+  //KReportsView* m_reportsView;
   KForecastView* m_forecastView;
 
   Q3VBox* m_homeViewFrame;

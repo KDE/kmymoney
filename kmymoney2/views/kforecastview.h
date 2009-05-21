@@ -36,7 +36,7 @@
 //Added by qt3to4:
 #include <Q3ValueList>
 
-using namespace reports;
+//using namespace reports;
 
 /**
   * @author Alvaro Soliverez
@@ -141,7 +141,7 @@ private:
   KMyMoneyAccountTreeForecastItem*    m_incomeItem;
   KMyMoneyAccountTreeForecastItem*    m_expenseItem;
 
-  KReportChartView* m_forecastChart;
+  //KReportChartView* m_forecastChart;
 
 };
 
