@@ -19,7 +19,6 @@
 #include <q3vbox.h>
 #include <qlayout.h>
 #include <q3buttongroup.h>
-#include <qabstractlayout.h>
 #include <qpixmap.h>
 #include <q3textview.h>
 #include <qlabel.h>
