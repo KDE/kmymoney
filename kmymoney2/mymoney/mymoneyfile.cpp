@@ -932,7 +932,7 @@ void MyMoneyFile::removePayee(const MyMoneyPayee& payee)
   addNotification(payee.id(), false);
 }
 
-void MyMoneyFile::accountList(QLinkedList<MyMoneyAccount>& list, const QStringList& idlist, const bool recursive) const
+void MyMoneyFile::accountList(Q3ValueList<MyMoneyAccount>& list, const QStringList& idlist, const bool recursive) const
 {
   if(idlist.isEmpty()) {
     d->m_cache.account(list);
@@ -946,8 +946,8 @@ void MyMoneyFile::accountList(QLinkedList<MyMoneyAccount>& list, const QStringLi
     }
 #endif
 
-    QLinkedList<MyMoneyAccount>::Iterator it;
-    QLinkedList<MyMoneyAccount>::Iterator next;
+    Q3ValueList<MyMoneyAccount>::Iterator it;
+    Q3ValueList<MyMoneyAccount>::Iterator next;
     for(it = list.begin(); it != list.end(); ) {
       if(isStandardAccount( (*it).id() )) {
         it = list.erase(it);
@@ -956,8 +956,8 @@ void MyMoneyFile::accountList(QLinkedList<MyMoneyAccount>& list, const QStringLi
       }
     }
   } else {
-    QLinkedList<MyMoneyAccount>::ConstIterator it;
-    QLinkedList<MyMoneyAccount> list_a;
+    Q3ValueList<MyMoneyAccount>::ConstIterator it;
+    Q3ValueList<MyMoneyAccount> list_a;
     d->m_cache.account(list_a);
 
     for(it = list_a.begin(); it != list_a.end(); ++it) {
@@ -1137,19 +1137,19 @@ void MyMoneyFile::clearNotification()
   d->m_notificationList.clear();
 }
 
-void MyMoneyFile::transactionList(QLinkedList<QPair<MyMoneyTransaction, MyMoneySplit> >& list, MyMoneyTransactionFilter& filter) const
+void MyMoneyFile::transactionList(Q3ValueList<QPair<MyMoneyTransaction, MyMoneySplit> >& list, MyMoneyTransactionFilter& filter) const
 {
   checkStorage();
   m_storage->transactionList(list, filter);
 }
 
-void MyMoneyFile::transactionList(QLinkedList<MyMoneyTransaction>& list, MyMoneyTransactionFilter& filter) const
+void MyMoneyFile::transactionList(Q3ValueList<MyMoneyTransaction>& list, MyMoneyTransactionFilter& filter) const
 {
   checkStorage();
   m_storage->transactionList(list, filter);
 }
 
-const QLinkedList<MyMoneyTransaction> MyMoneyFile::transactionList(MyMoneyTransactionFilter& filter) const
+const Q3ValueList<MyMoneyTransaction> MyMoneyFile::transactionList(MyMoneyTransactionFilter& filter) const
 {
   Q3ValueList<MyMoneyTransaction> list;
   transactionList(list, filter);

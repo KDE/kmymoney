@@ -578,11 +578,11 @@ public:
     *
     * @return set of transactions in form of a QValueList<MyMoneyTransaction>
     */
-  const QLinkedList<MyMoneyTransaction> transactionList(MyMoneyTransactionFilter& filter) const;
+  const Q3ValueList<MyMoneyTransaction> transactionList(MyMoneyTransactionFilter& filter) const;
 
-  void transactionList(QLinkedList<MyMoneyTransaction>& list, MyMoneyTransactionFilter& filter) const;
+  void transactionList(Q3ValueList<MyMoneyTransaction>& list, MyMoneyTransactionFilter& filter) const;
 
-  void transactionList(QLinkedList<QPair<MyMoneyTransaction, MyMoneySplit> >& list, MyMoneyTransactionFilter& filter) const;
+  void transactionList(Q3ValueList<QPair<MyMoneyTransaction, MyMoneySplit> >& list, MyMoneyTransactionFilter& filter) const;
 
   /**
     * This method is used to remove a transaction from the transaction
@@ -725,7 +725,7 @@ public:
     *
     * @param recursive if @p true, then recurse in all found accounts. The default is @p false
     */
-  void accountList(QLinkedList<MyMoneyAccount>& list, const QStringList& idlist = QStringList(), const bool recursive = false) const;
+  void accountList(Q3ValueList<MyMoneyAccount>& list, const QStringList& idlist = QStringList(), const bool recursive = false) const;
 
   /**
     * This method is used to convert an account id to a string representation
