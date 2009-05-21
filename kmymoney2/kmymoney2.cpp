@@ -1135,7 +1135,8 @@ void KMyMoney2App::slotPerformanceTest(void)
   measurement[0] = measurement[1] = 0;
   timer.start();
   for(int i = 0; i < 1000; ++i) {
-    QLinkedList<MyMoneyAccount> list;
+    Q3ValueList<MyMoneyAccount> list;
+
     MyMoneyFile::instance()->accountList(list);
     measurement[i != 0] = timer.elapsed();
   }
@@ -1203,7 +1204,7 @@ void KMyMoney2App::slotPerformanceTest(void)
   if(MyMoneyFile::instance()->asset().accountCount()) {
     MyMoneyTransactionFilter filter(MyMoneyFile::instance()->asset().accountList()[0]);
     filter.setDateFilter(QDate(), QDate::currentDate());
-    QLinkedList<MyMoneyTransaction> list;
+    Q3ValueList<MyMoneyTransaction> list;
 
     timer.start();
     for(int i = 0; i < 100; ++i) {
@@ -1222,7 +1223,7 @@ void KMyMoney2App::slotPerformanceTest(void)
   if(MyMoneyFile::instance()->asset().accountCount()) {
     MyMoneyTransactionFilter filter(MyMoneyFile::instance()->asset().accountList()[0]);
     filter.setDateFilter(QDate(), QDate::currentDate());
-    QLinkedList<MyMoneyTransaction> list;
+    Q3ValueList<MyMoneyTransaction> list;
 
     timer.start();
     for(int i = 0; i < 100; ++i) {
@@ -1288,8 +1289,8 @@ void KMyMoney2App::slotFileNew(void)
         }
 
         // import the account templates
-        QLinkedList<MyMoneyTemplate> templates = wizard->templates();
-        QLinkedList<MyMoneyTemplate>::iterator it_t;
+        Q3ValueList<MyMoneyTemplate> templates = wizard->templates();
+        Q3ValueList<MyMoneyTemplate>::iterator it_t;
         for(it_t = templates.begin(); it_t != templates.end(); ++it_t) {
           (*it_t).importTemplate(&progressCallback);
         }
@@ -1412,8 +1413,8 @@ void KMyMoney2App::slotFileOpenRecent(const KUrl& url)
   KUrl lastFile = m_fileName;
 
   // check if there are other instances which might have this file open
-  QLinkedList<Q3CString> list = instanceList();
-  QLinkedList<Q3CString>::ConstIterator it;
+  Q3ValueList<Q3CString> list = instanceList();
+  Q3ValueList<Q3CString>::ConstIterator it;
   bool duplicate = false;
 #warning "port kde4"
 #if 0
@@ -1742,8 +1743,8 @@ void KMyMoney2App::slotFileClose(void)
   slotSelectInvestment();
   slotSelectSchedule();
   slotSelectCurrency();
-  slotSelectBudget(QLinkedList<MyMoneyBudget>());
-  slotSelectPayees(QLinkedList<MyMoneyPayee>());
+  slotSelectBudget(Q3ValueList<MyMoneyBudget>());
+  slotSelectPayees(Q3ValueList<MyMoneyPayee>());
   slotSelectTransactions(KMyMoneyRegister::SelectedTransactions());
 
   m_reconciliationAccount = MyMoneyAccount();
@@ -1942,8 +1943,8 @@ void KMyMoney2App::slotLoadAccountTemplates(void)
     MyMoneyFileTransaction ft;
     try {
     // import the account templates
-      QLinkedList<MyMoneyTemplate> templates = dlg->templates();
-      QLinkedList<MyMoneyTemplate>::iterator it_t;
+      Q3ValueList<MyMoneyTemplate> templates = dlg->templates();
+      Q3ValueList<MyMoneyTemplate>::iterator it_t;
       for(it_t = templates.begin(); it_t != templates.end(); ++it_t) {
         (*it_t).importTemplate(&progressCallback);
       }
@@ -2716,7 +2717,7 @@ const MyMoneyAccount& KMyMoney2App::findAccount(const MyMoneyAccount& acc, const
   static MyMoneyAccount nullAccount;
 
   MyMoneyFile* file = MyMoneyFile::instance();
-  QLinkedList<MyMoneyAccount> parents;
+  Q3ValueList<MyMoneyAccount> parents;
   try {
     // search by id
     if(!acc.id().isEmpty()) {
@@ -2732,7 +2733,7 @@ const MyMoneyAccount& KMyMoney2App::findAccount(const MyMoneyAccount& acc, const
     } else {
       parents << parent;
     }
-    QLinkedList<MyMoneyAccount>::const_iterator it_p;
+    Q3ValueList<MyMoneyAccount>::const_iterator it_p;
     for(it_p = parents.begin(); it_p != parents.end(); ++it_p) {
       MyMoneyAccount parentAccount = *it_p;
       // search by name (allow hierarchy)
@@ -3106,7 +3107,7 @@ void KMyMoney2App::createSchedule(MyMoneySchedule newSchedule, MyMoneyAccount& n
       // to the account pool. Note: the schedule code used to leave
       // this always the first split, but the loan code leaves it as
       // the second one. So I thought, searching is a good alternative ....
-      QLinkedList<MyMoneySplit>::ConstIterator it_s;
+      Q3ValueList<MyMoneySplit>::ConstIterator it_s;
       for(it_s = t.splits().begin(); it_s != t.splits().end(); ++it_s) {
         if((*it_s).accountId().isEmpty()) {
           MyMoneySplit s = (*it_s);
@@ -3147,7 +3148,7 @@ bool KMyMoney2App::exchangeAccountInTransaction(MyMoneyTransaction& _t, const QS
 {
   bool rc = false;
   MyMoneyTransaction t(_t);
-  QLinkedList<MyMoneySplit>::iterator it_s;
+  Q3ValueList<MyMoneySplit>::iterator it_s;
   for(it_s = t.splits().begin(); it_s != t.splits().end(); ++it_s) {
     if((*it_s).accountId() == fromId) {
       (*it_s).setAccountId(toId);
@@ -3222,8 +3223,8 @@ void KMyMoney2App::slotAccountDelete(void)
         // get the list of all transactions that reference the old account
         MyMoneyTransactionFilter filter(m_selectedAccount.id());
         filter.setReportAllSplits(false);
-        QLinkedList<MyMoneyTransaction> tlist;
-        QLinkedList<MyMoneyTransaction>::iterator it_t;
+        Q3ValueList<MyMoneyTransaction> tlist;
+        Q3ValueList<MyMoneyTransaction>::iterator it_t;
         file->transactionList(tlist, filter);
 
         slotStatusProgressBar(0, tlist.count());
@@ -3239,8 +3240,8 @@ void KMyMoney2App::slotAccountDelete(void)
       // now fix all schedules
       {
         KMSTATUS(i18n("Adjusting scheduled transactions..."));
-        QLinkedList<MyMoneySchedule> slist = file->scheduleList(m_selectedAccount.id());
-        QLinkedList<MyMoneySchedule>::iterator it_s;
+        Q3ValueList<MyMoneySchedule> slist = file->scheduleList(m_selectedAccount.id());
+        Q3ValueList<MyMoneySchedule>::iterator it_s;
 
         int cnt = 0;
         slotStatusProgressBar(0, slist.count());
@@ -3257,8 +3258,8 @@ void KMyMoney2App::slotAccountDelete(void)
       // now fix all budgets
       {
         KMSTATUS(i18n("Adjusting budgets..."));
-        QLinkedList<MyMoneyBudget> blist = file->budgetList();
-        QLinkedList<MyMoneyBudget>::const_iterator it_b;
+        Q3ValueList<MyMoneyBudget> blist = file->budgetList();
+        Q3ValueList<MyMoneyBudget>::const_iterator it_b;
         for(it_b = blist.begin(); it_b != blist.end(); ++it_b) {
           if((*it_b).hasReferenceTo(m_selectedAccount.id())) {
             MyMoneyBudget b = (*it_b);
@@ -3554,7 +3555,7 @@ void KMyMoney2App::slotAccountReconcileStart(void)
     try {
 #if 0
       // check if we have overdue schedules for this account
-      QLinkedList<MyMoneySchedule> schedules = file->scheduleList(m_selectedAccount.id(), MyMoneySchedule::TYPE_ANY, MyMoneySchedule::OCCUR_ANY, MyMoneySchedule::STYPE_ANY, QDate(), QDate(), true);
+      Q3ValueList<MyMoneySchedule> schedules = file->scheduleList(m_selectedAccount.id(), MyMoneySchedule::TYPE_ANY, MyMoneySchedule::OCCUR_ANY, MyMoneySchedule::STYPE_ANY, QDate(), QDate(), true);
       if(schedules.count() > 0) {
         if(KMessageBox::questionYesNo(this, i18n("KMyMoney has detected some overdue scheduled transactions for this account. Do you want to enter those scheduled transactions now?"), i18n("Scheduled transactions found")) == KMessageBox::Yes) {
 
@@ -3563,7 +3564,7 @@ void KMyMoney2App::slotAccountReconcileStart(void)
           KMyMoneyUtils::EnterScheduleResultCodeE rc = KMyMoneyUtils::Enter;
           do {
             processedOne = false;
-            QLinkedList<MyMoneySchedule>::const_iterator it_sch;
+            Q3ValueList<MyMoneySchedule>::const_iterator it_sch;
             for(it_sch = schedules.begin(); (rc != KMyMoneyUtils::Cancel) && (it_sch != schedules.end()); ++it_sch) {
               MyMoneySchedule sch(*(it_sch));
 
@@ -3632,7 +3633,7 @@ void KMyMoney2App::slotAccountReconcileFinish(void)
 
   if(!m_reconciliationAccount.id().isEmpty()) {
     // retrieve list of all transactions that are not reconciled or cleared
-    QLinkedList<QPair<MyMoneyTransaction, MyMoneySplit> > transactionList;
+    Q3ValueList<QPair<MyMoneyTransaction, MyMoneySplit> > transactionList;
     MyMoneyTransactionFilter filter(m_reconciliationAccount.id());
     filter.addState(MyMoneyTransactionFilter::cleared);
     filter.addState(MyMoneyTransactionFilter::notReconciled);
@@ -3646,7 +3647,7 @@ void KMyMoney2App::slotAccountReconcileFinish(void)
     actBalance = clearedBalance = balance;
 
     // walk the list of transactions to figure out the balance(s)
-    QLinkedList<QPair<MyMoneyTransaction, MyMoneySplit> >::const_iterator it;
+    Q3ValueList<QPair<MyMoneyTransaction, MyMoneySplit> >::const_iterator it;
     for(it = transactionList.begin(); it != transactionList.end(); ++it) {
       if((*it).second.reconcileFlag() == MyMoneySplit::NotReconciled) {
         clearedBalance -= (*it).second.shares();
@@ -3690,7 +3691,7 @@ void KMyMoney2App::slotAccountReconcileFinish(void)
       */
 
       // walk the list of transactions/splits and mark the cleared ones as reconciled
-      QLinkedList<QPair<MyMoneyTransaction, MyMoneySplit> >::iterator it;
+      Q3ValueList<QPair<MyMoneyTransaction, MyMoneySplit> >::iterator it;
 
       for(it = transactionList.begin(); it != transactionList.end(); ++it) {
         MyMoneySplit sp = (*it).second;
@@ -3803,8 +3804,8 @@ bool KMyMoney2App::canCloseAccount(const MyMoneyAccount& acc) const
   }
 
   // there must be no unfinished schedule referencing the account
-  QLinkedList<MyMoneySchedule> list = MyMoneyFile::instance()->scheduleList();
-  QLinkedList<MyMoneySchedule>::const_iterator it_l;
+  Q3ValueList<MyMoneySchedule> list = MyMoneyFile::instance()->scheduleList();
+  Q3ValueList<MyMoneySchedule>::const_iterator it_l;
   for(it_l = list.begin(); it_l != list.end(); ++it_l) {
     if((*it_l).isFinished())
       continue;
@@ -4282,10 +4283,10 @@ void KMyMoney2App::slotPayeeNew(void)
   emit payeeCreated(id);
 }
 
-bool KMyMoney2App::payeeInList(const QLinkedList<MyMoneyPayee>& list, const QString& id) const
+bool KMyMoney2App::payeeInList(const Q3ValueList<MyMoneyPayee>& list, const QString& id) const
 {
   bool rc = false;
-  QLinkedList<MyMoneyPayee>::const_iterator it_p = list.begin();
+  Q3ValueList<MyMoneyPayee>::const_iterator it_p = list.begin();
   while(it_p != list.end()) {
     if((*it_p).id() == id) {
       rc = true;
@@ -4304,8 +4305,8 @@ void KMyMoney2App::slotPayeeDelete(void)
   MyMoneyFile * file = MyMoneyFile::instance();
 
   // first create list with all non-selected payees
-  QLinkedList<MyMoneyPayee> remainingPayees = file->payeeList();
-  QLinkedList<MyMoneyPayee>::iterator it_p;
+  Q3ValueList<MyMoneyPayee> remainingPayees = file->payeeList();
+  Q3ValueList<MyMoneyPayee>::iterator it_p;
   for(it_p = remainingPayees.begin(); it_p != remainingPayees.end(); ) {
     if(m_selectedPayees.contains(*it_p)) {
       it_p = remainingPayees.erase(it_p);
@@ -4328,22 +4329,22 @@ void KMyMoney2App::slotPayeeDelete(void)
   try {
     // create a transaction filter that contains all payees selected for removal
     MyMoneyTransactionFilter f = MyMoneyTransactionFilter();
-    for (QLinkedList<MyMoneyPayee>::const_iterator it = m_selectedPayees.begin();
+    for (Q3ValueList<MyMoneyPayee>::const_iterator it = m_selectedPayees.begin();
          it != m_selectedPayees.end(); ++it) {
       f.addPayee( (*it).id() );
     }
     // request a list of all transactions that still use the payees in question
-    QLinkedList<MyMoneyTransaction> translist = file->transactionList(f);
+    Q3ValueList<MyMoneyTransaction> translist = file->transactionList(f);
 //     kDebug() << "[KPayeesView::slotDeletePayee]  " << translist.count() << " transaction still assigned to payees";
 
     // now get a list of all schedules that make use of one of the payees
-    QLinkedList<MyMoneySchedule> all_schedules = file->scheduleList();
-    QLinkedList<MyMoneySchedule> used_schedules;
-    for (QLinkedList<MyMoneySchedule>::ConstIterator it = all_schedules.begin();
+    Q3ValueList<MyMoneySchedule> all_schedules = file->scheduleList();
+    Q3ValueList<MyMoneySchedule> used_schedules;
+    for (Q3ValueList<MyMoneySchedule>::ConstIterator it = all_schedules.begin();
          it != all_schedules.end(); ++it)
     {
       // loop over all splits in the transaction of the schedule
-      for (QLinkedList<MyMoneySplit>::ConstIterator s_it = (*it).transaction().splits().begin();
+      for (Q3ValueList<MyMoneySplit>::ConstIterator s_it = (*it).transaction().splits().begin();
            s_it != (*it).transaction().splits().end(); ++s_it)
       {
         // is the payee in the split to be deleted?
@@ -4380,11 +4381,11 @@ void KMyMoney2App::slotPayeeDelete(void)
       // TODO : check if we have a report that explicitely uses one of our payees
       //        and issue an appropriate warning
       try {
-        QLinkedList<MyMoneySplit>::iterator s_it;
+        Q3ValueList<MyMoneySplit>::iterator s_it;
         // now loop over all transactions and reassign payee
-        for (QLinkedList<MyMoneyTransaction>::iterator it = translist.begin(); it != translist.end(); ++it) {
+        for (Q3ValueList<MyMoneyTransaction>::iterator it = translist.begin(); it != translist.end(); ++it) {
           // create a copy of the splits list in the transaction
-          QLinkedList<MyMoneySplit> splits = (*it).splits();
+          Q3ValueList<MyMoneySplit> splits = (*it).splits();
           // loop over all splits
           for (s_it = splits.begin(); s_it != splits.end(); ++s_it) {
             // if the split is assigned to one of the selected payees, we need to modify it
@@ -4398,13 +4399,13 @@ void KMyMoney2App::slotPayeeDelete(void)
         } // for - Transactions
 
         // now loop over all schedules and reassign payees
-        for (QLinkedList<MyMoneySchedule>::iterator it = used_schedules.begin();
+        for (Q3ValueList<MyMoneySchedule>::iterator it = used_schedules.begin();
              it != used_schedules.end(); ++it)
         {
           // create copy of transaction in current schedule
           MyMoneyTransaction trans = (*it).transaction();
           // create copy of lists of splits
-          QLinkedList<MyMoneySplit> splits = trans.splits();
+          Q3ValueList<MyMoneySplit> splits = trans.splits();
           for (s_it = splits.begin(); s_it != splits.end(); ++s_it) {
             if(payeeInList(m_selectedPayees, (*s_it).payeeId())) {
               (*s_it).setPayeeId(payee_id);
@@ -4428,7 +4429,7 @@ void KMyMoney2App::slotPayeeDelete(void)
     QStringList deletedPayeeNames;
 
     // now loop over all selected payees and remove them
-    for (QLinkedList<MyMoneyPayee>::iterator it = m_selectedPayees.begin();
+    for (Q3ValueList<MyMoneyPayee>::iterator it = m_selectedPayees.begin();
       it != m_selectedPayees.end(); ++it) {
       if(addToMatchList) {
         deletedPayeeNames << (*it).name();
@@ -4470,7 +4471,7 @@ void KMyMoney2App::slotPayeeDelete(void)
     ft.commit();
 
     // If we just deleted the payees, they sure don't exist anymore
-    slotSelectPayees(QLinkedList<MyMoneyPayee>());
+    slotSelectPayees(Q3ValueList<MyMoneyPayee>());
 
   } catch(MyMoneyException *e) {
     KMessageBox::detailedSorry(0, i18n("Unable to remove payee(s)"),
@@ -4606,7 +4607,7 @@ void KMyMoney2App::slotBudgetDelete(void)
   MyMoneyFileTransaction ft;
   try {
     // now loop over all selected budgets and remove them
-    for (QLinkedList<MyMoneyBudget>::iterator it = m_selectedBudgets.begin();
+    for (Q3ValueList<MyMoneyBudget>::iterator it = m_selectedBudgets.begin();
       it != m_selectedBudgets.end(); ++it) {
       file->removeBudget(*it);
     }
@@ -4817,7 +4818,7 @@ void KMyMoney2App::slotTransactionDuplicate(void)
     try {
       for(it_t = list.begin(); it_t != list.end(); ++it_t) {
         MyMoneyTransaction t = (*it_t).transaction();
-        QLinkedList<MyMoneySplit>::iterator it_s;
+        Q3ValueList<MyMoneySplit>::iterator it_s;
         // wipe out any reconciliation information
         for(it_s = t.splits().begin(); it_s != t.splits().end(); ++it_s) {
           (*it_s).setReconcileFlag(MyMoneySplit::NotReconciled);
@@ -5131,8 +5132,8 @@ void KMyMoney2App::slotTransactionsAccept(void)
       if(t.isImported()) {
         t.setImported(false);
         if(!m_selectedAccount.id().isEmpty()) {
-          QLinkedList<MyMoneySplit> list = t.splits();
-          QLinkedList<MyMoneySplit>::const_iterator it_s;
+          Q3ValueList<MyMoneySplit> list = t.splits();
+          Q3ValueList<MyMoneySplit>::const_iterator it_s;
           for(it_s = list.begin(); it_s != list.end(); ++it_s) {
             if((*it_s).accountId() == m_selectedAccount.id()) {
               if((*it_s).reconcileFlag() == MyMoneySplit::NotReconciled) {
@@ -5208,8 +5209,8 @@ void KMyMoney2App::slotTransactionCreateSchedule(void)
     s.clearId();
     t.removeSplits();
     t.addSplit(s);
-    const QLinkedList<MyMoneySplit>& splits = m_selectedTransactions[0].transaction().splits();
-    QLinkedList<MyMoneySplit>::const_iterator it_s;
+    const Q3ValueList<MyMoneySplit>& splits = m_selectedTransactions[0].transaction().splits();
+    Q3ValueList<MyMoneySplit>::const_iterator it_s;
     for(it_s = splits.begin(); it_s != splits.end(); ++it_s) {
       if((*it_s).id() != splitId) {
         MyMoneySplit s0 = (*it_s);
@@ -5247,7 +5248,7 @@ void KMyMoney2App::slotMoveToAccount(const QString& id)
     try {
       KMyMoneyRegister::SelectedTransactions::const_iterator it_t;
       for(it_t = m_selectedTransactions.begin(); it_t != m_selectedTransactions.end(); ++it_t) {
-        QLinkedList<MyMoneySplit>::const_iterator it_s;
+        Q3ValueList<MyMoneySplit>::const_iterator it_s;
         bool changed = false;
         MyMoneyTransaction t = (*it_t).transaction();
         for(it_s = (*it_t).transaction().splits().begin(); it_s != (*it_t).transaction().splits().end(); ++it_s) {
@@ -5294,7 +5295,7 @@ void KMyMoney2App::slotUpdateMoveToAccountMenu(void)
     // remove those accounts that we currently reference
     KMyMoneyRegister::SelectedTransactions::const_iterator it_t;
     for(it_t = m_selectedTransactions.begin(); it_t != m_selectedTransactions.end(); ++it_t) {
-      QLinkedList<MyMoneySplit>::const_iterator it_s;
+      Q3ValueList<MyMoneySplit>::const_iterator it_s;
       for(it_s = (*it_t).transaction().splits().begin(); it_s != (*it_t).transaction().splits().end(); ++it_s) {
         d->m_moveToAccountSelector->removeItem((*it_s).accountId());
       }
@@ -5733,9 +5734,9 @@ void KMyMoney2App::slotUpdateActions(void)
     }
   }
 
-  QLinkedList<MyMoneyAccount> accList;
+  Q3ValueList<MyMoneyAccount> accList;
   file->accountList(accList);
-  QLinkedList<MyMoneyAccount>::const_iterator it_a;
+  Q3ValueList<MyMoneyAccount>::const_iterator it_a;
   QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p = m_onlinePlugins.end();
   for(it_a = accList.begin(); (it_p == m_onlinePlugins.end()) && (it_a != accList.end()); ++it_a) {
     if ( !(*it_a).onlineBankingSettings().value("provider").isEmpty() ) {
@@ -5894,8 +5895,8 @@ void KMyMoney2App::slotResetSelections(void)
   slotSelectInvestment();
   slotSelectSchedule();
   slotSelectCurrency();
-  slotSelectPayees(QLinkedList<MyMoneyPayee>());
-  slotSelectBudget(QLinkedList<MyMoneyBudget>());
+  slotSelectPayees(Q3ValueList<MyMoneyPayee>());
+  slotSelectBudget(Q3ValueList<MyMoneyBudget>());
   slotSelectTransactions(KMyMoneyRegister::SelectedTransactions());
   slotUpdateActions();
 }
@@ -5907,14 +5908,14 @@ void KMyMoney2App::slotSelectCurrency(const MyMoneySecurity& currency)
   emit currencySelected(m_selectedCurrency);
 }
 
-void KMyMoney2App::slotSelectBudget(const QLinkedList<MyMoneyBudget>& list)
+void KMyMoney2App::slotSelectBudget(const Q3ValueList<MyMoneyBudget>& list)
 {
   m_selectedBudgets = list;
   slotUpdateActions();
   emit budgetSelected(m_selectedBudgets);
 }
 
-void KMyMoney2App::slotSelectPayees(const QLinkedList<MyMoneyPayee>& list)
+void KMyMoney2App::slotSelectPayees(const Q3ValueList<MyMoneyPayee>& list)
 {
   m_selectedPayees = list;
   slotUpdateActions();
@@ -5952,7 +5953,7 @@ void KMyMoney2App::slotSelectTransactions(const KMyMoneyRegister::SelectedTransa
         }
       }
       try {
-        QLinkedList<MyMoneySplit>::const_iterator it_s;
+        Q3ValueList<MyMoneySplit>::const_iterator it_s;
         const MyMoneyTransaction& t = m_selectedTransactions[0].transaction();
         // search the first non-income/non-expense accunt and use it for the 'goto account'
         const MyMoneySplit& sp = m_selectedTransactions[0].split();
@@ -6101,8 +6102,8 @@ void KMyMoney2App::slotCheckSchedules(void)
     MyMoneyFile *file = MyMoneyFile::instance();
     QDate checkDate = QDate::currentDate().addDays(KMyMoneyGlobalSettings::checkSchedulePreview());
 
-    QLinkedList<MyMoneySchedule> scheduleList =  file->scheduleList();
-    QLinkedList<MyMoneySchedule>::Iterator it;
+    Q3ValueList<MyMoneySchedule> scheduleList =  file->scheduleList();
+    Q3ValueList<MyMoneySchedule>::Iterator it;
 
     KMyMoneyUtils::EnterScheduleResultCodeE rc = KMyMoneyUtils::Enter;
     for (it=scheduleList.begin(); (it != scheduleList.end()) && (rc != KMyMoneyUtils::Cancel); ++it) {
@@ -6196,12 +6197,12 @@ const QString KMyMoney2App::filename(void) const
   return m_fileName.url();
 }
 
-const QLinkedList<Q3CString> KMyMoney2App::instanceList(void) const
+const Q3ValueList<Q3CString> KMyMoney2App::instanceList(void) const
 {
-  QLinkedList<Q3CString> list;
+  Q3ValueList<Q3CString> list;
   //FIXME: Port to KDE4
-//   QLinkedList<Q3CString> apps = kapp->dcopClient()->registeredApplications();
-//   QLinkedList<Q3CString>::ConstIterator it;
+//   Q3ValueList<Q3CString> apps = kapp->dcopClient()->registeredApplications();
+//   Q3ValueList<Q3CString>::ConstIterator it;
 //
 //   for(it = apps.begin(); it != apps.end(); ++it) {
 //     // skip over myself
@@ -6251,7 +6252,7 @@ void KMyMoney2App::webConnect(const QString& url, const Q3CString& asn_id)
     {
       if ( (*it_plugin)->isMyFormat(url) )
       {
-        QLinkedList<MyMoneyStatement> statements;
+        Q3ValueList<MyMoneyStatement> statements;
         if (!(*it_plugin)->import(url) )
         {
           KMessageBox::error( this, i18n("Unable to import %1 using %2 plugin.  The plugin returned the following error: %3", url,(*it_plugin)->formatName(),(*it_plugin)->lastError()), i18n("Importing error"));
@@ -6375,10 +6376,10 @@ void KMyMoney2App::slotDateChanged(void)
 
 const MyMoneyAccount& KMyMoney2App::account(const QString& key, const QString& value) const
 {
-  QLinkedList<MyMoneyAccount> list;
-  QLinkedList<MyMoneyAccount>::const_iterator it_a;
+  Q3ValueList<MyMoneyAccount> list;
+  Q3ValueList<MyMoneyAccount>::const_iterator it_a;
   MyMoneyFile::instance()->accountList(list);
-  QLinkedList<MyMoneyAccount> accList;
+  Q3ValueList<MyMoneyAccount> accList;
   for(it_a = list.begin(); it_a != list.end(); ++it_a) {
     const QString& id = (*it_a).onlineBankingSettings().value(key);
     if(id.contains(value)) {
@@ -6512,9 +6513,9 @@ void KMyMoney2App::slotAccountMapOnline(void)
 
 void KMyMoney2App::slotAccountUpdateOnlineAll(void)
 {
-  QLinkedList<MyMoneyAccount> accList;
+  Q3ValueList<MyMoneyAccount> accList;
   MyMoneyFile::instance()->accountList(accList);
-  QLinkedList<MyMoneyAccount>::iterator it_a;
+  Q3ValueList<MyMoneyAccount>::iterator it_a;
   QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p;
   d->m_statementResults.clear();
   d->m_collectingStatements = true;

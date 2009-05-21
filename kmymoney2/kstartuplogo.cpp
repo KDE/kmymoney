@@ -31,9 +31,7 @@
 #include <kstandarddirs.h>
 #include <kapplication.h>
 
-#if KDE_IS_VERSION(3,2,0)
 #include <ksplashscreen.h>
-#endif
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -53,19 +51,8 @@ KStartupLogo::KStartupLogo() :
   QPixmap pm(filename);
 
   if(!pm.isNull()) {
-#if KDE_IS_VERSION(3,2,0)
     KSplashScreen* splash = new KSplashScreen(pm);
     splash->setFixedSize(pm.size());
-
-#else
-    Q3Frame* splash = new Q3Frame(0, 0, Q3Frame::WStyle_NoBorder | Q3Frame::WStyle_StaysOnTop | Q3Frame::WStyle_Tool | Q3Frame::WWinOwnDC | Q3Frame::WStyle_Customize);
-    splash->setBackgroundPixmap(pm);
-    splash->setFrameShape( Q3Frame::StyledPanel );
-    splash->setFrameShadow( Q3Frame::Raised );
-    splash->setLineWidth( 2 );
-    splash->setGeometry( QRect( (QApplication::desktop()->width()/2)-(pm.width()/2), (QApplication::desktop()->height()/2)-(pm.height()/2), pm.width(), pm.height() ) );
-
-#endif
 
     splash->show();
     m_splash = splash;
@@ -77,4 +64,3 @@ KStartupLogo::~KStartupLogo()
     delete m_splash;
 }
 
-#include "kstartuplogo.moc"

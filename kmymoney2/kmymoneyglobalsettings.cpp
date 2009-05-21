@@ -23,7 +23,7 @@
 // KDE Includes
 
 #include <kglobalsettings.h>
-
+#include <KColorScheme>
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -52,7 +52,7 @@ QFont KMyMoneyGlobalSettings::listHeaderFont(void)
 QColor KMyMoneyGlobalSettings::listColor(void)
 {
   if(useSystemColors())
-    return KGlobalSettings::baseColor();
+    return KColorScheme::NormalBackground;
   else
     return KMyMoneySettings::listColor();
 }
@@ -60,7 +60,7 @@ QColor KMyMoneyGlobalSettings::listColor(void)
 QColor KMyMoneyGlobalSettings::listBGColor(void)
 {
   if(useSystemColors())
-    return KGlobalSettings::alternateBackgroundColor();
+    return KColorScheme::AlternateBackground;
   else
     return KMyMoneySettings::listBGColor();
 }

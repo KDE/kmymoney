@@ -32,7 +32,8 @@
 #include <kmessagebox.h>
 #include <kconfig.h>
 #include <kstandarddirs.h>
-
+#include <KGlobalSettings>
+#include <KColorScheme>
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -119,27 +120,27 @@ MyMoneySecurity::eSECURITYTYPE KMyMoneyUtils::stringToSecurity(const QString& tx
 
 const QString KMyMoneyUtils::securityTypeToString(const MyMoneySecurity::eSECURITYTYPE securityType)
 {
-  return i18n(MyMoneySecurity::securityTypeToString(securityType));
+  return i18n(MyMoneySecurity::securityTypeToString(securityType).toLatin1());
 }
 
 const QString KMyMoneyUtils::occurenceToString(const MyMoneySchedule::occurenceE occurence)
 {
-  return i18n(MyMoneySchedule::occurenceToString(occurence));
+  return i18n(MyMoneySchedule::occurenceToString(occurence).toLatin1());
 }
 
 const QString KMyMoneyUtils::paymentMethodToString(MyMoneySchedule::paymentTypeE paymentType)
 {
-  return i18n(MyMoneySchedule::paymentMethodToString(paymentType));
+  return i18n(MyMoneySchedule::paymentMethodToString(paymentType).toLatin1());
 }
 
 const QString KMyMoneyUtils::weekendOptionToString(MyMoneySchedule::weekendOptionE weekendOption)
 {
-  return i18n(MyMoneySchedule::weekendOptionToString(weekendOption));
+  return i18n(MyMoneySchedule::weekendOptionToString(weekendOption).toLatin1());
 }
 
 const QString KMyMoneyUtils::scheduleTypeToString(MyMoneySchedule::typeE type)
 {
-  return i18n(MyMoneySchedule::scheduleTypeToString(type));
+  return i18n(MyMoneySchedule::scheduleTypeToString(type).toLatin1());
 }
 
 KGuiItem KMyMoneyUtils::scheduleNewGuiItem(void)
@@ -264,7 +265,7 @@ void KMyMoneyUtils::checkConstants(void)
 
 QString KMyMoneyUtils::variableCSS(void)
 {
-  QColor tcolor = KGlobalSettings::textColor();
+  QColor tcolor = /*KGlobalSettings::textColor()*/KColorScheme::NormalText;
 
   QString css;
   css += "<style type=\"text/css\">\n<!--\n";
