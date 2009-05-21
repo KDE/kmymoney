@@ -23,9 +23,8 @@
 
 
 TransactionSortOption::TransactionSortOption( QWidget *parent )
-    :QWidget( parent )
+    :TransactionSortOptionDecl( parent )
 {
-    setupUi( this );
     init();
 }
 
@@ -33,10 +32,10 @@ TransactionSortOption::TransactionSortOption( QWidget *parent )
 void TransactionSortOption::init()
 {
   KIconLoader* il = KIconLoader::global();
-  m_addButton->setIconSet(QIcon(il->loadIcon("1rightarrow", KIcon::Small, KIconLoader::SizeSmall)));
-  m_removeButton->setIconSet(QIcon(il->loadIcon("1leftarrow", KIcon::Small, KIconLoader::SizeSmall)));
-  m_upButton->setIconSet(QIcon(il->loadIcon("1uparrow", KIcon::Small, KIconLoader::SizeSmall)));
-  m_downButton->setIconSet(QIcon(il->loadIcon("1downarrow", KIcon::Small, KIconLoader::SizeSmall)));
+  m_addButton->setIconSet(KIcon(il->loadIcon("1rightarrow", KIconLoader::Small, KIconLoader::SizeSmall)));
+  m_removeButton->setIconSet(QIcon(il->loadIcon("1leftarrow", KIconLoader::Small, KIconLoader::SizeSmall)));
+  m_upButton->setIconSet(QIcon(il->loadIcon("1uparrow", KIconLoader::Small, KIconLoader::SizeSmall)));
+  m_downButton->setIconSet(QIcon(il->loadIcon("1downarrow", KIconLoader::Small, KIconLoader::SizeSmall)));
 
   // don't allow sorting of the selected entries
   m_selectedList->setSortColumn(-1);

@@ -51,6 +51,8 @@ protected slots:
     void slotDownItem( void );
 private:
     void init();
+signals:
+    void settingsChanged(const QString&);
 };
 
 
