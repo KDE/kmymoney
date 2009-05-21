@@ -41,7 +41,7 @@
 #include <mymoneyobject.h>
 #include <register.h>
 
-#include "../kmymoneysettings.h"
+#include "kmymoneysettings.h"
 
 class MyMoneyObjectContainer;
 
