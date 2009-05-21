@@ -2,6 +2,7 @@
 Name=KMyMoney
 Name[sv]=Kmymoney
 GenericName=Personal Finance Manager
+GenericName[et]=Isiklike rahaasjade haldur
 GenericName[gl]=Xestor de finanzas persoais
 GenericName[pt]=Gestor de Finanças Pessoais
 GenericName[pt_BR]=Gestor de Finanças Pessoais
@@ -9,6 +10,7 @@ GenericName[sv]=Personlig ekonomihantering
 GenericName[uk]=Особисте керування фінансами
 Exec=kmymoney2 %u
 Comment=Personal Finance Manager
+Comment[et]=Isiklike rahaasjade haldur
 Comment[gl]=Xestor de finanzas persoais
 Comment[pt]=Gestor de Finanças Pessoais
 Comment[pt_BR]=Gestor de Finanças Pessoais
