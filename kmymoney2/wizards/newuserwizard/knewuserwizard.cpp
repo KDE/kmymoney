@@ -361,3 +361,4 @@ bool FilePage::isComplete(void) const
 }
 
 #include "knewuserwizard.moc"
+#include "knewuserwizard_p.moc"

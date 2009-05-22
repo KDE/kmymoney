@@ -1692,3 +1692,4 @@ void AccountSummaryPage::enterPage(void)
 }
 
 #include "knewaccountwizard.moc"
+#include "knewaccountwizard_p.moc"

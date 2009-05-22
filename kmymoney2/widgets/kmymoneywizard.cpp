@@ -386,4 +386,4 @@ void KMyMoneyWizard::accept(void)
 }
 
 #include "kmymoneywizard.moc"
-
+#include "kmymoneywizard_p.moc"
