@@ -37,11 +37,8 @@
 #include <kiconloader.h>
 #include <kapplication.h>
 
-#if KDE_IS_VERSION(3,2,0)
-  #include <kinputdialog.h>
+#include <kinputdialog.h>
 #include <ktoolinvocation.h>
-#else
-  #endif
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -121,12 +118,12 @@ MyMoneyQifProfileEditor::MyMoneyQifProfileEditor(const bool edit, QWidget *paren
   connect(m_thousandsBox, SIGNAL(activated(const QString&)), this, SLOT(slotThousandsChanged(const QString&)));
 
   connect(m_editInputFilterLocation, SIGNAL(textChanged(const QString&)), &m_profile, SLOT(setFilterScriptImport(const QString&)));
-  connect(m_editInputFilterLocation, SIGNAL(urlSelected(const QString&)), m_editInputFilterLocation, SLOT(setUrl(const QString&)));
+  connect(m_editInputFilterLocation, SIGNAL(urlSelected(const KUrl&)), m_editInputFilterLocation, SLOT(setUrl(const KUrl&)));
 
   connect(m_editInputFilterFileType, SIGNAL(textChanged(const QString&)), &m_profile, SLOT(setFilterFileType(const QString&)));
 
   connect(m_editOutputFilterLocation, SIGNAL(textChanged(const QString&)), &m_profile, SLOT(setFilterScriptExport(const QString&)));
-  connect(m_editOutputFilterLocation, SIGNAL(urlSelected(const QString&)), m_editOutputFilterLocation, SLOT(setUrl(const QString&)));
+  connect(m_editOutputFilterLocation, SIGNAL(urlSelected(const KUrl&)), m_editOutputFilterLocation, SLOT(setUrl(const KUrl&)));
 
   connect(m_attemptMatch, SIGNAL(toggled(bool)), &m_profile, SLOT(setAttemptMatchDuplicates(bool)));
 }

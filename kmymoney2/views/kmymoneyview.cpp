@@ -611,11 +611,7 @@ bool KMyMoneyView::readFile(const KUrl& url)
 
   IMyMoneyStorageFormat* pReader = NULL;
 
-#if KDE_IS_VERSION(3,2,0)
   if(!url.isValid()) {
-#else
-  if(url.isMalformed()) {
-#endif
     qDebug("Invalid URL '%s'", url.url().toLatin1());
     return false;
   }

@@ -74,9 +74,7 @@
 #include <kdatetable.h> // for maximum re-use
 #include <kmenu.h>
 
-#if KDE_IS_VERSION(3,2,0)
 #include <kcalendarsystem.h>
-#endif
 
 // ----------------------------------------------------------------------------
 // Project Includes

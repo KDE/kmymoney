@@ -33,10 +33,8 @@
 #include <kpushbutton.h>
 #include <kmessagebox.h>
 
-#if KDE_IS_VERSION(3,1,90)
 #include <kabc/addressee.h>
 #include <kabc/stdaddressbook.h>
-#endif
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -76,12 +74,10 @@ void KNewFileDlg::init(const QString& title)
   if (!title.isEmpty())
     setCaption(title);
 
-#if KDE_IS_VERSION( 3, 1, 90 )
   KABC::StdAddressBook *ab = static_cast<KABC::StdAddressBook*>
     ( KABC::StdAddressBook::self() );
   if ( ab && !ab->whoAmI().isEmpty() )
       showLoadButton = true;
-#endif
 
   if(!showLoadButton)
     kabcBtn->hide();
@@ -111,7 +107,6 @@ void KNewFileDlg::okClicked()
 
 void KNewFileDlg::loadFromKABC(void)
 {
-#if KDE_IS_VERSION( 3, 1, 90 )
   KABC::StdAddressBook *ab = static_cast<KABC::StdAddressBook*>
     ( KABC::StdAddressBook::self() );
   if ( !ab )
@@ -134,7 +129,6 @@ void KNewFileDlg::loadFromKABC(void)
   postcodeEdit->setText( a.postalCode() );
   townEdit->setText( a.locality() );
   streetEdit->setText( a.street() );
-#endif
 }
 
 #include "knewfiledlg.moc"

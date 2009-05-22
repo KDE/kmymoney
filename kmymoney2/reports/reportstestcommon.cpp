@@ -400,14 +400,8 @@ void writeRCFtoXML( const MyMoneyReport& filter, const QString& _filename )
   g.open( QIODevice::WriteOnly );
 
   Q3TextStream stream(&g);
-#if KDE_IS_VERSION(3,2,0)
   stream.setEncoding(Q3TextStream::UnicodeUTF8);
   stream << doc->toString();
-#else
-  //stream.setEncoding(QTextStream::Locale);
-  QString temp = doc->toString();
-  stream << temp.data();
-#endif
   g.close();
 
   delete doc;
