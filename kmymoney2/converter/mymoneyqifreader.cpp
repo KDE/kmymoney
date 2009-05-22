@@ -398,7 +398,7 @@ bool MyMoneyQifReader::startImport(void)
 
   if(!KIO::NetAccess::download(m_url, m_filename, NULL)) {
     KMessageBox::detailedError(0,
-                               i18n("Error while loading file '%1'!").arg(m_url.prettyUrl()),
+                               i18n("Error while loading file '%1'!",m_url.prettyUrl()),
                                KIO::NetAccess::lastErrorString(),
                                i18n("File access error"));
     return false;

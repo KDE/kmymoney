@@ -482,7 +482,7 @@ void MyMoneyStatementReader::processSecurityEntry(const MyMoneyStatement::Securi
       ft.commit();
       kDebug(0) << "Created " << security.name() << " with id " << security.id();
     } catch(MyMoneyException *e) {
-      KMessageBox::error(0, i18n("Error creating security record: %1").arg(e->what()), i18n("Error"));
+      KMessageBox::error(0, i18n("Error creating security record: %1",e->what()), i18n("Error"));
     }
   } else {
     kDebug(0) << "Found " << security.name() << " with id " << security.id();

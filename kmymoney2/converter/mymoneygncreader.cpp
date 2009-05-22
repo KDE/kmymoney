@@ -119,8 +119,8 @@ void GncObject::checkVersion (const QString& elName, const QXmlAttributes& elAtt
   TRY
   if (map.contains(elName)) { // if it's not in the map, there's nothing to check
     if (!map[elName].contains(elAttrs.value("version"))) {
-      QString em = i18n("%1: Sorry. This importer cannot handle version %2 of element %3")
-                          .arg(__func__).arg(elAttrs.value("version")).arg(elName);
+      QString em = i18n("%1: Sorry. This importer cannot handle version %2 of element %3"
+                          ,__func__,elAttrs.value("version"),elName);
       throw new MYMONEYEXCEPTION (em);
     }
   }
@@ -1255,7 +1255,7 @@ void MyMoneyGncReader::convertAccount (const GncAccount* gac) {
     acc.setAccountType(MyMoneyAccount::MoneyMarket);
   } else { // we have here an account type we can't currently handle
     QString em =
-        i18n("Current importer does not recognize GnuCash account type %1").arg(gac->type());
+        i18n("Current importer does not recognize GnuCash account type %1",gac->type());
     throw new MYMONEYEXCEPTION (em);
   }
   // if no parent account is present, assign to one of our standard accounts
@@ -1739,7 +1739,7 @@ void MyMoneyGncReader::convertSchedule (const GncSchedule *gsc) {
     ++itt;
   }
   if (itt == 0) {
-    throw new MYMONEYEXCEPTION (i18n("Can't find template transaction for schedule %1").arg(sc.name()));
+    throw new MYMONEYEXCEPTION (i18n("Can't find template transaction for schedule %1",sc.name()));
   } else {
     tx = convertTemplateTransaction (sc.name(), *itt);
   }
@@ -2021,7 +2021,7 @@ void MyMoneyGncReader::terminate () {
   for (i = 0; i < m_suspectList.count(); i++) {
     MyMoneySchedule sc = m_storage->schedule(m_suspectList[i]);
       KEditScheduleDlg *s;
-      switch(KMessageBox::warningYesNo(0, i18n("Problems were encountered in converting schedule '%1'.\nDo you want to review or edit it now?").arg(sc.name()), PACKAGE)) {
+      switch(KMessageBox::warningYesNo(0, i18n("Problems were encountered in converting schedule '%1'.\nDo you want to review or edit it now?",sc.name()), PACKAGE)) {
       case KMessageBox::Yes:
         s = new KEditScheduleDlg (sc);
         // FIXME: connect newCategory to something useful, so that we
@@ -2273,7 +2273,7 @@ void MyMoneyGncReader::checkInvestmentOption (QString stockId) {
     bool ok = false;
     while (!ok) { // keep going till we have a valid investment parent
       QString invAccName = QInputDialog::getItem (
-                             PACKAGE, i18n("Select parent investment account or enter new name. Stock %1").arg(stockAcc.name ()),
+                             PACKAGE, i18n("Select parent investment account or enter new name. Stock %1",stockAcc.name ()),
                              accList, lastSelected, true, &ok);
       if (ok) {
         lastSelected = accList.findIndex (invAccName); // preserve selection for next time
@@ -2311,7 +2311,7 @@ void MyMoneyGncReader::checkInvestmentOption (QString stockId) {
             break;
           }
 #endif
-          switch(KMessageBox::questionYesNo(0, i18n ("%1 is not an Investment Account. Do you wish to make it one?").arg(invAcc.name(), PACKAGE))) {
+          switch(KMessageBox::questionYesNo(0, i18n ("%1 is not an Investment Account. Do you wish to make it one?",invAcc.name(), PACKAGE))) {
             case KMessageBox::Yes:
               // convert it - but what if it has splits???
               qFatal ("Not yet implemented");

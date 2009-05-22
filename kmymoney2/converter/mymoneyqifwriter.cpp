@@ -70,8 +70,7 @@ void MyMoneyQifWriter::write(const QString& filename, const QString& profile,
 
     } catch(MyMoneyException *e) {
       QString errMsg = i18n("Unexpected exception '%1' thrown in %2, line %3 "
-                            "caught in MyMoneyQifWriter::write()")
-                       .arg(e->what()).arg(e->file()).arg(e->line());
+                            "caught in MyMoneyQifWriter::write()",e->what(),e->file(),e->line());
 
       KMessageBox::error(0, errMsg);
       delete e;
@@ -79,7 +78,7 @@ void MyMoneyQifWriter::write(const QString& filename, const QString& profile,
 
     qifFile.close();
   } else {
-    KMessageBox::error(0, i18n("Unable to open file '%1' for writing").arg(filename));
+    KMessageBox::error(0, i18n("Unable to open file '%1' for writing",filename));
   }
 }
 
