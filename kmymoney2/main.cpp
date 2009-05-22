@@ -289,6 +289,7 @@ int main(int argc, char *argv[])
       if(kmymoney2 != 0) {
         kmymoney2->updateCaption();
         args->clear();
+	kmymoney2->show();
         kmymoney2->setEnabled(true);
         rc = a->exec();
 	}
