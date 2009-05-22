@@ -1372,8 +1372,7 @@ void KMyMoney2App::slotOpenDatabase(void)
   dialog.setMode(QIODevice::ReadWrite);
 
   if(dialog.exec() == QDialog::Accepted) {
-#warning "port to kde4"
-      //slotFileOpenRecent(dialog.selectedUrl());
+      slotFileOpenRecent(dialog.selectedURL());
   }
 }
 
@@ -1439,8 +1438,7 @@ void KMyMoney2App::slotFileOpenRecent(const KUrl& url)
       if ((dburl.queryItem("secure") == "yes") && dburl.pass().isEmpty()) {
         KSelectDatabaseDlg dialog(dburl);
         dialog.setMode(QIODevice::ReadWrite);
-#warning "port to kde4"
-        //if(dialog.exec() == QDialog::Accepted) dburl = dialog.selectedUrl();
+        if(dialog.exec() == QDialog::Accepted) dburl = dialog.selectedURL();
       }
       slotFileClose();
       if(!myMoneyView->fileOpen()) {
@@ -1681,8 +1679,7 @@ bool KMyMoney2App::slotSaveAsDatabase(void)
   KUrl url = oldUrl;
 
   while (oldUrl == url && dialog.exec() == QDialog::Accepted) {
-#warning "port to kde4"
-      //url = dialog.selectedUrl();
+      url = dialog.selectedURL();
     // If the protocol is SQL for the old and new, and the hostname and database names match
     // Let the user know that the current database cannot be saved on top of itself.
     if (url.protocol() == "sql" && oldUrl.protocol() == "sql"

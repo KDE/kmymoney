@@ -46,6 +46,7 @@
 #include <kmymoneytitlelabel.h>
 #include <kguiutils.h>
 #include <ktoolinvocation.h>
+#include <KColorScheme>
 
 KMyMoneyWizardPagePrivate::KMyMoneyWizardPagePrivate(QObject* parent, const char* name) :
   QObject(parent, name)
@@ -155,10 +156,7 @@ KMyMoneyWizard::KMyMoneyWizard(QWidget *parent, const char *name, bool modal, Qt
 
   // create stage layout and frame
   m_stepFrame = new Q3Frame(this, "stepFrame");
-#warning "port to kde4"
-#if 0
-  //m_stepFrame->setPaletteBackgroundColor(KGlobalSettings::highlightColor());
-#endif
+  m_stepFrame->setPaletteBackgroundColor(KColorScheme::NormalText);
   m_stepLayout = new Q3VBoxLayout(m_stepFrame, 11, 6, "stepLayout");
   m_stepLayout->addWidget(new QLabel("", m_stepFrame));
   m_stepLayout->addItem(new QSpacerItem(20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding));
@@ -171,11 +169,7 @@ KMyMoneyWizard::KMyMoneyWizard(QWidget *parent, const char *name, bool modal, Qt
   // information when the user selected a different color set using the KConfigCenter
   m_stepPalette = m_stepLabel->palette();
   QColorGroup::ColorRole role = QColorGroup::Foreground;
-  QColor color;
-#warning "port to kde4"
-#if 0
-  QColor color= KGlobalSettings::highlightedTextColor();
-#endif
+  QColor color= KColorScheme::NormalText; 
   m_stepPalette.setColor( QPalette::Active, role, color );
   m_stepPalette.setColor( QPalette::Inactive, role, color );
   m_stepPalette.setColor( QPalette::Disabled, role, color );

@@ -2307,7 +2307,7 @@ void Register::addGroupMarkers(void)
           MyMoneyMoney balance(m_account.value("lastStatementBalance"));
           if(m_account.accountGroup() == MyMoneyAccount::Liability)
             balance = -balance;
-          QString txt = i18n("Online Statement Balance: %1").arg(balance.formatMoney(m_account.fraction()));
+          QString txt = i18n("Online Statement Balance: %1",balance.formatMoney(m_account.fraction()));
           new KMyMoneyRegister::StatementGroupMarker(this, KMyMoneyRegister::Deposit, QDate::fromString(m_account.value("lastImportedTransactionDate"), Qt::ISODate), txt);
         }
 

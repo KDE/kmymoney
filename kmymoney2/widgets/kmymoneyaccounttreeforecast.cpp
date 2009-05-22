@@ -113,14 +113,14 @@ void KMyMoneyAccountTreeForecast::showAdvanced(MyMoneyForecast& forecast)
 
   //add columns
   for(int i = 1; ((i * forecast.accountsCycle()) + daysToBeginDay) <= forecast.forecastDays(); ++i) {
-    int col = addColumn(i18n("Min Bal %1").arg(i), -1);
+    int col = addColumn(i18n("Min Bal %1",i), -1);
     setColumnAlignment(col, Qt::AlignRight);
-    addColumn(i18n("Min Date %1").arg(i), -1);
+    addColumn(i18n("Min Date %1",i), -1);
   }
   for(int i = 1; ((i * forecast.accountsCycle()) + daysToBeginDay) <= forecast.forecastDays(); ++i) {
-    int col = addColumn(i18n("Max Bal %1").arg(i), -1);
+    int col = addColumn(i18n("Max Bal %1",i), -1);
     setColumnAlignment(col, Qt::AlignRight);
-    addColumn(i18n("Max Date %1").arg(i), -1);
+    addColumn(i18n("Max Date %1",i), -1);
   }
   int col = addColumn(i18n("Average"), -1);
   setColumnAlignment(col, Qt::AlignRight);
