@@ -38,7 +38,6 @@
 #include <transactioneditorcontainer.h>
 #include <register.h>
 
-class KCurrencyExchange;
 class KMyMoneyCategory;
 
 class TransactionEditor : public QObject

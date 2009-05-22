@@ -29,7 +29,6 @@
 #include <qwidget.h>
 #include <qpair.h>
 #include <qdatastream.h>
-class Q3ListViewItem;
 
 // ----------------------------------------------------------------------------
 // KDE Includes

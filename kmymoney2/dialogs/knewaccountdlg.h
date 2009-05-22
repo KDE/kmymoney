@@ -42,8 +42,7 @@
 #include <QResizeEvent>
 class KMyMoneyAccountTreeBaseItem;
 namespace reports {
-  class KReportChartView;
-}
+  }
 
 /**
   * This dialog lets you create/edit an account.

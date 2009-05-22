@@ -39,8 +39,6 @@
 #include <mymoneyaccount.h>
 #include <mymoneytransaction.h>
 
-class kMyMoneyEdit;
-class kMyMoneyLineEdit;
 
 #include "ui_ksplittransactiondlgdecl.h"
 #include "ui_ksplitcorrectiondlg.h"
