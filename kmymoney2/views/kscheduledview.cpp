@@ -67,8 +67,10 @@ KScheduledView::KScheduledView(QWidget *parent) :
   // create the searchline widget
   // and insert it into the existing layout
   m_searchWidget = new K3ListViewSearchLineWidget(m_qlistviewScheduled, m_listTab);
+#warning "port to kde4"
+#if 0
   m_listTabLayout->insertWidget(0, m_searchWidget);
-
+#endif
   m_qlistviewScheduled->addColumn(i18n("Type/Name"));
   m_qlistviewScheduled->addColumn(i18n("Account"));
   m_qlistviewScheduled->addColumn(i18n("Payee"));
@@ -97,8 +99,9 @@ KScheduledView::KScheduledView(QWidget *parent) :
   m_accountsCombo->setGuiItem(KMyMoneyUtils::accountsFilterGuiItem());
 
   KIconLoader *il = KIconLoader::global();
-  m_tabWidget->setTabIcon(m_listTab, KIcon(il->loadIcon("contents", KIconLoader::Small, KIconLoader::SizeSmall)));
-  m_tabWidget->setTabIcon(m_calendarTab, KIcon(il->loadIcon("calendartab", KIconLoader::User, KIconLoader::SizeSmall)));
+#warning "port to kde4"
+  //m_tabWidget->setTabIcon(m_listTab, KIcon(il->loadIcon("contents", KIconLoader::Small, KIconLoader::SizeSmall)));
+ // m_tabWidget->setTabIcon(m_calendarTab, KIcon(il->loadIcon("calendartab", KIconLoader::User, KIconLoader::SizeSmall)));
 
   connect(m_qlistviewScheduled, SIGNAL(contextMenu(K3ListView*, Q3ListViewItem*, const QPoint&)),
     this, SLOT(slotListViewContextMenu(K3ListView*, Q3ListViewItem*, const QPoint&)));

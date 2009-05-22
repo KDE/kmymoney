@@ -58,7 +58,7 @@
 #include <kdebug.h>
 #include <kapplication.h>
 #include <keditlistbox.h>
-
+#include <K3ListViewSearchLineWidget>
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -66,7 +66,6 @@
 #include <kmymoneyaccounttree.h>
 #include <kmymoneyglobalsettings.h>
 #include <ktoolinvocation.h>
-#include "../widgets/klistviewsearchline.h"
 
 #include "kpayeesview.h"
 
@@ -330,21 +329,24 @@ KPayeesView::KPayeesView(QWidget *parent) :
   // and insert it into the existing layout
   m_searchWidget = new K3ListViewSearchLineWidget(m_payeesList, this);
   m_searchWidget->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed));
-  KPayeesViewDeclLayout->insertWidget(0, m_searchWidget);
+#warning "port to kde4"
+  //KPayeesViewDeclLayout->insertWidget(0, m_searchWidget);
 
   m_splitter = new QSplitter(this);
   m_payeesList->reparent(m_splitter, QPoint(0,0), true);
   m_tabWidget->reparent(m_splitter, QPoint(0, 0), true);
   m_splitter->setResizeMode(m_tabWidget, QSplitter::Stretch);
   m_splitter->setOpaqueResize();
-  layout10->addWidget(m_splitter);
+#warning "port to kde4"
+  //layout10->addWidget(m_splitter);
 
   // use the size settings of the last run (if any)
   KSharedConfigPtr config = KGlobal::config();
   KConfigGroup grp = config->group("Last Use Settings");
-  Q3ValueList<int> sizes = gr.readEntry("KPayeesViewSplitterSize", Q3ValueList<int>());
-  if(sizes.size() == 2)
-    m_splitter->setSizes(sizes);
+#warning "port to kde4"
+  //Q3ValueList<int> sizes = grp.readEntry("KPayeesViewSplitterSize", Q3ValueList<int>());
+  //if(sizes.size() == 2)
+    //m_splitter->setSizes(sizes);
 
   m_transactionView->setSorting(-1);
   m_transactionView->setColumnWidthMode(2, Q3ListView::Manual);
@@ -452,7 +454,8 @@ void KPayeesView::slotChooseDefaultAccount(void)
       }
     }
   }
-
+#warning "port to kde4"  
+#if 0
   QMapIterator<QString,int> most_frequent, iter;
   most_frequent = account_count.end();
   for (iter = account_count.begin(); iter != account_count.end(); iter++) {
@@ -465,6 +468,7 @@ void KPayeesView::slotChooseDefaultAccount(void)
     checkEnableDefaultAccount->setChecked(true);
     comboDefaultAccount->setSelected(most_frequent.key());
   }
+#endif  
 }
 
 void KPayeesView::slotStartRename(void)

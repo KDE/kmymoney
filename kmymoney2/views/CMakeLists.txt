@@ -13,10 +13,10 @@ SET(libviews_a_SOURCES
   kmymoneyfile.cpp
   kmymoneytransaction.cpp
   #kmymoneyview.cpp
-  #kpayeesview.cpp
+  kpayeesview.cpp
   #kreportsview.cpp
   kscheduledlistitem.cpp
-  #kscheduledview.cpp
+  kscheduledview.cpp
   )
 
 SET(libviews_a_HEADER kmymoneyview.h)
