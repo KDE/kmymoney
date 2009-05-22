@@ -9,10 +9,3 @@ SET(kgpgfile_STAT_SRCS
 
 KDE4_ADD_LIBRARY(kgpgfile STATIC ${kgpgfile_STAT_SRCS})
 
-
-########### install files ###############
-
-INSTALL(FILES ${kgpgfile_STAT_SRCS}
-	DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney
-)
-
