@@ -794,7 +794,8 @@ void KMyMoneyView::checkAccountName(const MyMoneyAccount& _acc, const QString& n
 }
 
 bool KMyMoneyView::openDatabase (const KUrl& url) {
-  ::timetrace("start opening database");
+#if 0
+      	::timetrace("start opening database");
   m_fileOpen = false;
 
   // open the database
@@ -854,6 +855,8 @@ bool KMyMoneyView::openDatabase (const KUrl& url) {
   reader->setProgressCallback(0);
   ::timetrace("done opening database");
   return initializeStorage();
+#endif
+  return false;
 }
 
 bool KMyMoneyView::initializeStorage()
@@ -1181,6 +1184,8 @@ bool KMyMoneyView::saveFile(const KUrl& url, const QString& keyList)
 bool KMyMoneyView::saveAsDatabase(const KUrl& url)
 {
   bool rc = false;
+#warning "port to kde4"
+#if 0
   if (!fileOpen()) {
     KMessageBox::error(this, i18n("Tried to access a file when it's not open"));
     return (rc);
@@ -1221,6 +1226,7 @@ bool KMyMoneyView::saveAsDatabase(const KUrl& url)
           " for further info").arg(url.prettyUrl()), writer->lastError());
   }
   delete writer;
+#endif  
   return (rc);
 }
 

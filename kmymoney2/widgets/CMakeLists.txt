@@ -61,7 +61,7 @@ SET(_uncritial_common_sources
   stdtransactiondownloaded.cpp
   stdtransactionmatched.cpp 
   transaction.cpp
-  #transactionform.cpp
+  transactionform.cpp
   kmymoneyreportconfigtabimpl.cpp
   )
 

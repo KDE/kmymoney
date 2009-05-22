@@ -62,7 +62,7 @@ TabBar::SignalEmissionE TabBar::setSignalEmission(TabBar::SignalEmissionE type)
   m_signalType = type;
   return _type;
 }
-
+#if 0
 int TabBar::currentTab(void) const
 {
   QMap<int, int>::const_iterator it;
@@ -166,7 +166,7 @@ void TabBar::copyTabs(const TabBar* otabbar)
       setCurrentTab(ntab);
   }
 }
-
+#endif
 TransactionForm::TransactionForm(QWidget *parent, const char *name) :
   TransactionEditorContainer(parent, name),
   m_transaction(0),
@@ -201,11 +201,13 @@ TransactionForm::TransactionForm(QWidget *parent, const char *name) :
 
 void TransactionForm::drawContents( QPainter *p, int cx, int cy, int cw, int ch )
 {
+    #warning "port to kde4"
+#if 0
   // the QTable::drawContents() method does not honor the block update flag
   // so we take care of it here
   if ( testWState(WState_Visible|WState_BlockUpdates) != WState_Visible )
     return;
-
+#endif
   Q3Table::drawContents(p, cx, cy, cw, ch);
 }
 
@@ -288,6 +290,8 @@ void TransactionForm::slotActionSelected(int id)
 
 void TransactionForm::setupForm(const MyMoneyAccount& acc)
 {
+    #warning "port to kde4"
+#if 0
   // remove all tabs from the tabbar
   QTab* tab;
   for(tab = m_tabBar->tabAt(0); tab; tab = m_tabBar->tabAt(0)) {
@@ -295,14 +299,14 @@ void TransactionForm::setupForm(const MyMoneyAccount& acc)
   }
 
   m_tabBar->show();
-
+#endif
   // important: one needs to add the new tabs first and then
   // change the identifier. Otherwise, addTab() will assign
   // a different value
   switch(acc.accountType()) {
     default:
 #warning "port to kde4"
-#if 0	    
+#if 0
       tab = new QTab(i18n("&Deposit"));
       m_tabBar->addTab(tab, KMyMoneyRegister::ActionDeposit);
       tab = new QTab(i18n("&Transfer"));
@@ -327,7 +331,7 @@ void TransactionForm::setupForm(const MyMoneyAccount& acc)
     case MyMoneyAccount::Liability:
     case MyMoneyAccount::Loan:
 #warning "port to kde4"
-#if 0      
+#if 0
       tab = new QTab(i18n("&Decrease"));
       m_tabBar->addTab(tab, KMyMoneyRegister::ActionDeposit);
       tab = new QTab(i18n("&Transfer"));
