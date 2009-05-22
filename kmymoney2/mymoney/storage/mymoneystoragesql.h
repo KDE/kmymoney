@@ -86,22 +86,7 @@ typedef enum databaseTypeE { // database (driver) type
   Sqlite3 //
 } _databaseType;
 
-class MyMoneyStorageSql;
 
-/**
-  * The MyMoneySqlQuery class is derived from QSqlQuery to provide
-  * a way to adjust some queries based on databaseTypeE and make
-  * debugging easier by providing a place to put debug statements.
-  */
-class MyMoneySqlQuery : public QSqlQuery {
-  public:
-    MyMoneySqlQuery (MyMoneyStorageSql* db = 0);
-    virtual ~MyMoneySqlQuery() {}
-    bool exec ();
-    bool prepare ( const QString & query );
-  private:
-    const MyMoneyStorageSql* m_db;
-};
 
 /**
   * The MyMoneyDbDrivers class is a map from string to enum of db types.
@@ -431,6 +416,7 @@ class IMyMoneySerialize;
   * The MyMoneyDbColumn class is a base type for generic db columns.
   * Derived types exist for several common column types.
   */
+class MyMoneySqlQuery;
 class MyMoneyStorageSql : public IMyMoneyStorageFormat, public QSqlDatabase, public KShared {
 public:
 
@@ -791,7 +777,26 @@ private:
   QDateTime m_txPostDate; // FIXME: remove when Tom puts date into split object
 
   //Disable copying
-  MyMoneyStorageSql (const MyMoneyStorageSql& rhs);
-  MyMoneyStorageSql& operator= (const MyMoneyStorageSql& rhs);
+  //MyMoneyStorageSql (const MyMoneyStorageSql& rhs);
+  //MyMoneyStorageSql& operator= (const MyMoneyStorageSql& rhs);
+};
+
+
+
+class MyMoneyStorageSql;
+
+/**
+  * The MyMoneySqlQuery class is derived from QSqlQuery to provide
+  * a way to adjust some queries based on databaseTypeE and make
+  * debugging easier by providing a place to put debug statements.
+  */
+class MyMoneySqlQuery : public QSqlQuery {
+public:
+    MyMoneySqlQuery (const MyMoneyStorageSql& db );
+    virtual ~MyMoneySqlQuery() {}
+    bool exec ();
+    bool prepare ( const QString & query );
+  private:
+    const MyMoneyStorageSql m_db;
 };
 #endif // MYMONEYSTORAGESQL_H

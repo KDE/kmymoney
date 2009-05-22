@@ -57,22 +57,21 @@ unsigned int MyMoneyDbDef::m_currentVersion = 5;
 
 // subclass QSqlQuery for performance tracing
 
-MyMoneySqlQuery::MyMoneySqlQuery (MyMoneyStorageSql*  db)
-  : QSqlQuery (static_cast<QSqlDatabase*>(db)) {
-  m_db = db;
+MyMoneySqlQuery::MyMoneySqlQuery (const MyMoneyStorageSql& db)
+  : QSqlQuery (db),m_db( db ) {
 }
 
 bool MyMoneySqlQuery::exec () {
-  TRACE(QString("start sql - %1").arg(lastQuery()));
+  TRACE(QString("start sql - %1").arg(lastQuery()).latin1());
   bool rc = QSqlQuery::exec();
   QString msg("end sql\n%1\n***Query returned %2, row count %3");
-  TRACE (msg.arg(QSqlQuery::executedQuery()).arg(rc).arg(numRowsAffected()));
+  TRACE (msg.arg(QSqlQuery::executedQuery()).arg(rc).arg(numRowsAffected()).latin1());
   //DBG (QString("%1\n***Query returned %2, row count %3").arg(QSqlQuery::executedQuery()).arg(rc).arg(size()));
   return (rc);
 }
 
 bool MyMoneySqlQuery::prepare ( const QString & query ) {
-  if (m_db->isSqlite3()) {
+  if (m_db.isSqlite3()) {
     QString newQuery = query;
     return (QSqlQuery::prepare (newQuery.replace("FOR UPDATE", "")));
   }
@@ -105,7 +104,7 @@ databaseTypeE MyMoneyDbDrivers::driverToType (const QString& driver) const {
 
 //************************ Constructor/Destructor *****************************
 MyMoneyStorageSql::MyMoneyStorageSql (IMyMoneySerialize *storage, const KUrl& url)
-  : QSqlDatabase (url.queryItem("driver"), QString("kmmdatabase")) {
+  : QSqlDatabase (url.queryItem("driver")) {
   DBG("*** Entering MyMoneyStorageSql::MyMoneyStorageSql");
   m_majorVersion = 0;
   m_minorVersion = 1;
