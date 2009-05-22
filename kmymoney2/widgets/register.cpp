@@ -1116,7 +1116,8 @@ void Register::suppressAdjacentMarkers(void)
 
 void Register::updateRegister(bool forceUpdateRowHeight)
 {
-  ::timetrace("Update register");
+#warning "port to kde4"	
+  //::timetrace("Update register");
   if(m_listsDirty || forceUpdateRowHeight) {
     // don't get in here recursively
     m_listsDirty = false;
@@ -1188,7 +1189,8 @@ void Register::updateRegister(bool forceUpdateRowHeight)
         QTimer::singleShot(0, this, SLOT(resize()));
     }
   }
-  ::timetrace("Done updateing register");
+#warning "port to kde4"  
+  //::timetrace("Done updateing register");
 }
 
 int Register::rowHeightHint(void) const
