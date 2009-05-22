@@ -51,8 +51,8 @@
 // Project Headers
 
 #include "mymoneyqifreader.h"
-#include "../mymoney/mymoneyfile.h"
-#include "../dialogs/kaccountselectdlg.h"
+#include "mymoneyfile.h"
+#include "kaccountselectdlg.h"
 #include "../kmymoney2.h"
 #include "kmymoneyglobalsettings.h"
 

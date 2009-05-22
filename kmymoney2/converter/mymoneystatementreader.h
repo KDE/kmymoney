@@ -41,8 +41,8 @@
 // Project Headers
 
 #include "mymoneyqifprofile.h"
-#include "../mymoney/mymoneyaccount.h"
-#include "../mymoney/mymoneystatement.h"
+#include "mymoneyaccount.h"
+#include "mymoneystatement.h"
 
 class MyMoneyFileTransaction;
 class QStringList;

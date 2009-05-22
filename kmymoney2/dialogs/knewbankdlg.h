@@ -30,8 +30,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "../mymoney/mymoneyinstitution.h"
-#include "../mymoney/mymoneykeyvaluecontainer.h"
+#include "mymoneyinstitution.h"
+#include "mymoneykeyvaluecontainer.h"
 
 #include "ui_knewbankdlgdecl.h"
 

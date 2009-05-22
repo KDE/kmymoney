@@ -44,7 +44,7 @@
 // ----------------------------------------------------------------------------
 // Project Headers
 
-#include "../mymoney/mymoneyexception.h"
+#include "mymoneyexception.h"
 #include "mymoneyqifprofile.h"
 #include "webpricequote.h"
 

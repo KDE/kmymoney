@@ -34,7 +34,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-// #include "../views/kledgerview.h"
+// #include "kledgerview.h"
 #include <mymoneyutils.h>
 #include <mymoneytransactionfilter.h>
 

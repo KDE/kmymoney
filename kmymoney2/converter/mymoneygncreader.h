@@ -168,8 +168,8 @@ class QIODevice;
 #endif
 
 #ifndef _GNCFILEANON
-#include "../mymoney/storage/imymoneyserialize.h" // not used any more, but call interface requires it
-#include "../mymoney/storage/imymoneystorageformat.h"
+#include "storage/imymoneyserialize.h" // not used any more, but call interface requires it
+#include "storage/imymoneystorageformat.h"
 #endif // _GNCFILEANON
 
 // not sure what these are for, but leave them in

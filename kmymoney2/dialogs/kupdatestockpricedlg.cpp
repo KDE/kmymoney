@@ -32,7 +32,7 @@
 // Project Includes
 
 #include "kupdatestockpricedlg.h"
-#include "../widgets/kmymoneycurrencyselector.h"
+#include "kmymoneycurrencyselector.h"
 
 KUpdateStockPriceDlg::KUpdateStockPriceDlg(QWidget* parent) :
   kUpdateStockPriceDecl(parent)

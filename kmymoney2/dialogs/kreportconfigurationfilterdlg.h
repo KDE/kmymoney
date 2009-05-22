@@ -27,8 +27,8 @@
 #include <q3valuevector.h>
 
 #include "kfindtransactiondlg.h"
-#include "../mymoney/mymoneyreport.h"
-#include "../mymoney/mymoneybudget.h"
+#include "mymoneyreport.h"
+#include "mymoneybudget.h"
 #include "kmymoneyreportconfigtabimpl.h"
 
 

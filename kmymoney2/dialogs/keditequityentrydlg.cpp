@@ -38,7 +38,7 @@
 
 #include "keditequityentrydlg.h"
 #include "kupdatestockpricedlg.h"
-#include "../widgets/kmymoneypriceview.h"
+#include "kmymoneypriceview.h"
 
 KEditEquityEntryDlg::KEditEquityEntryDlg(const MyMoneySecurity& selectedSecurity, QWidget *parent)
   : KEditEquityEntryDecl(parent)

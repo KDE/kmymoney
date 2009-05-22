@@ -44,8 +44,8 @@
 #include <mymoneyfile.h>
 #include <kmymoneycombo.h>
 #include <ktoolinvocation.h>
-#include "../widgets/kmymoneycurrencyselector.h"
-#include "../converter/webpricequote.h"
+#include "kmymoneycurrencyselector.h"
+#include "webpricequote.h"
 #include "../kmymoneyutils.h"
 
 KNewInvestmentWizard::KNewInvestmentWizard( QWidget *parent ) :

@@ -23,8 +23,8 @@
 #include <k3listview.h>
 #include <qpushbutton.h>
 
-#include "../mymoney/mymoneyfile.h"
-#include "../mymoney/mymoneymoney.h"
+#include "mymoneyfile.h"
+#include "mymoneymoney.h"
 
 #include "ui_kreconciledlgdecl.h"
 

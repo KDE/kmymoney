@@ -49,7 +49,7 @@
 #include "kimportdlg.h"
 #include <mymoneyfile.h>
 #include "mymoneyqifprofileeditor.h"
-#include "../converter/mymoneyqifprofile.h"
+#include "mymoneyqifprofile.h"
 
 KImportDlg::KImportDlg(QWidget *parent)
   : KImportDlgDecl(parent)

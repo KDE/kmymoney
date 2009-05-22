@@ -50,8 +50,8 @@
 
 #include "kscheduledview.h"
 #include "kscheduledlistitem.h"
-#include "../widgets/kmymoneyscheduleddatetbl.h"
-// #include "../dialogs/kenterscheduledialog.h"
+#include "kmymoneyscheduleddatetbl.h"
+// #include "kenterscheduledialog.h"
 #include <kmymoneyutils.h>
 #include <kmymoneyglobalsettings.h>
 

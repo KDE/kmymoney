@@ -48,14 +48,14 @@ email                : mte@users.sourceforge.net
 #include "mymoneygncreader.h"
 #ifndef _GNCFILEANON
   #include "config-kmymoney.h"
-  #include "../mymoney/storage/imymoneystorage.h"
+  #include "storage/imymoneystorage.h"
   #include "../kmymoneyutils.h"
-  #include "../mymoney/mymoneyfile.h"
-  #include "../mymoney/mymoneyprice.h"
-  #include "../dialogs/kgncimportoptionsdlg.h"
-  #include "../dialogs/kgncpricesourcedlg.h"
-  #include "../dialogs/keditscheduledlg.h"
-  #include "../widgets/kmymoneyedit.h"
+  #include "mymoneyfile.h"
+  #include "mymoneyprice.h"
+  #include "kgncimportoptionsdlg.h"
+  #include "kgncpricesourcedlg.h"
+  #include "keditscheduledlg.h"
+  #include "kmymoneyedit.h"
   #define TRY try {
   #define CATCH } catch (MyMoneyException *e) {
   #define PASS } catch (MyMoneyException *e) { throw e; }

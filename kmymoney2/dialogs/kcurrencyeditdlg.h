@@ -38,7 +38,7 @@
 // Project Includes
 
 #include "ui_kcurrencyeditdlgdecl.h"
-#include "../mymoney/mymoneysecurity.h"
+#include "mymoneysecurity.h"
 
 /**
   * @author Thomas Baumgart

@@ -19,8 +19,8 @@
 #define CONVERTERTEST_H
 
 #include <cppunit/extensions/HelperMacros.h>
-#include "../mymoney/mymoneyfile.h"
-#include "../mymoney/storage/mymoneyseqaccessmgr.h"
+#include "mymoneyfile.h"
+#include "storage/mymoneyseqaccessmgr.h"
 
 class ConverterTest : public CppUnit::TestFixture  {
   CPPUNIT_TEST_SUITE(ConverterTest);

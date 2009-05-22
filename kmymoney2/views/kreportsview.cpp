@@ -74,7 +74,7 @@
 #include "kreportsview.h"
 #include "../reports/querytable.h"
 #include "../reports/objectinfotable.h"
-#include "../dialogs/kreportconfigurationfilterdlg.h"
+#include "kreportconfigurationfilterdlg.h"
 #include "../kmymoneyutils.h"
 
 using namespace reports;

@@ -57,7 +57,7 @@
 #include <kmymoneyaccountselector.h>
 #include <kmymoneylineedit.h>
 
-#include "../widgets/kmymoneypriceview.h"
+#include "kmymoneypriceview.h"
 
 KCurrencyEditDlg::KCurrencyEditDlg(QWidget *parent) :
   KCurrencyEditDlgDecl(parent)

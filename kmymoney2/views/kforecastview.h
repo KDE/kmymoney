@@ -31,7 +31,7 @@
 #include <mymoneyutils.h>
 
 #include "ui_kforecastviewdecl.h"
-#include "../widgets/kmymoneyaccounttreeforecast.h"
+#include "kmymoneyaccounttreeforecast.h"
 //#include "../reports/kreportchartview.h"
 //Added by qt3to4:
 #include <Q3ValueList>

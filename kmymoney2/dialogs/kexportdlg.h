@@ -34,7 +34,7 @@
 // ----------------------------------------------------------------------------
 // Project Headers
 
-#include "../widgets/kmymoneydateinput.h"
+#include "kmymoneydateinput.h"
 #include "ui_kexportdlgdecl.h"
 
 /**

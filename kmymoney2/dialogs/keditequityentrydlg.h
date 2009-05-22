@@ -38,7 +38,7 @@
 // Project Includes
 
 #include "ui_keditequityentrydecl.h"
-#include "../mymoney/mymoneysecurity.h"
+#include "mymoneysecurity.h"
 
 /**
   * @author Kevin Tambascio

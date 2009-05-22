@@ -41,7 +41,7 @@
 #include <kmymoneyaccountselector.h>
 #include <ktoolinvocation.h>
 
-#include "../dialogs/kcurrencycalculator.h"
+#include "kcurrencycalculator.h"
 
 class KEndingBalanceDlg::Private
 {

@@ -43,8 +43,8 @@
 #include "../kmymoney2.h"
 #include "../kmymoneyutils.h"
 #include "../mymoney/mymoneyforecast.h"
-#include "../widgets/kmymoneyforecastlistviewitem.h"
-#include "../widgets/kmymoneyaccounttreeforecast.h"
+#include "kmymoneyforecastlistviewitem.h"
+#include "kmymoneyaccounttreeforecast.h"
 //#include "../reports/pivottable.h"
 //#include "../reports/pivotgrid.h"
 

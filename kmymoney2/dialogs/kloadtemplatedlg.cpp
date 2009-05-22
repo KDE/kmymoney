@@ -30,7 +30,7 @@
 // Project Includes
 
 #include "kloadtemplatedlg.h"
-#include "../widgets/kaccounttemplateselector.h"
+#include "kaccounttemplateselector.h"
 //Added by qt3to4:
 #include <Q3ValueList>
 

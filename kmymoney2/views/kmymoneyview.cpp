@@ -75,16 +75,16 @@
 #include <string>
 #endif
 
-#include "../dialogs/kendingbalancedlg.h"
-#include "../dialogs/kchooseimportexportdlg.h"
-#include "../dialogs/kcsvprogressdlg.h"
-#include "../dialogs/kimportdlg.h"
-#include "../dialogs/kexportdlg.h"
-#include "../dialogs/knewloanwizard.h"
-#include "../dialogs/kcurrencyeditdlg.h"
-#include "../dialogs/kfindtransactiondlg.h"
-#include "../dialogs/knewbankdlg.h"
-#include "../dialogs/knewfiledlg.h"
+#include "kendingbalancedlg.h"
+#include "kchooseimportexportdlg.h"
+#include "kcsvprogressdlg.h"
+#include "kimportdlg.h"
+#include "kexportdlg.h"
+#include "knewloanwizard.h"
+#include "kcurrencyeditdlg.h"
+#include "kfindtransactiondlg.h"
+#include "knewbankdlg.h"
+#include "knewfiledlg.h"
 
 #include "../mymoney/storage/mymoneyseqaccessmgr.h"
 #include "../mymoney/storage/mymoneydatabasemgr.h"
@@ -2288,7 +2288,7 @@ KMyMoneyViewBase* KMyMoneyView::addPage(const QString& title, const QString& ico
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "../widgets/kmymoneytitlelabel.h"
+#include "kmymoneytitlelabel.h"
 
 class KMyMoneyViewBase::Private {
   public:

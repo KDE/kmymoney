@@ -32,9 +32,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "../widgets/kmymoneydatetbl.h"
-#include "../widgets/kmymoneybriefschedule.h"
-#include "../mymoney/mymoneyscheduled.h"
+#include "kmymoneydatetbl.h"
+#include "kmymoneybriefschedule.h"
+#include "mymoneyscheduled.h"
 //Added by qt3to4:
 #include <QMouseEvent>
 

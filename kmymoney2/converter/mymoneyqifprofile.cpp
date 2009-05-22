@@ -36,8 +36,8 @@
 // Project Includes
 
 #include "mymoneyqifprofile.h"
-#include "../mymoney/mymoneyexception.h"
-#include "../mymoney/mymoneymoney.h"
+#include "mymoneyexception.h"
+#include "mymoneymoney.h"
 
 /*
  * CENTURY_BREAK is used to identfy the century for a two digit year

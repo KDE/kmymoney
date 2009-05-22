@@ -31,7 +31,7 @@ class Q3ListViewItem;
 
 #include "ui_ksecuritylisteditordecl.h"
 
-#include "../mymoney/mymoneysecurity.h"
+#include "mymoneysecurity.h"
 
 /**
   * @author Thomas Baumgart

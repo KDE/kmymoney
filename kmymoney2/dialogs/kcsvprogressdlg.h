@@ -29,7 +29,7 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include "../mymoney/mymoneyaccount.h"
+#include "mymoneyaccount.h"
 #include "ui_kcsvprogressdlgdecl.h"
 
 /**

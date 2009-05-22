@@ -56,9 +56,9 @@
 #include <transactionform.h>
 #include <kmymoneyglobalsettings.h>
 
-#include "../dialogs/ksplittransactiondlg.h"
-#include "../dialogs/kcurrencycalculator.h"
-#include "../dialogs/kselecttransactionsdlg.h"
+#include "ksplittransactiondlg.h"
+#include "kcurrencycalculator.h"
+#include "kselecttransactionsdlg.h"
 
 using namespace KMyMoneyRegister;
 using namespace KMyMoneyTransactionForm;

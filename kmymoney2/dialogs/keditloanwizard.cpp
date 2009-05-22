@@ -40,14 +40,14 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <../dialogs/knewloanwizard.h>
+#include <knewloanwizard.h>
 #include "keditloanwizard.h"
-#include "../widgets/kmymoneylineedit.h"
-#include "../widgets/kmymoneyedit.h"
-#include "../widgets/kmymoneycombo.h"
-#include "../widgets/kmymoneyaccountselector.h"
-#include "../widgets/kmymoneydateinput.h"
-#include "../mymoney/mymoneyfile.h"
+#include "kmymoneylineedit.h"
+#include "kmymoneyedit.h"
+#include "kmymoneycombo.h"
+#include "kmymoneyaccountselector.h"
+#include "kmymoneydateinput.h"
+#include "mymoneyfile.h"
 #include "../kmymoneyutils.h"
 
 KEditLoanWizard::KEditLoanWizard(const MyMoneyAccount& account, QWidget *parent ) :

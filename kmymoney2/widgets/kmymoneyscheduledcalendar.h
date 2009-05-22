@@ -32,8 +32,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "../widgets/kmymoneycalendar.h"
-#include "../widgets/kmymoneyscheduleddatetbl.h"
+#include "kmymoneycalendar.h"
+#include "kmymoneyscheduleddatetbl.h"
 
 class KMenu;
 class kMyMoneyDateTbl;

@@ -46,8 +46,8 @@ class KPushButton;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "../mymoney/mymoneytransaction.h"
-#include "../mymoney/mymoneyaccount.h"
+#include "mymoneytransaction.h"
+#include "mymoneyaccount.h"
 
 class KMyMoneyCategory;
 class kMyMoneyLineEdit;

@@ -38,9 +38,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "../converter/webpricequote.h"
-#include "../mymoney/mymoneysecurity.h"
-#include "../mymoney/mymoneyprice.h"
+#include "webpricequote.h"
+#include "mymoneysecurity.h"
+#include "mymoneyprice.h"
 #include "ui_kequitypriceupdatedlgdecl.h"
 
 /**

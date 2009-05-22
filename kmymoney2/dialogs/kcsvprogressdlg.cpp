@@ -47,7 +47,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 #include "kcsvprogressdlg.h"
-#include "../widgets/kmymoneydateinput.h"
+#include "kmymoneydateinput.h"
 #include "../kmymoneyutils.h"
 
 /** Simple constructor */

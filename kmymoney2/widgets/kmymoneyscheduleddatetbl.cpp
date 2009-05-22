@@ -64,7 +64,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 #include "kmymoneyscheduleddatetbl.h"
-#include "../mymoney/mymoneyfile.h"
+#include "mymoneyfile.h"
 
 kMyMoneyScheduledDateTbl::kMyMoneyScheduledDateTbl(QWidget *parent, QDate date_, const char* name, Qt::WFlags f )
   : kMyMoneyDateTbl(parent, date_, name, f),

@@ -39,7 +39,7 @@
 // ----------------------------------------------------------------------------
 // Project Headers
 
-#include "../mymoney/mymoneyaccount.h"
+#include "mymoneyaccount.h"
 
 /**
   * @author Kevin Tambascio

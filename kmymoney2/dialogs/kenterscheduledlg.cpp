@@ -37,7 +37,7 @@
 // Project Includes
 
 #include "kenterscheduledlg.h"
-#include "../dialogs/kcurrencycalculator.h"
+#include "kcurrencycalculator.h"
 #include <register.h>
 #include <transactionform.h>
 #include <transaction.h>

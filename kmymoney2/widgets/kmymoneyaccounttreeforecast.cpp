@@ -25,7 +25,7 @@
 #include <kmymoneyaccounttreeforecast.h>
 #include "../kmymoney2.h"
 #include "../kmymoneyglobalsettings.h"
-#include "../mymoney/mymoneyforecast.h"
+#include "mymoneyforecast.h"
 #include "../reports/reportaccount.h"
 //Added by qt3to4:
 #include <Q3ValueList>

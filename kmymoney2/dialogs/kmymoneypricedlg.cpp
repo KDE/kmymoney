@@ -40,7 +40,7 @@
 #include "kmymoneypricedlg.h"
 #include "kupdatestockpricedlg.h"
 #include "kcurrencycalculator.h"
-#include "../widgets/kmymoneypriceview.h"
+#include "kmymoneypriceview.h"
 #include "kequitypriceupdatedlg.h"
 #include <kmymoneycurrencyselector.h>
 #include <mymoneyfile.h>
@@ -233,9 +233,9 @@ void KMyMoneyPriceDlg::slotOnlinePriceUpdate(void)
 // This seems to be fixed, so I #if 0'ed it out. Let's see, if someone
 // complains and if not, we get rid of this whole block one day. (2007-06-22 ipwizard)
 //
-// kmymoney2/widgets/kmymoneypriceview.cpp:179: undefined reference to
+// kmymonekmymoneypriceview.cpp:179: undefined reference to
 // `KUpdateStockPriceDlg::KUpdateStockPriceDlg[in-charge](QWidget*, char const*)'
-// kmymoney2/widgets/kmymoneypriceview.cpp:204: undefined reference to
+// kmymonekmymoneypriceview.cpp:204: undefined reference to
 // `KUpdateStockPriceDlg::KUpdateStockPriceDlg[in-charge](QDate const&, QString const&, QWidget*, char const*)'
 void KEditEquityEntryDlg_useless(void)
 {

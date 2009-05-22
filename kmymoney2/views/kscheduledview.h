@@ -39,7 +39,7 @@ class K3ListViewSearchLineWidget;
 #include "ui_kscheduledviewdecl.h"
 #include <mymoneyfile.h>
 #include <mymoneyaccount.h>
-#include "../widgets/kmymoneyscheduledcalendar.h"
+#include "kmymoneyscheduledcalendar.h"
 
 class KMenu;
 

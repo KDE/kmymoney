@@ -45,10 +45,10 @@
 // Project Headers
 
 #include "kexportdlg.h"
-#include "../mymoney/mymoneycategory.h"
-#include "../dialogs/mymoneyqifprofileeditor.h"
-#include "../mymoney/mymoneyfile.h"
-#include "../widgets/kmymoneyaccountcombo.h"
+#include "mymoneycategory.h"
+#include "mymoneyqifprofileeditor.h"
+#include "mymoneyfile.h"
+#include "kmymoneyaccountcombo.h"
 #include "../kmymoneyutils.h"
 
 KExportDlg::KExportDlg(QWidget *parent)

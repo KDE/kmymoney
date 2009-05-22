@@ -37,7 +37,7 @@ namespace KIO {
 // ----------------------------------------------------------------------------
 // Project Headers
 
-#include "../mymoney/mymoneymoney.h"
+#include "mymoneymoney.h"
 
 /**
 Helper class to attend the process which is running the script, in the case

@@ -46,7 +46,7 @@
 #include <kmymoneylineedit.h>
 #include "kmymoneyedit.h"
 #include "kmymoneycalculator.h"
-#include "../mymoney/mymoneymoney.h"
+#include "mymoneymoney.h"
 
 kMyMoneyMoneyValidator::kMyMoneyMoneyValidator(QObject * parent, const char * name) :
   QDoubleValidator(parent, name)

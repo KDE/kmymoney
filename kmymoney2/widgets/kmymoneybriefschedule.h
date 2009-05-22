@@ -36,7 +36,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 #include "ui_kschedulebriefwidget.h"
-#include "../mymoney/mymoneyfile.h"
+#include "mymoneyfile.h"
 
 /**
   *@author Michael Edwardes

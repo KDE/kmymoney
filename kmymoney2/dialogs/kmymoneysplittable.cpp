@@ -66,9 +66,9 @@
 #include <mymoneysecurity.h>
 #include <kmymoneyglobalsettings.h>
 
-#include "../dialogs/kcurrencycalculator.h"
+#include "kcurrencycalculator.h"
 
-#include "../mymoney/mymoneyutils.h"
+#include "mymoneyutils.h"
 
 kMyMoneySplitTable::kMyMoneySplitTable(QWidget *parent, const char *name ) :
   Q3Table(parent,name),

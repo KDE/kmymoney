@@ -44,7 +44,7 @@
 #include <mymoneyinstitution.h>
 #include <mymoneyfile.h>
 #include <kmymoneycategory.h>
-#include "../widgets/kmymoneyaccountselector.h"
+#include "kmymoneyaccountselector.h"
 
 #include <../kmymoney2.h>
 

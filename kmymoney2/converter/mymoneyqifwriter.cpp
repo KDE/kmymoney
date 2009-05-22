@@ -37,7 +37,7 @@
 // Project Headers
 
 #include "mymoneyqifwriter.h"
-#include "../mymoney/mymoneyfile.h"
+#include "mymoneyfile.h"
 
 MyMoneyQifWriter::MyMoneyQifWriter()
 {

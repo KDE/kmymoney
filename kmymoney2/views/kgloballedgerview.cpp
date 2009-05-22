@@ -60,11 +60,11 @@
 
 #include <kmymoneyglobalsettings.h>
 
-#include "../widgets/registersearchline.h"
+#include "registersearchline.h"
 #include "kfindtransactiondlg.h"
 #include "../kmymoney2.h"
 
-#include "../widgets/scheduledtransaction.h"
+#include "scheduledtransaction.h"
 
 class KGlobalLedgerView::Private
 {

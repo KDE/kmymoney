@@ -33,8 +33,8 @@
 // Project Includes
 
 #include "knewequityentrydlg.h"
-#include "../widgets/kmymoneyedit.h"
-#include "../mymoney/mymoneymoney.h"
+#include "kmymoneyedit.h"
+#include "mymoneymoney.h"
 
 KNewEquityEntryDlg::KNewEquityEntryDlg(QWidget *parent)
   : kNewEquityEntryDecl(parent)

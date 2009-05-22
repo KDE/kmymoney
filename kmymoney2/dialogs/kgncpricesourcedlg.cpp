@@ -35,7 +35,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 #include "kgncpricesourcedlg.h"
-#include "../converter/webpricequote.h"
+#include "webpricequote.h"
 
 KGncPriceSourceDlg::KGncPriceSourceDlg(QWidget *parent)
  : KGncPriceSourceDlgDecl(parent)

@@ -51,13 +51,13 @@
 #include <kmymoneydateinput.h>
 #include <kmymoneyedit.h>
 #include <kmymoneyaccountselector.h>
-#include "../widgets/kmymoneycombo.h"
+#include "kmymoneycombo.h"
 
-#include "../dialogs/knewaccountdlg.h"
-#include "../dialogs/ksplittransactiondlg.h"
+#include "knewaccountdlg.h"
+#include "ksplittransactiondlg.h"
 
-#include "../mymoney/mymoneyfinancialcalculator.h"
-#include "../mymoney/mymoneyfile.h"
+#include "mymoneyfinancialcalculator.h"
+#include "mymoneyfile.h"
 
 #include "../kmymoney2.h"
 

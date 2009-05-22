@@ -51,8 +51,8 @@
 #include <mymoneyfile.h>
 #include <transactionform.h>
 
-#include "../dialogs/ksplittransactiondlg.h"
-#include "../dialogs/kcurrencycalculator.h"
+#include "ksplittransactiondlg.h"
+#include "kcurrencycalculator.h"
 
 #include "../kmymoneyglobalsettings.h"
 

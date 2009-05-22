@@ -39,8 +39,8 @@ using namespace test;
 #include <mymoneyprice.h>
 #include <mymoneyreport.h>
 #include <mymoneystatement.h>
-#include "../mymoney/storage/mymoneystoragexml.h"
-#include "../mymoney/storage/mymoneystoragedump.h"
+#include "storage/mymoneystoragexml.h"
+#include "storage/mymoneystoragedump.h"
 
 #define private public
 #include "../converter/webpricequote.h"

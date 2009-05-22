@@ -58,9 +58,9 @@
 #include <kmymoneytitlelabel.h>
 #include <kmymoneyedit.h>
 #include <kbudgetvalues.h>
-#include "../widgets/kmymoneyaccounttreebudget.h"
+#include "kmymoneyaccounttreebudget.h"
 #include "kbudgetview.h"
-#include "../dialogs/knewbudgetdlg.h"
+#include "knewbudgetdlg.h"
 #include "../kmymoney2.h"
 
 // *** KBudgetListItem Implementation ***

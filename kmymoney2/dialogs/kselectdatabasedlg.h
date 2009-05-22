@@ -31,7 +31,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 #include "ui_kselectdatabasedlgdecl.h"
-#include "../mymoney/storage/mymoneystoragesql.h"
+#include "storage/mymoneystoragesql.h"
 #include "kguiutils.h"
 
 

@@ -68,13 +68,13 @@
 #include <kguiutils.h>
 #include <kmymoneycombo.h>
 
-#include "../widgets/kmymoneycurrencyselector.h"
-#include "../widgets/kmymoneyaccountselector.h"
+#include "kmymoneycurrencyselector.h"
+#include "kmymoneyaccountselector.h"
 
-#include "../mymoney/mymoneyexception.h"
-#include "../mymoney/mymoneykeyvaluecontainer.h"
-#include "../dialogs/knewbankdlg.h"
-#include "../views/kmymoneyfile.h"
+#include "mymoneyexception.h"
+#include "mymoneykeyvaluecontainer.h"
+#include "knewbankdlg.h"
+#include "kmymoneyfile.h"
 #include "../kmymoneyutils.h"
 
 //#include "../reports/kreportchartview.h"

@@ -21,7 +21,7 @@
 
 #include <qwidget.h>
 #include <q3listview.h>
-#include "../mymoney/mymoneytransaction.h"
+#include "mymoneytransaction.h"
 
 /**
   *@author Michael Edwardes

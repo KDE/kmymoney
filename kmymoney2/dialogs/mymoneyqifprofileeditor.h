@@ -32,7 +32,7 @@ class Q3ListViewItem;
 // Project Includes
 
 #include "ui_mymoneyqifprofileeditordecl.h"
-#include "../converter/mymoneyqifprofile.h"
+#include "mymoneyqifprofile.h"
 
 /**
   * @author Thomas Baumgart

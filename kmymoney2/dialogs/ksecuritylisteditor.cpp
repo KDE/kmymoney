@@ -38,9 +38,9 @@
 
 #include "ksecuritylisteditor.h"
 
-#include "../mymoney/mymoneysecurity.h"
-#include "../mymoney/mymoneyfile.h"
-#include "../dialogs/knewinvestmentwizard.h"
+#include "mymoneysecurity.h"
+#include "mymoneyfile.h"
+#include "knewinvestmentwizard.h"
 
 #include "../kmymoneyutils.h"
 

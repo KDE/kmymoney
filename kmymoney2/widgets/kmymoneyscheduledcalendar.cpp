@@ -33,8 +33,8 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include "../widgets/kmymoneyscheduledcalendar.h"
-#include "../mymoney/mymoneyfile.h"
+#include "kmymoneyscheduledcalendar.h"
+#include "mymoneyfile.h"
 
 kMyMoneyScheduledCalendar::kMyMoneyScheduledCalendar(QWidget *parent, const char *name )
   : kMyMoneyCalendar(parent,name)

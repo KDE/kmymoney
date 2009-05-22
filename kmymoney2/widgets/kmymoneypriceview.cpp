@@ -49,12 +49,12 @@
 #include <mymoneyfile.h>
 #include "../kmymoneyglobalsettings.h"
 #if 0
-#include "../widgets/kmymoneycurrencyselector.h"
-#include "../dialogs/kupdatestockpricedlg.h"
-#include "../dialogs/kcurrencycalculator.h"
-#include "../dialogs/kequitypriceupdatedlg.h"
+#include "kmymoneycurrencyselector.h"
+#include "kupdatestockpricedlg.h"
+#include "kcurrencycalculator.h"
+#include "kequitypriceupdatedlg.h"
 #include "../kmymoneyutils.h"
-#include "../mymoney/mymoneyfile.h"
+#include "mymoneyfile.h"
 #endif
 
 #define COMMODITY_COL   0

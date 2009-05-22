@@ -44,8 +44,8 @@
 // Project Headers
 
 #include "mymoneyqifprofile.h"
-#include "../mymoney/mymoneyaccount.h"
-#include "../mymoney/mymoneytransaction.h"
+#include "mymoneyaccount.h"
+#include "mymoneytransaction.h"
 
 class MyMoneyFileTransaction;
 
