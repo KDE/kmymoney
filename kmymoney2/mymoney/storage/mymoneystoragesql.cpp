@@ -62,10 +62,10 @@ MyMoneySqlQuery::MyMoneySqlQuery (const MyMoneyStorageSql& db)
 }
 
 bool MyMoneySqlQuery::exec () {
-  TRACE(QString("start sql - %1").arg(lastQuery()).latin1());
+  TRACE(QString("start sql - %1").arg(lastQuery()).toLatin1());
   bool rc = QSqlQuery::exec();
   QString msg("end sql\n%1\n***Query returned %2, row count %3");
-  TRACE (msg.arg(QSqlQuery::executedQuery()).arg(rc).arg(numRowsAffected()).latin1());
+  TRACE (msg.arg(QSqlQuery::executedQuery()).arg(rc).arg(numRowsAffected()).toLatin1());
   //DBG (QString("%1\n***Query returned %2, row count %3").arg(QSqlQuery::executedQuery()).arg(rc).arg(size()));
   return (rc);
 }

@@ -1216,7 +1216,7 @@ bool KMyMoneyView::saveFile(const KUrl& url, const QString& keyList)
         }
 #endif
       }
-      chown(filename.latin1(), static_cast<uid_t>(-1), gid);
+      chown(filename.toLatin1(), static_cast<uid_t>(-1), gid);
     } else {
 #warning "port to kde4"
 #if 0

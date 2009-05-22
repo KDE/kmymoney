@@ -2156,7 +2156,7 @@ QString MyMoneyGncReader::createOrphanAccount (const QString& gncName) {
   m_storage->addAccount (acc);
   // assign the gnucash id as the key into the map to find our id
   m_mapIds[gncName.utf8()] = acc.id();
-  postMessage (QString("OR"), 1, acc.name().latin1());
+  postMessage (QString("OR"), 1, acc.name().toLatin1());
   return (acc.id());
 }
 //****************************** incrDate *********************************************

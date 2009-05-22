@@ -195,7 +195,7 @@ bool ItemPtrVector::item_cmp(RegisterItem* i1, RegisterItem* i2)
         break;
 
       case EntryOrderSort:
-        rc = qstrcmp(i1->sortEntryOrder().latin1(), i2->sortEntryOrder().latin1());
+        rc = qstrcmp(i1->sortEntryOrder().toLatin1(), i2->sortEntryOrder().toLatin1());
         break;
 
       case TypeSort:
