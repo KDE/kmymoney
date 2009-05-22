@@ -711,10 +711,13 @@ StdTransactionEditor::StdTransactionEditor(TransactionEditorContainer* regForm, 
 
 StdTransactionEditor::~StdTransactionEditor()
 {
+#warning "port to kde4"	
+#if 0	
   KMyMoneyTransactionForm::TransactionForm* form = dynamic_cast<KMyMoneyTransactionForm::TransactionForm*>(m_regForm);
   if(form) {
     form->enableTabBar(true);
   }
+#endif  
 }
 
 

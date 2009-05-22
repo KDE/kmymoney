@@ -244,9 +244,10 @@ void WebPriceQuote::enter_loop(void)
 {
   QWidget dummy(0,0,Qt::WType_Dialog | Qt::WShowModal);
   dummy.setFocusPolicy( Qt::NoFocus );
-  qt_enter_modal(&dummy);
+#warning "port to kde4"
+  //qt_enter_modal(&dummy);
   qApp->enter_loop();
-  qt_leave_modal(&dummy);
+  //qt_leave_modal(&dummy);
 }
 
 void WebPriceQuote::slotResult( KIO::Job * job )

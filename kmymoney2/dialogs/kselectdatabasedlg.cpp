@@ -161,7 +161,9 @@ const KUrl KSelectDatabaseDlg::selectedURL() {
 }
 
 void KSelectDatabaseDlg::slotDriverSelected (Q3ListBoxItem *driver) {
-  if (m_map.driverToType(driver->text().section(' ', 0, 0)) == Sqlite3){
+#warning "port to kde4"
+#if 0
+      	if (m_map.driverToType(driver->text().section(' ', 0, 0)) == Sqlite3){
     QString dbName = Q3FileDialog::getOpenFileName(
       "",
       i18n("SQLite files (*.sql);; All files (*.*)"),
@@ -183,6 +185,7 @@ void KSelectDatabaseDlg::slotDriverSelected (Q3ListBoxItem *driver) {
     textHostName->setEnabled (true);
     textPassword->setEnabled(true);
   }
+#endif	
 }
 
 void KSelectDatabaseDlg::slotGenerateSQL () {
@@ -196,8 +199,11 @@ void KSelectDatabaseDlg::slotGenerateSQL () {
   QFile out(fileName);
   if (!out.open(QIODevice::WriteOnly)) return;
   Q3TextStream s(&out);
+#warning "port to kde4"
+#if 0
   MyMoneyDbDef db;
   s << db.generateSQL(listDrivers->currentText().section (' ', 0, 0));
+#endif
   out.close();
 }
 
