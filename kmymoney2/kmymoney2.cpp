@@ -5555,13 +5555,13 @@ void KMyMoney2App::slotUpdateActions(void)
   action("account_online_map")->setEnabled(false);
   action("account_online_update")->setEnabled(false);
   action("account_online_update_all")->setEnabled(false);
-  action("account_online_update_menu")->setEnabled(false);
+  //action("account_online_update_menu")->setEnabled(false);
   action("account_online_unmap")->setEnabled(false);
 #ifdef HAVE_KDCHART
   action("account_chart")->setEnabled(false);
 #endif
 
-  action("category_new")->setEnabled(fileOpen);
+  //action("category_new")->setEnabled(fileOpen);
   action("category_edit")->setEnabled(false);
   action("category_delete")->setEnabled(false);
 

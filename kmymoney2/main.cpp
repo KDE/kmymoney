@@ -94,7 +94,7 @@ int main(int argc, char *argv[])
   aboutData.addCredit(ki18n("Kevin Tambascio" ), ki18n("Initial investment support"), "ktambascio@users.sourceforge.net");
   aboutData.addCredit(ki18n("Javier Campos Morales" ), ki18n("Developer & Artist"), "javi_c@users.sourceforge.net");
   aboutData.addCredit(ki18n("Robert Wadley" ), ki18n("Icons & splash screen"), "rob@robntina.fastmail.us");
-  aboutData.addCredit(ki18n("Laurent Montel" ),ki18n("Patches"), "montel@kde.org");
+  aboutData.addCredit(ki18n("Laurent Montel" ),ki18n("Patches and port to kde4"), "montel@kde.org");
   aboutData.addCredit(ki18n("Wolfgang Rohdewald" ), ki18n("Patches"), "woro@users.sourceforge.net");
   KCmdLineOptions options;
   options.add( "lang <lang-code>", ki18n("language to be used") );
@@ -285,6 +285,13 @@ int main(int argc, char *argv[])
                                QString("%1 in file %2 line %3").arg(e->what()).arg(e->file()).arg(e->line()));
     throw e;
   }
+#else
+      if(kmymoney2 != 0) {
+        kmymoney2->updateCaption();
+        args->clear();
+        kmymoney2->setEnabled(true);
+        rc = a->exec();
+	}
 #endif
   delete a;
 

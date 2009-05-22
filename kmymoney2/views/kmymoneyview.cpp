@@ -473,6 +473,8 @@ void KMyMoneyView::removeStorage(void)
 
 void KMyMoneyView::enableViews(int state)
 {
+#warning "port to kde4"
+#if 0	
   if(state == -1)
     state = m_fileOpen;
 
@@ -489,6 +491,7 @@ void KMyMoneyView::enableViews(int state)
   m_forecastViewFrame->setEnabled(state);
 
   emit viewStateChanged(state != 0);
+#endif
 }
 
 void KMyMoneyView::slotLedgerSelected(const QString& _accId, const QString& transaction)
