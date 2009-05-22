@@ -418,13 +418,13 @@ void KMyMoney2App::initActions(void)
   // The View menu
   // *************
   //new KToggleAction(i18n("Show Transaction Detail"), KShortcut("Ctrl+T"), actionCollection(), "view_show_transaction_detail");
-  KToggleAction *view_show_transaction_detail;
+  KToggleAction *view_show_transaction_detail = new KToggleAction(this);
   actionCollection()->addAction("view_show_transaction_detail", view_show_transaction_detail);
   view_show_transaction_detail->setText(i18n("Show Transaction Detail"));
   view_show_transaction_detail->setShortcut(KShortcut("Ctrl+T"));
 
   //new KToggleAction(i18n("Hide reconciled transactions"), "hide_reconciled", KShortcut("Ctrl+R"), this, SLOT(slotHideReconciledTransactions()), actionCollection(), "view_hide_reconciled_transactions");
-  KToggleAction *view_hide_reconciled_transactions;
+  KToggleAction *view_hide_reconciled_transactions = new KToggleAction(this);
   actionCollection()->addAction("view_hide_reconciled_transactions", view_hide_reconciled_transactions);
   view_hide_reconciled_transactions->setText(i18n("Hide reconciled transactions"));
   view_hide_reconciled_transactions->setIcon(KIcon("hide_reconciled"));
@@ -432,7 +432,7 @@ void KMyMoney2App::initActions(void)
   connect(view_hide_reconciled_transactions, SIGNAL(triggered()), this, SLOT(slotHideReconciledTransactions()));
 
   //new KToggleAction(i18n("Hide unused categories"), "hide_categories", KShortcut("Ctrl+U"), this, SLOT(slotHideUnusedCategories()), actionCollection(), "view_hide_unused_categories");
-  KToggleAction *view_hide_unused_categories;
+  KToggleAction *view_hide_unused_categories = new KToggleAction(this);
   actionCollection()->addAction("view_hide_unused_categories", view_hide_unused_categories);
   view_hide_unused_categories->setText(i18n("Hide unused categories"));
   view_hide_unused_categories->setIcon(KIcon("hide_categories"));
@@ -440,7 +440,7 @@ void KMyMoney2App::initActions(void)
   connect(view_hide_unused_categories, SIGNAL(triggered()), this, SLOT(slotHideUnusedCategories()));
 
   //new KToggleAction(i18n("Show all accounts"), "", KShortcut("Ctrl+Shift+A"), this, SLOT(slotShowAllAccounts()), actionCollection(), "view_show_all_accounts");
-  KToggleAction *view_show_all_accounts;
+  KToggleAction *view_show_all_accounts = new KToggleAction(this);
   actionCollection()->addAction("view_show_all_accounts", view_show_all_accounts);
   view_show_all_accounts->setText(i18n("Show all accounts"));
   view_show_all_accounts->setShortcut(KShortcut("Ctrl+Shift+A"));
