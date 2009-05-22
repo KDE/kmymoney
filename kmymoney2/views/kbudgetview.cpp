@@ -727,8 +727,7 @@ void KBudgetView::cb_includesSubaccounts_clicked()
 void KBudgetView::slotNewBudget(void)
 {
   askSave();
-#warning "port to kde4"
-  //kmymoney2->action("budget_new")->activate();
+  kmymoney2->action("budget_new")->trigger();
 }
 
 void KBudgetView::slotResetBudget(void)

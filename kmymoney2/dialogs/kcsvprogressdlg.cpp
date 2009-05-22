@@ -221,7 +221,7 @@ void KCsvProgressDlg::readConfig(void)
   KSharedConfigPtr kconfig = KGlobal::config();
   KConfigGroup grp = kconfig->group("Last Use Settings");
 #warning "port to kde4"
-  //m_kmymoneydateStart->setDate(grp.readEntry("KCsvProgressDlg_StartDate").date());
+  //m_kmymoneydateStart->setDate(grp.readEntry("KCsvProgressDlg_StartDate").toDateTime());
   //m_kmymoneydateEnd->setDate(grp.readEntry("KCsvProgressDlg_EndDate").date());
   m_qlineeditFile->setText(grp.readEntry("KCsvProgressDlg_LastFile", ""));
   if (m_qlineeditFile->text().length()>=1)

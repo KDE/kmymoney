@@ -366,15 +366,12 @@ const MyMoneyAccount& MyMoneyFile::subAccountByName(const MyMoneyAccount& acc, c
 {
   static MyMoneyAccount nullAccount;
 
-  Q3ValueList<QString>::const_iterator it_a;
-#warning "port to kde4"
-#if 0  
-  for(it_a = acc.accountList().begin(); it_a != acc.accountList().end(); ++it_a) {
+  QList<QString>::const_iterator it_a;
+  for(it_a = acc.accountList().constBegin(); it_a != acc.accountList().constEnd(); ++it_a) {
     const MyMoneyAccount& sacc = account(*it_a);
     if(sacc.name() == name)
       return sacc;
   }
-#endif  
   return nullAccount;
 }
 
@@ -528,19 +525,16 @@ void MyMoneyFile::removeInstitution(const MyMoneyInstitution& institution)
   // clear all changed objects from cache
   MyMoneyNotifier notifier(this);
 
-  Q3ValueList<QString>::ConstIterator it_a;
+  QList<QString>::ConstIterator it_a;
   MyMoneyInstitution inst = MyMoneyFile::institution(institution.id());
 
   bool blocked = signalsBlocked();
   blockSignals(true);
-#warning "port to kde4"
-#if 0
   for(it_a = inst.accountList().constBegin(); it_a != inst.accountList().constEnd(); ++it_a) {
     MyMoneyAccount acc = account(*it_a);
     acc.setInstitutionId(QString());
     modifyAccount(acc);
   }
-#endif  
   blockSignals(blocked);
 
   m_storage->removeInstitution(institution);

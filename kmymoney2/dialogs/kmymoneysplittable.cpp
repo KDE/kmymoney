@@ -103,8 +103,8 @@ kMyMoneySplitTable::kMyMoneySplitTable(QWidget *parent, const char *name ) :
   // setup the context menu
   m_contextMenu = new KMenu(this);
   KIconLoader *il = KIconLoader::global();
-#warning "port to kde4"
-  //m_contextMenu->insertTitle(il->loadIcon("transaction", KIcon::MainToolbar), i18n("Split Options"));
+  m_contextMenu->setTitle(i18n("Split Options"));
+  m_contextMenu->setIcon(il->loadIcon("transaction", KIconLoader::MainToolbar));
   m_contextMenu->insertItem(il->loadIcon("edit", KIconLoader::Small), i18n("Edit..."), this, SLOT(slotStartEdit()));
   m_contextMenuDuplicate = m_contextMenu->insertItem(il->loadIcon("editcopy", KIconLoader::Small), i18n("Duplicate"), this, SLOT(slotDuplicateSplit()));
   m_contextMenuDelete = m_contextMenu->insertItem(il->loadIcon("delete", KIconLoader::Small),

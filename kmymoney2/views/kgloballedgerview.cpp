@@ -1284,8 +1284,7 @@ bool KGlobalLedgerView::eventFilter(QObject* o, QEvent* e)
           switch(k->key()) {
             case Qt::Key_Return:
             case Qt::Key_Enter:
-#warning "port to kde4"
-      		    //kmymoney2->action("transaction_edit")->activate();
+      		    kmymoney2->action("transaction_edit")->trigger();
               rc = true;
               break;
           }
