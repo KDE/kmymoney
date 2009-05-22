@@ -1044,8 +1044,8 @@ void KMyMoney2App::initStatusBar(void)
 void KMyMoney2App::saveOptions(void)
 {
   //FIXME: Port to KDE4
-  //KConfigGroup grp = config->group("General Options");
-  //config->writeEntry("Geometry", size());
+  KConfigGroup grp = config->group("General Options");
+  grp.writeEntry("Geometry", size());
 
   // config->writeEntry("Show Statusbar", toggleAction("options_show_statusbar")->isChecked());
   // toolBar("mainToolBar")->saveSettings(config, "mainToolBar");
@@ -2279,14 +2279,12 @@ bool KMyMoney2App::okToWriteFile(const KUrl& url)
 
 void KMyMoney2App::slotSettings(void)
 {
-#warning "port to kde4"
-#if 0
   // if we already have an instance of the settings dialog, then use it
   if(KConfigDialog::showDialog("KMyMoney-Settings"))
     return;
 
   // otherwise, we have to create it
-  KConfigDialog* dlg = new KConfigDialog(this, "KMyMoney-Settings", KMyMoneyGlobalSettings::self(), KDialog::Default | KDialog::Ok | KDialog::Cancel | KDialog::Help, KDialog::Ok, true);
+  KConfigDialog* dlg = new KConfigDialog(this, "KMyMoney-Settings", KMyMoneyGlobalSettings::self());
 
   // create the pages ...
   KSettingsGeneral* generalPage = new KSettingsGeneral();
@@ -2302,23 +2300,22 @@ void KMyMoney2App::slotSettings(void)
 
   // ... and add them to the dialog
   //FIXME: Port to KDE4
-//   dlg->addPage(generalPage, QString("misc"), QString(), i18n("General"), true);
-//   dlg->addPage(registerPage, i18n("Register"), "ledger");
-//   dlg->addPage(homePage, i18n("Home"), "home");
-//   dlg->addPage(schedulesPage, i18n("Scheduled\ntransactions"), "schedule");
-//   dlg->addPage(encryptionPage, i18n("Encryption"), "kgpg");
-//   dlg->addPage(colorsPage, i18n("Colors"), "colorscm");
-//   dlg->addPage(fontsPage, i18n("Fonts"), "font");
-//   dlg->addPage(onlineQuotesPage, i18n("Online Quotes"), "network_local");
-//   dlg->addPage(forecastPage, i18n("Forecast"), "forcast");
-//   dlg->addPage(pluginsPage, i18n("Plugins"), "connect_no");
+   dlg->addPage(generalPage, QString("misc"), QString(), i18n("General"), true);
+   dlg->addPage(registerPage, i18n("Register"), "ledger");
+   dlg->addPage(homePage, i18n("Home"), "home");
+   dlg->addPage(schedulesPage, i18n("Scheduled\ntransactions"), "schedule");
+   dlg->addPage(encryptionPage, i18n("Encryption"), "kgpg");
+   dlg->addPage(colorsPage, i18n("Colors"), "colorscm");
+   dlg->addPage(fontsPage, i18n("Fonts"), "font");
+   dlg->addPage(onlineQuotesPage, i18n("Online Quotes"), "network_local");
+   dlg->addPage(forecastPage, i18n("Forecast"), "forcast");
+   dlg->addPage(pluginsPage, i18n("Plugins"), "connect_no");
 
   connect(dlg, SIGNAL(settingsChanged()), this, SLOT(slotUpdateConfiguration()));
   connect(dlg, SIGNAL(okClicked()), pluginsPage, SLOT(slotSavePlugins()));
   connect(dlg, SIGNAL(defaultClicked()), pluginsPage, SLOT(slotDefaultsPlugins()));
 
   dlg->show();
-#endif
 }
 
 void KMyMoney2App::slotUpdateConfiguration(void)
