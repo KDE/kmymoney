@@ -65,7 +65,8 @@ public slots:
   void slotGenerateSQL();
 private:
   int m_mode;
-  MyMoneyDbDrivers m_map;
+#warning "port to kde4"
+  //MyMoneyDbDrivers m_map;
   kMandatoryFieldGroup* m_requiredFields;
 };
 

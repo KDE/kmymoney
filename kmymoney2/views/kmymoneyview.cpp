@@ -131,6 +131,8 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   m_fileOpen(false),
   m_fmode(0600)
 {
+    #warning "port to kde4"
+#if 0
   // the global variable kmymoney2 is not yet assigned. So we construct it here
   QObject* kmymoney2 = parent->parent();
   const int iconSize = (KMyMoneyGlobalSettings::iconSize()+1)*16;
@@ -140,7 +142,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   m_homeViewFrame = addVBoxPage( i18n("Home"), i18n("Home"),
     DesktopIcon("home", iconSize));
 
-  m_homeView = new KHomeView(m_homeViewFrame, "HomeView");
+  m_homeView = new KHomeView(m_homeViewFrame);
   connect(m_homeView, SIGNAL(ledgerSelected(const QString&, const QString&)),
           this, SLOT(slotLedgerSelected(const QString&, const QString&)));
   connect(m_homeView, SIGNAL(scheduleSelected(const QString&)),
@@ -152,7 +154,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   m_institutionsViewFrame = addVBoxPage( i18n("Institutions"), i18n("Institutions"),
     DesktopIcon("institutions", iconSize));
   addTitleBar(m_institutionsViewFrame, i18n("Institutions"));
-  m_institutionsView = new KInstitutionsView(m_institutionsViewFrame, "InstitutionsView");
+  m_institutionsView = new KInstitutionsView(m_institutionsViewFrame);
   connect(m_institutionsView, SIGNAL(selectObject(const MyMoneyObject&)), kmymoney2, SLOT(slotSelectAccount(const MyMoneyObject&)));
   connect(m_institutionsView, SIGNAL(selectObject(const MyMoneyObject&)), kmymoney2, SLOT(slotSelectInstitution(const MyMoneyObject&)));
   connect(m_institutionsView, SIGNAL(openContextMenu(const MyMoneyObject&)), kmymoney2, SLOT(slotShowAccountContextMenu(const MyMoneyObject&)));
@@ -166,7 +168,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   m_accountsViewFrame = addVBoxPage( i18n("Accounts"), i18n("Accounts"),
     DesktopIcon("accounts", iconSize));
   addTitleBar(m_accountsViewFrame, i18n("Accounts"));
-  m_accountsView = new KAccountsView(m_accountsViewFrame, "AccountsView");
+  m_accountsView = new KAccountsView(m_accountsViewFrame);
   connect(m_accountsView, SIGNAL(selectObject(const MyMoneyObject&)), kmymoney2, SLOT(slotSelectAccount(const MyMoneyObject&)));
   connect(m_accountsView, SIGNAL(selectObject(const MyMoneyObject&)), kmymoney2, SLOT(slotSelectInstitution(const MyMoneyObject&)));
   connect(m_accountsView, SIGNAL(selectObject(const MyMoneyObject&)), kmymoney2, SLOT(slotSelectInvestment(const MyMoneyObject&)));
@@ -180,7 +182,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   m_scheduleViewFrame = addVBoxPage( i18n("Scheduled\ntransactions"), i18n("Bills & Reminders"),
     DesktopIcon("schedule", iconSize));
   addTitleBar(m_scheduleViewFrame, i18n("Scheduled transactions"));
-  m_scheduledView = new KScheduledView(m_scheduleViewFrame, "ScheduledView");
+  m_scheduledView = new KScheduledView(m_scheduleViewFrame);
   connect(kmymoney2, SIGNAL(fileLoaded(const KUrl&)), m_scheduledView, SLOT(slotReloadView()));
   connect(m_scheduledView, SIGNAL(scheduleSelected(const MyMoneySchedule&)), kmymoney2, SLOT(slotSelectSchedule(const MyMoneySchedule&)));
   connect(m_scheduledView, SIGNAL(openContextMenu()), kmymoney2, SLOT(slotShowScheduleContextMenu()));
@@ -192,7 +194,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   m_categoriesViewFrame = addVBoxPage( i18n("Categories"), i18n("Categories"),
     DesktopIcon("categories", iconSize));
   addTitleBar(m_categoriesViewFrame, i18n("Categories"));
-  m_categoriesView = new KCategoriesView(m_categoriesViewFrame, "CategoriesView");
+  m_categoriesView = new KCategoriesView(m_categoriesViewFrame);
   connect(m_categoriesView, SIGNAL(selectObject(const MyMoneyObject&)), kmymoney2, SLOT(slotSelectAccount(const MyMoneyObject&)));
   connect(m_categoriesView, SIGNAL(selectObject(const MyMoneyObject&)), kmymoney2, SLOT(slotSelectInstitution(const MyMoneyObject&)));
   connect(m_categoriesView, SIGNAL(openContextMenu(const MyMoneyObject&)), kmymoney2, SLOT(slotShowAccountContextMenu(const MyMoneyObject&)));
@@ -203,7 +205,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   m_payeesViewFrame = addVBoxPage( i18n("Payees"), i18n("Payees"),
     DesktopIcon("payee", iconSize));
   addTitleBar(m_payeesViewFrame, i18n("Payees"));
-  m_payeesView = new KPayeesView(m_payeesViewFrame, "PayeesView");
+  m_payeesView = new KPayeesView(m_payeesViewFrame);
   connect(kmymoney2, SIGNAL(payeeCreated(const QString&)), m_payeesView, SLOT(slotSelectPayeeAndTransaction(const QString&)));
   connect(kmymoney2, SIGNAL(payeeRename()), m_payeesView, SLOT(slotStartRename()));
   connect(m_payeesView, SIGNAL(openContextMenu(const MyMoneyObject&)), kmymoney2, SLOT(slotShowPayeeContextMenu()));
@@ -230,7 +232,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   m_investmentViewFrame = addVBoxPage( i18n("Investments"), i18n("Investments"),
     DesktopIcon("investments", iconSize));
   addTitleBar(m_investmentViewFrame, i18n("Investments"));
-  m_investmentView = new KInvestmentView(m_investmentViewFrame, "InvestmentView");
+  m_investmentView = new KInvestmentView(m_investmentViewFrame);
   connect(m_investmentView, SIGNAL(accountSelected(const QString&, const QString&)),
       this, SLOT(slotLedgerSelected(const QString&, const QString&)));
   connect(m_investmentView, SIGNAL(accountSelected(const MyMoneyObject&)), kmymoney2, SLOT(slotSelectAccount(const MyMoneyObject&)));
@@ -239,13 +241,14 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   // Page 8
   m_reportsViewFrame = addVBoxPage(i18n("Reports"), i18n("Reports"),
     DesktopIcon("report", iconSize));
-  m_reportsView = new KReportsView(m_reportsViewFrame, "ReportsView");
+#warning "port to kde4"
+  //m_reportsView = new KReportsView(m_reportsViewFrame, "ReportsView");
 
   // Page 9
   m_budgetViewFrame = addVBoxPage(i18n("Budgets"), i18n("Budgets"),
     DesktopIcon("budget", iconSize));
   addTitleBar(m_budgetViewFrame, i18n("Budgets"));
-  m_budgetView = new KBudgetView(m_budgetViewFrame, "BudgetView");
+  m_budgetView = new KBudgetView(m_budgetViewFrame);
   connect(kmymoney2, SIGNAL(fileLoaded(const KUrl&)), m_budgetView, SLOT(slotRefreshView()));
   connect(m_budgetView, SIGNAL(openContextMenu(const MyMoneyObject&)), kmymoney2, SLOT(slotShowBudgetContextMenu()));
   connect(m_budgetView, SIGNAL(selectObjects(const Q3ValueList<MyMoneyBudget>&)), kmymoney2, SLOT(slotSelectBudget(const Q3ValueList<MyMoneyBudget>&)));
@@ -255,7 +258,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   m_forecastViewFrame = addVBoxPage( i18n("Forecast"), i18n("Forecast"),
                                      DesktopIcon("forcast", iconSize));
   addTitleBar(m_forecastViewFrame, i18n("Forecast"));
-  m_forecastView = new KForecastView(m_forecastViewFrame, "ForecastView");
+  m_forecastView = new KForecastView(m_forecastViewFrame);
 
 
   // construct an empty file
@@ -277,6 +280,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   connect(this, SIGNAL(aboutToShowPage(QWidget*)), this, SLOT(slotRememberPage(QWidget*)));
 
   m_inConstructor = false;
+#endif
 }
 
 KMyMoneyView::~KMyMoneyView()
@@ -294,6 +298,8 @@ void KMyMoneyView::addTitleBar(QWidget* parent, const QString& title)
 
 void KMyMoneyView::showTitleBar(bool show)
 {
+#warning "port to kde4"
+#if 0
   QObjectList l = queryList( 0, "titleLabel" );
   QObjectListIterator it( *l ); // iterate over the labels
   QObject *obj;
@@ -304,10 +310,13 @@ void KMyMoneyView::showTitleBar(bool show)
     ((QWidget*)obj)->setShown( show );
   }
   delete l; // delete the list, not the objects
+#endif
 }
 
 bool KMyMoneyView::showPage(int index)
 {
+#warning "port to kde4"
+#if 0
   // reset all selected items before showing the selected view
   // but not while we're in our own constructor
   if(!m_inConstructor && index != activePageIndex()) {
@@ -334,32 +343,44 @@ bool KMyMoneyView::showPage(int index)
   }
 
   return rc;
+#endif
+  return false;
 }
 
 bool KMyMoneyView::canPrint(void)
 {
+    #warning "port to kde4"
+#if 0
   bool rc = (
               activePageIndex() == pageIndex(m_reportsViewFrame) ||
               activePageIndex() == pageIndex(m_homeViewFrame)
             );
   return rc;
+#endif
+  return false;
 }
 
 bool KMyMoneyView::canCreateTransactions(const KMyMoneyRegister::SelectedTransactions& /* list */, QString& tooltip) const
 {
   // we can only create transactions in the ledger view so
   // we check that this is the active page
-
+#warning "port to kde4"
+#if 0
   bool rc = (activePageIndex() == pageIndex(m_ledgerViewFrame));
   if(rc)
     rc = m_ledgerView->canCreateTransactions(tooltip);
   else
     tooltip = i18n("Creating transactions can only be performed in the ledger view");
   return rc;
+#endif
+
+  return false;
 }
 
 bool KMyMoneyView::canModifyTransactions(const KMyMoneyRegister::SelectedTransactions& list, QString& tooltip) const
 {
+#warning "port to kde4"
+#if 0
   // we can only modify transactions in the ledger view so
   // we check that this is the active page
 
@@ -371,13 +392,17 @@ bool KMyMoneyView::canModifyTransactions(const KMyMoneyRegister::SelectedTransac
     tooltip = i18n("Modifying transactions can only be performed in the ledger view");
   }
   return rc;
+#endif
+
+  return false;
 }
 
 bool KMyMoneyView::canDuplicateTransactions(const KMyMoneyRegister::SelectedTransactions& list, QString& tooltip) const
 {
   // we can only duplicate transactions in the ledger view so
   // we check that this is the active page
-
+#warning "port to kde4"
+#if 0
   bool rc = (activePageIndex() == pageIndex(m_ledgerViewFrame));
 
   if(rc) {
@@ -386,6 +411,9 @@ bool KMyMoneyView::canDuplicateTransactions(const KMyMoneyRegister::SelectedTran
     tooltip = i18n("Duplicating transactions can only be performed in the ledger view");
   }
   return rc;
+#endif
+
+  return false;
 }
 
 bool KMyMoneyView::canEditTransactions(const KMyMoneyRegister::SelectedTransactions& list, QString& tooltip) const
@@ -424,10 +452,13 @@ TransactionEditor* KMyMoneyView::startEdit(const KMyMoneyRegister::SelectedTrans
 
 void KMyMoneyView::newStorage(storageTypeE t)
 {
+#warning "port to kde4"	
+#if 0	
   removeStorage();
   MyMoneyFile* file = MyMoneyFile::instance();
   if (t == Memory) file->attachStorage(new MyMoneySeqAccessMgr);
   else file->attachStorage(new MyMoneyDatabaseMgr);
+#endif
 }
 
 void KMyMoneyView::removeStorage(void)
@@ -453,7 +484,8 @@ void KMyMoneyView::enableViews(int state)
   m_budgetViewFrame->setEnabled(state);
   m_ledgerViewFrame->setEnabled(state);
   m_investmentViewFrame->setEnabled(state);
-  m_reportsViewFrame->setEnabled(state);
+#warning "port to kde4"
+  //m_reportsViewFrame->setEnabled(state);
   m_forecastViewFrame->setEnabled(state);
 
   emit viewStateChanged(state != 0);
@@ -484,8 +516,11 @@ void KMyMoneyView::slotLedgerSelected(const QString& _accId, const QString& tran
     case MyMoneyAccount::Expense:
     case MyMoneyAccount::Investment:
     case MyMoneyAccount::Equity:
-      showPage(pageIndex(m_ledgerViewFrame));
-      m_ledgerView->slotSelectAccount(accId, transaction);
+#warning "port to kde4"
+#if 0
+        showPage(pageIndex(m_ledgerViewFrame));
+#endif
+        m_ledgerView->slotSelectAccount(accId, transaction);
       break;
 
     case MyMoneyAccount::CertificateDep:
@@ -502,8 +537,11 @@ void KMyMoneyView::slotLedgerSelected(const QString& _accId, const QString& tran
 
 void KMyMoneyView::slotPayeeSelected(const QString& payee, const QString& account, const QString& transaction)
 {
-  showPage(pageIndex(m_payeesViewFrame));
+#warning "port to kde4"
+#if 0
+    showPage(pageIndex(m_payeesViewFrame));
   m_payeesView->slotSelectPayeeAndTransaction(payee, account, transaction);
+#endif
 }
 
 void KMyMoneyView::slotScheduleSelected(const QString& scheduleId)
@@ -514,14 +552,20 @@ void KMyMoneyView::slotScheduleSelected(const QString& scheduleId)
 
 void KMyMoneyView::slotShowReport(const QString& reportid)
 {
-  showPage(pageIndex(m_reportsViewFrame));
+#warning "port to kde4"
+    #if 0
+    showPage(pageIndex(m_reportsViewFrame));
   m_reportsView->slotOpenReport(reportid);
+#endif
 }
 
 void KMyMoneyView::slotShowReport(const MyMoneyReport& report)
 {
+#warning "port to kde4"
+    #if 0
   showPage(pageIndex(m_reportsViewFrame));
   m_reportsView->slotOpenReport(report);
+ #endif
 }
 
 bool KMyMoneyView::fileOpen(void)
@@ -531,9 +575,11 @@ bool KMyMoneyView::fileOpen(void)
 
 void KMyMoneyView::closeFile(void)
 {
-  if ( m_reportsView )
+#warning "port to kde4"
+#if 0
+    if ( m_reportsView )
     m_reportsView->slotCloseAll();
-
+#endif
   emit kmmFilePlugin (preClose);
   if (isDatabase())
     MyMoneyFile::instance()->storage()->close(); // to log off a database user
@@ -666,7 +712,7 @@ bool KMyMoneyView::readFile(const KUrl& url)
             // unsigned long int's by preserving endianess. This is
             // achieved by reading them through a QDataStream object
             qint32 magic0, magic1;
-            QDataStream s(hdr, QIODevice::ReadOnly);
+            QDataStream s(&hdr, QIODevice::ReadOnly);
             s >> magic0;
             s >> magic1;
 
@@ -904,13 +950,15 @@ bool KMyMoneyView::initializeStorage()
   KSharedConfigPtr config = KGlobal::config();
   int page;
   KConfigGroup grp = config->group("General Options");
+#warning "port to kde4"
+#if 0
   if(KMyMoneyGlobalSettings::startLastViewSelected() != 0) {
     KConfigGroup grp2 = config->group("Last Use Settings");
-    page = grp2readEntry("LastViewSelected", 0);
+    page = grp2.readEntry("LastViewSelected", 0);
   } else {
     page = pageIndex(m_homeViewFrame);
   }
-
+#endif
   ::timetrace("start fixing file");
 
   // For debugging purposes, we can turn off the automatic fix manually
@@ -971,10 +1019,12 @@ bool KMyMoneyView::initializeStorage()
   MyMoneyFile::instance()->forceDataChanged();
 
   // if we currently see a different page, then select the right one
-  if(page != activePageIndex()) {
+#warning "port to kde4"
+#if 0
+    if(page != activePageIndex()) {
     showPage(page);
   }
-
+#endif
   return true;
 }
 
@@ -1052,7 +1102,8 @@ void KMyMoneyView::saveToLocalFile(QFile* qfile, IMyMoneyStorageFormat* pWriter,
       qfile->close();
       base->setDevice(qfile, false);
       // we need to reopen the file to set the mode inside the filter stuff
-      dev = new KFilterDev(base, true);
+#warning "port to kde4"
+      //dev = new KFilterDev(base, true);
       if(!dev || !dev->open(QIODevice::WriteOnly)) {
         MyMoneyFile::instance()->blockSignals(blocked);
         delete dev;
@@ -1074,7 +1125,8 @@ void KMyMoneyView::saveToLocalFile(QFile* qfile, IMyMoneyStorageFormat* pWriter,
   pWriter->setProgressCallback(0);
 
   if(base != 0) {
-    dev->flush();
+#warning "port to kde4"
+      //dev->flush();
     dev->close();
     if(statusDevice->status() != IO_Ok) {
       delete dev;
@@ -1147,6 +1199,8 @@ bool KMyMoneyView::saveFile(const KUrl& url, const QString& keyList)
       // deleted, before we reach the chown() call
       {
         int mask = umask((~fmode) & 0777);
+#warning "port to kde4"
+#if 0
         KSaveFile qfile(filename, fmode);
         umask(mask);
         if(qfile.status() == 0) {
@@ -1160,14 +1214,18 @@ bool KMyMoneyView::saveFile(const KUrl& url, const QString& keyList)
         } else {
           throw new MYMONEYEXCEPTION(i18n("Unable to write changes to '%1'").arg(filename));
         }
+#endif
       }
-      chown(filename, static_cast<uid_t>(-1), gid);
+      chown(filename.latin1(), static_cast<uid_t>(-1), gid);
     } else {
-      KTemporaryFile tmpfile;
+#warning "port to kde4"
+#if 0
+        KTemporaryFile tmpfile;
       saveToLocalFile(tmpfile.file(), pWriter, plaintext, keyList);
       if(!KIO::NetAccess::upload(tmpfile.name(), url, NULL))
         throw new MYMONEYEXCEPTION(i18n("Unable to upload to '%1'").arg(url.url()));
       tmpfile.unlink();
+#endif
     }
     m_fileType = KmmXML;
   } catch (MyMoneyException *e) {
@@ -1226,7 +1284,7 @@ bool KMyMoneyView::saveAsDatabase(const KUrl& url)
           " for further info").arg(url.prettyUrl()), writer->lastError());
   }
   delete writer;
-#endif  
+#endif
   return (rc);
 }
 
@@ -1250,7 +1308,8 @@ bool KMyMoneyView::startReconciliation(const MyMoneyAccount& account, const QDat
   // it makes sense for asset and liability accounts only
   if(ok == true) {
     if(account.isAssetLiability()) {
-      showPage(pageIndex(m_ledgerViewFrame));
+#warning "port to kde4"
+        //      showPage(pageIndex(m_ledgerViewFrame));
       // prepare reconciliation mode
       emit reconciliationStarts(account, reconciliationDate, endingBalance);
     } else {
@@ -1295,7 +1354,7 @@ void KMyMoneyView::selectBaseCurrency(void)
 
   // check if we have a base currency. If not, we need to select one
   if(file->baseCurrency().id().isEmpty()) {
-    KCurrencyEditDlg dlg(this, "CurrencyEditDlg");
+    KCurrencyEditDlg dlg(this);
     connect(&dlg, SIGNAL(selectBaseCurrency(const MyMoneySecurity&)), this, SLOT(slotSetBaseCurrency(const MyMoneySecurity&)));
     dlg.exec();
   }
@@ -1596,9 +1655,11 @@ void KMyMoneyView::viewUp(void)
 
 void KMyMoneyView::viewAccountList(const QString& /*selectAccount*/)
 {
+#warning "port to kde4"
+#if 0
   if(pageIndex(m_accountsViewFrame) != activePageIndex())
     showPage(1);
-
+#endif
   m_accountsView->show();
 }
 
@@ -1624,7 +1685,8 @@ void KMyMoneyView::slotRefreshViews()
   m_budgetView->slotRefreshView();
   m_homeView->slotLoadView();
   m_investmentView->slotLoadView();
-  m_reportsView->slotLoadView();
+#warning "port to kde4"
+  //m_reportsView->slotLoadView();
   m_forecastView->slotLoadForecast();
 
   m_scheduledView->slotReloadView();
@@ -1646,7 +1708,8 @@ void KMyMoneyView::slotRememberPage(QWidget* w)
 {
   KSharedConfigPtr config = KGlobal::config();
   KConfigGroup grp = config->group("Last Use Settings");
-  grp.writeEntry("LastViewSelected", pageIndex(w));
+#warning "port to kde4"
+  //grp.writeEntry("LastViewSelected", pageIndex(w));
   config->sync();
 }
 
@@ -2183,17 +2246,24 @@ void KMyMoneyView::fixDuplicateAccounts_0(MyMoneyTransaction& t)
 
 void KMyMoneyView::slotPrintView(void)
 {
-  if(pageIndex(m_reportsViewFrame) == activePageIndex())
+#warning "port  to kde4"
+#if 0
+    if(pageIndex(m_reportsViewFrame) == activePageIndex())
     m_reportsView->slotPrintView();
   else if(pageIndex(m_homeViewFrame) == activePageIndex())
     m_homeView->slotPrintView();
+#endif
 }
 
 KMyMoneyViewBase* KMyMoneyView::addPage(const QString& title, const QString& icon)
 {
+#warning "port to kde4"
+#if 0
   const int iconSize = (KMyMoneyGlobalSettings::iconSize()+1)*16;
   KVBox* frm = KJanusWidget::addVBoxPage(title, title, DesktopIcon(icon, iconSize));
   return new KMyMoneyViewBase(frm, title.toLatin1(), title);
+#endif
+  return 0;
 }
 
 /* ------------------------------------------------------------------------ */

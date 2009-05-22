@@ -51,6 +51,7 @@
 KSelectDatabaseDlg::KSelectDatabaseDlg(QWidget *parent)
  : KSelectDatabaseDlgDecl(parent) {
   listDrivers->clear();
+#if 0
   // list drivers supported by KMM
   QMap<QString, QString> map = m_map.driverMap();
   // list drivers installed on system
@@ -88,13 +89,15 @@ KSelectDatabaseDlg::KSelectDatabaseDlg(QWidget *parent)
   connect (buttonSQL, SIGNAL(clicked()), this, SLOT(slotGenerateSQL()));
   connect (buttonOK, SIGNAL(clicked()), this, SLOT(accept()));
   checkPreLoad->setChecked(false);
-}
+#endif
+ }
 
 KSelectDatabaseDlg::KSelectDatabaseDlg(KUrl openURL, QWidget *parent)
  : KSelectDatabaseDlgDecl(parent) {
   // here we are re-opening a database from a URL
   // probably taken from the last-used or recent file list
-  listDrivers->clear();
+#if 0
+       	 listDrivers->clear();
   // check that the SQL driver is still available
   QString driverName = openURL.queryItem("driver");
   // list drivers installed on system
@@ -134,7 +137,8 @@ KSelectDatabaseDlg::KSelectDatabaseDlg(KUrl openURL, QWidget *parent)
   connect (buttonHelp, SIGNAL(clicked()), this, SLOT(slotHelp()));
   connect (buttonOK, SIGNAL(clicked()), this, SLOT(slotOKPressed()));
   checkPreLoad->setChecked(false);
-}
+#endif
+ }
 
 KSelectDatabaseDlg::~KSelectDatabaseDlg() {
   delete m_requiredFields;

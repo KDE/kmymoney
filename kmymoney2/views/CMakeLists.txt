@@ -6,13 +6,13 @@ SET(libviews_a_SOURCES
 	kforecastview.cpp
 
 	kgloballedgerview.cpp
-	#khomeview.cpp
+	khomeview.cpp
    kinstitutionsview.cpp
   kinvestmentlistitem.cpp
   kinvestmentview.cpp
   kmymoneyfile.cpp
   kmymoneytransaction.cpp
-  #kmymoneyview.cpp
+  kmymoneyview.cpp
   kpayeesview.cpp
   #kreportsview.cpp
   kscheduledlistitem.cpp

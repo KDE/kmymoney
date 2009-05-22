@@ -22,7 +22,7 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
-
+#include <q3tl.h>
 #include <qlayout.h>
 #include <qdatetime.h>
 #include <qapplication.h>
@@ -55,7 +55,7 @@
 #include <kglobalsettings.h>
 #include <kiconloader.h>
 #include <ktoolinvocation.h>
-
+#include <KToggleAction>
 // ----------------------------------------------------------------------------
 // Project Includes
 #include "khomeview.h"
@@ -93,7 +93,7 @@ KHomeView::KHomeView(QWidget *parent, const char *name ) :
   m_showAllSchedules(false),
   m_needReload(true)
 {
-  m_part = new KHTMLPart(this, "htmlpart_km2");
+  m_part = new KHTMLPart(this);
   addWidget(m_part->view());
 
   m_filename = KMyMoneyUtils::findResource("appdata", QString("html/home%1.html"));
@@ -149,7 +149,7 @@ void KHomeView::loadView(void)
   MyMoneyFile::instance()->accountList(list);
   if(list.count() == 0)
   {
-    m_part->openURL(m_filename);
+    m_part->openUrl(m_filename);
 
 #if 0
     // (ace) I am experimenting with replacing links in the
@@ -268,6 +268,8 @@ void KHomeView::loadView(void)
 
 void KHomeView::showNetWorthGraph(void)
 {
+#warning "port to kde4"
+#if 0
 #ifdef HAVE_KDCHART
   m_part->write(QString("<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">%1</div>\n<div class=\"gap\">&nbsp;</div>\n").arg(i18n("Networth Forecast")));
 
@@ -290,7 +292,6 @@ void KHomeView::showNetWorthGraph(void)
   reportCfg.setConvertCurrency( true );
   reportCfg.setIncludingForecast( true );
   reportCfg.setDateFilter(QDate::currentDate(),QDate::currentDate().addDays(+90));
-
   reports::PivotTable table(reportCfg);
 
   reports::KReportChartView* chartWidget = new reports::KReportChartView(0, 0);
@@ -344,6 +345,7 @@ void KHomeView::showNetWorthGraph(void)
   m_part->write("</table></div></div>");
 
   delete chartWidget;
+#endif
 #endif
 }
 
@@ -606,7 +608,7 @@ void KHomeView::showPaymentEntry(const MyMoneySchedule& sched, int cnt)
 
   try {
     MyMoneyAccount acc = sched.account();
-    if(acc.id()) {
+    if(!acc.id().isEmpty()) {
       MyMoneyTransaction t = sched.transaction();
       // only show the entry, if it is still active
       // FIXME clean old code
@@ -615,12 +617,13 @@ void KHomeView::showPaymentEntry(const MyMoneySchedule& sched, int cnt)
         MyMoneySplit sp = t.splitByAccount(acc.id(), true);
 
         QString pathEnter, pathSkip;
-        KIconLoader::global()->loadIcon("key_enter", KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState, &pathEnter);
-        KIconLoader::global()->loadIcon("player_fwd", KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState, &pathSkip);
+#warning "port to kde4"
+        //KIconLoader::global()->loadIcon("key_enter", KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState, &pathEnter);
+        //KIconLoader::global()->loadIcon("player_fwd", KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState, &pathSkip);
 
         //show payment date
         tmp = QString("<td>") +
-          KGlobal::locale()->formatDate(sched.nextDueDate(), true) +
+          KGlobal::locale()->formatDate(sched.nextDueDate()) +
           "</td><td>";
         if(pathEnter.length() > 0)
           tmp += link(VIEW_SCHEDULE, QString("?id=%1&mode=enter").arg(sched.id()), i18n("Enter schedule")) + QString("<img src=\"file://%1\" border=\"0\"></a>").arg(pathEnter) + linkend();
@@ -861,7 +864,8 @@ MyMoneyMoney KHomeView::investmentBalance(const MyMoneyAccount& acc)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
   MyMoneyMoney value;
-
+#warning "port to kde4"
+#if 0
   value = file->balance(acc.id());
   Q3ValueList<QString>::const_iterator it_a;
   for(it_a = acc.accountList().begin(); it_a != acc.accountList().end(); ++it_a) {
@@ -882,6 +886,7 @@ MyMoneyMoney KHomeView::investmentBalance(const MyMoneyAccount& acc)
       delete e;
     }
   }
+#endif
   return value;
 }
 
@@ -1104,16 +1109,17 @@ const QString KHomeView::linkend(void) const
   return "</a>";
 }
 
-void KHomeView::slotOpenURL(const KUrl &url, const KParts::URLArgs& /* args */)
+void KHomeView::slotOpenURL(const KUrl &url, const KParts::OpenUrlArguments& /* args */)
 {
   QString protocol = url.protocol();
   QString view = url.fileName(false);
-  QString id = url.queryItem("id").data();
-  QString mode = url.queryItem("mode").data();
+  QString id = url.queryItem("id");
+  QString mode = url.queryItem("mode");
 
   if ( protocol == "http" )
   {
-    KApplication::kApplication()->invokeBrowser(url.prettyUrl());
+#warning "port to kde4"
+      //KApplication::kApplication()->invokeBrowser(url.prettyUrl());
   }
   else if ( protocol == "mailto" )
   {
@@ -1127,22 +1133,28 @@ void KHomeView::slotOpenURL(const KUrl &url, const KParts::URLArgs& /* args */)
     } else if(view == VIEW_SCHEDULE) {
       if(mode == "enter") {
         emit scheduleSelected(id);
+#warning "port to kde4"
+#if 0
         KMainWindow* mw = dynamic_cast<KMainWindow*>(qApp->mainWidget());
         Q_CHECK_PTR(mw);
         QTimer::singleShot(0, mw->actionCollection()->action("schedule_enter"), SLOT(activate()));
-
+#endif
       } else if(mode == "edit") {
         emit scheduleSelected(id);
+#warning "port to kde4"
+#if 0
         KMainWindow* mw = dynamic_cast<KMainWindow*>(qApp->mainWidget());
         Q_CHECK_PTR(mw);
         QTimer::singleShot(0, mw->actionCollection()->action("schedule_edit"), SLOT(activate()));
-
+#endif
       } else if(mode == "skip") {
+#warning "port to kde4"
+#if 0
         emit scheduleSelected(id);
         KMainWindow* mw = dynamic_cast<KMainWindow*>(qApp->mainWidget());
         Q_CHECK_PTR(mw);
         QTimer::singleShot(0, mw->actionCollection()->action("schedule_skip"), SLOT(activate()));
-
+#endif
       } else if(mode == "full") {
         m_showAllSchedules = true;
         loadView();
@@ -1162,16 +1174,18 @@ void KHomeView::slotOpenURL(const KUrl &url, const KParts::URLArgs& /* args */)
       {
         QString fname = KMyMoneyUtils::findResource("appdata",QString("html/whats_new%1.html"));
         if(!fname.isEmpty())
-          m_part->openURL(fname);
+          m_part->openUrl(fname);
       }
       else
-        m_part->openURL(m_filename);
+        m_part->openUrl(m_filename);
 
     } else if(view == "action") {
-      KMainWindow* mw = dynamic_cast<KMainWindow*>(qApp->mainWidget());
+#warning "port to kde4"
+#if 0
+        KMainWindow* mw = dynamic_cast<KMainWindow*>(qApp->mainWidget());
       Q_CHECK_PTR(mw);
       QTimer::singleShot(0, mw->actionCollection()->action( id ), SLOT(activate()));
-
+#endif
     } else if(view == VIEW_HOME) {
       Q3ValueList<MyMoneyAccount> list;
       MyMoneyFile::instance()->accountList(list);
@@ -1188,6 +1202,8 @@ void KHomeView::slotOpenURL(const KUrl &url, const KParts::URLArgs& /* args */)
 
 void KHomeView::showAssetsLiabilities(void)
 {
+#warning "port to kde4"
+#if 0
   Q3ValueList<MyMoneyAccount> accounts;
   Q3ValueList<MyMoneyAccount>::Iterator it;
   QMap<QString, MyMoneyAccount> nameAssetsIdx;
@@ -1368,11 +1384,14 @@ void KHomeView::showAssetsLiabilities(void)
     m_part->write("</table>");
     m_part->write("</div></div>");
   }
+#endif
 }
 
 void KHomeView::showBudget(void)
 {
-  MyMoneyFile* file = MyMoneyFile::instance();
+#warning "port to kde4"
+#if 0
+    MyMoneyFile* file = MyMoneyFile::instance();
 
   if ( file->countBudgets() ) {
     int prec = MyMoneyMoney::denomToPrec(file->baseCurrency().smallestAccountFraction());
@@ -1508,6 +1527,7 @@ void KHomeView::showBudget(void)
     }
     m_part->write("</table></div></div>");
   }
+#endif
 }
 
 QString KHomeView::showColoredAmount(const QString& amount, bool isNegative)
@@ -1560,6 +1580,8 @@ MyMoneyMoney KHomeView::forecastPaymentBalance(const MyMoneyAccount& acc, const 
 
 void KHomeView::showCashFlowSummary()
 {
+#warning "port to kde4"
+#if 0
   MyMoneyTransactionFilter filter;
   MyMoneyMoney incomeValue;
   MyMoneyMoney expenseValue;
@@ -1944,7 +1966,7 @@ void KHomeView::showCashFlowSummary()
 
   m_part->write("</div></div>");
 
-
+#endif
 }
 
 // Make sure, that these definitions are only used within this file
