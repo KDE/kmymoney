@@ -909,7 +909,7 @@ const MyMoneyMoney MyMoneySeqAccessMgr::balance(const QString& id, const QDate& 
     }
 
     // fill the found balances into the cache
-    for(it_b = balances.begin(); it_b != balances.end(); ++it_b) {
+    for(it_b = balances.constBegin(); it_b != balances.constEnd(); ++it_b) {
       MyMoneyBalanceCacheItem balance(*it_b);
       m_balanceCache[it_b.key()] = balance;
     }
@@ -941,7 +941,7 @@ const MyMoneyMoney MyMoneySeqAccessMgr::totalBalance(const QString& id, const QD
 
   accounts = account(id).accountList();
 
-  for(it_a = accounts.begin(); it_a != accounts.end(); ++it_a) {
+  for(it_a = accounts.constBegin(); it_a != accounts.constEnd(); ++it_a) {
     result += totalBalance(*it_a, date);
   }
 
@@ -1681,8 +1681,8 @@ void MyMoneySeqAccessMgr::addPrice(const MyMoneyPrice& price)
   // an existing one.
 
   MyMoneyPriceEntries::ConstIterator it;
-  it = entries.find(price.date());
-  if(it != entries.end()) {
+  it = entries.constFind(price.date());
+  if(it != entries.constEnd()) {
     if((*it).rate(QString()) == price.rate(QString())
     && (*it).source() == price.source())
       // in case the information did not change, we don't do anything

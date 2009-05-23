@@ -261,7 +261,7 @@ void MyMoneyStorageANON::fakeBudget(MyMoneyBudget& bx)
       account.setBudgetSubaccounts((*it).budgetSubaccounts());
       QMap<QDate, MyMoneyBudget::PeriodGroup> plist = (*it).getPeriods();
       QMap<QDate, MyMoneyBudget::PeriodGroup>::const_iterator it_p;
-      for(it_p = plist.begin(); it_p != plist.end(); ++it_p) {
+      for(it_p = plist.constBegin(); it_p != plist.constEnd(); ++it_p) {
         MyMoneyBudget::PeriodGroup pGroup;
         pGroup.setAmount((*it_p).amount() * m_factor );
         pGroup.setStartDate( (*it_p).startDate());

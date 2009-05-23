@@ -132,12 +132,12 @@ public:
 
   inline Q_TYPENAME QMap<Key, T>::const_iterator begin(void) const
   {
-    return QMap<Key,T>::begin();
+    return QMap<Key,T>::constBegin();
   }
 
   inline Q_TYPENAME QMap<Key, T>::const_iterator end(void) const
   {
-    return QMap<Key,T>::end();
+    return QMap<Key,T>::constEnd();
   }
 
   inline bool contains(const Key& k) const

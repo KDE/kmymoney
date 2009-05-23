@@ -97,7 +97,7 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storag
       xferCount[accountCount] = xferCount[accountCount] + 1;
   }
   QMap<int,int>::ConstIterator it_cnt;
-  for(it_cnt = xferCount.begin(); it_cnt != xferCount.end(); ++it_cnt) {
+  for(it_cnt = xferCount.constBegin(); it_cnt != xferCount.constEnd(); ++it_cnt) {
     s << "               " << *it_cnt << " of them references " << it_cnt.key() << " accounts\n";
   }
 
@@ -193,7 +193,7 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storag
     if(list_s.count() > 0) {
       s << "  Children =" << "\n";
     }
-    for(it_s = list_s.begin(); it_s != list_s.end(); ++it_s) {
+    for(it_s = list_s.constBegin(); it_s != list_s.constEnd(); ++it_s) {
       MyMoneyAccount child = storage->account(*it_s);
       s << "    " << *it_s << " (" << child.name() << ")\n";
     }
@@ -260,11 +260,11 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storag
 
   MyMoneyPriceList list_pr = _storage->priceList();
   MyMoneyPriceList::ConstIterator it_pr;
-  for(it_pr = list_pr.begin(); it_pr != list_pr.end(); ++it_pr) {
+  for(it_pr = list_pr.constBegin(); it_pr != list_pr.constEnd(); ++it_pr) {
     s << "  From = " << it_pr.key().first << "\n";
     s << "    To = " << it_pr.key().second << "\n";
     MyMoneyPriceEntries::ConstIterator it_pre;
-    for(it_pre = (*it_pr).begin(); it_pre != (*it_pr).end(); ++it_pre) {
+    for(it_pre = (*it_pr).constBegin(); it_pre != (*it_pr).constEnd(); ++it_pre) {
       s << "      Date = " << (*it_pre).date().toString() << "\n";
       s << "        Price = " << (*it_pre).rate(QString()).formatMoney("", 8) << "\n";
       s << "        Source = " << (*it_pre).source() << "\n";
