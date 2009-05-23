@@ -22,6 +22,7 @@
 #include <q3listbox.h>
 #include <q3listview.h>
 #include <qcheckbox.h>
+#include <qtabwidget.h>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -78,6 +79,10 @@ MyMoneyQifProfileEditor::MyMoneyQifProfileEditor(const bool edit, QWidget *paren
   m_isAccepted(false),
   m_selectedAmountType(0)
 {
+  // we don't need the date and amounts tab anymore, so we just hide them for now
+  profileTabs->removePage( tabMoney );
+  profileTabs->removePage( tabDate );
+
   loadWidgets();
   loadProfileListFromConfig();
 
@@ -136,6 +141,8 @@ MyMoneyQifProfileEditor::~MyMoneyQifProfileEditor()
   } else {
     slotReset();
   }
+  delete tabMoney;
+  delete tabDate;
 }
 
 void MyMoneyQifProfileEditor::loadWidgets(void)
@@ -396,6 +403,7 @@ void MyMoneyQifProfileEditor::slotNew(void)
 const QString MyMoneyQifProfileEditor::enterName(bool& ok)
 {
   MyMoneyQifProfileNameValidator val(this, "Validator");
+#if KDE_IS_VERSION(3,2,0)
   return KInputDialog::getText(i18n("QIF Profile Editor"),
                                i18n("Enter new profile name"),
                                QString::null,
@@ -404,6 +412,25 @@ const QString MyMoneyQifProfileEditor::enterName(bool& ok)
 
                                &val,
                                0);
+#else
+  QString rc;
+
+  // the blank in the next line as the value for the edit box is
+  // there on purpose, so that with the following call to validateAndSet
+  // the state is changed and the OK-Button is greyed
+  KLineEditDlg* dlg = new KLineEditDlg(i18n("Enter new profile name"), " ", this);
+  dlg->lineEdit()->setValidator(&val);
+  dlg->lineEdit()->validateAndSet("", 0, 0, 0);
+
+  ok = false;
+  if(dlg->exec()) {
+    ok = true;
+  }
+  rc = dlg->lineEdit()->text();
+  delete dlg;
+
+  return rc;
+#endif
 }
 
 void MyMoneyQifProfileEditor::slotDelete(void)
