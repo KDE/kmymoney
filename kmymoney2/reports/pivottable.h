@@ -331,10 +331,11 @@ protected:
     */
     MyMoneyMoney cellBalance(const QString& outergroup, const ReportAccount& _row, unsigned column, bool budget);
 
+#warning #port to kde4
    /**
      * Draws a PivotGridRowSet in a chart for the given ERowType
      */
-    unsigned drawChartRowSet(unsigned rowNum, const bool seriesTotals, const bool accountSeries, KDChartTableData& data, const PivotGridRowSet& rowSet, const ERowType rowType ) const;
+    //unsigned drawChartRowSet(unsigned rowNum, const bool seriesTotals, const bool accountSeries, KDChartTableData& data, const PivotGridRowSet& rowSet, const ERowType rowType ) const;
 
    /**
      * Loads m_rowTypeList with the list of PivotGridRow types that the reporttable

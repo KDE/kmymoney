@@ -60,11 +60,14 @@ class Q3ListViewItem;
 #include <mymoneyreport.h>
 #include "pivottable.h"
 #include "querytable.h"
-#include "ui_kmymoneyreportcontroldecl.h"
+#include "../widgets/kmymoneyreportcontrolimpl.h"
 #include "kreportchartview.h"
 #include "kmymoneyview.h"
 
 class MyMoneyReport;
+
+
+
 
 
 /**
@@ -91,8 +94,9 @@ public:
   {
   private:
     KHTMLPart* m_part;
-    reports::KReportChartView* m_chartView;
-    kMyMoneyReportControlDecl* m_control;
+//FIXME: Port to KDE4
+//    reports::KReportChartView* m_chartView;
+    kMyMoneyReportControl* m_control;
     Q3VBoxLayout* m_layout;
     MyMoneyReport m_report;
     bool m_deleteMe;

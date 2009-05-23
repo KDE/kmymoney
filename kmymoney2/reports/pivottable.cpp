@@ -1935,6 +1935,8 @@ void PivotTable::dump( const QString& file, const QString& /* context */) const
   g.close();
 }
 
+#warning #Port to KDE4
+#if 0
 #ifdef HAVE_KDCHART
 void PivotTable::drawChart( KReportChartView& _view ) const
 {
@@ -2275,6 +2277,7 @@ unsigned PivotTable::drawChartRowSet(unsigned rowNum, const bool seriesTotals, c
 
   return ++rowNum;
 }
+#endif
 
 QString PivotTable::coloredAmount(const MyMoneyMoney& amount, const QString& currencySymbol, int prec) const
 {

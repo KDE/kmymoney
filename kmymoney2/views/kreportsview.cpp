@@ -585,8 +585,8 @@ void KReportsView::slotSaveView(void)
     // adjust to our local needs (filetypes etc.) and
     // enhanced to show the m_saveEncrypted combo box
     KFileDialog dlg( ":kmymoney-export",
-                   QString("%1|%2\n").arg("*.csv").arg(i18n("CSV (Filefilter)", "CSV files")) +
-                   QString("%1|%2\n").arg("*.html").arg(i18n("HTML (Filefilter)", "HTML files")),
+                   QString("%1|%2\n").arg("*.csv").arg(i18nc("CSV (Filefilter)", "CSV files")) +
+                   QString("%1|%2\n").arg("*.html").arg(i18nc("HTML (Filefilter)", "HTML files")),
                    this, "filedialog", true, vbox);
     connect(&dlg, SIGNAL(filterChanged(const QString&)), this, SLOT(slotSaveFilterChanged(const QString&)));
 

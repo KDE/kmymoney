@@ -30,7 +30,7 @@ SET(kmymoney_STAT_HEADERS
   selectedtransaction.h stdtransactiondownloaded.h
   stdtransactionmatched.h transactioneditorcontainer.h
   transactionform.h transaction.h transactionsortoptionimpl.h
-  kmymoneyreportconfigtabimpl.h
+  kmymoneyreportconfigtabimpl.h kmymoneyreportcontrolimpl.h
   )
 
 ########### Basic Widget Library (kmymoney_base) STATIC #################
@@ -137,6 +137,7 @@ SET(libwidgets_a_SOURCES
   transactioneditorcontainer.cpp
   transactionsortoptionimpl.cpp
   kmymoneyreportconfigtabimpl.cpp
+  kmymoneyreportcontrolimpl.cpp
   )
 
 SET(libwidgets_a_UI
