@@ -935,16 +935,9 @@ void PivotTable::calculateBudgetMapping( void )
               while ( column < m_numColumns )
               {
                 //only show budget values if the budget year and the column date match
+                //no currency conversion is done here because that is done for all columns later
                 if( budget.budgetStart().year() == columnDate(column).year() ) {
-                  MyMoneyMoney finalValue = value;
-
-                  //convert to base currency if the category is in foreign currency
-                  if ( m_config_f.isConvertCurrency() && splitAccount.isForeignCurrency()) {
-                    price = splitAccount.baseCurrencyPrice(columnDate(column));
-                    finalValue = value * price;
-                    finalValue = finalValue.convert(10000);
-                  }
-                  assignCell( outergroup, splitAccount, column, finalValue, true /*budget*/ );
+                  assignCell( outergroup, splitAccount, column, value, true /*budget*/ );
                 }
                 ++column;
               }
@@ -969,14 +962,9 @@ void PivotTable::calculateBudgetMapping( void )
                     if((*it_period).startDate() >= m_beginDate.addDays(-m_beginDate.day() + 1)
                         && (*it_period).startDate() <= m_endDate.addDays(m_endDate.daysInMonth() - m_endDate.day() )
                         && (*it_period).startDate() > (columnDate(column).addMonths(-m_config_f.columnType()))) {
-                            value = (*it_period).amount() * reverse;
-
-                            //convert to base currency if the category is in foreign currency
-                            if ( m_config_f.isConvertCurrency() && splitAccount.isForeignCurrency()) {
-                              price = splitAccount.baseCurrencyPrice(columnDate(column));
-                              value = value * price;
-                            }
-                            assignCell( outergroup, splitAccount, column, value, true /*budget*/ );
+                      //no currency conversion is done here because that is done for all columns later
+                      value = (*it_period).amount() * reverse;
+                      assignCell( outergroup, splitAccount, column, value, true /*budget*/ );
                     }
                     ++it_period;
                     break;

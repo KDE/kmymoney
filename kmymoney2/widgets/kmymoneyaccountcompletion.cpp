@@ -68,17 +68,17 @@ void kMyMoneyAccountCompletion::slotMakeCompletion(const QString& txt)
   //  return;
 
   int cnt = 0;
-  QStringList parts = QStringList::split(MyMoneyFile::AccountSeperator, txt);
   if(txt.contains(MyMoneyFile::AccountSeperator) == 0) {
     m_lastCompletion = QRegExp(QRegExp::escape(txt), false);
     cnt = selector()->slotMakeCompletion(txt);
   } else {
+    QStringList parts = QStringList::split(MyMoneyFile::AccountSeperator, txt);
     QString pattern("^");
     QStringList::iterator it;
     for(it = parts.begin(); it != parts.end(); ++it) {
       if(pattern.length() > 1)
         pattern += MyMoneyFile::AccountSeperator;
-      pattern += QRegExp::escape(*it) + ".*";
+      pattern += QRegExp::escape(QString(*it).stripWhiteSpace()) + ".*";
     }
     pattern += "$";
     m_lastCompletion = QRegExp(pattern, false);

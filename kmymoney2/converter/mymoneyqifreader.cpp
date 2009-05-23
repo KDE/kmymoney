@@ -95,6 +95,10 @@ class MyMoneyQifReader::Private {
      */
     MyMoneySplit::reconcileFlagE reconcileState(const QString& state) const;
 
+    /**
+      */
+    void fixMultiLineMemo(QString& memo) const;
+
   public:
     /**
      * the statement that is currently collected/processed
@@ -117,6 +121,11 @@ class MyMoneyQifReader::Private {
     bool     mapCategories;
     MyMoneyQifReader::QifEntryTypeE  transactionType;
 };
+
+void MyMoneyQifReader::Private::fixMultiLineMemo(QString& memo) const
+{
+  memo.replace("\\n", "\n");
+}
 
 void MyMoneyQifReader::Private::finishStatement(void)
 {
@@ -700,6 +709,7 @@ void MyMoneyQifReader::extractSplits(Q3ValueList<qSplit>& listqSplits) const
       q.m_strCategoryName = (*it++).mid(1);       //   'S'
       if((*it)[0] == 'E') {
         q.m_strMemo =  (*it++).mid(1);//           'E'
+        d->fixMultiLineMemo(q.m_strMemo);
       }
       if((*it)[0] == '$') {
         q.m_amount =  (*it).mid(1);//              '$'
@@ -1091,6 +1101,7 @@ void MyMoneyQifReader::processTransactionEntry(void)
 
   tr.m_reconcile = d->reconcileState(extractLine('C'));
   tr.m_strMemo = extractLine('M');
+  d->fixMultiLineMemo(tr.m_strMemo);
   s1.m_strMemo = tr.m_strMemo;
   // tr.m_listSplits.append(s1);
 
@@ -1283,7 +1294,8 @@ void MyMoneyQifReader::processInvestmentTransactionEntry(void)
 
   // 'M' field: Memo
   QString memo = extractLine('M');
-  tr.m_strMemo = extractLine('M');
+  d->fixMultiLineMemo(memo);
+  tr.m_strMemo = memo;
   unsigned long h;
 
   h = MyMoneyTransaction::hash(m_qifEntry.join(";"));

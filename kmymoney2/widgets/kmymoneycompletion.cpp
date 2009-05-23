@@ -274,7 +274,7 @@ bool kMyMoneyCompletion::eventFilter(QObject* o, QEvent* e)
 
 void kMyMoneyCompletion::slotMakeCompletion(const QString& txt)
 {
-  int cnt = selector()->slotMakeCompletion(txt);
+  int cnt = selector()->slotMakeCompletion(txt.stripWhiteSpace());
 
   if(m_parent && m_parent->isVisible() && !isVisible() && cnt)
     show(false);

@@ -693,11 +693,14 @@ QPixmap MyMoneyAccount::accountGroupPixmap(bool reconcileFlag) const
   QPixmap result = QPixmap(KGlobal::dirs()->findResource("appdata",QString( "icons/hicolor/22x22/actions/%1.png").arg(icon)));
 #if 0
   if(isClosed()) {
-    QPixmap closed = QPixmap(KGlobal::dirs()->findResource("appdata",QString( "icons/hicolor/22x22/actions/account-types_closed.png")));
-    bitBlt(&result, 0, 0, &closed, 0, 0, closed.width(), closed.height(), Qt::CopyROP, false);
+    QPixmap ovly = QPixmap(KGlobal::dirs()->findResource("appdata",QString( "icons/hicolor/22x22/actions/account-types_closed.png")));
+    bitBlt(&result, 0, 0, &ovly, 0, 0, ovly.width(), ovly.height(), Qt::CopyROP, false);
   } else if(reconcileFlag) {
-    QPixmap closed = QPixmap(KGlobal::dirs()->findResource("appdata",QString( "icons/hicolor/22x22/actions/account-types_reconcile.png")));
-    bitBlt(&result, 0, 0, &closed, 0, 0, closed.width(), closed.height(), Qt::CopyROP, false);
+    QPixmap ovly = QPixmap(KGlobal::dirs()->findResource("appdata",QString( "icons/hicolor/22x22/actions/account-types_reconcile.png")));
+    bitBlt(&result, 0, 0, &ovly, 0, 0, ovly.width(), ovly.height(), Qt::CopyROP, false);
+  } else if(!onlineBankingSettings().value("provider").isEmpty()) {
+    QPixmap ovly = QPixmap(KGlobal::dirs()->findResource("appdata",QString( "icons/hicolor/22x22/actions/account-types_online.png")));
+    bitBlt(&result, 0, 0, &ovly, 0, 0, ovly.width(), ovly.height(), Qt::CopyROP, false);
   }
 #endif
   return result;
