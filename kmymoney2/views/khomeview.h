@@ -38,10 +38,10 @@ class Q3Frame;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "../mymoney/mymoneyscheduled.h"
-#include "../mymoney/mymoneyaccount.h"
-#include "../mymoney/mymoneyforecast.h"
-#include "../views/kmymoneyview.h"
+#include "mymoneyscheduled.h"
+#include "mymoneyaccount.h"
+#include "mymoneyforecast.h"
+#include "kmymoneyview.h"
 
 /**
   * Displays a 'home page' for the user.  Similar to concepts used in

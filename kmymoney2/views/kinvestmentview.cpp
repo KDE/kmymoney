@@ -40,7 +40,7 @@
 #include <kmymoneyaccountcombo.h>
 #include <kmymoneycurrencyselector.h>
 
-#include "../kmymoney2.h"
+#include "kmymoney2.h"
 
 #include "kinvestmentview.h"
 #include "kinvestmentlistitem.h"

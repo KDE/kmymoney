@@ -34,7 +34,7 @@
 // Project Includes
 
 #include "imymoneyserialize.h"
-#include "../mymoneysecurity.h"
+#include "mymoneysecurity.h"
 
 /**
   * @author Thomas Baumgart

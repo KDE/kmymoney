@@ -57,7 +57,7 @@
 #include <stdtransactiondownloaded.h>
 #include <stdtransactionmatched.h>
 #include "scheduledtransaction.h"
-#include "../kmymoneyglobalsettings.h"
+#include "kmymoneyglobalsettings.h"
 
 const int LinesPerMemo = 3;
 

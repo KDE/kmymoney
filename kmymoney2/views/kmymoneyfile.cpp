@@ -28,7 +28,7 @@
 #include <klocale.h>
 
 #include "kmymoneyfile.h"
-#include "../mymoney/storage/mymoneyseqaccessmgr.h"
+#include "mymoneyseqaccessmgr.h"
 
 KMyMoneyFile::KMyMoneyFile()
 {

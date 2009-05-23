@@ -21,9 +21,9 @@
 #include <q3valuelist.h>
 class QDomDocument;
 
-#include "../mymoney/mymoneyaccount.h"
-#include "../mymoney/mymoneytransaction.h"
-#include "../mymoney/mymoneymoney.h"
+#include "mymoneyaccount.h"
+#include "mymoneytransaction.h"
+#include "mymoneymoney.h"
 class MyMoneyReport;
 
 namespace reports {

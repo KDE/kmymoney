@@ -58,9 +58,9 @@
 #include "knewaccountwizard_p.h"
 #include <kguiutils.h>
 
-#include "../../dialogs/ksplittransactiondlg.h"
-#include "../../dialogs/kequitypriceupdatedlg.h"
-#include "../../kmymoney2.h"
+#include "ksplittransactiondlg.h"
+#include "kequitypriceupdatedlg.h"
+#include "kmymoney2.h"
 
 using namespace NewAccountWizard;
 

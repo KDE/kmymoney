@@ -29,7 +29,7 @@
 
 #include "kmymoneychecklistitem.h"
 #include "kmymoneylistviewitem.h"
-#include "../kmymoneyglobalsettings.h"
+#include "kmymoneyglobalsettings.h"
 
 KMyMoneyCheckListItem::KMyMoneyCheckListItem(Q3ListView* parent, const QString& txt, const QString& key, const QString& id, Type type) :
   Q3CheckListItem(parent, txt, type),

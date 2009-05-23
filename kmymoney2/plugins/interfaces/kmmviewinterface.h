@@ -33,7 +33,7 @@ class KMyMoneyViewBase;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "../viewinterface.h"
+#include "viewinterface.h"
 
 namespace KMyMoneyPlugin {
 

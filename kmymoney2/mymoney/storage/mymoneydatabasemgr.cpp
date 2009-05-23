@@ -18,8 +18,8 @@
 #include <algorithm>
 
 #include "mymoneydatabasemgr.h"
-#include "../mymoneytransactionfilter.h"
-#include "../mymoneycategory.h"
+#include "mymoneytransactionfilter.h"
+#include "mymoneycategory.h"
 //Added by qt3to4:
 #include <Q3ValueList>
 
@@ -523,7 +523,7 @@ void MyMoneyDatabaseMgr::modifyAccount(const MyMoneyAccount& account, const bool
       if(!account.institutionId().isEmpty())
         institution(account.institutionId());
 
-      Q3ValueList<QString>::ConstIterator it_a;
+      QList<QString>::ConstIterator it_a;
       for(it_a = account.accountList().constBegin(); it_a != account.accountList().constEnd(); ++it_a) {
         this->account(*it_a);
       }
@@ -1630,9 +1630,9 @@ bool MyMoneyDatabaseMgr::isReferenced(const MyMoneyObject& obj, const MyMoneyFil
 }
 
 void MyMoneyDatabaseMgr::close(void) {
-  if (m_sql != 0) {
+  if (m_sql->isValid()) {
     m_sql->close(true);
-    m_sql = 0;
+    //m_sql = 0;
   }
 }
 

@@ -41,8 +41,8 @@
 // Project Includes
 
 #include "mymoneystorageanon.h"
-#include "../mymoneyreport.h"
-#include "../mymoneyinstitution.h"
+#include "mymoneyreport.h"
+#include "mymoneyinstitution.h"
 
 QStringList MyMoneyStorageANON::zKvpNoModify = QStringList::split(",","kmm-baseCurrency,PreferredAccount,Tax,fixed-interest,interest-calculation,payee,schedule,term,kmm-online-source,kmm-brokerage-account,lastStatementDate,kmm-sort-reconcile,kmm-sort-std,kmm-iconpos,mm-closed,payee,schedule,term");
 QStringList MyMoneyStorageANON::zKvpXNumber = QStringList::split(",","final-payment,loan-amount,periodic-payment");

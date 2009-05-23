@@ -54,7 +54,7 @@
 #include "mymoneyfile.h"
 #include "mymoneysecurity.h"
 #include "mymoneyprice.h"
-#include "../kmymoneyglobalsettings.h"
+#include "kmymoneyglobalsettings.h"
 
 #define SYMBOL_COL      0
 #define NAME_COL        1

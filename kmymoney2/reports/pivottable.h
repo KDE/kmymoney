@@ -31,8 +31,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 //#include "kreportchartview.h"
-#include "../mymoney/mymoneyfile.h"
-#include "../mymoney/mymoneyreport.h"
+#include "mymoneyfile.h"
+#include "mymoneyreport.h"
 #include "reporttable.h"
 #include "pivotgrid.h"
 #include "reportaccount.h"

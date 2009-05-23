@@ -22,7 +22,7 @@
 #include <cppunit/TestSuite.h>
 #include <cppunit/extensions/HelperMacros.h>
 
-#include "../autotest.h"
+#include "autotest.h"
 
 #define private public
 #include "mymoneyseqaccessmgr.h"

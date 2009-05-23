@@ -51,7 +51,7 @@
 #include <investtransactioneditor.h>
 #include <kmymoneyutils.h>
 
-#include "../kmymoneyglobalsettings.h"
+#include "kmymoneyglobalsettings.h"
 
 using namespace KMyMoneyRegister;
 using namespace KMyMoneyTransactionForm;

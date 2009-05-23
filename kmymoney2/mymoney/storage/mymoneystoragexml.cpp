@@ -41,9 +41,9 @@
 // Project Includes
 
 #include "mymoneystoragexml.h"
-#include "../mymoneyreport.h"
-#include "../mymoneybudget.h"
-#include "../mymoneyinstitution.h"
+#include "mymoneyreport.h"
+#include "mymoneybudget.h"
+#include "mymoneyinstitution.h"
 
 unsigned int MyMoneyStorageXML::fileVersionRead = 0;
 unsigned int MyMoneyStorageXML::fileVersionWrite = 0;

@@ -49,7 +49,7 @@
 #include <mymoneytransaction.h>
 #include <kmymoneyglobalsettings.h>
 
-#include "../kmymoneyutils.h"
+#include "kmymoneyutils.h"
 
 bool KCurrencyCalculator::setupSplitPrice(MyMoneyMoney& shares, const MyMoneyTransaction& t, const MyMoneySplit& s, const QMap<QString, MyMoneyMoney>& priceInfo, QWidget* parentWidget)
 {

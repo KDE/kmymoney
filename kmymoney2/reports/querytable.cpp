@@ -39,11 +39,11 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include "../mymoney/mymoneyfile.h"
-#include "../mymoney/mymoneytransaction.h"
-#include "../mymoney/mymoneyreport.h"
-#include "../mymoney/mymoneyexception.h"
-#include "../kmymoneyutils.h"
+#include "mymoneyfile.h"
+#include "mymoneytransaction.h"
+#include "mymoneyreport.h"
+#include "mymoneyexception.h"
+#include "kmymoneyutils.h"
 #include "reportaccount.h"
 #include "reportdebug.h"
 #include "querytable.h"

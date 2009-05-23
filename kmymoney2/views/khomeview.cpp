@@ -64,11 +64,11 @@
 #include "mymoneyfile.h"
 #include "mymoneyforecast.h"
 #include "kmymoney2.h"
-//#include "../reports/kreportchartview.h"
-//#include "../reports/pivottable.h"
-//#include "../reports/pivotgrid.h"
-//#include "../reports/reportaccount.h"
-#include "../kmymoneyglobalsettings.h"
+//#include "kreportchartview.h"
+//#include "pivottable.h"
+//#include "pivotgrid.h"
+//#include "reportaccount.h"
+#include "kmymoneyglobalsettings.h"
 
 
 #define VIEW_LEDGER         "ledger"

@@ -28,17 +28,17 @@
 #include <kstandarddirs.h>
 
 // DOH, mmreport.h uses this without including it!!
-#include "../mymoney/mymoneyaccount.h"
+#include "mymoneyaccount.h"
 
-#include "../mymoney/mymoneysecurity.h"
-#include "../mymoney/mymoneyprice.h"
-#include "../mymoney/mymoneyreport.h"
-#include "../mymoney/mymoneystatement.h"
-#include "../mymoney/storage/mymoneystoragedump.h"
-#include "../mymoney/storage/mymoneystoragexml.h"
+#include "mymoneysecurity.h"
+#include "mymoneyprice.h"
+#include "mymoneyreport.h"
+#include "mymoneystatement.h"
+#include "mymoneystoragedump.h"
+#include "mymoneystoragexml.h"
 
 #define private public
-#include "../reports/pivottable.h"
+#include "pivottable.h"
 #undef private
 
 #include "reportstestcommon.h"

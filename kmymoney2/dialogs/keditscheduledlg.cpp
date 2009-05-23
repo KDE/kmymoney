@@ -53,7 +53,7 @@
 #include <KToolInvocation>
 
 #include "keditscheduledlg.h"
-#include "../kmymoney2.h"
+#include "kmymoney2.h"
 
 class KEditScheduleDlg::Private {
 public:

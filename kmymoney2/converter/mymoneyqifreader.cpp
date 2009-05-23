@@ -53,7 +53,7 @@
 #include "mymoneyqifreader.h"
 #include "mymoneyfile.h"
 #include "kaccountselectdlg.h"
-#include "../kmymoney2.h"
+#include "kmymoney2.h"
 #include "kmymoneyglobalsettings.h"
 
 #include "mymoneystatementreader.h"

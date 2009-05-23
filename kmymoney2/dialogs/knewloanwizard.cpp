@@ -46,7 +46,7 @@
 
 #include "knewloanwizard.h"
 
-#include "../kmymoneyutils.h"
+#include "kmymoneyutils.h"
 #include <kmymoneylineedit.h>
 #include <kmymoneydateinput.h>
 #include <kmymoneyedit.h>
@@ -59,7 +59,7 @@
 #include "mymoneyfinancialcalculator.h"
 #include "mymoneyfile.h"
 
-#include "../kmymoney2.h"
+#include "kmymoney2.h"
 
 KNewLoanWizard::KNewLoanWizard(QWidget *parent) :
   KNewLoanWizardDecl(parent)

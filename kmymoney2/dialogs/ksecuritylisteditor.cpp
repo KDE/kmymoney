@@ -42,7 +42,7 @@
 #include "mymoneyfile.h"
 #include "knewinvestmentwizard.h"
 
-#include "../kmymoneyutils.h"
+#include "kmymoneyutils.h"
 
 #define ID_COL        0
 #define TYPE_COL      1

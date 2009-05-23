@@ -55,9 +55,9 @@
 #include "pivotgrid.h"
 #include "reportdebug.h"
 #include "kreportchartview.h"
-#include "../kmymoneyglobalsettings.h"
-#include "../kmymoneyutils.h"
-#include "../mymoney/mymoneyforecast.h"
+#include "kmymoneyglobalsettings.h"
+#include "kmymoneyutils.h"
+#include "mymoneyforecast.h"
 
 
 #include <kmymoneyutils.h>

@@ -49,7 +49,7 @@
 #include "mymoneyqifprofileeditor.h"
 #include "mymoneyfile.h"
 #include "kmymoneyaccountcombo.h"
-#include "../kmymoneyutils.h"
+#include "kmymoneyutils.h"
 
 KExportDlg::KExportDlg(QWidget *parent)
   : KExportDlgDecl(parent)

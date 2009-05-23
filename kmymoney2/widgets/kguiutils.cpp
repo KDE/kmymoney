@@ -37,7 +37,7 @@
 // Project Includes
 
 #include "kguiutils.h"
-#include "../kmymoneyglobalsettings.h"
+#include "kmymoneyglobalsettings.h"
 
  /**************************************************************************
   *                                                                        *

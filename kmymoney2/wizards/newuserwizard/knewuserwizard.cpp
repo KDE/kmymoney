@@ -63,8 +63,8 @@
 #include <kmymoneyedit.h>
 #include <kaccounttemplateselector.h>
 
-#include "../../kmymoney2.h"
-#include "../../kmymoneyglobalsettings.h"
+#include "kmymoney2.h"
+#include "kmymoneyglobalsettings.h"
 
 using namespace NewUserWizard;
 

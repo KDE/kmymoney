@@ -19,8 +19,8 @@
 #define QUERYTABLETEST_H
 
 #include <cppunit/extensions/HelperMacros.h>
-#include "../mymoney/mymoneyfile.h"
-#include "../mymoney/storage/mymoneyseqaccessmgr.h"
+#include "mymoneyfile.h"
+#include "mymoneyseqaccessmgr.h"
 
 class QueryTableTest : public CppUnit::TestFixture  {
   CPPUNIT_TEST_SUITE(QueryTableTest);

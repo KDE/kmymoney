@@ -23,10 +23,10 @@
 // Project Includes
 #include <mymoneyfile.h>
 #include <kmymoneyaccounttreeforecast.h>
-#include "../kmymoney2.h"
-#include "../kmymoneyglobalsettings.h"
+#include "kmymoney2.h"
+#include "kmymoneyglobalsettings.h"
 #include "mymoneyforecast.h"
-#include "../reports/reportaccount.h"
+#include "reportaccount.h"
 //Added by qt3to4:
 #include <Q3ValueList>
 

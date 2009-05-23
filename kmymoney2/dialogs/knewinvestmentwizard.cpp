@@ -46,7 +46,7 @@
 #include <ktoolinvocation.h>
 #include "kmymoneycurrencyselector.h"
 #include "webpricequote.h"
-#include "../kmymoneyutils.h"
+#include "kmymoneyutils.h"
 
 KNewInvestmentWizard::KNewInvestmentWizard( QWidget *parent ) :
   KNewInvestmentWizardDecl( parent )

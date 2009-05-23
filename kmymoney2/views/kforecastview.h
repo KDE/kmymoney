@@ -32,7 +32,7 @@
 
 #include "ui_kforecastviewdecl.h"
 #include "kmymoneyaccounttreeforecast.h"
-//#include "../reports/kreportchartview.h"
+//#include "kreportchartview.h"
 //Added by qt3to4:
 #include <Q3ValueList>
 

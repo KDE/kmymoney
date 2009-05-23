@@ -48,7 +48,7 @@
 #include <mymoneysplit.h>
 #include <registeritem.h>
 #include <mymoneyscheduled.h>
-#include "../kmymoneyutils.h"
+#include "kmymoneyutils.h"
 
 KMyMoneyCombo::KMyMoneyCombo(QWidget *w, const char *name) :
   KComboBox(w),

@@ -36,8 +36,8 @@
 // Project Includes
 
 #include "ui_kbudgetviewdecl.h"
-#include "../mymoney/mymoneybudget.h"
-#include "../mymoney/mymoneysecurity.h"
+#include "mymoneybudget.h"
+#include "mymoneysecurity.h"
 class KMyMoneyAccountTreeBudgetItem;
 
 /**

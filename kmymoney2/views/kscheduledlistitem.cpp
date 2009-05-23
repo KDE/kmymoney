@@ -41,9 +41,9 @@
 // Project Includes
 
 #include "kscheduledlistitem.h"
-#include "../mymoney/mymoneyfile.h"
-#include "../kmymoneyglobalsettings.h"
-#include "../kmymoneyutils.h"
+#include "mymoneyfile.h"
+#include "kmymoneyglobalsettings.h"
+#include "kmymoneyutils.h"
 
 KScheduledListItem::KScheduledListItem(K3ListView *parent, const QString& name, const QPixmap& pixmap, const QString& sortKey) :
   K3ListViewItem(parent, name),

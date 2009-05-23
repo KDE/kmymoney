@@ -49,8 +49,8 @@
 #include <kmymoneylistviewitem.h>
 #include <kmymoneychecklistitem.h>
 
-#include "../kmymoneyutils.h"
-#include "../kmymoneyglobalsettings.h"
+#include "kmymoneyutils.h"
+#include "kmymoneyglobalsettings.h"
 
 kMyMoneyAccountSelector::kMyMoneyAccountSelector(QWidget *parent, const char *name, Qt::WFlags flags, const bool createButtons) :
   KMyMoneySelector(parent, name, flags),

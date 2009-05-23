@@ -22,11 +22,11 @@
 #include <cppunit/TestSuite.h>
 #include <cppunit/extensions/HelperMacros.h>
 
-#include "../autotest.h"
+#include "autotest.h"
 
 #define private public
 #define protected public
-#include "../mymoneyobject.h"
+#include "mymoneyobject.h"
 #include "mymoneydatabasemgr.h"
 #undef private
 

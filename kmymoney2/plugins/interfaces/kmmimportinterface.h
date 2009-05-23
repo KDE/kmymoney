@@ -33,7 +33,7 @@ class KMyMoney2App;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "../importinterface.h"
+#include "importinterface.h"
 
 namespace KMyMoneyPlugin {
 

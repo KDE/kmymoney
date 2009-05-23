@@ -75,10 +75,10 @@
 #include "mymoneykeyvaluecontainer.h"
 #include "knewbankdlg.h"
 #include "kmymoneyfile.h"
-#include "../kmymoneyutils.h"
+#include "kmymoneyutils.h"
 
-//#include "../reports/kreportchartview.h"
-//#include "../reports/pivottable.h"
+//#include "kreportchartview.h"
+//#include "pivottable.h"
 
 // in KOffice version < 1.5 KDCHART_PROPSET_NORMAL_DATA was a static const
 // but in 1.5 this has been changed into a #define'd value. So we have to

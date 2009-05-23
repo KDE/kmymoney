@@ -38,8 +38,8 @@
 #include "kbalancechartdlg.h"
 
 #include <mymoneyreport.h>
-//#include "../reports/kreportchartview.h"
-//#include "../reports/pivottable.h"
+//#include "kreportchartview.h"
+//#include "pivottable.h"
 
 #include <kmymoneyglobalsettings.h>
 

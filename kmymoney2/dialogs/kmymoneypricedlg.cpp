@@ -45,7 +45,7 @@
 #include <kmymoneycurrencyselector.h>
 #include <mymoneyfile.h>
 
-#include "../kmymoneyglobalsettings.h"
+#include "kmymoneyglobalsettings.h"
 
 #define COMMODITY_COL     0
 #define CURRENCY_COL      1

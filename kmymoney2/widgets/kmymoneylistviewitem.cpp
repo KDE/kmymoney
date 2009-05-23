@@ -33,7 +33,7 @@
 
 #include "kmymoneylistviewitem.h"
 #include "kmymoneychecklistitem.h"
-#include "../kmymoneyglobalsettings.h"
+#include "kmymoneyglobalsettings.h"
 
 KMyMoneyListViewItem::KMyMoneyListViewItem(Q3ListView* parent, const QString& txt, const QString& key, const QString& id) :
   K3ListViewItem(parent, txt),

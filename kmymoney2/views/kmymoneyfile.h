@@ -27,7 +27,7 @@
  * This file is currently not used anymore, but kept here for reference purposes
  */
 #if 0
-#include "../mymoney/mymoneyaccount.h"
+#include "mymoneyaccount.h"
 class MyMoneySeqAccessMgr;
 
 /**

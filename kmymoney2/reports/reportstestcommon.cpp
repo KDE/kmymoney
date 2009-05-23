@@ -37,12 +37,12 @@
 #undef private
 using namespace reports;
 
-#include "../mymoney/mymoneysecurity.h"
-#include "../mymoney/mymoneyprice.h"
-#include "../mymoney/storage/mymoneystoragedump.h"
-#include "../mymoney/mymoneyreport.h"
-#include "../mymoney/mymoneystatement.h"
-#include "../mymoney/storage/mymoneystoragexml.h"
+#include "mymoneysecurity.h"
+#include "mymoneyprice.h"
+#include "mymoneystoragedump.h"
+#include "mymoneyreport.h"
+#include "mymoneystatement.h"
+#include "mymoneystoragexml.h"
 #include "reportstestcommon.h"
 
 namespace test {

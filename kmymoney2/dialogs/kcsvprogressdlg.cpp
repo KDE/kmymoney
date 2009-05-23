@@ -48,7 +48,7 @@
 // Project Includes
 #include "kcsvprogressdlg.h"
 #include "kmymoneydateinput.h"
-#include "../kmymoneyutils.h"
+#include "kmymoneyutils.h"
 
 /** Simple constructor */
 KCsvProgressDlg::KCsvProgressDlg(int type, MyMoneyAccount *account, QWidget *parent, const char *name )

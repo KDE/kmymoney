@@ -62,7 +62,7 @@
 
 #include "registersearchline.h"
 #include "kfindtransactiondlg.h"
-#include "../kmymoney2.h"
+#include "kmymoney2.h"
 
 #include "scheduledtransaction.h"
 

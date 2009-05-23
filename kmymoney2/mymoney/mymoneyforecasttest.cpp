@@ -23,10 +23,10 @@
 
 #include <mymoneyexception.h>
 
-#include "../kmymoneyglobalsettings.h"
-#include "../mymoney/storage/mymoneystoragedump.h"
-#include "../mymoney/storage/mymoneystoragexml.h"
-#include "../reports/reportstestcommon.h"
+#include "kmymoneyglobalsettings.h"
+#include "mymoneystoragedump.h"
+#include "mymoneystoragexml.h"
+#include "reportstestcommon.h"
 
 
 using namespace test;

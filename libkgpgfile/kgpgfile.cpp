@@ -28,12 +28,10 @@
 #include <qdir.h>
 #include <qstring.h>
 
-#if QT_IS_VERSION(3,3,0)
 #include <qeventloop.h>
 //Added by qt3to4:
 #include <Q3CString>
 #include <Q3ValueList>
-#endif
 
 
 // ----------------------------------------------------------------------------

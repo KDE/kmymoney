@@ -58,11 +58,11 @@ class Q3ListViewItem;
 #include <mymoneyscheduled.h>
 #include <mymoneyaccount.h>
 #include <mymoneyreport.h>
-#include "../reports/pivottable.h"
-#include "../reports/querytable.h"
+#include "pivottable.h"
+#include "querytable.h"
 #include "ui_kmymoneyreportcontroldecl.h"
-#include "../reports/kreportchartview.h"
-#include "../views/kmymoneyview.h"
+#include "kreportchartview.h"
+#include "kmymoneyview.h"
 
 class MyMoneyReport;
 

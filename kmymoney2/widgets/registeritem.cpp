@@ -27,7 +27,7 @@
 #include <registeritem.h>
 #include <register.h>
 
-#include "../kmymoneyglobalsettings.h"
+#include "kmymoneyglobalsettings.h"
 
 using namespace KMyMoneyRegister;
 

@@ -44,8 +44,8 @@
 #include <kmymoneycategory.h>
 
 #include "transactionform.h"
-#include "../kmymoneyutils.h"
-#include "../kmymoneyglobalsettings.h"
+#include "kmymoneyutils.h"
+#include "kmymoneyglobalsettings.h"
 
 using namespace KMyMoneyTransactionForm;
 

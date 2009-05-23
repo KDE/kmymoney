@@ -35,9 +35,9 @@
 
 #include "mymoneystoragedump.h"
 #include "imymoneystorage.h"
-#include "../mymoneyaccount.h"
-#include "../mymoneysecurity.h"
-#include "../mymoneyprice.h"
+#include "mymoneyaccount.h"
+#include "mymoneysecurity.h"
+#include "mymoneyprice.h"
 
 MyMoneyStorageDump::MyMoneyStorageDump()
 {

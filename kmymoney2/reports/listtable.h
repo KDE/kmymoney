@@ -34,7 +34,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "../mymoney/mymoneyreport.h"
+#include "mymoneyreport.h"
 #include "reporttable.h"
 
 namespace reports {

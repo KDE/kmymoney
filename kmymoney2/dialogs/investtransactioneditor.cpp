@@ -54,7 +54,7 @@
 #include "ksplittransactiondlg.h"
 #include "kcurrencycalculator.h"
 
-#include "../kmymoneyglobalsettings.h"
+#include "kmymoneyglobalsettings.h"
 
 #include "investactivities.h"
 

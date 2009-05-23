@@ -33,8 +33,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "../mymoney/mymoneyfile.h"
-#include "../mymoney/mymoneysecurity.h"
+#include "mymoneyfile.h"
+#include "mymoneysecurity.h"
 #include "reportdebug.h"
 #include "reportaccount.h"
 

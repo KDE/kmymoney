@@ -32,7 +32,7 @@
 #include "convertertest.h"
 
 // uses helper functions from reports tests
-#include "../reports/reportstestcommon.h"
+#include "reportstestcommon.h"
 using namespace test;
 
 #include <mymoneysecurity.h>
@@ -43,7 +43,7 @@ using namespace test;
 #include "storage/mymoneystoragedump.h"
 
 #define private public
-#include "../converter/webpricequote.h"
+#include "webpricequote.h"
 #undef private
 
 ConverterTest::ConverterTest()

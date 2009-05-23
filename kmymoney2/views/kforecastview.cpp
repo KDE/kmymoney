@@ -39,14 +39,14 @@
 
 #include <mymoneyfile.h>
 #include "kforecastview.h"
-#include "../kmymoneyglobalsettings.h"
-#include "../kmymoney2.h"
-#include "../kmymoneyutils.h"
-#include "../mymoney/mymoneyforecast.h"
+#include "kmymoneyglobalsettings.h"
+#include "kmymoney2.h"
+#include "kmymoneyutils.h"
+#include "mymoneyforecast.h"
 #include "kmymoneyforecastlistviewitem.h"
 #include "kmymoneyaccounttreeforecast.h"
-//#include "../reports/pivottable.h"
-//#include "../reports/pivotgrid.h"
+//#include "pivottable.h"
+//#include "pivotgrid.h"
 
 KForecastView::KForecastView(QWidget *parent) :
   KForecastViewDecl(parent)

@@ -35,8 +35,8 @@
 
 #include <mymoneyfile.h>
 #include "kinstitutionsview.h"
-#include "../kmymoneyglobalsettings.h"
-#include "../kmymoney2.h"
+#include "kmymoneyglobalsettings.h"
+#include "kmymoney2.h"
 
 KInstitutionsView::KInstitutionsView(QWidget *parent) :
   KInstitutionsViewDecl(parent),

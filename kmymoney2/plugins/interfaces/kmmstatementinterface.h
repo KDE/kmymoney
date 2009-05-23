@@ -33,7 +33,7 @@ class KMyMoney2App;
 class MyMoneyAccount;
 class MyMoneyKeyValueContainer;
 
-#include "../statementinterface.h"
+#include "statementinterface.h"
 
 namespace KMyMoneyPlugin {
 

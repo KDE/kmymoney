@@ -19,8 +19,8 @@
 
 #include <cppunit/extensions/HelperMacros.h>
 
-#include "../mymoney/mymoneyfile.h"
-#include "../mymoney/storage/mymoneyseqaccessmgr.h"
+#include "mymoneyfile.h"
+#include "mymoneyseqaccessmgr.h"
 
 #define private public
 #include "mymoneyforecast.h"

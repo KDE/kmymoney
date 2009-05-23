@@ -48,7 +48,7 @@
 #include "kmymoneyaccountselector.h"
 #include "kmymoneydateinput.h"
 #include "mymoneyfile.h"
-#include "../kmymoneyutils.h"
+#include "kmymoneyutils.h"
 
 KEditLoanWizard::KEditLoanWizard(const MyMoneyAccount& account, QWidget *parent ) :
   KNewLoanWizard(parent)

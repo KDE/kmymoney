@@ -36,7 +36,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "../kmymoneyplugin.h"
+#include "kmymoneyplugin.h"
 class KOnlineBankingStatus;
 
 /**

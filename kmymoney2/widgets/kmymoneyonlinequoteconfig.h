@@ -28,7 +28,7 @@
 // Project Includes
 
 #include "ui_kmymoneyonlinequoteconfigdecl.h"
-#include "../converter/webpricequote.h"
+#include "webpricequote.h"
 //Added by qt3to4:
 #include <Q3ValueList>
 

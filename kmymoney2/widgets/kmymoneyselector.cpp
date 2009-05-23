@@ -36,7 +36,7 @@
 #include <kmymoneylistviewitem.h>
 #include <kmymoneychecklistitem.h>
 
-#include "../kmymoneyglobalsettings.h"
+#include "kmymoneyglobalsettings.h"
 
 KMyMoneySelector::KMyMoneySelector(QWidget *parent, const char *name, Qt::WFlags flags) :
   QWidget(parent, name, flags)

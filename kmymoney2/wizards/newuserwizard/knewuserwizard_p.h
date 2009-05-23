@@ -31,9 +31,9 @@
 #include "ui_kpreferencepagedecl.h"
 #include "ui_kfilepagedecl.h"
 
-#include "../wizardpages/userinfo.h"
-#include "../wizardpages/currency.h"
-#include "../wizardpages/accounts.h"
+#include "userinfo.h"
+#include "currency.h"
+#include "accounts.h"
 
 #include <mymoneytemplate.h>
 //Added by qt3to4:

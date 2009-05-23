@@ -92,4 +92,3 @@ QString KReconcileListItem::key(int column, bool ascending) const
 
 #endif
 
-#include "kreconcilelistitem.moc"

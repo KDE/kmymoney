@@ -50,7 +50,7 @@
 #include "pivottable.h"
 #include "reportdebug.h"
 #include "kreportchartview.h"
-#include "../kmymoneyglobalsettings.h"
+#include "kmymoneyglobalsettings.h"
 
 #include <kmymoneyutils.h>
 

@@ -86,15 +86,15 @@
 #include "knewbankdlg.h"
 #include "knewfiledlg.h"
 
-#include "../mymoney/storage/mymoneyseqaccessmgr.h"
-#include "../mymoney/storage/mymoneydatabasemgr.h"
-#include "../mymoney/storage/imymoneystorageformat.h"
-#include "../mymoney/storage/mymoneystoragebin.h"
-#include "../mymoney/mymoneyexception.h"
-#include "../mymoney/storage/mymoneystoragexml.h"
-#include "../mymoney/storage/mymoneystoragesql.h"
-#include "../converter/mymoneygncreader.h"
-#include "../mymoney/storage/mymoneystorageanon.h"
+#include "mymoneyseqaccessmgr.h"
+#include "mymoneydatabasemgr.h"
+#include "imymoneystorageformat.h"
+#include "mymoneystoragebin.h"
+#include "mymoneyexception.h"
+#include "mymoneystoragexml.h"
+#include "mymoneystoragesql.h"
+#include "mymoneygncreader.h"
+#include "mymoneystorageanon.h"
 
 #include <transactioneditor.h>
 #include <kmymoneyglobalsettings.h>
@@ -115,8 +115,8 @@
 #include <kmymoneytitlelabel.h>
 
 
-#include "../kmymoney2.h"
-#include "../kmymoneyutils.h"
+#include "kmymoney2.h"
+#include "kmymoneyutils.h"
 
 #include <libkgpgfile/kgpgfile.h>
 

@@ -49,7 +49,7 @@ email                : mte@users.sourceforge.net
 #ifndef _GNCFILEANON
   #include "config-kmymoney.h"
   #include "storage/imymoneystorage.h"
-  #include "../kmymoneyutils.h"
+  #include "kmymoneyutils.h"
   #include "mymoneyfile.h"
   #include "mymoneyprice.h"
   #include "kgncimportoptionsdlg.h"

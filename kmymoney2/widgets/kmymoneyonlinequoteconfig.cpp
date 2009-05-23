@@ -38,7 +38,7 @@
 // Project Includes
 
 #include "kmymoneyonlinequoteconfig.h"
-#include "../converter/webpricequote.h"
+#include "webpricequote.h"
 
 kMyMoneyOnlineQuoteConfig::kMyMoneyOnlineQuoteConfig(QWidget *parent )
   : kMyMoneyOnlineQuoteConfigDecl(parent)

@@ -24,9 +24,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "../../kmymoney2.h"
-#include "../../views/kmymoneyview.h"
-#include "../../widgets/selectedtransaction.h"
+#include "kmymoney2.h"
+#include "kmymoneyview.h"
+#include "selectedtransaction.h"
 #include "kmmviewinterface.h"
 //Added by qt3to4:
 #include <Q3ValueList>

@@ -47,13 +47,13 @@
 #include "kmymoneypriceview.h"
 #include <mymoneysecurity.h>
 #include <mymoneyfile.h>
-#include "../kmymoneyglobalsettings.h"
+#include "kmymoneyglobalsettings.h"
 #if 0
 #include "kmymoneycurrencyselector.h"
 #include "kupdatestockpricedlg.h"
 #include "kcurrencycalculator.h"
 #include "kequitypriceupdatedlg.h"
-#include "../kmymoneyutils.h"
+#include "kmymoneyutils.h"
 #include "mymoneyfile.h"
 #endif
 

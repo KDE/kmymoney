@@ -19,8 +19,8 @@
 #define __KREPORTSVIEWTEST_H__
 
 #include <cppunit/extensions/HelperMacros.h>
-#include "../mymoney/mymoneyfile.h"
-#include "../mymoney/storage/mymoneyseqaccessmgr.h"
+#include "mymoneyfile.h"
+#include "mymoneyseqaccessmgr.h"
 
 class KReportsViewTest : public CppUnit::TestFixture  {
   CPPUNIT_TEST_SUITE(KReportsViewTest);

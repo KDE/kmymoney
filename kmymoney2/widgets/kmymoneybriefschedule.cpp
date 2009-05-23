@@ -43,7 +43,7 @@
 
 #include <mymoneyscheduled.h>
 #include "kmymoneybriefschedule.h"
-#include "../kmymoneyutils.h"
+#include "kmymoneyutils.h"
 
 KMyMoneyBriefSchedule::KMyMoneyBriefSchedule(QWidget *parent)
     : kScheduleBriefWidget(parent/*,name, Qt::WStyle_Customize | Qt::WStyle_NoBorder*/)
