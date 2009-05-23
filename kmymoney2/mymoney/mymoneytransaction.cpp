@@ -451,14 +451,14 @@ QString MyMoneyTransaction::accountSignature(bool includeSplitCount) const
 {
   QMap<QString, int> accountList;
   Q3ValueList<MyMoneySplit>::const_iterator it_s;
-  for(it_s = m_splits.begin(); it_s != m_splits.end(); ++it_s) {
+  for(it_s = m_splits.constBegin(); it_s != m_splits.constEnd(); ++it_s) {
     accountList[(*it_s).accountId()] += 1;
   }
 
   QMap<QString, int>::const_iterator it_a;
   QString rc;
-  for(it_a = accountList.begin(); it_a != accountList.end(); ++it_a) {
-    if(it_a != accountList.begin())
+  for(it_a = accountList.constBegin(); it_a != accountList.constEnd(); ++it_a) {
+    if(it_a != accountList.constBegin())
       rc += "-";
     rc += it_a.key();
     if(includeSplitCount)

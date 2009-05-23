@@ -472,8 +472,8 @@ void MyMoneyReport::write ( QDomElement& e, QDomDocument *doc, bool anonymous ) 
     else
     {
       // iterate over payees, and add each one
-      QStringList::const_iterator it_payee = payeelist.begin();
-      while ( it_payee != payeelist.end() )
+      QStringList::const_iterator it_payee = payeelist.constBegin();
+      while ( it_payee != payeelist.constEnd() )
       {
         QDomElement p = doc->createElement ( "PAYEE" );
         p.setAttribute ( "id", *it_payee );
@@ -511,8 +511,8 @@ void MyMoneyReport::write ( QDomElement& e, QDomDocument *doc, bool anonymous ) 
   if ( accounts ( accountlist ) )
   {
     // iterate over accounts, and add each one
-    QStringList::const_iterator it_account = accountlist.begin();
-    while ( it_account != accountlist.end() )
+    QStringList::const_iterator it_account = accountlist.constBegin();
+    while ( it_account != accountlist.constEnd() )
     {
       QDomElement p = doc->createElement ( "ACCOUNT" );
       p.setAttribute ( "id", *it_account );
@@ -530,8 +530,8 @@ void MyMoneyReport::write ( QDomElement& e, QDomDocument *doc, bool anonymous ) 
   if ( categories ( accountlist ) )
   {
     // iterate over accounts, and add each one
-    QStringList::const_iterator it_account = accountlist.begin();
-    while ( it_account != accountlist.end() )
+    QStringList::const_iterator it_account = accountlist.constBegin();
+    while ( it_account != accountlist.constEnd() )
     {
       QDomElement p = doc->createElement ( "CATEGORY" );
       p.setAttribute ( "id", *it_account );
@@ -694,8 +694,8 @@ bool MyMoneyReport::read ( const QDomElement& e )
 
     unsigned qc = 0;
     QStringList columns = QStringList::split ( ",", e.attribute ( "querycolumns", "none" ) );
-    QStringList::const_iterator it_column = columns.begin();
-    while ( it_column != columns.end() )
+    QStringList::const_iterator it_column = columns.constBegin();
+    while ( it_column != columns.constEnd() )
     {
       i = kQueryColumnsText.findIndex ( *it_column );
       if ( i > 0 )

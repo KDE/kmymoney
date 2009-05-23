@@ -36,7 +36,7 @@ MyMoneyObjectContainer::~MyMoneyObjectContainer()
 void MyMoneyObjectContainer::clear(IMyMoneyStorage* storage)
 {
   // delete all objects
-  QMap<QString, MyMoneyObject const *>::const_iterator it;
+  QMap<QString, MyMoneyObject const *>::iterator it;
   for(it = m_map.begin(); it != m_map.end(); ++it) {
     delete (*it);
   }

@@ -1110,7 +1110,7 @@ void MyMoneyFile::warningMissingRate(const QString& fromId, const QString& toId)
 void MyMoneyFile::notify(void)
 {
   QMap<QString, bool>::ConstIterator it;
-  for(it = d->m_notificationList.begin(); it != d->m_notificationList.end(); ++it) {
+  for(it = d->m_notificationList.constBegin(); it != d->m_notificationList.constEnd(); ++it) {
     if(*it)
       d->m_cache.refresh(it.key());
     else
@@ -1221,7 +1221,7 @@ QString MyMoneyFile::locateSubAccount(const MyMoneyAccount& base, const QString&
   QStringList list = base.accountList();
   QStringList::ConstIterator it_a;
 
-  for(it_a = list.begin(); it_a != list.end(); ++it_a) {
+  for(it_a = list.constBegin(); it_a != list.constEnd(); ++it_a) {
     nextBase = account(*it_a);
     if(nextBase.name() == level) {
       if(remainder.isEmpty()) {
@@ -2007,7 +2007,7 @@ bool MyMoneyFile::hasAccount(const QString& id, const QString& name) const
   QStringList list = acc.accountList();
   QStringList::ConstIterator it;
   bool rc = false;
-  for(it = list.begin(); rc == false && it != list.end(); ++it) {
+  for(it = list.constBegin(); rc == false && it != list.constEnd(); ++it) {
     MyMoneyAccount a = d->m_cache.account(*it);
     if(a.name() == name)
       rc = true;

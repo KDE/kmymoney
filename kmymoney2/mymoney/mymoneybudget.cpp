@@ -129,12 +129,12 @@ MyMoneyBudget::AccountGroup MyMoneyBudget::AccountGroup::operator += (const MyMo
   QMap<QDate, MyMoneyBudget::PeriodGroup>::const_iterator it_p;
   QMap<QDate, MyMoneyBudget::PeriodGroup>::const_iterator it_pr;
   m_periods.clear();
-  it_p = periods.begin();
-  it_pr = rPeriods.begin();
+  it_p = periods.constBegin();
+  it_pr = rPeriods.constBegin();
   QDate date = (*it_p).startDate();
-  while(it_p != periods.end()) {
+  while(it_p != periods.constEnd()) {
     MyMoneyBudget::PeriodGroup period = *it_p;
-    if(it_pr != rPeriods.end()) {
+    if(it_pr != rPeriods.constEnd()) {
       period.setAmount(period.amount() + (*it_pr).amount());
       ++it_pr;
     }
