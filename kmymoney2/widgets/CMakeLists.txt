@@ -62,7 +62,6 @@ SET(_uncritial_common_sources
   stdtransactionmatched.cpp 
   transaction.cpp
   transactionform.cpp
-  kmymoneyreportconfigtabimpl.cpp
   )
 
 # sources that contain the KMM_DESIGNER flag
@@ -137,6 +136,7 @@ SET(libwidgets_a_SOURCES
   selectedtransaction.cpp
   transactioneditorcontainer.cpp
   transactionsortoptionimpl.cpp
+  kmymoneyreportconfigtabimpl.cpp
   )
 
 SET(libwidgets_a_UI

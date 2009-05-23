@@ -73,26 +73,29 @@ void MyMoneyQifProfile::Private::dissectDate(Q3ValueVector<QString>& parts, cons
 {
   QRegExp nonDelimChars("[ 0-9a-zA-Z]");
   int part = 0;                 // the current part we scan
-  int posFirstDelim = -1,       // the position of the first delimiter
-  posSecondDelim = -1;      // the position of the second delimiter
-  int pos;                      // the current scan position
-  int maxPartSize = txt.length() > 6 ? 4 : 2;
-                                // the maximum size of a part
+  unsigned int pos;             // the current scan position
+  unsigned int maxPartSize = txt.length() > 6 ? 4 : 2;
+                                 // the maximum size of a part
+  // some fu... up MS-Money versions write two delimiter in a row
+  // so we need to keep track of them. Example: D14/12/'08
+  bool lastWasDelim = false;
 
   // separate the parts of the date and keep the locations of the delimiters
   for(pos = 0; pos < txt.length() && part < 3; ++pos) {
     if(nonDelimChars.search(txt[pos]) == -1) {
-      posFirstDelim = posSecondDelim;
-      posSecondDelim = pos;
-      ++part;
-      maxPartSize = -1;         // make sure to pick the right one depending if next char is numeric or not
-    } else {
-      // check if the part is over and we did not see a delimiter
-      if(parts[part].length() == maxPartSize) {
+      if(!lastWasDelim) {
         ++part;
-        maxPartSize = -1;
+        maxPartSize = 0;         // make sure to pick the right one depending if next char is numeric or not
+        lastWasDelim = true;
       }
-      if(maxPartSize == -1) {
+    } else {
+      lastWasDelim = false;
+      // check if the part is over and we did not see a delimiter
+      if((maxPartSize != 0) && (parts[part].length() == maxPartSize)) {
+        ++part;
+        maxPartSize = 0;
+      }
+      if(maxPartSize == 0) {
         maxPartSize = txt[pos].isDigit() ? 2 : 3;
         if(part == 2)
           maxPartSize = 4;
@@ -100,11 +103,6 @@ void MyMoneyQifProfile::Private::dissectDate(Q3ValueVector<QString>& parts, cons
       if(part < 3)
         parts[part] += txt[pos];
     }
-  }
-
-  if(posFirstDelim == -1) {
-    posFirstDelim = posSecondDelim;
-    posSecondDelim = -1;
   }
 
   if(part == 3) { // invalid date
@@ -299,7 +297,7 @@ void MyMoneyQifProfile::setInputDateFormat(const QString& dateFormat)
 {
   int j = -1;
   if(dateFormat.length() > 0) {
-    for(int i = 0; i < dateFormat.length()-1; ++i) {
+    for(unsigned int i = 0; i < dateFormat.length()-1; ++i) {
       if(dateFormat[i] == '%') {
         d->m_partPos[dateFormat[++i]] = ++j;
       }
@@ -983,7 +981,7 @@ void MyMoneyQifProfile::scanNumeric(const QString& txt, QChar& decimal, QChar& t
 {
   QChar first, second;
   QRegExp numericChars("[0-9-()]");
-  for(int i = 0; i < txt.length(); ++i) {
+  for(unsigned int i = 0; i < txt.length(); ++i) {
     if(numericChars.search(txt[i]) == -1) {
       first = second;
       second = txt[i];
