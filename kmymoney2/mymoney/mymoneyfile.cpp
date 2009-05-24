@@ -926,7 +926,7 @@ void MyMoneyFile::removePayee(const MyMoneyPayee& payee)
   addNotification(payee.id(), false);
 }
 
-void MyMoneyFile::accountList(Q3ValueList<MyMoneyAccount>& list, const QStringList& idlist, const bool recursive) const
+void MyMoneyFile::accountList(QLinkedList<MyMoneyAccount>& list, const QStringList& idlist, const bool recursive) const
 {
   if(idlist.isEmpty()) {
     d->m_cache.account(list);
@@ -940,8 +940,8 @@ void MyMoneyFile::accountList(Q3ValueList<MyMoneyAccount>& list, const QStringLi
     }
 #endif
 
-    Q3ValueList<MyMoneyAccount>::Iterator it;
-    Q3ValueList<MyMoneyAccount>::Iterator next;
+    QLinkedList<MyMoneyAccount>::Iterator it;
+    QLinkedList<MyMoneyAccount>::Iterator next;
     for(it = list.begin(); it != list.end(); ) {
       if(isStandardAccount( (*it).id() )) {
         it = list.erase(it);
@@ -950,8 +950,8 @@ void MyMoneyFile::accountList(Q3ValueList<MyMoneyAccount>& list, const QStringLi
       }
     }
   } else {
-    Q3ValueList<MyMoneyAccount>::ConstIterator it;
-    Q3ValueList<MyMoneyAccount> list_a;
+    QLinkedList<MyMoneyAccount>::ConstIterator it;
+    QLinkedList<MyMoneyAccount> list_a;
     d->m_cache.account(list_a);
 
     for(it = list_a.begin(); it != list_a.end(); ++it) {

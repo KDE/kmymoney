@@ -46,7 +46,7 @@
 #include <khtmlview.h>
 #include <kconfig.h>
 #include <kstandardaction.h>
-#include <kmainwindow.h>
+#include <kxmlguiwindow.h>
 #include <kactioncollection.h>
 #include <kapplication.h>
 #include <kmessagebox.h>
@@ -65,8 +65,8 @@
 #include "mymoneyforecast.h"
 #include "kmymoney2.h"
 //#include "kreportchartview.h"
-//#include "pivottable.h"
-//#include "pivotgrid.h"
+#include "pivottable.h"
+#include "pivotgrid.h"
 //#include "reportaccount.h"
 #include "kmymoneyglobalsettings.h"
 
@@ -864,10 +864,8 @@ MyMoneyMoney KHomeView::investmentBalance(const MyMoneyAccount& acc)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
   MyMoneyMoney value;
-#warning "port to kde4"
-#if 0
   value = file->balance(acc.id());
-  Q3ValueList<QString>::const_iterator it_a;
+  QList<QString>::const_iterator it_a;
   for(it_a = acc.accountList().begin(); it_a != acc.accountList().end(); ++it_a) {
     MyMoneyAccount stock = file->account(*it_a);
     try {
@@ -886,7 +884,6 @@ MyMoneyMoney KHomeView::investmentBalance(const MyMoneyAccount& acc)
       delete e;
     }
   }
-#endif
   return value;
 }
 
@@ -1118,8 +1115,7 @@ void KHomeView::slotOpenURL(const KUrl &url, const KParts::OpenUrlArguments& /* 
 
   if ( protocol == "http" )
   {
-#warning "port to kde4"
-      //KApplication::kApplication()->invokeBrowser(url.prettyUrl());
+    KToolInvocation::invokeBrowser(url.prettyUrl());
   }
   else if ( protocol == "mailto" )
   {
@@ -1133,28 +1129,19 @@ void KHomeView::slotOpenURL(const KUrl &url, const KParts::OpenUrlArguments& /* 
     } else if(view == VIEW_SCHEDULE) {
       if(mode == "enter") {
         emit scheduleSelected(id);
-#warning "port to kde4"
-#if 0
-        KMainWindow* mw = dynamic_cast<KMainWindow*>(qApp->mainWidget());
+        KXmlGuiWindow* mw = dynamic_cast<KXmlGuiWindow*>(qApp->mainWidget());
         Q_CHECK_PTR(mw);
         QTimer::singleShot(0, mw->actionCollection()->action("schedule_enter"), SLOT(activate()));
-#endif
       } else if(mode == "edit") {
         emit scheduleSelected(id);
-#warning "port to kde4"
-#if 0
-        KMainWindow* mw = dynamic_cast<KMainWindow*>(qApp->mainWidget());
+        KXmlGuiWindow* mw = dynamic_cast<KXmlGuiWindow*>(qApp->mainWidget());
         Q_CHECK_PTR(mw);
         QTimer::singleShot(0, mw->actionCollection()->action("schedule_edit"), SLOT(activate()));
-#endif
       } else if(mode == "skip") {
-#warning "port to kde4"
-#if 0
         emit scheduleSelected(id);
-        KMainWindow* mw = dynamic_cast<KMainWindow*>(qApp->mainWidget());
+        KXmlGuiWindow* mw = dynamic_cast<KXmlGuiWindow*>(qApp->mainWidget());
         Q_CHECK_PTR(mw);
         QTimer::singleShot(0, mw->actionCollection()->action("schedule_skip"), SLOT(activate()));
-#endif
       } else if(mode == "full") {
         m_showAllSchedules = true;
         loadView();
@@ -1168,7 +1155,7 @@ void KHomeView::slotOpenURL(const KUrl &url, const KParts::OpenUrlArguments& /* 
       emit reportSelected(id);
 
     } else if(view == VIEW_WELCOME) {
-      KMainWindow* mw = dynamic_cast<KMainWindow*>(qApp->mainWidget());
+      KXmlGuiWindow* mw = dynamic_cast<KXmlGuiWindow*>(qApp->mainWidget());
       Q_CHECK_PTR(mw);
       if ( mode == "whatsnew" )
       {
@@ -1202,8 +1189,8 @@ void KHomeView::slotOpenURL(const KUrl &url, const KParts::OpenUrlArguments& /* 
 
 void KHomeView::showAssetsLiabilities(void)
 {
-#warning "port to kde4"
-#if 0
+  #warning #Port to KDE4
+  #if 0
   Q3ValueList<MyMoneyAccount> accounts;
   Q3ValueList<MyMoneyAccount>::Iterator it;
   QMap<QString, MyMoneyAccount> nameAssetsIdx;
@@ -1384,7 +1371,7 @@ void KHomeView::showAssetsLiabilities(void)
     m_part->write("</table>");
     m_part->write("</div></div>");
   }
-#endif
+  #endif
 }
 
 void KHomeView::showBudget(void)
