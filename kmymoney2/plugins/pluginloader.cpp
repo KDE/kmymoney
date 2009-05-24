@@ -22,7 +22,7 @@
 #include <qcheckbox.h>
 #include <qlayout.h>
 //Added by qt3to4:
-#include <Q3CString>
+#include <QByteArray>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -80,7 +80,7 @@ PluginLoader::PluginLoader(QObject* parent)
   d->m_pluginSelector->load();
 
   connect(d->m_pluginSelector, SIGNAL(changed(bool)), this, SLOT(changed()));
-  connect(d->m_pluginSelector, SIGNAL(configCommitted(const Q3CString &)), this, SLOT(changedConfigOfPlugin(const Q3CString &)));
+  connect(d->m_pluginSelector, SIGNAL(configCommitted(const QByteArray &)), this, SLOT(changedConfigOfPlugin(const QByteArray &)));
 }
 
 PluginLoader::~PluginLoader()
@@ -140,7 +140,7 @@ void PluginLoader::changed()
   loadPlugins();
 }
 
-void PluginLoader::changedConfigOfPlugin(const Q3CString & name)
+void PluginLoader::changedConfigOfPlugin(const QByteArray & name)
 {
   PluginsMap::iterator itPlugin = d->m_loadedPlugins.find(QString(name));
   if (itPlugin != d->m_loadedPlugins.end())

@@ -93,6 +93,8 @@ KHomeView::KHomeView(QWidget *parent, const char *name ) :
   m_showAllSchedules(false),
   m_needReload(true)
 {
+  #warning #port to KDE4
+  #if 0
   m_part = new KHTMLPart(this);
   addWidget(m_part->view());
 
@@ -103,6 +105,7 @@ KHomeView::KHomeView(QWidget *parent, const char *name ) :
           this, SLOT(slotOpenURL(const KUrl&, const KParts::URLArgs&)));
 
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadView()));
+  #endif
 }
 
 KHomeView::~KHomeView()

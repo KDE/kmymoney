@@ -220,7 +220,8 @@ KMyMoney2App::KMyMoney2App(QWidget * /*parent*/ , const char* name) :
   ::timetrace("create view");
   myMoneyView = new KMyMoneyView(frame, "KMyMoneyView");
   layout->addWidget(myMoneyView, 10);
-  connect(myMoneyView, SIGNAL(aboutToShowPage(QWidget*)), this, SLOT(slotResetSelections()));
+  #warning #port to KDE4
+  //connect(myMoneyView, SIGNAL(aboutToShowPage(QWidget*)), this, SLOT(slotResetSelections()));
 
   ///////////////////////////////////////////////////////////////////
   // call inits to invoke all other construction parts

@@ -26,7 +26,7 @@
 #include <qwidget.h>
 #include <q3scrollview.h>
 //Added by qt3to4:
-#include <Q3CString>
+#include <QByteArray>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -65,7 +65,7 @@ namespace KMyMoneyPlugin
 
   private slots:
     void changed();
-    void changedConfigOfPlugin( const Q3CString & );
+    void changedConfigOfPlugin( const QByteArray & );
 
   private:
     struct Private;
