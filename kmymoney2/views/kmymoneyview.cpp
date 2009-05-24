@@ -131,18 +131,17 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   m_fileOpen(false),
   m_fmode(0600)
 {
-    #warning "port to kde4"
-#if 0
   // the global variable kmymoney2 is not yet assigned. So we construct it here
   QObject* kmymoney2 = parent->parent();
   const int iconSize = (KMyMoneyGlobalSettings::iconSize()+1)*16;
   newStorage();
 
   // Page 0
-  m_homeViewFrame = addVBoxPage( i18n("Home"), i18n("Home"),
-    DesktopIcon("home", iconSize));
+  m_homeView = new KHomeView();
+  m_homeViewFrame = addPage( m_homeView, i18n("Home"));
+  m_homeViewFrame->setIcon(KIcon("home"));
+  m_homeViewFrame->setHeader(i18n("Home"));
 
-  m_homeView = new KHomeView(m_homeViewFrame);
   connect(m_homeView, SIGNAL(ledgerSelected(const QString&, const QString&)),
           this, SLOT(slotLedgerSelected(const QString&, const QString&)));
   connect(m_homeView, SIGNAL(scheduleSelected(const QString&)),
@@ -151,10 +150,13 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
     this, SLOT(slotShowReport(const QString&)));
 
   // Page 1
-  m_institutionsViewFrame = addVBoxPage( i18n("Institutions"), i18n("Institutions"),
-    DesktopIcon("institutions", iconSize));
-  addTitleBar(m_institutionsViewFrame, i18n("Institutions"));
-  m_institutionsView = new KInstitutionsView(m_institutionsViewFrame);
+  m_institutionsView = new KInstitutionsView();
+  m_institutionsViewFrame = addPage( m_institutionsView, i18n("Institutions"));
+  m_institutionsViewFrame->setIcon(KIcon("institutions"));
+  m_institutionsViewFrame->setHeader(i18n("Institutions"));
+
+  addTitleBar(m_institutionsView, i18n("Institutions"));
+
   connect(m_institutionsView, SIGNAL(selectObject(const MyMoneyObject&)), kmymoney2, SLOT(slotSelectAccount(const MyMoneyObject&)));
   connect(m_institutionsView, SIGNAL(selectObject(const MyMoneyObject&)), kmymoney2, SLOT(slotSelectInstitution(const MyMoneyObject&)));
   connect(m_institutionsView, SIGNAL(openContextMenu(const MyMoneyObject&)), kmymoney2, SLOT(slotShowAccountContextMenu(const MyMoneyObject&)));
@@ -165,10 +167,14 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   connect(this, SIGNAL(reconciliationStarts(const MyMoneyAccount&, const QDate&, const MyMoneyMoney&)), m_institutionsView, SLOT(slotReconcileAccount(const MyMoneyAccount&, const QDate&, const MyMoneyMoney&)));
 
   // Page 2
-  m_accountsViewFrame = addVBoxPage( i18n("Accounts"), i18n("Accounts"),
-    DesktopIcon("accounts", iconSize));
-  addTitleBar(m_accountsViewFrame, i18n("Accounts"));
-  m_accountsView = new KAccountsView(m_accountsViewFrame);
+  //m_accountsViewFrame = addVBoxPage( i18n("Accounts"), i18n("Accounts"), DesktopIcon("accounts", iconSize));
+  m_accountsView = new KAccountsView();
+  m_accountsViewFrame = addPage( m_accountsView, i18n("Accounts"));
+  m_accountsViewFrame->setIcon(KIcon("accounts"));
+  m_accountsViewFrame->setHeader(i18n("Accounts"));
+
+  addTitleBar(m_accountsView, i18n("Accounts"));
+
   connect(m_accountsView, SIGNAL(selectObject(const MyMoneyObject&)), kmymoney2, SLOT(slotSelectAccount(const MyMoneyObject&)));
   connect(m_accountsView, SIGNAL(selectObject(const MyMoneyObject&)), kmymoney2, SLOT(slotSelectInstitution(const MyMoneyObject&)));
   connect(m_accountsView, SIGNAL(selectObject(const MyMoneyObject&)), kmymoney2, SLOT(slotSelectInvestment(const MyMoneyObject&)));
@@ -179,10 +185,12 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   connect(this, SIGNAL(reconciliationStarts(const MyMoneyAccount&, const QDate&, const MyMoneyMoney&)), m_accountsView, SLOT(slotReconcileAccount(const MyMoneyAccount&, const QDate&, const MyMoneyMoney&)));
 
   // Page 3
-  m_scheduleViewFrame = addVBoxPage( i18n("Scheduled\ntransactions"), i18n("Bills & Reminders"),
-    DesktopIcon("schedule", iconSize));
-  addTitleBar(m_scheduleViewFrame, i18n("Scheduled transactions"));
-  m_scheduledView = new KScheduledView(m_scheduleViewFrame);
+  //m_scheduleViewFrame = addVBoxPage( i18n("Scheduled\ntransactions"), i18n("Bills & Reminders"),DesktopIcon("schedule", iconSize));
+  m_scheduledView = new KScheduledView();
+  m_scheduleViewFrame = addPage( m_accountsView, i18n("Scheduled\ntransactions"));
+  m_scheduleViewFrame->setIcon(KIcon("schedule"));
+  m_scheduleViewFrame->setHeader(i18n("Bills & Reminders"));
+  addTitleBar(m_scheduledView, i18n("Scheduled transactions"));
   connect(kmymoney2, SIGNAL(fileLoaded(const KUrl&)), m_scheduledView, SLOT(slotReloadView()));
   connect(m_scheduledView, SIGNAL(scheduleSelected(const MyMoneySchedule&)), kmymoney2, SLOT(slotSelectSchedule(const MyMoneySchedule&)));
   connect(m_scheduledView, SIGNAL(openContextMenu()), kmymoney2, SLOT(slotShowScheduleContextMenu()));
@@ -191,10 +199,12 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   connect(m_scheduledView, SIGNAL(editSchedule()), kmymoney2, SLOT(slotScheduleEdit()));
 
   // Page 4
-  m_categoriesViewFrame = addVBoxPage( i18n("Categories"), i18n("Categories"),
-    DesktopIcon("categories", iconSize));
-  addTitleBar(m_categoriesViewFrame, i18n("Categories"));
-  m_categoriesView = new KCategoriesView(m_categoriesViewFrame);
+  //m_categoriesViewFrame = addVBoxPage( i18n("Categories"), i18n("Categories"), DesktopIcon("categories", iconSize));
+  m_categoriesView = new KCategoriesView();
+  m_categoriesViewFrame = addPage( m_categoriesView, i18n("Categories"));
+  m_categoriesViewFrame->setIcon(KIcon("categories"));
+  m_categoriesViewFrame->setHeader(i18n("Categories"));
+  addTitleBar(m_categoriesView, i18n("Categories"));
   connect(m_categoriesView, SIGNAL(selectObject(const MyMoneyObject&)), kmymoney2, SLOT(slotSelectAccount(const MyMoneyObject&)));
   connect(m_categoriesView, SIGNAL(selectObject(const MyMoneyObject&)), kmymoney2, SLOT(slotSelectInstitution(const MyMoneyObject&)));
   connect(m_categoriesView, SIGNAL(openContextMenu(const MyMoneyObject&)), kmymoney2, SLOT(slotShowAccountContextMenu(const MyMoneyObject&)));
@@ -202,10 +212,12 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   connect(m_categoriesView, SIGNAL(reparent(const MyMoneyAccount&, const MyMoneyAccount&)), kmymoney2, SLOT(slotReparentAccount(const MyMoneyAccount&, const MyMoneyAccount&)));
 
   // Page 5
-  m_payeesViewFrame = addVBoxPage( i18n("Payees"), i18n("Payees"),
-    DesktopIcon("payee", iconSize));
-  addTitleBar(m_payeesViewFrame, i18n("Payees"));
-  m_payeesView = new KPayeesView(m_payeesViewFrame);
+  //m_payeesViewFrame = addVBoxPage( i18n("Payees"), i18n("Payees"), DesktopIcon("payee", iconSize));
+  m_payeesView = new KPayeesView();
+  m_payeesViewFrame = addPage( m_payeesView, i18n("Payees"));
+  m_payeesViewFrame->setIcon(KIcon("payee"));
+  m_payeesViewFrame->setHeader(i18n("Payees"));
+  addTitleBar(m_payeesView, i18n("Payees"));
   connect(kmymoney2, SIGNAL(payeeCreated(const QString&)), m_payeesView, SLOT(slotSelectPayeeAndTransaction(const QString&)));
   connect(kmymoney2, SIGNAL(payeeRename()), m_payeesView, SLOT(slotStartRename()));
   connect(m_payeesView, SIGNAL(openContextMenu(const MyMoneyObject&)), kmymoney2, SLOT(slotShowPayeeContextMenu()));
@@ -214,9 +226,11 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
           this, SLOT(slotLedgerSelected(const QString&, const QString&)));
 
   // Page 6
-  m_ledgerViewFrame = addVBoxPage( i18n("Ledgers"), i18n("Ledgers"),
-    DesktopIcon("ledger", iconSize));
-  m_ledgerView = new KGlobalLedgerView(m_ledgerViewFrame, "GlobalLedgerView");
+  //m_ledgerViewFrame = addVBoxPage( i18n("Ledgers"), i18n("Ledgers"), DesktopIcon("ledger", iconSize));
+  m_ledgerView = new KGlobalLedgerView();
+  m_ledgerViewFrame = addPage( m_ledgerView, i18n("Ledgers"));
+  m_ledgerViewFrame->setIcon(KIcon("ledger"));
+  m_ledgerViewFrame->setHeader(i18n("Ledgers"));
   connect(m_ledgerView, SIGNAL(accountSelected(const MyMoneyObject&)), kmymoney2, SLOT(slotSelectAccount(const MyMoneyObject&)));
   connect(m_ledgerView, SIGNAL(openContextMenu()), kmymoney2, SLOT(slotShowTransactionContextMenu()));
   connect(m_ledgerView, SIGNAL(transactionsSelected(const KMyMoneyRegister::SelectedTransactions&)), kmymoney2, SLOT(slotSelectTransactions(const KMyMoneyRegister::SelectedTransactions&)));
@@ -229,41 +243,50 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   connect(kmymoney2, SIGNAL(selectAllTransactions()), m_ledgerView, SLOT(slotSelectAllTransactions()));
 
   // Page 7
-  m_investmentViewFrame = addVBoxPage( i18n("Investments"), i18n("Investments"),
-    DesktopIcon("investments", iconSize));
-  addTitleBar(m_investmentViewFrame, i18n("Investments"));
-  m_investmentView = new KInvestmentView(m_investmentViewFrame);
+  //m_investmentViewFrame = addVBoxPage( i18n("Investments"), i18n("Investments"), DesktopIcon("investments", iconSize));
+  m_investmentView = new KInvestmentView();
+  m_investmentViewFrame = addPage( m_investmentView, i18n("Investments"));
+  m_investmentViewFrame->setIcon(KIcon("investments"));
+  m_investmentViewFrame->setHeader(i18n("Investments"));
+  addTitleBar(m_investmentView, i18n("Investments"));
+  
   connect(m_investmentView, SIGNAL(accountSelected(const QString&, const QString&)),
       this, SLOT(slotLedgerSelected(const QString&, const QString&)));
   connect(m_investmentView, SIGNAL(accountSelected(const MyMoneyObject&)), kmymoney2, SLOT(slotSelectAccount(const MyMoneyObject&)));
   connect(m_investmentView, SIGNAL(investmentRightMouseClick()), kmymoney2, SLOT(slotShowInvestmentContextMenu()));
 
   // Page 8
-  m_reportsViewFrame = addVBoxPage(i18n("Reports"), i18n("Reports"),
-    DesktopIcon("report", iconSize));
 #warning "port to kde4"
+//m_reportsViewFrame = addVBoxPage(i18n("Reports"), i18n("Reports"),
+  //  DesktopIcon("report", iconSize));
+
   //m_reportsView = new KReportsView(m_reportsViewFrame, "ReportsView");
 
   // Page 9
-  m_budgetViewFrame = addVBoxPage(i18n("Budgets"), i18n("Budgets"),
-    DesktopIcon("budget", iconSize));
-  addTitleBar(m_budgetViewFrame, i18n("Budgets"));
-  m_budgetView = new KBudgetView(m_budgetViewFrame);
+  //m_budgetViewFrame = addVBoxPage(i18n("Budgets"), i18n("Budgets"), DesktopIcon("budget", iconSize));
+  m_budgetView = new KBudgetView();
+  m_budgetViewFrame = addPage( m_budgetView, i18n("Budgets"));
+  m_budgetViewFrame->setIcon(KIcon("budget"));
+  m_budgetViewFrame->setHeader(i18n("Budgets"));
+  addTitleBar(m_budgetView, i18n("Budgets"));
   connect(kmymoney2, SIGNAL(fileLoaded(const KUrl&)), m_budgetView, SLOT(slotRefreshView()));
   connect(m_budgetView, SIGNAL(openContextMenu(const MyMoneyObject&)), kmymoney2, SLOT(slotShowBudgetContextMenu()));
   connect(m_budgetView, SIGNAL(selectObjects(const Q3ValueList<MyMoneyBudget>&)), kmymoney2, SLOT(slotSelectBudget(const Q3ValueList<MyMoneyBudget>&)));
   connect(kmymoney2, SIGNAL(budgetRename()), m_budgetView, SLOT(slotStartRename()));
 
   // Page 10
-  m_forecastViewFrame = addVBoxPage( i18n("Forecast"), i18n("Forecast"),
-                                     DesktopIcon("forcast", iconSize));
-  addTitleBar(m_forecastViewFrame, i18n("Forecast"));
-  m_forecastView = new KForecastView(m_forecastViewFrame);
-
+  //m_forecastViewFrame = addVBoxPage( i18n("Forecast"), i18n("Forecast"), DesktopIcon("forcast", iconSize));
+  m_forecastView = new KForecastView();
+  m_forecastViewFrame = addPage( m_forecastView, i18n("Forecast"));
+  m_forecastViewFrame->setIcon(KIcon("forcast"));
+  m_forecastViewFrame->setHeader(i18n("Forecast"));
+  addTitleBar(m_forecastView, i18n("Forecast"));
 
   // construct an empty file
   newFile();
 
+  #warning "port to kde4"
+  #if 0
   // get rid of the title text
   QWidget* widget = dynamic_cast<QWidget*>(child("KJanusWidgetTitleLabel", "QLabel"));
   if(widget)
@@ -273,6 +296,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   widget = dynamic_cast<QWidget*>(child(0, "KSeparator"));
   if(widget)
     widget->hide();
+  #endif
 
   // select the page first, before connecting the aboutToShow signal
   // because we don't want to override the information stored in the config file
@@ -280,7 +304,6 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   connect(this, SIGNAL(aboutToShowPage(QWidget*)), this, SLOT(slotRememberPage(QWidget*)));
 
   m_inConstructor = false;
-#endif
 }
 
 KMyMoneyView::~KMyMoneyView()
@@ -2257,7 +2280,7 @@ void KMyMoneyView::slotPrintView(void)
 #endif
 }
 
-KMyMoneyViewBase* KMyMoneyView::addPage(const QString& title, const QString& icon)
+KMyMoneyViewBase* KMyMoneyView::addBasePage(const QString& title, const QString& icon)
 {
 #warning "port to kde4"
 #if 0
@@ -2265,8 +2288,9 @@ KMyMoneyViewBase* KMyMoneyView::addPage(const QString& title, const QString& ico
   KVBox* frm = KJanusWidget::addVBoxPage(title, title, DesktopIcon(icon, iconSize));
   return new KMyMoneyViewBase(frm, title.toLatin1(), title);
 #endif
-  return 0;
+return 0;
 }
+
 
 /* ------------------------------------------------------------------------ */
 /*                 KMyMoneyViewBase                                         */

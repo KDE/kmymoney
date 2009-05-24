@@ -49,7 +49,7 @@ KMyMoneyPlugin::KMMViewInterface::KMMViewInterface(KMyMoney2App* app, KMyMoneyVi
 
 KMyMoneyViewBase* KMyMoneyPlugin::KMMViewInterface::addPage(const QString& item, const QString& icon)
 {
-  return m_view->addPage(item, icon);
+  return m_view->addBasePage(item, icon);
 }
 
 void KMyMoneyPlugin::KMMViewInterface::addWidget(KMyMoneyViewBase* view, QWidget* w)

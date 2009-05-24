@@ -26,7 +26,6 @@
 //Added by qt3to4:
 #include <Q3ValueList>
 #include <Q3VBoxLayout>
-class Q3VBox;
 class QFile;
 class Q3VBoxLayout;
 
@@ -128,17 +127,17 @@ private:
   //KReportsView* m_reportsView;
   KForecastView* m_forecastView;
 
-  Q3VBox* m_homeViewFrame;
-  Q3VBox* m_accountsViewFrame;
-  Q3VBox* m_institutionsViewFrame;
-  Q3VBox* m_categoriesViewFrame;
-  Q3VBox* m_payeesViewFrame;
-  Q3VBox* m_budgetViewFrame;
-  Q3VBox* m_scheduleViewFrame;
-  Q3VBox* m_ledgerViewFrame;
-  Q3VBox* m_investmentViewFrame;
-  Q3VBox* m_reportsViewFrame;
-  Q3VBox* m_forecastViewFrame;
+  KPageWidgetItem* m_homeViewFrame;
+  KPageWidgetItem* m_accountsViewFrame;
+  KPageWidgetItem* m_institutionsViewFrame;
+  KPageWidgetItem* m_categoriesViewFrame;
+  KPageWidgetItem* m_payeesViewFrame;
+  KPageWidgetItem* m_budgetViewFrame;
+  KPageWidgetItem* m_scheduleViewFrame;
+  KPageWidgetItem* m_ledgerViewFrame;
+  KPageWidgetItem* m_investmentViewFrame;
+  KPageWidgetItem* m_reportsViewFrame;
+  KPageWidgetItem* m_forecastViewFrame;
 
   bool m_inConstructor;
 
@@ -341,7 +340,7 @@ public:
     */
   void enableViews(int state = -1);
 
-  KMyMoneyViewBase* addPage(const QString& title, const QString& icon = QString());
+  KMyMoneyViewBase* addBasePage(const QString& title, const QString& icon = QString());
 
   void addWidget(QWidget* w);
 
