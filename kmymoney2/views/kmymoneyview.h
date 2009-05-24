@@ -599,7 +599,7 @@ class KMyMoneyViewBase : public QWidget
 {
   Q_OBJECT
 public:
-  KMyMoneyViewBase(QWidget* parent, const char *name, const QString& title);
+  KMyMoneyViewBase(QWidget* parent, const QString& name, const QString& title);
   virtual ~KMyMoneyViewBase();
 
   void setTitle(const QString& title);

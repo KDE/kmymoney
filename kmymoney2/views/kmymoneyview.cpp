@@ -371,42 +371,32 @@ void KMyMoneyView::showTitleBar(bool show)
 
 bool KMyMoneyView::canPrint(void)
 {
-    #warning "port to kde4"
-#if 0
+
   bool rc = (
-              activePageIndex() == pageIndex(m_reportsViewFrame) ||
-              activePageIndex() == pageIndex(m_homeViewFrame)
+              m_reportsViewFrame == currentPage()
+              || m_homeViewFrame == currentPage()
             );
   return rc;
-#endif
-  return false;
 }
 
 bool KMyMoneyView::canCreateTransactions(const KMyMoneyRegister::SelectedTransactions& /* list */, QString& tooltip) const
 {
   // we can only create transactions in the ledger view so
   // we check that this is the active page
-#warning "port to kde4"
-#if 0
-  bool rc = (activePageIndex() == pageIndex(m_ledgerViewFrame));
+  bool rc = (m_ledgerViewFrame == currentPage());
   if(rc)
     rc = m_ledgerView->canCreateTransactions(tooltip);
   else
     tooltip = i18n("Creating transactions can only be performed in the ledger view");
   return rc;
-#endif
-
-  return false;
 }
 
 bool KMyMoneyView::canModifyTransactions(const KMyMoneyRegister::SelectedTransactions& list, QString& tooltip) const
 {
-#warning "port to kde4"
-#if 0
   // we can only modify transactions in the ledger view so
   // we check that this is the active page
 
-  bool rc = (activePageIndex() == pageIndex(m_ledgerViewFrame));
+  bool rc = (m_ledgerViewFrame == currentPage());
 
   if(rc) {
     rc = m_ledgerView->canModifyTransactions(list, tooltip);
@@ -414,18 +404,13 @@ bool KMyMoneyView::canModifyTransactions(const KMyMoneyRegister::SelectedTransac
     tooltip = i18n("Modifying transactions can only be performed in the ledger view");
   }
   return rc;
-#endif
-
-  return false;
 }
 
 bool KMyMoneyView::canDuplicateTransactions(const KMyMoneyRegister::SelectedTransactions& list, QString& tooltip) const
 {
   // we can only duplicate transactions in the ledger view so
   // we check that this is the active page
-#warning "port to kde4"
-#if 0
-  bool rc = (activePageIndex() == pageIndex(m_ledgerViewFrame));
+  bool rc = (m_ledgerViewFrame == currentPage());
 
   if(rc) {
     rc = m_ledgerView->canDuplicateTransactions(list, tooltip);
@@ -433,9 +418,6 @@ bool KMyMoneyView::canDuplicateTransactions(const KMyMoneyRegister::SelectedTran
     tooltip = i18n("Duplicating transactions can only be performed in the ledger view");
   }
   return rc;
-#endif
-
-  return false;
 }
 
 bool KMyMoneyView::canEditTransactions(const KMyMoneyRegister::SelectedTransactions& list, QString& tooltip) const
@@ -474,12 +456,14 @@ TransactionEditor* KMyMoneyView::startEdit(const KMyMoneyRegister::SelectedTrans
 
 void KMyMoneyView::newStorage(storageTypeE t)
 {
-#warning "port to kde4"	
-#if 0	
   removeStorage();
   MyMoneyFile* file = MyMoneyFile::instance();
-  if (t == Memory) file->attachStorage(new MyMoneySeqAccessMgr);
-  else file->attachStorage(new MyMoneyDatabaseMgr);
+  if (t == Memory)
+    file->attachStorage(new MyMoneySeqAccessMgr);
+  #warning "port to kde4"
+#if 0
+  else 
+    file->attachStorage(new MyMoneyDatabaseMgr);
 #endif
 }
 
@@ -495,8 +479,6 @@ void KMyMoneyView::removeStorage(void)
 
 void KMyMoneyView::enableViews(int state)
 {
-#warning "port to kde4"
-#if 0	
   if(state == -1)
     state = m_fileOpen;
 
@@ -513,7 +495,7 @@ void KMyMoneyView::enableViews(int state)
   m_forecastViewFrame->setEnabled(state);
 
   emit viewStateChanged(state != 0);
-#endif
+
 }
 
 void KMyMoneyView::slotLedgerSelected(const QString& _accId, const QString& transaction)
@@ -541,10 +523,7 @@ void KMyMoneyView::slotLedgerSelected(const QString& _accId, const QString& tran
     case MyMoneyAccount::Expense:
     case MyMoneyAccount::Investment:
     case MyMoneyAccount::Equity:
-#warning "port to kde4"
-#if 0
-        showPage(pageIndex(m_ledgerViewFrame));
-#endif
+        setCurrentPage(m_ledgerViewFrame);
         m_ledgerView->slotSelectAccount(accId, transaction);
       break;
 
@@ -1687,8 +1666,6 @@ void KMyMoneyView::viewAccountList(const QString& /*selectAccount*/)
 void KMyMoneyView::slotRefreshViews()
 {
   // turn off sync between ledger and investment view
-#warning "port to kde4"
-#if 0
       	disconnect(m_investmentView, SIGNAL(accountSelected(const MyMoneyObject&)), m_ledgerView, SLOT(slotSelectAccount(const MyMoneyObject&)));
   disconnect(m_ledgerView, SIGNAL(accountSelected(const MyMoneyObject&)), m_investmentView, SLOT(slotSelectAccount(const MyMoneyObject&)));
 
@@ -1713,7 +1690,6 @@ void KMyMoneyView::slotRefreshViews()
   m_forecastView->slotLoadForecast();
 
   m_scheduledView->slotReloadView();
-#endif
 }
 
 void KMyMoneyView::slotShowTransactionDetail(bool detailed)
@@ -2281,13 +2257,11 @@ void KMyMoneyView::slotPrintView(void)
 
 KMyMoneyViewBase* KMyMoneyView::addBasePage(const QString& title, const QString& icon)
 {
-#warning "port to kde4"
-#if 0
+  KPageWidgetItem* frm = new KPageWidgetItem(this);
+  KMyMoneyViewBase* viewBase = new KMyMoneyViewBase(this, title, title);
   const int iconSize = (KMyMoneyGlobalSettings::iconSize()+1)*16;
-  KVBox* frm = KJanusWidget::addVBoxPage(title, title, DesktopIcon(icon, iconSize));
-  return new KMyMoneyViewBase(frm, title.toLatin1(), title);
-#endif
-return 0;
+  addPage(frm);
+  return viewBase;
 }
 
 
@@ -2316,10 +2290,11 @@ class KMyMoneyViewBase::Private {
     Q3VBoxLayout* m_viewLayout;
 };
 
-KMyMoneyViewBase::KMyMoneyViewBase(QWidget* parent, const char* name, const QString& title) :
-  QWidget(parent, name),
+KMyMoneyViewBase::KMyMoneyViewBase(QWidget* parent, const QString& name, const QString& title) :
+  QWidget(parent),
   d(new Private)
 {
+  setAccessibleName(name);
   d->m_viewLayout = new Q3VBoxLayout(this);
   d->m_viewLayout->setSpacing( 6 );
   d->m_viewLayout->setMargin( 0 );
