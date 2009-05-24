@@ -701,7 +701,7 @@ void KMyMoney2App::initActions(void)
   KAction *transaction_delete = actionCollection()->addAction("transaction_delete");
   transaction_delete->setText(i18nc("Delete transaction", "Delete"));
   transaction_delete->setIcon(KIcon("delete"));
-  connect(transaction_delete, SIGNAL(triggered()), this, SLOT(slotTransactionDelete()));
+  connect(transaction_delete, SIGNAL(triggered()), this, SLOT(slotTransactionsDelete()));
 
   //new KAction(i18nc("Duplicate transaction", "Duplicate"), "editcopy", 0, this, SLOT(slotTransactionDuplicate()), actionCollection(), "transaction_duplicate");
   KAction *transaction_duplicate = actionCollection()->addAction("transaction_duplicate");
@@ -801,7 +801,7 @@ void KMyMoney2App::initActions(void)
   //new KAction(i18n("Online price update..."), "", 0, this, SLOT(slotOnlinePriceUpdate()), actionCollection(), "investment_online_price_update");
   KAction *investment_online_price_update = actionCollection()->addAction("investment_online_price_update");
   investment_online_price_update->setText(i18n("Online price update..."));
-  connect(investment_online_price_update, SIGNAL(triggered()), this, SLOT(slotOnlinelPriceUpdate()));
+  connect(investment_online_price_update, SIGNAL(triggered()), this, SLOT(slotOnlinePriceUpdate()));
 
   //new KAction(i18n("Manual price update..."), "", 0, this, SLOT(slotManualPriceUpdate()), actionCollection(), "investment_manual_price_update");
   KAction *investment_manual_price_update = actionCollection()->addAction("investment_manual_price_update");
@@ -856,7 +856,7 @@ void KMyMoney2App::initActions(void)
   KAction *payee_rename = actionCollection()->addAction("payee_rename");
   payee_rename->setText(i18n("Rename payee"));
   payee_rename->setIcon(KIcon("delete"));
-  connect(payee_rename, SIGNAL(triggered()), this, SLOT(slotPayeeRename()));
+  connect(payee_rename, SIGNAL(triggered()), this, SIGNAL(payeeRename()));
 
   //new KAction(i18n("Delete payee"), "delete", 0, this, SLOT(slotPayeeDelete()), actionCollection(), "payee_delete");
   KAction *payee_delete = actionCollection()->addAction("payee_delete");
