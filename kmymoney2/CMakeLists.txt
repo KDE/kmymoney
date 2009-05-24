@@ -13,8 +13,6 @@ ADD_SUBDIRECTORY( pics )
 ADD_SUBDIRECTORY( html ) 
 ADD_SUBDIRECTORY( templates ) 
 
-INCLUDE_DIRECTORIES( ${Dialogs_BINARY_DIR} )
-
 SET( _HEADERS export.h kmymoneyutils.h kmymoneyglobalsettings.h )
 
 ########### common code (kmymoney_common) STATIC ###############

@@ -1,6 +1,3 @@
-INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}
- ${KMyMoney_BINARY_DIR}/kmymoney )
-
 ADD_SUBDIRECTORY( settings ) 
 
 ########### next target ###############

@@ -32,4 +32,4 @@ INSTALL(FILES ${plugins_HEADERS}
 	DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney  COMPONENT Devel)
 
 INSTALL(FILES kmymoneyplugin.desktop kmymoneyimporterplugin.desktop
-  DESTINATION share/servicetypes)
+  DESTINATION ${SERVICETYPES_INSTALL_DIR})

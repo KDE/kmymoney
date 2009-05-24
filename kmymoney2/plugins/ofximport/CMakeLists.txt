@@ -1,6 +1,3 @@
-INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}
-  ${CMAKE_CURRENT_SOURCE_DIR}/dialogs ${CMAKE_CURRENT_BINARY_DIR}/dialogs)
-
 ADD_SUBDIRECTORY( dialogs )
 
 ########### next target ###############
