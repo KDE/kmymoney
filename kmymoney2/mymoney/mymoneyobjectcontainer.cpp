@@ -62,7 +62,7 @@ void MyMoneyObjectContainer::clear(const QString& id)
 void MyMoneyObjectContainer::a(Q3ValueList<T>& list) \
 { \
   QMap<QString, const MyMoneyObject*>::const_iterator it; \
-  for(it = m_map.begin(); it != m_map.end(); ++it) { \
+  for(it = m_map.constBegin(); it != m_map.constEnd(); ++it) { \
     const T* node = dynamic_cast<const T*>(*it); \
     if(node) { \
       list.append(*node); \
@@ -74,7 +74,7 @@ void MyMoneyObjectContainer::a(Q3ValueList<T>& list) \
 void MyMoneyObjectContainer::preload##a(const Q3ValueList<T>& list) \
 { \
   Q3ValueList<T>::const_iterator it; \
-  for(it = list.begin(); it != list.end(); ++it) { \
+  for(it = list.constBegin(); it != list.constEnd(); ++it) { \
     delete m_map[(*it).id()]; \
     m_map[(*it).id()] = new T(*it); \
   } \
@@ -94,8 +94,8 @@ const T& MyMoneyObjectContainer::a(const QString& id) \
   if(id.isEmpty()) \
     return nullElement; \
   QMap<QString, MyMoneyObject const *>::const_iterator it; \
-  it = m_map.find(id); \
-  if(it == m_map.end()) { \
+  it = m_map.constFind(id); \
+  if(it == m_map.constEnd()) { \
     /* not found, need to load from engine */ \
     T x = m_storage->a(id); \
     m_map[id] = new T(x); \
@@ -107,7 +107,7 @@ const T& MyMoneyObjectContainer::a(const QString& id) \
 void MyMoneyObjectContainer::account(QLinkedList<MyMoneyAccount>& list)
 {
   QMap<QString, const MyMoneyObject*>::const_iterator it;
-  for(it = m_map.begin(); it != m_map.end(); ++it) {
+  for(it = m_map.constBegin(); it != m_map.constEnd(); ++it) {
     const MyMoneyAccount* node = dynamic_cast<const MyMoneyAccount*>(*it);
     if(node) {
       assignFraction(const_cast<MyMoneyAccount*>(node));
@@ -163,8 +163,8 @@ void MyMoneyObjectContainer::refresh(const QString& id)
     return;
 
   QMap<QString, MyMoneyObject const *>::const_iterator it;
-  it = m_map.find(id);
-  if(it != m_map.end()) {
+  it = m_map.constFind(id);
+  if(it != m_map.constEnd()) {
     const MyMoneyAccount* account = dynamic_cast<const MyMoneyAccount *>(*it);
     const MyMoneyPayee* payee = dynamic_cast<const MyMoneyPayee *>(*it);
     const MyMoneySecurity* security = dynamic_cast<const MyMoneySecurity *>(*it);

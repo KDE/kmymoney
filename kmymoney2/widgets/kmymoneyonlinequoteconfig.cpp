@@ -112,16 +112,16 @@ void kMyMoneyOnlineQuoteConfig::loadList(const bool updateResetList)
 void kMyMoneyOnlineQuoteConfig::resetConfig(void)
 {
   QStringList::ConstIterator it;
-  QStringList groups = WebPriceQuote::quoteSources();
+  const QStringList groups = WebPriceQuote::quoteSources();
 
   // delete all currently defined entries
-  for(it = groups.begin(); it != groups.end(); ++it) {
+  for(it = groups.constBegin(); it != groups.constEnd(); ++it) {
     WebPriceQuoteSource(*it).remove();
   }
 
   // and write back the one's from the reset list
   Q3ValueList<WebPriceQuoteSource>::ConstIterator itr;
-  for(itr = m_resetList.begin(); itr != m_resetList.end(); ++itr) {
+  for(itr = m_resetList.constBegin(); itr != m_resetList.constEnd(); ++itr) {
     (*itr).write();
   }
 

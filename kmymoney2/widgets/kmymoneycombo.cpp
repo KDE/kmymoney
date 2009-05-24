@@ -589,15 +589,15 @@ public:
 
   int itemId(const QString& s) const {
     QMap<QString, int>::const_iterator it;
-    it = m_strings.find(s);
-    if(it != m_strings.end())
+    it = m_strings.constFind(s);
+    if(it != m_strings.constEnd())
       return *it;
     return -1;
   }
 
   const QString& itemText(int id) {
     QMap<QString, int>::const_iterator it;
-    for(it = m_strings.begin(); it != m_strings.end(); ++it) {
+    for(it = m_strings.constBegin(); it != m_strings.constEnd(); ++it) {
       if(*it == id) {
         return it.key();
       }

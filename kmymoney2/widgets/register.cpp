@@ -862,10 +862,10 @@ bool Register::focusNextPrevChild(bool next)
 
 void Register::setSortOrder(const QString& order)
 {
-  QStringList orderList = QStringList::split(",", order);
+  const QStringList orderList = QStringList::split(",", order);
   QStringList::const_iterator it;
   m_sortOrder.clear();
-  for(it = orderList.begin(); it != orderList.end(); ++it) {
+  for(it = orderList.constBegin(); it != orderList.constEnd(); ++it) {
     m_sortOrder << static_cast<TransactionSortField>((*it).toInt());
   }
 }
@@ -1448,8 +1448,7 @@ void Register::repaintItems(RegisterItem* first, RegisterItem* last)
     // make sure that the previously triggered repaint has been done before we
     // trigger the next. Not having this used to cause some trouble when changing
     // the focus within a 2000 item ledger from the last to the first item.
-#warning "port to kde4"
-    //QApplication::eventLoop()->processEvents(QEventLoop::ExcludeUserInput, 10);
+    QCoreApplication::processEvents(QEventLoop::ExcludeUserInput, 10);
   }
   m_lastRepaintRect = r;
 #warning "port to kde4"
@@ -1907,8 +1906,8 @@ QWidget* Register::cellWidget(int row, int col) const
   QPair<int, int> idx = qMakePair(row, col);
   QMap<QPair<int, int>, QWidget*>::const_iterator it_w;
 
-  it_w = m_cellWidgets.find(idx);
-  if(it_w != m_cellWidgets.end())
+  it_w = m_cellWidgets.constFind(idx);
+  if(it_w != m_cellWidgets.constEnd())
     w = *it_w;
   return w;
 }
@@ -2362,7 +2361,7 @@ void Register::addGroupMarkers(void)
           }
           p = p->nextItem();
         }
-        for(it = list.begin(); it != list.end(); ++it) {
+        for(it = list.constBegin(); it != list.constEnd(); ++it) {
           name = it.key();
           if(name.isEmpty()) {
             name = i18nc("Unknown payee", "Unknown");
@@ -2381,7 +2380,7 @@ void Register::addGroupMarkers(void)
           }
           p = p->nextItem();
         }
-        for(it = list.begin(); it != list.end(); ++it) {
+        for(it = list.constBegin(); it != list.constEnd(); ++it) {
           name = it.key();
           if(name.isEmpty()) {
             name = i18nc("Unknown category", "Unknown");
@@ -2400,7 +2399,7 @@ void Register::addGroupMarkers(void)
           }
           p = p->nextItem();
         }
-        for(it = list.begin(); it != list.end(); ++it) {
+        for(it = list.constBegin(); it != list.constEnd(); ++it) {
           name = it.key();
           if(name.isEmpty()) {
             name = i18nc("Unknown security", "Unknown");

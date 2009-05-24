@@ -404,7 +404,7 @@ int AccountSet::load(kMyMoneyAccountSelector* selector)
 
     if(item != 0) {
       // scan all matching accounts found in the engine
-      for(it_l = list.begin(); it_l != list.end(); ++it_l) {
+      for(it_l = list.constBegin(); it_l != list.constEnd(); ++it_l) {
         const MyMoneyAccount& acc = m_file->account(*it_l);
         ++m_count;
         ++count;
@@ -471,7 +471,7 @@ int AccountSet::load(kMyMoneyAccountSelector* selector, const QString& baseName,
   ++m_count;
 
   Q3ValueList<QString>::ConstIterator it;
-  for(it = accountIdList.begin(); it != accountIdList.end(); ++it)   {
+  for(it = accountIdList.constBegin(); it != accountIdList.constEnd(); ++it)   {
     const MyMoneyAccount& acc = m_file->account(*it);
     if(acc.isClosed())
       continue;
@@ -498,7 +498,7 @@ int AccountSet::loadSubAccounts(kMyMoneyAccountSelector* selector, Q3ListViewIte
   QStringList::ConstIterator it_l;
   int count = 0;
 
-  for(it_l = list.begin(); it_l != list.end(); ++it_l) {
+  for(it_l = list.constBegin(); it_l != list.constEnd(); ++it_l) {
     const MyMoneyAccount& acc = m_file->account(*it_l);
     // don't include stock accounts if not in expert mode
     if(acc.isInvest() && !KMyMoneyGlobalSettings::expertMode())
@@ -538,7 +538,7 @@ bool AccountSet::includeAccount(const MyMoneyAccount& acc)
 
   if(accounts.size() > 0) {
     QStringList::ConstIterator it_acc;
-    for(it_acc = accounts.begin(); it_acc != accounts.end(); ++it_acc) {
+    for(it_acc = accounts.constBegin(); it_acc != accounts.constEnd(); ++it_acc) {
       MyMoneyAccount account = m_file->account(*it_acc);
       if( includeAccount(account) )
         return true;

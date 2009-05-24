@@ -465,7 +465,7 @@ void MyMoneyForecast::calculateHistoricDailyBalances()
 
   //Calculate account daily balances
   QMap<QString, QString>::ConstIterator it_n;
-  for(it_n = m_nameIdx.begin(); it_n != m_nameIdx.end(); ++it_n) {
+  for(it_n = m_nameIdx.constBegin(); it_n != m_nameIdx.constEnd(); ++it_n) {
     MyMoneyAccount acc = file->account(*it_n);
 
     //set the starting balance of the account
@@ -557,7 +557,7 @@ void MyMoneyForecast::doFutureScheduledForecast(void)
 
   //adjust value of investments to deep currency
   QMap<QString, QString>::ConstIterator it_n;
-  for ( it_n = m_nameIdx.begin(); it_n != m_nameIdx.end(); ++it_n ) {
+  for ( it_n = m_nameIdx.constBegin(); it_n != m_nameIdx.constEnd(); ++it_n ) {
     MyMoneyAccount acc = file->account ( *it_n );
 
     if ( acc.isInvest() ) {
@@ -774,7 +774,7 @@ void MyMoneyForecast::calculateScheduledDailyBalances (void)
 
   //Calculate account daily balances
   QMap<QString, QString>::ConstIterator it_n;
-  for(it_n = m_nameIdx.begin(); it_n != m_nameIdx.end(); ++it_n) {
+  for(it_n = m_nameIdx.constBegin(); it_n != m_nameIdx.constEnd(); ++it_n) {
     MyMoneyAccount acc = file->account(*it_n);
 
     //set the starting balance of the account
@@ -1066,7 +1066,7 @@ void MyMoneyForecast::createBudget ( MyMoneyBudget& budget, QDate historyStart, 
 
     //go through all the accounts and add them to budget
     QMap<QString, QString>::ConstIterator it_nc;
-    for ( it_nc = m_nameIdx.begin(); it_nc != m_nameIdx.end(); ++it_nc ) {
+    for ( it_nc = m_nameIdx.constBegin(); it_nc != m_nameIdx.constEnd(); ++it_nc ) {
       MyMoneyAccount acc = file->account ( *it_nc );
 
       MyMoneyBudget::AccountGroup budgetAcc;
@@ -1134,7 +1134,7 @@ void MyMoneyForecast::calculateHistoricMonthlyBalances()
 
   //Calculate account monthly balances
   QMap<QString, QString>::ConstIterator it_n;
-  for(it_n = m_nameIdx.begin(); it_n != m_nameIdx.end(); ++it_n) {
+  for(it_n = m_nameIdx.constBegin(); it_n != m_nameIdx.constEnd(); ++it_n) {
     MyMoneyAccount acc = file->account(*it_n);
 
     for( QDate f_date = forecastStartDate(); f_date <= forecastEndDate(); ) {
@@ -1156,7 +1156,7 @@ void MyMoneyForecast::calculateScheduledMonthlyBalances()
 
 //Calculate account monthly balances
   QMap<QString, QString>::ConstIterator it_n;
-  for(it_n = m_nameIdx.begin(); it_n != m_nameIdx.end(); ++it_n) {
+  for(it_n = m_nameIdx.constBegin(); it_n != m_nameIdx.constEnd(); ++it_n) {
     MyMoneyAccount acc = file->account(*it_n);
 
     for( QDate f_date = forecastStartDate(); f_date <= forecastEndDate(); f_date = f_date.addDays(1) ) {

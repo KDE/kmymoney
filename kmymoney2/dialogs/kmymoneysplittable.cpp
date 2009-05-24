@@ -823,10 +823,7 @@ void kMyMoneySplitTable::destroyEditWidgets(void)
   clearCellWidget(m_currentRow, 2);
   clearCellWidget(m_currentRow+1, 0);
   m_editMode = false;
-#warning "port to kde4"
-#if 0
-  QApplication::eventLoop()->processEvents(QEventLoop::ExcludeUserInput, 100);
-#endif
+  QCoreApplication::processEvents(QEventLoop::ExcludeUserInput, 100);
 }
 
 QWidget* kMyMoneySplitTable::createEditWidgets(void)
