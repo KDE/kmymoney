@@ -301,7 +301,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
 
   // select the page first, before connecting the aboutToShow signal
   // because we don't want to override the information stored in the config file
-  showPage(0);
+  setCurrentPage(m_homeViewFrame);
   connect(this, SIGNAL(aboutToShowPage(QWidget*)), this, SLOT(slotRememberPage(QWidget*)));
 
   m_inConstructor = false;
@@ -336,39 +336,38 @@ void KMyMoneyView::showTitleBar(bool show)
   l.~QList();
 }
 
-bool KMyMoneyView::showPage(int index)
-{
-#warning "port to kde4"
-#if 0
-  // reset all selected items before showing the selected view
-  // but not while we're in our own constructor
-  if(!m_inConstructor && index != activePageIndex()) {
-    kmymoney2->slotResetSelections();
-  }
-
-  // pretend we're in the constructor to avoid calling the
-  // above resets. For some reason which I don't know the details
-  // of, KJanusWidget::showPage() calls itself recursively. This
-  // screws up the action handling, as items could have been selected
-  // in the meantime. We prevent this by setting the m_inConstructor
-  // to true and reset it to the previos value when we leave this method.
-  bool prevConstructor = m_inConstructor;
-  m_inConstructor = true;
-
-  bool rc = KJanusWidget::showPage(index);
-
-  m_inConstructor = prevConstructor;
-
-  if(!m_inConstructor) {
-    // fixup some actions that are dependant on the view
-    // this does not work during construction
-    kmymoney2->slotUpdateActions();
-  }
-
-  return rc;
-#endif
-  return false;
-}
+// bool KMyMoneyView::showPage(int index)
+// {
+// 
+//   // reset all selected items before showing the selected view
+//   // but not while we're in our own constructor
+//   if(!m_inConstructor && index != activePageIndex()) {
+//     kmymoney2->slotResetSelections();
+//   }
+// 
+//   // pretend we're in the constructor to avoid calling the
+//   // above resets. For some reason which I don't know the details
+//   // of, KJanusWidget::showPage() calls itself recursively. This
+//   // screws up the action handling, as items could have been selected
+//   // in the meantime. We prevent this by setting the m_inConstructor
+//   // to true and reset it to the previos value when we leave this method.
+//   bool prevConstructor = m_inConstructor;
+//   m_inConstructor = true;
+// 
+//   bool rc = showPage(index);
+// 
+//   m_inConstructor = prevConstructor;
+// 
+//   if(!m_inConstructor) {
+//     // fixup some actions that are dependant on the view
+//     // this does not work during construction
+//     kmymoney2->slotUpdateActions();
+//   }
+// 
+//   return rc;
+// 
+//   return false;
+// }
 
 bool KMyMoneyView::canPrint(void)
 {

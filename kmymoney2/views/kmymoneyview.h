@@ -344,7 +344,7 @@ public:
 
   void addWidget(QWidget* w);
 
-  virtual bool showPage(int index);
+  //bool showPage(int index);
 
   /**
     * check if the current view allows to create a transaction
@@ -501,7 +501,7 @@ public slots:
   /**
     * This slot switches the view to present the home page
     */
-  void slotShowHomePage(void) { showPage(0); }
+  void slotShowHomePage(void) { setCurrentPage(m_homeViewFrame); }
 
 protected slots:
   /**
