@@ -938,12 +938,14 @@ void KMyMoney2App::initActions(void)
   connect(new_user_wizard, SIGNAL(triggered()), this, SLOT(slotNewFeature()));
 
   //new KToggleAction("Debug Traces", "", 0, this, SLOT(slotToggleTraces()), actionCollection(), "debug_traces");
-  KToggleAction *debug_traces = actionCollection()->addAction("debug_traces");
+  KToggleAction *debug_traces = new KToggleAction(this);
+  actionCollection()->addAction("debug_traces", debug_traces);
   debug_traces->setText(i18n("Debug Traces"));
   connect(debug_traces, SIGNAL(triggered()), this, SLOT(slotToggleTraces()));
 
   //new KToggleAction("Debug Timers", "", 0, this, SLOT(slotToggleTimers()), actionCollection(), "debug_timers");
-  KToggleAction *debug_timers = actionCollection()->addAction("debug_timers");
+  KToggleAction *debug_timers = new KToggleAction(this);
+  actionCollection()->addAction("debug_timers", debug_timers);
   debug_timers->setText(i18n("Debug Timers"));
   connect(debug_timers, SIGNAL(triggered()), this, SLOT(slotToggleTimers()));
 
