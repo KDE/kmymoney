@@ -131,6 +131,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   m_fileOpen(false),
   m_fmode(0600)
 {
+  qDebug("Entering KMyMoneyView");
   // the global variable kmymoney2 is not yet assigned. So we construct it here
   QObject* kmymoney2 = parent->parent();
   const int iconSize = (KMyMoneyGlobalSettings::iconSize()+1)*16;
@@ -321,19 +322,18 @@ void KMyMoneyView::addTitleBar(QWidget* parent, const QString& title)
 
 void KMyMoneyView::showTitleBar(bool show)
 {
-#warning "port to kde4"
-#if 0
   QObjectList l = queryList( 0, "titleLabel" );
-  QObjectListIterator it( *l ); // iterate over the labels
+  QObjectList::iterator it = l.begin(); // iterate over the labels
   QObject *obj;
 
-  while ( (obj = it.current()) != 0 ) {
-        // for each found object...
+  while ( (*it) != 0 ) {
+    // for each found object...
+    obj = (*it);
     ++it;
     ((QWidget*)obj)->setShown( show );
   }
-  delete l; // delete the list, not the objects
-#endif
+  //delete l; // delete the list, not the objects
+  l.~QList();
 }
 
 bool KMyMoneyView::showPage(int index)
