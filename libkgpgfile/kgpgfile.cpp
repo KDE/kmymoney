@@ -19,7 +19,7 @@
 #include <config-kmymoney.h>
 #endif
 
-#include "kdecompat.h"
+
 
 // ----------------------------------------------------------------------------
 // QT Includes

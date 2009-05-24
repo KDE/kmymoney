@@ -60,7 +60,7 @@
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-#include "kdecompat.h"
+
 #include <kdatetable.h> // Use the classes available for maximum re-use
 #include <kglobal.h>
 #include <kglobalsettings.h>

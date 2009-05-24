@@ -55,7 +55,7 @@
 #include <QDesktopWidget>
 // ----------------------------------------------------------------------------
 // KDE Includes
-#include "kdecompat.h"
+
 #include <kglobal.h>
 #include <kglobalsettings.h>
 #include <kcolorscheme.h>
@@ -388,11 +388,7 @@ void kMyMoneyScheduledDateTbl::contentsMouseMoveEvent(QMouseEvent* e)
       return;
     }
 
-  #if KDE_VERSION < 310
-    int firstWeekDay = KGlobal::locale()->weekStartsMonday() ? 1 : 0;
-  #else
     int firstWeekDay = KGlobal::locale()->weekStartDay();
-  #endif
 
     QDate drawDate(date);
     QString text;

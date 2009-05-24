@@ -28,7 +28,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include "kdecompat.h"
+
 
 #include <kstandarddirs.h>
 

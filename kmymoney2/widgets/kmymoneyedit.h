@@ -17,7 +17,7 @@
 #ifndef KMYMONEYEDIT_H
 #define KMYMONEYEDIT_H
 
-#include "kdecompat.h"
+
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -44,10 +44,6 @@ class KPushButton;
 #include <mymoneysecurity.h>
 class MyMoneyMoney;
 class kMyMoneyCalculator;
-
-#if KDE_VERSION <= KDE_MAKE_VERSION(3,1,0)
-  #define KDoubleValidator QDoubleValidator
-#endif
 
 /**
   * This class is derived from KDoubleValidator and uses

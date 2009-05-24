@@ -23,7 +23,7 @@
 
 #include <config-kmymoney.h>
 
-#include "kdecompat.h"
+
 
 // ----------------------------------------------------------------------------
 // QT Includes

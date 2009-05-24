@@ -44,7 +44,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include "kdecompat.h"
+
 
 #include <kfiledialog.h>
 #include <kglobal.h>

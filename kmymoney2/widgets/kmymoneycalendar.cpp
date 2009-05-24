@@ -63,7 +63,7 @@
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-#include "kdecompat.h"
+
 #include <kglobal.h>
 #include <kapplication.h>
 #include <klocale.h>

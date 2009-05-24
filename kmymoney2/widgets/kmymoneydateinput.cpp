@@ -38,7 +38,7 @@
 #include <Q3VBox>
 // ----------------------------------------------------------------------------
 // KDE Includes
-#include "kdecompat.h"
+
 #include <kglobal.h>
 #include <klocale.h>
 #include <kiconloader.h>

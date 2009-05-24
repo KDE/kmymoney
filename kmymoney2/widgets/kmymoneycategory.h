@@ -30,7 +30,7 @@ class Q3Frame;
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include "kdecompat.h"
+
 #include <kcombobox.h>
 class KPushButton;
 

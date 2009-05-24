@@ -35,7 +35,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include "kdecompat.h"
+
 #include <klocale.h>
 #include <kcombobox.h>
 #include <kpushbutton.h>

@@ -27,7 +27,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include "kdecompat.h"
+
 #include <klocale.h>
 #include <kglobal.h>
 #include <kconfig.h>

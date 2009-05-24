@@ -58,7 +58,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include "kdecompat.h"
+
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -181,15 +181,7 @@ protected:
     QDate m_drawDateOrig;
 
 private:
-#if QT_VERSION <= 0x030005
-    int weekNumber(const QDate&, int *yr) const;
-#endif
-
-#if KDE_IS_VERSION(3,2,0)
   #define WEEK_DAY_NAME(a,b)  KGlobal::locale()->calendar()->weekDayName(a,b)
-#else
-  #define WEEK_DAY_NAME(a,b)  KGlobal::locale()->weekDayName(a,b)
-#endif
 };
 
 #endif

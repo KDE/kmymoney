@@ -34,7 +34,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kdecompat.h"
+
 #include "mymoneystatement.h"
 
 const QStringList kAccountTypeTxt = QStringList::split(",","none,checkings,savings,investment,creditcard,invalid");

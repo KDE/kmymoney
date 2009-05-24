@@ -19,7 +19,7 @@
 
 #include <config-kmymoney.h>
 
-#include "kdecompat.h"
+
 
 // ----------------------------------------------------------------------------
 // Std C++ / STL Includes
@@ -160,7 +160,7 @@
 #include <ktoolinvocation.h>
 
 #include "kmymoneyutils.h"
-#include "kdecompat.h"
+
 
 #define RECOVER_KEY_ID        "59B0F826D2B08440"
 #define ID_STATUS_MSG 1

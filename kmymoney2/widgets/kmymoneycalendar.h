@@ -58,7 +58,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include "kdecompat.h"
+
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -255,11 +255,7 @@ private:
   // calculate ISO 8601 week number
   int weekOfYear(QDate);
 
-#if KDE_IS_VERSION(3,2,0)
-  #define MONTH_NAME(a,b,c)  KGlobal::locale()->calendar()->monthName(a,b,c)
-#else
-  #define MONTH_NAME(a,b,c)  KGlobal::locale()->monthName(a,c)
-#endif
+#define MONTH_NAME(a,b,c)  KGlobal::locale()->calendar()->monthName(a,b,c)
 };
 
 #endif
