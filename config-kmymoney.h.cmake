@@ -159,3 +159,7 @@
 
 /* type to use in place of socklen_t if not defined (deprecated, use kde_socklen_t) */
 #cmakedefine ksize_t socklen_t
+
+
+#cmakedefine KMM_DEBUG 1
+
