@@ -305,7 +305,7 @@ QString KMyMoneyUtils::findResource(const char* type, const QString& filename)
   }
 
   if(rc.isEmpty()) {
-    qWarning("No resource found for (%s,%s)", type, filename.toLatin1());
+    qWarning("No resource found for (%s,%s)", type, qPrintable(filename));
   }
   return rc;
 }

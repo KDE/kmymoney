@@ -348,11 +348,11 @@ KPayeesView::KPayeesView(QWidget *parent) :
   //if(sizes.size() == 2)
     //m_splitter->setSizes(sizes);
 
-  m_transactionView->setSorting(-1);
-  m_transactionView->setColumnWidthMode(2, Q3ListView::Manual);
-  m_transactionView->setColumnAlignment(3, Qt::AlignRight);
+  //m_transactionView->setSorting(-1);
+  //m_transactionView->setColumnWidthMode(2, Q3ListView::Manual);
+ // m_transactionView->setColumnAlignment(3, Qt::AlignRight);
   // never show horizontal scroll bars
-  m_transactionView->setHScrollBarMode(Q3ScrollView::AlwaysOff);
+  //m_transactionView->setHScrollBarMode(Q3ScrollView::AlwaysOff);
 
   m_payeesList->addColumn(i18n("Name"));
 
@@ -366,11 +366,11 @@ KPayeesView::KPayeesView(QWidget *parent) :
   comboDefaultAccount->setEnabled(false);
 
   KIconLoader* il = KIconLoader::global();
-  KGuiItem updateButtenItem( i18n("Update"),
+  KGuiItem updateButtonItem( i18n("Update"),
                     KIcon(il->loadIcon("button_ok", KIconLoader::Small, KIconLoader::SizeSmall)),
                     i18n("Accepts the entered data and stores it"),
                     i18n("Use this to accept the modified data."));
-  m_updateButton->setGuiItem(updateButtenItem);
+  m_updateButton->setGuiItem(updateButtonItem);
 
   connect(m_payeesList, SIGNAL(selectionChanged()), this, SLOT(slotSelectPayee()));
   connect(m_payeesList, SIGNAL(itemRenamed(Q3ListViewItem*,int,const QString&)), this, SLOT(slotRenamePayee(Q3ListViewItem*,int,const QString&)));

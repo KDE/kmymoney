@@ -93,7 +93,7 @@ public slots:
     */
   void show(void);
 
-  void slotOpenURL(const KUrl &url, const KParts::OpenUrlArguments& args);
+  void slotOpenUrl(const KUrl &url, const KParts::OpenUrlArguments &args,const KParts::BrowserArguments &browArgs );
   void slotLoadView(void);
 
   /**

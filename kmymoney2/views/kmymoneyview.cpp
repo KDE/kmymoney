@@ -131,7 +131,6 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   m_fileOpen(false),
   m_fmode(0600)
 {
-  qDebug("Entering KMyMoneyView");
   // the global variable kmymoney2 is not yet assigned. So we construct it here
   QObject* kmymoney2 = parent->parent();
   const int iconSize = (KMyMoneyGlobalSettings::iconSize()+1)*16;
@@ -198,7 +197,6 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   connect(m_scheduledView, SIGNAL(enterSchedule()), kmymoney2, SLOT(slotScheduleEnter()));
   connect(m_scheduledView, SIGNAL(skipSchedule()), kmymoney2, SLOT(slotScheduleSkip()));
   connect(m_scheduledView, SIGNAL(editSchedule()), kmymoney2, SLOT(slotScheduleEdit()));
-  qDebug("Loaded Schedules View");
 
   // Page 4
   //m_categoriesViewFrame = addVBoxPage( i18n("Categories"), i18n("Categories"), DesktopIcon("categories", iconSize));
@@ -212,7 +210,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   connect(m_categoriesView, SIGNAL(openContextMenu(const MyMoneyObject&)), kmymoney2, SLOT(slotShowAccountContextMenu(const MyMoneyObject&)));
   connect(m_categoriesView, SIGNAL(openObject(const MyMoneyObject&)), kmymoney2, SLOT(slotAccountOpen(const MyMoneyObject&)));
   connect(m_categoriesView, SIGNAL(reparent(const MyMoneyAccount&, const MyMoneyAccount&)), kmymoney2, SLOT(slotReparentAccount(const MyMoneyAccount&, const MyMoneyAccount&)));
-  qDebug("Loaded Categories View");
+
 
 #warning #Port to KDE4
 #if 0
@@ -229,7 +227,6 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   connect(m_payeesView, SIGNAL(selectObjects(const Q3ValueList<MyMoneyPayee>&)), kmymoney2, SLOT(slotSelectPayees(const Q3ValueList<MyMoneyPayee>&)));
   connect(m_payeesView, SIGNAL(transactionSelected(const QString&, const QString&)),
           this, SLOT(slotLedgerSelected(const QString&, const QString&)));
-  qDebug("Loaded Payees View");
 
 
   // Page 6
@@ -288,7 +285,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   m_forecastViewFrame->setIcon(KIcon("forcast"));
   m_forecastViewFrame->setHeader(i18n("Forecast"));
   addTitleBar(m_forecastView, i18n("Forecast"));
-  qDebug("Finished loading Views");
+
 
   // construct an empty file
   newFile();
@@ -308,6 +305,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
 
   // select the page first, before connecting the aboutToShow signal
   // because we don't want to override the information stored in the config file
+
   setCurrentPage(m_homeViewFrame);
   #warning "port to kde4"
   //connect(this, SIGNAL(aboutToShowPage(QWidget*)), this, SLOT(slotRememberPage(QWidget*)));
@@ -338,7 +336,8 @@ void KMyMoneyView::showTitleBar(bool show)
     // for each found object...
     obj = (*it);
     ++it;
-    ((QWidget*)obj)->setShown( show );
+    #warning #port to KDE4
+    //((QWidget*)obj)->setShown( show );
   }
   //delete l; // delete the list, not the objects
   l.~QList();
@@ -596,6 +595,7 @@ void KMyMoneyView::closeFile(void)
   if (isDatabase())
     MyMoneyFile::instance()->storage()->close(); // to log off a database user
   newStorage();
+
   slotShowHomePage();
 
   emit kmmFilePlugin (postClose);
@@ -1677,22 +1677,26 @@ void KMyMoneyView::slotRefreshViews()
       	disconnect(m_investmentView, SIGNAL(accountSelected(const MyMoneyObject&)), m_ledgerView, SLOT(slotSelectAccount(const MyMoneyObject&)));
   disconnect(m_ledgerView, SIGNAL(accountSelected(const MyMoneyObject&)), m_investmentView, SLOT(slotSelectAccount(const MyMoneyObject&)));
 
+  #warning "port to kde4"
+  #if 0
   // TODO turn sync between ledger and investment view if selected by user
   if(KMyMoneyGlobalSettings::syncLedgerInvestment()) {
     connect(m_investmentView, SIGNAL(accountSelected(const MyMoneyObject&)), m_ledgerView, SLOT(slotSelectAccount(const MyMoneyObject&)));
     connect(m_ledgerView, SIGNAL(accountSelected(const MyMoneyObject&)), m_investmentView, SLOT(slotSelectAccount(const MyMoneyObject&)));
   }
+  #endif
 
   showTitleBar(KMyMoneyGlobalSettings::showTitleBar());
 
   m_accountsView->slotLoadAccounts();
   m_institutionsView->slotLoadAccounts();
   m_categoriesView->slotLoadAccounts();
-  m_payeesView->slotLoadPayees();
-  m_ledgerView->slotLoadView();
-  m_budgetView->slotRefreshView();
+  #warning "port to kde4"
+  //m_payeesView->slotLoadPayees();
+  //m_ledgerView->slotLoadView();
+  //m_budgetView->slotRefreshView();
   m_homeView->slotLoadView();
-  m_investmentView->slotLoadView();
+  //m_investmentView->slotLoadView();
 #warning "port to kde4"
   //m_reportsView->slotLoadView();
   m_forecastView->slotLoadForecast();

@@ -94,15 +94,16 @@ KHomeView::KHomeView(QWidget *parent, const char *name ) :
   m_needReload(true)
 {
   #warning #port to KDE4
-  #if 0
+  #if 1
   m_part = new KHTMLPart(this);
   addWidget(m_part->view());
 
   m_filename = KMyMoneyUtils::findResource("appdata", QString("html/home%1.html"));
 
 //   m_part->openURL(m_filename);
-  connect(m_part->browserExtension(), SIGNAL(openURLRequest(const KUrl&, const KParts::URLArgs&)),
-          this, SLOT(slotOpenURL(const KUrl&, const KParts::URLArgs&)));
+  connect(m_part->browserExtension(), SIGNAL(openUrlRequest(const KUrl &,
+          const KParts::OpenUrlArguments &,const KParts::BrowserArguments & )),
+          this, SLOT(slotOpenUrl(const KUrl&, const KParts::OpenUrlArguments &,const KParts::BrowserArguments & )));
 
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadView()));
   #endif
@@ -1109,7 +1110,7 @@ const QString KHomeView::linkend(void) const
   return "</a>";
 }
 
-void KHomeView::slotOpenURL(const KUrl &url, const KParts::OpenUrlArguments& /* args */)
+void KHomeView::slotOpenUrl(const KUrl &url, const KParts::OpenUrlArguments &args,const KParts::BrowserArguments &browArgs )
 {
   QString protocol = url.protocol();
   QString view = url.fileName(false);

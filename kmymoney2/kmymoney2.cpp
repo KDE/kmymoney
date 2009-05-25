@@ -5498,12 +5498,13 @@ void KMyMoney2App::updateCaption(bool skipActions)
   if(caption.length() > 0)
     caption += " - ";
   caption += "KMyMoney";
-  setPlainCaption(caption);
+  #warning #Port to KDE4
+  //setPlainCaption(caption);
 
-  if(!skipActions) {
-    myMoneyView->enableViews();
-    slotUpdateActions();
-  }
+  //if(!skipActions) {
+  //  myMoneyView->enableViews();
+  //  slotUpdateActions();
+  //}
 }
 
 void KMyMoney2App::slotUpdateActions(void)
