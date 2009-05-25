@@ -340,7 +340,7 @@ void KMyMoneyView::showTitleBar(bool show)
     //((QWidget*)obj)->setShown( show );
   }
   //delete l; // delete the list, not the objects
-  l.~QList();
+  //l.~QList();
 }
 
 // bool KMyMoneyView::showPage(int index)
