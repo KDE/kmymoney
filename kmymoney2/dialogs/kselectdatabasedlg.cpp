@@ -141,7 +141,10 @@ KSelectDatabaseDlg::KSelectDatabaseDlg(KUrl openURL, QWidget *parent)
  }
 
 KSelectDatabaseDlg::~KSelectDatabaseDlg() {
+#warning "reactivate it when code reactivate"
+#if 0
   delete m_requiredFields;
+#endif
 }
 
 void KSelectDatabaseDlg::setMode (int openMode) {
