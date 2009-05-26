@@ -22,7 +22,8 @@
 #include <qapplication.h>
 #include <qdesktopwidget.h>
 #include <qwidget.h>
-#include <q3vbox.h>
+#include <kvbox.h>
+#include <khbox.h>
 //Added by qt3to4:
 #include <Q3Frame>
 #include <QPixmap>
@@ -163,7 +164,7 @@ QValidator::State kMyMoneyMoneyValidator::validate( QString & input, int & _p ) 
 }
 
 kMyMoneyEdit::kMyMoneyEdit(QWidget *parent, const char *name, const int prec)
- : Q3HBox(parent, name)
+ : KHBox(parent)
 {
   m_prec = prec;
   if(prec < -1 || prec > 20)
@@ -172,7 +173,7 @@ kMyMoneyEdit::kMyMoneyEdit(QWidget *parent, const char *name, const int prec)
 }
 
 kMyMoneyEdit::kMyMoneyEdit(const MyMoneySecurity& sec, QWidget *parent, const char *name)
- : Q3HBox(parent, name)
+ : KHBox(parent)
 {
   m_prec = MyMoneyMoney::denomToPrec(sec.smallestAccountFraction());
   init();
@@ -221,7 +222,7 @@ void kMyMoneyEdit::init(void)
   m_edit->setValidator(validator);
   m_edit->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
-  m_calculatorFrame = new Q3VBox(this, 0, Qt::WType_Popup);
+  m_calculatorFrame = new KVBox(this);
 
   m_calculatorFrame->setFrameStyle(Q3Frame::PopupPanel | Q3Frame::Raised);
   m_calculatorFrame->setLineWidth(3);

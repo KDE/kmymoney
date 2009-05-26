@@ -35,7 +35,7 @@
 #include <Q3Frame>
 #include <QKeyEvent>
 #include <QEvent>
-#include <Q3VBox>
+#include <KVBox>
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -75,7 +75,7 @@ bool KMyMoneyDateEdit::event(QEvent* e)
 }
 
 kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, const char *name, Qt::AlignmentFlag flags)
- : Q3HBox(parent,name)
+ : KHBox(parent)
 {
   m_qtalignment = flags;
   m_date = QDate::currentDate();
@@ -90,7 +90,7 @@ kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, const char *name, Qt::Alig
   m_datePopup->setTimeout(DATE_POPUP_TIMEOUT);
   m_datePopup->setView(new QLabel(KGlobal::locale()->formatDate(m_date), m_datePopup, "datePopupLabel"));
 
-  m_dateFrame = new Q3VBox(this, 0, Qt::WType_Popup);
+  m_dateFrame = new KVBox(this);
   m_dateFrame->setFrameStyle(Q3Frame::PopupPanel | Q3Frame::Raised);
   m_dateFrame->setLineWidth(3);
   m_dateFrame->hide();
@@ -153,7 +153,7 @@ kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, const char *name, Qt::Alig
 void kMyMoneyDateInput::show(void)
 {
   // don't forget the standard behaviour  ;-)
-  Q3HBox::show();
+  KHBox::show();
 
   // If the widget is shown, the size must be fixed a little later
   // to be appropriate. I saw this in some other places and the only

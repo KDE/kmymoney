@@ -24,7 +24,8 @@
 #include <qlineedit.h>
 #include <qdatetime.h>
 #include <q3datetimeedit.h>
-#include <q3vbox.h>
+#include <khbox.h>
+#include <kvbox.h>
 //Added by qt3to4:
 #include <QResizeEvent>
 #include <QKeyEvent>
@@ -64,7 +65,7 @@ protected:
   * which is based on an edit field with spin boxes and adds a QPushButton
   * to open a KDatePicker.
   */
-class kMyMoneyDateInput : public Q3HBox
+class kMyMoneyDateInput : public KHBox
 {
   Q_OBJECT
 
@@ -116,7 +117,7 @@ private:
   QDate m_date;  // The date !
   QDate m_prevDate;
   Qt::AlignmentFlag m_qtalignment;
-  Q3VBox *m_dateFrame;
+  KVBox *m_dateFrame;
   KPushButton *m_dateButton;
   KPassivePopup *m_datePopup;
   int m_focusDatePart;

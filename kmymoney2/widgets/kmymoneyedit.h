@@ -27,8 +27,9 @@
 //Added by qt3to4:
 #include <QEvent>
 #include <QKeyEvent>
-
-class Q3VBox;
+#include <KHBox>
+class KVBox;
+class KHBox;
 class QWidget;
 
 // ----------------------------------------------------------------------------
@@ -87,7 +88,7 @@ public:
   *
   * @author Michael Edwardes, Thomas Baumgart
   */
-class kMyMoneyEdit : public Q3HBox
+class kMyMoneyEdit : public KHBox
 {
   Q_OBJECT
   Q_PROPERTY(bool calculatorButtonVisibility READ isCalculatorButtonVisible WRITE setCalculatorButtonVisible)
@@ -99,7 +100,7 @@ private:
   QString previousText; // keep track of what has been typed
   QString m_text;       // keep track of what was the original value
   kMyMoneyCalculator* m_calculator;
-  Q3VBox*              m_calculatorFrame;
+  KVBox*              m_calculatorFrame;
   kMyMoneyLineEdit*   m_edit;
   KPushButton*        m_calcButton;
   KPushButton*        m_resetButton;

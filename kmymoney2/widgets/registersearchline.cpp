@@ -252,7 +252,7 @@ class RegisterSearchLineWidget::RegisterSearchLineWidgetPrivate
 
 
 RegisterSearchLineWidget::RegisterSearchLineWidget(Register* reg, QWidget* parent, const char* name) :
-  Q3HBox(parent, name),
+  KHBox(parent),
   d(new RegisterSearchLineWidgetPrivate)
 {
   d->reg = reg;

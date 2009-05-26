@@ -46,7 +46,7 @@
 const int kMyMoneyCompletion::MAX_ITEMS = 16;
 
 kMyMoneyCompletion::kMyMoneyCompletion(QWidget *parent, const char *name ) :
-  Q3VBox(parent, name, Qt::WType_Popup)
+  KVBox(parent)
 {
   m_selector = new KMyMoneySelector(this);
   m_selector->listView()->setFocusProxy(this);
@@ -146,7 +146,7 @@ void kMyMoneyCompletion::show(bool presetSelected)
     }
   }
 
-  Q3VBox::show();
+  KVBox::show();
 }
 
 void kMyMoneyCompletion::hide(void)
@@ -161,7 +161,7 @@ void kMyMoneyCompletion::hide(void)
       c->lineEdit()->removeEventFilter(this);
     }
   }
-  Q3VBox::hide();
+  KVBox::hide();
 }
 
 bool kMyMoneyCompletion::eventFilter(QObject* o, QEvent* e)
@@ -269,7 +269,7 @@ bool kMyMoneyCompletion::eventFilter(QObject* o, QEvent* e)
       }
     }
   }
-  return Q3VBox::eventFilter(o, e);
+  return KVBox::eventFilter(o, e);
 }
 
 void kMyMoneyCompletion::slotMakeCompletion(const QString& txt)

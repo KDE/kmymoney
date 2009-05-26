@@ -27,7 +27,7 @@
 // QT Includes
 
 #include <qwidget.h>
-#include <q3vbox.h>
+#include <kvbox.h>
 #include <qregexp.h>
 //Added by qt3to4:
 #include <QEvent>
@@ -47,7 +47,7 @@ class KMyMoneySelector;
   * @author Thomas Baumgart
   */
 
-class kMyMoneyCompletion : public Q3VBox
+class kMyMoneyCompletion : public KVBox
 {
   Q_OBJECT
 public:

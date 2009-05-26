@@ -21,7 +21,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <q3hbox.h>
+#include <khbox.h>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -106,7 +106,7 @@ private:
   *
   * @author Thomas Baumgart
   */
-class KMYMONEY_EXPORT RegisterSearchLineWidget : public Q3HBox
+class KMYMONEY_EXPORT RegisterSearchLineWidget : public KHBox
 {
   Q_OBJECT
 public:
