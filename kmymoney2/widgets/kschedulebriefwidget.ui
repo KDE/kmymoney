@@ -216,7 +216,7 @@
               </layout>
             </item>
             <item>
-              <widget class="Q3TextEdit" name="m_details">
+              <widget class="QTextEdit" name="m_details">
                 <property name="enabled">
                   <bool>true</bool>
                 </property>
