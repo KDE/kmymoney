@@ -38,12 +38,11 @@
 
 #include "kmymoneylineedit.h"
 
-kMyMoneyLineEdit::kMyMoneyLineEdit(QWidget *w, const char* name, bool forceMonetaryDecimalSymbol, int alignment) :
+kMyMoneyLineEdit::kMyMoneyLineEdit(QWidget *w, const char* name, bool forceMonetaryDecimalSymbol, Qt::Alignment alignment) :
   KLineEdit(w),
   m_forceMonetaryDecimalSymbol(forceMonetaryDecimalSymbol)
 {
-#warning "port to kde4"	
-  //setAlignment(alignment);
+    setAlignment(alignment);
 }
 
 kMyMoneyLineEdit::~kMyMoneyLineEdit()
@@ -128,7 +127,7 @@ void kMyMoneyLineEdit::keyPressEvent(QKeyEvent* k)
 
 void kMyMoneyLineEdit::drawContents( QPainter *p)
 {
-#warning "port to kde4"	
+#warning "port to kde4"
   //KLineEdit::drawContents(p);
 
   if(text().isEmpty() && !m_hint.isEmpty() && !hasFocus()) {
