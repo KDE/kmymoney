@@ -1673,12 +1673,13 @@ void KMyMoneyView::viewAccountList(const QString& /*selectAccount*/)
 
 void KMyMoneyView::slotRefreshViews()
 {
-  // turn off sync between ledger and investment view
-      	disconnect(m_investmentView, SIGNAL(accountSelected(const MyMoneyObject&)), m_ledgerView, SLOT(slotSelectAccount(const MyMoneyObject&)));
-  disconnect(m_ledgerView, SIGNAL(accountSelected(const MyMoneyObject&)), m_investmentView, SLOT(slotSelectAccount(const MyMoneyObject&)));
-
   #warning "port to kde4"
   #if 0
+  // turn off sync between ledger and investment view
+  disconnect(m_investmentView, SIGNAL(accountSelected(const MyMoneyObject&)), m_ledgerView, SLOT(slotSelectAccount(const MyMoneyObject&)));
+  disconnect(m_ledgerView, SIGNAL(accountSelected(const MyMoneyObject&)), m_investmentView, SLOT(slotSelectAccount(const MyMoneyObject&)));
+
+
   // TODO turn sync between ledger and investment view if selected by user
   if(KMyMoneyGlobalSettings::syncLedgerInvestment()) {
     connect(m_investmentView, SIGNAL(accountSelected(const MyMoneyObject&)), m_ledgerView, SLOT(slotSelectAccount(const MyMoneyObject&)));
