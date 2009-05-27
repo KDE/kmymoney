@@ -161,9 +161,6 @@ GET_FILENAME_COMPONENT(QT_DIR     ${QT_BIN_DIR}        PATH)
 SET(QT_INSTALL_DIR ${QT_DIR} CACHE PATH
   "Qt install prefix defaults to the Qt prefix: ${QT_DIR}")
 
-# check for Sqlite and QtSqlite
-FIND_PACKAGE(QtSqlite)
-
 # check for CppUnit to build the tests
 FIND_PACKAGE(CppUnit)
 IF( CPPUNIT_FOUND )
