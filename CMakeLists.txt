@@ -149,7 +149,7 @@ FIND_PACKAGE(KDECONFIG)
 FIND_PACKAGE(MSGFMT REQUIRED)
 FIND_PACKAGE(MEINPROC REQUIRED)
 
-MARK_AS_ADVANCED(KDE4_DCOPIDL2CPP_EXECUTABLE KDE4_DCOPIDL_EXECUTABLE
+MARK_AS_ADVANCED(
   KDE4_KCFGC_EXECUTABLE KDE4_KDECORE_LIBRARY KDECONFIG_EXECUTABLE)
 
 ######################### Special Requirements ##########################
@@ -285,13 +285,6 @@ ADD_SUBDIRECTORY( kmymoney2 )
 #ADD_CUSTOM_TARGET(uninstall
 #  "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake")
 
-# This command will extract and merge the translations.
-# Note that this will modify the source tree.
-ADD_CUSTOM_TARGET(messages
-  COMMAND "${CMAKE_CURRENT_SOURCE_DIR}/admin/extract-messages.sh" "${CMAKE_CURRENT_SOURCE_DIR}" "${CMAKE_CURRENT_BINARY_DIR}")
-
-######################### Package Generation ##########################
-##### General Setup (tar.gz / tar.bz2 source and binary) #####
 
 # by default, the package name is kmymoney
 SET(CPACK_PACKAGE_NAME "kmymoney")
