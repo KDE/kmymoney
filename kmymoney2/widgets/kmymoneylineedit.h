@@ -51,13 +51,12 @@ class kMyMoneyLineEdit : public KLineEdit
 public:
   /**
     * @param w pointer to parent
-    * @param name pointer to name of object
     * @param forceMonetaryDecimalSymbol if @a true, the numeric keypad comma key will have a fixed
     *            value and does not follow the keyboard layout (default: @p false)
     * @param alignment Controls the alignment of the text. Default is Qt::AlignLeft | Qt::AlignVCenter.
     *                  See Qt::AlignmentFlags for other possible values.
     */
-  kMyMoneyLineEdit(QWidget *w = 0, const char* name = 0, bool forceMonetaryDecimalSymbol = false, Qt::Alignment alignment = (Qt::AlignLeft | Qt::AlignVCenter));
+  kMyMoneyLineEdit(QWidget *w = 0, bool forceMonetaryDecimalSymbol = false, Qt::Alignment alignment = (Qt::AlignLeft | Qt::AlignVCenter));
   ~kMyMoneyLineEdit();
 
   /**

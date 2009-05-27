@@ -159,7 +159,7 @@ QValidator::State kMyMoneyMoneyValidator::validate( QString & input, int & _p ) 
         rc = Invalid;
     }
   }
-#endif  
+#endif
   return rc;
 }
 
@@ -213,7 +213,7 @@ static const uchar resetButtonImage[] = {
 void kMyMoneyEdit::init(void)
 {
   allowEmpty = false;
-  m_edit = new kMyMoneyLineEdit(this, 0, true);
+  m_edit = new kMyMoneyLineEdit(this, true);
   m_edit->installEventFilter(this);
   setFocusProxy(m_edit);
 

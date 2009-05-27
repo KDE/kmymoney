@@ -38,7 +38,7 @@
 
 #include "kmymoneylineedit.h"
 
-kMyMoneyLineEdit::kMyMoneyLineEdit(QWidget *w, const char* name, bool forceMonetaryDecimalSymbol, Qt::Alignment alignment) :
+kMyMoneyLineEdit::kMyMoneyLineEdit(QWidget *w, bool forceMonetaryDecimalSymbol, Qt::Alignment alignment) :
   KLineEdit(w),
   m_forceMonetaryDecimalSymbol(forceMonetaryDecimalSymbol)
 {
