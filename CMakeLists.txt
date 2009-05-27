@@ -2,11 +2,7 @@
 PROJECT(KMyMoney)
 
 # The CMake version we require
-CMAKE_MINIMUM_REQUIRED(VERSION 2.4)
-
-# This option will make 'make' very verbose
-#SET(CMAKE_VERBOSE_MAKEFILE ON)
-
+CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 
 # cmake 2.6 proposed to add this policy
 if(COMMAND cmake_policy)
@@ -15,10 +11,6 @@ endif(COMMAND cmake_policy)
 
 # Our modules reside in the subdirectory cmake/modules/
 SET(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules)
-
-######################### Qt3 Support ##############################
-SET(QT_USE_QT3SUPPORT true)
-
 
 ######################### KMyMoney Version ##########################
 
@@ -44,6 +36,7 @@ find_package(KdepimLibs REQUIRED)
 
 add_definitions( ${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
 add_definitions (-DQT3_SUPPORT -DQT3_SUPPORT_WARNINGS)
+
 include_directories( ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES} 
 	${CMAKE_CURRENT_BINARY_DIR}/kmymoney2/dialogs/ 
 	${CMAKE_CURRENT_SOURCE_DIR}/kmymoney2/widgets/
@@ -59,6 +52,7 @@ include_directories( ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES}
 	${CMAKE_CURRENT_BINARY_DIR}/kmymoney2/mymoney/storage/
 	${CMAKE_CURRENT_SOURCE_DIR}/kmymoney2/reports/
 	${CMAKE_CURRENT_SOURCE_DIR}/kmymoney2/wizards/wizardpages/)
+
 set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${KDE4_ENABLE_EXCEPTIONS}" )
 string(TOLOWER ${CMAKE_BUILD_TYPE} CMAKE_BUILD_TYPE_TOLOWER)
 
@@ -146,7 +140,6 @@ CHECK_TYPE_SIZE(short SIZEOF_SHORT)
 CHECK_TYPE_SIZE(size_t SIZEOF_SIZE_T)
 CHECK_TYPE_SIZE("unsigned long" SIZEOF_UNSIGNED_LONG)
 FIND_PACKAGE(KDECONFIG)
-FIND_PACKAGE(MSGFMT REQUIRED)
 FIND_PACKAGE(MEINPROC REQUIRED)
 
 MARK_AS_ADVANCED(
