@@ -265,7 +265,7 @@ INCLUDE_DIRECTORIES(
 
 ADD_SUBDIRECTORY( libkgpgfile ) 
 # Remove charts until we figure out how to use the KDE4 version
-#ADD_SUBDIRECTORY( libkdchart )
+ADD_SUBDIRECTORY( libkdchart )
 ADD_SUBDIRECTORY( kmymoney2 ) 
 #ADD_SUBDIRECTORY( doc ) 
 #ADD_SUBDIRECTORY( developer-doc ) 
