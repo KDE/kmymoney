@@ -195,9 +195,8 @@ void KAccountTemplateSelector::slotLoadTemplateList(void)
         continue;
       QRegExp exp("(..)_(..)");
       if(exp.search(*it_d) != -1) {
-        QString country ;
-#warning "port to kde4"
-	//QString country = KGlobal::locale()->twoAlphaToCountryName(exp.cap(2));
+
+        QString country = KGlobal::locale()->countryCodeToName(exp.cap(2));
         if(country.isEmpty())
           country = exp.cap(2);
         QString lang = KGlobal::locale()->languageCodeToName(exp.cap(1));
@@ -205,24 +204,18 @@ void KAccountTemplateSelector::slotLoadTemplateList(void)
           if(d->countries[country] != *it_d) {
             QString oName = d->countries[country];
             exp.search(oName);
-#warning "port to kde4"
-#if 0
-	    QString oCountry = KGlobal::locale()->twoAlphaToCountryName(exp.cap(2));
+            QString oCountry = KGlobal::locale()->countryCodeToName(exp.cap(2));
             QString oLang = KGlobal::locale()->languageCodeToName(exp.cap(1));
             d->countries.remove(country);
             d->countries[QString("%1 (%2)").arg(oCountry).arg(oLang)] = oName;
             d->countries[QString("%1 (%2)").arg(country).arg(lang)] = *it_d;
-#endif
-	  }
+          }
         } else {
           d->countries[country] = *it_d;
         }
       } else if((*it_d).length() == 2) {
-#warning "port to kde4"
-#if 0
-      	      QString country = KGlobal::locale()->twoAlphaToCountryName((*it_d).toUpper());
+        QString country = KGlobal::locale()->countryCodeToName((*it_d).toUpper());
         d->countries[country] = *it_d;
-#endif	
       } else {
         qDebug("'%s/%s' not scanned", (*it).data(), (*it_d).data());
       }
