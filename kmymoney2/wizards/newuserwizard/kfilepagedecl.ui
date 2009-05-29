@@ -44,7 +44,7 @@
         </spacer>
       </item>
       <item>
-        <widget class="K3ActiveLabel" name="m_existingFileLabel">
+        <widget class="QLabel" name="m_existingFileLabel">
           <property name="text">
             <string>Either the currently selected file exists or the selected directory does not exist. Please make sure, that
 
@@ -53,15 +53,21 @@
 &lt;li&gt;the filename is not currently used in this directory.&lt;/li&gt;
 &lt;/ul&gt;</string>
           </property>
+          <property name="textFormat">
+            <enum>Qt::RichText</enum>
+          </property>
         </widget>
       </item>
       <item>
-        <widget class="K3ActiveLabel" name="m_finishLabel">
+        <widget class="QLabel" name="m_finishLabel">
           <property name="focusPolicy">
             <enum>Qt::NoFocus</enum>
           </property>
           <property name="text">
             <string>This finishes the setup of your KMyMoney environment. You can now press the Finish button and start using KMyMoney to record your financial transactions.</string>
+          </property>
+          <property name="textFormat">
+            <enum>Qt::RichText</enum>
           </property>
         </widget>
       </item>
