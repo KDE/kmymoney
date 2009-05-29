@@ -3735,8 +3735,8 @@ void KMyMoney2App::slotAccountReconcilePostpone(void)
   MyMoneyFile* file = MyMoneyFile::instance();
 
   if(!m_reconciliationAccount.id().isEmpty()) {
-    // update the account data
-    file->modifyAccount(m_reconciliationAccount);
+    // refresh object
+    m_reconciliationAccount = file->account(m_reconciliationAccount.id());
 
     // Turn off reconciliation mode
     myMoneyView->finishReconciliation(m_reconciliationAccount);
