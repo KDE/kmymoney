@@ -554,7 +554,7 @@ private:
     *
     * @note This method will close the file when it is written.
     */
-  void saveToLocalFile(QFile* qf, IMyMoneyStorageFormat* writer, bool plaintext=false, const QString& keyList = QString());
+  void saveToLocalFile(QFile* qfile, IMyMoneyStorageFormat* writer, bool plaintext=false, const QString& keyList = QString());
 
   /**
     * Internal method used by slotAccountNew() and slotAccountCategory().

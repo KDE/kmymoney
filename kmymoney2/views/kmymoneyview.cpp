@@ -1084,7 +1084,7 @@ void KMyMoneyView::saveToLocalFile(QFile* qfile, IMyMoneyStorageFormat* pWriter,
   if(!keyList.isEmpty() && encryptedOk == true && !plaintext ) {
     qfile->close();
     base++;
-    KGPGFile *kgpg = new KGPGFile(qfile->name());
+    KGPGFile *kgpg = new KGPGFile(qfile->fileName());
     if(kgpg) {
       QStringList keys = QStringList::split(",", keyList);
       QStringList::const_iterator it_s;
@@ -1100,7 +1100,7 @@ void KMyMoneyView::saveToLocalFile(QFile* qfile, IMyMoneyStorageFormat* pWriter,
     if(!dev || !dev->open(QIODevice::WriteOnly)) {
       MyMoneyFile::instance()->blockSignals(blocked);
       delete dev;
-      throw new MYMONEYEXCEPTION(i18n("Unable to open file '%1' for writing.").arg(qfile->name()));
+      throw new MYMONEYEXCEPTION(i18n("Unable to open file '%1' for writing.").arg(qfile->fileName()));
     }
 
   } else if(!plaintext) {
@@ -1111,11 +1111,11 @@ void KMyMoneyView::saveToLocalFile(QFile* qfile, IMyMoneyStorageFormat* pWriter,
       base->setDevice(qfile, false);
       // we need to reopen the file to set the mode inside the filter stuff
 #warning "port to kde4"
-      //dev = new KFilterDev(base, true);
+      dev = KFilterDev::deviceForFile(qfile->fileName(), COMPRESSION_MIME_TYPE, true);
       if(!dev || !dev->open(QIODevice::WriteOnly)) {
         MyMoneyFile::instance()->blockSignals(blocked);
         delete dev;
-        throw new MYMONEYEXCEPTION(i18n("Unable to open file '%1' for writing.").arg(qfile->name()));
+        throw new MYMONEYEXCEPTION(i18n("Unable to open file '%1' for writing.").arg(qfile->fileName()));
       }
       statusDevice = base->device();
     }
@@ -1128,17 +1128,17 @@ void KMyMoneyView::saveToLocalFile(QFile* qfile, IMyMoneyStorageFormat* pWriter,
   pWriter->writeFile(dev, dynamic_cast<IMyMoneySerialize*> (MyMoneyFile::instance()->storage()));
   MyMoneyFile::instance()->blockSignals(blocked);
   if(statusDevice->status() != IO_Ok) {
-    throw new MYMONEYEXCEPTION(i18n("Failure while writing to '%1'").arg(qfile->name()));
+    throw new MYMONEYEXCEPTION(i18n("Failure while writing to '%1'").arg(qfile->fileName()));
   }
   pWriter->setProgressCallback(0);
 
   if(base != 0) {
 #warning "port to kde4"
-      //dev->flush();
+    //dev->flush();
     dev->close();
     if(statusDevice->status() != IO_Ok) {
       delete dev;
-      throw new MYMONEYEXCEPTION(i18n("Failure while writing to '%1'").arg(qfile->name()));
+      throw new MYMONEYEXCEPTION(i18n("Failure while writing to '%1'").arg(qfile->fileName()));
     }
     delete dev;
   } else
@@ -1154,17 +1154,6 @@ bool KMyMoneyView::saveFile(const KUrl& url, const QString& keyList)
     return false;
   }
 
-#if 0
-  if(KMessageBox::warningContinueCancel(this, i18n(
-      "Since this version of KMyMoney only writes data files in its new "
-      "format, files written with this version cannot be read by KMyMoney version 0.4. "
-      "If you still want to use older versions of KMyMoney with your data files, "
-      "please make sure you keep a backup-file of your finance data. "
-      "If you want to abort this operation, please press Cancel now"),
-      QString::null, KStandardGuiItem::cont(), "WarningNewFileVersion0.5") == KMessageBox::Cancel)
-    return false;
-#endif
-
   emit kmmFilePlugin (preSave);
   IMyMoneyStorageFormat* pWriter = NULL;
 
@@ -1177,7 +1166,7 @@ bool KMyMoneyView::saveFile(const KUrl& url, const QString& keyList)
   }
   else
   {
-    // only use XML writer. The binary format will be depreacated after 0.8
+    // only use XML writer. The binary format will be deprecated after 0.8
     pWriter = new MyMoneyStorageXML;
   }
 
@@ -1206,14 +1195,13 @@ bool KMyMoneyView::saveFile(const KUrl& url, const QString& keyList)
       // create a new basic block here, so that the object qfile gets
       // deleted, before we reach the chown() call
       {
+        //FIXME: Port to KDE4 - set the mode later
         int mask = umask((~fmode) & 0777);
-#warning "port to kde4"
-#if 0
-        KSaveFile qfile(filename, fmode);
+        KSaveFile qfile(filename);
         umask(mask);
-        if(qfile.status() == 0) {
+        if(qfile.open()) {
           try {
-            saveToLocalFile(qfile.file(), pWriter, plaintext, keyList);
+            saveToLocalFile( &qfile, pWriter, plaintext, keyList);
           } catch (MyMoneyException* e) {
             qfile.abort();
             delete e;
@@ -1222,18 +1210,13 @@ bool KMyMoneyView::saveFile(const KUrl& url, const QString& keyList)
         } else {
           throw new MYMONEYEXCEPTION(i18n("Unable to write changes to '%1'").arg(filename));
         }
-#endif
       }
       chown(filename.toLatin1(), static_cast<uid_t>(-1), gid);
     } else {
-#warning "port to kde4"
-#if 0
         KTemporaryFile tmpfile;
-      saveToLocalFile(tmpfile.file(), pWriter, plaintext, keyList);
-      if(!KIO::NetAccess::upload(tmpfile.name(), url, NULL))
+      saveToLocalFile(new QFile(&tmpfile) , pWriter, plaintext, keyList);
+      if(!KIO::NetAccess::upload(tmpfile.fileName(), url, NULL))
         throw new MYMONEYEXCEPTION(i18n("Unable to upload to '%1'").arg(url.url()));
-      tmpfile.unlink();
-#endif
     }
     m_fileType = KmmXML;
   } catch (MyMoneyException *e) {

@@ -330,8 +330,6 @@ FilePage::FilePage(Wizard* wizard) :
   connect(m_mandatoryGroup, SIGNAL(stateChanged()), object(), SIGNAL(completeStateChanged()));
 
   KUser user;
-#warning "port to kde4"
-  //m_dataFileEdit->setShowLocalProtocol(false);
   m_dataFileEdit->setUrl(QString("%1/%2.kmy").arg(QDir::homePath(), user.loginName()));
 }
 
