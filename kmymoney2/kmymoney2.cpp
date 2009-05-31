@@ -80,6 +80,7 @@
 #include <kconfigdialog.h>
 #include <kinputdialog.h>
 #include <kxmlguifactory.h>
+#include <krecentfilesaction.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -323,7 +324,7 @@ void KMyMoney2App::initActions(void)
   actionCollection()->addAction( KStandardAction::Open, this, SLOT(slotFileOpen()) );
 
   //KStandardAction::openRecent(this, SLOT(slotFileOpenRecent(const KUrl&)), actionCollection());
-  m_recentFiles = KStandardAction::openRecent(this, SLOT(slotFileOpenRecent(const KUrl&)), this);
+  m_recentFiles = KStandardAction::openRecent(this, SLOT(slotFileOpenRecent(const KUrl&)), actionCollection());
 
   //KStandardAction::save(this, SLOT(slotFileSave()), actionCollection());
   actionCollection()->addAction( KStandardAction::Save, this, SLOT(slotFileSave()) );
@@ -1050,10 +1051,10 @@ void KMyMoney2App::saveOptions(void)
   KConfigGroup grp = config->group("General Options");
   grp.writeEntry("Geometry", size());
 
-  // config->writeEntry("Show Statusbar", toggleAction("options_show_statusbar")->isChecked());
-  // toolBar("mainToolBar")->saveSettings(config, "mainToolBar");
+  grp.writeEntry("Show Statusbar", toggleAction("options_show_statusbar")->isChecked());
+  //toolBar("mainToolBar")->saveSettings(grp, "mainToolBar");
 
-  //dynamic_cast<KRecentFilesAction*>(action("file_open_recent"))->saveEntries(config,"Recent Files");
+  m_recentFiles->saveEntries(config->group("Recent Files"));
 
 }
 
@@ -1067,14 +1068,14 @@ void KMyMoney2App::readOptions(void)
 
   //FIXME: Port to KDE4
 // initialize the recent file list
-  //KRecentFilesAction *p = dynamic_cast<KRecentFilesAction*>(action("file_open_recent"));
+  //KRecentFilesAction *p = dynamic_cast<KRecentFilesAction*>(action(KStandardAction::name(KStandardAction::OpenRecent)));
   //if(p)
-  //  p->loadEntries(config,"Recent Files");
+  m_recentFiles->loadEntries(config->group("Recent Files"));
 
   //QSize size=grp.readEntry("Geometry");
   //if(!size.isEmpty())
   //{
-  //  resize(size);
+    //resize(size);
   //}
 
   // Startdialog is written in the settings dialog
@@ -1311,9 +1312,9 @@ void KMyMoney2App::slotFileNew(void)
         slotFileSave();
 
         // now keep the filename in the recent files used list
-        KRecentFilesAction *p = dynamic_cast<KRecentFilesAction*>(action("file_open_recent"));
-        if(p)
-          p->addUrl( m_fileName );
+        //KRecentFilesAction *p = dynamic_cast<KRecentFilesAction*>(action(KStandardAction::name(KStandardAction::OpenRecent)));
+        //if(p)
+        m_recentFiles->addUrl( m_fileName );
         writeLastUsedFile(m_fileName.url());
 
       } catch(MyMoneyException* e) {
@@ -1448,9 +1449,9 @@ void KMyMoney2App::slotFileOpenRecent(const KUrl& url)
         if(myMoneyView->readFile(dburl)) {
           if((myMoneyView->isNativeFile())) {
             m_fileName = dburl;
-            KRecentFilesAction *p = dynamic_cast<KRecentFilesAction*>(action("file_open_recent"));
-            if(p)
-              p->addUrl(dburl.pathOrUrl());
+            //KRecentFilesAction *p = dynamic_cast<KRecentFilesAction*>(action("file_open_recent"));
+            //if(p)
+              m_recentFiles->addUrl(dburl.pathOrUrl());
             writeLastUsedFile(dburl.pathOrUrl());
           } else {
             m_fileName = KUrl(); // imported files have no filename
@@ -1626,9 +1627,9 @@ bool KMyMoney2App::slotFileSaveAs(void)
       }
 
       if(okToWriteFile(newName)) {
-        KRecentFilesAction *p = dynamic_cast<KRecentFilesAction*>(action("file_open_recent"));
-        if(p)
-          p->addUrl( newName );
+        //KRecentFilesAction *p = dynamic_cast<KRecentFilesAction*>(action("file_open_recent"));
+        //if(p)
+          m_recentFiles->addUrl( newName );
 
         setEnabled(false);
         // If this is the anonymous file export, just save it, don't actually take the
@@ -1695,9 +1696,9 @@ bool KMyMoney2App::slotSaveAsDatabase(void)
     }
   }
   if (rc) {
-    KRecentFilesAction *p = dynamic_cast<KRecentFilesAction*>(action("file_open_recent"));
-    if(p)
-      p->addUrl(url.pathOrUrl());
+    //KRecentFilesAction *p = dynamic_cast<KRecentFilesAction*>(action("file_open_recent"));
+    //if(p)
+      m_recentFiles->addUrl(url.pathOrUrl());
     writeLastUsedFile(url.pathOrUrl());
   }
   m_autoSaveTimer->stop();
