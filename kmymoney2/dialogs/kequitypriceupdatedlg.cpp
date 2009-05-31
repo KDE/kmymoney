@@ -97,7 +97,7 @@ KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent, const QString& sec
   QRegExp splitrx("([0-9a-z\\.]+)[^a-z0-9]+([0-9a-z\\.]+)",false /*case sensitive*/);
   MyMoneySecurityPair currencyIds;
   if ( splitrx.search(securityId) != -1 )
-    currencyIds = MyMoneySecurityPair(splitrx.cap(1).utf8(),splitrx.cap(2).utf8());
+    currencyIds = MyMoneySecurityPair(splitrx.cap(1).toUtf8(),splitrx.cap(2).toUtf8());
 
   MyMoneyPriceList prices = file->priceList();
   for(MyMoneyPriceList::ConstIterator it_price = prices.begin(); it_price != prices.end(); ++it_price)
@@ -255,7 +255,7 @@ void KEquityPriceUpdateDlg::addInvestment(const MyMoneySecurity& inv)
     if(it_a != list.end()) {
       K3ListViewItem* item = new K3ListViewItem(lvEquityList, symbol, inv.name());
       MyMoneySecurity currency = file->currency(inv.tradingCurrency());
-      MyMoneyPrice pr = file->price(id.utf8(), inv.tradingCurrency());
+      MyMoneyPrice pr = file->price(id.toUtf8(), inv.tradingCurrency());
       if(pr.isValid()) {
         item->setText(PRICE_COL, pr.rate(currency.id()).formatMoney(currency.tradingSymbol(), KMyMoneyGlobalSettings::pricePrecision()));
         item->setText(DATE_COL, pr.date().toString(Qt::ISODate));
@@ -296,14 +296,14 @@ MyMoneyPrice KEquityPriceUpdateDlg::price(const QString& id) const
     MyMoneyMoney rate(item->text(PRICE_COL));
     if ( !rate.isZero() )
     {
-      QString id = item->text(ID_COL).utf8();
+      QString id = item->text(ID_COL).toUtf8();
 
         // if the ID has a space, then this is TWO ID's, so it's a currency quote
       if ( QString(id).contains(" ") )
       {
         QStringList ids = QStringList::split(" ",QString(id));
-        QString fromid = ids[0].utf8();
-        QString toid = ids[1].utf8();
+        QString fromid = ids[0].toUtf8();
+        QString toid = ids[1].toUtf8();
         price = MyMoneyPrice(fromid,toid,QDate().fromString(item->text(DATE_COL), Qt::ISODate),rate,item->text(SOURCE_COL));
       }
       else
@@ -336,14 +336,14 @@ void KEquityPriceUpdateDlg::storePrices(void)
       MyMoneyMoney rate(item->text(PRICE_COL));
       if ( !rate.isZero() )
       {
-        QString id = item->text(ID_COL).utf8();
+        QString id = item->text(ID_COL).toUtf8();
 
         // if the ID has a space, then this is TWO ID's, so it's a currency quote
         if ( QString(id).contains(" ") )
         {
           QStringList ids = QStringList::split(" ",QString(id));
-          QString fromid = ids[0].utf8();
-          QString toid = ids[1].utf8();
+          QString fromid = ids[0].toUtf8();
+          QString toid = ids[1].toUtf8();
           name = QString("%1 --> %2").arg(fromid).arg(toid);
           MyMoneyPrice price(fromid,toid,QDate().fromString(item->text(DATE_COL), Qt::ISODate),rate,item->text(SOURCE_COL));
           file->addPrice(price);
@@ -436,7 +436,7 @@ void KEquityPriceUpdateDlg::slotQuoteFailed(const QString& _id, const QString& _
     MyMoneyFileTransaction ft;
     try {
       // Get this security (by ID)
-      MyMoneySecurity security = MyMoneyFile::instance()->security(_id.utf8());
+      MyMoneySecurity security = MyMoneyFile::instance()->security(_id.toUtf8());
 
       // Set the quote source to blank
       security.setValue("kmm-online-source",QString());
@@ -498,7 +498,7 @@ void KEquityPriceUpdateDlg::slotReceivedQuote(const QString& _id, const QString&
         date = QDate::currentDate();
 
       double price = _price;
-      QString id = _id.utf8();
+      QString id = _id.toUtf8();
       MyMoneySecurity sec;
       if ( _id.contains(" ") == 0) {
         MyMoneySecurity security = MyMoneyFile::instance()->security(id);
@@ -518,7 +518,7 @@ void KEquityPriceUpdateDlg::slotReceivedQuote(const QString& _id, const QString&
         QRegExp splitrx("([0-9a-z\\.]+)[^a-z0-9]+([0-9a-z\\.]+)",false /*case sensitive*/);
         if ( splitrx.search(_id) != -1 ) {
           try {
-            sec = MyMoneyFile::instance()->security(splitrx.cap(2).utf8());
+            sec = MyMoneyFile::instance()->security(splitrx.cap(2).toUtf8());
           } catch(MyMoneyException *e) {
             sec = MyMoneySecurity();
             delete e;

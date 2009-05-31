@@ -1154,7 +1154,7 @@ void MyMoneyGncReader::convertCommodity (const GncCommodity *gcm) {
 
     //assign the gnucash id as the key into the map to find our id
     if (gncdebug) qDebug ("mapping, key = %s, id = %s", gcm->id().toLatin1(), equ.id().data());
-    m_mapEquities[gcm->id().utf8()] = equ.id();
+    m_mapEquities[gcm->id().toUtf8()] = equ.id();
   }
   signalProgress (++m_commodityCount, 0);
   return ;
@@ -1167,15 +1167,15 @@ void MyMoneyGncReader::convertPrice (const GncPrice *gpr) {
   if (m_priceCount == 0) signalProgress (0, 1, i18n("Loading prices..."));
   MyMoneyMoney rate = convBadValue (gpr->value());
   if (gpr->commodity()->isCurrency()) {
-    MyMoneyPrice exchangeRate (gpr->commodity()->id().utf8(), gpr->currency()->id().utf8(),
+    MyMoneyPrice exchangeRate (gpr->commodity()->id().toUtf8(), gpr->currency()->id().toUtf8(),
                                gpr->priceDate(), rate, i18n("Imported History"));
     m_storage->addPrice (exchangeRate);
   } else {
-    MyMoneySecurity e = m_storage->security(m_mapEquities[gpr->commodity()->id().utf8()]);
+    MyMoneySecurity e = m_storage->security(m_mapEquities[gpr->commodity()->id().toUtf8()]);
     if (gncdebug) qDebug ("Searching map, key = %s, found id = %s",
                             gpr->commodity()->id().toLatin1(), e.id().data());
-    e.setTradingCurrency (gpr->currency()->id().utf8());
-    MyMoneyPrice stockPrice(e.id(), gpr->currency()->id().utf8(), gpr->priceDate(), rate, i18n("Imported History"));
+    e.setTradingCurrency (gpr->currency()->id().toUtf8());
+    MyMoneyPrice stockPrice(e.id(), gpr->currency()->id().toUtf8(), gpr->priceDate(), rate, i18n("Imported History"));
     m_storage->addPrice (stockPrice);
     m_storage->modifySecurity(e);
   }
@@ -1189,7 +1189,7 @@ void MyMoneyGncReader::convertAccount (const GncAccount* gac) {
   TRY
   // we don't care about the GNC root account
   if("ROOT" == gac->type()) {
-      m_rootId = gac->id().utf8();
+      m_rootId = gac->id().toUtf8();
       return;
   }
 
@@ -1204,11 +1204,11 @@ void MyMoneyGncReader::convertAccount (const GncAccount* gac) {
   acc.setLastModified(currentDate);
   acc.setLastReconciliationDate(currentDate);
   if (gac->commodity()->isCurrency()) {
-    acc.setCurrencyId (gac->commodity()->id().utf8());
+    acc.setCurrencyId (gac->commodity()->id().toUtf8());
     m_currencyCount[gac->commodity()->id()]++;
   }
 
-  acc.setParentAccountId (gac->parent().utf8());
+  acc.setParentAccountId (gac->parent().toUtf8());
   // now determine the account type and its parent id
   /* This list taken from
 # Feb 2006: A RELAX NG Compact schema for gnucash "v2" XML files.
@@ -1275,7 +1275,7 @@ void MyMoneyGncReader::convertAccount (const GncAccount* gac) {
     // save the id for later linking to investment account
     m_stockList.append (gac->id());
     // set the equity type
-    MyMoneySecurity e = m_storage->security (m_mapEquities[gac->commodity()->id().utf8()]);
+    MyMoneySecurity e = m_storage->security (m_mapEquities[gac->commodity()->id().toUtf8()]);
     if (gncdebug) qDebug ("Acct equity search, key = %s, found id = %s",
                             gac->commodity()->id().toLatin1(), e.id().data());
     acc.setCurrencyId (e.id()); // actually, the security id
@@ -1315,7 +1315,7 @@ void MyMoneyGncReader::convertAccount (const GncAccount* gac) {
   // all the details from the file about the account should be known by now.
   // calling addAccount will automatically fill in the account ID.
   m_storage->addAccount(acc);
-  m_mapIds[gac->id().utf8()] = acc.id(); // to link gnucash id to ours for tx posting
+  m_mapIds[gac->id().toUtf8()] = acc.id(); // to link gnucash id to ours for tx posting
 
   if (gncdebug) qDebug("Gnucash account %s has id of %s, type of %s, parent is %s",
                          gac->id().toLatin1(), acc.id().data(),
@@ -1345,7 +1345,7 @@ void MyMoneyGncReader::convertTransaction (const GncTransaction *gtx) {
   tx.setPostDate (gtx->datePosted());
   m_txDatePosted = tx.postDate(); // save for use in splits
   m_txChequeNo = gtx->no(); // ditto
-  tx.setCommodity (gtx->currency().utf8());
+  tx.setCommodity (gtx->currency().toUtf8());
   m_txCommodity = tx.commodity(); // save in storage, maybe needed for Orphan accounts
   // process splits
   for (i = 0; i < gtx->splitCount(); i++) {
@@ -1397,7 +1397,7 @@ void MyMoneyGncReader::convertSplit (const GncSplit *gsp) {
   MyMoneyAccount splitAccount;
   // find the kmm account id coresponding to the gnc id
   QString kmmAccountId;
-  map_accountIds::Iterator id = m_mapIds.find(gsp->acct().utf8());
+  map_accountIds::Iterator id = m_mapIds.find(gsp->acct().toUtf8());
   if (id != m_mapIds.end()) {
     kmmAccountId = id.data();
   } else { // for the case where the acs not found (which shouldn't happen?), create an account with gnc name
@@ -1411,7 +1411,7 @@ void MyMoneyGncReader::convertSplit (const GncSplit *gsp) {
   //                        gsp->acct().toLatin1(), kmmAccountId.data(), gsp->memo().toLatin1(), gsp->value().toLatin1(),
   //                        gsp->recon().toLatin1());
   // payee id
-  split.setPayeeId (m_txPayeeId.utf8());
+  split.setPayeeId (m_txPayeeId.toUtf8());
   // reconciled state and date
   switch (gsp->recon().at(0).toLatin1()) {
   case 'n':
@@ -1540,7 +1540,7 @@ MyMoneyTransaction MyMoneyGncReader::convertTemplateTransaction (const QString& 
   tx.setEntryDate(gtx->dateEntered());
   tx.setPostDate(gtx->datePosted());
   m_txDatePosted = tx.postDate();
-  tx.setCommodity (gtx->currency().utf8());
+  tx.setCommodity (gtx->currency().toUtf8());
   m_txCommodity = tx.commodity(); // save for possible use in orphan account
   // process splits
   for (i = 0; i < gtx->splitCount(); i++) {
@@ -1604,7 +1604,7 @@ void MyMoneyGncReader::convertTemplateSplit (const QString& schedName, const Gnc
   // memo
   split.setMemo(gsp->memo());
   // payee id
-  split.setPayeeId (m_txPayeeId.utf8());
+  split.setPayeeId (m_txPayeeId.toUtf8());
   // read split slots (KVPs)
   int xactionCount = 0;
   int validSlotCount = 0;
@@ -1686,7 +1686,7 @@ void MyMoneyGncReader::convertTemplateSplit (const QString& schedName, const Gnc
   }
   // find the kmm account id coresponding to the gnc id
   QString kmmAccountId;
-  map_accountIds::Iterator id = m_mapIds.find(gncAccountId.utf8());
+  map_accountIds::Iterator id = m_mapIds.find(gncAccountId.toUtf8());
   if (id != m_mapIds.end()) {
     kmmAccountId = id.data();
   } else { // for the case where the acs not found (which shouldn't happen?), create an account with gnc name
@@ -1977,7 +1977,7 @@ void MyMoneyGncReader::terminate () {
        since for Yes, the id is 3 and the index is 0, whereas the No button will return 4 or 1. So we test for either Yes case */
     /* and now it seems to have changed again, returning 259 for a Yes??? so use KMessagebox */
     QString question = i18n("Your main currency seems to be %1 (%2); do you want to set this as your base currency?")
-        .arg(mainCurrency).arg(m_storage->currency(mainCurrency.utf8()).name());
+        .arg(mainCurrency).arg(m_storage->currency(mainCurrency.toUtf8()).name());
     if(KMessageBox::questionYesNo(0, question, PACKAGE) == KMessageBox::Yes) {
       m_storage->setValue ("kmm-baseCurrency", mainCurrency);
     }
@@ -2155,7 +2155,7 @@ QString MyMoneyGncReader::createOrphanAccount (const QString& gncName) {
   acc.setParentAccountId (m_storage->asset().id());
   m_storage->addAccount (acc);
   // assign the gnucash id as the key into the map to find our id
-  m_mapIds[gncName.utf8()] = acc.id();
+  m_mapIds[gncName.toUtf8()] = acc.id();
   postMessage (QString("OR"), 1, acc.name().toLatin1());
   return (acc.id());
 }
@@ -2206,7 +2206,7 @@ void MyMoneyGncReader::checkInvestmentOption (QString stockId) {
   // implement the investment option for stock accounts
   // first check whether the parent account (gnucash id) is actually an
   // investment account. if it is, no further action is needed
-  MyMoneyAccount stockAcc = m_storage->account (m_mapIds[stockId.utf8()]);
+  MyMoneyAccount stockAcc = m_storage->account (m_mapIds[stockId.toUtf8()]);
   MyMoneyAccount parent;
   QString parentKey = stockAcc.parentAccountId();
   map_accountIds::Iterator id = m_mapIds.find (parentKey);

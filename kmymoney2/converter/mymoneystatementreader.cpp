@@ -542,7 +542,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
   if ( thisaccount.accountType() == MyMoneyAccount::Investment )
   {
     // determine the brokerage account
-    brokerageactid = m_account.value("kmm-brokerage-account").utf8();
+    brokerageactid = m_account.value("kmm-brokerage-account").toUtf8();
     if (brokerageactid.isEmpty() )
     {
       brokerageactid = file->accountByName(m_account.brokerageName()).id();
@@ -781,7 +781,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       // written.  However, if a user has an associated brokerage account,
       // we can stuff the transaction there.
 
-      QString brokerageactid = m_account.value("kmm-brokerage-account").utf8();
+      QString brokerageactid = m_account.value("kmm-brokerage-account").toUtf8();
       if (brokerageactid.isEmpty() )
       {
         brokerageactid = file->accountByName(m_account.brokerageName()).id();
