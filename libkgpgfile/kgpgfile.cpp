@@ -96,7 +96,7 @@ void KGPGFile::init(void)
 void KGPGFile::setName(const QString& fn)
 {
   m_fn = fn;
-  if(fn[0] == '~') {
+  if(!fn.isEmpty() && fn[0] == '~') {
     m_fn = QDir::homePath()+fn.mid(1);
 
   } else if(QDir::isRelativePath(m_fn)) {
