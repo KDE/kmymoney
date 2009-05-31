@@ -242,7 +242,7 @@ void GncObject::debugDump () {
   uint i;
   qDebug ("Object %s", m_elementName.toLatin1());
   for (i = 0; i < m_dataElementListCount; i++) {
-    qDebug ("%s = %s", m_dataElementList[i].toLatin1(), m_v.at(i)->latin1());
+    qDebug ("%s = %s", m_dataElementList[i].toLatin1(), m_v.at(i)->toLatin1());
   }
 }
 //*****************************************************************
@@ -944,7 +944,7 @@ bool XmlReader::startElement (const QString&, const QString&, const QString& elN
     KMessageBox::error(0, i18n("Import failed:\n\n%1",e->what()), PACKAGE);
     qFatal ("%s", e->what().toLatin1());
 #else
-    qFatal ("%s", e->latin1());
+    qFatal ("%s", e->toLatin1());
 #endif // _GNCFILEANON
   }
   return true; // to keep compiler happy
@@ -979,7 +979,7 @@ bool XmlReader::endElement( const QString&, const QString&, const QString&elName
     KMessageBox::error(0, i18n("Import failed:\n\n%1",e->what()), PACKAGE);
     qFatal ("%s", e->what().toLatin1());
 #else
-    qFatal ("%s", e->latin1());
+    qFatal ("%s", e->toLatin1());
 #endif // _GNCFILEANON
   }
   return (true); // to keep compiler happy
@@ -1089,7 +1089,7 @@ void MyMoneyGncReader::readFile(QString in, QString out) {
   try {
     m_xr->processFile (&pDevice);
   } catch (MyMoneyException *e) {
-    qFatal ("%s", e->latin1());
+    qFatal ("%s", e->toLatin1());
   } // end catch
   delete m_xr;
   pDevice.close();

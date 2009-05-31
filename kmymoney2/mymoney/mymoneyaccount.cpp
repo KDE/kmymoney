@@ -302,7 +302,7 @@ const MyMoneyMoney MyMoneyAccountLoan::interestRate(const QDate& date) const
   QMap<QString, QString>::ConstIterator it;
   for(it = pairs().begin(); it != pairs().end(); ++it) {
     if(regExp.search(it.key()) > -1) {
-      if(qstrcmp(it.key().latin1(),key.latin1()) <= 0)
+      if(qstrcmp(it.key().toLatin1(),key.toLatin1()) <= 0)
         val = *it;
       else
         break;
