@@ -99,7 +99,6 @@ namespace KMyMoneyPlugin { class ImporterPlugin; }
   * @short Main application class.
   */
 class KMyMoney2App : public KXmlGuiWindow
-		     //, public DCOPObject
 {
   Q_OBJECT
 
@@ -545,7 +544,6 @@ public:
 
   void createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal);
 
-//k_dcop:
   // Note: Don't use e.g. filename(void) but use filename() because
   // otherwise the kidl compiler produces uncompilable results.
   const QString filename() const;

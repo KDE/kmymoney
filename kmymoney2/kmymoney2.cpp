@@ -87,7 +87,7 @@
 
 #include "kmymoney2.h"
 #include "kmymoneyglobalsettings.h"
-//#include "kmymoney2_stub.h"
+#include "kmymoneyadaptor.h"
 
 #include "dialogs/kstartdlg.h"
 #include "dialogs/settings/ksettingsgeneral.h"
@@ -187,7 +187,6 @@ public:
 
 KMyMoney2App::KMyMoney2App(QWidget * /*parent*/ , const char* name) :
   KXmlGuiWindow(0),
-  //DCOPObject("kmymoney2app"),
   d(new Private),
   myMoneyView(0),
   m_searchDlg(0),
@@ -196,6 +195,10 @@ KMyMoney2App::KMyMoney2App(QWidget * /*parent*/ , const char* name) :
   m_transactionEditor(0),
   m_endingBalanceDlg(0)
 {
+    new KmymoneyAdaptor(this);
+    QDBusConnection::sessionBus().registerObject("/KMymoney", this);
+
+
   ::timetrace("start kmymoney2app constructor");
   // preset the pointer because we need it during the course of this constructor
   setObjectName(name);

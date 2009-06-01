@@ -43,6 +43,8 @@ SET( kmymoney2_SRCS
 	main.cpp 
 	kmymoney2.cpp )
 
+qt4_add_dbus_adaptor(kmymoney2_SRCS org.kde.kmymoney.xml kmymoney2.h KMyMoney2App)
+
 #KDE4_ADD_DCOP_SKELS( kmymoney2_SRCS kmymoney2.h )
 #KDE4_ADD_DCOP_STUBS( kmymoney2_SRCS kmymoney2.h )
 
