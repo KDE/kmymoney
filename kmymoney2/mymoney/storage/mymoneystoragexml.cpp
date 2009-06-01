@@ -267,13 +267,13 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
           MyMoneyPrice p(m_reader->d->m_fromSecurity, m_reader->d->m_toSecurity, m_baseNode);
           m_reader->d->prList[MyMoneySecurityPair(m_reader->d->m_fromSecurity, m_reader->d->m_toSecurity)][p.date()] = p;
         } else {
-          m_errMsg = i18n("Unknown XML tag %1 found in line %2").arg(qName).arg(m_loc->lineNumber());
+          m_errMsg = i18n("Unknown XML tag %1 found in line %2",qName,m_loc->lineNumber());
           kWarning() << m_errMsg;
           rc = false;
         }
         m_reader->signalProgress(++m_elementCount, 0);
       } catch(MyMoneyException* e) {
-        m_errMsg = i18n("Exception while creating a %1 element: %2").arg(s).arg(e->what());
+        m_errMsg = i18n("Exception while creating a %1 element: %2",s,e->what());
         kWarning() << m_errMsg;
         delete e;
         rc = false;

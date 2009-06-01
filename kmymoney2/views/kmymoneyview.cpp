@@ -253,7 +253,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   m_investmentViewFrame->setIcon(KIcon("investments"));
   m_investmentViewFrame->setHeader(i18n("Investments"));
   addTitleBar(m_investmentView, i18n("Investments"));
-  
+
   connect(m_investmentView, SIGNAL(accountSelected(const QString&, const QString&)),
       this, SLOT(slotLedgerSelected(const QString&, const QString&)));
   connect(m_investmentView, SIGNAL(accountSelected(const MyMoneyObject&)), kmymoney2, SLOT(slotSelectAccount(const MyMoneyObject&)));
@@ -345,13 +345,13 @@ void KMyMoneyView::showTitleBar(bool show)
 
 // bool KMyMoneyView::showPage(int index)
 // {
-// 
+//
 //   // reset all selected items before showing the selected view
 //   // but not while we're in our own constructor
 //   if(!m_inConstructor && index != activePageIndex()) {
 //     kmymoney2->slotResetSelections();
 //   }
-// 
+//
 //   // pretend we're in the constructor to avoid calling the
 //   // above resets. For some reason which I don't know the details
 //   // of, KJanusWidget::showPage() calls itself recursively. This
@@ -360,19 +360,19 @@ void KMyMoneyView::showTitleBar(bool show)
 //   // to true and reset it to the previos value when we leave this method.
 //   bool prevConstructor = m_inConstructor;
 //   m_inConstructor = true;
-// 
+//
 //   bool rc = showPage(index);
-// 
+//
 //   m_inConstructor = prevConstructor;
-// 
+//
 //   if(!m_inConstructor) {
 //     // fixup some actions that are dependant on the view
 //     // this does not work during construction
 //     kmymoney2->slotUpdateActions();
 //   }
-// 
+//
 //   return rc;
-// 
+//
 //   return false;
 // }
 
@@ -469,7 +469,7 @@ void KMyMoneyView::newStorage(storageTypeE t)
     file->attachStorage(new MyMoneySeqAccessMgr);
 #warning "port to kde4"
 #if 0
-  else 
+  else
     file->attachStorage(new MyMoneyDatabaseMgr);
 #endif
 }
@@ -645,7 +645,7 @@ bool KMyMoneyView::readFile(const KUrl& url)
   } else {
     if(!KIO::NetAccess::download(url, filename, NULL)) {
       KMessageBox::detailedError(this,
-             i18n("Error while loading file '%1'!").arg(url.url()),
+             i18n("Error while loading file '%1'!",url.url()),
              KIO::NetAccess::lastErrorString(),
              i18n("File access error"));
       return false;
@@ -657,7 +657,7 @@ bool KMyMoneyView::readFile(const KUrl& url)
   QFile file(filename);
   QFileInfo info(file);
   if(!info.isFile()) {
-    QString msg=i18n("<b>%1</b> is not a KMyMoney file.").arg(filename);
+    QString msg=i18n("<b>%1</b> is not a KMyMoney file.",filename);
     KMessageBox::error(this, QString("<p>")+msg, i18n("Filetype Error"));
     return false;
   }
@@ -698,7 +698,7 @@ bool KMyMoneyView::readFile(const KUrl& url)
           haveAt = false;
           isEncrypted = true;
         } else {
-          KMessageBox::sorry(this, QString("<qt>%1</qt>"). arg(i18n("GPG is not available for decryption of file <b>%1</b>").arg(filename)));
+          KMessageBox::sorry(this, QString("<qt>%1</qt>"). arg(i18n("GPG is not available for decryption of file <b>%1</b>",filename)));
           qfile = new QFile(file.name());
         }
       } else {
@@ -776,18 +776,18 @@ bool KMyMoneyView::readFile(const KUrl& url)
               ::timetrace("done reading to memory");
             } else {
               if(m_fileType == KmmBinary) {
-                KMessageBox::sorry(this, QString("<qt>%1</qt>"). arg(i18n("File <b>%1</b> contains the old binary format used by KMyMoney. Please use an older version of KMyMoney (0.8.x) that still supports this format to convert it to the new XML based format.").arg(filename)));
+                KMessageBox::sorry(this, QString("<qt>%1</qt>"). arg(i18n("File <b>%1</b> contains the old binary format used by KMyMoney. Please use an older version of KMyMoney (0.8.x) that still supports this format to convert it to the new XML based format.",filename)));
               } else {
-                KMessageBox::sorry(this, QString("<qt>%1</qt>"). arg(i18n("File <b>%1</b> contains an unknown file format!").arg(filename)));
+                KMessageBox::sorry(this, QString("<qt>%1</qt>"). arg(i18n("File <b>%1</b> contains an unknown file format!",filename)));
               }
               rc = false;
             }
           } else {
-            KMessageBox::sorry(this, QString("<qt>%1</qt>"). arg(i18n("Cannot read from file <b>%1</b>!").arg(filename)));
+            KMessageBox::sorry(this, QString("<qt>%1</qt>"). arg(i18n("Cannot read from file <b>%1</b>!",filename)));
             rc = false;
           }
         } catch (MyMoneyException *e) {
-          KMessageBox::sorry(this, QString("<qt>%1</qt>"). arg(i18n("Cannot load file <b>%1</b>. Reason: %2").arg(filename, e->what())));
+          KMessageBox::sorry(this, QString("<qt>%1</qt>"). arg(i18n("Cannot load file <b>%1</b>. Reason: %2",filename, e->what())));
           delete e;
           rc = false;
         }
@@ -797,13 +797,13 @@ bool KMyMoneyView::readFile(const KUrl& url)
         }
         qfile->close();
       } else {
-        KMessageBox::sorry(this, QString("<qt>%1</qt>"). arg(i18n("File <b>%1</b> not found!").arg(filename)));
+        KMessageBox::sorry(this, QString("<qt>%1</qt>"). arg(i18n("File <b>%1</b> not found!",filename)));
         rc = false;
       }
       delete qfile;
     }
   } else {
-    KMessageBox::sorry(this, QString("<qt>%1</qt>"). arg(i18n("File <b>%1</b> not found!").arg(filename)));
+    KMessageBox::sorry(this, QString("<qt>%1</qt>"). arg(i18n("File <b>%1</b> not found!",filename)));
     rc = false;
   }
 
@@ -868,7 +868,7 @@ bool KMyMoneyView::openDatabase (const KUrl& url) {
       retry = false;
       break;
     case 1: // permanent error
-      KMessageBox::detailedError (this, i18n("Can't open database %1\n").arg(dbURL.prettyUrl()), reader->lastError());
+      KMessageBox::detailedError (this, i18n("Can't open database %1\n",dbURL.prettyUrl()), reader->lastError());
       if (pDBMgr) {
         removeStorage();
         delete pDBMgr;
@@ -1053,7 +1053,7 @@ void KMyMoneyView::saveToLocalFile(QFile* qfile, IMyMoneyStorageFormat* pWriter,
     if(KMyMoneyGlobalSettings::encryptRecover()) {
       encryptRecover = true;
       if(!KGPGFile::keyAvailable(QString(RECOVER_KEY_ID))) {
-        KMessageBox::sorry(this, QString("<p>")+i18n("You have selected to encrypt your data also with the KMyMoney recover key, but the key with id</p><p><center><b>%1</b></center></p>has not been found in your keyring at this time. Please make sure to import this key into your keyring. You can find it on the <a href=\"http://kmymoney2.sourceforge.net/\">KMyMoney web-site</a>. This time your data will not be encrypted with the KMyMoney recover key.").arg(RECOVER_KEY_ID), i18n("GPG-Key not found"));
+        KMessageBox::sorry(this, QString("<p>")+i18n("You have selected to encrypt your data also with the KMyMoney recover key, but the key with id</p><p><center><b>%1</b></center></p>has not been found in your keyring at this time. Please make sure to import this key into your keyring. You can find it on the <a href=\"http://kmymoney2.sourceforge.net/\">KMyMoney web-site</a>. This time your data will not be encrypted with the KMyMoney recover key.",QString( RECOVER_KEY_ID) ), i18n("GPG-Key not found"));
         encryptRecover = false;
       }
     }
@@ -1062,7 +1062,7 @@ void KMyMoneyView::saveToLocalFile(QFile* qfile, IMyMoneyStorageFormat* pWriter,
     QStringList::const_iterator it_s;
     for(it_s = keys.begin(); it_s != keys.begin(); ++it_s) {
       if(!KGPGFile::keyAvailable(*it_s)) {
-        KMessageBox::sorry(this, QString("<p>")+i18n("You have specified to encrypt your data for the user-id</p><p><center><b>%1</b>.</center></p>Unfortunately, a valid key for this user-id was not found in your keyring. Please make sure to import a valid key for this user-id. This time, encryption is disabled.").arg(*it_s), i18n("GPG-Key not found"));
+        KMessageBox::sorry(this, QString("<p>")+i18n("You have specified to encrypt your data for the user-id</p><p><center><b>%1</b>.</center></p>Unfortunately, a valid key for this user-id was not found in your keyring. Please make sure to import a valid key for this user-id. This time, encryption is disabled.",*it_s), i18n("GPG-Key not found"));
         encryptedOk = false;
       }
     }
@@ -1100,7 +1100,7 @@ void KMyMoneyView::saveToLocalFile(QFile* qfile, IMyMoneyStorageFormat* pWriter,
     if(!dev || !dev->open(QIODevice::WriteOnly)) {
       MyMoneyFile::instance()->blockSignals(blocked);
       delete dev;
-      throw new MYMONEYEXCEPTION(i18n("Unable to open file '%1' for writing.").arg(qfile->fileName()));
+      throw new MYMONEYEXCEPTION(i18n("Unable to open file '%1' for writing.",qfile->fileName()));
     }
 
   } else if(!plaintext) {
@@ -1115,7 +1115,7 @@ void KMyMoneyView::saveToLocalFile(QFile* qfile, IMyMoneyStorageFormat* pWriter,
       if(!dev || !dev->open(QIODevice::WriteOnly)) {
         MyMoneyFile::instance()->blockSignals(blocked);
         delete dev;
-        throw new MYMONEYEXCEPTION(i18n("Unable to open file '%1' for writing.").arg(qfile->fileName()));
+        throw new MYMONEYEXCEPTION(i18n("Unable to open file '%1' for writing.",qfile->fileName()));
       }
       statusDevice = base->device();
     }
@@ -1128,7 +1128,7 @@ void KMyMoneyView::saveToLocalFile(QFile* qfile, IMyMoneyStorageFormat* pWriter,
   pWriter->writeFile(dev, dynamic_cast<IMyMoneySerialize*> (MyMoneyFile::instance()->storage()));
   MyMoneyFile::instance()->blockSignals(blocked);
   if(statusDevice->status() != IO_Ok) {
-    throw new MYMONEYEXCEPTION(i18n("Failure while writing to '%1'").arg(qfile->fileName()));
+    throw new MYMONEYEXCEPTION(i18n("Failure while writing to '%1'",qfile->fileName()));
   }
   pWriter->setProgressCallback(0);
 
@@ -1138,7 +1138,7 @@ void KMyMoneyView::saveToLocalFile(QFile* qfile, IMyMoneyStorageFormat* pWriter,
     dev->close();
     if(statusDevice->status() != IO_Ok) {
       delete dev;
-      throw new MYMONEYEXCEPTION(i18n("Failure while writing to '%1'").arg(qfile->fileName()));
+      throw new MYMONEYEXCEPTION(i18n("Failure while writing to '%1'",qfile->fileName()));
     }
     delete dev;
   } else
@@ -1175,7 +1175,7 @@ bool KMyMoneyView::saveFile(const KUrl& url, const QString& keyList)
   bool rc = true;
   try {
     if(! url.isValid()) {
-      throw new MYMONEYEXCEPTION(i18n("Malformed URL '%1'").arg(url.url()));
+      throw new MYMONEYEXCEPTION(i18n("Malformed URL '%1'",url.url()));
     }
 
     if(url.isLocalFile()) {
@@ -1205,10 +1205,10 @@ bool KMyMoneyView::saveFile(const KUrl& url, const QString& keyList)
           } catch (MyMoneyException* e) {
             qfile.abort();
             delete e;
-            throw new MYMONEYEXCEPTION(i18n("Unable to write changes to '%1'").arg(filename));
+            throw new MYMONEYEXCEPTION(i18n("Unable to write changes to '%1'",filename));
           }
         } else {
-          throw new MYMONEYEXCEPTION(i18n("Unable to write changes to '%1'").arg(filename));
+          throw new MYMONEYEXCEPTION(i18n("Unable to write changes to '%1'",filename));
         }
       }
       chown(filename.toLatin1(), static_cast<uid_t>(-1), gid);
@@ -1216,7 +1216,7 @@ bool KMyMoneyView::saveFile(const KUrl& url, const QString& keyList)
         KTemporaryFile tmpfile;
       saveToLocalFile(new QFile(&tmpfile) , pWriter, plaintext, keyList);
       if(!KIO::NetAccess::upload(tmpfile.fileName(), url, NULL))
-        throw new MYMONEYEXCEPTION(i18n("Unable to upload to '%1'").arg(url.url()));
+        throw new MYMONEYEXCEPTION(i18n("Unable to upload to '%1'",url.url()));
     }
     m_fileType = KmmXML;
   } catch (MyMoneyException *e) {
@@ -1272,7 +1272,7 @@ bool KMyMoneyView::saveAsDatabase(const KUrl& url)
     KMessageBox::detailedError (this,
       i18n("Can't open or create database %1\n"
           "Retry SaveAsDatabase and click Help"
-          " for further info").arg(url.prettyUrl()), writer->lastError());
+          " for further info",url.prettyUrl()), writer->lastError());
   }
   delete writer;
 #endif
@@ -1332,7 +1332,7 @@ void KMyMoneyView::slotSetBaseCurrency(const MyMoneySecurity& baseCurrency)
         MyMoneyFile::instance()->setBaseCurrency(baseCurrency);
         ft.commit();
       } catch(MyMoneyException *e) {
-        KMessageBox::sorry(this, i18n("Cannot set %1 as base currency: %2").arg(baseCurrency.name()).arg(e->what()), i18n("Set base currency"));
+        KMessageBox::sorry(this, i18n("Cannot set %1 as base currency: %2",baseCurrency.name(),e->what()), i18n("Set base currency"));
         delete e;
       }
     }
@@ -1957,7 +1957,7 @@ void KMyMoneyView::fixLoanAccount_0(MyMoneyAccount acc)
         i18n("The account \"%1\" was previously created as loan account but some information "
              "is missing. The new loan wizard will be started to collect all relevant "
              "information. Please use a KMyMoney version >= 0.8.7 and < 0.9 to correct the problem."
-             ).arg(acc.name()),
+             ,acc.name()),
         i18n("Account problem"));
 
     throw new MYMONEYEXCEPTION("Fix LoanAccount0 not supported anymore");

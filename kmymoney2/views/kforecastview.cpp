@@ -296,12 +296,12 @@ void KForecastView::loadSummaryView(void)
           break;
         case 0:
           msg = QString("<font color=\"%1\">").arg(KMyMoneyGlobalSettings::listNegativeValueColor().name());
-          msg += i18n("The balance of %2 is below the minimum balance %3 today.").arg(acc.name()).arg(minBalance.formatMoney(acc, currency));
+          msg += i18n("The balance of %2 is below the minimum balance %3 today.",acc.name(),minBalance.formatMoney(acc, currency));
           msg += QString("</font>");
           break;
         default:
           msg = QString("<font color=\"%1\">").arg(KMyMoneyGlobalSettings::listNegativeValueColor().name());
-          msg += i18n("The balance of %1 will drop below the minimum balance %2 in %3 days.").arg(acc.name()).arg(minBalance.formatMoney(acc, currency)).arg(dropMinimum-1);
+          msg += i18n("The balance of %1 will drop below the minimum balance %2 in %3 days.",acc.name(),minBalance.formatMoney(acc, currency),dropMinimum-1);
           msg += QString("</font>");
       }
 
@@ -318,24 +318,24 @@ void KForecastView::loadSummaryView(void)
       case 0:
         if(acc.accountGroup() == MyMoneyAccount::Asset) {
           msg = QString("<font color=\"%1\">").arg(KMyMoneyGlobalSettings::listNegativeValueColor().name());
-          msg += i18n("The balance of %1 is below %2 today.").arg(acc.name()).arg(MyMoneyMoney().formatMoney(acc, currency));
+          msg += i18n("The balance of %1 is below %2 today.",acc.name(),MyMoneyMoney().formatMoney(acc, currency));
           msg += QString("</font>");
           break;
         }
         if(acc.accountGroup() == MyMoneyAccount::Liability) {
-          msg = i18n("The balance of %1 is above %2 today.").arg(acc.name()).arg(MyMoneyMoney().formatMoney(acc, currency));
+          msg = i18n("The balance of %1 is above %2 today.",acc.name(),MyMoneyMoney().formatMoney(acc, currency));
           break;
         }
         break;
       default:
         if(acc.accountGroup() == MyMoneyAccount::Asset) {
           msg = QString("<font color=\"%1\">").arg(KMyMoneyGlobalSettings::listNegativeValueColor().name());
-          msg += i18n("The balance of %1 will drop below %2 in %3 days.").arg(acc.name()).arg(MyMoneyMoney().formatMoney(acc, currency)).arg(dropZero);
+          msg += i18n("The balance of %1 will drop below %2 in %3 days.",acc.name(),MyMoneyMoney().formatMoney(acc, currency),dropZero);
           msg += QString("</font>");
           break;
         }
         if(acc.accountGroup() == MyMoneyAccount::Liability) {
-          msg = i18n("The balance of %1 will raise above %2 in %3 days.").arg(acc.name()).arg(MyMoneyMoney().formatMoney(acc, currency)).arg(dropZero);
+          msg = i18n("The balance of %1 will raise above %2 in %3 days.",acc.name(),MyMoneyMoney().formatMoney(acc, currency),dropZero);
           break;
         }
     }
@@ -348,7 +348,7 @@ void KForecastView::loadSummaryView(void)
     MyMoneyMoney accCycleVariation = forecast.accountCycleVariation(acc);
     if (accCycleVariation < MyMoneyMoney(0, 1)) {
       msg = QString("<font color=\"%1\">").arg(KMyMoneyGlobalSettings::listNegativeValueColor().name());
-      msg += i18n("The account %1 is decreasing %2 per cycle.").arg(acc.name()).arg(accCycleVariation.formatMoney(acc, currency));
+      msg += i18n("The account %1 is decreasing %2 per cycle.",acc.name(),accCycleVariation.formatMoney(acc, currency));
       msg += QString("</font>");
     }
 
@@ -404,14 +404,14 @@ void KForecastView::loadAdvancedView(void)
 
   //add columns
   for(int i = 1; ((i * forecast.accountsCycle()) + daysToBeginDay) <= forecast.forecastDays(); ++i) {
-    int col = m_advancedList->addColumn(i18n("Min Bal %1").arg(i), -1);
+    int col = m_advancedList->addColumn(i18n("Min Bal %1",i), -1);
     m_advancedList->setColumnAlignment(col, Qt::AlignRight);
-    m_advancedList->addColumn(i18n("Min Date %1").arg(i), -1);
+    m_advancedList->addColumn(i18n("Min Date %1",i), -1);
   }
   for(int i = 1; ((i * forecast.accountsCycle()) + daysToBeginDay) <= forecast.forecastDays(); ++i) {
-    int col = m_advancedList->addColumn(i18n("Max Bal %1").arg(i), -1);
+    int col = m_advancedList->addColumn(i18n("Max Bal %1",i), -1);
     m_advancedList->setColumnAlignment(col, Qt::AlignRight);
-    m_advancedList->addColumn(i18n("Max Date %1").arg(i), -1);
+    m_advancedList->addColumn(i18n("Max Date %1",i), -1);
   }
   int col = m_advancedList->addColumn(i18n("Average"), -1);
   m_advancedList->setColumnAlignment(col, Qt::AlignRight);

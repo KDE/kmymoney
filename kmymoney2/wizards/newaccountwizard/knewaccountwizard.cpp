@@ -263,7 +263,7 @@ const MyMoneySchedule& NewAccountWizard::Wizard::schedule(void)
       m_schedule.setTransaction(t);
 
     } else if(m_account.isLoan()) {
-      m_schedule.setName(i18n("Loan payment for %1").arg(m_accountTypePage->m_accountName->text()));
+      m_schedule.setName(i18n("Loan payment for %1",m_accountTypePage->m_accountName->text()));
       m_schedule.setType(MyMoneySchedule::TYPE_LOANPAYMENT);
       if(moneyBorrowed())
         m_schedule.setPaymentType(MyMoneySchedule::STYPE_DIRECTDEBIT);
@@ -697,7 +697,7 @@ CreditCardSchedulePage::CreditCardSchedulePage(Wizard* wizard) :
 void CreditCardSchedulePage::enterPage(void)
 {
   if(m_name->text().isEmpty())
-    m_name->setText(i18n("CreditCard %1 monthly payment").arg(m_wizard->m_accountTypePage->m_accountName->text()));
+    m_name->setText(i18n("CreditCard %1 monthly payment",m_wizard->m_accountTypePage->m_accountName->text()));
 }
 
 bool CreditCardSchedulePage::isComplete(void) const

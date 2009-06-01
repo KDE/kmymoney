@@ -454,7 +454,7 @@ void KPayeesView::slotChooseDefaultAccount(void)
       }
     }
   }
-#warning "port to kde4"  
+#warning "port to kde4"
 #if 0
   QMapIterator<QString,int> most_frequent, iter;
   most_frequent = account_count.end();
@@ -468,7 +468,7 @@ void KPayeesView::slotChooseDefaultAccount(void)
     checkEnableDefaultAccount->setChecked(true);
     comboDefaultAccount->setSelected(most_frequent.key());
   }
-#endif  
+#endif
 }
 
 void KPayeesView::slotStartRename(void)
@@ -498,7 +498,7 @@ void KPayeesView::slotRenamePayee(Q3ListViewItem* p , int /* col */, const QStri
         if (KMessageBox::questionYesNo(this,
           i18n("A payee with the name '%1' already exists. It is not advisable to have "
             "multiple payees with the same identification name. Are you sure you would like "
-            "to rename the payee?").arg(new_name)) != KMessageBox::Yes)
+            "to rename the payee?",new_name)) != KMessageBox::Yes)
         {
           p->setText(0,m_payee.name());
           return;
@@ -569,7 +569,7 @@ void KPayeesView::slotSelectPayee(void)
   // and ask to store the data
   if (m_updateButton->isEnabled()) {
     if (KMessageBox::questionYesNo(this, QString("<qt>%1</qt>").arg(
-          i18n("Do you want to save the changes for <b>%1</b>?").arg(m_newName)),
+          i18n("Do you want to save the changes for <b>%1</b>?",m_newName)),
           i18n("Save changes")) == KMessageBox::Yes) {
       m_inSelection = true;
       slotUpdatePayee();
@@ -667,7 +667,7 @@ void KPayeesView::showTransactions(void)
   m_transactionView->clear();
 
   if(m_payee.id().isEmpty() || !m_tabWidget->isEnabled()) {
-    m_balanceLabel->setText(i18n("Balance: %1").arg(balance.formatMoney(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction())));
+    m_balanceLabel->setText(i18n("Balance: %1",balance.formatMoney(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction())));
     return;
   }
 

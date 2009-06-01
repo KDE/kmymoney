@@ -1411,13 +1411,13 @@ const QStringList MyMoneyFile::consistencyCheck(void)
         problemCount++;
         if(problemAccount != (*it_a).name()) {
           problemAccount = (*it_a).name();
-          rc << i18n("* Problem with account '%1'").arg(problemAccount);
+          rc << i18n("* Problem with account '%1'",problemAccount);
         }
         // the parent belongs to a different group, so we reconnect to the
         // master group account (asset, liability, etc) to which this account
         // should belong and update it in the engine.
-        rc << i18n("  * Parent account '%1' belongs to a different group.").arg(parent.name());
-        rc << i18n("    New parent account is the top level account '%1'.").arg(toplevel.name());
+        rc << i18n("  * Parent account '%1' belongs to a different group.",parent.name());
+        rc << i18n("    New parent account is the top level account '%1'.",toplevel.name());
         (*it_a).setParentAccountId(toplevel.id());
 
         // make sure to rebuild the sub-accounts of the top account
@@ -1430,10 +1430,10 @@ const QStringList MyMoneyFile::consistencyCheck(void)
         problemCount++;
         if(problemAccount != (*it_a).name()) {
           problemAccount = (*it_a).name();
-          rc << i18n("* Problem with account '%1'").arg(problemAccount);
+          rc << i18n("* Problem with account '%1'",problemAccount);
         }
         // parent exists, but does not have a reference to the account
-        rc << i18n("  * Parent account '%1' does not contain '%2' as sub-account.").arg(parent.name(), problemAccount);
+        rc << i18n("  * Parent account '%1' does not contain '%2' as sub-account.",parent.name(), problemAccount);
         accountRebuild << parent.id();
       }
     } catch(MyMoneyException *e) {
@@ -1444,10 +1444,10 @@ const QStringList MyMoneyFile::consistencyCheck(void)
       problemCount++;
       if(problemAccount != (*it_a).name()) {
         problemAccount = (*it_a).name();
-        rc << i18n("* Problem with account '%1'").arg(problemAccount);
+        rc << i18n("* Problem with account '%1'",problemAccount);
       }
-      rc << i18n("  * The parent with id %1 does not exist anymore.").arg(parentId);
-      rc << i18n("    New parent account is the top level account '%1'.").arg(toplevel.name());
+      rc << i18n("  * The parent with id %1 does not exist anymore.",parentId);
+      rc << i18n("    New parent account is the top level account '%1'.",toplevel.name());
       (*it_a).setParentAccountId(toplevel.id());
 
       addNotification((*it_a).id());
@@ -1466,9 +1466,9 @@ const QStringList MyMoneyFile::consistencyCheck(void)
         problemCount++;
         if(problemAccount != (*it_a).name()) {
           problemAccount = (*it_a).name();
-          rc << i18n("* Problem with account '%1'").arg(problemAccount);
+          rc << i18n("* Problem with account '%1'",problemAccount);
         }
-        rc << i18n("  * Child account with id %1 does not exist anymore.").arg(*it_c);
+        rc << i18n("  * Child account with id %1 does not exist anymore.",*it_c);
         rc << i18n("    The child account list will be reconstructed.");
         if(accountRebuild.contains((*it_a).id()) == 0)
           accountRebuild << (*it_a).id();
@@ -1533,7 +1533,7 @@ const QStringList MyMoneyFile::consistencyCheck(void)
         addNotification((*it_a).id());
       } catch (MyMoneyException *e) {
         delete e;
-        rc << i18n("  * Unable to update account data for account %1 in engine").arg((*it_a).name());
+        rc << i18n("  * Unable to update account data for account %1 in engine",(*it_a).name());
       }
     }
   }
@@ -1551,7 +1551,7 @@ const QStringList MyMoneyFile::consistencyCheck(void)
       payee.clearId();
       m_storage->addPayee(payee);
       payeeConversionMap[(*it_p).id()] = payee.id();
-      rc << i18n("  * Payee %1 recreated with fixed id").arg(payee.name());
+      rc << i18n("  * Payee %1 recreated with fixed id",payee.name());
       ++problemCount;
     }
   }
@@ -1580,7 +1580,7 @@ const QStringList MyMoneyFile::consistencyCheck(void)
       if(payeeConversionMap.find((*it_s).payeeId()) != payeeConversionMap.end()) {
         s.setPayeeId(payeeConversionMap[s.payeeId()]);
         sChanged = true;
-        rc << i18n("  * Payee id updated in split of transaction '%1'.").arg(t.id());
+        rc << i18n("  * Payee id updated in split of transaction '%1'.",t.id());
         ++problemCount;
       }
 
@@ -1593,16 +1593,16 @@ const QStringList MyMoneyFile::consistencyCheck(void)
           // use the value as master if the transaction is balanced
           if(t.splitSum().isZero()) {
             s.setShares(s.value());
-            rc << i18n("  * shares set to value in split of transaction '%1'.").arg(t.id());
+            rc << i18n("  * shares set to value in split of transaction '%1'.",t.id());
           } else {
             s.setValue(s.shares());
-            rc << i18n("  * value set to shares in split of transaction '%1'.").arg(t.id());
+            rc << i18n("  * value set to shares in split of transaction '%1'.",t.id());
           }
           sChanged = true;
           ++problemCount;
         }
       } catch(MyMoneyException *e) {
-        rc << i18n("  * Split %2 in transaction '%1' contains a reference to invalid account %3. Please fix manually.").arg(t.id(), (*it_s).id(), (*it_s).accountId());
+        rc << i18n("  * Split %2 in transaction '%1' contains a reference to invalid account %3. Please fix manually.",t.id(), (*it_s).id(), (*it_s).accountId());
         ++problemCount;
         ++unfixedCount;
         delete e;
@@ -1613,7 +1613,7 @@ const QStringList MyMoneyFile::consistencyCheck(void)
       && s.action() != MyMoneySplit::ActionInterest) {
         s.setAction(MyMoneySplit::ActionInterest);
         sChanged = true;
-        rc << i18n("  * action marked as interest in split of transaction '%1'.").arg(t.id());
+        rc << i18n("  * action marked as interest in split of transaction '%1'.",t.id());
         ++problemCount;
       }
 
@@ -1640,13 +1640,13 @@ const QStringList MyMoneyFile::consistencyCheck(void)
       if(payeeConversionMap.find((*it_s).payeeId()) != payeeConversionMap.end()) {
         s.setPayeeId(payeeConversionMap[s.payeeId()]);
         sChanged = true;
-        rc << i18n("  * Payee id updated in split of schedule '%1'.").arg((*it_sch).name());
+        rc << i18n("  * Payee id updated in split of schedule '%1'.",(*it_sch).name());
         ++problemCount;
       }
       if(!(*it_s).value().isZero() && (*it_s).shares().isZero()) {
         s.setShares(s.value());
         sChanged = true;
-        rc << i18n("  * Split in scheduled transaction '%1' contained value != 0 and shares == 0.").arg((*it_sch).name());
+        rc << i18n("  * Split in scheduled transaction '%1' contained value != 0 and shares == 0.",(*it_sch).name());
         rc << i18n("    Shares set to value.");
         ++problemCount;
       }
@@ -1655,7 +1655,7 @@ const QStringList MyMoneyFile::consistencyCheck(void)
       if(!(*it_s).bankID().isEmpty()) {
         s.setBankID(QString());
         sChanged = true;
-        rc << i18n("  * Removed bankid from split in scheduled transaction '%1'.").arg((*it_sch).name());
+        rc << i18n("  * Removed bankid from split in scheduled transaction '%1'.",(*it_sch).name());
         ++problemCount;
       }
 
@@ -1668,16 +1668,16 @@ const QStringList MyMoneyFile::consistencyCheck(void)
           // use the value as master if the transaction is balanced
           if(t.splitSum().isZero()) {
             s.setShares(s.value());
-            rc << i18n("  * shares set to value in split in schedule '%1'.").arg((*it_sch).name());
+            rc << i18n("  * shares set to value in split in schedule '%1'.",(*it_sch).name());
           } else {
             s.setValue(s.shares());
-            rc << i18n("  * value set to shares in split in schedule '%1'.").arg((*it_sch).name());
+            rc << i18n("  * value set to shares in split in schedule '%1'.",(*it_sch).name());
           }
           sChanged = true;
           ++problemCount;
         }
       } catch(MyMoneyException *e) {
-        rc << i18n("  * Split %2 in schedule '%1' contains a reference to invalid account %3. Please fix manually.").arg((*it_sch).name(), (*it_s).id(), (*it_s).accountId());
+        rc << i18n("  * Split %2 in schedule '%1' contains a reference to invalid account %3. Please fix manually.",(*it_sch).name(), (*it_s).id(), (*it_s).accountId());
         ++problemCount;
         ++unfixedCount;
         delete e;
@@ -1703,7 +1703,7 @@ const QStringList MyMoneyFile::consistencyCheck(void)
     bool rChanged = false;
     for(it_p = pList.begin(); it_p != pList.end(); ++it_p) {
       if(payeeConversionMap.find(*it_p) != payeeConversionMap.end()) {
-        rc << i18n("  * Payee id updated in report '%1'.").arg((*it_r).name());
+        rc << i18n("  * Payee id updated in report '%1'.",(*it_r).name());
         ++problemCount;
         r.removeReference(*it_p);
         r.addPayee(payeeConversionMap[*it_p]);
@@ -1720,7 +1720,7 @@ const QStringList MyMoneyFile::consistencyCheck(void)
   for(it_m = payeeConversionMap.begin(); it_m != payeeConversionMap.end(); ++it_m) {
     MyMoneyPayee payee = this->payee(it_m.key());
     removePayee(payee);
-    rc << i18n("  * Payee '%1' removed.").arg(payee.id());
+    rc << i18n("  * Payee '%1' removed.",payee.id());
     ++problemCount;
   }
 
@@ -1730,7 +1730,7 @@ const QStringList MyMoneyFile::consistencyCheck(void)
     rc << i18n("Finish! Data is consistent.");
   else
     rc << i18n("Finish! %1 problem(s) corrected. %2 problem(s) still present.")
-            .arg(problemCount).arg(unfixedCount);
+            .arg(problemCount,unfixedCount);
 
   return rc;
 }

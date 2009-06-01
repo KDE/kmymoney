@@ -657,11 +657,11 @@ void KGlobalLedgerView::loadView(void)
           arg(paymentAmount[m_account.id()].abs().formatMoney(m_account.fraction())) );
     }
     if(pStatement) {
-      pStatement->setText(i18n("%1 payments (%2)").arg(payments[m_account.id()]).
+      pStatement->setText(i18n("%1 payments (%2)",payments[m_account.id()]).
           arg(paymentAmount[m_account.id()].abs().formatMoney(m_account.fraction())) );
     }
     if(dStatement) {
-      dStatement->setText(i18n("%1 deposits (%2)").arg(deposits[m_account.id()]).
+      dStatement->setText(i18n("%1 deposits (%2)",deposits[m_account.id()]).
           arg(depositAmount[m_account.id()].abs().formatMoney(m_account.fraction())) );
     }
 
@@ -729,9 +729,9 @@ void KGlobalLedgerView::updateSummaryLine(const QMap<QString, MyMoneyMoney>& act
 
   if(isReconciliationAccount()) {
     if(m_account.accountType() != MyMoneyAccount::Investment) {
-      m_leftSummaryLabel->setText(i18n("Statement: %1").arg(d->m_endingBalance.formatMoney("", d->m_precision)));
-      m_centerSummaryLabel->setText(i18n("Cleared: %1").arg(clearedBalance[m_account.id()].formatMoney("", d->m_precision)));
-      m_rightSummaryLabel->setText(i18n("Difference: %1").arg((clearedBalance[m_account.id()] - d->m_endingBalance).formatMoney("", d->m_precision)));
+      m_leftSummaryLabel->setText(i18n("Statement: %1",d->m_endingBalance.formatMoney("", d->m_precision)));
+      m_centerSummaryLabel->setText(i18n("Cleared: %1",clearedBalance[m_account.id()].formatMoney("", d->m_precision)));
+      m_rightSummaryLabel->setText(i18n("Difference: %1",(clearedBalance[m_account.id()] - d->m_endingBalance).formatMoney("", d->m_precision)));
     }
   } else {
     // update summary line in normal mode
@@ -744,8 +744,8 @@ void KGlobalLedgerView::updateSummaryLine(const QMap<QString, MyMoneyMoney>& act
     }
 
     if(m_account.accountType() != MyMoneyAccount::Investment) {
-      m_centerSummaryLabel->setText(i18n("Cleared: %1").arg(clearedBalance[m_account.id()].formatMoney("", d->m_precision)));
-      m_rightSummaryLabel->setText(i18n("Balance: %1").arg(actBalance[m_account.id()].formatMoney("", d->m_precision)));
+      m_centerSummaryLabel->setText(i18n("Cleared: %1",clearedBalance[m_account.id()].formatMoney("", d->m_precision)));
+      m_rightSummaryLabel->setText(i18n("Balance: %1",actBalance[m_account.id()].formatMoney("", d->m_precision)));
     } else {
       m_centerSummaryLabel->hide();
       MyMoneyMoney balance;
@@ -773,7 +773,7 @@ void KGlobalLedgerView::updateSummaryLine(const QMap<QString, MyMoneyMoney>& act
         }
         balance += ((*it_b) * rate).convert(base.smallestAccountFraction());
       }
-      m_rightSummaryLabel->setText(i18n("Investment value: %1%2").arg(approx ? "~" : "").arg(balance.formatMoney(base.tradingSymbol(), d->m_precision)));
+      m_rightSummaryLabel->setText(i18n("Investment value: %1%2",approx ? "~" : "",balance.formatMoney(base.tradingSymbol(), d->m_precision)));
     }
   }
 }
@@ -912,7 +912,7 @@ void KGlobalLedgerView::slotSetReconcileAccount(const MyMoneyAccount& acc, const
       // the view.
       slotLoadView();
     }
-#endif    
+#endif
   }
 }
 
@@ -1043,7 +1043,7 @@ TransactionEditor* KGlobalLedgerView::startEdit(const KMyMoneyRegister::Selected
 
     case 1:
 #warning "port to kde4"
-#if 0      
+#if 0
       if(KMessageBox::warningContinueCancel(0,
         i18n(
           "At least one split of the selected transactions has been reconciled. "
@@ -1053,7 +1053,7 @@ TransactionEditor* KGlobalLedgerView::startEdit(const KMyMoneyRegister::Selected
         "EditReconciledTransaction") == KMessageBox::Cancel) {
         warnLevel = 2;
       }
-#endif      
+#endif
       break;
 
     case 2:
