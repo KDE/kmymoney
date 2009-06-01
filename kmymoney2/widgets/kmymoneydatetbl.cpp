@@ -167,21 +167,10 @@ kMyMoneyDateTbl::paintCell(QPainter *painter, int row, int col)
 
       int year=date.year();
       QString headerText;
-#if QT_VERSION > 0x030005
       // FIXME: Shouldn't that be i18n()'ed as well
       QString weekStr = QString::number(date.weekNumber(&year));
       QString yearStr = QString::number(year);
-      headerText = i18n("Week %1 for year %2.")
-        .arg(weekStr)
-        .arg(yearStr);
-#else
-      // FIXME: include code to display the same as for KDE >= 3.0.5
-      QString weekStr = QString::number(weekNumber(date, &year));
-      QString yearStr = QString::number(year);
-      headerText = i18n("Week %1 for year %2.")
-        .arg(weekStr)
-        .arg(yearStr);
-#endif
+      headerText = i18n("Week %1 for year %2.", weekStr, yearStr);
 
       painter->drawText(0, 0, w, h-1, Qt::AlignCenter, headerText, -1, &rect);
 
@@ -271,7 +260,7 @@ kMyMoneyDateTbl::paintCell(QPainter *painter, int row, int col)
 
     drawCellContents(painter, row, col, drawDate);
   }
-#endif  
+#endif
 }
 
 void
@@ -353,9 +342,9 @@ kMyMoneyDateTbl::setFontSize(int size)
 
   for(count=0; count<m_colCount; ++count)
   {
-#warning "port to kde4"	  
+#warning "port to kde4"
     //rect=metrics.boundingRect(WEEK_DAY_NAME(count+1/*, true*/));
- 
+
     maxCell.setWidth(qMax(maxCell.width(), rect.width()));
     maxCell.setHeight(qMax(maxCell.height(), rect.height()));
   }
@@ -389,7 +378,7 @@ kMyMoneyDateTbl::contentsMouseReleaseEvent(QMouseEvent *e)
 
   if(!isEnabled())
   {
-#warning "port to kde4"	  
+#warning "port to kde4"
     //KNotifyClient::beep();
     return;
   }
@@ -652,50 +641,5 @@ void kMyMoneyDateTbl::contentsMouseMoveEvent(QMouseEvent* e)
 
   Q3GridView::contentsMouseMoveEvent(e);
 }
-
-#if QT_VERSION <= 0x030005
-// The following code is borrowed from QT 3.2 QDate::weekNumber()
-// and slightly modified
-int kMyMoneyDateTbl::weekNumber(const QDate& date, int *yearNumber) const
-{
-     if ( !date.isValid() )
-        return 0;
-
-    int dow = date.dayOfWeek();
-    int doy = date.dayOfYear();
-    int currYear = date.year();
-    int jan1WeekDay = QDate( currYear, 1, 1 ).dayOfWeek();
-    int yearNum;
-    int weekNum;
-
-    if ( doy <= (8 - jan1WeekDay) && jan1WeekDay > 4 ) {
-        yearNum = currYear - 1;
-        weekNum = 52;
-        if ( jan1WeekDay == 5 ||
-             (jan1WeekDay == 6 && QDate::leapYear(yearNum)) )
-            weekNum++;
-    } else {
-        int totalDays = 365;
-        if ( QDate::leapYear(currYear) )
-            totalDays++;
-
-        if ( (totalDays - doy < 4 - dow)
-             || (jan1WeekDay == 7 && totalDays - doy < 3) ) {
-            yearNum = currYear + 1;
-            weekNum = 1;
-        } else {
-            int j = doy + ( 7 - dow ) + ( jan1WeekDay - 1 );
-            yearNum = currYear;
-            weekNum = j / 7;
-            if ( jan1WeekDay > 4 )
-                weekNum--;
-        }
-    }
-    if ( yearNumber )
-        *yearNumber = yearNum;
-    return weekNum;
-
-}
-#endif
 
 #include "kmymoneydatetbl.moc"

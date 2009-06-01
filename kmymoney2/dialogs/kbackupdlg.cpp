@@ -30,11 +30,7 @@
 
 #include <kglobal.h>
 #include <klocale.h>
-#if QT_VERSION > 300
 #include <kstandarddirs.h>
-#else
-#include <kstandarddirs.h>
-#endif
 
 #include <kconfig.h>
 #include <kdirselectdialog.h>

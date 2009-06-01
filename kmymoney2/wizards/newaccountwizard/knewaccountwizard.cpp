@@ -562,9 +562,7 @@ void AccountTypePage::priceWarning(bool always)
 
 void AccountTypePage::slotUpdateConversionRate(const QString& txt)
 {
-  m_conversionExample->setText(i18n("1 %1 equals %2").
-      arg(MyMoneyFile::instance()->baseCurrency().tradingSymbol()).
-      arg(MyMoneyMoney(txt).formatMoney(m_currencyComboBox->security().tradingSymbol(), KMyMoneyGlobalSettings::pricePrecision())));
+  m_conversionExample->setText(i18n("1 %1 equals %2",MyMoneyFile::instance()->baseCurrency().tradingSymbol(),MyMoneyMoney(txt).formatMoney(m_currencyComboBox->security().tradingSymbol(), KMyMoneyGlobalSettings::pricePrecision())));
 }
 
 void AccountTypePage::slotLoadWidgets(void)
