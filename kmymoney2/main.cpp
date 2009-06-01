@@ -96,6 +96,7 @@ int main(int argc, char *argv[])
   aboutData.addCredit(ki18n("Robert Wadley" ), ki18n("Icons & splash screen"), "rob@robntina.fastmail.us");
   aboutData.addCredit(ki18n("Laurent Montel" ),ki18n("Patches and port to kde4"), "montel@kde.org");
   aboutData.addCredit(ki18n("Wolfgang Rohdewald" ), ki18n("Patches"), "woro@users.sourceforge.net");
+  aboutData.setOrganizationDomain("kde.org");
   KCmdLineOptions options;
   options.add( "lang <lang-code>", ki18n("language to be used") );
   options.add( "n", ki18n("don't open last used file") );
