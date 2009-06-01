@@ -611,7 +611,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
 
         if ( t_in.m_strSecurity.isEmpty() )
         {
-          KMessageBox::information(0, i18n("This imported statement contains investment transactions with no security.  These transactions will be ignored.").arg(t_in.m_strSecurity),i18n("Security not found"),QString("BlankSecurity"));
+          KMessageBox::information(0, i18n("This imported statement contains investment transactions with no security.  These transactions will be ignored.",t_in.m_strSecurity),i18n("Security not found"),QString("BlankSecurity"));
           return;
         }
         else
@@ -1161,7 +1161,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           // to enter the schedule and match it agains the new transaction. Otherwise, we
           // just leave the transaction as imported.
           MyMoneySchedule schedule(*(dynamic_cast<const MyMoneySchedule*>(o)));
-          if(KMessageBox::questionYesNo(0, QString("<qt>%1</qt>").arg(i18n("KMyMoney has found a scheduled transaction named <b>%1</b> which matches an imported transaction. Do you want KMyMoney to enter this schedule now so that the transaction can be matched? ").arg(schedule.name())), i18n("Schedule found")) == KMessageBox::Yes) {
+          if(KMessageBox::questionYesNo(0, QString("<qt>%1</qt>").arg(i18n("KMyMoney has found a scheduled transaction named <b>%1</b> which matches an imported transaction. Do you want KMyMoney to enter this schedule now so that the transaction can be matched? ",schedule.name())), i18n("Schedule found")) == KMessageBox::Yes) {
             KEnterScheduleDlg dlg(0, schedule);
             TransactionEditor* editor = dlg.startEdit();
             if(editor) {

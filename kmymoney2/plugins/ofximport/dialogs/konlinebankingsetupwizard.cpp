@@ -381,7 +381,7 @@ int KOnlineBankingSetupWizard::ofxStatusCallback(struct OfxStatusData data, void
   }
 
   if(data.server_message_valid==true){
-    message += i18n("Server message: %1\n").arg(data.server_message);
+    message += i18n("Server message: %1\n",data.server_message);
   }
 
   if(data.severity_valid==true){
@@ -389,10 +389,10 @@ int KOnlineBankingSetupWizard::ofxStatusCallback(struct OfxStatusData data, void
     case OfxStatusData::INFO :
       break;
     case OfxStatusData::WARN :
-      KMessageBox::detailedError( pthis, i18n("Your bank returned warnings when signing on"), i18n("WARNING %1").arg(message) );
+      KMessageBox::detailedError( pthis, i18n("Your bank returned warnings when signing on"), i18n("WARNING %1",message) );
       break;
     case OfxStatusData::ERROR :
-      KMessageBox::detailedError( pthis, i18n("Error signing onto your bank"), i18n("ERROR %1").arg(message) );
+      KMessageBox::detailedError( pthis, i18n("Error signing onto your bank"), i18n("ERROR %1",message) );
       break;
     default:
       break;

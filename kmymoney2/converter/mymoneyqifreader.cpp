@@ -753,7 +753,7 @@ void MyMoneyQifReader::processMSAccountEntry(const MyMoneyAccount::accountTypeE 
           const MyMoneySecurity& sec = file->security(m_account.currencyId());
           if ( KMessageBox::questionYesNo(
             qApp->mainWidget(),
-            i18n("The %1 account currently has an opening balance of %2. This QIF file reports an opening balance of %3. Would you like to overwrite the current balance with the one from the QIF file?").arg(m_account.name(), split.shares().formatMoney(m_account, sec),balance.formatMoney(m_account, sec)),
+            i18n("The %1 account currently has an opening balance of %2. This QIF file reports an opening balance of %3. Would you like to overwrite the current balance with the one from the QIF file?",m_account.name(), split.shares().formatMoney(m_account, sec),balance.formatMoney(m_account, sec)),
             i18n("Overwrite opening balance"),
             KStandardGuiItem::yes(),
             KStandardGuiItem::no(),
@@ -1412,7 +1412,7 @@ void MyMoneyQifReader::processInvestmentTransactionEntry(void)
     // If the security is not known, notify the user
     // TODO (Ace) A "SelectOrCreateAccount" interface for investments
     KMessageBox::information(0, i18n("This investment account does not contain the \"%1\" security.  "
-                                      "Transactions involving this security will be ignored.").arg(securityname),
+                                      "Transactions involving this security will be ignored.",securityname),
                                 i18n("Security not found"),
                                 QString("MissingSecurity%1").arg(securityname.trimmed()));
     return;
@@ -2198,7 +2198,7 @@ void MyMoneyQifReader::selectOrCreateAccount(const SelectCreateMode mode, MyMone
               const MyMoneySecurity&  sec = file->security(account.currencyId());
               if ( KMessageBox::questionYesNo(
                 qApp->mainWidget(),
-                i18n("The %1 account currently has an opening balance of %2. This QIF file reports an opening balance of %3. Would you like to overwrite the current balance with the one from the QIF file?").arg(account.name(), split.shares().formatMoney(account, sec), balance.formatMoney(account, sec)),
+                i18n("The %1 account currently has an opening balance of %2. This QIF file reports an opening balance of %3. Would you like to overwrite the current balance with the one from the QIF file?",account.name(), split.shares().formatMoney(account, sec), balance.formatMoney(account, sec)),
                 i18n("Overwrite opening balance"),
                 KStandardGuiItem::yes(),
                 KStandardGuiItem::no(),

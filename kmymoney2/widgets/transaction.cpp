@@ -665,7 +665,7 @@ bool Transaction::maybeTip(const QPoint& cpos, int row, int col, QRect& r, QStri
       msg = QString("<qt>%1</qt>").arg(i18n("Transaction is missing a category assignment."));
     } else {
       const MyMoneySecurity& sec = MyMoneyFile::instance()->security(m_account.currencyId());
-      msg = QString("<qt>%1</qt>").arg(i18n("The transaction has a missing assignment of <b>%1</b>.").arg(m_transaction.splitSum().abs().formatMoney(m_account, sec)));
+      msg = QString("<qt>%1</qt>").arg(i18n("The transaction has a missing assignment of <b>%1</b>.",m_transaction.splitSum().abs().formatMoney(m_account, sec)));
     }
     return true;
   }

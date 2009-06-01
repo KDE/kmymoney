@@ -192,13 +192,13 @@ bool WebPriceQuote::launchNative( const QString& _symbol, const QString& _id, co
 
 void WebPriceQuote::removeTempFile(const QString& tmpFile)
 {
-#warning "port to kde4"	
-#if 0	
+#warning "port to kde4"
+#if 0
   if(tmpFile == m_tmpFile) {
     unlink(tmpFile);
     m_tmpFile = QString();
   }
-#endif  
+#endif
 }
 
 bool WebPriceQuote::download(const KUrl& u, QString & target, QWidget* window)
@@ -346,7 +346,7 @@ void WebPriceQuote::slotParseQuote(const QString& _quotedata)
     QRegExp priceRegExp(m_source.m_price);
 
     if( symbolRegExp.search(quotedata) > -1)
-      emit status(i18n("Symbol found: %1").arg(symbolRegExp.cap(1)));
+      emit status(i18n("Symbol found: %1",symbolRegExp.cap(1)));
 
     if(priceRegExp.search(quotedata)> -1)
     {
@@ -837,7 +837,7 @@ void FinanceQuoteProcess::launch (const QString& scriptPath) {
 #warning "port to kde4"
 #if 0
       	clearArguments();
-  
+
   arguments.append(Q3CString("perl"));
   arguments.append(scriptPath);
   arguments.append (Q3CString("-l"));
@@ -960,7 +960,7 @@ QDate MyMoneyDateFormat::convertString(const QString& _in, bool _strict, unsigne
         unsigned i = 1;
         while ( i <= 12 )
         {
-#warning "port it to kde4"		
+#warning "port it to kde4"
           if(KGlobal::locale()->calendar()->monthName(i, 2000).toLower() == *it_scanned
           || KGlobal::locale()->calendar()->monthName(i, 2000/*, KLocale::ShortDate*/).toLower() == *it_scanned)
             month = i;
@@ -1014,7 +1014,7 @@ QDate MyMoneyDateFormat::convertString(const QString& _in, bool _strict, unsigne
     throw new MYMONEYEXCEPTION(QString("Invalid date (yr%1 mo%2 dy%3)").arg(year).arg(month).arg(day));
 
   return result;
-#endif  
+#endif
   return QDate();
 }
 

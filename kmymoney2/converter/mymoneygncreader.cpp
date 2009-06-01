@@ -1128,7 +1128,7 @@ void MyMoneyGncReader::setFileHideFactor () {
         i18n ("Each monetary value on your file will be multiplied by a random number between 0.01 and 1.99\n"
                      "with a different value used for each transaction. In addition, to further disguise the true\n"
                              "values, you may enter a number between %1 and %2 which will be applied to all values.\n"
-                             "These numbers will not be stored in the file.").arg(MINFILEHIDEF).arg(MAXFILEHIDEF),
+                             "These numbers will not be stored in the file.",MINFILEHIDEF,MAXFILEHIDEF),
                 (1.0 + (int)(1000.0 * rand() / (RAND_MAX + 1.0))) / 100.0,
         MINFILEHIDEF, MAXFILEHIDEF, 2);
     }
@@ -1976,8 +1976,7 @@ void MyMoneyGncReader::terminate () {
        indeed it used to do so. However now it seems to return the index of the button. In this case it doesn't matter,
        since for Yes, the id is 3 and the index is 0, whereas the No button will return 4 or 1. So we test for either Yes case */
     /* and now it seems to have changed again, returning 259 for a Yes??? so use KMessagebox */
-    QString question = i18n("Your main currency seems to be %1 (%2); do you want to set this as your base currency?")
-        .arg(mainCurrency).arg(m_storage->currency(mainCurrency.toUtf8()).name());
+    QString question = i18n("Your main currency seems to be %1 (%2); do you want to set this as your base currency?", mainCurrency,m_storage->currency(mainCurrency.toUtf8()).name());
     if(KMessageBox::questionYesNo(0, question, PACKAGE) == KMessageBox::Yes) {
       m_storage->setValue ("kmm-baseCurrency", mainCurrency);
     }
@@ -2296,7 +2295,7 @@ void MyMoneyGncReader::checkInvestmentOption (QString stockId) {
           // this code is probably not going to be implemented coz we can't change account types (??)
 #if 0
           QMessageBox mb (PACKAGE,
-                          i18n ("%1 is not an Investment Account. Do you wish to make it one?").arg(invAcc.name()),
+                          i18n ("%1 is not an Investment Account. Do you wish to make it one?",invAcc.name()),
                           QMessageBox::Question,
                           QMessageBox::Yes | QMessageBox::Default,
                           QMessageBox::No | QMessageBox::Escape,

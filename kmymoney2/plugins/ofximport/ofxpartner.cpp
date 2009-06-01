@@ -405,7 +405,7 @@ OfxHttpRequest::OfxHttpRequest(const QString& type, const KUrl &url, const QByte
     delete m_job;
   } else {
     m_error = Q3Http::Aborted;
-    errorMsg = i18n("Cannot open file %1 for writing").arg(dst.path());
+    errorMsg = i18n("Cannot open file %1 for writing",dst.path());
   }
 
   if(m_error != Q3Http::NoError) {
