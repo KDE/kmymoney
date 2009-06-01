@@ -1452,9 +1452,7 @@ void KMyMoney2App::slotFileOpenRecent(const KUrl& url)
         if(myMoneyView->readFile(dburl)) {
           if((myMoneyView->isNativeFile())) {
             m_fileName = dburl;
-            //KRecentFilesAction *p = dynamic_cast<KRecentFilesAction*>(action("file_open_recent"));
-            //if(p)
-              m_recentFiles->addUrl(dburl.pathOrUrl());
+            m_recentFiles->addUrl(dburl.pathOrUrl());
             writeLastUsedFile(dburl.pathOrUrl());
           } else {
             m_fileName = KUrl(); // imported files have no filename

@@ -64,6 +64,8 @@ public:
   virtual ~TabBar() {}
 
   SignalEmissionE setSignalEmission(SignalEmissionE type);
+
+#warning #Port to KDE4
 #if 0
   void copyTabs(const TabBar* otabbar);
 
@@ -72,31 +74,34 @@ public:
   void setIdentifier(QTab* tab, int newId);
 
   QTab* tab(int id) const;
+#endif
 
-  int currentTab(void) const;
+  int currentIndex(void) const;
 
 public slots:
+#warning #Port to KDE4
+#if 0
   /**
     * overridden for internal reasons, API not changed
     */
-  virtual void setCurrentTab( int );
+  virtual void setCurrentIndex( int );
 
   /**
     * overridden for internal reasons, API not changed
     */
-  virtual void setCurrentTab( QTab * );
-
+  virtual void setCurrentIndex( QTab * );
+#endif
   /**
     * overridden for internal reasons, API not changed
     */
   virtual void show(void);
 
 protected slots:
-  void slotTabSelected(int id);
+  void slotTabCurrentChanged(int id);
 
 signals:
-  void tabSelected(int id);
-#endif
+  void tabCurrentChanged(int id);
+
 private:
   SignalEmissionE    m_signalType;
   

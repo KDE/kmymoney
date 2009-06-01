@@ -641,7 +641,6 @@ bool KMyMoneyView::readFile(const KUrl& url)
 
   if(url.isLocalFile()) {
     filename = url.path();
-
   } else {
     if(!KIO::NetAccess::download(url, filename, NULL)) {
       KMessageBox::detailedError(this,

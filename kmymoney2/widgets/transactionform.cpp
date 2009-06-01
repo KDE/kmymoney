@@ -53,7 +53,7 @@ TabBar::TabBar(QWidget* parent, const char* name) :
   QTabBar(parent),
   m_signalType(SignalNormal)
 {
-  connect(this, SIGNAL(selected(int)), this, SLOT(slotTabSelected(int)));
+  connect(this, SIGNAL(currentChanged(int)), this, SLOT(slotTabCurrentChanged(int)));
 }
 
 TabBar::SignalEmissionE TabBar::setSignalEmission(TabBar::SignalEmissionE type)
@@ -62,22 +62,25 @@ TabBar::SignalEmissionE TabBar::setSignalEmission(TabBar::SignalEmissionE type)
   m_signalType = type;
   return _type;
 }
-#if 0
-int TabBar::currentTab(void) const
+#warning #Port to kde4
+
+int TabBar::currentIndex(void) const
 {
   QMap<int, int>::const_iterator it;
-  it = m_idMap.find(QTabBar::currentTab());
+  it = m_idMap.find(QTabBar::currentIndex());
   if(it != m_idMap.end())
     return *it;
   return -1;
 }
-
-void TabBar::setCurrentTab(int id)
+#warning #Port to KDE4
+#if 0
+void TabBar::setCurrentIndex(int id)
 {
   if (tab(id)) // there are no tabs in an expense/income ledger
     if (tab(id)->isEnabled())
-      setCurrentTab(tab(id));
+      setCurrentIndex(tab(id));
 }
+
 
 QTab* TabBar::tab(int id) const
 {
@@ -97,12 +100,13 @@ QTab* TabBar::tab(int id) const
   return result;
 }
 
-void TabBar::setCurrentTab(QTab* tab)
+
+void TabBar::setCurrentIndex(QTab* tab)
 {
   if(m_signalType != SignalNormal)
     blockSignals(true);
 
-  QTabBar::setCurrentTab(tab);
+  QTabBar::setCurrentIndex(tab);
 
   if(m_signalType != SignalNormal)
     blockSignals(false);
@@ -121,20 +125,20 @@ void TabBar::setIdentifier(QTab* tab, int newId)
 {
   m_idMap[tab->identifier()] = newId;
 }
-
+#endif
 void TransactionForm::enableTabBar(bool b)
 {
   m_tabBar->setEnabled(b);
 }
 
-void TabBar::slotTabSelected(int id)
+void TabBar::slotTabCurrentChanged(int id)
 {
   QMap<int, int>::const_iterator it;
   it = m_idMap.find(id);
   if(it != m_idMap.end())
-    emit tabSelected(*it);
+    emit tabCurrentChanged(*it);
   else
-    emit tabSelected(id);
+    emit tabCurrentChanged(id);
 }
 
 void TabBar::show(void)
@@ -149,6 +153,8 @@ void TabBar::show(void)
     blockSignals(false);
 }
 
+#warning #Port to KDE4
+#if 0
 void TabBar::copyTabs(const TabBar* otabbar)
 {
   // remove all existing tabs
@@ -167,6 +173,7 @@ void TabBar::copyTabs(const TabBar* otabbar)
   }
 }
 #endif
+
 TransactionForm::TransactionForm(QWidget *parent, const char *name) :
   TransactionEditorContainer(parent, name),
   m_transaction(0),
