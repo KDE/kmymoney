@@ -1481,7 +1481,7 @@ void KMyMoneyView::loadDefaultCurrencies(void)
   loadDefaultCurrency(MyMoneySecurity("IDR", i18n("Indonesian Rupiah"),      "IDR", 100, 1), create);
   loadDefaultCurrency(MyMoneySecurity("IRR", i18n("Iranian Rial"),           "IRR", 1, 1), create);
   loadDefaultCurrency(MyMoneySecurity("IQD", i18n("Iraqi Dinar"),            "IQD", 1000, 1000), create);
-  loadDefaultCurrency(MyMoneySecurity("NIS", i18n("Israeli New Shekel"),     QChar(0x20AA)), create);
+  loadDefaultCurrency(MyMoneySecurity("ILS", i18n("Israeli New Shekel"),     QChar(0x20AA)), create);
   loadDefaultCurrency(MyMoneySecurity("JMD", i18n("Jamaican Dollar"),        "$"), create);
   loadDefaultCurrency(MyMoneySecurity("JPY", i18n("Japanese Yen"),           QChar(0x00A5), 100, 1), create);
   loadDefaultCurrency(MyMoneySecurity("JOD", i18n("Jordanian Dinar"),        "JOD", 1000, 1000), create);
