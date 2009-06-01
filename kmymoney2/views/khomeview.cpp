@@ -27,7 +27,7 @@
 #include <qdatetime.h>
 #include <qapplication.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QLinkedList>
 #include <QPixmap>
 #include <dom/dom_element.h>
 #include <dom/dom_doc.h>
@@ -93,20 +93,17 @@ KHomeView::KHomeView(QWidget *parent, const char *name ) :
   m_showAllSchedules(false),
   m_needReload(true)
 {
-  #warning #port to KDE4
-  #if 1
   m_part = new KHTMLPart(this);
   addWidget(m_part->view());
 
   m_filename = KMyMoneyUtils::findResource("appdata", QString("html/home%1.html"));
 
-//   m_part->openURL(m_filename);
+  m_part->openUrl(m_filename);
   connect(m_part->browserExtension(), SIGNAL(openUrlRequest(const KUrl &,
           const KParts::OpenUrlArguments &,const KParts::BrowserArguments & )),
           this, SLOT(slotOpenUrl(const KUrl&, const KParts::OpenUrlArguments &,const KParts::BrowserArguments & )));
 
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadView()));
-  #endif
 }
 
 KHomeView::~KHomeView()
@@ -149,7 +146,7 @@ void KHomeView::loadView(void)
   m_part->setZoomFactor( KMyMoneyGlobalSettings::fontSizePercentage() );
   //kDebug() << "Setting font size: " << m_part->zoomFactor();
 
-  Q3ValueList<MyMoneyAccount> list;
+  QLinkedList<MyMoneyAccount> list;
   MyMoneyFile::instance()->accountList(list);
   if(list.count() == 0)
   {
@@ -621,9 +618,8 @@ void KHomeView::showPaymentEntry(const MyMoneySchedule& sched, int cnt)
         MyMoneySplit sp = t.splitByAccount(acc.id(), true);
 
         QString pathEnter, pathSkip;
-#warning "port to kde4"
-        //KIconLoader::global()->loadIcon("key_enter", KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState, &pathEnter);
-        //KIconLoader::global()->loadIcon("player_fwd", KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState, &pathSkip);
+        KIconLoader::global()->loadIcon(QString("key_enter"), KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState, QStringList(), &pathEnter, false);
+        KIconLoader::global()->loadIcon(QString("player_fwd"), KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState, QStringList(), &pathSkip);
 
         //show payment date
         tmp = QString("<td>") +
@@ -1171,12 +1167,9 @@ void KHomeView::slotOpenUrl(const KUrl &url, const KParts::OpenUrlArguments &arg
         m_part->openUrl(m_filename);
 
     } else if(view == "action") {
-#warning "port to kde4"
-#if 0
-        KMainWindow* mw = dynamic_cast<KMainWindow*>(qApp->mainWidget());
+      KXmlGuiWindow* mw = dynamic_cast<KXmlGuiWindow*>(qApp->mainWidget());
       Q_CHECK_PTR(mw);
       QTimer::singleShot(0, mw->actionCollection()->action( id ), SLOT(activate()));
-#endif
     } else if(view == VIEW_HOME) {
       Q3ValueList<MyMoneyAccount> list;
       MyMoneyFile::instance()->accountList(list);
@@ -1186,7 +1179,7 @@ void KHomeView::slotOpenUrl(const KUrl &url, const KParts::OpenUrlArguments &arg
       loadView();
 
     } else {
-      qDebug("Unknown view '%s' in KHomeView::slotOpenURL()", view.toLatin1());
+      qDebug("Unknown view '%s' in KHomeView::slotOpenURL()", qPrintable(view));
     }
   }
 }
