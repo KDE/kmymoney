@@ -1182,6 +1182,7 @@ bool KMyMoneyView::saveFile(const KUrl& url, const QString& keyList)
       filename = url.path();
       int fmode = 0600;
       gid_t gid = static_cast<gid_t>(-1);      // don't change the group id (see "man 2 chown")
+      KSaveFile qfile(filename);
       QFileInfo fi(filename);
       if(fi.exists()) {
         fmode |= fi.permission(QFile::ReadGroup) ? 040 : 0;
@@ -1190,6 +1191,8 @@ bool KMyMoneyView::saveFile(const KUrl& url, const QString& keyList)
         fmode |= fi.permission(QFile::WriteOther) ? 002 : 0;
         if(fi.groupId() != static_cast<uint>(-2))
           gid = fi.groupId();
+      } else {
+        qfile.open();
       }
 
       // create a new basic block here, so that the object qfile gets
@@ -1197,9 +1200,8 @@ bool KMyMoneyView::saveFile(const KUrl& url, const QString& keyList)
       {
         //FIXME: Port to KDE4 - set the mode later
         int mask = umask((~fmode) & 0777);
-        KSaveFile qfile(filename);
         umask(mask);
-        if(qfile.open()) {
+        if(qfile.error() == QFile::NoError) {
           try {
             saveToLocalFile( &qfile, pWriter, plaintext, keyList);
           } catch (MyMoneyException* e) {
@@ -1939,7 +1941,7 @@ void KMyMoneyView::fixSchedule_0(MyMoneySchedule sched)
       MyMoneyFile::instance()->modifySchedule(sched);
     }
   } catch(MyMoneyException *e) {
-    qWarning("Unable to update broken schedule: %s", e->what().toLatin1());
+    qWarning("Unable to update broken schedule: %s", qPrintable(e->what()));
     delete e;
   }
 }
