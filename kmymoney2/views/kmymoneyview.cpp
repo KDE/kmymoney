@@ -467,7 +467,7 @@ void KMyMoneyView::newStorage(storageTypeE t)
   MyMoneyFile* file = MyMoneyFile::instance();
   if (t == Memory)
     file->attachStorage(new MyMoneySeqAccessMgr);
-  #warning "port to kde4"
+#warning "port to kde4"
 #if 0
   else 
     file->attachStorage(new MyMoneyDatabaseMgr);

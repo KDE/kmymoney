@@ -7,7 +7,7 @@ SET(storage_a_SOURCES
   mymoneyseqaccessmgr.cpp imymoneystorage.cpp imymoneyserialize.cpp
   mymoneystorageanon.cpp 
   #mymoneystoragesql.cpp 
-  #mymoneydatabasemgr.cpp
+  mymoneydatabasemgr.cpp
   )
 
 KDE4_ADD_KCFG_FILES(storage_a_SOURCES  ../../kmymoneysettings.kcfgc )

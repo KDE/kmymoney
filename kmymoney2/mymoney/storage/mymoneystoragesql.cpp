@@ -3940,7 +3940,7 @@ void MyMoneyDbDef::Budgets(void){
   fields.append(new MyMoneyDbColumn("id", "varchar(32)", PRIMARYKEY, NOTNULL));
   fields.append(new MyMoneyDbColumn("name", "text", false, NOTNULL));
   fields.append(new MyMoneyDbColumn("start", "date", false, NOTNULL));
-  fields.append(new MyMoneyDbTextColumn("XML", MyMoneyDbTextColumn::LONG));
+  fields.append(new MyMoneyDbTextColumn("XML", MyMoneyDbTextColumn::LONG) );
   MyMoneyDbTable t("kmmBudgetConfig", fields);
   t.buildSQLStrings();
   m_tables[t.name()] = t;
@@ -3963,7 +3963,7 @@ void MyMoneyDbDef::Balances(void){
 const QString MyMoneyDbDef::generateSQL (const QString& driver) const {
   QString retval;
   databaseTypeE dbType = m_drivers.driverToType(driver);
-  QMap<QString, MyMoneyDbTable>::Iterator tt = m_tables.begin();
+  QMap<QString, MyMoneyDbTable>::ConstIterator tt = m_tables.begin();
   while (tt != m_tables.end()) {
     retval += (*tt).generateCreateSQL(dbType) + '\n';
     ++tt;
