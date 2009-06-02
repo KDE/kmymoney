@@ -94,7 +94,7 @@ KReportsView::KReportTab::KReportTab(KTabWidget* parent, const MyMoneyReport& re
   m_part( new KHTMLPart( this) ),
   //FIXME: Port to KDE4
   //m_chartView( new KReportChartView( this, "reportchart" ) ),
-  m_control( new kMyMoneyReportControlDecl( this ) ),
+  m_control( new kMyMoneyReportControl( this ) ),
   m_layout( new Q3VBoxLayout( this, 11, 6, "reporttablayout" ) ),
   m_report( report ),
   m_deleteMe( false ),

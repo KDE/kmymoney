@@ -14,7 +14,7 @@ SET(libviews_a_SOURCES
   kmymoneytransaction.cpp
   kmymoneyview.cpp
   kpayeesview.cpp
-  #kreportsview.cpp
+  kreportsview.cpp
   kscheduledlistitem.cpp
   kscheduledview.cpp
   )

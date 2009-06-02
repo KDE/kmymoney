@@ -3,9 +3,9 @@ INCLUDE_DIRECTORIES( ${KMyMoney_SOURCE_DIR}/libkdchart)
 SET (libreports_a_SOURCES
 	#kreportchartview.cpp 
 	listtable.cpp 
-	#objectinfotable.cpp 
-	#pivotgrid.cpp
-   #pivottable.cpp 
+	objectinfotable.cpp 
+	pivotgrid.cpp
+   pivottable.cpp 
    querytable.cpp reportaccount.cpp
   )
 

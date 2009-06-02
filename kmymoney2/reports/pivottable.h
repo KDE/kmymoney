@@ -91,7 +91,8 @@ public:
     *
     * @param view The KReportChartView into which to draw the chart.
     */
-    void drawChart( KReportChartView& view ) const;
+    #warning #Port to KDE4
+    //void drawChart( KReportChartView& view ) const;
 
   /**
     * Dump the report's HTML to a file

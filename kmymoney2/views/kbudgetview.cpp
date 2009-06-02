@@ -160,7 +160,7 @@ KBudgetView::KBudgetView(QWidget *parent) :
   //FIXME: Port to KDE4
   //connect(kmymoney2->action("budget_rename"), SIGNAL(enabled(bool)), m_renameButton, SLOT(setEnabled(bool)));
   connect(m_deleteButton, SIGNAL(clicked()), kmymoney2->action("budget_delete"), SLOT(trigger()));
-  connect(kmymoney2->action("budget_delete"), SIGNAL(enabled(bool)), m_deleteButton, SLOT(setEnabled(bool)));
+  //connect(kmymoney2->action("budget_delete"), SIGNAL(enabled(bool)), m_deleteButton, SLOT(setEnabled(bool)));
 
   connect(m_budgetValue, SIGNAL(valuesChanged()), this, SLOT(slotBudgetedAmountChanged()));
 

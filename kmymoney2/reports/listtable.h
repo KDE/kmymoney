@@ -59,7 +59,8 @@ namespace reports {
       ListTable ( const MyMoneyReport& );
       QString renderHTML ( void ) const;
       QString renderCSV ( void ) const;
-      void drawChart ( KReportChartView& ) const {}
+      #warning #Port to KDE4
+      //void drawChart ( KReportChartView& ) const {}
       void dump ( const QString& file, const QString& context = QString() ) const;
       void init ( void );
 

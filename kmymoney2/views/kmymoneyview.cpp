@@ -108,7 +108,7 @@
 #include "kscheduledview.h"
 #include "kgloballedgerview.h"
 #include "kinvestmentview.h"
-//#include "kreportsview.h"
+#include "kreportsview.h"
 #include "kbudgetview.h"
 #include "kforecastview.h"
 
@@ -255,11 +255,13 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   connect(m_investmentView, SIGNAL(accountSelected(const MyMoneyObject&)), kmymoney2, SLOT(slotSelectAccount(const MyMoneyObject&)));
   connect(m_investmentView, SIGNAL(investmentRightMouseClick()), kmymoney2, SLOT(slotShowInvestmentContextMenu()));
   // Page 8
-#warning "port to kde4"
-//m_reportsViewFrame = addVBoxPage(i18n("Reports"), i18n("Reports"),
-  //  DesktopIcon("report", iconSize));
 
-  //m_reportsView = new KReportsView(m_reportsViewFrame, "ReportsView");
+  //m_reportsViewFrame = addVBoxPage(i18n("Reports"), i18n("Reports"), DesktopIcon("report", iconSize));
+  m_reportsView = new KReportsView();
+  m_reportsViewFrame = addPage( m_reportsView, i18n("Reports"));
+  m_reportsViewFrame->setIcon(KIcon("report"));
+  m_reportsViewFrame->setHeader(i18n("Reports"));
+  addTitleBar(m_reportsView, i18n("Reports"));
 
   // Page 9
   //m_budgetViewFrame = addVBoxPage(i18n("Budgets"), i18n("Budgets"), DesktopIcon("budget", iconSize));
