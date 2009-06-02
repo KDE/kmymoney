@@ -285,7 +285,7 @@ QString KMyMoneyUtils::findResource(const char* type, const QString& filename)
 
   // check that the placeholder is present
   if(!filename.find("%1")) {
-    qWarning("%%1 not found in '%s'", filename.toLatin1());
+    qWarning("%%1 not found in '%s'", qPrintable(filename));
     return filename;
   }
 

@@ -354,7 +354,7 @@ MyMoneyMoney ObjectInfoTable::investmentBalance(const MyMoneyAccount& acc)
       val = val.convert(acc.fraction());
       value += val;
     } catch(MyMoneyException* e) {
-      qWarning("%s", (QString("cannot convert stock balance of %1 to base currency: %2").arg(stock.name(), e->what())).data());
+      qWarning("%s", qPrintable(QString("cannot convert stock balance of %1 to base currency: %2").arg(stock.name(), e->what())));
       delete e;
     }
   }

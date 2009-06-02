@@ -999,7 +999,7 @@ QAction* KMyMoney2App::action(const QString& actionName) const
   if(p)
     return p;
 
-  qWarning("Action with name '%s' not found!", actionName.toLatin1());
+  qWarning("Action with name '%s' not found!", qPrintable(actionName));
   return p;
 }
 
@@ -3606,7 +3606,7 @@ void KMyMoney2App::slotAccountReconcileStart(void)
               ft.commit();
 
             } catch(MyMoneyException *e) {
-              qWarning("interest transaction not stored: '%s'", e->what().data());
+              qWarning("interest transaction not stored: '%s'", qPrintable(e->what()));
               delete e;
             }
 

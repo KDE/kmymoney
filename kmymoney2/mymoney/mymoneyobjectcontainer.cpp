@@ -192,7 +192,7 @@ void MyMoneyObjectContainer::refresh(const QString& id)
       const MyMoneySchedule& s = m_storage->schedule(id);
       m_map[id] = new MyMoneySchedule(s);
     } else {
-      qWarning("Ooops, should preload an unknown object with id '%s'", id.data());
+      qWarning("Ooops, should preload an unknown object with id '%s'", qPrintable(id));
     }
     return;
   }

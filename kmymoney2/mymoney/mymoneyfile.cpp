@@ -1099,7 +1099,7 @@ void MyMoneyFile::warningMissingRate(const QString& fromId, const QString& toId)
   try {
     from = security(fromId);
     to = security(toId);
-    qWarning("Missing price info for conversion from %s to %s", from.name().toLatin1(), to.name().toLatin1());
+    qWarning("Missing price info for conversion from %s to %s", qPrintable(from.name()), qPrintable(to.name()));
 
   } catch(MyMoneyException *e) {
     qFatal("Missing security caught in MyMoneyFile::warningMissingRate(): %s(%ld) %s", e->file().data(), e->line(), e->what().data());

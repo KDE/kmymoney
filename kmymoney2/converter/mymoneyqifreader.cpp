@@ -603,7 +603,7 @@ void MyMoneyQifReader::processQifSpecial(const QString& _line)
       m_entryType = EntryClass;
 
     } else {
-      qWarning("Unknown type code '%s' in QIF file on line %d", line.data(), m_linenumber);
+      qWarning("Unknown type code '%s' in QIF file on line %d", qPrintable(line), m_linenumber);
     }
   } else if(line.toLower() == "account") {
     m_entryType = EntryAccount;

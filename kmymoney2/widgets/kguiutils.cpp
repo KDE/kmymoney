@@ -84,8 +84,7 @@ void kMandatoryFieldGroup::add(QWidget *widget)
                       this, SLOT(changed()));
 
     else {
-      qWarning("MandatoryFieldGroup: unsupported class %s",
-               widget->className());
+      qWarning("MandatoryFieldGroup: unsupported class %s", widget->className());
       return;
     }
 

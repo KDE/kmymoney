@@ -95,7 +95,7 @@ MyMoneyAccount::MyMoneyAccount(const QDomElement& node) :
   if(bOK) {
     setAccountType(static_cast<MyMoneyAccount::accountTypeE>(type));
   } else {
-    qWarning("XMLREADER: Account %s had invalid or no account type information.", name().data());
+    qWarning("XMLREADER: Account %s had invalid or no account type information.", qPrintable(name()));
   }
 
   if(node.hasAttribute("openingbalance")) {

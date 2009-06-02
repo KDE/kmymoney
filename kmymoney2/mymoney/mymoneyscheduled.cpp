@@ -641,7 +641,7 @@ MyMoneyAccount MyMoneySchedule::account(int cnt) const
       if(!cnt)
         return acc;
     } catch(MyMoneyException *e) {
-      qWarning("Schedule '%s' references unknown account '%s'", id().data(),   (*it).accountId().data());
+      qWarning("Schedule '%s' references unknown account '%s'", qPrintable(id()),   qPrintable((*it).accountId()));
       delete e;
       return MyMoneyAccount();
     }
