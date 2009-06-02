@@ -17,6 +17,8 @@
 
 # include <config-kmymoney.h>
 
+#include <QDBusConnection>
+#include <QDBusConnectionInterface>
 #include <stdio.h>
 
 // ----------------------------------------------------------------------------
@@ -26,8 +28,6 @@
 #include <qdatetime.h>
 #include <qstringlist.h>
 #include <qeventloop.h>
-//Added by qt3to4:
-#include <Q3CString>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -183,13 +183,11 @@ int main(int argc, char *argv[])
 
   int rc = 0;
 #warning "port me to kde4"
-#if 0
+#if 1
   try {
-    do {
-      // connect to DCOP server
-      DCOPClient* client = a->dcopClient();
-      if(client->registerAs("kmymoney", true) != false) {
-        const QCStringList instances = kmymoney2->instanceList();
+      do {
+          if ( QDBusConnection::sessionBus().interface()->isServiceRegistered("org.kde.kmymoney") ) {
+        const Q3ValueList<Q3CString> instances = kmymoney2->instanceList();
         if(instances.count() > 0) {
 
           // If the user launches a second copy of the app and includes a file to
@@ -201,7 +199,8 @@ int main(int argc, char *argv[])
             KUrl url = args->url(0);
             if ( kmymoney2->isImportableFile( url.path() ) )
             {
-              // if there are multiple instances, we'll send this to the first one
+#if 0
+                // if there are multiple instances, we'll send this to the first one
               Q3CString primary = instances[0];
 
               // send a message to the primary client to import this file
@@ -211,11 +210,11 @@ int main(int argc, char *argv[])
               arg << kapp->startupId();
               if (!client->send(primary, "kmymoney2app", "webConnect(QString,QCString)",data))
                 qDebug("Unable to launch WebConnect via DCOP.");
-
+#endif
               // Before we delete the application, we make sure that we destroy all
               // widgets by running the event loop for some time to catch all those
               // widgets that are requested to be destroyed using the deleteLater() method.
-              QApplication::eventLoop()->processEvents(QEventLoop::ExcludeUserInput, 10);
+              QCoreApplication::processEvents(QEventLoop::ExcludeUserInput, 10);
 
               delete kmymoney2;
               delete splash;
