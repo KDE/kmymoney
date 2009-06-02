@@ -150,7 +150,7 @@ int main(int argc, char *argv[])
   QString language = args->getOption("lang");
   if(!language.isEmpty()) {
       if(!KGlobal::locale()->setLanguage(QStringList()<<language)) {
-      qWarning("Unable to select language '%s'. This has one of two reasons:\n\ta) the standard KDE message catalogue is not installed\n\tb) the KMyMoney message catalogue is not installed", language.data());
+      qWarning("Unable to select language '%s'. This has one of two reasons:\n\ta) the standard KDE message catalogue is not installed\n\tb) the KMyMoney message catalogue is not installed", qPrintable(language));
     }
   }
 
@@ -182,8 +182,6 @@ int main(int argc, char *argv[])
 #endif
 
   int rc = 0;
-#warning "port me to kde4"
-#if 1
   try {
       do {
           if ( QDBusConnection::sessionBus().interface()->isServiceRegistered("org.kde.kmymoney") ) {
@@ -199,6 +197,7 @@ int main(int argc, char *argv[])
             KUrl url = args->url(0);
             if ( kmymoney2->isImportableFile( url.path() ) )
             {
+#warning "port to kde4"
 #if 0
                 // if there are multiple instances, we'll send this to the first one
               Q3CString primary = instances[0];
@@ -230,7 +229,7 @@ int main(int argc, char *argv[])
           }
         }
       } else {
-        qDebug("DCOP registration failed. Some functions are not available.");
+        qDebug("D-Bus registration failed. Some functions are not available.");
       }
       kmymoney2->show();
       kmymoney2->setEnabled(false);
@@ -286,15 +285,6 @@ int main(int argc, char *argv[])
                                QString("%1 in file %2 line %3").arg(e->what()).arg(e->file()).arg(e->line()));
     throw e;
   }
-#else
-      if(kmymoney2 != 0) {
-        kmymoney2->updateCaption();
-        args->clear();
-	kmymoney2->show();
-        kmymoney2->setEnabled(true);
-        rc = a->exec();
-	}
-#endif
   delete a;
 
   return rc;
