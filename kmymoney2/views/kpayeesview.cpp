@@ -337,8 +337,7 @@ KPayeesView::KPayeesView(QWidget *parent) :
   m_tabWidget->reparent(m_splitter, QPoint(0, 0), true);
   m_splitter->setResizeMode(m_tabWidget, QSplitter::Stretch);
   m_splitter->setOpaqueResize();
-#warning "port to kde4"
-  //layout10->addWidget(m_splitter);
+  hboxLayout->addWidget(m_splitter);
 
   // use the size settings of the last run (if any)
   KSharedConfigPtr config = KGlobal::config();
