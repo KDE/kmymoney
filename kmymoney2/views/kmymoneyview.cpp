@@ -258,7 +258,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
       this, SLOT(slotLedgerSelected(const QString&, const QString&)));
   connect(m_investmentView, SIGNAL(accountSelected(const MyMoneyObject&)), kmymoney2, SLOT(slotSelectAccount(const MyMoneyObject&)));
   connect(m_investmentView, SIGNAL(investmentRightMouseClick()), kmymoney2, SLOT(slotShowInvestmentContextMenu()));
-
+#endif
   // Page 8
 #warning "port to kde4"
 //m_reportsViewFrame = addVBoxPage(i18n("Reports"), i18n("Reports"),
@@ -277,7 +277,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   connect(m_budgetView, SIGNAL(openContextMenu(const MyMoneyObject&)), kmymoney2, SLOT(slotShowBudgetContextMenu()));
   connect(m_budgetView, SIGNAL(selectObjects(const Q3ValueList<MyMoneyBudget>&)), kmymoney2, SLOT(slotSelectBudget(const Q3ValueList<MyMoneyBudget>&)));
   connect(kmymoney2, SIGNAL(budgetRename()), m_budgetView, SLOT(slotStartRename()));
-#endif
+
   // Page 10
   //m_forecastViewFrame = addVBoxPage( i18n("Forecast"), i18n("Forecast"), DesktopIcon("forcast", iconSize));
   m_forecastView = new KForecastView();
@@ -496,7 +496,7 @@ void KMyMoneyView::enableViews(int state)
 #warning "port to kde4"
 
   //m_payeesViewFrame->setEnabled(state);
-  //m_budgetViewFrame->setEnabled(state);
+  m_budgetViewFrame->setEnabled(state);
   //m_ledgerViewFrame->setEnabled(state);
   //m_investmentViewFrame->setEnabled(state);
   //m_reportsViewFrame->setEnabled(state);
