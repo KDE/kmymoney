@@ -639,7 +639,7 @@ void KPayeesView::slotSelectPayee(void)
     showTransactions();
 
   } catch(MyMoneyException *e) {
-    qDebug("exception during display of payee: %s at %s:%ld", e->what().toLatin1(), e->file().toLatin1(), e->line());
+    qDebug("exception during display of payee: %s at %s:%ld", qPrintable(e->what()), qPrintable(e->file()), e->line());
     m_transactionView->clear();
     m_payee = MyMoneyPayee();
     delete e;

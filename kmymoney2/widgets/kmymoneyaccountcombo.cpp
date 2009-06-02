@@ -55,6 +55,8 @@ KMyMoneyAccountCombo::KMyMoneyAccountCombo( QWidget* parent, const char* name ) 
   connect(this, SIGNAL(clicked()), this, SLOT(slotButtonPressed()));
   connect(m_completion, SIGNAL(itemSelected(const QString&)), this, SLOT(slotSelected(const QString&)));
 #endif
+#else
+  m_completion = 0;
 #endif
   // make sure that we can display a minimum of characters
   QFontMetrics fm(font());
@@ -217,7 +219,8 @@ int KMyMoneyAccountCombo::loadList(const Q3ValueList<int>& list)
 QStringList KMyMoneyAccountCombo::selectedAccounts(void) const
 {
   QStringList list;
-  m_completion->selector()->selectedItems(list);
+  if(m_completion)
+	  m_completion->selector()->selectedItems(list);
   return list;
 }
 
