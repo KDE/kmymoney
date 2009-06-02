@@ -346,7 +346,7 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
   }
   catch (MyMoneyException *e)
   {
-    qDebug("exception in init for account dialog: %s", e->what().toLatin1());
+    qDebug("exception in init for account dialog: %s", qPrintable(e->what()));
     delete e;
   }
 
@@ -503,7 +503,7 @@ void KNewAccountDlg::okClicked()
       }
       catch (MyMoneyException *e)
       {
-        qDebug("Exception in account institution set: %s", e->what().toLatin1());
+        qDebug("Exception in account institution set: %s", qPrintable(e->what()));
         delete e;
       }
     }
@@ -917,7 +917,7 @@ void KNewAccountDlg::initParentWidget(QString parentId, const QString& accountId
   }
   catch (MyMoneyException *e)
   {
-    qDebug("Exception in assets account refresh: %s", e->what().toLatin1());
+    qDebug("Exception in assets account refresh: %s", qPrintable(e->what()));
     delete e;
   }
 
