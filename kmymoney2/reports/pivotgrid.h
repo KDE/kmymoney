@@ -79,14 +79,14 @@ namespace reports {
     MyMoneyMoney m_postSplit;
     bool m_cellUsed;
   };
-  class PivotGridRow: public Q3ValueList<PivotCell>
+  class PivotGridRow: public QList<PivotCell>
   {
   public:
 
     PivotGridRow( unsigned _numcolumns = 0 )
     {
-      if ( _numcolumns )
-        insert( end(), _numcolumns, PivotCell() );
+      for (uint i = 0; i < _numcolumns; i++ )
+        append( PivotCell() );
     }
     MyMoneyMoney m_total;
   };

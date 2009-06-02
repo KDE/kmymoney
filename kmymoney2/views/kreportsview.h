@@ -61,7 +61,8 @@ class Q3ListViewItem;
 #include "pivottable.h"
 #include "querytable.h"
 #include "../widgets/kmymoneyreportcontrolimpl.h"
-#include "kreportchartview.h"
+//FIXME: Port to KDE4
+//#include "kreportchartview.h"
 #include "kmymoneyview.h"
 
 class MyMoneyReport;
@@ -229,7 +230,7 @@ protected:
   static void defaultReports(Q3ValueList<ReportGroup>&);
 
 public slots:
-  void slotOpenURL(const KUrl &url, const KParts::URLArgs& args);
+  void slotOpenUrl(const KUrl &url, const KParts::OpenUrlArguments& args, const KParts::BrowserArguments& browArgs);
 
   void slotLoadView(void);
   void slotPrintView(void);

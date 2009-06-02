@@ -54,7 +54,8 @@
 #include "pivottable.h"
 #include "pivotgrid.h"
 #include "reportdebug.h"
-#include "kreportchartview.h"
+#warning #Port to KDE4
+//#include "kreportchartview.h"
 #include "kmymoneyglobalsettings.h"
 #include "kmymoneyutils.h"
 #include "mymoneyforecast.h"
@@ -544,7 +545,7 @@ void PivotTable::calculateColumnHeadings(void)
       unsigned column = 1;
       while ( column++ < m_numColumns )
       {
-        QString heading = KGlobal::locale()->calendar()->monthName(columnDate.month(), columnDate.year(), true) + " " + QString::number(columnDate.day());
+        QString heading = KGlobal::locale()->calendar()->monthName(columnDate.month(), columnDate.year(), KCalendarSystem::ShortName) + " " + QString::number(columnDate.day());
         columnDate = columnDate.addDays(1);
         m_columnHeadings.append( heading);
       }
@@ -562,9 +563,9 @@ void PivotTable::calculateColumnHeadings(void)
         if (((dow % columnpitch) == 0) || (day == m_endDate))
         {
           m_columnHeadings.append(QString("%1&nbsp;%2 - %3&nbsp;%4")
-            .arg(KGlobal::locale()->calendar()->monthName(prv.month(), prv.year(), true))
+            .arg(KGlobal::locale()->calendar()->monthName(prv.month(), prv.year(), KCalendarSystem::ShortName))
             .arg(prv.day())
-            .arg(KGlobal::locale()->calendar()->monthName(day.month(), day.year(), true))
+            .arg(KGlobal::locale()->calendar()->monthName(day.month(), day.year(), KCalendarSystem::ShortName))
             .arg(day.day()));
           prv = day.addDays(1);
         }
@@ -592,9 +593,9 @@ void PivotTable::calculateColumnHeadings(void)
       unsigned column = 1;
       while ( column++ < m_numColumns )
       {
-        QString heading = KGlobal::locale()->calendar()->monthName(1+segment*columnpitch, 2000, true);
+        QString heading = KGlobal::locale()->calendar()->monthName(1+segment*columnpitch, 2000, KCalendarSystem::ShortName);
         if ( columnpitch != 1 )
-          heading += "-" + KGlobal::locale()->calendar()->monthName((1+segment)*columnpitch, 2000, true);
+          heading += "-" + KGlobal::locale()->calendar()->monthName((1+segment)*columnpitch, 2000, KCalendarSystem::ShortName);
         if ( includeyear )
           heading += " " + QString::number(year);
         m_columnHeadings.append( heading);
@@ -1094,9 +1095,11 @@ void PivotTable::convertToDeepCurrency( void )
 void PivotTable::calculateTotals( void )
 {
   //insert the row type that is going to be used
-  for(unsigned i = 0; i < m_rowTypeList.size(); ++i)
-    m_grid.m_total[ m_rowTypeList[i] ].insert( m_grid.m_total[ m_rowTypeList[i] ].end(), m_numColumns, PivotCell() );
-
+  for(unsigned i = 0; i < m_rowTypeList.size(); ++i) {
+    for(unsigned k = 0; i < m_numColumns; ++k) {
+      m_grid.m_total[ m_rowTypeList[i] ].append( PivotCell() );
+    }
+  }
   //
   // Outer groups
   //
@@ -1105,8 +1108,11 @@ void PivotTable::calculateTotals( void )
   PivotGrid::iterator it_outergroup = m_grid.begin();
   while ( it_outergroup != m_grid.end() )
   {
-    for(unsigned i = 0; i < m_rowTypeList.size(); ++i)
-      (*it_outergroup).m_total[ m_rowTypeList[i] ].insert( (*it_outergroup).m_total[ m_rowTypeList[i] ].end(), m_numColumns, PivotCell() );
+    for(unsigned i = 0; i < m_rowTypeList.size(); ++i) {
+      for(unsigned k = 0; i < m_numColumns; ++k) {
+        (*it_outergroup).m_total[ m_rowTypeList[i] ].append( PivotCell() );
+      }
+    }
 
     //
     // Inner Groups
@@ -1115,8 +1121,11 @@ void PivotTable::calculateTotals( void )
     PivotOuterGroup::iterator it_innergroup = (*it_outergroup).begin();
     while ( it_innergroup != (*it_outergroup).end() )
     {
-      for(unsigned i = 0; i < m_rowTypeList.size(); ++i)
-        (*it_innergroup).m_total[ m_rowTypeList[i] ].insert( (*it_innergroup).m_total[ m_rowTypeList[i] ].end(), m_numColumns, PivotCell() );
+      for(unsigned i = 0; i < m_rowTypeList.size(); ++i) {
+        for(unsigned k = 0; i < m_numColumns; ++k) {
+          (*it_innergroup).m_total[ m_rowTypeList[i] ].append( PivotCell() );
+        }
+      }
       //
       // Rows
       //
@@ -1557,7 +1566,7 @@ QString PivotTable::renderHTML( void ) const
 
   //actual dates of the report
   result += QString("<div class=\"subtitle\">");
-  result += i18n("Report date range", "%1 through %2").arg(KGlobal::locale()->formatDate(m_config_f.fromDate(), true)).arg(KGlobal::locale()->formatDate(m_config_f.toDate(), true));
+  result += i18nc("Report date range", "%1 through %2").arg(KGlobal::locale()->formatDateTime(QDateTime(m_config_f.fromDate()), KLocale::ShortDate, false)).arg(KGlobal::locale()->formatDateTime(QDateTime(m_config_f.toDate()), KLocale::ShortDate, false));
   result += QString("</div>\n");
   result += QString("<div class=\"gap\">&nbsp;</div>\n");
 
@@ -1611,7 +1620,9 @@ QString PivotTable::renderHTML( void ) const
 
       for(unsigned i = 0; i < m_rowTypeList.size(); ++i) {
         result += QString("<td%2>%1</td>")
-            .arg(i18n( m_columnTypeHeaderList[i] ))
+            #warning #Port to KDE4
+            //.arg(i18n( m_columnTypeHeaderList[i] ))
+            .arg( m_columnTypeHeaderList[i] )
             .arg(i == 0 ? lb : QString() );
       }
       column++;
@@ -1619,7 +1630,9 @@ QString PivotTable::renderHTML( void ) const
     if ( m_config_f.isShowingRowTotals() ) {
       for(unsigned i = 0; i < m_rowTypeList.size(); ++i) {
         result += QString("<td%2>%1</td>")
-            .arg(i18n( m_columnTypeHeaderList[i] ))
+            #warning #Port to KDE4
+            //.arg(i18n( m_columnTypeHeaderList[i] ))
+            .arg( m_columnTypeHeaderList[i] )
             .arg(i == 0 ? leftborder : QString() );
       }
     }
@@ -1640,7 +1653,7 @@ QString PivotTable::renderHTML( void ) const
     //
     // I hope this doesn't bog the performance of reports, given that we're copying the entire report
     // data.  If this is a perf hit, we could change to storing outergroup pointers, I think.
-    Q3ValueList<PivotOuterGroup> outergroups;
+    QList<PivotOuterGroup> outergroups;
     PivotGrid::const_iterator it_outergroup_map = m_grid.begin();
     while ( it_outergroup_map != m_grid.end() )
     {
@@ -1652,9 +1665,10 @@ QString PivotTable::renderHTML( void ) const
 
       ++it_outergroup_map;
     }
-    qSort(outergroups);
+    #warning #Port to KDE4
+    //qSort(outergroups);
 
-    Q3ValueList<PivotOuterGroup>::const_iterator it_outergroup = outergroups.begin();
+    QList<PivotOuterGroup>::const_iterator it_outergroup = outergroups.begin();
     while ( it_outergroup != outergroups.end() )
     {
       //

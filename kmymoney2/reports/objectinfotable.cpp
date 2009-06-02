@@ -19,7 +19,7 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
-#include <q3valuelist.h>
+#include <qlinkedlist.h>
 #include <qfile.h>
 #include <q3textstream.h>
 
@@ -126,7 +126,8 @@ void ObjectInfoTable::init ( void )
   }
 
   TableRow::setSortCriteria ( sort );
-  qSort ( m_rows );
+  #warning #Port to KDE4
+  //qSort ( m_rows );
 }
 
 void ObjectInfoTable::constructScheduleTable ( void )
@@ -232,9 +233,9 @@ void ObjectInfoTable::constructAccountTable ( void )
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
-  Q3ValueList<MyMoneyAccount> accounts;
+  QLinkedList<MyMoneyAccount> accounts;
   file->accountList(accounts);
-  Q3ValueList<MyMoneyAccount>::const_iterator it_account = accounts.begin();
+  QLinkedList<MyMoneyAccount>::const_iterator it_account = accounts.begin();
   while ( it_account != accounts.end() )
   {
     TableRow accountRow;
@@ -286,9 +287,9 @@ void ObjectInfoTable::constructAccountLoanTable ( void )
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
-  Q3ValueList<MyMoneyAccount> accounts;
+  QLinkedList<MyMoneyAccount> accounts;
   file->accountList(accounts);
-  Q3ValueList<MyMoneyAccount>::const_iterator it_account = accounts.begin();
+  QLinkedList<MyMoneyAccount>::const_iterator it_account = accounts.begin();
   while ( it_account != accounts.end() )
   {
     TableRow accountRow;
@@ -336,11 +337,11 @@ void ObjectInfoTable::constructAccountLoanTable ( void )
 MyMoneyMoney ObjectInfoTable::investmentBalance(const MyMoneyAccount& acc)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
-  MyMoneyMoney value;
+  MyMoneyMoney value = file->balance(acc.id());
+  QStringList accList = acc.accountList();
 
-  value = file->balance(acc.id());
-  Q3ValueList<QString>::const_iterator it_a;
-  for(it_a = acc.accountList().begin(); it_a != acc.accountList().end(); ++it_a) {
+  QStringList::const_iterator it_a = accList.begin();
+  for(; it_a != acc.accountList().end(); ++it_a) {
     MyMoneyAccount stock = file->account(*it_a);
     try {
       MyMoneyMoney val;

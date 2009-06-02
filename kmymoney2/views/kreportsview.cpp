@@ -90,10 +90,11 @@ using namespace reports;
   */
 
 KReportsView::KReportTab::KReportTab(KTabWidget* parent, const MyMoneyReport& report ):
-  QWidget( parent, "reporttab" ),
-  m_part( new KHTMLPart( this, "reporttabpart" ) ),
-  m_chartView( new KReportChartView( this, "reportchart" ) ),
-  m_control( new kMyMoneyReportControlDecl( this, "reportcontrol" ) ),
+  QWidget( parent ),
+  m_part( new KHTMLPart( this) ),
+  //FIXME: Port to KDE4
+  //m_chartView( new KReportChartView( this, "reportchart" ) ),
+  m_control( new kMyMoneyReportControlDecl( this ) ),
   m_layout( new Q3VBoxLayout( this, 11, 6, "reporttablayout" ) ),
   m_report( report ),
   m_deleteMe( false ),
@@ -103,16 +104,21 @@ KReportsView::KReportTab::KReportTab(KTabWidget* parent, const MyMoneyReport& re
 {
   m_part->setZoomFactor( KMyMoneyGlobalSettings::fontSizePercentage() );
 
-  if ( ! KReportChartView::implemented() || m_report.reportType() != MyMoneyReport::ePivotTable )
+  if ( 
+  //FIXME: Port to KDE4
+  // ! KReportChartView::implemented() || 
+  m_report.reportType() != MyMoneyReport::ePivotTable )
   {
     m_control->buttonChart->hide();
   }
 
-  m_chartView->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );
-  m_chartView->hide();
+//FIXME: Port to KDE4
+//m_chartView->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );
+//m_chartView->hide();
   m_layout->addWidget( m_control ); //, 0, Qt::AlignTop );
   m_layout->addWidget( m_part->view() );
-  m_layout->addWidget( m_chartView );
+//FIXME: Port to KDE4
+//m_layout->addWidget( m_chartView );
 
   // I like this icon...
   QString icon = KGlobal::dirs()->findResource("icon", "default.kde/16x16/mimetypes/spreadsheet.png");
@@ -228,8 +234,9 @@ void KReportsView::KReportTab::updateReport(void)
   m_part->write(createTable());
   m_part->end();
 
-  m_table->drawChart( *m_chartView );
-  m_chartView->update();
+//FIXME: Port to KDE4
+//  m_table->drawChart( *m_chartView );
+//  m_chartView->update();
 }
 
 QString KReportsView::KReportTab::createTable(const QString& links)
@@ -284,7 +291,8 @@ void KReportsView::KReportTab::toggleChart(void)
   if ( m_showingChart )
   {
     m_part->show();
-    m_chartView->hide();
+//FIXME: Port to KDE4
+//    m_chartView->hide();
 
     m_control->buttonChart->setText( i18n( "Chart" ) );
     QToolTip::add( m_control->buttonChart, i18n( "Show the chart version of this report" ) );
@@ -292,7 +300,8 @@ void KReportsView::KReportTab::toggleChart(void)
   else
   {
     m_part->hide();
-    m_chartView->show();
+//FIXME: Port to KDE4
+//    m_chartView->show();
 
     m_control->buttonChart->setText( i18n( "Report" ) );
     QToolTip::add( m_control->buttonChart, i18n( "Show the report version of this chart" ) );
@@ -318,13 +327,13 @@ KReportsView::KReportsView(QWidget *parent, const char *name ) :
   d(new Private),
   m_needReload(false)
 {
-  m_reportTabWidget = new KTabWidget( this, "m_reportTabWidget" );
+  m_reportTabWidget = new KTabWidget( this);
   addWidget( m_reportTabWidget );
   m_reportTabWidget->setHoverCloseButton( true );
 
   m_listTab = (new QWidget( m_reportTabWidget, "indextab" ));
   m_listTabLayout = ( new Q3VBoxLayout( m_listTab, 11, 6, "indextabLayout") );
-  m_reportListView = new K3ListView( m_listTab, "m_reportListView" );
+  m_reportListView = new K3ListView( m_listTab);
   m_listTabLayout->addWidget( m_reportListView );
   m_reportTabWidget->insertTab( m_listTab, i18n("Reports") );
 
@@ -529,10 +538,10 @@ void KReportsView::loadView(void)
   ::timetrace("Done KReportsView::loadView");
 }
 
-void KReportsView::slotOpenURL(const KUrl &url, const KParts::URLArgs& /* args */)
+void KReportsView::slotOpenUrl(const KUrl &url, const KParts::OpenUrlArguments&, const KParts::BrowserArguments&)
 {
   QString view = url.fileName(false);
-  QString command = url.queryItem("command").data();
+  QString command = url.queryItem("command");
 
   if(view == VIEW_REPORTS) {
 
@@ -553,10 +562,10 @@ void KReportsView::slotOpenURL(const KUrl &url, const KParts::URLArgs& /* args *
     else if ( command == "delete" )
       slotDelete();
     else
-      qDebug("Unknown command '%s' in KReportsView::slotOpenURL()", static_cast<const char*>(command));
+      qDebug("Unknown command '%s' in KReportsView::slotOpenUrl()", qPrintable(command));
 
   } else {
-    qDebug("Unknown view '%s' in KReportsView::slotOpenURL()", view.toLatin1());
+    qDebug("Unknown view '%s' in KReportsView::slotOpenUrl()", qPrintable(view));
   }
 }
 
@@ -584,10 +593,10 @@ void KReportsView::slotSaveView(void)
     // the following code is copied from KFileDialog::getSaveFileName,
     // adjust to our local needs (filetypes etc.) and
     // enhanced to show the m_saveEncrypted combo box
-    KFileDialog dlg( ":kmymoney-export",
+    KFileDialog dlg( KUrl(":kmymoney-export"),
                    QString("%1|%2\n").arg("*.csv").arg(i18nc("CSV (Filefilter)", "CSV files")) +
                    QString("%1|%2\n").arg("*.html").arg(i18nc("HTML (Filefilter)", "HTML files")),
-                   this, "filedialog", true, vbox);
+                   this);
     connect(&dlg, SIGNAL(filterChanged(const QString&)), this, SLOT(slotSaveFilterChanged(const QString&)));
 
     dlg.setOperationMode( KFileDialog::Saving );
@@ -595,9 +604,9 @@ void KReportsView::slotSaveView(void)
     slotSaveFilterChanged("*.csv");    // init gui
 
     if(dlg.exec() == QDialog::Accepted) {
-      KUrl newURL = dlg.selectedURL();
+      KUrl newURL = dlg.selectedUrl();
       if (!newURL.isEmpty()) {
-        QString newName = newURL.prettyUrl(0, KUrl::StripFileProtocol);
+        QString newName = newURL.pathOrUrl();
 
         if(newName.findRev('.') == -1)
           newName.append(".html");
