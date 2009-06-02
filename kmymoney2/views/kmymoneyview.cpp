@@ -211,7 +211,6 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   connect(m_categoriesView, SIGNAL(openObject(const MyMoneyObject&)), kmymoney2, SLOT(slotAccountOpen(const MyMoneyObject&)));
   connect(m_categoriesView, SIGNAL(reparent(const MyMoneyAccount&, const MyMoneyAccount&)), kmymoney2, SLOT(slotReparentAccount(const MyMoneyAccount&, const MyMoneyAccount&)));
 
-#if 0
   // Page 5
   //m_payeesViewFrame = addVBoxPage( i18n("Payees"), i18n("Payees"), DesktopIcon("payee", iconSize));
   m_payeesView = new KPayeesView();
@@ -225,7 +224,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   connect(m_payeesView, SIGNAL(selectObjects(const Q3ValueList<MyMoneyPayee>&)), kmymoney2, SLOT(slotSelectPayees(const Q3ValueList<MyMoneyPayee>&)));
   connect(m_payeesView, SIGNAL(transactionSelected(const QString&, const QString&)),
           this, SLOT(slotLedgerSelected(const QString&, const QString&)));
-
+#if 0
   // Page 6
   //m_ledgerViewFrame = addVBoxPage( i18n("Ledgers"), i18n("Ledgers"), DesktopIcon("ledger", iconSize));
   m_ledgerView = new KGlobalLedgerView();
@@ -491,7 +490,7 @@ void KMyMoneyView::enableViews(int state)
   m_categoriesViewFrame->setEnabled(state);
 #warning "port to kde4"
 
-  //m_payeesViewFrame->setEnabled(state);
+  m_payeesViewFrame->setEnabled(state);
   m_budgetViewFrame->setEnabled(state);
   //m_ledgerViewFrame->setEnabled(state);
   m_investmentViewFrame->setEnabled(state);
