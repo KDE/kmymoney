@@ -96,7 +96,7 @@ KInvestmentView::KInvestmentView(QWidget *parent) :
   connect(m_accountComboBox, SIGNAL(accountSelected(const QString&)),
     this, SLOT(slotSelectAccount(const QString&)));
 
-  connect(m_table, SIGNAL(doubleClicked(Q3ListViewItem*,const QPoint&, int)), kmymoney2->action("investment_edit"), SLOT(activate()));
+  connect(m_table, SIGNAL(doubleClicked(Q3ListViewItem*,const QPoint&, int)), kmymoney2->action("investment_edit"), SLOT(trigger()));
 
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadView()));
 }

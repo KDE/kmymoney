@@ -154,10 +154,12 @@ KBudgetView::KBudgetView(QWidget *parent) :
 
   // connect the buttons to the actions. Make sure the enabled state
   // of the actions is reflected by the buttons
-  connect(kmymoney2->action("budget_new"), SIGNAL(enabled(bool)), m_newButton, SLOT(setEnabled(bool)));
-  connect(m_renameButton, SIGNAL(clicked()), kmymoney2->action("budget_rename"), SLOT(activate()));
-  connect(kmymoney2->action("budget_rename"), SIGNAL(enabled(bool)), m_renameButton, SLOT(setEnabled(bool)));
-  connect(m_deleteButton, SIGNAL(clicked()), kmymoney2->action("budget_delete"), SLOT(activate()));
+  //FIXME: Port to KDE4
+  //connect(kmymoney2->action("budget_new"), SIGNAL(enabled(bool)), m_newButton, SLOT(setEnabled(bool)));
+  connect(m_renameButton, SIGNAL(clicked()), kmymoney2->action("budget_rename"), SLOT(trigger()));
+  //FIXME: Port to KDE4
+  //connect(kmymoney2->action("budget_rename"), SIGNAL(enabled(bool)), m_renameButton, SLOT(setEnabled(bool)));
+  connect(m_deleteButton, SIGNAL(clicked()), kmymoney2->action("budget_delete"), SLOT(trigger()));
   connect(kmymoney2->action("budget_delete"), SIGNAL(enabled(bool)), m_deleteButton, SLOT(setEnabled(bool)));
 
   connect(m_budgetValue, SIGNAL(valuesChanged()), this, SLOT(slotBudgetedAmountChanged()));
