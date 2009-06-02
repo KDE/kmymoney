@@ -197,6 +197,8 @@ KMyMoney2App::KMyMoney2App(QWidget * /*parent*/ , const char* name) :
 {
   new KmymoneyAdaptor(this);
   QDBusConnection::sessionBus().registerObject("/KMymoney", this);
+  QDBusConnection::sessionBus().interface()->registerService(
+      "org.kde.kmymoney", QDBusConnectionInterface::DontQueueService );
 
   ::timetrace("start kmymoney2app constructor");
   // preset the pointer because we need it during the course of this constructor
