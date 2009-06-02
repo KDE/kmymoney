@@ -195,9 +195,8 @@ KMyMoney2App::KMyMoney2App(QWidget * /*parent*/ , const char* name) :
   m_transactionEditor(0),
   m_endingBalanceDlg(0)
 {
-    new KmymoneyAdaptor(this);
-    QDBusConnection::sessionBus().registerObject("/KMymoney", this);
-
+  new KmymoneyAdaptor(this);
+  QDBusConnection::sessionBus().registerObject("/KMymoney", this);
 
   ::timetrace("start kmymoney2app constructor");
   // preset the pointer because we need it during the course of this constructor
@@ -1015,13 +1014,13 @@ KToggleAction* KMyMoney2App::toggleAction(const QString& actionName) const
   if(q) {
     KToggleAction* p = dynamic_cast<KToggleAction*>(q);
     if(!p) {
-      qWarning("Action '%s' is not of type KToggleAction", actionName.toLatin1());
+      qWarning("Action '%s' is not of type KToggleAction", qPrintable(actionName));
       //p = &dummyAction;
     }
     return p;
   }
 
-  qWarning("Action with name '%s' not found!", actionName.toLatin1());
+  qWarning("Action with name '%s' not found!", qPrintable(actionName));
   return dynamic_cast<KToggleAction*>(q);
 }
 
@@ -5500,10 +5499,10 @@ void KMyMoney2App::updateCaption(bool skipActions)
   #warning #Port to KDE4
   //setPlainCaption(caption);
 
-  //if(!skipActions) {
-  //  myMoneyView->enableViews();
-  //  slotUpdateActions();
-  //}
+  if(!skipActions) {
+    myMoneyView->enableViews();
+    slotUpdateActions();
+  }
 }
 
 void KMyMoney2App::slotUpdateActions(void)
