@@ -285,7 +285,7 @@ TabBar* TransactionForm::tabBar(QWidget* parent)
     m_tabBar = new TabBar( parent );
     m_tabBar->setSignalEmission(TabBar::SignalAlways);
     m_tabBar->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)5, (QSizePolicy::SizeType)0, 0, 0, m_tabBar->sizePolicy().hasHeightForWidth() ) );
-    connect(m_tabBar, SIGNAL(tabSelected(int)), this, SLOT(slotActionSelected(int)));
+    connect(m_tabBar, SIGNAL(tabCurrentChanged(int)), this, SLOT(slotActionSelected(int)));
   }
   return m_tabBar;
 }
