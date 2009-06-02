@@ -211,8 +211,6 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   connect(m_categoriesView, SIGNAL(openObject(const MyMoneyObject&)), kmymoney2, SLOT(slotAccountOpen(const MyMoneyObject&)));
   connect(m_categoriesView, SIGNAL(reparent(const MyMoneyAccount&, const MyMoneyAccount&)), kmymoney2, SLOT(slotReparentAccount(const MyMoneyAccount&, const MyMoneyAccount&)));
 
-
-#warning #Port to KDE4
 #if 0
   // Page 5
   //m_payeesViewFrame = addVBoxPage( i18n("Payees"), i18n("Payees"), DesktopIcon("payee", iconSize));
@@ -227,7 +225,6 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   connect(m_payeesView, SIGNAL(selectObjects(const Q3ValueList<MyMoneyPayee>&)), kmymoney2, SLOT(slotSelectPayees(const Q3ValueList<MyMoneyPayee>&)));
   connect(m_payeesView, SIGNAL(transactionSelected(const QString&, const QString&)),
           this, SLOT(slotLedgerSelected(const QString&, const QString&)));
-
 
   // Page 6
   //m_ledgerViewFrame = addVBoxPage( i18n("Ledgers"), i18n("Ledgers"), DesktopIcon("ledger", iconSize));
@@ -245,7 +242,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   connect(m_ledgerView, SIGNAL(toggleReconciliationFlag()), kmymoney2, SLOT(slotToggleReconciliationFlag()));
   connect(this, SIGNAL(reconciliationStarts(const MyMoneyAccount&, const QDate&, const MyMoneyMoney&)), m_ledgerView, SLOT(slotSetReconcileAccount(const MyMoneyAccount&, const QDate&, const MyMoneyMoney&)));
   connect(kmymoney2, SIGNAL(selectAllTransactions()), m_ledgerView, SLOT(slotSelectAllTransactions()));
-
+#endif
   // Page 7
   //m_investmentViewFrame = addVBoxPage( i18n("Investments"), i18n("Investments"), DesktopIcon("investments", iconSize));
   m_investmentView = new KInvestmentView();
@@ -258,7 +255,6 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
       this, SLOT(slotLedgerSelected(const QString&, const QString&)));
   connect(m_investmentView, SIGNAL(accountSelected(const MyMoneyObject&)), kmymoney2, SLOT(slotSelectAccount(const MyMoneyObject&)));
   connect(m_investmentView, SIGNAL(investmentRightMouseClick()), kmymoney2, SLOT(slotShowInvestmentContextMenu()));
-#endif
   // Page 8
 #warning "port to kde4"
 //m_reportsViewFrame = addVBoxPage(i18n("Reports"), i18n("Reports"),
@@ -498,7 +494,7 @@ void KMyMoneyView::enableViews(int state)
   //m_payeesViewFrame->setEnabled(state);
   m_budgetViewFrame->setEnabled(state);
   //m_ledgerViewFrame->setEnabled(state);
-  //m_investmentViewFrame->setEnabled(state);
+  m_investmentViewFrame->setEnabled(state);
   //m_reportsViewFrame->setEnabled(state);
   m_forecastViewFrame->setEnabled(state);
 
