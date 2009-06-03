@@ -496,7 +496,7 @@ void KMyMoneyView::enableViews(int state)
   m_budgetViewFrame->setEnabled(state);
   //m_ledgerViewFrame->setEnabled(state);
   m_investmentViewFrame->setEnabled(state);
-  //m_reportsViewFrame->setEnabled(state);
+  m_reportsViewFrame->setEnabled(state);
   m_forecastViewFrame->setEnabled(state);
 
   emit viewStateChanged(state != 0);
