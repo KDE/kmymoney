@@ -113,7 +113,7 @@ signals:
    * @param transactionList reference to QValueList of QPair containing all
    *        transaction/split pairs processed by the reconciliation.
    */
-  void accountReconciled(const MyMoneyAccount& account, const QDate& date, const MyMoneyMoney& startingBalance, const MyMoneyMoney& endingBalance, const Q3ValueList<QPair<MyMoneyTransaction, MyMoneySplit> >& transactionList);
+  void accountReconciled(const MyMoneyAccount& account, const QDate& date, const MyMoneyMoney& startingBalance, const MyMoneyMoney& endingBalance, const QList<QPair<MyMoneyTransaction, MyMoneySplit> >& transactionList);
 
 
   void viewStateChanged(bool);
