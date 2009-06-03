@@ -94,7 +94,7 @@ void KMyMoneyAccountCombo::setSelected(const QString& id)
       MyMoneyAccount acc = MyMoneyFile::instance()->account(id);
       setSelected(acc);
     } catch(MyMoneyException *e) {
-      qDebug("Account '%s' not found in %s(%d)", id.data(), __FILE__, __LINE__);
+      qDebug("Account '%s' not found in %s(%d)", qPrintable(id), __FILE__, __LINE__);
       delete e;
     }
   } else {

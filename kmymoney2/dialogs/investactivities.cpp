@@ -157,7 +157,7 @@ void Activity::setLabelText(const QString& idx, const QString& txt) const
   if(w) {
     w->setText(txt);
   } else {
-    qDebug("Unknown QLabel named '%s'", idx.data());
+    qDebug("Unknown QLabel named '%s'", qPrintable(idx));
   }
 }
 
@@ -167,7 +167,7 @@ void Activity::preloadAssetAccount(void)
   cat = dynamic_cast<KMyMoneyCategory*>(haveWidget("asset-account"));
   if(cat->isVisible()) {
     if(cat->currentText().isEmpty()) {
-      MyMoneyAccount acc = MyMoneyFile::instance()->accountByName(i18n("%1 (Brokerage)").arg(m_parent->account().name()));
+      MyMoneyAccount acc = MyMoneyFile::instance()->accountByName(i18n("%1 (Brokerage)",m_parent->account().name()));
       if(!acc.id().isEmpty()) {
         bool blocked = cat->signalsBlocked();
         // block signals, so that the focus does not go crazy

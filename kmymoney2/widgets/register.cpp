@@ -646,7 +646,7 @@ void Register::dropEvent(QDropEvent* event)
       qDebug("Drop was ok");
       KUrl::List urls;
       K3URLDrag::decode(event, urls);
-      qDebug("List is '%s'", urls.toStringList().join(";").data());
+      qDebug("List is '%s'", qPrintable(urls.toStringList().join(";")));
       event->accept();
     }
   }

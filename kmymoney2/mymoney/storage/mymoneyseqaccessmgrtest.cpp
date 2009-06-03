@@ -1386,7 +1386,7 @@ void MyMoneySeqAccessMgrTest::testScheduleList() {
 		m->addSchedule(schedule3);
 		m->addSchedule(schedule4);
 	} catch(MyMoneyException *e) {
-		qDebug("Error: %s", e->what().toLatin1());
+		qDebug("Error: %s", qPrintable(e->what()));
 		delete e;
 		CPPUNIT_FAIL("Unexpected exception");
 	}

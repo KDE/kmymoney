@@ -436,7 +436,7 @@ MyMoneyTransaction KMyMoneyUtils::scheduledTransaction(const MyMoneySchedule& sc
       calculateAutoLoan(schedule, t, QMap<QString, MyMoneyMoney>());
     }
   } catch (MyMoneyException* e) {
-    qDebug("Unable to load schedule details for '%s' during transaction match: %s", schedule.name().data(), e->what().data());
+    qDebug("Unable to load schedule details for '%s' during transaction match: %s", qPrintable(schedule.name()), qPrintable(e->what()));
     delete e;
   }
 
