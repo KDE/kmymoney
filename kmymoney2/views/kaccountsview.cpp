@@ -411,7 +411,7 @@ void KAccountsView::loadListView(void)
 bool KAccountsView::loadSubAccounts(KMyMoneyAccountTreeItem* parent, const QStringList& accountList)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
-
+  qDebug("account list size:%i",accountList.size());
   bool unused = false;
   bool showClosedAccounts = kmymoney2->toggleAction("view_show_all_accounts")->isChecked()
                          || !KMyMoneyGlobalSettings::hideClosedAccounts();

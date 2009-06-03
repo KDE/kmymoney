@@ -340,38 +340,34 @@ void KMyMoneyView::showTitleBar(bool show)
   //l.~QList();
 }
 
-// bool KMyMoneyView::showPage(int index)
-// {
-//
-//   // reset all selected items before showing the selected view
-//   // but not while we're in our own constructor
-//   if(!m_inConstructor && index != activePageIndex()) {
-//     kmymoney2->slotResetSelections();
-//   }
-//
-//   // pretend we're in the constructor to avoid calling the
-//   // above resets. For some reason which I don't know the details
-//   // of, KJanusWidget::showPage() calls itself recursively. This
-//   // screws up the action handling, as items could have been selected
-//   // in the meantime. We prevent this by setting the m_inConstructor
-//   // to true and reset it to the previos value when we leave this method.
-//   bool prevConstructor = m_inConstructor;
-//   m_inConstructor = true;
-//
-//   bool rc = showPage(index);
-//
-//   m_inConstructor = prevConstructor;
-//
-//   if(!m_inConstructor) {
-//     // fixup some actions that are dependant on the view
-//     // this does not work during construction
-//     kmymoney2->slotUpdateActions();
-//   }
-//
-//   return rc;
-//
-//   return false;
-// }
+void KMyMoneyView::showPage(KPageWidgetItem* pageItem)
+{
+
+  // reset all selected items before showing the selected view
+  // but not while we're in our own constructor
+  if(!m_inConstructor && pageItem != currentPage()) {
+    kmymoney2->slotResetSelections();
+  }
+
+  // pretend we're in the constructor to avoid calling the
+  // above resets. For some reason which I don't know the details
+  // of, KJanusWidget::showPage() calls itself recursively. This
+  // screws up the action handling, as items could have been selected
+  // in the meantime. We prevent this by setting the m_inConstructor
+  // to true and reset it to the previos value when we leave this method.
+  bool prevConstructor = m_inConstructor;
+  m_inConstructor = true;
+
+  setCurrentPage(pageItem);
+
+  m_inConstructor = prevConstructor;
+
+  if(!m_inConstructor) {
+    // fixup some actions that are dependant on the view
+    // this does not work during construction
+    kmymoney2->slotUpdateActions();
+  }
+}
 
 bool KMyMoneyView::canPrint(void)
 {
@@ -546,11 +542,8 @@ void KMyMoneyView::slotLedgerSelected(const QString& _accId, const QString& tran
 
 void KMyMoneyView::slotPayeeSelected(const QString& payee, const QString& account, const QString& transaction)
 {
-#warning "port to kde4"
-#if 0
-    showPage(pageIndex(m_payeesViewFrame));
+  showPage(m_payeesViewFrame);
   m_payeesView->slotSelectPayeeAndTransaction(payee, account, transaction);
-#endif
 }
 
 void KMyMoneyView::slotScheduleSelected(const QString& scheduleId)
@@ -561,20 +554,14 @@ void KMyMoneyView::slotScheduleSelected(const QString& scheduleId)
 
 void KMyMoneyView::slotShowReport(const QString& reportid)
 {
-#warning "port to kde4"
-    #if 0
-    showPage(pageIndex(m_reportsViewFrame));
+  showPage(m_reportsViewFrame);
   m_reportsView->slotOpenReport(reportid);
-#endif
 }
 
 void KMyMoneyView::slotShowReport(const MyMoneyReport& report)
 {
-#warning "port to kde4"
-    #if 0
-  showPage(pageIndex(m_reportsViewFrame));
+  showPage(m_reportsViewFrame);
   m_reportsView->slotOpenReport(report);
- #endif
 }
 
 bool KMyMoneyView::fileOpen(void)
@@ -584,11 +571,9 @@ bool KMyMoneyView::fileOpen(void)
 
 void KMyMoneyView::closeFile(void)
 {
-#warning "port to kde4"
-#if 0
-    if ( m_reportsView )
+  if ( m_reportsView )
     m_reportsView->slotCloseAll();
-#endif
+
   emit kmmFilePlugin (preClose);
   if (isDatabase())
     MyMoneyFile::instance()->storage()->close(); // to log off a database user
@@ -619,7 +604,7 @@ bool KMyMoneyView::readFile(const KUrl& url)
   IMyMoneyStorageFormat* pReader = NULL;
 
   if(!url.isValid()) {
-    qDebug("Invalid URL '%s'", url.url().toLatin1());
+    qDebug("Invalid URL '%s'", qPrintable(url.url()));
     return false;
   }
 
@@ -1299,7 +1284,7 @@ bool KMyMoneyView::startReconciliation(const MyMoneyAccount& account, const QDat
   if(ok == true) {
     if(account.isAssetLiability()) {
 #warning "port to kde4"
-        //      showPage(pageIndex(m_ledgerViewFrame));
+      //      showPage(pageIndex(m_ledgerViewFrame));
       // prepare reconciliation mode
       emit reconciliationStarts(account, reconciliationDate, endingBalance);
     } else {
@@ -1646,10 +1631,8 @@ void KMyMoneyView::viewUp(void)
 void KMyMoneyView::viewAccountList(const QString& /*selectAccount*/)
 {
 #warning "port to kde4"
-#if 0
-  if(pageIndex(m_accountsViewFrame) != activePageIndex())
-    showPage(1);
-#endif
+  if(m_accountsViewFrame != currentPage())
+    showPage(m_accountsViewFrame);
   m_accountsView->show();
 }
 
@@ -1675,13 +1658,13 @@ void KMyMoneyView::slotRefreshViews()
   m_institutionsView->slotLoadAccounts();
   m_categoriesView->slotLoadAccounts();
   #warning "port to kde4"
-  //m_payeesView->slotLoadPayees();
+  m_payeesView->slotLoadPayees();
   //m_ledgerView->slotLoadView();
   //m_budgetView->slotRefreshView();
   m_homeView->slotLoadView();
   //m_investmentView->slotLoadView();
 #warning "port to kde4"
-  //m_reportsView->slotLoadView();
+  m_reportsView->slotLoadView();
   m_forecastView->slotLoadForecast();
 
   m_scheduledView->slotReloadView();

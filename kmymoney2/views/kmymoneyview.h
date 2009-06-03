@@ -344,7 +344,7 @@ public:
 
   void addWidget(QWidget* w);
 
-  //bool showPage(int index);
+void showPage(KPageWidgetItem* pageItem);
 
   /**
     * check if the current view allows to create a transaction
