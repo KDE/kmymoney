@@ -453,9 +453,7 @@ void KPayeesView::slotChooseDefaultAccount(void)
       }
     }
   }
-#warning "port to kde4"
-#if 0
-  QMapIterator<QString,int> most_frequent, iter;
+  QMap<QString,int>::Iterator most_frequent, iter;
   most_frequent = account_count.end();
   for (iter = account_count.begin(); iter != account_count.end(); iter++) {
     if (iter.data() > most_frequent.data()) {
@@ -467,7 +465,6 @@ void KPayeesView::slotChooseDefaultAccount(void)
     checkEnableDefaultAccount->setChecked(true);
     comboDefaultAccount->setSelected(most_frequent.key());
   }
-#endif
 }
 
 void KPayeesView::slotStartRename(void)
