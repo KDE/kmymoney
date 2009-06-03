@@ -959,15 +959,13 @@ void LoanDetailsPage::slotCalculate(void)
       // calculate the amount of the loan out of the other information
       val = calc.presentValue();
       m_loanAmount->loadText(MyMoneyMoney(static_cast<double>(val)).abs().formatMoney("", m_wizard->precision()));
-      result = i18n("KMyMoney has calculated the amount of the loan as %1.")
-          .arg(m_loanAmount->lineedit()->text());
+      result = i18n("KMyMoney has calculated the amount of the loan as %1.",m_loanAmount->lineedit()->text());
 
     } else if(m_interestRate->lineedit()->text().isEmpty()) {
       // calculate the interest rate out of the other information
       val = calc.interestRate();
       m_interestRate->loadText(MyMoneyMoney(static_cast<double>(val)).abs().formatMoney("", 3));
-      result = i18n("KMyMoney has calculated the interest rate to %1%.")
-          .arg(m_interestRate->lineedit()->text());
+      result = i18n("KMyMoney has calculated the interest rate to %1%.",m_interestRate->lineedit()->text());
 
     } else if(m_paymentAmount->lineedit()->text().isEmpty()) {
       // calculate the periodical amount of the payment out of the other information
@@ -979,8 +977,7 @@ void LoanDetailsPage::slotCalculate(void)
         val = -val;
       calc.setPmt(val);
 
-      result = i18n("KMyMoney has calculated a periodic payment of %1 to cover principal and interest.")
-          .arg(m_paymentAmount->lineedit()->text());
+      result = i18n("KMyMoney has calculated a periodic payment of %1 to cover principal and interest.",m_paymentAmount->lineedit()->text());
 
       val = calc.futureValue();
       if((moneyBorrowed && val < 0 && fabsl(val) >= fabsl(calc.payment()))
@@ -991,16 +988,14 @@ void LoanDetailsPage::slotCalculate(void)
         MyMoneyMoney refVal(static_cast<double>(val));
         m_balloonAmount->loadText(refVal.abs().formatMoney("", m_wizard->precision()));
         result += QString(" ");
-        result += i18n("The number of payments has been decremented and the balloon payment has been modified to %1.")
-            .arg(m_balloonAmount->lineedit()->text());
+        result += i18n("The number of payments has been decremented and the balloon payment has been modified to %1.",m_balloonAmount->lineedit()->text());
           } else if((moneyBorrowed && val < 0 && fabsl(val) < fabsl(calc.payment()))
                      || (moneyLend && val > 0 && fabs(val) < fabs(calc.payment()))) {
                        m_balloonAmount->loadText(MyMoneyMoney(0,1).formatMoney("", m_wizard->precision()));
                      } else {
                        MyMoneyMoney refVal(static_cast<double>(val));
                        m_balloonAmount->loadText(refVal.abs().formatMoney("", m_wizard->precision()));
-                       result += i18n("The balloon payment has been modified to %1.")
-                           .arg(m_balloonAmount->lineedit()->text());
+                       result += i18n("The balloon payment has been modified to %1.",m_balloonAmount->lineedit()->text());
                      }
 
     } else if(m_termAmount->value() == 0) {
@@ -1011,16 +1006,14 @@ void LoanDetailsPage::slotCalculate(void)
 
       // if the number of payments has a fractional part, then we
       // round it to the smallest integer and calculate the balloon payment
-      result = i18n("KMyMoney has calculated the term of your loan as %1. ")
-          .arg(updateTermWidgets(floorl(val)));
+      result = i18n("KMyMoney has calculated the term of your loan as %1. ",updateTermWidgets(floorl(val)));
 
       if(val != floorl(val)) {
         calc.setNpp(floorl(val));
         val = calc.futureValue();
         MyMoneyMoney refVal(static_cast<double>(val));
         m_balloonAmount->loadText(refVal.abs().formatMoney("", m_wizard->precision()));
-        result += i18n("The balloon payment has been modified to %1.")
-            .arg(m_balloonAmount->lineedit()->text());
+        result += i18n("The balloon payment has been modified to %1.",m_balloonAmount->lineedit()->text());
       }
 
     } else {
@@ -1050,8 +1043,7 @@ void LoanDetailsPage::slotCalculate(void)
       }
 
       MyMoneyMoney refVal(static_cast<double>(val));
-      result = i18n("KMyMoney has calculated a balloon payment of %1 for this loan.")
-          .arg(refVal.abs().formatMoney("", m_wizard->precision()));
+      result = i18n("KMyMoney has calculated a balloon payment of %1 for this loan.",refVal.abs().formatMoney("", m_wizard->precision()));
 
       if(!m_balloonAmount->lineedit()->text().isEmpty()) {
         if((m_balloonAmount->value().abs() - refVal.abs()).abs().toDouble() > 1) {

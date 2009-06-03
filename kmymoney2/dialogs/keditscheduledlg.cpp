@@ -272,15 +272,14 @@ TransactionEditor* KEditScheduleDlg::startEdit(void)
     d->m_tabOrderWidgets.append(m_frequencyEdit);
     d->m_tabOrderWidgets.append(m_paymentMethodEdit);
     d->m_tabOrderWidgets.append(m_form);
-#warning "port to kde4"
-#if 0
-    // install event filter in all taborder widgets
-    QWidget* w;
-    for(w = d->m_tabOrderWidgets.first(); w; w = d->m_tabOrderWidgets.next()) {
-      w->installEventFilter(this);
-      w->installEventFilter(editor);
-    }
-#endif
+    for (int i = 0; i < d->m_tabOrderWidgets.size(); ++i) {
+        QWidget* w = d->m_tabOrderWidgets.at(i);
+	if(w) {
+           w->installEventFilter(this);
+           w->installEventFilter(editor);
+        }
+     }
+
     // connect the postdate modification signal to our update routine
     kMyMoneyDateInput* dateEdit = dynamic_cast<kMyMoneyDateInput*>(editor->haveWidget("postdate"));
     if(dateEdit)

@@ -430,8 +430,8 @@ void QueryTable::constructTransactionTable(void)
     qA["commodity"] = qS["commodity"] = (* it_transaction).commodity();
 
     pd = (* it_transaction).postDate();
-    qA["month"] = qS["month"] = i18n("Month of %1").arg(QDate(pd.year(),pd.month(),1).toString(Qt::ISODate));
-    qA["week"] = qS["week"] = i18n("Week of %1").arg(pd.addDays(1-pd.dayOfWeek()).toString(Qt::ISODate));
+    qA["month"] = qS["month"] = i18n("Month of %1",QDate(pd.year(),pd.month(),1).toString(Qt::ISODate));
+    qA["week"] = qS["week"] = i18n("Week of %1",pd.addDays(1-pd.dayOfWeek()).toString(Qt::ISODate));
 
     qA["currency"] = qS["currency"] = "";
 
@@ -692,8 +692,8 @@ void QueryTable::constructTransactionTable(void)
 
             if (! splitAcc.isIncomeExpense()) {
               qA["category"] = ((*it_split).shares().isNegative()) ?
-                  i18n("Transfer from %1").arg(splitAcc.fullName())
-                : i18n("Transfer to %1").arg(splitAcc.fullName());
+                  i18n("Transfer from %1",splitAcc.fullName())
+                : i18n("Transfer to %1",splitAcc.fullName());
               qA["topcategory"] = splitAcc.topParentName();
               qA["categorytype"] = i18n("Transfer");
             }
@@ -734,8 +734,8 @@ void QueryTable::constructTransactionTable(void)
             qS["topaccount"] = splitAcc.topParentName();
 
             qS["category"] = ((*it_split).shares().isNegative())
-              ? i18n("Transfer to %1").arg(a_fullname)
-              : i18n("Transfer from %1").arg(a_fullname);
+              ? i18n("Transfer to %1",a_fullname)
+              : i18n("Transfer from %1",a_fullname);
 
             qS["institution"] = institution.isEmpty()
               ? i18n("No Institution")
@@ -1199,8 +1199,8 @@ void QueryTable::constructSplitsTable(void)
     qA["commodity"] = qS["commodity"] = (* it_transaction).commodity();
 
     pd = (* it_transaction).postDate();
-    qA["month"] = qS["month"] = i18n("Month of %1").arg(QDate(pd.year(),pd.month(),1).toString(Qt::ISODate));
-    qA["week"] = qS["week"] = i18n("Week of %1").arg(pd.addDays(1-pd.dayOfWeek()).toString(Qt::ISODate));
+    qA["month"] = qS["month"] = i18n("Month of %1",QDate(pd.year(),pd.month(),1).toString(Qt::ISODate));
+    qA["week"] = qS["week"] = i18n("Week of %1",pd.addDays(1-pd.dayOfWeek()).toString(Qt::ISODate));
 
     qA["currency"] = qS["currency"] = "";
 
@@ -1354,8 +1354,8 @@ void QueryTable::constructSplitsTable(void)
         //fill in account information
         if (! splitAcc.isIncomeExpense() && it_split != myBegin) {
           qA["account"] = ((*it_split).shares().isNegative()) ?
-              i18n("Transfer to %1").arg(myBeginAcc.fullName())
-            : i18n("Transfer from %1").arg(myBeginAcc.fullName());
+              i18n("Transfer to %1",myBeginAcc.fullName())
+            : i18n("Transfer from %1",myBeginAcc.fullName());
         } else if (it_split == myBegin ) {
           //handle the main split
           if((splits.count() > 2)) {
@@ -1373,8 +1373,8 @@ void QueryTable::constructSplitsTable(void)
             ReportAccount tempSplitAcc = (*tempSplit).accountId();
             if (! tempSplitAcc.isIncomeExpense()) {
               qA["account"] = ((*it_split).shares().isNegative()) ?
-                  i18n("Transfer to %1").arg(tempSplitAcc.fullName())
-                : i18n("Transfer from %1").arg(tempSplitAcc.fullName());
+                  i18n("Transfer to %1",tempSplitAcc.fullName())
+                : i18n("Transfer from %1",tempSplitAcc.fullName());
             } else {
               qA["account"] = tempSplitAcc.fullName();
             }

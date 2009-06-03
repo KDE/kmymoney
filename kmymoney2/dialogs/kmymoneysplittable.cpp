@@ -645,7 +645,7 @@ void kMyMoneySplitTable::slotDuplicateSplit(void)
       m_transaction.addSplit(split);
       emit transactionChanged(m_transaction);
     } catch(MyMoneyException *e) {
-      qDebug("Cannot duplicate split: %s", e->what().toLatin1());
+      qDebug("Cannot duplicate split: %s", qPrintable(e->what()));
       delete e;
     }
   }
@@ -671,7 +671,7 @@ void kMyMoneySplitTable::slotDeleteSplit(void)
           setCurrentCell(m_currentRow, 0);
         emit transactionChanged(m_transaction);
       } catch(MyMoneyException *e) {
-        qDebug("Cannot remove split: %s", e->what().toLatin1());
+        qDebug("Cannot remove split: %s", qPrintable(e->what()));
         delete e;
       }
     }
@@ -780,7 +780,7 @@ void kMyMoneySplitTable::endEdit(bool keyBoardDriven)
       }
       emit transactionChanged(m_transaction);
     } catch(MyMoneyException *e) {
-      qDebug("Cannot add/modify split: %s", e->what().toLatin1());
+      qDebug("Cannot add/modify split: %s", qPrintable(e->what()));
       delete e;
     }
   }
@@ -905,13 +905,15 @@ QWidget* kMyMoneySplitTable::createEditWidgets(void)
   // load e.g. the category widget with the account list
   slotLoadEditWidgets();
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadEditWidgets()));
-#warning "port to kde4"
-#if 0
-  // setup the keyboard filter for all widgets
-  for(QWidget* w = m_tabOrderWidgets.first(); w; w = m_tabOrderWidgets.next()) {
-    w->installEventFilter(this);
+
+  for (int i = 0; i < m_tabOrderWidgets.size(); ++i) {
+      QWidget* w = m_tabOrderWidgets.at(i);
+      if(w) {
+          w->installEventFilter(this);
+      }
   }
-#endif
+
+
   m_editCategory->setFocus();
   m_editCategory->lineEdit()->selectAll();
   m_editMode = true;
