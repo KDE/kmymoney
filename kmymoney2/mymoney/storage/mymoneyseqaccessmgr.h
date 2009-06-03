@@ -33,7 +33,7 @@
 #include "imymoneyserialize.h"
 #include "mymoneymap.h"
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 /**
   * @author Thomas Baumgart
@@ -217,7 +217,7 @@ public:
     *
     * @return QValueList<MyMoneyPayee> containing the payee information
     */
-  const Q3ValueList<MyMoneyPayee> payeeList(void) const;
+  const QList<MyMoneyPayee> payeeList(void) const;
 
   /**
     * This method is used to add one account as sub-ordinate to another
@@ -411,7 +411,7 @@ public:
     *
     * @return QMap containing the institution information
     */
-  const Q3ValueList<MyMoneyInstitution> institutionList(void) const;
+  const QList<MyMoneyInstitution> institutionList(void) const;
 
   /**
     * This method returns a list of accounts inside the storage object.
@@ -420,7 +420,7 @@ public:
     *
     * @note The standard accounts will not be returned
     */
-  void accountList(Q3ValueList<MyMoneyAccount>& list) const;
+  void accountList(QList<MyMoneyAccount>& list) const;
 
   /**
     * This method is used to pull a list of transactions from the file
@@ -438,7 +438,7 @@ public:
     *
     * @return set of transactions in form of a QValueList<MyMoneyTransaction>
     */
-  void transactionList(Q3ValueList<MyMoneyTransaction>& list, MyMoneyTransactionFilter& filter) const;
+  void transactionList(QList<MyMoneyTransaction>& list, MyMoneyTransactionFilter& filter) const;
 
   /**
     * This method is used to pull a list of transactions from the file
@@ -456,12 +456,12 @@ public:
     *
     * @return set of transactions in form of a QValueList<QPair<MyMoneyTransaction,MyMoneySplit> >
     */
-  void transactionList(Q3ValueList< QPair<MyMoneyTransaction, MyMoneySplit> >& list, MyMoneyTransactionFilter& filter) const;
+  void transactionList(QList< QPair<MyMoneyTransaction, MyMoneySplit> >& list, MyMoneyTransactionFilter& filter) const;
 
   /**
     * Compatibility interface for the previous method.
     */
-  const Q3ValueList<MyMoneyTransaction> transactionList(MyMoneyTransactionFilter& filter) const;
+  const QList<MyMoneyTransaction> transactionList(MyMoneyTransactionFilter& filter) const;
 
   /**
     * This method returns whether a given transaction is already in memory, to avoid
@@ -681,7 +681,7 @@ public:
     * This method returns a list of security objects that the engine has
     * knowledge of.
     */
-  const Q3ValueList<MyMoneySecurity> securityList(void) const;
+  const QList<MyMoneySecurity> securityList(void) const;
 
   /**
     * This method is used to add a new currency object to the engine.
@@ -733,7 +733,7 @@ public:
     *
     * @return QValueList of all MyMoneyCurrency objects.
     */
-  const Q3ValueList<MyMoneySecurity> currencyList(void) const;
+  const QList<MyMoneySecurity> currencyList(void) const;
 
   /**
     * This method is used to extract a list of scheduled transactions
@@ -761,7 +761,7 @@ public:
     *
     * @return const QValueList<MyMoneySchedule> list of schedule objects.
     */
-  const Q3ValueList<MyMoneySchedule> scheduleList(const QString& accountId = QString(),
+  const QList<MyMoneySchedule> scheduleList(const QString& accountId = QString(),
                                      const MyMoneySchedule::typeE type = MyMoneySchedule::TYPE_ANY,
                                      const MyMoneySchedule::occurenceE occurence = MyMoneySchedule::OCCUR_ANY,
                                      const MyMoneySchedule::paymentTypeE paymentType = MyMoneySchedule::STYPE_ANY,
@@ -769,7 +769,7 @@ public:
                                      const QDate& endDate = QDate(),
                                      const bool overdue = false) const;
 
-  const Q3ValueList<MyMoneySchedule> scheduleListEx( int scheduleTypes,
+  const QList<MyMoneySchedule> scheduleListEx( int scheduleTypes,
                                               int scheduleOcurrences,
                                               int schedulePaymentTypes,
                                               QDate startDate,
@@ -783,7 +783,7 @@ public:
     *
     * @return QValueList of all MyMoneyReport objects.
     */
-  const Q3ValueList<MyMoneyReport> reportList( void ) const;
+  const QList<MyMoneyReport> reportList( void ) const;
 
   /**
     * This method is used to add a new report to the engine.
@@ -854,7 +854,7 @@ public:
     *
     * @return QValueList of all MyMoneyBudget objects.
     */
-  const Q3ValueList<MyMoneyBudget> budgetList( void ) const;
+  const QList<MyMoneyBudget> budgetList( void ) const;
 
   /**
     * This method is used to add a new budget to the engine.

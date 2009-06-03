@@ -28,7 +28,7 @@
 #include <qxml.h>
 //Added by qt3to4:
 #include <Q3TextStream>
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -613,8 +613,8 @@ bool MyMoneyStorageXML::readUserInformation(const QDomElement& userElement)
 
 void MyMoneyStorageXML::writeInstitutions(QDomElement& institutions)
 {
-  const Q3ValueList<MyMoneyInstitution> list = m_storage->institutionList();
-  Q3ValueList<MyMoneyInstitution>::ConstIterator it;
+  const QList<MyMoneyInstitution> list = m_storage->institutionList();
+  QList<MyMoneyInstitution>::ConstIterator it;
   institutions.setAttribute("count", list.count());
 
   for(it = list.begin(); it != list.end(); ++it)
@@ -628,8 +628,8 @@ void MyMoneyStorageXML::writeInstitution(QDomElement& institution, const MyMoney
 
 void MyMoneyStorageXML::writePayees(QDomElement& payees)
 {
-  const Q3ValueList<MyMoneyPayee> list = m_storage->payeeList();
-  Q3ValueList<MyMoneyPayee>::ConstIterator it;
+  const QList<MyMoneyPayee> list = m_storage->payeeList();
+  QList<MyMoneyPayee>::ConstIterator it;
   payees.setAttribute("count", list.count());
 
   for(it = list.begin(); it != list.end(); ++it)
@@ -643,9 +643,9 @@ void MyMoneyStorageXML::writePayee(QDomElement& payee, const MyMoneyPayee& p)
 
 void MyMoneyStorageXML::writeAccounts(QDomElement& accounts)
 {
-  Q3ValueList<MyMoneyAccount> list;
+  QList<MyMoneyAccount> list;
   m_storage->accountList(list);
-  Q3ValueList<MyMoneyAccount>::ConstIterator it;
+  QList<MyMoneyAccount>::ConstIterator it;
   accounts.setAttribute("count", list.count()+5);
 
   writeAccount(accounts, m_storage->asset());
@@ -671,11 +671,11 @@ void MyMoneyStorageXML::writeTransactions(QDomElement& transactions)
 {
   MyMoneyTransactionFilter filter;
   filter.setReportAllSplits(false);
-  Q3ValueList<MyMoneyTransaction> list;
+  QList<MyMoneyTransaction> list;
   m_storage->transactionList(list, filter);
   transactions.setAttribute("count", list.count());
 
-  Q3ValueList<MyMoneyTransaction>::ConstIterator it;
+  QList<MyMoneyTransaction>::ConstIterator it;
 
   signalProgress(0, list.count(), i18n("Saving transactions..."));
 
@@ -694,8 +694,8 @@ void MyMoneyStorageXML::writeTransaction(QDomElement& transaction, const MyMoney
 
 void MyMoneyStorageXML::writeSchedules(QDomElement& scheduled)
 {
-  const Q3ValueList<MyMoneySchedule> list = m_storage->scheduleList();
-  Q3ValueList<MyMoneySchedule>::ConstIterator it;
+  const QList<MyMoneySchedule> list = m_storage->scheduleList();
+  QList<MyMoneySchedule>::ConstIterator it;
   scheduled.setAttribute("count", list.count());
 
   for(it = list.begin(); it != list.end(); ++it)
@@ -711,11 +711,11 @@ void MyMoneyStorageXML::writeSchedule(QDomElement& scheduledTx, const MyMoneySch
 
 void MyMoneyStorageXML::writeSecurities(QDomElement& equities)
 {
-  const Q3ValueList<MyMoneySecurity> securityList = m_storage->securityList();
+  const QList<MyMoneySecurity> securityList = m_storage->securityList();
   equities.setAttribute("count", securityList.count());
   if(securityList.size())
   {
-    for(Q3ValueList<MyMoneySecurity>::ConstIterator it = securityList.begin(); it != securityList.end(); ++it)
+    for(QList<MyMoneySecurity>::ConstIterator it = securityList.begin(); it != securityList.end(); ++it)
     {
       writeSecurity(equities, (*it));
     }
@@ -729,11 +729,11 @@ void MyMoneyStorageXML::writeSecurity(QDomElement& securityElement, const MyMone
 
 void MyMoneyStorageXML::writeCurrencies(QDomElement& currencies)
 {
-  const Q3ValueList<MyMoneySecurity> currencyList = m_storage->currencyList();
+  const QList<MyMoneySecurity> currencyList = m_storage->currencyList();
   currencies.setAttribute("count", currencyList.count());
   if(currencyList.size())
   {
-    for(Q3ValueList<MyMoneySecurity>::ConstIterator it = currencyList.begin(); it != currencyList.end(); ++it)
+    for(QList<MyMoneySecurity>::ConstIterator it = currencyList.begin(); it != currencyList.end(); ++it)
     {
       writeSecurity(currencies, (*it));
     }
@@ -742,8 +742,8 @@ void MyMoneyStorageXML::writeCurrencies(QDomElement& currencies)
 
 void MyMoneyStorageXML::writeReports(QDomElement& parent)
 {
-  const Q3ValueList<MyMoneyReport> list = m_storage->reportList();
-  Q3ValueList<MyMoneyReport>::ConstIterator it;
+  const QList<MyMoneyReport> list = m_storage->reportList();
+  QList<MyMoneyReport>::ConstIterator it;
   parent.setAttribute("count", list.count());
 
   signalProgress(0, list.count(), i18n("Saving reports..."));
@@ -757,8 +757,8 @@ void MyMoneyStorageXML::writeReports(QDomElement& parent)
 
 void MyMoneyStorageXML::writeBudgets(QDomElement& parent)
 {
-  const Q3ValueList<MyMoneyBudget> list = m_storage->budgetList();
-  Q3ValueList<MyMoneyBudget>::ConstIterator it;
+  const QList<MyMoneyBudget> list = m_storage->budgetList();
+  QList<MyMoneyBudget>::ConstIterator it;
   parent.setAttribute("count", list.count());
 
   signalProgress(0, list.count(), i18n("Saving budgets..."));

@@ -30,7 +30,7 @@
 #include <qdom.h>
 #include <qmap.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -150,7 +150,7 @@ void MyMoneyStorageANON::fakeTransaction(MyMoneyTransaction& tx)
   tn.setBankID(hideString(tx.bankID()));
 
   // hide split data
-  Q3ValueList<MyMoneySplit>::ConstIterator it_s;
+  QList<MyMoneySplit>::ConstIterator it_s;
   for(it_s = tx.splits().begin(); it_s != tx.splits().end(); ++it_s) {
     MyMoneySplit s = (*it_s);
     s.setMemo(QString("%1/%2").arg(tn.id()).arg(s.id()));
@@ -250,8 +250,8 @@ void MyMoneyStorageANON::fakeBudget(MyMoneyBudget& bx)
   bn.setBudgetStart(bx.budgetStart());
   bn = MyMoneyBudget(bx.id(), bn);
 
-  Q3ValueList<MyMoneyBudget::AccountGroup> list = bx.getaccounts();
-  Q3ValueList<MyMoneyBudget::AccountGroup>::iterator it;
+  QList<MyMoneyBudget::AccountGroup> list = bx.getaccounts();
+  QList<MyMoneyBudget::AccountGroup>::iterator it;
   for(it = list.begin(); it != list.end(); ++it) {
     // only add the account if there is a budget entered
     if(!(*it).balance().isZero()) {

@@ -25,7 +25,7 @@
 #include <qapplication.h>
 //Added by qt3to4:
 #include <Q3TextStream>
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -266,8 +266,8 @@ bool MyMoneyTemplate::createAccounts(MyMoneyAccount& parent, QDomNode account)
       QDomElement accountElement = account.toElement();
       if(accountElement.tagName() == "account") {
         signalProgress(++m_accountsRead, 0);
-        Q3ValueList<MyMoneyAccount> subAccountList;
-        Q3ValueList<MyMoneyAccount>::ConstIterator it;
+        QList<MyMoneyAccount> subAccountList;
+        QList<MyMoneyAccount>::ConstIterator it;
         it = subAccountList.end();
         if(!parent.accountList().isEmpty()) {
           MyMoneyFile::instance()->accountList(subAccountList, parent.accountList());
@@ -373,9 +373,9 @@ bool MyMoneyTemplate::addAccountStructure(QDomElement& parent, const MyMoneyAcco
 
   // any child accounts?
   if(acc.accountList().count() > 0) {
-    Q3ValueList<MyMoneyAccount> list;
+    QList<MyMoneyAccount> list;
     MyMoneyFile::instance()->accountList(list, acc.accountList(), false);
-    Q3ValueList<MyMoneyAccount>::Iterator it;
+    QList<MyMoneyAccount>::Iterator it;
     for(it = list.begin(); it != list.end(); ++it) {
       addAccountStructure(account, *it);
     }

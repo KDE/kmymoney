@@ -25,7 +25,7 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
-#include <q3valuelist.h>
+#include <QList>
 #include <qfile.h>
 #include <q3textstream.h>
 
@@ -163,7 +163,7 @@ double CashFlowList::xirrResult ( double& rate ) const
   double r = rate + 1.0;
   double res = 0.00000;//back().value().toDouble();
 
-  Q3ValueList<CashFlowListItem>::const_iterator list_it = begin();
+  QList<CashFlowListItem>::const_iterator list_it = begin();
   while( list_it != end() ) {
     double e_i = ( (* list_it).today().daysTo ( (* list_it).date() ) ) / 365.0;
     MyMoneyMoney val = (* list_it).value();
@@ -183,7 +183,7 @@ double CashFlowList::xirrResultDerive ( double& rate ) const
   double r = rate + 1.0;
   double res = 0.00000;
 
-  Q3ValueList<CashFlowListItem>::const_iterator list_it = begin();
+  QList<CashFlowListItem>::const_iterator list_it = begin();
   while( list_it != end() ) {
     double e_i = ( (* list_it).today().daysTo ( (* list_it).date() ) ) / 365.0;
     MyMoneyMoney val = (* list_it).value();
@@ -418,8 +418,8 @@ void QueryTable::constructTransactionTable(void)
   QMap<QString, MyMoneyAccount> accts;
 
   //get all transactions for this report
-  Q3ValueList<MyMoneyTransaction> transactions = file->transactionList(report);
-  for (Q3ValueList<MyMoneyTransaction>::const_iterator it_transaction = transactions.begin(); it_transaction != transactions.end(); ++it_transaction) {
+  QList<MyMoneyTransaction> transactions = file->transactionList(report);
+  for (QList<MyMoneyTransaction>::const_iterator it_transaction = transactions.begin(); it_transaction != transactions.end(); ++it_transaction) {
 
     TableRow qA, qS;
     QDate pd;
@@ -448,8 +448,8 @@ void QueryTable::constructTransactionTable(void)
     // to be the account (qA) that will have the sub-item "split" entries. we add
     // one transaction entry (qS) for each subsequent entry in the split.
 
-    const Q3ValueList<MyMoneySplit>& splits = (*it_transaction).splits();
-    Q3ValueList<MyMoneySplit>::const_iterator myBegin, it_split;
+    const QList<MyMoneySplit>& splits = (*it_transaction).splits();
+    QList<MyMoneySplit>::const_iterator myBegin, it_split;
     //S_end = splits.end();
 
     for (it_split = splits.begin(), myBegin = splits.end(); it_split != splits.end(); ++it_split) {
@@ -923,7 +923,7 @@ void QueryTable::constructPerformanceRow( const ReportAccount& account, TableRow
     filter.addAccount(account.id());
     filter.setReportAllSplits(true);
 
-    Q3ValueList<MyMoneyTransaction> startTransactions = file->transactionList(filter);
+    QList<MyMoneyTransaction> startTransactions = file->transactionList(filter);
     if(startTransactions.size() > 0)
     {
       //get the last transaction
@@ -969,8 +969,8 @@ void QueryTable::constructPerformanceRow( const ReportAccount& account, TableRow
   report.setConsiderCategory(true);
   report.clearAccountFilter();
   report.addAccount(account.id());
-  Q3ValueList<MyMoneyTransaction> transactions = file->transactionList( report );
-  Q3ValueList<MyMoneyTransaction>::const_iterator it_transaction = transactions.begin();
+  QList<MyMoneyTransaction> transactions = file->transactionList( report );
+  QList<MyMoneyTransaction>::const_iterator it_transaction = transactions.begin();
   while ( it_transaction != transactions.end() )
   {
     // s is the split for the stock account
@@ -1001,8 +1001,8 @@ void QueryTable::constructPerformanceRow( const ReportAccount& account, TableRow
       reinvestincome += CashFlowListItem( (*it_transaction).postDate(), value );
     } else if ( action == MyMoneySplit::ActionDividend || action == MyMoneySplit::ActionYield ) {
       // find the split with the category, which has the actual amount of the dividend
-      Q3ValueList<MyMoneySplit> splits = (*it_transaction).splits();
-      Q3ValueList<MyMoneySplit>::const_iterator it_split = splits.begin();
+      QList<MyMoneySplit> splits = (*it_transaction).splits();
+      QList<MyMoneySplit>::const_iterator it_split = splits.begin();
       bool found = false;
       while( it_split != splits.end() ) {
         ReportAccount acc = (*it_split).accountId();
@@ -1087,9 +1087,9 @@ void QueryTable::constructAccountTable(void)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
-  Q3ValueList<MyMoneyAccount> accounts;
+  QList<MyMoneyAccount> accounts;
   file->accountList(accounts);
-  Q3ValueList<MyMoneyAccount>::const_iterator it_account = accounts.begin();
+  QList<MyMoneyAccount>::const_iterator it_account = accounts.begin();
   while ( it_account != accounts.end() )
   {
     ReportAccount account = *it_account;
@@ -1187,8 +1187,8 @@ void QueryTable::constructSplitsTable(void)
   QMap<QString, MyMoneyAccount> accts;
 
   //get all transactions for this report
-  Q3ValueList<MyMoneyTransaction> transactions = file->transactionList(report);
-  for (Q3ValueList<MyMoneyTransaction>::const_iterator it_transaction = transactions.begin(); it_transaction != transactions.end(); ++it_transaction) {
+  QList<MyMoneyTransaction> transactions = file->transactionList(report);
+  for (QList<MyMoneyTransaction>::const_iterator it_transaction = transactions.begin(); it_transaction != transactions.end(); ++it_transaction) {
 
     TableRow qA, qS;
     QDate pd;
@@ -1216,8 +1216,8 @@ void QueryTable::constructSplitsTable(void)
     // that is not an income or expense account if there is no stock or loan account)
     // to be the account (qA) that will have the sub-item "split" entries. we add
     // one transaction entry (qS) for each subsequent entry in the split.
-    const Q3ValueList<MyMoneySplit>& splits = (*it_transaction).splits();
-    Q3ValueList<MyMoneySplit>::const_iterator myBegin, it_split;
+    const QList<MyMoneySplit>& splits = (*it_transaction).splits();
+    QList<MyMoneySplit>::const_iterator myBegin, it_split;
     //S_end = splits.end();
 
     for (it_split = splits.begin(), myBegin = splits.end(); it_split != splits.end(); ++it_split) {
@@ -1363,7 +1363,7 @@ void QueryTable::constructSplitsTable(void)
             qA["account"] = i18n("[Split Transaction]");
           } else {
             //fill the account name of the second split
-            Q3ValueList<MyMoneySplit>::const_iterator tempSplit = splits.begin();
+            QList<MyMoneySplit>::const_iterator tempSplit = splits.begin();
 
             //there are supposed to be only 2 splits if we ever get here
             if(tempSplit == myBegin && splits.count() > 1)

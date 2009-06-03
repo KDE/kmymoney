@@ -21,7 +21,7 @@
 #include <qpushbutton.h>
 #include <qlabel.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -53,13 +53,13 @@ KMyMoneyFileInfoDlg::KMyMoneyFileInfoDlg(QWidget *parent)
   m_payeeCount->setText(QString("%1").arg(storage->payeeList().count()));
   m_institutionCount->setText(QString("%1").arg(storage->institutionList().count()));
 
-  Q3ValueList<MyMoneyAccount> a_list;
+  QList<MyMoneyAccount> a_list;
   storage->accountList(a_list);
   m_accountCount->setText(QString("%1").arg(a_list.count()));
 
   QMap<MyMoneyAccount::accountTypeE, int> accountMap;
   QMap<MyMoneyAccount::accountTypeE, int> accountMapClosed;
-  Q3ValueList<MyMoneyAccount>::const_iterator it_a;
+  QList<MyMoneyAccount>::const_iterator it_a;
   for(it_a = a_list.begin(); it_a != a_list.end(); ++it_a) {
     accountMap[(*it_a).accountType()] = accountMap[(*it_a).accountType()] + 1;
     accountMapClosed[(*it_a).accountType()] = accountMapClosed[(*it_a).accountType()] + 0;

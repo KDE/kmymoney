@@ -1372,7 +1372,7 @@ void MyMoneyGncReader::convertTransaction (const GncTransaction *gtx) {
     const GncKvp *slot = gtx->getKvp(i);
     if (slot->key() == "notes") tx.setMemo(slot->value());
   }
-  Q3ValueList<MyMoneySplit>::iterator it = m_splitList.begin();
+  QList<MyMoneySplit>::iterator it = m_splitList.begin();
   while (!m_splitList.isEmpty()) {
     split = *it;
     // at this point, if m_potentialTransfer is still true, it is actually one!
@@ -1562,7 +1562,7 @@ MyMoneyTransaction MyMoneyGncReader::convertTemplateTransaction (const QString& 
   if (m_splitList.count() != 2) m_potentialTransfer = false;
   // at this point, if m_potentialTransfer is still true, it is actually one!
   QString txMemo = "";
-  Q3ValueList<MyMoneySplit>::iterator it = m_splitList.begin();
+  QList<MyMoneySplit>::iterator it = m_splitList.begin();
   while (!m_splitList.isEmpty()) {
     split = *it;
     if (m_potentialTransfer) {
@@ -1908,15 +1908,15 @@ void MyMoneyGncReader::terminate () {
   }
   // first step is to implement the users investment option, now we
   // have all the accounts available
-  Q3ValueList<QString>::iterator stocks;
+  QList<QString>::iterator stocks;
   for (stocks = m_stockList.begin(); stocks != m_stockList.end(); ++stocks) {
     checkInvestmentOption (*stocks);
   }
   // Next step is to walk the list and assign the parent/child relationship between the objects.
   unsigned int i = 0;
   signalProgress (0, m_accountCount, i18n ("Reorganizing accounts..."));
-  Q3ValueList<MyMoneyAccount> list;
-  Q3ValueList<MyMoneyAccount>::Iterator acc;
+  QList<MyMoneyAccount> list;
+  QList<MyMoneyAccount>::Iterator acc;
   m_storage->accountList(list);
   for (acc = list.begin(); acc != list.end(); ++acc) {
     if ((*acc).parentAccountId() == m_storage->asset().id()) {
@@ -2260,8 +2260,8 @@ void MyMoneyGncReader::checkInvestmentOption (QString stockId) {
     static int lastSelected = 0;
     MyMoneyAccount invAcc (stockAcc);
     QStringList accList;
-    Q3ValueList<MyMoneyAccount> list;
-    Q3ValueList<MyMoneyAccount>::Iterator acc;
+    QList<MyMoneyAccount> list;
+    QList<MyMoneyAccount>::Iterator acc;
     m_storage->accountList(list);
     // build a list of candidates for the input box
     for (acc = list.begin(); acc != list.end(); ++acc) {

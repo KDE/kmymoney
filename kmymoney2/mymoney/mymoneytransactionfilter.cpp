@@ -32,7 +32,7 @@
 #include <mymoneyfile.h>
 #include "mymoneytransactionfilter.h"
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 #include <Q3PtrList>
 
 MyMoneyTransactionFilter::MyMoneyTransactionFilter()
@@ -220,7 +220,7 @@ void MyMoneyTransactionFilter::setConsiderCategory(const bool check)
   m_considerCategory = check;
 }
 
-const Q3ValueList<MyMoneySplit>& MyMoneyTransactionFilter::matchingSplits(void) const
+const QList<MyMoneySplit>& MyMoneyTransactionFilter::matchingSplits(void) const
 {
   return m_matchingSplits;
 }
@@ -271,7 +271,7 @@ bool MyMoneyTransactionFilter::match(const MyMoneySplit * const sp) const
 bool MyMoneyTransactionFilter::match(const MyMoneyTransaction& transaction)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
-  Q3ValueList<MyMoneySplit>::ConstIterator it;
+  QList<MyMoneySplit>::ConstIterator it;
 
   m_matchingSplits.clear();
 
@@ -536,7 +536,7 @@ int MyMoneyTransactionFilter::splitType(const MyMoneyTransaction& t, const MyMon
 
 MyMoneyTransactionFilter::validityOptionE MyMoneyTransactionFilter::validTransaction(const MyMoneyTransaction& t) const
 {
-  Q3ValueList<MyMoneySplit>::ConstIterator it_s;
+  QList<MyMoneySplit>::ConstIterator it_s;
   MyMoneyMoney val;
 
   for(it_s = t.splits().begin(); it_s != t.splits().end(); ++it_s) {
@@ -630,7 +630,7 @@ bool MyMoneyTransactionFilter::categories(QStringList& list) const
   return result;
 }
 
-bool MyMoneyTransactionFilter::types(Q3ValueList<int>& list) const
+bool MyMoneyTransactionFilter::types(QList<int>& list) const
 {
   bool result = m_filterSet.singleFilter.typeFilter;
 
@@ -646,7 +646,7 @@ bool MyMoneyTransactionFilter::types(Q3ValueList<int>& list) const
   return result;
 }
 
-bool MyMoneyTransactionFilter::states(Q3ValueList<int>& list) const
+bool MyMoneyTransactionFilter::states(QList<int>& list) const
 {
   bool result = m_filterSet.singleFilter.stateFilter;
 

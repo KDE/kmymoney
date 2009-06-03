@@ -33,7 +33,7 @@
 #include <qwidget.h>
 //Added by qt3to4:
 #include <QResizeEvent>
-#include <Q3ValueList>
+#include <QList>
 class QSplitter;
 
 // ----------------------------------------------------------------------------
@@ -228,7 +228,7 @@ public slots:
 protected:
   void resizeEvent(QResizeEvent*);
   void loadPayees(void);
-  void selectedPayees(Q3ValueList<MyMoneyPayee>& payeesList) const;
+  void selectedPayees(QList<MyMoneyPayee>& payeesList) const;
   void ensurePayeeVisible(const QString& id);
   void clearItemData(void);
 
@@ -292,7 +292,7 @@ private:
 signals:
   void transactionSelected(const QString& accountId, const QString& transactionId);
   void openContextMenu(const MyMoneyObject& obj);
-  void selectObjects(const Q3ValueList<MyMoneyPayee>& payees);
+  void selectObjects(const QList<MyMoneyPayee>& payees);
 
 private:
   MyMoneyPayee m_payee;
@@ -303,7 +303,7 @@ private:
   /**
     * This member holds a list of all transactions
     */
-  Q3ValueList<KMyMoneyTransaction> m_transactionList;
+  QList<KMyMoneyTransaction> m_transactionList;
 
   /**
     * This member keeps a vector of pointers to all visible (filtered)

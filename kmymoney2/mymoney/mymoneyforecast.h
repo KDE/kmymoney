@@ -24,7 +24,7 @@
 // QT Includes
 
 #include <qmap.h>
-#include <q3valuelist.h>
+#include <QList>
 #include <qstring.h>
 
 // ----------------------------------------------------------------------------
@@ -57,7 +57,7 @@ public:
   /**
    * Returns the list of accounts to be forecast.
    */
-  Q3ValueList<MyMoneyAccount> accountList(void);
+  QList<MyMoneyAccount> accountList(void);
 
   /**
    * Returns the balance trend for account @a acc based on a number of days @p forecastDays
@@ -109,12 +109,12 @@ public:
   /**
    * returns a list of the dates where the account was on its lowest balance in each cycle
    */
-  Q3ValueList<QDate> accountMinimumBalanceDateList(const MyMoneyAccount& acc);
+  QList<QDate> accountMinimumBalanceDateList(const MyMoneyAccount& acc);
 
   /**
    * returns a list of the dates where the account was on its highest balance in each cycle
    */
-  Q3ValueList<QDate> accountMaximumBalanceDateList(const MyMoneyAccount& acc);
+  QList<QDate> accountMaximumBalanceDateList(const MyMoneyAccount& acc);
 
   /**
    * returns the average balance of the account within the forecast period
@@ -196,12 +196,12 @@ private:
   /**
    * Returns the list of accounts to be forecast. Only Asset and Liability are returned.
    */
-  static Q3ValueList<MyMoneyAccount> forecastAccountList(void);
+  static QList<MyMoneyAccount> forecastAccountList(void);
 
   /**
    * Returns the list of accounts to create a budget. Only Income and Expenses are returned.
    */
-  Q3ValueList<MyMoneyAccount> budgetAccountList(void);
+  QList<MyMoneyAccount> budgetAccountList(void);
 
   /**
    * calculate daily forecast balance based on historic transactions

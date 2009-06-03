@@ -36,7 +36,7 @@
 #include <qlayout.h>
 #include <qobject.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 #include <Q3VBoxLayout>
 #include <Q3Frame>
 #include <Q3CString>
@@ -221,7 +221,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   connect(kmymoney2, SIGNAL(payeeCreated(const QString&)), m_payeesView, SLOT(slotSelectPayeeAndTransaction(const QString&)));
   connect(kmymoney2, SIGNAL(payeeRename()), m_payeesView, SLOT(slotStartRename()));
   connect(m_payeesView, SIGNAL(openContextMenu(const MyMoneyObject&)), kmymoney2, SLOT(slotShowPayeeContextMenu()));
-  connect(m_payeesView, SIGNAL(selectObjects(const Q3ValueList<MyMoneyPayee>&)), kmymoney2, SLOT(slotSelectPayees(const Q3ValueList<MyMoneyPayee>&)));
+  connect(m_payeesView, SIGNAL(selectObjects(const QList<MyMoneyPayee>&)), kmymoney2, SLOT(slotSelectPayees(const QList<MyMoneyPayee>&)));
   connect(m_payeesView, SIGNAL(transactionSelected(const QString&, const QString&)),
           this, SLOT(slotLedgerSelected(const QString&, const QString&)));
 #if 0
@@ -272,7 +272,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   addTitleBar(m_budgetView, i18n("Budgets"));
   connect(kmymoney2, SIGNAL(fileLoaded(const KUrl&)), m_budgetView, SLOT(slotRefreshView()));
   connect(m_budgetView, SIGNAL(openContextMenu(const MyMoneyObject&)), kmymoney2, SLOT(slotShowBudgetContextMenu()));
-  connect(m_budgetView, SIGNAL(selectObjects(const Q3ValueList<MyMoneyBudget>&)), kmymoney2, SLOT(slotSelectBudget(const Q3ValueList<MyMoneyBudget>&)));
+  connect(m_budgetView, SIGNAL(selectObjects(const QList<MyMoneyBudget>&)), kmymoney2, SLOT(slotSelectBudget(const QList<MyMoneyBudget>&)));
   connect(kmymoney2, SIGNAL(budgetRename()), m_budgetView, SLOT(slotStartRename()));
 
   // Page 10
@@ -1351,9 +1351,9 @@ void KMyMoneyView::selectBaseCurrency(void)
 
   if(!file->baseCurrency().id().isEmpty()) {
     // check that all accounts have a currency
-    Q3ValueList<MyMoneyAccount> list;
+    QList<MyMoneyAccount> list;
     file->accountList(list);
-    Q3ValueList<MyMoneyAccount>::Iterator it;
+    QList<MyMoneyAccount>::Iterator it;
 
     // don't forget those standard accounts
     list << file->asset();
@@ -1717,13 +1717,13 @@ void KMyMoneyView::fixFile_2(void)
   MyMoneyFile* file = MyMoneyFile::instance();
   MyMoneyTransactionFilter filter;
   filter.setReportAllSplits( false );
-  Q3ValueList<MyMoneyTransaction> transactionList;
+  QList<MyMoneyTransaction> transactionList;
   file->transactionList(transactionList, filter);
 
   // scan the transactions and modify transactions with two splits
   // which reference an account and a category to have the memo text
   // of the account.
-  Q3ValueList<MyMoneyTransaction>::Iterator it_t;
+  QList<MyMoneyTransaction>::Iterator it_t;
   int count = 0;
   for(it_t = transactionList.begin(); it_t != transactionList.end(); ++it_t) {
     if((*it_t).splitCount() == 2) {
@@ -1731,8 +1731,8 @@ void KMyMoneyView::fixFile_2(void)
       QString categoryId;
       QString accountMemo;
       QString categoryMemo;
-      const Q3ValueList<MyMoneySplit>& splits = (*it_t).splits();
-      Q3ValueList<MyMoneySplit>::const_iterator it_s;
+      const QList<MyMoneySplit>& splits = (*it_t).splits();
+      QList<MyMoneySplit>::const_iterator it_s;
       for(it_s = splits.begin(); it_s != splits.end(); ++it_s) {
         MyMoneyAccount acc = file->account((*it_s).accountId());
         if(acc.isIncomeExpense()) {
@@ -1765,8 +1765,8 @@ void KMyMoneyView::fixFile_1(void)
   // as well if we don't have the expert mode enabled
   if(!KMyMoneyGlobalSettings::expertMode()) {
     try {
-      Q3ValueList<MyMoneyReport> reports = MyMoneyFile::instance()->reportList();
-      Q3ValueList<MyMoneyReport>::iterator it_r;
+      QList<MyMoneyReport> reports = MyMoneyFile::instance()->reportList();
+      QList<MyMoneyReport>::iterator it_r;
       for(it_r = reports.begin(); it_r != reports.end(); ++it_r) {
         QStringList list;
         (*it_r).accounts(list);
@@ -1836,13 +1836,13 @@ void KMyMoneyView::fixFile_0(void)
    */
 
   MyMoneyFile* file = MyMoneyFile::instance();
-  Q3ValueList<MyMoneyAccount> accountList;
+  QList<MyMoneyAccount> accountList;
   file->accountList(accountList);
   ::timetrace("Have account list");
-  Q3ValueList<MyMoneyAccount>::Iterator it_a;
-  Q3ValueList<MyMoneySchedule> scheduleList = file->scheduleList();
+  QList<MyMoneyAccount>::Iterator it_a;
+  QList<MyMoneySchedule> scheduleList = file->scheduleList();
   ::timetrace("Have schedule list");
-  Q3ValueList<MyMoneySchedule>::Iterator it_s;
+  QList<MyMoneySchedule>::Iterator it_s;
 
   MyMoneyAccount equity = file->equity();
   MyMoneyAccount asset = file->asset();
@@ -1884,8 +1884,8 @@ void KMyMoneyView::fixFile_0(void)
 void KMyMoneyView::fixSchedule_0(MyMoneySchedule sched)
 {
   MyMoneyTransaction t = sched.transaction();
-  Q3ValueList<MyMoneySplit> splitList = t.splits();
-  Q3ValueList<MyMoneySplit>::ConstIterator it_s;
+  QList<MyMoneySplit> splitList = t.splits();
+  QList<MyMoneySplit>::ConstIterator it_s;
   bool updated = false;
 
   try {
@@ -1983,7 +1983,7 @@ void KMyMoneyView::createSchedule(MyMoneySchedule newSchedule, MyMoneyAccount& n
       // to the account pool. Note: the schedule code used to leave
       // this always the first split, but the loan code leaves it as
       // the second one. So I thought, searching is a good alternative ....
-      Q3ValueList<MyMoneySplit>::ConstIterator it_s;
+      QList<MyMoneySplit>::ConstIterator it_s;
       for(it_s = t.splits().begin(); it_s != t.splits().end(); ++it_s) {
         if((*it_s).accountId().isEmpty()) {
           MyMoneySplit s = (*it_s);
@@ -2024,15 +2024,15 @@ void KMyMoneyView::fixTransactions_0(void)
 #endif
 
   ::timetrace("fixTransactions: get schedule list");
-  Q3ValueList<MyMoneySchedule> scheduleList = file->scheduleList();
+  QList<MyMoneySchedule> scheduleList = file->scheduleList();
   ::timetrace("fixTransactions: get transaction list");
   MyMoneyTransactionFilter filter;
   filter.setReportAllSplits( false );
-  Q3ValueList<MyMoneyTransaction> transactionList;
+  QList<MyMoneyTransaction> transactionList;
   file->transactionList(transactionList, filter);
   ::timetrace("fixTransactions: have list");
 
-  Q3ValueList<MyMoneySchedule>::Iterator it_x;
+  QList<MyMoneySchedule>::Iterator it_x;
   QStringList interestAccounts;
 
   KMSTATUS(i18n("Fix transactions"));
@@ -2042,7 +2042,7 @@ void KMyMoneyView::fixTransactions_0(void)
   // scan the schedules to find interest accounts
   for(it_x = scheduleList.begin(); it_x != scheduleList.end(); ++it_x) {
     MyMoneyTransaction t = (*it_x).transaction();
-    Q3ValueList<MyMoneySplit>::ConstIterator it_s;
+    QList<MyMoneySplit>::ConstIterator it_s;
     QStringList accounts;
     bool hasDuplicateAccounts = false;
 
@@ -2070,11 +2070,11 @@ void KMyMoneyView::fixTransactions_0(void)
 
   ::timetrace("fixTransactions: start loop");
   // scan the transactions and modify loan transactions
-  Q3ValueList<MyMoneyTransaction>::Iterator it_t;
+  QList<MyMoneyTransaction>::Iterator it_t;
   for(it_t = transactionList.begin(); it_t != transactionList.end(); ++it_t) {
     const char *defaultAction = 0;
-    Q3ValueList<MyMoneySplit> splits = (*it_t).splits();
-    Q3ValueList<MyMoneySplit>::Iterator it_s;
+    QList<MyMoneySplit> splits = (*it_t).splits();
+    QList<MyMoneySplit>::Iterator it_s;
     QStringList accounts;
 
     // check if base commodity is set. if not, set baseCurrency

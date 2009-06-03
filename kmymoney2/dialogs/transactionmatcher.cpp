@@ -31,7 +31,7 @@
 #include <mymoneyscheduled.h>
 #include <kmymoneyutils.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 TransactionMatcher::TransactionMatcher(const MyMoneyAccount& acc) :
   m_account(acc),
@@ -107,8 +107,8 @@ void TransactionMatcher::match(MyMoneyTransaction tm, MyMoneySplit sm, MyMoneyTr
 #if 0 // Ace's original code
   // TODO (Ace) Add in another error to catch the case where a user
   // tries to match two hand-entered transactions.
-  Q3ValueList<MyMoneySplit> endSplits = endMatchTransaction.splits();
-  Q3ValueList<MyMoneySplit>::const_iterator it_split = endSplits.begin();
+  QList<MyMoneySplit> endSplits = endMatchTransaction.splits();
+  QList<MyMoneySplit>::const_iterator it_split = endSplits.begin();
   while (it_split != endSplits.end())
   {
     // find the corresponding split in the start transaction
@@ -264,8 +264,8 @@ void TransactionMatcher::checkTransaction(const MyMoneyTransaction& tm, const My
   Q_UNUSED(ti);
 
 
-  const Q3ValueList<MyMoneySplit>& splits = tm.splits();
-  Q3ValueList<MyMoneySplit>::const_iterator it_s;
+  const QList<MyMoneySplit>& splits = tm.splits();
+  QList<MyMoneySplit>::const_iterator it_s;
   for(it_s = splits.begin(); it_s != splits.end(); ++it_s) {
     MyMoneyMoney upper((*it_s).shares());
     MyMoneyMoney lower(upper);
@@ -315,11 +315,11 @@ MyMoneyObject const * TransactionMatcher::findMatch(const MyMoneyTransaction& ti
   filter.setDateFilter(ti.postDate().addDays(-m_days), ti.postDate().addDays(m_days));
   filter.setAmountFilter(si.shares(), si.shares());
 
-  Q3ValueList<QPair<MyMoneyTransaction, MyMoneySplit> > list;
+  QList<QPair<MyMoneyTransaction, MyMoneySplit> > list;
   MyMoneyFile::instance()->transactionList(list, filter);
 
   // parse list
-  Q3ValueList<QPair<MyMoneyTransaction, MyMoneySplit> >::iterator it_l;
+  QList<QPair<MyMoneyTransaction, MyMoneySplit> >::iterator it_l;
   QPair<MyMoneyTransaction, MyMoneySplit> lastMatch;
 
   for(it_l = list.begin(); (result != matchedDuplicate) && (it_l != list.end()); ++it_l) {
@@ -338,8 +338,8 @@ MyMoneyObject const * TransactionMatcher::findMatch(const MyMoneyTransaction& ti
 
   } else {
     // if we did not find anything, we need to scan for scheduled transactions
-    Q3ValueList<MyMoneySchedule> list;
-    Q3ValueList<MyMoneySchedule>::iterator it_sch;
+    QList<MyMoneySchedule> list;
+    QList<MyMoneySchedule>::iterator it_sch;
     // find all schedules that have a reference to the current account
     list = MyMoneyFile::instance()->scheduleList(m_account.id());
     for(it_sch = list.begin(); (result != matched && result != matchedExact) && (it_sch != list.end()); ++it_sch) {

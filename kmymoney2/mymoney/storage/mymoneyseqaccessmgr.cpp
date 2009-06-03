@@ -22,7 +22,7 @@
 #include "mymoneytransactionfilter.h"
 #include "mymoneycategory.h"
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 #define TRY try {
 #define CATCH } catch (MyMoneyException *e) {
@@ -147,7 +147,7 @@ const MyMoneyAccount MyMoneySeqAccessMgr::account(const QString& id) const
   throw new MYMONEYEXCEPTION(msg);
 }
 
-void MyMoneySeqAccessMgr::accountList(Q3ValueList<MyMoneyAccount>& list) const
+void MyMoneySeqAccessMgr::accountList(QList<MyMoneyAccount>& list) const
 {
   QMap<QString, MyMoneyAccount>::ConstIterator it;
   for(it = m_accountList.begin(); it != m_accountList.end(); ++it) {
@@ -244,7 +244,7 @@ void MyMoneySeqAccessMgr::removePayee(const MyMoneyPayee& payee)
   m_payeeList.remove((*it_p).id());
 }
 
-const Q3ValueList<MyMoneyPayee> MyMoneySeqAccessMgr::payeeList(void) const
+const QList<MyMoneyPayee> MyMoneySeqAccessMgr::payeeList(void) const
 {
   return m_payeeList.values();
 }
@@ -302,7 +302,7 @@ unsigned int MyMoneySeqAccessMgr::transactionCount(const QString& account) const
 
   } else {
     QMap<QString, MyMoneyTransaction>::ConstIterator it_t;
-    Q3ValueList<MyMoneySplit>::ConstIterator it_s;
+    QList<MyMoneySplit>::ConstIterator it_s;
 
     // scan all transactions
     for(it_t = m_transactionList.begin(); it_t != m_transactionList.end(); ++it_t) {
@@ -332,7 +332,7 @@ const QMap<QString, unsigned long> MyMoneySeqAccessMgr::transactionCountMap(void
 {
   QMap<QString, unsigned long> map;
   QMap<QString, MyMoneyTransaction>::ConstIterator it_t;
-  Q3ValueList<MyMoneySplit>::ConstIterator it_s;
+  QList<MyMoneySplit>::ConstIterator it_s;
 
   // scan all transactions
   for(it_t = m_transactionList.begin(); it_t != m_transactionList.end(); ++it_t) {
@@ -418,7 +418,7 @@ void MyMoneySeqAccessMgr::addTransaction(MyMoneyTransaction& transaction, const 
     throw new MYMONEYEXCEPTION("invalid post date");
 
   // now check the splits
-  Q3ValueList<MyMoneySplit>::ConstIterator it_s;
+  QList<MyMoneySplit>::ConstIterator it_s;
   for(it_s = transaction.splits().begin(); it_s != transaction.splits().end(); ++it_s) {
     // the following lines will throw an exception if the
     // account or payee do not exist
@@ -475,7 +475,7 @@ const MyMoneyInstitution MyMoneySeqAccessMgr::institution(const QString& id) con
   throw new MYMONEYEXCEPTION("unknown institution");
 }
 
-const Q3ValueList<MyMoneyInstitution> MyMoneySeqAccessMgr::institutionList(void) const
+const QList<MyMoneyInstitution> MyMoneySeqAccessMgr::institutionList(void) const
 {
   return m_institutionList.values();
 }
@@ -499,7 +499,7 @@ void MyMoneySeqAccessMgr::modifyAccount(const MyMoneyAccount& account, const boo
 
 #warning "KDE4 port me"
 #if 0
-      Q3ValueList<QString>::ConstIterator it_a;
+      QList<QString>::ConstIterator it_a;
       for(it_a = account.accountList().constBegin(); it_a != account.accountList().constEnd(); ++it_a) {
         this->account(*it_a);
       }
@@ -546,7 +546,7 @@ void MyMoneySeqAccessMgr::modifyTransaction(const MyMoneyTransaction& transactio
     throw new MYMONEYEXCEPTION("invalid transaction to be modified");
 
   // now check the splits
-  Q3ValueList<MyMoneySplit>::ConstIterator it_s;
+  QList<MyMoneySplit>::ConstIterator it_s;
   for(it_s = transaction.splits().begin(); it_s != transaction.splits().end(); ++it_s) {
     // the following lines will throw an exception if the
     // account or payee do not exist
@@ -660,7 +660,7 @@ void MyMoneySeqAccessMgr::removeTransaction(const MyMoneyTransaction& transactio
   if(it_t == m_transactionList.end())
     throw new MYMONEYEXCEPTION("invalid transaction key");
 
-  Q3ValueList<MyMoneySplit>::ConstIterator it_s;
+  QList<MyMoneySplit>::ConstIterator it_s;
 
   // scan the splits and collect all accounts that need
   // to be updated after the removal of this transaction
@@ -768,7 +768,7 @@ void MyMoneySeqAccessMgr::removeInstitution(const MyMoneyInstitution& institutio
     throw new MYMONEYEXCEPTION("invalid institution");
 }
 
-void MyMoneySeqAccessMgr::transactionList(Q3ValueList<MyMoneyTransaction>& list, MyMoneyTransactionFilter& filter) const
+void MyMoneySeqAccessMgr::transactionList(QList<MyMoneyTransaction>& list, MyMoneyTransactionFilter& filter) const
 {
   list.clear();
 
@@ -793,7 +793,7 @@ void MyMoneySeqAccessMgr::transactionList(Q3ValueList<MyMoneyTransaction>& list,
   }
 }
 
-void MyMoneySeqAccessMgr::transactionList(Q3ValueList< QPair<MyMoneyTransaction, MyMoneySplit> >& list, MyMoneyTransactionFilter& filter) const
+void MyMoneySeqAccessMgr::transactionList(QList< QPair<MyMoneyTransaction, MyMoneySplit> >& list, MyMoneyTransactionFilter& filter) const
 {
   list.clear();
 
@@ -801,7 +801,7 @@ void MyMoneySeqAccessMgr::transactionList(Q3ValueList< QPair<MyMoneyTransaction,
 
   for(it_t = m_transactionList.begin(); it_t != m_transactionList.end(); ++it_t) {
     if(filter.match(*it_t)) {
-      Q3ValueList<MyMoneySplit>::const_iterator it_s;
+      QList<MyMoneySplit>::const_iterator it_s;
       for(it_s = filter.matchingSplits().begin(); it_s != filter.matchingSplits().end(); ++it_s) {
         list.append(qMakePair(*it_t, *it_s));
       }
@@ -809,9 +809,9 @@ void MyMoneySeqAccessMgr::transactionList(Q3ValueList< QPair<MyMoneyTransaction,
   }
 }
 
-const Q3ValueList<MyMoneyTransaction> MyMoneySeqAccessMgr::transactionList(MyMoneyTransactionFilter& filter) const
+const QList<MyMoneyTransaction> MyMoneySeqAccessMgr::transactionList(MyMoneyTransactionFilter& filter) const
 {
-  Q3ValueList<MyMoneyTransaction> list;
+  QList<MyMoneyTransaction> list;
   transactionList(list, filter);
   return list;
 }
@@ -853,7 +853,7 @@ const MyMoneyTransaction MyMoneySeqAccessMgr::transaction(const QString& account
 */
 
   // new implementation if the above code does not work anymore
-  Q3ValueList<MyMoneyTransaction> list;
+  QList<MyMoneyTransaction> list;
   MyMoneyAccount acc = m_accountList[account];
   MyMoneyTransactionFilter filter;
 
@@ -888,9 +888,9 @@ const MyMoneyMoney MyMoneySeqAccessMgr::balance(const QString& id, const QDate& 
       m_balanceCacheDate = date;
     }
 
-    Q3ValueList<MyMoneyTransaction> list;
-    Q3ValueList<MyMoneyTransaction>::ConstIterator it_t;
-    Q3ValueList<MyMoneySplit>::ConstIterator it_s;
+    QList<MyMoneyTransaction> list;
+    QList<MyMoneyTransaction>::ConstIterator it_t;
+    QList<MyMoneySplit>::ConstIterator it_s;
 
     MyMoneyTransactionFilter filter;
     filter.setDateFilter(QDate(), date);
@@ -1237,7 +1237,7 @@ const MyMoneySchedule MyMoneySeqAccessMgr::schedule(const QString& id) const
   throw new MYMONEYEXCEPTION(msg);
 }
 
-const Q3ValueList<MyMoneySchedule> MyMoneySeqAccessMgr::scheduleList(
+const QList<MyMoneySchedule> MyMoneySeqAccessMgr::scheduleList(
                           const QString& accountId,
                           const MyMoneySchedule::typeE type,
                           const MyMoneySchedule::occurenceE occurence,
@@ -1247,7 +1247,7 @@ const Q3ValueList<MyMoneySchedule> MyMoneySeqAccessMgr::scheduleList(
                           const bool overdue) const
 {
   QMap<QString, MyMoneySchedule>::ConstIterator pos;
-  Q3ValueList<MyMoneySchedule> list;
+  QList<MyMoneySchedule> list;
 
   // qDebug("scheduleList()");
 
@@ -1274,8 +1274,8 @@ const Q3ValueList<MyMoneySchedule> MyMoneySeqAccessMgr::scheduleList(
 
     if(!accountId.isEmpty()) {
       MyMoneyTransaction t = (*pos).transaction();
-      Q3ValueList<MyMoneySplit>::ConstIterator it;
-      Q3ValueList<MyMoneySplit> splits;
+      QList<MyMoneySplit>::ConstIterator it;
+      QList<MyMoneySplit> splits;
       splits = t.splits();
       for(it = splits.begin(); it != splits.end(); ++it) {
         if((*it).accountId() == accountId)
@@ -1338,7 +1338,7 @@ void MyMoneySeqAccessMgr::loadScheduleId(const unsigned long id)
   m_nextScheduleID = id;
 }
 
-const Q3ValueList<MyMoneySchedule> MyMoneySeqAccessMgr::scheduleListEx(int scheduleTypes,
+const QList<MyMoneySchedule> MyMoneySeqAccessMgr::scheduleListEx(int scheduleTypes,
                                                                 int scheduleOcurrences,
                                                                 int schedulePaymentTypes,
                                                                 QDate date,
@@ -1347,7 +1347,7 @@ const Q3ValueList<MyMoneySchedule> MyMoneySeqAccessMgr::scheduleListEx(int sched
 //  qDebug("scheduleListEx");
 
   QMap<QString, MyMoneySchedule>::ConstIterator pos;
-  Q3ValueList<MyMoneySchedule> list;
+  QList<MyMoneySchedule> list;
 
   if (!date.isValid())
     return list;
@@ -1438,7 +1438,7 @@ const MyMoneySecurity MyMoneySeqAccessMgr::security(const QString& id) const
   return MyMoneySecurity();
 }
 
-const Q3ValueList<MyMoneySecurity> MyMoneySeqAccessMgr::securityList(void) const
+const QList<MyMoneySecurity> MyMoneySeqAccessMgr::securityList(void) const
 {
   //qDebug("securityList: Security list size is %d, this=%8p", m_equitiesList.size(), (void*)this);
   return m_securitiesList.values();
@@ -1497,12 +1497,12 @@ const MyMoneySecurity MyMoneySeqAccessMgr::currency(const QString& id) const
   return *it;
 }
 
-const Q3ValueList<MyMoneySecurity> MyMoneySeqAccessMgr::currencyList(void) const
+const QList<MyMoneySecurity> MyMoneySeqAccessMgr::currencyList(void) const
 {
   return m_currencyList.values();
 }
 
-const Q3ValueList<MyMoneyReport> MyMoneySeqAccessMgr::reportList(void) const
+const QList<MyMoneyReport> MyMoneySeqAccessMgr::reportList(void) const
 {
   return m_reportList.values();
 }
@@ -1578,7 +1578,7 @@ void MyMoneySeqAccessMgr::removeReport( const MyMoneyReport& report )
   m_reportList.remove(report.id());
 }
 
-const Q3ValueList<MyMoneyBudget> MyMoneySeqAccessMgr::budgetList(void) const
+const QList<MyMoneyBudget> MyMoneySeqAccessMgr::budgetList(void) const
 {
   return m_budgetList.values();
 }
@@ -1776,8 +1776,8 @@ void MyMoneySeqAccessMgr::rebuildAccountBalances(void)
   // now scan over all transactions and all splits and setup the balances
   QMap<QString, MyMoneyTransaction>::const_iterator it_t;
   for(it_t = m_transactionList.begin(); it_t != m_transactionList.end(); ++it_t) {
-    const Q3ValueList<MyMoneySplit>& splits = (*it_t).splits();
-    Q3ValueList<MyMoneySplit>::const_iterator it_s = splits.begin();
+    const QList<MyMoneySplit>& splits = (*it_t).splits();
+    QList<MyMoneySplit>::const_iterator it_s = splits.begin();
     for(; it_s != splits.end(); ++it_s ) {
       if(!(*it_s).shares().isZero()) {
         const QString& id = (*it_s).accountId();

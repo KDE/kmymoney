@@ -19,7 +19,7 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
-#include <qlinkedlist.h>
+#include <qlist.h>
 #include <qfile.h>
 #include <q3textstream.h>
 
@@ -134,11 +134,11 @@ void ObjectInfoTable::constructScheduleTable ( void )
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
-  Q3ValueList<MyMoneySchedule> schedules;
+  QList<MyMoneySchedule> schedules;
 
   schedules = file->scheduleList ( "", MyMoneySchedule::TYPE_ANY, MyMoneySchedule::OCCUR_ANY, MyMoneySchedule::STYPE_ANY, m_config.fromDate(), m_config.toDate() );
 
-  Q3ValueList<MyMoneySchedule>::const_iterator it_schedule = schedules.begin();
+  QList<MyMoneySchedule>::const_iterator it_schedule = schedules.begin();
   while ( it_schedule != schedules.end() )
   {
     MyMoneySchedule schedule = *it_schedule;
@@ -188,8 +188,8 @@ void ObjectInfoTable::constructScheduleTable ( void )
       if ( m_config.detailLevel() == MyMoneyReport::eDetailAll )
       {
         //get the information for all splits
-        Q3ValueList<MyMoneySplit> splits = transaction.splits();
-        Q3ValueList<MyMoneySplit>::const_iterator split_it = splits.begin();
+        QList<MyMoneySplit> splits = transaction.splits();
+        QList<MyMoneySplit>::const_iterator split_it = splits.begin();
         for ( ;split_it != splits.end(); split_it++ )
         {
           TableRow splitRow;
@@ -233,9 +233,9 @@ void ObjectInfoTable::constructAccountTable ( void )
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
-  QLinkedList<MyMoneyAccount> accounts;
+  QList<MyMoneyAccount> accounts;
   file->accountList(accounts);
-  QLinkedList<MyMoneyAccount>::const_iterator it_account = accounts.begin();
+  QList<MyMoneyAccount>::const_iterator it_account = accounts.begin();
   while ( it_account != accounts.end() )
   {
     TableRow accountRow;
@@ -287,9 +287,9 @@ void ObjectInfoTable::constructAccountLoanTable ( void )
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
-  QLinkedList<MyMoneyAccount> accounts;
+  QList<MyMoneyAccount> accounts;
   file->accountList(accounts);
-  QLinkedList<MyMoneyAccount>::const_iterator it_account = accounts.begin();
+  QList<MyMoneyAccount>::const_iterator it_account = accounts.begin();
   while ( it_account != accounts.end() )
   {
     TableRow accountRow;

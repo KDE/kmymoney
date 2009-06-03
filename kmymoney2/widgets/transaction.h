@@ -23,7 +23,7 @@
 
 #include <qpalette.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -381,7 +381,7 @@ public:
 
   TransactionEditor* createEditor(TransactionEditorContainer* regForm, const KMyMoneyRegister::SelectedTransactions& list, const QDate& lastPostDate);
 
-  void splits(MyMoneySplit& assetAccountSplit, Q3ValueList<MyMoneySplit>& interestSplits, Q3ValueList<MyMoneySplit>& feeSplits) const;
+  void splits(MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& feeSplits) const;
 
 protected:
   bool haveShares(void) const;
@@ -402,8 +402,8 @@ protected:
   void activity(QString& txt, MyMoneySplit::investTransactionTypeE type) const;
 
 private:
-  Q3ValueList<MyMoneySplit>  m_feeSplits;
-  Q3ValueList<MyMoneySplit>  m_interestSplits;
+  QList<MyMoneySplit>  m_feeSplits;
+  QList<MyMoneySplit>  m_interestSplits;
   MyMoneySplit              m_assetAccountSplit;
   MyMoneySecurity           m_security;
   MyMoneySecurity           m_currency;

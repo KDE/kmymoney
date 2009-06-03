@@ -32,7 +32,7 @@
 #include <qtimer.h>
 #include <qlayout.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -117,8 +117,8 @@ KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent, const QString& sec
   // Add each investment
   //
 
-  Q3ValueList<MyMoneySecurity> securities = file->securityList();
-  for(Q3ValueList<MyMoneySecurity>::ConstIterator it = securities.begin(); it != securities.end(); ++it)
+  QList<MyMoneySecurity> securities = file->securityList();
+  for(QList<MyMoneySecurity>::const_iterator it = securities.begin(); it != securities.end(); ++it)
   {
     if (  !(*it).isCurrency()
           && ( securityId.isEmpty() || ( (*it).id() == securityId ) )
@@ -196,8 +196,8 @@ void KEquityPriceUpdateDlg::addPricePair(const MyMoneySecurityPair& pair, bool d
       || (pair.second == file->baseCurrency().id())) {
         const QString& foreignCurrency = file->foreignCurrency(pair.first, pair.second);
         // check that the foreign currency is still in use
-        Q3ValueList<MyMoneyAccount>::const_iterator it_a;
-        Q3ValueList<MyMoneyAccount> list;
+        QList<MyMoneyAccount>::const_iterator it_a;
+        QList<MyMoneyAccount> list;
         file->accountList(list);
         for(it_a = list.begin(); !dontCheckExistance && it_a != list.end(); ++it_a) {
           // if it's an account denominated in the foreign currency
@@ -242,8 +242,8 @@ void KEquityPriceUpdateDlg::addInvestment(const MyMoneySecurity& inv)
   if ( ! lvEquityList->findItem(id, ID_COL, Q3ListView::ExactMatch) )
   {
     // check that the security is still in use
-    Q3ValueList<MyMoneyAccount>::const_iterator it_a;
-    Q3ValueList<MyMoneyAccount> list;
+    QList<MyMoneyAccount>::const_iterator it_a;
+    QList<MyMoneyAccount> list;
     file->accountList(list);
     for(it_a = list.begin(); it_a != list.end(); ++it_a) {
       if((*it_a).isInvest()
@@ -322,7 +322,7 @@ void KEquityPriceUpdateDlg::storePrices(void)
   // update the new prices into the equities
 
   MyMoneyFile* file = MyMoneyFile::instance();
-  Q3ValueList<MyMoneySecurity> equities = file->securityList();
+  QList<MyMoneySecurity> equities = file->securityList();
 
   Q3ListViewItem* item = lvEquityList->firstChild();
   MyMoneyFileTransaction ft;

@@ -23,7 +23,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 #include <qmap.h>
-#include <q3valuelist.h>
+#include <QList>
 #include <qstring.h>
 class QDomElement;
 class QDomDocument;
@@ -262,7 +262,7 @@ public:
     * @param list list to append account groups into
     * @return return true if an account group filter has been set
     */
-  bool accountGroups(Q3ValueList<MyMoneyAccount::accountTypeE>& list) const;
+  bool accountGroups(QList<MyMoneyAccount::accountTypeE>& list) const;
 
   /**
     * This method returns whether the specified account group
@@ -414,7 +414,7 @@ private:
     * is applied to the individual splits AFTER a transaction has been
     * matched using the underlying filter.
     */
-  Q3ValueList<MyMoneyAccount::accountTypeE> m_accountGroups;
+  QList<MyMoneyAccount::accountTypeE> m_accountGroups;
   /**
     * Whether an account group filter has been set (see m_accountGroups)
     */

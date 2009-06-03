@@ -29,7 +29,7 @@
 #include <qcheckbox.h>
 #include <qlabel.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -926,7 +926,7 @@ void KNewLoanWizard::slotAdditionalFees(void)
   if(dlg->exec() == QDialog::Accepted) {
     m_transaction = dlg->transaction();
     // sum up the additional fees
-    Q3ValueList<MyMoneySplit>::ConstIterator it;
+    QList<MyMoneySplit>::ConstIterator it;
 
     MyMoneyMoney fees;
     for(it = m_transaction.splits().begin(); it != m_transaction.splits().end(); ++it) {
@@ -989,7 +989,7 @@ MyMoneyTransaction KNewLoanWizard::transaction() const
   t.addSplit(sInterest);
 
   // copy the splits from the other costs and update the payment split
-  Q3ValueList<MyMoneySplit>::ConstIterator it;
+  QList<MyMoneySplit>::ConstIterator it;
   for(it = m_transaction.splits().begin(); it != m_transaction.splits().end(); ++it) {
     if((*it).accountId() != account.id()) {
       MyMoneySplit sp = (*it);

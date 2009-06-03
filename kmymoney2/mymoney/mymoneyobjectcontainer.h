@@ -25,7 +25,7 @@
 #include <qobject.h>
 #include <qstring.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -59,15 +59,15 @@ public:
   const MyMoneyInstitution& institution(const QString& id);
   const MyMoneySchedule& schedule(const QString& id);
 
-  void account(QLinkedList<MyMoneyAccount>& list);
-  void payee(Q3ValueList<MyMoneyPayee>& list);
-  void institution(Q3ValueList<MyMoneyInstitution>& list);
+  void account(QList<MyMoneyAccount>& list);
+  void payee(QList<MyMoneyPayee>& list);
+  void institution(QList<MyMoneyInstitution>& list);
 
-  void preloadAccount(const Q3ValueList<MyMoneyAccount>& list);
-  void preloadPayee(const Q3ValueList<MyMoneyPayee>& list);
-  void preloadInstitution(const Q3ValueList<MyMoneyInstitution>& list);
-  void preloadSecurity(const Q3ValueList<MyMoneySecurity>& list);
-  void preloadSchedule(const Q3ValueList<MyMoneySchedule>& list);
+  void preloadAccount(const QList<MyMoneyAccount>& list);
+  void preloadPayee(const QList<MyMoneyPayee>& list);
+  void preloadInstitution(const QList<MyMoneyInstitution>& list);
+  void preloadSecurity(const QList<MyMoneySecurity>& list);
+  void preloadSchedule(const QList<MyMoneySchedule>& list);
 
   void preloadAccount(const MyMoneyAccount& account);
   void preloadSecurity(const MyMoneySecurity& security);

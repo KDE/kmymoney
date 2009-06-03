@@ -24,7 +24,7 @@
 #include <qdatetime.h>
 //Added by qt3to4:
 #include <Q3TextStream>
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -121,13 +121,13 @@ void MyMoneyForecast::pastTransactions()
   filter.setDateFilter(historyStartDate(), historyEndDate());
   filter.setReportAllSplits(false);
 
-  Q3ValueList<MyMoneyTransaction> transactions = file->transactionList(filter);
-  Q3ValueList<MyMoneyTransaction>::const_iterator it_t = transactions.begin();
+  QList<MyMoneyTransaction> transactions = file->transactionList(filter);
+  QList<MyMoneyTransaction>::const_iterator it_t = transactions.begin();
 
   //Check past transactions
   for(; it_t != transactions.end(); ++it_t ) {
-    const Q3ValueList<MyMoneySplit>& splits = (*it_t).splits();
-    Q3ValueList<MyMoneySplit>::const_iterator it_s = splits.begin();
+    const QList<MyMoneySplit>& splits = (*it_t).splits();
+    QList<MyMoneySplit>::const_iterator it_s = splits.begin();
     for(; it_s != splits.end(); ++it_s ) {
       if(!(*it_s).shares().isZero()) {
         MyMoneyAccount acc = file->account((*it_s).accountId());
@@ -285,14 +285,14 @@ void MyMoneyForecast::calculateAccountTrendList()
   }
 }
 
-Q3ValueList<MyMoneyAccount> MyMoneyForecast::forecastAccountList(void)
+QList<MyMoneyAccount> MyMoneyForecast::forecastAccountList(void)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
-  Q3ValueList<MyMoneyAccount> accList;
+  QList<MyMoneyAccount> accList;
   //Get all accounts from the file and check if they are of the right type to calculate forecast
   file->accountList(accList);
-  Q3ValueList<MyMoneyAccount>::iterator accList_t = accList.begin();
+  QList<MyMoneyAccount>::iterator accList_t = accList.begin();
   for(; accList_t != accList.end(); ) {
     MyMoneyAccount acc = *accList_t;
     if(acc.isClosed()             //check the account is not closed
@@ -307,15 +307,15 @@ Q3ValueList<MyMoneyAccount> MyMoneyForecast::forecastAccountList(void)
   return accList;
 }
 
-Q3ValueList<MyMoneyAccount> MyMoneyForecast::accountList(void)
+QList<MyMoneyAccount> MyMoneyForecast::accountList(void)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
-  Q3ValueList<MyMoneyAccount> accList;
+  QList<MyMoneyAccount> accList;
   QStringList emptyStringList;
   //Get all accounts from the file and check if they are present
   file->accountList(accList, emptyStringList, false);
-  Q3ValueList<MyMoneyAccount>::iterator accList_t = accList.begin();
+  QList<MyMoneyAccount>::iterator accList_t = accList.begin();
   for(; accList_t != accList.end(); ) {
     MyMoneyAccount acc = *accList_t;
     if(!isForecastAccount( acc ) ) {
@@ -360,13 +360,13 @@ MyMoneyMoney MyMoneyForecast::calculateAccountTrend(const MyMoneyAccount& acc, i
      }
 
   filter.setReportAllSplits(false);
-  Q3ValueList<MyMoneyTransaction> transactions = file->transactionList(filter);
-  Q3ValueList<MyMoneyTransaction>::const_iterator it_t = transactions.begin();
+  QList<MyMoneyTransaction> transactions = file->transactionList(filter);
+  QList<MyMoneyTransaction>::const_iterator it_t = transactions.begin();
 
   //add all transactions for that account
   for(; it_t != transactions.end(); ++it_t ) {
-    const Q3ValueList<MyMoneySplit>& splits = (*it_t).splits();
-    Q3ValueList<MyMoneySplit>::const_iterator it_s = splits.begin();
+    const QList<MyMoneySplit>& splits = (*it_t).splits();
+    QList<MyMoneySplit>::const_iterator it_s = splits.begin();
     for(; it_s != splits.end(); ++it_s ) {
       if(!(*it_s).shares().isZero()) {
         if(acc.id()==(*it_s).accountId()) netIncome += (*it_s).value();
@@ -597,12 +597,12 @@ void MyMoneyForecast::addFutureTransactions(void)
   filter.setDateFilter(forecastStartDate(), forecastEndDate());
   filter.setReportAllSplits(false);
 
-  Q3ValueList<MyMoneyTransaction> transactions = file->transactionList(filter);
-  Q3ValueList<MyMoneyTransaction>::const_iterator it_t = transactions.begin();
+  QList<MyMoneyTransaction> transactions = file->transactionList(filter);
+  QList<MyMoneyTransaction>::const_iterator it_t = transactions.begin();
 
   for(; it_t != transactions.end(); ++it_t ) {
-    const Q3ValueList<MyMoneySplit>& splits = (*it_t).splits();
-    Q3ValueList<MyMoneySplit>::const_iterator it_s = splits.begin();
+    const QList<MyMoneySplit>& splits = (*it_t).splits();
+    QList<MyMoneySplit>::const_iterator it_s = splits.begin();
     for(; it_s != splits.end(); ++it_s ) {
       if(!(*it_s).shares().isZero()) {
         MyMoneyAccount acc = file->account((*it_s).accountId());
@@ -649,12 +649,12 @@ void MyMoneyForecast::addScheduledTransactions (void)
   MyMoneyFile* file = MyMoneyFile::instance();
 
   // now process all the schedules that may have an impact
-  Q3ValueList<MyMoneySchedule> schedule;
+  QList<MyMoneySchedule> schedule;
 
   schedule = file->scheduleList("", MyMoneySchedule::TYPE_ANY, MyMoneySchedule::OCCUR_ANY, MyMoneySchedule::STYPE_ANY,
                                 QDate::currentDate(), forecastEndDate());
   if(schedule.count() > 0) {
-    Q3ValueList<MyMoneySchedule>::Iterator it;
+    QList<MyMoneySchedule>::Iterator it;
     do {
 #warning "port it to kde4"	    
       //qBubbleSort(schedule);
@@ -686,7 +686,7 @@ void MyMoneyForecast::addScheduledTransactions (void)
             // only process the entry, if it is still active
             if(!(*it).isFinished() && nextDate != QDate()) {
               // make sure we have all 'starting balances' so that the autocalc works
-              Q3ValueList<MyMoneySplit>::const_iterator it_s;
+              QList<MyMoneySplit>::const_iterator it_s;
               QMap<QString, MyMoneyMoney> balanceMap;
 
               for(it_s = t.splits().begin(); it_s != t.splits().end(); ++it_s ) {
@@ -849,10 +849,10 @@ void MyMoneyForecast::setForecastAccountList(void)
 {
 
   //get forecast accounts
-  Q3ValueList<MyMoneyAccount> accList;
+  QList<MyMoneyAccount> accList;
   accList = forecastAccountList();
 
-  Q3ValueList<MyMoneyAccount>::const_iterator accList_t = accList.begin();
+  QList<MyMoneyAccount>::const_iterator accList_t = accList.begin();
   for(; accList_t != accList.end(); ++accList_t ) {
     MyMoneyAccount acc = *accList_t;
     // check if this is a new account for us
@@ -882,9 +882,9 @@ MyMoneyMoney MyMoneyForecast::accountTotalVariation(const MyMoneyAccount& acc)
   return totalVariation;
 }
 
-Q3ValueList<QDate> MyMoneyForecast::accountMinimumBalanceDateList(const MyMoneyAccount& acc)
+QList<QDate> MyMoneyForecast::accountMinimumBalanceDateList(const MyMoneyAccount& acc)
 {
-  Q3ValueList<QDate> minBalanceList;
+  QList<QDate> minBalanceList;
   int daysToBeginDay;
 
   daysToBeginDay = QDate::currentDate().daysTo(beginForecastDate());
@@ -903,9 +903,9 @@ Q3ValueList<QDate> MyMoneyForecast::accountMinimumBalanceDateList(const MyMoneyA
   return minBalanceList;
 }
 
-Q3ValueList<QDate> MyMoneyForecast::accountMaximumBalanceDateList(const MyMoneyAccount& acc)
+QList<QDate> MyMoneyForecast::accountMaximumBalanceDateList(const MyMoneyAccount& acc)
 {
-  Q3ValueList<QDate> maxBalanceList;
+  QList<QDate> maxBalanceList;
   int daysToBeginDay;
 
   daysToBeginDay = QDate::currentDate().daysTo(beginForecastDate());
@@ -1093,10 +1093,10 @@ void MyMoneyForecast::createBudget ( MyMoneyBudget& budget, QDate historyStart, 
 void MyMoneyForecast::setBudgetAccountList(void)
 {
   //get budget accounts
-  Q3ValueList<MyMoneyAccount> accList;
+  QList<MyMoneyAccount> accList;
   accList = budgetAccountList();
 
-  Q3ValueList<MyMoneyAccount>::const_iterator accList_t = accList.begin();
+  QList<MyMoneyAccount>::const_iterator accList_t = accList.begin();
   for(; accList_t != accList.end(); ++accList_t ) {
     MyMoneyAccount acc = *accList_t;
       // check if this is a new account for us
@@ -1106,15 +1106,15 @@ void MyMoneyForecast::setBudgetAccountList(void)
   }
 }
 
-Q3ValueList<MyMoneyAccount> MyMoneyForecast::budgetAccountList(void)
+QList<MyMoneyAccount> MyMoneyForecast::budgetAccountList(void)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
-  Q3ValueList<MyMoneyAccount> accList;
+  QList<MyMoneyAccount> accList;
   QStringList emptyStringList;
   //Get all accounts from the file and check if they are of the right type to calculate forecast
   file->accountList(accList, emptyStringList, false);
-  Q3ValueList<MyMoneyAccount>::iterator accList_t = accList.begin();
+  QList<MyMoneyAccount>::iterator accList_t = accList.begin();
   for(; accList_t != accList.end(); ) {
     MyMoneyAccount acc = *accList_t;
     if(acc.isClosed()             //check the account is not closed

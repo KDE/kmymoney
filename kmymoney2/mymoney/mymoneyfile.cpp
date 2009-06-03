@@ -21,7 +21,7 @@
 
 #include <qstring.h>
 #include <qdatetime.h>
-#include <q3valuelist.h>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -212,7 +212,7 @@ void MyMoneyFile::modifyTransaction(const MyMoneyTransaction& transaction)
 
   // now check the splits
   bool loanAccountAffected = false;
-  Q3ValueList<MyMoneySplit>::ConstIterator it_s;
+  QList<MyMoneySplit>::ConstIterator it_s;
   for(it_s = transaction.splits().begin(); it_s != transaction.splits().end(); ++it_s) {
     // the following line will throw an exception if the
     // account does not exist
@@ -229,7 +229,7 @@ void MyMoneyFile::modifyTransaction(const MyMoneyTransaction& transaction)
   // into amortization splits
   if(loanAccountAffected) {
     tCopy = transaction;
-    Q3ValueList<MyMoneySplit> list = transaction.splits();
+    QList<MyMoneySplit> list = transaction.splits();
     for(it_s = list.begin(); it_s != list.end(); ++it_s) {
       if((*it_s).action() == MyMoneySplit::ActionTransfer) {
         MyMoneyAccount acc = MyMoneyFile::account((*it_s).accountId());
@@ -389,7 +389,7 @@ void MyMoneyFile::removeTransaction(const MyMoneyTransaction& transaction)
 
   // get the engine's idea about this transaction
   MyMoneyTransaction tr = MyMoneyFile::transaction(transaction.id());
-  Q3ValueList<MyMoneySplit>::ConstIterator it_s;
+  QList<MyMoneySplit>::ConstIterator it_s;
 
   // scan the splits again to update notification list
   for(it_s = tr.splits().begin(); it_s != tr.splits().end(); ++it_s) {
@@ -694,8 +694,8 @@ QString MyMoneyFile::openingBalanceTransaction(const MyMoneyAccount& acc) const
   // Iterate over all the opening balance transactions for this currency
   MyMoneyTransactionFilter filter;
   filter.addAccount(openAcc.id());
-  Q3ValueList<MyMoneyTransaction> transactions = transactionList(filter);
-  Q3ValueList<MyMoneyTransaction>::const_iterator it_t = transactions.begin();
+  QList<MyMoneyTransaction> transactions = transactionList(filter);
+  QList<MyMoneyTransaction>::const_iterator it_t = transactions.begin();
   while ( it_t != transactions.end() )
   {
     try
@@ -759,8 +759,8 @@ const MyMoneyAccount MyMoneyFile::openingBalanceAccount_internal(const MyMoneySe
   MyMoneyAccount acc;
   QRegExp match(QString("^%1").arg((MyMoneyFile::OpeningBalancesPrefix)));
 
-  Q3ValueList<MyMoneyAccount> accounts;
-  Q3ValueList<MyMoneyAccount>::Iterator it;
+  QList<MyMoneyAccount> accounts;
+  QList<MyMoneyAccount>::Iterator it;
 
   accountList(accounts, equity().accountList(), true);
 
@@ -819,7 +819,7 @@ void MyMoneyFile::addTransaction(MyMoneyTransaction& transaction)
 
   // now check the splits
   bool loanAccountAffected = false;
-  Q3ValueList<MyMoneySplit>::ConstIterator it_s;
+  QList<MyMoneySplit>::ConstIterator it_s;
   for(it_s = transaction.splits().begin(); it_s != transaction.splits().end(); ++it_s) {
     // the following line will throw an exception if the
     // account does not exist or is one of the standard accounts
@@ -835,7 +835,7 @@ void MyMoneyFile::addTransaction(MyMoneyTransaction& transaction)
   // change transfer splits between asset/liability and loan accounts
   // into amortization splits
   if(loanAccountAffected) {
-    Q3ValueList<MyMoneySplit> list = transaction.splits();
+    QList<MyMoneySplit> list = transaction.splits();
     for(it_s = list.begin(); it_s != list.end(); ++it_s) {
       if((*it_s).action() == MyMoneySplit::ActionTransfer) {
         MyMoneyAccount acc = MyMoneyFile::account((*it_s).accountId());
@@ -926,7 +926,7 @@ void MyMoneyFile::removePayee(const MyMoneyPayee& payee)
   addNotification(payee.id(), false);
 }
 
-void MyMoneyFile::accountList(QLinkedList<MyMoneyAccount>& list, const QStringList& idlist, const bool recursive) const
+void MyMoneyFile::accountList(QList<MyMoneyAccount>& list, const QStringList& idlist, const bool recursive) const
 {
   if(idlist.isEmpty()) {
     d->m_cache.account(list);
@@ -940,8 +940,8 @@ void MyMoneyFile::accountList(QLinkedList<MyMoneyAccount>& list, const QStringLi
     }
 #endif
 
-    QLinkedList<MyMoneyAccount>::Iterator it;
-    QLinkedList<MyMoneyAccount>::Iterator next;
+    QList<MyMoneyAccount>::Iterator it;
+    QList<MyMoneyAccount>::Iterator next;
     for(it = list.begin(); it != list.end(); ) {
       if(isStandardAccount( (*it).id() )) {
         it = list.erase(it);
@@ -950,8 +950,8 @@ void MyMoneyFile::accountList(QLinkedList<MyMoneyAccount>& list, const QStringLi
       }
     }
   } else {
-    QLinkedList<MyMoneyAccount>::ConstIterator it;
-    QLinkedList<MyMoneyAccount> list_a;
+    QList<MyMoneyAccount>::ConstIterator it;
+    QList<MyMoneyAccount> list_a;
     d->m_cache.account(list_a);
 
     for(it = list_a.begin(); it != list_a.end(); ++it) {
@@ -967,14 +967,14 @@ void MyMoneyFile::accountList(QLinkedList<MyMoneyAccount>& list, const QStringLi
   }
 }
 
-void MyMoneyFile::institutionList(Q3ValueList<MyMoneyInstitution>& list) const
+void MyMoneyFile::institutionList(QList<MyMoneyInstitution>& list) const
 {
   d->m_cache.institution(list);
 }
 
-const Q3ValueList<MyMoneyInstitution> MyMoneyFile::institutionList(void) const
+const QList<MyMoneyInstitution> MyMoneyFile::institutionList(void) const
 {
-  Q3ValueList<MyMoneyInstitution> list;
+  QList<MyMoneyInstitution> list;
   institutionList(list);
   return list;
 }
@@ -1131,28 +1131,28 @@ void MyMoneyFile::clearNotification()
   d->m_notificationList.clear();
 }
 
-void MyMoneyFile::transactionList(Q3ValueList<QPair<MyMoneyTransaction, MyMoneySplit> >& list, MyMoneyTransactionFilter& filter) const
+void MyMoneyFile::transactionList(QList<QPair<MyMoneyTransaction, MyMoneySplit> >& list, MyMoneyTransactionFilter& filter) const
 {
   checkStorage();
   m_storage->transactionList(list, filter);
 }
 
-void MyMoneyFile::transactionList(Q3ValueList<MyMoneyTransaction>& list, MyMoneyTransactionFilter& filter) const
+void MyMoneyFile::transactionList(QList<MyMoneyTransaction>& list, MyMoneyTransactionFilter& filter) const
 {
   checkStorage();
   m_storage->transactionList(list, filter);
 }
 
-const Q3ValueList<MyMoneyTransaction> MyMoneyFile::transactionList(MyMoneyTransactionFilter& filter) const
+const QList<MyMoneyTransaction> MyMoneyFile::transactionList(MyMoneyTransactionFilter& filter) const
 {
-  Q3ValueList<MyMoneyTransaction> list;
+  QList<MyMoneyTransaction> list;
   transactionList(list, filter);
   return list;
 }
 
-const Q3ValueList<MyMoneyPayee> MyMoneyFile::payeeList(void) const
+const QList<MyMoneyPayee> MyMoneyFile::payeeList(void) const
 {
-  Q3ValueList<MyMoneyPayee> list;
+  QList<MyMoneyPayee> list;
   d->m_cache.payee(list);
   return list;
 }
@@ -1265,7 +1265,7 @@ void MyMoneyFile::addSchedule(MyMoneySchedule& sched)
   checkTransaction(__PRETTY_FUNCTION__);
 
   MyMoneyTransaction transaction = sched.transaction();
-  Q3ValueList<MyMoneySplit>::const_iterator it_s;
+  QList<MyMoneySplit>::const_iterator it_s;
   for(it_s = transaction.splits().begin(); it_s != transaction.splits().end(); ++it_s) {
     // the following line will throw an exception if the
     // account does not exist or is one of the standard accounts
@@ -1287,7 +1287,7 @@ void MyMoneyFile::modifySchedule(const MyMoneySchedule& sched)
   checkTransaction(__PRETTY_FUNCTION__);
 
   MyMoneyTransaction transaction = sched.transaction();
-  Q3ValueList<MyMoneySplit>::const_iterator it_s;
+  QList<MyMoneySplit>::const_iterator it_s;
   for(it_s = transaction.splits().begin(); it_s != transaction.splits().end(); ++it_s) {
     // the following line will throw an exception if the
     // account does not exist or is one of the standard accounts
@@ -1323,7 +1323,7 @@ const MyMoneySchedule MyMoneyFile::schedule(const QString& id) const
   return d->m_cache.schedule(id);
 }
 
-const Q3ValueList<MyMoneySchedule> MyMoneyFile::scheduleList(
+const QList<MyMoneySchedule> MyMoneyFile::scheduleList(
                           const QString& accountId,
                           const MyMoneySchedule::typeE type,
                           const MyMoneySchedule::occurenceE occurence,
@@ -1340,12 +1340,12 @@ const Q3ValueList<MyMoneySchedule> MyMoneyFile::scheduleList(
 
 const QStringList MyMoneyFile::consistencyCheck(void)
 {
-  Q3ValueList<MyMoneyAccount> list;
-  Q3ValueList<MyMoneyAccount>::Iterator it_a;
-  Q3ValueList<MyMoneySchedule>::Iterator it_sch;
-  Q3ValueList<MyMoneyPayee>::Iterator it_p;
-  Q3ValueList<MyMoneyTransaction>::Iterator it_t;
-  Q3ValueList<MyMoneyReport>::Iterator it_r;
+  QList<MyMoneyAccount> list;
+  QList<MyMoneyAccount>::Iterator it_a;
+  QList<MyMoneySchedule>::Iterator it_sch;
+  QList<MyMoneyPayee>::Iterator it_p;
+  QList<MyMoneyTransaction>::Iterator it_t;
+  QList<MyMoneyReport>::Iterator it_r;
   QStringList accountRebuild;
   QStringList::ConstIterator it_c;
 
@@ -1513,7 +1513,7 @@ const QStringList MyMoneyFile::consistencyCheck(void)
 
   // reconstruct the lists
   for(it_a = list.begin(); it_a != list.end(); ++it_a) {
-    Q3ValueList<MyMoneyAccount>::Iterator it;
+    QList<MyMoneyAccount>::Iterator it;
     parentId = (*it_a).parentAccountId();
     if(accountRebuild.contains(parentId)) {
       for(it = list.begin(); it != list.end(); ++it) {
@@ -1540,7 +1540,7 @@ const QStringList MyMoneyFile::consistencyCheck(void)
 
   // For some reason, files exist with invalid ids. This has been found in the payee id
   // so we fix them here
-  Q3ValueList<MyMoneyPayee> pList = payeeList();
+  QList<MyMoneyPayee> pList = payeeList();
   QMap<QString, QString>payeeConversionMap;
 
   for(it_p = pList.begin(); it_p != pList.end(); ++it_p) {
@@ -1557,14 +1557,14 @@ const QStringList MyMoneyFile::consistencyCheck(void)
   }
 
   // Fix the transactions
-  Q3ValueList<MyMoneyTransaction> tList;
+  QList<MyMoneyTransaction> tList;
   MyMoneyTransactionFilter filter;
   filter.setReportAllSplits(false);
   m_storage->transactionList(tList, filter);
   // Generate the list of interest accounts
   for(it_t = tList.begin(); it_t != tList.end(); ++it_t) {
     const MyMoneyTransaction& t = (*it_t);
-    Q3ValueList<MyMoneySplit>::const_iterator it_s;
+    QList<MyMoneySplit>::const_iterator it_s;
     for(it_s = t.splits().begin(); it_s != t.splits().end(); ++it_s) {
       if((*it_s).action() == MyMoneySplit::ActionInterest)
         interestAccounts[(*it_s).accountId()] = true;
@@ -1572,7 +1572,7 @@ const QStringList MyMoneyFile::consistencyCheck(void)
   }
   for(it_t = tList.begin(); it_t != tList.end(); ++it_t) {
     MyMoneyTransaction t = (*it_t);
-    Q3ValueList<MyMoneySplit>::const_iterator it_s;
+    QList<MyMoneySplit>::const_iterator it_s;
     bool tChanged = false;
     for(it_s = t.splits().begin(); it_s != t.splits().end(); ++it_s) {
       bool sChanged = false;
@@ -1628,12 +1628,12 @@ const QStringList MyMoneyFile::consistencyCheck(void)
   }
 
   // Fix the schedules
-  Q3ValueList<MyMoneySchedule> schList = scheduleList();
+  QList<MyMoneySchedule> schList = scheduleList();
   for(it_sch = schList.begin(); it_sch != schList.end(); ++it_sch) {
     MyMoneySchedule sch = (*it_sch);
     MyMoneyTransaction t = sch.transaction();
     bool tChanged = false;
-    Q3ValueList<MyMoneySplit>::const_iterator it_s;
+    QList<MyMoneySplit>::const_iterator it_s;
     for(it_s = t.splits().begin(); it_s != t.splits().end(); ++it_s) {
       MyMoneySplit s = (*it_s);
       bool sChanged = false;
@@ -1694,7 +1694,7 @@ const QStringList MyMoneyFile::consistencyCheck(void)
   }
 
   // Fix the reports
-  Q3ValueList<MyMoneyReport> rList = reportList();
+  QList<MyMoneyReport> rList = reportList();
   for(it_r = rList.begin(); it_r != rList.end(); ++it_r) {
     MyMoneyReport r = *it_r;
     QStringList pList;
@@ -1786,7 +1786,7 @@ QString MyMoneyFile::createCategory(const MyMoneyAccount& base, const QString& n
   return categoryToAccount(name);
 }
 
-const Q3ValueList<MyMoneySchedule> MyMoneyFile::scheduleListEx( int scheduleTypes,
+const QList<MyMoneySchedule> MyMoneyFile::scheduleListEx( int scheduleTypes,
                                               int scheduleOcurrences,
                                               int schedulePaymentTypes,
                                               QDate startDate,
@@ -1841,7 +1841,7 @@ const MyMoneySecurity& MyMoneyFile::security(const QString& id) const
   return d->m_cache.security(id);
 }
 
-const Q3ValueList<MyMoneySecurity> MyMoneyFile::securityList(void) const
+const QList<MyMoneySecurity> MyMoneyFile::securityList(void) const
 {
   checkStorage();
 
@@ -1906,7 +1906,7 @@ const MyMoneySecurity& MyMoneyFile::currency(const QString& id) const
   return curr;
 }
 
-const Q3ValueList<MyMoneySecurity> MyMoneyFile::currencyList(void) const
+const QList<MyMoneySecurity> MyMoneyFile::currencyList(void) const
 {
   checkStorage();
 
@@ -2015,7 +2015,7 @@ bool MyMoneyFile::hasAccount(const QString& id, const QString& name) const
   return rc;
 }
 
-const Q3ValueList<MyMoneyReport> MyMoneyFile::reportList( void ) const
+const QList<MyMoneyReport> MyMoneyFile::reportList( void ) const
 {
   checkStorage();
 
@@ -2069,7 +2069,7 @@ void MyMoneyFile::removeReport(const MyMoneyReport& report)
 }
 
 
-const Q3ValueList<MyMoneyBudget> MyMoneyFile::budgetList( void ) const
+const QList<MyMoneyBudget> MyMoneyFile::budgetList( void ) const
 {
   checkStorage();
 
@@ -2146,8 +2146,8 @@ bool MyMoneyFile::checkNoUsed(const QString& accId, const QString& no) const
 
   MyMoneyTransactionFilter filter;
   filter.addAccount(accId);
-  Q3ValueList<MyMoneyTransaction> transactions = transactionList(filter);
-  Q3ValueList<MyMoneyTransaction>::const_iterator it_t = transactions.begin();
+  QList<MyMoneyTransaction> transactions = transactionList(filter);
+  QList<MyMoneyTransaction>::const_iterator it_t = transactions.begin();
   while ( it_t != transactions.end() ) {
     try {
       MyMoneySplit split;
@@ -2170,8 +2170,8 @@ QString MyMoneyFile::highestCheckNo(const QString& accId) const
   QString no;
   MyMoneyTransactionFilter filter;
   filter.addAccount(accId);
-  Q3ValueList<MyMoneyTransaction> transactions = transactionList(filter);
-  Q3ValueList<MyMoneyTransaction>::const_iterator it_t = transactions.begin();
+  QList<MyMoneyTransaction> transactions = transactionList(filter);
+  QList<MyMoneyTransaction>::const_iterator it_t = transactions.begin();
   while ( it_t != transactions.end() ) {
     try {
       // Test whether the transaction also includes a split into
@@ -2205,7 +2205,7 @@ void MyMoneyFile::preloadCache(void)
   checkStorage();
 
   d->m_cache.clear();
-  Q3ValueList<MyMoneyAccount> a_list;
+  QList<MyMoneyAccount> a_list;
   m_storage->accountList(a_list);
   d->m_cache.preloadAccount(a_list);
   d->m_cache.preloadPayee(m_storage->payeeList());
@@ -2218,7 +2218,7 @@ bool MyMoneyFile::isTransfer(const MyMoneyTransaction& t) const
 {
   bool rc = false;
   if(t.splitCount() == 2) {
-    Q3ValueList<MyMoneySplit>::const_iterator it_s;
+    QList<MyMoneySplit>::const_iterator it_s;
     for(it_s = t.splits().begin(); it_s != t.splits().end(); ++it_s) {
       MyMoneyAccount acc = account((*it_s).accountId());
       if(acc.isIncomeExpense())
@@ -2232,8 +2232,8 @@ bool MyMoneyFile::isTransfer(const MyMoneyTransaction& t) const
 
 bool MyMoneyFile::referencesClosedAccount(const MyMoneyTransaction& t) const
 {
-  Q3ValueList<MyMoneySplit>::const_iterator it_s;
-  const Q3ValueList<MyMoneySplit>& list = t.splits();
+  QList<MyMoneySplit>::const_iterator it_s;
+  const QList<MyMoneySplit>& list = t.splits();
   for(it_s = list.begin(); it_s != list.end(); ++it_s) {
     if(referencesClosedAccount(*it_s))
       break;

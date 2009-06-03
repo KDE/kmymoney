@@ -25,7 +25,7 @@
 
 #include "mymoneytransaction.h"
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 MyMoneyTransaction::MyMoneyTransaction() :
   MyMoneyObject()
@@ -43,7 +43,7 @@ MyMoneyTransaction::MyMoneyTransaction(const QString id, const MyMoneyTransactio
   if(m_entryDate == QDate())
     m_entryDate = QDate::currentDate();
 
-  Q3ValueList<MyMoneySplit>::Iterator it;
+  QList<MyMoneySplit>::Iterator it;
   for(it = m_splits.begin(); it != m_splits.end(); ++it) {
     (*it).setTransactionId(id);
   }
@@ -99,7 +99,7 @@ bool MyMoneyTransaction::operator == (const MyMoneyTransaction& right) const
 
 bool MyMoneyTransaction::accountReferenced(const QString& id) const
 {
-  Q3ValueList<MyMoneySplit>::ConstIterator it;
+  QList<MyMoneySplit>::ConstIterator it;
 
   for(it = m_splits.begin(); it != m_splits.end(); ++it) {
     if((*it).accountId() == id)
@@ -176,7 +176,7 @@ void MyMoneyTransaction::modifySplit(MyMoneySplit& split)
   if(split.accountId().isEmpty())
     throw new MYMONEYEXCEPTION("Cannot modify split that does not contain an account reference");
 
-  Q3ValueList<MyMoneySplit>::Iterator it;
+  QList<MyMoneySplit>::Iterator it;
   for(it = m_splits.begin(); it != m_splits.end(); ++it) {
     if(split.id() == (*it).id()) {
       *it = split;
@@ -188,7 +188,7 @@ void MyMoneyTransaction::modifySplit(MyMoneySplit& split)
 
 void MyMoneyTransaction::removeSplit(const MyMoneySplit& split)
 {
-  Q3ValueList<MyMoneySplit>::Iterator it;
+  QList<MyMoneySplit>::Iterator it;
 
   for(it = m_splits.begin(); it != m_splits.end(); ++it) {
     if(split.id() == (*it).id()) {
@@ -208,7 +208,7 @@ void MyMoneyTransaction::removeSplits(void)
 
 const MyMoneySplit& MyMoneyTransaction::splitByPayee(const QString& payeeId) const
 {
-  Q3ValueList<MyMoneySplit>::ConstIterator it;
+  QList<MyMoneySplit>::ConstIterator it;
 
   for(it = m_splits.begin(); it != m_splits.end(); ++it) {
     if((*it).payeeId() == payeeId)
@@ -219,7 +219,7 @@ const MyMoneySplit& MyMoneyTransaction::splitByPayee(const QString& payeeId) con
 
 const MyMoneySplit& MyMoneyTransaction::splitByAccount(const QString& accountId, const bool match) const
 {
-  Q3ValueList<MyMoneySplit>::ConstIterator it;
+  QList<MyMoneySplit>::ConstIterator it;
 
   for(it = m_splits.begin(); it != m_splits.end(); ++it) {
     if(match == true && (*it).accountId() == accountId)
@@ -232,7 +232,7 @@ const MyMoneySplit& MyMoneyTransaction::splitByAccount(const QString& accountId,
 
 const MyMoneySplit& MyMoneyTransaction::splitByAccount(const QStringList& accountIds, const bool match) const
 {
-  Q3ValueList<MyMoneySplit>::ConstIterator it;
+  QList<MyMoneySplit>::ConstIterator it;
 
   for(it = m_splits.begin(); it != m_splits.end(); ++it) {
     if(match == true && accountIds.contains((*it).accountId()) )
@@ -245,7 +245,7 @@ const MyMoneySplit& MyMoneyTransaction::splitByAccount(const QStringList& accoun
 
 const MyMoneySplit& MyMoneyTransaction::splitById(const QString& splitId) const
 {
-  Q3ValueList<MyMoneySplit>::ConstIterator it;
+  QList<MyMoneySplit>::ConstIterator it;
 
   for(it = m_splits.begin(); it != m_splits.end(); ++it) {
     if((*it).id() == splitId)
@@ -271,7 +271,7 @@ const QString MyMoneyTransaction::firstSplitID()
 const MyMoneyMoney MyMoneyTransaction::splitSum(void) const
 {
   MyMoneyMoney result(0);
-  Q3ValueList<MyMoneySplit>::ConstIterator it;
+  QList<MyMoneySplit>::ConstIterator it;
 
   for(it = m_splits.begin(); it != m_splits.end(); ++it) {
     result += (*it).value();
@@ -286,7 +286,7 @@ void MyMoneyTransaction::setMemo(const QString& memo) { m_memo = memo; }
 bool MyMoneyTransaction::isLoanPayment(void) const
 {
   try {
-    Q3ValueList<MyMoneySplit>::ConstIterator it;
+    QList<MyMoneySplit>::ConstIterator it;
 
     for(it = m_splits.begin(); it != m_splits.end(); ++it) {
       if((*it).isAmortizationSplit())
@@ -302,7 +302,7 @@ const MyMoneySplit& MyMoneyTransaction::amortizationSplit(void) const
 {
   static MyMoneySplit nullSplit;
 
-  Q3ValueList<MyMoneySplit>::ConstIterator it;
+  QList<MyMoneySplit>::ConstIterator it;
 
   for(it = m_splits.begin(); it != m_splits.end(); ++it) {
     if((*it).isAmortizationSplit() && (*it).isAutoCalc())
@@ -315,7 +315,7 @@ const MyMoneySplit& MyMoneyTransaction::interestSplit(void) const
 {
   static MyMoneySplit nullSplit;
 
-  Q3ValueList<MyMoneySplit>::ConstIterator it;
+  QList<MyMoneySplit>::ConstIterator it;
 
   for(it = m_splits.begin(); it != m_splits.end(); ++it) {
     if((*it).isInterestSplit() && (*it).isAutoCalc())
@@ -379,7 +379,7 @@ bool MyMoneyTransaction::isDuplicate(const MyMoneyTransaction& r) const
       for(int i = 0; i < 2; ++i)
         accHash[i] = valHash[i] = numHash[i] = 0;
 
-      Q3ValueList<MyMoneySplit>::ConstIterator it;
+      QList<MyMoneySplit>::ConstIterator it;
       for(it = splits().begin(); it != splits().end(); ++it) {
         accHash[0] += hash((*it).accountId());
         valHash[0] += hash((*it).value().formatMoney("", 4));
@@ -415,7 +415,7 @@ void MyMoneyTransaction::writeXML(QDomDocument& document, QDomElement& parent) c
   el.setAttribute("commodity", m_commodity);
 
   QDomElement splits = document.createElement("SPLITS");
-  Q3ValueList<MyMoneySplit>::ConstIterator it;
+  QList<MyMoneySplit>::ConstIterator it;
   for(it = m_splits.begin(); it != m_splits.end(); ++it) {
     (*it).writeXML(document, splits);
   }
@@ -428,7 +428,7 @@ void MyMoneyTransaction::writeXML(QDomDocument& document, QDomElement& parent) c
 
 bool MyMoneyTransaction::hasReferenceTo(const QString& id) const
 {
-  Q3ValueList<MyMoneySplit>::const_iterator it;
+  QList<MyMoneySplit>::const_iterator it;
   bool rc = (id == m_commodity);
   for(it = m_splits.begin(); rc == false && it != m_splits.end(); ++it) {
     rc = (*it).hasReferenceTo(id);
@@ -438,7 +438,7 @@ bool MyMoneyTransaction::hasReferenceTo(const QString& id) const
 
 bool MyMoneyTransaction::hasAutoCalcSplit(void) const
 {
-  Q3ValueList<MyMoneySplit>::ConstIterator it;
+  QList<MyMoneySplit>::ConstIterator it;
 
   for(it = m_splits.begin(); it != m_splits.end(); ++it) {
     if((*it).isAutoCalc())
@@ -450,7 +450,7 @@ bool MyMoneyTransaction::hasAutoCalcSplit(void) const
 QString MyMoneyTransaction::accountSignature(bool includeSplitCount) const
 {
   QMap<QString, int> accountList;
-  Q3ValueList<MyMoneySplit>::const_iterator it_s;
+  QList<MyMoneySplit>::const_iterator it_s;
   for(it_s = m_splits.constBegin(); it_s != m_splits.constEnd(); ++it_s) {
     accountList[(*it_s).accountId()] += 1;
   }

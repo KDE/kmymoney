@@ -27,7 +27,7 @@
 #include <qdatetime.h>
 #include <qapplication.h>
 //Added by qt3to4:
-#include <QLinkedList>
+#include <QList>
 #include <QPixmap>
 #include <dom/dom_element.h>
 #include <dom/dom_doc.h>
@@ -67,7 +67,7 @@
 //#include "kreportchartview.h"
 #include "pivottable.h"
 #include "pivotgrid.h"
-//#include "reportaccount.h"
+#include "reportaccount.h"
 #include "kmymoneyglobalsettings.h"
 
 
@@ -146,7 +146,7 @@ void KHomeView::loadView(void)
   m_part->setZoomFactor( KMyMoneyGlobalSettings::fontSizePercentage() );
   //kDebug() << "Setting font size: " << m_part->zoomFactor();
 
-  QLinkedList<MyMoneyAccount> list;
+  QList<MyMoneyAccount> list;
   MyMoneyFile::instance()->accountList(list);
   if(list.count() == 0)
   {
@@ -353,8 +353,8 @@ void KHomeView::showNetWorthGraph(void)
 void KHomeView::showPayments(void)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
-  Q3ValueList<MyMoneySchedule> overdues;
-  Q3ValueList<MyMoneySchedule> schedule;
+  QList<MyMoneySchedule> overdues;
+  QList<MyMoneySchedule> schedule;
   int i = 0;
 
   //if forecast has not been executed yet, do it.
@@ -377,7 +377,7 @@ void KHomeView::showPayments(void)
   // HACK
   // Remove the finished schedules
 
-  Q3ValueList<MyMoneySchedule>::Iterator d_it;
+  QList<MyMoneySchedule>::Iterator d_it;
   for (d_it=schedule.begin(); d_it!=schedule.end();)
   {
     // FIXME cleanup old code
@@ -409,8 +409,8 @@ void KHomeView::showPayments(void)
     m_part->write("<div class=\"gap\">&nbsp;</div>\n");
 
     qBubbleSort(overdues);
-    Q3ValueList<MyMoneySchedule>::Iterator it;
-    Q3ValueList<MyMoneySchedule>::Iterator it_f;
+    QList<MyMoneySchedule>::Iterator it;
+    QList<MyMoneySchedule>::Iterator it_f;
 
     m_part->write("<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >");
     m_part->write(QString("<tr class=\"itemtitle warningtitle\" ><td colspan=\"5\">%1</td></tr>\n").arg(showColoredAmount(i18n("Overdue payments"), true)));
@@ -464,8 +464,8 @@ void KHomeView::showPayments(void)
     qBubbleSort(schedule);
 
     // Extract todays payments if any
-    Q3ValueList<MyMoneySchedule> todays;
-    Q3ValueList<MyMoneySchedule>::Iterator t_it;
+    QList<MyMoneySchedule> todays;
+    QList<MyMoneySchedule>::Iterator t_it;
     for (t_it=schedule.begin(); t_it!=schedule.end();) {
       if ((*t_it).nextDueDate() == QDate::currentDate()) {
         todays.append(*t_it);
@@ -517,7 +517,7 @@ void KHomeView::showPayments(void)
     {
       m_part->write("<div class=\"gap\">&nbsp;</div>\n");
 
-      Q3ValueList<MyMoneySchedule>::Iterator it;
+      QList<MyMoneySchedule>::Iterator it;
 
       m_part->write("<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >");
       m_part->write(QString("<tr class=\"itemtitle\"><td class=\"left\" colspan=\"5\">%1</td></tr>\n").arg(i18n("Future payments")));
@@ -672,9 +672,9 @@ void KHomeView::showPaymentEntry(const MyMoneySchedule& sched, int cnt)
 void KHomeView::showAccounts(KHomeView::paymentTypeE type, const QString& header)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
-  Q3ValueList<MyMoneyAccount> accounts;
-  Q3ValueList<MyMoneyAccount>::Iterator it;
-  Q3ValueList<MyMoneyAccount>::Iterator prevIt;
+  QList<MyMoneyAccount> accounts;
+  QList<MyMoneyAccount>::Iterator it;
+  QList<MyMoneyAccount>::Iterator prevIt;
   QMap<QString, MyMoneyAccount> nameIdx;
 
   bool showClosedAccounts = kmymoney2->toggleAction("view_show_all_accounts")->isChecked();
@@ -889,13 +889,13 @@ MyMoneyMoney KHomeView::investmentBalance(const MyMoneyAccount& acc)
 
 void KHomeView::showFavoriteReports(void)
 {
-  Q3ValueList<MyMoneyReport> reports = MyMoneyFile::instance()->reportList();
+  QList<MyMoneyReport> reports = MyMoneyFile::instance()->reportList();
 
   if ( reports.count() > 0 )
   {
     bool firstTime = 1;
     int row = 0;
-    Q3ValueList<MyMoneyReport>::const_iterator it_report = reports.begin();
+    QList<MyMoneyReport>::const_iterator it_report = reports.begin();
     while( it_report != reports.end() )
     {
       if ( (*it_report).isFavorite() ) {
@@ -930,7 +930,7 @@ void KHomeView::showForecast(void)
 {
   QMap<QString, MyMoneyAccount> nameIdx;
   MyMoneyFile* file = MyMoneyFile::instance();
-  Q3ValueList<MyMoneyAccount> accList;
+  QList<MyMoneyAccount> accList;
 
   //if forecast has not been executed yet, do it.
   if(!m_forecast.isForecastDone())
@@ -939,7 +939,7 @@ void KHomeView::showForecast(void)
   accList = m_forecast.accountList();
 
   //add it to a map to have it ordered by name
-  Q3ValueList<MyMoneyAccount>::const_iterator accList_t = accList.begin();
+  QList<MyMoneyAccount>::const_iterator accList_t = accList.begin();
   for ( ; accList_t != accList.end(); ++accList_t )
   {
     QString key = (*accList_t).name();
@@ -1171,7 +1171,7 @@ void KHomeView::slotOpenUrl(const KUrl &url, const KParts::OpenUrlArguments &arg
       Q_CHECK_PTR(mw);
       QTimer::singleShot(0, mw->actionCollection()->action( id ), SLOT(activate()));
     } else if(view == VIEW_HOME) {
-      Q3ValueList<MyMoneyAccount> list;
+      QList<MyMoneyAccount> list;
       MyMoneyFile::instance()->accountList(list);
       if(list.count() == 0) {
         KMessageBox::information(this, i18n("Before KMyMoney can give you detailed information about your financial status, you need to create at least one account. Until then, KMyMoney shows the welcome page instead."));
@@ -1188,8 +1188,8 @@ void KHomeView::showAssetsLiabilities(void)
 {
   #warning #Port to KDE4
   #if 0
-  Q3ValueList<MyMoneyAccount> accounts;
-  Q3ValueList<MyMoneyAccount>::Iterator it;
+  QList<MyMoneyAccount> accounts;
+  QList<MyMoneyAccount>::Iterator it;
   QMap<QString, MyMoneyAccount> nameAssetsIdx;
   QMap<QString, MyMoneyAccount> nameLiabilitiesIdx;
   MyMoneyMoney netAssets;
@@ -1582,17 +1582,17 @@ void KHomeView::showCashFlowSummary()
   filter.setDateFilter(startOfMonth, endOfMonth);
   filter.setReportAllSplits(false);
 
-  Q3ValueList<MyMoneyTransaction> transactions = file->transactionList(filter);
+  QList<MyMoneyTransaction> transactions = file->transactionList(filter);
   //if no transaction then skip and print total in zero
   if(transactions.size() > 0) {
-    Q3ValueList<MyMoneyTransaction>::const_iterator it_transaction;
+    QList<MyMoneyTransaction>::const_iterator it_transaction;
 
     //get all transactions for this month
     for(it_transaction = transactions.begin(); it_transaction != transactions.end(); ++it_transaction ) {
 
       //get the splits for each transaction
-      const Q3ValueList<MyMoneySplit>& splits = (*it_transaction).splits();
-      Q3ValueList<MyMoneySplit>::const_iterator it_split;
+      const QList<MyMoneySplit>& splits = (*it_transaction).splits();
+      QList<MyMoneySplit>::const_iterator it_split;
       for(it_split = splits.begin(); it_split != splits.end(); ++it_split) {
         if(!(*it_split).shares().isZero()) {
           ReportAccount repSplitAcc = ReportAccount((*it_split).accountId());
@@ -1637,14 +1637,14 @@ void KHomeView::showCashFlowSummary()
   MyMoneyMoney scheduledOtherTransfer;
 
   //get overdues and schedules until the end of this month
-  Q3ValueList<MyMoneySchedule> schedule = file->scheduleList("", MyMoneySchedule::TYPE_ANY,
+  QList<MyMoneySchedule> schedule = file->scheduleList("", MyMoneySchedule::TYPE_ANY,
       MyMoneySchedule::OCCUR_ANY,
       MyMoneySchedule::STYPE_ANY,
       QDate(),
             endOfMonth);
 
   //Remove the finished schedules
-  Q3ValueList<MyMoneySchedule>::Iterator finished_it;
+  QList<MyMoneySchedule>::Iterator finished_it;
   for (finished_it=schedule.begin(); finished_it!=schedule.end();) {
     if ((*finished_it).isFinished()) {
       finished_it = schedule.remove(finished_it);
@@ -1654,7 +1654,7 @@ void KHomeView::showCashFlowSummary()
   }
 
   //add income and expenses
-  Q3ValueList<MyMoneySchedule>::Iterator sched_it;
+  QList<MyMoneySchedule>::Iterator sched_it;
   for (sched_it=schedule.begin(); sched_it!=schedule.end();) {
     QDate nextDate = (*sched_it).nextDueDate();
     int cnt = 0;
@@ -1680,7 +1680,7 @@ void KHomeView::showCashFlowSummary()
         QDate nextDate = (*sched_it).nextPayment((*sched_it).lastPayment());
 
         //make sure we have all 'starting balances' so that the autocalc works
-        Q3ValueList<MyMoneySplit>::const_iterator it_s;
+        QList<MyMoneySplit>::const_iterator it_s;
         QMap<QString, MyMoneyMoney> balanceMap;
 
         for(it_s = transaction.splits().begin(); it_s != transaction.splits().end(); ++it_s ) {
@@ -1696,8 +1696,8 @@ void KHomeView::showCashFlowSummary()
       }
 
       //go through the splits and assign to liquid or other transfers
-      const Q3ValueList<MyMoneySplit> splits = transaction.splits();
-      Q3ValueList<MyMoneySplit>::const_iterator split_it;
+      const QList<MyMoneySplit> splits = transaction.splits();
+      QList<MyMoneySplit>::const_iterator split_it;
       for (split_it = splits.begin(); split_it != splits.end(); ++split_it) {
         if( (*split_it).accountId() != acc.id() ) {
           ReportAccount repSplitAcc = ReportAccount((*split_it).accountId());
@@ -1745,8 +1745,8 @@ void KHomeView::showCashFlowSummary()
   amountScheduledOtherTransfer.replace(" ","&nbsp;");
 
   //get liquid assets and liabilities
-  Q3ValueList<MyMoneyAccount> accounts;
-  Q3ValueList<MyMoneyAccount>::const_iterator account_it;
+  QList<MyMoneyAccount> accounts;
+  QList<MyMoneyAccount>::const_iterator account_it;
   MyMoneyMoney liquidAssets;
   MyMoneyMoney liquidLiabilities;
 

@@ -21,7 +21,7 @@
 #include "mymoneytransactionfilter.h"
 #include "mymoneycategory.h"
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 #define TRY try {
 #define CATCH } catch (MyMoneyException *e) {
@@ -208,7 +208,7 @@ void MyMoneyDatabaseMgr::modifyPayee(const MyMoneyPayee& payee)
 void MyMoneyDatabaseMgr::removePayee(const MyMoneyPayee& payee)
 {
   QMap<QString, MyMoneyTransaction>::ConstIterator it_t;
-  Q3ValueList<MyMoneySplit>::ConstIterator it_s;
+  QList<MyMoneySplit>::ConstIterator it_s;
   QMap<QString, MyMoneyPayee> payeeList = m_sql->fetchPayees(QStringList()<< QString(payee.id()));
   QMap<QString, MyMoneyPayee>::ConstIterator it_p;
 
@@ -236,12 +236,12 @@ void MyMoneyDatabaseMgr::removePayee(const MyMoneyPayee& payee)
   m_sql->removePayee(payee);
 }
 
-const Q3ValueList<MyMoneyPayee> MyMoneyDatabaseMgr::payeeList(void) const
+const QList<MyMoneyPayee> MyMoneyDatabaseMgr::payeeList(void) const
 {
   if (m_sql)
     return m_sql->fetchPayees().values();
   else
-    return Q3ValueList<MyMoneyPayee> ();
+    return QList<MyMoneyPayee> ();
 }
 
 const MyMoneyAccount MyMoneyDatabaseMgr::account(const QString& id) const
@@ -392,7 +392,7 @@ void MyMoneyDatabaseMgr::addTransaction(MyMoneyTransaction& transaction, const b
     throw new MYMONEYEXCEPTION("invalid post date");
 
   // now check the splits
-  Q3ValueList<MyMoneySplit>::ConstIterator it_s;
+  QList<MyMoneySplit>::ConstIterator it_s;
   for(it_s = transaction.splits().begin(); it_s != transaction.splits().end(); ++it_s) {
     // the following lines will throw an exception if the
     // account or payee do not exist
@@ -498,12 +498,12 @@ unsigned int MyMoneyDatabaseMgr::accountCount(void) const
   return m_sql->getRecCount("kmmAccounts");
 }
 
-const Q3ValueList<MyMoneyInstitution> MyMoneyDatabaseMgr::institutionList(void) const
+const QList<MyMoneyInstitution> MyMoneyDatabaseMgr::institutionList(void) const
 {
   if (m_sql) {
     return m_sql->fetchInstitutions().values();
   } else {
-    return Q3ValueList<MyMoneyInstitution> ();
+    return QList<MyMoneyInstitution> ();
   }
 }
 
@@ -590,7 +590,7 @@ void MyMoneyDatabaseMgr::modifyTransaction(const MyMoneyTransaction& transaction
     throw new MYMONEYEXCEPTION("invalid transaction to be modified");
 
   // now check the splits
-  Q3ValueList<MyMoneySplit>::ConstIterator it_s;
+  QList<MyMoneySplit>::ConstIterator it_s;
   for(it_s = transaction.splits().begin(); it_s != transaction.splits().end(); ++it_s) {
     // the following lines will throw an exception if the
     // account or payee do not exist
@@ -720,7 +720,7 @@ void MyMoneyDatabaseMgr::removeTransaction(const MyMoneyTransaction& transaction
   if(it_t == transactionList.end())
     throw new MYMONEYEXCEPTION("invalid transaction key");
 
-  Q3ValueList<MyMoneySplit>::ConstIterator it_s;
+  QList<MyMoneySplit>::ConstIterator it_s;
 
   // scan the splits and collect all accounts that need
   // to be updated after the removal of this transaction
@@ -750,14 +750,14 @@ unsigned int MyMoneyDatabaseMgr::transactionCount(const QString& account) const
 const QMap<QString, unsigned long> MyMoneyDatabaseMgr::transactionCountMap(void) const
 { return (m_sql->transactionCountMap()); }
 
-const Q3ValueList<MyMoneyTransaction> MyMoneyDatabaseMgr::transactionList(MyMoneyTransactionFilter& filter) const
+const QList<MyMoneyTransaction> MyMoneyDatabaseMgr::transactionList(MyMoneyTransactionFilter& filter) const
 {
-  Q3ValueList<MyMoneyTransaction> list;
+  QList<MyMoneyTransaction> list;
   transactionList(list, filter);
   return list;
 }
 
-void MyMoneyDatabaseMgr::transactionList(Q3ValueList<MyMoneyTransaction>& list, MyMoneyTransactionFilter& filter) const
+void MyMoneyDatabaseMgr::transactionList(QList<MyMoneyTransaction>& list, MyMoneyTransactionFilter& filter) const
 {
   list.clear();
 
@@ -766,7 +766,7 @@ void MyMoneyDatabaseMgr::transactionList(Q3ValueList<MyMoneyTransaction>& list, 
   PASS
 }
 
-void MyMoneyDatabaseMgr::transactionList(Q3ValueList<QPair<MyMoneyTransaction, MyMoneySplit> >& list, MyMoneyTransactionFilter& filter) const
+void MyMoneyDatabaseMgr::transactionList(QList<QPair<MyMoneyTransaction, MyMoneySplit> >& list, MyMoneyTransactionFilter& filter) const
 {
   list.clear();
   MyMoneyMap<QString, MyMoneyTransaction> transactionList;
@@ -779,7 +779,7 @@ void MyMoneyDatabaseMgr::transactionList(Q3ValueList<QPair<MyMoneyTransaction, M
 
   for(it_t = transactionList.begin(); it_t != txEnd; ++it_t) {
     if(filter.match(*it_t)) {
-      Q3ValueList<MyMoneySplit>::const_iterator it_s;
+      QList<MyMoneySplit>::const_iterator it_s;
       for(it_s = filter.matchingSplits().begin(); it_s != filter.matchingSplits().end(); ++it_s) {
         list.append(qMakePair(*it_t, *it_s));
       }
@@ -936,15 +936,15 @@ const MyMoneyMoney MyMoneyDatabaseMgr::balance(const QString& id, const QDate& d
 //FIXME:      m_balanceCacheDate = date;
 //FIXME:    }
 
-    Q3ValueList<MyMoneyTransaction>::ConstIterator it_t;
-    Q3ValueList<MyMoneyTransaction>::ConstIterator txEnd;
-    Q3ValueList<MyMoneySplit>::ConstIterator it_s;
+    QList<MyMoneyTransaction>::ConstIterator it_t;
+    QList<MyMoneyTransaction>::ConstIterator txEnd;
+    QList<MyMoneySplit>::ConstIterator it_s;
 
     MyMoneyTransactionFilter filter;
     filter.addAccount(id);
     filter.setDateFilter(QDate(), date_);
     filter.setReportAllSplits(false);
-    Q3ValueList<MyMoneyTransaction> list = transactionList(filter);
+    QList<MyMoneyTransaction> list = transactionList(filter);
 
     txEnd = list.end();
     for(it_t = list.begin(); it_t != txEnd; ++it_t) {
@@ -1005,7 +1005,7 @@ const MyMoneyTransaction MyMoneyDatabaseMgr::transaction(const QString& account,
 */
 
   // new implementation if the above code does not work anymore
-  Q3ValueList<MyMoneyTransaction> list;
+  QList<MyMoneyTransaction> list;
   //MyMoneyAccount acc = m_accountList[account];
   MyMoneyAccount acc = m_sql->fetchAccounts(QStringList()<<QString(account)) [account];
   MyMoneyTransactionFilter filter;
@@ -1028,7 +1028,7 @@ unsigned int MyMoneyDatabaseMgr::institutionCount(void) const
   return m_sql->getRecCount("kmmInstitutions");
 }
 
-void MyMoneyDatabaseMgr::accountList(Q3ValueList<MyMoneyAccount>& list) const
+void MyMoneyDatabaseMgr::accountList(QList<MyMoneyAccount>& list) const
 {
   QMap <QString, MyMoneyAccount> accountList;
   if (m_sql) accountList  = m_sql->fetchAccounts();
@@ -1111,7 +1111,7 @@ const MyMoneySecurity MyMoneyDatabaseMgr::security(const QString& id) const
   return MyMoneySecurity();
 }
 
-const Q3ValueList<MyMoneySecurity> MyMoneyDatabaseMgr::securityList(void) const
+const QList<MyMoneySecurity> MyMoneyDatabaseMgr::securityList(void) const
 { return m_sql->fetchSecurities().values(); }
 
 void MyMoneyDatabaseMgr::addPrice(const MyMoneyPrice& price)
@@ -1205,7 +1205,7 @@ const MyMoneySchedule MyMoneyDatabaseMgr::schedule(const QString& id) const
   throw new MYMONEYEXCEPTION(msg);
 }
 
-const Q3ValueList<MyMoneySchedule> MyMoneyDatabaseMgr::scheduleList(const QString& accountId,
+const QList<MyMoneySchedule> MyMoneyDatabaseMgr::scheduleList(const QString& accountId,
                                      const MyMoneySchedule::typeE type,
                                      const MyMoneySchedule::occurenceE occurence,
                                      const MyMoneySchedule::paymentTypeE paymentType,
@@ -1216,7 +1216,7 @@ const Q3ValueList<MyMoneySchedule> MyMoneyDatabaseMgr::scheduleList(const QStrin
   QMap<QString, MyMoneySchedule> scheduleList;
   if (m_sql) scheduleList = m_sql->fetchSchedules();
   QMap<QString, MyMoneySchedule>::ConstIterator pos;
-  Q3ValueList<MyMoneySchedule> list;
+  QList<MyMoneySchedule> list;
 
   // qDebug("scheduleList()");
 
@@ -1243,8 +1243,8 @@ const Q3ValueList<MyMoneySchedule> MyMoneyDatabaseMgr::scheduleList(const QStrin
 
     if(!accountId.isEmpty()) {
       MyMoneyTransaction t = (*pos).transaction();
-      Q3ValueList<MyMoneySplit>::ConstIterator it;
-      Q3ValueList<MyMoneySplit> splits;
+      QList<MyMoneySplit>::ConstIterator it;
+      QList<MyMoneySplit> splits;
       splits = t.splits();
       for(it = splits.begin(); it != splits.end(); ++it) {
         if((*it).accountId() == accountId)
@@ -1291,7 +1291,7 @@ const Q3ValueList<MyMoneySchedule> MyMoneyDatabaseMgr::scheduleList(const QStrin
   return list;
 }
 
-const Q3ValueList<MyMoneySchedule> MyMoneyDatabaseMgr::scheduleListEx( int scheduleTypes,
+const QList<MyMoneySchedule> MyMoneyDatabaseMgr::scheduleListEx( int scheduleTypes,
                                               int scheduleOcurrences,
                                               int schedulePaymentTypes,
                                               QDate startDate,
@@ -1300,7 +1300,7 @@ const Q3ValueList<MyMoneySchedule> MyMoneyDatabaseMgr::scheduleListEx( int sched
 //  qDebug("scheduleListEx");
   QMap<QString, MyMoneySchedule> scheduleList = m_sql->fetchSchedules();
   QMap<QString, MyMoneySchedule>::ConstIterator pos;
-  Q3ValueList<MyMoneySchedule> list;
+  QList<MyMoneySchedule> list;
 
   if (!startDate.isValid())
     return list;
@@ -1397,21 +1397,21 @@ const MyMoneySecurity MyMoneyDatabaseMgr::currency(const QString& id) const
   return *it;
 }
 
-const Q3ValueList<MyMoneySecurity> MyMoneyDatabaseMgr::currencyList(void) const
+const QList<MyMoneySecurity> MyMoneyDatabaseMgr::currencyList(void) const
 {
   if (m_sql) {
     return m_sql->fetchCurrencies().values();
   } else {
-    return Q3ValueList<MyMoneySecurity> ();
+    return QList<MyMoneySecurity> ();
   }
 }
 
-const Q3ValueList<MyMoneyReport> MyMoneyDatabaseMgr::reportList( void ) const
+const QList<MyMoneyReport> MyMoneyDatabaseMgr::reportList( void ) const
 {
   if (m_sql) {
     return m_sql->fetchReports().values();
   } else {
-    return Q3ValueList<MyMoneyReport> ();
+    return QList<MyMoneyReport> ();
   }
 }
 
@@ -1461,7 +1461,7 @@ void MyMoneyDatabaseMgr::removeReport(const MyMoneyReport& report)
   m_sql->removeReport(report);
 }
 
-const Q3ValueList<MyMoneyBudget> MyMoneyDatabaseMgr::budgetList( void ) const
+const QList<MyMoneyBudget> MyMoneyDatabaseMgr::budgetList( void ) const
 {
   return m_sql->fetchBudgets().values();
 }
@@ -1586,17 +1586,17 @@ bool MyMoneyDatabaseMgr::isReferenced(const MyMoneyObject& obj, const MyMoneyFil
   }
 
   if(!skipCheck[RefCheckAccount] && !rc) {
-    Q3ValueList<MyMoneyAccount> accountList;
+    QList<MyMoneyAccount> accountList;
     MyMoneyFile::instance()->accountList(accountList);
     rc = (accountList.end() != std::find_if(accountList.begin(), accountList.end(),  isReferencedHelper(id)));
   }
   if(!skipCheck[RefCheckInstitution] && !rc) {
-    Q3ValueList<MyMoneyInstitution> institutionList;
+    QList<MyMoneyInstitution> institutionList;
     MyMoneyFile::instance()->institutionList(institutionList);
     rc = (institutionList.end() != std::find_if(institutionList.begin(), institutionList.end(),  isReferencedHelper(id)));
   }
   if(!skipCheck[RefCheckPayee] && !rc) {
-    Q3ValueList<MyMoneyPayee> payeeList = MyMoneyFile::instance()->payeeList();
+    QList<MyMoneyPayee> payeeList = MyMoneyFile::instance()->payeeList();
     rc = (payeeList.end() != std::find_if(payeeList.begin(), payeeList.end(),  isReferencedHelper(id)));
   }
   if(!skipCheck[RefCheckReport] && !rc) {
@@ -1612,11 +1612,11 @@ bool MyMoneyDatabaseMgr::isReferenced(const MyMoneyObject& obj, const MyMoneyFil
     rc = (scheduleList.end() != std::find_if(scheduleList.begin(), scheduleList.end(),  isReferencedHelper(id)));
   }
   if(!skipCheck[RefCheckSecurity] && !rc) {
-    Q3ValueList<MyMoneySecurity> securitiesList = MyMoneyFile::instance()->securityList();
+    QList<MyMoneySecurity> securitiesList = MyMoneyFile::instance()->securityList();
     rc = (securitiesList.end() != std::find_if(securitiesList.begin(), securitiesList.end(),  isReferencedHelper(id)));
   }
   if(!skipCheck[RefCheckCurrency] && !rc) {
-    Q3ValueList<MyMoneySecurity> currencyList = m_sql->fetchCurrencies().values();
+    QList<MyMoneySecurity> currencyList = m_sql->fetchCurrencies().values();
     rc = (currencyList.end() != std::find_if(currencyList.begin(), currencyList.end(),  isReferencedHelper(id)));
   }
   // within the pricelist we don't have to scan each entry. Checking the QPair

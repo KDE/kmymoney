@@ -410,7 +410,7 @@ bool TransactionEditor::fixTransactionCommodity(const MyMoneyAccount& account)
               MyMoneyMoney price;
               if(!(*it_t).split().shares().isZero() && !(*it_t).split().value().isZero())
                 price = (*it_t).split().shares() / (*it_t).split().value();
-              Q3ValueList<MyMoneySplit>::iterator it_s;
+              QList<MyMoneySplit>::iterator it_s;
               MyMoneySplit& mySplit = (*it_t).split();
               for(it_s = (*it_t).transaction().splits().begin(); it_s != (*it_t).transaction().splits().end(); ++it_s) {
                 MyMoneySplit s = (*it_s);
@@ -459,7 +459,7 @@ bool TransactionEditor::canAssignNumber(void) const
   return (number != 0) && (number->text().isEmpty());
 }
 
-void TransactionEditor::setupCategoryWidget(KMyMoneyCategory* category, const Q3ValueList<MyMoneySplit>& splits, QString& categoryId, const char* splitEditSlot, bool /* allowObjectCreation */)
+void TransactionEditor::setupCategoryWidget(KMyMoneyCategory* category, const QList<MyMoneySplit>& splits, QString& categoryId, const char* splitEditSlot, bool /* allowObjectCreation */)
 {
   disconnect(category, SIGNAL(focusIn()), this, splitEditSlot);
 #if 0
@@ -524,7 +524,7 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
   // collect the transactions to be stored in the engine in a local
   // list first, so that the user has a chance to interrupt the storage
   // process
-  Q3ValueList<MyMoneyTransaction> list;
+  QList<MyMoneyTransaction> list;
   bool storeTransactions = true;
 
   // collect transactions
@@ -548,7 +548,7 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
     MyMoneyFileTransaction ft;
 
     try {
-      Q3ValueList<MyMoneyTransaction>::iterator it_ts;
+      QList<MyMoneyTransaction>::iterator it_ts;
       QMap<QString, bool> minBalanceEarly;
       QMap<QString, bool> minBalanceAbsolute;
       QMap<QString, bool> maxCreditEarly;
@@ -562,7 +562,7 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
           (*it_ts).setImported(false);
 
         // create information about min and max balances
-        Q3ValueList<MyMoneySplit>::const_iterator it_s;
+        QList<MyMoneySplit>::const_iterator it_s;
         for(it_s = (*it_ts).splits().begin(); it_s != (*it_ts).splits().end(); ++it_s) {
           MyMoneyAccount acc = file->account((*it_s).accountId());
           accountIds[acc.id()] = true;
@@ -899,7 +899,7 @@ void StdTransactionEditor::loadEditWidgets(KMyMoneyRegister::Action action)
 
   // check if the current transaction has a reference to an equity account
   bool haveEquityAccount = false;
-  Q3ValueList<MyMoneySplit>::const_iterator it_s;
+  QList<MyMoneySplit>::const_iterator it_s;
   for(it_s = m_transaction.splits().begin(); !haveEquityAccount && it_s != m_transaction.splits().end(); ++it_s) {
     MyMoneyAccount acc = MyMoneyFile::instance()->account((*it_s).accountId());
     if(acc.accountType() == MyMoneyAccount::Equity)
@@ -954,7 +954,7 @@ void StdTransactionEditor::loadEditWidgets(KMyMoneyRegister::Action action)
     if(m_transaction.splitCount() < 2) {
       category->completion()->setSelected(QString());
     } else {
-      Q3ValueList<MyMoneySplit>::const_iterator it_s;
+      QList<MyMoneySplit>::const_iterator it_s;
       for(it_s = m_transaction.splits().begin(); it_s != m_transaction.splits().end(); ++it_s) {
         if((*it_s) == m_split)
           continue;
@@ -1173,7 +1173,7 @@ void StdTransactionEditor::slotUpdatePayee(const QString& payeeId)
 MyMoneyMoney StdTransactionEditor::shares(const MyMoneyTransaction& t) const
 {
   MyMoneyMoney result;
-  Q3ValueList<MyMoneySplit>::const_iterator it_s;
+  QList<MyMoneySplit>::const_iterator it_s;
   for(it_s = t.splits().begin(); it_s != t.splits().end(); ++it_s) {
     if((*it_s).accountId() == m_account.id()) {
       result += (*it_s).shares();
@@ -1189,7 +1189,7 @@ struct uniqTransaction {
 
 void StdTransactionEditor::autoFill(const QString& payeeId)
 {
-  Q3ValueList<QPair<MyMoneyTransaction, MyMoneySplit> >  list;
+  QList<QPair<MyMoneyTransaction, MyMoneySplit> >  list;
   MyMoneyTransactionFilter filter(m_account.id());
   filter.addPayee(payeeId);
   MyMoneyFile::instance()->transactionList(list, filter);
@@ -1197,7 +1197,7 @@ void StdTransactionEditor::autoFill(const QString& payeeId)
     // ok, we found at least one previous transaction. now we clear out
     // what we have collected so far and add those splits from
     // the previous transaction.
-    Q3ValueList<QPair<MyMoneyTransaction, MyMoneySplit> >::const_iterator  it_t;
+    QList<QPair<MyMoneyTransaction, MyMoneySplit> >::const_iterator  it_t;
     QMap<QString, struct uniqTransaction> uniqList;
 
     // collect the transactions and see if we have any duplicates
@@ -1290,7 +1290,7 @@ void StdTransactionEditor::autoFill(const QString& payeeId)
       m_transaction.removeSplits();
       m_split = MyMoneySplit();
       MyMoneySplit otherSplit;
-      Q3ValueList<MyMoneySplit>::ConstIterator it;
+      QList<MyMoneySplit>::ConstIterator it;
       for(it = t.splits().begin(); it != t.splits().end(); ++it) {
         MyMoneySplit s(*it);
         s.setReconcileFlag(MyMoneySplit::NotReconciled);
@@ -1665,7 +1665,7 @@ MyMoneyMoney StdTransactionEditor::removeVatSplit(void)
   MyMoneySplit t; // tax split
 
   bool netValue = false;
-  Q3ValueList<MyMoneySplit>::const_iterator it_s;
+  QList<MyMoneySplit>::const_iterator it_s;
   for(it_s = m_splits.begin(); it_s != m_splits.end(); ++it_s) {
     MyMoneyAccount acc = MyMoneyFile::instance()->account((*it_s).accountId());
     if(!acc.value("VatAccount").isEmpty()) {
@@ -1909,7 +1909,7 @@ bool StdTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyMone
 {
   // extract price info from original transaction
   m_priceInfo.clear();
-  Q3ValueList<MyMoneySplit>::const_iterator it_s;
+  QList<MyMoneySplit>::const_iterator it_s;
   if(!torig.id().isEmpty()) {
     for(it_s = torig.splits().begin(); it_s != torig.splits().end(); ++it_s) {
       if((*it_s).id() != sorig.id()) {
@@ -1992,7 +1992,7 @@ bool StdTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyMone
   // if we have none or only one other split, we reconstruct it here
   // if we have more than one other split, we take them as they are
   // make sure to perform all those changes on a local copy
-  Q3ValueList<MyMoneySplit> splits = m_splits;
+  QList<MyMoneySplit> splits = m_splits;
 
   MyMoneySplit s1;
   if(torig.splitCount() < 2 && splits.count() == 0) {
@@ -2008,7 +2008,7 @@ bool StdTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyMone
   // split or create it
   if(isMultiSelection()) {
     if(torig.splitCount() == 2) {
-      Q3ValueList<MyMoneySplit>::const_iterator it_s;
+      QList<MyMoneySplit>::const_iterator it_s;
       for(it_s = torig.splits().begin(); it_s != torig.splits().end(); ++it_s) {
         if((*it_s).id() == sorig.id())
           continue;
@@ -2076,7 +2076,7 @@ bool StdTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyMone
       t.addSplit(s1);
 
   } else {
-    Q3ValueList<MyMoneySplit>::iterator it_s;
+    QList<MyMoneySplit>::iterator it_s;
     for(it_s = splits.begin(); it_s != splits.end(); ++it_s) {
       s1 = *it_s;
       s1.clearId();

@@ -21,8 +21,6 @@
 // Project Includes
 
 #include <mymoneyobjectcontainer.h>
-//Added by qt3to4:
-#include <Q3ValueList>
 
 MyMoneyObjectContainer::MyMoneyObjectContainer()
 {
@@ -59,7 +57,7 @@ void MyMoneyObjectContainer::clear(const QString& id)
 }
 
 #define listMethod(a, T) \
-void MyMoneyObjectContainer::a(Q3ValueList<T>& list) \
+void MyMoneyObjectContainer::a(QList<T>& list) \
 { \
   QMap<QString, const MyMoneyObject*>::const_iterator it; \
   for(it = m_map.constBegin(); it != m_map.constEnd(); ++it) { \
@@ -71,9 +69,9 @@ void MyMoneyObjectContainer::a(Q3ValueList<T>& list) \
 }
 
 #define preloadListMethod(a, T) \
-void MyMoneyObjectContainer::preload##a(const Q3ValueList<T>& list) \
+void MyMoneyObjectContainer::preload##a(const QList<T>& list) \
 { \
-  Q3ValueList<T>::const_iterator it; \
+  QList<T>::const_iterator it; \
   for(it = list.constBegin(); it != list.constEnd(); ++it) { \
     delete m_map[(*it).id()]; \
     m_map[(*it).id()] = new T(*it); \
@@ -104,7 +102,7 @@ const T& MyMoneyObjectContainer::a(const QString& id) \
   return dynamic_cast<const T&>(*(*it)); \
 }
 
-void MyMoneyObjectContainer::account(QLinkedList<MyMoneyAccount>& list)
+void MyMoneyObjectContainer::account(QList<MyMoneyAccount>& list)
 {
   QMap<QString, const MyMoneyObject*>::const_iterator it;
   for(it = m_map.constBegin(); it != m_map.constEnd(); ++it) {

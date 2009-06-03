@@ -77,8 +77,8 @@ class MyMoneyStatementReader::Private
     void assignUniqueBankID(MyMoneySplit& s, const MyMoneyStatement::Transaction& t_in);
 
     MyMoneyAccount                 lastAccount;
-    Q3ValueList<MyMoneyTransaction> transactions;
-    Q3ValueList<MyMoneyPayee>       payees;
+    QList<MyMoneyTransaction> transactions;
+    QList<MyMoneyPayee>       payees;
     int                            transactionsCount;
     int                            transactionsAdded;
     int                            transactionsMatched;
@@ -344,8 +344,8 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
   {
     try {
       signalProgress(0, s.m_listPrices.count(), "Importing Statement ...");
-      Q3ValueList<MyMoneySecurity> slist = MyMoneyFile::instance()->securityList();
-      Q3ValueList<MyMoneySecurity>::const_iterator it_s;
+      QList<MyMoneySecurity> slist = MyMoneyFile::instance()->securityList();
+      QList<MyMoneySecurity>::const_iterator it_s;
       for(it_s = slist.begin(); it_s != slist.end(); ++it_s) {
         d->securitiesBySymbol[(*it_s).tradingSymbol()] = *it_s;
         d->securitiesByName[(*it_s).name()] = *it_s;
@@ -372,7 +372,7 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
 
   // delete all payees created in vain
   int payeeCount = d->payees.count();
-  Q3ValueList<MyMoneyPayee>::const_iterator it_p;
+  QList<MyMoneyPayee>::const_iterator it_p;
   for(it_p = d->payees.begin(); it_p != d->payees.end(); ++it_p) {
     try {
       MyMoneyFile::instance()->removePayee(*it_p);
@@ -453,8 +453,8 @@ void MyMoneyStatementReader::processSecurityEntry(const MyMoneyStatement::Securi
   // In a statement, we do not know what type of security this is, so we will
   // not use type as a matching factor.
   MyMoneySecurity security;
-  Q3ValueList<MyMoneySecurity> list = file->securityList();
-  Q3ValueList<MyMoneySecurity>::ConstIterator it = list.begin();
+  QList<MyMoneySecurity> list = file->securityList();
+  QList<MyMoneySecurity>::ConstIterator it = list.begin();
   while ( it != list.end() && security.id().isEmpty() )
   {
     if(sec_in.m_strSymbol.isEmpty()) {
@@ -617,8 +617,8 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
         else
         {
           MyMoneySecurity security;
-          Q3ValueList<MyMoneySecurity> list = MyMoneyFile::instance()->securityList();
-          Q3ValueList<MyMoneySecurity>::ConstIterator it = list.begin();
+          QList<MyMoneySecurity> list = MyMoneyFile::instance()->securityList();
+          QList<MyMoneySecurity>::ConstIterator it = list.begin();
           while ( it != list.end() && security.id().isEmpty() )
           {
             if(t_in.m_strSecurity.toLower() == (*it).tradingSymbol().toLower()
@@ -825,8 +825,8 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
   {
     QString payeeid;
     try {
-      Q3ValueList<MyMoneyPayee> pList = file->payeeList();
-      Q3ValueList<MyMoneyPayee>::const_iterator it_p;
+      QList<MyMoneyPayee> pList = file->payeeList();
+      QList<MyMoneyPayee>::const_iterator it_p;
       QMap<int, QString> matchMap;
       for(it_p = pList.begin(); it_p != pList.end(); ++it_p) {
         bool ignoreCase;
@@ -1001,7 +1001,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       else if (t_in.m_listSplits.isEmpty() && !d->m_skipCategoryMatching) {
         MyMoneyTransactionFilter filter(thisaccount.id());
         filter.addPayee(payeeid);
-        Q3ValueList<MyMoneyTransaction> list = file->transactionList(filter);
+        QList<MyMoneyTransaction> list = file->transactionList(filter);
         if(!list.empty())
         {
           // Default to using the most recent transaction as the reference
@@ -1012,7 +1012,9 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           // with the same VALUE as our imported transaction, and if so take that one.
           if ( list.count() > 1 )
           {
-            Q3ValueList<MyMoneyTransaction>::ConstIterator it_trans = list.fromLast();
+            QList<MyMoneyTransaction>::ConstIterator it_trans = list.end();
+            if(it_trans != list.begin())
+              --it_trans;
             while ( it_trans != list.end() )
             {
               MyMoneySplit s = (*it_trans).splitByAccount(thisaccount.id());
@@ -1025,7 +1027,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
             }
           }
 
-          Q3ValueList<MyMoneySplit>::ConstIterator it_split;
+          QList<MyMoneySplit>::ConstIterator it_split;
           for(it_split = t_old.splits().begin(); it_split != t_old.splits().end(); ++it_split)
           {
             // We don't need the split that covers this account,
@@ -1245,11 +1247,11 @@ bool MyMoneyStatementReader::selectOrCreateAccount(const SelectCreateMode /*mode
   if ( ! accountNumber.isEmpty() )
   {
     // Get a list of all accounts
-    Q3ValueList<MyMoneyAccount> accounts;
+    QList<MyMoneyAccount> accounts;
     file->accountList(accounts);
 
     // Iterate through them
-    Q3ValueList<MyMoneyAccount>::const_iterator it_account = accounts.begin();
+    QList<MyMoneyAccount>::const_iterator it_account = accounts.begin();
     while ( it_account != accounts.end() )
     {
       if (

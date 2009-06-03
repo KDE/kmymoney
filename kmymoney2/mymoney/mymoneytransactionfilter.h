@@ -35,7 +35,7 @@
 #include <q3intdict.h>
 #include <qregexp.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 #include <Q3Dict>
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -357,7 +357,7 @@ public:
     *       see the documentation of the constructors MyMoneyTransactionFilter()
     *       and MyMoneyTransactionFilter(const QString&) for details.
     */
-  const Q3ValueList<MyMoneySplit>& matchingSplits(void) const;
+  const QList<MyMoneySplit>& matchingSplits(void) const;
 
   /**
     * This method returns the from date set in the filter. If
@@ -476,7 +476,7 @@ public:
     */
   bool firstType(int& i) const;
 
-  bool types(Q3ValueList<int>& list) const;
+  bool types(QList<int>& list) const;
 
   /**
     * This method returns whether a state filter has been set,
@@ -487,7 +487,7 @@ public:
     */
   bool firstState(int& i) const;
 
-  bool states(Q3ValueList<int>& list) const;
+  bool states(QList<int>& list) const;
   /**
     * This method returns whether a text filter has been set,
     * and if so, it returns the text filter.
@@ -572,7 +572,7 @@ protected:
   QString             m_fromNr, m_toNr;
   QDate               m_fromDate, m_toDate;
   MyMoneyMoney        m_fromAmount, m_toAmount;
-  Q3ValueList<MyMoneySplit> m_matchingSplits;
+  QList<MyMoneySplit> m_matchingSplits;
 };
 
 #endif

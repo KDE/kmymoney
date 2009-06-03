@@ -28,8 +28,7 @@
 
 #include <qstring.h>
 #include <qbitarray.h>
-//Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -201,7 +200,7 @@ public:
     *
     * @return QValueList<MyMoneyPayee> containing the payee information
     */
-  virtual const Q3ValueList<MyMoneyPayee> payeeList(void) const = 0;
+  virtual const QList<MyMoneyPayee> payeeList(void) const = 0;
 
   /**
     * Returns the account addressed by it's id.
@@ -339,7 +338,7 @@ public:
     * @return QValueList<MyMoneyInstitution> containing the
     *         institution information
     */
-  virtual const Q3ValueList<MyMoneyInstitution> institutionList(void) const = 0;
+  virtual const QList<MyMoneyInstitution> institutionList(void) const = 0;
 
   /**
     * Modifies an already existing account in the file global account pool.
@@ -428,11 +427,11 @@ public:
     *
     * @return set of transactions in form of a QValueList<MyMoneyTransaction>
     */
-  virtual const Q3ValueList<MyMoneyTransaction> transactionList(MyMoneyTransactionFilter& filter) const = 0;
+  virtual const QList<MyMoneyTransaction> transactionList(MyMoneyTransactionFilter& filter) const = 0;
 
-  virtual void transactionList(Q3ValueList<MyMoneyTransaction>& list, MyMoneyTransactionFilter& filter) const = 0;
+  virtual void transactionList(QList<MyMoneyTransaction>& list, MyMoneyTransactionFilter& filter) const = 0;
 
-  virtual void transactionList(Q3ValueList<QPair<MyMoneyTransaction, MyMoneySplit> >& list, MyMoneyTransactionFilter& filter) const = 0;
+  virtual void transactionList(QList<QPair<MyMoneyTransaction, MyMoneySplit> >& list, MyMoneyTransactionFilter& filter) const = 0;
 
   /**
     * Deletes an existing account from the file global account pool
@@ -491,7 +490,7 @@ public:
     *
     * @note The standard accounts will not be returned
     */
-  virtual void accountList(Q3ValueList<MyMoneyAccount>& list) const = 0;
+  virtual void accountList(QList<MyMoneyAccount>& list) const = 0;
 
   /**
     * This method is used to return the standard liability account
@@ -571,7 +570,7 @@ public:
     *
     * @return QValueList<MyMoneySecurity> containing objects
     */
-  virtual const Q3ValueList<MyMoneySecurity> securityList(void) const = 0;
+  virtual const QList<MyMoneySecurity> securityList(void) const = 0;
 
   virtual void addPrice(const MyMoneyPrice& price) = 0;
   virtual void removePrice(const MyMoneyPrice& price) = 0;
@@ -653,7 +652,7 @@ public:
     *
     * @return const QValueList<MyMoneySchedule> list of schedule objects.
     */
-  virtual const Q3ValueList<MyMoneySchedule> scheduleList(const QString& accountId = QString(),
+  virtual const QList<MyMoneySchedule> scheduleList(const QString& accountId = QString(),
                                      const MyMoneySchedule::typeE type = MyMoneySchedule::TYPE_ANY,
                                      const MyMoneySchedule::occurenceE occurence = MyMoneySchedule::OCCUR_ANY,
                                      const MyMoneySchedule::paymentTypeE paymentType = MyMoneySchedule::STYPE_ANY,
@@ -661,7 +660,7 @@ public:
                                      const QDate& endDate = QDate(),
                                      const bool overdue = false) const = 0;
 
-  virtual const Q3ValueList<MyMoneySchedule> scheduleListEx( int scheduleTypes,
+  virtual const QList<MyMoneySchedule> scheduleListEx( int scheduleTypes,
                                               int scheduleOcurrences,
                                               int schedulePaymentTypes,
                                               QDate startDate,
@@ -717,7 +716,7 @@ public:
     *
     * @return QValueList of all MyMoneySecurity objects representing a currency.
     */
-  virtual const Q3ValueList<MyMoneySecurity> currencyList(void) const = 0;
+  virtual const QList<MyMoneySecurity> currencyList(void) const = 0;
 
   /**
     * This method is used to retrieve the list of all reports
@@ -727,7 +726,7 @@ public:
     *
     * @return QValueList of all MyMoneyReport objects.
     */
-  virtual const Q3ValueList<MyMoneyReport> reportList( void ) const = 0;
+  virtual const QList<MyMoneyReport> reportList( void ) const = 0;
 
   /**
     * This method is used to add a new report to the engine.
@@ -788,7 +787,7 @@ public:
     *
     * @return QValueList of all MyMoneyBudget objects.
     */
-  virtual const Q3ValueList<MyMoneyBudget> budgetList( void ) const = 0;
+  virtual const QList<MyMoneyBudget> budgetList( void ) const = 0;
 
   /**
     * This method is used to add a new budget to the engine.

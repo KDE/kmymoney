@@ -24,7 +24,7 @@
 
 #include <qwidget.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 #include <Q3VBoxLayout>
 class QFile;
 class Q3VBoxLayout;
@@ -614,7 +614,7 @@ public:
     * @retval false view was not capable to edit transactions
     * @retval true view was capable to edit the transactions and did so
     */
-  bool editTransactions(const Q3ValueList<MyMoneyTransaction>& transactions) const { Q_UNUSED(transactions)  return false; }
+  bool editTransactions(const QList<MyMoneyTransaction>& transactions) const { Q_UNUSED(transactions)  return false; }
 private:
   /// \internal d-pointer class.
   class Private;

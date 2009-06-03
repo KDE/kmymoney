@@ -22,7 +22,7 @@
 #include <qpixmap.h>
 #include <qlayout.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 #include <Q3VBoxLayout>
 
 // ----------------------------------------------------------------------------
@@ -234,9 +234,9 @@ void KAccountsView::loadIconView(void)
   MyMoneyFile* file = MyMoneyFile::instance();
 
   // get account list and sort by name
-  Q3ValueList<MyMoneyAccount> alist;
+  QList<MyMoneyAccount> alist;
   file->accountList(alist);
-  Q3ValueList<MyMoneyAccount>::const_iterator it_a;
+  QList<MyMoneyAccount>::const_iterator it_a;
   for(it_a = alist.begin(); it_a != alist.end(); ++it_a) {
     accountMap[QString("%1-%2").arg((*it_a).name()).arg((*it_a).id())] = *it_a;
   }
@@ -337,9 +337,9 @@ void KAccountsView::loadListView(void)
 
   MyMoneyFile* file = MyMoneyFile::instance();
 
-  Q3ValueList<MyMoneySecurity> slist = file->currencyList();
+  QList<MyMoneySecurity> slist = file->currencyList();
   slist += file->securityList();
-  Q3ValueList<MyMoneySecurity>::const_iterator it_s;
+  QList<MyMoneySecurity>::const_iterator it_s;
   for(it_s = slist.begin(); it_s != slist.end(); ++it_s) {
     m_securityMap[(*it_s).id()] = *it_s;
   }
@@ -419,7 +419,7 @@ bool KAccountsView::loadSubAccounts(KMyMoneyAccountTreeItem* parent, const QStri
   QStringList::const_iterator it_a;
   for(it_a = accountList.begin(); it_a != accountList.end(); ++it_a) {
     const MyMoneyAccount& acc = file->account(*it_a);
-    Q3ValueList<MyMoneyPrice> prices;
+    QList<MyMoneyPrice> prices;
     MyMoneySecurity security = file->baseCurrency();
     try {
       if(acc.isInvest()) {

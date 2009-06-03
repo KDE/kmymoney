@@ -21,14 +21,14 @@
 #include <mymoneysplit.h>
 #include <mymoneyfile.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 namespace KMyMoneyRegister {
   
 int SelectedTransaction::warnLevel() const
 {
   int warnLevel = 0;
-  Q3ValueList<MyMoneySplit>::const_iterator it_s;
+  QList<MyMoneySplit>::const_iterator it_s;
   for(it_s = transaction().splits().begin(); warnLevel < 2 && it_s != transaction().splits().end(); ++it_s) {
     const MyMoneyAccount& acc = MyMoneyFile::instance()->account((*it_s).accountId());
     if(acc.isClosed())

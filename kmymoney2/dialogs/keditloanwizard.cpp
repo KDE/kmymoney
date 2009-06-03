@@ -27,7 +27,7 @@
 #include <q3buttongroup.h>
 #include <qlabel.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -145,7 +145,7 @@ void KEditLoanWizard::loadWidgets(const MyMoneyAccount& /* account */)
 
   m_transaction = m_schedule.transaction();
 
-  Q3ValueList<MyMoneySplit>::ConstIterator it_s;
+  QList<MyMoneySplit>::const_iterator it_s;
   for(it_s = m_schedule.transaction().splits().begin();
       it_s != m_schedule.transaction().splits().end();
       ++it_s) {
@@ -442,12 +442,12 @@ void KEditLoanWizard::updateEditSummary(void)
   filter.setDateFilter(m_effectiveChangeDateEdit->date(), QDate());
 
   int count = 0;
-  Q3ValueList<MyMoneyTransaction> list;
-  Q3ValueList<MyMoneyTransaction>::ConstIterator it;
+  QList<MyMoneyTransaction> list;
+  QList<MyMoneyTransaction>::const_iterator it;
   list = MyMoneyFile::instance()->transactionList(filter);
 
   for(it = list.begin(); it != list.end(); ++it) {
-    Q3ValueList<MyMoneySplit>::ConstIterator it_s;
+    QList<MyMoneySplit>::const_iterator it_s;
     int match = 0;
     for(it_s = (*it).splits().begin(); it_s != (*it).splits().end(); ++it_s) {
       // we only count those transactions that have an interest

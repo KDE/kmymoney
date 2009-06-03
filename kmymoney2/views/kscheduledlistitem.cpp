@@ -26,7 +26,7 @@
 #include <qpainter.h>
 #include <qstyle.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 #include <QPixmap>
 
 // ----------------------------------------------------------------------------
@@ -66,7 +66,7 @@ KScheduledListItem::KScheduledListItem(KScheduledListItem *parent, const MyMoney
     MyMoneyTransaction transaction = schedule.transaction();
     MyMoneySplit s1 = transaction.splits()[0];
     MyMoneySplit s2 = transaction.splits()[1];
-    Q3ValueList<MyMoneySplit>::ConstIterator it_s;
+    QList<MyMoneySplit>::ConstIterator it_s;
     MyMoneySplit split;
     MyMoneyAccount acc;
 

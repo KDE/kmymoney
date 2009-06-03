@@ -25,7 +25,7 @@
 #include <qlayout.h>
 #include <q3valuevector.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 #include <QResizeEvent>
 
 // ----------------------------------------------------------------------------
@@ -222,7 +222,7 @@ TransactionEditor* KEditScheduleDlg::startEdit(void)
         // into the transaction and determine the type. in case we don't have a transaction with splits
         // we stick with the default action already set up
         if(d->m_schedule.transaction().splits().count() > 0) {
-          Q3ValueList<MyMoneySplit>::const_iterator it_s;
+          QList<MyMoneySplit>::const_iterator it_s;
           bool isDeposit = false;
           bool isTransfer = false;
           for(it_s = d->m_schedule.transaction().splits().begin(); it_s != d->m_schedule.transaction().splits().end(); ++it_s) {

@@ -26,7 +26,7 @@
 #include <qradiobutton.h>
 #include <q3buttongroup.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -145,14 +145,14 @@ void InvestTransactionEditor::activityFactory(MyMoneySplit::investTransactionTyp
   }
 }
 
-void InvestTransactionEditor::dissectTransaction(const MyMoneyTransaction& transaction, const MyMoneySplit& split, MyMoneySplit& assetAccountSplit, Q3ValueList<MyMoneySplit>& feeSplits, Q3ValueList<MyMoneySplit>& interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency, MyMoneySplit::investTransactionTypeE& transactionType)
+void InvestTransactionEditor::dissectTransaction(const MyMoneyTransaction& transaction, const MyMoneySplit& split, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency, MyMoneySplit::investTransactionTypeE& transactionType)
 {
   // collect the splits. split references the stock account and should already
   // be set up. assetAccountSplit references the corresponding asset account (maybe
   // empty), feeSplits is the list of all expenses and interestSplits
   // the list of all incomes
   MyMoneyFile* file = MyMoneyFile::instance();
-  Q3ValueList<MyMoneySplit>::ConstIterator it_s;
+  QList<MyMoneySplit>::ConstIterator it_s;
   for(it_s = transaction.splits().begin(); it_s != transaction.splits().end(); ++it_s) {
     MyMoneyAccount acc = file->account((*it_s).accountId());
     if((*it_s).id() == split.id()) {
@@ -332,7 +332,7 @@ int InvestTransactionEditor::slotEditInterestSplits(void)
   return editSplits("interest-account", "interest-amount", m_interestSplits, true, SLOT(slotEditInterestSplits()));
 }
 
-int InvestTransactionEditor::editSplits(const QString& categoryWidgetName, const QString& amountWidgetName, Q3ValueList<MyMoneySplit>& splits, bool isIncome, const char* slotEditSplits)
+int InvestTransactionEditor::editSplits(const QString& categoryWidgetName, const QString& amountWidgetName, QList<MyMoneySplit>& splits, bool isIncome, const char* slotEditSplits)
 {
   int rc = QDialog::Rejected;
 
@@ -384,7 +384,7 @@ int InvestTransactionEditor::editSplits(const QString& categoryWidgetName, const
         transaction = dlg->transaction();
         // collect splits out of the transaction
         splits.clear();
-        Q3ValueList<MyMoneySplit>::const_iterator it_s;
+        QList<MyMoneySplit>::const_iterator it_s;
         MyMoneyMoney fees;
         for(it_s = transaction.splits().begin(); it_s != transaction.splits().end(); ++it_s) {
           if((*it_s).accountId() == d->m_phonyAccount.id())
@@ -414,7 +414,7 @@ int InvestTransactionEditor::editSplits(const QString& categoryWidgetName, const
   return rc;
 }
 
-bool InvestTransactionEditor::createPseudoTransaction(MyMoneyTransaction& t, const Q3ValueList<MyMoneySplit>& splits)
+bool InvestTransactionEditor::createPseudoTransaction(MyMoneyTransaction& t, const QList<MyMoneySplit>& splits)
 {
   t.removeSplits();
 
@@ -425,7 +425,7 @@ bool InvestTransactionEditor::createPseudoTransaction(MyMoneyTransaction& t, con
   t.addSplit(split);
   d->m_phonySplit = split;
 
-  Q3ValueList<MyMoneySplit>::const_iterator it_s;
+  QList<MyMoneySplit>::const_iterator it_s;
   for(it_s = splits.begin(); it_s != splits.end(); ++it_s) {
     split = *it_s;
     split.clearId();
@@ -555,7 +555,7 @@ void InvestTransactionEditor::loadEditWidgets(KMyMoneyRegister::Action /* action
 
   // check if the current transaction has a reference to an equity account
   bool haveEquityAccount = false;
-  Q3ValueList<MyMoneySplit>::const_iterator it_s;
+  QList<MyMoneySplit>::const_iterator it_s;
   for(it_s = m_transaction.splits().begin(); !haveEquityAccount && it_s != m_transaction.splits().end(); ++it_s) {
     MyMoneyAccount acc = MyMoneyFile::instance()->account((*it_s).accountId());
     if(acc.accountType() == MyMoneyAccount::Equity)
@@ -700,9 +700,9 @@ bool InvestTransactionEditor::isComplete(void) const
   return d->m_activity->isComplete();
 }
 
-MyMoneyMoney InvestTransactionEditor::subtotal(const Q3ValueList<MyMoneySplit>& splits) const
+MyMoneyMoney InvestTransactionEditor::subtotal(const QList<MyMoneySplit>& splits) const
 {
-  Q3ValueList<MyMoneySplit>::const_iterator it_s;
+  QList<MyMoneySplit>::const_iterator it_s;
   MyMoneyMoney sum;
 
   for(it_s = splits.begin(); it_s != splits.end(); ++it_s) {
@@ -939,7 +939,7 @@ bool InvestTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyM
 
   // extract price info from original transaction
   m_priceInfo.clear();
-  Q3ValueList<MyMoneySplit>::const_iterator it_s;
+  QList<MyMoneySplit>::const_iterator it_s;
   if(!torig.id().isEmpty()) {
     for(it_s = torig.splits().begin(); it_s != torig.splits().end(); ++it_s) {
       if((*it_s).id() != sorig.id()) {
@@ -972,8 +972,8 @@ bool InvestTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyM
   }
 
   MyMoneySplit assetAccountSplit;
-  Q3ValueList<MyMoneySplit> feeSplits;
-  Q3ValueList<MyMoneySplit> interestSplits;
+  QList<MyMoneySplit> feeSplits;
+  QList<MyMoneySplit> interestSplits;
   MyMoneySecurity security, currency;
   MyMoneySplit::investTransactionTypeE transactionType;
 
@@ -1031,7 +1031,7 @@ bool InvestTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyM
 
     t.addSplit(s0);
 
-    Q3ValueList<MyMoneySplit>::iterator it_s;
+    QList<MyMoneySplit>::iterator it_s;
     for(it_s = feeSplits.begin(); it_s != feeSplits.end(); ++it_s) {
       (*it_s).clearId();
       t.addSplit(*it_s);

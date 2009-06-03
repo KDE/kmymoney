@@ -31,7 +31,7 @@
 
 #include <qstringlist.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -99,7 +99,7 @@ private:
   static QDate m_sToday;
 };
 
-class CashFlowList: public Q3ValueList<CashFlowListItem>
+class CashFlowList: public QList<CashFlowListItem>
 {
   public:
     CashFlowList(void) {}

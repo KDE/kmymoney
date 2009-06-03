@@ -434,7 +434,7 @@ void KGlobalLedgerView::loadView(void)
     kmymoney2->slotStatusProgressBar(0, m_transactionList.count());
 
     // create the elements for the register
-    Q3ValueList<QPair<MyMoneyTransaction, MyMoneySplit> >::const_iterator it;
+    QList<QPair<MyMoneyTransaction, MyMoneySplit> >::const_iterator it;
     QMap<QString, int>uniqueMap;
     int i = 0;
     for(it = m_transactionList.begin(); it != m_transactionList.end(); ++it) {
@@ -459,7 +459,7 @@ void KGlobalLedgerView::loadView(void)
       QDate endDate = QDate::currentDate().addDays(period);
       if(isReconciliationAccount())
         endDate = reconciliationDate.addDays(period);
-      Q3ValueList<MyMoneySchedule> scheduleList = MyMoneyFile::instance()->scheduleList(m_account.id());
+      QList<MyMoneySchedule> scheduleList = MyMoneyFile::instance()->scheduleList(m_account.id());
       while(scheduleList.count() > 0){
         MyMoneySchedule& s = scheduleList.first();
         for(;;) {
@@ -474,8 +474,8 @@ void KGlobalLedgerView::loadView(void)
           // as the alternative
           if(s.isOverdue())
             t.setPostDate(QDate::currentDate());
-          const Q3ValueList<MyMoneySplit>& splits = t.splits();
-          Q3ValueList<MyMoneySplit>::const_iterator it_s;
+          const QList<MyMoneySplit>& splits = t.splits();
+          QList<MyMoneySplit>::const_iterator it_s;
           for(it_s = splits.begin(); it_s != splits.end(); ++it_s) {
             if((*it_s).accountId() == m_account.id()) {
               new KMyMoneyRegister::StdTransactionScheduled(m_register, t, *it_s, uniqueMap[t.id()]);
@@ -533,7 +533,7 @@ void KGlobalLedgerView::loadView(void)
 #warning "port to kde4"
 #if 0
     if(m_account.accountType() == MyMoneyAccount::Investment) {
-      Q3ValueList<QString>::const_iterator it_a;
+      QList<QString>::const_iterator it_a;
       for(it_a = m_account.accountList().begin(); it_a != m_account.accountList().end(); ++it_a) {
             actBalance[*it_a] = MyMoneyMoney();
           }

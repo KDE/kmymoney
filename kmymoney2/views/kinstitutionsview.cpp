@@ -21,7 +21,7 @@
 #include <qlabel.h>
 #include <qtabwidget.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -123,9 +123,9 @@ void KInstitutionsView::loadAccounts(void)
 
   MyMoneyFile* file = MyMoneyFile::instance();
 
-  Q3ValueList<MyMoneyAccount> alist;
+  QList<MyMoneyAccount> alist;
   file->accountList(alist);
-  Q3ValueList<MyMoneyAccount>::const_iterator it_a;
+  QList<MyMoneyAccount>::const_iterator it_a;
   for(it_a = alist.begin(); it_a != alist.end(); ++it_a) {
     m_accountMap[(*it_a).id()] = *it_a;
   }
@@ -139,9 +139,9 @@ void KInstitutionsView::loadAccounts(void)
     }
   }
 
-  Q3ValueList<MyMoneySecurity> slist = file->currencyList();
+  QList<MyMoneySecurity> slist = file->currencyList();
   slist += file->securityList();
-  Q3ValueList<MyMoneySecurity>::const_iterator it_s;
+  QList<MyMoneySecurity>::const_iterator it_s;
   for(it_s = slist.begin(); it_s != slist.end(); ++it_s) {
     m_securityMap[(*it_s).id()] = *it_s;
   }
@@ -164,8 +164,8 @@ void KInstitutionsView::loadAccounts(void)
     // hide it, if unused
     noInstitutionItem->setVisible(noInstitutionItem->childCount() != 0);
 
-    Q3ValueList<MyMoneyInstitution> list = file->institutionList();
-    Q3ValueList<MyMoneyInstitution>::const_iterator it_i;
+    QList<MyMoneyInstitution> list = file->institutionList();
+    QList<MyMoneyInstitution>::const_iterator it_i;
     for(it_i = list.begin(); it_i != list.end(); ++it_i) {
       KMyMoneyAccountTreeItem* item = new KMyMoneyAccountTreeItem(m_accountTree, *it_i);
       item->setPixmap(0, none.pixmap());
@@ -214,7 +214,7 @@ void KInstitutionsView::loadSubAccounts(KMyMoneyAccountTreeItem* parent)
     if(acc.isClosed() && !showClosedAccounts)
       continue;
     const MyMoneySecurity& security = m_securityMap[acc.currencyId()];
-    Q3ValueList<MyMoneyPrice> prices;
+    QList<MyMoneyPrice> prices;
     prices += file->price(acc.currencyId(), security.tradingCurrency());
     if(security.tradingCurrency() != file->baseCurrency().id()) {
       MyMoneySecurity sec = m_securityMap[security.tradingCurrency()];
@@ -246,7 +246,7 @@ void KInstitutionsView::loadSubAccounts(KMyMoneyAccountTreeItem* parent, const Q
         if(acc.institutionId() == institutionId
         && !acc.isInvest()
         && (!acc.isClosed() || showClosedAccounts)) {
-          Q3ValueList<MyMoneyPrice> prices;
+          QList<MyMoneyPrice> prices;
           MyMoneySecurity security = file->baseCurrency();
           try {
             if(acc.currencyId() != file->baseCurrency().id()) {

@@ -17,6 +17,11 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
+//Added by qt3to4:
+#include <QResizeEvent>
+#include <QEvent>
+#include <Q3ValueList>
+#include <QKeyEvent>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -33,13 +38,7 @@
 #include <mymoneyfile.h>
 #include <mymoneytransaction.h>
 #include <kmymoneyglobalsettings.h>
-
 #include "kmergetransactionsdlg.h"
-//Added by qt3to4:
-#include <QResizeEvent>
-#include <QEvent>
-#include <Q3ValueList>
-#include <QKeyEvent>
 #include <ktoolinvocation.h>
 
 KSelectTransactionsDlg::KSelectTransactionsDlg(const MyMoneyAccount& _account, QWidget* parent) :
@@ -95,7 +94,7 @@ void KSelectTransactionsDlg::slotEnableOk(const KMyMoneyRegister::SelectedTransa
 
 void KSelectTransactionsDlg::addTransaction(const MyMoneyTransaction& t)
 {
-  Q3ValueList<MyMoneySplit>::const_iterator it_s;
+  QList<MyMoneySplit>::const_iterator it_s;
   for(it_s = t.splits().begin(); it_s != t.splits().end(); ++it_s) {
     if((*it_s).accountId() == m_account.id()) {
       KMyMoneyRegister::Transaction* tr = KMyMoneyRegister::Register::transactionFactory(m_register, t, (*it_s), 0);

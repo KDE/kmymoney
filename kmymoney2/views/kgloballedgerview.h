@@ -357,7 +357,7 @@ private:
   /**
     * This member holds the transaction list
     */
-  Q3ValueList<QPair<MyMoneyTransaction, MyMoneySplit> >  m_transactionList;
+  QList<QPair<MyMoneyTransaction, MyMoneySplit> >  m_transactionList;
 
   QLabel*                         m_leftSummaryLabel;
   QLabel*                         m_centerSummaryLabel;

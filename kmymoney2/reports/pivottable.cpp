@@ -31,7 +31,7 @@
 #include <qdom.h>
 //Added by qt3to4:
 #include <Q3TextStream>
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -185,7 +185,7 @@ void PivotTable::init(void)
   // Populate all transactions into the row/column pivot grid
   //
 
-  Q3ValueList<MyMoneyTransaction> transactions;
+  QList<MyMoneyTransaction> transactions;
   m_config_f.setReportAllSplits(false);
   m_config_f.setConsiderCategory(true);
   try {
@@ -209,8 +209,8 @@ void PivotTable::init(void)
     QDate configbegin, configend;
     m_config_f.validDateRange(configbegin, configend);
 
-    Q3ValueList<MyMoneySchedule> schedules = file->scheduleList();
-    Q3ValueList<MyMoneySchedule>::const_iterator it_schedule = schedules.begin();
+    QList<MyMoneySchedule> schedules = file->scheduleList();
+    QList<MyMoneySchedule>::const_iterator it_schedule = schedules.begin();
     while ( it_schedule != schedules.end() )
     {
       // If the transaction meets the filter
@@ -226,8 +226,8 @@ void PivotTable::init(void)
         if ( nextpayment.isValid() )
         {
           // Add one transaction for each date
-          Q3ValueList<QDate> paymentDates = (*it_schedule).paymentDates(nextpayment,configend);
-          Q3ValueList<QDate>::const_iterator it_date = paymentDates.begin();
+          QList<QDate> paymentDates = (*it_schedule).paymentDates(nextpayment,configend);
+          QList<QDate>::const_iterator it_date = paymentDates.begin();
           while ( it_date != paymentDates.end() )
           {
             //if the payment occurs in the past, enter it tomorrow
@@ -259,7 +259,7 @@ void PivotTable::init(void)
   //this is to store balance for loan accounts when not included in the report
   QMap<QString, MyMoneyMoney> loanBalances;
 
-  Q3ValueList<MyMoneyTransaction>::const_iterator it_transaction = transactions.begin();
+  QList<MyMoneyTransaction>::const_iterator it_transaction = transactions.begin();
   unsigned colofs = columnValue(m_beginDate) - 1;
   while ( it_transaction != transactions.end() )
   {
@@ -299,7 +299,7 @@ void PivotTable::init(void)
 
         //if the loan split is not included in the report, update the balance for the next occurrence
         if(!m_config_f.includes( splitAccount )) {
-          Q3ValueList<MyMoneySplit>::ConstIterator it_loanSplits;
+          QList<MyMoneySplit>::ConstIterator it_loanSplits;
           for(it_loanSplits = tx.splits().begin(); it_loanSplits != tx.splits().end(); ++it_loanSplits) {
             if((*it_loanSplits).isAmortizationSplit() && (*it_loanSplits).accountId() == splitAccount.id() )
               loanBalances[splitAccount.id()] = loanBalances[splitAccount.id()] + (*it_loanSplits).shares();
@@ -308,8 +308,8 @@ void PivotTable::init(void)
       }
     }
 
-    Q3ValueList<MyMoneySplit> splits = tx.splits();
-    Q3ValueList<MyMoneySplit>::const_iterator it_split = splits.begin();
+    QList<MyMoneySplit> splits = tx.splits();
+    QList<MyMoneySplit>::const_iterator it_split = splits.begin();
     while ( it_split != splits.end() )
     {
       ReportAccount splitAccount = (*it_split).accountId();
@@ -614,10 +614,10 @@ void PivotTable::createAccountRows(void)
   DEBUG_ENTER(__PRETTY_FUNCTION__);
   MyMoneyFile* file = MyMoneyFile::instance();
 
-  Q3ValueList<MyMoneyAccount> accounts;
+  QList<MyMoneyAccount> accounts;
   file->accountList(accounts);
 
-  Q3ValueList<MyMoneyAccount>::const_iterator it_account = accounts.begin();
+  QList<MyMoneyAccount>::const_iterator it_account = accounts.begin();
 
   while ( it_account != accounts.end() )
   {
@@ -654,10 +654,10 @@ void PivotTable::calculateOpeningBalances( void )
 
   MyMoneyFile* file = MyMoneyFile::instance();
 
-  Q3ValueList<MyMoneyAccount> accounts;
+  QList<MyMoneyAccount> accounts;
   file->accountList(accounts);
 
-  Q3ValueList<MyMoneyAccount>::const_iterator it_account = accounts.begin();
+  QList<MyMoneyAccount>::const_iterator it_account = accounts.begin();
 
   while ( it_account != accounts.end() )
   {
@@ -675,7 +675,7 @@ void PivotTable::calculateOpeningBalances( void )
         filter.addAccount(account.id());
         filter.setDateFilter(m_beginDate, m_endDate);
         filter.setReportAllSplits(false);
-        Q3ValueList<MyMoneyTransaction> transactions = file->transactionList(filter);
+        QList<MyMoneyTransaction> transactions = file->transactionList(filter);
         //if a closed account has no transactions in that timeframe, do not include it
         if(transactions.size() == 0 ) {
           DEBUG_OUTPUT(QString("DOES NOT INCLUDE account %1").arg(account.name()));
@@ -828,8 +828,8 @@ void PivotTable::calculateBudgetMapping( void )
     MyMoneyBudget budget = MyMoneyBudget();
     //if no budget has been selected
     if (m_config_f.budget() == "Any" ) {
-      Q3ValueList<MyMoneyBudget> budgets = file->budgetList();
-      Q3ValueList<MyMoneyBudget>::const_iterator budgets_it = budgets.begin();
+      QList<MyMoneyBudget> budgets = file->budgetList();
+      QList<MyMoneyBudget>::const_iterator budgets_it = budgets.begin();
       while( budgets_it != budgets.end() ) {
         //pick the first budget that matches the report start year
         if( (*budgets_it).budgetStart().year() == QDate::currentDate().year() ) {
@@ -853,9 +853,9 @@ void PivotTable::calculateBudgetMapping( void )
     //kDebug(2) << "Budget " << budget.name() << ": ";
 
     // Go through all accounts in the system to build the mapping
-    Q3ValueList<MyMoneyAccount> accounts;
+    QList<MyMoneyAccount> accounts;
     file->accountList(accounts);
-    Q3ValueList<MyMoneyAccount>::const_iterator it_account = accounts.begin();
+    QList<MyMoneyAccount>::const_iterator it_account = accounts.begin();
     while ( it_account != accounts.end() )
     {
       //include only the accounts selected for the report
@@ -898,8 +898,8 @@ void PivotTable::calculateBudgetMapping( void )
     } // end while looping through the accounts in the file
 
     // Place the budget values into the budget grid
-    Q3ValueList<MyMoneyBudget::AccountGroup> baccounts = budget.getaccounts();
-    Q3ValueList<MyMoneyBudget::AccountGroup>::const_iterator it_bacc = baccounts.begin();
+    QList<MyMoneyBudget::AccountGroup> baccounts = budget.getaccounts();
+    QList<MyMoneyBudget::AccountGroup>::const_iterator it_bacc = baccounts.begin();
     while ( it_bacc != baccounts.end() )
     {
       ReportAccount splitAccount = (*it_bacc).id();

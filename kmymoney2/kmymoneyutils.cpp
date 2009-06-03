@@ -44,7 +44,7 @@
 
 #include "kmymoneyutils.h"
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 #include <QPixmap>
 
 KMyMoneyUtils::KMyMoneyUtils()
@@ -312,7 +312,7 @@ QString KMyMoneyUtils::findResource(const char* type, const QString& filename)
 
 const MyMoneySplit KMyMoneyUtils::stockSplit(const MyMoneyTransaction& t)
 {
-  Q3ValueList<MyMoneySplit>::ConstIterator it_s;
+  QList<MyMoneySplit>::ConstIterator it_s;
   MyMoneySplit investmentAccountSplit;
   for(it_s = t.splits().begin(); it_s != t.splits().end(); ++it_s) {
     if(!(*it_s).accountId().isEmpty()) {
@@ -455,15 +455,15 @@ void KMyMoneyUtils::previouslyUsedCategories(const QString& investmentAccount, Q
     filter.setReportAllSplits(false);
     // since we assume an investment account here, we need to collect the stock accounts as well
     filter.addAccount(acc.accountList());
-    Q3ValueList< QPair<MyMoneyTransaction, MyMoneySplit> > list;
+    QList< QPair<MyMoneyTransaction, MyMoneySplit> > list;
     file->transactionList(list, filter);
-    Q3ValueList< QPair<MyMoneyTransaction, MyMoneySplit> >::const_iterator it_t;
+    QList< QPair<MyMoneyTransaction, MyMoneySplit> >::const_iterator it_t;
     for(it_t = list.begin(); it_t != list.end(); ++it_t) {
       const MyMoneyTransaction& t = (*it_t).first;
       const MyMoneySplit&s = (*it_t).second;
       MyMoneySplit assetAccountSplit;
-      Q3ValueList<MyMoneySplit> feeSplits;
-      Q3ValueList<MyMoneySplit> interestSplits;
+      QList<MyMoneySplit> feeSplits;
+      QList<MyMoneySplit> interestSplits;
       MyMoneySecurity security;
       MyMoneySecurity currency;
       MyMoneySplit::investTransactionTypeE transactionType;

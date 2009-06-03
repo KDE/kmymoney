@@ -31,7 +31,7 @@
 #include <q3groupbox.h>
 #include <qtooltip.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 #include <QResizeEvent>
 
 // ----------------------------------------------------------------------------
@@ -244,8 +244,8 @@ void KBudgetView::loadBudgets(void)
 
   KBudgetListItem* currentItem = 0;
 
-  Q3ValueList<MyMoneyBudget> list = MyMoneyFile::instance()->budgetList();
-  Q3ValueList<MyMoneyBudget>::ConstIterator it;
+  QList<MyMoneyBudget> list = MyMoneyFile::instance()->budgetList();
+  QList<MyMoneyBudget>::ConstIterator it;
   for (it = list.begin(); it != list.end(); ++it)
   {
     KBudgetListItem* item = new KBudgetListItem(m_budgetList, *it);
@@ -427,10 +427,10 @@ bool KBudgetView::loadSubAccounts(KMyMoneyAccountTreeBudgetItem* parent, QString
   //FIXME this is just a hack to order the accounts
   if ( !accountList.isEmpty() ) {
     QMap<QString, MyMoneyAccount> accountMap;
-    Q3ValueList<MyMoneyAccount> alist;
+    QList<MyMoneyAccount> alist;
     file->accountList ( alist, accountList );
     accountList.clear();
-    Q3ValueList<MyMoneyAccount>::const_iterator it_ac;
+    QList<MyMoneyAccount>::const_iterator it_ac;
     for ( it_ac = alist.begin(); it_ac != alist.end(); ++it_ac ) {
       accountMap[(*it_ac).name()] = *it_ac;
     }
@@ -443,7 +443,7 @@ bool KBudgetView::loadSubAccounts(KMyMoneyAccountTreeBudgetItem* parent, QString
   QStringList::const_iterator it_a;
   for(it_a = accountList.begin(); it_a != accountList.end(); ++it_a) {
     const MyMoneyAccount& acc = file->account(*it_a);
-    Q3ValueList<MyMoneyPrice> prices;
+    QList<MyMoneyPrice> prices;
     MyMoneySecurity security = file->baseCurrency();
     try {
       if(acc.isInvest()) {
@@ -532,7 +532,7 @@ void KBudgetView::slotSelectBudget(void)
   slotRefreshHideUnusedButton();
   loadAccounts();
 
-  Q3ValueList<MyMoneyBudget> budgetList;
+  QList<MyMoneyBudget> budgetList;
   if(!m_budget.id().isEmpty())
     budgetList << m_budget;
   emit selectObjects(budgetList);

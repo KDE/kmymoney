@@ -26,7 +26,7 @@
 //Added by qt3to4:
 #include <QResizeEvent>
 #include <QEvent>
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -218,7 +218,7 @@ protected:
   /**
     * This member holds a list of all transactions matching the filter criteria
     */
-  Q3ValueList<QPair<MyMoneyTransaction, MyMoneySplit> > m_transactionList;
+  QList<QPair<MyMoneyTransaction, MyMoneySplit> > m_transactionList;
 
   MyMoneyTransactionFilter        m_filter;
 

@@ -20,7 +20,7 @@
 
 #include <qpixmap.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -183,8 +183,8 @@ void KEndingBalanceDlg::slotUpdateBalances(void)
   filter.addState(MyMoneyTransactionFilter::cleared);
   filter.setReportAllSplits(true);
 
-  Q3ValueList<QPair<MyMoneyTransaction, MyMoneySplit> > transactionList;
-  Q3ValueList<QPair<MyMoneyTransaction, MyMoneySplit> >::const_iterator it;
+  QList<QPair<MyMoneyTransaction, MyMoneySplit> > transactionList;
+  QList<QPair<MyMoneyTransaction, MyMoneySplit> >::const_iterator it;
 
     // retrieve the list from the engine
   MyMoneyFile::instance()->transactionList(transactionList, filter);
@@ -462,11 +462,11 @@ const MyMoneyMoney KEndingBalanceLoanDlg::totalInterest(const QDate& start, cons
   MyMoneyTransactionFilter  filter(d->m_account.id());
   filter.setDateFilter(start, end);
 
-  Q3ValueList<MyMoneyTransaction> list = MyMoneyFile::instance()->transactionList(filter);
-  Q3ValueList<MyMoneyTransaction>::ConstIterator it_t;
+  QList<MyMoneyTransaction> list = MyMoneyFile::instance()->transactionList(filter);
+  QList<MyMoneyTransaction>::const_iterator it_t;
 
   for(it_t = list.begin(); it_t != list.end(); ++it_t) {
-    Q3ValueList<MyMoneySplit>::ConstIterator it_s;
+    QList<MyMoneySplit>::const_iterator it_s;
     for(it_s = (*it_t).splits().begin(); it_s != (*it_t).splits().end(); ++it_s) {
       if((*it_s).action() == MyMoneySplit::ActionInterest) {
         interest += (*it_s).value();
@@ -486,11 +486,11 @@ const MyMoneyMoney KEndingBalanceLoanDlg::totalAmortization(const QDate& start, 
   if(d->m_account.accountType() == MyMoneyAccount::AssetLoan)
     adjust = -adjust;
 
-  Q3ValueList<MyMoneyTransaction> list = MyMoneyFile::instance()->transactionList(filter);
-  Q3ValueList<MyMoneyTransaction>::ConstIterator it_t;
+  QList<MyMoneyTransaction> list = MyMoneyFile::instance()->transactionList(filter);
+  QList<MyMoneyTransaction>::const_iterator it_t;
 
   for(it_t = list.begin(); it_t != list.end(); ++it_t) {
-    Q3ValueList<MyMoneySplit>::ConstIterator it_s;
+    QList<MyMoneySplit>::const_iterator it_s;
     for(it_s = (*it_t).splits().begin(); it_s != (*it_t).splits().end(); ++it_s) {
       if((*it_s).accountId() == d->m_account.id()
       && (*it_s).action() == MyMoneySplit::ActionAmortization

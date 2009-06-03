@@ -24,7 +24,7 @@
 #include <qwidget.h>
 //Added by qt3to4:
 #include <QResizeEvent>
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -200,7 +200,7 @@ signals:
     * This signal serves as proxy for KMyMoneyBudgetList::selectObject()
     */
   void openContextMenu(const MyMoneyObject& obj);
-  void selectObjects(const Q3ValueList<MyMoneyBudget>& budget);
+  void selectObjects(const QList<MyMoneyBudget>& budget);
 
 private:
   typedef enum {

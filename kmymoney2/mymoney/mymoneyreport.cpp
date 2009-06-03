@@ -23,7 +23,7 @@
 #include <qstring.h>
 #include <qdom.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -193,7 +193,7 @@ void MyMoneyReport::validDateRange ( QDate& _db, QDate& _de )
   // year as the filter criteria.
 
   if ( !_db.isValid() || !_de.isValid() ) {
-    Q3ValueList<MyMoneyTransaction> list = MyMoneyFile::instance()->transactionList ( *this );
+    QList<MyMoneyTransaction> list = MyMoneyFile::instance()->transactionList ( *this );
     QDate tmpBegin, tmpEnd;
 
     if ( !list.isEmpty() ) {
@@ -234,14 +234,14 @@ void MyMoneyReport::setRowType ( ERowType _rt )
   }
 }
 
-bool MyMoneyReport::accountGroups(Q3ValueList<MyMoneyAccount::accountTypeE>& list) const
+bool MyMoneyReport::accountGroups(QList<MyMoneyAccount::accountTypeE>& list) const
 
 {
   bool result = m_accountGroupFilter;
 
   if ( result )
   {
-    Q3ValueList<MyMoneyAccount::accountTypeE>::const_iterator it_group = m_accountGroups.begin();
+    QList<MyMoneyAccount::accountTypeE>::const_iterator it_group = m_accountGroups.begin();
     while ( it_group != m_accountGroups.end() )
     {
       list += ( *it_group );
@@ -402,11 +402,11 @@ void MyMoneyReport::write ( QDomElement& e, QDomDocument *doc, bool anonymous ) 
   //
   // Type & State Filters
   //
-  Q3ValueList<int> typelist;
+  QList<int> typelist;
   if ( types ( typelist ) && ! typelist.empty() )
   {
     // iterate over payees, and add each one
-    Q3ValueList<int>::const_iterator it_type = typelist.begin();
+    QList<int>::const_iterator it_type = typelist.begin();
     while ( it_type != typelist.end() )
     {
       QDomElement p = doc->createElement ( "TYPE" );
@@ -417,11 +417,11 @@ void MyMoneyReport::write ( QDomElement& e, QDomDocument *doc, bool anonymous ) 
     }
   }
 
-  Q3ValueList<int> statelist;
+  QList<int> statelist;
   if ( states ( statelist ) && ! statelist.empty() )
   {
     // iterate over payees, and add each one
-    Q3ValueList<int>::const_iterator it_state = statelist.begin();
+    QList<int>::const_iterator it_state = statelist.begin();
     while ( it_state != statelist.end() )
     {
       QDomElement p = doc->createElement ( "STATE" );
@@ -488,11 +488,11 @@ void MyMoneyReport::write ( QDomElement& e, QDomDocument *doc, bool anonymous ) 
   // Account Groups Filter
   //
 
-  Q3ValueList<MyMoneyAccount::accountTypeE> accountgrouplist;
+  QList<MyMoneyAccount::accountTypeE> accountgrouplist;
   if ( accountGroups ( accountgrouplist ) )
   {
     // iterate over accounts, and add each one
-    Q3ValueList<MyMoneyAccount::accountTypeE>::const_iterator it_group = accountgrouplist.begin();
+    QList<MyMoneyAccount::accountTypeE>::const_iterator it_group = accountgrouplist.begin();
     while ( it_group != accountgrouplist.end() )
     {
       QDomElement p = doc->createElement ( "ACCOUNTGROUP" );

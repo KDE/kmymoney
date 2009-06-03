@@ -35,7 +35,7 @@
 #include <qlayout.h>
 #include <qtabwidget.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 #include <QResizeEvent>
 
 // ----------------------------------------------------------------------------
@@ -493,8 +493,8 @@ void KNewAccountDlg::okClicked()
       {
         MyMoneyFile *file = MyMoneyFile::instance();
 
-        Q3ValueList<MyMoneyInstitution> list = file->institutionList();
-        Q3ValueList<MyMoneyInstitution>::ConstIterator institutionIterator;
+        QList<MyMoneyInstitution> list = file->institutionList();
+        QList<MyMoneyInstitution>::ConstIterator institutionIterator;
         for (institutionIterator = list.begin(); institutionIterator != list.end(); ++institutionIterator)
         {
           if ((*institutionIterator).name() == institutionNameText)
@@ -991,9 +991,9 @@ void KNewAccountDlg::slotSelectionChanged(Q3ListViewItem *item)
 
 void KNewAccountDlg::loadVatAccounts(void)
 {
-  Q3ValueList<MyMoneyAccount> list;
+  QList<MyMoneyAccount> list;
   MyMoneyFile::instance()->accountList(list);
-  Q3ValueList<MyMoneyAccount>::Iterator it;
+  QList<MyMoneyAccount>::Iterator it;
   QStringList loadListExpense;
   QStringList loadListIncome;
   QStringList loadListAsset;
@@ -1035,8 +1035,8 @@ void KNewAccountDlg::slotLoadInstitutions(const QString& name)
   {
     MyMoneyFile *file = MyMoneyFile::instance();
 
-    Q3ValueList<MyMoneyInstitution> list = file->institutionList();
-    Q3ValueList<MyMoneyInstitution>::ConstIterator institutionIterator;
+    QList<MyMoneyInstitution> list = file->institutionList();
+    QList<MyMoneyInstitution>::ConstIterator institutionIterator;
     for (institutionIterator = list.begin(), counter=1; institutionIterator != list.end(); ++institutionIterator, counter++)
     {
       if ((*institutionIterator).name() == name) {

@@ -42,7 +42,7 @@
 #include <qsplitter.h>
 #include <qmap.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 #include <QResizeEvent>
 
 // ----------------------------------------------------------------------------
@@ -343,7 +343,7 @@ KPayeesView::KPayeesView(QWidget *parent) :
   KSharedConfigPtr config = KGlobal::config();
   KConfigGroup grp = config->group("Last Use Settings");
 #warning "port to kde4"
-  //Q3ValueList<int> sizes = grp.readEntry("KPayeesViewSplitterSize", Q3ValueList<int>());
+  //QList<int> sizes = grp.readEntry("KPayeesViewSplitterSize", QList<int>());
   //if(sizes.size() == 2)
     //m_splitter->setSizes(sizes);
 
@@ -550,7 +550,7 @@ void KPayeesView::ensurePayeeVisible(const QString& id)
   }
 }
 
-void KPayeesView::selectedPayees(Q3ValueList<MyMoneyPayee>& payeesList) const
+void KPayeesView::selectedPayees(QList<MyMoneyPayee>& payeesList) const
 {
   Q3ListViewItemIterator it_l(m_payeesList, Q3ListViewItemIterator::Selected | Q3ListViewItemIterator::Visible);
   Q3ListViewItem* it_v;
@@ -578,7 +578,7 @@ void KPayeesView::slotSelectPayee(void)
 
   // loop over all payees and count the number of payees, also
   // optain last selected payee
-  Q3ValueList<MyMoneyPayee> payeesList;
+  QList<MyMoneyPayee> payeesList;
   selectedPayees(payeesList);
 
   emit selectObjects(payeesList);
@@ -675,7 +675,7 @@ void KPayeesView::showTransactions(void)
   filter.addPayee(m_payee.id());
   filter.setDateFilter(KMyMoneyGlobalSettings::startDate().date(), QDate());
 
-  Q3ValueList<MyMoneyTransaction> list = file->transactionList(filter);
+  QList<MyMoneyTransaction> list = file->transactionList(filter);
   m_transactionList.clear();
 
   m_transactionPtrVector.clear();
@@ -683,7 +683,7 @@ void KPayeesView::showTransactions(void)
   m_transactionPtrVector.setPayeeId(m_payee.id());
   m_transactionPtrVector.setSortType(KTransactionPtrVector::SortPostDate);
 
-  Q3ValueList<MyMoneyTransaction>::ConstIterator it_t;
+  QList<MyMoneyTransaction>::ConstIterator it_t;
   QString lastId;
   int ofs = 0;
 
@@ -701,10 +701,10 @@ void KPayeesView::showTransactions(void)
     MyMoneyAccount acc = MyMoneyFile::instance()->account(filter.matchingSplits()[ofs].accountId());
     if(acc.accountGroup() == MyMoneyAccount::Asset
     || acc.accountGroup() == MyMoneyAccount::Liability) {
-      Q3ValueList<KMyMoneyTransaction>::ConstIterator it_k;
-      it_k = m_transactionList.append(k);
+      QList<KMyMoneyTransaction>::const_iterator it_k;
+      m_transactionList.append(k);
       balance += k.splitById(k.splitId()).value();
-      m_transactionPtrVector.insert(i, &(*it_k));
+      m_transactionPtrVector.insert(i, &(m_transactionList.last()));
       ++i;
     }
   }
@@ -921,7 +921,7 @@ void KPayeesView::show(void)
   // don't forget base class implementation
   KPayeesViewDecl::show();
 
-  Q3ValueList<MyMoneyPayee> list;
+  QList<MyMoneyPayee> list;
   selectedPayees(list);
   emit selectObjects(list);
 }
@@ -975,8 +975,8 @@ void KPayeesView::loadPayees(void)
   m_transactionView->clear();
   currentItem = 0;
 
-  Q3ValueList<MyMoneyPayee>list = MyMoneyFile::instance()->payeeList();
-  Q3ValueList<MyMoneyPayee>::ConstIterator it;
+  QList<MyMoneyPayee>list = MyMoneyFile::instance()->payeeList();
+  QList<MyMoneyPayee>::ConstIterator it;
 
   for (it = list.begin(); it != list.end(); ++it) {
     KPayeeListItem* item = new KPayeeListItem(m_payeesList, *it);

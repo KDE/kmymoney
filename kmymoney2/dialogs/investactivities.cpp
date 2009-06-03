@@ -20,7 +20,7 @@
 
 #include <qlabel.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -102,7 +102,7 @@ bool Activity::havePrice(void) const
   return !amount->value().isZero();
 }
 
-bool Activity::createCategorySplits(const MyMoneyTransaction& t, KMyMoneyCategory* cat, kMyMoneyEdit* amount, MyMoneyMoney factor, Q3ValueList<MyMoneySplit>&splits, const Q3ValueList<MyMoneySplit>& osplits ) const
+bool Activity::createCategorySplits(const MyMoneyTransaction& t, KMyMoneyCategory* cat, kMyMoneyEdit* amount, MyMoneyMoney factor, QList<MyMoneySplit>&splits, const QList<MyMoneySplit>& osplits ) const
 {
   bool rc = true;
   if(!isMultiSelection() || (isMultiSelection() && !cat->currentText().isEmpty())) {
@@ -137,11 +137,11 @@ void Activity::createAssetAccountSplit(MyMoneySplit& split, const MyMoneySplit& 
   split.setMemo(stockSplit.memo());
 }
 
-MyMoneyMoney Activity::sumSplits(const MyMoneySplit& s0, const Q3ValueList<MyMoneySplit>& feeSplits, const Q3ValueList<MyMoneySplit>& interestSplits) const
+MyMoneyMoney Activity::sumSplits(const MyMoneySplit& s0, const QList<MyMoneySplit>& feeSplits, const QList<MyMoneySplit>& interestSplits) const
 {
   MyMoneyMoney total;
   total = s0.value();
-  Q3ValueList<MyMoneySplit>::const_iterator it_s;
+  QList<MyMoneySplit>::const_iterator it_s;
   for(it_s = feeSplits.begin(); it_s != feeSplits.end(); ++it_s) {
     total += (*it_s).value();
   }
@@ -215,7 +215,7 @@ bool Buy::isComplete(void) const
   return rc;
 }
 
-bool Buy::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, Q3ValueList<MyMoneySplit>& feeSplits, Q3ValueList<MyMoneySplit>& m_feeSplits, Q3ValueList<MyMoneySplit>& interestSplits, Q3ValueList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency)
+bool Buy::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency)
 {
   Q_UNUSED(m_interestSplits);
   Q_UNUSED(security);
@@ -302,7 +302,7 @@ bool Sell::isComplete(void) const
   return rc;
 }
 
-bool Sell::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, Q3ValueList<MyMoneySplit>& feeSplits, Q3ValueList<MyMoneySplit>& m_feeSplits, Q3ValueList<MyMoneySplit>& interestSplits, Q3ValueList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency)
+bool Sell::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency)
 {
   Q_UNUSED(security);
   Q_UNUSED(currency);
@@ -377,7 +377,7 @@ bool Div::isComplete(void) const
   return rc;
 }
 
-bool Div::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, Q3ValueList<MyMoneySplit>& feeSplits, Q3ValueList<MyMoneySplit>& m_feeSplits, Q3ValueList<MyMoneySplit>& interestSplits, Q3ValueList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency)
+bool Div::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency)
 {
   Q_UNUSED(m_feeSplits);
   Q_UNUSED(security);
@@ -438,7 +438,7 @@ bool Reinvest::isComplete(void) const
   return rc;
 }
 
-bool Reinvest::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, Q3ValueList<MyMoneySplit>& feeSplits, Q3ValueList<MyMoneySplit>& m_feeSplits, Q3ValueList<MyMoneySplit>& interestSplits, Q3ValueList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency)
+bool Reinvest::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency)
 {
   Q_UNUSED(assetAccountSplit);
   Q_UNUSED(security);
@@ -488,7 +488,7 @@ bool Reinvest::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMone
 
   MyMoneySplit& s1 = interestSplits[0];
 
-  MyMoneyMoney total = sumSplits(s0, feeSplits, Q3ValueList<MyMoneySplit>());
+  MyMoneyMoney total = sumSplits(s0, feeSplits, QList<MyMoneySplit>());
   s1.setValue(-total);
 
   if(!m_parent->setupPrice(t, s1))
@@ -513,7 +513,7 @@ bool Add::isComplete(void) const
   return rc;
 }
 
-bool Add::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, Q3ValueList<MyMoneySplit>& feeSplits, Q3ValueList<MyMoneySplit>& m_feeSplits, Q3ValueList<MyMoneySplit>& interestSplits, Q3ValueList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency)
+bool Add::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency)
 {
   Q_UNUSED(t);
   Q_UNUSED(assetAccountSplit);
@@ -553,7 +553,7 @@ bool Remove::isComplete(void) const
   return rc;
 }
 
-bool Remove::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, Q3ValueList<MyMoneySplit>& feeSplits, Q3ValueList<MyMoneySplit>& m_feeSplits, Q3ValueList<MyMoneySplit>& interestSplits, Q3ValueList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency)
+bool Remove::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency)
 {
   Q_UNUSED(t);
   Q_UNUSED(assetAccountSplit);
@@ -595,7 +595,7 @@ bool Split::isComplete(void) const
   return rc;
 }
 
-bool Split::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, Q3ValueList<MyMoneySplit>& feeSplits, Q3ValueList<MyMoneySplit>& m_feeSplits, Q3ValueList<MyMoneySplit>& interestSplits, Q3ValueList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency)
+bool Split::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency)
 {
   Q_UNUSED(t);
   Q_UNUSED(assetAccountSplit);

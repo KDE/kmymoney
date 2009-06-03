@@ -25,7 +25,7 @@
 
 #include <qstring.h>
 #include <qdatetime.h>
-#include <q3valuelist.h>
+#include <QList>
 #include <qstringlist.h>
 //Added by qt3to4:
 #include <Q3TextStream>
@@ -74,18 +74,18 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storag
 
   s << "Internal-Info\n";
   s << "-------------\n";
-  Q3ValueList<MyMoneyAccount> list_a;
+  QList<MyMoneyAccount> list_a;
   storage->accountList(list_a);
   s << "accounts = " << list_a.count() <<", next id = " << _storage->accountId() << "\n";
   MyMoneyTransactionFilter filter;
   filter.setReportAllSplits(false);
-  Q3ValueList<MyMoneyTransaction> list_t;
+  QList<MyMoneyTransaction> list_t;
   storage->transactionList(list_t, filter);
-  Q3ValueList<MyMoneyTransaction>::ConstIterator it_t;
+  QList<MyMoneyTransaction>::ConstIterator it_t;
   s << "transactions = " << list_t.count() << ", next id = " << _storage->transactionId() << "\n";
   QMap<int,int> xferCount;
   for(it_t = list_t.begin(); it_t != list_t.end(); ++it_t) {
-    Q3ValueList<MyMoneySplit>::ConstIterator it_s;
+    QList<MyMoneySplit>::ConstIterator it_s;
     int accountCount = 0;
     for(it_s = (*it_t).splits().begin(); it_s != (*it_t).splits().end(); ++it_s) {
       MyMoneyAccount acc = storage->account((*it_s).accountId());
@@ -109,8 +109,8 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storag
   s << "Institutions\n";
   s << "------------\n";
 
-  Q3ValueList<MyMoneyInstitution> list_i = storage->institutionList();
-  Q3ValueList<MyMoneyInstitution>::ConstIterator it_i;
+  QList<MyMoneyInstitution> list_i = storage->institutionList();
+  QList<MyMoneyInstitution>::ConstIterator it_i;
   for(it_i = list_i.begin(); it_i != list_i.end(); ++it_i) {
     s << "  ID = " << (*it_i).id() << "\n";
     s << "  Name = " << (*it_i).name() << "\n";
@@ -121,8 +121,8 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storag
   s << "Payees" << "\n";
   s << "------" << "\n";
 
-  Q3ValueList<MyMoneyPayee> list_p = storage->payeeList();
-  Q3ValueList<MyMoneyPayee>::ConstIterator it_p;
+  QList<MyMoneyPayee> list_p = storage->payeeList();
+  QList<MyMoneyPayee>::ConstIterator it_p;
   for(it_p = list_p.begin(); it_p != list_p.end(); ++it_p) {
     s << "  ID = " << (*it_p).id() << "\n";
     s << "  Name = " << (*it_p).name() << "\n";
@@ -146,7 +146,7 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storag
   list_a.push_front(storage->income());
   list_a.push_front(storage->liability());
   list_a.push_front(storage->asset());
-  Q3ValueList<MyMoneyAccount>::ConstIterator it_a;
+  QList<MyMoneyAccount>::ConstIterator it_a;
   for(it_a = list_a.begin(); it_a != list_a.end(); ++it_a) {
     s << "  ID = " << (*it_a).id() << "\n";
     s << "  Name = " << (*it_a).name() << "\n";
@@ -205,8 +205,8 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storag
   s << "Currencies" << "\n";
   s << "----------" << "\n";
 
-  Q3ValueList<MyMoneyCurrency> list_c = storage->currencyList();
-  Q3ValueList<MyMoneyCurrency>::ConstIterator it_c;
+  QList<MyMoneyCurrency> list_c = storage->currencyList();
+  QList<MyMoneyCurrency>::ConstIterator it_c;
   for(it_c = list_c.begin(); it_c != list_c.end(); ++it_c) {
     s << "  Name = " << (*it_c).name() << "\n";
     s << "    ID = " << (*it_c).id() << "\n";
@@ -223,8 +223,8 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storag
   s << "Securities" << "\n";
   s << "----------" << "\n";
 
-  Q3ValueList<MyMoneySecurity> list_e = storage->securityList();
-  Q3ValueList<MyMoneySecurity>::ConstIterator it_e;
+  QList<MyMoneySecurity> list_e = storage->securityList();
+  QList<MyMoneySecurity>::ConstIterator it_e;
   for(it_e = list_e.begin(); it_e != list_e.end(); ++it_e) {
     s << "  Name = " << (*it_e).name() << "\n";
     s << "    ID = " << (*it_e).id() << "\n";
@@ -287,8 +287,8 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storag
   s << "Schedules" << "\n";
   s << "---------" << "\n";
 
-  Q3ValueList<MyMoneySchedule> list_s = storage->scheduleList();
-  Q3ValueList<MyMoneySchedule>::ConstIterator it_s;
+  QList<MyMoneySchedule> list_s = storage->scheduleList();
+  QList<MyMoneySchedule>::ConstIterator it_s;
   for(it_s = list_s.begin(); it_s != list_s.end(); ++it_s) {
     s << "  ID = " << (*it_s).id() << "\n";
     s << "  Name = " << (*it_s).name() << "\n";
@@ -316,8 +316,8 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storag
       s << "               = overdue!" << "\n";
     }
 
-    Q3ValueList<QDate> list_d;
-    Q3ValueList<QDate>::ConstIterator it_d;
+    QList<QDate> list_d;
+    QList<QDate>::ConstIterator it_d;
 
     list_d = (*it_s).recordedPayments();
     if(list_d.count() > 0) {
@@ -334,8 +334,8 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storag
   s << "Reports" << "\n";
   s << "-------" << "\n";
 
-  Q3ValueList<MyMoneyReport> list_r = storage->reportList();
-  Q3ValueList<MyMoneyReport>::ConstIterator it_r;
+  QList<MyMoneyReport> list_r = storage->reportList();
+  QList<MyMoneyReport>::ConstIterator it_r;
   for(it_r = list_r.begin(); it_r != list_r.end(); ++it_r) {
     s << "  ID = " << (*it_r).id() << "\n";
     s << "  Name = " << (*it_r).name() << "\n";
@@ -365,7 +365,7 @@ void MyMoneyStorageDump::dumpTransaction(Q3TextStream& s, IMyMoneyStorage* stora
 
   s << "  Splits\n";
   s << "  ------\n";
-  Q3ValueList<MyMoneySplit>::ConstIterator it_s;
+  QList<MyMoneySplit>::ConstIterator it_s;
   for(it_s = it_t.splits().begin(); it_s != it_t.splits().end(); ++it_s) {
     s << "   ID = " << (*it_s).id() << "\n";
     s << "    Transaction = " << (*it_s).transactionId() << "\n";

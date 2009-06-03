@@ -25,7 +25,7 @@
 #include <qobject.h>
 #include <qstring.h>
 #include <qmap.h>
-#include <q3valuelist.h>
+#include <QStringList>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -578,11 +578,11 @@ public:
     *
     * @return set of transactions in form of a QValueList<MyMoneyTransaction>
     */
-  const Q3ValueList<MyMoneyTransaction> transactionList(MyMoneyTransactionFilter& filter) const;
+  const QList<MyMoneyTransaction> transactionList(MyMoneyTransactionFilter& filter) const;
 
-  void transactionList(Q3ValueList<MyMoneyTransaction>& list, MyMoneyTransactionFilter& filter) const;
+  void transactionList(QList<MyMoneyTransaction>& list, MyMoneyTransactionFilter& filter) const;
 
-  void transactionList(Q3ValueList<QPair<MyMoneyTransaction, MyMoneySplit> >& list, MyMoneyTransactionFilter& filter) const;
+  void transactionList(QList<QPair<MyMoneyTransaction, MyMoneySplit> >& list, MyMoneyTransactionFilter& filter) const;
 
   /**
     * This method is used to remove a transaction from the transaction
@@ -673,7 +673,7 @@ public:
     *
     * @param list reference to the list. It will be cleared by this method first
     */
-  void institutionList(Q3ValueList<MyMoneyInstitution>& list) const;
+  void institutionList(QList<MyMoneyInstitution>& list) const;
 
   /**
     * This method returns a list of the institutions
@@ -682,7 +682,7 @@ public:
     *
     * @return QValueList containing the institution objects
     */
-  const Q3ValueList<MyMoneyInstitution> institutionList(void) const;
+  const QList<MyMoneyInstitution> institutionList(void) const;
 
   /**
     * Returns the account addressed by its id.
@@ -725,7 +725,7 @@ public:
     *
     * @param recursive if @p true, then recurse in all found accounts. The default is @p false
     */
-  void accountList(QLinkedList<MyMoneyAccount>& list, const QStringList& idlist = QStringList(), const bool recursive = false) const;
+  void accountList(QList<MyMoneyAccount>& list, const QStringList& idlist = QStringList(), const bool recursive = false) const;
 
   /**
     * This method is used to convert an account id to a string representation
@@ -833,7 +833,7 @@ public:
     *
     * @return QValueList<MyMoneyPayee> containing the payee information
     */
-  const Q3ValueList<MyMoneyPayee> payeeList(void) const;
+  const QList<MyMoneyPayee> payeeList(void) const;
 
   /**
     * This method is used to extract a value from the storage's
@@ -934,7 +934,7 @@ public:
     *
     * @return const QValueList<MyMoneySchedule> list of schedule objects.
     */
-  const Q3ValueList<MyMoneySchedule> scheduleList(const QString& accountId = QString(),
+  const QList<MyMoneySchedule> scheduleList(const QString& accountId = QString(),
                                      const MyMoneySchedule::typeE type = MyMoneySchedule::TYPE_ANY,
                                      const MyMoneySchedule::occurenceE occurence = MyMoneySchedule::OCCUR_ANY,
                                      const MyMoneySchedule::paymentTypeE paymentType = MyMoneySchedule::STYPE_ANY,
@@ -977,7 +977,7 @@ public:
     **/
   QString createCategory(const MyMoneyAccount& base, const QString& name);
 
-  const Q3ValueList<MyMoneySchedule> scheduleListEx( int scheduleTypes,
+  const QList<MyMoneySchedule> scheduleListEx( int scheduleTypes,
                                               int scheduleOcurrences,
                                               int schedulePaymentTypes,
                                               QDate startDate,
@@ -1030,7 +1030,7 @@ public:
   /**
     * This method is used to retrieve a list of all MyMoneySecurity objects.
     */
-  const Q3ValueList<MyMoneySecurity> securityList(void) const;
+  const QList<MyMoneySecurity> securityList(void) const;
 
   /**
     * This method is used to add a new currency object to the engine.
@@ -1083,7 +1083,7 @@ public:
     *
     * @return QValueList of all MyMoneySecurity objects.
     */
-  const Q3ValueList<MyMoneySecurity> currencyList(void) const;
+  const QList<MyMoneySecurity> currencyList(void) const;
 
   /**
     * This method retrieves a MyMoneySecurity object representing
@@ -1170,7 +1170,7 @@ public:
     *
     * @return QValueList of all MyMoneyReport objects.
     */
-  const Q3ValueList<MyMoneyReport> reportList( void ) const;
+  const QList<MyMoneyReport> reportList( void ) const;
 
   /**
     * Adds a report to the file-global institution pool. A
@@ -1231,7 +1231,7 @@ public:
     *
     * @return QValueList of all MyMoneyBudget objects.
     */
-  const Q3ValueList<MyMoneyBudget> budgetList( void ) const;
+  const QList<MyMoneyBudget> budgetList( void ) const;
 
   /**
     * Adds a budget to the file-global institution pool. A

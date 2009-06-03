@@ -31,7 +31,7 @@
 #include <mymoneyscheduled.h>
 #include <mymoneysplit.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 namespace KMyMoneyRegister {
 
@@ -68,7 +68,7 @@ private:
 
 class Register;
 
-class SelectedTransactions:public Q3ValueList<SelectedTransaction>
+class SelectedTransactions:public QList<SelectedTransaction>
 {
 public:
   SelectedTransactions() {}

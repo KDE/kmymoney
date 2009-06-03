@@ -865,7 +865,7 @@ private:
     * A list of stock accounts (gnc ids) which will be held till the end
       so we can implement the user's investment option
     */
-  Q3ValueList<QString> m_stockList;
+  QList<QString> m_stockList;
   /**
     * Temporary storage areas for transaction processing
     */
@@ -875,7 +875,7 @@ private:
   QString m_txChequeNo;    // ditto for cheque number
   /** In kmm, the order of splits is critical to some operations. These
     * areas will hold the splits until we've read them all */
-  Q3ValueList<MyMoneySplit> m_splitList, m_liabilitySplitList, m_otherSplitList;
+  QList<MyMoneySplit> m_splitList, m_liabilitySplitList, m_otherSplitList;
   bool m_potentialTransfer;       // to determine whether this might be a transfer
   /** Schedules are processed through 3 different functions, any of which may set this flag */
   bool m_suspectSchedule;

@@ -30,7 +30,7 @@
 
 #include <transactioneditor.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 class InvestTransactionEditor : public TransactionEditor
 {
@@ -66,7 +66,7 @@ public:
 
   void totalAmount(MyMoneyMoney& amount) const;
 
-  static void dissectTransaction(const MyMoneyTransaction& transaction, const MyMoneySplit& split, MyMoneySplit& assetAccountSplit, Q3ValueList<MyMoneySplit>& feeSplits, Q3ValueList<MyMoneySplit>& interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency, MyMoneySplit::investTransactionTypeE& transactionType);
+  static void dissectTransaction(const MyMoneyTransaction& transaction, const MyMoneySplit& split, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency, MyMoneySplit::investTransactionTypeE& transactionType);
 
   bool setupPrice(const MyMoneyTransaction& t, MyMoneySplit& split);
 
@@ -130,13 +130,13 @@ protected:
 
   void activityFactory(MyMoneySplit::investTransactionTypeE type);
 
-  MyMoneyMoney subtotal(const Q3ValueList<MyMoneySplit>& splits) const;
+  MyMoneyMoney subtotal(const QList<MyMoneySplit>& splits) const;
 
   /**
    * This method creates a transaction to be used for the split fee/interest editor.
    * It has a reference to a phony account and the splits contained in @a splits .
    */
-  bool createPseudoTransaction(MyMoneyTransaction& t, const Q3ValueList<MyMoneySplit>& splits);
+  bool createPseudoTransaction(MyMoneyTransaction& t, const QList<MyMoneySplit>& splits);
 
   /**
    * Convenience method used by slotEditInterestSplits() and slotEditFeeSplits().
@@ -149,7 +149,7 @@ protected:
    *                       category widget named @p categoryWidgetName in case of multiple splits
    *                       in @p splits .
    */
-  int editSplits(const QString& categoryWidgetName, const QString& amountWidgetName, Q3ValueList<MyMoneySplit>& splits, bool isIncome, const char* slotEditSplits);
+  int editSplits(const QString& categoryWidgetName, const QString& amountWidgetName, QList<MyMoneySplit>& splits, bool isIncome, const char* slotEditSplits);
 
   void updatePriceMode(const MyMoneySplit& split = MyMoneySplit());
 
@@ -157,8 +157,8 @@ protected:
 
 private:
   MyMoneySplit                              m_assetAccountSplit;
-  Q3ValueList<MyMoneySplit>                  m_interestSplits;
-  Q3ValueList<MyMoneySplit>                  m_feeSplits;
+  QList<MyMoneySplit>                  m_interestSplits;
+  QList<MyMoneySplit>                  m_feeSplits;
   MyMoneySecurity                           m_security;
   MyMoneySecurity                           m_currency;
   MyMoneySplit::investTransactionTypeE      m_transactionType;

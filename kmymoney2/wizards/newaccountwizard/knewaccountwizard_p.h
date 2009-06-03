@@ -23,7 +23,7 @@
 
 #include <qcheckbox.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -298,7 +298,7 @@ public:
    * @note The splits may contain assigned ids which the caller must remove before
    * adding the splits to a MyMoneyTransaction object.
    */
-  void additionalFeesSplits(Q3ValueList<MyMoneySplit>& list);
+  void additionalFeesSplits(QList<MyMoneySplit>& list);
 
 protected slots:
   void slotAdditionalFees(void);

@@ -29,7 +29,7 @@
 #include <q3ptrlist.h>
 #include <qstringlist.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -69,8 +69,8 @@ public:
   const QDate& entryDate(void) const { return m_entryDate; };
   const QDate& postDate(void) const { return m_postDate; };
   const QString& memo(void) const { return m_memo; };
-  const Q3ValueList<MyMoneySplit>& splits(void) const { return m_splits; };
-  Q3ValueList<MyMoneySplit>& splits(void) { return m_splits; };
+  const QList<MyMoneySplit>& splits(void) const { return m_splits; };
+  QList<MyMoneySplit>& splits(void) { return m_splits; };
   unsigned int splitCount(void) const { return m_splits.count(); };
   const QString& commodity(void) const { return m_commodity; };
   const QString& bankID(void) const /*__attribute__ ((deprecated))*/ { return m_bankID; };
@@ -323,7 +323,7 @@ private:
   /**
     * This member contains the splits for this transaction
     */
-  Q3ValueList<MyMoneySplit> m_splits;
+  QList<MyMoneySplit> m_splits;
 
   /**
     * This member keeps the unique numbers of splits within this

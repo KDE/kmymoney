@@ -27,7 +27,7 @@
 // QT Includes
 
 #include <qstring.h>
-#include <q3valuelist.h>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -97,7 +97,7 @@ public:
     *
     * @note The standard accounts will not be returned
     */
-  virtual void accountList(Q3ValueList<MyMoneyAccount>& list) const = 0;
+  virtual void accountList(QList<MyMoneyAccount>& list) const = 0;
 
   /**
     * This method returns a list of the institutions
@@ -105,7 +105,7 @@ public:
     *
     * @return QMap containing the institution information
     */
-  virtual const Q3ValueList<MyMoneyInstitution> institutionList(void) const = 0;
+  virtual const QList<MyMoneyInstitution> institutionList(void) const = 0;
 
   /**
     * This method is used to pull a list of transactions from the file
@@ -117,7 +117,7 @@ public:
     *             the set of transactions
     * @param filter MyMoneyTransactionFilter object with the match criteria
     */
-  virtual void transactionList(Q3ValueList<MyMoneyTransaction>& list, MyMoneyTransactionFilter& filter) const = 0;
+  virtual void transactionList(QList<MyMoneyTransaction>& list, MyMoneyTransactionFilter& filter) const = 0;
 
 
   /**
@@ -131,7 +131,7 @@ public:
     *
     * @return QValueList<MyMoneyPayee> containing the payee information
     */
-  virtual const Q3ValueList<MyMoneyPayee> payeeList(void) const = 0;
+  virtual const QList<MyMoneyPayee> payeeList(void) const = 0;
 
   /**
     * This method returns a list of the scheduled transactions
@@ -139,7 +139,7 @@ public:
     * list of the transactions, all arguments should be used with their
     * default arguments.
     */
-  virtual const Q3ValueList<MyMoneySchedule> scheduleList(const QString& = QString(),
+  virtual const QList<MyMoneySchedule> scheduleList(const QString& = QString(),
                                      const MyMoneySchedule::typeE = MyMoneySchedule::TYPE_ANY,
                                      const MyMoneySchedule::occurenceE = MyMoneySchedule::OCCUR_ANY,
                                      const MyMoneySchedule::paymentTypeE = MyMoneySchedule::STYPE_ANY,
@@ -151,7 +151,7 @@ public:
     * This method returns a list of security objects that the engine has
     * knowledge of.
     */
-  virtual const Q3ValueList<MyMoneySecurity> securityList(void) const = 0;
+  virtual const QList<MyMoneySecurity> securityList(void) const = 0;
 
   /**
     * This method is used to return the standard liability account
@@ -314,7 +314,7 @@ public:
     */
   virtual void setPairs(const QMap<QString, QString>& list) = 0;
 
-  virtual const Q3ValueList<MyMoneySchedule> scheduleListEx( int scheduleTypes,
+  virtual const QList<MyMoneySchedule> scheduleListEx( int scheduleTypes,
                                               int scheduleOcurrences,
                                               int schedulePaymentTypes,
                                               QDate startDate,
@@ -328,7 +328,7 @@ public:
     *
     * @return QValueList of all MyMoneySecurity objects representing a currency.
     */
-  virtual const Q3ValueList<MyMoneySecurity> currencyList(void) const = 0;
+  virtual const QList<MyMoneySecurity> currencyList(void) const = 0;
 
   /**
     * This method is used to retrieve the list of all reports
@@ -338,7 +338,7 @@ public:
     *
     * @return QValueList of all MyMoneyReport objects.
     */
-  virtual const Q3ValueList<MyMoneyReport> reportList( void ) const = 0;
+  virtual const QList<MyMoneyReport> reportList( void ) const = 0;
 
   /**
     * This method is used to retrieve the list of all budgets
@@ -348,7 +348,7 @@ public:
     *
     * @return QValueList of all MyMoneyBudget objects.
     */
-  virtual const Q3ValueList<MyMoneyBudget> budgetList( void ) const = 0;
+  virtual const QList<MyMoneyBudget> budgetList( void ) const = 0;
 
 
   /**

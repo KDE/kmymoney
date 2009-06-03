@@ -26,7 +26,7 @@
 
 #include <qlabel.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -306,9 +306,9 @@ const MyMoneySchedule& NewAccountWizard::Wizard::schedule(void)
       t.addSplit(s);
 
       // additional fee splits
-      Q3ValueList<MyMoneySplit> additionalSplits;
+      QList<MyMoneySplit> additionalSplits;
       m_loanPaymentPage->additionalFeesSplits(additionalSplits);
-      Q3ValueList<MyMoneySplit>::const_iterator it;
+      QList<MyMoneySplit>::const_iterator it;
       MyMoneyMoney factor(moneyBorrowed() ? 1 : -1, 1);
 
       for(it = additionalSplits.begin(); it != additionalSplits.end(); ++it) {
@@ -366,7 +366,7 @@ bool NewAccountWizard::Wizard::moneyBorrowed(void) const
 class NewAccountWizard::InstitutionPage::Private
 {
 public:
-  Q3ValueList<MyMoneyInstitution>  m_list;
+  QList<MyMoneyInstitution>  m_list;
 };
 
 InstitutionPage::InstitutionPage(Wizard* wizard) :
@@ -397,7 +397,7 @@ void InstitutionPage::slotLoadWidgets(void)
 #warning "port to kde4"
   //qSort(d->m_list);
 
-  Q3ValueList<MyMoneyInstitution>::const_iterator it_l;
+  QList<MyMoneyInstitution>::const_iterator it_l;
   m_institutionComboBox->insertItem("");
   for(it_l = d->m_list.begin(); it_l != d->m_list.end(); ++it_l) {
     m_institutionComboBox->insertItem((*it_l).name());
@@ -411,7 +411,7 @@ void InstitutionPage::slotNewInstitution(void)
   emit m_wizard->createInstitution(institution);
 
   if(!institution.id().isEmpty()) {
-    Q3ValueList<MyMoneyInstitution>::const_iterator it_l;
+    QList<MyMoneyInstitution>::const_iterator it_l;
     int i = 0;
     for(it_l = d->m_list.begin(); it_l != d->m_list.end(); ++it_l) {
       if((*it_l).id() == institution.id()) {
@@ -1248,11 +1248,11 @@ MyMoneyMoney LoanPaymentPage::additionalFees(void) const
   return d->additionalFees;
 }
 
-void LoanPaymentPage::additionalFeesSplits(Q3ValueList<MyMoneySplit>& list)
+void LoanPaymentPage::additionalFeesSplits(QList<MyMoneySplit>& list)
 {
   list.clear();
 
-  Q3ValueList<MyMoneySplit>::ConstIterator it;
+  QList<MyMoneySplit>::ConstIterator it;
   for(it = d->additionalFeesTransaction.splits().begin(); it != d->additionalFeesTransaction.splits().end(); ++it) {
     if((*it).accountId() != d->phonyAccount.id()) {
       list << (*it);
@@ -1287,7 +1287,7 @@ void LoanPaymentPage::slotAdditionalFees(void)
   if(dlg->exec() == QDialog::Accepted) {
     d->additionalFeesTransaction = dlg->transaction();
     // sum up the additional fees
-    Q3ValueList<MyMoneySplit>::ConstIterator it;
+    QList<MyMoneySplit>::ConstIterator it;
 
     d->additionalFees = MyMoneyMoney(0);
     for(it = d->additionalFeesTransaction.splits().begin(); it != d->additionalFeesTransaction.splits().end(); ++it) {

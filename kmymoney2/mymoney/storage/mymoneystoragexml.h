@@ -26,7 +26,7 @@
 #include <qdom.h>
 #include <qdatastream.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 class QIODevice;
 
 // ----------------------------------------------------------------------------
@@ -75,7 +75,7 @@ protected:
     */
   static unsigned int fileVersion(fileVersionDirectionType dir = Reading);
 
-  Q3ValueList<QDomElement> readElements(QString groupTag, QString itemTag = QString());
+  QList<QDomElement> readElements(QString groupTag, QString itemTag = QString());
 
   bool readFileInformation(const QDomElement& fileInfo);
   virtual void writeFileInformation(QDomElement& fileInfo);

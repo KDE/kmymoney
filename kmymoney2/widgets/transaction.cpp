@@ -22,7 +22,7 @@
 #include <qpainter.h>
 #include <qwidget.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 #include <QPixmap>
 
 // ----------------------------------------------------------------------------
@@ -674,7 +674,7 @@ bool Transaction::maybeTip(const QPoint& cpos, int row, int col, QRect& r, QStri
   r = m_parent->cellGeometry(m_startRow + 1, col);
   if(row == 1 && r.contains(cpos) && m_transaction.splitCount() > 2) {
     MyMoneyFile* file = MyMoneyFile::instance();
-    Q3ValueList<MyMoneySplit>::const_iterator it_s;
+    QList<MyMoneySplit>::const_iterator it_s;
     QString txt;
     const MyMoneySecurity& sec = file->security(m_transaction.commodity());
     MyMoneyMoney factor(1, 1);
@@ -747,8 +747,8 @@ bool Transaction::matches(const QString& txt) const
   QString s(txt);
   s.replace(MyMoneyMoney::thousandSeparator(), QString());
 
-  const Q3ValueList<MyMoneySplit>&list = m_transaction.splits();
-  Q3ValueList<MyMoneySplit>::const_iterator it_s;
+  const QList<MyMoneySplit>&list = m_transaction.splits();
+  QList<MyMoneySplit>::const_iterator it_s;
   for(it_s = list.begin(); it_s != list.end(); ++it_s) {
     // check if the text is contained in one of the fields
     // memo, number, payee, account
@@ -911,7 +911,7 @@ KMyMoneyRegister::Action StdTransaction::actionType(void) const
 
   // if at least one split is referencing an income or
   // expense account, we will not call it a transfer
-  Q3ValueList<MyMoneySplit>::const_iterator it_s;
+  QList<MyMoneySplit>::const_iterator it_s;
 
   for(it_s = m_transaction.splits().begin(); it_s != m_transaction.splits().end(); ++it_s) {
     if((*it_s).accountId() == m_split.accountId())
@@ -1374,7 +1374,7 @@ InvestTransaction::InvestTransaction(Register *parent, const MyMoneyTransaction&
                      m_currency,
                      m_transactionType);
 
-  Q3ValueList<MyMoneySplit>::ConstIterator it_s;
+  QList<MyMoneySplit>::ConstIterator it_s;
   for(it_s = m_feeSplits.begin(); it_s != m_feeSplits.end(); ++it_s) {
     m_feeAmount += (*it_s).value();
   }
@@ -2160,7 +2160,7 @@ bool InvestTransaction::haveSplitRatio(void) const
   return m_transactionType == MyMoneySplit::SplitShares;
 }
 
-void InvestTransaction::splits(MyMoneySplit& assetAccountSplit, Q3ValueList<MyMoneySplit>& interestSplits, Q3ValueList<MyMoneySplit>& feeSplits) const
+void InvestTransaction::splits(MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& feeSplits) const
 {
   assetAccountSplit = m_assetAccountSplit;
   interestSplits = m_interestSplits;

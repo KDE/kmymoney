@@ -637,7 +637,7 @@ protected:
     * @retval true object has been found
     * @retval false object is not in list
     */
-  bool payeeInList(const Q3ValueList<MyMoneyPayee>& list, const QString& id) const;
+  bool payeeInList(const QList<MyMoneyPayee>& list, const QString& id) const;
 
   /**
     * Mark the selected transactions as provided by @a flag. If
@@ -969,9 +969,9 @@ public slots:
 
   void slotSelectSchedule(const MyMoneySchedule& schedule = MyMoneySchedule());
 
-  void slotSelectPayees(const Q3ValueList<MyMoneyPayee>& list);
+  void slotSelectPayees(const QList<MyMoneyPayee>& list);
 
-  void slotSelectBudget(const Q3ValueList<MyMoneyBudget>& list);
+  void slotSelectBudget(const QList<MyMoneyBudget>& list);
 
   void slotSelectTransactions(const KMyMoneyRegister::SelectedTransactions& list);
 
@@ -1081,7 +1081,7 @@ signals:
     * @p payees is identical to an empty QValueList. This signal is used
     * by plugins to get information about changes.
     */
-  void payeesSelected(const Q3ValueList<MyMoneyPayee>& payees);
+  void payeesSelected(const QList<MyMoneyPayee>& payees);
 
   /**
     * This signal is emitted when a transaction/list of transactions has been selected by
@@ -1103,7 +1103,7 @@ signals:
     * @a budget is identical to an empty QValueList. This signal is used
     * by plugins to get information about changes.
     */
-  void budgetSelected(const Q3ValueList<MyMoneyBudget>& budget);
+  void budgetSelected(const QList<MyMoneyBudget>& budget);
   void budgetRename(void);
 
   /**
@@ -1160,7 +1160,7 @@ signals:
     * @param transactionList reference to QValueList of QPair containing all
     *        transaction/split pairs processed by the reconciliation.
     */
-  void accountReconciled(const MyMoneyAccount& account, const QDate& date, const MyMoneyMoney& startingBalance, const MyMoneyMoney& endingBalance, const Q3ValueList<QPair<MyMoneyTransaction, MyMoneySplit> >& transactionList);
+  void accountReconciled(const MyMoneyAccount& account, const QDate& date, const MyMoneyMoney& startingBalance, const MyMoneyMoney& endingBalance, const QList<QPair<MyMoneyTransaction, MyMoneySplit> >& transactionList);
 
 public:
   /**
@@ -1266,8 +1266,8 @@ private:
   MyMoneyInstitution    m_selectedInstitution;
   MyMoneySchedule       m_selectedSchedule;
   MyMoneySecurity       m_selectedCurrency;
-  Q3ValueList<MyMoneyPayee>  m_selectedPayees;
-  Q3ValueList<MyMoneyBudget> m_selectedBudgets;
+  QList<MyMoneyPayee>  m_selectedPayees;
+  QList<MyMoneyBudget> m_selectedBudgets;
   KMyMoneyRegister::SelectedTransactions m_selectedTransactions;
 
   // This is Auto Saving related

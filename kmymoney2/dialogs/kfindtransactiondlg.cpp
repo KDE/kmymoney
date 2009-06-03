@@ -487,8 +487,8 @@ void KFindTransactionDlg::setupPayeesPage(void)
 void KFindTransactionDlg::loadPayees(void)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
-  Q3ValueList<MyMoneyPayee> list;
-  Q3ValueList<MyMoneyPayee>::Iterator it_l;
+  QList<MyMoneyPayee> list;
+  QList<MyMoneyPayee>::Iterator it_l;
 
   list = file->payeeList();
   // load view
@@ -719,7 +719,7 @@ void KFindTransactionDlg::loadView(void)
   MyMoneyFile::instance()->transactionList(m_transactionList, m_filter);
 
     // create the elements for the register
-  Q3ValueList<QPair<MyMoneyTransaction, MyMoneySplit> >::const_iterator it;
+  QList<QPair<MyMoneyTransaction, MyMoneySplit> >::const_iterator it;
   QMap<QString, int>uniqueMap;
   MyMoneyMoney deposit, payment;
 

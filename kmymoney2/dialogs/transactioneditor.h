@@ -165,7 +165,7 @@ protected:
   virtual void createEditWidgets(void) = 0;
   virtual void setupFinalWidgets(void) = 0;
   virtual void loadEditWidgets(KMyMoneyRegister::Action action = KMyMoneyRegister::ActionNone) = 0;
-  void setupCategoryWidget(KMyMoneyCategory* category, const Q3ValueList<MyMoneySplit>& splits, QString& categoryId, const char* splitEditSlot, bool allowObjectCreation = true);
+  void setupCategoryWidget(KMyMoneyCategory* category, const QList<MyMoneySplit>& splits, QString& categoryId, const char* splitEditSlot, bool allowObjectCreation = true);
 
 protected slots:
   virtual void slotUpdateButtonState(void);
@@ -269,7 +269,7 @@ signals:
   void balanceWarning(QWidget* parent, const MyMoneyAccount& account, const QString& msg);
 
 protected:
-  Q3ValueList<MyMoneySplit>                          m_splits;
+  QList<MyMoneySplit>                               m_splits;
   KMyMoneyRegister::SelectedTransactions            m_transactions;
   Q3ValueList<const QWidget*>                        m_finalEditWidgets;
   TransactionEditorContainer*                       m_regForm;
