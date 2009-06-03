@@ -678,7 +678,7 @@ void KGPGFile::dumpBuffer(char *s, int len) const
 
   while(1) {
     if(addr && !(addr & 0x0f)) {
-      qDebug("%s %s", data.data(), chars.data());
+      qDebug("%s %s", qPrintable(data), qPrintable(chars));
       if(!len)
         break;
     }

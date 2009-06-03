@@ -139,7 +139,6 @@ CHECK_TYPE_SIZE(long SIZEOF_LONG)
 CHECK_TYPE_SIZE(short SIZEOF_SHORT)
 CHECK_TYPE_SIZE(size_t SIZEOF_SIZE_T)
 CHECK_TYPE_SIZE("unsigned long" SIZEOF_UNSIGNED_LONG)
-FIND_PACKAGE(KDECONFIG)
 FIND_PACKAGE(MEINPROC REQUIRED)
 
 MARK_AS_ADVANCED(
@@ -233,8 +232,6 @@ endif(USE_LEAK_CHECK)
 OPTION(USE_QT_DESIGNER
   "Install KMyMoney specific widget library for Qt-Designer (default=OFF)" OFF)
 
-# initialize the default install prefix to the kde3 prefix
-# ( usually /opt/kde3. ${KDE3PREFIX} is set by FIND_PACKAGE(KDE3) above )
 IF(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   SET(CMAKE_INSTALL_PREFIX "${KDE4PREFIX}" CACHE PATH
     "KMyMoney2 install prefix defaults
