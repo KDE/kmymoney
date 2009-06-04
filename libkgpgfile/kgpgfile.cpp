@@ -15,8 +15,6 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <config-kmymoney.h>
-
 
 
 // ----------------------------------------------------------------------------
@@ -223,7 +221,7 @@ bool KGPGFile::open(int mode, const QString& cmdArgs, bool skipPasswd)
   }
 
 //FIXME: Port to Qt4
-//  setState( IO_Open );
+ //setState( IO_Open );
 //  ioIndex = 0;
   // qDebug("File open");
   return true;
