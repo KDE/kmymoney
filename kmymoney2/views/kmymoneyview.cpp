@@ -1092,7 +1092,6 @@ void KMyMoneyView::saveToLocalFile(QFile* qfile, IMyMoneyStorageFormat* pWriter,
       qfile->close();
       base->setDevice(qfile, false);
       // we need to reopen the file to set the mode inside the filter stuff
-#warning "port to kde4"
       dev = KFilterDev::deviceForFile(qfile->fileName(), COMPRESSION_MIME_TYPE, true);
       if(!dev || !dev->open(QIODevice::WriteOnly)) {
         MyMoneyFile::instance()->blockSignals(blocked);
@@ -1120,6 +1119,7 @@ void KMyMoneyView::saveToLocalFile(QFile* qfile, IMyMoneyStorageFormat* pWriter,
     dev->close();
     if(statusDevice->status() != IO_Ok) {
       delete dev;
+      dev = 0;
       throw new MYMONEYEXCEPTION(i18n("Failure while writing to '%1'",qfile->fileName()));
     }
     delete dev;
