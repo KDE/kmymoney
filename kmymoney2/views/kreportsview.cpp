@@ -269,7 +269,7 @@ QString KReportsView::KReportTab::createTable(const QString& links)
   {
     kDebug(2) << "KReportsView::KReportTab::createTable(): ERROR " << e->what();
 
-    QString error = QString(i18n("There was an error creating your report: \"%1\".\nPlease report this error to the developer's list: kmymoney2-developer@lists.sourceforge.net")).arg(e->what());
+    QString error = i18n("There was an error creating your report: \"%1\".\nPlease report this error to the developer's list: kmymoney2-developer@lists.sourceforge.net",e->what());
 
     KMessageBox::error(this, error, i18n("Critical Error"));
 

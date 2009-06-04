@@ -1042,11 +1042,11 @@ void KHomeView::showForecast(void)
           case -1:
             break;
           case 0:
-            msg = i18n("The balance of %1 is below the minimum balance %2 today.").arg((*it_account).name()).arg(minBalance.formatMoney(*it_account, currency));
+            msg = i18n("The balance of %1 is below the minimum balance %2 today.",(*it_account).name(),minBalance.formatMoney(*it_account, currency));
             msg = showColoredAmount(msg, true);
             break;
           default:
-            msg = i18n("The balance of %1 will drop below the minimum balance %2 in %3 days.").arg((*it_account).name()).arg(minBalance.formatMoney(*it_account, currency)).arg(dropMinimum-1);
+            msg = i18n("The balance of %1 will drop below the minimum balance %2 in %3 days.",(*it_account).name(),minBalance.formatMoney(*it_account, currency),dropMinimum-1);
             msg = showColoredAmount(msg, true);
             break;
         }
@@ -1062,23 +1062,23 @@ void KHomeView::showForecast(void)
              break;
            case 0:
              if((*it_account).accountGroup() == MyMoneyAccount::Asset) {
-               msg = i18n("The balance of %1 is below %2 today.").arg((*it_account).name()).arg(MyMoneyMoney().formatMoney(*it_account, currency));
+               msg = i18n("The balance of %1 is below %2 today.",(*it_account).name(),MyMoneyMoney().formatMoney(*it_account, currency));
                msg = showColoredAmount(msg, true);
                break;
              }
              if((*it_account).accountGroup() == MyMoneyAccount::Liability) {
-               msg = i18n("The balance of %1 is above %2 today.").arg((*it_account).name()).arg(MyMoneyMoney().formatMoney(*it_account, currency));
+               msg = i18n("The balance of %1 is above %2 today.",(*it_account).name(),MyMoneyMoney().formatMoney(*it_account, currency));
                break;
              }
              break;
            default:
              if((*it_account).accountGroup() == MyMoneyAccount::Asset) {
-               msg = i18n("The balance of %1 will drop below %2 in %3 days.").arg((*it_account).name()).arg(MyMoneyMoney().formatMoney(*it_account, currency)).arg(dropZero);
+               msg = i18n("The balance of %1 will drop below %2 in %3 days.",(*it_account).name(),MyMoneyMoney().formatMoney(*it_account, currency),dropZero);
                msg = showColoredAmount(msg, true);
                break;
              }
              if((*it_account).accountGroup() == MyMoneyAccount::Liability) {
-               msg = i18n("The balance of %1 will raise above %2 in %3 days.").arg((*it_account).name()).arg(MyMoneyMoney().formatMoney(*it_account, currency)).arg(dropZero);
+               msg = i18n("The balance of %1 will raise above %2 in %3 days.",(*it_account).name(),MyMoneyMoney().formatMoney(*it_account, currency),dropZero);
                break;
              }
          }
