@@ -192,13 +192,10 @@ bool WebPriceQuote::launchNative( const QString& _symbol, const QString& _id, co
 
 void WebPriceQuote::removeTempFile(const QString& tmpFile)
 {
-#warning "port to kde4"
-#if 0
   if(tmpFile == m_tmpFile) {
-    unlink(tmpFile);
+    unlink(tmpFile.toLatin1());
     m_tmpFile = QString();
   }
-#endif
 }
 
 bool WebPriceQuote::download(const KUrl& u, QString & target, QWidget* window)

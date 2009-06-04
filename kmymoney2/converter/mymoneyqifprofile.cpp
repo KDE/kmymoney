@@ -380,17 +380,10 @@ void MyMoneyQifProfile::setVoidMark(const QString& txt)
 QString MyMoneyQifProfile::accountDelimiter(void) const
 {
   QString rc;
-#warning "port to kde4"
-#if 0
-  switch(m_accountDelimiter[0]) {
-    case ' ':
-      rc = "  ";
-      break;
-    default:
-      rc = "[]";
-      break;
-  }
-#endif  
+  if(m_accountDelimiter[0] == ' ' ) 
+	  rc = " ";
+  else
+	  rc ="[]";
   return rc;
 }
 
@@ -676,9 +669,7 @@ QString MyMoneyQifProfile::twoDigitYear(const QChar delim, int yr) const
 {
   QChar realDelim = delim;
   QString buffer;
-#warning "port to kde4"
-#if 0
-  if(delim) {
+  if(!delim.isNull()) {
     if((m_apostropheFormat == "1900-1949" && yr <= 1949)
     || (m_apostropheFormat == "1900-1999" && yr <= 1999)
     || (m_apostropheFormat == "2000-2099" && yr >= 2000))
@@ -693,7 +684,6 @@ QString MyMoneyQifProfile::twoDigitYear(const QChar delim, int yr) const
     buffer += "0";
 
   buffer += QString::number(yr);
-#endif
   return buffer;
 }
 
