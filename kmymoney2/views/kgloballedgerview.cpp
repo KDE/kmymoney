@@ -1043,13 +1043,13 @@ TransactionEditor* KGlobalLedgerView::startEdit(const KMyMoneyRegister::Selected
 
     case 1:
 #warning "port to kde4"
-#if 0
+#if 1
       if(KMessageBox::warningContinueCancel(0,
         i18n(
           "At least one split of the selected transactions has been reconciled. "
           "Do you wish to continue to edit the transactions anyway?"
         ),
-        i18n("Transaction already reconciled"), KStandardGuiItem::cont(),
+        i18n("Transaction already reconciled"), KStandardGuiItem::cont(), KGuiItem(),
         "EditReconciledTransaction") == KMessageBox::Cancel) {
         warnLevel = 2;
       }

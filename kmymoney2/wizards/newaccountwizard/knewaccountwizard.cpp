@@ -394,8 +394,7 @@ void InstitutionPage::slotLoadWidgets(void)
 
   d->m_list.clear();
   MyMoneyFile::instance()->institutionList(d->m_list);
-#warning "port to kde4"
-  //qSort(d->m_list);
+  qSort(d->m_list);
 
   QList<MyMoneyInstitution>::const_iterator it_l;
   m_institutionComboBox->insertItem("");

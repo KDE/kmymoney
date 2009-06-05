@@ -67,10 +67,7 @@ KScheduledView::KScheduledView(QWidget *parent) :
   // create the searchline widget
   // and insert it into the existing layout
   m_searchWidget = new K3ListViewSearchLineWidget(m_qlistviewScheduled, m_listTab);
-#warning "port to kde4"
-#if 0
-  m_listTabLayout->insertWidget(0, m_searchWidget);
-#endif
+  hboxLayout->insertWidget(0, m_searchWidget);
   m_qlistviewScheduled->addColumn(i18n("Type/Name"));
   m_qlistviewScheduled->addColumn(i18n("Account"));
   m_qlistviewScheduled->addColumn(i18n("Payee"));
