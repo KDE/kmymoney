@@ -25,7 +25,7 @@
 //Added by qt3to4:
 #include <Q3TextStream>
 #include <QList>
-
+#include <q3tl.h>
 // ----------------------------------------------------------------------------
 // KDE Includes
 #include <kdebug.h>
@@ -656,8 +656,7 @@ void MyMoneyForecast::addScheduledTransactions (void)
   if(schedule.count() > 0) {
     QList<MyMoneySchedule>::Iterator it;
     do {
-#warning "port it to kde4"	    
-      //qBubbleSort(schedule);
+      qBubbleSort(schedule);
       it = schedule.begin();
       if(it == schedule.end())
         break;

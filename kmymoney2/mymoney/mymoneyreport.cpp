@@ -197,8 +197,7 @@ void MyMoneyReport::validDateRange ( QDate& _db, QDate& _de )
     QDate tmpBegin, tmpEnd;
 
     if ( !list.isEmpty() ) {
-#warning "port to kde4"
-      	    //qSort ( list );
+      qSort ( list );
       tmpBegin = list.front().postDate();
       tmpEnd = list.back().postDate();
     } else {
