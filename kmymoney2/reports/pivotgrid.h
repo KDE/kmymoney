@@ -23,7 +23,8 @@
 // QT Includes
 
 #include <qmap.h>
-#include <q3valuelist.h>
+#include <QList>
+#include <q3tl.h>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -109,7 +110,7 @@ namespace reports {
   {
   public:
     PivotOuterGroup( unsigned _numcolumns = 0, unsigned _sort=m_kDefaultSortOrder, bool _inverted=false): m_total(_numcolumns), m_inverted(_inverted), m_sortOrder(_sort) {}
-    int operator<( const PivotOuterGroup& _right )
+    bool operator<( const PivotOuterGroup& _right )
     {
       if ( m_sortOrder != _right.m_sortOrder )
         return m_sortOrder < _right.m_sortOrder;

@@ -127,7 +127,7 @@ void ObjectInfoTable::init ( void )
 
   TableRow::setSortCriteria ( sort );
   #warning #Port to KDE4
-  //qSort ( m_rows );
+  qSort ( m_rows );
 }
 
 void ObjectInfoTable::constructScheduleTable ( void )

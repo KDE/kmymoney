@@ -19,7 +19,7 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
-#include <q3valuelist.h>
+#include <QList>
 #include <qfile.h>
 #include <q3textstream.h>
 
@@ -286,7 +286,7 @@ namespace reports {
     // header.  The group iterator keeps track of a subtotal also.
 
     int depth = 1;
-    Q3ValueList<GroupIterator> groupIteratorList;
+    QList<GroupIterator> groupIteratorList;
     QStringList::const_iterator it_grouplevel = groups.begin();
     while ( it_grouplevel != groups.end() )
     {
@@ -302,7 +302,7 @@ namespace reports {
 
     // ***DV***
     MyMoneyMoney startingBalance;
-    for ( Q3ValueList<TableRow>::const_iterator it_row = m_rows.begin();
+    for ( QList<TableRow>::const_iterator it_row = m_rows.begin();
           it_row != m_rows.end();
           ++it_row ) {
 
@@ -328,7 +328,7 @@ namespace reports {
       // then we need to force all the downstream groups to get one too.
 
       // Update the group iterators with the current row value
-      Q3ValueList<GroupIterator>::iterator it_group = groupIteratorList.begin();
+      QList<GroupIterator>::iterator it_group = groupIteratorList.begin();
       while ( it_group != groupIteratorList.end() )
       {
         ( *it_group ).update ( *it_row );
@@ -338,7 +338,9 @@ namespace reports {
       // Do subtotals backwards
       if ( m_config.isConvertCurrency() )
       {
-        it_group = groupIteratorList.fromLast();
+        it_group = groupIteratorList.end();
+        if(it_group != groupIteratorList.begin())
+          --it_group;
         while ( it_group != groupIteratorList.end() )
         {
           if ( ( *it_group ).isSubtotal() )
@@ -537,7 +539,9 @@ namespace reports {
     if ( m_config.isConvertCurrency() )
     {
       int fraction = file->baseCurrency().smallestAccountFraction();
-      Q3ValueList<GroupIterator>::iterator it_group = groupIteratorList.fromLast();
+      QList<GroupIterator>::iterator it_group = groupIteratorList.end();
+      if(it_group != groupIteratorList.begin())
+        --it_group;
       while ( it_group != groupIteratorList.end() )
       {
         ( *it_group ).update ( TableRow() );

@@ -76,7 +76,7 @@ Debug::Debug( const QString& _name ): m_methodName( _name ), m_enabled( m_sEnabl
 
   if (m_enabled)
   {
-    qDebug( "%s%s(): ENTER", m_sTabs.toLatin1(), m_methodName.toLatin1() );
+    qDebug( "%s%s(): ENTER", qPrintable(m_sTabs), qPrintable(m_methodName) );
     m_sTabs.append("--");
   }
 }
@@ -86,7 +86,7 @@ Debug::~Debug()
   if ( m_enabled )
   {
     m_sTabs.remove(0,2);
-    qDebug( "%s%s(): EXIT", m_sTabs.toLatin1(), m_methodName.toLatin1() );
+    qDebug( "%s%s(): EXIT", qPrintable(m_sTabs), qPrintable(m_methodName) );
 
     if (m_methodName == m_sEnableKey)
       m_enabled = false;
@@ -96,7 +96,7 @@ Debug::~Debug()
 void Debug::output( const QString& _text )
 {
   if ( m_enabled )
-    qDebug( "%s%s(): %s", m_sTabs.toLatin1(), m_methodName.toLatin1(), _text.toLatin1() );
+    qDebug( "%s%s(): %s", qPrintable(m_sTabs), qPrintable(m_methodName), qPrintable(_text) );
 }
 
 PivotTable::PivotTable( const MyMoneyReport& _config_f ):

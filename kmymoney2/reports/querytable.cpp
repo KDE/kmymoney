@@ -82,7 +82,7 @@ const CashFlowListItem& CashFlowList::mostRecent(void) const
 {
   CashFlowList dupe( *this );
 #warning "port to kde4"
-  //qSort( dupe );
+  qSort( dupe );
 
   //kDebug(2) << " CashFlowList::mostRecent() == " << dupe.back().date().toString(Qt::ISODate);
 
@@ -380,7 +380,7 @@ void QueryTable::init(void)
 
   TableRow::setSortCriteria(sort);
 #warning "port to kde4"
-  //qSort(m_rows);
+  qSort(m_rows);
 }
 
 void QueryTable::constructTransactionTable(void)

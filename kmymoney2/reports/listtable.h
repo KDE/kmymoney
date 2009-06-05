@@ -25,8 +25,7 @@
 
 #include <qstringlist.h>
 //Added by qt3to4:
-#include <Q3ValueList>
-#include <q3tl.h>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -85,11 +84,11 @@ namespace reports {
           static QStringList m_sortCriteria;
       };
 
-      Q3ValueList<TableRow> rows() {return m_rows;};
+      QList<TableRow> rows() {return m_rows;};
 
     protected:
       void render ( QString&, QString& ) const;
-      Q3ValueList<TableRow> m_rows;
+      QList<TableRow> m_rows;
 
       QString m_group;
       /**

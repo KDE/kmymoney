@@ -1106,7 +1106,7 @@ const QString KHomeView::linkend(void) const
   return "</a>";
 }
 
-void KHomeView::slotOpenUrl(const KUrl &url, const KParts::OpenUrlArguments &args,const KParts::BrowserArguments &browArgs )
+void KHomeView::slotOpenUrl(const KUrl &url, const KParts::OpenUrlArguments&,const KParts::BrowserArguments& )
 {
   QString protocol = url.protocol();
   QString view = url.fileName(false);
