@@ -746,13 +746,12 @@ void KHomeView::showAccounts(KHomeView::paymentTypeE type, const QString& header
     // if we still point to the same account we keep it in the list and move on ;-)
     if(prevIt == it) {
       QString key = (*it).name();
-      if(nameIdx[key].id().isEmpty()) {
+      if(!nameIdx.contains(key)) {
         nameIdx[key] = *it;
-
       } else if(nameIdx[key].id() != (*it).id()) {
         key = (*it).name() + "[%1]";
         int dup = 2;
-        while(!nameIdx[key.arg(dup)].id().isEmpty()
+        while(nameIdx.contains(key.arg(dup))
         && nameIdx[key.arg(dup)].id() != (*it).id())
           ++dup;
         nameIdx[key.arg(dup)] = *it;
