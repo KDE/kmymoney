@@ -142,8 +142,6 @@ QValidator::State kMyMoneyMoneyValidator::validate( QString & input, int & _p ) 
     return Acceptable;
 
   QValidator::State rc = QDoubleValidator::validate( s, _p );
-#warning "port to kde4"
-#if 0
   if(rc == Acceptable) {
     // If the numeric value is acceptable, we check if the parens
     // are ok. If only the lead-in is present, the return value
@@ -152,14 +150,13 @@ QValidator::State kMyMoneyMoneyValidator::validate( QString & input, int & _p ) 
     // only, if the locale settings have it enabled.
     if(l->negativeMonetarySignPosition() == KLocale::ParensAround
     || l->positiveMonetarySignPosition() == KLocale::ParensAround) {
-      int tmp = input.contains('(') - input.contains(')');
+      int tmp = input.count('(') - input.count(')');
       if(tmp > 0)
         rc = Intermediate;
       else if(tmp < 0)
         rc = Invalid;
     }
   }
-#endif
   return rc;
 }
 
