@@ -22,7 +22,7 @@
 #include "mymoneycategory.h"
 //Added by qt3to4:
 #include <QList>
-
+#include <list>
 #define TRY try {
 #define CATCH } catch (MyMoneyException *e) {
 #define PASS } catch (MyMoneyException *e) { throw; }
@@ -447,7 +447,6 @@ bool MyMoneyDatabaseMgr::hasActiveSplits(const QString& id) const
     * @return balance of the account as MyMoneyMoney object
     */
 //const MyMoneyMoney MyMoneyDatabaseMgr::balance(const QString& id, const QDate& date);
-
 const MyMoneyMoney MyMoneyDatabaseMgr::totalBalance(const QString& id, const QDate& date) const
 {
 
@@ -462,11 +461,11 @@ const MyMoneyMoney MyMoneyDatabaseMgr::totalBalance(const QString& id, const QDa
   }
 #warning "port to kde4"
 #if 0
-  std::list tempList (accounts.begin(), accounts.end());
+  std::list<QString> tempList (accounts.begin(), accounts.end());
   tempList.sort();
   tempList.unique();
 
-  accounts = QStringList(tempList);
+  accounts = QStringList (tempList);
 
   QMap<QString, MyMoneyMoney> balanceMap = m_sql->fetchBalance(accounts, date);
   for (QMap<QString, MyMoneyMoney>::ConstIterator it_b = balanceMap.begin(); it_b != balanceMap.end(); ++it_b) {
