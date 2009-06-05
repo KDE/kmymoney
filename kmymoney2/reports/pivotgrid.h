@@ -24,7 +24,6 @@
 
 #include <qmap.h>
 #include <QList>
-#include <q3tl.h>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -110,7 +109,7 @@ namespace reports {
   {
   public:
     PivotOuterGroup( unsigned _numcolumns = 0, unsigned _sort=m_kDefaultSortOrder, bool _inverted=false): m_total(_numcolumns), m_inverted(_inverted), m_sortOrder(_sort) {}
-    bool operator<( const PivotOuterGroup& _right )
+    bool operator<( const PivotOuterGroup& _right ) const
     {
       if ( m_sortOrder != _right.m_sortOrder )
         return m_sortOrder < _right.m_sortOrder;

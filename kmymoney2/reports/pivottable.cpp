@@ -1666,7 +1666,7 @@ QString PivotTable::renderHTML( void ) const
       ++it_outergroup_map;
     }
     #warning #Port to KDE4
-    //qSort(outergroups);
+    qSort(outergroups.begin(), outergroups.end());
 
     QList<PivotOuterGroup>::const_iterator it_outergroup = outergroups.begin();
     while ( it_outergroup != outergroups.end() )
