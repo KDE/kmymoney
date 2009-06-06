@@ -1334,7 +1334,7 @@ void KGlobalLedgerView::slotSortOptions(void)
         MyMoneyFile::instance()->modifyAccount(m_account);
         ft.commit();
       } catch(MyMoneyException* e) {
-        qDebug("Unable to update sort order for account '%s': %s", m_account.name().toLatin1(), e->what().toLatin1());
+        qDebug("Unable to update sort order for account '%s': %s", qPrintable(m_account.name()), qPrintable(e->what()));
         delete e;
       }
     }
