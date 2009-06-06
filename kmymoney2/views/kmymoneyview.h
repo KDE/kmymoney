@@ -502,6 +502,11 @@ public slots:
     * This slot switches the view to present the home page
     */
   void slotShowHomePage(void) { setCurrentPage(m_homeViewFrame); }
+  
+  signals:
+
+  void currentPageChanged (const QModelIndex &current, const QModelIndex &previous);
+
 
 protected slots:
   /**

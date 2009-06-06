@@ -79,10 +79,11 @@ KAccountsView::KAccountsView(QWidget *parent) :
   // create the searchline widget
   // and insert it into the existing layout
   m_searchWidget = new K3ListViewSearchLineWidget(m_accountTree, m_accountTree->parentWidget());
-  Q3VBoxLayout* layout = dynamic_cast<Q3VBoxLayout*>(m_accountTree->parentWidget()->layout());
-  if(layout) {
-    layout->insertWidget(0, m_searchWidget);
-  }
+//   Q3VBoxLayout* layout = dynamic_cast<Q3VBoxLayout*>(m_accountTree->parentWidget()->layout());
+//   if(layout) {
+//     layout->insertWidget(0, m_searchWidget);
+//   }
+  hboxLayout->insertWidget(0, m_searchWidget);
 
   // setup icons for collapse and expand button
   KIconLoader *ic = KIconLoader::global();

@@ -136,6 +136,8 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   const int iconSize = (KMyMoneyGlobalSettings::iconSize()+1)*16;
   newStorage();
 
+  connect(this, SIGNAL(currentPageChanged (const QModelIndex, const QModelIndex)), this, SLOT(slotRefreshViews()));
+
   // Page 0
   m_homeView = new KHomeView();
   m_homeViewFrame = addPage( m_homeView, i18n("Home"));
