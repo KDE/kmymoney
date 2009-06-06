@@ -193,7 +193,7 @@ KMyMoneyWizard::KMyMoneyWizard(QWidget *parent, const char *name, bool modal, Qt
 #warning "port to kde4"
   //  clearWState(WState_Polished);
 
-  m_titleLabel->setText("No Title specified");
+  m_titleLabel->setText(i18n("No Title specified"));
   m_titleLabel->setRightImageFile("pics/titlelabel_background.png");
 
   m_finishButton->hide();
