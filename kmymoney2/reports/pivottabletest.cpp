@@ -117,7 +117,7 @@ void PivotTableTest::testNetWorthSingle()
   }
   catch(MyMoneyException *e)
   {
-    CPPUNIT_FAIL(e->what());
+    CPPUNIT_FAIL(qPrintable(e->what()));
     delete e;
   }
 }
@@ -934,7 +934,7 @@ void PivotTableTest::testInvestment(void)
   }
   catch(MyMoneyException *e)
   {
-    CPPUNIT_FAIL(e->what());
+    CPPUNIT_FAIL(qPrintable(e->what()));
     delete e;
   }
 }

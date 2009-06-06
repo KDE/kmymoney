@@ -484,7 +484,7 @@ void MyMoneySeqAccessMgrTest::testReparentAccount() {
 		CPPUNIT_ASSERT(m->account(ex1.id()).accountCount() == 2);
 		CPPUNIT_ASSERT(ex3.parentAccountId() == ex1.id());
 	} catch (MyMoneyException *e) {
-		std::cout << std::endl << e->what() << std::endl;
+		std::cout << std::endl << qPrintable(e->what()) << std::endl;
 		delete e;
 		CPPUNIT_FAIL("Unexpected exception");
 	}
@@ -1608,7 +1608,7 @@ void MyMoneySeqAccessMgrTest::testCurrencyList()
 
 void MyMoneySeqAccessMgrTest::testAccountList()
 {
-	Q3ValueList<MyMoneyAccount> accounts;
+	QList<MyMoneyAccount> accounts;
 	m->accountList(accounts);
 	CPPUNIT_ASSERT(accounts.count() == 0);
 	testAddNewAccount();

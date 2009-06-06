@@ -573,7 +573,7 @@ void MyMoneyFileTest::testRemoveStdAccount(const MyMoneyAccount& acc) {
         MyMoneyFileTransaction ft;
         try {
                 m->removeAccount(acc);
-                CPPUNIT_FAIL(txt.toLatin1());
+                CPPUNIT_FAIL(qPrintable(txt));
         } catch(MyMoneyException *e) {
                 ft.commit();
                 delete e;
@@ -660,7 +660,7 @@ void MyMoneyFileTest::testRemoveAccountTree() {
 }
 
 void MyMoneyFileTest::testAccountListRetrieval () {
-        Q3ValueList<MyMoneyAccount> list;
+        QList<MyMoneyAccount> list;
 
         storage->m_dirty = false;
         m->accountList(list);

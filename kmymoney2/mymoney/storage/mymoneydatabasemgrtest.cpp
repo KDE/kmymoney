@@ -62,7 +62,7 @@ void MyMoneyDatabaseMgrTest::testEmptyConstructor()
   CPPUNIT_ASSERT(m->nextReportID() == 0);
   CPPUNIT_ASSERT(m->institutionList().count() == 0);
 
-  Q3ValueList<MyMoneyAccount> accList;
+  QList<MyMoneyAccount> accList;
   m->accountList(accList);
   CPPUNIT_ASSERT(accList.count() == 0);
 
@@ -223,7 +223,7 @@ void MyMoneyDatabaseMgrTest::testNewAccount() {
   m->addAccount(a);
 
   CPPUNIT_ASSERT(m->accountId() == 1);
-  Q3ValueList<MyMoneyAccount> accList;
+  QList<MyMoneyAccount> accList;
   m->accountList(accList);
   CPPUNIT_ASSERT(accList.count() == 1);
   CPPUNIT_ASSERT((*(accList.begin())).name() == "AccountName");
@@ -276,7 +276,7 @@ void MyMoneyDatabaseMgrTest::testAddNewAccount() {
   m->setDirty();
 
   CPPUNIT_ASSERT(m->accountId() == 2);
-  Q3ValueList<MyMoneyAccount> accList;
+  QList<MyMoneyAccount> accList;
   m->accountList(accList);
   CPPUNIT_ASSERT(accList.count() == 2);
 
@@ -563,7 +563,7 @@ void MyMoneyDatabaseMgrTest::testReparentAccount() {
     CPPUNIT_ASSERT(m->account(ex1.id()).accountCount() == 2);
     CPPUNIT_ASSERT(ex3.parentAccountId() == ex1.id());
   } catch (MyMoneyException *e) {
-    std::cout << std::endl << e->what() << std::endl;
+    std::cout << std::endl << qPrintable(e->what()) << std::endl;
     delete e;
     CPPUNIT_FAIL("Unexpected exception");
   }
@@ -760,7 +760,7 @@ void MyMoneyDatabaseMgrTest::testCopyBudget() {
     CPPUNIT_ASSERT(testBudget.budgetStart() == newBudget.budgetStart());
     CPPUNIT_ASSERT(testBudget.name() == newBudget.name());
   } catch (QString& s) {
-    std::cout << "Error in testCopyBudget(): " << s << std::endl;
+    std::cout << "Error in testCopyBudget(): " << qPrintable(s) << std::endl;
     CPPUNIT_ASSERT(false);
   }
 }
@@ -1733,7 +1733,7 @@ void MyMoneyDatabaseMgrTest::testScheduleList() {
     m->addSchedule(schedule3);
     m->addSchedule(schedule4);
   } catch(MyMoneyException *e) {
-    qDebug("Error: %s", e->what().toLatin1());
+    qDebug("Error: %s", qPrintable(e->what()));
     delete e;
     CPPUNIT_FAIL("Unexpected exception");
   }
@@ -1980,7 +1980,7 @@ void MyMoneyDatabaseMgrTest::testAccountList()
     return;
   }
 
-  Q3ValueList<MyMoneyAccount> accounts;
+  QList<MyMoneyAccount> accounts;
   m->accountList(accounts);
   CPPUNIT_ASSERT(accounts.count() == 0);
   testAddNewAccount();

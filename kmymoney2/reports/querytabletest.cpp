@@ -279,7 +279,7 @@ void QueryTableTest::testQueryBasics()
   }
   catch(MyMoneyException *e)
   {
-    CPPUNIT_FAIL(e->what());
+    CPPUNIT_FAIL(qPrintable(e->what()));
     delete e;
   }
 
@@ -425,7 +425,7 @@ void QueryTableTest::testAccountQuery()
   }
   catch(MyMoneyException *e)
   {
-    CPPUNIT_FAIL(e->what());
+    CPPUNIT_FAIL(qPrintable(e->what()));
     delete e;
   }
 }
@@ -601,7 +601,7 @@ void QueryTableTest::testInvestment(void)
   }
   catch(MyMoneyException *e)
   {
-    CPPUNIT_FAIL(e->what());
+    CPPUNIT_FAIL(qPrintable(e->what()));
     delete e;
   }
 }
@@ -646,8 +646,8 @@ void QueryTableTest::testInvestment(void)
       CPPUNIT_ASSERT(rows.count() == 16);
 
       //this is to make sure that the dates of closing and opening balances and the balance numbers are ok
-      QString openingDate = KGlobal::locale()->formatDate(QDate(2004,1,1), true);
-      QString closingDate = KGlobal::locale()->formatDate(QDate(2005,9,1), true);
+      QString openingDate = KGlobal::locale()->formatDate(QDate(2004,1,1), KLocale::ShortDate);
+      QString closingDate = KGlobal::locale()->formatDate(QDate(2005,9,1), KLocale::ShortDate);
       CPPUNIT_ASSERT( html.find(openingDate + "</td><td class=\"left\"></td><td class=\"left\">"+i18n("Opening Balance")) > 0);
       CPPUNIT_ASSERT( html.find(closingDate + "</td><td class=\"left\"></td><td class=\"left\">"+i18n("Closing Balance")+"</td><td class=\"left\"></td><td class=\"value\"></td><td>&nbsp;-702.36</td></tr>") > 0);
       CPPUNIT_ASSERT( html.find(closingDate + "</td><td class=\"left\"></td><td class=\"left\">"+i18n("Closing Balance")+"</td><td class=\"left\"></td><td class=\"value\"></td><td>&nbsp;-705.69</td></tr>") > 0);
@@ -655,7 +655,7 @@ void QueryTableTest::testInvestment(void)
     }
     catch(MyMoneyException *e)
     {
-      CPPUNIT_FAIL(e->what());
+      CPPUNIT_FAIL(qPrintable(e->what()));
       delete e;
     }
 
@@ -686,7 +686,7 @@ void QueryTableTest::testTaxReport()
     QString html = qtbl_3.renderHTML();
     CPPUNIT_ASSERT(rows.count() == 1);
   } catch(MyMoneyException *e) {
-    CPPUNIT_FAIL(e->what());
+    CPPUNIT_FAIL(qPrintable(e->what()));
     delete e;
   }
 }

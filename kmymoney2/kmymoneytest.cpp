@@ -27,6 +27,7 @@
 
 #include <kcmdlineargs.h>
 #include <kapplication.h>
+#include <kaboutdata.h>
 
 #include "cppunit/TextTestRunner.h"
 #include "cppunit/TextTestResult.h"
@@ -82,7 +83,7 @@ class MyProgressListener : public CppUnit::TextTestProgressListener
     if(m_name != name) {
       if(m_name != "")
         std::cout << std::endl;
-      std::cout << "Running: " << name << std::endl;
+      std::cout << "Running: " << qPrintable(name) << std::endl;
       m_name = name;
     }
   }
@@ -92,16 +93,12 @@ private:
 
 void unexpectedException(MyMoneyException *e)
 {
-  std::string msg = "Unexpected exception: ";
-  msg += e->what().toLatin1();
-  msg += " thrown in ";
-  msg += e->file().toLatin1();
-  msg += ":";
-  char line[8];
-  sprintf(line, "%ld", e->line());
-  msg += line;
+  QString msg = QString("Unexpected exception: %1 thrown in %2:%3")
+                  .arg(e->what())
+                  .arg(e->file())
+                  .arg(e->line());
   delete e;
-  CPPUNIT_FAIL(msg);
+  CPPUNIT_FAIL(qPrintable(msg));
 }
 
 #endif // HAVE_LIBCPPUNIT
@@ -111,18 +108,21 @@ int main(int testargc, char** testargv)
   int rc = 0;
 
 #ifdef HAVE_LIBCPPUNIT
-  static const KCmdLineOptions options[] =
-  {
-     { "+[test_suite]", ("Optionally specify a test suite"), 0 },
-     { "", ("Optional arguments are for ctest"), 0 },
-     KCmdLineLastOption // End of options.
-  };
 
   // we seem to need a KApplication object to use KGlobal::locale()
-  KCmdLineArgs::init(testargc, testargv, testargv[0], "UNIT TESTS", "", "0.1");
+  KAboutData aboutData( "kmymoneytest",0, ki18n("KMyMoney Unittest"),
+    "0.1", ki18n( "\nKMyMoney, the Personal Finance Manager for KDE.\n\nPlease consider contributing to this project with code and/or suggestions." ), KAboutData::License_GPL,
+                        ki18n( "(c) 2000-2009 The KMyMoney development team" ), /*feature*/KLocalizedString(),
+    I18N_NOOP( "http://kmymoney2.sourceforge.net/" )/*,
+                                                      "kmymoney2-developer@lists.sourceforge.net")*/ );
+  KCmdLineOptions options;
+  options.add("+[test_suite]", ki18n("Optionally specify a test suite") );
+  options.add("", ki18n("Optional arguments are for ctest") );
+
+  KCmdLineArgs::init(testargc, testargv, &aboutData);
   KCmdLineArgs::addCmdLineOptions( options );
-  KApplication::disableAutoDcopRegistration();
-  KApplication app(false, false);
+  // KApplication::disableAutoDcopRegistration();
+  KApplication app;
 
 #ifdef _CHECK_MEMORY
   _CheckMemory_Init(0);

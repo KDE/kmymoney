@@ -202,7 +202,7 @@ void ConverterTest::testDateFormat()
   }
   catch (MyMoneyException* e)
   {
-    CPPUNIT_FAIL(e->what());
+    CPPUNIT_FAIL(qPrintable(e->what()));
   }
 }
 
