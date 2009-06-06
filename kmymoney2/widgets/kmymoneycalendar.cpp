@@ -267,10 +267,7 @@ kMyMoneyCalendar::dateChangedSlot(QDate date)
     kDebug() << "kMyMoneyCalendar::dateChangedSlot: date changed (" << date.year() << "/" << date.month() << "/" << date.day() << ").";
     line->setText(KGlobal::locale()->formatDate(date));
     d->selectWeek->setText(i18n("Week %1",weekOfYear(date)));
-#warning "port to kde4"
-#if 0
-    selectMonth->setText(MONTH_NAME(date.month(), date.year(), false));
-#endif
+    selectMonth->setText(MONTH_NAME(date.month(), date.year(), KCalendarSystem::ShortName));
     selectYear->setText(date.toString("yyyy"));
     emit(dateChanged(date));
 }
