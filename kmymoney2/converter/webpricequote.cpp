@@ -888,7 +888,7 @@ QDate MyMoneyDateFormat::convertString(const QString& _in, bool _strict, unsigne
   //
 
   QRegExp formatrex("%([mdy]+)(\\W+)%([mdy]+)(\\W+)%([mdy]+)",false /* case sensitive */);
-  if ( formatrex.search(m_format) == -1 )
+  if ( formatrex.indexIn(m_format) == -1 )
   {
     throw new MYMONEYEXCEPTION("Invalid format string");
   }
@@ -917,7 +917,7 @@ QDate MyMoneyDateFormat::convertString(const QString& _in, bool _strict, unsigne
   else
     inputrex.setPattern("(\\w+)\\W+(\\w+)\\W+(\\w+)");
 
-  if ( inputrex.search(_in) == -1 )
+  if ( inputrex.indexIn(_in) == -1 )
   {
     throw new MYMONEYEXCEPTION("Invalid input string");
   }
@@ -930,8 +930,6 @@ QDate MyMoneyDateFormat::convertString(const QString& _in, bool _strict, unsigne
   //
   // Convert the scanned parts into actual date components
   //
-#warning "port to kde4"
-#if 0
   unsigned day = 0, month = 0, year = 0;
   bool ok;
   QRegExp digitrex("(\\d+)");
@@ -939,7 +937,8 @@ QDate MyMoneyDateFormat::convertString(const QString& _in, bool _strict, unsigne
   QStringList::const_iterator it_format = formatParts.begin();
   while ( it_scanned != scannedParts.end() )
   {
-    switch ( (*it_format)[0] )
+    // decide upon the first character of the part
+    switch ( (*it_format).at(0).cell() )
     {
     case 'd':
       // remove any extraneous non-digits (e.g. read "3rd" as 3)
@@ -957,9 +956,8 @@ QDate MyMoneyDateFormat::convertString(const QString& _in, bool _strict, unsigne
         unsigned i = 1;
         while ( i <= 12 )
         {
-#warning "port it to kde4"
           if(KGlobal::locale()->calendar()->monthName(i, 2000).toLower() == *it_scanned
-          || KGlobal::locale()->calendar()->monthName(i, 2000/*, KLocale::ShortDate*/).toLower() == *it_scanned)
+          || KGlobal::locale()->calendar()->monthName(i, 2000, KCalendarSystem::ShortName).toLower() == *it_scanned)
             month = i;
           ++i;
         }
@@ -1011,8 +1009,6 @@ QDate MyMoneyDateFormat::convertString(const QString& _in, bool _strict, unsigne
     throw new MYMONEYEXCEPTION(QString("Invalid date (yr%1 mo%2 dy%3)").arg(year).arg(month).arg(day));
 
   return result;
-#endif
-  return QDate();
 }
 
 //
