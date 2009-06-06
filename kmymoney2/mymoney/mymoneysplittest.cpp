@@ -251,8 +251,11 @@ void MyMoneySplitTest::testWriteXML() {
 	QString ref = QString(
 		"<!DOCTYPE TEST>\n"
 		"<SPLIT-CONTAINER>\n"
-		" <SPLIT payee=\"P000001\" reconciledate=\"\" shares=\"96379/100\" action=\"Deposit\" bankid=\"SPID\" number=\"124\" reconcileflag=\"2\" memo=\"\" value=\"96379/1000\" id=\"\" account=\"A000076\" />\n"
+		" <SPLIT payee=\"P000001\" reconcileflag=\"2\" shares=\"96379/100\" reconciledate=\"\" action=\"Deposit\" bankid=\"SPID\" account=\"A000076\" number=\"124\" value=\"96379/1000\" memo=\"\" id=\"\" />\n"
 		"</SPLIT-CONTAINER>\n");
+
+	//qDebug("ref = '%s'", qPrintable(ref));
+	//qDebug("doc = '%s'", qPrintable(doc.toString()));
 
 	CPPUNIT_ASSERT(doc.toString() == ref);
 }

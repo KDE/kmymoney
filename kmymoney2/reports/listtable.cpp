@@ -184,10 +184,10 @@ namespace reports {
     // the things that we care about for query reports are:
     // how to group the rows, what columns to display, and what field
     // to subtotal on
-    QStringList groups = QStringList::split ( ",", m_group );
-    QStringList columns = QStringList::split ( ",", m_columns );
+    QStringList groups = m_group.split(",");
+    QStringList columns = m_columns.split(",");
     columns += m_subtotal;
-    QStringList postcolumns = QStringList::split ( ",", m_postcolumns );
+    QStringList postcolumns = m_postcolumns.split(",");
     columns += postcolumns;
 
     //
@@ -246,17 +246,17 @@ namespace reports {
     i18nHeaders["currentbalance"] = i18n ( "Current Balance" );
 
     // the list of columns which represent money, so we can display them correctly
-    QStringList moneyColumns = QStringList::split ( ",", "value,shares,price,latestprice,netinvvalue,buys,sells,cashincome,reinvestincome,startingbal,fees,interest,payment,balance,balancewarning,maxbalancelimit,creditwarning,maxcreditlimit,loanamount,periodicpayment,finalpayment,currentbalance" );
+    QStringList moneyColumns = QString("value,shares,price,latestprice,netinvvalue,buys,sells,cashincome,reinvestincome,startingbal,fees,interest,payment,balance,balancewarning,maxbalancelimit,creditwarning,maxcreditlimit,loanamount,periodicpayment,finalpayment,currentbalance" ).split(",");
 
     // the list of columns which represent shares, which is like money except the
     // transaction currency will not be displayed
-    QStringList sharesColumns = QStringList::split ( ",", "shares" );
+    QStringList sharesColumns = QString( "shares" ).split(",");
 
     // the list of columns which represent a percentage, so we can display them correctly
-    QStringList percentColumns = QStringList::split ( ",", "return,returninvestment,interestrate" );
+    QStringList percentColumns = QString("return,returninvestment,interestrate" ).split(",");
 
     // the list of columns which represent dates, so we can display them correctly
-    QStringList dateColumns = QStringList::split ( ",", "postdate,entrydate,nextduedate,openingdate,nextinterestchange" );
+    QStringList dateColumns = QString("postdate,entrydate,nextduedate,openingdate,nextinterestchange" ).split(",");
 
     result += "<table class=\"report\">\n<thead><tr class=\"itemheader\">";
 
@@ -366,6 +366,10 @@ namespace reports {
             csv +=
               "\"" + i18n ( "Total" ) + " " + oldName + "\",\"" + subtotal_csv + "\"\n";
           }
+
+          // going beyond begin() is not caught by the iterator
+          if(it_group == groupIteratorList.begin())
+            break;
           --it_group;
         }
       }
@@ -561,6 +565,10 @@ namespace reports {
                   i18n ( "Total" ) + " " + ( *it_group ).oldName() + "</td>"
                   "<td>" + subtotal_html + "</td></tr>\n";
         csv += "\"" + i18n ( "Total" ) + " " + ( *it_group ).oldName() + "\",\"" + subtotal_csv + "\"\n";
+
+        // going beyond begin() is not caught by the iterator
+        if(it_group == groupIteratorList.begin())
+          break;
         --it_group;
       }
 

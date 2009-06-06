@@ -1429,7 +1429,7 @@ const MyMoneySecurity MyMoneySeqAccessMgr::security(const QString& id) const
   QMap<QString, MyMoneySecurity>::ConstIterator it = m_securitiesList.find(id);
   if(it != m_securitiesList.end())
   {
-    return it.data();
+    return it.value();
   }
 
   return MyMoneySecurity();
@@ -1729,6 +1729,7 @@ const MyMoneyPrice MyMoneySeqAccessMgr::price(const QString& fromId, const QStri
   MyMoneyPrice rc;
   MyMoneyPriceEntries::ConstIterator it;
   QDate date(_date);
+  MyMoneySecurityPair pricePair(fromId, toId);
 
   // If no valid date is passed, we use today's date.
   if(!date.isValid())
@@ -1736,19 +1737,23 @@ const MyMoneyPrice MyMoneySeqAccessMgr::price(const QString& fromId, const QStri
 
   // If the caller selected an exact entry, we can search for
   // it using the date as the key
-  if(exactDate) {
-    it = m_priceList[MyMoneySecurityPair(fromId, toId)].find(date);
-    if(it != m_priceList[MyMoneySecurityPair(fromId, toId)].end())
-      rc = *it;
-
-  } else {
-    // otherwise, we must scan the map for the previous price entry
-    for(it = m_priceList[MyMoneySecurityPair(fromId, toId)].begin(); it != m_priceList[MyMoneySecurityPair(fromId, toId)].end(); ++it) {
-      if(date < it.key())
-        break;
-
-      if(date >= it.key())
+  QMap<MyMoneySecurityPair, MyMoneyPriceEntries>::const_iterator itm;
+  itm = m_priceList.find(pricePair);
+  if(itm != m_priceList.end()) {
+    if(exactDate) {
+      it = itm.value().find(date);
+      if(it != itm.value().end())
         rc = *it;
+
+    } else {
+      // otherwise, we must scan the map for the previous price entry
+      for(it = itm.value().begin(); it != itm.value().end(); ++it) {
+        if(date < it.key())
+          break;
+
+        if(date >= it.key())
+          rc = *it;
+      }
     }
   }
   return rc;

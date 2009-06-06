@@ -23,6 +23,7 @@
 #include "mymoneyobject.h"
 #include "mymoneyutils.h"
 #include "mymoneyexception.h"
+#include <QString>
 
 const QString MyMoneyObject::m_emptyId;
 

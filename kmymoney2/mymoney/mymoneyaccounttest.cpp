@@ -300,7 +300,7 @@ void MyMoneyAccountTest::testWriteXML() {
 	QString ref = QString(
 		"<!DOCTYPE TEST>\n"
 		"<ACCOUNT-CONTAINER>\n"
-		" <ACCOUNT parentaccount=\"Parent\" lastmodified=\"%1\" lastreconciled=\"\" institution=\"B000001\" number=\"465500\" opened=\"%2\" type=\"9\" id=\"A000001\" name=\"AccountName\" description=\"Desc\" >\n"
+		" <ACCOUNT description=\"Desc\" parentaccount=\"Parent\" opened=\"%2\" number=\"465500\" lastmodified=\"%1\" type=\"9\" id=\"A000001\" lastreconciled=\"\" institution=\"B000001\" name=\"AccountName\" >\n"
 		"  <SUBACCOUNTS>\n"
 		"   <SUBACCOUNT id=\"A000002\" />\n"
 		"  </SUBACCOUNTS>\n"
@@ -311,6 +311,8 @@ void MyMoneyAccountTest::testWriteXML() {
 		"</ACCOUNT-CONTAINER>\n").
 			arg(QDate::currentDate().toString(Qt::ISODate)).arg(QDate::currentDate().toString(Qt::ISODate));
 
+	//qDebug("ref = '%s'", qPrintable(ref));
+	//qDebug("doc = '%s'", qPrintable(doc.toString()));
 	CPPUNIT_ASSERT(doc.toString() == ref);
 }
 

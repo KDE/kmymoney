@@ -1,8 +1,6 @@
 #include <stdint.h>
-#include <qmap.h>
-#include <q3ptrstack.h>
-//Added by qt3to4:
-#include <Q3ValueList>
+#include <QMap>
+#include <QStack>
 #include <mymoneyexception.h>
 
 #ifndef MYMONEYMAP_H
@@ -60,8 +58,12 @@ public:
       throw new MYMONEYEXCEPTION("No transaction started to commit changes");
 
     bool rc = m_stack.count() > 1;
-    m_stack.setAutoDelete(true);
-    m_stack.clear();
+    // remove all actions from the stack
+    MyMoneyMapAction* action;
+    while(m_stack.count()) {
+      action = m_stack.pop();
+      delete action;
+    }
     return rc;
   }
 
@@ -112,18 +114,23 @@ public:
   }
 
 
-  inline Q3ValueList<T> values(void) const
+  inline QList<T> values(void) const
   {
     return QMap<Key,T>::values();
   }
 
-  inline Q3ValueList<Key> keys(void) const
+  inline QList<Key> keys(void) const
   {
     return QMap<Key,T>::keys();
   }
 
   const T& operator[] ( const Key& k ) const
-        { /*QT_CHECK_INVALID_MAP_ELEMENT;*/ /*PORT ME KDE4*/ return QMap<Key,T>::operator[](k); }
+  {
+    return find(k).value();
+#if 0
+/*QT_CHECK_INVALID_MAP_ELEMENT;*/ /*PORT ME KDE4*/ return QMap<Key,T>::operator[](k);
+#endif
+  }
 
   inline Q_TYPENAME QMap<Key, T>::const_iterator find(const Key& k) const
   {
@@ -265,7 +272,7 @@ private:
   };
 
 protected:
-  Q3PtrStack<MyMoneyMapAction> m_stack;
+  QStack<MyMoneyMapAction *> m_stack;
 };
 
 #if MY_OWN_DEBUG
@@ -281,7 +288,7 @@ main()
   // this should not be possible
   // container["a"] = acc;
 
-  Q3ValueList<MyMoneyAccount> list;
+  QList<MyMoneyAccount> list;
   list = container.values();
 
   MyMoneyAccount b;

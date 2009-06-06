@@ -1040,14 +1040,14 @@ void MyMoneyScheduleTest::testWriteXML() {
 	QString ref = QString(
 		"<!DOCTYPE TEST>\n"
 		"<SCHEDULE-CONTAINER>\n"
-		" <SCHEDULED_TX startDate=\"%1\" autoEnter=\"1\" weekendOption=\"2\" lastPayment=\"%2\" paymentType=\"1\" endDate=\"\" type=\"1\" id=\"SCH0001\" name=\"A Name\" fixed=\"1\" occurenceMultiplier=\"123\" occurence=\"4\" >\n"
+		" <SCHEDULED_TX paymentType=\"1\" autoEnter=\"1\" occurenceMultiplier=\"123\" startDate=\"%1\" lastPayment=\"%2\" occurence=\"4\" weekendOption=\"2\" type=\"1\" id=\"SCH0001\" name=\"A Name\" endDate=\"\" fixed=\"1\" >\n"
 		"  <PAYMENTS>\n"
 		"   <PAYMENT date=\"%3\" />\n"
 		"  </PAYMENTS>\n"
-		"  <TRANSACTION postdate=\"2001-12-28\" memo=\"Wohnung:Miete\" id=\"\" commodity=\"EUR\" entrydate=\"2003-09-29\" >\n"
+		"  <TRANSACTION postdate=\"2001-12-28\" commodity=\"EUR\" memo=\"Wohnung:Miete\" id=\"\" entrydate=\"2003-09-29\" >\n"
 		"   <SPLITS>\n"
-		"    <SPLIT payee=\"P000001\" reconciledate=\"\" shares=\"96379/100\" action=\"\" bankid=\"\" number=\"\" reconcileflag=\"2\" memo=\"\" value=\"96379/100\" id=\"S0001\" account=\"A000076\" />\n"
-		"    <SPLIT payee=\"\" reconciledate=\"\" shares=\"-96379/100\" action=\"\" bankid=\"\" number=\"\" reconcileflag=\"1\" memo=\"\" value=\"-96379/100\" id=\"S0002\" account=\"A000276\" />\n"
+		"    <SPLIT payee=\"P000001\" reconcileflag=\"2\" shares=\"96379/100\" reconciledate=\"\" action=\"\" bankid=\"\" account=\"A000076\" number=\"\" value=\"96379/100\" memo=\"\" id=\"S0001\" />\n"
+		"    <SPLIT payee=\"\" reconcileflag=\"1\" shares=\"-96379/100\" reconciledate=\"\" action=\"\" bankid=\"\" account=\"A000276\" number=\"\" value=\"-96379/100\" memo=\"\" id=\"S0002\" />\n"
 		"   </SPLITS>\n"
 		"   <KEYVALUEPAIRS>\n"
 		"    <PAIR key=\"key\" value=\"value\" />\n"
@@ -1058,6 +1058,9 @@ void MyMoneyScheduleTest::testWriteXML() {
 	).arg(QDate::currentDate().toString(Qt::ISODate))
 	 .arg(QDate::currentDate().toString(Qt::ISODate))
 	 .arg(QDate::currentDate().toString(Qt::ISODate));
+
+	//qDebug("ref = '%s'", qPrintable(ref));
+	//qDebug("doc = '%s'", qPrintable(doc.toString()));
 
 	CPPUNIT_ASSERT(doc.toString() == ref);
 }

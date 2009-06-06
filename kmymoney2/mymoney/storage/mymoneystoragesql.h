@@ -747,7 +747,7 @@ private:
     */
 //  QValueList<QString> m_payeeList;
 
-  void alert(QString s) const {qDebug("%s", s.ascii());}; // FIXME: remove...
+  void alert(QString s) const { qDebug("%s", qPrintable(s)); } // FIXME: remove...
   /** The following keeps track of commitment units (known as transactions in SQL
     * though it would be confusing to use that term within KMM). It is implemented
     * as a stack for debug purposes. Long term, probably a count would suffice

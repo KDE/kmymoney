@@ -120,7 +120,7 @@ public:
     const QString& id( void ) const { return m_id; }
     bool budgetSubaccounts( void ) const { return m_budgetsubaccounts; }
     eBudgetLevel budgetLevel( void ) const { return m_budgetlevel; }
-    const PeriodGroup& period( const QDate &_date ) const { return m_periods[_date]; }
+    PeriodGroup period( const QDate &_date ) const { return m_periods[_date]; }
     const QMap<QDate, PeriodGroup>& getPeriods( void ) const { return m_periods; }
     void clearPeriods(void) { m_periods.clear(); }
     const MyMoneyMoney balance( void ) const

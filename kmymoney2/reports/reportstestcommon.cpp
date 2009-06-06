@@ -19,8 +19,7 @@
 #include <q3valuevector.h>
 #include <qdom.h>
 #include <qfile.h>
-//Added by qt3to4:
-#include <Q3TextStream>
+#include <QTextStream>
 
 #include <kdebug.h>
 #include <kdeversion.h>
@@ -327,7 +326,7 @@ void writeTabletoHTML( const PivotTable& table, const QString& _filename )
 
   QFile g( filename );
   g.open( QIODevice::WriteOnly );
-  Q3TextStream(&g) << table.renderHTML();
+  QTextStream(&g) << table.renderHTML();
   g.close();
 
 }
@@ -344,7 +343,7 @@ void writeTabletoHTML( const QueryTable& table, const QString& _filename )
 
   QFile g( filename );
   g.open( QIODevice::WriteOnly );
-  Q3TextStream(&g) << table.renderHTML();
+  QTextStream(&g) << table.renderHTML();
   g.close();
 }
 
@@ -360,7 +359,7 @@ void writeTabletoCSV( const PivotTable& table, const QString& _filename )
 
   QFile g( filename );
   g.open( QIODevice::WriteOnly );
-  Q3TextStream(&g) << table.renderCSV();
+  QTextStream(&g) << table.renderCSV();
   g.close();
 
 }
@@ -377,7 +376,7 @@ void writeTabletoCSV( const QueryTable& table, const QString& _filename )
 
   QFile g( filename );
   g.open( QIODevice::WriteOnly );
-  Q3TextStream(&g) << table.renderCSV();
+  QTextStream(&g) << table.renderCSV();
   g.close();
 
 }
@@ -399,8 +398,8 @@ void writeRCFtoXML( const MyMoneyReport& filter, const QString& _filename )
   QFile g( filename );
   g.open( QIODevice::WriteOnly );
 
-  Q3TextStream stream(&g);
-  stream.setEncoding(Q3TextStream::UnicodeUTF8);
+  QTextStream stream(&g);
+  stream.setCodec("UTF-8");
   stream << doc->toString();
   g.close();
 
@@ -478,7 +477,7 @@ void XMLandback( MyMoneyReport& filter )
 MyMoneyMoney searchHTML(const QString& _html, const QString& _search)
 {
   QRegExp re(QString("%1[<>/td]*([\\-.0-9,]*)").arg(_search));
-  re.search(_html);
+  re.indexIn(_html);
   QString found = re.cap(1);
   found.remove(',');
 

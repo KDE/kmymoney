@@ -387,9 +387,9 @@ void MyMoneyTransactionTest::testWriteXML() {
 	QString ref = QString(
                 "<!DOCTYPE TEST>\n"
                 "<TRANSACTION-CONTAINER>\n"
-		" <TRANSACTION postdate=\"2001-12-28\" memo=\"Wohnung:Miete\" id=\"T000000000000000001\" commodity=\"EUR\" entrydate=\"2003-09-29\" >\n"
+		" <TRANSACTION postdate=\"2001-12-28\" commodity=\"EUR\" memo=\"Wohnung:Miete\" id=\"T000000000000000001\" entrydate=\"2003-09-29\" >\n"
 		"  <SPLITS>\n"
-		"   <SPLIT payee=\"P000001\" reconciledate=\"\" shares=\"96379/100\" action=\"Withdrawal\" bankid=\"SPID\" number=\"\" reconcileflag=\"2\" memo=\"\" value=\"96379/100\" id=\"S0001\" account=\"A000076\" />\n"
+		"   <SPLIT payee=\"P000001\" reconcileflag=\"2\" shares=\"96379/100\" reconciledate=\"\" action=\"Withdrawal\" bankid=\"SPID\" account=\"A000076\" number=\"\" value=\"96379/100\" memo=\"\" id=\"S0001\" />\n"
 		"  </SPLITS>\n"
 		"  <KEYVALUEPAIRS>\n"
 		"   <PAIR key=\"key\" value=\"value\" />\n"
@@ -398,6 +398,9 @@ void MyMoneyTransactionTest::testWriteXML() {
                 "</TRANSACTION-CONTAINER>\n"
 
 	);
+
+	//qDebug("ref = '%s'", qPrintable(ref));
+	//qDebug("doc = '%s'", qPrintable(doc.toString()));
 
 	CPPUNIT_ASSERT(doc.toString() == ref);
 }

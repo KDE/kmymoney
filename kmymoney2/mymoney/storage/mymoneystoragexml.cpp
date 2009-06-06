@@ -806,7 +806,7 @@ QDomElement MyMoneyStorageXML::writeKeyValuePairs(const QMap<QString, QString> p
     {
       QDomElement pair = m_doc->createElement("PAIR");
       pair.setAttribute("key", it.key());
-      pair.setAttribute("value", it.data());
+      pair.setAttribute("value", it.value());
       keyValPairs.appendChild(pair);
     }
     return keyValPairs;
@@ -858,6 +858,7 @@ void MyMoneyStorageXML::signalProgress(int current, int total, const QString& ms
     (*m_progressCallback)(current, total, msg);
 }
 
+#if 0
 /*!
     This convenience function returns all of the remaining data in the
     device.
@@ -907,4 +908,5 @@ QByteArray QIODevice::readAll()
     return ba;
   }
 }
+#endif
 

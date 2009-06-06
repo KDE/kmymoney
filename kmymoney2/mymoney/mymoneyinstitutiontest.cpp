@@ -213,8 +213,8 @@ void MyMoneyInstitutionTest::testWriteXML() {
 	QString ref = QString(
 		"<!DOCTYPE TEST>\n"
 		"<INSTITUTION-CONTAINER>\n"
-		" <INSTITUTION sortcode=\"sortcode\" id=\"I00001\" manager=\"manager\" name=\"name\" >\n"
-		"  <ADDRESS street=\"street\" zip=\"postcode\" city=\"town\" telephone=\"telephone\" />\n"
+		" <INSTITUTION manager=\"manager\" id=\"I00001\" name=\"name\" sortcode=\"sortcode\" >\n"
+		"  <ADDRESS street=\"street\" telephone=\"telephone\" zip=\"postcode\" city=\"town\" />\n"
 		"  <ACCOUNTIDS>\n"
 		"   <ACCOUNTID id=\"A000001\" />\n"
 		"   <ACCOUNTID id=\"A000003\" />\n"
@@ -224,6 +224,9 @@ void MyMoneyInstitutionTest::testWriteXML() {
                 "  </KEYVALUEPAIRS>\n"
 		" </INSTITUTION>\n"
 		"</INSTITUTION-CONTAINER>\n");
+
+	// qDebug("ref = '%s'", qPrintable(ref));
+	// qDebug("doc = '%s'", qPrintable(doc.toString()));
 
 	CPPUNIT_ASSERT(doc.toString() == ref);
 }

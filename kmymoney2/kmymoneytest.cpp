@@ -74,11 +74,11 @@ class MyProgressListener : public CppUnit::TextTestProgressListener
 {
   void startTest(CppUnit::Test *test) {
     QString name = test->getName().c_str();
-    if(name.find('.') != -1) {    // in CPPUNIT 1.8.0
+    if(name.indexOf('.') != -1) {    // in CPPUNIT 1.8.0
       name = name.mid(2);   // cut off first 2 chars
-      name = name.left(name.find('.'));
-    } else if(name.find("::") != -1) {  // in CPPUNIT 1.9.14
-      name = name.left(name.find("::"));
+      name = name.left(name.indexOf('.'));
+    } else if(name.indexOf("::") != -1) {  // in CPPUNIT 1.9.14
+      name = name.left(name.indexOf("::"));
     }
     if(m_name != name) {
       if(m_name != "")
@@ -130,14 +130,14 @@ int main(int testargc, char** testargv)
 
   // mymoney tests
   //CPPUNIT_TEST_SUITE_REGISTRATION(KReportsViewTest);
+  CPPUNIT_TEST_SUITE_REGISTRATION(MyMoneyMoneyTest);
   CPPUNIT_TEST_SUITE_REGISTRATION(MyMoneyMapTest);
   CPPUNIT_TEST_SUITE_REGISTRATION(ConverterTest);
   CPPUNIT_TEST_SUITE_REGISTRATION(MyMoneyKeyValueContainerTest);
   CPPUNIT_TEST_SUITE_REGISTRATION(MyMoneySplitTest);
-  CPPUNIT_TEST_SUITE_REGISTRATION(MyMoneyMoneyTest);
   CPPUNIT_TEST_SUITE_REGISTRATION(MyMoneyAccountTest);
   CPPUNIT_TEST_SUITE_REGISTRATION(MyMoneyScheduleTest);
-  CPPUNIT_TEST_SUITE_REGISTRATION(MyMoneyDatabaseMgrTest);
+  //CPPUNIT_TEST_SUITE_REGISTRATION(MyMoneyDatabaseMgrTest);
   CPPUNIT_TEST_SUITE_REGISTRATION(MyMoneySeqAccessMgrTest);
   CPPUNIT_TEST_SUITE_REGISTRATION(MyMoneyFileTest);
   CPPUNIT_TEST_SUITE_REGISTRATION(MyMoneyObjectTest);
@@ -147,7 +147,7 @@ int main(int testargc, char** testargv)
   CPPUNIT_TEST_SUITE_REGISTRATION(MyMoneySecurityTest);
   CPPUNIT_TEST_SUITE_REGISTRATION(MyMoneyForecastTest);
   CPPUNIT_TEST_SUITE_REGISTRATION(MyMoneyExceptionTest);
-  CPPUNIT_TEST_SUITE_REGISTRATION(MyMoneyObserverTest);
+  //CPPUNIT_TEST_SUITE_REGISTRATION(MyMoneyObserverTest);
   CPPUNIT_TEST_SUITE_REGISTRATION(MyMoneyPriceTest);
   CPPUNIT_TEST_SUITE_REGISTRATION(MyMoneyPayeeTest);
   CPPUNIT_TEST_SUITE_REGISTRATION(PivotGridTest);
