@@ -120,14 +120,14 @@ MyMoneyMoney::MyMoneyMoney(const QString& pszAmount)
 
   // take care of prices given in the form "8 5/16"
   regExp.setPattern("(\\d+)\\s+(\\d+/\\d+)");
-  if(regExp.search(pszAmount) > -1) {
+  if(regExp.indexIn(pszAmount) > -1) {
     *this = MyMoneyMoney(regExp.cap(1)) + MyMoneyMoney(regExp.cap(2));
     return;
   }
 
   // take care of our internal representation
   regExp.setPattern("(\\-?\\d+)/(\\d+)");
-  if(regExp.search(pszAmount) > -1) {
+  if(regExp.indexIn(pszAmount) > -1) {
     // string matches the internal representation
     fromString(pszAmount);
     return;
@@ -152,35 +152,38 @@ MyMoneyMoney::MyMoneyMoney(const QString& pszAmount)
     negChars = "()";
   }
   validChars += negChars;
-  // qDebug("0: '%s'", validChars.data());
+  // qDebug("0: '%s'", qPrintable(validChars));
 
   QRegExp invChars(QString("[^%1]").arg(validChars));
-  // qDebug("1: '%s'", res.data());
+  // qDebug("1: '%s'", qPrintable(res));
   res.remove(invChars);
 
   QRegExp negCharSet(QString("[%1]").arg(negChars));
   bool isNegative = false;
-  if(res.find(negCharSet) != -1) {
+  if(res.indexOf(negCharSet) != -1) {
     isNegative = true;
     res.remove(negCharSet);
   }
-  // qDebug("2: '%s'", res.data());
+  // qDebug("2: '%s'", qPrintable(res));
   int pos;
 
-  // qDebug("3: '%s'", res.data());
-  if((pos = res.find(_decimalSeparator)) != -1) {
+  // qDebug("3: '%s'", qPrintable(res));
+  if((pos = res.indexOf(_decimalSeparator)) != -1) {
     // make sure, we get the denominator right
     m_denom = precToDenom(res.length() - pos - 1);
 
     // now remove the decimal symbol
     res.remove(pos, 1);
   }
-  // qDebug("4: '%s'", res.data());
+  // qDebug("4: '%s'", qPrintable(res));
   if(res.length() > 0)
-    m_num =  res .toLong();
+    m_num =  res.toLongLong();
 
   if(isNegative)
     m_num = -m_num;
+
+  // qDebug("5: %Ld", m_num);
+  // qDebug("6: %Ld", m_denom);
 }
 
 QString MyMoneyMoney::formatMoney(int denom, bool showThousandSeparator) const
@@ -344,7 +347,7 @@ void MyMoneyMoney::fromString(const QString& str)
   m_denom = 1;
 
   QRegExp regExp("(\\-?\\d+)/(\\d+)");
-  int pos = regExp.search(str);
+  int pos = regExp.indexIn(str);
   if(pos > -1) {
     m_num = regExp.cap(1).toLong();
     m_denom = regExp.cap(2).toLong();
