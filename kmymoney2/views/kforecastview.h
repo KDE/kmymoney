@@ -34,7 +34,7 @@
 #include "kmymoneyaccounttreeforecast.h"
 //#include "kreportchartview.h"
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 //using namespace reports;
 
@@ -125,7 +125,7 @@ protected slots:
    * This is used later to create an instance of KMyMoneyAccountTreeForecastItem
    *
    */
-  Q3ValueList<MyMoneyPrice> getAccountPrices(const MyMoneyAccount& acc);
+  QList<MyMoneyPrice> getAccountPrices(const MyMoneyAccount& acc);
 
 private:
   void addAssetLiabilityRows(const MyMoneyForecast& forecast);

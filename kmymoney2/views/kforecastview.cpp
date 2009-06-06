@@ -24,7 +24,7 @@
 #include <q3textedit.h>
 #include <qlayout.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -96,6 +96,7 @@ void KForecastView::slotTabChanged(QWidget* _tab)
 
 void KForecastView::loadForecast(ForecastViewTab tab)
 {
+  qDebug("slot Load Forecast");
   if(m_needReload[tab]) {
     switch(tab) {
       case ListView:
@@ -215,7 +216,7 @@ void KForecastView::loadListView(void)
 void KForecastView::loadSummaryView(void)
 {
   MyMoneyForecast forecast;
-  Q3ValueList<MyMoneyAccount> accList;
+  QList<MyMoneyAccount> accList;
   int dropMinimum;
   int dropZero;
 
@@ -249,7 +250,7 @@ void KForecastView::loadSummaryView(void)
   //Get all accounts of the right type to calculate forecast
   m_nameIdx.clear();
   accList = forecast.accountList();
-  Q3ValueList<MyMoneyAccount>::const_iterator accList_t = accList.begin();
+  QList<MyMoneyAccount>::const_iterator accList_t = accList.begin();
   for(; accList_t != accList.end(); ++accList_t ) {
     MyMoneyAccount acc = *accList_t;
     if(m_nameIdx[acc.id()] != acc.id()) { //Check if the account is there
@@ -363,7 +364,7 @@ void KForecastView::loadSummaryView(void)
 void KForecastView::loadAdvancedView(void)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
-  Q3ValueList<MyMoneyAccount> accList;
+  QList<MyMoneyAccount> accList;
   MyMoneySecurity baseCurrency = file->baseCurrency();
   MyMoneyForecast forecast;
   int daysToBeginDay;
@@ -379,7 +380,7 @@ void KForecastView::loadAdvancedView(void)
   //Get all accounts of the right type to calculate forecast
   m_nameIdx.clear();
   accList = forecast.accountList();
-  Q3ValueList<MyMoneyAccount>::const_iterator accList_t = accList.begin();
+  QList<MyMoneyAccount>::const_iterator accList_t = accList.begin();
   for(; accList_t != accList.end(); ++accList_t ) {
     MyMoneyAccount acc = *accList_t;
     if(m_nameIdx[acc.id()] != acc.id()) { //Check if the account is there
@@ -439,8 +440,8 @@ void KForecastView::loadAdvancedView(void)
     int it_c = 1; // iterator for the columns of the listview
 
     //get minimum balance list
-    Q3ValueList<QDate> minBalanceList = forecast.accountMinimumBalanceDateList(acc);
-    Q3ValueList<QDate>::Iterator t_min;
+    QList<QDate> minBalanceList = forecast.accountMinimumBalanceDateList(acc);
+    QList<QDate>::Iterator t_min;
     for(t_min = minBalanceList.begin(); t_min != minBalanceList.end() ; ++t_min)
     {
       QDate minDate = *t_min;
@@ -456,8 +457,8 @@ void KForecastView::loadAdvancedView(void)
     }
 
     //get maximum balance list
-    Q3ValueList<QDate> maxBalanceList = forecast.accountMaximumBalanceDateList(acc);
-    Q3ValueList<QDate>::Iterator t_max;
+    QList<QDate> maxBalanceList = forecast.accountMaximumBalanceDateList(acc);
+    QList<QDate>::Iterator t_max;
     for(t_max = maxBalanceList.begin(); t_max != maxBalanceList.end() ; ++t_max)
     {
       QDate maxDate = *t_max;
@@ -516,10 +517,10 @@ void KForecastView::loadBudgetView(void)
   m_budgetList->show();
 }
 
-Q3ValueList<MyMoneyPrice> KForecastView::getAccountPrices(const MyMoneyAccount& acc)
+QList<MyMoneyPrice> KForecastView::getAccountPrices(const MyMoneyAccount& acc)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
-  Q3ValueList<MyMoneyPrice> prices;
+  QList<MyMoneyPrice> prices;
   MyMoneySecurity security = file->baseCurrency();
     try {
       if(acc.isInvest()) {
@@ -546,7 +547,7 @@ void KForecastView::addAssetLiabilityRows(const MyMoneyForecast& forecast)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
-  Q3ValueList<MyMoneyPrice> basePrices;
+  QList<MyMoneyPrice> basePrices;
   m_assetItem = new KMyMoneyAccountTreeForecastItem( m_totalItem, file->asset(), forecast, basePrices, file->baseCurrency() );
   m_assetItem->setOpen(true);
   m_liabilityItem = new KMyMoneyAccountTreeForecastItem( m_totalItem, file->liability(), forecast, basePrices, file->baseCurrency());
@@ -557,7 +558,7 @@ void KForecastView::addIncomeExpenseRows(const MyMoneyForecast& forecast)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
-  Q3ValueList<MyMoneyPrice> basePrices;
+  QList<MyMoneyPrice> basePrices;
   m_incomeItem = new KMyMoneyAccountTreeForecastItem( m_totalItem, file->income(), forecast, basePrices, file->baseCurrency() );
   m_incomeItem->setOpen(true);
   m_expenseItem = new KMyMoneyAccountTreeForecastItem( m_totalItem, file->expense(), forecast, basePrices, file->baseCurrency());
@@ -631,7 +632,7 @@ void KForecastView::loadAccounts(MyMoneyForecast& forecast, const MyMoneyAccount
     MyMoneyMoney vAmountMM;
 
     //get prices
-    Q3ValueList<MyMoneyPrice> prices = getAccountPrices(subAccount);
+    QList<MyMoneyPrice> prices = getAccountPrices(subAccount);
 
     forecastItem = new KMyMoneyAccountTreeForecastItem( parentItem, subAccount, forecast, prices, currency, static_cast<KMyMoneyAccountTreeForecastItem::EForecastViewType>(forecastType) );
     forecastItem->setOpen(true);
