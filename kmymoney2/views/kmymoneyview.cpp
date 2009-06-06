@@ -187,7 +187,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   // Page 3
   //m_scheduleViewFrame = addVBoxPage( i18n("Scheduled\ntransactions"), i18n("Bills & Reminders"),DesktopIcon("schedule", iconSize));
   m_scheduledView = new KScheduledView();
-  m_scheduleViewFrame = addPage( m_accountsView, i18n("Scheduled\ntransactions"));
+  m_scheduleViewFrame = addPage( m_scheduledView, i18n("Scheduled\ntransactions"));
   m_scheduleViewFrame->setIcon(KIcon("schedule"));
   m_scheduleViewFrame->setHeader(i18n("Bills & Reminders"));
   addTitleBar(m_scheduledView, i18n("Scheduled transactions"));
@@ -303,9 +303,14 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   // select the page first, before connecting the aboutToShow signal
   // because we don't want to override the information stored in the config file
 
+
+
+
+
   setCurrentPage(m_homeViewFrame);
   #warning "port to kde4"
   //connect(this, SIGNAL(aboutToShowPage(QWidget*)), this, SLOT(slotRememberPage(QWidget*)));
+
 
   m_inConstructor = false;
 }

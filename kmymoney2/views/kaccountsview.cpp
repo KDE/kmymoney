@@ -102,9 +102,9 @@ KAccountsView::KAccountsView(QWidget *parent) :
 
   KSharedConfigPtr config = KGlobal::config();
   KConfigGroup grp= config->group("Last Use Settings");
-  m_tab->setCurrentPage(grp.readEntry("KAccountsView_LastType", 0));
+  m_tab->setCurrentIndex(grp.readEntry("KAccountsView_LastType", 0));
 
-  connect(m_tab, SIGNAL(currentChanged(QWidget*)), this, SLOT(slotTabChanged(QWidget*)));
+  connect(m_tab, SIGNAL(currentChanged(QWidget*)), this, SLOT(slotTabCurrentChanged(QWidget*)));
 
   connect(m_accountTree, SIGNAL(selectObject(const MyMoneyObject&)), this, SIGNAL(selectObject(const MyMoneyObject&)));
   connect(m_accountTree, SIGNAL(openContextMenu(const MyMoneyObject&)), this, SIGNAL(openContextMenu(const MyMoneyObject&)));
@@ -129,10 +129,10 @@ void KAccountsView::slotLoadAccounts(void)
   m_needReload[ListView] = true;
   m_needReload[IconView] = true;
   if(isVisible())
-    slotTabChanged(m_tab->currentPage());
+    slotTabCurrentChanged(m_tab->currentWidget());
 }
 
-void KAccountsView::slotTabChanged(QWidget* _tab)
+void KAccountsView::slotTabCurrentChanged(QWidget* _tab)
 {
   AccountsViewTab tab = static_cast<AccountsViewTab>(m_tab->indexOf(_tab));
 
@@ -162,7 +162,7 @@ void KAccountsView::slotTabChanged(QWidget* _tab)
   KMyMoneyAccountIconItem* iconItem = selectedIcon();
 
   emit selectObject(MyMoneyAccount());
-  switch(static_cast<AccountsViewTab>(m_tab->indexOf(m_tab->currentPage()))) {
+  switch(static_cast<AccountsViewTab>(m_tab->currentIndex())) {
     case ListView:
       // if we have a selected account, let the application know about it
       if(treeItem) {
@@ -185,7 +185,7 @@ void KAccountsView::show(void)
 {
   // don't forget base class implementation
   KAccountsViewDecl::show();
-  slotTabChanged(m_tab->currentPage());
+  slotTabCurrentChanged(m_tab->currentWidget());
 }
 
 void KAccountsView::polish(void)
@@ -411,7 +411,6 @@ void KAccountsView::loadListView(void)
 bool KAccountsView::loadSubAccounts(KMyMoneyAccountTreeItem* parent, const QStringList& accountList)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
-  qDebug("account list size:%i",accountList.size());
   bool unused = false;
   bool showClosedAccounts = kmymoney2->toggleAction("view_show_all_accounts")->isChecked()
                          || !KMyMoneyGlobalSettings::hideClosedAccounts();

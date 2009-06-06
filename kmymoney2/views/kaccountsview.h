@@ -91,6 +91,7 @@ public:
   KAccountsViewDecl( QWidget *parent ) : QWidget( parent ) {
     setupUi( this );
   }
+
 };
 class KAccountsView : public KAccountsViewDecl
 {
@@ -157,7 +158,7 @@ protected:
 
 protected slots:
   void slotUpdateNetWorth(void);
-  void slotTabChanged(QWidget*);
+  void slotTabCurrentChanged(QWidget*);
   void slotSelectIcon(Q3IconViewItem* item);
   void slotOpenContext(Q3IconViewItem* item);
   void slotOpenObject(Q3IconViewItem* item);
