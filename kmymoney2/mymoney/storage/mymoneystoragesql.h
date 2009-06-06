@@ -421,6 +421,7 @@ class MyMoneyStorageSql : public IMyMoneyStorageFormat, public QSqlDatabase, pub
 public:
 
   MyMoneyStorageSql (IMyMoneySerialize *storage, const KUrl& = KUrl());
+  MyMoneyStorageSql ();
   virtual ~MyMoneyStorageSql() {close(true);}
 
   unsigned int currentVersion() const {return (m_db.currentVersion());};
@@ -580,6 +581,7 @@ public:
   void loadBudgetId(const unsigned long& id);
 
 private:
+  void init(void);
   // a function to build a comprehensive error message
   QString& buildError (const QSqlQuery& q, const QString& function, const QString& message) const;
   // write routines
@@ -774,7 +776,7 @@ private:
     */
   QString m_logonUser;
   QDateTime m_logonAt;
-  QDateTime m_txPostDate; // FIXME: remove when Tom puts date into split object
+  QDate m_txPostDate; // FIXME: remove when Tom puts date into split object
 
   //Disable copying
   //MyMoneyStorageSql (const MyMoneyStorageSql& rhs);
@@ -793,6 +795,7 @@ class MyMoneyStorageSql;
 class MyMoneySqlQuery : public QSqlQuery {
 public:
     MyMoneySqlQuery (const MyMoneyStorageSql& db );
+    MyMoneySqlQuery ();
     virtual ~MyMoneySqlQuery() {}
     bool exec ();
     bool prepare ( const QString & query );

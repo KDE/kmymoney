@@ -77,7 +77,7 @@ IF( KDE4_BUILD_TESTS )
 
   KDE4_ADD_EXECUTABLE( kmymoneytest ${kmymoneytest_SRCS} )
   TARGET_LINK_LIBRARIES( kmymoneytest
-  ${kmymoney_link_LIBS} ${CPPUNIT_LIBRARY} )
+  ${kmymoney_common_LIBS} ${kmymoney_link_LIBS} ${CPPUNIT_LIBRARY} ${KDE4_KDEUI_LIBS} ${KDE4_KDE3SUPPORT_LIBS})
 
   ##################
   # The Actual Testing using CTest
