@@ -329,8 +329,8 @@ KPayeesView::KPayeesView(QWidget *parent) :
   // and insert it into the existing layout
   m_searchWidget = new K3ListViewSearchLineWidget(m_payeesList, this);
   m_searchWidget->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed));
-#warning "port to kde4"
-  //KPayeesViewDeclLayout->insertWidget(0, m_searchWidget);
+
+  vboxLayout->insertWidget(0, m_searchWidget);
 
   m_splitter = new QSplitter(this);
   m_payeesList->reparent(m_splitter, QPoint(0,0), true);

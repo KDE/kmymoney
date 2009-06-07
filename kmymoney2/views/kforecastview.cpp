@@ -96,7 +96,6 @@ void KForecastView::slotTabChanged(QWidget* _tab)
 
 void KForecastView::loadForecast(ForecastViewTab tab)
 {
-  qDebug("slot Load Forecast");
   if(m_needReload[tab]) {
     switch(tab) {
       case ListView:

@@ -115,6 +115,8 @@ private:
     Database
   } _storageType;
 
+  KPageWidgetModel* m_model;
+
   KHomeView *m_homeView;
   KAccountsView *m_accountsView;
   KInstitutionsView *m_institutionsView;
@@ -344,7 +346,7 @@ public:
 
   void addWidget(QWidget* w);
 
-void showPage(KPageWidgetItem* pageItem);
+  void showPage(KPageWidgetItem* pageItem);
 
   /**
     * check if the current view allows to create a transaction
@@ -507,6 +509,7 @@ public slots:
 
   void currentPageChanged (const QModelIndex &current, const QModelIndex &previous);
 
+  void pageToggled(KPageWidgetItem *page, bool checked);
 
 protected slots:
   /**
