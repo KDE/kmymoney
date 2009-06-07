@@ -20,17 +20,17 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <q3frame.h>
+#include <qframe.h>
 #include <qlayout.h>
 #include <qtimer.h>
 //Added by qt3to4:
-#include <Q3HBoxLayout>
+#include <QHBoxLayout>
 #include <QKeyEvent>
 #include <QList>
 #include <QLabel>
 #include <QResizeEvent>
 #include <QEvent>
-#include <Q3VBoxLayout>
+#include <QVBoxLayout>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -164,12 +164,12 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name )
   d->m_action = KMyMoneyRegister::ActionNone;;
 
   // create the toolbar frame at the top of the view
-  m_toolbarFrame = new Q3Frame(this);
-  Q3VBoxLayout* toolbarLayout = new Q3VBoxLayout(m_toolbarFrame, 0, 0);
+  m_toolbarFrame = new QFrame(this);
+  QVBoxLayout* toolbarLayout = new QVBoxLayout(m_toolbarFrame, 0, 0);
 
   m_toolbar = new KToolBar(m_toolbarFrame, 0, true);
   toolbarLayout->addWidget(m_toolbar);
-  //m_toolbar->setIconText(KToolBar::IconTextRight);
+  m_toolbar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
 
   m_accountComboBox = new KMyMoneyAccountCombo(m_toolbar, "AccountCombo");
   m_toolbar->addWidget(m_accountComboBox);
@@ -188,8 +188,8 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name )
   layout()->addWidget(m_toolbarFrame);
 
   // create the register frame
-  m_registerFrame = new Q3Frame(this);
-  Q3VBoxLayout* registerFrameLayout = new Q3VBoxLayout(m_registerFrame, 0, 0);
+  m_registerFrame = new QFrame(this);
+  QVBoxLayout* registerFrameLayout = new QVBoxLayout(m_registerFrame, 0, 0);
   layout()->addWidget(m_registerFrame);
   layout()->setStretchFactor(m_registerFrame, 2);
   m_register = new KMyMoneyRegister::Register(m_registerFrame);
@@ -205,8 +205,8 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name )
   d->m_registerSearchLine = new KMyMoneyRegister::RegisterSearchLineWidget(m_register, m_toolbar);
 
   // create the summary frame
-  m_summaryFrame = new Q3Frame(this);
-  Q3HBoxLayout* summaryFrameLayout = new Q3HBoxLayout(m_summaryFrame, 0, 0);
+  m_summaryFrame = new QFrame(this);
+  QHBoxLayout* summaryFrameLayout = new QHBoxLayout(m_summaryFrame, 0, 0);
   m_leftSummaryLabel = new QLabel(m_summaryFrame);
   m_centerSummaryLabel = new QLabel(m_summaryFrame);
   m_rightSummaryLabel = new QLabel(m_summaryFrame);
@@ -220,11 +220,11 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name )
   layout()->addWidget(m_summaryFrame);
 
   // create the button frame
-  m_buttonFrame = new Q3Frame(this);
-  Q3VBoxLayout* buttonLayout = new Q3VBoxLayout(m_buttonFrame, 0, 0);
+  m_buttonFrame = new QFrame(this);
+  QVBoxLayout* buttonLayout = new QVBoxLayout(m_buttonFrame, 0, 0);
   layout()->addWidget(m_buttonFrame);
   m_buttonbar = new KToolBar(m_buttonFrame, 0, true);
-  //m_buttonbar->setIconText(KToolBar::IconTextRight);
+  m_buttonbar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
   buttonLayout->addWidget(m_buttonbar);
 
   m_buttonbar->addAction(kmymoney2->action("transaction_new"));
@@ -236,13 +236,13 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name )
   m_buttonbar->addAction(kmymoney2->action("transaction_match"));
 
   // create the transaction form frame
-  m_formFrame = new Q3Frame(this);
-  Q3VBoxLayout* frameLayout = new Q3VBoxLayout(m_formFrame, 5, 0);
+  m_formFrame = new QFrame(this);
+  QVBoxLayout* frameLayout = new QVBoxLayout(m_formFrame, 5, 0);
   m_form = new KMyMoneyTransactionForm::TransactionForm(m_formFrame);
   frameLayout->addWidget(m_form->tabBar(m_formFrame));
   frameLayout->addWidget(m_form);
-  m_formFrame->setFrameShape( Q3Frame::Panel );
-  m_formFrame->setFrameShadow( Q3Frame::Raised );
+  m_formFrame->setFrameShape( QFrame::Panel );
+  m_formFrame->setFrameShadow( QFrame::Raised );
   layout()->addWidget(m_formFrame);
 
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadView()));

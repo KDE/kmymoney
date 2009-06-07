@@ -215,7 +215,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   connect(m_payeesView, SIGNAL(transactionSelected(const QString&, const QString&)),
           this, SLOT(slotLedgerSelected(const QString&, const QString&)));
 #warning #Port to KDE4
-#if 0
+
   // Page 6
   //m_ledgerViewFrame = addVBoxPage( i18n("Ledgers"), i18n("Ledgers"), DesktopIcon("ledger", iconSize));
   m_ledgerView = new KGlobalLedgerView();
@@ -232,7 +232,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   connect(m_ledgerView, SIGNAL(toggleReconciliationFlag()), kmymoney2, SLOT(slotToggleReconciliationFlag()));
   connect(this, SIGNAL(reconciliationStarts(const MyMoneyAccount&, const QDate&, const MyMoneyMoney&)), m_ledgerView, SLOT(slotSetReconcileAccount(const MyMoneyAccount&, const QDate&, const MyMoneyMoney&)));
   connect(kmymoney2, SIGNAL(selectAllTransactions()), m_ledgerView, SLOT(slotSelectAllTransactions()));
-#endif
+
 
   // Page 7
   m_investmentView = new KInvestmentView();

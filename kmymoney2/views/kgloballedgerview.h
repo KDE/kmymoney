@@ -30,21 +30,18 @@
 #include <qwidget.h>
 #include <qstring.h>
 //Added by qt3to4:
-#include <Q3HBoxLayout>
 #include <QResizeEvent>
-#include <Q3GridLayout>
-#include <Q3Frame>
+#include <QFrame>
 #include <QList>
 #include <QLabel>
-#include <Q3PopupMenu>
+
 #include <QEvent>
 #include <Q3VBoxLayout>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-
-// ----------------------------------------------------------------------------
-// Project Includes
+class KToolBar;
+class KToolBarButton;
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -55,16 +52,7 @@
 #include <register.h>
 #include <transactionform.h>
 
-class Q3VBoxLayout;
-class Q3HBoxLayout;
-class Q3GridLayout;
-class Q3PopupMenu;
-class Q3Frame;
-class QLabel;
-
 class KMyMoneyAccountCombo;
-class KToolBar;
-class KToolBarButton;
 class MyMoneyReport;
 class TransactionEditor;
 
@@ -337,11 +325,11 @@ private:
   Private* const d;
 
   // frames
-  Q3Frame*                       m_toolbarFrame;
-  Q3Frame*                       m_registerFrame;
-  Q3Frame*                       m_buttonFrame;
-  Q3Frame*                       m_formFrame;
-  Q3Frame*                       m_summaryFrame;
+  QFrame*                       m_toolbarFrame;
+  QFrame*                       m_registerFrame;
+  QFrame*                       m_buttonFrame;
+  QFrame*                       m_formFrame;
+  QFrame*                       m_summaryFrame;
 
   // widgets
   KMyMoneyAccountCombo*         m_accountComboBox;
