@@ -16,8 +16,7 @@
 
 #include "mymoneyseqaccessmgrtest.h"
 #include <iostream>
-//Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 MyMoneySeqAccessMgrTest::MyMoneySeqAccessMgrTest()
 {
@@ -593,12 +592,12 @@ void MyMoneySeqAccessMgrTest::testAddTransactions() {
 		ch = m->account("A000006");
 
 		// check that the account's transaction list is updated
-		Q3ValueList<MyMoneyTransaction> list;
+		QList<MyMoneyTransaction> list;
 		MyMoneyTransactionFilter filter("A000006");
 		list = m->transactionList(filter);
 		CPPUNIT_ASSERT(list.size() == 2);
 
-		Q3ValueList<MyMoneyTransaction>::ConstIterator it;
+		QList<MyMoneyTransaction>::ConstIterator it;
 		it = list.begin();
 		CPPUNIT_ASSERT((*it).id() == "T000000000000000002");
 		++it;
@@ -709,12 +708,12 @@ void MyMoneySeqAccessMgrTest::testModifyTransaction() {
 		ch = m->account("A000006");
 
 		// check that the account's transaction list is updated
-		Q3ValueList<MyMoneyTransaction> list;
+		QList<MyMoneyTransaction> list;
 		MyMoneyTransactionFilter filter("A000006");
 		list = m->transactionList(filter);
 		CPPUNIT_ASSERT(list.size() == 2);
 
-		Q3ValueList<MyMoneyTransaction>::ConstIterator it;
+		QList<MyMoneyTransaction>::ConstIterator it;
 		it = list.begin();
 		CPPUNIT_ASSERT((*it).id() == "T000000000000000001");
 		++it;
@@ -883,24 +882,24 @@ void MyMoneySeqAccessMgrTest::testRemoveTransaction() {
 void MyMoneySeqAccessMgrTest::testTransactionList() {
 	testAddTransactions();
 
-	Q3ValueList<MyMoneyTransaction> list;
+	QList<MyMoneyTransaction> list;
 	MyMoneyTransactionFilter filter("A000006");
 	list = m->transactionList(filter);
 	CPPUNIT_ASSERT(list.count() == 2);
-	CPPUNIT_ASSERT((*(list.at(0))).id() == "T000000000000000002");
-	CPPUNIT_ASSERT((*(list.at(1))).id() == "T000000000000000001");
+	CPPUNIT_ASSERT(list.at(0).id() == "T000000000000000002");
+	CPPUNIT_ASSERT(list.at(1).id() == "T000000000000000001");
 
 	filter.clear();
 	filter.addAccount(QString("A000003"));
 	list = m->transactionList(filter);
 	CPPUNIT_ASSERT(list.count() == 1);
-	CPPUNIT_ASSERT((*(list.at(0))).id() == "T000000000000000002");
+	CPPUNIT_ASSERT(list.at(0).id() == "T000000000000000002");
 
 	filter.clear();
 	list = m->transactionList(filter);
 	CPPUNIT_ASSERT(list.count() == 2);
-	CPPUNIT_ASSERT((*(list.at(0))).id() == "T000000000000000002");
-	CPPUNIT_ASSERT((*(list.at(1))).id() == "T000000000000000001");
+	CPPUNIT_ASSERT(list.at(0).id() == "T000000000000000002");
+	CPPUNIT_ASSERT(list.at(1).id() == "T000000000000000001");
 }
 
 void MyMoneySeqAccessMgrTest::testAddPayee() {
@@ -1391,7 +1390,7 @@ void MyMoneySeqAccessMgrTest::testScheduleList() {
 		CPPUNIT_FAIL("Unexpected exception");
 	}
 
-	Q3ValueList<MyMoneySchedule> list;
+	QList<MyMoneySchedule> list;
 
 	// no filter
 	list = m->scheduleList();

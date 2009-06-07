@@ -34,6 +34,7 @@ class MyMoneyDatabaseMgrTest : public CppUnit::TestFixture  {
   CPPUNIT_TEST_SUITE(MyMoneyDatabaseMgrTest);
   CPPUNIT_TEST(testEmptyConstructor);
   CPPUNIT_TEST(testCreateDb);
+#if 0
   CPPUNIT_TEST(testAttachDb);
   CPPUNIT_TEST(testSetFunctions);
   CPPUNIT_TEST(testSupportFunctions);
@@ -78,6 +79,7 @@ class MyMoneyDatabaseMgrTest : public CppUnit::TestFixture  {
   CPPUNIT_TEST(testCurrency);
   CPPUNIT_TEST(testCurrencyList);
   CPPUNIT_TEST(testAccountList);
+#endif
   CPPUNIT_TEST_SUITE_END();
 
 protected:

@@ -16,9 +16,8 @@
 #include <qsqldatabase.h>
 #include <qsqlquery.h>
 #include <qsqlerror.h>
-#include <q3valuestack.h>
-//Added by qt3to4:
-#include <Q3ValueList>
+#include <QStack>
+#include <QList>
 
 class QIODevice;
 // ----------------------------------------------------------------------------
@@ -257,7 +256,7 @@ class MyMoneyDbIndex {
 class MyMoneyDbTable {
   public:
     MyMoneyDbTable (const QString& iname,
-             const Q3ValueList<KSharedPtr <MyMoneyDbColumn> >& ifields,
+             const QList<KSharedPtr <MyMoneyDbColumn> >& ifields,
              const QString& initVersion = "1.0"):
     m_name(iname),
     m_fields(ifields),
@@ -321,15 +320,15 @@ class MyMoneyDbTable {
       */
     void addIndex(const QString& name, const QStringList& columns, bool unique = false);
 
-    typedef Q3ValueList<KSharedPtr <MyMoneyDbColumn> >::const_iterator field_iterator;
+    typedef QList<KSharedPtr <MyMoneyDbColumn> >::const_iterator field_iterator;
     inline field_iterator begin(void) const {return m_fields.constBegin();}
     inline field_iterator end(void) const {return m_fields.constEnd(); }
   private:
     QString m_name;
-    Q3ValueList<KSharedPtr <MyMoneyDbColumn> > m_fields;
+    QList<KSharedPtr <MyMoneyDbColumn> > m_fields;
 
-    typedef Q3ValueList<MyMoneyDbIndex>::const_iterator index_iterator;
-    Q3ValueList<MyMoneyDbIndex> m_indices;
+    typedef QList<MyMoneyDbIndex>::const_iterator index_iterator;
+    QList<MyMoneyDbIndex> m_indices;
     QString m_initVersion;
     QString m_insertString; // string to insert a record
     QString m_selectAllString; // to select all fields
@@ -541,7 +540,7 @@ public:
   bool isReferencedByTransaction(const QString& id) const;
 
   void readPayees(const QString&);
-  void readPayees(const Q3ValueList<QString> payeeList = Q3ValueList<QString>());
+  void readPayees(const QList<QString> payeeList = QList<QString>());
   void readTransactions(const MyMoneyTransactionFilter& filter);
   void setProgressCallback(void(*callback)(int, int, const QString&));
 
@@ -602,7 +601,7 @@ private:
   void writePayee(const MyMoneyPayee& p, MyMoneySqlQuery& q, bool isUserInfo = false);
   void writeAccount (const MyMoneyAccount& a, MyMoneySqlQuery& q);
   void writeTransaction(const QString& txId, const MyMoneyTransaction& tx, MyMoneySqlQuery& q, const QString& type);
-  void writeSplits(const QString& txId, const QString& type, const Q3ValueList<MyMoneySplit>& splitList);
+  void writeSplits(const QString& txId, const QString& type, const QList<MyMoneySplit>& splitList);
   void writeSplit(const QString& txId, const MyMoneySplit& split, const QString& type, const int splitId, MyMoneySqlQuery& q);
   void writeSchedule(const MyMoneySchedule& sch, MyMoneySqlQuery& q, bool insert);
   void writeSecurity(const MyMoneySecurity& security, MyMoneySqlQuery& q);
@@ -752,7 +751,7 @@ private:
     * though it would be confusing to use that term within KMM). It is implemented
     * as a stack for debug purposes. Long term, probably a count would suffice
     */
-  Q3ValueStack<QString> m_commitUnitStack;
+  QStack<QString> m_commitUnitStack;
   /**
     * This member variable is used to preload transactions for preferred accounts
     */

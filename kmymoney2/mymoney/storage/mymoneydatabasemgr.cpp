@@ -20,9 +20,8 @@
 #include "mymoneydatabasemgr.h"
 #include "mymoneytransactionfilter.h"
 #include "mymoneycategory.h"
-//Added by qt3to4:
 #include <QList>
-#include <list>
+
 #define TRY try {
 #define CATCH } catch (MyMoneyException *e) {
 #define PASS } catch (MyMoneyException *e) { throw; }
@@ -459,19 +458,18 @@ const MyMoneyMoney MyMoneyDatabaseMgr::totalBalance(const QString& id, const QDa
   for (it_a = accounts.begin(); it_a != accounts.end(); ++it_a) {
     accounts += MyMoneyFile::instance()->account(*it_a).accountList();
   }
-#warning "port to kde4"
-#if 0
-  std::list<QString> tempList (accounts.begin(), accounts.end());
-  tempList.sort();
-  tempList.unique();
 
-  accounts = QStringList (tempList);
+  // convert into a sorted list with each account only once
+  QMap<QString, bool> tempList;
+  for (it_a = accounts.begin(); it_a != accounts.end(); ++it_a) {
+    tempList[*it_a] = true;
+  }
+  accounts = tempList.uniqueKeys();
 
   QMap<QString, MyMoneyMoney> balanceMap = m_sql->fetchBalance(accounts, date);
   for (QMap<QString, MyMoneyMoney>::ConstIterator it_b = balanceMap.begin(); it_b != balanceMap.end(); ++it_b) {
-    result += it_b.data();
+    result += it_b.value();
   }
-#endif
   return result;
 }
 
@@ -898,7 +896,7 @@ const MyMoneyTransaction MyMoneyDatabaseMgr::transaction(const QString& id) cons
   if(!transactionList.size())
     throw new MYMONEYEXCEPTION("invalid transaction key");
 
-  return transactionList.begin().data();
+  return transactionList.begin().value();
 }
 
 const MyMoneyMoney MyMoneyDatabaseMgr::balance(const QString& id, const QDate& date) const
@@ -921,7 +919,7 @@ const MyMoneyMoney MyMoneyDatabaseMgr::balance(const QString& id, const QDate& d
   MyMoneyAccount acc;
   QMap<QString, MyMoneyAccount> accountList = m_sql->fetchAccounts(/*QString(id)*/);
   //QMap<QString, MyMoneyAccount>::const_iterator accpos = accountList.find(id);
-  if (date_ != QDate()) qDebug ("request balance for %s at %s", id.data(), date_.toString(Qt::ISODate).toLatin1());
+  if (date_ != QDate()) qDebug ("request balance for %s at %s", qPrintable(id), qPrintable(date_.toString(Qt::ISODate)));
 //  if(!date_.isValid() && MyMoneyFile::instance()->account(id).accountType() != MyMoneyAccount::Stock) {
 //    if(accountList.find(id) != accountList.end())
 //      return accountList[id].balance();
@@ -1104,7 +1102,7 @@ const MyMoneySecurity MyMoneyDatabaseMgr::security(const QString& id) const
   QMap<QString, MyMoneySecurity>::ConstIterator it = securitiesList.find(id);
   if(it != securitiesList.end())
   {
-    return it.data();
+    return it.value();
   }
 
   return MyMoneySecurity();
@@ -1841,12 +1839,12 @@ void MyMoneyDatabaseMgr::rebuildAccountBalances(void)
 
   for (QMap<QString, MyMoneyMoney>::const_iterator it_b = balanceMap.begin();
          it_b != balanceMap.end(); ++it_b) {
-    accountMap[it_b.key()].setBalance(it_b.data());
+    accountMap[it_b.key()].setBalance(it_b.value());
   }
 
   for (QMap<QString, MyMoneyAccount>::const_iterator it_a = accountMap.begin();
          it_a != accountMap.end(); ++it_a) {
-    m_sql->modifyAccount(it_a.data());
+    m_sql->modifyAccount(it_a.value());
   }
   commitTransaction();
 }

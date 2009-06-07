@@ -17,8 +17,7 @@
 #include "mymoneydatabasemgrtest.h"
 #include <pwd.h>
 #include <iostream>
-//Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 MyMoneyDatabaseMgrTest::MyMoneyDatabaseMgrTest()
   : m_dbAttached (false),
@@ -656,8 +655,8 @@ void MyMoneyDatabaseMgrTest::testAddTransactions() {
 
     //QMap<QString, QString>::ConstIterator it_k;
     MyMoneyTransactionFilter f;
-    Q3ValueList<MyMoneyTransaction> transactionList (m->transactionList(f));
-    Q3ValueList<MyMoneyTransaction>::ConstIterator it_t (transactionList.begin());
+    QList<MyMoneyTransaction> transactionList (m->transactionList(f));
+    QList<MyMoneyTransaction>::ConstIterator it_t (transactionList.begin());
 
     //CPPUNIT_ASSERT((*it_k) == "2002-05-10-T000000000000000001");
     CPPUNIT_ASSERT((*it_t).id() == "T000000000000000002");
@@ -673,12 +672,12 @@ void MyMoneyDatabaseMgrTest::testAddTransactions() {
     ch = m->account("A000006");
 
     // check that the account's transaction list is updated
-    Q3ValueList<MyMoneyTransaction> list;
+    QList<MyMoneyTransaction> list;
     MyMoneyTransactionFilter filter("A000006");
     list = m->transactionList(filter);
     CPPUNIT_ASSERT(list.size() == 2);
 
-    Q3ValueList<MyMoneyTransaction>::ConstIterator it;
+    QList<MyMoneyTransaction>::ConstIterator it;
     it = list.begin();
     CPPUNIT_ASSERT((*it).id() == "T000000000000000002");
     ++it;
@@ -719,7 +718,7 @@ void MyMoneyDatabaseMgrTest::testAddBudget() {
   MyMoneyBudget budget;
 
   budget.setName("TestBudget");
-  budget.setBudgetStart(QDate::currentDate(Qt::LocalTime));
+  budget.setBudgetStart(QDate::currentDate());
 
   m->addBudget(budget);
 
@@ -775,7 +774,7 @@ void MyMoneyDatabaseMgrTest::testModifyBudget() {
 
   MyMoneyBudget budget = m->budgetByName("TestBudget");
 
-  budget.setBudgetStart(QDate::currentDate(Qt::LocalTime).addDays(-1));
+  budget.setBudgetStart(QDate::currentDate().addDays(-1));
 
   m->modifyBudget(budget);
 
@@ -908,8 +907,8 @@ void MyMoneyDatabaseMgrTest::testModifyTransaction() {
 
     //QMap<QString, QString>::ConstIterator it_k;
     MyMoneyTransactionFilter f;
-    Q3ValueList<MyMoneyTransaction> transactionList (m->transactionList(f));
-    Q3ValueList<MyMoneyTransaction>::ConstIterator it_t (transactionList.begin());
+    QList<MyMoneyTransaction> transactionList (m->transactionList(f));
+    QList<MyMoneyTransaction>::ConstIterator it_t (transactionList.begin());
     //it_k = m->m_transactionKeys.begin();
     //CPPUNIT_ASSERT((*it_k) == "2002-05-10-T000000000000000001");
     CPPUNIT_ASSERT((*it_t).id() == "T000000000000000001");
@@ -925,12 +924,12 @@ void MyMoneyDatabaseMgrTest::testModifyTransaction() {
     ch = m->account("A000006");
 
     // check that the account's transaction list is updated
-    Q3ValueList<MyMoneyTransaction> list;
+    QList<MyMoneyTransaction> list;
     MyMoneyTransactionFilter filter("A000006");
     list = m->transactionList(filter);
     CPPUNIT_ASSERT(list.size() == 2);
 
-    Q3ValueList<MyMoneyTransaction>::ConstIterator it;
+    QList<MyMoneyTransaction>::ConstIterator it;
     it = list.begin();
     CPPUNIT_ASSERT((*it).id() == "T000000000000000001");
     ++it;
@@ -1111,24 +1110,24 @@ void MyMoneyDatabaseMgrTest::testTransactionList() {
 
   testAddTransactions();
 
-  Q3ValueList<MyMoneyTransaction> list;
+  QList<MyMoneyTransaction> list;
   MyMoneyTransactionFilter filter("A000006");
   list = m->transactionList(filter);
   CPPUNIT_ASSERT(list.count() == 2);
-  CPPUNIT_ASSERT((*(list.at(0))).id() == "T000000000000000002");
-  CPPUNIT_ASSERT((*(list.at(1))).id() == "T000000000000000001");
+  CPPUNIT_ASSERT(list.at(0).id() == "T000000000000000002");
+  CPPUNIT_ASSERT(list.at(1).id() == "T000000000000000001");
 
   filter.clear();
   filter.addAccount(QString("A000003"));
   list = m->transactionList(filter);
   CPPUNIT_ASSERT(list.count() == 1);
-  CPPUNIT_ASSERT((*(list.at(0))).id() == "T000000000000000002");
+  CPPUNIT_ASSERT(list.at(0).id() == "T000000000000000002");
 
   filter.clear();
   list = m->transactionList(filter);
   CPPUNIT_ASSERT(list.count() == 2);
-  CPPUNIT_ASSERT((*(list.at(0))).id() == "T000000000000000002");
-  CPPUNIT_ASSERT((*(list.at(1))).id() == "T000000000000000001");
+  CPPUNIT_ASSERT(list.at(0).id() == "T000000000000000002");
+  CPPUNIT_ASSERT(list.at(1).id() == "T000000000000000001");
 }
 
 void MyMoneyDatabaseMgrTest::testAddPayee() {
@@ -1738,7 +1737,7 @@ void MyMoneyDatabaseMgrTest::testScheduleList() {
     CPPUNIT_FAIL("Unexpected exception");
   }
 
-  Q3ValueList<MyMoneySchedule> list;
+  QList<MyMoneySchedule> list;
 
   // no filter
   list = m->scheduleList();
