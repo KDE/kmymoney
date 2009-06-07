@@ -17,7 +17,7 @@
  ***************************************************************************/
 
 
-# include <config-kmymoney.h>
+
 
 #include <unistd.h>
 
@@ -43,8 +43,6 @@
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-
-
 
 #include <kfiledialog.h>
 #include <kglobal.h>
@@ -74,6 +72,7 @@
 #include <string>
 #endif
 
+#include <config-kmymoney.h>
 #include <kmymoneyglobalsettings.h>
 #include <kmymoneytitlelabel.h>
 #include <libkgpgfile/kgpgfile.h>

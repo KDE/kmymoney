@@ -14,7 +14,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "config-kmymoney.h"
+
 
 #ifndef KMYMONEYVIEW_H
 #define KMYMONEYVIEW_H
@@ -40,6 +40,7 @@ class Q3VBoxLayout;
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "config-kmymoney.h"
 #include <mymoneyaccount.h>
 #include <mymoneyinstitution.h>
 #include <mymoneytransaction.h>
