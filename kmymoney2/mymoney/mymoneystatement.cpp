@@ -27,9 +27,8 @@
 #include <qdom.h>
 #include <qstringlist.h>
 #include <qfile.h>
-#include <q3textstream.h>
-//Added by qt3to4:
-#include <Q3ValueList>
+#include <QTextStream>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -37,8 +36,8 @@
 
 #include "mymoneystatement.h"
 
-const QStringList kAccountTypeTxt = QStringList::split(",","none,checkings,savings,investment,creditcard,invalid");
-const QStringList kActionText = QStringList::split(",","none,buy,sell,reinvestdividend,cashdividend,add,remove,stocksplit,fees,interest,invalid");
+const QStringList kAccountTypeTxt = QString("none,checkings,savings,investment,creditcard,invalid").split(",");
+const QStringList kActionText = QString("none,buy,sell,reinvestdividend,cashdividend,add,remove,stocksplit,fees,interest,invalid").split(",");
 
 void MyMoneyStatement::write(QDomElement& _root,QDomDocument* _doc) const
 {
@@ -58,7 +57,7 @@ void MyMoneyStatement::write(QDomElement& _root,QDomDocument* _doc) const
   e.setAttribute("skipCategoryMatching", m_skipCategoryMatching);
 
   // iterate over transactions, and add each one
-  Q3ValueList<Transaction>::const_iterator it_t = m_listTransactions.begin();
+  QList<Transaction>::const_iterator it_t = m_listTransactions.begin();
   while ( it_t != m_listTransactions.end() )
   {
     QDomElement p = _doc->createElement("TRANSACTION");
@@ -79,7 +78,7 @@ void MyMoneyStatement::write(QDomElement& _root,QDomDocument* _doc) const
     }
 
     // add all the splits we know of (might be empty)
-    Q3ValueList<Split>::const_iterator it_s;
+    QList<Split>::const_iterator it_s;
     for(it_s = (*it_t).m_listSplits.begin(); it_s != (*it_t).m_listSplits.end(); ++it_s) {
       QDomElement split = _doc->createElement("SPLIT");
       split.setAttribute("accountid", (*it_s).m_accountId);
@@ -97,7 +96,7 @@ void MyMoneyStatement::write(QDomElement& _root,QDomDocument* _doc) const
   }
 
   // iterate over prices, and add each one
-  Q3ValueList<Price>::const_iterator it_p = m_listPrices.begin();
+  QList<Price>::const_iterator it_p = m_listPrices.begin();
   while ( it_p != m_listPrices.end() )
   {
     QDomElement p = _doc->createElement("PRICE");
@@ -111,7 +110,7 @@ void MyMoneyStatement::write(QDomElement& _root,QDomDocument* _doc) const
   }
 
   // iterate over securities, and add each one
-  Q3ValueList<Security>::const_iterator it_s = m_listSecurities.begin();
+  QList<Security>::const_iterator it_s = m_listSecurities.begin();
   while ( it_s != m_listSecurities.end() )
   {
     QDomElement p = _doc->createElement("SECURITY");
@@ -144,7 +143,7 @@ bool MyMoneyStatement::read(const QDomElement& _e)
     m_accountId = _e.attribute("accountid");
     m_skipCategoryMatching = _e.attribute("skipCategoryMatching").isEmpty();
 
-    int i = kAccountTypeTxt.findIndex(_e.attribute("type",kAccountTypeTxt[1]));
+    int i = kAccountTypeTxt.indexOf(_e.attribute("type",kAccountTypeTxt[1]));
     if ( i != -1 )
       m_eType = static_cast<EType>(i);
 
@@ -164,7 +163,7 @@ bool MyMoneyStatement::read(const QDomElement& _e)
         t.m_strPayee = c.attribute("payee");
         t.m_strBankID = c.attribute("bankid");
         t.m_reconcile = static_cast<MyMoneySplit::reconcileFlagE>(c.attribute("reconcile").toInt());
-        int i = kActionText.findIndex(c.attribute("action",kActionText[1]));
+        int i = kActionText.indexOf(c.attribute("action",kActionText[1]));
         if ( i != -1 )
           t.m_eAction = static_cast<Transaction::EAction>(i);
 
@@ -228,11 +227,11 @@ bool MyMoneyStatement::isStatementFile(const QString& _filename)
   QFile f( _filename );
   if ( f.open( QIODevice::ReadOnly ) )
   {
-    Q3TextStream ts( &f );
+    QTextStream ts( &f );
 
     int lineCount = 20;
     while ( !ts.atEnd() && !result && lineCount != 0) {
-      if ( ts.readLine().contains("<KMYMONEY-STATEMENT>",false) )
+      if ( ts.readLine().contains("<KMYMONEY-STATEMENT>", Qt::CaseInsensitive) )
         result = true;
       --lineCount;
     }
@@ -263,8 +262,8 @@ void MyMoneyStatement::writeXMLFile( const MyMoneyStatement& _s, const QString& 
 
   QFile g( filename );
   if(g.open( QIODevice::WriteOnly )) {
-    Q3TextStream stream(&g);
-    stream.setEncoding(Q3TextStream::UnicodeUTF8);
+    QTextStream stream(&g);
+    stream.setCodec("UTF-8");
     stream << doc->toString();
     g.close();
   }

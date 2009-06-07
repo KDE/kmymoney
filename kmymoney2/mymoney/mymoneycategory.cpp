@@ -44,7 +44,7 @@ bool MyMoneyCategory::addMinorCategory(const QString val)
   if (val.isEmpty() || val.isNull())
     return false;
 
-  if (m_minorCategories.find(val) == m_minorCategories.end()) {
+  if (m_minorCategories.indexOf(val) == -1) {
     m_minorCategories.append(val);
     return true;
   }
@@ -57,8 +57,8 @@ bool MyMoneyCategory::removeMinorCategory(const QString val)
   if (val.isEmpty() || val.isNull())
     return false;
 
-  if (m_minorCategories.find(val) != m_minorCategories.end()) {
-    m_minorCategories.remove(val);
+  if (m_minorCategories.indexOf(val) != -1) {
+    m_minorCategories.removeOne(val);
     return true;
   }
 
@@ -70,10 +70,10 @@ bool MyMoneyCategory::renameMinorCategory(const QString oldVal, const QString ne
   if (oldVal.isEmpty() || oldVal.isNull() || newVal.isEmpty() || newVal.isNull())
     return false;
 
-  if (m_minorCategories.find(oldVal) != m_minorCategories.end() &&
-    m_minorCategories.find(newVal) == m_minorCategories.end() ) {
+  if ((m_minorCategories.indexOf(oldVal) != -1) &&
+    (m_minorCategories.indexOf(newVal) == -1) ) {
 
-    m_minorCategories.remove(oldVal);
+    m_minorCategories.removeOne(oldVal);
     return addMinorCategory(newVal);
   }
 

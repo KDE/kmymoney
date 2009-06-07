@@ -24,6 +24,8 @@
 #include <mymoneykeyvaluecontainer.h>
 #include <mymoneyexception.h>
 
+static QString nullString;
+
 MyMoneyKeyValueContainer::MyMoneyKeyValueContainer()
 {
 }
@@ -37,7 +39,7 @@ MyMoneyKeyValueContainer::MyMoneyKeyValueContainer(const QDomElement& node)
     m_kvp.clear();
 
     QDomNodeList nodeList = node.elementsByTagName("PAIR");
-    for(unsigned int i = 0; i < nodeList.count(); ++i) {
+    for(int i = 0; i < nodeList.count(); ++i) {
       const QDomElement& el(nodeList.item(i).toElement());
       m_kvp[el.attribute("key")] = el.attribute("value");
     }
@@ -55,7 +57,7 @@ const QString& MyMoneyKeyValueContainer::value(const QString& key) const
   it = m_kvp.find(key);
   if(it != m_kvp.end())
     return (*it);
-  return QString::null;
+  return nullString;
 }
 
 void MyMoneyKeyValueContainer::setValue(const QString& key, const QString& value)
@@ -75,7 +77,7 @@ void MyMoneyKeyValueContainer::deletePair(const QString& key)
 
   it = m_kvp.find(key);
   if(it != m_kvp.end())
-    m_kvp.remove(it);
+    m_kvp.erase(it);
 }
 
 void MyMoneyKeyValueContainer::clear(void)
@@ -111,7 +113,7 @@ void MyMoneyKeyValueContainer::writeXML(QDomDocument& document, QDomElement& par
     {
       QDomElement pair = document.createElement("PAIR");
       pair.setAttribute("key", it.key());
-      pair.setAttribute("value", it.data());
+      pair.setAttribute("value", it.value());
       el.appendChild(pair);
     }
 

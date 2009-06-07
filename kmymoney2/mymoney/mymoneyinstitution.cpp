@@ -89,7 +89,7 @@ MyMoneyInstitution::MyMoneyInstitution(const QDomElement& node) :
   nodeList = node.elementsByTagName("ACCOUNTIDS");
   if(nodeList.count() > 0) {
     nodeList = nodeList.item(0).toElement().elementsByTagName("ACCOUNTID");
-    for(unsigned int i = 0; i < nodeList.count(); ++i) {
+    for(int i = 0; i < nodeList.count(); ++i) {
       m_accountList << nodeList.item(i).toElement().attribute("id");
     }
   }
@@ -108,12 +108,12 @@ void MyMoneyInstitution::addAccountId(const QString& account)
 
 QString MyMoneyInstitution::removeAccountId(const QString& account)
 {
-  QStringList::Iterator pos;
+  int pos;
   QString rc;
 
-  pos = m_accountList.find(account);
-  if(pos != m_accountList.end()) {
-    m_accountList.remove(pos);
+  pos = m_accountList.indexOf(account);
+  if(pos != -1) {
+    m_accountList.removeAt(pos);
     rc = account;
   }
   return rc;

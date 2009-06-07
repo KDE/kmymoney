@@ -31,7 +31,7 @@
 
 #include "mymoneybudget.h"
 
-const QStringList MyMoneyBudget::AccountGroup::kBudgetLevelText = QStringList::split(",","none,monthly,monthbymonth,yearly,invalid",true);
+const QStringList MyMoneyBudget::AccountGroup::kBudgetLevelText = QString("none,monthly,monthbymonth,yearly,invalid").split(",");
 const int BUDGET_VERSION = 2;
 
 bool MyMoneyBudget::AccountGroup::isZero(void) const
@@ -205,10 +205,10 @@ void MyMoneyBudget::write(QDomElement& e, QDomDocument *doc) const
     if(!(*it).balance().isZero()) {
       QDomElement domAccount = doc->createElement("ACCOUNT");
       domAccount.setAttribute("id", it.key());
-      domAccount.setAttribute("budgetlevel", AccountGroup::kBudgetLevelText[it.data().budgetLevel()]);
-      domAccount.setAttribute("budgetsubaccounts", it.data().budgetSubaccounts());
+      domAccount.setAttribute("budgetlevel", AccountGroup::kBudgetLevelText[it.value().budgetLevel()]);
+      domAccount.setAttribute("budgetsubaccounts", it.value().budgetSubaccounts());
 
-      const QMap<QDate, PeriodGroup> periods = it.data().getPeriods();
+      const QMap<QDate, PeriodGroup> periods = it.value().getPeriods();
       QMap<QDate, PeriodGroup>::const_iterator it_per;
       for(it_per = periods.begin(); it_per != periods.end(); ++it_per) {
         if(!(*it_per).amount().isZero()) {
@@ -253,7 +253,7 @@ bool MyMoneyBudget::read(const QDomElement& e)
           account.setId(c.attribute("id"));
 
         if(c.hasAttribute("budgetlevel")) {
-          int i = AccountGroup::kBudgetLevelText.findIndex(c.attribute("budgetlevel"));
+          int i = AccountGroup::kBudgetLevelText.indexOf(c.attribute("budgetlevel"));
           if ( i != -1 )
             account.setBudgetLevel(static_cast<AccountGroup::eBudgetLevel>(i));
         }
@@ -323,9 +323,11 @@ void MyMoneyBudget::setAccount(const AccountGroup &_account, const QString _id)
 const MyMoneyBudget::AccountGroup& MyMoneyBudget::account(const QString _id) const
 {
   static AccountGroup empty;
+  QMap<QString, AccountGroup>::ConstIterator it;
 
-  if ( m_accounts.contains(_id) )
-    return m_accounts[_id];
+  it = m_accounts.constFind(_id);
+  if ( it != m_accounts.constEnd() )
+    return it.value();
   return empty;
 }
 

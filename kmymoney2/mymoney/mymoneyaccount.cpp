@@ -114,7 +114,7 @@ MyMoneyAccount::MyMoneyAccount(const QDomElement& node) :
   QDomNodeList nodeList = node.elementsByTagName("SUBACCOUNTS");
   if(nodeList.count() > 0) {
     nodeList = nodeList.item(0).toElement().elementsByTagName("SUBACCOUNT");
-    for(unsigned int i = 0; i < nodeList.count(); ++i) {
+    for(int i = 0; i < nodeList.count(); ++i) {
       addAccountId(QString(nodeList.item(i).toElement().attribute("id")));
     }
   }
@@ -122,9 +122,9 @@ MyMoneyAccount::MyMoneyAccount(const QDomElement& node) :
   nodeList = node.elementsByTagName("ONLINEBANKING");
   if(nodeList.count() > 0) {
     QDomNamedNodeMap attributes = nodeList.item(0).toElement().attributes();
-    for(unsigned int i = 0; i < attributes.count(); ++i) {
+    for(int i = 0; i < attributes.count(); ++i) {
       const QDomAttr& it_attr = attributes.item(i).toAttr();
-      m_onlineBankingSettings.setValue(it_attr.name().utf8(), it_attr.value());
+      m_onlineBankingSettings.setValue(it_attr.name(), it_attr.value());
     }
   }
 
@@ -193,11 +193,11 @@ void MyMoneyAccount::removeAccountIds(void)
 
 void MyMoneyAccount::removeAccountId(const QString& account)
 {
-  QStringList::Iterator it;
+  int pos;
 
-  it = m_accountList.find(account);
-  if(it != m_accountList.end())
-    m_accountList.remove(it);
+  pos = m_accountList.indexOf(account);
+  if(pos != -1)
+    m_accountList.removeAt(pos);
 }
 
 MyMoneyAccount::accountTypeE MyMoneyAccount::accountGroup(MyMoneyAccount::accountTypeE type)
@@ -301,7 +301,7 @@ const MyMoneyMoney MyMoneyAccountLoan::interestRate(const QDate& date) const
 
   QMap<QString, QString>::ConstIterator it;
   for(it = pairs().begin(); it != pairs().end(); ++it) {
-    if(regExp.search(it.key()) > -1) {
+    if(regExp.indexIn(it.key()) > -1) {
       if(qstrcmp(it.key().toLatin1(),key.toLatin1()) <= 0)
         val = *it;
       else
@@ -348,7 +348,7 @@ const QDate MyMoneyAccountLoan::nextInterestChange(void) const
   QDate rc;
 
   QRegExp regExp("(\\d{4})-(\\d{2})-(\\d{2})");
-  if(regExp.search(value("interest-nextchange")) != -1) {
+  if(regExp.indexIn(value("interest-nextchange")) != -1) {
     rc.setYMD(regExp.cap(1).toInt(), regExp.cap(2).toInt(), regExp.cap(3).toInt());
   }
   return rc;
@@ -367,7 +367,7 @@ int MyMoneyAccountLoan::interestChangeFrequency(int* unit) const
     *unit = 1;
 
   QRegExp regExp("(\\d+)/(\\d{1})");
-  if(regExp.search(value("interest-changefrequency")) != -1) {
+  if(regExp.indexIn(value("interest-changefrequency")) != -1) {
     rc = regExp.cap(1).toInt();
     if(unit != 0) {
       *unit = regExp.cap(2).toInt();
@@ -514,7 +514,7 @@ void MyMoneyAccount::writeXML(QDomDocument& document, QDomElement& parent) const
     QDomElement onlinesettings = document.createElement("ONLINEBANKING");
     QMap<QString,QString>::const_iterator it_key = m_onlineBankingSettings.pairs().begin();
     while ( it_key != m_onlineBankingSettings.pairs().end() ) {
-      onlinesettings.setAttribute(it_key.key(), it_key.data());
+      onlinesettings.setAttribute(it_key.key(), it_key.value());
       ++it_key;
     }
     el.appendChild(onlinesettings);
@@ -616,6 +616,7 @@ void MyMoneyAccount::adjustBalance(const MyMoneySplit& s, bool reverse)
 
 QPixmap MyMoneyAccount::accountPixmap(bool reconcileFlag) const
 {
+  Q_UNUSED(reconcileFlag)
   QString pixmap;
 
   switch(accountType()) {
@@ -655,7 +656,7 @@ QPixmap MyMoneyAccount::accountPixmap(bool reconcileFlag) const
       break;
   }
   QPixmap result;// = DesktopIcon(pixmap);
-#warning "port to kde4"
+#warning "port to kde4 - best is to move this away from the engine object"
 #if 0
   if(isClosed()) {
     QPixmap overlay = DesktopIcon("account-types_closed");
@@ -670,6 +671,7 @@ QPixmap MyMoneyAccount::accountPixmap(bool reconcileFlag) const
 
 QPixmap MyMoneyAccount::accountGroupPixmap(bool reconcileFlag) const
 {
+  Q_UNUSED(reconcileFlag)
   QString icon;
   switch (accountGroup())
   {
@@ -689,7 +691,7 @@ QPixmap MyMoneyAccount::accountGroupPixmap(bool reconcileFlag) const
       icon = "account";
       break;
   }
-#warning "port to kde4"
+#warning "port to kde4 - best is to move this away from the engine object"
   QPixmap result = QPixmap(KGlobal::dirs()->findResource("appdata",QString( "icons/hicolor/22x22/actions/%1.png").arg(icon)));
 #if 0
   if(isClosed()) {

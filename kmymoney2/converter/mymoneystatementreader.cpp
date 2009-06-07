@@ -30,8 +30,7 @@
 #include <qstringlist.h>
 #include <qtimer.h>
 #include <q3textedit.h>
-//Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
@@ -299,7 +298,7 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
   //
   signalProgress(0, s.m_listSecurities.count(), "Importing Statement ...");
   int progress = 0;
-  Q3ValueList<MyMoneyStatement::Security>::const_iterator it_s = s.m_listSecurities.begin();
+  QList<MyMoneyStatement::Security>::const_iterator it_s = s.m_listSecurities.begin();
   while ( it_s != s.m_listSecurities.end() )
   {
     processSecurityEntry(*it_s);
@@ -318,7 +317,7 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
       qDebug("Processing transactions (%s)", m_account.name().data());
       signalProgress(0, s.m_listTransactions.count(), "Importing Statement ...");
       int progress = 0;
-      Q3ValueList<MyMoneyStatement::Transaction>::const_iterator it_t = s.m_listTransactions.begin();
+      QList<MyMoneyStatement::Transaction>::const_iterator it_t = s.m_listTransactions.begin();
       while ( it_t != s.m_listTransactions.end() )
       {
         processTransactionEntry(*it_t);
@@ -352,7 +351,7 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
       }
 
       int progress = 0;
-      Q3ValueList<MyMoneyStatement::Price>::const_iterator it_p = s.m_listPrices.begin();
+      QList<MyMoneyStatement::Price>::const_iterator it_p = s.m_listPrices.begin();
       while(it_p != s.m_listPrices.end()) {
         processPriceEntry(*it_p);
         signalProgress(++progress, 0);
@@ -1084,7 +1083,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
   //                   process splits
   //******************************************
 
-    Q3ValueList<MyMoneyStatement::Split>::const_iterator it_s;
+    QList<MyMoneyStatement::Split>::const_iterator it_s;
     for(it_s = t_in.m_listSplits.begin(); it_s != t_in.m_listSplits.end(); ++it_s) {
       MyMoneySplit s2;
       s2.setAccountId((*it_s).m_accountId);

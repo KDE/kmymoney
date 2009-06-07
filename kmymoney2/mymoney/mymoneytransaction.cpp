@@ -68,7 +68,7 @@ MyMoneyTransaction::MyMoneyTransaction(const QDomElement& node, const bool force
   QDomNodeList nodeList = node.elementsByTagName("SPLITS");
   if(nodeList.count() > 0) {
     nodeList = nodeList.item(0).toElement().elementsByTagName("SPLIT");
-    for(unsigned int i = 0; i < nodeList.count(); ++i) {
+    for(int i = 0; i < nodeList.count(); ++i) {
       MyMoneySplit s(nodeList.item(i).toElement());
       if(!m_bankID.isEmpty())
         s.setBankID(m_bankID);
@@ -192,7 +192,7 @@ void MyMoneyTransaction::removeSplit(const MyMoneySplit& split)
 
   for(it = m_splits.begin(); it != m_splits.end(); ++it) {
     if(split.id() == (*it).id()) {
-      m_splits.remove(it);
+      m_splits.erase(it);
       break;
     }
   }
@@ -328,7 +328,7 @@ unsigned long MyMoneyTransaction::hash(const QString& txt, unsigned long h)
 {
   unsigned long g;
 
-  for(unsigned i=0; i < txt.length(); ++i) {
+  for(int i=0; i < txt.length(); ++i) {
     unsigned short uc = txt[i].unicode();
     for(unsigned j = 0; j < 2; ++j) {
       unsigned char c = uc & 0xff;

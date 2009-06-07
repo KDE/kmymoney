@@ -217,7 +217,7 @@ QString MyMoneyUtils::getFileExtension(QString strFileName)
   if(!strFileName.isEmpty())
   {
     //find last . delminator
-    int nLoc = strFileName.findRev('.');
+    int nLoc = strFileName.lastIndexOf('.');
     if(nLoc != -1)
     {
       strTemp = strFileName.right(strFileName.length() - (nLoc + 1));
@@ -234,7 +234,7 @@ MyMoneyTracer::MyMoneyTracer(const char* name)
 {
   if(m_onoff) {
     QRegExp exp("(.*)::(.*)");
-    if(exp.search(name) != -1) {
+    if(exp.indexIn(name) != -1) {
       m_className = exp.cap(1);
       m_memberName = exp.cap(2);
     } else {
@@ -331,7 +331,7 @@ unsigned long extractId(const QString& txt)
   int pos;
   unsigned long rc = 0;
 
-  pos = txt.find(QRegExp("\\d+"), 0);
+  pos = txt.indexOf(QRegExp("\\d+"), 0);
   if(pos != -1) {
     rc = txt.mid(pos).toInt();
   }

@@ -29,8 +29,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qstring.h>
-#include <q3valuelist.h>
+#include <QString>
+#include <QList>
 #include <qdatetime.h>
 
 // ----------------------------------------------------------------------------
@@ -88,7 +88,7 @@ public:
     QString m_strBrokerageAccount;
     QString m_strSymbol;
     QString m_strSecurity;
-    Q3ValueList<Split> m_listSplits;
+    QList<Split> m_listSplits;
   };
 
   struct Price
@@ -125,9 +125,9 @@ public:
   MyMoneyMoney m_closingBalance;
   EType m_eType;
 
-  Q3ValueList<Transaction> m_listTransactions;
-  Q3ValueList<Price> m_listPrices;
-  Q3ValueList<Security> m_listSecurities;
+  QList<Transaction> m_listTransactions;
+  QList<Price> m_listPrices;
+  QList<Security> m_listSecurities;
 
   bool m_skipCategoryMatching;
 
