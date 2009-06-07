@@ -28,7 +28,7 @@
 #include "mymoneyforecast.h"
 #include "reportaccount.h"
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 using namespace reports;
 
@@ -166,7 +166,7 @@ KMyMoneyAccountTreeForecastItem::KMyMoneyAccountTreeForecastItem(K3ListView *par
   
 }
 
-KMyMoneyAccountTreeForecastItem::KMyMoneyAccountTreeForecastItem(KMyMoneyAccountTreeForecastItem *parent, const MyMoneyAccount& account, const MyMoneyForecast& forecast, const Q3ValueList<MyMoneyPrice>& price, const MyMoneySecurity& security, const EForecastViewType forecastType) :
+KMyMoneyAccountTreeForecastItem::KMyMoneyAccountTreeForecastItem(KMyMoneyAccountTreeForecastItem *parent, const MyMoneyAccount& account, const MyMoneyForecast& forecast, const QList<MyMoneyPrice>& price, const MyMoneySecurity& security, const EForecastViewType forecastType) :
     KMyMoneyAccountTreeBaseItem(parent, account, price, security),
     m_forecast(forecast),
     m_forecastType(forecastType)

@@ -19,7 +19,7 @@
 // Project Includes
 #include <kmymoneyaccounttreebudget.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 KMyMoneyAccountTreeBudget::KMyMoneyAccountTreeBudget(QWidget* parent, const char* name) :
   KMyMoneyAccountTreeBase::KMyMoneyAccountTreeBase(parent, name)
@@ -46,7 +46,7 @@ KMyMoneyAccountTreeBudgetItem::KMyMoneyAccountTreeBudgetItem(K3ListView *parent,
   updateAccount(true);
 }
 
-KMyMoneyAccountTreeBudgetItem::KMyMoneyAccountTreeBudgetItem(KMyMoneyAccountTreeBudgetItem *parent, const MyMoneyAccount& account, const MyMoneyBudget& budget, const Q3ValueList<MyMoneyPrice>& price, const MyMoneySecurity& security) :
+KMyMoneyAccountTreeBudgetItem::KMyMoneyAccountTreeBudgetItem(KMyMoneyAccountTreeBudgetItem *parent, const MyMoneyAccount& account, const MyMoneyBudget& budget, const QList<MyMoneyPrice>& price, const MyMoneySecurity& security) :
   KMyMoneyAccountTreeBaseItem(parent, account, price, security),
   m_budget(budget)
 {

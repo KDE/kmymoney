@@ -28,7 +28,7 @@
 #include <qpixmap.h>
 #include <qstyle.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -71,7 +71,7 @@ KMyMoneyAccountTreeItem::KMyMoneyAccountTreeItem(K3ListView *parent, const MyMon
   updateAccount();
 }
 
-KMyMoneyAccountTreeItem::KMyMoneyAccountTreeItem(KMyMoneyAccountTreeBaseItem *parent, const MyMoneyAccount& account, const Q3ValueList<MyMoneyPrice>& price, const MyMoneySecurity& security) :
+KMyMoneyAccountTreeItem::KMyMoneyAccountTreeItem(KMyMoneyAccountTreeBaseItem *parent, const MyMoneyAccount& account, const QList<MyMoneyPrice>& price, const MyMoneySecurity& security) :
     KMyMoneyAccountTreeBaseItem(parent,account,price,security),
     m_reconcileFlag(false)
 {

@@ -21,7 +21,7 @@
 
 #include <kmymoneyaccounttreebase.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 class KMyMoneyAccountTreeItem;
 
@@ -79,7 +79,7 @@ public:
    * @param security const reference to the security used to show the value. Usually
    *                 one should pass MyMoneyFile::baseCurrency() here.
    */
-  KMyMoneyAccountTreeItem(KMyMoneyAccountTreeBaseItem *parent, const MyMoneyAccount& account, const Q3ValueList<MyMoneyPrice>& price = Q3ValueList<MyMoneyPrice>(), const MyMoneySecurity& security = MyMoneySecurity());
+  KMyMoneyAccountTreeItem(KMyMoneyAccountTreeBaseItem *parent, const MyMoneyAccount& account, const QList<MyMoneyPrice>& price = QList<MyMoneyPrice>(), const MyMoneySecurity& security = MyMoneySecurity());
 
   void setReconciliation(bool);
 

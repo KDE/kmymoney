@@ -28,7 +28,7 @@
 #include <qpixmap.h>
 #include <qstyle.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 #include <QDragMoveEvent>
 #include <QDropEvent>
 #include <QPaintEvent>
@@ -573,7 +573,7 @@ KMyMoneyAccountTreeBaseItem::KMyMoneyAccountTreeBaseItem(K3ListView *parent, con
   setName();
 }
 
-KMyMoneyAccountTreeBaseItem::KMyMoneyAccountTreeBaseItem(KMyMoneyAccountTreeBaseItem *parent, const MyMoneyAccount& account, const Q3ValueList<MyMoneyPrice>& price, const MyMoneySecurity& security) :
+KMyMoneyAccountTreeBaseItem::KMyMoneyAccountTreeBaseItem(KMyMoneyAccountTreeBaseItem *parent, const MyMoneyAccount& account, const QList<MyMoneyPrice>& price, const MyMoneySecurity& security) :
   K3ListViewItem(parent),
   m_price(price),
   m_security(security),
@@ -609,7 +609,7 @@ MyMoneyMoney KMyMoneyAccountTreeBaseItem::value() const
 {
   // calculate the new value by running down the price list
   MyMoneyMoney result = balance();
-  Q3ValueList<MyMoneyPrice>::const_iterator it_p;
+  QList<MyMoneyPrice>::const_iterator it_p;
   QString security = m_security.id();
   for(it_p = m_price.begin(); it_p != m_price.end(); ++it_p) {
     result = (result * (MyMoneyMoney(1,1) / (*it_p).rate(security))).convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision()));

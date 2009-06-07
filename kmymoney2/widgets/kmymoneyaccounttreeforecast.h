@@ -23,7 +23,7 @@
 
 #include <qtimer.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 class Q3DragObject;
 
 // ----------------------------------------------------------------------------
@@ -78,7 +78,7 @@ public:
     * @param security const reference to the security used to show the value. Usually
     *                 one should pass MyMoneyFile::baseCurrency() here.
     */
-  KMyMoneyAccountTreeForecastItem(KMyMoneyAccountTreeForecastItem *parent, const MyMoneyAccount& account, const MyMoneyForecast& forecast, const Q3ValueList<MyMoneyPrice>& price = Q3ValueList<MyMoneyPrice>(), const MyMoneySecurity& security = MyMoneySecurity(), const EForecastViewType forecastViewType = eUndefined);
+  KMyMoneyAccountTreeForecastItem(KMyMoneyAccountTreeForecastItem *parent, const MyMoneyAccount& account, const MyMoneyForecast& forecast, const QList<MyMoneyPrice>& price = QList<MyMoneyPrice>(), const MyMoneySecurity& security = MyMoneySecurity(), const EForecastViewType forecastViewType = eUndefined);
 
   /**
     * Constructor to be used to construct an account
