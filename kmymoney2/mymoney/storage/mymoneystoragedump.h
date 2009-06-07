@@ -27,8 +27,7 @@
 // QT Includes
 
 #include <qdatastream.h>
-//Added by qt3to4:
-#include <Q3TextStream>
+#include <QTextStream>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -50,8 +49,8 @@ public:
   void writeStream(QDataStream& s, IMyMoneySerialize* storage);
 
 private:
-  void dumpTransaction(Q3TextStream& s, IMyMoneyStorage* storage, const MyMoneyTransaction& it_t);
-  void dumpKVP(const QString& headline, Q3TextStream& s, const MyMoneyKeyValueContainer &kvp, int indent = 0);
+  void dumpTransaction(QTextStream& s, IMyMoneyStorage* storage, const MyMoneyTransaction& it_t);
+  void dumpKVP(const QString& headline, QTextStream& s, const MyMoneyKeyValueContainer &kvp, int indent = 0);
   const QString reconcileToString(MyMoneySplit::reconcileFlagE flag) const;
 };
 

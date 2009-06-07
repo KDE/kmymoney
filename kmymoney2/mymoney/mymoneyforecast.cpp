@@ -22,10 +22,9 @@
 
 #include <qstring.h>
 #include <qdatetime.h>
-//Added by qt3to4:
-#include <Q3TextStream>
+#include <QTextStream>
 #include <QList>
-#include <q3tl.h>
+#include <QtAlgorithms>
 // ----------------------------------------------------------------------------
 // KDE Includes
 #include <kdebug.h>
@@ -298,8 +297,8 @@ QList<MyMoneyAccount> MyMoneyForecast::forecastAccountList(void)
     if(acc.isClosed()             //check the account is not closed
     || (!acc.isAssetLiability()) ) {
     //|| (acc.accountType() == MyMoneyAccount::Investment) ) {//check that it is not an Investment account and only include Stock accounts
-      accList.remove(accList_t);    //remove the account if it is not of the correct type
-      accList_t = accList.begin();
+    //remove the account if it is not of the correct type
+      accList_t = accList.erase(accList_t);
     } else {
       ++accList_t;
     }
@@ -319,11 +318,10 @@ QList<MyMoneyAccount> MyMoneyForecast::accountList(void)
   for(; accList_t != accList.end(); ) {
     MyMoneyAccount acc = *accList_t;
     if(!isForecastAccount( acc ) ) {
-      accList.remove(accList_t);    //remove the account
-      accList_t = accList.begin();
-       } else {
-         ++accList_t;
-       }
+      accList_t = accList.erase(accList_t);    //remove the account
+    } else {
+      ++accList_t;
+    }
   }
   return accList;
 }
@@ -624,7 +622,7 @@ void MyMoneyForecast::addFutureTransactions(void)
 #if 0
   QFile trcFile("forecast.csv");
     trcFile.open(QIODevice::WriteOnly);
-    Q3TextStream s(&trcFile);
+    QTextStream s(&trcFile);
 
     {
       s << "Already present transactions\n";
@@ -656,20 +654,20 @@ void MyMoneyForecast::addScheduledTransactions (void)
   if(schedule.count() > 0) {
     QList<MyMoneySchedule>::Iterator it;
     do {
-      qBubbleSort(schedule);
+      qSort(schedule);
       it = schedule.begin();
       if(it == schedule.end())
         break;
 
       QDate nextDate = (*it).nextPayment((*it).lastPayment());
       if(!nextDate.isValid()) {
-        schedule.remove(it);
+        schedule.erase(it);
         continue;
       }
 
       if (nextDate > forecastEndDate()) {
         // We're done with this schedule, let's move on to the next
-        schedule.remove(it);
+        schedule.erase(it);
         continue;
       }
 
@@ -738,12 +736,12 @@ void MyMoneyForecast::addScheduledTransactions (void)
         } catch(MyMoneyException* e) {
           kDebug(2) << __func__ << " Schedule " << (*it).id() << " (" << (*it).name() << "): " << e->what();
 
-          schedule.remove(it);
+          schedule.erase(it);
           delete e;
         }
       } else {
         // remove schedule from list
-        schedule.remove(it);
+        schedule.erase(it);
       }
     }
     while(1);
@@ -985,8 +983,7 @@ void MyMoneyForecast::purgeForecastAccountsList(QMap<QString, dailyBalances>& ac
   QMap<QString, QString>::Iterator it_n;
   for ( it_n = m_nameIdx.begin(); it_n != m_nameIdx.end(); ) {
     if(!accountList.contains(*it_n)) {
-      m_nameIdx.remove(it_n);
-      it_n = m_nameIdx.begin();
+      it_n = m_nameIdx.erase(it_n);
     } else
       ++it_n;
   }
@@ -1118,11 +1115,11 @@ QList<MyMoneyAccount> MyMoneyForecast::budgetAccountList(void)
     MyMoneyAccount acc = *accList_t;
     if(acc.isClosed()             //check the account is not closed
        || (!acc.isIncomeExpense()) ) {
-      accList.remove(accList_t);    //remove the account if it is not of the correct type
-      accList_t = accList.begin();
-       } else {
-         ++accList_t;
-       }
+    //remove the account if it is not of the correct type
+      accList_t = accList.erase(accList_t);
+    } else {
+      ++accList_t;
+    }
   }
   return accList;
 }

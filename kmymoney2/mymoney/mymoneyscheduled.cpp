@@ -111,7 +111,7 @@ MyMoneySchedule::MyMoneySchedule(const QDomElement& node) :
   nodeList = node.elementsByTagName("PAYMENTS");
   if(nodeList.count() > 0) {
     nodeList = nodeList.item(0).toElement().elementsByTagName("PAYMENT");
-    for(unsigned int i = 0; i < nodeList.count(); ++i) {
+    for(int i = 0; i < nodeList.count(); ++i) {
       m_recordedPayments << stringToDate(nodeList.item(i).toElement().attribute("date"));
     }
   }
@@ -1080,6 +1080,7 @@ int MyMoneySchedule::variation(void) const
 
 void MyMoneySchedule::setVariation(int var)
 {
+  Q_UNUSED(var)
 #if 0
   deletePair("kmm-variation");
   if(var != 0)

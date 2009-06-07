@@ -848,13 +848,13 @@ bool MyMoneyTransactionFilter::translateDateRange(dateOptionE id, QDate& start, 
 void MyMoneyTransactionFilter::removeReference(const QString& id)
 {
   if(m_accounts.find(id)) {
-    qDebug("%s", (QString("Remove account '%1' from report").arg(id)).data());
+    qDebug("%s", qPrintable(QString("Remove account '%1' from report").arg(id)));
     m_accounts.remove(id);
   } else if(m_categories.find(id)) {
-    qDebug("%s", (QString("Remove category '%1' from report").arg(id)).data());
+    qDebug("%s", qPrintable(QString("Remove category '%1' from report").arg(id)));
     m_categories.remove(id);
   } else if(m_payees.find(id)) {
-    qDebug("%s", (QString("Remove payee '%1' from report").arg(id)).data());
+    qDebug("%s", qPrintable(QString("Remove payee '%1' from report").arg(id)));
     m_payees.remove(id);
   }
 }

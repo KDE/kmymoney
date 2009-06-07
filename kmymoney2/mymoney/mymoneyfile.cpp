@@ -739,7 +739,7 @@ const MyMoneyAccount MyMoneyFile::openingBalanceAccount(const MyMoneySecurity& s
       ft.commit();
 
     } catch(MyMoneyException* e) {
-      qDebug("Unable to create opening balance account for security %s", security.id().data());
+      qDebug("Unable to create opening balance account for security %s", qPrintable(security.id()));
       delete e;
     }
     return acc;
@@ -765,7 +765,7 @@ const MyMoneyAccount MyMoneyFile::openingBalanceAccount_internal(const MyMoneySe
   accountList(accounts, equity().accountList(), true);
 
   for(it = accounts.begin(); it != accounts.end(); ++it) {
-    if(match.search((*it).name()) != -1) {
+    if(match.indexIn((*it).name()) != -1) {
       if((*it).currencyId() == security.id()) {
         acc = *it;
         break;
@@ -956,7 +956,7 @@ void MyMoneyFile::accountList(QList<MyMoneyAccount>& list, const QStringList& id
 
     for(it = list_a.begin(); it != list_a.end(); ++it) {
       if(!isStandardAccount((*it).id())) {
-        if(idlist.findIndex((*it).id()) != -1) {
+        if(idlist.indexOf((*it).id()) != -1) {
           list.append(*it);
           if(recursive == true) {
             accountList(list, (*it).accountList(), true);
@@ -1102,7 +1102,7 @@ void MyMoneyFile::warningMissingRate(const QString& fromId, const QString& toId)
     qWarning("Missing price info for conversion from %s to %s", qPrintable(from.name()), qPrintable(to.name()));
 
   } catch(MyMoneyException *e) {
-    qFatal("Missing security caught in MyMoneyFile::warningMissingRate(): %s(%ld) %s", e->file().data(), e->line(), e->what().data());
+    qFatal("Missing security caught in MyMoneyFile::warningMissingRate(): %s(%ld) %s", qPrintable(e->file()), e->line(), qPrintable(e->what()));
     delete e;
   }
 }
@@ -1745,7 +1745,7 @@ QString MyMoneyFile::createCategory(const MyMoneyAccount& base, const QString& n
   if(base.id() != expense().id() && base.id() != income().id())
     throw new MYMONEYEXCEPTION("Invalid base category");
 
-  QStringList subAccounts = QStringList::split(AccountSeperator, name);
+  QStringList subAccounts = name.split(AccountSeperator);
   QStringList::Iterator it;
   for (it = subAccounts.begin(); it != subAccounts.end(); ++it)
   {
@@ -1773,10 +1773,10 @@ QString MyMoneyFile::createCategory(const MyMoneyAccount& base, const QString& n
     catch (MyMoneyException *e)
     {
       qDebug("Unable to add account %s, %s, %s: %s",
-        categoryAccount.name().toLatin1(),
-        parent.name().toLatin1(),
-        categoryText.toLatin1(),
-        e->what().toLatin1());
+        qPrintable(categoryAccount.name()),
+        qPrintable(parent.name()),
+        qPrintable(categoryText),
+        qPrintable(e->what()));
       delete e;
     }
 
@@ -2141,7 +2141,7 @@ bool MyMoneyFile::checkNoUsed(const QString& accId, const QString& no) const
 {
   // by definition, an empty string or a non-numeric string is not used
   QRegExp exp(QString("(.*\\D)?(\\d+)(\\D.*)?"));
-  if(no.isEmpty() || exp.search(no) == -1)
+  if(no.isEmpty() || exp.indexIn(no) == -1)
     return false;
 
   MyMoneyTransactionFilter filter;

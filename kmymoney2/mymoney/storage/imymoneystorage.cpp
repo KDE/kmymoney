@@ -22,7 +22,7 @@
 
 #include "imymoneystorage.h"
 
-bool MyMoneyFileBitArray::testBit(uint index) const
+bool MyMoneyFileBitArray::testBit(int index) const
 {
   if(index < size())
     return QBitArray::testBit(index);

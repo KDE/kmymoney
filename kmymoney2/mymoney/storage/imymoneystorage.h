@@ -58,9 +58,9 @@ class MyMoneyFileBitArray : public QBitArray
 public:
   MyMoneyFileBitArray() : QBitArray() {}
   MyMoneyFileBitArray(int size) : QBitArray(size) {}
-  bool testBit(uint index) const;
+  bool testBit(int index) const;
   bool operator[](int index) const { return testBit(index); }
-  bool at(uint index) const { return testBit(index); }
+  bool at(int index) const { return testBit(index); }
 };
 
 

@@ -27,8 +27,7 @@
 #include <qdatetime.h>
 #include <QList>
 #include <qstringlist.h>
-//Added by qt3to4:
-#include <Q3TextStream>
+#include <QTextStream>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -54,7 +53,7 @@ void MyMoneyStorageDump::readStream(QDataStream& /* s */, IMyMoneySerialize* /* 
 
 void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storage)
 {
-  Q3TextStream s(_s.device());
+  QTextStream s(_s.device());
   IMyMoneyStorage* storage = dynamic_cast<IMyMoneyStorage *> (_storage);
   MyMoneyPayee user = storage->user();
 
@@ -249,7 +248,7 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storag
     QMap<QString, QString>kvp = (*it_e).pairs();
     QMap<QString, QString>::Iterator it;
     for(it = kvp.begin(); it != kvp.end(); ++it) {
-      s << "      '" << it.key() << "' = '" << it.data() << "'\n";
+      s << "      '" << it.key() << "' = '" << it.value() << "'\n";
     }
     s << "\n";
   }
@@ -342,18 +341,18 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storag
   }
 }
 
-void MyMoneyStorageDump::dumpKVP(const QString& headline, Q3TextStream& s, const MyMoneyKeyValueContainer &kvp, int indent)
+void MyMoneyStorageDump::dumpKVP(const QString& headline, QTextStream& s, const MyMoneyKeyValueContainer &kvp, int indent)
 {
   QString ind;
   ind.fill(' ', indent);
   s << ind << headline << "\n";
   QMap<QString, QString>::const_iterator it;
   for(it = kvp.pairs().begin(); it != kvp.pairs().end(); ++it) {
-    s << ind << "  '" << it.key() << "' = '" << it.data() << "'\n";
+    s << ind << "  '" << it.key() << "' = '" << it.value() << "'\n";
   }
 }
 
-void MyMoneyStorageDump::dumpTransaction(Q3TextStream& s, IMyMoneyStorage* storage, const MyMoneyTransaction& it_t)
+void MyMoneyStorageDump::dumpTransaction(QTextStream& s, IMyMoneyStorage* storage, const MyMoneyTransaction& it_t)
 {
   s << "  ID = " << it_t.id() << "\n";
   s << "  Postdate  = " << it_t.postDate().toString(Qt::ISODate) << "\n";
@@ -432,7 +431,7 @@ const QString MyMoneyStorageDump::reconcileToString(MyMoneySplit::reconcileFlagE
 }
 
 #if 0
-void MyMoneyStorageDump::dumpPriceHistory(Q3TextStream& s, const equity_price_history history)
+void MyMoneyStorageDump::dumpPriceHistory(QTextStream& s, const equity_price_history history)
 {
   if(history.count() != 0) {
     s << "    Price History:\n";

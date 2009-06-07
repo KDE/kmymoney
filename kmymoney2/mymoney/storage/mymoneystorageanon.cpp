@@ -44,8 +44,8 @@
 #include "mymoneyreport.h"
 #include "mymoneyinstitution.h"
 
-QStringList MyMoneyStorageANON::zKvpNoModify = QStringList::split(",","kmm-baseCurrency,PreferredAccount,Tax,fixed-interest,interest-calculation,payee,schedule,term,kmm-online-source,kmm-brokerage-account,lastStatementDate,kmm-sort-reconcile,kmm-sort-std,kmm-iconpos,mm-closed,payee,schedule,term");
-QStringList MyMoneyStorageANON::zKvpXNumber = QStringList::split(",","final-payment,loan-amount,periodic-payment");
+QStringList MyMoneyStorageANON::zKvpNoModify = QString("kmm-baseCurrency,PreferredAccount,Tax,fixed-interest,interest-calculation,payee,schedule,term,kmm-online-source,kmm-brokerage-account,lastStatementDate,kmm-sort-reconcile,kmm-sort-std,kmm-iconpos,mm-closed,payee,schedule,term").split(",");
+QStringList MyMoneyStorageANON::zKvpXNumber = QString("final-payment,loan-amount,periodic-payment").split(",");
 
 
 MyMoneyStorageANON::MyMoneyStorageANON() :
@@ -121,7 +121,7 @@ void MyMoneyStorageANON::writePayee(QDomElement& payee, const MyMoneyPayee& _p)
   QStringList keys;
   MyMoneyPayee::payeeMatchType matchType = p.matchData(ignoreCase, keys);
   QRegExp exp("[A-Za-z]");
-  p.setMatchData(matchType, ignoreCase, QStringList::split(";", keys.join(";").replace(exp, "x")));
+  p.setMatchData(matchType, ignoreCase, keys.join(";").replace(exp, "x").split(";"));
 
   MyMoneyStorageXML::writePayee(payee, p);
 }
@@ -174,11 +174,11 @@ void MyMoneyStorageANON::fakeKeyValuePair(MyMoneyKeyValueContainer& kvp)
   for(it = kvp.pairs().begin(); it != kvp.pairs().end(); ++it)
   {
     if ( zKvpXNumber.contains( it.key() ) || it.key().left(3)=="ir-" )
-      pairs[it.key()] = hideNumber(MyMoneyMoney(it.data())).toString();
+      pairs[it.key()] = hideNumber(MyMoneyMoney(it.value())).toString();
     else if ( zKvpNoModify.contains( it.key() ) )
-      pairs[it.key()] = it.data();
+      pairs[it.key()] = it.value();
     else
-      pairs[it.key()] = hideString(it.data());
+      pairs[it.key()] = hideString(it.value());
   }
   kvp.setPairs(pairs);
 }

@@ -34,22 +34,22 @@
 #include "mymoneyfile.h"
 #include "mymoneyreport.h"
 
-const QStringList MyMoneyReport::kRowTypeText = QStringList::split ( ",", "none,assetliability,expenseincome,category,topcategory,account,payee,month,week,topaccount,topaccount-account,equitytype,accounttype,institution,budget,budgetactual,schedule,accountinfo,accountloaninfo,accountreconcile,cashflow", true );
-const QStringList MyMoneyReport::kColumnTypeText = QStringList::split ( ",", "none,months,bimonths,quarters,4,5,6,weeks,8,9,10,11,years", true );
+const QStringList MyMoneyReport::kRowTypeText = QString("none,assetliability,expenseincome,category,topcategory,account,payee,month,week,topaccount,topaccount-account,equitytype,accounttype,institution,budget,budgetactual,schedule,accountinfo,accountloaninfo,accountreconcile,cashflow").split(",");
+const QStringList MyMoneyReport::kColumnTypeText = QString("none,months,bimonths,quarters,4,5,6,weeks,8,9,10,11,years").split(",");
 
 // if you add names here, don't forget to update the bitmap for EQueryColumns
 // and shift the bit for eQCend one position to the left
-const QStringList MyMoneyReport::kQueryColumnsText = QStringList::split ( ",", "none,number,payee,category,memo,account,reconcileflag,action,shares,price,performance,loan,balance", true );
+const QStringList MyMoneyReport::kQueryColumnsText = QString("none,number,payee,category,memo,account,reconcileflag,action,shares,price,performance,loan,balance").split(",");
 
 const MyMoneyReport::EReportType MyMoneyReport::kTypeArray[] = { eNoReport, ePivotTable, ePivotTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, ePivotTable, ePivotTable, eInfoTable, eInfoTable, eInfoTable, eQueryTable, eQueryTable, eNoReport };
-const QStringList MyMoneyReport::kDetailLevelText = QStringList::split ( ",", "none,all,top,group,total,invalid", true );
-const QStringList MyMoneyReport::kChartTypeText = QStringList::split ( ",", "none,line,bar,pie,ring,stackedbar,invalid", true );
+const QStringList MyMoneyReport::kDetailLevelText = QString("none,all,top,group,total,invalid").split(",");
+const QStringList MyMoneyReport::kChartTypeText = QString("none,line,bar,pie,ring,stackedbar,invalid").split(",");
 
 // This should live in mymoney/mymoneytransactionfilter.h
-static const QStringList kTypeText = QStringList::split ( ",", "all,payments,deposits,transfers,none" );
-static const QStringList kStateText = QStringList::split ( ",", "all,notreconciled,cleared,reconciled,frozen,none" );
-static const QStringList kDateLockText = QStringList::split ( ",", "alldates,untiltoday,currentmonth,currentyear,monthtodate,yeartodate,yeartomonth,lastmonth,lastyear,last7days,last30days,last3months,last6months,last12months,next7days,next30days,next3months,next6months,next12months,userdefined,last3tonext3months,last11Months,currentQuarter,lastQuarter,nextQuarter,currentFiscalYear,lastFiscalYear,today" );
-static const QStringList kAccountTypeText = QStringList::split ( ",", "unknown,checkings,savings,cash,creditcard,loan,certificatedep,investment,moneymarket,asset,liability,currency,income,expense,assetloan,stock,equity,invalid" );
+static const QStringList kTypeText = QString("all,payments,deposits,transfers,none").split(",");
+static const QStringList kStateText = QString("all,notreconciled,cleared,reconciled,frozen,none").split(",");
+static const QStringList kDateLockText = QString("alldates,untiltoday,currentmonth,currentyear,monthtodate,yeartodate,yeartomonth,lastmonth,lastyear,last7days,last30days,last3months,last6months,last12months,next7days,next30days,next3months,next6months,next12months,userdefined,last3tonext3months,last11Months,currentQuarter,lastQuarter,nextQuarter,currentFiscalYear,lastFiscalYear,today").split(",");
+static const QStringList kAccountTypeText = QString("unknown,checkings,savings,cash,creditcard,loan,certificatedep,investment,moneymarket,asset,liability,currency,income,expense,assetloan,stock,equity,invalid").split(",");
 
 MyMoneyReport::MyMoneyReport() :
     m_name ( "Unconfigured Pivot Table Report" ),
@@ -392,8 +392,8 @@ void MyMoneyReport::write ( QDomElement& e, QDomDocument *doc, bool anonymous ) 
   {
     QDomElement f = doc->createElement ( "TEXT" );
     f.setAttribute ( "pattern", textfilter.pattern() );
-    f.setAttribute ( "casesensitive", textfilter.caseSensitive() );
-    f.setAttribute ( "regex", !textfilter.wildcard() );
+    f.setAttribute ( "casesensitive", (textfilter.caseSensitivity() == Qt::CaseSensitive) ? 1 : 0);
+    f.setAttribute ( "regex", (textfilter.patternSyntax() == QRegExp::Wildcard) ? 1 : 0 );
     f.setAttribute ( "inverttext", m_invertText );
     e.appendChild ( f );
   }
@@ -572,11 +572,11 @@ bool MyMoneyReport::read ( const QDomElement& e )
     "REPORT" == e.tagName()
     &&
     (
-      ( e.attribute ( "type" ).find ( "pivottable 1." ) == 0 )
+      ( e.attribute ( "type" ).indexOf ( "pivottable 1." ) == 0 )
       ||
-      ( e.attribute ( "type" ).find ( "querytable 1." ) == 0 )
+      ( e.attribute ( "type" ).indexOf ( "querytable 1." ) == 0 )
       ||
-      ( e.attribute ( "type" ).find ( "infotable 1." ) == 0 )
+      ( e.attribute ( "type" ).indexOf ( "infotable 1." ) == 0 )
     )
   )
   {
@@ -588,11 +588,11 @@ bool MyMoneyReport::read ( const QDomElement& e )
     m_comment = e.attribute ( "comment", "Extremely old report" );
 
     //set report type
-    if(!e.attribute ( "type" ).find ( "pivottable" )) {
+    if(!e.attribute ( "type" ).indexOf ( "pivottable" )) {
       m_reportType = MyMoneyReport::ePivotTable;
-    } else if(!e.attribute ( "type" ).find ( "querytable" )) {
+    } else if(!e.attribute ( "type" ).indexOf ( "querytable" )) {
       m_reportType = MyMoneyReport::eQueryTable;
-    } else if(!e.attribute ( "type" ).find ( "infotable" )) {
+    } else if(!e.attribute ( "type" ).indexOf ( "infotable" )) {
       m_reportType = MyMoneyReport::eInfoTable;
     } else {
       m_reportType = MyMoneyReport::eNoReport;
@@ -607,7 +607,7 @@ bool MyMoneyReport::read ( const QDomElement& e )
     //check for reports with older settings which didn't have the detail attribute
     if ( e.hasAttribute ( "detail" ) )
     {
-      i = kDetailLevelText.findIndex ( e.attribute ( "detail", "all" ) );
+      i = kDetailLevelText.indexOf ( e.attribute ( "detail", "all" ) );
       if ( i != -1 )
         m_detailLevel = static_cast<EDetailLevel> ( i );
     } else if ( e.attribute ( "showsubaccounts", "0" ).toUInt() ) {
@@ -639,7 +639,7 @@ bool MyMoneyReport::read ( const QDomElement& e )
 
     //only load chart data if it is a pivot table
     if ( m_reportType == ePivotTable ) {
-      i = kChartTypeText.findIndex ( e.attribute ( "charttype" ) );
+      i = kChartTypeText.indexOf ( e.attribute ( "charttype" ) );
 
       if ( i != -1 )
         m_chartType = static_cast<EChartType> ( i );
@@ -667,13 +667,13 @@ bool MyMoneyReport::read ( const QDomElement& e )
     i = datelockstr.toUInt ( &ok );
     if ( !ok )
     {
-      i = kDateLockText.findIndex ( datelockstr );
+      i = kDateLockText.indexOf ( datelockstr );
       if ( i == -1 )
         i = userDefined;
     }
     setDateFilter ( static_cast<dateOptionE> ( i ) );
 
-    i = kRowTypeText.findIndex ( e.attribute ( "rowtype", "expenseincome" ) );
+    i = kRowTypeText.indexOf ( e.attribute ( "rowtype", "expenseincome" ) );
     if ( i != -1 )
     {
       setRowType ( static_cast<ERowType> ( i ) );
@@ -687,16 +687,16 @@ bool MyMoneyReport::read ( const QDomElement& e )
     if ( e.hasAttribute ( "showrowtotals" ) )
       m_showRowTotals = e.attribute ( "showrowtotals" ).toUInt();
 
-    i = kColumnTypeText.findIndex ( e.attribute ( "columntype", "months" ) );
+    i = kColumnTypeText.indexOf ( e.attribute ( "columntype", "months" ) );
     if ( i != -1 )
       setColumnType ( static_cast<EColumnType> ( i ) );
 
     unsigned qc = 0;
-    QStringList columns = QStringList::split ( ",", e.attribute ( "querycolumns", "none" ) );
+    QStringList columns = e.attribute ( "querycolumns", "none" ).split(",");
     QStringList::const_iterator it_column = columns.constBegin();
     while ( it_column != columns.constEnd() )
     {
-      i = kQueryColumnsText.findIndex ( *it_column );
+      i = kQueryColumnsText.indexOf ( *it_column );
       if ( i > 0 )
         qc |= ( 1 << ( i - 1 ) );
 
@@ -710,17 +710,22 @@ bool MyMoneyReport::read ( const QDomElement& e )
       QDomElement c = child.toElement();
       if ( "TEXT" == c.tagName() && c.hasAttribute ( "pattern" ) )
       {
-        setTextFilter ( QRegExp ( c.attribute ( "pattern" ), c.attribute ( "casesensitive", "1" ).toUInt(), !c.attribute ( "regex", "1" ).toUInt() ), c.attribute ( "inverttext", "0" ).toUInt() );
+        setTextFilter ( QRegExp ( c.attribute ( "pattern" ),
+                                  c.attribute ( "casesensitive", "1" ).toUInt()
+                                     ? Qt::CaseSensitive : Qt::CaseInsensitive,
+                                  c.attribute ( "regex", "1" ).toUInt()
+                                     ? QRegExp::Wildcard : QRegExp::RegExp ),
+                        c.attribute ( "inverttext", "0" ).toUInt() );
       }
       if ( "TYPE" == c.tagName() && c.hasAttribute ( "type" ) )
       {
-        i = kTypeText.findIndex ( c.attribute ( "type" ) );
+        i = kTypeText.indexOf ( c.attribute ( "type" ) );
         if ( i != -1 )
           addType ( i );
       }
       if ( "STATE" == c.tagName() && c.hasAttribute ( "state" ) )
       {
-        i = kStateText.findIndex ( c.attribute ( "state" ) );
+        i = kStateText.indexOf ( c.attribute ( "state" ) );
         if ( i != -1 )
           addState ( i );
       }
@@ -755,7 +760,7 @@ bool MyMoneyReport::read ( const QDomElement& e )
       }
       if ( "ACCOUNTGROUP" == c.tagName() && c.hasAttribute ( "group" ) )
       {
-        i = kAccountTypeText.findIndex ( c.attribute ( "group" ) );
+        i = kAccountTypeText.indexOf ( c.attribute ( "group" ) );
         if ( i != -1 )
           addAccountGroup ( static_cast<MyMoneyAccount::accountTypeE> ( i ) );
       }

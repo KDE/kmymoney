@@ -21,7 +21,6 @@
 #include "mymoneyseqaccessmgr.h"
 #include "mymoneytransactionfilter.h"
 #include "mymoneycategory.h"
-//Added by qt3to4:
 #include <QList>
 
 #define TRY try {
@@ -1020,7 +1019,7 @@ void MyMoneySeqAccessMgr::loadAccounts(const QMap<QString, MyMoneyAccount>& map)
       lastId = (*it_a).id();
   }
 
-  int pos = lastId.find(QRegExp("\\d+"), 0);
+  int pos = lastId.indexOf(QRegExp("\\d+"), 0);
   if(pos != -1) {
     m_nextAccountID = lastId.mid(pos).toInt();
   }
@@ -1043,7 +1042,7 @@ void MyMoneySeqAccessMgr::loadTransactions(const QMap<QString, MyMoneyTransactio
   m_transactionKeys = keys;
 
 
-  int pos = lastId.find(QRegExp("\\d+"), 0);
+  int pos = lastId.indexOf(QRegExp("\\d+"), 0);
   if(pos != -1) {
     m_nextTransactionID = lastId.mid(pos).toInt();
   }
@@ -1061,7 +1060,7 @@ void MyMoneySeqAccessMgr::loadInstitutions(const QMap<QString, MyMoneyInstitutio
       lastId = (*it_i).id();
   }
 
-  int pos = lastId.find(QRegExp("\\d+"), 0);
+  int pos = lastId.indexOf(QRegExp("\\d+"), 0);
   if(pos != -1) {
     m_nextInstitutionID = lastId.mid(pos).toInt();
   }
@@ -1082,7 +1081,7 @@ void MyMoneySeqAccessMgr::loadPayees(const QMap<QString, MyMoneyPayee>& map)
     }
   }
 
-  int pos = lastId.find(QRegExp("\\d+"), 0);
+  int pos = lastId.indexOf(QRegExp("\\d+"), 0);
   if(pos != -1) {
     m_nextPayeeID = lastId.mid(pos).toInt();
   }
@@ -1100,7 +1099,7 @@ void MyMoneySeqAccessMgr::loadSecurities(const QMap<QString, MyMoneySecurity>& m
       lastId = (*it_s).id();
   }
 
-  int pos = lastId.find(QRegExp("\\d+"), 0);
+  int pos = lastId.indexOf(QRegExp("\\d+"), 0);
   if(pos != -1) {
     m_nextSecurityID = lastId.mid(pos).toInt();
   }
@@ -1324,7 +1323,7 @@ void MyMoneySeqAccessMgr::loadSchedules(const QMap<QString, MyMoneySchedule>& ma
       lastId = (*it_s).id();
   }
 
-  int pos = lastId.find(QRegExp("\\d+"), 0);
+  int pos = lastId.indexOf(QRegExp("\\d+"), 0);
   if(pos != -1) {
     m_nextScheduleID = lastId.mid(pos).toInt();
   }
@@ -1526,7 +1525,7 @@ void MyMoneySeqAccessMgr::loadReports(const QMap<QString, MyMoneyReport>& map)
       lastId = (*it_r).id();
   }
 
-  int pos = lastId.find(QRegExp("\\d+"), 0);
+  int pos = lastId.indexOf(QRegExp("\\d+"), 0);
   if(pos != -1) {
     m_nextReportID = lastId.mid(pos).toInt();
   }
@@ -1600,7 +1599,7 @@ void MyMoneySeqAccessMgr::loadBudgets(const QMap<QString, MyMoneyBudget>& map)
       lastId = (*it_b).id();
   }
 
-  int pos = lastId.find(QRegExp("\\d+"), 0);
+  int pos = lastId.indexOf(QRegExp("\\d+"), 0);
   if(pos != -1) {
     m_nextBudgetID = lastId.mid(pos).toInt();
   }
