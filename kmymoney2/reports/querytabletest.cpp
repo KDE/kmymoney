@@ -15,8 +15,6 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <q3valuelist.h>
-#include <q3valuevector.h>
 #include <qfile.h>
 
 #include <kdebug.h>
@@ -120,7 +118,7 @@ void QueryTableTest::testQueryBasics()
 
     writeTabletoHTML(qtbl_1,"Transactions by Category.html");
 
-    Q3ValueList<ListTable::TableRow> rows = qtbl_1.rows();
+    QList<ListTable::TableRow> rows = qtbl_1.rows();
 
     CPPUNIT_ASSERT(rows.count() == 12);
     CPPUNIT_ASSERT(rows[0]["categorytype"]=="Expense");
@@ -352,7 +350,7 @@ void QueryTableTest::testAccountQuery()
 
     writeTabletoHTML(qtbl_1,"Accounts by Institution (No transactions).html");
 
-    Q3ValueList<ListTable::TableRow> rows = qtbl_1.rows();
+    QList<ListTable::TableRow> rows = qtbl_1.rows();
 
     CPPUNIT_ASSERT(rows.count() == 2);
     CPPUNIT_ASSERT(rows[0]["account"]=="Checking Account");
@@ -479,7 +477,7 @@ void QueryTableTest::testInvestment(void)
 #if 1
   writeTabletoHTML(invtran,"investment_transactions_test.html");
 
-  Q3ValueList<ListTable::TableRow> rows = invtran.rows();
+  QList<ListTable::TableRow> rows = invtran.rows();
 
   CPPUNIT_ASSERT(rows.count()==17);
   CPPUNIT_ASSERT(MyMoneyMoney(rows[1]["value"])==MyMoneyMoney(100000.00));
@@ -641,7 +639,7 @@ void QueryTableTest::testInvestment(void)
 
       QString html = qtbl_3.renderHTML();
 
-      Q3ValueList<ListTable::TableRow> rows = qtbl_3.rows();
+      QList<ListTable::TableRow> rows = qtbl_3.rows();
 
       CPPUNIT_ASSERT(rows.count() == 16);
 
@@ -681,7 +679,7 @@ void QueryTableTest::testTaxReport()
 
     writeTabletoHTML(qtbl_3,"Tax Transactions.html");
 
-    Q3ValueList<ListTable::TableRow> rows = qtbl_3.rows();
+    QList<ListTable::TableRow> rows = qtbl_3.rows();
 
     QString html = qtbl_3.renderHTML();
     CPPUNIT_ASSERT(rows.count() == 1);

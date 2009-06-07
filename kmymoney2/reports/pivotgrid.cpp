@@ -145,7 +145,7 @@ PivotGridRowSet PivotGrid::rowSet(QString id)
       while ( it_row != (*it_innergroup).end() )
       {
         if(it_row.key().id() == id)
-          return it_row.data();
+          return it_row.value();
 
         ++it_row;
       }

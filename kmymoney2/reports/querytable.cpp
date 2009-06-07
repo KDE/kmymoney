@@ -78,10 +78,10 @@ MyMoneyMoney CashFlowListItem::NPV( double _rate ) const
 //
 // ****************************************************************************
 
-const CashFlowListItem& CashFlowList::mostRecent(void) const
+CashFlowListItem CashFlowList::mostRecent(void) const
 {
   CashFlowList dupe( *this );
-#warning "port to kde4"
+
   qSort( dupe );
 
   //kDebug(2) << " CashFlowList::mostRecent() == " << dupe.back().date().toString(Qt::ISODate);
@@ -517,7 +517,7 @@ void QueryTable::constructTransactionTable(void)
     bool transaction_text = false; //indicates whether a text should be considered as a match for the transaction or for a split only
     QString a_fullname = "";
     QString a_memo = "";
-    unsigned int pass = 1;
+    int pass = 1;
 
     do {
       MyMoneyMoney xr;
@@ -1268,7 +1268,7 @@ void QueryTable::constructSplitsTable(void)
     bool transaction_text = false; //indicates whether a text should be considered as a match for the transaction or for a split only
     QString a_fullname = "";
     QString a_memo = "";
-    unsigned int pass = 1;
+    int pass = 1;
 
     do {
       MyMoneyMoney xr;

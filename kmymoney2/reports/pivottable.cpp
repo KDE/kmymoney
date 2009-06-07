@@ -22,15 +22,14 @@
 #include <qlayout.h>
 #include <qdatetime.h>
 #include <qregexp.h>
-#include <q3dragobject.h>
+// #include <q3dragobject.h>
 #include <qclipboard.h>
 #include <qapplication.h>
 #include <qprinter.h>
 #include <qpainter.h>
 #include <qfile.h>
 #include <qdom.h>
-//Added by qt3to4:
-#include <Q3TextStream>
+#include <QTextStream>
 #include <QList>
 
 // ----------------------------------------------------------------------------
@@ -260,11 +259,11 @@ void PivotTable::init(void)
   QMap<QString, MyMoneyMoney> loanBalances;
 
   QList<MyMoneyTransaction>::const_iterator it_transaction = transactions.begin();
-  unsigned colofs = columnValue(m_beginDate) - 1;
+  int colofs = columnValue(m_beginDate) - 1;
   while ( it_transaction != transactions.end() )
   {
     QDate postdate = (*it_transaction).postDate();
-    unsigned column = columnValue(postdate) - colofs;
+    int column = columnValue(postdate) - colofs;
 
     MyMoneyTransaction tx = (*it_transaction);
 
@@ -432,15 +431,15 @@ void PivotTable::collapseColumns(void)
 {
   DEBUG_ENTER(__PRETTY_FUNCTION__);
 
-  unsigned columnpitch = m_config_f.columnPitch();
+  int columnpitch = m_config_f.columnPitch();
   if ( columnpitch != 1 )
   {
-    unsigned sourcemonth = (m_config_f.isColumnsAreDays())
+    int sourcemonth = (m_config_f.isColumnsAreDays())
       // use the user's locale to determine the week's start
       ? (m_beginDate.dayOfWeek() + 8 - KGlobal::locale()->weekStartDay()) % 7
       : m_beginDate.month();
-    unsigned sourcecolumn = 1;
-    unsigned destcolumn = 1;
+    int sourcecolumn = 1;
+    int destcolumn = 1;
     while ( sourcecolumn < m_numColumns )
     {
       if ( sourcecolumn != destcolumn )
@@ -466,7 +465,7 @@ void PivotTable::collapseColumns(void)
   }
 }
 
-void PivotTable::accumulateColumn(unsigned destcolumn, unsigned sourcecolumn)
+void PivotTable::accumulateColumn(int destcolumn, int sourcecolumn)
 {
   DEBUG_ENTER(__PRETTY_FUNCTION__);
   DEBUG_OUTPUT(QString("From Column %1 to %2").arg(sourcecolumn).arg(destcolumn));
@@ -498,7 +497,7 @@ void PivotTable::accumulateColumn(unsigned destcolumn, unsigned sourcecolumn)
   }
 }
 
-void PivotTable::clearColumn(unsigned column)
+void PivotTable::clearColumn(int column)
 {
   DEBUG_ENTER(__PRETTY_FUNCTION__);
   DEBUG_OUTPUT(QString("Column %1").arg(column));
@@ -534,7 +533,7 @@ void PivotTable::calculateColumnHeadings(void)
   // one column for the opening balance
   m_columnHeadings.append( "Opening" );
 
-  unsigned columnpitch = m_config_f.columnPitch();
+  int columnpitch = m_config_f.columnPitch();
 
   // if this is a days-based report
   if (m_config_f.isColumnsAreDays())
@@ -542,7 +541,7 @@ void PivotTable::calculateColumnHeadings(void)
     if ( columnpitch == 1 )
     {
       QDate columnDate = m_beginDate;
-      unsigned column = 1;
+      int column = 1;
       while ( column++ < m_numColumns )
       {
         QString heading = KGlobal::locale()->calendar()->monthName(columnDate.month(), columnDate.year(), KCalendarSystem::ShortName) + " " + QString::number(columnDate.day());
@@ -556,7 +555,7 @@ void PivotTable::calculateColumnHeadings(void)
       QDate prv = m_beginDate;
 
       // use the user's locale to determine the week's start
-      unsigned dow = (day.dayOfWeek() +8 -KGlobal::locale()->weekStartDay())%7;
+      int dow = (day.dayOfWeek() +8 -KGlobal::locale()->weekStartDay())%7;
 
       while (day <= m_endDate)
       {
@@ -580,17 +579,17 @@ void PivotTable::calculateColumnHeadings(void)
   {
     if ( columnpitch == 12 )
     {
-      unsigned year = m_beginDate.year();
-      unsigned column = 1;
+      int year = m_beginDate.year();
+      int column = 1;
       while ( column++ < m_numColumns )
         m_columnHeadings.append(QString::number(year++));
     }
     else
     {
-      unsigned year = m_beginDate.year();
+      int year = m_beginDate.year();
       bool includeyear = ( m_beginDate.year() != m_endDate.year() );
-      unsigned segment = ( m_beginDate.month() - 1 ) / columnpitch;
-      unsigned column = 1;
+      int segment = ( m_beginDate.month() - 1 ) / columnpitch;
+      int column = 1;
       while ( column++ < m_numColumns )
       {
         QString heading = KGlobal::locale()->calendar()->monthName(1+segment*columnpitch, 2000, KCalendarSystem::ShortName);
@@ -710,7 +709,7 @@ void PivotTable::calculateOpeningBalances( void )
 void PivotTable::calculateRunningSums( PivotInnerGroup::iterator& it_row)
 {
   MyMoneyMoney runningsum = it_row.value()[eActual][0].calculateRunningSum(MyMoneyMoney(0,1));
-  unsigned column = 1;
+  int column = 1;
   while ( column < m_numColumns )
   {
     if ( it_row.value()[eActual].count() <= column )
@@ -739,7 +738,7 @@ void PivotTable::calculateRunningSums( void )
       {
 #if 0
         MyMoneyMoney runningsum = it_row.value()[0];
-        unsigned column = 1;
+        int column = 1;
         while ( column < m_numColumns )
         {
         if ( it_row.value()[eActual].count() <= column )
@@ -759,7 +758,7 @@ void PivotTable::calculateRunningSums( void )
   }
 }
 
-MyMoneyMoney PivotTable::cellBalance(const QString& outergroup, const ReportAccount& _row, unsigned _column, bool budget)
+MyMoneyMoney PivotTable::cellBalance(const QString& outergroup, const ReportAccount& _row, int _column, bool budget)
 {
   if(m_runningSumsCalculated) {
     qDebug("You must not call PivotTable::cellBalance() after calling PivotTable::calculateRunningSums()");
@@ -798,7 +797,7 @@ MyMoneyMoney PivotTable::cellBalance(const QString& outergroup, const ReportAcco
   else
     balance = m_grid[outergroup][innergroup][row][eActual][0].cellBalance(MyMoneyMoney());
 
-  unsigned column = 1;
+  int column = 1;
   while ( column < _column)
   {
     if ( m_grid[outergroup][innergroup][row][eActual].count() <= column )
@@ -915,7 +914,7 @@ void PivotTable::calculateBudgetMapping( void )
         const QMap<QDate, MyMoneyBudget::PeriodGroup>& periods = (*it_bacc).getPeriods();
         MyMoneyMoney value = (*periods.begin()).amount() * reverse;
         MyMoneyMoney price = MyMoneyMoney(1,1);
-        unsigned column = 1;
+        int column = 1;
 
         // based on the kind of budget it is, deal accordingly
         switch ( (*it_bacc).budgetLevel() )
@@ -999,7 +998,7 @@ void PivotTable::convertToBaseCurrency( void )
       PivotInnerGroup::iterator it_row = (*it_innergroup).begin();
       while ( it_row != (*it_innergroup).end() )
       {
-        unsigned column = 1;
+        int column = 1;
         while ( column < m_numColumns )
         {
           if ( it_row.value()[eActual].count() <= column )
@@ -1010,7 +1009,7 @@ void PivotTable::convertToBaseCurrency( void )
           //get base price for that date
           MyMoneyMoney conversionfactor = it_row.key().baseCurrencyPrice(valuedate);
 
-          for(unsigned i = 0; i < m_rowTypeList.size(); ++i) {
+          for(int i = 0; i < m_rowTypeList.size(); ++i) {
             if( m_rowTypeList[i] != eAverage ) {
               //calculate base value
               MyMoneyMoney oldval = it_row.value()[ m_rowTypeList[i] ][column];
@@ -1049,7 +1048,7 @@ void PivotTable::convertToDeepCurrency( void )
       PivotInnerGroup::iterator it_row = (*it_innergroup).begin();
       while ( it_row != (*it_innergroup).end() )
       {
-        unsigned column = 1;
+        int column = 1;
         while ( column < m_numColumns )
         {
           if ( it_row.value()[eActual].count() <= column )
@@ -1095,8 +1094,8 @@ void PivotTable::convertToDeepCurrency( void )
 void PivotTable::calculateTotals( void )
 {
   //insert the row type that is going to be used
-  for(unsigned i = 0; i < m_rowTypeList.size(); ++i) {
-    for(unsigned k = 0; k < m_numColumns; ++k) {
+  for(int i = 0; i < m_rowTypeList.size(); ++i) {
+    for(int k = 0; k < m_numColumns; ++k) {
       m_grid.m_total[ m_rowTypeList[i] ].append( PivotCell() );
     }
   }
@@ -1108,8 +1107,8 @@ void PivotTable::calculateTotals( void )
   PivotGrid::iterator it_outergroup = m_grid.begin();
   while ( it_outergroup != m_grid.end() )
   {
-    for(unsigned i = 0; i < m_rowTypeList.size(); ++i) {
-      for(unsigned k = 0; k < m_numColumns; ++k) {
+    for(int i = 0; i < m_rowTypeList.size(); ++i) {
+      for(int k = 0; k < m_numColumns; ++k) {
         (*it_outergroup).m_total[ m_rowTypeList[i] ].append( PivotCell() );
       }
     }
@@ -1121,8 +1120,8 @@ void PivotTable::calculateTotals( void )
     PivotOuterGroup::iterator it_innergroup = (*it_outergroup).begin();
     while ( it_innergroup != (*it_outergroup).end() )
     {
-      for(unsigned i = 0; i < m_rowTypeList.size(); ++i) {
-        for(unsigned k = 0; k < m_numColumns; ++k) {
+      for(int i = 0; i < m_rowTypeList.size(); ++i) {
+        for(int k = 0; k < m_numColumns; ++k) {
           (*it_innergroup).m_total[ m_rowTypeList[i] ].append( PivotCell() );
         }
       }
@@ -1137,10 +1136,10 @@ void PivotTable::calculateTotals( void )
         // Columns
         //
 
-        unsigned column = 1;
+        int column = 1;
         while ( column < m_numColumns )
         {
-          for(unsigned i = 0; i < m_rowTypeList.size(); ++i) {
+          for(int i = 0; i < m_rowTypeList.size(); ++i) {
             if ( it_row.value()[ m_rowTypeList[i] ].count() <= column )
               throw new MYMONEYEXCEPTION(QString("Column %1 out of grid range (%2) in PivotTable::calculateTotals, row columns").arg(column).arg(it_row.value()[ m_rowTypeList[i] ].count()));
             if ( (*it_innergroup).m_total[ m_rowTypeList[i] ].count() <= column )
@@ -1160,10 +1159,10 @@ void PivotTable::calculateTotals( void )
       // Inner Row Group Totals
       //
 
-      unsigned column = 1;
+      int column = 1;
       while ( column < m_numColumns )
       {
-        for(unsigned i = 0; i < m_rowTypeList.size(); ++i) {
+        for(int i = 0; i < m_rowTypeList.size(); ++i) {
           if ( (*it_innergroup).m_total[ m_rowTypeList[i] ].count() <= column )
             throw new MYMONEYEXCEPTION(QString("Column %1 out of grid range (%2) in PivotTable::calculateTotals, inner group totals").arg(column).arg((*it_innergroup).m_total[ m_rowTypeList[i] ].count()));
           if ( (*it_outergroup).m_total[ m_rowTypeList[i] ].count() <= column )
@@ -1185,10 +1184,10 @@ void PivotTable::calculateTotals( void )
     //
 
     bool invert_total = (*it_outergroup).m_inverted;
-    unsigned column = 1;
+    int column = 1;
     while ( column < m_numColumns )
     {
-      for(unsigned i = 0; i < m_rowTypeList.size(); ++i) {
+      for(int i = 0; i < m_rowTypeList.size(); ++i) {
         if ( m_grid.m_total[ m_rowTypeList[i] ].count() <= column )
           throw new MYMONEYEXCEPTION(QString("Column %1 out of grid range (%2) in PivotTable::calculateTotals, grid totals").arg(column).arg((*it_innergroup).m_total[ m_rowTypeList[i] ].count()));
 
@@ -1213,10 +1212,10 @@ void PivotTable::calculateTotals( void )
   // Report Totals
   //
 
-  unsigned totalcolumn = 1;
+  int totalcolumn = 1;
   while ( totalcolumn < m_numColumns )
   {
-    for(unsigned i = 0; i < m_rowTypeList.size(); ++i) {
+    for(int i = 0; i < m_rowTypeList.size(); ++i) {
       if ( m_grid.m_total[ m_rowTypeList[i] ].count() <= totalcolumn )
         throw new MYMONEYEXCEPTION(QString("Total column %1 out of grid range (%2) in PivotTable::calculateTotals, grid totals").arg(totalcolumn).arg(m_grid.m_total[ m_rowTypeList[i] ].count()));
 
@@ -1228,7 +1227,7 @@ void PivotTable::calculateTotals( void )
   }
 }
 
-void PivotTable::assignCell( const QString& outergroup, const ReportAccount& _row, unsigned column, MyMoneyMoney value, bool budget, bool stockSplit )
+void PivotTable::assignCell( const QString& outergroup, const ReportAccount& _row, int column, MyMoneyMoney value, bool budget, bool stockSplit )
 {
   DEBUG_ENTER(__PRETTY_FUNCTION__);
   DEBUG_OUTPUT(QString("Parameters: %1,%2,%3,%4,%5").arg(outergroup).arg(_row.debugName()).arg(column).arg(DEBUG_SENSITIVE(value.toDouble())).arg(budget));
@@ -1304,7 +1303,7 @@ void PivotTable::createRow( const QString& outergroup, const ReportAccount& row,
   }
 }
 
-unsigned PivotTable::columnValue(const QDate& _date) const
+int PivotTable::columnValue(const QDate& _date) const
 {
   if (m_config_f.isColumnsAreDays())
     return (QDate().daysTo(_date));
@@ -1340,7 +1339,7 @@ QString PivotTable::renderCSV( void ) const
 
   result += i18n("Account");
 
-  unsigned column = 1;
+  int column = 1;
   while ( column < m_numColumns )
     result += QString(",%1").arg(QString(m_columnHeadings[column++]));
 
@@ -1370,7 +1369,7 @@ QString PivotTable::renderCSV( void ) const
     //
 
     PivotOuterGroup::const_iterator it_innergroup = (*it_outergroup).begin();
-    unsigned rownum = 0;
+    int rownum = 0;
     while ( it_innergroup != (*it_outergroup).end() )
     {
       //
@@ -1389,15 +1388,15 @@ QString PivotTable::renderCSV( void ) const
         //
 
         QString rowdata;
-        unsigned column = 1;
+        int column = 1;
 
         bool isUsed = false;
-        for(unsigned i = 0; i < m_rowTypeList.size(); ++i)
+        for(int i = 0; i < m_rowTypeList.size(); ++i)
           isUsed |= it_row.value()[ m_rowTypeList[i] ][0].isUsed();
 
         while ( column < m_numColumns ) {
           //show columns
-          for(unsigned i = 0; i < m_rowTypeList.size(); ++i) {
+          for(int i = 0; i < m_rowTypeList.size(); ++i) {
             isUsed |= it_row.value()[ m_rowTypeList[i] ][column].isUsed();
             rowdata += QString(",\"%1\"").arg(it_row.value()[ m_rowTypeList[i] ][column].formatMoney(fraction, false));
           }
@@ -1405,7 +1404,7 @@ QString PivotTable::renderCSV( void ) const
         }
 
         if ( m_config_f.isShowingRowTotals() ) {
-          for(unsigned i = 0; i < m_rowTypeList.size(); ++i)
+          for(int i = 0; i < m_rowTypeList.size(); ++i)
             rowdata += QString(",\"%1\"").arg((*it_row)[ m_rowTypeList[i] ].m_total.formatMoney(fraction, false));
         }
 
@@ -1471,14 +1470,14 @@ QString PivotTable::renderCSV( void ) const
       // Finish the row started above, unless told not to
       if ( finishrow )
       {
-        unsigned column = 1;
+        int column = 1;
 
-        for(unsigned i = 0; i < m_rowTypeList.size(); ++i)
+        for(int i = 0; i < m_rowTypeList.size(); ++i)
           isUsed |= (*it_innergroup).m_total[ m_rowTypeList[i] ][0].isUsed();
 
         while ( column < m_numColumns )
         {
-          for(unsigned i = 0; i < m_rowTypeList.size(); ++i) {
+          for(int i = 0; i < m_rowTypeList.size(); ++i) {
             isUsed |= (*it_innergroup).m_total[ m_rowTypeList[i] ][column].isUsed();
             finalRow += QString(",\"%1\"").arg((*it_innergroup).m_total[ m_rowTypeList[i] ][column].formatMoney(fraction, false));
           }
@@ -1486,7 +1485,7 @@ QString PivotTable::renderCSV( void ) const
         }
 
         if (  m_config_f.isShowingRowTotals() ) {
-          for(unsigned i = 0; i < m_rowTypeList.size(); ++i)
+          for(int i = 0; i < m_rowTypeList.size(); ++i)
             finalRow += QString(",\"%1\"").arg((*it_innergroup).m_total[ m_rowTypeList[i] ].m_total.formatMoney(fraction, false));
         }
 
@@ -1508,16 +1507,16 @@ QString PivotTable::renderCSV( void ) const
     if ( m_config_f.isShowingColumnTotals() )
     {
       result += QString("%1 %2").arg(i18n("Total")).arg(it_outergroup.key());
-      unsigned column = 1;
+      int column = 1;
       while ( column < m_numColumns ) {
-        for(unsigned i = 0; i < m_rowTypeList.size(); ++i)
+        for(int i = 0; i < m_rowTypeList.size(); ++i)
           result += QString(",\"%1\"").arg((*it_outergroup).m_total[ m_rowTypeList[i] ][column].formatMoney(fraction, false));
 
         column++;
       }
 
       if (  m_config_f.isShowingRowTotals() ) {
-        for(unsigned i = 0; i < m_rowTypeList.size(); ++i)
+        for(int i = 0; i < m_rowTypeList.size(); ++i)
           result += QString(",\"%1\"").arg((*it_outergroup).m_total[ m_rowTypeList[i] ].m_total.formatMoney(fraction, false));
       }
 
@@ -1533,16 +1532,16 @@ QString PivotTable::renderCSV( void ) const
   if ( m_config_f.isShowingColumnTotals() )
   {
     result += i18n("Grand Total");
-    unsigned totalcolumn = 1;
+    int totalcolumn = 1;
     while ( totalcolumn < m_numColumns ) {
-      for(unsigned i = 0; i < m_rowTypeList.size(); ++i)
+      for(int i = 0; i < m_rowTypeList.size(); ++i)
         result += QString(",\"%1\"").arg(m_grid.m_total[ m_rowTypeList[i] ][totalcolumn].formatMoney(fraction, false));
 
       totalcolumn++;
     }
 
     if (  m_config_f.isShowingRowTotals() ) {
-      for(unsigned i = 0; i < m_rowTypeList.size(); ++i)
+      for(int i = 0; i < m_rowTypeList.size(); ++i)
         result += QString(",\"%1\"").arg(m_grid.m_total[ m_rowTypeList[i] ].m_total.formatMoney(fraction, false));
     }
 
@@ -1566,7 +1565,7 @@ QString PivotTable::renderHTML( void ) const
 
   //actual dates of the report
   result += QString("<div class=\"subtitle\">");
-  result += i18nc("Report date range", "%1 through %2").arg(KGlobal::locale()->formatDateTime(QDateTime(m_config_f.fromDate()), KLocale::ShortDate, false)).arg(KGlobal::locale()->formatDateTime(QDateTime(m_config_f.toDate()), KLocale::ShortDate, false));
+  result += i18nc("Report date range", "%1 through %2").arg(KGlobal::locale()->formatDate(m_config_f.fromDate(), KLocale::ShortDate)).arg(KGlobal::locale()->formatDate(m_config_f.toDate(), KLocale::ShortDate));
   result += QString("</div>\n");
   result += QString("<div class=\"gap\">&nbsp;</div>\n");
 
@@ -1595,7 +1594,7 @@ QString PivotTable::renderHTML( void ) const
 
   headerspan = QString(" colspan=\"%1\"").arg(span);
 
-  unsigned column = 1;
+  int column = 1;
   while ( column < m_numColumns )
     result += QString("<th%1>%2</th>").arg(headerspan,QString(m_columnHeadings[column++]).replace(QRegExp(" "),"<br>"));
 
@@ -1611,14 +1610,14 @@ QString PivotTable::renderHTML( void ) const
   {
     result += "<tr><td></td>";
 
-    unsigned column = 1;
+    int column = 1;
     while ( column < m_numColumns )
     {
       QString lb;
       if(column != 1)
         lb = leftborder;
 
-      for(unsigned i = 0; i < m_rowTypeList.size(); ++i) {
+      for(int i = 0; i < m_rowTypeList.size(); ++i) {
         result += QString("<td%2>%1</td>")
             #warning #Port to KDE4
             //.arg(i18n( m_columnTypeHeaderList[i] ))
@@ -1628,7 +1627,7 @@ QString PivotTable::renderHTML( void ) const
       column++;
     }
     if ( m_config_f.isShowingRowTotals() ) {
-      for(unsigned i = 0; i < m_rowTypeList.size(); ++i) {
+      for(int i = 0; i < m_rowTypeList.size(); ++i) {
         result += QString("<td%2>%1</td>")
             #warning #Port to KDE4
             //.arg(i18n( m_columnTypeHeaderList[i] ))
@@ -1686,7 +1685,7 @@ QString PivotTable::renderHTML( void ) const
         //
 
         PivotOuterGroup::const_iterator it_innergroup = (*it_outergroup).begin();
-        unsigned rownum = 0;
+        int rownum = 0;
         while ( it_innergroup != (*it_outergroup).end() )
         {
           //
@@ -1702,7 +1701,7 @@ QString PivotTable::renderHTML( void ) const
             //
 
             QString rowdata;
-            unsigned column = 1;
+            int column = 1;
             bool isUsed = it_row.value()[eActual][0].isUsed();
             while ( column < m_numColumns )
             {
@@ -1710,7 +1709,7 @@ QString PivotTable::renderHTML( void ) const
               if(column != 1)
                 lb = leftborder;
 
-              for(unsigned i = 0; i < m_rowTypeList.size(); ++i) {
+              for(int i = 0; i < m_rowTypeList.size(); ++i) {
                 rowdata += QString("<td%2>%1</td>")
                     .arg(coloredAmount(it_row.value()[ m_rowTypeList[i] ][column]))
                     .arg(i == 0 ? lb : QString());
@@ -1723,7 +1722,7 @@ QString PivotTable::renderHTML( void ) const
 
             if ( m_config_f.isShowingRowTotals() )
             {
-              for(unsigned i = 0; i < m_rowTypeList.size(); ++i) {
+              for(int i = 0; i < m_rowTypeList.size(); ++i) {
                 rowdata += QString("<td%2>%1</td>")
                     .arg(coloredAmount(it_row.value()[ m_rowTypeList[i] ].m_total))
                     .arg(i == 0 ? leftborder : QString());
@@ -1806,7 +1805,7 @@ QString PivotTable::renderHTML( void ) const
           // Finish the row started above, unless told not to
           if ( finishrow )
           {
-            unsigned column = 1;
+            int column = 1;
             isUsed |= (*it_innergroup).m_total[eActual][0].isUsed();
             while ( column < m_numColumns )
             {
@@ -1814,7 +1813,7 @@ QString PivotTable::renderHTML( void ) const
               if(column != 1)
                 lb = leftborder;
 
-              for(unsigned i = 0; i < m_rowTypeList.size(); ++i) {
+              for(int i = 0; i < m_rowTypeList.size(); ++i) {
                 finalRow += QString("<td%2>%1</td>")
                     .arg(coloredAmount((*it_innergroup).m_total[ m_rowTypeList[i] ][column]))
                     .arg(i == 0 ? lb : QString());
@@ -1826,7 +1825,7 @@ QString PivotTable::renderHTML( void ) const
 
             if (  m_config_f.isShowingRowTotals() )
             {
-              for(unsigned i = 0; i < m_rowTypeList.size(); ++i) {
+              for(int i = 0; i < m_rowTypeList.size(); ++i) {
                 finalRow += QString("<td%2>%1</td>")
                     .arg(coloredAmount((*it_innergroup).m_total[ m_rowTypeList[i] ].m_total))
                     .arg(i == 0 ? leftborder : QString());
@@ -1853,14 +1852,14 @@ QString PivotTable::renderHTML( void ) const
       if ( m_config_f.isShowingColumnTotals() )
       {
         result += QString("<tr class=\"sectionfooter\"><td class=\"left\">%1&nbsp;%2</td>").arg(i18n("Total")).arg((*it_outergroup).m_displayName);
-        unsigned column = 1;
+        int column = 1;
         while ( column < m_numColumns )
         {
           QString lb;
           if(column != 1)
             lb = leftborder;
 
-          for(unsigned i = 0; i < m_rowTypeList.size(); ++i) {
+          for(int i = 0; i < m_rowTypeList.size(); ++i) {
             result += QString("<td%2>%1</td>")
                 .arg(coloredAmount((*it_outergroup).m_total[ m_rowTypeList[i] ][column]))
                 .arg(i == 0 ? lb : QString());
@@ -1871,7 +1870,7 @@ QString PivotTable::renderHTML( void ) const
 
         if (  m_config_f.isShowingRowTotals() )
         {
-          for(unsigned i = 0; i < m_rowTypeList.size(); ++i) {
+          for(int i = 0; i < m_rowTypeList.size(); ++i) {
             result += QString("<td%2>%1</td>")
                 .arg(coloredAmount((*it_outergroup).m_total[ m_rowTypeList[i] ].m_total))
                 .arg(i == 0 ? leftborder : QString());
@@ -1894,14 +1893,14 @@ QString PivotTable::renderHTML( void ) const
   {
     result += QString("<tr class=\"spacer\"><td>&nbsp;</td></tr>\n");
     result += QString("<tr class=\"reportfooter\"><td class=\"left\">%1</td>").arg(i18n("Grand Total"));
-    unsigned totalcolumn = 1;
+    int totalcolumn = 1;
     while ( totalcolumn < m_numColumns )
     {
       QString lb;
       if(totalcolumn != 1)
         lb = leftborder;
 
-      for(unsigned i = 0; i < m_rowTypeList.size(); ++i) {
+      for(int i = 0; i < m_rowTypeList.size(); ++i) {
         result += QString("<td%2>%1</td>")
             .arg(coloredAmount(m_grid.m_total[ m_rowTypeList[i] ][totalcolumn]))
             .arg(i == 0 ? lb : QString());
@@ -1912,7 +1911,7 @@ QString PivotTable::renderHTML( void ) const
 
     if (  m_config_f.isShowingRowTotals() )
     {
-      for(unsigned i = 0; i < m_rowTypeList.size(); ++i) {
+      for(int i = 0; i < m_rowTypeList.size(); ++i) {
         result += QString("<td%2>%1</td>")
             .arg(coloredAmount(m_grid.m_total[ m_rowTypeList[i] ].m_total))
             .arg(i == 0 ? leftborder : QString());
@@ -1933,7 +1932,7 @@ void PivotTable::dump( const QString& file, const QString& /* context */) const
 {
   QFile g( file );
   g.open( QIODevice::WriteOnly );
-  Q3TextStream(&g) << renderHTML();
+  QTextStream(&g) << renderHTML();
   g.close();
 }
 
@@ -2021,8 +2020,8 @@ void PivotTable::drawChart( KReportChartView& _view ) const
   // In KDChart parlance, a 'series' (or row) is an account (or accountgroup, etc)
   // and an 'item' (or column) is a month
   //
-  unsigned r;
-  unsigned c;
+  int r;
+  int c;
   if ( accountSeries )
   {
     r = 1;
@@ -2044,7 +2043,7 @@ void PivotTable::drawChart( KReportChartView& _view ) const
   abscissaNames.clear();
   if ( accountSeries )
   {
-    unsigned column = 1;
+    int column = 1;
     while ( column < m_numColumns ) {
       abscissaNames += QString(m_columnHeadings[column++]).replace("&nbsp;", " ");
     }
@@ -2060,7 +2059,7 @@ void PivotTable::drawChart( KReportChartView& _view ) const
     case MyMoneyReport::eDetailEnd:
     case MyMoneyReport::eDetailAll:
     {
-      unsigned rowNum = 0;
+      int rowNum = 0;
 
       // iterate over outer groups
       PivotGrid::const_iterator it_outergroup = m_grid.begin();
@@ -2081,7 +2080,7 @@ void PivotTable::drawChart( KReportChartView& _view ) const
             //Do not include investments accounts in the chart because they are merely container of stock and other accounts
             if( it_row.key().accountType() != MyMoneyAccount::Investment) {
               //iterate row types
-              for(unsigned i = 0; i < m_rowTypeList.size(); ++i) {
+              for(int i = 0; i < m_rowTypeList.size(); ++i) {
                 //skip the budget difference rowset
                 if(m_rowTypeList[i] != eBudgetDiff ) {
                   rowNum = drawChartRowSet(rowNum, seriesTotals, accountSeries, data, it_row.value(), m_rowTypeList[i]);
@@ -2106,7 +2105,7 @@ void PivotTable::drawChart( KReportChartView& _view ) const
 
     case MyMoneyReport::eDetailTop:
     {
-      unsigned rowNum = 0;
+      int rowNum = 0;
 
       // iterate over outer groups
       PivotGrid::const_iterator it_outergroup = m_grid.begin();
@@ -2118,7 +2117,7 @@ void PivotTable::drawChart( KReportChartView& _view ) const
         while ( it_innergroup != (*it_outergroup).end() )
         {
           //iterate row types
-          for(unsigned i = 0; i < m_rowTypeList.size(); ++i) {
+          for(int i = 0; i < m_rowTypeList.size(); ++i) {
             //skip the budget difference rowset
             if(m_rowTypeList[i] != eBudgetDiff ) {
               rowNum = drawChartRowSet(rowNum, seriesTotals, accountSeries, data, (*it_innergroup).m_total, m_rowTypeList[i]);
@@ -2140,14 +2139,14 @@ void PivotTable::drawChart( KReportChartView& _view ) const
 
     case MyMoneyReport::eDetailGroup:
     {
-      unsigned rowNum = 0;
+      int rowNum = 0;
 
       // iterate over outer groups
       PivotGrid::const_iterator it_outergroup = m_grid.begin();
       while ( it_outergroup != m_grid.end() )
       {
         //iterate row types
-        for(unsigned i = 0; i < m_rowTypeList.size(); ++i) {
+        for(int i = 0; i < m_rowTypeList.size(); ++i) {
           //skip the budget difference rowset
           if(m_rowTypeList[i] != eBudgetDiff ) {
             rowNum = drawChartRowSet(rowNum, seriesTotals, accountSeries, data, (*it_outergroup).m_total, m_rowTypeList[i]);
@@ -2167,7 +2166,7 @@ void PivotTable::drawChart( KReportChartView& _view ) const
       if (m_config_f.isShowingRowTotals())
       {
         //iterate row types
-        for(unsigned i = 0; i < m_rowTypeList.size(); ++i) {
+        for(int i = 0; i < m_rowTypeList.size(); ++i) {
           //skip the budget difference rowset
           if(m_rowTypeList[i] != eBudgetDiff ) {
             rowNum = drawChartRowSet(rowNum, seriesTotals, accountSeries, data, m_grid.m_total, m_rowTypeList[i]);
@@ -2186,10 +2185,10 @@ void PivotTable::drawChart( KReportChartView& _view ) const
 
     case MyMoneyReport::eDetailTotal:
     {
-      unsigned rowNum = 0;
+      int rowNum = 0;
 
       //iterate row types
-      for(unsigned i = 0; i < m_rowTypeList.size(); ++i) {
+      for(int i = 0; i < m_rowTypeList.size(); ++i) {
         //skip the budget difference rowset
         if(m_rowTypeList[i] != eBudgetDiff ) {
           rowNum = drawChartRowSet(rowNum, seriesTotals, accountSeries, data, m_grid.m_total, m_rowTypeList[i]);
@@ -2223,7 +2222,7 @@ void PivotTable::drawChart( KReportChartView& _view ) const
   {
     // the first column of report which represents a date in the future, or one past the
     // last column if all columns are in the present day. Only relevant when accountSeries==true
-    unsigned futurecolumn = columnValue(QDate::currentDate()) - columnValue(m_beginDate) + 1;
+    int futurecolumn = columnValue(QDate::currentDate()) - columnValue(m_beginDate) + 1;
 
     // kDebug(2) << "futurecolumn: " << futurecolumn;
     // kDebug(2) << "m_numColumns: " << m_numColumns;
@@ -2244,7 +2243,7 @@ void PivotTable::drawChart( KReportChartView& _view ) const
 void PivotTable::drawChart( KReportChartView& ) const { }
 #endif
 
-unsigned PivotTable::drawChartRowSet(unsigned rowNum, const bool seriesTotals, const bool accountSeries, KDChartTableData& data, const PivotGridRowSet& rowSet, const ERowType rowType ) const
+unsigned PivotTable::drawChartRowSet(int rowNum, const bool seriesTotals, const bool accountSeries, KDChartTableData& data, const PivotGridRowSet& rowSet, const ERowType rowType ) const
 {
   //only add a row if one has been added before
   // TODO: This is inefficient. Really we should total up how many rows
@@ -2266,7 +2265,7 @@ unsigned PivotTable::drawChartRowSet(unsigned rowNum, const bool seriesTotals, c
   }
   else
   {
-    unsigned column = 1;
+    int column = 1;
     while ( column < m_numColumns )
     {
       if ( accountSeries )
@@ -2306,7 +2305,7 @@ void PivotTable::calculateBudgetDiff(void)
       PivotInnerGroup::iterator it_row = (*it_innergroup).begin();
       while ( it_row != (*it_innergroup).end() )
       {
-        unsigned column = 1;
+        int column = 1;
         switch( it_row.key().accountGroup() )
         {
           case MyMoneyAccount::Income:
@@ -2375,7 +2374,7 @@ void PivotTable::calculateForecast(void)
       PivotInnerGroup::iterator it_row = (*it_innergroup).begin();
       while ( it_row != (*it_innergroup).end() )
       {
-        unsigned column = 1;
+        int column = 1;
         QDate forecastDate = m_beginDate;
         //check whether columns are days or months
         if(m_config_f.isColumnsAreDays())
@@ -2470,7 +2469,7 @@ void PivotTable::calculateMovingAverage (void)
       PivotInnerGroup::iterator it_row = (*it_innergroup).begin();
       while ( it_row != (*it_innergroup).end() )
       {
-        unsigned column = 1;
+        int column = 1;
 
         //check whether columns are days or months
         if(m_config_f.columnType() == MyMoneyReport::eDays) {
@@ -2574,7 +2573,7 @@ void PivotTable::fillBasePriceUnit(ERowType rowType)
       PivotInnerGroup::iterator it_row = ( *it_innergroup ).begin();
       while ( it_row != ( *it_innergroup ).end() )
       {
-        unsigned column = 1;
+        int column = 1;
         while ( column < m_numColumns ) {
           //insert a unit of currency for each account
           it_row.value() [rowType][column] = MyMoneyMoney ( 1, 1 );

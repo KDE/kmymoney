@@ -82,7 +82,7 @@ namespace reports {
           static QStringList m_sortCriteria;
       };
 
-      QList<TableRow> rows() {return m_rows;};
+      const QList<TableRow>& rows() {return m_rows;};
 
     protected:
       void render ( QString&, QString& ) const;

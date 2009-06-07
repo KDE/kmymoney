@@ -157,11 +157,11 @@ namespace reports {
       //actual dates of the report
     result += QString("<div class=\"subtitle\">");
     if(!m_config.fromDate().isNull()) {
-      result += i18nc("Report date range", "%1 through %2",KGlobal::locale()->formatDate(m_config.fromDate()),KGlobal::locale()->formatDate(m_config.toDate()));
+      result += i18nc("Report date range", "%1 through %2").arg(KGlobal::locale()->formatDate(m_config.fromDate(), KLocale::ShortDate)).arg(KGlobal::locale()->formatDate(m_config.toDate(), KLocale::ShortDate));
       result += QString("</div>\n");
       result += QString("<div class=\"gap\">&nbsp;</div>\n");
 
-      csv += i18nc("Report date range", "%1 through %2",KGlobal::locale()->formatDate(m_config.fromDate()),KGlobal::locale()->formatDate(m_config.toDate()));
+      csv += i18nc("Report date range", "%1 through %2").arg(KGlobal::locale()->formatDate(m_config.fromDate(), KLocale::ShortDate)).arg(KGlobal::locale()->formatDate(m_config.toDate(), KLocale::ShortDate));
       csv += QString("\n");
     }
 
@@ -518,7 +518,7 @@ namespace reports {
           // if we have a locale() then use its date formatter
           if ( KGlobal::locale() && ! data.isEmpty() ) {
             QDate qd = QDate::fromString ( data, Qt::ISODate );
-            data = KGlobal::locale()->formatDate ( qd );
+            data = KGlobal::locale()->formatDate ( qd, KLocale::ShortDate );
           }
           result += QString ( "<td class=\"left\">%1</td>" ).arg ( data );
         }

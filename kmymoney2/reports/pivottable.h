@@ -116,7 +116,7 @@ private:
     PivotGrid m_grid;
 
     QStringList m_columnHeadings;
-    unsigned m_numColumns;
+    int m_numColumns;
     QDate m_beginDate;
     QDate m_endDate;
     bool m_runningSumsCalculated;
@@ -184,7 +184,7 @@ protected:
     * @param stockSplit Wheter this is a stock split (@p true) or an actual
     *                   value (@p false). Defaults to @p false.
     */
-    inline void assignCell( const QString& outergroup, const ReportAccount& row, unsigned column, MyMoneyMoney value, bool budget = false, bool stockSplit = false );
+    inline void assignCell( const QString& outergroup, const ReportAccount& row, int column, MyMoneyMoney value, bool budget = false, bool stockSplit = false );
 
   /**
     * Create a row for each included account. This is used when
@@ -308,8 +308,8 @@ protected:
     * Helper methods for collapseColumns
     *
     */
-    void accumulateColumn(unsigned destcolumn, unsigned sourcecolumn);
-    void clearColumn(unsigned column);
+    void accumulateColumn(int destcolumn, int sourcecolumn);
+    void clearColumn(int column);
 
   /**
     * Calculate the column of a given date.  This is the absolute column in a
@@ -318,7 +318,7 @@ protected:
     *
     * @param _date The date
     */
-    unsigned columnValue(const QDate& _date) const;
+    int columnValue(const QDate& _date) const;
 
   /**
     * Calculate the date of the last day covered by a given column.
@@ -330,13 +330,13 @@ protected:
   /**
     * Returns the balance of a given cell. Throws an exception once calculateRunningSums() has been run.
     */
-    MyMoneyMoney cellBalance(const QString& outergroup, const ReportAccount& _row, unsigned column, bool budget);
+    MyMoneyMoney cellBalance(const QString& outergroup, const ReportAccount& _row, int column, bool budget);
 
 #warning #port to kde4
    /**
      * Draws a PivotGridRowSet in a chart for the given ERowType
      */
-    //unsigned drawChartRowSet(unsigned rowNum, const bool seriesTotals, const bool accountSeries, KDChartTableData& data, const PivotGridRowSet& rowSet, const ERowType rowType ) const;
+    //unsigned drawChartRowSet(int rowNum, const bool seriesTotals, const bool accountSeries, KDChartTableData& data, const PivotGridRowSet& rowSet, const ERowType rowType ) const;
 
    /**
      * Loads m_rowTypeList with the list of PivotGridRow types that the reporttable
