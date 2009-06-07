@@ -128,6 +128,8 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   const int iconSize = (KMyMoneyGlobalSettings::iconSize()+1)*16;
   newStorage();
 
+  m_model = new KPageWidgetModel();
+
   connect(this, SIGNAL(currentPageChanged (const QModelIndex, const QModelIndex)), this, SLOT(slotRefreshViews()));
   connect(this, SIGNAL(pageToggled(KPageWidgetItem*, bool)), this, SLOT(slotRefreshViews()));
 
