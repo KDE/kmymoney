@@ -26,7 +26,7 @@
 //Added by qt3to4:
 #include <Q3HBoxLayout>
 #include <QKeyEvent>
-#include <Q3ValueList>
+#include <QList>
 #include <QLabel>
 #include <QResizeEvent>
 #include <QEvent>
@@ -120,7 +120,7 @@ bool MousePressFilter::eventFilter(QObject* o, QEvent* e)
 {
   if(m_filterActive) {
     if(e->type() == QEvent::MouseButtonPress && !m_lastMousePressEvent) {
-      Q3ValueList<QWidget*>::const_iterator it_w;
+      QList<QWidget*>::const_iterator it_w;
       for(it_w = m_parents.begin(); it_w != m_parents.end(); ++it_w) {
         if(isChildOf((QWidget*)o, (*it_w))) {
           m_lastMousePressEvent = e;
@@ -172,8 +172,7 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name )
   //m_toolbar->setIconText(KToolBar::IconTextRight);
 
   m_accountComboBox = new KMyMoneyAccountCombo(m_toolbar, "AccountCombo");
-#warning "port to kde4"
-  //m_toolbar->insertWidget(1, 100, m_accountComboBox);
+  m_toolbar->addWidget(m_accountComboBox);
 
 #if 0
   // the account button at the right of the toolbar
@@ -227,16 +226,15 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name )
   m_buttonbar = new KToolBar(m_buttonFrame, 0, true);
   //m_buttonbar->setIconText(KToolBar::IconTextRight);
   buttonLayout->addWidget(m_buttonbar);
-#warning "port to kde4"
-#if 0
-  kmymoney2->action("transaction_new")->plug(m_buttonbar);
-  kmymoney2->action("transaction_delete")->plug(m_buttonbar);
-  kmymoney2->action("transaction_edit")->plug(m_buttonbar);
-  kmymoney2->action("transaction_enter")->plug(m_buttonbar);
-  kmymoney2->action("transaction_cancel")->plug(m_buttonbar);
-  kmymoney2->action("transaction_accept")->plug(m_buttonbar);
-  kmymoney2->action("transaction_match")->plug(m_buttonbar);
-#endif
+
+  m_buttonbar->addAction(kmymoney2->action("transaction_new"));
+  m_buttonbar->addAction(kmymoney2->action("transaction_delete"));
+  m_buttonbar->addAction(kmymoney2->action("transaction_edit"));
+  m_buttonbar->addAction(kmymoney2->action("transaction_enter"));
+  m_buttonbar->addAction(kmymoney2->action("transaction_cancel"));
+  m_buttonbar->addAction(kmymoney2->action("transaction_accept"));
+  m_buttonbar->addAction(kmymoney2->action("transaction_match"));
+
   // create the transaction form frame
   m_formFrame = new Q3Frame(this);
   Q3VBoxLayout* frameLayout = new Q3VBoxLayout(m_formFrame, 5, 0);
@@ -530,15 +528,14 @@ void KGlobalLedgerView::loadView(void)
 
     // we need at least the balance for the account we currently show
     actBalance[m_account.id()] = MyMoneyMoney();
-#warning "port to kde4"
-#if 0
+
     if(m_account.accountType() == MyMoneyAccount::Investment) {
       QList<QString>::const_iterator it_a;
       for(it_a = m_account.accountList().begin(); it_a != m_account.accountList().end(); ++it_a) {
-            actBalance[*it_a] = MyMoneyMoney();
-          }
+        actBalance[*it_a] = MyMoneyMoney();
+      }
     }
-#endif
+
     // determine balances (actual, cleared). We do this by getting the actual
     // balance of all entered transactions from the engine and walk the list
     // of transactions backward. Also re-select a transaction if it was
@@ -898,21 +895,19 @@ void KGlobalLedgerView::slotSetReconcileAccount(const MyMoneyAccount& acc, const
       d->m_endingBalance = -endingBalance;
 
     m_newAccountLoaded = true;
-#warning "port to kde4"
-#if 0
+
     if(acc.id().isEmpty()) {
-      kmymoney2->action("account_reconcile_postpone")->unplug(m_buttonbar);
-      kmymoney2->action("account_reconcile_finish")->unplug(m_buttonbar);
+      m_buttonbar->removeAction(kmymoney2->action("account_reconcile_postpone"));
+      m_buttonbar->removeAction(kmymoney2->action("account_reconcile_finish"));
     } else {
-      kmymoney2->action("account_reconcile_postpone")->plug(m_buttonbar);
-      kmymoney2->action("account_reconcile_finish")->plug(m_buttonbar);
+      m_buttonbar->removeAction(kmymoney2->action("account_reconcile_postpone"));
+      m_buttonbar->removeAction(kmymoney2->action("account_reconcile_finish"));
       // when we start reconciliation, we need to reload the view
       // because no data has been changed. When postponing or finishing
       // reconciliation, the data change in the engine takes care of updateing
       // the view.
       slotLoadView();
     }
-#endif
   }
 }
 
@@ -1042,8 +1037,6 @@ TransactionEditor* KGlobalLedgerView::startEdit(const KMyMoneyRegister::Selected
       break;
 
     case 1:
-#warning "port to kde4"
-#if 1
       if(KMessageBox::warningContinueCancel(0,
         i18n(
           "At least one split of the selected transactions has been reconciled. "
@@ -1053,7 +1046,6 @@ TransactionEditor* KGlobalLedgerView::startEdit(const KMyMoneyRegister::Selected
         "EditReconciledTransaction") == KMessageBox::Cancel) {
         warnLevel = 2;
       }
-#endif
       break;
 
     case 2:
@@ -1141,13 +1133,12 @@ TransactionEditor* KGlobalLedgerView::startEdit(const KMyMoneyRegister::Selected
       editor->setup(m_tabOrderWidgets, m_account, d->m_action);
 
       Q_ASSERT(!m_tabOrderWidgets.isEmpty());
-#warning "port to kde4"
-#if 0
+
       // install event filter in all taborder widgets
-      for(QWidget* w = m_tabOrderWidgets.first(); w; w = m_tabOrderWidgets.next()) {
-        w->installEventFilter(this);
+      QWidgetList::const_iterator it_w = m_tabOrderWidgets.begin();
+      for(;it_w != m_tabOrderWidgets.end(); ++it_w) {
+        (*it_w)->installEventFilter(this);
       }
-#endif
       // Install a filter that checks if a mouse press happened outside
       // of one of our own widgets.
       qApp->installEventFilter(d->m_mousePressFilter);

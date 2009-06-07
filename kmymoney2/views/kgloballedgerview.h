@@ -34,7 +34,7 @@
 #include <QResizeEvent>
 #include <Q3GridLayout>
 #include <Q3Frame>
-#include <Q3ValueList>
+#include <QList>
 #include <QLabel>
 #include <Q3PopupMenu>
 #include <QEvent>
@@ -129,7 +129,7 @@ signals:
   void mousePressedOnExternalWidget(bool&);
 
 private:
-  Q3ValueList<QWidget*> m_parents;
+  QList<QWidget*>      m_parents;
   QEvent*              m_lastMousePressEvent;
   bool                 m_filterActive;
 };
