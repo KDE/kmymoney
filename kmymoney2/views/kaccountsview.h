@@ -116,7 +116,7 @@ public slots:
    * do this in show() because show() itself may change the layout
    * in undesired ways.
    */
-  void polish(void);
+  void ensurePolished(void) const;
 
   /**
     * update the account objects if their icon position has changed since

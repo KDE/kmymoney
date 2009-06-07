@@ -19,7 +19,7 @@
       </property>
       <item>
         <widget class="QTabWidget" name="m_tab">
-          <widget class="QWidget" name="tab">
+          <widget class="QWidget" name="list">
             <attribute name="title">
               <string>List</string>
             </attribute>
@@ -76,7 +76,7 @@
               </item>
             </layout>
           </widget>
-          <widget class="QWidget" name="tab">
+          <widget class="QWidget" name="icons">
             <attribute name="title">
               <string>Icons</string>
             </attribute>

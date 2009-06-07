@@ -139,9 +139,8 @@ void KAccountsView::slotTabCurrentChanged(QWidget* _tab)
 
   // remember this setting for startup
   KSharedConfigPtr config = KGlobal::config();
-  KConfigGroup grp =config->group("Last Use Settings");
-#warning "port to kde4"
-  //grp.writeEntry("KAccountsView_LastType", tab);
+  KConfigGroup grp = config->group("Last Use Settings");
+  grp.writeEntry("KAccountsView_LastType", QVariant(tab).toString());
 
   loadAccounts(tab);
 
@@ -189,10 +188,10 @@ void KAccountsView::show(void)
   slotTabCurrentChanged(m_tab->currentWidget());
 }
 
-void KAccountsView::polish(void)
+void KAccountsView::ensurePolished(void) const
 {
   // don't forget base class implementation
-  KAccountsViewDecl::polish();
+  KAccountsViewDecl::ensurePolished();
   m_accountTree->setResizeMode(Q3ListView::LastColumn);
   m_accountTree->restoreLayout("Account View Settings");
 }
