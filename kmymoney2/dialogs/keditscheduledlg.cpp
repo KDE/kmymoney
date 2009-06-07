@@ -95,7 +95,10 @@ KEditScheduleDlg::KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget *par
 
   // ... now add the transaction to register and form ...
   MyMoneyTransaction t = transaction();
-  d->m_item = KMyMoneyRegister::Register::transactionFactory(m_register, t, d->m_schedule.transaction().splits()[0], 0);
+  if( d->m_schedule.transaction().splits().isEmpty())
+	  d->m_item = KMyMoneyRegister::Register::transactionFactory(m_register, t, MyMoneySplit(), 0);
+  else
+          d->m_item = KMyMoneyRegister::Register::transactionFactory(m_register, t, d->m_schedule.transaction().splits()[0], 0);
   m_register->selectItem(d->m_item);
   // show the account row
   d->m_item->setShowRowInForm(0, true);
