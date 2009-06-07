@@ -37,7 +37,6 @@
 #include <mymoneysecurity.h>
 #include <mymoneyaccount.h>
 #include <mymoneytransaction.h>
-#include <mymoneyobserver.h>
 
 //indexes for the various columns on the summary view
 #define COLUMN_NAME_INDEX       0

@@ -5,8 +5,8 @@ ADD_SUBDIRECTORY( storage )
 SET(kmm_mymoney_LIB_SRCS
   mymoneymoney.cpp mymoneyfinancialcalculator.cpp 
   mymoneytransactionfilter.cpp
-  mymoneyobject.cpp mymoneykeyvaluecontainer.cpp mymoneyobserver.cpp
-  mymoneysubject.cpp mymoneysplit.cpp mymoneyinstitution.cpp
+  mymoneyobject.cpp mymoneykeyvaluecontainer.cpp 
+  mymoneysplit.cpp mymoneyinstitution.cpp
   mymoneyexception.cpp mymoneyinvesttransaction.cpp mymoneyutils.cpp
   mymoneysecurity.cpp mymoneytransaction.cpp mymoneyscheduled.cpp
   mymoneypayee.cpp 
@@ -23,9 +23,9 @@ SET(mymoney_HEADERS
   mymoneyobject.h mymoneyaccount.h mymoneycategory.h mymoneyexception.h
   mymoneyfile.h mymoneyfinancialcalculator.h mymoneyinstitution.h
   mymoneyinvesttransaction.h mymoneykeyvaluecontainer.h mymoneymoney.h
-  mymoneyobserver.h mymoneypayee.h mymoneyprice.h mymoneyreport.h
+  mymoneypayee.h mymoneyprice.h mymoneyreport.h
   mymoneyscheduled.h mymoneysecurity.h mymoneysplit.h mymoneystatement.h
-  mymoneysubject.h mymoneytransactionfilter.h mymoneytransaction.h
+  mymoneytransactionfilter.h mymoneytransaction.h
   mymoneyutils.h mymoneybudget.h mymoneyobjectcontainer.h mymoneyforecast.h
   )
 

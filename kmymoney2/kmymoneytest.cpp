@@ -36,14 +36,8 @@
 
 #include "mymoney/mymoneyutils.h"
 
-#define private public
-#include "mymoney/mymoneysubject.h"
-#include "mymoney/mymoneyobserver.h"
-#undef private
-
 #include "mymoney/mymoneyexceptiontest.h"
 #include "mymoney/mymoneymoneytest.h"
-#include "mymoney/mymoneyobservertest.h"
 #include "mymoney/mymoneyinstitutiontest.h"
 #include "mymoney/mymoneysplittest.h"
 #include "mymoney/mymoneyaccounttest.h"
@@ -147,7 +141,6 @@ int main(int testargc, char** testargv)
   CPPUNIT_TEST_SUITE_REGISTRATION(MyMoneySecurityTest);
   CPPUNIT_TEST_SUITE_REGISTRATION(MyMoneyForecastTest);
   CPPUNIT_TEST_SUITE_REGISTRATION(MyMoneyExceptionTest);
-  //CPPUNIT_TEST_SUITE_REGISTRATION(MyMoneyObserverTest);
   CPPUNIT_TEST_SUITE_REGISTRATION(MyMoneyPriceTest);
   CPPUNIT_TEST_SUITE_REGISTRATION(MyMoneyPayeeTest);
   CPPUNIT_TEST_SUITE_REGISTRATION(PivotGridTest);
