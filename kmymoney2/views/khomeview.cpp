@@ -1168,7 +1168,7 @@ void KHomeView::slotOpenUrl(const KUrl &url, const KParts::OpenUrlArguments&,con
     } else if(view == "action") {
       KXmlGuiWindow* mw = dynamic_cast<KXmlGuiWindow*>(qApp->mainWidget());
       Q_CHECK_PTR(mw);
-      QTimer::singleShot(0, mw->actionCollection()->action( id ), SLOT(activate()));
+      QTimer::singleShot(0, mw->actionCollection()->action( id ), SLOT(trigger ()));
     } else if(view == VIEW_HOME) {
       QList<MyMoneyAccount> list;
       MyMoneyFile::instance()->accountList(list);
