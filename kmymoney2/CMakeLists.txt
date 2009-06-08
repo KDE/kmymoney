@@ -49,7 +49,7 @@ qt4_add_dbus_adaptor(kmymoney2_SRCS org.kde.kmymoney.xml kmymoney2.h KMyMoney2Ap
 #KDE4_ADD_DCOP_STUBS( kmymoney2_SRCS kmymoney2.h )
 
 KDE4_ADD_EXECUTABLE( kmymoney2 ${kmymoney2_SRCS} )
-TARGET_LINK_LIBRARIES( kmymoney2 ${kmymoney_common_LIBS} kmymoney_base  ${kmymoney_link_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QT3SUPPORT_LIBRARY} ${KDE4_KDE3SUPPORT_LIBS})
+TARGET_LINK_LIBRARIES( kmymoney2 ${kmymoney_common_LIBS} kmymoney_base  ${kmymoney_link_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QT3SUPPORT_LIBRARY} ${KDE4_KDE3SUPPORT_LIBS} ${KDE4_KFILE_LIBS} )
 
 ########### kmymoneytest executable ###############
 
