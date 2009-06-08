@@ -103,7 +103,7 @@ KSelectDatabaseDlg::KSelectDatabaseDlg(KUrl openURL, QWidget *parent)
   // list drivers installed on system
   QStringList list = QSqlDatabase::drivers();
   if (!list.contains(driverName)) {
-    KMessageBox::error (0, i18n("Qt SQL driver %1 is no longer installed on your system").arg(driverName),
+    KMessageBox::error (0, i18n("Qt SQL driver %1 is no longer installed on your system",driverName),
         "");
         reject();
   }

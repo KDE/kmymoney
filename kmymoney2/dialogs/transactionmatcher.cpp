@@ -82,7 +82,7 @@ void TransactionMatcher::match(MyMoneyTransaction tm, MyMoneySplit sm, MyMoneyTr
 
   // verify that the amounts are the same, otherwise we should not be matching!
   if(sm.shares() != si.shares()) {
-    throw new MYMONEYEXCEPTION(i18n("Splits for %1 have conflicting values (%2,%3)").arg(m_account.name()).arg(sm.shares().formatMoney(m_account, sec), si.shares().formatMoney(m_account, sec)));
+    throw new MYMONEYEXCEPTION(i18n("Splits for %1 have conflicting values (%2,%3)",m_account.name(),sm.shares().formatMoney(m_account, sec), si.shares().formatMoney(m_account, sec)));
   }
 
   // ipwizard: I took over the code to keep the bank id found in the endMatchTransaction
@@ -95,12 +95,12 @@ void TransactionMatcher::match(MyMoneyTransaction tm, MyMoneySplit sm, MyMoneyTr
         sm.setBankID( bankID );
         tm.modifySplit(sm);
       } else if(sm.bankID() != bankID) {
-        throw new MYMONEYEXCEPTION(i18n("Both of these transactions have been imported into %1.  Therefore they cannot be matched.  Matching works with one imported transaction and one non-imported transaction.").arg(m_account.name()));
+        throw new MYMONEYEXCEPTION(i18n("Both of these transactions have been imported into %1.  Therefore they cannot be matched.  Matching works with one imported transaction and one non-imported transaction.",m_account.name()));
       }
     } catch(MyMoneyException *e) {
       QString estr = e->what();
       delete e;
-      throw new MYMONEYEXCEPTION(i18n("Unable to match all splits (%1)").arg(estr));
+      throw new MYMONEYEXCEPTION(i18n("Unable to match all splits (%1)",estr));
     }
   }
 

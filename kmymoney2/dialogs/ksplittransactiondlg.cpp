@@ -185,16 +185,13 @@ int KSplitTransactionDlg::exec(void)
         // now modify the text items of the dialog to contain the correct values
         QString q = i18n("The total amount of this transaction is %1 while "
                                 "the sum of the splits is %2. The remaining %3 are "
-                                "unassigned.")
-                    .arg(total)
-                    .arg(sums)
-                    .arg(diff);
+                                "unassigned.",total,sums,diff);
         corrDlg->explanation->setText(q);
 
-        q = i18n("Change &total amount of transaction to %1.").arg(sums);
+        q = i18n("Change &total amount of transaction to %1.",sums);
         corrDlg->changeBtn->setText(q);
 
-        q = i18n("&Distribute difference of %1 among all splits.").arg(diff);
+        q = i18n("&Distribute difference of %1 among all splits.",diff);
         corrDlg->distributeBtn->setText(q);
         // FIXME remove the following line once distribution among
         //       all splits is implemented
@@ -203,9 +200,9 @@ int KSplitTransactionDlg::exec(void)
 
         // if we have only two splits left, we don't allow leaving sth. unassigned.
         if(m_transaction.splitCount() < 3) {
-          q = i18n("&Leave total amount of transaction at %1.").arg(total);
+          q = i18n("&Leave total amount of transaction at %1.",total);
         } else {
-          q = i18n("&Leave %1 unassigned.").arg(diff);
+          q = i18n("&Leave %1 unassigned.",diff);
         }
         corrDlg->leaveBtn->setText(q);
 
