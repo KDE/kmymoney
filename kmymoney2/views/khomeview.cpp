@@ -635,7 +635,7 @@ void KHomeView::showPaymentEntry(const MyMoneySchedule& sched, int cnt)
 
         //show quantity of payments overdue if any
         if(cnt > 1)
-          tmp += i18n(" (%1 payments)").arg(cnt);
+          tmp += i18n(" (%1 payments)",cnt);
 
         //show account of the main split
         tmp += "</td><td>";
@@ -966,7 +966,7 @@ void KHomeView::showForecast(void)
       beginDay = m_forecast.accountsCycle();
 
     // Now output header
-    m_part->write(QString("<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">%1</div>\n<div class=\"gap\">&nbsp;</div>\n").arg(i18n("%1 Day Forecast").arg(m_forecast.forecastDays())));
+    m_part->write(QString("<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">%1</div>\n<div class=\"gap\">&nbsp;</div>\n").arg(i18n("%1 Day Forecast",m_forecast.forecastDays())));
     m_part->write("<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >");
     m_part->write("<tr class=\"item\"><td class=\"left\" width=\"40%\">");
     m_part->write(i18n("Account"));
@@ -975,7 +975,7 @@ void KHomeView::showForecast(void)
     for(i = 0; (i*m_forecast.accountsCycle() + beginDay) <= m_forecast.forecastDays(); ++i) {
       m_part->write(QString("<td width=\"%1%\" class=\"right\">").arg(colWidth));
 
-      m_part->write(i18n("%1 days").arg(i*m_forecast.accountsCycle() + beginDay));
+      m_part->write(i18n("%1 days",i*m_forecast.accountsCycle() + beginDay));
       m_part->write("</td>");
       colspan++;
     }
