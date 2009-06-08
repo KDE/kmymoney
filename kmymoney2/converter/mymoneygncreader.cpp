@@ -240,7 +240,7 @@ QString GncObject::hide (QString data, unsigned int anonClass) {
 // dump current object data values // only called if gncdebug set
 void GncObject::debugDump () {
   uint i;
-  qDebug ("Object %s", m_elementName.toLatin1());
+  qDebug ("Object %s", qPrintable(m_elementName));
   for (i = 0; i < m_dataElementListCount; i++) {
     qDebug ("%s = %s", m_dataElementList[i].toLatin1(), m_v.at(i)->toLatin1());
   }
@@ -413,7 +413,7 @@ void GncCountData::terminate () {
   if (i != 0) {
     if (m_countType == "budget") pMain->setBudgetsFound(true);
     else if (m_countType.left(7) == "gnc:Gnc") pMain->setSmallBusinessFound(true);
-    else if (pMain->xmldebug) qDebug ("Unknown count type %s", m_countType.toLatin1());
+    else if (pMain->xmldebug) qDebug ("Unknown count type %s", qPrintable(m_countType));
   }
   return ;
 }
@@ -891,7 +891,7 @@ bool XmlReader::startDocument() {
 bool XmlReader::startElement (const QString&, const QString&, const QString& elName ,
                               const QXmlAttributes& elAttrs) {
   try {
-    if (pMain->gncdebug) qDebug ("XML start - %s", elName.toLatin1());
+    if (pMain->gncdebug) qDebug ("XML start - %s", qPrintable(elName));
 #ifdef _GNCFILEANON
     int i;
     QString spaces;
@@ -952,7 +952,7 @@ bool XmlReader::startElement (const QString&, const QString&, const QString& elN
 
 bool XmlReader::endElement( const QString&, const QString&, const QString&elName ) {
   try {
-    if (pMain->xmldebug) qDebug ("XML end - %s", elName.toLatin1());
+    if (pMain->xmldebug) qDebug ("XML end - %s", qPrintable(elName));
 #ifdef _GNCFILEANON
     QString spaces;
     switch (lastType) {
@@ -989,7 +989,7 @@ bool XmlReader::characters (const QString &data) {
   if (pMain->xmldebug) qDebug ("XML Data received - %d bytes", data.length());
   QString pData = data.trimmed(); // data may contain line feeds and indentation spaces
   if (!pData.isEmpty()) {
-    if (pMain->developerDebug) qDebug ("XML Data - %s", pData.toLatin1());
+    if (pMain->developerDebug) qDebug ("XML Data - %s", qPrintable(pData));
     m_co->storeData (pData); //go store it
 #ifdef _GNCFILEANON
     QString anonData = m_co->getData ();
@@ -1153,7 +1153,7 @@ void MyMoneyGncReader::convertCommodity (const GncCommodity *gcm) {
     m_storage->addSecurity(equ);
 
     //assign the gnucash id as the key into the map to find our id
-    if (gncdebug) qDebug ("mapping, key = %s, id = %s", gcm->id().toLatin1(), equ.id().data());
+    if (gncdebug) qDebug ("mapping, key = %s, id = %s", qPrintable(gcm->id()), equ.id().data());
     m_mapEquities[gcm->id().toUtf8()] = equ.id();
   }
   signalProgress (++m_commodityCount, 0);
@@ -1173,7 +1173,7 @@ void MyMoneyGncReader::convertPrice (const GncPrice *gpr) {
   } else {
     MyMoneySecurity e = m_storage->security(m_mapEquities[gpr->commodity()->id().toUtf8()]);
     if (gncdebug) qDebug ("Searching map, key = %s, found id = %s",
-                            gpr->commodity()->id().toLatin1(), e.id().data());
+                            qPrintable(gpr->commodity()->id()), e.id().data());
     e.setTradingCurrency (gpr->currency()->id().toUtf8());
     MyMoneyPrice stockPrice(e.id(), gpr->currency()->id().toUtf8(), gpr->priceDate(), rate, i18n("Imported History"));
     m_storage->addPrice (stockPrice);
@@ -1277,11 +1277,11 @@ void MyMoneyGncReader::convertAccount (const GncAccount* gac) {
     // set the equity type
     MyMoneySecurity e = m_storage->security (m_mapEquities[gac->commodity()->id().toUtf8()]);
     if (gncdebug) qDebug ("Acct equity search, key = %s, found id = %s",
-                            gac->commodity()->id().toLatin1(), e.id().data());
+                            qPrintable(gac->commodity()->id()), e.id().data());
     acc.setCurrencyId (e.id()); // actually, the security id
     if ("MUTUAL" == gac->type()) {
       e.setSecurityType (MyMoneySecurity::SECURITY_MUTUALFUND);
-      if (gncdebug) qDebug ("Setting %s to mutual", e.name().toLatin1());
+      if (gncdebug) qDebug ("Setting %s to mutual", qPrintable(e.name()));
       m_storage->modifySecurity (e);
     }
     // See if he wants online quotes for this account
@@ -1318,8 +1318,8 @@ void MyMoneyGncReader::convertAccount (const GncAccount* gac) {
   m_mapIds[gac->id().toUtf8()] = acc.id(); // to link gnucash id to ours for tx posting
 
   if (gncdebug) qDebug("Gnucash account %s has id of %s, type of %s, parent is %s",
-                         gac->id().toLatin1(), acc.id().data(),
-                         KMyMoneyUtils::accountTypeToString(acc.accountType()).toLatin1(), acc.parentAccountId().data());
+                         qPrintable(gac->id()), acc.id().data(),
+                         qPrintable(KMyMoneyUtils::accountTypeToString(acc.accountType())), acc.parentAccountId().data());
 
   signalProgress (++m_accountCount, 0);
   return ;
@@ -1472,8 +1472,8 @@ void MyMoneyGncReader::convertSplit (const GncSplit *gsp) {
           m_storage->currency(m_txCommodity);   // will throw exception if not currency
           e.setTradingCurrency (m_txCommodity);
           if (gncdebug) qDebug ("added price for %s, %s date %s",
-              e.name().toLatin1(), newPrice.toString().toLatin1(),
-              m_txDatePosted.toString(Qt::ISODate).toLatin1());
+              qPrintable(e.name()), qPrintable(newPrice.toString()),
+              qPrintable(m_txDatePosted.toString(Qt::ISODate)));
           m_storage->modifySecurity(e);
           MyMoneyPrice dealPrice (e.id(), m_txCommodity, m_txDatePosted, newPrice, i18n("Imported Transaction"));
           m_storage->addPrice (dealPrice);
@@ -1636,7 +1636,7 @@ void MyMoneyGncReader::convertTemplateSplit (const QString& schedName, const Gnc
       // all data read, now check we have everything
       if ((bFoundStringCreditFormula) && (bFoundStringDebitFormula) && (bFoundGuidAccountId)) {
         if (gncdebug) qDebug ("Found valid slot; credit %s, debit %s, acct %s",
-                                gncCreditFormula.toLatin1(), gncDebitFormula.toLatin1(), gncAccountId.toLatin1());
+                                qPrintable(gncCreditFormula), qPrintable(gncDebitFormula), qPrintable(gncAccountId));
         validSlotCount++;
       }
       // validate numeric, work out sign
@@ -1661,7 +1661,7 @@ void MyMoneyGncReader::convertTemplateSplit (const QString& schedName, const Gnc
             exFormula = numericTest;
         }
       } else {
-          if (gncdebug) qDebug ("%s is not numeric", numericTest.toLatin1());
+          if (gncdebug) qDebug ("%s is not numeric", qPrintable(numericTest));
           nonNumericFormula = true;
       }
       split.setValue (exFormula);
@@ -2076,7 +2076,7 @@ QString MyMoneyGncReader::buildReportSection (const QString& source) {
     }
     if (more) s.append (i18n("\n\nPress More for further information"));
   } else { // we need to retrieve the posted messages for this source
-    if (gncdebug) qDebug("Building messages for source %s", source.toLatin1());
+    if (gncdebug) qDebug("Building messages for source %s", qPrintable(source));
     unsigned int i, j;
     for (i = 0; i < m_messageList.count(); i++) {
       GncMessageArgs *m = m_messageList.at(i);
@@ -2092,7 +2092,7 @@ QString MyMoneyGncReader::buildReportSection (const QString& source) {
       }
     }
   }
-  if (gncdebug) qDebug ("%s", s.toLatin1());
+  if (gncdebug) qDebug ("%s", qPrintable(s));
   return (static_cast<const QString>(s));
   PASS
 }
@@ -2438,7 +2438,7 @@ QString GncMessages::text (const QString source, const unsigned int code) {
     if ((source == texts[i].source) && (code == texts[i].code)) break;
   }
   if (texts[i].source == "ZZ") {
-    QString mess = QString().sprintf("Internal error - unknown message - source %s, code %d", source.toLatin1(), code);
+    QString mess = QString().sprintf("Internal error - unknown message - source %s, code %i", qPrintable(source), code);
     throw new MYMONEYEXCEPTION (mess);
   }
   return (texts[i].text);
@@ -2452,7 +2452,7 @@ unsigned int GncMessages::argCount (const QString source, const unsigned int cod
     if ((source == texts[i].source) && (code == texts[i].code)) break;
   }
   if (texts[i].source == "ZZ") {
-    QString mess = QString().sprintf("Internal error - unknown message - source %s, code %d", source.toLatin1(), code);
+    QString mess = QString().sprintf("Internal error - unknown message - source %s, code %d", qPrintable(source), code);
     throw new MYMONEYEXCEPTION (mess);
   }
   QRegExp argConst ("%\\d");
