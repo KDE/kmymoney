@@ -23,7 +23,7 @@
 #ifndef KNEWEQUITYENTRY_H
 #define KNEWEQUITYENTRY_H
 
-#include <qdialog.h>
+#include <QDialog>
 #include <klocale.h>
 
 #include "ui_knewequityentrydecl.h"

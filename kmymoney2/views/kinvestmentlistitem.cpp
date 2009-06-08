@@ -23,7 +23,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qpainter.h>
+#include <QPainter>
 //Added by qt3to4:
 #include <Q3ValueList>
 

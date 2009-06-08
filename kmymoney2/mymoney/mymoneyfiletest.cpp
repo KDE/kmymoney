@@ -19,7 +19,7 @@
 
 #include <memory>
 #include <unistd.h>
-#include <qfile.h>
+#include <QFile>
 #include <qdatastream.h>
 //Added by qt3to4:
 #include <Q3ValueList>

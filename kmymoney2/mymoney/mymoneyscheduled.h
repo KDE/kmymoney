@@ -24,9 +24,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qstringlist.h>
+#include <QStringList>
 #include <qmap.h>
-#include <qdatetime.h>
+#include <QDateTime>
 //Added by qt3to4:
 #include <Q3ValueList>
 

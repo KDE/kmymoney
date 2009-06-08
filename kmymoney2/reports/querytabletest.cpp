@@ -15,7 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <qfile.h>
+#include <QFile>
 
 #include <kdebug.h>
 #include <kdeversion.h>

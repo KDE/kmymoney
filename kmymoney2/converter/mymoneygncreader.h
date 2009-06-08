@@ -153,13 +153,13 @@ allow us to test the structure, if not the data content, of the file.
 //Added by qt3to4:
 #include <Q3TextStream>
 class QIODevice;
-#include <qobject.h>
+#include <QObject>
 #include <q3valuelist.h>
 #include <q3ptrlist.h>
 #include <q3ptrstack.h>
-#include <qxml.h>
-#include <qdatetime.h>
-#include <qtextcodec.h>
+#include <QtXml>
+#include <QDateTime>
+#include <QTextCodec>
 
 // ----------------------------------------------------------------------------
 // Project Includes

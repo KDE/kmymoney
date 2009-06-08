@@ -18,11 +18,11 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qlayout.h>
+#include <QLayout>
 #include <q3header.h>
-#include <qtimer.h>
-#include <qstyle.h>
-#include <qregexp.h>
+#include <QTimer>
+#include <QStyle>
+#include <QRegExp>
 //Added by qt3to4:
 #include <Q3HBoxLayout>
 

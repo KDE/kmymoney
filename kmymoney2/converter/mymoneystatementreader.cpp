@@ -26,9 +26,9 @@
 // ----------------------------------------------------------------------------
 // QT Headers
 
-#include <qfile.h>
-#include <qstringlist.h>
-#include <qtimer.h>
+#include <QFile>
+#include <QStringList>
+#include <QTimer>
 #include <q3textedit.h>
 #include <QList>
 
@@ -41,7 +41,7 @@
 #include <kdebug.h>
 #include <kdialog.h>
 #include <q3vbox.h>
-#include <qlabel.h>
+#include <QLabel>
 
 // ----------------------------------------------------------------------------
 // Project Headers

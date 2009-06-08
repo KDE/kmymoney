@@ -18,18 +18,18 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qpainter.h>
+#include <QPainter>
 #include <qdrawutil.h>
 #include <qpoint.h>
-#include <qvalidator.h>
-#include <qtimer.h>
-#include <qstyle.h>
-#include <qlayout.h>
-#include <qapplication.h>
+#include <QValidator>
+#include <QTimer>
+#include <QStyle>
+#include <QLayout>
+#include <QApplication>
 #include <qdesktopwidget.h>
-#include <qpixmap.h>
-#include <qtimer.h>
-#include <qlabel.h>
+#include <QPixmap>
+#include <QTimer>
+#include <QLabel>
 //Added by qt3to4:
 #include <QResizeEvent>
 #include <Q3Frame>

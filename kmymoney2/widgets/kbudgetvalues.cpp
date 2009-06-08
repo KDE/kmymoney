@@ -18,14 +18,14 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qtabwidget.h>
-#include <qlabel.h>
+#include <QTabWidget>
+#include <QLabel>
 #include <q3buttongroup.h>
-#include <qradiobutton.h>
+#include <QRadioButton>
 #include <q3widgetstack.h>
-#include <qtimer.h>
-#include <qtooltip.h>
-#include <qapplication.h>
+#include <QTimer>
+#include <QToolTip>
+#include <QApplication>
 //Added by qt3to4:
 #include <QKeyEvent>
 #include <QEvent>

@@ -18,9 +18,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qfile.h>
+#include <QFile>
 #include <q3textstream.h>
-#include <qradiobutton.h>
+#include <QRadioButton>
 #include <qspinbox.h>
 #include <q3datetimeedit.h>
 //Added by qt3to4:

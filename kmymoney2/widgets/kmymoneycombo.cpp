@@ -18,10 +18,10 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qrect.h>
-#include <qstyle.h>
-#include <qpainter.h>
-#include <qapplication.h>
+#include <QRect>
+#include <QStyle>
+#include <QPainter>
+#include <QApplication>
 //Added by qt3to4:
 #include <QKeyEvent>
 #include <Q3ValueList>

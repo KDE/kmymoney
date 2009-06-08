@@ -22,8 +22,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qobject.h>
-#include <qstring.h>
+#include <QObject>
+#include <QString>
 #include <qmap.h>
 #include <QStringList>
 

@@ -18,7 +18,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qpixmap.h>
+#include <QPixmap>
 //Added by qt3to4:
 #include <QList>
 

@@ -21,9 +21,9 @@
 // ----------------------------------------------------------------------------
 // QT Headers
 
-#include <qobject.h>
-#include <qdatetime.h>
-#include <qstringlist.h>
+#include <QObject>
+#include <QDateTime>
+#include <QStringList>
 #include <qmap.h>
 
 // ----------------------------------------------------------------------------

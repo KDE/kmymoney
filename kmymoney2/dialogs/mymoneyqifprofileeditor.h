@@ -22,7 +22,7 @@
 // QT Includes
 
 #include <qwidget.h>
-#include <qvalidator.h>
+#include <QValidator>
 class Q3ListViewItem;
 
 // ----------------------------------------------------------------------------

@@ -18,11 +18,11 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qpushbutton.h>
+#include <QPushButton>
 #include <q3listbox.h>
 #include <q3listview.h>
-#include <qcheckbox.h>
-#include <qtabwidget.h>
+#include <QCheckBox>
+#include <QTabWidget>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

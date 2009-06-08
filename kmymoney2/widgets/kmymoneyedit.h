@@ -23,7 +23,7 @@
 // QT Includes
 
 #include <q3hbox.h>
-#include <qvalidator.h>
+#include <QValidator>
 //Added by qt3to4:
 #include <QEvent>
 #include <QKeyEvent>

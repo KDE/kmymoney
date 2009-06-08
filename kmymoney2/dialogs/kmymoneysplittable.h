@@ -29,7 +29,7 @@
 #include <qwidget.h>
 #include <q3table.h>
 #include <qwidget.h>
-#include <qpointer.h>
+#include <QPointer>
 //Added by qt3to4:
 #include <QResizeEvent>
 #include <QEvent>

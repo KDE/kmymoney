@@ -23,10 +23,10 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qlabel.h>
-#include <qlineedit.h>
+#include <QLabel>
+#include <QLineEdit>
 #include <q3textedit.h>
-#include <qtoolbutton.h>
+#include <QToolButton>
 //Added by qt3to4:
 #include <Q3ValueList>
 

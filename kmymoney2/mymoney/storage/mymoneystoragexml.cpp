@@ -22,10 +22,10 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qfile.h>
+#include <QFile>
 #include <qdom.h>
 #include <qmap.h>
-#include <qxml.h>
+#include <QtXml>
 //Added by qt3to4:
 #include <Q3TextStream>
 #include <QList>

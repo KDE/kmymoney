@@ -33,7 +33,7 @@
   #undef new
 #endif
 
-#include <qlabel.h>
+#include <QLabel>
 #include <KDChartWidget.h>
 #include <KDChartTable.h>
 #include <KDChartParams.h>

@@ -24,10 +24,10 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qstring.h>
-#include <qdatetime.h>
+#include <QString>
+#include <QDateTime>
 #include <q3ptrlist.h>
-#include <qstringlist.h>
+#include <QStringList>
 //Added by qt3to4:
 #include <QList>
 

@@ -20,7 +20,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qlayout.h>
+#include <QLayout>
 #include <q3frame.h>
 //Added by qt3to4:
 #include <Q3HBoxLayout>

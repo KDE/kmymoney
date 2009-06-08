@@ -17,12 +17,12 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qtabwidget.h>
+#include <QTabWidget>
 #include <qspinbox.h>
-#include <qlabel.h>
+#include <QLabel>
 #include <q3buttongroup.h>
 #include <q3textedit.h>
-#include <qlayout.h>
+#include <QLayout>
 //Added by qt3to4:
 #include <QList>
 

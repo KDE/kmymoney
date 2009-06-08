@@ -24,7 +24,7 @@
 #include <q3table.h>
 #include <q3valuelist.h>
 #include <q3valuevector.h>
-#include <qpalette.h>
+#include <QPalette>
 #include <qwidget.h>
 #include <qtabbar.h>
 //Added by qt3to4:

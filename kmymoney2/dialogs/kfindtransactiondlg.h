@@ -21,7 +21,7 @@
 // QT Includes
 
 #include <q3listview.h>
-#include <qdatetime.h>
+#include <QDateTime>
 #include <qmap.h>
 //Added by qt3to4:
 #include <QResizeEvent>

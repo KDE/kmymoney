@@ -24,17 +24,17 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qlabel.h>
-#include <qfile.h>
+#include <QLabel>
+#include <QFile>
 #include <q3textstream.h>
 #include <q3progressdialog.h>
-#include <qtextcodec.h>
-#include <qstatusbar.h>
+#include <QTextCodec>
+#include <QStatusBar>
 
-#include <qcursor.h>
-#include <qregexp.h>
-#include <qlayout.h>
-#include <qobject.h>
+#include <QCursor>
+#include <QRegExp>
+#include <QLayout>
+#include <QObject>
 //Added by qt3to4:
 #include <QList>
 #include <Q3VBoxLayout>
@@ -2241,7 +2241,7 @@ KMyMoneyViewBase* KMyMoneyView::addBasePage(const QString& title, const QString&
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qlayout.h>
+#include <QLayout>
 #include <q3vbox.h>
 
 // ----------------------------------------------------------------------------

@@ -17,11 +17,11 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
-#include <qcheckbox.h>
-#include <qlineedit.h>
-#include <qlayout.h>
-#include <qapplication.h>
-#include <qcombobox.h>
+#include <QCheckBox>
+#include <QLineEdit>
+#include <QLayout>
+#include <QApplication>
+#include <QComboBox>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

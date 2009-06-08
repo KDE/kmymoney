@@ -18,15 +18,15 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
-#include <qlayout.h>
-#include <qdatetime.h>
-#include <qregexp.h>
+#include <QLayout>
+#include <QDateTime>
+#include <QRegExp>
 #include <q3dragobject.h>
-#include <qclipboard.h>
-#include <qapplication.h>
-#include <qprinter.h>
-#include <qpainter.h>
-#include <qfile.h>
+#include <QClipboard>
+#include <QApplication>
+#include <QPrinter>
+#include <QPainter>
+#include <QFile>
 #include <qdom.h>
 
 // ----------------------------------------------------------------------------

@@ -18,7 +18,7 @@
 #include <q3valuelist.h>
 #include <q3valuevector.h>
 #include <qdom.h>
-#include <qfile.h>
+#include <QFile>
 #include <QTextStream>
 
 #include <kdebug.h>

@@ -22,7 +22,7 @@
 // QT Includes
 
 
-#include <qobject.h>
+#include <QObject>
 #include <q3http.h>
 //Added by qt3to4:
 #include <Q3ValueList>

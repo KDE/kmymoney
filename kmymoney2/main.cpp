@@ -25,9 +25,9 @@
 // QT Includes
 
 #include <qwidget.h>
-#include <qdatetime.h>
-#include <qstringlist.h>
-#include <qeventloop.h>
+#include <QDateTime>
+#include <QStringList>
+#include <QEventLoop>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

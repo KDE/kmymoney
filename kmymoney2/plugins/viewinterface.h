@@ -23,9 +23,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qobject.h>
-#include <qstring.h>
-#include <qpixmap.h>
+#include <QObject>
+#include <QString>
+#include <QPixmap>
 //Added by qt3to4:
 #include <Q3Frame>
 #include <Q3ValueList>

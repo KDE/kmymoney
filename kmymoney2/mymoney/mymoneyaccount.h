@@ -22,12 +22,12 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qstring.h>
-#include <qdatetime.h>
+#include <QString>
+#include <QDateTime>
 #include <q3valuelist.h>
-#include <qstringlist.h>
+#include <QStringList>
 #include <qdom.h>
-#include <qpixmap.h>
+#include <QPixmap>
 
 // ----------------------------------------------------------------------------
 // Project Includes

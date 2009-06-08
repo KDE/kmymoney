@@ -31,7 +31,7 @@
 
 #include <QString>
 #include <QList>
-#include <qdatetime.h>
+#include <QDateTime>
 
 // ----------------------------------------------------------------------------
 // Project Includes

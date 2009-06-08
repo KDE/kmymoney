@@ -20,7 +20,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qstring.h>
+#include <QString>
 #include <qdom.h>
 //Added by qt3to4:
 #include <QList>

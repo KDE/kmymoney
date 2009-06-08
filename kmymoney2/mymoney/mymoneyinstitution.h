@@ -22,10 +22,10 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qstring.h>
+#include <QString>
 #include <qmap.h>
-#include <qstringlist.h>
-#include <qpixmap.h>
+#include <QStringList>
+#include <QPixmap>
 
 // ----------------------------------------------------------------------------
 // Project Includes

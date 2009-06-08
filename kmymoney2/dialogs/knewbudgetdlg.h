@@ -24,9 +24,9 @@
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-#include <qdatetime.h>
-#include <qcombobox.h>
-#include <qlineedit.h>
+#include <QDateTime>
+#include <QComboBox>
+#include <QLineEdit>
 // ----------------------------------------------------------------------------
 // Project Includes
 

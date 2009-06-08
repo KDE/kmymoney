@@ -18,8 +18,8 @@
 // QT Includes
 
 #include <q3groupbox.h>
-#include <qcheckbox.h>
-#include <qregexp.h>
+#include <QCheckBox>
+#include <QRegExp>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

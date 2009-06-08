@@ -17,11 +17,11 @@
 #ifndef KRECONCILEDLG_H
 #define KRECONCILEDLG_H
 
-#include <qlabel.h>
+#include <QLabel>
 //Added by qt3to4:
 #include <QResizeEvent>
 #include <k3listview.h>
-#include <qpushbutton.h>
+#include <QPushButton>
 
 #include "mymoneyfile.h"
 #include "mymoneymoney.h"

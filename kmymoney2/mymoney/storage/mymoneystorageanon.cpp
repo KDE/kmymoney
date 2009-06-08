@@ -26,7 +26,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qfile.h>
+#include <QFile>
 #include <qdom.h>
 #include <qmap.h>
 //Added by qt3to4:

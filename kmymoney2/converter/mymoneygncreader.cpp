@@ -22,12 +22,12 @@ email                : mte@users.sourceforge.net
 
 // ----------------------------------------------------------------------------
 // QT Includes
-#include <qfile.h>
+#include <QFile>
 #include <qmap.h>
-#include <qobject.h>
+#include <QObject>
 #include <q3filedialog.h>
 #include <qinputdialog.h>
-#include <qdatetime.h>
+#include <QDateTime>
 //Added by qt3to4:
 #include <Q3ValueList>
 #include <Q3TextStream>
@@ -1097,7 +1097,7 @@ void MyMoneyGncReader::readFile(QString in, QString out) {
   return ;
 }
 
-#include <qapplication.h>
+#include <QApplication>
 int main (int argc, char ** argv) {
     QApplication a (argc, argv);
     MyMoneyGncReader m;

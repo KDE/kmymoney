@@ -25,8 +25,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qdatetime.h>
-#include <qregexp.h>
+#include <QDateTime>
+#include <QRegExp>
 //Added by qt3to4:
 #include <Q3CString>
 #include <Q3ValueList>

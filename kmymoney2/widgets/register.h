@@ -33,8 +33,8 @@
 #include <q3valuevector.h>
 #include <qwidget.h>
 #include <qmap.h>
-#include <qpair.h>
-#include <qevent.h>
+#include <QPair>
+#include <QEvent>
 //Added by qt3to4:
 #include <QKeyEvent>
 #include <QPixmap>

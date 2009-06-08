@@ -21,7 +21,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qapplication.h>
+#include <QApplication>
 //Added by qt3to4:
 #include <Q3ValueList>
 #include <QLabel>

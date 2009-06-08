@@ -20,9 +20,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qlabel.h>
-#include <qdir.h>
-#include <qfile.h>
+#include <QLabel>
+#include <QDir>
+#include <QFile>
 #include <q3textstream.h>
 
 // ----------------------------------------------------------------------------

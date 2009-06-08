@@ -21,9 +21,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qlabel.h>
-#include <qimage.h>
-#include <qcolor.h>
+#include <QLabel>
+#include <QImage>
+#include <QColor>
 //Added by qt3to4:
 #include <QResizeEvent>
 #include <QPixmap>

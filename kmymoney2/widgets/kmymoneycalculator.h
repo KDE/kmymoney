@@ -28,11 +28,11 @@
 
 #include <qwidget.h>
 #include <q3frame.h>
-#include <qlayout.h>
+#include <QLayout>
 #include <q3grid.h>
 #include <qlcdnumber.h>
-#include <qlineedit.h>
-#include <qlabel.h>
+#include <QLineEdit>
+#include <QLabel>
 //Added by qt3to4:
 #include <QKeyEvent>
 

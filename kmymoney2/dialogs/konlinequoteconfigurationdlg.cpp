@@ -18,9 +18,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qlabel.h>
-#include <qpushbutton.h>
-#include <qradiobutton.h>
+#include <QLabel>
+#include <QPushButton>
+#include <QRadioButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

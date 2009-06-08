@@ -23,10 +23,10 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qstring.h>
-#include <qdatetime.h>
+#include <QString>
+#include <QDateTime>
 #include <QList>
-#include <qstringlist.h>
+#include <QStringList>
 #include <QTextStream>
 
 // ----------------------------------------------------------------------------

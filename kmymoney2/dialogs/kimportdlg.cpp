@@ -21,13 +21,13 @@
 // ----------------------------------------------------------------------------
 // QT Headers
 
-#include <qlineedit.h>
+#include <QLineEdit>
 #include <q3textstream.h>
 #include <q3progressbar.h>
-#include <qlabel.h>
+#include <QLabel>
 #include <q3buttongroup.h>
-#include <qpixmap.h>
-#include <qapplication.h>
+#include <QPixmap>
+#include <QApplication>
 
 // ----------------------------------------------------------------------------
 // KDE Headers

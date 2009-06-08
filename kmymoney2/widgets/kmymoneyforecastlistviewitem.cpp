@@ -18,10 +18,10 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qpalette.h>
-#include <qpen.h>
-#include <qcolor.h>
-#include <qpainter.h>
+#include <QPalette>
+#include <QPen>
+#include <QColor>
+#include <QPainter>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

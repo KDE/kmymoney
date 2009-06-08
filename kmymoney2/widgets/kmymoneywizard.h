@@ -20,9 +20,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qdialog.h>
+#include <QDialog>
 #include <q3valuelist.h>
-#include <qpalette.h>
+#include <QPalette>
 //Added by qt3to4:
 #include <Q3HBoxLayout>
 #include <Q3VBoxLayout>

@@ -22,7 +22,7 @@
 // QT Includes
 
 #include <QMap>
-#include <qobject.h>
+#include <QObject>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

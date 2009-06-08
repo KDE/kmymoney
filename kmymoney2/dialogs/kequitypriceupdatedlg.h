@@ -27,7 +27,7 @@
 // QT Includes
 
 #include <qwidget.h>
-#include <qpair.h>
+#include <QPair>
 #include <qdatastream.h>
 
 // ----------------------------------------------------------------------------

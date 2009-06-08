@@ -19,7 +19,7 @@
 // QT Includes
 
 #include <qfont.h>
-#include <qpainter.h>
+#include <QPainter>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

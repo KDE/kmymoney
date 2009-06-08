@@ -23,8 +23,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qpainter.h>
-#include <qstyle.h>
+#include <QPainter>
+#include <QStyle>
 //Added by qt3to4:
 #include <QList>
 #include <QPixmap>

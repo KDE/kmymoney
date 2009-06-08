@@ -20,10 +20,10 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qpixmap.h>
-#include <qlabel.h>
-#include <qlineedit.h>
-#include <qcheckbox.h>
+#include <QPixmap>
+#include <QLabel>
+#include <QLineEdit>
+#include <QCheckBox>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

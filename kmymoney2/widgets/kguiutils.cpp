@@ -19,11 +19,11 @@
 // QT Includes
  // No need for QDateEdit, QSpinBox, etc., since these always return values
 
-#include <qcheckbox.h>
+#include <QCheckBox>
 #include <q3listbox.h>
-#include <qcombobox.h>
-#include <qlineedit.h>
-#include <qpushbutton.h>
+#include <QComboBox>
+#include <QLineEdit>
+#include <QPushButton>
 #include <qwidget.h>
 #include <q3hbox.h>
 #include <qspinbox.h>

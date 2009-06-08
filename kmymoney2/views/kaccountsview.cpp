@@ -17,10 +17,10 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qlabel.h>
-#include <qtabwidget.h>
-#include <qpixmap.h>
-#include <qlayout.h>
+#include <QLabel>
+#include <QTabWidget>
+#include <QPixmap>
+#include <QLayout>
 //Added by qt3to4:
 #include <QList>
 #include <Q3VBoxLayout>

@@ -20,9 +20,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qrect.h>
-#include <qpainter.h>
-#include <qpalette.h>
+#include <QRect>
+#include <QPainter>
+#include <QPalette>
 //Added by qt3to4:
 #include <QKeyEvent>
 #include <QFocusEvent>

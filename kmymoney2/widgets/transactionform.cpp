@@ -18,13 +18,13 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qstring.h>
-#include <qpainter.h>
-#include <qtimer.h>
-#include <qapplication.h>
-#include <qlayout.h>
+#include <QString>
+#include <QPainter>
+#include <QTimer>
+#include <QApplication>
+#include <QLayout>
 #include <qtabbar.h>
-#include <qpalette.h>
+#include <QPalette>
 //Added by qt3to4:
 #include <Q3Frame>
 

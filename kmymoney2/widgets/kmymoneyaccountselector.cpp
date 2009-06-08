@@ -23,13 +23,13 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qlayout.h>
+#include <QLayout>
 #include <q3header.h>
-#include <qlabel.h>
-#include <qtimer.h>
-#include <qpainter.h>
-#include <qstyle.h>
-#include <qrect.h>
+#include <QLabel>
+#include <QTimer>
+#include <QPainter>
+#include <QStyle>
+#include <QRect>
 //Added by qt3to4:
 #include <Q3ValueList>
 #include <Q3VBoxLayout>

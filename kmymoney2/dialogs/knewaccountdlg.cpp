@@ -21,19 +21,19 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qpixmap.h>
-#include <qpushbutton.h>
-#include <qlabel.h>
+#include <QPixmap>
+#include <QPushButton>
+#include <QLabel>
 #include <q3header.h>
-#include <qtooltip.h>
-#include <qcheckbox.h>
-#include <qtimer.h>
-#include <qtabwidget.h>
+#include <QToolTip>
+#include <QCheckBox>
+#include <QTimer>
+#include <QTabWidget>
 #include <q3buttongroup.h>
-#include <qradiobutton.h>
+#include <QRadioButton>
 #include <q3textedit.h>
-#include <qlayout.h>
-#include <qtabwidget.h>
+#include <QLayout>
+#include <QTabWidget>
 //Added by qt3to4:
 #include <QList>
 #include <QResizeEvent>

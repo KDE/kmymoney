@@ -37,7 +37,7 @@
 #endif
 
 // So we can save this object
-#include <qstring.h>
+#include <QString>
 #include <qdatastream.h>
 #include <export.h>
 #include <mymoneyexception.h>

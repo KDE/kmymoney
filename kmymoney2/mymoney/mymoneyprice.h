@@ -28,9 +28,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qstring.h>
-#include <qdatetime.h>
-#include <qpair.h>
+#include <QString>
+#include <QDateTime>
+#include <QPair>
 #include <qmap.h>
 #include <qdom.h>
 

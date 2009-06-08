@@ -24,11 +24,11 @@
 #include <kurlrequester.h>
 #include <k3iconview.h>
 
-#include <qstring.h>
-#include <qradiobutton.h>
-#include <qlineedit.h>
-#include <qcheckbox.h>
-#include <qpushbutton.h>
+#include <QString>
+#include <QRadioButton>
+#include <QLineEdit>
+#include <QCheckBox>
+#include <QPushButton>
 //Added by qt3to4:
 #include <Q3Frame>
 #include <KPageDialog>

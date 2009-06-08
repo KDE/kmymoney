@@ -23,9 +23,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qradiobutton.h>
+#include <QRadioButton>
 #include <q3buttongroup.h>
-#include <qlabel.h>
+#include <QLabel>
 //Added by qt3to4:
 #include <QList>
 

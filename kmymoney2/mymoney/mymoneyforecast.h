@@ -25,7 +25,7 @@
 
 #include <qmap.h>
 #include <QList>
-#include <qstring.h>
+#include <QString>
 
 // ----------------------------------------------------------------------------
 // Project Includes

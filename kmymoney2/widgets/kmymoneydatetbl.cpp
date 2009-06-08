@@ -45,11 +45,11 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 #include <qglobal.h>
-#include <qdatetime.h>
-#include <qstring.h>
-#include <qpen.h>
-#include <qpainter.h>
-#include <qdialog.h>
+#include <QDateTime>
+#include <QString>
+#include <QPen>
+#include <QPainter>
+#include <QDialog>
 //Added by qt3to4:
 #include <QWheelEvent>
 #include <QResizeEvent>

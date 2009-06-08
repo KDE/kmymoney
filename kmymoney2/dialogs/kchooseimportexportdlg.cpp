@@ -21,11 +21,11 @@
 #include <klocale.h>
 #include <kstandarddirs.h>
 
-#include <qpixmap.h>
+#include <QPixmap>
 
-#include <qlabel.h>
-#include <qcombobox.h>
-#include <qpushbutton.h>
+#include <QLabel>
+#include <QComboBox>
+#include <QPushButton>
 
 #include <kglobal.h>
 #include <kconfig.h>

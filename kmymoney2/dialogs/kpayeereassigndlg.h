@@ -24,7 +24,7 @@
 // QT Includes
 
 #include <q3valuelist.h>
-#include <qcheckbox.h>
+#include <QCheckBox>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

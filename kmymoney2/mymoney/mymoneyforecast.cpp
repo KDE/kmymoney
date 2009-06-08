@@ -20,8 +20,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qstring.h>
-#include <qdatetime.h>
+#include <QString>
+#include <QDateTime>
 #include <QTextStream>
 #include <QList>
 #include <QtAlgorithms>

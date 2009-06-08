@@ -21,8 +21,8 @@
 // QT Includes
 
 #include <qwidget.h>
-#include <qlineedit.h>
-#include <qdatetime.h>
+#include <QLineEdit>
+#include <QDateTime>
 #include <q3datetimeedit.h>
 #include <khbox.h>
 #include <kvbox.h>

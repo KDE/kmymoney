@@ -28,7 +28,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qstring.h>
+#include <QString>
 #include <export.h>
 /**
   * @file

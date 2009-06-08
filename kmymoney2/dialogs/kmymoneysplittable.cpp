@@ -26,12 +26,12 @@
 // QT Includes
 
 #include <qglobal.h>
-#include <qpainter.h>
-#include <qcursor.h>
-#include <qapplication.h>
-#include <qtimer.h>
-#include <qlayout.h>
-#include <qeventloop.h>
+#include <QPainter>
+#include <QCursor>
+#include <QApplication>
+#include <QTimer>
+#include <QLayout>
+#include <QEventLoop>
 //Added by qt3to4:
 #include <Q3HBoxLayout>
 #include <QKeyEvent>

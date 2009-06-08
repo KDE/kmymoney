@@ -31,16 +31,16 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qdir.h>
-#include <qprinter.h>
-#include <qlayout.h>
-#include <qsignalmapper.h>
-#include <qclipboard.h>        // temp for problem 1105503
-#include <qdatetime.h>         // only for performance tests
-#include <qtimer.h>
+#include <QDir>
+#include <QPrinter>
+#include <QLayout>
+#include <QSignalMapper>
+#include <QClipboard>        // temp for problem 1105503
+#include <QDateTime>         // only for performance tests
+#include <QTimer>
 #include <q3sqlpropertymap.h>
 #include <q3vbox.h>
-#include <qeventloop.h>
+#include <QEventLoop>
 //Added by qt3to4:
 #include <Q3CString>
 #include <Q3BoxLayout>

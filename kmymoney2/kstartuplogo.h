@@ -21,7 +21,7 @@
 // QT Includes
 
 #include <qwidget.h>
-#include <qpointer.h>
+#include <QPointer>
 
 // ----------------------------------------------------------------------------
 // Project Includes

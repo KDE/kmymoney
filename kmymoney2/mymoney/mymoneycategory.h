@@ -20,8 +20,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qstring.h>
-#include <qstringlist.h>
+#include <QString>
+#include <QStringList>
 
 /**
   * @deprecated This class represents an Income or Expense category. Please don't

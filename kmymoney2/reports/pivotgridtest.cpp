@@ -15,10 +15,10 @@
  *                                                                         *
  ***************************************************************************/
 /*
-#include <qvaluelist.h>
+#include <Q3ValueList>
 #include <qvaluevector.h>
 #include <qdom.h>
-#include <qfile.h>
+#include <QFile>
 
 #include <kdebug.h>
 #include <kdeversion.h>

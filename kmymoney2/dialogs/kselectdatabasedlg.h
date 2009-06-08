@@ -21,8 +21,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 #include <q3listbox.h>
-#include <qlineedit.h>
-#include <qlabel.h>
+#include <QLineEdit>
+#include <QLabel>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

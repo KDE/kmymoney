@@ -22,7 +22,7 @@
 // QT Includes
 
 #include <qmap.h>
-#include <qstring.h>
+#include <QString>
 #include <q3table.h>
 class QWidget;
 

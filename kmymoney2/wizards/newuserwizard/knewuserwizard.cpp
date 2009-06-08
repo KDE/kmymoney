@@ -20,12 +20,12 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qpixmap.h>
-#include <qbitmap.h>
-#include <qcheckbox.h>
-#include <qpushbutton.h>
-#include <qdir.h>
-#include <qlabel.h>
+#include <QPixmap>
+#include <QBitmap>
+#include <QCheckBox>
+#include <QPushButton>
+#include <QDir>
+#include <QLabel>
 //Added by qt3to4:
 #include <Q3ValueList>
 

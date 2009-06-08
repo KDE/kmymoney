@@ -24,9 +24,9 @@
 // QT Includes
 
 #include <qdrawutil.h>
-#include <qpainter.h>
-#include <qstyle.h>
-#include <qapplication.h>
+#include <QPainter>
+#include <QStyle>
+#include <QApplication>
 //Added by qt3to4:
 #include <QMouseEvent>
 #include <Q3ValueList>

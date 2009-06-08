@@ -17,12 +17,12 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qlabel.h>
-#include <qradiobutton.h>
-#include <qcheckbox.h>
-#include <qtimer.h>
-#include <qtabwidget.h>
-#include <qlayout.h>
+#include <QLabel>
+#include <QRadioButton>
+#include <QCheckBox>
+#include <QTimer>
+#include <QTabWidget>
+#include <QLayout>
 //Added by qt3to4:
 #include <QKeyEvent>
 #include <Q3ValueList>

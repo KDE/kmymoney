@@ -18,9 +18,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qlayout.h>
-#include <qstring.h>
-#include <qlabel.h>
+#include <QLayout>
+#include <QString>
+#include <QLabel>
 //Added by qt3to4:
 #include <Q3VBoxLayout>
 

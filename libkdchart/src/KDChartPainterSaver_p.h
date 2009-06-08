@@ -35,7 +35,7 @@
 // We mean it.
 //
 
-#include <qpainter.h>
+#include <QPainter>
 
 #include <KDABLibFakes>
 

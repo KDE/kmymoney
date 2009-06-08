@@ -21,14 +21,14 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qdatetime.h>
-#include <qeventloop.h>
-#include <qfileinfo.h>
+#include <QDateTime>
+#include <QEventLoop>
+#include <QFileInfo>
 #include <q3valuelist.h>
-#include <qapplication.h>
+#include <QApplication>
 #include <qdom.h>
-#include <qregexp.h>
-#include <qdir.h>
+#include <QRegExp>
+#include <QDir>
 #include <q3textstream.h>
 
 // ----------------------------------------------------------------------------

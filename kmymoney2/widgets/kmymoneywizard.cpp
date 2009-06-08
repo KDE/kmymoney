@@ -17,12 +17,12 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qlayout.h>
-#include <qlabel.h>
+#include <QLayout>
+#include <QLabel>
 #include <qpoint.h>
 #include <qfont.h>
 #include <q3frame.h>
-#include <qtooltip.h>
+#include <QToolTip>
 //Added by qt3to4:
 #include <Q3HBoxLayout>
 #include <Q3ValueList>

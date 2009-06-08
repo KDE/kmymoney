@@ -19,17 +19,17 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qpushbutton.h>
-#include <qcombobox.h>
-#include <qlineedit.h>
-#include <qlabel.h>
+#include <QPushButton>
+#include <QComboBox>
+#include <QLineEdit>
+#include <QLabel>
 #include <q3multilineedit.h>
-#include <qpixmap.h>
-#include <qtabwidget.h>
+#include <QPixmap>
+#include <QTabWidget>
 #include <q3listbox.h>
-#include <qcheckbox.h>
+#include <QCheckBox>
 #include <q3groupbox.h>
-#include <qtooltip.h>
+#include <QToolTip>
 //Added by qt3to4:
 #include <QList>
 #include <QResizeEvent>

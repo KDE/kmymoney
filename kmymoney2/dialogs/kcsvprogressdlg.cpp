@@ -25,15 +25,15 @@
 #include <kstandarddirs.h>
 #endif
 
-#include <qpixmap.h>
+#include <QPixmap>
 // ----------------------------------------------------------------------------
 // QT Includes
-#include <qfile.h>
+#include <QFile>
 #include <q3textstream.h>
-#include <qlabel.h>
-#include <qpushbutton.h>
+#include <QLabel>
+#include <QPushButton>
 #include <q3progressbar.h>
-#include <qlineedit.h>
+#include <QLineEdit>
 #include <q3groupbox.h>
 
 // ----------------------------------------------------------------------------

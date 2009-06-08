@@ -25,21 +25,21 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qpushbutton.h>
-#include <qcombobox.h>
-#include <qlineedit.h>
-#include <qlabel.h>
-#include <qlayout.h>
+#include <QPushButton>
+#include <QComboBox>
+#include <QLineEdit>
+#include <QLabel>
+#include <QLayout>
 #include <q3multilineedit.h>
-#include <qpixmap.h>
-#include <qtabwidget.h>
-#include <qcursor.h>
-#include <qcheckbox.h>
-#include <qradiobutton.h>
-#include <qpainter.h>
+#include <QPixmap>
+#include <QTabWidget>
+#include <QCursor>
+#include <QCheckBox>
+#include <QRadioButton>
+#include <QPainter>
 #include <q3header.h>
 #include <q3buttongroup.h>
-#include <qsplitter.h>
+#include <QSplitter>
 #include <qmap.h>
 //Added by qt3to4:
 #include <QList>

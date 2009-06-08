@@ -18,10 +18,10 @@
 #ifndef KGPGFILE_H
 #define KGPGFILE_H
 
-#include <qfile.h>
-#include <qobject.h>
-#include <qstring.h>
-#include <qstringlist.h>
+#include <QFile>
+#include <QObject>
+#include <QString>
+#include <QStringList>
 //Added by qt3to4:
 #include <Q3CString>
 #include <Q3ValueList>

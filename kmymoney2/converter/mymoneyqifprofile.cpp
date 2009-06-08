@@ -18,7 +18,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qregexp.h>
+#include <QRegExp>
 #include <q3valuevector.h>
 //Added by qt3to4:
 #include <Q3ValueList>

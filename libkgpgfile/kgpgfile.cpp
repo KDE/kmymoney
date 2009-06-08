@@ -20,11 +20,11 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qfile.h>
-#include <qdir.h>
-#include <qstring.h>
+#include <QFile>
+#include <QDir>
+#include <QString>
 
-#include <qeventloop.h>
+#include <QEventLoop>
 //Added by qt3to4:
 #include <Q3CString>
 #include <Q3ValueList>

@@ -26,12 +26,12 @@
 // ----------------------------------------------------------------------------
 // QT Headers
 
-#include <qfile.h>
-#include <qstringlist.h>
-#include <qtimer.h>
+#include <QFile>
+#include <QStringList>
+#include <QTimer>
 #include <q3textedit.h>
-#include <qregexp.h>
-#include <qbuffer.h>
+#include <QRegExp>
+#include <QBuffer>
 //Added by qt3to4:
 #include <Q3ValueList>
 #include <Q3CString>

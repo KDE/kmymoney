@@ -18,7 +18,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qlabel.h>
+#include <QLabel>
 //Added by qt3to4:
 #include <QList>
 

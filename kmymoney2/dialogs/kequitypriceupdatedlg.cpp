@@ -24,13 +24,13 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qlabel.h>
-#include <qpushbutton.h>
-#include <qradiobutton.h>
-#include <qfile.h>
+#include <QLabel>
+#include <QPushButton>
+#include <QRadioButton>
+#include <QFile>
 #include <q3textstream.h>
-#include <qtimer.h>
-#include <qlayout.h>
+#include <QTimer>
+#include <QLayout>
 //Added by qt3to4:
 #include <QList>
 

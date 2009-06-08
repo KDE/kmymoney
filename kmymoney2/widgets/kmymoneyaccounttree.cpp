@@ -19,14 +19,14 @@
 // QT Includes
 
 #include <qpoint.h>
-#include <qevent.h>
+#include <QEvent>
 #include <q3dragobject.h>
-#include <qtimer.h>
-#include <qcursor.h>
+#include <QTimer>
+#include <QCursor>
 #include <q3header.h>
-#include <qpainter.h>
-#include <qpixmap.h>
-#include <qstyle.h>
+#include <QPainter>
+#include <QPixmap>
+#include <QStyle>
 //Added by qt3to4:
 #include <QList>
 

@@ -20,9 +20,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qfile.h>
-#include <qfileinfo.h>
-#include <qapplication.h>
+#include <QFile>
+#include <QFileInfo>
+#include <QApplication>
 //Added by qt3to4:
 #include <Q3TextStream>
 #include <QList>

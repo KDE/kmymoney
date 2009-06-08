@@ -28,21 +28,21 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qlayout.h>
-#include <qdatetime.h>
-#include <qregexp.h>
+#include <QLayout>
+#include <QDateTime>
+#include <QRegExp>
 #include <q3dragobject.h>
-#include <qclipboard.h>
-#include <qapplication.h>
-#include <qprinter.h>
-#include <qpainter.h>
-#include <qfile.h>
-#include <qtimer.h>
-#include <qicon.h>
+#include <QClipboard>
+#include <QApplication>
+#include <QPrinter>
+#include <QPainter>
+#include <QFile>
+#include <QTimer>
+#include <QIcon>
 #include <q3popupmenu.h>
-#include <qpushbutton.h>
-#include <qtooltip.h>
-#include <qcheckbox.h>
+#include <QPushButton>
+#include <QToolTip>
+#include <QCheckBox>
 #include <q3vbox.h>
 //Added by qt3to4:
 #include <Q3TextStream>

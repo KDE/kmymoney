@@ -18,8 +18,8 @@
 // QT Includes
 
 #include <q3header.h>
-#include <qlabel.h>
-#include <qtabwidget.h>
+#include <QLabel>
+#include <QTabWidget>
 //Added by qt3to4:
 #include <QList>
 

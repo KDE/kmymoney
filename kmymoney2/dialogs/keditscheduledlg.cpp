@@ -18,11 +18,11 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qtimer.h>
+#include <QTimer>
 #include <qwidget.h>
-#include <qcheckbox.h>
-#include <qlabel.h>
-#include <qlayout.h>
+#include <QCheckBox>
+#include <QLabel>
+#include <QLayout>
 #include <q3valuevector.h>
 //Added by qt3to4:
 #include <QList>

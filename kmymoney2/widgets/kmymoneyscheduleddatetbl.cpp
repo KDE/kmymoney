@@ -42,13 +42,13 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
-#include <qstring.h>
-#include <qpen.h>
-#include <qpainter.h>
-#include <qdialog.h>
+#include <QString>
+#include <QPen>
+#include <QPainter>
+#include <QDialog>
 #include <qdrawutil.h>
-#include <qcursor.h>
-#include <qapplication.h>
+#include <QCursor>
+#include <QApplication>
 //Added by qt3to4:
 #include <Q3ValueList>
 #include <QMouseEvent>

@@ -21,9 +21,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qstring.h>
-#include <qdatetime.h>
-#include <qpainter.h>
+#include <QString>
+#include <QDateTime>
+#include <QPainter>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

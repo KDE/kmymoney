@@ -23,9 +23,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qtooltip.h>
+#include <QToolTip>
 #include <qwidget.h>
-#include <qrect.h>
+#include <QRect>
 #include <qpoint.h>
 //Added by qt3to4:
 #include <QPixmap>

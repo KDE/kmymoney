@@ -21,8 +21,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qtimer.h>
-#include <qmutex.h>
+#include <QTimer>
+#include <QMutex>
 //Added by qt3to4:
 #include <QPaintEvent>
 #include <QFocusEvent>

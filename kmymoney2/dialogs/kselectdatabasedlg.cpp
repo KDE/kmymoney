@@ -22,14 +22,14 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qlayout.h>
-#include <qpushbutton.h>
-#include <qapplication.h>
+#include <QLayout>
+#include <QPushButton>
+#include <QApplication>
 #include <qsqldatabase.h>
 #include <q3filedialog.h>
-#include <qstatusbar.h>
-#include <qcheckbox.h>
-#include <qcolor.h>
+#include <QStatusBar>
+#include <QCheckBox>
+#include <QColor>
 //Added by qt3to4:
 #include <Q3TextStream>
 

@@ -19,7 +19,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qregexp.h>
+#include <QRegExp>
 //Added by qt3to4:
 #include <QPixmap>
 #include <kstandarddirs.h>

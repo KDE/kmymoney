@@ -23,8 +23,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qapplication.h>
-#include <qregexp.h>
+#include <QApplication>
+#include <QRegExp>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

@@ -22,9 +22,9 @@
 // ----------------------------------------------------------------------------
 // QT Headers
 
-#include <qstring.h>
-#include <qlineedit.h>
-#include <qcheckbox.h>
+#include <QString>
+#include <QLineEdit>
+#include <QCheckBox>
 
 // ----------------------------------------------------------------------------
 // KDE Headers

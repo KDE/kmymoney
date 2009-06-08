@@ -17,10 +17,10 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qapplication.h>
-#include <qlabel.h>
-#include <qtoolbutton.h>
-#include <qtimer.h>
+#include <QApplication>
+#include <QLabel>
+#include <QToolButton>
+#include <QTimer>
 #include <QComboBox>
 // ----------------------------------------------------------------------------
 // KDE Includes

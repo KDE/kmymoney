@@ -17,12 +17,12 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
-#include <qlabel.h>
+#include <QLabel>
 #include <q3listbox.h>
-#include <qlineedit.h>
+#include <QLineEdit>
 #include <q3buttongroup.h>
-#include <qlayout.h>
-#include <qapplication.h>
+#include <QLayout>
+#include <QApplication>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

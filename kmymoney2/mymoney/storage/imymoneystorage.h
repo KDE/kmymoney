@@ -26,8 +26,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qstring.h>
-#include <qbitarray.h>
+#include <QString>
+#include <QBitArray>
 #include <QList>
 
 // ----------------------------------------------------------------------------

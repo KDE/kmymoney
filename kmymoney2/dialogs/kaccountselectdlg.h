@@ -27,7 +27,7 @@
 // QT Includes
 
 #include <qwidget.h>
-#include <qstring.h>
+#include <QString>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

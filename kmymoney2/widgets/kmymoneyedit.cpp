@@ -19,7 +19,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qapplication.h>
+#include <QApplication>
 #include <qdesktopwidget.h>
 #include <qwidget.h>
 #include <kvbox.h>

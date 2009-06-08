@@ -22,9 +22,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qstring.h>
+#include <QString>
 #include <qdom.h>
-#include <qdatetime.h>
+#include <QDateTime>
 
 // ----------------------------------------------------------------------------
 // Project Includes

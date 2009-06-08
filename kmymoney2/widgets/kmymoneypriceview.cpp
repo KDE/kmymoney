@@ -24,9 +24,9 @@
 // QT Includes
 
 #include <q3header.h>
-#include <qcursor.h>
-#include <qtimer.h>
-#include <qcheckbox.h>
+#include <QCursor>
+#include <QTimer>
+#include <QCheckBox>
 #include <q3groupbox.h>
 //Added by qt3to4:
 #include <QResizeEvent>

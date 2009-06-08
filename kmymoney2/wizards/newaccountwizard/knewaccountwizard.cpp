@@ -20,11 +20,11 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qcheckbox.h>
+#include <QCheckBox>
 //#include <qfocusdata.h>
-#include <qtooltip.h>
+#include <QToolTip>
 
-#include <qlabel.h>
+#include <QLabel>
 //Added by qt3to4:
 #include <QList>
 

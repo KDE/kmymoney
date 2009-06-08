@@ -21,7 +21,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qobject.h>
+#include <QObject>
 #include <qwidget.h>
 //Added by qt3to4:
 #include <Q3ValueList>

@@ -18,9 +18,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qstringlist.h>
-#include <qcheckbox.h>
-#include <qlayout.h>
+#include <QStringList>
+#include <QCheckBox>
+#include <QLayout>
 //Added by qt3to4:
 #include <QByteArray>
 

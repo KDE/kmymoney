@@ -28,8 +28,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qstring.h>
-#include <qdatetime.h>
+#include <QString>
+#include <QDateTime>
 
 // ----------------------------------------------------------------------------
 // Project Includes

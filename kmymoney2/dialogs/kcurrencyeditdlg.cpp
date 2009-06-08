@@ -26,11 +26,11 @@
 // QT Includes
 
 #include <q3header.h>
-#include <qtimer.h>
+#include <QTimer>
 
-#include <qpixmap.h>
-#include <qbitmap.h>
-#include <qlabel.h>
+#include <QPixmap>
+#include <QBitmap>
+#include <QLabel>
 #include <q3groupbox.h>
 //Added by qt3to4:
 #include <QResizeEvent>

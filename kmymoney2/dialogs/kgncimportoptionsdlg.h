@@ -21,8 +21,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 #include <q3buttongroup.h>
-#include <qcheckbox.h>
-#include <qtextcodec.h>
+#include <QCheckBox>
+#include <QTextCodec>
 #include <q3ptrlist.h>
 //Added by qt3to4:
 #include <Q3PtrCollection>

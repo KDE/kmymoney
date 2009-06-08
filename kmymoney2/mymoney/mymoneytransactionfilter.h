@@ -28,12 +28,12 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qstring.h>
-#include <qdatetime.h>
+#include <QString>
+#include <QDateTime>
 #include <qmap.h>
 #include <q3asciidict.h>
 #include <q3intdict.h>
-#include <qregexp.h>
+#include <QRegExp>
 //Added by qt3to4:
 #include <QList>
 #include <Q3Dict>

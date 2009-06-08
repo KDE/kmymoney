@@ -28,7 +28,7 @@
 
 #include <qwidget.h>
 #include <kvbox.h>
-#include <qregexp.h>
+#include <QRegExp>
 //Added by qt3to4:
 #include <QEvent>
 class Q3ListViewItem;

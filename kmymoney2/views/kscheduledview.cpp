@@ -24,11 +24,11 @@
 // QT Includes
 
 #include <q3header.h>
-#include <qtoolbutton.h>
-#include <qcombobox.h>
-#include <qtabwidget.h>
-#include <qlayout.h>
-#include <qtimer.h>
+#include <QToolButton>
+#include <QComboBox>
+#include <QTabWidget>
+#include <QLayout>
+#include <QTimer>
 //Added by qt3to4:
 #include <Q3ValueList>
 

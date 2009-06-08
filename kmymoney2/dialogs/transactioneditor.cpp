@@ -18,10 +18,10 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qlabel.h>
-#include <qapplication.h>
-#include <qeventloop.h>
-#include <qradiobutton.h>
+#include <QLabel>
+#include <QApplication>
+#include <QEventLoop>
+#include <QRadioButton>
 #include <q3buttongroup.h>
 //Added by qt3to4:
 #include <QKeyEvent>

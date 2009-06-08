@@ -21,7 +21,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qdatetime.h>
+#include <QDateTime>
 //Added by qt3to4:
 #include <QEvent>
 #include <QLabel>

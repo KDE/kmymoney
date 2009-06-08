@@ -23,8 +23,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qpixmap.h>
-#include <qbitmap.h>
+#include <QPixmap>
+#include <QBitmap>
 //Added by qt3to4:
 #include <Q3ValueList>
 

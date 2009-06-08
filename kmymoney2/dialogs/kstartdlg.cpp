@@ -17,11 +17,11 @@
 // QT Includes
 
 #include <q3vbox.h>
-#include <qlayout.h>
+#include <QLayout>
 #include <q3buttongroup.h>
-#include <qpixmap.h>
+#include <QPixmap>
 #include <q3textview.h>
-#include <qlabel.h>
+#include <QLabel>
 //Added by qt3to4:
 #include <Q3VBoxLayout>
 
@@ -49,7 +49,7 @@
 #include "krecentfileitem.h"
 #include "kmymoney2.h"
 
-#include <qtooltip.h>
+#include <QToolTip>
 
 KStartDlg::KStartDlg(QWidget *parent, const char *name, bool modal)
     : KPageDialog(parent)

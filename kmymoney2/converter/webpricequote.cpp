@@ -18,8 +18,8 @@
 // ----------------------------------------------------------------------------
 // QT Headers
 
-#include <qfile.h>
-#include <qregexp.h>
+#include <QFile>
+#include <QRegExp>
 #include <q3textstream.h>
 #include <q3process.h>
 //Added by qt3to4:

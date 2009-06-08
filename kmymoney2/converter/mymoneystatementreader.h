@@ -27,9 +27,9 @@
 // ----------------------------------------------------------------------------
 // QT Headers
 
-#include <qobject.h>
-#include <qstring.h>
-#include <qstringlist.h>
+#include <QObject>
+#include <QString>
+#include <QStringList>
 
 // ----------------------------------------------------------------------------
 // KDE Headers

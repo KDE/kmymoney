@@ -45,17 +45,17 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
-#include <qpainter.h>
+#include <QPainter>
 #include <qdrawutil.h>
 #include <q3frame.h>
-#include <qpainter.h>
-#include <qdialog.h>
-#include <qstyle.h>
-#include <qtoolbutton.h>
-#include <qtooltip.h>
+#include <QPainter>
+#include <QDialog>
+#include <QStyle>
+#include <QToolButton>
+#include <QToolTip>
 #include <qfont.h>
-#include <qvalidator.h>
-#include <qpushbutton.h>
+#include <QValidator>
+#include <QPushButton>
 //Added by qt3to4:
 #include <QResizeEvent>
 #include <QKeyEvent>

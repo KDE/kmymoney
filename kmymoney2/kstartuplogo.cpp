@@ -19,8 +19,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qapplication.h>
-#include <qpixmap.h>
+#include <QApplication>
+#include <QPixmap>
 #include <q3frame.h>
 
 // ----------------------------------------------------------------------------

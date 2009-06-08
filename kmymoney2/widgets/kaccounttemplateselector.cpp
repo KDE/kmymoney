@@ -18,9 +18,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qdir.h>
+#include <QDir>
 #include <q3header.h>
-#include <qtimer.h>
+#include <QTimer>
 //Added by qt3to4:
 #include <Q3ValueList>
 

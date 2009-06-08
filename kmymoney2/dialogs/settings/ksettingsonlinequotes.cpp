@@ -18,8 +18,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qregexp.h>
-#include <qcheckbox.h>
+#include <QRegExp>
+#include <QCheckBox>
 //Added by qt3to4:
 #include <Q3ValueList>
 

@@ -23,9 +23,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qlabel.h>
-#include <qsignalmapper.h>
-#include <qregexp.h>
+#include <QLabel>
+#include <QSignalMapper>
+#include <QRegExp>
 //Added by qt3to4:
 #include <Q3GridLayout>
 #include <Q3Frame>

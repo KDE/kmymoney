@@ -18,8 +18,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qcheckbox.h>
-#include <qlabel.h>
+#include <QCheckBox>
+#include <QLabel>
 //Added by qt3to4:
 #include <Q3ValueList>
 

@@ -26,22 +26,22 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qvariant.h>
+#include <QVariant>
 #include <q3buttongroup.h>
-#include <qcheckbox.h>
+#include <QCheckBox>
 #include <q3frame.h>
-#include <qlabel.h>
-#include <qlineedit.h>
-#include <qpushbutton.h>
-#include <qradiobutton.h>
-#include <qlayout.h>
+#include <QLabel>
+#include <QLineEdit>
+#include <QPushButton>
+#include <QRadioButton>
+#include <QLayout>
 #include <qspinbox.h>
-#include <qtooltip.h>
+#include <QToolTip>
 #include <q3whatsthis.h>
-#include <qtabwidget.h>
+#include <QTabWidget>
 #include <q3textedit.h>
-#include <qlayout.h>
-#include <qapplication.h>
+#include <QLayout>
+#include <QApplication>
 //Added by qt3to4:
 #include <Q3ValueList>
 

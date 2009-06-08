@@ -25,7 +25,7 @@
 
 #include <qmap.h>
 #include <q3valuelist.h>
-#include <qstring.h>
+#include <QString>
 class QDomElement;
 class QDomDocument;
 

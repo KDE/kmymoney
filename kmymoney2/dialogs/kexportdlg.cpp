@@ -20,9 +20,9 @@
 // ----------------------------------------------------------------------------
 // QT Headers
 
-#include <qlineedit.h>
-#include <qlabel.h>
-#include <qpixmap.h>
+#include <QLineEdit>
+#include <QLabel>
+#include <QPixmap>
 //Added by qt3to4:
 #include <Q3ValueList>
 

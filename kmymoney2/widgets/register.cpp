@@ -20,12 +20,12 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qstring.h>
-#include <qtimer.h>
-#include <qapplication.h>
-#include <qeventloop.h>
-#include <qtooltip.h>
-#include <qimage.h>
+#include <QString>
+#include <QTimer>
+#include <QApplication>
+#include <QEventLoop>
+#include <QToolTip>
+#include <QImage>
 //Added by qt3to4:
 #include <QPixmap>
 #include <QFocusEvent>

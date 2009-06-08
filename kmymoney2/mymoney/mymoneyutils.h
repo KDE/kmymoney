@@ -25,8 +25,8 @@
 
 #include <config-kmymoney.h>
 
-#include <qstring.h>
-#include <qdatetime.h>
+#include <QString>
+#include <QDateTime>
 #include <q3valuelist.h>
 #include <export.h>
 #if 0

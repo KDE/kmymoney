@@ -22,10 +22,10 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qstring.h>
-#include <qdatetime.h>
-#include <qstringlist.h>
-#include <qiodevice.h>
+#include <QString>
+#include <QDateTime>
+#include <QStringList>
+#include <QIODevice>
 #include <qsqldriver.h>
 //Added by qt3to4:
 #include <QSqlQuery>

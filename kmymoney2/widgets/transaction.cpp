@@ -18,8 +18,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qstring.h>
-#include <qpainter.h>
+#include <QString>
+#include <QPainter>
 #include <qwidget.h>
 //Added by qt3to4:
 #include <QList>

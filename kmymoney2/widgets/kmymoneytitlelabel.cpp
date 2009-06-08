@@ -18,10 +18,10 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qpixmap.h>
-#include <qvariant.h>
-#include <qstyle.h>
-#include <qpainter.h>
+#include <QPixmap>
+#include <QVariant>
+#include <QStyle>
+#include <QPainter>
 //Added by qt3to4:
 #include <QResizeEvent>
 #include <QLabel>

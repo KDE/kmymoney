@@ -19,9 +19,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qpixmap.h>
-#include <qlineedit.h>
-#include <qlabel.h>
+#include <QPixmap>
+#include <QLineEdit>
+#include <QLabel>
 
 // ----------------------------------------------------------------------------
 // KDE Headers

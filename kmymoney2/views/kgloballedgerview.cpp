@@ -21,8 +21,8 @@
 // QT Includes
 
 #include <qframe.h>
-#include <qlayout.h>
-#include <qtimer.h>
+#include <QLayout>
+#include <QTimer>
 //Added by qt3to4:
 #include <QHBoxLayout>
 #include <QKeyEvent>

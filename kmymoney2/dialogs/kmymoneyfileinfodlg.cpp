@@ -18,8 +18,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qpushbutton.h>
-#include <qlabel.h>
+#include <QPushButton>
+#include <QLabel>
 //Added by qt3to4:
 #include <QList>
 

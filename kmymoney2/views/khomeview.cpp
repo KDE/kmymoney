@@ -23,19 +23,19 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 #include <q3tl.h>
-#include <qlayout.h>
-#include <qdatetime.h>
-#include <qapplication.h>
+#include <QLayout>
+#include <QDateTime>
+#include <QApplication>
 //Added by qt3to4:
 #include <QList>
 #include <QPixmap>
 #include <dom/dom_element.h>
 #include <dom/dom_doc.h>
 #include <dom/dom_text.h>
-#include <qfile.h>
+#include <QFile>
 #include <q3textstream.h>
-#include <qtimer.h>
-#include <qbuffer.h>
+#include <QTimer>
+#include <QBuffer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

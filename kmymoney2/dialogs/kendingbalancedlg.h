@@ -22,10 +22,10 @@
 
 #include <qwidget.h>
 #include <q3groupbox.h>
-#include <qlabel.h>
-#include <qpushbutton.h>
-#include <qdialog.h>
-#include <qdatetime.h>
+#include <QLabel>
+#include <QPushButton>
+#include <QDialog>
+#include <QDateTime>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

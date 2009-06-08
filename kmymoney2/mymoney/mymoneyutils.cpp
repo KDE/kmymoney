@@ -29,7 +29,7 @@
 #include <cstdarg>
 #include <cstdlib>
 
-#include <qregexp.h>
+#include <QRegExp>
 
 #ifdef _CHECK_MEMORY
 

@@ -21,7 +21,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qpalette.h>
+#include <QPalette>
 //Added by qt3to4:
 #include <QList>
 

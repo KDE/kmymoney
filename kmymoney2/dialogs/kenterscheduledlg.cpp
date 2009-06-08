@@ -18,9 +18,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qtimer.h>
+#include <QTimer>
 #include <qwidget.h>
-#include <qlabel.h>
+#include <QLabel>
 //Added by qt3to4:
 #include <QResizeEvent>
 
