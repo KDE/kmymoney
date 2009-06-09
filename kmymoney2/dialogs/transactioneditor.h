@@ -24,7 +24,7 @@
 #include <QObject>
 #include <qwidget.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 #include <QEvent>
 
 // ----------------------------------------------------------------------------
@@ -271,7 +271,7 @@ signals:
 protected:
   QList<MyMoneySplit>                               m_splits;
   KMyMoneyRegister::SelectedTransactions            m_transactions;
-  Q3ValueList<const QWidget*>                        m_finalEditWidgets;
+  QList<const QWidget*>                             m_finalEditWidgets;
   TransactionEditorContainer*                       m_regForm;
   KMyMoneyRegister::Transaction*                    m_item;
   KMyMoneyRegister::QWidgetContainer                m_editWidgets;

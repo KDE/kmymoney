@@ -937,7 +937,7 @@ void StdTransaction::loadTab(TransactionForm* form)
   bar->setSignalEmission(TabBar::SignalNever);
   for(int i = 0; i < bar->count(); ++i) {
 #warning "port to kde4"
-      	  //bar->setTabEnabled(bar->tabAt(i)->identifier(), true);
+    bar->setTabEnabled(i, true);
   }
 
   if(m_transaction.splitCount() > 0) {
