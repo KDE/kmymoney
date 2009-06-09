@@ -931,15 +931,20 @@ void PivotTable::calculateBudgetMapping( void )
                || m_config_f.columnType() == MyMoneyReport::eMonths
                || m_config_f.columnType() == MyMoneyReport::eYears
                || m_config_f.columnType() == MyMoneyReport::eQuarters) {
-              value = value * MyMoneyMoney(m_config_f.columnType(), 1);
-              while ( column < m_numColumns )
-              {
+              QDate budgetDate = budget.budgetStart();
+              while ( column < m_numColumns && budget.budgetStart().addYears(1) > budgetDate ) {
                 //only show budget values if the budget year and the column date match
                 //no currency conversion is done here because that is done for all columns later
-                if( budget.budgetStart().year() == columnDate(column).year() ) {
-                  assignCell( outergroup, splitAccount, column, value, true /*budget*/ );
+                if(budgetDate > columnDate(column) ) {
+                  ++column;
+                } else {
+                  if(budgetDate >= m_beginDate.addDays(-m_beginDate.day() + 1)
+                    && budgetDate <= m_endDate.addDays(m_endDate.daysInMonth() - m_endDate.day() )
+                    && budgetDate > (columnDate(column).addMonths(-m_config_f.columnType()))) {
+                    assignCell( outergroup, splitAccount, column, value, true /*budget*/ );
+                  }
+                  budgetDate = budgetDate.addMonths(1);
                 }
-                ++column;
               }
             }
             break;
