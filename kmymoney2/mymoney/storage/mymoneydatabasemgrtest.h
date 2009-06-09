@@ -32,10 +32,10 @@
 
 class MyMoneyDatabaseMgrTest : public CppUnit::TestFixture  {
   CPPUNIT_TEST_SUITE(MyMoneyDatabaseMgrTest);
-  CPPUNIT_TEST(testEmptyConstructor);
-  CPPUNIT_TEST(testCreateDb);
-#if 0
+//  CPPUNIT_TEST(testEmptyConstructor);
+//  CPPUNIT_TEST(testCreateDb);
   CPPUNIT_TEST(testAttachDb);
+#if 0
   CPPUNIT_TEST(testSetFunctions);
   CPPUNIT_TEST(testSupportFunctions);
   CPPUNIT_TEST(testIsStandardAccount);

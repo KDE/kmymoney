@@ -99,7 +99,7 @@ void MyMoneyDatabaseMgrTest::testCreateDb() {
                      + *it + "&mode=single";
     KSharedPtr <MyMoneyStorageSql> sql = m->connectToDatabase(m_url);
     CPPUNIT_ASSERT(0 != sql);
-    //qDebug("Database driver is %s", sql->driverName().ascii());
+    qDebug("Database driver is %s", qPrintable(sql->driverName()));
     // Clear the database, so there is a fresh start on each run.
     if (0 == sql->open(m_url, QIODevice::WriteOnly, true)) {
       MyMoneyFile::instance()->attachStorage(m);

@@ -1637,17 +1637,25 @@ void MyMoneyDatabaseMgr::close(void) {
 }
 
 void MyMoneyDatabaseMgr::startTransaction(void)
-{ if (m_sql) m_sql->startCommitUnit ("databasetransaction"); }
+{
+  qDebug("MyMoneyDatabaseMgr::startTransaction(m_sql = %d)", ((m_sql) ? 1 : 0));
+  if (m_sql)
+    m_sql->startCommitUnit ("databasetransaction"); }
 
 bool MyMoneyDatabaseMgr::commitTransaction(void)
 {
+  qDebug("MyMoneyDatabaseMgr::commitTransaction(m_sql = %d)", ((m_sql) ? 1 : 0 ));
   if (m_sql)
     return m_sql->endCommitUnit ("databasetransaction");
   return false;
 }
 
 void MyMoneyDatabaseMgr::rollbackTransaction(void)
-{ if (m_sql) m_sql->cancelCommitUnit ("databasetransaction"); }
+{
+  qDebug("MyMoneyDatabaseMgr::RollbackTransaction(m_sql = %d)", ((m_sql) ? 1 : 0));
+  if (m_sql)
+    m_sql->cancelCommitUnit ("databasetransaction"); }
+
 
 void MyMoneyDatabaseMgr::setCreationDate(const QDate& val)
 { m_creationDate = val; }
