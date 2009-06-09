@@ -29,13 +29,13 @@
 // QT Includes
 
 #include <q3table.h>
-#include <q3valuelist.h>
 #include <q3valuevector.h>
 #include <qwidget.h>
 #include <qmap.h>
 #include <QPair>
 #include <QEvent>
 //Added by qt3to4:
+#include <QList>
 #include <QKeyEvent>
 #include <QPixmap>
 #include <QDragMoveEvent>
@@ -285,7 +285,7 @@ public:
     *
     * @retval QValueList<RegisterItem*>
     */
-  Q3ValueList<RegisterItem*> selectedItems(void) const;
+  QList<RegisterItem*> selectedItems(void) const;
 
   /**
     * Construct a list of all currently selected transactions in the register.
@@ -381,10 +381,10 @@ public:
     * Show the columns contained in @a cols for @a account. @a account
     * can be left empty ( MyMoneyAccount() ) e.g. for the search dialog.
     */
-  void setupRegister(const MyMoneyAccount& account, const Q3ValueList<Column>& cols);
+  void setupRegister(const MyMoneyAccount& account, const QList<Column>& cols);
 
   void setSortOrder(const QString& order);
-  const Q3ValueList<TransactionSortField>& sortOrder(void) const { return m_sortOrder; }
+  const QList<TransactionSortField>& sortOrder(void) const { return m_sortOrder; }
   TransactionSortField primarySortKey(void) const;
   void sortItems(void);
 
@@ -599,7 +599,7 @@ private:
   bool                         m_needInitialColumnResize;
   Qt::ButtonState              m_buttonState;
   Column                       m_lastCol;
-  Q3ValueList<TransactionSortField> m_sortOrder;
+  QList<TransactionSortField>  m_sortOrder;
   QMap<QPair<int, int>, QWidget*> m_cellWidgets;
   //RegisterToolTip*             m_tooltip;
   QRect                        m_lastRepaintRect;

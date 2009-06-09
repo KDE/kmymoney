@@ -25,7 +25,7 @@
 #include <QLayout>
 //Added by qt3to4:
 #include <QKeyEvent>
-#include <Q3ValueList>
+#include <QList>
 #include <QResizeEvent>
 #include <QEvent>
 
@@ -128,7 +128,7 @@ KFindTransactionDlg::KFindTransactionDlg(QWidget *parent) :
   m_helpAnchor[m_detailsTab] = QString("details.search.details");
 
   // setup the register
-  Q3ValueList<KMyMoneyRegister::Column> cols;
+  QList<KMyMoneyRegister::Column> cols;
   cols << KMyMoneyRegister::DateColumn;
   cols << KMyMoneyRegister::AccountColumn;
   cols << KMyMoneyRegister::DetailColumn;
@@ -820,7 +820,7 @@ void KFindTransactionDlg::resizeEvent(QResizeEvent* ev)
 
 void KFindTransactionDlg::slotSelectTransaction(void)
 {
-  Q3ValueList<KMyMoneyRegister::RegisterItem*> list = m_register->selectedItems();
+  QList<KMyMoneyRegister::RegisterItem*> list = m_register->selectedItems();
   if(!list.isEmpty()) {
     KMyMoneyRegister::Transaction* t = dynamic_cast<KMyMoneyRegister::Transaction*>(list[0]);
     if(t) {

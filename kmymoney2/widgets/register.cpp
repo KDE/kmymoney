@@ -30,7 +30,7 @@
 #include <QPixmap>
 #include <QFocusEvent>
 #include <QMouseEvent>
-#include <Q3ValueList>
+#include <QList>
 #include <QKeyEvent>
 #include <QEvent>
 #include <Q3Frame>
@@ -135,8 +135,8 @@ void ItemPtrVector::sort(void)
 
 bool ItemPtrVector::item_cmp(RegisterItem* i1, RegisterItem* i2)
 {
-  const Q3ValueList<TransactionSortField>& sortOrder = i1->parent()->sortOrder();
-  Q3ValueList<TransactionSortField>::const_iterator it;
+  const QList<TransactionSortField>& sortOrder = i1->parent()->sortOrder();
+  QList<TransactionSortField>::const_iterator it;
   int rc = 0;
   bool ok1, ok2;
   qulonglong n1, n2;
@@ -713,7 +713,7 @@ bool Register::eventFilter(QObject* o, QEvent* e)
   return Q3Table::eventFilter(o, e);
 }
 
-void Register::setupRegister(const MyMoneyAccount& account, const Q3ValueList<Column>& cols)
+void Register::setupRegister(const MyMoneyAccount& account, const QList<Column>& cols)
 {
   m_account = account;
   bool enabled = isUpdatesEnabled();
@@ -725,7 +725,7 @@ void Register::setupRegister(const MyMoneyAccount& account, const Q3ValueList<Co
   m_needInitialColumnResize = true;
 
   m_lastCol = static_cast<Column>(0);
-  Q3ValueList<Column>::const_iterator it_c;
+  QList<Column>::const_iterator it_c;
   for(it_c = cols.begin(); it_c != cols.end(); ++it_c) {
     if((*it_c) > MaxColumns)
       continue;
@@ -1452,7 +1452,7 @@ void Register::repaintItems(RegisterItem* first, RegisterItem* last)
   }
   m_lastRepaintRect = r;
 #warning "port to kde4"
-  //QApplication::postEvent( viewport(), new QPaintEvent( r, FALSE ) );
+  QApplication::postEvent( viewport(), new QPaintEvent( r ) );
 
 }
 
@@ -1549,9 +1549,9 @@ void Register::selectedTransactions(SelectedTransactions& list) const
   }
 }
 
-Q3ValueList<RegisterItem*> Register::selectedItems(void) const
+QList<RegisterItem*> Register::selectedItems(void) const
 {
-  Q3ValueList<RegisterItem*> list;
+  QList<RegisterItem*> list;
 
   RegisterItem* item = m_firstItem;
   while(item) {
@@ -1680,7 +1680,7 @@ void Register::selectItem(RegisterItem* item, bool dontChangeSelections)
 
   if(item->isSelectable()) {
     QString id = item->id();
-    Q3ValueList<RegisterItem*> itemList = selectedItems();
+    QList<RegisterItem*> itemList = selectedItems();
     bool okToSelect = true;
     int cnt = itemList.count();
     bool sameEntryType = true;

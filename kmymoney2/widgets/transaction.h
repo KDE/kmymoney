@@ -402,8 +402,8 @@ protected:
   void activity(QString& txt, MyMoneySplit::investTransactionTypeE type) const;
 
 private:
-  QList<MyMoneySplit>  m_feeSplits;
-  QList<MyMoneySplit>  m_interestSplits;
+  QList<MyMoneySplit>       m_feeSplits;
+  QList<MyMoneySplit>       m_interestSplits;
   MyMoneySplit              m_assetAccountSplit;
   MyMoneySecurity           m_security;
   MyMoneySecurity           m_currency;
