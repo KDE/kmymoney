@@ -1391,7 +1391,7 @@ void StdTransactionEditor::slotUpdateCashFlow(KMyMoneyRegister::CashFlowDirectio
   if(categoryLabel) {
     TabBar* tabbar = dynamic_cast<TabBar*>(haveWidget("tabbar"));
     if(categoryLabel->text() != i18n("Category")) {
-      tabbar->setCurrentTab(KMyMoneyRegister::ActionTransfer);
+      tabbar->setCurrentIndex(KMyMoneyRegister::ActionTransfer);
       if(dir == KMyMoneyRegister::Deposit) {
         categoryLabel->setText(i18n("Transfer from"));
       } else {
@@ -1399,9 +1399,9 @@ void StdTransactionEditor::slotUpdateCashFlow(KMyMoneyRegister::CashFlowDirectio
       }
     } else {
       if(dir == KMyMoneyRegister::Deposit)
-        tabbar->setCurrentTab(KMyMoneyRegister::ActionDeposit);
+        tabbar->setCurrentIndex(KMyMoneyRegister::ActionDeposit);
       else
-        tabbar->setCurrentTab(KMyMoneyRegister::ActionWithdrawal);
+        tabbar->setCurrentIndex(KMyMoneyRegister::ActionWithdrawal);
     }
   }
 }

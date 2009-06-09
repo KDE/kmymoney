@@ -26,13 +26,13 @@
 #include <q3valuevector.h>
 #include <QPalette>
 #include <qwidget.h>
-#include <qtabbar.h>
 //Added by qt3to4:
 #include <QMouseEvent>
 #include <QKeyEvent>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
+#include <ktabwidget.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -50,7 +50,7 @@ namespace KMyMoneyTransactionForm {
 /**
   * @author Thomas Baumgart
   */
-class TabBar : public QTabBar
+class TabBar : public KTabWidget
 {
   Q_OBJECT
 public:
@@ -66,21 +66,20 @@ public:
   SignalEmissionE setSignalEmission(SignalEmissionE type);
 
 #warning #Port to KDE4
-#if 0
+
   void copyTabs(const TabBar* otabbar);
 
-  void addTab(QTab* tab, int id);
+  void insertTab(int id, QWidget* tab, QString title = QString());
 
-  void setIdentifier(QTab* tab, int newId);
+  void setIdentifier(QWidget* tab, int newId);
 
-  QTab* tab(int id) const;
-#endif
+  QWidget* widget(int id) const;
+
 
   int currentIndex(void) const;
 
 public slots:
-#warning #Port to KDE4
-#if 0
+
   /**
     * overridden for internal reasons, API not changed
     */
@@ -89,8 +88,8 @@ public slots:
   /**
     * overridden for internal reasons, API not changed
     */
-  virtual void setCurrentIndex( QTab * );
-#endif
+  virtual void setCurrentWidget( QWidget * );
+
   /**
     * overridden for internal reasons, API not changed
     */

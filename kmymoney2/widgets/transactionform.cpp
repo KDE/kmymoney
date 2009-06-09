@@ -23,7 +23,6 @@
 #include <QTimer>
 #include <QApplication>
 #include <QLayout>
-#include <qtabbar.h>
 #include <QPalette>
 //Added by qt3to4:
 #include <Q3Frame>
@@ -50,7 +49,7 @@
 using namespace KMyMoneyTransactionForm;
 
 TabBar::TabBar(QWidget* parent, const char* name) :
-  QTabBar(parent),
+  KTabWidget(parent),
   m_signalType(SignalNormal)
 {
   connect(this, SIGNAL(currentChanged(int)), this, SLOT(slotTabCurrentChanged(int)));
@@ -62,27 +61,24 @@ TabBar::SignalEmissionE TabBar::setSignalEmission(TabBar::SignalEmissionE type)
   m_signalType = type;
   return _type;
 }
-#warning #Port to kde4
 
 int TabBar::currentIndex(void) const
 {
   QMap<int, int>::const_iterator it;
-  it = m_idMap.find(QTabBar::currentIndex());
+  it = m_idMap.find(KTabWidget::currentIndex());
   if(it != m_idMap.end())
     return *it;
   return -1;
 }
-#warning #Port to KDE4
-#if 0
+
 void TabBar::setCurrentIndex(int id)
 {
-  if (tab(id)) // there are no tabs in an expense/income ledger
-    if (tab(id)->isEnabled())
-      setCurrentIndex(tab(id));
+  if (widget(id)) // there are no tabs in an expense/income ledger
+    if (widget(id)->isEnabled())
+      setCurrentWidget(widget(id));
 }
 
-
-QTab* TabBar::tab(int id) const
+QWidget* TabBar::widget(int id) const
 {
   /* if a QAccel calls setCurrentTab, id will be as set by qt.
   * however if we call it programmatically, id will
@@ -92,40 +88,41 @@ QTab* TabBar::tab(int id) const
   * new values for our own ids which should lie way
   * outside of the range that qt uses
   */
-  QTab *result=QTabBar::tab(id);
+  QWidget *result=KTabWidget::widget(id);
   QMap<int, int>::const_iterator it;
   for(it = m_idMap.begin(); it != m_idMap.end(); ++it)
     if(*it == id)
-      result=QTabBar::tab(it.key());
+      result=KTabWidget::widget(it.key());
   return result;
 }
 
 
-void TabBar::setCurrentIndex(QTab* tab)
+void TabBar::setCurrentWidget(QWidget* tab)
 {
   if(m_signalType != SignalNormal)
     blockSignals(true);
 
-  QTabBar::setCurrentIndex(tab);
+  KTabWidget::setCurrentWidget(tab);
 
   if(m_signalType != SignalNormal)
     blockSignals(false);
 
-  if(m_signalType == SignalAlways)
-    emit selected(tab->identifier());
+#warning #Port to KDE4
+/*  if(m_signalType == SignalAlways)
+    emit selected(tab->identifier());*/
 }
 
-void TabBar::addTab(QTab* tab, int id)
+void TabBar::insertTab(int id, QWidget* tab, QString title)
 {
-  QTabBar::addTab(tab);
+  KTabWidget::insertTab(id, tab, title);
   setIdentifier(tab, id);
 }
 
-void TabBar::setIdentifier(QTab* tab, int newId)
+void TabBar::setIdentifier(QWidget* tab, int newId)
 {
-  m_idMap[tab->identifier()] = newId;
+  m_idMap[indexOf(tab)] = newId;
 }
-#endif
+
 void TransactionForm::enableTabBar(bool b)
 {
   m_tabBar->setEnabled(b);
@@ -147,32 +144,30 @@ void TabBar::show(void)
   if(m_signalType != SignalNormal)
     blockSignals(true);
 
-  QTabBar::show();
+  KTabWidget::show();
 
   if(m_signalType != SignalNormal)
     blockSignals(false);
 }
 
 #warning #Port to KDE4
-#if 0
 void TabBar::copyTabs(const TabBar* otabbar)
 {
   // remove all existing tabs
   while(count()) {
-    removeTab(tabAt(0));
+    removeTab(0);
   }
   // now create new ones. copy text, icon and identifier
   for(int i=0; i < otabbar->count(); ++i) {
-    QTab* otab = otabbar->tabAt(i);
-    QTab* ntab = new QTab(otab->text());
-    int nid = QTabBar::addTab(ntab);
-    m_idMap[nid] = otabbar->m_idMap[otab->identifier()];
+    QWidget* otab = otabbar->widget(i);
+    QWidget* ntab = new QWidget();
+    int nid = KTabWidget::addTab(ntab, otabbar->tabText(i));
+    m_idMap[nid] = otabbar->m_idMap[indexOf(otab)];
     ntab->setEnabled(otab->isEnabled());
-    if(otab->identifier() == otabbar->currentTab())
-      setCurrentTab(ntab);
+    if(indexOf(otab) == otabbar->currentIndex())
+      setCurrentWidget(ntab);
   }
 }
-#endif
 
 TransactionForm::TransactionForm(QWidget *parent, const char *name) :
   TransactionEditorContainer(parent, name),

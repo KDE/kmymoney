@@ -941,7 +941,7 @@ void StdTransaction::loadTab(TransactionForm* form)
   }
 
   if(m_transaction.splitCount() > 0) {
-    bar->setCurrentTab(actionType());
+    bar->setCurrentIndex(actionType());
   }
   bar->setSignalEmission(TabBar::SignalAlways);
 }
