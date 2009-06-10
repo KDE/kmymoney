@@ -213,10 +213,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   connect(m_payeesView, SIGNAL(selectObjects(const QList<MyMoneyPayee>&)), kmymoney2, SLOT(slotSelectPayees(const QList<MyMoneyPayee>&)));
   connect(m_payeesView, SIGNAL(transactionSelected(const QString&, const QString&)),
           this, SLOT(slotLedgerSelected(const QString&, const QString&)));
-#warning #Port to KDE4
-
   // Page 6
-  //m_ledgerViewFrame = addVBoxPage( i18n("Ledgers"), i18n("Ledgers"), DesktopIcon("ledger", iconSize));
   m_ledgerView = new KGlobalLedgerView();
   m_ledgerViewFrame = m_model->addPage( m_ledgerView, i18n("Ledgers"));
   m_ledgerViewFrame->setIcon(KIcon("ledger"));
@@ -450,11 +447,8 @@ void KMyMoneyView::newStorage(storageTypeE t)
   MyMoneyFile* file = MyMoneyFile::instance();
   if (t == Memory)
     file->attachStorage(new MyMoneySeqAccessMgr);
-#warning "port to kde4"
-#if 0
   else
     file->attachStorage(new MyMoneyDatabaseMgr);
-#endif
 }
 
 void KMyMoneyView::removeStorage(void)
@@ -1205,8 +1199,6 @@ bool KMyMoneyView::saveFile(const KUrl& url, const QString& keyList)
 bool KMyMoneyView::saveAsDatabase(const KUrl& url)
 {
   bool rc = false;
-#warning "port to kde4"
-#if 0
   if (!fileOpen()) {
     KMessageBox::error(this, i18n("Tried to access a file when it's not open"));
     return (rc);
@@ -1247,7 +1239,6 @@ bool KMyMoneyView::saveAsDatabase(const KUrl& url)
           " for further info",url.prettyUrl()), writer->lastError());
   }
   delete writer;
-#endif
   return (rc);
 }
 
@@ -1648,11 +1639,10 @@ void KMyMoneyView::slotRefreshViews()
   m_categoriesView->slotLoadAccounts();
   #warning "port to kde4"
   m_payeesView->slotLoadPayees();
-  //m_ledgerView->slotLoadView();
-  //m_budgetView->slotRefreshView();
+  m_ledgerView->slotLoadView();
+  m_budgetView->slotRefreshView();
   m_homeView->slotLoadView();
-  //m_investmentView->slotLoadView();
-#warning "port to kde4"
+  m_investmentView->slotLoadView();
   m_reportsView->slotLoadView();
   m_forecastView->slotLoadForecast();
 
