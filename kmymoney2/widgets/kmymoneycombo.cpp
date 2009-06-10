@@ -84,7 +84,7 @@ void KMyMoneyCombo::setCurrentTextById(const QString& id)
 
 void KMyMoneyCombo::slotItemSelected(const QString& id)
 {
-  if(editable()) {
+  if(isEditable()) {
     bool blocked = signalsBlocked();
     blockSignals(true);
     setCurrentTextById(id);
@@ -101,7 +101,7 @@ void KMyMoneyCombo::slotItemSelected(const QString& id)
 
 void KMyMoneyCombo::setEditable(bool y)
 {
-  if(y == editable())
+  if(y == isEditable())
     return;
 
   KComboBox::setEditable(y);
@@ -174,7 +174,7 @@ void KMyMoneyCombo::mousePressEvent(QMouseEvent *e)
   if(e->button() != Qt::LeftButton)
     return;
 
-  if(((!editable() || isInArrowArea(mapToGlobal(e->pos()))) && selector()->itemList().count()) && !m_completion->isVisible()) {
+  if(((!isEditable() || isInArrowArea(mapToGlobal(e->pos()))) && selector()->itemList().count()) && !m_completion->isVisible()) {
     m_completion->show();
   }
 
@@ -200,8 +200,8 @@ bool KMyMoneyCombo::isInArrowArea(const QPoint& pos) const
   // and thus has a rect that doesn't fit the button.
   arrowRect.setHeight( qMax(  height() - (2 * arrowRect.y()), arrowRect.height() ) );
 
-  // if the button is not editable, it covers the whole widget
-  if(!editable())
+  // if the button is not isEditable, it covers the whole widget
+  if(!isEditable())
     arrowRect = rect();
 
   return arrowRect.contains(mapFromGlobal(pos));
@@ -213,7 +213,7 @@ void KMyMoneyCombo::keyPressEvent(QKeyEvent* e)
 {
   if((e->key() == Qt::Key_F4 && e->state() == 0 ) ||
      (e->key() == Qt::Key_Down && (e->state() & Qt::AltModifier)) ||
-     (!editable() && e->key() == Qt::Key_Space)) {
+     (!isEditable() && e->key() == Qt::Key_Space)) {
     // if we have at least one item in the list, we open the dropdown
     if(selector()->listView()->firstChild())
       m_completion->show();
@@ -245,7 +245,7 @@ void KMyMoneyCombo::focusOutEvent(QFocusEvent* e)
   }
 
   m_inFocusOutEvent = true;
-  if(editable() && !currentText().isEmpty()) {
+  if(isEditable() && !currentText().isEmpty()) {
     if(m_canCreateObjects) {
       if(!m_completion->selector()->contains(currentText())) {
         QString id;
@@ -276,7 +276,7 @@ void KMyMoneyCombo::focusOutEvent(QFocusEvent* e)
   KComboBox::focusOutEvent(e);
 
   // force update of hint and id if there is no text in the widget
-  if(editable() && currentText().isEmpty()) {
+  if(isEditable() && currentText().isEmpty()) {
     QString id = m_id;
     m_id = QString();
     if(!id.isEmpty())
