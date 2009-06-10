@@ -190,8 +190,6 @@ KMyMoneyWizard::KMyMoneyWizard(QWidget *parent, const char *name, bool modal, Qt
   m_wizardLayout->addLayout(hboxLayout);
 
   resize(QSize(770, 520).expandedTo(minimumSizeHint()));
-#warning "port to kde4"
-  //  clearWState(WState_Polished);
 
   m_titleLabel->setText(i18n("No Title specified"));
   m_titleLabel->setRightImageFile("pics/titlelabel_background.png");

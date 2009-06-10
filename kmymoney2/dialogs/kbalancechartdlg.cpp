@@ -217,7 +217,6 @@ KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* paren
   connect( buttonClose, SIGNAL( clicked() ), this, SLOT( accept() ) );
 
   resize( QSize(700, 500).expandedTo(minimumSizeHint()) );
-  //clearWState( WState_Polished );
 #endif
 #endif
 }

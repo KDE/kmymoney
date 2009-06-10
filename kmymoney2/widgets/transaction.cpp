@@ -936,7 +936,6 @@ void StdTransaction::loadTab(TransactionForm* form)
   TabBar* bar = form->tabBar();
   bar->setSignalEmission(TabBar::SignalNever);
   for(int i = 0; i < bar->count(); ++i) {
-#warning "port to kde4"
     bar->setTabEnabled(i, true);
   }
 
