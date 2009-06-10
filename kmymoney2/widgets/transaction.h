@@ -89,15 +89,15 @@ public:
 
   bool isErronous(void) const { return m_erronous; }
 
-  virtual const QDate& sortPostDate(void) const { return m_transaction.postDate(); }
+  virtual const QDate sortPostDate(void) const { return m_transaction.postDate(); }
   virtual int sortSamePostDate(void) const { return 2; }
-  virtual const QDate& sortEntryDate(void) const { return m_transaction.entryDate(); }
-  virtual const QString& sortPayee(void) const { return m_payee; }
-  virtual const MyMoneyMoney& sortValue(void) const { return m_split.shares(); }
-  virtual const QString& sortNumber(void) const { return m_split.number(); }
-  virtual const QString& sortEntryOrder(void) const { return m_uniqueId; }
+  virtual const QDate sortEntryDate(void) const { return m_transaction.entryDate(); }
+  virtual const QString sortPayee(void) const { return m_payee; }
+  virtual const MyMoneyMoney sortValue(void) const { return m_split.shares(); }
+  virtual const QString sortNumber(void) const { return m_split.number(); }
+  virtual const QString sortEntryOrder(void) const { return m_uniqueId; }
   virtual CashFlowDirection sortType(void) const { return m_split.shares().isNegative() ? Payment : Deposit; }
-  virtual const QString& sortCategory(void) const { return m_category; }
+  virtual const QString sortCategory(void) const { return m_category; }
   virtual MyMoneySplit::reconcileFlagE sortReconcileState(void) const { return m_split.reconcileFlag(); }
 
   virtual const QString& id(void) const { return m_uniqueId; }
@@ -348,7 +348,7 @@ public:
   InvestTransaction(Register* parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
   virtual ~InvestTransaction() {}
 
-  virtual const QString& sortSecurity(void) const { return m_security.name(); }
+  virtual const QString sortSecurity(void) const { return m_security.name(); }
   virtual const char* className(void) { return "InvestTransaction"; }
 
   // virtual void paintRegisterCell(QPainter* painter, int row, int col, const QRect& r, bool selected, const QColorGroup& cg);
