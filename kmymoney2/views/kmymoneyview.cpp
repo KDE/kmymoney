@@ -1637,7 +1637,6 @@ void KMyMoneyView::slotRefreshViews()
   m_accountsView->slotLoadAccounts();
   m_institutionsView->slotLoadAccounts();
   m_categoriesView->slotLoadAccounts();
-  #warning "port to kde4"
   m_payeesView->slotLoadPayees();
   m_ledgerView->slotLoadView();
   m_budgetView->slotRefreshView();
