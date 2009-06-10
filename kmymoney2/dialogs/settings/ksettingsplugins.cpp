@@ -22,7 +22,7 @@
 #include <QString>
 #include <QLabel>
 //Added by qt3to4:
-#include <Q3VBoxLayout>
+#include <QVBoxLayout>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -40,7 +40,7 @@
 KSettingsPlugins::KSettingsPlugins(QWidget* parent)
   : QWidget(parent)
 {
-  Q3VBoxLayout *layout = new Q3VBoxLayout(this);
+  QVBoxLayout *layout = new QVBoxLayout(this);
   KMyMoneyPlugin::PluginLoader::instance()->pluginSelectorWidget()->reparent(this, QPoint());
   layout->addWidget(KMyMoneyPlugin::PluginLoader::instance()->pluginSelectorWidget());
   layout->setSpacing(KDialog::spacingHint());

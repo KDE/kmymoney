@@ -125,7 +125,7 @@
                       </widget>
                     </item>
                     <item>
-                      <widget class="Q3Frame" name="m_periodFrame">
+                      <widget class="QFrame" name="m_periodFrame">
                         <property name="enabled">
                           <bool>false</bool>
                         </property>

@@ -565,7 +565,7 @@
                           </widget>
                         </item>
                         <item>
-                          <widget class="Q3Frame" name="m_vatCategoryFrame">
+                          <widget class="QFrame" name="m_vatCategoryFrame">
                             <property name="frameShape">
                               <enum>QFrame::NoFrame</enum>
                             </property>
@@ -631,7 +631,7 @@
                       </layout>
                     </item>
                     <item>
-                      <widget class="Q3Frame" name="m_vatAssignmentFrame">
+                      <widget class="QFrame" name="m_vatAssignmentFrame">
                         <property name="frameShape">
                           <enum>QFrame::NoFrame</enum>
                         </property>

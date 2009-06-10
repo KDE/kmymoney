@@ -167,7 +167,7 @@
         </widget>
       </item>
       <item>
-        <widget class="Q3Frame" name="frame4">
+        <widget class="QFrame" name="frame4">
           <property name="frameShape">
             <enum>QFrame::Panel</enum>
           </property>

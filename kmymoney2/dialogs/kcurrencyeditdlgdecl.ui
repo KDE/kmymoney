@@ -28,7 +28,7 @@
                 <widget class="K3ListView" name="m_currencyList"/>
               </item>
               <item>
-                <widget class="Q3Frame" name="m_baseCurrencyFrame">
+                <widget class="QFrame" name="m_baseCurrencyFrame">
                   <property name="frameShape">
                     <enum>QFrame::NoFrame</enum>
                   </property>

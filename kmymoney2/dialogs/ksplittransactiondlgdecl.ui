@@ -42,7 +42,7 @@
             </widget>
           </item>
           <item>
-            <widget class="Q3Frame" name="m_sumFrame">
+            <widget class="QFrame" name="m_sumFrame">
               <property name="frameShape">
                 <enum>QFrame::StyledPanel</enum>
               </property>
@@ -234,7 +234,7 @@
                   </layout>
                 </item>
                 <item>
-                  <widget class="Q3Frame" name="Frame3">
+                  <widget class="QFrame" name="Frame3">
                     <property name="sizePolicy">
                       <sizepolicy>
                         <hsizetype>5</hsizetype>

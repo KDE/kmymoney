@@ -2218,7 +2218,7 @@ When does the actual interest rate get calculated?</string>
           </layout>
         </item>
         <item>
-          <widget class="Q3Frame" name="Frame3">
+          <widget class="QFrame" name="Frame3">
             <property name="frameShape">
               <enum>QFrame::StyledPanel</enum>
             </property>
@@ -2457,7 +2457,7 @@ Please enter the interest rate or leave the field empty to calculate it.</string
           </layout>
         </item>
         <item>
-          <widget class="Q3Frame" name="Frame3_2">
+          <widget class="QFrame" name="Frame3_2">
             <property name="frameShape">
               <enum>QFrame::StyledPanel</enum>
             </property>
@@ -2695,7 +2695,7 @@ Please enter the term of this loan or leave the field empty to calculate it. The
           </layout>
         </item>
         <item>
-          <widget class="Q3Frame" name="Frame3_2_2">
+          <widget class="QFrame" name="Frame3_2_2">
             <property name="frameShape">
               <enum>QFrame::StyledPanel</enum>
             </property>
@@ -2934,7 +2934,7 @@ Please enter the amount you pay for principal and interest or leave the field em
           </layout>
         </item>
         <item>
-          <widget class="Q3Frame" name="Frame3_2_2_2">
+          <widget class="QFrame" name="Frame3_2_2_2">
             <property name="frameShape">
               <enum>QFrame::StyledPanel</enum>
             </property>
@@ -3173,7 +3173,7 @@ Please enter the amount of a final amortization payment or leave the field empty
           </layout>
         </item>
         <item>
-          <widget class="Q3Frame" name="Frame3_2_2_2_2">
+          <widget class="QFrame" name="Frame3_2_2_2_2">
             <property name="frameShape">
               <enum>QFrame::StyledPanel</enum>
             </property>
@@ -3389,7 +3389,7 @@ KMyMoney has calculated the loan as shown in the overview below. You can accept 
           </spacer>
         </item>
         <item>
-          <widget class="Q3Frame" name="Frame3_2_2_2_2_2">
+          <widget class="QFrame" name="Frame3_2_2_2_2_2">
             <property name="frameShape">
               <enum>QFrame::StyledPanel</enum>
             </property>
@@ -3871,7 +3871,7 @@ If your regular payment contains any additional fees, click on the button &quot;
           </spacer>
         </item>
         <item>
-          <widget class="Q3Frame" name="Frame9">
+          <widget class="QFrame" name="Frame9">
             <property name="frameShape">
               <enum>QFrame::StyledPanel</enum>
             </property>
@@ -4226,7 +4226,7 @@ KMyMoney has calculated the loan as shown below. If you want to accept these val
           </spacer>
         </item>
         <item>
-          <widget class="Q3Frame" name="Frame3_2_2_2_2_2_2">
+          <widget class="QFrame" name="Frame3_2_2_2_2_2_2">
             <property name="frameShape">
               <enum>QFrame::StyledPanel</enum>
             </property>

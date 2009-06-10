@@ -198,24 +198,24 @@ void KEndingBalanceDlg::slotUpdateBalances(void)
   balance = balance * factor;
   endBalance = startBalance = balance;
 
-  tracer.printf("total balance = %s", endBalance.formatMoney("", 2).data());
+  tracer.printf("total balance = %s", qPrintable(endBalance.formatMoney("", 2)));
 
   for(it = transactionList.begin(); it != transactionList.end(); ++it) {
     const MyMoneySplit& split = (*it).second;
     balance -= split.shares() * factor;
     if((*it).first.postDate() > m_statementDate->date()) {
-      tracer.printf("Reducing balances by %s because postdate of %s/%s(%s) is past statement date", (split.shares() * factor).formatMoney("", 2).data(), (*it).first.id().data(),split.id().data(), (*it).first.postDate().toString(Qt::ISODate).data());
+      tracer.printf("Reducing balances by %s because postdate of %s/%s(%s) is past statement date", qPrintable((split.shares() * factor).formatMoney("", 2)), qPrintable((*it).first.id()),qPrintable(split.id()), qPrintable((*it).first.postDate().toString(Qt::ISODate)));
       endBalance -= split.shares() * factor;
       startBalance -= split.shares() * factor;
     } else {
       switch(split.reconcileFlag()) {
         case MyMoneySplit::NotReconciled:
-          tracer.printf("Reducing balances by %s because %s/%s(%s) is not reconciled", (split.shares() * factor).formatMoney("", 2).data(), (*it).first.id().data(), split.id().data(), (*it).first.postDate().toString(Qt::ISODate).data());
+          tracer.printf("Reducing balances by %s because %s/%s(%s) is not reconciled", qPrintable((split.shares() * factor).formatMoney("", 2)), qPrintable((*it).first.id()), qPrintable(split.id()), qPrintable((*it).first.postDate().toString(Qt::ISODate)));
           endBalance -= split.shares() * factor;
           startBalance -= split.shares() * factor;
           break;
         case MyMoneySplit::Cleared:
-          tracer.printf("Reducing start balance by %s because %s/%s(%s) is cleared", (split.shares() * factor).formatMoney("", 2).data(), (*it).first.id().data(), split.id().data(), (*it).first.postDate().toString(Qt::ISODate).data());
+          tracer.printf("Reducing start balance by %s because %s/%s(%s) is cleared", qPrintable((split.shares() * factor).formatMoney("", 2)), qPrintable((*it).first.id()), qPrintable(split.id()), qPrintable((*it).first.postDate().toString(Qt::ISODate)));
           startBalance -= split.shares() * factor;
           break;
         default:
@@ -225,8 +225,8 @@ void KEndingBalanceDlg::slotUpdateBalances(void)
   }
   m_previousBalance->setValue(startBalance);
   m_endingBalance->setValue(endBalance);
-  tracer.printf("total balance = %s", endBalance.formatMoney("", 2).data());
-  tracer.printf("start balance = %s", startBalance.formatMoney("", 2).data());
+  tracer.printf("total balance = %s", qPrintable(endBalance.formatMoney("", 2)));
+  tracer.printf("start balance = %s", qPrintable(startBalance.formatMoney("", 2)));
 
   m_interestDateEdit->setDate(m_statementDate->date());
   m_chargesDateEdit->setDate(m_statementDate->date());
@@ -365,7 +365,7 @@ bool KEndingBalanceDlg::createTransaction(MyMoneyTransaction &t, const int sign,
     t.modifySplit(s2);
 
   } catch(MyMoneyException *e) {
-    qDebug("%s", e->what().data());
+    qDebug("%s", qPrintable(e->what()));
     delete e;
     t = MyMoneyTransaction();
     return false;
@@ -592,7 +592,7 @@ const MyMoneyTransaction KEndingBalanceLoanDlg::adjustmentTransaction(void) cons
       t.setPostDate(m_endDateEdit->date());
 
     } catch(MyMoneyException *e) {
-      qDebug("Unable to create adjustment transaction for loan reconciliation: %s", e->what().data());
+      qDebug("Unable to create adjustment transaction for loan reconciliation: %s", qPrintable(e->what()));
       delete e;
       return MyMoneyTransaction();
     }

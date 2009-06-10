@@ -20,8 +20,6 @@
 
 #include <QRegExp>
 #include <QCheckBox>
-//Added by qt3to4:
-#include <Q3ValueList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
