@@ -353,8 +353,8 @@ void KMyMoneyWizard::completeStateChanged(void)
   KMyMoneyWizardPage* currentPage = m_history.back();
   bool lastPage = currentPage->isLastPage();
 
-  m_finishButton->setShown(lastPage);
-  m_nextButton->setShown(!lastPage);
+  m_finishButton->setVisible(lastPage);
+  m_nextButton->setVisible(!lastPage);
 
   KPushButton* button;
 

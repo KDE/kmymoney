@@ -510,7 +510,7 @@ void KEditScheduleDlg::slotSetPaymentMethod(int item)
 {
   kMyMoneyLineEdit* dateEdit = dynamic_cast<kMyMoneyLineEdit*>(d->m_editor->haveWidget("number"));
   if(dateEdit) {
-    dateEdit->setShown(item == MyMoneySchedule::STYPE_WRITECHEQUE);
+    dateEdit->setVisible(item == MyMoneySchedule::STYPE_WRITECHEQUE);
 
     // hiding the label does not work, because the label underneath will shine
     // through. So we either write the label or a blank

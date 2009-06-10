@@ -462,7 +462,7 @@ void KNewAccountDlg::setOpeningBalance(const MyMoneyMoney& balance)
 
 void KNewAccountDlg::setOpeningBalanceShown(bool shown)
 {
-  m_openingBalanceEdit->setShown(shown);
+  m_openingBalanceEdit->setVisible(shown);
 }
 
 void KNewAccountDlg::okClicked()

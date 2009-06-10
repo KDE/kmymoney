@@ -147,7 +147,7 @@ void KAccountsView::slotTabCurrentChanged(QWidget* _tab)
   switch(tab) {
     case ListView:
       // update the hint if categories are hidden
-      m_hiddenCategories->setShown(m_haveUnusedCategories);
+      m_hiddenCategories->setVisible(m_haveUnusedCategories);
       break;
 
     case IconView:

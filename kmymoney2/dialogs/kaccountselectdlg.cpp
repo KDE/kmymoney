@@ -166,7 +166,7 @@ void KAccountSelectDlg::setMode(const int mode)
 
 void KAccountSelectDlg::showAbortButton(const bool visible)
 {
-  m_kButtonAbort->setShown(visible);
+  m_kButtonAbort->setVisible(visible);
 }
 
 int KAccountSelectDlg::exec(void)

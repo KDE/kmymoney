@@ -128,8 +128,8 @@ KMyMoneyUtils::EnterScheduleResultCodeE KEnterScheduleDlg::resultCode(void) cons
 
 void KEnterScheduleDlg::showExtendedKeys(bool visible)
 {
-  buttonIgnore->setShown(visible);
-  buttonSkip->setShown(visible);
+  buttonIgnore->setVisible(visible);
+  buttonSkip->setVisible(visible);
 }
 
 void KEnterScheduleDlg::slotIgnore(void)

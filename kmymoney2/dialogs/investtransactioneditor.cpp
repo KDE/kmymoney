@@ -473,7 +473,7 @@ void InvestTransactionEditor::slotUpdateFeeVisibility(const QString& txt)
   haveWidget("fee-amount")->setHidden(txt.isEmpty());
   QWidget* w = haveWidget("fee-amount-label");
   if(w)
-    w->setShown(haveWidget("fee-amount")->isVisible());
+    w->setVisible(haveWidget("fee-amount")->isVisible());
 }
 
 void InvestTransactionEditor::slotUpdateInterestCategory(const QString& id)
@@ -499,7 +499,7 @@ void InvestTransactionEditor::slotUpdateInterestVisibility(const QString& txt)
   }
 
   if(w)
-    w->setShown(haveWidget("interest-amount")->isVisible());
+    w->setVisible(haveWidget("interest-amount")->isVisible());
 }
 
 void InvestTransactionEditor::slotCreateInterestCategory(const QString& name, QString& id)

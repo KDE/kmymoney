@@ -214,7 +214,7 @@ void KCategoriesView::loadAccounts(void)
   m_accountTree->repaintContents();
 
   // update the hint if categories are hidden
-  m_hiddenCategories->setShown(haveUnusedCategories);
+  m_hiddenCategories->setVisible(haveUnusedCategories);
 
   ::timetrace("done load categories view");
 }

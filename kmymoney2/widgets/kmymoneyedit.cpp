@@ -512,12 +512,12 @@ QWidget* kMyMoneyEdit::focusWidget(void) const
 
 void kMyMoneyEdit::setCalculatorButtonVisible(const bool show)
 {
-  m_calcButton->setShown(show);
+  m_calcButton->setVisible(show);
 }
 
 void kMyMoneyEdit::setResetButtonVisible(const bool show)
 {
-  m_resetButton->setShown(show);
+  m_resetButton->setVisible(show);
 }
 
 void kMyMoneyEdit::setAllowEmpty(bool allowed)

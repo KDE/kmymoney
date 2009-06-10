@@ -323,7 +323,7 @@ void KGlobalLedgerView::loadView(void)
   MYMONEYTRACER(tracer);
 
   // setup form visibility
-  m_formFrame->setShown(KMyMoneyGlobalSettings::transactionForm());
+  m_formFrame->setVisible(KMyMoneyGlobalSettings::transactionForm());
 
   // no account selected
   emit accountSelected(MyMoneyAccount());

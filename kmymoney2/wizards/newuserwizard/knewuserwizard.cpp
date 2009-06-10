@@ -353,7 +353,7 @@ bool FilePage::isComplete(void) const
       }
     }
     m_existingFileLabel->setHidden(rc);
-    m_finishLabel->setShown(rc);
+    m_finishLabel->setVisible(rc);
   }
   return rc;
 }

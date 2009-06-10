@@ -321,7 +321,7 @@ void KMyMoneyView::showTitleBar(bool show)
     obj = (*it);
     ++it;
     #warning #port to KDE4
-    //((QWidget*)obj)->setShown( show );
+    //((QWidget*)obj)->setVisible( show );
   }
   //delete l; // delete the list, not the objects
   //l.~QList();

@@ -26,11 +26,7 @@
 #include <QObject>
 #include <QString>
 #include <QPixmap>
-//Added by qt3to4:
-#include <Q3Frame>
-#include <Q3ValueList>
-class Q3Frame;
-
+#include <QPair>
 // ----------------------------------------------------------------------------
 // KDE Includes
 

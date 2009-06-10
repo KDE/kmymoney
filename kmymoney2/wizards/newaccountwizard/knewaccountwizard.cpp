@@ -522,10 +522,10 @@ void AccountTypePage::slotUpdateCurrency(void)
   m_openingBalance->setPrecision(MyMoneyMoney::denomToPrec(acc.fraction(currency())));
 
   bool show =  m_currencyComboBox->security().id() != MyMoneyFile::instance()->baseCurrency().id();
-  m_conversionLabel->setShown(show);
-  m_conversionRate->setShown(show);
-  m_conversionExample->setShown(show);
-  m_onlineQuote->setShown(show);
+  m_conversionLabel->setVisible(show);
+  m_conversionRate->setVisible(show);
+  m_conversionExample->setVisible(show);
+  m_onlineQuote->setVisible(show);
   m_conversionRate->setEnabled(show);       // make sure to include/exclude in mandatoryGroup
   m_mandatoryGroup->changed();
   slotUpdateConversionRate(m_conversionRate->lineedit()->text());
