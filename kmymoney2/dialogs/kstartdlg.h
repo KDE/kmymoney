@@ -30,9 +30,8 @@
 #include <QCheckBox>
 #include <QPushButton>
 //Added by qt3to4:
-#include <Q3Frame>
 #include <KPageDialog>
-
+#include <KVBox>
 /**KMyMoney 2 start dialog
   */
 
@@ -64,8 +63,8 @@ private: // Private methods
   bool isnewfile;
   bool isopenfile;
   QString templatename;
-  Q3VBox *templateMainFrame;
-  Q3Frame *recentMainFrame;
+  KVBox *templateMainFrame;
+  QFrame *recentMainFrame;
 
 protected slots:
   /** No descriptions */

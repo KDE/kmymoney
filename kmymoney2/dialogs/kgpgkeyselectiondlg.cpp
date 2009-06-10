@@ -22,7 +22,7 @@
 
 //Added by qt3to4:
 #include <Q3HBoxLayout>
-#include <Q3VBoxLayout>
+#include <QVBoxLayout>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -50,7 +50,7 @@ KGpgKeySelectionDlg::KGpgKeySelectionDlg(QWidget *parent, const char *name) :
     setModal( true );
   QWidget* page = new QWidget(this);
   setMainWidget(page);
-  Q3VBoxLayout* topLayout = new Q3VBoxLayout(page, 0, spacingHint());
+  QVBoxLayout* topLayout = new QVBoxLayout(page, spacingHint());
 
   m_listBox = new KEditListBox(page);
   m_listBox->setTitle(i18n("User identification"));

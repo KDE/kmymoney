@@ -23,7 +23,7 @@
 #include <q3textview.h>
 #include <QLabel>
 //Added by qt3to4:
-#include <Q3VBoxLayout>
+#include <QVBoxLayout>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -76,7 +76,7 @@ KStartDlg::~KStartDlg()
 void KStartDlg::setPage_Template()
 {
   KIconLoader *ic = KIconLoader::global();
-  templateMainFrame = new Q3VBox;
+  templateMainFrame = new KVBox;
 
   KPageWidgetItem *page = new KPageWidgetItem( templateMainFrame , i18n("Select templates") );
   page->setHeader( i18n("Templates") );
@@ -97,14 +97,14 @@ void KStartDlg::setPage_Documents()
 {
 
 
-  recentMainFrame = new Q3VBox;
+  recentMainFrame = new KVBox;
 
   KPageWidgetItem *page = new KPageWidgetItem( recentMainFrame , i18n("Open a KMyMoney document") );
   page->setHeader( i18n("Open") );
   page->setIcon( KIcon("fileopen"));
   addPage(page);
 
-  Q3VBoxLayout *mainLayout = new Q3VBoxLayout( recentMainFrame );
+  QVBoxLayout *mainLayout = new QVBoxLayout( recentMainFrame );
 
   kurlrequest = new KUrlRequester( recentMainFrame );
 

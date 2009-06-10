@@ -33,7 +33,7 @@
 #include <QLayout>
 #include <QEventLoop>
 //Added by qt3to4:
-#include <Q3HBoxLayout>
+#include <QHBoxLayout>
 #include <QKeyEvent>
 #include <Q3ValueList>
 #include <Q3Frame>
@@ -855,7 +855,7 @@ QWidget* kMyMoneySplitTable::createEditWidgets(void)
   palette.setColor(QColorGroup::Background, rowBackgroundColor(m_currentRow+1) );
   m_registerButtonFrame->setPalette(palette);
 
-  Q3HBoxLayout* l = new Q3HBoxLayout(m_registerButtonFrame);
+  QHBoxLayout* l = new QHBoxLayout(m_registerButtonFrame);
   m_registerEnterButton = new KPushButton(KIcon( il->loadIcon("button_ok", KIconLoader::Small, KIconLoader::SizeSmall) ), QString(), m_registerButtonFrame);
 
   m_registerCancelButton = new KPushButton(KIcon( il->loadIcon("button_cancel", KIconLoader::Small, KIconLoader::SizeSmall) ), QString(), m_registerButtonFrame);

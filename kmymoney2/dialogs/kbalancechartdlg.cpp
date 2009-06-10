@@ -24,7 +24,7 @@
 #include <q3frame.h>
 //Added by qt3to4:
 #include <Q3HBoxLayout>
-#include <Q3VBoxLayout>
+#include <QVBoxLayout>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -61,7 +61,7 @@ KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* paren
   setSizeGripEnabled( TRUE );
   setModal( TRUE );
 
-  Q3VBoxLayout* KBalanceChartDlgLayout = new Q3VBoxLayout( this, 11, 6, "KBalanceChartDlgLayout");
+  QVBoxLayout* KBalanceChartDlgLayout = new QVBoxLayout( this, 11, 6, "KBalanceChartDlgLayout");
 
   MyMoneyReport reportCfg = MyMoneyReport(
                                           MyMoneyReport::eAssetLiability,
