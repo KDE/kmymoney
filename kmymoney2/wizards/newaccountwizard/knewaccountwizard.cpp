@@ -161,8 +161,8 @@ const MyMoneyAccount& NewAccountWizard::Wizard::account(void)
       m_account.setAccountType(MyMoneyAccount::AssetLoan);
     m_account.setLoanAmount(m_loanDetailsPage->m_loanAmount->value());
     m_account.setInterestRate(m_loanSchedulePage->firstPaymentDueDate(), m_loanDetailsPage->m_interestRate->value());
-    m_account.setInterestCalculation(m_loanDetailsPage->m_paymentDue->currentItem() == 0 ? MyMoneyAccountLoan::paymentReceived : MyMoneyAccountLoan::paymentDue);
-    m_account.setFixedInterestRate(m_generalLoanInfoPage->m_interestType->currentItem() == 0);
+    m_account.setInterestCalculation(m_loanDetailsPage->m_paymentDue->currentIndex() == 0 ? MyMoneyAccountLoan::paymentReceived : MyMoneyAccountLoan::paymentDue);
+    m_account.setFixedInterestRate(m_generalLoanInfoPage->m_interestType->currentIndex() == 0);
     m_account.setFinalPayment(m_loanDetailsPage->m_balloonAmount->value());
     m_account.setTerm(m_loanDetailsPage->term());
     m_account.setPeriodicPayment(m_loanDetailsPage->m_paymentAmount->value());
@@ -360,7 +360,7 @@ MyMoneyPrice NewAccountWizard::Wizard::conversionRate(void) const
 
 bool NewAccountWizard::Wizard::moneyBorrowed(void) const
 {
-  return m_generalLoanInfoPage->m_loanDirection->currentItem() == 0;
+  return m_generalLoanInfoPage->m_loanDirection->currentIndex() == 0;
 }
 
 class NewAccountWizard::InstitutionPage::Private
@@ -434,7 +434,7 @@ void InstitutionPage::slotSelectInstitution(int id)
 const MyMoneyInstitution& InstitutionPage::institution(void) const
 {
   static MyMoneyInstitution emptyInstitution;
-  if(m_institutionComboBox->currentItem() == 0)
+  if(m_institutionComboBox->currentIndex() == 0)
     return emptyInstitution;
 
   return d->m_list[m_institutionComboBox->currentItem()-1];
@@ -806,11 +806,11 @@ bool GeneralLoanInfoPage::isComplete(void) const
   }
 
   // fixup availability of items on this page
-  m_recordings->setDisabled(m_anyPayments->currentItem() == 0);
+  m_recordings->setDisabled(m_anyPayments->currentIndex() == 0);
 
-  m_interestFrequencyAmountEdit->setDisabled(m_interestType->currentItem() == 0);
-  m_interestFrequencyUnitEdit->setDisabled(m_interestType->currentItem() == 0);
-  m_interestChangeDateEdit->setDisabled(m_interestType->currentItem() == 0);
+  m_interestFrequencyAmountEdit->setDisabled(m_interestType->currentIndex() == 0);
+  m_interestFrequencyUnitEdit->setDisabled(m_interestType->currentIndex() == 0);
+  m_interestChangeDateEdit->setDisabled(m_interestType->currentIndex() == 0);
 
   m_openingBalance->setDisabled(recordAllPayments());
 
@@ -830,7 +830,7 @@ bool GeneralLoanInfoPage::isComplete(void) const
 
 const MyMoneyAccount& GeneralLoanInfoPage::parentAccount(void)
 {
-  return ( m_loanDirection->currentItem() == 0 )
+  return ( m_loanDirection->currentIndex() == 0 )
          ? MyMoneyFile::instance()->liability()
          : MyMoneyFile::instance()->asset();
 }

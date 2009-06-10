@@ -36,7 +36,7 @@
         </widget>
       </item>
       <item>
-        <widget class="Q3Frame" name="m_currencyFrame">
+        <widget class="QFrame" name="m_currencyFrame">
           <property name="enabled">
             <bool>false</bool>
           </property>

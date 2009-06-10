@@ -26,7 +26,7 @@ This information will be seen and used only by you. The information is used to p
       <item>
         <layout class="QHBoxLayout">
           <item>
-            <widget class="Q3Frame" name="frame8">
+            <widget class="QFrame" name="frame8">
               <property name="minimumSize">
                 <size>
                   <width>25</width>
@@ -204,7 +204,7 @@ This information will be seen and used only by you. The information is used to p
             </layout>
           </item>
           <item>
-            <widget class="Q3Frame" name="frame8_2">
+            <widget class="QFrame" name="frame8_2">
               <property name="minimumSize">
                 <size>
                   <width>25</width>

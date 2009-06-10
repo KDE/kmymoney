@@ -32,7 +32,7 @@
         </widget>
       </item>
       <item>
-        <widget class="Q3Frame" name="m_paymentFrame">
+        <widget class="QFrame" name="m_paymentFrame">
           <property name="frameShape">
             <enum>QFrame::NoFrame</enum>
           </property>

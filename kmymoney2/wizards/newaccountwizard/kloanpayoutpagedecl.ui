@@ -33,7 +33,7 @@ If this loan is a 'consumer loan' (money to use however you want), you can use a
         </widget>
       </item>
       <item>
-        <widget class="Q3Frame" name="m_payoutDetailFrame">
+        <widget class="QFrame" name="m_payoutDetailFrame">
           <property name="frameShape">
             <enum>QFrame::NoFrame</enum>
           </property>
