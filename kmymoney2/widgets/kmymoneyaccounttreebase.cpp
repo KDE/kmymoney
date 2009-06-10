@@ -98,11 +98,11 @@ KMyMoneyAccountTreeBase::KMyMoneyAccountTreeBase(QWidget* parent, const char* na
 
 KMyMoneyAccountTreeBase::~KMyMoneyAccountTreeBase()
 {
-#warning "port to kde4"
-#if 0	
   if (!m_configGroup.isEmpty())
-    saveLayout(KGlobal::config(), m_configGroup);
-#endif
+  {
+    KConfigGroup grp = KGlobal::config()->group(m_configGroup);
+    saveLayout(grp);
+  }
 }
 
 void KMyMoneyAccountTreeBase::restoreLayout(const QString& group)
@@ -113,10 +113,8 @@ void KMyMoneyAccountTreeBase::restoreLayout(const QString& group)
   // we use equal distribution of all fields as an initial setting
   // TODO this only makes the first column invisible if settings exist setColumnWidth(0, 0);
   m_configGroup = group;
-#warning "port to kde4"
-#if 0
-  //K3ListView::restoreLayout(KGlobal::config(), m_configGroup);
-#endif
+  KConfigGroup grp = KGlobal::config()->group(m_configGroup);
+  K3ListView::restoreLayout(grp);
 }
 
 void KMyMoneyAccountTreeBase::showType(void)
