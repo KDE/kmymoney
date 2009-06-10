@@ -3078,7 +3078,7 @@ void KMyMoney2App::slotManualPriceUpdate(void)
       // The dialog takes care of adding the price if necessary
       calc.exec();
     } catch(MyMoneyException* e) {
-      qDebug("Error in price update: %s", e->what().data());
+      qDebug("Error in price update: %s", qPrintable(e->what()));
       delete e;
     }
   }
@@ -3523,14 +3523,14 @@ void KMyMoney2App::slotAccountEdit(void)
                   file->addSchedule(sch);
                   ft.commit();
                 } catch (MyMoneyException *f) {
-                  qDebug("Cannot add schedule: '%s'", f->what().data());
+                  qDebug("Cannot add schedule: '%s'", qPrintable(f->what()));
                   delete f;
                 }
                 delete e;
               }
             } catch(MyMoneyException *e) {
-              qDebug("Unable to modify account %s: '%s'", m_selectedAccount.name().data(),
-                  e->what().data());
+              qDebug("Unable to modify account %s: '%s'", qPrintable(m_selectedAccount.name()),
+                  qPrintable(e->what()));
               delete e;
             }
           }
@@ -5837,7 +5837,7 @@ void KMyMoney2App::slotUpdateActions(void)
         action("investment_online_price_update")->setEnabled(true);
 
     } catch(MyMoneyException *e) {
-      qDebug("Error retrieving security for investment %s: %s", m_selectedInvestment.name().data(), e->what().data());
+      qDebug("Error retrieving security for investment %s: %s", qPrintable(m_selectedInvestment.name()), qPrintable(e->what()));
       delete e;
     }
     if(m_selectedInvestment.isClosed())
@@ -6576,7 +6576,8 @@ void KMyMoney2App::Private::unlinkStatementXML(void)
 {
   QDir d("/home/thb", "kmm-statement*");
   for(int i=0; i < d.count(); ++i) {
-    qDebug("Remove %s", d[i].data());
+    qDebug("Remove %s", qPrintable(d[i]));
+#warning "fix me on windows"
     d.remove(QString("/home/thb/%1").arg(d[i]));
   }
   statementXMLindex = 0;

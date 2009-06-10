@@ -942,7 +942,7 @@ bool KMyMoneyView::initializeStorage()
       // Check if we have to modify the file before we allow to work with it
       IMyMoneyStorage* s = MyMoneyFile::instance()->storage();
       while (s->fileFixVersion() < s->currentFixVersion()) {
-        qDebug("%s", (QString("testing fileFixVersion %1 < %2").arg(s->fileFixVersion()).arg(s->currentFixVersion())).data());
+        qDebug("%s", qPrintable((QString("testing fileFixVersion %1 < %2").arg(s->fileFixVersion()).arg(s->currentFixVersion()))));
         switch (s->fileFixVersion()) {
           case 0:
             fixFile_0();
@@ -1335,7 +1335,7 @@ void KMyMoneyView::selectBaseCurrency(void)
           file->modifyAccount(*it);
           ft.commit();
         } catch(MyMoneyException *e) {
-          qDebug("Unable to setup base currency in account %s (%s): %s", qPrintable((*it).name()), (*it).id().data(), qPrintable(e->what()));
+          qDebug("Unable to setup base currency in account %s (%s): %s", qPrintable((*it).name()), qPrintable((*it).id()), qPrintable(e->what()));
           delete e;
         }
       }
@@ -1363,7 +1363,7 @@ void KMyMoneyView::loadDefaultCurrency(const MyMoneySecurity& currency, const bo
       }
       ft.commit();
     } catch (MyMoneyException* e) {
-      qDebug("Error %s loading default currency", e->what().data());
+      qDebug("Error %s loading default currency", qPrintable(e->what()));
       delete e;
     }
   }
@@ -1563,7 +1563,7 @@ void KMyMoneyView::loadAncientCurrency(const QString& id, const QString& name, c
       }
       ft.commit();
     } catch(MyMoneyException *e) {
-      qDebug("Error loading currency: %s", e->what().data());
+      qDebug("Error loading currency: %s",qPrintable( e->what()));
       delete e;
     }
   }
@@ -2138,7 +2138,7 @@ void KMyMoneyView::fixTransactions_0(void)
           (*it_s).setAction(MyMoneySplit::ActionInterest);
           (*it_t).modifySplit(*it_s);
           file->modifyTransaction(*it_t);
-          qDebug("Fixed interest action in %s", (*it_t).id().data());
+          qDebug("Fixed interest action in %s", qPrintable((*it_t).id()));
         }
       // if it does not reference an interest account, it must not be
       // of type ActionInterest
@@ -2148,7 +2148,7 @@ void KMyMoneyView::fixTransactions_0(void)
           (*it_s).setAction(defaultAction);
           (*it_t).modifySplit(*it_s);
           file->modifyTransaction(*it_t);
-          qDebug("Fixed interest action in %s", (*it_t).id().data());
+          qDebug("Fixed interest action in %s", qPrintable((*it_t).id()));
         }
       }
 
@@ -2168,14 +2168,14 @@ void KMyMoneyView::fixTransactions_0(void)
         try {
           int fract = splitAccount.fraction();
           if((*it_s).shares() != (*it_s).shares().convert(fract)) {
-            qDebug("adjusting fraction in %s,%s", (*it_t).id().data(), (*it_s).id().data());
+            qDebug("adjusting fraction in %s,%s", qPrintable((*it_t).id()), qPrintable((*it_s).id()));
             (*it_s).setShares((*it_s).shares().convert(fract));
             (*it_s).setValue((*it_s).value().convert(fract));
             (*it_t).modifySplit(*it_s);
             file->modifyTransaction(*it_t);
           }
         } catch(MyMoneyException* e) {
-          qDebug("Missing security '%s', split not altered", splitAccount.currencyId().data());
+          qDebug("Missing security '%s', split not altered", qPrintable(splitAccount.currencyId()));
           delete e;
         }
       }
@@ -2198,7 +2198,7 @@ void KMyMoneyView::fixTransactions_0(void)
 
 void KMyMoneyView::fixDuplicateAccounts_0(MyMoneyTransaction& t)
 {
-  qDebug("Duplicate account in transaction %s", t.id().data());
+  qDebug("Duplicate account in transaction %s", qPrintable(t.id()));
 }
 
 void KMyMoneyView::slotPrintView(void)

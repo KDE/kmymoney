@@ -229,7 +229,7 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
     try {
       m_account = MyMoneyFile::instance()->account(s.m_accountId);
     } catch(MyMoneyException* e) {
-      qDebug("Received reference '%s' to unknown account in statement", s.m_accountId.data());
+      qDebug("Received reference '%s' to unknown account in statement", qPrintable(s.m_accountId));
       delete e;
     }
   }
@@ -291,7 +291,7 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
   else if(s.m_listTransactions.count() == 0)
     messages += i18n("Importing statement without transactions");
 
-  qDebug("Importing statement for '%s'", m_account.name().data());
+  qDebug("Importing statement for '%s'", qPrintable(m_account.name()));
 
   //
   // Process the securities
@@ -314,7 +314,7 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
   if ( !m_userAbort )
   {
     try {
-      qDebug("Processing transactions (%s)", m_account.name().data());
+      qDebug("Processing transactions (%s)", qPrintable(m_account.name()));
       signalProgress(0, s.m_listTransactions.count(), "Importing Statement ...");
       int progress = 0;
       QList<MyMoneyStatement::Transaction>::const_iterator it_t = s.m_listTransactions.begin();
@@ -324,13 +324,13 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
         signalProgress(++progress, 0);
         ++it_t;
       }
-      qDebug("Processing transactions done (%s)", m_account.name().data());
+      qDebug("Processing transactions done (%s)", qPrintable(m_account.name()));
 
     } catch(MyMoneyException* e) {
       if(e->what() == "USERABORT")
         m_userAbort = true;
       else
-        qDebug("Caught exception from processTransactionEntry() not caused by USERABORT: %s", e->what().data());
+        qDebug("Caught exception from processTransactionEntry() not caused by USERABORT: %s", qPrintable(e->what()));
       delete e;
     }
     signalProgress(-1, -1);
@@ -361,7 +361,7 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
       if(e->what() == "USERABORT")
         m_userAbort = true;
       else
-        qDebug("Caught exception from processPriceEntry() not caused by USERABORT: %s", e->what().data());
+        qDebug("Caught exception from processPriceEntry() not caused by USERABORT: %s", qPrintable(e->what()));
       delete e;
     }
     signalProgress(-1, -1);
@@ -415,7 +415,7 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
   delete m_ft;
   m_ft = 0;
 
-  qDebug("Importing statement for '%s' done", m_account.name().data());
+  qDebug("Importing statement for '%s' done", qPrintable(m_account.name()));
 
   return rc;
 }
@@ -950,7 +950,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
 
         try {
           file->addPayee(payee);
-          qDebug("Payee '%s' created", payee.name().data());
+          qDebug("Payee '%s' created", qPrintable(payee.name()));
           d->payees << payee;
           payeeid = payee.id();
           s1.setPayeeId(payeeid);
@@ -1151,7 +1151,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
               break;
             case TransactionMatcher::matched:
             case TransactionMatcher::matchedExact:
-              qDebug("Detected as match to transaction '%s'", tm.id().data());
+              qDebug("Detected as match to transaction '%s'", qPrintable(tm.id()));
               matcher.match(tm, matchedSplit, t, s1, true);
               d->transactionsMatched++;
               break;
@@ -1220,7 +1220,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
     delete o;
   } catch (MyMoneyException *e) {
     QString message(i18n("Problem adding or matching imported transaction with id '%1': %2",t_in.m_strBankID,e->what()));
-    qDebug("%s", message.data());
+    qDebug("%s", qPrintable(message));
     delete e;
 
     int result = KMessageBox::warningContinueCancel(0, message);

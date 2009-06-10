@@ -664,7 +664,7 @@ void KHomeView::showPaymentEntry(const MyMoneySchedule& sched, int cnt)
       }
     }
   } catch(MyMoneyException* e) {
-    qDebug("Unable to display schedule entry: %s", e->what().data());
+    qDebug("Unable to display schedule entry: %s", qPrintable(e->what()));
     delete e;
   }
 }
