@@ -1344,7 +1344,7 @@ void KMyMoneyView::selectBaseCurrency(void)
           file->modifyAccount(*it);
           ft.commit();
         } catch(MyMoneyException *e) {
-          qDebug("Unable to setup base currency in account %s (%s): %s", (*it).name().toLatin1(), (*it).id().data(), e->what().toLatin1());
+          qDebug("Unable to setup base currency in account %s (%s): %s", qPrintable((*it).name()), (*it).id().data(), qPrintable(e->what()));
           delete e;
         }
       }

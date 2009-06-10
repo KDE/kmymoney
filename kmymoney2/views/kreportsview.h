@@ -36,10 +36,9 @@
 #include <q3valuevector.h>
 #include <qwidget.h>
 //Added by qt3to4:
-#include <Q3VBoxLayout>
-#include <Q3ValueList>
+#include <QVBoxLayout>
+#include <QList>
 
-class Q3VBoxLayout;
 class Q3ListViewItem;
 
 // ----------------------------------------------------------------------------
@@ -98,7 +97,7 @@ public:
 //FIXME: Port to KDE4
 //    reports::KReportChartView* m_chartView;
     kMyMoneyReportControl* m_control;
-    Q3VBoxLayout* m_layout;
+    QVBoxLayout* m_layout;
     MyMoneyReport m_report;
     bool m_deleteMe;
     bool m_showingChart;
@@ -172,7 +171,7 @@ public:
     *
     * @author Ace Jones
     */
-  class ReportGroup: public Q3ValueList<MyMoneyReport>
+  class ReportGroup: public QList<MyMoneyReport>
   {
   private:
     QString m_name;     ///< the title of the group in non-translated form
@@ -192,7 +191,7 @@ private:
   KTabWidget* m_reportTabWidget;
   K3ListView* m_reportListView;
   QWidget* m_listTab;
-  Q3VBoxLayout* m_listTabLayout;
+  QVBoxLayout* m_listTabLayout;
   bool m_needReload;
 
 public:
@@ -227,7 +226,7 @@ public:
 protected:
   void addReportTab(const MyMoneyReport&);
   void loadView(void);
-  static void defaultReports(Q3ValueList<ReportGroup>&);
+  static void defaultReports(QList<ReportGroup>&);
 
 public slots:
   void slotOpenUrl(const KUrl &url, const KParts::OpenUrlArguments& args, const KParts::BrowserArguments& browArgs);

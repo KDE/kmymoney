@@ -5498,8 +5498,7 @@ void KMyMoney2App::updateCaption(bool skipActions)
   if(caption.length() > 0)
     caption += " - ";
   caption += "KMyMoney";
-  #warning #Port to KDE4
-  //setPlainCaption(caption);
+  setPlainCaption(caption);
 
   if(!skipActions) {
     myMoneyView->enableViews();

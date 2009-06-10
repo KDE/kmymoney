@@ -43,12 +43,11 @@
 #include <QPushButton>
 #include <QToolTip>
 #include <QCheckBox>
-#include <q3vbox.h>
 //Added by qt3to4:
-#include <Q3TextStream>
-#include <Q3ValueList>
+#include <QTextStream>
+#include <QList>
 #include <QPixmap>
-#include <Q3VBoxLayout>
+#include <QVBoxLayout>
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -95,7 +94,7 @@ KReportsView::KReportTab::KReportTab(KTabWidget* parent, const MyMoneyReport& re
   //FIXME: Port to KDE4
   //m_chartView( new KReportChartView( this, "reportchart" ) ),
   m_control( new kMyMoneyReportControl( this ) ),
-  m_layout( new Q3VBoxLayout( this, 11, 6, "reporttablayout" ) ),
+  m_layout( new QVBoxLayout( this, 11, 6, "reporttablayout" ) ),
   m_report( report ),
   m_deleteMe( false ),
   m_showingChart( false ),
@@ -160,16 +159,16 @@ void KReportsView::KReportTab::saveAs( const QString& filename, bool includeCSS 
   {
     if ( QFileInfo(filename).extension(false).toLower() == "csv")
     {
-      Q3TextStream(&file) << m_table->renderCSV();
+      QTextStream(&file) << m_table->renderCSV();
     }
     else {
-      Q3TextStream stream(&file);
+      QTextStream stream(&file);
       QRegExp exp("(.*)(<link.*css\" href=)\"(.*)\">(<meta.*utf-8\" />)(.*)");
       QString table = createTable();
       if(exp.search(table) != -1 && includeCSS) {
         QFile cssFile(exp.cap(3));
         if(cssFile.open(QIODevice::ReadOnly)) {
-          Q3TextStream cssStream(&cssFile);
+          QTextStream cssStream(&cssFile);
           stream << exp.cap(1);
           stream << exp.cap(4);
           stream << endl << "<style type=\"text/css\">" << endl << "<!--" << endl;
@@ -332,7 +331,7 @@ KReportsView::KReportsView(QWidget *parent, const char *name ) :
   m_reportTabWidget->setHoverCloseButton( true );
 
   m_listTab = (new QWidget( m_reportTabWidget, "indextab" ));
-  m_listTabLayout = ( new Q3VBoxLayout( m_listTab, 11, 6, "indextabLayout") );
+  m_listTabLayout = ( new QVBoxLayout( m_listTab, 11, 6, "indextabLayout") );
   m_reportListView = new K3ListView( m_listTab);
   m_listTabLayout->addWidget( m_reportListView );
   m_reportTabWidget->insertTab( m_listTab, i18n("Reports") );
@@ -444,9 +443,9 @@ void KReportsView::loadView(void)
   KReportGroupListItem* chartnode = new KReportGroupListItem(m_reportListView, 10, i18n("Charts"));
 
   QMap<QString,KReportGroupListItem*> groupitems;
-  Q3ValueList<ReportGroup> defaultreports;
+  QList<ReportGroup> defaultreports;
   defaultReports(defaultreports);
-  Q3ValueList<ReportGroup>::const_iterator it_group = defaultreports.begin();
+  QList<ReportGroup>::const_iterator it_group = defaultreports.begin();
   while ( it_group != defaultreports.end() )
   {
     QString groupname = (*it_group).name();
@@ -454,7 +453,7 @@ void KReportsView::loadView(void)
     curnode->setOpen(isOpen.find(curnode->text(0)) != isOpen.end());
     groupitems[groupname] = curnode;
 
-    Q3ValueList<MyMoneyReport>::const_iterator it_report = (*it_group).begin();
+    QList<MyMoneyReport>::const_iterator it_report = (*it_group).begin();
     while( it_report != (*it_group).end() )
     {
       MyMoneyReport report = *it_report;
@@ -483,8 +482,8 @@ void KReportsView::loadView(void)
   favoritenode->setOpen(isOpen.find(favoritenode->text(0)) != isOpen.end());
   KReportGroupListItem* orphannode = NULL;
 
-  Q3ValueList<MyMoneyReport> customreports = MyMoneyFile::instance()->reportList();
-  Q3ValueList<MyMoneyReport>::const_iterator it_report = customreports.begin();
+  QList<MyMoneyReport> customreports = MyMoneyFile::instance()->reportList();
+  QList<MyMoneyReport>::const_iterator it_report = customreports.begin();
   while( it_report != customreports.end() )
   {
     // If this report is in a known group, place it there
@@ -587,8 +586,10 @@ void KReportsView::slotSaveView(void)
 {
   KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->currentPage());
   if(tab) {
-    Q3VBox* vbox = new Q3VBox();
+    QWidget* vbox = new QWidget;
+    QVBoxLayout* layout = new QVBoxLayout;
     d->includeCSS = new QCheckBox(i18n("Include Stylesheet"), vbox);
+    layout->addWidget(d->includeCSS);
 
     // the following code is copied from KFileDialog::getSaveFileName,
     // adjust to our local needs (filetypes etc.) and
@@ -940,7 +941,7 @@ void KReportsView::slotDeleteFromList(void)
   }
 }
 
-void KReportsView::defaultReports(Q3ValueList<ReportGroup>& groups)
+void KReportsView::defaultReports(QList<ReportGroup>& groups)
 {
   {
     ReportGroup list("Income and Expenses", i18n("Income and Expenses"));
