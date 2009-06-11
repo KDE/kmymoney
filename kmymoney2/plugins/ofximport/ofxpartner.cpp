@@ -322,6 +322,7 @@ OfxHttpsRequest::~OfxHttpsRequest()
   if(d->m_fpTrace.isOpen()) {
     d->m_fpTrace.close();
   }
+  delete d;
 }
 
 void OfxHttpsRequest::slotOfxConnected(KIO::Job*)
