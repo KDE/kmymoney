@@ -35,14 +35,13 @@
 #include <QEvent>
 #include <QMouseEvent>
 #include <Q3ValueList>
-#include <Q3Frame>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 class KMenu;
 class KPushButton;
-
+class QFrame;
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -260,7 +259,7 @@ private:
     */
   QWidgetList         m_tabOrderWidgets;
 
-  QPointer<Q3Frame>           m_registerButtonFrame;
+  QPointer<QFrame>           m_registerButtonFrame;
   QPointer<KPushButton>      m_registerEnterButton;
   QPointer<KPushButton>      m_registerCancelButton;
 

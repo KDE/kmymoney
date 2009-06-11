@@ -36,7 +36,7 @@
 #include <QHBoxLayout>
 #include <QKeyEvent>
 #include <Q3ValueList>
-#include <Q3Frame>
+#include <QFrame>
 #include <QResizeEvent>
 #include <QMouseEvent>
 #include <QEvent>
@@ -850,7 +850,7 @@ QWidget* kMyMoneySplitTable::createEditWidgets(void)
 
   // create buttons for the mouse users
   KIconLoader *il = KIconLoader::global();
-  m_registerButtonFrame = new Q3Frame(this, "buttonFrame");
+  m_registerButtonFrame = new QFrame(this);
   QPalette palette = m_registerButtonFrame->palette();
   palette.setColor(QColorGroup::Background, rowBackgroundColor(m_currentRow+1) );
   m_registerButtonFrame->setPalette(palette);
