@@ -185,7 +185,7 @@ TransactionEditor* KEditScheduleDlg::startEdit(void)
   // check that we use the same transaction commodity in all selected transactions
   // if not, we need to update this in the editor's list. The user can also bail out
   // of this operation which means that we have to stop editing here.
-  if(editor) {
+  if(editor && !d->m_schedule.account().id().isEmpty()) {
     if(!editor->fixTransactionCommodity(d->m_schedule.account())) {
       // if the user wants to quit, we need to destroy the editor
       // and bail out

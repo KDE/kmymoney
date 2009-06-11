@@ -167,6 +167,13 @@ protected:
   virtual void loadEditWidgets(KMyMoneyRegister::Action action = KMyMoneyRegister::ActionNone) = 0;
   void setupCategoryWidget(KMyMoneyCategory* category, const QList<MyMoneySplit>& splits, QString& categoryId, const char* splitEditSlot, bool allowObjectCreation = true);
 
+  /**
+   * This method sets the precision of the value widgets to reflect
+   * the account in m_account. If m_account has no id, the precision
+   * defaults to 2.
+   */
+  void setupPrecision(void);
+
 protected slots:
   virtual void slotUpdateButtonState(void);
   virtual void slotUpdateAccount(void);

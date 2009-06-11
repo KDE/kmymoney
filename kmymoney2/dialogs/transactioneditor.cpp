@@ -93,12 +93,27 @@ TransactionEditor::~TransactionEditor()
 void TransactionEditor::slotUpdateAccount(const QString& id)
 {
   m_account = MyMoneyFile::instance()->account(id);
+  setupPrecision();
 }
 
 void TransactionEditor::slotUpdateAccount(void)
 {
   // reload m_account as it might have been changed
   m_account = MyMoneyFile::instance()->account(m_account.id());
+  setupPrecision();
+}
+
+void TransactionEditor::setupPrecision(void)
+{
+  const int prec = (m_account.id().isEmpty()) ? 2 : MyMoneyMoney::denomToPrec(m_account.fraction());
+  QStringList widgets = QString("amount,deposit,payment").split(",");
+  QStringList::const_iterator it_w;
+  for(it_w = widgets.begin(); it_w != widgets.end(); ++it_w) {
+    QWidget * w;
+    if((w = haveWidget(*it_w)) != 0) {
+      dynamic_cast<kMyMoneyEdit*>(w)->setPrecision(prec);
+    }
+  }
 }
 
 void TransactionEditor::setup(QWidgetList& tabOrderWidgets, const MyMoneyAccount& account, KMyMoneyRegister::Action action)
@@ -780,22 +795,18 @@ void StdTransactionEditor::createEditWidgets(void)
   kMyMoneyEdit* value = new kMyMoneyEdit;
   m_editWidgets["amount"] = value;
   value->setResetButtonVisible(false);
-  const int prec = MyMoneyMoney::denomToPrec(m_account.fraction());
-  value->setPrecision(prec);
   connect(value, SIGNAL(valueChanged(const QString&)), this, SLOT(slotUpdateAmount(const QString&)));
   connect(value, SIGNAL(textChanged(const QString&)), this, SLOT(slotUpdateButtonState()));
 
   value = new kMyMoneyEdit;
   m_editWidgets["payment"] = value;
   value->setResetButtonVisible(false);
-  value->setPrecision(prec);
   connect(value, SIGNAL(valueChanged(const QString&)), this, SLOT(slotUpdatePayment(const QString&)));
   connect(value, SIGNAL(textChanged(const QString&)), this, SLOT(slotUpdateButtonState()));
 
   value = new kMyMoneyEdit;
   m_editWidgets["deposit"] = value;
   value->setResetButtonVisible(false);
-  value->setPrecision(prec);
   connect(value, SIGNAL(valueChanged(const QString&)), this, SLOT(slotUpdateDeposit(const QString&)));
   connect(value, SIGNAL(textChanged(const QString&)), this, SLOT(slotUpdateButtonState()));
 
@@ -839,6 +850,8 @@ void StdTransactionEditor::createEditWidgets(void)
   label = new QLabel(i18n("Number"), 0);
   label->setAlignment(Qt::AlignVCenter | Qt::TextDontClip);
   m_editWidgets["number-label"] = label;
+
+  setupPrecision();
 }
 
 void StdTransactionEditor::setupCategoryWidget(QString& categoryId)
