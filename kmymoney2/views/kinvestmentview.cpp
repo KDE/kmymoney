@@ -185,7 +185,7 @@ void KInvestmentView::loadAccounts(void)
     try {
       d->m_precision = MyMoneyMoney::denomToPrec(d->m_account.fraction());
     } catch(MyMoneyException *e) {
-      qDebug("Security %s for account %s not found", d->m_account.currencyId().data(), d->m_account.name().data());
+      qDebug("Security %s for account %s not found", qPrintable(d->m_account.currencyId()), qPrintable(d->m_account.name()));
       delete e;
       d->m_precision = 2;
     }
@@ -234,7 +234,7 @@ bool KInvestmentView::slotSelectAccount(const QString& id, const QString& transa
         }
 
       } catch(MyMoneyException* e) {
-        qDebug("Unable to retrieve account %s", id.data());
+        qDebug("Unable to retrieve account %s", qPrintable(id));
         delete e;
         rc = false;
       }

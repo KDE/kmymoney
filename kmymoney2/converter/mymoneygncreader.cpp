@@ -1153,7 +1153,7 @@ void MyMoneyGncReader::convertCommodity (const GncCommodity *gcm) {
     m_storage->addSecurity(equ);
 
     //assign the gnucash id as the key into the map to find our id
-    if (gncdebug) qDebug ("mapping, key = %s, id = %s", qPrintable(gcm->id()), equ.id().data());
+    if (gncdebug) qDebug ("mapping, key = %s, id = %s", qPrintable(gcm->id()), qPrintable(equ.id()));
     m_mapEquities[gcm->id().toUtf8()] = equ.id();
   }
   signalProgress (++m_commodityCount, 0);
@@ -1277,7 +1277,7 @@ void MyMoneyGncReader::convertAccount (const GncAccount* gac) {
     // set the equity type
     MyMoneySecurity e = m_storage->security (m_mapEquities[gac->commodity()->id().toUtf8()]);
     if (gncdebug) qDebug ("Acct equity search, key = %s, found id = %s",
-                            qPrintable(gac->commodity()->id()), e.id().data());
+                            qPrintable(gac->commodity()->id()), qPrintable(e.id()));
     acc.setCurrencyId (e.id()); // actually, the security id
     if ("MUTUAL" == gac->type()) {
       e.setSecurityType (MyMoneySecurity::SECURITY_MUTUALFUND);
@@ -1318,7 +1318,7 @@ void MyMoneyGncReader::convertAccount (const GncAccount* gac) {
   m_mapIds[gac->id().toUtf8()] = acc.id(); // to link gnucash id to ours for tx posting
 
   if (gncdebug) qDebug("Gnucash account %s has id of %s, type of %s, parent is %s",
-                         qPrintable(gac->id()), acc.id().data(),
+                         qPrintable(gac->id()), qPrintable(acc.id()),
                          qPrintable(KMyMoneyUtils::accountTypeToString(acc.accountType())), acc.parentAccountId().data());
 
   signalProgress (++m_accountCount, 0);
@@ -1904,7 +1904,7 @@ void MyMoneyGncReader::terminate () {
   // this code is just temporary to show us what is in the file.
   if (gncdebug) qDebug("%d accounts found in the GnuCash file", (unsigned int)m_mapIds.count());
   for (map_accountIds::Iterator it = m_mapIds.begin(); it != m_mapIds.end(); ++it) {
-    if (gncdebug) qDebug("key = %s, value = %s", it.key().data(), it.data().data());
+    if (gncdebug) qDebug("key = %s, value = %s", qPrintable(it.key()), qPrintable(it.data()));
   }
   // first step is to implement the users investment option, now we
   // have all the accounts available
@@ -1922,34 +1922,34 @@ void MyMoneyGncReader::terminate () {
     if ((*acc).parentAccountId() == m_storage->asset().id()) {
       MyMoneyAccount assets = m_storage->asset();
       m_storage->addAccount(assets, (*acc));
-      if (gncdebug) qDebug("Account id %s is a child of the main asset account", (*acc).id().data());
+      if (gncdebug) qDebug("Account id %s is a child of the main asset account", qPrintable((*acc).id()));
     } else if ((*acc).parentAccountId() == m_storage->liability().id()) {
       MyMoneyAccount liabilities = m_storage->liability();
       m_storage->addAccount(liabilities, (*acc));
-      if (gncdebug) qDebug("Account id %s is a child of the main liability account", (*acc).id().data());
+      if (gncdebug) qDebug("Account id %s is a child of the main liability account", qPrintable((*acc).id()));
     } else if ((*acc).parentAccountId() == m_storage->income().id()) {
       MyMoneyAccount incomes = m_storage->income();
       m_storage->addAccount(incomes, (*acc));
-      if (gncdebug) qDebug("Account id %s is a child of the main income account", (*acc).id().data());
+      if (gncdebug) qDebug("Account id %s is a child of the main income account", qPrintable((*acc).id()));
     } else if ((*acc).parentAccountId() == m_storage->expense().id()) {
       MyMoneyAccount expenses = m_storage->expense();
       m_storage->addAccount(expenses, (*acc));
-      if (gncdebug) qDebug("Account id %s is a child of the main expense account", (*acc).id().data());
+      if (gncdebug) qDebug("Account id %s is a child of the main expense account", qPrintable((*acc).id()));
     } else if ((*acc).parentAccountId() == m_storage->equity().id()) {
       MyMoneyAccount equity = m_storage->equity();
       m_storage->addAccount(equity, (*acc));
-      if (gncdebug) qDebug("Account id %s is a child of the main equity account", (*acc).id().data());
+      if (gncdebug) qDebug("Account id %s is a child of the main equity account", qPrintable((*acc).id()));
     } else if ((*acc).parentAccountId() == m_rootId) {
-      if (gncdebug) qDebug("Account id %s is a child of root", (*acc).id().data());
+      if (gncdebug) qDebug("Account id %s is a child of root", qPrintable((*acc).id()));
     } else {
       // it is not under one of the main accounts, so find gnucash parent
       QString parentKey = (*acc).parentAccountId();
-      if (gncdebug) qDebug ("acc %s, parent %s", (*acc).id().data(),
-                              (*acc).parentAccountId().data());
+      if (gncdebug) qDebug ("acc %s, parent %s", qPrintable((*acc).id()),
+                              qPrintable((*acc).parentAccountId()));
       map_accountIds::Iterator id = m_mapIds.find(parentKey);
       if (id != m_mapIds.end()) {
         if (gncdebug) qDebug("Setting account id %s's parent account id to %s",
-                               (*acc).id().data(), id.data().data());
+                               qPrintable((*acc).id()), qPrintable(id.data()));
         MyMoneyAccount parent = m_storage->account(id.data());
         parent = checkConsistency (parent, (*acc));
         m_storage->addAccount (parent, (*acc));
