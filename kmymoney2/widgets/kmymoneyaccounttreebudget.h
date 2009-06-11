@@ -24,7 +24,6 @@
 #include <QTimer>
 //Added by qt3to4:
 #include <QList>
-class Q3DragObject;
 
 // ----------------------------------------------------------------------------
 // KDE Includes

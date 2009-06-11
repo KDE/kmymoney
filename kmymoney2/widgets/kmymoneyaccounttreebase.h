@@ -27,7 +27,6 @@
 #include <QDropEvent>
 #include <QPaintEvent>
 #include <QList>
-class Q3DragObject;
 
 // ----------------------------------------------------------------------------
 // KDE Includes

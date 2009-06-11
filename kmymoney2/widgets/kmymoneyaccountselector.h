@@ -35,7 +35,6 @@ class KPushButton;
 #include <kmymoneyutils.h>
 #include <mymoneyaccount.h>
 
-class kMyMoneyAccountCompletion;
 class AccountSet;
 class MyMoneyFile;
 

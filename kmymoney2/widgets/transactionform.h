@@ -43,7 +43,6 @@
 
 #include "kmymoneysettings.h"
 
-class MyMoneyObjectContainer;
 
 namespace KMyMoneyTransactionForm {
 
