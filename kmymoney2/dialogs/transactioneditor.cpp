@@ -427,7 +427,7 @@ bool TransactionEditor::fixTransactionCommodity(const MyMoneyAccount& account)
               }
             }
           } catch(MyMoneyException *e) {
-            qDebug("Unable to update commodity of split currency in %s: '%s'", (*it_t).transaction().id().data(), e->what().data());
+            qDebug("Unable to update commodity of split currency in %s: '%s'", qPrintable((*it_t).transaction().id()), qPrintable(e->what()));
             delete e;
           }
           break;
