@@ -322,7 +322,7 @@ void MyMoneyQifProfileEditor::deleteProfile(const QString& name)
 
   KConfigGroup grp = config->group("Profiles");
   QStringList list = grp.readEntry("profiles", QStringList());
-  list.remove(name);
+  list.removeAll(name);
 
   grp.writeEntry("profiles", list);
   m_isDirty = true;
