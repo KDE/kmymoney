@@ -27,7 +27,6 @@
 // KDE Includes
 
 class KTemporaryFile;
-class KOfxDirectConnectDlgPrivate;
 
 namespace KIO
 {

@@ -31,7 +31,6 @@
 
 #include <kfile.h>
 #include <kurl.h>
-class KMenu;
 
 // ----------------------------------------------------------------------------
 // Project Includes

@@ -29,8 +29,6 @@
 // KDE Includes
 
 #include <kxmlguiclient.h>
-class KAboutData;
-class KInstance;
 class KAction;
 class KToggleAction;
 

@@ -50,8 +50,6 @@ class KComboBox;
 #include <mymoneykeyvaluecontainer.h>
 
 class MyMoneyAccount;
-class MyMoneyInstitution;
-class MyMoneyTransaction;
 
 /**
  * @author Thomas Baumgart
