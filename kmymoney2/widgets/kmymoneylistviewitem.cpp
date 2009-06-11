@@ -66,8 +66,8 @@ QString KMyMoneyListViewItem::key(int column, bool ascending) const
   Q_UNUSED(ascending);
 
   if(column == 0)
-    return m_key[0] + text(0);
-  return m_key.mid(1);
+    return m_key.isEmpty() ? text(0) : (m_key[0] + text(0));
+  return m_key.isEmpty() ? QString() : m_key.mid(1);
 }
 
 
