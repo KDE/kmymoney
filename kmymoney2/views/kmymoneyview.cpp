@@ -920,17 +920,17 @@ bool KMyMoneyView::initializeStorage()
   }
 
   KSharedConfigPtr config = KGlobal::config();
-  int page;
+  int pageIndex = 0;
+  KPageWidgetItem* page;
   KConfigGroup grp = config->group("General Options");
-#warning "port to kde4"
-#if 0
+
   if(KMyMoneyGlobalSettings::startLastViewSelected() != 0) {
     KConfigGroup grp2 = config->group("Last Use Settings");
-    page = grp2.readEntry("LastViewSelected", 0);
+    pageIndex = grp2.readEntry("LastViewSelected", 0);
+    page = m_model->item(m_model->index(1,0));
   } else {
-    page = pageIndex(m_homeViewFrame);
+    page = m_homeViewFrame;
   }
-#endif
   ::timetrace("start fixing file");
 
   // For debugging purposes, we can turn off the automatic fix manually
@@ -991,12 +991,9 @@ bool KMyMoneyView::initializeStorage()
   MyMoneyFile::instance()->forceDataChanged();
 
   // if we currently see a different page, then select the right one
-#warning "port to kde4"
-#if 0
-    if(page != activePageIndex()) {
+  if(pageIndex != KPageView::currentPage().row()) {
     showPage(page);
   }
-#endif
   return true;
 }
 
@@ -1262,8 +1259,7 @@ bool KMyMoneyView::startReconciliation(const MyMoneyAccount& account, const QDat
   // it makes sense for asset and liability accounts only
   if(ok == true) {
     if(account.isAssetLiability()) {
-#warning "port to kde4"
-      //      showPage(pageIndex(m_ledgerViewFrame));
+      showPage(m_ledgerViewFrame);
       // prepare reconciliation mode
       emit reconciliationStarts(account, reconciliationDate, endingBalance);
     } else {
@@ -1609,7 +1605,6 @@ void KMyMoneyView::viewUp(void)
 
 void KMyMoneyView::viewAccountList(const QString& /*selectAccount*/)
 {
-#warning "port to kde4"
   if(m_accountsViewFrame != currentPage())
     showPage(m_accountsViewFrame);
   m_accountsView->show();
@@ -1617,9 +1612,6 @@ void KMyMoneyView::viewAccountList(const QString& /*selectAccount*/)
 
 void KMyMoneyView::slotRefreshViews()
 {
-  qDebug("slot refresh views");
-  #warning "port to kde4"
-  #if 0
   // turn off sync between ledger and investment view
   disconnect(m_investmentView, SIGNAL(accountSelected(const MyMoneyObject&)), m_ledgerView, SLOT(slotSelectAccount(const MyMoneyObject&)));
   disconnect(m_ledgerView, SIGNAL(accountSelected(const MyMoneyObject&)), m_investmentView, SLOT(slotSelectAccount(const MyMoneyObject&)));
@@ -1630,7 +1622,6 @@ void KMyMoneyView::slotRefreshViews()
     connect(m_investmentView, SIGNAL(accountSelected(const MyMoneyObject&)), m_ledgerView, SLOT(slotSelectAccount(const MyMoneyObject&)));
     connect(m_ledgerView, SIGNAL(accountSelected(const MyMoneyObject&)), m_investmentView, SLOT(slotSelectAccount(const MyMoneyObject&)));
   }
-  #endif
 
   showTitleBar(KMyMoneyGlobalSettings::showTitleBar());
 
@@ -1644,7 +1635,6 @@ void KMyMoneyView::slotRefreshViews()
   m_investmentView->slotLoadView();
   m_reportsView->slotLoadView();
   m_forecastView->slotLoadForecast();
-
   m_scheduledView->slotReloadView();
 }
 
@@ -2202,13 +2192,10 @@ void KMyMoneyView::fixDuplicateAccounts_0(MyMoneyTransaction& t)
 
 void KMyMoneyView::slotPrintView(void)
 {
-#warning "port  to kde4"
-#if 0
-    if(pageIndex(m_reportsViewFrame) == activePageIndex())
+  if(m_reportsViewFrame == currentPage())
     m_reportsView->slotPrintView();
-  else if(pageIndex(m_homeViewFrame) == activePageIndex())
+  else if(m_homeViewFrame == currentPage())
     m_homeView->slotPrintView();
-#endif
 }
 
 KMyMoneyViewBase* KMyMoneyView::addBasePage(const QString& title, const QString& icon)
