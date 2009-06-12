@@ -25,9 +25,9 @@
 #include <qwidget.h>
 //Added by qt3to4:
 #include <QList>
-#include <Q3VBoxLayout>
+#include <QVBoxLayout>
+
 class QFile;
-class Q3VBoxLayout;
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -612,7 +612,7 @@ public:
   virtual ~KMyMoneyViewBase();
 
   void setTitle(const QString& title);
-  Q3VBoxLayout* layout(void) const;
+  QVBoxLayout* layout(void) const;
   void addWidget(QWidget* w);
 
   /**

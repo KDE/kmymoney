@@ -37,7 +37,7 @@
 #include <QObject>
 //Added by qt3to4:
 #include <QList>
-#include <Q3VBoxLayout>
+#include <QVBoxLayout>
 #include <Q3Frame>
 #include <Q3CString>
 
@@ -2230,7 +2230,7 @@ class KMyMoneyViewBase::Private {
   public:
     Q3Frame* m_titleLine;
     KMyMoneyTitleLabel* m_titleLabel;
-    Q3VBoxLayout* m_viewLayout;
+    QVBoxLayout* m_viewLayout;
 };
 
 KMyMoneyViewBase::KMyMoneyViewBase(QWidget* parent, const QString& name, const QString& title) :
@@ -2238,7 +2238,7 @@ KMyMoneyViewBase::KMyMoneyViewBase(QWidget* parent, const QString& name, const Q
   d(new Private)
 {
   setAccessibleName(name);
-  d->m_viewLayout = new Q3VBoxLayout(this);
+  d->m_viewLayout = new QVBoxLayout(this);
   d->m_viewLayout->setSpacing( 6 );
   d->m_viewLayout->setMargin( 0 );
 
@@ -2267,7 +2267,7 @@ void KMyMoneyViewBase::addWidget(QWidget* w)
   d->m_viewLayout->addWidget(w);
 }
 
-Q3VBoxLayout* KMyMoneyViewBase::layout(void) const
+QVBoxLayout* KMyMoneyViewBase::layout(void) const
 {
   return d->m_viewLayout;
 }

@@ -27,8 +27,9 @@
 #include "importinterface.h"
 
 KMyMoneyPlugin::ImportInterface::ImportInterface(QObject* parent, const char* name) :
-  QObject(parent, name)
+  QObject(parent)
 {
+	setObjectName(name);
 }
 
 #include "importinterface.moc"

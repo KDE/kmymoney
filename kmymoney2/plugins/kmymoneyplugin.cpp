@@ -33,8 +33,9 @@
 #include "kmymoneyplugin.h"
 
 KMyMoneyPlugin::Plugin::Plugin(QObject* o, const char* name) :
-  QObject(o, name)
+  QObject(o)
 {
+	setObjectName(name);
 }
 
 KMyMoneyPlugin::Plugin::~Plugin()
@@ -86,17 +87,26 @@ KToggleAction* KMyMoneyPlugin::Plugin::toggleAction(const QString& actionName) c
 
 KMyMoneyPlugin::ViewInterface* KMyMoneyPlugin::Plugin::viewInterface() const
 {
+#warning "port to kde4"
+#if 0
   return static_cast<ViewInterface*>( parent()->child( 0, "KMyMoneyPlugin::ViewInterface" ) );
+#endif
 }
 
 KMyMoneyPlugin::StatementInterface* KMyMoneyPlugin::Plugin::statementInterface() const
 {
+#warning "port to kde4"
+#if 0
   return static_cast<StatementInterface*>( parent()->child( 0, "KMyMoneyPlugin::StatementInterface" ) );
+#endif
 }
 
 KMyMoneyPlugin::ImportInterface* KMyMoneyPlugin::Plugin::importInterface() const
 {
+#warning "port to kde4"
+#if 0
   return static_cast<ImportInterface*>( parent()->child( 0, "KMyMoneyPlugin::ImportInterface" ) );
+#endif
 }
 
 #include "kmymoneyplugin.moc"

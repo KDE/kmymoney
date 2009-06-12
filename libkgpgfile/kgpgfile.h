@@ -22,6 +22,7 @@
 #include <QObject>
 #include <QString>
 #include <QStringList>
+#include <QEventLoop>
 //Added by qt3to4:
 #include <Q3CString>
 #include <Q3ValueList>
@@ -74,10 +75,12 @@ public:
   virtual void close(void);
   virtual void flush(void);
 
-  virtual Offset size(void) const { return 0; };
+  // Port to Qt4
+  // Btw is this function really needed ?
+  //virtual Offset size(void) const { return 0; };
 
-  virtual Q_LONG read(char *data, Q_ULONG maxlen);
-  virtual Q_LONG write(const char *data, Q_ULONG maxlen);
+  virtual qint64 read(char *data, qint64 maxlen);
+  virtual qint64 write(const char *data, qint64 maxlen);
   virtual QByteArray readAll(void);
 
   virtual int getch(void);
@@ -164,7 +167,7 @@ protected slots:
 private:
   void init(void);
   bool startProcess(const QStringList& args);
-  Q_LONG _write(const char *data, Q_ULONG maxlen);
+  qint64 _write(const char *data, qint64 maxlen);
   bool open(int mode, const QString&, bool skipPasswd);
 
 private:
@@ -176,14 +179,15 @@ private:
   QString m_homedir;
 
   K3ShellProcess* m_process;
+  QEventLoop* m_event;
 
   QLinkedList<QByteArray> m_recipient;
   QByteArray m_ungetchBuffer;
   QByteArray m_errmsg;
   int      m_exitStatus;
-  Q_LONG  m_readRemain;
-  char*   m_ptrRemain;
-  bool    m_needExitLoop;
+  qint64   m_readRemain;
+  char*    m_ptrRemain;
+  bool     m_needExitLoop;
 };
 
 #endif

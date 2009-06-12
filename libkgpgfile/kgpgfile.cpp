@@ -68,12 +68,15 @@ KGPGFile::KGPGFile(const QString& fn, const QString& homedir, const QString& opt
   m_options(options),
   m_homedir(homedir),
   m_readRemain(0),
-  m_needExitLoop(false)
+  m_needExitLoop(false),
+  m_event(0)
 {
   setName(fn);
   m_exitStatus = -2;
   m_comment = "created by KGPGFile";
   // qDebug("ungetchbuffer %d", m_ungetchBuffer.length());
+  m_event = new QEventLoop(this);
+
 }
 
 KGPGFile::~KGPGFile()
@@ -180,7 +183,7 @@ bool KGPGFile::open(int mode, const QString& cmdArgs, bool skipPasswd)
       args << "--no-default-recipient" << QString("\"%1\"").arg(m_fn);
     }
   } else {
-    args = QStringList::split(" ", cmdArgs);
+	  args = cmdArgs.split(" ");
   }
 
   Q3CString pwd;
@@ -277,7 +280,7 @@ void KGPGFile::close(void)
         m_process->closeStdin();
         // now wait for GPG to finish
         m_needExitLoop = true;
-        qApp->enter_loop();
+        event->exec(QEventLoop::ExcludeUserInputEvents);
       } else
         m_process->kill();
 
@@ -287,7 +290,7 @@ void KGPGFile::close(void)
         m_process->closeStdout();
         // now wait for GPG to finish
         m_needExitLoop = true;
-        qApp->enter_loop();
+        event->exec(QEventLoop::ExcludeUserInputEvents);
       } else
         m_process->kill();
     }
@@ -346,7 +349,7 @@ int KGPGFile::putch(int c)
   return EOF;
 }
 
-Q_LONG KGPGFile::write(const char *data, Q_ULONG maxlen)
+qint64 KGPGFile::write(const char *data, qint64 maxlen)
 {
   if(!isOpen())
     return EOF;
@@ -356,7 +359,7 @@ Q_LONG KGPGFile::write(const char *data, Q_ULONG maxlen)
   return _write(data, maxlen);
 }
 
-Q_LONG KGPGFile::_write(const char *data, Q_ULONG maxlen)
+qint64 KGPGFile::_write(const char *data, qint64 maxlen)
 {
   if(!m_process)
     return EOF;
@@ -366,7 +369,7 @@ Q_LONG KGPGFile::_write(const char *data, Q_ULONG maxlen)
   if(m_process->writeStdin(data, maxlen)) {
     // wait until the data has been written
     m_needExitLoop = true;
-    qApp->enter_loop();
+    event->exec(QEventLoop::ExcludeUserInputEvents);
     if(!m_process)
       return EOF;
     return maxlen;
@@ -375,7 +378,7 @@ Q_LONG KGPGFile::_write(const char *data, Q_ULONG maxlen)
     return EOF;
 }
 
-Q_LONG KGPGFile::read(char *data, Q_ULONG maxlen)
+qint64 KGPGFile::read(char *data, qint64 maxlen)
 {
   // char *oridata = data;
   if(maxlen == 0)
@@ -386,7 +389,7 @@ Q_LONG KGPGFile::read(char *data, Q_ULONG maxlen)
   if(!isReadable())
     return EOF;
 
-  Q_ULONG nread = 0;
+  qint64 nread = 0;
   if(!m_ungetchBuffer.isEmpty()) {
     unsigned l = m_ungetchBuffer.length();
     if(maxlen < l)
@@ -414,7 +417,7 @@ Q_LONG KGPGFile::read(char *data, Q_ULONG maxlen)
   if(m_readRemain) {
     m_process->resume();
     m_needExitLoop = true;
-    qApp->enter_loop();
+    event->exec(QEventLoop::ExcludeUserInputEvents);
   }
   // if nothing has been read (maxlen-m_readRemain == 0) then we assume EOF
   if((maxlen - m_readRemain) == 0) {
@@ -463,7 +466,7 @@ void KGPGFile::slotGPGExited(K3Process* )
 
   if(m_needExitLoop) {
     m_needExitLoop = false;
-    qApp->exit_loop();
+    event->quit();
   }
 }
 
@@ -493,7 +496,7 @@ void KGPGFile::slotDataFromGPG(K3Process* proc, char* buf, int len)
     // wake up the recipient
     if(m_needExitLoop) {
       m_needExitLoop = false;
-      qApp->exit_loop();
+      event->quit();
     }
   }
   // qDebug("end slotDataFromGPG");
@@ -502,10 +505,10 @@ void KGPGFile::slotDataFromGPG(K3Process* proc, char* buf, int len)
 void KGPGFile::slotErrorFromGPG(K3Process *, char *buf, int len)
 {
   // qDebug("Received %d bytes on stderr", len);
-  Q3CString msg;
-  msg.setRawData(buf, len);
+  QByteArray msg;
+  msg.fromRawData(buf, len);
   m_errmsg += msg;
-  msg.resetRawData(buf, len);
+  msg.clear();
 }
 
 void KGPGFile::slotSendDataToGPG(K3Process *)
@@ -513,7 +516,7 @@ void KGPGFile::slotSendDataToGPG(K3Process *)
   // qDebug("wrote stdin");
   if(m_needExitLoop) {
     m_needExitLoop = false;
-    qApp->exit_loop();
+    event->quit();
   }
 }
 
@@ -521,7 +524,7 @@ bool KGPGFile::GPGAvailable(void)
 {
   QString output;
   char  buffer[1024];
-  Q_LONG len;
+  qint64 len;
 
   KGPGFile file;
   file.open(QIODevice::ReadOnly, "--version", true);
@@ -537,7 +540,7 @@ bool KGPGFile::keyAvailable(const QString& name)
 {
   QString output;
   char  buffer[1024];
-  Q_LONG len;
+  long len;
 
   KGPGFile file;
   QString args = QString("--list-keys --list-options no-show-photos %1").arg(name);
@@ -555,7 +558,7 @@ void KGPGFile::publicKeyList(QStringList& list)
   QMap<QString, QString> map;
   QString output;
   char  buffer[1024];
-  Q_LONG len;
+  long len;
 
   list.clear();
   KGPGFile file;
@@ -574,12 +577,13 @@ void KGPGFile::publicKeyList(QStringList& list)
     uid:u::::2001-11-29::00A393737BC120C98A6402B921599F6D72058DD8::Thomas Baumgart <ipwizard@users.sourceforge.net>:
     sub:u:1024:16:85968A70D1F83C2B:2001-06-23::::::e:
   */
-  QStringList lines = QStringList::split("\n", output);
+ 
+  QStringList lines = output.split("\n");
   QStringList::iterator it;
   QString currentKey;
   for(it = lines.begin(); it != lines.end(); ++it) {
     // qDebug("Parsing: '%s'", (*it).data());
-    QStringList fields = QStringList::split(":", (*it), true);
+    QStringList fields = (*it).split(":");
     QString val;
     if(fields[0] == "pub") {
       currentKey = fields[4];
@@ -598,7 +602,7 @@ void KGPGFile::secretKeyList(QStringList& list)
 {
   QString output;
   char  buffer[1024];
-  Q_LONG len;
+  long len;
 
   list.clear();
   KGPGFile file;
@@ -617,12 +621,12 @@ void KGPGFile::secretKeyList(QStringList& list)
     sec::1024:17:59B0F826D2B08440:2005-01-03:2010-01-02:::KMyMoney emergency data recovery <kmymoney-recover@users.sourceforge.net>:::
     ssb::2048:16:B3DABDC48C0FE2F3:2005-01-03:::::::
   */
-  QStringList lines = QStringList::split("\n", output);
+  QStringList lines = output.split("\n");
   QStringList::iterator it;
   QString currentKey;
   for(it = lines.begin(); it != lines.end(); ++it) {
     // qDebug("Parsing: '%s'", (*it).data());
-    QStringList fields = QStringList::split(":", (*it), true);
+	QStringList fields = (*it).split(":");
     if(fields[0] == "sec") {
       currentKey = fields[4];
       list << QString("%1:%2").arg(currentKey).arg(fields[9]);
