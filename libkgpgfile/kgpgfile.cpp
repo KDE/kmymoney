@@ -576,7 +576,7 @@ void KGPGFile::publicKeyList(QStringList& list)
     uid:u::::2001-11-29::00A393737BC120C98A6402B921599F6D72058DD8::Thomas Baumgart <ipwizard@users.sourceforge.net>:
     sub:u:1024:16:85968A70D1F83C2B:2001-06-23::::::e:
   */
-  QStringList lines = QStringList::split("\n", output);
+  QStringList lines = output.split("\n");
   QStringList::iterator it;
   QString currentKey;
   for(it = lines.begin(); it != lines.end(); ++it) {
@@ -619,7 +619,7 @@ void KGPGFile::secretKeyList(QStringList& list)
     sec::1024:17:59B0F826D2B08440:2005-01-03:2010-01-02:::KMyMoney emergency data recovery <kmymoney-recover@users.sourceforge.net>:::
     ssb::2048:16:B3DABDC48C0FE2F3:2005-01-03:::::::
   */
-  QStringList lines = QStringList::split("\n", output);
+  QStringList lines = output.split("\n");
   QStringList::iterator it;
   QString currentKey;
   for(it = lines.begin(); it != lines.end(); ++it) {
