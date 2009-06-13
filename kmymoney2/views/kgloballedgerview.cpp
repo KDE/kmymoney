@@ -161,7 +161,7 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name )
   m_inEditMode(false)
 {
   d->m_mousePressFilter = new MousePressFilter((QWidget*)this);
-  d->m_action = KMyMoneyRegister::ActionNone;;
+  d->m_action = KMyMoneyRegister::ActionNone;
 
   // create the toolbar frame at the top of the view
   m_toolbarFrame = new QFrame(this);
@@ -174,16 +174,6 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name )
   m_accountComboBox = new KMyMoneyAccountCombo(m_toolbar, "AccountCombo");
   m_toolbar->addWidget(m_accountComboBox);
 
-#if 0
-  // the account button at the right of the toolbar
-  // I leave the code commented here for a while, so that I see
-  // how I can add other  widgets at this point
-  KIconLoader *il = KIconLoader::global();
-  m_toolbar->insertButton(il->loadIcon("document", KIconLoader::Small, KIconLoader::SizeSmall),
-                        1,true,i18n("Account"));
-  //m_toolbar->setMaximumSize(50,20);
-  m_toolbar->alignItemRight(1);
-#endif
   m_toolbar->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
   layout()->addWidget(m_toolbarFrame);
 

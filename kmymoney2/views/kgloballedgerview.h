@@ -34,9 +34,7 @@
 #include <QFrame>
 #include <QList>
 #include <QLabel>
-
 #include <QEvent>
-#include <Q3VBoxLayout>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

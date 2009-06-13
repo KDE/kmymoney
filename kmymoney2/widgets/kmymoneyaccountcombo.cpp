@@ -29,7 +29,7 @@
 #include <QApplication>
 //Added by qt3to4:
 #include <QMouseEvent>
-#include <Q3ValueList>
+#include <QList>
 #include <QKeyEvent>
 
 // ----------------------------------------------------------------------------
@@ -48,16 +48,13 @@ KMyMoneyAccountCombo::KMyMoneyAccountCombo( QWidget* parent, const char* name ) 
   m_mlbDown(false)
 {
 #warning "port to kde4 (crash"
-#if 0
 #ifndef KMM_DESIGNER
   m_completion = new kMyMoneyAccountCompletion(this);
 
   connect(this, SIGNAL(clicked()), this, SLOT(slotButtonPressed()));
   connect(m_completion, SIGNAL(itemSelected(const QString&)), this, SLOT(slotSelected(const QString&)));
 #endif
-#else
-  m_completion = 0;
-#endif
+
   // make sure that we can display a minimum of characters
   QFontMetrics fm(font());
   setMinimumWidth(fm.maxWidth()*15);
@@ -114,7 +111,7 @@ void KMyMoneyAccountCombo::setText(const QString& txt)
   changeItem(txt, currentItem());
 }
 
-int KMyMoneyAccountCombo::loadList(const QString& baseName, const Q3ValueList<QString>& accountIdList, const bool clear)
+int KMyMoneyAccountCombo::loadList(const QString& baseName, const QList<QString>& accountIdList, const bool clear)
 {
   AccountSet set;
 
@@ -124,7 +121,7 @@ int KMyMoneyAccountCombo::loadList(const QString& baseName, const Q3ValueList<QS
 int KMyMoneyAccountCombo::loadList(KMyMoneyUtils::categoryTypeE typeMask)
 {
   AccountSet set;
-  Q3ValueList<int> typeList;
+  QList<int> typeList;
 
   if(typeMask & KMyMoneyUtils::asset) {
     set.addAccountGroup(MyMoneyAccount::Asset);
@@ -200,16 +197,16 @@ int KMyMoneyAccountCombo::count(void) const
   return m_completion->selector()->accountList().count();
 }
 
-QStringList KMyMoneyAccountCombo::accountList(const Q3ValueList<MyMoneyAccount::accountTypeE>& list) const
+QStringList KMyMoneyAccountCombo::accountList(const QList<MyMoneyAccount::accountTypeE>& list) const
 {
   return m_completion->selector()->accountList(list);
 }
 
-int KMyMoneyAccountCombo::loadList(const Q3ValueList<int>& list)
+int KMyMoneyAccountCombo::loadList(const QList<int>& list)
 {
   // FIXME make the caller construct the AccountSet directly
   AccountSet set;
-  Q3ValueList<int>::const_iterator it;
+  QList<int>::const_iterator it;
   for(it = list.begin(); it != list.end(); ++it) {
     set.addAccountType(static_cast<MyMoneyAccount::accountTypeE>(*it));
   }

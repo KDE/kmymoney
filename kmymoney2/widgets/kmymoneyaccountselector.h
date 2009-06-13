@@ -1,5 +1,4 @@
-//Added by qt3to4:
-#include <Q3ValueList>
+
 /***************************************************************************
                              kmymoneyaccountselector.h
                              -------------------
@@ -22,6 +21,8 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
+//Added by qt3to4:
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -74,7 +75,7 @@ public:
     *             will be returned.
     * @return QStringList of account ids
     */
-  QStringList accountList(const Q3ValueList<MyMoneyAccount::accountTypeE>& list = Q3ValueList<MyMoneyAccount::accountTypeE>()) const;
+  QStringList accountList(const QList<MyMoneyAccount::accountTypeE>& list = QList<MyMoneyAccount::accountTypeE>()) const;
 
   void setSelectionMode(Q3ListView::SelectionMode mode);
 
@@ -150,7 +151,7 @@ protected:
   KPushButton*              m_noAccountButton;
   KPushButton*              m_incomeCategoriesButton;
   KPushButton*              m_expenseCategoriesButton;
-  Q3ValueList<int>           m_typeList;
+  QList<int>                m_typeList;
   QStringList               m_accountList;
 };
 
@@ -167,7 +168,7 @@ public:
   void clear(void);
 
   int load(kMyMoneyAccountSelector* selector);
-  int load(kMyMoneyAccountSelector* selector, const QString& baseName, const Q3ValueList<QString>& accountIdList, const bool clear = false);
+  int load(kMyMoneyAccountSelector* selector, const QString& baseName, const QList<QString>& accountIdList, const bool clear = false);
 
   int count(void) const { return m_count; }
 
@@ -181,8 +182,8 @@ protected:
 private:
   int                                      m_count;
   MyMoneyFile*                             m_file;
-  Q3ValueList<MyMoneyAccount::accountTypeE> m_typeList;
-  Q3ListViewItem*                           m_favorites;
+  QList<MyMoneyAccount::accountTypeE>      m_typeList;
+  Q3ListViewItem*                          m_favorites;
   bool                                     m_hideClosedAccounts;
 };
 #endif

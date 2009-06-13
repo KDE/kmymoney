@@ -39,7 +39,7 @@
 //Added by qt3to4:
 #include <QMouseEvent>
 #include <QKeyEvent>
-#include <Q3ValueList>
+#include <QList>
 class kMyMoneyAccountCompletion;
 
 /**
@@ -68,12 +68,12 @@ public:
     * @param clear if true (default) clears the widget before populating
     * @return This method returns the number of accounts loaded into the list
     */
-  int loadList(const QString& baseName, const Q3ValueList<QString>& accountIdList, const bool clear = true);
+  int loadList(const QString& baseName, const QList<QString>& accountIdList, const bool clear = true);
 
-  QStringList accountList(const Q3ValueList<MyMoneyAccount::accountTypeE>& list = Q3ValueList<MyMoneyAccount::accountTypeE>()) const;
+  QStringList accountList(const QList<MyMoneyAccount::accountTypeE>& list = QList<MyMoneyAccount::accountTypeE>()) const;
 
   int loadList(KMyMoneyUtils::categoryTypeE typeMask);
-  int loadList(const Q3ValueList<int>& list);
+  int loadList(const QList<int>& list);
   int loadList(MyMoneyAccount::accountTypeE type);
 
   void setSelected(const QString& id);

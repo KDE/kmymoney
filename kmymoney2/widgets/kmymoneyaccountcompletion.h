@@ -28,7 +28,7 @@
 
 #include <qwidget.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -50,7 +50,7 @@ public:
   kMyMoneyAccountCompletion(QWidget *parent=0, const char *name=0);
   virtual ~kMyMoneyAccountCompletion();
 
-  QStringList accountList(const Q3ValueList<MyMoneyAccount::accountTypeE>& list = Q3ValueList<MyMoneyAccount::accountTypeE>()) const { return selector()->accountList(list); }
+  QStringList accountList(const QList<MyMoneyAccount::accountTypeE>& list = QList<MyMoneyAccount::accountTypeE>()) const { return selector()->accountList(list); }
 
   /**
     * reimplemented from kMyMoneyCompletion

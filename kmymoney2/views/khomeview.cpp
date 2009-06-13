@@ -86,7 +86,7 @@
 #define KMM_KDCHART_PROPSET_NORMAL_DATA KDCHART_PROPSET_NORMAL_DATA
 #endif
 
-//using namespace reports;
+using namespace reports;
 
 KHomeView::KHomeView(QWidget *parent, const char *name ) :
   KMyMoneyViewBase(parent, name, i18n("Home")),
@@ -225,7 +225,7 @@ void KHomeView::loadView(void)
 
           case 3:         // payment accounts
             // Check if preferred accounts are shown separately
-            if(settings.find("2") == settings.end()) {
+            if(settings.contains("2")) {
               showAccounts(static_cast<paymentTypeE> (Payment | Preferred),
                            i18n("Payment Accounts"));
             } else {
@@ -263,7 +263,6 @@ void KHomeView::loadView(void)
     m_part->write("<div id=\"vieweffect\"></div>");
     m_part->write(footer);
     m_part->end();
-
   }
 }
 
@@ -384,7 +383,7 @@ void KHomeView::showPayments(void)
     // if ((*d_it).isFinished() || (*d_it).nextPayment((*d_it).lastPayment()) == QDate())
     if ((*d_it).isFinished())
     {
-      d_it = schedule.remove(d_it);
+      d_it = schedule.erase(d_it);
       continue;
     }
     ++d_it;
@@ -396,7 +395,7 @@ void KHomeView::showPayments(void)
     // if ((*d_it).isFinished() || (*d_it).nextPayment((*d_it).lastPayment()) == QDate())
     if ((*d_it).isFinished())
     {
-      d_it = overdues.remove(d_it);
+      d_it = overdues.erase(d_it);
       continue;
     }
     ++d_it;
@@ -451,7 +450,7 @@ void KHomeView::showPayments(void)
       // make sure to not repeat overdues later again
       for(it_f = schedule.begin(); it_f != schedule.end();) {
         if((*it).id() == (*it_f).id()) {
-          it_f = schedule.remove(it_f);
+          it_f = schedule.erase(it_f);
           continue;
         }
         ++it_f;
@@ -473,7 +472,7 @@ void KHomeView::showPayments(void)
 
         //if nextDueDate is still currentDate then remove it from scheduled payments
         if ((*t_it).nextDueDate() == QDate::currentDate()) {
-          t_it = schedule.remove(t_it);
+          t_it = schedule.erase(t_it);
 
           //break it that was the last schedule
           if (t_it == schedule.end())
@@ -555,7 +554,7 @@ void KHomeView::showPayments(void)
         // we remove it from the list
         QDate nextDate = (*it).nextDueDate();
         if(!nextDate.isValid()) {
-          schedule.remove(it);
+          schedule.erase(it);
           continue;
         }
 
@@ -576,7 +575,7 @@ void KHomeView::showPayments(void)
         // for single occurence we have reported everything so we
         // better get out of here.
         if((*it).occurence() == MyMoneySchedule::OCCUR_ONCE) {
-          schedule.remove(it);
+          schedule.erase(it);
           continue;
         }
 
@@ -690,7 +689,7 @@ void KHomeView::showAccounts(KHomeView::paymentTypeE type, const QString& header
           // never show a category account
           // Note: This might be different in a future version when
           //       the homepage also shows category based information
-          it = accounts.remove(it);
+          it = accounts.erase(it);
           break;
 
         // Asset and Liability accounts are only shown if they
@@ -701,7 +700,7 @@ void KHomeView::showAccounts(KHomeView::paymentTypeE type, const QString& header
           // if preferred accounts are requested, then keep in list
           if((*it).value("PreferredAccount") != "Yes"
           || (type & Preferred) == 0) {
-            it = accounts.remove(it);
+            it = accounts.erase(it);
           }
           break;
 
@@ -715,32 +714,32 @@ void KHomeView::showAccounts(KHomeView::paymentTypeE type, const QString& header
           switch(type & (Payment | Preferred)) {
             case Payment:
               if((*it).value("PreferredAccount") == "Yes")
-                it = accounts.remove(it);
+                it = accounts.erase(it);
               break;
 
             case Preferred:
               if((*it).value("PreferredAccount") != "Yes")
-                it = accounts.remove(it);
+                it = accounts.erase(it);
               break;
 
             case Payment | Preferred:
               break;
 
             default:
-              it = accounts.remove(it);
+              it = accounts.erase(it);
               break;
           }
           break;
 
         // filter all accounts that are not used on homepage views
         default:
-          it = accounts.remove(it);
+          it = accounts.erase(it);
           break;
       }
 
     } else if((*it).isClosed() || (*it).isInvest()) {
       // don't show if closed or a stock account
-      it = accounts.remove(it);
+      it = accounts.erase(it);
     }
 
     // if we still point to the same account we keep it in the list and move on ;-)
@@ -1185,8 +1184,6 @@ void KHomeView::slotOpenUrl(const KUrl &url, const KParts::OpenUrlArguments&,con
 
 void KHomeView::showAssetsLiabilities(void)
 {
-  #warning #Port to KDE4
-  #if 0
   QList<MyMoneyAccount> accounts;
   QList<MyMoneyAccount>::Iterator it;
   QMap<QString, MyMoneyAccount> nameAssetsIdx;
@@ -1367,13 +1364,10 @@ void KHomeView::showAssetsLiabilities(void)
     m_part->write("</table>");
     m_part->write("</div></div>");
   }
-  #endif
 }
 
 void KHomeView::showBudget(void)
 {
-#warning "port to kde4"
-#if 0
     MyMoneyFile* file = MyMoneyFile::instance();
 
   if ( file->countBudgets() ) {
@@ -1464,7 +1458,7 @@ void KHomeView::showBudget(void)
         while ( it_row != (*it_innergroup).end() )
         {
           //column number is 1 because the report includes only current month
-          if(it_row.data()[eBudgetDiff][1].isNegative()) {
+          if(it_row.value()[eBudgetDiff][1].isNegative()) {
             //get report account to get the name later
             ReportAccount rowname = it_row.key();
 
@@ -1477,9 +1471,9 @@ void KHomeView::showBudget(void)
             m_part->write(QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd"));
 
             //get values from grid
-            MyMoneyMoney actualValue = it_row.data()[eActual][1];
-            MyMoneyMoney budgetValue = it_row.data()[eBudget][1];
-            MyMoneyMoney budgetDiffValue = it_row.data()[eBudgetDiff][1];
+            MyMoneyMoney actualValue = it_row.value()[eActual][1];
+            MyMoneyMoney budgetValue = it_row.value()[eBudget][1];
+            MyMoneyMoney budgetDiffValue = it_row.value()[eBudgetDiff][1];
 
             //format amounts
             QString actualAmount = actualValue.formatMoney(file->baseCurrency().tradingSymbol(), prec);
@@ -1510,7 +1504,6 @@ void KHomeView::showBudget(void)
     }
     m_part->write("</table></div></div>");
   }
-#endif
 }
 
 QString KHomeView::showColoredAmount(const QString& amount, bool isNegative)
@@ -1564,7 +1557,6 @@ MyMoneyMoney KHomeView::forecastPaymentBalance(const MyMoneyAccount& acc, const 
 void KHomeView::showCashFlowSummary()
 {
 #warning "port to kde4"
-#if 0
   MyMoneyTransactionFilter filter;
   MyMoneyMoney incomeValue;
   MyMoneyMoney expenseValue;
@@ -1668,7 +1660,7 @@ void KHomeView::showCashFlowSummary()
     }
 
     MyMoneyAccount acc = (*sched_it).account();
-    if(acc.id()) {
+    if(acc.id() != QString()) {
       MyMoneyTransaction transaction = (*sched_it).transaction();
       // only show the entry, if it is still active
 
@@ -1944,12 +1936,8 @@ void KHomeView::showCashFlowSummary()
   m_part->write(QString("<td align=\"right\">%2</td>").arg(showColoredAmount(amountProfit, profitValue.isNegative())));
 
   m_part->write("</tr>");
-
   m_part->write("</table>");
-
   m_part->write("</div></div>");
-
-#endif
 }
 
 // Make sure, that these definitions are only used within this file
