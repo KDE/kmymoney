@@ -76,7 +76,7 @@
           <property name="title">
             <string>Payment information</string>
           </property>
-          <layout class="QVBoxLayout">
+          <layout class="QVBoxLayout" name="m_paymentInformationLayout">
             <item>
               <layout class="QHBoxLayout">
                 <item>

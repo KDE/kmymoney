@@ -79,11 +79,11 @@ KEditScheduleDlg::KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget *par
   d->m_requiredFields = new kMandatoryFieldGroup (this);
   d->m_requiredFields->setOkButton(buttonOk); // button to be enabled when all fields present
 #warning "port to kde4"
-#if 0
+
   // make sure, we have a tabbar with the form
   // insert it after the horizontal line
   m_paymentInformationLayout->insertWidget(2, m_form->tabBar(m_form->parentWidget()));
-#endif
+
   // we never need to see the register
   m_register->hide();
 
@@ -353,10 +353,10 @@ const MyMoneySchedule& KEditScheduleDlg::schedule(void) const
 
     d->m_schedule.setType(MyMoneySchedule::TYPE_BILL);
 #warning "port to kde4"
-#if 0
+
     KMyMoneyTransactionForm::TabBar* tabbar = dynamic_cast<KMyMoneyTransactionForm::TabBar*>(d->m_editor->haveWidget("tabbar"));
     if(tabbar) {
-      switch(static_cast<KMyMoneyRegister::Action>(tabbar->currentTab())) {
+      switch(static_cast<KMyMoneyRegister::Action>(tabbar->currentIndex())) {
         case KMyMoneyRegister::ActionDeposit:
           d->m_schedule.setType(MyMoneySchedule::TYPE_DEPOSIT);
           break;
@@ -371,7 +371,7 @@ const MyMoneySchedule& KEditScheduleDlg::schedule(void) const
     } else {
       qDebug("No tabbar found in KEditScheduleDlg::schedule(). Defaulting type to BILL");
     }
-#endif
+
     d->m_schedule.setAutoEnter(m_autoEnterEdit->isChecked());
     d->m_schedule.setPaymentType(static_cast<MyMoneySchedule::paymentTypeE>(m_paymentMethodEdit->currentItem()));
     if(m_endSeriesEdit->isEnabled() && m_endSeriesEdit->isChecked()) {
@@ -395,64 +395,71 @@ MyMoneyTransaction KEditScheduleDlg::transaction(void) const
   t.setEntryDate(QDate());
   return t;
 }
-#if 0
-QDate KEditScheduleDlg::adjustDate(const QDate& _date) const
-{
-  QDate date(_date);
-  if (d->m_schedule.weekendOption() != MyMoneySchedule::MoveNothing) {
-    int dayOfWeek = date.dayOfWeek();
-    if (dayOfWeek >= 6) {
-      if (d->m_schedule.weekendOption() == MyMoneySchedule::MoveFriday) {
-        if (dayOfWeek == 7)
-          date = date.addDays(-2);
-        else
-          date = date.addDays(-1);
-      } else {
-        if (dayOfWeek == 6)
-          date = date.addDays(2);
-        else
-          date = date.addDays(1);
-      }
-    }
-  }
-  return date;
-}
-#endif
 
 bool KEditScheduleDlg::focusNextPrevChild(bool next)
 {
   bool  rc = false;
 #warning "port to kde4"
-#if 0
+
   // qDebug("KEditScheduleDlg::focusNextPrevChild(editmode=%s)", m_inEditMode ? "true" : "false");
   QWidget *w = 0;
   QWidget *currentWidget;
 
   w = qApp->focusWidget();
-  while(w && d->m_tabOrderWidgets.find(w) == -1) {
+  while(w && !d->m_tabOrderWidgets.contains(w)) {
     // qDebug("'%s' not in list, use parent", w->className());
     w = w->parentWidget();
   }
+
+  QList<QWidget*>::iterator it_w = d->m_tabOrderWidgets.begin();
   // if(w) qDebug("tab order is at '%s'", w->className());
-  currentWidget = d->m_tabOrderWidgets.current();
-  w = next ? d->m_tabOrderWidgets.next() : d->m_tabOrderWidgets.prev();
+  while(it_w != d->m_tabOrderWidgets.end()) {
+      if ((*it_w)->hasFocus()) {
+        currentWidget = (*it_w);
+        break;
+      }
+      ++it_w;
+  }
+
+  if(!currentWidget)
+    currentWidget = (*it_w);
+
+  if(next) {
+      ++it_w;
+  } else {
+      --it_w;
+  }
+
 
   do {
-    if(!w) {
-      w = next ? d->m_tabOrderWidgets.first() : d->m_tabOrderWidgets.last();
+    if(!(*it_w)) {
+      if(next) {
+        it_w = d->m_tabOrderWidgets.begin();
+      } else {
+        it_w = d->m_tabOrderWidgets.end();
+        --it_w;
+      }
     }
 
-    if(w != currentWidget
-    && ((w->focusPolicy() & Qt::TabFocus) == Qt::TabFocus)
-    && w->isVisible() && w->isEnabled()) {
+    if((*it_w) != currentWidget
+    && (((*it_w)->focusPolicy() & Qt::TabFocus) == Qt::TabFocus)
+    && (*it_w)->isVisible() && (*it_w)->isEnabled()) {
       // qDebug("Selecting '%s' as focus", w->className());
-      w->setFocus();
+      (*it_w)->setFocus();
       rc = true;
       break;
     }
-    w = next ? d->m_tabOrderWidgets.next() : d->m_tabOrderWidgets.prev();
-  } while(w != currentWidget);
-#endif
+    if(next) {
+      ++it_w;
+    } else {
+      if(it_w != d->m_tabOrderWidgets.begin()) {
+        --it_w;
+      } else {
+        break;
+      }
+    }
+  } while((*it_w) != currentWidget && it_w != d->m_tabOrderWidgets.end());
+
   return rc;
 }
 

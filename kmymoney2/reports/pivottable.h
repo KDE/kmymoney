@@ -30,6 +30,7 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
+#warning #Port to KDE4
 //#include "kreportchartview.h"
 #include "mymoneyfile.h"
 #include "mymoneyreport.h"

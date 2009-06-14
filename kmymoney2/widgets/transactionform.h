@@ -108,8 +108,6 @@ private:
     * need to know which is which
     */
   QMap<int, int>     m_idMap;
-  
-  
 };
 
 typedef enum {

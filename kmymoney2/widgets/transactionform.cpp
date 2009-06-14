@@ -25,7 +25,7 @@
 #include <QLayout>
 #include <QPalette>
 //Added by qt3to4:
-#include <Q3Frame>
+#include <QFrame>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -88,7 +88,7 @@ QWidget* TabBar::widget(int id) const
   * new values for our own ids which should lie way
   * outside of the range that qt uses
   */
-  QWidget *result=KTabWidget::widget(id);
+  QWidget* result = KTabWidget::widget(id);
   QMap<int, int>::const_iterator it;
   for(it = m_idMap.begin(); it != m_idMap.end(); ++it)
     if(*it == id)
@@ -214,7 +214,7 @@ void TransactionForm::drawContents( QPainter *p, int cx, int cy, int cw, int ch 
 
 bool TransactionForm::focusNextPrevChild(bool next)
 {
-  return Q3Frame::focusNextPrevChild(next);
+  return QFrame::focusNextPrevChild(next);
 }
 
 void TransactionForm::clear(void)
@@ -291,68 +291,54 @@ void TransactionForm::slotActionSelected(int id)
 
 void TransactionForm::setupForm(const MyMoneyAccount& acc)
 {
-    #warning "port to kde4"
-#if 0
   // remove all tabs from the tabbar
-  QTab* tab;
-  for(tab = m_tabBar->tabAt(0); tab; tab = m_tabBar->tabAt(0)) {
-    m_tabBar->removeTab(tab);
+  QWidget* tab;
+  for(tab = m_tabBar->widget(0); tab; tab = m_tabBar->widget(0)) {
+    m_tabBar->removeTab(0);
   }
 
   m_tabBar->show();
-#endif
+
   // important: one needs to add the new tabs first and then
   // change the identifier. Otherwise, addTab() will assign
   // a different value
   switch(acc.accountType()) {
     default:
-#warning "port to kde4"
-#if 0
-      tab = new QTab(i18n("&Deposit"));
-      m_tabBar->addTab(tab, KMyMoneyRegister::ActionDeposit);
-      tab = new QTab(i18n("&Transfer"));
-      m_tabBar->addTab(tab, KMyMoneyRegister::ActionTransfer);
-      tab = new QTab(i18n("&Withdrawal"));
-      m_tabBar->addTab(tab, KMyMoneyRegister::ActionWithdrawal);
-#endif
+      tab = new QWidget();
+      m_tabBar->insertTab(KMyMoneyRegister::ActionDeposit, tab,i18n("&Deposit"));
+      tab = new QWidget();
+      m_tabBar->insertTab(KMyMoneyRegister::ActionTransfer, tab, i18n("&Transfer"));
+      tab = new QWidget();
+      m_tabBar->insertTab(KMyMoneyRegister::ActionWithdrawal, tab, i18n("&Withdrawal"));
       break;
 
     case MyMoneyAccount::CreditCard:
-#warning "port to kde4"
-#if 0
-      tab = new QTab(i18n("&Payment"));
-      m_tabBar->addTab(tab, KMyMoneyRegister::ActionDeposit);
-      tab = new QTab(i18n("&Transfer"));
-      m_tabBar->addTab(tab, KMyMoneyRegister::ActionTransfer);
-      tab = new QTab(i18n("&Charge"));
-      m_tabBar->addTab(tab, KMyMoneyRegister::ActionWithdrawal);
-#endif
+      tab = new QWidget();
+      m_tabBar->insertTab(KMyMoneyRegister::ActionDeposit, tab, i18n("&Payment"));
+      tab = new QWidget();
+      m_tabBar->insertTab(KMyMoneyRegister::ActionTransfer, tab, i18n("&Transfer"));
+      tab = new QWidget();
+      m_tabBar->insertTab(KMyMoneyRegister::ActionWithdrawal, tab, i18n("&Charge"));
       break;
 
     case MyMoneyAccount::Liability:
     case MyMoneyAccount::Loan:
-#warning "port to kde4"
-#if 0
-      tab = new QTab(i18n("&Decrease"));
-      m_tabBar->addTab(tab, KMyMoneyRegister::ActionDeposit);
-      tab = new QTab(i18n("&Transfer"));
-      m_tabBar->addTab(tab, KMyMoneyRegister::ActionTransfer);
-      tab = new QTab(i18n("&Increase"));
-      m_tabBar->addTab(tab, KMyMoneyRegister::ActionWithdrawal);
-#endif
+      tab = new QWidget();
+      m_tabBar->insertTab(KMyMoneyRegister::ActionDeposit, tab, i18n("&Decrease"));
+      tab = new QWidget();
+      m_tabBar->insertTab(KMyMoneyRegister::ActionTransfer, tab, i18n("&Transfer"));
+      tab = new QWidget();
+      m_tabBar->insertTab(KMyMoneyRegister::ActionWithdrawal, tab, i18n("&Increase"));
       break;
 
     case MyMoneyAccount::Asset:
     case MyMoneyAccount::AssetLoan:
-#warning "port to kde4"
-#if 0
-      tab = new QTab(i18n("&Increase"));
-      m_tabBar->addTab(tab, KMyMoneyRegister::ActionDeposit);
-      tab = new QTab(i18n("&Transfer"));
-      m_tabBar->addTab(tab, KMyMoneyRegister::ActionTransfer);
-      tab = new QTab(i18n("&Decrease"));
-      m_tabBar->addTab(tab, KMyMoneyRegister::ActionWithdrawal);
-#endif
+      tab = new QWidget();
+      m_tabBar->insertTab(KMyMoneyRegister::ActionDeposit, tab, i18n("&Increase"));
+      tab = new QWidget();
+      m_tabBar->insertTab(KMyMoneyRegister::ActionTransfer, tab, i18n("&Transfer"));
+      tab = new QWidget();
+      m_tabBar->insertTab(KMyMoneyRegister::ActionWithdrawal, tab, i18n("&Decrease"));
       break;
 
     case MyMoneyAccount::Income:
