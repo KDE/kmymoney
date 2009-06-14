@@ -282,7 +282,7 @@ int main(int argc, char *argv[])
     } while(0);
   } catch(MyMoneyException *e) {
     KMessageBox::detailedError(0, i18n("Uncaught error. Please report the details to the developers"),
-                               QString("%1 in file %2 line %3").arg(e->what()).arg(e->file()).arg(e->line()));
+                               i18n("%1 in file %2 line %3",e->what(),e->file(),e->line()));
     throw e;
   }
   delete a;
