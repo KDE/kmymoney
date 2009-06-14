@@ -5,17 +5,22 @@ Init=new KInstance("kmmwidgets");
 
 
 [KMyMoneyTitleLabel]
+Includes=kmymoney/kmymoneytitlelabel.h
 
 [kMyMoneyEdit]
+Includes=kmymoney/kmymoneyedit.h
 
 [kMyMoneyDateInput]
+Include=kmymoney/kmymoneydateinput.h
 
 [KMyMoneyAccountTree]
+Include=kmymoney/kmymoneyaccounttree.h
 
 [KMyMoneySecuritySelector]
 IncludeFile=kmymoney/kmymoneycurrencyselector.h
 
 [KMyMoneyCurrencySelector]
+Include=kmymoney/kmymoneycurrencyselector.h
 
 [KMyMoneyRegister::Register]
 IconSet=register.png
@@ -26,6 +31,7 @@ IconSet=transactionform.png
 IncludeFile=kmymoney/transactionform.h
 
 [KMyMoneyCategory]
+IncludeFile=kmymoney/kmymoneycategory.h
 
 [KMyMoneyPayeeCombo]
 IncludeFile=kmymoney/kmymoneycombo.h
@@ -40,15 +46,18 @@ IncludeFile=kmymoney/kmymoneycombo.h
 IncludeFile=kmymoney/kmymoneycombo.h
 
 [TransactionSortOption]
+IncludeFile=kmymoney/transactionsortoptionimpl.h
 
 [KMyMoneyGeneralCombo]
 IncludeFile=kmymoney/kmymoneycombo.h
 
 [KBudgetValues]
+IncludeFile=kmymoney/kbudgetvalues.h
 
 [KAccountTemplateSelector]
+IncludeFile=kmymoney/kaccounttemplateselector.h
 
 # deprecated will be removed at some point in time
 
 [KMyMoneyAccountCombo]
-
+IncludeFile=kmymoney/kmymoneyaccountcombo.h

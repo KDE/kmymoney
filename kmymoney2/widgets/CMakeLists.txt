@@ -165,7 +165,7 @@ kde4_add_widget_files(${kmymoneywidgets_PART_SRCS} kmymoney.widgets)
 
 kde4_add_plugin(kmymoneywidgets ${kmymoneywidgets_PART_SRCS})
 
-target_link_libraries(kmymoneywidgets ${KDE4_KDECORE_LIBS}  ${QT_QTGUI_LIBRARY} ${KDE4_KDE3SUPPORT_LIBS} widgets kmymoney kmymoney_common dialogs)
+target_link_libraries(kmymoneywidgets ${KDE4_KDECORE_LIBS}  ${QT_QTGUI_LIBRARY} ${KDE4_KDE3SUPPORT_LIBS} widgets kmymoney kmymoney_common dialogs kgpgfile converter)
 
 install(TARGETS kmymoneywidgets DESTINATION ${PLUGIN_INSTALL_DIR}/plugins/designer )
 
