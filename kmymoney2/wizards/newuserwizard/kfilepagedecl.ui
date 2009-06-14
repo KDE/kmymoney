@@ -63,6 +63,9 @@
           <property name="focusPolicy">
             <enum>Qt::NoFocus</enum>
           </property>
+          <property name="wordWrap">
+            <bool>true</bool>
+          </property>
           <property name="text">
             <string>This finishes the setup of your KMyMoney environment. You can now press the Finish button and start using KMyMoney to record your financial transactions.</string>
           </property>
