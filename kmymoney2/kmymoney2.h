@@ -1253,11 +1253,6 @@ private:
   KFindTransactionDlg* m_searchDlg;
 
   bool m_bCheckSchedules;
-#warning "port to kde4"
-#if 0
-  KToolBarPopupAction*  m_previousViewButton;
-  KToolBarPopupAction*  m_nextViewButton;
-#endif
   QObject*              m_pluginInterface;
 
   MyMoneyAccount        m_selectedAccount;

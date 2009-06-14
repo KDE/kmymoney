@@ -114,7 +114,7 @@ void KStartDlg::setPage_Documents()
   kurlrequest->fileDialog()->setUrl(KUrl(kmymoney2->readLastUsedDir()));//kurlrequest->fileDialog()->setURL(KUrl(KGlobalSettings::documentPath()));
   mainLayout->addWidget( kurlrequest );
 
-  QLabel *label1 = new QLabel( recentMainFrame, "label1" );
+  QLabel *label1 = new QLabel( recentMainFrame );
   label1->setText( i18n("Recent Files") );
   mainLayout->addWidget( label1 );
   view_recent = new K3IconView( recentMainFrame, "view_recent" );

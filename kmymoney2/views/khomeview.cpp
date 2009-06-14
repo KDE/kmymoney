@@ -1556,7 +1556,6 @@ MyMoneyMoney KHomeView::forecastPaymentBalance(const MyMoneyAccount& acc, const 
 
 void KHomeView::showCashFlowSummary()
 {
-#warning "port to kde4"
   MyMoneyTransactionFilter filter;
   MyMoneyMoney incomeValue;
   MyMoneyMoney expenseValue;
