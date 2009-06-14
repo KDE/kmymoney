@@ -148,7 +148,7 @@ KGuiItem KMyMoneyUtils::scheduleNewGuiItem(void)
   KIconLoader *ic = KIconLoader::global();
 
   KGuiItem splitGuiItem(  i18n("&New Schedule..."),
-                          KIcon(ic->loadIcon("filenew", KIconLoader::Small, KIconLoader::SizeSmall)),
+                          KIcon(ic->loadIcon("document-new", KIconLoader::Small, KIconLoader::SizeSmall)),
                           i18n("Create a new schedule."),
                           i18n("Use this to create a new schedule."));
 

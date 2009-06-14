@@ -88,11 +88,11 @@ KAccountsView::KAccountsView(QWidget *parent) :
   // setup icons for collapse and expand button
   KIconLoader *ic = KIconLoader::global();
   KGuiItem collapseGuiItem("",
-                          KIcon(ic->loadIcon("viewmag-", KIconLoader::Small, KIconLoader::SizeSmall)),
+                          KIcon(ic->loadIcon("zoom-out", KIconLoader::Small, KIconLoader::SizeSmall)),
                           QString(),
                           QString());
   KGuiItem expandGuiItem("",
-                          KIcon(ic->loadIcon("viewmag+", KIconLoader::Small, KIconLoader::SizeSmall)),
+                          KIcon(ic->loadIcon("zoom-in", KIconLoader::Small, KIconLoader::SizeSmall)),
                           QString(),
                           QString());
   m_collapseButton->setGuiItem(collapseGuiItem);

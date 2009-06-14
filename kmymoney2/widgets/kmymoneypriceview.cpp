@@ -143,7 +143,7 @@ KMyMoneyPriceView::KMyMoneyPriceView(QWidget *parent, const char *name ) :
 
   m_contextMenu = new KMenu(this);
   m_contextMenu->addTitle(i18n("Price Options"));
-  m_contextMenu->insertItem(kiconloader->loadIcon("filenew", KIconLoader::Small),
+  m_contextMenu->insertItem(kiconloader->loadIcon("document-new", KIconLoader::Small),
                         i18n("New..."),
                         this, SIGNAL(newPrice()));
 

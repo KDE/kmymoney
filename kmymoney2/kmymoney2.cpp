@@ -663,10 +663,10 @@ void KMyMoney2App::initActions(void)
   // ***************************
   // Actions w/o main menu entry
   // ***************************
-  //new KAction(i18nc("New transaction button", "New"), "filenew", QKeySequence(Qt::CTRL | Qt::Key_Insert), this, SLOT(slotTransactionsNew()), actionCollection(), "transaction_new");
+  //new KAction(i18nc("New transaction button", "New"), "document-new", QKeySequence(Qt::CTRL | Qt::Key_Insert), this, SLOT(slotTransactionsNew()), actionCollection(), "transaction_new");
   KAction *transaction_new = actionCollection()->addAction("transaction_new");
   transaction_new->setText(i18nc("New transaction button", "New"));
-  transaction_new->setIcon(KIcon("filenew"));
+  transaction_new->setIcon(KIcon("document-new"));
   transaction_new->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_Insert));
   connect(transaction_new, SIGNAL(triggered()), this, SLOT(slotTransactionsNew()));
 
@@ -786,10 +786,10 @@ void KMyMoney2App::initActions(void)
   connect(transaction_combine, SIGNAL(triggered()), this, SLOT(slotTransactionCombine()));
 
   //Investment
-  //new KAction(i18n("New investment"), "filenew", 0, this, SLOT(slotInvestmentNew()), actionCollection(), "investment_new");
+  //new KAction(i18n("New investment"), "document-new", 0, this, SLOT(slotInvestmentNew()), actionCollection(), "investment_new");
   KAction *investment_new = actionCollection()->addAction("investment_new");
   investment_new->setText(i18n("New investment..."));
-  investment_new->setIcon(KIcon("filenew"));
+  investment_new->setIcon(KIcon("document-new"));
   connect(investment_new, SIGNAL(triggered()), this, SLOT(slotInvestmentNew()));
 
   //new KAction(i18n("Edit investment..."), "edit", 0, this, SLOT(slotInvestmentEdit()), actionCollection(), "investment_edit");
@@ -815,10 +815,10 @@ void KMyMoney2App::initActions(void)
   connect(investment_manual_price_update, SIGNAL(triggered()), this, SLOT(slotManualPriceUpdate()));
 
   //Schedule
-  //new KAction(i18n("New scheduled transaction..."), "filenew", 0, this, SLOT(slotScheduleNew()), actionCollection(), "schedule_new");
+  //new KAction(i18n("New scheduled transaction..."), "document-new", 0, this, SLOT(slotScheduleNew()), actionCollection(), "schedule_new");
   KAction *schedule_new = actionCollection()->addAction("schedule_new");
   schedule_new->setText(i18n("New scheduled transaction"));
-  schedule_new->setIcon(KIcon("filenew"));
+  schedule_new->setIcon(KIcon("document-new"));
   connect(schedule_new, SIGNAL(triggered()), this, SLOT(slotScheduleNew()));
 
   //new KAction(i18n("Edit scheduled transaction..."), "edit", 0, this, SLOT(slotScheduleEdit()), actionCollection(), "schedule_edit");
@@ -839,23 +839,23 @@ void KMyMoney2App::initActions(void)
   schedule_duplicate->setIcon(KIcon("editcopy"));
   connect(schedule_duplicate, SIGNAL(triggered()), this, SLOT(slotScheduleDuplicate()));
 
-  //new KAction(i18n("Enter next transaction..."), "key_enter", 0, this, SLOT(slotScheduleEnter()), actionCollection(), "schedule_enter");
+  //new KAction(i18n("Enter next transaction..."), "go-jump-locationbar", 0, this, SLOT(slotScheduleEnter()), actionCollection(), "schedule_enter");
   KAction *schedule_enter = actionCollection()->addAction("schedule_enter");
   schedule_enter->setText(i18n("Enter next transaction..."));
-  schedule_enter->setIcon(KIcon("key_enter"));
+  schedule_enter->setIcon(KIcon("go-jump-locationbar"));
   connect(schedule_enter, SIGNAL(triggered()), this, SLOT(slotScheduleEnter()));
 
-  //new KAction(i18n("Skip next transaction..."), "player_fwd", 0, this, SLOT(slotScheduleSkip()), actionCollection(), "schedule_skip");
+  //new KAction(i18n("Skip next transaction..."), "media-seek-forward", 0, this, SLOT(slotScheduleSkip()), actionCollection(), "schedule_skip");
   KAction *schedule_skip = actionCollection()->addAction("schedule_skip");
   schedule_skip->setText(i18n("Skip next transaction..."));
-  schedule_skip->setIcon(KIcon("player_fwd"));
+  schedule_skip->setIcon(KIcon("media-seek-forward"));
   connect(schedule_skip, SIGNAL(triggered()), this, SLOT(slotScheduleSkip()));
 
   //Payees
-  //new KAction(i18n("New payee"), "filenew", 0, this, SLOT(slotPayeeNew()), actionCollection(), "payee_new");
+  //new KAction(i18n("New payee"), "document-new", 0, this, SLOT(slotPayeeNew()), actionCollection(), "payee_new");
   KAction *payee_new = actionCollection()->addAction("payee_new");
   payee_new->setText(i18n("New payee"));
-  payee_new->setIcon(KIcon("filenew"));
+  payee_new->setIcon(KIcon("document-new"));
   connect(payee_new, SIGNAL(triggered()), this, SLOT(slotPayeeNew()));
 
   //new KAction(i18n("Rename payee"), "edit", 0, this, SIGNAL(payeeRename()), actionCollection(), "payee_rename");
@@ -871,10 +871,10 @@ void KMyMoney2App::initActions(void)
   connect(payee_delete, SIGNAL(triggered()), this, SLOT(slotPayeeDelete()));
 
   //Budget
-  //new KAction(i18n("New budget"), "filenew", 0, this, SLOT(slotBudgetNew()), actionCollection(), "budget_new");
+  //new KAction(i18n("New budget"), "document-new", 0, this, SLOT(slotBudgetNew()), actionCollection(), "budget_new");
   KAction *budget_new = actionCollection()->addAction("budget_new");
   budget_new->setText(i18n("New budget"));
-  budget_new->setIcon(KIcon("filenew"));
+  budget_new->setIcon(KIcon("document-new"));
   connect(budget_new, SIGNAL(triggered()), this, SLOT(slotBudgetNew()));
 
   //new KAction(i18n("Rename budget"), "edit", 0, this, SIGNAL(budgetRename()), actionCollection(), "budget_rename");
@@ -910,10 +910,10 @@ void KMyMoney2App::initActions(void)
   // ************************
   // Currency actions
   // ************************
-  //new KAction(i18n("New currency"), "filenew", 0, this, SLOT(slotCurrencyNew()), actionCollection(), "currency_new");
+  //new KAction(i18n("New currency"), "document-new", 0, this, SLOT(slotCurrencyNew()), actionCollection(), "currency_new");
   KAction *currency_new = actionCollection()->addAction("currency_new");
   currency_new->setText(i18n("New currency"));
-  currency_new->setIcon(KIcon("filenew"));
+  currency_new->setIcon(KIcon("document-new"));
   connect(currency_new, SIGNAL(triggered()), this, SLOT(slotCurrencyNew()));
 
 

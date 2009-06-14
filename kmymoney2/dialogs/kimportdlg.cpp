@@ -77,7 +77,7 @@ KImportDlg::KImportDlg(QWidget *parent)
   m_qbuttonBrowse->setGuiItem(browseButtenItem);
 
   KGuiItem newButtenItem( i18n( "&New..." ),
-                      KIcon(il->loadIcon("filenew", KIconLoader::Small, KIconLoader::SizeSmall)),
+                      KIcon(il->loadIcon("document-new", KIconLoader::Small, KIconLoader::SizeSmall)),
                       i18n("Create a new profile"),
                       i18n("Use this to open the profile editor"));
   m_profileEditorButton->setGuiItem(newButtenItem);

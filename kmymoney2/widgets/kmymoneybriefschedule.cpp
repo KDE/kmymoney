@@ -49,8 +49,8 @@ KMyMoneyBriefSchedule::KMyMoneyBriefSchedule(QWidget *parent)
     : kScheduleBriefWidget(parent/*,name, Qt::WStyle_Customize | Qt::WStyle_NoBorder*/)
 {
   KIconLoader *ic = KIconLoader::global();
-  m_nextButton->setPixmap(BarIcon(QString::fromLatin1("1rightarrow")));
-  m_prevButton->setPixmap(BarIcon(QString::fromLatin1("1leftarrow")));
+  m_nextButton->setPixmap(BarIcon(QString::fromLatin1("arrow-right")));
+  m_prevButton->setPixmap(BarIcon(QString::fromLatin1("arrow-left")));
 
   connect(m_prevButton, SIGNAL(clicked()), this, SLOT(slotPrevClicked()));
   connect(m_nextButton, SIGNAL(clicked()), this, SLOT(slotNextClicked()));
@@ -59,13 +59,13 @@ KMyMoneyBriefSchedule::KMyMoneyBriefSchedule(QWidget *parent)
   connect(m_buttonEnter, SIGNAL(clicked()), this, SLOT(slotEnterClicked()));
 
   KGuiItem skipGuiItem(  i18n("&Skip"),
-                          KIcon(ic->loadIcon("player_fwd", KIconLoader::Small, KIconLoader::SizeSmall)),
+                          KIcon(ic->loadIcon("media-seek-forward", KIconLoader::Small, KIconLoader::SizeSmall)),
                           i18n("Skip this transaction"),
                           i18n("Use this button to skip this transaction"));
   m_skipButton->setGuiItem(skipGuiItem);
 
   KGuiItem enterGuiItem(  i18n("&Enter"),
-                          KIcon(ic->loadIcon("key_enter", KIconLoader::Small, KIconLoader::SizeSmall)),
+                          KIcon(ic->loadIcon("go-jump-locationbar", KIconLoader::Small, KIconLoader::SizeSmall)),
                           i18n("Record this transaction into the register"),
                           i18n("Use this button to record this transaction"));
   m_buttonEnter->setGuiItem(enterGuiItem);

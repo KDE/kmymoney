@@ -140,10 +140,10 @@ void kMyMoneyCalendar::init( const QDate &dt )
   setFontSize(10);
   line->setValidator(val);
   line->installEventFilter( this );
-  yearForward->setPixmap(BarIcon(QString::fromLatin1("2rightarrow")));
-  yearBackward->setPixmap(BarIcon(QString::fromLatin1("2leftarrow")));
-  monthForward->setPixmap(BarIcon(QString::fromLatin1("1rightarrow")));
-  monthBackward->setPixmap(BarIcon(QString::fromLatin1("1leftarrow")));
+  yearForward->setPixmap(BarIcon(QString::fromLatin1("arrow-right-double")));
+  yearBackward->setPixmap(BarIcon(QString::fromLatin1("arrow-left-double")));
+  monthForward->setPixmap(BarIcon(QString::fromLatin1("arrow-right")));
+  monthBackward->setPixmap(BarIcon(QString::fromLatin1("arrow-left")));
   setDate(dt); // set button texts
   connect(table, SIGNAL(dateChanged(QDate)), SLOT(dateChangedSlot(QDate)));
   connect(table, SIGNAL(tableClicked()), SLOT(tableClickedSlot()));

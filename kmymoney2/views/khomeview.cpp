@@ -617,8 +617,8 @@ void KHomeView::showPaymentEntry(const MyMoneySchedule& sched, int cnt)
         MyMoneySplit sp = t.splitByAccount(acc.id(), true);
 
         QString pathEnter, pathSkip;
-        KIconLoader::global()->loadIcon(QString("key_enter"), KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState, QStringList(), &pathEnter, false);
-        KIconLoader::global()->loadIcon(QString("player_fwd"), KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState, QStringList(), &pathSkip);
+        KIconLoader::global()->loadIcon(QString("go-jump-locationbar"), KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState, QStringList(), &pathEnter, false);
+        KIconLoader::global()->loadIcon(QString("media-seek-forward"), KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState, QStringList(), &pathSkip);
 
         //show payment date
         tmp = QString("<td>") +

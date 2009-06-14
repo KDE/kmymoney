@@ -68,7 +68,7 @@ KAccountSelectDlg::KAccountSelectDlg(const KMyMoneyUtils::categoryTypeE accountT
   m_qbuttonCancel->setGuiItem(skipButtonItem);
 
   KGuiItem createButtenItem( i18n( "&Create..." ),
-                      KIcon(il->loadIcon("filenew", KIconLoader::Small, KIconLoader::SizeSmall)),
+                      KIcon(il->loadIcon("document-new", KIconLoader::Small, KIconLoader::SizeSmall)),
                       i18n("Create a new account/category"),
                       i18n("Use this to add a new account/category to the file"));
   m_createButton->setGuiItem(createButtenItem);

@@ -32,10 +32,10 @@ TransactionSortOption::TransactionSortOption( QWidget *parent )
 void TransactionSortOption::init()
 {
   KIconLoader* il = KIconLoader::global();
-  m_addButton->setIconSet(KIcon(il->loadIcon("1rightarrow", KIconLoader::Small, KIconLoader::SizeSmall)));
-  m_removeButton->setIconSet(QIcon(il->loadIcon("1leftarrow", KIconLoader::Small, KIconLoader::SizeSmall)));
-  m_upButton->setIconSet(QIcon(il->loadIcon("1uparrow", KIconLoader::Small, KIconLoader::SizeSmall)));
-  m_downButton->setIconSet(QIcon(il->loadIcon("1downarrow", KIconLoader::Small, KIconLoader::SizeSmall)));
+  m_addButton->setIconSet(KIcon(il->loadIcon("arrow-right", KIconLoader::Small, KIconLoader::SizeSmall)));
+  m_removeButton->setIconSet(QIcon(il->loadIcon("arrow-left", KIconLoader::Small, KIconLoader::SizeSmall)));
+  m_upButton->setIconSet(QIcon(il->loadIcon("arrow-up", KIconLoader::Small, KIconLoader::SizeSmall)));
+  m_downButton->setIconSet(QIcon(il->loadIcon("arrow-down", KIconLoader::Small, KIconLoader::SizeSmall)));
 
   // don't allow sorting of the selected entries
   m_selectedList->setSortColumn(-1);
