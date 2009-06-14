@@ -581,7 +581,7 @@ void KGPGFile::publicKeyList(QStringList& list)
   QString currentKey;
   for(it = lines.begin(); it != lines.end(); ++it) {
     // qDebug("Parsing: '%s'", (*it).data());
-    QStringList fields = QStringList::split(":", (*it), true);
+    QStringList fields = (*it).split(":");
     QString val;
     if(fields[0] == "pub") {
       currentKey = fields[4];
@@ -600,7 +600,7 @@ void KGPGFile::secretKeyList(QStringList& list)
 {
   QString output;
   char  buffer[1024];
-  Q_LONG len;
+  qint64 len;
 
   list.clear();
   KGPGFile file;
@@ -624,7 +624,7 @@ void KGPGFile::secretKeyList(QStringList& list)
   QString currentKey;
   for(it = lines.begin(); it != lines.end(); ++it) {
     // qDebug("Parsing: '%s'", (*it).data());
-    QStringList fields = QStringList::split(":", (*it), true);
+    QStringList fields = (*it).split(":");
     if(fields[0] == "sec") {
       currentKey = fields[4];
       list << QString("%1:%2").arg(currentKey).arg(fields[9]);
