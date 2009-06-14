@@ -35,7 +35,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <export.h>
+#include <kmm_plugin_export.h>
 
 class KPluginSelector;
 
@@ -43,7 +43,7 @@ namespace KMyMoneyPlugin
 {
   class Plugin;
 
-  class KMYMONEY_EXPORT PluginLoader : public QObject
+  class KMM_PLUGINS_EXPORT PluginLoader : public QObject
   {
     Q_OBJECT
   public:

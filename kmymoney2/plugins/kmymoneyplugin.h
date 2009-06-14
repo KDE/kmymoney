@@ -38,7 +38,7 @@ class KToggleAction;
 #include <viewinterface.h>
 #include <statementinterface.h>
 #include <importinterface.h>
-#include <export.h>
+#include <kmm_plugin_export.h>
 
 namespace KMyMoneyPlugin {
 
@@ -52,7 +52,7 @@ namespace KMyMoneyPlugin {
   * http://developer.kde.org/documentation/tutorials/developing-a-plugin-structure/index.html
   *
   */
-  class KMYMONEY_EXPORT Plugin : public QObject, public KXMLGUIClient
+  class KMM_PLUGINS_EXPORT Plugin : public QObject, public KXMLGUIClient
   {
     Q_OBJECT
   public:
@@ -87,7 +87,7 @@ namespace KMyMoneyPlugin {
    * http://developer.kde.org/documentation/tutorials/developing-a-plugin-structure/index.html
    *
  */
-  class KMYMONEY_EXPORT OnlinePlugin
+  class KMM_PLUGINS_EXPORT OnlinePlugin
   {
   public:
     OnlinePlugin() {}
@@ -153,7 +153,7 @@ namespace KMyMoneyPlugin {
   * http://developer.kde.org/documentation/tutorials/developing-a-plugin-structure/index.html
   *
   */
-  class KMYMONEY_EXPORT ImporterPlugin
+  class KMM_PLUGINS_EXPORT ImporterPlugin
   {
   public:
     ImporterPlugin() {}

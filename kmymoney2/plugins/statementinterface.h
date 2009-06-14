@@ -33,7 +33,7 @@
 
 #include <mymoneystatement.h>
 #include <mymoneyaccount.h>
-#include <export.h>
+#include <kmm_plugin_export.h>
 
 namespace KMyMoneyPlugin {
 
@@ -41,7 +41,7 @@ namespace KMyMoneyPlugin {
   * This abstract class represents the interface to import statements
   * into the KMyMoney application
   */
-class KMYMONEY_EXPORT StatementInterface : public QObject {
+class KMM_PLUGINS_EXPORT StatementInterface : public QObject {
   Q_OBJECT
 
 public:

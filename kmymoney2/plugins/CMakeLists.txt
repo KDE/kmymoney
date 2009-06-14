@@ -15,7 +15,7 @@ SET(kmm_plugin_LIB_SRCS
 
 SET(plugins_HEADERS
   importinterface.h kmymoneyplugin.h pluginloader.h
-  statementinterface.h viewinterface.h)
+  statementinterface.h viewinterface.h kmm_plugin_export.h)
 
 
 KDE4_ADD_LIBRARY(kmm_plugin SHARED ${kmm_plugin_LIB_SRCS})

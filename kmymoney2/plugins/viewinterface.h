@@ -36,7 +36,7 @@
 
 #include <mymoneyaccount.h>
 #include <mymoneyinstitution.h>
-#include <export.h>
+#include <kmm_plugin_export.h>
 class KMyMoneyViewBase;
 namespace KMyMoneyRegister {
   class SelectedTransactions;
@@ -49,7 +49,7 @@ namespace KMyMoneyPlugin {
   * add new view pages to the JanusWidget of KMyMoney. It
   * also gives access to the account context menu.
   */
-class KMYMONEY_EXPORT ViewInterface : public QObject {
+class KMM_PLUGINS_EXPORT ViewInterface : public QObject {
   Q_OBJECT
 
 public:

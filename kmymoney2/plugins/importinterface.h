@@ -35,7 +35,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <export.h>
+#include <kmm_plugin_export.h>
 
 namespace KMyMoneyPlugin {
 
@@ -43,7 +43,7 @@ namespace KMyMoneyPlugin {
   * This abstract class represents the ImportInterface to
   * add new importers to KMyMoney.
   */
-class KMYMONEY_EXPORT ImportInterface : public QObject
+class KMM_PLUGINS_EXPORT ImportInterface : public QObject
 {
   Q_OBJECT
 
