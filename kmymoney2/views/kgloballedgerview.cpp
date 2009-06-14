@@ -1104,8 +1104,8 @@ TransactionEditor* KGlobalLedgerView::startEdit(const KMyMoneyRegister::Selected
 
       m_inEditMode = true;
       connect(editor, SIGNAL(transactionDataSufficient(bool)), kmymoney2->action("transaction_enter"), SLOT(setEnabled(bool)));
-      connect(editor, SIGNAL(returnPressed()), kmymoney2->action("transaction_enter"), SLOT(activate()));
-      connect(editor, SIGNAL(escapePressed()), kmymoney2->action("transaction_cancel"), SLOT(activate()));
+      connect(editor, SIGNAL(returnPressed()), kmymoney2->action("transaction_enter"), SLOT(trigger()));
+      connect(editor, SIGNAL(escapePressed()), kmymoney2->action("transaction_cancel"), SLOT(trigger()));
 
       connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), editor, SLOT(slotReloadEditWidgets()));
       connect(editor, SIGNAL(finishEdit(const KMyMoneyRegister::SelectedTransactions&)), this, SLOT(slotLeaveEditMode(const KMyMoneyRegister::SelectedTransactions&)));

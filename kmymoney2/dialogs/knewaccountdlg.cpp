@@ -984,7 +984,7 @@ void KNewAccountDlg::slotSelectionChanged(Q3ListViewItem *item)
   }
   catch (MyMoneyException *e)
   {
-    qDebug("This shouldn't happen! : %s", e->what().toLatin1());
+    qDebug("This shouldn't happen! : %s", qPrintable(e->what()));
     delete e;
   }
 }
@@ -1055,7 +1055,7 @@ void KNewAccountDlg::slotLoadInstitutions(const QString& name)
   }
   catch (MyMoneyException *e)
   {
-    qDebug("Exception in institution load: %s", e->what().toLatin1());
+    qDebug("Exception in institution load: %s", qPrintable(e->what()));
     delete e;
   }
 }
