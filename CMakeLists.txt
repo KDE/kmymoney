@@ -229,6 +229,10 @@ endif(USE_LEAK_CHECK)
 OPTION(USE_QT_DESIGNER
   "Install KMyMoney specific widget library for Qt-Designer (default=OFF)" OFF)
 
+if(USE_QT_DESIGNER)
+   set(KMM_DESIGNER 1)
+endif(USE_QT_DESIGNER)
+
 IF(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   SET(CMAKE_INSTALL_PREFIX "${KDE4PREFIX}" CACHE PATH
     "KMyMoney2 install prefix defaults

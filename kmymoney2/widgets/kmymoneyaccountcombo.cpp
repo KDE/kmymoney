@@ -37,7 +37,7 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-
+#include "config-kmymoney.h"
 #include <mymoneyfile.h>
 #include <kmymoneyaccountcombo.h>
 #include "kmymoneyaccountcompletion.h"

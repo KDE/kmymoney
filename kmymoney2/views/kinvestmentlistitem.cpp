@@ -41,6 +41,7 @@
 
 #include <mymoneysecurity.h>
 #include <mymoneyfile.h>
+#include "config-kmymoney.h"
 
 KInvestmentListItem::KInvestmentListItem(K3ListView* parent, const MyMoneyAccount& account)
   : K3ListViewItem(parent)

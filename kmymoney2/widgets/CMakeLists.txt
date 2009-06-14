@@ -156,7 +156,6 @@ TARGET_LINK_LIBRARIES(widgets kmymoney_base)
 INSTALL(FILES ${kmymoney_STAT_HEADERS} 
   DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney COMPONENT Devel)
 
-if(false)
 if( USE_QT_DESIGNER )
 set(kmymoneywidgets_PART_SRCS
    ${CMAKE_CURRENT_BINARY_DIR}/kmymoneywidgets.cpp
@@ -174,4 +173,3 @@ INSTALL(FILES kmymoneytitlelabel.png DESTINATION ${DATA_INSTALL_DIR}/kmymoney2/p
 
 
 endif( USE_QT_DESIGNER )
-endif()
