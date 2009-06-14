@@ -1,8 +1,8 @@
-[Includes]
-kinstance.h
+[Global]
+PluginName=kmmwidgets
+Includes=kcomponentdata.h
+Init=new KInstance("kmmwidgets");
 
-[Init]
-new KInstance("kmmwidgets");
 
 [KMyMoneyTitleLabel]
 

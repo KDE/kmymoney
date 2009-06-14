@@ -2,20 +2,6 @@ PROJECT(widgets)
 
 ########### custom command #############
 
-# create the makekdewidgets file out of the makewidgets.in
-CONFIGURE_FILE (${CMAKE_CURRENT_SOURCE_DIR}/makekdewidgets.in
-  ${CMAKE_CURRENT_BINARY_DIR}/makekdewidgets @ONLY)
-
-#ADD_CUSTOM_COMMAND(
-#  OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/kmmwidgets.cpp
-#  COMMAND ${CMAKE_CURRENT_BINARY_DIR}/makekdewidgets -g KMyMoney
-#    -n CustomWidgetPlugin -o kmmwidgets.cpp -i kmymoney
-#    ${CMAKE_CURRENT_SOURCE_DIR}/kmymoney.widgets
-#  DEPENDS
-#    ${CMAKE_CURRENT_SOURCE_DIR}/kmymoney.widgets
-#    ${CMAKE_CURRENT_BINARY_DIR}/makekdewidgets
-#  )
-
 ########### create links ###############
 SET(kmymoney_STAT_HEADERS
   kaccounttemplateselector.h kbudgetvalues.h kguiutils.h
@@ -101,7 +87,6 @@ KDE4_ADD_LIBRARY(kmymoney_base STATIC ${_uncritial_common_sources})
 
 KDE4_ADD_LIBRARY(kmymoney SHARED
  ${_critial_common_sources} ${_uncritial_common_sources} )
-# kmmwidgets.cpp)
 TARGET_LINK_LIBRARIES(kmymoney  dialogs widgets kmymoney_common kmm_mymoney converter ${KDE4_KDE3SUPPORT_LIBS} ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS})
 
 # Build directly with INSTALL_RPATH.
@@ -168,9 +153,22 @@ TARGET_LINK_LIBRARIES(widgets kmymoney_base)
 INSTALL(FILES ${kmymoney_STAT_HEADERS} 
   DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney COMPONENT Devel)
 
-IF( USE_QT_DESIGNER )
-  INSTALL(TARGETS kmymoney
-    DESTINATION ${QT_INSTALL_DIR}/plugins/designer)
-  INSTALL(FILES kmymoneytitlelabel.png
-    DESTINATION ${DATA_INSTALL_DIR}/kmymoney2/pics)
-ENDIF( USE_QT_DESIGNER )
+
+if( USE_QT_DESIGNER )
+set(kmymoneywidgets_PART_SRCS
+   ${CMAKE_CURRENT_BINARY_DIR}/kmymoneywidgets.cpp
+)
+
+kde4_add_widget_files(${kmymoneywidgets_PART_SRCS} kmymoney.widgets)
+
+kde4_add_plugin(kmymoneywidgets ${kmymoneywidgets_PART_SRCS})
+
+target_link_libraries(kmymoneywidgets ${KDE4_KDECORE_LIBS}  ${QT_QTGUI_LIBRARY} ${KDE4_KDE3SUPPORT_LIBS} widgets kmymoney kmymoney_common dialogs)
+
+install(TARGETS kmymoneywidgets DESTINATION ${PLUGIN_INSTALL_DIR}/plugins/designer )
+
+INSTALL(FILES kmymoneytitlelabel.png DESTINATION ${DATA_INSTALL_DIR}/kmymoney2/pics)
+
+
+endif( USE_QT_DESIGNER )
+
