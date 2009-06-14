@@ -43,7 +43,7 @@
   * @author Alvaro Soliverez <asoliverez@gmail.com>
   */
 
-class MyMoneyForecast
+class KMYMONEY_EXPORT MyMoneyForecast
 {
 public:
   MyMoneyForecast();

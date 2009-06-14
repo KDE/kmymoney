@@ -1729,8 +1729,7 @@ const QStringList MyMoneyFile::consistencyCheck(void)
   if(problemCount == 0)
     rc << i18n("Finish! Data is consistent.");
   else
-    rc << i18n("Finish! %1 problem(s) corrected. %2 problem(s) still present.")
-            .arg(problemCount,unfixedCount);
+    rc << i18n("Finish! %1 problem(s) corrected. %2 problem(s) still present.",problemCount,unfixedCount);
 
   return rc;
 }

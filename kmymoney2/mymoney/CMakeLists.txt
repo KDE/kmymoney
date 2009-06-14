@@ -29,11 +29,12 @@ SET(mymoney_HEADERS
   mymoneyutils.h mymoneybudget.h mymoneyobjectcontainer.h mymoneyforecast.h
   )
 
-KDE4_ADD_LIBRARY(kmm_mymoney STATIC ${kmm_mymoney_LIB_SRCS})
+KDE4_ADD_LIBRARY(kmm_mymoney SHARED 
+	${kmm_mymoney_LIB_SRCS})
 
 TARGET_LINK_LIBRARIES(kmm_mymoney ${KDE4_KDEUI_LIBS} ${QT_QTGUI_LIBRARY} ${QT_QT3SUPPORT_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTCORE_LIBRARY} ${KDE4_KDECORE_LIBS} kmm_storage)
 
-#SET_TARGET_PROPERTIES(kmm_mymoney PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
+SET_TARGET_PROPERTIES(kmm_mymoney PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
 
 ########### install files ###############
 
