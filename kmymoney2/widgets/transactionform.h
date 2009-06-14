@@ -64,8 +64,6 @@ public:
 
   SignalEmissionE setSignalEmission(SignalEmissionE type);
 
-#warning #Port to KDE4
-
   void copyTabs(const TabBar* otabbar);
 
   void insertTab(int id, QWidget* tab, QString title = QString());

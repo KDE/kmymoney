@@ -631,9 +631,9 @@ void KGlobalLedgerView::loadView(void)
       p = p->prevItem();
     }
 
-    tracer.printf("total balance of %s = %s", m_account.name().data(), actBalance[m_account.id()].formatMoney("", 2).data());
-    tracer.printf("future balance of %s = %s", m_account.name().data(), futureBalance[m_account.id()].formatMoney("", 2).data());
-    tracer.printf("cleared balance of %s = %s", m_account.name().data(), clearedBalance[m_account.id()].formatMoney("", 2).data());
+    tracer.printf("total balance of %s = %s", qPrintable(m_account.name()), qPrintable(actBalance[m_account.id()].formatMoney("", 2)));
+    tracer.printf("future balance of %s = %s", qPrintable(m_account.name()), qPrintable(futureBalance[m_account.id()].formatMoney("", 2)));
+    tracer.printf("cleared balance of %s = %s", qPrintable(m_account.name()), qPrintable(clearedBalance[m_account.id()].formatMoney("", 2)));
 
     // update statement information
     if(statement) {
@@ -827,7 +827,7 @@ void KGlobalLedgerView::loadAccounts(void)
     try {
       d->m_precision = MyMoneyMoney::denomToPrec(m_account.fraction());
     } catch(MyMoneyException *e) {
-      qDebug("Security %s for account %s not found", m_account.currencyId().data(), m_account.name().data());
+      qDebug("Security %s for account %s not found", qPrintable(m_account.currencyId()), qPrintable(m_account.name()));
       delete e;
       d->m_precision = 2;
     }

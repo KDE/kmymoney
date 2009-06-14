@@ -150,7 +150,6 @@ void TabBar::show(void)
     blockSignals(false);
 }
 
-#warning #Port to KDE4
 void TabBar::copyTabs(const TabBar* otabbar)
 {
   // remove all existing tabs
