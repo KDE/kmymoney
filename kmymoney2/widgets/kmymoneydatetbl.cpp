@@ -312,8 +312,7 @@ kMyMoneyDateTbl::keyPressEvent( QKeyEvent *e )
         setDate(QDate::currentDate());
         return;
     }
-#warning "port to kde4"
-    //KNotifyClient::beep();
+    KNotification::beep(); 
 }
 
 void
