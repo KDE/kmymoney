@@ -539,7 +539,7 @@ void KReportsView::loadView(void)
 
 void KReportsView::slotOpenUrl(const KUrl &url, const KParts::OpenUrlArguments&, const KParts::BrowserArguments&)
 {
-  QString view = url.fileName(false);
+  QString view = url.fileName();
   QString command = url.queryItem("command");
 
   if(view == VIEW_REPORTS) {

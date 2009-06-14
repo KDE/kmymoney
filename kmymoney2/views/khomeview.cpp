@@ -1107,7 +1107,7 @@ const QString KHomeView::linkend(void) const
 void KHomeView::slotOpenUrl(const KUrl &url, const KParts::OpenUrlArguments&,const KParts::BrowserArguments& )
 {
   QString protocol = url.protocol();
-  QString view = url.fileName(false);
+  QString view = url.fileName();
   QString id = url.queryItem("id");
   QString mode = url.queryItem("mode");
 

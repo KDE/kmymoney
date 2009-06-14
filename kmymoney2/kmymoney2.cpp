@@ -2448,7 +2448,7 @@ void KMyMoney2App::slotProcessExited(void)
           QDate::currentDate().year(),
           QDate::currentDate().month(),
           QDate::currentDate().day());
-        QString backupfile = m_mountpoint + "/" + m_fileName.fileName(false);
+        QString backupfile = m_mountpoint + "/" + m_fileName.fileName();
         KMyMoneyUtils::appendCorrectFileExt(backupfile, today);
 
         // check if file already exists and ask what to do
@@ -5467,7 +5467,7 @@ void KMyMoney2App::updateCaption(bool skipActions)
 {
   QString caption;
 
-  caption = m_fileName.fileName(false);
+  caption = m_fileName.fileName();
 
   if(caption.isEmpty() && myMoneyView && myMoneyView->fileOpen())
     caption = i18n("Untitled");
