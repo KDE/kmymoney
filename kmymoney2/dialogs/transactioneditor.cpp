@@ -683,13 +683,13 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
           key = "maxCreditEarly";
           if(!acc.value(key).isEmpty()) {
             if(maxCreditEarly[acc.id()] == false && balance < MyMoneyMoney(acc.value(key))) {
-              msg = QString("<qt>%1</qt>").arg(i18n("The balance of account <b>%1</b> dropped below the maximum credit warning limit of %2.").arg(acc.name(), MyMoneyMoney(acc.value(key)).formatMoney(acc, sec)));
+              msg = QString("<qt>%1</qt>").arg(i18n("The balance of account <b>%1</b> dropped below the maximum credit warning limit of %2.",acc.name(), MyMoneyMoney(acc.value(key)).formatMoney(acc, sec)));
             }
           }
           key = "maxCreditAbsolute";
           if(!acc.value(key).isEmpty()) {
             if(maxCreditAbsolute[acc.id()] == false && balance < MyMoneyMoney(acc.value(key))) {
-              msg = QString("<qt>%1</qt>").arg(i18n("The balance of account <b>%1</b> dropped below the maximum credit limit of %2.").arg(acc.name(), MyMoneyMoney(acc.value(key)).formatMoney(acc, sec)));
+              msg = QString("<qt>%1</qt>").arg(i18n("The balance of account <b>%1</b> dropped below the maximum credit limit of %2.",acc.name(), MyMoneyMoney(acc.value(key)).formatMoney(acc, sec)));
             }
           }
 
@@ -699,7 +699,7 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
         }
       }
     } catch(MyMoneyException * e) {
-      qDebug("Unable to store transaction within engine: %s", e->what().toLatin1());
+      qDebug("Unable to store transaction within engine: %s", qPrintable(e->what()));
       delete e;
       newTransactionCreated = false;
     }
@@ -872,7 +872,6 @@ bool StdTransactionEditor::isTransfer(const QString& accId1, const QString& accI
 
 void StdTransactionEditor::loadEditWidgets(KMyMoneyRegister::Action action)
 {
-#warning "port to kde4"	
   // don't kick off VAT processing from here
   m_inUpdateVat = true;
 
@@ -1414,9 +1413,8 @@ void StdTransactionEditor::slotUpdateCashFlow(KMyMoneyRegister::CashFlowDirectio
 
 void StdTransactionEditor::slotUpdateCategory(const QString& id)
 {
-#warning "port to kde4"
   QLabel *categoryLabel = dynamic_cast<QLabel*>(haveWidget("category-label"));
-  // qDebug("Update category to %s", id.data());
+  // qDebug("Update category to %s", qPrintable(id));
 
   if(categoryLabel) {
     TabBar* tabbar = dynamic_cast<TabBar*>(haveWidget("tabbar"));
@@ -1492,7 +1490,7 @@ void StdTransactionEditor::slotUpdateDeposit(const QString& txt)
 
 void StdTransactionEditor::slotUpdateAmount(const QString& txt)
 {
-  // qDebug("Update amount to %s", txt.data());
+  // qDebug("Update amount to %s", qPrintable(txt));
   MyMoneyMoney val(txt);
   updateAmount(val);
   updateVAT(true);
