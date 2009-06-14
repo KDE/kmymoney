@@ -1,5 +1,3 @@
-//Added by qt3to4:
-#include <QMouseEvent>
 /***************************************************************************
                           kreportchartview.h
                              -------------------
@@ -34,6 +32,8 @@
 #endif
 
 #include <QLabel>
+//Added by qt3to4:
+#include <QMouseEvent>
 #include <KDChartWidget.h>
 #include <KDChartTable.h>
 #include <KDChartParams.h>
