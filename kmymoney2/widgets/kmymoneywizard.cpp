@@ -135,7 +135,7 @@ KMyMoneyWizard::KMyMoneyWizard(QWidget *parent, const char *name, bool modal, Qt
     m_nextButton->setIconSet( KStandardGuiItem::forward( KStandardGuiItem::UseRTL ).iconSet() );
     m_finishButton->setIconSet( SmallIconSet( "apply" ) );
     m_cancelButton->setIconSet( SmallIconSet( "button_cancel" ) );
-    m_helpButton->setIconSet( SmallIconSet( "help" ) );
+    m_helpButton->setIconSet( SmallIconSet( "help-contents" ) );
   }
 
   // create button layout
