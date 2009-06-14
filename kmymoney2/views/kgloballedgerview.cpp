@@ -23,7 +23,6 @@
 #include <qframe.h>
 #include <QLayout>
 #include <QTimer>
-//Added by qt3to4:
 #include <QHBoxLayout>
 #include <QKeyEvent>
 #include <QList>
