@@ -105,6 +105,9 @@ SET_TARGET_PROPERTIES(kmymoney PROPERTIES
 #  COMPILE_FLAGS "-U_CHECK_MEMORY -DKMM_DESIGNER")
 #####
 
+set_target_properties(kmymoney PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
+install(TARGETS kmymoney ${INSTALL_TARGETS_DEFAULT_ARGS} )
+
 ########### Widget Library (widgets) STATIC #################
  
 SET(libwidgets_a_SOURCES
@@ -153,7 +156,7 @@ TARGET_LINK_LIBRARIES(widgets kmymoney_base)
 INSTALL(FILES ${kmymoney_STAT_HEADERS} 
   DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney COMPONENT Devel)
 
-
+if(false)
 if( USE_QT_DESIGNER )
 set(kmymoneywidgets_PART_SRCS
    ${CMAKE_CURRENT_BINARY_DIR}/kmymoneywidgets.cpp
@@ -171,4 +174,4 @@ INSTALL(FILES kmymoneytitlelabel.png DESTINATION ${DATA_INSTALL_DIR}/kmymoney2/p
 
 
 endif( USE_QT_DESIGNER )
-
+endif()
