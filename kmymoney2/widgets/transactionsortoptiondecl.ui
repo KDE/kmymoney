@@ -13,9 +13,6 @@
         <height>228</height>
       </rect>
     </property>
-    <property name="windowTitle">
-      <string>TransactionSortOptionDecl</string>
-    </property>
     <layout class="QHBoxLayout">
       <item>
         <layout class="QVBoxLayout">
