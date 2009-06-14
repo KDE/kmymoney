@@ -35,7 +35,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <export.h>
+#include <kmm_mymoney_export.h>
 
 #ifdef _GLIBCPP_HAVE_MODFL
 #define HAVE_LONG_DOUBLE  1
@@ -67,7 +67,7 @@
   * For a detailed description of the algorithms see
   * gnucash-1.8.5/src/doc/finutil.html.
   */
-class KMYMONEY_EXPORT MyMoneyFinancialCalculator
+class KMM_MYMONEY_EXPORT MyMoneyFinancialCalculator
 {
 public:
   MyMoneyFinancialCalculator();

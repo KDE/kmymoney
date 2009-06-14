@@ -37,7 +37,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <export.h>
+#include <kmm_mymoney_export.h>
 #include <mymoneymoney.h>
 #include <mymoneyutils.h>
 #include <mymoneyobject.h>
@@ -51,7 +51,7 @@
   * @author Kevin Tambascio
   * @author Thomas Baumgart
   */
-class KMYMONEY_EXPORT MyMoneySecurity : public MyMoneyObject, public MyMoneyKeyValueContainer
+class KMM_MYMONEY_EXPORT MyMoneySecurity : public MyMoneyObject, public MyMoneyKeyValueContainer
 {
 public:
   MyMoneySecurity();

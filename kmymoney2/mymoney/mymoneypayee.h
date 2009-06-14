@@ -30,7 +30,7 @@ class QStringList;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <export.h>
+#include <kmm_mymoney_export.h>
 #include <mymoneyobject.h>
 
 /**
@@ -40,7 +40,7 @@ class QStringList;
   *
   * @author Thomas Baumgart
   */
-class KMYMONEY_EXPORT MyMoneyPayee : public MyMoneyObject
+class KMM_MYMONEY_EXPORT MyMoneyPayee : public MyMoneyObject
 {
 private:
   // Simple fields

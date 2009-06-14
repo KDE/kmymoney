@@ -33,7 +33,7 @@
 #include "mymoneyutils.h"
 #include <mymoneyobject.h>
 #include <mymoneykeyvaluecontainer.h>
-#include <export.h>
+#include <kmm_mymoney_export.h>
 
 class MyMoneyFile;
 class MyMoneyMoney;
@@ -43,7 +43,7 @@ class MyMoneyMoney;
   *
   * @author Thomas Baumgart
   */
-class KMYMONEY_EXPORT MyMoneyInstitution : public MyMoneyObject, public MyMoneyKeyValueContainer
+class KMM_MYMONEY_EXPORT MyMoneyInstitution : public MyMoneyObject, public MyMoneyKeyValueContainer
 {
 public:
   /**

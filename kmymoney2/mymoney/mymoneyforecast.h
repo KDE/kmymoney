@@ -34,7 +34,7 @@
 #include <mymoneyaccount.h>
 #include <mymoneymoney.h>
 #include <mymoneyscheduled.h>
-#include <export.h>
+#include <kmm_mymoney_export.h>
 #include "mymoneybudget.h"
 
 /**
@@ -43,7 +43,7 @@
   * @author Alvaro Soliverez <asoliverez@gmail.com>
   */
 
-class KMYMONEY_EXPORT MyMoneyForecast
+class KMM_MYMONEY_EXPORT MyMoneyForecast
 {
 public:
   MyMoneyForecast();

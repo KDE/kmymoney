@@ -29,7 +29,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <export.h>
+#include <kmm_mymoney_export.h>
 
 /**
   * @author Thomas Baumgart
@@ -38,7 +38,7 @@
 /**
   * This class represents the base class of all MyMoney objects.
   */
-class KMYMONEY_EXPORT MyMoneyObject
+class KMM_MYMONEY_EXPORT MyMoneyObject
 {
 public:
   /**

@@ -28,7 +28,7 @@
 #include <QString>
 #include <QDateTime>
 #include <q3valuelist.h>
-#include <export.h>
+#include <kmm_mymoney_export.h>
 #if 0
 
 //Includes for STL support below
@@ -67,7 +67,7 @@ public:
 
 };
 
-class KMYMONEY_EXPORT MyMoneyTracer
+class KMM_MYMONEY_EXPORT MyMoneyTracer
 {
 public:
   MyMoneyTracer(const char* prettyName);
@@ -122,7 +122,7 @@ typedef QMap<void *, _CheckMemoryEntry> CheckMemoryTable;
 
 typedef void _CheckMemoryOutFunc(const char *);
 
-class KMYMONEY_EXPORT _CheckMemory {
+class KMM_MYMONEY_EXPORT _CheckMemory {
  public:
   _CheckMemory();
   _CheckMemory(_CheckMemoryOutFunc *out);
@@ -147,17 +147,17 @@ class KMYMONEY_EXPORT _CheckMemory {
   friend void operator delete [] (void *p) throw();
 };
 
-KMYMONEY_EXPORT void * operator new(size_t s,const char *file,int line) throw(); // Normal new operator
-KMYMONEY_EXPORT void * operator new [] (size_t s,const char *file,int line) throw(); // Array new operator
-KMYMONEY_EXPORT void operator delete(void *p) throw();
-KMYMONEY_EXPORT void operator delete [] (void *p) throw();
+KMM_MYMONEY_EXPORT void * operator new(size_t s,const char *file,int line) throw(); // Normal new operator
+KMM_MYMONEY_EXPORT void * operator new [] (size_t s,const char *file,int line) throw(); // Array new operator
+KMM_MYMONEY_EXPORT void operator delete(void *p) throw();
+KMM_MYMONEY_EXPORT void operator delete [] (void *p) throw();
 
 #define new new(__FILE__,__LINE__)
 
-KMYMONEY_EXPORT extern _CheckMemory chkmem;
+KMM_MYMONEY_EXPORT extern _CheckMemory chkmem;
 
-KMYMONEY_EXPORT void _CheckMemory_Init(_CheckMemoryOutFunc *out);
-KMYMONEY_EXPORT void _CheckMemory_End();
+KMM_MYMONEY_EXPORT void _CheckMemory_Init(_CheckMemoryOutFunc *out);
+KMM_MYMONEY_EXPORT void _CheckMemory_End();
 #define _CheckMemory_Leak(freeall) chkmem.CheckMemoryLeak(freeall)
 #define _CheckMemory_FreeAll() chkmem.FreeAll()
 
@@ -170,7 +170,7 @@ KMYMONEY_EXPORT void _CheckMemory_End();
  * @param date const reference to date to be converted
  * @return QString containing the converted date
  */
-KMYMONEY_EXPORT QString dateToString(const QDate& date);
+KMM_MYMONEY_EXPORT QString dateToString(const QDate& date);
 
 /**
  * This function returns a date as QDate object as specified by
@@ -181,10 +181,10 @@ KMYMONEY_EXPORT QString dateToString(const QDate& date);
  * @param str date in Qt::ISODate format
  * @return QDate object
  */
-KMYMONEY_EXPORT QDate stringToDate(const QString& str);
+KMM_MYMONEY_EXPORT QDate stringToDate(const QString& str);
 
-KMYMONEY_EXPORT QString QStringEmpty(const QString&);
+KMM_MYMONEY_EXPORT QString QStringEmpty(const QString&);
 
-KMYMONEY_EXPORT unsigned long extractId(const QString& txt);
+KMM_MYMONEY_EXPORT unsigned long extractId(const QString& txt);
 
 #endif

@@ -44,13 +44,13 @@
 // Project Includes
 
 #include <mymoneytransaction.h>
-#include <export.h>
+#include <kmm_mymoney_export.h>
 
 /**
   * @author Thomas Baumgart
   */
 
-class KMYMONEY_EXPORT MyMoneyTransactionFilter
+class KMM_MYMONEY_EXPORT MyMoneyTransactionFilter
 {
 public:
   // Make sure to keep the following enum valus in sync with the values

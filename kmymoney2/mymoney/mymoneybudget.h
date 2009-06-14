@@ -35,7 +35,7 @@ class QDomDocument;
 #include <mymoneyobject.h>
 #include <mymoneyaccount.h>
 #include <mymoneymoney.h>
-#include <export.h>
+#include <kmm_mymoney_export.h>
 
 /**
   * This class defines a Budget within the MyMoneyEngine.  The Budget class
@@ -48,7 +48,7 @@ class QDomDocument;
   *
   * @author Darren Gould <darren_gould@gmx.de>
   */
-class KMYMONEY_EXPORT MyMoneyBudget: public MyMoneyObject
+class KMM_MYMONEY_EXPORT MyMoneyBudget: public MyMoneyObject
 {
 public:
   MyMoneyBudget(void);

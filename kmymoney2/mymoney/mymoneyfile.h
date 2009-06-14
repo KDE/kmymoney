@@ -43,7 +43,7 @@
 #include <mymoneyreport.h>
 #include <mymoneybudget.h>
 #include <mymoneyscheduled.h>
-#include <export.h>
+#include <kmm_mymoney_export.h>
 
 /**
   * @author Thomas Baumgart, Michael Edwardes, Kevin Tambascio
@@ -132,7 +132,7 @@ class MyMoneyTransactionFilter;
   * while the engine code is running. The MyMoneyException:: object
   * describes the problem.
   */
-class KMYMONEY_EXPORT MyMoneyFile : public QObject
+class KMM_MYMONEY_EXPORT MyMoneyFile : public QObject
 {
   Q_OBJECT
 public:
@@ -1441,7 +1441,7 @@ private:
   static MyMoneyFile* _instance;
 };
 
-class KMYMONEY_EXPORT MyMoneyFileTransaction
+class KMM_MYMONEY_EXPORT MyMoneyFileTransaction
 {
 public:
   MyMoneyFileTransaction();

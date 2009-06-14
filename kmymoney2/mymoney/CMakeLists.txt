@@ -19,7 +19,7 @@ SET(kmm_mymoney_LIB_SRCS
   )
 
 
-SET(mymoney_HEADERS
+SET(mymoney_HEADERS kmm_mymoney_export.h
   mymoneyobject.h mymoneyaccount.h mymoneycategory.h mymoneyexception.h
   mymoneyfile.h mymoneyfinancialcalculator.h mymoneyinstitution.h
   mymoneyinvesttransaction.h mymoneykeyvaluecontainer.h mymoneymoney.h

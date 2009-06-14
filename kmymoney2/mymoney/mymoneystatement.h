@@ -36,7 +36,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <export.h>
+#include <kmm_mymoney_export.h>
 #include <mymoneymoney.h>
 #include <mymoneysplit.h>
 
@@ -134,9 +134,9 @@ public:
   void write(QDomElement&,QDomDocument*) const;
   bool read(const QDomElement&);
 
-  KMYMONEY_EXPORT static bool isStatementFile(const QString&);
-  KMYMONEY_EXPORT static bool readXMLFile( MyMoneyStatement&, const QString& );
-  KMYMONEY_EXPORT static void writeXMLFile( const MyMoneyStatement&, const QString& );
+  KMM_MYMONEY_EXPORT static bool isStatementFile(const QString&);
+  KMM_MYMONEY_EXPORT static bool readXMLFile( MyMoneyStatement&, const QString& );
+  KMM_MYMONEY_EXPORT static void writeXMLFile( const MyMoneyStatement&, const QString& );
 };
 
 #endif

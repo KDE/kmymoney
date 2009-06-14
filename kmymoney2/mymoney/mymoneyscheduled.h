@@ -36,7 +36,7 @@
 
 #include "mymoneytransaction.h"
 #include "mymoneyaccount.h"
-#include <export.h>
+#include <kmm_mymoney_export.h>
 #include <mymoneyobject.h>
 
 /**
@@ -50,7 +50,7 @@
   * @short A class to represent a schedule.
   * @see MyMoneyScheduled
   */
-class KMYMONEY_EXPORT MyMoneySchedule : public MyMoneyObject
+class KMM_MYMONEY_EXPORT MyMoneySchedule : public MyMoneyObject
 {
 public:
   /**

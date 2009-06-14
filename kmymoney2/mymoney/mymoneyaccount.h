@@ -36,7 +36,7 @@
 #include <mymoneyobject.h>
 #include <mymoneykeyvaluecontainer.h>
 #include <mymoneysecurity.h>
-#include <export.h>
+#include <kmm_mymoney_export.h>
 #include "mymoneyutils.h"
 class MyMoneyTransaction;
 class MyMoneyInstitution;
@@ -75,7 +75,7 @@ class MyMoneyObjectContainer;
   * @author Thomas Baumgart 2002
   *
 **/
-class KMYMONEY_EXPORT MyMoneyAccount : public MyMoneyObject, public MyMoneyKeyValueContainer
+class KMM_MYMONEY_EXPORT MyMoneyAccount : public MyMoneyObject, public MyMoneyKeyValueContainer
 {
   friend class MyMoneyObjectContainer;
 public:
@@ -534,8 +534,8 @@ public:
    */
   static QString accountTypeToString(const MyMoneyAccount::accountTypeE accountType);
 
-  KMYMONEY_EXPORT QDataStream &operator<<( const MyMoneyAccount & );
-  KMYMONEY_EXPORT QDataStream &operator>>( MyMoneyAccount & );
+  KMM_MYMONEY_EXPORT QDataStream &operator<<( const MyMoneyAccount & );
+  KMM_MYMONEY_EXPORT QDataStream &operator>>( MyMoneyAccount & );
 
 private:
   /**
@@ -630,7 +630,7 @@ private:
   * laon relevant data stored in the key value container of the MyMoneyAccount
   * object.
   */
-class KMYMONEY_EXPORT MyMoneyAccountLoan : public MyMoneyAccount
+class KMM_MYMONEY_EXPORT MyMoneyAccountLoan : public MyMoneyAccount
 {
 public:
   enum interestDueE {

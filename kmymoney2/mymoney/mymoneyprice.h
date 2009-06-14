@@ -41,7 +41,7 @@
 // Project Includes
 
 #include <mymoneymoney.h>
-#include <export.h>
+#include <kmm_mymoney_export.h>
 
 /**
   * @author Thomas Baumgart
@@ -65,7 +65,7 @@
   * Using the @p rate() member function, one can retrieve the conversion rate based
   * upon the @p toSecurity or the @p fromSecurity.
   */
-class KMYMONEY_EXPORT MyMoneyPrice
+class KMM_MYMONEY_EXPORT MyMoneyPrice
 {
 public:
   MyMoneyPrice();

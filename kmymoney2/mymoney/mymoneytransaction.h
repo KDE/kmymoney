@@ -38,7 +38,7 @@
 #include "mymoneymoney.h"
 #include "mymoneykeyvaluecontainer.h"
 #include "mymoneysplit.h"
-#include <export.h>
+#include <kmm_mymoney_export.h>
 
 /**
   * This class represents a transaction within the MyMoneyEngine. A transaction
@@ -48,7 +48,7 @@
   * is tolerated by the engine, but in general not a good idea as it is financially
   * wrong.
   */
-class KMYMONEY_EXPORT MyMoneyTransaction : public MyMoneyObject, public MyMoneyKeyValueContainer
+class KMM_MYMONEY_EXPORT MyMoneyTransaction : public MyMoneyObject, public MyMoneyKeyValueContainer
 {
 public:
   MyMoneyTransaction();

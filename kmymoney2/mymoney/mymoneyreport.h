@@ -33,7 +33,7 @@ class QDomDocument;
 #include <mymoneyobject.h>
 #include <mymoneyaccount.h>
 #include <mymoneytransactionfilter.h>
-#include <export.h>
+#include <kmm_mymoney_export.h>
 
 /**
   * This class defines a report within the MyMoneyEngine.  The report class
@@ -54,7 +54,7 @@ class QDomDocument;
   * @author Ace Jones <acejones@users.sourceforge.net>
   */
 
-class KMYMONEY_EXPORT MyMoneyReport: public MyMoneyObject, public MyMoneyTransactionFilter
+class KMM_MYMONEY_EXPORT MyMoneyReport: public MyMoneyObject, public MyMoneyTransactionFilter
 {
 public:
   // When adding a new row type, be sure to add a corresponding entry in kTypeArray

@@ -37,7 +37,7 @@
 #include "mymoneyexception.h"
 #include "mymoneyutils.h"
 #include "mymoneymoney.h"
-#include <export.h>
+#include <kmm_mymoney_export.h>
 #include <mymoneyobject.h>
 #include <mymoneykeyvaluecontainer.h>
 class MyMoneyTransaction;
@@ -49,7 +49,7 @@ class MyMoneyTransaction;
 /**
   * This class represents a split of a transaction.
   */
-class KMYMONEY_EXPORT MyMoneySplit : public MyMoneyObject, public MyMoneyKeyValueContainer
+class KMM_MYMONEY_EXPORT MyMoneySplit : public MyMoneyObject, public MyMoneyKeyValueContainer
 {
 public:
   /**

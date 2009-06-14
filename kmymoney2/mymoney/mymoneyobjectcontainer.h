@@ -30,7 +30,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <export.h>
+#include <kmm_mymoney_export.h>
 #include <mymoneytransaction.h>
 #include <mymoneyaccount.h>
 #include <mymoneyinstitution.h>
@@ -46,7 +46,7 @@
 /**
   * This class represents a generic container for all MyMoneyObject derived objects.
   */
-class KMYMONEY_EXPORT MyMoneyObjectContainer : public QObject
+class KMM_MYMONEY_EXPORT MyMoneyObjectContainer : public QObject
 {
   Q_OBJECT
 public:

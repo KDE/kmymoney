@@ -39,7 +39,7 @@
 // So we can save this object
 #include <QString>
 #include <qdatastream.h>
-#include <export.h>
+#include <kmm_mymoney_export.h>
 #include <mymoneyexception.h>
 
 // Check for standard definitions
@@ -65,7 +65,7 @@ class MyMoneySecurity;
   *
   * @author Michael Edwardes
   */
-class KMYMONEY_EXPORT MyMoneyMoney
+class KMM_MYMONEY_EXPORT MyMoneyMoney
 {
 public:
   enum fileVersionE {
@@ -229,8 +229,8 @@ private:
 
   signed64 getLcd(const MyMoneyMoney& b) const;
 
-  KMYMONEY_EXPORT friend QDataStream &operator<<(QDataStream &, const MyMoneyMoney &);
-  KMYMONEY_EXPORT friend QDataStream &operator>>(QDataStream &, MyMoneyMoney &);
+  KMM_MYMONEY_EXPORT friend QDataStream &operator<<(QDataStream &, const MyMoneyMoney &);
+  KMM_MYMONEY_EXPORT friend QDataStream &operator>>(QDataStream &, MyMoneyMoney &);
 
   static unsigned char _thousandSeparator;
   static unsigned char _decimalSeparator;

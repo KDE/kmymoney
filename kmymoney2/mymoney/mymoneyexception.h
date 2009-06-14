@@ -29,7 +29,7 @@
 // QT Includes
 
 #include <QString>
-#include <export.h>
+#include <kmm_mymoney_export.h>
 /**
   * @file
   * @author Thomas Baumgart
@@ -39,7 +39,7 @@
   * This class describes an exception that is thrown by the engine
   * in case of a failure.
   */
-class KMYMONEY_EXPORT MyMoneyException {
+class KMM_MYMONEY_EXPORT MyMoneyException {
 public:
 
 /**
