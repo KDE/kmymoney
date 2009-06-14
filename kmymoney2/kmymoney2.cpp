@@ -697,10 +697,10 @@ void KMyMoney2App::initActions(void)
   transaction_editsplits->setIcon(KIcon("split_transaction"));
   connect(transaction_editsplits, SIGNAL(triggered()), this, SLOT(slotTransactionsEditSplits()));
 
-  //new KAction(i18nc("Cancel transaction edit", "Cancel"), "button_cancel", 0, this, SLOT(slotTransactionsCancel()), actionCollection(), "transaction_cancel");
+  //new KAction(i18nc("Cancel transaction edit", "Cancel"), "dialog-cancel", 0, this, SLOT(slotTransactionsCancel()), actionCollection(), "transaction_cancel");
   KAction *transaction_cancel = actionCollection()->addAction("transaction_cancel");
   transaction_cancel->setText(i18nc("Cancel transaction edit", "Cancel"));
-  transaction_cancel->setIcon(KIcon("button_cancel"));
+  transaction_cancel->setIcon(KIcon("dialog-cancel"));
   connect(transaction_cancel, SIGNAL(triggered()), this, SLOT(slotTransactionsCancel()));
 
   //new KAction(i18nc("Delete transaction", "Delete"), "delete", 0, this, SLOT(slotTransactionsDelete()), actionCollection(), "transaction_delete");
