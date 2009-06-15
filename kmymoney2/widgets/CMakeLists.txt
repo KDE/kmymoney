@@ -17,6 +17,7 @@ SET(kmymoney_STAT_HEADERS
   stdtransactionmatched.h transactioneditorcontainer.h
   transactionform.h transaction.h transactionsortoptionimpl.h
   kmymoneyreportconfigtabimpl.h kmymoneyreportcontrolimpl.h
+  kmymoney_export.h
   )
 
 ########### Basic Widget Library (kmymoney_base) STATIC #################

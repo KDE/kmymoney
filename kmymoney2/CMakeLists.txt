@@ -13,7 +13,7 @@ ADD_SUBDIRECTORY( pics )
 ADD_SUBDIRECTORY( html ) 
 ADD_SUBDIRECTORY( templates ) 
 
-SET( _HEADERS export.h kmymoneyutils.h kmymoneyglobalsettings.h )
+SET( _HEADERS kmymoneyutils.h kmymoneyglobalsettings.h )
 
 ########### common code (kmymoney_common) STATIC ###############
 # will be linked into kmymoney2, kmymoneytest, and libkmymoney.so

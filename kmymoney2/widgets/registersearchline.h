@@ -32,7 +32,7 @@
 // Project Includes
 
 #include <register.h>
-#include <export.h>
+#include <kmymoney_export.h>
 
 namespace KMyMoneyRegister {
 
