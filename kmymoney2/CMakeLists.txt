@@ -12,6 +12,7 @@ ADD_SUBDIRECTORY( wizards )
 ADD_SUBDIRECTORY( pics ) 
 ADD_SUBDIRECTORY( html ) 
 ADD_SUBDIRECTORY( templates ) 
+ADD_SUBDIRECTORY( misc )
 
 SET( _HEADERS kmymoneyutils.h kmymoneyglobalsettings.h )
 
