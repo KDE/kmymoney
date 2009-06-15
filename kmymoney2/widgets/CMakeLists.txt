@@ -53,7 +53,7 @@ SET(_uncritial_common_sources
 
 # sources that contain the KMM_DESIGNER flag
 SET (_critial_common_sources
-	kaccounttemplateselector.cpp
+  kaccounttemplateselector.cpp
   kmymoneyaccountcombo.cpp
   kmymoneyaccountcompletion.cpp
   kmymoneyaccounttreebase.cpp
@@ -89,11 +89,6 @@ KDE4_ADD_LIBRARY(kmymoney_base STATIC ${_uncritial_common_sources})
 KDE4_ADD_LIBRARY(kmymoney SHARED
  ${_critial_common_sources} ${_uncritial_common_sources} )
 TARGET_LINK_LIBRARIES(kmymoney  dialogs widgets kmymoney_common kmm_mymoney converter ${KDE4_KDE3SUPPORT_LIBS} ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS})
-
-# Build directly with INSTALL_RPATH.
-# This avoids relinking (and rerunning uic) on 'make install'
-#SET_TARGET_PROPERTIES(kmymoney PROPERTIES
-#  BUILD_WITH_INSTALL_RPATH TRUE)
 
 # For now, be NOT pedantic about this library.
 # Some undefined references remain.
@@ -158,19 +153,18 @@ INSTALL(FILES ${kmymoney_STAT_HEADERS}
   DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney COMPONENT Devel)
 
 if( USE_QT_DESIGNER )
-set(kmymoneywidgets_PART_SRCS
-   ${CMAKE_CURRENT_BINARY_DIR}/kmymoneywidgets.cpp
-)
+  set(kmymoneywidgets_PART_SRCS
+     ${CMAKE_CURRENT_BINARY_DIR}/kmymoneywidgets.cpp
+  )
 
-kde4_add_widget_files(${kmymoneywidgets_PART_SRCS} kmymoney.widgets)
+  kde4_add_widget_files(${kmymoneywidgets_PART_SRCS} kmymoney.widgets)
 
-kde4_add_plugin(kmymoneywidgets ${kmymoneywidgets_PART_SRCS})
+  kde4_add_plugin(kmymoneywidgets ${kmymoneywidgets_PART_SRCS})
 
-target_link_libraries(kmymoneywidgets ${KDE4_KDECORE_LIBS}  ${QT_QTGUI_LIBRARY} ${KDE4_KDE3SUPPORT_LIBS} widgets kmymoney kmymoney_common dialogs kgpgfile converter)
+  target_link_libraries(kmymoneywidgets ${KDE4_KDECORE_LIBS}  ${QT_QTGUI_LIBRARY} ${KDE4_KDE3SUPPORT_LIBS} widgets kmymoney kmymoney_common dialogs kgpgfile converter)
 
-install(TARGETS kmymoneywidgets DESTINATION ${PLUGIN_INSTALL_DIR}/plugins/designer )
+  install(TARGETS kmymoneywidgets DESTINATION ${PLUGIN_INSTALL_DIR}/plugins/designer )
 
-INSTALL(FILES kmymoneytitlelabel.png DESTINATION ${DATA_INSTALL_DIR}/kmymoney2/pics)
-
+  INSTALL(FILES kmymoneytitlelabel.png DESTINATION ${DATA_INSTALL_DIR}/kmymoney2/pics)
 
 endif( USE_QT_DESIGNER )
