@@ -133,7 +133,7 @@ KMyMoneyWizard::KMyMoneyWizard(QWidget *parent, const char *name, bool modal, Qt
   {
     m_backButton->setIconSet( KStandardGuiItem::back( KStandardGuiItem::UseRTL ).iconSet() );
     m_nextButton->setIconSet( KStandardGuiItem::forward( KStandardGuiItem::UseRTL ).iconSet() );
-    m_finishButton->setIconSet( SmallIconSet( "apply" ) );
+    m_finishButton->setIconSet( SmallIconSet( "dialog-ok-apply" ) );
     m_cancelButton->setIconSet( SmallIconSet( "dialog-cancel" ) );
     m_helpButton->setIconSet( SmallIconSet( "help-contents" ) );
   }
