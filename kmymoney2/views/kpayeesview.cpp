@@ -366,7 +366,7 @@ KPayeesView::KPayeesView(QWidget *parent) :
 
   KIconLoader* il = KIconLoader::global();
   KGuiItem updateButtonItem( i18n("Update"),
-                    KIcon(il->loadIcon("button_ok", KIconLoader::Small, KIconLoader::SizeSmall)),
+                    KIcon(il->loadIcon("dialog-ok", KIconLoader::Small, KIconLoader::SizeSmall)),
                     i18n("Accepts the entered data and stores it"),
                     i18n("Use this to accept the modified data."));
   m_updateButton->setGuiItem(updateButtonItem);

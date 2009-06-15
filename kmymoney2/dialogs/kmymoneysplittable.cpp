@@ -856,7 +856,7 @@ QWidget* kMyMoneySplitTable::createEditWidgets(void)
   m_registerButtonFrame->setPalette(palette);
 
   QHBoxLayout* l = new QHBoxLayout(m_registerButtonFrame);
-  m_registerEnterButton = new KPushButton(KIcon( il->loadIcon("button_ok", KIconLoader::Small, KIconLoader::SizeSmall) ), QString(), m_registerButtonFrame);
+  m_registerEnterButton = new KPushButton(KIcon( il->loadIcon("dialog-ok", KIconLoader::Small, KIconLoader::SizeSmall) ), QString(), m_registerButtonFrame);
 
   m_registerCancelButton = new KPushButton(KIcon( il->loadIcon("dialog-cancel", KIconLoader::Small, KIconLoader::SizeSmall) ), QString(), m_registerButtonFrame);
 

@@ -683,11 +683,9 @@ void KMyMoney2App::initActions(void)
   connect(transaction_edit, SIGNAL(triggered()), this, SLOT(slotTransactionsEdit()));
 
 
-  //p = new KAction(i18nc("Enter transaction", "Enter"), "button_ok", 0, this, SLOT(slotTransactionsEnter()), actionCollection(), "transaction_enter");
-  //p->setShortcutConfigurable(false);
   KAction *transaction_enter = actionCollection()->addAction("transaction_enter");
   transaction_enter->setText(i18nc("Enter transaction", "Enter"));
-  transaction_enter->setIcon(KIcon("button_ok"));
+  transaction_enter->setIcon(KIcon("dialog-ok"));
   transaction_enter->setShortcutConfigurable(false);
   connect(transaction_enter, SIGNAL(triggered()), this, SLOT(slotTransactionsEnter()));
 

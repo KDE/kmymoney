@@ -76,7 +76,7 @@ KMyMoneyPriceDlg::KMyMoneyPriceDlg(QWidget* parent) :
   m_editButton->setGuiItem(editButtenItem);
 
   KGuiItem okButtenItem( i18n("&Close" ),
-                    KIcon(il->loadIcon("button_ok", KIconLoader::Small, KIconLoader::SizeSmall)),
+                    KIcon(il->loadIcon("dialog-ok", KIconLoader::Small, KIconLoader::SizeSmall)),
                     i18n("Close the dialog"),
                     i18n("Use this to close the dialog and return to the application."));
   m_closeButton->setGuiItem(okButtenItem);

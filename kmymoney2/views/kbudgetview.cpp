@@ -129,7 +129,7 @@ KBudgetView::KBudgetView(QWidget *parent) :
   QToolTip::add(m_deleteButton, deleteButtenItem.toolTip());
 
   KGuiItem updateButtenItem( QString(""),
-                             KIcon(il->loadIcon("button_ok", KIconLoader::Small, KIconLoader::SizeSmall)),
+                             KIcon(il->loadIcon("dialog-ok", KIconLoader::Small, KIconLoader::SizeSmall)),
                              i18n("Accepts the entered values and stores the budget"),
                              i18n("Use this to store the modified data."));
   m_updateButton->setGuiItem(updateButtenItem);
