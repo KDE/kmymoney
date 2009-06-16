@@ -656,7 +656,7 @@ void MyMoneyStorageXML::writeAccounts(QDomElement& accounts)
 
   signalProgress(0, list.count(), i18n("Saving accounts..."));
   int i = 0;
-  for(it = list.begin(); it != list.end(); ++it, ++i) {
+  for(it = list.constBegin(); it != list.constEnd(); ++it, ++i) {
     writeAccount(accounts, *it);
     signalProgress(i, 0);
   }
@@ -680,7 +680,7 @@ void MyMoneyStorageXML::writeTransactions(QDomElement& transactions)
   signalProgress(0, list.count(), i18n("Saving transactions..."));
 
   int i = 0;
-  for(it = list.begin(); it != list.end(); ++it, ++i)
+  for(it = list.constBegin(); it != list.constEnd(); ++it, ++i)
   {
     writeTransaction(transactions, *it);
     signalProgress(i, 0);
@@ -698,7 +698,7 @@ void MyMoneyStorageXML::writeSchedules(QDomElement& scheduled)
   QList<MyMoneySchedule>::ConstIterator it;
   scheduled.setAttribute("count", list.count());
 
-  for(it = list.begin(); it != list.end(); ++it)
+  for(it = list.constBegin(); it != list.constEnd(); ++it)
   {
     this->writeSchedule(scheduled, *it);
   }
@@ -715,7 +715,7 @@ void MyMoneyStorageXML::writeSecurities(QDomElement& equities)
   equities.setAttribute("count", securityList.count());
   if(securityList.size())
   {
-    for(QList<MyMoneySecurity>::ConstIterator it = securityList.begin(); it != securityList.end(); ++it)
+    for(QList<MyMoneySecurity>::ConstIterator it = securityList.constBegin(); it != securityList.constEnd(); ++it)
     {
       writeSecurity(equities, (*it));
     }
@@ -733,7 +733,7 @@ void MyMoneyStorageXML::writeCurrencies(QDomElement& currencies)
   currencies.setAttribute("count", currencyList.count());
   if(currencyList.size())
   {
-    for(QList<MyMoneySecurity>::ConstIterator it = currencyList.begin(); it != currencyList.end(); ++it)
+    for(QList<MyMoneySecurity>::ConstIterator it = currencyList.constBegin(); it != currencyList.constEnd(); ++it)
     {
       writeSecurity(currencies, (*it));
     }
@@ -748,7 +748,7 @@ void MyMoneyStorageXML::writeReports(QDomElement& parent)
 
   signalProgress(0, list.count(), i18n("Saving reports..."));
   unsigned i = 0;
-  for(it = list.begin(); it != list.end(); ++it)
+  for(it = list.constBegin(); it != list.constEnd(); ++it)
   {
     (*it).writeXML(*m_doc, parent);
     signalProgress(++i, 0);
@@ -763,7 +763,7 @@ void MyMoneyStorageXML::writeBudgets(QDomElement& parent)
 
   signalProgress(0, list.count(), i18n("Saving budgets..."));
   unsigned i = 0;
-  for(it = list.begin(); it != list.end(); ++it)
+  for(it = list.constBegin(); it != list.constEnd(); ++it)
   {
     writeBudget(parent, (*it));
     signalProgress(++i, 0);
@@ -802,7 +802,7 @@ QDomElement MyMoneyStorageXML::writeKeyValuePairs(const QMap<QString, QString> p
     QDomElement keyValPairs = m_doc->createElement("KEYVALUEPAIRS");
 
     QMap<QString, QString>::const_iterator it;
-    for(it = pairs.begin(); it != pairs.end(); ++it)
+    for(it = pairs.constBegin(); it != pairs.constEnd(); ++it)
     {
       QDomElement pair = m_doc->createElement("PAIR");
       pair.setAttribute("key", it.key());
@@ -820,7 +820,7 @@ void MyMoneyStorageXML::writePrices(QDomElement& prices)
   MyMoneyPriceList::ConstIterator it;
   prices.setAttribute("count", list.count());
 
-  for(it = list.begin(); it != list.end(); ++it)
+  for(it = list.constBegin(); it != list.constEnd(); ++it)
   {
     QDomElement price = m_doc->createElement("PRICEPAIR");
     price.setAttribute("from", it.key().first);
@@ -833,7 +833,7 @@ void MyMoneyStorageXML::writePrices(QDomElement& prices)
 void MyMoneyStorageXML::writePricePair(QDomElement& price, const MyMoneyPriceEntries& p)
 {
   MyMoneyPriceEntries::ConstIterator it;
-  for(it = p.begin(); it != p.end(); ++it) {
+  for(it = p.constBegin(); it != p.constEnd(); ++it) {
     QDomElement entry = m_doc->createElement("PRICE");
     writePrice(entry, *it);
     price.appendChild(entry);

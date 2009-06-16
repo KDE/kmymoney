@@ -418,7 +418,7 @@ void MyMoneySeqAccessMgr::addTransaction(MyMoneyTransaction& transaction, const 
 
   // now check the splits
   QList<MyMoneySplit>::ConstIterator it_s;
-  for(it_s = transaction.splits().begin(); it_s != transaction.splits().end(); ++it_s) {
+  for(it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s) {
     // the following lines will throw an exception if the
     // account or payee do not exist
     account((*it_s).accountId());
@@ -435,7 +435,7 @@ void MyMoneySeqAccessMgr::addTransaction(MyMoneyTransaction& transaction, const 
   transaction = newTransaction;
 
   // adjust the balance of all affected accounts
-  for(it_s = transaction.splits().begin(); it_s != transaction.splits().end(); ++it_s) {
+  for(it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s) {
     MyMoneyAccount acc = m_accountList[(*it_s).accountId()];
     acc.adjustBalance(*it_s);
     if(!skipAccountUpdate) {
@@ -893,7 +893,7 @@ const MyMoneyMoney MyMoneySeqAccessMgr::balance(const QString& id, const QDate& 
     filter.setReportAllSplits(false);
     transactionList(list, filter);
 
-    for(it_t = list.begin(); it_t != list.end(); ++it_t) {
+    for(it_t = list.constBegin(); it_t != list.constEnd(); ++it_t) {
       for(it_s = (*it_t).splits().begin(); it_s != (*it_t).splits().end(); ++it_s){
         const QString& aid = (*it_s).accountId();
         if((*it_s).action() == MyMoneySplit::ActionSplitShares) {
@@ -1273,11 +1273,11 @@ const QList<MyMoneySchedule> MyMoneySeqAccessMgr::scheduleList(
       QList<MyMoneySplit>::ConstIterator it;
       QList<MyMoneySplit> splits;
       splits = t.splits();
-      for(it = splits.begin(); it != splits.end(); ++it) {
+      for(it = splits.constBegin(); it != splits.constEnd(); ++it) {
         if((*it).accountId() == accountId)
           break;
       }
-      if(it == splits.end()) {
+      if(it == splits.constEnd()) {
         continue;
       }
     }
