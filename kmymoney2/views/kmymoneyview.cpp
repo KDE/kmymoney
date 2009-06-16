@@ -1019,9 +1019,9 @@ void KMyMoneyView::saveToLocalFile(QFile* qfile, IMyMoneyStorageFormat* pWriter,
       }
     }
 
-    QStringList keys = QStringList::split(",", keyList);
+    const QStringList keys = QStringList::split(",", keyList);
     QStringList::const_iterator it_s;
-    for(it_s = keys.begin(); it_s != keys.begin(); ++it_s) {
+    for(it_s = keys.constBegin(); it_s != keys.constEnd(); ++it_s) {
       if(!KGPGFile::keyAvailable(*it_s)) {
         KMessageBox::sorry(this, QString("<p>")+i18n("You have specified to encrypt your data for the user-id</p><p><center><b>%1</b>.</center></p>Unfortunately, a valid key for this user-id was not found in your keyring. Please make sure to import a valid key for this user-id. This time, encryption is disabled.",*it_s), i18n("GPG-Key not found"));
         encryptedOk = false;
@@ -1049,7 +1049,7 @@ void KMyMoneyView::saveToLocalFile(QFile* qfile, IMyMoneyStorageFormat* pWriter,
     if(kgpg) {
       QStringList keys = QStringList::split(",", keyList);
       QStringList::const_iterator it_s;
-      for(it_s = keys.begin(); it_s != keys.end(); ++it_s) {
+      for(it_s = keys.constBegin(); it_s != keys.constEnd(); ++it_s) {
         kgpg->addRecipient((*it_s).toLatin1());
       }
       if(encryptRecover) {
@@ -1723,7 +1723,7 @@ void KMyMoneyView::fixFile_1(void)
         (*it_r).accounts(list);
         QStringList missing;
         QStringList::const_iterator it_a, it_b;
-        for(it_a = list.begin(); it_a != list.end(); ++it_a) {
+        for(it_a = list.constBegin(); it_a != list.constEnd(); ++it_a) {
           MyMoneyAccount acc = MyMoneyFile::instance()->account(*it_a);
           if(acc.accountType() == MyMoneyAccount::Investment) {
             for(it_b = acc.accountList().begin(); it_b != acc.accountList().end(); ++it_b) {
@@ -1842,10 +1842,10 @@ void KMyMoneyView::fixSchedule_0(MyMoneySchedule sched)
   try {
     // Check if the splits contain valid data and set it to
     // be valid.
-    for(it_s = splitList.begin(); it_s != splitList.end(); ++it_s) {
+    for(it_s = splitList.constBegin(); it_s != splitList.constEnd(); ++it_s) {
       // the first split is always the account on which this transaction operates
       // and if the transaction commodity is not set, we take this
-      if(it_s == splitList.begin() && t.commodity().isEmpty()) {
+      if(it_s == splitList.constBegin() && t.commodity().isEmpty()) {
         kDebug(2) << __func__ << " " << t.id() << " has no commodity";
         try {
           MyMoneyAccount acc = MyMoneyFile::instance()->account((*it_s).accountId());
@@ -1935,7 +1935,7 @@ void KMyMoneyView::createSchedule(MyMoneySchedule newSchedule, MyMoneyAccount& n
       // this always the first split, but the loan code leaves it as
       // the second one. So I thought, searching is a good alternative ....
       QList<MyMoneySplit>::ConstIterator it_s;
-      for(it_s = t.splits().begin(); it_s != t.splits().end(); ++it_s) {
+      for(it_s = t.splits().constBegin(); it_s != t.splits().constEnd(); ++it_s) {
         if((*it_s).accountId().isEmpty()) {
           MyMoneySplit s = (*it_s);
           s.setAccountId(newAccount.id());
@@ -1997,7 +1997,7 @@ void KMyMoneyView::fixTransactions_0(void)
     QStringList accounts;
     bool hasDuplicateAccounts = false;
 
-    for(it_s = t.splits().begin(); it_s != t.splits().end(); ++it_s) {
+    for(it_s = t.splits().constBegin(); it_s != t.splits().constEnd(); ++it_s) {
       if(accounts.contains((*it_s).accountId())) {
         hasDuplicateAccounts = true;
         kDebug(2) << __func__ << " " << t.id() << " has multiple splits with account " << (*it_s).accountId();

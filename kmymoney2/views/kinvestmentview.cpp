@@ -292,7 +292,7 @@ void KInvestmentView::loadView(void)
     d->m_account = file->account(d->m_account.id());
     QStringList securities = d->m_account.accountList();
 
-    for(QStringList::ConstIterator it = securities.begin(); it != securities.end(); ++it) {
+    for(QStringList::ConstIterator it = securities.constBegin(); it != securities.constEnd(); ++it) {
       MyMoneyAccount acc = file->account(*it);
       if(!acc.isClosed() || showClosedAccounts)
         new KInvestmentListItem(m_table, acc);

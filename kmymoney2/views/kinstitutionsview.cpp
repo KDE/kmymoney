@@ -126,7 +126,7 @@ void KInstitutionsView::loadAccounts(void)
   QList<MyMoneyAccount> alist;
   file->accountList(alist);
   QList<MyMoneyAccount>::const_iterator it_a;
-  for(it_a = alist.begin(); it_a != alist.end(); ++it_a) {
+  for(it_a = alist.constBegin(); it_a != alist.constEnd(); ++it_a) {
     m_accountMap[(*it_a).id()] = *it_a;
   }
 
@@ -142,7 +142,7 @@ void KInstitutionsView::loadAccounts(void)
   QList<MyMoneySecurity> slist = file->currencyList();
   slist += file->securityList();
   QList<MyMoneySecurity>::const_iterator it_s;
-  for(it_s = slist.begin(); it_s != slist.end(); ++it_s) {
+  for(it_s = slist.constBegin(); it_s != slist.constEnd(); ++it_s) {
     m_securityMap[(*it_s).id()] = *it_s;
   }
 
@@ -166,7 +166,7 @@ void KInstitutionsView::loadAccounts(void)
 
     QList<MyMoneyInstitution> list = file->institutionList();
     QList<MyMoneyInstitution>::const_iterator it_i;
-    for(it_i = list.begin(); it_i != list.end(); ++it_i) {
+    for(it_i = list.constBegin(); it_i != list.constEnd(); ++it_i) {
       KMyMoneyAccountTreeItem* item = new KMyMoneyAccountTreeItem(m_accountTree, *it_i);
       item->setPixmap(0, none.pixmap());
       loadSubAccounts(item, (*it_i).id());
@@ -234,7 +234,7 @@ void KInstitutionsView::loadSubAccounts(KMyMoneyAccountTreeItem* parent, const Q
   MyMoneyMoney  value;
   bool showClosedAccounts = kmymoney2->toggleAction("view_show_all_accounts")->isChecked();
 
-  for(it_a = m_accountMap.begin(); it_a != m_accountMap.end(); ++it_a) {
+  for(it_a = m_accountMap.constBegin(); it_a != m_accountMap.constEnd(); ++it_a) {
     const MyMoneyAccount& acc = *it_a;
     MyMoneyMoney factor(1,1);
     switch(acc.accountGroup()) {
