@@ -246,7 +246,7 @@ void KBudgetView::loadBudgets(void)
 
   QList<MyMoneyBudget> list = MyMoneyFile::instance()->budgetList();
   QList<MyMoneyBudget>::ConstIterator it;
-  for (it = list.begin(); it != list.end(); ++it)
+  for (it = list.constBegin(); it != list.constEnd(); ++it)
   {
     KBudgetListItem* item = new KBudgetListItem(m_budgetList, *it);
 
@@ -431,17 +431,17 @@ bool KBudgetView::loadSubAccounts(KMyMoneyAccountTreeBudgetItem* parent, QString
     file->accountList ( alist, accountList );
     accountList.clear();
     QList<MyMoneyAccount>::const_iterator it_ac;
-    for ( it_ac = alist.begin(); it_ac != alist.end(); ++it_ac ) {
+    for ( it_ac = alist.constBegin(); it_ac != alist.constEnd(); ++it_ac ) {
       accountMap[(*it_ac).name()] = *it_ac;
     }
     QMap<QString, MyMoneyAccount>::const_iterator it_am;
-    for ( it_am = accountMap.begin(); it_am != accountMap.end(); ++it_am ) {
+    for ( it_am = accountMap.constBegin(); it_am != accountMap.constEnd(); ++it_am ) {
       accountList.prepend((*it_am).id()); //use prepend instead of append otherwise account show up in ascending order
     }
   }
 
   QStringList::const_iterator it_a;
-  for(it_a = accountList.begin(); it_a != accountList.end(); ++it_a) {
+  for(it_a = accountList.constBegin(); it_a != accountList.constEnd(); ++it_a) {
     const MyMoneyAccount& acc = file->account(*it_a);
     QList<MyMoneyPrice> prices;
     MyMoneySecurity security = file->baseCurrency();

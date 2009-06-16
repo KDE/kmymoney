@@ -211,7 +211,7 @@ void KHomeView::loadView(void)
 
     QStringList::ConstIterator it;
 
-    for(it = settings.begin(); it != settings.end(); ++it) {
+    for(it = settings.constBegin(); it != settings.constEnd(); ++it) {
       int option = (*it).toInt();
       if(option > 0) {
         switch(option) {
@@ -780,7 +780,7 @@ void KHomeView::showAccounts(KHomeView::paymentTypeE type, const QString& header
 
 
     QMap<QString, MyMoneyAccount>::const_iterator it_m;
-    for(it_m = nameIdx.begin(); it_m != nameIdx.end(); ++it_m) {
+    for(it_m = nameIdx.constBegin(); it_m != nameIdx.constEnd(); ++it_m) {
       m_part->write(QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd"));
       showAccountEntry(*it_m);
       m_part->write("</tr>");
@@ -893,8 +893,8 @@ void KHomeView::showFavoriteReports(void)
   {
     bool firstTime = 1;
     int row = 0;
-    QList<MyMoneyReport>::const_iterator it_report = reports.begin();
-    while( it_report != reports.end() )
+    QList<MyMoneyReport>::const_iterator it_report = reports.constBegin();
+    while( it_report != reports.constEnd() )
     {
       if ( (*it_report).isFavorite() ) {
         if(firstTime) {
@@ -937,8 +937,8 @@ void KHomeView::showForecast(void)
   accList = m_forecast.accountList();
 
   //add it to a map to have it ordered by name
-  QList<MyMoneyAccount>::const_iterator accList_t = accList.begin();
-  for ( ; accList_t != accList.end(); ++accList_t )
+  QList<MyMoneyAccount>::const_iterator accList_t = accList.constBegin();
+  for ( ; accList_t != accList.constEnd(); ++accList_t )
   {
     QString key = (*accList_t).name();
     if(nameIdx[key].id().isEmpty()) {
@@ -984,7 +984,7 @@ void KHomeView::showForecast(void)
     i = 0;
 
     QMap<QString, MyMoneyAccount>::ConstIterator it_account;
-    for(it_account = nameIdx.begin(); it_account != nameIdx.end(); ++it_account) {
+    for(it_account = nameIdx.constBegin(); it_account != nameIdx.constEnd(); ++it_account) {
       //MyMoneyAccount acc = (*it_n);
 
       m_part->write(QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd"));
@@ -1274,12 +1274,12 @@ void KHomeView::showAssetsLiabilities(void)
     m_part->write("</td></tr>");
 
     //get asset and liability accounts
-    QMap<QString, MyMoneyAccount>::const_iterator asset_it = nameAssetsIdx.begin();
-    QMap<QString,MyMoneyAccount>::const_iterator liabilities_it = nameLiabilitiesIdx.begin();
-    for(; asset_it != nameAssetsIdx.end() || liabilities_it != nameLiabilitiesIdx.end();) {
+    QMap<QString, MyMoneyAccount>::const_iterator asset_it = nameAssetsIdx.constBegin();
+    QMap<QString,MyMoneyAccount>::const_iterator liabilities_it = nameLiabilitiesIdx.constBegin();
+    for(; asset_it != nameAssetsIdx.constEnd() || liabilities_it != nameLiabilitiesIdx.constEnd();) {
       m_part->write(QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd"));
       //write an asset account if we still have any
-      if(asset_it != nameAssetsIdx.end()) {
+      if(asset_it != nameAssetsIdx.constEnd()) {
         MyMoneyMoney value;
         //investment accounts consolidate the balance of its subaccounts
         if( (*asset_it).accountType() == MyMoneyAccount::Investment) {
@@ -1309,7 +1309,7 @@ void KHomeView::showAssetsLiabilities(void)
       m_part->write("<td class=\"setcolor\"></td>");
 
       //write a liability account
-      if(liabilities_it != nameLiabilitiesIdx.end()) {
+      if(liabilities_it != nameLiabilitiesIdx.constEnd()) {
         MyMoneyMoney value;
         value = MyMoneyFile::instance()->balance((*liabilities_it).id(), QDate::currentDate());
         //calculate balance if foreign currency
@@ -1578,7 +1578,7 @@ void KHomeView::showCashFlowSummary()
     QList<MyMoneyTransaction>::const_iterator it_transaction;
 
     //get all transactions for this month
-    for(it_transaction = transactions.begin(); it_transaction != transactions.end(); ++it_transaction ) {
+    for(it_transaction = transactions.constBegin(); it_transaction != transactions.constEnd(); ++it_transaction ) {
 
       //get the splits for each transaction
       const QList<MyMoneySplit>& splits = (*it_transaction).splits();
@@ -1673,7 +1673,7 @@ void KHomeView::showCashFlowSummary()
         QList<MyMoneySplit>::const_iterator it_s;
         QMap<QString, MyMoneyMoney> balanceMap;
 
-        for(it_s = transaction.splits().begin(); it_s != transaction.splits().end(); ++it_s ) {
+        for(it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s ) {
           MyMoneyAccount acc = file->account((*it_s).accountId());
             // collect all overdues on the first day
             QDate schedDate = nextDate;
@@ -1688,7 +1688,7 @@ void KHomeView::showCashFlowSummary()
       //go through the splits and assign to liquid or other transfers
       const QList<MyMoneySplit> splits = transaction.splits();
       QList<MyMoneySplit>::const_iterator split_it;
-      for (split_it = splits.begin(); split_it != splits.end(); ++split_it) {
+      for (split_it = splits.constBegin(); split_it != splits.constEnd(); ++split_it) {
         if( (*split_it).accountId() != acc.id() ) {
           ReportAccount repSplitAcc = ReportAccount((*split_it).accountId());
 
@@ -1742,7 +1742,7 @@ void KHomeView::showCashFlowSummary()
 
   // get list of all accounts
   file->accountList(accounts);
-  for(account_it = accounts.begin(); account_it != accounts.end();) {
+  for(account_it = accounts.constBegin(); account_it != accounts.constEnd();) {
     if(!(*account_it).isClosed()) {
       switch((*account_it).accountType()) {
         //group all assets into one list

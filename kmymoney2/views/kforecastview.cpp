@@ -249,8 +249,8 @@ void KForecastView::loadSummaryView(void)
   //Get all accounts of the right type to calculate forecast
   m_nameIdx.clear();
   accList = forecast.accountList();
-  QList<MyMoneyAccount>::const_iterator accList_t = accList.begin();
-  for(; accList_t != accList.end(); ++accList_t ) {
+  QList<MyMoneyAccount>::const_iterator accList_t = accList.constBegin();
+  for(; accList_t != accList.constEnd(); ++accList_t ) {
     MyMoneyAccount acc = *accList_t;
     if(m_nameIdx[acc.id()] != acc.id()) { //Check if the account is there
       m_nameIdx[acc.id()] = acc.id();
@@ -258,7 +258,7 @@ void KForecastView::loadSummaryView(void)
   }
 
   QMap<QString, QString>::ConstIterator it_nc;
-  for(it_nc = m_nameIdx.begin(); it_nc != m_nameIdx.end(); ++it_nc) {
+  for(it_nc = m_nameIdx.constBegin(); it_nc != m_nameIdx.constEnd(); ++it_nc) {
 
     const MyMoneyAccount& acc = file->account(*it_nc);
     MyMoneySecurity currency;
@@ -379,8 +379,8 @@ void KForecastView::loadAdvancedView(void)
   //Get all accounts of the right type to calculate forecast
   m_nameIdx.clear();
   accList = forecast.accountList();
-  QList<MyMoneyAccount>::const_iterator accList_t = accList.begin();
-  for(; accList_t != accList.end(); ++accList_t ) {
+  QList<MyMoneyAccount>::const_iterator accList_t = accList.constBegin();
+  for(; accList_t != accList.constEnd(); ++accList_t ) {
     MyMoneyAccount acc = *accList_t;
     if(m_nameIdx[acc.id()] != acc.id()) { //Check if the account is there
       m_nameIdx[acc.id()] = acc.id();
@@ -419,7 +419,7 @@ void KForecastView::loadAdvancedView(void)
   KMyMoneyForecastListViewItem *advancedItem = 0;
 
   QMap<QString, QString>::ConstIterator it_nc;
-  for(it_nc = m_nameIdx.begin(); it_nc != m_nameIdx.end(); ++it_nc) {
+  for(it_nc = m_nameIdx.constBegin(); it_nc != m_nameIdx.constEnd(); ++it_nc) {
     const MyMoneyAccount& acc = file->account(*it_nc);
     QString amount;
     MyMoneyMoney amountMM;
@@ -583,7 +583,7 @@ bool KForecastView::includeAccount(MyMoneyForecast& forecast, const MyMoneyAccou
 
   if(accounts.size() > 0) {
     QStringList::ConstIterator it_acc;
-    for(it_acc = accounts.begin(); it_acc != accounts.end(); ++it_acc) {
+    for(it_acc = accounts.constBegin(); it_acc != accounts.constEnd(); ++it_acc) {
       MyMoneyAccount account = file->account(*it_acc);
       if( includeAccount(forecast, account) )
         return true;
@@ -606,7 +606,7 @@ void KForecastView::loadAccounts(MyMoneyForecast& forecast, const MyMoneyAccount
     return;
 
   QStringList::ConstIterator accList_t;
-  for(accList_t = accList.begin(); accList_t != accList.end(); ++accList_t ) {
+  for(accList_t = accList.constBegin(); accList_t != accList.constEnd(); ++accList_t ) {
     MyMoneyAccount subAccount = file->account(*accList_t);
     //only add the account if it is a forecast account or the parent of a forecast account
     if(includeAccount(forecast, subAccount)) {
@@ -615,7 +615,7 @@ void KForecastView::loadAccounts(MyMoneyForecast& forecast, const MyMoneyAccount
   }
 
   QMap<QString, QString>::ConstIterator it_nc;
-  for(it_nc = nameIdx.begin(); it_nc != nameIdx.end(); ++it_nc) {
+  for(it_nc = nameIdx.constBegin(); it_nc != nameIdx.constEnd(); ++it_nc) {
 
     const MyMoneyAccount subAccount = file->account(*it_nc);
     MyMoneySecurity currency;

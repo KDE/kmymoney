@@ -237,7 +237,7 @@ void KAccountsView::loadIconView(void)
   QList<MyMoneyAccount> alist;
   file->accountList(alist);
   QList<MyMoneyAccount>::const_iterator it_a;
-  for(it_a = alist.begin(); it_a != alist.end(); ++it_a) {
+  for(it_a = alist.constBegin(); it_a != alist.constEnd(); ++it_a) {
     accountMap[QString("%1-%2").arg((*it_a).name()).arg((*it_a).id())] = *it_a;
   }
 
@@ -247,7 +247,7 @@ void KAccountsView::loadIconView(void)
   // parse list and add all asset and liability accounts
   QMap<QString, MyMoneyAccount>::const_iterator it;
   QPoint loc;
-  for(it = accountMap.begin(); it != accountMap.end(); ++it) {
+  for(it = accountMap.constBegin(); it != accountMap.constEnd(); ++it) {
     if((*it).isClosed() && !showClosedAccounts)
       continue;
     const QString& pos = (*it).value("kmm-iconpos");
@@ -340,7 +340,7 @@ void KAccountsView::loadListView(void)
   QList<MyMoneySecurity> slist = file->currencyList();
   slist += file->securityList();
   QList<MyMoneySecurity>::const_iterator it_s;
-  for(it_s = slist.begin(); it_s != slist.end(); ++it_s) {
+  for(it_s = slist.constBegin(); it_s != slist.constEnd(); ++it_s) {
     m_securityMap[(*it_s).id()] = *it_s;
   }
   m_transactionCountMap = file->transactionCountMap();

@@ -120,13 +120,13 @@ bool MousePressFilter::eventFilter(QObject* o, QEvent* e)
   if(m_filterActive) {
     if(e->type() == QEvent::MouseButtonPress && !m_lastMousePressEvent) {
       QList<QWidget*>::const_iterator it_w;
-      for(it_w = m_parents.begin(); it_w != m_parents.end(); ++it_w) {
+      for(it_w = m_parents.constBegin(); it_w != m_parents.constEnd(); ++it_w) {
         if(isChildOf((QWidget*)o, (*it_w))) {
           m_lastMousePressEvent = e;
           break;
         }
       }
-      if(it_w == m_parents.end()) {
+      if(it_w == m_parents.constEnd()) {
         m_lastMousePressEvent = e;
         bool rc = false;
         emit mousePressedOnExternalWidget(rc);
@@ -424,7 +424,7 @@ void KGlobalLedgerView::loadView(void)
     QList<QPair<MyMoneyTransaction, MyMoneySplit> >::const_iterator it;
     QMap<QString, int>uniqueMap;
     int i = 0;
-    for(it = m_transactionList.begin(); it != m_transactionList.end(); ++it) {
+    for(it = m_transactionList.constBegin(); it != m_transactionList.constEnd(); ++it) {
       uniqueMap[(*it).first.id()]++;
       KMyMoneyRegister::Transaction* t = KMyMoneyRegister::Register::transactionFactory(m_register, (*it).first, (*it).second, uniqueMap[(*it).first.id()]);
       actBalance[t->split().accountId()] = MyMoneyMoney(0,1);
@@ -1124,8 +1124,8 @@ TransactionEditor* KGlobalLedgerView::startEdit(const KMyMoneyRegister::Selected
       Q_ASSERT(!m_tabOrderWidgets.isEmpty());
 
       // install event filter in all taborder widgets
-      QWidgetList::const_iterator it_w = m_tabOrderWidgets.begin();
-      for(;it_w != m_tabOrderWidgets.end(); ++it_w) {
+      QWidgetList::const_iterator it_w = m_tabOrderWidgets.constBegin();
+      for(;it_w != m_tabOrderWidgets.constEnd(); ++it_w) {
         (*it_w)->installEventFilter(this);
       }
       // Install a filter that checks if a mouse press happened outside
