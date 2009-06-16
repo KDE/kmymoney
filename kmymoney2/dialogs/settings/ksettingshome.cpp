@@ -94,7 +94,7 @@ void KSettingsHome::slotLoadItems(void)
   QFontMetrics fm( KGlobalSettings::generalFont());
   Q3CheckListItem* last = 0;
 
-  for(it = list.begin(); it != list.end(); ++it) {
+  for(it = list.constBegin(); it != list.constEnd(); ++it) {
     int idx = (*it).toInt();
     // skip over unknown item entries
     if(idx == 0)

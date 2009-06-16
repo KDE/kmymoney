@@ -386,7 +386,7 @@ int InvestTransactionEditor::editSplits(const QString& categoryWidgetName, const
         splits.clear();
         QList<MyMoneySplit>::const_iterator it_s;
         MyMoneyMoney fees;
-        for(it_s = transaction.splits().begin(); it_s != transaction.splits().end(); ++it_s) {
+        for(it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s) {
           if((*it_s).accountId() == d->m_phonyAccount.id())
             continue;
           splits << *it_s;
@@ -556,7 +556,7 @@ void InvestTransactionEditor::loadEditWidgets(KMyMoneyRegister::Action /* action
   // check if the current transaction has a reference to an equity account
   bool haveEquityAccount = false;
   QList<MyMoneySplit>::const_iterator it_s;
-  for(it_s = m_transaction.splits().begin(); !haveEquityAccount && it_s != m_transaction.splits().end(); ++it_s) {
+  for(it_s = m_transaction.splits().constBegin(); !haveEquityAccount && it_s != m_transaction.splits().constEnd(); ++it_s) {
     MyMoneyAccount acc = MyMoneyFile::instance()->account((*it_s).accountId());
     if(acc.accountType() == MyMoneyAccount::Equity)
       haveEquityAccount = true;
@@ -673,7 +673,7 @@ void InvestTransactionEditor::loadEditWidgets(KMyMoneyRegister::Action /* action
     QStringList fields;
     fields << "shares" << "price" << "fee-amount" << "interest-amount";
     QStringList::const_iterator it_f;
-    for(it_f = fields.begin(); it_f != fields.end(); ++it_f) {
+    for(it_f = fields.constBegin(); it_f != fields.constEnd(); ++it_f) {
       value = dynamic_cast<kMyMoneyEdit*>(haveWidget((*it_f)));
       value->setText("");
       value->setAllowEmpty();
@@ -683,7 +683,7 @@ void InvestTransactionEditor::loadEditWidgets(KMyMoneyRegister::Action /* action
     if(!allSameActivity) {
       fields << "asset-account" << "fee-account" << "interest-account";
       QStringList::const_iterator it_f;
-      for(it_f = fields.begin(); it_f != fields.end(); ++it_f) {
+      for(it_f = fields.constBegin(); it_f != fields.constEnd(); ++it_f) {
         haveWidget(*it_f)->setDisabled(true);
       }
     }
@@ -811,7 +811,7 @@ void InvestTransactionEditor::slotUpdateActivity(MyMoneySplit::investTransaction
   // hiding labels works by clearing them. hide() does not do the job
   // as the underlying text in the QTable object will shine through
   QStringList::const_iterator it_s;
-  for(it_s = dynwidgets.begin(); it_s != dynwidgets.end(); ++it_s) {
+  for(it_s = dynwidgets.constBegin(); it_s != dynwidgets.constEnd(); ++it_s) {
     QLabel* w = dynamic_cast<QLabel*>(haveWidget(*it_s));
     if(w)
       w->setText(" ");
@@ -821,7 +821,7 @@ void InvestTransactionEditor::slotUpdateActivity(MyMoneySplit::investTransaction
   dynwidgets.clear();
   dynwidgets << "asset-account" << "interest-amount" << "fee-amount" << "shares" << "price" << "total";
 
-  for(it_s = dynwidgets.begin(); it_s != dynwidgets.end(); ++it_s) {
+  for(it_s = dynwidgets.constBegin(); it_s != dynwidgets.constEnd(); ++it_s) {
     QWidget* w = haveWidget(*it_s);
     if(w)
       w->hide();
@@ -1045,7 +1045,7 @@ bool InvestTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyM
 
   // adjust the value to the smallestAccountFraction found
   // for the commodity of the transaction.
-  for(it_s = t.splits().begin(); it_s != t.splits().end(); ++it_s) {
+  for(it_s = t.splits().constBegin(); it_s != t.splits().constEnd(); ++it_s) {
     MyMoneySplit s = (*it_s);
     s.setValue((*it_s).value().convert(currency.smallestAccountFraction()));
     t.modifySplit(s);

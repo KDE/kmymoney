@@ -75,7 +75,7 @@ void TransactionSortOption::setSettings(const QString& settings)
   QStringList::const_iterator it_s;
   Q3ListViewItem* last = 0;
   int dateSign = 1;
-  for(it_s = list.begin(); it_s != list.end(); ++it_s) {
+  for(it_s = list.constBegin(); it_s != list.constEnd(); ++it_s) {
     int val = (*it_s).toInt();
     selectedMap[abs(val)] = true;
     // skip EntryDateSort but keep sign

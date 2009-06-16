@@ -113,7 +113,7 @@ void KSettingsOnlineQuotes::resetConfig(void)
   QStringList groups = WebPriceQuote::quoteSources();
 
   // delete all currently defined entries
-  for(it = groups.begin(); it != groups.end(); ++it) {
+  for(it = groups.constBegin(); it != groups.constEnd(); ++it) {
     WebPriceQuoteSource(*it).remove();
   }
 
