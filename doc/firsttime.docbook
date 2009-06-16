@@ -123,7 +123,7 @@ The view selector consists of at least eleven icons in the left side of the main
 						<imagedata fileref="institutions_view.png" format="PNG"></imagedata>
 					</imageobject>
 					<textobject>
-						<phrase>Accounts View</phrase>
+						<phrase>Institutions View</phrase>
 					</textobject>
 				</inlinemediaobject>
 			</guiicon>
