@@ -121,10 +121,10 @@ void MyMoneyForecast::pastTransactions()
   filter.setReportAllSplits(false);
 
   QList<MyMoneyTransaction> transactions = file->transactionList(filter);
-  QList<MyMoneyTransaction>::const_iterator it_t = transactions.begin();
+  QList<MyMoneyTransaction>::const_iterator it_t = transactions.constBegin();
 
   //Check past transactions
-  for(; it_t != transactions.end(); ++it_t ) {
+  for(; it_t != transactions.constEnd(); ++it_t ) {
     const QList<MyMoneySplit>& splits = (*it_t).splits();
     QList<MyMoneySplit>::const_iterator it_s = splits.begin();
     for(; it_s != splits.end(); ++it_s ) {
@@ -359,10 +359,10 @@ MyMoneyMoney MyMoneyForecast::calculateAccountTrend(const MyMoneyAccount& acc, i
 
   filter.setReportAllSplits(false);
   QList<MyMoneyTransaction> transactions = file->transactionList(filter);
-  QList<MyMoneyTransaction>::const_iterator it_t = transactions.begin();
+  QList<MyMoneyTransaction>::const_iterator it_t = transactions.constBegin();
 
   //add all transactions for that account
-  for(; it_t != transactions.end(); ++it_t ) {
+  for(; it_t != transactions.constEnd(); ++it_t ) {
     const QList<MyMoneySplit>& splits = (*it_t).splits();
     QList<MyMoneySplit>::const_iterator it_s = splits.begin();
     for(; it_s != splits.end(); ++it_s ) {
@@ -596,9 +596,9 @@ void MyMoneyForecast::addFutureTransactions(void)
   filter.setReportAllSplits(false);
 
   QList<MyMoneyTransaction> transactions = file->transactionList(filter);
-  QList<MyMoneyTransaction>::const_iterator it_t = transactions.begin();
+  QList<MyMoneyTransaction>::const_iterator it_t = transactions.constBegin();
 
-  for(; it_t != transactions.end(); ++it_t ) {
+  for(; it_t != transactions.constEnd(); ++it_t ) {
     const QList<MyMoneySplit>& splits = (*it_t).splits();
     QList<MyMoneySplit>::const_iterator it_s = splits.begin();
     for(; it_s != splits.end(); ++it_s ) {
@@ -686,7 +686,7 @@ void MyMoneyForecast::addScheduledTransactions (void)
               QList<MyMoneySplit>::const_iterator it_s;
               QMap<QString, MyMoneyMoney> balanceMap;
 
-              for(it_s = t.splits().begin(); it_s != t.splits().end(); ++it_s ) {
+              for(it_s = t.splits().constBegin(); it_s != t.splits().constEnd(); ++it_s ) {
                 MyMoneyAccount acc = file->account((*it_s).accountId());
                 if(isForecastAccount(acc)) {
                   // collect all overdues on the first day
@@ -707,7 +707,7 @@ void MyMoneyForecast::addScheduledTransactions (void)
               calculateAutoLoan(*it, t, balanceMap);
 
               // now add the splits to the balances
-              for(it_s = t.splits().begin(); it_s != t.splits().end(); ++it_s ) {
+              for(it_s = t.splits().constBegin(); it_s != t.splits().constEnd(); ++it_s ) {
                 MyMoneyAccount acc = file->account((*it_s).accountId());
                 if(isForecastAccount(acc)) {
                   dailyBalances balance;
@@ -849,8 +849,8 @@ void MyMoneyForecast::setForecastAccountList(void)
   QList<MyMoneyAccount> accList;
   accList = forecastAccountList();
 
-  QList<MyMoneyAccount>::const_iterator accList_t = accList.begin();
-  for(; accList_t != accList.end(); ++accList_t ) {
+  QList<MyMoneyAccount>::const_iterator accList_t = accList.constBegin();
+  for(; accList_t != accList.constEnd(); ++accList_t ) {
     MyMoneyAccount acc = *accList_t;
     // check if this is a new account for us
     if(m_nameIdx[acc.id()] != acc.id()) {
@@ -1092,8 +1092,8 @@ void MyMoneyForecast::setBudgetAccountList(void)
   QList<MyMoneyAccount> accList;
   accList = budgetAccountList();
 
-  QList<MyMoneyAccount>::const_iterator accList_t = accList.begin();
-  for(; accList_t != accList.end(); ++accList_t ) {
+  QList<MyMoneyAccount>::const_iterator accList_t = accList.constBegin();
+  for(; accList_t != accList.constEnd(); ++accList_t ) {
     MyMoneyAccount acc = *accList_t;
       // check if this is a new account for us
     if(m_nameIdx[acc.id()] != acc.id()) {

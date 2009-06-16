@@ -230,7 +230,7 @@ void MyMoneyFile::modifyTransaction(const MyMoneyTransaction& transaction)
   if(loanAccountAffected) {
     tCopy = transaction;
     QList<MyMoneySplit> list = transaction.splits();
-    for(it_s = list.begin(); it_s != list.end(); ++it_s) {
+    for(it_s = list.constBegin(); it_s != list.constEnd(); ++it_s) {
       if((*it_s).action() == MyMoneySplit::ActionTransfer) {
         MyMoneyAccount acc = MyMoneyFile::account((*it_s).accountId());
 
@@ -252,7 +252,7 @@ void MyMoneyFile::modifyTransaction(const MyMoneyTransaction& transaction)
 
   // scan the splits again to update notification list
   // and mark all accounts that are referenced
-  for(it_s = tr.splits().begin(); it_s != tr.splits().end(); ++it_s) {
+  for(it_s = tr.splits().constBegin(); it_s != tr.splits().constEnd(); ++it_s) {
     addNotification((*it_s).accountId());
     addNotification((*it_s).payeeId());
   }
@@ -392,7 +392,7 @@ void MyMoneyFile::removeTransaction(const MyMoneyTransaction& transaction)
   QList<MyMoneySplit>::ConstIterator it_s;
 
   // scan the splits again to update notification list
-  for(it_s = tr.splits().begin(); it_s != tr.splits().end(); ++it_s) {
+  for(it_s = tr.splits().constBegin(); it_s != tr.splits().constEnd(); ++it_s) {
     MyMoneyAccount acc = account((*it_s).accountId());
     if(acc.isClosed())
       throw new MYMONEYEXCEPTION(i18n("Cannot remove transaction that references a closed account."));
@@ -695,8 +695,8 @@ QString MyMoneyFile::openingBalanceTransaction(const MyMoneyAccount& acc) const
   MyMoneyTransactionFilter filter;
   filter.addAccount(openAcc.id());
   QList<MyMoneyTransaction> transactions = transactionList(filter);
-  QList<MyMoneyTransaction>::const_iterator it_t = transactions.begin();
-  while ( it_t != transactions.end() )
+  QList<MyMoneyTransaction>::const_iterator it_t = transactions.constBegin();
+  while ( it_t != transactions.constEnd() )
   {
     try
     {
@@ -820,7 +820,7 @@ void MyMoneyFile::addTransaction(MyMoneyTransaction& transaction)
   // now check the splits
   bool loanAccountAffected = false;
   QList<MyMoneySplit>::ConstIterator it_s;
-  for(it_s = transaction.splits().begin(); it_s != transaction.splits().end(); ++it_s) {
+  for(it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s) {
     // the following line will throw an exception if the
     // account does not exist or is one of the standard accounts
     MyMoneyAccount acc = MyMoneyFile::account((*it_s).accountId());
@@ -836,7 +836,7 @@ void MyMoneyFile::addTransaction(MyMoneyTransaction& transaction)
   // into amortization splits
   if(loanAccountAffected) {
     QList<MyMoneySplit> list = transaction.splits();
-    for(it_s = list.begin(); it_s != list.end(); ++it_s) {
+    for(it_s = list.constBegin(); it_s != list.constEnd(); ++it_s) {
       if((*it_s).action() == MyMoneySplit::ActionTransfer) {
         MyMoneyAccount acc = MyMoneyFile::account((*it_s).accountId());
 
@@ -858,7 +858,7 @@ void MyMoneyFile::addTransaction(MyMoneyTransaction& transaction)
   m_storage->addTransaction(transaction);
 
   // scan the splits again to update notification list
-  for(it_s = transaction.splits().begin(); it_s != transaction.splits().end(); ++it_s) {
+  for(it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s) {
     addNotification((*it_s).accountId());
     addNotification((*it_s).payeeId());
   }
@@ -954,7 +954,7 @@ void MyMoneyFile::accountList(QList<MyMoneyAccount>& list, const QStringList& id
     QList<MyMoneyAccount> list_a;
     d->m_cache.account(list_a);
 
-    for(it = list_a.begin(); it != list_a.end(); ++it) {
+    for(it = list_a.constBegin(); it != list_a.constEnd(); ++it) {
       if(!isStandardAccount((*it).id())) {
         if(idlist.indexOf((*it).id()) != -1) {
           list.append(*it);
@@ -1266,7 +1266,7 @@ void MyMoneyFile::addSchedule(MyMoneySchedule& sched)
 
   MyMoneyTransaction transaction = sched.transaction();
   QList<MyMoneySplit>::const_iterator it_s;
-  for(it_s = transaction.splits().begin(); it_s != transaction.splits().end(); ++it_s) {
+  for(it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s) {
     // the following line will throw an exception if the
     // account does not exist or is one of the standard accounts
     MyMoneyAccount acc = MyMoneyFile::account((*it_s).accountId());
@@ -1288,7 +1288,7 @@ void MyMoneyFile::modifySchedule(const MyMoneySchedule& sched)
 
   MyMoneyTransaction transaction = sched.transaction();
   QList<MyMoneySplit>::const_iterator it_s;
-  for(it_s = transaction.splits().begin(); it_s != transaction.splits().end(); ++it_s) {
+  for(it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s) {
     // the following line will throw an exception if the
     // account does not exist or is one of the standard accounts
     MyMoneyAccount acc = MyMoneyFile::account((*it_s).accountId());
@@ -1574,7 +1574,7 @@ const QStringList MyMoneyFile::consistencyCheck(void)
     MyMoneyTransaction t = (*it_t);
     QList<MyMoneySplit>::const_iterator it_s;
     bool tChanged = false;
-    for(it_s = t.splits().begin(); it_s != t.splits().end(); ++it_s) {
+    for(it_s = t.splits().constBegin(); it_s != t.splits().constEnd(); ++it_s) {
       bool sChanged = false;
       MyMoneySplit s = (*it_s);
       if(payeeConversionMap.find((*it_s).payeeId()) != payeeConversionMap.end()) {
@@ -1634,7 +1634,7 @@ const QStringList MyMoneyFile::consistencyCheck(void)
     MyMoneyTransaction t = sch.transaction();
     bool tChanged = false;
     QList<MyMoneySplit>::const_iterator it_s;
-    for(it_s = t.splits().begin(); it_s != t.splits().end(); ++it_s) {
+    for(it_s = t.splits().constBegin(); it_s != t.splits().constEnd(); ++it_s) {
       MyMoneySplit s = (*it_s);
       bool sChanged = false;
       if(payeeConversionMap.find((*it_s).payeeId()) != payeeConversionMap.end()) {
@@ -2146,8 +2146,8 @@ bool MyMoneyFile::checkNoUsed(const QString& accId, const QString& no) const
   MyMoneyTransactionFilter filter;
   filter.addAccount(accId);
   QList<MyMoneyTransaction> transactions = transactionList(filter);
-  QList<MyMoneyTransaction>::const_iterator it_t = transactions.begin();
-  while ( it_t != transactions.end() ) {
+  QList<MyMoneyTransaction>::const_iterator it_t = transactions.constBegin();
+  while ( it_t != transactions.constEnd() ) {
     try {
       MyMoneySplit split;
       // Test whether the transaction also includes a split into
@@ -2170,8 +2170,8 @@ QString MyMoneyFile::highestCheckNo(const QString& accId) const
   MyMoneyTransactionFilter filter;
   filter.addAccount(accId);
   QList<MyMoneyTransaction> transactions = transactionList(filter);
-  QList<MyMoneyTransaction>::const_iterator it_t = transactions.begin();
-  while ( it_t != transactions.end() ) {
+  QList<MyMoneyTransaction>::const_iterator it_t = transactions.constBegin();
+  while ( it_t != transactions.constEnd() ) {
     try {
       // Test whether the transaction also includes a split into
       // this account

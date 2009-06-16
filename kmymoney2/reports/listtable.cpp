@@ -99,8 +99,8 @@ namespace reports {
   {
     bool result = false;
 
-    QStringList::const_iterator it_criterion = m_sortCriteria.begin();
-    while ( it_criterion != m_sortCriteria.end() )
+    QStringList::const_iterator it_criterion = m_sortCriteria.constBegin();
+    while ( it_criterion != m_sortCriteria.constEnd() )
     {
       if ( this->operator[] ( *it_criterion ) < _compare[ *it_criterion ] )
       {
@@ -260,8 +260,8 @@ namespace reports {
 
     result += "<table class=\"report\">\n<thead><tr class=\"itemheader\">";
 
-    QStringList::const_iterator it_column = columns.begin();
-    while ( it_column != columns.end() )
+    QStringList::const_iterator it_column = columns.constBegin();
+    while ( it_column != columns.constEnd() )
     {
       QString i18nName = i18nHeaders[*it_column];
       if ( i18nName.isEmpty() )
@@ -287,8 +287,8 @@ namespace reports {
 
     int depth = 1;
     QList<GroupIterator> groupIteratorList;
-    QStringList::const_iterator it_grouplevel = groups.begin();
-    while ( it_grouplevel != groups.end() )
+    QStringList::const_iterator it_grouplevel = groups.constBegin();
+    while ( it_grouplevel != groups.constEnd() )
     {
       groupIteratorList += GroupIterator ( ( *it_grouplevel ), m_subtotal, depth++ );
       ++it_grouplevel;
@@ -412,8 +412,8 @@ namespace reports {
         else
           result += QString ( "<tr class=\"%1\">" ).arg ( row_odd ? "row-odd " : "row-even" );
 
-      QStringList::const_iterator it_column = columns.begin();
-      while ( it_column != columns.end() )
+      QStringList::const_iterator it_column = columns.constBegin();
+      while ( it_column != columns.constEnd() )
       {
         QString data = ( *it_row ) [*it_column];
 

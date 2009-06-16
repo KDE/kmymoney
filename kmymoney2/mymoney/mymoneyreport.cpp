@@ -405,8 +405,8 @@ void MyMoneyReport::write ( QDomElement& e, QDomDocument *doc, bool anonymous ) 
   if ( types ( typelist ) && ! typelist.empty() )
   {
     // iterate over payees, and add each one
-    QList<int>::const_iterator it_type = typelist.begin();
-    while ( it_type != typelist.end() )
+    QList<int>::const_iterator it_type = typelist.constBegin();
+    while ( it_type != typelist.constEnd() )
     {
       QDomElement p = doc->createElement ( "TYPE" );
       p.setAttribute ( "type", kTypeText[*it_type] );
@@ -420,8 +420,8 @@ void MyMoneyReport::write ( QDomElement& e, QDomDocument *doc, bool anonymous ) 
   if ( states ( statelist ) && ! statelist.empty() )
   {
     // iterate over payees, and add each one
-    QList<int>::const_iterator it_state = statelist.begin();
-    while ( it_state != statelist.end() )
+    QList<int>::const_iterator it_state = statelist.constBegin();
+    while ( it_state != statelist.constEnd() )
     {
       QDomElement p = doc->createElement ( "STATE" );
       p.setAttribute ( "state", kStateText[*it_state] );
@@ -491,8 +491,8 @@ void MyMoneyReport::write ( QDomElement& e, QDomDocument *doc, bool anonymous ) 
   if ( accountGroups ( accountgrouplist ) )
   {
     // iterate over accounts, and add each one
-    QList<MyMoneyAccount::accountTypeE>::const_iterator it_group = accountgrouplist.begin();
-    while ( it_group != accountgrouplist.end() )
+    QList<MyMoneyAccount::accountTypeE>::const_iterator it_group = accountgrouplist.constBegin();
+    while ( it_group != accountgrouplist.constEnd() )
     {
       QDomElement p = doc->createElement ( "ACCOUNTGROUP" );
       p.setAttribute ( "group", kAccountTypeText[*it_group] );
