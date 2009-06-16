@@ -108,7 +108,7 @@ void TransactionEditor::setupPrecision(void)
   const int prec = (m_account.id().isEmpty()) ? 2 : MyMoneyMoney::denomToPrec(m_account.fraction());
   QStringList widgets = QString("amount,deposit,payment").split(",");
   QStringList::const_iterator it_w;
-  for(it_w = widgets.begin(); it_w != widgets.end(); ++it_w) {
+  for(it_w = widgets.constBegin(); it_w != widgets.constEnd(); ++it_w) {
     QWidget * w;
     if((w = haveWidget(*it_w)) != 0) {
       dynamic_cast<kMyMoneyEdit*>(w)->setPrecision(prec);
@@ -178,7 +178,7 @@ bool TransactionEditor::eventFilter(QObject* o, QEvent* e)
           // to do this as long as the appropriate option is set. In all other cases,
           // we treat the return/enter key as such.
           if(KMyMoneyGlobalSettings::enterMovesBetweenFields()) {
-            for(it_w = m_finalEditWidgets.begin(); !isFinal && it_w != m_finalEditWidgets.end(); ++it_w) {
+            for(it_w = m_finalEditWidgets.constBegin(); !isFinal && it_w != m_finalEditWidgets.constEnd(); ++it_w) {
               if(*it_w == o) {
                 if(dynamic_cast<const kMyMoneyEdit*>(*it_w)) {
                   isFinal = !(dynamic_cast<const kMyMoneyEdit*>(*it_w)->value().isZero());
@@ -578,7 +578,7 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
 
         // create information about min and max balances
         QList<MyMoneySplit>::const_iterator it_s;
-        for(it_s = (*it_ts).splits().begin(); it_s != (*it_ts).splits().end(); ++it_s) {
+        for(it_s = (*it_ts).splits().constBegin(); it_s != (*it_ts).splits().constEnd(); ++it_s) {
           MyMoneyAccount acc = file->account((*it_s).accountId());
           accountIds[acc.id()] = true;
           MyMoneyMoney balance = file->balance(acc.id());
@@ -662,7 +662,7 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
       QMap<QString, bool>::const_iterator it_a;
 
       if(!suppressBalanceWarnings) {
-        for(it_a = accountIds.begin(); it_a != accountIds.end(); ++it_a) {
+        for(it_a = accountIds.constBegin(); it_a != accountIds.constEnd(); ++it_a) {
           QString msg;
           MyMoneyAccount acc = file->account(it_a.key());
           MyMoneyMoney balance = file->balance(acc.id());
@@ -906,7 +906,7 @@ void StdTransactionEditor::loadEditWidgets(KMyMoneyRegister::Action action)
   // check if the current transaction has a reference to an equity account
   bool haveEquityAccount = false;
   QList<MyMoneySplit>::const_iterator it_s;
-  for(it_s = m_transaction.splits().begin(); !haveEquityAccount && it_s != m_transaction.splits().end(); ++it_s) {
+  for(it_s = m_transaction.splits().constBegin(); !haveEquityAccount && it_s != m_transaction.splits().constEnd(); ++it_s) {
     MyMoneyAccount acc = MyMoneyFile::instance()->account((*it_s).accountId());
     if(acc.accountType() == MyMoneyAccount::Equity)
       haveEquityAccount = true;
@@ -961,7 +961,7 @@ void StdTransactionEditor::loadEditWidgets(KMyMoneyRegister::Action action)
       category->completion()->setSelected(QString());
     } else {
       QList<MyMoneySplit>::const_iterator it_s;
-      for(it_s = m_transaction.splits().begin(); it_s != m_transaction.splits().end(); ++it_s) {
+      for(it_s = m_transaction.splits().constBegin(); it_s != m_transaction.splits().constEnd(); ++it_s) {
         if((*it_s) == m_split)
           continue;
         m_splits.append(*it_s);
@@ -1140,7 +1140,7 @@ void StdTransactionEditor::slotUpdatePayee(const QString& payeeId)
     QStringList fields;
     fields << "amount" << "payment" << "deposit";
     QStringList::const_iterator it_f;
-    for(it_f = fields.begin(); it_f != fields.end(); ++it_f) {
+    for(it_f = fields.constBegin(); it_f != fields.constEnd(); ++it_f) {
       amount = dynamic_cast<kMyMoneyEdit*>(haveWidget(*it_f));
       if(amount && !amount->value().isZero())
         return;
@@ -1206,7 +1206,7 @@ void StdTransactionEditor::autoFill(const QString& payeeId)
     QMap<QString, struct uniqTransaction> uniqList;
 
     // collect the transactions and see if we have any duplicates
-    for(it_t = list.begin(); it_t != list.end(); ++it_t) {
+    for(it_t = list.constBegin(); it_t != list.constEnd(); ++it_t) {
       QString key = (*it_t).first.accountSignature();
       int cnt = 0;
       QMap<QString, struct uniqTransaction>::iterator it_u;
@@ -1261,7 +1261,7 @@ void StdTransactionEditor::autoFill(const QString& payeeId)
         dlg.setCaption(i18n("Select autofill transaction"));
 
         QMap<QString, struct uniqTransaction>::const_iterator it_u;
-        for(it_u = uniqList.begin(); it_u != uniqList.end(); ++it_u) {
+        for(it_u = uniqList.constBegin(); it_u != uniqList.constEnd(); ++it_u) {
           dlg.addTransaction(*(*it_u).t);
         }
 
@@ -1283,7 +1283,7 @@ void StdTransactionEditor::autoFill(const QString& payeeId)
     } else {
       int maxCnt = 0;
       QMap<QString, struct uniqTransaction>::const_iterator it_u;
-      for(it_u = uniqList.begin(); it_u != uniqList.end(); ++it_u) {
+      for(it_u = uniqList.constBegin(); it_u != uniqList.constEnd(); ++it_u) {
         if((*it_u).cnt > maxCnt) {
           t = *(*it_u).t;
           maxCnt = (*it_u).cnt;
@@ -1296,7 +1296,7 @@ void StdTransactionEditor::autoFill(const QString& payeeId)
       m_split = MyMoneySplit();
       MyMoneySplit otherSplit;
       QList<MyMoneySplit>::ConstIterator it;
-      for(it = t.splits().begin(); it != t.splits().end(); ++it) {
+      for(it = t.splits().constBegin(); it != t.splits().constEnd(); ++it) {
         MyMoneySplit s(*it);
         s.setReconcileFlag(MyMoneySplit::NotReconciled);
         s.setReconcileDate(QDate());
@@ -1668,7 +1668,7 @@ MyMoneyMoney StdTransactionEditor::removeVatSplit(void)
 
   bool netValue = false;
   QList<MyMoneySplit>::const_iterator it_s;
-  for(it_s = m_splits.begin(); it_s != m_splits.end(); ++it_s) {
+  for(it_s = m_splits.constBegin(); it_s != m_splits.constEnd(); ++it_s) {
     MyMoneyAccount acc = MyMoneyFile::instance()->account((*it_s).accountId());
     if(!acc.value("VatAccount").isEmpty()) {
       netValue = (acc.value("VatAmount").toLower() == "net");

@@ -495,7 +495,7 @@ void KNewAccountDlg::okClicked()
 
         QList<MyMoneyInstitution> list = file->institutionList();
         QList<MyMoneyInstitution>::ConstIterator institutionIterator;
-        for (institutionIterator = list.begin(); institutionIterator != list.end(); ++institutionIterator)
+        for (institutionIterator = list.constBegin(); institutionIterator != list.constEnd(); ++institutionIterator)
         {
           if ((*institutionIterator).name() == institutionNameText)
             m_account.setInstitutionId((*institutionIterator).id());
@@ -938,7 +938,7 @@ void KNewAccountDlg::showSubAccounts(QStringList accounts, KMyMoneyAccountTreeBa
 {
   MyMoneyFile *file = MyMoneyFile::instance();
 
-  for ( QStringList::ConstIterator it = accounts.begin(); it != accounts.end(); ++it )
+  for ( QStringList::ConstIterator it = accounts.constBegin(); it != accounts.constEnd(); ++it )
   {
     KMyMoneyAccountTreeBaseItem *accountItem  = new KMyMoneyAccountTreeItem(parentItem,
           file->account(*it));
@@ -1037,7 +1037,7 @@ void KNewAccountDlg::slotLoadInstitutions(const QString& name)
 
     QList<MyMoneyInstitution> list = file->institutionList();
     QList<MyMoneyInstitution>::ConstIterator institutionIterator;
-    for (institutionIterator = list.begin(), counter=1; institutionIterator != list.end(); ++institutionIterator, counter++)
+    for (institutionIterator = list.constBegin(), counter=1; institutionIterator != list.constEnd(); ++institutionIterator, counter++)
     {
       if ((*institutionIterator).name() == name) {
         id = counter;

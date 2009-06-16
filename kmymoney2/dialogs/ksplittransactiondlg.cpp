@@ -366,11 +366,11 @@ void KSplitTransactionDlg::slotSetTransaction(const MyMoneyTransaction& t)
       haveZeroSplit = true;
   }
   QMap<QString, int>::const_iterator it_s;
-  for(it_s = splits.begin(); it_s != splits.end(); ++it_s) {
+  for(it_s = splits.constBegin(); it_s != splits.constEnd(); ++it_s) {
     if((*it_s) > 1)
       break;
   }
-  mergeBtn->setDisabled(it_s == splits.end());
+  mergeBtn->setDisabled(it_s == splits.constEnd());
   clearZeroBtn->setEnabled(haveZeroSplit);
 
   updateSums();

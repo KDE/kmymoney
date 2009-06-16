@@ -100,7 +100,7 @@ KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent, const QString& sec
     currencyIds = MyMoneySecurityPair(splitrx.cap(1).toUtf8(),splitrx.cap(2).toUtf8());
 
   MyMoneyPriceList prices = file->priceList();
-  for(MyMoneyPriceList::ConstIterator it_price = prices.begin(); it_price != prices.end(); ++it_price)
+  for(MyMoneyPriceList::ConstIterator it_price = prices.constBegin(); it_price != prices.constEnd(); ++it_price)
   {
     const MyMoneySecurityPair& pair = it_price.key();
     if ( file->security( pair.first ).isCurrency() && ( securityId.isEmpty() || ( pair == currencyIds ) ) )
@@ -118,7 +118,7 @@ KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent, const QString& sec
   //
 
   QList<MyMoneySecurity> securities = file->securityList();
-  for(QList<MyMoneySecurity>::const_iterator it = securities.begin(); it != securities.end(); ++it)
+  for(QList<MyMoneySecurity>::const_iterator it = securities.constBegin(); it != securities.constEnd(); ++it)
   {
     if (  !(*it).isCurrency()
           && ( securityId.isEmpty() || ( (*it).id() == securityId ) )
@@ -199,7 +199,7 @@ void KEquityPriceUpdateDlg::addPricePair(const MyMoneySecurityPair& pair, bool d
         QList<MyMoneyAccount>::const_iterator it_a;
         QList<MyMoneyAccount> list;
         file->accountList(list);
-        for(it_a = list.begin(); !dontCheckExistance && it_a != list.end(); ++it_a) {
+        for(it_a = list.constBegin(); !dontCheckExistance && it_a != list.constEnd(); ++it_a) {
           // if it's an account denominated in the foreign currency
           // keep it
           if(((*it_a).currencyId() == foreignCurrency)
@@ -214,14 +214,14 @@ void KEquityPriceUpdateDlg::addPricePair(const MyMoneySecurityPair& pair, bool d
           }
         }
         // if it is in use, it_a is not equal to list.end()
-        if(it_a == list.end() && !dontCheckExistance)
+        if(it_a == list.constEnd() && !dontCheckExistance)
           keep = false;
       }
 
       if(keep) {
         K3ListViewItem* item = new K3ListViewItem(lvEquityList,
           symbol,
-          i18n("%1 units in %2").arg(pair.first,pair.second));
+          i18n("%1 units in %2",pair.first,pair.second));
         if(pr.isValid()) {
           item->setText(PRICE_COL, pr.rate(pair.second).formatMoney(file->currency(pair.second).tradingSymbol(), KMyMoneyGlobalSettings::pricePrecision()));
           item->setText(DATE_COL, pr.date().toString(Qt::ISODate));
@@ -245,14 +245,14 @@ void KEquityPriceUpdateDlg::addInvestment(const MyMoneySecurity& inv)
     QList<MyMoneyAccount>::const_iterator it_a;
     QList<MyMoneyAccount> list;
     file->accountList(list);
-    for(it_a = list.begin(); it_a != list.end(); ++it_a) {
+    for(it_a = list.constBegin(); it_a != list.constEnd(); ++it_a) {
       if((*it_a).isInvest()
       && ((*it_a).currencyId() == inv.id())
       && !(*it_a).isClosed())
         break;
     }
     // if it is in use, it_a is not equal to list.end()
-    if(it_a != list.end()) {
+    if(it_a != list.constEnd()) {
       K3ListViewItem* item = new K3ListViewItem(lvEquityList, symbol, inv.name());
       MyMoneySecurity currency = file->currency(inv.tradingCurrency());
       MyMoneyPrice pr = file->price(id.toUtf8(), inv.tradingCurrency());

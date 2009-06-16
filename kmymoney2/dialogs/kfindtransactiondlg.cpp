@@ -609,10 +609,10 @@ void KFindTransactionDlg::setupFilter(void)
     if(!KMyMoneyGlobalSettings::expertMode()) {
       QStringList missing;
       QStringList::const_iterator it_a, it_b;
-      for(it_a = list.begin(); it_a != list.end(); ++it_a) {
+      for(it_a = list.constBegin(); it_a != list.constEnd(); ++it_a) {
         MyMoneyAccount acc = MyMoneyFile::instance()->account(*it_a);
         if(acc.accountType() == MyMoneyAccount::Investment) {
-          for(it_b = acc.accountList().begin(); it_b != acc.accountList().end(); ++it_b) {
+          for(it_b = acc.accountList().constBegin(); it_b != acc.accountList().constEnd(); ++it_b) {
             if(!list.contains(*it_b)) {
               missing.append(*it_b);
             }
@@ -724,7 +724,7 @@ void KFindTransactionDlg::loadView(void)
   MyMoneyMoney deposit, payment;
 
   int splitCount = 0;
-  for(it = m_transactionList.begin(); it != m_transactionList.end(); ++it) {
+  for(it = m_transactionList.constBegin(); it != m_transactionList.constEnd(); ++it) {
     const MyMoneySplit& split = (*it).second;
     MyMoneyAccount acc = MyMoneyFile::instance()->account(split.accountId());
     ++splitCount;

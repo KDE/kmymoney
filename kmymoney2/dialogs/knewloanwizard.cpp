@@ -929,7 +929,7 @@ void KNewLoanWizard::slotAdditionalFees(void)
     QList<MyMoneySplit>::ConstIterator it;
 
     MyMoneyMoney fees;
-    for(it = m_transaction.splits().begin(); it != m_transaction.splits().end(); ++it) {
+    for(it = m_transaction.splits().constBegin(); it != m_transaction.splits().constEnd(); ++it) {
       if((*it).accountId() != account.id()) {
         fees += (*it).value();
       }

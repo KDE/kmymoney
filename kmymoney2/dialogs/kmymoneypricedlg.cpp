@@ -112,10 +112,10 @@ void KMyMoneyPriceDlg::slotLoadWidgets(void)
 
   MyMoneyPriceList list = MyMoneyFile::instance()->priceList();
   MyMoneyPriceList::ConstIterator it_l;
-  for(it_l = list.begin(); it_l != list.end(); ++it_l) {
+  for(it_l = list.constBegin(); it_l != list.constEnd(); ++it_l) {
     MyMoneyPriceEntries::ConstIterator it_e;
     if(m_showAllPrices->isChecked()) {
-      for(it_e = (*it_l).begin(); it_e != (*it_l).end(); ++it_e) {
+      for(it_e = (*it_l).constBegin(); it_e != (*it_l).constEnd(); ++it_e) {
         new KMyMoneyPriceItem(m_priceList, *it_e);
       }
     } else {

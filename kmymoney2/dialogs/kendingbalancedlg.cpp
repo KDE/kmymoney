@@ -200,7 +200,7 @@ void KEndingBalanceDlg::slotUpdateBalances(void)
 
   tracer.printf("total balance = %s", qPrintable(endBalance.formatMoney("", 2)));
 
-  for(it = transactionList.begin(); it != transactionList.end(); ++it) {
+  for(it = transactionList.constBegin(); it != transactionList.constEnd(); ++it) {
     const MyMoneySplit& split = (*it).second;
     balance -= split.shares() * factor;
     if((*it).first.postDate() > m_statementDate->date()) {
@@ -465,7 +465,7 @@ const MyMoneyMoney KEndingBalanceLoanDlg::totalInterest(const QDate& start, cons
   QList<MyMoneyTransaction> list = MyMoneyFile::instance()->transactionList(filter);
   QList<MyMoneyTransaction>::const_iterator it_t;
 
-  for(it_t = list.begin(); it_t != list.end(); ++it_t) {
+  for(it_t = list.constBegin(); it_t != list.constEnd(); ++it_t) {
     QList<MyMoneySplit>::const_iterator it_s;
     for(it_s = (*it_t).splits().begin(); it_s != (*it_t).splits().end(); ++it_s) {
       if((*it_s).action() == MyMoneySplit::ActionInterest) {
@@ -489,7 +489,7 @@ const MyMoneyMoney KEndingBalanceLoanDlg::totalAmortization(const QDate& start, 
   QList<MyMoneyTransaction> list = MyMoneyFile::instance()->transactionList(filter);
   QList<MyMoneyTransaction>::const_iterator it_t;
 
-  for(it_t = list.begin(); it_t != list.end(); ++it_t) {
+  for(it_t = list.constBegin(); it_t != list.constEnd(); ++it_t) {
     QList<MyMoneySplit>::const_iterator it_s;
     for(it_s = (*it_t).splits().begin(); it_s != (*it_t).splits().end(); ++it_s) {
       if((*it_s).accountId() == d->m_account.id()

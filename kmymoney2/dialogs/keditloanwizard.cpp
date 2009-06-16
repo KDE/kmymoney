@@ -446,7 +446,7 @@ void KEditLoanWizard::updateEditSummary(void)
   QList<MyMoneyTransaction>::const_iterator it;
   list = MyMoneyFile::instance()->transactionList(filter);
 
-  for(it = list.begin(); it != list.end(); ++it) {
+  for(it = list.constBegin(); it != list.constEnd(); ++it) {
     QList<MyMoneySplit>::const_iterator it_s;
     int match = 0;
     for(it_s = (*it).splits().begin(); it_s != (*it).splits().end(); ++it_s) {
