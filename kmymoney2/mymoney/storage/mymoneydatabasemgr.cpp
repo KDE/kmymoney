@@ -116,15 +116,15 @@ void MyMoneyDatabaseMgr::addAccount(MyMoneyAccount& parent, MyMoneyAccount& acco
   startTransaction();
   accountList = m_sql->fetchAccounts(accountIdList, true);
 
-  theParent = accountList.find(parent.id());
-  if(theParent == accountList.end()) {
+  theParent = accountList.constFind(parent.id());
+  if(theParent == accountList.constEnd()) {
     QString msg = "Unknown parent account '";
     msg += parent.id() + "'";
     throw new MYMONEYEXCEPTION(msg);
   }
 
-  theChild = accountList.find(account.id());
-  if(theChild == accountList.end()) {
+  theChild = accountList.constFind(account.id());
+  if(theChild == accountList.constEnd()) {
     QString msg = "Unknown child account '";
     msg += account.id() + "'";
     throw new MYMONEYEXCEPTION(msg);
@@ -161,8 +161,8 @@ const MyMoneyPayee MyMoneyDatabaseMgr::payee(const QString& id) const
 {
   QMap<QString, MyMoneyPayee>::ConstIterator it;
   QMap<QString, MyMoneyPayee> payeeList = m_sql->fetchPayees(QStringList()<<QString(id));
-  it = payeeList.find(id);
-  if(it == payeeList.end())
+  it = payeeList.constFind(id);
+  if(it == payeeList.constEnd())
     throw new MYMONEYEXCEPTION("Unknown payee '" + id + "'");
 
   return *it;
@@ -181,7 +181,7 @@ const MyMoneyPayee MyMoneyDatabaseMgr::payeeByName(const QString& payee) const
 
   QMap<QString, MyMoneyPayee>::ConstIterator it_p;
 
-  for(it_p = payeeList.begin(); it_p != payeeList.end(); ++it_p) {
+  for(it_p = payeeList.constBegin(); it_p != payeeList.constEnd(); ++it_p) {
     if((*it_p).name() == payee) {
       return *it_p;
     }
@@ -195,8 +195,8 @@ void MyMoneyDatabaseMgr::modifyPayee(const MyMoneyPayee& payee)
     QMap<QString, MyMoneyPayee> payeeList = m_sql->fetchPayees(QStringList()<<QString(payee.id()), true);
   QMap<QString, MyMoneyPayee>::ConstIterator it;
 
-  it = payeeList.find(payee.id());
-  if(it == payeeList.end()) {
+  it = payeeList.constFind(payee.id());
+  if(it == payeeList.constEnd()) {
     QString msg = "Unknown payee '" + payee.id() + "'";
     throw new MYMONEYEXCEPTION(msg);
   }
@@ -211,8 +211,8 @@ void MyMoneyDatabaseMgr::removePayee(const MyMoneyPayee& payee)
   QMap<QString, MyMoneyPayee> payeeList = m_sql->fetchPayees(QStringList()<< QString(payee.id()));
   QMap<QString, MyMoneyPayee>::ConstIterator it_p;
 
-  it_p = payeeList.find(payee.id());
-  if(it_p == payeeList.end()) {
+  it_p = payeeList.constFind(payee.id());
+  if(it_p == payeeList.constEnd()) {
     QString msg = "Unknown payee '" + payee.id() + "'";
     throw new MYMONEYEXCEPTION(msg);
   }
@@ -223,9 +223,9 @@ void MyMoneyDatabaseMgr::removePayee(const MyMoneyPayee& payee)
 
   QMap<QString, MyMoneyTransaction> transactionList = m_sql->fetchTransactions(f); // make sure they're all here
 
-  for(it_t = transactionList.begin(); it_t != transactionList.end(); ++it_t) {
+  for(it_t = transactionList.constBegin(); it_t != transactionList.constEnd(); ++it_t) {
     // scan all splits of this transaction
-    for(it_s = (*it_t).splits().begin(); it_s != (*it_t).splits().end(); ++it_s) {
+    for(it_s = (*it_t).splits().constBegin(); it_s != (*it_t).splits().constEnd(); ++it_s) {
       if((*it_s).payeeId() == payee.id())
         throw new MYMONEYEXCEPTION("Cannot remove payee that is referenced");
     }
@@ -248,10 +248,10 @@ const MyMoneyAccount MyMoneyDatabaseMgr::account(const QString& id) const
   if (m_sql)
   {
       QMap <QString, MyMoneyAccount> accountList = m_sql->fetchAccounts(QStringList()<<QString(id));
-    QMap <QString, MyMoneyAccount>::ConstIterator pos = accountList.find(id);
+    QMap <QString, MyMoneyAccount>::ConstIterator pos = accountList.constFind(id);
 
     // locate the account and if present, return it's data
-    if(pos != accountList.end())
+    if(pos != accountList.constEnd())
       return *pos;
   }
 
@@ -392,7 +392,7 @@ void MyMoneyDatabaseMgr::addTransaction(MyMoneyTransaction& transaction, const b
 
   // now check the splits
   QList<MyMoneySplit>::ConstIterator it_s;
-  for(it_s = transaction.splits().begin(); it_s != transaction.splits().end(); ++it_s) {
+  for(it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s) {
     // the following lines will throw an exception if the
     // account or payee do not exist
     account((*it_s).accountId());
@@ -408,7 +408,7 @@ void MyMoneyDatabaseMgr::addTransaction(MyMoneyTransaction& transaction, const b
   transaction = newTransaction;
 
   // adjust the balance of all affected accounts
-  for(it_s = transaction.splits().begin(); it_s != transaction.splits().end(); ++it_s) {
+  for(it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s) {
     MyMoneyAccount acc = MyMoneyFile::instance()->account((*it_s).accountId());
     acc.adjustBalance((*it_s));
     if(!skipAccountUpdate) {
@@ -426,7 +426,7 @@ bool MyMoneyDatabaseMgr::hasActiveSplits(const QString& id) const
   MyMoneyTransactionFilter f(id);
   QMap<QString, MyMoneyTransaction> transactionList = m_sql->fetchTransactions(f);
 
-  for(it = transactionList.begin(); it != transactionList.end(); ++it) {
+  for(it = transactionList.constBegin(); it != transactionList.constEnd(); ++it) {
     if((*it).accountReferenced(id)) {
       return true;
     }
@@ -455,19 +455,19 @@ const MyMoneyMoney MyMoneyDatabaseMgr::totalBalance(const QString& id, const QDa
   MyMoneyMoney result; //(balance(id, date));
 
   accounts = MyMoneyFile::instance()->account(id).accountList();
-  for (it_a = accounts.begin(); it_a != accounts.end(); ++it_a) {
+  for (it_a = accounts.constBegin(); it_a != accounts.constEnd(); ++it_a) {
     accounts += MyMoneyFile::instance()->account(*it_a).accountList();
   }
 
   // convert into a sorted list with each account only once
   QMap<QString, bool> tempList;
-  for (it_a = accounts.begin(); it_a != accounts.end(); ++it_a) {
+  for (it_a = accounts.constBegin(); it_a != accounts.constEnd(); ++it_a) {
     tempList[*it_a] = true;
   }
   accounts = tempList.uniqueKeys();
 
   QMap<QString, MyMoneyMoney> balanceMap = m_sql->fetchBalance(accounts, date);
-  for (QMap<QString, MyMoneyMoney>::ConstIterator it_b = balanceMap.begin(); it_b != balanceMap.end(); ++it_b) {
+  for (QMap<QString, MyMoneyMoney>::ConstIterator it_b = balanceMap.constBegin(); it_b != balanceMap.constEnd(); ++it_b) {
     result += it_b.value();
   }
   return result;
@@ -478,8 +478,8 @@ const MyMoneyInstitution MyMoneyDatabaseMgr::institution(const QString& id) cons
   QMap<QString, MyMoneyInstitution>::ConstIterator pos;
   QMap<QString, MyMoneyInstitution> institutionList = m_sql->fetchInstitutions(QStringList()<<QString(id));
 
-  pos = institutionList.find(id);
-  if(pos != institutionList.end())
+  pos = institutionList.constFind(id);
+  if(pos != institutionList.constEnd())
     return *pos;
   throw new MYMONEYEXCEPTION("unknown institution");
 }
@@ -554,8 +554,8 @@ void MyMoneyDatabaseMgr::modifyInstitution(const MyMoneyInstitution& institution
   QMap<QString, MyMoneyInstitution>::ConstIterator pos;
 
   // locate the institution in the file global pool
-  pos = institutionList.find(institution.id());
-  if(pos != institutionList.end()) {
+  pos = institutionList.constFind(institution.id());
+  if(pos != institutionList.constEnd()) {
     m_sql->modifyInstitution(institution);
   } else
     throw new MYMONEYEXCEPTION("unknown institution");
@@ -672,11 +672,11 @@ void MyMoneyDatabaseMgr::reparentAccount(MyMoneyAccount &account, MyMoneyAccount
 
   if(!account.parentAccountId().isEmpty()) {
     MyMoneyDatabaseMgr::account(account.parentAccountId());
-    oldParent = accountList.find(account.parentAccountId());
+    oldParent = accountList.constFind(account.parentAccountId());
   }
 
-  newParent = accountList.find(parent.id());
-  childAccount = accountList.find(account.id());
+  newParent = accountList.constFind(parent.id());
+  childAccount = accountList.constFind(account.id());
 
   MyMoneyAccount acc;
   if(!account.parentAccountId().isEmpty()) {
