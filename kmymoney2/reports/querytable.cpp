@@ -419,7 +419,7 @@ void QueryTable::constructTransactionTable(void)
 
   //get all transactions for this report
   QList<MyMoneyTransaction> transactions = file->transactionList(report);
-  for (QList<MyMoneyTransaction>::const_iterator it_transaction = transactions.begin(); it_transaction != transactions.end(); ++it_transaction) {
+  for (QList<MyMoneyTransaction>::const_iterator it_transaction = transactions.constBegin(); it_transaction != transactions.constEnd(); ++it_transaction) {
 
     TableRow qA, qS;
     QDate pd;
@@ -814,7 +814,7 @@ void QueryTable::constructTransactionTable(void)
   startDate = startDate.addDays(-1);
 
   QMap<QString, MyMoneyAccount>::const_iterator it_account, accts_end;
-  for (it_account = accts.begin(); it_account != accts.end(); ++it_account) {
+  for (it_account = accts.constBegin(); it_account != accts.constEnd(); ++it_account) {
 
     TableRow qA;
 
@@ -970,8 +970,8 @@ void QueryTable::constructPerformanceRow( const ReportAccount& account, TableRow
   report.clearAccountFilter();
   report.addAccount(account.id());
   QList<MyMoneyTransaction> transactions = file->transactionList( report );
-  QList<MyMoneyTransaction>::const_iterator it_transaction = transactions.begin();
-  while ( it_transaction != transactions.end() )
+  QList<MyMoneyTransaction>::const_iterator it_transaction = transactions.constBegin();
+  while ( it_transaction != transactions.constEnd() )
   {
     // s is the split for the stock account
     MyMoneySplit s = (*it_transaction).splitByAccount(account.id());
@@ -1002,9 +1002,9 @@ void QueryTable::constructPerformanceRow( const ReportAccount& account, TableRow
     } else if ( action == MyMoneySplit::ActionDividend || action == MyMoneySplit::ActionYield ) {
       // find the split with the category, which has the actual amount of the dividend
       QList<MyMoneySplit> splits = (*it_transaction).splits();
-      QList<MyMoneySplit>::const_iterator it_split = splits.begin();
+      QList<MyMoneySplit>::const_iterator it_split = splits.constBegin();
       bool found = false;
-      while( it_split != splits.end() ) {
+      while( it_split != splits.constEnd() ) {
         ReportAccount acc = (*it_split).accountId();
         if ( acc.isIncomeExpense() ) {
           found = true;
@@ -1089,8 +1089,8 @@ void QueryTable::constructAccountTable(void)
 
   QList<MyMoneyAccount> accounts;
   file->accountList(accounts);
-  QList<MyMoneyAccount>::const_iterator it_account = accounts.begin();
-  while ( it_account != accounts.end() )
+  QList<MyMoneyAccount>::const_iterator it_account = accounts.constBegin();
+  while ( it_account != accounts.constEnd() )
   {
     ReportAccount account = *it_account;
 
@@ -1188,7 +1188,7 @@ void QueryTable::constructSplitsTable(void)
 
   //get all transactions for this report
   QList<MyMoneyTransaction> transactions = file->transactionList(report);
-  for (QList<MyMoneyTransaction>::const_iterator it_transaction = transactions.begin(); it_transaction != transactions.end(); ++it_transaction) {
+  for (QList<MyMoneyTransaction>::const_iterator it_transaction = transactions.constBegin(); it_transaction != transactions.constEnd(); ++it_transaction) {
 
     TableRow qA, qS;
     QDate pd;
@@ -1437,7 +1437,7 @@ void QueryTable::constructSplitsTable(void)
   startDate = startDate.addDays(-1);
 
   QMap<QString, MyMoneyAccount>::const_iterator it_account, accts_end;
-  for (it_account = accts.begin(); it_account != accts.end(); ++it_account) {
+  for (it_account = accts.constBegin(); it_account != accts.constEnd(); ++it_account) {
 
     TableRow qA;
 

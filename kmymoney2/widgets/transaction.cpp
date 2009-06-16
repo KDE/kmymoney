@@ -681,7 +681,7 @@ bool Transaction::maybeTip(const QPoint& cpos, int row, int col, QRect& r, QStri
     if(!m_split.value().isNegative())
       factor = -factor;
 
-    for(it_s = m_transaction.splits().begin(); it_s != m_transaction.splits().end(); ++it_s) {
+    for(it_s = m_transaction.splits().constBegin(); it_s != m_transaction.splits().constEnd(); ++it_s) {
       if(*it_s == m_split)
         continue;
       const MyMoneyAccount& acc = file->account((*it_s).accountId());
@@ -1374,10 +1374,10 @@ InvestTransaction::InvestTransaction(Register *parent, const MyMoneyTransaction&
                      m_transactionType);
 
   QList<MyMoneySplit>::ConstIterator it_s;
-  for(it_s = m_feeSplits.begin(); it_s != m_feeSplits.end(); ++it_s) {
+  for(it_s = m_feeSplits.constBegin(); it_s != m_feeSplits.constEnd(); ++it_s) {
     m_feeAmount += (*it_s).value();
   }
-  for(it_s = m_interestSplits.begin(); it_s != m_interestSplits.end(); ++it_s) {
+  for(it_s = m_interestSplits.constBegin(); it_s != m_interestSplits.constEnd(); ++it_s) {
     m_interestAmount += (*it_s).value();
   }
 

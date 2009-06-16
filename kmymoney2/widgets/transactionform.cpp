@@ -131,8 +131,8 @@ void TransactionForm::enableTabBar(bool b)
 void TabBar::slotTabCurrentChanged(int id)
 {
   QMap<int, int>::const_iterator it;
-  it = m_idMap.find(id);
-  if(it != m_idMap.end())
+  it = m_idMap.constFind(id);
+  if(it != m_idMap.constEnd())
     emit tabCurrentChanged(*it);
   else
     emit tabCurrentChanged(id);

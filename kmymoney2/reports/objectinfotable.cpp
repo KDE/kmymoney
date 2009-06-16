@@ -126,7 +126,6 @@ void ObjectInfoTable::init ( void )
   }
 
   TableRow::setSortCriteria ( sort );
-  #warning #Port to KDE4
   qSort ( m_rows );
 }
 
@@ -138,8 +137,8 @@ void ObjectInfoTable::constructScheduleTable ( void )
 
   schedules = file->scheduleList ( "", MyMoneySchedule::TYPE_ANY, MyMoneySchedule::OCCUR_ANY, MyMoneySchedule::STYPE_ANY, m_config.fromDate(), m_config.toDate() );
 
-  QList<MyMoneySchedule>::const_iterator it_schedule = schedules.begin();
-  while ( it_schedule != schedules.end() )
+  QList<MyMoneySchedule>::const_iterator it_schedule = schedules.constBegin();
+  while ( it_schedule != schedules.constEnd() )
   {
     MyMoneySchedule schedule = *it_schedule;
 
@@ -189,8 +188,8 @@ void ObjectInfoTable::constructScheduleTable ( void )
       {
         //get the information for all splits
         QList<MyMoneySplit> splits = transaction.splits();
-        QList<MyMoneySplit>::const_iterator split_it = splits.begin();
-        for ( ;split_it != splits.end(); split_it++ )
+        QList<MyMoneySplit>::const_iterator split_it = splits.constBegin();
+        for ( ;split_it != splits.constEnd(); split_it++ )
         {
           TableRow splitRow;
           ReportAccount splitAcc = ( *split_it ).accountId();
@@ -235,8 +234,8 @@ void ObjectInfoTable::constructAccountTable ( void )
 
   QList<MyMoneyAccount> accounts;
   file->accountList(accounts);
-  QList<MyMoneyAccount>::const_iterator it_account = accounts.begin();
-  while ( it_account != accounts.end() )
+  QList<MyMoneyAccount>::const_iterator it_account = accounts.constBegin();
+  while ( it_account != accounts.constEnd() )
   {
     TableRow accountRow;
     ReportAccount account = *it_account;
@@ -289,8 +288,8 @@ void ObjectInfoTable::constructAccountLoanTable ( void )
 
   QList<MyMoneyAccount> accounts;
   file->accountList(accounts);
-  QList<MyMoneyAccount>::const_iterator it_account = accounts.begin();
-  while ( it_account != accounts.end() )
+  QList<MyMoneyAccount>::const_iterator it_account = accounts.constBegin();
+  while ( it_account != accounts.constEnd() )
   {
     TableRow accountRow;
     ReportAccount account = *it_account;
@@ -340,8 +339,8 @@ MyMoneyMoney ObjectInfoTable::investmentBalance(const MyMoneyAccount& acc)
   MyMoneyMoney value = file->balance(acc.id());
   QStringList accList = acc.accountList();
 
-  QStringList::const_iterator it_a = accList.begin();
-  for(; it_a != acc.accountList().end(); ++it_a) {
+  QStringList::const_iterator it_a = accList.constBegin();
+  for(; it_a != acc.accountList().constEnd(); ++it_a) {
     MyMoneyAccount stock = file->account(*it_a);
     try {
       MyMoneyMoney val;
