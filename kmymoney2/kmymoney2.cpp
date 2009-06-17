@@ -2307,9 +2307,9 @@ void KMyMoney2App::slotSettings(void)
   dlg->addPage(homePage, i18n("Home"), "home");
   dlg->addPage(schedulesPage, i18n("Scheduled\ntransactions"), "schedule");
   dlg->addPage(encryptionPage, i18n("Encryption"), "kgpg");
-  dlg->addPage(colorsPage, i18n("Colors"), "colorscm");
-  dlg->addPage(fontsPage, i18n("Fonts"), "font");
-  dlg->addPage(onlineQuotesPage, i18n("Online Quotes"), "network_local");
+  dlg->addPage(colorsPage, i18n("Colors"), "preferences-desktop-color");
+  dlg->addPage(fontsPage, i18n("Fonts"), "preferences-desktop-font");
+  dlg->addPage(onlineQuotesPage, i18n("Online Quotes"), "preferences-system-network");
   dlg->addPage(forecastPage, i18n("Forecast"), "forcast");
   dlg->addPage(pluginsPage, i18n("Plugins"), "connect_no");
 
