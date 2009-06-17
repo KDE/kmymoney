@@ -4716,7 +4716,7 @@ void KMyMoney2App::slotKDELanguageSettings(void)
   QString error;
   int pid;
 
-  KToolInvocation::kdeinitExec("kcmshell", args, &error, &pid);
+  KToolInvocation::kdeinitExec("kcmshell4", args, &error, &pid);
 }
 
 void KMyMoney2App::slotNewFeature(void)
