@@ -47,13 +47,10 @@ KMyMoneyAccountCombo::KMyMoneyAccountCombo( QWidget* parent, const char* name ) 
   m_completion(0),
   m_mlbDown(false)
 {
-#warning "port to kde4 (crash"
-#ifndef KMM_DESIGNER
   m_completion = new kMyMoneyAccountCompletion(this);
 
   connect(this, SIGNAL(clicked()), this, SLOT(slotButtonPressed()));
   connect(m_completion, SIGNAL(itemSelected(const QString&)), this, SLOT(slotSelected(const QString&)));
-#endif
 
   // make sure that we can display a minimum of characters
   QFontMetrics fm(font());
