@@ -111,7 +111,7 @@ private:
     CategoryNew
   };
 
-  typedef enum storageTypeE { // not used but keep for future implementation
+  enum storageTypeE { // not used but keep for future implementation
     Memory = 0,
     Database
   } _storageType;
