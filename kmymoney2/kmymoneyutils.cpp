@@ -458,7 +458,7 @@ void KMyMoneyUtils::previouslyUsedCategories(const QString& investmentAccount, Q
     QList< QPair<MyMoneyTransaction, MyMoneySplit> > list;
     file->transactionList(list, filter);
     QList< QPair<MyMoneyTransaction, MyMoneySplit> >::const_iterator it_t;
-    for(it_t = list.begin(); it_t != list.end(); ++it_t) {
+    for(it_t = list.constBegin(); it_t != list.constEnd(); ++it_t) {
       const MyMoneyTransaction& t = (*it_t).first;
       const MyMoneySplit&s = (*it_t).second;
       MyMoneySplit assetAccountSplit;

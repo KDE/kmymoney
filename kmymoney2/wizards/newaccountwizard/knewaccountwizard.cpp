@@ -311,7 +311,7 @@ const MyMoneySchedule& NewAccountWizard::Wizard::schedule(void)
       QList<MyMoneySplit>::const_iterator it;
       MyMoneyMoney factor(moneyBorrowed() ? 1 : -1, 1);
 
-      for(it = additionalSplits.begin(); it != additionalSplits.end(); ++it) {
+      for(it = additionalSplits.constBegin(); it != additionalSplits.constEnd(); ++it) {
         s = (*it);
         s.clearId();
         s.setShares(s.shares() * factor);
@@ -398,7 +398,7 @@ void InstitutionPage::slotLoadWidgets(void)
 
   QList<MyMoneyInstitution>::const_iterator it_l;
   m_institutionComboBox->insertItem("");
-  for(it_l = d->m_list.begin(); it_l != d->m_list.end(); ++it_l) {
+  for(it_l = d->m_list.constBegin(); it_l != d->m_list.constEnd(); ++it_l) {
     m_institutionComboBox->insertItem((*it_l).name());
   }
 }
@@ -412,7 +412,7 @@ void InstitutionPage::slotNewInstitution(void)
   if(!institution.id().isEmpty()) {
     QList<MyMoneyInstitution>::const_iterator it_l;
     int i = 0;
-    for(it_l = d->m_list.begin(); it_l != d->m_list.end(); ++it_l) {
+    for(it_l = d->m_list.constBegin(); it_l != d->m_list.constEnd(); ++it_l) {
       if((*it_l).id() == institution.id()) {
         // select the item and remember that the very first one is the empty item
         m_institutionComboBox->setCurrentIndex(i+1);
@@ -1244,7 +1244,7 @@ void LoanPaymentPage::additionalFeesSplits(QList<MyMoneySplit>& list)
   list.clear();
 
   QList<MyMoneySplit>::ConstIterator it;
-  for(it = d->additionalFeesTransaction.splits().begin(); it != d->additionalFeesTransaction.splits().end(); ++it) {
+  for(it = d->additionalFeesTransaction.splits().constBegin(); it != d->additionalFeesTransaction.splits().constEnd(); ++it) {
     if((*it).accountId() != d->phonyAccount.id()) {
       list << (*it);
     }
@@ -1281,7 +1281,7 @@ void LoanPaymentPage::slotAdditionalFees(void)
     QList<MyMoneySplit>::ConstIterator it;
 
     d->additionalFees = MyMoneyMoney(0);
-    for(it = d->additionalFeesTransaction.splits().begin(); it != d->additionalFeesTransaction.splits().end(); ++it) {
+    for(it = d->additionalFeesTransaction.splits().constBegin(); it != d->additionalFeesTransaction.splits().constEnd(); ++it) {
       if((*it).accountId() != d->phonyAccount.id()) {
         d->additionalFees += (*it).shares();
       }

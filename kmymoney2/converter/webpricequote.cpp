@@ -638,8 +638,8 @@ QStringList WebPriceQuote::quoteSourcesNative()
   // Set up each of the default sources.  These are done piecemeal so that
   // when we add a new source, it's automatically picked up.
   QMap<QString,WebPriceQuoteSource> defaults = defaultQuoteSources();
-  QMap<QString,WebPriceQuoteSource>::const_iterator it_source = defaults.begin();
-  while ( it_source != defaults.end() )
+  QMap<QString,WebPriceQuoteSource>::const_iterator it_source = defaults.constBegin();
+  while ( it_source != defaults.constEnd() )
   {
     if ( ! groups.contains( (*it_source).m_name ) )
     {
@@ -933,9 +933,9 @@ QDate MyMoneyDateFormat::convertString(const QString& _in, bool _strict, unsigne
   unsigned day = 0, month = 0, year = 0;
   bool ok;
   QRegExp digitrex("(\\d+)");
-  QStringList::const_iterator it_scanned = scannedParts.begin();
-  QStringList::const_iterator it_format = formatParts.begin();
-  while ( it_scanned != scannedParts.end() )
+  QStringList::const_iterator it_scanned = scannedParts.constBegin();
+  QStringList::const_iterator it_format = formatParts.constBegin();
+  while ( it_scanned != scannedParts.constEnd() )
   {
     // decide upon the first character of the part
     switch ( (*it_format).at(0).cell() )

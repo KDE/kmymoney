@@ -167,8 +167,8 @@ void MyMoneyStatementReader::Private::assignUniqueBankID(MyMoneySplit& s, const 
     int idx = 1;
     for(;;) {
       QMap<QString, bool>::const_iterator it;
-      it = uniqIds.find(hash);
-      if(it == uniqIds.end()) {
+      it = uniqIds.constFind(hash);
+      if(it == uniqIds.constEnd()) {
         uniqIds[hash] = true;
         break;
       }
@@ -345,7 +345,7 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
       signalProgress(0, s.m_listPrices.count(), "Importing Statement ...");
       QList<MyMoneySecurity> slist = MyMoneyFile::instance()->securityList();
       QList<MyMoneySecurity>::const_iterator it_s;
-      for(it_s = slist.begin(); it_s != slist.end(); ++it_s) {
+      for(it_s = slist.constBegin(); it_s != slist.constEnd(); ++it_s) {
         d->securitiesBySymbol[(*it_s).tradingSymbol()] = *it_s;
         d->securitiesByName[(*it_s).name()] = *it_s;
       }
@@ -372,7 +372,7 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
   // delete all payees created in vain
   int payeeCount = d->payees.count();
   QList<MyMoneyPayee>::const_iterator it_p;
-  for(it_p = d->payees.begin(); it_p != d->payees.end(); ++it_p) {
+  for(it_p = d->payees.constBegin(); it_p != d->payees.constEnd(); ++it_p) {
     try {
       MyMoneyFile::instance()->removePayee(*it_p);
       --payeeCount;
@@ -401,7 +401,7 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
   KConfigGroup grp = config->group(QString::fromLatin1("Notification Messages"));
   QStringList::ConstIterator it;
 
-  for(it = m_dontAskAgain.begin(); it != m_dontAskAgain.end(); ++it) {
+  for(it = m_dontAskAgain.constBegin(); it != m_dontAskAgain.constEnd(); ++it) {
     grp.deleteEntry(*it);
   }
   config->sync();
@@ -453,8 +453,8 @@ void MyMoneyStatementReader::processSecurityEntry(const MyMoneyStatement::Securi
   // not use type as a matching factor.
   MyMoneySecurity security;
   QList<MyMoneySecurity> list = file->securityList();
-  QList<MyMoneySecurity>::ConstIterator it = list.begin();
-  while ( it != list.end() && security.id().isEmpty() )
+  QList<MyMoneySecurity>::ConstIterator it = list.constBegin();
+  while ( it != list.constEnd() && security.id().isEmpty() )
   {
     if(sec_in.m_strSymbol.isEmpty()) {
       if((*it).name() == sec_in.m_strName)
@@ -562,8 +562,8 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       // search through each subordinate account
       bool found = false;
       QStringList accounts = thisaccount.accountList();
-      QStringList::const_iterator it_account = accounts.begin();
-      while( !found && it_account != accounts.end() )
+      QStringList::const_iterator it_account = accounts.constBegin();
+      while( !found && it_account != accounts.constEnd() )
       {
         QString currencyid = file->account(*it_account).currencyId();
         MyMoneySecurity security = file->security( currencyid );
@@ -617,8 +617,8 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
         {
           MyMoneySecurity security;
           QList<MyMoneySecurity> list = MyMoneyFile::instance()->securityList();
-          QList<MyMoneySecurity>::ConstIterator it = list.begin();
-          while ( it != list.end() && security.id().isEmpty() )
+          QList<MyMoneySecurity>::ConstIterator it = list.constBegin();
+          while ( it != list.constEnd() && security.id().isEmpty() )
           {
             if(t_in.m_strSecurity.toLower() == (*it).tradingSymbol().toLower()
             || t_in.m_strSecurity.toLower() == (*it).name().toLower()) {
@@ -859,11 +859,11 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       // in case of a) we take the one with the largest matchedLength()
       // which happens to be the last one in the map
       if(matchMap.count() > 1) {
-        QMap<int, QString>::const_iterator it_m = matchMap.end();
+        QMap<int, QString>::const_iterator it_m = matchMap.constEnd();
         --it_m;
         payeeid = *it_m;
       } else if(matchMap.count() == 1)
-        payeeid = *(matchMap.begin());
+        payeeid = *(matchMap.constBegin());
 
       // if we did not find a matching payee, we throw an exception and try to create it
       if(payeeid.isEmpty())

@@ -268,17 +268,17 @@ bool MyMoneyTemplate::createAccounts(MyMoneyAccount& parent, QDomNode account)
         signalProgress(++m_accountsRead, 0);
         QList<MyMoneyAccount> subAccountList;
         QList<MyMoneyAccount>::ConstIterator it;
-        it = subAccountList.end();
+        it = subAccountList.constEnd();
         if(!parent.accountList().isEmpty()) {
           MyMoneyFile::instance()->accountList(subAccountList, parent.accountList());
-          for(it = subAccountList.begin(); it != subAccountList.end(); ++it) {
+          for(it = subAccountList.constBegin(); it != subAccountList.constEnd(); ++it) {
             if((*it).name() == accountElement.attribute("name")) {
               acc = *it;
               break;
             }
           }
         }
-        if(it == subAccountList.end()) {
+        if(it == subAccountList.constEnd()) {
           // not found, we need to create it
           acc.setName(accountElement.attribute("name"));
           acc.setAccountType(static_cast<MyMoneyAccount::_accountTypeE>(accountElement.attribute("type").toUInt()));
@@ -388,7 +388,7 @@ bool MyMoneyTemplate::saveTemplate(const KUrl& url)
   QString filename;
 
   if(!url.isValid()) {
-    qDebug("Invalid template URL '%s'", url.url().toLatin1());
+    qDebug("Invalid template URL '%s'", qPrintable(url.url()));
     return false;
   }
 
