@@ -147,10 +147,6 @@ INSTALL(FILES kmymoney2ui.rc tips
 INSTALL(FILES ${_HEADERS}
   DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney
   )
-#INSTALL(FILES x-kmymoney2.desktop
-#  DESTINATION ${KDE4MIMEDIR}/applications
-#  )
-
 INSTALL(FILES kmymoney2.desktop
   DESTINATION ${XDG_APPS_INSTALL_DIR}
   )
