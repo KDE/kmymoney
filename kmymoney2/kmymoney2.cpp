@@ -632,7 +632,7 @@ void KMyMoney2App::initActions(void)
   //new KAction(i18n("KCalc..."), "kcalc", 0, this, SLOT(slotToolsStartKCalc()), actionCollection(), "tools_kcalc");
   KAction *tools_kcalc = actionCollection()->addAction("tools_kcalc");
   tools_kcalc->setText(i18n("KCalc..."));
-  tools_kcalc->setIcon(KIcon("kcalc"));
+  tools_kcalc->setIcon(KIcon("accessories-calculator"));
   connect(tools_kcalc, SIGNAL(triggered()), this, SLOT(slotToolsStartKCalc()));
 
   // *****************

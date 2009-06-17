@@ -228,7 +228,7 @@ void kMyMoneyEdit::init(void)
   m_calculatorFrame->setFixedSize(m_calculator->width()+3, m_calculator->height()+3);
   m_calculatorFrame->hide();
 
-  m_calcButton = new KPushButton(KIcon(QPixmap(KIconLoader::global()->iconPath("kcalc", -KIconLoader::SizeSmall))), QString(""), this);
+  m_calcButton = new KPushButton(KIcon(QPixmap(KIconLoader::global()->iconPath("accessories-calculator", -KIconLoader::SizeSmall))), QString(""), this);
   m_calcButton->setFixedWidth( m_calcButton->sizeHint().width() );
   m_calcButton->setFixedHeight(m_edit->sizeHint().height());
   m_calcButton->setFocusProxy(m_edit);
