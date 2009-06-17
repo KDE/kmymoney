@@ -83,8 +83,8 @@ KOnlineBankingSetupWizard::KOnlineBankingSetupWizard(QWidget *parent):
 #endif
   OfxPartner::setDirectory(KStandardDirs::locateLocal("appdata", ""));
   QStringList banks = OfxPartner::BankNames();
-  QStringList::const_iterator it_bank = banks.begin();
-  while (it_bank != banks.end())
+  QStringList::const_iterator it_bank = banks.constBegin();
+  while (it_bank != banks.constEnd())
   {
     new K3ListViewItem( m_listFi, (*it_bank));
     ++it_bank;
@@ -139,8 +139,8 @@ bool KOnlineBankingSetupWizard::finishFiPage(void)
       m_textDetails->clear();
       m_textDetails->append(QString("<p>Details for %1:</p>").arg(bank));
       QStringList fipids = OfxPartner::FipidForBank(bank);
-      QStringList::const_iterator it_fipid = fipids.begin();
-      while ( it_fipid != fipids.end() )
+      QStringList::const_iterator it_fipid = fipids.constBegin();
+      while ( it_fipid != fipids.constEnd() )
       {
         // For each fipid, get the connection details
         info = OfxPartner::ServiceInfo(*it_fipid);
@@ -183,7 +183,7 @@ bool KOnlineBankingSetupWizard::finishFiPage(void)
     }
 
     m_textDetails->clear();
-    m_textDetails->append(QString("<p>Details for %1:</p>").arg(m_bankName->text()));
+    m_textDetails->append(i18n("<p>Details for %1:</p>",m_bankName->text()));
 
     memset(&info, 0, sizeof(OfxFiServiceInfo));
     strncpy(info.fid, m_fid->text().toLatin1(), OFX_FID_LENGTH-1);

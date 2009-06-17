@@ -101,12 +101,12 @@ OfxAppVersion::OfxAppVersion(KComboBox* combo, const QString& appId) :
   combo->insertStringList(m_appMap.keys());
 
   QMap<QString, QString>::const_iterator it_a;
-  for(it_a = m_appMap.begin(); it_a != m_appMap.end(); ++it_a) {
+  for(it_a = m_appMap.constBegin(); it_a != m_appMap.constEnd(); ++it_a) {
     if(*it_a == appId)
       break;
   }
 
-  if(it_a != m_appMap.end()) {
+  if(it_a != m_appMap.constEnd()) {
     combo->setCurrentItem(it_a.key());
   } else {
     combo->setCurrentItem(i18n("Quicken Windows 2008"));

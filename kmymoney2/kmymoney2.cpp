@@ -1387,8 +1387,8 @@ bool KMyMoney2App::isImportableFile( const KUrl& url )
   bool result = false;
 
   // Iterate through the plugins and see if there's a loaded plugin who can handle it
-  QMap<QString,KMyMoneyPlugin::ImporterPlugin*>::const_iterator it_plugin = m_importerPlugins.begin();
-  while ( it_plugin != m_importerPlugins.end() )
+  QMap<QString,KMyMoneyPlugin::ImporterPlugin*>::const_iterator it_plugin = m_importerPlugins.constBegin();
+  while ( it_plugin != m_importerPlugins.constEnd() )
   {
     if ( (*it_plugin)->isMyFormat(url.path()) )
     {
@@ -1401,7 +1401,7 @@ bool KMyMoney2App::isImportableFile( const KUrl& url )
   // If we did not find a match, try importing it as a KMM statement file,
   // which is really just for testing.  the statement file is not exposed
   // to users.
-  if ( it_plugin == m_importerPlugins.end() )
+  if ( it_plugin == m_importerPlugins.constEnd() )
     if ( MyMoneyStatement::isStatementFile( url.path() ) )
       result = true;
 
@@ -1773,8 +1773,8 @@ void KMyMoney2App::slotFileQuit(void)
   QList<KMainWindow*> memberList = KMainWindow::memberList();
   if(!memberList.isEmpty()) {
 
-    QList<KMainWindow*>::const_iterator w_it = memberList.begin();
-    for(; w_it != memberList.end(); ++w_it) {
+    QList<KMainWindow*>::const_iterator w_it = memberList.constBegin();
+    for(; w_it != memberList.constEnd(); ++w_it) {
       // only close the window if the closeEvent is accepted. If the user presses Cancel on the saveModified() dialog,
 
       // the window and the application stay open.
@@ -2730,7 +2730,7 @@ const MyMoneyAccount& KMyMoney2App::findAccount(const MyMoneyAccount& acc, const
       parents << parent;
     }
     QList<MyMoneyAccount>::const_iterator it_p;
-    for(it_p = parents.begin(); it_p != parents.end(); ++it_p) {
+    for(it_p = parents.constBegin(); it_p != parents.constEnd(); ++it_p) {
       MyMoneyAccount parentAccount = *it_p;
       // search by name (allow hierarchy)
       int pos;
@@ -3256,7 +3256,7 @@ void KMyMoney2App::slotAccountDelete(void)
         KMSTATUS(i18n("Adjusting budgets..."));
         QList<MyMoneyBudget> blist = file->budgetList();
         QList<MyMoneyBudget>::const_iterator it_b;
-        for(it_b = blist.begin(); it_b != blist.end(); ++it_b) {
+        for(it_b = blist.constBegin(); it_b != blist.constEnd(); ++it_b) {
           if((*it_b).hasReferenceTo(m_selectedAccount.id())) {
             MyMoneyBudget b = (*it_b);
             MyMoneyBudget::AccountGroup fromBudget = b.account(m_selectedAccount.id());
@@ -3354,7 +3354,7 @@ void KMyMoney2App::slotAccountDelete(void)
       // all good, now first reparent selected sub-categories
       try {
         MyMoneyAccount parent = file->account(m_selectedAccount.parentAccountId());
-        for (QStringList::const_iterator it = accountsToReparent.begin(); it != accountsToReparent.end(); ++it) {
+        for (QStringList::const_iterator it = accountsToReparent.constBegin(); it != accountsToReparent.constEnd(); ++it) {
           MyMoneyAccount child = file->account(*it);
           file->reparentAccount(child, parent);
         }
@@ -3440,14 +3440,14 @@ void KMyMoney2App::slotAccountEdit(void)
         }
 
         // check for online modules
-        QMap<QString, KMyMoneyPlugin::OnlinePlugin *>::const_iterator it_plugin = m_onlinePlugins.end();
+        QMap<QString, KMyMoneyPlugin::OnlinePlugin *>::const_iterator it_plugin = m_onlinePlugins.constEnd();
         const MyMoneyKeyValueContainer& kvp = m_selectedAccount.onlineBankingSettings();
         if(!kvp["provider"].isEmpty()) {
           // if we have an online provider for this account, we need to check
           // that we have the corresponding plugin. If that exists, we ask it
           // to provide an additional tab for the account editor.
-          it_plugin = m_onlinePlugins.find(kvp["provider"]);
-          if(it_plugin != m_onlinePlugins.end()) {
+          it_plugin = m_onlinePlugins.constFind(kvp["provider"]);
+          if(it_plugin != m_onlinePlugins.constEnd()) {
             QString name;
             QWidget *w = 0;
             w = (*it_plugin)->accountConfigTab(m_selectedAccount, name);
@@ -3461,7 +3461,7 @@ void KMyMoney2App::slotAccountEdit(void)
 
             MyMoneyAccount account = dlg.account();
             MyMoneyAccount parent = dlg.parentAccount();
-            if(it_plugin != m_onlinePlugins.end()) {
+            if(it_plugin != m_onlinePlugins.constEnd()) {
               account.setOnlineBankingSettings((*it_plugin)->onlineBankingSettings(account.onlineBankingSettings()));
             }
             MyMoneyMoney bal = dlg.openingBalance();
@@ -3643,7 +3643,7 @@ void KMyMoney2App::slotAccountReconcileFinish(void)
 
     // walk the list of transactions to figure out the balance(s)
     QList<QPair<MyMoneyTransaction, MyMoneySplit> >::const_iterator it;
-    for(it = transactionList.begin(); it != transactionList.end(); ++it) {
+    for(it = transactionList.constBegin(); it != transactionList.constEnd(); ++it) {
       if((*it).second.reconcileFlag() == MyMoneySplit::NotReconciled) {
         clearedBalance -= (*it).second.shares();
       }
@@ -3791,7 +3791,7 @@ bool KMyMoney2App::canCloseAccount(const MyMoneyAccount& acc) const
 
   // all children must be already closed
   QStringList::const_iterator it_a;
-  for(it_a = acc.accountList().begin(); it_a != acc.accountList().end(); ++it_a) {
+  for(it_a = acc.accountList().constBegin(); it_a != acc.accountList().constEnd(); ++it_a) {
     MyMoneyAccount a = MyMoneyFile::instance()->account(*it_a);
     if(!a.isClosed()) {
       return false;
@@ -3801,7 +3801,7 @@ bool KMyMoney2App::canCloseAccount(const MyMoneyAccount& acc) const
   // there must be no unfinished schedule referencing the account
   QList<MyMoneySchedule> list = MyMoneyFile::instance()->scheduleList();
   QList<MyMoneySchedule>::const_iterator it_l;
-  for(it_l = list.begin(); it_l != list.end(); ++it_l) {
+  for(it_l = list.constBegin(); it_l != list.constEnd(); ++it_l) {
     if((*it_l).isFinished())
       continue;
     if((*it_l).hasReferenceTo(acc.id()))
@@ -4324,8 +4324,8 @@ void KMyMoney2App::slotPayeeDelete(void)
   try {
     // create a transaction filter that contains all payees selected for removal
     MyMoneyTransactionFilter f = MyMoneyTransactionFilter();
-    for (QList<MyMoneyPayee>::const_iterator it = m_selectedPayees.begin();
-         it != m_selectedPayees.end(); ++it) {
+    for (QList<MyMoneyPayee>::const_iterator it = m_selectedPayees.constBegin();
+         it != m_selectedPayees.constEnd(); ++it) {
       f.addPayee( (*it).id() );
     }
     // request a list of all transactions that still use the payees in question
@@ -4335,12 +4335,12 @@ void KMyMoney2App::slotPayeeDelete(void)
     // now get a list of all schedules that make use of one of the payees
     QList<MyMoneySchedule> all_schedules = file->scheduleList();
     QList<MyMoneySchedule> used_schedules;
-    for (QList<MyMoneySchedule>::ConstIterator it = all_schedules.begin();
-         it != all_schedules.end(); ++it)
+    for (QList<MyMoneySchedule>::ConstIterator it = all_schedules.constBegin();
+         it != all_schedules.constEnd(); ++it)
     {
       // loop over all splits in the transaction of the schedule
-      for (QList<MyMoneySplit>::ConstIterator s_it = (*it).transaction().splits().begin();
-           s_it != (*it).transaction().splits().end(); ++s_it)
+      for (QList<MyMoneySplit>::ConstIterator s_it = (*it).transaction().splits().constBegin();
+           s_it != (*it).transaction().splits().constEnd(); ++s_it)
       {
         // is the payee in the split to be deleted?
         if(payeeInList(m_selectedPayees, (*s_it).payeeId())) {
@@ -4443,16 +4443,16 @@ void KMyMoney2App::slotPayeeDelete(void)
       //       of regular expressions at this point. For now, we leave this task
       //       to the user himeself.
       QStringList::const_iterator it_n;
-      for(it_n = deletedPayeeNames.begin(); it_n != deletedPayeeNames.end(); ++it_n) {
+      for(it_n = deletedPayeeNames.constBegin(); it_n != deletedPayeeNames.constEnd(); ++it_n) {
         if(matchType == MyMoneyPayee::matchKey) {
           // make sure we really need it and it is not caught by an existing regexp
           QStringList::const_iterator it_k;
-          for(it_k = payeeNames.begin(); it_k != payeeNames.end(); ++it_k) {
+          for(it_k = payeeNames.constBegin(); it_k != payeeNames.constEnd(); ++it_k) {
             QRegExp exp(*it_k, ignorecase);
             if(exp.search(*it_n) != -1)
               break;
           }
-          if(it_k == payeeNames.end())
+          if(it_k == payeeNames.constEnd())
             payeeNames << QRegExp::escape(*it_n);
         } else if(payeeNames.contains(*it_n) == 0)
           payeeNames << QRegExp::escape(*it_n);
@@ -4855,7 +4855,7 @@ void KMyMoney2App::doDeleteTransactions(void)
   MyMoneyFileTransaction ft;
   MyMoneyFile* file = MyMoneyFile::instance();
   try {
-    for(it_t = list.begin(); it_t != list.end(); ++it_t) {
+    for(it_t = list.constBegin(); it_t != list.constEnd(); ++it_t) {
       // only remove those transactions that do not reference a closed account
       if(!file->referencesClosedAccount((*it_t).transaction()))
         file->removeTransaction((*it_t).transaction());
@@ -5057,7 +5057,7 @@ void KMyMoney2App::markTransaction(MyMoneySplit::reconcileFlagE flag)
   slotStatusProgressBar(0, cnt);
   MyMoneyFileTransaction ft;
   try {
-    for(it_t = list.begin(); it_t != list.end(); ++it_t) {
+    for(it_t = list.constBegin(); it_t != list.constEnd(); ++it_t) {
       // turn on signals before we modify the last entry in the list
       cnt--;
       MyMoneyFile::instance()->blockSignals(cnt != 0);
@@ -5121,7 +5121,7 @@ void KMyMoney2App::slotTransactionsAccept(void)
   slotStatusProgressBar(0, cnt);
   MyMoneyFileTransaction ft;
   try {
-    for(it_t = list.begin(); it_t != list.end(); ++it_t) {
+    for(it_t = list.constBegin(); it_t != list.constEnd(); ++it_t) {
       // reload transaction in case it got changed during the course of this loop
       MyMoneyTransaction t = MyMoneyFile::instance()->transaction((*it_t).transaction().id());
       if(t.isImported()) {
@@ -5129,7 +5129,7 @@ void KMyMoney2App::slotTransactionsAccept(void)
         if(!m_selectedAccount.id().isEmpty()) {
           QList<MyMoneySplit> list = t.splits();
           QList<MyMoneySplit>::const_iterator it_s;
-          for(it_s = list.begin(); it_s != list.end(); ++it_s) {
+          for(it_s = list.constBegin(); it_s != list.constEnd(); ++it_s) {
             if((*it_s).accountId() == m_selectedAccount.id()) {
               if((*it_s).reconcileFlag() == MyMoneySplit::NotReconciled) {
                 MyMoneySplit s = (*it_s);
@@ -5242,11 +5242,11 @@ void KMyMoney2App::slotMoveToAccount(const QString& id)
     MyMoneyFileTransaction ft;
     try {
       KMyMoneyRegister::SelectedTransactions::const_iterator it_t;
-      for(it_t = m_selectedTransactions.begin(); it_t != m_selectedTransactions.end(); ++it_t) {
+      for(it_t = m_selectedTransactions.constBegin(); it_t != m_selectedTransactions.constEnd(); ++it_t) {
         QList<MyMoneySplit>::const_iterator it_s;
         bool changed = false;
         MyMoneyTransaction t = (*it_t).transaction();
-        for(it_s = (*it_t).transaction().splits().begin(); it_s != (*it_t).transaction().splits().end(); ++it_s) {
+        for(it_s = (*it_t).transaction().splits().constBegin(); it_s != (*it_t).transaction().splits().constEnd(); ++it_s) {
           if((*it_s).accountId() == m_selectedAccount.id()) {
             MyMoneySplit s = (*it_s);
             s.setAccountId(id);
@@ -5289,9 +5289,9 @@ void KMyMoney2App::slotUpdateMoveToAccountMenu(void)
     accountSet.load(d->m_moveToAccountSelector);
     // remove those accounts that we currently reference
     KMyMoneyRegister::SelectedTransactions::const_iterator it_t;
-    for(it_t = m_selectedTransactions.begin(); it_t != m_selectedTransactions.end(); ++it_t) {
+    for(it_t = m_selectedTransactions.constBegin(); it_t != m_selectedTransactions.constEnd(); ++it_t) {
       QList<MyMoneySplit>::const_iterator it_s;
-      for(it_s = (*it_t).transaction().splits().begin(); it_s != (*it_t).transaction().splits().end(); ++it_s) {
+      for(it_s = (*it_t).transaction().splits().constBegin(); it_s != (*it_t).transaction().splits().constEnd(); ++it_s) {
         d->m_moveToAccountSelector->removeItem((*it_s).accountId());
       }
     }
@@ -5299,7 +5299,7 @@ void KMyMoney2App::slotUpdateMoveToAccountMenu(void)
     // in a different currency
     QStringList list = d->m_moveToAccountSelector->accountList();
     QList<QString>::const_iterator it_a;
-    for(it_a = list.begin(); it_a != list.end(); ++it_a) {
+    for(it_a = list.constBegin(); it_a != list.constEnd(); ++it_a) {
       MyMoneyAccount acc = MyMoneyFile::instance()->account(*it_a);
       if(acc.currencyId() != m_selectedAccount.currencyId())
         d->m_moveToAccountSelector->removeItem((*it_a));
@@ -5322,7 +5322,7 @@ void KMyMoney2App::transactionUnmatch(void)
   KMyMoneyRegister::SelectedTransactions::const_iterator it;
   MyMoneyFileTransaction ft;
   try {
-    for(it = m_selectedTransactions.begin(); it != m_selectedTransactions.end(); ++it) {
+    for(it = m_selectedTransactions.constBegin(); it != m_selectedTransactions.constEnd(); ++it) {
       if((*it).split().isMatched()) {
         TransactionMatcher matcher(m_selectedAccount);
         matcher.unmatch((*it).transaction(), (*it).split());
@@ -5348,7 +5348,7 @@ void KMyMoney2App::transactionMatch(void)
 
   KMyMoneyRegister::SelectedTransactions::const_iterator it;
   KMyMoneyRegister::SelectedTransactions toBeDeleted;
-  for(it = m_selectedTransactions.begin(); it != m_selectedTransactions.end(); ++it) {
+  for(it = m_selectedTransactions.constBegin(); it != m_selectedTransactions.constEnd(); ++it) {
     if((*it).transaction().isImported()) {
       endMatchTransaction = (*it).transaction();
       endSplit = (*it).split();
@@ -5646,7 +5646,7 @@ void KMyMoney2App::slotUpdateActions(void)
       // selected transactions does not reference a closed account
       bool enable = false;
       KMyMoneyRegister::SelectedTransactions::const_iterator it_t;
-      for(it_t = m_selectedTransactions.begin(); (enable == false) && (it_t != m_selectedTransactions.end()); ++it_t) {
+      for(it_t = m_selectedTransactions.constBegin(); (enable == false) && (it_t != m_selectedTransactions.constEnd()); ++it_t) {
         enable = !file->referencesClosedAccount((*it_t).transaction());
       }
       action("transaction_delete")->setEnabled(enable);
@@ -5697,7 +5697,7 @@ void KMyMoney2App::slotUpdateActions(void)
       int matchedCount = 0;
       int importedCount = 0;
       KMyMoneyRegister::SelectedTransactions::const_iterator it;
-      for(it = m_selectedTransactions.begin(); it != m_selectedTransactions.end(); ++it) {
+      for(it = m_selectedTransactions.constBegin(); it != m_selectedTransactions.constEnd(); ++it) {
         if((*it).transaction().isImported())
           ++importedCount;
         if((*it).split().isMatched())
@@ -5732,12 +5732,12 @@ void KMyMoney2App::slotUpdateActions(void)
   QList<MyMoneyAccount> accList;
   file->accountList(accList);
   QList<MyMoneyAccount>::const_iterator it_a;
-  QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p = m_onlinePlugins.end();
-  for(it_a = accList.begin(); (it_p == m_onlinePlugins.end()) && (it_a != accList.end()); ++it_a) {
+  QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p = m_onlinePlugins.constEnd();
+  for(it_a = accList.constBegin(); (it_p == m_onlinePlugins.constEnd()) && (it_a != accList.constEnd()); ++it_a) {
     if ( !(*it_a).onlineBankingSettings().value("provider").isEmpty() ) {
       // check if provider is available
-      it_p = m_onlinePlugins.find((*it_a).onlineBankingSettings().value("provider"));
-      if(it_p != m_onlinePlugins.end()) {
+      it_p = m_onlinePlugins.constFind((*it_a).onlineBankingSettings().value("provider"));
+      if(it_p != m_onlinePlugins.constEnd()) {
         QStringList protocols;
         (*it_p)->protocols(protocols);
         if(protocols.count() > 0) {
@@ -5781,8 +5781,8 @@ void KMyMoney2App::slotUpdateActions(void)
             action("account_online_unmap")->setEnabled(true);
             // check if provider is available
             QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p;
-            it_p = m_onlinePlugins.find(m_selectedAccount.onlineBankingSettings().value("provider"));
-            if(it_p != m_onlinePlugins.end()) {
+            it_p = m_onlinePlugins.constFind(m_selectedAccount.onlineBankingSettings().value("provider"));
+            if(it_p != m_onlinePlugins.constEnd()) {
               QStringList protocols;
               (*it_p)->protocols(protocols);
               if(protocols.count() > 0) {
@@ -6242,8 +6242,8 @@ void KMyMoney2App::webConnect(const QString& url, const Q3CString& asn_id)
     // remove the statement files
     d->unlinkStatementXML();
 
-    QMap<QString,KMyMoneyPlugin::ImporterPlugin*>::const_iterator it_plugin = m_importerPlugins.begin();
-    while ( it_plugin != m_importerPlugins.end() )
+    QMap<QString,KMyMoneyPlugin::ImporterPlugin*>::const_iterator it_plugin = m_importerPlugins.constBegin();
+    while ( it_plugin != m_importerPlugins.constEnd() )
     {
       if ( (*it_plugin)->isMyFormat(url) )
       {
@@ -6261,7 +6261,7 @@ void KMyMoney2App::webConnect(const QString& url, const Q3CString& asn_id)
     // If we did not find a match, try importing it as a KMM statement file,
     // which is really just for testing.  the statement file is not exposed
     // to users.
-    if ( it_plugin == m_importerPlugins.end() )
+    if ( it_plugin == m_importerPlugins.constEnd() )
       if ( MyMoneyStatement::isStatementFile( url ) )
         slotStatementImport(url);
 
@@ -6375,7 +6375,7 @@ const MyMoneyAccount& KMyMoney2App::account(const QString& key, const QString& v
   QList<MyMoneyAccount>::const_iterator it_a;
   MyMoneyFile::instance()->accountList(list);
   QList<MyMoneyAccount> accList;
-  for(it_a = list.begin(); it_a != list.end(); ++it_a) {
+  for(it_a = list.constBegin(); it_a != list.constEnd(); ++it_a) {
     const QString& id = (*it_a).onlineBankingSettings().value(key);
     if(id.contains(value)) {
       accList << MyMoneyFile::instance()->account((*it_a).id());
@@ -6528,7 +6528,7 @@ void KMyMoney2App::slotAccountUpdateOnlineAll(void)
   // now work on the remaining list of accounts
   int cnt = accList.count() - 1;
   for(it_a = accList.begin(); it_a != accList.end(); ++it_a) {
-    it_p = m_onlinePlugins.find((*it_a).onlineBankingSettings().value("provider"));
+    it_p = m_onlinePlugins.constFind((*it_a).onlineBankingSettings().value("provider"));
     (*it_p)->updateAccount(*it_a, cnt != 0);
     --cnt;
   }
@@ -6549,8 +6549,8 @@ void KMyMoney2App::slotAccountUpdateOnline(void)
 
   // find the provider
   QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p;
-  it_p = m_onlinePlugins.find(m_selectedAccount.onlineBankingSettings().value("provider"));
-  if(it_p != m_onlinePlugins.end()) {
+  it_p = m_onlinePlugins.constFind(m_selectedAccount.onlineBankingSettings().value("provider"));
+  if(it_p != m_onlinePlugins.constEnd()) {
     // plugin found, call it
     d->m_collectingStatements = true;
     d->m_statementResults.clear();
