@@ -827,7 +827,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       QList<MyMoneyPayee> pList = file->payeeList();
       QList<MyMoneyPayee>::const_iterator it_p;
       QMap<int, QString> matchMap;
-      for(it_p = pList.begin(); it_p != pList.end(); ++it_p) {
+      for(it_p = pList.constBegin(); it_p != pList.constEnd(); ++it_p) {
         bool ignoreCase;
         QStringList keys;
         QStringList::const_iterator it_s;
@@ -840,7 +840,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
             // tricky fall through here
 
           case MyMoneyPayee::matchKey:
-            for(it_s = keys.begin(); it_s != keys.end(); ++it_s) {
+            for(it_s = keys.constBegin(); it_s != keys.constEnd(); ++it_s) {
               QRegExp exp(*it_s, !ignoreCase);
               if(exp.search(payeename) != -1) {
                 matchMap[exp.matchedLength()] = (*it_p).id();
@@ -1011,10 +1011,10 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           // with the same VALUE as our imported transaction, and if so take that one.
           if ( list.count() > 1 )
           {
-            QList<MyMoneyTransaction>::ConstIterator it_trans = list.end();
-            if(it_trans != list.begin())
+            QList<MyMoneyTransaction>::ConstIterator it_trans = list.constEnd();
+            if(it_trans != list.constBegin())
               --it_trans;
-            while ( it_trans != list.end() )
+            while ( it_trans != list.constEnd() )
             {
               MyMoneySplit s = (*it_trans).splitByAccount(thisaccount.id());
               if ( s.value() == s1.value() )
@@ -1027,7 +1027,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           }
 
           QList<MyMoneySplit>::ConstIterator it_split;
-          for(it_split = t_old.splits().begin(); it_split != t_old.splits().end(); ++it_split)
+          for(it_split = t_old.splits().constBegin(); it_split != t_old.splits().constEnd(); ++it_split)
           {
             // We don't need the split that covers this account,
             // we just need the other ones.
@@ -1250,8 +1250,8 @@ bool MyMoneyStatementReader::selectOrCreateAccount(const SelectCreateMode /*mode
     file->accountList(accounts);
 
     // Iterate through them
-    QList<MyMoneyAccount>::const_iterator it_account = accounts.begin();
-    while ( it_account != accounts.end() )
+    QList<MyMoneyAccount>::const_iterator it_account = accounts.constBegin();
+    while ( it_account != accounts.constEnd() )
     {
       if (
          ( (*it_account).value("StatementKey") == accountNumber ) ||

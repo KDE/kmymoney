@@ -782,8 +782,8 @@ void MyMoneyQifProfile::possibleDateFormats(QStringList& list) const
   QStringList defaultList = QStringList::split(":", "y,m,d:y,d,m:m,d,y:m,y,d:d,m,y:d,y,m");
   list.clear();
   QStringList::const_iterator it_d;
-  for(it_d = defaultList.begin(); it_d != defaultList.end(); ++it_d) {
-    QStringList parts = QStringList::split(",", *it_d);
+  for(it_d = defaultList.constBegin(); it_d != defaultList.constEnd(); ++it_d) {
+    const QStringList parts = QStringList::split(",", *it_d);
     int i;
     for(i = 0; i < 3; ++i) {
       if(d->m_partPos.contains(parts[i][0])) {
@@ -810,7 +810,7 @@ void MyMoneyQifProfile::possibleDateFormats(QStringList& list) const
   // if we haven't found any, then there's something wrong.
   // in this case, we present the full list and let the user decide
   if(list.count() == 0) {
-    for(it_d = defaultList.begin(); it_d != defaultList.end(); ++it_d) {
+    for(it_d = defaultList.constBegin(); it_d != defaultList.constEnd(); ++it_d) {
       QString format = *it_d;
       format.replace('y', "%y");
       format.replace('m', "%m");
@@ -931,7 +931,7 @@ void MyMoneyQifProfile::autoDetect(const QStringList& lines)
               // if it's 20% larger than the other one and let the
               // user pick the other two
         {
-          it_b = sortedPos.begin();
+          it_b = sortedPos.constBegin();
           it_a = it_b;
           ++it_b;
           double a = d->m_changeCount[*it_a];
@@ -943,7 +943,7 @@ void MyMoneyQifProfile::autoDetect(const QStringList& lines)
         break;
 
       case 3: // three different, we check if they are 20% apart each
-        it_b = sortedPos.begin();
+        it_b = sortedPos.constBegin();
         for(int i = 0; i < 2; ++i) {
           it_a = it_b;
           ++it_b;

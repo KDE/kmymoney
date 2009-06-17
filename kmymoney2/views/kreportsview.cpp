@@ -445,8 +445,8 @@ void KReportsView::loadView(void)
   QMap<QString,KReportGroupListItem*> groupitems;
   QList<ReportGroup> defaultreports;
   defaultReports(defaultreports);
-  QList<ReportGroup>::const_iterator it_group = defaultreports.begin();
-  while ( it_group != defaultreports.end() )
+  QList<ReportGroup>::const_iterator it_group = defaultreports.constBegin();
+  while ( it_group != defaultreports.constEnd() )
   {
     QString groupname = (*it_group).name();
     KReportGroupListItem* curnode = new KReportGroupListItem(m_reportListView, pagenumber++, (*it_group).title());
@@ -483,8 +483,8 @@ void KReportsView::loadView(void)
   KReportGroupListItem* orphannode = NULL;
 
   QList<MyMoneyReport> customreports = MyMoneyFile::instance()->reportList();
-  QList<MyMoneyReport>::const_iterator it_report = customreports.begin();
-  while( it_report != customreports.end() )
+  QList<MyMoneyReport>::const_iterator it_report = customreports.constBegin();
+  while( it_report != customreports.constEnd() )
   {
     // If this report is in a known group, place it there
     KReportGroupListItem* groupnode = groupitems[(*it_report).group()];

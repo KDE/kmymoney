@@ -488,7 +488,7 @@ void KScheduledView::slotSetSelectedItem(Q3ListViewItem* item)
       emit scheduleSelected(schedule);
       m_selectedSchedule = schedItem->scheduleId();
     } catch(MyMoneyException* e) {
-      qDebug("KScheduledView::slotSetSelectedItem: %s", e->what().data());
+      qDebug("KScheduledView::slotSetSelectedItem: %s", qPrintable(e->what()));
       delete e;
     }
   }

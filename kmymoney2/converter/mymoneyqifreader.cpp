@@ -486,7 +486,7 @@ bool MyMoneyQifReader::finishImport(void)
     KConfigGroup grp = config->group(QString::fromLatin1("Notification Messages"));
     QStringList::ConstIterator it;
 
-    for(it = m_dontAskAgain.begin(); it != m_dontAskAgain.end(); ++it) {
+    for(it = m_dontAskAgain.constBegin(); it != m_dontAskAgain.constEnd(); ++it) {
       grp.deleteEntry(*it);
     }
     grp.sync();
@@ -683,7 +683,7 @@ const QString MyMoneyQifReader::extractLine(const QChar id, int cnt)
   QStringList::ConstIterator it;
 
   m_extractedLine = -1;
-  for(it = m_qifEntry.begin(); it != m_qifEntry.end(); ++it) {
+  for(it = m_qifEntry.constBegin(); it != m_qifEntry.constEnd(); ++it) {
     m_extractedLine++;
     if((*it)[0] == id) {
       if(cnt-- == 1) {
@@ -999,8 +999,8 @@ void MyMoneyQifReader::processTransactionEntry(void)
   for(;;) {
     hash = QString("%1-%2").arg(hashBase).arg(idx);
     QMap<QString, bool>::const_iterator it;
-    it = d->m_hashMap.find(hash);
-    if(it == d->m_hashMap.end()) {
+    it = d->m_hashMap.constFind(hash);
+    if(it == d->m_hashMap.constEnd()) {
       d->m_hashMap[hash] = true;
       break;
     }
@@ -1307,8 +1307,8 @@ void MyMoneyQifReader::processInvestmentTransactionEntry(void)
   for(;;) {
     hash = QString("%1-%2").arg(hashBase).arg(idx);
     QMap<QString, bool>::const_iterator it;
-    it = d->m_hashMap.find(hash);
-    if(it == d->m_hashMap.end()) {
+    it = d->m_hashMap.constFind(hash);
+    if(it == d->m_hashMap.constEnd()) {
       d->m_hashMap[hash] = true;
       break;
     }
@@ -1831,8 +1831,8 @@ const QString MyMoneyQifReader::findOrCreateIncomeAccount(const QString& searchn
   // First, try to find this account as an income account
   MyMoneyAccount acc = file->income();
   QStringList list = acc.accountList();
-  QStringList::ConstIterator it_accid = list.begin();
-  while ( it_accid != list.end() )
+  QStringList::ConstIterator it_accid = list.constBegin();
+  while ( it_accid != list.constEnd() )
   {
     acc = file->account(*it_accid);
     if ( acc.name() == searchname )
@@ -1870,8 +1870,8 @@ const QString MyMoneyQifReader::findOrCreateExpenseAccount(const QString& search
   // First, try to find this account as an income account
   MyMoneyAccount acc = file->expense();
   QStringList list = acc.accountList();
-  QStringList::ConstIterator it_accid = list.begin();
-  while ( it_accid != list.end() )
+  QStringList::ConstIterator it_accid = list.constBegin();
+  while ( it_accid != list.constEnd() )
   {
     acc = file->account(*it_accid);
     if ( acc.name() == searchname )
@@ -2101,8 +2101,8 @@ void MyMoneyQifReader::selectOrCreateAccount(const SelectCreateMode mode, MyMone
   if(!msg.isEmpty())
     accountSelect.setCaption(msg);
 
-  it = m_accountTranslation.find((leadIn + MyMoneyFile::AccountSeperator + account.name()).toLower());
-  if(it != m_accountTranslation.end()) {
+  it = m_accountTranslation.constFind((leadIn + MyMoneyFile::AccountSeperator + account.name()).toLower());
+  if(it != m_accountTranslation.constEnd()) {
     try {
       account = file->account(*it);
       return;
@@ -2262,11 +2262,11 @@ void MyMoneyQifReader::processPriceEntry(void)
 
 */
 
-  QStringList::const_iterator it_line = m_qifEntry.begin();
+  QStringList::const_iterator it_line = m_qifEntry.constBegin();
 
   // Make a price for each line
   QRegExp priceExp("\"(.*)\",(.*),\"(.*)\"");
-  while ( it_line != m_qifEntry.end() )
+  while ( it_line != m_qifEntry.constEnd() )
   {
     if(priceExp.search(*it_line) != -1) {
       MyMoneyStatement::Price price;

@@ -684,7 +684,7 @@ void KPayeesView::showTransactions(void)
   QString lastId;
   int ofs = 0;
 
-  for(i = 0, it_t = list.begin(); it_t != list.end(); ++it_t) {
+  for(i = 0, it_t = list.constBegin(); it_t != list.constEnd(); ++it_t) {
     KMyMoneyTransaction k(*it_t);
 
     filter.match(*it_t);
@@ -975,7 +975,7 @@ void KPayeesView::loadPayees(void)
   QList<MyMoneyPayee>list = MyMoneyFile::instance()->payeeList();
   QList<MyMoneyPayee>::ConstIterator it;
 
-  for (it = list.begin(); it != list.end(); ++it) {
+  for (it = list.constBegin(); it != list.constEnd(); ++it) {
     KPayeeListItem* item = new KPayeeListItem(m_payeesList, *it);
     if(item->payee().id() == id)
       currentItem = item;

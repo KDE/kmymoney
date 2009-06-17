@@ -79,7 +79,7 @@ KScheduledListItem::KScheduledListItem(KScheduledListItem *parent, const MyMoney
         break;
 
       case MyMoneySchedule::TYPE_LOANPAYMENT:
-        for(it_s = transaction.splits().begin(); it_s != transaction.splits().end(); ++it_s) {
+        for(it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s) {
           acc = MyMoneyFile::instance()->account((*it_s).accountId());
           if(acc.accountGroup() == MyMoneyAccount::Asset
           || acc.accountGroup() == MyMoneyAccount::Liability) {
@@ -90,7 +90,7 @@ KScheduledListItem::KScheduledListItem(KScheduledListItem *parent, const MyMoney
             }
           }
         }
-        if(it_s == transaction.splits().end()) {
+        if(it_s == transaction.splits().constEnd()) {
           qFatal("Split for payment account not found in %s:%d.", __FILE__, __LINE__);
         }
         break;

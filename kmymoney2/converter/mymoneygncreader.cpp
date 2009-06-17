@@ -1964,7 +1964,7 @@ void MyMoneyGncReader::terminate () {
   QString mainCurrency = "";
   unsigned int maxCount = 0;
   QMap<QString, unsigned int>::ConstIterator it;
-  for (it = m_currencyCount.begin(); it != m_currencyCount.end(); ++it) {
+  for (it = m_currencyCount.constBegin(); it != m_currencyCount.constEnd(); ++it) {
     if (it.data() > maxCount) {
       maxCount = it.data();
       mainCurrency = it.key();
