@@ -131,12 +131,13 @@ bool WebPriceQuote::launchNative( const QString& _symbol, const QString& _id, co
   // Note that a 'non-interactive' session right now means only the test
   // cases.  Although in the future if KMM gains a non-UI mode, this would
   // still be useful
+#warning "fix for windows";
   if ( ! kapp && ! url.isLocalFile() )
     url = KUrl::fromPathOrUrl("/usr/bin/wget -O - " + url.prettyUrl());
 
   if ( url.isLocalFile() )
   {
-    emit status(QString("Executing %1...").arg(url.path()));
+    emit status(i18n("Executing %1...",url.path()));
 
     m_filter.clearArguments();
     m_filter << QStringList::split(" ",url.path());
@@ -155,13 +156,13 @@ bool WebPriceQuote::launchNative( const QString& _symbol, const QString& _id, co
     }
     else
     {
-      emit error(QString("Unable to launch: %1").arg(url.path()));
+      emit error(i18n("Unable to launch: %1",url.path()));
       slotParseQuote(QString());
     }
   }
   else
   {
-    emit status(QString("Fetching URL %1...").arg(url.prettyUrl()));
+    emit status(i18n("Fetching URL %1...",url.prettyUrl()));
 
     QString tmpFile;
     if( download( url, tmpFile, NULL ) )
@@ -281,7 +282,7 @@ bool WebPriceQuote::launchFinanceQuote ( const QString& _symbol, const QString& 
   m_filter << "perl" << m_financeQuoteScriptPath << FQSource << KShell::quoteArg(_symbol);
   m_filter.setUseShell(true);
   m_filter.setSymbol(m_symbol);
-  emit status(QString("Executing %1 %2 %3...").arg(m_financeQuoteScriptPath).arg(FQSource).arg(_symbol));
+  emit status(i18n("Executing %1 %2 %3...",m_financeQuoteScriptPath,FQSource,_symbol));
 
     // if we're running non-interactive, we'll need to block.
     // otherwise, just let us know when it's done.
