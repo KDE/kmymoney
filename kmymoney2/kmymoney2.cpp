@@ -5390,7 +5390,7 @@ void KMyMoney2App::transactionMatch(void)
 void KMyMoney2App::showContextMenu(const QString& containerName)
 {
   QWidget* w = factory()->container(containerName, this);
-  Q3PopupMenu *menu = dynamic_cast<Q3PopupMenu*>(w);
+  KMenu *menu = dynamic_cast<KMenu*>(w);
   if(menu)
     menu->exec(QCursor::pos());
 }
