@@ -108,21 +108,21 @@ KBudgetView::KBudgetView(QWidget *parent) :
 
   KIconLoader* il = KIconLoader::global();
   KGuiItem newButtenItem( QString(""),
-                             KIcon(il->loadIcon("file_new", KIconLoader::Small, KIconLoader::SizeSmall)),
+                             KIcon(il->loadIcon("document-new", KIconLoader::Small, KIconLoader::SizeSmall)),
                              i18n("Creates a new budget"),
                              i18n("Use this to create a new empty budget."));
   m_newButton->setGuiItem(newButtenItem);
   m_newButton->setToolTip( newButtenItem.toolTip());
 
   KGuiItem renameButtenItem( QString(""),
-                          KIcon(il->loadIcon("editpaste", KIconLoader::Small, KIconLoader::SizeSmall)),
+                          KIcon(il->loadIcon("paste", KIconLoader::Small, KIconLoader::SizeSmall)),
                           i18n("Rename the current selected budget"),
                           i18n("Use this to start renaming the selected budget."));
   m_renameButton->setGuiItem(renameButtenItem);
   m_renameButton->setToolTip( renameButtenItem.toolTip());
 
   KGuiItem deleteButtenItem( QString(""),
-                             KIcon(il->loadIcon("editdelete", KIconLoader::Small, KIconLoader::SizeSmall)),
+                             KIcon(il->loadIcon("delete", KIconLoader::Small, KIconLoader::SizeSmall)),
                              i18n("Delete the current selected budget"),
                              i18n("Use this to delete the selected budget."));
   m_deleteButton->setGuiItem(deleteButtenItem);
@@ -154,13 +154,8 @@ KBudgetView::KBudgetView(QWidget *parent) :
 
   // connect the buttons to the actions. Make sure the enabled state
   // of the actions is reflected by the buttons
-  //FIXME: Port to KDE4
-  //connect(kmymoney2->action("budget_new"), SIGNAL(enabled(bool)), m_newButton, SLOT(setEnabled(bool)));
   connect(m_renameButton, SIGNAL(clicked()), kmymoney2->action("budget_rename"), SLOT(trigger()));
-  //FIXME: Port to KDE4
-  //connect(kmymoney2->action("budget_rename"), SIGNAL(enabled(bool)), m_renameButton, SLOT(setEnabled(bool)));
   connect(m_deleteButton, SIGNAL(clicked()), kmymoney2->action("budget_delete"), SLOT(trigger()));
-  //connect(kmymoney2->action("budget_delete"), SIGNAL(enabled(bool)), m_deleteButton, SLOT(setEnabled(bool)));
 
   connect(m_budgetValue, SIGNAL(valuesChanged()), this, SLOT(slotBudgetedAmountChanged()));
 
@@ -491,7 +486,7 @@ void KBudgetView::askSave(void)
   // and ask to store the data
   if (m_updateButton->isEnabled()) {
     if (KMessageBox::questionYesNo(this, QString("<qt>%1</qt>").arg(
-        i18n("Do you want to save the changes for <b>%1</b>").arg(m_budget.name())),
+        i18n("Do you want to save the changes for <b>%1</b>",m_budget.name())),
              i18n("Save changes")) == KMessageBox::Yes) {
                m_inSelection = true;
                slotUpdateBudget();
@@ -614,7 +609,7 @@ void KBudgetView::slotRenameBudget(Q3ListViewItem* p , int /*col*/, const QStrin
         if (KMessageBox::questionYesNo(this,
           i18n("A budget with the name '%1' already exists. It is not advisable to have "
             "multiple budgets with the same identification name. Are you sure you would like "
-            "to rename the budget?").arg(new_name)) != KMessageBox::Yes)
+            "to rename the budget?",new_name)) != KMessageBox::Yes)
         {
           p->setText(0,pBudget->budget().name());
           return;
