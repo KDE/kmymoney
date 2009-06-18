@@ -344,8 +344,9 @@ kMyMoneyCalendar::yearBackwardClicked()
 void
 kMyMoneyCalendar::selectWeekClicked()
 {
-#if KDE_VERSION >= 310 && KDE_VERSION <= 314
   int week;
+#warning "port to kde4";
+#if 0
   KPopupFrame* popup = new KPopupFrame(this);
   KDateInternalWeekSelector* picker = new KDateInternalWeekSelector(/*fontsize, */popup);
   // -----
@@ -374,7 +375,7 @@ kMyMoneyCalendar::selectWeekClicked()
       // ----- set this date
       setDate(date);
     } else {
-         KNotifyClient::beep();
+         KNotification::beep();
     }
   delete popup;
 #endif
@@ -383,7 +384,8 @@ kMyMoneyCalendar::selectWeekClicked()
 void
 kMyMoneyCalendar::selectMonthClicked()
 {
-#if KDE_VERSION >= 310 && KDE_VERSION <= 314
+#warning "port to kde4";
+#if 0
   int month;
   KPopupFrame* popup = new KPopupFrame(this);
   KDateInternalMonthPicker* picker = new KDateInternalMonthPicker(/*fontsize, */popup);
@@ -406,7 +408,7 @@ kMyMoneyCalendar::selectMonthClicked()
       // ----- set this month
       setDate(date);
     } else {
-      KNotifyClient::beep();
+      KNotification::beep();
     }
   delete popup;
 #endif
@@ -415,7 +417,8 @@ kMyMoneyCalendar::selectMonthClicked()
 void
 kMyMoneyCalendar::selectYearClicked()
 {
-#if KDE_VERSION >= 310 && KDE_VERSION <= 314
+#warning "port to kde4"
+#if 0
   int year;
   KPopupFrame* popup = new KPopupFrame(this);
   KDateInternalYearSelector* picker = new KDateInternalYearSelector(fontsize, popup);
@@ -438,7 +441,7 @@ kMyMoneyCalendar::selectYearClicked()
       // ----- set this month
       setDate(date);
     } else {
-      KNotifyClient::beep();
+      KNotification::beep();
     }
   delete popup;
 #endif
@@ -472,10 +475,7 @@ kMyMoneyCalendar::lineEnterPressed()
   emit(dateEntered(temp));
   setDate(temp);
     } else {
-#warning "port to kde4"
-#if 0
-      KNotifyClient::beep();
-#endif
+      KNotification::beep();
       kDebug() << "kMyMoneyCalendar::lineEnterPressed: invalid date entered.";
     }
 }
