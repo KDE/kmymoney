@@ -112,35 +112,35 @@ KBudgetView::KBudgetView(QWidget *parent) :
                              i18n("Creates a new budget"),
                              i18n("Use this to create a new empty budget."));
   m_newButton->setGuiItem(newButtenItem);
-  QToolTip::add(m_newButton, newButtenItem.toolTip());
+  m_newButton->setToolTip( newButtenItem.toolTip());
 
   KGuiItem renameButtenItem( QString(""),
                           KIcon(il->loadIcon("editpaste", KIconLoader::Small, KIconLoader::SizeSmall)),
                           i18n("Rename the current selected budget"),
                           i18n("Use this to start renaming the selected budget."));
   m_renameButton->setGuiItem(renameButtenItem);
-  QToolTip::add(m_renameButton, renameButtenItem.toolTip());
+  m_renameButton->setToolTip( renameButtenItem.toolTip());
 
   KGuiItem deleteButtenItem( QString(""),
                              KIcon(il->loadIcon("editdelete", KIconLoader::Small, KIconLoader::SizeSmall)),
                              i18n("Delete the current selected budget"),
                              i18n("Use this to delete the selected budget."));
   m_deleteButton->setGuiItem(deleteButtenItem);
-  QToolTip::add(m_deleteButton, deleteButtenItem.toolTip());
+  m_deleteButton->setToolTip( deleteButtenItem.toolTip());
 
   KGuiItem updateButtenItem( QString(""),
                              KIcon(il->loadIcon("dialog-ok", KIconLoader::Small, KIconLoader::SizeSmall)),
                              i18n("Accepts the entered values and stores the budget"),
                              i18n("Use this to store the modified data."));
   m_updateButton->setGuiItem(updateButtenItem);
-  QToolTip::add(m_updateButton, updateButtenItem.toolTip());
+  m_updateButton->setToolTip( updateButtenItem.toolTip());
 
   KGuiItem resetButtenItem( QString(""),
                              KIcon(il->loadIcon("undo", KIconLoader::Small, KIconLoader::SizeSmall)),
                              i18n("Revert budget to last saved state"),
                              i18n("Use this to discard the modified data."));
   m_resetButton->setGuiItem(resetButtenItem);
-  QToolTip::add(m_resetButton, resetButtenItem.toolTip());
+  m_resetButton->setToolTip( resetButtenItem.toolTip());
 
   connect(m_budgetList, SIGNAL(contextMenu(K3ListView*, Q3ListViewItem* , const QPoint&)),
     this, SLOT(slotOpenContextMenu(K3ListView*, Q3ListViewItem*, const QPoint&)));

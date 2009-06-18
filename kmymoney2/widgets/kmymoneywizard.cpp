@@ -104,9 +104,9 @@ bool KMyMoneyWizardPage::isLastPage(void) const
 bool KMyMoneyWizardPage::isComplete(void) const
 {
   if(!isLastPage())
-    QToolTip::add(wizard()->m_nextButton, i18n("Continue with next page"));
+    wizard()->m_nextButton->setToolTip( i18n("Continue with next page"));
   else
-    QToolTip::add(wizard()->m_finishButton, i18n("Finish wizard"));
+    wizard()->m_finishButton->setToolTip( i18n("Finish wizard"));
   return m_mandatoryGroup->isEnabled();
 }
 

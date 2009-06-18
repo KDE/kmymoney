@@ -101,7 +101,7 @@ KBudgetValues::KBudgetValues(QWidget* parent) :
 
   m_clearButton->setGuiItem(clearItem);
   m_clearButton->setText("");
-  QToolTip::add(m_clearButton, clearItem.toolTip());
+  m_clearButton->setToolTip( clearItem.toolTip());
 }
 
 
