@@ -46,7 +46,7 @@ KSelectTransactionsDlg::KSelectTransactionsDlg(const MyMoneyAccount& _account, Q
   m_account(_account)
 {
   // setup descriptive texts
-  setCaption(i18n("Select Transaction"));
+  setWindowTitle(i18n("Select Transaction"));
   m_description->setText(i18n("Select a transaction and press the OK button or use Cancel to select none."));
 
   // clear current register contents

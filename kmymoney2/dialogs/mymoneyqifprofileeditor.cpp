@@ -148,9 +148,9 @@ MyMoneyQifProfileEditor::~MyMoneyQifProfileEditor()
 void MyMoneyQifProfileEditor::loadWidgets(void)
 {
   if(m_inEdit)
-    setCaption(i18n("QIF Profile Editor"));
+    setWindowTitle(i18n("QIF Profile Editor"));
   else
-    setCaption(i18n("QIF Profile Selector"));
+    setWindowTitle(i18n("QIF Profile Selector"));
 
   m_editDateFormat->clear();
   m_editDateFormat->insertItem( "%d/%m/%yy" );

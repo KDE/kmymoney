@@ -1258,7 +1258,7 @@ void StdTransactionEditor::autoFill(const QString& payeeId)
       } else {
 #endif
         KSelectTransactionsDlg dlg(m_account, m_regForm);
-        dlg.setCaption(i18n("Select autofill transaction"));
+        dlg.setWindowTitle(i18n("Select autofill transaction"));
 
         QMap<QString, struct uniqTransaction>::const_iterator it_u;
         for(it_u = uniqList.constBegin(); it_u != uniqList.constEnd(); ++it_u) {

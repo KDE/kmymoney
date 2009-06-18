@@ -72,7 +72,7 @@ void KNewFileDlg::init(const QString& title)
   cancelBtn->setGuiItem(KStandardGuiItem::cancel());
 
   if (!title.isEmpty())
-    setCaption(title);
+    setWindowTitle(title);
 
   KABC::StdAddressBook *ab = static_cast<KABC::StdAddressBook*>
     ( KABC::StdAddressBook::self() );

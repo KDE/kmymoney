@@ -360,7 +360,7 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
   accountNameEdit->setFocus();
 
   if (!title.isEmpty())
-    setCaption(title);
+    setWindowTitle(title);
 
   // load button icons
   KIconLoader* il = KIconLoader::global();

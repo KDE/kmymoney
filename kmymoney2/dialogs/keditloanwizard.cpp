@@ -55,7 +55,7 @@ KEditLoanWizard::KEditLoanWizard(const MyMoneyAccount& account, QWidget *parent 
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
-  setCaption(i18n("Edit loan wizard"));
+  setWindowTitle(i18n("Edit loan wizard"));
   m_effectiveDateLabel->setText(QString("\n") + i18n(
             "Please enter the date from which on the following changes will be effective. "
             "The date entered must be later than the opening date of this account (%1), but must "

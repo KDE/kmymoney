@@ -62,7 +62,7 @@ KNewInvestmentWizard::KNewInvestmentWizard( const MyMoneyAccount& acc, QWidget *
   KNewInvestmentWizardDecl( parent ),
   m_account(acc)
 {
-  setCaption(i18n("Investment detail wizard"));
+  setWindowTitle(i18n("Investment detail wizard"));
   init1();
 
   // load the widgets with the data
@@ -82,7 +82,7 @@ KNewInvestmentWizard::KNewInvestmentWizard( const MyMoneySecurity& security, QWi
   KNewInvestmentWizardDecl( parent ),
   m_security(security)
 {
-  setCaption(i18n("Security detail wizard"));
+  setWindowTitle(i18n("Security detail wizard"));
   init1();
   m_createAccount = false;
 

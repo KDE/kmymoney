@@ -37,7 +37,7 @@ KMergeTransactionsDlg::KMergeTransactionsDlg(const MyMoneyAccount& account, QWid
 {
 
   // setup descriptive texts
-  setCaption(i18n("Merge Transactions"));
+  setWindowTitle(i18n("Merge Transactions"));
   m_description->setText(i18n("Are you sure you wish to merge these transactions?"));
 
   // no selection possible

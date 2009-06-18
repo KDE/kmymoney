@@ -85,7 +85,7 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
     // Rework labelling
     //
 
-    setCaption( i18n( "Report Configuration" ) );
+    setWindowTitle( i18n( "Report Configuration" ) );
     delete TextLabel1;
 
     //

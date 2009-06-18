@@ -2099,7 +2099,7 @@ void MyMoneyQifReader::selectOrCreateAccount(const SelectCreateMode mode, MyMone
 
   KAccountSelectDlg accountSelect(type, "QifImport", kmymoney2);
   if(!msg.isEmpty())
-    accountSelect.setCaption(msg);
+    accountSelect.setWindowTitle(msg);
 
   it = m_accountTranslation.constFind((leadIn + MyMoneyFile::AccountSeperator + account.name()).toLower());
   if(it != m_accountTranslation.constEnd()) {
