@@ -5486,7 +5486,6 @@ void KMyMoney2App::updateCaption(bool skipActions)
 #if KMM_DEBUG
   caption += QString(" (%1 x %2)").arg(width()).arg(height());
 #endif
-//FIXME: Port to KDE4
   if(modified) {
     caption = KDialog::makeStandardCaption(caption, false, KDialog::ModifiedCaption);
   } else {
@@ -5559,7 +5558,7 @@ void KMyMoney2App::slotUpdateActions(void)
   action("account_chart")->setEnabled(false);
 #endif
 
-  //action("category_new")->setEnabled(fileOpen);
+  action("category_new")->setEnabled(fileOpen);
   action("category_edit")->setEnabled(false);
   action("category_delete")->setEnabled(false);
 
