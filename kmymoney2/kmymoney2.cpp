@@ -571,7 +571,7 @@ void KMyMoney2App::initActions(void)
   // The categories menu
   // *******************
   //new KAction(i18n("New category..."), "account_add", 0, this, SLOT(slotCategoryNew()), actionCollection(), "category_new");
-  KAction *category_new = actionCollection()->addAction("category_edit");
+  KAction *category_new = actionCollection()->addAction("category_new");
   category_new->setText(i18n("New category..."));
   category_new->setIcon(KIcon("account_add"));
   connect(category_new, SIGNAL(triggered()), this, SLOT(slotCategoryNew()));
