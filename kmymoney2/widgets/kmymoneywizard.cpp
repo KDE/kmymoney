@@ -110,7 +110,7 @@ bool KMyMoneyWizardPage::isComplete(void) const
   return m_mandatoryGroup->isEnabled();
 }
 
-const QString& KMyMoneyWizardPage::helpContext(void) const
+QString KMyMoneyWizardPage::helpContext(void) const
 {
   return QString::null;
 }
@@ -211,9 +211,9 @@ void KMyMoneyWizard::setTitle(const QString& txt)
 void KMyMoneyWizard::addStep(const QString& text)
 {
   QLabel* step = new QLabel(text, m_stepFrame);
-  step->setFrameStyle(Q3Frame::Panel | Q3Frame::Raised);
+  step->setFrameStyle(QFrame::Panel | QFrame::Raised);
   step->setAlignment(Qt::AlignHCenter);
-  step->setFrameStyle(Q3Frame::Box | Q3Frame::Sunken);
+  step->setFrameStyle(QFrame::Box | QFrame::Sunken);
   step->setMargin(2);
   step->setPalette( m_stepPalette );
 
@@ -248,10 +248,10 @@ void KMyMoneyWizard::selectStep(unsigned int step)
   QFont f = m_steps[0]->font();
   for(it_l = m_steps.begin(); it_l != m_steps.end(); ++it_l) {
     f.setBold(false);
-    (*it_l)->setFrameStyle(Q3Frame::NoFrame);
+    (*it_l)->setFrameStyle(QFrame::NoFrame);
     if(--step == 0) {
       f.setBold(true);
-      (*it_l)->setFrameStyle(Q3Frame::Box | Q3Frame::Sunken);
+      (*it_l)->setFrameStyle(QFrame::Box | QFrame::Sunken);
     }
     (*it_l)->setFont(f);
   }

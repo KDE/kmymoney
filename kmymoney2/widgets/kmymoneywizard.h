@@ -236,7 +236,7 @@ public:
    * This method returns a specific help context for the page shown
    * The default returns an empty string.
    */
-  virtual const QString& helpContext(void) const;
+  virtual QString helpContext(void) const;
 
   virtual ~KMyMoneyWizardPage() {}
 protected:
