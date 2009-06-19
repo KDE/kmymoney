@@ -67,8 +67,7 @@ KMyMoneyCategory::KMyMoneyCategory(QWidget* parent, const char * name, bool spli
     Q3HBoxLayout* layout = new Q3HBoxLayout(d->frame);
     // make sure not to use our own overridden version of reparent() here
 
-#warning "port to kde4"
-    //KMyMoneyCombo::reparent(d->frame, getWFlags() & ~Qt::WType_Mask, QPoint(0, 0), true);
+    KMyMoneyCombo::reparent(d->frame, windowFlags ()  & ~Qt::WType_Mask, QPoint(0, 0), true);
     if(parent)
       d->frame->reparent(parent, QPoint(0, 0), true);
 
