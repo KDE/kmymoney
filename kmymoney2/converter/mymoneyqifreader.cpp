@@ -364,7 +364,7 @@ void MyMoneyQifReader::slotProcessData(void)
 
   m_qifProfile.setInputDateFormat(list.first());
 
-  qDebug("Selected date format: '%s'", list.first().data());
+  qDebug("Selected date format: '%s'", qPrintable(list.first()));
 
   signalProgress(0, m_qifLines.count(), i18n("Importing QIF ..."));
   QStringList::iterator it;
@@ -993,7 +993,7 @@ void MyMoneyQifReader::processTransactionEntry(void)
   h = MyMoneyTransaction::hash(m_qifEntry.join(";"));
 
   QString hashBase;
-  hashBase.sprintf("%s-%07lx", m_qifProfile.date(extractLine('D')).toString(Qt::ISODate).data(), h);
+  hashBase.sprintf("%s-%07lx", qPrintable(m_qifProfile.date(extractLine('D')).toString(Qt::ISODate)), h);
   int idx = 1;
   QString hash;
   for(;;) {
@@ -1301,7 +1301,7 @@ void MyMoneyQifReader::processInvestmentTransactionEntry(void)
   h = MyMoneyTransaction::hash(m_qifEntry.join(";"));
 
   QString hashBase;
-  hashBase.sprintf("%s-%07lx", m_qifProfile.date(extractLine('D')).toString(Qt::ISODate).data(), h);
+  hashBase.sprintf("%s-%07lx", qPrintable(m_qifProfile.date(extractLine('D')).toString(Qt::ISODate)), h);
   int idx = 1;
   QString hash;
   for(;;) {
