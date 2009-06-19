@@ -25,7 +25,7 @@
 #include <q3datetimeedit.h>
 //Added by qt3to4:
 #include <Q3ValueList>
-#include <Q3CString>
+#include <QByteArray>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -131,7 +131,7 @@ bool OfxImporterPlugin::import( const QString& filename )
   m_statementlist.clear();
   m_securitylist.clear();
 
-  Q3CString filename_deep( filename.utf8() );
+  QByteArray filename_deep( filename.utf8() );
 
   LibofxContextPtr ctx = libofx_get_new_context();
   Q_CHECK_PTR(ctx);

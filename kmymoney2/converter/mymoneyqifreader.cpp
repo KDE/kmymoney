@@ -34,7 +34,7 @@
 #include <QBuffer>
 //Added by qt3to4:
 #include <Q3ValueList>
-#include <Q3CString>
+#include <QByteArray>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
@@ -319,7 +319,7 @@ void MyMoneyQifReader::slotReceivedDataFromFilter(K3Process* /* proc */, char *b
       if(!m_lineBuffer.isEmpty()) {
         m_qifLines << QString::fromUtf8(m_lineBuffer.trimmed());
       }
-      m_lineBuffer = Q3CString();
+      m_lineBuffer = QByteArray();
     } else {
       // collect all others
       m_lineBuffer += (*buff);

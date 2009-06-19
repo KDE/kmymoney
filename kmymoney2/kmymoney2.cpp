@@ -42,7 +42,7 @@
 #include <q3vbox.h>
 #include <QEventLoop>
 //Added by qt3to4:
-#include <Q3CString>
+#include <QByteArray>
 #include <Q3BoxLayout>
 #include <Q3Frame>
 #include <QResizeEvent>
@@ -1418,8 +1418,8 @@ void KMyMoney2App::slotFileOpenRecent(const KUrl& url)
   KUrl lastFile = m_fileName;
 
   // check if there are other instances which might have this file open
-  Q3ValueList<Q3CString> list = instanceList();
-  Q3ValueList<Q3CString>::ConstIterator it;
+  Q3ValueList<QByteArray> list = instanceList();
+  Q3ValueList<QByteArray>::ConstIterator it;
   bool duplicate = false;
 #warning "port kde4"
 #if 0
@@ -6191,12 +6191,12 @@ const QString KMyMoney2App::filename(void) const
   return m_fileName.url();
 }
 
-const Q3ValueList<Q3CString> KMyMoney2App::instanceList(void) const
+const Q3ValueList<QByteArray> KMyMoney2App::instanceList(void) const
 {
-  Q3ValueList<Q3CString> list;
+  Q3ValueList<QByteArray> list;
   //FIXME: Port to KDE4
-//   Q3ValueList<Q3CString> apps = kapp->dcopClient()->registeredApplications();
-//   Q3ValueList<Q3CString>::ConstIterator it;
+//   Q3ValueList<QByteArray> apps = kapp->dcopClient()->registeredApplications();
+//   Q3ValueList<QByteArray>::ConstIterator it;
 //
 //   for(it = apps.begin(); it != apps.end(); ++it) {
 //     // skip over myself
@@ -6216,7 +6216,7 @@ void KMyMoney2App::slotEquityPriceUpdate(void)
     dlg.storePrices();
 }
 
-void KMyMoney2App::webConnect(const QString& url, const Q3CString& asn_id)
+void KMyMoney2App::webConnect(const QString& url, const QByteArray& asn_id)
 {
   //
   // Web connect attempts to go through the known importers and see if the file

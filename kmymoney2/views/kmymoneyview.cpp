@@ -39,7 +39,7 @@
 #include <QList>
 #include <QVBoxLayout>
 #include <Q3Frame>
-#include <Q3CString>
+#include <QByteArray>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -717,7 +717,7 @@ bool KMyMoneyView::readFile(const KUrl& url)
                   ungetString(qfile, hdr.data(), 70);
                 QRegExp kmyexp("<!DOCTYPE KMYMONEY-FILE>");
                 QRegExp gncexp("<gnc-v(\\d+)");
-                Q3CString txt(hdr, 70);
+                QByteArray txt(hdr, 70);
                 if(kmyexp.search(txt) != -1) {
                   ::timetrace("is XML format");
                   pReader = new MyMoneyStorageXML;

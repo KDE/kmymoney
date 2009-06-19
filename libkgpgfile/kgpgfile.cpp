@@ -26,7 +26,7 @@
 
 #include <QEventLoop>
 //Added by qt3to4:
-#include <Q3CString>
+#include <QByteArray>
 #include <Q3ValueList>
 
 
@@ -109,7 +109,7 @@ void KGPGFile::flush(void)
   // no functionality
 }
 
-void KGPGFile::addRecipient(const Q3CString& recipient)
+void KGPGFile::addRecipient(const QByteArray& recipient)
 {
   m_recipient << recipient;
 }
@@ -185,7 +185,7 @@ bool KGPGFile::open(int mode, const QString& cmdArgs, bool skipPasswd)
     args = cmdArgs.split(" ");
   }
 
-  Q3CString pwd;
+  QByteArray pwd;
   if(isReadable() && useOwnPassphrase && !skipPasswd) {
     K3PasswordDialog dlg(K3PasswordDialog::Password,false,0);
     dlg.setPrompt(i18n("Enter passphrase"));
@@ -193,7 +193,7 @@ bool KGPGFile::open(int mode, const QString& cmdArgs, bool skipPasswd)
     dlg.adjustSize();
     if (dlg.exec() == QDialog::Rejected)
       return false;
-    pwd = Q3CString(dlg.password());
+    pwd = QByteArray(dlg.password());
   }
 
   // qDebug("starting GPG process");
@@ -294,7 +294,7 @@ void KGPGFile::close(void)
         m_process->kill();
     }
   }
-  m_ungetchBuffer = Q3CString();
+  m_ungetchBuffer = QByteArray();
 
 //FIXME: Port to Qt4
 //  setState(0);

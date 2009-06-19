@@ -28,7 +28,7 @@
 #include <QDateTime>
 #include <QRegExp>
 //Added by qt3to4:
-#include <Q3CString>
+#include <QByteArray>
 #include <Q3ValueList>
 
 // ----------------------------------------------------------------------------
@@ -640,7 +640,7 @@ MyMoneyOfxConnector::Tag MyMoneyOfxConnector::investmentTransaction(const MyMone
   //Use this version for inv transactions
   MyMoneySplit s = _t.splitByAccount( m_account.accountList(), true );
 
-  Q3CString stockid = file->account(s.accountId()).currencyId();
+  QByteArray stockid = file->account(s.accountId()).currencyId();
 
   Tag invtran("INVTRAN");
   invtran.element("FITID",_t.id()).element("DTTRADE",_t.postDate().toString(Qt::ISODate).remove(QRegExp("[^0-9]")));
@@ -698,7 +698,7 @@ MyMoneyOfxConnector::Tag MyMoneyOfxConnector::investmentTransaction(const MyMone
     bool found = false;
     while( it_split != splits.end() )
     {
-      Q3CString accid = (*it_split).accountId();
+      QByteArray accid = (*it_split).accountId();
       MyMoneyAccount acc = file->account(accid);
       if ( acc.accountType() == MyMoneyAccount::Income || acc.accountType() == MyMoneyAccount::Expense )
       {

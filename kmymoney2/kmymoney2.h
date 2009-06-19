@@ -25,7 +25,7 @@
 //Added by qt3to4:
 #include <Q3ValueList>
 #include <QLabel>
-#include <Q3CString>
+#include <QByteArray>
 #include <QResizeEvent>
 #include <QProgressBar>
 class QTimer;
@@ -505,7 +505,7 @@ public:
     *
     * @retval QStringList of process ids
     */
-  const Q3ValueList<Q3CString> instanceList(void) const;
+  const Q3ValueList<QByteArray> instanceList(void) const;
 
   /**
     * Dump a list of the names of all defined KActions to stdout.
@@ -548,7 +548,7 @@ public:
   // otherwise the kidl compiler produces uncompilable results.
   const QString filename() const;
 
-  void webConnect(const QString&, const Q3CString& asn_id);
+  void webConnect(const QString&, const QByteArray& asn_id);
 
   /**
     * Checks if the file with the @a url already exists. If so,

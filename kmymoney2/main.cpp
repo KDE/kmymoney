@@ -185,7 +185,7 @@ int main(int argc, char *argv[])
   try {
       do {
           if ( QDBusConnection::sessionBus().interface()->isServiceRegistered("org.kde.kmymoney") ) {
-        const Q3ValueList<Q3CString> instances = kmymoney2->instanceList();
+        const Q3ValueList<QByteArray> instances = kmymoney2->instanceList();
         if(instances.count() > 0) {
 
           // If the user launches a second copy of the app and includes a file to
@@ -200,7 +200,7 @@ int main(int argc, char *argv[])
 #warning "port to kde4"
 #if 0
                 // if there are multiple instances, we'll send this to the first one
-              Q3CString primary = instances[0];
+              QByteArray primary = instances[0];
 
               // send a message to the primary client to import this file
               QByteArray data;

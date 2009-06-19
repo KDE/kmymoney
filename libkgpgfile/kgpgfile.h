@@ -25,7 +25,7 @@
 #include <QEventLoop>
 
 //Added by qt3to4:
-#include <Q3CString>
+#include <QByteArray>
 #include <Q3ValueList>
 #include <config-kmymoney.h>
 
@@ -96,7 +96,7 @@ public:
     *
     * @param recipient recipients identification (e.g. e-mail address)
     */
-  void addRecipient(const Q3CString& recipient);
+  void addRecipient(const QByteArray& recipient);
 
   /**
     * sets the name of the file to @p fn. This method must be
@@ -105,7 +105,7 @@ public:
   void setName(const QString& fn);
   void setComment(const QString& txt);
 
-  const Q3CString errmsg(void) const { return m_errmsg; };
+  const QByteArray errmsg(void) const { return m_errmsg; };
   int exitStatus(void) const { return m_exitStatus; };
 
   /**

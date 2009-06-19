@@ -30,7 +30,7 @@
 #include <QString>
 #include <QStringList>
 //Added by qt3to4:
-#include <Q3CString>
+#include <QByteArray>
 #include <Q3ValueList>
 
 // ----------------------------------------------------------------------------
@@ -370,7 +370,7 @@ private:
   QMap<QString, QString>  m_investmentMap;
   QFile                   *m_file;
   char                    m_buffer[1024];
-  Q3CString                m_lineBuffer;
+  QByteArray                m_lineBuffer;
   QStringList             m_qifEntry;
   int                     m_extractedLine;
   QString                 m_qifLine;

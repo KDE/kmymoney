@@ -23,7 +23,7 @@
 #include <q3textstream.h>
 #include <q3process.h>
 //Added by qt3to4:
-#include <Q3CString>
+#include <QByteArray>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
@@ -836,9 +836,9 @@ void FinanceQuoteProcess::launch (const QString& scriptPath) {
 #if 0
       	clearArguments();
 
-  arguments.append(Q3CString("perl"));
+  arguments.append(QByteArray("perl"));
   arguments.append(scriptPath);
-  arguments.append (Q3CString("-l"));
+  arguments.append (QByteArray("-l"));
   if (!start(K3Process::NotifyOnExit, K3Process::Stdout)) qFatal ("Unable to start FQ script");
   return;
 #endif
