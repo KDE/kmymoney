@@ -115,7 +115,7 @@ KBudgetView::KBudgetView(QWidget *parent) :
   m_newButton->setToolTip( newButtenItem.toolTip());
 
   KGuiItem renameButtenItem( QString(""),
-                          KIcon(il->loadIcon("paste", KIconLoader::Small, KIconLoader::SizeSmall)),
+                          KIcon(il->loadIcon("edit-rename", KIconLoader::Small, KIconLoader::SizeSmall)),
                           i18n("Rename the current selected budget"),
                           i18n("Use this to start renaming the selected budget."));
   m_renameButton->setGuiItem(renameButtenItem);
