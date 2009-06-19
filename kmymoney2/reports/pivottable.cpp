@@ -1334,9 +1334,9 @@ QString PivotTable::renderCSV( void ) const
 
   QString result = QString("\"Report: %1\"\n").arg(m_config_f.name());
   if ( m_config_f.isConvertCurrency() )
-    result += i18n("All currencies converted to %1\n").arg(MyMoneyFile::instance()->baseCurrency().name());
+    result += i18n("All currencies converted to %1\n", MyMoneyFile::instance()->baseCurrency().name());
   else
-    result += i18n("All values shown in %1 unless otherwise noted\n").arg(MyMoneyFile::instance()->baseCurrency().name());
+    result += i18n("All values shown in %1 unless otherwise noted\n", MyMoneyFile::instance()->baseCurrency().name());
 
   //
   // Table Header
@@ -1570,14 +1570,14 @@ QString PivotTable::renderHTML( void ) const
 
   //actual dates of the report
   result += QString("<div class=\"subtitle\">");
-  result += i18nc("Report date range", "%1 through %2").arg(KGlobal::locale()->formatDate(m_config_f.fromDate(), KLocale::ShortDate)).arg(KGlobal::locale()->formatDate(m_config_f.toDate(), KLocale::ShortDate));
+  result += i18nc("Report date range", "%1 through %2", KGlobal::locale()->formatDate(m_config_f.fromDate(), KLocale::ShortDate), KGlobal::locale()->formatDate(m_config_f.toDate(), KLocale::ShortDate));
   result += QString("</div>\n");
   result += QString("<div class=\"gap\">&nbsp;</div>\n");
 
   //currency conversion message
   result += QString("<div class=\"subtitle\">");
   if ( m_config_f.isConvertCurrency() )
-    result += i18n("All currencies converted to %1").arg(MyMoneyFile::instance()->baseCurrency().name());
+    result += i18n("All currencies converted to %1", MyMoneyFile::instance()->baseCurrency().name());
   else
     result += i18n("All values shown in %1 unless otherwise noted").arg(MyMoneyFile::instance()->baseCurrency().name());
   result += QString("</div>\n");
