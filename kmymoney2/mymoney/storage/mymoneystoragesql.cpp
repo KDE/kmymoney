@@ -322,11 +322,8 @@ bool MyMoneyStorageSql::addColumn
   if ((m_dbType == Sqlite3) && (!after.isEmpty()))
     qFatal("sqlite doesn't support 'AFTER'; use sqliteAlterTable");
 
-#warning "port to kde4"
-#if 0
   if (record(t.name()).contains(c.name()))
     return (true);
-#endif
 
   MyMoneySqlQuery q(this);
   QString afterString = ";";
@@ -347,11 +344,8 @@ bool MyMoneyStorageSql::dropColumn
     (const MyMoneyDbTable& t, const MyMoneyDbColumn& c){
   if (m_dbType == Sqlite3)
     qFatal("sqlite doesn't support 'DROP COLUMN'; use sqliteAlterTable");
-#warning "port to kde4"
-#if 0
   if (!record(t.name()).contains(c.name()))
     return (true);
-#endif
   MyMoneySqlQuery q(this);
   q.prepare("ALTER TABLE " + t.name() + " DROP COLUMN "
       + c.name() + ";");
