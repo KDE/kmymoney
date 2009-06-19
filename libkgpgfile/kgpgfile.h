@@ -179,13 +179,13 @@ private:
   QString m_homedir;
 
   K3ShellProcess* m_process;
+  qint64   m_readRemain;
   QEventLoop* m_event;
 
   QLinkedList<QByteArray> m_recipient;
   QByteArray m_ungetchBuffer;
   QByteArray m_errmsg;
   int      m_exitStatus;
-  qint64   m_readRemain;
   char*   m_ptrRemain;
   bool    m_needExitLoop;
 };
