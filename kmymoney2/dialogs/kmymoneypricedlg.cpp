@@ -64,13 +64,13 @@ KMyMoneyPriceDlg::KMyMoneyPriceDlg(QWidget* parent) :
   m_deleteButton->setGuiItem(removeButtenItem);
 
   KGuiItem newButtenItem( i18n( "&New" ),
-                    KIcon(il->loadIcon("file_new", KIconLoader::Small, KIconLoader::SizeSmall)),
+                    KIcon(il->loadIcon("document-new", KIconLoader::Small, KIconLoader::SizeSmall)),
                     i18n("Add a new entry"),
                     i18n("Create a new price entry."));
   m_newButton->setGuiItem(newButtenItem);
 
   KGuiItem editButtenItem( i18n( "&Edit" ),
-                    KIcon(il->loadIcon("edit", KIconLoader::Small, KIconLoader::SizeSmall)),
+                    KIcon(il->loadIcon("document-edit", KIconLoader::Small, KIconLoader::SizeSmall)),
                     i18n("Modify the selected entry"),
                     i18n("Change the details of selected price information."));
   m_editButton->setGuiItem(editButtenItem);
