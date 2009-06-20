@@ -41,14 +41,12 @@
 #include <q3sqlpropertymap.h>
 #include <q3vbox.h>
 #include <QEventLoop>
-//Added by qt3to4:
 #include <QByteArray>
 #include <Q3BoxLayout>
 #include <Q3Frame>
 #include <QResizeEvent>
 #include <QLabel>
-#include <Q3PopupMenu>
-//#include <Q3ValueList>
+#include <KMenu>
 #include <QProgressBar>
 #include <QList>
 
@@ -210,8 +208,8 @@ KMyMoney2App::KMyMoney2App(QWidget * /*parent*/ , const char* name) :
 
   updateCaption(true);
 
-  Q3Frame* frame = new Q3Frame(this);
-  frame->setFrameStyle(Q3Frame::NoFrame);
+  QFrame* frame = new QFrame(this);
+  frame->setFrameStyle(QFrame::NoFrame);
   // values for margin (11) and spacing(6) taken from KDialog implementation
   Q3BoxLayout* layout = new Q3BoxLayout(frame, Q3BoxLayout::TopToBottom, 2, 6);
 
@@ -301,7 +299,7 @@ const KUrl KMyMoney2App::lastOpenedURL(void)
 void KMyMoney2App::initDynamicMenus(void)
 {
   QWidget* w = factory()->container("transaction_move_menu", this);
-  Q3PopupMenu *menu = dynamic_cast<Q3PopupMenu*>(w);
+  KMenu *menu = dynamic_cast<KMenu*>(w);
   if(menu) {
     d->m_moveToAccountSelector = new kMyMoneyAccountSelector(menu, 0, 0, false);
     //FIXME: Port to KDE4

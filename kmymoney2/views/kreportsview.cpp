@@ -700,7 +700,7 @@ void KReportsView::slotDelete(void)
     MyMoneyReport report = tab->report();
     if ( ! report.id().isEmpty() )
     {
-      if ( KMessageBox::Continue == KMessageBox::warningContinueCancel(this, QString("<qt>")+i18n("Are you sure you want to delete report <b>%1</b>?  There is no way to recover it!").arg(report.name())+QString("</qt>"), i18n("Delete Report?")))
+      if ( KMessageBox::Continue == KMessageBox::warningContinueCancel(this, QString("<qt>")+i18n("Are you sure you want to delete report <b>%1</b>?  There is no way to recover it!",report.name())+QString("</qt>"), i18n("Delete Report?")))
       {
         // close the tab and then remove the report so that it is not
         // generated again during the following loadView() call
@@ -712,7 +712,7 @@ void KReportsView::slotDelete(void)
       }
     }
     else
-      KMessageBox::information(this, QString("<qt>")+i18n("Sorry, <b>%1</b> is a default report.  You may not delete it.").arg(report.name())+QString("</qt>"), i18n("Delete Report?"));
+      KMessageBox::information(this, QString("<qt>")+i18n("Sorry, <b>%1</b> is a default report.  You may not delete it.",report.name())+QString("</qt>"), i18n("Delete Report?"));
   }
 }
 
@@ -891,11 +891,11 @@ void KReportsView::slotListContextMenu(K3ListView* lv,Q3ListViewItem* item,const
 {
   if ( lv == m_reportListView && item )
   {
-    Q3PopupMenu* contextmenu = new Q3PopupMenu(this);
-    contextmenu->insertItem( i18n("&Open"), this, SLOT(slotOpenFromList()) );
-    contextmenu->insertItem( i18n("&Configure"), this, SLOT(slotConfigureFromList()) );
-    contextmenu->insertItem( i18n("&New report"), this, SLOT(slotNewFromList()) );
-    contextmenu->insertItem( i18n("&Delete"), this, SLOT(slotDeleteFromList()) );
+    KMenu* contextmenu = new KMenu(this);
+    contextmenu->addAction( i18n("&Open"), this, SLOT(slotOpenFromList()) );
+    contextmenu->addAction( i18n("&Configure"), this, SLOT(slotConfigureFromList()) );
+    contextmenu->addAction( i18n("&New report"), this, SLOT(slotNewFromList()) );
+    contextmenu->addAction( i18n("&Delete"), this, SLOT(slotDeleteFromList()) );
 
     contextmenu->popup(p);
   }
