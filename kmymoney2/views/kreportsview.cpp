@@ -1354,6 +1354,21 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
     list.push_back(MyMoneyReport(
       MyMoneyReport::eBudgetActual,
       MyMoneyReport::eMonths,
+      MyMoneyTransactionFilter::yearToMonth,
+      MyMoneyReport::eDetailAll,
+      i18n("Budgeted vs. Actual This Year (YTM)"),
+      i18n("Default Report")
+    ));
+    list.back().setShowingRowTotals(true);
+    list.back().setBudget("Any",true);
+    // in case we're in January, we show the last year
+    if(QDate::currentDate().month() == 1) {
+      list.back().setDateFilter(MyMoneyTransactionFilter::lastYear);
+    }
+
+    list.push_back(MyMoneyReport(
+      MyMoneyReport::eBudgetActual,
+      MyMoneyReport::eMonths,
       MyMoneyTransactionFilter::currentMonth,
       MyMoneyReport::eDetailAll,
       i18n("Monthly Budgeted vs. Actual"),
