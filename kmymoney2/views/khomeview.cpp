@@ -193,7 +193,7 @@ void KHomeView::loadView(void)
     //clear the forecast flag so it will be reloaded
     m_forecast.setForecastDone(false);
 
-    QString filename = KGlobal::dirs()->findResource("appdata", "html/kmymoney2.css");
+    const QString filename = KGlobal::dirs()->findResource("appdata", "html/kmymoney2.css");
     QString header = QString("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\">\n<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"%1\">\n").arg(filename);
 
     header += KMyMoneyUtils::variableCSS();
@@ -404,7 +404,7 @@ void KHomeView::showPayments(void)
   m_part->write("<div class=\"shadow\"><div class=\"displayblock\">");
   m_part->write(QString("<div class=\"summaryheader\">%1</div>\n").arg(i18n("Payments")));
 
-  if(overdues.count() > 0) {
+  if(!overdues.isEmpty()) {
     m_part->write("<div class=\"gap\">&nbsp;</div>\n");
 
     qBubbleSort(overdues);
@@ -459,7 +459,7 @@ void KHomeView::showPayments(void)
     m_part->write("</table>");
   }
 
-  if(schedule.count() > 0) {
+  if(!schedule.isEmpty()) {
     qBubbleSort(schedule);
 
     // Extract todays payments if any
@@ -512,7 +512,7 @@ void KHomeView::showPayments(void)
       m_part->write("</table>");
     }
 
-    if (schedule.count() > 0)
+    if (!schedule.isEmpty())
     {
       m_part->write("<div class=\"gap\">&nbsp;</div>\n");
 
@@ -759,7 +759,7 @@ void KHomeView::showAccounts(KHomeView::paymentTypeE type, const QString& header
     }
   }
 
-  if(accounts.count() > 0) {
+  if(!accounts.isEmpty()) {
     QString tmp;
     int i = 0;
     tmp = "<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">" + header + "</div>\n<div class=\"gap\">&nbsp;</div>\n";
@@ -889,7 +889,7 @@ void KHomeView::showFavoriteReports(void)
 {
   QList<MyMoneyReport> reports = MyMoneyFile::instance()->reportList();
 
-  if ( reports.count() > 0 )
+  if ( !reports.isEmpty() )
   {
     bool firstTime = 1;
     int row = 0;
