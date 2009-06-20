@@ -246,7 +246,7 @@ void MyMoneyQifProfileEditor::loadProfileListFromConfig(void)
   list.sort();
 
   m_profileListBox->insertStringList(list);
-  if(list.count() > 0) {
+  if(!list.isEmpty()) {
     m_profileListBox->setSelected(0, true);
     slotLoadProfileFromConfig(list[0]);
   }

@@ -984,7 +984,7 @@ bool KGlobalLedgerView::selectEmptyTransaction(void)
     // this transaction is not empty, we take it as template for the
     // transaction to be created
     KMyMoneyRegister::SelectedTransactions list(m_register);
-    if((d->m_action == KMyMoneyRegister::ActionNone) && (list.count() > 0) && (!list[0].transaction().id().isEmpty())) {
+    if((d->m_action == KMyMoneyRegister::ActionNone) && (!list.isEmpty()) && (!list[0].transaction().id().isEmpty())) {
       // the new transaction to be created will have the same type
       // as the one that currently has the focus
       KMyMoneyRegister::Transaction* t = dynamic_cast<KMyMoneyRegister::Transaction*>(m_register->focusItem());
@@ -1362,7 +1362,7 @@ bool KGlobalLedgerView::canProcessTransactions(const KMyMoneyRegister::SelectedT
     tooltip = i18n("Cannot process transaction with focus if it is not selected.");
     return false;
   }
-  return list.count() > 0;
+  return !list.isEmpty();
 }
 
 bool KGlobalLedgerView::canModifyTransactions(const KMyMoneyRegister::SelectedTransactions& list, QString& tooltip) const

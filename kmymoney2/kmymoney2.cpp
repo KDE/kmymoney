@@ -5927,7 +5927,7 @@ void KMyMoney2App::slotSelectTransactions(const KMyMoneyRegister::SelectedTransa
 
   m_accountGoto = QString();
   m_payeeGoto = QString();
-  if(list.count() > 0 && !list.first().isScheduled()) {
+  if(!list.isEmpty() && !list.first().isScheduled()) {
     m_selectedTransactions = list;
     if(list.count() == 1) {
       const MyMoneySplit& sp = m_selectedTransactions[0].split();
@@ -5973,7 +5973,7 @@ void KMyMoney2App::slotSelectTransactions(const KMyMoneyRegister::SelectedTransa
     slotUpdateActions();
     emit transactionsSelected(m_selectedTransactions);
 
-  } else if(list.count() > 0) {
+  } else if(!list.isEmpty()) {
     slotSelectSchedule(MyMoneyFile::instance()->schedule(list.first().scheduleId()));
 
   } else {

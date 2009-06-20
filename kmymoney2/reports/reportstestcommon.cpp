@@ -465,7 +465,7 @@ void XMLandback( MyMoneyReport& filter )
 
   writeRCFtoXMLDoc(filter,doc);
   Q3ValueList<MyMoneyReport> list;
-  if ( readRCFfromXMLDoc(list,doc) && list.count() > 0 )
+  if ( readRCFfromXMLDoc(list,doc) && !list.isEmpty() )
     filter = list[0];
   else
     throw new MYMONEYEXCEPTION("Failed to load report from XML");

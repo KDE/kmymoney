@@ -274,7 +274,7 @@ int AccountSet::load(kMyMoneyAccountSelector* selector)
   if(selector->selectionMode() == Q3ListView::Single) {
     QStringList list;
     selector->selectedItems(list);
-    if(list.count() > 0)
+    if(!list.isEmpty())
       currentId = list.first();
   }
   if(m_typeList.contains(MyMoneyAccount::Checkings)
