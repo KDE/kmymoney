@@ -31,6 +31,7 @@
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QList>
+#include <QSqlRecord>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
