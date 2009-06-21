@@ -21,6 +21,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <ksavefile.h>
 #include <qdom.h>
 class QFile;
 class Q3ListViewItem;
@@ -68,7 +69,7 @@ protected:
   bool loadDescription(void);
   bool createAccounts(MyMoneyAccount& parent, QDomNode account);
   bool setFlags(MyMoneyAccount& acc, QDomNode flags);
-  bool saveToLocalFile(QFile* qfile);
+  bool saveToLocalFile(KSaveFile* qfile);
   bool addAccountStructure(QDomElement& parent, const MyMoneyAccount& acc);
   bool hierarchy(QMap<QString, Q3ListViewItem*>& list, const QString& parent, QDomNode account);
 

@@ -405,7 +405,8 @@ bool MyMoneyTemplate::saveTemplate(const KUrl& url)
     }
   } else {
     KTemporaryFile tmpfile;
-    saveToLocalFile(&tmpfile);
+    KSaveFile qfile( tmpfile.fileName() );
+    saveToLocalFile(&qfile);
     if(!KIO::NetAccess::upload(tmpfile.fileName(), url, NULL))
       throw new MYMONEYEXCEPTION(i18n("Unable to upload to '%1'",url.url()));
     //tmpfile.unlink();
@@ -413,7 +414,7 @@ bool MyMoneyTemplate::saveTemplate(const KUrl& url)
   return true;
 }
 
-bool MyMoneyTemplate::saveToLocalFile(QFile* qfile)
+bool MyMoneyTemplate::saveToLocalFile(KSaveFile* qfile)
 {
   Q3TextStream stream(qfile);
   stream.setEncoding(Q3TextStream::UnicodeUTF8);
