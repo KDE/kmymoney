@@ -997,7 +997,7 @@ bool KMyMoneyView::initializeStorage()
   return true;
 }
 
-void KMyMoneyView::saveToLocalFile(QFile* qfile, IMyMoneyStorageFormat* pWriter, bool plaintext, const QString& keyList)
+void KMyMoneyView::saveToLocalFile(KSaveFile* qfile, IMyMoneyStorageFormat* pWriter, bool plaintext, const QString& keyList)
 {
   QIODevice *dev = qfile;
   KFilterBase *base = 0;
@@ -1094,7 +1094,7 @@ void KMyMoneyView::saveToLocalFile(QFile* qfile, IMyMoneyStorageFormat* pWriter,
 
   if(base != 0) {
 #warning "port to kde4"
-    //dev->flush();
+      //dev->flush();
     dev->close();
     if(statusDevice->status() != IO_Ok) {
       delete dev;
@@ -1177,9 +1177,10 @@ bool KMyMoneyView::saveFile(const KUrl& url, const QString& keyList)
       chown(filename.toLatin1(), static_cast<uid_t>(-1), gid);
     } else {
         KTemporaryFile tmpfile;
-      saveToLocalFile(new QFile(&tmpfile) , pWriter, plaintext, keyList);
-      if(!KIO::NetAccess::upload(tmpfile.fileName(), url, NULL))
-        throw new MYMONEYEXCEPTION(i18n("Unable to upload to '%1'",url.url()));
+
+        saveToLocalFile(new KSaveFile(tmpfile.fileName()) , pWriter, plaintext, keyList);
+        if(!KIO::NetAccess::upload(tmpfile.fileName(), url, NULL))
+            throw new MYMONEYEXCEPTION(i18n("Unable to upload to '%1'",url.url()));
     }
     m_fileType = KmmXML;
   } catch (MyMoneyException *e) {

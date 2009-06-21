@@ -22,6 +22,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <ksavefile.h>
 #include <qwidget.h>
 //Added by qt3to4:
 #include <QList>
@@ -505,7 +506,7 @@ public slots:
     * This slot switches the view to present the home page
     */
   void slotShowHomePage(void) { setCurrentPage(m_homeViewFrame); }
-  
+
   signals:
 
   void currentPageChanged (const QModelIndex &current, const QModelIndex &previous);
@@ -563,7 +564,7 @@ private:
     *
     * @note This method will close the file when it is written.
     */
-  void saveToLocalFile(QFile* qfile, IMyMoneyStorageFormat* writer, bool plaintext=false, const QString& keyList = QString());
+  void saveToLocalFile(KSaveFile* qfile, IMyMoneyStorageFormat* writer, bool plaintext=false, const QString& keyList = QString());
 
   /**
     * Internal method used by slotAccountNew() and slotAccountCategory().
