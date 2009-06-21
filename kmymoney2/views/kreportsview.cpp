@@ -293,8 +293,8 @@ void KReportsView::KReportTab::toggleChart(void)
 //FIXME: Port to KDE4
 //    m_chartView->hide();
 
-    m_control->buttonChart->setText( i18n( "Chart" ) );
-    m_control->buttonChart->setToolTip( i18n( "Show the chart version of this report" ) );
+    //m_control->buttonChart->setText( i18n( "Chart" ) );
+    //m_control->buttonChart->setToolTip( i18n( "Show the chart version of this report" ) );
   }
   else
   {
@@ -302,8 +302,8 @@ void KReportsView::KReportTab::toggleChart(void)
 //FIXME: Port to KDE4
 //    m_chartView->show();
 
-    m_control->buttonChart->setText( i18n( "Report" ) );
-    m_control->buttonChart->setToolTip( i18n( "Show the report version of this chart" ) );
+    //m_control->buttonChart->setText( i18n( "Report" ) );
+    //m_control->buttonChart->setToolTip( i18n( "Show the report version of this chart" ) );
   }
   m_showingChart = ! m_showingChart;
 }
