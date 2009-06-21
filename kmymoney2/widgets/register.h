@@ -112,7 +112,7 @@ public:
         ++it_w;
       else {
         delete (*it_w);
-        remove(it_w);
+        remove(it_w.key());
         it_w = begin();
       }
     }
