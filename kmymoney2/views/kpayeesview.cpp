@@ -342,16 +342,15 @@ KPayeesView::KPayeesView(QWidget *parent) :
   // use the size settings of the last run (if any)
   KSharedConfigPtr config = KGlobal::config();
   KConfigGroup grp = config->group("Last Use Settings");
-#warning "port to kde4"
-  //QList<int> sizes = grp.readEntry("KPayeesViewSplitterSize", QList<int>());
-  //if(sizes.size() == 2)
-    //m_splitter->setSizes(sizes);
+  QList<int> sizes = grp.readEntry("KPayeesViewSplitterSize", QList<int>());
+  if(sizes.size() == 2)
+    m_splitter->setSizes(sizes);
 
-  //m_transactionView->setSorting(-1);
-  //m_transactionView->setColumnWidthMode(2, Q3ListView::Manual);
- // m_transactionView->setColumnAlignment(3, Qt::AlignRight);
+  m_transactionView->setSorting(-1);
+  m_transactionView->setColumnWidthMode(2, Q3ListView::Manual);
+ m_transactionView->setColumnAlignment(3, Qt::AlignRight);
   // never show horizontal scroll bars
-  //m_transactionView->setHScrollBarMode(Q3ScrollView::AlwaysOff);
+  m_transactionView->setHScrollBarMode(Q3ScrollView::AlwaysOff);
 
   m_payeesList->addColumn(i18n("Name"));
 
@@ -580,7 +579,7 @@ void KPayeesView::slotSelectPayee(void)
 
   emit selectObjects(payeesList);
 
-  if (payeesList.count() == 0) {
+  if (payeesList.isEmpty()) {
     m_tabWidget->setEnabled(false); // disable tab widget
     clearItemData();
     m_payee = MyMoneyPayee();

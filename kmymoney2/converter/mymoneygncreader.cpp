@@ -2399,8 +2399,8 @@ void MyMoneyGncReader::postMessage (const QString& source, const unsigned int co
   // get the number of args this message requires
   const unsigned int argCount = GncMessages::argCount (source, code);
   if ((gncdebug) && (argCount != argList.count()))
-    qDebug("%s", QString("MyMoneyGncReader::postMessage debug: Message %1, code %2, requires %3 arguments, got %4")
-        .arg(source).arg(code).arg(argCount).arg(argList.count()).data());
+    qDebug("%s", qPrintable(QString("MyMoneyGncReader::postMessage debug: Message %1, code %2, requires %3 arguments, got %4")
+        .arg(source).arg(code).arg(argCount).arg(argList.count())));
   // store the arguments
   for (i = 0; i < argCount; i++) {
     if (i > argList.count()) m->args.append(QString());

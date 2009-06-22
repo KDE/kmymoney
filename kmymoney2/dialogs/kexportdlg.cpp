@@ -164,9 +164,8 @@ void KExportDlg::readConfig(void)
   m_qlineeditFile->setText(kgrp.readEntry("KExportDlg_LastFile"));
   m_qcheckboxAccount->setChecked(kgrp.readEntry("KExportDlg_AccountOpt", true));
   m_qcheckboxCategories->setChecked(kgrp.readEntry("KExportDlg_CatOpt", true));
-#warning "port to kde4"
-  //m_kmymoneydateStart->setDate(kgrp.readEntry("KExportDlg_StartDate").date());
-  //m_kmymoneydateEnd->setDate(kgrp.readEntry("KExportDlg_EndDate").date());
+  m_kmymoneydateStart->setDate(kgrp.readEntry("KExportDlg_StartDate",QDate()));
+  m_kmymoneydateEnd->setDate(kgrp.readEntry("KExportDlg_EndDate",QDate()));
   // m_profileComboBox is loaded in loadProfiles(), so we don't worry here
   // m_accountComboBox is loaded in loadAccounts(), so we don't worry here
 }
