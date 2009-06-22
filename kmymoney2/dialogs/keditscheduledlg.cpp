@@ -78,7 +78,6 @@ KEditScheduleDlg::KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget *par
 
   d->m_requiredFields = new kMandatoryFieldGroup (this);
   d->m_requiredFields->setOkButton(buttonOk); // button to be enabled when all fields present
-#warning "port to kde4"
 
   // make sure, we have a tabbar with the form
   // insert it after the horizontal line
@@ -352,7 +351,6 @@ const MyMoneySchedule& KEditScheduleDlg::schedule(void) const
     }
 
     d->m_schedule.setType(MyMoneySchedule::TYPE_BILL);
-#warning "port to kde4"
 
     KMyMoneyTransactionForm::TabBar* tabbar = dynamic_cast<KMyMoneyTransactionForm::TabBar*>(d->m_editor->haveWidget("tabbar"));
     if(tabbar) {
@@ -399,7 +397,6 @@ MyMoneyTransaction KEditScheduleDlg::transaction(void) const
 bool KEditScheduleDlg::focusNextPrevChild(bool next)
 {
   bool  rc = false;
-#warning "port to kde4"
 
   // qDebug("KEditScheduleDlg::focusNextPrevChild(editmode=%s)", m_inEditMode ? "true" : "false");
   QWidget *w = 0;
