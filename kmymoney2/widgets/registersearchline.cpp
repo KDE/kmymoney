@@ -277,9 +277,8 @@ void RegisterSearchLineWidget::createWidgets(void)
   positionInToolBar();
   if(!d->clearButton) {
     d->clearButton = new QToolButton(this);
-#warning "port to kde4"
-    //KIcon icon = SmallIconSet(QApplication::isRightToLeft() ? "clear_left" : "locationbar_erase");
-    //d->clearButton->setIconSet(icon);
+    QIcon icon = SmallIconSet(QApplication::isRightToLeft() ? "clear_left" : "locationbar_erase");
+    d->clearButton->setIconSet(icon);
   }
 
   d->clearButton->show();
