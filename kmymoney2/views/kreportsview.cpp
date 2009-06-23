@@ -108,7 +108,8 @@ KReportsView::KReportTab::KReportTab(KTabWidget* parent, const MyMoneyReport& re
   // ! KReportChartView::implemented() || 
   m_report.reportType() != MyMoneyReport::ePivotTable )
   {
-    m_control->buttonChart->hide();
+#warning "port to kde4"
+      	  //m_control->buttonChart->hide();
   }
 
 //FIXME: Port to KDE4
