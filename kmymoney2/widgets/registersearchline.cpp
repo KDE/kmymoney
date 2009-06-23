@@ -242,12 +242,10 @@ class RegisterSearchLineWidget::RegisterSearchLineWidgetPrivate
   public:
   RegisterSearchLineWidgetPrivate() :
     reg(0),
-    searchLine(0),
-    clearButton(0) {}
+    searchLine(0) {}
 
   Register* reg;
   RegisterSearchLine* searchLine;
-  QToolButton* clearButton;
 };
 
 
@@ -275,14 +273,6 @@ RegisterSearchLine* RegisterSearchLineWidget::createSearchLine(Register* reg)
 void RegisterSearchLineWidget::createWidgets(void)
 {
   positionInToolBar();
-  if(!d->clearButton) {
-    d->clearButton = new QToolButton(this);
-    QIcon icon = SmallIconSet(QApplication::isRightToLeft() ? "clear_left" : "locationbar_erase");
-    d->clearButton->setIconSet(icon);
-  }
-
-  d->clearButton->show();
-
   QLabel *label = new QLabel(i18n("S&earch:"), this, "kde toolbar widget");
 
   d->searchLine = createSearchLine(d->reg);
@@ -291,7 +281,6 @@ void RegisterSearchLineWidget::createWidgets(void)
   label->setBuddy(d->searchLine);
   label->show();
 
-  connect(d->clearButton, SIGNAL(clicked()), d->searchLine, SLOT(reset()));
 }
 
 
