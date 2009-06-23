@@ -92,7 +92,7 @@ void RegisterSearchLine::init(Register *reg)
     connect(reg, SIGNAL(destroyed()), this, SLOT(registerDestroyed()));
     connect(reg, SIGNAL(itemAdded(RegisterItem*)), this, SLOT(itemAdded(RegisterItem*)));
   } else {
-    setEnabled(false);
+     setEnabled(false);
   }
 }
 
@@ -314,7 +314,7 @@ void RegisterSearchLineWidget::positionInToolBar(void)
         break;
       }
     }
-#endif    
+#endif
   }
 
   if(d->searchLine)

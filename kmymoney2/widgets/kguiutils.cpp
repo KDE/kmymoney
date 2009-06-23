@@ -53,12 +53,12 @@
 void kMandatoryFieldGroup::add(QWidget *widget)
 {
   if (!widgets.contains(widget)) {
-    if (widget->inherits("QCheckBox"))
+    if (qobject_cast<QCheckBox*>( widget))
       connect(qobject_cast<QCheckBox*>(widget),
                SIGNAL(clicked()),
                this, SLOT(changed()));
 
-    else if (widget->inherits("QComboBox")) {
+    else if (qobject_cast<QComboBox*>(widget)) {
       QComboBox* combo = qobject_cast<QComboBox*>(widget);
       QLineEdit* lineedit = combo->lineEdit();
       if(lineedit) {
@@ -68,23 +68,23 @@ void kMandatoryFieldGroup::add(QWidget *widget)
       }
     }
 
-    else if (widget->inherits("QLineEdit"))
+    else if (qobject_cast<QLineEdit*>(widget))
       connect(qobject_cast<QLineEdit*>(widget),
                SIGNAL(textChanged(const QString&)),
                this, SLOT(changed()));
 
-    else if (widget->inherits("QSpinBox"))
+    else if (qobject_cast<QSpinBox*>(widget))
       connect(qobject_cast<QSpinBox*>(widget),
                SIGNAL(valueChanged(const QString&)),
                       this, SLOT(changed()));
 
-    else if (widget->inherits("QListBox"))
+    else if (qobject_cast<Q3ListBox*>(widget))
       connect(qobject_cast<Q3ListBox*>(widget),
                SIGNAL(selectionChanged()),
                       this, SLOT(changed()));
 
     else {
-      qWarning("MandatoryFieldGroup: unsupported class %s", widget->className());
+        qWarning("MandatoryFieldGroup: unsupported class %s", ( widget->className() ));
       return;
     }
 
@@ -122,28 +122,28 @@ void kMandatoryFieldGroup::changed(void)
     if(!(widget->isEnabled())) {
       continue;
     }
-    if (widget->inherits("QCheckBox")) {
+    if (qobject_cast<QCheckBox*>(widget)) {
       if ((qobject_cast<QCheckBox*>(widget))->state() == QCheckBox::NoChange) {
         enable = false;
         break;
       } else
         continue;
     }
-    if (widget->inherits("QComboBox")) {
+    if (qobject_cast<QComboBox*>(widget)) {
       if ((qobject_cast<QComboBox*>(widget))->currentText().isEmpty()) {
         enable = false;
         break;
       } else
         continue;
     }
-    if (widget->inherits("QLineEdit")) {
+    if (qobject_cast<QLineEdit*>(widget)) {
       if ((qobject_cast<QLineEdit*>(widget))->text().isEmpty()) {
         enable = false;
         break;
       } else
         continue;
     }
-    if (widget->inherits("QListBox")) {
+    if ((qobject_cast<Q3ListBox*>(widget))) {
       if ((qobject_cast<Q3ListBox*>(widget))->selectedItem() == 0) {
         enable = false;
         break;
