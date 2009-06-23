@@ -610,7 +610,7 @@ void KNewAccountDlg::okClicked()
   if(m_vatCategory->isChecked()) {
     m_account.setValue("VatRate", (m_vatRate->value().abs() / MyMoneyMoney(100,1)).toString());
   } else {
-    if(m_vatAssignment->isChecked()) {
+    if(m_vatAssignment->isChecked() && !m_vatAccount->selectedItems().isEmpty()) {
       m_account.setValue("VatAccount", m_vatAccount->selectedItems().first());
       if(m_netAmount->isChecked())
         m_account.setValue("VatAmount", "Net");
