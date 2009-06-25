@@ -147,19 +147,17 @@ void KOfxDirectConnectDlg::slotOfxConnected(KIO::Job*)
 
 void KOfxDirectConnectDlg::slotOfxData(KIO::Job*,const QByteArray& _ba)
 {
-#warning "port to kde4"	
-#if 0	
   if ( !m_tmpfile )
 //     throw new MYMONEYEXCEPTION("Not currently connected!!");
     kDebug(2) << "void ofxdcon::slotOfxData():: Not currently connected!";
-  *(m_tmpfile->textStream()) << QString(_ba);
+  QTextStream out(m_tmpfile);
+  out << QString(_ba);
 
   if(d->m_fpTrace.isOpen()) {
     d->m_fpTrace.write(_ba, _ba.size());
   }
 
   setDetails(QString("Got %1 bytes").arg(_ba.size()));
-#endif
 }
 
 void KOfxDirectConnectDlg::slotOfxFinished(KIO::Job* /* e */)
