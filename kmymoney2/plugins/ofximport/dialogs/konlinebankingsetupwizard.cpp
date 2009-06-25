@@ -77,10 +77,7 @@ KOnlineBankingSetupWizard::KOnlineBankingSetupWizard(QWidget *parent):
   dlg->setMinimumDuration(0);
   kapp->processEvents();
 
-  #warning "port to kde4"
-#if 0
-  tabLayout->insertWidget(0, new K3ListViewSearchLineWidget(m_listFi, tab));
-#endif
+  vboxLayout1->insertWidget(0, new K3ListViewSearchLineWidget(m_listFi, tab));
   OfxPartner::setDirectory(KStandardDirs::locateLocal("appdata", ""));
   QStringList banks = OfxPartner::BankNames();
   QStringList::const_iterator it_bank = banks.constBegin();
