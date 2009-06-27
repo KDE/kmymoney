@@ -494,16 +494,16 @@ void KMyMoney2App::initActions(void)
   account_reconcile->setShortcut(KShortcut("Ctrl+Shift+R"));
   connect(account_reconcile, SIGNAL(triggered()), this, SLOT(slotAccountReconcileStart()));
 
-  //new KAction(i18nc("Finish reconciliation", "Finish"), "player_end", 0, this, SLOT(slotAccountReconcileFinish()), actionCollection(), "account_reconcile_finish");
+  //new KAction(i18nc("Finish reconciliation", "Finish"), "media-skip-forward", 0, this, SLOT(slotAccountReconcileFinish()), actionCollection(), "account_reconcile_finish");
   KAction *account_reconcile_finish = actionCollection()->addAction("account_reconcile_finish");
   account_reconcile_finish->setText(i18nc("Finish reconciliation", "Finish"));
-  account_reconcile_finish->setIcon(KIcon("player_end"));
+  account_reconcile_finish->setIcon(KIcon("media-skip-forward"));
   connect(account_reconcile_finish, SIGNAL(triggered()), this, SLOT(slotAccountReconcileFinish()));
 
-  //new KAction(i18nc("Postpone reconciliation", "Postpone"), "player_pause", 0, this, SLOT(slotAccountReconcilePostpone()), actionCollection(), "account_reconcile_postpone");
+  //new KAction(i18nc("Postpone reconciliation", "Postpone"), "media-playback-pause", 0, this, SLOT(slotAccountReconcilePostpone()), actionCollection(), "account_reconcile_postpone");
   KAction *account_reconcile_postpone = actionCollection()->addAction("account_reconcile_postpone");
   account_reconcile_postpone->setText(i18n("Postpone reconciliation"));
-  account_reconcile_postpone->setIcon(KIcon("player_pause"));
+  account_reconcile_postpone->setIcon(KIcon("media-playback-pause"));
   connect(account_reconcile_postpone, SIGNAL(triggered()), this, SLOT(slotAccountReconcilePostpone()));
 
   //new KAction(i18n("Edit account..."), "edit", 0, this, SLOT(slotAccountEdit()), actionCollection(), "account_edit");
@@ -539,10 +539,10 @@ void KMyMoney2App::initActions(void)
   account_chart->setIcon(KIcon("kchart_chrt"));
   connect(account_chart, SIGNAL(triggered()), this, SLOT(slotAccountChart()));
 #endif
-  //new KAction(i18n("Map to online account"), "news_subscribe", 0, this, SLOT(slotAccountMapOnline()), actionCollection(), "account_online_map");
+  //new KAction(i18n("Map to online account"), "news-subscribe", 0, this, SLOT(slotAccountMapOnline()), actionCollection(), "account_online_map");
   KAction *account_online_map = actionCollection()->addAction("account_online_map");
   account_online_map->setText(i18n("Map to online account"));
-  account_online_map->setIcon(KIcon("news_subscribe"));
+  account_online_map->setIcon(KIcon("news-subscribe"));
   connect(account_online_map, SIGNAL(triggered()), this, SLOT(slotAccountMapOnline()));
 
   //new KAction(i18n("Unmap account"), "", 0, this, SLOT(slotAccountUnmapOnline()), actionCollection(), "account_online_unmap");
