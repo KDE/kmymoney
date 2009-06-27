@@ -2309,7 +2309,7 @@ void KMyMoney2App::slotSettings(void)
   dlg->addPage(fontsPage, i18n("Fonts"), "preferences-desktop-font");
   dlg->addPage(onlineQuotesPage, i18n("Online Quotes"), "preferences-system-network");
   dlg->addPage(forecastPage, i18n("Forecast"), "forcast");
-  dlg->addPage(pluginsPage, i18n("Plugins"), "connect_no");
+  dlg->addPage(pluginsPage, i18n("Plugins"), "network-disconnect");
 
   connect(dlg, SIGNAL(settingsChanged(const QString&)), this, SLOT(slotUpdateConfiguration()));
   connect(dlg, SIGNAL(okClicked()), pluginsPage, SLOT(slotSavePlugins()));
