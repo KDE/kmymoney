@@ -4874,6 +4874,7 @@ void KMyMoney2App::slotTransactionsNew(void)
   if(kmymoney2->action("transaction_new")->isEnabled()) {
     if(myMoneyView->createNewTransaction()) {
       m_transactionEditor = myMoneyView->startEdit(m_selectedTransactions);
+       if(m_transactionEditor){
       KMyMoneyPayeeCombo* payeeEdit = dynamic_cast<KMyMoneyPayeeCombo*>(m_transactionEditor->haveWidget("payee"));
       if(payeeEdit && !d->m_lastPayeeEntered.isEmpty()) {
         // in case we entered a new transaction before and used a payee,
@@ -4891,6 +4892,7 @@ void KMyMoney2App::slotTransactionsNew(void)
       }
       slotUpdateActions();
     }
+   }
   }
 }
 
