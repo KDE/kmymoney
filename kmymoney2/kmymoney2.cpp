@@ -402,10 +402,10 @@ void KMyMoney2App::initActions(void)
   file_dump->setText(i18n("Dump Memory"));
   connect(file_dump, SIGNAL(triggered()), this, SLOT(slotFileFileInfo()));
 #endif
-  //new KAction(i18n("File-Information..."), "info", 0, this, SLOT(slotFileInfoDialog()), actionCollection(), "view_file_info");
+  //new KAction(i18n("File-Information..."), "document-properties", 0, this, SLOT(slotFileInfoDialog()), actionCollection(), "view_file_info");
   KAction *view_file_info = actionCollection()->addAction("view_file_info");
   view_file_info->setText(i18n("File-Information..."));
-  view_file_info->setIcon(KIcon("info"));
+  view_file_info->setIcon(KIcon("document-properties"));
   connect(view_file_info, SIGNAL(triggered()), this, SLOT(slotFileInfoDialog()));
 
   // *************
@@ -550,7 +550,7 @@ void KMyMoney2App::initActions(void)
   account_online_unmap->setText(i18n("Unmap account..."));
   connect(account_online_unmap, SIGNAL(triggered()), this, SLOT(slotAccountUnmapOnline()));
 
-  KActionMenu* menu = new KActionMenu(KIcon(KIconLoader::global()->loadIcon("reload", KIconLoader::Small,                                      KIconLoader::SizeSmall)), i18n("Update"), actionCollection()); //, "account_online_update_menu");
+  KActionMenu* menu = new KActionMenu(KIcon(KIconLoader::global()->loadIcon("view-refresh", KIconLoader::Small,                                      KIconLoader::SizeSmall)), i18n("Update"), actionCollection()); //, "account_online_update_menu");
   // activating the menu button is the same as selecting the current account
   connect( menu, SIGNAL( activated() ), this, SLOT(slotAccountUpdateOnline()));
   //menu->insert(new KAction(i18n("Update account..."), "", 0, this, SLOT(slotAccountUpdateOnline()), actionCollection(), "account_online_update"));
@@ -705,22 +705,22 @@ void KMyMoney2App::initActions(void)
   transaction_delete->setIcon(KIcon("delete"));
   connect(transaction_delete, SIGNAL(triggered()), this, SLOT(slotTransactionsDelete()));
 
-  //new KAction(i18nc("Duplicate transaction", "Duplicate"), "editcopy", 0, this, SLOT(slotTransactionDuplicate()), actionCollection(), "transaction_duplicate");
+  //new KAction(i18nc("Duplicate transaction", "Duplicate"), "edit-copy", 0, this, SLOT(slotTransactionDuplicate()), actionCollection(), "transaction_duplicate");
   KAction *transaction_duplicate = actionCollection()->addAction("transaction_duplicate");
   transaction_duplicate->setText(i18nc("Duplicate transaction", "Duplicate"));
-  transaction_duplicate->setIcon(KIcon("editcopy"));
+  transaction_duplicate->setIcon(KIcon("edit-copy"));
   connect(transaction_duplicate, SIGNAL(triggered()), this, SLOT(slotTransactionDuplicate()));
 
-  //new KAction(i18nc("Button text for match transaction", "Match"), "stop", 0, this, SLOT(slotTransactionMatch()), actionCollection(), "transaction_match");
+  //new KAction(i18nc("Button text for match transaction", "Match"), "process-stop", 0, this, SLOT(slotTransactionMatch()), actionCollection(), "transaction_match");
   KAction *transaction_match = actionCollection()->addAction("transaction_match");
   transaction_match->setText(i18nc("Button text for match transaction", "Match"));
-  transaction_match->setIcon(KIcon("stop"));
+  transaction_match->setIcon(KIcon("process-stop"));
   connect(transaction_match, SIGNAL(triggered()), this, SLOT(slotTransactionMatch()));
 
   //new KAction(i18nc("Accept 'imported' and 'matched' transaction", "Accept"), "apply", 0, this, SLOT(slotTransactionsAccept()), actionCollection(), "transaction_accept");
   KAction *transaction_accept = actionCollection()->addAction("transaction_accept");
   transaction_accept->setText(i18nc("Accept 'imported' and 'matched' transaction", "Accept"));
-  transaction_accept->setIcon(KIcon("apply"));
+  transaction_accept->setIcon(KIcon("dialog-ok-apply"));
   connect(transaction_accept, SIGNAL(triggered()), this, SLOT(slotTransactionsAccept()));
 
   //new KAction(i18nc("Toggle reconciliation flag", "Toggle"), 0, KShortcut("Ctrl+Space"), this, SLOT(slotToggleReconciliationFlag()), actionCollection(), "transaction_mark_toggle");
@@ -752,22 +752,22 @@ void KMyMoney2App::initActions(void)
   connect(transaction_select_all, SIGNAL(triggered()), this, SIGNAL(selectAllTransactions()));
 
 
-  //new KAction(i18n("Goto account"), "goto", 0, this, SLOT(slotTransactionGotoAccount()), actionCollection(), "transaction_goto_account");
+  //new KAction(i18n("Goto account"), "go-jump", 0, this, SLOT(slotTransactionGotoAccount()), actionCollection(), "transaction_goto_account");
   KAction *transaction_goto_account = actionCollection()->addAction("transaction_goto_account");
   transaction_goto_account->setText(i18n("Goto account"));
-  transaction_goto_account->setIcon(KIcon("goto"));
+  transaction_goto_account->setIcon(KIcon("go-jump"));
   connect(transaction_goto_account, SIGNAL(triggered()), this, SLOT(slotTransactionGotoAccount()));
 
-  //new KAction(i18n("Goto payee"), "goto", 0, this, SLOT(slotTransactionGotoPayee()), actionCollection(), "transaction_goto_payee");
+  //new KAction(i18n("Goto payee"), "go-jump", 0, this, SLOT(slotTransactionGotoPayee()), actionCollection(), "transaction_goto_payee");
   KAction *transaction_goto_payee = actionCollection()->addAction("transaction_goto_payee");
   transaction_goto_payee->setText(i18n("Goto payee"));
-  transaction_goto_payee->setIcon(KIcon("goto"));
+  transaction_goto_payee->setIcon(KIcon("go-jump"));
   connect(transaction_goto_payee, SIGNAL(triggered()), this, SLOT(slotTransactionGotoPayee()));
 
-  //new KAction(i18n("Create scheduled transaction..."), "bookmark_add", 0, this, SLOT(slotTransactionCreateSchedule()), actionCollection(), "transaction_create_schedule");
+  //new KAction(i18n("Create scheduled transaction..."), "bookmark-new", 0, this, SLOT(slotTransactionCreateSchedule()), actionCollection(), "transaction_create_schedule");
   KAction *transaction_create_schedule = actionCollection()->addAction("transaction_create_schedule");
   transaction_create_schedule->setText(i18n("Create scheduled transaction..."));
-  transaction_create_schedule->setIcon(KIcon("bookmark_add"));
+  transaction_create_schedule->setIcon(KIcon("bookmark-new"));
   connect(transaction_create_schedule, SIGNAL(triggered()), this, SLOT(slotTransactionCreateSchedule()));
 
   //new KAction(i18n("Assign next number"), "", KShortcut("Ctrl+Shift+N"), this, SLOT(slotTransactionAssignNumber()), actionCollection(), "transaction_assign_number");
@@ -829,10 +829,10 @@ void KMyMoney2App::initActions(void)
   schedule_delete->setIcon(KIcon("delete"));
   connect(schedule_delete, SIGNAL(triggered()), this, SLOT(slotScheduleDelete()));
 
-  //new KAction(i18n("Duplicate scheduled transaction"), "editcopy", 0, this, SLOT(slotScheduleDuplicate()), actionCollection(), "schedule_duplicate");
+  //new KAction(i18n("Duplicate scheduled transaction"), "edit-copy", 0, this, SLOT(slotScheduleDuplicate()), actionCollection(), "schedule_duplicate");
   KAction *schedule_duplicate = actionCollection()->addAction("schedule_duplicate");
   schedule_duplicate->setText(i18n("Duplicate scheduled transaction"));
-  schedule_duplicate->setIcon(KIcon("editcopy"));
+  schedule_duplicate->setIcon(KIcon("edit-copy"));
   connect(schedule_duplicate, SIGNAL(triggered()), this, SLOT(slotScheduleDuplicate()));
 
   //new KAction(i18n("Enter next transaction..."), "go-jump-locationbar", 0, this, SLOT(slotScheduleEnter()), actionCollection(), "schedule_enter");
@@ -885,10 +885,10 @@ void KMyMoney2App::initActions(void)
   budget_delete->setIcon(KIcon("delete"));
   connect(budget_delete, SIGNAL(triggered()), this, SLOT(slotBudgetDelete()));
 
-  //new KAction(i18n("Copy budget"), "editcopy", 0, this, SLOT(slotBudgetCopy()), actionCollection(), "budget_copy");
+  //new KAction(i18n("Copy budget"), "edit-copy", 0, this, SLOT(slotBudgetCopy()), actionCollection(), "budget_copy");
   KAction *budget_copy = actionCollection()->addAction("budget_copy");
   budget_copy->setText(i18n("Copy budget"));
-  budget_copy->setIcon(KIcon("editcopy"));
+  budget_copy->setIcon(KIcon("edit-copy"));
   connect(budget_copy, SIGNAL(triggered()), this, SLOT(slotBudgetCopy()));
 
   //new KAction(i18n("Change budget year"), "", 0, this, SLOT(slotBudgetChangeYear()), actionCollection(), "budget_change_year");
@@ -956,8 +956,8 @@ void KMyMoney2App::initActions(void)
   // Currently unused actions
   // ************************
 #if 0
-  new KToolBarPopupAction(i18n("View back"), "back", 0, this, SLOT(slotShowPreviousView()), actionCollection(), "go_back");
-  new KToolBarPopupAction(i18n("View forward"), "forward", 0, this, SLOT(slotShowNextView()), actionCollection(), "go_forward");
+  new KToolBarPopupAction(i18n("View back"), "go-previous", 0, this, SLOT(slotShowPreviousView()), actionCollection(), "go_back");
+  new KToolBarPopupAction(i18n("View forward"), "go-next", 0, this, SLOT(slotShowNextView()), actionCollection(), "go_forward");
 
   action("go_back")->setEnabled(false);
   action("go_forward")->setEnabled(false);
@@ -5713,7 +5713,7 @@ void KMyMoney2App::slotUpdateActions(void)
       if(matchedCount != 0) {
         action("transaction_match")->setEnabled(true);
         action("transaction_match")->setText(i18nc("Button text for unmatch transaction", "Unmatch"));
-        action("transaction_match")->setIcon(QIcon("stop"));
+        action("transaction_match")->setIcon(QIcon("process-stop"));
       }
 
       if(m_selectedTransactions.count() > 1) {
