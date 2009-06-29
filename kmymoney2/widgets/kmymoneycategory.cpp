@@ -25,7 +25,7 @@
 #include <QTimer>
 //Added by qt3to4:
 #include <Q3HBoxLayout>
-#include <Q3Frame>
+#include <QFrame>
 #include <QFocusEvent>
 
 // ----------------------------------------------------------------------------
@@ -53,7 +53,7 @@ public:
     recursive(false) {}
 
   KPushButton*      splitButton;
-  Q3Frame*           frame;
+  QFrame*           frame;
   bool              recursive;
 };
 
@@ -62,7 +62,7 @@ KMyMoneyCategory::KMyMoneyCategory(QWidget* parent, const char * name, bool spli
   d(new Private)
 {
   if(splitButton) {
-    d->frame = new Q3Frame(0);
+    d->frame = new QFrame(0);
     d->frame->setFocusProxy(this);
     Q3HBoxLayout* layout = new Q3HBoxLayout(d->frame);
     // make sure not to use our own overridden version of reparent() here

@@ -33,7 +33,7 @@
 #include <QList>
 #include <QKeyEvent>
 #include <QEvent>
-#include <Q3Frame>
+#include <QFrame>
 #include <QDropEvent>
 #include <QDragMoveEvent>
 #include <QPaintEvent>
@@ -857,7 +857,7 @@ void Register::setupRegister(const MyMoneyAccount& account, bool showAccountColu
 
 bool Register::focusNextPrevChild(bool next)
 {
-  return Q3Frame::focusNextPrevChild(next);
+  return QFrame::focusNextPrevChild(next);
 }
 
 void Register::setSortOrder(const QString& order)

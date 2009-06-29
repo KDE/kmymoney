@@ -28,7 +28,7 @@
 #include <QRegExp>
 //Added by qt3to4:
 #include <Q3GridLayout>
-#include <Q3Frame>
+#include <QFrame>
 #include <QKeyEvent>
 
 // ----------------------------------------------------------------------------
@@ -43,7 +43,7 @@
 #include "kmymoneycalculator.h"
 
 kMyMoneyCalculator::kMyMoneyCalculator(QWidget* parent, const char *name)
-  : Q3Frame(parent, name)
+  : QFrame(parent, name)
 {
   m_comma = KGlobal::locale()->monetaryDecimalSymbol()[0];
   m_clearOperandOnDigit = false;
@@ -53,7 +53,7 @@ kMyMoneyCalculator::kMyMoneyCalculator(QWidget* parent, const char *name)
   display = new QLabel(this);
   display->setBackgroundColor(QColor("#BDFFB4"));
 
-  display->setFrameStyle( Q3Frame::Panel | Q3Frame::Sunken );
+  display->setFrameStyle( QFrame::Panel | QFrame::Sunken );
   display->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
   grid->addMultiCellWidget(display, 0, 0, 0, 4);
 

@@ -58,7 +58,7 @@
   * without having the user to re-type the data. See setInitialValues()
   * for details.
   */
-class kMyMoneyCalculator : public Q3Frame  {
+class kMyMoneyCalculator : public QFrame  {
    Q_OBJECT
 public:
   kMyMoneyCalculator(QWidget* parent = 0, const char *name = 0);

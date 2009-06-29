@@ -25,7 +25,7 @@
 
 #include <QApplication>
 //Added by qt3to4:
-#include <Q3Frame>
+#include <QFrame>
 #include <QKeyEvent>
 #include <QEvent>
 #include <QDesktopWidget>
@@ -53,7 +53,7 @@ kMyMoneyCompletion::kMyMoneyCompletion(QWidget *parent, const char *name ) :
 
   m_parent = parent;
   setFocusProxy((parent) ? parent : (QWidget*) Qt::NoFocus);
-  setFrameStyle(Q3Frame::PopupPanel | Q3Frame::Raised);
+  setFrameStyle(QFrame::PopupPanel | QFrame::Raised);
   connectSignals(m_selector, m_selector->listView());
 }
 
