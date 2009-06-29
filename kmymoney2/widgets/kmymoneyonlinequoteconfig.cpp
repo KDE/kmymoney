@@ -43,7 +43,6 @@
 kMyMoneyOnlineQuoteConfig::kMyMoneyOnlineQuoteConfig(QWidget *parent )
   : kMyMoneyOnlineQuoteConfigDecl(parent)
 {
-#if 1
   QStringList groups = WebPriceQuote::quoteSources();
 
   loadList(true /*updateResetList*/);
@@ -84,7 +83,6 @@ kMyMoneyOnlineQuoteConfig::kMyMoneyOnlineQuoteConfig(QWidget *parent )
 
   // FIXME deleting a source is not yet implemented
   m_deleteButton->setEnabled(false);
-#endif
 }
 
 void kMyMoneyOnlineQuoteConfig::loadList(const bool updateResetList)
