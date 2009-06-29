@@ -203,11 +203,10 @@ try {
   // check if the database is locked, if not lock it
   readFileInfo();
   if (!m_logonUser.isEmpty() && (!m_override)) {
-    m_error = QString
-        (i18n("Database apparently in use\nOpened by %1 on %2 at %3.\nOpen anyway?"))
-        .arg(m_logonUser)
-        .arg(m_logonAt.date().toString(Qt::ISODate))
-        .arg(m_logonAt.time().toString("hh.mm.ss"));
+    m_error = i18n("Database apparently in use\nOpened by %1 on %2 at %3.\nOpen anyway?",
+        m_logonUser,
+        m_logonAt.date().toString(Qt::ISODate),
+        m_logonAt.time().toString("hh.mm.ss"));
     qDebug("%s", qPrintable(m_error));
     close(false);
     rc = -1;
@@ -241,8 +240,7 @@ int MyMoneyStorageSql::createDatabase (const KUrl& url) {
   DBG("*** Entering MyMoneyStorageSql::createDatabase");
   if (m_dbType == Sqlite3) return(0); // not needed for sqlite
   if (!m_dbType == Mysql) {
-    m_error =
-        QString(i18n("Cannot currently create database for driver %1; please create manually")).arg(driverName());
+    m_error =i18n("Cannot currently create database for driver %1; please create manually",driverName());
     return (1);
   }
   // create the database (only works for mysql at present)
@@ -257,7 +255,7 @@ int MyMoneyStorageSql::createDatabase (const KUrl& url) {
   QString qs = QString("CREATE DATABASE %1;").arg(dbName);
   qm.prepare (qs);
   if (!qm.exec()) {
-    buildError (qm, __func__, QString(i18n("Error in create database %1; do you have create permissions?")).arg(dbName));
+    buildError (qm, __func__, i18n("Error in create database %1; do you have create permissions?",dbName));
     return (1);
   }
   QSqlDatabase::removeDatabase (maindb.connectionName());
