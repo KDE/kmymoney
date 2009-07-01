@@ -673,7 +673,6 @@ void KHomeView::showAccounts(KHomeView::paymentTypeE type, const QString& header
   MyMoneyFile* file = MyMoneyFile::instance();
   QList<MyMoneyAccount> accounts;
   QList<MyMoneyAccount>::Iterator it;
-  QList<MyMoneyAccount>::Iterator prevIt;
   QMap<QString, MyMoneyAccount> nameIdx;
 
   bool showClosedAccounts = kmymoney2->toggleAction("view_show_all_accounts")->isChecked();
@@ -681,7 +680,7 @@ void KHomeView::showAccounts(KHomeView::paymentTypeE type, const QString& header
   // get list of all accounts
   file->accountList(accounts);
   for(it = accounts.begin(); it != accounts.end();) {
-    prevIt = it;
+    bool removeAccount = false;
     if(!(*it).isClosed() || showClosedAccounts) {
       switch((*it).accountType()) {
         case MyMoneyAccount::Expense:
@@ -689,7 +688,7 @@ void KHomeView::showAccounts(KHomeView::paymentTypeE type, const QString& header
           // never show a category account
           // Note: This might be different in a future version when
           //       the homepage also shows category based information
-          it = accounts.erase(it);
+          removeAccount = true;
           break;
 
         // Asset and Liability accounts are only shown if they
@@ -700,7 +699,7 @@ void KHomeView::showAccounts(KHomeView::paymentTypeE type, const QString& header
           // if preferred accounts are requested, then keep in list
           if((*it).value("PreferredAccount") != "Yes"
           || (type & Preferred) == 0) {
-            it = accounts.erase(it);
+            removeAccount = true;
           }
           break;
 
@@ -714,36 +713,37 @@ void KHomeView::showAccounts(KHomeView::paymentTypeE type, const QString& header
           switch(type & (Payment | Preferred)) {
             case Payment:
               if((*it).value("PreferredAccount") == "Yes")
-                it = accounts.erase(it);
+                removeAccount = true;
               break;
 
             case Preferred:
               if((*it).value("PreferredAccount") != "Yes")
-                it = accounts.erase(it);
+                removeAccount = true;
               break;
 
             case Payment | Preferred:
               break;
 
             default:
-              it = accounts.erase(it);
+              removeAccount = true;
               break;
           }
           break;
 
         // filter all accounts that are not used on homepage views
         default:
-          it = accounts.erase(it);
+          removeAccount = true;
           break;
       }
 
     } else if((*it).isClosed() || (*it).isInvest()) {
       // don't show if closed or a stock account
-      it = accounts.erase(it);
+      removeAccount = true;
     }
 
-    // if we still point to the same account we keep it in the list and move on ;-)
-    if(prevIt == it) {
+    if (removeAccount)
+      it = accounts.erase(it);
+    else {
       QString key = (*it).name();
       if(!nameIdx.contains(key)) {
         nameIdx[key] = *it;
