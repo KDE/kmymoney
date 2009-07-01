@@ -670,7 +670,7 @@ void KReportsView::slotDuplicate(void)
 
   if(tab) {
     MyMoneyReport dupe = tab->report();
-    dupe.setName( QString(i18n("Copy of %1")).arg(dupe.name()) );
+    dupe.setName( i18n("Copy of %1",dupe.name()) );
     if ( dupe.comment() == i18n("Default Report") )
       dupe.setComment( i18n("Custom Report") );
     dupe.clearId();

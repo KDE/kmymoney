@@ -211,8 +211,8 @@ void ObjectInfoTable::constructScheduleTable ( void )
           //if it is an assett account, mark it as a transfer
           if ( ! splitAcc.isIncomeExpense() ) {
             splitRow["category"] = ( ( * split_it ).value().isNegative() )
-                                   ? i18n ( "Transfer from %1" ).arg ( splitAcc.fullName() )
-                                   : i18n ( "Transfer to %1" ).arg ( splitAcc.fullName() );
+                                   ? i18n ( "Transfer from %1" , splitAcc.fullName() )
+                                   : i18n ( "Transfer to %1" , splitAcc.fullName() );
           } else {
             splitRow ["category"] = splitAcc.fullName();
           }
