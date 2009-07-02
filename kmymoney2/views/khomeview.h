@@ -141,6 +141,7 @@ private:
   MyMoneyMoney forecastPaymentBalance(const MyMoneyAccount& acc, const MyMoneyMoney& payment, QDate& paymentDate);
 
   KHTMLPart*      m_part;
+  QString         m_html;
   Q3VBoxLayout*    m_qvboxlayoutPage;
   QString         m_filename;
   bool            m_showAllSchedules;

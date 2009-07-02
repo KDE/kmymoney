@@ -202,10 +202,10 @@ void KHomeView::loadView(void)
 
     QString footer = "</body></html>\n";
 
-    m_part->begin();
-    m_part->write(header);
+    m_html.clear();
+    m_html += header;
 
-    m_part->write(QString("<div id=\"summarytitle\">%1</div>").arg(i18n("Your Financial Summary")));
+    m_html += QString("<div id=\"summarytitle\">%1</div>").arg(i18n("Your Financial Summary"));
 
     QStringList settings = KMyMoneyGlobalSettings::itemList();
 
@@ -253,15 +253,18 @@ void KHomeView::loadView(void)
 
 
         }
-        m_part->write("<div class=\"gap\">&nbsp;</div>\n");
+        m_html += "<div class=\"gap\">&nbsp;</div>\n";
       }
     }
 
-    m_part->write("<div id=\"returnlink\">");
-    m_part->write(link(VIEW_WELCOME, QString()) + i18n("Show KMyMoney welcome page") + linkend());
-    m_part->write("</div>");
-    m_part->write("<div id=\"vieweffect\"></div>");
-    m_part->write(footer);
+    m_html += "<div id=\"returnlink\">";
+    m_html += link(VIEW_WELCOME, QString()) + i18n("Show KMyMoney welcome page") + linkend();
+    m_html += "</div>";
+    m_html += "<div id=\"vieweffect\"></div>";
+    m_html += footer;
+
+    m_part->begin();
+    m_part->write(m_html);
     m_part->end();
   }
 }
@@ -401,35 +404,35 @@ void KHomeView::showPayments(void)
     ++d_it;
   }
 
-  m_part->write("<div class=\"shadow\"><div class=\"displayblock\">");
-  m_part->write(QString("<div class=\"summaryheader\">%1</div>\n").arg(i18n("Payments")));
+  m_html += "<div class=\"shadow\"><div class=\"displayblock\">";
+  m_html += QString("<div class=\"summaryheader\">%1</div>\n").arg(i18n("Payments"));
 
   if(!overdues.isEmpty()) {
-    m_part->write("<div class=\"gap\">&nbsp;</div>\n");
+    m_html += "<div class=\"gap\">&nbsp;</div>\n";
 
     qBubbleSort(overdues);
     QList<MyMoneySchedule>::Iterator it;
     QList<MyMoneySchedule>::Iterator it_f;
 
-    m_part->write("<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >");
-    m_part->write(QString("<tr class=\"itemtitle warningtitle\" ><td colspan=\"5\">%1</td></tr>\n").arg(showColoredAmount(i18n("Overdue payments"), true)));
-    m_part->write("<tr class=\"item warning\">");
-    m_part->write("<td class=\"left\" width=\"10%\">");
-    m_part->write(i18n("Date"));
-    m_part->write("</td>");
-    m_part->write("<td class=\"left\" width=\"40%\">");
-    m_part->write(i18n("Schedule"));
-    m_part->write("</td>");
-    m_part->write("<td class=\"left\" width=\"20%\">");
-    m_part->write(i18n("Account"));
-    m_part->write("</td>");
-    m_part->write("<td class=\"right\" width=\"15%\">");
-    m_part->write(i18n("Amount"));
-    m_part->write("</td>");
-    m_part->write("<td class=\"right\" width=\"15%\">");
-    m_part->write(i18n("Balance after"));
-    m_part->write("</td>");
-    m_part->write("</tr>");
+    m_html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
+    m_html += QString("<tr class=\"itemtitle warningtitle\" ><td colspan=\"5\">%1</td></tr>\n").arg(showColoredAmount(i18n("Overdue payments"), true));
+    m_html += "<tr class=\"item warning\">";
+    m_html += "<td class=\"left\" width=\"10%\">";
+    m_html += i18n("Date");
+    m_html += "</td>";
+    m_html += "<td class=\"left\" width=\"40%\">";
+    m_html += i18n("Schedule");
+    m_html += "</td>";
+    m_html += "<td class=\"left\" width=\"20%\">";
+    m_html += i18n("Account");
+    m_html += "</td>";
+    m_html += "<td class=\"right\" width=\"15%\">";
+    m_html += i18n("Amount");
+    m_html += "</td>";
+    m_html += "<td class=\"right\" width=\"15%\">";
+    m_html += i18n("Balance after");
+    m_html += "</td>";
+    m_html += "</tr>";
 
     for(it = overdues.begin(); it != overdues.end(); ++it) {
       // determine number of overdue payments
@@ -444,9 +447,9 @@ void KHomeView::showPayments(void)
           break;
       }
 
-      m_part->write(QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd"));
+      m_html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");
       showPaymentEntry(*it, cnt);
-      m_part->write("</tr>");
+      m_html += "</tr>";
       // make sure to not repeat overdues later again
       for(it_f = schedule.begin(); it_f != schedule.end();) {
         if((*it).id() == (*it_f).id()) {
@@ -456,7 +459,7 @@ void KHomeView::showPayments(void)
         ++it_f;
       }
     }
-    m_part->write("</table>");
+    m_html += "</table>";
   }
 
   if(!schedule.isEmpty()) {
@@ -483,60 +486,60 @@ void KHomeView::showPayments(void)
     }
 
     if (todays.count() > 0) {
-      m_part->write("<div class=\"gap\">&nbsp;</div>\n");
-      m_part->write("<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >");
-      m_part->write(QString("<tr class=\"itemtitle\"><td class=\"left\" colspan=\"5\">%1</td></tr>\n").arg(i18n("Today's payments")));
-      m_part->write("<tr class=\"item\">");
-      m_part->write("<td class=\"left\" width=\"10%\">");
-      m_part->write(i18n("Date"));
-      m_part->write("</td>");
-      m_part->write("<td class=\"left\" width=\"40%\">");
-      m_part->write(i18n("Schedule"));
-      m_part->write("</td>");
-      m_part->write("<td class=\"left\" width=\"20%\">");
-      m_part->write(i18n("Account"));
-      m_part->write("</td>");
-      m_part->write("<td class=\"right\" width=\"15%\">");
-      m_part->write(i18n("Amount"));
-      m_part->write("</td>");
-      m_part->write("<td class=\"right\" width=\"15%\">");
-      m_part->write(i18n("Balance after"));
-      m_part->write("</td>");
-      m_part->write("</tr>");
+      m_html += "<div class=\"gap\">&nbsp;</div>\n";
+      m_html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
+      m_html += QString("<tr class=\"itemtitle\"><td class=\"left\" colspan=\"5\">%1</td></tr>\n").arg(i18n("Today's payments"));
+      m_html += "<tr class=\"item\">";
+      m_html += "<td class=\"left\" width=\"10%\">";
+      m_html += i18n("Date");
+      m_html += "</td>";
+      m_html += "<td class=\"left\" width=\"40%\">";
+      m_html += i18n("Schedule");
+      m_html += "</td>";
+      m_html += "<td class=\"left\" width=\"20%\">";
+      m_html += i18n("Account");
+      m_html += "</td>";
+      m_html += "<td class=\"right\" width=\"15%\">";
+      m_html += i18n("Amount");
+      m_html += "</td>";
+      m_html += "<td class=\"right\" width=\"15%\">";
+      m_html += i18n("Balance after");
+      m_html += "</td>";
+      m_html += "</tr>";
 
       for(t_it = todays.begin(); t_it != todays.end(); ++t_it) {
-        m_part->write(QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd"));
+        m_html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");
         showPaymentEntry(*t_it);
-        m_part->write("</tr>");
+        m_html += "</tr>";
       }
-      m_part->write("</table>");
+      m_html += "</table>";
     }
 
     if (!schedule.isEmpty())
     {
-      m_part->write("<div class=\"gap\">&nbsp;</div>\n");
+      m_html += "<div class=\"gap\">&nbsp;</div>\n";
 
       QList<MyMoneySchedule>::Iterator it;
 
-      m_part->write("<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >");
-      m_part->write(QString("<tr class=\"itemtitle\"><td class=\"left\" colspan=\"5\">%1</td></tr>\n").arg(i18n("Future payments")));
-      m_part->write("<tr class=\"item\">");
-      m_part->write("<td class=\"left\" width=\"10%\">");
-      m_part->write(i18n("Date"));
-      m_part->write("</td>");
-      m_part->write("<td class=\"left\" width=\"40%\">");
-      m_part->write(i18n("Schedule"));
-      m_part->write("</td>");
-      m_part->write("<td class=\"left\" width=\"20%\">");
-      m_part->write(i18n("Account"));
-      m_part->write("</td>");
-      m_part->write("<td class=\"right\" width=\"15%\">");
-      m_part->write(i18n("Amount"));
-      m_part->write("</td>");
-      m_part->write("<td class=\"right\" width=\"15%\">");
-      m_part->write(i18n("Balance after"));
-      m_part->write("</td>");
-      m_part->write("</tr>");
+      m_html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
+      m_html += QString("<tr class=\"itemtitle\"><td class=\"left\" colspan=\"5\">%1</td></tr>\n").arg(i18n("Future payments"));
+      m_html += "<tr class=\"item\">";
+      m_html += "<td class=\"left\" width=\"10%\">";
+      m_html += i18n("Date");
+      m_html += "</td>";
+      m_html += "<td class=\"left\" width=\"40%\">";
+      m_html += i18n("Schedule");
+      m_html += "</td>";
+      m_html += "<td class=\"left\" width=\"20%\">";
+      m_html += i18n("Account");
+      m_html += "</td>";
+      m_html += "<td class=\"right\" width=\"15%\">";
+      m_html += i18n("Amount");
+      m_html += "</td>";
+      m_html += "<td class=\"right\" width=\"15%\">";
+      m_html += i18n("Balance after");
+      m_html += "</td>";
+      m_html += "</tr>";
 
       // show all or the first 6 entries
       int cnt;
@@ -568,9 +571,9 @@ void KHomeView::showPayments(void)
         if(cnt > 0)
           --cnt;
 
-        m_part->write(QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd"));
+        m_html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");
         showPaymentEntry(*it);
-        m_part->write("</tr>");
+        m_html += "</tr>";
 
         // for single occurence we have reported everything so we
         // better get out of here.
@@ -585,20 +588,20 @@ void KHomeView::showPayments(void)
       while(1);
 
       if (needMoreLess) {
-        m_part->write(QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd"));
-        m_part->write("<td>");
+        m_html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");
+        m_html += "<td>";
         if(m_showAllSchedules) {
-          m_part->write(link(VIEW_SCHEDULE,  QString("?mode=%1").arg("reduced")) + i18n("Less...") + linkend());
+          m_html += link(VIEW_SCHEDULE,  QString("?mode=%1").arg("reduced")) + i18n("Less...") + linkend();
         } else {
-          m_part->write(link(VIEW_SCHEDULE,  QString("?mode=%1").arg("full")) + i18n("More...") + linkend());
+          m_html += link(VIEW_SCHEDULE,  QString("?mode=%1").arg("full")) + i18n("More...") + linkend();
         }
-        m_part->write("</td><td></td><td></td><td></td><td></td>");
-        m_part->write("</tr>");
+        m_html += "</td><td></td><td></td><td></td><td></td>";
+        m_html += "</tr>";
       }
-      m_part->write("</table>");
+      m_html += "</table>";
     }
   }
-  m_part->write("</div></div>");
+  m_html += "</div></div>";
 }
 
 void KHomeView::showPaymentEntry(const MyMoneySchedule& sched, int cnt)
@@ -659,7 +662,7 @@ void KHomeView::showPaymentEntry(const MyMoneySchedule& sched, int cnt)
         tmp += "</td>";
 
         // qDebug("paymentEntry = '%s'", tmp.toLatin1());
-        m_part->write(tmp);
+        m_html += tmp;
       }
     }
   } catch(MyMoneyException* e) {
@@ -763,29 +766,29 @@ void KHomeView::showAccounts(KHomeView::paymentTypeE type, const QString& header
     QString tmp;
     int i = 0;
     tmp = "<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">" + header + "</div>\n<div class=\"gap\">&nbsp;</div>\n";
-    m_part->write(tmp);
-    m_part->write("<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >");
-    m_part->write("<tr class=\"item\"><td class=\"left\" width=\"35%\">");
-    m_part->write(i18n("Account"));
-    m_part->write("</td><td width=\"25%\" class=\"right\">");
-    m_part->write(i18n("Current Balance"));
-    m_part->write("</td>");
+    m_html += tmp;
+    m_html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
+    m_html += "<tr class=\"item\"><td class=\"left\" width=\"35%\">";
+    m_html += i18n("Account");
+    m_html += "</td><td width=\"25%\" class=\"right\">";
+    m_html += i18n("Current Balance");
+    m_html += "</td>";
     //only show limit info if user chose to do so
     if(KMyMoneyGlobalSettings::showLimitInfo()) {
-      m_part->write("<td width=\"40%\" class=\"right\">");
-      m_part->write(i18n("To Minimum Balance / Maximum Credit"));
-      m_part->write("</td>");
+      m_html += "<td width=\"40%\" class=\"right\">";
+      m_html += i18n("To Minimum Balance / Maximum Credit");
+      m_html += "</td>";
     }
-    m_part->write("</tr>");
+    m_html += "</tr>";
 
 
     QMap<QString, MyMoneyAccount>::const_iterator it_m;
     for(it_m = nameIdx.constBegin(); it_m != nameIdx.constEnd(); ++it_m) {
-      m_part->write(QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd"));
+      m_html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");
       showAccountEntry(*it_m);
-      m_part->write("</tr>");
+      m_html += "</tr>";
     }
-    m_part->write("</table></div></div>");
+    m_html += "</table></div></div>";
   }
 }
 
@@ -855,7 +858,7 @@ void KHomeView::showAccountEntry(const MyMoneyAccount& acc, const MyMoneyMoney& 
     }
   }
   // qDebug("accountEntry = '%s'", tmp.toLatin1());
-  m_part->write(tmp);
+  m_html += tmp;
 }
 
 MyMoneyMoney KHomeView::investmentBalance(const MyMoneyAccount& acc)
@@ -898,29 +901,28 @@ void KHomeView::showFavoriteReports(void)
     {
       if ( (*it_report).isFavorite() ) {
         if(firstTime) {
-          m_part->write(QString("<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">%1</div>\n<div class=\"gap\">&nbsp;</div>\n").arg(i18n("Favorite Reports")));
-          m_part->write("<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >");
-          m_part->write("<tr class=\"item\"><td class=\"left\" width=\"40%\">");
-          m_part->write(i18n("Report"));
-          m_part->write("</td><td width=\"60%\" class=\"left\">");
-          m_part->write(i18n("Comment"));
-          m_part->write("</td></tr>");
+          m_html += QString("<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">%1</div>\n<div class=\"gap\">&nbsp;</div>\n").arg(i18n("Favorite Reports"));
+          m_html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
+          m_html += "<tr class=\"item\"><td class=\"left\" width=\"40%\">";
+          m_html += i18n("Report");
+          m_html += "</td><td width=\"60%\" class=\"left\">";
+          m_html += i18n("Comment");
+          m_html += "</td></tr>";
           firstTime = false;
         }
 
-        m_part->write(QString("<tr class=\"row-%1\"><td>%2%3%4</td><td align=\"left\">%5</td></tr>")
+        m_html += QString("<tr class=\"row-%1\"><td>%2%3%4</td><td align=\"left\">%5</td></tr>")
           .arg(row++ & 0x01 ? "even" : "odd")
           .arg(link(VIEW_REPORTS, QString("?id=%1").arg((*it_report).id())))
           .arg((*it_report).name())
           .arg(linkend())
-          .arg((*it_report).comment())
-        );
+          .arg((*it_report).comment());
       }
 
       ++it_report;
     }
     if(!firstTime)
-      m_part->write("</table></div></div>");
+      m_html += "</table></div></div>";
   }
 }
 
@@ -965,20 +967,20 @@ void KHomeView::showForecast(void)
       beginDay = m_forecast.accountsCycle();
 
     // Now output header
-    m_part->write(QString("<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">%1</div>\n<div class=\"gap\">&nbsp;</div>\n").arg(i18n("%1 Day Forecast",m_forecast.forecastDays())));
-    m_part->write("<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >");
-    m_part->write("<tr class=\"item\"><td class=\"left\" width=\"40%\">");
-    m_part->write(i18n("Account"));
-    m_part->write("</td>");
+    m_html += QString("<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">%1</div>\n<div class=\"gap\">&nbsp;</div>\n").arg(i18n("%1 Day Forecast",m_forecast.forecastDays()));
+    m_html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
+    m_html += "<tr class=\"item\"><td class=\"left\" width=\"40%\">";
+    m_html += i18n("Account");
+    m_html += "</td>";
     int colWidth = 55/ (m_forecast.forecastDays() / m_forecast.accountsCycle());
     for(i = 0; (i*m_forecast.accountsCycle() + beginDay) <= m_forecast.forecastDays(); ++i) {
-      m_part->write(QString("<td width=\"%1%\" class=\"right\">").arg(colWidth));
+      m_html += QString("<td width=\"%1%\" class=\"right\">").arg(colWidth);
 
-      m_part->write(i18n("%1 days",i*m_forecast.accountsCycle() + beginDay));
-      m_part->write("</td>");
+      m_html += i18n("%1 days",i*m_forecast.accountsCycle() + beginDay);
+      m_html += "</td>";
       colspan++;
     }
-    m_part->write("</tr>");
+    m_html += "</tr>";
 
     // Now output entries
     i = 0;
@@ -987,9 +989,9 @@ void KHomeView::showForecast(void)
     for(it_account = nameIdx.constBegin(); it_account != nameIdx.constEnd(); ++it_account) {
       //MyMoneyAccount acc = (*it_n);
 
-      m_part->write(QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd"));
-      m_part->write(QString("<td width=\"40%\">") +
-          link(VIEW_LEDGER, QString("?id=%1").arg((*it_account).id())) + (*it_account).name() + linkend() + "</td>");
+      m_html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");
+      m_html += QString("<td width=\"40%\">") +
+          link(VIEW_LEDGER, QString("?id=%1").arg((*it_account).id())) + (*it_account).name() + linkend() + "</td>";
 
       int dropZero = -1; //account dropped below zero
       int dropMinimum = -1; //account dropped below minimum balance
@@ -1011,11 +1013,11 @@ void KHomeView::showForecast(void)
         QString amount;
         amount = forecastBalance.formatMoney( *it_account, currency);
         amount.replace(" ","&nbsp;");
-        m_part->write(QString("<td width=\"%1%\" align=\"right\">").arg(colWidth));
-        m_part->write(QString("%1</td>").arg(showColoredAmount(amount, forecastBalance.isNegative())));
+        m_html += QString("<td width=\"%1%\" align=\"right\">").arg(colWidth);
+        m_html += QString("%1</td>").arg(showColoredAmount(amount, forecastBalance.isNegative()));
       }
 
-      m_part->write("</tr>");
+      m_html += "</tr>";
 
       //Check if the account is going to be below zero or below the minimal balance in the forecast period
 
@@ -1050,7 +1052,7 @@ void KHomeView::showForecast(void)
         }
 
         if(!msg.isEmpty()) {
-          m_part->write(QString("<tr class=\"warning\" style=\"font-weight: normal;\" ><td colspan=%2 align=\"center\" >%1</td></tr>").arg(msg).arg(colspan));
+          m_html += QString("<tr class=\"warning\" style=\"font-weight: normal;\" ><td colspan=%2 align=\"center\" >%1</td></tr>").arg(msg).arg(colspan);
         }
          }
       // a drop below zero is always shown
@@ -1081,10 +1083,10 @@ void KHomeView::showForecast(void)
              }
          }
          if(!msg.isEmpty()) {
-           m_part->write(QString("<tr class=\"warning\"><td colspan=%2 align=\"center\" ><b>%1</b></td></tr>").arg(msg).arg(colspan));
+           m_html += QString("<tr class=\"warning\"><td colspan=%2 align=\"center\" ><b>%1</b></td></tr>").arg(msg).arg(colspan);
          }
     }
-    m_part->write("</table></div></div>");
+    m_html += "</table></div></div>";
 
   }
 }
@@ -1255,29 +1257,29 @@ void KHomeView::showAssetsLiabilities(void)
   //only do it if we have assets or liabilities account
   if(nameAssetsIdx.count() > 0 || nameLiabilitiesIdx.count() > 0) {
     //print header
-    m_part->write("<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">" + i18n("Assets and Liabilities Summary") + "</div>\n<div class=\"gap\">&nbsp;</div>\n");
-    m_part->write("<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >");
+    m_html += "<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">" + i18n("Assets and Liabilities Summary") + "</div>\n<div class=\"gap\">&nbsp;</div>\n";
+    m_html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
     //column titles
-    m_part->write("<tr class=\"item\"><td class=\"left\" width=\"30%\">");
-    m_part->write(i18n("Asset Accounts"));
-    m_part->write("</td>");
-    m_part->write("<td width=\"15%\" class=\"right\">");
-    m_part->write(i18n("Current Balance"));
-    m_part->write("</td>");
+    m_html += "<tr class=\"item\"><td class=\"left\" width=\"30%\">";
+    m_html += i18n("Asset Accounts");
+    m_html += "</td>";
+    m_html += "<td width=\"15%\" class=\"right\">";
+    m_html += i18n("Current Balance");
+    m_html += "</td>";
     //intermediate row to separate both columns
-    m_part->write("<td width=\"10%\" class=\"setcolor\"></td>");
-    m_part->write("<td class=\"left\" width=\"30%\">");
-    m_part->write(i18n("Liability Accounts"));
-    m_part->write("</td>");
-    m_part->write("<td width=\"15%\" class=\"right\">");
-    m_part->write(i18n("Current Balance"));
-    m_part->write("</td></tr>");
+    m_html += "<td width=\"10%\" class=\"setcolor\"></td>";
+    m_html += "<td class=\"left\" width=\"30%\">";
+    m_html += i18n("Liability Accounts");
+    m_html += "</td>";
+    m_html += "<td width=\"15%\" class=\"right\">";
+    m_html += i18n("Current Balance");
+    m_html += "</td></tr>";
 
     //get asset and liability accounts
     QMap<QString, MyMoneyAccount>::const_iterator asset_it = nameAssetsIdx.constBegin();
     QMap<QString,MyMoneyAccount>::const_iterator liabilities_it = nameLiabilitiesIdx.constBegin();
     for(; asset_it != nameAssetsIdx.constEnd() || liabilities_it != nameLiabilitiesIdx.constEnd();) {
-      m_part->write(QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd"));
+      m_html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");
       //write an asset account if we still have any
       if(asset_it != nameAssetsIdx.constEnd()) {
         MyMoneyMoney value;
@@ -1302,11 +1304,11 @@ void KHomeView::showAssetsLiabilities(void)
         ++asset_it;
       } else {
         //write a white space if we don't
-        m_part->write("<td></td><td></td>");
+        m_html += "<td></td><td></td>";
       }
 
       //leave the intermediate column empty
-      m_part->write("<td class=\"setcolor\"></td>");
+      m_html += "<td class=\"setcolor\"></td>";
 
       //write a liability account
       if(liabilities_it != nameLiabilitiesIdx.constEnd()) {
@@ -1327,9 +1329,9 @@ void KHomeView::showAssetsLiabilities(void)
         ++liabilities_it;
       } else {
         //leave the space empty if we run out of liabilities
-        m_part->write("<td></td><td></td>");
+        m_html += "<td></td><td></td>";
       }
-      m_part->write("</tr>");
+      m_html += "</tr>";
     }
     //calculate net worth
     MyMoneyMoney netWorth = netAssets+netLiabilities;
@@ -1342,27 +1344,27 @@ void KHomeView::showAssetsLiabilities(void)
     amountLiabilities.replace(" ","&nbsp;");
     amountNetWorth.replace(" ","&nbsp;");
 
-    m_part->write(QString("<tr class=\"row-%1\" style=\"font-weight:bold;\">").arg(i++ & 0x01 ? "even" : "odd"));
+    m_html += QString("<tr class=\"row-%1\" style=\"font-weight:bold;\">").arg(i++ & 0x01 ? "even" : "odd");
 
     //print total for assets
-    m_part->write(QString("<td class=\"left\">%1</td><td align=\"right\">%2</td>").arg(i18n("Total Assets")).arg(showColoredAmount(amountAssets, netAssets.isNegative())));
+    m_html += QString("<td class=\"left\">%1</td><td align=\"right\">%2</td>").arg(i18n("Total Assets")).arg(showColoredAmount(amountAssets, netAssets.isNegative()));
 
     //leave the intermediate column empty
-    m_part->write("<td class=\"setcolor\"></td>");
+    m_html += "<td class=\"setcolor\"></td>";
 
     //print total liabilities
-    m_part->write(QString("<td class=\"left\">%1</td><td align=\"right\">%2</td>").arg(i18n("Total Liabilities")).arg(showColoredAmount(amountLiabilities, netLiabilities.isNegative())));
-    m_part->write("</tr>");
+    m_html += QString("<td class=\"left\">%1</td><td align=\"right\">%2</td>").arg(i18n("Total Liabilities")).arg(showColoredAmount(amountLiabilities, netLiabilities.isNegative()));
+    m_html += "</tr>";
 
     //print net worth
-    m_part->write(QString("<tr class=\"row-%1\" style=\"font-weight:bold;\">").arg(i++ & 0x01 ? "even" : "odd"));
+    m_html += QString("<tr class=\"row-%1\" style=\"font-weight:bold;\">").arg(i++ & 0x01 ? "even" : "odd");
 
-    m_part->write("<td></td><td></td><td class=\"setcolor\"></td>");
-    m_part->write(QString("<td class=\"left\">%1</td><td align=\"right\">%2</td>").arg(i18n("Net Worth")).arg(showColoredAmount(amountNetWorth, netWorth.isNegative() )));
+    m_html += "<td></td><td></td><td class=\"setcolor\"></td>";
+    m_html += QString("<td class=\"left\">%1</td><td align=\"right\">%2</td>").arg(i18n("Net Worth")).arg(showColoredAmount(amountNetWorth, netWorth.isNegative() ));
 
-    m_part->write("</tr>");
-    m_part->write("</table>");
-    m_part->write("</div></div>");
+    m_html += "</tr>";
+    m_html += "</table>";
+    m_html += "</div></div>";
   }
 }
 
@@ -1390,26 +1392,26 @@ void KHomeView::showBudget(void)
     PivotGrid grid = table.grid();
 
     //div header
-    m_part->write("<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">" + i18n("Budget") + "</div>\n<div class=\"gap\">&nbsp;</div>\n");
+    m_html += "<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">" + i18n("Budget") + "</div>\n<div class=\"gap\">&nbsp;</div>\n";
 
     //display budget summary
-    m_part->write("<table width=\"75%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >");
-    m_part->write("<tr class=\"itemtitle\">");
-    m_part->write("<td class=\"left\" colspan=\"3\">");
-    m_part->write(i18n("Current Month Summary"));
-    m_part->write("</td></tr>");
-    m_part->write("<tr class=\"item\">");
-    m_part->write("<td class=\"right\" width=\"33%\">");
-    m_part->write(i18n("Budgeted"));
-    m_part->write("</td>");
-    m_part->write("<td class=\"right\" width=\"33%\">");
-    m_part->write(i18n("Actual"));
-    m_part->write("</td>");
-    m_part->write("<td class=\"right\" width=\"33%\">");
-    m_part->write(i18n("Difference"));
-    m_part->write("</td></tr>");
+    m_html += "<table width=\"75%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
+    m_html += "<tr class=\"itemtitle\">";
+    m_html += "<td class=\"left\" colspan=\"3\">";
+    m_html += i18n("Current Month Summary");
+    m_html += "</td></tr>";
+    m_html += "<tr class=\"item\">";
+    m_html += "<td class=\"right\" width=\"33%\">";
+    m_html += i18n("Budgeted");
+    m_html += "</td>";
+    m_html += "<td class=\"right\" width=\"33%\">";
+    m_html += i18n("Actual");
+    m_html += "</td>";
+    m_html += "<td class=\"right\" width=\"33%\">";
+    m_html += i18n("Difference");
+    m_html += "</td></tr>";
 
-    m_part->write(QString("<tr class=\"row-odd\">"));
+    m_html += QString("<tr class=\"row-odd\">");
 
     MyMoneyMoney totalBudgetValue = grid.m_total[eBudget].m_total;
     MyMoneyMoney totalActualValue = grid.m_total[eActual].m_total;
@@ -1419,32 +1421,32 @@ void KHomeView::showBudget(void)
     QString totalActualAmount = totalActualValue.formatMoney(file->baseCurrency().tradingSymbol(), prec);
     QString totalBudgetDiffAmount = totalBudgetDiffValue.formatMoney(file->baseCurrency().tradingSymbol(), prec);
 
-    m_part->write(QString("<td align=\"right\">%1</td>").arg(showColoredAmount(totalBudgetAmount, totalBudgetValue.isNegative())));
-    m_part->write(QString("<td align=\"right\">%1</td>").arg(showColoredAmount(totalActualAmount, totalActualValue.isNegative())));
-    m_part->write(QString("<td align=\"right\">%1</td>").arg(showColoredAmount(totalBudgetDiffAmount, totalBudgetDiffValue.isNegative())));
-    m_part->write("</tr>");
-    m_part->write("</table>");
+    m_html += QString("<td align=\"right\">%1</td>").arg(showColoredAmount(totalBudgetAmount, totalBudgetValue.isNegative()));
+    m_html += QString("<td align=\"right\">%1</td>").arg(showColoredAmount(totalActualAmount, totalActualValue.isNegative()));
+    m_html += QString("<td align=\"right\">%1</td>").arg(showColoredAmount(totalBudgetDiffAmount, totalBudgetDiffValue.isNegative()));
+    m_html += "</tr>";
+    m_html += "</table>";
 
     //budget overrun
-    m_part->write("<div class=\"gap\">&nbsp;</div>\n");
-    m_part->write("<table width=\"75%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >");
-    m_part->write("<tr class=\"itemtitle\">");
-    m_part->write("<td class=\"left\" colspan=\"4\">");
-    m_part->write(i18n("Budget Overruns"));
-    m_part->write("</td></tr>");
-    m_part->write("<tr class=\"item\">");
-    m_part->write("<td class=\"left\" width=\"30%\">");
-    m_part->write(i18n("Account"));
-    m_part->write("</td>");
-    m_part->write("<td class=\"right\" width=\"20%\">");
-    m_part->write(i18n("Budgeted"));
-    m_part->write("</td>");
-    m_part->write("<td class=\"right\" width=\"20%\">");
-    m_part->write(i18n("Actual"));
-    m_part->write("</td>");
-    m_part->write("<td class=\"right\" width=\"20%\">");
-    m_part->write(i18n("Difference"));
-    m_part->write("</td></tr>");
+    m_html += "<div class=\"gap\">&nbsp;</div>\n";
+    m_html += "<table width=\"75%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
+    m_html += "<tr class=\"itemtitle\">";
+    m_html += "<td class=\"left\" colspan=\"4\">";
+    m_html += i18n("Budget Overruns");
+    m_html += "</td></tr>";
+    m_html += "<tr class=\"item\">";
+    m_html += "<td class=\"left\" width=\"30%\">";
+    m_html += i18n("Account");
+    m_html += "</td>";
+    m_html += "<td class=\"right\" width=\"20%\">";
+    m_html += i18n("Budgeted");
+    m_html += "</td>";
+    m_html += "<td class=\"right\" width=\"20%\">";
+    m_html += i18n("Actual");
+    m_html += "</td>";
+    m_html += "<td class=\"right\" width=\"20%\">";
+    m_html += i18n("Difference");
+    m_html += "</td></tr>";
 
 
     PivotGrid::iterator it_outergroup = grid.begin();
@@ -1464,11 +1466,11 @@ void KHomeView::showBudget(void)
 
             //write the outergroup if it is the first row of outergroup being shown
             if(i == 0) {
-              m_part->write("<tr style=\"font-weight:bold;\">");
-              m_part->write(QString("<td class=\"left\" colspan=\"4\">%1</td>").arg(KMyMoneyUtils::accountTypeToString( rowname.accountType())));
-              m_part->write("</tr>");
+              m_html += "<tr style=\"font-weight:bold;\">";
+              m_html += QString("<td class=\"left\" colspan=\"4\">%1</td>").arg(KMyMoneyUtils::accountTypeToString( rowname.accountType()));
+              m_html += "</tr>";
             }
-            m_part->write(QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd"));
+            m_html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");
 
             //get values from grid
             MyMoneyMoney actualValue = it_row.value()[eActual][1];
@@ -1481,13 +1483,13 @@ void KHomeView::showBudget(void)
             QString budgetDiffAmount = budgetDiffValue.formatMoney(file->baseCurrency().tradingSymbol(), prec);
 
             //account name
-            m_part->write(QString("<td>") + link(VIEW_LEDGER, QString("?id=%1").arg(rowname.id())) + rowname.name() + linkend() + "</td>");
+            m_html += QString("<td>") + link(VIEW_LEDGER, QString("?id=%1").arg(rowname.id())) + rowname.name() + linkend() + "</td>";
 
             //show amounts
-            m_part->write(QString("<td align=\"right\">%1</td>").arg(showColoredAmount(budgetAmount, budgetValue.isNegative())));
-            m_part->write(QString("<td align=\"right\">%1</td>").arg(showColoredAmount(actualAmount, actualValue.isNegative())));
-            m_part->write(QString("<td align=\"right\">%1</td>").arg(showColoredAmount(budgetDiffAmount, budgetDiffValue.isNegative())));
-            m_part->write("</tr>");
+            m_html += QString("<td align=\"right\">%1</td>").arg(showColoredAmount(budgetAmount, budgetValue.isNegative()));
+            m_html += QString("<td align=\"right\">%1</td>").arg(showColoredAmount(actualAmount, actualValue.isNegative()));
+            m_html += QString("<td align=\"right\">%1</td>").arg(showColoredAmount(budgetDiffAmount, budgetDiffValue.isNegative()));
+            m_html += "</tr>";
           }
           ++it_row;
         }
@@ -1498,11 +1500,11 @@ void KHomeView::showBudget(void)
 
     //if no negative differences are found, then inform that
     if(i == 0) {
-      m_part->write(QString("<tr class=\"row-%1\" style=\"font-weight:bold;\">").arg(i++ & 0x01 ? "even" : "odd"));
-      m_part->write(QString("<td class=\"center\" colspan=\"4\">%1</td>").arg(i18n("No Budget Categories have been overrun")));
-      m_part->write("</tr>");
+      m_html += QString("<tr class=\"row-%1\" style=\"font-weight:bold;\">").arg(i++ & 0x01 ? "even" : "odd");
+      m_html += QString("<td class=\"center\" colspan=\"4\">%1</td>").arg(i18n("No Budget Categories have been overrun"));
+      m_html += "</tr>";
     }
-    m_part->write("</table></div></div>");
+    m_html += "</table></div></div>";
   }
 }
 
@@ -1798,92 +1800,92 @@ void KHomeView::showCashFlowSummary()
   amountLiquidWorth.replace(" ","&nbsp;");
 
   //show the summary
-  m_part->write("<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">" + i18n("Cash Flow Summary") + "</div>\n<div class=\"gap\">&nbsp;</div>\n");
+  m_html += "<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">" + i18n("Cash Flow Summary") + "</div>\n<div class=\"gap\">&nbsp;</div>\n";
 
   //print header
-  m_part->write("<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >");
+  m_html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
   //income and expense title
-  m_part->write("<tr class=\"itemtitle\">");
-  m_part->write("<td class=\"left\" colspan=\"4\">");
-  m_part->write(i18n("Income and Expenses of Current Month"));
-  m_part->write("</td></tr>");
+  m_html += "<tr class=\"itemtitle\">";
+  m_html += "<td class=\"left\" colspan=\"4\">";
+  m_html += i18n("Income and Expenses of Current Month");
+  m_html += "</td></tr>";
   //column titles
-  m_part->write("<tr class=\"item\">");
-  m_part->write("<td width=\"25%\" class=\"center\">");
-  m_part->write(i18n("Income"));
-  m_part->write("</td>");
-  m_part->write("<td width=\"25%\" class=\"center\">");
-  m_part->write(i18n("Scheduled Income"));
-  m_part->write("</td>");
-  m_part->write("<td width=\"25%\" class=\"center\">");
-  m_part->write(i18n("Expenses"));
-  m_part->write("</td>");
-  m_part->write("<td width=\"25%\" class=\"center\">");
-  m_part->write(i18n("Scheduled Expenses"));
-  m_part->write("</td>");
-  m_part->write("</tr>");
+  m_html += "<tr class=\"item\">";
+  m_html += "<td width=\"25%\" class=\"center\">";
+  m_html += i18n("Income");
+  m_html += "</td>";
+  m_html += "<td width=\"25%\" class=\"center\">";
+  m_html += i18n("Scheduled Income");
+  m_html += "</td>";
+  m_html += "<td width=\"25%\" class=\"center\">";
+  m_html += i18n("Expenses");
+  m_html += "</td>";
+  m_html += "<td width=\"25%\" class=\"center\">";
+  m_html += i18n("Scheduled Expenses");
+  m_html += "</td>";
+  m_html += "</tr>";
 
   //add row with banding
-  m_part->write(QString("<tr class=\"row-even\" style=\"font-weight:bold;\">"));
+  m_html += QString("<tr class=\"row-even\" style=\"font-weight:bold;\">");
 
   //print current income
-  m_part->write(QString("<td align=\"right\">%2</td>").arg(showColoredAmount(amountIncome, incomeValue.isNegative())));
+  m_html += QString("<td align=\"right\">%2</td>").arg(showColoredAmount(amountIncome, incomeValue.isNegative()));
 
   //print the scheduled income
-  m_part->write(QString("<td align=\"right\">%2</td>").arg(showColoredAmount(amountScheduledIncome, scheduledIncome.isNegative())));
+  m_html += QString("<td align=\"right\">%2</td>").arg(showColoredAmount(amountScheduledIncome, scheduledIncome.isNegative()));
 
   //print current expenses
-  m_part->write(QString("<td align=\"right\">%2</td>").arg(showColoredAmount(amountExpense,  expenseValue.isNegative())));
+  m_html += QString("<td align=\"right\">%2</td>").arg(showColoredAmount(amountExpense,  expenseValue.isNegative()));
 
   //print the scheduled expenses
-  m_part->write(QString("<td align=\"right\">%2</td>").arg(showColoredAmount(amountScheduledExpense,  scheduledExpense.isNegative())));
-  m_part->write("</tr>");
+  m_html += QString("<td align=\"right\">%2</td>").arg(showColoredAmount(amountScheduledExpense,  scheduledExpense.isNegative()));
+  m_html += "</tr>";
 
-  m_part->write("</table>");
+  m_html += "</table>";
 
   //print header of assets and liabilities
-  m_part->write("<div class=\"gap\">&nbsp;</div>\n");
-  m_part->write("<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >");
+  m_html += "<div class=\"gap\">&nbsp;</div>\n";
+  m_html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
   //assets and liabilities title
-  m_part->write("<tr class=\"itemtitle\">");
-  m_part->write("<td class=\"left\" colspan=\"4\">");
-  m_part->write(i18n("Liquid Assets and Liabilities"));
-  m_part->write("</td></tr>");
+  m_html += "<tr class=\"itemtitle\">";
+  m_html += "<td class=\"left\" colspan=\"4\">";
+  m_html += i18n("Liquid Assets and Liabilities");
+  m_html += "</td></tr>";
   //column titles
-  m_part->write("<tr class=\"item\">");
-  m_part->write("<td width=\"25%\" class=\"center\">");
-  m_part->write(i18n("Liquid Assets"));
-  m_part->write("</td>");
-  m_part->write("<td width=\"25%\" class=\"center\">");
-  m_part->write(i18n("Transfers to Liquid Liabilities"));
-  m_part->write("</td>");
-  m_part->write("<td width=\"25%\" class=\"center\">");
-  m_part->write(i18n("Liquid Liabilities"));
-  m_part->write("</td>");
-  m_part->write("<td width=\"25%\" class=\"center\">");
-  m_part->write(i18n("Other Transfers"));
-  m_part->write("</td>");
-  m_part->write("</tr>");
+  m_html += "<tr class=\"item\">";
+  m_html += "<td width=\"25%\" class=\"center\">";
+  m_html += i18n("Liquid Assets");
+  m_html += "</td>";
+  m_html += "<td width=\"25%\" class=\"center\">";
+  m_html += i18n("Transfers to Liquid Liabilities");
+  m_html += "</td>";
+  m_html += "<td width=\"25%\" class=\"center\">";
+  m_html += i18n("Liquid Liabilities");
+  m_html += "</td>";
+  m_html += "<td width=\"25%\" class=\"center\">";
+  m_html += i18n("Other Transfers");
+  m_html += "</td>";
+  m_html += "</tr>";
 
   //add row with banding
-  m_part->write(QString("<tr class=\"row-even\" style=\"font-weight:bold;\">"));
+  m_html += QString("<tr class=\"row-even\" style=\"font-weight:bold;\">");
 
   //print current liquid assets
-  m_part->write(QString("<td align=\"right\">%2</td>").arg(showColoredAmount(amountLiquidAssets, liquidAssets.isNegative())));
+  m_html += QString("<td align=\"right\">%2</td>").arg(showColoredAmount(amountLiquidAssets, liquidAssets.isNegative()));
 
   //print the scheduled transfers
-  m_part->write(QString("<td align=\"right\">%2</td>").arg(showColoredAmount(amountScheduledLiquidTransfer, scheduledLiquidTransfer.isNegative())));
+  m_html += QString("<td align=\"right\">%2</td>").arg(showColoredAmount(amountScheduledLiquidTransfer, scheduledLiquidTransfer.isNegative()));
 
   //print current liabilities
-  m_part->write(QString("<td align=\"right\">%2</td>").arg(showColoredAmount(amountLiquidLiabilities,  liquidLiabilities.isNegative())));
+  m_html += QString("<td align=\"right\">%2</td>").arg(showColoredAmount(amountLiquidLiabilities,  liquidLiabilities.isNegative()));
 
   //print the scheduled transfers
-  m_part->write(QString("<td align=\"right\">%2</td>").arg(showColoredAmount(amountScheduledOtherTransfer, scheduledOtherTransfer.isNegative())));
+  m_html += QString("<td align=\"right\">%2</td>").arg(showColoredAmount(amountScheduledOtherTransfer, scheduledOtherTransfer.isNegative()));
 
 
-  m_part->write("</tr>");
+  m_html += "</tr>";
 
-  m_part->write("</table>");
+  m_html += "</table>";
 
   //final conclusion
   MyMoneyMoney profitValue = incomeValue + expenseValue + scheduledIncome + scheduledExpense;
@@ -1900,43 +1902,43 @@ void KHomeView::showCashFlowSummary()
 
 
   //print header of cash flow status
-  m_part->write("<div class=\"gap\">&nbsp;</div>\n");
-  m_part->write("<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >");
+  m_html += "<div class=\"gap\">&nbsp;</div>\n";
+  m_html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
   //income and expense title
-  m_part->write("<tr class=\"itemtitle\">");
-  m_part->write("<td class=\"left\" colspan=\"4\">");
-  m_part->write(i18n("Cash Flow Status"));
-  m_part->write("</td></tr>");
+  m_html += "<tr class=\"itemtitle\">";
+  m_html += "<td class=\"left\" colspan=\"4\">";
+  m_html += i18n("Cash Flow Status");
+  m_html += "</td></tr>";
   //column titles
-  m_part->write("<tr class=\"item\">");
-  m_part->write("<td>&nbsp;</td>");
-  m_part->write("<td width=\"25%\" class=\"center\">");
-  m_part->write(i18n("Expected Liquid Assets"));
-  m_part->write("</td>");
-  m_part->write("<td width=\"25%\" class=\"center\">");
-  m_part->write(i18n("Expected Liquid Liabilities"));
-  m_part->write("</td>");
-  m_part->write("<td width=\"25%\" class=\"center\">");
-  m_part->write(i18n("Expected Profit/Loss"));
-  m_part->write("</td>");
-  m_part->write("</tr>");
+  m_html += "<tr class=\"item\">";
+  m_html += "<td>&nbsp;</td>";
+  m_html += "<td width=\"25%\" class=\"center\">";
+  m_html += i18n("Expected Liquid Assets");
+  m_html += "</td>";
+  m_html += "<td width=\"25%\" class=\"center\">";
+  m_html += i18n("Expected Liquid Liabilities");
+  m_html += "</td>";
+  m_html += "<td width=\"25%\" class=\"center\">";
+  m_html += i18n("Expected Profit/Loss");
+  m_html += "</td>";
+  m_html += "</tr>";
 
   //add row with banding
-  m_part->write(QString("<tr class=\"row-even\" style=\"font-weight:bold;\">"));
-  m_part->write("<td>&nbsp;</td>");
+  m_html += QString("<tr class=\"row-even\" style=\"font-weight:bold;\">");
+  m_html += "<td>&nbsp;</td>";
 
   //print expected assets
-  m_part->write(QString("<td align=\"right\">%2</td>").arg(showColoredAmount(amountExpectedAsset, expectedAsset.isNegative())));
+  m_html += QString("<td align=\"right\">%2</td>").arg(showColoredAmount(amountExpectedAsset, expectedAsset.isNegative()));
 
   //print expected liabilities
-  m_part->write(QString("<td align=\"right\">%2</td>").arg(showColoredAmount(amountExpectedLiabilities, expectedLiabilities.isNegative())));
+  m_html += QString("<td align=\"right\">%2</td>").arg(showColoredAmount(amountExpectedLiabilities, expectedLiabilities.isNegative()));
 
   //print expected profit
-  m_part->write(QString("<td align=\"right\">%2</td>").arg(showColoredAmount(amountProfit, profitValue.isNegative())));
+  m_html += QString("<td align=\"right\">%2</td>").arg(showColoredAmount(amountProfit, profitValue.isNegative()));
 
-  m_part->write("</tr>");
-  m_part->write("</table>");
-  m_part->write("</div></div>");
+  m_html += "</tr>";
+  m_html += "</table>";
+  m_html += "</div></div>";
 }
 
 // Make sure, that these definitions are only used within this file
