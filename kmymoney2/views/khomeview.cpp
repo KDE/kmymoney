@@ -1131,17 +1131,17 @@ void KHomeView::slotOpenUrl(const KUrl &url, const KParts::OpenUrlArguments&,con
         emit scheduleSelected(id);
         KXmlGuiWindow* mw = dynamic_cast<KXmlGuiWindow*>(qApp->mainWidget());
         Q_CHECK_PTR(mw);
-        QTimer::singleShot(0, mw->actionCollection()->action("schedule_enter"), SLOT(activate()));
+        QTimer::singleShot(0, mw->actionCollection()->action("schedule_enter"), SLOT(trigger()));
       } else if(mode == "edit") {
         emit scheduleSelected(id);
         KXmlGuiWindow* mw = dynamic_cast<KXmlGuiWindow*>(qApp->mainWidget());
         Q_CHECK_PTR(mw);
-        QTimer::singleShot(0, mw->actionCollection()->action("schedule_edit"), SLOT(activate()));
+        QTimer::singleShot(0, mw->actionCollection()->action("schedule_edit"), SLOT(trigger()));
       } else if(mode == "skip") {
         emit scheduleSelected(id);
         KXmlGuiWindow* mw = dynamic_cast<KXmlGuiWindow*>(qApp->mainWidget());
         Q_CHECK_PTR(mw);
-        QTimer::singleShot(0, mw->actionCollection()->action("schedule_skip"), SLOT(activate()));
+        QTimer::singleShot(0, mw->actionCollection()->action("schedule_skip"), SLOT(trigger()));
       } else if(mode == "full") {
         m_showAllSchedules = true;
         loadView();

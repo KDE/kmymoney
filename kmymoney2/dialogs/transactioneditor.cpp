@@ -1428,10 +1428,9 @@ void StdTransactionEditor::slotUpdateCategory(const QString& id)
     }
 
     if(tabbar) {
-#warning "kde4 port it"	    
-      //tabbar->widget(KMyMoneyRegister::ActionTransfer)->setEnabled(true);
-      //tabbar->widget(KMyMoneyRegister::ActionDeposit)->setEnabled(true);
-      //tabbar->widget(KMyMoneyRegister::ActionWithdrawal)->setEnabled(true);
+      tabbar->widget(KMyMoneyRegister::ActionTransfer)->setEnabled(true);
+      tabbar->widget(KMyMoneyRegister::ActionDeposit)->setEnabled(true);
+      tabbar->widget(KMyMoneyRegister::ActionWithdrawal)->setEnabled(true);
     }
 
     if(!id.isEmpty()) {

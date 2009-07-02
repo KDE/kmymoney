@@ -161,9 +161,9 @@ void TabBar::copyTabs(const TabBar* otabbar)
     QWidget* otab = otabbar->widget(i);
     QWidget* ntab = new QWidget();
     int nid = KTabWidget::addTab(ntab, otabbar->tabText(i));
-    m_idMap[nid] = otabbar->m_idMap[indexOf(otab)];
+    m_idMap[nid] = otabbar->m_idMap[i];
     ntab->setEnabled(otab->isEnabled());
-    if(indexOf(otab) == otabbar->currentIndex())
+    if(i == otabbar->currentIndex())
       setCurrentWidget(ntab);
   }
 }
