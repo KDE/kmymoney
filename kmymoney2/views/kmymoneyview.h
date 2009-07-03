@@ -507,12 +507,6 @@ public slots:
     */
   void slotShowHomePage(void) { setCurrentPage(m_homeViewFrame); }
 
-  signals:
-
-  void currentPageChanged (const QModelIndex &current, const QModelIndex &previous);
-
-  void pageToggled(KPageWidgetItem *page, bool checked);
-
 protected slots:
   /**
     * Called when the user changes the detail

@@ -96,9 +96,9 @@ KScheduledView::KScheduledView(QWidget *parent) :
   m_accountsCombo->setGuiItem(KMyMoneyUtils::accountsFilterGuiItem());
 
   KIconLoader *il = KIconLoader::global();
-#warning "port to kde4"
-  //m_tabWidget->setTabIcon(m_listTab, KIcon(il->loadIcon("contents", KIconLoader::Small, KIconLoader::SizeSmall)));
- // m_tabWidget->setTabIcon(m_calendarTab, KIcon(il->loadIcon("calendartab", KIconLoader::User, KIconLoader::SizeSmall)));
+
+  m_tabWidget->setTabIcon(m_tabWidget->indexOf(m_listTab), KIcon(il->loadIcon("contents", KIconLoader::Small, KIconLoader::SizeSmall)));
+  m_tabWidget->setTabIcon(m_tabWidget->indexOf(m_calendarTab), KIcon(il->loadIcon("calendartab", KIconLoader::User, KIconLoader::SizeSmall)));
 
   connect(m_qlistviewScheduled, SIGNAL(contextMenu(K3ListView*, Q3ListViewItem*, const QPoint&)),
     this, SLOT(slotListViewContextMenu(K3ListView*, Q3ListViewItem*, const QPoint&)));
