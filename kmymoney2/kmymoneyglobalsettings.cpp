@@ -51,18 +51,22 @@ QFont KMyMoneyGlobalSettings::listHeaderFont(void)
 
 QColor KMyMoneyGlobalSettings::listColor(void)
 {
-  if(useSystemColors())
-    return KColorScheme::NormalBackground;
-  else
+  if(useSystemColors()) {
+    KColorScheme scheme(QPalette::Normal);
+    return scheme.background(KColorScheme::NormalBackground).color();
+  } else {
     return KMyMoneySettings::listColor();
+  }
 }
 
 QColor KMyMoneyGlobalSettings::listBGColor(void)
 {
-  if(useSystemColors())
-    return KColorScheme::AlternateBackground;
-  else
+  if(useSystemColors()) {
+    KColorScheme scheme(QPalette::Normal);
+    return scheme.background(KColorScheme::AlternateBackground).color();
+  } else {
     return KMyMoneySettings::listBGColor();
+  }
 }
 
 QStringList KMyMoneyGlobalSettings::itemList(void)
