@@ -46,6 +46,61 @@
 #include "kmymoney2.h"
 #include <K3ListViewSearchLineWidget>
 
+QPixmap accountPixmap(const MyMoneyAccount& account, bool reconcileFlag)
+{
+  QString pixmap;
+
+  switch(account.accountType()) {
+    default:
+      if(account.accountGroup() == MyMoneyAccount::Asset)
+        pixmap = "account-types_asset";
+      else
+        pixmap = "account-types_liability";
+      break;
+
+    case MyMoneyAccount::Investment:
+      pixmap = "account-types_investments";
+      break;
+
+    case MyMoneyAccount::Checkings:
+      pixmap = "account-types_checking";
+      break;
+    case MyMoneyAccount::Savings:
+      pixmap = "account-types_savings";
+      break;
+
+    case MyMoneyAccount::AssetLoan:
+    case MyMoneyAccount::Loan:
+      pixmap = "account-types_loan";
+      break;
+
+    case MyMoneyAccount::CreditCard:
+      pixmap = "account-types_credit-card";
+      break;
+
+    case MyMoneyAccount::Asset:
+      pixmap = "account-types_asset";
+      break;
+
+    case MyMoneyAccount::Cash:
+      pixmap = "account-types_cash";
+      break;
+  }
+  QPixmap result = DesktopIcon(pixmap);
+
+  if(account.isClosed()) {
+    QPixmap overlay = DesktopIcon("account-types_closed");
+    QPainter pixmapPainter(&result);
+    pixmapPainter.drawPixmap(0, 0, overlay, 0, 0, overlay.width(), overlay.height());
+  } else if(reconcileFlag) {
+    QPixmap overlay = DesktopIcon("account-types_reconcile");
+    QPainter pixmapPainter(&result);
+    pixmapPainter.drawPixmap(0, 0, overlay, 0, 0, overlay.width(), overlay.height());
+  }
+
+  return result;
+}
+
 KMyMoneyAccountIconItem::KMyMoneyAccountIconItem(Q3IconView *parent, const MyMoneyAccount& account) :
   K3IconViewItem(parent, account.name()),
   m_account(account),
@@ -68,7 +123,7 @@ void KMyMoneyAccountIconItem::setReconciliation(bool on)
 
 void KMyMoneyAccountIconItem::updateAccount(const MyMoneyAccount& account)
 {
-  setPixmap(account.accountPixmap(m_reconcileFlag));
+  setPixmap(accountPixmap(account, m_reconcileFlag));
 }
 
 KAccountsView::KAccountsView(QWidget *parent) :

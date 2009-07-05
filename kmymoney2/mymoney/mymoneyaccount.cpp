@@ -614,61 +614,6 @@ void MyMoneyAccount::adjustBalance(const MyMoneySplit& s, bool reverse)
 
 }
 
-QPixmap MyMoneyAccount::accountPixmap(bool reconcileFlag) const
-{
-  Q_UNUSED(reconcileFlag)
-  QString pixmap;
-
-  switch(accountType()) {
-    default:
-      if(accountGroup() == MyMoneyAccount::Asset)
-        pixmap = "account-types_asset";
-      else
-        pixmap = "account-types_liability";
-      break;
-
-    case MyMoneyAccount::Investment:
-      pixmap = "account-types_investments";
-      break;
-
-    case MyMoneyAccount::Checkings:
-      pixmap = "account-types_checking";
-      break;
-    case MyMoneyAccount::Savings:
-      pixmap = "account-types_savings";
-      break;
-
-    case MyMoneyAccount::AssetLoan:
-    case MyMoneyAccount::Loan:
-      pixmap = "account-types_loan";
-      break;
-
-    case MyMoneyAccount::CreditCard:
-      pixmap = "account-types_credit-card";
-      break;
-
-    case MyMoneyAccount::Asset:
-      pixmap = "account-types_asset";
-      break;
-
-    case MyMoneyAccount::Cash:
-      pixmap = "account-types_cash";
-      break;
-  }
-  QPixmap result;// = DesktopIcon(pixmap);
-#warning "port to kde4 - best is to move this away from the engine object"
-#if 0
-  if(isClosed()) {
-    QPixmap overlay = DesktopIcon("account-types_closed");
-    bitBlt(&result, 0, 0, &overlay, 0, 0, overlay.width(), overlay.height(), Qt::CopyROP, false);
-  } else if(reconcileFlag) {
-    QPixmap overlay = DesktopIcon("account-types_reconcile");
-    bitBlt(&result, 0, 0, &overlay, 0, 0, overlay.width(), overlay.height(), Qt::CopyROP, false);
-  }
-#endif
-  return result;
-}
-
 QPixmap MyMoneyAccount::accountGroupPixmap(bool reconcileFlag) const
 {
   Q_UNUSED(reconcileFlag)
