@@ -17,7 +17,6 @@
 #include "mymoneydatabasemgrtest.h"
 #include <pwd.h>
 #include <iostream>
-#include <QList>
 
 MyMoneyDatabaseMgrTest::MyMoneyDatabaseMgrTest()
   : m_dbAttached (false),
@@ -27,14 +26,13 @@ MyMoneyDatabaseMgrTest::MyMoneyDatabaseMgrTest()
 void MyMoneyDatabaseMgrTest::setUp()
 {
   m = new MyMoneyDatabaseMgr;
-
-  m->startTransaction();
 }
 
 void MyMoneyDatabaseMgrTest::tearDown()
 {
   if (m_canOpen) {
-    m->commitTransaction();
+    // All transactions should have already been committed.
+    //m->commitTransaction();
   }
   if (MyMoneyFile::instance()->storageAttached()) {
      MyMoneyFile::instance()->detachStorage(m);
@@ -75,7 +73,6 @@ void MyMoneyDatabaseMgrTest::testEmptyConstructor()
 }
 
 void MyMoneyDatabaseMgrTest::testCreateDb() {
-  m->commitTransaction();
 
   // Fetch the list of available drivers
   QStringList list = QSqlDatabase::drivers();
@@ -94,17 +91,16 @@ void MyMoneyDatabaseMgrTest::testCreateDb() {
     //"QSQLITE3"
     m_url = "sql://" + userName + "@localhost/kmm_test_driver?driver="
                      //"QPSQL7&mode=single";
-                     //"QSQLITE3&mode=single";
+                     "QSQLITE&mode=single";
                      //"QMYSQL3&mode=single";
-                     + *it + "&mode=single";
+                     //+ *it + "&mode=single";
     KSharedPtr <MyMoneyStorageSql> sql = m->connectToDatabase(m_url);
     CPPUNIT_ASSERT(0 != sql);
-    qDebug("Database driver is %s", qPrintable(sql->driverName()));
+    //qDebug("Database driver is %s", qPrintable(sql->driverName()));
     // Clear the database, so there is a fresh start on each run.
     if (0 == sql->open(m_url, QIODevice::WriteOnly, true)) {
       MyMoneyFile::instance()->attachStorage(m);
       CPPUNIT_ASSERT(sql->writeFile());
-      m->startTransaction();
       CPPUNIT_ASSERT(0 == sql->upgradeDb());
     } else {
       m_canOpen = false;
@@ -122,7 +118,6 @@ void MyMoneyDatabaseMgrTest::testAttachDb() {
       int openStatus = sql->open(m_url, QIODevice::ReadWrite);
       CPPUNIT_ASSERT(0 == openStatus);
       MyMoneyFile::instance()->attachStorage(m);
-      m->startTransaction();
       m_dbAttached = true;
     }
   }
@@ -176,19 +171,23 @@ void MyMoneyDatabaseMgrTest::testSupportFunctions()
     return;
   }
 
-  CPPUNIT_ASSERT(m->nextInstitutionID() == "I000001");
-  CPPUNIT_ASSERT(m->nextAccountID() == "A000001");
-  CPPUNIT_ASSERT(m->nextTransactionID() == "T000000000000000001");
-  CPPUNIT_ASSERT(m->nextPayeeID() == "P000001");
-  CPPUNIT_ASSERT(m->nextScheduleID() == "SCH000001");
-  CPPUNIT_ASSERT(m->nextReportID() == "R000001");
+  try {
+    CPPUNIT_ASSERT(m->nextInstitutionID() == "I000001");
+    CPPUNIT_ASSERT(m->nextAccountID() == "A000001");
+    CPPUNIT_ASSERT(m->nextTransactionID() == "T000000000000000001");
+    CPPUNIT_ASSERT(m->nextPayeeID() == "P000001");
+    CPPUNIT_ASSERT(m->nextScheduleID() == "SCH000001");
+    CPPUNIT_ASSERT(m->nextReportID() == "R000001");
 
-  CPPUNIT_ASSERT(m->liability().name() == "Liability");
-  CPPUNIT_ASSERT(m->asset().name() == "Asset");
-  CPPUNIT_ASSERT(m->expense().name() == "Expense");
-  CPPUNIT_ASSERT(m->income().name() == "Income");
-  CPPUNIT_ASSERT(m->equity().name() == "Equity");
-  CPPUNIT_ASSERT(m->dirty() == false);
+    CPPUNIT_ASSERT(m->liability().name() == "Liability");
+    CPPUNIT_ASSERT(m->asset().name() == "Asset");
+    CPPUNIT_ASSERT(m->expense().name() == "Expense");
+    CPPUNIT_ASSERT(m->income().name() == "Income");
+    CPPUNIT_ASSERT(m->equity().name() == "Equity");
+    CPPUNIT_ASSERT(m->dirty() == false);
+  } catch (MyMoneyException* e) {
+    unexpectedException(e);
+  }
 }
 
 void MyMoneyDatabaseMgrTest::testIsStandardAccount()
@@ -255,8 +254,7 @@ void MyMoneyDatabaseMgrTest::testAccount() {
     CPPUNIT_ASSERT(a.name() == "AccountName");
     CPPUNIT_ASSERT(a.id() == "A000001");
   } catch (MyMoneyException *e) {
-    delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    unexpectedException(e);
   }
 }
 
@@ -290,8 +288,8 @@ void MyMoneyDatabaseMgrTest::testAddNewAccount() {
 
   CPPUNIT_ASSERT(m->dirty() == false);
   // now try to add account 1 as sub-account to account 2
-  a = m->account("A000001");
   try {
+    a = m->account("A000001");
     CPPUNIT_ASSERT(m->asset().accountList().count() == 0);
     m->addAccount(b, a);
     MyMoneyAccount acc (m->account("A000002"));
@@ -299,8 +297,7 @@ void MyMoneyDatabaseMgrTest::testAddNewAccount() {
     CPPUNIT_ASSERT(acc.accountList().count() == 1);
     CPPUNIT_ASSERT(m->asset().accountList().count() == 0);
   } catch (MyMoneyException *e) {
-    delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    unexpectedException(e);
   }
 }
 
@@ -350,8 +347,7 @@ void MyMoneyDatabaseMgrTest::testInstitution() {
     CPPUNIT_ASSERT(i.name() == "Inst Name");
     CPPUNIT_ASSERT(m->dirty() == false);
   } catch (MyMoneyException *e) {
-    delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    unexpectedException(e);
   }
 }
 
@@ -373,8 +369,7 @@ void MyMoneyDatabaseMgrTest::testAccount2Institution() {
     i = m->institution("I000001");
     a = m->account("A000001");
   } catch (MyMoneyException *e) {
-    delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    unexpectedException(e);
   }
 
   m->setDirty();
@@ -400,8 +395,7 @@ void MyMoneyDatabaseMgrTest::testAccount2Institution() {
     CPPUNIT_ASSERT(b.institutionId() == i.id());
     CPPUNIT_ASSERT(i.accountList().count() == 0);
   } catch (MyMoneyException *e) {
-    delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    unexpectedException(e);
   }
 }
 
@@ -425,8 +419,7 @@ void MyMoneyDatabaseMgrTest::testModifyAccount() {
     CPPUNIT_ASSERT(b.parentAccountId() == a.parentAccountId());
     CPPUNIT_ASSERT(b.name() == "New account name");
   } catch (MyMoneyException *e) {
-    delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    unexpectedException(e);
   }
 
   // modify institution to unknown id
@@ -475,10 +468,8 @@ void MyMoneyDatabaseMgrTest::testModifyInstitution() {
     m->modifyInstitution(i);
     i = m->institution("I000001");
     CPPUNIT_ASSERT(i.name() == "New inst name");
-
   } catch (MyMoneyException *e) {
-    delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    unexpectedException(e);
   }
 
   // try to modify an institution that does not exist
@@ -562,9 +553,7 @@ void MyMoneyDatabaseMgrTest::testReparentAccount() {
     CPPUNIT_ASSERT(m->account(ex1.id()).accountCount() == 2);
     CPPUNIT_ASSERT(ex3.parentAccountId() == ex1.id());
   } catch (MyMoneyException *e) {
-    std::cout << std::endl << qPrintable(e->what()) << std::endl;
-    delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    unexpectedException(e);
   }
 }
 
@@ -759,7 +748,7 @@ void MyMoneyDatabaseMgrTest::testCopyBudget() {
     CPPUNIT_ASSERT(testBudget.budgetStart() == newBudget.budgetStart());
     CPPUNIT_ASSERT(testBudget.name() == newBudget.name());
   } catch (QString& s) {
-    std::cout << "Error in testCopyBudget(): " << qPrintable(s) << std::endl;
+    qDebug("Error in testCopyBudget(): %s", qPrintable(s));
     CPPUNIT_ASSERT(false);
   }
 }
@@ -816,44 +805,48 @@ void MyMoneyDatabaseMgrTest::testBalance() {
 
   testAddTransactions();
 
-  CPPUNIT_ASSERT(m->balance("A000001", QDate()).isZero());
-  CPPUNIT_ASSERT(m->balance("A000002", QDate()) == MyMoneyMoney(1200));
-  CPPUNIT_ASSERT(m->balance("A000003", QDate()) == MyMoneyMoney(400));
-  //Add a transaction to zero account A000003
-  MyMoneyTransaction t1;
-  MyMoneySplit s;
+  try {
+    CPPUNIT_ASSERT(m->balance("A000001", QDate()).isZero());
+    CPPUNIT_ASSERT(m->balance("A000002", QDate()) == MyMoneyMoney(1200));
+    CPPUNIT_ASSERT(m->balance("A000003", QDate()) == MyMoneyMoney(400));
+    //Add a transaction to zero account A000003
+    MyMoneyTransaction t1;
+    MyMoneySplit s;
 
-  s.setAccountId("A000003");
-  s.setShares(-400);
-  s.setValue(-400);
-  CPPUNIT_ASSERT(s.id().isEmpty());
-  t1.addSplit(s);
+    s.setAccountId("A000003");
+    s.setShares(-400);
+    s.setValue(-400);
+    CPPUNIT_ASSERT(s.id().isEmpty());
+    t1.addSplit(s);
 
-  s.setId(QString());  // enable re-usage of split variable
-  s.setAccountId("A000002");
-  s.setShares(400);
-  s.setValue(400);
-  CPPUNIT_ASSERT(s.id().isEmpty());
-  t1.addSplit(s);
+    s.setId(QString());  // enable re-usage of split variable
+    s.setAccountId("A000002");
+    s.setShares(400);
+    s.setValue(400);
+    CPPUNIT_ASSERT(s.id().isEmpty());
+    t1.addSplit(s);
 
-  t1.setPostDate(QDate(2007,5,10));
+    t1.setPostDate(QDate(2007,5,10));
 
-  m->addTransaction(t1);
+    m->addTransaction(t1);
 
-  //qDebug ("Balance of A000003 is 0 = %s", m->balance("A000003", QDate()).toString().ascii());
-  CPPUNIT_ASSERT(m->balance("A000003", QDate()).isZero());
+    //qDebug ("Balance of A000003 is 0 = %s", m->balance("A000003", QDate()).toString().ascii());
+    CPPUNIT_ASSERT(m->balance("A000003", QDate()).isZero());
 
-  //qDebug ("Balance of A000001 is 1600 = %s", m->balance("A000001", QDate()).toString().ascii());
-  CPPUNIT_ASSERT(m->totalBalance("A000001", QDate()) == MyMoneyMoney(1600));
+    //qDebug ("Balance of A000001 is 1600 = %s", m->balance("A000001", QDate()).toString().ascii());
+    CPPUNIT_ASSERT(m->totalBalance("A000001", QDate()) == MyMoneyMoney(1600));
 
-  //qDebug ("Balance of A000006 is -11600 = %s", m->balance("A000006", QDate(2002,5,9)).toString().ascii());
-  CPPUNIT_ASSERT(m->balance("A000006", QDate(2002,5,9)) == MyMoneyMoney(-11600));
+    //qDebug ("Balance of A000006 is -11600 = %s", m->balance("A000006", QDate(2002,5,9)).toString().ascii());
+    CPPUNIT_ASSERT(m->balance("A000006", QDate(2002,5,9)) == MyMoneyMoney(-11600));
 
-  //qDebug ("Balance of A000005 is -100000 = %s", m->balance("A000005", QDate(2002,5,10)).toString().ascii());
-  CPPUNIT_ASSERT(m->balance("A000005", QDate(2002,5,10)) == MyMoneyMoney(-100000));
+    //qDebug ("Balance of A000005 is -100000 = %s", m->balance("A000005", QDate(2002,5,10)).toString().ascii());
+    CPPUNIT_ASSERT(m->balance("A000005", QDate(2002,5,10)) == MyMoneyMoney(-100000));
 
-  //qDebug ("Balance of A000006 is 88400 = %s", m->balance("A000006", QDate(2002,5,10)).toString().ascii());
-  CPPUNIT_ASSERT(m->balance("A000006", QDate(2002,5,10)) == MyMoneyMoney(88400));
+    //qDebug ("Balance of A000006 is 88400 = %s", m->balance("A000006", QDate(2002,5,10)).toString().ascii());
+    CPPUNIT_ASSERT(m->balance("A000006", QDate(2002,5,10)) == MyMoneyMoney(88400));
+  } catch (MyMoneyException* e) {
+    unexpectedException(e);
+  }
 }
 
 void MyMoneyDatabaseMgrTest::testModifyTransaction() {
@@ -893,8 +886,7 @@ void MyMoneyDatabaseMgrTest::testModifyTransaction() {
     CPPUNIT_ASSERT(m->balance("A000006", QDate()) == MyMoneyMoney(100000-12600));
     CPPUNIT_ASSERT(m->totalBalance("A000001", QDate()) == MyMoneyMoney(1600));
   } catch (MyMoneyException *e) {
-    delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    unexpectedException(e);
   }
 
   // now modify the date
@@ -938,8 +930,7 @@ void MyMoneyDatabaseMgrTest::testModifyTransaction() {
     CPPUNIT_ASSERT(it == list.end());
 
   } catch (MyMoneyException *e) {
-    delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    unexpectedException(e);
   }
 }
 
@@ -1012,8 +1003,7 @@ void MyMoneyDatabaseMgrTest::testRemoveUnusedAccount() {
     i = m->institution("I000001");
     CPPUNIT_ASSERT(i.accountCount() == 0);
   } catch (MyMoneyException *e) {
-    delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    unexpectedException(e);
   }
 }
 
@@ -1059,8 +1049,7 @@ void MyMoneyDatabaseMgrTest::testRemoveInstitution() {
     m->modifyAccount(a);
     CPPUNIT_ASSERT(i.accountCount() == 0);
   } catch (MyMoneyException *e) {
-    delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    unexpectedException(e);
   }
 
   m->setDirty();
@@ -1073,8 +1062,7 @@ void MyMoneyDatabaseMgrTest::testRemoveInstitution() {
     CPPUNIT_ASSERT(a.institutionId().isEmpty());
     CPPUNIT_ASSERT(m->institutionCount() == 0);
   } catch (MyMoneyException *e) {
-    delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    unexpectedException(e);
   }
 }
 
@@ -1095,8 +1083,7 @@ void MyMoneyDatabaseMgrTest::testRemoveTransaction() {
     m->removeTransaction(t);
     CPPUNIT_ASSERT(m->transactionCount() == 1);
   } catch (MyMoneyException *e) {
-    delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    unexpectedException(e);
   }
 }
 
@@ -1147,8 +1134,7 @@ void MyMoneyDatabaseMgrTest::testAddPayee() {
     m->addPayee(p);
     CPPUNIT_ASSERT(m->payeeId() == 1);
   } catch (MyMoneyException *e) {
-    delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    unexpectedException(e);
   }
 
 }
@@ -1164,34 +1150,34 @@ void MyMoneyDatabaseMgrTest::testSetAccountName() {
   try {
     m->setAccountName(STD_ACC_LIABILITY, "Verbindlichkeiten");
   } catch (MyMoneyException *e) {
-    delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    unexpectedException(e);
   }
   try {
     m->setAccountName(STD_ACC_ASSET, "Verm�gen");
   } catch (MyMoneyException *e) {
-    delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    unexpectedException(e);
   }
   try {
     m->setAccountName(STD_ACC_EXPENSE, "Ausgaben");
   } catch (MyMoneyException *e) {
-    delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    unexpectedException(e);
   }
   try {
     m->setAccountName(STD_ACC_INCOME, "Einnahmen");
   } catch (MyMoneyException *e) {
-    delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    unexpectedException(e);
   }
 
   MyMoneyFile::instance()->preloadCache();
 
-  CPPUNIT_ASSERT(m->liability().name() == "Verbindlichkeiten");
-  CPPUNIT_ASSERT(m->asset().name() == "Verm�gen");
-  CPPUNIT_ASSERT(m->expense().name() == "Ausgaben");
-  CPPUNIT_ASSERT(m->income().name() == "Einnahmen");
+  try {
+    CPPUNIT_ASSERT(m->liability().name() == "Verbindlichkeiten");
+    CPPUNIT_ASSERT(m->asset().name() == "Verm�gen");
+    CPPUNIT_ASSERT(m->expense().name() == "Ausgaben");
+    CPPUNIT_ASSERT(m->income().name() == "Einnahmen");
+  } catch (MyMoneyException* e) {
+    unexpectedException(e);
+  }
 
   try {
     m->setAccountName("A000001", "New account name");
@@ -1221,8 +1207,7 @@ void MyMoneyDatabaseMgrTest::testModifyPayee() {
     p = m->payee("P000001");
     CPPUNIT_ASSERT(p.name() == "New name");
   } catch (MyMoneyException *e) {
-    delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    unexpectedException(e);
   }
 }
 
@@ -1244,8 +1229,7 @@ void MyMoneyDatabaseMgrTest::testRemovePayee() {
     m->removePayee(p);
     CPPUNIT_ASSERT(m->payeeList().count() == 0);
   } catch (MyMoneyException *e) {
-    delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    unexpectedException(e);
   }
 
   // add transaction
@@ -1275,8 +1259,7 @@ void MyMoneyDatabaseMgrTest::testRemovePayee() {
   try {
     m->modifyTransaction(tr);
   } catch (MyMoneyException *e) {
-    delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    unexpectedException(e);
   }
 
   m->setDirty();
@@ -1503,8 +1486,7 @@ void MyMoneyDatabaseMgrTest::testAddSchedule() {
     MyMoneyFile::instance()->clearCache();
     CPPUNIT_ASSERT(m->schedule("SCH000001").id() == "SCH000001");
   } catch(MyMoneyException *e) {
-    delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    unexpectedException(e);
   }
 
   try {
@@ -1522,33 +1504,35 @@ void MyMoneyDatabaseMgrTest::testAddSchedule() {
     delete e;
   }
 
+  CPPUNIT_ASSERT(m->scheduleList().count() == 1);
+
   // now try with a bad account, so this should cause an exception
-  // TODO: enable this check without corrupting other tests
-//  try {
-//    MyMoneyTransaction t1;
-//    MyMoneySplit s1, s2;
-//    s1.setAccountId("Abadaccount1");
-//    t1.addSplit(s1);
-//    s2.setAccountId("Abadaccount2");
-//    t1.addSplit(s2);
-//    MyMoneySchedule schedule("Sched-Name",
-//           MyMoneySchedule::TYPE_DEPOSIT,
-//           MyMoneySchedule::OCCUR_DAILY, 1,
-//           MyMoneySchedule::STYPE_MANUALDEPOSIT,
-//           QDate(),
-//           QDate(),
-//           true,
-//           false);
-//    t1.setPostDate(QDate(2003,7,10));
-//    schedule.setTransaction(t1);
+  try {
+    MyMoneyTransaction t1;
+    MyMoneySplit s1, s2;
+    s1.setAccountId("Abadaccount1");
+    t1.addSplit(s1);
+    s2.setAccountId("Abadaccount2");
+    //t1.addSplit(s2);
+    MyMoneySchedule schedule("Sched-Name",
+           MyMoneySchedule::TYPE_DEPOSIT,
+           MyMoneySchedule::OCCUR_DAILY, 1,
+           MyMoneySchedule::STYPE_MANUALDEPOSIT,
+           QDate(),
+           QDate(),
+           true,
+           false);
+    t1.setPostDate(QDate(2003,7,10));
+    schedule.setTransaction(t1);
 
-//    m->addSchedule(schedule);
-//    CPPUNIT_FAIL("Exception expected, but not thrown");
-//  } catch(MyMoneyException *e) {
-//    delete e;
-//    // Exception caught as expected.
-//  }
+    m->addSchedule(schedule);
+    CPPUNIT_FAIL("Exception expected, but not thrown");
+  } catch(MyMoneyException *e) {
+    delete e;
+    // Exception caught as expected.
+  }
 
+  CPPUNIT_ASSERT(m->scheduleList().count() == 1);
 }
 
 void MyMoneyDatabaseMgrTest::testSchedule() {
@@ -1603,8 +1587,7 @@ void MyMoneyDatabaseMgrTest::testModifySchedule() {
     CPPUNIT_ASSERT((*(m->scheduleList().begin())).id() == "SCH000001");
 
   } catch(MyMoneyException *e) {
-    delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    unexpectedException(e);
   }
 
 }
@@ -1635,8 +1618,7 @@ void MyMoneyDatabaseMgrTest::testRemoveSchedule() {
     CPPUNIT_ASSERT(m->scheduleList().count() == 0);
 
   } catch(MyMoneyException *e) {
-    delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    unexpectedException(e);
   }
 }
 
@@ -1732,9 +1714,7 @@ void MyMoneyDatabaseMgrTest::testScheduleList() {
     m->addSchedule(schedule3);
     m->addSchedule(schedule4);
   } catch(MyMoneyException *e) {
-    qDebug("Error: %s", qPrintable(e->what()));
-    delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    unexpectedException(e);
   }
 
   QList<MyMoneySchedule> list;
@@ -1830,17 +1810,16 @@ void MyMoneyDatabaseMgrTest::testAddCurrency()
     CPPUNIT_ASSERT((*(m->currencyList().begin())).name() == "Euro");
     CPPUNIT_ASSERT((*(m->currencyList().begin())).id() == "EUR");
   } catch(MyMoneyException *e) {
-                delete e;
-                CPPUNIT_FAIL("Unexpected exception");
+    unexpectedException(e);
   }
 
   m->setDirty();
   try {
     m->addCurrency(curr);
-                CPPUNIT_FAIL("Expected exception missing");
+    CPPUNIT_FAIL("Expected exception missing");
   } catch(MyMoneyException *e) {
     CPPUNIT_ASSERT(m->dirty() == false);
-                delete e;
+    delete e;
   }
 }
 
@@ -1863,8 +1842,7 @@ void MyMoneyDatabaseMgrTest::testModifyCurrency()
     CPPUNIT_ASSERT((*(m->currencyList().begin())).name() == "EURO");
     CPPUNIT_ASSERT((*(m->currencyList().begin())).id() == "EUR");
   } catch(MyMoneyException *e) {
-    delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    unexpectedException(e);
   }
 
   m->setDirty();
@@ -1872,7 +1850,7 @@ void MyMoneyDatabaseMgrTest::testModifyCurrency()
   MyMoneySecurity unknownCurr("DEM", "Deutsche Mark", "DM", 100, 100);
   try {
     m->modifyCurrency(unknownCurr);
-                CPPUNIT_FAIL("Expected exception missing");
+    CPPUNIT_FAIL("Expected exception missing");
   } catch(MyMoneyException *e) {
     CPPUNIT_ASSERT(m->dirty() == false);
     delete e;
@@ -1895,8 +1873,7 @@ void MyMoneyDatabaseMgrTest::testRemoveCurrency()
     m->removeCurrency(curr);
     CPPUNIT_ASSERT(m->currencyList().count() == 0);
   } catch(MyMoneyException *e) {
-                delete e;
-                CPPUNIT_FAIL("Unexpected exception");
+    unexpectedException(e);
   }
 
   m->setDirty();
@@ -1904,10 +1881,10 @@ void MyMoneyDatabaseMgrTest::testRemoveCurrency()
   MyMoneySecurity unknownCurr("DEM", "Deutsche Mark", "DM", 100, 100);
   try {
     m->removeCurrency(unknownCurr);
-                CPPUNIT_FAIL("Expected exception missing");
+    CPPUNIT_FAIL("Expected exception missing");
   } catch(MyMoneyException *e) {
     CPPUNIT_ASSERT(m->dirty() == false);
-                delete e;
+    delete e;
   }
 }
 
@@ -1930,8 +1907,7 @@ void MyMoneyDatabaseMgrTest::testCurrency()
     CPPUNIT_ASSERT(newCurr.id() == curr.id());
     CPPUNIT_ASSERT(newCurr.name() == curr.name());
   } catch(MyMoneyException *e) {
-    delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    unexpectedException(e);
   }
 
   try {
@@ -1965,8 +1941,7 @@ void MyMoneyDatabaseMgrTest::testCurrencyList()
     CPPUNIT_ASSERT(m->currencyList().count() == 2);
     CPPUNIT_ASSERT(m->dirty() == false);
   } catch(MyMoneyException *e) {
-    delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    unexpectedException(e);
   }
 }
 

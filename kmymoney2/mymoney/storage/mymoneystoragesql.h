@@ -16,8 +16,10 @@
 #include <qsqldatabase.h>
 #include <qsqlquery.h>
 #include <qsqlerror.h>
-#include <QStack>
 #include <QList>
+#include <QStack>
+
+#include <QtDebug>
 
 class QIODevice;
 // ----------------------------------------------------------------------------
@@ -30,21 +32,21 @@ class QIODevice;
 // Project Includes
 
 #include "imymoneystorageformat.h"
-#include "mymoneyinstitution.h"
-#include "mymoneypayee.h"
-#include "mymoneyaccount.h"
-#include "mymoneytransaction.h"
-#include "mymoneysplit.h"
-#include "mymoneyscheduled.h"
-#include "mymoneysecurity.h"
-#include "mymoneyprice.h"
-#include "mymoneyreport.h"
-#include "mymoneybudget.h"
-#include "mymoneyfile.h"
-#include "mymoneykeyvaluecontainer.h"
+#include "../mymoneyinstitution.h"
+#include "../mymoneypayee.h"
+#include "../mymoneyaccount.h"
+#include "../mymoneytransaction.h"
+#include "../mymoneysplit.h"
+#include "../mymoneyscheduled.h"
+#include "../mymoneysecurity.h"
+#include "../mymoneyprice.h"
+#include "../mymoneyreport.h"
+#include "../mymoneybudget.h"
+#include "../mymoneyfile.h"
+#include "../mymoneykeyvaluecontainer.h"
 #include "mymoneymap.h"
-#include "mymoneymoney.h"
-#include "mymoneytransactionfilter.h"
+#include "../mymoneymoney.h"
+#include "../mymoneytransactionfilter.h"
 
 // This is a convenience functor to make it easier to use STL algorithms
 // It will return false if the MyMoneyTransaction DOES match the filter.
@@ -85,7 +87,22 @@ typedef enum databaseTypeE { // database (driver) type
   Sqlite3 //
 } _databaseType;
 
+class MyMoneyStorageSql;
 
+/**
+  * The MyMoneySqlQuery class is derived from QSqlQuery to provide
+  * a way to adjust some queries based on databaseTypeE and make
+  * debugging easier by providing a place to put debug statements.
+  */
+class MyMoneySqlQuery : public QSqlQuery {
+  public:
+    MyMoneySqlQuery (MyMoneyStorageSql* db = 0);
+    virtual ~MyMoneySqlQuery();
+    bool exec ();
+    bool prepare ( const QString & query );
+  private:
+    const MyMoneyStorageSql* m_db;
+};
 
 /**
   * The MyMoneyDbDrivers class is a map from string to enum of db types.
@@ -389,21 +406,21 @@ private:
   MyMoneyDbDrivers m_drivers;
 #define TABLE(name) void name();
 #define VIEW(name) void name();
-  TABLE(FileInfo)
-  TABLE(Institutions)
-  TABLE(Payees)
-  TABLE(Accounts)
-  TABLE(Transactions)
-  TABLE(Splits)
-  TABLE(KeyValuePairs)
-  TABLE(Schedules)
-  TABLE(SchedulePaymentHistory)
-  TABLE(Securities)
-  TABLE(Prices)
-  TABLE(Currencies)
-  TABLE(Reports)
-  TABLE(Budgets)
-  VIEW(Balances)
+  TABLE(FileInfo);
+  TABLE(Institutions);
+  TABLE(Payees);
+  TABLE(Accounts);
+  TABLE(Transactions);
+  TABLE(Splits);
+  TABLE(KeyValuePairs);
+  TABLE(Schedules);
+  TABLE(SchedulePaymentHistory);
+  TABLE(Securities);
+  TABLE(Prices);
+  TABLE(Currencies);
+  TABLE(Reports);
+  TABLE(Budgets);
+  VIEW(Balances);
 protected:
   QMap<QString, MyMoneyDbTable> m_tables;
   QMap<QString, MyMoneyDbView> m_views;
@@ -415,12 +432,10 @@ class IMyMoneySerialize;
   * The MyMoneyDbColumn class is a base type for generic db columns.
   * Derived types exist for several common column types.
   */
-class MyMoneySqlQuery;
 class MyMoneyStorageSql : public IMyMoneyStorageFormat, public QSqlDatabase, public KShared {
 public:
 
   MyMoneyStorageSql (IMyMoneySerialize *storage, const KUrl& = KUrl());
-  MyMoneyStorageSql ();
   virtual ~MyMoneyStorageSql() {close(true);}
 
   unsigned int currentVersion() const {return (m_db.currentVersion());};
@@ -739,14 +754,14 @@ private:
    * This member variable holds a list of those accounts for which all
    * transactions are in memory, thus saving reading them again
    */
-//  QValueList<QString> m_accountsLoaded;
+//  QList<QString> m_accountsLoaded;
   /**
     * This member variable is used when loading transactions to list all
     * referenced payees, which can then be read into memory (if not already there)
     */
-//  QValueList<QString> m_payeeList;
+//  QList<QString> m_payeeList;
 
-  void alert(QString s) const { qDebug("%s", qPrintable(s)); } // FIXME: remove...
+  void alert(QString s) const {qDebug() << s;}; // FIXME: remove...
   /** The following keeps track of commitment units (known as transactions in SQL
     * though it would be confusing to use that term within KMM). It is implemented
     * as a stack for debug purposes. Long term, probably a count would suffice
@@ -778,26 +793,7 @@ private:
   QDate m_txPostDate; // FIXME: remove when Tom puts date into split object
 
   //Disable copying
-  //MyMoneyStorageSql (const MyMoneyStorageSql& rhs);
-  //MyMoneyStorageSql& operator= (const MyMoneyStorageSql& rhs);
-};
-
-
-
-class MyMoneyStorageSql;
-
-/**
-  * The MyMoneySqlQuery class is derived from QSqlQuery to provide
-  * a way to adjust some queries based on databaseTypeE and make
-  * debugging easier by providing a place to put debug statements.
-  */
-class MyMoneySqlQuery : public QSqlQuery {
-public:
-    MyMoneySqlQuery (const MyMoneyStorageSql* db );
-    virtual ~MyMoneySqlQuery() {}
-    bool exec ();
-    bool prepare ( const QString & query );
-  private:
-    const MyMoneyStorageSql* m_db;
+  MyMoneyStorageSql (const MyMoneyStorageSql& rhs);
+  MyMoneyStorageSql& operator= (const MyMoneyStorageSql& rhs);
 };
 #endif // MYMONEYSTORAGESQL_H

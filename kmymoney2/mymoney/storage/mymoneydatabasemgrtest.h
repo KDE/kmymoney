@@ -22,20 +22,19 @@
 #include <cppunit/TestSuite.h>
 #include <cppunit/extensions/HelperMacros.h>
 
-#include "autotest.h"
+#include "../autotest.h"
 
 #define private public
 #define protected public
-#include "mymoneyobject.h"
+#include "../mymoneyobject.h"
 #include "mymoneydatabasemgr.h"
 #undef private
 
 class MyMoneyDatabaseMgrTest : public CppUnit::TestFixture  {
   CPPUNIT_TEST_SUITE(MyMoneyDatabaseMgrTest);
-//  CPPUNIT_TEST(testEmptyConstructor);
-//  CPPUNIT_TEST(testCreateDb);
+  CPPUNIT_TEST(testEmptyConstructor);
+  CPPUNIT_TEST(testCreateDb);
   CPPUNIT_TEST(testAttachDb);
-#if 0
   CPPUNIT_TEST(testSetFunctions);
   CPPUNIT_TEST(testSupportFunctions);
   CPPUNIT_TEST(testIsStandardAccount);
@@ -79,7 +78,6 @@ class MyMoneyDatabaseMgrTest : public CppUnit::TestFixture  {
   CPPUNIT_TEST(testCurrency);
   CPPUNIT_TEST(testCurrencyList);
   CPPUNIT_TEST(testAccountList);
-#endif
   CPPUNIT_TEST_SUITE_END();
 
 protected:
