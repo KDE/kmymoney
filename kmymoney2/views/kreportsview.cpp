@@ -863,8 +863,9 @@ void KReportsView::addReportTab(const MyMoneyReport& report)
 {
   KReportTab* tab = new KReportTab(m_reportTabWidget,report);
 
-  connect( tab->control()->buttonChart, SIGNAL(clicked()),
-    this, SLOT(slotToggleChart(void )));
+#warning "port to kde4"  
+  //connect( tab->control()->buttonChart, SIGNAL(clicked()),
+    //this, SLOT(slotToggleChart(void )));
   connect( tab->control()->buttonConfigure, SIGNAL(clicked()),
     this, SLOT(slotConfigure(void )));
   connect( tab->control()->buttonNew, SIGNAL(clicked()),
