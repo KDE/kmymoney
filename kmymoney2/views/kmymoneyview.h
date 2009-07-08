@@ -435,13 +435,13 @@ public:
 
 public slots:
   /**
-    * This slot writes information about the page passed as argument @p widget
+    * This slot writes information about the page passed as argument @current
     * in the kmymoney2.rc file so that in can be selected automatically when
     * the application is started again.
     *
     * @param widget pointer to page widget
     */
-  void slotRememberPage(QWidget* widget);
+  void slotRememberPage(const QModelIndex current, const QModelIndex previous);
 
   /**
     * Brings up a dialog to change the list(s) settings and saves them into the

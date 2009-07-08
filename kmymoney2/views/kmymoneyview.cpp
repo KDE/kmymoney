@@ -290,8 +290,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
 
 
   setCurrentPage(m_homeViewFrame);
-  #warning "port to kde4"
-  //connect(this, SIGNAL(aboutToShowPage(QWidget*)), this, SLOT(slotRememberPage(QWidget*)));
+  connect(this, SIGNAL(currentPageChanged(const QModelIndex, const QModelIndex)), this, SLOT(slotRememberPage(const QModelIndex, const QModelIndex)));
 
 
   m_inConstructor = false;
@@ -927,7 +926,7 @@ bool KMyMoneyView::initializeStorage()
   if(KMyMoneyGlobalSettings::startLastViewSelected() != 0) {
     KConfigGroup grp2 = config->group("Last Use Settings");
     pageIndex = grp2.readEntry("LastViewSelected", 0);
-    page = m_model->item(m_model->index(1,0));
+    page = m_model->item(m_model->index(pageIndex, 0));
   } else {
     page = m_homeViewFrame;
   }
@@ -1651,12 +1650,11 @@ void KMyMoneyView::progressCallback(int current, int total, const QString& msg)
   kmymoney2->progressCallback(current, total, msg);
 }
 
-void KMyMoneyView::slotRememberPage(QWidget* w)
+void KMyMoneyView::slotRememberPage(const QModelIndex current, const QModelIndex)
 {
   KSharedConfigPtr config = KGlobal::config();
   KConfigGroup grp = config->group("Last Use Settings");
-#warning "port to kde4"
-  //grp.writeEntry("LastViewSelected", pageIndex(w));
+  grp.writeEntry("LastViewSelected", current.row());
   config->sync();
 }
 
