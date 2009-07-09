@@ -2680,7 +2680,7 @@ void KMyMoney2App::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& par
   {
     int pos;
     // check for ':' in the name and use it as separator for a hierarchy
-    while((pos = newAccount.name().find(MyMoneyFile::AccountSeperator)) != -1) {
+    while((pos = newAccount.name().indexOf(MyMoneyFile::AccountSeperator)) != -1) {
       QString part = newAccount.name().left(pos);
       QString remainder = newAccount.name().mid(pos+1);
       const MyMoneyAccount& existingAccount = file->subAccountByName(parentAccount, part);
@@ -4354,7 +4354,7 @@ void KMyMoney2App::slotPayeeDelete(void)
           QStringList::const_iterator it_k;
           for(it_k = payeeNames.constBegin(); it_k != payeeNames.constEnd(); ++it_k) {
             QRegExp exp(*it_k, ignorecase);
-            if(exp.search(*it_n) != -1)
+            if(exp.indexIn(*it_n) != -1)
               break;
           }
           if(it_k == payeeNames.constEnd())
@@ -4455,7 +4455,7 @@ void KMyMoney2App::slotCurrencySetBase(void)
 
 void KMyMoney2App::slotBudgetNew(void)
 {
-  QDate date = QDate::currentDate(Qt::LocalTime);
+  QDate date = QDate::currentDate();
   date.setYMD(date.year(), 1, 1);
   QString newname = i18n("Budget %1",QString::number(date.year()));
 
@@ -6219,10 +6219,10 @@ void KMyMoney2App::slotPluginPlug(KPluginInfo* info)
   guiFactory()->addClient(plugin);
 
   if(op)
-    m_onlinePlugins[plugin->name()] = op;
+    m_onlinePlugins[plugin->objectName()] = op;
 
   if(ip)
-    m_importerPlugins[plugin->name()] = ip;
+    m_importerPlugins[plugin->objectName()] = ip;
 
   slotUpdateActions();
 }
@@ -6240,10 +6240,10 @@ void KMyMoney2App::slotPluginUnplug(KPluginInfo* info)
   guiFactory()->removeClient(plugin);
 
   if(op)
-    m_onlinePlugins.erase(plugin->name());
+    m_onlinePlugins.remove(plugin->objectName());
 
   if(ip)
-    m_importerPlugins.erase(plugin->name());
+    m_importerPlugins.remove(plugin->objectName());
 
   slotUpdateActions();
 }
@@ -6426,7 +6426,7 @@ void KMyMoney2App::slotAccountUpdateOnlineAll(void)
   for(it_a = accList.begin(); it_a != accList.end();) {
     if ((*it_a).onlineBankingSettings().value("provider").isEmpty()
     || m_onlinePlugins.find((*it_a).onlineBankingSettings().value("provider")) == m_onlinePlugins.end() ) {
-      it_a = accList.remove(it_a);
+      it_a = accList.erase(it_a);
     } else
       ++it_a;
   }
@@ -6479,7 +6479,7 @@ KMStatus::~KMStatus()
 void KMyMoney2App::Private::unlinkStatementXML(void)
 {
   QDir d("/home/thb", "kmm-statement*");
-  for(int i=0; i < d.count(); ++i) {
+  for(uint i = 0; i < d.count(); ++i) {
     qDebug("Remove %s", qPrintable(d[i]));
 #warning "fix me on windows"
     d.remove(QString("/home/thb/%1").arg(d[i]));
