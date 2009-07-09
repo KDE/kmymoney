@@ -95,7 +95,7 @@
               </layout>
             </item>
             <item row="1" column="0">
-              <widget class="Q3ButtonGroup" name="kcfg_forecastMethod">
+              <widget class="KButtonGroup" name="kcfg_forecastMethod">
                 <property name="title">
                   <string>Forecast Method</string>
                 </property>
@@ -105,18 +105,12 @@
                       <property name="text">
                         <string>Scheduled and Future Transactions</string>
                       </property>
-                      <property name="buttonGroupId">
-                        <number>0</number>
-                      </property>
                     </widget>
                   </item>
                   <item>
                     <widget class="QRadioButton" name="radioButton10">
                       <property name="text">
                         <string>History-based</string>
-                      </property>
-                      <property name="buttonGroupId">
-                        <number>1</number>
                       </property>
                     </widget>
                   </item>
@@ -163,7 +157,7 @@
                     </layout>
                   </item>
                   <item row="1" column="0">
-                    <widget class="Q3ButtonGroup" name="kcfg_historyMethod">
+                    <widget class="KButtonGroup" name="kcfg_historyMethod">
                       <property name="title">
                         <string>History Forecast Method</string>
                       </property>
@@ -173,9 +167,6 @@
                             <property name="text">
                               <string>Simple Moving Average</string>
                             </property>
-                            <property name="buttonGroupId">
-                              <number>0</number>
-                            </property>
                           </widget>
                         </item>
                         <item>
@@ -183,18 +174,12 @@
                             <property name="text">
                               <string>Weighted Moving Average</string>
                             </property>
-                            <property name="buttonGroupId">
-                              <number>1</number>
-                            </property>
                           </widget>
                         </item>
                         <item>
                           <widget class="QRadioButton" name="radioButton13">
                             <property name="text">
                               <string>Linear Regression</string>
-                            </property>
-                            <property name="buttonGroupId">
-                              <number>2</number>
                             </property>
                           </widget>
                         </item>

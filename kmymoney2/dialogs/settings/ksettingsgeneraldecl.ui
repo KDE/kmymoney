@@ -25,12 +25,9 @@
             </attribute>
             <layout class="QVBoxLayout">
               <item>
-                <widget class="Q3ButtonGroup" name="kcfg_StartLastViewSelected">
+                <widget class="KButtonGroup" name="kcfg_StartLastViewSelected">
                   <property name="title">
                     <string>Startup page options</string>
-                  </property>
-                  <property name="exclusive">
-                    <bool>true</bool>
                   </property>
                   <layout class="QVBoxLayout">
                     <item>
@@ -41,18 +38,12 @@
                         <property name="checked">
                           <bool>true</bool>
                         </property>
-                        <property name="buttonGroupId">
-                          <number>0</number>
-                        </property>
                       </widget>
                     </item>
                     <item>
                       <widget class="QRadioButton" name="radioButton2">
                         <property name="text">
                           <string>Start with last selected view</string>
-                        </property>
-                        <property name="buttonGroupId">
-                          <number>1</number>
                         </property>
                       </widget>
                     </item>
@@ -343,12 +334,9 @@
                 </widget>
               </item>
               <item>
-                <widget class="Q3ButtonGroup" name="kcfg_iconSize">
+                <widget class="KButtonGroup" name="kcfg_iconSize">
                   <property name="title">
                     <string>Icon size of navigation bar</string>
-                  </property>
-                  <property name="exclusive">
-                    <bool>true</bool>
                   </property>
                   <layout class="QGridLayout">
                     <item row="0" column="0">
@@ -494,7 +482,7 @@ You can use &lt;b&gt;View/Show all accounts&lt;/b&gt; to temporarily show hidden
                           <widget class="kMyMoneyDateInput" name="m_startDateEdit"/>
                         </item>
                         <item>
-                          <widget class="Q3DateEdit" name="kcfg_StartDate"/>
+                          <widget class="QDateEdit" name="kcfg_StartDate"/>
                         </item>
                         <item>
                           <spacer name="spacer10">
