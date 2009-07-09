@@ -87,7 +87,7 @@ void kMyMoneyScheduledDateTbl::drawCellContents(QPainter *painter, int /*row*/, 
   QPen pen;
   KColorScheme colorScheme = KColorScheme(QPalette::Active);
   //QBrush brushBlue(KGlobalSettings::activeTitleColor());
-  QBrush brushBlue = colorScheme.foreground(KColorScheme::NormalText);
+  QBrush brushBlue = colorScheme.background(KColorScheme::PositiveBackground);
   //QBrush brushLightblue(KGlobalSettings::baseColor());
   QBrush brushLightblue = colorScheme.background(KColorScheme::NormalBackground);
   QFont font=KGlobalSettings::generalFont();
@@ -119,14 +119,14 @@ void kMyMoneyScheduledDateTbl::drawCellContents(QPainter *painter, int /*row*/, 
     {
       if (hasFocus())
       { // draw the currently selected date
-        painter->setPen(colorScheme.foreground(KColorScheme::ActiveText));
-        painter->setBrush(colorScheme.background(KColorScheme::ActiveBackground));
+        painter->setPen(colorScheme.foreground(KColorScheme::PositiveText));
+        painter->setBrush(colorScheme.background(KColorScheme::PositiveBackground));
         pen=QColor(Qt::white);
       } else {
         //painter->setPen(KGlobalSettings::calculateAlternateBackgroundColor(KGlobalSettings::highlightColor()));
-	painter->setPen(colorScheme.foreground(KColorScheme::InactiveText));
+        painter->setPen(colorScheme.foreground(KColorScheme::InactiveText));
         //painter->setBrush(KGlobalSettings::calculateAlternateBackgroundColor(KGlobalSettings::highlightColor()));
-	painter->setBrush(colorScheme.background(KColorScheme::AlternateBackground));
+        painter->setBrush(colorScheme.background(KColorScheme::AlternateBackground));
         pen=QColor(Qt::white);
       }
     } else {

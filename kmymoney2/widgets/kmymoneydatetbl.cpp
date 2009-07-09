@@ -103,14 +103,16 @@ kMyMoneyDateTbl::kMyMoneyDateTbl(QWidget *parent, QDate date_, const char* name,
 void
 kMyMoneyDateTbl::paintCell(QPainter *painter, int row, int col)
 {
-#if 0
   QRect rect;
   QString text;
   QPen pen;
   int w=cellWidth();
   int h=cellHeight();
-  QBrush brushBlue(KGlobalSettings::activeTitleColor());
-  QBrush brushLightblue(KGlobalSettings::baseColor());
+  KColorScheme colorScheme = KColorScheme(QPalette::Active);
+  //QBrush brushBlue(KGlobalSettings::activeTitleColor());
+  QBrush brushBlue = colorScheme.background(KColorScheme::PositiveBackground);
+  //QBrush brushLightblue(KGlobalSettings::baseColor());
+  QBrush brushLightblue = colorScheme.background(KColorScheme::NormalBackground);
   QFont font=KGlobalSettings::generalFont();
 
   // -----
@@ -126,31 +128,41 @@ kMyMoneyDateTbl::paintCell(QPainter *painter, int row, int col)
       painter->setFont(font);
       bool normalday = true;
       QString daystr;
-      if ( col+firstWeekDay < 8 )
-        daystr = WEEK_DAY_NAME(col+firstWeekDay, true);
-      else
-        daystr = WEEK_DAY_NAME(col+firstWeekDay-7, true);
 
-      if ( daystr==i18n("Sunday", "Sun") || daystr==i18n("Saturday", "Sat") )
+      if ( col+firstWeekDay < 8 )
+        daystr = WEEK_DAY_NAME(col+firstWeekDay, KCalendarSystem::ShortDayName);
+      else
+        daystr = WEEK_DAY_NAME(col+firstWeekDay-7, KCalendarSystem::ShortDayName);
+
+      if ( daystr==i18nc("Sunday", "Sun") || daystr==i18nc("Saturday", "Sat") )
         normalday=false;
 
       if (!normalday)
       {
-        painter->setPen(KGlobalSettings::baseColor());
+        //painter->setPen(KGlobalSettings::baseColor());
+        painter->setPen(colorScheme.background(KColorScheme::NormalBackground));
         painter->setBrush(brushLightblue);
         painter->drawRect(0, 0, w, h);
-        painter->setPen(KGlobalSettings::activeTitleColor());
+        //painter->setPen(KGlobalSettings::activeTitleColor());
+        painter->setPen(colorScheme.foreground(KColorScheme::PositiveText));
       } else {
-        painter->setPen(KGlobalSettings::activeTitleColor());
+        //painter->setPen(KGlobalSettings::activeTitleColor());
+        painter->setPen(colorScheme.foreground(KColorScheme::PositiveText));
         painter->setBrush(brushBlue);
         painter->drawRect(0, 0, w, h);
-        painter->setPen(KGlobalSettings::activeTextColor());
+        //painter->setPen(KGlobalSettings::activeTextColor());
+        painter->setPen(colorScheme.foreground(KColorScheme::PositiveText));
       }
       painter->drawText(0, 0, w, h-1, Qt::AlignCenter,
                         daystr, -1, &rect);
-      painter->setPen(KGlobalSettings::textColor());
-      painter->moveTo(0, h-1);
-      painter->lineTo(w-1, h-1);
+      //painter->setPen(KGlobalSettings::textColor());
+      painter->setPen(colorScheme.foreground(KColorScheme::NormalText));
+      
+      QPainterPath path;
+      path.moveTo(0, h-1);
+      path.lineTo(w-1, h-1);
+
+      painter->drawPath(path);
 
       if(rect.width()>maxCell.width())
         maxCell.setWidth(rect.width());
@@ -160,10 +172,12 @@ kMyMoneyDateTbl::paintCell(QPainter *painter, int row, int col)
     }
     else if (m_type == WEEKLY)
     {
-      painter->setPen(KGlobalSettings::activeTitleColor());
+      //painter->setPen(KGlobalSettings::activeTitleColor());
+      painter->setPen(colorScheme.foreground(KColorScheme::PositiveText));
       painter->setBrush(brushBlue);
       painter->drawRect(0, 0, w, h);
-      painter->setPen(KGlobalSettings::activeTextColor());
+      //painter->setPen(KGlobalSettings::activeTextColor());
+      painter->setPen(colorScheme.foreground(KColorScheme::PositiveText));
 
       int year=date.year();
       QString headerText;
@@ -185,7 +199,7 @@ kMyMoneyDateTbl::paintCell(QPainter *painter, int row, int col)
 
       painter->setPen(KGlobalSettings::activeTitleColor());
       painter->setBrush(brushBlue);
-      painter->setPen(/*KGlobalSettings::activeTextColor()*/Qt::black);
+      painter->setPen(/*KGlobalSettings::activeTextColor()*/QColor(Qt::black));
 
       if (col == 0)
       {
@@ -260,7 +274,6 @@ kMyMoneyDateTbl::paintCell(QPainter *painter, int row, int col)
 
     drawCellContents(painter, row, col, drawDate);
   }
-#endif
 }
 
 void
@@ -341,8 +354,7 @@ kMyMoneyDateTbl::setFontSize(int size)
 
   for(count=0; count<m_colCount; ++count)
   {
-#warning "port to kde4"
-    //rect=metrics.boundingRect(WEEK_DAY_NAME(count+1/*, true*/));
+    rect=metrics.boundingRect(WEEK_DAY_NAME(count+1, KCalendarSystem::ShortDayName));
 
     maxCell.setWidth(qMax(maxCell.width(), rect.width()));
     maxCell.setHeight(qMax(maxCell.height(), rect.height()));
