@@ -362,7 +362,7 @@ Likewise, it won't allow matching between two transactions which have both been 
 <para>
 A transaction can have three states: non-reconciled (N), cleared (C) and 
 reconciled (R). When you enter a transaction, it has state (N). Once the 
-the bank posts the transaction, the user can clear it and thus transform 
+bank posts the transaction, the user can clear it and thus transform 
 it to state (C). When you receive a statement from the bank, all cleared 
 transactions should be on the statement. 
 </para>
