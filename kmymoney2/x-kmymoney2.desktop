@@ -10,6 +10,7 @@ Comment[ro]=Fișier KMyMoney
 Comment[sv]=Kmymoney-fil
 Comment[uk]=Файл KMyMoney
 Comment[x-test]=xxKMyMoney Filexx
+Comment[zh_TW]=KMyMoney 檔
 Icon=kmy
 Type=MimeType
 MimeType=application/x-kmymoney

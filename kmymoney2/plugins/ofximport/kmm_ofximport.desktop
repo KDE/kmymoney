@@ -14,6 +14,7 @@ Comment[pt_BR]=Adicionar a importação de OFX ao KMyMoney
 Comment[sv]=Lägg till OFX-import till Kmymoney
 Comment[uk]=Додає можливість імпортування OFX до KMyMoney
 Comment[x-test]=xxAdd OFX importing to KMyMoneyxx
+Comment[zh_TW]=新增 OFX 匯入 KMyMoney
 ServiceTypes=KMyMoneyPlugin
 Type=Service
 Icon=connect_creating

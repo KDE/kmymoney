@@ -10,6 +10,7 @@ Name[ro]=Modul KMyMoney
 Name[sv]=Kmymoney insticksprogram
 Name[uk]=Додаток KMyMoney
 Name[x-test]=xxKMyMoney Pluginxx
+Name[zh_TW]=KMyMoney 外掛程式
 X-KDE-ServiceType=KMyMoneyPlugin
 Comment=A KMyMoney plugin
 Comment[et]=KMyMoney plugin
@@ -21,4 +22,5 @@ Comment[ro]=Un modul KMyMoney
 Comment[sv]=Ett Kmymoney insticksprogram
 Comment[uk]=Додаток KMyMoney
 Comment[x-test]=xxA KMyMoney pluginxx
+Comment[zh_TW]=KMyMoney 外掛程式
 
