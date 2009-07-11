@@ -57,28 +57,24 @@ KInstitutionsView::~KInstitutionsView()
 {
 }
 
-void KInstitutionsView::show(void)
+void KInstitutionsView::showEvent(QShowEvent * event)
 {
   if(m_needReload) {
     loadAccounts();
     m_needReload = false;
   }
 
+  m_accountTree->setResizeMode(Q3ListView::LastColumn);
+  m_accountTree->restoreLayout("Institution View Settings");
+
   // don't forget base class implementation
-  KInstitutionsViewDecl::show();
+  KInstitutionsViewDecl::showEvent(event);
 
   // if we have a selected account, let the application know about it
   KMyMoneyAccountTreeBaseItem *item = m_accountTree->selectedItem();
   if(item) {
     emit selectObject(item->itemObject());
   }
-}
-
-void KInstitutionsView::polish(void)
-{
-  KInstitutionsViewDecl::polish();
-  m_accountTree->setResizeMode(Q3ListView::LastColumn);
-  m_accountTree->restoreLayout("Institution View Settings");
 }
 
 void KInstitutionsView::slotLoadAccounts(void)

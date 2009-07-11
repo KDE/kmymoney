@@ -61,19 +61,6 @@ public:
 public slots:
   void slotLoadAccounts(void);
 
-  /**
-   * Override the base class behaviour to include all updates that
-   * happened in the meantime.
-   */
-  void show(void);
-
-  /**
-   * Override the base class behaviour to restore the layout. Do not
-   * do this in show() because show() itself may change the layout
-   * in undesired ways.
-   */
-  void polish(void);
-
   void slotReconcileAccount(const MyMoneyAccount& acc, const QDate& reconciliationDate, const MyMoneyMoney& endingBalance);
 
 protected:
@@ -84,6 +71,9 @@ protected:
 
   // load stock accounts under the investment account (parent)
   void loadSubAccounts(KMyMoneyAccountTreeItem* parent);
+
+  // for now it contains the implementation from show()
+  virtual void showEvent(QShowEvent * event);
 
 protected slots:
   void slotUpdateNetWorth(void);
