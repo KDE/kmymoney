@@ -36,8 +36,9 @@
 #include <kapplication.h>
 #include <klocale.h>
 #include <k3process.h>
-#include <k3passworddialog.h>
+#include <kpassworddialog.h>
 #include <klibloader.h>
+//#include <kdialog.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -187,13 +188,13 @@ bool KGPGFile::open(int mode, const QString& cmdArgs, bool skipPasswd)
 
   QByteArray pwd;
   if(isReadable() && useOwnPassphrase && !skipPasswd) {
-    K3PasswordDialog dlg(K3PasswordDialog::Password,false,0);
+    KPasswordDialog dlg(0, KPasswordDialog::NoFlags,KDialog::None);
     dlg.setPrompt(i18n("Enter passphrase"));
-    dlg.addLine(i18n("File"), m_fn);
+    dlg.addCommentLine(i18n("File"), m_fn);
     dlg.adjustSize();
     if (dlg.exec() == QDialog::Rejected)
       return false;
-    pwd = QByteArray(dlg.password());
+    pwd = QByteArray(dlg.password().toUtf8());
   }
 
   // qDebug("starting GPG process");
