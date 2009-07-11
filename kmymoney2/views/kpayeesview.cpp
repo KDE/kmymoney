@@ -354,6 +354,13 @@ KPayeesView::KPayeesView(QWidget *parent) :
 
   m_payeesList->addColumn(i18n("Name"));
 
+  KIconLoader* il = KIconLoader::global();
+  KGuiItem updateButtonItem( i18n("Update"),
+                    KIcon(il->loadIcon("dialog-ok", KIconLoader::Small, KIconLoader::SizeSmall)),
+                    i18n("Accepts the entered data and stores it"),
+                    i18n("Use this to accept the modified data."));
+  m_updateButton->setGuiItem(updateButtonItem);
+
   m_updateButton->setEnabled(false);
   radioNoMatch->setChecked(true);
 
@@ -362,13 +369,6 @@ KPayeesView::KPayeesView(QWidget *parent) :
   checkEnableDefaultAccount->setChecked(false);
   labelDefaultAccount->setEnabled(false);
   comboDefaultAccount->setEnabled(false);
-
-  KIconLoader* il = KIconLoader::global();
-  KGuiItem updateButtonItem( i18n("Update"),
-                    KIcon(il->loadIcon("dialog-ok", KIconLoader::Small, KIconLoader::SizeSmall)),
-                    i18n("Accepts the entered data and stores it"),
-                    i18n("Use this to accept the modified data."));
-  m_updateButton->setGuiItem(updateButtonItem);
 
   connect(m_payeesList, SIGNAL(selectionChanged()), this, SLOT(slotSelectPayee()));
   connect(m_payeesList, SIGNAL(itemRenamed(Q3ListViewItem*,int,const QString&)), this, SLOT(slotRenamePayee(Q3ListViewItem*,int,const QString&)));
