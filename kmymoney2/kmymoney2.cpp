@@ -443,7 +443,7 @@ void KMyMoney2App::initActions(void)
 
   KAction *institution_edit = actionCollection()->addAction("institution_edit");
   institution_edit->setText(i18n("Edit institution..."));
-  institution_edit->setIcon(KIcon("edit"));
+  institution_edit->setIcon(KIcon("document-properties"));
   connect(institution_edit, SIGNAL(triggered()), this, SLOT(slotInstitutionEdit()));
 
   KAction *institution_delete = actionCollection()->addAction("institution_delete");
@@ -483,7 +483,7 @@ void KMyMoney2App::initActions(void)
 
   KAction *account_edit = actionCollection()->addAction("account_edit");
   account_edit->setText(i18n("Edit account..."));
-  account_edit->setIcon(KIcon("edit"));
+  account_edit->setIcon(KIcon("document-properties"));
   connect(account_edit, SIGNAL(triggered()), this, SLOT(slotAccountEdit()));
 
   KAction *account_delete = actionCollection()->addAction("account_delete");
@@ -541,7 +541,7 @@ void KMyMoney2App::initActions(void)
 
   KAction *category_edit = actionCollection()->addAction("category_edit");
   category_edit->setText(i18n("Edit category..."));
-  category_edit->setIcon(KIcon("edit"));
+  category_edit->setIcon(KIcon("document-properties"));
   connect(category_edit, SIGNAL(triggered()), this, SLOT(slotAccountEdit()));
 
   KAction *category_delete = actionCollection()->addAction("category_delete");
@@ -555,7 +555,7 @@ void KMyMoney2App::initActions(void)
   // **************
   KAction *tools_qif_editor = actionCollection()->addAction("tools_qif_editor");
   tools_qif_editor->setText(i18n("QIF Profile Editor..."));
-  tools_qif_editor->setIcon(KIcon("edit"));
+  tools_qif_editor->setIcon(KIcon("document-properties"));
   connect(tools_qif_editor, SIGNAL(triggered()), this, SLOT(slotQifProfileEditor()));
 
   KAction *tools_security_editor = actionCollection()->addAction("tools_security_editor");
@@ -626,7 +626,7 @@ void KMyMoney2App::initActions(void)
   //p->setShortcutConfigurable(false);
   KAction *transaction_edit = actionCollection()->addAction("transaction_edit");
   transaction_edit->setText(i18nc("Edit transaction button", "Edit"));
-  transaction_edit->setIcon(KIcon("edit"));
+  transaction_edit->setIcon(KIcon("document-properties"));
   transaction_edit->setShortcutConfigurable(false);
   connect(transaction_edit, SIGNAL(triggered()), this, SLOT(slotTransactionsEdit()));
 
@@ -723,7 +723,7 @@ void KMyMoney2App::initActions(void)
 
   KAction *investment_edit = actionCollection()->addAction("investment_edit");
   investment_edit->setText(i18n("Edit investment..."));
-  investment_edit->setIcon(KIcon("edit"));
+  investment_edit->setIcon(KIcon("document-properties"));
   connect(investment_edit, SIGNAL(triggered()), this, SLOT(slotInvestmentEdit()));
 
   KAction *investment_delete = actionCollection()->addAction("investment_delete");
@@ -747,7 +747,7 @@ void KMyMoney2App::initActions(void)
 
   KAction *schedule_edit = actionCollection()->addAction("schedule_edit");
   schedule_edit->setText(i18n("Edit scheduled transaction"));
-  schedule_edit->setIcon(KIcon("edit"));
+  schedule_edit->setIcon(KIcon("document-properties"));
   connect(schedule_edit, SIGNAL(triggered()), this, SLOT(slotScheduleEdit()));
 
   KAction *schedule_delete = actionCollection()->addAction("schedule_delete");
@@ -794,7 +794,7 @@ void KMyMoney2App::initActions(void)
 
   KAction *budget_rename = actionCollection()->addAction("budget_rename");
   budget_rename->setText(i18n("Rename budget"));
-  budget_rename->setIcon(KIcon("edit"));
+  budget_rename->setIcon(KIcon("document-properties"));
   connect(budget_rename, SIGNAL(triggered()), this, SIGNAL(budgetRename()));
 
   KAction *budget_delete = actionCollection()->addAction("budget_delete");
