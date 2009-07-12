@@ -191,7 +191,8 @@ KMyMoney2App::KMyMoney2App(QWidget * /*parent*/ , const char* name) :
   m_autoSaveTimer(0),
   m_inAutoSaving(false),
   m_transactionEditor(0),
-  m_endingBalanceDlg(0)
+  m_endingBalanceDlg(0),
+  m_saveEncrypted(0)
 {
   new KmymoneyAdaptor(this);
   QDBusConnection::sessionBus().registerObject("/KMymoney", this);
@@ -1409,6 +1410,8 @@ bool KMyMoney2App::slotFileSave(void)
 
 void KMyMoney2App::slotFileSaveAsFilterChanged(const QString& filter)
 {
+  if (!m_saveEncrypted)
+    return;
   if(filter != "*.kmy") {
     m_saveEncrypted->setCurrentItem(0);
     m_saveEncrypted->setEnabled(false);
@@ -1548,7 +1551,7 @@ bool KMyMoney2App::slotFileSaveAs(void)
 
           m_fileName = newName;
           QString encryptionKeys;
-          if(m_saveEncrypted->currentItem() != 0) {
+          if(m_saveEncrypted && m_saveEncrypted->currentItem() != 0) {
             QRegExp keyExp(".* \\((.*)\\)");
             if(keyExp.search(m_saveEncrypted->currentText()) != -1) {
               encryptionKeys = keyExp.cap(1);
