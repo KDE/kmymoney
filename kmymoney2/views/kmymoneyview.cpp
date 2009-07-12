@@ -303,10 +303,13 @@ KMyMoneyView::~KMyMoneyView()
 
 void KMyMoneyView::addTitleBar(QWidget* parent, const QString& title)
 {
+#warning "port to kde4"
+#if 0
   KMyMoneyTitleLabel* label = new KMyMoneyTitleLabel( parent, "titleLabel" );
   label->setMinimumSize( QSize( 100, 30 ) );
   label->setRightImageFile("pics/titlelabel_background.png" );
   label->setText(title);
+#endif
 }
 
 void KMyMoneyView::showTitleBar(bool show)
