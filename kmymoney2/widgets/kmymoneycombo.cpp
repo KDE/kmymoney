@@ -584,6 +584,7 @@ void KMyMoneyPayeeCombo::loadPayees(const Q3ValueList<MyMoneyPayee>& list)
 
 class KMyMoneyGeneralCombo::Private {
 public:
+  QString m_null;
   QMap<QString, int> m_strings;
   void insertItem(const QString& s, int id) { m_strings[s] = id; }
 
@@ -602,7 +603,7 @@ public:
         return it.key();
       }
     }
-    return QString::null;
+    return m_null;
   }
 };
 
