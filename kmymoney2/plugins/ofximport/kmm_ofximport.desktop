@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=KMyMoney OFX
+Name[fr]=OFX pour KMyMoney
 Name[pt]=OFX do KMyMoney
 Name[pt_BR]=OFX do KMyMoney
 Name[sv]=Kmymoney OFX
@@ -7,6 +8,7 @@ Name[uk]=OFX KMyMoney
 Name[x-test]=xxKMyMoney OFXxx
 Comment=Add OFX importing to KMyMoney
 Comment[et]=OFX import KMyMoneysse
+Comment[fr]=Ajouter l'import OFX à KMyMoney
 Comment[gl]=Engade a importación de OFX a KMyMoney
 Comment[km]=បន្ថែម​ការ​នាំចូល OFX ទៅ​កាន់ KMyMoney
 Comment[pt]=Adicionar a importação de OFX ao KMyMoney

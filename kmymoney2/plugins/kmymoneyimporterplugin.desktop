@@ -2,6 +2,7 @@
 Type=ServiceType
 Name=KMyMoney Importer Plugin
 Name[et]=KMyMoney impordiplugin
+Name[fr]=Module d'import pour KMyMoney
 Name[gl]=Extensión de importación de KMyMoney
 Name[km]=កម្មវិធី​ជំនួយ​របស់​កម្មវិធី​នាំចូល KMyMoney
 Name[pt]='Plugin' de Importação do KMyMoney
@@ -14,6 +15,7 @@ Name[zh_TW]=KMyMoney 匯入外掛程式
 X-KDE-ServiceType=KMyMoneyImporterPlugin
 Comment=A KMyMoney plugin
 Comment[et]=KMyMoney plugin
+Comment[fr]=Un module pour KMyMoney
 Comment[gl]=Unha extensión de KMyMoney
 Comment[km]=កម្មវិធី​ជំនួយ KMyMoney
 Comment[pt]=Um 'plugin' do KMyMoney
