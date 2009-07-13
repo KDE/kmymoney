@@ -48,6 +48,8 @@ const int kMyMoneyCompletion::MAX_ITEMS = 16;
 kMyMoneyCompletion::kMyMoneyCompletion(QWidget *parent, const char *name ) :
   KVBox(parent)
 {
+  setWindowFlags(Qt::Popup);
+  
   m_selector = new KMyMoneySelector(this);
   m_selector->listView()->setFocusProxy(this);
 
