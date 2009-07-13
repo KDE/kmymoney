@@ -145,10 +145,8 @@ const QString KMyMoneyUtils::scheduleTypeToString(MyMoneySchedule::typeE type)
 
 KGuiItem KMyMoneyUtils::scheduleNewGuiItem(void)
 {
-  KIconLoader *ic = KIconLoader::global();
-
   KGuiItem splitGuiItem(  i18n("&New Schedule..."),
-                          KIcon(ic->loadIcon("document-new", KIconLoader::Small, KIconLoader::SizeSmall)),
+                          KIcon("document-new"),
                           i18n("Create a new schedule."),
                           i18n("Use this to create a new schedule."));
 
@@ -157,10 +155,8 @@ KGuiItem KMyMoneyUtils::scheduleNewGuiItem(void)
 
 KGuiItem KMyMoneyUtils::accountsFilterGuiItem(void)
 {
-  KIconLoader *ic = KIconLoader::global();
-
   KGuiItem splitGuiItem(  i18n("&Filter"),
-                          KIcon(ic->loadIcon("filter", KIconLoader::Small, KIconLoader::SizeSmall)),
+                          KIcon("filter"),
                           i18n("Filter out accounts"),
                           i18n("Use this to filter out accounts"));
 

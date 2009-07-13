@@ -102,12 +102,11 @@ kMyMoneySplitTable::kMyMoneySplitTable(QWidget *parent, const char *name ) :
 
   // setup the context menu
   m_contextMenu = new KMenu(this);
-  KIconLoader *il = KIconLoader::global();
   m_contextMenu->setTitle(i18n("Split Options"));
-  m_contextMenu->setIcon(il->loadIcon("transaction", KIconLoader::MainToolbar));
-  m_contextMenu->insertItem(il->loadIcon("edit", KIconLoader::Small), i18n("Edit..."), this, SLOT(slotStartEdit()));
-  m_contextMenuDuplicate = m_contextMenu->insertItem(il->loadIcon("editcopy", KIconLoader::Small), i18n("Duplicate"), this, SLOT(slotDuplicateSplit()));
-  m_contextMenuDelete = m_contextMenu->insertItem(il->loadIcon("delete", KIconLoader::Small),
+  m_contextMenu->setIcon(KIcon("transaction"));
+  m_contextMenu->insertItem(KIcon("edit"), i18n("Edit..."), this, SLOT(slotStartEdit()));
+  m_contextMenuDuplicate = m_contextMenu->insertItem(KIcon("editcopy"), i18n("Duplicate"), this, SLOT(slotDuplicateSplit()));
+  m_contextMenuDelete = m_contextMenu->insertItem(KIcon("delete"),
                         i18n("Delete ..."),
                         this, SLOT(slotDeleteSplit()));
 
@@ -849,16 +848,15 @@ QWidget* kMyMoneySplitTable::createEditWidgets(void)
   m_editMemo->setFont(cellFont);
 
   // create buttons for the mouse users
-  KIconLoader *il = KIconLoader::global();
   m_registerButtonFrame = new QFrame(this);
   QPalette palette = m_registerButtonFrame->palette();
   palette.setColor(QColorGroup::Background, rowBackgroundColor(m_currentRow+1) );
   m_registerButtonFrame->setPalette(palette);
 
   QHBoxLayout* l = new QHBoxLayout(m_registerButtonFrame);
-  m_registerEnterButton = new KPushButton(KIcon( il->loadIcon("dialog-ok", KIconLoader::Small, KIconLoader::SizeSmall) ), QString(), m_registerButtonFrame);
+  m_registerEnterButton = new KPushButton(KIcon("dialog-ok"), QString(), m_registerButtonFrame);
 
-  m_registerCancelButton = new KPushButton(KIcon( il->loadIcon("dialog-cancel", KIconLoader::Small, KIconLoader::SizeSmall) ), QString(), m_registerButtonFrame);
+  m_registerCancelButton = new KPushButton(KIcon("dialog-cancel"), QString(), m_registerButtonFrame);
 
   l->addWidget(m_registerEnterButton);
   l->addWidget(m_registerCancelButton);

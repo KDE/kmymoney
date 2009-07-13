@@ -63,21 +63,20 @@ KImportDlg::KImportDlg(QWidget *parent)
   // load button icons
   m_qbuttonCancel->setGuiItem(KStandardGuiItem::cancel());
 
-  KIconLoader* il = KIconLoader::global();
   KGuiItem okButtenItem( i18n( "&Import" ),
-                      KIcon(il->loadIcon("fileimport", KIconLoader::Small, KIconLoader::SizeSmall)),
+                      KIcon("fileimport"),
                       i18n("Start operation"),
                       i18n("Use this to start the import operation"));
   m_qbuttonOk->setGuiItem(okButtenItem);
 
   KGuiItem browseButtenItem( i18n( "&Browse..." ),
-                      KIcon(il->loadIcon("fileopen", KIconLoader::Small, KIconLoader::SizeSmall)),
+                      KIcon("fileopen"),
                       i18n("Select filename"),
                       i18n("Use this to select a filename to export to"));
   m_qbuttonBrowse->setGuiItem(browseButtenItem);
 
   KGuiItem newButtenItem( i18n( "&New..." ),
-                      KIcon(il->loadIcon("document-new", KIconLoader::Small, KIconLoader::SizeSmall)),
+                      KIcon("document-new"),
                       i18n("Create a new profile"),
                       i18n("Use this to open the profile editor"));
   m_profileEditorButton->setGuiItem(newButtenItem);

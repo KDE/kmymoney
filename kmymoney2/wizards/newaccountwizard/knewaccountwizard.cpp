@@ -1369,9 +1369,8 @@ LoanPayoutPage::LoanPayoutPage(Wizard* wizard) :
   m_mandatoryGroup->add(m_assetAccount->lineEdit());
   m_mandatoryGroup->add(m_loanAccount->lineEdit());
 
-  KIconLoader* il = KIconLoader::global();
   KGuiItem createAssetButtenItem( i18n( "&Create..." ),
-                                  KIcon(il->loadIcon("document-new", KIconLoader::Small, KIconLoader::SizeSmall)),
+                                  KIcon("document-new"),
                                   i18n("Create a new asset account"),
                                   i18n("If the asset account does not yet exist, press this button to create it."));
   m_createAssetButton->setGuiItem(createAssetButtenItem);

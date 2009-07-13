@@ -75,17 +75,16 @@ KSplitTransactionDlg::KSplitTransactionDlg(const MyMoneyTransaction& t,
 {
     setModal( true );
   // add icons to buttons
-  KIconLoader *il = KIconLoader::global();
 
   KGuiItem clearButtenItem( i18n( "Clear &All" ),
-                    KIcon(il->loadIcon("edittrash", KIconLoader::Small, KIconLoader::SizeSmall)),
+                    KIcon("edittrash"),
                     i18n("Clear all splits"),
                     i18n("Use this to clear all splits of this transaction"));
   clearAllBtn->setGuiItem(clearButtenItem);
 
 
   KGuiItem mergeButtenItem( i18n( "&Merge" ),
-                             KIcon(il->loadIcon("math_sum", KIconLoader::Small, KIconLoader::SizeSmall)),
+                             KIcon("math_sum"),
                                       "", "");
   mergeBtn->setGuiItem(mergeButtenItem);
 

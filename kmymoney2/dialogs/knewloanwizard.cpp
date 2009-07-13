@@ -121,23 +121,22 @@ KNewLoanWizard::KNewLoanWizard(QWidget *parent) :
   m_interestAccountEdit->removeButtons();
 
   // load button icons
-  KIconLoader* il = KIconLoader::global();
   KGuiItem createCategoryButtenItem( i18n( "&Create..." ),
-                      KIcon(il->loadIcon("document-new", KIconLoader::Small, KIconLoader::SizeSmall)),
+                      KIcon("document-new"),
                       i18n("Create a new category"),
                       i18n("Use this to open the new account editor"));
   m_createCategoryButton->setGuiItem(createCategoryButtenItem);
   connect(m_createCategoryButton, SIGNAL(clicked()), this, SLOT(slotCreateCategory()));
 
   KGuiItem additionalFeeButtenItem( i18n( "&Additional fees..." ),
-                      0, //QIconSet(il->loadIcon("document-new", KIconLoader::Small, KIconLoader::SizeSmall)),
+                      0, //KIcon("document-new"),
                       i18n("Enter additional fees"),
                       i18n("Use this to add any additional fees other than principal and interest contained in your periodical payments."));
   m_additionalFeeButton->setGuiItem(additionalFeeButtenItem);
   connect(m_additionalFeeButton, SIGNAL(clicked()), this, SLOT(slotAdditionalFees()));
 
   KGuiItem createAssetButtenItem( i18n( "&Create..." ),
-                      KIcon(il->loadIcon("document-new", KIconLoader::Small, KIconLoader::SizeSmall)),
+                      KIcon("document-new"),
                       i18n("Create a new asset account"),
                       i18n("Use this to create a new account to which the initial payment should be made"));
   m_createNewAssetButton->setGuiItem(createAssetButtenItem);

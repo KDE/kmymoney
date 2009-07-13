@@ -64,13 +64,12 @@ KCategoriesView::KCategoriesView(QWidget *parent) :
   hboxLayout->insertWidget(2, m_searchWidget);
 
   // setup icons for collapse and expand button
-  KIconLoader *ic = KIconLoader::global();
   KGuiItem collapseGuiItem("",
-                          KIcon(ic->loadIcon("viewmag-", KIconLoader::Small, KIconLoader::SizeSmall)),
+                          KIcon("viewmag"),
                           QString(),
                           QString());
   KGuiItem expandGuiItem("",
-                          KIcon(ic->loadIcon("viewmag+", KIconLoader::Small, KIconLoader::SizeSmall)),
+                          KIcon("viewmag+"),
                           QString(),
                           QString());
   m_collapseButton->setGuiItem(collapseGuiItem);

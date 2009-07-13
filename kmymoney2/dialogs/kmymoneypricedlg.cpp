@@ -56,27 +56,26 @@
 KMyMoneyPriceDlg::KMyMoneyPriceDlg(QWidget* parent) :
   KMyMoneyPriceDlgDecl(parent)
 {
-  KIconLoader *il = KIconLoader::global();
   KGuiItem removeButtenItem( i18n( "&Delete" ),
-                    KIcon(il->loadIcon("delete", KIconLoader::Small, KIconLoader::SizeSmall)),
+                    KIcon("delete"),
                     i18n("Delete this entry"),
                     i18n("Remove this price item from the file"));
   m_deleteButton->setGuiItem(removeButtenItem);
 
   KGuiItem newButtenItem( i18n( "&New" ),
-                    KIcon(il->loadIcon("document-new", KIconLoader::Small, KIconLoader::SizeSmall)),
+                    KIcon("document-new"),
                     i18n("Add a new entry"),
                     i18n("Create a new price entry."));
   m_newButton->setGuiItem(newButtenItem);
 
   KGuiItem editButtenItem( i18n( "&Edit" ),
-                    KIcon(il->loadIcon("document-edit", KIconLoader::Small, KIconLoader::SizeSmall)),
+                    KIcon("document-edit"),
                     i18n("Modify the selected entry"),
                     i18n("Change the details of selected price information."));
   m_editButton->setGuiItem(editButtenItem);
 
   KGuiItem okButtenItem( i18n("&Close" ),
-                    KIcon(il->loadIcon("dialog-ok", KIconLoader::Small, KIconLoader::SizeSmall)),
+                    KIcon("dialog-ok"),
                     i18n("Close the dialog"),
                     i18n("Use this to close the dialog and return to the application."));
   m_closeButton->setGuiItem(okButtenItem);

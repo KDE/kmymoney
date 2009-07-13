@@ -95,10 +95,8 @@ KScheduledView::KScheduledView(QWidget *parent) :
   m_qbuttonNew->setGuiItem(KMyMoneyUtils::scheduleNewGuiItem());
   m_accountsCombo->setGuiItem(KMyMoneyUtils::accountsFilterGuiItem());
 
-  KIconLoader *il = KIconLoader::global();
-
-  m_tabWidget->setTabIcon(m_tabWidget->indexOf(m_listTab), KIcon(il->loadIcon("view-list-details", KIconLoader::Small, KIconLoader::SizeSmall)));
-  m_tabWidget->setTabIcon(m_tabWidget->indexOf(m_calendarTab), KIcon(il->loadIcon("view-calendar-list", KIconLoader::Small, KIconLoader::SizeSmall)));
+  m_tabWidget->setTabIcon(m_tabWidget->indexOf(m_listTab), KIcon("view-list-details"));
+  m_tabWidget->setTabIcon(m_tabWidget->indexOf(m_calendarTab), KIcon("view-calendar-list"));
 
   connect(m_qlistviewScheduled, SIGNAL(contextMenu(K3ListView*, Q3ListViewItem*, const QPoint&)),
     this, SLOT(slotListViewContextMenu(K3ListView*, Q3ListViewItem*, const QPoint&)));

@@ -50,12 +50,11 @@ KBackupDlg::KBackupDlg( QWidget* parent)
   readConfig();
 
   // add icons to buttons
-  KIconLoader *il = KIconLoader::global();
   btnOK->setGuiItem(KStandardGuiItem::ok());
   btnCancel->setGuiItem(KStandardGuiItem::cancel());
 
   KGuiItem chooseButtenItem( i18n("C&hoose..."),
-                    KIcon(il->loadIcon("folder", KIconLoader::Small, KIconLoader::SizeSmall)),
+                    KIcon("folder"),
                     i18n("Select mount point"),
                     i18n("Use this to browse to the mount point."));
   chooseButton->setGuiItem(chooseButtenItem);

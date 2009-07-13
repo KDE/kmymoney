@@ -604,11 +604,11 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
             KGuiItem enterItem;
             KIconLoader* il = KIconLoader::global();
             KGuiItem enterButton( i18n("&Enter" ),
-                    KIcon(il->loadIcon("kontact_journal", KIconLoader::Small, KIconLoader::SizeSmall)),
+                    KIcon("kontact_journal"),
                     i18n("Accepts the entered data and stores it"),
                     i18n("Use this to enter the transaction into the ledger."));
             KGuiItem scheduleButton( i18n("&Schedule" ),
-                    KIcon(il->loadIcon("kontact_date", KIconLoader::Small, KIconLoader::SizeSmall)),
+                    KIcon("kontact_date"),
                     i18n("Accepts the entered data and stores it as schedule"),
                     i18n("Use this to schedule the transaction for later entry into the ledger."));
 

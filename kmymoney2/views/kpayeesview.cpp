@@ -354,9 +354,8 @@ KPayeesView::KPayeesView(QWidget *parent) :
 
   m_payeesList->addColumn(i18n("Name"));
 
-  KIconLoader* il = KIconLoader::global();
   KGuiItem updateButtonItem( i18n("Update"),
-                    KIcon(il->loadIcon("dialog-ok", KIconLoader::Small, KIconLoader::SizeSmall)),
+                    KIcon("dialog-ok"),
                     i18n("Accepts the entered data and stores it"),
                     i18n("Use this to accept the modified data."));
   m_updateButton->setGuiItem(updateButtonItem);

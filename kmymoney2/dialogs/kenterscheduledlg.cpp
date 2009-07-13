@@ -71,8 +71,8 @@ KEnterScheduleDlg::KEnterScheduleDlg(QWidget *parent, const MyMoneySchedule& sch
 {
   d->m_schedule = schedule;
   d->m_extendedReturnCode = KMyMoneyUtils::Enter;
-  buttonOk->setIconSet(KIconLoader::global()->loadIconSet("go-jump-locationbar", KIconLoader::NoGroup, KIconLoader::SizeSmall, true));
-  buttonSkip->setIconSet(KIconLoader::global()->loadIconSet("media-seek-forward", KIconLoader::NoGroup, KIconLoader::SizeSmall, true));
+  buttonOk->setIcon(KIcon("go-jump-locationbar"));
+  buttonSkip->setIcon(KIcon("media-seek-forward"));
   buttonCancel->setGuiItem(KStandardGuiItem::cancel());
   buttonHelp->setGuiItem(KStandardGuiItem::help());
   buttonIgnore->setHidden(true);

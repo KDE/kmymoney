@@ -106,37 +106,36 @@ KBudgetView::KBudgetView(QWidget *parent) :
   m_accountTree->setSorting(-1);
   m_budgetList->setSorting(0);
 
-  KIconLoader* il = KIconLoader::global();
   KGuiItem newButtenItem( QString(""),
-                             KIcon(il->loadIcon("document-new", KIconLoader::Small, KIconLoader::SizeSmall)),
+                             KIcon("document-new"),
                              i18n("Creates a new budget"),
                              i18n("Use this to create a new empty budget."));
   m_newButton->setGuiItem(newButtenItem);
   m_newButton->setToolTip( newButtenItem.toolTip());
 
   KGuiItem renameButtenItem( QString(""),
-                          KIcon(il->loadIcon("edit-rename", KIconLoader::Small, KIconLoader::SizeSmall)),
+                          KIcon("edit-rename"),
                           i18n("Rename the current selected budget"),
                           i18n("Use this to start renaming the selected budget."));
   m_renameButton->setGuiItem(renameButtenItem);
   m_renameButton->setToolTip( renameButtenItem.toolTip());
 
   KGuiItem deleteButtenItem( QString(""),
-                             KIcon(il->loadIcon("delete", KIconLoader::Small, KIconLoader::SizeSmall)),
+                             KIcon("delete"),
                              i18n("Delete the current selected budget"),
                              i18n("Use this to delete the selected budget."));
   m_deleteButton->setGuiItem(deleteButtenItem);
   m_deleteButton->setToolTip( deleteButtenItem.toolTip());
 
   KGuiItem updateButtenItem( QString(""),
-                             KIcon(il->loadIcon("dialog-ok", KIconLoader::Small, KIconLoader::SizeSmall)),
+                             KIcon("dialog-ok"),
                              i18n("Accepts the entered values and stores the budget"),
                              i18n("Use this to store the modified data."));
   m_updateButton->setGuiItem(updateButtenItem);
   m_updateButton->setToolTip( updateButtenItem.toolTip());
 
   KGuiItem resetButtenItem( QString(""),
-                             KIcon(il->loadIcon("undo", KIconLoader::Small, KIconLoader::SizeSmall)),
+                             KIcon("undo"),
                              i18n("Revert budget to last saved state"),
                              i18n("Use this to discard the modified data."));
   m_resetButton->setGuiItem(resetButtenItem);

@@ -73,8 +73,7 @@ KMyMoneyCategory::KMyMoneyCategory(QWidget* parent, const char * name, bool spli
 
     // create button
     KGuiItem splitButtonItem("",
-        KIcon(KIconLoader::global()->loadIcon("split_transaction", KIconLoader::Small,
-        KIconLoader::SizeSmall)), "", "");
+        KIcon("split_transaction"), "", "");
     d->splitButton = new KPushButton( splitButtonItem, d->frame );
     d->splitButton->setObjectName( "splitButton" );
 

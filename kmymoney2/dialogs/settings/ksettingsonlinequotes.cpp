@@ -48,21 +48,20 @@ KSettingsOnlineQuotes::KSettingsOnlineQuotes(QWidget *parent)
 
   m_updateButton->setEnabled(false);
 
-  KIconLoader* il = KIconLoader::global();
   KGuiItem updateButtenItem( i18n("&Update" ),
-                    KIcon(il->loadIcon("dialog-ok", KIconLoader::Small, KIconLoader::SizeSmall)),
+                    KIcon("dialog-ok"),
                     i18n("Accepts the entered data and stores it"),
                     i18n("Use this to accept the modified data."));
   m_updateButton->setGuiItem(updateButtenItem);
 
   KGuiItem deleteButtenItem( i18n( "&Delete" ),
-                      KIcon(il->loadIcon("editdelete", KIconLoader::Small, KIconLoader::SizeSmall)),
+                      KIcon("editdelete"),
                       i18n("Delete the selected source entry"),
                       i18n("Use this to delete the selected online source entry"));
   m_deleteButton->setGuiItem(deleteButtenItem);
 
   KGuiItem newButtenItem( i18n( "&New..." ),
-                      KIcon(il->loadIcon("document-new", KIconLoader::Small, KIconLoader::SizeSmall)),
+                      KIcon("document-new"),
                       i18n("Create a new source entry for online quotes"),
                       i18n("Use this to create a new entry for online quotes"));
   m_newButton->setGuiItem(newButtenItem);
