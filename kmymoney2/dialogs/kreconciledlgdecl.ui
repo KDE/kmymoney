@@ -610,8 +610,7 @@ Your account is balanced when the Difference is Zero.  Click on the Finish butto
     </layout>
   </widget>
   <layoutdefault spacing="6" margin="11"/>
-  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
-  <customwidgets>
+    <customwidgets>
     <customwidget>
       <class>K3ListView</class>
       <extends>Q3ListView</extends>

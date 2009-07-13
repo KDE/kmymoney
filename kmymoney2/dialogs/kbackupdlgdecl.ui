@@ -172,5 +172,4 @@ Click OK to perform the backup. If your system does not use an automounter, make
     </layout>
   </widget>
   <layoutdefault spacing="6" margin="11"/>
-  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
-</ui>
+  </ui>

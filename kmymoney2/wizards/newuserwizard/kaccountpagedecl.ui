@@ -230,8 +230,7 @@
     </layout>
   </widget>
   <layoutdefault spacing="6" margin="11"/>
-  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
-  <tabstops>
+    <tabstops>
     <tabstop>m_accountNameEdit</tabstop>
     <tabstop>m_accountNumberEdit</tabstop>
     <tabstop>m_openingDateEdit</tabstop>

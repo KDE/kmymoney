@@ -206,8 +206,7 @@ Please enter the path to the QIF file or select it by clicking on the Browse but
     </layout>
   </widget>
   <layoutdefault spacing="6" margin="11"/>
-  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
-  <customwidgets>
+    <customwidgets>
     <customwidget>
       <class>KComboBox</class>
       <extends>QComboBox</extends>

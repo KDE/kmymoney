@@ -138,8 +138,7 @@ KMyMoney keeps this field only for documentation purposes and does not use it ot
     </layout>
   </widget>
   <layoutdefault spacing="6" margin="11"/>
-  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
-  <customwidgets>
+    <customwidgets>
     <customwidget>
       <class>KComboBox</class>
       <extends>QComboBox</extends>

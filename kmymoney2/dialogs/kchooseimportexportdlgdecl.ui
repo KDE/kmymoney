@@ -169,5 +169,4 @@ Once you have chosen an import type please press the OK button.</string>
       </item>
     </layout>
   </widget>
-  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
-</ui>
+  </ui>

@@ -184,8 +184,7 @@ As always, please make sure you have adequate backups of your data.&lt;/font&gt;
     </layout>
   </widget>
   <layoutdefault spacing="6" margin="11"/>
-  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
-  <connections>
+    <connections>
     <connection>
       <sender>buttonOK</sender>
       <signal>released()</signal>

@@ -538,8 +538,7 @@ You can use &lt;b&gt;View/Show all accounts&lt;/b&gt; to temporarily show hidden
     </layout>
   </widget>
   <layoutdefault spacing="6" margin="11"/>
-  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
-  <customwidgets>
+    <customwidgets>
     <customwidget>
       <class>K3ListView</class>
       <extends>Q3ListView</extends>

@@ -170,5 +170,4 @@ This mechanism is provided for the case that you have lost your key and cannot a
     </layout>
   </widget>
   <layoutdefault spacing="6" margin="11"/>
-  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
-</ui>
+  </ui>

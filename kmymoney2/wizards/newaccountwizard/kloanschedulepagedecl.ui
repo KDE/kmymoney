@@ -135,5 +135,4 @@ If you selected to record all payments this date has already been supplied. If y
     </layout>
   </widget>
   <layoutdefault spacing="6" margin="11"/>
-  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
-</ui>
+  </ui>

@@ -199,8 +199,7 @@
     </layout>
   </widget>
   <layoutdefault spacing="6" margin="11"/>
-  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
-  <connections>
+    <connections>
     <connection>
       <sender>okBtn</sender>
       <signal>clicked()</signal>

@@ -61,5 +61,4 @@ On the next few pages you will be guided through the steps necessary to setup th
     </layout>
   </widget>
   <layoutdefault spacing="6" margin="11"/>
-  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
-</ui>
+  </ui>

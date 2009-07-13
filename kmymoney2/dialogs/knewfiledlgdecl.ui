@@ -279,8 +279,7 @@ your KMyMoney file.</string>
     </layout>
   </widget>
   <layoutdefault spacing="6" margin="11"/>
-  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
-  <tabstops>
+    <tabstops>
     <tabstop>userNameEdit</tabstop>
     <tabstop>streetEdit</tabstop>
     <tabstop>townEdit</tabstop>

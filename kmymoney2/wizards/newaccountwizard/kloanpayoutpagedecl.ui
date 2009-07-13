@@ -159,8 +159,7 @@ If this loan is a 'consumer loan' (money to use however you want), you can use a
     </layout>
   </widget>
   <layoutdefault spacing="6" margin="11"/>
-  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
-  <connections>
+    <connections>
     <connection>
       <sender>m_noPayoutTransaction</sender>
       <signal>toggled(bool)</signal>

@@ -169,8 +169,7 @@ from account</string>
     </layout>
   </widget>
   <layoutdefault spacing="6" margin="11"/>
-  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
-  <connections>
+    <connections>
     <connection>
       <sender>m_reminderCheckBox</sender>
       <signal>toggled(bool)</signal>

@@ -354,8 +354,7 @@ xx</string>
     </layout>
   </widget>
   <layoutdefault spacing="6" margin="11"/>
-  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
-  <tabstops>
+    <tabstops>
     <tabstop>m_amountButton</tabstop>
     <tabstop>m_rateButton</tabstop>
     <tabstop>m_updateButton</tabstop>

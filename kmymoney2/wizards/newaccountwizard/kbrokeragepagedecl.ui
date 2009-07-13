@@ -140,8 +140,7 @@
     </layout>
   </widget>
   <layoutdefault spacing="6" margin="11"/>
-  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
-  <tabstops>
+    <tabstops>
     <tabstop>m_createBrokerageButton</tabstop>
     <tabstop>m_brokerageCurrency</tabstop>
     <tabstop>m_accountNumber</tabstop>

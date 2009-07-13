@@ -442,8 +442,7 @@ Selecting 0% will list all transactions.</string>
     </layout>
   </widget>
   <layoutdefault spacing="6" margin="11"/>
-  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
-  <customwidgets>
+    <customwidgets>
   <customwidget>
    <class>KIntSpinBox</class>
    <extends>QSpinBox</extends>
