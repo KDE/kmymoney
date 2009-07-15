@@ -620,7 +620,9 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
             // pass the newly assigned id on to the caller
             newId = (*it_ts).id();
             // refresh account object for transactional changes
+            // refresh account and transaction object because they might have changed
             m_account = file->account(m_account.id());
+            t = (*it_ts);
 
             // if a new transaction has a valid number, keep it with the account
             QString number = (*it_ts).splits()[0].number();
@@ -650,10 +652,18 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
 
       // update m_transactions to contain the newly created transaction so that
       // it is selected as the current one
+      // we need to do that before we commit the transaction to the engine
+      // as we need it during the update of the views that is caused by committing already.
       if(newTransactionCreated) {
         m_transactions.clear();
-        KMyMoneyRegister::SelectedTransaction s((*it_ts), (*it_ts).splits()[0]);
-        m_transactions.append(s);
+        MyMoneySplit s;
+        // a transaction w/o a single split should not exist and adding it
+        // should throw an exception in MyMoneyFile::addTransaction, but we
+        // remain on the save side of things to check for it
+        if(t.splitCount() > 0)
+          s = t.splits()[0];
+        KMyMoneyRegister::SelectedTransaction st(t, s);
+        m_transactions.append(st);
       }
 
       ft.commit();
