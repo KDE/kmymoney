@@ -2210,7 +2210,7 @@ void KMyMoney2App::slotSettings(void)
   KSettingsForecast* forecastPage = new KSettingsForecast();
   KSettingsPlugins* pluginsPage = new KSettingsPlugins();
 
-  dlg->addPage(generalPage, QString("misc"), QString(), i18n("General"), true);
+  dlg->addPage(generalPage, i18n("General"), "system-run");
   dlg->addPage(registerPage, i18n("Register"), "ledger");
   dlg->addPage(homePage, i18n("Home"), "home");
   dlg->addPage(schedulesPage, i18n("Scheduled\ntransactions"), "schedule");
