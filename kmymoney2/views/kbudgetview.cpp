@@ -135,7 +135,7 @@ KBudgetView::KBudgetView(QWidget *parent) :
   m_updateButton->setToolTip( updateButtenItem.toolTip());
 
   KGuiItem resetButtenItem( QString(""),
-                             KIcon("undo"),
+                             KIcon("edit-undo"),
                              i18n("Revert budget to last saved state"),
                              i18n("Use this to discard the modified data."));
   m_resetButton->setGuiItem(resetButtenItem);
@@ -176,19 +176,14 @@ KBudgetView::~KBudgetView()
 {
 }
 
-void KBudgetView::show()
+void KBudgetView::showEvent(QShowEvent * event)
 {
   QTimer::singleShot(50, this, SLOT(slotRearrange()));
-  QWidget::show();
+  KBudgetViewDecl::showEvent(event);
+  m_accountTree->restoreLayout("Budget Account View Settings");
   if(m_needReload) {
     slotRefreshView();
   }
-}
-
-void KBudgetView::polish()
-{
-  KBudgetViewDecl::polish();
-  m_accountTree->restoreLayout("Budget Account View Settings");
 }
 
 void KBudgetView::slotRearrange(void)

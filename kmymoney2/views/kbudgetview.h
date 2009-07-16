@@ -94,14 +94,12 @@ class KBudgetView : public KBudgetViewDecl
 public:
   KBudgetView(QWidget *parent=0);
   ~KBudgetView();
-  void show();
 
   /**
-   * Override the base class behaviour to restore the layout. Do not
-   * do this in show() because show() itself may change the layout
-   * in undesired ways.
+   * Override the base class behaviour to include all updates that
+   * happened in the meantime and restore the layout.
    */
-  void polish(void);
+  void showEvent(QShowEvent * event);
 
   /**
     * This method is used to suppress updates for specific times
@@ -218,7 +216,7 @@ private:
   KMyMoneyAccountTreeBudgetItem*      m_incomeItem;
   KMyMoneyAccountTreeBudgetItem*      m_expenseItem;
 
-  /// set if a view needs to be reloaded during show()
+  /// set if a view needs to be reloaded during showEvent()
   bool                                m_needReload;
 
   // set if we are in the selection of a different budget

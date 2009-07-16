@@ -107,16 +107,9 @@ public slots:
 
   /**
     * Override the base class behaviour to include all updates that
-    * happened in the meantime.
+    * happened in the meantime and restore the layout.
     */
-  void show(void);
-
-  /**
-   * Override the base class behaviour to restore the layout. Do not
-   * do this in show() because show() itself may change the layout
-   * in undesired ways.
-   */
-  void ensurePolished(void) const;
+  void showEvent(QShowEvent * event);
 
   /**
     * update the account objects if their icon position has changed since

@@ -235,19 +235,13 @@ void KAccountsView::slotTabCurrentChanged(QWidget* _tab)
   }
 }
 
-void KAccountsView::show(void)
+void KAccountsView::showEvent(QShowEvent * event)
 {
   // don't forget base class implementation
-  KAccountsViewDecl::show();
-  slotTabCurrentChanged(m_tab->currentWidget());
-}
-
-void KAccountsView::ensurePolished(void) const
-{
-  // don't forget base class implementation
-  KAccountsViewDecl::ensurePolished();
   m_accountTree->setResizeMode(Q3ListView::LastColumn);
   m_accountTree->restoreLayout("Account View Settings");
+  KAccountsViewDecl::showEvent(event);
+  slotTabCurrentChanged(m_tab->currentWidget());
 }
 
 void KAccountsView::loadAccounts(AccountsViewTab tab)

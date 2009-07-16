@@ -84,16 +84,9 @@ public slots:
 
   /**
     * Override the base class behaviour to include all updates that
-    * happened in the meantime.
+    * happened in the meantime and restore the layout.
     */
-  void show(void);
-
-  /**
-   * Override the base class behaviour to restore the layout. Do not
-   * do this in show() because show() itself may change the layout
-   * in undesired ways.
-   */
-  void polish(void);
+  void showEvent(QShowEvent * event);
 
 protected:
   void loadAccounts(void);
@@ -150,7 +143,7 @@ private:
    */
   K3ListViewSearchLineWidget*  m_searchWidget;
 
-  /// set if a view needs to be reloaded during show()
+  /// set if a view needs to be reloaded during showEvent()
   bool                                m_needReload;
 };
 

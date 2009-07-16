@@ -65,11 +65,11 @@ KCategoriesView::KCategoriesView(QWidget *parent) :
 
   // setup icons for collapse and expand button
   KGuiItem collapseGuiItem("",
-                          KIcon("viewmag"),
+                          KIcon("zoom-out"),
                           QString(),
                           QString());
   KGuiItem expandGuiItem("",
-                          KIcon("viewmag+"),
+                          KIcon("zoom-in"),
                           QString(),
                           QString());
   m_collapseButton->setGuiItem(collapseGuiItem);
@@ -91,29 +91,25 @@ KCategoriesView::~KCategoriesView()
 {
 }
 
-void KCategoriesView::show(void)
+void KCategoriesView::showEvent(QShowEvent * event)
 {
   if(m_needReload) {
     loadAccounts();
     m_needReload = false;
   }
 
+  // restore the layou
+  m_accountTree->setResizeMode(Q3ListView::LastColumn);
+  m_accountTree->restoreLayout("Category View Settings");
+
   // don't forget base class implementation
-  KCategoriesViewDecl::show();
+  KCategoriesViewDecl::showEvent(event);
 
   // if we have a selected account, let the application know about it
   KMyMoneyAccountTreeBaseItem *item = m_accountTree->selectedItem();
   if(item) {
     emit selectObject(item->itemObject());
   }
-}
-
-void KCategoriesView::polish(void)
-{
-  KCategoriesViewDecl::polish();
-  m_accountTree->setResizeMode(Q3ListView::LastColumn);
-  m_accountTree->restoreLayout("Category View Settings");
-
 }
 
 void KCategoriesView::slotLoadAccounts(void)
