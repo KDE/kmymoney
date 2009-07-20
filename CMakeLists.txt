@@ -10,7 +10,7 @@ if(COMMAND cmake_policy)
 endif(COMMAND cmake_policy)
 
 # Our modules reside in the subdirectory cmake/modules/
-SET(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules)
+SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake/modules)
 
 ######################### KMyMoney Version ##########################
 
@@ -21,7 +21,7 @@ SET(VERSION_PATCH "3")
 
 # Get the date of the last change from the ChangeLog
 SET(date_format "([0-9][0-9][0-9][0-9])-([0-9][0-9])-([0-9][0-9])")
-FILE(STRINGS ${CMAKE_SOURCE_DIR}/ChangeLog LAST_CHANGE
+FILE(STRINGS ${CMAKE_CURRENT_SOURCE_DIR}/ChangeLog LAST_CHANGE
   REGEX ${date_format} LIMIT_COUNT 1 LENGTH_MINIMUM 10 LENGTH_MAXIMUM 10)
 STRING(REGEX MATCH ${date_format} _ign "${LAST_CHANGE}")
 SET(VERSION_SUFFIX "svn${CMAKE_MATCH_1}${CMAKE_MATCH_2}${CMAKE_MATCH_3}")
