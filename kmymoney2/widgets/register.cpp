@@ -332,11 +332,14 @@ void GroupMarker::paintRegisterCell(QPainter* painter, int row, int /* col */, c
     m_bg = newPic;
   }
 
+#warning "port to kde4" 
+#if 0
   // now it's time to draw the background
   painter->drawPixmap(cellRect, *m_bg);
 
   // translate back
   painter->translate(-r.x(), -r.y());
+#endif
 
   // in case we need to show the date, we just paint it in col 1
   if(m_showDate) {
