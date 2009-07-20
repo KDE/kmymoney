@@ -122,6 +122,15 @@ public:
   MyMoneyMoney baseCurrencyPrice( const QDate& date ) const;
 
   /**
+   * Returns the price of this account's deep currency on the indicated date,
+   * translated into the base currency
+   *
+   * @param foreignCurrency The currency on which the price will be returned
+   * @param date The date in question
+   * @return MyMoneyMoney The value of the account's currency on that date
+   */
+  MyMoneyMoney foreignCurrencyPrice( const QString foreignCurrency, const QDate& date ) const;
+  /**
     * Fetch the trading symbol of this account's deep currency
     *
     * @return  The account's currency trading currency object

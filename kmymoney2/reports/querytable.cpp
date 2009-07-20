@@ -518,6 +518,7 @@ void QueryTable::constructTransactionTable(void)
     QString a_fullname = "";
     QString a_memo = "";
     int pass = 1;
+    QString myBeginCurrency = (file->account((*myBegin).accountId())).currencyId(); //currency of the main split
 
     do {
       MyMoneyMoney xr;
@@ -533,10 +534,15 @@ void QueryTable::constructTransactionTable(void)
       QString institution = splitAcc.institutionId();
       QString payee = (*it_split).payeeId();
 
+      //convert to base currency
       if ( m_config.isConvertCurrency() ) {
         xr = (splitAcc.deepCurrencyPrice((*it_transaction).postDate()) * splitAcc.baseCurrencyPrice((*it_transaction).postDate())).reduce();
       } else {
-        xr = splitAcc.deepCurrencyPrice((*it_transaction).postDate()).reduce();
+        xr = (splitAcc.deepCurrencyPrice((*it_transaction).postDate())).reduce();
+        //if the currency of the split is different from the currency of the main split, then convert to the currency of the main split
+        if(splitAcc.currency().id() != myBeginCurrency) {
+          xr = (xr * splitAcc.foreignCurrencyPrice(myBeginCurrency, (*it_transaction).postDate())).reduce();
+        }
       }
 
       //there is a bug where the price sometimes returns 1

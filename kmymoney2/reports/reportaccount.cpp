@@ -150,26 +150,50 @@ MyMoneyMoney ReportAccount::baseCurrencyPrice( const QDate& date ) const
 
   if(isForeignCurrency())
   {
-    MyMoneyPrice price = file->price(currency().id(), file->baseCurrency().id(), date);
+    result = foreignCurrencyPrice(file->baseCurrency().id(), date);
+  }
+
+  return result;
+}
+
+MyMoneyMoney ReportAccount::foreignCurrencyPrice( const QString foreignCurrency, const QDate& date ) const
+{
+  DEBUG_ENTER(__PRETTY_FUNCTION__);
+
+  MyMoneyPrice price;
+  MyMoneyMoney result(1, 1);
+  MyMoneyFile* file = MyMoneyFile::instance();
+  MyMoneySecurity security = file->security(foreignCurrency);
+
+  //check whether it is a currency or a commodity. In the latter case case, get the trading currency
+  QString tradingCurrency;
+  if(security.isCurrency()) {
+    tradingCurrency = foreignCurrency;
+  } else {
+    tradingCurrency = security.tradingCurrency();
+  }
+
+  //It makes no sense to get the price if both currencies are the same
+  if(currency().id() != tradingCurrency) {
+    price = file->price(currency().id(), tradingCurrency, date);
+
     if(price.isValid())
     {
-      result = price.rate(file->baseCurrency().id());
-
-      DEBUG_OUTPUT(QString("Converting deep %1 to base %2, price on %3 is %4")
-        .arg(file->currency(currency().id()).name())
-        .arg(file->baseCurrency().name())
-        .arg(date.toString())
-        .arg(result.toDouble()));
+      result = price.rate(tradingCurrency);
+      DEBUG_OUTPUT(QString("Converting deep %1 to currency %2, price on %3 is %4")
+          .arg(file->currency(currency().id()).name())
+          .arg(file->currency(foreignCurrency).name())
+          .arg(date.toString())
+          .arg(result.toDouble()));
     }
     else
     {
-      DEBUG_OUTPUT(QString("No price to convert deep %1 to base %2 on %3")
-        .arg(file->currency(currency().id()).name())
-        .arg(file->baseCurrency().name())
-        .arg(date.toString()));
+      DEBUG_OUTPUT(QString("No price to convert deep %1 to currency %2 on %3")
+          .arg(file->currency(currency().id()).name())
+          .arg(file->currency(foreignCurrency).name())
+          .arg(date.toString()));
     }
   }
-
   return result;
 }
 
