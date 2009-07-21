@@ -26,7 +26,7 @@
 //Added by qt3to4:
 #include <QPaintEvent>
 #include <QFocusEvent>
-#include <Q3ValueList>
+#include <QList>
 #include <QMouseEvent>
 #include <QKeyEvent>
 
@@ -347,7 +347,7 @@ class KMyMoneyPayeeCombo : public KMyMoneyCombo
 public:
   KMyMoneyPayeeCombo(QWidget* parent = 0, const char* name = 0);
 
-  void loadPayees(const Q3ValueList<MyMoneyPayee>& list);
+  void loadPayees(const QList<MyMoneyPayee>& list);
 };
 
 class KMyMoneyGeneralCombo : public KComboBox

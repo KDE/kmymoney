@@ -24,7 +24,7 @@
 #include <QApplication>
 //Added by qt3to4:
 #include <QKeyEvent>
-#include <Q3ValueList>
+#include <QList>
 #include <QFocusEvent>
 #include <QMouseEvent>
 #include <QPaintEvent>
@@ -572,10 +572,10 @@ KMyMoneyPayeeCombo::KMyMoneyPayeeCombo(QWidget* parent, const char * name) :
   connect(this, SIGNAL(textChanged(const QString&)), m_completion, SLOT(slotMakeCompletion(const QString&)));
 }
 
-void KMyMoneyPayeeCombo::loadPayees(const Q3ValueList<MyMoneyPayee>& list)
+void KMyMoneyPayeeCombo::loadPayees(const QList<MyMoneyPayee>& list)
 {
   selector()->listView()->clear();
-  Q3ValueList<MyMoneyPayee>::const_iterator it;
+  QList<MyMoneyPayee>::const_iterator it;
   for(it = list.begin(); it != list.end(); ++it) {
     selector()->newTopItem((*it).name(), QString(), (*it).id());
   }
