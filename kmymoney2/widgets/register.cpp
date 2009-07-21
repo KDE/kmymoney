@@ -1068,9 +1068,8 @@ void Register::drawContents( QPainter *p, int cx, int cy, int cw, int ch )
 {
   // the QTable::drawContents() method does not honor the block update flag
   // so we take care of it here
-#warning "port to kde4"
-  //if ( testWState(WState_Visible|WState_BlockUpdates) != WState_Visible )
-    //return;
+  if (testAttribute(Qt::WA_UpdatesDisabled))
+    return;
 
   if(m_listsDirty) {
     updateRegister(KMyMoneyGlobalSettings::ledgerLens() | !KMyMoneyGlobalSettings::transactionForm());

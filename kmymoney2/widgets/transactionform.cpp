@@ -202,13 +202,11 @@ TransactionForm::TransactionForm(QWidget *parent, const char *name) :
 
 void TransactionForm::drawContents( QPainter *p, int cx, int cy, int cw, int ch )
 {
-    #warning "port to kde4"
-#if 0
   // the QTable::drawContents() method does not honor the block update flag
   // so we take care of it here
-  if ( testWState(WState_Visible|WState_BlockUpdates) != WState_Visible )
+  if (testAttribute(Qt::WA_UpdatesDisabled))
     return;
-#endif
+
   Q3Table::drawContents(p, cx, cy, cw, ch);
 }
 
