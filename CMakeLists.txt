@@ -15,9 +15,9 @@ SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake/modules)
 ######################### KMyMoney Version ##########################
 
 # The current version of KMyMoney (used for packages and config.h)
-SET(VERSION_MAJOR "0")
-SET(VERSION_MINOR "9")
-SET(VERSION_PATCH "3")
+SET(VERSION_MAJOR "3")
+SET(VERSION_MINOR "95")
+SET(VERSION_PATCH "0")
 
 # Get the date of the last change from the ChangeLog
 SET(date_format "([0-9][0-9][0-9][0-9])-([0-9][0-9])-([0-9][0-9])")
