@@ -76,9 +76,9 @@ void RegisterSearchLine::init(Register *reg)
   d->combo = new QComboBox(parentWidget());
   // don't change the order of the following lines unless updating
   // the case labels in RegisterSearchLine::itemMatches() at the same time
-  d->combo->insertItem(SmallIcon("run"), i18n("Any status"));
-  d->combo->insertItem(SmallIcon("fileimport"), i18n("Imported"));
-  d->combo->insertItem(SmallIcon("connect_creating"), i18n("Matched"));
+  d->combo->insertItem(SmallIcon("system-run"), i18n("Any status"));
+  d->combo->insertItem(SmallIcon("document-import"), i18n("Imported"));
+  d->combo->insertItem(SmallIcon("process-stop"), i18n("Matched"));
   d->combo->insertItem(SmallIcon("attention"), i18n("Erroneous"));
   d->combo->insertItem(i18n("Not marked"));
   d->combo->insertItem(i18n("Not reconciled"));
@@ -242,10 +242,12 @@ class RegisterSearchLineWidget::RegisterSearchLineWidgetPrivate
   public:
   RegisterSearchLineWidgetPrivate() :
     reg(0),
-    searchLine(0) {}
+    searchLine(0),
+    clearButton(0) {}
 
   Register* reg;
   RegisterSearchLine* searchLine;
+  QToolButton* clearButton;
 };
 
 
@@ -272,7 +274,12 @@ RegisterSearchLine* RegisterSearchLineWidget::createSearchLine(Register* reg)
 
 void RegisterSearchLineWidget::createWidgets(void)
 {
-  positionInToolBar();
+  if(!d->clearButton) {
+    d->clearButton = new QToolButton(this);
+    KIcon icon(QApplication::reverseLayout() ? "edit-clear-locationbar-rtl" : "edit-clear-locationbar-ltr");
+    d->clearButton->setIcon(icon);
+  }
+
   QLabel *label = new QLabel(i18n("S&earch:"), this, "kde toolbar widget");
 
   d->searchLine = createSearchLine(d->reg);
@@ -281,44 +288,13 @@ void RegisterSearchLineWidget::createWidgets(void)
   label->setBuddy(d->searchLine);
   label->show();
 
+  connect(d->clearButton, SIGNAL(clicked()), d->searchLine, SLOT(reset()));
 }
 
 
 RegisterSearchLine* RegisterSearchLineWidget::searchLine(void) const
 {
   return d->searchLine;
-}
-
-void RegisterSearchLineWidget::positionInToolBar(void)
-{
-  KToolBar *toolBar = dynamic_cast<KToolBar *>(parent());
-
-  if(toolBar) {
-#warning "port to kde4"
-#if 0
-    // Here we have The Big Ugly.  Figure out how many widgets are in the
-    // and do a hack-ish iteration over them to find this widget so that we
-    // can insert the clear button before it.
-
-    int widgetCount = toolBar->count();
-
-    for(int index = 0; index < widgetCount; index++) {
-      int id = toolBar->idAt(index);
-      if(toolBar->getWidget(id) == this) {
-        toolBar->setItemAutoSized(id);
-        if(!d->clearButton) {
-          QString icon = QApplication::isRightToLeft() ? "clear_left" : "locationbar_erase";
-          d->clearButton = new KToolBarButton(icon, 2005, toolBar);
-        }
-        toolBar->insertWidget(2005, d->clearButton->width(), d->clearButton, index+1);
-        break;
-      }
-    }
-#endif
-  }
-
-  if(d->searchLine)
-    d->searchLine->show();
 }
 
 #include "registersearchline.moc"

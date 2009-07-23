@@ -164,16 +164,10 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name )
 
   // create the toolbar frame at the top of the view
   m_toolbarFrame = new QFrame(this);
-  QVBoxLayout* toolbarLayout = new QVBoxLayout(m_toolbarFrame, 0, 0);
+  QHBoxLayout* toolbarLayout = new QHBoxLayout(m_toolbarFrame, 0, 0);
+  m_accountComboBox = new KMyMoneyAccountCombo(m_toolbarFrame, "AccountCombo");
+  toolbarLayout->addWidget(m_accountComboBox);
 
-  m_toolbar = new KToolBar(m_toolbarFrame, 0, true);
-  toolbarLayout->addWidget(m_toolbar);
-  m_toolbar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
-
-  m_accountComboBox = new KMyMoneyAccountCombo(m_toolbar, "AccountCombo");
-  m_toolbar->addWidget(m_accountComboBox);
-
-  m_toolbar->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
   layout()->addWidget(m_toolbarFrame);
 
   // create the register frame
@@ -191,7 +185,8 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name )
 
   // insert search line widget
 
-  d->m_registerSearchLine = new KMyMoneyRegister::RegisterSearchLineWidget(m_register, m_toolbar);
+  d->m_registerSearchLine = new KMyMoneyRegister::RegisterSearchLineWidget(m_register, m_toolbarFrame);
+  toolbarLayout->addWidget(d->m_registerSearchLine);
 
   // create the summary frame
   m_summaryFrame = new QFrame(this);

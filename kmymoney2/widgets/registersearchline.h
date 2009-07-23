@@ -141,9 +141,6 @@ protected slots:
     */
   virtual void createWidgets(void);
 
-private slots:
-  void positionInToolBar(void);
-
 private:
   class RegisterSearchLineWidgetPrivate;
   RegisterSearchLineWidgetPrivate* const d;
