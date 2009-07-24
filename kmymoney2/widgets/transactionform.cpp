@@ -107,9 +107,8 @@ void TabBar::setCurrentWidget(QWidget* tab)
   if(m_signalType != SignalNormal)
     blockSignals(false);
 
-#warning #Port to KDE4
-/*  if(m_signalType == SignalAlways)
-    emit selected(tab->identifier());*/
+  if(m_signalType == SignalAlways)
+    emit currentChanged(indexOf(tab));
 }
 
 void TabBar::insertTab(int id, QWidget* tab, QString title)
@@ -224,7 +223,6 @@ void TransactionForm::slotSetTransaction(KMyMoneyRegister::Transaction* transact
 {
   m_transaction = transaction;
 
-  bool enabled = isUpdatesEnabled();
   setUpdatesEnabled(false);
 
   if(m_transaction) {
@@ -256,7 +254,7 @@ void TransactionForm::slotSetTransaction(KMyMoneyRegister::Transaction* transact
   setMaximumHeight(height);
   setMinimumHeight(height);
 
-  setUpdatesEnabled(enabled);
+  setUpdatesEnabled(true);
 
   // force resizeing of the columns
   QTimer::singleShot(0, this, SLOT(resize()));
@@ -355,7 +353,6 @@ void TransactionForm::resize(void)
 
 void TransactionForm::resize(int col)
 {
-  bool enabled = isUpdatesEnabled();
   setUpdatesEnabled(false);
 
   // resize the register
@@ -379,7 +376,7 @@ void TransactionForm::resize(int col)
   if(col < nc && w >= 0)
     setColumnWidth(col, w);
 
-  setUpdatesEnabled(enabled);
+  setUpdatesEnabled(true);
   updateContents();
 }
 

@@ -332,7 +332,6 @@ private:
   // widgets
   KMyMoneyAccountCombo*         m_accountComboBox;
   KMyMoneyRegister::Register*   m_register;
-  KToolBar*                     m_toolbar;
   KToolBar*                     m_buttonbar;
 
   /**
