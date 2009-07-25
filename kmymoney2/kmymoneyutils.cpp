@@ -156,7 +156,7 @@ KGuiItem KMyMoneyUtils::scheduleNewGuiItem(void)
 KGuiItem KMyMoneyUtils::accountsFilterGuiItem(void)
 {
   KGuiItem splitGuiItem(  i18n("&Filter"),
-                          KIcon("filter"),
+                          KIcon("view-filter"),
                           i18n("Filter out accounts"),
                           i18n("Use this to filter out accounts"));
 

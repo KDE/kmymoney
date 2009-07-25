@@ -42,7 +42,6 @@ kMyMoneyScheduledCalendar::kMyMoneyScheduledCalendar(QWidget *parent, const char
   QPushButton *pb1 = new QPushButton(i18n("Select Schedules"), this);
 
   kpopupmenu = new KMenu(this);
-  kpopupmenu->setCheckable(true);
   kpopupmenu->insertItem(i18n("Bills"), 0);
   kpopupmenu->insertItem(i18n("Deposits"), 1);
   kpopupmenu->insertItem(i18n("Transfers"), 2);
@@ -73,19 +72,16 @@ kMyMoneyScheduledCalendar::~kMyMoneyScheduledCalendar()
 
 void kMyMoneyScheduledCalendar::slotSetViewBills()
 {
-  kpopupmenu->setItemChecked(0, ((kpopupmenu->isItemChecked(0)) ? false : true));
   m_scheduledDateTable->filterBills(!kpopupmenu->isItemChecked(0));
 }
 
 void kMyMoneyScheduledCalendar::slotSetViewDeposits()
 {
-  kpopupmenu->setItemChecked(1, ((kpopupmenu->isItemChecked(1)) ? false : true));
   m_scheduledDateTable->filterDeposits(!kpopupmenu->isItemChecked(1));
 }
 
 void kMyMoneyScheduledCalendar::slotSetViewTransfers()
 {
-  kpopupmenu->setItemChecked(2, ((kpopupmenu->isItemChecked(2)) ? false : true));
   m_scheduledDateTable->filterTransfers(!kpopupmenu->isItemChecked(2));
 }
 

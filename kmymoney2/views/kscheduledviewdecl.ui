@@ -67,7 +67,7 @@
             <attribute name="title">
               <string>List View</string>
             </attribute>
-            <layout class="QVBoxLayout">
+            <layout class="QVBoxLayout" name="m_listTabLayout">
               <property name="margin">
                 <number>0</number>
               </property>

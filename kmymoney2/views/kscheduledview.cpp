@@ -67,7 +67,8 @@ KScheduledView::KScheduledView(QWidget *parent) :
   // create the searchline widget
   // and insert it into the existing layout
   m_searchWidget = new K3ListViewSearchLineWidget(m_qlistviewScheduled, m_listTab);
-  hboxLayout->insertWidget(0, m_searchWidget);
+  m_listTabLayout->insertWidget(0, m_searchWidget);
+
   m_qlistviewScheduled->addColumn(i18n("Type/Name"));
   m_qlistviewScheduled->addColumn(i18n("Account"));
   m_qlistviewScheduled->addColumn(i18n("Payee"));
@@ -88,7 +89,6 @@ KScheduledView::KScheduledView(QWidget *parent) :
 
   // attach popup to 'Filter...' button
   m_kaccPopup = new KMenu(this);
-  m_kaccPopup->setCheckable(true);
   m_accountsCombo->setPopup(m_kaccPopup);
   connect(m_kaccPopup, SIGNAL(activated(int)), this, SLOT(slotAccountActivated(int)));
 
@@ -392,8 +392,6 @@ void KScheduledView::slotListItemExecuted(Q3ListViewItem* item, const QPoint&, i
 void KScheduledView::slotAccountActivated(int id)
 {
   m_filterAccounts.clear();
-
-  m_kaccPopup->setItemChecked(id, ((m_kaccPopup->isItemChecked(id))?false:true));
 
   try
   {
