@@ -136,7 +136,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   m_homeView = new KHomeView();
   m_homeViewFrame = m_model->addPage( m_homeView, i18n("Home"));
   m_homeViewFrame->setIcon(KIcon("home"));
-  m_homeViewFrame->setHeader(i18n("Home"));
+  m_homeViewFrame->setHeader(QString(""));
   connect(m_homeView, SIGNAL(ledgerSelected(const QString&, const QString&)),
           this, SLOT(slotLedgerSelected(const QString&, const QString&)));
   connect(m_homeView, SIGNAL(scheduleSelected(const QString&)),
@@ -148,7 +148,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   m_institutionsView = new KInstitutionsView();
   m_institutionsViewFrame = m_model->addPage( m_institutionsView, i18n("Institutions"));
   m_institutionsViewFrame->setIcon(KIcon("institutions"));
-  m_institutionsViewFrame->setHeader(i18n("Institutions"));
+  m_institutionsViewFrame->setHeader(QString(""));
   addTitleBar(m_institutionsView, i18n("Institutions"));
 
   connect(m_institutionsView, SIGNAL(selectObject(const MyMoneyObject&)), kmymoney2, SLOT(slotSelectAccount(const MyMoneyObject&)));
@@ -164,7 +164,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   m_accountsView = new KAccountsView();
   m_accountsViewFrame = m_model->addPage( m_accountsView, i18n("Accounts"));
   m_accountsViewFrame->setIcon(KIcon("accounts"));
-  m_accountsViewFrame->setHeader(i18n("Accounts"));
+  m_accountsViewFrame->setHeader(QString(""));
   addTitleBar(m_accountsView, i18n("Accounts"));
 
   connect(m_accountsView, SIGNAL(selectObject(const MyMoneyObject&)), kmymoney2, SLOT(slotSelectAccount(const MyMoneyObject&)));
@@ -180,7 +180,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   m_scheduledView = new KScheduledView();
   m_scheduleViewFrame = m_model->addPage( m_scheduledView, i18n("Scheduled\ntransactions"));
   m_scheduleViewFrame->setIcon(KIcon("schedule"));
-  m_scheduleViewFrame->setHeader(i18n("Bills & Reminders"));
+  m_scheduleViewFrame->setHeader(QString(""));
   addTitleBar(m_scheduledView, i18n("Scheduled transactions"));
   connect(kmymoney2, SIGNAL(fileLoaded(const KUrl&)), m_scheduledView, SLOT(slotReloadView()));
   connect(m_scheduledView, SIGNAL(scheduleSelected(const MyMoneySchedule&)), kmymoney2, SLOT(slotSelectSchedule(const MyMoneySchedule&)));
@@ -193,7 +193,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   m_categoriesView = new KCategoriesView();
   m_categoriesViewFrame = m_model->addPage( m_categoriesView, i18n("Categories"));
   m_categoriesViewFrame->setIcon(KIcon("categories"));
-  m_categoriesViewFrame->setHeader(i18n("Categories"));
+  m_categoriesViewFrame->setHeader(QString(""));
   addTitleBar(m_categoriesView, i18n("Categories"));
   connect(m_categoriesView, SIGNAL(selectObject(const MyMoneyObject&)), kmymoney2, SLOT(slotSelectAccount(const MyMoneyObject&)));
   connect(m_categoriesView, SIGNAL(selectObject(const MyMoneyObject&)), kmymoney2, SLOT(slotSelectInstitution(const MyMoneyObject&)));
@@ -205,7 +205,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   m_payeesView = new KPayeesView();
   m_payeesViewFrame = m_model->addPage( m_payeesView, i18n("Payees"));
   m_payeesViewFrame->setIcon(KIcon("payee"));
-  m_payeesViewFrame->setHeader(i18n("Payees"));
+  m_payeesViewFrame->setHeader(QString(""));
   addTitleBar(m_payeesView, i18n("Payees"));
   connect(kmymoney2, SIGNAL(payeeCreated(const QString&)), m_payeesView, SLOT(slotSelectPayeeAndTransaction(const QString&)));
   connect(kmymoney2, SIGNAL(payeeRename()), m_payeesView, SLOT(slotStartRename()));
@@ -217,7 +217,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   m_ledgerView = new KGlobalLedgerView();
   m_ledgerViewFrame = m_model->addPage( m_ledgerView, i18n("Ledgers"));
   m_ledgerViewFrame->setIcon(KIcon("ledger"));
-  m_ledgerViewFrame->setHeader(i18n("Ledgers"));
+  m_ledgerViewFrame->setHeader(QString(""));
   connect(m_ledgerView, SIGNAL(accountSelected(const MyMoneyObject&)), kmymoney2, SLOT(slotSelectAccount(const MyMoneyObject&)));
   connect(m_ledgerView, SIGNAL(openContextMenu()), kmymoney2, SLOT(slotShowTransactionContextMenu()));
   connect(m_ledgerView, SIGNAL(transactionsSelected(const KMyMoneyRegister::SelectedTransactions&)), kmymoney2, SLOT(slotSelectTransactions(const KMyMoneyRegister::SelectedTransactions&)));
@@ -234,7 +234,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   m_investmentView = new KInvestmentView();
   m_investmentViewFrame = m_model->addPage( m_investmentView, i18n("Investments"));
   m_investmentViewFrame->setIcon(KIcon("investments"));
-  m_investmentViewFrame->setHeader(i18n("Investments"));
+  m_investmentViewFrame->setHeader(QString(""));
   addTitleBar(m_investmentView, i18n("Investments"));
   connect(m_investmentView, SIGNAL(accountSelected(const QString&, const QString&)),
       this, SLOT(slotLedgerSelected(const QString&, const QString&)));
@@ -245,14 +245,13 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   m_reportsView = new KReportsView();
   m_reportsViewFrame = m_model->addPage( m_reportsView, i18n("Reports"));
   m_reportsViewFrame->setIcon(KIcon("report"));
-  m_reportsViewFrame->setHeader(i18n("Reports"));
-  addTitleBar(m_reportsView, i18n("Reports"));
+  m_reportsViewFrame->setHeader(QString(""));
 
   // Page 9
   m_budgetView = new KBudgetView();
   m_budgetViewFrame = m_model->addPage( m_budgetView, i18n("Budgets"));
   m_budgetViewFrame->setIcon(KIcon("budget"));
-  m_budgetViewFrame->setHeader(i18n("Budgets"));
+  m_budgetViewFrame->setHeader(QString(""));
   addTitleBar(m_budgetView, i18n("Budgets"));
   connect(kmymoney2, SIGNAL(fileLoaded(const KUrl&)), m_budgetView, SLOT(slotRefreshView()));
   connect(m_budgetView, SIGNAL(openContextMenu(const MyMoneyObject&)), kmymoney2, SLOT(slotShowBudgetContextMenu()));
@@ -263,7 +262,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   m_forecastView = new KForecastView();
   m_forecastViewFrame = m_model->addPage( m_forecastView, i18n("Forecast"));
   m_forecastViewFrame->setIcon(KIcon("forcast"));
-  m_forecastViewFrame->setHeader(i18n("Forecast"));
+  m_forecastViewFrame->setHeader(QString(""));
   addTitleBar(m_forecastView, i18n("Forecast"));
 
   //set the model
@@ -303,13 +302,13 @@ KMyMoneyView::~KMyMoneyView()
 
 void KMyMoneyView::addTitleBar(QWidget* parent, const QString& title)
 {
-#warning "port to kde4"
-#if 0
   KMyMoneyTitleLabel* label = new KMyMoneyTitleLabel( parent, "titleLabel" );
   label->setMinimumSize( QSize( 100, 30 ) );
   label->setRightImageFile("pics/titlelabel_background.png" );
   label->setText(title);
-#endif
+  QBoxLayout* pBoxLayout = dynamic_cast<QBoxLayout *>(parent->layout());
+  if (pBoxLayout)
+    pBoxLayout->insertWidget(0, label);
 }
 
 void KMyMoneyView::showTitleBar(bool show)

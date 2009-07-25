@@ -41,10 +41,10 @@
 #include "kmymoneytitlelabel.h"
 
 KMyMoneyTitleLabel::KMyMoneyTitleLabel(QWidget *parent, const char *name) :
-  QLabel(parent, name),
-  m_bgColor( KColorScheme::ActiveBackground ),
-  m_textColor( KColorScheme::ActiveText )
+  QLabel(parent, name)
 {
+  m_bgColor = KColorScheme(isEnabled() ? QPalette::Active : QPalette::Inactive, KColorScheme::Selection).background(KColorScheme::NormalBackground);
+
   setFont(KGlobalSettings::windowTitleFont());
 }
 
@@ -74,35 +74,28 @@ void KMyMoneyTitleLabel::setRightImageFile(const QString& _file)
   }
 }
 
-void KMyMoneyTitleLabel::resizeEvent ( QResizeEvent * )
+void KMyMoneyTitleLabel::paintEvent(QPaintEvent *e)
 {
-#warning "port to kde4"	
-#if 0	
+  QLabel::paintEvent(e);
+
+  QPainter painter(this);
   QRect cr = contentsRect();
+
+  // prepare the pixmap
   QImage output( cr.width(), cr.height(), 32 );
   output.fill( m_bgColor.rgb() );
 
-  bitBlt ( &output, cr.width() - m_rightImage.width(), 0, &m_rightImage, 0, 0, m_rightImage.width(), m_rightImage.height(), 0 );
-  bitBlt ( &output, 0, 0, &m_leftImage, 0, 0, m_leftImage.width(), m_leftImage.height(), 0 );
+  QPixmap result = QPixmap::fromImage(output);
+  QPixmap overlay = QPixmap::fromImage(m_rightImage);
+  QPainter pixmapPainter(&result);
+  pixmapPainter.drawPixmap(cr.width() - m_rightImage.width(), 0, overlay, 0, 0, overlay.width(), overlay.height());
+  overlay = QPixmap::fromImage(m_leftImage);
+  pixmapPainter.drawPixmap(0, 0, overlay, 0, 0, overlay.width(), overlay.height());
 
-  QPixmap pix;
-  pix.convertFromImage(output);
-  setPixmap(pix);
-  setMinimumWidth( m_rightImage.width() );
-#endif
-}
-
-void KMyMoneyTitleLabel::drawContents(QPainter *p)
-{
-#warning "port to kde4"	
-#if 0	
   // first draw pixmap
-  QLabel::drawContents(p);
-
+  style()->drawItemPixmap(&painter, contentsRect(), alignment(), result);
   // then draw text on top
-  style().drawItem( p, contentsRect(), alignment(), colorGroup(), isEnabled(),
-                          0, QString("   ")+m_text, -1, &m_textColor );
-#endif
+  style()->drawItemText(&painter, contentsRect(), alignment(), colorGroup(), isEnabled(), QString("   ")+m_text);
 }
 
 void KMyMoneyTitleLabel::setText(const QString& txt)

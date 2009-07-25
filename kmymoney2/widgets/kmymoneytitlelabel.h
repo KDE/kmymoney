@@ -64,14 +64,12 @@ public slots:
 
 protected:
   void updatePixmap(void);
-  virtual void resizeEvent ( QResizeEvent * );
-  void drawContents(QPainter *);
+  void paintEvent(QPaintEvent *);
 
 private:
   QImage m_leftImage;
   QImage m_rightImage;
   QColor m_bgColor;
-  QColor m_textColor;
   QString m_text;
 
   QString m_leftImageFile;
