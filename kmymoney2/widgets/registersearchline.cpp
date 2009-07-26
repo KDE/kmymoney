@@ -57,6 +57,7 @@ RegisterSearchLine::RegisterSearchLine(QWidget* parent, Register* reg, const cha
   KLineEdit(parent),
   d(new RegisterSearchLinePrivate)
 {
+  setClearButtonShown(true);
   init(reg);
 }
 
@@ -64,6 +65,7 @@ RegisterSearchLine::RegisterSearchLine(QWidget* parent, const char* name) :
   KLineEdit(parent),
   d(new RegisterSearchLinePrivate)
 {
+  setClearButtonShown(true);
   init(0);
 }
 
@@ -242,12 +244,10 @@ class RegisterSearchLineWidget::RegisterSearchLineWidgetPrivate
   public:
   RegisterSearchLineWidgetPrivate() :
     reg(0),
-    searchLine(0),
-    clearButton(0) {}
+    searchLine(0) {}
 
   Register* reg;
   RegisterSearchLine* searchLine;
-  QToolButton* clearButton;
 };
 
 
@@ -274,12 +274,6 @@ RegisterSearchLine* RegisterSearchLineWidget::createSearchLine(Register* reg)
 
 void RegisterSearchLineWidget::createWidgets(void)
 {
-  if(!d->clearButton) {
-    d->clearButton = new QToolButton(this);
-    KIcon icon(QApplication::reverseLayout() ? "edit-clear-locationbar-rtl" : "edit-clear-locationbar-ltr");
-    d->clearButton->setIcon(icon);
-  }
-
   QLabel *label = new QLabel(i18n("S&earch:"), this, "kde toolbar widget");
 
   d->searchLine = createSearchLine(d->reg);
@@ -287,8 +281,6 @@ void RegisterSearchLineWidget::createWidgets(void)
 
   label->setBuddy(d->searchLine);
   label->show();
-
-  connect(d->clearButton, SIGNAL(clicked()), d->searchLine, SLOT(reset()));
 }
 
 
