@@ -23,9 +23,10 @@
 #include "sortoptionlistitem.h"
 
 TransactionSortOption::TransactionSortOption( QWidget *parent )
-    :TransactionSortOptionDecl( parent )
+    : QWidget( parent )
 {
-    init();
+  setupUi(this);
+  init();
 }
 
 

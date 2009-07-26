@@ -184,49 +184,49 @@
     <connection>
       <sender>m_addButton</sender>
       <signal>clicked()</signal>
-      <receiver>TransactionSortOption</receiver>
+      <receiver>TransactionSortOptionDecl</receiver>
       <slot>slotAddItem()</slot>
     </connection>
     <connection>
       <sender>m_availableList</sender>
       <signal>selectionChanged(Q3ListViewItem*)</signal>
-      <receiver>TransactionSortOption</receiver>
+      <receiver>TransactionSortOptionDecl</receiver>
       <slot>slotAvailableSelected(Q3ListViewItem*)</slot>
     </connection>
     <connection>
       <sender>m_downButton</sender>
       <signal>clicked()</signal>
-      <receiver>TransactionSortOption</receiver>
+      <receiver>TransactionSortOptionDecl</receiver>
       <slot>slotDownItem()</slot>
     </connection>
     <connection>
       <sender>m_removeButton</sender>
       <signal>clicked()</signal>
-      <receiver>TransactionSortOption</receiver>
+      <receiver>TransactionSortOptionDecl</receiver>
       <slot>slotRemoveItem()</slot>
     </connection>
     <connection>
       <sender>m_selectedList</sender>
       <signal>selectionChanged(Q3ListViewItem*)</signal>
-      <receiver>TransactionSortOption</receiver>
+      <receiver>TransactionSortOptionDecl</receiver>
       <slot>slotSelectedSelected(Q3ListViewItem*)</slot>
     </connection>
     <connection>
       <sender>m_upButton</sender>
       <signal>clicked()</signal>
-      <receiver>TransactionSortOption</receiver>
+      <receiver>TransactionSortOptionDecl</receiver>
       <slot>slotUpItem()</slot>
     </connection>
     <connection>
       <sender>m_selectedList</sender>
       <signal>doubleClicked(Q3ListViewItem*)</signal>
-      <receiver>TransactionSortOption</receiver>
+      <receiver>TransactionSortOptionDecl</receiver>
       <slot>toggleDirection(Q3ListViewItem*)</slot>
     </connection>
     <connection>
       <sender>m_selectedList</sender>
       <signal>spacePressed(Q3ListViewItem*)</signal>
-      <receiver>TransactionSortOption</receiver>
+      <receiver>TransactionSortOptionDecl</receiver>
       <slot>toggleDirection(Q3ListViewItem*)</slot>
     </connection>
   </connections>

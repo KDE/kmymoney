@@ -46,9 +46,9 @@ public:
   ~KSettingsRegister();
 
 protected slots:
-  void slotLoadNormal(void);
-  void slotLoadReconcile(void);
-  void slotLoadSearch(void);
+  void slotLoadNormal(const QString& text);
+  void slotLoadReconcile(const QString& text);
+  void slotLoadSearch(const QString& text);
 };
 #endif
 

@@ -115,7 +115,7 @@
                     </attribute>
                     <layout class="QHBoxLayout">
                       <item>
-                        <widget class="KTextEdit" name="kcfg_sortNormalView"/>
+                        <widget class="KLineEdit" name="kcfg_sortNormalView"/>
                       </item>
                       <item>
                         <widget class="TransactionSortOption" name="m_sortNormalView"/>
@@ -128,7 +128,7 @@
                     </attribute>
                     <layout class="QHBoxLayout">
                       <item>
-                        <widget class="KTextEdit" name="kcfg_sortReconcileView"/>
+                        <widget class="KLineEdit" name="kcfg_sortReconcileView"/>
                       </item>
                       <item>
                         <widget class="TransactionSortOption" name="m_sortReconcileView"/>
@@ -141,7 +141,7 @@
                     </attribute>
                     <layout class="QHBoxLayout">
                       <item>
-                        <widget class="KTextEdit" name="kcfg_sortSearchView"/>
+                        <widget class="KLineEdit" name="kcfg_sortSearchView"/>
                       </item>
                       <item>
                         <widget class="TransactionSortOption" name="m_sortSearchView"/>

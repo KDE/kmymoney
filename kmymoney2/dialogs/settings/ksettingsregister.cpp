@@ -20,7 +20,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <ktextedit.h>
+#include <klineedit.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -35,9 +35,9 @@ KSettingsRegister::KSettingsRegister(QWidget* parent) :
   kcfg_sortSearchView->hide();
 
   // setup connections, so that the sort optios get loaded once the edit fields are filled
-  connect(kcfg_sortNormalView, SIGNAL(textChanged()), this, SLOT(slotLoadNormal()));
-  connect(kcfg_sortReconcileView, SIGNAL(textChanged()), this, SLOT(slotLoadReconcile()));
-  connect(kcfg_sortSearchView, SIGNAL(textChanged()), this, SLOT(slotLoadSearch()));
+  connect(kcfg_sortNormalView, SIGNAL(textChanged(const QString&)), this, SLOT(slotLoadNormal(const QString&)));
+  connect(kcfg_sortReconcileView, SIGNAL(textChanged(const QString&)), this, SLOT(slotLoadReconcile(const QString&)));
+  connect(kcfg_sortSearchView, SIGNAL(textChanged(const QString&)), this, SLOT(slotLoadSearch(const QString&)));
 
   // setup connections, so that changes by the user are forwarded to the (hidden) edit fields
   connect(m_sortNormalView, SIGNAL(settingsChanged(const QString&)), kcfg_sortNormalView, SLOT(setText(const QString&)));
@@ -49,25 +49,25 @@ KSettingsRegister::~KSettingsRegister()
 {
 }
 
-void KSettingsRegister::slotLoadNormal(void)
+void KSettingsRegister::slotLoadNormal(const QString& text)
 {
   // only need this once
-  disconnect(kcfg_sortNormalView, SIGNAL(textChanged()), this, SLOT(slotLoadNormal()));
-  m_sortNormalView->setSettings(kcfg_sortNormalView->text());
+  disconnect(kcfg_sortNormalView, SIGNAL(textChanged(const QString&)), this, SLOT(slotLoadNormal(const QString&)));
+  m_sortNormalView->setSettings(text);
 }
 
-void KSettingsRegister::slotLoadReconcile(void)
+void KSettingsRegister::slotLoadReconcile(const QString& text)
 {
   // only need this once
-  disconnect(kcfg_sortReconcileView, SIGNAL(textChanged()), this, SLOT(slotLoadReconcile()));
-  m_sortReconcileView->setSettings(kcfg_sortReconcileView->text());
+  disconnect(kcfg_sortReconcileView, SIGNAL(textChanged(const QString&)), this, SLOT(slotLoadReconcile(const QString&)));
+  m_sortReconcileView->setSettings(text);
 }
 
-void KSettingsRegister::slotLoadSearch(void)
+void KSettingsRegister::slotLoadSearch(const QString& text)
 {
   // only need this once
-  disconnect(kcfg_sortSearchView, SIGNAL(textChanged()), this, SLOT(slotLoadSearch()));
-  m_sortSearchView->setSettings(kcfg_sortSearchView->text());
+  disconnect(kcfg_sortSearchView, SIGNAL(textChanged(const QString&)), this, SLOT(slotLoadSearch(const QString&)));
+  m_sortSearchView->setSettings(text);
 }
 
 #include "ksettingsregister.moc"

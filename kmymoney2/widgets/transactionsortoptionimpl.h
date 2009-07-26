@@ -22,15 +22,7 @@
 
 #include "ui_transactionsortoptiondecl.h"
 
-class TransactionSortOptionDecl : public QWidget, public Ui::TransactionSortOptionDecl
-{
-public:
-  TransactionSortOptionDecl( QWidget *parent ) : QWidget( parent ) {
-    setupUi( this );
-  }
-};
-
-class TransactionSortOption : public TransactionSortOptionDecl
+class TransactionSortOption : public QWidget, public Ui::TransactionSortOptionDecl
 {
     Q_OBJECT
 public:
