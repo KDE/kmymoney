@@ -254,14 +254,7 @@ GroupMarker::GroupMarker(Register *parent, const QString& txt) :
   if(m_bg == 0) {
     m_bg = new QPixmap;
     m_bg->loadFromData(fancymarker_bg_image, sizeof(fancymarker_bg_image));
-
-    // for now, we can't simply resize the m_bg member as Qt does not support
-    // alpha resizing. So we take the (slow) detour through a QImage object
-    // which is ok, since we do this only once.
-    // m_bg->resize(m_bg->width(), h);
-    QImage img(m_bg->convertToImage());
-    img = img.smoothScale(img.width(), h);
-    m_bg->convertFromImage(img);
+    *m_bg = m_bg->scaled(m_bg->width(), h, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
   }
 
   ++m_bgRefCnt;
@@ -320,26 +313,11 @@ void GroupMarker::paintRegisterCell(QPainter* painter, int row, int /* col */, c
   cellRect.setHeight(m_bg->height());
   int curWidth = m_bg->width();
 
-  // if the background image is too small (not wide enough) we need to increase its width.
-  if(curWidth < cellRect.width()) {
-    QPixmap* newPic = new QPixmap(cellRect.width(), cellRect.height());
-    int x = 0;
-    while(x < cellRect.width()) {
-      copyBlt(newPic, x, 0, m_bg, 0, 0, curWidth, m_bg->height());
-      x += curWidth;
-    }
-    delete m_bg;
-    m_bg = newPic;
-  }
-
-#warning "port to kde4" 
-#if 0
   // now it's time to draw the background
   painter->drawPixmap(cellRect, *m_bg);
 
   // translate back
   painter->translate(-r.x(), -r.y());
-#endif
 
   // in case we need to show the date, we just paint it in col 1
   if(m_showDate) {
