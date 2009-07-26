@@ -515,11 +515,6 @@ public:
   QString brokerageName(void) const;
 
   /**
-   * @return a 22x22 pixmap for the account group type
-   */
-  QPixmap accountGroupPixmap(bool reconcileFlag = false) const;
-
-  /**
    * This method is used to convert the internal representation of
    * an account type into a human readable format
    *

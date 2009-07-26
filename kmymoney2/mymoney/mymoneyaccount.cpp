@@ -614,45 +614,6 @@ void MyMoneyAccount::adjustBalance(const MyMoneySplit& s, bool reverse)
 
 }
 
-QPixmap MyMoneyAccount::accountGroupPixmap(bool reconcileFlag) const
-{
-  Q_UNUSED(reconcileFlag)
-  QString icon;
-  switch (accountGroup())
-  {
-    case MyMoneyAccount::Income:
-      icon = "account-types_income";
-      break;
-    case MyMoneyAccount::Expense:
-      icon = "account-types_expense";
-      break;
-    case MyMoneyAccount::Liability:
-      icon = "account-types_liability";
-      break;
-    case MyMoneyAccount::Asset:
-      icon = "account-types_asset";
-      break;
-    default:
-      icon = "account";
-      break;
-  }
-#warning "port to kde4 - best is to move this away from the engine object"
-  QPixmap result = QPixmap(KGlobal::dirs()->findResource("appdata",QString( "icons/hicolor/22x22/actions/%1.png").arg(icon)));
-#if 0
-  if(isClosed()) {
-    QPixmap ovly = QPixmap(KGlobal::dirs()->findResource("appdata",QString( "icons/hicolor/22x22/actions/account-types_closed.png")));
-    bitBlt(&result, 0, 0, &ovly, 0, 0, ovly.width(), ovly.height(), Qt::CopyROP, false);
-  } else if(reconcileFlag) {
-    QPixmap ovly = QPixmap(KGlobal::dirs()->findResource("appdata",QString( "icons/hicolor/22x22/actions/account-types_reconcile.png")));
-    bitBlt(&result, 0, 0, &ovly, 0, 0, ovly.width(), ovly.height(), Qt::CopyROP, false);
-  } else if(!onlineBankingSettings().value("provider").isEmpty()) {
-    QPixmap ovly = QPixmap(KGlobal::dirs()->findResource("appdata",QString( "icons/hicolor/22x22/actions/account-types_online.png")));
-    bitBlt(&result, 0, 0, &ovly, 0, 0, ovly.width(), ovly.height(), Qt::CopyROP, false);
-  }
-#endif
-  return result;
-}
-
 QString MyMoneyAccount::accountTypeToString(const MyMoneyAccount::accountTypeE accountType)
 {
   QString returnString;

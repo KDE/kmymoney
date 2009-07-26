@@ -379,6 +379,11 @@ public:
    */
   static void previouslyUsedCategories(const QString& investmentAccount, QString& feesId, QString& interestId);
 
+  /**
+   * @return a 22x22 pixmap for the group type of @a account
+   */
+  static QPixmap accountGroupPixmap(const MyMoneyAccount& account, bool reconcileFlag = false);
+
 };
 
 #endif

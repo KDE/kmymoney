@@ -477,4 +477,42 @@ void KMyMoneyUtils::previouslyUsedCategories(const QString& investmentAccount, Q
 
 }
 
+QPixmap KMyMoneyUtils::accountGroupPixmap(const MyMoneyAccount& account, bool reconcileFlag)
+{
+  QString icon;
+  switch (account.accountGroup())
+  {
+    case MyMoneyAccount::Income:
+      icon = "account-types_income";
+      break;
+    case MyMoneyAccount::Expense:
+      icon = "account-types_expense";
+      break;
+    case MyMoneyAccount::Liability:
+      icon = "account-types_liability";
+      break;
+    case MyMoneyAccount::Asset:
+      icon = "account-types_asset";
+      break;
+    default:
+      icon = "account";
+      break;
+  }
+  QPixmap result = QPixmap(KGlobal::dirs()->findResource("appdata", QString( "icons/hicolor/22x22/actions/%1.png").arg(icon)));
+  if(account.isClosed()) {
+    QPixmap overlay = QPixmap(KGlobal::dirs()->findResource("appdata", QString( "icons/hicolor/22x22/actions/account-types_closed.png")));
+    QPainter pixmapPainter(&result);
+    pixmapPainter.drawPixmap(0, 0, overlay, 0, 0, overlay.width(), overlay.height());
+  } else if(reconcileFlag) {
+    QPixmap overlay = QPixmap(KGlobal::dirs()->findResource("appdata", QString( "icons/hicolor/22x22/actions/account-types_reconcile.png")));
+    QPainter pixmapPainter(&result);
+    pixmapPainter.drawPixmap(0, 0, overlay, 0, 0, overlay.width(), overlay.height());
+  } else if(!account.onlineBankingSettings().value("provider").isEmpty()) {
+    QPixmap overlay = QPixmap(KGlobal::dirs()->findResource("appdata", QString( "icons/hicolor/22x22/actions/account-types_online.png")));
+    QPainter pixmapPainter(&result);
+    pixmapPainter.drawPixmap(0, 0, overlay, 0, 0, overlay.width(), overlay.height());
+  }
+  return result;
+}
+
 
