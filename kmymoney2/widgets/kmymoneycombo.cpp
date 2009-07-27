@@ -126,9 +126,6 @@ void KMyMoneyCombo::setHint(const QString& hint) const
 void KMyMoneyCombo::paintEvent(QPaintEvent* ev)
 {
   KComboBox::paintEvent(ev);
-#warning "port to kde4"
-#if 0
-
   // if we don't have an edit field, we need to paint the text onto the button
   if(!m_edit) {
     if(m_completion) {
@@ -142,10 +139,9 @@ void KMyMoneyCombo::paintEvent(QPaintEvent* ev)
           QPainter p( this );
           const QColorGroup & g = colorGroup();
           p.setPen(g.text());
-
-          QRect re = style().querySubControlMetrics( QStyle::CC_ComboBox, this,
-                                                    QStyle::SC_ComboBoxEditField );
-          re = QStyle::visualRect(re, this);
+          QStyleOptionComboBox opt;
+          initStyleOption(&opt);
+          QRect re = style()->subControlRect(QStyle::CC_ComboBox, &opt, QStyle::SC_ComboBoxEditField, this);
           p.setClipRect( re );
           p.save();
           p.setFont(font());
@@ -157,7 +153,6 @@ void KMyMoneyCombo::paintEvent(QPaintEvent* ev)
       }
     }
   }
-#endif
 }
 
 void KMyMoneyCombo::setPaletteBackgroundColor(const QColor& color)
