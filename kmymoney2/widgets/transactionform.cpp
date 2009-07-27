@@ -223,7 +223,9 @@ void TransactionForm::slotSetTransaction(KMyMoneyRegister::Transaction* transact
 {
   m_transaction = transaction;
 
-  setUpdatesEnabled(false);
+  bool updatesNeedToBeDisabled = updatesEnabled();
+  if (updatesNeedToBeDisabled)
+    setUpdatesEnabled(false);
 
   if(m_transaction) {
     // the next call sets up a back pointer to the form and also sets up the col and row span
@@ -254,7 +256,8 @@ void TransactionForm::slotSetTransaction(KMyMoneyRegister::Transaction* transact
   setMaximumHeight(height);
   setMinimumHeight(height);
 
-  setUpdatesEnabled(true);
+  if (updatesNeedToBeDisabled)
+    setUpdatesEnabled(true); // see the call to setUpdatesEnabled(false) above
 
   // force resizeing of the columns
   QTimer::singleShot(0, this, SLOT(resize()));
@@ -353,7 +356,9 @@ void TransactionForm::resize(void)
 
 void TransactionForm::resize(int col)
 {
-  setUpdatesEnabled(false);
+  bool updatesNeedToBeDisabled = updatesEnabled();
+  if (updatesNeedToBeDisabled)
+    setUpdatesEnabled(false);
 
   // resize the register
   int w = visibleWidth();
@@ -376,7 +381,8 @@ void TransactionForm::resize(int col)
   if(col < nc && w >= 0)
     setColumnWidth(col, w);
 
-  setUpdatesEnabled(true);
+  if (updatesNeedToBeDisabled)
+    setUpdatesEnabled(true); // see the call to setUpdatesEnabled(false) above
   updateContents();
 }
 
