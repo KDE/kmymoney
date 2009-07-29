@@ -30,7 +30,7 @@ The &lt;i&gt;Recovery encryption&lt;/i&gt; group is only accessible, if the nece
         </widget>
       </item>
       <item>
-        <widget class="Q3GroupBox" name="m_idGroup">
+        <widget class="QGroupBox" name="m_idGroup">
           <property name="title">
             <string>User identification</string>
           </property>
@@ -85,7 +85,7 @@ The &lt;i&gt;Recovery encryption&lt;/i&gt; group is only accessible, if the nece
         </widget>
       </item>
       <item>
-        <widget class="Q3GroupBox" name="m_recoveryGroup">
+        <widget class="QGroupBox" name="m_recoveryGroup">
           <property name="title">
             <string>Recovery encryption</string>
           </property>

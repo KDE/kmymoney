@@ -273,7 +273,7 @@
               </widget>
             </item>
             <item row="6" column="0" rowspan="1" colspan="3">
-              <widget class="Q3TextBrowser" name="m_textDetails"/>
+              <widget class="QTextBrowser" name="m_textDetails"/>
             </item>
           </layout>
         </item>
