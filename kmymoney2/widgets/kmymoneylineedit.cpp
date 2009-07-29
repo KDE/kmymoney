@@ -125,11 +125,11 @@ void kMyMoneyLineEdit::keyPressEvent(QKeyEvent* k)
   KLineEdit::keyPressEvent(k);
 }
 
-void kMyMoneyLineEdit::drawContents( QPainter *p)
+void kMyMoneyLineEdit::paintEvent(QPaintEvent* ev)
 {
-#warning "port to kde4"
-  //KLineEdit::drawContents(p);
+  KLineEdit::paintEvent(ev);
 
+  QPainter p(this);
   if(text().isEmpty() && !m_hint.isEmpty() && !hasFocus()) {
     const int innerMargin = 1;
 
@@ -140,16 +140,16 @@ void kMyMoneyLineEdit::drawContents( QPainter *p)
                     cr.width() - 2*innerMargin, fm.height() );
     QPoint topLeft = lineRect.topLeft() - QPoint(0, -fm.ascent());
 
-    p->save();
-    QFont f = p->font();
+    p.save();
+    QFont f = p.font();
     f.setItalic(true);
     f.setWeight(QFont::Light);
-    p->setFont(f);
-    p->setPen(palette().disabled().text());
+    p.setFont(f);
+    p.setPen(palette().disabled().text());
 
-    p->drawText(topLeft, m_hint);
+    p.drawText(topLeft, m_hint);
 
-    p->restore();
+    p.restore();
   }
 }
 

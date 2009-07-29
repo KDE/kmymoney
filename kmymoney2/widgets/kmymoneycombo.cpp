@@ -185,11 +185,9 @@ void KMyMoneyCombo::mousePressEvent(QMouseEvent *e)
 
 bool KMyMoneyCombo::isInArrowArea(const QPoint& pos) const
 {
-#warning "port to kde4"
-#if 0
-    QRect arrowRect = style().querySubControlMetrics( QStyle::CC_ComboBox, this,
-                                                    QStyle::SC_ComboBoxArrow);
-  arrowRect = QStyle::visualRect(arrowRect, this);
+  QStyleOptionComboBox opt;
+  initStyleOption(&opt);
+  QRect arrowRect = style()->subControlRect(QStyle::CC_ComboBox, &opt, QStyle::SC_ComboBoxEditField, this);
 
   // Correction for motif style, where arrow is smaller
   // and thus has a rect that doesn't fit the button.
@@ -200,8 +198,6 @@ bool KMyMoneyCombo::isInArrowArea(const QPoint& pos) const
     arrowRect = rect();
 
   return arrowRect.contains(mapFromGlobal(pos));
-#endif
-  return false;
 }
 
 void KMyMoneyCombo::keyPressEvent(QKeyEvent* e)

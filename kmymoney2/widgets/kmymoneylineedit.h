@@ -85,7 +85,7 @@ protected:
   void focusOutEvent(QFocusEvent *ev);
 
   /** reimplemented to support the hint display */
-  void drawContents( QPainter *);
+  void paintEvent(QPaintEvent* ev);
 
   /**
     * Overridden so that the period key on the numeric keypad always sends
