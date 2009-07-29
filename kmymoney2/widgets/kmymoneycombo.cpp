@@ -624,7 +624,7 @@ void KMyMoneyGeneralCombo::setCurrentItem(int id)
 {
   const QString& txt = d->itemText(id);
   for(int idx = 0; idx < count(); ++idx) {
-    if(txt == text(idx)) {
+    if(txt == itemText(idx)) {
       KComboBox::setCurrentIndex(idx);
       break;
     }
