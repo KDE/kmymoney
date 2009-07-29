@@ -31,7 +31,7 @@
       <item>
         <layout class="QHBoxLayout">
           <item>
-            <widget class="Q3GroupBox" name="groupBox1">
+            <widget class="QGroupBox" name="groupBox1">
               <property name="sizePolicy">
                 <sizepolicy>
                   <hsizetype>7</hsizetype>
@@ -161,7 +161,7 @@
                 </widget>
               </item>
               <item>
-                <widget class="Q3GroupBox" name="m_assignmentBox">
+                <widget class="QGroupBox" name="m_assignmentBox">
                   <property name="sizePolicy">
                     <sizepolicy>
                       <hsizetype>0</hsizetype>

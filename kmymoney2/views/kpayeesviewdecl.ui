@@ -55,7 +55,7 @@
         </attribute>
         <layout class="QVBoxLayout">
          <item>
-          <widget class="Q3GroupBox" name="transactionGroup">
+          <widget class="QGroupBox" name="transactionGroup">
            <property name="title">
             <string>Transactions</string>
            </property>

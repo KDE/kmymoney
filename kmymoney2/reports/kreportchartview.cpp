@@ -33,7 +33,7 @@
 //Added by qt3to4:
 #include <QMouseEvent>
 #include <QLabel>
-#include <Q3Frame>
+#include <QFrame>
 
 using namespace reports;
 
@@ -97,7 +97,7 @@ KReportChartView::KReportChartView( QWidget* parent, const char* name ): KDChart
     label->hide();
     // mouse tracking on will force the mouseMoveEvent() method to be called from Qt
     label->setMouseTracking( true );
-    label->setFrameStyle( QFrame::StyledPanel | Q3Frame::Raised );
+    label->setFrameStyle( QFrame::StyledPanel | QFrame::Raised );
     label->setAlignment( Qt::AlignRight );
     label->setAutoResize( true );
 }
