@@ -70,7 +70,7 @@ class kMyMoneyDateInput : public KHBox
   Q_OBJECT
 
 public:
-  kMyMoneyDateInput(QWidget *parent=0, const char *name=0, Qt::AlignmentFlag flags=Qt::AlignLeft);
+  kMyMoneyDateInput(QWidget *parent=0, Qt::AlignmentFlag flags=Qt::AlignLeft);
   ~kMyMoneyDateInput();
 
   // Replace calls to this with the new date() method
@@ -82,9 +82,6 @@ public:
   void resetDate(void);
   QWidget* focusWidget(void) const;
   virtual void setRange(const QDate & min, const QDate & max) { dateEdit->setRange(min, max); }
-
-public slots:
-  virtual void show(void);
 
 signals:
   void dateChanged(const QDate& date);
@@ -99,6 +96,7 @@ protected:
     */
   void keyPressEvent(QKeyEvent * k);
   void resizeEvent(QResizeEvent*);
+  void showEvent(QShowEvent* event);
 
   /** To intercept events sent to focusWidget() */
   bool eventFilter(QObject *o, QEvent *e);

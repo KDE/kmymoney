@@ -74,7 +74,7 @@ bool KMyMoneyDateEdit::event(QEvent* e)
   return rc;
 }
 
-kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, const char *name, Qt::AlignmentFlag flags)
+kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, Qt::AlignmentFlag flags)
  : KHBox(parent)
 {
   m_qtalignment = flags;
@@ -88,16 +88,17 @@ kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, const char *name, Qt::Alig
   m_datePopup = new KPassivePopup(dateEdit);
   m_datePopup->setObjectName("datePopup");
   m_datePopup->setTimeout(DATE_POPUP_TIMEOUT);
-  m_datePopup->setView(new QLabel(KGlobal::locale()->formatDate(m_date), m_datePopup, "datePopupLabel"));
+  m_datePopup->setView(new QLabel(KGlobal::locale()->formatDate(m_date), m_datePopup));
 
   m_dateFrame = new KVBox(this);
+  m_dateFrame->setWindowFlags(Qt::Popup);
   m_dateFrame->setFrameStyle(QFrame::PopupPanel | QFrame::Raised);
   m_dateFrame->setLineWidth(3);
   m_dateFrame->hide();
 
   QString dateFormat = KGlobal::locale()->dateFormatShort().toLower();
   QString order, separator;
-  for(unsigned i = 0; i < dateFormat.length(); ++i) {
+  for(int i = 0; i < dateFormat.length(); ++i) {
     // DD.MM.YYYY is %d.%m.%y
     // dD.mM.YYYY is %e.%n.%y
     // SHORTWEEKDAY, dD SHORTMONTH YYYY is %a, %e %b %Y
@@ -146,10 +147,10 @@ kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, const char *name, Qt::Alig
   connect(m_datePicker, SIGNAL(dateSelected(QDate)), m_dateFrame, SLOT(hide()));
 }
 
-void kMyMoneyDateInput::show(void)
+void kMyMoneyDateInput::showEvent(QShowEvent* event)
 {
   // don't forget the standard behaviour  ;-)
-  KHBox::show();
+  KHBox::showEvent(event);
 
   // If the widget is shown, the size must be fixed a little later
   // to be appropriate. I saw this in some other places and the only
@@ -249,12 +250,9 @@ void kMyMoneyDateInput::keyPressEvent(QKeyEvent * k)
       break;
 
     default:
-#warning "port to kde4"
-#if 0
-      if(today.contains(KKey(k)) || k->key() == Qt::Key_T) {
+      if(today.contains(QKeySequence(k->key())) || k->key() == Qt::Key_T) {
         slotDateChosen(QDate::currentDate());
       }
-#endif      
       break;
   }
 }

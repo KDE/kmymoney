@@ -237,7 +237,7 @@ void TransactionForm::slotSetTransaction(KMyMoneyRegister::Transaction* transact
     setNumCols(1);
   }
 
-  kMyMoneyDateInput dateInput(0, "editDate");
+  kMyMoneyDateInput dateInput(0);
   KMyMoneyCategory category(0, "category", true);
 
   // extract the maximal sizeHint height
