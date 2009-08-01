@@ -436,10 +436,7 @@ QDate MyMoneySchedule::nextPayment(const QDate& refDate) const
         break;
 
       case OCCUR_DAILY:
-        if (paymentDate <= refDate)
-          paymentDate = refDate.addDays(m_occurenceMultiplier);
-        else
-          paymentDate = paymentDate.addDays(m_occurenceMultiplier);
+        paymentDate = refDate.addDays(m_occurenceMultiplier);
         break;
 
       case OCCUR_WEEKLY:
