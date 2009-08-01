@@ -445,12 +445,12 @@ void KGlobalLedgerView::loadView(void)
       while(scheduleList.count() > 0){
         MyMoneySchedule& s = scheduleList.first();
         for(;;) {
-          if(s.isFinished() || s.nextDueDate() > endDate) {
+          if(s.isFinished() || s.adjustedNextDueDate() > endDate) {
             break;
           }
 
           MyMoneyTransaction t(s.id(), KMyMoneyUtils::scheduledTransaction(s));
-          t.setPostDate(s.nextDueDate());
+          t.setPostDate(s.adjustedNextDueDate());
           // if the transaction is scheduled and overdue, it can't
           // certainly be posted in the past. So we take todays date
           // as the alternative
@@ -471,7 +471,7 @@ void KGlobalLedgerView::loadView(void)
             break;
 
           // for all others, we check if the next payment date is still 'in range'
-          s.setNextDueDate(s.nextPayment(s.nextDueDate()));
+          s.setNextDueDate(s.nextPayment(s.adjustedNextDueDate()));
         }
         scheduleList.pop_front();
       }

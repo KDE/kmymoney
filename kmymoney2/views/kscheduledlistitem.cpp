@@ -140,7 +140,7 @@ KScheduledListItem::KScheduledListItem(KScheduledListItem *parent, const MyMoney
       setText(4, i18n("Finished"));
     }
     else
-      setText(4, KGlobal::locale()->formatDate(schedule.nextDueDate()));
+      setText(4, KGlobal::locale()->formatDate(schedule.adjustedNextDueDate()));
 
     setText(5, i18n(schedule.occurenceToString().toLatin1()));
     setText(6, KMyMoneyUtils::paymentMethodToString(schedule.paymentType()));
@@ -217,7 +217,7 @@ int KScheduledListItem::compare(Q3ListViewItem* i, int col, bool ascending) cons
       break;
 
     case 4:   // date
-      rc = item->m_schedule.nextDueDate().daysTo(m_schedule.nextDueDate());
+      rc = item->m_schedule.adjustedNextDueDate().daysTo(m_schedule.adjustedNextDueDate());
       break;
 
     case 5:   // occurence
