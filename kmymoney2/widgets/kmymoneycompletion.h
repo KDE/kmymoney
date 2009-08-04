@@ -52,14 +52,8 @@ class kMyMoneyCompletion : public KVBox
   Q_OBJECT
 public:
 
-  kMyMoneyCompletion(QWidget *parent=0, const char *name=0);
+  kMyMoneyCompletion(QWidget *parent=0);
   virtual ~kMyMoneyCompletion();
-
-  /**
-    * Re-implemented for internal reasons.  API is unaffected.
-    */
-  virtual void show(void) { show(true); }
-
 
   /**
     * Re-implemented for internal reasons.  API is unaffected.
@@ -89,6 +83,11 @@ protected:
   virtual bool eventFilter( QObject *, QEvent * );
 
   /**
+    * Re-implemented for internal reasons.  API is unaffected.
+    */
+  virtual void showEvent(QShowEvent*);
+
+  /**
     * This method resizes the widget to show a maximum of @p count
     * or @a MAX_ITEMS items.
     *
@@ -113,7 +112,7 @@ protected:
   QWidget*                    m_parent;
   QWidget*                    m_widget;
   QString                     m_id;
-  K3ListView*                  m_lv;
+  K3ListView*                 m_lv;
   KMyMoneySelector*           m_selector;
   QRegExp                     m_lastCompletion;
 

@@ -67,7 +67,7 @@ KMyMoneyAccountCombo::~KMyMoneyAccountCombo()
 
 void KMyMoneyAccountCombo::slotButtonPressed(void)
 {
-  m_completion->show();
+  m_completion->setVisible(true);
 }
 
 void KMyMoneyAccountCombo::slotSelected(const QString& id)

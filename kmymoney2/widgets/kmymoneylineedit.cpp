@@ -42,7 +42,7 @@ kMyMoneyLineEdit::kMyMoneyLineEdit(QWidget *w, bool forceMonetaryDecimalSymbol, 
   KLineEdit(w),
   m_forceMonetaryDecimalSymbol(forceMonetaryDecimalSymbol)
 {
-    setAlignment(alignment);
+  setAlignment(alignment);
 }
 
 kMyMoneyLineEdit::~kMyMoneyLineEdit()

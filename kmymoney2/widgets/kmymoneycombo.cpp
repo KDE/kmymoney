@@ -170,7 +170,7 @@ void KMyMoneyCombo::mousePressEvent(QMouseEvent *e)
     return;
 
   if(((!isEditable() || isInArrowArea(mapToGlobal(e->pos()))) && selector()->itemList().count()) && !m_completion->isVisible()) {
-    m_completion->show();
+    m_completion->setVisible(true);
   }
 
   if(m_timer.isActive()) {
@@ -207,7 +207,7 @@ void KMyMoneyCombo::keyPressEvent(QKeyEvent* e)
      (!isEditable() && e->key() == Qt::Key_Space)) {
     // if we have at least one item in the list, we open the dropdown
     if(selector()->listView()->firstChild())
-      m_completion->show();
+      m_completion->setVisible(true);
     e->ignore();
     return;
   }
@@ -216,20 +216,26 @@ void KMyMoneyCombo::keyPressEvent(QKeyEvent* e)
 
 void KMyMoneyCombo::connectNotify(const char* signal)
 {
-  if(signal && !strcmp(signal, SIGNAL(createItem(const QString&,QString&)))) {
+  if(signal && QLatin1String(signal) != QLatin1String(QMetaObject::normalizedSignature(SIGNAL(createItem(const QString&,QString&))))) {
     m_canCreateObjects = true;
   }
 }
 
 void KMyMoneyCombo::disconnectNotify(const char* signal)
 {
-  if(signal && !strcmp(signal, SIGNAL(createItem(const QString&,QString&)))) {
+  if(signal && QLatin1String(signal) != QLatin1String(QMetaObject::normalizedSignature(SIGNAL(createItem(const QString&,QString&))))) {
     m_canCreateObjects = false;
   }
 }
 
 void KMyMoneyCombo::focusOutEvent(QFocusEvent* e)
 {
+  // when showing m_completion we'll receive a focus out event even if the focus
+  // will still remain at this widget since this widget is the completion's focus proxy
+  // so ignore the focus out event caused by showin a widget of type Qt::Popup
+  if(e->reason() == Qt::PopupFocusReason)
+    return;
+
   if(m_inFocusOutEvent) {
     KComboBox::focusOutEvent(e);
     return;
@@ -272,7 +278,7 @@ void KMyMoneyCombo::focusOutEvent(QFocusEvent* e)
     m_id = QString();
     if(!id.isEmpty())
       emit itemSelected(m_id);
-    repaint();
+    update();
   }
   m_inFocusOutEvent = false;
 }
@@ -343,7 +349,7 @@ QSize KMyMoneyCombo::sizeHint() const
 KMyMoneyReconcileCombo::KMyMoneyReconcileCombo(QWidget* w, const char* name) :
   KMyMoneyCombo(false, w, name)
 {
-  m_completion = new kMyMoneyCompletion(this, 0);
+  m_completion = new kMyMoneyCompletion(this);
   // connect(m_completion, SIGNAL(itemSelected(const QString&)), this, SIGNAL(itemSelected(const QString&)));
 
   // add the items in reverse order of appearance (see KMyMoneySelector::newItem() for details)
@@ -416,7 +422,7 @@ MyMoneySplit::reconcileFlagE KMyMoneyReconcileCombo::state(void) const
 KMyMoneyComboAction::KMyMoneyComboAction(QWidget* w, const char* name) :
   KMyMoneyCombo(false, w, name)
 {
-  m_completion = new kMyMoneyCompletion(this, 0);
+  m_completion = new kMyMoneyCompletion(this);
   QString num;
   // add the items in reverse order of appearance (see KMyMoneySelector::newItem() for details)
   selector()->newTopItem(i18n("ATM"), QString(), num.setNum(KMyMoneyRegister::ActionAtm));
@@ -466,7 +472,7 @@ int KMyMoneyComboAction::action(void) const
 KMyMoneyCashFlowCombo::KMyMoneyCashFlowCombo(QWidget* w, const char* name, MyMoneyAccount::accountTypeE accountType) :
   KMyMoneyCombo(false, w, name)
 {
-  m_completion = new kMyMoneyCompletion(this, 0);
+  m_completion = new kMyMoneyCompletion(this);
   QString num;
   // add the items in reverse order of appearance (see KMyMoneySelector::newItem() for details)
   if(accountType == MyMoneyAccount::Income || accountType == MyMoneyAccount::Expense) {
@@ -514,7 +520,7 @@ KMyMoneyActivityCombo::KMyMoneyActivityCombo(QWidget* w, const char* name) :
   KMyMoneyCombo(false, w, name),
   m_activity(MyMoneySplit::UnknownTransactionType)
 {
-  m_completion = new kMyMoneyCompletion(this, 0);
+  m_completion = new kMyMoneyCompletion(this);
   QString num;
   // add the items in reverse order of appearance (see KMyMoneySelector::newItem() for details)
   selector()->newTopItem(i18n("Split shares"), QString(), num.setNum(MyMoneySplit::SplitShares));

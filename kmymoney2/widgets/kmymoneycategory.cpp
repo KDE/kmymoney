@@ -81,7 +81,7 @@ KMyMoneyCategory::KMyMoneyCategory(QWidget* parent, const char * name, bool spli
     layout->addWidget(d->splitButton);
   }
 
-  m_completion = new kMyMoneyAccountCompletion(this, 0);
+  m_completion = new kMyMoneyAccountCompletion(this);
   connect(m_completion, SIGNAL(itemSelected(const QString&)), this, SLOT(slotItemSelected(const QString&)));
   connect(this, SIGNAL(textChanged(const QString&)), m_completion, SLOT(slotMakeCompletion(const QString&)));
 }

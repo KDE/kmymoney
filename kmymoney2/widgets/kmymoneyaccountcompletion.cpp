@@ -37,8 +37,8 @@
 #include "kmymoneyaccountcompletion.h"
 #include <mymoneyfile.h>
 
-kMyMoneyAccountCompletion::kMyMoneyAccountCompletion(QWidget *parent, const char *name ) :
-  kMyMoneyCompletion(parent, name)
+kMyMoneyAccountCompletion::kMyMoneyAccountCompletion(QWidget *parent) :
+  kMyMoneyCompletion(parent)
 {
   delete m_selector;
   m_selector = new kMyMoneyAccountSelector(this, 0, 0, false);

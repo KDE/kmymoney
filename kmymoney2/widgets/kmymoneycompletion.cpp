@@ -45,17 +45,17 @@
 
 const int kMyMoneyCompletion::MAX_ITEMS = 16;
 
-kMyMoneyCompletion::kMyMoneyCompletion(QWidget *parent, const char *name ) :
+kMyMoneyCompletion::kMyMoneyCompletion(QWidget *parent) :
   KVBox(parent)
 {
   setWindowFlags(Qt::Popup);
-  
-  m_selector = new KMyMoneySelector(this);
-  m_selector->listView()->setFocusProxy(this);
+  setFrameStyle(QFrame::PopupPanel | QFrame::Raised);
 
   m_parent = parent;
-  setFocusProxy((parent) ? parent : (QWidget*) Qt::NoFocus);
-  setFrameStyle(QFrame::PopupPanel | QFrame::Raised);
+  setFocusProxy(parent);
+
+  m_selector = new KMyMoneySelector(this);
+
   connectSignals(m_selector, m_selector->listView());
 }
 
@@ -130,6 +130,11 @@ void kMyMoneyCompletion::adjustSize(const int count)
   }
 }
 
+void kMyMoneyCompletion::showEvent(QShowEvent*)
+{
+  show(true);
+}
+
 void kMyMoneyCompletion::show(bool presetSelected)
 {
   if(!m_id.isEmpty() && presetSelected)
@@ -139,6 +144,7 @@ void kMyMoneyCompletion::show(bool presetSelected)
 
   if(m_parent) {
     m_parent->installEventFilter(this);
+    m_parent->grabKeyboard();
     // make sure to install the filter for the combobox lineedit as well
     // We have do this here because QObject::installEventFilter() is not
     // declared virtual and we have no chance to override it in KMyMoneyCombo
@@ -155,6 +161,7 @@ void kMyMoneyCompletion::hide(void)
 {
   if(m_parent) {
     m_parent->removeEventFilter(this);
+    m_parent->releaseKeyboard();
     // make sure to uninstall the filter for the combobox lineedit as well
     // We have do this here because QObject::installEventFilter() is not
     // declared virtual and we have no chance to override it in KMyMoneyCombo
@@ -168,19 +175,17 @@ void kMyMoneyCompletion::hide(void)
 
 bool kMyMoneyCompletion::eventFilter(QObject* o, QEvent* e)
 {
-  int type = e->type();
-
   KMyMoneyCombo *c = dynamic_cast<KMyMoneyCombo*>(m_parent);
   Q3ListViewItem* item;
   if(o == m_parent || (c && o == c->lineEdit())) {
     if(isVisible()) {
-      if(type == QEvent::KeyPress) {
+      if(e->type() == QEvent::KeyPress) {
         QKeyEvent* ev = static_cast<QKeyEvent*> (e);
         QKeyEvent evt(QEvent::KeyPress,
-                      Qt::Key_Down, 0, ev->state(), QString::null,
+                      Qt::Key_Down, ev->modifiers(), QString::null,
                       ev->isAutoRepeat(), ev->count());
         QKeyEvent evbt(QEvent::KeyPress,
-                      Qt::Key_Up, 0, ev->state(), QString::null,
+                      Qt::Key_Up, ev->modifiers(), QString::null,
                       ev->isAutoRepeat(), ev->count());
 
         switch(ev->key()) {
@@ -235,7 +240,7 @@ bool kMyMoneyCompletion::eventFilter(QObject* o, QEvent* e)
 
           case Qt::Key_Home:
           case Qt::Key_End:
-            if(ev->state() & Qt::ControlModifier) {
+            if(ev->modifiers() & Qt::ControlModifier) {
               item = m_lv->currentItem();
               if(ev->key() == Qt::Key_Home) {
                 while(item && item->itemAbove()) {
