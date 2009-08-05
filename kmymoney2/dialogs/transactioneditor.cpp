@@ -165,7 +165,7 @@ bool TransactionEditor::eventFilter(QObject* o, QEvent* e)
   && (e->type() == QEvent::KeyPress)
   && m_editWidgets.values().contains(dynamic_cast<QWidget*>(o))) {
     QKeyEvent* k = dynamic_cast<QKeyEvent*>(e);
-    if((k->state() & Qt::KeyboardModifierMask) == 0) {
+    if((k->modifiers() & Qt::KeyboardModifierMask) == 0) {
       bool isFinal = false;
       QList<const QWidget*>::const_iterator it_w;
       switch(k->key()) {
@@ -192,7 +192,7 @@ bool TransactionEditor::eventFilter(QObject* o, QEvent* e)
           // for the non-final objects, we treat the return key as a TAB
           if(!isFinal) {
             QKeyEvent evt(e->type(),
-                          Qt::Key_Tab, 0, k->state(), QString::null,
+                          Qt::Key_Tab, k->modifiers(), QString::null,
                           k->isAutoRepeat(), k->count());
 
             QApplication::sendEvent( o, &evt );
@@ -602,7 +602,6 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
           bool enter = true;
           if(askForSchedule && (*it_ts).postDate() > QDate::currentDate()) {
             KGuiItem enterItem;
-            KIconLoader* il = KIconLoader::global();
             KGuiItem enterButton( i18n("&Enter" ),
                     KIcon("kontact_journal"),
                     i18n("Accepts the entered data and stores it"),
@@ -842,7 +841,7 @@ void StdTransactionEditor::createEditWidgets(void)
 
   QLabel* label;
   m_editWidgets["category-label"] = label = new QLabel(i18n("Category"), 0);
-  label->setAlignment(Qt::AlignVCenter | Qt::TextDontClip);
+  label->setAlignment(Qt::AlignVCenter);
 
   // create a copy of tabbar above the form (if we are created for a form)
   KMyMoneyTransactionForm::TransactionForm* form = dynamic_cast<KMyMoneyTransactionForm::TransactionForm*>(m_regForm);
@@ -854,11 +853,11 @@ void StdTransactionEditor::createEditWidgets(void)
     connect(tabbar, SIGNAL(tabCurrentChanged(int)), this, SLOT(slotUpdateAction(int)));
   }
   label = new QLabel(i18n("Date"), 0);
-  label->setAlignment(Qt::AlignVCenter | Qt::TextDontClip);
+  label->setAlignment(Qt::AlignVCenter);
   m_editWidgets["date-label"] = label;
 
   label = new QLabel(i18n("Number"), 0);
-  label->setAlignment(Qt::AlignVCenter | Qt::TextDontClip);
+  label->setAlignment(Qt::AlignVCenter);
   m_editWidgets["number-label"] = label;
 
   setupPrecision();
@@ -1142,7 +1141,7 @@ void StdTransactionEditor::slotUpdatePayee(const QString& payeeId)
 
     // check if memo is empty
     KTextEdit* memo = dynamic_cast<KTextEdit*>(m_editWidgets["memo"]);
-    if(memo && !memo->text().isEmpty())
+    if(memo && !memo->toPlainText().isEmpty())
       return;
 
     // check if all value fields are empty
@@ -1959,8 +1958,8 @@ bool StdTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyMone
   //       by the user
   KTextEdit* memo = dynamic_cast<KTextEdit*>(m_editWidgets["memo"]);
   if(memo) {
-    if(!isMultiSelection() || (isMultiSelection() && !memo->text().isEmpty() ) )
-      s0.setMemo(memo->text());
+    if(!isMultiSelection() || (isMultiSelection() && !memo->toPlainText().isEmpty() ) )
+      s0.setMemo(memo->toPlainText());
   }
 
   kMyMoneyLineEdit* number = dynamic_cast<kMyMoneyLineEdit*>(haveWidget("number"));
@@ -2045,7 +2044,7 @@ bool StdTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyMone
     // if the first split has a memo but the second split is empty,
     // we just copy the memo text over
     if(memo) {
-      if(!isMultiSelection() || (isMultiSelection() && !memo->text().isEmpty())) {
+      if(!isMultiSelection() || (isMultiSelection() && !memo->toPlainText().isEmpty())) {
         // if the memo is filled, we check if the
         // account referenced by s1 is a regular account or a category.
         // in case of a regular account, we just leave the memo as is
