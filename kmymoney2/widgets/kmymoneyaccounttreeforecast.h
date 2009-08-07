@@ -41,7 +41,7 @@ class KMyMoneyAccountTreeForecast : public KMyMoneyAccountTreeBase
 {
     Q_OBJECT
   public:
-    KMyMoneyAccountTreeForecast(QWidget* parent = 0, const char *name = 0);
+    KMyMoneyAccountTreeForecast(QWidget* parent = 0);
     virtual ~KMyMoneyAccountTreeForecast() {}
 
     void showSummary(MyMoneyForecast& forecast);

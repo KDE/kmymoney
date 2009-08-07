@@ -29,7 +29,7 @@ class KMyMoneyAccountTree : public KMyMoneyAccountTreeBase
 {
   Q_OBJECT
 public:
-  KMyMoneyAccountTree(QWidget* parent = 0, const char *name = 0);
+  KMyMoneyAccountTree(QWidget* parent = 0);
   int taxReportColumn(void) const { return m_taxReportColumn; }
   int vatCategoryColumn(void) const { return m_vatCategoryColumn; }
 private:

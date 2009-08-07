@@ -21,8 +21,8 @@
 //Added by qt3to4:
 #include <QList>
 
-KMyMoneyAccountTreeBudget::KMyMoneyAccountTreeBudget(QWidget* parent, const char* name) :
-  KMyMoneyAccountTreeBase::KMyMoneyAccountTreeBase(parent, name)
+KMyMoneyAccountTreeBudget::KMyMoneyAccountTreeBudget(QWidget* parent) :
+  KMyMoneyAccountTreeBase::KMyMoneyAccountTreeBase(parent)
 {
   showType();
   showValue();

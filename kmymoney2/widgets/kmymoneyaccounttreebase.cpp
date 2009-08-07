@@ -27,6 +27,7 @@
 #include <QPainter>
 #include <QPixmap>
 #include <QStyle>
+#include <QStyleOptionFocusRect>
 //Added by qt3to4:
 #include <QList>
 #include <QDragMoveEvent>
@@ -51,7 +52,7 @@
 
 #include <kmymoneyutils.h>
 
-KMyMoneyAccountTreeBase::KMyMoneyAccountTreeBase(QWidget* parent, const char* name) :
+KMyMoneyAccountTreeBase::KMyMoneyAccountTreeBase(QWidget* parent) :
   K3ListView(parent),
   m_accountConnections(false),
   m_institutionConnections(false),
@@ -480,12 +481,12 @@ void KMyMoneyAccountTreeBase::contentsDragMoveEvent(QDragMoveEvent* e)
       }
     }
     if ( accepted ) {
-      switch ( e->action() ) {
-        case QDropEvent::Copy:
-        case QDropEvent::Link:
+      switch ( e->dropAction() ) {
+        case Qt::CopyAction:
+        case Qt::LinkAction:
           break;
-        case QDropEvent::Move:
-          e->acceptAction();
+        case Qt::MoveAction:
+          e->accept();
           break;
         default:
           break;
@@ -509,25 +510,25 @@ void KMyMoneyAccountTreeBase::cleanItemHighlighter(void)
     // make sure, we repaint a bit more. that's important during
     // autoscroll. if we don't do that, parts of the highlighter
     // do not get removed
-    rect.moveBy(-1, -1);
+    rect.translate(-1, -1);
     rect.setSize(rect.size() + QSize(2,2));
-    viewport()->repaint(rect, true);
+    viewport()->update(rect);
   }
 }
 
 void KMyMoneyAccountTreeBase::viewportPaintEvent(QPaintEvent* e)
 {
   Q3ListView::viewportPaintEvent(e);
-#warning "port to kde4"
-#if 0
   if (m_lastDropHighlighter.isValid() && e->rect().intersects(m_lastDropHighlighter)) {
     QPainter painter(viewport());
 
+    QStyleOptionFocusRect styleOption;
+    styleOption.rect = m_lastDropHighlighter;
+    styleOption.palette = palette();
+    styleOption.state = QStyle::State_FocusAtBorder;
     // This is where we actually draw the drop-highlighter
-    style().drawPrimitive(QStyle::PE_FocusRect, &painter, m_lastDropHighlighter, colorGroup(),
-                          QStyle::State_FocusAtBorder);
+    style()->drawPrimitive(QStyle::PE_FrameFocusRect, &styleOption, &painter);
   }
-#endif  
 }
 
 

@@ -50,7 +50,7 @@ class KMyMoneyAccountTreeBase : public K3ListView
 
   Q_OBJECT
 public:
-  KMyMoneyAccountTreeBase(QWidget* parent = 0, const char *name = 0);
+  KMyMoneyAccountTreeBase(QWidget* parent = 0);
   virtual ~KMyMoneyAccountTreeBase();
 
   /**

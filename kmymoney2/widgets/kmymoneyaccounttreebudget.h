@@ -41,7 +41,7 @@ class KMyMoneyAccountTreeBudget : public KMyMoneyAccountTreeBase
 {
   Q_OBJECT
 public:
-  KMyMoneyAccountTreeBudget(QWidget* parent = 0, const char *name = 0);
+  KMyMoneyAccountTreeBudget(QWidget* parent = 0);
   virtual ~KMyMoneyAccountTreeBudget() {}
 
 public slots:

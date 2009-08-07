@@ -48,8 +48,8 @@
 
 #include <kmymoneyutils.h>
 
-KMyMoneyAccountTree::KMyMoneyAccountTree(QWidget* parent, const char *name) :
-    KMyMoneyAccountTreeBase(parent,name)
+KMyMoneyAccountTree::KMyMoneyAccountTree(QWidget* parent) :
+    KMyMoneyAccountTreeBase(parent)
 {
   showType();
 
