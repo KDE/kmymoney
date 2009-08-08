@@ -138,7 +138,7 @@ public:
   /**
     * overridden for internal reasons, no API change
     */
-  void setCurrentText(const QString& txt = QString()) { KComboBox::setCurrentText(txt); }
+  void setCurrentText(const QString& txt = QString()) { KComboBox::setItemText(KComboBox::currentIndex(), txt); }
 
   /**
     * overridden to set the background color of the lineedit as well
