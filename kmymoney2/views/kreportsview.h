@@ -94,7 +94,7 @@ public:
   {
   private:
     KHTMLPart* m_part;
-//FIXME: Port to KDE4
+#warning  #Port to KDE4
 //    reports::KReportChartView* m_chartView;
     kMyMoneyReportControl* m_control;
     QVBoxLayout* m_layout;

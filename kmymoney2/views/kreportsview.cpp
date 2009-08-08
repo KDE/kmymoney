@@ -91,33 +91,34 @@ using namespace reports;
 KReportsView::KReportTab::KReportTab(KTabWidget* parent, const MyMoneyReport& report ):
   QWidget( parent ),
   m_part( new KHTMLPart( this) ),
-  //FIXME: Port to KDE4
+  #warning #Port to KDE4
   //m_chartView( new KReportChartView( this, "reportchart" ) ),
   m_control( new kMyMoneyReportControl( this ) ),
-  m_layout( new QVBoxLayout( this, 11, 6, "reporttablayout" ) ),
+  m_layout( new QVBoxLayout( this) ),
   m_report( report ),
   m_deleteMe( false ),
   m_showingChart( false ),
   m_needReload( true ),
   m_table(0)
 {
+  m_layout->setSpacing(6);
   m_part->setZoomFactor( KMyMoneyGlobalSettings::fontSizePercentage() );
 
   if ( 
-  //FIXME: Port to KDE4
+  #warning #Port to KDE4
   // ! KReportChartView::implemented() || 
   m_report.reportType() != MyMoneyReport::ePivotTable )
   {
-#warning "port to kde4"
+  #warning #Port to KDE4
       	  //m_control->buttonChart->hide();
   }
 
-//FIXME: Port to KDE4
+  #warning #Port to KDE4
 //m_chartView->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );
 //m_chartView->hide();
   m_layout->addWidget( m_control ); //, 0, Qt::AlignTop );
   m_layout->addWidget( m_part->view() );
-//FIXME: Port to KDE4
+  #warning #Port to KDE4
 //m_layout->addWidget( m_chartView );
 
   // I like this icon...
@@ -126,10 +127,11 @@ KReportsView::KReportTab::KReportTab(KTabWidget* parent, const MyMoneyReport& re
   if ( icon == QString::null )
     icon = KGlobal::dirs()->findResource("icon", "hicolor/16x16/apps/kmymoney2.png");
 
-  parent->insertTab( this, KIcon(QPixmap(icon)), report.name() );
-  parent->setTabEnabled( this, true );
+  parent->addTab( this, KIcon(QPixmap(icon)), report.name() );
+  parent->setTabEnabled( parent->indexOf(this), true );
 
-#ifdef HAVE_KDCHART
+#warning #Port to KDE4
+#if 0
   if ( m_report.isChartByDefault() )
     toggleChart();
 #endif
@@ -148,9 +150,9 @@ void KReportsView::KReportTab::print(void)
 
 void KReportsView::KReportTab::copyToClipboard(void)
 {
-  Q3TextDrag* pdrag =  new Q3TextDrag( createTable() );
-  pdrag->setSubtype("html");
-  QApplication::clipboard()->setData(pdrag);
+  QMimeData* pMimeData =  new QMimeData();
+  pMimeData->setHtml(createTable());
+  QApplication::clipboard()->setMimeData(pMimeData);
 }
 
 void KReportsView::KReportTab::saveAs( const QString& filename, bool includeCSS )
@@ -158,7 +160,7 @@ void KReportsView::KReportTab::saveAs( const QString& filename, bool includeCSS 
   QFile file( filename );
   if ( file.open( QIODevice::WriteOnly ) )
   {
-    if ( QFileInfo(filename).extension(false).toLower() == "csv")
+    if ( QFileInfo(filename).suffix().toLower() == "csv")
     {
       QTextStream(&file) << m_table->renderCSV();
     }
@@ -166,14 +168,14 @@ void KReportsView::KReportTab::saveAs( const QString& filename, bool includeCSS 
       QTextStream stream(&file);
       QRegExp exp("(.*)(<link.*css\" href=)\"(.*)\">(<meta.*utf-8\" />)(.*)");
       QString table = createTable();
-      if(exp.search(table) != -1 && includeCSS) {
+      if(exp.indexIn(table) != -1 && includeCSS) {
         QFile cssFile(exp.cap(3));
         if(cssFile.open(QIODevice::ReadOnly)) {
           QTextStream cssStream(&cssFile);
           stream << exp.cap(1);
           stream << exp.cap(4);
           stream << endl << "<style type=\"text/css\">" << endl << "<!--" << endl;
-          stream << cssStream.read();
+          stream << cssStream.readAll();
           stream << "-->" << endl << "</style>" << endl;
           stream << exp.cap(5);
           cssFile.close();
@@ -234,7 +236,7 @@ void KReportsView::KReportTab::updateReport(void)
   m_part->write(createTable());
   m_part->end();
 
-//FIXME: Port to KDE4
+  #warning #Port to KDE4
 //  m_table->drawChart( *m_chartView );
 //  m_chartView->update();
 }
@@ -291,7 +293,7 @@ void KReportsView::KReportTab::toggleChart(void)
   if ( m_showingChart )
   {
     m_part->show();
-//FIXME: Port to KDE4
+  #warning #Port to KDE4
 //    m_chartView->hide();
 
     //m_control->buttonChart->setText( i18n( "Chart" ) );
@@ -300,7 +302,7 @@ void KReportsView::KReportTab::toggleChart(void)
   else
   {
     m_part->hide();
-//FIXME: Port to KDE4
+  #warning #Port to KDE4
 //    m_chartView->show();
 
     //m_control->buttonChart->setText( i18n( "Report" ) );
@@ -329,13 +331,14 @@ KReportsView::KReportsView(QWidget *parent, const char *name ) :
 {
   m_reportTabWidget = new KTabWidget( this);
   addWidget( m_reportTabWidget );
-  m_reportTabWidget->setHoverCloseButton( true );
+  m_reportTabWidget->setCloseButtonEnabled( true );
 
-  m_listTab = (new QWidget( m_reportTabWidget, "indextab" ));
-  m_listTabLayout = ( new QVBoxLayout( m_listTab, 11, 6, "indextabLayout") );
+  m_listTab = (new QWidget( m_reportTabWidget));
+  m_listTabLayout = ( new QVBoxLayout( m_listTab) );
+  m_listTabLayout->setSpacing(6);
   m_reportListView = new K3ListView( m_listTab);
   m_listTabLayout->addWidget( m_reportListView );
-  m_reportTabWidget->insertTab( m_listTab, i18n("Reports") );
+  m_reportTabWidget->addTab( m_listTab, i18n("Reports") );
 
   m_reportListView->addColumn(i18n("Report"));
   m_reportListView->addColumn(i18n("Comment"));
@@ -368,7 +371,7 @@ void KReportsView::show()
     m_needReload = false;
   }
 
-  KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->currentPage());
+  KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->currentWidget());
   if(tab)
     emit reportSelected(tab->report());
   else
@@ -525,7 +528,7 @@ void KReportsView::loadView(void)
   while ( index < m_reportTabWidget->count() )
   {
     // TODO: Find some way of detecting the file is closed and kill these tabs!!
-    KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->page(index));
+    KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->widget(index));
     if ( tab->isReadyToDelete() /* || ! reports.count() */ )
     {
       delete tab;
@@ -571,21 +574,21 @@ void KReportsView::slotOpenUrl(const KUrl &url, const KParts::OpenUrlArguments&,
 
 void KReportsView::slotPrintView(void)
 {
-  KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->currentPage());
+  KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->currentWidget());
   if(tab)
     tab->print();
 }
 
 void KReportsView::slotCopyView(void)
 {
-  KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->currentPage());
+  KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->currentWidget());
   if(tab)
     tab->copyToClipboard();
 }
 
 void KReportsView::slotSaveView(void)
 {
-  KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->currentPage());
+  KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->currentWidget());
   if(tab) {
     QWidget* vbox = new QWidget;
     QVBoxLayout* layout = new QVBoxLayout;
@@ -610,7 +613,7 @@ void KReportsView::slotSaveView(void)
       if (!newURL.isEmpty()) {
         QString newName = newURL.pathOrUrl();
 
-        if(newName.findRev('.') == -1)
+        if(newName.indexOf('.') == -1)
           newName.append(".html");
 
         tab->saveAs( newName, d->includeCSS->isEnabled() && d->includeCSS->isChecked() );
@@ -626,7 +629,7 @@ void KReportsView::slotSaveFilterChanged(const QString& filter)
 
 void KReportsView::slotConfigure(void)
 {
-  KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->currentPage());
+  KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->currentWidget());
 
   if(tab) {
     MyMoneyReport report = tab->report();
@@ -650,8 +653,8 @@ void KReportsView::slotConfigure(void)
         ft.commit();
         tab->modifyReport(newreport);
 
-        m_reportTabWidget->changeTab( tab, newreport.name() );
-        m_reportTabWidget->showPage(tab);
+        m_reportTabWidget->setTabText( m_reportTabWidget->indexOf(tab), newreport.name() );
+        m_reportTabWidget->setCurrentIndex(m_reportTabWidget->indexOf(tab)) ;
       }
       else
       {
@@ -666,7 +669,7 @@ void KReportsView::slotConfigure(void)
 
 void KReportsView::slotDuplicate(void)
 {
-  KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->currentPage());
+  KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->currentWidget());
 
   if(tab) {
     MyMoneyReport dupe = tab->report();
@@ -695,7 +698,7 @@ void KReportsView::slotDuplicate(void)
 
 void KReportsView::slotDelete(void)
 {
-  KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->currentPage());
+  KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->currentWidget());
 
   if(tab) {
     MyMoneyReport report = tab->report();
@@ -725,7 +728,7 @@ void KReportsView::slotOpenReport(const QString& id)
     int index = 1;
     while ( index < m_reportTabWidget->count() )
     {
-      KReportTab* current = dynamic_cast<KReportTab*>(m_reportTabWidget->page(index));
+      KReportTab* current = dynamic_cast<KReportTab*>(m_reportTabWidget->widget(index));
 
       if ( current->report().id() == id )
       {
@@ -738,7 +741,7 @@ void KReportsView::slotOpenReport(const QString& id)
 
     // Show the tab, or create a new one, as needed
     if ( page )
-      m_reportTabWidget->showPage( page );
+      m_reportTabWidget->setCurrentIndex(m_reportTabWidget->indexOf(page));
     else
       addReportTab(MyMoneyFile::instance()->report(id));
   }
@@ -756,7 +759,7 @@ void KReportsView::slotOpenReport(Q3ListViewItem* item)
     int index = 1;
     while ( index < m_reportTabWidget->count() )
     {
-      KReportTab* current = dynamic_cast<KReportTab*>(m_reportTabWidget->page(index));
+      KReportTab* current = dynamic_cast<KReportTab*>(m_reportTabWidget->widget(index));
 
       // If this report has an ID, we'll use the ID to match
       if ( ! reportItem->report().id().isEmpty() )
@@ -783,7 +786,7 @@ void KReportsView::slotOpenReport(Q3ListViewItem* item)
 
     // Show the tab, or create a new one, as needed
     if ( page )
-      m_reportTabWidget->showPage( page );
+      m_reportTabWidget->setCurrentIndex(m_reportTabWidget->indexOf(page)) ;
     else
       addReportTab(reportItem->report());
   }
@@ -807,7 +810,7 @@ void KReportsView::slotOpenReport(const MyMoneyReport& report)
     int index = 1;
     while ( index < m_reportTabWidget->count() )
     {
-      KReportTab* current = dynamic_cast<KReportTab*>(m_reportTabWidget->page(index));
+      KReportTab* current = dynamic_cast<KReportTab*>(m_reportTabWidget->widget(index));
 
         if ( current->report().name() == report.name() )
         {
@@ -820,42 +823,42 @@ void KReportsView::slotOpenReport(const MyMoneyReport& report)
 
     // Show the tab, or create a new one, as needed
     if ( page )
-      m_reportTabWidget->showPage( page );
+      m_reportTabWidget->setCurrentIndex(m_reportTabWidget->indexOf(page));
     else
       addReportTab(report);
 }
 
 void KReportsView::slotToggleChart(void)
 {
-  KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->currentPage());
+  KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->currentWidget());
   if(tab)
     tab->toggleChart();
 }
 
 void KReportsView::slotCloseCurrent(void)
 {
-  if(m_reportTabWidget->currentPage())
-    slotClose(m_reportTabWidget->currentPage());
+  if(m_reportTabWidget->currentWidget())
+    slotClose(m_reportTabWidget->currentWidget());
 }
 
 void KReportsView::slotClose(QWidget* w)
 {
   KReportTab* tab = dynamic_cast<KReportTab*>(w);
   if(tab) {
-    m_reportTabWidget->removePage(tab);
+    m_reportTabWidget->removeTab(m_reportTabWidget->indexOf(tab));
     tab->setReadyToDelete(true);
   }
 }
 
 void KReportsView::slotCloseAll(void)
 {
-  KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->page(1));
+  KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->widget(1));
   while (tab)
   {
-    m_reportTabWidget->removePage(tab);
+    m_reportTabWidget->removeTab(m_reportTabWidget->indexOf(tab));
     tab->setReadyToDelete(true);
 
-    tab = dynamic_cast<KReportTab*>(m_reportTabWidget->page(1));
+    tab = dynamic_cast<KReportTab*>(m_reportTabWidget->widget(1));
   }
 }
 
@@ -885,7 +888,7 @@ void KReportsView::addReportTab(const MyMoneyReport& report)
 
   // slotRefreshView();
 
-  m_reportTabWidget->showPage(tab);
+  m_reportTabWidget->setCurrentIndex(m_reportTabWidget->indexOf(tab));
 
 }
 
