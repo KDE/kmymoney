@@ -101,17 +101,17 @@ KReportsView::KReportTab::KReportTab(KTabWidget* parent, const MyMoneyReport& re
   m_needReload( true ),
   m_table(0)
 {
+  qDebug("adding tab");
   m_layout->setSpacing(6);
   m_part->setZoomFactor( KMyMoneyGlobalSettings::fontSizePercentage() );
 
-  if ( 
   #warning #Port to KDE4
+//  if (
   // ! KReportChartView::implemented() || 
-  m_report.reportType() != MyMoneyReport::ePivotTable )
-  {
-  #warning #Port to KDE4
-      	  //m_control->buttonChart->hide();
-  }
+//  m_report.reportType() != MyMoneyReport::ePivotTable )
+//  {
+    //m_control->buttonChart->hide();
+//  }
 
   #warning #Port to KDE4
 //m_chartView->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );
@@ -864,7 +864,7 @@ void KReportsView::slotCloseAll(void)
 
 void KReportsView::addReportTab(const MyMoneyReport& report)
 {
-  KReportTab* tab = new KReportTab(m_reportTabWidget,report);
+  KReportTab* tab = new KReportTab(m_reportTabWidget, report);
 
 #warning "port to kde4"  
   //connect( tab->control()->buttonChart, SIGNAL(clicked()),

@@ -26,6 +26,7 @@ class kMyMoneyReportControlDecl : public QWidget, public Ui::kMyMoneyReportContr
 {
 public:
   kMyMoneyReportControlDecl( QWidget *parent ) : QWidget( parent ) {
+    setupUi( this );
   }
 };
  
