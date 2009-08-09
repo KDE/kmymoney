@@ -118,7 +118,7 @@ public:
     bool isReadyToDelete(void) const { return m_deleteMe; }
     void setReadyToDelete(bool f) { m_deleteMe = f; }
     void modifyReport( const MyMoneyReport& report ) { m_report = report; }
-    void show(void);
+    void showEvent(QShowEvent * event);
     void loadTab(void);
   };
 
@@ -147,7 +147,6 @@ public:
       m_id( report.id() ),
       m_report( report )
     {}
-    //const QString& id(void) const { return m_id; }
     const MyMoneyReport& report(void) const { return m_report; }
   };
 
@@ -221,7 +220,7 @@ public:
     *
     * @return Nothing.
     */
-  void show();
+  void showEvent(QShowEvent * event);
 
 protected:
   void addReportTab(const MyMoneyReport&);

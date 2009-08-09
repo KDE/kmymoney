@@ -101,22 +101,21 @@ KReportsView::KReportTab::KReportTab(KTabWidget* parent, const MyMoneyReport& re
   m_needReload( true ),
   m_table(0)
 {
-  qDebug("adding tab");
   m_layout->setSpacing(6);
   m_part->setZoomFactor( KMyMoneyGlobalSettings::fontSizePercentage() );
 
   #warning #Port to KDE4
-//  if (
+  if (
   // ! KReportChartView::implemented() || 
-//  m_report.reportType() != MyMoneyReport::ePivotTable )
-//  {
-    //m_control->buttonChart->hide();
-//  }
+  m_report.reportType() != MyMoneyReport::ePivotTable )
+  {
+    m_control->buttonChart->hide();
+  }
 
   #warning #Port to KDE4
 //m_chartView->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );
 //m_chartView->hide();
-  m_layout->addWidget( m_control ); //, 0, Qt::AlignTop );
+  m_layout->addWidget( m_control );
   m_layout->addWidget( m_part->view() );
   #warning #Port to KDE4
 //m_layout->addWidget( m_chartView );
@@ -199,13 +198,13 @@ void KReportsView::KReportTab::loadTab(void)
   }
 }
 
-void KReportsView::KReportTab::show(void)
+void KReportsView::KReportTab::showEvent(QShowEvent * event)
 {
   if(m_needReload) {
     m_needReload = false;
     updateReport();
   }
-  QWidget::show();
+  QWidget::showEvent(event);
 }
 
 void KReportsView::KReportTab::updateReport(void)
@@ -364,7 +363,7 @@ KReportsView::~KReportsView()
   delete d;
 }
 
-void KReportsView::show()
+void KReportsView::showEvent(QShowEvent * event)
 {
   if(m_needReload) {
     loadView();
@@ -378,7 +377,7 @@ void KReportsView::show()
     emit reportSelected(MyMoneyReport());
 
   // don't forget base class implementation
-  KMyMoneyViewBase::show();
+  KMyMoneyViewBase::showEvent(event);
 }
 
 void KReportsView::slotLoadView(void)
@@ -885,8 +884,6 @@ void KReportsView::addReportTab(const MyMoneyReport& report)
   // if this is a default report, then you can't delete it!
   if ( report.id().isEmpty() )
     tab->control()->buttonDelete->setEnabled(false);
-
-  // slotRefreshView();
 
   m_reportTabWidget->setCurrentIndex(m_reportTabWidget->indexOf(tab));
 
