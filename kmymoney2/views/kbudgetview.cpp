@@ -82,7 +82,6 @@ KBudgetListItem::~KBudgetListItem()
 void KBudgetListItem::paintCell(QPainter *p, const QColorGroup & cg, int column, int width, int align)
 {
   p->setFont(KMyMoneyGlobalSettings::listCellFont());
-
   QColorGroup cg2(cg);
 
   if (isAlternate())
@@ -179,11 +178,11 @@ KBudgetView::~KBudgetView()
 void KBudgetView::showEvent(QShowEvent * event)
 {
   QTimer::singleShot(50, this, SLOT(slotRearrange()));
-  KBudgetViewDecl::showEvent(event);
   m_accountTree->restoreLayout("Budget Account View Settings");
   if(m_needReload) {
     slotRefreshView();
   }
+  KBudgetViewDecl::showEvent(event);
 }
 
 void KBudgetView::slotRearrange(void)
@@ -224,7 +223,7 @@ void KBudgetView::loadBudgets(void)
   m_budgetValue->clear();
 
   // add the correct years to the drop down list
-  QDate date = QDate::currentDate(Qt::LocalTime);
+  QDate date = QDate::currentDate();
   int iStartYear = date.year() - m_iBudgetYearsBack;
 
   m_yearList.clear();
@@ -240,7 +239,7 @@ void KBudgetView::loadBudgets(void)
     KBudgetListItem* item = new KBudgetListItem(m_budgetList, *it);
 
     // create a list of unique years
-    if (m_yearList.findIndex(QString::number((*it).budgetStart().year())) == -1)
+    if (m_yearList.indexOf(QString::number((*it).budgetStart().year())) == -1)
       m_yearList += QString::number((*it).budgetStart().year());
 
     if(item->budget().id() == id) {
