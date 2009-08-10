@@ -396,67 +396,31 @@ MyMoneyTransaction KEditScheduleDlg::transaction(void) const
 
 bool KEditScheduleDlg::focusNextPrevChild(bool next)
 {
-  bool  rc = false;
-
-  // qDebug("KEditScheduleDlg::focusNextPrevChild(editmode=%s)", m_inEditMode ? "true" : "false");
+  bool rc = false;
   QWidget *w = 0;
-  QWidget *currentWidget;
 
   w = qApp->focusWidget();
-  while(w && !d->m_tabOrderWidgets.contains(w)) {
+  int currentWidgetIndex = d->m_tabOrderWidgets.indexOf(w);
+  while(w && currentWidgetIndex == -1) {
     // qDebug("'%s' not in list, use parent", w->className());
     w = w->parentWidget();
+    currentWidgetIndex = d->m_tabOrderWidgets.indexOf(w);
   }
 
-  QList<QWidget*>::iterator it_w = d->m_tabOrderWidgets.begin();
-  // if(w) qDebug("tab order is at '%s'", w->className());
-  while(it_w != d->m_tabOrderWidgets.end()) {
-      if ((*it_w)->hasFocus()) {
-        currentWidget = (*it_w);
-        break;
-      }
-      ++it_w;
-  }
+  if (currentWidgetIndex != -1) {
+    // if(w) qDebug("tab order is at '%s'", w->className());
+    QWidgetList::const_iterator it = d->m_tabOrderWidgets.begin() + currentWidgetIndex;
+    if (next)
+      w = ((it + 1) != d->m_tabOrderWidgets.end()) ? *(it + 1) : d->m_tabOrderWidgets.first();
+    else
+      w = ((it - 1) != d->m_tabOrderWidgets.begin()) ? *(it - 1) : d->m_tabOrderWidgets.last();
 
-  if(!currentWidget)
-    currentWidget = (*it_w);
-
-  if(next) {
-      ++it_w;
-  } else {
-      --it_w;
-  }
-
-
-  do {
-    if(!(*it_w)) {
-      if(next) {
-        it_w = d->m_tabOrderWidgets.begin();
-      } else {
-        it_w = d->m_tabOrderWidgets.end();
-        --it_w;
-      }
-    }
-
-    if((*it_w) != currentWidget
-    && (((*it_w)->focusPolicy() & Qt::TabFocus) == Qt::TabFocus)
-    && (*it_w)->isVisible() && (*it_w)->isEnabled()) {
+    if(((w->focusPolicy() & Qt::TabFocus) == Qt::TabFocus) && w->isVisible() && w->isEnabled()) {
       // qDebug("Selecting '%s' as focus", w->className());
-      (*it_w)->setFocus();
+      w->setFocus();
       rc = true;
-      break;
     }
-    if(next) {
-      ++it_w;
-    } else {
-      if(it_w != d->m_tabOrderWidgets.begin()) {
-        --it_w;
-      } else {
-        break;
-      }
-    }
-  } while((*it_w) != currentWidget && it_w != d->m_tabOrderWidgets.end());
-
+  }
   return rc;
 }
 

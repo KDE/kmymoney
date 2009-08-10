@@ -300,38 +300,31 @@ TransactionEditor* KEnterScheduleDlg::startEdit(void)
 
 bool KEnterScheduleDlg::focusNextPrevChild(bool next)
 {
-  bool  rc = false;
-#warning "port to kde4"
-#if 0
-  // qDebug("KGlobalLedgerView::focusNextPrevChild(editmode=%s)", m_inEditMode ? "true" : "false");
+  bool rc = false;
   QWidget *w = 0;
-  QWidget *currentWidget;
 
   w = qApp->focusWidget();
-  while(w && d->m_tabOrderWidgets.find(w) == -1) {
+  int currentWidgetIndex = d->m_tabOrderWidgets.indexOf(w);
+  while(w && currentWidgetIndex == -1) {
     // qDebug("'%s' not in list, use parent", w->className());
     w = w->parentWidget();
+    currentWidgetIndex = d->m_tabOrderWidgets.indexOf(w);
   }
-  // if(w) qDebug("tab order is at '%s'", w->className());
-  currentWidget = d->m_tabOrderWidgets.current();
-  w = next ? d->m_tabOrderWidgets.next() : d->m_tabOrderWidgets.prev();
 
-  do {
-    if(!w) {
-      w = next ? d->m_tabOrderWidgets.first() : d->m_tabOrderWidgets.last();
-    }
+  if (currentWidgetIndex != -1) {
+    // if(w) qDebug("tab order is at '%s'", w->className());
+    QWidgetList::const_iterator it = d->m_tabOrderWidgets.begin() + currentWidgetIndex;
+    if (next)
+      w = ((it + 1) != d->m_tabOrderWidgets.end()) ? *(it + 1) : d->m_tabOrderWidgets.first();
+    else
+      w = ((it - 1) != d->m_tabOrderWidgets.begin()) ? *(it - 1) : d->m_tabOrderWidgets.last();
 
-    if(w != currentWidget
-    && ((w->focusPolicy() & Qt::TabFocus) == Qt::TabFocus)
-    && w->isVisible() && w->isEnabled()) {
+    if(((w->focusPolicy() & Qt::TabFocus) == Qt::TabFocus) && w->isVisible() && w->isEnabled()) {
       // qDebug("Selecting '%s' as focus", w->className());
       w->setFocus();
       rc = true;
-      break;
     }
-    w = next ? d->m_tabOrderWidgets.next() : d->m_tabOrderWidgets.prev();
-  } while(w != currentWidget);
-#endif
+  }
   return rc;
 }
 

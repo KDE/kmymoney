@@ -35,7 +35,11 @@
                 </widget>
               </item>
               <item>
-                <widget class="KLineEdit" name="m_nameEdit"/>
+                <widget class="KLineEdit" name="m_nameEdit">
+                  <property name="focusPolicy">
+                    <enum>Qt::StrongFocus</enum>
+                  </property>
+                </widget>
               </item>
             </layout>
           </item>
@@ -61,6 +65,9 @@
                   </property>
                   <property name="toolTip" stdset="0">
                     <string>Number of selected periods between entries</string>
+                  </property>
+                  <property name="focusPolicy">
+                    <enum>Qt::StrongFocus</enum>
                   </property>
                 </widget>
               </item>

@@ -963,34 +963,33 @@ bool kMyMoneySplitTable::focusNextPrevChild(bool next)
 {
   MYMONEYTRACER(tracer);
   bool  rc = false;
-#warning "port to kde4"
-#if 0
   if(m_editCategory) {
     QWidget *w = 0;
-    QWidget *currentWidget;
 
-    m_tabOrderWidgets.find(qApp->focusWidget());
-    currentWidget = m_tabOrderWidgets.current();
-    w = next ? m_tabOrderWidgets.next() : m_tabOrderWidgets.prev();
+    w = qApp->focusWidget();
+    int currentWidgetIndex = m_tabOrderWidgets.indexOf(w);
+    while(w && currentWidgetIndex == -1) {
+      // qDebug("'%s' not in list, use parent", w->className());
+      w = w->parentWidget();
+      currentWidgetIndex = m_tabOrderWidgets.indexOf(w);
+    }
 
-    do {
-      if(!w) {
-        w = next ? m_tabOrderWidgets.first() : m_tabOrderWidgets.last();
-      }
+    if (currentWidgetIndex != -1) {
+      // if(w) qDebug("tab order is at '%s'", w->className());
+      QWidgetList::const_iterator it = m_tabOrderWidgets.begin() + currentWidgetIndex;
+      if (next)
+        w = ((it + 1) != m_tabOrderWidgets.end()) ? *(it + 1) : m_tabOrderWidgets.first();
+      else
+        w = ((it - 1) != m_tabOrderWidgets.begin()) ? *(it - 1) : m_tabOrderWidgets.last();
 
-      if(w != currentWidget
-      && ((w->focusPolicy() & Qt::TabFocus) == Qt::TabFocus)
-      && w->isVisible() && w->isEnabled()) {
+      if(((w->focusPolicy() & Qt::TabFocus) == Qt::TabFocus) && w->isVisible() && w->isEnabled()) {
+        // qDebug("Selecting '%s' as focus", w->className());
         w->setFocus();
         rc = true;
-        break;
       }
-      w = next ? m_tabOrderWidgets.next() : m_tabOrderWidgets.prev();
-    } while(w != currentWidget);
-
+    }
   } else
     rc = Q3Table::focusNextPrevChild(next);
-#endif
   return rc;
 }
 
