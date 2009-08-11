@@ -165,7 +165,7 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name )
   // create the toolbar frame at the top of the view
   m_toolbarFrame = new QFrame(this);
   QHBoxLayout* toolbarLayout = new QHBoxLayout(m_toolbarFrame, 0, 0);
-  m_accountComboBox = new KMyMoneyAccountCombo(m_toolbarFrame, "AccountCombo");
+  m_accountComboBox = new KMyMoneyAccountCombo(m_toolbarFrame);
   toolbarLayout->addWidget(m_accountComboBox);
 
   layout()->addWidget(m_toolbarFrame);
@@ -1248,7 +1248,7 @@ bool KGlobalLedgerView::eventFilter(QObject* o, QEvent* e)
     } else {
       // qDebug("object = %s, key = %d", o->className(), k->key());
       if(o == m_register) {
-        if((k->state() & Qt::KeyboardModifierMask) == 0) {
+        if((k->modifiers() & Qt::KeyboardModifierMask) == 0) {
           switch(k->key()) {
             case Qt::Key_Return:
             case Qt::Key_Enter:

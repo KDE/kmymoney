@@ -42,8 +42,8 @@
 #include <kmymoneyaccountcombo.h>
 #include "kmymoneyaccountcompletion.h"
 
-KMyMoneyAccountCombo::KMyMoneyAccountCombo( QWidget* parent, const char* name ) :
-  KComboBox( parent ),
+KMyMoneyAccountCombo::KMyMoneyAccountCombo(QWidget* parent) :
+  KComboBox(parent),
   m_completion(0),
   m_mlbDown(false)
 {
@@ -58,7 +58,7 @@ KMyMoneyAccountCombo::KMyMoneyAccountCombo( QWidget* parent, const char* name ) 
   setMaximumHeight(height());
 
   // we only use this one item and replace the text as we have our own dropdown box
-  insertItem(QString(""));
+  insertItem(0, QString());
 }
 
 KMyMoneyAccountCombo::~KMyMoneyAccountCombo()
@@ -105,7 +105,7 @@ void KMyMoneyAccountCombo::setSelected(const MyMoneyAccount& acc)
 
 void KMyMoneyAccountCombo::setText(const QString& txt)
 {
-  changeItem(txt, currentItem());
+  setItemText(currentIndex(), txt);
 }
 
 int KMyMoneyAccountCombo::loadList(const QString& baseName, const QList<QString>& accountIdList, const bool clear)

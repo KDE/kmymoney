@@ -77,8 +77,10 @@ void KMyMoneyCombo::setCurrentTextById(const QString& id)
     setCurrentText();
     if(!id.isEmpty()) {
       Q3ListViewItem* item = selector()->item(id);
-      if(item)
-        setCurrentText(item->text(0));
+      if(item) {
+        setCompletedText(item->text(0));
+        setEditText(item->text(0));
+      }
     }
 }
 
@@ -202,8 +204,8 @@ bool KMyMoneyCombo::isInArrowArea(const QPoint& pos) const
 
 void KMyMoneyCombo::keyPressEvent(QKeyEvent* e)
 {
-  if((e->key() == Qt::Key_F4 && e->state() == 0 ) ||
-     (e->key() == Qt::Key_Down && (e->state() & Qt::AltModifier)) ||
+  if((e->key() == Qt::Key_F4 && e->modifiers() == 0 ) ||
+     (e->key() == Qt::Key_Down && (e->modifiers() & Qt::AltModifier)) ||
      (!isEditable() && e->key() == Qt::Key_Space)) {
     // if we have at least one item in the list, we open the dropdown
     if(selector()->listView()->firstChild())

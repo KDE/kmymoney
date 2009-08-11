@@ -122,10 +122,14 @@ kMyMoneyAccountSelector* KMyMoneyCategory::selector(void) const
 
 void KMyMoneyCategory::setCurrentTextById(const QString& id)
 {
-  if(!id.isEmpty())
-    setCurrentText(MyMoneyFile::instance()->accountToCategory(id));
-  else
-    setCurrentText();
+  if(!id.isEmpty()) {
+    QString category = MyMoneyFile::instance()->accountToCategory(id);
+    setCompletedText(category);
+    setEditText(category);
+  } else {
+    setCompletedText(QString());
+    clearEditText();
+  }
   setSuppressObjectCreation(false);
 }
 

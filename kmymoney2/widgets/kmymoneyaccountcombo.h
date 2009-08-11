@@ -49,7 +49,7 @@ class KMyMoneyAccountCombo : public KComboBox
 {
   Q_OBJECT
 public:
-  KMyMoneyAccountCombo( QWidget* parent = 0, const char* name = 0 );
+  KMyMoneyAccountCombo(QWidget* parent = 0);
   ~KMyMoneyAccountCombo();
 
   /**

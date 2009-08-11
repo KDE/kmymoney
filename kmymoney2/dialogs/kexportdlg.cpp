@@ -113,7 +113,7 @@ void KExportDlg::slotNewProfile(void)
   MyMoneyQifProfileEditor* editor = new MyMoneyQifProfileEditor(true, this);
   editor->setObjectName( "QIF Profile Editor");
   if(editor->exec()) {
-    m_profileComboBox->setCurrentText(editor->selectedProfile());
+    m_profileComboBox->setItemText(m_profileComboBox->currentIndex(), editor->selectedProfile());
     loadProfiles();
   }
   delete editor;
@@ -137,7 +137,7 @@ void KExportDlg::loadProfiles(const bool selectLast)
 
   list = grp.readEntry("profiles",QStringList());
   list.sort();
-  m_profileComboBox->insertStringList(list);
+  m_profileComboBox->insertItems(0, list);
 
   if(selectLast == true) {
     grp = config->group("Last Use Settings");
@@ -146,7 +146,7 @@ void KExportDlg::loadProfiles(const bool selectLast)
 
   m_profileComboBox->setCurrentItem(0);
   if(list.contains(current) > 0)
-    m_profileComboBox->setCurrentText(current);
+    m_profileComboBox->setItemText(m_profileComboBox->currentIndex(), current);
 }
 
 void KExportDlg::slotOkClicked()
