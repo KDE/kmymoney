@@ -184,7 +184,7 @@ int KMyMoneyPriceDlg::slotEditPrice(void)
                              item->price().rate(to.id()),
                              item->price().date(),
                              fract,
-                             this, "currencyCalculator");
+                             this);
     calc.setupPriceEditor();
 
     rc = calc.exec();

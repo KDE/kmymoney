@@ -892,7 +892,7 @@ bool InvestTransactionEditor::setupPrice(const MyMoneyTransaction& t, MyMoneySpl
                                 toValue,
                                 t.postDate(),
                                 fract,
-                                m_regForm, "currencyCalculator");
+                                m_regForm);
 
       if(calc.exec() == QDialog::Rejected) {
         return false;

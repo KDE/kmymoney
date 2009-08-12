@@ -27,8 +27,7 @@
 // QT Includes
 
 #include <qwidget.h>
-//Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -59,8 +58,8 @@ public:
     TypeAll        = 0x03
   };
 
-  KMyMoneySecuritySelector(QWidget *parent=0, const char *name=0);
-  KMyMoneySecuritySelector(displayTypeE type = TypeAll, QWidget *parent=0, const char *name=0);
+  KMyMoneySecuritySelector(QWidget *parent=0);
+  KMyMoneySecuritySelector(displayTypeE type = TypeAll, QWidget *parent=0);
   virtual ~KMyMoneySecuritySelector();
 
   const MyMoneySecurity& security(void) const;
@@ -79,13 +78,13 @@ private:
   int             m_selectedItemId;
   bool            m_displayOnly;
   displayTypeE    m_displayType;
-  Q3ValueList<MyMoneySecurity> m_list;
+  QList<MyMoneySecurity> m_list;
 };
 
 class KMyMoneyCurrencySelector : public KMyMoneySecuritySelector
 {
 public:
-  KMyMoneyCurrencySelector(QWidget *parent=0, const char *name=0);
+  KMyMoneyCurrencySelector(QWidget *parent=0);
   virtual ~KMyMoneyCurrencySelector() {}
 };
 

@@ -95,7 +95,7 @@ bool KCurrencyCalculator::setupSplitPrice(MyMoneyMoney& shares, const MyMoneyTra
                               toValue,
                               t.postDate(),
                               fract,
-                              parentWidget, "currencyCalculator");
+                              parentWidget);
 
       if(calc.exec() == QDialog::Rejected) {
         rc = false;
@@ -111,7 +111,7 @@ bool KCurrencyCalculator::setupSplitPrice(MyMoneyMoney& shares, const MyMoneyTra
   return rc;
 }
 
-KCurrencyCalculator::KCurrencyCalculator(const MyMoneySecurity& from, const MyMoneySecurity& to, const MyMoneyMoney& value, const MyMoneyMoney& shares, const QDate& date, const signed64 resultFraction, QWidget *parent, const char *name ) :
+KCurrencyCalculator::KCurrencyCalculator(const MyMoneySecurity& from, const MyMoneySecurity& to, const MyMoneyMoney& value, const MyMoneyMoney& shares, const QDate& date, const signed64 resultFraction, QWidget *parent) :
   KCurrencyCalculatorDecl(parent),
   m_fromCurrency(from),
   m_toCurrency(to),

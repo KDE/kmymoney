@@ -38,7 +38,7 @@
 
 #include "kmymoneycurrencyselector.h"
 
-KMyMoneySecuritySelector::KMyMoneySecuritySelector(QWidget *parent, const char *name ) :
+KMyMoneySecuritySelector::KMyMoneySecuritySelector(QWidget *parent) :
   KComboBox(parent),
   m_displayItem(FullName),
   m_displayOnly(false),
@@ -47,7 +47,7 @@ KMyMoneySecuritySelector::KMyMoneySecuritySelector(QWidget *parent, const char *
   // update(QString());
 }
 
-KMyMoneySecuritySelector::KMyMoneySecuritySelector(displayTypeE type, QWidget *parent, const char *name ) :
+KMyMoneySecuritySelector::KMyMoneySecuritySelector(displayTypeE type, QWidget *parent) :
   KComboBox(parent),
   m_displayItem(FullName),
   m_displayOnly(false),
@@ -82,14 +82,15 @@ void KMyMoneySecuritySelector::update(const QString& id)
     m_list += MyMoneyFile::instance()->securityList();
 
   // sort
-#warning "port to kde4"
-  //qSort(m_list);
+  qSort(m_list);
 
-  Q3ValueList<MyMoneySecurity>::ConstIterator it;
+  QList<MyMoneySecurity>::ConstIterator it;
 
   // construct a transparent 16x16 pixmap
   QPixmap empty(16, 16);
-  empty.setMask(QBitmap(16, 16, true));
+  QBitmap mask(16, 16);
+  mask.clear();
+  empty.setMask(mask);
 
   int itemId = 0;
   int m_selectedItemId = 0;
@@ -113,10 +114,9 @@ void KMyMoneySecuritySelector::update(const QString& id)
         break;
     }
     if((*it).id() == baseCurrency) {
-      insertItem(QPixmap( KStandardDirs::locate("icon","hicolor/16x16/apps/kmymoney2.png")),
-                          display, itemId);
+      insertItem(itemId, QIcon(KStandardDirs::locate("icon","hicolor/16x16/apps/kmymoney2.png")), display);
     } else {
-      insertItem(empty, display, itemId);
+      insertItem(itemId, QIcon(empty), display);
     }
 
     if(curr.id() == (*it).id()) {
@@ -152,7 +152,7 @@ void KMyMoneySecuritySelector::slotSetInitialSecurity(void)
 
 const MyMoneySecurity& KMyMoneySecuritySelector::security(void) const
 {
-  return m_list[currentItem()];
+  return m_list[currentIndex()];
 }
 
 void KMyMoneySecuritySelector::setSecurity(const MyMoneySecurity& currency)
@@ -161,8 +161,8 @@ void KMyMoneySecuritySelector::setSecurity(const MyMoneySecurity& currency)
   update(QString("x"));
 }
 
-KMyMoneyCurrencySelector::KMyMoneyCurrencySelector(QWidget *parent, const char *name ) :
-  KMyMoneySecuritySelector(TypeCurrencies, parent, name)
+KMyMoneyCurrencySelector::KMyMoneyCurrencySelector(QWidget *parent) :
+  KMyMoneySecuritySelector(TypeCurrencies, parent)
 {
 }
 

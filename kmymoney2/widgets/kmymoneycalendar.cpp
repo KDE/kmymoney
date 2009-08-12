@@ -60,6 +60,8 @@
 #include <QResizeEvent>
 #include <QKeyEvent>
 #include <QEvent>
+#include <QStyleOptionToolButton>
+#include <QIntValidator>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -81,16 +83,131 @@
 #include "kmymoneycalendar.h"
 #include "kmymoneydatetbl.h"
 
+KDatePickerPrivateYearSelector::KDatePickerPrivateYearSelector(
+                                const KCalendarSystem *cal, const QDate &currentDate, QWidget* parent)
+                              : QLineEdit(parent), val(new QIntValidator(this)), result(0)
+{
+  calendar = cal;
+  oldDate = currentDate;
+
+  QFont font;
+  font = KGlobalSettings::generalFont();
+  setFont(font);
+
+  setFrame(false);
+
+  val->setRange(calendar->year(calendar->earliestValidDate()),
+                calendar->year(calendar->latestValidDate()));
+  setValidator(val);
+
+  connect(this, SIGNAL(returnPressed()), SLOT(yearEnteredSlot()));
+}
+
+void KDatePickerPrivateYearSelector::yearEnteredSlot()
+{
+  bool ok;
+  int newYear;
+  QDate newDate;
+
+  // check if entered value is a number
+  newYear = text().toInt(&ok);
+  if(!ok) {
+    KNotification::beep();
+    return;
+  }
+
+  // check if new year will lead to a valid date
+  if (calendar->setDate(newDate, newYear, calendar->month(oldDate), calendar->day(oldDate))) {
+    result = newYear;
+    emit(closeMe(1));
+  } else {
+    KNotification::beep();
+  }
+}
+
+int KDatePickerPrivateYearSelector::year()
+{
+  return result;
+}
+
+void KDatePickerPrivateYearSelector::setYear(int year)
+{
+  setText(QString::number(year));
+}
+
+KDatePickerPrivateWeekSelector::KDatePickerPrivateWeekSelector(
+                                const KCalendarSystem *cal, const QDate &currentDate, QWidget* parent)
+                              : QLineEdit(parent), val(new QIntValidator(this)), result(0)
+{
+  calendar = cal;
+  oldDate = currentDate;
+
+  QFont font;
+  font = KGlobalSettings::generalFont();
+  setFont(font);
+
+  setFrame(false);
+
+  val->setRange(1, 53);
+  setValidator(val);
+
+  connect(this, SIGNAL(returnPressed()), SLOT(weekEnteredSlot()));
+}
+
+void KDatePickerPrivateWeekSelector::weekEnteredSlot()
+{
+  bool ok;
+  int newWeek;
+
+  // check if entered value is a number
+  newWeek = text().toInt(&ok);
+  if(!ok) {
+    KNotification::beep();
+    return;
+  }
+
+  result = newWeek;
+  emit(closeMe(1));
+}
+
+int KDatePickerPrivateWeekSelector::week()
+{
+  return result;
+}
+
+void KDatePickerPrivateWeekSelector::setWeek(int week)
+{
+  setText(QString::number(week));
+}
+
 class kMyMoneyCalendar::kMyMoneyCalendarPrivate
 {
 public:
-    kMyMoneyCalendarPrivate()
-      : closeButton(0L), selectWeek(0L), userButton1(0), userButton2(0) {}
+  kMyMoneyCalendarPrivate()
+    : closeButton(0L), selectWeek(0L), userButton1(0), userButton2(0) {}
 
-    QToolButton *closeButton;
-    QToolButton *selectWeek;
-    QPushButton *userButton1;
-    QPushButton *userButton2;
+  QDate validDateInYearMonth( int year, int month )
+  {
+    QDate newDate;
+    const KCalendarSystem* calendar = KGlobal::locale()->calendar();
+
+    // Try to create a valid date in this year and month
+    // First try the first of the month, then try last of month
+    if ( calendar->isValid( year, month, 1 ) ) {
+      calendar->setDate( newDate, year, month, 1 );
+    } else if ( calendar->isValid( year, month + 1, 1 ) ) {
+      calendar->setDate( newDate, year, month, 1 );
+      calendar->addDays( newDate, -1 );
+    } else {
+      newDate = QDate::fromJulianDay( 0 );
+    }
+
+    return newDate;
+  }
+  QToolButton *closeButton;
+  QToolButton *selectWeek;
+  QPushButton *userButton1;
+  QPushButton *userButton2;
 };
 
 kMyMoneyCalendar::kMyMoneyCalendar(QWidget *parent, const char *name ) :
@@ -120,12 +237,11 @@ void kMyMoneyCalendar::init( const QDate &dt )
 
   d->selectWeek = new QToolButton( this );
 
-//  KIconLoader *kiconloader = KIconLoader::global();
   KMenu* kpopupmenuNew = new KMenu(this);
-  kpopupmenuNew->insertItem(i18n("Week"), this, SLOT(slotSetStyleWeekly()));
-  kpopupmenuNew->insertItem(i18n("Month"), this, SLOT(slotSetStyleMonthly()));
-/*  kpopupmenuNew->insertItem(i18n("3 Months"), this, SLOT(slotSetStyleQuarterly())); */
-  styleControl->setPopup(kpopupmenuNew);
+  kpopupmenuNew->addAction(i18n("Week"), this, SLOT(slotSetStyleWeekly()));
+  kpopupmenuNew->addAction(i18n("Month"), this, SLOT(slotSetStyleMonthly()));
+/*  kpopupmenuNew->addAction(i18n("3 Months"), this, SLOT(slotSetStyleQuarterly())); */
+  styleControl->setMenu(kpopupmenuNew);
 
   styleControl->setToolTip( i18n("Choose Style"));
   yearForward->setToolTip( i18n("Next year"));
@@ -140,10 +256,10 @@ void kMyMoneyCalendar::init( const QDate &dt )
   setFontSize(10);
   line->setValidator(val);
   line->installEventFilter( this );
-  yearForward->setPixmap(BarIcon(QString::fromLatin1("arrow-right-double")));
-  yearBackward->setPixmap(BarIcon(QString::fromLatin1("arrow-left-double")));
-  monthForward->setPixmap(BarIcon(QString::fromLatin1("arrow-right")));
-  monthBackward->setPixmap(BarIcon(QString::fromLatin1("arrow-left")));
+  yearForward->setIcon(QIcon(BarIcon("arrow-right-double")));
+  yearBackward->setIcon(QIcon(BarIcon("arrow-left-double")));
+  monthForward->setIcon(QIcon(BarIcon("arrow-right")));
+  monthBackward->setIcon(QIcon(BarIcon("arrow-left")));
   setDate(dt); // set button texts
   connect(table, SIGNAL(dateChanged(QDate)), SLOT(dateChangedSlot(QDate)));
   connect(table, SIGNAL(tableClicked()), SLOT(tableClickedSlot()));
@@ -212,11 +328,10 @@ kMyMoneyCalendar::resizeEvent(QResizeEvent*)
     // ----- calculate size of the month button:
     for(count=0; count<NoOfButtons; ++count) {
   if(buttons[count]==selectMonth) {
-#warning "port to kde4"
-#if 0
-      QSize metricBound = style().sizeFromContents(QStyle::CT_ToolButton, selectMonth, maxMonthRect);
-      sizes[count].setWidth(qMax(metricBound.width(), maxMonthRect.width()+2*QApplication::style().pixelMetric(QStyle::PM_ButtonMargin)));
-#endif
+    QStyleOptionToolButton opt;
+    opt.initFrom(selectMonth);
+    QSize metricBound = style()->sizeFromContents(QStyle::CT_ToolButton, &opt, maxMonthRect);
+    sizes[count].setWidth(qMax(metricBound.width(), maxMonthRect.width()+2*QApplication::style()->pixelMetric(QStyle::PM_ButtonMargin)));
   }
     }
     // ----- place the buttons:
@@ -303,10 +418,7 @@ kMyMoneyCalendar::setDate(const QDate& date)
   // -----
   table->setDate(date);
   d->selectWeek->setText(i18n("Week %1",weekOfYear(date)));
-#warning "port to kde4"
-#if 0
-  selectMonth->setText(MONTH_NAME(date.month(), date.year(), false));
-#endif
+  selectMonth->setText(MONTH_NAME(date.month(), date.year(), KCalendarSystem::LongName));
   temp.setNum(date.year());
   selectYear->setText(temp);
   line->setText(KGlobal::locale()->formatDate(date));
@@ -344,107 +456,116 @@ kMyMoneyCalendar::yearBackwardClicked()
 void
 kMyMoneyCalendar::selectWeekClicked()
 {
-  int week;
-#warning "port to kde4";
-#if 0
-  KPopupFrame* popup = new KPopupFrame(this);
-  KDateInternalWeekSelector* picker = new KDateInternalWeekSelector(/*fontsize, */popup);
-  // -----
+  const KCalendarSystem* calendar = KGlobal::locale()->calendar();
+
+  KPopupFrame *popup = new KPopupFrame(this);
+  KDatePickerPrivateWeekSelector *picker = new KDatePickerPrivateWeekSelector(calendar, date(), popup);
   picker->resize(picker->sizeHint());
+  picker->setWeek(weekOfYear(date()));
+  picker->selectAll();
   popup->setMainWidget(picker);
   connect(picker, SIGNAL(closeMe(int)), popup, SLOT(close(int)));
   picker->setFocus();
-  if(popup->exec(d->selectWeek->mapToGlobal(QPoint(0, d->selectWeek->height()))))
-    {
-      QDate date;
-      int year;
-      // -----
-      week=picker->getWeek();
-      date=table->getDate();
-      year=date.year();
-      // ----- find the first selectable day in this week (hacky solution :)
-      date.setYMD(year, 1, 1);
-      while (weekOfYear(date)>50)
-          date=date.addDays(1);
-      while (weekOfYear(date)<week && (week!=53 || (week==53 &&
-            (weekOfYear(date)!=52 || weekOfYear(date.addDays(1))!=1))))
-          date=date.addDays(1);
-      if (week==53 && weekOfYear(date)==52)
-          while (weekOfYear(date.addDays(-1))==52)
-              date=date.addDays(-1);
-      // ----- set this date
-      setDate(date);
-    } else {
-         KNotification::beep();
+
+  if( popup->exec(d->selectWeek->mapToGlobal(QPoint(0, d->selectWeek->height())))) {
+    QDate newDate;
+    int week = picker->week();
+    // check if new week will lead to a valid date
+    calendar->setDate(newDate, calendar->year(date()), 1, 1);
+    while (weekOfYear(newDate) > 50)
+      newDate = newDate.addDays(1);
+    while (weekOfYear(newDate) < week && (week !=53 || (week == 53 &&
+          (weekOfYear(newDate) != 52 || weekOfYear(newDate.addDays(1)) !=1 ))))
+      newDate = newDate.addDays(1);
+    if (week==53 && weekOfYear(newDate)==52)
+      while (weekOfYear(newDate.addDays(-1))==52)
+        newDate = newDate.addDays(-1);
+
+    // Set the date, if it's invalid in any way then alert user and don't update
+    if (!setDate(newDate)) {
+      KNotification::beep();
     }
+  }
   delete popup;
-#endif
 }
 
 void
 kMyMoneyCalendar::selectMonthClicked()
 {
-#warning "port to kde4";
-#if 0
-  int month;
-  KPopupFrame* popup = new KPopupFrame(this);
-  KDateInternalMonthPicker* picker = new KDateInternalMonthPicker(/*fontsize, */popup);
-  // -----
-  picker->resize(picker->sizeHint());
-  popup->setMainWidget(picker);
-  picker->setFocus();
-  connect(picker, SIGNAL(closeMe(int)), popup, SLOT(close(int)));
-  if(popup->exec(selectMonth->mapToGlobal(QPoint(0, selectMonth->height()))))
-    {
-      QDate date;
-      int day;
-      // -----
-      month=picker->getResult();
-      date=table->getDate();
-      day=date.day();
-      // ----- construct a valid date in this month:
-      date.setYMD(date.year(), month, 1);
-      date.setYMD(date.year(), month, qMin(day, date.daysInMonth()));
-      // ----- set this month
-      setDate(date);
-    } else {
-      KNotification::beep();
-    }
-  delete popup;
-#endif
+  QMenu popup(selectMonth);
+  const KCalendarSystem* calendar = KGlobal::locale()->calendar();
+
+  // Populate the pick list with all the month names, this may change by year
+  // JPL do we need to do somethng here for months that fall outside valid range?
+  for (int m = 1; m <= calendar->monthsInYear(date()); m++) {
+    popup.addAction(calendar->monthName(m, calendar->year(date())))->setData(m);
+  }
+
+  QAction *item = popup.actions()[calendar->month(date()) - 1];
+  // if this happens the above should already given an assertion
+  if (item) {
+    popup.setActiveAction(item);
+  }
+
+  // cancelled
+  if ((item = popup.exec(selectMonth->mapToGlobal(QPoint(0, 0)), item)) == 0) {
+    return;
+  }
+
+  // We need to create a valid date in the month selected so we can find out how many days are
+  // in the month.
+  QDate newDate = d->validDateInYearMonth(calendar->year(date()), item->data().toInt());
+
+  // If we have succeeded in creating a date in the new month, then try to create the new date,
+  // checking we don't set a day after the last day of the month
+  if (calendar->isValid(newDate)) {
+    calendar->setDate(newDate,
+      calendar->year(date()), item->data().toInt(),
+      qMin(calendar->day(date()), calendar->daysInMonth(newDate))
+    );
+  }
+
+  // Set the date, if it's invalid in any way then alert user and don't update
+  if (!setDate(newDate)) {
+    KNotification::beep();
+  }
 }
 
 void
 kMyMoneyCalendar::selectYearClicked()
 {
-#warning "port to kde4"
-#if 0
-  int year;
-  KPopupFrame* popup = new KPopupFrame(this);
-  KDateInternalYearSelector* picker = new KDateInternalYearSelector(fontsize, popup);
-  // -----
+  QDate newDate;
+  const KCalendarSystem* calendar = KGlobal::locale()->calendar();
+
+  KPopupFrame *popup = new KPopupFrame(this);
+  KDatePickerPrivateYearSelector *picker = new KDatePickerPrivateYearSelector(calendar, date(), popup);
   picker->resize(picker->sizeHint());
+  picker->setYear(calendar->year(date()));
+  picker->selectAll();
   popup->setMainWidget(picker);
   connect(picker, SIGNAL(closeMe(int)), popup, SLOT(close(int)));
   picker->setFocus();
-  if(popup->exec(selectYear->mapToGlobal(QPoint(0, selectMonth->height()))))
-    {
-      QDate date;
-      int day;
-      // -----
-      year=picker->getYear();
-      date=table->getDate();
-      day=date.day();
-      // ----- construct a valid date in this month:
-      date.setYMD(year, date.month(), 1);
-      date.setYMD(year, date.month(), qMin(day, date.daysInMonth()));
-      // ----- set this month
-      setDate(date);
-    } else {
+
+  if( popup->exec(selectYear->mapToGlobal(QPoint(0, selectMonth->height())))) {
+    // We need to create a valid date in the year/month selected so we can find out how many
+    // days are in the month.
+    newDate = d->validDateInYearMonth(picker->year(), calendar->month(date()));
+
+    // If we have succeeded in creating a date in the new month, then try to create the new
+    // date, checking we don't set a day after the last day of the month
+    if (calendar->isValid(newDate)) {
+      calendar->setDate(newDate,
+        picker->year(), calendar->month(date()),
+        qMin(calendar->day(date()), calendar->daysInMonth(newDate))
+      );
+    }
+
+    // Set the date, if it's invalid in any way then alert user and don't update
+    if (!setDate(newDate)) {
       KNotification::beep();
     }
+  }
   delete popup;
-#endif
 }
 
 void
@@ -509,11 +630,10 @@ kMyMoneyCalendar::sizeHint() const
 
       if(buttons[count]==selectMonth)
   {
-#warning "port to kde4"
-#if 0
-    QSize metricBound = style().sizeFromContents(QStyle::CT_ToolButton, selectMonth, maxMonthRect);
-    cx+=qMax(metricBound.width(), maxMonthRect.width()+2*QApplication::style().pixelMetric(QStyle::PM_ButtonMargin));
-#endif
+    QStyleOptionToolButton opt;
+    opt.initFrom(selectMonth);
+    QSize metricBound = style()->sizeFromContents(QStyle::CT_ToolButton, &opt, maxMonthRect);
+    cx+=qMax(metricBound.width(), maxMonthRect.width()+2*QApplication::style()->pixelMetric(QStyle::PM_ButtonMargin));
   } else {
     cx+=sizes[count].width();
   }
@@ -555,11 +675,8 @@ kMyMoneyCalendar::setFontSize(int s)
     QFontMetrics metrics(selectMonth->fontMetrics());
     for(int i=1; i <= 12; ++i)
       { // maxMonthRect is used by sizeHint()
-#warning "port to kde4"
-#if 0
-          r=metrics.boundingRect(MONTH_NAME(i, 2000, false));
-#endif
-          maxMonthRect.setWidth(qMax(r.width(), maxMonthRect.width()));
+        r = metrics.boundingRect(MONTH_NAME(i, 2000, KCalendarSystem::LongName));
+        maxMonthRect.setWidth(qMax(r.width(), maxMonthRect.width()));
         maxMonthRect.setHeight(qMax(r.height(),  maxMonthRect.height()));
       }
     table->setFontSize(s);
@@ -574,8 +691,8 @@ kMyMoneyCalendar::setCloseButton( bool enable )
 
     if ( enable ) {
         d->closeButton = new QToolButton( this );
-        d->closeButton->setToolTip( i18n("Close"));
-        d->closeButton->setPixmap( SmallIcon("remove") );
+        d->closeButton->setToolTip( i18n("Close") );
+        d->closeButton->setIcon( QIcon( SmallIcon( "remove" ) ) );
         connect( d->closeButton, SIGNAL( clicked() ),
                  topLevelWidget(), SLOT( close() ) );
     }

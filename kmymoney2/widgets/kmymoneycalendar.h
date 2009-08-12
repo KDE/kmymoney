@@ -54,6 +54,7 @@
 //Added by qt3to4:
 #include <QResizeEvent>
 #include <QEvent>
+#include <QLineEdit>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -64,11 +65,12 @@
 // Project Includes
 #include "kmymoneydatetbl.h"
 
-class QLineEdit;
 class QToolButton;
 class KDateValidator;
 class kMyMoneyDateTbl;
 class QPushButton;
+class QIntValidator;
+class KCalendarSystem;
 
 /**
   * A representation of a calendar.
@@ -256,6 +258,59 @@ private:
   int weekOfYear(QDate);
 
 #define MONTH_NAME(a,b,c)  KGlobal::locale()->calendar()->monthName(a,b,c)
+};
+
+//taken from kdatepicker_p.h until kmymoneycalendar is ported to not duplicate KDE code
+class KDatePickerPrivateYearSelector : public QLineEdit
+{
+  Q_OBJECT
+
+public:
+  KDatePickerPrivateYearSelector(const KCalendarSystem *calendar, const QDate &currentDate, QWidget *parent = 0);
+  int year();
+  void setYear(int year);
+
+public slots:
+  void yearEnteredSlot();
+
+signals:
+  void closeMe(int);
+
+protected:
+  QIntValidator *val;
+  int result;
+
+private:
+  const KCalendarSystem *calendar;
+  QDate oldDate;
+
+  Q_DISABLE_COPY(KDatePickerPrivateYearSelector)
+};
+
+class KDatePickerPrivateWeekSelector : public QLineEdit
+{
+  Q_OBJECT
+
+public:
+  KDatePickerPrivateWeekSelector(const KCalendarSystem *calendar, const QDate &currentDate, QWidget *parent = 0);
+  int week();
+  void setWeek(int week);
+
+public slots:
+  void weekEnteredSlot();
+
+signals:
+  void closeMe(int);
+
+protected:
+  QIntValidator *val;
+  int result;
+
+private:
+  const KCalendarSystem *calendar;
+  QDate oldDate;
+
+  Q_DISABLE_COPY(KDatePickerPrivateWeekSelector)
 };
 
 #endif

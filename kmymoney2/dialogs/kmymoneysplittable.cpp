@@ -756,7 +756,7 @@ void kMyMoneySplitTable::endEdit(bool keyBoardDriven)
                                 toValue,
                                 m_transaction.postDate(),
                                 fract,
-                                this, "currencyCalculator");
+                                this);
 
         if(calc.exec() == QDialog::Rejected) {
           return;
