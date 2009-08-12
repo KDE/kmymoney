@@ -50,7 +50,7 @@
 #include <mymoneyscheduled.h>
 #include "kmymoneyutils.h"
 
-KMyMoneyCombo::KMyMoneyCombo(QWidget *w, const char *name) :
+KMyMoneyCombo::KMyMoneyCombo(QWidget *w) :
   KComboBox(w),
   m_completion(0),
   m_edit(0),
@@ -59,7 +59,7 @@ KMyMoneyCombo::KMyMoneyCombo(QWidget *w, const char *name) :
 {
 }
 
-KMyMoneyCombo::KMyMoneyCombo(bool rw, QWidget *w, const char *name) :
+KMyMoneyCombo::KMyMoneyCombo(bool rw, QWidget *w) :
   KComboBox(rw, w),
   m_completion(0),
   m_edit(0),
@@ -112,8 +112,7 @@ void KMyMoneyCombo::setEditable(bool y)
   if(y) {
     m_edit = new kMyMoneyLineEdit(this, "combo edit");
     setLineEdit(m_edit);
-    m_edit->setPaletteBackgroundColor(paletteBackgroundColor());
-
+    m_edit->setPalette(palette());
   } else {
     m_edit = 0;
   }
@@ -139,8 +138,7 @@ void KMyMoneyCombo::paintEvent(QPaintEvent* ev)
         // is that length 1 is the blank case so no need to do painting
         if(str.length() > 1) {
           QPainter p( this );
-          const QColorGroup & g = colorGroup();
-          p.setPen(g.text());
+          p.setPen(palette().text().color());
           QStyleOptionComboBox opt;
           initStyleOption(&opt);
           QRect re = style()->subControlRect(QStyle::CC_ComboBox, &opt, QStyle::SC_ComboBoxEditField, this);
@@ -154,14 +152,6 @@ void KMyMoneyCombo::paintEvent(QPaintEvent* ev)
         }
       }
     }
-  }
-}
-
-void KMyMoneyCombo::setPaletteBackgroundColor(const QColor& color)
-{
-  KComboBox::setPaletteBackgroundColor(color);
-  if(m_edit) {
-    m_edit->setPaletteBackgroundColor(color);
   }
 }
 
@@ -181,7 +171,8 @@ void KMyMoneyCombo::mousePressEvent(QMouseEvent *e)
   } else {
     KConfig config( "kcminputrc" );
     KConfigGroup grp = config.group("KDE");
-    m_timer.start(grp.readEntry("DoubleClickInterval", 400), true);
+    m_timer.setSingleShot(true);
+    m_timer.start(grp.readEntry("DoubleClickInterval", 400));
   }
 }
 
@@ -348,8 +339,8 @@ QSize KMyMoneyCombo::sizeHint() const
 
 
 
-KMyMoneyReconcileCombo::KMyMoneyReconcileCombo(QWidget* w, const char* name) :
-  KMyMoneyCombo(false, w, name)
+KMyMoneyReconcileCombo::KMyMoneyReconcileCombo(QWidget* w) :
+  KMyMoneyCombo(false, w)
 {
   m_completion = new kMyMoneyCompletion(this);
   // connect(m_completion, SIGNAL(itemSelected(const QString&)), this, SIGNAL(itemSelected(const QString&)));
@@ -421,8 +412,8 @@ MyMoneySplit::reconcileFlagE KMyMoneyReconcileCombo::state(void) const
 }
 
 
-KMyMoneyComboAction::KMyMoneyComboAction(QWidget* w, const char* name) :
-  KMyMoneyCombo(false, w, name)
+KMyMoneyComboAction::KMyMoneyComboAction(QWidget* w) :
+  KMyMoneyCombo(false, w)
 {
   m_completion = new kMyMoneyCompletion(this);
   QString num;
@@ -471,8 +462,8 @@ int KMyMoneyComboAction::action(void) const
   return 0;
 }
 
-KMyMoneyCashFlowCombo::KMyMoneyCashFlowCombo(QWidget* w, const char* name, MyMoneyAccount::accountTypeE accountType) :
-  KMyMoneyCombo(false, w, name)
+KMyMoneyCashFlowCombo::KMyMoneyCashFlowCombo(QWidget* w, MyMoneyAccount::accountTypeE accountType) :
+  KMyMoneyCombo(false, w)
 {
   m_completion = new kMyMoneyCompletion(this);
   QString num;
@@ -518,8 +509,8 @@ void KMyMoneyCashFlowCombo::removeDontCare(void)
 }
 
 
-KMyMoneyActivityCombo::KMyMoneyActivityCombo(QWidget* w, const char* name) :
-  KMyMoneyCombo(false, w, name),
+KMyMoneyActivityCombo::KMyMoneyActivityCombo(QWidget* w) :
+  KMyMoneyCombo(false, w),
   m_activity(MyMoneySplit::UnknownTransactionType)
 {
   m_completion = new kMyMoneyCompletion(this);
@@ -559,8 +550,8 @@ void KMyMoneyActivityCombo::slotSetActivity(const QString& id)
   update();
 }
 
-KMyMoneyPayeeCombo::KMyMoneyPayeeCombo(QWidget* parent, const char * name) :
-  KMyMoneyCombo(true, parent, name)
+KMyMoneyPayeeCombo::KMyMoneyPayeeCombo(QWidget* parent) :
+  KMyMoneyCombo(true, parent)
 {
   m_completion = new kMyMoneyCompletion(this);
 
@@ -606,7 +597,7 @@ public:
   }
 };
 
-KMyMoneyGeneralCombo::KMyMoneyGeneralCombo(QWidget* w, const char* name) :
+KMyMoneyGeneralCombo::KMyMoneyGeneralCombo(QWidget* w) :
   KComboBox(w),
   d(new Private)
 {
@@ -653,14 +644,14 @@ void KMyMoneyGeneralCombo::clear(void)
 void KMyMoneyGeneralCombo::insertItem(const QString& txt, int id, int idx)
 {
   d->insertItem(txt, id);
-  KComboBox::insertItem(txt, idx);
+  KComboBox::insertItem(idx, txt);
 }
 
 void KMyMoneyGeneralCombo::removeItem(int id)
 {
   const QString& txt = d->itemText(id);
   for(int idx = 0; idx < count(); ++idx) {
-    if(txt == text(idx)) {
+    if(txt == itemText(idx)) {
       KComboBox::removeItem(idx);
       break;
     }
@@ -669,11 +660,11 @@ void KMyMoneyGeneralCombo::removeItem(int id)
 
 void KMyMoneyGeneralCombo::slotChangeItem(int idx)
 {
-  emit itemSelected(d->itemId(text(idx)));
+  emit itemSelected(d->itemId(itemText(idx)));
 }
 
-KMyMoneyPeriodCombo::KMyMoneyPeriodCombo(QWidget* parent, const char* name) :
-  KMyMoneyGeneralCombo(parent, name)
+KMyMoneyPeriodCombo::KMyMoneyPeriodCombo(QWidget* parent) :
+  KMyMoneyGeneralCombo(parent)
 {
   insertItem(i18n("All dates"), MyMoneyTransactionFilter::allDates);
   insertItem(i18n("As of today"), MyMoneyTransactionFilter::asOfToday);
@@ -738,8 +729,8 @@ void KMyMoneyPeriodCombo::dates(QDate& start, QDate& end, MyMoneyTransactionFilt
 }
 #endif
 
-KMyMoneyOccurenceCombo::KMyMoneyOccurenceCombo(QWidget* parent, const char* name) :
-  KMyMoneyGeneralCombo(parent, name)
+KMyMoneyOccurenceCombo::KMyMoneyOccurenceCombo(QWidget* parent) :
+  KMyMoneyGeneralCombo(parent)
 {
 }
 
@@ -748,8 +739,8 @@ MyMoneySchedule::occurenceE KMyMoneyOccurenceCombo::currentItem(void) const
   return static_cast<MyMoneySchedule::occurenceE>(KMyMoneyGeneralCombo::currentItem());
 }
 
-KMyMoneyOccurencePeriodCombo::KMyMoneyOccurencePeriodCombo(QWidget* parent, const char* name) :
-  KMyMoneyOccurenceCombo(parent, name)
+KMyMoneyOccurencePeriodCombo::KMyMoneyOccurencePeriodCombo(QWidget* parent) :
+  KMyMoneyOccurenceCombo(parent)
 {
   insertItem(i18n(MyMoneySchedule::occurencePeriodToString(MyMoneySchedule::OCCUR_ONCE).toLatin1()), MyMoneySchedule::OCCUR_ONCE);
   insertItem(i18n(MyMoneySchedule::occurencePeriodToString(MyMoneySchedule::OCCUR_DAILY).toLatin1()), MyMoneySchedule::OCCUR_DAILY);
@@ -759,8 +750,8 @@ KMyMoneyOccurencePeriodCombo::KMyMoneyOccurencePeriodCombo(QWidget* parent, cons
   insertItem(i18n(MyMoneySchedule::occurencePeriodToString(MyMoneySchedule::OCCUR_YEARLY).toLatin1()), MyMoneySchedule::OCCUR_YEARLY);
 }
 
-KMyMoneyFrequencyCombo::KMyMoneyFrequencyCombo(QWidget* parent, const char* name) :
-  KMyMoneyOccurenceCombo(parent, name)
+KMyMoneyFrequencyCombo::KMyMoneyFrequencyCombo(QWidget* parent) :
+  KMyMoneyOccurenceCombo(parent)
 {
   insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_ONCE).toLatin1()), MyMoneySchedule::OCCUR_ONCE);
   insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_DAILY).toLatin1()), MyMoneySchedule::OCCUR_DAILY);

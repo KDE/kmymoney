@@ -58,8 +58,8 @@ class KMyMoneyCombo : public KComboBox
 {
   Q_OBJECT
 public:
-  KMyMoneyCombo(QWidget *w = 0, const char *name=0);
-  KMyMoneyCombo(bool rw, QWidget *w = 0, const char *name=0);
+  KMyMoneyCombo(QWidget *w = 0);
+  KMyMoneyCombo(bool rw, QWidget *w = 0);
 
   /**
     * This method is used to turn on/off the hint display and to setup the appropriate text.
@@ -139,11 +139,6 @@ public:
     * overridden for internal reasons, no API change
     */
   void setCurrentText(const QString& txt = QString()) { KComboBox::setItemText(KComboBox::currentIndex(), txt); }
-
-  /**
-    * overridden to set the background color of the lineedit as well
-    */
-  void setPaletteBackgroundColor(const QColor& color);
 
   /**
    * Overridden to support our own completion box
@@ -234,7 +229,7 @@ class KMyMoneyReconcileCombo : public KMyMoneyCombo
 {
   Q_OBJECT
 public:
-  KMyMoneyReconcileCombo(QWidget *w = 0, const char *name=0);
+  KMyMoneyReconcileCombo(QWidget *w = 0);
 
   void setState(MyMoneySplit::reconcileFlagE state);
   MyMoneySplit::reconcileFlagE state(void) const;
@@ -255,7 +250,7 @@ class KMyMoneyComboAction : public KMyMoneyCombo
 {
   Q_OBJECT
 public:
-  KMyMoneyComboAction(QWidget *w = 0, const char *name=0);
+  KMyMoneyComboAction(QWidget *w = 0);
 
   void setAction(int state);
   int action(void) const;
@@ -281,7 +276,7 @@ public:
     * Create a combo box that contains the entries "Pay to", "From" and
     * "  " for don't care.
     */
-  KMyMoneyCashFlowCombo(QWidget *w = 0, const char *name=0, MyMoneyAccount::accountTypeE type = MyMoneyAccount::Asset);
+  KMyMoneyCashFlowCombo(QWidget *w = 0, MyMoneyAccount::accountTypeE type = MyMoneyAccount::Asset);
 
   void setDirection(KMyMoneyRegister::CashFlowDirection dir);
   KMyMoneyRegister::CashFlowDirection direction(void) const { return m_dir; }
@@ -309,7 +304,7 @@ public:
   /**
     * Create a combo box that contains the entries "Buy", "Sell" etc.
     */
-  KMyMoneyActivityCombo(QWidget *w = 0, const char *name=0);
+  KMyMoneyActivityCombo(QWidget *w = 0);
 
   void setActivity(MyMoneySplit::investTransactionTypeE activity);
   MyMoneySplit::investTransactionTypeE activity(void) const { return m_activity; }
@@ -345,7 +340,7 @@ class KMyMoneyPayeeCombo : public KMyMoneyCombo
 {
    Q_OBJECT
 public:
-  KMyMoneyPayeeCombo(QWidget* parent = 0, const char* name = 0);
+  KMyMoneyPayeeCombo(QWidget* parent = 0);
 
   void loadPayees(const QList<MyMoneyPayee>& list);
 };
@@ -354,7 +349,7 @@ class KMyMoneyGeneralCombo : public KComboBox
 {
   Q_OBJECT
 public:
-  KMyMoneyGeneralCombo(QWidget* parent = 0, const char* name = 0);
+  KMyMoneyGeneralCombo(QWidget* parent = 0);
   virtual ~KMyMoneyGeneralCombo();
 
   void insertItem(const QString& txt, int id, int idx = -1);
@@ -396,7 +391,7 @@ class KMyMoneyPeriodCombo : public KMyMoneyGeneralCombo
 {
   Q_OBJECT
 public:
-  KMyMoneyPeriodCombo(QWidget* parent = 0, const char* name = 0);
+  KMyMoneyPeriodCombo(QWidget* parent = 0);
 
   MyMoneyTransactionFilter::dateOptionE currentItem(void) const;
   void setCurrentItem(MyMoneyTransactionFilter::dateOptionE id);
@@ -428,7 +423,7 @@ class KMyMoneyOccurenceCombo : public KMyMoneyGeneralCombo
 {
   Q_OBJECT
 public:
-  KMyMoneyOccurenceCombo(QWidget* parent = 0, const char* name = 0);
+  KMyMoneyOccurenceCombo(QWidget* parent = 0);
 
   MyMoneySchedule::occurenceE currentItem(void) const;
 };
@@ -442,7 +437,7 @@ class KMyMoneyOccurencePeriodCombo : public KMyMoneyOccurenceCombo
 {
   Q_OBJECT
 public:
-  KMyMoneyOccurencePeriodCombo(QWidget* parent = 0, const char* name = 0);
+  KMyMoneyOccurencePeriodCombo(QWidget* parent = 0);
 };
 
 /**
@@ -453,7 +448,7 @@ class KMyMoneyFrequencyCombo : public KMyMoneyOccurenceCombo
 {
   Q_OBJECT
 public:
-  KMyMoneyFrequencyCombo(QWidget* parent = 0, const char* name = 0);
+  KMyMoneyFrequencyCombo(QWidget* parent = 0);
 
   /**
    * This method returns the number of events for the selected payment

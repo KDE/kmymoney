@@ -752,7 +752,7 @@ void StdTransactionEditor::createEditWidgets(void)
   connect(payee, SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
   connect(payee, SIGNAL(itemSelected(const QString&)), this, SLOT(slotUpdatePayee(const QString&)));
 
-  KMyMoneyCategory* category = new KMyMoneyCategory(0, 0, true);
+  KMyMoneyCategory* category = new KMyMoneyCategory(0, true);
   category->setHint(i18n("Category/Account"));
   m_editWidgets["category"] = category;
   connect(category, SIGNAL(itemSelected(const QString&)), this, SLOT(slotUpdateCategory(const QString&)));
@@ -815,7 +815,7 @@ void StdTransactionEditor::createEditWidgets(void)
   connect(value, SIGNAL(valueChanged(const QString&)), this, SLOT(slotUpdateDeposit(const QString&)));
   connect(value, SIGNAL(textChanged(const QString&)), this, SLOT(slotUpdateButtonState()));
 
-  KMyMoneyCashFlowCombo* cashflow = new KMyMoneyCashFlowCombo(0, 0, m_account.accountGroup());
+  KMyMoneyCashFlowCombo* cashflow = new KMyMoneyCashFlowCombo(0, m_account.accountGroup());
   m_editWidgets["cashflow"] = cashflow;
   connect(cashflow, SIGNAL(directionSelected(KMyMoneyRegister::CashFlowDirection)), this, SLOT(slotUpdateCashFlow(KMyMoneyRegister::CashFlowDirection)));
   connect(cashflow, SIGNAL(directionSelected(KMyMoneyRegister::CashFlowDirection)), this, SLOT(slotUpdateButtonState()));

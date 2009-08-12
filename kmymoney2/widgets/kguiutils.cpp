@@ -29,6 +29,7 @@
 #include <qspinbox.h>
 //Added by qt3to4:
 #include <Q3ValueList>
+#include <QApplication>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -84,11 +85,13 @@ void kMandatoryFieldGroup::add(QWidget *widget)
                       this, SLOT(changed()));
 
     else {
-        qWarning("MandatoryFieldGroup: unsupported class %s", ( widget->className() ));
+        qWarning("MandatoryFieldGroup: unsupported class %s", ( widget->metaObject()->className() ));
       return;
     }
 
-    widget->setPaletteBackgroundColor(KMyMoneyGlobalSettings::requiredFieldColor());
+    QPalette palette = widget->palette();
+    palette.setColor(widget->backgroundRole(), KMyMoneyGlobalSettings::requiredFieldColor());
+    widget->setPalette(palette);
     widgets.append(widget);
     changed();
   }
@@ -97,7 +100,7 @@ void kMandatoryFieldGroup::add(QWidget *widget)
 
 void kMandatoryFieldGroup::remove(QWidget *widget)
 {
-  widget->setPaletteBackgroundColor(widget->colorGroup().background());
+  widget->setPalette(QApplication::palette());
   widgets.remove(widget);
   changed();
 }
@@ -123,7 +126,7 @@ void kMandatoryFieldGroup::changed(void)
       continue;
     }
     if (qobject_cast<QCheckBox*>(widget)) {
-      if ((qobject_cast<QCheckBox*>(widget))->state() == QCheckBox::NoChange) {
+      if ((qobject_cast<QCheckBox*>(widget))->checkState() == Qt::PartiallyChecked) {
         enable = false;
         break;
       } else
@@ -165,7 +168,7 @@ void kMandatoryFieldGroup::clear(void)
 {
   Q3ValueList<QWidget *>::Iterator i;
   for (i = widgets.begin(); i != widgets.end(); ++i)
-    (*i)->setPaletteBackgroundColor((*i)->colorGroup().background());
+    (*i)->setPalette(QApplication::palette());
   widgets.clear();
   if (okButton) {
     okButton->setEnabled(true);

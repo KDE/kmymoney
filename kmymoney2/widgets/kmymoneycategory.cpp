@@ -57,8 +57,8 @@ public:
   bool              recursive;
 };
 
-KMyMoneyCategory::KMyMoneyCategory(QWidget* parent, const char * name, bool splitButton) :
-  KMyMoneyCombo(true, parent, name),
+KMyMoneyCategory::KMyMoneyCategory(QWidget* parent, bool splitButton) :
+  KMyMoneyCombo(true, parent),
   d(new Private)
 {
   if(splitButton) {
@@ -192,8 +192,8 @@ void KMyMoneyCategory::setDisabled(bool disable)
   setEnabled(!disable);
 }
 
-KMyMoneySecurity::KMyMoneySecurity(QWidget* parent, const char * name) :
-  KMyMoneyCategory(parent, name, false)
+KMyMoneySecurity::KMyMoneySecurity(QWidget* parent) :
+  KMyMoneyCategory(parent, false)
 {
 }
 

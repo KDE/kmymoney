@@ -209,13 +209,13 @@ void InvestTransactionEditor::createEditWidgets(void)
   connect(security, SIGNAL(createItem(const QString&, QString&)), this, SLOT(slotCreateSecurity(const QString&, QString&)));
   connect(security, SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
 
-  KMyMoneyCategory* asset = new KMyMoneyCategory(0, 0, false);
+  KMyMoneyCategory* asset = new KMyMoneyCategory(0, false);
   asset->setHint(i18n("Asset account"));
   m_editWidgets["asset-account"] = asset;
   connect(asset, SIGNAL(textChanged(const QString&)), this, SLOT(slotUpdateButtonState()));
   connect(asset, SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
 
-  KMyMoneyCategory* fees = new KMyMoneyCategory(0, 0, true);
+  KMyMoneyCategory* fees = new KMyMoneyCategory(0, true);
   fees->setHint(i18n("Fees"));
   m_editWidgets["fee-account"] = fees;
   connect(fees, SIGNAL(itemSelected(const QString&)), this, SLOT(slotUpdateFeeCategory(const QString&)));
@@ -225,7 +225,7 @@ void InvestTransactionEditor::createEditWidgets(void)
   connect(fees, SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
   connect(fees->splitButton(), SIGNAL(clicked()), this, SLOT(slotEditFeeSplits()));
 
-  KMyMoneyCategory* interest = new KMyMoneyCategory(0, 0, true);
+  KMyMoneyCategory* interest = new KMyMoneyCategory(0, true);
   interest->setHint(i18n("Interest"));
   m_editWidgets["interest-account"] = interest;
   connect(interest, SIGNAL(itemSelected(const QString&)), this, SLOT(slotUpdateInterestCategory(const QString&)));

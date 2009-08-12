@@ -504,7 +504,7 @@ int Transaction::formRowHeight(void) const
   if(m_formRowHeight < 0) {
     // determine the height of the objects in the table
     kMyMoneyDateInput dateInput;
-    KMyMoneyCategory category(0,0,true);
+    KMyMoneyCategory category(0, true);
 
     return qMax(dateInput.sizeHint().height(), category.sizeHint().height());
   }

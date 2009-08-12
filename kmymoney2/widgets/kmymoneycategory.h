@@ -88,13 +88,13 @@ public:
     * Enhanced usage example (with split button):
     *
     * @code
-    * KMyMoneyCategory* category = new KMyMoneyCategory(0, 0, true);
+    * KMyMoneyCategory* category = new KMyMoneyCategory(0, true);
     * category->reparent(newParent);
     * layout->addWidget(category->parentWidget());
     * table->setCellWidget(category->parentWidget());
     * @endcode
     */
-  KMyMoneyCategory(QWidget* parent = 0, const char* name = 0, bool splitButton = false);
+  KMyMoneyCategory(QWidget* parent = 0, bool splitButton = false);
 
   virtual ~KMyMoneyCategory();
 
@@ -181,7 +181,7 @@ class KMyMoneySecurity : public KMyMoneyCategory
 {
   Q_OBJECT
 public:
-  KMyMoneySecurity(QWidget* parent = 0, const char* name = 0);
+  KMyMoneySecurity(QWidget* parent = 0);
   virtual ~KMyMoneySecurity();
 
   /**
