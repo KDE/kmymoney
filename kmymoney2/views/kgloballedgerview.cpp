@@ -584,9 +584,9 @@ void KGlobalLedgerView::loadView(void)
         if(t->id() == anchorItemId)
           anchorItem = t;
 
-        MyMoneyMoney balance = futureBalance[t->split().accountId()];
-        t->setBalance(balance.formatMoney("", d->m_precision));
         const MyMoneySplit& split = t->split();
+        MyMoneyMoney balance = futureBalance[split.accountId()];
+        t->setBalance(balance);
 
         // if this split is a stock split, we can't just add the amount of shares
         if(t->transaction().isStockSplit()) {

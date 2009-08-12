@@ -104,8 +104,8 @@ public:
   const MyMoneyTransaction& transaction(void) const { return m_transaction; }
   const MyMoneySplit& split(void) const { return m_split; }
 
-  void setBalance(const QString& balance) { m_balance = balance; }
-  const QString& balance(void) const { return m_balance; }
+  void setBalance(const MyMoneyMoney& balance) { m_balance = balance; }
+  const MyMoneyMoney& balance(void) const { return m_balance; }
 
   virtual int rowHeightHint(void) const;
 
@@ -273,11 +273,11 @@ protected:
   MyMoneyTransaction      m_transaction;
   MyMoneySplit            m_split;
   MyMoneyAccount          m_account;
+  MyMoneyMoney            m_balance;
   Q3Table*                 m_form;
   QString                 m_category;
   QString                 m_payee;
   QString                 m_payeeHeader;
-  QString                 m_balance;
   QString                 m_categoryHeader;
   QString                 m_splitCurrencyId;
   QString                 m_uniqueId;

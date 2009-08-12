@@ -274,6 +274,15 @@ bool Transaction::paintRegisterCellSetup(QPainter* painter, int& row, int& col, 
   if(m_erronous && m_parent->markErronousTransactions()) {
     painter->setPen(KMyMoneyGlobalSettings::listErronousTransactionColor());
   }
+
+  // do we need to switch to the negative balance color?
+  if(col == BalanceColumn) {
+    bool showNegative = m_balance.isNegative();
+    if(m_account.accountGroup() == MyMoneyAccount::Liability && !m_balance.isZero() )
+      showNegative = !showNegative;
+    if(showNegative)
+      painter->setPen(KMyMoneyGlobalSettings::listNegativeValueColor());
+  }
   return true;
 }
 
@@ -1138,7 +1147,7 @@ void StdTransaction::registerCellText(QString& txt, int& align, int row, int col
         case BalanceColumn:
           align |= Qt::AlignRight;
           if(m_showBalance)
-            txt = m_balance;
+            txt = m_balance.formatMoney(m_account.fraction());
           else
             txt = "----";
           break;
@@ -1721,7 +1730,7 @@ void InvestTransaction::registerCellText(QString& txt, int& align, int row, int 
         case BalanceColumn:
           align |= Qt::AlignRight;
           if(m_showBalance)
-            txt = m_balance;
+            txt = m_balance.formatMoney("", MyMoneyMoney::denomToPrec(m_security.smallestAccountFraction()));
           else
             txt = "----";
           break;
