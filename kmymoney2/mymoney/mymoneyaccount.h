@@ -515,6 +515,12 @@ public:
   QString brokerageName(void) const;
 
   /**
+   * @param size is a hint for the size of the icon
+   * @return a pixmap using DesktopIcon for the account type
+   */
+  QPixmap accountPixmap(bool reconcileFlag = false, int size = 0) const;
+
+  /**
    * This method is used to convert the internal representation of
    * an account type into a human readable format
    *

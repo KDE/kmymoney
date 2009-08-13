@@ -22,6 +22,7 @@
 #include <QRegExp>
 //Added by qt3to4:
 #include <QPixmap>
+#include <QPainter>
 #include <kstandarddirs.h>
 #include <kiconloader.h>
 
@@ -615,6 +616,76 @@ void MyMoneyAccount::adjustBalance(const MyMoneySplit& s, bool reverse)
       m_balance += s.shares();
   }
 
+}
+
+QPixmap MyMoneyAccount::accountPixmap(bool reconcileFlag, int size) const
+{
+  QString icon;
+  switch(accountType()) {
+    default:
+      if(accountGroup() == MyMoneyAccount::Asset)
+        icon = "account-types_asset";
+      else
+        icon = "account-types_liability";
+      break;
+
+    case MyMoneyAccount::Investment:
+    case MyMoneyAccount::Stock:
+    case MyMoneyAccount::MoneyMarket:
+    case MyMoneyAccount::CertificateDep:
+      icon = "account-types_investments";
+      break;
+
+    case MyMoneyAccount::Checkings:
+      icon = "account-types_checking";
+      break;
+    case MyMoneyAccount::Savings:
+      icon = "account-types_savings";
+      break;
+
+    case MyMoneyAccount::AssetLoan:
+    case MyMoneyAccount::Loan:
+      icon = "account-types_loan";
+      break;
+
+    case MyMoneyAccount::CreditCard:
+      icon = "account-types_credit-card";
+      break;
+
+    case MyMoneyAccount::Asset:
+      icon = "account-types_asset";
+      break;
+
+    case MyMoneyAccount::Cash:
+      icon = "account-types_cash";
+      break;
+
+    case MyMoneyAccount::Income:
+      icon = "account-types_income";
+      break;
+
+    case MyMoneyAccount::Expense:
+      icon = "account-types_expense";
+      break;
+
+    case MyMoneyAccount::Equity:
+      icon = "account";
+      break;
+  }
+
+  QPixmap result = DesktopIcon(icon, size);
+  QPainter pixmapPainter(&result);
+  if(isClosed()) {
+    QPixmap ovly = DesktopIcon("account-types_closed", size);
+    pixmapPainter.drawPixmap(0, 0, ovly.width(), ovly.height(), ovly);
+  } else if(reconcileFlag) {
+    QPixmap ovly = DesktopIcon("account-types_reconcile.png", size);
+    pixmapPainter.drawPixmap(0, 0, ovly.width(), ovly.height(), ovly);
+  } else if(!onlineBankingSettings().value("provider").isEmpty()) {
+    QPixmap ovly = DesktopIcon("account-types_online.png", size);
+    pixmapPainter.drawPixmap(0, 0, ovly.width(), ovly.height(), ovly);
+  }
+  return result;
 }
 
 QString MyMoneyAccount::accountTypeToString(const MyMoneyAccount::accountTypeE accountType)

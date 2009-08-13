@@ -93,7 +93,7 @@ void KMyMoneyAccountTreeItem::fillColumns()
   QPixmap checkMark = QPixmap(KIconLoader::global()->loadIcon("ok", KIconLoader::Small));
   MyMoneyMoney vatRate;
   if (!isInstitution())
-    setPixmap(lv->nameColumn(), KMyMoneyUtils::accountGroupPixmap(m_account, m_reconcileFlag));
+    setPixmap(lv->nameColumn(), m_account.accountPixmap(m_reconcileFlag, 22));
   switch(m_account.accountType()) {
     case MyMoneyAccount::Income:
     case MyMoneyAccount::Expense:

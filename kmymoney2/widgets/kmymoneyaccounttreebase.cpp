@@ -631,7 +631,7 @@ void KMyMoneyAccountTreeBaseItem::setName()
     setPixmap(lv->nameColumn(), m_institution.pixmap());
     setText(lv->nameColumn(), m_institution.name());
   } else {
-    setPixmap(lv->nameColumn(), KMyMoneyUtils::accountGroupPixmap(m_account));
+    setPixmap(lv->nameColumn(), m_account.accountPixmap(false, 22));
     setText(lv->nameColumn(), m_account.name());
 #ifndef KMM_DESIGNER
     if(lv->typeColumn()>=0 && !MyMoneyFile::instance()->isStandardAccount(m_account.id()))
