@@ -140,23 +140,23 @@ kMyMoneyDateTbl::paintCell(QPainter *painter, int row, int col)
       if (!normalday)
       {
         //painter->setPen(KGlobalSettings::baseColor());
-        painter->setPen(colorScheme.background(KColorScheme::NormalBackground));
+        painter->setPen(colorScheme.background(KColorScheme::NormalBackground).color());
         painter->setBrush(brushLightblue);
         painter->drawRect(0, 0, w, h);
         //painter->setPen(KGlobalSettings::activeTitleColor());
-        painter->setPen(colorScheme.foreground(KColorScheme::PositiveText));
+        painter->setPen(colorScheme.foreground(KColorScheme::PositiveText).color());
       } else {
         //painter->setPen(KGlobalSettings::activeTitleColor());
-        painter->setPen(colorScheme.foreground(KColorScheme::PositiveText));
+        painter->setPen(colorScheme.foreground(KColorScheme::PositiveText).color());
         painter->setBrush(brushBlue);
         painter->drawRect(0, 0, w, h);
         //painter->setPen(KGlobalSettings::activeTextColor());
-        painter->setPen(colorScheme.foreground(KColorScheme::PositiveText));
+        painter->setPen(colorScheme.foreground(KColorScheme::PositiveText).color());
       }
       painter->drawText(0, 0, w, h-1, Qt::AlignCenter,
                         daystr, -1, &rect);
       //painter->setPen(KGlobalSettings::textColor());
-      painter->setPen(colorScheme.foreground(KColorScheme::NormalText));
+      painter->setPen(colorScheme.foreground(KColorScheme::NormalText).color());
       
       QPainterPath path;
       path.moveTo(0, h-1);
@@ -173,11 +173,11 @@ kMyMoneyDateTbl::paintCell(QPainter *painter, int row, int col)
     else if (m_type == WEEKLY)
     {
       //painter->setPen(KGlobalSettings::activeTitleColor());
-      painter->setPen(colorScheme.foreground(KColorScheme::PositiveText));
+      painter->setPen(colorScheme.foreground(KColorScheme::PositiveText).color());
       painter->setBrush(brushBlue);
       painter->drawRect(0, 0, w, h);
       //painter->setPen(KGlobalSettings::activeTextColor());
-      painter->setPen(colorScheme.foreground(KColorScheme::PositiveText));
+      painter->setPen(colorScheme.foreground(KColorScheme::PositiveText).color());
 
       int year=date.year();
       QString headerText;
@@ -389,8 +389,7 @@ kMyMoneyDateTbl::contentsMouseReleaseEvent(QMouseEvent *e)
 
   if(!isEnabled())
   {
-#warning "port to kde4"
-    //KNotifyClient::beep();
+    KNotification::beep();
     return;
   }
 
