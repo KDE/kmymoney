@@ -108,7 +108,7 @@ Use the buttons and checkboxes to customize the layout of the home page.</string
             </widget>
           </item>
           <item row="0" column="0" rowspan="2" colspan="1">
-            <widget class="KTextEdit" name="kcfg_ItemList">
+            <widget class="KLineEdit" name="kcfg_ItemList">
               <property name="text">
                 <string/>
               </property>
