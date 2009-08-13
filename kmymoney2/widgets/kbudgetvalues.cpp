@@ -116,9 +116,9 @@ bool KBudgetValues::eventFilter(QObject* o, QEvent* e)
   if(o->isWidgetType()
   && (e->type() == QEvent::KeyPress)) {
     QKeyEvent* k = dynamic_cast<QKeyEvent*>(e);
-    if((k->state() & Qt::KeyboardModifierMask) == 0) {
+    if((k->modifiers() & Qt::KeyboardModifierMask) == 0) {
       QKeyEvent evt(e->type(),
-                    Qt::Key_Tab, 0, k->state(), QString::null,
+                    Qt::Key_Tab, k->modifiers(), QString::null,
                     k->isAutoRepeat(), k->count());
       switch(k->key()) {
         case Qt::Key_Return:

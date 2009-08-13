@@ -61,7 +61,8 @@ kMyMoneyAccountSelector::kMyMoneyAccountSelector(QWidget *parent, const char *na
 {
 
   if(createButtons) {
-    QVBoxLayout* buttonLayout = new QVBoxLayout( 0, 0, 6, "accountSelectorButtonLayout");
+    QVBoxLayout* buttonLayout = new QVBoxLayout();
+    buttonLayout->setSpacing(6);
 
     m_allAccountsButton = new KPushButton( this );
     m_allAccountsButton->setObjectName( "m_allAccountsButton" );
@@ -134,7 +135,6 @@ QStringList kMyMoneyAccountSelector::accountList(const  QList<MyMoneyAccount::ac
   QStringList    list;
   Q3ListViewItemIterator it;
   Q3ListViewItem* it_v;
-  QList<MyMoneyAccount::accountTypeE>::ConstIterator it_f;
 
   it = Q3ListViewItemIterator(m_listView, Q3ListViewItemIterator::Selectable);
   while((it_v = it.current()) != 0) {
@@ -143,15 +143,13 @@ QStringList kMyMoneyAccountSelector::accountList(const  QList<MyMoneyAccount::ac
         KMyMoneyCheckListItem* it_c = dynamic_cast<KMyMoneyCheckListItem*>(it_v);
         if(it_c->type() == Q3CheckListItem::CheckBox) {
           MyMoneyAccount acc = MyMoneyFile::instance()->account(it_c->id());
-          it_f = filterList.find(acc.accountType());
-          if(filterList.count() == 0 || it_f != filterList.end())
+          if(filterList.count() == 0 || filterList.contains(acc.accountType()))
             list << it_c->id();
         }
       } else if(it_v->rtti() == 0) {
         KMyMoneyListViewItem* it_c = dynamic_cast<KMyMoneyListViewItem*>(it_v);
         MyMoneyAccount acc = MyMoneyFile::instance()->account(it_c->id());
-        it_f = filterList.find(acc.accountType());
-        if(filterList.count() == 0 || it_f != filterList.end())
+        if(filterList.count() == 0 || filterList.contains(acc.accountType()))
           list << it_c->id();
       }
     }
@@ -171,9 +169,9 @@ bool kMyMoneyAccountSelector::match(const QRegExp& exp, Q3ListViewItem* item) co
     if(!it_c) {
       return KMyMoneySelector::match(exp, item);
     }
-    return exp.search(it_c->key(1, true)) != -1;
+    return exp.indexIn(it_c->key(1, true)) != -1;
   }
-  return exp.search(it_l->key(1, true)) != -1;
+  return exp.indexIn(it_l->key(1, true)) != -1;
 }
 
 bool kMyMoneyAccountSelector::contains(const QString& txt) const
@@ -192,12 +190,12 @@ bool kMyMoneyAccountSelector::contains(const QString& txt) const
     QRegExp exp(QString("^(?:%1):%2$").arg(baseName).arg(QRegExp::escape(txt)));
     if(it_v->rtti() == 1) {
       KMyMoneyCheckListItem* it_c = dynamic_cast<KMyMoneyCheckListItem*>(it_v);
-      if(exp.search(it_c->key(1, true)) != -1) {
+      if(exp.indexIn(it_c->key(1, true)) != -1) {
         return true;
       }
     } else if(it_v->rtti() == 0) {
       KMyMoneyListViewItem* it_c = dynamic_cast<KMyMoneyListViewItem*>(it_v);
-      if(exp.search(it_c->key(1, true)) != -1) {
+      if(exp.indexIn(it_c->key(1, true)) != -1) {
         return true;
       }
     }
@@ -251,10 +249,9 @@ void AccountSet::addAccountType(MyMoneyAccount::accountTypeE type)
 
 void AccountSet::removeAccountType(MyMoneyAccount::accountTypeE type)
 {
-  QList<MyMoneyAccount::accountTypeE>::iterator it;
-  it = m_typeList.find(type);
-  if(it != m_typeList.end()) {
-    m_typeList.remove(it);
+  int index = m_typeList.indexOf(type);
+  if(index != -1) {
+    m_typeList.removeAt(index);
   }
 }
 

@@ -23,19 +23,17 @@
 
 #include <qwidget.h>
 #include <q3listview.h>
-//Added by qt3to4:
-#include <Q3HBoxLayout>
-class Q3HBoxLayout;
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-
-class K3ListView;
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include <mymoneyutils.h>
+
+class QHBoxLayout;
+class K3ListView;
 
 /**
   * This class implements a general selector for id based objects. It is based
@@ -376,14 +374,14 @@ protected slots:
   void slotListRightMouse(Q3ListViewItem* it_v, const QPoint& p, int /* col */);
 
 protected:
-  K3ListView*                m_listView;
+  K3ListView*               m_listView;
   QStringList               m_itemList;
   QString                   m_baseName;
-  Q3ListView::SelectionMode  m_selMode;
-  Q3HBoxLayout*              m_layout;
+  Q3ListView::SelectionMode m_selMode;
+  QHBoxLayout*              m_layout;
 
 private:
-  const Q3ListViewItem*      m_visibleItem;
+  const Q3ListViewItem*     m_visibleItem;
 };
 
 #endif

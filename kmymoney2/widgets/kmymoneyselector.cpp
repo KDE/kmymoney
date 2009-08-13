@@ -23,8 +23,7 @@
 #include <QTimer>
 #include <QStyle>
 #include <QRegExp>
-//Added by qt3to4:
-#include <Q3HBoxLayout>
+#include <QHBoxLayout>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -57,7 +56,8 @@ KMyMoneySelector::KMyMoneySelector(QWidget *parent, const char *name, Qt::WFlags
 
   m_listView->setAllColumnsShowFocus(true);
 
-  m_layout = new Q3HBoxLayout( this, 0, 6);
+  m_layout = new QHBoxLayout(this);
+  m_layout->setSpacing(6);
 
   m_listView->addColumn( "Hidden" );
   m_listView->header()->hide();
