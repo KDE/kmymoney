@@ -161,7 +161,7 @@ void KMyMoneyCombo::mousePressEvent(QMouseEvent *e)
   if(e->button() != Qt::LeftButton)
     return;
 
-  if(((!isEditable() || isInArrowArea(mapToGlobal(e->pos()))) && selector()->itemList().count()) && !m_completion->isVisible()) {
+  if(((!isEditable() || isInArrowArea(e->globalPos())) && selector()->itemList().count()) && !m_completion->isVisible()) {
     m_completion->setVisible(true);
   }
 
@@ -180,7 +180,7 @@ bool KMyMoneyCombo::isInArrowArea(const QPoint& pos) const
 {
   QStyleOptionComboBox opt;
   initStyleOption(&opt);
-  QRect arrowRect = style()->subControlRect(QStyle::CC_ComboBox, &opt, QStyle::SC_ComboBoxEditField, this);
+  QRect arrowRect = style()->subControlRect(QStyle::CC_ComboBox, &opt, QStyle::SC_ComboBoxArrow, this);
 
   // Correction for motif style, where arrow is smaller
   // and thus has a rect that doesn't fit the button.
