@@ -436,7 +436,7 @@ void KHomeView::showPayments(void)
 
     for(it = overdues.begin(); it != overdues.end(); ++it) {
       // determine number of overdue payments
-      QDate nextDate = (*it).nextDueDate();
+      QDate nextDate = (*it).adjustedNextDueDate();
       int cnt = 0;
       while(nextDate.isValid() && nextDate < QDate::currentDate()) {
         ++cnt;
@@ -625,7 +625,7 @@ void KHomeView::showPaymentEntry(const MyMoneySchedule& sched, int cnt)
 
         //show payment date
         tmp = QString("<td>") +
-          KGlobal::locale()->formatDate(sched.nextDueDate()) +
+          KGlobal::locale()->formatDate(sched.adjustedNextDueDate()) +
           "</td><td>";
         if(pathEnter.length() > 0)
           tmp += link(VIEW_SCHEDULE, QString("?id=%1&mode=enter").arg(sched.id()), i18n("Enter schedule")) + QString("<img src=\"file://%1\" border=\"0\"></a>").arg(pathEnter) + linkend();

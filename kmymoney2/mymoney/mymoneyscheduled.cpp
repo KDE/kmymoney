@@ -432,7 +432,6 @@ QDate MyMoneySchedule::nextPayment(const QDate& refDate) const
         // then don't show it
         if(nextDueDate() < refDate)
           return QDate();
-        paymentDate = nextDueDate();
         break;
 
       case OCCUR_DAILY:
@@ -455,7 +454,7 @@ QDate MyMoneySchedule::nextPayment(const QDate& refDate) const
            paymentDate = addHalfMonths(paymentDate,m_occurenceMultiplier);
         }
         while (paymentDate <= refDate);
-       break;
+        break;
 
       case OCCUR_MONTHLY:
         do {
@@ -584,10 +583,9 @@ Q3ValueList<QDate> MyMoneySchedule::paymentDates(const QDate& _startDate, const 
   return theDates;
 }
 
-
 bool MyMoneySchedule::operator <(const MyMoneySchedule& right) const
 {
-  return nextDueDate() < right.nextDueDate();
+  return adjustedNextDueDate() < right.adjustedNextDueDate();
 }
 
 bool MyMoneySchedule::operator ==(const MyMoneySchedule& right) const
@@ -700,7 +698,7 @@ bool MyMoneySchedule::isOverdue() const
   if (isFinished())
     return false;
 
-  if(nextDueDate() >= QDate::currentDate())
+  if(adjustedNextDueDate() >= QDate::currentDate())
     return false;
 
   return true;
