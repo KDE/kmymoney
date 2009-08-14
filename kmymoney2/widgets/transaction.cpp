@@ -217,7 +217,7 @@ void Transaction::markAttachment(QPainter* painter, int /* row */, int /* col */
   if(clip.isNull()) {
     clip = KIconLoader::global()->loadIcon("attach", KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState);
     if(clip.height() > h) {
-      clip.resize(h, h);
+      clip = clip.copy(0, 0, h, h);
     }
   }
 
@@ -236,7 +236,7 @@ void Transaction::markAsErronous(QPainter* painter, int /* row */, int /* col */
   attention.loadFromData(attentionSign, sizeof(attentionSign), 0, 0);
 
   if(attention.height() > h) {
-    attention.resize(h, h);
+     attention = attention.copy(0, 0, h, h);
   }
   painter->drawPixmap(QPoint(r.topRight().x() - h - m, m + (h - attention.height())/2 ), attention);
   painter->restore();
