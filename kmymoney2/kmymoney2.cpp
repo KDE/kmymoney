@@ -4789,9 +4789,15 @@ void KMyMoney2App::slotTransactionsNew(void)
       if(payeeEdit && !d->m_lastPayeeEntered.isEmpty()) {
         // in case we entered a new transaction before and used a payee,
         // we reuse it here. Save the text to the edit widget, select it
-        // so that hitting any character will start entering another payee
-        // and close the completion list
+        // so that hitting any character will start entering another payee.
+        // close the completion list
         payeeEdit->setCurrentText(d->m_lastPayeeEntered);
+        payeeEdit->completion()->slotMakeCompletion(d->m_lastPayeeEntered);
+        QStringList payeeId;
+        payeeEdit->selector()->selectedItems(payeeId);
+        if(payeeId.count() == 1) {
+          payeeEdit->setSelectedItem(payeeId[0]);
+        }
         payeeEdit->lineEdit()->selectAll();
         payeeEdit->completion()->hide();
       }
