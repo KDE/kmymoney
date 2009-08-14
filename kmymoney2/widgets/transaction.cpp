@@ -761,27 +761,27 @@ bool Transaction::matches(const QString& txt) const
   for(it_s = list.begin(); it_s != list.end(); ++it_s) {
     // check if the text is contained in one of the fields
     // memo, number, payee, account
-    if((*it_s).memo().contains(txt, false)
-       || (*it_s).number().contains(txt, false))
+    if((*it_s).memo().contains(txt, Qt::CaseInsensitive)
+       || (*it_s).number().contains(txt, Qt::CaseInsensitive))
       return true;
 
     if(!(*it_s).payeeId().isEmpty()) {
       const MyMoneyPayee& payee = file->payee((*it_s).payeeId());
-      if(payee.name().contains(txt, false))
+      if(payee.name().contains(txt, Qt::CaseInsensitive))
         return true;
     }
     const MyMoneyAccount& acc = file->account((*it_s).accountId());
-    if(acc.name().contains(txt, false))
+    if(acc.name().contains(txt, Qt::CaseInsensitive))
       return true;
 
     if(!s.isEmpty()) {
       // check if any of the value field matches if a value has been entered
       QString r = (*it_s).value().formatMoney(m_account.fraction(), false);
-      if(r.contains(s, false))
+      if(r.contains(s, Qt::CaseInsensitive))
         return true;
       const MyMoneyAccount& acc = file->account((*it_s).accountId());
       r = (*it_s).shares().formatMoney(acc.fraction(), false);
-      if(r.contains(s, false))
+      if(r.contains(s, Qt::CaseInsensitive))
         return true;
     }
   }
