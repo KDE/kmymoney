@@ -216,7 +216,7 @@ void KBudgetView::loadBudgets(void)
   QPoint startPoint = m_budgetList->viewportToContents(QPoint(0, 0));
 
   // turn off updates to avoid flickering during reload
-  m_budgetList->setUpdatesEnabled(false);
+  //m_budgetList->setUpdatesEnabled(false);
 
   // clear the budget list
   m_budgetList->clear();
@@ -258,8 +258,7 @@ void KBudgetView::loadBudgets(void)
   m_budgetList->setContentsPos(startPoint.x(), startPoint.y());
 
   // turn updates back on
-  m_budgetList->setUpdatesEnabled(true);
-  m_budgetList->repaintContents();
+  //m_budgetList->setUpdatesEnabled(true);
 
   // reset the status of the buttons
   m_updateButton->setEnabled(false);
@@ -338,7 +337,7 @@ void KBudgetView::loadAccounts(void)
   QPoint startPoint = m_accountTree->viewportToContents(QPoint(0, 0));
 
   // turn off updates to avoid flickering during reload
-  m_accountTree->setUpdatesEnabled(false);
+  //m_accountTree->setUpdatesEnabled(false);
 
   // clear the current contents and recreate it
   m_accountTree->clear();
@@ -395,8 +394,7 @@ void KBudgetView::loadAccounts(void)
   m_accountTree->setContentsPos(startPoint.x(), startPoint.y());
 
   // turn updates back on
-  m_accountTree->setUpdatesEnabled(true);
-  m_accountTree->repaintContents();
+  //m_accountTree->setUpdatesEnabled(true);
 
   m_updateButton->setEnabled(!(selectedBudget() == m_budget));
   m_resetButton->setEnabled(!(selectedBudget() == m_budget));
@@ -560,7 +558,7 @@ void KBudgetView::slotOpenContextMenu(K3ListView* lv, Q3ListViewItem* i, const Q
   Q_UNUSED(lv);
   Q_UNUSED(p);
 
-  m_accountTree->setUpdatesEnabled(false);
+  //m_accountTree->setUpdatesEnabled(false);
 
   KBudgetListItem* item = dynamic_cast<KBudgetListItem*>(i);
   if (item)
@@ -568,7 +566,7 @@ void KBudgetView::slotOpenContextMenu(K3ListView* lv, Q3ListViewItem* i, const Q
   else
     emit openContextMenu(MyMoneyBudget());
 
-  m_accountTree->setUpdatesEnabled(true);
+  //m_accountTree->setUpdatesEnabled(true);
 }
 
 void KBudgetView::slotStartRename(void)
