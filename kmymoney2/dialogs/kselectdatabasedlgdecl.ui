@@ -1,201 +1,237 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui version="4.0" stdsetdef="1">
-  <author></author>
-  <comment></comment>
-  <exportmacro></exportmacro>
-  <class>KSelectDatabaseDlgDecl</class>
-  <widget class="QDialog" name="KSelectDatabaseDlgDecl">
-    <property name="geometry">
-      <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>449</width>
-        <height>640</height>
-      </rect>
-    </property>
-    <property name="windowTitle">
-      <string>KMyMoney - Select Database</string>
-    </property>
-    <layout class="QVBoxLayout">
+<ui version="4.0">
+ <class>KSelectDatabaseDlgDecl</class>
+ <widget class="QDialog" name="KSelectDatabaseDlgDecl">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>449</width>
+    <height>640</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>KMyMoney - Select Database</string>
+  </property>
+  <layout class="QVBoxLayout">
+   <item>
+    <widget class="Q3GroupBox" name="groupBox6">
+     <property name="title">
+      <string>CAUTION!</string>
+     </property>
+     <layout class="QVBoxLayout">
       <item>
-        <widget class="Q3GroupBox" name="groupBox6">
-          <property name="title">
-            <string>CAUTION!</string>
-          </property>
-          <layout class="QVBoxLayout">
-            <item>
-              <widget class="K3ActiveLabel" name="kActiveLabel1">
-                <property name="font">
-                  <font>
-                    <pointsize>10</pointsize>
-                    <bold>true</bold>
-                  </font>
-                </property>
-                <property name="focusPolicy">
-                  <enum>Qt::NoFocus</enum>
-                </property>
-                <property name="text">
-                  <string>&lt;font color=&quot;#ff2727&quot;&gt;This software is still in an experimental stage, and there are still some known response time problems. Please be patient; we are working on them.
+       <widget class="K3ActiveLabel" name="kActiveLabel1" native="true">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
+        </property>
+        <property name="text" stdset="0">
+         <string>&lt;font color=&quot;#ff2727&quot;&gt;This software is still in an experimental stage, and there are still some known response time problems. Please be patient; we are working on them.
 As always, please make sure you have adequate backups of your data.&lt;/font&gt;</string>
-                </property>
-              </widget>
-            </item>
-          </layout>
-        </widget>
+        </property>
+       </widget>
       </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="Q3GroupBox" name="groupBox1">
+     <property name="title">
+      <string>Database Type</string>
+     </property>
+     <layout class="QVBoxLayout"/>
+    </widget>
+   </item>
+   <item>
+    <widget class="KListWidget" name="listDrivers"/>
+   </item>
+   <item>
+    <widget class="Q3GroupBox" name="groupBox2">
+     <property name="title">
+      <string>Database Name</string>
+     </property>
+     <layout class="QVBoxLayout">
       <item>
-        <widget class="Q3GroupBox" name="groupBox1">
-          <property name="title">
-            <string>Database Type</string>
-          </property>
-          <layout class="QVBoxLayout">
-            <item>
-              <widget class="Q3ListBox" name="listDrivers"/>
-            </item>
-          </layout>
-        </widget>
+       <widget class="QLineEdit" name="textDbName"/>
       </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="Q3GroupBox" name="groupBox3">
+     <property name="title">
+      <string>Host Name</string>
+     </property>
+     <layout class="QVBoxLayout">
       <item>
-        <widget class="Q3GroupBox" name="groupBox2">
-          <property name="title">
-            <string>Database Name</string>
-          </property>
-          <layout class="QVBoxLayout">
-            <item>
-              <widget class="QLineEdit" name="textDbName"/>
-            </item>
-          </layout>
-        </widget>
+       <widget class="QLineEdit" name="textHostName"/>
       </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="Q3GroupBox" name="groupBox4">
+     <property name="title">
+      <string>User Name</string>
+     </property>
+     <layout class="QVBoxLayout">
       <item>
-        <widget class="Q3GroupBox" name="groupBox3">
-          <property name="title">
-            <string>Host Name</string>
-          </property>
-          <layout class="QVBoxLayout">
-            <item>
-              <widget class="QLineEdit" name="textHostName"/>
-            </item>
-          </layout>
-        </widget>
+       <widget class="QLineEdit" name="textUserName"/>
       </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="Q3GroupBox" name="groupBoxPassword">
+     <property name="title">
+      <string>Password</string>
+     </property>
+     <layout class="QVBoxLayout">
       <item>
-        <widget class="Q3GroupBox" name="groupBox4">
-          <property name="title">
-            <string>User Name</string>
-          </property>
-          <layout class="QVBoxLayout">
-            <item>
-              <widget class="QLineEdit" name="textUserName"/>
-            </item>
-          </layout>
-        </widget>
+       <widget class="QLineEdit" name="textPassword">
+        <property name="echoMode">
+         <enum>QLineEdit::Password</enum>
+        </property>
+       </widget>
       </item>
-      <item>
-        <widget class="Q3GroupBox" name="groupBoxPassword">
-          <property name="title">
-            <string>Password</string>
-          </property>
-          <layout class="QVBoxLayout">
-            <item>
-              <widget class="QLineEdit" name="textPassword">
-                <property name="echoMode">
-                  <enum>QLineEdit::Password</enum>
-                </property>
-              </widget>
-            </item>
-          </layout>
-        </widget>
-      </item>
-      <item>
-        <widget class="QCheckBox" name="checkPreLoad">
-          <property name="text">
-            <string>Preload &amp;all data</string>
-          </property>
-        </widget>
-      </item>
-      <item>
-        <layout class="QHBoxLayout">
-          <item>
-            <widget class="QPushButton" name="buttonHelp">
-              <property name="text">
-                <string>Help</string>
-              </property>
-            </widget>
-          </item>
-          <item>
-            <spacer name="spacer3">
-              <property name="sizeHint">
-                <size>
-                  <width>20</width>
-                  <height>20</height>
-                </size>
-              </property>
-              <property name="sizeType">
-                <enum>QSizePolicy::Expanding</enum>
-              </property>
-              <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-              </property>
-            </spacer>
-          </item>
-          <item>
-            <widget class="QPushButton" name="buttonSQL">
-              <property name="text">
-                <string>&amp;Generate SQL</string>
-              </property>
-            </widget>
-          </item>
-          <item>
-            <spacer name="spacer2">
-              <property name="sizeHint">
-                <size>
-                  <width>31</width>
-                  <height>20</height>
-                </size>
-              </property>
-              <property name="sizeType">
-                <enum>QSizePolicy::Expanding</enum>
-              </property>
-              <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-              </property>
-            </spacer>
-          </item>
-          <item>
-            <widget class="QPushButton" name="buttonOK">
-              <property name="text">
-                <string>OK</string>
-              </property>
-              <property name="default">
-                <bool>true</bool>
-              </property>
-            </widget>
-          </item>
-          <item>
-            <widget class="QPushButton" name="buttonCancel">
-              <property name="text">
-                <string>Ca&amp;ncel</string>
-              </property>
-            </widget>
-          </item>
-        </layout>
-      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="checkPreLoad">
+     <property name="text">
+      <string>Preload &amp;all data</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout">
+     <item>
+      <widget class="QPushButton" name="buttonHelp">
+       <property name="text">
+        <string>Help</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="spacer3">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Expanding</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="buttonSQL">
+       <property name="text">
+        <string>&amp;Generate SQL</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="spacer2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Expanding</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>31</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="buttonOK">
+       <property name="text">
+        <string>OK</string>
+       </property>
+       <property name="default">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="buttonCancel">
+       <property name="text">
+        <string>Ca&amp;ncel</string>
+       </property>
+      </widget>
+     </item>
     </layout>
-  </widget>
-  <layoutdefault spacing="6" margin="11"/>
-    <connections>
-    <connection>
-      <sender>buttonOK</sender>
-      <signal>released()</signal>
-      <receiver>KSelectDatabaseDlgDecl</receiver>
-      <slot>accept()</slot>
-    </connection>
-    <connection>
-      <sender>buttonCancel</sender>
-      <signal>released()</signal>
-      <receiver>KSelectDatabaseDlgDecl</receiver>
-      <slot>reject()</slot>
-    </connection>
-  </connections>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>Q3GroupBox</class>
+   <extends>QGroupBox</extends>
+   <header>Qt3Support/Q3GroupBox</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>KListWidget</class>
+   <extends>QListWidget</extends>
+   <header>klistwidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>K3ActiveLabel</class>
+   <extends>QWidget</extends>
+   <header>k3activelabel.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonOK</sender>
+   <signal>released()</signal>
+   <receiver>KSelectDatabaseDlgDecl</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonCancel</sender>
+   <signal>released()</signal>
+   <receiver>KSelectDatabaseDlgDecl</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

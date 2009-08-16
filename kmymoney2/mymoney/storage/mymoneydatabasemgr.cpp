@@ -207,7 +207,7 @@ void MyMoneyDatabaseMgr::modifyPayee(const MyMoneyPayee& payee)
 void MyMoneyDatabaseMgr::removePayee(const MyMoneyPayee& payee)
 {
   QMap<QString, MyMoneyTransaction>::ConstIterator it_t;
-  QList<MyMoneySplit>::ConstIterator it_s;
+  QMap<QString, MyMoneySchedule>::ConstIterator it_s;
   QMap<QString, MyMoneyPayee> payeeList = m_sql->fetchPayees(QStringList(payee.id()));
   QMap<QString, MyMoneyPayee>::ConstIterator it_p;
 
@@ -218,19 +218,23 @@ void MyMoneyDatabaseMgr::removePayee(const MyMoneyPayee& payee)
   }
 
   // scan all transactions to check if the payee is still referenced
-  MyMoneyTransactionFilter f;
-  f.addPayee(payee.id());
 
-  QMap<QString, MyMoneyTransaction> transactionList = m_sql->fetchTransactions(f); // make sure they're all here
-
+  QMap<QString, MyMoneyTransaction> transactionList = m_sql->fetchTransactions(); // make sure they're all here
   for(it_t = transactionList.constBegin(); it_t != transactionList.constEnd(); ++it_t) {
-    // scan all splits of this transaction
-    for(it_s = (*it_t).splits().constBegin(); it_s != (*it_t).splits().constEnd(); ++it_s) {
-      if((*it_s).payeeId() == payee.id())
-        throw new MYMONEYEXCEPTION("Cannot remove payee that is referenced");
+    if((*it_t).hasReferenceTo(payee.id())) {
+      throw new MYMONEYEXCEPTION(QString("Cannot remove payee that is still referenced to a %1").arg("transaction"));
     }
   }
-  // FIXME: check referential integrity in schedules
+
+  // check referential integrity in schedules
+  QMap<QString, MyMoneySchedule> scheduleList = m_sql->fetchSchedules(); // make sure they're all here
+  for(it_s = scheduleList.begin(); it_s != scheduleList.end(); ++it_s) {
+    if((*it_s).hasReferenceTo(payee.id())) {
+      throw new MYMONEYEXCEPTION(QString("Cannot remove payee that is still referenced to a %1").arg("schedule"));
+    }
+  }
+  // remove any reference to report and/or budget
+  removeReferences(payee.id());
 
   m_sql->removePayee(payee);
 }
@@ -1868,6 +1872,28 @@ void MyMoneyDatabaseMgr::rebuildAccountBalances(void)
     m_sql->modifyAccount(it_a.value());
   }
   commitTransaction();
+}
+
+void MyMoneyDatabaseMgr::removeReferences(const QString& id)
+{
+  QMap<QString, MyMoneyReport>::const_iterator it_r;
+  QMap<QString, MyMoneyBudget>::const_iterator it_b;
+
+  // remove from reports
+  QMap<QString, MyMoneyReport> reportList = m_sql->fetchReports();
+  for(it_r = reportList.begin(); it_r != reportList.end(); ++it_r) {
+    MyMoneyReport r = *it_r;
+    r.removeReference(id);
+//    reportList.modify(r.id(), r);
+  }
+
+  // remove from budgets
+  QMap<QString, MyMoneyBudget> budgetList = m_sql->fetchBudgets();
+  for(it_b = budgetList.begin(); it_b != budgetList.end(); ++it_b) {
+    MyMoneyBudget b = *it_b;
+    b.removeReference(id);
+//    budgetList.modify(b.id(), b);
+  }
 }
 
 #undef TRY

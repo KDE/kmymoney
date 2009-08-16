@@ -813,7 +813,6 @@ void KMyMoneyView::checkAccountName(const MyMoneyAccount& _acc, const QString& n
 }
 
 bool KMyMoneyView::openDatabase (const KUrl& url) {
-#if 0
       	::timetrace("start opening database");
   m_fileOpen = false;
 
@@ -874,8 +873,6 @@ bool KMyMoneyView::openDatabase (const KUrl& url) {
   reader->setProgressCallback(0);
   ::timetrace("done opening database");
   return initializeStorage();
-#endif
-  return false;
 }
 
 bool KMyMoneyView::initializeStorage()

@@ -26,12 +26,11 @@
 #include <QDateTime>
 #include <QStringList>
 #include <QIODevice>
-#include <qsqldriver.h>
-//Added by qt3to4:
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QList>
 #include <QSqlRecord>
+#include <QMap>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -55,7 +54,7 @@
 #define TRACE(a) ::timetrace(a)
 
 //***************** THE CURRENT VERSION OF THE DATABASE LAYOUT ****************
-unsigned int MyMoneyDbDef::m_currentVersion = 5;
+unsigned int MyMoneyDbDef::m_currentVersion = 6;
 
 // subclass QSqlQuery for performance tracing
 MyMoneySqlQuery::MyMoneySqlQuery (MyMoneyStorageSql*  db)
@@ -137,6 +136,18 @@ databaseTypeE MyMoneyDbDrivers::driverToType (const QString& driver) const {
   else throw new MYMONEYEXCEPTION (QString("Unknown database driver type").arg(driver));
 }
 
+bool MyMoneyDbDrivers::isTested (databaseTypeE dbType) const {
+  switch (dbType) {
+    case Mysql:
+    case Sqlite3:
+    case Postgresql:
+      return (true);
+    default:
+      return(false);
+  }
+  return(false);
+}
+
 //************************ Constructor/Destructor *****************************
 MyMoneyStorageSql::MyMoneyStorageSql (IMyMoneySerialize *storage, const KUrl& url)
   : QSqlDatabase (url.queryItem("driver")) {
@@ -147,13 +158,11 @@ MyMoneyStorageSql::MyMoneyStorageSql (IMyMoneySerialize *storage, const KUrl& ur
 
 void MyMoneyStorageSql::init(void) {
   m_storagePtr = dynamic_cast<IMyMoneyStorage*>(m_storage);
-  m_majorVersion = 0;
-  m_minorVersion = 1;
+  m_dbVersion = 0;
   m_progressCallback = 0;
   m_displayStatus = false;
-//  m_payeeListRead = false;
-//  m_transactionListRead = false;
   m_readingPrices = false;
+  m_newDatabase = false;
   m_loadAll = false;
   m_override = false;
   m_preferred.setReportAllSplits(false);
@@ -189,6 +198,7 @@ try {
     case QIODevice::WriteOnly:   // SaveAs Database - if exists, must be empty, if not will create
       // Try to open the database.
       // If that fails, try to create the database, then try to open it again.
+      m_newDatabase = true;
       if (!QSqlDatabase::open()) {
         if (createDatabase(url) != 0) {
           rc = 1;
@@ -283,44 +293,76 @@ int MyMoneyStorageSql::upgradeDb() {
   //signalProgress(0, 1, QObject::tr("Upgrading database..."));
   MyMoneySqlQuery q(this);
   q.prepare ("SELECT version FROM kmmFileInfo;");
-  if (!q.exec() || !q.next()) { // must be a new database
-    m_majorVersion = m_db.currentVersion();
-    return (0);
+  if (!q.exec() || !q.next()) {
+    if (!m_newDatabase) {
+      buildError (q, __func__, "Error retrieving file info(version)");
+      return(1);
+    } else {
+      m_dbVersion = m_db.currentVersion();
+      m_storage->setFileFixVersion(m_storage->currentFixVersion());
+      QSqlQuery q(*this);
+      q.prepare("UPDATE kmmFileInfo SET version = :version, \
+                fixLevel = :fixLevel;");
+      q.bindValue(":version", m_dbVersion);
+      q.bindValue(":fixLevel", m_storage->currentFixVersion());
+      if (!q.exec()) {
+        buildError (q, __func__, "Error updating file info(version)");
+        return(1);
+      }
+      return (0);
+    }
   }
-  m_majorVersion = q.value(0).toString().section('.', 0, 0).toUInt();
-  m_minorVersion = q.value(0).toString().section('.', 1, 1).toUInt();
+  // prior to dbv6, 'version' format was 'dbversion.fixLevel+1'
+  // as of dbv6, these are separate fields
+  QString version = q.value(0).toString();
+  if (version.contains('.')) {
+    m_dbVersion = q.value(0).toString().section('.', 0, 0).toUInt();
+    m_storage->setFileFixVersion(q.value(0).toString().section('.', 1, 1).toUInt() - 1);
+  } else {
+    m_dbVersion = version.toUInt();
+    q.prepare ("SELECT fixLevel FROM kmmFileInfo;");
+    if (!q.exec() || !q.next()) {
+      buildError (q, __func__, "Error retrieving file info (fixLevel)");
+      return(1);
+    }
+    m_storage->setFileFixVersion(q.value(0).toUInt());  }
   int rc = 0;
-  while ((m_majorVersion < m_db.currentVersion()) && (rc == 0)) {
-    switch (m_majorVersion) {
+  while ((m_dbVersion < m_db.currentVersion()) && (rc == 0)) {
+    switch (m_dbVersion) {
     case 0:
       if ((rc = upgradeToV1()) != 0) return (1);
-      ++m_majorVersion;
+      ++m_dbVersion;
       break;
     case 1:
       if ((rc = upgradeToV2()) != 0) return (1);
-      ++m_majorVersion;
+      ++m_dbVersion;
       break;
     case 2:
       if ((rc = upgradeToV3()) != 0) return (1);
-      ++m_majorVersion;
+      ++m_dbVersion;
       break;
     case 3:
       if ((rc = upgradeToV4()) != 0) return (1);
-      ++m_majorVersion;
+      ++m_dbVersion;
       break;
     case 4:
       if ((rc = upgradeToV5()) != 0) return (1);
-      ++m_majorVersion;
+      ++m_dbVersion;
       break;
     case 5:
+      if ((rc = upgradeToV6()) != 0) return (1);
+      ++m_dbVersion;
+      break;
+    case 6:
       break;
     default:
-      qFatal("Unknown version number in database - %d", m_majorVersion);
+      qFatal("Unknown version number in database - %d", m_dbVersion);
     }
   }
   // write updated version to DB
-  setVersion(QString("%1.%2").arg(m_majorVersion).arg(m_minorVersion));
-  q.prepare (QString("UPDATE kmmFileInfo SET version=%1.%2").arg(m_majorVersion).arg(m_minorVersion));
+  //setVersion(QString("%1.%2").arg(m_dbVersion).arg(m_minorVersion))
+  q.prepare (QString("UPDATE kmmFileInfo SET version = :version;"));
+  q.bindValue(":version", m_dbVersion);
   if (!q.exec()) {
     buildError (q, __func__, "Error updating db version");
     return (1);
@@ -330,6 +372,22 @@ int MyMoneyStorageSql::upgradeDb() {
 }
 // SF bug 2779291
 // check whether a column appears in a table already; if not, add it
+bool MyMoneyStorageSql::addColumn
+    (const QString& table, const QString& col,
+                 const QString& after)
+{
+  MyMoneyDbTable t = m_db.m_tables[table];
+  MyMoneyDbTable::field_iterator ft;
+  KSharedPtr<MyMoneyDbColumn> c;
+  for (ft = t.begin(); ft != t.end(); ++ft) {
+    c = (*ft);
+    if (c->name() == col)
+      break;
+  }
+  if (ft == t.end()) qFatal("addColumn - get it right");
+  return (addColumn(t, *(c.data()), after));
+}
+
 bool MyMoneyStorageSql::addColumn
     (const MyMoneyDbTable& t, const MyMoneyDbColumn& c,
                  const QString& after){
@@ -354,18 +412,26 @@ bool MyMoneyStorageSql::addColumn
 }
 
 // analogous to above
+
+// analogous to above
 bool MyMoneyStorageSql::dropColumn
-    (const MyMoneyDbTable& t, const MyMoneyDbColumn& c){
+    (const QString& table, const QString& col)
+{
+  return (dropColumn(m_db.m_tables[table], col));
+}
+
+bool MyMoneyStorageSql::dropColumn
+    (const MyMoneyDbTable& t, const QString& col){
   if (m_dbType == Sqlite3)
     qFatal("sqlite doesn't support 'DROP COLUMN'; use sqliteAlterTable");
-  if (!record(t.name()).contains(c.name()))
+  if (!record(t.name()).contains(col))
     return (true);
   MyMoneySqlQuery q(this);
   q.prepare("ALTER TABLE " + t.name() + " DROP COLUMN "
-      + c.name() + ";");
+      + col + ";");
   if (!q.exec()) {
     buildError (q, __func__,
-      QString("Error dropping column %1 from table %2").arg(c.name()).arg(t.name()));
+      QString("Error dropping column %1 from table %2").arg(col).arg(t.name()));
     return (false);
   }
   return (true);
@@ -612,6 +678,66 @@ int MyMoneyStorageSql::upgradeToV5() {
     if (!sqliteAlterTable(t))
       return (1);
   }
+  return 0;
+}
+
+int MyMoneyStorageSql::upgradeToV6() {
+  DBG("*** Entering MyMoneyStorageSql::upgradeToV6");
+  startCommitUnit(__func__);
+  MyMoneySqlQuery q(this);
+  // add separate fix level in file info
+  if (!addColumn("kmmFileInfo", "fixLevel"))
+    return (1);
+  // upgrade Mysql to InnoDB transaction-safe engine
+  if (m_dbType == Mysql) {
+    for (QMap<QString, MyMoneyDbTable>::ConstIterator tt = m_db.tableBegin(); tt != m_db.tableEnd(); ++tt) {
+      q.prepare(QString("ALTER TABLE %1 ENGINE = InnoDB;").arg(tt.value().name()));
+      if (!q.exec()) {
+        buildError (q, __func__, "Error updating to InnoDB");
+        return (1);
+      }
+    }
+  }
+  // add unique id to reports table
+  if (!addColumn(m_db.m_tables["kmmReportConfig"],
+       (MyMoneyDbColumn("id", "varchar(32)", false))))
+    return(1);
+  // read and write reports to get ids inserted
+  readFileInfo();
+  QMap<QString, MyMoneyReport> reportList =
+      fetchReports();
+  // the V5 database allowed lots of duplicate reports with no
+  // way to distinguish between them. The fetchReports call
+  // will have effectively removed all duplicates
+  // so we now delete from the db and re-write them
+  q.prepare("DELETE FROM kmmReportConfig;");
+  if (!q.exec()) {
+    buildError (q, __func__, "Error deleting reports");
+    return (1);
+  }
+  unsigned long long hiReportId = 0;
+  QMap<QString, MyMoneyReport>::const_iterator it_r;
+  for(it_r = reportList.begin(); it_r != reportList.end(); ++it_r) {
+    MyMoneyReport r = *it_r;
+    hiReportId = calcHighId(hiReportId, r.id());
+    q.prepare (m_db.m_tables["kmmReportConfig"].insertString());
+    writeReport(*it_r, q);
+  }
+  m_hiIdReports = hiReportId;
+  m_storage->loadReportId(m_hiIdReports);
+  // sqlite3 doesn't support ADD PRIMARY KEY
+  if (m_dbType == Sqlite3) {
+    if (!sqliteAlterTable(m_db.m_tables["kmmReportConfig"])) {
+      return (1);
+    }
+  } else {
+    q.prepare ("ALTER TABLE kmmReportConfig ADD PRIMARY KEY (id);");
+    if (!q.exec()) {
+      buildError (q, __func__, "Error updating kmmReportConfig pkey");
+      return (1);
+    }
+  }
+  endCommitUnit(__func__);
   return 0;
 }
 
@@ -1881,7 +2007,7 @@ void MyMoneyStorageSql::writeReports() {
   QList<QString> dbList;
   MyMoneySqlQuery q(this);
   MyMoneySqlQuery q2(this);
-  q.prepare("SELECT name FROM kmmReportConfig;");
+  q.prepare("SELECT id FROM kmmReportConfig;");
   if (!q.exec()) throw new MYMONEYEXCEPTION(buildError (q, __func__, "building Report list"));
   while (q.next()) dbList.append(q.value(0).toString());
 
@@ -1891,8 +2017,8 @@ void MyMoneyStorageSql::writeReports() {
   q.prepare (m_db.m_tables["kmmReportConfig"].updateString());
   q2.prepare (m_db.m_tables["kmmReportConfig"].insertString());
   for(it = list.constBegin(); it != list.constEnd(); ++it){
-    if (dbList.contains((*it).name())) {
-      dbList.removeAll ((*it).name());
+    if (dbList.contains((*it).id())) {
+      dbList.removeAll ((*it).id());
       writeReport(*it, q);
     } else {
       writeReport(*it, q2);
@@ -1901,10 +2027,10 @@ void MyMoneyStorageSql::writeReports() {
   }
 
   if (!dbList.isEmpty()) {
-    q.prepare("DELETE FROM kmmReportConfig WHERE name = :name");
+    q.prepare("DELETE FROM kmmReportConfig WHERE id = :id");
     QList<QString>::const_iterator it = dbList.constBegin();
     while (it != dbList.constEnd()) {
-      q.bindValue(":name", (*it));
+      q.bindValue(":id", (*it));
       if (!q.exec()) throw new MYMONEYEXCEPTION(buildError (q, __func__, "deleting Report"));
       ++it;
     }
@@ -1934,8 +2060,8 @@ void MyMoneyStorageSql::removeReport(const MyMoneyReport& rep) {
   DBG("*** Entering MyMoneyStorageSql::removeReport");
   MyMoneyDbTransaction t(*this, __func__);
   MyMoneySqlQuery q(this);
-  q.prepare("DELETE FROM kmmReportConfig WHERE name = :name");
-  q.bindValue(":name", rep.name());
+  q.prepare("DELETE FROM kmmReportConfig WHERE id = :id");
+  q.bindValue(":id", rep.id());
   if (!q.exec()) throw new MYMONEYEXCEPTION(buildError (q, __func__, QString("deleting Report")));
   --m_reports;
   writeFileInfo();
@@ -1947,6 +2073,7 @@ void MyMoneyStorageSql::writeReport (const MyMoneyReport& rep, MyMoneySqlQuery& 
   QDomElement e = d.createElement("REPORTS");
   d.appendChild (e);
   rep.writeXML(d, e); // write the XML to document
+  q.bindValue(":id", rep.id());
   q.bindValue(":name", rep.name());
   q.bindValue(":XML", d.toString());
   if (!q.exec()) throw new MYMONEYEXCEPTION(buildError (q, __func__, QString("writing Reports")));
@@ -2046,9 +2173,8 @@ void MyMoneyStorageSql::writeFileInfo() {
   else
     qs = (m_db.m_tables["kmmFileInfo"].insertString());
   q.prepare(qs);
-  q.bindValue(":version", QString("%1.%2")
-      .arg(m_majorVersion)
-          .arg((m_storage->fileFixVersion() + 1)));
+  q.bindValue(":version", m_dbVersion);
+  q.bindValue(":fixLevel", m_storage->fileFixVersion());
   q.bindValue(":created", m_storage->creationDate().toString(Qt::ISODate));
   //q.bindValue(":lastModified", m_storage->lastModificationDate().toString(Qt::ISODate));
   q.bindValue(":lastModified", QDate::currentDate().toString(Qt::ISODate));
@@ -2146,8 +2272,10 @@ void MyMoneyStorageSql::readFileInfo(void) {
   MyMoneyDbTable::field_iterator ft = t.begin();
   int i = 0;
   while (ft != t.end()) {
-    CASE(version)  setVersion(GETSTRING); // check version == current version...
-    else CASE(created) m_storage->setCreationDate(GETDATE);
+    // versioning is now handled in open routine
+/*    CASE(version)  setVersion(GETSTRING); // check version == current version...
+    else*/
+    CASE(created) m_storage->setCreationDate(GETDATE);
     else CASE(lastModified) m_storage->setLastModificationDate(GETDATE);
     else CASE(hiInstitutionId) m_hiIdInstitutions = (unsigned long) GETULL;
     else CASE(hiPayeeId)       m_hiIdPayees = (unsigned long) GETULL;
@@ -2178,16 +2306,16 @@ void MyMoneyStorageSql::readFileInfo(void) {
   m_storage->setPairs(readKeyValuePairs("STORAGE", QString("")).pairs());
 }
 
-void MyMoneyStorageSql::setVersion (const QString& version) {
+/*void MyMoneyStorageSql::setVersion (const QString& version) {
   DBG("*** Entering MyMoneyStorageSql::setVersion");
-  m_majorVersion = version.section('.', 0, 0).toUInt();
+  m_dbVersion = version.section('.', 0, 0).toUInt();
   m_minorVersion = version.section('.', 1, 1).toUInt();
   // Okay, I made a cockup by forgetting to include a fixversion in the database
   // design, so we'll use the minor version as fix level (similar to VERSION
   // and FIXVERSION in XML file format). A second mistake was setting minor version to 1
   // in the first place, so we need to subtract one on reading and add one on writing (sigh)!!
   m_storage->setFileFixVersion( m_minorVersion - 1);
-}
+}*/
 
 void MyMoneyStorageSql::readInstitutions(void) {
   TRY
@@ -2277,10 +2405,10 @@ void MyMoneyStorageSql::readPayees (const QString& id) {
 void MyMoneyStorageSql::readPayees(const QList<QString> pid) {
   DBG("*** Entering MyMoneyStorageSql::readPayees(list)");
   TRY
-  QStringList pidList;
-  qCopy(pid.begin(), pid.end(), pidList.begin());
+  //QStringList pidList(pid);
+  //qCopy(pid.begin(), pid.end(), pidList.begin()); // aborted here with qt4
 
-  m_storage->loadPayees(fetchPayees(pidList));
+  m_storage->loadPayees(fetchPayees(pid));
   readFileInfo();
   m_storage->loadPayeeId(m_hiIdPayees);
   CATCH
@@ -2737,20 +2865,21 @@ const QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions (co
   if (txFilterActive) accountsOnlyFilter = false;
 
   QString whereClause = "";
-  QString subClauseconnector = " where ";
+  QString subClauseconnector = " where txType = 'N' and ";
   // payees
   QStringList payees;
   //filter.payees(payees);
   if (filter.payees(payees)) {
     accountsOnlyFilter = false;
-    QString itemConnector = "";
-    QString payeesClause = "(";
+    QString itemConnector = "payeeId in (";
+    QString payeesClause = "";
     QStringList::ConstIterator it;
     for (it = payees.constBegin(); it != payees.constEnd(); ++it) {
-      payeesClause.append(QString("%1 payeeId = '%2'").arg(itemConnector).arg(*it));
-      itemConnector = " or ";
+      payeesClause.append(QString("%1'%2'")
+          .arg(itemConnector).arg(*it));
+      itemConnector = ", ";
     }
-    if (payeesClause != "(")
+    if (payeesClause.isEmpty())
     {
       whereClause += subClauseconnector + payeesClause + ")";
       subClauseconnector = " and ";
@@ -2761,13 +2890,14 @@ const QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions (co
   // accounts and categories
   if (!accounts.isEmpty()) {
     splitFilterActive = true;
-    QString itemConnector = " txType = 'N' and (";
+    QString itemConnector = "accountId in (";
     QString accountsClause = "";
     QStringList::ConstIterator it;
     for (it = accounts.constBegin(); it != accounts.constEnd(); ++it) {
 //      if (m_accountsLoaded.find(*it) == m_accountsLoaded.end()) {
-        accountsClause.append(QString("%1accountId = '%2'").arg(itemConnector).arg(*it));
-        itemConnector = " or ";
+        accountsClause.append(QString("%1 '%2'")
+            .arg(itemConnector).arg(*it));
+        itemConnector = ", ";
         //if (accountsOnlyFilter) m_accountsLoaded.append(*it); // a bit premature...
 //      }
     }
@@ -2781,19 +2911,29 @@ const QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions (co
   QList <int> splitStates;
   if (filter.states(splitStates)) {
     splitFilterActive = true;
-    QString itemConnector = " reconcileflag IN (";
+    QString itemConnector = " reconcileFlag IN (";
     QString statesClause = "";
     for (QList<int>::ConstIterator it = splitStates.constBegin(); it != splitStates.constEnd(); ++it) {
-      statesClause.append(QString("%1 '%2'").arg(itemConnector)
+      statesClause.append(QString(" %1 '%2'").arg(itemConnector)
           .arg(splitState(MyMoneyTransactionFilter::stateOptionE(*it))));
       itemConnector = ",";
     }
     if (!statesClause.isEmpty()) {
-      whereClause += subClauseconnector + statesClause + "))";
+      whereClause += subClauseconnector + statesClause + ")";
       subClauseconnector = " and (";
     }
   }
-
+  // I've given up trying to work out the logic. we keep getting the wrong number of close brackets
+  int obc = whereClause.count('(');
+  int cbc = whereClause.count(')');
+  if (cbc > obc) {
+    qDebug() << "invalid where clause " << whereClause;
+    qFatal("aborting");
+  }
+  while (cbc < obc) {
+    whereClause.append(")");
+    cbc++;
+  }
   // if the split filter is active, but the where clause is empty
   // it means we already have all the transactions for the specified filter
   // in memory, so just exit
@@ -3313,6 +3453,8 @@ const QMap<QString, MyMoneySecurity> MyMoneyStorageSql::fetchCurrencies (const Q
 void MyMoneyStorageSql::readReports(void) {
   TRY
   m_storage->loadReports(fetchReports());
+  readFileInfo();
+  m_storage->loadReportId(m_hiIdReports);
   PASS
 }
 
@@ -3726,6 +3868,8 @@ void MyMoneyDbDef::FileInfo(void){
   appendField(MyMoneyDbIntColumn("hiBudgetId", MyMoneyDbIntColumn::BIG, UNSIGNED));
   appendField(MyMoneyDbColumn("logonUser", "varchar(255)"));
   appendField(MyMoneyDbDatetimeColumn("logonAt"));
+  appendField(MyMoneyDbIntColumn("fixLevel",
+               MyMoneyDbIntColumn::MEDIUM, UNSIGNED));
   MyMoneyDbTable t("kmmFileInfo", fields);
   t.buildSQLStrings();
   m_tables[t.name()] = t;
@@ -3932,6 +4076,7 @@ void MyMoneyDbDef::Reports(void) {
   QList<KSharedPtr <MyMoneyDbColumn> > fields;
   appendField(MyMoneyDbColumn("name", "varchar(255)", false, NOTNULL));
   appendField(MyMoneyDbTextColumn("XML", MyMoneyDbTextColumn::LONG));
+  appendField(MyMoneyDbColumn("id", "varchar(32)", PRIMARYKEY, NOTNULL));
   MyMoneyDbTable t("kmmReportConfig", fields);
   t.buildSQLStrings();
   m_tables[t.name()] = t;
@@ -4041,14 +4186,15 @@ const QString MyMoneyDbTable::generateCreateSQL (databaseTypeE dbType) const {
 
   if (!pkey.isEmpty()) {
     qs += "PRIMARY KEY (" + pkey;
-    qs = qs.left(qs.length() - 2) + "));\n";
+    qs = qs.left(qs.length() - 2) + "))";
   } else {
-    qs = qs.left(qs.length() - 2) + ");\n";
+    qs = qs.left(qs.length() - 2) + ")";
   }
 
-  if (Mysql == dbType) {
-    qs = qs.left(qs.length() - 2) + " ENGINE = InnoDB;\n";
-  }
+  if (dbType == Mysql)
+    qs += " ENGINE = InnoDB;\n";
+  else
+    qs += ";\n";
 
   for (index_iterator ii = m_indices.begin(); ii != m_indices.end(); ++ii) {
     qs += (*ii).generateDDL(dbType);

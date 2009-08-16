@@ -27,12 +27,11 @@
 #include <qwidget.h>
 #include <q3hbox.h>
 #include <qspinbox.h>
-//Added by qt3to4:
-#include <Q3ValueList>
 #include <QApplication>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
+#include <klistwidget.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -53,7 +52,8 @@
 
 void kMandatoryFieldGroup::add(QWidget *widget)
 {
-  if (!widgets.contains(widget)) {
+
+  if (!m_widgets.contains(widget)) {
     if (qobject_cast<QCheckBox*>( widget))
       connect(qobject_cast<QCheckBox*>(widget),
                SIGNAL(clicked()),
@@ -84,15 +84,20 @@ void kMandatoryFieldGroup::add(QWidget *widget)
                SIGNAL(selectionChanged()),
                       this, SLOT(changed()));
 
+    else if (qobject_cast<KListWidget*>(widget))
+      connect(qobject_cast<KListWidget*>(widget),
+               SIGNAL(itemSelectionChanged()),
+                      this, SLOT(changed()));
+
     else {
-        qWarning("MandatoryFieldGroup: unsupported class %s", ( widget->metaObject()->className() ));
+      qWarning("MandatoryFieldGroup: unsupported class %s", ( widget->metaObject()->className() ));
       return;
     }
 
     QPalette palette = widget->palette();
     palette.setColor(widget->backgroundRole(), KMyMoneyGlobalSettings::requiredFieldColor());
     widget->setPalette(palette);
-    widgets.append(widget);
+    m_widgets.append(widget);
     changed();
   }
 }
@@ -101,16 +106,16 @@ void kMandatoryFieldGroup::add(QWidget *widget)
 void kMandatoryFieldGroup::remove(QWidget *widget)
 {
   widget->setPalette(QApplication::palette());
-  widgets.remove(widget);
+  m_widgets.removeOne(widget);
   changed();
 }
 
 
 void kMandatoryFieldGroup::setOkButton(QPushButton *button)
 {
-  if (okButton && okButton != button)
-    okButton->setEnabled(true);
-  okButton = button;
+  if (m_okButton && m_okButton != button)
+    m_okButton->setEnabled(true);
+  m_okButton = button;
   changed();
 }
 
@@ -118,8 +123,8 @@ void kMandatoryFieldGroup::setOkButton(QPushButton *button)
 void kMandatoryFieldGroup::changed(void)
 {
   bool enable = true;
-  Q3ValueList<QWidget *>::ConstIterator i;
-  for (i = widgets.begin(); i != widgets.end(); ++i) {
+  QList<QWidget *>::ConstIterator i;
+  for (i = m_widgets.begin(); i != m_widgets.end(); ++i) {
     QWidget *widget = *i;
     // disabled widgets don't count
     if(!(widget->isEnabled())) {
@@ -153,10 +158,17 @@ void kMandatoryFieldGroup::changed(void)
       } else
         continue;
     }
+    if ((qobject_cast<KListWidget*>(widget))) {
+      if ((qobject_cast<KListWidget*>(widget))->selectedItems().count() == 0) {
+        enable = false;
+        break;
+      } else
+        continue;
+    }
   }
 
-  if (okButton)
-    okButton->setEnabled(enable);
+  if (m_okButton)
+    m_okButton->setEnabled(enable);
   m_enabled = enable;
 
   emit stateChanged();
@@ -166,13 +178,13 @@ void kMandatoryFieldGroup::changed(void)
 
 void kMandatoryFieldGroup::clear(void)
 {
-  Q3ValueList<QWidget *>::Iterator i;
-  for (i = widgets.begin(); i != widgets.end(); ++i)
+  QList<QWidget *>::Iterator i;
+  for (i = m_widgets.begin(); i != m_widgets.end(); ++i)
     (*i)->setPalette(QApplication::palette());
-  widgets.clear();
-  if (okButton) {
-    okButton->setEnabled(true);
-    okButton = 0;
+  m_widgets.clear();
+  if (m_okButton) {
+    m_okButton->setEnabled(true);
+    m_okButton = 0;
     m_enabled = true;
   }
 }

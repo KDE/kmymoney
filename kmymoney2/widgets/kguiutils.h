@@ -22,7 +22,7 @@
 // QT Includes
 
 #include <QObject>
-#include <q3valuelist.h>
+#include <QList>
 class QWidget;
 
 // ----------------------------------------------------------------------------
@@ -43,7 +43,7 @@ class kMandatoryFieldGroup : public QObject
 
 public:
   kMandatoryFieldGroup(QObject *parent) :
-    QObject(parent), okButton(0), m_enabled(true) {}
+    QObject(parent), m_okButton(0), m_enabled(true) {}
 
   /**
     * This method adds a widget to the list of mandatory fields for the current dialog
@@ -86,8 +86,8 @@ signals:
   void stateChanged(bool state);
 
 private:
-  Q3ValueList<QWidget *> widgets;
-  QPushButton*          okButton;
+  QList<QWidget *>      m_widgets;
+  QPushButton*          m_okButton;
   bool                  m_enabled;
 };
 

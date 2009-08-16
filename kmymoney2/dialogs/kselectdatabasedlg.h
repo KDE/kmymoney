@@ -20,7 +20,6 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
-#include <q3listbox.h>
 #include <QLineEdit>
 #include <QLabel>
 
@@ -60,13 +59,13 @@ public:
   const KUrl selectedURL();
 
 public slots:
-  void slotDriverSelected(Q3ListBoxItem *driver);
+  void slotDriverSelected(QListWidgetItem *driver);
   void slotHelp();
   void slotGenerateSQL();
 private:
+  void setError();
   int m_mode;
-#warning "port to kde4"
-  //MyMoneyDbDrivers m_map;
+  MyMoneyDbDrivers m_map;
   kMandatoryFieldGroup* m_requiredFields;
 };
 

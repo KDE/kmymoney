@@ -1017,6 +1017,7 @@ private:
     * @return id for an budget object
     */
   const QString nextBudgetID(void);
+  void removeReferences(const QString& id);
 
   static const int INSTITUTION_ID_SIZE = 6;
   static const int ACCOUNT_ID_SIZE = 6;
