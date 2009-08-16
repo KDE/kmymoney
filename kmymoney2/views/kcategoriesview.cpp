@@ -61,7 +61,7 @@ KCategoriesView::KCategoriesView(QWidget *parent) :
   if(layout) {
     layout->insertWidget(2, m_searchWidget);
   }*/
-  hboxLayout->insertWidget(2, m_searchWidget);
+  hboxLayout->insertWidget(0, m_searchWidget);
 
   // setup icons for collapse and expand button
   KGuiItem collapseGuiItem("",
