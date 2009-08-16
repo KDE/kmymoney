@@ -109,7 +109,7 @@ void KInstitutionsView::loadAccounts(void)
   QPoint startPoint = m_accountTree->viewportToContents(QPoint(0, 0));
 
   // turn off updates to avoid flickering during reload
-  m_accountTree->setUpdatesEnabled(false);
+  //m_accountTree->setUpdatesEnabled(false);
 
   // clear the current contents and recreate it
   m_accountTree->clear();
@@ -191,8 +191,7 @@ void KInstitutionsView::loadAccounts(void)
   m_accountTree->setContentsPos(startPoint.x(), startPoint.y());
 
   // turn updates back on
-  m_accountTree->setUpdatesEnabled(true);
-  m_accountTree->repaintContents();
+  //m_accountTree->setUpdatesEnabled(true);
 
   ::timetrace("done load institutions view");
 }

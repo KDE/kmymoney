@@ -963,7 +963,7 @@ void KPayeesView::loadPayees(void)
   QPoint startPoint = m_payeesList->viewportToContents(QPoint(0, 0));
 
   // turn off updates to avoid flickering during reload
-  m_payeesList->setUpdatesEnabled(false);
+  //m_payeesList->setUpdatesEnabled(false);
 
   // clear the list
   m_payeesList->clear();
@@ -991,8 +991,7 @@ void KPayeesView::loadPayees(void)
   m_searchWidget->searchLine()->updateSearch(QString::null);
 
   // turn updates back on
-  m_payeesList->setUpdatesEnabled(true);
-  m_payeesList->repaintContents();
+  //m_payeesList->setUpdatesEnabled(true);
 
   slotSelectPayee();
 

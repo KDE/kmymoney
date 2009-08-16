@@ -272,7 +272,6 @@ void KAccountsView::loadIconView(void)
     posMap[p->itemObject().id()] = p->pos();
 
   // turn off updates to avoid flickering during reload
-  m_accountIcons->setUpdatesEnabled(false);
   m_accountIcons->setAutoArrange(true);
 
   // clear the current contents and recreate it
@@ -291,6 +290,7 @@ void KAccountsView::loadIconView(void)
 
   bool showClosedAccounts = kmymoney2->toggleAction("view_show_all_accounts")->isChecked()
       || !KMyMoneyGlobalSettings::hideClosedAccounts();
+  bool existNewIcons = false;
 
   // parse list and add all asset and liability accounts
   QMap<QString, MyMoneyAccount>::const_iterator it;
@@ -320,7 +320,9 @@ void KAccountsView::loadIconView(void)
         }
 
         loc = posMap[(*it).id()];
-        if(loc != QPoint()) {
+        if(loc == QPoint()) {
+          existNewIcons = true;
+        } else {
           m_accountIcons->setAutoArrange(false);
         }
 
@@ -342,11 +344,11 @@ void KAccountsView::loadIconView(void)
   m_securityMap.clear();
   m_transactionCountMap.clear();
 
-  m_accountIcons->setAutoArrange(false);
-  // turn updates back on
-  m_accountIcons->setUpdatesEnabled(true);
-  m_accountIcons->repaintContents();
+  if(existNewIcons) {
+    m_accountIcons->arrangeItemsInGrid(true);
+  }
 
+  m_accountIcons->setAutoArrange(false);
   ::timetrace("done load accounts icon view");
 }
 
@@ -373,7 +375,7 @@ void KAccountsView::loadListView(void)
   QPoint startPoint = m_accountTree->viewportToContents(QPoint(0, 0));
 
   // turn off updates to avoid flickering during reload
-  m_accountTree->setUpdatesEnabled(false);
+  //m_accountTree->setUpdatesEnabled(false);
 
   // clear the current contents and recreate it
   m_accountTree->clear();
@@ -447,8 +449,7 @@ void KAccountsView::loadListView(void)
   m_searchWidget->searchLine()->updateSearch(QString::null);
 
   // turn updates back on
-  m_accountTree->setUpdatesEnabled(true);
-  m_accountTree->repaintContents();
+  //m_accountTree->setUpdatesEnabled(true);
 
   // clear the current contents
   m_securityMap.clear();

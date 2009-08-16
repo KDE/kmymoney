@@ -434,7 +434,7 @@ void KReportsView::loadView(void)
   QPoint startPoint = m_reportListView->viewportToContents(QPoint(0, 0));
 
   // turn off updates to avoid flickering during reload
-  m_reportListView->setUpdatesEnabled(false);
+  //m_reportListView->setUpdatesEnabled(false);
 
   //
   // Rebuild the list page
@@ -516,8 +516,7 @@ void KReportsView::loadView(void)
   m_reportListView->setContentsPos(startPoint.x(), startPoint.y());
 
   // turn updates back on
-  m_reportListView->setUpdatesEnabled(true);
-  m_reportListView->repaintContents();
+  //m_reportListView->setUpdatesEnabled(true);
 
   //
   // Go through the tabs to set their update flag or delete them if needed

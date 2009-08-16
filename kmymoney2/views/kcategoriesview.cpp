@@ -144,7 +144,7 @@ void KCategoriesView::loadAccounts(void)
   QPoint startPoint = m_accountTree->viewportToContents(QPoint(0, 0));
 
   // turn off updates to avoid flickering during reload
-  m_accountTree->setUpdatesEnabled(false);
+  //m_accountTree->setUpdatesEnabled(false);
 
   // clear the current contents and recreate it
   m_accountTree->clear();
@@ -205,8 +205,7 @@ void KCategoriesView::loadAccounts(void)
   m_searchWidget->searchLine()->updateSearch(QString::null);
 
   // turn updates back on
-  m_accountTree->setUpdatesEnabled(true);
-  m_accountTree->repaintContents();
+  //m_accountTree->setUpdatesEnabled(true);
 
   // update the hint if categories are hidden
   m_hiddenCategories->setVisible(haveUnusedCategories);
