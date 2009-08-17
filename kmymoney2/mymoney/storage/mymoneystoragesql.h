@@ -13,9 +13,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qsqldatabase.h>
-#include <qsqlquery.h>
-#include <qsqlerror.h>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlError>
 #include <QList>
 #include <QStack>
 
@@ -599,6 +599,8 @@ private:
   void init(void);
   // a function to build a comprehensive error message
   QString& buildError (const QSqlQuery& q, const QString& function, const QString& message) const;
+  QString& buildError (const QSqlQuery& q, const QString& function, const QString& message,
+                       const QSqlDatabase*) const;
   // write routines
   void writeUserInformation(void);
   void writeInstitutions(void);

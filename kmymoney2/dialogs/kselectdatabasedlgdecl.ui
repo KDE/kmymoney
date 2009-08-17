@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>449</width>
+    <width>518</width>
     <height>640</height>
    </rect>
   </property>
@@ -15,26 +15,131 @@
   </property>
   <layout class="QVBoxLayout">
    <item>
-    <widget class="Q3GroupBox" name="groupBox6">
+    <widget class="QGroupBox" name="groupBox6">
+     <property name="palette">
+      <palette>
+       <active>
+        <colorrole role="WindowText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>255</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </active>
+       <inactive>
+        <colorrole role="WindowText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>255</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </inactive>
+       <disabled>
+        <colorrole role="WindowText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>126</red>
+           <green>125</green>
+           <blue>124</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </disabled>
+      </palette>
+     </property>
      <property name="title">
-      <string>CAUTION!</string>
+      <string>PLEASE NOTE</string>
      </property>
      <layout class="QVBoxLayout">
       <item>
-       <widget class="K3ActiveLabel" name="kActiveLabel1" native="true">
+       <widget class="QPlainTextEdit" name="plainTextEdit">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="palette">
+         <palette>
+          <active>
+           <colorrole role="WindowText">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>255</red>
+              <green>0</green>
+              <blue>0</blue>
+             </color>
+            </brush>
+           </colorrole>
+           <colorrole role="Text">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>255</red>
+              <green>0</green>
+              <blue>0</blue>
+             </color>
+            </brush>
+           </colorrole>
+          </active>
+          <inactive>
+           <colorrole role="WindowText">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>255</red>
+              <green>0</green>
+              <blue>0</blue>
+             </color>
+            </brush>
+           </colorrole>
+           <colorrole role="Text">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>255</red>
+              <green>0</green>
+              <blue>0</blue>
+             </color>
+            </brush>
+           </colorrole>
+          </inactive>
+          <disabled>
+           <colorrole role="WindowText">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>126</red>
+              <green>125</green>
+              <blue>124</blue>
+             </color>
+            </brush>
+           </colorrole>
+           <colorrole role="Text">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>126</red>
+              <green>125</green>
+              <blue>124</blue>
+             </color>
+            </brush>
+           </colorrole>
+          </disabled>
+         </palette>
+        </property>
         <property name="font">
          <font>
-          <pointsize>10</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
+          <pointsize>9</pointsize>
          </font>
         </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
+        <property name="readOnly">
+         <bool>true</bool>
         </property>
-        <property name="text" stdset="0">
-         <string>&lt;font color=&quot;#ff2727&quot;&gt;This software is still in an experimental stage, and there are still some known response time problems. Please be patient; we are working on them.
-As always, please make sure you have adequate backups of your data.&lt;/font&gt;</string>
+        <property name="plainText">
+         <string>This software is still in an experimental stage, and there are still some known response time problems. Please be patient; we are working on them.
+As always, please make sure you have adequate backups of your data.</string>
         </property>
        </widget>
       </item>
@@ -42,18 +147,19 @@ As always, please make sure you have adequate backups of your data.&lt;/font&gt;
     </widget>
    </item>
    <item>
-    <widget class="Q3GroupBox" name="groupBox1">
+    <widget class="QGroupBox" name="groupBox1">
      <property name="title">
       <string>Database Type</string>
      </property>
-     <layout class="QVBoxLayout"/>
+     <layout class="QVBoxLayout">
+      <item>
+       <widget class="KListWidget" name="listDrivers"/>
+      </item>
+     </layout>
     </widget>
    </item>
    <item>
-    <widget class="KListWidget" name="listDrivers"/>
-   </item>
-   <item>
-    <widget class="Q3GroupBox" name="groupBox2">
+    <widget class="QGroupBox" name="groupBox2">
      <property name="title">
       <string>Database Name</string>
      </property>
@@ -65,7 +171,7 @@ As always, please make sure you have adequate backups of your data.&lt;/font&gt;
     </widget>
    </item>
    <item>
-    <widget class="Q3GroupBox" name="groupBox3">
+    <widget class="QGroupBox" name="groupBox3">
      <property name="title">
       <string>Host Name</string>
      </property>
@@ -77,7 +183,7 @@ As always, please make sure you have adequate backups of your data.&lt;/font&gt;
     </widget>
    </item>
    <item>
-    <widget class="Q3GroupBox" name="groupBox4">
+    <widget class="QGroupBox" name="groupBox4">
      <property name="title">
       <string>User Name</string>
      </property>
@@ -89,7 +195,7 @@ As always, please make sure you have adequate backups of your data.&lt;/font&gt;
     </widget>
    </item>
    <item>
-    <widget class="Q3GroupBox" name="groupBoxPassword">
+    <widget class="QGroupBox" name="groupBoxPassword">
      <property name="title">
       <string>Password</string>
      </property>
@@ -183,20 +289,9 @@ As always, please make sure you have adequate backups of your data.&lt;/font&gt;
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>Q3GroupBox</class>
-   <extends>QGroupBox</extends>
-   <header>Qt3Support/Q3GroupBox</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>KListWidget</class>
    <extends>QListWidget</extends>
    <header>klistwidget.h</header>
-  </customwidget>
-  <customwidget>
-   <class>K3ActiveLabel</class>
-   <extends>QWidget</extends>
-   <header>k3activelabel.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
