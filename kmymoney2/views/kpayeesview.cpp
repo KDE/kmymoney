@@ -66,7 +66,6 @@
 #include <kmymoneyaccounttree.h>
 #include <kmymoneyglobalsettings.h>
 #include <ktoolinvocation.h>
-
 #include "kpayeesview.h"
 
 /* -------------------------------------------------------------------------------*/
@@ -335,7 +334,7 @@ KPayeesView::KPayeesView(QWidget *parent) :
   m_splitter = new QSplitter(this);
   m_payeesList->reparent(m_splitter, QPoint(0,0), true);
   m_tabWidget->reparent(m_splitter, QPoint(0, 0), true);
-  m_splitter->setResizeMode(m_tabWidget, QSplitter::Stretch);
+  m_splitter->setStretchFactor(m_splitter->indexOf(m_tabWidget), 2);
   m_splitter->setOpaqueResize();
   hboxLayout->addWidget(m_splitter);
 
@@ -432,7 +431,7 @@ void KPayeesView::slotChooseDefaultAccount(void)
     MyMoneyFile* file = MyMoneyFile::instance();
     QMap<QString,int> account_count;
 
-  for (int i = 0; i < m_transactionPtrVector.size(); ++i) {
+  for (uint i = 0; i < m_transactionPtrVector.size(); ++i) {
     KMyMoneyTransaction* t = m_transactionPtrVector[i];
     MyMoneySplit s = t->splitById(t->splitId());
     const MyMoneyAccount& acc = file->account(s.accountId());
@@ -454,7 +453,7 @@ void KPayeesView::slotChooseDefaultAccount(void)
   QMap<QString,int>::Iterator most_frequent, iter;
   most_frequent = account_count.end();
   for (iter = account_count.begin(); iter != account_count.end(); iter++) {
-    if (iter.data() > most_frequent.data()) {
+    if (iter.value() > most_frequent.value()) {
       most_frequent = iter;
     }
   }

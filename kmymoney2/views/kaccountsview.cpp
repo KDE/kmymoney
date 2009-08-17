@@ -23,7 +23,6 @@
 #include <QLayout>
 //Added by qt3to4:
 #include <QList>
-#include <Q3VBoxLayout>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -134,10 +133,6 @@ KAccountsView::KAccountsView(QWidget *parent) :
   // create the searchline widget
   // and insert it into the existing layout
   m_searchWidget = new K3ListViewSearchLineWidget(m_accountTree, m_accountTree->parentWidget());
-//   Q3VBoxLayout* layout = dynamic_cast<Q3VBoxLayout*>(m_accountTree->parentWidget()->layout());
-//   if(layout) {
-//     layout->insertWidget(0, m_searchWidget);
-//   }
   hboxLayout->insertWidget(0, m_searchWidget);
 
   // setup icons for collapse and expand button
@@ -628,7 +623,7 @@ QPoint KAccountsView::point(const QString& val) const
   QRegExp exp("(\\d+);(\\d+)");
   int x = 0;
   int y = 0;
-  if(exp.search(val) != -1) {
+  if(exp.indexIn(val) != -1) {
     x = exp.cap(1).toInt();
     y = exp.cap(2).toInt();
   }

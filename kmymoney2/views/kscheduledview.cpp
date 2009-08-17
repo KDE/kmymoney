@@ -51,7 +51,6 @@
 #include "kscheduledview.h"
 #include "kscheduledlistitem.h"
 #include "kmymoneyscheduleddatetbl.h"
-// #include "kenterscheduledialog.h"
 #include <kmymoneyutils.h>
 #include <kmymoneyglobalsettings.h>
 
@@ -315,7 +314,7 @@ void KScheduledView::readConfig(void)
   m_openDeposits = grp.readEntry("KScheduleView_openDeposits", true);
   m_openTransfers = grp.readEntry("KScheduleView_openTransfers", true);
   m_openLoans = grp.readEntry("KScheduleView_openLoans", true);
-  m_tabWidget->setCurrentPage(grp.readEntry("KScheduleView_tab", 0));
+  m_tabWidget->setCurrentIndex(grp.readEntry("KScheduleView_tab", 0));
 
   m_qlistviewScheduled->header()->setFont(KMyMoneyGlobalSettings::listHeaderFont());
   grp = config->group("Schedule View Settings");
@@ -331,7 +330,7 @@ void KScheduledView::writeConfig(void)
   grp.writeEntry("KScheduleView_openDeposits", m_openDeposits);
   grp.writeEntry("KScheduleView_openTransfers", m_openTransfers);
   grp.writeEntry("KScheduleView_openLoans", m_openLoans);
-  grp.writeEntry("KScheduleView_tab", m_tabWidget->currentPageIndex());
+  grp.writeEntry("KScheduleView_tab", m_tabWidget->currentIndex());
   config->sync();
 
   grp = config->group("Schedule View Settings");
@@ -389,7 +388,7 @@ void KScheduledView::slotListItemExecuted(Q3ListViewItem* item, const QPoint&, i
   }
 }
 
-void KScheduledView::slotAccountActivated(int id)
+void KScheduledView::slotAccountActivated(int /*id*/)
 {
   m_filterAccounts.clear();
 
