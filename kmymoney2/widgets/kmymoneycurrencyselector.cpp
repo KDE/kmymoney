@@ -94,7 +94,7 @@ void KMyMoneySecuritySelector::update(const QString& id)
 
   int itemId = 0;
   int m_selectedItemId = 0;
-  for(it = m_list.begin(); it != m_list.end(); ++it) {
+  for(it = m_list.constBegin(); it != m_list.constEnd(); ++it) {
     QString display;
     switch(m_displayItem) {
       default:

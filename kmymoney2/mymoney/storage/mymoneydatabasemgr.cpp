@@ -228,7 +228,7 @@ void MyMoneyDatabaseMgr::removePayee(const MyMoneyPayee& payee)
 
   // check referential integrity in schedules
   QMap<QString, MyMoneySchedule> scheduleList = m_sql->fetchSchedules(); // make sure they're all here
-  for(it_s = scheduleList.begin(); it_s != scheduleList.end(); ++it_s) {
+  for(it_s = scheduleList.constBegin(); it_s != scheduleList.constEnd(); ++it_s) {
     if((*it_s).hasReferenceTo(payee.id())) {
       throw new MYMONEYEXCEPTION(QString("Cannot remove payee that is still referenced to a %1").arg("schedule"));
     }
@@ -1881,7 +1881,7 @@ void MyMoneyDatabaseMgr::removeReferences(const QString& id)
 
   // remove from reports
   QMap<QString, MyMoneyReport> reportList = m_sql->fetchReports();
-  for(it_r = reportList.begin(); it_r != reportList.end(); ++it_r) {
+  for(it_r = reportList.constBegin(); it_r != reportList.constEnd(); ++it_r) {
     MyMoneyReport r = *it_r;
     r.removeReference(id);
 //    reportList.modify(r.id(), r);
@@ -1889,7 +1889,7 @@ void MyMoneyDatabaseMgr::removeReferences(const QString& id)
 
   // remove from budgets
   QMap<QString, MyMoneyBudget> budgetList = m_sql->fetchBudgets();
-  for(it_b = budgetList.begin(); it_b != budgetList.end(); ++it_b) {
+  for(it_b = budgetList.constBegin(); it_b != budgetList.constEnd(); ++it_b) {
     MyMoneyBudget b = *it_b;
     b.removeReference(id);
 //    budgetList.modify(b.id(), b);

@@ -124,7 +124,7 @@ void kMandatoryFieldGroup::changed(void)
 {
   bool enable = true;
   QList<QWidget *>::ConstIterator i;
-  for (i = m_widgets.begin(); i != m_widgets.end(); ++i) {
+  for (i = m_widgets.constBegin(); i != m_widgets.constEnd(); ++i) {
     QWidget *widget = *i;
     // disabled widgets don't count
     if(!(widget->isEnabled())) {

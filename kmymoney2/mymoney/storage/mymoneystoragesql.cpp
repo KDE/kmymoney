@@ -722,7 +722,7 @@ int MyMoneyStorageSql::upgradeToV6() {
   }
   unsigned long long hiReportId = 0;
   QMap<QString, MyMoneyReport>::const_iterator it_r;
-  for(it_r = reportList.begin(); it_r != reportList.end(); ++it_r) {
+  for(it_r = reportList.constBegin(); it_r != reportList.constEnd(); ++it_r) {
     MyMoneyReport r = *it_r;
     hiReportId = calcHighId(hiReportId, r.id());
     q.prepare (m_db.m_tables["kmmReportConfig"].insertString());
