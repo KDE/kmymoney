@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sect1 id="reference.widgets.intro">
+<title>Widgets</title>
+
 <sect2 id="reference.widgets.datepicker">
 <title>Date entry widget</title>
 
