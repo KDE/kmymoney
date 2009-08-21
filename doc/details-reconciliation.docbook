@@ -1,37 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <chapter id="details.reconcile">
 <chapterinfo>
-<authorgroup>
-<author>
-	<firstname>Michael</firstname>
-	<othername>T.</othername>
-	<surname>Edwardes</surname>
-	<affiliation>
-		<address><email>mte@users.sourceforge.net</email></address>
-	</affiliation>
-</author>
-</authorgroup>
-<date>2005-07-09</date>
-<releaseinfo>0.8</releaseinfo>
+  <authorgroup>
+    <author>
+      <firstname>Michael</firstname>
+      <othername>T.</othername>
+      <surname>Edwardes</surname>
+      <affiliation>
+	<address><email>mte@users.sourceforge.net</email></address>
+      </affiliation>
+    </author>
+  </authorgroup>
+  <date>2009-07-28</date>
+  <releaseinfo>1.0</releaseinfo>
 </chapterinfo>
-
 
 <title>Reconciliation</title>
 
 <sect1 id="details.reconcile.whatis">
 <title>What is reconciliation?</title>
+
 <para>
-Reconciliation involves matching the transactions you have entered with the transactions listed in a statement, be it a bank statement, credit card statement, loan statement or any other statement. If any discrepancies are found then either you or the person who created the statement have made a mistake.
+  Reconciliation is the process of matching the transactions you have entered
+  into &kappname; with the transactions listed for that account by the
+  institution.  This is most commonly done with the list of transactions in a
+  statement, be it a bank statement, credit card statement, loan statement, or
+  any other statement. It can also be done against an on-line listing of the
+  account, although this is less common.  If any discrepancies are found, then
+  either you or the person who created the statement have made a mistake.
 </para>
 
 <para>
-	To reconcile an account, choose your account from the drop down list and click on the<guiicon><inlinemediaobject><imageobject><imagedata fileref="reconcile.png"/></imageobject></inlinemediaobject> Reconcile Ledgers</guiicon> icon, select <menuchoice><guimenu>Accounts</guimenu> <guimenuitem>Reconcile...</guimenuitem></menuchoice> or use the key combination Ctl+Shift+R.
+  To reconcile an account, choose your account from the drop down box and click
+  on the <guiicon><inlinemediaobject> <imageobject><imagedata
+  fileref="reconcile.png"/></imageobject>
+  </inlinemediaobject>Reconcile</guiicon> icon, select
+  <menuchoice><guimenu>Account</guimenu>
+  <guimenuitem>Reconcile...</guimenuitem></menuchoice> or use the key
+  combination Ctl+Shift+R.
 </para>
 </sect1>
 
 <sect1 id="details.reconcile.wizard">
 <title>The reconciliation wizard</title>
 <para>
-This will open the reconciliation wizard with the first page informing you of what will happen briefly.  Click on <guibutton>Next</guibutton> to actually start the wizard.
+  This will open the reconciliation wizard.  The first page of the wizard
+  briefly describes the process you will follow.  Click
+  on <guibutton>Next</guibutton> to actually start the wizard.
 </para>
 
 <para>
@@ -51,7 +66,11 @@ This will open the reconciliation wizard with the first page informing you of wh
 <sect2 id="details.reconcile.wizard.statement">
 <title>Statement details</title>
 <para>
-The statement date, starting balance and ending balance can be found in your statement.  Make sure that the figures match and click on the <guibutton>Next</guibutton> button.  If the figures do not match then enter the figures as listed on your statement and click on the <guibutton>Next</guibutton> button.
+  The statement date, starting balance, and ending balance can be found in your
+  statement.  Make sure that the figures match and click on
+  the <guibutton>Next</guibutton> button.  If the figures do not match then
+  enter the figures as listed on your statement and click on
+  the <guibutton>Next</guibutton> button.
 </para>
 
 <para>
@@ -73,7 +92,9 @@ The statement date, starting balance and ending balance can be found in your sta
 <sect2 id="details.reconcile.wizard.interest">
 <title>Interest</title>
 <para>
-If the statement reconciliation is on a bank account or any account with interest and/or charges then enter these values in the required fields.  A category can be assigned to the transactions.
+  If the statement reconciliation is on a bank account or any account with
+  interest and/or charges fees, then enter these values in the appropriate
+  fields.  A category can be assigned for each of these amounts.
 </para>
 
 <para>
@@ -91,20 +112,30 @@ If the statement reconciliation is on a bank account or any account with interes
 
 <note>
 <para>
-The interest field is for interest you gained. If you have to pay interest for e.g. a credit card account, this has to be entered as charge.
+  The interest field is for interest you gained. If you have to pay interest,
+  e.g., for a credit card account, this has to be entered as a charge.
 </para>
 </note>
 </para>
 
 <para>
-Click on <guibutton>Finish</guibutton> to start matching your statement to what you have entered.
+  Click on <guibutton>Finish</guibutton> to start matching your statement to
+  what you have entered.  Note that this completes the Reconciliation Wizard,
+  but not the process of reconciliation.  As described below, you still need to
+  clear transactions and then tell &kappname; that the account is reconciled.
 </para>
 </sect2>
 
 <sect2 id="details.reconcile.wizard.clearing">
 <title>Clearing transactions</title>
 <para>
-	To mark a transaction as cleared click on the C column in the list view.  A transaction is cleared when it matches the transaction on your statement.  The command frame lists the statement amount and the cleared amount.  When the difference is zero then the account is reconciled and you can click the <guibutton>Finish</guibutton> button to save the transactions.  To postpone the reconciliation to a later time click on the <guibutton>Postpone</guibutton> button.  During the reconciliation any transaction can be edited to make it match the statement and new transactions can be created as usual.  After clicking on the <guibutton>Finish</guibutton> button the transactions are marked as reconciled and the C column changes to 'R' to reflect the change.
+  To mark a transaction as cleared, click on the C column in the list view.  A
+  transaction is cleared when it matches the transaction on your statement.
+</para>
+
+<para>
+  During the reconciliation, any transaction can be edited to make it match the
+  statement, and new transactions can be created as usual.
 </para>
 
 <para>
@@ -120,7 +151,36 @@ Click on <guibutton>Finish</guibutton> to start matching your statement to what 
 	</mediaobject>
 </screenshot>
 </para>
+</sect2>
 
+<sect2 id="details.reconcile.complete">
+<title>Completing Reconciliation</title>
+
+<sect3 id="details.reconcile.finish">
+<title>Finishing Reconciliation</title>
+<para>
+  The command frame (just below the transaction list area) displays the
+  statement amount and the cleared amount.  When the difference is zero then the
+  account is reconciled and you can click the <guibutton>Finish</guibutton>
+  button.  When you do this, &kappname; takes all the transactions which have
+  been marked as cleared and marks them as reconciled, and the C column changes
+  to 'R' to reflect the change. In addition, it saves the changes and
+  records that the account has been reconciled.
+</para>
+</sect3>
+
+<sect3 id="details.reconcile.postpone">
+<title>Postponing Reconciliation</title>
+<para>
+  To postpone the reconciliation to a later time, click on
+  the <guibutton>Postpone</guibutton> button.  Any edits you have made to any
+  transactions, such as marking them cleared, can still be saved before you
+  exit &kappname;, but you will have to run the reconciliation wizard again in
+  order to reconcile the account.  If you exit &kappname; before clicking either
+  <guibutton>Finish</guibutton> or <guibutton>Postpone</guibutton>, it has the
+  same effect as clicking <guibutton>Postpone</guibutton>.
+</para>
+</sect3>
 </sect2>
 </sect1>
 

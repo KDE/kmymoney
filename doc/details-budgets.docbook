@@ -1,424 +1,406 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter id="details.budgets">
-  <chapterinfo>
-    <authorgroup>
-      <author>
-        <surname>Colin Wright &lt;cdwright@gwi.net&gt;</surname>
-      </author>
-    </authorgroup>
+<chapterinfo>
+  <authorgroup>
+    <author>
+      <surname>Colin Wright &lt;cdwright@gwi.net&gt;</surname>
+    </author>
+  </authorgroup>
+  <date>2009-08-03</date>
+  <releaseinfo>1.0</releaseinfo>
+</chapterinfo>
 
-    <date>2008-01-28</date>
+<title id="details.budgets.title">Budgets</title>
+<sect1 id="details.budgets.define">
+<title>What is a budget?</title>
 
-    <releaseinfo>0.9</releaseinfo>
-  </chapterinfo>
+<para>
+  A budget is a categorized list of expected income and expenses for a period.
+</para>
 
-  <title id="details.budgets.title">Budgets</title>
+<para>
+  The Budget facility of &kappname; allows you to create annual budgets.  More
+  than one Budget can be created for any year. You set monthly Budget values
+  against any Income or Expense categories that you have defined. The values can
+  be set in three ways, depending on the Period:
+</para>
 
-  <sect1 id="details.budgets.define">
-    <title>What is a budget?</title>
+<variablelist>
+  <varlistentry>
+    <term>Monthly</term>
+    <listitem><para>(Default) specify a single value applied to every month in
+      the Budget</para></listitem>
+  </varlistentry>
 
-    <para>A budget is a categorized list of expected income and expenditure
-    for a period.</para>
+  <varlistentry>
+    <term>Yearly</term>
+    <listitem><para>specify a single value to divide evenly across each month in
+      the Budget</para></listitem>
+  </varlistentry>
 
-    <para>The Budget facility of &kappname; allows you to create annual budgets.
-    More than one Budget can be created for any year. You set monthly Budget
-    values against any Income or Expense categories that you have defined. The
-    values can be set in three ways, depending on the Period:</para>
+  <varlistentry>
+    <term>Individual</term>
+    <listitem><para>specify separate values for each month.</para>
+      <para>This is used for income and expenses spread irregularly through the
+          year.</para></listitem>
+  </varlistentry>
+</variablelist>
 
-    <variablelist>
-      <varlistentry>
-        <term>Monthly</term>
+<para>
+  &kappname; provides a number of reports which compare actual income and
+  expenses against the entered Budgets.
+</para>
+</sect1>
 
-        <listitem>
-          <para>(Default) specify a single value applied to every month in the
-          Budget</para>
-        </listitem>
-      </varlistentry>
+<sect1 id="details.budgets.create" >
+<title>Your budgets</title>
 
-      <varlistentry>
-        <term>Yearly</term>
+<para>
+  You can access your budgets by clicking the appropriate icon in the navigation
+  pane at the left hand side of your &kappname; window.
+</para>
 
-        <listitem>
-          <para>specify a single value to divide evenly across each month in
-          the Budget</para>
-        </listitem>
-      </varlistentry>
+<sect2>
+<title>Creating, changing, and deleting budgets</title>
 
-      <varlistentry>
-        <term>Individual</term>
+<para>
+  This section of the Budgets window displays the list of Budgets contained in
+  the current file. If no Budget has yet been created the list will display a
+  single empty Budget called "Budget &lt;year&gt;" where &lt;year&gt; is the
+  current fiscal year. The list of Budgets has two columns:
+</para>
 
-        <listitem>
-          <para>specify separate values for each month.</para>
+<variablelist>
+  <varlistentry>
+    <term>Name</term>
+    <listitem>
+      <para>Name of the Budget</para>
+    </listitem>
+  </varlistentry>
 
-          <para>This is used for income and expenses spread irregularly through the
-          year.</para>
-        </listitem>
-      </varlistentry>
-    </variablelist>
+  <varlistentry>
+    <term>Year</term>
+    <listitem>
+      <para>Fiscal year of the Budget</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
 
-    <para>&kappname; provides a number of reports which compare actual income
-    and expenses against the entered Budgets.</para>
+<para>
+  Values from the selected Budget are displayed to the right. To select a
+  different Budget you can click on the Budget in the list.  Alternatively, when
+  the list has focus, you can select a different Budget using the up and down
+  keys. If you have made changes to a Budget and then select a different budget
+  &kappname; will ask you whether you want to discard the changes.
+</para>
 
-  </sect1>
+<para>
+  There are five buttons above the list of Budgets.
+</para>
 
-  <sect1 id="details.budgets.create" >
-	<title>Your budgets</title>
+<variablelist>
+  <varlistentry>
+    <term>New</term>
+    <listitem>
+      <para>Create a new budget</para>
+    </listitem>
+  </varlistentry>
 
-    <para>You can access your budgets by clicking the appropriate large icon
-    in the navigation pane at the left hand side of your &kappname;
-    window.</para>
+  <varlistentry>
+    <term>Rename</term>
+    <listitem>
+      <para>Edit the name of the selected Budget.</para>
 
-    <sect2>
-      <title>Creating, changing and deleting budgets</title>
+      <para>You can also edit the name of a Budget by clicking on the name of
+        the selected Budget or double-clicking on the name of a different
+        Budget.</para>
+    </listitem>
+  </varlistentry>
 
-      <para>This section of the Budgets window displays the list of Budgets
-      contained in the current file. If no Budget has yet been created the
-      list will display a single empty Budget called "Budget &lt;year&gt;"
-      where &lt;year&gt; is the current fiscal year. The list of Budgets has
-      two columns:</para>
+  <varlistentry>
+    <term>Delete</term>
+    <listitem>
+      <para>Delete the selected Budget</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Revert</term>
+    <listitem>
+      <para>Reverts the selected Budget to its last stored state.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Save</term>
+    <listitem>
+      <para>Accepts any unsaved changes to the selected Budget and
+        stores them.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<para>
+  Additional options are available on a menu accessed by right-clicking on a
+  Budget.
+</para>
+
+<variablelist>
+  <varlistentry>
+    <term>New Budget</term>
+    <listitem>
+      <para>Create a new, blank Budget.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Rename Budget</term>
+    <listitem>
+      <para>Rename the selected Budget.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Change budget year</term>
+    <listitem>
+      <para>Displays a window with a list of years to select a different budget
+        year.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Delete budget</term>
+    <listitem>
+      <para>Delete the selected Budget.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Copy budget</term>
+    <listitem>
+      <para>Creates a copy of the selected Budget. The new Budget has the name
+        "Copy of &lt;budget&gt;", where &lt;budget&gt; is the name of the copied
+        Budget.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+<title>Account List</title>
+
+<para>
+  The Account List displays the list of Income and Expense Categories. As in
+  other places in &kappname; the list is organized in a tree structure. The list
+  can be expanded or collapsed to show or hide Subcategories within a
+  Category. The Account List has a number of columns:</para>
+
+<variablelist>
+  <varlistentry>
+    <term>Account</term>
+    <listitem>
+      <para>Account name</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Type</term>
+    <listitem>
+      <para>Account Type (Income or Expense)</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Tax</term>
+    <listitem>
+      <para>Checked if a Category included in Tax Reports</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>VAT</term>
+    <listitem>
+      <para>Checked if a Category marked as a VAT Category</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Balance</term>
+    <listitem>
+      <para>Current balance of Account. Blank for Categories</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Value</term>
+    <listitem>
+      <para>Total yearly value in the Budget. If an Account has Subaccounts and
+        the Account's list of Subaccounts is collapsed the value displayed is
+        the sum of the values for the Account and all of its Subaccounts.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<para>
+  The Account List can be filtered using "Hide unused Categories".  In Budgets
+  this hides any Categories for which no value has been assigned to the Category
+  or any of its Subcategories.
+</para>
+</sect2>
+
+<sect2>
+<title>Assignments</title>
+
+<para>
+  The Assignments area shows the value for the selected Account.
+</para>
+
+<variablelist>
+  <varlistentry>
+    <term>Account</term>
+    <listitem>
+      <para>Displays the name of the selected Account. If the Account is a
+        Subaccount, the full name of the selected Account is displayed in the
+        Account:Subaccount format.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Total</term>
+    <listitem>
+      <para>Displays the total yearly value assigned to the Account</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Include subaccounts</term>
+    <listitem>
+      <para>In Reports show actual income or expenses in Subcategories belonging
+        to the Category against the Category instead of the Subcategory.</para>
+
+      <para>If a Subcategory has a value defined in the Budget the income and
+        expenses are shown against the Subcategory.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Clear</term>
+    <listitem>
+      <para>The Clear button resets the budgeted account value or values to
+        zero.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Period</term>
+    <listitem>
+      <para>The Period radio buttons allow you to select the period for which
+        the value applies</para>
 
       <variablelist>
-        <varlistentry>
-          <term>Name</term>
+	<varlistentry>
+	  <term>Monthly</term>
+	  <listitem>
+	    <para>A single value is entered, specifying the amount per
+              month. This is the default setting.</para>
+	  </listitem>
+	</varlistentry>
 
-          <listitem>
-            <para>Name of the Budget</para>
-          </listitem>
-        </varlistentry>
+	<varlistentry>
+	  <term>Yearly</term>
+	  <listitem>
+	    <para>A single value is entered, specifying the amount per
+              year.</para>
+	  </listitem>
+	</varlistentry>
 
-        <varlistentry>
-          <term>Year</term>
-
-          <listitem>
-            <para>Fiscal year of the Budget</para>
-          </listitem>
-        </varlistentry>
+	<varlistentry>
+	  <term>Individual</term>
+	  <listitem>
+	    <para>Values are specified for each Calendar month. This is used
+              where expense or income is spread irregularly through the
+              year.</para>
+	  </listitem>
+	</varlistentry>
       </variablelist>
 
-      <para>Values from the selected Budget are displayed to the right. To
-      select a different Budget you can click on the Budget in the list.
-      Alternatively, when the list has focus you can select a different
-      Budget using the up and down keys. If you have made changes to a
-      Budget and then select a different budget &kappname; will ask you
-      whether you want to discard the changes.</para>
-
-      <para>There are five buttons above the list of Budgets.</para>
-
-      <variablelist>
-        <varlistentry>
-          <term>New</term>
-
-          <listitem>
-            <para>Create a new budget</para>
-          </listitem>
-        </varlistentry>
-
-        <varlistentry>
-          <term>Rename</term>
-
-          <listitem>
-            <para>Edit the name of the selected Budget.</para>
-
-            <para>You can also edit the name of a Budget by clicking on the name
-            of the selected Budget or double-clicking on the name of a different
-            Budget.</para>
-          </listitem>
-        </varlistentry>
-
-        <varlistentry>
-          <term>Delete</term>
-
-          <listitem>
-            <para>Delete the selected Budget</para>
-          </listitem>
-        </varlistentry>
-
-        <varlistentry>
-          <term>Revert</term>
-
-          <listitem>
-            <para>Reverts the selected Budget to its last stored state.</para>
-          </listitem>
-        </varlistentry>
-
-        <varlistentry>
-          <term>Save</term>
-
-          <listitem>
-            <para>Accepts any unsaved changes to the selected Budget and stores
-            them.</para>
-          </listitem>
-        </varlistentry>
-      </variablelist>
-
-      <para>Additional options are available on a menu accessed by
-      right-clicking on a Budget.</para>
-
-      <variablelist>
-        <varlistentry>
-          <term>New Budget</term>
-
-          <listitem>
-            <para>Create a new, blank Budget.</para>
-          </listitem>
-        </varlistentry>
-
-        <varlistentry>
-          <term>Rename Budget</term>
-
-          <listitem>
-            <para>Rename the selected Budget.</para>
-          </listitem>
-        </varlistentry>
-
-        <varlistentry>
-          <term>Change budget year</term>
-
-          <listitem>
-            <para>Displays a window with a list of years to select a
-            different budget year.</para>
-          </listitem>
-        </varlistentry>
-
-        <varlistentry>
-          <term>Delete budget</term>
-
-          <listitem>
-            <para>Delete the selected Budget.</para>
-          </listitem>
-        </varlistentry>
-
-        <varlistentry>
-          <term>Copy budget</term>
-
-          <listitem>
-            <para>Creates a copy of the selected Budget. The new Budget has
-            the name "Copy of &lt;budget&gt;", where &lt;budget&gt; is the
-            name of the copied Budget.</para>
-          </listitem>
-        </varlistentry>
-      </variablelist>
-    </sect2>
-
-    <sect2>
-      <title>Account List</title>
-
-      <para>The Account List displays the list of Income and Expense
-      Categories. As in other places in &kappname; the list is organized in a
-      tree structure. The list can be expanded or collapsed to show or hide
-      Subcategories within a Category. The Account List has a number of
-      columns:</para>
-
-      <variablelist>
-        <varlistentry>
-          <term>Account</term>
-
-          <listitem>
-            <para>Account name</para>
-          </listitem>
-        </varlistentry>
-
-        <varlistentry>
-          <term>Type</term>
-
-          <listitem>
-            <para>Account Type (Income or Expense)</para>
-          </listitem>
-        </varlistentry>
-
-        <varlistentry>
-          <term>Tax</term>
-
-          <listitem>
-            <para>Checked if a Category included in Tax Reports</para>
-          </listitem>
-        </varlistentry>
-
-        <varlistentry>
-          <term>VAT</term>
-
-          <listitem>
-            <para>Checked if a Category marked as a VAT Category</para>
-          </listitem>
-        </varlistentry>
-
-        <varlistentry>
-          <term>Balance</term>
-
-          <listitem>
-            <para>Current balance of Account. Blank for Categories</para>
-          </listitem>
-        </varlistentry>
-
-        <varlistentry>
-          <term>Value</term>
-
-          <listitem>
-            <para>Total yearly value in the Budget. If an Account has
-            Subaccounts and the Account's list of Subaccounts is collapsed
-            the value displayed is the sum of the values for the Account and
-            all of its Subaccounts.</para>
-          </listitem>
-        </varlistentry>
-      </variablelist>
-
-      <para>The Account List can be filtered using "Hide unused Categories".
-      In Budgets this hides any Categories for which no value has been assigned
-      to the Category or any of its Subcategories.</para>
-    </sect2>
-
-    <sect2>
-      <title>Assignments</title>
-
-      <para>The Assignments area shows the value for the selected
-      Account.</para>
-
-      <variablelist>
-        <varlistentry>
-          <term>Account</term>
-
-          <listitem>
-            <para>Displays the name of the selected Account. If the Account
-            is a Subaccount, the full name of the selected Account is
-            displayed in the Account:Subaccount format.</para>
-          </listitem>
-        </varlistentry>
-
-        <varlistentry>
-          <term>Total</term>
-
-          <listitem>
-            <para>Displays the total yearly value assigned to the
-            Account</para>
-          </listitem>
-        </varlistentry>
-
-        <varlistentry>
-          <term>Include subaccounts</term>
-
-          <listitem>
-            <para>In Reports show actual income or expenses in Subcategories
-            belonging to the Category against the Category instead of the
-            Subcategory.</para>
-
-            <para>If a Subcategory has a value defined in the Budget the
-            income and expenses are shown against the Subcategory.</para>
-          </listitem>
-        </varlistentry>
-
-        <varlistentry>
-          <term>Clear</term>
-
-          <listitem>
-            <para>The Clear button resets the budgeted account value or values
-            to zero.</para>
-          </listitem>
-        </varlistentry>
-
-        <varlistentry>
-          <term>Period</term>
-
-          <listitem>
-            <para>The Period radio buttons allow you to select the period
-            for which the value applies</para>
-
-            <variablelist>
-              <varlistentry>
-                <term>Monthly</term>
-
-                <listitem>
-                  <para>A single value is entered, specifying the amount per
-                  month. This is the default setting.</para>
-                </listitem>
-              </varlistentry>
-
-              <varlistentry>
-                <term>Yearly</term>
-
-                <listitem>
-                  <para>A single value is entered, specifying the amount per
-                  year.</para>
-                </listitem>
-              </varlistentry>
-
-              <varlistentry>
-                <term>Individual</term>
-
-                <listitem>
-                  <para>Values are specified for each Calendar month. This
-                  is used where expense or income is spread irregularly
-                  through the year.</para>
-                </listitem>
-              </varlistentry>
-            </variablelist>
-
-            <para>If a value is or values are already specified and the Period is
-            changed &kappname; will ask whether to use the current total yearly
-            value to assign the new values.</para>
-          </listitem>
-        </varlistentry>
-      </variablelist>
-
-    </sect2>
-
-    <sect2>
-      <title>Update and Revert</title>
-
-      <para>For performance reasons, changes made to a Budget are not saved
-      immediately. Instead, they first have to be stored using the Update button
-      and then permanently saved using the &kappname; Save.</para>
-
-      <para>When a Budget's values are first modified the Update and Revert
-      buttons are enabled.  Multiple changes can be made to the Budget.  Pressing
-      Update will store the changes, disable the Update and Revert buttons
-      and enable the &kappname; Save.</para>
-
-      <para>The &kappname; Save only saves changes that have been stored using
-      the Update button. Thus, if you have modified a Budget but not yet stored
-      the changes &kappname; Save will not affect the modified Budget and the
-      Update and Revert buttons remain enabled.</para>
-
-      <para>Revert undoes any changes made to a Budget since the last Update
-      and disables the Update and Revert buttons.</para>
-
-      <para>Changes stored using Update but not yet saved using &kappname; Save
-      can only be reverted by reloading the &kappname; file.</para>
-    </sect2>
-  </sect1>
-
-  <sect1 id="budget.details.reports">
-    <title>Budget Reports</title>
-
-    <para>&kappname; provides a number of reports to compare actual income and
-    expenses against Budgets. These are listed in Reports under "6.
-    Budgeting". There are two types of Reports:</para>
-
-    <variablelist>
-      <varlistentry>
-        <term>(1)</term>
-
-        <listitem>
-          <para>Reports displaying values from a Budget: Monthly Budget
-          Displays the monthly values from a Budget. Yearly Budget Displays
-          the monthly values from a Budget, with yearly total.</para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry>
-        <term>(2)</term>
-
-        <listitem>
-          <para>Reports comparing values from a Budget to actual income and
-          expenses: Budget vs. Actual This Year Month-by-month comparison
-          for the current year so far, with total. Monthly Budget vs. Actual
-          Month-by-month comparison, defaulting to the current month. Yearly
-          Budgeted vs. Actual Month-by-month comparison for the whole of the
-          current year, with total. These reports provide a base from which
-          custom reports can be created by changing the date range and
-          Budget. Of the Budget reports, only the "Budget vs. Actual This
-          Year" does not allow the Budget to be changed.</para>
-        </listitem>
-      </varlistentry>
-    </variablelist>
-  </sect1>
+      <para>
+        If a value is or values are already specified and the Period is changed
+        &kappname; will ask whether to use the current total yearly value to
+        assign the new values.
+      </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+</sect2>
+
+<sect2>
+<title>Update and Revert</title>
+
+<para>
+  For performance reasons, changes made to a Budget are not saved
+  immediately. Instead, they first have to be stored using the Update button and
+  then permanently saved using the &kappname; Save.
+</para>
+
+<para>
+  When a Budget's values are first modified, the Update and Revert buttons are
+  enabled.  Multiple changes can be made to the Budget.  Pressing Update will
+  store the changes, disable the Update and Revert buttons and enable the
+  &kappname; Save.
+</para>
+
+<para>
+  The &kappname; Save only saves changes that have been stored using the Update
+  button. Thus, if you have modified a Budget but not yet stored the changes
+  &kappname; Save will not affect the modified Budget and the Update and Revert
+  buttons remain enabled.
+</para>
+
+<para>
+  Revert undoes any changes made to a Budget since the last Update and disables
+  the Update and Revert buttons.
+</para>
+
+<para>
+  Changes stored using Update but not yet saved using &kappname; Save can only
+  be reverted by reloading the &kappname; file.
+</para>
+</sect2>
+</sect1>
+
+<sect1 id="budget.details.reports">
+<title>Budget Reports</title>
+
+<para>
+  &kappname; provides a number of reports to compare actual income and expenses
+  against Budgets. These are listed in Reports under "Budgeting". There are two
+  types of Reports:
+</para>
+
+<variablelist>
+  <varlistentry>
+    <term>Budget only</term>
+    <listitem><para>Reports displaying values from a Budget: Monthly Budget
+      Displays the monthly values from a Budget. Yearly Budget Displays the
+      monthly values from a Budget, with yearly total.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Compare Budget and Actual</term>
+    <listitem><para>Reports comparing values from a Budget to actual income and
+      expenses: Budget vs. Actual This Year Month-by-month comparison for the
+      current year so far, with total. Monthly Budget vs. Actual Month-by-month
+      comparison, defaulting to the current month. Yearly Budgeted vs. Actual
+      Month-by-month comparison for the whole of the current year, with
+      total. These reports provide a base from which custom reports can be
+      created by changing the date range and Budget. Of the Budget reports, only
+      the "Budget vs. Actual This Year" does not allow the Budget to be
+      changed.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect1>
 </chapter>

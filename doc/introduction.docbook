@@ -1,27 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <chapter id="introduction">
+<chapterinfo>
+  <date>2009-08-05</date>
+  <releaseinfo>1.0</releaseinfo>
+</chapterinfo>
+
 <title>Introduction</title>
 
 <sect1 id="what-is-kmymoney">
 <title>What is &kappname;?</title>
 
 <para>
-Put simply, &kappname; is a personal finance manager for KDE.  It enables users of open source operating systems to keep careful track of their personal finance by providing a broad array of financial features and tools.
+  Put simply, &kappname; is a personal finance manager for &kde;.  It enables
+  users of open source operating systems to keep careful track of their personal
+  finances by providing a broad array of financial features and tools.
 </para>
 
-<para>The principal goals of the project are:</para>
+<para>
+  The principal goals of the project are:
+</para>
+
 <itemizedlist>
-<listitem><formalpara><title>Feature Parity</title><para>
-&kappname; intends to provide all important features found in the commercially-available personal finance managers.  Although this release is closer than ever to that goal, there is still work to be done.
-</para></formalpara>
-</listitem>
+  <listitem>
+    <formalpara><title>Feature Parity</title>
+      <para>
+        &kappname; intends to provide all important features found in the
+        commercially-available personal finance managers.  Although this release
+        is closer than ever to that goal, there is still work to be done.
+      </para>
+    </formalpara>
+  </listitem>
 
-<listitem><formalpara><title>Ease of Use.</title><para>
-&kappname; strives to be the easiest open source personal finance manager to use, especially for the non-technical user.
-</para></formalpara></listitem>
+  <listitem>
+    <formalpara><title>Ease of Use.</title>
+      <para>
+        &kappname; strives to be the easiest open source personal finance
+        manager to use, especially for the non-technical user.
+      </para>
+    </formalpara>
+  </listitem>
 
-<listitem><formalpara><title>Correctness.</title><para>
-Based on tried and tested double entry accounting principles &kappname; ensures that your finances are kept in correct order.
-</para></formalpara></listitem>
+  <listitem>
+    <formalpara><title>Correctness.</title>
+      <para>
+        Based on tried and tested double entry accounting principles &kappname;
+        ensures that your finances are kept in correct order.
+      </para>
+    </formalpara>
+  </listitem>
 </itemizedlist>
 
 </sect1>
@@ -30,11 +56,16 @@ Based on tried and tested double entry accounting principles &kappname; ensures 
 <title>What &kappname; is not</title>
 
 <para>
-As a personal finance manager, &kappname; is not intended to scale to the needs of an average business.  However, it would be possible to create client / supplier / document features through plugins.
+  As a personal finance manager, &kappname; is not intended to scale to the
+  needs of an average business.  However, it would be possible to create client
+  / supplier / document features through plugins.
 </para>
 
 <para>
-&kappname; is not simply a clone of the commercially-available personal finance programs. Although many of the features present in &kappname; can be found in other similar applications, &kappname; strives to present an individual and unique view of your finances.
+  &kappname; is not simply a clone of the commercially-available personal
+  finance programs. Although many of the features present in &kappname; can be
+  found in other similar applications, &kappname; strives to present an
+  individual and unique view of your finances.
 </para>
 
 </sect1>

@@ -1,59 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <chapter id="details.investments">
 <chapterinfo>
-<authorgroup>
-<author>
-<firstname>Ace</firstname>
-<surname>Jones</surname>
-<affiliation><address><email>acejones@users.sourceforge.net</email></address></affiliation>
-</author>
-</authorgroup>
-<date>2005-07-20</date>
-<releaseinfo>0.8</releaseinfo>
+  <authorgroup>
+    <author>
+      <firstname>Ace</firstname>
+      <surname>Jones</surname>
+      <affiliation>
+        <address><email>acejones@users.sourceforge.net</email></address>
+      </affiliation>
+    </author>
+  </authorgroup>
+  <date>2009-06-14</date>
+  <releaseinfo>1.0</releaseinfo>
 </chapterinfo>
 
 <title>Investments</title>
 
 <sect1 id="details.investments.overview">
+<title>Investments in &kappname;</title>
 
-            <title>Investments in &kappname;</title>
+<sect2>
+<title>Investments</title>
 
-<sect2><title>Investments</title>
 <para>
-Investments are instruments for investing money that are traded on a market.
-Stocks, bonds, and mutual funds are the most common investments; so they're the ones supported most directly.
-Futures, commodities, options and more complex derivatives are also sometimes used, but &kappname; has no special functionality for them.  As long as they behave like a stock or a bond, they can be tracked easily.
+  Investments are instruments for investing money that are traded on a market.
+  Stocks, bonds, and mutual funds are the most common investments; so they are
+  the ones supported most directly.  Futures, commodities, options, and more
+  complex derivatives are also sometimes used, but &kappname; has no special
+  functionality for them.  As long as they behave like a stock or a bond, they
+  can be tracked easily.
 </para>
 </sect2>
 
-<sect2><title>Base Currency</title>
+<sect2>
+<title>Base Currency</title>
 <para>
-Each investment has a Base Currency.
-This is the currency it's traded in.
-When a price quote is entered for an investment, the currency of the value given is always its base currency.
-A stock on the NYSE would be in US dollars, and one on the Australian markets would be in Australian dollars.
+  Each investment has a Base Currency.  This is the currency in which it is
+  traded.  When a price quote is entered for an investment, the currency of the
+  value given is always its base currency.  A stock on the NYSE (New York Stock
+  Exchange) would be in US dollars, and one on an Australian market would be in
+  Australian dollars.
 </para>
 </sect2>
 
-<sect2><title>Investment Accounts</title>
+<sect2>
+<title>Investment Accounts</title>
 <para>
-Investment Accounts hold a collection of investments.  
-Transactions, such as buys and sells, of those investments are contained in an Investment Account.
-All transactions in an Investment account must relate to a specific investment.
-There is no separate &quot;cash balance&quot; in an investment account.
-For that, you need a Brokerage Account.
+  Investment Accounts hold a collection of investments.  An Investment account
+  contains transactions, such as buys and sells, of those investments.  All
+  transactions in an Investment account must relate to a specific investment.
+  There is no separate <quote>cash balance</quote> in an investment account.  For
+  that, you need a Brokerage Account.
 </para>
 </sect2>
 
-<sect2><title>Brokerage Accounts</title>
+<sect2>
+<title>Brokerage Accounts</title>
 <para>
-Often an investment account has an associated Brokerage Account.
-This is also sometimes referred to as a &quot;Cash Account&quot;.
-Investment accounts cannot contain cash transactions, like a transfer from your bank.
-When a stock is sold, the proceeds are typically placed in the Brokerage Account.
+  An investment account often has an associated Brokerage Account.  This is also
+  sometimes referred to as a <quote>Cash Account</quote>.  Investment accounts
+  cannot contain cash transactions, like a transfer from your bank.  When a
+  stock is sold, the proceeds are typically placed in the Brokerage Account.
 </para>
 
 <para>
-When you create an Investment Account, you have the option of creating an associated Brokerage Account with it.
+  When you create an Investment Account, you have the option of creating an
+  associated Brokerage Account with it.
 </para>
 
 </sect2>
@@ -61,105 +73,153 @@ When you create an Investment Account, you have the option of creating an associ
 </sect1>
 
 <sect1 id="details.investments.investment">
-
-            <title>Creating an Investment Account</title>
+<title>Creating an Investment Account</title>
 
 <para>
-  The first step on the path to working with investments is to create an account to hold your investments.
-  Choose   
-<menuchoice>
-<guimenu>Account</guimenu>
-<guimenuitem>Add new account...</guimenuitem>
-</menuchoice>
- to begin the process of adding a new account.  Create an account as usual, making sure to choose &quot;Investment&quot; as the type of account.
+  The first step on the path to working with investments is to create an account
+  to hold your investments. Choose <menuchoice><guimenu>Account</guimenu>
+  <guimenuitem>New account...</guimenuitem></menuchoice> to begin the process of
+  adding a new account.  Create an account as usual, making sure to choose
+  <quote>Investment</quote> as the type of account.
 </para>
+
 <para>
-  To work with the new investment account, navigate to the <guibutton>Investments</guibutton> view, 
-  and choose the account you have just created from the <guilabel>Select Account</guilabel> drop-down box.
+  To work with the new investment account, navigate to the
+  <guibutton>Investments</guibutton> view, and choose the account you have just
+  created from the <guilabel>Select Account</guilabel> dropdown box.
 </para>
 </sect1>
             
 <sect1 id="details.investments.securities">
+<title>Adding Investments to Your Account</title>
 
-            <title>Adding Investments to Your Account</title>
 <para>
-  To add individual Investments to your Investment Account, navigate to the <guibutton>Investments</guibutton> view, 
-  and choose the account where the investment is held from the <guilabel>Select Account</guilabel> drop-down box.
-  Ensure you are looking at the <guibutton>Investment Summary</guibutton> tab.
+  To add individual Investments to your Investment Account, navigate to
+  the <guibutton>Investments</guibutton> view, and choose the account where the
+  investment is held from the <guilabel>Select Account</guilabel> drop-down box.
 </para>
+
 <para>
-  Right-click the mouse in the empty space in the view.  
-  This brings up the <guimenu>Investment Options</guimenu> context menu.  
-  Choose <guimenuitem>New...</guimenuitem> from this menu.
-  This launches the <guilabel>New Investment Wizard</guilabel> which you use to create your new Investment.
+  Right-click the mouse in the empty space in the view.  This brings up
+  the <guimenu>Investment Options</guimenu> context menu. Choose
+  <guimenuitem>New...</guimenuitem> from this menu.  This launches the
+  <guilabel>New Investment Wizard</guilabel> which you use to create your new
+  Investment.
 </para>
 
 <sect2 id="details.investments.newinvestmentwizard">
+<title>New Investment Wizard</title>
 
-	<title>New Investment Wizard</title>
+<para>
+  The first thing you'll be asked to enter is the type of investment, whether
+  it's a stock, bond, etc.
+</para>
 
-<para>The first thing you'll be asked to enter is the type of investment, whether it's a stock, bond, etc.</para>
-
-<para>Next, the investment details page is presented.  The following information is entered on this page:</para>
+<para>
+  Next, the investment details page is presented.  The following information is
+  entered on this page:
+</para>
 
 <itemizedlist>
-<listitem><para>Full name.  The friendly, readable name of the investment you're creating, e.g. &quot;Advanced Micro Devices, Inc.&quot;</para></listitem>
-<listitem><para>Trading Symbol.  The ticker symbol used to identify the investment on whatever market it trades.  &kappname; requires a trading symbol for all investments, however some investments do not have symbols.  In this case, you will need to make up a symbol for it.</para></listitem>
-<listitem><para>Fraction.  The degree of precision to which your holdings are measured.  For example, in the US most mutual funds measure holdings to three decimal places, so you would enter 1000 in this field.  Stocks are often measured to only whole units, so you could enter 1 for a stock like this.</para></listitem>
-<listitem><para>Trading market.  Where the stock trades.  This is an optional field which is provided for your convenience.  This information is not used anywhere else in &kappname;.</para></listitem>
-<listitem><para>Identification.  An optional field to enter additional identification information you might like to keep track of.  Again, this information is not used anywhere else.</para></listitem>
-<listitem><para>Trading currency: The underlying currency in which this investment trades on its market.</para></listitem>
+  <listitem><para> Trading Symbol.  The ticker symbol used to identify the
+    investment on whatever market it trades.  &kappname; requires a trading
+    symbol for all investments; however some investments do not have symbols.
+    In this case, you will need to make up a symbol for it.
+  </para></listitem>
+
+  <listitem><para> Full name.  The friendly, readable name of the investment
+    you're creating, e.g., <quote>Advanced Micro Devices, Inc.</quote> This name is
+    also referred to as the security.
+  </para></listitem>
+
+  <listitem><para> Fraction.  The degree of precision to which your holdings are
+    measured.  For example, in the US most mutual funds measure holdings to
+    three decimal places, so you would enter 1000 in this field.  Stocks are
+    often measured to only whole units, so you could enter 1 for a stock like
+    this.
+  </para></listitem>
+  
+  <listitem><para> Trading market.  Where the stock trades.  This is an optional
+    field which is provided for your convenience.  This information is not used
+    anywhere else in &kappname;.
+  </para></listitem>
+
+  <listitem><para>Identification.  An optional field to enter additional
+    identification information you might like to keep track of.  Again, this
+    information is not used anywhere else.
+  </para></listitem>
+
+  <listitem><para>Trading currency. The underlying currency in which this
+    investment trades on its market.
+  </para></listitem>
+
+  <listitem><para> Price entry. Choose whether the price will be entered as an
+    individual price, or as the total for all shares.
+  </para></listitem>
 </itemizedlist>
 
 <para>
-  If you are using Online Quotes, ensure that the symbol exactly matches the symbol used by your quote source.
-  Yahoo covers most of the world's markets, and requires a suffix on the end of symbols outside the US.
-  For example, Rubicon Limited on the New Zealand market should be entered as &quot;RBC.NZ&quot;.  
+  If you are using Online Quotes, ensure that the symbol exactly matches the
+  symbol used by your quote source.  Yahoo covers most of the world's markets,
+  and requires a suffix on the end of symbols outside the US.  For example,
+  Rubicon Limited on the New Zealand market should be entered as
+  <quote>RBC.NZ</quote>.
 </para>
 
-<para>Finally, you're presented with the Online Update screen.  This is where you tell &kappname; how you would like to update the prices of your investment.
-The following items are set here:</para>
+<para>
+  Finally, you're presented with the Online Update screen.  This is where you
+  tell &kappname; how you would like to update the prices of your investment.
+  The following items are set here:
+</para>
 
 <itemizedlist>
-<listitem><para>Use Finance::Quote.  This is an option for GnuCash users who are used to this style of quotes.  Most users can leave this unchecked.</para></listitem>
-<listitem><para>Online Source.  The online source you'd like to use for this particular investment.  The most common choice is &quot;Yahoo&quot;.  Try that first, and if the investment cannot be found using this source, then experiment with the others.</para></listitem>
-<listitem><para>Factor.  A multiplier that should be applied to quotes retrieved for this investment.  This is most commonly needed for UK stocks where the price quoted is in pence (1/100), and the stock is denominated in pounds.  In this case, enter 100 for the Factor.</para></listitem>
+  <listitem>
+    <para>
+      Use Finance::Quote.  This is an option for GnuCash users who are used to
+      this style of quotes.  Most users can leave this unchecked.
+    </para>
+  </listitem>
 
+  <listitem>
+    <para>
+      Online Source.  The online source you'd like to use for this particular
+      investment.  The most common choice is <quote>Yahoo</quote>.  Try that
+      first, and if the investment cannot be found using this source, then
+      experiment with the others.
+    </para>
+  </listitem>
+
+  <listitem>
+    <para>
+      Factor.  A multiplier that should be applied to quotes retrieved for this
+      investment.  This is most commonly needed for UK stocks where the price
+      quoted is in pence (1/100), and the stock is denominated in pounds.  In
+      this case, enter 0,01 for the Factor.
+    </para>
+  </listitem>
 </itemizedlist>
 </sect2>
 </sect1>
 
-<sect1 id="details.investments.summary">
-
-            <title>Investment Summary Information</title>
+<sect1 id="details.investments.edit">
+<title>Editing an Investment</title>
 
 <para>
-  The Investment Summary tab lists your current holdings in this account, along with their price and value.
+  The Investment view window lists your current holdings in this account, along
+  with their symbol, value, and price.  Right-click the mouse on any of the
+  investments to bring up the <guimenu>Investment Options</guimenu> context
+  menu, where you have the option to add, edit, or delete individual investments
+  from this account. Also, you can update the price of your investments here
+  either manually or via their online source. In addition, it is possible to
+  close an empty account, or to reopen a closed account.
 </para>
-<para>
-  It's also the place to add, edit or delete individual investments from this account.
-  Likewise, you can update the price of your investments here either manually or via their online source.
-  To perform any of these, right-click the mouse on any of the investments to bring up the <guimenu>Investment Options</guimenu> context menu.
-</para>
+</sect1>
+
+<sect1 id="details.investments.ledger">
+<title>Investment Transactions</title>
 
 <para>
 	<screenshot>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="investments_summarytab.png" format="PNG" />
-	</imageobject>
-	<textobject>
-	<phrase>Investments Summary Tab</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
-</para>
-
-</sect1>
-
-<sect1 id="details.investments.ledger"><title>Investment Transactions</title>
-<para>
-<screenshot>
 	<screeninfo>Investment Transaction Form</screeninfo>
 	<mediaobject>
 	<imageobject>
@@ -169,88 +229,159 @@ The following items are set here:</para>
 	<phrase>Investment Transaction Form</phrase>
 	</textobject>
 	</mediaobject>
-</screenshot>
+	</screenshot>
 </para>
-<para>
-The investment ledger is almost the same as the <link linkend="details.ledgers">ledger</link> for other kinds of accounts.
-Investment transactions have some additional elements:
-</para>
-<orderedlist numeration="upperalpha">
-	<listitem><para>Activity</para></listitem>
-	<listitem><para>Symbol Name</para></listitem>
-	<listitem><para>Shares &amp; Price</para></listitem>
-	<listitem><para>Fees</para></listitem>
-	<listitem><para>Account</para></listitem>
-</orderedlist>
 
-<sect2><title>Activity</title>
 <para>
-The Activity for an investment transaction describes what action is happening to the stock.
-The following activities are supported:
+  Investment transactions are entered and edited in the
+  <link linkend="details.ledgers">ledger</link> view, as with other kinds of
+  accounts. However, the fields are different, and vary depending on the
+  investment transaction type or activity.  Investment transactions have some
+  additional elements:
 </para>
 
 <itemizedlist>
-	<listitem><para>Buy/Sell.  Use to record purchases or sales of individual investments.  This action requires an account to transfer the funds from/to.</para></listitem>
-	<listitem><para>Dividend/Yield.  Also known as a &quot;Cash Dividend&quot;, this action is used for when you receive an interest or dividend disbursement from your investment. This action requires an account to transfer the funds from/to.</para></listitem>
-	<listitem><para>Reinvest Dividend.  This is a dividend where the proceeds are re-invested back into the investment.</para></listitem>
-	<listitem><para>Add/Remove Shares.  A simple increase or decrease in your balance.  This should be used very rarely, because it's uncommon for shares to just show up in your account (or disappear) unless it's a purchase or a sale.</para></listitem>
-	<listitem><para>Split Shares.  Used when the stock is split.  Enter the ratio of the split in the &quot;Split Ratio&quot; field.  For example, in a 3:2 split, enter 1.5</para></listitem>
+	<listitem><para>Activity</para></listitem>
+	<listitem><para>Security</para></listitem>
+	<listitem><para>Account</para></listitem>
+	<listitem><para>Shares, Price, &amp; Total Amount</para></listitem>
+	<listitem><para>Fees</para></listitem>
+	<listitem><para>Interest category</para></listitem>
 </itemizedlist>
 
+<sect2>
+<title>Activity</title>
+<para>
+  The Activity for an investment transaction describes what action is happening
+  to the stock.  The following activities are supported:
+</para>
+
+<itemizedlist>
+  <listitem>
+    <para>
+      Buy/Sell.  Use to record purchases or sales of individual investments.
+      This action requires an account to transfer the funds from/to.
+    </para>
+  </listitem>
+
+  <listitem>
+    <para>
+      Dividend/Yield.  Also known as a <quote>Cash Dividend</quote>, this action
+      is used for when you receive an interest or dividend disbursement from
+      your investment. This action requires an account to transfer the funds
+      from/to.
+    </para>
+  </listitem>
+
+  <listitem>
+    <para>
+      Reinvest Dividend.  This is a dividend where the proceeds are re-invested
+      back into the investment.
+    </para>
+  </listitem>
+
+  <listitem>
+    <para>
+      Add/Remove Shares.  A simple increase or decrease in your balance.  This
+      should be used very rarely, because it's uncommon for shares to just show
+      up in your account (or disappear) unless it's a purchase or a sale.
+    </para>
+  </listitem>
+
+  <listitem>
+    <para>
+      Split Shares.  Used when the stock is split.  Enter the ratio of the split
+      in the <quote>Split Ratio</quote> field.  For example, in a 3:2 split,
+      enter 1.5
+    </para>
+  </listitem>
+</itemizedlist>
 </sect2>
 
-<sect2><title>Symbol Name</title>
+<sect2>
+<title>Security</title>
 <para>
-Each investment transaction must be associated with an individual investment.
-Choose the investment name when adding or editing a transaction.
-The symbol will be displayed when viewing it.
+  Each investment transaction must be associated with an individual security,
+  which is here just another name for an investment.  Choose the investment name
+  when adding or editing a transaction.  The symbol will be displayed when
+  viewing it.
 </para>
 </sect2>
 
-<sect2><title>Shares, Price &amp; Total Amount</title>
+<sect2>
+<title>Account</title>
 <para>
-For buy, sell, and cash dividend transactions, the number of shares, the price, and the total amount of the transaction must be established.
-You can enter any two of these, and &kappname; will calculate the third.
-It's usually best to enter just the total amount and the shares, because these are the known facts of the transaction.
-The price can be calculated from these.
+  For any transactions which generate or require money, you must enter the
+  account where the money is transferred to/from.  If your investment account
+  has an associated brokerage account, it's usually best to transfer the funds
+  there.  This applies to funds for purchase or sale of the investment, as well
+  as for fees paid or interest or dividends earned.
 </para>
 </sect2>
 
-<sect2><title>Fees</title>
+<sect2>
+<title>Shares, Price &amp; Total Amount</title>
 <para>
-With many investment transactions you can include the fees (or commission) you paid the broker.
-There is a space for the amount of the fee and the category to which you wish to assign it.
+  For buy, sell, and cash dividend transactions, the number of shares, the price
+  per share, and the total amount of the transaction must be established.  You
+  can enter any two of these, and &kappname; will calculate the third.  It's
+  usually best to enter just the total amount and the number of shares, because
+  these are the known facts of the transaction.  The price per share can be
+  calculated from these.
 </para>
 </sect2>
 
-<sect2><title>Account</title>
+<sect2>
+<title>Fees</title>
 <para>
-For any transactions which generate or require money, you must enter the account where the money is transferred from/to.
-If your investment account has an associated brokerage account, it's usually best to transfer the funds there.
+  With many investment transactions you can include the fees (or commission) you
+  paid the broker.  If you enter a category for the fee, then a field will be
+  shown to the right where you can enter the amount of the fee.  If you need to
+  enter more than one fee for the transaction, you can use
+  the <link linkend="details.ledgers.split">Split Transactions</link> feature.
+  In this case, when you complete entering all the splits, the total amount of
+  the fees will be shown to the right.
+</para>
+</sect2>
+
+<sect2>
+<title>Interest</title>
+<para>
+  This is how you enter an interest or dividend payment from an invenstment.  As
+  with fees, if  you enter a category, then  a field will be shown  to the right
+  where  you can  enter the  amount.   You can  also use  the split  transaction
+  feature, if required.
 </para>
 </sect2>
 
 </sect1>
 
-<sect1 id="details.investments.foreign"><title>Working With Foreign Investments</title>
+<sect1 id="details.investments.foreign">
+<title>Working With Foreign Investments</title>
+
 <para>
-Now that &kappname; supports multiple currencies and investments, you'd probably like to combine the two.
-Doing so requires extra care.
-As noted above, when you added an investment, you had to specify its trading currency. 
-This might not be the same as your base currency, and it also might not be the same as the account in which you hold the stock or the account where you transfer your funds to/from for buys/sells.
+  &kappname; supports multiple currencies and investments, and you may want to
+  combine the two.  However, doing so requires extra care.  As noted above, when
+  you added an investment, you had to specify its trading currency.  This might
+  not be the same as your base currency, and it also might not be the same as
+  the account in which you hold the stock or the account where you transfer your
+  funds to/from for buys/sells.
 </para>
+
 <para>
-Consider a hypothetical case.  
-Your base currency is USD.
-You have an investment account in EUR, and a brokerage account also in EUR.
-In that account, you hold shares of TietoEnator, which is traded in SEK.
+  Consider a hypothetical case.  Your base currency is USD.  You have an
+  investment account in EUR, and a brokerage account also in EUR.  In that
+  account, you hold shares of TietoEnator, which is traded in SEK.
 </para>
+
 <para>
-When you enter a buy transaction on this investment, use SEK as the currency.
-So if you buy 100 shares at a price of SEK 248.00, for a total of SEK 24,800.00, enter these values in the transaction.
+  When you enter a buy transaction on this investment, use SEK as the currency.
+  So if you buy 100 shares at a price of SEK 248.00, for a total of SEK
+  24,800.00, enter these values in the transaction.
 </para>
+
 <para>
-<screenshot>
+	<screenshot>
 	<screeninfo>Currency Warning</screeninfo>
 	<mediaobject>
 	<imageobject>
@@ -260,13 +391,16 @@ So if you buy 100 shares at a price of SEK 248.00, for a total of SEK 24,800.00,
 	<phrase>Currency Warning</phrase>
 	</textobject>
 	</mediaobject>
-</screenshot>
+	</screenshot>
 </para>
+
 <para>
-When you choose the brokerage account to fund the transfer, you'll be warned that it's in a different currency.
+  When you choose the brokerage account to fund the transfer, you'll be warned
+  that it's in a different currency.
 </para>
+
 <para>
-<screenshot>
+	<screenshot>
 	<screeninfo>Exchange Rate Editor</screeninfo>
 	<mediaobject>
 	<imageobject>
@@ -276,100 +410,137 @@ When you choose the brokerage account to fund the transfer, you'll be warned tha
 	<phrase>Exchange Rate Editor</phrase>
 	</textobject>
 	</mediaobject>
-</screenshot>
+	</screenshot>
 </para>
+
 <para>
-When you finish the transaction, you will be prompted for a price update to the investment account's currency, in this case, SEK -> EUR.  Review the documentation on <link linkend="details.currencies.prices">Entering Prices Manually</link> for more information on the price dialog.
+  When you finish the transaction, you will be prompted for a price update to
+  the investment account's currency, in this case, SEK -> EUR.  Review the
+  documentation on <link linkend="details.currencies.prices">Entering Prices
+  Manually</link> for more information on the price dialog.
 </para>
+
 <para>
-If you then switch over to the brokerage account, you will see the transaction in EUR, or 2,430.48 in this case.
+  If you then switch over to the brokerage account, you will see the transaction
+  as EUR 2,254.54, assuming an exchange rate is 11.0000 SEK / EUR.
 </para>
 </sect1>
-<sect1 id="details.investments.prices"><title>Updating Prices</title>
-<para>
-You can enter prices for your investments using the same
-<link linkend="details.currencies.prices">Price Editor</link> as used for currencies.  
-Or you can fetch them electronically, using <link linkend="details.investments.onlinequotes">Online Price Quotes</link>.
-</para>
-</sect1>
 
-<sect1 id="details.investments.onlinequotes">
+<sect1 id="details.investments.prices">
+<title>Updating Prices</title>
+<para>
+  There are two ways of updating the prices for your investments.  You can
+  either enter the new price manually or have &kappname; fetch it from the web.
 
-						<title>Online Price Quotes</title>
+</para>
 
-<sect2><title>How Online Quotes Work</title>
+<sect2>
+<title>Manual Price Updates</title>
 <para>
-	KMyMoney has the ability to download the latest prices for your investments and currencies via the web.
-	At your request, it will fetch a page from the web that contains the latest price for each item.
-	By default, prices are fetched from finance.yahoo.com, and are subject to the terms and conditions of that site.
-</para>
-<para>
-	The online quote lookup uses the investment's trading symbol to find the price.  
-	Therefore, it's important to set the symbol correctly.
-	Yahoo supports stocks from most major world markets, so it's usually just a matter of finding the correct symbol.
-	For example, TietoEnator trades on the Stockholm Stock Exchange market, and its Yahoo symbol is TIEN.ST.
-</para>
-<para>
-	To find the trading symbol for a security supported by Yahoo, use the &quot;Symbol Lookup&quot; feature at http://finance.yahoo.com.
+  You can enter prices for your investments using the same
+  <link linkend="details.currencies.prices">Price Editor</link> as used for
+  currencies.
 </para>
 </sect2>
 
-<sect2><title>Assigning a Quote Source</title>
+<sect2 id="details.investments.onlinequotes">
+<title>Online Price Quotes</title>
+<para>
+  &kappname; has the ability to download the latest prices for your investments
+  and currencies via the web.  
+</para>
+
+<sect3>
+<title>How Online Quotes Work</title>
+<para>
+  At your request, &kappname; will fetch a page from the web that contains the
+  latest price for each item.  By default, prices are fetched from
+  http://finance.yahoo.com, and are subject to the terms and conditions of that
+  site.
+</para>
 
 <para>
-	In order to get online price quotes, you first have to enable it for each investment or currency you want updated by setting a &quot;Online Quote Source&quot;.
-	This is the name of the service from which the quote should be fetched.  KMyMoney ships with several sources to choose from.  
-	Yahoo is the recommended default source, and should work for most investments and all currencies.
+  The online quote lookup uses the investment's trading symbol to find the
+  price.  Therefore, it's important to set the symbol correctly.  Yahoo supports
+  stocks from most major world markets, so it's usually just a matter of finding
+  the correct symbol.  For example, TietoEnator trades on the Stockholm Stock
+  Exchange market, and its Yahoo symbol is TIEN.ST.
 </para>
-<para>
-	To assign a quote source to an investment, navigate to the investment summary view for the account in which the security is held.
-	Edit the security by right-clicking it and selecting <guibutton>Edit</guibutton>.
-	Choose the <guibutton>Quote Source</guibutton> tab.  
-	Pick the appropriate source from the drop-down menu.
-</para>
-<para>
-	Later versions of &kappname; contain support for the Finance::Quote package for obtaining
-	online quotes. This is intended primarily as a convenience for those users converting
-	from the GnuCash finance package, which uses it as its native method. If you do select this
-	option, you should see a different list of sources, those supported by Finance::Quote. If
-	the list is empty, it suggests that the package is not properly installed.
-	See their web site at
-	<ulink url="http://finance-quote.sourceforge.net">
-	http://finance-quote.sourceforge.net</ulink>
-	for more information.
-</para>
-</sect2>
-
-<sect2><title>Adjusting a quote</title>
 
 <para>
-	Some online sources do not report the price in a base quantity (e.g.
-	EUR) but in a fraction (e.g. Cent). Using this information as price
-	will produce wrong values for your investments.
+  To find the trading symbol for a security supported by Yahoo, use the
+  <quote>Symbol Lookup</quote> feature at http://finance.yahoo.com.
 </para>
-<para>
-	If this is the case for your online source, you can use the
-	<guilabel>Factor</guilabel>
-	field to enter an adjusting factor. For the above mentioned example
-	the factor would be 0.01.
-</para>
-<para>
-	The <guilabel>Factor</guilabel> field is only available if a
-	<guibutton>Quote Source</guibutton> has been selected.
-</para>
-</sect2>
+</sect3>
 
-<sect2><title>Fetching Quotes</title>
+<sect3>
+<title>Assigning a Quote Source</title>
 
 <para>
-	Typically, you will update the prices for all your investments and currencies at once. 
-  Choose the   
-  <menuchoice>
-<guimenu>Tools</guimenu>
-<guimenuitem>Update Stock and Currency Prices...</guimenuitem> </menuchoice> menu option to bring up the online price quotes dialog.  Press <guibutton>Update All</guibutton> to fetch quotes for all investments and currencies in your &kappname; file.
+  In order to get online price quotes, you first have to enable it for each
+  investment or currency you want updated, by setting a <quote>Online Quote
+  Source</quote>.  This is the name of the service from which the quote should
+  be fetched.  KMyMoney ships with several sources to choose from.  Yahoo is the
+  recommended default source, and should work for most investments and all
+  currencies.
 </para>
+
 <para>
-<screenshot>
+  To assign a quote source to an investment, navigate to the investment summary
+  view for the account in which the security is held.  Edit the security by
+  right-clicking it and selecting <guimenuitem>Edit Investment
+  ...</guimenuitem>.  In the Investment Detail Wizard,
+  click <guibutton>Next</guibutton> twice, for the Online Update section.  In
+  the Online source dropdown box, select the online source.
+</para>
+
+<para>
+  Versions of &kappname; starting with 0.9 contain support for the
+  Finance::Quote package for obtaining online quotes. This is intended primarily
+  as a convenience for those users converting from the GnuCash finance package,
+  which uses it as its native method. If you do select this option, you should
+  see a different list of sources, those supported by Finance::Quote. If the
+  list is empty, it suggests that the package is not properly installed.  See
+  their web site at
+  <ulink url="http://finance-quote.sourceforge.net">
+  http://finance-quote.sourceforge.net</ulink> for more information.
+</para>
+</sect3>
+
+<sect3>
+<title>Adjusting a quote</title>
+
+<para>
+  Some online sources do not report the price in a base quantity (e.g., EUR) but
+  in a fraction (e.g., Cent). Using this information as price will produce wrong
+  values for your investments.
+</para>
+
+<para>
+  If this is the case for your online source, you can use the
+  <guilabel>Factor</guilabel> field to enter an adjusting factor. For the above
+  mentioned example the factor would be 0.01.
+</para>
+
+<para>
+  The <guilabel>Factor</guilabel> field is only available if a
+  <guibutton>Quote Source</guibutton> has been selected.
+</para>
+</sect3>
+
+<sect3>
+<title>Fetching Quotes</title>
+
+<para>
+  Typically, you will update the prices for all your investments and currencies
+  at once.  Choose the <menuchoice><guimenu>Tools</guimenu><guimenuitem>Update
+  Stock and Currency Prices...</guimenuitem></menuchoice> menu option to bring
+  up the online price quotes dialog.  Press <guibutton>Update All</guibutton> to
+  fetch quotes for all investments and currencies in your &kappname; file.
+</para>
+
+<para>
+	<screenshot>
 	<screeninfo>Update Stock and Currency Prices</screeninfo>
 	<mediaobject>
 	<imageobject>
@@ -379,57 +550,74 @@ Or you can fetch them electronically, using <link linkend="details.investments.o
 	<phrase>Online Stock and Currency Price Update</phrase>
 	</textobject>
 	</mediaobject>
-</screenshot>
+	</screenshot>
 </para>
-</sect2>
+</sect3>
 
-<sect2><title>Editing or Adding Quote Sources</title>
+<sect3>
+<title>Adding or Editing Quote Sources</title>
 
 <para>
-	Editing or adding quote sources is not recommended for anyone but the most technical user.  
-	You should feel comfortable reading HTML, and writing complex regular expressions.
-	If this doesn't sound like you, we recommend writing to the developer's list if none of the quote sources work for you.  
-	Ideally, please point us to a web page where these quotes can be obtained.
+  Adding or editing quote sources is not recommended for anyone but the most
+  technical user.  You should feel comfortable reading HTML and writing complex
+  regular expressions.  If this doesn't sound like you, we recommend writing to
+  the developer's list if none of the quote sources work for you.  Ideally,
+  please point us to a web page where these quotes can be obtained.
 </para>
+
 <para>
-	If you do feel up to the challenge, here's how it works.  
-	The quote sources are contained in the settings dialog.  
-	Choose <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure &kappname;</guimenuitem></menuchoice>.  
-	From there, choose the <guilabel>Online Quotes</guilabel> section.  
-	You can choose an existing source to edit, or create a new one.  
-	When you are done with your changes, be sure to press the <guibutton>Update</guibutton> button before exiting the dialog.
-	Your changes are not saved by default.
+  If you do feel up to the challenge, here's how it works.  The quote sources
+  are contained in the settings dialog.
+  Choose <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
+  &kappname;</guimenuitem></menuchoice>.  From there, choose
+  the <guilabel>Online Quotes</guilabel> section.  You can choose an existing
+  source to edit, or create a new one.  When you are done with your changes, be
+  sure to press the <guibutton>Update</guibutton> button before exiting the
+  dialog.  Your changes are not saved by default.
 </para>
+
 <para>
-	The first thing to worry about in an online quote source is the URL.  
-	This is the page that is fetched from the web.  
-	You will see a %1 in all sources, and a %2 in currency sources.  For investments, %1 is replaced by the trading symbol.
-	For currencies, %1 is replaced by the From currency, and %2 is replaced by the To.  
-	This URL is then fetched, all HTML tags are removed, and that stripped file is then sent to the page parser.
+  The first thing to worry about in an online quote source is the URL.  This is
+  the page that is fetched from the web.  You will see a %1 in all sources, and
+  a %2 in currency sources.  For investments, %1 is replaced by the trading
+  symbol.  For currencies, %1 is replaced by the From currency, and %2 is
+  replaced by the To currency.  This URL is then fetched, all HTML tags are
+  removed, and that stripped file is then sent to the page parser.
 </para>
+
 <para>
-	Note that the URL can also be a file: URL, which the quote fetcher takes to mean an executable script.  
-	It will pass any command-line arguments to it that you have specified, and feed the stdout to the page parser.
-	For example, you might have a script called getquote.sh that contains custom quote logic, taking the symbol as a single parameter.
-	Your URL would be &quot;file:/path/to/getquote.sh %1&quot;.
+  Note that the URL can also be a file: URL, which the quote fetcher takes to
+  mean an executable script.  It will pass any command-line arguments to it that
+  you have specified, and feed the stdout to the page parser.  For example, you
+  might have a script called getquote.sh that contains custom quote logic,
+  taking the symbol as a single parameter.  Your URL would be
+  <quote>file:/path/to/getquote.sh %1</quote>.
 </para>
+
 <para>
-	The page parser looks for a symbol, a date, and a price.  
-	Regular expressions tell it how to rip those items out of the page.  
-	Please review the documentation for the QRegExp class at doc.trolltech.com for the exact makeup of the regular expressions.
-	There should be exactly one capture expression, surrounded by parentheses, in each regexp.
-	The date format further tells the date parser the order of year, month, and day.  
-	This date format should always be in the form "%x %x %x". where x is y, m, or d.
-	The date parser is very smart.  &quot;%m %d %y&quot; will parse &quot;December 31st, 2005&quot; as easily as &quot;12/31/05&quot;.  
-	Two digit years are interpreted as being in the range of 1950-2049.
+  The page parser looks for a symbol, a date, and a price.  Regular expressions
+  tell it how to extract those items from the page.  Please review the
+  documentation for the <ulink
+  url="http://qt.nokia.com/doc/3.3/qregexp.html#1">QRegExp class</ulink> at
+  http://qt.nokia.com/doc/3.3/qregexp.html#1 for the exact makeup of the
+  regular expressions.  There should be exactly one capture expression,
+  surrounded by parentheses, in each regexp.  The date format further tells the
+  date parser the order of year, month, and day.  This date format should always
+  be in the form "%x %x %x". where x is y, m, or d.  The date parser is very
+  smart.  <quote>%m %d %y</quote> will parse <quote>December 31st, 2005</quote>
+  as easily as <quote>12/31/05</quote>.  Two digit years are interpreted as
+  being in the range of 1950-2049.
 </para>
+</sect3>
 </sect2>
 </sect1>
-<sect1 id="details.investments.unimplemented"><title>Unimplemented Features</title>
+
+<sect1 id="details.investments.unimplemented">
+<title>Unimplemented Features</title>
 <para>
-Certain common features that are normally found with investments are not yet implemented in &kappname;.  
-These include:  Derivatives (options, futures, etc), capital gains and tax reporting for investments.
+  Certain common features that are normally found with investments are not yet
+  implemented in &kappname;.  These include: Derivatives (options, futures,
+  etc), capital gains, and tax reporting for investments.
 </para>
 </sect1>
 </chapter>
-

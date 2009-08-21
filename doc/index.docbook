@@ -1,108 +1,121 @@
 <?xml version="1.0" ?>
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
-	<!ENTITY kappname "KMyMoney">
-	<!ENTITY devlist "<email>kmymoney2-developer@lists.sourceforge.net</email>">
-	<!ENTITY userlist "<email>kmymoney2-user@lists.sourceforge.net</email>">
-	<!ENTITY % addindex "IGNORE">
-	<!ENTITY % English "INCLUDE"><!-- change language only here -->
+  <!-- Define an entity for your application if it is not part of KDE
+       CVS -->
+  <!ENTITY kmyapplication "<application>KMyMoney</application>">
+  <!ENTITY kappname "KMyMoney"><!-- replace kmyapplication here
+                                            do *not* replace kappname-->
+  <!ENTITY package "kde-module"><!-- kdebase, kdeadmin, etc.  Leave
+                                     this unchanged if your
+                                     application is not maintained in KDE CVS -->
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % English "INCLUDE"> <!-- ONLY If you are writing non-English
+                                     original documentation, change
+                                     the language here -->
+  <!-- Do not define any other entities; instead, use the entities
+       from entities/general.entities and $LANG/user.entities. -->
+  <!ENTITY devlist "<email>kmymoney2-developer@lists.sourceforge.net</email>">
+  <!ENTITY userlist "<email>kmymoney2-user@lists.sourceforge.net</email>">
+  <!ENTITY Ctrl "<keycap>Ctrl</keycap>">
+  <!ENTITY Insert "<keycap>Ins</keycap>">
 
 <!-- the chapters -->
-	<!ENTITY introduction SYSTEM "introduction.docbook">
-	<!ENTITY makemostof SYSTEM "makemostof.docbook">
-	<!ENTITY firsttime SYSTEM "firsttime.docbook">
-	<!ENTITY whatsnew SYSTEM "whatsnew.docbook">
-	<!ENTITY details-institutions SYSTEM "details-institutions.docbook">
-	<!ENTITY details-accounts SYSTEM "details-accounts.docbook">
-	<!ENTITY details-loans SYSTEM "details-loans.docbook">
-	<!ENTITY details-budgets SYSTEM "details-budgets.docbook">
-	<!ENTITY details-forecast SYSTEM "details-forecast.docbook">
-	<!ENTITY details-categories SYSTEM "details-categories.docbook">
-	<!ENTITY details-payees SYSTEM "details-payees.docbook">
-	<!ENTITY details-schedules SYSTEM "details-schedules.docbook">
-	<!ENTITY details-ledgers SYSTEM "details-ledgers.docbook">
-	<!ENTITY details-investments SYSTEM "details-investments.docbook">
-	<!ENTITY details-currencies SYSTEM "details-currencies.docbook">
-	<!ENTITY details-impexp SYSTEM "details-impexp.docbook">
-	<!ENTITY details-reconciliation SYSTEM "details-reconciliation.docbook">
-	<!ENTITY details-search SYSTEM "details-search.docbook">
-	<!ENTITY details-reports SYSTEM "details-reports.docbook">
-	<!ENTITY details-settings SYSTEM "details-settings.docbook">
-	<!ENTITY details-widgets SYSTEM "details-widgets.docbook">
-	<!ENTITY details-formats SYSTEM "details-formats.docbook">
-	<!ENTITY details-database SYSTEM "details-database.docbook">
-	<!ENTITY details-hbciofx SYSTEM "details-hbciofx.docbook">
-	<!ENTITY reference SYSTEM "reference.docbook">
-	<!ENTITY credits SYSTEM "credits.docbook">
-
-<!-- i18n for keys 
-	<!ENTITY Ctrl "<keycap>Ctrl</keycap>">
-	<!ENTITY Insert "<keycap>Ins</keycap>">
-entities defined in the header are untranslatable, so remove them
--->
+  <!ENTITY introduction SYSTEM "introduction.docbook">
+  <!ENTITY makemostof SYSTEM "makemostof.docbook">
+  <!ENTITY firsttime SYSTEM "firsttime.docbook">
+  <!ENTITY whatsnew SYSTEM "whatsnew.docbook">
+  <!ENTITY details-institutions SYSTEM "details-institutions.docbook">
+  <!ENTITY details-accounts SYSTEM "details-accounts.docbook">
+  <!ENTITY details-loans SYSTEM "details-loans.docbook">
+  <!ENTITY details-budgets SYSTEM "details-budgets.docbook">
+  <!ENTITY details-forecast SYSTEM "details-forecast.docbook">
+  <!ENTITY details-categories SYSTEM "details-categories.docbook">
+  <!ENTITY details-payees SYSTEM "details-payees.docbook">
+  <!ENTITY details-schedules SYSTEM "details-schedules.docbook">
+  <!ENTITY details-ledgers SYSTEM "details-ledgers.docbook">
+  <!ENTITY details-investments SYSTEM "details-investments.docbook">
+  <!ENTITY details-currencies SYSTEM "details-currencies.docbook">
+  <!ENTITY details-impexp SYSTEM "details-impexp.docbook">
+  <!ENTITY details-reconciliation SYSTEM "details-reconciliation.docbook">
+  <!ENTITY details-search SYSTEM "details-search.docbook">
+  <!ENTITY details-reports SYSTEM "details-reports.docbook">
+  <!ENTITY details-settings SYSTEM "details-settings.docbook">
+  <!ENTITY details-widgets SYSTEM "details-widgets.docbook">
+  <!ENTITY details-formats SYSTEM "details-formats.docbook">
+  <!ENTITY details-database SYSTEM "details-database.docbook">
+  <!ENTITY details-hbciofx SYSTEM "details-hbciofx.docbook">
+  <!ENTITY reference SYSTEM "reference.docbook">
+  <!ENTITY credits SYSTEM "credits.docbook">
 ]>
 
 <book lang="&language;">
 
 <bookinfo>
-<title>The KMyMoney Handbook</title>
-<subtitle>for &kappname; version 0.9</subtitle>
+<title>The &kmyapplication; Handbook</title>
+<subtitle>for &kappname; version 1.0</subtitle>
 
 <authorgroup>
+<!-- This is just put in as an example.  For real documentation, please
+     define a general entity in entities/contributor.entities, e.g.
+<!ENTITY George.N.Ugnacious "<personname><firstname>George</firstname><othername>N.</othername><surname>Ugnacious</surname></personname>">
+<!ENTITY George.N.Ugnacious.mail "<email>gnu@kde.org</email>">
+and use `&George.N.Ugnacious; &George.N.Ugnacious.mail;' in the author element.
+ -->
 <author>
-	<firstname>Michael</firstname>
-	<othername>T.</othername>
-	<surname>Edwardes</surname>
-	<affiliation>
-		<address><email>mte@users.sourceforge.net</email></address>
-	</affiliation>
+  <personname>
+    <firstname>Michael</firstname>
+    <othername>T.</othername>
+    <surname>Edwardes</surname>
+  </personname>
+  <email>mte@users.sourceforge.net</email>
 </author>
 
 <author>
-	<firstname>Thomas</firstname>
-	<surname>Baumgart</surname>
-	<affiliation>
-		<address><email>ipwizard@users.sourceforge.net</email></address>
-	</affiliation>
+  <personname>
+    <firstname>Thomas</firstname>
+    <surname>Baumgart</surname>
+  </personname>
+  <email>ipwizard@users.sourceforge.net</email>
 </author>
 
 <author>
-	<firstname>Ace</firstname>
-	<surname>Jones</surname>
-	<affiliation>
-		<address><email>acejones@users.sourceforge.net</email></address>
-	</affiliation>
+  <personname>
+    <firstname>Ace</firstname>
+    <surname>Jones</surname>
+  </personname>
+  <email>acejones@users.sourceforge.net</email>
 </author>
 
 <author>
-	<firstname>Tony</firstname>
-	<surname>Bloomfield</surname>
-	<affiliation>
-		<address><email>tonybloom@users.sourceforge.net</email></address>
-	</affiliation>
+  <personname>
+    <firstname>Tony</firstname>
+    <surname>Bloomfield</surname>
+  </personname>
+  <email>tonybloom@users.sourceforge.net</email>
 </author>
 
 <author>
-	<firstname>Robert</firstname>
-	<surname>Wadley</surname>
-	<affiliation>
-		<address><email>robntina@users.sourceforge.net</email></address>
-	</affiliation>
+  <personname>
+    <firstname>Robert</firstname>
+    <surname>Wadley</surname>
+  </personname>
+  <email>robntina@users.sourceforge.net</email>
 </author>
 
 <author>
-	<firstname>Darin</firstname>
-	<surname>Strait</surname>
-	<affiliation>
-		<address><email>darin.strait@ashdar-partners.com</email></address>
-	</affiliation>
+  <personname>
+    <firstname>Darin</firstname>
+    <surname>Strait</surname>
+  </personname>
+  <email>darin.strait@ashdar-partners.com</email>
 </author>
 
 <author>
-	<firstname>Roger</firstname>
-	<surname>Lum</surname>
-	<affiliation>
-		<address><email>rogerlum@gmail.com</email></address>
-	</affiliation>
+  <personname>
+    <firstname>Roger</firstname>
+    <surname>Lum</surname>
+  </personname>
+  <email>rogerlum@gmail.com</email>
 </author>
 
 <!-- TRANS:ROLES_OF_TRANSLATORS -->
@@ -119,34 +132,38 @@ entities defined in the header are untranslatable, so remove them
 <year>2007</year>
 <year>2008</year>
 <year>2009</year>
-<holder>The KMyMoney Development Team</holder>
+<holder>The &kmyapplication; Development Team</holder>
 </copyright>
-
 <!-- Translators: put here the copyright notice of the translation -->
 <!-- Put here the FDL notice.  Read the explanation in fdl-notice.docbook
      and in the FDL itself on how to use it. -->
-<!-- <legalnotice>&FDLNotice;</legalnotice> -->
+<legalnotice>&FDLNotice;</legalnotice>
 
 <!-- Date and version information of the documentation
 Don't forget to include this last date and this last revision number, we
 need them for translation coordination !
-Please respect the format of the date (DD/MM/YYYY) and of the version
+Please respect the format of the date (YYYY-MM-DD) and of the version
 (V.MM.LL), it could be used by automation scripts.
 Do NOT change these in the translation. -->
 
-<date>08/05/2009</date>
-<releaseinfo>0.9</releaseinfo>
+<date>2009-08-10</date>
+<releaseinfo>1.00.00</releaseinfo>
 
 <!-- Abstract about this handbook -->
 
 <abstract>
 <para>
-&kappname;, the personal finance manager for &kde;.
+  &kappname;, the personal finance manager for &kde;.
 </para>
+
 <para>
-	This handbook describes &kappname; version 0.9.
+  This handbook describes &kappname; version 1.0.
 </para>
 </abstract>
+
+<!-- This is a set of Keywords for indexing by search engines.
+Please at least include KDE, the KDE package it is in, the name
+ of your application, and a few relevant keywords. -->
 
 <keywordset>
 <keyword>KDE</keyword>
@@ -161,6 +178,15 @@ Do NOT change these in the translation. -->
 </keywordset>
 
 </bookinfo>
+
+<!-- The contents of the documentation begin here.  Label
+each chapter so with the id attribute. This is necessary for two reasons: it
+allows you to easily reference the chapter from other chapters of your
+document, and if there is no ID, the name of the generated HTML files will vary
+from time to time making it hard to manage for maintainers and for the CVS
+system. Any chapter labelled (OPTIONAL) may be left out at the author's
+discretion. Other chapters should not be left out in order to maintain a
+consistent documentation style across all KDE apps. -->
 
 <!--
 	the main book
@@ -194,10 +220,13 @@ Do NOT change these in the translation. -->
 </book>
 <!--
 Local Variables:
-mode: sgml
-sgml-minimize-attributes: nil
-sgml-general-insert-case: lower
+mode: xml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
 sgml-indent-step:0
 sgml-indent-data:nil
 End:
+
+vim:tabstop=2:shiftwidth=2:expandtab
+kate: space-indent on; indent-width 2; tab-width 2; indent-mode none;
 -->

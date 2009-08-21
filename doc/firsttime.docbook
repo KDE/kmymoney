@@ -1,19 +1,18 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <chapter id="firsttime">
-
 <chapterinfo>
-<authorgroup>
-<author>
-	<firstname>Michael</firstname>
-	<othername>T.</othername>
-	<surname>Edwardes</surname>
-	<affiliation>
-		<address><email>mte@users.sourceforge.net</email></address>
-	</affiliation>
-</author>
-</authorgroup>
-<date>2005-07-09</date>
-<releaseinfo>0.8</releaseinfo>
+  <authorgroup>
+    <author>
+      <firstname>Michael</firstname>
+      <othername>T.</othername>
+      <surname>Edwardes</surname>
+      <affiliation>
+        <address><email>mte@users.sourceforge.net</email></address>
+      </affiliation>
+    </author>
+  </authorgroup>
+  <date>2009-05-05</date>
+  <releaseinfo>1.0</releaseinfo>
 </chapterinfo>
 
 <title>Using &kappname; for the first time</title>
@@ -22,8 +21,10 @@
 <title>Running &kappname; for the first time</title>
 
 <para>
-	Once &kappname; has fully loaded two windows will be opened. The top window, 'Tip of the Day' offers one of a series of important or useful pieces of information about the application.
-	<screenshot>
+  Once &kappname; has fully loaded two windows will be opened. The top window,
+  'Tip of the Day' offers one of a series of important or useful pieces of
+  information about the application.
+  <screenshot>
 	<screeninfo>Tip of the Day</screeninfo>
 	<mediaobject>
 	<imageobject>
@@ -33,27 +34,38 @@
 	<phrase>Tip of the Day</phrase>
 	</textobject>
 	</mediaobject>
-	</screenshot>
+  </screenshot>
 </para>
 
 <para>
-You are recommended to quickly read through these tips by pressing on the <guibutton>Previous</guibutton> and <guibutton>Next</guibutton> buttons at the bottom of the window.
+  You are recommended to quickly read through these tips by pressing on the
+  <guibutton>Previous</guibutton> and <guibutton>Next</guibutton> buttons at the
+  bottom of the window.
 </para>
 
 <para>
-Once you have read the tips the window can be closed and will re-open each time &kappname; is started.  To stop this default behavior uncheck the appropriate option on the Tip of the Day window.
+  Once you have read the tips the window can be closed; it will re-open each
+  time &kappname; is started.  To stop this default behavior, uncheck the
+  appropriate option on the Tip of the Day window.
 </para>
 
-<note><para>
-	Tips can be read at anytime by selecting <guimenuitem>Show tip of the day</guimenuitem> from the <guimenu>Help</guimenu> menu within &kappname;.
-</para></note>
+<note>
+  <para>
+    Tips can be read at anytime by selecting <guimenuitem>Show tip of the
+    day</guimenuitem> from the <guimenu>Help</guimenu> menu within &kappname;.
+  </para>
+</note>
 
 <para>
-All tips have been extracted from the Frequently Asked Questions list (FAQ) that provides more detailed help and can be found on the project <ulink url="http://kmymoney2.sourceforge.net/faq.html">website</ulink> and in this manual.
+  All tips have been extracted from the Frequently Asked Questions list (FAQ)
+  that provides more detailed help and can be found on the project <ulink
+  url="http://kmymoney2.sourceforge.net/faq.html">website</ulink> and in this
+  manual.
 </para>
 
 <para>
-	Please click on <guibutton>Close</guibutton> to close the Tip of the Day dialog.
+  Please click on <guibutton>Close</guibutton> to close the Tip of the Day
+  dialog.
 </para>
 </sect1>
 
@@ -75,234 +87,262 @@ All tips have been extracted from the Frequently Asked Questions list (FAQ) that
 </para>
 
 <para>
-The &kappname; main window consists of four major parts
+  The &kappname; main window consists of four major parts
 </para>
+
 <itemizedlist>
-	<listitem><para>A. The menu bar</para></listitem>
-	<listitem><para>B. The toolbar</para></listitem>
-	<listitem><para>C. The View selector</para></listitem>
-	<listitem><para>D. The view</para></listitem>
+  <listitem><para>A. The menu bar</para></listitem>
+  <listitem><para>B. The toolbar</para></listitem>
+  <listitem><para>C. The View selector</para></listitem>
+  <listitem><para>D. The view</para></listitem>
 </itemizedlist>
 
-
-
-<para>	
-The menu and toolbars provide access to the features of &kappname; and allow you to <link linkend="firsttime-3">Create</link> files or configure how &kappname; operates.
+<para>
+  The menu and toolbars provide access to the features of &kappname; and allow
+  you to <link linkend="firsttime-3">Create</link> files or configure how
+  &kappname; operates.
 </para>
 
 <para>
-The view selector consists of at least eleven icons in the left side of the main window, depending upon the software provided by your system.  More icons could be added by various plugins.  By clicking on an icon, the view window on the right hand side is loaded with the appropriate view of your financial data.  Each view provides a unique representation of your financial situation and allows you to view or edit the information shown.
+  The view selector consists of at least eleven icons in the left side of the
+  main window, depending upon the software provided by your system.  More icons
+  could be added by various plugins.  By clicking on an icon, the view window on
+  the right hand side is loaded with the appropriate view of your financial
+  data.  Each view provides a unique representation of your financial situation
+  and allows you to view or edit the information shown.
 </para>
 
 <para>
-	The view selector contains the following icons
+  The view selector contains the following icons
 </para>
-	
+
 <itemizedlist>
-	<listitem>
-		<para>
-			<guiicon>
-				<inlinemediaobject>
-					<imageobject>
-						<imagedata fileref="home_view.png" format="PNG"></imagedata>
-					</imageobject>
-					<textobject>
-						<phrase>Home View</phrase>
-					</textobject>
-				</inlinemediaobject>
-			</guiicon>
-			A configurable overview of your current financial situation (or an introduction page when no data exists).
-		</para>
-	</listitem>
+  <listitem>
+    <para>
+      <guiicon>
+	<inlinemediaobject>
+	  <imageobject>
+	    <imagedata fileref="home_view.png" format="PNG"></imagedata>
+	  </imageobject>
+	  <textobject>
+	    <phrase>Home View</phrase>
+	  </textobject>
+	</inlinemediaobject>
+      </guiicon>
+      Home: A configurable overview of your current financial situation (or an
+      introduction page when no data file is open).
+    </para>
+  </listitem>
 
-	<listitem>
-		<para>
-			<guiicon>
-				<inlinemediaobject>
-					<imageobject>
-						<imagedata fileref="institutions_view.png" format="PNG"></imagedata>
-					</imageobject>
-					<textobject>
-						<phrase>Institutions View</phrase>
-					</textobject>
-				</inlinemediaobject>
-			</guiicon>
-			All of your institutions and accounts displayed in a hierarchy.
-		</para>
-	</listitem>
+  <listitem>
+    <para>
+      <guiicon>
+        <inlinemediaobject>
+          <imageobject>
+	    <imagedata fileref="institutions_view.png" format="PNG"></imagedata>
+          </imageobject>
+	  <textobject>
+	    <phrase>Accounts View</phrase>
+	  </textobject>
+	</inlinemediaobject>
+      </guiicon>
+      Institutions: All of your institutions and accounts displayed in a
+      hierarchy.
+    </para>
+  </listitem>
 
-	<listitem>
-		<para>
-			<guiicon>
-				<inlinemediaobject>
-					<imageobject>
-						<imagedata fileref="accounts_view.png" format="PNG"></imagedata>
-					</imageobject>
-					<textobject>
-						<phrase>Accounts View</phrase>
-					</textobject>
-				</inlinemediaobject>
-			</guiicon>
-			All of your accounts displayed in a hierarchy.
-		</para>
-	</listitem>
+  <listitem>
+    <para>
+      <guiicon>
+	<inlinemediaobject>
+	  <imageobject>
+	    <imagedata fileref="accounts_view.png" format="PNG"></imagedata>
+	  </imageobject>
+	  <textobject>
+	    <phrase>Accounts View</phrase>
+	  </textobject>
+	</inlinemediaobject>
+      </guiicon>
+      Accounts: All of your accounts displayed in a hierarchy.
+    </para>
+  </listitem>
 
-	<listitem>
-		<para>
-			<guiicon>
-				<inlinemediaobject>
-					<imageobject>
-						<imagedata fileref="schedule_view.png" format="PNG"></imagedata>
-					</imageobject>
-					<textobject>
-						<phrase>Schedule View</phrase>
-					</textobject>
-				</inlinemediaobject>
-			</guiicon>
-			Your recurring bills and deposits.
-		</para>
-	</listitem>
+  <listitem>
+    <para>
+      <guiicon>
+	<inlinemediaobject>
+	  <imageobject>
+	    <imagedata fileref="schedule_view.png" format="PNG"></imagedata>
+	  </imageobject>
+	  <textobject>
+	    <phrase>Schedules View</phrase>
+	  </textobject>
+	</inlinemediaobject>
+      </guiicon>
+      Schedules: Your recurring bills and deposits.
+    </para>
+  </listitem>
 
-	<listitem>
-		<para>
-			<guiicon>
-				<inlinemediaobject>
-					<imageobject>
-						<imagedata fileref="categories_view.png" format="PNG"></imagedata>
-					</imageobject>
-					<textobject>
-						<phrase>Categories View</phrase>
-					</textobject>
-				</inlinemediaobject>
-			</guiicon>
-			Special accounts that provide a means for you to group associated transactions.
-		</para>
-	</listitem>
+  <listitem>
+    <para>
+      <guiicon>
+        <inlinemediaobject>
+	  <imageobject>
+	    <imagedata fileref="categories_view.png" format="PNG"></imagedata>
+	  </imageobject>
+	  <textobject>
+	    <phrase>Categories View</phrase>
+	  </textobject>
+	</inlinemediaobject>
+      </guiicon>
+      Categories: Special accounts that provide a means for you to group
+      associated transactions.
+    </para>
+  </listitem>
 
-	<listitem>
-		<para>
-			<guiicon>
-				<inlinemediaobject>
-					<imageobject>
-						<imagedata fileref="payees_view.png" format="PNG"></imagedata>
-					</imageobject>
-					<textobject>
-						<phrase>Payees View</phrase>
-					</textobject>
-				</inlinemediaobject>
-			</guiicon>
-			All Payees used by &kappname;.
-		</para>
-	</listitem>
+  <listitem>
+    <para>
+      <guiicon>
+        <inlinemediaobject>
+	  <imageobject>
+	    <imagedata fileref="payees_view.png" format="PNG"></imagedata>
+	  </imageobject>
+	  <textobject>
+	    <phrase>Payees View</phrase>
+	  </textobject>
+	</inlinemediaobject>
+      </guiicon>
+      Payees: All Payees used by &kappname;.
+    </para>
+  </listitem>
 
-	<listitem>
-		<para>
-			<guiicon>
-				<inlinemediaobject>
-					<imageobject>
-						<imagedata fileref="ledgers_view.png" format="PNG"></imagedata>
-					</imageobject>
-					<textobject>
-						<phrase>Ledgers View</phrase>
-					</textobject>
-				</inlinemediaobject>
-			</guiicon>
-			Your account transactions.
-		</para>
-	</listitem>
+  <listitem>
+    <para>
+      <guiicon>
+	<inlinemediaobject>
+	  <imageobject>
+	    <imagedata fileref="ledgers_view.png" format="PNG"></imagedata>
+          </imageobject>
+	  <textobject>
+	    <phrase>Ledgers View</phrase>
+          </textobject>
+	</inlinemediaobject>
+      </guiicon>
+      Ledgers: Your account transactions.
+    </para>
+  </listitem>
 
-	<listitem>
-		<para>
-			<guiicon>
-				<inlinemediaobject>
-					<imageobject>
-						<imagedata fileref="investments_view.png" format="PNG"></imagedata>
-					</imageobject>
-					<textobject>
-						<phrase>Investments View</phrase>
-					</textobject>
-				</inlinemediaobject>
-			</guiicon>
-			Your portfolio summary.
-		</para>
-	</listitem>
+  <listitem>
+    <para>
+      <guiicon>
+	<inlinemediaobject>
+	  <imageobject>
+	    <imagedata fileref="investments_view.png" format="PNG"></imagedata>
+	  </imageobject>
+	  <textobject>
+            <phrase>Investments View</phrase>
+	  </textobject>
+	</inlinemediaobject>
+      </guiicon>
+      Investments: Your portfolio summary.
+    </para>
+  </listitem>
 
-	<listitem>
-		<para>
-			<guiicon>
-				<inlinemediaobject>
-					<imageobject>
-						<imagedata fileref="reports_view.png" format="PNG"></imagedata>
-					</imageobject>
-					<textobject>
-						<phrase>Reports View</phrase>
-					</textobject>
-				</inlinemediaobject>
-			</guiicon>
-			A collection of useful reports, providing alternate views of your financial data.
-		</para>
-	</listitem>
-        <listitem>
-		<para>
-			<guiicon>
-				<inlinemediaobject>
-					<imageobject>
-						<imagedata fileref="budgets_view.png" format="PNG"></imagedata>
-					</imageobject>
-					<textobject>
-						<phrase>Budgets View</phrase>
-					</textobject>
-				</inlinemediaobject>
-			</guiicon>
-			Your budgets
-		</para>
-	</listitem>
+  <listitem>
+    <para>
+      <guiicon>
+	<inlinemediaobject>
+	  <imageobject>
+	    <imagedata fileref="reports_view.png" format="PNG"></imagedata>
+	  </imageobject>
+	  <textobject>
+	    <phrase>Reports View</phrase>
+	  </textobject>
+	</inlinemediaobject>
+      </guiicon>
+      Reports: A collection of useful reports, providing alternate views of your
+      financial data.
+    </para>
+  </listitem>
 
-        <listitem>
-		<para>
-			<guiicon>
-				<inlinemediaobject>
-					<imageobject>
-						<imagedata fileref="forecast_view.png" format="PNG"></imagedata>
-					</imageobject>
-					<textobject>
-						<phrase>Forecast View</phrase>
-					</textobject>
-				</inlinemediaobject>
-			</guiicon>
-			This view provides a forecast of your accounts and categories
-		</para>
-	</listitem>
+  <listitem>
+    <para>
+      <guiicon>
+	<inlinemediaobject>
+	  <imageobject>
+	    <imagedata fileref="budgets_view.png" format="PNG"></imagedata>
+	  </imageobject>
+	  <textobject>
+	    <phrase>Budgets View</phrase>
+          </textobject>
+	</inlinemediaobject>
+      </guiicon>
+      Budgets: Your budgets
+    </para>
+  </listitem>
 
-	<listitem>
-		<para>
-			<guiicon>
-				<inlinemediaobject>
-					<imageobject>
-						<imagedata fileref="outbox_view.png" format="PNG"></imagedata>
-					</imageobject>
-					<textobject>
-						<phrase>Outbox View</phrase>
-					</textobject>
-				</inlinemediaobject>
-			</guiicon>
-			Used by the online banking module to provide feedback on running processes.  This is a view provided by the KBanking plugin and may not be present on your system.
-		</para>
-	</listitem>
+  <listitem>
+    <para>
+      <guiicon>
+	<inlinemediaobject>
+	  <imageobject>
+	    <imagedata fileref="forecast_view.png" format="PNG"></imagedata>
+	  </imageobject>
+	  <textobject>
+	    <phrase>Forecast View</phrase>
+	  </textobject>
+	</inlinemediaobject>
+      </guiicon>
+      Forecast: This view provides a forecast of your accounts and categories
+    </para>
+  </listitem>
+
+  <listitem>
+    <para>
+      <guiicon>
+	<inlinemediaobject>
+	  <imageobject>
+	    <imagedata fileref="outbox_view.png" format="PNG"></imagedata>
+	  </imageobject>
+	  <textobject>
+	    <phrase>Outbox View</phrase>
+	  </textobject>
+	</inlinemediaobject>
+      </guiicon>
+      Used by the online banking module to provide feedback on running
+      processes.  This is a view provided by the KBanking plugin and may not be
+      present on your system.
+    </para>
+  </listitem>
 </itemizedlist>
-</sect1>	
+</sect1>
 
 <sect1 id="firsttime-3">
 <title>Creating a new file</title>
 
 <para>
-	To create a new file you can either select <menuchoice><guimenu>File</guimenu><guimenuitem>New</guimenuitem></menuchoice> from the  menu or choose the <inlinemediaobject><imageobject><imagedata fileref="new.png"/></imageobject><textobject><phrase>New</phrase></textobject></inlinemediaobject> icon from the toolbar.
+  &kappname; keeps all the data about your finances in a file.  As was stated in
+  <link linkend="makingmostof.basicaccounting.personalaccounts">Defining the
+  accounts (personal records)</link>, you can keep more than one set of
+  accounts, but the data for each will be kept in a separate file, and
+  &kappname; can only have one file open at a time.  See the chapter on <link
+  linkend="details.formats">File Formats</link> for more details about
+  &kappname;'s data files.
 </para>
 
 <para>
-	&kappname; will then open the <quote>New File Setup Wizard</quote> which will guide you through the process of creating the file.
+  To create a new file you can either select
+  <menuchoice><guimenu>File</guimenu><guimenuitem>New</guimenuitem></menuchoice>
+  from the menu or choose the <inlinemediaobject><imageobject><imagedata
+  fileref="new.png"/></imageobject><textobject><phrase>New</phrase></textobject></inlinemediaobject>
+  icon from the toolbar.
 </para>
-	
+
+<para>
+  &kappname; will then open the <quote>New File Setup Wizard</quote> which will
+  guide you through the process of creating the file.
+</para>
+
 <para>
 	<screenshot>
 	<screeninfo>Personal Data Page</screeninfo>
@@ -318,14 +358,31 @@ The view selector consists of at least eleven icons in the left side of the main
 </para>
 
 <para>
-Because all fields are optional, you can use &kappname; without entering any information now.  Any information entered here is used only to personalize your file.  In the future, it may be used in some reports and for online banking. If &kappname; requires any personal information in future releases and finds none, you will be prompted to enter the relevant data then.
+  Since all fields are optional, you can use &kappname; without entering any
+  information now.  Any information entered here is used only to personalize
+  your file.  In the future, it may be used in some reports and for online
+  banking. If &kappname; requires any personal information in future releases
+  and finds none, you will be prompted to enter the relevant data then.
 </para>
 
 <para>
-	Please enter your name and address or nothing and press <guibutton>Next</guibutton>.
+  Please enter your name and address or nothing and press
+  <guibutton>Next</guibutton>.
 </para>
 
-<para>&kappname; supports multiple currencies.  To set your base currency, (the currency you use day to day and which will be used for your reports), select the appropriate entry from the list provided and press <guibutton>Next</guibutton>.</para>
+<para>
+  In case you have an address for yourself stored in the KAddressbook, the
+  button <guibutton>Load from Addressbook</guibutton> is enabled and pressing it
+  imports all information into &kappname;.
+</para>
+
+<para>
+  &kappname; supports multiple currencies.  To set your base currency (the
+  currency you use day to day and which will be used for your reports), select
+  the appropriate entry from the list provided and press
+  <guibutton>Next</guibutton>. A default will be selected from &kappname; based
+  upon your locale settings.
+</para>
 
 <para>
 	<screenshot>
@@ -342,7 +399,8 @@ Because all fields are optional, you can use &kappname; without entering any inf
 </para>
 
 <para>
-The following page allows you to create an initial account. For the typical &kappname; user this is a checking account.
+  The following page allows you to create an initial account. For the typical
+  &kappname; user this is a checking account.
 </para>
 
 <para>
@@ -360,55 +418,23 @@ The following page allows you to create an initial account. For the typical &kap
 </para>
 
 <para>
-Enter the name of the account and a possible reference number assigned by the institution managing the account.  Enter the opening date of the account and the opening balance of the account.  For example, you want to use &kappname; to manage all your finances as of 2008-01-01, then enter the balance of the account at the beginning of this date.  The number can possibly be obtained from a paper statement.
-Also enter the name and routing number of the institution, though this information is optional and only required for online banking purposes.
+  Enter the name of the account and a possible reference number assigned by the
+  institution managing the account.  Enter the opening date of the account and
+  the opening balance of the account.  For example, you want to use &kappname;
+  to manage all your finances as of 2008-01-01, then enter the balance of the
+  account at the beginning of this date.  The number can possibly be obtained
+  from a paper statement.  Also enter the name and routing number of the
+  institution, though this information is optional and only required for online
+  banking purposes.
 </para>
 
 <para>
-In case you don't want to setup an initial account, please uncheck the checkbox 
-</para>
-<para>
-Once finished, press <guibutton>Next</guibutton> to proceed.
+  In case you don't want to setup an initial account, please uncheck the checkbox
 </para>
 
 <para>
-	Because this is a new file &kappname; will now allow you to import a set of default accounts with your interaction.
+  Once finished, press <guibutton>Next</guibutton> to proceed.
 </para>
-<!--
-<para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="default_prompt.png" format="PNG" />
-	</imageobject>
-	<textobject>
-	<phrase>Prompt</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
-</para>
-
-<para>
-	Please read the message and click on <guibutton>OK</guibutton>.
-</para>
-
-<para>
-	Next &kappname; shows the standard KDE File Open dialog box allowing you to select the appropriate file for your country/region.  This window should list various language-dependent directories containing files ending with the file extension 'kmt'.  If no files are listed matching this criteria then please navigate to $KDEDIR/share/apps/kmymoney2.  On a Mandrake 10 System this relates to /usr/share/apps/kmymoney2.
-
-	<screenshot>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="kmt.png" format="PNG" />
-	</imageobject>
-	<textobject>
-	<phrase>Account Templates</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
-
-	Only one file needs to be selected and should match your country and or region.  If your country/region is not listed then please select the default_account_enC.dat file or Click on <guibutton>Cancel</guibutton> to not load any pre-defined accounts.  The enC file relates to the default country and region and is usually American.  Accounts can be renamed later if needed.
-</para>
--->
 
 <para>
 	<screenshot>
@@ -426,14 +452,22 @@ Once finished, press <guibutton>Next</guibutton> to proceed.
 
 
 <para>
-	Choose the appropriate country and account template(s). Multiple templates, even from multiple countries can be selected using a combination of &Ctrl; and &Shift; together with the left mouse button.  The account hierarchy to be setup will be shown in a preview part of the wizard. In case you cannot find a template that suits your needs, don't select a template.
-</para>
-<para>
-Once finished with the template selection press <guibutton>Next</guibutton> to proceed.
+  Choose the appropriate country and account template(s). Multiple templates,
+  even from multiple countries can be selected using a combination of
+  <keycap>Ctrl</keycap> and <keycap>Shift</keycap> together with the left mouse
+  button.  The account hierarchy to be setup will be shown in a preview part of
+  the wizard. In case you cannot find a template that suits your needs, don't
+  select a template.
 </para>
 
 <para>
-The next page of the wizard allows you to setup user preferences. Press <guibutton>Next</guibutton> if you are done and want to proceed.
+  Once finished with the template selection press <guibutton>Next</guibutton> to
+  proceed.
+</para>
+
+<para>
+  The next page of the wizard allows you to setup user preferences. Press
+  <guibutton>Next</guibutton> if you are done and want to proceed.
 </para>
 
 <para>
@@ -450,9 +484,11 @@ The next page of the wizard allows you to setup user preferences. Press <guibutt
 	</screenshot>
 </para>
 
-
 <para>
-The last page of the wizard allows you to select the filename that will be used to store your financial data. An initial filename will be constructed out of your HOME directory and user name.
+  The last page of the wizard allows you to select the filename that will be
+  used to store your financial data. An initial filename will be constructed out
+  of your HOME folder and user name. In case the file exists, a warning will
+  be displayed which reminds you to select a name of a non-existing file.
 </para>
 
 <para>
@@ -470,84 +506,148 @@ The last page of the wizard allows you to select the filename that will be used 
 </para>
 
 <para>
-Now you have collected all relevant information to create the file. Press <guibutton>Finish</guibutton> and &kappname; will create the file for you and open it.
+  Now you have entered all relevant information to create the file. Press
+  <guibutton>Finish</guibutton> and &kappname; will create the file for you and
+  open it.
 </para>
 
 <!--
-<para>
-After &kappname; has finished loading the default accounts your financial summary will be displayed.  As you have defined no accounts to hold your transactions this is currently empty.
-</para>
+<para>After &kappname; has finished loading the default accounts your financial
+summary will be displayed.  As you have defined no accounts to hold your
+transactions this is currently empty.</para>
 -->
 </sect1>
-
 
 <sect1 id="firsttime-4">
 <title>Creating accounts</title>
 
 <para>
-You can create an account in one of two ways both of which are described here:
+  You can create an account in one of two ways both of which are described here:
 </para>
 
 <variablelist>
-	<varlistentry><term>Using the menu</term><listitem><para>To create an account using the menu select <menuchoice><guimenu>Accounts</guimenu><guimenuitem>Add new account</guimenuitem></menuchoice>.</para></listitem></varlistentry>
-		
-	<varlistentry><term>Using the Accounts view</term><listitem><para>To create an account using the accounts view click on the Accounts icon in the view selector and then right click on the Asset tree icon in the right hand view and select <guimenuitem>New account</guimenuitem> from the popup menu.  The Asset tree holds all of your accounts that are an asset.  Assets, and all the other account types, are discussed in more detail later in this manual.</para></listitem></varlistentry>
+  <varlistentry>
+    <term>Using the menu</term>
+    <listitem>
+      <para>
+        To create an account using the menu select
+        <menuchoice><guimenu>Accounts</guimenu><guimenuitem>Add new
+        account</guimenuitem></menuchoice>.
+      </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Using the Accounts view</term>
+    <listitem>
+      <para>
+        To create an account using the accounts view click on the Accounts icon
+        in the view selector and then right click on the Asset tree icon in the
+        right hand view and select <guimenuitem>New account</guimenuitem> from
+        the popup menu.  The Asset tree holds all of your accounts that are an
+        asset.  Assets, and all the other account types, are discussed in more
+        detail later in this manual.
+      </para>
+    </listitem>
+  </varlistentry>
 </variablelist>
 
 <tip>
-	<para>
-		Note that &kappname; uses the context menus a lot throughout the whole application.  If you find yourself stuck trying to figure out how to do something, try right-clicking where you would expect to see a feature.
-	</para>
+  <para>
+    Note that &kappname; uses the context menus a lot throughout the whole
+    application.  If you find yourself stuck trying to figure out how to do
+    something, try right-clicking where you would expect to see a feature.
+  </para>
 </tip>
 
 <para>
-	Creating a new account by either method opens the <emphasis>New Account Wizard</emphasis>.  This wizard will take you step by step through the process of creating an account, gathering the required information at each step.  To navigate through the pages click on the <guibutton>Previous</guibutton> and <guibutton>Next</guibutton> buttons.
+  Creating a new account by either method opens the <emphasis>New Account
+  Wizard</emphasis>.  This wizard will take you step by step through the process
+  of creating an account, gathering the required information at each step.  To
+  navigate through the pages click on the <guibutton>Previous</guibutton> and
+  <guibutton>Next</guibutton> buttons.
 </para>
 
 <para>
-Create an account using either of the two previously mentioned methods to continue.
-A full description of creating accounts can be found in the <link linkend="details.accounts">Accounts</link> section.
+  Create an account using either of the two previously mentioned methods to
+  continue.  A full description of creating accounts can be found in the <link
+  linkend="details.accounts">Accounts</link> section.
 </para>
 
 <para>
-	Now that one or more accounts exist in &kappname; your account summary is shown in the Home view.  You can create transactions manually in the <link linkend="details.ledgers">Ledger</link> view, or set up automatic transactions through the <link linkend="details.schedules">Schedule</link> view.
+  Now that one or more accounts exist in &kappname;, your account summary is
+  shown in the Home view.  You can create transactions manually in the <link
+  linkend="details.ledgers">Ledgers</link> view, or set up automatic
+  transactions through the <link linkend="details.schedules">Schedules</link>
+  view.
 </para>
-
 </sect1>
 
 <sect1 id="firsttime.schedules">
 <title>Schedules</title>
+
 <para>
-	A <link linkend="details.schedules">Schedule</link> is a transaction that occurs one or more times over a certain period of time.  Sometimes called recurring transactions a typical example is your pay check that you receive every month or week.  Rather than have to enter the transaction details each time you get paid, you can instruct &kappname; to create a schedule that will enter a transaction for you when you get paid.
+  Sometimes called a recurring transaction, a <link
+  linkend="details.schedules">Schedule</link> is a transaction that occurs one
+  or more times over a certain period of time.  A typical example is your pay
+  check that you receive every month or week.  Rather than have to enter the
+  transaction details each time you get paid, you can instruct &kappname; to
+  create a schedule that will enter a transaction for you when you get paid.
+</para>
+
+<para>
+  To maintain <link linkend="details.schedules">schedules</link> click on the
+  <guiicon><inlinemediaobject><imageobject><imagedata
+  fileref="schedule_view.png"/></imageobject></inlinemediaobject>Schedules</guiicon>
+  icon in the view selector.
 </para>
 </sect1>
 
 <sect1 id="firsttime.categories">
 <title>Categories</title>
-<para>	
-	To maintain <link linkend="details.categories">categories</link> click on the <guiicon><inlinemediaobject><imageobject><imagedata fileref="categories_view.png"/></imageobject></inlinemediaobject>Categories</guiicon> icon in the view selector.
+
+<para>
+  To maintain <link linkend="details.categories">categories</link> click on the
+  <guiicon><inlinemediaobject><imageobject><imagedata
+  fileref="categories_view.png"/></imageobject></inlinemediaobject>Categories</guiicon>
+  icon in the view selector.
+</para>
+
+<para>
+  A full description of this topic can be found in the <link
+  linkend="details.categories">Categories</link> section.
 </para>
 </sect1>
 
 <sect1 id="firsttime.payees">
 <title>Payees</title>
+
 <para>
-	To maintain your list of payees click on the <guiicon><inlinemediaobject><imageobject><imagedata fileref="payees_view.png"/></imageobject></inlinemediaobject>Payees</guiicon> icon in the view selector.
+  To maintain your list of payees click on the
+  <guiicon><inlinemediaobject><imageobject><imagedata
+  fileref="payees_view.png"/></imageobject></inlinemediaobject>Payees</guiicon>
+  icon in the view selector.
 </para>
 
 <para>
-A full description of this topic can be found in the <link linkend="details.payees">Payees</link> section.
+  A full description of this topic can be found in the <link
+  linkend="details.payees">Payees</link> section.
 </para>
 </sect1>
 
 <sect1 id="firsttime-import">
 <title>Quicken Interchange Format (QIF) Import</title>
+
 <para>
-If you currently use a financial manager application &kappname; can then import an account's transactions as long as they are in the Quicken Interchange Format (QIF).  Most financial programs can export this format and the different applications methods of exporting QIF is not discussed here for brevity.
+  If you currently use a financial manager application, &kappname; can import an
+  account's transactions as long as they are in the Quicken Interchange Format
+  (QIF).  Most financial programs can export this format and the different
+  applications methods of exporting QIF is not discussed here for brevity.
 </para>
 
 <para>
-A full description of this topic can be found in the <link linkend="details.impexp.qifimp">QIF Import</link> section.
+  A full description of this topic can be found in the <link
+  linkend="details.impexp.qifimp">QIF Import</link> section.
 </para>
 </sect1>
 
@@ -555,15 +655,21 @@ A full description of this topic can be found in the <link linkend="details.impe
 <title>Searching for transactions</title>
 
 <para>
-	&kappname; provides a useful and powerful transaction search facility in the form of the search dialog.
+  &kappname; provides a useful and powerful transaction search facility in the
+  form of the search dialog.
 </para>
 
 <para>
-	The search dialog can be opened from the toolbar using the <guiicon><inlinemediaobject><imageobject><imagedata fileref="transaction_find.png"/></imageobject></inlinemediaobject>Find</guiicon> icon or by selecting <guimenuitem>Find Transaction</guimenuitem> from the <guimenu>Account</guimenu> menu.
+  The search dialog can be opened from the toolbar using the
+  <guiicon><inlinemediaobject><imageobject><imagedata
+  fileref="transaction_find.png"/></imageobject></inlinemediaobject>Find</guiicon>
+  icon or by selecting <guimenuitem>Find Transaction</guimenuitem> from the
+  <guimenu>Edit</guimenu> menu.
 </para>
 
 <para>
-A full description of this topic can be found in the <link linkend="details.search">Search</link> section.
+  A full description of this topic can be found in the <link
+  linkend="details.search">Search</link> section.
 </para>
 
 </sect1>
@@ -572,85 +678,156 @@ A full description of this topic can be found in the <link linkend="details.sear
 <title>Reconciliation</title>
 
 <para>
-At some point you will want to reconcile the transactions you have entered with the transactions listed in a statement, be it a bank statement, credit card statement, loan statement or any other statement.  Reconciliation involves matching what you have entered with what the statement lists.  If any discrepancies are found then either you or the person who created the statement have made a mistake.
+  At some point you will want to reconcile the transactions you have entered
+  with the transactions listed in a statement, be it a bank statement, credit
+  card statement, loan statement, or any other statement.  Reconciliation
+  involves matching what you have entered with what the statement lists.  If any
+  discrepancies are found then either you or the person who created the
+  statement have made a mistake.
 </para>
 
 <para>
-To reconcile an account click on the <guiicon><inlinemediaobject><imageobject><imagedata fileref="reconcile.png"/></imageobject></inlinemediaobject> Reconcile Ledgers</guiicon> icon in the account selector, choose your account from the drop down list and then click on the <guibutton>Reconcile</guibutton> button.
+  To reconcile an account, first select the account, either from
+  <guiicon>Accounts</guiicon> view or from <guiicon>Ledgers</guiicon>
+  view. Then, either click on the <guiicon>Reconcile</guiicon> icon on the
+  Toolbar, or select <guimenuitem>Reconcile</guimenuitem> from the
+  <guimenu>Account</guimenu> menu.
 </para>
 
 <para>
-A full description of this topic can be found in the <link linkend="details.reconcile">Reconciliation</link> section.
+  A full description of this topic can be found in the <link
+  linkend="details.reconcile">Reconciliation</link> section.
 </para>
 
 </sect1>
 
 <sect1 id="firsttime-backup">
 <title>Backing up</title>
+
 <para>
-Now that you have created some accounts and entered transactions its a good idea to perform a backup.  Because the file used by &kappname; is a standard Unix file you can just copy the file to another location to back it up or use the dialog provided by &kappname;.  Using the dialog is the preferred method because if &kappname; ever starts using other file formats, such as SQL, then it would be much harder to copy the file manually.
+  Now that you have created some accounts and entered transactions it's a good
+  idea to perform a backup.  Because the file used by &kappname; is a standard
+  Unix file you can just copy the file to another location to back it up or use
+  the dialog provided by &kappname;.  Using the dialog is the preferred method
+  because if &kappname; ever starts using other file formats, such as SQL, then
+  it would be much harder to copy the file manually.
 </para>
 
 <para>
-	To backup your file through &kappname; Select <guimenuitem>Backup</guimenuitem> from the <guimenu>File</guimenu> menu and enter the directory where you wish the file to be copied to.  If the directory needs mounting first and you have the sufficient privileges then check the tick box labeled <guilabel>Mount this directory before backing up</guilabel> and click on <guibutton>OK</guibutton>.
+  To backup your file through &kappname; Select
+  <guimenuitem>Backup</guimenuitem> from the <guimenu>File</guimenu> menu and
+  enter the folder where you wish the file to be copied to.  If the folder
+  needs mounting first and you have the sufficient privileges then check the
+  tick box labeled <guilabel>Mount this directory before backing up</guilabel>
+  and click on <guibutton>OK</guibutton>.
 </para>
 
 <para>
-The file will be coped to the directory specified with the current date appended to the filename so it is easy to see the date the file was backed up.
+  The file will be coped to the folder specified with the current date
+  appended to the filename so it is easy to see the date the file was backed up.
 </para>
 </sect1>
 
 <sect1 id="firsttime-contact">
 <title>Contacting the developers / Reporting Bugs</title>
-<sect2><title>Contacting the developers</title>
+
+<sect2>
+<title>Contacting the developers</title>
+
 <para>
-	You can contact the developers through their mailing list &devlist;.
+  You can contact the developers through their mailing list &devlist;.
 </para>
+
 <para>
-We're happy to hear about your experiences using &kappname;.
+  We're happy to hear about your experiences using &kappname;.
 </para>
 </sect2>
-<sect2><title>Reporting bugs</title>
+
+<sect2>
+<title>Reporting bugs</title>
+
 <para>
-	To report a bug please use the interface provided by &kappname; by selecting <menuchoice><guimenu>Help</guimenu><guimenuitem>Report Bug</guimenuitem></menuchoice> and filling in the required information.
+  To report a bug please use the interface provided by &kappname; by selecting
+  <menuchoice><guimenu>Help</guimenu><guimenuitem>Report
+  Bug</guimenuitem></menuchoice> and filling in the required information.
 </para>
-<sect3 id="firsttime.bugs.quality"><title>Writing High Quality Bug Reports</title>
+
+<sect3 id="firsttime.bugs.quality">
+<title>Writing High Quality Bug Reports</title>
+
 <para>
-	We encourage users to take extra time to write high-quality bug reports when submitting them.
-	This reduces wasted effort on all sides, as the reporter and the developer who will fix it trade e-mails until this information is really in place.
+  We encourage users to take extra time to write high-quality bug reports when
+  submitting them.  This reduces wasted effort on all sides, as the reporter and
+  the developer who will fix it trade emails until this information is really
+  in place.
 </para>
+
 <para>
-Eli Goldberg wrote the canonical Bug-Writing Guideline, available at <ulink url="http://issues.apache.org/bugwritinghelp.html">http://issues.apache.org/bugwritinghelp.html</ulink>.  Generally, you'll be well-served by following these guidelines:
+  Eli Goldberg wrote the canonical Bug-Writing Guideline, available at <ulink
+  url="http://issues.apache.org/bugwritinghelp.html">http://issues.apache.org/bugwritinghelp.html</ulink>.
+  Generally, you'll be well-served by following these guidelines:
 </para>
 
 <formalpara><title>Include your system information</title>
-<para>
-The  <menuchoice><guimenu>Help</guimenu><guimenuitem>Report Bug</guimenuitem></menuchoice> menu choice will fill this in automatically.  But if you would prefer not to use this interface, we will need to know the version of &kappname; you're running, the version of KDE, the name and version of your distribution, and the version of your kernel.
-</para>
+  <para>
+    The <menuchoice><guimenu>Help</guimenu><guimenuitem>Report
+    Bug</guimenuitem></menuchoice> menu choice will fill this in automatically,
+    but if you would prefer not to use this interface, we will need to know the
+    version of &kappname; you're running, the version of &kde;, the name and
+    version of your distribution, and the version of your kernel.
+  </para>
 </formalpara>
-
 
 <formalpara><title>Include a backtrace for crashes</title>
+  <para>
+    The backtrace is often the single most useful piece of information in
+    solving crashes.
+  </para>
+</formalpara>
+
+<formalpara><title>Try to reproduce it</title>
+  <para>
+    Let us know if you were able to do so.  It's useful to know whether the bug
+    only happened once and you couldn't get it to happen again or happens every
+    time or happens sometimes but not others.
+  </para>
+</formalpara>
+
+<formalpara><title>Include specific steps</title>
+  <para>
+    This is a bad bug report: <quote>I entered a transaction, and &kappname;
+    crashed.</quote> A much better bug report is: <quote>Using the transaction
+    form, I entered a new transaction in my Credit Card account.  I selected the
+    Transfer tab, entered in an amount, then changed to the Deposit tab, and
+    back to the Transfer tab.  When I returned to the Transfer tab, &kappname;
+    crashed.  This bug is fully reproducible for me.</quote>
+  </para>
+</formalpara>
+
+<formalpara><title>Tell us what you expected to happen</title>
+  <para>
+    In some cases, this is obvious, but in more subtle bugs, sometimes you'll
+    see a bug report where it is not obvious what the reporter expected to
+    happen.  Always tell us what you think should have happened.
+  </para>
+</formalpara>
+
+<formalpara><title>Consider running with debugging enabled</title>
+  <para>
+    By compiling a version configured with --enable-debug=full you can ensure
+    that the best possible backtraces are generated.  If you encounter a crash,
+    run &kappname; again from within gdb, and reproduce the crash.  When it
+    crashes, type <quote>bt</quote> to generate a backtrace.
+  </para>
+</formalpara>
+
 <para>
-The backtrace is often the single most useful piece of information in solving crashes.
+  Running this way is a bit more difficult, so we don't expect all users to do
+  this.  However, if you're interested in helping &kappname; become as stable as
+  possible, this is the best way to do it short of finding the bug in the code
+  and sending in a patch.
 </para>
-</formalpara>
-
-<formalpara><title>Try to reproduce it</title><para>Let us know if you were able to do so.  It's useful to know whether the bug only happened once and you couldn't get it to happen again or happens every time or happens sometimes but not others.</para>
-</formalpara>
-
-<formalpara><title>Include specific steps</title><para>This is a bad bug report: &quot;I entered a transaction, and &kappname; crashed.&quot;  A much better bug report is: &quot;Using the transaction form, I entered a new transaction in my Credit Card account.  I selected the Transfer tab, entered in an amount, then changed to the Deposit tab, and back to the Transfer tab.  When I returned to the Transfer tab, &kappname; crashed.  This bug is fully reproducible for me.&quot;</para>
-</formalpara>
-
-<formalpara><title>Tell us what you expected to happen</title><para>In crashes this is obvious, but in more subtle bugs, sometimes you'll see a bug report where it is not obvious what the reporter expected to happen.  Always tell us what you think should have happened.</para>
-</formalpara>
-
-<formalpara><title>Consider running with debugging enabled</title><para>By compiling a version configured with --enable-debug=full you can ensure that the best possible backtraces are generated.  If you encounter a crash, run &kappname; again from within gdb, and reproduce the crash.  When it crashes, type &quot;bt&quot; to generate a backtrace.</para>
-</formalpara>
-
-<para>Running this way is a bit more difficult, so we don't expect all users to do this.  However, if you're interested in helping &kappname; become as stable as possible, this is the best way to do it short of finding the bug in the code and sending in a patch.</para>
 </sect3>
 </sect2>
 </sect1>
-
 </chapter>

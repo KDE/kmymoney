@@ -1,56 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <chapter id="details.search">
-
 <chapterinfo>
-<authorgroup>
-<author>
-<firstname>Darin</firstname>
-<surname>Strait</surname>
-<affiliation><address><email>darin.strait@ashdar-partners.com</email></address></affiliation>
-</author>
-</authorgroup>
-<date>2009-05-08</date>
-<releaseinfo>0.9</releaseinfo>
+  <authorgroup>
+    <author>
+      <firstname>Darin</firstname>
+      <surname>Strait</surname>
+      <affiliation>
+        <address><email>darin.strait@ashdar-partners.com</email></address>
+      </affiliation>
+    </author>
+  </authorgroup>
+  <date>2009-08-05</date>
+  <releaseinfo>1.0</releaseinfo>
 </chapterinfo>
-
 <title>Search Transactions</title>
 
 <sect1 id="details.search.general">
 <title>General</title>
 
 <para>
-The <guilabel>Search Transactions</guilabel> dialog searches your data based on criteria that you 
-specify. You can access the dialog by going to the <guimenu>Edit</guimenu> menu and selecting 
-<guimenuitem>Find transactions...</guimenuitem>.
+  The <guilabel>Search Transactions</guilabel> dialog searches your data based
+  on criteria that you specify. You can access the dialog by going to
+  the <guimenu>Edit</guimenu> menu and selecting
+  <guimenuitem>Find transactions...</guimenuitem>.
 </para>
 
 <para>
-There are several tabs within this dialog. Each tab allows you to specify particular kinds of 
-criteria. When the <guibutton>Find</guibutton> button is pressed, the search is initiated and 
-all criteria that has been entered on any tab will be taken into account.
+  There are two main tabs in this dialog. The <quote>Criteria</quote> tab
+  displays a number of sub-tabs for specifying the search critera.
 </para>
 
 <para>
-The <guibutton>Reset</guibutton> button resets all of the criteria on all of the tabs back to the 
-defaults. This allows you to specify new search criteria.
+  The results will be displayed under the <quote>Result</quote> tab after the
+  search has completed. Below the list of results, &kappname; shows the number
+  of transactions that met the search criteria.  Double-clicking on an
+  individual transaction in the result list will bring up the appropriate ledger
+  and display the transaction.
 </para>
 
 <para>
-The <guibutton>Close</guibutton> button closes the <guilabel>Search Transactions</guilabel> dialog box.
+  When the <guibutton>Find</guibutton> button is pressed, the search is
+  initiated and all criteria that have been entered on any tab will be taken
+  into account.
 </para>
 
 <para>
-The results will be displayed in the lower portion of the dialog box after the 
-search has completed. Double-clicking on an individual transaction in the result 
-window will bring up the appropriate ledger and display the transaction.
+ The <guibutton>Reset</guibutton> button resets all of the fields on all of the
+ critera sub-tabs back to the defaults. This allows you to specify new search
+ criteria.
+</para>
+
+<para>
+  The <guibutton>Close</guibutton> button closes the <guilabel>Search
+  Transactions</guilabel> dialog box.
 </para>
 
 </sect1>
 
 <sect1 id="details.search.criteria">
-<title>Criteria</title>
+<title>Search Criteria</title>
 
 <para>
-In this tab you can select the search criteria to find your transactions
+  There are several sub-tabs under the main <quote>Criteria</quote> tab, each of
+  which allows you to specify different types of search criteria.  Below the
+  area for specifying the criteria, &kappname; lists each of the different types
+  of criteria that are currently specified for the search.
 </para>
 
 <sect2 id="details.search.text">
@@ -68,33 +82,47 @@ In this tab you can select the search criteria to find your transactions
 </screenshot>
 
 <para>
-This tab allows you to specify text for the search criteria. 
+  This tab allows you to speicify text to search for.  There are also two check
+  boxes that control how the text is used in the search.
 </para>
 
 <para>
-By default, this will match on simple substrings. For example:
+  By default, this will match on simple substrings. For example:
 </para>
 
 <para>
 <itemizedlist>
-<listitem><para>&quot;Best&quot; will find &quot;Best Cakes, Inc.&quot;</para></listitem>
-<listitem><para>&quot;est&quot; will also find &quot;Best Cakes, Inc.&quot;</para></listitem>
+  <listitem>
+    <para><quote>Best</quote> will find <quote>Best Cakes, Inc.</quote></para>
+  </listitem>
+  <listitem>
+    <para>
+      <quote>est</quote> will also find <quote>Best Cakes, Inc.</quote>
+    </para>
+  </listitem>
 </itemizedlist>
 </para>
 
 <para>
-Select <guilabel>Contains</guilabel> if you want to find transactions that contain the text, or select <guilabel>Does not contain</guilabel> if you want to find transactions that do not contain the specified text.
+  In the dropdown field next to the text field,
+  select <guilabel>Contains</guilabel> if you want to find transactions that
+  contain the text, or select <guilabel>Does not contain</guilabel> if you want
+  to find transactions that do not contain the specified text.
 </para>
 
 <para>
-If you check the <guilabel>Case Sensitive</guilabel> box, the search will be case sensitive.   For example, &quot;best&quot; would not find &quot;Best Cakes, Inc.&quot; if this option is set.
+  If you check the <guilabel>Case Sensitive</guilabel> box, the search will be
+  case sensitive.  For example, <quote>best</quote> would not find <quote>Best
+  Cakes, Inc.</quote> if this option is set.
 </para>
 
 <para>
-If you check the <guilabel>Treat Text as regular expression</guilabel> box, the text will be treated as a 
-regular expression.  For details on how to craft a regular expression, visit the Qt documentation at doc.trolltech.com, and look for the QRegExp class.
+  If you check the <guilabel>Treat Text as regular expression</guilabel> box,
+  the text will be treated as a regular expresssion.  For details on how to
+  craft a regular expression, visit the &Qt; documentation about the
+  <ulink url="http://qt.nokia.com/doc/3.3/qregexp.html#1">QRegExp
+  class</ulink>.
 </para>
-
 </sect2>
 
 <sect2 id="details.search.account">
@@ -112,16 +140,19 @@ regular expression.  For details on how to craft a regular expression, visit the
 </screenshot>
 
 <para>
-This tab allows you to specify the accounts that should be searched. 
+  This tab allows you to specify the accounts that should be searched. 
 </para>
 
 <para>
-Accounts are displayed in a tree format. Accounts that are marked for search are indicated with a check box. If you 
-click the <guibutton>All</guibutton> button, all accounts marked for searching. If you click the 
-<guibutton>None</guibutton> button, no accounts will be marked for searching. Individual accounts 
-can be marked or unmarked by clicking on the box next to the account name.
+  Accounts are displayed in a tree format. Accounts that are marked for search
+  are indicated with a check box. If you click the <guibutton>All</guibutton>
+  button, all accounts are marked for searching. If you click the
+  <guibutton>None</guibutton> button, no accounts will be marked for
+  searching. Individual accounts can be marked or unmarked by clicking on the
+  box next to the account name using the left mouse button. A complete hierarchy
+  of accounts can be marked or unmarked by clicking on the box using the right
+  mouse button.
 </para>
-
 </sect2>
 
 <sect2 id="details.search.date">
@@ -139,18 +170,17 @@ can be marked or unmarked by clicking on the box next to the account name.
 </screenshot>
 
 <para>
-This tab allows you to specify which dates should be searched.
+  This tab allows you to specify which dates should be searched.
 </para>
 
 <para>
-The &quot;Range&quot; control provides a convenient way to set the From and To controls. 
-The From and To controls can be manipulated individually. Dates can be 
-entered manually. The controls will prevent you from entering non-existing 
-dates. Date values can also be changed by clicking on the up and down arrows. 
-Clicking on the small calendar icon will bring up a calendar to easily select 
-dates.
+  The <quote>Range</quote> control provides a convenient way to set the From and
+  To controls.  The From and To controls can be manipulated individually. Dates
+  can be entered manually. The controls will prevent you from entering
+  non-existing dates. Date values can also be changed by clicking on the up and
+  down arrows when a particular part of a date is highlighted.  Clicking on the
+  small calendar icon will bring up a calendar to easily select dates.
 </para>
-
 </sect2>
 
 
@@ -169,15 +199,14 @@ dates.
 </screenshot>
 
 <para>
-This tab allows you to specify what amounts should be searched for.
+  This tab allows you to specify what amounts should be searched for.
 </para>
 
 <para>
-You can search for an exact amount or for a range of amounts. If you click on 
-the calculator icon, a small on-screen calculator will pop up to assist you 
-in entering a value.
+  You can search for an exact amount or for a range of amounts. If you click on
+  the calculator icon, a small on-screen calculator will pop up to assist you in
+  entering a value.
 </para>
-
 </sect2>
 
 <sect2 id="details.search.category">
@@ -195,21 +224,25 @@ in entering a value.
 </screenshot>
 
 <para>
-This tab allows you to specify which categories should be searched. 
+  This tab allows you to specify which categories should be searched. 
 </para>
 
 <para>
-Categories are displayed in a tree format. Categories that are marked for search are indicated with a box. If you 
-click the <guibutton>All</guibutton> button, all categories are marked for searching. If you click 
-the <guibutton>None</guibutton> button, no categories will be marked for searching. If you click 
-the <guibutton>Income</guibutton> button, income categories will be marked and expense categories 
-will be unmarked. If you click the <guibutton>Expense</guibutton> button, income categories will 
-be unmarked and expense categories will be marked. 
+  Categories are displayed in a tree format. Categories that are marked for
+  search are indicated with a box. If you click the <guibutton>All</guibutton>
+  button, all categories are marked for searching. If you click
+  the <guibutton>None</guibutton> button, no categories will be marked for
+  searching. If you click the <guibutton>Income</guibutton> button, income
+  categories will be marked and expense categories will be unmarked. If you
+  click the <guibutton>Expense</guibutton> button, income categories will be
+  unmarked and expense categories will be marked.
 </para>
 
 <para>
-Individual accounts can be marked or unmarked by clicking on the box next to 
-the account name.
+  Individual categories can be marked or unmarked by clicking on the box next to
+  the category name using the left mouse button. A complete hierarchy of
+  categories can be marked or unmarked by clicking on the box using the right
+  mouse button.
 </para>
 </sect2>
 
@@ -228,25 +261,30 @@ the account name.
 </screenshot>
 
 <para>
-This tab allows you to specify which payees should be searched. 
+  This tab allows you to specify which payees should be searched. 
 </para>
 
 <para>
-Payees that are marked for search are indicated with a box. If you click 
-the <guibutton>All</guibutton> button, all payees are marked for searching. If you click the 
-<guibutton>None</guibutton> button, no payees will be marked for searching. Individual payees can 
-be marked or unmarked by clicking on the box next to the payee name.
+  Payees that are marked for search are indicated with a box. If you click
+  the <guibutton>All</guibutton> button, all payees are marked for searching. If
+  you click the <guibutton>None</guibutton> button, no payees will be marked for
+  searching. Individual payees can be marked or unmarked by clicking on the box
+  next to the payee name.
 </para>
 
 <para>
-If you check the <guilabel>Select transactions without payees</guilabel> box, transactions with no payee 
-will be selected.
+  If you check the <guilabel>Select transactions without payees</guilabel> box,
+  only transactions with no payee will be selected.
 </para>
 
 </sect2>
 
 <sect2 id="details.search.details">
 <title>Details</title>
+
+<para>
+  This tab allows you to specify various additional search criteria.
+</para>
 
 <screenshot>
 <mediaobject>
@@ -260,54 +298,54 @@ will be selected.
 </screenshot>
 
 <para>
-You can search for various detail criteria.
-</para>
-
-<para>
 <itemizedlist>
-<title>Type can be one of the following:</title>
-<listitem><para>All Types</para></listitem>
-<listitem><para>Payments</para></listitem>
-<listitem><para>Deposits</para></listitem>
-<listitem><para>Transfers</para></listitem>
+  <title>Type can be one of the following:</title>
+  <listitem><para>All Types</para></listitem>
+  <listitem><para>Payments</para></listitem>
+  <listitem><para>Deposits</para></listitem>
+  <listitem><para>Transfers</para></listitem>
 </itemizedlist>
 
 <itemizedlist>
-<title>State can be one of the following:</title>
-<listitem><para>All states</para></listitem>
-<listitem><para>Not reconciled</para></listitem>
-<listitem><para>Cleared</para></listitem>
-<listitem><para>Reconciled</para></listitem>
+  <title>State can be one of the following:</title>
+  <listitem><para>All states</para></listitem>
+  <listitem><para>Not reconciled</para></listitem>
+  <listitem><para>Cleared</para></listitem>
+  <listitem><para>Reconciled</para></listitem>
 </itemizedlist>
 
 <itemizedlist>
-<title>Validity can be one of the following:</title>
-<listitem><para>Any transaction</para></listitem>
-<listitem><para>Valid transaction</para></listitem>
-<listitem><para>Invalid transaction</para></listitem>
+  <title>Validity can be one of the following:</title>
+  <listitem><para>Any transaction</para></listitem>
+  <listitem><para>Valid transaction</para></listitem>
+  <listitem><para>Invalid transaction</para></listitem>
 </itemizedlist>
 </para>
 
 <para>
-You can search for a particular transaction number or search for a range of 
-transaction numbers.
+  You can search for a particular transaction number or search for a range of
+  transaction numbers.
 </para>
 
 </sect2>
 </sect1>
 
 <sect1 id="details.search.results">
-<title>Search criteria</title>
+<title>Search results</title>
 
 <para>
-The results tab displays the Date, Account, Details, Reconciliation status, Payment and Deposit for each transaction that matches the search criteria you have entered.
+  The <quote>Result</quote> tab displays the Date, Account, Details,
+  Reconciliation status, Payment, and Deposit for each transaction
+  that matches the search criteria you have entered.  Right clicking
+  on the header row of the results list allows you to alter the sort
+  order of the results.
 </para>
 
 <para>
-Double-clicking on a transaction will display the corresponding account ledger and focus on the selected transaction.
+  Double-clicking on a transaction will display the corresponding
+  account ledger and focus on the selected transaction.
 </para>
 
 </sect1>
 
 </chapter>
-

@@ -1,266 +1,290 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter id="details.forecast">
-  <chapterinfo>
-    <authorgroup>
-      <author>
-        <surname>Colin Wright &lt;cdwright@gwi.net&gt;</surname>
-      </author>
-    </authorgroup>
+<chapterinfo>
+  <authorgroup>
+    <author>
+      <surname>Colin Wright &lt;cdwright@gwi.net&gt;</surname>
+    </author>
+  </authorgroup>
+  <date>2009-08-03</date>
+  <releaseinfo>1.0</releaseinfo>
+</chapterinfo>
 
-    <date>2008-01-29</date>
+<title id="details.forecast.title">Forecast</title>
+<sect1 id="details.forecast.define">
+<title>What is a Forecast?</title>
 
-    <releaseinfo>0.9</releaseinfo>
-  </chapterinfo>
+<para>
+  In &kappname;, a Forecast is a prediction of the balances of Accounts during a
+  specified future period of time.</para>
 
-  <title id="details.forecast.title">Forecast</title>
+<para>
+  Forecasts can be predicted using one of two methods.
+</para>
 
-  <sect1 id="details.forecast.define">
-    <title>What is a Forecast?</title>
+<variablelist>
+  <varlistentry>
+    <term>Scheduled and Future Transactions</term>
+    <listitem>
+      <para>&kappname; uses a combination of future transactions already entered
+        into the ledgers and the entries in the Schedule.</para>
+    </listitem>
+  </varlistentry>
 
-    <para>In &kappname;, a Forecast is a prediction of the balances of Accounts during a specified future period of time.</para>
+  <varlistentry>
+    <term>History-based</term>
+    <listitem>
+      <para>&kappname; uses values from past transactions in the ledgers to
+        predict future transactions.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
 
-    <para>Forecasts can be predicted using one of two methods.</para>
+<para>
+  The forecast method and forecast period can be set in the &kappname; Settings,
+  in the Forecast pane.
+</para>
 
-    <variablelist>
-      <varlistentry>
-        <term>Scheduled and Future Transactions</term>
+<para>
+  &kappname; Forecast provides a summary, showing the predicted balances at
+  account cycle dates and the expected difference between the starting and
+  ending balances.  The length of the account cycle can be set by the user.  The
+  summary also displays messages about significant predicted changes to the
+  accounts during the forecast period.
+</para>
 
-        <listitem>
-          <para>&kappname; uses a combination of future transactions already entered into the ledgers and the entries in the Schedule.</para>
-        </listitem>
-      </varlistentry>
+<para>
+  As well as the summary, &kappname; Forecast also allows you to view day-by-day
+  balances and view the minimum and maximum balances for each forecast account
+  cycle.
+</para>
 
-      <varlistentry>
-        <term>History-based</term>
+<para>
+  By default the Forecast is created for 90-days, with 30-day account cycles
+  using Scheduled and Future Transactions.
+</para>
+</sect1>
 
-        <listitem>
-          <para>&kappname; uses values from past transactions in the ledgers to predict future transactions.</para>
-        </listitem>
-      </varlistentry>
+<sect1 id="details.forecast.view" >
+<title>Viewing Forecasts</title>
 
-    </variablelist>
+<para>
+  You can view a Forecast by clicking the appropriate icon in the navigation
+  pane at the left hand side of your &kappname; window.
+</para>
 
-    <para>The forecast method and forecast period can be set in the
-    &kappname; Settings, in the Forecast pane.</para>
+<para>
+  The Forecast window is split into three tabs
+</para>
 
-    <para>&kappname; Forecast provides a summary, showing the predicted
-    balances at account cycle dates and the expected difference between the
-    starting and ending balances.  The length of the account cycle can be set
-    by the user.  The summary also displays messages about significant predicted
-    changes to the accounts during the forecast period.</para>
+<sect2>
+<title>Summary Tab</title>
 
-    <para>As well as the summary, &kappname; Forecast also allows you to
-    view day-by-day balances and view the minimum and maximum balances
-    for each forecast account cycle.</para>
+<para>
+  The Summary tab is split vertically into two halves.
+</para>
 
-    <para>By default the Forecast is created for 90-days, with 30-day
-    account cycles using Scheduled and Future Transactions.</para>
-  </sect1>
+<sect3>
+<title>Account Summary</title>
 
-  <sect1 id="details.forecast.view" >
-	<title>Viewing Forecasts</title>
+<para>
+  The Account Summary contains a grid displaying a row of information for each
+  Asset and Liability.
+</para>
 
-    <para>You can view a Forecast by clicking the appropriate large icon
-    in the navigation pane at the left hand side of your &kappname;
-    window.</para>
+<para>
+  The following columns are displayed:
+</para>
 
-    <para>The Forecast window is split into three tabs</para>
+<variablelist>
+  <varlistentry>
+    <term>Account</term>
+    <listitem>
+      <para>The name of the Asset or Liability account</para>
+    </listitem>
+  </varlistentry>
 
-    <sect2>
-      <title>Summary Tab</title>
+  <varlistentry>
+    <term>Current Balance (Current)</term>
+    <listitem>
+      <para>The current balance of the account is displayed.</para>
+    </listitem>
+  </varlistentry>
 
-      <para>The Summary tab is split vertically into two halves.</para>
+  <varlistentry>
+    <term>Account Cycle Balance</term>
+    <listitem>
+      <para>The Forecast period is split into account cycles.  The default
+        account cycle length is 30 days, but can be set by the user.</para>
 
-      <sect3>
-        <title>Account Summary</title>
+      <para>The first account cycle date is the first Forecast date.  By default
+        this is the current date plus one account cycle, but can change
+        depending on the "Day of Month to start Forecast" setting.</para>
 
-        <para>The Account Summary contains a grid displaying a row of information
-        for each Asset and Liability.</para>
+      <para>Remaining account cycle dates are determined by adding the account
+        cycle length to the previous account cycle date.  This is continued
+        until the calculated account cycle date would be beyond the Forecast
+        period.</para>
 
-        <para>The following columns are displayed:</para>
-        <variablelist>
-          <varlistentry>
-            <term>Account</term>
+      <para>For each account cycle date the predicted balance is
+        displayed.</para>
+    </listitem>
+  </varlistentry>
 
-            <listitem>
-              <para>The name of the Asset or Liability account</para>
-            </listitem>
-          </varlistentry>
-          <varlistentry>
-            <term>Current Balance (Current)</term>
-            <listitem>
-              <para>The current balance of the account is displayed.</para>
-            </listitem>
-          </varlistentry>
-          <varlistentry>
-            <term>Account Cycle Balance</term>
-            <listitem>
-              <para>The Forecast period is split into account cycles.  The default
-              account cycle length is 30 days, but can be set by the user.</para>
-              
-              <para>The first account cycle date is the first Forecast date.  By
-              default this is the current date plus one account cycle, but can
-              change depending on the "Day of Month to start Forecast" setting.</para>
+  <varlistentry>
+    <term>Total Variation</term>
+    <listitem>
+      <para>The rightmost column displays the predicted difference in value
+        between the balances at the start and end of the forecast.  If the
+        predicted end value of the account (in terms of net worth) is less than
+        the start value the whole row is highlighted in red.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
 
-              <para>Remaining account cycle dates are determined by adding the
-              account cycle length to the previous account cycle date.  This is
-              continued until the calculated account cycle date would be beyond
-              the Forecast period.</para>
-              
-              <para>For each account cycle date the predicted balance is displayed.</para>
-            </listitem>
-          </varlistentry>
-          <varlistentry>
-            <term>Total Variation</term>
-            <listitem>
-              <para>The rightmost column displays the predicted difference in value
-              between the balances at the start and end of the forecast.  If the
-              predicted end value of the account (in terms of net worth) is less than
-              the start value the whole row is highlighted in red.</para>
-            </listitem>
-          </varlistentry>
-        </variablelist>
+</sect3>
 
-      </sect3>
-      <sect3>
-        <title>Key Summary Information</title>
+<sect3>
+<title>Key Summary Information</title>
 
-        <para>The bottom half of the Summary tab displays noteworthy information about
-        accounts.  This includes:</para>
+<para>
+  The bottom half of the Summary tab displays noteworthy information about
+  accounts.  This includes:
+</para>
 
-        <variablelist>
-          <varlistentry>
-            <term>Assets below zero</term>
+<variablelist>
+  <varlistentry>
+    <term>Assets below zero</term>
+    <listitem>
+      <para>A message is displayed for any asset for which the value starts or
+        will drop below zero during the forecast period.</para>
+    </listitem>
+  </varlistentry>
 
-            <listitem>
-              <para>A message is displayed for any asset for which the value starts
-              or will drop below zero during the forecast period.</para>
-            </listitem>
-          </varlistentry>
-          <varlistentry>
-            <term>Liabilities above zero</term>
+  <varlistentry>
+    <term>Liabilities above zero</term>
+    <listitem>
+      <para>A message is displayed for any liability for which the value starts
+        or will rise above zero during the forecast period.  Note that the value
+        of a liability is the negative of its ledger balance, since a positive
+        balance indicates money owed.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect3>
+</sect2>
 
-            <listitem>
-              <para>A message is displayed for any liability for which the value
-              starts or will rise above zero during the forecast period.  Note that
-              the value of a liability is the negative of its ledger balance, since
-              a positive balance indicates money owed.</para>
-            </listitem>
-          </varlistentry>
-        </variablelist>
-      </sect3>
-    </sect2>
+<sect2>
+<title>Details Tab</title>
 
-    <sect2>
-      <title>Details Tab</title>
+<para>
+  The Details tab contains a grid displaying a row of information for each Asset
+  and Liability.
+</para>
 
-      <para>The Details tab contains a grid displaying a row of information
-      for each Asset and Liability.</para>
+<variablelist>
+  <varlistentry>
+    <term>Account</term>
+    <listitem>
+      <para>The name of the Asset or Liability account</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Dates</term>
+    <listitem>
+      <para>For each date in the Forecast period a column displays the predicted
+        balance of the account on that date.  The date columns are in ascending
+        order from left to right.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Total Variation</term>
+    <listitem>
+      <para>The rightmost column displays the predicted difference in value
+        between the balances at the start and end of the forecast.  If the
+        predicted end value of the account (in terms of net worth) is less than
+        the start value the whole row is highlighted in red.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+<title>Advanced Tab</title>
+
+<para>
+  The Advanced tab contains a grid displaying a row of information for each
+  Asset and Liability.  The information is split into columns as follows:
+</para>
+
+<variablelist>
+  <varlistentry>
+    <term>Account</term>
+    <listitem>
+      <para>The name of the Asset or Liability account</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Minimum Account Cycle Balance</term>
+    <listitem>
+      <para>For each account cycle number &lt;n&gt; in the Forecast period
+      the following columns are displayed:</para>
 
       <variablelist>
-        <varlistentry>
-          <term>Account</term>
-          
-          <listitem>
-            <para>The name of the Asset or Liability account</para>
-          </listitem>
-        </varlistentry>
-        <varlistentry>
-          <term>Dates</term>
-          <listitem>
-            <para>For each date in the Forecast period a column displays the
-            predicted balance of the account on that date.  The date columns are in
-            ascending order from left to right.</para>
-          </listitem>
-        </varlistentry>
-        <varlistentry>
-          <term>Total Variation</term>
-          <listitem>
-            <para>The rightmost column displays the predicted difference in value
-            between the balances at the start and end of the forecast.  If the
-            predicted end value of the account (in terms of net worth) is less than
-            the start value the whole row is highlighted in red.</para>
-          </listitem>
-        </varlistentry>
+	<varlistentry>
+	  <term>Minimum Balance (Min Bal &lt;n&gt;)</term>
+	  <listitem>
+	    <para>The minimum predicted balance during the account cycle</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Minimum Balance Date (Min Date &lt;n&gt;)</term>
+	  <listitem>
+	    <para>The date on which the balance reaches its predicted
+	    minimum.</para>
+	  </listitem>
+	</varlistentry>
       </variablelist>
-    </sect2>
+    </listitem>
+  </varlistentry>
 
-    <sect2>
-      <title>Advanced Tab</title>
+  <varlistentry>
+    <term>Maximum Account Cycle Balance</term>
 
-      <para>The Advanced tab contains a grid displaying a row of information
-      for each Asset and Liability.  The information is split into columns
-      as follows:</para>
+    <listitem>
+      <para>For each account cycle number &lt;n&gt; in the Forecast period
+      the following columns are displayed:</para>
 
       <variablelist>
-        <varlistentry>
-          <term>Account</term>
-          
-          <listitem>
-            <para>The name of the Asset or Liability account</para>
-          </listitem>
-        </varlistentry>
-
-        <varlistentry>
-          <term>Minimum Account Cycle Balance</term>
-          
-          <listitem>
-            <para>For each account cycle number &lt;n&gt; in the Forecast period
-            the following columns are displayed:</para>
-  
-            <variablelist>
-              <varlistentry>
-                <term>Minimum Balance (Min Bal &lt;n&gt;)</term>
-                <listitem>
-                  <para>The minimum predicted balance during the account cycle</para>
-                </listitem>
-              </varlistentry>
-              <varlistentry>
-                <term>Minimum Balance Date (Min Date &lt;n&gt;)</term>
-                <listitem>
-                  <para>The date on which the balance reaches its predicted
-                  minimum.</para>
-                </listitem>
-              </varlistentry>
-            </variablelist>
-          </listitem>
-        </varlistentry>
-
-        <varlistentry>
-          <term>Maximum Account Cycle Balance</term>
-          
-          <listitem>
-            <para>For each account cycle number &lt;n&gt; in the Forecast period
-            the following columns are displayed:</para>
-  
-            <variablelist>
-              <varlistentry>
-                <term>Maximum Balance (Max Bal &lt;n&gt;)</term>
-                <listitem>
-                  <para>The maximum predicted balance during the account cycle</para>
-                </listitem>
-              </varlistentry>
-              <varlistentry>
-                <term>Maximum Balance Date (Max Date &lt;n&gt;)</term>
-                <listitem>
-                  <para>The date on which the balance reaches its predicted
-                  maximum.</para>
-                </listitem>
-              </varlistentry>
-            </variablelist>
-          </listitem>
-        </varlistentry>
-
-        <varlistentry>
-          <term>Average</term>
-
-          <listitem>
-            <para>The average balance of the account during the forecast period</para>
-          </listitem>
-        </varlistentry>
+	<varlistentry>
+	  <term>Maximum Balance (Max Bal &lt;n&gt;)</term>
+	  <listitem>
+	    <para>The maximum predicted balance during the account cycle</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Maximum Balance Date (Max Date &lt;n&gt;)</term>
+	  <listitem>
+	    <para>The date on which the balance reaches its predicted
+	    maximum.</para>
+	  </listitem>
+	</varlistentry>
       </variablelist>
+    </listitem>
+  </varlistentry>
 
-    </sect2>
+  <varlistentry>
+    <term>Average</term>
 
-  </sect1>
+    <listitem>
+      <para>The average balance of the account during the forecast period</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+</sect2>
+</sect1>
 </chapter>

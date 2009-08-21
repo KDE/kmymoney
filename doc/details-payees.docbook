@@ -1,29 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <chapter id="details.payees">
-
 <chapterinfo>
-<authorgroup>
-<author>
-<firstname>Roger</firstname>
-<surname>Lum</surname>
-<affiliation><address><email>rogerlum@gmail.com</email></address></affiliation>
-</author>
-<author>
-<firstname>Ace</firstname>
-<surname>Jones</surname>
-<affiliation><address><email>acejones@users.sf.net</email></address></affiliation>
-</author>
-</authorgroup>
-<date>2006-08-02</date>
-<releaseinfo>0.9</releaseinfo>
+  <authorgroup>
+    <author>
+      <firstname>Roger</firstname>
+      <surname>Lum</surname>
+      <affiliation>
+       <address><email>rogerlum@gmail.com</email></address>
+      </affiliation>
+    </author>
+    <author>
+      <firstname>Ace</firstname>
+      <surname>Jones</surname>
+      <affiliation>
+        <address><email>acejones@users.sf.net</email></address>
+      </affiliation>
+    </author>
+  </authorgroup>
+  <date>2009-06-04</date>
+  <releaseinfo>1.0</releaseinfo>
 </chapterinfo>
 
 <title id="details.payees.title">Payees</title>
+
 <para>
-  The Payees screen provides detailed information about all the payees and payers involved in transactions. The Payees screen is split into two main areas: a payees and payers list and a detail area. 
+  The Payees screen provides detailed information about all the payees and
+  payers involved in transactions. The Payees screen is split into two main
+  areas: a payees and payers list and a detail area.
 </para>
 
 <para>
-  The Payees screen allows for updating personal information associated with a particular payee or payer and viewing the transaction history.  
+  The Payees screen allows for viewing the transactions for the selected payee,
+  updating personal information associated with a particular payee or payer, and
+  specifying transaction matching criteria.
 </para>
 
 <para>
@@ -36,36 +45,63 @@
 	</screenshot>
 </para>
 
-<sect1 id="details.payees.list"><title id="details.payees.list.title">Payees List</title>
+<sect1 id="details.payees.list">
+<title>Payees List</title>
 
 <para>
-  A list of payees and payers is on the left side of this screen. The payee list is sorted alphabetically. To sort in reverse alphabetical order, click on the Name title at the top of the list.
+  A list of payees and payers is on the left side of this screen. The payee list
+  is sorted alphabetically. To sort in reverse alphabetical order, click on the
+  Name title at the top of the list.
 </para>
 
-<sect2><title>Adding a Payee or Payer</title>
+<sect2>
+<title>Adding a Payee or Payer</title>
+
 <para>
-  To add a payee or payer, right-click on any payee name and choose "New payee". This creates a new payee called 'New Payee.' Double-click on this payee to enter the name of the new payee or payer. 
+  To add a payee or payer, right-click on any payee name and choose
+  <guimenuitem>New payee</guimenuitem>. This creates a new payee called
+  <quote>New Payee</quote>. Right-click on this payee and select
+  <guimenuitem>Rename payee</guimenuitem> to enter the name of the new payee or
+  payer.
 </para>
 </sect2>
 
-<sect2><title>Renaming a Payee or Payer</title>
+<sect2>
+<title>Renaming a Payee or Payer</title>
+
 <para>
-  To rename a payee or payer, simply double-click on the name and the name becomes editable. Changing the name will affect the name in all transaction entries.
+  To rename a payee or payer, simply right-click on the name, select
+  <guimenuitem>Rename payee</guimenuitem> and the name becomes
+  editable. Changing the name will affect the name in all the transactions in
+  which it appears.
 </para>
 </sect2>
 
-<sect2><title>Deleting a Payee or Payer</title>
+<sect2>
+<title>Deleting a Payee or Payer</title>
+
 <para>
-  To remove a payee or payer, right-click the name and select "Delete payee". You will not be able to delete a payee or payer unless all the transactions associated with that particular payee or payer have been removed.
+  To remove a payee or payer, right-click the name and select
+  <guimenuitem>Delete payee</guimenuitem>. If the payee has any transactions,
+  you will be presented with a dialog that allows you to reassign them to a
+  different payee, and also a check box to enable a deleted name to be added to
+  the new payee's matching list.
 </para>
 </sect2>
 
 </sect1>
 
-<sect1 id="details.payees.personalinformation"><title id="details.payees.personalinformation.title">Personal Information</title>
+<sect1 id="details.payees.personalinformation">
+<title>Additional Payee Details</title>
+
+<sect2>
+<title>Personal Information</title>
 
 <para>
-  To view and edit the personal information associated with a particular payee, select the payee from the list and select the Personal Information tab in the detail area. To modify this information, edit the detail area directly and press the Update button when finished.   
+  To view and edit the personal information associated with a particular payee,
+  select the payee from the list and select the Address tab. To modify this
+  information, edit the detail area directly and press the Update button when
+  finished.
 </para>
 
 <para>
@@ -81,60 +117,111 @@
 	</mediaobject>
 </screenshot>
 </para>
+</sect2>
 
-<sect2><title>Transaction Matching Settings</title>
+<sect2>
+<title>Transaction Matching Settings</title>
 
-<sect3><title>Overview</title>
+<sect3>
+<title>Overview</title>
+
 <para>
-&kappname; has the ability to automatically assign the proper payee to imported transactions.
-This can be handy when importing transactions from your bank when the payee name has extra unnecessary characters, or worse if the payee names change.
+ &kappname; has the ability to automatically assign the proper payee to imported
+ transactions.  This can be handy when importing transactions from your bank,
+ when the payee name has extra unnecessary characters, or worse, if the payee
+ names change.
 </para>
 
 <para>
-For example, let's say your monthly mortgage payment comes in from your bank like this &quot;SUNTRUST BANK       MAPLE VALLEY, GA    111506&quot; one month and then &quot;SUNTRUST BANK       MAPLE VALLEY, GA    121606&quot; the next month.
-You would really like both of those transactions to be assigned simply to your payee &quot;SunTrust&quot;.
-The transaction matching feature is for you!
+  For example, let's say your monthly mortgage payment comes in from your bank
+  like this <quote>SUNTRUST BANK MAPLE VALLEY, GA 111506</quote> one month and
+  then <quote>SUNTRUST BANK MAPLE VALLEY, GA 121606</quote> the next month.  You
+  would really like both of those transactions to be assigned simply to your
+  payee <quote>SunTrust</quote>.  The transaction matching feature is for you!
+</para>
+
+<para>
+<screenshot>
+	<screeninfo>The payee matching tab</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="payee_match.png" format="PNG" />
+	</imageobject>
+	<textobject>
+	<phrase>Payee matching details</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
 </para>
 </sect3>
 
-<sect3><title>Setting up</title>
+<sect3>
+<title>Setting up</title>
+
 <para>
-From the Payee Personal Information tab, you can set the Transaction Matching Settings.  You have 3 major options:
+  From the Matching tab, you can set the Transaction Matching Settings. You have
+  3 major options:
 </para>
 
 <itemizedlist>
-	<listitem><para>No Matching.  Disables the feature for this payee.  This is the default setting for all payees.</para></listitem>
-	<listitem><para>Match on Payee Name.  Enables the feature, and uses the payee name itself as the Match Key</para></listitem>
-	<listitem><para>Match on Key.  Enables the feature, and allows you to enter in a Match Key of your choosing.</para></listitem>
+  <listitem>
+    <para>
+      No Matching.  Disables the feature for this payee.  This is the default
+      setting for all payees.
+    </para>
+  </listitem>
+
+  <listitem>
+    <para>
+      Match on Payee Name.  Enables the feature, and uses the payee name itself
+      as the Match Key
+    </para>
+  </listitem>
+
+  <listitem>
+    <para>
+      Match on Key.  Enables the feature, and allows you to enter one or more
+      Match Keys of your choosing.  In general, entering a plain string will
+      work perfectly.  However, the match keys are actually regular expressions,
+      so it is possible to match on more complicated patterns.
+    </para>
+  </listitem>
 </itemizedlist>
 
-<para>You can also choose whether you want to ignore the case of the Match Key.  If you choose this option, the Match Key &quot;SunTrust&quot; would match &quot;SUNTRUST BANK&quot; or &quot;SunTrust Bank&quot;</para>
-
+<para>
+  You can also choose whether you want to ignore the case of the Match Key.  If
+  you choose this option, the Match Key <quote>SunTrust</quote> would match
+  <quote>SUNTRUST BANK</quote> or <quote>SunTrust Bank</quote>.
+</para>
 </sect3>
 
-<sect3><title>Importing Transactions</title>
+<sect3>
+<title>Importing Transactions</title>
 
 <para>
-When you import transactions using the QIF import, or using a plugin such as OFX or AqBanking, the Match Keys you have set will be considered.
-If the Match Key for one of your payees is found anywhere in the payee of the imported transaction, the corresponding payee from your list will be assigned to that transaction.
-Thus, a Match Key of &quot;SunTrust&quot; will match &quot;SUNTRUST BANK MAPLE VALLEY,GA&quot; or even &quot;MORGENSUNTRUST&amp;LOAN&quot;.
-So choose your Match Keys carefully.
-<note><para>
-If a transaction payee matches more than one Match Key, the behaviour is undefined.
-&kappname; will arbitrarily pick one of the matching payees.
-</para></note>
+  When you import transactions using the QIF import, or using a plugin such as
+  OFX or AqBanking, the Match Keys you have set will be considered.  If the
+  Match Key for one of your payees is found anywhere in the payee of the
+  imported transaction, the corresponding payee from your list will be assigned
+  to that transaction.  Thus, a Match Key of <quote>SunTrust</quote> will match
+  <quote>SUNTRUST BANK MAPLE VALLEY,GA</quote> or even
+  <quote>MORGENSUNTRUST&amp;LOAN</quote>.  So choose your Match Keys carefully.
+  <note><para> If a transaction payee matches more than one Match Key, the
+  behaviour is undefined.  &kappname; will arbitrarily pick one of the matching
+  payees.  </para></note>
 </para>
-
 </sect3>
-
 </sect2>
-
 </sect1>
 
-<sect1 id="details.payees.transactionhistory"><title id="details.payees.transactionhistory.title">Viewing Transaction History</title>
+<sect1 id="details.payees.transactionhistory">
+<title>Viewing Transaction History</title>
 
 <para>
-  To view all transactions associated with a particular payee, select the payee from the list and the Transaction tab in the detail area. Double-clicking a particular transaction will bring you directly to that transaction in the Ledgers screen. 
+  To view all transactions associated with a particular payee, select the payee
+  from the list and the Transaction tab in the detail area. Double-clicking a
+  particular transaction will bring you directly to that transaction in the
+  Ledgers screen.
 </para>
 
 <para>
@@ -150,7 +237,5 @@ If a transaction payee matches more than one Match Key, the behaviour is undefin
 	</mediaobject>
 </screenshot>
 </para>
-
 </sect1>
-
 </chapter>

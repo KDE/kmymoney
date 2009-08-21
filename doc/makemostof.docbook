@@ -1,68 +1,109 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <chapter id="makingmostof">
-
 <chapterinfo>
-<authorgroup>
-<author>
-	<firstname>Joe</firstname>
-	<surname>(joe1011010)</surname>
-	<affiliation>
-		<address><email>joe1011010_km@users.sourceforge.net</email></address>
-	</affiliation>
-</author>
-</authorgroup>
-<date>2006-05-30</date>
-<releaseinfo>0.8</releaseinfo>
+  <authorgroup>
+    <author>
+      <firstname>Joe</firstname>
+      <surname>(joe1011010)</surname>
+      <affiliation>
+        <address><email>joe1011010_km@users.sourceforge.net</email></address>
+      </affiliation>
+    </author>
+  </authorgroup>
+  <date>2009-05-05</date>
+  <releaseinfo>1.0</releaseinfo>
 </chapterinfo>
 
 <title>Making the most of &kappname;</title>
 
 <para>
-    You could go ahead, click some buttons and fill in some data. After a time, you could decide you have done it wrong and start again, even if you did read the documentation on each part of &kappname;.
+  Whilst you could go ahead, clicking some buttons and filling in some data,
+  after a time, you could decide you have done it wrong and start again, even if
+  you did read the documentation on each part of &kappname;.
 </para>
+
 <para>
-    You will get a more effective system if you spend a little time planning how you are going to use &kappname;, so follow the steps given here.
+  You will get a more effective system if you spend a little time planning how
+  you are going to use &kappname;, so follow the steps given here.
 </para>
 
 <sect1 id="makingmostof.basicaccounting">
 <title>Basic Accounting</title>
 
 <para>
-    Imagine your money as balls, or beans, and to stop them rolling around you keep them in a box, or pot. Accounting, or Book Keeping, is the process of counting the beans in the pot, or several pots.
+  Imagine your money as balls, or beans, and to stop them rolling around you
+  keep them in a box, or pot. Accounting, or Book Keeping, is the process of
+  counting the beans in the pot, or several pots.
+</para>
+
+<para>
+  You have some money in the pot marked <quote>Cash</quote>. You buy some goods,
+  so you take some beans out of the cash pot and place them into another pot
+  marked <quote>Supplier</quote>. The supplier gives you some goods in exchange
+  for the cash, so you take the beans out of the pot marked
+  <quote>Supplier</quote> and put them in the pot marked <quote>Goods</quote>.
 </para>
 <para>
-    You have some money, in the pot marked <quote>Cash</quote>. You buy some goods, so you take some beans out of the cash pot and place them into another pot marked <quote>Supplier</quote>. The supplier gives you some goods in exchange for the cash, so you take the beans out of the  pot marked <quote>Supplier</quote> and put them in the pot marked <quote>Goods</quote>.
+  The goods have a value (the price you paid) so you still have the same amount
+  of beans, some representing cash and some representing goods.
 </para>
 <para>
-    The goods have a value (the price you paid) so you still have the same amount of beans, some representing cash and some representing goods.
+  In this case you have two movements of beans, or transactions. Each
+  transaction needs two entries, one to take beans out and one to put beans
+  in. This is called <quote>double entry book keeping</quote> or <quote>double
+  entry accounting</quote>. The recording of the transactions is done in a
+  <quote>Ledger</quote>; each pot is known as an <quote>Account</quote> or
+  <quote>Ledger code</quote>.
 </para>
+
 <para>
-    In this case you have two movements of beans, or transactions. Each transaction needs two entries, one to take beans out and one to put beans in. This is called <quote>double entry book keeping</quote> or <quote>double entry accounting</quote>. The recording of the transactions is done in a <quote>Ledger</quote>; each pot is known as an <quote>Account</quote> or <quote>Ledger code</quote>.
+  Now you take some goods and give them to a customer, who gives you some cash
+  in exchange. The goods were worth some beans and, hopefully, the customer has
+  given us more beans than that, so making a profit. To over simplify, the beans
+  from the Goods pot come back as Cash, but we can split that as the <quote>Cost
+  of Goods sold</quote> and <quote>Profit</quote>. This transaction has three
+  entries; one side of the <quote>double entry</quote> has been split.
 </para>
+
 <para>
-    Now you take some goods and give them to a customer, who gives you some cash in exchange. The goods were worth some beans and, hopefully, the customer has given us more beans than that, so making a profit. To over simplify, the beans from the Goods pot come back as Cash, but we can split that as the <quote>Cost of Goods sold</quote> and <quote>Profit</quote>. This transaction has three entries; one side of the <quote>double entry</quote> has been split.
-</para>
-<para>
-    This will be covered properly in setting up accounts for Businesses.
+  This will be covered properly in setting up accounts for Businesses.
 </para>
 
 <sect2 id="makingmostof.basicaccounting.personalaccounts">
 <title>Defining the accounts (personal records)</title>
 
 <para>
-    Most accounts, or pots, above represent a measure of our <quote>Worth</quote>. The cash and goods represent our <quote>Assets</quote>; so does what we are owed if our customers have not yet given us the money. The money we owe, say if we had not paid our suppliers, are our <quote>Liabilities</quote>. These accounts are transferable to Cash and have a value.
+  Most accounts, or pots, above represent a measure of our
+  <quote>Worth</quote>. The cash and goods represent our <quote>Assets</quote>;
+  so does what we are owed if our customers have not yet given us the money. The
+  money we owe, say if we had not paid our suppliers, are our
+  <quote>Liabilities</quote>. These accounts are transferable to Cash and have a
+  value.
 </para>
+
 <para>
-    Any pots that cannot be valued are <quote>Income</quote> or <quote>Expense</quote>, such as an unpaid phone bill that would be an expense as we have already made the calls. Although these do not have a value, it is useful to monitor how much is in each.
+  Any pots that cannot be valued are <quote>Income</quote> or
+  <quote>Expense</quote>, such as an unpaid phone bill that would be an expense
+  as we have already made the calls. Although these do not have a value, it is
+  useful to monitor how much is in each.
 </para>
+
 <para>
-    In some cases a supplier is a Liability, in others it is an Expense. This is something we need to consider and decide for each case. Similarly, you may set up a loan as a Liability, particularly if you transfer the money into your bank account, but it could be an expense if it was to buy some furniture.
+  In some cases a supplier is a <quote>Liability</quote>, in others it is an
+  <quote>Expense</quote>. This is something we need to consider and decide for
+  each case. Similarly, you may set up a loan as a Liability, particularly if
+  you transfer the money into your bank account, but it could be an Expense if
+  it was to buy some furniture.
 </para>
+
 <para>
-    Consider how you want to analyze your income and expenses. This will decide how you set them up.
+  Consider how you want to analyze your income and expenses. This will decide how you set them up.
 </para>
+
 <para>
-    Finally, consider if you want everything in one set of accounts, or two or more. This may depend on the legal framework or just how you want to analyze things. Each set of accounts would be handled separately.
+  Finally, consider if you want everything in one set of accounts, or two or
+  more. This may depend on the legal framework or just how you want to analyze
+  things. Each set of accounts would be handled separately.
 </para>
 </sect2>
 
@@ -70,7 +111,9 @@
 <title>Defining the accounts (business records)</title>
 
 <para>
-    This is similar to setting up for personal use, but needs to follow legal guidelines. You should be aware of what these are.
+  This is similar to setting up for personal use, but needs to follow legal
+  guidelines. We do not discuss them here, but you should be aware of what these
+  are.
 </para>
 </sect2>
 </sect1>
@@ -79,79 +122,79 @@
 <title>Mapping your finances to &kappname;</title>
 
 <para>
-    So, collect up your papers and see the following sections for each item in &kappname;.
+  So, collect up your papers and see the following sections for each item in
+  &kappname;.
 </para>
 
 <sect2 id="makingmostof.mapping.accounts">
 <title>Accounts</title>
 
 <para>
-    These hold a value. Transactions are created against one or more accounts.
+  These hold a value. Transactions are created against one or more accounts.
 </para>
 
 <sect3 id="makingmostof.mapping.accounts.asset">
 <title>Accounts - Asset</title>
 
 <para>
-    These are the accounts which hold your money and possessions that you wish to monitor. The following types are available:
+  These are the accounts which hold your money and possessions that you wish to
+  monitor. The following types are available:
 </para>
 
 <variablelist>
+  <varlistentry>
+    <term>Checking</term>
+    <listitem>
+      <para>
+        Standard bank checking account.
+      </para>
+    </listitem>
+  </varlistentry>
 
-<varlistentry>
-<term>Checking</term>
-<listitem>
-<para>
-Standard bank trading account.
-</para>
-</listitem>
-</varlistentry>
+  <varlistentry>
+    <term>Savings</term>
+    <listitem>
+      <para>
+        Standard bank savings account.
+      </para>
+    </listitem>
+  </varlistentry>
 
-<varlistentry>
-<term>Savings</term>
-<listitem>
-<para>
-Standard bank savings account.
-</para>
-</listitem>
-</varlistentry>
+  <varlistentry>
+    <term>Cash</term>
+    <listitem>
+      <para>
+        Money in your hand or wallet.
+      </para>
+    </listitem>
+  </varlistentry>
 
-<varlistentry>
-<term>Cash</term>
-<listitem>
-<para>
-Money in your hand or wallet.
-</para>
-</listitem>
-</varlistentry>
+  <varlistentry>
+    <term>Loan</term>
+    <listitem>
+      <para>
+        Loans you make to someone else.
+      </para>
+    </listitem>
+  </varlistentry>
 
-<varlistentry>
-<term>Loan</term>
-<listitem>
-<para>
-Loans made by you, etc.
-</para>
-</listitem>
-</varlistentry>
+  <varlistentry>
+    <term>Investment</term>
+    <listitem>
+      <para>
+        Money you invest.
+      </para>
+    </listitem>
+  </varlistentry>
 
-<varlistentry>
-<term>Investment</term>
-<listitem>
-<para>
-Investments made.
-</para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term>Asset</term>
-<listitem>
-<para>
-Property, collections, etc.
-</para>
-</listitem>
-</varlistentry>
-
+  <varlistentry>
+    <term>Asset</term>
+    <listitem>
+      <para>
+        Property, collections, etc.
+      </para>
+    </listitem>
+  </varlistentry>
 </variablelist>
 </sect3>
 
@@ -159,38 +202,37 @@ Property, collections, etc.
 <title>Accounts - Liability</title>
 
 <para>
-    These are the accounts which represent your debts and money owed that you wish to monitor. The following types are available:
+  These are the accounts which represent your debts and money owed that you wish
+  to monitor. The following types are available:
 </para>
 
 <variablelist>
+  <varlistentry>
+    <term>Credit card</term>
+    <listitem>
+      <para>
+        Standard credit card account.
+      </para>
+    </listitem>
+  </varlistentry>
 
-<varlistentry>
-<term>Credit card</term>
-<listitem>
-<para>
-Standard credit card account.
-</para>
-</listitem>
-</varlistentry>
+  <varlistentry>
+    <term>Loan</term>
+    <listitem>
+      <para>
+        Loans made to you, mortgages, etc.
+      </para>
+    </listitem>
+  </varlistentry>
 
-<varlistentry>
-<term>Loan</term>
-<listitem>
-<para>
-Loans made to you, mortgages, etc.
-</para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term>Liability</term>
-<listitem>
-<para>
-Anything you owe that is not a loan.
-</para>
-</listitem>
-</varlistentry>
-
+  <varlistentry>
+    <term>Liability</term>
+    <listitem>
+      <para>
+        Anything else you owe that is not a loan.
+      </para>
+    </listitem>
+  </varlistentry>
 </variablelist>
 </sect3>
 </sect2>
@@ -199,7 +241,8 @@ Anything you owe that is not a loan.
 <title>Institutions</title>
 
 <para>
-    These are completely optional and can be used to group accounts, and show a total value for all accounts in each group.
+  These are completely optional and can be used to group accounts, and show a
+  total value for all accounts in each group.
 </para>
 </sect2>
 
@@ -207,7 +250,9 @@ Anything you owe that is not a loan.
 <title>Categories</title>
 
 <para>
-    These represent non-managed income and expense accounts that do not have a value. The total value of transactions is shown against each category. A category or transfer account is required for each transaction.
+  These represent non-managed income and expense accounts that do not have a
+  value. The total value of transactions is shown against each category. A
+  category or transfer account is required for each transaction.
 </para>
 </sect2>
 
@@ -215,7 +260,8 @@ Anything you owe that is not a loan.
 <title>Sub-Categories</title>
 
 <para>
-   Categories can be split into sub-categories, but the sub-category totals are not included in the higher level category total.
+  Categories can be split into sub-categories, but the sub-category totals are
+  not included in the higher level category total.
 </para>
 </sect2>
 
@@ -223,7 +269,9 @@ Anything you owe that is not a loan.
 <title>Payees</title>
 
 <para>
-    These are optional for transactions. They are required for Scheduled transactions. A transaction history, with category, is shown against each payee.
+  These are optional for transactions. They are required for Scheduled
+  transactions. A transaction history, with category, is shown against each
+  payee.
 </para>
 </sect2>
 
@@ -231,55 +279,83 @@ Anything you owe that is not a loan.
 <title>Scheduled transactions</title>
 
 <para>
-    Where regular transactions occur, these can be set up against a Schedule. Transactions are created from a schedule; any that are overdue can be seen on the home page.
+  Where regular transactions occur, these can be set up against a
+  Schedule. Transactions are created from a schedule; any that are overdue can
+  be seen on the home page.
 </para>
 </sect2>
-
 </sect1>
 
 <sect1 id="makingmostof.usefultips">
 <title>Useful Tips</title>
 
 <para>
-    Unless you keep you money under the floorboards, you probably make use of one or more institutions where you have accounts which may be in credit or debit. In order to familiarise yourself with the way &kappname; works, choose an account you want to track of with &kappname; and select File>New in order to set up an account file.
+  Unless you keep you money under the floorboards, you probably make use of one
+  or more institutions where you have accounts which may be in credit or
+  debit. In order to familiarise yourself with the way &kappname; works, choose
+  an account you want to track of with &kappname; and select File>New in order
+  to set up an account file.
 </para>
 
 <para>
-    If you have used another personal finance manager, you may be able to import the data from it into &kappname;.
+  If you have used another personal finance manager, you may be able to import
+  the data from it into &kappname;.
 </para>
 
 <para>
-    If you have some regular receipts into or outgoings from this account, go to Payee and enter the names of both the payers and the payees involved; then go to Schedule and fill in a New Schedule for each transaction. If you haven't entered the payee or payer, &kappname; will offer you the opportunity to do this in the middle of entering the schedule.
+  If you have some regular receipts into or outgoings from this account, go to
+  Payee and enter the names of both the payers and the payees involved; then go
+  to Schedule and fill in a New Schedule for each transaction. If you haven't
+  entered the payee or payer, &kappname; will offer you the opportunity to do
+  this in the middle of entering the schedule.
 </para>
 
 <para>
-    To add other new transactions go to Ledgers; you can add new payees and categories in the middle of a transaction or by going to Payees or Categories before entering the transaction.
+  To add other new transactions go to Ledgers; you can add new payees and
+  categories in the middle of a transaction or by going to Payees or Categories
+  before entering the transaction.
 </para>
 
 <para>
-    You will probably find that the default Categories do not exactly match your needs; you can easily delete ones you know you are never going to need and add others that you need. But when you are entering a transaction, you only have to type a few letters of a category and &kappname; will offer you a drop down list of the matching categories from which to choose.
+  You will probably find that the default Categories do not exactly match your
+  needs; you can easily delete ones you know you are never going to need and add
+  others that you need. But when you are entering a transaction, you only have
+  to type a few letters of a category and &kappname; will offer you a drop down
+  list of the matching categories from which to choose.
 </para>
 
 <para>
-    You can add different accounts managed by different institutions; the preferred one will show when you open &kappname; but you can quickly switch to any of the others.
+  You can add different accounts managed by different institutions; the
+  preferred one will show when you open &kappname; but you can quickly switch to
+  any of the others.
 </para>
 
 <para>
-    When you make a payment, &kappname; will work out what the next cheque number should be; delete this if you are not making a cheque payment or edit it if the first cheque you enter is not cheque number 1.
+  When you make a payment, &kappname; will work out what the next cheque number
+  should be; delete this if you are not making a cheque payment or edit it if
+  the first cheque you enter is not cheque number 1. Alternatively, it is
+  possible to switch off auto-increment of cheque numbers.
 </para>
 
 <para>
-    Every so often you may get statements of your account from the institutions you use; you can reconcile your &kappname; accounts against these statements so that you have an accurate statement of the current state of your finances.
+  Every so often you may get statements of your account from the institutions
+  you use; you can reconcile your &kappname; accounts against these statements
+  so that you have an accurate statement of the current state of your finances.
 </para>
 
 <para>
-    If you go to Reports, you will find several default reports; to customise these, open one similar to the sort you prefer and then select 'New' (not 'Copy'); you can then customise this to your needs and mark it as a preferred report if you wish.
+  If you go to Reports, you will find several default reports; to customise
+  these, open one similar to the sort you perfer and then select 'New' (not
+  'Copy'); you can then customise this to your needs and mark it as a preferred
+  report if you wish.
 </para>
 
 <para>
-    Though &kappname; is not intended for use in a business context, if you are running a business on your own and so do not need payroll functions, you will probably find that &kappname; is sufficiently customisable to meet your needs particularly as it comes with budgeting and forecasting features and you can export your customised reports via CSV into other applications.
+  Though &kappname; is not intended for use in a business context, if you are
+  running a business on your own and so do not need payroll functions, you will
+  probably find that &kappname; is sufficiently customisable to meet your needs
+  particularly as it comes with budgeting and forecasting features and you can
+  export your customised reports via CSV into other applications.
 </para>
-
 </sect1>
-
 </chapter>
