@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<sect1 id="reference.widgets.intro">
 <sect2 id="reference.widgets.datepicker">
 <title>Date entry widget</title>
 
@@ -190,3 +191,4 @@
 </para>
 
 </sect2>
+</sect1>
