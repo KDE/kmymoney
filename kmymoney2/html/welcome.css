@@ -4,129 +4,168 @@ Robert Wadley    rob<at>robntina.fastmail.us
 David Wadley     mail<at>davidwadley.com
 ********************************************************************/
 
+
 body {
-   background-color: highlight;
-   margin-top:83px;
-   }
+    background-color: highlight;
+    margin-top:100px;
+  }
+
 
 #background_image {
-z-index: -10;
-position:absolute;
-left:0px; 
-top:0px; 
-width:100%;
-}
+    z-index: -10;
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:100%;
+  }
+
 
 #KMyMoneyLogo {
-  position:absolute;
-  top:10px;
-  right:10px;
-  z-index: 10;
+    position:absolute;
+    top:12px;
+    left:25px;
+    z-index: 10;
   }
-/*line of text under logo("Personal Finance Software")*/
-#tagline {
-  position:absolute;
-  top:50px;
-  right:10px;
-  font-family:bitstream vera sans, verdana, sans;
-  font-size:8px;
-  color: highlighttext;
 
-}
+/*line of text under logo("Personal Finance Software")*/
+
+#tagline {
+    position:absolute;
+    top:55px;
+    left:25px;
+    font-family:bitstream vera sans, verdana, sans;
+    font-size:8px;
+    color: highlighttext;
+  }
+
 /*("Welcome to KMyMoney","What's New in...")*/
+
 #title {
-  font-family:bitstream vera sans, verdana, sans;
-  line-height:1em;  
-  font-size: 20px;
-  position:absolute;
-  top:0px;
-  left:10px;
-  color:highlighttext;
-}
+    font-family:bitstream vera sans, verdana, sans;
+    line-height:1em;
+    font-size: 20px;
+    position:absolute;
+    top:-3px;
+    right:25px;
+    color:highlighttext;
+  }
+
+#subtitle {
+    font-family:bitstream vera sans, verdana, sans;
+    line-height:1em;
+    font-size: 10px;
+    position:absolute;
+    top:30px;
+    right:25px;
+    color:highlighttext;
+  }
+
+
 /*link under title, "Goto My Financial Summary"etc.*/
+
 #summaryLink, #returnLink {
-  position:absolute;
-  top:45px;
-  left:35px;
-  color:highlighttext;
-}
+    position:absolute;
+    top:75px;
+    left:6%;
+    color:highlighttext;
+  }
+
+
 #returnLink img {
-  vertical-align:middle;
-  position:relative;
-  margin-right: 5px;
-  top:-3px;
-}
+    vertical-align:middle;
+    position:relative;
+    margin-right: 5px;
+    top:-3px;
+  }
+
+
 #summaryLink a, #returnLink a {
-  color:highlighttext;
-  text-decoration:none;  
-}
+    color:highlighttext;
+    text-decoration:none;
+  }
+
+
 #summaryLink a:hover, #returnLink a:hover {
-  color:highlighttext;
-  text-decoration:underline;  
-}
+    color:highlighttext;
+    text-decoration:underline;
+  }
+
+
+
 /*start content box frame*/
+
 #topleft {
   background: 
 url(./images/topleft.png) no-repeat left top;
   width:87%;
   margin-left:5%;
   margin-right:5%;
-  z-index: 10;
+
   }
 #topright {
-  background: 
-	url(./images/topright.png) 
+  background:url(./images/topright.png) 
   top right no-repeat;
   position: relative;
   right:-22px;
   padding-top: 20px;
-  z-index: 10;
-
   }
+
 #rightborder {
-  background: 
-	url(./images/rightborder.png) 
+  background: url(./images/rightborder.png) 
   top right repeat-y;
   position: relative;
   right:-22px;
   padding-right: 22px;
-  margin-bottom: -20px;
-  z-index: 10;
+  margin-bottom: -91px;/*appears to adjust margin below content*/
   }
+
 #bottomleft {
   background: 
 	url(./images/bottomleft.png) 
   bottom left no-repeat;
     position: relative;
-	top: 20px;
-	z-index: 10;
+	top: 91px;
+padding-top: 0px;
+	
   }
+
 #bottomright {
-	background: 
-	url(./images/bottomright.png) 
+	background: url(./images/bottomright.png) 
   bottom right no-repeat;
     position: relative;
     right:-22px;
-    padding-top: 20px;
-    z-index: 10;
+    padding-top: 91px;
   }
-  /* end content box frame */
-  
+
+/* end content box frame */
+
+
 /* list of links on welcome page */  
+
 #welcomeMenu ul {
-  list-style-type:none;/*removes default bullets*/
-}
+    list-style-type:none;
+    /*removes default bullets*/
+  }
+
+
 #welcomeMenu li {
-  margin-bottom: 10px;/*adds space between lines*/
-  color: black;
-}
+    margin-bottom: 10px;
+    /*adds space between lines*/ color: black;
+  }
+
+
 #welcomeMenu span:hover {
-  text-decoration:underline; /*sets hover attributes*/
-}
+    text-decoration:underline;
+    /*sets hover attributes*/
+  }
+
 /* replacement bullets */
+
 #welcomeMenu img {
-  vertical-align:middle;
-  position:relative;
-  margin-right: 5px;
-  top: -2px;
-}
+    vertical-align:middle;
+    position:relative;
+    margin-right: 5px;
+    top: -2px;
+  }
+
+  

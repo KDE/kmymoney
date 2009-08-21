@@ -18,18 +18,18 @@
 }
 
 body#summaryview { /* set body attributes that affect only the summary view (and not reports) */
-    /*background-color:lightgrey;*/
+    background: url(./images/bg-texture.png) repeat fixed;
 }
 
 
 #vieweffect { /* creates a dropshadow at the top of the view creating a resessed effect */
-  /*  background: url(./images/top-shadow.png) repeat-x top;
+    background: url(./images/top-shadow.png) repeat-x top;
     margin:0px -10px 0px -10px;
     position:fixed;
-    top:0px;
+    top:-5px;
     width:100%;
     height:20px;
-    z-index:50;*/
+    z-index:50;
 }
 
   #summarytitle { /* "your financial summary" title on summary page */
@@ -42,7 +42,7 @@ body#summaryview { /* set body attributes that affect only the summary view (and
   }
 
   .shadow {/*wraps .displayblock -can be used for special decorative effects like a drop shadow */
-   /*background: url(./images/shadow.png) no-repeat bottom right;*/
+   background: url(./images/shadow.png) no-repeat bottom right;
     margin:0px 5px 30px 15px;
   }
 
@@ -52,15 +52,15 @@ body#summaryview { /* set body attributes that affect only the summary view (and
     top:-6px;
     left:-6px;
     background-color: Window;
-    /*border-right: 1px solid gray;
+    border-right: 1px solid gray;
     border-bottom: 1px solid gray;
-    border-left: 1px solid lightgrey;*/
-border:1px solid WindowText;
+    border-left: 1px solid lightgrey;
+/*border:1px solid WindowText;*/
     padding: 0px;
   }
 
   .summaryheader { /*section labels over each table in the financial summary*/
-   background: HighLight /* url(./images/currencyflourish.png) no-repeat bottom right*/;
+   background: HighLight url(./images/currencyflourish.png) no-repeat bottom right;
     color:HighLightText;
     Font-size:1.2em;
     font-weight:bold;

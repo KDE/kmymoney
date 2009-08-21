@@ -12,17 +12,18 @@ Thomas Baumgart  ipwizard<at>users.sourceforge.net
 <head>
   <title>Untitled Document</title>
   <meta http-equiv="Content-Type"
- content="text/html; charset=iso-8859-1">
+ content="text/html; charset=utf-8">
   <link href="welcome.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <!--"background_image", if enabled, displays an image in the background of this page.
 If you wish to use a background, un-comment the following line  -->
-<!-- <img id="background_image" src="images/background.png" height="100%"> -->
+<img id="background_image" src="images/background.png" height="100%">
 <img id="KMyMoneyLogo" src="images/trans_logo.png">
-<h3 id="title" style="font-size: 20px;">Willkommen bei KMyMoney</h3>
-<p id="tagline">Personal Finance Software</p>
-<div id="summaryLink"><a href="/home">Zur Finanz&uuml;bersicht</a></div>
+<h3 id="title">Willkommen bei KMyMoney</h3>
+<h4 id="subtitle">Ihrem persönlichen Finanzassistenten</h4>
+<!--p id="tagline">Personal Finance Software</p-->
+<div id="returnLink"><a href="/home"><img src="images/backarrow.png">Zur Finanzübersicht</a></div>
 <div id="topleft">
 <div id="topright"><img src="images/spacer.png"></div>
 <div id="rightborder">
@@ -30,25 +31,28 @@ If you wish to use a background, un-comment the following line  -->
   <tbody>
     <tr>
       <td></td>
-      <td style="height: 150px; width: 500px;">
+      <!-- <td style="height: 150px; width: 380px;"> -->
+      <td style="height: 150px;">
       <div id="welcomeMenu">
+        <h4>Beginne mit einer der folgenden Aktivitäten...</h4>
       <ul>
         <li><img src="images/filenew.png"><a href="/action?id=file_new">Erzeuge eine neue KMyMoney Datei</a></li>
-        <li><img src="images/kmymoneydata.png"><a href="/action?id=file_open">&Ouml;ffne eine bestehende KMyMoney Datei</a></li>
+        <li><img src="images/kmymoneydata.png"><a href="/action?id=file_open">Öffne eine bestehende KMyMoney Datei</a></li>
         <li><img src="images/manual.png"><a href="/action?id=help_contents">Lerne mit KMyMoney umzugehen</a></li>
         <li><img src="images/konqueror.png"><a href="http://kmymoney2.sf.net">Besuche die KMyMoney website</a></li>
-        <li><img src="images/messagebox_info.png"><a href="/welcome?mode=whatsnew">&Uuml;bersicht der neuen Funktionen dieser Version</a></li>
+        <li><img src="images/about_kde.png"><a href="http://forum.kde.org/viewforum.php?f=69">Erhalte Hilfe von der KMyMoney Community</a></li>
+        <li><img src="images/messagebox_info.png"><a href="/welcome?mode=whatsnew">Übersicht der neuen Funktionen dieser Version</a></li>
       </ul>
-      </div>
+      </div><!--welcomeMenu-->
       </td>
       <td></td>
     </tr>
   </tbody>
 </table>
-</div>
+</div><!--rightborder-->
 <div id="bottomleft">
-<div id="bottomright"></div>
-</div>
-</div>
+<div id="bottomright"></div><!--bottomright-->
+</div><!--bottomleft-->
+</div><!--topleft-->
 </body>
 </html>

@@ -11,7 +11,7 @@ David Wadley     mail<at>davidwadley.com
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>Novità di KMyMoney</title>
+<title>Documento senza titolo</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <link href="welcome.css" rel="stylesheet" type="text/css">
 </head>
@@ -19,10 +19,10 @@ David Wadley     mail<at>davidwadley.com
 <body>
 <!--"background_image", if enabled, displays an image in the background of this page.
 If you wish to use a background, un-comment the following line  -->
-<!-- <img id="background_image" src="images/background.png" height="900 px"> -->
+<img id="background_image" src="images/background.png" height="100%">
 <img id="KMyMoneyLogo" src="images/trans_logo.png">
-  <h3 id="title" style="font-size: 20px;">Novità di questa versione</h3>
-  <p id="tagline">Software per le finanze personali</p>
+  <h3 id="title">Novità di KMyMoney 1.0</h3>
+  <!--p id="tagline">Personal Finance Software</p-->
   <div id="returnLink"><img src="images/backarrow.png"><a href="/welcome">Ritorna alla pagina di benvenuto</a></div>
   
   
@@ -31,46 +31,61 @@ If you wish to use a background, un-comment the following line  -->
   <div id="rightborder"><table><tr><td>
 <!-- This is where the content should be put to show up inside the decorative frame-->
 <!-- Begin content -->
-<p><b>Questa è una versione di sviluppo<b>, e alcune delle nuove funzionalità non sono complete.
-I rilasci di questo tipo sono anche definiti <em>'instabili'</em>, per cui consigliamo di eseguire frequenti
-copie di sicurezza dei propri file, incluso il file corrente (versione 0.8).
-<br>Detto questo, la maggior parte degli sviluppatori stessi, hanno affidato i loro dati
-a questa versione per diverso tempo!</p>
+
+
+<p>Gli sviluppatori di KMyMoney ha il piacere di annunciare un passo importante verso ciò che è stato descritto come "il MIGLIORE gestore delle finanze personali per gli utenti LIBERI". Con oltre 3 anni di sviluppo, questa nuova versione ha numerose nuove funzionalità e un'interfaccia utente aggiornata.</p>
+
+<h4>Novità rispetto alla versione 0.9.3:</h4>
+<ul>
+<li>Un nuovo aspetto, con nuove icone</li>
+<li>Aggiunti i report dei prezzi d'investimento e della media mobile del prezzo d'investimento</li>
+<li>Aggiunta un'opzione all'interfaccia grafica per la modalità esperta</li>
+<li>Migliorato il supporto alle ricorrenze pianificate</li>
+<li>Migliorato il supporto a CMake</li>
+<li>Migliorato il filtro di testo per le transazioni</li>
+<li>Migliorato l'aspetto dei grafici</li>
+<li>Migliorato il supporto di database e prestazioni</li>
+<li>Migliorato il supporto QIF e OFX</li>
+<li>Documentazione aggiornata</li>
+<li>Traduzioni aggiornate</li>
+<li>Numerosi bug corretti ed eliminate alcune imprecisioni per regalarvi una versione eccezionale</li>
+</ul>
+
+<h4>Novità rispetto alla versione 0.8.9:</h4>
+<ul>
+<li>Pagina principale. Report migliorati sono disponibili nella pagina principale per fornire una rapida panoramica della situazione finanziaria</li>
+<li>Aspetto. Una pagina principale aggiornata e nuove icone disegnate esclusivamente per celebrare il rilascio della 1.0</li>
+<li>Budget. Una nuova funzionalità di budget consente di specificare le aspettative future di entrate e uscite, per poi confrontare i risultati attuali con tali previsioni. KMyMoney può utilizzare i dati storici per generare un budget base al posto vostro. I report di budget possono essere visualizzati come grafici se lo si desidera. Gli sforamenti mensili di budget possono essere visualizzati nella pagina principale, ma possono essere rimossi se ritenuti deprimenti</li>
+<li>Previsioni. Può essere prodotta una previsione dei bilanci futuri dei conti critici, basata su transazioni regolarmente pianificate o su dati storici</li>
+<li>Report. Previsione, Informazioni sulla pianificazione, Informazioni sul conto, Informazioni sul prestito, Riconciliazione, Contante, Prezzo d'investimento e Media mobile del prezzo d'investimento</li>
+<li>Grafici. Molti dei report prodotti da KMyMoney ora possono essere rappresentati sotto forma di grafico. Linee, barre, barre sovrapposte, torte e grafici ad anelli sono supportati nei casi appropriati</li>
+<li>Pianificazioni. Periodi di ricorrenza più flessibili</li>
+<li>Importatore. Un importatore di file Quicken (QIF) completamente riscritto e un importatore migliorato di file GnuCash. Aggiunto anche il supporto OFX per i conti di mercato monetario</li>
+<li>Cifratura PGP. Aggiunto il supporto per più di una chiave</li>
+<li>Database. L'impiego facoltativo di un database per conservare i dati è supportato (MySQL, PostgreSQL e SQLite versione 3 sono stati ampiamente testati)</li>
+<li>CMake. Aggiunto il supporto per compilazione e test</li>
+<li>Traduzioni. Aggiunte traduzioni per Svedese, Cinese semplificato, Turco, Rumeno e Finlandese</li>
+</ul>
+
+<p>Molte modifiche sono state apportate alle funzionalità esistenti, per accrescere il livello di esperienza dell'utente. Tra le principali sono le seguenti:</p>
 
 <ul>
-<LI>Diversi miglioramenti all'importazione HBCI e OFX, inclusa la gestione delle corrispondenze
-e degli errori, tra le altre</LI>
-<LI>Aggiunto supporto per conti sul mercato monetario</LI>
-<LI>Aggiunto supporto alla cifratura PGP per più di una chiave</LI>
-<LI>Aggiunti nuovi report: previsioni, informazioni di pianificazione,
-informazioni sul conto, informazioni sul prestito e riconciliazioni</LI>
-<LI>Aggiunta una gestione gerarchica alla procedura guidata Nuovo conto</LI>
-<LI>Nuove traduzioni: svedese, cinese semplificato, turco, rumeno</LI>
-<LI>Supporto iniziale alla compilazione con CMake</LI> 
-<LI>Consente la creazione di conti di capitale aggiuntivi e la modifica di transazioni patrimoniali</LI>
-<LI>Consente la modifica diretta e l'inserimento di pianificazioni dalla pagina Home</LI>
-<LI>Consente la visualizzazione e l'inserimento di pianificazioni nella vista del registro</LI>
-<LI>Struttura migliorata della pagina Home e aggiunte ulteriori informazioni sul
-Riepilogo finanziario e Pagamenti</LI>
-<LI>Migliorato il calcolo degli utili e il supporto a valute multiple nei report di investimento</LI>
-<LI>Migliorata la finestra di dialogo delle transazioni di investimento e dell'aggiornamento in linea</LI>
-    <li>Migliorata la struttura della vista Previsioni</li>
-
-    <li>Migliorato il motore DB, nonostante sia ancora in fase di test</li>
-
-    <li>Migliorati i file della documentazione e README</li>
-
-    <li>Pulizia del codice</li>
-
-    <li>Traduzioni aggiornate: argentino, tedesco, olandese,
-    portoghese, brasiliano, italiano, francese, spagnolo</li>
-
-    <li>Molte correzioni di bug in diverse aree: categorie, ricerca,
-    registro, report, navigazione da tastiera, calcolatrice, budget,
-    importazione, pianificazioni, conti, prestiti</li>
+<li>Interfaccia utente. Sono state fornite numerose nuove opzioni per consentire una configurazione di KMyMoney a seconda delle proprie necessità. Diversi miglioramenti dell'interfaccia utente</li>
+<li>Conti. Sono state create nuove 'procedure guidate' per semplificare la configurazione di nuovi conti, e operazioni complesse quali prestiti e mutui. Una procedura guidata in particolare assisterà i novizi nell'impostazione del nuovo file, e sono forniti elenchi di modelli di conto utilizzati di frequente e categorie, spesso adattati alla nazionalità. I conti cessati ora possono essere marcati come chiusi, per mantenere uno schermo più ordinato, anche se saranno ancora visualizzabili su richiesta. Consente la creazione di conti di capitale aggiuntivi e la modifica delle transazioni di capitale. Aggiunta una gestione gerarchica alla procedura di creazione di un nuovo conto. Messaggi di avviso possono essere visualizzati se il bilancio di un conto eccede, o scende al di sotto, di un determinato valore</li>
+<li>Valute. Aggiunto il supporto all'Euro per la Slovacchia. Supporto migliorato in caso di valute multiple</li>
+<li>Libri mastro. Le viste dei diversi libri mastro sono state ridisegnate per fornire prestazioni migliori, e altri strumenti di ordinamento e ricerca delle transazioni, inclusa un'opzione di 'ricerca rapida'. Una nuova funzione di selezione di transazioni multiple consentirà di effettuare alcune modifiche 'in massa' delle transazioni. Un nuovo strumento, più completo, di completamento automatico delle transazioni, basato sul nome del creditore, è stato introdotto</li>
+<li>Creditori. L'eliminazione di creditori 'non-vuoti' e di categorie è ora permessa, con il conseguente riassegnamento delle transazioni</li>
+<li>Pianificazioni. Modifiche sono state apportate per semplificare l'inserimento e la gestione delle transazioni regolarmente pianificate. Consente la modifica diretta e l'inserimento di pianificazioni dalla pagina principale. Consente la visualizzazione e l'inserimento di pianificazioni nella vista Libro mastro</li>
+<li>Report. Filtro di testo migliorato per le transazioni. Diverse correzioni relative ai report Prestiti e Budget. Sono stati aggiunti alcuni nuovi report, nuovi livelli di dettaglio sono stati inclusi, e molti di essi sono stati resi maggiormente configurabili. Molte correzioni sono state apportate ai report a valuta multipla. Migliorato il calcolo di rendimento e valute multiple nei report d'investimento</li>
+<li>Aggiornamento in linea. Se utilizzate OFX o HBCI per l'online banking, la configurazione è stata semplificata, e uno strumento di verifica manuale delle transazioni dovrebbe semplificare la riconciliazione degli estratti conto scaricati. Introdotto il supporto per le nuove versioni di AqBanking e libofx, che forniscono maggiore flessibilità e affidabilità. Migliorato il supporto QIF e OFX, con aggiornamenti significativi del processo di importazione OFX. Tra gli altri miglioramenti, il rilevamento e la gestione degli errori. Transazioni d'investimento migliorare e finestra di dialogo per l'aggiornamento in linea</li>
+<li>Migliorata la documentazione e i file README</li>
+<li>Traduzioni aggiornate per Spagnolo, Spagnolo argentino, Portoghese brasiliano, Cinese semplificato, Ceco, Olandese, Francese, Galiziano, Tedesco, Italiano e Portoghese</li>
+<li>Pulizia del codice</li>
+<li>Numerosi bug corretti ed eliminate alcune imprecisioni per regalarvi una versione eccezionale</li>
 </ul>
-<p>Fateci sapere cosa ne pensate. Speriamo che questa nuova versione di KMyMoney sia di vostro gradimento. Vi preghiamo di notificarci qualsiasi comportamento anomalo del programma selezionando <a href="/action?id=help_report_bug">"Segnala un bug..."</a> dal menu Aiuto o inviando un'email alla lista di distribuzione degli sviluppatori. <font color="blue"><a href="mailto:kmymoney2-developer@lists.sourceforge.net">kmymoney2-developer@lists.sourceforge.net</a></font></p>
-<p><div align="right">Il team di sviluppo di KMyMoney</div></p>
+
+<p>Fateci sapere cosa ne pensate. Speriamo che questa nuova versione di KMyMoney sia di vostro gradimento.</p> <p>Vi preghiamo di segnalarci qualsiasi comportamento anomalo del programma selezionando "Segnala un bug..." dal menu Aiuto o inviando un'email alla lista di distribuzione degli sviluppatori. <font color="blue"><a href="mailto:kmymoney2-developer@lists.sourceforge.net">kmymoney2-developer@lists.sourceforge.net</a></font></p>
+<p><div align="right">Gli sviluppatori di KMyMoney</div></p>
 <!-- End content  -->
 	</td></tr></table>
   </div>

@@ -19,13 +19,13 @@ David Wadley     mail<at>davidwadley.com
 <body>
 <!--"background_image", if enabled, displays an image in the background of this page.
 If you wish to use a background, un-comment the following line  -->
-<!-- <img id="background_image" src="images/background.png" height="900 px"> -->
+<img id="background_image" src="images/background.png" height="100%">
 <img id="KMyMoneyLogo" src="images/trans_logo.png">
-  <h3 id="title" style="font-size: 20px;">Whats new in this release</h3>
-  <p id="tagline">Personal Finance Software</p>
+  <h3 id="title">What's new in KMyMoney 1.0</h3>
+  <!--p id="tagline">Personal Finance Software</p-->
   <div id="returnLink"><img src="images/backarrow.png"><a href="/welcome">Return to the Welcome page</a></div>
-
-
+  
+  
 <div id="topleft">
   <div id="topright"><img src="images/spacer.gif"></div>
   <div id="rightborder"><table><tr><td>
@@ -33,32 +33,56 @@ If you wish to use a background, un-comment the following line  -->
 <!-- Begin content -->
 
 
-<p>This v0.9.3 release can be considered as a release candidate for the upcoming 1.0 release. Even so, it should still be considered a development release and as such, we still recommended that you maintain frequent backups of your files. Please let us know if something is not working properly. </p>
+<p>The KMyMoney development team is pleased to announce a major step forward for what has been described as "the BEST personal finance manager for FREE users". With over 3 years of development, this new stable release has a lot of new features and a refreshed user interface.</p>
 
-<p>Major enhancements to this release include a totally new Quicken ® (QIF) file importer, and the first 'official' support for the use of a relational database storage, as an alternative to the proprietary XML format.</p>
-
-<h4>v0.9.3 Release notes:</h4>
+<h4>What's new since version 0.9.3:</h4>
 <ul>
-<li>A totally re-written Quicken ® (QIF) file importer.</li>
-<li>Improved GnuCash file importer.</li>
-<li>The optional use of a database for data storage is supported (MySQL ®, PostgreSQL and SQLite version 3 have been extensively tested).</li>
-<li>More flexible occurrence periods.</li>
-<li>Better support for multiple currencies.</li>
-<li>Added CashFlow report.</li>
-<li>Added moving averages to a number of reports and charts.</li>
-<li>Added default report "Income and Expenses By Year".</li>
-<li>Added Linear Regression method to Forecast History Methods.</li>
-<li>Various fixes related to Loans, and Budget reports.</li>
-<li>Significant improvements to the OFX import process.</li>
-<li>Enhanced online statement download</li>
-<li>Improved transaction matching</li>
-<li>More support for the cmake build process.</li>
-<li>New translations for Finnish and Romanian.</li>
-<li>Updated translations for Argentinian, Brazilian Portuguese, simplified Chinese, Czech, Dutch, French, Galician, German, Italian and Portuguese.</li>
-<li>Add Euro support for Slovakia.</li>
-<li>Improvements in multiple currency handling.</li>
-<li>User Interface improvements.</li>
-<li>And of course, many bug fixes.</li></ul>
+<li>A new look and feel, and a new set of icons</li>
+<li>Added investment price reports, investment moving average price</li>
+<li>Added GUI option for expert mode</li>
+<li>Improved scheduled occurrences support</li>
+<li>Improved support for CMake</li>
+<li>Improved text filter for transactions</li>
+<li>Improved charts look and feel</li>
+<li>Improved DB support and performance</li>
+<li>Improved QIF and OFX support</li>
+<li>Updated documentation</li>
+<li>Updated translations</li>
+<li>A lot of bug fixing and polishing rough edges to make this an outstanding release</li>
+</ul>
+
+<h4>What's new since version 0.8.9:</h4>
+<ul>
+<li>Home Page. Improved reports are available on the home page to give a quick glance on your financial situation</li>
+<li>Appearance. A refreshed home page and a new set of icons have been exclusively designed to celebrate the 1.0 release</li>
+<li>Budgets. A new budget feature allows you to specify your future expectations of income and expenditure, and then to compare your actual performance against these. You can use your historical data to have KMyMoney create a basic budget for you. Budget reports can be displayed as charts if desired. Monthly budget overruns can be displayed on your home page, but can be removed if you find it too depressing</li>
+<li>Forecasts. A forecast can be produced of the future balances of your critical accounts, based either on regular scheduled transactions or your historical data</li>
+<li>Reports. Forecast, Schedule Information, Account Information, Loan Information, Reconciliation, Cash Flow, Investment Price, and Investment Moving Average Price</li>
+<li>Charts. Many of the reports produced by KMyMoney may now be displayed in chart form. Line, bar, stacked bar, pie and ring charts are supported where appropriate</li>
+<li>Schedules. More flexible occurrence periods</li>
+<li>Importer. A totally re-written Quicken (QIF) file importer and an improved GnuCash file importer. Also added OFX support for money market accounts</li>
+<li>PGP encryption. Added support for more than one key</li>
+<li>Database. The optional use of a database for data storage is supported (MySQL, PostgreSQL and SQLite version 3 have been extensively tested)</li>
+<li>CMake. Added support for compilation and tests</li>
+<li>Translations. Added translations for Swedish, Simplified Chinese, Turkish, Romanian, and Finnish</li>
+</ul>
+
+<p>Many enhancements have been made to existing functionality, to improve your user experience. Among the foremost of these are the following:</p>
+
+<ul>
+<li>User interface. Several new options have been provided to enable you to configure KMyMoney to your personal requirements. Multiple user interface improvements</li>
+<li>Accounts. New 'wizards' have been produced to simplify the setting up of new accounts, and complicated situations such as loans and mortgages. One wizard in particular will guide first time users through the setting up of their new file, and template lists of frequently-used accounts and categories are supplied, often tailored to nationality. Defunct accounts may now be marked as closed, so that they no longer clutter up your screens, though they are still available for viewing if required. Allow creation of additional Equity accounts and editing of Equity transactions. Added hierarchy management to New Account wizard. Warning messages can be displayed if the balance on an account exceeds, or falls below, a given value</li>
+<li>Currencies. Added Euro support for Slovakia. Better support for multiple currencies</li>
+<li>Ledgers. The views of the various ledgers have been revamped to provide better performance, and more facilities for sorting and searching transactions, including a 'quick search' option. A new multiple transaction selection function will allow you to do some 'bulk' changing of transactions. A new, more comprehensive, transaction autofill facility, based on payee name, has been introduced</li>
+<li>Payees. Deletion of 'non-empty' payees and categories is now allowed, with the transactions being re-assigned as required</li>
+<li>Schedules. Changes have been made to simplify the entry and maintenance of your regular scheduled transactions. Allow direct editing and entering of schedules from Home page. Allow viewing and entering schedules on the Ledger View</li>
+<li>Reports. Improved text filter for transactions. Various fixes related to Loans, and Budget reports. Some new reports have been added, new levels of detail have been included, and many of them have also been made more configurable. There have also been a lot of fixes related to multi-currency reports. Improved calculation of returns and multiple currencies in investment reports</li>
+<li>Online update. If you use OFX or HBCI for online banking, your setup has been made easier, and a manual transaction matching facility should simplify reconciliation of your downloaded statements. There is support for new versions of AqBanking and libofx, providing more flexibility and reliability. Improved QIF and OFX support, with significant improvements to the OFX import process. Improvements and enhancements to matching and error handling, among others. Improved investment transaction and online update dialog</li>
+<li>Improved documentation and README files</li>
+<li>Updated translations for Spanish, Argentinian Spanish, Brazilian Portuguese, simplified Chinese, Czech, Dutch, French, Galician, German, Italian and Portuguese</li>
+<li>Lots of code cleanup</li>
+<li>A lot of bug fixing and polishing rough edges to make this an outstanding release</li>
+</ul>
 
 <p>Let us know what you think. We hope that you enjoy using this version of KMyMoney.</p> <p>Please let us know about any abnormal behavior in the program by selecting <a href="/action?id=help_report_bug">"Report bug..."</a> from the help menu or by sending an e-mail to the developers mailing list. <font color="blue"><a href="mailto:kmymoney2-developer@lists.sourceforge.net">kmymoney2-developer@lists.sourceforge.net</a></font></p>
 <p><div align="right">The KMyMoney Development Team</div></p>
@@ -71,23 +95,3 @@ If you wish to use a background, un-comment the following line  -->
 <div style="margin-bottom: 65px"></div>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
