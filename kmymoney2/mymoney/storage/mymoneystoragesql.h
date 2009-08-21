@@ -683,7 +683,7 @@ private:
    * @return false - could not create
    *
    */
-  int createDatabase(const KUrl& url);
+  bool createDatabase(const KUrl& url);
   int upgradeDb();
   int upgradeToV1();
   int upgradeToV2();

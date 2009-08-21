@@ -46,29 +46,59 @@
 
 #include "kselectdatabasedlg.h"
 
-KSelectDatabaseDlg::KSelectDatabaseDlg(QWidget *parent)
+KSelectDatabaseDlg::KSelectDatabaseDlg(int openMode, KUrl openURL, QWidget *parent)
  : KSelectDatabaseDlgDecl(parent) {
-  listDrivers->clear();
+  m_requiredFields = 0;
+  m_url = openURL;
+  m_mode = openMode;
+  checkPreLoad->setEnabled (openMode == QIODevice::ReadWrite);
+}
+
+KSelectDatabaseDlg::~KSelectDatabaseDlg() {
+  if (m_requiredFields != 0) delete m_requiredFields;
+}
+
+bool KSelectDatabaseDlg::checkDrivers() {
   // list drivers supported by KMM
   QMap<QString, QString> map = m_map.driverMap();
   // list drivers installed on system
   QStringList list = QSqlDatabase::drivers();
-  if (list.count() == 0) {
-    KMessageBox::error (0, i18n("There are no Qt SQL drivers installed in your system.\n"
-        "Please consult documentation for your distro, or visit the Qt web site (www.trolltech.com)"
-            " and search for SQL drivers."),
-        "");
-    setError();
-  } else {
-    QStringList::Iterator it = list.begin();
-    while(it != list.end()) {
-      QString dname = *it;
-      if (map.keys().contains(dname)) { // only display if driver is supported
-        dname = dname + " - " + map[dname];
-        listDrivers->addItem (dname);
-      }
-      it++;
+  // join the two
+  QStringList::Iterator it = list.begin();
+  while(it != list.end()) {
+    QString dname = *it;
+    if (map.keys().contains(dname)) { // only keep if driver is supported
+      dname = dname + " - " + map[dname];
+      m_supportedDrivers.append(dname);
     }
+    it  ++;
+  }
+  if (m_url != KUrl()) {
+    QString driverName = m_url.queryItem("driver");
+    if (!list.contains(driverName)) {
+      KMessageBox::error (0, i18n("Qt SQL driver %1 is no longer installed on your system", driverName),
+        "");
+      return (false);
+    }
+  }
+  if (m_supportedDrivers.count() == 0) {
+      // why does KMessageBox not have a standard dialog with Help button?
+    if ((KMessageBox::questionYesNo(this,
+         i18n("In order to use a database, you need to install some additional software. Click Help for more information"),
+         i18n("No Qt SQL Drivers"),
+         KStandardGuiItem::help(), KStandardGuiItem::cancel()))
+        == KMessageBox::Yes) { // Yes stands in for help here
+      KToolInvocation::invokeHelp("details.database.usage");
+    }
+    return(false);
+  }
+  return (true);
+}
+
+int KSelectDatabaseDlg::exec() {
+  listDrivers->clear();
+  if (m_url == KUrl()) {
+    listDrivers->addItems(m_supportedDrivers);
     textDbName->setText ("KMyMoney");
     textHostName->setText ("localhost");
     textUserName->setText("");
@@ -86,47 +116,20 @@ KSelectDatabaseDlg::KSelectDatabaseDlg(QWidget *parent)
     connect (buttonOK, SIGNAL(clicked()), this, SLOT(accept()));
     checkPreLoad->setChecked(false);
     buttonSQL->setEnabled(true);
-  }
-  connect (buttonHelp, SIGNAL(clicked()), this, SLOT(slotHelp()));
-   // ensure a driver gets selected; pre-select if only one
-  if (listDrivers->count() == 1) {
-    listDrivers->setCurrentItem(listDrivers->item(0));
-    slotDriverSelected(listDrivers->item(0));
-  }
-}
-
-KSelectDatabaseDlg::KSelectDatabaseDlg(KUrl openURL, QWidget *parent)
- : KSelectDatabaseDlgDecl(parent) {
-  // here we are re-opening a database from a URL
-  // probably taken from the last-used or recent file list
-  listDrivers->clear();
-  // check that the SQL driver is still available
-  QString driverName = openURL.queryItem("driver");
-  // list drivers installed on system
-  QStringList list = QSqlDatabase::drivers();
-  if (!list.contains(driverName)) {
-    KMessageBox::error (0, i18n("Qt SQL driver %1 is no longer installed on your system",driverName),
-        "");
-        reject();
-  }
-  // check drivers supported by KMM
-  QMap<QString, QString> map = m_map.driverMap();
-  if (!map.contains(driverName)) {
-    KMessageBox::error (0, i18n("Qt SQL driver %1 is not suported").arg(driverName),
-        "");
-        setError();
-  } else if (!map.contains(driverName)) {
-    KMessageBox::error (0, i18n("Qt SQL driver %1 is not suported").arg(driverName),
-        "");
-        setError();
+    // ensure a driver gets selected; pre-select if only one
+    if (listDrivers->count() == 1) {
+      listDrivers->setCurrentItem(listDrivers->item(0));
+      slotDriverSelected(listDrivers->item(0));
+    }
   } else {
     // fill in the fixed data from the URL
-    listDrivers->addItem (QString(driverName + " - " + map[driverName]));
+    QString driverName = m_url.queryItem("driver");
+    listDrivers->addItem (QString(driverName + " - " + m_map.driverMap()[driverName]));
     listDrivers->setCurrentItem(listDrivers->item(0));
-    QString dbName = openURL.path().right(openURL.path().length() - 1); // remove separator slash
+    QString dbName = m_url.path().right(m_url.path().length() - 1); // remove separator slash
     textDbName->setText (dbName);
-    textHostName->setText (openURL.host());
-    textUserName->setText(openURL.user());
+    textHostName->setText (m_url.host());
+    textUserName->setText(m_url.user());
     // disable all but the password field, coz that's why we're here
     textDbName->setEnabled(false);
     listDrivers->setEnabled(false);
@@ -135,7 +138,7 @@ KSelectDatabaseDlg::KSelectDatabaseDlg(KUrl openURL, QWidget *parent)
     textPassword->setEnabled(true);
     textPassword->setFocus();
     buttonSQL->setEnabled(false);
-    // set password as required
+    // set password required
     m_requiredFields = new kMandatoryFieldGroup(this);
     m_requiredFields->add(textPassword);
     m_requiredFields->setOkButton(buttonOK);
@@ -143,16 +146,9 @@ KSelectDatabaseDlg::KSelectDatabaseDlg(KUrl openURL, QWidget *parent)
     connect (buttonOK, SIGNAL(clicked()), this, SLOT(accept()));
     checkPreLoad->setChecked(false);
   }
+
   connect (buttonHelp, SIGNAL(clicked()), this, SLOT(slotHelp()));
- }
-
-KSelectDatabaseDlg::~KSelectDatabaseDlg() {
-  if (m_requiredFields != 0) delete m_requiredFields;
-}
-
-void KSelectDatabaseDlg::setMode (int openMode) {
-  m_mode = openMode;
-  checkPreLoad->setEnabled (openMode == QIODevice::ReadWrite);
+  return (QDialog::exec());
 }
 
 const KUrl KSelectDatabaseDlg::selectedURL() {
@@ -232,12 +228,6 @@ void KSelectDatabaseDlg::slotGenerateSQL () {
 
 void KSelectDatabaseDlg::slotHelp(void) {
   KToolInvocation::invokeHelp("details.database.selectdatabase");
-}
-
-void KSelectDatabaseDlg::setError() {
-  buttonOK->setEnabled(false);
-  buttonSQL->setEnabled(false);
-  m_requiredFields = 0;
 }
 
 #include "kselectdatabasedlg.moc"

@@ -108,7 +108,7 @@ class MyMoneyDbTransaction {
 MyMoneyDbDrivers::MyMoneyDbDrivers () {
   m_driverMap["QDB2"] = QString("IBM DB2");
   m_driverMap["QIBASE"] = QString("Borland Interbase");
-  m_driverMap["QMYSQL3"] = QString("MySQL");
+  m_driverMap["QMYSQL"] = QString("MySQL");
   m_driverMap["QOCI8"] = QString("Oracle Call Interface, version 8 and 9");
   m_driverMap["QODBC3"] = QString("Open Database Connectivity");
   m_driverMap["QPSQL7"] = QString("PostgreSQL v6.x and v7.x");
@@ -119,7 +119,7 @@ MyMoneyDbDrivers::MyMoneyDbDrivers () {
 databaseTypeE MyMoneyDbDrivers::driverToType (const QString& driver) const {
   if (driver == "QDB2") return(Db2);
   else if (driver == "QIBASE") return(Interbase);
-  else if (driver == "QMYSQL3") return(Mysql);
+  else if (driver == "QMYSQL") return(Mysql);
   else if (driver == "QOCI8") return(Oracle8);
   else if (driver == "QODBC3") return(ODBC3);
   else if (driver == "QPSQL7") return(Postgresql);
@@ -142,7 +142,7 @@ bool MyMoneyDbDrivers::isTested (databaseTypeE dbType) const {
 
 //************************ Constructor/Destructor *****************************
 MyMoneyStorageSql::MyMoneyStorageSql (IMyMoneySerialize *storage, const KUrl& url)
-  : QSqlDatabase (url.queryItem("driver")) {
+  : QSqlDatabase(url.queryItem("driver")) {
   DBG("*** Entering MyMoneyStorageSql::MyMoneyStorageSql");
   m_storage = storage;
   init();
@@ -164,8 +164,7 @@ int MyMoneyStorageSql::open(const KUrl& url, int openMode, bool clear) {
   DBG("*** Entering MyMoneyStorageSql::open");
 try {
   int rc = 0;
-  QString driverName = url.queryItem("driver");
-  m_dbType = m_drivers.driverToType(driverName);
+  m_dbType = m_drivers.driverToType(url.queryItem("driver"));
   //get the input options
   QStringList options = url.queryItem("options").split(",");
   m_loadAll = options.contains("loadAll")/*|| m_mode == 0*/;
@@ -192,7 +191,7 @@ try {
       // If that fails, try to create the database, then try to open it again.
       m_newDatabase = true;
       if (!QSqlDatabase::open()) {
-        if (createDatabase(url) != 0) {
+        if (!createDatabase(url)) {
           rc = 1;
         } else {
           if (!QSqlDatabase::open()) {
@@ -218,7 +217,7 @@ try {
   }
   if (rc != 0) return (rc);
   // bypass logon check if we are creating a database
-  if (openMode == QIODevice::WriteOnly) return(0);
+  if (m_newDatabase) return(0);
   // check if the database is locked, if not lock it
   readFileInfo();
   if (!m_logonUser.isEmpty() && (!m_override)) {
@@ -228,7 +227,7 @@ try {
         m_logonAt.time().toString("hh.mm.ss"));
     qDebug("%s", qPrintable(m_error));
     close(false);
-    rc = -1;
+    rc = -1; // retryable error
   } else {
     m_logonUser = url.user() + "@" + url.host();
     m_logonAt = QDateTime::currentDateTime();
@@ -254,35 +253,36 @@ void MyMoneyStorageSql::close(bool logoff) {
   }
 }
 
-int MyMoneyStorageSql::createDatabase (const KUrl& url) {
+bool MyMoneyStorageSql::createDatabase (const KUrl& url) {
   DBG("*** Entering MyMoneyStorageSql::createDatabase");
-  if (m_dbType == Sqlite3) return(0); // not needed for sqlite
-  //if (!m_dbType == Mysql) { // in qt4 it doesn't work for mysql either
-    m_error =i18n("Cannot currently create database for driver %1; please create manually",driverName());
-    return (1);
-  //}
-  // create the database (only works for mysql at present)
+  int rc = true;
+  if (m_dbType == Sqlite3) return(true); // not needed for sqlite
   QString dbName = url.path().right(url.path().length() - 1); // remove separator slash
+  if (!m_dbType == Mysql) {
+    m_error = i18n("Automatic database creation for type %1 is not currently implemented.\n"
+                   "Please create database %2 manually", driverName(), dbName);
+    return (false);
+  }
+  // create the database (only works for mysql at present)
   QSqlDatabase maindb = QSqlDatabase::addDatabase(driverName(), "main");
   maindb.setDatabaseName ("mysql");
   maindb.setHostName (url.host());
   maindb.setUserName (url.user());
   maindb.setPassword (url.pass());
-  QSqlQuery qm(maindb);
   if (!maindb.open()) {
-      buildError (qm, __func__, "opening maindb", &maindb);
-      return(1);
+    throw new MYMONEYEXCEPTION (QString("opening maindb in function %1").arg(__func__));
+  } else {
+    QSqlQuery qm(maindb);
+    QString qs = QString("CREATE DATABASE %1;").arg(dbName);
+    if (!qm.exec(qs)) {
+      buildError (qm, __func__,
+           i18n("Error in create database %1; do you have create permissions?",dbName), &maindb);
+      rc = false;
+    }
+    maindb.close();
   }
-  QString qs = QString("CREATE DATABASE %1;").arg(dbName);
-  qm.prepare (qs);
-  if (!qm.exec()) {
-    buildError (qm, __func__,
-               i18n("Error in create database %1; do you have create permissions?",dbName), &maindb);
-    return (1);
-  }
-  maindb.close();
   QSqlDatabase::removeDatabase (maindb.connectionName());
-  return (0);
+  return (rc);
 }
 
 int MyMoneyStorageSql::upgradeDb() {

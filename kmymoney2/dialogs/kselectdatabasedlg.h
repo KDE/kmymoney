@@ -46,25 +46,29 @@ class KSelectDatabaseDlg : public KSelectDatabaseDlgDecl
 {
 Q_OBJECT
 public:
-  KSelectDatabaseDlg(QWidget *parent = 0);
-  KSelectDatabaseDlg(KUrl openURL, QWidget *parent = 0);
+  KSelectDatabaseDlg(int openMode, KUrl openURL = KUrl(), QWidget *parent = 0);
   ~KSelectDatabaseDlg();
-  /** Set the mode of this dialog
-    * @param - openMode (QIODevice::ReadWrite = open database; QIODevice::WriteOnly = saveas database)
+  /**
+    * Check whether we have required database drivers
+    * @return - false, no drivers available, true, can proceed
   **/
-  void setMode(int openMode);
+  bool checkDrivers();
   /** Return URL of database
     * @return - pseudo-URL of database selected by user
   **/
   const KUrl selectedURL();
-
+  /** Execute the database selection dialog
+    * @return - as QDialog::exec()
+  **/
+  int exec();
 public slots:
   void slotDriverSelected(QListWidgetItem *driver);
   void slotHelp();
   void slotGenerateSQL();
 private:
-  void setError();
   int m_mode;
+  KUrl m_url;
+  QList<QString> m_supportedDrivers;
   MyMoneyDbDrivers m_map;
   kMandatoryFieldGroup* m_requiredFields;
 };

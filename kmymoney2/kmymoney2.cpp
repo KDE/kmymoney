@@ -1280,8 +1280,8 @@ void KMyMoney2App::slotFileOpen(void)
 void KMyMoney2App::slotOpenDatabase(void)
 {
   KMSTATUS(i18n("Open a file."));
-  KSelectDatabaseDlg dialog;
-  dialog.setMode(QIODevice::ReadWrite);
+  KSelectDatabaseDlg dialog(QIODevice::ReadWrite);
+  if (!dialog.checkDrivers()) return;
 
   if(dialog.exec() == QDialog::Accepted) {
       slotFileOpenRecent(dialog.selectedURL());
@@ -1343,22 +1343,33 @@ void KMyMoney2App::slotFileOpenRecent(const KUrl& url)
   }
 #endif
   if(!duplicate) {
-
-    if((url.protocol() == "sql") || (url.isValid() && KIO::NetAccess::exists(url, true, this))) {
-      KUrl dburl = url;
-      // check if a password is needed. it may be if the URL came from the last/recent file list
-      if ((dburl.queryItem("secure") == "yes") && dburl.pass().isEmpty()) {
-        KSelectDatabaseDlg dialog(dburl);
-        dialog.setMode(QIODevice::ReadWrite);
-        if(dialog.exec() == QDialog::Accepted) dburl = dialog.selectedURL();
+    KUrl newurl = url;
+    if((newurl.protocol() == "sql")) {
+      if (newurl.queryItem("driver") == "QMYSQL3") { // fix any old urls
+          newurl.removeQueryItem("driver");
+          newurl.addQueryItem("driver", "QMYSQL");
       }
+      if (newurl.queryItem("driver") == "QSQLITE3") {
+          newurl.removeQueryItem("driver");
+          newurl.addQueryItem("driver", "QSQLITE");
+      }
+      // check if a password is needed. it may be if the URL came from the last/recent file list
+      KSelectDatabaseDlg dialog(QIODevice::ReadWrite, newurl);
+      if (!dialog.checkDrivers()) return;
+      // if we need to supply a password, then show the dialog
+      // otherwise it isn't needed
+      if ((newurl.queryItem("secure") == "yes") && newurl.pass().isEmpty()) {
+        if(dialog.exec() == QDialog::Accepted) newurl = dialog.selectedURL();
+      }
+    }
+    if ((newurl.protocol() == "sql") || (newurl.isValid() && KIO::NetAccess::exists(newurl, true, this))) {
       slotFileClose();
       if(!myMoneyView->fileOpen()) {
-        if(myMoneyView->readFile(dburl)) {
+        if(myMoneyView->readFile(newurl)) {
           if((myMoneyView->isNativeFile())) {
-            m_fileName = dburl;
-            m_recentFiles->addUrl(dburl.pathOrUrl());
-            writeLastUsedFile(dburl.pathOrUrl());
+            m_fileName = newurl;
+            m_recentFiles->addUrl(newurl.pathOrUrl());
+            writeLastUsedFile(newurl.pathOrUrl());
           } else {
             m_fileName = KUrl(); // imported files have no filename
           }
@@ -1367,17 +1378,19 @@ void KMyMoney2App::slotFileOpenRecent(const KUrl& url)
           slotCheckSchedules();
           ::timetrace("Done checking schedules");
         }
-
         updateCaption();
         ::timetrace("Announcing new filename");
         emit fileLoaded(m_fileName);
         ::timetrace("Announcing new filename done");
+      } else {
+          /*fileOpen failed - should we do something
+           or maybe fileOpen puts out the message... - it does for database*/
       }
-    } else {
+    } else { // newurl invalid
       slotFileClose();
       KMessageBox::sorry(this, QString("<p>")+i18n("<b>%1</b> is either an invalid filename or the file does not exist. You can open another file or create a new one.", url.pathOrUrl()), i18n("File not found"));
     }
-  } else {
+  } else { // isDuplicate
     KMessageBox::sorry(this, QString("<p>")+i18n("File <b>%1</b> is already opened in another instance of KMyMoney", url.pathOrUrl()), i18n("Duplicate open"));
   }
 }
@@ -1585,10 +1598,10 @@ bool KMyMoney2App::slotSaveAsDatabase(void)
   if (myMoneyView->isDatabase())
     dynamic_cast<IMyMoneySerialize*> (MyMoneyFile::instance()->storage())->fillStorage();
   KMSTATUS(i18n("Saving file to database..."));
-  KSelectDatabaseDlg dialog;
-  dialog.setMode(QIODevice::WriteOnly);
+  KSelectDatabaseDlg dialog(QIODevice::WriteOnly);
   KUrl oldUrl = m_fileName.isEmpty() ? lastOpenedURL() : m_fileName;
   KUrl url = oldUrl;
+  if (!dialog.checkDrivers()) return (false);
 
   while (oldUrl == url && dialog.exec() == QDialog::Accepted) {
       url = dialog.selectedURL();
