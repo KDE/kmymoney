@@ -353,7 +353,7 @@ void KMyMoney2App::initActions(void)
   connect(saveas_database, SIGNAL(triggered()), this, SLOT(slotSaveAsDatabase()));
 
   KAction *file_backup = actionCollection()->addAction("file_backup");
-  file_backup->setText(i18n("QIF..."));
+  file_backup->setText(i18n("Backup..."));
   file_backup->setIcon(KIcon("backup"));
   connect(file_backup, SIGNAL(triggered()), this, SLOT(slotFileBackup()));
 
