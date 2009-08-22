@@ -914,25 +914,6 @@
 </sect2>
 </sect1>
 
-<sect1 id="reference.widgets">
-<sect1info>
-  <author>
-    <firstname>Thomas</firstname>
-    <surname>Baumgart</surname>
-    <affiliation>
-      <address><email>ipwizard@users.sourceforge.net</email></address>
-    </affiliation>
-  </author>
-</sect1info>
-
-<title>Widgets</title>
-
-<para>
-  &kappname; has some specific widgets not found in other applications. The
-  usage of these widgets is explained in this chapter.
-</para>
-
 &details-widgets;
 
-</sect1>
 </chapter>
