@@ -449,7 +449,7 @@ void KMyMoney2App::initActions(void)
 
   KAction *institution_delete = actionCollection()->addAction("institution_delete");
   institution_delete->setText(i18n("Delete institution..."));
-  institution_delete->setIcon(KIcon("delete"));
+  institution_delete->setIcon(KIcon("edit-delete"));
   connect(institution_delete, SIGNAL(triggered()), this, SLOT(slotInstitutionDelete()));
 
   // *****************
@@ -463,7 +463,7 @@ void KMyMoney2App::initActions(void)
   // note : action "category_new" is included in this menu but defined below
   KAction *account_open = actionCollection()->addAction("account_open");
   account_open->setText(i18n("Open ledger"));
-  account_open->setIcon(KIcon("account"));
+  account_open->setIcon(KIcon("ledger"));
   connect(account_open, SIGNAL(triggered()), this, SLOT(slotAccountOpen()));
 
   KAction *account_reconcile = actionCollection()->addAction("account_reconcile");
@@ -506,7 +506,7 @@ void KMyMoney2App::initActions(void)
 #ifdef HAVE_KDCHART
   KAction *account_chart = actionCollection()->addAction("account_chart");
   account_chart->setText(i18n("Show balance chart..."));
-  account_chart->setIcon(KIcon("kchart_chrt"));
+  account_chart->setIcon(KIcon("report"));
   connect(account_chart, SIGNAL(triggered()), this, SLOT(slotAccountChart()));
 #endif
   KAction *account_online_map = actionCollection()->addAction("account_online_map");
@@ -547,7 +547,7 @@ void KMyMoney2App::initActions(void)
 
   KAction *category_delete = actionCollection()->addAction("category_delete");
   category_delete->setText(i18n("Delete category..."));
-  category_delete->setIcon(KIcon("delete"));
+  category_delete->setIcon(KIcon("edit-delete"));
   connect(category_delete, SIGNAL(triggered()), this, SLOT(slotAccountDelete()));
 
 
@@ -650,7 +650,7 @@ void KMyMoney2App::initActions(void)
 
   KAction *transaction_delete = actionCollection()->addAction("transaction_delete");
   transaction_delete->setText(i18nc("Delete transaction", "Delete"));
-  transaction_delete->setIcon(KIcon("delete"));
+  transaction_delete->setIcon(KIcon("edit-delete"));
   connect(transaction_delete, SIGNAL(triggered()), this, SLOT(slotTransactionsDelete()));
 
   KAction *transaction_duplicate = actionCollection()->addAction("transaction_duplicate");
@@ -729,7 +729,7 @@ void KMyMoney2App::initActions(void)
 
   KAction *investment_delete = actionCollection()->addAction("investment_delete");
   investment_delete->setText(i18n("Delete investment..."));
-  investment_delete->setIcon(KIcon("delete"));
+  investment_delete->setIcon(KIcon("edit-delete"));
   connect(investment_delete, SIGNAL(triggered()), this, SLOT(slotInvestmentDelete()));
 
   KAction *investment_online_price_update = actionCollection()->addAction("investment_online_price_update");
@@ -753,7 +753,7 @@ void KMyMoney2App::initActions(void)
 
   KAction *schedule_delete = actionCollection()->addAction("schedule_delete");
   schedule_delete->setText(i18n("Delete scheduled transaction"));
-  schedule_delete->setIcon(KIcon("delete"));
+  schedule_delete->setIcon(KIcon("edit-delete"));
   connect(schedule_delete, SIGNAL(triggered()), this, SLOT(slotScheduleDelete()));
 
   KAction *schedule_duplicate = actionCollection()->addAction("schedule_duplicate");
@@ -779,12 +779,12 @@ void KMyMoney2App::initActions(void)
 
   KAction *payee_rename = actionCollection()->addAction("payee_rename");
   payee_rename->setText(i18n("Rename payee"));
-  payee_rename->setIcon(KIcon("delete"));
+  payee_rename->setIcon(KIcon("edit-delete"));
   connect(payee_rename, SIGNAL(triggered()), this, SIGNAL(payeeRename()));
 
   KAction *payee_delete = actionCollection()->addAction("payee_delete");
   payee_delete->setText(i18n("Delete payee"));
-  payee_delete->setIcon(KIcon("delete"));
+  payee_delete->setIcon(KIcon("edit-delete"));
   connect(payee_delete, SIGNAL(triggered()), this, SLOT(slotPayeeDelete()));
 
   //Budget
@@ -800,7 +800,7 @@ void KMyMoney2App::initActions(void)
 
   KAction *budget_delete = actionCollection()->addAction("budget_delete");
   budget_delete->setText(i18n("Delete budget"));
-  budget_delete->setIcon(KIcon("delete"));
+  budget_delete->setIcon(KIcon("edit-delete"));
   connect(budget_delete, SIGNAL(triggered()), this, SLOT(slotBudgetDelete()));
 
   KAction *budget_copy = actionCollection()->addAction("budget_copy");
@@ -829,13 +829,13 @@ void KMyMoney2App::initActions(void)
 
   KAction *currency_rename = actionCollection()->addAction("currency_rename");
   currency_rename->setText(i18n("Rename currency"));
-  currency_rename->setIcon(KIcon("delete"));
+  currency_rename->setIcon(KIcon("edit-delete"));
   connect(currency_rename, SIGNAL(triggered()), this, SIGNAL(currencyRename()));
 
 
   KAction *currency_delete = actionCollection()->addAction("currency_delete");
   currency_delete->setText(i18n("Delete currency"));
-  currency_delete->setIcon(KIcon("delete"));
+  currency_delete->setIcon(KIcon("edit-delete"));
   connect(currency_delete, SIGNAL(triggered()), this, SLOT(slotCurrencyDelete()));
 
   KAction *currency_setbase = actionCollection()->addAction("currency_setbase");

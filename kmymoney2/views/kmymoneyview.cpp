@@ -135,7 +135,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   // Page 0
   m_homeView = new KHomeView();
   m_homeViewFrame = m_model->addPage( m_homeView, i18n("Home"));
-  m_homeViewFrame->setIcon(KIcon("home"));
+  m_homeViewFrame->setIcon(KIcon("go-home"));
   m_homeViewFrame->setHeader(QString(""));
   connect(m_homeView, SIGNAL(ledgerSelected(const QString&, const QString&)),
           this, SLOT(slotLedgerSelected(const QString&, const QString&)));

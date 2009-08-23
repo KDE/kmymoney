@@ -155,53 +155,53 @@ INSTALL(FILES misc/financequote.pl
   )
 
 ########## Application Icons #############
-INSTALL(DIRECTORY icons/hicolor
+INSTALL(DIRECTORY icons/oxygen
   DESTINATION ${DATA_INSTALL_DIR}/kmymoney2/icons
   PATTERN "*Make*" EXCLUDE
   PATTERN ".svn" EXCLUDE
   )
 INSTALL(FILES hi16-app-kmymoney2.png
-  DESTINATION ${ICON_INSTALL_DIR}/hicolor/16x16/apps
+  DESTINATION ${ICON_INSTALL_DIR}/oxygen/16x16/apps
   RENAME kmymoney2.png
   )
 INSTALL(FILES mimetype_kmy_16x16.png
-  DESTINATION ${ICON_INSTALL_DIR}/hicolor/16x16/mimetypes
+  DESTINATION ${ICON_INSTALL_DIR}/oxygen/16x16/mimetypes
   RENAME kmy.png
   )
 INSTALL(FILES hi32-app-kmymoney2.png
-  DESTINATION ${ICON_INSTALL_DIR}/hicolor/32x32/apps
+  DESTINATION ${ICON_INSTALL_DIR}/oxygen/32x32/apps
   RENAME kmymoney2.png
   )
 INSTALL(FILES mimetype_kmy_22x22.png
-  DESTINATION ${ICON_INSTALL_DIR}/hicolor/22x22/mimetypes
+  DESTINATION ${ICON_INSTALL_DIR}/oxygen/22x22/mimetypes
   RENAME kmy.png
   )
 INSTALL(FILES mimetype_kmy_32x32.png
-  DESTINATION ${ICON_INSTALL_DIR}/hicolor/32x32/mimetypes
+  DESTINATION ${ICON_INSTALL_DIR}/oxygen/32x32/mimetypes
   RENAME kmy.png
   )
 INSTALL(FILES hi48-app-kmymoney2.png
-  DESTINATION ${ICON_INSTALL_DIR}/hicolor/48x48/apps
+  DESTINATION ${ICON_INSTALL_DIR}/oxygen/48x48/apps
   RENAME kmymoney2.png
   )
 INSTALL(FILES mimetype_kmy_48x48.png
-  DESTINATION ${ICON_INSTALL_DIR}/hicolor/48x48/mimetypes
+  DESTINATION ${ICON_INSTALL_DIR}/oxygen/48x48/mimetypes
   RENAME kmy.png
   )
 INSTALL(FILES hi64-app-kmymoney2.png
-  DESTINATION ${ICON_INSTALL_DIR}/hicolor/68x68/apps
+  DESTINATION ${ICON_INSTALL_DIR}/oxygen/68x68/apps
   RENAME kmymoney2.png
   )
 INSTALL(FILES mimetype_kmy_64x64.png
-  DESTINATION ${ICON_INSTALL_DIR}/hicolor/64x64/mimetypes
+  DESTINATION ${ICON_INSTALL_DIR}/oxygen/64x64/mimetypes
   RENAME kmy.png
   )
 INSTALL(FILES hi128-app-kmymoney2.png
-  DESTINATION ${ICON_INSTALL_DIR}/hicolor/128x128/apps
+  DESTINATION ${ICON_INSTALL_DIR}/oxygen/128x128/apps
   RENAME kmymoney2.png
   )
 INSTALL(FILES mimetype_kmy_128x128.png
-  DESTINATION ${ICON_INSTALL_DIR}/hicolor/128x128/mimetypes
+  DESTINATION ${ICON_INSTALL_DIR}/oxygen/128x128/mimetypes
   RENAME kmy.png
   )
 INSTALL(FILES lo16-app-kmymoney2.png
