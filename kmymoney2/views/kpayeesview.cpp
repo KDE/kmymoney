@@ -332,8 +332,13 @@ KPayeesView::KPayeesView(QWidget *parent) :
   vboxLayout->insertWidget(0, m_searchWidget);
 
   m_splitter = new QSplitter(this);
-  m_payeesList->reparent(m_splitter, QPoint(0,0), true);
-  m_tabWidget->reparent(m_splitter, QPoint(0, 0), true);
+  m_payeesList->setParent(m_splitter);
+  m_payeesList->move(QPoint(0,0));
+  m_payeesList->show();
+  m_tabWidget->setParent(m_splitter);
+  m_tabWidget->move(QPoint(0,0));
+  m_tabWidget->show();
+
   m_splitter->setStretchFactor(m_splitter->indexOf(m_tabWidget), 2);
   m_splitter->setOpaqueResize();
   hboxLayout->addWidget(m_splitter);
@@ -778,8 +783,6 @@ void KPayeesView::slotKeyListChanged(void)
 
 void KPayeesView::slotPayeeDataChanged(void)
 {
-  kDebug(2) << "KPayeesView::slotPayeeDataChanged(void)";
-
   bool rc = false;
 
   if(m_tabWidget->isEnabled()) {
