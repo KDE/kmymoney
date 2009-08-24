@@ -142,7 +142,7 @@
 	    <imagedata fileref="institutions_view.png" format="PNG"></imagedata>
           </imageobject>
 	  <textobject>
-	    <phrase>Accounts View</phrase>
+	    <phrase>Institutions View</phrase>
 	  </textobject>
 	</inlinemediaobject>
       </guiicon>
@@ -723,7 +723,7 @@ transactions this is currently empty.</para>
 </para>
 
 <para>
-  The file will be coped to the folder specified with the current date
+  The file will be copied to the folder specified with the current date
   appended to the filename so it is easy to see the date the file was backed up.
 </para>
 </sect1>

@@ -101,7 +101,7 @@
 
 <para>
   Negative values can be entered by preceeding the value with a minus sign. In
-  case your locale is set to display negative numbers with parantheses around
+  case your locale is set to display negative numbers with parentheses around
   the value, the value can also be enclosed in parenthesis in the value entry
   widget.
 </para>

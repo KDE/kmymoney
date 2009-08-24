@@ -482,8 +482,7 @@
   </varlistentry>
 
   <varlistentry>
-    <term><guilabel>Number of days to preview schedules schedules in
-      ledger</guilabel></term>
+    <term><guilabel>Number of days to preview schedules in ledger</guilabel></term>
     <listitem>
       <para>Specify how many days should the schedules show up in the
         ledger.</para>
@@ -618,8 +617,7 @@
 </para>
 
 <para>
-  For more details, please refer to to
-  the <link linkend="details.investments.onlinequotes">Online Price
+  For more details, please refer to the <link linkend="details.investments.onlinequotes">Online Price
   Quotes</link> section.
 </para>
 </sect1>

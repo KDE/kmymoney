@@ -646,7 +646,7 @@
 
   <varlistentry>
     <term><menuchoice>
-      <guimenu>Transaction</guimenu><guimenuitem>Unatch</guimenuitem>
+      <guimenu>Transaction</guimenu><guimenuitem>Unmatch</guimenuitem>
     </menuchoice></term>
     <listitem>
       <para>
