@@ -2876,8 +2876,7 @@ const QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions (co
           .arg(itemConnector).arg(*it));
       itemConnector = ", ";
     }
-    if (payeesClause.isEmpty())
-    {
+    if (!payeesClause.isEmpty()) {
       whereClause += subClauseconnector + payeesClause + ")";
       subClauseconnector = " and ";
     }
