@@ -3470,9 +3470,8 @@ void KMyMoney2App::slotAccountReconcileStart(void)
     // check if we can reconcile this account
     // it make's sense for asset and liability accounts
     try {
-#if 0
       // check if we have overdue schedules for this account
-      Q3ValueList<MyMoneySchedule> schedules = file->scheduleList(m_selectedAccount.id(), MyMoneySchedule::TYPE_ANY, MyMoneySchedule::OCCUR_ANY, MyMoneySchedule::STYPE_ANY, QDate(), QDate(), true);
+      QList<MyMoneySchedule> schedules = file->scheduleList(m_selectedAccount.id(), MyMoneySchedule::TYPE_ANY, MyMoneySchedule::OCCUR_ANY, MyMoneySchedule::STYPE_ANY, QDate(), QDate(), true);
       if(schedules.count() > 0) {
         if(KMessageBox::questionYesNo(this, i18n("KMyMoney has detected some overdue scheduled transactions for this account. Do you want to enter those scheduled transactions now?"), i18n("Scheduled transactions found")) == KMessageBox::Yes) {
 
@@ -3481,7 +3480,7 @@ void KMyMoney2App::slotAccountReconcileStart(void)
           KMyMoneyUtils::EnterScheduleResultCodeE rc = KMyMoneyUtils::Enter;
           do {
             processedOne = false;
-            Q3ValueList<MyMoneySchedule>::const_iterator it_sch;
+            QList<MyMoneySchedule>::const_iterator it_sch;
             for(it_sch = schedules.begin(); (rc != KMyMoneyUtils::Cancel) && (it_sch != schedules.end()); ++it_sch) {
               MyMoneySchedule sch(*(it_sch));
 
@@ -3499,7 +3498,6 @@ void KMyMoney2App::slotAccountReconcileStart(void)
           } while(processedOne);
         }
       }
-#endif
 
       account = file->account(m_selectedAccount.id());
       // get rid of previous run.
