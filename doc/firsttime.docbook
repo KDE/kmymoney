@@ -122,7 +122,7 @@
       <guiicon>
 	<inlinemediaobject>
 	  <imageobject>
-	    <imagedata fileref="home_view.png" format="PNG"></imagedata>
+	    <imagedata fileref="home_view.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
 	    <phrase>Home View</phrase>
@@ -139,7 +139,7 @@
       <guiicon>
         <inlinemediaobject>
           <imageobject>
-	    <imagedata fileref="institutions_view.png" format="PNG"></imagedata>
+	    <imagedata fileref="institutions_view.png" format="PNG"/>
           </imageobject>
 	  <textobject>
 	    <phrase>Institutions View</phrase>
@@ -156,7 +156,7 @@
       <guiicon>
 	<inlinemediaobject>
 	  <imageobject>
-	    <imagedata fileref="accounts_view.png" format="PNG"></imagedata>
+	    <imagedata fileref="accounts_view.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
 	    <phrase>Accounts View</phrase>
@@ -172,7 +172,7 @@
       <guiicon>
 	<inlinemediaobject>
 	  <imageobject>
-	    <imagedata fileref="schedule_view.png" format="PNG"></imagedata>
+	    <imagedata fileref="schedule_view.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
 	    <phrase>Schedules View</phrase>
@@ -188,7 +188,7 @@
       <guiicon>
         <inlinemediaobject>
 	  <imageobject>
-	    <imagedata fileref="categories_view.png" format="PNG"></imagedata>
+	    <imagedata fileref="categories_view.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
 	    <phrase>Categories View</phrase>
@@ -205,7 +205,7 @@
       <guiicon>
         <inlinemediaobject>
 	  <imageobject>
-	    <imagedata fileref="payees_view.png" format="PNG"></imagedata>
+	    <imagedata fileref="payees_view.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
 	    <phrase>Payees View</phrase>
@@ -221,7 +221,7 @@
       <guiicon>
 	<inlinemediaobject>
 	  <imageobject>
-	    <imagedata fileref="ledgers_view.png" format="PNG"></imagedata>
+	    <imagedata fileref="ledgers_view.png" format="PNG"/>
           </imageobject>
 	  <textobject>
 	    <phrase>Ledgers View</phrase>
@@ -237,7 +237,7 @@
       <guiicon>
 	<inlinemediaobject>
 	  <imageobject>
-	    <imagedata fileref="investments_view.png" format="PNG"></imagedata>
+	    <imagedata fileref="investments_view.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
             <phrase>Investments View</phrase>
@@ -253,7 +253,7 @@
       <guiicon>
 	<inlinemediaobject>
 	  <imageobject>
-	    <imagedata fileref="reports_view.png" format="PNG"></imagedata>
+	    <imagedata fileref="reports_view.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
 	    <phrase>Reports View</phrase>
@@ -270,7 +270,7 @@
       <guiicon>
 	<inlinemediaobject>
 	  <imageobject>
-	    <imagedata fileref="budgets_view.png" format="PNG"></imagedata>
+	    <imagedata fileref="budgets_view.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
 	    <phrase>Budgets View</phrase>
@@ -286,7 +286,7 @@
       <guiicon>
 	<inlinemediaobject>
 	  <imageobject>
-	    <imagedata fileref="forecast_view.png" format="PNG"></imagedata>
+	    <imagedata fileref="forecast_view.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
 	    <phrase>Forecast View</phrase>
@@ -302,7 +302,7 @@
       <guiicon>
 	<inlinemediaobject>
 	  <imageobject>
-	    <imagedata fileref="outbox_view.png" format="PNG"></imagedata>
+	    <imagedata fileref="outbox_view.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
 	    <phrase>Outbox View</phrase>
