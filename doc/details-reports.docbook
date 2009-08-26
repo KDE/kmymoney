@@ -33,8 +33,6 @@
 </screenshot>
 </para>
 
-<para>@Rob: Pls update Screenshot to include new Charts section</para>
-
 <para>
   The Reports View lists all available reports, grouped under the following
   headings.
@@ -289,8 +287,6 @@
 	</screenshot>
 </para>
 
-<para>@Rob: Screenshot of rows/columns tab from an income/expense report</para>
-
 <para>
   For income/expense and net worth reports:
 <itemizedlist>
@@ -335,7 +331,6 @@
 
 <sect2>
 <title>Chart Tab</title>
-<para>@Rob: Screenshot of chart tab</para>
 
 <para>
   This tab allows you to configure what the report should look like when it is
@@ -397,7 +392,6 @@
 
 <sect3>
 <title>Line Graph</title>
-<para>@Rob: Screenshot of a simple line graph</para>
 
 <para>
   A line graph is one of the most simple forms of a chart.  There is one line
@@ -419,7 +413,6 @@
 
 <sect3>
 <title>Bar Graph</title>
-<para>@Rob: Screenshot of a simple bar graph</para>
 
 <para>
   The bar graph works exactly the same as the line graph, except there is one
@@ -429,7 +422,6 @@
 
 <sect3>
 <title>Pie Chart</title>
-<para>@Rob: Screenshot of a simple pie chart</para>
 
 <para>
   The pie chart is the most simple chart available.  It shows only one time
@@ -442,7 +434,6 @@
 
 <sect3>
 <title>Ring Chart</title>
-<para>@Rob: Screenshot of a simple ring chart</para>
 
 <para>
   The ring chart is very similar to a pie chart, except there is one
