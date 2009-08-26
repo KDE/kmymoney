@@ -68,7 +68,7 @@
             <item>
               <widget class="QRadioButton" name="m_onceRadio">
                 <property name="text">
-                  <string>Enter these new values this one time, for this occurence only.</string>
+                  <string>Enter these new values this one time, for this occurrence only.</string>
                 </property>
               </widget>
             </item>

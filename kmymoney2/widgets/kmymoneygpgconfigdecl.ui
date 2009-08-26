@@ -18,7 +18,7 @@
     </property>
     <property name="whatsThis" stdset="0">
       <string>This page allows you to set the parameters for encrypted file storage of your &lt;b&gt;KMyMoney&lt;/b&gt; data based on &lt;b&gt;GPG&lt;/b&gt;.&lt;p&gt;
-Acces to the settings is disabled if &lt;b&gt;GPG&lt;/b&gt; could not be detected on your system. In this case, please make sure that &lt;b&gt;GPG&lt;/b&gt; is working properly for the current user.&lt;p&gt;
+Access to the settings is disabled if &lt;b&gt;GPG&lt;/b&gt; could not be detected on your system. In this case, please make sure that &lt;b&gt;GPG&lt;/b&gt; is working properly for the current user.&lt;p&gt;
 The &lt;i&gt;Recovery encryption&lt;/i&gt; group is only accessible, if the necessary key for &lt;b&gt;kmymoney-recover@users.sourceforge.net&lt;/b&gt; with id 0x8AFDDC8E is found.</string>
     </property>
     <layout class="QVBoxLayout">

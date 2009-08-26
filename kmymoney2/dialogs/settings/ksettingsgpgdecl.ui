@@ -73,7 +73,7 @@ The &lt;i&gt;additional recovery encryption&lt;/i&gt; is only accessible, if the
             <item>
               <widget class="KEditListBox" name="kcfg_GpgRecipientList">
                 <property name="title">
-                  <string>Additonal keys</string>
+                  <string>Additional keys</string>
                 </property>
                 <property name="checkable">
                   <bool>false</bool>

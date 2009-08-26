@@ -4439,7 +4439,7 @@ KMyMoney has calculated the loan as shown below. If you want to accept these val
         <item>
           <widget class="QLabel" name="TextLabel10_4_2">
             <property name="text">
-              <string>If this loan is for an asset, such as a car or a house, you can create the asset account now. An asset account represents the total value of an asset. The money from this loan will be transfered into the asset account you create or select.
+              <string>If this loan is for an asset, such as a car or a house, you can create the asset account now. An asset account represents the total value of an asset. The money from this loan will be transferred into the asset account you create or select.
 If this loan is a 'consumer loan' (money to use however you want), you can use a checking account instead.</string>
             </property>
             <property name="alignment">
