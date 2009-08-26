@@ -3829,17 +3829,17 @@ void KMyMoney2App::slotScheduleNew(void)
   slotScheduleNew(MyMoneyTransaction());
 }
 
-void KMyMoney2App::slotScheduleNew(const MyMoneyTransaction& _t, MyMoneySchedule::occurenceE occurence)
+void KMyMoney2App::slotScheduleNew(const MyMoneyTransaction& _t, MyMoneySchedule::occurrenceE occurrence)
 {
   MyMoneySchedule schedule;
-  schedule.setOccurence(occurence);
+  schedule.setOccurrence(occurrence);
 
   // if the schedule is based on an existing transaction,
   // we take the post date and project it to the next
   // schedule in a month.
   if(_t != MyMoneyTransaction()) {
     MyMoneyTransaction t(_t);
-    if(occurence != MyMoneySchedule::OCCUR_ONCE)
+    if(occurrence != MyMoneySchedule::OCCUR_ONCE)
       t.setPostDate(schedule.nextPayment(t.postDate()));
     schedule.setTransaction(t);
   }
@@ -3999,7 +3999,7 @@ void KMyMoney2App::slotScheduleSkip(void)
     try {
       MyMoneySchedule schedule = MyMoneyFile::instance()->schedule(m_selectedSchedule.id());
       if(!schedule.isFinished()) {
-        if(schedule.occurence() != MyMoneySchedule::OCCUR_ONCE) {
+        if(schedule.occurrence() != MyMoneySchedule::OCCUR_ONCE) {
           QDate next = schedule.nextDueDate();
           if(!schedule.isFinished() && (KMessageBox::questionYesNo(this, QString("<qt>")+i18n("Do you really want to skip the <b>%1</b> transaction scheduled for <b>%2</b>?",schedule.name(), KGlobal::locale()->formatDateTime(QDateTime(next), KLocale::ShortDate, false))+QString("</qt>"))) == KMessageBox::Yes) {
             MyMoneyFileTransaction ft;
@@ -4815,7 +4815,7 @@ void KMyMoney2App::slotTransactionsNew(void)
       if(m_transactionEditor) {
         connect(m_transactionEditor, SIGNAL(statusProgress(int, int)), this, SLOT(slotStatusProgressBar(int, int)));
         connect(m_transactionEditor, SIGNAL(statusMsg(const QString&)), this, SLOT(slotStatusMsg(const QString&)));
-        connect(m_transactionEditor, SIGNAL(scheduleTransaction(const MyMoneyTransaction&, MyMoneySchedule::occurenceE)), this, SLOT(slotScheduleNew(const MyMoneyTransaction&, MyMoneySchedule::occurenceE)));
+        connect(m_transactionEditor, SIGNAL(scheduleTransaction(const MyMoneyTransaction&, MyMoneySchedule::occurrenceE)), this, SLOT(slotScheduleNew(const MyMoneyTransaction&, MyMoneySchedule::occurrenceE)));
       }
       slotUpdateActions();
     }
@@ -5776,8 +5776,8 @@ void KMyMoney2App::slotUpdateActions(void)
     action("schedule_delete")->setEnabled(!file->isReferenced(m_selectedSchedule));
     if(!m_selectedSchedule.isFinished()) {
       action("schedule_enter")->setEnabled(true);
-      // a schedule with a single occurence cannot be skipped
-      if(m_selectedSchedule.occurence() != MyMoneySchedule::OCCUR_ONCE) {
+      // a schedule with a single occurrence cannot be skipped
+      if(m_selectedSchedule.occurrence() != MyMoneySchedule::OCCUR_ONCE) {
         action("schedule_skip")->setEnabled(true);
       }
     }

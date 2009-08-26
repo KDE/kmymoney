@@ -250,7 +250,7 @@ signals:
     * This signal is sent out, if the user decides to schedule the transaction @a t
     * rather then adding it to the ledger right away.
     */
-  void scheduleTransaction(const MyMoneyTransaction& t, MyMoneySchedule::occurenceE occurence);
+  void scheduleTransaction(const MyMoneyTransaction& t, MyMoneySchedule::occurrenceE occurrence);
 
   /**
    * This signal is sent out, if the user double clicks the number field

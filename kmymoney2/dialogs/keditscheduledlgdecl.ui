@@ -72,7 +72,7 @@
                 </widget>
               </item>
               <item>
-                <widget class="KMyMoneyOccurencePeriodCombo" name="m_frequencyEdit"/>
+                <widget class="KMyMoneyOccurrencePeriodCombo" name="m_frequencyEdit"/>
               </item>
             </layout>
           </item>
@@ -461,7 +461,7 @@
    <container>1</container>                                         
   </customwidget>  
   <customwidget>
-   <class>KMyMoneyOccurencePeriodCombo</class>
+   <class>KMyMoneyOccurrencePeriodCombo</class>
    <extends>QWidget</extends>
    <header>kmymoneycombo.h</header>
    <container>1</container>

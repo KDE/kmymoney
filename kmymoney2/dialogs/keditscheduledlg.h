@@ -90,7 +90,7 @@ private slots:
   void slotSetPaymentMethod(int);
   void slotFrequencyChanged(int item);
   void slotShowHelp(void);
-  void slotOccurenceMultiplierChanged(int mult);
+  void slotOccurrenceMultiplierChanged(int mult);
 
   /// Overridden for internal reasons. No API changes.
   void accept(void);

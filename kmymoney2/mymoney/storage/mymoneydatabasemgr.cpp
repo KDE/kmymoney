@@ -1229,7 +1229,7 @@ const MyMoneySchedule MyMoneyDatabaseMgr::schedule(const QString& id) const
 
 const QList<MyMoneySchedule> MyMoneyDatabaseMgr::scheduleList(const QString& accountId,
                                      const MyMoneySchedule::typeE type,
-                                     const MyMoneySchedule::occurenceE occurence,
+                                     const MyMoneySchedule::occurrenceE occurrence,
                                      const MyMoneySchedule::paymentTypeE paymentType,
                                      const QDate& startDate,
                                      const QDate& endDate,
@@ -1251,8 +1251,8 @@ const QList<MyMoneySchedule> MyMoneyDatabaseMgr::scheduleList(const QString& acc
       }
     }
 
-    if(occurence != MyMoneySchedule::OCCUR_ANY) {
-      if(occurence != (*pos).occurence()) {
+    if(occurrence != MyMoneySchedule::OCCUR_ANY) {
+      if(occurrence != (*pos).occurrence()) {
         continue;
       }
     }
@@ -1332,7 +1332,7 @@ const QList<MyMoneySchedule> MyMoneyDatabaseMgr::scheduleListEx( int scheduleTyp
     if (scheduleTypes && !(scheduleTypes & (*pos).type()))
       continue;
 
-    if (scheduleOcurrences && !(scheduleOcurrences & (*pos).occurence()))
+    if (scheduleOcurrences && !(scheduleOcurrences & (*pos).occurrence()))
       continue;
 
     if (schedulePaymentTypes && !(schedulePaymentTypes & (*pos).paymentType()))

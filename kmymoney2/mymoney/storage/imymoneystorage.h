@@ -635,8 +635,8 @@ public:
     * @param type      only schedules of type @p type are searched for.
     *                  See MyMoneySchedule::typeE for details.
     *                  Default is MyMoneySchedule::TYPE_ANY
-    * @param occurence only schedules of occurence type @p occurance are searched for.
-    *                  See MyMoneySchedule::occurenceE for details.
+    * @param occurrence only schedules of occurrence type @p occurrence are searched for.
+    *                  See MyMoneySchedule::occurrenceE for details.
     *                  Default is MyMoneySchedule::OCCUR_ANY
     * @param paymentType only schedules of payment method @p paymentType
     *                  are searched for.
@@ -653,7 +653,7 @@ public:
     */
   virtual const QList<MyMoneySchedule> scheduleList(const QString& accountId = QString(),
                                      const MyMoneySchedule::typeE type = MyMoneySchedule::TYPE_ANY,
-                                     const MyMoneySchedule::occurenceE occurence = MyMoneySchedule::OCCUR_ANY,
+                                     const MyMoneySchedule::occurrenceE occurrence = MyMoneySchedule::OCCUR_ANY,
                                      const MyMoneySchedule::paymentTypeE paymentType = MyMoneySchedule::STYPE_ANY,
                                      const QDate& startDate = QDate(),
                                      const QDate& endDate = QDate(),

@@ -123,9 +123,9 @@ const QString KMyMoneyUtils::securityTypeToString(const MyMoneySecurity::eSECURI
   return i18n(MyMoneySecurity::securityTypeToString(securityType).toLatin1());
 }
 
-const QString KMyMoneyUtils::occurenceToString(const MyMoneySchedule::occurenceE occurence)
+const QString KMyMoneyUtils::occurrenceToString(const MyMoneySchedule::occurrenceE occurrence)
 {
-  return i18n(MyMoneySchedule::occurenceToString(occurence).toLatin1());
+  return i18n(MyMoneySchedule::occurrenceToString(occurrence).toLatin1());
 }
 
 const QString KMyMoneyUtils::paymentMethodToString(MyMoneySchedule::paymentTypeE paymentType)

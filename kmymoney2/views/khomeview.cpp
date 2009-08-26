@@ -441,9 +441,9 @@ void KHomeView::showPayments(void)
       while(nextDate.isValid() && nextDate < QDate::currentDate()) {
         ++cnt;
         nextDate = (*it).nextPayment(nextDate);
-        // for single occurence nextDate will not change, so we
+        // for single occurrence nextDate will not change, so we
         // better get out of here.
-        if((*it).occurence() == MyMoneySchedule::OCCUR_ONCE)
+        if((*it).occurrence() == MyMoneySchedule::OCCUR_ONCE)
           break;
       }
 
@@ -575,9 +575,9 @@ void KHomeView::showPayments(void)
         showPaymentEntry(*it);
         m_html += "</tr>";
 
-        // for single occurence we have reported everything so we
+        // for single occurrence we have reported everything so we
         // better get out of here.
-        if((*it).occurence() == MyMoneySchedule::OCCUR_ONCE) {
+        if((*it).occurrence() == MyMoneySchedule::OCCUR_ONCE) {
           schedule.erase(it);
           continue;
         }
@@ -1654,9 +1654,9 @@ void KHomeView::showCashFlowSummary()
     while(nextDate.isValid() && nextDate <= endOfMonth) {
       ++cnt;
       nextDate = (*sched_it).nextPayment(nextDate);
-        // for single occurence nextDate will not change, so we
+        // for single occurrence nextDate will not change, so we
         // better get out of here.
-      if((*sched_it).occurence() == MyMoneySchedule::OCCUR_ONCE)
+      if((*sched_it).occurrence() == MyMoneySchedule::OCCUR_ONCE)
         break;
     }
 
@@ -1694,7 +1694,7 @@ void KHomeView::showCashFlowSummary()
         if( (*split_it).accountId() != acc.id() ) {
           ReportAccount repSplitAcc = ReportAccount((*split_it).accountId());
 
-          //get the shares and multiply by the quantity of occurences in the period
+          //get the shares and multiply by the quantity of occurrences in the period
           MyMoneyMoney value = (*split_it).shares() * cnt;
 
           //convert to foreign currency if needed

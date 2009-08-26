@@ -113,7 +113,7 @@ KNewLoanWizard::KNewLoanWizard(QWidget *parent) :
 
   m_interestFrequencyAmountEdit->setValue(1);
   m_interestFrequencyUnitEdit->setCurrentItem(static_cast<int>(MyMoneyAccountLoan::changeYearly));
-  m_paymentFrequencyUnitEdit->setCurrentItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_MONTHLY).toLatin1()));
+  m_paymentFrequencyUnitEdit->setCurrentItem(i18n(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_MONTHLY).toLatin1()));
   m_firstDueDateEdit->loadDate(QDate(QDate::currentDate().year(),QDate::currentDate().month(),30));
 
   m_paymentAccountEdit->removeButtons();
@@ -617,21 +617,21 @@ void KNewLoanWizard::loadComboBoxes(void)
   m_interestFrequencyUnitEdit->insertItem(i18n("Months"), static_cast<int>(MyMoneyAccountLoan::changeMonthly));
   m_interestFrequencyUnitEdit->insertItem(i18n("Years"), static_cast<int>(MyMoneyAccountLoan::changeYearly));
 
-  m_paymentFrequencyUnitEdit->insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_DAILY).toLatin1()));
-  m_paymentFrequencyUnitEdit->insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_WEEKLY).toLatin1()));
-  m_paymentFrequencyUnitEdit->insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_FORTNIGHTLY).toLatin1()));
-  m_paymentFrequencyUnitEdit->insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_EVERYOTHERWEEK).toLatin1()));
-  m_paymentFrequencyUnitEdit->insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_EVERYHALFMONTH).toLatin1()));
-  m_paymentFrequencyUnitEdit->insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_EVERYTHREEWEEKS).toLatin1()));
-  m_paymentFrequencyUnitEdit->insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_EVERYFOURWEEKS).toLatin1()));
-  m_paymentFrequencyUnitEdit->insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_EVERYTHIRTYDAYS).toLatin1()));
-  m_paymentFrequencyUnitEdit->insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_MONTHLY).toLatin1()));
-  m_paymentFrequencyUnitEdit->insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_EVERYEIGHTWEEKS).toLatin1()));
-  m_paymentFrequencyUnitEdit->insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_EVERYOTHERMONTH).toLatin1()));
-  m_paymentFrequencyUnitEdit->insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_QUARTERLY).toLatin1()));
-  m_paymentFrequencyUnitEdit->insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_EVERYFOURMONTHS).toLatin1()));
-  m_paymentFrequencyUnitEdit->insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_TWICEYEARLY).toLatin1()));
-  m_paymentFrequencyUnitEdit->insertItem(i18n(MyMoneySchedule::occurenceToString(MyMoneySchedule::OCCUR_YEARLY).toLatin1()));
+  m_paymentFrequencyUnitEdit->insertItem(i18n(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_DAILY).toLatin1()));
+  m_paymentFrequencyUnitEdit->insertItem(i18n(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_WEEKLY).toLatin1()));
+  m_paymentFrequencyUnitEdit->insertItem(i18n(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_FORTNIGHTLY).toLatin1()));
+  m_paymentFrequencyUnitEdit->insertItem(i18n(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_EVERYOTHERWEEK).toLatin1()));
+  m_paymentFrequencyUnitEdit->insertItem(i18n(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_EVERYHALFMONTH).toLatin1()));
+  m_paymentFrequencyUnitEdit->insertItem(i18n(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_EVERYTHREEWEEKS).toLatin1()));
+  m_paymentFrequencyUnitEdit->insertItem(i18n(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_EVERYFOURWEEKS).toLatin1()));
+  m_paymentFrequencyUnitEdit->insertItem(i18n(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_EVERYTHIRTYDAYS).toLatin1()));
+  m_paymentFrequencyUnitEdit->insertItem(i18n(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_MONTHLY).toLatin1()));
+  m_paymentFrequencyUnitEdit->insertItem(i18n(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_EVERYEIGHTWEEKS).toLatin1()));
+  m_paymentFrequencyUnitEdit->insertItem(i18n(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_EVERYOTHERMONTH).toLatin1()));
+  m_paymentFrequencyUnitEdit->insertItem(i18n(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_QUARTERLY).toLatin1()));
+  m_paymentFrequencyUnitEdit->insertItem(i18n(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_EVERYFOURMONTHS).toLatin1()));
+  m_paymentFrequencyUnitEdit->insertItem(i18n(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_TWICEYEARLY).toLatin1()));
+  m_paymentFrequencyUnitEdit->insertItem(i18n(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_YEARLY).toLatin1()));
 
   m_durationUnitEdit->insertItem(i18n("Months"), static_cast<int>(MyMoneySchedule::OCCUR_MONTHLY));
   m_durationUnitEdit->insertItem(i18n("Years"), static_cast<int>(MyMoneySchedule::OCCUR_YEARLY));
@@ -663,7 +663,7 @@ int KNewLoanWizard::calculateLoan(void)
   // FIXME: for now, we only support periodic compounding
   calc.setDisc();
 
-  PF = MyMoneySchedule::eventsPerYear(MyMoneySchedule::stringToOccurence(
+  PF = MyMoneySchedule::eventsPerYear(MyMoneySchedule::stringToOccurrence(
                             m_paymentFrequencyUnitEdit->currentText()));
   if(PF == 0)
     return 0;
@@ -826,8 +826,8 @@ QString KNewLoanWizard::updateTermWidgets(const long double val)
   long long vl = static_cast<long long>(floorl(val));
 
   QString valString;
-  MyMoneySchedule::occurenceE unit;
-  unit = MyMoneySchedule::stringToOccurence(m_paymentFrequencyUnitEdit->currentText());
+  MyMoneySchedule::occurrenceE unit;
+  unit = MyMoneySchedule::stringToOccurrence(m_paymentFrequencyUnitEdit->currentText());
 
   if((unit == MyMoneySchedule::OCCUR_MONTHLY)
   && ((vl % 12) == 0)) {
@@ -1006,7 +1006,7 @@ MyMoneySchedule KNewLoanWizard::schedule(void) const
 {
   MyMoneySchedule sched(m_nameEdit->text(),
                         MyMoneySchedule::TYPE_LOANPAYMENT,
-                        MyMoneySchedule::stringToOccurence(m_paymentFrequencyUnitEdit->currentText()), 1,
+                        MyMoneySchedule::stringToOccurrence(m_paymentFrequencyUnitEdit->currentText()), 1,
                         MyMoneySchedule::STYPE_OTHER,
                         QDate(),
                         QDate(),
@@ -1051,7 +1051,7 @@ int KNewLoanWizard::term(void) const
         factor *= m_durationValueEdit->value();
         // factor now is the duration in days. we divide this by the
         // payment frequency and get the number of payments
-        factor /= MyMoneySchedule::daysBetweenEvents(MyMoneySchedule::stringToOccurence(
+        factor /= MyMoneySchedule::daysBetweenEvents(MyMoneySchedule::stringToOccurrence(
                             m_paymentFrequencyUnitEdit->currentText()));
         break;
 

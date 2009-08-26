@@ -36,8 +36,8 @@ MyMoneySchedule::MyMoneySchedule() :
   MyMoneyObject()
 {
   // Set up the default values
-  m_occurence = OCCUR_ANY;
-  m_occurenceMultiplier = 1;
+  m_occurrence = OCCUR_ANY;
+  m_occurrenceMultiplier = 1;
   m_type = TYPE_ANY;
   m_paymentType = STYPE_ANY;
   m_fixed = false;
@@ -49,7 +49,7 @@ MyMoneySchedule::MyMoneySchedule() :
 }
 
 MyMoneySchedule::MyMoneySchedule(const QString& name, typeE type,
-                                 occurenceE occurence, int occurenceMultiplier,
+                                 occurrenceE occurrence, int occurrenceMultiplier,
                                  paymentTypeE paymentType,
                                  const QDate& /* startDate */,
                                  const QDate& endDate,
@@ -58,9 +58,9 @@ MyMoneySchedule::MyMoneySchedule(const QString& name, typeE type,
 {
   // Set up the default values
   m_name = name;
-  m_occurence = occurence;
-  m_occurenceMultiplier = occurenceMultiplier;
-  simpleToCompoundOccurence(m_occurenceMultiplier,m_occurence);
+  m_occurrence = occurrence;
+  m_occurrenceMultiplier = occurrenceMultiplier;
+  simpleToCompoundOccurrence(m_occurrenceMultiplier,m_occurrence);
   m_type = type;
   m_paymentType = paymentType;
   m_fixed = fixed;
@@ -84,10 +84,10 @@ MyMoneySchedule::MyMoneySchedule(const QDomElement& node) :
 
   m_type = static_cast<MyMoneySchedule::typeE>(node.attribute("type").toInt());
   m_paymentType = static_cast<MyMoneySchedule::paymentTypeE>(node.attribute("paymentType").toInt());
-  m_occurence = static_cast<MyMoneySchedule::occurenceE>(node.attribute("occurence").toInt());
-  m_occurenceMultiplier = node.attribute("occurenceMultiplier", "1").toInt();
-  // Convert to compound occurence
-  simpleToCompoundOccurence(m_occurenceMultiplier,m_occurence);
+  m_occurrence = static_cast<MyMoneySchedule::occurrenceE>(node.attribute("occurence").toInt());
+  m_occurrenceMultiplier = node.attribute("occurenceMultiplier", "1").toInt();
+  // Convert to compound occurrence
+  simpleToCompoundOccurrence(m_occurrenceMultiplier,m_occurrence);
   m_autoEnter = static_cast<bool>(node.attribute("autoEnter").toInt());
   m_fixed = static_cast<bool>(node.attribute("fixed").toInt());
   m_weekendOption = static_cast<MyMoneySchedule::weekendOptionE>(node.attribute("weekendOption").toInt());
@@ -145,11 +145,11 @@ MyMoneySchedule::MyMoneySchedule(const QString& id, const MyMoneySchedule& right
   setId(id);
 }
 
-MyMoneySchedule::occurenceE MyMoneySchedule::occurence(void) const
+MyMoneySchedule::occurrenceE MyMoneySchedule::occurrence(void) const
 {
-  MyMoneySchedule::occurenceE occ = m_occurence;
-  int mult = m_occurenceMultiplier;
-  compoundToSimpleOccurence(mult, occ);
+  MyMoneySchedule::occurrenceE occ = m_occurrence;
+  int mult = m_occurrenceMultiplier;
+  compoundToSimpleOccurrence(mult, occ);
   return occ;
 }
 
@@ -208,8 +208,19 @@ void MyMoneySchedule::setTransaction(const MyMoneyTransaction& transaction, bool
         continue;
 
       if(!(*it_s).payeeId().isEmpty()) {
-        s.setPayeeId(QString());
-        t.modifySplit(s);
+        // but only if the split references an income/expense category
+        MyMoneyFile* file = MyMoneyFile::instance();
+        // some unit tests don't have a storage attached, so we
+        // simply skip the test
+        // Don't check for accounts with an id of 'Phony-ID' which is used
+        // internally for non-existing accounts (during creation of accounts)
+        if(file->storageAttached() && s.accountId() != QString("Phony-ID")) {
+          MyMoneyAccount acc = file->account(s.accountId());
+          if(acc.isIncomeExpense()) {
+            s.setPayeeId(QString());
+            t.modifySplit(s);
+          }
+        }
       }
     }
   }
@@ -302,23 +313,23 @@ void MyMoneySchedule::setName(const QString& nm)
   m_name = nm;
 }
 
-void MyMoneySchedule::setOccurence(occurenceE occ)
+void MyMoneySchedule::setOccurrence(occurrenceE occ)
 {
-  MyMoneySchedule::occurenceE occ2 = occ;
+  MyMoneySchedule::occurrenceE occ2 = occ;
   int mult = 1;
-  simpleToCompoundOccurence(mult, occ2);
-  setOccurencePeriod( occ2 );
-  setOccurenceMultiplier( mult );
+  simpleToCompoundOccurrence(mult, occ2);
+  setOccurrencePeriod( occ2 );
+  setOccurrenceMultiplier( mult );
 }
 
-void MyMoneySchedule::setOccurencePeriod(occurenceE occ)
+void MyMoneySchedule::setOccurrencePeriod(occurrenceE occ)
 {
-  m_occurence = occ;
+  m_occurrence = occ;
 }
 
-void MyMoneySchedule::setOccurenceMultiplier(int occmultiplier)
+void MyMoneySchedule::setOccurrenceMultiplier(int occmultiplier)
 {
-  m_occurenceMultiplier = occmultiplier < 1 ? 1 : occmultiplier;
+  m_occurrenceMultiplier = occmultiplier < 1 ? 1 : occmultiplier;
 }
 
 void MyMoneySchedule::setType(typeE type)
@@ -332,7 +343,7 @@ void MyMoneySchedule::validate(bool id_check) const
    *
    * To be valid it must not have the id set and have the following fields set:
    *
-   * m_occurence
+   * m_occurrence
    * m_type
    * m_startDate
    * m_paymentType
@@ -342,8 +353,8 @@ void MyMoneySchedule::validate(bool id_check) const
   if (id_check && !m_id.isEmpty())
     throw new MYMONEYEXCEPTION("ID for schedule not empty when required");
 
-  if(m_occurence == OCCUR_ANY)
-    throw new MYMONEYEXCEPTION("Invalid occurence type for schedule");
+  if(m_occurrence == OCCUR_ANY)
+    throw new MYMONEYEXCEPTION("Invalid occurrence type for schedule");
 
   if(m_type == TYPE_ANY)
     throw new MYMONEYEXCEPTION("Invalid type for schedule");
@@ -421,7 +432,7 @@ QDate MyMoneySchedule::nextPayment(const QDate& refDate) const
   QDate paymentDate(nextDueDate());
 
   if(refDate >= paymentDate) {
-    switch (m_occurence)
+    switch (m_occurrence)
     {
       case OCCUR_ONCE:
         // if the lastPayment is already set, then there will be no more payments
@@ -435,12 +446,12 @@ QDate MyMoneySchedule::nextPayment(const QDate& refDate) const
         break;
 
       case OCCUR_DAILY:
-        paymentDate = refDate.addDays(m_occurenceMultiplier);
+        paymentDate = refDate.addDays(m_occurrenceMultiplier);
         break;
 
       case OCCUR_WEEKLY:
         {
-          int step = 7*m_occurenceMultiplier;
+          int step = 7*m_occurrenceMultiplier;
           do {
             paymentDate = paymentDate.addDays(step);
           }
@@ -451,14 +462,14 @@ QDate MyMoneySchedule::nextPayment(const QDate& refDate) const
       case OCCUR_EVERYHALFMONTH:
         do
         {
-           paymentDate = addHalfMonths(paymentDate,m_occurenceMultiplier);
+           paymentDate = addHalfMonths(paymentDate,m_occurrenceMultiplier);
         }
         while (paymentDate <= refDate);
         break;
 
       case OCCUR_MONTHLY:
         do {
-          paymentDate = paymentDate.addMonths(m_occurenceMultiplier);
+          paymentDate = paymentDate.addMonths(m_occurrenceMultiplier);
           fixDate(paymentDate);
         }
         while (paymentDate <= refDate);
@@ -466,7 +477,7 @@ QDate MyMoneySchedule::nextPayment(const QDate& refDate) const
 
       case OCCUR_YEARLY:
         do {
-          paymentDate = paymentDate.addYears(m_occurenceMultiplier);
+          paymentDate = paymentDate.addYears(m_occurrenceMultiplier);
           fixDate(paymentDate);
         }
         while (paymentDate <= refDate);
@@ -504,7 +515,7 @@ Q3ValueList<QDate> MyMoneySchedule::paymentDates(const QDate& _startDate, const 
   || startDate() > endDate)
     return theDates;
 
-  switch (m_occurence)
+  switch (m_occurrence)
   {
     case OCCUR_ONCE:
       if (startDate() >= _startDate && startDate() <= endDate)
@@ -514,19 +525,19 @@ Q3ValueList<QDate> MyMoneySchedule::paymentDates(const QDate& _startDate, const 
     case OCCUR_DAILY:
       if (paymentDate < _startDate)
       {
-        int daysMod = paymentDate.daysTo(_startDate) % m_occurenceMultiplier;
-        paymentDate = (daysMod==0) ? _startDate : _startDate.addDays( m_occurenceMultiplier -daysMod );
+        int daysMod = paymentDate.daysTo(_startDate) % m_occurrenceMultiplier;
+        paymentDate = (daysMod==0) ? _startDate : _startDate.addDays( m_occurrenceMultiplier -daysMod );
       }
       while (paymentDate <= endDate)
       {
         theDates.append(paymentDate);
-        paymentDate = paymentDate.addDays(m_occurenceMultiplier);
+        paymentDate = paymentDate.addDays(m_occurrenceMultiplier);
       }
       break;
 
     case OCCUR_WEEKLY:
       {
-        int step = 7*m_occurenceMultiplier;
+        int step = 7*m_occurrenceMultiplier;
         while (paymentDate < _startDate)
           paymentDate = paymentDate.addDays(step);
         while (paymentDate <= endDate)
@@ -540,37 +551,37 @@ Q3ValueList<QDate> MyMoneySchedule::paymentDates(const QDate& _startDate, const 
     case OCCUR_EVERYHALFMONTH:
       while (paymentDate < _startDate)
       {
-        paymentDate = addHalfMonths(paymentDate,m_occurenceMultiplier);
+        paymentDate = addHalfMonths(paymentDate,m_occurrenceMultiplier);
       }
       while (paymentDate <= endDate)
       {
         theDates.append(paymentDate);
-        paymentDate = addHalfMonths(paymentDate,m_occurenceMultiplier);
+        paymentDate = addHalfMonths(paymentDate,m_occurrenceMultiplier);
       }
       break;
 
     case OCCUR_MONTHLY:
       while (paymentDate < _startDate) {
-        paymentDate = paymentDate.addMonths(m_occurenceMultiplier);
+        paymentDate = paymentDate.addMonths(m_occurrenceMultiplier);
         fixDate(paymentDate);
       }
       while (paymentDate <= endDate)
       {
         theDates.append(paymentDate);
-        paymentDate = paymentDate.addMonths(m_occurenceMultiplier);
+        paymentDate = paymentDate.addMonths(m_occurrenceMultiplier);
         fixDate(paymentDate);
       }
       break;
 
     case OCCUR_YEARLY:
       while (paymentDate < _startDate) {
-        paymentDate = paymentDate.addYears(m_occurenceMultiplier);
+        paymentDate = paymentDate.addYears(m_occurrenceMultiplier);
         fixDate(paymentDate);
       }
       while (paymentDate <= endDate)
       {
         theDates.append(paymentDate);
-        paymentDate = paymentDate.addYears(m_occurenceMultiplier);
+        paymentDate = paymentDate.addYears(m_occurrenceMultiplier);
         fixDate(paymentDate);
       }
       break;
@@ -591,8 +602,8 @@ bool MyMoneySchedule::operator <(const MyMoneySchedule& right) const
 bool MyMoneySchedule::operator ==(const MyMoneySchedule& right) const
 {
   if (  MyMoneyObject::operator==(right) &&
-        m_occurence == right.m_occurence &&
-        m_occurenceMultiplier == right.m_occurenceMultiplier &&
+        m_occurrence == right.m_occurrence &&
+        m_occurrenceMultiplier == right.m_occurrenceMultiplier &&
         m_type == right.m_type &&
         m_startDate == right.m_startDate &&
         m_paymentType == right.m_paymentType &&
@@ -653,36 +664,36 @@ QDate MyMoneySchedule::dateAfter(int transactions) const
   if (transactions<=0)
     return paymentDate;
 
-  switch (m_occurence)
+  switch (m_occurrence)
   {
     case OCCUR_ONCE:
       break;
 
     case OCCUR_DAILY:
       while (counter++ < transactions)
-        paymentDate = paymentDate.addDays(m_occurenceMultiplier);
+        paymentDate = paymentDate.addDays(m_occurrenceMultiplier);
       break;
 
     case OCCUR_WEEKLY:
       {
-        int step = 7 * m_occurenceMultiplier;
+        int step = 7 * m_occurrenceMultiplier;
         while (counter++ < transactions)
           paymentDate = paymentDate.addDays(step);
       }
       break;
 
     case OCCUR_EVERYHALFMONTH:
-      paymentDate = addHalfMonths(paymentDate,m_occurenceMultiplier*(transactions-1));
+      paymentDate = addHalfMonths(paymentDate,m_occurrenceMultiplier*(transactions-1));
       break;
 
     case OCCUR_MONTHLY:
       while (counter++ < transactions)
-        paymentDate = paymentDate.addMonths(m_occurenceMultiplier);
+        paymentDate = paymentDate.addMonths(m_occurrenceMultiplier);
       break;
 
     case OCCUR_YEARLY:
       while (counter++ < transactions)
-        paymentDate = paymentDate.addYears(m_occurenceMultiplier);
+        paymentDate = paymentDate.addYears(m_occurrenceMultiplier);
       break;
 
     case OCCUR_ANY:
@@ -769,7 +780,7 @@ bool MyMoneySchedule::isFinished() const
   }
 
   // Check to see if its a once off payment
-  if (m_occurence == MyMoneySchedule::OCCUR_ONCE)
+  if (m_occurrence == MyMoneySchedule::OCCUR_ONCE)
     return true;
 
   return false;
@@ -825,8 +836,8 @@ void MyMoneySchedule::writeXML(QDomDocument& document, QDomElement& parent) cons
 
   el.setAttribute("name", m_name);
   el.setAttribute("type", m_type);
-  el.setAttribute("occurence", m_occurence);
-  el.setAttribute("occurenceMultiplier", m_occurenceMultiplier);
+  el.setAttribute("occurence", m_occurrence);
+  el.setAttribute("occurenceMultiplier", m_occurrenceMultiplier);
   el.setAttribute("paymentType", m_paymentType);
   el.setAttribute("startDate", dateToString(m_startDate));
   el.setAttribute("endDate", dateToString(m_endDate));
@@ -857,124 +868,124 @@ bool MyMoneySchedule::hasReferenceTo(const QString& id) const
   return m_transaction.hasReferenceTo(id);
 }
 
-QString MyMoneySchedule::occurenceToString() const
+QString MyMoneySchedule::occurrenceToString() const
 {
-  return occurenceToString( occurenceMultiplier(), occurencePeriod() );
+  return occurrenceToString( occurrenceMultiplier(), occurrencePeriod() );
 }
 
-QString MyMoneySchedule::occurenceToString(occurenceE occurence)
+QString MyMoneySchedule::occurrenceToString(occurrenceE occurrence)
 {
-  QString occurenceString = I18N_NOOP("Any");
+  QString occurrenceString = I18N_NOOP("Any");
 
-  if(occurence == MyMoneySchedule::OCCUR_ONCE)
-    occurenceString = I18N_NOOP("Once");
-  else if(occurence == MyMoneySchedule::OCCUR_DAILY)
-    occurenceString = I18N_NOOP("Daily");
-  else if(occurence == MyMoneySchedule::OCCUR_WEEKLY)
-    occurenceString = I18N_NOOP("Weekly");
-  else if(occurence == MyMoneySchedule::OCCUR_FORTNIGHTLY)
-    occurenceString = I18N_NOOP("Fortnightly");
-  else if(occurence == MyMoneySchedule::OCCUR_EVERYOTHERWEEK)
-    occurenceString = I18N_NOOP("Every other week");
-  else if(occurence == MyMoneySchedule::OCCUR_EVERYHALFMONTH)
-    occurenceString = I18N_NOOP("Every half month");
-  else if(occurence == MyMoneySchedule::OCCUR_EVERYTHREEWEEKS)
-    occurenceString = I18N_NOOP("Every three weeks");
-  else if(occurence == MyMoneySchedule::OCCUR_EVERYFOURWEEKS)
-    occurenceString = I18N_NOOP("Every four weeks");
-  else if(occurence == MyMoneySchedule::OCCUR_EVERYTHIRTYDAYS)
-    occurenceString = I18N_NOOP("Every thirty days");
-  else if(occurence == MyMoneySchedule::OCCUR_MONTHLY)
-    occurenceString = I18N_NOOP("Monthly");
-  else if(occurence == MyMoneySchedule::OCCUR_EVERYEIGHTWEEKS)
-    occurenceString = I18N_NOOP("Every eight weeks");
-  else if(occurence == MyMoneySchedule::OCCUR_EVERYOTHERMONTH)
-    occurenceString = I18N_NOOP("Every two months");
-  else if(occurence == MyMoneySchedule::OCCUR_EVERYTHREEMONTHS)
-    occurenceString = I18N_NOOP("Every three months");
-  else if(occurence == MyMoneySchedule::OCCUR_QUARTERLY)
-    occurenceString = I18N_NOOP("Quarterly");
-  else if(occurence == MyMoneySchedule::OCCUR_EVERYFOURMONTHS)
-    occurenceString = I18N_NOOP("Every four months");
-  else if(occurence == MyMoneySchedule::OCCUR_TWICEYEARLY)
-    occurenceString = I18N_NOOP("Twice yearly");
-  else if(occurence == MyMoneySchedule::OCCUR_YEARLY)
-    occurenceString = I18N_NOOP("Yearly");
-  else if(occurence == MyMoneySchedule::OCCUR_EVERYOTHERYEAR)
-    occurenceString = I18N_NOOP("Every other year");
-  return occurenceString;
+  if(occurrence == MyMoneySchedule::OCCUR_ONCE)
+    occurrenceString = I18N_NOOP("Once");
+  else if(occurrence == MyMoneySchedule::OCCUR_DAILY)
+    occurrenceString = I18N_NOOP("Daily");
+  else if(occurrence == MyMoneySchedule::OCCUR_WEEKLY)
+    occurrenceString = I18N_NOOP("Weekly");
+  else if(occurrence == MyMoneySchedule::OCCUR_FORTNIGHTLY)
+    occurrenceString = I18N_NOOP("Fortnightly");
+  else if(occurrence == MyMoneySchedule::OCCUR_EVERYOTHERWEEK)
+    occurrenceString = I18N_NOOP("Every other week");
+  else if(occurrence == MyMoneySchedule::OCCUR_EVERYHALFMONTH)
+    occurrenceString = I18N_NOOP("Every half month");
+  else if(occurrence == MyMoneySchedule::OCCUR_EVERYTHREEWEEKS)
+    occurrenceString = I18N_NOOP("Every three weeks");
+  else if(occurrence == MyMoneySchedule::OCCUR_EVERYFOURWEEKS)
+    occurrenceString = I18N_NOOP("Every four weeks");
+  else if(occurrence == MyMoneySchedule::OCCUR_EVERYTHIRTYDAYS)
+    occurrenceString = I18N_NOOP("Every thirty days");
+  else if(occurrence == MyMoneySchedule::OCCUR_MONTHLY)
+    occurrenceString = I18N_NOOP("Monthly");
+  else if(occurrence == MyMoneySchedule::OCCUR_EVERYEIGHTWEEKS)
+    occurrenceString = I18N_NOOP("Every eight weeks");
+  else if(occurrence == MyMoneySchedule::OCCUR_EVERYOTHERMONTH)
+    occurrenceString = I18N_NOOP("Every two months");
+  else if(occurrence == MyMoneySchedule::OCCUR_EVERYTHREEMONTHS)
+    occurrenceString = I18N_NOOP("Every three months");
+  else if(occurrence == MyMoneySchedule::OCCUR_QUARTERLY)
+    occurrenceString = I18N_NOOP("Quarterly");
+  else if(occurrence == MyMoneySchedule::OCCUR_EVERYFOURMONTHS)
+    occurrenceString = I18N_NOOP("Every four months");
+  else if(occurrence == MyMoneySchedule::OCCUR_TWICEYEARLY)
+    occurrenceString = I18N_NOOP("Twice yearly");
+  else if(occurrence == MyMoneySchedule::OCCUR_YEARLY)
+    occurrenceString = I18N_NOOP("Yearly");
+  else if(occurrence == MyMoneySchedule::OCCUR_EVERYOTHERYEAR)
+    occurrenceString = I18N_NOOP("Every other year");
+  return occurrenceString;
 }
 
-QString MyMoneySchedule::occurenceToString(int mult, occurenceE type)
+QString MyMoneySchedule::occurrenceToString(int mult, occurrenceE type)
 {
-  QString occurenceString = I18N_NOOP("Any");
+  QString occurrenceString = I18N_NOOP("Any");
 
   if (type == MyMoneySchedule::OCCUR_ONCE)
     switch (mult)
     {
-      case 1: occurenceString = I18N_NOOP("Once"); break;
-      default: occurenceString = I18N_NOOP(static_cast<QString>("%1 times").arg(mult));
+      case 1: occurrenceString = I18N_NOOP("Once"); break;
+      default: occurrenceString = I18N_NOOP(static_cast<QString>("%1 times").arg(mult));
     }
   else if(type == MyMoneySchedule::OCCUR_DAILY)
     switch (mult)
     {
-      case 1: occurenceString = I18N_NOOP("Daily"); break;
-      case 30: occurenceString = I18N_NOOP("Every thirty days"); break;
-      default: occurenceString = I18N_NOOP(static_cast<QString>("Every %1 days").arg(mult));
+      case 1: occurrenceString = I18N_NOOP("Daily"); break;
+      case 30: occurrenceString = I18N_NOOP("Every thirty days"); break;
+      default: occurrenceString = I18N_NOOP(static_cast<QString>("Every %1 days").arg(mult));
     }
   else if(type == MyMoneySchedule::OCCUR_WEEKLY)
     switch (mult)
     {
-      case 1: occurenceString = I18N_NOOP("Weekly"); break;
-      case 2: occurenceString = I18N_NOOP("Every other week"); break;
-      case 3: occurenceString = I18N_NOOP("Every three weeks"); break;
-      case 4: occurenceString = I18N_NOOP("Every four weeks"); break;
-      case 8: occurenceString = I18N_NOOP("Every eight weeks"); break;
-      default: occurenceString = I18N_NOOP(static_cast<QString>("Every %1 weeks").arg(mult));
+      case 1: occurrenceString = I18N_NOOP("Weekly"); break;
+      case 2: occurrenceString = I18N_NOOP("Every other week"); break;
+      case 3: occurrenceString = I18N_NOOP("Every three weeks"); break;
+      case 4: occurrenceString = I18N_NOOP("Every four weeks"); break;
+      case 8: occurrenceString = I18N_NOOP("Every eight weeks"); break;
+      default: occurrenceString = I18N_NOOP(static_cast<QString>("Every %1 weeks").arg(mult));
     }
   else if(type == MyMoneySchedule::OCCUR_EVERYHALFMONTH)
     switch (mult)
     {
-      case 1: occurenceString = I18N_NOOP("Every half month"); break;
-      default: occurenceString = I18N_NOOP(static_cast<QString>("Every %1 half months").arg(mult));
+      case 1: occurrenceString = I18N_NOOP("Every half month"); break;
+      default: occurrenceString = I18N_NOOP(static_cast<QString>("Every %1 half months").arg(mult));
     }
   else if(type == MyMoneySchedule::OCCUR_MONTHLY)
     switch (mult)
     {
-      case 1: occurenceString = I18N_NOOP("Monthly"); break;
-      case 2: occurenceString = I18N_NOOP("Every two months"); break;
-      case 3: occurenceString = I18N_NOOP("Every three months"); break;
-      case 4: occurenceString = I18N_NOOP("Every four months"); break;
-      case 6: occurenceString = I18N_NOOP("Twice yearly"); break;
-      default: occurenceString = I18N_NOOP(static_cast<QString>("Every %1 months").arg(mult));
+      case 1: occurrenceString = I18N_NOOP("Monthly"); break;
+      case 2: occurrenceString = I18N_NOOP("Every two months"); break;
+      case 3: occurrenceString = I18N_NOOP("Every three months"); break;
+      case 4: occurrenceString = I18N_NOOP("Every four months"); break;
+      case 6: occurrenceString = I18N_NOOP("Twice yearly"); break;
+      default: occurrenceString = I18N_NOOP(static_cast<QString>("Every %1 months").arg(mult));
     }
   else if(type == MyMoneySchedule::OCCUR_YEARLY)
     switch (mult)
     {
-      case 1: occurenceString = I18N_NOOP("Yearly"); break;
-      case 2: occurenceString = I18N_NOOP("Every other year"); break;
-      default: occurenceString = I18N_NOOP(static_cast<QString>("Every %1 years").arg(mult));
+      case 1: occurrenceString = I18N_NOOP("Yearly"); break;
+      case 2: occurrenceString = I18N_NOOP("Every other year"); break;
+      default: occurrenceString = I18N_NOOP(static_cast<QString>("Every %1 years").arg(mult));
     }
-  return occurenceString;
+  return occurrenceString;
 }
 
-QString MyMoneySchedule::occurencePeriodToString(MyMoneySchedule::occurenceE type)
+QString MyMoneySchedule::occurrencePeriodToString(MyMoneySchedule::occurrenceE type)
 {
-  QString occurenceString = I18N_NOOP("Any");
+  QString occurrenceString = I18N_NOOP("Any");
 
   if(type == MyMoneySchedule::OCCUR_ONCE)
-    occurenceString = I18N_NOOP("Once");
+    occurrenceString = I18N_NOOP("Once");
   else if(type == MyMoneySchedule::OCCUR_DAILY)
-    occurenceString = I18N_NOOP("Day");
+    occurrenceString = I18N_NOOP("Day");
   else if(type == MyMoneySchedule::OCCUR_WEEKLY)
-    occurenceString = I18N_NOOP("Week");
+    occurrenceString = I18N_NOOP("Week");
   else if(type == MyMoneySchedule::OCCUR_EVERYHALFMONTH)
-    occurenceString = I18N_NOOP("Half-month");
+    occurrenceString = I18N_NOOP("Half-month");
   else if(type == MyMoneySchedule::OCCUR_MONTHLY)
-    occurenceString = I18N_NOOP("Month");
+    occurrenceString = I18N_NOOP("Month");
   else if(type == MyMoneySchedule::OCCUR_YEARLY)
-    occurenceString = I18N_NOOP("Year");
-  return occurenceString;
+    occurrenceString = I18N_NOOP("Year");
+  return occurrenceString;
 }
 
 QString MyMoneySchedule::scheduleTypeToString(MyMoneySchedule::typeE type)
@@ -1083,11 +1094,11 @@ void MyMoneySchedule::setVariation(int var)
 #endif
 }
 
-int MyMoneySchedule::eventsPerYear(MyMoneySchedule::occurenceE occurence)
+int MyMoneySchedule::eventsPerYear(MyMoneySchedule::occurrenceE occurrence)
 {
   int rc = 0;
 
-  switch(occurence) {
+  switch(occurrence) {
     case MyMoneySchedule::OCCUR_DAILY:
       rc = 365;
       break;
@@ -1133,17 +1144,17 @@ int MyMoneySchedule::eventsPerYear(MyMoneySchedule::occurenceE occurence)
       rc = 1;
       break;
     default:
-      qWarning("Occurence not supported by financial calculator");
+      qWarning("Occurrence not supported by financial calculator");
   }
 
   return rc;
 }
 
-int MyMoneySchedule::daysBetweenEvents(MyMoneySchedule::occurenceE occurence)
+int MyMoneySchedule::daysBetweenEvents(MyMoneySchedule::occurrenceE occurrence)
 {
   int rc = 0;
 
-  switch(occurence) {
+  switch(occurrence) {
     case MyMoneySchedule::OCCUR_DAILY:
       rc = 1;
       break;
@@ -1191,7 +1202,7 @@ int MyMoneySchedule::daysBetweenEvents(MyMoneySchedule::occurenceE occurence)
       rc = 360;
       break;
     default:
-      qWarning("Occurence not supported by financial calculator");
+      qWarning("Occurrence not supported by financial calculator");
   }
 
  return rc;
@@ -1255,117 +1266,117 @@ QDate MyMoneySchedule::addHalfMonths( QDate date, int mult ) const
   return newdate;
 } 
 
-MyMoneySchedule::occurenceE MyMoneySchedule::stringToOccurence(const QString& text)
+MyMoneySchedule::occurrenceE MyMoneySchedule::stringToOccurrence(const QString& text)
 {
-  MyMoneySchedule::occurenceE occurence = MyMoneySchedule::OCCUR_ANY;
+  MyMoneySchedule::occurrenceE occurrence = MyMoneySchedule::OCCUR_ANY;
   QString tmp = text.toLower();
 
   if(tmp == i18n("Once").toLower())
-    occurence = MyMoneySchedule::OCCUR_ONCE;
+    occurrence = MyMoneySchedule::OCCUR_ONCE;
   else if(tmp == i18n("Daily").toLower())
-    occurence = MyMoneySchedule::OCCUR_DAILY;
+    occurrence = MyMoneySchedule::OCCUR_DAILY;
   else if(tmp == i18n("Weekly").toLower())
-    occurence = MyMoneySchedule::OCCUR_WEEKLY;
+    occurrence = MyMoneySchedule::OCCUR_WEEKLY;
   else if(tmp == i18n("Fortnightly").toLower())
-    occurence = MyMoneySchedule::OCCUR_FORTNIGHTLY;
+    occurrence = MyMoneySchedule::OCCUR_FORTNIGHTLY;
   else if(tmp == i18n("Every other week").toLower())
-    occurence = MyMoneySchedule::OCCUR_EVERYOTHERWEEK;
+    occurrence = MyMoneySchedule::OCCUR_EVERYOTHERWEEK;
   else if(tmp == i18n("Every half month").toLower())
-    occurence = MyMoneySchedule::OCCUR_EVERYHALFMONTH;
+    occurrence = MyMoneySchedule::OCCUR_EVERYHALFMONTH;
   else if(tmp == i18n("Every three weeks").toLower())
-    occurence = MyMoneySchedule::OCCUR_EVERYTHREEWEEKS;
+    occurrence = MyMoneySchedule::OCCUR_EVERYTHREEWEEKS;
   else if(tmp == i18n("Every four weeks").toLower())
-    occurence = MyMoneySchedule::OCCUR_EVERYFOURWEEKS;
+    occurrence = MyMoneySchedule::OCCUR_EVERYFOURWEEKS;
   else if(tmp == i18n("Every thirty days").toLower())
-    occurence = MyMoneySchedule::OCCUR_EVERYTHIRTYDAYS;
+    occurrence = MyMoneySchedule::OCCUR_EVERYTHIRTYDAYS;
   else if(tmp == i18n("Monthly").toLower())
-    occurence = MyMoneySchedule::OCCUR_MONTHLY;
+    occurrence = MyMoneySchedule::OCCUR_MONTHLY;
   else if(tmp == i18n("Every eight weeks").toLower())
-    occurence = MyMoneySchedule::OCCUR_EVERYEIGHTWEEKS;
+    occurrence = MyMoneySchedule::OCCUR_EVERYEIGHTWEEKS;
   else if(tmp == i18n("Every two months").toLower())
-    occurence = MyMoneySchedule::OCCUR_EVERYOTHERMONTH;
+    occurrence = MyMoneySchedule::OCCUR_EVERYOTHERMONTH;
   else if(tmp == i18n("Every three months").toLower())
-    occurence = MyMoneySchedule::OCCUR_EVERYTHREEMONTHS;
+    occurrence = MyMoneySchedule::OCCUR_EVERYTHREEMONTHS;
   else if(tmp == i18n("Quarterly").toLower())
-    occurence = MyMoneySchedule::OCCUR_QUARTERLY;
+    occurrence = MyMoneySchedule::OCCUR_QUARTERLY;
   else if(tmp == i18n("Every four months").toLower())
-    occurence = MyMoneySchedule::OCCUR_EVERYFOURMONTHS;
+    occurrence = MyMoneySchedule::OCCUR_EVERYFOURMONTHS;
   else if(tmp == i18n("Twice yearly").toLower())
-    occurence = MyMoneySchedule::OCCUR_TWICEYEARLY;
+    occurrence = MyMoneySchedule::OCCUR_TWICEYEARLY;
   else if(tmp == i18n("Yearly").toLower())
-    occurence = MyMoneySchedule::OCCUR_YEARLY;
+    occurrence = MyMoneySchedule::OCCUR_YEARLY;
   else if(tmp == i18n("Every other year").toLower())
-    occurence = MyMoneySchedule::OCCUR_EVERYOTHERYEAR;
+    occurrence = MyMoneySchedule::OCCUR_EVERYOTHERYEAR;
 
-  return occurence;
+  return occurrence;
 }
 
 /**
-  * Helper method to convert simple occurence to compound occurence + multiplier
+  * Helper method to convert simple occurrence to compound occurrence + multiplier
   *
   * @param multiplier Returned by reference.  Adjusted multiplier
-  * @param occurence Returned by reference.  Occurence type
+  * @param occurrence Returned by reference.  Occurrence type
   */
-void MyMoneySchedule::simpleToCompoundOccurence(int& multiplier,occurenceE& occurence)
+void MyMoneySchedule::simpleToCompoundOccurrence(int& multiplier,occurrenceE& occurrence)
 {
-  occurenceE newOcc = occurence;
+  occurrenceE newOcc = occurrence;
   int newMulti = 1;
-  if (occurence == MyMoneySchedule::OCCUR_ONCE ||
-      occurence == MyMoneySchedule::OCCUR_DAILY ||
-      occurence == MyMoneySchedule::OCCUR_WEEKLY ||
-      occurence == MyMoneySchedule::OCCUR_EVERYHALFMONTH ||
-      occurence == MyMoneySchedule::OCCUR_MONTHLY ||
-      occurence == MyMoneySchedule::OCCUR_YEARLY )
-  { // Already a base occurence and multiplier
+  if (occurrence == MyMoneySchedule::OCCUR_ONCE ||
+      occurrence == MyMoneySchedule::OCCUR_DAILY ||
+      occurrence == MyMoneySchedule::OCCUR_WEEKLY ||
+      occurrence == MyMoneySchedule::OCCUR_EVERYHALFMONTH ||
+      occurrence == MyMoneySchedule::OCCUR_MONTHLY ||
+      occurrence == MyMoneySchedule::OCCUR_YEARLY )
+  { // Already a base occurrence and multiplier
   }
-  else if(occurence == MyMoneySchedule::OCCUR_FORTNIGHTLY ||
-          occurence == MyMoneySchedule::OCCUR_EVERYOTHERWEEK)
+  else if(occurrence == MyMoneySchedule::OCCUR_FORTNIGHTLY ||
+          occurrence == MyMoneySchedule::OCCUR_EVERYOTHERWEEK)
   {
     newOcc    = MyMoneySchedule::OCCUR_WEEKLY;
     newMulti  = 2;
   }
-  else if(occurence == MyMoneySchedule::OCCUR_EVERYTHREEWEEKS)
+  else if(occurrence == MyMoneySchedule::OCCUR_EVERYTHREEWEEKS)
   {
     newOcc    = MyMoneySchedule::OCCUR_WEEKLY;
     newMulti  = 3;
   }
-  else if(occurence == MyMoneySchedule::OCCUR_EVERYFOURWEEKS)
+  else if(occurrence == MyMoneySchedule::OCCUR_EVERYFOURWEEKS)
   {
     newOcc    = MyMoneySchedule::OCCUR_WEEKLY;
     newMulti  = 4;
   }
-  else if(occurence == MyMoneySchedule::OCCUR_EVERYTHIRTYDAYS)
+  else if(occurrence == MyMoneySchedule::OCCUR_EVERYTHIRTYDAYS)
   {
     newOcc    = MyMoneySchedule::OCCUR_DAILY;
     newMulti  = 30;
   }
-  else if(occurence == MyMoneySchedule::OCCUR_EVERYEIGHTWEEKS)
+  else if(occurrence == MyMoneySchedule::OCCUR_EVERYEIGHTWEEKS)
   {
     newOcc    = MyMoneySchedule::OCCUR_WEEKLY;
     newMulti  = 8;
   }
-  else if(occurence == MyMoneySchedule::OCCUR_EVERYOTHERMONTH)
+  else if(occurrence == MyMoneySchedule::OCCUR_EVERYOTHERMONTH)
   {
     newOcc    = MyMoneySchedule::OCCUR_MONTHLY;
     newMulti  = 2;
   }
-  else if(occurence == MyMoneySchedule::OCCUR_EVERYTHREEMONTHS ||
-          occurence == MyMoneySchedule::OCCUR_QUARTERLY )
+  else if(occurrence == MyMoneySchedule::OCCUR_EVERYTHREEMONTHS ||
+          occurrence == MyMoneySchedule::OCCUR_QUARTERLY )
   {
     newOcc    = MyMoneySchedule::OCCUR_MONTHLY;
     newMulti  = 3;
   }
-  else if(occurence == MyMoneySchedule::OCCUR_EVERYFOURMONTHS)
+  else if(occurrence == MyMoneySchedule::OCCUR_EVERYFOURMONTHS)
   {
     newOcc    = MyMoneySchedule::OCCUR_MONTHLY;
     newMulti  = 4;
   }
-  else if(occurence == MyMoneySchedule::OCCUR_TWICEYEARLY)
+  else if(occurrence == MyMoneySchedule::OCCUR_TWICEYEARLY)
   {
     newOcc    = MyMoneySchedule::OCCUR_MONTHLY;
     newMulti  = 6;
   }
-  else if(occurence == MyMoneySchedule::OCCUR_EVERYOTHERYEAR)
+  else if(occurrence == MyMoneySchedule::OCCUR_EVERYOTHERYEAR)
   {
     newOcc    = MyMoneySchedule::OCCUR_YEARLY;
     newMulti  = 2;
@@ -1375,26 +1386,26 @@ void MyMoneySchedule::simpleToCompoundOccurence(int& multiplier,occurenceE& occu
     newOcc    = MyMoneySchedule::OCCUR_ANY;
     newMulti  = 1;
   }
-  if (newOcc != occurence)
+  if (newOcc != occurrence)
   {
-    occurence   = newOcc;
+    occurrence   = newOcc;
     multiplier  = newMulti == 1 ? multiplier : newMulti * multiplier;
   }
 }
 
 /**
-  * Helper method to convert compound occurence + multiplier to simple occurence
+  * Helper method to convert compound occurrence + multiplier to simple occurrence
   *
   * @param multiplier Returned by reference.  Adjusted multiplier
-  * @param occurence Returned by reference.  Occurence type
+  * @param occurrence Returned by reference.  Occurrence type
   */
-void MyMoneySchedule::compoundToSimpleOccurence(int& multiplier,occurenceE& occurence)
+void MyMoneySchedule::compoundToSimpleOccurrence(int& multiplier,occurrenceE& occurrence)
 {
-  occurenceE newOcc = occurence;
-  if(occurence == MyMoneySchedule::OCCUR_ONCE)
+  occurrenceE newOcc = occurrence;
+  if(occurrence == MyMoneySchedule::OCCUR_ONCE)
   { // Nothing to do
   }
-  else if(occurence == MyMoneySchedule::OCCUR_DAILY)
+  else if(occurrence == MyMoneySchedule::OCCUR_DAILY)
   {
     switch (multiplier)
     {
@@ -1413,7 +1424,7 @@ void MyMoneySchedule::compoundToSimpleOccurence(int& multiplier,occurenceE& occu
       case 8: newOcc = MyMoneySchedule::OCCUR_EVERYEIGHTWEEKS; break;
     }
   }
-  else if(occurence == MyMoneySchedule::OCCUR_MONTHLY)
+  else if(occurrence == MyMoneySchedule::OCCUR_MONTHLY)
     switch (multiplier)
     {
       case 1: break;
@@ -1422,12 +1433,12 @@ void MyMoneySchedule::compoundToSimpleOccurence(int& multiplier,occurenceE& occu
       case 4: newOcc = MyMoneySchedule::OCCUR_EVERYFOURMONTHS; break;
       case 6: newOcc = MyMoneySchedule::OCCUR_TWICEYEARLY; break;
     }
-  else if(occurence == MyMoneySchedule::OCCUR_EVERYHALFMONTH)
+  else if(occurrence == MyMoneySchedule::OCCUR_EVERYHALFMONTH)
     switch (multiplier)
     {
       case 1: break;
     }
-  else if(occurence == MyMoneySchedule::OCCUR_YEARLY)
+  else if(occurrence == MyMoneySchedule::OCCUR_YEARLY)
   {
     switch (multiplier)
     {
@@ -1435,9 +1446,9 @@ void MyMoneySchedule::compoundToSimpleOccurence(int& multiplier,occurenceE& occu
       case 2: newOcc = MyMoneySchedule::OCCUR_EVERYOTHERYEAR; break;
     }
   }
-  if (occurence != newOcc ) // Changed to derived type
+  if (occurrence != newOcc ) // Changed to derived type
   {
-    occurence = newOcc;
+    occurrence = newOcc;
     multiplier = 1;
   }
 }

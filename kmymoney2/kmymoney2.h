@@ -108,7 +108,7 @@ protected slots:
   /**
     * This slot is intended to be used as part of auto saving. This is used when the
     * QTimer emits the timeout signal and simply checks that the file is dirty (has
-    * received modifications to it's contents), and call the apropriate method to
+    * received modifications to it's contents), and call the appropriate method to
     * save the file. Furthermore, re-starts the timer (possibly not needed).
     * @author mvillarino 2005
     * @see KMyMoney2App::slotDataChanged()
@@ -428,9 +428,9 @@ protected slots:
 
   /**
     * This slot collects information for a new scheduled transaction
-    * based on transaction @a t and @a occurence and saves it in the engine.
+    * based on transaction @a t and @a occurrence and saves it in the engine.
     */
-  void slotScheduleNew(const MyMoneyTransaction& t, MyMoneySchedule::occurenceE occurence = MyMoneySchedule::OCCUR_MONTHLY);
+  void slotScheduleNew(const MyMoneyTransaction& t, MyMoneySchedule::occurrenceE occurrence = MyMoneySchedule::OCCUR_MONTHLY);
 
   /**
     */

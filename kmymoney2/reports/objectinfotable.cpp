@@ -168,7 +168,7 @@ void ObjectInfoTable::constructScheduleTable ( void )
       scheduleRow["name"] = schedule.name();
       scheduleRow["nextduedate"] = schedule.nextDueDate().toString ( Qt::ISODate );
       scheduleRow["type"] = KMyMoneyUtils::scheduleTypeToString ( schedule.type() );
-      scheduleRow["occurence"] = i18n( schedule.occurenceToString().toLatin1() );
+      scheduleRow["occurence"] = i18n( schedule.occurrenceToString().toLatin1() );
       scheduleRow["paymenttype"] = KMyMoneyUtils::paymentMethodToString ( schedule.paymentType() );
 
       //scheduleRow["category"] = account.name();

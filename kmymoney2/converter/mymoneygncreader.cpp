@@ -1750,7 +1750,7 @@ void MyMoneyGncReader::convertSchedule (const GncSchedule *gsc) {
     QString gncType; // the gnucash name
     unsigned char interval; // for date calculation
     unsigned int intervalCount;
-    MyMoneySchedule::occurenceE occ; // equivalent occurence code
+    MyMoneySchedule::occurrenceE occ; // equivalent occurrence code
     MyMoneySchedule::weekendOptionE wo;
   };
 /* other intervals supported by gnc according to Josh Sled's schema (see above)
@@ -1795,7 +1795,7 @@ void MyMoneyGncReader::convertSchedule (const GncSchedule *gsc) {
       frequency = gre->getFrequency();
       schedEnabled = gsc->enabled();
     }
-    sc.setOccurence(MyMoneySchedule::OCCUR_ONCE); // FIXME - how to convert
+    sc.setOccurrence(MyMoneySchedule::OCCUR_ONCE); // FIXME - how to convert
   } else {
     // find this interval
     const GncFreqSpec *fs = gsc->getFreqSpec();
@@ -1822,7 +1822,7 @@ void MyMoneyGncReader::convertSchedule (const GncSchedule *gsc) {
     m_suspectSchedule = true;
   }
   // set the occurrence interval, weekend option, start date
-  sc.setOccurence (vi[i].occ);
+  sc.setOccurrence (vi[i].occ);
   sc.setWeekendOption (vi[i].wo);
   sc.setStartDate (gsc->startDate());
   // if a last date was specified, use it, otherwise try to work out the last date

@@ -167,19 +167,19 @@ public:
   static const QString securityTypeToString(const MyMoneySecurity::eSECURITYTYPE securityType);
 
   /**
-    * This method is used to convert the occurence type from it's
+    * This method is used to convert the occurrence type from it's
     * internal representation into a human readable format.
     *
-    * @param occurence numerical representation of the MyMoneySchedule
-    *                  occurence type
+    * @param occurrence numerical representation of the MyMoneySchedule
+    *                  occurrence type
     *
     * @return QString representing the human readable format translated according to the language cataglogue
     *
-    * @sa MyMoneySchedule::occurenceToString()
+    * @sa MyMoneySchedule::occurrenceToString()
     *
-    * @deprecated Use i18n(MyMoneySchedule::occurenceToString(occurence)) instead
+    * @deprecated Use i18n(MyMoneySchedule::occurrenceToString(occurrence)) instead
     */
-  static const QString occurenceToString(const MyMoneySchedule::occurenceE occurence);
+  static const QString occurrenceToString(const MyMoneySchedule::occurrenceE occurrence);
 
   /**
     * This method is used to convert the payment type from it's

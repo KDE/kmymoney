@@ -57,7 +57,7 @@ public:
     * This enum is used to describe all the possible schedule frequencies.
     * The special entry, OCCUR_ANY, is used to combine all the other types.
     */
-  enum occurenceE { OCCUR_ANY=0, OCCUR_ONCE=1, OCCUR_DAILY=2, OCCUR_WEEKLY=4, OCCUR_FORTNIGHTLY=8,
+  enum occurrenceE { OCCUR_ANY=0, OCCUR_ONCE=1, OCCUR_DAILY=2, OCCUR_WEEKLY=4, OCCUR_FORTNIGHTLY=8,
                     OCCUR_EVERYOTHERWEEK=16,
                     OCCUR_EVERYHALFMONTH=18,
                     OCCUR_EVERYTHREEWEEKS=20,
@@ -104,7 +104,7 @@ public:
     *
     * @a startDate is not used anymore and internally set to QDate()
     */
-  MyMoneySchedule(const QString& name, typeE type, occurenceE occurence, int occurenceMultiplier,
+  MyMoneySchedule(const QString& name, typeE type, occurrenceE occurrence, int occurrenceMultiplier,
           paymentTypeE paymentType, const QDate& startDate, const QDate& endDate, bool fixed, bool autoEnter);
 
   MyMoneySchedule(const QDomElement& node);
@@ -117,27 +117,27 @@ public:
   ~MyMoneySchedule() {}
 
   /**
-    * Simple get method that returns the occurence frequency.
+    * Simple get method that returns the occurrence frequency.
     *
-    * @return occurenceE The instance frequency.
+    * @return occurrenceE The instance frequency.
     */
-  occurenceE occurence(void) const;
+  occurrenceE occurrence(void) const;
 
   /**
-    * Simple get method that returns the occurence period
-    * multiplier and occurence
+    * Simple get method that returns the occurrence period
+    * multiplier and occurrence
     *
-    * @return occurenceE The instance period 
+    * @return occurrenceE The instance period 
     *
     */
-  occurenceE occurencePeriod(void) const { return m_occurence; }
+  occurrenceE occurrencePeriod(void) const { return m_occurrence; }
 
   /**
-    * Simple get method that returns the occurence period multiplier.
+    * Simple get method that returns the occurrence period multiplier.
     *
     * @return int The frequency multiplier
     */
-  int occurenceMultiplier(void) const { return m_occurenceMultiplier; }
+  int occurrenceMultiplier(void) const { return m_occurrenceMultiplier; }
 
   /**
     * Simple get method that returns the schedule type.
@@ -249,26 +249,26 @@ public:
   /**
     * Simple method that sets the frequency for the schedule.
     *
-    * @param occ The new occurence (frequency).
+    * @param occ The new occurrence (frequency).
     * @return none
     */
-  void setOccurence(occurenceE occ);
+  void setOccurrence(occurrenceE occ);
 
   /**
     * Simple method that sets the schedule period 
     *
-    * @param occ The new occurence period (frequency)
+    * @param occ The new occurrence period (frequency)
     * @return none
     */
-  void setOccurencePeriod(occurenceE occ);
+  void setOccurrencePeriod(occurrenceE occ);
 
   /**
     * Simple method that sets the frequency multiplier for the schedule.
     *
-    * @param occmultiplier The new occurence (frequency) multiplier.
+    * @param occmultiplier The new occurrence (frequency) multiplier.
     * @return none
     */
-  void setOccurenceMultiplier(int occmultiplier);
+  void setOccurrenceMultiplier(int occmultiplier);
 
   /**
     * Simple method that sets the type for the schedule.
@@ -453,46 +453,46 @@ public:
   virtual bool hasReferenceTo(const QString& id) const;
 
   /**
-   * Returns the human-readable format of Schedule's occurence
+   * Returns the human-readable format of Schedule's occurrence
    *
    * @return QString representing the human readable format
    */
-  QString occurenceToString() const;
+  QString occurrenceToString() const;
 
   /**
-   * This method is used to convert the occurence type from it's
+   * This method is used to convert the occurrence type from it's
    * internal representation into a human readable format.
    *
    * @param type numerical representation of the MyMoneySchedule
-   *                  occurence type
+   *                  occurrence type
    *
    * @return QString representing the human readable format
    */
-  static QString occurenceToString(occurenceE type);
+  static QString occurrenceToString(occurrenceE type);
 
   /**
-   * This method is used to convert a multiplier and base occurence type
+   * This method is used to convert a multiplier and base occurrence type
    * from it's internal representation into a human readable format.
-   * When multiplier * occurence is equivalent to a simple occurence
-   * the method returns the same as occurenceToString of the simple occurence
+   * When multiplier * occurrence is equivalent to a simple occurrence
+   * the method returns the same as occurrenceToString of the simple occurrence
    *
-   * @param mult occurence multiplier
-   * @param type occurence period 
+   * @param mult occurrence multiplier
+   * @param type occurrence period 
    *
    * @return QString representing the human readable format
    */
-  static QString occurenceToString(int mult, occurenceE type);
+  static QString occurrenceToString(int mult, occurrenceE type);
 
   /**
-   * This method is used to convert an occurence period from
+   * This method is used to convert an occurrence period from
    * it's internal representation into a human-readable format.
    *
    * @param type numerical representation of the MyMoneySchedule
-   *                  occurence type
+   *                  occurrence type
    *
    * @return QString representing the human readable format
    */
-  static QString occurencePeriodToString(occurenceE type);
+  static QString occurrencePeriodToString(occurrenceE type);
 
   /**
    * This method is used to convert the payment type from it's
@@ -532,52 +532,52 @@ public:
 
  /**
   *
-  * Convert an occurence to the maximum number of events possible during a single
+  * Convert an occurrence to the maximum number of events possible during a single
   * calendar year.
   * A fortnight is treated as 15 days.
   *
-  * @param occurence  The occurence
+  * @param occurrence  The occurrence
   *
   * @return int  Number of days between events
   */
-  static int eventsPerYear(MyMoneySchedule::occurenceE occurence);
+  static int eventsPerYear(MyMoneySchedule::occurrenceE occurrence);
 
  /**
   *
-  * Convert an occurence to the number of days between events
+  * Convert an occurrence to the number of days between events
   * Treats a month as 30 days.
   * Treats a fortnight as 15 days.
   *
-  * @param occurence  The occurence
+  * @param occurrence  The occurrence
   *
   * @return int  Number of days between events
   */
-  static int daysBetweenEvents(MyMoneySchedule::occurenceE occurence);
+  static int daysBetweenEvents(MyMoneySchedule::occurrenceE occurrence);
 
   /**
-    * Helper method to convert simple occurence to compound occurence + multiplier
+    * Helper method to convert simple occurrence to compound occurrence + multiplier
     *
     * @param multiplier Returned by reference.  Adjusted multiplier
-    * @param occurence Returned by reference.  Occurence type
+    * @param occurrence Returned by reference.  Occurrence type
     */
-  static void simpleToCompoundOccurence(int& multiplier,occurenceE& occurence);
+  static void simpleToCompoundOccurrence(int& multiplier,occurrenceE& occurrence);
 
   /**
-    * Helper method to convert compound occurence + multiplier to simple occurence
+    * Helper method to convert compound occurrence + multiplier to simple occurrence
     *
     * @param multiplier Returned by reference.  Adjusted multiplier
-    * @param occurence Returned by reference.  Occurence type
+    * @param occurrence Returned by reference.  Occurrence type
     */
-  static void compoundToSimpleOccurence(int& multiplier,occurenceE& occurence);
+  static void compoundToSimpleOccurrence(int& multiplier,occurrenceE& occurrence);
 
   /**
-    * This method is used to convert the occurence type from the
+    * This method is used to convert the occurrence type from the
     * human readable form into it's internal representation.
     *
     * @param text reference to QString representing the human readable format
-    * @return numerical representation of the occurence
+    * @return numerical representation of the occurrence
     */
-  static MyMoneySchedule::occurenceE stringToOccurence(const QString& text);
+  static MyMoneySchedule::occurrenceE stringToOccurrence(const QString& text);
 
 private:
   /**
@@ -604,7 +604,7 @@ private:
 
   /**
     * This method adds a number of Half Months to the given Date.
-    * This is used for OCCUR_EVERYHALFMONTH occurences.
+    * This is used for OCCUR_EVERYHALFMONTH occurrences.
     * The addition uses the following rules to add a half month:
     * Day 1-13: add 15 days
     * Day 14: add 15 days (except February: the last day of the month)
@@ -627,11 +627,11 @@ private:
   QDate addHalfMonths( QDate date, int mult = 1 ) const;
 
 private:
-  /// Its occurence
-  occurenceE m_occurence;
+  /// Its occurrence
+  occurrenceE m_occurrence;
 
-  /// Its occurence multiplier
-  int m_occurenceMultiplier;
+  /// Its occurrence multiplier
+  int m_occurrenceMultiplier;
 
   /// Its type
   typeE m_type;

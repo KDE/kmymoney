@@ -470,7 +470,7 @@ void KGlobalLedgerView::loadView(void)
           }
 
           // if this is a one time schedule, we can bail out here as we're done
-          if(s.occurence() == MyMoneySchedule::OCCUR_ONCE)
+          if(s.occurrence() == MyMoneySchedule::OCCUR_ONCE)
             break;
 
           // for all others, we check if the next payment date is still 'in range'

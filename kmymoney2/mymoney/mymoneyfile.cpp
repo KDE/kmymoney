@@ -1326,7 +1326,7 @@ const MyMoneySchedule MyMoneyFile::schedule(const QString& id) const
 const QList<MyMoneySchedule> MyMoneyFile::scheduleList(
                           const QString& accountId,
                           const MyMoneySchedule::typeE type,
-                          const MyMoneySchedule::occurenceE occurence,
+                          const MyMoneySchedule::occurrenceE occurrence,
                           const MyMoneySchedule::paymentTypeE paymentType,
                           const QDate& startDate,
                           const QDate& endDate,
@@ -1334,7 +1334,7 @@ const QList<MyMoneySchedule> MyMoneyFile::scheduleList(
 {
   checkStorage();
 
-  return m_storage->scheduleList(accountId, type, occurence, paymentType, startDate, endDate, overdue);
+  return m_storage->scheduleList(accountId, type, occurrence, paymentType, startDate, endDate, overdue);
 }
 
 

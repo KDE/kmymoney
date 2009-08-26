@@ -141,7 +141,7 @@ public:
     */
   virtual const QList<MyMoneySchedule> scheduleList(const QString& = QString(),
                                      const MyMoneySchedule::typeE = MyMoneySchedule::TYPE_ANY,
-                                     const MyMoneySchedule::occurenceE = MyMoneySchedule::OCCUR_ANY,
+                                     const MyMoneySchedule::occurrenceE = MyMoneySchedule::OCCUR_ANY,
                                      const MyMoneySchedule::paymentTypeE = MyMoneySchedule::STYPE_ANY,
                                      const QDate& = QDate(),
                                      const QDate& = QDate(),

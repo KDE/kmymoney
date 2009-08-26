@@ -111,12 +111,12 @@ void KMyMoneyBriefSchedule::loadSchedule()
                 KGlobal::locale()->formatDate(m_date),
                 amount.formatMoney(sched.account().fraction()),
                 QString::number(transactions),
-                i18n(sched.occurenceToString().toLatin1()));
+                i18n(sched.occurrenceToString().toLatin1()));
       } else {
         text = i18n("Payment on %1 for %2 occuring %4.",
                 KGlobal::locale()->formatDate(m_date),
                 amount.formatMoney(sched.account().fraction()),
-                i18n(sched.occurenceToString().toLatin1()));
+                i18n(sched.occurrenceToString().toLatin1()));
       }
 
       if (m_date < QDate::currentDate())
@@ -134,7 +134,7 @@ void KMyMoneyBriefSchedule::loadSchedule()
           int transactions = sched.paymentDates(startD, QDate::currentDate()).count();
 
           text += "<br><font color=red>";
-          text += i18n("%1 days overdue (%2 occurences).",
+          text += i18n("%1 days overdue (%2 occurrences).",
                       QString::number(days),
                       QString::number(transactions));
           text += "</color>";
@@ -145,7 +145,7 @@ void KMyMoneyBriefSchedule::loadSchedule()
 
       m_prevButton->setEnabled(true);
       m_nextButton->setEnabled(true);
-      m_skipButton->setEnabled(sched.occurencePeriod() != MyMoneySchedule::OCCUR_ONCE);
+      m_skipButton->setEnabled(sched.occurrencePeriod() != MyMoneySchedule::OCCUR_ONCE);
 
       if (m_index == 0)
         m_prevButton->setEnabled(false);

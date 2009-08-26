@@ -142,7 +142,7 @@ KScheduledListItem::KScheduledListItem(KScheduledListItem *parent, const MyMoney
     else
       setText(4, KGlobal::locale()->formatDate(schedule.adjustedNextDueDate()));
 
-    setText(5, i18n(schedule.occurenceToString().toLatin1()));
+    setText(5, i18n(schedule.occurrenceToString().toLatin1()));
     setText(6, KMyMoneyUtils::paymentMethodToString(schedule.paymentType()));
   }
   catch (MyMoneyException *e)
@@ -198,7 +198,7 @@ int KScheduledListItem::compare(Q3ListViewItem* i, int col, bool ascending) cons
   // a) date
   // b) amount
   // c) name/group
-  // d) occurence
+  // d) occurrence
   // in all other cases use the standard sorting
   MyMoneyMoney diff;
   switch(col) {
@@ -220,8 +220,8 @@ int KScheduledListItem::compare(Q3ListViewItem* i, int col, bool ascending) cons
       rc = item->m_schedule.adjustedNextDueDate().daysTo(m_schedule.adjustedNextDueDate());
       break;
 
-    case 5:   // occurence
-      rc = (m_schedule.occurence() - item->m_schedule.occurence());
+    case 5:   // occurrence
+      rc = (m_schedule.occurrence() - item->m_schedule.occurrence());
       break;
 
     default:

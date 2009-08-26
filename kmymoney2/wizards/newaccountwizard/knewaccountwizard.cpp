@@ -241,8 +241,8 @@ const MyMoneySchedule& NewAccountWizard::Wizard::schedule(void)
       m_schedule.setType(MyMoneySchedule::TYPE_TRANSFER);
       m_schedule.setPaymentType(static_cast<MyMoneySchedule::paymentTypeE>(m_schedulePage->m_method->currentItem()));
       m_schedule.setFixed(false);
-      m_schedule.setOccurencePeriod(MyMoneySchedule::OCCUR_MONTHLY);
-      m_schedule.setOccurenceMultiplier(1);
+      m_schedule.setOccurrencePeriod(MyMoneySchedule::OCCUR_MONTHLY);
+      m_schedule.setOccurrenceMultiplier(1);
       MyMoneyTransaction t;
       MyMoneySplit s;
       s.setPayeeId(m_schedulePage->m_payee->selectedItem());
@@ -271,7 +271,7 @@ const MyMoneySchedule& NewAccountWizard::Wizard::schedule(void)
         m_schedule.setPaymentType(MyMoneySchedule::STYPE_DIRECTDEPOSIT);
 
       m_schedule.setFixed(true);
-      m_schedule.setOccurence(m_generalLoanInfoPage->m_paymentFrequency->currentItem());
+      m_schedule.setOccurrence(m_generalLoanInfoPage->m_paymentFrequency->currentItem());
 
       MyMoneyTransaction t;
       MyMoneySplit s;
@@ -1108,7 +1108,7 @@ QString LoanDetailsPage::updateTermWidgets(const long double val)
   long long vl = static_cast<long long>(floorl(val));
 
   QString valString;
-  MyMoneySchedule::occurenceE unit = m_termUnit->currentItem();
+  MyMoneySchedule::occurrenceE unit = m_termUnit->currentItem();
 
   if((unit == MyMoneySchedule::OCCUR_MONTHLY)
   && ((vl % 12) == 0)) {
@@ -1664,7 +1664,7 @@ void AccountSummaryPage::enterPage(void)
     p = new K3ListViewItem(group, i18n("Name"), sch.name());
     if(acc.accountType() == MyMoneyAccount::CreditCard) {
       MyMoneyAccount paymentAccount = MyMoneyFile::instance()->account(m_wizard->m_schedulePage->m_paymentAccount->selectedItem());
-      p = new K3ListViewItem(group, p, i18n("Occurence"), i18n("Monthly"));
+      p = new K3ListViewItem(group, p, i18n("Occurrence"), i18n("Monthly"));
       p = new K3ListViewItem(group, p, i18n("Paid from"), paymentAccount.name());
       p = new K3ListViewItem(group, p, i18n("Pay to"), m_wizard->m_schedulePage->m_payee->currentText());
       p = new K3ListViewItem(group, p, i18n("Amount"), m_wizard->m_schedulePage->m_amount->value().formatMoney(acc, sec));
@@ -1672,7 +1672,7 @@ void AccountSummaryPage::enterPage(void)
       p = new K3ListViewItem(group, p, i18n("Payment method"), m_wizard->m_schedulePage->m_method->currentText());
     }
     if(acc.isLoan()) {
-      p = new K3ListViewItem(group, p, i18n("Occurence"), m_wizard->m_generalLoanInfoPage->m_paymentFrequency->currentText());
+      p = new K3ListViewItem(group, p, i18n("Occurrence"), m_wizard->m_generalLoanInfoPage->m_paymentFrequency->currentText());
       p = new K3ListViewItem(group, p, i18n("Amount"), (m_wizard->m_loanPaymentPage->basePayment() + m_wizard->m_loanPaymentPage->additionalFees()).formatMoney(acc, sec));
       p = new K3ListViewItem(group, p, i18n("First payment due"), KGlobal::locale()->formatDate(m_wizard->m_loanSchedulePage->firstPaymentDueDate()));
     }
