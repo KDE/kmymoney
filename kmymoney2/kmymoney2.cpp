@@ -1726,7 +1726,7 @@ const QString KMyMoney2App::slotStatusMsg(const QString &text)
 
   m_statusMsg = text;
   if(m_statusMsg.isEmpty())
-    m_statusMsg = i18nc("Ready.", "Application ready.");
+    m_statusMsg = i18nc("Ready.", "Application is ready to use");
   statusBar()->clear();
   statusBar()->changeItem(text, ID_STATUS_MSG);
   return msg;
@@ -1739,7 +1739,7 @@ void KMyMoney2App::ready(void)
 
 bool KMyMoney2App::isReady(void)
 {
-  return m_statusMsg == i18nc("Ready.", "Application ready.");
+  return m_statusMsg == i18nc("Ready.", "Application is ready to use");
 }
 
 void KMyMoney2App::slotStatusProgressBar(int current, int total)
@@ -3459,7 +3459,7 @@ void KMyMoney2App::slotAccountReconcileStart(void)
           do {
             processedOne = false;
             QList<MyMoneySchedule>::const_iterator it_sch;
-            for(it_sch = schedules.constBegin(); (rc != KMyMoneyUtils::Cancel) && (it_sch != schedules.constEnd()); ++it_sch) {
+            for(it_sch = schedules.begin(); (rc != KMyMoneyUtils::Cancel) && (it_sch != schedules.end()); ++it_sch) {
               MyMoneySchedule sch(*(it_sch));
 
               // and enter it if it is not on the skip list
