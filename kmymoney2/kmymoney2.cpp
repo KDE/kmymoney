@@ -314,34 +314,17 @@ void KMyMoney2App::initDynamicMenus(void)
 
 void KMyMoney2App::initActions(void)
 {
-  //KAction* p;
-
   // *************
   // The File menu
   // *************
 
-  //KStandardAction::openNew(this, SLOT(slotFileNew()), actionCollection());
   actionCollection()->addAction( KStandardAction::New, this, SLOT(slotFileNew()) );
-
-  //KStandardAction::open(this, SLOT(slotFileOpen()), actionCollection());
   actionCollection()->addAction( KStandardAction::Open, this, SLOT(slotFileOpen()) );
-
-  //KStandardAction::openRecent(this, SLOT(slotFileOpenRecent(const KUrl&)), actionCollection());
   m_recentFiles = KStandardAction::openRecent(this, SLOT(slotFileOpenRecent(const KUrl&)), actionCollection());
-
-  //KStandardAction::save(this, SLOT(slotFileSave()), actionCollection());
   actionCollection()->addAction( KStandardAction::Save, this, SLOT(slotFileSave()) );
-
-  //KStandardAction::saveAs(this, SLOT(slotFileSaveAs()), actionCollection());
   actionCollection()->addAction( KStandardAction::SaveAs, this, SLOT(slotFileSaveAs()) );
-
-  //KStandardAction::close(this, SLOT(slotFileClose()), actionCollection());
   actionCollection()->addAction( KStandardAction::Close, this, SLOT(slotFileClose()) );
-
-  //KStandardAction::quit(this, SLOT(slotFileQuit()), actionCollection());
   actionCollection()->addAction( KStandardAction::Quit, this, SLOT(slotFileQuit()) );
-
-  //KStandardAction::print(this, SLOT(slotPrintView()), actionCollection());
   actionCollection()->addAction( KStandardAction::Print, this, SLOT(slotPrintView()) );
 
   KAction *open_database = actionCollection()->addAction("open_database");
@@ -377,7 +360,6 @@ void KMyMoney2App::initActions(void)
   file_export_template->setText(i18n("Account Template..."));
   connect(file_export_template, SIGNAL(triggered()), this, SLOT(slotSaveAccountTemplates()));
 
-
   KAction *file_export_qif = actionCollection()->addAction("file_export_qif");
   file_export_qif->setText(i18n("QIF..."));
   connect(file_export_qif, SIGNAL(triggered()), this, SLOT(slotQifExport()));
@@ -392,6 +374,7 @@ void KMyMoney2App::initActions(void)
   file_dump->setText(i18n("Dump Memory"));
   connect(file_dump, SIGNAL(triggered()), this, SLOT(slotFileFileInfo()));
 #endif
+
   KAction *view_file_info = actionCollection()->addAction("view_file_info");
   view_file_info->setText(i18n("File-Information..."));
   view_file_info->setIcon(KIcon("document-properties"));
@@ -503,12 +486,14 @@ void KMyMoney2App::initActions(void)
   account_transaction_report->setText(i18n("Transaction report"));
   account_transaction_report->setIcon(KIcon("view_info"));
   connect(account_transaction_report, SIGNAL(triggered()), this, SLOT(slotAccountTransactionReport()));
+
 #ifdef HAVE_KDCHART
   KAction *account_chart = actionCollection()->addAction("account_chart");
   account_chart->setText(i18n("Show balance chart..."));
   account_chart->setIcon(KIcon("report"));
   connect(account_chart, SIGNAL(triggered()), this, SLOT(slotAccountChart()));
 #endif
+
   KAction *account_online_map = actionCollection()->addAction("account_online_map");
   account_online_map->setText(i18n("Map to online account"));
   account_online_map->setIcon(KIcon("news-subscribe"));
@@ -521,7 +506,7 @@ void KMyMoney2App::initActions(void)
   KActionMenu* menu = new KActionMenu(KIcon("view-refresh"), i18n("Update"), actionCollection()); //, "account_online_update_menu");
   // activating the menu button is the same as selecting the current account
   connect( menu, SIGNAL( activated() ), this, SLOT(slotAccountUpdateOnline()));
-  //menu->insert(new KAction(i18n("Update account..."), "", 0, this, SLOT(slotAccountUpdateOnline()), actionCollection(), "account_online_update"));
+
   KAction *account_online_update = actionCollection()->addAction("account_online_update");
   account_online_update->setText(i18n("Update account..."));
   connect(account_online_update, SIGNAL(triggered()), this, SLOT(slotAccountUpdateOnline()));
@@ -549,7 +534,6 @@ void KMyMoney2App::initActions(void)
   category_delete->setText(i18n("Delete category..."));
   category_delete->setIcon(KIcon("edit-delete"));
   connect(category_delete, SIGNAL(triggered()), this, SLOT(slotAccountDelete()));
-
 
   // **************
   // The tools menu
@@ -623,14 +607,11 @@ void KMyMoney2App::initActions(void)
   // we use Return as the same shortcut for Edit and Enter. Therefore, we don't allow
   // to change them (The standard KDE dialog complains anyway if you want to assign
   // the same shortcut to two actions)
-  //p = new KAction(i18nc("Edit transaction button", "Edit"), "edit", 0, this, SLOT(slotTransactionsEdit()), actionCollection(), "transaction_edit");
-  //p->setShortcutConfigurable(false);
   KAction *transaction_edit = actionCollection()->addAction("transaction_edit");
   transaction_edit->setText(i18nc("Edit transaction button", "Edit"));
   transaction_edit->setIcon(KIcon("document-properties"));
   transaction_edit->setShortcutConfigurable(false);
   connect(transaction_edit, SIGNAL(triggered()), this, SLOT(slotTransactionsEdit()));
-
 
   KAction *transaction_enter = actionCollection()->addAction("transaction_enter");
   transaction_enter->setText(i18nc("Enter transaction", "Enter"));
@@ -690,7 +671,6 @@ void KMyMoney2App::initActions(void)
   transaction_select_all->setText(i18nc("Select all transactions", "Select all"));
   transaction_select_all->setShortcut(KShortcut("Ctrl+A"));
   connect(transaction_select_all, SIGNAL(triggered()), this, SIGNAL(selectAllTransactions()));
-
 
   KAction *transaction_goto_account = actionCollection()->addAction("transaction_goto_account");
   transaction_goto_account->setText(i18n("Goto account"));
@@ -826,12 +806,10 @@ void KMyMoney2App::initActions(void)
   currency_new->setIcon(KIcon("document-new"));
   connect(currency_new, SIGNAL(triggered()), this, SLOT(slotCurrencyNew()));
 
-
   KAction *currency_rename = actionCollection()->addAction("currency_rename");
   currency_rename->setText(i18n("Rename currency"));
   currency_rename->setIcon(KIcon("edit-delete"));
   connect(currency_rename, SIGNAL(triggered()), this, SIGNAL(currencyRename()));
-
 
   KAction *currency_delete = actionCollection()->addAction("currency_delete");
   currency_delete->setText(i18n("Delete currency"));
@@ -858,8 +836,8 @@ void KMyMoney2App::initActions(void)
   actionCollection()->addAction("debug_timers", debug_timers);
   debug_timers->setText(i18n("Debug Timers"));
   connect(debug_timers, SIGNAL(triggered()), this, SLOT(slotToggleTimers()));
-
 #endif
+
   // ************************
   // Currently unused actions
   // ************************
@@ -1748,7 +1726,7 @@ const QString KMyMoney2App::slotStatusMsg(const QString &text)
 
   m_statusMsg = text;
   if(m_statusMsg.isEmpty())
-    m_statusMsg = i18n("Ready.");
+    m_statusMsg = i18nc("Ready.", "Application ready.");
   statusBar()->clear();
   statusBar()->changeItem(text, ID_STATUS_MSG);
   return msg;
@@ -1761,7 +1739,7 @@ void KMyMoney2App::ready(void)
 
 bool KMyMoney2App::isReady(void)
 {
-  return m_statusMsg == i18n("Ready.");
+  return m_statusMsg == i18nc("Ready.", "Application ready.");
 }
 
 void KMyMoney2App::slotStatusProgressBar(int current, int total)
@@ -2223,15 +2201,15 @@ void KMyMoney2App::slotSettings(void)
   KSettingsForecast* forecastPage = new KSettingsForecast();
   KSettingsPlugins* pluginsPage = new KSettingsPlugins();
 
-  dlg->addPage(generalPage, i18n("General"), "system-run");
-  dlg->addPage(registerPage, i18n("Register"), "ledger");
+  dlg->addPage(generalPage, i18nc("General", "General settings"), "system-run");
+  dlg->addPage(registerPage, i18nc("Register", "Register view settings"), "ledger");
   dlg->addPage(homePage, i18n("Home"), "home");
   dlg->addPage(schedulesPage, i18n("Scheduled\ntransactions"), "schedule");
   dlg->addPage(encryptionPage, i18n("Encryption"), "kgpg");
   dlg->addPage(colorsPage, i18n("Colors"), "preferences-desktop-color");
   dlg->addPage(fontsPage, i18n("Fonts"), "preferences-desktop-font");
   dlg->addPage(onlineQuotesPage, i18n("Online Quotes"), "preferences-system-network");
-  dlg->addPage(forecastPage, i18n("Forecast"), "forcast");
+  dlg->addPage(forecastPage, i18nc("Forecast", "Forecast settings"), "forcast");
   dlg->addPage(pluginsPage, i18n("Plugins"), "network-disconnect");
 
   connect(dlg, SIGNAL(settingsChanged(const QString&)), this, SLOT(slotUpdateConfiguration()));
@@ -2431,7 +2409,7 @@ void KMyMoney2App::slotProcessExited(void)
           m_backupState = BACKUP_UNMOUNTING;
           proc.start();
         } else {
-          progressCallback(300, 0, i18n("Done"));
+          progressCallback(300, 0, i18nc("Done", "Backup done"));
           KMessageBox::information(this, i18n("File successfully backed up"), i18n("Backup"));
           m_backupState = BACKUP_IDLE;
           progressCallback(-1, -1, QString());
@@ -2463,7 +2441,7 @@ void KMyMoney2App::slotProcessExited(void)
     case BACKUP_UNMOUNTING:
       if(proc.normalExit() && proc.exitStatus() == 0) {
 
-        progressCallback(300, 0, i18n("Done"));
+        progressCallback(300, 0, i18nc("Done", "Backup done"));
         if(m_backupResult == 0)
           KMessageBox::information(this, i18n("File successfully backed up"), i18n("Backup"));
       } else {
@@ -4582,7 +4560,7 @@ void KMyMoney2App::slotBudgetChangeYear(void)
           MyMoneyFile::instance()->modifyBudget(budget);
           ft.commit();
         } catch(MyMoneyException *e) {
-          KMessageBox::detailedSorry(0, i18n("Error"), i18n("Unable to modify budget: %1, thrown in %2:%3").      arg(e->what()).arg(e->file()).arg(e->line()));
+          KMessageBox::detailedSorry(0, i18n("Error"), i18n("Unable to modify budget: %1, thrown in %2:%3", e->what(), e->file(), e->line()));
           delete e;
         }
       }
