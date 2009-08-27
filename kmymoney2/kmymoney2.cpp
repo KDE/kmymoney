@@ -3459,7 +3459,7 @@ void KMyMoney2App::slotAccountReconcileStart(void)
           do {
             processedOne = false;
             QList<MyMoneySchedule>::const_iterator it_sch;
-            for(it_sch = schedules.begin(); (rc != KMyMoneyUtils::Cancel) && (it_sch != schedules.end()); ++it_sch) {
+            for(it_sch = schedules.constBegin(); (rc != KMyMoneyUtils::Cancel) && (it_sch != schedules.constEnd()); ++it_sch) {
               MyMoneySchedule sch(*(it_sch));
 
               // and enter it if it is not on the skip list
