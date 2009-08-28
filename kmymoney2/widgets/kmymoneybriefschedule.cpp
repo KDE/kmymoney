@@ -94,9 +94,7 @@ void KMyMoneyBriefSchedule::loadSchedule()
     {
       MyMoneySchedule sched = m_scheduleList[m_index];
 
-      m_indexLabel->setText(i18n("%1 of %2")
-                              .arg(QString::number(m_index+1))
-                              .arg(QString::number(m_scheduleList.count())));
+      m_indexLabel->setText(i18n("%1 of %2", QString::number(m_index+1), QString::number(m_scheduleList.count())));
       m_name->setText(sched.name());
       m_type->setText(KMyMoneyUtils::scheduleTypeToString(sched.type()));
       m_account->setText(sched.account().name());
@@ -113,7 +111,7 @@ void KMyMoneyBriefSchedule::loadSchedule()
                 QString::number(transactions),
                 i18n(sched.occurrenceToString().toLatin1()));
       } else {
-        text = i18n("Payment on %1 for %2 occuring %4.",
+        text = i18n("Payment on %1 for %2 occuring %3.",
                 KGlobal::locale()->formatDate(m_date),
                 amount.formatMoney(sched.account().fraction()),
                 i18n(sched.occurrenceToString().toLatin1()));

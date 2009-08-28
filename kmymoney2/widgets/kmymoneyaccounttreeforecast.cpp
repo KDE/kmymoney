@@ -66,7 +66,7 @@ void KMyMoneyAccountTreeForecast::showSummary(MyMoneyForecast& forecast)
   }
   for(int i = 0; ((i*forecast.accountsCycle())+daysToBeginDay) <= forecast.forecastDays(); ++i) {
     int intervalDays = ((i*forecast.accountsCycle())+daysToBeginDay);
-    QString columnName =  i18n("%1 days").arg(intervalDays, 0, 10);
+    QString columnName =  i18np("1 day", "%1 days", intervalDays);
     addColumn(columnName, -1);
   }
 

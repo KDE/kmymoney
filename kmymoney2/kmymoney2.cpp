@@ -2701,9 +2701,9 @@ void KMyMoney2App::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& par
           "Negate the amount?\n\n"
           "Please click Yes to change the opening balance to %1,\n"
           "Please click No to leave the amount as %2,\n"
-          "Please click Cancel to abort the account creation.")
-          .arg((-openingBal).formatMoney(newAccount, sec))
-          .arg(openingBal.formatMoney(newAccount, sec));
+          "Please click Cancel to abort the account creation."
+          , (-openingBal).formatMoney(newAccount, sec)
+          , openingBal.formatMoney(newAccount, sec));
 
       int ans = KMessageBox::questionYesNoCancel(this, message);
       if (ans == KMessageBox::Yes) {
@@ -5845,7 +5845,7 @@ void KMyMoney2App::slotSelectTransactions(const KMyMoneyRegister::SelectedTransa
             m_payeeGoto = payee.id();
             QString name = payee.name();
             name.replace(QRegExp("&(?!&)"), "&&");
-            action("transaction_goto_payee")->setText(i18n("Goto '%1'").arg(name));
+            action("transaction_goto_payee")->setText(i18n("Goto '%1'", name));
           }
         } catch(MyMoneyException *e) {
           delete e;
@@ -5867,7 +5867,7 @@ void KMyMoney2App::slotSelectTransactions(const KMyMoneyRegister::SelectedTransa
               m_accountGoto = acc.id();
               QString name = acc.name();
               name.replace(QRegExp("&(?!&)"), "&&");
-              action("transaction_goto_account")->setText(i18n("Goto '%1'").arg(name));
+              action("transaction_goto_account")->setText(i18n("Goto '%1'", name));
               break;
             }
           }

@@ -276,7 +276,7 @@ void KMyMoneyWizard::updateStepCount(void)
       hiddenAdjust++;
     ++step;
   }
-  m_stepLabel->setText(i18n("Step %1 of %2").arg(m_step - hiddenAdjust).arg(stepCount));
+  m_stepLabel->setText(i18n("Step %1 of %2", (m_step - hiddenAdjust), stepCount));
 }
 
 void KMyMoneyWizard::setFirstPage(KMyMoneyWizardPage* page)
