@@ -244,7 +244,7 @@ void KEditLoanWizard::next()
       QString errMsg = i18n(
             "Your previous selection was \"%1\". If you select another option, "
             "KMyMoney will dismiss the changes you have just entered. "
-            "Do you wish to proceed?").arg(button->text());
+            "Do you wish to proceed?", button->text());
 
       if(KMessageBox::questionYesNo(this, errMsg) == KMessageBox::No) {
         dontLeavePage = true;

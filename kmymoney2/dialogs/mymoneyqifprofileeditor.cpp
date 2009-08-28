@@ -437,7 +437,7 @@ void MyMoneyQifProfileEditor::slotDelete(void)
 {
   QString profile = m_profile.profileName().mid(8);
 
-  if(KMessageBox::questionYesNo(this, i18n("Do you really want to delete profile '%1'?").arg(profile)) == KMessageBox::Yes) {
+  if(KMessageBox::questionYesNo(this, i18n("Do you really want to delete profile '%1'?", profile)) == KMessageBox::Yes) {
     int idx = m_profileListBox->currentItem();
     m_profile.saveProfile();
     deleteProfile(profile);

@@ -2310,7 +2310,7 @@ void MyMoneyGncReader::checkInvestmentOption (QString stockId) {
             break;
           }
 #endif
-          switch(KMessageBox::questionYesNo(0, i18n ("%1 is not an Investment Account. Do you wish to make it one?",invAcc.name(), PACKAGE))) {
+          switch(KMessageBox::questionYesNo(0, i18n ("%1 is not an Investment Account. Do you wish to make it one?",invAcc.name()), PACKAGE)) {
             case KMessageBox::Yes:
               // convert it - but what if it has splits???
               qFatal ("Not yet implemented");

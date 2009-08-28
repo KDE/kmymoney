@@ -1579,7 +1579,7 @@ QString PivotTable::renderHTML( void ) const
   if ( m_config_f.isConvertCurrency() )
     result += i18n("All currencies converted to %1", MyMoneyFile::instance()->baseCurrency().name());
   else
-    result += i18n("All values shown in %1 unless otherwise noted").arg(MyMoneyFile::instance()->baseCurrency().name());
+    result += i18n("All values shown in %1 unless otherwise noted", MyMoneyFile::instance()->baseCurrency().name());
   result += QString("</div>\n");
   result += QString("<div class=\"gap\">&nbsp;</div>\n");
 

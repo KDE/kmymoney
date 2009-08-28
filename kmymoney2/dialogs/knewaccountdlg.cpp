@@ -544,16 +544,6 @@ void KNewAccountDlg::okClicked()
     if(acctype == MyMoneyAccount::Loan
     && parent.accountGroup() == MyMoneyAccount::Asset)
       acctype = MyMoneyAccount::AssetLoan;
-
-#if 0
-    // we do allow the same name for different accounts, so
-    // we don't need this check anymore.
-    if(!file->nameToAccount(accountNameText).isEmpty()
-    && (file->nameToAccount(accountNameText) != m_account.id())) {
-      KMessageBox::error(this, QString("<qt>")+i18n("An account named <b>%1</b> already exists. You cannot create a second account with the same name.").arg(accountNameText)+QString("</qt>"));
-      return;
-    }
-#endif
   }
   else
   {

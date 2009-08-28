@@ -610,7 +610,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
 
         if ( t_in.m_strSecurity.isEmpty() )
         {
-          KMessageBox::information(0, i18n("This imported statement contains investment transactions with no security.  These transactions will be ignored.",t_in.m_strSecurity),i18n("Security not found"),QString("BlankSecurity"));
+          KMessageBox::information(0, i18n("This imported statement contains investment transactions with no security.  These transactions will be ignored."),i18n("Security not found"),QString("BlankSecurity"));
           return;
         }
         else
