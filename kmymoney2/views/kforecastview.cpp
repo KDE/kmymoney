@@ -450,7 +450,7 @@ void KForecastView::loadAdvancedView(void)
       advancedItem->setText(it_c, amount, amountMM.isNegative());
       it_c++;
 
-      QString dateString = KGlobal::locale()->formatDate(minDate);
+      QString dateString = KGlobal::locale()->formatDate(minDate, KLocale::ShortDate);
       advancedItem->setText(it_c, dateString, amountMM.isNegative());
       it_c++;
     }
@@ -467,7 +467,7 @@ void KForecastView::loadAdvancedView(void)
       advancedItem->setText(it_c, amount, amountMM.isNegative());
       it_c++;
 
-      QString dateString = KGlobal::locale()->formatDate(maxDate);
+      QString dateString = KGlobal::locale()->formatDate(maxDate, KLocale::ShortDate);
       advancedItem->setText(it_c, dateString, amountMM.isNegative());
       it_c++;
     }

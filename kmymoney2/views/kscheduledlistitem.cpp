@@ -140,7 +140,7 @@ KScheduledListItem::KScheduledListItem(KScheduledListItem *parent, const MyMoney
       setText(4, i18n("Finished"));
     }
     else
-      setText(4, KGlobal::locale()->formatDate(schedule.adjustedNextDueDate()));
+      setText(4, KGlobal::locale()->formatDate(schedule.adjustedNextDueDate(), KLocale::ShortDate));
 
     setText(5, i18n(schedule.occurrenceToString().toLatin1()));
     setText(6, KMyMoneyUtils::paymentMethodToString(schedule.paymentType()));

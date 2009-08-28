@@ -722,7 +722,7 @@ void KPayeesView::showTransactions(void)
 
     item = new KTransactionListItem(m_transactionView, item, s.accountId(), t->id());
     item->setText(0, s.number());
-    item->setText(1, KGlobal::locale()->formatDate(t->postDate()));
+    item->setText(1, KGlobal::locale()->formatDate(t->postDate(), KLocale::ShortDate));
 
     QString txt;
     if(s.action() == MyMoneySplit::ActionAmortization) {

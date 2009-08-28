@@ -722,7 +722,7 @@ void KGlobalLedgerView::updateSummaryLine(const QMap<QString, MyMoneyMoney>& act
     QDate reconcileDate = m_account.lastReconciliationDate();
 
     if(reconcileDate.isValid()) {
-      m_leftSummaryLabel->setText(i18n("Last reconciled: %1",KGlobal::locale()->formatDate(reconcileDate)));
+      m_leftSummaryLabel->setText(i18n("Last reconciled: %1",KGlobal::locale()->formatDate(reconcileDate, KLocale::ShortDate)));
     } else {
       m_leftSummaryLabel->setText(i18n("Never reconciled"));
     }

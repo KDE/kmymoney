@@ -332,7 +332,7 @@ void GroupMarker::paintRegisterCell(QPainter* painter, int row, int /* col */, c
 
     font.setBold(false);
     painter->setFont(font);
-    painter->drawText(cellRect, Qt::AlignVCenter | Qt::AlignCenter, KGlobal::locale()->formatDate(sortPostDate()));
+    painter->drawText(cellRect, Qt::AlignVCenter | Qt::AlignCenter, KGlobal::locale()->formatDate(sortPostDate(), KLocale::ShortDate));
   }
 
   painter->restore();
@@ -1371,7 +1371,7 @@ void Register::adjustColumn(int col)
 
   // check for date column
   if(col == DateColumn) {
-    QString txt = KGlobal::locale()->formatDate(QDate(6999,12,29));
+    QString txt = KGlobal::locale()->formatDate(QDate(6999,12,29), KLocale::ShortDate);
     int nw = cellFontMetrics.width(txt+"  ");
     w = qMax( w, nw );
   } else {
