@@ -634,19 +634,19 @@ void KGlobalLedgerView::loadView(void)
 
     // update statement information
     if(statement) {
-      statement->setText(i18n("%1 deposits (%3), %2 payments (%4)").
-          arg(deposits[m_account.id()]).
-          arg(payments[m_account.id()]).
-          arg(depositAmount[m_account.id()].abs().formatMoney(m_account.fraction())).
-          arg(paymentAmount[m_account.id()].abs().formatMoney(m_account.fraction())) );
+      statement->setText(i18n("%1 deposits (%3), %2 payments (%4)"
+          , deposits[m_account.id()]
+          , payments[m_account.id()]
+          , depositAmount[m_account.id()].abs().formatMoney(m_account.fraction())
+          , paymentAmount[m_account.id()].abs().formatMoney(m_account.fraction())) );
     }
     if(pStatement) {
-      pStatement->setText(i18n("%1 payments (%2)",payments[m_account.id()]).
-          arg(paymentAmount[m_account.id()].abs().formatMoney(m_account.fraction())) );
+      pStatement->setText(i18n("%1 payments (%2)", payments[m_account.id()]
+        , paymentAmount[m_account.id()].abs().formatMoney(m_account.fraction())) );
     }
     if(dStatement) {
-      dStatement->setText(i18n("%1 deposits (%2)",deposits[m_account.id()]).
-          arg(depositAmount[m_account.id()].abs().formatMoney(m_account.fraction())) );
+      dStatement->setText(i18n("%1 deposits (%2)", deposits[m_account.id()]
+        , depositAmount[m_account.id()].abs().formatMoney(m_account.fraction())) );
     }
 
     // add a last empty entry for new transactions

@@ -296,7 +296,7 @@ void KForecastView::loadSummaryView(void)
           break;
         case 0:
           msg = QString("<font color=\"%1\">").arg(KMyMoneyGlobalSettings::listNegativeValueColor().name());
-          msg += i18n("The balance of %2 is below the minimum balance %3 today.",acc.name(),minBalance.formatMoney(acc, currency));
+          msg += i18n("The balance of %1 is below the minimum balance %2 today.",acc.name(),minBalance.formatMoney(acc, currency));
           msg += QString("</font>");
           break;
         default:
