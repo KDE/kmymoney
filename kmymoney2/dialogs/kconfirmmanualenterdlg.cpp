@@ -55,22 +55,6 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
   MyMoneyFile* file = MyMoneyFile::instance();
   int noItemsChanged=0;
 
-#if 0
-  // if no schedule is present, we cannot enter it
-  if(m_schedule.id().isEmpty())
-    return false;
-
-  if (m_fromAccountId == m_toAccountId)
-  {
-    KMessageBox::error(this, i18n("Account and transfer account are the same.  Please change one."));
-    m_from->setFocus();
-    return false;
-  }
-
-  if (!checkDateInPeriod(m_date->date()))
-    return false;
-#endif
-
   try
   {
     QString po, pn;
@@ -81,40 +65,22 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
 
     if (po != pn) {
       noItemsChanged++;
-      messageDetail += i18n("Payee changed.<br>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b><p>").arg(po).arg(pn);
+      messageDetail += i18n("Payee changed.<br>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b><p>", po, pn);
     }
-#if 0
-    if (  (m_schedule.type() == MyMoneySchedule::TYPE_TRANSFER ||
-          m_schedule.type() == MyMoneySchedule::TYPE_BILL) &&
-          m_from->currentText() != m_schedule.account().name())
-    {
-      noItemsChanged++;
-      messageDetail += i18n("Account changed.  Old: \"%1\", New: \"%2\"")
-        .arg(m_schedule.account().name()).arg(m_from->currentText()) + QString("\n");
-    }
-
-    if (  m_schedule.type() == MyMoneySchedule::TYPE_DEPOSIT &&
-          m_to->currentText() != m_schedule.account().name())
-    {
-      noItemsChanged++;
-      messageDetail += i18n("Account changed.  Old: \"%1\", New: \"%2\"")
-        .arg(m_schedule.account().name()).arg(m_to->currentText()) + QString("\n");
-    }
-#endif
 
     if(to.splits()[0].accountId() != tn.splits()[0].accountId()) {
       noItemsChanged++;
-      messageDetail += i18n("Account changed.<br>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b><p>")
-        .arg(file->account(to.splits()[0].accountId()).name())
-        .arg(file->account(tn.splits()[0].accountId()).name());
+      messageDetail += i18n("Account changed.<br>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b><p>"
+        , file->account(to.splits()[0].accountId()).name()
+	, file->account(tn.splits()[0].accountId()).name());
     }
 
     if(file->isTransfer(to) && file->isTransfer(tn)) {
       if(to.splits()[1].accountId() != tn.splits()[1].accountId()) {
         noItemsChanged++;
-        messageDetail += i18n("Transfer account changed.<br>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b><p>")
-          .arg(file->account(to.splits()[1].accountId()).name())
-          .arg(file->account(tn.splits()[1].accountId()).name());
+        messageDetail += i18n("Transfer account changed.<br>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b><p>"
+	  , file->account(to.splits()[1].accountId()).name()
+	  , file->account(tn.splits()[1].accountId()).name());
       }
     } else {
       QString co, cn;

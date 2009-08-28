@@ -104,64 +104,6 @@ void TransactionMatcher::match(MyMoneyTransaction tm, MyMoneySplit sm, MyMoneyTr
     }
   }
 
-#if 0 // Ace's original code
-  // TODO (Ace) Add in another error to catch the case where a user
-  // tries to match two hand-entered transactions.
-  QList<MyMoneySplit> endSplits = endMatchTransaction.splits();
-  QList<MyMoneySplit>::const_iterator it_split = endSplits.begin();
-  while (it_split != endSplits.end())
-  {
-    // find the corresponding split in the start transaction
-    MyMoneySplit startSplit;
-    QString accountid = (*it_split).accountId();
-    try
-    {
-      startSplit = startMatchTransaction.splitByAccount( accountid );
-    }
-      // only exception is thrown if we cannot find a split like this
-    catch(MyMoneyException *e)
-    {
-      delete e;
-      startSplit = (*it_split);
-      startSplit.clearId();
-      startMatchTransaction.addSplit(startSplit);
-    }
-
-    // verify that the amounts are the same, otherwise we should not be
-    // matching!
-    if ( (*it_split).value() != startSplit.value() )
-    {
-      QString accountname = MyMoneyFile::instance()->account(accountid).name();
-      throw new MYMONEYEXCEPTION(i18n("Splits for %1 have conflicting values (%2,%3)").arg(accountname).arg((*it_split).value().formatMoney(),startSplit.value().formatMoney()));
-    }
-
-    QString bankID = (*it_split).bankID();
-    if ( ! bankID.isEmpty() )
-    {
-      try
-      {
-        if ( startSplit.bankID().isEmpty() )
-        {
-          startSplit.setBankID( bankID );
-          startMatchTransaction.modifySplit(startSplit);
-        }
-        else
-        {
-          QString accountname = MyMoneyFile::instance()->account(accountid).name();
-          throw new MYMONEYEXCEPTION(i18n("Both of these transactions have been imported into %1.  Therefore they cannot be matched.  Matching works with one imported transaction and one non-imported transaction.").arg(accountname));
-        }
-      }
-      catch(MyMoneyException *e)
-      {
-        QString estr = e->what();
-        delete e;
-        throw new MYMONEYEXCEPTION(i18n("Unable to match all splits (%1)").arg(estr));
-      }
-    }
-    ++it_split;
-  }
-#endif
-
   // mark the split as cleared if it does not have a reconciliation information yet
   if(sm.reconcileFlag() == MyMoneySplit::NotReconciled) {
     sm.setReconcileFlag(MyMoneySplit::Cleared);
