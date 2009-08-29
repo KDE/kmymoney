@@ -1481,7 +1481,7 @@ void HierarchyPage::enterPage(void)
   {
     if ( &m_topAccount != NULL )
     {
-      // If the list has alrady been populated clear it
+      // If the list has already been populated clear it
       if ( (*m_qlistviewParentAccounts).childCount() > 0 )
         (*m_qlistviewParentAccounts).clear();
     }

@@ -1395,7 +1395,7 @@ void MyMoneyGncReader::convertSplit (const GncSplit *gsp) {
   Q_CHECK_PTR (gsp);
   MyMoneySplit split;
   MyMoneyAccount splitAccount;
-  // find the kmm account id coresponding to the gnc id
+  // find the kmm account id corresponding to the gnc id
   QString kmmAccountId;
   map_accountIds::Iterator id = m_mapIds.find(gsp->acct().toUtf8());
   if (id != m_mapIds.end()) {
@@ -1684,7 +1684,7 @@ void MyMoneyGncReader::convertTemplateSplit (const QString& schedName, const Gnc
     postMessage ("SC", 6, schedName.toLatin1());
     m_suspectSchedule = true;
   }
-  // find the kmm account id coresponding to the gnc id
+  // find the kmm account id corresponding to the gnc id
   QString kmmAccountId;
   map_accountIds::Iterator id = m_mapIds.find(gncAccountId.toUtf8());
   if (id != m_mapIds.end()) {

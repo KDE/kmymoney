@@ -182,7 +182,7 @@ protected:
     * @param value The value to be added in
     * @param budget Whether this is a budget value (@p true) or an actual
     *               value (@p false). Defaults to @p false.
-    * @param stockSplit Wheter this is a stock split (@p true) or an actual
+    * @param stockSplit Whether this is a stock split (@p true) or an actual
     *                   value (@p false). Defaults to @p false.
     */
     inline void assignCell( const QString& outergroup, const ReportAccount& row, int column, MyMoneyMoney value, bool budget = false, bool stockSplit = false );

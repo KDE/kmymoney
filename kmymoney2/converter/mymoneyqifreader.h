@@ -244,7 +244,7 @@ private:
     * An empty QString is returned, if the line is not found.
     *
     * @param id QChar containing the letter to be found
-    * @param cnt return cnt'th of occurance of id in lines. cnt defaults to 1.
+    * @param cnt return cnt'th of occurrence of id in lines. cnt defaults to 1.
     *
     * @return QString with the remainder of the line or empty if
     *         @p id is not found in @p lines

@@ -226,7 +226,7 @@ namespace reports {
     i18nHeaders["type"] = i18n ( "Type" );
     i18nHeaders["name"] = i18n ( "Name" );
     i18nHeaders["nextduedate"] = i18n ( "Next Due Date" );
-    i18nHeaders["occurence"] = i18n ( "Occurence" );
+    i18nHeaders["occurence"] = i18n ( "Occurrence" );
     i18nHeaders["paymenttype"] = i18n ( "Payment Method" );
     i18nHeaders["institution"] = i18n ( "Institution" );
     i18nHeaders["description"] = i18n ( "Description" );

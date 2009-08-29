@@ -417,7 +417,7 @@ const QString MyMoneyQifProfileEditor::enterName(bool& ok)
 
   // the blank in the next line as the value for the edit box is
   // there on purpose, so that with the following call to validateAndSet
-  // the state is changed and the OK-Button is greyed
+  // the state is changed and the OK-Button is grayed
   KLineEditDlg* dlg = new KLineEditDlg(i18n("Enter new profile name"), " ", this);
   dlg->lineEdit()->setValidator(&val);
   dlg->lineEdit()->validateAndSet("", 0, 0, 0);

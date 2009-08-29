@@ -989,7 +989,7 @@ void MyMoneyQifProfile::scanDate(const QString& txt) const
   Q3ValueVector<QString> parts(3);             // the various parts of the date
   d->dissectDate(parts, txt);
 
-  // now analyse the parts
+  // now analyze the parts
   for(int i = 0; i < 3; ++i) {
     bool ok;
     int value = parts[i].toInt(&ok);

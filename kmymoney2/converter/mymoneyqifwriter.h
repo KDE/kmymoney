@@ -69,7 +69,7 @@ public:
     * @param accountId The id of the account that will be exported
     * @param accountData If true, the transactions will be exported
     * @param categoryData If true, the categories will be exported as well
-    * @param startDate Transations before this date will not be exported
+    * @param startDate Transactions before this date will not be exported
     * @param endDate Transactions after this date will not be exported
     */
   void write(const QString& filename, const QString& profile,

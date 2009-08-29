@@ -53,7 +53,7 @@ class OfxHeaderVersion;
   * his account.
   *
   * Currently works only with OFX Direct Connect, but I imagined that
-  * other protocols could be included here.  To accomodate this, we'd
+  * other protocols could be included here.  To accommodate this, we'd
   * add another page at the start of the wizard to ask which protocol
   * they wanted.
   *

@@ -156,7 +156,7 @@ public:
 
   /**
     * The entire hierarchy of this account descriptor
-    * This is similiar to debugName(), however debugName() is not guaranteed
+    * This is similar to debugName(), however debugName() is not guaranteed
     * to always look pretty, while fullName() is.  So if the user is ever
     * going to see the results, use fullName().
     *

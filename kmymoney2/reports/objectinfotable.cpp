@@ -61,7 +61,7 @@ namespace reports {
 
 ObjectInfoTable::ObjectInfoTable(const MyMoneyReport& _report): ListTable(_report)
 {
-  // seperated into its own method to allow debugging (setting breakpoints
+  // separated into its own method to allow debugging (setting breakpoints
   // directly in ctors somehow does not work for me (ipwizard))
   // TODO: remove the init() method and move the code back to the ctor
   init();

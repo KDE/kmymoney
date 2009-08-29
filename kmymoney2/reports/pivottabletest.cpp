@@ -942,7 +942,7 @@ void PivotTableTest::testInvestment(void)
 void PivotTableTest::testBudget(void)
 {
 
-  // 1. Budget on A, transations on A
+  // 1. Budget on A, transactions on A
   {
     BudgetHelper budget;
     budget += BudgetEntryHelper( QDate(2006,1,1), acSolo, false, 100.0 );
