@@ -64,13 +64,13 @@ KImportDlg::KImportDlg(QWidget *parent)
   m_qbuttonCancel->setGuiItem(KStandardGuiItem::cancel());
 
   KGuiItem okButtenItem( i18n( "&Import" ),
-                      KIcon("fileimport"),
+                      KIcon("document-import"),
                       i18n("Start operation"),
                       i18n("Use this to start the import operation"));
   m_qbuttonOk->setGuiItem(okButtenItem);
 
   KGuiItem browseButtenItem( i18n( "&Browse..." ),
-                      KIcon("fileopen"),
+                      KIcon("document-open"),
                       i18n("Select filename"),
                       i18n("Use this to select a filename to export to"));
   m_qbuttonBrowse->setGuiItem(browseButtenItem);

@@ -57,7 +57,7 @@ KMyMoneyPriceDlg::KMyMoneyPriceDlg(QWidget* parent) :
   KMyMoneyPriceDlgDecl(parent)
 {
   KGuiItem removeButtenItem( i18n( "&Delete" ),
-                    KIcon("delete"),
+                    KIcon("edit-delete"),
                     i18n("Delete this entry"),
                     i18n("Remove this price item from the file"));
   m_deleteButton->setGuiItem(removeButtenItem);

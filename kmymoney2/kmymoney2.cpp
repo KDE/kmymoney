@@ -591,7 +591,7 @@ void KMyMoney2App::initActions(void)
   // *************
   KAction *help_show_tip = actionCollection()->addAction("help_show_tip");
   help_show_tip->setText(i18n("&Show tip of the day"));
-  help_show_tip->setIcon(KIcon("idea"));
+  help_show_tip->setIcon(KIcon("ktip"));
   connect(help_show_tip, SIGNAL(triggered()), this, SLOT(slotShowTipOfTheDay()));
 
   // ***************************

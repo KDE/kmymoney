@@ -61,7 +61,7 @@ KAccountSelectDlg::KAccountSelectDlg(const KMyMoneyUtils::categoryTypeE accountT
   slotReloadWidget();
 
   KGuiItem skipButtonItem( i18n( "&Skip" ),
-                    KIcon("redo"),
+                    KIcon("media-skip-forward"),
                     i18n("Skip this transaction"),
                     i18n("Use this to skip importing this transaction and proceed with the next one."));
   m_qbuttonCancel->setGuiItem(skipButtonItem);
@@ -74,7 +74,7 @@ KAccountSelectDlg::KAccountSelectDlg(const KMyMoneyUtils::categoryTypeE accountT
   m_qbuttonOk->setGuiItem(KStandardGuiItem::ok());
 
   KGuiItem abortButtenItem( i18n("&Abort" ),
-                    KIcon("stop"),
+                    KIcon("dialog-cancel"),
                     i18n("Abort the import operation and dismiss all changes"),
                     i18n("Use this to abort the import. Your financial data will be in the state before you started the QIF import."));
   m_kButtonAbort->setGuiItem(abortButtenItem);

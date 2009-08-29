@@ -80,7 +80,7 @@ void KStartDlg::setPage_Template()
 
   KPageWidgetItem *page = new KPageWidgetItem( templateMainFrame , i18n("Select templates") );
   page->setHeader( i18n("Templates") );
-  page->setIcon( KIcon("wizard"));
+  page->setIcon( KIcon("tools-wizard"));
   addPage(page);
 
 

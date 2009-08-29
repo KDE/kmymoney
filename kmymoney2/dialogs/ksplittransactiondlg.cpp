@@ -77,7 +77,7 @@ KSplitTransactionDlg::KSplitTransactionDlg(const MyMoneyTransaction& t,
   // add icons to buttons
 
   KGuiItem clearButtenItem( i18n( "Clear &All" ),
-                    KIcon("edittrash"),
+                    KIcon("edit-delete"),
                     i18n("Clear all splits"),
                     i18n("Use this to clear all splits of this transaction"));
   clearAllBtn->setGuiItem(clearButtenItem);

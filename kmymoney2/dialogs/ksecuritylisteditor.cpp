@@ -66,7 +66,7 @@ KSecurityListEditor::KSecurityListEditor(QWidget *parent) :
   m_listView->setAllColumnsShowFocus(true);
 
   KGuiItem removeButtenItem( i18n( "&Delete" ),
-                    KIcon("delete"),
+                    KIcon("edit-delete"),
                     i18n("Delete this entry"),
                     i18n("Remove this security item from the file"));
   m_deleteButton->setGuiItem(removeButtenItem);
@@ -78,7 +78,7 @@ KSecurityListEditor::KSecurityListEditor(QWidget *parent) :
   m_addButton->setGuiItem(addButtenItem);
 
   KGuiItem editButtenItem( i18n( "&Edit" ),
-                    KIcon("edit"),
+                    KIcon("document-edit"),
                     i18n("Modify the selected entry"),
                     i18n("Change the security information of the selected entry."));
   m_editButton->setGuiItem(editButtenItem);

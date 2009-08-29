@@ -55,7 +55,7 @@ KSettingsOnlineQuotes::KSettingsOnlineQuotes(QWidget *parent)
   m_updateButton->setGuiItem(updateButtenItem);
 
   KGuiItem deleteButtenItem( i18n( "&Delete" ),
-                      KIcon("editdelete"),
+                      KIcon("edit-delete"),
                       i18n("Delete the selected source entry"),
                       i18n("Use this to delete the selected online source entry"));
   m_deleteButton->setGuiItem(deleteButtenItem);

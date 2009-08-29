@@ -692,7 +692,7 @@ kMyMoneyCalendar::setCloseButton( bool enable )
     if ( enable ) {
         d->closeButton = new QToolButton( this );
         d->closeButton->setToolTip( i18n("Close") );
-        d->closeButton->setIcon( QIcon( SmallIcon( "remove" ) ) );
+        d->closeButton->setIcon( QIcon( SmallIcon( "dialog-close" ) ) );
         connect( d->closeButton, SIGNAL( clicked() ),
                  topLevelWidget(), SLOT( close() ) );
     }
