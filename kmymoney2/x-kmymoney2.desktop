@@ -1,5 +1,4 @@
 [Desktop Entry]
-Encoding=UTF-8
 Comment=KMyMoney File
 Comment[et]=KMyMoney fail
 Comment[fr]=Fichier KMyMoney
@@ -14,5 +13,5 @@ Comment[x-test]=xxKMyMoney Filexx
 Comment[zh_TW]=KMyMoney 檔
 Icon=kmy
 Type=MimeType
-MimeType=application/x-kmymoney
+MimeType=application/x-kmymoney;
 Patterns=*.kmy;*.kmt;
