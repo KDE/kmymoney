@@ -5,7 +5,7 @@
   <!ENTITY kmyapplication "<application>KMyMoney</application>">
   <!ENTITY kappname "KMyMoney"><!-- replace kmyapplication here
                                             do *not* replace kappname-->
-  <!ENTITY package "kde-module"><!-- kdebase, kdeadmin, etc.  Leave
+  <!ENTITY package "kde-finance"><!-- kdebase, kdeadmin, etc.  Leave
                                      this unchanged if your
                                      application is not maintained in KDE CVS -->
   <!ENTITY % addindex "IGNORE">
