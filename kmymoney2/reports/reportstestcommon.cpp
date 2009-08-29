@@ -443,7 +443,7 @@ bool readRCFfromXML( Q3ValueList<MyMoneyReport>& list, const QString& filename )
   QFile f( filename );
   f.open( QIODevice::ReadOnly );
   QDomDocument* doc = new QDomDocument;
-  if(doc->setContent(&f, FALSE))
+  if(doc->setContent(&f, false))
   {
     result = readRCFfromXMLDoc(list,doc);
   }

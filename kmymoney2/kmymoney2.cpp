@@ -1877,7 +1877,7 @@ void KMyMoney2App::slotSaveAccountTemplates(void)
       QString strExt, strTemp;
       strTemp = newName.left(nLoc + 1);
       strExt = newName.right(newName.length() - (nLoc + 1));
-      if((strExt.find("kmt", 0, FALSE) == -1))
+      if((strExt.find("kmt", 0, false) == -1))
       {
         strTemp.append("kmt");
         //append to make complete file name

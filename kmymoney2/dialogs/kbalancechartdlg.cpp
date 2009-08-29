@@ -58,8 +58,8 @@ KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* paren
 {
 #ifdef HAVE_KDCHART
   setCaption(i18n("Balance of %1",account.name()));
-  setSizeGripEnabled( TRUE );
-  setModal( TRUE );
+  setSizeGripEnabled( true );
+  setModal( true );
 
   QVBoxLayout* KBalanceChartDlgLayout = new QVBoxLayout( this, 11, 6, "KBalanceChartDlgLayout");
 
@@ -208,8 +208,8 @@ KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* paren
   Layout1->addWidget( buttonOk );
 #endif
   KPushButton* buttonClose = new KPushButton( this );
-  buttonClose->setEnabled( TRUE );
-  buttonClose->setAutoDefault( TRUE );
+  buttonClose->setEnabled( true );
+  buttonClose->setAutoDefault( true );
   buttonClose->setGuiItem(KStandardGuiItem::Close);
   Layout1->addWidget( buttonClose );
 

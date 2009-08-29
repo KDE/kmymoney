@@ -164,7 +164,7 @@ void kMyMoneyCalculator::commaClicked(void)
 {
   if(operand.length() == 0)
     operand = "0";
-  if(operand.contains('.', FALSE) == 0)
+  if(operand.contains('.', false) == 0)
     operand.append('.');
 
   if(operand.length() > 16)

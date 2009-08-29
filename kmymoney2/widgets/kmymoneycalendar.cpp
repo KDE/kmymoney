@@ -288,7 +288,7 @@ kMyMoneyCalendar::eventFilter(QObject *o, QEvent *e )
        {
           QApplication::sendEvent( table, e );
           table->setFocus();
-          return TRUE; // eat event
+          return true; // eat event
        }
    }
    return Q3Frame::eventFilter( o, e );

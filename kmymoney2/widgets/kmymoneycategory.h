@@ -114,7 +114,7 @@ public:
   /**
     * Reimplemented for internal reasons. No API change
     */
-  virtual void reparent( QWidget *parent, Qt::WFlags, const QPoint &, bool showIt = FALSE );
+  virtual void reparent( QWidget *parent, Qt::WFlags, const QPoint &, bool showIt = false );
 
   /**
     * Reimplemented for internal reasons. No API change.

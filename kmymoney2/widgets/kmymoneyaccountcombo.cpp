@@ -169,7 +169,7 @@ void KMyMoneyAccountCombo::mousePressEvent(QMouseEvent *e)
   }
   bool hit = rect().contains( e->pos() );
   if ( hit ) {                                // mouse press on button
-    m_mlbDown = TRUE;                         // left mouse button down
+    m_mlbDown = true;                         // left mouse button down
     emit pressed();
   }
 }

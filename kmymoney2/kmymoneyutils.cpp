@@ -232,7 +232,7 @@ bool KMyMoneyUtils::appendCorrectFileExt(QString& str, const QString& strExtToUs
       QString strExt, strTemp;
       strTemp = str.left(nLoc + 1);
       strExt = str.right(str.length() - (nLoc + 1));
-      if(strExt.find(strExtToUse, 0, FALSE) == -1) {
+      if(strExt.find(strExtToUse, 0, false) == -1) {
         // if the extension given contains a period, we remove our's
         if(strExtToUse.find('.') != -1)
           strTemp = strTemp.left(strTemp.length()-1);

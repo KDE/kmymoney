@@ -389,7 +389,7 @@ void KMyMoneyAccountTreeBase::slotOpenFolder(void)
 {
   m_autoopenTimer.stop();
   if ( m_dropItem && !m_dropItem->isOpen() ) {
-    m_dropItem->setOpen( TRUE );
+    m_dropItem->setOpen( true );
     m_dropItem->repaint();
   }
 }
