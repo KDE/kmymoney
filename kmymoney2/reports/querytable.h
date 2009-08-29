@@ -4,10 +4,10 @@
     begin                : Fri Jul 23 2004
     copyright            : (C) 2004-2005 by Ace Jones
                            (C) 2007 Sascha Pfau
-    email                :  acejones@users.sourceforge.net
-                            MrPeacock@gmail.com
+    email                :  <acejones@users.sourceforge.net>
+                            <MrPeacock@gmail.com>
  ***************************************************************************/
- 
+
 /****************************************************************************
   Contains code from the func_xirr and related methods of financial.cpp 
   - KOffice 1.6 by Sascha Pfau.  Sascha agreed to relicense those methods under

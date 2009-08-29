@@ -1,5 +1,5 @@
 /***************************************************************************
-                          mymoneystoragexml.h  -  description
+                          mymoneystoragexml.h
                              -------------------
     begin                : Thu Oct 24 2002
     copyright            : (C) 2002 by Kevin Tambascio

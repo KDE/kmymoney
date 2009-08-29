@@ -3,8 +3,8 @@
                              -------------------
     copyright            : (C) 2000 by Michael Edwardes
                                2004 by Thomas Baumgart
-    email                : mte@users.sourceforge.net
-                           ipwizard@users.sourceforge.net
+    email                : <mte@users.sourceforge.net>
+                           <ipwizard@users.sourceforge.net>
  ***************************************************************************/
 
 /***************************************************************************

@@ -4,8 +4,8 @@
     copyright            : (C) 2005 by Andreas Nicolai
                            (C) 2007 by Thomas Baumgart
     author               : Andreas Nicolai, Thomas Baumgart
-    email                : ghorwin@users.sourceforge.net
-                           ipwizard@users.sourceforge.net
+    email                : <ghorwin@users.sourceforge.net>
+                           <ipwizard@users.sourceforge.net>
  ***************************************************************************/
 
 /***************************************************************************

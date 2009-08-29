@@ -3,7 +3,7 @@
                              -------------------
     copyright            : (C) 2005 by Tony Bloomfield
     author               : Tony Bloomfield
-    email                : tonybloom@users.sourceforge.net
+    email                : <tonybloom@users.sourceforge.net>
  ***************************************************************************/
 
 /***************************************************************************

@@ -2,7 +2,7 @@
                           knewaccountdlg.h
                              -------------------
     copyright            : (C) 2000 by Michael Edwardes
-    email                : mte@users.sourceforge.net
+    email                : <mte@users.sourceforge.net>
  ***************************************************************************/
 
 /***************************************************************************

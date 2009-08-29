@@ -4,8 +4,8 @@
     begin                : Fri Jul 23 2004
     copyright            : (C) 2004-2005 by Ace Jones
                            (C) 2007 Sascha Pfau
-    email                :  acejones@users.sourceforge.net
-                            MrPeacock@gmail.com
+    email                :  <acejones@users.sourceforge.net>
+                            <MrPeacock@gmail.com>
  ***************************************************************************/
 
 /****************************************************************************

@@ -3,7 +3,7 @@
                              -------------------
     copyright            : (C) 2007 by Thomas Baumgart
     author               : Thomas Baumgart
-    email                : ipwizard@users.sourceforge.net
+    email                : <ipwizard@users.sourceforge.net>
  ***************************************************************************/
 
 /***************************************************************************

@@ -4,7 +4,7 @@
     begin                : Sun May 5 2002
     copyright            : (C) 2000-2002 by Michael Edwardes
                                2002 Thomas Baumgart
-    email                : mte@users.sourceforge.net
+    email                : <mte@users.sourceforge.net>
                            Thomas Baumgart <ipwizard@users.sourceforge.net>
  ***************************************************************************/
 

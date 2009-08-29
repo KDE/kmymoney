@@ -5,7 +5,7 @@
     copyright            : (C) 2000-2002 by Michael Edwardes
                                     2005 by Andrea Nicolai
                                     2006 by Thomas Baumgart
-    email                : mte@users.sourceforge.net
+    email                : Michael Edwardes <mte@users.sourceforge.net>
                            Javier Campos Morales <javi_c@users.sourceforge.net>
                            Felix Rodriguez <frodriguez@users.sourceforge.net>
                            John C <thetacoturtle@users.sourceforge.net>

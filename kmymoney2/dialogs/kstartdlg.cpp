@@ -1,5 +1,13 @@
 /***************************************************************************
-                          KStartDlg.cpp  -  description
+                          KStartDlg.cpp
+                          --------------
+     copyright            : (C) 2002-2005 
+    author               : Michael Edwardes
+                           Thomas Baumgart
+                           Kevin Tambascio
+    email                : <mte@users.sourceforge.net>
+                           <ipwizard@users.sourceforge.net>
+                           <ktambascio@users.sourceforge.net>
  ***************************************************************************/
 
 /***************************************************************************
