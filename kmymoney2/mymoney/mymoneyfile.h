@@ -2,7 +2,7 @@
                           mymoneyfile.h
                              -------------------
     copyright            : (C) 2002, 2007 by Thomas Baumgart
-    email                : ipwizard@users.sourceforge.net
+    email                : <ipwizard@users.sourceforge.net>
  ***************************************************************************/
 
 /***************************************************************************

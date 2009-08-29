@@ -3,7 +3,7 @@
                              -------------------
     begin                : Wed May 9 2001
     copyright            : (C) 2001 by Michael Edwardes
-    email                : mte@users.sourceforge.net
+    email                : <mte@users.sourceforge.net>
                              Javier Campos Morales <javi_c@ctv.es>
                              Felix Rodriguez <frodriguez@mail.wesleyan.edu>
  ***************************************************************************/

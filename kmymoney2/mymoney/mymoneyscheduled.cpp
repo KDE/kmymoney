@@ -3,7 +3,7 @@
                              -------------------
     copyright            : (C) 2000-2002 by Michael Edwardes
                            (C) 2007 by Thomas Baumgart
-    email                : mte@users.sourceforge.net
+    email                : <mte@users.sourceforge.net>
                            Thomas Baumgart <ipwizard@users.sourceforge.net>
  ***************************************************************************/
 

@@ -2,7 +2,7 @@
                           mymoneyaccount.h
                           -------------------
     copyright            : (C) 2002 by Thomas Baumgart
-    email                : ipwizard@users.sourceforge.net
+    email                : <ipwizard@users.sourceforge.net>
  ***************************************************************************/
 
 /***************************************************************************

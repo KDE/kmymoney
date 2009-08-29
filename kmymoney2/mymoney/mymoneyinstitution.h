@@ -2,7 +2,7 @@
                           mymoneyinstitution.h
                           -------------------
     copyright            : (C) 2002-2005 by Thomas Baumgart
-    email                : ipwizard@users.sourceforge.net
+    email                : <ipwizard@users.sourceforge.net>
  ***************************************************************************/
 
 /***************************************************************************
