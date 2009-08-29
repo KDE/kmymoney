@@ -1661,7 +1661,7 @@ void KHomeView::showCashFlowSummary()
     }
 
     MyMoneyAccount acc = (*sched_it).account();
-    if(acc.id() != QString()) {
+    if(!acc.id().isEmpty()) {
       MyMoneyTransaction transaction = (*sched_it).transaction();
       // only show the entry, if it is still active
 
