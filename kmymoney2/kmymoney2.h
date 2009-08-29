@@ -22,7 +22,6 @@
 // QT Includes
 
 #include <QApplication>
-//Added by qt3to4:
 #include <Q3ValueList>
 #include <QLabel>
 #include <QByteArray>
@@ -810,7 +809,7 @@ public slots:
   bool slotStatementImport(const MyMoneyStatement& s);
 
   /**
-    * Essentially similiar to the above slot, except this will load the file
+    * Essentially similar to the above slot, except this will load the file
     * from disk first, given the URL.
     */
   bool slotStatementImport(const QString& url);

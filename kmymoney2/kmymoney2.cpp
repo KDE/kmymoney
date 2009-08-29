@@ -4045,7 +4045,7 @@ KMyMoneyUtils::EnterScheduleResultCodeE KMyMoney2App::enterSchedule(MyMoneySched
                     action = cdlg.action();
                     break;
                   }
-                  // the user has choosen 'cancel' during confirmation,
+                  // the user has chosen 'cancel' during confirmation,
                   // we go back to the editor
                   continue;
                 }
@@ -4058,7 +4058,7 @@ KMyMoneyUtils::EnterScheduleResultCodeE KMyMoney2App::enterSchedule(MyMoneySched
             } else {
               if(autoEnter) {
                 if(KMessageBox::warningYesNo(this, i18n("Are you sure you wish to stop this scheduled transaction from being entered into the register?\n\nKMyMoney will prompt you again next time it starts unless you manually enter it later.")) == KMessageBox::No) {
-                  // the user has choosen 'No' for the above question,
+                  // the user has chosen 'No' for the above question,
                   // we go back to the editor
                   continue;
                 }
@@ -4270,7 +4270,7 @@ void KMyMoney2App::slotPayeeDelete(void)
 
       newPayee = file->payee(payee_id);
 
-      // TODO : check if we have a report that explicitely uses one of our payees
+      // TODO : check if we have a report that explicitively uses one of our payees
       //        and issue an appropriate warning
       try {
         QList<MyMoneySplit>::iterator s_it;
@@ -5945,7 +5945,7 @@ void KMyMoney2App::slotSelectSchedule(const MyMoneySchedule& schedule)
 
 void KMyMoney2App::slotDataChanged(void)
 {
-  // As this method is called everytime the MyMoneyFile instance
+  // As this method is called every time the MyMoneyFile instance
   // notifies a modification, it's the perfect place to start the timer if needed
   if (m_autoSaveEnabled && !m_autoSaveTimer->isActive()) {
     m_autoSaveTimer->start(m_autoSavePeriod * 60 * 1000, true);  //miliseconds

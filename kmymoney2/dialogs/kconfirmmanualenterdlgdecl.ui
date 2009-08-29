@@ -75,7 +75,7 @@
             <item>
               <widget class="QRadioButton" name="m_setRadio">
                 <property name="text">
-                  <string>Set all further occurences in this schedule to be these values.</string>
+                  <string>Set all further occurrences in this schedule to be these values.</string>
                 </property>
               </widget>
             </item>
