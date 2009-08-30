@@ -1,11 +1,10 @@
 /***************************************************************************
                           kmymoney2.cpp
                              -------------------
-    copyright            : (C) 2000 by Michael Edwardes
-                           (C) 2007 by Thomas Baumgart
-    email                : <mte@users.sourceforge.net>
-                           <ipwizard@users.sourceforge.net>
- ***************************************************************************/
+    copyright            : (C) 2000 by Michael Edwardes <mte@users.sourceforge.net>
+                           (C) 2007 by Thomas Baumgart <ipwizard@users.sourceforge.net>
+
+****************************************************************************/
 
 /***************************************************************************
  *                                                                         *

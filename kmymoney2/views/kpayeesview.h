@@ -2,16 +2,14 @@
                           kpayeesview.h
                           -------------
     begin                : Thu Jan 24 2002
-    copyright            : (C) 2000-2002 by Michael Edwardes
-                                    2005 by Andrea Nicolai
-                                    2006 by Thomas Baumgart
-    email                : Michael Edwardes <mte@users.sourceforge.net>
+    copyright            : (C) 2000-2002 by Michael Edwardes <mte@users.sourceforge.net>
+                                    2005 by Andrea Nicolai <Andreas.Nicolai@gmx.net>
+                                    2006 by Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Javier Campos Morales <javi_c@users.sourceforge.net>
                            Felix Rodriguez <frodriguez@users.sourceforge.net>
                            John C <thetacoturtle@users.sourceforge.net>
-                           Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
-                           Andreas Nicolai <Andreas.Nicolai@gmx.net>
+
 ***************************************************************************/
 
 /***************************************************************************
