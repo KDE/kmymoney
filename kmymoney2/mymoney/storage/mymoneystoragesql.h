@@ -88,8 +88,8 @@ typedef enum databaseTypeE { // database (driver) type
   Db2 = 0, //
   Interbase, //
   Mysql, //
-  Oracle8, //
-  ODBC3, //
+  Oracle, //
+  ODBC, //
   Postgresql, //
   Sqlite, //
   Sybase, //
@@ -486,14 +486,14 @@ public:
   bool writeFile(void);
 
   // check database type
-  bool isDb2() const { return (m_dbType == Db2);};
-  bool isInterbase() const { return (m_dbType == Interbase);};
-  bool isMysql() const { return (m_dbType == Mysql);};
-  bool isOracle8() const { return (m_dbType == Oracle8);};
-  bool isODBC3() const { return (m_dbType == ODBC3);};
-  bool isPostgresql() const { return (m_dbType == Postgresql);};
-  bool isSybase() const { return (m_dbType == Sybase);};
-  bool isSqlite3() const { return (m_dbType == Sqlite3);};
+  inline bool isDb2() const { return (m_dbType == Db2);};
+  inline bool isInterbase() const { return (m_dbType == Interbase);};
+  inline bool isMysql() const { return (m_dbType == Mysql);};
+  inline bool isOracle() const { return (m_dbType == Oracle);};
+  inline bool isODBC() const { return (m_dbType == ODBC);};
+  inline bool isPostgresql() const { return (m_dbType == Postgresql);};
+  inline bool isSybase() const { return (m_dbType == Sybase);};
+  inline bool isSqlite3() const { return (m_dbType == Sqlite3);};
 
     /**
    * MyMoneyStorageSql generalized error routine

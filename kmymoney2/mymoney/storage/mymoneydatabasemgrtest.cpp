@@ -86,13 +86,11 @@ void MyMoneyDatabaseMgrTest::testCreateDb() {
     if (pwd != 0) {
       userName = QString(pwd->pw_name);
     }
-    //"QMYSQL3"
-    //"QPSQL7"
-    //"QSQLITE3"
+
     m_url = "sql://" + userName + "@localhost/kmm_test_driver?driver="
-                     //"QPSQL7&mode=single";
+                     //"QPSQL&mode=single";
                      "QSQLITE&mode=single";
-                     //"QMYSQL3&mode=single";
+                     //"QMYSQL&mode=single";
                      //+ *it + "&mode=single";
     KSharedPtr <MyMoneyStorageSql> sql = m->connectToDatabase(m_url);
     CPPUNIT_ASSERT(0 != sql);
