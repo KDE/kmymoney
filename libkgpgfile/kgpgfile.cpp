@@ -122,7 +122,7 @@ bool KGPGFile::open(int mode)
 
 bool KGPGFile::open(int mode, const QString& cmdArgs, bool skipPasswd)
 {
-  bool useOwnPassphrase = (getenv("GPG_AGENT_INFO") == 0);
+  bool useOwnPassphrase = (qgetenv("GPG_AGENT_INFO") == 0);
 
   // qDebug("KGPGFile::open(%d)", mode);
   m_errmsg.resize(1);
