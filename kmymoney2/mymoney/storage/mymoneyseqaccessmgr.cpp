@@ -2,11 +2,10 @@
                           mymoneyseqaccessmgr.cpp
                              -------------------
     begin                : Sun May 5 2002
-    copyright            : (C) 2000-2002 by Michael Edwardes
-                               2002 Thomas Baumgart
-    email                : <mte@users.sourceforge.net>
-                           Thomas Baumgart <ipwizard@users.sourceforge.net>
- ***************************************************************************/
+    copyright            : (C) 2000-2002 by Michael Edwardes <mte@users.sourceforge.net>
+                               2002 Thomas Baumgart <ipwizard@users.sourceforge.net>
+
+***************************************************************************/
 
 /***************************************************************************
  *                                                                         *

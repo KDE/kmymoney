@@ -2,8 +2,7 @@
                           pivottable.h
                              -------------------
     begin                : Sat May 22 2004
-    copyright            : (C) 2004-2005 by Ace Jones
-    email                : <ace.j@hotpop.com>
+    copyright            : (C) 2004-2005 by Ace Jones <ace.j@hotpop.com>
                            Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Alvaro Soliverez <asoliverez@gmail.com>
  ***************************************************************************/

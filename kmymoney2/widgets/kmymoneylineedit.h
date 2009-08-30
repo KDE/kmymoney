@@ -2,13 +2,12 @@
                           kmymoneylineedit.h  -  description
                              -------------------
     begin                : Wed May 9 2001
-    copyright            : (C) 2001 by Michael Edwardes
-                               2006 by Thomas Baumgart
-    email                : <mte@users.sourceforge.net>
+    copyright            : (C) 2001 by Michael Edwardes <mte@users.sourceforge.net>
+                               2006 by Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Javier Campos Morales <javi_c@ctv.es>
                            Felix Rodriguez <frodriguez@mail.wesleyan.edu>
-                           Thomas Baumgart <ipwizard@users.sourceforge.net>
- ***************************************************************************/
+
+****************************************************************************/
 
 /***************************************************************************
  *                                                                         *

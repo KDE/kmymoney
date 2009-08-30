@@ -2,11 +2,10 @@
                           listtable.cpp
                          -------------------
     begin                : Sat 28 jun 2008
-    copyright            : (C) 2004-2005 by Ace Jones
-                               2008 by Alvaro Soliverez
-    email                :  <acejones@users.sourceforge.net>
-                            <asoliverez@gmail.com>
- ***************************************************************************/
+    copyright            : (C) 2004-2005 by Ace Jones <acejones@users.sourceforge.net>
+                               2008 by Alvaro Soliverez <asoliverez@gmail.com>
+
+***************************************************************************/
 
 /***************************************************************************
  *                                                                         *

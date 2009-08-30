@@ -1,11 +1,10 @@
 /***************************************************************************
                           mymoneyinstitution.cpp
                           -------------------
-    copyright            : (C) 2001 by Michael Edwardes,
-                               2002-2005 by Thomas Baumgart
-    email                : <mte@users.sourceforge.net>
-                           <ipwizard@users.sourceforge.net>
- ***************************************************************************/
+    copyright            : (C) 2001 by Michael Edwardes <mte@users.sourceforge.net>
+                               2002-2005 by Thomas Baumgart <ipwizard@users.sourceforge.net>
+
+***************************************************************************/
 
 /***************************************************************************
  *                                                                         *

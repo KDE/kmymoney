@@ -2,11 +2,10 @@
                           mymoneystoragexml.cpp  -  description
                              -------------------
     begin                : Thu Oct 24 2002
-    copyright            : (C) 2002 by Kevin Tambascio
-                           (C) 2004 by Thomas Baumgart
-    email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           Kevin Tambascio <ktambascio@users.sourceforge.net>
- ***************************************************************************/
+    copyright            : (C) 2002 by Kevin Tambascio <ktambascio@users.sourceforge.net>
+                           (C) 2004 by Thomas Baumgart <ipwizard@users.sourceforge.net>
+
+***************************************************************************/
 
 /***************************************************************************
  *                                                                         *

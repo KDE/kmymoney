@@ -1,11 +1,10 @@
 /***************************************************************************
                           mymoneypayee.h
                              -------------------
-    copyright            : (C) 2000 by Michael Edwardes
-                               2005 by Thomas Baumgart
-    email                : <mte@users.sourceforge.net>
-                           <ipwizard@users.sourceforge.net>
- ***************************************************************************/
+    copyright            : (C) 2000 by Michael Edwardes <mte@users.sourceforge.net>
+                               2005 by Thomas Baumgart <ipwizard@users.sourceforge.net>
+
+***************************************************************************/
 
 /***************************************************************************
  *                                                                         *

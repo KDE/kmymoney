@@ -1,9 +1,8 @@
 /***************************************************************************
                           kgncpricesourcedlg.h
                              -------------------
-    copyright            : (C) 2005 by Ace Jones
-    author               : Tony Bloomfield
-    email                : <tonybloom@users.sourceforge.net>
+    copyright            : (C) 2005 by Tony Bloomfield <tonybloom@users.sourceforge.net>
+
  ***************************************************************************/
 
 /***************************************************************************

@@ -1,12 +1,10 @@
 /***************************************************************************
                           kpayeereassigndlg.cpp
                              -------------------
-    copyright            : (C) 2005 by Andreas Nicolai
-                           (C) 2007 by Thomas Baumgart
-    author               : Andreas Nicolai, Thomas Baumgart
-    email                : <ghorwin@users.sourceforge.net>
-                           <ipwizard@users.sourceforge.net>
- ***************************************************************************/
+    copyright            : (C) 2005 by Andreas Nicolai <ghorwin@users.sourceforge.net>
+                           (C) 2007 by Thomas Baumgart <ipwizard@users.sourceforge.net>
+
+***************************************************************************/
 
 /***************************************************************************
  *                                                                         *
