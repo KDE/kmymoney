@@ -355,9 +355,9 @@ KPayeesView::KPayeesView(QWidget *parent) :
   // never show horizontal scroll bars
   m_transactionView->setHScrollBarMode(Q3ScrollView::AlwaysOff);
 
-  m_payeesList->addColumn(i18n("Name"));
+  m_payeesList->addColumn(i18nc("Name", "Payee name"));
 
-  KGuiItem updateButtonItem( i18n("Update"),
+  KGuiItem updateButtonItem( i18nc("Update", "Update payee"),
                     KIcon("dialog-ok"),
                     i18n("Accepts the entered data and stores it"),
                     i18n("Use this to accept the modified data."));

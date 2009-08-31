@@ -591,9 +591,9 @@ void KHomeView::showPayments(void)
         m_html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");
         m_html += "<td>";
         if(m_showAllSchedules) {
-          m_html += link(VIEW_SCHEDULE,  QString("?mode=%1").arg("reduced")) + i18n("Less...") + linkend();
+          m_html += link(VIEW_SCHEDULE,  QString("?mode=%1").arg("reduced")) + i18nc("Less...", "Show less schedules on the list") + linkend();
         } else {
-          m_html += link(VIEW_SCHEDULE,  QString("?mode=%1").arg("full")) + i18n("More...") + linkend();
+          m_html += link(VIEW_SCHEDULE,  QString("?mode=%1").arg("full")) + i18nc("More...", "Show more schedules on the list") + linkend();
         }
         m_html += "</td><td></td><td></td><td></td><td></td>";
         m_html += "</tr>";
@@ -976,7 +976,7 @@ void KHomeView::showForecast(void)
     for(i = 0; (i*m_forecast.accountsCycle() + beginDay) <= m_forecast.forecastDays(); ++i) {
       m_html += QString("<td width=\"%1%\" class=\"right\">").arg(colWidth);
 
-      m_html += i18n("%1 days",i*m_forecast.accountsCycle() + beginDay);
+      m_html += i18nc("%1 days", "Forecast days", i*m_forecast.accountsCycle() + beginDay);
       m_html += "</td>";
       colspan++;
     }

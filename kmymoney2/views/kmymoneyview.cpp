@@ -1011,7 +1011,7 @@ void KMyMoneyView::saveToLocalFile(KSaveFile* qfile, IMyMoneyStorageFormat* pWri
     if(KMyMoneyGlobalSettings::encryptRecover()) {
       encryptRecover = true;
       if(!KGPGFile::keyAvailable(QString(RECOVER_KEY_ID))) {
-        KMessageBox::sorry(this, QString("<p>")+i18n("You have selected to encrypt your data also with the KMyMoney recover key, but the key with id</p><p><center><b>%1</b></center></p>has not been found in your keyring at this time. Please make sure to import this key into your keyring. You can find it on the <a href=\"http://kmymoney2.sourceforge.net/\">KMyMoney web-site</a>. This time your data will not be encrypted with the KMyMoney recover key.",QString( RECOVER_KEY_ID) ), i18n("GPG-Key not found"));
+        KMessageBox::sorry(this, QString("<p>")+i18n("You have selected to encrypt your data also with the KMyMoney recover key, but the key with id</p><p><center><b>%1</b></center></p><p>has not been found in your keyring at this time. Please make sure to import this key into your keyring. You can find it on the <a href=\"http://kmymoney2.sourceforge.net/\">KMyMoney web-site</a>. This time your data will not be encrypted with the KMyMoney recover key.</p>",QString( RECOVER_KEY_ID) ), i18n("GPG-Key not found"));
         encryptRecover = false;
       }
     }
@@ -1020,7 +1020,7 @@ void KMyMoneyView::saveToLocalFile(KSaveFile* qfile, IMyMoneyStorageFormat* pWri
     QStringList::const_iterator it_s;
     for(it_s = keys.constBegin(); it_s != keys.constEnd(); ++it_s) {
       if(!KGPGFile::keyAvailable(*it_s)) {
-        KMessageBox::sorry(this, QString("<p>")+i18n("You have specified to encrypt your data for the user-id</p><p><center><b>%1</b>.</center></p>Unfortunately, a valid key for this user-id was not found in your keyring. Please make sure to import a valid key for this user-id. This time, encryption is disabled.",*it_s), i18n("GPG-Key not found"));
+        KMessageBox::sorry(this, QString("<p>")+i18n("You have specified to encrypt your data for the user-id</p><p><center><b>%1</b>.</center></p><p>Unfortunately, a valid key for this user-id was not found in your keyring. Please make sure to import a valid key for this user-id. This time, encryption is disabled.</p>",*it_s), i18n("GPG-Key not found"));
         encryptedOk = false;
       }
     }
@@ -1901,9 +1901,7 @@ void KMyMoneyView::fixLoanAccount_0(MyMoneyAccount acc)
   || acc.value("schedule").isEmpty()
   || acc.value("fixed-interest").isEmpty()) {
     KMessageBox::information(this,
-        i18n("The account \"%1\" was previously created as loan account but some information "
-             "is missing. The new loan wizard will be started to collect all relevant "
-             "information. Please use a KMyMoney version >= 0.8.7 and < 0.9 to correct the problem."
+        i18n("<p>The account \"%1\" was previously created as loan account but some information is missing.</p><p>The new loan wizard will be started to collect all relevant information.</p><p>Please use a KMyMoney version >= 0.8.7 and < 0.9 to correct the problem.</p>"
              ,acc.name()),
         i18n("Account problem"));
 

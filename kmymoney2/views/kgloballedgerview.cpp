@@ -714,7 +714,7 @@ void KGlobalLedgerView::updateSummaryLine(const QMap<QString, MyMoneyMoney>& act
   if(isReconciliationAccount()) {
     if(m_account.accountType() != MyMoneyAccount::Investment) {
       m_leftSummaryLabel->setText(i18n("Statement: %1", d->m_endingBalance.formatMoney("", d->m_precision)));
-      m_centerSummaryLabel->setText(i18n("Cleared: %1", clearedBalance[m_account.id()].formatMoney("", d->m_precision)));
+      m_centerSummaryLabel->setText(i18nc("Cleared: %1", "Cleared balance", clearedBalance[m_account.id()].formatMoney("", d->m_precision)));
       m_rightSummaryLabel->setText(i18n("Difference: %1", (clearedBalance[m_account.id()] - d->m_endingBalance).formatMoney("", d->m_precision)));
     }
   } else {
@@ -729,7 +729,7 @@ void KGlobalLedgerView::updateSummaryLine(const QMap<QString, MyMoneyMoney>& act
 
     m_rightSummaryLabel->setPaletteForegroundColor(m_leftSummaryLabel->paletteForegroundColor());
     if(m_account.accountType() != MyMoneyAccount::Investment) {
-      m_centerSummaryLabel->setText(i18n("Cleared: %1", clearedBalance[m_account.id()].formatMoney("", d->m_precision)));
+      m_centerSummaryLabel->setText(i18nc("Cleared: %1", "Cleared balance", clearedBalance[m_account.id()].formatMoney("", d->m_precision)));
       m_rightSummaryLabel->setText(i18n("Balance: %1", actBalance[m_account.id()].formatMoney("", d->m_precision)));
       bool showNegative = actBalance[m_account.id()].isNegative();
       if(m_account.accountGroup() == MyMoneyAccount::Liability && !actBalance[m_account.id()].isZero())
