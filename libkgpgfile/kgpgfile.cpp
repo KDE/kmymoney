@@ -16,6 +16,11 @@
  ***************************************************************************/
 
 
+// ----------------------------------------------------------------------------
+// Project Includes
+
+#include "kgpgfile.h"
+
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -40,11 +45,6 @@
 #include <kpassworddialog.h>
 #include <klibloader.h>
 //#include <kdialog.h>
-
-// ----------------------------------------------------------------------------
-// Project Includes
-
-#include "kgpgfile.h"
 
 #if 0
 class KGPGFileFactory : public KLibFactory

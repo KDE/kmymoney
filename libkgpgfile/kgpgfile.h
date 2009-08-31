@@ -66,9 +66,9 @@ class KGPGFile : public QFile
   Q_OBJECT
 
 public:
-  KGPGFile(const QString& fname = "",
-           const QString& homedir = "~/.gnupg",
-           const QString& options = "");
+  explicit KGPGFile(const QString& fname = "",
+                    const QString& homedir = "~/.gnupg",
+                    const QString& options = "");
 
   ~KGPGFile();
 
@@ -129,7 +129,7 @@ public:
 
   /**
     * This function returns a list of the secret keys contained
-    * in the keyring. Each list item is divided into two fields
+    * in the keyring. Each list item is devided into two fields
     * separated by a colon (':'). The first field contains the
     * key id, the second field the name. The list may contain
     * multiple entries with the same key-id and different names.
@@ -142,7 +142,7 @@ public:
 
   /**
     * This function returns a list of the public keys contained
-    * in the keyring. Each list item is divided into two fields
+    * in the keyring. Each list item is devided into two fields
     * separated by a colon (':'). The first field contains the
     * key id, the second field the name. The list may contain
     * multiple entries with the same key-id and different names.
