@@ -151,12 +151,11 @@ allow us to test the structure, if not the data content, of the file.
 
 #include <qdatastream.h>
 //Added by qt3to4:
-#include <Q3TextStream>
+#include <QTextStream>
 class QIODevice;
 #include <QObject>
-#include <q3valuelist.h>
-#include <q3ptrlist.h>
-#include <q3ptrstack.h>
+#include <QList>
+#include <QStack>
 #include <QtXml>
 #include <QDateTime>
 #include <QTextCodec>
@@ -248,7 +247,7 @@ protected:
   const QString *m_dataElementList; // ditto for data elements
   unsigned int m_dataElementListCount;
   QString *m_dataPtr; // pointer to m_v variable for current data item
-  mutable Q3PtrList<QString> m_v; // storage for variable pointers
+  mutable QList<QString*> m_v; // storage for variable pointers
 
   unsigned int m_state; // effectively, the index to subElementList or dataElementList, whichever is currently in use
 
@@ -338,7 +337,7 @@ private:
   // data elements
   enum KvpDataEls {KEY, VALUE, END_Kvp_DELS };
   virtual void dataEl (const QXmlAttributes&);
-  mutable Q3PtrList<GncObject> m_kvpList;
+  mutable QList<GncObject*> m_kvpList;
   QString m_kvpType;  // type is an XML attribute
 };
 // ************* GncLot********************************************
@@ -430,7 +429,7 @@ private:
   // data elements
   enum AccountDataEls {ID, NAME, DESC, TYPE, PARENT, END_Account_DELS };
   GncCmdtySpec *m_vpCommodity;
-  Q3PtrList<GncObject> m_kvpList;
+  QList<GncObject*> m_kvpList;
 };
 // ************* GncSplit********************************************
 class GncSplit : public GncObject {
@@ -485,9 +484,9 @@ private:
   enum TransactionDataEls {ID, NO, DESC, END_Transaction_DELS };
   GncCmdtySpec *m_vpCurrency;
   GncDate *m_vpDateEntered, *m_vpDatePosted;
-  mutable Q3PtrList<GncObject> m_splitList;
+  mutable QList<GncObject*> m_splitList;
   bool m_template; // true if this is a template for scheduled transaction
-  mutable Q3PtrList<GncObject> m_kvpList;
+  mutable QList<GncObject*> m_kvpList;
 };
 
 // ************* GncTemplateSplit********************************************
@@ -513,7 +512,7 @@ private:
   virtual void endSubEl(GncObject *);
   // data elements
   enum TemplateSplitDataEls {ID, MEMO, RECON, VALUE, QTY, ACCT, END_TemplateSplit_DELS };
-  mutable Q3PtrList<GncObject> m_kvpList;
+  mutable QList<GncObject*> m_kvpList;
 };
 // ************* GncSchedule********************************************
 class GncFreqSpec;
@@ -556,7 +555,7 @@ private:
                         NUMOCC, REMOCC, TEMPLID, END_Schedule_DELS };
   GncDate *m_vpStartDate, *m_vpLastDate, *m_vpEndDate;
   GncFreqSpec *m_vpFreqSpec;
-  mutable Q3PtrList<GncRecurrence> m_vpRecurrence; // gnc handles multiple occurrences
+  mutable QList<GncRecurrence*> m_vpRecurrence; // gnc handles multiple occurrences
   GncSchedDef *m_vpSchedDef;
 };
 // ************* GncFreqSpec********************************************
@@ -576,7 +575,7 @@ private:
   // data elements
   enum FreqSpecDataEls {INTVT, MONTHLY, DAILY, WEEKLY, INTVI, INTVO, INTVD, END_FreqSpec_DELS};
   virtual void terminate();
-  mutable Q3PtrList<GncObject> m_fsList;
+  mutable QList<GncObject*> m_fsList;
 };
 
 // ************* GncRecurrence********************************************
@@ -637,7 +636,7 @@ protected:
 private:
   QXmlInputSource *m_source;
   QXmlSimpleReader *m_reader;
-  Q3PtrStack<GncObject> m_os; // stack of sub objects
+  QStack<GncObject*> m_os; // stack of sub objects
   GncObject *m_co;           // current object, for ease of coding (=== m_os.top)
   MyMoneyGncReader *pMain;  // the 'main' pointer, to pass on to objects
   bool m_headerFound; // check for gnc-v2 header
@@ -655,7 +654,7 @@ protected:
   friend class MyMoneyGncReader;
   QString source; // 'type of message
   unsigned int code; // to identify actual message
-  Q3ValueList<QString> args; // variable arguments
+  QList<QString> args; // variable arguments
 };
 
 class GncMessages {
@@ -818,12 +817,12 @@ private:
   // wind up when all done
   void terminate();
   QString buildReportSection (const QString&);
-  bool writeReportToFile (const Q3ValueList<QString>&);
+  bool writeReportToFile (const QList<QString>&);
   // main storage
 #ifndef _GNCFILEANON
   IMyMoneyStorage *m_storage;
 #else
-  Q3TextStream oStream;
+  QTextStream oStream;
 #endif // _GNCFILEANON
   XmlReader *m_xr;
   /** to hold the callback pointer for the progress bar */
@@ -882,13 +881,13 @@ private:
   /**
   * A holding area for template txs while we're waiting for the schedules
   */
-  Q3PtrList<GncTransaction> m_templateList;
+  QList<GncTransaction*> m_templateList;
   /** Hold a list of suspect schedule ids for later processing? */
-  Q3ValueList<QString> m_suspectList;
+  QList<QString> m_suspectList;
   /**
     * To hold message data till final report
     */
-  Q3PtrList<GncMessageArgs> m_messageList;
+  QList<GncMessageArgs*> m_messageList;
   GncMessages *m_messageTexts;
   /**
     * Internal utility functions
