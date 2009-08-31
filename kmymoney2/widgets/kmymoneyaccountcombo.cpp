@@ -182,7 +182,7 @@ void KMyMoneyAccountCombo::mouseReleaseEvent(QMouseEvent *e)
   }
   if ( !m_mlbDown )
       return;
-  m_mlbDown = FALSE;                            // left mouse button up
+  m_mlbDown = false;                            // left mouse button up
   emit released();
   if ( rect().contains( e->pos() ) ) {              // mouse release on button
     emit clicked();
