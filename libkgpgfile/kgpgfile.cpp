@@ -20,6 +20,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <qglobal.h>
 #include <QFile>
 #include <QDir>
 #include <QString>
@@ -122,7 +123,7 @@ bool KGPGFile::open(int mode)
 
 bool KGPGFile::open(int mode, const QString& cmdArgs, bool skipPasswd)
 {
-  bool useOwnPassphrase = (qgetenv("GPG_AGENT_INFO") == 0);
+  bool useOwnPassphrase = qgetenv("GPG_AGENT_INFO").isEmpty();
 
   // qDebug("KGPGFile::open(%d)", mode);
   m_errmsg.resize(1);
