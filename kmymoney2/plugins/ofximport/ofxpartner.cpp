@@ -73,7 +73,6 @@ void ValidateIndexCache(void)
 {
   // TODO (Ace) Check whether these files exist and are recent enough before getting them again
 
-  struct stat filestats;
   KUrl fname;
 
   QMap<QString, QString> attr;
