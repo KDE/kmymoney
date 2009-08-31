@@ -502,7 +502,7 @@ void KMyMoney2App::initActions(void)
   account_online_unmap->setText(i18n("Unmap account..."));
   connect(account_online_unmap, SIGNAL(triggered()), this, SLOT(slotAccountUnmapOnline()));
 
-  KActionMenu* menu = new KActionMenu(KIcon("view-refresh"), i18n("Update"), actionCollection()); //, "account_online_update_menu");
+  KActionMenu* menu = new KActionMenu(KIcon("view-refresh"), i18nc("Update", "Update online accounts menu"), actionCollection());
   // activating the menu button is the same as selecting the current account
   connect( menu, SIGNAL( activated() ), this, SLOT(slotAccountUpdateOnline()));
 
@@ -2778,7 +2778,7 @@ void KMyMoney2App::slotCategoryNew(const QString& name, QString& id)
 void KMyMoney2App::slotCategoryNew(MyMoneyAccount& account, const MyMoneyAccount& parent)
 {
   if(KMessageBox::questionYesNo(this,
-    QString("<qt>%1</qt>").arg(i18n("The category <b>%1</b> currently does not exist. Do you want to create it?<p><i>The parent account will default to <b>%2</b> but can be changed in the following dialog</i>.",account.name(),parent.name())), i18n("Create category"),
+    QString("<qt>%1</qt>").arg(i18n("<p>The category <b>%1</b> currently does not exist. Do you want to create it?</p><p><i>The parent account will default to <b>%2</b> but can be changed in the following dialog</i>.</p>",account.name(),parent.name())), i18n("Create category"),
     KStandardGuiItem::yes(), KStandardGuiItem::no(), "CreateNewCategories") == KMessageBox::Yes) {
     createCategory(account, parent);
   }
@@ -4448,7 +4448,7 @@ void KMyMoney2App::slotBudgetNew(void)
 {
   QDate date = QDate::currentDate();
   date.setYMD(date.year(), 1, 1);
-  QString newname = i18n("Budget %1",QString::number(date.year()));
+  QString newname = i18n("Budget <numid>%1</numid>",QString::number(date.year()));
 
   MyMoneyBudget budget;
 
@@ -4458,7 +4458,7 @@ void KMyMoney2App::slotBudgetNew(void)
     // Exception thrown when the name is not found
     while (1) {
       MyMoneyFile::instance()->budgetByName(newname);
-      newname = i18n("Budget %1 (%2)",QString::number(date.year()), QString::number(i++));
+      newname = i18n("Budget <numid>%1</numid> (<numid>%2</numid>)",QString::number(date.year()), QString::number(i++));
     }
   } catch(MyMoneyException *e) {
     // all ok, the name is unique
@@ -4575,7 +4575,7 @@ void KMyMoney2App::slotBudgetForecast(void)
       MyMoneyBudget budget = m_selectedBudgets.first();
       bool calcBudget = budget.getaccounts().count() == 0;
       if(!calcBudget) {
-        if(KMessageBox::warningContinueCancel(0, i18n("The current budget already contains data. Continuing will replace all current values of this budget."), i18n("Warning")) == KMessageBox::Continue)
+        if(KMessageBox::warningContinueCancel(0, i18n("The current budget already contains data. Continuing will replace all current values of this budget."), i18nc("Warning", "Warning message box")) == KMessageBox::Continue)
           calcBudget = true;
       }
 
@@ -4605,7 +4605,7 @@ void KMyMoney2App::slotBudgetForecast(void)
 
 void KMyMoney2App::slotKDELanguageSettings(void)
 {
-  KMessageBox::information(this, i18n("Please be aware that changes made in the following dialog affect all KDE applications not only KMyMoney."), i18n("Warning"), "LanguageSettingsWarning");
+  KMessageBox::information(this, i18n("Please be aware that changes made in the following dialog affect all KDE applications not only KMyMoney."), i18nc("Warning", "Warning message box"), "LanguageSettingsWarning");
 
   QStringList args;
   args << "language";
@@ -4617,51 +4617,6 @@ void KMyMoney2App::slotKDELanguageSettings(void)
 
 void KMyMoney2App::slotNewFeature(void)
 {
-  // accounts
-  // transactions
-  // budgets
-  // currency
-  // institutions
-  // payees
-  // schedules
-
-  // slotStatementImport();
-#if 0
-  if(m_selectedBudgets.size() == 1) {
-    MyMoneyFileTransaction ft;
-    try {
-      MyMoneyBudget budget = m_selectedBudgets[0];
-      bool calcBudget = budget.getaccounts().count() == 0;
-      if(!calcBudget) {
-        if(KMessageBox::warningContinueCancel(0, i18n("The current budget already contains data. Continuing will replace all current values of this budget."), i18n("Warning")) == KMessageBox::Continue)
-          calcBudget = true;
-      }
-
-      if(calcBudget) {
-        QDate historyStart;
-        QDate historyEnd;
-        QDate budgetStart;
-        QDate budgetEnd;
-
-        budgetStart = budget.budgetStart();
-        budgetEnd = budgetStart.addYears(1).addDays(-1);
-        historyStart = budgetStart.addYears(-1);
-        historyEnd = budgetEnd.addYears(-1);
-
-        MyMoneyForecast forecast;
-        budget = forecast.createBudget (historyStart, historyEnd, budgetStart, budgetEnd, true);
-
-        budget.setName(m_selectedBudgets[0].name());
-        MyMoneyFile::instance()->removeBudget(m_selectedBudgets[0]);
-        MyMoneyFile::instance()->addBudget(budget);
-        ft.commit();
-      }
-    } catch(MyMoneyException *e) {
-      KMessageBox::detailedSorry(0, i18n("Error"), i18n("Unable to modify budget: %1, thrown in %2:%3",e->what(),e->file(),e->line()));
-      delete e;
-    }
-  }
-#endif
 }
 
 void KMyMoney2App::slotTransactionsDelete(void)
@@ -4903,10 +4858,10 @@ void KMyMoney2App::slotTransactionsCancelOrEnter(bool& okToSelect)
         // okToSelect is preset to true if a cancel of the dialog is useful and false if it is not
         int rc;
         if(okToSelect == true) {
-          rc = KMessageBox::warningYesNoCancel(0, QString("<p>")+i18n("Do you really want to cancel editing this transaction without saving it?<p>- <b>Yes</b> cancels editing the transaction<br>- <b>No</b> saves the transaction prior to cancelling and<br>- <b>Cancel</b> returns to the transaction editor.<p>You can also select an option to save the transaction automatically when e.g. selecting another transaction."), i18n("Cancel transaction edit"), KStandardGuiItem::yes(), KStandardGuiItem::no(), KGuiItem(dontShowAgain));
+          rc = KMessageBox::warningYesNoCancel(0, QString("<p>")+i18n("Do you really want to cancel editing this transaction without saving it?</p>- <b>Yes</b> cancels editing the transaction<br/>- <b>No</b> saves the transaction prior to cancelling and<br/>- <b>Cancel</b> returns to the transaction editor.<p>You can also select an option to save the transaction automatically when e.g. selecting another transaction.</p>"), i18n("Cancel transaction edit"), KStandardGuiItem::yes(), KStandardGuiItem::no(), KGuiItem(dontShowAgain));
 
         } else {
-          rc = KMessageBox::warningYesNo(0, QString("<p>")+i18n("Do you really want to cancel editing this transaction without saving it?<p>- <b>Yes</b> cancels editing the transaction<br>- <b>No</b> saves the transaction prior to cancelling.<p>You can also select an option to save the transaction automatically when e.g. selecting another transaction."), i18n("Cancel transaction edit"), KStandardGuiItem::yes(), KStandardGuiItem::no(), dontShowAgain);
+          rc = KMessageBox::warningYesNo(0, QString("<p>")+i18n("Do you really want to cancel editing this transaction without saving it?</p>- <b>Yes</b> cancels editing the transaction<br/>- <b>No</b> saves the transaction prior to cancelling.<p>You can also select an option to save the transaction automatically when e.g. selecting another transaction.</p>"), i18n("Cancel transaction edit"), KStandardGuiItem::yes(), KStandardGuiItem::no(), dontShowAgain);
         }
 
         switch(rc) {
