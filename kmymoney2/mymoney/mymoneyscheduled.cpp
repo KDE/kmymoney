@@ -1270,11 +1270,11 @@ MyMoneySchedule::occurrenceE MyMoneySchedule::stringToOccurrence(const QString& 
   MyMoneySchedule::occurrenceE occurrence = MyMoneySchedule::OCCUR_ANY;
   QString tmp = text.toLower();
 
-  if(tmp == i18n("Once").toLower())
+  if(tmp == i18nc("Once", "Occurs once").toLower())
     occurrence = MyMoneySchedule::OCCUR_ONCE;
-  else if(tmp == i18n("Daily").toLower())
+  else if(tmp == i18nc("Daily", "Occurs daily").toLower())
     occurrence = MyMoneySchedule::OCCUR_DAILY;
-  else if(tmp == i18n("Weekly").toLower())
+  else if(tmp == i18nc("Weekly", "Occurs weekly").toLower())
     occurrence = MyMoneySchedule::OCCUR_WEEKLY;
   else if(tmp == i18n("Fortnightly").toLower())
     occurrence = MyMoneySchedule::OCCUR_FORTNIGHTLY;
@@ -1288,7 +1288,7 @@ MyMoneySchedule::occurrenceE MyMoneySchedule::stringToOccurrence(const QString& 
     occurrence = MyMoneySchedule::OCCUR_EVERYFOURWEEKS;
   else if(tmp == i18n("Every thirty days").toLower())
     occurrence = MyMoneySchedule::OCCUR_EVERYTHIRTYDAYS;
-  else if(tmp == i18n("Monthly").toLower())
+  else if(tmp == i18nc("Monthly", "Occurs monthly").toLower())
     occurrence = MyMoneySchedule::OCCUR_MONTHLY;
   else if(tmp == i18n("Every eight weeks").toLower())
     occurrence = MyMoneySchedule::OCCUR_EVERYEIGHTWEEKS;
@@ -1302,7 +1302,7 @@ MyMoneySchedule::occurrenceE MyMoneySchedule::stringToOccurrence(const QString& 
     occurrence = MyMoneySchedule::OCCUR_EVERYFOURMONTHS;
   else if(tmp == i18n("Twice yearly").toLower())
     occurrence = MyMoneySchedule::OCCUR_TWICEYEARLY;
-  else if(tmp == i18n("Yearly").toLower())
+  else if(tmp == i18nc("Yearly", "Occurs yearly").toLower())
     occurrence = MyMoneySchedule::OCCUR_YEARLY;
   else if(tmp == i18n("Every other year").toLower())
     occurrence = MyMoneySchedule::OCCUR_EVERYOTHERYEAR;
