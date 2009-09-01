@@ -502,7 +502,7 @@ void KMyMoney2App::initActions(void)
   account_online_unmap->setText(i18n("Unmap account..."));
   connect(account_online_unmap, SIGNAL(triggered()), this, SLOT(slotAccountUnmapOnline()));
 
-  KActionMenu* menu = new KActionMenu(KIcon("view-refresh"), i18nc("Update", "Update online accounts menu"), actionCollection());
+  KActionMenu* menu = new KActionMenu(KIcon("view-refresh"), i18nc("Update online accounts menu", "Update"), actionCollection());
   // activating the menu button is the same as selecting the current account
   connect( menu, SIGNAL( activated() ), this, SLOT(slotAccountUpdateOnline()));
 
@@ -1725,7 +1725,7 @@ const QString KMyMoney2App::slotStatusMsg(const QString &text)
 
   m_statusMsg = text;
   if(m_statusMsg.isEmpty())
-    m_statusMsg = i18nc("Ready.", "Application is ready to use");
+    m_statusMsg = i18nc("Application is ready to use", "Ready.");
   statusBar()->clear();
   statusBar()->changeItem(text, ID_STATUS_MSG);
   return msg;
@@ -1738,7 +1738,7 @@ void KMyMoney2App::ready(void)
 
 bool KMyMoney2App::isReady(void)
 {
-  return m_statusMsg == i18nc("Ready.", "Application is ready to use");
+  return m_statusMsg == i18nc("Application is ready to use", "Ready.");
 }
 
 void KMyMoney2App::slotStatusProgressBar(int current, int total)
@@ -2200,15 +2200,15 @@ void KMyMoney2App::slotSettings(void)
   KSettingsForecast* forecastPage = new KSettingsForecast();
   KSettingsPlugins* pluginsPage = new KSettingsPlugins();
 
-  dlg->addPage(generalPage, i18nc("General", "General settings"), "system-run");
-  dlg->addPage(registerPage, i18nc("Register", "Register view settings"), "ledger");
+  dlg->addPage(generalPage, i18nc("General settings", "General"), "system-run");
+  dlg->addPage(registerPage, i18nc("Register view settings", "Register"), "ledger");
   dlg->addPage(homePage, i18n("Home"), "home");
   dlg->addPage(schedulesPage, i18n("Scheduled\ntransactions"), "schedule");
   dlg->addPage(encryptionPage, i18n("Encryption"), "kgpg");
   dlg->addPage(colorsPage, i18n("Colors"), "preferences-desktop-color");
   dlg->addPage(fontsPage, i18n("Fonts"), "preferences-desktop-font");
   dlg->addPage(onlineQuotesPage, i18n("Online Quotes"), "preferences-system-network");
-  dlg->addPage(forecastPage, i18nc("Forecast", "Forecast settings"), "forcast");
+  dlg->addPage(forecastPage, i18nc("Forecast settings", "Forecast"), "forcast");
   dlg->addPage(pluginsPage, i18n("Plugins"), "network-disconnect");
 
   connect(dlg, SIGNAL(settingsChanged(const QString&)), this, SLOT(slotUpdateConfiguration()));
@@ -2408,7 +2408,7 @@ void KMyMoney2App::slotProcessExited(void)
           m_backupState = BACKUP_UNMOUNTING;
           proc.start();
         } else {
-          progressCallback(300, 0, i18nc("Done", "Backup done"));
+          progressCallback(300, 0, i18nc("Backup done", "Done"));
           KMessageBox::information(this, i18n("File successfully backed up"), i18n("Backup"));
           m_backupState = BACKUP_IDLE;
           progressCallback(-1, -1, QString());
@@ -2440,7 +2440,7 @@ void KMyMoney2App::slotProcessExited(void)
     case BACKUP_UNMOUNTING:
       if(proc.normalExit() && proc.exitStatus() == 0) {
 
-        progressCallback(300, 0, i18nc("Done", "Backup done"));
+        progressCallback(300, 0, i18nc("Backup done", "Done"));
         if(m_backupResult == 0)
           KMessageBox::information(this, i18n("File successfully backed up"), i18n("Backup"));
       } else {
@@ -4575,7 +4575,7 @@ void KMyMoney2App::slotBudgetForecast(void)
       MyMoneyBudget budget = m_selectedBudgets.first();
       bool calcBudget = budget.getaccounts().count() == 0;
       if(!calcBudget) {
-        if(KMessageBox::warningContinueCancel(0, i18n("The current budget already contains data. Continuing will replace all current values of this budget."), i18nc("Warning", "Warning message box")) == KMessageBox::Continue)
+        if(KMessageBox::warningContinueCancel(0, i18n("The current budget already contains data. Continuing will replace all current values of this budget."), i18nc("Warning message box", "Warning")) == KMessageBox::Continue)
           calcBudget = true;
       }
 
@@ -4605,7 +4605,7 @@ void KMyMoney2App::slotBudgetForecast(void)
 
 void KMyMoney2App::slotKDELanguageSettings(void)
 {
-  KMessageBox::information(this, i18n("Please be aware that changes made in the following dialog affect all KDE applications not only KMyMoney."), i18nc("Warning", "Warning message box"), "LanguageSettingsWarning");
+  KMessageBox::information(this, i18n("Please be aware that changes made in the following dialog affect all KDE applications not only KMyMoney."), i18nc("Warning message box", "Warning"), "LanguageSettingsWarning");
 
   QStringList args;
   args << "language";

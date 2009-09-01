@@ -164,17 +164,17 @@ void KForecastView::loadForecastSettings(void)
   m_historyMethod->setButton(KMyMoneyGlobalSettings::historyMethod());
   switch(KMyMoneyGlobalSettings::forecastMethod()) {
     case 0:
-      m_forecastMethod->setText(i18nc("Scheduled", "Scheduled method"));
+      m_forecastMethod->setText(i18nc("Scheduled method", "Scheduled"));
       m_forecastCycles->setDisabled(true);
       m_historyMethod->setDisabled(true);
       break;
     case 1:
-      m_forecastMethod->setText(i18nc("History", "History-based method"));
+      m_forecastMethod->setText(i18nc("History-based method", "History"));
       m_forecastCycles->setEnabled(true);
       m_historyMethod->setEnabled(true);
       break;
     default:
-      m_forecastMethod->setText(i18nc("Unknown", "Unknown forecast method"));
+      m_forecastMethod->setText(i18nc("Unknown forecast method", "Unknown"));
       break;
   }
 }
@@ -413,7 +413,7 @@ void KForecastView::loadAdvancedView(void)
     m_advancedList->setColumnAlignment(col, Qt::AlignRight);
     m_advancedList->addColumn(i18n("Max Date %1",i), -1);
   }
-  int col = m_advancedList->addColumn(i18nc("Average", "Average balance"), -1);
+  int col = m_advancedList->addColumn(i18nc("Average balance", "Average"), -1);
   m_advancedList->setColumnAlignment(col, Qt::AlignRight);
   m_advancedList->setSorting(-1);
   KMyMoneyForecastListViewItem *advancedItem = 0;
@@ -568,7 +568,7 @@ void KForecastView::addTotalRow(KMyMoneyAccountTreeForecast* forecastList, const
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
-  m_totalItem = new KMyMoneyAccountTreeForecastItem( forecastList, file->asset(), forecast, file->baseCurrency(), i18nc("Total", "Total balance") );
+  m_totalItem = new KMyMoneyAccountTreeForecastItem( forecastList, file->asset(), forecast, file->baseCurrency(), i18nc("Total balance", "Total") );
   m_totalItem->setOpen(true);
 }
 

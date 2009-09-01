@@ -893,8 +893,8 @@ void KReportsView::slotListContextMenu(K3ListView* lv,Q3ListViewItem* item,const
   if ( lv == m_reportListView && item )
   {
     KMenu* contextmenu = new KMenu(this);
-    contextmenu->addAction( i18nc("&Open", "To open a new report"), this, SLOT(slotOpenFromList()) );
-    contextmenu->addAction( i18nc("&Configure", "Configure a report"), this, SLOT(slotConfigureFromList()) );
+    contextmenu->addAction( i18nc("To open a new report", "&Open"), this, SLOT(slotOpenFromList()) );
+    contextmenu->addAction( i18nc("Configure a report", "&Configure"), this, SLOT(slotConfigureFromList()) );
     contextmenu->addAction( i18n("&New report"), this, SLOT(slotNewFromList()) );
     contextmenu->addAction( i18n("&Delete"), this, SLOT(slotDeleteFromList()) );
 

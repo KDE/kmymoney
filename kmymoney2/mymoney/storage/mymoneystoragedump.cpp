@@ -30,6 +30,10 @@
 #include <QTextStream>
 
 // ----------------------------------------------------------------------------
+// KDE Includes
+#include <klocalizedstring.h>
+
+// ----------------------------------------------------------------------------
 // Project Includes
 
 #include "mymoneystoragedump.h"
@@ -412,19 +416,19 @@ const QString MyMoneyStorageDump::reconcileToString(MyMoneySplit::reconcileFlagE
 
   switch(flag) {
     case MyMoneySplit::NotReconciled:
-      rc = i18n("not reconciled");
+      rc = i18nc("Reconciliation status 'Not Reconciled'", "not reconciled");
       break;
     case MyMoneySplit::Cleared:
-      rc = i18n("cleared");
+      rc = i18nc("Reconciliation status 'Cleared'", "cleared");
       break;
     case MyMoneySplit::Reconciled:
-      rc = i18n("reconciled");
+      rc = i18nc("Reconciliation status 'Reconciled'", "reconciled");
       break;
     case MyMoneySplit::Frozen:
-      rc = i18n("frozen");
+      rc = i18nc("Reconciliation status 'Frozen'", "frozen");
       break;
     default:
-      rc = i18n("unknown");
+      rc = i18nc("Reconciliation status unknown", "unknown");
       break;
   }
   return rc;

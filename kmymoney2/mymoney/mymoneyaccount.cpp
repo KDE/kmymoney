@@ -741,7 +741,7 @@ QString MyMoneyAccount::accountTypeToString(const MyMoneyAccount::accountTypeE a
       returnString = i18n("Equity");
       break;
     default:
-      returnString = i18nc("Unknown", "Unknown account type");
+      returnString = i18nc("Unknown account type", "Unknown");
   }
 
   return returnString;

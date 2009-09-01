@@ -69,8 +69,8 @@ KInvestmentView::KInvestmentView(QWidget *parent) :
 {
   m_table->setRootIsDecorated(false);
   // m_table->setColumnText(0, i18n("Symbol"));
-  m_table->addColumn(i18nc("Name", "Investment name"));
-  m_table->addColumn(i18nc("Symbol", "Investment symbol"));
+  m_table->addColumn(i18nc("Investment name", "Name"));
+  m_table->addColumn(i18nc("Investment symbol", "Symbol"));
 
   int col = m_table->addColumn(i18n("Value"));
   m_table->setColumnAlignment(col, Qt::AlignRight);

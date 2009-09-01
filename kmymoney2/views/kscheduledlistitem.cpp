@@ -137,7 +137,7 @@ KScheduledListItem::KScheduledListItem(KScheduledListItem *parent, const MyMoney
     // Do the real next payment like ms-money etc
     if (schedule.isFinished())
     {
-      setText(4, i18nc("Finished", "Finished schedule"));
+      setText(4, i18nc("Finished schedule", "Finished"));
     }
     else
       setText(4, KGlobal::locale()->formatDate(schedule.adjustedNextDueDate(), KLocale::ShortDate));

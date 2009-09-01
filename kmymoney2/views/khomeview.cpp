@@ -976,7 +976,7 @@ void KHomeView::showForecast(void)
     for(i = 0; (i*m_forecast.accountsCycle() + beginDay) <= m_forecast.forecastDays(); ++i) {
       m_html += QString("<td width=\"%1%\" class=\"right\">").arg(colWidth);
 
-      m_html += i18nc("%1 days", "Forecast days", i*m_forecast.accountsCycle() + beginDay);
+      m_html += i18nc("Forecast days", "%1 days", i*m_forecast.accountsCycle() + beginDay);
       m_html += "</td>";
       colspan++;
     }

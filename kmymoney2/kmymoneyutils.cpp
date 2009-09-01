@@ -399,7 +399,7 @@ QString KMyMoneyUtils::reconcileStateToString(MyMoneySplit::reconcileFlagE flag,
         txt = i18nc("Reconcile state 'Frozen'", "Frozen");
         break;
       default:
-        txt = i18nc("Unknown", "Unknown reconciliation state");
+        txt = i18nc("Unknown reconciliation state", "Unknown");
         break;
     }
   } else {
