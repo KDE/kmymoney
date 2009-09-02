@@ -80,7 +80,8 @@ Since objects may be nested, a stack is used, with the top element pointing to
 the 'current object'. The startDocument() call creates the first, GncFile,
 object at the top of the stack.
 
-As each startElement() call occurs, the two element lists created by the current
+As each startElement() call occurs, the two#include "mymoneygncreader.h"
+ element lists created by the current
 object are scanned.
 If this element represents the start of a sub object, the current object's subEl()
 function is called to create an instance of the appropriate type. This is then
@@ -150,7 +151,6 @@ allow us to test the structure, if not the data content, of the file.
 // QT Includes
 
 #include <qdatastream.h>
-//Added by qt3to4:
 #include <QTextStream>
 class QIODevice;
 #include <QObject>
@@ -230,7 +230,7 @@ protected:
   // called by isSubElement to create appropriate sub object
   virtual GncObject *startSubEl() { return (0);};
   // called by isDataElement to set variable pointer
-  virtual void dataEl(const QXmlAttributes&) {m_dataPtr = m_v.at(m_state); m_anonClass = m_anonClassList[m_state];};
+  virtual void dataEl(const QXmlAttributes&) {m_dataPtr = &(m_v[m_state]); m_anonClass = m_anonClassList[m_state];};
   // return gnucash data string variable pointer
   virtual QString var (int i) const;
   // anonymize data
@@ -247,7 +247,7 @@ protected:
   const QString *m_dataElementList; // ditto for data elements
   unsigned int m_dataElementListCount;
   QString *m_dataPtr; // pointer to m_v variable for current data item
-  mutable QList<QString*> m_v; // storage for variable pointers
+  mutable QList<QString> m_v; // storage for variable pointers
 
   unsigned int m_state; // effectively, the index to subElementList or dataElementList, whichever is currently in use
 
@@ -283,9 +283,9 @@ public:
 protected:
   friend class MyMoneyGncReader;
   friend class GncTransaction;
-  bool isCurrency() const { return (*m_v.at(CMDTYSPC) == QString("ISO4217"));};
-  QString id() const { return (*m_v.at(CMDTYID));};
-  QString space() const { return (*m_v.at(CMDTYSPC));};
+  bool isCurrency() const { return (m_v[CMDTYSPC] == QString("ISO4217"));};
+  QString id() const { return (m_v[CMDTYID]);};
+  QString space() const { return (m_v[CMDTYSPC]);};
 private:
   // data elements
   enum CmdtySpecDataEls {CMDTYSPC, CMDTYID, END_CmdtySpec_DELS};
@@ -305,11 +305,11 @@ protected:
   friend class GncSplit;
   friend class GncSchedule;
   friend class GncRecurrence;
-  const QDate date() const { return (QDate::fromString(m_v.at(TSDATE)->section(' ', 0, 0), Qt::ISODate));};
+  const QDate date() const { return (QDate::fromString(m_v[TSDATE].section(' ', 0, 0), Qt::ISODate));};
 private:
   // data elements
   enum DateDataEls {TSDATE, GDATE, END_Date_DELS};
-  virtual void dataEl(const QXmlAttributes&) {m_dataPtr = m_v.at(TSDATE); m_anonClass = GncObject::ASIS;}
+  virtual void dataEl(const QXmlAttributes&) {m_dataPtr = &(m_v[TSDATE]); m_anonClass = GncObject::ASIS;}
   ; // treat both date types the same
 };
 // ************* GncKvp********************************************

@@ -19,6 +19,7 @@ email                : mte@users.sourceforge.net
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
+#include "mymoneygncreader.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -43,7 +44,6 @@ email                : mte@users.sourceforge.net
 
 // ------------------------------------------------------------Box21----------------
 // Project Includes
-#include "mymoneygncreader.h"
 #ifndef _GNCFILEANON
   #include "config-kmymoney.h"
   #include "storage/imymoneystorage.h"
@@ -169,7 +169,7 @@ QString GncObject::var (int i) const {
       ? *(m_v.at(i))
       : pMain->m_decoder->toUnicode (*(m_v.at(i))));
 #endif
-	return QString();
+        return m_v[i];
 }
 
 void GncObject::adjustHideFactor () {
@@ -237,9 +237,9 @@ QString GncObject::hide (QString data, unsigned int anonClass) {
 // dump current object data values // only called if gncdebug set
 void GncObject::debugDump () {
   uint i;
-  qDebug ("Object %s", qPrintable(m_elementName));
+  qDebug () << "Object" << m_elementName;
   for (i = 0; i < m_dataElementListCount; i++) {
-    qDebug () << m_dataElementList[i] << "=" << m_v.at(i);
+    qDebug () << m_dataElementList[i] << "=" << m_v[i];
   }
 }
 //*****************************************************************
@@ -296,7 +296,7 @@ GncDate::GncDate () {
   m_dataElementListCount = END_Date_DELS;
   static const unsigned int anonClasses[] = {ASIS, ASIS};
   m_anonClassList = anonClasses;
-  for (uint i = 0; i < m_dataElementListCount; i++) m_v.append (new QString (""));
+  for (uint i = 0; i < m_dataElementListCount; i++) m_v.append (QString());
 }
 
 GncDate::~GncDate() {}
@@ -308,7 +308,7 @@ GncCmdtySpec::GncCmdtySpec () {
   m_dataElementListCount = END_CmdtySpec_DELS;
   static const unsigned int anonClasses[] = {ASIS, ASIS};
   m_anonClassList = anonClasses;
-  for (uint i = 0; i < m_dataElementListCount; i++) m_v.append (new QString (""));
+  for (uint i = 0; i < m_dataElementListCount; i++) m_v.append (QString());
 }
 
 GncCmdtySpec::~GncCmdtySpec () {}
@@ -332,7 +332,7 @@ GncKvp::GncKvp () {
   m_dataElementList = dataEls;
   static const unsigned int anonClasses[] = {ASIS, ASIS};
   m_anonClassList = anonClasses;
-  for (uint i = 0; i < m_dataElementListCount; i++) m_v.append (new QString (""));
+  for (uint i = 0; i < m_dataElementListCount; i++) m_v.append (QString());
 }
 
 GncKvp::~GncKvp () {}
@@ -342,7 +342,7 @@ void GncKvp::dataEl (const QXmlAttributes& elAttrs) {
   case VALUE:
     m_kvpType = elAttrs.value("type");
   }
-  m_dataPtr = m_v.at(m_state);
+  m_dataPtr = &(m_v[m_state]);
   if (key().contains ("formula")) {
     m_anonClass = MONEY2;
   } else {
@@ -381,19 +381,19 @@ GncLot::~GncLot() {}
 GncCountData::GncCountData() {
   m_subElementListCount = 0;
   m_dataElementListCount = 0;
-  m_v.append (new QString ("")); // only 1 data item
+  m_v.append (QString()); // only 1 data item
 }
 
 GncCountData::~GncCountData () {}
 
 void GncCountData::initiate (const QString&, const QXmlAttributes& elAttrs) {
   m_countType = elAttrs.value ("cd:type");
-  m_dataPtr = m_v.at(0);
+  m_dataPtr = &(m_v[0]);
   return ;
 }
 
 void GncCountData::terminate () {
-  int i = m_v.at(0)->toInt();
+  int i = m_v[0].toInt();
   if (m_countType == "commodity") {
     pMain->setGncCommodityCount(i); return ;
   }
@@ -421,7 +421,7 @@ GncCommodity::GncCommodity () {
   m_dataElementListCount = END_Commodity_DELS;
   static const unsigned int anonClasses[] = {ASIS, NXTEQU, SUPPRESS, ASIS};
   m_anonClassList = anonClasses;
-  for (uint i = 0; i < m_dataElementListCount; i++) m_v.append (new QString (""));
+  for (uint i = 0; i < m_dataElementListCount; i++) m_v.append (QString());
 }
 
 GncCommodity::~GncCommodity () {}
@@ -442,7 +442,7 @@ GncPrice::GncPrice () {
   m_dataElementList = dataEls;
   static const unsigned int anonClasses[] = {ASIS};
   m_anonClassList = anonClasses;
-  for (uint i = 0; i < m_dataElementListCount; i++) m_v.append (new QString (""));
+  for (uint i = 0; i < m_dataElementListCount; i++) m_v.append (QString());
   m_vpCommodity = NULL;
   m_vpCurrency = NULL;
   m_vpPriceDate = NULL;
@@ -494,7 +494,7 @@ GncAccount::GncAccount () {
   m_dataElementList = dataEls;
   static const unsigned int anonClasses[] = {ASIS, NXTACC, SUPPRESS, ASIS, ASIS};
   m_anonClassList = anonClasses;
-  for (uint i = 0; i < m_dataElementListCount; i++) m_v.append (new QString (""));
+  for (uint i = 0; i < m_dataElementListCount; i++) m_v.append (QString());
   m_vpCommodity = NULL;
 }
 
@@ -546,7 +546,7 @@ GncTransaction::GncTransaction (bool processingTemplates) {
   m_anonClassList = anonClasses;
   adjustHideFactor();
   m_template = processingTemplates;
-  for (uint i = 0; i < m_dataElementListCount; i++) m_v.append (new QString (""));
+  for (uint i = 0; i < m_dataElementListCount; i++) m_v.append (QString());
   m_vpCurrency = NULL;
   m_vpDateEntered = m_vpDatePosted = NULL;
 }
@@ -611,7 +611,7 @@ GncSplit::GncSplit () {
   m_dataElementList = dataEls;
   static const unsigned int anonClasses[] = {ASIS, SUPPRESS, ASIS, MONEY1, MONEY1, ASIS};
   m_anonClassList = anonClasses;
-  for (uint i = 0; i < m_dataElementListCount; i++) m_v.append (new QString (""));
+  for (uint i = 0; i < m_dataElementListCount; i++) m_v.append (QString());
   m_vpDateReconciled = NULL;
 }
 
@@ -648,7 +648,7 @@ GncTemplateSplit::GncTemplateSplit () {
   m_dataElementList = dataEls;
   static const unsigned int anonClasses[] = {ASIS, SUPPRESS, ASIS, MONEY1, MONEY1, ASIS};
   m_anonClassList = anonClasses;
-  for (uint i = 0; i < m_dataElementListCount; i++) m_v.append (new QString (""));
+  for (uint i = 0; i < m_dataElementListCount; i++) m_v.append (QString());
 }
 
 GncTemplateSplit::~GncTemplateSplit () {}
@@ -684,7 +684,7 @@ GncSchedule::GncSchedule () {
   m_dataElementList = dataEls;
   static const unsigned int anonClasses[] = {NXTSCHD, ASIS, ASIS, ASIS, ASIS, ASIS, ASIS, ASIS, ASIS, ASIS, ASIS};
   m_anonClassList = anonClasses;
-  for (uint i = 0; i < m_dataElementListCount; i++) m_v.append (new QString (""));
+  for (uint i = 0; i < m_dataElementListCount; i++) m_v.append (QString());
   m_vpStartDate = m_vpLastDate = m_vpEndDate = NULL;
   m_vpFreqSpec = NULL;
   m_vpRecurrence.clear();
@@ -742,7 +742,7 @@ GncFreqSpec::GncFreqSpec () {
   m_dataElementList = dataEls;
   static const unsigned int anonClasses[] = {ASIS, ASIS, ASIS, ASIS, ASIS, ASIS, ASIS      };
   m_anonClassList = anonClasses;
-  for (uint i = 0; i < m_dataElementListCount; i++) m_v.append (new QString (""));
+  for (uint i = 0; i < m_dataElementListCount; i++) m_v.append (QString());
 }
 
 GncFreqSpec::~GncFreqSpec () {}
@@ -783,7 +783,7 @@ GncRecurrence::GncRecurrence () {
   m_dataElementList = dataEls;
   static const unsigned int anonClasses[] = {ASIS, ASIS};
   m_anonClassList = anonClasses;
-  for (uint i = 0; i < m_dataElementListCount; i++) m_v.append (new QString (""));
+  for (uint i = 0; i < m_dataElementListCount; i++) m_v.append (QString());
 }
 
 GncRecurrence::~GncRecurrence () {
@@ -899,7 +899,7 @@ bool XmlReader::startElement (const QString&, const QString&, const QString& elN
         break;
     }
     pMain->oStream << '<' << elName;
-    for (i = 0; i < elAttrs.count(); i++) {
+    for (i = 0; i < elAttrs.count(); ++i) {
       pMain->oStream << ' ' << elAttrs.qName(i) << '='  << '"' << elAttrs.value(i) << '"';
     }
     pMain->oStream << '>';
@@ -932,7 +932,7 @@ bool XmlReader::startElement (const QString&, const QString&, const QString& elN
 #ifndef _GNCFILEANON
     // we can't pass on exceptions here coz the XML reader won't catch them and we just abort
     KMessageBox::error(0, i18n("Import failed:\n\n%1",e->what()), PACKAGE);
-    qFatal ("%s", e->what().toLatin1());
+    qFatal ("%s", qPrintable(e->what()));
 #else
     qFatal ("%s", e->toLatin1());
 #endif // _GNCFILEANON
@@ -967,7 +967,7 @@ bool XmlReader::endElement( const QString&, const QString&, const QString&elName
 #ifndef _GNCFILEANON
     // we can't pass on exceptions here coz the XML reader won't catch them and we just abort
     KMessageBox::error(0, i18n("Import failed:\n\n%1",e->what()), PACKAGE);
-    qFatal ("%s", e->what().toLatin1());
+    qFatal (qPrintable(e->what()));
 #else
     qFatal ("%s", e->toLatin1());
 #endif // _GNCFILEANON
@@ -1055,7 +1055,7 @@ void MyMoneyGncReader::readFile(QIODevice* pDevice, IMyMoneySerialize* storage) 
     ft.commit();
   } catch (MyMoneyException *e) {
     KMessageBox::error(0, i18n("Import failed:\n\n%1",e->what()), PACKAGE);
-    qFatal ("%s", e->what().toLatin1());
+    qFatal (qPrintable( e->what()));
   } // end catch
   signalProgress (0, 1, i18n("Import complete")); // switch off progress bar
   delete m_xr;
@@ -1373,7 +1373,7 @@ void MyMoneyGncReader::convertTransaction (const GncTransaction *gtx) {
          && (!tx.memo().isEmpty())) // and tx notes are present
       split.setMemo(tx.memo());  // use the tx notes as memo
     tx.addSplit(split);
-    it = m_splitList.remove(it);
+    it = m_splitList.erase(it);
   }
   // memo - set from split - not any more
   //tx.setMemo(txMemo);
@@ -1390,7 +1390,7 @@ void MyMoneyGncReader::convertSplit (const GncSplit *gsp) {
   QString kmmAccountId;
   map_accountIds::Iterator id = m_mapIds.find(gsp->acct().toUtf8());
   if (id != m_mapIds.end()) {
-    kmmAccountId = id.data();
+    kmmAccountId = id.value();
   } else { // for the case where the acs not found (which shouldn't happen?), create an account with gnc name
     kmmAccountId = createOrphanAccount (gsp->acct());
   }
@@ -1573,7 +1573,7 @@ MyMoneyTransaction MyMoneyGncReader::convertTemplateTransaction (const QString& 
     // are not viewable as split transactions in kmm so the split memo is not seen
     if ((txMemo.isEmpty()) && (!split.memo().isEmpty())) txMemo = split.memo();
     tx.addSplit(split);
-    it = m_splitList.remove(it);
+    it = m_splitList.erase(it);
   }
   // memo - set from split
   tx.setMemo (txMemo);
@@ -1679,7 +1679,7 @@ void MyMoneyGncReader::convertTemplateSplit (const QString& schedName, const Gnc
   QString kmmAccountId;
   map_accountIds::Iterator id = m_mapIds.find(gncAccountId.toUtf8());
   if (id != m_mapIds.end()) {
-    kmmAccountId = id.data();
+    kmmAccountId = id.value();
   } else { // for the case where the acs not found (which shouldn't happen?), create an account with gnc name
     kmmAccountId = createOrphanAccount (gncAccountId);
   }
@@ -1722,8 +1722,8 @@ void MyMoneyGncReader::convertSchedule (const GncSchedule *gsc) {
   // schedule name
   sc.setName(gsc->name());
   // find the transaction template as stored earlier
-  QList<GncTransaction*>::Iterator itt;
-  GncTransaction *ttx;
+  QList<GncTransaction*>::const_iterator itt;
+  //GncTransaction *ttx;
   for (itt = m_templateList.begin(); itt != m_templateList.end(); ++itt) {
     // the id to match against is the split:account value in the splits
     if (static_cast<const GncTemplateSplit *>((*itt)->getSplit(0))->acct() == gsc->templId()) break;
@@ -1795,7 +1795,7 @@ void MyMoneyGncReader::convertSchedule (const GncSchedule *gsc) {
       frequency = fs->intervalType();
       if (!fs->m_fsList.isEmpty()) unknownOccurs = true; // nested freqspec
     }
-    schedEnabled = "y"; // earlier versions did not have an enable flag
+    schedEnabled = 'y'; // earlier versions did not have an enable flag
   }
 
   int i;
@@ -1893,7 +1893,7 @@ void MyMoneyGncReader::terminate () {
   // this code is just temporary to show us what is in the file.
   if (gncdebug) qDebug("%d accounts found in the GnuCash file", (unsigned int)m_mapIds.count());
   for (map_accountIds::Iterator it = m_mapIds.begin(); it != m_mapIds.end(); ++it) {
-    if (gncdebug) qDebug() << "key ="  << it.key() << "value =" << it.data();
+    if (gncdebug) qDebug() << "key ="  << it.key() << "value =" << it.value();
   }
   // first step is to implement the users investment option, now we
   // have all the accounts available
@@ -1939,8 +1939,8 @@ void MyMoneyGncReader::terminate () {
       if (id != m_mapIds.end()) {
         if (gncdebug)
             qDebug() << "Setting account id" << (*acc).id()
-                     << "parent account id to" << id.data();
-        MyMoneyAccount parent = m_storage->account(id.data());
+                     << "parent account id to" << id.value();
+        MyMoneyAccount parent = m_storage->account(id.value());
         parent = checkConsistency (parent, (*acc));
         m_storage->addAccount (parent, (*acc));
       } else {
@@ -1955,8 +1955,8 @@ void MyMoneyGncReader::terminate () {
   unsigned int maxCount = 0;
   QMap<QString, unsigned int>::ConstIterator it;
   for (it = m_currencyCount.constBegin(); it != m_currencyCount.constEnd(); ++it) {
-    if (it.data() > maxCount) {
-      maxCount = it.data();
+    if (it.value() > maxCount) {
+      maxCount = it.value();
       mainCurrency = it.key();
       }
   }
@@ -1973,10 +1973,11 @@ void MyMoneyGncReader::terminate () {
   }
   // now produce the end of job reports - first, work out which ones are required
   m_ccCount = 0, m_orCount = 0, m_scCount = 0;
-  for (i = 0; i < m_messageList.count(); i++) {
-    if ((*m_messageList.at(i)).source == "CC") m_ccCount++;
-    if ((*m_messageList.at(i)).source == "OR") m_orCount++;
-    if ((*m_messageList.at(i)).source == "SC") m_scCount++;
+  int si;
+  for (si = 0; si < m_messageList.count(); ++si) {
+    if ((*m_messageList.at(si)).source == "CC") m_ccCount++;
+    if ((*m_messageList.at(si)).source == "OR") m_orCount++;
+    if ((*m_messageList.at(si)).source == "SC") m_scCount++;
   }
   QList<QString> sectionsToReport; // list of sections needing report
   sectionsToReport.append ("MN"); // always build the main section
@@ -1985,15 +1986,15 @@ void MyMoneyGncReader::terminate () {
   if (m_scCount > 0) sectionsToReport.append ("SC");
   // produce the sections in message boxes
   bool exit = false;
-  for (i = 0; (i < sectionsToReport.count()) && !exit; i++) {
+  for (si = 0; (si < sectionsToReport.count()) && !exit; ++si) {
     QString button0Text = i18n("More");
-    if (i + 1 == sectionsToReport.count())
+    if (si + 1 == sectionsToReport.count())
       button0Text = i18n("Done"); // last section
     KGuiItem yesItem(button0Text, KIcon(), "", "");
     KGuiItem noItem(i18n("Save Report"), KIcon(), "", "");
 
     switch(KMessageBox::questionYesNoCancel(0,
-           buildReportSection (sectionsToReport[i]),
+           buildReportSection (sectionsToReport[si]),
                                 PACKAGE,
                                 yesItem, noItem)) {
       case KMessageBox::Yes:
@@ -2007,8 +2008,8 @@ void MyMoneyGncReader::terminate () {
     }
   }
 
-  for (i = 0; i < m_suspectList.count(); i++) {
-    MyMoneySchedule sc = m_storage->schedule(m_suspectList[i]);
+  for (si = 0; si < m_suspectList.count(); ++si) {
+    MyMoneySchedule sc = m_storage->schedule(m_suspectList[si]);
       KEditScheduleDlg *s;
       switch(KMessageBox::warningYesNo(0, i18n("Problems were encountered in converting schedule '%1'.\nDo you want to review or edit it now?",sc.name()), PACKAGE)) {
       case KMessageBox::Yes:
@@ -2067,7 +2068,7 @@ QString MyMoneyGncReader::buildReportSection (const QString& source) {
     if (more) s.append (i18n("\n\nPress More for further information"));
   } else { // we need to retrieve the posted messages for this source
     if (gncdebug) qDebug() << "Building messages for source" << source;
-    unsigned int i, j;
+    int i, j;
     for (i = 0; i < m_messageList.count(); i++) {
       GncMessageArgs *m = m_messageList[i];
       if (m->source == source) {
@@ -2088,7 +2089,7 @@ QString MyMoneyGncReader::buildReportSection (const QString& source) {
 //************************ writeReportToFile*********************************
 bool MyMoneyGncReader::writeReportToFile (const QList<QString>& sectionsToReport) {
   TRY
-  unsigned int i;
+  int i;
   QString fd = KFileDialog::getSaveFileName (KUrl(), QString::null,
                    0, i18n("Save report as"));
   if (fd.isEmpty()) return (false);
@@ -2193,7 +2194,7 @@ void MyMoneyGncReader::checkInvestmentOption (QString stockId) {
   QString parentKey = stockAcc.parentAccountId();
   map_accountIds::Iterator id = m_mapIds.find (parentKey);
   if (id != m_mapIds.end()) {
-    parent = m_storage->account (id.data());
+    parent = m_storage->account (id.value());
     if (parent.accountType() == MyMoneyAccount::Investment) return ;
   }
   // so now, check the investment option requested by the user
@@ -2263,7 +2264,7 @@ void MyMoneyGncReader::checkInvestmentOption (QString stockId) {
                              accList,
                              lastSelected, true, &ok);
       if (ok) {
-        lastSelected = accList.findIndex (invAccName); // preserve selection for next time
+        lastSelected = accList.indexOf (invAccName); // preserve selection for next time
         for (acc = list.begin(); acc != list.end(); ++acc) {
           if ((*acc).name() == invAccName) break;
         }
@@ -2331,9 +2332,9 @@ void MyMoneyGncReader::getPriceSource (MyMoneySecurity stock, QString gncSource)
   // (mapSources is initialy empty. We may be able to pre-fill it with some equivalent
   //  sources, if such things do exist. User feedback may help here.)
   QMap<QString, QString>::Iterator it;
-  for (it = m_mapSources.begin(); it != m_mapSources.end(); it++) {
+  for (it = m_mapSources.begin(); it != m_mapSources.end(); ++it) {
     if (it.key() == gncSource) {
-      stock.setValue("kmm-online-source", it.data());
+      stock.setValue("kmm-online-source", it.value());
       m_storage->modifySecurity(stock);
       return;
     }
@@ -2379,18 +2380,18 @@ void MyMoneyGncReader::postMessage (const QString& source, const unsigned int co
   postMessage(source, code, argList);
 }
 void MyMoneyGncReader::postMessage (const QString& source, const unsigned int code, const QStringList& argList) {
-  unsigned int i;
+  int i;
   GncMessageArgs *m = new GncMessageArgs;
 
   m->source = source;
   m->code = code;
   // get the number of args this message requires
-  const unsigned int argCount = GncMessages::argCount (source, code);
+  const int argCount = GncMessages::argCount (source, code);
   if ((gncdebug) && (argCount != argList.count()))
     qDebug("%s", qPrintable(QString("MyMoneyGncReader::postMessage debug: Message %1, code %2, requires %3 arguments, got %4")
         .arg(source).arg(code).arg(argCount).arg(argList.count())));
   // store the arguments
-  for (i = 0; i < argCount; i++) {
+  for (i = 0; i < argCount; ++i) {
     if (i > argList.count()) m->args.append(QString());
     else m->args.append (argList[i]); //Adds the next argument to the list
   }
@@ -2444,13 +2445,14 @@ unsigned int GncMessages::argCount (const QString source, const unsigned int cod
     throw new MYMONEYEXCEPTION (mess);
   }
   QRegExp argConst ("%\\d");
-  int offset = 0;
+  /*int offset = 0;
   unsigned int argCount = 0;
   while ((offset = argConst.search (texts[i].text, offset)) != -1) {
     argCount++;
     offset += 2;
   }
-  return (argCount);
+  return (argCount);*/
+  return (texts[i].text.count(argConst));
   PASS
 }
 #endif // _GNCFILEANON
