@@ -14,11 +14,12 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
+#include "mymoneydatabasemgr.h"
+
 #include <algorithm>
 #include <list>
 #include <typeinfo>
 
-#include "mymoneydatabasemgr.h"
 #include "../mymoneytransactionfilter.h"
 #include "../mymoneycategory.h"
 
@@ -119,14 +120,14 @@ void MyMoneyDatabaseMgr::addAccount(MyMoneyAccount& parent, MyMoneyAccount& acco
   theParent = accountList.constFind(parent.id());
   if(theParent == accountList.constEnd()) {
     QString msg = "Unknown parent account '";
-    msg += parent.id() + "'";
+    msg += parent.id() + '\'';
     throw new MYMONEYEXCEPTION(msg);
   }
 
   theChild = accountList.constFind(account.id());
   if(theChild == accountList.constEnd()) {
     QString msg = "Unknown child account '";
-    msg += account.id() + "'";
+    msg += account.id() + '\'';
     throw new MYMONEYEXCEPTION(msg);
   }
 
@@ -163,7 +164,7 @@ const MyMoneyPayee MyMoneyDatabaseMgr::payee(const QString& id) const
   QMap<QString, MyMoneyPayee> payeeList = m_sql->fetchPayees(QStringList(id));
   it = payeeList.constFind(id);
   if(it == payeeList.constEnd())
-    throw new MYMONEYEXCEPTION("Unknown payee '" + id + "'");
+    throw new MYMONEYEXCEPTION("Unknown payee '" + id + '\'');
 
   return *it;
 }
@@ -187,7 +188,7 @@ const MyMoneyPayee MyMoneyDatabaseMgr::payeeByName(const QString& payee) const
     }
   }
 
-  throw new MYMONEYEXCEPTION("Unknown payee '" + payee + "'");
+  throw new MYMONEYEXCEPTION("Unknown payee '" + payee + '\'');
 }
 
 void MyMoneyDatabaseMgr::modifyPayee(const MyMoneyPayee& payee)
@@ -197,7 +198,7 @@ void MyMoneyDatabaseMgr::modifyPayee(const MyMoneyPayee& payee)
 
   it = payeeList.constFind(payee.id());
   if(it == payeeList.constEnd()) {
-    QString msg = "Unknown payee '" + payee.id() + "'";
+    QString msg = "Unknown payee '" + payee.id() + '\'';
     throw new MYMONEYEXCEPTION(msg);
   }
 
@@ -213,7 +214,7 @@ void MyMoneyDatabaseMgr::removePayee(const MyMoneyPayee& payee)
 
   it_p = payeeList.constFind(payee.id());
   if(it_p == payeeList.constEnd()) {
-    QString msg = "Unknown payee '" + payee.id() + "'";
+    QString msg = "Unknown payee '" + payee.id() + '\'';
     throw new MYMONEYEXCEPTION(msg);
   }
 
@@ -266,7 +267,7 @@ const MyMoneyAccount MyMoneyDatabaseMgr::account(const QString& id) const
   }
 
   // throw an exception, if it does not exist
-  QString msg = "Unknown account id '" + id + "'";
+  QString msg = "Unknown account id '" + id + '\'';
   throw new MYMONEYEXCEPTION(msg);
 }
 
@@ -311,7 +312,7 @@ const QString MyMoneyDatabaseMgr::nextPayeeID(void)
   QString id;
   if (m_sql) {
     id.setNum(ulong(m_sql->incrementPayeeId()));
-    id = "P" + id.rightJustified(PAYEE_ID_SIZE, '0');
+    id = 'P' + id.rightJustified(PAYEE_ID_SIZE, '0');
   }
   return id;
 }
@@ -321,7 +322,7 @@ const QString MyMoneyDatabaseMgr::nextInstitutionID(void)
   QString id;
   if (m_sql) {
     id.setNum(ulong(m_sql->incrementInstitutionId()));
-    id = "I" + id.rightJustified(INSTITUTION_ID_SIZE, '0');
+    id = 'I' + id.rightJustified(INSTITUTION_ID_SIZE, '0');
   }
   return id;
 }
@@ -331,7 +332,7 @@ const QString MyMoneyDatabaseMgr::nextAccountID(void)
   QString id;
   if (m_sql) {
     id.setNum(ulong(m_sql->incrementAccountId()));
-    id = "A" + id.rightJustified(ACCOUNT_ID_SIZE, '0');
+    id = 'A' + id.rightJustified(ACCOUNT_ID_SIZE, '0');
   }
   return id;
 }
@@ -341,7 +342,7 @@ const QString MyMoneyDatabaseMgr::nextBudgetID(void)
   QString id;
   if (m_sql) {
     id.setNum(ulong(m_sql->incrementBudgetId()));
-    id = "B" + id.rightJustified(BUDGET_ID_SIZE, '0');
+    id = 'B' + id.rightJustified(BUDGET_ID_SIZE, '0');
   }
   return id;
 }
@@ -351,7 +352,7 @@ const QString MyMoneyDatabaseMgr::nextReportID(void)
   QString id;
   if (m_sql) {
     id.setNum(ulong(m_sql->incrementReportId()));
-    id = "R" + id.rightJustified(REPORT_ID_SIZE, '0');
+    id = 'R' + id.rightJustified(REPORT_ID_SIZE, '0');
   }
   return id;
 }
@@ -361,7 +362,7 @@ const QString MyMoneyDatabaseMgr::nextTransactionID(void)
   QString id;
   if (m_sql) {
     id.setNum(ulong(m_sql->incrementTransactionId()));
-    id = "T" + id.rightJustified(TRANSACTION_ID_SIZE, '0');
+    id = 'T' + id.rightJustified(TRANSACTION_ID_SIZE, '0');
   }
   return id;
 }
@@ -381,7 +382,7 @@ const QString MyMoneyDatabaseMgr::nextSecurityID(void)
   QString id;
   if (m_sql) {
     id.setNum(ulong(m_sql->incrementSecurityId()));
-    id = "E" + id.rightJustified(SECURITY_ID_SIZE, '0');
+    id = 'E' + id.rightJustified(SECURITY_ID_SIZE, '0');
   }
   return id;
 }
@@ -1189,7 +1190,7 @@ void MyMoneyDatabaseMgr::modifySchedule(const MyMoneySchedule& sched)
 
   it = scheduleList.constFind(sched.id());
   if(it == scheduleList.constEnd()) {
-    QString msg = "Unknown schedule '" + sched.id() + "'";
+    QString msg = "Unknown schedule '" + sched.id() + '\'';
     throw new MYMONEYEXCEPTION(msg);
   }
 
@@ -1203,7 +1204,7 @@ void MyMoneyDatabaseMgr::removeSchedule(const MyMoneySchedule& sched)
 
   it = scheduleList.constFind(sched.id());
   if(it == scheduleList.constEnd()) {
-    QString msg = "Unknown schedule '" + sched.id() + "'";
+    QString msg = "Unknown schedule '" + sched.id() + '\'';
     throw new MYMONEYEXCEPTION(msg);
   }
 
@@ -1223,7 +1224,7 @@ const MyMoneySchedule MyMoneyDatabaseMgr::schedule(const QString& id) const
     return (*pos);
 
   // throw an exception, if it does not exist
-  QString msg = "Unknown schedule id '" + id + "'";
+  QString msg = "Unknown schedule id '" + id + '\'';
   throw new MYMONEYEXCEPTION(msg);
 }
 
@@ -1452,7 +1453,7 @@ void MyMoneyDatabaseMgr::modifyReport( const MyMoneyReport& report )
 
   it = reportList.constFind(report.id());
   if(it == reportList.constEnd()) {
-    QString msg = "Unknown report '" + report.id() + "'";
+    QString msg = "Unknown report '" + report.id() + '\'';
     throw new MYMONEYEXCEPTION(msg);
   }
 
@@ -1476,7 +1477,7 @@ void MyMoneyDatabaseMgr::removeReport(const MyMoneyReport& report)
 
   it = reportList.constFind(report.id());
   if(it == reportList.constEnd()) {
-    QString msg = "Unknown report '" + report.id() + "'";
+    QString msg = "Unknown report '" + report.id() + '\'';
     throw new MYMONEYEXCEPTION(msg);
   }
 
@@ -1505,7 +1506,7 @@ const MyMoneyBudget MyMoneyDatabaseMgr::budgetByName(const QString& budget) cons
     }
   }
 
-  throw new MYMONEYEXCEPTION("Unknown budget '" + budget + "'");
+  throw new MYMONEYEXCEPTION("Unknown budget '" + budget + '\'');
 }
 
 void MyMoneyDatabaseMgr::modifyBudget( const MyMoneyBudget& budget )
@@ -1514,14 +1515,14 @@ void MyMoneyDatabaseMgr::modifyBudget( const MyMoneyBudget& budget )
 
   //it = m_budgetList.find(budget.id());
   //if(it == m_budgetList.end()) {
-  //  QString msg = "Unknown budget '" + budget.id() + "'";
+  //  QString msg = "Unknown budget '" + budget.id() + '\'';
   //  throw new MYMONEYEXCEPTION(msg);
   //}
   //m_budgetList.modify(budget.id(), budget);
 
   startTransaction();
   if (m_sql->fetchBudgets(QStringList(budget.id()), true).empty()) {
-    QString msg = "Unknown budget '" + budget.id() + "'";
+    QString msg = "Unknown budget '" + budget.id() + '\'';
     throw new MYMONEYEXCEPTION(msg);
   }
   m_sql->modifyBudget(budget);
@@ -1544,7 +1545,7 @@ void MyMoneyDatabaseMgr::removeBudget(const MyMoneyBudget& budget)
 //
 //  it = m_budgetList.find(budget.id());
 //  if(it == m_budgetList.end()) {
-//    QString msg = "Unknown budget '" + budget.id() + "'";
+//    QString msg = "Unknown budget '" + budget.id() + '\'';
 //    throw new MYMONEYEXCEPTION(msg);
 //  }
 //

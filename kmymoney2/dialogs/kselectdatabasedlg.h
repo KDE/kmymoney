@@ -45,7 +45,7 @@ class KSelectDatabaseDlg : public KSelectDatabaseDlgDecl
 {
 Q_OBJECT
 public:
-  KSelectDatabaseDlg(int openMode, KUrl openURL = KUrl(), QWidget *parent = 0);
+  explicit KSelectDatabaseDlg(int openMode, KUrl openURL = KUrl(), QWidget *parent = 0);
   ~KSelectDatabaseDlg();
   /**
     * Check whether we have required database drivers

@@ -16,6 +16,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "mymoneystoragesql.h"
+
 #include <algorithm>
 #include <numeric>
 
@@ -40,7 +42,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneystoragesql.h"
 #include "imymoneyserialize.h"
 #include <kmymoneyglobalsettings.h>
 
@@ -229,7 +230,7 @@ try {
     close(false);
     rc = -1; // retryable error
   } else {
-    m_logonUser = url.user() + "@" + url.host();
+    m_logonUser = url.user() + '@' + url.host();
     m_logonAt = QDateTime::currentDateTime();
     writeFileInfo();
   }
@@ -245,7 +246,7 @@ void MyMoneyStorageSql::close(bool logoff) {
   if (QSqlDatabase::open()) {
     if (logoff) {
       MyMoneyDbTransaction t(*this, __func__);
-      m_logonUser = QString();
+      m_logonUser.clear();
       writeFileInfo();
     }
     QSqlDatabase::close();
@@ -395,7 +396,7 @@ bool MyMoneyStorageSql::addColumn
     return (true);
 
   MyMoneySqlQuery q(this);
-  QString afterString = ";";
+  QString afterString(';');
   if (!after.isEmpty())
     afterString = QString("AFTER %1;").arg(after);
   q.prepare("ALTER TABLE " + t.name() + " ADD COLUMN " +
@@ -425,7 +426,7 @@ bool MyMoneyStorageSql::dropColumn
     return (true);
   MyMoneySqlQuery q(this);
   q.prepare("ALTER TABLE " + t.name() + " DROP COLUMN "
-      + col + ";");
+      + col + ';');
   if (!q.exec()) {
     buildError (q, __func__,
       QString("Error dropping column %1 from table %2").arg(col).arg(t.name()));
@@ -477,7 +478,7 @@ int MyMoneyStorageSql::upgradeToV1() {
   // add index to kmmKeyValuePairs to (kvpType,kvpId)
   QStringList list;
   list << "kvpType" << "kvpId";
-  q.prepare (MyMoneyDbIndex("kmmKeyValuePairs", "kmmKVPtype_id", list, false).generateDDL(m_dbType) + ";");
+  q.prepare (MyMoneyDbIndex("kmmKeyValuePairs", "kmmKVPtype_id", list, false).generateDDL(m_dbType) + ';');
   if (!q.exec()) {
       buildError (q, __func__, "Error adding kmmKeyValuePairs index");
       return (1);
@@ -485,7 +486,7 @@ int MyMoneyStorageSql::upgradeToV1() {
   // add index to kmmSplits to (accountId, txType)
   list.clear();
   list << "accountId" << "txType";
-  q.prepare (MyMoneyDbIndex("kmmSplits", "kmmSplitsaccount_type", list, false).generateDDL(m_dbType) + ";");
+  q.prepare (MyMoneyDbIndex("kmmSplits", "kmmSplitsaccount_type", list, false).generateDDL(m_dbType) + ';');
   if (!q.exec()) {
     buildError (q, __func__, "Error adding kmmSplits index");
     return (1);
@@ -633,7 +634,7 @@ int MyMoneyStorageSql::upgradeToV4() {
   MyMoneySqlQuery q(this);
   QStringList list;
   list << "transactionId" << "splitId";
-  q.prepare (MyMoneyDbIndex("kmmSplits", "kmmTx_Split", list, false).generateDDL(m_dbType) + ";");
+  q.prepare (MyMoneyDbIndex("kmmSplits", "kmmTx_Split", list, false).generateDDL(m_dbType) + ';');
   if (!q.exec()) {
     buildError (q, __func__, "Error adding kmmSplits index on (transactionId, splitId)");
     return (1);
@@ -745,19 +746,19 @@ bool MyMoneyStorageSql::sqliteAlterTable(const MyMoneyDbTable& t) {
   QString tempTableName = t.name();
   tempTableName.replace("kmm", "tmp");
   MyMoneySqlQuery q(this);
-  q.prepare (QString("ALTER TABLE " + t.name() + " RENAME TO " + tempTableName + ";"));
+  q.prepare (QString("ALTER TABLE " + t.name() + " RENAME TO " + tempTableName + ';'));
   if (!q.exec()) {
     buildError (q, __func__, "Error renaming table");
     return false;
   }
   createTable(t);
   q.prepare (QString("INSERT INTO " + t.name() + " (" + t.columnList() +
-      ") SELECT " + t.columnList() + " FROM " + tempTableName + ";"));
+      ") SELECT " + t.columnList() + " FROM " + tempTableName + ';'));
   if (!q.exec()) {
     buildError (q, __func__, "Error inserting into new table");
     return false;
   }
-  q.prepare (QString("DROP TABLE " + tempTableName + ";"));
+  q.prepare (QString("DROP TABLE " + tempTableName + ';'));
   if (!q.exec()) {
     buildError (q, __func__, "Error dropping old table");
     return false;
@@ -940,7 +941,7 @@ bool MyMoneyStorageSql::writeFile(void) {
 void MyMoneyStorageSql::startCommitUnit (const QString& callingFunction) {
   DBG("*** Entering MyMoneyStorageSql::startCommitUnit");
   if (m_commitUnitStack.isEmpty()) {
-    if (!transaction()) throw new MYMONEYEXCEPTION(buildError (MyMoneySqlQuery(), callingFunction, "starting commit unit") + " " + callingFunction);
+    if (!transaction()) throw new MYMONEYEXCEPTION(buildError (MyMoneySqlQuery(), callingFunction, "starting commit unit") + ' ' + callingFunction);
   }
   m_commitUnitStack.push(callingFunction);
 }
@@ -973,7 +974,7 @@ void MyMoneyStorageSql::cancelCommitUnit (const QString& callingFunction) {
   if (callingFunction != m_commitUnitStack.top())
     qDebug("%s", qPrintable(QString("%1 - %2 s/be %3").arg(__func__).arg(callingFunction).arg(m_commitUnitStack.top())));
   m_commitUnitStack.clear();
-  if (!rollback()) throw new MYMONEYEXCEPTION(buildError (MyMoneySqlQuery(), callingFunction, "cancelling commit unit") + " " + callingFunction);
+  if (!rollback()) throw new MYMONEYEXCEPTION(buildError (MyMoneySqlQuery(), callingFunction, "cancelling commit unit") + ' ' + callingFunction);
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -1361,7 +1362,7 @@ void MyMoneyStorageSql::writeAccount(const MyMoneyAccount& acc, MyMoneySqlQuery&
                 acc.balance().formatMoney("", -1, false));
   ECATCH
 
-  q.bindValue(":transactionCount", Q_ULLONG(m_transactionCountMap[acc.id()]));
+  q.bindValue(":transactionCount", quint64(m_transactionCountMap[acc.id()]));
   if (!q.exec()) throw new MYMONEYEXCEPTION(buildError (q, __func__, QString("writing Account")));
 
   //Add in Key-Value Pairs for accounts.
@@ -2346,7 +2347,7 @@ const QMap<QString, MyMoneyInstitution> MyMoneyStorageSql::fetchInstitutions (co
   if (forUpdate)
     queryString += " FOR UPDATE";
 
-  queryString += ";";
+  queryString += ';';
 
   q.prepare (queryString);
 
@@ -2438,7 +2439,7 @@ const QMap<QString, MyMoneyPayee> MyMoneyStorageSql::fetchPayees (const QStringL
       whereClause.append(QString("%1id = '%2'").arg(itemConnector).arg(*it));
       itemConnector = " or ";
     }
-    whereClause += ")";
+    whereClause += ')';
     q.prepare (t.selectAllString(false) + whereClause);
   }
   if (!q.exec()) throw new MYMONEYEXCEPTION(buildError (q, __func__, QString("reading Payee")));
@@ -2509,8 +2510,8 @@ const QMap<QString, MyMoneyAccount> MyMoneyStorageSql::fetchAccounts (const QStr
       queryString += " :id" + QString::number(i) + ", ";
       childQueryString += ":id" + QString::number(i) + ", ";
     }
-    queryString = queryString.left(queryString.length() - 2) + ")";
-    childQueryString = childQueryString.left(childQueryString.length() - 2) + ")";
+    queryString = queryString.left(queryString.length() - 2) + ')';
+    childQueryString = childQueryString.left(childQueryString.length() - 2) + ')';
   } else {
     childQueryString += " NOT parentId IS NULL";
   }
@@ -2877,7 +2878,7 @@ const QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions (co
       itemConnector = ", ";
     }
     if (!payeesClause.isEmpty()) {
-      whereClause += subClauseconnector + payeesClause + ")";
+      whereClause += subClauseconnector + payeesClause + ')';
       subClauseconnector = " and ";
     }
     splitFilterActive = true;
@@ -2898,7 +2899,7 @@ const QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions (co
 //      }
     }
     if (!accountsClause.isEmpty()) {
-      whereClause += subClauseconnector + accountsClause + ")";
+      whereClause += subClauseconnector + accountsClause + ')';
       subClauseconnector = " and (";
     }
   }
@@ -2912,10 +2913,10 @@ const QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions (co
     for (QList<int>::ConstIterator it = splitStates.constBegin(); it != splitStates.constEnd(); ++it) {
       statesClause.append(QString(" %1 '%2'").arg(itemConnector)
           .arg(splitState(MyMoneyTransactionFilter::stateOptionE(*it))));
-      itemConnector = ",";
+      itemConnector = ',';
     }
     if (!statesClause.isEmpty()) {
-      whereClause += subClauseconnector + statesClause + ")";
+      whereClause += subClauseconnector + statesClause + ')';
       subClauseconnector = " and (";
     }
   }
@@ -2927,7 +2928,7 @@ const QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions (co
     qFatal("aborting");
   }
   while (cbc < obc) {
-    whereClause.append(")");
+    whereClause.append(')');
     cbc++;
   }
   // if the split filter is active, but the where clause is empty
@@ -3058,7 +3059,7 @@ const QMap<QString, MyMoneySchedule> MyMoneyStorageSql::fetchSchedules (const QS
   if (forUpdate)
     queryString += " FOR UPDATE";
 
-  queryString += ";";
+  queryString += ';';
 
   q.prepare (queryString);
 
@@ -3320,21 +3321,21 @@ const  MyMoneyPriceList MyMoneyStorageSql::fetchPrices (const QStringList& fromI
     for (int i = 0; i < fromIdList.count(); ++i) {
       queryString += " fromId = :fromId" + QString::number(i) + " OR";
     }
-    queryString = queryString.left(queryString.length() - 2) + ")";
+    queryString = queryString.left(queryString.length() - 2) + ')';
   }
   if (! toIdList.empty()) {
     queryString += " AND (";
     for (int i = 0; i < toIdList.count(); ++i) {
       queryString += " toId = :toId" + QString::number(i) + " OR";
     }
-    queryString = queryString.left(queryString.length() - 2) + ")";
+    queryString = queryString.left(queryString.length() - 2) + ')';
   }
 
 
   if (forUpdate)
     queryString += " FOR UPDATE";
 
-  queryString += ";";
+  queryString += ';';
 
   q.prepare (queryString);
 
@@ -3407,7 +3408,7 @@ const QMap<QString, MyMoneySecurity> MyMoneyStorageSql::fetchCurrencies (const Q
   if (forUpdate)
     queryString += " FOR UPDATE";
 
-  queryString += ";";
+  queryString += ';';
 
   q.prepare (queryString);
 
@@ -3496,7 +3497,7 @@ const QMap<QString, MyMoneyBudget> MyMoneyStorageSql::fetchBudgets (const QStrin
   if (forUpdate)
     queryString += " FOR UPDATE";
 
-  queryString += ";";
+  queryString += ';';
 
   q.prepare (queryString);
   if (!q.exec()) throw new MYMONEYEXCEPTION(buildError (q, __func__, QString("reading budgets")));
@@ -4149,7 +4150,7 @@ void MyMoneyDbTable::buildSQLStrings (void) {
 
   // build an update string; key fields go in the where clause
   qs = "UPDATE " + name() + " SET ";
-  ws = QString();
+  ws.clear();
   ft = m_fields.constBegin();
   while (ft != m_fields.constEnd()) {
     if ((*ft)->isPrimaryKey()) {
@@ -4162,11 +4163,11 @@ void MyMoneyDbTable::buildSQLStrings (void) {
   }
   qs = qs.left(qs.length() - 2);
   if (!ws.isEmpty()) qs += " WHERE " + ws;
-  m_updateString = qs + ";";
+  m_updateString = qs + ';';
   // build a delete string; where clause as for update
   qs = "DELETE FROM " + name();
   if (!ws.isEmpty()) qs += " WHERE " + ws;
-  m_deleteString = qs + ";";
+  m_deleteString = qs + ';';
  }
 
 const QString MyMoneyDbTable::columnList() const {
@@ -4193,7 +4194,7 @@ const QString MyMoneyDbTable::generateCreateSQL (databaseTypeE dbType) const {
     qs += "PRIMARY KEY (" + pkey;
     qs = qs.left(qs.length() - 2) + "))";
   } else {
-    qs = qs.left(qs.length() - 2) + ")";
+    qs = qs.left(qs.length() - 2) + ')';
   }
 
   if (dbType == Mysql)
@@ -4220,15 +4221,15 @@ const QString MyMoneyDbTable::dropPrimaryKeyString(databaseTypeE dbType) const
 }
 
 const QString MyMoneyDbTable::modifyColumnString(databaseTypeE dbType, const QString& columnName, const MyMoneyDbColumn& newDef) const {
-  QString qs = "ALTER TABLE " + m_name + " ";
+  QString qs = "ALTER TABLE " + m_name + ' ';
   if (dbType == Mysql)
-    qs += "CHANGE " + columnName + " " + newDef.generateDDL(dbType);
+    qs += "CHANGE " + columnName + ' ' + newDef.generateDDL(dbType);
   else if (dbType == Postgresql)
     qs += "ALTER COLUMN " + columnName + " TYPE " + newDef.generateDDL(dbType).section(' ', 1);
   else if (dbType == Sqlite3)
     qs = "";
   else if (dbType == Oracle)
-    qs = "MODIFY " + columnName + " " + newDef.generateDDL(dbType);
+    qs = "MODIFY " + columnName + ' ' + newDef.generateDDL(dbType);
 
   return qs;
 }
@@ -4243,7 +4244,7 @@ const QString MyMoneyDbIndex::generateDDL (databaseTypeE dbType) const
   if (m_unique)
     qs += "UNIQUE ";
 
-  qs += "INDEX " + m_table + "_" + m_name + "_idx ON "
+  qs += "INDEX " + m_table + '_' + m_name + "_idx ON "
        + m_table + " (";
 
   // The following should probably be revised.  MySQL supports an index on
@@ -4252,7 +4253,7 @@ const QString MyMoneyDbIndex::generateDDL (databaseTypeE dbType) const
   // a way to merge these, and support other DBMSs like SQLite at the same time.
   // For now, if we just use plain columns, this will work fine.
   for (QStringList::ConstIterator it = m_columns.begin(); it != m_columns.end(); ++it) {
-    qs += *it + ",";
+    qs += *it + ',';
   }
 
   qs = qs.left(qs.length() - 1) + ");\n";
@@ -4281,14 +4282,14 @@ const QString MyMoneyDbColumn::generateDDL (databaseTypeE dbType) const
 {
   Q_UNUSED(dbType);
 
-  QString qs = name() + " " + type();
+  QString qs = name() + ' ' + type();
   if (isNotNull()) qs += " NOT NULL";
   return qs;
 }
 
 const QString MyMoneyDbIntColumn::generateDDL (databaseTypeE dbType) const
 {
-  QString qs = name() + " ";
+  QString qs = name() + ' ';
 
   switch (m_type) {
     case MyMoneyDbIntColumn::TINY:
@@ -4361,7 +4362,7 @@ const QString MyMoneyDbIntColumn::generateDDL (databaseTypeE dbType) const
 
 const QString MyMoneyDbTextColumn::generateDDL (databaseTypeE dbType) const
 {
-  QString qs = name() + " ";
+  QString qs = name() + ' ';
 
   switch (m_type) {
     case MyMoneyDbTextColumn::TINY:
@@ -4434,7 +4435,7 @@ const QString MyMoneyDbTextColumn::generateDDL (databaseTypeE dbType) const
 
 const QString MyMoneyDbDatetimeColumn::generateDDL (databaseTypeE dbType) const
 {
-  QString qs = name() + " ";
+  QString qs = name() + ' ';
   if (dbType == Mysql  || dbType == ODBC) {
     qs += "datetime ";
   } else if (dbType == Postgresql || dbType == Db2 || dbType == Oracle || dbType == Sqlite3 ) {

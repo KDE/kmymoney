@@ -13,6 +13,7 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
+#include "kselectdatabasedlg.h"
 
 #include <unistd.h>
 #include <sys/types.h>
@@ -43,7 +44,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kselectdatabasedlg.h"
 
 KSelectDatabaseDlg::KSelectDatabaseDlg(int openMode, KUrl openURL, QWidget *parent)
  : KSelectDatabaseDlgDecl(parent) {
@@ -156,7 +156,7 @@ const KUrl KSelectDatabaseDlg::selectedURL() {
   url.setUser(textUserName->text());
   url.setPass(textPassword->text());
   url.setHost(textHostName->text());
-  url.setPath("/" + textDbName->text());
+  url.setPath('/' + textDbName->text());
   QString qs = QString("driver=%1")
       .arg(listDrivers->currentItem()->text().section (' ', 0, 0));
   if (checkPreLoad->isChecked()) qs.append("&options=loadAll");

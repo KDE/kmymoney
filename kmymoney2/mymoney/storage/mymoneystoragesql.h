@@ -135,7 +135,7 @@ class MyMoneyDbDrivers {
   */
 class MyMoneyDbColumn : public KShared {
   public:
-    MyMoneyDbColumn (const QString& iname,
+    explicit MyMoneyDbColumn (const QString& iname,
              const QString& itype = QString::null,
              const bool iprimary = false,
              const bool inotnull = false,
@@ -180,7 +180,7 @@ class MyMoneyDbColumn : public KShared {
   */
 class MyMoneyDbDatetimeColumn : public MyMoneyDbColumn {
   public:
-    MyMoneyDbDatetimeColumn (const QString& iname,
+    explicit MyMoneyDbDatetimeColumn (const QString& iname,
                              const bool iprimary = false,
                              const bool inotnull = false,
                              const QString &initVersion = "0.1"):
@@ -199,7 +199,7 @@ class MyMoneyDbDatetimeColumn : public MyMoneyDbColumn {
 class MyMoneyDbIntColumn : public MyMoneyDbColumn {
   public:
     enum size {TINY, SMALL, MEDIUM, BIG};
-    MyMoneyDbIntColumn (const QString& iname,
+    explicit MyMoneyDbIntColumn (const QString& iname,
                         const size type = MEDIUM,
                         const bool isigned = true,
                         const bool iprimary = false,
@@ -224,7 +224,7 @@ class MyMoneyDbIntColumn : public MyMoneyDbColumn {
 class MyMoneyDbTextColumn : public MyMoneyDbColumn {
   public:
     enum size {TINY, NORMAL, MEDIUM, LONG};
-    MyMoneyDbTextColumn (const QString& iname,
+    explicit MyMoneyDbTextColumn (const QString& iname,
                          const size type = MEDIUM,
                          const bool iprimary = false,
                          const bool inotnull = false,
@@ -445,7 +445,7 @@ class IMyMoneySerialize;
 class MyMoneyStorageSql : public IMyMoneyStorageFormat, public QSqlDatabase, public KShared {
 public:
 
-  MyMoneyStorageSql (IMyMoneySerialize *storage, const KUrl& = KUrl());
+  explicit MyMoneyStorageSql (IMyMoneySerialize *storage, const KUrl& = KUrl());
   virtual ~MyMoneyStorageSql() {close(true);}
 
   unsigned int currentVersion() const {return (m_db.currentVersion());};

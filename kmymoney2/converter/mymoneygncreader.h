@@ -150,13 +150,13 @@ allow us to test the structure, if not the data content, of the file.
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qdatastream.h>
+#include <QDataStream>
 #include <QTextStream>
 class QIODevice;
 #include <QObject>
 #include <QList>
 #include <QStack>
-#include <QtXml>
+#include <QXmlReader>
 #include <QDateTime>
 #include <QTextCodec>
 

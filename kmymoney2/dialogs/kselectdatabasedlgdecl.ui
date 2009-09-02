@@ -165,7 +165,7 @@ As always, please make sure you have adequate backups of your data.</string>
      </property>
      <layout class="QVBoxLayout">
       <item>
-       <widget class="QLineEdit" name="textDbName"/>
+       <widget class="KLineEdit" name="textDbName"/>
       </item>
      </layout>
     </widget>
@@ -177,19 +177,19 @@ As always, please make sure you have adequate backups of your data.</string>
      </property>
      <layout class="QVBoxLayout">
       <item>
-       <widget class="QLineEdit" name="textHostName"/>
+       <widget class="KLineEdit" name="textHostName"/>
       </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
-    <widget class="QGroupBox" name="groupBox4">
-     <property name="title">
-      <string>User Name</string>
-     </property>
-     <layout class="QVBoxLayout">
       <item>
-       <widget class="QLineEdit" name="textUserName"/>
+       <widget class="QGroupBox" name="groupBox4">
+        <property name="title">
+         <string>User Name</string>
+        </property>
+        <layout class="QVBoxLayout">
+         <item>
+          <widget class="KLineEdit" name="textUserName"/>
+         </item>
+        </layout>
+       </widget>
       </item>
      </layout>
     </widget>
@@ -201,7 +201,7 @@ As always, please make sure you have adequate backups of your data.</string>
      </property>
      <layout class="QVBoxLayout">
       <item>
-       <widget class="QLineEdit" name="textPassword">
+       <widget class="KLineEdit" name="textPassword">
         <property name="echoMode">
          <enum>QLineEdit::Password</enum>
         </property>
@@ -293,38 +293,43 @@ As always, please make sure you have adequate backups of your data.</string>
    <extends>QListWidget</extends>
    <header>klistwidget.h</header>
   </customwidget>
+  <customwidget>
+   <class>KLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>klineedit.h</header>
+  </customwidget>
  </customwidgets>
  <resources/>
  <connections>
   <connection>
    <sender>buttonOK</sender>
-   <signal>released()</signal>
+   <signal>clicked()</signal>
    <receiver>KSelectDatabaseDlgDecl</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>20</x>
-     <y>20</y>
+     <x>415</x>
+     <y>620</y>
     </hint>
     <hint type="destinationlabel">
-     <x>20</x>
-     <y>20</y>
+     <x>295</x>
+     <y>724</y>
     </hint>
    </hints>
   </connection>
   <connection>
    <sender>buttonCancel</sender>
-   <signal>released()</signal>
+   <signal>clicked()</signal>
    <receiver>KSelectDatabaseDlgDecl</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>20</x>
-     <y>20</y>
+     <x>476</x>
+     <y>624</y>
     </hint>
     <hint type="destinationlabel">
-     <x>20</x>
-     <y>20</y>
+     <x>426</x>
+     <y>720</y>
     </hint>
    </hints>
   </connection>

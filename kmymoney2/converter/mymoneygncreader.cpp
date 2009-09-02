@@ -189,7 +189,7 @@ QString GncObject::hide (QString data, unsigned int anonClass) {
   static QMap<QString, QString> anonStocks; // for reference to equities
 
   QString result (data);
-  QMap<QString, QString>::Iterator it;
+  QMap<QString, QString>::const_iterator it;
   MyMoneyMoney in, mresult;
   switch (anonClass) {
   case ASIS: break;                  // this is not personal data
@@ -1276,7 +1276,7 @@ void MyMoneyGncReader::convertAccount (const GncAccount* gac) {
     // NB: In gnc, this selection is per account, in KMM, per security
     // This is unlikely to cause problems in practice. If it does,
     // we probably need to introduce a 'pricing basis' in the account class
-    QList<GncObject*>::Iterator kvpi;
+    QList<GncObject*>::const_iterator kvpi;
     QList<GncObject*> list = gac->m_kvpList;
     GncKvp *k;
     for (kvpi = list.begin(); kvpi != list.end(); ++kvpi) {
@@ -1291,7 +1291,7 @@ void MyMoneyGncReader::convertAccount (const GncAccount* gac) {
   }
 
   // check for tax-related status
-  QList<GncObject*>::Iterator kvpi;
+  QList<GncObject*>::const_iterator kvpi;
   QList<GncObject*> list = gac->m_kvpList;
   GncKvp *k;
   for (kvpi = list.begin(); kvpi != list.end(); ++kvpi) {
@@ -1388,7 +1388,7 @@ void MyMoneyGncReader::convertSplit (const GncSplit *gsp) {
   MyMoneyAccount splitAccount;
   // find the kmm account id corresponding to the gnc id
   QString kmmAccountId;
-  map_accountIds::Iterator id = m_mapIds.find(gsp->acct().toUtf8());
+  map_accountIds::const_iterator id = m_mapIds.find(gsp->acct().toUtf8());
   if (id != m_mapIds.end()) {
     kmmAccountId = id.value();
   } else { // for the case where the acs not found (which shouldn't happen?), create an account with gnc name
@@ -1677,7 +1677,7 @@ void MyMoneyGncReader::convertTemplateSplit (const QString& schedName, const Gnc
   }
   // find the kmm account id corresponding to the gnc id
   QString kmmAccountId;
-  map_accountIds::Iterator id = m_mapIds.find(gncAccountId.toUtf8());
+  map_accountIds::const_iterator id = m_mapIds.find(gncAccountId.toUtf8());
   if (id != m_mapIds.end()) {
     kmmAccountId = id.value();
   } else { // for the case where the acs not found (which shouldn't happen?), create an account with gnc name
@@ -1892,7 +1892,7 @@ void MyMoneyGncReader::terminate () {
   // All data has been converted and added to storage
   // this code is just temporary to show us what is in the file.
   if (gncdebug) qDebug("%d accounts found in the GnuCash file", (unsigned int)m_mapIds.count());
-  for (map_accountIds::Iterator it = m_mapIds.begin(); it != m_mapIds.end(); ++it) {
+  for (map_accountIds::const_iterator it = m_mapIds.begin(); it != m_mapIds.end(); ++it) {
     if (gncdebug) qDebug() << "key ="  << it.key() << "value =" << it.value();
   }
   // first step is to implement the users investment option, now we
@@ -1905,7 +1905,7 @@ void MyMoneyGncReader::terminate () {
   unsigned int i = 0;
   signalProgress (0, m_accountCount, i18n ("Reorganizing accounts..."));
   QList<MyMoneyAccount> list;
-  QList<MyMoneyAccount>::Iterator acc;
+  QList<MyMoneyAccount>::iterator acc;
   m_storage->accountList(list);
   for (acc = list.begin(); acc != list.end(); ++acc) {
     if ((*acc).parentAccountId() == m_storage->asset().id()) {
@@ -1935,7 +1935,7 @@ void MyMoneyGncReader::terminate () {
       QString parentKey = (*acc).parentAccountId();
       if (gncdebug) qDebug ("acc %s, parent %s", qPrintable((*acc).id()),
                               qPrintable((*acc).parentAccountId()));
-      map_accountIds::Iterator id = m_mapIds.find(parentKey);
+      map_accountIds::const_iterator id = m_mapIds.find(parentKey);
       if (id != m_mapIds.end()) {
         if (gncdebug)
             qDebug() << "Setting account id" << (*acc).id()
@@ -2192,7 +2192,7 @@ void MyMoneyGncReader::checkInvestmentOption (QString stockId) {
   MyMoneyAccount stockAcc = m_storage->account (m_mapIds[stockId.toUtf8()]);
   MyMoneyAccount parent;
   QString parentKey = stockAcc.parentAccountId();
-  map_accountIds::Iterator id = m_mapIds.find (parentKey);
+  map_accountIds::const_iterator id = m_mapIds.find (parentKey);
   if (id != m_mapIds.end()) {
     parent = m_storage->account (id.value());
     if (parent.accountType() == MyMoneyAccount::Investment) return ;
@@ -2248,7 +2248,7 @@ void MyMoneyGncReader::checkInvestmentOption (QString stockId) {
     MyMoneyAccount invAcc (stockAcc);
     QStringList accList;
     QList<MyMoneyAccount> list;
-    QList<MyMoneyAccount>::Iterator acc;
+    QList<MyMoneyAccount>::iterator acc;
     m_storage->accountList(list);
     // build a list of candidates for the input box
     for (acc = list.begin(); acc != list.end(); ++acc) {
@@ -2331,7 +2331,7 @@ void MyMoneyGncReader::getPriceSource (MyMoneySecurity stock, QString gncSource)
   // first check if we have already asked about this source
   // (mapSources is initialy empty. We may be able to pre-fill it with some equivalent
   //  sources, if such things do exist. User feedback may help here.)
-  QMap<QString, QString>::Iterator it;
+  QMap<QString, QString>::const_iterator it;
   for (it = m_mapSources.begin(); it != m_mapSources.end(); ++it) {
     if (it.key() == gncSource) {
       stock.setValue("kmm-online-source", it.value());
