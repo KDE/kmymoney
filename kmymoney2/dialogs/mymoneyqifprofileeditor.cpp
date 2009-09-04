@@ -94,7 +94,7 @@ MyMoneyQifProfileEditor::MyMoneyQifProfileEditor(const bool edit, QWidget *paren
   m_helpButton->setGuiItem(KStandardGuiItem::help());
 
   KIconLoader* il = KIconLoader::global();
-  KGuiItem newButtenItem( i18n("New profile", "&New" ),
+  KGuiItem newButtenItem( i18nc("New profile", "&New" ),
                       KIcon(il->loadIcon("document-new", KIconLoader::Small, KIconLoader::SizeSmall)),
                       i18n("Create a new profile"),
                       i18n("Use this to create a new QIF import/export profile"));

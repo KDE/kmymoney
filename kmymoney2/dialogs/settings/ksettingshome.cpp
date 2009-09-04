@@ -48,7 +48,7 @@ KSettingsHome::KSettingsHome(QWidget* parent) :
   m_homePageList->setAllColumnsShowFocus(true);
 
   KIconLoader* il = KIconLoader::global();
-  KGuiItem upButtonItem( i18n( "&Up" ),
+  KGuiItem upButtonItem( i18nc("Move item up",  "&Up" ),
                     KIcon(il->loadIcon("go-up", KIconLoader::Small, KIconLoader::SizeSmall)),
                     i18n("Move selected item up"),
                     i18n("Use this to move the selected item up by one position in the list."));

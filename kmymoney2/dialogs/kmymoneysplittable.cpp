@@ -105,7 +105,7 @@ kMyMoneySplitTable::kMyMoneySplitTable(QWidget *parent, const char *name ) :
   m_contextMenu->setTitle(i18n("Split Options"));
   m_contextMenu->setIcon(KIcon("transaction"));
   m_contextMenu->insertItem(KIcon("document-edit"), i18n("Edit..."), this, SLOT(slotStartEdit()));
-  m_contextMenuDuplicate = m_contextMenu->insertItem(KIcon("edit-copy"), i18n("To duplicate a split", "Duplicate"), this, SLOT(slotDuplicateSplit()));
+  m_contextMenuDuplicate = m_contextMenu->insertItem(KIcon("edit-copy"), i18nc("To duplicate a split", "Duplicate"), this, SLOT(slotDuplicateSplit()));
   m_contextMenuDelete = m_contextMenu->insertItem(KIcon("edit-delete"),
                         i18n("Delete ..."),
                         this, SLOT(slotDeleteSplit()));
