@@ -129,11 +129,11 @@ void QueryTableTest::testQueryBasics()
     CPPUNIT_ASSERT(rows[11]["postdate"]=="2005-01-01");
 
     QString html = qtbl_1.renderHTML();
-    CPPUNIT_ASSERT( searchHTML(html,i18n("Total")+" Parent") == -(moParent1 + moParent2) * 3 );
-    CPPUNIT_ASSERT( searchHTML(html,i18n("Total")+" Parent: Child") == -(moChild) * 3 );
-    CPPUNIT_ASSERT( searchHTML(html,i18n("Total")+" Solo") == -(moSolo) * 3 );
-    CPPUNIT_ASSERT( searchHTML(html,i18n("Total")+" Expense") == -(moParent1 + moParent2 + moSolo + moChild) * 3 );
-    CPPUNIT_ASSERT( searchHTML(html,i18n("Grand Total")) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen );
+    CPPUNIT_ASSERT( searchHTML(html,i18nc("Total balance", "Total")+" Parent") == -(moParent1 + moParent2) * 3 );
+    CPPUNIT_ASSERT( searchHTML(html,i18nc("Total balance", "Total")+" Parent: Child") == -(moChild) * 3 );
+    CPPUNIT_ASSERT( searchHTML(html,i18nc("Total balance", "Total")+" Solo") == -(moSolo) * 3 );
+    CPPUNIT_ASSERT( searchHTML(html,i18nc("Total balance", "Total")+" Expense") == -(moParent1 + moParent2 + moSolo + moChild) * 3 );
+    CPPUNIT_ASSERT( searchHTML(html,i18nc("Grand total balance", "Grand Total")) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen );
     filter.setRowType( MyMoneyReport::eTopCategory );
     cols = MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCaccount;
     filter.setQueryColumns( static_cast<MyMoneyReport::EQueryColumns>(cols) ); //
@@ -157,10 +157,10 @@ void QueryTableTest::testQueryBasics()
     CPPUNIT_ASSERT(rows[11]["postdate"]=="2005-01-01");
 
     html = qtbl_2.renderHTML();
-    CPPUNIT_ASSERT( searchHTML(html,i18n("Total")+" Parent") == -(moParent1 + moParent2 + moChild) * 3 );
-    CPPUNIT_ASSERT( searchHTML(html,i18n("Total")+" Solo") == -(moSolo) * 3 );
-    CPPUNIT_ASSERT( searchHTML(html,i18n("Total")+" Expense") == -(moParent1 + moParent2 + moSolo + moChild) * 3 );
-    CPPUNIT_ASSERT( searchHTML(html,i18n("Grand Total")) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
+    CPPUNIT_ASSERT( searchHTML(html,i18nc("Total balance", "Total")+" Parent") == -(moParent1 + moParent2 + moChild) * 3 );
+    CPPUNIT_ASSERT( searchHTML(html,i18nc("Total balance", "Total")+" Solo") == -(moSolo) * 3 );
+    CPPUNIT_ASSERT( searchHTML(html,i18nc("Total balance", "Total")+" Expense") == -(moParent1 + moParent2 + moSolo + moChild) * 3 );
+    CPPUNIT_ASSERT( searchHTML(html,i18nc("Grand total balance", "Grand Total")) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
 
     filter.setRowType( MyMoneyReport::eAccount );
     filter.setName("Transactions by Account");
@@ -194,7 +194,7 @@ void QueryTableTest::testQueryBasics()
     html = qtbl_3.renderHTML();
     CPPUNIT_ASSERT( searchHTML(html,i18n("Total")+" Checking Account") == -(moSolo) * 3 + moCheckingOpen);
     CPPUNIT_ASSERT( searchHTML(html,i18n("Total")+" Credit Card") == -(moParent1 + moParent2 + moChild) * 3 + moCreditOpen );
-    CPPUNIT_ASSERT( searchHTML(html,i18n("Grand Total")) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
+    CPPUNIT_ASSERT( searchHTML(html,i18nc("Grand total balance", "Grand Total")) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
 
     filter.setRowType( MyMoneyReport::ePayee );
     filter.setName("Transactions by Payee");
@@ -219,8 +219,8 @@ void QueryTableTest::testQueryBasics()
     CPPUNIT_ASSERT(rows[11]["postdate"]=="2005-09-01");
 
     html = qtbl_4.renderHTML();
-    CPPUNIT_ASSERT( searchHTML(html,i18n("Total")+" Test Payee") == -(moParent1 + moParent2 + moSolo + moChild) * 3 );
-    CPPUNIT_ASSERT( searchHTML(html,i18n("Grand Total")) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
+    CPPUNIT_ASSERT( searchHTML(html,i18nc("Total balance", "Total")+" Test Payee") == -(moParent1 + moParent2 + moSolo + moChild) * 3 );
+    CPPUNIT_ASSERT( searchHTML(html,i18nc("Grand total balance", "Grand Total")) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
 
     filter.setRowType( MyMoneyReport::eMonth );
     filter.setName("Transactions by Month");
@@ -245,10 +245,10 @@ void QueryTableTest::testQueryBasics()
     CPPUNIT_ASSERT(rows[11]["postdate"]=="2005-09-01");
 
     html = qtbl_5.renderHTML();
-    CPPUNIT_ASSERT( searchHTML(html,i18n("Total")+" Month of 2004-01-01") == -moSolo );
-    CPPUNIT_ASSERT( searchHTML(html,i18n("Total")+" Month of 2004-11-01") == -(moChild) * 3 );
-    CPPUNIT_ASSERT( searchHTML(html,i18n("Total")+" Month of 2004-05-01") == -moParent1 + moCheckingOpen );
-    CPPUNIT_ASSERT( searchHTML(html,i18n("Grand Total")) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
+    CPPUNIT_ASSERT( searchHTML(html,i18nc("Total balance", "Total")+" Month of 2004-01-01") == -moSolo );
+    CPPUNIT_ASSERT( searchHTML(html,i18nc("Total balance", "Total")+" Month of 2004-11-01") == -(moChild) * 3 );
+    CPPUNIT_ASSERT( searchHTML(html,i18nc("Total balance", "Total")+" Month of 2004-05-01") == -moParent1 + moCheckingOpen );
+    CPPUNIT_ASSERT( searchHTML(html,i18nc("Grand total balance", "Grand Total")) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
 
     filter.setRowType( MyMoneyReport::eWeek );
     filter.setName("Transactions by Week");
@@ -270,10 +270,10 @@ void QueryTableTest::testQueryBasics()
     CPPUNIT_ASSERT(rows[11]["postdate"]=="2005-09-01");
 
     html = qtbl_6.renderHTML();
-    CPPUNIT_ASSERT( searchHTML(html,i18n("Total")+" Week of 2003-12-29") == -moSolo );
-    CPPUNIT_ASSERT( searchHTML(html,i18n("Total")+" Week of 2004-11-01") == -(moChild) * 3 );
-    CPPUNIT_ASSERT( searchHTML(html,i18n("Total")+" Week of 2005-08-29") == -moParent2 );
-    CPPUNIT_ASSERT( searchHTML(html,i18n("Grand Total")) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
+    CPPUNIT_ASSERT( searchHTML(html,i18nc("Total balance", "Total")+" Week of 2003-12-29") == -moSolo );
+    CPPUNIT_ASSERT( searchHTML(html,i18nc("Total balance", "Total")+" Week of 2004-11-01") == -(moChild) * 3 );
+    CPPUNIT_ASSERT( searchHTML(html,i18nc("Total balance", "Total")+" Week of 2005-08-29") == -moParent2 );
+    CPPUNIT_ASSERT( searchHTML(html,i18nc("Grand total balance", "Grand Total")) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
   }
   catch(MyMoneyException *e)
   {
@@ -361,8 +361,8 @@ void QueryTableTest::testAccountQuery()
     CPPUNIT_ASSERT(rows[1]["equitytype"].isEmpty());
 
     QString html = qtbl_1.renderHTML();
-    CPPUNIT_ASSERT( searchHTML(html,i18n("Total")+" None") == moCheckingOpen+moCreditOpen );
-    CPPUNIT_ASSERT( searchHTML(html,i18n("Grand Total")) == moCheckingOpen+moCreditOpen );
+    CPPUNIT_ASSERT( searchHTML(html,i18nc("Total balance", "Total")+" None") == moCheckingOpen+moCreditOpen );
+    CPPUNIT_ASSERT( searchHTML(html,i18nc("Grand total balance", "Grand Total")) == moCheckingOpen+moCreditOpen );
 
     //
     // Adding in transactions
@@ -417,9 +417,9 @@ void QueryTableTest::testAccountQuery()
     CPPUNIT_ASSERT(MyMoneyMoney(rows[1]["value"])==(moCreditOpen-(moParent1 + moParent2 + moChild) * 3));
 
     html = qtbl_3.renderHTML();
-    CPPUNIT_ASSERT( searchHTML(html,i18n("Total")+" "+i18n("Checking")) == moCheckingOpen-moSolo*3 );
-    CPPUNIT_ASSERT( searchHTML(html,i18n("Total")+" "+i18n("Credit Card")) == moCreditOpen-(moParent1 + moParent2 + moChild) * 3 );
-    CPPUNIT_ASSERT( searchHTML(html,i18n("Grand Total")) == moCheckingOpen+moCreditOpen-(moParent1 + moParent2 + moSolo + moChild) * 3 );
+    CPPUNIT_ASSERT( searchHTML(html,i18nc("Total balance", "Total")+" "+i18n("Checking")) == moCheckingOpen-moSolo*3 );
+    CPPUNIT_ASSERT( searchHTML(html,i18nc("Total balance", "Total")+" "+i18n("Credit Card")) == moCreditOpen-(moParent1 + moParent2 + moChild) * 3 );
+    CPPUNIT_ASSERT( searchHTML(html,i18nc("Grand total balance", "Grand Total")) == moCheckingOpen+moCreditOpen-(moParent1 + moParent2 + moSolo + moChild) * 3 );
   }
   catch(MyMoneyException *e)
   {

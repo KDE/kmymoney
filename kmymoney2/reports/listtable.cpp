@@ -223,7 +223,7 @@ namespace reports {
     i18nHeaders["payment"] = i18n ( "Payment" );
     i18nHeaders["balance"] = i18n ( "Balance" );
     i18nHeaders["type"] = i18n ( "Type" );
-    i18nHeaders["name"] = i18n ( "Name" );
+    i18nHeaders["name"] = i18nc ("Account name", "Name" );
     i18nHeaders["nextduedate"] = i18n ( "Next Due Date" );
     i18nHeaders["occurence"] = i18n ( "Occurrence" );
     i18nHeaders["paymenttype"] = i18n ( "Payment Method" );
@@ -359,11 +359,11 @@ namespace reports {
               "<td class=\"left" + QString::number ( ( ( *it_group ).depth() - 1 ) ) + "\" "
               "colspan=\"" +
               QString::number ( columns.count() - 1 - postcolumns.count() ) + "\">" +
-              i18n ( "Total" ) + " " + oldName + "</td>"
+              i18nc ("Total balance", "Total" ) + " " + oldName + "</td>"
               "<td>" + subtotal_html + "</td></tr>\n";
 
             csv +=
-              "\"" + i18n ( "Total" ) + " " + oldName + "\",\"" + subtotal_csv + "\"\n";
+              "\"" + i18nc ("Total balance", "Total" ) + " " + oldName + "\",\"" + subtotal_csv + "\"\n";
           }
 
           // going beyond begin() is not caught by the iterator
@@ -561,9 +561,9 @@ namespace reports {
         result += "<tr class=\"sectionfooter\">"
                   "<td class=\"left" + QString::number ( ( *it_group ).depth() - 1 ) + "\" "
                   "colspan=\"" + QString::number ( columns.count() - 1 - postcolumns.count() ) + "\">" +
-                  i18n ( "Total" ) + " " + ( *it_group ).oldName() + "</td>"
+                  i18nc ( "Total balance", "Total" ) + " " + ( *it_group ).oldName() + "</td>"
                   "<td>" + subtotal_html + "</td></tr>\n";
-        csv += "\"" + i18n ( "Total" ) + " " + ( *it_group ).oldName() + "\",\"" + subtotal_csv + "\"\n";
+        csv += "\"" + i18nc ( "Total balance", "Total" ) + " " + ( *it_group ).oldName() + "\",\"" + subtotal_csv + "\"\n";
 
         // going beyond begin() is not caught by the iterator
         if(it_group == groupIteratorList.begin())

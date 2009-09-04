@@ -620,8 +620,8 @@ void QueryTable::constructTransactionTable(void)
               qA["value"] = ((*it_split).shares() * xr).convert(fraction).toString();
               qA["rank"] = "0";
               qA["category"] = i18n("[Split Transaction]");
-              qA["topcategory"] = i18n("Split");
-              qA["categorytype"] = i18n("Split");
+              qA["topcategory"] = i18nc("Split transaction", "Split");
+              qA["categorytype"] = i18nc("Split transaction", "Split");
 
               m_rows += qA;
             }
@@ -1154,7 +1154,7 @@ void QueryTable::constructAccountTable(void)
       }
 
       if ( iid.isEmpty() )
-        qaccountrow["institution"] = i18n("None");
+        qaccountrow["institution"] = i18nc("No institution", "None");
       else
         qaccountrow["institution"] = file->institution(iid).name();
 

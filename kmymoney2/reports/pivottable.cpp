@@ -1349,7 +1349,7 @@ QString PivotTable::renderCSV( void ) const
     result += QString(",%1").arg(QString(m_columnHeadings[column++]));
 
   if ( m_config_f.isShowingRowTotals() )
-    result += QString(",%1").arg(i18n("Total"));
+    result += QString(",%1").arg(i18nc("Total balance", "Total"));
 
   result += "\n";
 
@@ -1451,7 +1451,7 @@ QString PivotTable::renderCSV( void ) const
         if ( m_config_f.isShowingColumnTotals() )
         {
           // Start the TOTALS row
-          finalRow = i18n("Total");
+          finalRow = i18nc("Total balance", "Total");
           isUsed = true;
         }
         else
@@ -1511,7 +1511,7 @@ QString PivotTable::renderCSV( void ) const
 
     if ( m_config_f.isShowingColumnTotals() )
     {
-      result += QString("%1 %2").arg(i18n("Total")).arg(it_outergroup.key());
+      result += QString("%1 %2").arg(i18nc("Total balance", "Total")).arg(it_outergroup.key());
       int column = 1;
       while ( column < m_numColumns ) {
         for(int i = 0; i < m_rowTypeList.size(); ++i)
@@ -1604,7 +1604,7 @@ QString PivotTable::renderHTML( void ) const
     result += QString("<th%1>%2</th>").arg(headerspan,QString(m_columnHeadings[column++]).replace(QRegExp(" "),"<br>"));
 
   if ( m_config_f.isShowingRowTotals() )
-    result += QString("<th%1>%2</th>").arg(headerspan).arg(i18n("Total"));
+    result += QString("<th%1>%2</th>").arg(headerspan).arg(i18nc("Total balance", "Total"));
 
   result += "</tr></thead>\n";
 
@@ -1779,7 +1779,7 @@ QString PivotTable::renderHTML( void ) const
               // Start the TOTALS row
               finalRow = QString("<tr class=\"row-%1\" id=\"subtotal\"><td class=\"left\">&nbsp;&nbsp;%2</td>")
                 .arg(rownum & 0x01 ? "even" : "odd")
-                .arg(i18n("Total"));
+                .arg(i18nc("Total balance", "Total"));
               // don't suppress display of totals
               isUsed = true;
             }
@@ -1856,7 +1856,7 @@ QString PivotTable::renderHTML( void ) const
 
       if ( m_config_f.isShowingColumnTotals() )
       {
-        result += QString("<tr class=\"sectionfooter\"><td class=\"left\">%1&nbsp;%2</td>").arg(i18n("Total")).arg((*it_outergroup).m_displayName);
+        result += QString("<tr class=\"sectionfooter\"><td class=\"left\">%1&nbsp;%2</td>").arg(i18nc("Total balance", "Total")).arg((*it_outergroup).m_displayName);
         int column = 1;
         while ( column < m_numColumns )
         {
@@ -2178,9 +2178,9 @@ void PivotTable::drawChart( KReportChartView& _view ) const
 
             //only show the column type in the header if there is more than one type
             if(m_rowTypeList.size() > 1) {
-              _view.params()->setLegendText( rowNum-1, m_columnTypeHeaderList[i] + " - " + i18n("Total") );
+              _view.params()->setLegendText( rowNum-1, m_columnTypeHeaderList[i] + " - " + i18nc("Total balance", "Total") );
             } else {
-              _view.params()->setLegendText( rowNum-1, i18n("Total") );
+              _view.params()->setLegendText( rowNum-1, i18nc("Total balance", "Total") );
             }
           }
         }
@@ -2200,9 +2200,9 @@ void PivotTable::drawChart( KReportChartView& _view ) const
 
           //only show the column type in the header if there is more than one type
           if(m_rowTypeList.size() > 1) {
-            _view.params()->setLegendText( rowNum-1, m_columnTypeHeaderList[i] + " - " + i18n("Total") );
+            _view.params()->setLegendText( rowNum-1, m_columnTypeHeaderList[i] + " - " + i18nc("Total balance", "Total") );
           } else {
-            _view.params()->setLegendText( rowNum-1, i18n("Total") );
+            _view.params()->setLegendText( rowNum-1, i18nc("Total balance", "Total") );
           }
         }
       }
