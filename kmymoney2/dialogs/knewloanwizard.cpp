@@ -612,7 +612,7 @@ void KNewLoanWizard::next()
 
 void KNewLoanWizard::loadComboBoxes(void)
 {
-  m_interestFrequencyUnitEdit->insertItem(i18n("Days"), static_cast<int>(MyMoneyAccountLoan::changeDaily));
+  m_interestFrequencyUnitEdit->insertItem(i18nc("Occurrence period 'days'", "Days"), static_cast<int>(MyMoneyAccountLoan::changeDaily));
   m_interestFrequencyUnitEdit->insertItem(i18n("Weeks"), static_cast<int>(MyMoneyAccountLoan::changeWeekly));
   m_interestFrequencyUnitEdit->insertItem(i18n("Months"), static_cast<int>(MyMoneyAccountLoan::changeMonthly));
   m_interestFrequencyUnitEdit->insertItem(i18n("Years"), static_cast<int>(MyMoneyAccountLoan::changeYearly));

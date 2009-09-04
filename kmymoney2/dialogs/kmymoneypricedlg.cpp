@@ -62,7 +62,7 @@ KMyMoneyPriceDlg::KMyMoneyPriceDlg(QWidget* parent) :
                     i18n("Remove this price item from the file"));
   m_deleteButton->setGuiItem(removeButtenItem);
 
-  KGuiItem newButtenItem( i18n( "&New" ),
+  KGuiItem newButtenItem( i18nc("New price entry", "&New" ),
                     KIcon("document-new"),
                     i18n("Add a new entry"),
                     i18n("Create a new price entry."));

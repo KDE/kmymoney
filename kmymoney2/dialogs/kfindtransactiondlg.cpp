@@ -281,7 +281,7 @@ void KFindTransactionDlg::slotUpdateSelections(void)
   emit selectionEmpty(txt.isEmpty());
 
   if(txt.isEmpty()) {
-    txt = i18n("(None)");
+    txt = i18nc("No selection", "(None)");
   }
   m_selectedCriteria->setText(i18n("Current selections: ") + txt);
 }

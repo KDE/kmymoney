@@ -105,7 +105,7 @@ void KStartDlg::setPage_Documents()
   recentMainFrame = new KVBox;
 
   KPageWidgetItem *page = new KPageWidgetItem( recentMainFrame , i18n("Open a KMyMoney document") );
-  page->setHeader( i18n("Open") );
+  page->setHeader( i18nc("To open KMyMoney document", "Open") );
   page->setIcon( KIcon("fileopen"));
   addPage(page);
 

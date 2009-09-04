@@ -200,7 +200,7 @@ void Buy::showWidgets(void) const
   setLabelText("asset-label", i18n("Account"));
   setLabelText("shares-label", i18n("Shares"));
   setLabelText("price-label", i18n("Price/share"));
-  setLabelText("total-label", i18n("Total"));
+  setLabelText("total-label", i18nc("Total value", "Total"));
 }
 
 bool Buy::isComplete(void) const
@@ -288,7 +288,7 @@ void Sell::showWidgets(void) const
   setLabelText("asset-label", i18n("Account"));
   setLabelText("shares-label", i18n("Shares"));
   setLabelText("price-label", i18n("Price/share"));
-  setLabelText("total-label", i18n("Total"));
+  setLabelText("total-label", i18nc("Total value", "Total"));
 }
 
 bool Sell::isComplete(void) const
@@ -367,7 +367,7 @@ void Div::showWidgets(void) const
   setLabelText("interest-amount-label", i18n("Amount"));
   setLabelText("interest-label", i18n("Interest"));
   setLabelText("asset-label", i18n("Account"));
-  setLabelText("total-label", i18n("Total"));
+  setLabelText("total-label", i18nc("Total value", "Total"));
 }
 
 bool Div::isComplete(void) const
@@ -425,7 +425,7 @@ void Reinvest::showWidgets(void) const
   setLabelText("interest-label", i18n("Interest"));
   setLabelText("shares-label", i18n("Shares"));
   setLabelText("price-label", i18n("Price/share"));
-  setLabelText("total-label", i18n("Total"));
+  setLabelText("total-label", i18nc("Total value", "Total"));
 }
 
 bool Reinvest::isComplete(void) const

@@ -120,7 +120,7 @@ KEditScheduleDlg::KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget *par
   m_paymentMethodEdit->insertItem(i18n("Standing order"), MyMoneySchedule::STYPE_STANDINGORDER);
   m_paymentMethodEdit->insertItem(i18n("Bank transfer"), MyMoneySchedule::STYPE_BANKTRANSFER);
   m_paymentMethodEdit->insertItem(i18n("Write check"), MyMoneySchedule::STYPE_WRITECHEQUE);
-  m_paymentMethodEdit->insertItem(i18n("Other"), MyMoneySchedule::STYPE_OTHER);
+  m_paymentMethodEdit->insertItem(i18nc("Other payment method", "Other"), MyMoneySchedule::STYPE_OTHER);
 
   MyMoneySchedule::paymentTypeE method = d->m_schedule.paymentType();
   if(method == MyMoneySchedule::STYPE_ANY)

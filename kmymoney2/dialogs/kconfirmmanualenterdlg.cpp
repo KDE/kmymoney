@@ -65,12 +65,12 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
 
     if (po != pn) {
       noItemsChanged++;
-      messageDetail += i18n("Payee changed.<br>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b><p>", po, pn);
+      messageDetail += i18n("Payee changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b><p>", po, pn);
     }
 
     if(to.splits()[0].accountId() != tn.splits()[0].accountId()) {
       noItemsChanged++;
-      messageDetail += i18n("Account changed.<br>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b><p>"
+      messageDetail += i18n("Account changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b><p>"
         , file->account(to.splits()[0].accountId()).name()
 	, file->account(tn.splits()[0].accountId()).name());
     }
@@ -78,7 +78,7 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
     if(file->isTransfer(to) && file->isTransfer(tn)) {
       if(to.splits()[1].accountId() != tn.splits()[1].accountId()) {
         noItemsChanged++;
-        messageDetail += i18n("Transfer account changed.<br>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b><p>"
+        messageDetail += i18n("Transfer account changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b><p>"
 	  , file->account(to.splits()[1].accountId()).name()
 	  , file->account(tn.splits()[1].accountId()).name());
       }
@@ -106,7 +106,7 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
       if (co != cn)
       {
         noItemsChanged++;
-        messageDetail += i18n("Category changed.<br>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b><p>", co, cn);
+        messageDetail += i18n("Category changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b><p>", co, cn);
       }
     }
 
@@ -114,13 +114,13 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
     mo = to.splits()[0].memo();
     mn = tn.splits()[0].memo();
     if(mo.isEmpty())
-       mo = QString("<i>")+i18n("empty")+QString("</i>");
+       mo = QString("<i>")+i18nc("Empty memo", "empty")+QString("</i>");
     if(mn.isEmpty())
-       mn = QString("<i>")+i18n("empty")+QString("</i>");
+       mn = QString("<i>")+i18nc("Empty memo", "empty")+QString("</i>");
     if (mo != mn)
     {
       noItemsChanged++;
-      messageDetail += i18n("Memo changed.<br>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b><p>", mo, mn);
+      messageDetail += i18n("Memo changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b><p>", mo, mn);
     }
 
     const MyMoneySecurity& sec = MyMoneyFile::instance()->security(to.commodity());
@@ -129,7 +129,7 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
     an = tn.splits()[0].value();
     if (ao != an) {
       noItemsChanged++;
-      messageDetail += i18n("Amount changed.<br>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b><p>", ao.formatMoney(sec.smallestAccountFraction()), an.formatMoney(sec.smallestAccountFraction()));
+      messageDetail += i18n("Amount changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b><p>", ao.formatMoney(sec.smallestAccountFraction()), an.formatMoney(sec.smallestAccountFraction()));
     }
 
     MyMoneySplit::reconcileFlagE fo, fn;
@@ -137,7 +137,7 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
     fn = tn.splits()[0].reconcileFlag();
     if(fo != fn) {
       noItemsChanged++;
-      messageDetail += i18n("Reconciliation flag changed.<br>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b><p>",    KMyMoneyUtils::reconcileStateToString(fo, true), KMyMoneyUtils::reconcileStateToString(fn, true));
+      messageDetail += i18n("Reconciliation flag changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b><p>",    KMyMoneyUtils::reconcileStateToString(fo, true), KMyMoneyUtils::reconcileStateToString(fn, true));
     }
   }
   catch (MyMoneyException *e)

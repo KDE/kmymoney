@@ -70,7 +70,7 @@ KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent, const QString& sec
   lvEquityList->setRootIsDecorated(false);
   lvEquityList->setColumnText(0, i18n("Symbol"));
   lvEquityList->addColumn(i18n("Symbol"));
-  lvEquityList->addColumn(i18n("Name"),125);
+  lvEquityList->addColumn(i18nc("Equity name", "Name"),125);
   lvEquityList->addColumn(i18n("Price"));
   lvEquityList->addColumn(i18n("Date"));
 
