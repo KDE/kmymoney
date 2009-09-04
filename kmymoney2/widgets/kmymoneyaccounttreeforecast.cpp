@@ -56,7 +56,7 @@ void KMyMoneyAccountTreeForecast::showSummary(MyMoneyForecast& forecast)
   int daysToBeginDay;
 
   //add cycle interval columns
-  addColumn(i18n("Current"), -1);
+  addColumn(i18nc("Today's forecast", "Current"), -1);
 
   //if beginning of forecast is today, set the begin day to next cycle to avoid repeating the first cycle
   if(QDate::currentDate() < forecast.beginForecastDate()) {
@@ -83,7 +83,7 @@ void KMyMoneyAccountTreeForecast::showSummary(MyMoneyForecast& forecast)
 void KMyMoneyAccountTreeForecast::showDetailed(MyMoneyForecast& forecast)
 {
   //add cycle interval columns
-  addColumn(i18n("Current"), -1);
+  addColumn(i18nc("Today's forecast", "Current"), -1);
 
   for(int i = 1; i <= forecast.forecastDays(); ++i) {
     QDate forecastDate = QDate::currentDate().addDays(i);
@@ -122,7 +122,7 @@ void KMyMoneyAccountTreeForecast::showAdvanced(MyMoneyForecast& forecast)
     setColumnAlignment(col, Qt::AlignRight);
     addColumn(i18n("Max Date %1",i), -1);
   }
-  int col = addColumn(i18n("Average"), -1);
+  int col = addColumn(i18nc("Average balance", "Average"), -1);
   setColumnAlignment(col, Qt::AlignRight);
 }
 
@@ -138,7 +138,7 @@ void KMyMoneyAccountTreeForecast::showBudget(MyMoneyForecast& forecast)
     addColumn(columnName, -1);
   }
   //add total column
-  addColumn(i18n("Total"), -1);
+  addColumn(i18nc("Total balance", "Total"), -1);
 
 
   //align columns

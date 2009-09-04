@@ -474,7 +474,7 @@ ReconcileGroupMarker::ReconcileGroupMarker(Register* parent, MyMoneySplit::recon
       m_txt = i18nc("Reconcile state 'Frozen'", "Frozen");
       break;
     default:
-      m_txt = i18n("Unknown");
+      m_txt = i18nc("Unknown reconcile state", "Unknown");
       break;
   }
 }
@@ -555,7 +555,7 @@ Register::Register(QWidget *parent, const char *name ) :
   setSorting(false);
 
   // keep the following list in sync with KMyMoneyRegister::Column in transaction.h
-  horizontalHeader()->setLabel(NumberColumn, i18n("No."));
+  horizontalHeader()->setLabel(NumberColumn, i18nc("Cheque Number", "No."));
   horizontalHeader()->setLabel(DateColumn, i18n("Date"));
   horizontalHeader()->setLabel(AccountColumn, i18n("Account"));
   horizontalHeader()->setLabel(SecurityColumn, i18n("Security"));

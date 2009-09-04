@@ -249,7 +249,7 @@ void kMyMoneyScheduledDateTbl::drawCellContents(QPainter *painter, int /*row*/, 
 
         if (billSchedules.count() >= 1)
         {
-          text += i18n("%1 Bills.",QString::number(billSchedules.count()));
+          text += i18n("%1 Bills.",billSchedules.count());
         }
       }
 
@@ -265,7 +265,7 @@ void kMyMoneyScheduledDateTbl::drawCellContents(QPainter *painter, int /*row*/, 
         {
           if(!text.isEmpty())
             text += "  ";
-          text += i18n("%1 Deposits.",QString::number(depositSchedules.count()));
+          text += i18n("%1 Deposits.",depositSchedules.count());
         }
       }
 
@@ -281,7 +281,7 @@ void kMyMoneyScheduledDateTbl::drawCellContents(QPainter *painter, int /*row*/, 
         {
           if(!text.isEmpty())
             text += "  ";
-          text += i18n("%1 Transfers.",QString::number(transferSchedules.count()));
+          text += i18n("%1 Transfers.", transferSchedules.count());
         }
       }
     }

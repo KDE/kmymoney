@@ -84,7 +84,7 @@ void RegisterSearchLine::init(Register *reg)
   d->combo->insertItem(SmallIcon("attention"), i18n("Erroneous"));
   d->combo->insertItem(i18n("Not marked"));
   d->combo->insertItem(i18n("Not reconciled"));
-  d->combo->insertItem(i18n("Cleared"));
+  d->combo->insertItem(i18nc("Reconciliation state 'Cleared'", "Cleared"));
   d->combo->setCurrentItem(0);
   connect(d->combo, SIGNAL(activated(int)), this, SLOT(slotStatusChanged(int)));
 
@@ -274,7 +274,7 @@ RegisterSearchLine* RegisterSearchLineWidget::createSearchLine(Register* reg)
 
 void RegisterSearchLineWidget::createWidgets(void)
 {
-  QLabel *label = new QLabel(i18n("S&earch:"), this, "kde toolbar widget");
+  QLabel *label = new QLabel(i18nc("Search widget label", "S&earch:"), this, "kde toolbar widget");
 
   d->searchLine = createSearchLine(d->reg);
   d->searchLine->show();

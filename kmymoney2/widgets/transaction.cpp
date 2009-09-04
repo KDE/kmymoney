@@ -711,7 +711,7 @@ QString Transaction::reconcileState(bool text) const
   QString txt = KMyMoneyUtils::reconcileStateToString(m_split.reconcileFlag(), text);
 
   if((text == true)
-  && (txt == i18n("Unknown"))
+  && (txt == i18nc("Unknown reconciliation state", "Unknown"))
   && (m_transaction == MyMoneyTransaction()))
     txt = QString();
   return txt;
@@ -1462,7 +1462,7 @@ void InvestTransaction::activity(QString& txt, MyMoneySplit::investTransactionTy
       txt = i18n("Split shares");
       break;
     default:
-      txt = i18n("Unknown");
+      txt = i18nc("Unknown investment activity", "Unknown");
       break;
   }
 }
@@ -1646,7 +1646,7 @@ bool InvestTransaction::formCellText(QString& txt, int& align, int row, int col,
         case LabelColumn2:
           align |= Qt::AlignLeft;
           if(haveAmount())
-            txt = i18n("Total");
+            txt = i18nc("Total balance", "Total");
           break;
 
         case ValueColumn2:

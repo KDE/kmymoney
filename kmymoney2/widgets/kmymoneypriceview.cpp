@@ -129,7 +129,7 @@ KMyMoneyPriceView::KMyMoneyPriceView(QWidget *parent, const char *name ) :
   addColumn(i18n("Currency"));
   addColumn(i18n("Date"));
   addColumn(i18n("Price"));
-  addColumn(i18n("Source"));
+  addColumn(i18nc("Price source", "Source"));
   setAllColumnsShowFocus(true);
   setMultiSelection(false);
   setColumnWidthMode(0, Q3ListView::Maximum);
@@ -144,7 +144,7 @@ KMyMoneyPriceView::KMyMoneyPriceView(QWidget *parent, const char *name ) :
   m_contextMenu = new KMenu(this);
   m_contextMenu->addTitle(i18n("Price Options"));
   m_contextMenu->insertItem(kiconloader->loadIcon("document-new", KIconLoader::Small),
-                        i18n("New..."),
+                        i18nc("New price", "New..."),
                         this, SIGNAL(newPrice()));
 
   m_contextMenu->insertItem(kiconloader->loadIcon("edit", KIconLoader::Small),

@@ -49,7 +49,7 @@ kMyMoneyOnlineQuoteConfig::kMyMoneyOnlineQuoteConfig(QWidget *parent )
 
   m_updateButton->setEnabled(false);
 
-  KGuiItem updateButtenItem( i18n("&Update" ),
+  KGuiItem updateButtenItem( i18nc("To update online sources", "&Update" ),
                     KIcon("dialog-ok"),
                     i18n("Accepts the entered data and stores it"),
                     i18n("Use this to accept the modified data."));
@@ -61,7 +61,7 @@ kMyMoneyOnlineQuoteConfig::kMyMoneyOnlineQuoteConfig(QWidget *parent )
                       i18n("Use this to delete the selected online source entry"));
   m_deleteButton->setGuiItem(deleteButtenItem);
 
-  KGuiItem newButtenItem( i18n( "&New..." ),
+  KGuiItem newButtenItem( i18nc("New online source", "&New..." ),
                       KIcon("document-new"),
                       i18n("Create a new source entry for online quotes"),
                       i18n("Use this to create a new entry for online quotes"));

@@ -1340,7 +1340,7 @@ void MyMoneyScheduleTest::testStringToOccurrence()
   // test MyMoneySchedule::stringToOccurrence(QString) == occurrence
   CPPUNIT_ASSERT( MyMoneySchedule::stringToOccurrence(i18nc("Occurs once", "Once")) == MyMoneySchedule::OCCUR_ONCE );
   CPPUNIT_ASSERT( MyMoneySchedule::stringToOccurrence(i18nc("Occurs daily", "Daily")) == MyMoneySchedule::OCCUR_DAILY );
-  CPPUNIT_ASSERT( MyMoneySchedule::stringToOccurrence(i18n("Occurs weekly", "Weekly")) == MyMoneySchedule::OCCUR_WEEKLY );
+  CPPUNIT_ASSERT( MyMoneySchedule::stringToOccurrence(i18nc("Occurs weekly", "Weekly")) == MyMoneySchedule::OCCUR_WEEKLY );
   CPPUNIT_ASSERT( MyMoneySchedule::stringToOccurrence(i18n("Every other week")) == MyMoneySchedule::OCCUR_EVERYOTHERWEEK );
   CPPUNIT_ASSERT( MyMoneySchedule::stringToOccurrence(i18n("Fortnightly")) == MyMoneySchedule::OCCUR_FORTNIGHTLY );
   CPPUNIT_ASSERT( MyMoneySchedule::stringToOccurrence(i18n("Every half month")) == MyMoneySchedule::OCCUR_EVERYHALFMONTH );

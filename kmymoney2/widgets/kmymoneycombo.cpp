@@ -348,7 +348,7 @@ KMyMoneyReconcileCombo::KMyMoneyReconcileCombo(QWidget* w) :
   // add the items in reverse order of appearance (see KMyMoneySelector::newItem() for details)
   // selector()->newTopItem(i18n("Frozen"), QString(), "F");
   selector()->newTopItem(i18n("Reconciled"), QString(), "R");
-  selector()->newTopItem(i18n("Cleared"), QString(), "C");
+  selector()->newTopItem(i18nc("Reconciliation state 'Cleared'", "Cleared"), QString(), "C");
   selector()->newTopItem(i18n("Not reconciled"), QString(), " ");
   selector()->newTopItem(" ", QString(), "U");
 

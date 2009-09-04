@@ -94,7 +94,7 @@ void KMyMoneyBriefSchedule::loadSchedule()
     {
       MyMoneySchedule sched = m_scheduleList[m_index];
 
-      m_indexLabel->setText(i18n("%1 of %2", QString::number(m_index+1), QString::number(m_scheduleList.count())));
+      m_indexLabel->setText(i18n("%1 of %2", m_index+1, m_scheduleList.count()));
       m_name->setText(sched.name());
       m_type->setText(KMyMoneyUtils::scheduleTypeToString(sched.type()));
       m_account->setText(sched.account().name());

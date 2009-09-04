@@ -124,9 +124,9 @@ KMyMoneyWizard::KMyMoneyWizard(QWidget *parent, const char *name, bool modal, Qt
 
   // create buttons
   m_cancelButton = new KPushButton(i18n("&Cancel"), this);
-  m_backButton = new KPushButton(i18n("&Back"), this);
-  m_nextButton = new KPushButton(i18n("&Next"), this);
-  m_finishButton = new KPushButton(i18n("&Finish"), this);
+  m_backButton = new KPushButton(i18nc("Go to previous page of the wizard", "&Back"), this);
+  m_nextButton = new KPushButton(i18nc("Go to next page of the wizard", "&Next"), this);
+  m_finishButton = new KPushButton(i18nc("Finish the wizard", "&Finish"), this);
   m_helpButton = new KPushButton(i18n("&Help"), this);
 
   if ( KGlobalSettings::showIconsOnPushButtons() )

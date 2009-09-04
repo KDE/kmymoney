@@ -66,7 +66,7 @@ kMyMoneyAccountSelector::kMyMoneyAccountSelector(QWidget *parent, const char *na
 
     m_allAccountsButton = new KPushButton( this );
     m_allAccountsButton->setObjectName( "m_allAccountsButton" );
-    m_allAccountsButton->setText( i18n( "All" ) );
+    m_allAccountsButton->setText( i18nc("Select all accounts", "All" ) );
     buttonLayout->addWidget( m_allAccountsButton );
 
     m_incomeCategoriesButton = new KPushButton( this);
@@ -81,7 +81,7 @@ kMyMoneyAccountSelector::kMyMoneyAccountSelector(QWidget *parent, const char *na
 
     m_noAccountButton = new KPushButton( this);
     m_noAccountButton->setObjectName( "m_noAccountButton" );
-    m_noAccountButton->setText( i18n( "None" ) );
+    m_noAccountButton->setText( i18nc("No account", "None" ) );
     buttonLayout->addWidget( m_noAccountButton );
 
     QSpacerItem* spacer = new QSpacerItem( 0, 67, QSizePolicy::Minimum, QSizePolicy::Expanding );
