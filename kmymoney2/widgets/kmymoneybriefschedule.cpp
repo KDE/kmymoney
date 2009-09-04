@@ -105,13 +105,13 @@ void KMyMoneyBriefSchedule::loadSchedule()
       if (sched.willEnd())
       {
         int transactions = sched.paymentDates(m_date, sched.endDate()).count()-1;
-        text = i18n("Payment on %1 for %2 with %3 transactions remaining occuring %4.",
+        text = i18n("Payment on %1 for %2 with %3 transactions remaining occurring %4.",
                 KGlobal::locale()->formatDate(m_date),
                 amount.formatMoney(sched.account().fraction()),
                 QString::number(transactions),
                 i18n(sched.occurrenceToString().toLatin1()));
       } else {
-        text = i18n("Payment on %1 for %2 occuring %3.",
+        text = i18n("Payment on %1 for %2 occurring %3.",
                 KGlobal::locale()->formatDate(m_date),
                 amount.formatMoney(sched.account().fraction()),
                 i18n(sched.occurrenceToString().toLatin1()));

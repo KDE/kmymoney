@@ -117,7 +117,7 @@ Once you have chosen an import type please press the OK button.</string>
             </size>
           </property>
           <property name="text">
-            <string>Some descripton</string>
+            <string>Some description</string>
           </property>
           <property name="wordWrap">
             <bool>false</bool>

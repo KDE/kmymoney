@@ -201,7 +201,7 @@ int KEnterScheduleDlg::exec(void)
 {
   if(d->m_showWarningOnce) {
     d->m_showWarningOnce = false;
-    KMessageBox::information(this, QString("<qt>")+i18n("<p>Please check that all the details in the following dialog are correct and press OK.</p><p>Editable data can be changed and can either be applied to just this occurence or for all subsequent occurences for this schedule.  (You will be asked what you intend after pressing OK in the following dialog)</p>")+QString("</qt>"), i18n("Enter scheduled transaction"), "EnterScheduleDlgInfo");
+    KMessageBox::information(this, QString("<qt>")+i18n("<p>Please check that all the details in the following dialog are correct and press OK.</p><p>Editable data can be changed and can either be applied to just this occurrence or for all subsequent occurrences for this schedule.  (You will be asked what you intend after pressing OK in the following dialog)</p>")+QString("</qt>"), i18n("Enter scheduled transaction"), "EnterScheduleDlgInfo");
   }
 
   return KEnterScheduleDlgDecl::exec();

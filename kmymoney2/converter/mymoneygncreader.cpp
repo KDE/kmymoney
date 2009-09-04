@@ -194,11 +194,11 @@ QString GncObject::hide (QString data, unsigned int anonClass) {
   switch (anonClass) {
   case ASIS: break;                  // this is not personal data
   case SUPPRESS: result = ""; break; // this is personal and is not essential
-  case NXTACC: result = i18n("Account%1").arg(++nextAccount, -6); break; // generate account name
+  case NXTACC: result = ki18n("Account%1").subs(++nextAccount, -6).toString(); break; // generate account name
   case NXTEQU:   // generate/return an equity name
     it = anonStocks.find (data);
     if (it == anonStocks.end()) {
-      result = i18n("Stock%1").arg(++nextEquity, -6);
+      result = ki18n("Stock%1").subs(++nextEquity, -6).toString();
       anonStocks.insert (data, result);
     } else {
       result = (*it);
@@ -207,13 +207,13 @@ QString GncObject::hide (QString data, unsigned int anonClass) {
   case NXTPAY:   // genearet/return a payee name
     it = anonPayees.find (data);
     if (it == anonPayees.end()) {
-      result = i18n("Payee%1").arg(++nextPayee, -6);
+      result = ki18n("Payee%1").subs(++nextPayee, -6).toString();
       anonPayees.insert (data, result);
     } else {
       result = (*it);
     }
     break;
-  case NXTSCHD: result = i18n("Schedule%1").arg(++nextSched, -6); break; // generate a schedule name
+  case NXTSCHD: result = ki18n("Schedule%1").subs(++nextSched, -6).toString(); break; // generate a schedule name
   case MONEY1:
     in = MyMoneyMoney(data);
     if (data == "-1/0") in = MyMoneyMoney (0); // spurious gnucash data - causes a crash sometimes

@@ -91,7 +91,7 @@ NewAccountWizard::Wizard::Wizard(QWidget *parent, const char *name, bool modal, 
   addStep(i18n("Schedule"));
   addStep(i18n("Payout"));
   addStep(i18n("Parent Account"));
-  addStep(i18n("Finish"));
+  addStep(i18nc("Finish the wizard", "Finish"));
   setStepHidden(StepBroker);
   setStepHidden(StepSchedule);
   setStepHidden(StepPayout);
@@ -685,7 +685,7 @@ CreditCardSchedulePage::CreditCardSchedulePage(Wizard* wizard) :
   m_method->insertItem(i18n("Standing order"), MyMoneySchedule::STYPE_STANDINGORDER);
   m_method->insertItem(i18n("Manual deposit"), MyMoneySchedule::STYPE_MANUALDEPOSIT);
   m_method->insertItem(i18n("Direct deposit"), MyMoneySchedule::STYPE_DIRECTDEPOSIT);
-  m_method->insertItem(i18n("Other"), MyMoneySchedule::STYPE_OTHER);
+  m_method->insertItem(i18nc("Other payment method", "Other"), MyMoneySchedule::STYPE_OTHER);
   m_method->setCurrentItem(MyMoneySchedule::STYPE_DIRECTDEBIT);
 
   slotLoadWidgets();
@@ -1587,7 +1587,7 @@ void AccountSummaryPage::enterPage(void)
   Q3ListViewItem* group = new KMyMoneyCheckListItem(m_dataList, i18n("Account information"), QString(), QString(), Q3CheckListItem::RadioButtonController);
   group->setOpen(true);
   Q3ListViewItem* p;
-  p = new K3ListViewItem(group, i18n("Name"), acc.name());
+  p = new K3ListViewItem(group, i18nc("Account name", "Name"), acc.name());
   if(!acc.isLoan())
     p = new K3ListViewItem(group, p, i18n("Subaccount of"),
                           m_wizard->parentAccount().name());
@@ -1617,7 +1617,7 @@ void AccountSummaryPage::enterPage(void)
     if(m_wizard->m_brokeragepage->m_createBrokerageButton->isChecked()) {
       group = new KMyMoneyCheckListItem(m_dataList, group, i18n("Brokerage Account"), QString(), QString(), Q3CheckListItem::RadioButtonController);
       group->setOpen(true);
-      p = new K3ListViewItem(group, p, i18n("Name"), QString("%1 (Brokerage)").arg(acc.name()));
+      p = new K3ListViewItem(group, p, i18nc("Account name", "Name"), QString("%1 (Brokerage)").arg(acc.name()));
       p = new K3ListViewItem(group, p, i18n("Currency"), m_wizard->m_brokeragepage->m_brokerageCurrency->security().name());
       if(m_wizard->m_brokeragepage->m_accountNumber->isEnabled() && !m_wizard->m_brokeragepage->m_accountNumber->text().isEmpty())
         p = new K3ListViewItem(group, p, i18n("Number"), m_wizard->m_brokeragepage->m_accountNumber->text());
@@ -1661,10 +1661,10 @@ void AccountSummaryPage::enterPage(void)
   if(!(sch == MyMoneySchedule())) {
     group = new KMyMoneyCheckListItem(m_dataList, group, i18n("Schedule information"), QString(), QString(), Q3CheckListItem::RadioButtonController);
     group->setOpen(true);
-    p = new K3ListViewItem(group, i18n("Name"), sch.name());
+    p = new K3ListViewItem(group, i18nc("Schedule name", "Name"), sch.name());
     if(acc.accountType() == MyMoneyAccount::CreditCard) {
       MyMoneyAccount paymentAccount = MyMoneyFile::instance()->account(m_wizard->m_schedulePage->m_paymentAccount->selectedItem());
-      p = new K3ListViewItem(group, p, i18n("Occurrence"), i18n("Monthly"));
+      p = new K3ListViewItem(group, p, i18nc("Schedule occurrence", "Occurrence"), i18n("Monthly"));
       p = new K3ListViewItem(group, p, i18n("Paid from"), paymentAccount.name());
       p = new K3ListViewItem(group, p, i18n("Pay to"), m_wizard->m_schedulePage->m_payee->currentText());
       p = new K3ListViewItem(group, p, i18n("Amount"), m_wizard->m_schedulePage->m_amount->value().formatMoney(acc, sec));

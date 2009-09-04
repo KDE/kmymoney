@@ -76,7 +76,7 @@ void KChooseImportExportDlg::slotTypeActivated(const QString& text)
       "Another dialog will appear, if you choose this type, asking for further\n"
       "information relevant to the Quicken format."));
   } else {
-    descriptionLabel->setText(i18n("The CSV type uses a comma delimeted text file that can be used by\n"
+    descriptionLabel->setText(i18n("The CSV type uses a comma delimited text file that can be used by\n"
       "most popular spreadsheet programs available for Linux and other operating\n"
       "systems."));
   }

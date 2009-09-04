@@ -80,12 +80,12 @@ NewUserWizard::Wizard::Wizard(QWidget *parent, const char *name, bool modal, Qt:
 
   setTitle(i18n("KMyMoney New File Setup"));
   if(isFirstTime)
-    addStep(i18n("Introduction"));
+    addStep(i18nc("New file wizard introduction", "Introduction"));
   addStep(i18n("Personal Data"));
   addStep(i18n("Select Currency"));
   addStep(i18n("Select Accounts"));
   addStep(i18n("Set preferences"));
-  addStep(i18n("Finish"));
+  addStep(i18nc("Finish the wizard", "Finish"));
 
   if(isFirstTime)
     m_introPage = new IntroPage(this);

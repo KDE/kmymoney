@@ -20,7 +20,7 @@
             <enum>Qt::NoFocus</enum>
           </property>
           <property name="text">
-            <string>KMyMoney supports multiple currencies. Your reports will be based on a default curreny which you can select here. The default for new accounts is also the currency you select here.</string>
+            <string>KMyMoney supports multiple currencies. Your reports will be based on a default currency which you can select here. The default for new accounts is also the currency you select here.</string>
           </property>
         </widget>
       </item>
