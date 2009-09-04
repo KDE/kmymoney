@@ -389,11 +389,11 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
   }
   messages += i18n("  Transactions");
   messages += i18n("    %1 processed",d->transactionsCount);
-  messages += i18n("    %1 added",d->transactionsAdded);
+  messages += i18nc("x transactions have been added", "    %1 added",d->transactionsAdded);
   messages += i18n("    %1 matched",d->transactionsMatched);
   messages += i18n("    %1 duplicates",d->transactionsDuplicate);
   messages += i18n("  Payees");
-  messages += i18n("    %1 created",payeeCount);
+  messages += i18nc("x transactions have been created", "    %1 created",payeeCount);
   messages += QString();
 
   // remove the Don't ask again entries
@@ -1268,11 +1268,11 @@ bool MyMoneyStatementReader::selectOrCreateAccount(const SelectCreateMode /*mode
     }
   }
 
-  QString msg = i18n("<b>You have downloaded a statement for the following account:</b><br><br>");
-  msg += i18n(" - Account Name: %1",account.name()) + "<br>";
-  msg += i18n(" - Account Type: %1",KMyMoneyUtils::accountTypeToString(account.accountType())) + "<br>";
-  msg += i18n(" - Account Number: %1",account.number()) + "<br>";
-  msg += "<br>";
+  QString msg = i18n("<b>You have downloaded a statement for the following account:</b><br/><br/>");
+  msg += i18n(" - Account Name: %1",account.name()) + "<br/>";
+  msg += i18n(" - Account Type: %1",KMyMoneyUtils::accountTypeToString(account.accountType())) + "<br/>";
+  msg += i18n(" - Account Number: %1",account.number()) + "<br/>";
+  msg += "<br/>";
 
   QString header;
 

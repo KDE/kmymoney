@@ -2129,7 +2129,7 @@ void MyMoneyQifReader::selectOrCreateAccount(const SelectCreateMode mode, MyMone
 
       } else {
         switch(KMessageBox::questionYesNo(0,
-                  i18n("The %1 '%2' does not exist. Do you "
+                  i18nc("The 'type of object' 'x' does not exist", "The %1 '%2' does not exist. Do you "
                        "want to create it?",typeStr,account.name()))) {
           case KMessageBox::Yes:
             break;
@@ -2138,7 +2138,7 @@ void MyMoneyQifReader::selectOrCreateAccount(const SelectCreateMode mode, MyMone
         }
       }
     } else {
-      accountSelect.setHeader(i18n("Select %1",typeStr));
+      accountSelect.setHeader(i18nc("To select account", "Select %1",typeStr));
       if(!accountId.isEmpty()) {
         msg = i18n("The %1 <b>%2</b> currently exists. Do you want "
                    "to import transactions to this account?",typeStr,account.name());

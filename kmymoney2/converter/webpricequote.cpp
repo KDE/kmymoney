@@ -137,7 +137,7 @@ bool WebPriceQuote::launchNative( const QString& _symbol, const QString& _id, co
 
   if ( url.isLocalFile() )
   {
-    emit status(i18n("Executing %1...",url.path()));
+    emit status(i18nc("The process x is executing", "Executing %1...",url.path()));
 
     m_filter.clearArguments();
     m_filter << QStringList::split(" ",url.path());
@@ -282,7 +282,7 @@ bool WebPriceQuote::launchFinanceQuote ( const QString& _symbol, const QString& 
   m_filter << "perl" << m_financeQuoteScriptPath << FQSource << KShell::quoteArg(_symbol);
   m_filter.setUseShell(true);
   m_filter.setSymbol(m_symbol);
-  emit status(i18n("Executing %1 %2 %3...",m_financeQuoteScriptPath,FQSource,_symbol));
+  emit status(i18nc("Executing 'script' 'online source' 'investment symbol' ", "Executing %1 %2 %3...",m_financeQuoteScriptPath,FQSource,_symbol));
 
     // if we're running non-interactive, we'll need to block.
     // otherwise, just let us know when it's done.
