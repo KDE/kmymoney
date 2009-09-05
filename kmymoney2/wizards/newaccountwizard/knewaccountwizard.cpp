@@ -534,9 +534,9 @@ void AccountTypePage::slotUpdateCurrency(void)
 void AccountTypePage::slotGetOnlineQuote(void)
 {
   QString id = MyMoneyFile::instance()->baseCurrency().id()+" "+m_currencyComboBox->security().id();
-  KEquityPriceUpdateDlg dlg(this, id);
-  if(dlg.exec() == QDialog::Accepted) {
-    MyMoneyPrice price = dlg.price(id);
+  QPointer<KEquityPriceUpdateDlg> dlg = new KEquityPriceUpdateDlg(this, id);
+  if(dlg->exec() == QDialog::Accepted) {
+    MyMoneyPrice price = dlg->price(id);
     if(price.isValid()) {
       m_conversionRate->setValue(price.rate(m_currencyComboBox->security().id()));
       if(price.date() != m_openingDate->date()) {
@@ -544,6 +544,7 @@ void AccountTypePage::slotGetOnlineQuote(void)
       }
     }
   }
+  delete dlg;
 }
 
 void AccountTypePage::slotPriceWarning(void)
@@ -1271,7 +1272,7 @@ void LoanPaymentPage::enterPage(void)
 void LoanPaymentPage::slotAdditionalFees(void)
 {
   QMap<QString, MyMoneyMoney> priceInfo;
-  KSplitTransactionDlg* dlg = new KSplitTransactionDlg(d->additionalFeesTransaction, d->phonySplit, d->phonyAccount, false, !m_wizard->moneyBorrowed(), MyMoneyMoney(0), priceInfo);
+  QPointer<KSplitTransactionDlg> dlg = new KSplitTransactionDlg(d->additionalFeesTransaction, d->phonySplit, d->phonyAccount, false, !m_wizard->moneyBorrowed(), MyMoneyMoney(0), priceInfo);
 
   // connect(dlg, SIGNAL(newCategory(MyMoneyAccount&)), this, SIGNAL(newCategory(MyMoneyAccount&)));
 

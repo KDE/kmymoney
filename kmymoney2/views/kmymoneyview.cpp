@@ -1302,9 +1302,10 @@ void KMyMoneyView::selectBaseCurrency(void)
 
   // check if we have a base currency. If not, we need to select one
   if(file->baseCurrency().id().isEmpty()) {
-    KCurrencyEditDlg dlg(this);
-    connect(&dlg, SIGNAL(selectBaseCurrency(const MyMoneySecurity&)), this, SLOT(slotSetBaseCurrency(const MyMoneySecurity&)));
-    dlg.exec();
+    QPointer<KCurrencyEditDlg> dlg = new KCurrencyEditDlg(this);
+    connect(dlg, SIGNAL(selectBaseCurrency(const MyMoneySecurity&)), this, SLOT(slotSetBaseCurrency(const MyMoneySecurity&)));
+    dlg->exec();
+    delete dlg;
   }
 
   if(!file->baseCurrency().id().isEmpty()) {

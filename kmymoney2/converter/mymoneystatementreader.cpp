@@ -1293,22 +1293,22 @@ bool MyMoneyStatementReader::selectOrCreateAccount(const SelectCreateMode /*mode
   }
 
   KMyMoneyUtils::categoryTypeE type = static_cast<KMyMoneyUtils::categoryTypeE>(KMyMoneyUtils::asset|KMyMoneyUtils::liability);
-  KAccountSelectDlg accountSelect(type, "StatementImport", kmymoney2);
-  accountSelect.setHeader(i18n("Import transactions"));
-  accountSelect.setDescription(msg);
-  accountSelect.setAccount(account, accountId);
-  accountSelect.setMode(false);
-  accountSelect.showAbortButton(true);
-  accountSelect.m_qifEntry->hide();
+  QPointer<KAccountSelectDlg> accountSelect = new KAccountSelectDlg(type, "StatementImport", kmymoney2);
+  accountSelect->setHeader(i18n("Import transactions"));
+  accountSelect->setDescription(msg);
+  accountSelect->setAccount(account, accountId);
+  accountSelect->setMode(false);
+  accountSelect->showAbortButton(true);
+  accountSelect->m_qifEntry->hide();
   QString accname;
   bool done = false;
   while ( !done )
   {
-    if ( accountSelect.exec() == QDialog::Accepted && !accountSelect.selectedAccount().isEmpty() )
+    if ( accountSelect->exec() == QDialog::Accepted && !accountSelect->selectedAccount().isEmpty() )
     {
       result = true;
       done = true;
-      accountId = accountSelect.selectedAccount();
+      accountId = accountSelect->selectedAccount();
       account = file->account(accountId);
       if ( ! accountNumber.isEmpty() && account.value("StatementKey") != accountNumber )
       {
@@ -1326,13 +1326,15 @@ bool MyMoneyStatementReader::selectOrCreateAccount(const SelectCreateMode /*mode
     }
     else
     {
-      if(accountSelect.aborted())
+      if(accountSelect->aborted())
         //throw new MYMONEYEXCEPTION("USERABORT");
         done = true;
       else
         KMessageBox::error(0, QString("<qt>%1</qt>").arg(i18n("You must select an account, create a new one, or press the <b>Abort</b> button.")));
     }
   }
+  delete accountSelect;
+
   return result;
 }
 

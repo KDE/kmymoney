@@ -1191,25 +1191,25 @@ void StdTransactionEditor::autoFill(const QString& payeeId)
         t = list.last().first;
       } else {
 #endif
-        KSelectTransactionsDlg dlg(m_account, m_regForm);
-        dlg.setWindowTitle(i18n("Select autofill transaction"));
+        QPointer<KSelectTransactionsDlg> dlg = new KSelectTransactionsDlg(m_account, m_regForm);
+        dlg->setWindowTitle(i18n("Select autofill transaction"));
 
         QMap<QString, struct uniqTransaction>::const_iterator it_u;
         for(it_u = uniqList.constBegin(); it_u != uniqList.constEnd(); ++it_u) {
-          dlg.addTransaction(*(*it_u).t);
+          dlg->addTransaction(*(*it_u).t);
         }
 
         // setup sort order
-        dlg.m_register->setSortOrder("1,-9,-4");
+        dlg->m_register->setSortOrder("1,-9,-4");
         // sort the transactions according to the sort setting
-        dlg.m_register->sortItems();
+        dlg->m_register->sortItems();
 
         // and select the last item
-        if(dlg.m_register->lastItem())
-          dlg.m_register->selectItem(dlg.m_register->lastItem());
+        if(dlg->m_register->lastItem())
+          dlg->m_register->selectItem(dlg->m_register->lastItem());
 
-        if(dlg.exec() == QDialog::Accepted) {
-          t = dlg.transaction();
+        if(dlg->exec() == QDialog::Accepted) {
+          t = dlg->transaction();
         }
 #if 0
       }
@@ -1757,7 +1757,8 @@ int StdTransactionEditor::slotEditSplits(void)
     if(createTransaction(transaction, m_transaction, m_split)) {
       MyMoneyMoney value;
 
-      KSplitTransactionDlg* dlg = new KSplitTransactionDlg(transaction,
+      QPointer<KSplitTransactionDlg> dlg =
+                                 new KSplitTransactionDlg(transaction,
                                                           transaction.splits()[0],
                                                           m_account,
                                                           isValidAmount,

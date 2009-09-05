@@ -145,28 +145,34 @@ void KMyMoneyPriceDlg::slotSelectPrice(Q3ListViewItem * item)
 
 void KMyMoneyPriceDlg::slotNewPrice(void)
 {
-  KUpdateStockPriceDlg dlg(this);
-  KMyMoneyPriceItem* item = dynamic_cast<KMyMoneyPriceItem*>(m_priceList->selectedItem());
-  if(item) {
-    MyMoneySecurity security;
-    security = MyMoneyFile::instance()->security(item->price().from());
-    dlg.m_security->setSecurity(security);
-    security = MyMoneyFile::instance()->security(item->price().to());
-    dlg.m_currency->setSecurity(security);
-  }
-
-  if(dlg.exec()) {
-    MyMoneyPrice price(dlg.m_security->security().id(), dlg.m_currency->security().id(), dlg.date(), MyMoneyMoney(1,1));
-    KMyMoneyPriceItem* p = new KMyMoneyPriceItem(m_priceList, price);
-    m_priceList->setSelected(p, true);
-    // If the user cancels the following operation, we delete the new item
-    // and re-select any previously selected one
-    if(slotEditPrice() == QDialog::Rejected) {
-      delete p;
-      if(item)
-        m_priceList->setSelected(item, true);
+  QPointer<KUpdateStockPriceDlg> dlg = new KUpdateStockPriceDlg(this);
+  try {
+    KMyMoneyPriceItem* item = dynamic_cast<KMyMoneyPriceItem*>(m_priceList->selectedItem());
+    if(item) {
+      MyMoneySecurity security;
+      security = MyMoneyFile::instance()->security(item->price().from());
+      dlg->m_security->setSecurity(security);
+      security = MyMoneyFile::instance()->security(item->price().to());
+      dlg->m_currency->setSecurity(security);
     }
+
+    if(dlg->exec()) {
+      MyMoneyPrice price(dlg->m_security->security().id(), dlg->m_currency->security().id(), dlg->date(), MyMoneyMoney(1,1));
+      KMyMoneyPriceItem* p = new KMyMoneyPriceItem(m_priceList, price);
+      m_priceList->setSelected(p, true);
+      // If the user cancels the following operation, we delete the new item
+      // and re-select any previously selected one
+      if(slotEditPrice() == QDialog::Rejected) {
+        delete p;
+        if(item)
+          m_priceList->setSelected(item, true);
+      }
+    }
+  } catch (...) {
+    delete dlg;
+    throw;
   }
+  delete dlg;
 }
 
 int KMyMoneyPriceDlg::slotEditPrice(void)
@@ -178,16 +184,18 @@ int KMyMoneyPriceDlg::slotEditPrice(void)
     MyMoneySecurity to(MyMoneyFile::instance()->security(item->price().to()));
     signed64 fract = MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision());
 
-    KCurrencyCalculator calc(from,
+    QPointer<KCurrencyCalculator> calc =
+      new KCurrencyCalculator(from,
                              to,
                              MyMoneyMoney(1,1),
                              item->price().rate(to.id()),
                              item->price().date(),
                              fract,
                              this);
-    calc.setupPriceEditor();
+    calc->setupPriceEditor();
 
-    rc = calc.exec();
+    rc = calc->exec();
+    delete calc;
   }
   return rc;
 }
@@ -215,13 +223,15 @@ void KMyMoneyPriceDlg::slotOnlinePriceUpdate(void)
   KMyMoneyPriceItem* item = dynamic_cast<KMyMoneyPriceItem*>(m_priceList->selectedItem());
   if(item)
   {
-    KEquityPriceUpdateDlg dlg(this, (item->text(COMMODITY_COL)+" "+item->text(CURRENCY_COL)).toUtf8());
-    if(dlg.exec() == QDialog::Accepted)
-      dlg.storePrices();
+    QPointer<KEquityPriceUpdateDlg> dlg = new KEquityPriceUpdateDlg(this, (item->text(COMMODITY_COL)+" "+item->text(CURRENCY_COL)).toUtf8());
+    if(dlg->exec() == QDialog::Accepted)
+      dlg->storePrices();
+    delete dlg;
   } else {
-    KEquityPriceUpdateDlg dlg(this);
-    if(dlg.exec() == QDialog::Accepted)
-      dlg.storePrices();
+    QPointer<KEquityPriceUpdateDlg> dlg = new KEquityPriceUpdateDlg(this);
+    if(dlg->exec() == QDialog::Accepted)
+      dlg->storePrices();
+    delete dlg;
   }
 }
 

@@ -865,7 +865,7 @@ void KFindTransactionDlg::slotShowHelp(void)
 
 void KFindTransactionDlg::slotSortOptions(void)
 {
-  KSortOptionDlg* dlg = new KSortOptionDlg(this);
+  QPointer<KSortOptionDlg> dlg = new KSortOptionDlg(this);
 
   dlg->setSortOption(KMyMoneyGlobalSettings::sortSearchView(), QString());
   dlg->hideDefaultButton();

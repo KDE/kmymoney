@@ -1053,15 +1053,15 @@ void KNewAccountDlg::slotNewClicked()
 {
   MyMoneyInstitution institution;
 
-  KNewBankDlg dlg(institution, this);
-  if (dlg.exec())
+  QPointer<KNewBankDlg> dlg = new KNewBankDlg(institution, this);
+  if (dlg->exec())
   {
     MyMoneyFileTransaction ft;
     try
     {
       MyMoneyFile *file = MyMoneyFile::instance();
 
-      institution = dlg.institution();
+      institution = dlg->institution();
       file->addInstitution(institution);
       ft.commit();
       slotLoadInstitutions(institution.name());
@@ -1072,6 +1072,7 @@ void KNewAccountDlg::slotNewClicked()
       KMessageBox::information(this, i18n("Cannot add institution"));
     }
   }
+  delete dlg;
 }
 
 void KNewAccountDlg::slotAccountTypeChanged(const QString& typeStr)

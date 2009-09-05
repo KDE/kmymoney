@@ -89,7 +89,8 @@ bool KCurrencyCalculator::setupSplitPrice(MyMoneyMoney& shares, const MyMoneyTra
       }
 
       // now present all that to the user
-      KCurrencyCalculator calc(fromCurrency,
+      QPointer<KCurrencyCalculator> calc =
+        new KCurrencyCalculator(fromCurrency,
                               toCurrency,
                               fromValue,
                               toValue,
@@ -97,10 +98,12 @@ bool KCurrencyCalculator::setupSplitPrice(MyMoneyMoney& shares, const MyMoneyTra
                               fract,
                               parentWidget);
 
-      if(calc.exec() == QDialog::Rejected) {
+      if(calc->exec() == QDialog::Rejected) {
         rc = false;
       } else
-        shares = (s.value() * calc.price()).convert(fract);
+        shares = (s.value() * calc->price()).convert(fract);
+
+      delete calc;
 
     } else {
       shares = s.value().convert(fract);

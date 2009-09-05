@@ -370,7 +370,7 @@ int InvestTransactionEditor::editSplits(const QString& categoryWidgetName, const
     if(createPseudoTransaction(transaction, splits)) {
       MyMoneyMoney value;
 
-      KSplitTransactionDlg* dlg = new KSplitTransactionDlg(transaction,
+      QPointer<KSplitTransactionDlg> dlg = new KSplitTransactionDlg(transaction,
                                                           d->m_phonySplit,
                                                           d->m_phonyAccount,
                                                           false,
@@ -886,18 +886,21 @@ bool InvestTransactionEditor::setupPrice(const MyMoneyTransaction& t, MyMoneySpl
       MyMoneyPrice priceInfo = MyMoneyFile::instance()->price(fromCurrency.id(), toCurrency.id());
       toValue = split.value() * priceInfo.rate(toCurrency.id());
 
-      KCurrencyCalculator calc(fromCurrency,
-                                toCurrency,
-                                fromValue,
-                                toValue,
-                                t.postDate(),
-                                fract,
-                                m_regForm);
+      QPointer<KCurrencyCalculator> calc =
+          new KCurrencyCalculator(fromCurrency,
+                                  toCurrency,
+                                  fromValue,
+                                  toValue,
+                                  t.postDate(),
+                                  fract,
+                                  m_regForm);
 
-      if(calc.exec() == QDialog::Rejected) {
+      if(calc->exec() == QDialog::Rejected) {
+        delete calc;
         return false;
       }
-      price = calc.price();
+      price = calc->price();
+      delete calc;
       m_priceInfo[key] = price;
     } else {
       price = (*it_p);

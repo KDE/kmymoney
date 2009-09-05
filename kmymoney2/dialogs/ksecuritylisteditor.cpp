@@ -165,13 +165,19 @@ void KSecurityListEditor::slotEditSecurity(void)
   if(item) {
     MyMoneySecurity security = MyMoneyFile::instance()->security(item->text(ID_COL).toLatin1());
 
-    KNewInvestmentWizard dlg(security, this );
-    dlg.setObjectName( "KNewInvestmentWizard");
-    if(dlg.exec() == QDialog::Accepted) {
-      dlg.createObjects(QString());
-      security = MyMoneyFile::instance()->security(item->text(ID_COL).toLatin1());
-      fillItem(item, security);
+    QPointer<KNewInvestmentWizard> dlg = new KNewInvestmentWizard(security, this );
+    dlg->setObjectName("KNewInvestmentWizard");
+    if(dlg->exec() == QDialog::Accepted) {
+      dlg->createObjects(QString());
+      try {
+        security = MyMoneyFile::instance()->security(item->text(ID_COL).toLatin1());
+        fillItem(item, security);
+      } catch (MyMoneyException* e) {
+        KMessageBox::error(this, i18n("Failed to edit security: %1", e->what()));
+        delete e;
+      }
     }
+    delete dlg;
   }
 }
 

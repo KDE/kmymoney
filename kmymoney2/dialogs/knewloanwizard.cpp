@@ -867,7 +867,7 @@ void KNewLoanWizard::slotCreateCategory(void)
   }
   acc.setParentAccountId(base.id());
 
-  KNewAccountDlg* dlg = new KNewAccountDlg(acc, true, true);
+  QPointer<KNewAccountDlg> dlg = new KNewAccountDlg(acc, true, true);
   if(dlg->exec() == QDialog::Accepted) {
     acc = dlg->account();
 
@@ -919,7 +919,7 @@ void KNewLoanWizard::slotAdditionalFees(void)
   MyMoneyAccount account("Phony-ID", MyMoneyAccount());
 
   QMap<QString, MyMoneyMoney> priceInfo;
-  KSplitTransactionDlg* dlg = new KSplitTransactionDlg(m_transaction, m_split, account, false, !m_borrowButton->isChecked(), MyMoneyMoney(0), priceInfo);
+  QPointer<KSplitTransactionDlg> dlg = new KSplitTransactionDlg(m_transaction, m_split, account, false, !m_borrowButton->isChecked(), MyMoneyMoney(0), priceInfo);
   connect(dlg, SIGNAL(newCategory(MyMoneyAccount&)), this, SIGNAL(newCategory(MyMoneyAccount&)));
 
   if(dlg->exec() == QDialog::Accepted) {

@@ -1071,12 +1071,12 @@ void MyMoneyDatabaseMgr::addSecurity(MyMoneySecurity& security)
 {
   // create the account
   try {
-  startTransaction();
-  MyMoneySecurity newSecurity(nextSecurityID(), security);
+    startTransaction();
+    MyMoneySecurity newSecurity(nextSecurityID(), security);
 
-  m_sql->addSecurity(newSecurity);
-  security = newSecurity;
-  commitTransaction();
+    m_sql->addSecurity(newSecurity);
+    security = newSecurity;
+    commitTransaction();
   } catch (...) {
     rollbackTransaction();
     throw;

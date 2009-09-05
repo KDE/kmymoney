@@ -110,7 +110,7 @@ void KExportDlg::slotBrowse()
 
 void KExportDlg::slotNewProfile(void)
 {
-  MyMoneyQifProfileEditor* editor = new MyMoneyQifProfileEditor(true, this);
+  QPointer<MyMoneyQifProfileEditor> editor = new MyMoneyQifProfileEditor(true, this);
   editor->setObjectName( "QIF Profile Editor");
   if(editor->exec()) {
     m_profileComboBox->setItemText(m_profileComboBox->currentIndex(), editor->selectedProfile());

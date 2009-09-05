@@ -608,12 +608,14 @@ bool OfxImporterPlugin::mapAccount(const MyMoneyAccount& acc, MyMoneyKeyValueCon
   Q_UNUSED(acc);
 
   bool rc = false;
-  KOnlineBankingSetupWizard wiz(0, "onlinebankingsetup");
-  if(wiz.isInit()) {
-    if(wiz.exec() == QDialog::Accepted) {
-      rc = wiz.chosenSettings( settings );
+  QPointer<KOnlineBankingSetupWizard> wiz = new KOnlineBankingSetupWizard(0, "onlinebankingsetup");
+  if(wiz->isInit()) {
+    if(wiz->exec() == QDialog::Accepted) {
+      rc = wiz->chosenSettings( settings );
     }
   }
+
+  delete wiz;
 
   return rc;
 }
@@ -626,13 +628,14 @@ bool OfxImporterPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccoun
     if(!acc.id().isEmpty()) {
       // Save the value of preferName to be used by ofxTransactionCallback
       m_preferName = acc.onlineBankingSettings().value("kmmofx-preferName").toInt() != 0;
-      KOfxDirectConnectDlg dlg(acc);
+      QPointer<KOfxDirectConnectDlg> dlg = new KOfxDirectConnectDlg(acc);
 
-      connect(&dlg, SIGNAL(statementReady(const QString&)),
+      connect(dlg, SIGNAL(statementReady(const QString&)),
               this, SLOT(slotImportFile(const QString&)));
 
-      dlg.init();
-      dlg.exec();
+      dlg->init();
+      dlg->exec();
+      delete dlg;
     }
   } catch (MyMoneyException *e) {
     KMessageBox::information(0 ,i18n("Error connecting to bank: %1",e->what()));

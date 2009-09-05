@@ -2097,14 +2097,15 @@ void MyMoneyQifReader::selectOrCreateAccount(const SelectCreateMode mode, MyMone
       break;
   }
 
-  KAccountSelectDlg accountSelect(type, "QifImport", kmymoney2);
+  QPointer<KAccountSelectDlg> accountSelect = new KAccountSelectDlg(type, "QifImport", kmymoney2);
   if(!msg.isEmpty())
-    accountSelect.setWindowTitle(msg);
+    accountSelect->setWindowTitle(msg);
 
   it = m_accountTranslation.constFind((leadIn + MyMoneyFile::AccountSeperator + account.name()).toLower());
   if(it != m_accountTranslation.constEnd()) {
     try {
       account = file->account(*it);
+      delete accountSelect;
       return;
 
     } catch (MyMoneyException *e) {
@@ -2115,120 +2116,125 @@ void MyMoneyQifReader::selectOrCreateAccount(const SelectCreateMode mode, MyMone
     }
   }
 
-  if(!account.name().isEmpty()) {
-    if(type & (KMyMoneyUtils::income | KMyMoneyUtils::expense)) {
-      accountId = file->categoryToAccount(account.name());
-    } else {
-      accountId = file->nameToAccount(account.name());
-    }
-
-    if(mode == Create) {
-      if(!accountId.isEmpty()) {
-        account = file->account(accountId);
-        return;
-
+  // This is so the QPointer to the dialog gets properly destroyed if something throws.
+  try {
+    if(!account.name().isEmpty()) {
+      if(type & (KMyMoneyUtils::income | KMyMoneyUtils::expense)) {
+        accountId = file->categoryToAccount(account.name());
       } else {
-        switch(KMessageBox::questionYesNo(0,
-                  i18nc("The 'type of object' 'x' does not exist", "The %1 '%2' does not exist. Do you "
-                       "want to create it?",typeStr,account.name()))) {
-          case KMessageBox::Yes:
-            break;
-          case KMessageBox::No:
-            return;
+        accountId = file->nameToAccount(account.name());
+      }
+
+      if(mode == Create) {
+        if(!accountId.isEmpty()) {
+          account = file->account(accountId);
+          delete accountSelect;
+          return;
+
+        } else {
+          switch(KMessageBox::questionYesNo(0,
+                    i18nc("The 'type of object' 'x' does not exist", "The %1 '%2' does not exist. Do you "
+                         "want to create it?",typeStr,account.name()))) {
+            case KMessageBox::Yes:
+              break;
+            case KMessageBox::No:
+              delete accountSelect;
+              return;
+          }
+        }
+      } else {
+        accountSelect->setHeader(i18nc("To select account", "Select %1",typeStr));
+        if(!accountId.isEmpty()) {
+          msg = i18n("The %1 <b>%2</b> currently exists. Do you want "
+                     "to import transactions to this account?",typeStr,account.name());
+
+        } else {
+          msg = i18n("The %1 <b>%2</b> currently does not exist. You can "
+                     "create a new %3 by pressing the <b>Create</b> button "
+                     "or select another %4 manually from the selection box.",typeStr,account.name(),typeStr,typeStr);
         }
       }
-    } else {
-      accountSelect.setHeader(i18nc("To select account", "Select %1",typeStr));
-      if(!accountId.isEmpty()) {
-        msg = i18n("The %1 <b>%2</b> currently exists. Do you want "
-                   "to import transactions to this account?",typeStr,account.name());
 
-      } else {
-        msg = i18n("The %1 <b>%2</b> currently does not exist. You can "
-                   "create a new %3 by pressing the <b>Create</b> button "
-                   "or select another %4 manually from the selection box.",typeStr,account.name(),typeStr,typeStr);
+      accountSelect->setDescription(msg);
+      accountSelect->setAccount(account, accountId);
+      accountSelect->setMode(mode == Create);
+      accountSelect->showAbortButton(true);
+
+      // display current entry in widget, the offending line (if any) will be shown in red
+      QStringList::Iterator it_e;
+      int i = 0;
+      for(it_e = m_qifEntry.begin(); it_e != m_qifEntry.end(); ++it_e) {
+        if(m_extractedLine == i)
+          accountSelect->m_qifEntry->setColor(QColor("red"));
+        accountSelect->m_qifEntry->append(*it_e);
+        accountSelect->m_qifEntry->setColor(QColor("black"));
+        ++i;
       }
-    }
-  } else {
-    accountSelect.setHeader(i18n("Import transactions to %1",typeStr));
-    msg = i18n("No %1 information has been found in the selected QIF file. "
-               "Please select an account using the selection box in the dialog or "
-               "create a new %2 by pressing the <b>Create</b> button.",typeStr,typeStr);
-  }
 
-  accountSelect.setDescription(msg);
-  accountSelect.setAccount(account, accountId);
-  accountSelect.setMode(mode == Create);
-  accountSelect.showAbortButton(true);
+      for(;;) {
+        if(accountSelect->exec() == QDialog::Accepted) {
+          if(!accountSelect->selectedAccount().isEmpty()) {
+            accountId = accountSelect->selectedAccount();
 
-  // display current entry in widget, the offending line (if any) will be shown in red
-  QStringList::Iterator it_e;
-  int i = 0;
-  for(it_e = m_qifEntry.begin(); it_e != m_qifEntry.end(); ++it_e) {
-    if(m_extractedLine == i)
-      accountSelect.m_qifEntry->setColor(QColor("red"));
-    accountSelect.m_qifEntry->append(*it_e);
-    accountSelect.m_qifEntry->setColor(QColor("black"));
-    ++i;
-  }
+            m_accountTranslation[(leadIn + MyMoneyFile::AccountSeperator + account.name()).toLower()] = accountId;
 
-  for(;;) {
-    if(accountSelect.exec() == QDialog::Accepted) {
-      if(!accountSelect.selectedAccount().isEmpty()) {
-        accountId = accountSelect.selectedAccount();
-
-        m_accountTranslation[(leadIn + MyMoneyFile::AccountSeperator + account.name()).toLower()] = accountId;
-
-        // MMAccount::openingBalance() is where the accountSelect dialog has
-        // stashed the opening balance that the user chose.
-        MyMoneyAccount importedAccountData(account);
-        // MyMoneyMoney balance = importedAccountData.openingBalance();
-        account = file->account(accountId);
-        if ( ! balance.isZero() )
-        {
-          QString openingtxid = file->openingBalanceTransaction(account);
-          MyMoneyFileTransaction ft;
-          if ( ! openingtxid.isEmpty() )
-          {
-            MyMoneyTransaction openingtx = file->transaction(openingtxid);
-            MyMoneySplit split = openingtx.splitByAccount(account.id());
-
-            if ( split.shares() != balance )
+            // MMAccount::openingBalance() is where the accountSelect dialog has
+            // stashed the opening balance that the user chose.
+            MyMoneyAccount importedAccountData(account);
+            // MyMoneyMoney balance = importedAccountData.openingBalance();
+            account = file->account(accountId);
+            if ( ! balance.isZero() )
             {
-              const MyMoneySecurity&  sec = file->security(account.currencyId());
-              if ( KMessageBox::questionYesNo(
-                qApp->mainWidget(),
-                i18n("The %1 account currently has an opening balance of %2. This QIF file reports an opening balance of %3. Would you like to overwrite the current balance with the one from the QIF file?",account.name(), split.shares().formatMoney(account, sec), balance.formatMoney(account, sec)),
-                i18n("Overwrite opening balance"),
-                KStandardGuiItem::yes(),
-                KStandardGuiItem::no(),
-                "OverwriteOpeningBalance" )
-                == KMessageBox::Yes )
+              QString openingtxid = file->openingBalanceTransaction(account);
+              MyMoneyFileTransaction ft;
+              if ( ! openingtxid.isEmpty() )
               {
-                file->removeTransaction( openingtx );
+                MyMoneyTransaction openingtx = file->transaction(openingtxid);
+                MyMoneySplit split = openingtx.splitByAccount(account.id());
+
+                if ( split.shares() != balance )
+                {
+                  const MyMoneySecurity&  sec = file->security(account.currencyId());
+                  if ( KMessageBox::questionYesNo(
+                    qApp->mainWidget(),
+                    i18n("The %1 account currently has an opening balance of %2. This QIF file reports an opening balance of %3. Would you like to overwrite the current balance with the one from the QIF file?",account.name(), split.shares().formatMoney(account, sec), balance.formatMoney(account, sec)),
+                    i18n("Overwrite opening balance"),
+                    KStandardGuiItem::yes(),
+                    KStandardGuiItem::no(),
+                    "OverwriteOpeningBalance" )
+                    == KMessageBox::Yes )
+                  {
+                    file->removeTransaction( openingtx );
+                    file->createOpeningBalanceTransaction( account, balance );
+                  }
+                }
+              }
+              else
+              {
+                // Add an opening balance
                 file->createOpeningBalanceTransaction( account, balance );
               }
+              ft.commit();
             }
+            break;
           }
-          else
-          {
-            // Add an opening balance
-            file->createOpeningBalanceTransaction( account, balance );
-          }
-          ft.commit();
+
+        } else if(accountSelect->aborted())
+          throw new MYMONEYEXCEPTION("USERABORT");
+
+        if(typeStr == i18n("account")) {
+          KMessageBox::error(0, i18n("You must select or create an account."));
+        } else {
+          KMessageBox::error(0, i18n("You must select or create a category."));
         }
-        break;
       }
-
-    } else if(accountSelect.aborted())
-      throw new MYMONEYEXCEPTION("USERABORT");
-
-    if(typeStr == i18n("account")) {
-      KMessageBox::error(0, i18n("You must select or create an account."));
-    } else {
-      KMessageBox::error(0, i18n("You must select or create a category."));
     }
+  } catch (...) {
+    // cleanup the dialog pointer.
+    delete accountSelect;
+    throw;
   }
+  delete accountSelect;
 }
 
 void MyMoneyQifReader::setProgressCallback(void(*callback)(int, int, const QString&))

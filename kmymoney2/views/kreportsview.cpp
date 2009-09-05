@@ -596,27 +596,34 @@ void KReportsView::slotSaveView(void)
     // the following code is copied from KFileDialog::getSaveFileName,
     // adjust to our local needs (filetypes etc.) and
     // enhanced to show the m_saveEncrypted combo box
-    KFileDialog dlg( KUrl(":kmymoney-export"),
+    QPointer<KFileDialog> dlg = new KFileDialog( KUrl(":kmymoney-export"),
                    QString("%1|%2\n").arg("*.csv").arg(i18nc("CSV (Filefilter)", "CSV files")) +
                    QString("%1|%2\n").arg("*.html").arg(i18nc("HTML (Filefilter)", "HTML files")),
                    this);
-    connect(&dlg, SIGNAL(filterChanged(const QString&)), this, SLOT(slotSaveFilterChanged(const QString&)));
+    connect(dlg, SIGNAL(filterChanged(const QString&)), this, SLOT(slotSaveFilterChanged(const QString&)));
 
-    dlg.setOperationMode( KFileDialog::Saving );
-    dlg.setCaption(i18n("Export as"));
+    dlg->setOperationMode( KFileDialog::Saving );
+    dlg->setCaption(i18n("Export as"));
+
     slotSaveFilterChanged("*.csv");    // init gui
 
-    if(dlg.exec() == QDialog::Accepted) {
-      KUrl newURL = dlg.selectedUrl();
+    if(dlg->exec() == QDialog::Accepted) {
+      KUrl newURL = dlg->selectedUrl();
       if (!newURL.isEmpty()) {
         QString newName = newURL.pathOrUrl();
 
         if(newName.indexOf('.') == -1)
           newName.append(".html");
 
-        tab->saveAs( newName, d->includeCSS->isEnabled() && d->includeCSS->isChecked() );
+        try {
+          tab->saveAs( newName, d->includeCSS->isEnabled() && d->includeCSS->isChecked() );
+        } catch (MyMoneyException* e) {
+          KMessageBox::error(this, i18n("Failed to save: %1", e->what()));
+          delete e;
+        }
       }
     }
+    delete dlg;
   }
 }
 
@@ -637,31 +644,37 @@ void KReportsView::slotConfigure(void)
       report.setName( report.name() + i18n(" (Customized)") );
     }
 
-    KReportConfigurationFilterDlg dlg(report);
+    QPointer<KReportConfigurationFilterDlg> dlg = new KReportConfigurationFilterDlg(report);
 
-    if (dlg.exec())
+    if (dlg->exec())
     {
-      MyMoneyReport newreport = dlg.getConfig();
+      MyMoneyReport newreport = dlg->getConfig();
 
       // If this report has an ID, then MODIFY it, otherwise ADD it
       MyMoneyFileTransaction ft;
-      if ( ! newreport.id().isEmpty() )
-      {
-        MyMoneyFile::instance()->modifyReport(newreport);
-        ft.commit();
-        tab->modifyReport(newreport);
+      try {
+        if ( ! newreport.id().isEmpty() )
+        {
+          MyMoneyFile::instance()->modifyReport(newreport);
+          ft.commit();
+          tab->modifyReport(newreport);
 
-        m_reportTabWidget->setTabText( m_reportTabWidget->indexOf(tab), newreport.name() );
-        m_reportTabWidget->setCurrentIndex(m_reportTabWidget->indexOf(tab)) ;
-      }
-      else
-      {
-        MyMoneyFile::instance()->addReport(newreport);
-        ft.commit();
-        new KReportListItem( m_reportListView, newreport );
-        addReportTab(newreport);
+          m_reportTabWidget->setTabText( m_reportTabWidget->indexOf(tab), newreport.name() );
+          m_reportTabWidget->setCurrentIndex(m_reportTabWidget->indexOf(tab)) ;
+        }
+        else
+        {
+          MyMoneyFile::instance()->addReport(newreport);
+          ft.commit();
+          new KReportListItem( m_reportListView, newreport );
+          addReportTab(newreport);
+        }
+      } catch (MyMoneyException* e) {
+        KMessageBox::error(this, i18n("Failed to configure report: %1", e->what()));
+        delete e;
       }
     }
+    delete dlg;
   }
 }
 
@@ -676,10 +689,10 @@ void KReportsView::slotDuplicate(void)
       dupe.setComment( i18n("Custom Report") );
     dupe.clearId();
 
-    KReportConfigurationFilterDlg dlg(dupe);
-    if (dlg.exec())
+    QPointer<KReportConfigurationFilterDlg> dlg = new KReportConfigurationFilterDlg(dupe);
+    if (dlg->exec())
     {
-      dupe = dlg.getConfig();
+      dupe = dlg->getConfig();
       MyMoneyFileTransaction ft;
       try {
         MyMoneyFile::instance()->addReport(dupe);
@@ -691,6 +704,7 @@ void KReportsView::slotDuplicate(void)
         delete e;
       }
     }
+    delete dlg;
   }
 }
 

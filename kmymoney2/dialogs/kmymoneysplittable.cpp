@@ -750,7 +750,8 @@ void kMyMoneySplitTable::endEdit(bool keyBoardDriven)
         }
 
         // now present all that to the user
-        KCurrencyCalculator calc(fromCurrency,
+        QPointer<KCurrencyCalculator> calc =
+          new KCurrencyCalculator(fromCurrency,
                                 toCurrency,
                                 fromValue,
                                 toValue,
@@ -758,10 +759,12 @@ void kMyMoneySplitTable::endEdit(bool keyBoardDriven)
                                 fract,
                                 this);
 
-        if(calc.exec() == QDialog::Rejected) {
+        if(calc->exec() == QDialog::Rejected) {
+          delete calc;
           return;
         } else {
-          s1.setShares((s1.value() * calc.price()).convert(fract));
+          s1.setShares((s1.value() * calc->price()).convert(fract));
+          delete calc;
         }
 
       } else {
