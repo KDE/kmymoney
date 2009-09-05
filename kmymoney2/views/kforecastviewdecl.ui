@@ -149,7 +149,7 @@
                     </property>
                     <item>
                       <property name="text">
-                        <string>All</string>
+                        <string comment="Show all details">All</string>
                       </property>
                     </item>
                     <item>
@@ -381,7 +381,7 @@
                       </column>
                       <column>
                         <property name="text">
-                          <string>0 days</string>
+                          <string comment="0 days from now">0 days</string>
                         </property>
                         <property name="clickable">
                           <bool>true</bool>
@@ -392,7 +392,7 @@
                       </column>
                       <column>
                         <property name="text">
-                          <string>30 days</string>
+                          <string comment="30 days from now">30 days</string>
                         </property>
                         <property name="clickable">
                           <bool>true</bool>
@@ -403,7 +403,7 @@
                       </column>
                       <column>
                         <property name="text">
-                          <string>60 days</string>
+                          <string comment="60 days from now">60 days</string>
                         </property>
                         <property name="clickable">
                           <bool>true</bool>
@@ -414,7 +414,7 @@
                       </column>
                       <column>
                         <property name="text">
-                          <string>90 days</string>
+                          <string comment="90 days from now">90 days</string>
                         </property>
                         <property name="clickable">
                           <bool>true</bool>
@@ -474,7 +474,7 @@
           </widget>
           <widget class="QWidget" name="advanced">
             <attribute name="title">
-              <string>Advanced</string>
+              <string comment="Advanced forecast view">Advanced</string>
             </attribute>
             <layout class="QVBoxLayout">
               <property name="margin">
