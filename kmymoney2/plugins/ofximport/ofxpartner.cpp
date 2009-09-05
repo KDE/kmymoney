@@ -369,7 +369,7 @@ void OfxHttpsRequest::slotOfxFinished(KIO::Job* /* e */)
       }
       f.close();
     }
-    KMessageBox::detailedSorry( 0, i18n("The HTTP request failed."), details, i18n("Failed") );
+    KMessageBox::detailedSorry( 0, i18n("The HTTP request failed."), details, i18nc("The HTTP request failed", "Failed") );
     unlink(m_dst.path());
   }
 

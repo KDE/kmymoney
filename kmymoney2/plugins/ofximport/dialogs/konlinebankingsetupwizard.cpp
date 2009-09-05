@@ -143,20 +143,20 @@ bool KOnlineBankingSetupWizard::finishFiPage(void)
         info = OfxPartner::ServiceInfo(*it_fipid);
 
         // Print them to the text browser
-        QString message = QString("<p>Fipid: %1<br>").arg(*it_fipid);
+        QString message = QString("<p>Fipid: %1<br/>").arg(*it_fipid);
 
         // If the bank supports retrieving statements
         if ( info.accountlist )
         {
           m_bankInfo.push_back(info);
 
-          message += QString("URL: %1<br>Org: %2<br>Fid: %3<br>").arg(info.url,info.org,info.fid);
+          message += QString("URL: %1<br/>Org: %2<br/>Fid: %3<br/>").arg(info.url,info.org,info.fid);
           if ( info.statements )
-            message += i18n("Supports online statements<br>");
+            message += i18n("Supports online statements<br/>");
           if ( info.investments )
-            message += i18n("Supports investments<br>");
+            message += i18n("Supports investments<br/>");
           if ( info.billpay )
-            message += i18n("Supports bill payment (but not supported by KMyMoney yet)<br>");
+            message += i18n("Supports bill payment (but not supported by KMyMoney yet)<br/>");
         }
         else
         {
@@ -194,13 +194,13 @@ bool KOnlineBankingSetupWizard::finishFiPage(void)
     m_bankInfo.push_back(info);
 
     QString message;
-    message += QString("URL: %1<br>Org: %2<br>Fid: %3<br>").arg(info.url,info.org,info.fid);
+    message += QString("URL: %1<br/>Org: %2<br/>Fid: %3<br/>").arg(info.url,info.org,info.fid);
     if ( info.statements )
-      message += i18n("Supports online statements<br>");
+      message += i18n("Supports online statements<br/>");
     if ( info.investments )
-      message += i18n("Supports investments<br>");
+      message += i18n("Supports investments<br/>");
     if ( info.billpay )
-      message += i18n("Supports bill payment (but not supported by KMyMoney yet)<br>");
+      message += i18n("Supports bill payment (but not supported by KMyMoney yet)<br/>");
     m_textDetails->append(message);
     result = true;
   }
@@ -386,7 +386,7 @@ int KOnlineBankingSetupWizard::ofxStatusCallback(struct OfxStatusData data, void
     case OfxStatusData::INFO :
       break;
     case OfxStatusData::WARN :
-      KMessageBox::detailedError( pthis, i18n("Your bank returned warnings when signing on"), i18n("WARNING %1",message) );
+      KMessageBox::detailedError( pthis, i18n("Your bank returned warnings when signing on"), i18nc("Warning 'message'", "WARNING %1",message) );
       break;
     case OfxStatusData::ERROR :
       KMessageBox::detailedError( pthis, i18n("Error signing onto your bank"), i18n("ERROR %1",message) );

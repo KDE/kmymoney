@@ -195,7 +195,7 @@ void KOfxDirectConnectDlg::slotOfxFinished(KIO::Job* /* e */)
 
       kDebug(2) << "The HTTP request failed: " << details;
     }
-    KMessageBox::detailedSorry( this, i18n("The HTTP request failed."), details, i18n("Failed") );
+    KMessageBox::detailedSorry( this, i18n("The HTTP request failed."), details, i18nc("The HTTP request failed", "Failed") );
   }
   else if ( m_tmpfile )
   {
