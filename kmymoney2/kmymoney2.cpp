@@ -170,6 +170,9 @@ public:
     m_ft(0), m_moveToAccountSelector(0), statementXMLindex(0), m_collectingStatements(false)
   {}
   void unlinkStatementXML(void);
+  void moveInvestmentTransaction(const QString& fromId,
+                                 const QString& toId,
+                                 const MyMoneyTransaction& t);
 
   MyMoneyFileTransaction*       m_ft;
   kMyMoneyAccountSelector*      m_moveToAccountSelector;
@@ -5152,19 +5155,23 @@ void KMyMoney2App::slotMoveToAccount(const QString& id)
     try {
       KMyMoneyRegister::SelectedTransactions::const_iterator it_t;
       for(it_t = m_selectedTransactions.constBegin(); it_t != m_selectedTransactions.constEnd(); ++it_t) {
-        QList<MyMoneySplit>::const_iterator it_s;
-        bool changed = false;
-        MyMoneyTransaction t = (*it_t).transaction();
-        for(it_s = (*it_t).transaction().splits().constBegin(); it_s != (*it_t).transaction().splits().constEnd(); ++it_s) {
-          if((*it_s).accountId() == m_selectedAccount.id()) {
-            MyMoneySplit s = (*it_s);
-            s.setAccountId(id);
-            t.modifySplit(s);
-            changed = true;
+        if (m_selectedAccount.accountType() == MyMoneyAccount::Investment) {
+          d->moveInvestmentTransaction(m_selectedAccount.id(), id, (*it_t).transaction());
+        } else {
+          QList<MyMoneySplit>::const_iterator it_s;
+          bool changed = false;
+          MyMoneyTransaction t = (*it_t).transaction();
+          for(it_s = (*it_t).transaction().splits().constBegin(); it_s != (*it_t).transaction().splits().constEnd(); ++it_s) {
+            if((*it_s).accountId() == m_selectedAccount.id()) {
+              MyMoneySplit s = (*it_s);
+              s.setAccountId(id);
+              t.modifySplit(s);
+              changed = true;
+            }
           }
-        }
-        if(changed) {
-          MyMoneyFile::instance()->modifyTransaction(t);
+          if(changed) {
+            MyMoneyFile::instance()->modifyTransaction(t);
+          }
         }
       }
       ft.commit();
@@ -5174,11 +5181,69 @@ void KMyMoney2App::slotMoveToAccount(const QString& id)
   }
 }
 
+// move a stock transaction from one investment account to another
+void KMyMoney2App::Private::moveInvestmentTransaction(const QString& fromId,
+                                              const QString& toId,
+                                              const MyMoneyTransaction& tx)
+{
+  MyMoneyAccount toInvAcc = MyMoneyFile::instance()->account(toId);
+  MyMoneyTransaction t(tx);
+  // first determine which stock we are dealing with.
+  // fortunately, investment transactions have only one stock involved
+  QString stockAccountId;
+  QString stockSecurityId;
+  QList<MyMoneySplit>::const_iterator it_s;
+  for(it_s = t.splits().begin(); it_s != t.splits().end(); ++it_s) {
+     stockAccountId = (*it_s).accountId();
+     stockSecurityId =
+        MyMoneyFile::instance()->account(stockAccountId).currencyId();
+     if (!MyMoneyFile::instance()->security(stockSecurityId).isCurrency())
+       break;
+  }
+  // Now check the target investment account to see if it
+  // contains a stock with this id
+  QString newStockAccountId = QString();
+  QStringList accountList = toInvAcc.accountList();
+  QStringList::const_iterator it_a;
+  for (it_a = accountList.begin(); it_a != accountList.end(); ++it_a) {
+    if (MyMoneyFile::instance()->account((*it_a)).currencyId() ==
+        stockSecurityId) {
+      newStockAccountId = (*it_a);
+      break;
+    }
+  }
+  // if it doesn't exist, we need to add it as a copy of the old one
+  // no 'copyAccount()' function??
+  if (newStockAccountId.isEmpty()) {
+    MyMoneyAccount stockAccount =
+        MyMoneyFile::instance()->account(stockAccountId);
+    MyMoneyAccount newStock;
+    newStock.setName(stockAccount.name());
+    newStock.setNumber(stockAccount.number());
+    newStock.setDescription(stockAccount.description());
+    newStock.setInstitutionId(stockAccount.institutionId());
+    newStock.setOpeningDate(stockAccount.openingDate());
+    newStock.setAccountType(stockAccount.accountType());
+    newStock.setCurrencyId(stockAccount.currencyId());
+    newStock.setClosed(stockAccount.isClosed());
+    MyMoneyFile::instance()->addAccount(newStock, toInvAcc);
+    newStockAccountId = newStock.id();
+  }
+  // now update the split and the transaction
+  MyMoneySplit s = (*it_s);
+  s.setAccountId(newStockAccountId);
+  t.modifySplit(s);
+  MyMoneyFile::instance()->modifyTransaction(t);
+}
+
 void KMyMoney2App::slotUpdateMoveToAccountMenu(void)
 {
   if(!m_selectedAccount.id().isEmpty()) {
     AccountSet accountSet;
-    if(m_selectedAccount.isAssetLiability()) {
+    if(m_selectedAccount.accountType() == MyMoneyAccount::Investment) {
+      accountSet.addAccountType(MyMoneyAccount::Investment);
+    } else if(m_selectedAccount.isAssetLiability()) {
+
       accountSet.addAccountType(MyMoneyAccount::Checkings);
       accountSet.addAccountType(MyMoneyAccount::Savings);
       accountSet.addAccountType(MyMoneyAccount::Cash);
