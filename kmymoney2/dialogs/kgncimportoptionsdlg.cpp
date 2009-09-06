@@ -87,7 +87,7 @@ void KGncImportOptionsDlg::buildCodecList () {
     m_codecList.append (p);
   }
   m_codecList.sort();
-  for (i = 0; i < m_codecList.count(); i++) {
+  for (i = 0; i < m_codecList.count(); ++i) {
     QString name (m_codecList.at(i)->second->name());
     comboDecode->insertItem (name);
   }

@@ -456,7 +456,7 @@ void KPayeesView::slotChooseDefaultAccount(void)
   }
   QMap<QString,int>::Iterator most_frequent, iter;
   most_frequent = account_count.end();
-  for (iter = account_count.begin(); iter != account_count.end(); iter++) {
+  for (iter = account_count.begin(); iter != account_count.end(); ++iter) {
     if (iter.value() > most_frequent.value()) {
       most_frequent = iter;
     }

@@ -1026,7 +1026,7 @@ void KNewAccountDlg::slotLoadInstitutions(const QString& name)
 
     QList<MyMoneyInstitution> list = file->institutionList();
     QList<MyMoneyInstitution>::ConstIterator institutionIterator;
-    for (institutionIterator = list.constBegin(), counter=1; institutionIterator != list.constEnd(); ++institutionIterator, counter++)
+    for (institutionIterator = list.constBegin(), counter=1; institutionIterator != list.constEnd(); ++institutionIterator, ++counter)
     {
       if ((*institutionIterator).name() == name) {
         id = counter;
