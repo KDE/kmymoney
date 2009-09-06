@@ -2,8 +2,7 @@
                           khomeview.cpp  -  description
                              -------------------
     begin                : Tue Jan 22 2002
-    copyright            : (C) 2000-2002 by Michael Edwardes
-    email                : mte@users.sourceforge.net
+    copyright            : (C) 2000-2002 by Michael Edwardes <mte@users.sourceforge.net>
                            Javier Campos Morales <javi_c@users.sourceforge.net>
                            Felix Rodriguez <frodriguez@users.sourceforge.net>
                            John C <thetacoturtle@users.sourceforge.net>
