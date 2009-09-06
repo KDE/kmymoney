@@ -432,13 +432,17 @@ QMap<QString,WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources(void)
     "%m %d %y" // dateformat
   );
 
+  // 2009-08-20 Yahoo UK has no quotes and has comma separators
+  // sl1d1 format for Yahoo UK doesn't seem to give a date ever
+  // sl1d3 gives US locale time (9:99pm) and date (mm/dd/yyyy)
   result["Yahoo UK"] = WebPriceQuoteSource("Yahoo UK",
-    "http://uk.finance.yahoo.com/d/quotes.csv?s=%1&f=sl1d1",
-    "\"([^,\"]*)\",.*",  // symbolregexp
-    "[^,]*,([^,]*),.*", // priceregexp
-    "[^,]*,[^,]*,\"([^\"]*)\"", // dateregexp
-    "%m %d %y" // dateformat
+    "http://uk.finance.yahoo.com/d/quotes.csv?s=%1&f=sl1d3",
+    "^([^,]*),.*",  // symbolregexp
+    "^[^,]*,([^,]*),.*", // priceregexp
+    "^[^,]*,[^,]*,(.*)", // dateregexp
+    "%m/%d/%y" // dateformat
   );
+
   // sl1d1 format for Yahoo France doesn't seem to give a date ever
   // sl1d3 gives us time (99h99) and date
   result["Yahoo France"] = WebPriceQuoteSource("Yahoo France",
