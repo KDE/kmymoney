@@ -262,6 +262,54 @@ table.report tr#topparent td.left {/*parent label for each row group containing 
   table { margin-left: auto; margin-right: auto }
   td    { vertical-align: baseline }
 
+  table.report {/*center the report*/
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  table.report th {/*styles table header cells*/
+    padding: 0.5em 0.5em;
+  }
+
+  table.report td {/*styles table cells- but not background color*/
+    text-align: right;
+  }
+  table.report td.left {/*far left column*/
+    text-align: left;
+  }
+
+  table.report td.left0 {/*does not appear to be in use*/
+    text-align: left;
+  }
+
+  table.report td.left1 {/*does not appear to be in use*/
+    text-align: left;
+    text-indent: 1.0em;
+  }
+
+  table.report td.left2 {/*does not appear to be in use*/
+    text-align: left;
+    text-indent: 2.0em;
+  }
+
+  table.report tr#subtotal td {/*line separating row groups*/
+    border-bottom: 1px solid black;
+    font-weight: normal;
+  }
+
+table.report tr#solo td {/*line separating rows that are not groups*/
+    border-bottom: 1px solid black;
+    font-weight: normal;
+  }
+
+table.report tr#topparent td.left {/*parent label for each row group containing children*/
+    font-weight: bold;
+  }
+
+  table.report tr#solo td.left {/*label for each row group _not_ containing children*/
+    font-weight: bold;
+  }
+
   th { border-bottom: 1pt solid black }
 /*  th             { background: #cccccc } */
   tr.item0 td    { background: #f2f2ff }
