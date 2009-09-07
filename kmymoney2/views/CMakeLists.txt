@@ -5,6 +5,7 @@ SET(libviews_a_SOURCES
   kcategoriesview.cpp
   kforecastview.cpp
   kgloballedgerview.cpp
+  kwelcomepage.cpp
   khomeview.cpp
   kinstitutionsview.cpp
   kinvestmentlistitem.cpp

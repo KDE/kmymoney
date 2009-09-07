@@ -59,6 +59,7 @@
 // Project Includes
 #include "khomeview.h"
 #include "kmymoneyutils.h"
+#include "kwelcomepage.h"
 #include "kmymoneyglobalsettings.h"
 #include "mymoneyfile.h"
 #include "mymoneyforecast.h"
@@ -95,9 +96,9 @@ KHomeView::KHomeView(QWidget *parent, const char *name ) :
   m_part = new KHTMLPart(this);
   addWidget(m_part->view());
 
-  m_filename = KMyMoneyUtils::findResource("appdata", QString("html/home%1.html"));
-
-  m_part->openUrl(m_filename);
+  m_part->begin();
+  m_part->write(KWelcomePage::welcomePage());
+  m_part->end();
   connect(m_part->browserExtension(), SIGNAL(openUrlRequest(const KUrl &,
           const KParts::OpenUrlArguments &,const KParts::BrowserArguments & )),
           this, SLOT(slotOpenUrl(const KUrl&, const KParts::OpenUrlArguments &,const KParts::BrowserArguments & )));
@@ -149,45 +150,9 @@ void KHomeView::loadView(void)
   MyMoneyFile::instance()->accountList(list);
   if(list.count() == 0)
   {
-    m_part->openUrl(m_filename);
-
-#if 0
-    // (ace) I am experimenting with replacing links in the
-    // html depending on the state of the engine.  It's not
-    // working.  That's why it's #if0'd out.
-
-    DOM::Element e = m_part->document().getElementById("test");
-    if ( e.isNull() )
-    {
-      qDebug("Element id=test not found");
-    }
-    else
-    {
-      qDebug("Element id=test found!");
-      QString tagname = e.tagName().string();
-      qDebug("%s",tagname.toLatin1());
-      qDebug("%s id=%s",e.tagName().string().toLatin1(),e.getAttribute("id").string().toLatin1());
-
-      // Find the character data node
-      DOM::Node n = e.firstChild();
-      while (!n.isNull())
-      {
-        qDebug("Child type %u",static_cast<unsigned>(n.nodeType()));
-        if ( n.nodeType() == DOM::Node::TEXT_NODE )
-        {
-          DOM::Text t = n;
-          t.setData("Success!!");
-          e.replaceChild(n,t);
-          m_part->document().setDesignMode(true);
-          m_part->document().importNode(e,true);
-          m_part->document().updateRendering();
-
-          qDebug("Data is now %s",t.data().string().toLatin1());
-        }
-        n = n.nextSibling();
-      }
-    }
-#endif
+    m_part->begin();
+    m_part->write(KWelcomePage::welcomePage());
+    m_part->end();
   } else {
     //clear the forecast flag so it will be reloaded
     m_forecast.setForecastDone(false);
@@ -1156,14 +1121,15 @@ void KHomeView::slotOpenUrl(const KUrl &url, const KParts::OpenUrlArguments&,con
     } else if(view == VIEW_WELCOME) {
       KXmlGuiWindow* mw = dynamic_cast<KXmlGuiWindow*>(qApp->mainWidget());
       Q_CHECK_PTR(mw);
-      if ( mode == "whatsnew" )
-      {
-        QString fname = KMyMoneyUtils::findResource("appdata",QString("html/whats_new%1.html"));
-        if(!fname.isEmpty())
-          m_part->openUrl(fname);
+      if ( mode == "whatsnew" ) {
+        m_part->begin();
+        m_part->write(KWelcomePage::whatsNewPage());
+        m_part->end();
+      } else {
+        m_part->begin();
+        m_part->write(KWelcomePage::welcomePage());
+        m_part->end();
       }
-      else
-        m_part->openUrl(m_filename);
 
     } else if(view == "action") {
       KXmlGuiWindow* mw = dynamic_cast<KXmlGuiWindow*>(qApp->mainWidget());

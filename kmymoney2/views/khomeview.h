@@ -142,7 +142,6 @@ private:
   KHTMLPart*      m_part;
   QString         m_html;
   Q3VBoxLayout*    m_qvboxlayoutPage;
-  QString         m_filename;
   bool            m_showAllSchedules;
   bool            m_needReload;
   MyMoneyForecast m_forecast;
