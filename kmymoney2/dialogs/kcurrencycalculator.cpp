@@ -302,8 +302,14 @@ void KCurrencyCalculator::accept(void)
 
 const MyMoneyMoney KCurrencyCalculator::price(void) const
 {
-  return m_result / m_value;
+  // This should fix https://bugs.kde.org/show_bug.cgi?id=205254 but
+  // I am not sure about any side effects when dealing with multi-
+  // currency transactions.
+  //
+  // The following line is the original version of this code
+  // which causes some rounding issues (see the above bug entry)
+  // return m_result / m_value;
+  return m_conversionRate->value();
 }
-
 
 #include "kcurrencycalculator.moc"
