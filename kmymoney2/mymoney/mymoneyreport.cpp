@@ -308,7 +308,7 @@ bool MyMoneyReport::includes( const MyMoneyAccount& acc ) const
 void MyMoneyReport::write ( QDomElement& e, QDomDocument *doc, bool anonymous ) const
 {
   // No matter what changes, be sure to have a 'type' attribute.  Only change
-  // the major type if it becomes impossible to maintain compatability with
+  // the major type if it becomes impossible to maintain compatibility with
   // older versions of the program as new features are added to the reports.
   // Feel free to change the minor type every time a change is made here.
 
@@ -562,7 +562,7 @@ void MyMoneyReport::write ( QDomElement& e, QDomDocument *doc, bool anonymous ) 
 bool MyMoneyReport::read ( const QDomElement& e )
 {
   // The goal of this reading method is 100% backward AND 100% forward
-  // compatability.  Any report ever created with any version of KMyMoney
+  // compatibility.  Any report ever created with any version of KMyMoney
   // should be able to be loaded by this method (as long as it's one of the
   // report types supported in this version, of course)
 
@@ -678,7 +678,7 @@ bool MyMoneyReport::read ( const QDomElement& e )
     {
       setRowType ( static_cast<ERowType> ( i ) );
       // recent versions of KMyMoney always showed a total column for
-      // income/expense reports. We turn it on for backward compatability
+      // income/expense reports. We turn it on for backward compatibility
       // here. If the total column is turned off, the flag will be reset
       // in the next step
       if ( i == eExpenseIncome )

@@ -134,7 +134,7 @@ public:
 
   /**
     * This method is used to check if the given account is used
-    * in any of the splits of this transation
+    * in any of the splits of this transaction
     *
     * @param id account id that should be checked for usage
     */
@@ -264,7 +264,7 @@ public:
   /**
     * Returns a signature consisting of the account ids and the
     * number of times they occur in the transaction if @a includeSplitCount
-    * is @a true. The signature is independant from the order of splits.
+    * is @a true. The signature is independent from the order of splits.
     *
     * Example: Having splits referencing the account B, A and B, the returned
     * value will be "A-B" if @p includeSplitCount is @p false or A*1-B*2 if it

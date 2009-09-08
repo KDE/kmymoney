@@ -1262,7 +1262,7 @@ void StdTransaction::tabOrderInForm(QWidgetList& tabOrderWidgets) const
   tabOrderWidgets.append(focusWidget(m_form->cellWidget(1, LabelColumn1)));
   // payee
   tabOrderWidgets.append(focusWidget(m_form->cellWidget(1, ValueColumn1)));
-  // make sure to have the category field and the split button as seperate tab order widgets
+  // make sure to have the category field and the split button as separate tab order widgets
   // ok, we have to have some internal knowledge about the KMyMoneyCategory object, but
   // it's one of our own widgets, so we actually don't care. Just make sure, that we don't
   // go haywire when someone changes the KMyMoneyCategory object ...
@@ -1320,7 +1320,7 @@ void StdTransaction::tabOrderInRegister(QWidgetList& tabOrderWidgets) const
   tabOrderWidgets.append(focusWidget(m_parent->cellWidget(m_startRow + 0, DateColumn)));
   // payee
   tabOrderWidgets.append(focusWidget(m_parent->cellWidget(m_startRow + 0, DetailColumn)));
-  // make sure to have the category field and the split button as seperate tab order widgets
+  // make sure to have the category field and the split button as separate tab order widgets
   // ok, we have to have some internal knowledge about the KMyMoneyCategory object, but
   // it's one of our own widgets, so we actually don't care. Just make sure, that we don't
   // go haywire when someone changes the KMyMoneyCategory object ...
@@ -1940,7 +1940,7 @@ void InvestTransaction::tabOrderInForm(QWidgetList& tabOrderWidgets) const
   // price
   tabOrderWidgets.append(focusWidget(m_form->cellWidget(2, ValueColumn2)));
 
-  // make sure to have the fee category field and the split button as seperate tab order widgets
+  // make sure to have the fee category field and the split button as separate tab order widgets
   // ok, we have to have some internal knowledge about the KMyMoneyCategory object, but
   // it's one of our own widgets, so we actually don't care. Just make sure, that we don't
   // go haywire when someone changes the KMyMoneyCategory object ...
@@ -2015,7 +2015,7 @@ void InvestTransaction::tabOrderInRegister(QWidgetList& tabOrderWidgets) const
   // asset account
   tabOrderWidgets.append(focusWidget(m_parent->cellWidget(m_startRow + 1, DetailColumn)));
 
-  // make sure to have the category fields and the split button as seperate tab order widgets
+  // make sure to have the category fields and the split button as separate tab order widgets
   // ok, we have to have some internal knowledge about the KMyMoneyCategory object, but
   // it's one of our own widgets, so we actually don't care. Just make sure, that we don't
   // go haywire when someone changes the KMyMoneyCategory object ...

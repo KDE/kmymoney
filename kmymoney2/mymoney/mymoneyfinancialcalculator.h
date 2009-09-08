@@ -302,7 +302,7 @@ private:
                                 // i is not rounded, n is integer
 
   bool                  m_bep;  // beginning/end of period payment flag
-  bool                  m_disc; // discrete/continous compounding flag
+  bool                  m_disc; // discrete/continuous compounding flag
 
   unsigned short        m_mask; // available value mask
   #define PV_SET        0x0001

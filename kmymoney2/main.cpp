@@ -150,7 +150,7 @@ int main(int argc, char *argv[])
   QString language = args->getOption("lang");
   if(!language.isEmpty()) {
       if(!KGlobal::locale()->setLanguage(QStringList()<<language)) {
-      qWarning("Unable to select language '%s'. This has one of two reasons:\n\ta) the standard KDE message catalogue is not installed\n\tb) the KMyMoney message catalogue is not installed", qPrintable(language));
+      qWarning("Unable to select language '%s'. This has one of two reasons:\n\ta) the standard KDE message catalog is not installed\n\tb) the KMyMoney message catalog is not installed", qPrintable(language));
     }
   }
 

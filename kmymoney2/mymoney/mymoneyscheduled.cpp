@@ -623,7 +623,7 @@ int MyMoneySchedule::transactionsRemaining(void) const
   if (m_endDate.isValid())
   {
     Q3ValueList<QDate> dates = paymentDates(m_lastPayment, m_endDate);
-    // Dont include the last payment so -1
+    // Do not include the last payment so -1
     counter = dates.count();
   }
   return counter;

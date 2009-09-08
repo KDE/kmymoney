@@ -79,7 +79,7 @@ MyMoneySeqAccessMgr::MyMoneySeqAccessMgr()
   map[STD_ACC_EXPENSE] = expense;
   map[STD_ACC_EQUITY] = equity;
 
-  // load account list with inital accounts
+  // load account list with initial accounts
   m_accountList = map;
 
   MyMoneyBalanceCacheItem balance;

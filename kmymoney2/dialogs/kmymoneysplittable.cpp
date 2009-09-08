@@ -791,7 +791,7 @@ void kMyMoneySplitTable::endEdit(bool keyBoardDriven)
   slotSetFocus(currentRow()+1);
 
   // if we still have more splits, we start editing right away
-  // in case we have selected 'enter moves betweeen fields'
+  // in case we have selected 'enter moves between fields'
   if(keyBoardDriven
   && currentRow() < static_cast<int> (m_transaction.splits().count()-1)
   && KMyMoneyGlobalSettings::enterMovesBetweenFields()) {

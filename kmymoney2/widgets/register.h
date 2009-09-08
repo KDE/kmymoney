@@ -371,7 +371,7 @@ public:
   /**
     * Convenience method to setup the register to show the columns
     * based on the account type of @a account. If @a showAccountColumn
-    * is @a true then the account column is shown independant of the
+    * is @a true then the account column is shown independent of the
     * account type. If @a account does not have an @a id, all columns
     * will be hidden.
     */
@@ -421,7 +421,7 @@ public:
   bool markErronousTransactions(void) const { return (m_markErronousTransactions & 0x01) != 0; }
 
   /**
-    * This method creates a specifc transaction according to the
+    * This method creates a specific transaction according to the
     * transaction passed in @a transaction.
     *
     * @param parent pointer to register where the created object should be added

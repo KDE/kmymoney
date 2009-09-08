@@ -415,7 +415,7 @@ kMyMoneyDateTbl::contentsMouseReleaseEvent(QMouseEvent *e)
     // to be "1 indexed", hence the "+ 1" at the end of the sum.
     pos = (7 * (row - 1)) + col + 1;
 
-    // This gets pretty nasty below.  firstday is a locale independant index for
+    // This gets pretty nasty below.  firstday is a locale independent index for
     // the first day of the week.  dayoff is the day of the week that the week
     // starts with for the selected locale.  Monday = 1 .. Sunday = 7
     // Strangely, in some cases dayoff is in fact set to 8, hence all of the

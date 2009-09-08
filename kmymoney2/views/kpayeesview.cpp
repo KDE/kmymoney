@@ -588,7 +588,7 @@ void KPayeesView::slotSelectPayee(void)
     return; // make sure we don't access an undefined payee
   }
 
-  // if we have multiple payees selected, clear and disable the payee informations
+  // if we have multiple payees selected, clear and disable the payee information
   if (payeesList.count() > 1) {
     m_tabWidget->setEnabled(false); // disable tab widget
     clearItemData();

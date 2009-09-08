@@ -73,7 +73,7 @@ public:
 
 public slots:
   /**
-    * This slot allows to activate/deactive the filter. By default the
+    * This slot allows to activate/deactivate the filter. By default the
     * filter is active.
     *
     * @param state Allows to activate (@a true) or deactivate (@a false) the filter
@@ -81,7 +81,7 @@ public slots:
   void setFilterActive(bool state = true);
 
   /**
-    * This slot allows to activate/deactive the filter. By default the
+    * This slot allows to activate/deactivate the filter. By default the
     * filter is active.
     *
     * @param state Allows to deactivate (@a true) or activate (@a false) the filter

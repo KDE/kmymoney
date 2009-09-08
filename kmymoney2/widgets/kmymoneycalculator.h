@@ -106,7 +106,7 @@ protected:
 
   /**
     * This method is used to transform a double into a QString
-    * and removing any trailing 0's and decimal seperators
+    * and removing any trailing 0's and decimal separators
     *
     * @param val reference to double value to be converted
     * @return QString object containing the converted value

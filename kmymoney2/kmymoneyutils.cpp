@@ -22,6 +22,8 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
+#include <QList>
+#include <QPixmap>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
@@ -43,9 +45,7 @@
 #include <investtransactioneditor.h>
 
 #include "kmymoneyutils.h"
-//Added by qt3to4:
-#include <QList>
-#include <QPixmap>
+
 
 KMyMoneyUtils::KMyMoneyUtils()
 {

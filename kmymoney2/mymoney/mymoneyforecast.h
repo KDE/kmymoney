@@ -246,7 +246,7 @@ private:
   /**
    * Returns the day moving average for the account @a acc based on the daily balances of a given number of @p forecastTerms
    * It returns the moving average for a given @p trendDay of the forecastTerm
-   * With a term of 1 month and 3 terms, it calculates the trend taking the transactions occured
+   * With a term of 1 month and 3 terms, it calculates the trend taking the transactions occurred
    * at that day and the day before,for the last 3 months
    */
   MyMoneyMoney accountMovingAverage(const MyMoneyAccount& acc, const int trendDay, const int forecastTerms);

@@ -505,7 +505,7 @@ public:
 
   /**
     * This member function checks all accounts identified by account_list
-    * and their subaccounts wether they are assigned to transactions/splits or not.
+    * and their subaccounts whether they are assigned to transactions/splits or not.
     * The function calls itself recursively with the list of sub-accounts of
     * the currently processed account.
     *
@@ -731,7 +731,7 @@ public:
     * This method is used to convert an account id to a string representation
     * of the names which can be used as a category description. If the account
     * is part of a hierarchy, the category name will be the concatenation of
-    * the single account names seperated by MyMoneyAccount::AccountSeperator.
+    * the single account names separated by MyMoneyAccount::AccountSeperator.
     *
     * @param accountId QString reference of the account's id
     * @param includeStandardAccounts if true, the standard top account will be part
@@ -744,7 +744,7 @@ public:
   /**
     * This method is used to convert a string representing a category to
     * an account id. A category can be the concatenation of multiple accounts
-    * representing a hierarchy of accounts. They have to be seperated by
+    * representing a hierarchy of accounts. They have to be separated by
     * MyMoneyAccount::AccountSeperator.
     *
     * @param category const reference to QString containing the category
@@ -759,7 +759,7 @@ public:
     * This method is used to convert a string representing an asset or
     * liability account to an account id. An account name can be the
     * concatenation of multiple accounts representing a hierarchy of
-    * accounts. They have to be seperated by MyMoneyAccount::AccountSeperator.
+    * accounts. They have to be separated by MyMoneyAccount::AccountSeperator.
     *
     * @param name const reference to QString containing the account name
     *
@@ -770,7 +770,7 @@ public:
 
   /**
     * This method is used to extract the parent part of an account hierarchy
-    * name who's parts are seperated by MyMoneyAccount::AccountSeperator.
+    * name who's parts are separated by MyMoneyAccount::AccountSeperator.
     *
     * @param name full account name
     * @return parent name (full account name excluding the last part)
@@ -952,7 +952,7 @@ public:
   static const QString OpeningBalancesPrefix;
 
   /**
-    * MyMoneyFile::AccountSeperator is used as the seperator
+    * MyMoneyFile::AccountSeperator is used as the separator
     * between account names to form a hierarchy.
     */
   static const QString AccountSeperator;
@@ -960,7 +960,7 @@ public:
   /**
     * createCategory creates a category from a text name.
     *
-    * The whole account hierarchy is created if it doesnt
+    * The whole account hierarchy is created if it does not
     * already exist.  e.g if name = Bills:Credit Card and
     * base = expense(), Bills will first be checked to see if
     * it exists and created if not.  Credit Card will then

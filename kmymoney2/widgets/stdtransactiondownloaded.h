@@ -44,7 +44,7 @@ public:
   virtual const char* className(void) { return "StdTransactionDownloaded"; }
 
   /**
-   * This method sets the general paramaters required for the painting of a cell
+   * This method sets the general parameters required for the painting of a cell
    * in the register. These are:
    *
    * - background color (alternating)
@@ -96,7 +96,7 @@ class InvestTransactionDownloaded : public InvestTransaction
     virtual const char* className(void) { return "InvestTransactionDownloaded"; }
 
   /**
-     * This method sets the general paramaters required for the painting of a cell
+     * This method sets the general parameters required for the painting of a cell
    * in the register. These are:
      *
      * - background color (alternating)

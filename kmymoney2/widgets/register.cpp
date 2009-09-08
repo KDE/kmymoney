@@ -1868,7 +1868,7 @@ QString Register::text(int /*row*/, int /*col*/) const
 
 QWidget* Register::cellWidget(int row, int col) const
 {
-  // separeted here in two if()s, because this method is called for each
+  // separated here in two if()s, because this method is called for each
   // event from QTable::eventFilter and in the most cases it is -1, -1
   if(row < 0 || col < 0)
     return 0;

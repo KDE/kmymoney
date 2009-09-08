@@ -324,7 +324,7 @@ private:
    * This method returns the account id for a given account @a name. In
    * case @a name references an investment account and @a useBrokerage is @a true
    * (the default), the id of the corresponding brokerage account will be
-   * returned. In case an account is not existant, it will be created.
+   * returned. In case an account does not exist, it will be created.
    */
   QString transferAccount(QString name, bool useBrokerage = true);
 

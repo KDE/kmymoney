@@ -228,7 +228,7 @@ void MyMoneyBudget::write(QDomElement& e, QDomDocument *doc) const
 bool MyMoneyBudget::read(const QDomElement& e)
 {
   // The goal of this reading method is 100% backward AND 100% forward
-  // compatability.  Any Budget ever created with any version of KMyMoney
+  // compatibility.  Any Budget ever created with any version of KMyMoney
   // should be able to be loaded by this method (as long as it's one of the
   // Budget types supported in this version, of course)
 

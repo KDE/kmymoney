@@ -106,7 +106,7 @@ void KAccountTemplateSelector::Private::loadHierarchy(void)
   }
 
   // I need to think about this some more. The code works and shows
-  // the current account hierarchy. It might be usefull, to show
+  // the current account hierarchy. It might be useful, to show
   // existing accounts dimmed and the new ones in bold or so.
 #if 0
 

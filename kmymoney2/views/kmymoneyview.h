@@ -241,7 +241,7 @@ public:
   ~KMyMoneyView();
 
   /**
-    * Makes sure that a MyMoneyFile is open and has been created succesfully.
+    * Makes sure that a MyMoneyFile is open and has been created successfully.
     *
     * @return Whether the file is open and initialised
     */
@@ -256,12 +256,12 @@ public:
   /**
     * Calls MyMoneyFile::readAllData which reads a MyMoneyFile into appropriate
     * data structures in memory.  The return result is examined to make sure no
-    * errors occured whilst parsing.
+    * errors occurred whilst parsing.
     *
     * @param url The URL to read from.
     *            If no protocol is specified, file:// is assumed.
     *
-    * @return Whether the read was successfull.
+    * @return Whether the read was successful.
     */
   bool readFile(const KUrl& url);
 
@@ -448,7 +448,7 @@ public slots:
     * class KMyMoneySettings (a singleton).
     *
     * @see KListSettingsDlg
-    * Refreshs all views. Used e.g. after settings have been changed or
+    * Refreshes all views. Used e.g. after settings have been changed or
     * data has been loaded from external sources (QIF import).
     **/
   void slotRefreshViews();

@@ -204,7 +204,7 @@ public:
     *
     * @deprecated This method is only provided as long as we provide
     *             the version 0.4 binary reader. As soon as we deprecate
-    *             this compatability mode this method will disappear from
+    *             this compatibility mode this method will disappear from
     *             this interface!
     */
   virtual void addAccount(MyMoneyAccount& parent, MyMoneyAccount& account) = 0;
@@ -218,7 +218,7 @@ public:
     *
     * @deprecated This method is only provided as long as we provide
     *             the version 0.4 binary reader. As soon as we deprecate
-    *             this compatability mode this method will disappear from
+    *             this compatibility mode this method will disappear from
     *             this interface!
     *
     */
@@ -236,7 +236,7 @@ public:
     *
     * @deprecated This method is only provided as long as we provide
     *             the version 0.4 binary reader. As soon as we deprecate
-    *             this compatability mode this method will disappear from
+    *             this compatibility mode this method will disappear from
     *             this interface!
     */
   virtual void addInstitution(MyMoneyInstitution& institution) = 0;
@@ -257,7 +257,7 @@ public:
     *
     * @deprecated This method is only provided as long as we provide
     *             the version 0.4 binary reader. As soon as we deprecate
-    *             this compatability mode this method will disappear from
+    *             this compatibility mode this method will disappear from
     *             this interface!
     */
   virtual void addTransaction(MyMoneyTransaction& transaction, const bool skipAccountUpdate = false) = 0;

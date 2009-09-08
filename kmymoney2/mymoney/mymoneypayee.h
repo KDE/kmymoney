@@ -68,7 +68,7 @@ private:
 
   /**
     * This member keeps a reference to an external database
-    * (e.g. kaddressbook). It is the responsability of the
+    * (e.g. kaddressbook). It is the responsibility of the
     * application to format the reference string
     * (e.g. encoding the name of the external database into the
     * reference string).

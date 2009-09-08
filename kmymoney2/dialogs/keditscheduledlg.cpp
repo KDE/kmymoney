@@ -318,7 +318,7 @@ void KEditScheduleDlg::accept(void)
 
   // only accept if the button is really still enabled. We could end
   // up here, if the user filled all fields, the focus is on the category
-  // field, but the category is not yet existant. When the user presses the
+  // field, but the category is not yet existent. When the user presses the
   // OK button in this context, he will be asked if he wants to create
   // the category or not. In case he decides no, we end up here with no
   // category filled in, so we don't run through the final acceptance.

@@ -597,7 +597,7 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
 
       ft.commit();
 
-      // now analyse the balances and spit out warnings to the user
+      // now analyze the balances and spit out warnings to the user
       QMap<QString, bool>::const_iterator it_a;
 
       if(!suppressBalanceWarnings) {
@@ -1248,7 +1248,7 @@ void StdTransactionEditor::autoFill(const QString& payeeId)
         // <quote>
         // If a check number is already specified by the user it is
         // used. If the input field is empty and the previous transaction
-        // contains a checknumber, the next usuable check no will be assigned
+        // contains a checknumber, the next usable check number will be assigned
         // to the transaction.
         // </quote>
 

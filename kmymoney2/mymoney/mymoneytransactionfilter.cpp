@@ -276,7 +276,7 @@ bool MyMoneyTransactionFilter::match(const MyMoneyTransaction& transaction)
   m_matchingSplits.clear();
 
   // qDebug("T: %s", transaction.id().data());
-  // if no filter is set, we can savely return a match
+  // if no filter is set, we can safely return a match
   // if we should report all splits, then we collect them
   if(!m_filterSet.allFilter) {
     if(m_reportAllSplits) {

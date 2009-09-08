@@ -44,7 +44,7 @@ class QDomElement;
 class QDomDocument;
 
 /**
-Represents the electronic analog of the paper bank statement just like we used to get in the regular mail.  This class is designed to be easy to extend and easy to create with minimal dependencies.  So the header file should include as few project files as possible (preferrably NONE).
+Represents the electronic analog of the paper bank statement just like we used to get in the regular mail.  This class is designed to be easy to extend and easy to create with minimal dependencies.  So the header file should include as few project files as possible (preferably NONE).
 
 @author ace jones
 */

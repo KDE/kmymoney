@@ -1402,7 +1402,7 @@ void MyMoneySeqAccessMgrTest::testScheduleList() {
 	CPPUNIT_ASSERT(list[0].name() == "Schedule 1");
 	CPPUNIT_ASSERT(list[1].name() == "Schedule 4");
 
-	// filter by occurence
+	// filter by occurrence
 	list = m->scheduleList("", MyMoneySchedule::TYPE_ANY,
 				MyMoneySchedule::OCCUR_DAILY);
 	CPPUNIT_ASSERT(list.count() == 1);

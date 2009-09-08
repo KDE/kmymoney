@@ -384,7 +384,7 @@ private:
   /**
     * What sort of values should show up on the COLUMNS of this report,
     * in the case of a 'PivotTable' report.  Really this is used more as a
-    * QUANTITY of months or days.  Whether it's months or days is determiend
+    * QUANTITY of months or days.  Whether it's months or days is determined
     * by m_columnsAreDays.
     */
   enum EColumnType m_columnType;

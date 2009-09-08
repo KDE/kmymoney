@@ -82,7 +82,7 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
  m_currentState(report)
 {
     //
-    // Rework labelling
+    // Rework labeling
     //
 
     setWindowTitle( i18n( "Report Configuration" ) );
