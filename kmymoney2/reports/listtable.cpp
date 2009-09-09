@@ -37,6 +37,7 @@
 #include "mymoneyreport.h"
 #include "mymoneyexception.h"
 #include "kmymoneyutils.h"
+#include "kmymoneyglobalsettings.h"
 #include "reportdebug.h"
 #include "listtable.h"
 
@@ -612,6 +613,29 @@ namespace reports {
     else
       Q3TextStream ( &g ) << renderHTML();
     g.close();
+  }
+
+  void ListTable::includeInvestmentSubAccounts()
+  {
+  // if we're not in expert mode, we need to make sure
+  // that all stock accounts for the selected investment
+  // account are also selected
+    QStringList accountList;
+    if(m_config.accounts(accountList)) {
+      if(!KMyMoneyGlobalSettings::expertMode()) {
+        QStringList::const_iterator it_a, it_b;
+        for(it_a = accountList.begin(); it_a != accountList.end(); ++it_a) {
+          MyMoneyAccount acc = MyMoneyFile::instance()->account(*it_a);
+          if(acc.accountType() == MyMoneyAccount::Investment) {
+            for(it_b = acc.accountList().begin(); it_b != acc.accountList().end(); ++it_b) {
+              if(!accountList.contains(*it_b)) {
+                m_config.addAccount(*it_b);
+              }
+            }
+          }
+        }
+      }
+    }
   }
 
 }

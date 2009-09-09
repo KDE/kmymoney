@@ -386,6 +386,9 @@ void QueryTable::constructTransactionTable(void)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
+  //make sure we have all subaccounts of investment accounts
+  includeInvestmentSubAccounts();
+
   MyMoneyReport report(m_config);
   report.setReportAllSplits(false);
   report.setConsiderCategory(true);
@@ -1092,6 +1095,9 @@ void QueryTable::constructAccountTable(void)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
+  //make sure we have all subaccounts of investment accounts
+  includeInvestmentSubAccounts();
+
   QList<MyMoneyAccount> accounts;
   file->accountList(accounts);
   QList<MyMoneyAccount>::const_iterator it_account = accounts.constBegin();
@@ -1183,6 +1189,9 @@ void QueryTable::constructAccountTable(void)
 void QueryTable::constructSplitsTable(void)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
+
+  //make sure we have all subaccounts of investment accounts
+  includeInvestmentSubAccounts();
 
   MyMoneyReport report(m_config);
   report.setReportAllSplits(false);

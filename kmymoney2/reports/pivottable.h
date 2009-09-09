@@ -343,6 +343,12 @@ protected:
      * should show
      */
     void loadRowTypeList(void);
+
+   /**
+     * If not in expert mode, include all subaccounts for each selected
+     * investment account
+     */
+    void includeInvestmentSubAccounts(void);
 };
 
 

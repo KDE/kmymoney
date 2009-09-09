@@ -85,6 +85,13 @@ namespace reports {
 
     protected:
       void render ( QString&, QString& ) const;
+
+     /**
+      * If not in expert mode, include all subaccounts for each selected
+      * investment account
+      */
+      void includeInvestmentSubAccounts(void);
+
       QList<TableRow> m_rows;
 
       QString m_group;
@@ -103,7 +110,7 @@ namespace reports {
       QString m_summarize;
       QString m_propagate;
 
-      const MyMoneyReport& m_config;
+      MyMoneyReport m_config;
 
 
   };
