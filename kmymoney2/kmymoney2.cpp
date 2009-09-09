@@ -5193,7 +5193,7 @@ void KMyMoney2App::Private::moveInvestmentTransaction(const QString& fromId,
   QString stockAccountId;
   QString stockSecurityId;
   QList<MyMoneySplit>::const_iterator it_s;
-  for(it_s = t.splits().begin(); it_s != t.splits().end(); ++it_s) {
+  for(it_s = t.splits().constBegin(); it_s != t.splits().constEnd(); ++it_s) {
      stockAccountId = (*it_s).accountId();
      stockSecurityId =
         MyMoneyFile::instance()->account(stockAccountId).currencyId();
@@ -5205,7 +5205,7 @@ void KMyMoney2App::Private::moveInvestmentTransaction(const QString& fromId,
   QString newStockAccountId = QString();
   QStringList accountList = toInvAcc.accountList();
   QStringList::const_iterator it_a;
-  for (it_a = accountList.begin(); it_a != accountList.end(); ++it_a) {
+  for (it_a = accountList.constBegin(); it_a != accountList.constEnd(); ++it_a) {
     if (MyMoneyFile::instance()->account((*it_a)).currencyId() ==
         stockSecurityId) {
       newStockAccountId = (*it_a);
