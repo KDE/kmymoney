@@ -669,9 +669,7 @@ void KForecastView::loadChartView(void)
   table.drawChart(*m_forecastChart);
 #endif
   // Adjust the size
-  int nh;
-  nh = (width()*0.5);
-  //m_forecastChart->resize(width()-60, nh);
+  //m_forecastChart->resize(m_tab->width()-30, m_tab->height()-60);
 
   //m_forecastChart->update();
 }
