@@ -624,10 +624,10 @@ namespace reports {
     if(m_config.accounts(accountList)) {
       if(!KMyMoneyGlobalSettings::expertMode()) {
         QStringList::const_iterator it_a, it_b;
-        for(it_a = accountList.begin(); it_a != accountList.end(); ++it_a) {
+        for(it_a = accountList.constBegin(); it_a != accountList.constEnd(); ++it_a) {
           MyMoneyAccount acc = MyMoneyFile::instance()->account(*it_a);
           if(acc.accountType() == MyMoneyAccount::Investment) {
-            for(it_b = acc.accountList().begin(); it_b != acc.accountList().end(); ++it_b) {
+            for(it_b = acc.accountList().constBegin(); it_b != acc.accountList().constEnd(); ++it_b) {
               if(!accountList.contains(*it_b)) {
                 m_config.addAccount(*it_b);
               }
