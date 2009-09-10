@@ -59,20 +59,20 @@ const QString KWelcomePage::welcomePage(void)
   body = QString("<body>");
   //"background_image", if enabled, displays an image in the background of this page.
   //If you wish to use a background, un-comment the following line 
-  const QString backgroundFilename = KGlobal::dirs()->findResource("appdata", "images/background.png");
+  const QString backgroundFilename = KGlobal::dirs()->findResource("appdata", "html/images/background.png");
   body += QString("<img id=\"background_image\" src=\"%1\" height=\"100%\">").arg(backgroundFilename);
-  const QString logoFilename = KGlobal::dirs()->findResource("appdata", "images/trans_logo.png");
+  const QString logoFilename = KGlobal::dirs()->findResource("appdata", "html/images/trans_logo.png");
   body += QString("<img id=\"KMyMoneyLogo\" src=\"%1\">").arg(logoFilename);
   body += QString("<h3 id=\"title\">" + i18n("Welcome to KMyMoney") + "</h3>");
   body += QString("<h4 id=\"subtitle\">" + i18n("The free, easy to use, personal finance manager for KDE") + "</h4>");
-  const QString backArrowFilename = KGlobal::dirs()->findResource("appdata", "images/backarrow.png");
+  const QString backArrowFilename = KGlobal::dirs()->findResource("appdata", "html/images/backarrow.png");
   body += QString("<div id=\"returnLink\"><a href=\"/home\"><img src=\"%1\">").arg(backArrowFilename);
   body += QString(i18n("Go to My Financial Summary"));
   body += QString("</a></div>");
   body += QString("<div id=\"topleft\">");
 
   //topright
-  const QString spacerFilename = KGlobal::dirs()->findResource("appdata", "images/spacer.png");
+  const QString spacerFilename = KGlobal::dirs()->findResource("appdata", "html/images/spacer.png");
   body += QString("<div id=\"topright\"><img src=\"%1\"></div>").arg(spacerFilename);
   body += QString("<div id=\"rightborder\">");
   body += QString("<table style=\"width: 100%;\">");
@@ -85,22 +85,22 @@ const QString KWelcomePage::welcomePage(void)
 
   //Welcome menu
   body += QString("<ul>");
-  const QString newFilename = KGlobal::dirs()->findResource("appdata", "images/filenew.png");
+  const QString newFilename = KGlobal::dirs()->findResource("appdata", "html/images/filenew.png");
   body += QString("<li><img src=\"%1\">").arg(newFilename);
   body += QString("<a href=\"/action?id=file_new\">" + i18n("Get started and setup my accounts") + "</a></li>");
-  const QString dataFilename = KGlobal::dirs()->findResource("appdata", "images/kmymoneydata.png");
+  const QString dataFilename = KGlobal::dirs()->findResource("appdata", "html/images/kmymoneydata.png");
   body += QString("<li><img src=\"%1\">").arg(dataFilename);
   body += QString("<a href=\"/action?id=file_open\">" + i18n("Open an existing KMyMoney data file") + "</a></li>");
-  const QString manualFilename = KGlobal::dirs()->findResource("appdata", "images/manual.png");
+  const QString manualFilename = KGlobal::dirs()->findResource("appdata", "html/images/manual.png");
   body += QString("<li><img src=\"%1\">").arg(manualFilename);
   body += QString("<a href=\"/action?id=help_contents\">" + i18n("Learn how to use KMyMoney") + "</a></li>");
-  const QString konquerorFilename = KGlobal::dirs()->findResource("appdata", "images/konqueror.png");
+  const QString konquerorFilename = KGlobal::dirs()->findResource("appdata", "html/images/konqueror.png");
   body += QString("<li><img src=\"%1\">").arg(konquerorFilename);
   body += QString("<a href=\"http://kmymoney2.sf.net\">" + i18n("Visit the KMyMoney website") + "</a></li>");
-  const QString aboutFilename = KGlobal::dirs()->findResource("appdata", "images/about_kde.png");
+  const QString aboutFilename = KGlobal::dirs()->findResource("appdata", "html/images/about_kde.png");
   body += QString("<li><img src=\"%1\">").arg(aboutFilename);
   body += QString("<a href=\"http://forum.kde.org/viewforum.php?f=69\">" + i18n("Get help from the KMyMoney community") + "</a></li>");
-  const QString messageFilename = KGlobal::dirs()->findResource("appdata", "images/messagebox_info.png");
+  const QString messageFilename = KGlobal::dirs()->findResource("appdata", "html/images/messagebox_info.png");
   body += QString("<li><img src=\"%1\">").arg(messageFilename);
   body += QString("<a href=\"/welcome?mode=whatsnew\">" + i18n("See what's new in this version") + "</a></li>");
   body += QString("</ul>");
@@ -148,18 +148,18 @@ const QString KWelcomePage::whatsNewPage(void)
   body = QString("<body>");
   //"background_image", if enabled, displays an image in the background of this page.
   //If you wish to use a background, un-comment the following line 
-  const QString backgroundFilename = KGlobal::dirs()->findResource("appdata", "images/background.png");
+  const QString backgroundFilename = KGlobal::dirs()->findResource("appdata", "html/images/background.png");
   body += QString("<img id=\"background_image\" src=\"%1\" height=\"100%\">").arg(backgroundFilename);
-  const QString logoFilename = KGlobal::dirs()->findResource("appdata", "images/trans_logo.png");
+  const QString logoFilename = KGlobal::dirs()->findResource("appdata", "html/images/trans_logo.png");
   body += QString("<img id=\"KMyMoneyLogo\" src=\"%1\">").arg(logoFilename);
   body += QString("<h3 id=\"title\">" + i18n("What's new in KMyMoney 1.0") +"</h3>");
-  const QString backArrowFilename = KGlobal::dirs()->findResource("appdata", "images/backarrow.png");
+  const QString backArrowFilename = KGlobal::dirs()->findResource("appdata", "html/images/backarrow.png");
   body += QString("<div id=\"returnLink\"><img src=\"%1\">").arg(backArrowFilename);
   body += QString("<a href=\"/welcome\">" + i18n("Return to the Welcome page") + "</a></div>");
 
   body += QString("<div id=\"topleft\">");
 
-  const QString spacerFilename = KGlobal::dirs()->findResource("appdata", "images/spacer.png");
+  const QString spacerFilename = KGlobal::dirs()->findResource("appdata", "html/images/spacer.png");
   body += QString("<div id=\"topright\"><img src=\"%1\"></div>").arg(spacerFilename);
   body += QString("<div id=\"rightborder\"><table><tr><td>");
 //This is where the content should be put to show up inside the decorative frame
