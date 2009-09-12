@@ -74,6 +74,15 @@ bool MyMoneySqlQuery::exec () {
   return (rc);
 }
 
+bool MyMoneySqlQuery::exec ( const QString & query ) {
+  TRACE(QString("start sql - %1").arg(query).toLatin1());
+  bool rc = QSqlQuery::exec(query);
+  QString msg("end sql\n%1\n***Query returned %2, row count %3");
+  TRACE (msg.arg(QSqlQuery::executedQuery()).arg(rc).arg(numRowsAffected()).toLatin1());
+  //DBG (QString("%1\n***Query returned %2, row count %3").arg(QSqlQuery::executedQuery()).arg(rc).arg(size()));
+  return rc;
+}
+
 bool MyMoneySqlQuery::prepare ( const QString & query ) {
   if (m_db->isSqlite3()) {
     QString newQuery = query;
@@ -257,9 +266,9 @@ void MyMoneyStorageSql::close(bool logoff) {
 bool MyMoneyStorageSql::createDatabase (const KUrl& url) {
   DBG("*** Entering MyMoneyStorageSql::createDatabase");
   int rc = true;
-  if (m_dbType == Sqlite3) return(true); // not needed for sqlite
+  if (isSqlite3()) return(true); // not needed for sqlite
   QString dbName = url.path().right(url.path().length() - 1); // remove separator slash
-  if (!m_dbType == Mysql) {
+  if (!isMysql()) {
     m_error = i18n("Automatic database creation for type %1 is not currently implemented.\n"
                    "Please create database %2 manually", driverName(), dbName);
     return (false);
@@ -399,9 +408,8 @@ bool MyMoneyStorageSql::addColumn
   QString afterString(';');
   if (!after.isEmpty())
     afterString = QString("AFTER %1;").arg(after);
-  q.prepare("ALTER TABLE " + t.name() + " ADD COLUMN " +
-                     c.generateDDL(m_dbType) + afterString);
-  if (!q.exec()) {
+  if (!q.exec("ALTER TABLE " + t.name() + " ADD COLUMN " +
+                     c.generateDDL(m_dbType) + afterString)) {
     buildError (q, __func__,
       QString("Error adding column %1 to table %2").arg(c.name()).arg(t.name()));
     return (false);
@@ -425,9 +433,8 @@ bool MyMoneyStorageSql::dropColumn
   if (!record(t.name()).contains(col))
     return (true);
   MyMoneySqlQuery q(this);
-  q.prepare("ALTER TABLE " + t.name() + " DROP COLUMN "
-      + col + ';');
-  if (!q.exec()) {
+  if (!q.exec("ALTER TABLE " + t.name() + " DROP COLUMN "
+      + col + ';')) {
     buildError (q, __func__,
       QString("Error dropping column %1 from table %2").arg(col).arg(t.name()));
     return (false);
@@ -441,15 +448,13 @@ int MyMoneyStorageSql::upgradeToV1() {
   MyMoneyDbTransaction t(*this, __func__);
   MyMoneySqlQuery q(this);
   // change kmmSplits pkey to (transactionId, splitId)
-  q.prepare ("ALTER TABLE kmmSplits ADD PRIMARY KEY (transactionId, splitId);");
-  if (!q.exec()) {
+  if (!q.exec ("ALTER TABLE kmmSplits ADD PRIMARY KEY (transactionId, splitId);")) {
     buildError (q, __func__, "Error updating kmmSplits pkey");
     return (1);
   }
   // change kmmSplits alter checkNumber varchar(32)
-  q.prepare (m_db.m_tables["kmmSplits"].modifyColumnString(m_dbType, "checkNumber",
-             MyMoneyDbColumn("checkNumber", "varchar(32)")));
-  if (!q.exec()) {
+  if (!q.exec(m_db.m_tables["kmmSplits"].modifyColumnString(m_dbType, "checkNumber",
+             MyMoneyDbColumn("checkNumber", "varchar(32)")))) {
     buildError (q, __func__, "Error expanding kmmSplits.checkNumber");
     return (1);
   }
@@ -478,35 +483,30 @@ int MyMoneyStorageSql::upgradeToV1() {
   // add index to kmmKeyValuePairs to (kvpType,kvpId)
   QStringList list;
   list << "kvpType" << "kvpId";
-  q.prepare (MyMoneyDbIndex("kmmKeyValuePairs", "kmmKVPtype_id", list, false).generateDDL(m_dbType) + ';');
-  if (!q.exec()) {
+  if(!q.exec(MyMoneyDbIndex("kmmKeyValuePairs", "kmmKVPtype_id", list, false).generateDDL(m_dbType) + ';')) {
       buildError (q, __func__, "Error adding kmmKeyValuePairs index");
       return (1);
   }
   // add index to kmmSplits to (accountId, txType)
   list.clear();
   list << "accountId" << "txType";
-  q.prepare (MyMoneyDbIndex("kmmSplits", "kmmSplitsaccount_type", list, false).generateDDL(m_dbType) + ';');
-  if (!q.exec()) {
+  if (!q.exec (MyMoneyDbIndex("kmmSplits", "kmmSplitsaccount_type", list, false).generateDDL(m_dbType) + ';')) {
     buildError (q, __func__, "Error adding kmmSplits index");
     return (1);
   }
   // change kmmSchedulePaymentHistory pkey to (schedId, payDate)
-  q.prepare ("ALTER TABLE kmmSchedulePaymentHistory ADD PRIMARY KEY (schedId, payDate);");
-  if (!q.exec()) {
+  if (!q.exec ("ALTER TABLE kmmSchedulePaymentHistory ADD PRIMARY KEY (schedId, payDate);")) {
     buildError (q, __func__, "Error updating kmmSchedulePaymentHistory pkey");
     return (1);
   }
       // change kmmPrices pkey to (fromId, toId, priceDate)
-  q.prepare ("ALTER TABLE kmmPrices ADD PRIMARY KEY (fromId, toId, priceDate);");
-  if (!q.exec()) {
+  if (!q.exec ("ALTER TABLE kmmPrices ADD PRIMARY KEY (fromId, toId, priceDate);")) {
     buildError (q, __func__, "Error updating kmmPrices pkey");
     return (1);
   }
   // change kmmReportConfig pkey to (name)
   // There wasn't one previously, so no need to drop it.
-  q.prepare ("ALTER TABLE kmmReportConfig ADD PRIMARY KEY (name);");
-  if (!q.exec()) {
+  if (!q.exec ("ALTER TABLE kmmReportConfig ADD PRIMARY KEY (name);")) {
     buildError (q, __func__, "Error updating kmmReportConfig pkey");
     return (1);
   }
@@ -615,11 +615,10 @@ int MyMoneyStorageSql::upgradeToV3() {
   MyMoneyDbTransaction t(*this, __func__);
   MyMoneySqlQuery q(this);
   // The default value is given here to populate the column.
-  q.prepare ("ALTER TABLE kmmSchedules ADD COLUMN " +
+  if (!q.exec ("ALTER TABLE kmmSchedules ADD COLUMN " +
       MyMoneyDbIntColumn("occurenceMultiplier",
         MyMoneyDbIntColumn::SMALL, false, false, true)
-        .generateDDL(m_dbType) + " DEFAULT 0;");
-  if (!q.exec()) {
+        .generateDDL(m_dbType) + " DEFAULT 0;")) {
     buildError (q, __func__, "Error adding kmmSchedules.occurenceMultiplier");
     return (1);
   }
@@ -634,8 +633,7 @@ int MyMoneyStorageSql::upgradeToV4() {
   MyMoneySqlQuery q(this);
   QStringList list;
   list << "transactionId" << "splitId";
-  q.prepare (MyMoneyDbIndex("kmmSplits", "kmmTx_Split", list, false).generateDDL(m_dbType) + ';');
-  if (!q.exec()) {
+  if (!q.exec (MyMoneyDbIndex("kmmSplits", "kmmTx_Split", list, false).generateDDL(m_dbType) + ';')) {
     buildError (q, __func__, "Error adding kmmSplits index on (transactionId, splitId)");
     return (1);
   }
@@ -667,8 +665,7 @@ int MyMoneyStorageSql::upgradeToV5() {
     return (1);
   const MyMoneyDbTable& t = m_db.m_tables["kmmReportConfig"];
   if (m_dbType != Sqlite3) {
-    q.prepare (t.dropPrimaryKeyString(m_dbType));
-    if (!q.exec()) {
+    if (!q.exec (t.dropPrimaryKeyString(m_dbType))) {
       buildError (q, __func__, "Error dropping Report table keys");
       return (1);
     }
@@ -689,8 +686,7 @@ int MyMoneyStorageSql::upgradeToV6() {
   // upgrade Mysql to InnoDB transaction-safe engine
   if (m_dbType == Mysql) {
     for (QMap<QString, MyMoneyDbTable>::ConstIterator tt = m_db.tableBegin(); tt != m_db.tableEnd(); ++tt) {
-      q.prepare(QString("ALTER TABLE %1 ENGINE = InnoDB;").arg(tt.value().name()));
-      if (!q.exec()) {
+      if (!q.exec(QString("ALTER TABLE %1 ENGINE = InnoDB;").arg(tt.value().name()))) {
         buildError (q, __func__, "Error updating to InnoDB");
         return (1);
       }
@@ -729,8 +725,7 @@ int MyMoneyStorageSql::upgradeToV6() {
       return (1);
     }
   } else {
-    q.prepare ("ALTER TABLE kmmReportConfig ADD PRIMARY KEY (id);");
-    if (!q.exec()) {
+    if (!q.exec ("ALTER TABLE kmmReportConfig ADD PRIMARY KEY (id);")) {
       buildError (q, __func__, "Error updating kmmReportConfig pkey");
       return (1);
     }
@@ -746,8 +741,7 @@ bool MyMoneyStorageSql::sqliteAlterTable(const MyMoneyDbTable& t) {
   QString tempTableName = t.name();
   tempTableName.replace("kmm", "tmp");
   MyMoneySqlQuery q(this);
-  q.prepare (QString("ALTER TABLE " + t.name() + " RENAME TO " + tempTableName + ';'));
-  if (!q.exec()) {
+  if (!q.exec (QString("ALTER TABLE " + t.name() + " RENAME TO " + tempTableName + ';'))) {
     buildError (q, __func__, "Error renaming table");
     return false;
   }
@@ -758,8 +752,7 @@ bool MyMoneyStorageSql::sqliteAlterTable(const MyMoneyDbTable& t) {
     buildError (q, __func__, "Error inserting into new table");
     return false;
   }
-  q.prepare (QString("DROP TABLE " + tempTableName + ';'));
-  if (!q.exec()) {
+  if (!q.exec (QString("DROP TABLE " + tempTableName + ';'))) {
     buildError (q, __func__, "Error dropping old table");
     return false;
   }
@@ -796,8 +789,7 @@ int MyMoneyStorageSql::createTables () {
   MyMoneySqlQuery q(this);
   for (QMap<QString, MyMoneyDbView>::ConstIterator tt = m_db.viewBegin(); tt != m_db.viewEnd(); ++tt) {
     if (!lowerTables.contains(tt.key().toLower())) {
-      q.prepare (tt.value().createString());
-      if (!q.exec()) throw new MYMONEYEXCEPTION(buildError (q, __func__, QString ("creating view %1").arg(tt.key())));
+      if (!q.exec(tt.value().createString())) throw new MYMONEYEXCEPTION(buildError (q, __func__, QString ("creating view %1").arg(tt.key())));
     }
   }
 
@@ -813,8 +805,7 @@ void MyMoneyStorageSql::createTable (const MyMoneyDbTable& t) {
   QStringList ql = t.generateCreateSQL(m_dbType).split('\n', QString::SkipEmptyParts);
   MyMoneySqlQuery q(this);
   for (int i = 0; i < ql.count(); ++i) {
-    q.prepare (ql[i]);
-    if (!q.exec()) throw new MYMONEYEXCEPTION(buildError (q, __func__, QString ("creating table/index %1").arg(t.name())));
+    if (!q.exec(ql[i])) throw new MYMONEYEXCEPTION(buildError (q, __func__, QString ("creating table/index %1").arg(t.name())));
   }
 }
 

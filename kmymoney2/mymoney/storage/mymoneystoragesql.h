@@ -108,6 +108,7 @@ class MyMoneySqlQuery : public QSqlQuery {
     MyMoneySqlQuery (MyMoneyStorageSql* db = 0);
     virtual ~MyMoneySqlQuery();
     bool exec ();
+    bool exec ( const QString & query );
     bool prepare ( const QString & query );
   private:
     const MyMoneyStorageSql* m_db;
