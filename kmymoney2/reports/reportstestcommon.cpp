@@ -237,7 +237,7 @@ QString makeAccount( const QString& _name, MyMoneyAccount::accountTypeE _type, M
   info.setName(_name);
   info.setAccountType(_type);
   info.setOpeningDate(_open);
-  if ( _currency != "" )
+  if ( !_currency.isEmpty() )
     info.setCurrencyId(_currency);
   else
     info.setCurrencyId(MyMoneyFile::instance()->baseCurrency().id());

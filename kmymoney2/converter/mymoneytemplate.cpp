@@ -175,7 +175,7 @@ void MyMoneyTemplate::hierarchy(QMap<QString, Q3ListViewItem*>& list)
   while(rc == true && !accounts.isNull() && accounts.isElement()) {
     QDomElement childElement = accounts.toElement();
     if(childElement.tagName() == "account"
-    && childElement.attribute("name") == "") {
+    && childElement.attribute("name").isEmpty()) {
       switch(childElement.attribute("type").toUInt()) {
         case MyMoneyAccount::Asset:
           list[i18n("Asset")] = 0;
@@ -220,7 +220,7 @@ bool MyMoneyTemplate::importTemplate(void(*callback)(int, int, const QString&))
   while(rc == true && !m_accounts.isNull() && m_accounts.isElement()) {
     QDomElement childElement = m_accounts.toElement();
     if(childElement.tagName() == "account"
-    && childElement.attribute("name") == "") {
+    && childElement.attribute("name").isEmpty()) {
       ++m_accountsRead;
       MyMoneyAccount parent;
       switch(childElement.attribute("type").toUInt()) {

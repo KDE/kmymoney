@@ -443,10 +443,10 @@ namespace reports {
           }
 
           if ( need_label ) {
-            if ( ( * it_column == "payee" ) ||
-                 ( * it_column == "category" ) ||
-                 ( * it_column == "memo" ) ) {
-              if ( ( * it_row ) ["shares"] != "" ) {
+            if ( ( *it_column == "payee" ) ||
+                 ( *it_column == "category" ) ||
+                 ( *it_column == "memo" ) ) {
+              if ( !(*it_row)["shares"].isEmpty() ) {
                 data = ( ( * it_row ) ["id"] == "A" )
                        ? i18n ( "Initial Market Value" )
                        : i18n ( "Ending Market Value" );

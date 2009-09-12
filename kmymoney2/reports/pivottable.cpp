@@ -841,7 +841,7 @@ void PivotTable::calculateBudgetMapping( void )
         ++budgets_it;
       }
       //if we can't find a matching budget, take the first of the list
-      if( budget.id() == "" )
+      if( budget.id().isEmpty() )
         budget = budgets[0];
 
       //assign the budget to the report

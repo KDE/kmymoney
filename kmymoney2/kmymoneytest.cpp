@@ -75,7 +75,7 @@ class MyProgressListener : public CppUnit::TextTestProgressListener
       name = name.left(name.indexOf("::"));
     }
     if(m_name != name) {
-      if(m_name != "")
+      if(!m_name.isEmpty())
         std::cout << std::endl;
       std::cout << "Running: " << qPrintable(name) << std::endl;
       m_name = name;
