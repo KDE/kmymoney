@@ -72,8 +72,7 @@ const QString KWelcomePage::welcomePage(void)
   body += QString("<div id=\"topleft\">");
 
   //topright
-  const QString spacerFilename = KGlobal::dirs()->findResource("appdata", "html/images/spacer.png");
-  body += QString("<div id=\"topright\"><img src=\"%1\"></div>").arg(spacerFilename);
+  body += QString("<div id=\"topright\"></div>");
   body += QString("<div id=\"rightborder\">");
   body += QString("<table style=\"width: 100%;\">");
   body += QString("<tbody>");
@@ -159,8 +158,7 @@ const QString KWelcomePage::whatsNewPage(void)
 
   body += QString("<div id=\"topleft\">");
 
-  const QString spacerFilename = KGlobal::dirs()->findResource("appdata", "html/images/spacer.png");
-  body += QString("<div id=\"topright\"><img src=\"%1\"></div>").arg(spacerFilename);
+  body += QString("<div id=\"topright\"></div>");
   body += QString("<div id=\"rightborder\"><table><tr><td>");
 //This is where the content should be put to show up inside the decorative frame
 //Begin content
