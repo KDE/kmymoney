@@ -27,7 +27,7 @@
         <number>6</number>
       </property>
       <item>
-        <widget class="QTabWidget" name="m_tabWidget">
+        <widget class="KTabWidget" name="m_tabWidget">
           <widget class="QWidget" name="m_criteriaPage">
             <attribute name="title">
               <string>Criteria</string>
@@ -44,7 +44,7 @@
                 </widget>
               </item>
               <item>
-                <widget class="QTabWidget" name="m_criteriaTab">
+                <widget class="KTabWidget" name="m_criteriaTab">
                   <property name="sizePolicy">
                     <sizepolicy>
                       <hsizetype>5</hsizetype>

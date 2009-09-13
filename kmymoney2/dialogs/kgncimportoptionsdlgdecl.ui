@@ -142,7 +142,7 @@
                     </spacer>
                   </item>
                   <item>
-                    <widget class="QComboBox" name="comboDecode"/>
+                    <widget class="KComboBox" name="comboDecode"/>
                   </item>
                 </layout>
               </item>

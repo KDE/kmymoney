@@ -81,13 +81,13 @@ your KMyMoney file.</string>
             </widget>
           </item>
           <item row="0" column="1">
-            <widget class="QLineEdit" name="userNameEdit"/>
+            <widget class="KLineEdit" name="userNameEdit"/>
           </item>
           <item row="3" column="1">
-            <widget class="QLineEdit" name="countyEdit"/>
+            <widget class="KLineEdit" name="countyEdit"/>
           </item>
           <item row="2" column="1">
-            <widget class="QLineEdit" name="townEdit"/>
+            <widget class="KLineEdit" name="townEdit"/>
           </item>
           <item row="1" column="0">
             <widget class="QLabel" name="TextLabel2">
@@ -106,7 +106,7 @@ your KMyMoney file.</string>
             </widget>
           </item>
           <item row="1" column="1">
-            <widget class="QLineEdit" name="streetEdit"/>
+            <widget class="KLineEdit" name="streetEdit"/>
           </item>
           <item row="6" column="0">
             <widget class="QLabel" name="TextLabel7">
@@ -167,7 +167,7 @@ your KMyMoney file.</string>
             </widget>
           </item>
           <item row="6" column="1">
-            <widget class="QLineEdit" name="emailEdit"/>
+            <widget class="KLineEdit" name="emailEdit"/>
           </item>
           <item row="4" column="0">
             <widget class="QLabel" name="TextLabel5">
@@ -186,10 +186,10 @@ your KMyMoney file.</string>
             </widget>
           </item>
           <item row="5" column="1">
-            <widget class="QLineEdit" name="telephoneEdit"/>
+            <widget class="KLineEdit" name="telephoneEdit"/>
           </item>
           <item row="4" column="1">
-            <widget class="QLineEdit" name="postcodeEdit"/>
+            <widget class="KLineEdit" name="postcodeEdit"/>
           </item>
         </layout>
       </item>

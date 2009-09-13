@@ -176,7 +176,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="m_leAccounts">
+             <widget class="KLineEdit" name="m_leAccounts">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                 <horstretch>1</horstretch>

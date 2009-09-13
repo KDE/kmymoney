@@ -178,7 +178,7 @@
                   </widget>
                 </item>
                 <item>
-                  <widget class="QLineEdit" name="lineUserSource"/>
+                  <widget class="KLineEdit" name="lineUserSource"/>
                 </item>
               </layout>
             </widget>

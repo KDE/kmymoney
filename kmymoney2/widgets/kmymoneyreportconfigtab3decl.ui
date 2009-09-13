@@ -55,7 +55,7 @@
             </widget>
           </item>
           <item>
-            <widget class="QComboBox" name="m_comboOrganizeBy">
+            <widget class="KComboBox" name="m_comboOrganizeBy">
               <property name="enabled">
                 <bool>true</bool>
               </property>

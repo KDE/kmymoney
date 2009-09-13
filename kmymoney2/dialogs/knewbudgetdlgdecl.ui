@@ -51,10 +51,10 @@
               <item>
                 <layout class="QVBoxLayout">
                   <item>
-                    <widget class="QLineEdit" name="m_leBudgetName"/>
+                    <widget class="KLineEdit" name="m_leBudgetName"/>
                   </item>
                   <item>
-                    <widget class="QComboBox" name="m_cbYear">
+                    <widget class="KComboBox" name="m_cbYear">
                       <property name="sizePolicy">
                         <sizepolicy>
                           <hsizetype>7</hsizetype>

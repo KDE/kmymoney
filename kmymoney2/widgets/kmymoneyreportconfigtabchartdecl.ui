@@ -47,7 +47,7 @@
             </widget>
           </item>
           <item>
-            <widget class="QComboBox" name="m_comboType">
+            <widget class="KComboBox" name="m_comboType">
               <item>
                 <property name="text">
                   <string>Line</string>

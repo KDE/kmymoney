@@ -156,12 +156,12 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
     switch (account.accountType())
     {
       case MyMoneyAccount::Income:
-        typeCombo->setCurrentItem(0);
+        typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Income), false);
         break;
 
       case MyMoneyAccount::Expense:
       default:
-        typeCombo->setCurrentItem(1);
+        typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Expense), false);
         break;
     }
     m_currency->setEnabled(true);
@@ -248,32 +248,32 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
     {
       default:
       case MyMoneyAccount::Checkings:
-        typeCombo->setCurrentItem(0);
+        typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Checkings), false);
         break;
       case MyMoneyAccount::Savings:
-        typeCombo->setCurrentItem(1);
+        typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Savings), false);
         break;
       case MyMoneyAccount::Cash:
-        typeCombo->setCurrentItem(2);
+        typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Cash), false);
         break;
       case MyMoneyAccount::CreditCard:
-        typeCombo->setCurrentItem(3);
+        typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::CreditCard), false);
         break;
       case MyMoneyAccount::Loan:
-        typeCombo->setCurrentItem(4);
+        typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Loan), false);
         break;
       case MyMoneyAccount::Investment:
-        typeCombo->setCurrentItem(5);
+        typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Investment), false);
         break;
       case MyMoneyAccount::Asset:
-        typeCombo->setCurrentItem(6);
+        typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Asset), false);
         break;
       case MyMoneyAccount::Liability:
-        typeCombo->setCurrentItem(7);
+        typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Liability), false);
         break;
       case MyMoneyAccount::Stock:
         m_institutionBox->hide();
-        typeCombo->setCurrentItem(8);
+        typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Stock), false);
         break;
 /*
       case MyMoneyAccount::CertificateDep:
@@ -1012,7 +1012,6 @@ void KNewAccountDlg::loadVatAccounts(void)
 
 void KNewAccountDlg::slotLoadInstitutions(const QString& name)
 {
-  int id=-1, counter=0;
   m_qcomboboxInstitutions->clear();
   QString bic;
   // Are we forcing the user to use institutions?
@@ -1026,10 +1025,9 @@ void KNewAccountDlg::slotLoadInstitutions(const QString& name)
 
     QList<MyMoneyInstitution> list = file->institutionList();
     QList<MyMoneyInstitution>::ConstIterator institutionIterator;
-    for (institutionIterator = list.constBegin(), counter=1; institutionIterator != list.constEnd(); ++institutionIterator, ++counter)
+    for (institutionIterator = list.constBegin(); institutionIterator != list.constEnd(); ++institutionIterator)
     {
       if ((*institutionIterator).name() == name) {
-        id = counter;
         ibanEdit->setEnabled(true);
         accountNoEdit->setEnabled(true);
         m_bicValue->setText((*institutionIterator).value("bic"));
@@ -1037,10 +1035,7 @@ void KNewAccountDlg::slotLoadInstitutions(const QString& name)
       m_qcomboboxInstitutions->insertItem((*institutionIterator).name());
     }
 
-    if (id != -1)
-    {
-      m_qcomboboxInstitutions->setCurrentItem(id);
-    }
+    m_qcomboboxInstitutions->setCurrentItem(name, false);
   }
   catch (MyMoneyException *e)
   {

@@ -88,7 +88,7 @@ You can choose the file's path, the account and the format of the QIF file (prof
             </widget>
           </item>
           <item>
-            <widget class="QLineEdit" name="m_qlineeditFile"/>
+            <widget class="KLineEdit" name="m_qlineeditFile"/>
           </item>
           <item>
             <widget class="KPushButton" name="m_qbuttonBrowse">

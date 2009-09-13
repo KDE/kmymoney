@@ -81,7 +81,7 @@ Once you have chosen an import type please press the OK button.</string>
             </widget>
           </item>
           <item>
-            <widget class="QComboBox" name="typeCombo">
+            <widget class="KComboBox" name="typeCombo">
               <property name="minimumSize">
                 <size>
                   <width>100</width>

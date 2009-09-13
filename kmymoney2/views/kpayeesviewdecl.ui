@@ -39,7 +39,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QTabWidget" name="m_tabWidget">
+      <widget class="KTabWidget" name="m_tabWidget">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
          <horstretch>2</horstretch>
@@ -257,13 +257,13 @@
              </widget>
             </item>
             <item row="1" column="1">
-             <widget class="QLineEdit" name="postcodeEdit"/>
+             <widget class="KLineEdit" name="postcodeEdit"/>
             </item>
             <item row="2" column="1">
-             <widget class="QLineEdit" name="telephoneEdit"/>
+             <widget class="KLineEdit" name="telephoneEdit"/>
             </item>
             <item row="3" column="1">
-             <widget class="QLineEdit" name="emailEdit"/>
+             <widget class="KLineEdit" name="emailEdit"/>
             </item>
             <item row="0" column="1">
              <widget class="Q3MultiLineEdit" name="addressEdit" native="true">

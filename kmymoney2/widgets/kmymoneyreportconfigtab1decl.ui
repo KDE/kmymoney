@@ -36,7 +36,7 @@
             </widget>
           </item>
           <item>
-            <widget class="QLineEdit" name="m_editName">
+            <widget class="KLineEdit" name="m_editName">
               <property name="toolTip" stdset="0">
                 <string>&lt;p&gt;Choose a name for this report.&lt;/p&gt;</string>
               </property>
@@ -57,7 +57,7 @@
             </widget>
           </item>
           <item>
-            <widget class="QLineEdit" name="m_editComment">
+            <widget class="KLineEdit" name="m_editComment">
               <property name="toolTip" stdset="0">
                 <string>&lt;p&gt;Enter a comment to help you remember the details of this report.&lt;/p&gt;</string>
               </property>

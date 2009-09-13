@@ -97,7 +97,7 @@
         </widget>
       </item>
       <item>
-        <widget class="QTextEdit" name="lbStatus">
+        <widget class="KTextEdit" name="lbStatus">
           <property name="textFormat">
             <enum>Qt::LogText</enum>
           </property>

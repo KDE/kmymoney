@@ -62,7 +62,7 @@
         </widget>
       </item>
       <item>
-        <widget class="QTabWidget" name="m_tabWidget">
+        <widget class="KTabWidget" name="m_tabWidget">
           <widget class="QWidget" name="m_listTab">
             <attribute name="title">
               <string>List View</string>

@@ -83,7 +83,7 @@ Click OK to perform the backup. If your system does not use an automounter, make
                   </widget>
                 </item>
                 <item>
-                  <widget class="QLineEdit" name="txtMountPoint"/>
+                  <widget class="KLineEdit" name="txtMountPoint"/>
                 </item>
                 <item>
                   <widget class="KPushButton" name="chooseButton">

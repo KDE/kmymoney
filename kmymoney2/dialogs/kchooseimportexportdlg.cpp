@@ -57,7 +57,7 @@ KChooseImportExportDlg::KChooseImportExportDlg(int type, QWidget *parent)
 
   readConfig();
   slotTypeActivated(m_lastType);
-  typeCombo->setCurrentItem(((m_lastType=="QIF") ? 0 : 1));
+  typeCombo->setCurrentItem(((m_lastType=="QIF") ? i18n("QIF") : i18n("CSV")), false);
 
   connect(typeCombo, SIGNAL(activated(const QString&)), this, SLOT(slotTypeActivated(const QString&)));
   connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
