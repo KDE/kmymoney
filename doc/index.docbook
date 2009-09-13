@@ -16,9 +16,7 @@
        from entities/general.entities and $LANG/user.entities. -->
   <!ENTITY devlist "<email>kmymoney2-developer@lists.sourceforge.net</email>">
   <!ENTITY userlist "<email>kmymoney2-user@lists.sourceforge.net</email>">
-  <!ENTITY Ctrl "<keycap>Ctrl</keycap>">
   <!ENTITY Insert "<keycap>Ins</keycap>">
-
 <!-- the chapters -->
   <!ENTITY introduction SYSTEM "introduction.docbook">
   <!ENTITY makemostof SYSTEM "makemostof.docbook">
