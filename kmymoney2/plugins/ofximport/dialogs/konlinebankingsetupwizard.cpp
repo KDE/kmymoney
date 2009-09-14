@@ -77,6 +77,9 @@ KOnlineBankingSetupWizard::KOnlineBankingSetupWizard(QWidget *parent):
   dlg->setMinimumDuration(0);
   kapp->processEvents();
 
+  //set password field according to KDE preferences
+  m_editPassword->setPasswordMode(true);
+
   vboxLayout1->insertWidget(0, new K3ListViewSearchLineWidget(m_listFi, tab));
   OfxPartner::setDirectory(KStandardDirs::locateLocal("appdata", ""));
   QStringList banks = OfxPartner::BankNames();

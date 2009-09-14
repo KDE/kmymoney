@@ -18,7 +18,7 @@
     </property>
     <layout class="QVBoxLayout">
       <item>
-        <widget class="QTabWidget" name="tabWidget2">
+        <widget class="KTabWidget" name="tabWidget2">
           <widget class="QWidget" name="tab">
             <attribute name="title">
               <string>Foreground</string>

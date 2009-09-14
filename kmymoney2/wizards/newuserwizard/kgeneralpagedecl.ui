@@ -62,13 +62,13 @@ This information will be seen and used only by you. The information is used to p
                     </widget>
                   </item>
                   <item row="0" column="1">
-                    <widget class="QLineEdit" name="m_userNameEdit"/>
+                    <widget class="KLineEdit" name="m_userNameEdit"/>
                   </item>
                   <item row="3" column="1">
-                    <widget class="QLineEdit" name="m_countyEdit"/>
+                    <widget class="KLineEdit" name="m_countyEdit"/>
                   </item>
                   <item row="2" column="1">
-                    <widget class="QLineEdit" name="m_townEdit"/>
+                    <widget class="KLineEdit" name="m_townEdit"/>
                   </item>
                   <item row="1" column="0">
                     <widget class="QLabel" name="TextLabel2">
@@ -87,7 +87,7 @@ This information will be seen and used only by you. The information is used to p
                     </widget>
                   </item>
                   <item row="1" column="1">
-                    <widget class="QLineEdit" name="m_streetEdit"/>
+                    <widget class="KLineEdit" name="m_streetEdit"/>
                   </item>
                   <item row="6" column="0">
                     <widget class="QLabel" name="TextLabel7">
@@ -148,7 +148,7 @@ This information will be seen and used only by you. The information is used to p
                     </widget>
                   </item>
                   <item row="6" column="1">
-                    <widget class="QLineEdit" name="m_emailEdit"/>
+                    <widget class="KLineEdit" name="m_emailEdit"/>
                   </item>
                   <item row="4" column="0">
                     <widget class="QLabel" name="TextLabel5">
@@ -167,10 +167,10 @@ This information will be seen and used only by you. The information is used to p
                     </widget>
                   </item>
                   <item row="5" column="1">
-                    <widget class="QLineEdit" name="m_telephoneEdit"/>
+                    <widget class="KLineEdit" name="m_telephoneEdit"/>
                   </item>
                   <item row="4" column="1">
-                    <widget class="QLineEdit" name="m_zipcodeEdit"/>
+                    <widget class="KLineEdit" name="m_zipcodeEdit"/>
                   </item>
                 </layout>
               </item>

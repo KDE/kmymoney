@@ -18,7 +18,7 @@
     </property>
     <layout class="QVBoxLayout">
       <item>
-        <widget class="QTabWidget" name="tab">
+        <widget class="KTabWidget" name="tab">
           <widget class="QWidget" name="tab">
             <attribute name="title">
               <string>Display</string>
@@ -108,7 +108,7 @@
             </attribute>
             <layout class="QVBoxLayout">
               <item>
-                <widget class="QTabWidget" name="tabWidget3">
+                <widget class="KTabWidget" name="tabWidget3">
                   <widget class="QWidget" name="tab">
                     <attribute name="title">
                       <string>Normal view</string>
