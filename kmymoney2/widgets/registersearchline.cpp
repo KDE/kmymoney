@@ -21,12 +21,12 @@
 #include <QLabel>
 #include <QToolButton>
 #include <QTimer>
-#include <QComboBox>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <ktoolbar.h>
-
+#include <kcombobox.h>
 #include <kiconloader.h>
 #include <klocale.h>
 #include <KIcon>
@@ -47,7 +47,7 @@ public:
     status(0) {}
 
   Register* reg;
-  QComboBox* combo;
+  KComboBox* combo;
   QString search;
   int queuedSearches;
   int status;
@@ -75,7 +75,7 @@ void RegisterSearchLine::init(Register *reg)
   connect(this, SIGNAL(textChanged(const QString&)), this, SLOT(queueSearch(const QString&)));
 
   QLabel* label = new QLabel(i18nc("label for status combo", "Stat&us"), parentWidget());
-  d->combo = new QComboBox(parentWidget());
+  d->combo = new KComboBox(parentWidget());
   // don't change the order of the following lines unless updating
   // the case labels in RegisterSearchLine::itemMatches() at the same time
   d->combo->insertItem(SmallIcon("system-run"), i18n("Any status"));

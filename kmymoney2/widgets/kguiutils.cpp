@@ -21,8 +21,6 @@
 
 #include <QCheckBox>
 #include <q3listbox.h>
-#include <QComboBox>
-#include <QLineEdit>
 #include <QPushButton>
 #include <qwidget.h>
 #include <q3hbox.h>
@@ -32,6 +30,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 #include <klistwidget.h>
+#include <kcombobox.h>
+#include <klineedit.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -46,7 +46,7 @@
   * http://doc.trolltech.com/qq/qq11-mandatoryfields.html                  *
   *                                                                        *
   * Enhanced by Thomas Baumgart to support the lineedit field of a         *
-  * a QComboBox.                                                           *
+  * a KComboBox.                                                           *
   *                                                                        *
   **************************************************************************/
 
@@ -59,9 +59,9 @@ void kMandatoryFieldGroup::add(QWidget *widget)
                SIGNAL(clicked()),
                this, SLOT(changed()));
 
-    else if (qobject_cast<QComboBox*>(widget)) {
-      QComboBox* combo = qobject_cast<QComboBox*>(widget);
-      QLineEdit* lineedit = combo->lineEdit();
+    else if (qobject_cast<KComboBox*>(widget)) {
+      KComboBox* combo = qobject_cast<KComboBox*>(widget);
+      KLineEdit* lineedit = qobject_cast<KLineEdit*>(combo->lineEdit());
       if(lineedit) {
         connect(lineedit, SIGNAL(textChanged(const QString&)), this, SLOT(changed()));
       } else {
@@ -137,8 +137,8 @@ void kMandatoryFieldGroup::changed(void)
       } else
         continue;
     }
-    if (qobject_cast<QComboBox*>(widget)) {
-      if ((qobject_cast<QComboBox*>(widget))->currentText().isEmpty()) {
+    if (qobject_cast<KComboBox*>(widget)) {
+      if ((qobject_cast<KComboBox*>(widget))->currentText().isEmpty()) {
         enable = false;
         break;
       } else
