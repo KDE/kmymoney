@@ -159,6 +159,11 @@
       <extends>Q3IconView</extends>
       <header location="global">k3iconview.h</header>
     </customwidget>
+    <customwidget>
+      <class>KTabWidget</class>
+      <extends>QTabWidget</extends>
+      <header location="global">ktabwidget.h</header>
+    </customwidget>
   </customwidgets>
   <connections>
     <connection>

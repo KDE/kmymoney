@@ -554,7 +554,11 @@ You can use &lt;b&gt;View/Show all accounts&lt;/b&gt; to temporarily show hidden
    <extends>QSpinBox</extends>
    <header>knuminput.h</header>
   </customwidget>
-
+    <customwidget>
+      <class>KTabWidget</class>
+      <extends>QTabWidget</extends>
+      <header location="global">ktabwidget.h</header>
+    </customwidget>
   </customwidgets>
   <connections>
     <connection>

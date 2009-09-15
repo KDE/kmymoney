@@ -786,6 +786,16 @@
       <extends>QComboBox</extends>
       <header location="global">kcombobox.h</header>
     </customwidget>
+    <customwidget>
+      <class>KLineEdit</class>
+      <extends>QLineEdit</extends>
+      <header location="global">klineedit.h</header>
+    </customwidget>
+    <customwidget>
+      <class>KTabWidget</class>
+      <extends>QTabWidget</extends>
+      <header location="global">ktabwidget.h</header>
+    </customwidget>
   </customwidgets>
   <tabstops>
     <tabstop>m_profileListBox</tabstop>

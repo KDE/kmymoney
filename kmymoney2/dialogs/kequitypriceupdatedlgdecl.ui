@@ -161,5 +161,10 @@
       <extends>Q3ListView</extends>
       <header location="global">k3listview.h</header>
     </customwidget>
+    <customwidget>
+      <class>KTextEdit</class>
+      <extends>QTextEdit</extends>
+      <header location="global">ktextedit.h</header>
+    </customwidget>
   </customwidgets>
 </ui>

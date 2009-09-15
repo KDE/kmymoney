@@ -125,4 +125,16 @@
       <slot>m_pbCancel_clicked()</slot>
     </connection>
   </connections>
+  <customwidgets>
+    <customwidget>
+      <class>KLineEdit</class>
+      <extends>QLineEdit</extends>
+      <header location="global">klineedit.h</header>
+    </customwidget>
+    <customwidget>
+      <class>KComboBox</class>
+      <extends>QComboBox</extends>
+      <header location="global">kcombobox.h</header>
+    </customwidget>
+  </customwidgets>
 </ui>

@@ -937,12 +937,17 @@
       <extends>QComboBox</extends>
       <header location="global">kcombobox.h</header>
     </customwidget>
-  <customwidget>                                                                                                                  
-   <class>KMyMoneyPeriodCombo</class>                                                                                    
-   <extends>QWidget</extends>                                                                                                     
-   <header>kmymoneycombo.h</header>                                                                                               
-   <container>1</container>                                                                                                       
-  </customwidget>       
+    <customwidget>
+      <class>KTabWidget</class>
+      <extends>QTabWidget</extends>
+      <header location="global">ktabwidget.h</header>
+    </customwidget>
+    <customwidget>
+      <class>KMyMoneyPeriodCombo</class>
+      <extends>QWidget</extends>
+      <header>kmymoneycombo.h</header>
+      <container>1</container>
+    </customwidget>
   </customwidgets>
   <images>
     <image name="image0">

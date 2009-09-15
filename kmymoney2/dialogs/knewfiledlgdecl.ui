@@ -291,4 +291,11 @@ your KMyMoney file.</string>
     <tabstop>okBtn</tabstop>
     <tabstop>cancelBtn</tabstop>
   </tabstops>
+  <customwidgets>
+    <customwidget>
+      <class>KLineEdit</class>
+      <extends>QLineEdit</extends>
+      <header location="global">klineedit.h</header>
+    </customwidget>
+  </customwidgets>
 </ui>

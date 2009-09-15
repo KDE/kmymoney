@@ -169,4 +169,11 @@ Once you have chosen an import type please press the OK button.</string>
       </item>
     </layout>
   </widget>
-  </ui>
+  <customwidgets>
+    <customwidget>
+      <class>KComboBox</class>
+      <extends>QComboBox</extends>
+      <header location="global">kcombobox.h</header>
+    </customwidget>
+  </customwidgets>
+</ui>

@@ -224,4 +224,11 @@ This information will be seen and used only by you. The information is used to p
     </layout>
   </widget>
   <layoutdefault spacing="6" margin="11"/>
+  <customwidgets>
+    <customwidget>
+      <class>KLineEdit</class>
+      <extends>QLineEdit</extends>
+      <header location="global">klineedit.h</header>
+    </customwidget>
+  </customwidgets>
   </ui>

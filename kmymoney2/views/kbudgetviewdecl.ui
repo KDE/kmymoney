@@ -285,6 +285,11 @@
    <extends>QWidget</extends>
    <header>kbudgetvalues.h</header>
   </customwidget>
+  <customwidget>
+    <class>KLineEdit</class>
+    <extends>QLineEdit</extends>
+    <header location="global">klineedit.h</header>
+  </customwidget>
  </customwidgets>
  <resources/>
  <connections/>

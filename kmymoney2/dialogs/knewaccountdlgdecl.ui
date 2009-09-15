@@ -833,18 +833,33 @@
       </sizepolicy>
       <pixmap>image0</pixmap>
     </customwidget>
-  <customwidget>
-   <class>KMyMoneyGeneralCombo</class>
-   <extends>QWidget</extends>
-   <header>kmymoneycombo.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>KMyMoneySecuritySelector</class>
-   <extends>QWidget</extends>
-   <header>kmymoneycurrencyselector.h</header>
-   <container>1</container>
-  </customwidget>
+    <customwidget>
+    <class>KMyMoneyGeneralCombo</class>
+    <extends>QWidget</extends>
+    <header>kmymoneycombo.h</header>
+    <container>1</container>
+    </customwidget>
+    <customwidget>
+    <class>KMyMoneySecuritySelector</class>
+    <extends>QWidget</extends>
+    <header>kmymoneycurrencyselector.h</header>
+    <container>1</container>
+    </customwidget>
+    <customwidget>
+      <class>KLineEdit</class>
+      <extends>QLineEdit</extends>
+      <header location="global">klineedit.h</header>
+    </customwidget>
+    <customwidget>
+      <class>KTabWidget</class>
+      <extends>QTabWidget</extends>
+      <header location="global">ktabwidget.h</header>
+    </customwidget>
+    <customwidget>
+      <class>KComboBox</class>
+      <extends>QComboBox</extends>
+      <header location="global">kcombobox.h</header>
+    </customwidget>
   </customwidgets>
   <tabstops>
     <tabstop>m_tab</tabstop>

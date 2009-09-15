@@ -579,6 +579,16 @@ new transactions with this payee</string>
    <header>kpushbutton.h</header>
   </customwidget>
   <customwidget>
+    <class>KTabWidget</class>
+    <extends>QTabWidget</extends>
+    <header location="global">ktabwidget.h</header>
+  </customwidget>
+  <customwidget>
+    <class>KLineEdit</class>
+    <extends>QLineEdit</extends>
+    <header location="global">klineedit.h</header>
+  </customwidget>
+  <customwidget>
    <class>Q3MultiLineEdit</class>
    <extends>QWidget</extends>
    <header>q3multilineedit.h</header>

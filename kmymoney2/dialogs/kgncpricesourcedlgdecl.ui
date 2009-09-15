@@ -203,4 +203,11 @@
       <slot>close()</slot>
     </connection>
   </connections>
+  <customwidgets>
+    <customwidget>
+      <class>KLineEdit</class>
+      <extends>QLineEdit</extends>
+      <header location="global">klineedit.h</header>
+    </customwidget>
+  </customwidgets>
 </ui>

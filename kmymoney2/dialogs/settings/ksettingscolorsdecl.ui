@@ -376,4 +376,11 @@
       <slot>setDisabled(bool)</slot>
     </connection>
   </connections>
+  <customwidgets>
+    <customwidget>
+      <class>KTabWidget</class>
+      <extends>QTabWidget</extends>
+      <header location="global">ktabwidget.h</header>
+    </customwidget>
+  </customwidgets>
 </ui>

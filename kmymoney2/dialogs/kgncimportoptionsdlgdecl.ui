@@ -317,4 +317,11 @@
       <slot>slotHelp()</slot>
     </connection>
   </connections>
+  <customwidgets>
+    <customwidget>
+      <class>KComboBox</class>
+      <extends>QComboBox</extends>
+      <header location="global">kcombobox.h</header>
+    </customwidget>
+  </customwidgets>
 </ui>

@@ -217,5 +217,10 @@ Please enter the path to the QIF file or select it by clicking on the Browse but
       <extends>QWidget</extends>
       <header location="global">k3activelabel.h</header>
     </customwidget>
+    <customwidget>
+      <class>KLineEdit</class>
+      <extends>QLineEdit</extends>
+      <header location="global">klineedit.h</header>
+    </customwidget>
   </customwidgets>
 </ui>

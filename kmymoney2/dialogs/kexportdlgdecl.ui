@@ -407,6 +407,11 @@ You can choose the file's path, the account and the format of the QIF file (prof
       <extends>QComboBox</extends>
       <header location="global">kcombobox.h</header>
     </customwidget>
+    <customwidget>
+      <class>KLineEdit</class>
+      <extends>QLineEdit</extends>
+      <header location="global">klineedit.h</header>
+    </customwidget>
   </customwidgets>
   <images>
     <image name="image0">

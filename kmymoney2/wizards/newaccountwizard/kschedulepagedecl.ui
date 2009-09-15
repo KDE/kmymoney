@@ -190,7 +190,10 @@ from account</string>
    <header>kmymoneycombo.h</header>
    <container>1</container>
   </customwidget>
-
+    <customwidget>
+      <class>KLineEdit</class>
+      <extends>QLineEdit</extends>
+      <header location="global">klineedit.h</header>
+    </customwidget>
   </customwidgets>
-
 </ui>

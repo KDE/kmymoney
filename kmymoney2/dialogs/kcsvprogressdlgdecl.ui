@@ -371,6 +371,11 @@ You can cancel the process at any time by clicking on the Cancel button.</string
       </sizepolicy>
       <pixmap>image0</pixmap>
     </customwidget>
+    <customwidget>
+      <class>KLineEdit</class>
+      <extends>QLineEdit</extends>
+      <header location="global">klineedit.h</header>
+    </customwidget>
   </customwidgets>
   <images>
     <image name="image0">

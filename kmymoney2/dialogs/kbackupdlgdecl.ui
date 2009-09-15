@@ -172,4 +172,11 @@ Click OK to perform the backup. If your system does not use an automounter, make
     </layout>
   </widget>
   <layoutdefault spacing="6" margin="11"/>
+  <customwidgets>
+    <customwidget>
+      <class>KLineEdit</class>
+      <extends>QLineEdit</extends>
+      <header location="global">klineedit.h</header>
+    </customwidget>
+  </customwidgets>
   </ui>

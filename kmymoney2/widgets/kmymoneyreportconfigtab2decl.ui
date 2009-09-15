@@ -265,7 +265,11 @@
    <header>kmymoneycombo.h</header>
    <container>1</container>
   </customwidget>
+    <customwidget>
+      <class>KComboBox</class>
+      <extends>QComboBox</extends>
+      <header location="global">kcombobox.h</header>
+    </customwidget>
   </customwidgets>
-
   <layoutdefault spacing="6" margin="11"/>
   </ui>

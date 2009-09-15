@@ -541,5 +541,15 @@
       <extends>Q3ListView</extends>
       <header location="global">k3listview.h</header>
     </customwidget>
+    <customwidget>
+      <class>KTabWidget</class>
+      <extends>QTabWidget</extends>
+      <header location="global">ktabwidget.h</header>
+    </customwidget>
+    <customwidget>
+      <class>KComboBox</class>
+      <extends>QComboBox</extends>
+      <header location="global">kcombobox.h</header>
+    </customwidget>
   </customwidgets>
 </ui>

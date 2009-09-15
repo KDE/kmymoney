@@ -453,11 +453,15 @@ Selecting 0% will list all transactions.</string>
       <extends>QWidget</extends>
       <header location="locale">transactionsortoptionimpl.h</header>
     </customwidget>
-      
-	  <customwidget>
+    <customwidget>
       <class>KComboBox</class>
       <extends>QComboBox</extends>
       <header location="global">kcombobox.h</header>
+    </customwidget>
+    <customwidget>
+      <class>KTabWidget</class>
+      <extends>QTabWidget</extends>
+      <header location="global">ktabwidget.h</header>
     </customwidget>
   </customwidgets>
 </ui>

@@ -125,6 +125,11 @@
       <extends>Q3ListView</extends>
       <header location="global">k3listview.h</header>
     </customwidget>
+    <customwidget>
+      <class>KTabWidget</class>
+      <extends>QTabWidget</extends>
+      <header location="global">ktabwidget.h</header>
+    </customwidget>
   </customwidgets>
   <images>
     <image name="image0">
