@@ -57,7 +57,7 @@
   Files can be opened by specifying the file name on the command line
   (<command>kmymoney &lt;filepath&gt;</command>), or by means of the &kappname;
   <menuchoice>
-    <shortcut><keycombo><keysym>Ctrl-O</keysym></keycombo></shortcut>
+    <shortcut><keycombo>&Ctrl;<keycap>O</keycap></keycombo></shortcut>
     <guimenu>File</guimenu><guimenuitem>Open</guimenuitem>
   </menuchoice> or
   <menuchoice>
