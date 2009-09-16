@@ -216,7 +216,7 @@
               </layout>
             </item>
             <item>
-              <widget class="QTextEdit" name="m_details">
+              <widget class="KTextEdit" name="m_details">
                 <property name="enabled">
                   <bool>true</bool>
                 </property>
@@ -318,6 +318,11 @@
       <class>KLineEdit</class>
       <extends>QLineEdit</extends>
       <header location="global">klineedit.h</header>
+    </customwidget>
+    <customwidget>
+      <class>KTextEdit</class>
+      <extends>QTextEdit</extends>
+      <header location="global">ktextedit.h</header>
     </customwidget>
   </customwidgets>
   </ui>
