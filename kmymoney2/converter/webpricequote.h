@@ -23,16 +23,15 @@
 
 #include <QObject>
 #include <QDateTime>
+#include <QString>
 #include <QStringList>
 #include <qmap.h>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
 
-#include <k3process.h>
-namespace KIO {
-  class Job;
-}
+#include <kprocess.h>
+#include <kurl.h>
 
 // ----------------------------------------------------------------------------
 // Project Headers
@@ -45,16 +44,17 @@ of a local script being used to fetch the quote.
 
 @author Thomas Baumgart <thb@net-bembel.de> & Ace Jones <acejones@users.sourceforge.net>
 */
-class WebPriceQuoteProcess: public K3Process
+class WebPriceQuoteProcess: public KProcess
 {
   Q_OBJECT
 public:
   WebPriceQuoteProcess(void);
-  void setSymbol(const QString& _symbol) { m_symbol = _symbol; m_string.truncate(0); }
+  inline void setSymbol(const QString& _symbol)
+  { m_symbol = _symbol; m_string.truncate(0); }
 
 public slots:
-  void slotReceivedDataFromFilter(K3Process*, char*, int);
-  void slotProcessExited(K3Process*);
+  void slotReceivedDataFromFilter();
+  void slotProcessExited(int exitCode, QProcess::ExitStatus exitStatus);
 
 signals:
   void processExited(const QString&);
@@ -72,20 +72,20 @@ by the Finance::Quote package, and more user-friendly names.
 
 @author Thomas Baumgart <thb@net-bembel.de> & Ace Jones <acejones@users.sourceforge.net>, Tony B<tonybloom@users.sourceforge.net>
  */
-class FinanceQuoteProcess: public K3Process
+class FinanceQuoteProcess: public KProcess
 {
   Q_OBJECT
   public:
     FinanceQuoteProcess(void);
     void launch (const QString& scriptPath);
-    bool isFinished() { return(m_isDone);};
-    QStringList getSourceList();
-    const QString crypticName(const QString& niceName);
-    const QString niceName(const QString& crypticName);
+    bool isFinished() const { return(m_isDone);};
+    const QStringList getSourceList() const;
+    const QString crypticName(const QString& niceName) const;
+    const QString niceName(const QString& crypticName) const;
 
   public slots:
-    void slotReceivedDataFromFilter(K3Process*, char*, int);
-    void slotProcessExited(K3Process*);
+    void slotReceivedDataFromFilter(KProcess*, char*, int);
+    void slotProcessExited(int exitCode, QProcess::ExitStatus exitStatus);
 
   private:
     bool m_isDone;
@@ -103,7 +103,7 @@ class FinanceQuoteProcess: public K3Process
 struct WebPriceQuoteSource
 {
   WebPriceQuoteSource() {}
-  WebPriceQuoteSource(const QString& name);
+  explicit WebPriceQuoteSource(const QString& name);
   WebPriceQuoteSource(const QString& name, const QString& url, const QString& sym, const QString& price, const QString& date, const QString& dateformat);
   ~WebPriceQuoteSource() {}
 
@@ -129,7 +129,7 @@ class WebPriceQuote: public QObject
 {
   Q_OBJECT
 public:
-  WebPriceQuote( QObject* = 0, const char* = 0 );
+  explicit WebPriceQuote( QObject* = 0 );
   ~WebPriceQuote();
 
   typedef enum _quoteSystemE {
@@ -160,7 +160,7 @@ public:
    * @param _system whether to return Native or Finance::Quote source list
    * @return QStringList of quote source names
     */
-  static QStringList quoteSources(const _quoteSystemE _system=Native);
+  static const QStringList quoteSources(const _quoteSystemE _system=Native);
 
 signals:
   void quote(const QString&, const QString&, const QDate&, const double&);
@@ -172,23 +172,17 @@ protected slots:
   void slotParseQuote(const QString&);
 
 protected:
-  static QMap<QString,WebPriceQuoteSource> defaultQuoteSources(void);
+  static const QMap<QString,WebPriceQuoteSource> defaultQuoteSources(void);
 
 private:
   bool download(const KUrl& u, QString & target, QWidget* window);
   void removeTempFile(const QString& tmpFile);
-
-private slots:
-  void slotResult( KIO::Job * job );
-
-
-private:
   bool launchNative(const QString& _symbol, const QString& _id, const QString& _source=QString());
   bool launchFinanceQuote(const QString& _symbol, const QString& _id, const QString& _source=QString());
   void enter_loop(void);
 
-  static QStringList quoteSourcesNative();
-  static QStringList quoteSourcesFinanceQuote();
+  static const QStringList quoteSourcesNative();
+  static const QStringList quoteSourcesFinanceQuote();
 
   WebPriceQuoteProcess m_filter;
   QString m_symbol;
@@ -212,9 +206,9 @@ private:
 class MyMoneyDateFormat
 {
 public:
-  MyMoneyDateFormat(const QString& _format): m_format(_format) {}
-  QString convertDate(const QDate& _in) const;
-  QDate convertString(const QString& _in, bool _strict=true, unsigned _centurymidpoint = QDate::currentDate().year() ) const;
+  explicit MyMoneyDateFormat(const QString& _format): m_format(_format) {}
+  const QString convertDate(const QDate& _in) const;
+  const QDate convertString(const QString& _in, bool _strict=true, unsigned _centurymidpoint = QDate::currentDate().year() ) const;
   const QString& format(void) const { return m_format; }
 private:
   QString m_format;
@@ -231,10 +225,10 @@ class QuoteReceiver : public QObject
 {
 Q_OBJECT
 public:
-    QuoteReceiver(WebPriceQuote* q, QObject *parent = 0, const char *name = 0);
+    explicit QuoteReceiver(WebPriceQuote* q, QObject *parent = 0);
     ~QuoteReceiver();
 public slots:
-  void slotGetQuote(const QString&,const QDate&, const double&);
+  void slotGetQuote(const QString&, const QString&, const QDate&, const double&);
   void slotStatus(const QString&);
   void slotError(const QString&);
 public:
