@@ -51,7 +51,7 @@
   the selected field can be incremented/decremented.  The <keycap>+</keycap> and
   <keycap>-</keycap> keys can be used to increment/decrement a single day.
   Month and year boundaries are considered and incremented/decremented if
-  necessary. Pressing <keycap>t</keycap> will set the date to today's date.
+  necessary. Pressing <keycap>T</keycap> will set the date to today's date.
 </para>
 
 <para>

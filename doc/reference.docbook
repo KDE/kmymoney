@@ -209,7 +209,7 @@
   <varlistentry>
     <term><menuchoice>
       <shortcut>
-        <keycombo>&Ctrl;<keycap>f</keycap></keycombo>
+        <keycombo>&Ctrl;<keycap>F</keycap></keycombo>
       </shortcut>
       <guimenu>Edit</guimenu><guimenuitem>Find transactions...</guimenuitem>
     </menuchoice></term>

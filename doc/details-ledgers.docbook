@@ -354,20 +354,20 @@
   empty entry, press <keycombo action="simul">&Ctrl;&Insert;</keycombo>, or
   click <guibutton>New</guibutton> at the foot of the window. The
   <keycap>Up</keycap> and <keycap>Down</keycap> arrow keys let you navigate
-  through the list.  After pressing <keycap>Enter</keycap> or double clicking on
+  through the list.  After pressing &Enter; or double clicking on
   an entry, the transaction list displays the fields required to enter the
   transaction and waits for input.
 </para>
 
 <para>
-  To move through the fields press the <keycap>Tab</keycap> key and when done
-  press <keycap>Enter</keycap> to save the changes or <keycap>Esc</keycap> to
+  To move through the fields press the &Tab; key and when done
+  press &Enter; to save the changes or &Esc; to
   cancel.
 </para>
 
 <para>
   In case the option <guilabel>Use Enter to move between fields</guilabel> is
-  selected, the <keycap>Enter</keycap> moves to the next field just as the
+  selected, the &Enter; moves to the next field just as the
   <keycap>TAB</keycap> key except for the last entry field where it stores the
   data.
 </para>
@@ -441,7 +441,7 @@
   <guibutton>Edit</guibutton> in the transaction input form or right click on
   the entry and select <guimenuitem>Edit</guimenuitem> from the popup menu.  If
   you are editing transactions directly in the list you can edit the transaction
-  simply by double clicking on an entry or by pressing <keycap>Enter</keycap>
+  simply by double clicking on an entry or by pressing &Enter;
   when a transaction is highlighted.
 </para>
 </sect1>
