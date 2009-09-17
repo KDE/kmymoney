@@ -209,4 +209,3 @@ const QStringList KWelcomePage::featuresList(void)
   return featuresList;
 }
 
-#include "kwelcomepage.moc"
