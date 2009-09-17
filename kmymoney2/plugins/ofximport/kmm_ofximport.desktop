@@ -1,12 +1,20 @@
 [Desktop Entry]
 Name=KMyMoney OFX
+Name[en_GB]=KMyMoney OFX
+Name[et]=KMyMoney OFX
 Name[fr]=OFX pour KMyMoney
+Name[gl]=KMyMoney OFX
+Name[km]=KMyMoney OFX
 Name[pt]=OFX do KMyMoney
 Name[pt_BR]=OFX do KMyMoney
+Name[ro]=KMyMoney OFX
 Name[sv]=Kmymoney OFX
+Name[tr]=KMyMoney OFX
 Name[uk]=OFX KMyMoney
 Name[x-test]=xxKMyMoney OFXxx
+Name[zh_TW]=KMyMoney OFX
 Comment=Add OFX importing to KMyMoney
+Comment[en_GB]=Add OFX importing to KMyMoney
 Comment[et]=OFX import KMyMoneysse
 Comment[fr]=Ajouter l'import OFX à KMyMoney
 Comment[gl]=Engade a importación de OFX a KMyMoney

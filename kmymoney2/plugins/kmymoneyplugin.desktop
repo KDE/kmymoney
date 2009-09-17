@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=ServiceType
 Name=KMyMoney Plugin
+Name[en_GB]=KMyMoney Plugin
 Name[et]=KMyMoney plugin
 Name[fr]=Module KMyMoney
 Name[gl]=Extensión de KMyMoney
@@ -15,6 +16,7 @@ Name[x-test]=xxKMyMoney Pluginxx
 Name[zh_TW]=KMyMoney 外掛程式
 X-KDE-ServiceType=KMyMoneyPlugin
 Comment=A KMyMoney plugin
+Comment[en_GB]=A KMyMoney plugin
 Comment[et]=KMyMoney plugin
 Comment[fr]=Un module pour KMyMoney
 Comment[gl]=Unha extensión de KMyMoney
