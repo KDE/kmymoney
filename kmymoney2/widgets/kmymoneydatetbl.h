@@ -116,7 +116,7 @@ signals:
     /**
       *
     **/
-    virtual void hoverDate(QDate);
+    void hoverDate(QDate);
 
 protected:
     /**
