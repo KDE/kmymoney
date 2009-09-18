@@ -565,15 +565,16 @@ const QStringList WebPriceQuote::quoteSourcesNative()
 
   QStringList::Iterator it;
   QRegExp onlineQuoteSource(QString("^Online-Quote-Source-(.*)$"));
-#if 0
+
   // get rid of all 'non online quote source' entries
-  for(it = groups.begin(); it != groups.end(); it = groups.remove(it)) {
+  for(it = groups.begin(); it != groups.end(); it = groups.erase(it)) {
     if(onlineQuoteSource.indexIn(*it) >= 0) {
       // Insert the name part
-      groups.insert(it, onlineQuoteSource.cap(1));
+      it = groups.insert(it, onlineQuoteSource.cap(1));
+      it++;
     }
   }
-#endif
+
   // if the user has the OLD quote source defined, now is the
   // time to remove that entry and convert it to the new system.
   if ( ! groups.count() && kconfig->hasGroup("Online Quotes Options") )
