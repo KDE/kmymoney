@@ -48,7 +48,8 @@ KStartupLogo::KStartupLogo() :
     return;
 
   QString filename = KGlobal::dirs()->findResource("appdata", "pics/startlogo.png");
-  QPixmap pm(filename);
+  QString localeFilename = KGlobal::locale()->localizedFilePath(filename);
+  QPixmap pm(localeFilename);
 
   if(!pm.isNull()) {
     KSplashScreen* splash = new KSplashScreen(pm);
