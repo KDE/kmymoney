@@ -50,9 +50,6 @@
 QString WebPriceQuote::m_financeQuoteScriptPath;
 QStringList WebPriceQuote::m_financeQuoteSources;
 
-QString * WebPriceQuote::lastErrorMsg;
-int WebPriceQuote::lastErrorCode = 0;
-
 WebPriceQuote::WebPriceQuote( QObject* _parent ):
   QObject( _parent )
 {
@@ -79,28 +76,15 @@ bool WebPriceQuote::launchNative( const QString& _symbol, const QString& _id, co
 
 //   emit status(QString("(Debug) symbol=%1 id=%2...").arg(_symbol,_id));
 
-  // if we're running normally, with a UI, we can just get these the normal way,
-  // from the config file
-  if ( kapp )
-  {
-    QString sourcename = _sourcename;
-    if ( sourcename.isEmpty() )
-      sourcename = "Yahoo";
+  // Get sources from the config file
+  QString sourcename = _sourcename;
+  if ( sourcename.isEmpty() )
+    sourcename = "Yahoo";
 
-    if ( quoteSources().contains(sourcename) )
-      m_source = WebPriceQuoteSource(sourcename);
-    else
-      emit error(QString("Source <%1> does not exist.").arg(sourcename));
-  }
-  // otherwise, if we have no kapp, we have no config.  so we just get them from
-  // the defaults
+  if ( quoteSources().contains(sourcename) )
+    m_source = WebPriceQuoteSource(sourcename);
   else
-  {
-    if ( _sourcename.isEmpty() )
-      m_source = defaultQuoteSources()["Yahoo"];
-    else
-      m_source = defaultQuoteSources()[_sourcename];
-  }
+    emit error(QString("Source <%1> does not exist.").arg(sourcename));
 
   KUrl url;
 
@@ -110,7 +94,6 @@ bool WebPriceQuote::launchNative( const QString& _symbol, const QString& _id, co
     // this is a two-symbol quote.  split the symbol into two.  valid symbol
     // characters are: 0-9, A-Z and the dot.  anything else is a separator
     QRegExp splitrx("([0-9a-z\\.]+)[^a-z0-9]+([0-9a-z\\.]+)", Qt::CaseInsensitive);
-
     // if we've truly found 2 symbols delimited this way...
     if ( splitrx.indexIn(m_symbol) != -1 )
       url = KUrl(m_source.m_url.arg(splitrx.cap(1),splitrx.cap(2)));
@@ -120,17 +103,6 @@ bool WebPriceQuote::launchNative( const QString& _symbol, const QString& _id, co
   else
     // a regular one-symbol quote
     url = KUrl(m_source.m_url.arg(m_symbol));
-
-  // If we're running a non-interactive session (with no UI), we can't
-  // use KIO::NetAccess, so we have to get our web data the old-fashioned
-  // way... with 'wget'.
-  //
-  // Note that a 'non-interactive' session right now means only the test
-  // cases.  Although in the future if KMM gains a non-UI mode, this would
-  // still be useful
-#warning "fix for windows";
-  if ( ! kapp && ! url.isLocalFile() )
-    url = KUrl("/usr/bin/wget -O - " + url.prettyUrl());
 
   if ( url.isLocalFile() )
   {
@@ -146,26 +118,11 @@ bool WebPriceQuote::launchNative( const QString& _symbol, const QString& _id, co
     if(m_filter.waitForStarted())
     {
       result = true;
-      //m_filter.resume();
     }
     else
     {
       emit error(i18n("Unable to launch: %1",url.path()));
       slotParseQuote(QString());
-    }
-
-    // if we're running non-interactive, we'll need to block.
-    // otherwise, just let us know when it's done.
-    if( ! kapp ) {
-      if(m_filter.waitForFinished())
-      {
-        result = true;
-      }
-      else
-      {
-        emit error(i18n("Unable to launch: %1",url.path()));
-        slotParseQuote(QString());
-      }
     }
   }
   else
@@ -173,7 +130,7 @@ bool WebPriceQuote::launchNative( const QString& _symbol, const QString& _id, co
     emit status(i18n("Fetching URL %1...",url.prettyUrl()));
 
     QString tmpFile;
-    if( download( url, tmpFile, NULL ) )
+    if (KIO::NetAccess::download(url, tmpFile, NULL))
     {
       kDebug(2) << "Downloaded " << tmpFile;
       //kDebug(2) << "Downloaded " << tmpFile << " from " << url;
@@ -187,9 +144,10 @@ bool WebPriceQuote::launchNative( const QString& _symbol, const QString& _id, co
       }
       else
       {
+        emit error("Failed to open downloaded file");
         slotParseQuote(QString());
       }
-      removeTempFile( tmpFile );
+      KIO::NetAccess::removeTempFile( tmpFile );
     }
     else
     {
@@ -198,25 +156,6 @@ bool WebPriceQuote::launchNative( const QString& _symbol, const QString& _id, co
     }
   }
   return result;
-}
-
-void WebPriceQuote::removeTempFile(const QString& tmpFile)
-{
-  if(tmpFile == m_tmpFile) {
-    QFile(tmpFile).remove();
-    m_tmpFile.clear();
-  }
-}
-
-bool WebPriceQuote::download(const KUrl& u, QString & target, QWidget* window)
-{
-
-  bJobOK = KIO::NetAccess::download(u, target, window);
-  if (bJobOK) {
-    m_tmpFile = target;
-  }
-
-  return bJobOK;
 }
 
 bool WebPriceQuote::launchFinanceQuote ( const QString& _symbol, const QString& _id,
@@ -240,15 +179,11 @@ bool WebPriceQuote::launchFinanceQuote ( const QString& _symbol, const QString& 
 
   m_filter.setOutputChannelMode(KProcess::MergedChannels);
   m_filter.start();
-  // if we're running non-interactive, we'll need to block.
-  // otherwise, just let us know when it's done.
 
-  // This seems to work best if we just block regardless, but...
-  //if(kapp ? m_filter.waitForStarted() : m_filter.waitForFinished())
+  // This seems to work best if we just block until done.
   if(m_filter.waitForFinished())
   {
     result = true;
-    //m_filter.resume();
   }
   else
   {
@@ -394,7 +329,7 @@ const QMap<QString,WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources(void)
     "http://uk.finance.yahoo.com/d/quotes.csv?s=%1&f=sl1d3",
     "^([^,]*),.*",  // symbolregexp
     "^[^,]*,([^,]*),.*", // priceregexp
-    "^[^,]*,[^,]*,(.*)", // dateregexp
+    "^[^,]*,[^,]*, [^ ]* (../../....).*", // dateregexp
     "%m/%d/%y" // dateformat
   );
 
@@ -419,8 +354,8 @@ const QMap<QString,WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources(void)
   result["MSN.CA"] = WebPriceQuoteSource("MSN.CA",
     "http://ca.moneycentral.msn.com/investor/quotes/quotes.asp?symbol=%1",
     QString(),  // symbolregexp
-    "Net Asset Value (\\d+\\.\\d+)", // priceregexp
-    "NAV update (\\d+\\D+\\d+\\D+\\d+)", // dateregexp
+    "(\\d+\\.\\d+) [+-]\\d+.\\d+", // priceregexp
+    "Time of last trade (\\d+/\\d+/\\d+)", //dateregexp
     "%d %m %y" // dateformat
   );
   // Finanztreff (replaces VWD.DE) and boerseonline supplied by Micahel Zimmerman
@@ -571,7 +506,7 @@ const QStringList WebPriceQuote::quoteSourcesNative()
     if(onlineQuoteSource.indexIn(*it) >= 0) {
       // Insert the name part
       it = groups.insert(it, onlineQuoteSource.cap(1));
-      it++;
+      ++it;
     }
   }
 
@@ -597,7 +532,8 @@ const QStringList WebPriceQuote::quoteSourcesNative()
   }
 
   // Set up each of the default sources.  These are done piecemeal so that
-  // when we add a new source, it's automatically picked up.
+  // when we add a new source, it's automatically picked up. And any changes
+  // are also picked up.
   QMap<QString,WebPriceQuoteSource> defaults = defaultQuoteSources();
   QMap<QString,WebPriceQuoteSource>::const_iterator it_source = defaults.constBegin();
   while ( it_source != defaults.constEnd() )
@@ -605,9 +541,11 @@ const QStringList WebPriceQuote::quoteSourcesNative()
     if ( ! groups.contains( (*it_source).m_name ) )
     {
       groups += (*it_source).m_name;
-      (*it_source).write();
-      kconfig->sync();
     }
+
+    (*it_source).write();
+    kconfig->sync();
+
     ++it_source;
   }
 
@@ -622,7 +560,7 @@ const QStringList WebPriceQuote::quoteSourcesFinanceQuote()
         KGlobal::dirs()->findResource("appdata", QString("misc/financequote.pl"));
     getList.launch( m_financeQuoteScriptPath );
     while (!getList.isFinished()) {
-      qApp->processEvents();
+      kapp->processEvents();
     }
     m_financeQuoteSources = getList.getSourceList();
   }
@@ -633,13 +571,14 @@ const QStringList WebPriceQuote::quoteSourcesFinanceQuote()
 // Helper class to load/save an individual source
 //
 
-WebPriceQuoteSource::WebPriceQuoteSource(const QString& name, const QString& url, const QString& sym, const QString& price, const QString& date, const QString& dateformat):
+WebPriceQuoteSource::WebPriceQuoteSource(const QString& name, const QString& url, const QString& sym, const QString& price, const QString& date, const QString& dateformat, bool skipStripping):
   m_name(name),
   m_url(url),
   m_sym(sym),
   m_price(price),
   m_date(date),
-  m_dateformat(dateformat)
+  m_dateformat(dateformat),
+  m_skipStripping(skipStripping)
 {
 }
 
@@ -981,8 +920,7 @@ convertertest::QuoteReceiver::QuoteReceiver(WebPriceQuote* q, QObject* parent) :
 }
 
 convertertest::QuoteReceiver::~QuoteReceiver()
-{
-}
+{ }
 
 void convertertest::QuoteReceiver::slotGetQuote(const QString&, const QString&, const QDate& d, const double& m)
 {

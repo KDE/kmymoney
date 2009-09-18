@@ -97,13 +97,12 @@ void ConverterTest::tearDown ()
 void ConverterTest::testWebQuotes()
 {
 #ifdef PERFORM_ONLINE_TESTS
-//#warning "online tests enabled"
   try
   {
     WebPriceQuote q;
     QuoteReceiver qr(&q);
 
-    q.launch("DIS", "test1");
+    q.launch("DIS", "test default");
 
 //    kDebug(2) << "ConverterTest::testWebQuotes(): quote for " << q.m_symbol << " on " << qr.m_date.toString() << " is " << qr.m_price.toString() << " errors(" << qr.m_errors.count() << "): " << qr.m_errors.join(" /// ");
 
@@ -117,59 +116,103 @@ void ConverterTest::testWebQuotes()
     // Quote value should at least be positive
     CPPUNIT_ASSERT(qr.m_price.isPositive());
 
-    q.launch("VOD.L", "test2", "Yahoo UK");
-
-//    kDebug(2) << "ConverterTest::testWebQuotes(): quote for " << q.m_symbol << " on " << qr.m_date.toString() << " is " << qr.m_price.toString() << " errors(" << qr.m_errors.count() << "): " << qr.m_errors.join(" /// ");
-
+    q.launch("VOD.L", "test Yahoo UK", "Yahoo UK");
     CPPUNIT_ASSERT(qr.m_errors.count() == 0);
     CPPUNIT_ASSERT(qr.m_date <= QDate::currentDate().addDays(1));
     CPPUNIT_ASSERT(qr.m_date >= QDate::currentDate().addDays(-7));
     CPPUNIT_ASSERT(qr.m_price.isPositive());
 
-    q.launch("EUR > USD", "test3", "Yahoo Currency");
-
-//    kDebug(2) << "ConverterTest::testWebQuotes(): quote for " << q.m_symbol << " on " << qr.m_date.toString() << " is " << qr.m_price.toString() << " errors(" << qr.m_errors.count() << "): " << qr.m_errors.join(" /// ");
-
+    q.launch("EUR > USD", "test Yahoo Currency", "Yahoo Currency");
     CPPUNIT_ASSERT(qr.m_errors.count() == 0);
     CPPUNIT_ASSERT(qr.m_date <= QDate::currentDate().addDays(1));
     CPPUNIT_ASSERT(qr.m_date >= QDate::currentDate().addDays(-7));
     CPPUNIT_ASSERT(qr.m_price.isPositive());
 
-#warning #fix quotes from Globe & Mail
-    //q.launch("50492", "test4", "Globe & Mail");
-
-//    kDebug(2) << "ConverterTest::testWebQuotes(): quote for " << q.m_symbol << " on " << qr.m_date.toString() << " is " << qr.m_price.toString() << " errors(" << qr.m_errors.count() << "): " << qr.m_errors.join(" /// ");
-
-    //CPPUNIT_ASSERT(qr.m_errors.count() == 0);
-    //CPPUNIT_ASSERT(qr.m_date <= QDate::currentDate().addDays(1));
-    //CPPUNIT_ASSERT(qr.m_date >= QDate::currentDate().addDays(-7));
-    //CPPUNIT_ASSERT(qr.m_price.isPositive());
-
-#warning #fix quotes from MSN
-    //q.launch("TDB647", "test5", "MSN.CA");
-
-//    kDebug(2) << "ConverterTest::testWebQuotes(): quote for " << q.m_symbol << " on " << qr.m_date.toString() << " is " << qr.m_price.toString() << " errors(" << qr.m_errors.count() << "): " << qr.m_errors.join(" /// ");
-
-    //CPPUNIT_ASSERT(qr.m_errors.count() == 0);
-    //CPPUNIT_ASSERT(qr.m_date <= QDate::currentDate().addDays(1));
-    //CPPUNIT_ASSERT(qr.m_date >= QDate::currentDate().addDays(-7));
-    //CPPUNIT_ASSERT(qr.m_price.isPositive());
-
-    q.launch("DIS", "test6", "Finance::Quote usa");
-
-//    kDebug(2) << "ConverterTest::testWebQuotes(): quote for " << q.m_symbol << " on " << qr.m_date.toString() << " is " << qr.m_price.toString() << " errors(" << qr.m_errors.count() << "): " << qr.m_errors.join(" /// ");
-
+    q.launch("0585239", "test Financial Express", "Financial Express");
     CPPUNIT_ASSERT(qr.m_errors.count() == 0);
     CPPUNIT_ASSERT(qr.m_date <= QDate::currentDate().addDays(1));
     CPPUNIT_ASSERT(qr.m_date >= QDate::currentDate().addDays(-7));
     CPPUNIT_ASSERT(qr.m_price.isPositive());
+
+    q.launch("EAD.PA", "test Yahoo France", "Yahoo France");
+    CPPUNIT_ASSERT(qr.m_errors.count() == 0);
+    CPPUNIT_ASSERT(qr.m_date <= QDate::currentDate().addDays(1));
+    CPPUNIT_ASSERT(qr.m_date >= QDate::currentDate().addDays(-7));
+    CPPUNIT_ASSERT(qr.m_price.isPositive());
+
+    q.launch("50492", "test Globe-Mail", "Globe & Mail");
+    CPPUNIT_ASSERT(qr.m_errors.count() == 0);
+    CPPUNIT_ASSERT(qr.m_date <= QDate::currentDate().addDays(1));
+    CPPUNIT_ASSERT(qr.m_date >= QDate::currentDate().addDays(-7));
+    CPPUNIT_ASSERT(qr.m_price.isPositive());
+
+    q.launch("TDB647", "test MSN.CA", "MSN.CA");
+    CPPUNIT_ASSERT(qr.m_errors.count() == 0);
+    CPPUNIT_ASSERT(qr.m_date <= QDate::currentDate().addDays(1));
+    CPPUNIT_ASSERT(qr.m_date >= QDate::currentDate().addDays(-7));
+    CPPUNIT_ASSERT(qr.m_price.isPositive());
+
+//    q.launch("BASF.SE", "test Finanztreff", "Finanztreff");
+    CPPUNIT_ASSERT(qr.m_errors.count() == 0);
+    CPPUNIT_ASSERT(qr.m_date <= QDate::currentDate().addDays(1));
+    CPPUNIT_ASSERT(qr.m_date >= QDate::currentDate().addDays(-7));
+    CPPUNIT_ASSERT(qr.m_price.isPositive());
+
+//    q.launch("symbol", "test boerseonline", "boerseonline");
+    CPPUNIT_ASSERT(qr.m_errors.count() == 0);
+    CPPUNIT_ASSERT(qr.m_date <= QDate::currentDate().addDays(1));
+    CPPUNIT_ASSERT(qr.m_date >= QDate::currentDate().addDays(-7));
+    CPPUNIT_ASSERT(qr.m_price.isPositive());
+
+//    q.launch("symbol", "test Wallstreet-Online.DE (Default)", "Wallstreet-Online.DE (Default)");
+    CPPUNIT_ASSERT(qr.m_errors.count() == 0);
+    CPPUNIT_ASSERT(qr.m_date <= QDate::currentDate().addDays(1));
+    CPPUNIT_ASSERT(qr.m_date >= QDate::currentDate().addDays(-7));
+    CPPUNIT_ASSERT(qr.m_price.isPositive());
+
+//    q.launch("DZGEAE", "test Financial Times UK Funds", "Financial Times UK Funds");
+    CPPUNIT_ASSERT(qr.m_errors.count() == 0);
+    CPPUNIT_ASSERT(qr.m_date <= QDate::currentDate().addDays(1));
+    CPPUNIT_ASSERT(qr.m_date >= QDate::currentDate().addDays(-7));
+    CPPUNIT_ASSERT(qr.m_price.isPositive());
+
+    q.launch("UTS.TO", "test Yahoo Canada", "Yahoo Canada");
+    CPPUNIT_ASSERT(qr.m_errors.count() == 0);
+    CPPUNIT_ASSERT(qr.m_date <= QDate::currentDate().addDays(1));
+    CPPUNIT_ASSERT(qr.m_date >= QDate::currentDate().addDays(-7));
+    CPPUNIT_ASSERT(qr.m_price.isPositive());
+
+//    q.launch("TDB647", "test Wallstreet-Online.DE (Hamburg)", "Wallstreet-Online.DE (Hamburg)");
+    CPPUNIT_ASSERT(qr.m_errors.count() == 0);
+    CPPUNIT_ASSERT(qr.m_date <= QDate::currentDate().addDays(1));
+    CPPUNIT_ASSERT(qr.m_date >= QDate::currentDate().addDays(-7));
+    CPPUNIT_ASSERT(qr.m_price.isPositive());
+
+//    q.launch("TDB647", "test Gielda Papierow Wartosciowych (GPW)", "Gielda Papierow Wartosciowych (GPW)");
+    CPPUNIT_ASSERT(qr.m_errors.count() == 0);
+    CPPUNIT_ASSERT(qr.m_date <= QDate::currentDate().addDays(1));
+    CPPUNIT_ASSERT(qr.m_date >= QDate::currentDate().addDays(-7));
+    CPPUNIT_ASSERT(qr.m_price.isPositive());
+
+//    q.launch("TDB647", "test OMX Baltic funds", "OMX Baltic funds");
+    CPPUNIT_ASSERT(qr.m_errors.count() == 0);
+    CPPUNIT_ASSERT(qr.m_date <= QDate::currentDate().addDays(1));
+    CPPUNIT_ASSERT(qr.m_date >= QDate::currentDate().addDays(-7));
+    CPPUNIT_ASSERT(qr.m_price.isPositive());
+
+// TESTING F::Q
+    q.launch("DIS", "test F::Q usa", "Finance::Quote usa");
+    CPPUNIT_ASSERT(qr.m_errors.count() == 0);
+    CPPUNIT_ASSERT(qr.m_date <= QDate::currentDate().addDays(1));
+    CPPUNIT_ASSERT(qr.m_date >= QDate::currentDate().addDays(-7));
+    CPPUNIT_ASSERT(qr.m_price.isPositive());
+
+//UNTESTED: Other F::Q sources, local files, user custom sources
   }
   catch (MyMoneyException* e)
   {
     CPPUNIT_FAIL(qPrintable(e->what()));
   }
-//#else
-//#warning "online tests disabled"
 #endif
 }
 

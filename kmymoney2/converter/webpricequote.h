@@ -104,7 +104,7 @@ struct WebPriceQuoteSource
 {
   WebPriceQuoteSource() {}
   explicit WebPriceQuoteSource(const QString& name);
-  WebPriceQuoteSource(const QString& name, const QString& url, const QString& sym, const QString& price, const QString& date, const QString& dateformat);
+  WebPriceQuoteSource(const QString& name, const QString& url, const QString& sym, const QString& price, const QString& date, const QString& dateformat, bool skipStripping = false);
   ~WebPriceQuoteSource() {}
 
   void write(void) const;
@@ -175,8 +175,6 @@ protected:
   static const QMap<QString,WebPriceQuoteSource> defaultQuoteSources(void);
 
 private:
-  bool download(const KUrl& u, QString & target, QWidget* window);
-  void removeTempFile(const QString& tmpFile);
   bool launchNative(const QString& _symbol, const QString& _id, const QString& _source=QString());
   bool launchFinanceQuote(const QString& _symbol, const QString& _id, const QString& _source=QString());
   void enter_loop(void);
@@ -193,14 +191,6 @@ private:
   static QString m_financeQuoteScriptPath;
   static QStringList m_financeQuoteSources;
 
-
-  /**
-   * Whether the download succeeded or not. Taken from KIO::NetAccess
-   */
-  bool bJobOK;
-  static QString* lastErrorMsg;
-  static int lastErrorCode;
-  QString m_tmpFile;
 };
 
 class MyMoneyDateFormat
