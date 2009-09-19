@@ -61,8 +61,7 @@ WebPriceQuote::WebPriceQuote( QObject* _parent ):
 WebPriceQuote::~WebPriceQuote()
 { }
 
-bool WebPriceQuote::launch( const QString& _symbol, const QString& _id, const QString& _sourcename )
-{
+bool WebPriceQuote::launch( const QString& _symbol, const QString& _id, const QString& _sourcename ) {
   if (_sourcename.contains("Finance::Quote"))
     return (launchFinanceQuote (_symbol, _id, _sourcename));
   else
@@ -89,8 +88,7 @@ bool WebPriceQuote::launchNative( const QString& _symbol, const QString& _id, co
   KUrl url;
 
   // if the source has room for TWO symbols..
-  if ( m_source.m_url.contains("%2") )
-  {
+  if ( m_source.m_url.contains("%2") ) {
     // this is a two-symbol quote.  split the symbol into two.  valid symbol
     // characters are: 0-9, A-Z and the dot.  anything else is a separator
     QRegExp splitrx("([0-9a-z\\.]+)[^a-z0-9]+([0-9a-z\\.]+)", Qt::CaseInsensitive);
@@ -99,13 +97,11 @@ bool WebPriceQuote::launchNative( const QString& _symbol, const QString& _id, co
       url = KUrl(m_source.m_url.arg(splitrx.cap(1),splitrx.cap(2)));
     else
       kDebug(2) << "WebPriceQuote::launch() did not find 2 symbols";
-  }
-  else
+  } else
     // a regular one-symbol quote
     url = KUrl(m_source.m_url.arg(m_symbol));
 
-  if ( url.isLocalFile() )
-  {
+  if ( url.isLocalFile() ) {
     emit status(i18nc("The process x is executing", "Executing %1...",url.path()));
 
     m_filter.clearProgram();
@@ -115,42 +111,31 @@ bool WebPriceQuote::launchNative( const QString& _symbol, const QString& _id, co
     m_filter.setOutputChannelMode(KProcess::MergedChannels);
     m_filter.start();
 
-    if(m_filter.waitForStarted())
-    {
+    if(m_filter.waitForStarted()) {
       result = true;
-    }
-    else
-    {
+    } else {
       emit error(i18n("Unable to launch: %1",url.path()));
       slotParseQuote(QString());
     }
-  }
-  else
-  {
+  } else {
     emit status(i18n("Fetching URL %1...",url.prettyUrl()));
 
     QString tmpFile;
-    if (KIO::NetAccess::download(url, tmpFile, NULL))
-    {
+    if (KIO::NetAccess::download(url, tmpFile, NULL)) {
       kDebug(2) << "Downloaded " << tmpFile;
       //kDebug(2) << "Downloaded " << tmpFile << " from " << url;
       QFile f(tmpFile);
-      if ( f.open( QIODevice::ReadOnly ) )
-      {
+      if ( f.open( QIODevice::ReadOnly ) ) {
         result = true;
         QString quote = QTextStream(&f).readAll();
         f.close();
         slotParseQuote(quote);
-      }
-      else
-      {
+      } else {
         emit error("Failed to open downloaded file");
         slotParseQuote(QString());
       }
       KIO::NetAccess::removeTempFile( tmpFile );
-    }
-    else
-    {
+    } else {
       emit error(KIO::NetAccess::lastErrorString());
       slotParseQuote(QString());
     }
@@ -181,12 +166,9 @@ bool WebPriceQuote::launchFinanceQuote ( const QString& _symbol, const QString& 
   m_filter.start();
 
   // This seems to work best if we just block until done.
-  if(m_filter.waitForFinished())
-  {
+  if(m_filter.waitForFinished()) {
     result = true;
-  }
-  else
-  {
+  } else {
     emit error(QString("Unable to launch: %1").arg(m_financeQuoteScriptPath));
     slotParseQuote(QString());
   }
@@ -202,8 +184,7 @@ void WebPriceQuote::slotParseQuote(const QString& _quotedata)
 
 //    kDebug(2) << "WebPriceQuote::slotParseQuote( " << _quotedata << " ) ";
 
-  if ( ! quotedata.isEmpty() )
-  {
+  if ( ! quotedata.isEmpty() ) {
     if(!m_source.m_skipStripping) {
       //
       // First, remove extranous non-data elements
@@ -222,8 +203,7 @@ void WebPriceQuote::slotParseQuote(const QString& _quotedata)
 #if KMM_DEBUG
     // Enable to get a look at the data coming back from the source after it's stripped
     QFile file("stripped.txt");
-    if ( file.open( QIODevice::WriteOnly ) )
-    {
+    if ( file.open( QIODevice::WriteOnly ) ) {
       QTextStream( &file ) << quotedata;
       file.close();
     }
@@ -236,8 +216,7 @@ void WebPriceQuote::slotParseQuote(const QString& _quotedata)
     if( symbolRegExp.indexIn(quotedata) > -1)
       emit status(i18n("Symbol found: %1",symbolRegExp.cap(1)));
 
-    if(priceRegExp.indexIn(quotedata)> -1)
-    {
+    if(priceRegExp.indexIn(quotedata)> -1) {
       gotprice = true;
 
       // Deal with european quotes that come back as X.XXX,XX or XX,XXX
@@ -250,13 +229,11 @@ void WebPriceQuote::slotParseQuote(const QString& _quotedata)
       QString pricestr = priceRegExp.cap(1);
 
       int pos = pricestr.lastIndexOf(QRegExp("\\D"));
-      if ( pos > 0 )
-      {
+      if ( pos > 0 ) {
         pricestr[pos] = '.';
         pos = pricestr.lastIndexOf(QRegExp("\\D"),pos-1);
       }
-      while ( pos > 0 )
-      {
+      while ( pos > 0 ) {
         pricestr.remove(pos,1);
         pos = pricestr.lastIndexOf(QRegExp("\\D"),pos);
       }
@@ -265,19 +242,15 @@ void WebPriceQuote::slotParseQuote(const QString& _quotedata)
       emit status(i18n("Price found: %1 (%2)",pricestr,m_price));
     }
 
-    if(dateRegExp.indexIn(quotedata) > -1)
-    {
+    if(dateRegExp.indexIn(quotedata) > -1) {
       QString datestr = dateRegExp.cap(1);
 
       MyMoneyDateFormat dateparse(m_source.m_dateformat);
-      try
-      {
+      try {
         m_date = dateparse.convertString( datestr,false /*strict*/ );
         gotdate = true;
         emit status(i18n("Date found: %1",m_date.toString()));;
-      }
-      catch (MyMoneyException* e)
-      {
+      } catch (MyMoneyException* e) {
         // emit error(i18n("Unable to parse date %1 using format %2: %3").arg(datestr,dateparse.format(),e->what()));
         m_date = QDate::currentDate();
         gotdate = true;
@@ -285,25 +258,19 @@ void WebPriceQuote::slotParseQuote(const QString& _quotedata)
       }
     }
 
-    if ( gotprice && gotdate )
-    {
+    if ( gotprice && gotdate ) {
       emit quote( m_id, m_symbol, m_date, m_price );
-    }
-    else
-    {
+    } else {
       emit error(i18n("Unable to update price for %1 (no price or no date)",m_symbol));
       emit failed( m_id, m_symbol );
     }
-  }
-  else
-  {
+  } else {
     emit error(i18n("Unable to update price for %1 (empty quote data)",m_symbol));
     emit failed( m_id, m_symbol );
   }
 }
 
-const QMap<QString,WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources(void)
-{
+const QMap<QString,WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources(void) {
   QMap<QString,WebPriceQuoteSource> result;
 
   result["Yahoo"] = WebPriceQuoteSource("Yahoo",
@@ -512,8 +479,7 @@ const QStringList WebPriceQuote::quoteSourcesNative()
 
   // if the user has the OLD quote source defined, now is the
   // time to remove that entry and convert it to the new system.
-  if ( ! groups.count() && kconfig->hasGroup("Online Quotes Options") )
-  {
+  if ( ! groups.count() && kconfig->hasGroup("Online Quotes Options") ) {
     KConfigGroup grp = kconfig->group("Online Quotes Options");
     QString url(grp.readEntry("URL","http://finance.yahoo.com/d/quotes.csv?s=%1&f=sl1d1"));
     QString symbolRegExp(grp.readEntry("SymbolRegex","\"([^,\"]*)\",.*"));
@@ -536,10 +502,8 @@ const QStringList WebPriceQuote::quoteSourcesNative()
   // are also picked up.
   QMap<QString,WebPriceQuoteSource> defaults = defaultQuoteSources();
   QMap<QString,WebPriceQuoteSource>::const_iterator it_source = defaults.constBegin();
-  while ( it_source != defaults.constEnd() )
-  {
-    if ( ! groups.contains( (*it_source).m_name ) )
-    {
+  while ( it_source != defaults.constEnd() ) {
+    if ( ! groups.contains( (*it_source).m_name ) ) {
       groups += (*it_source).m_name;
     }
 
@@ -579,11 +543,9 @@ WebPriceQuoteSource::WebPriceQuoteSource(const QString& name, const QString& url
   m_date(date),
   m_dateformat(dateformat),
   m_skipStripping(skipStripping)
-{
-}
+{ }
 
-WebPriceQuoteSource::WebPriceQuoteSource(const QString& name)
-{
+WebPriceQuoteSource::WebPriceQuoteSource(const QString& name) {
   m_name = name;
   KSharedConfigPtr kconfig = KGlobal::config();
   KConfigGroup grp = kconfig->group(QString("Online-Quote-Source-%1").arg(m_name));
@@ -595,8 +557,7 @@ WebPriceQuoteSource::WebPriceQuoteSource(const QString& name)
   m_skipStripping = grp.readEntry("SkipStripping", false);
 }
 
-void WebPriceQuoteSource::write(void) const
-{
+void WebPriceQuoteSource::write(void) const {
   KSharedConfigPtr kconfig = KGlobal::config();
   KConfigGroup grp = kconfig->group(QString("Online-Quote-Source-%1").arg(m_name));
   grp.writeEntry("URL", m_url);
@@ -610,15 +571,13 @@ void WebPriceQuoteSource::write(void) const
     grp.deleteEntry("SkipStripping");
 }
 
-void WebPriceQuoteSource::rename(const QString& name)
-{
+void WebPriceQuoteSource::rename(const QString& name) {
   remove();
   m_name = name;
   write();
 }
 
-void WebPriceQuoteSource::remove(void) const
-{
+void WebPriceQuoteSource::remove(void) const {
   KSharedConfigPtr kconfig = KGlobal::config();
   kconfig->deleteGroup(QString("Online-Quote-Source-%1").arg(m_name));
 }
@@ -627,20 +586,17 @@ void WebPriceQuoteSource::remove(void) const
 // Helper class to babysit the KProcess used for running the local script in that case
 //
 
-WebPriceQuoteProcess::WebPriceQuoteProcess(void)
-{
+WebPriceQuoteProcess::WebPriceQuoteProcess(void) {
   connect(this, SIGNAL(readyReadStandardOutput()), this, SLOT(slotReceivedDataFromFilter()));
   connect(this, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(slotProcessExited(int, QProcess::ExitStatus)));
 }
 
-void WebPriceQuoteProcess::slotReceivedDataFromFilter()
-{
+void WebPriceQuoteProcess::slotReceivedDataFromFilter() {
 //   kDebug(2) << "WebPriceQuoteProcess::slotReceivedDataFromFilter(): " << QString(data);
   m_string += QString(readAllStandardOutput());
 }
 
-void WebPriceQuoteProcess::slotProcessExited(int /*exitCode*/, QProcess::ExitStatus /*exitStatus*/)
-{
+void WebPriceQuoteProcess::slotProcessExited(int /*exitCode*/, QProcess::ExitStatus /*exitStatus*/) {
 //   kDebug(2) << "WebPriceQuoteProcess::slotProcessExited()";
   emit processExited(m_string);
   m_string.truncate(0);
@@ -650,8 +606,7 @@ void WebPriceQuoteProcess::slotProcessExited(int /*exitCode*/, QProcess::ExitSta
 // Helper class to babysit the KProcess used for running the Finance Quote sources script
 //
 
-FinanceQuoteProcess::FinanceQuoteProcess(void)
-{
+FinanceQuoteProcess::FinanceQuoteProcess(void) {
   m_isDone = false;
   m_string = "";
   m_fqNames["aex"] = "AEX";
@@ -712,16 +667,14 @@ FinanceQuoteProcess::FinanceQuoteProcess(void)
   connect(this, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(slotProcessExited(int, QProcess::ExitStatus)));
 }
 
-void FinanceQuoteProcess::slotReceivedDataFromFilter(KProcess* /*_process*/, char* _pcbuffer, int _nbufferlen)
-{
+void FinanceQuoteProcess::slotReceivedDataFromFilter(KProcess* /*_process*/, char* _pcbuffer, int _nbufferlen) {
   QByteArray data(_pcbuffer, _nbufferlen);
 
 //   kDebug(2) << "WebPriceQuoteProcess::slotReceivedDataFromFilter(): " << QString(data);
   m_string += QString(data);
 }
 
-void FinanceQuoteProcess::slotProcessExited(int /*exitCode*/, QProcess::ExitStatus /*exitStatus*/)
-{
+void FinanceQuoteProcess::slotProcessExited(int /*exitCode*/, QProcess::ExitStatus /*exitStatus*/) {
 //   kDebug(2) << "WebPriceQuoteProcess::slotProcessExited()";
   m_isDone = true;
 }
@@ -774,15 +727,13 @@ const QString FinanceQuoteProcess::niceName(const QString& crypticName) const {
 // format in a way I don't understand.  So for the moment, they are 99%
 // compatable, waiting on that issue. (acejones)
 
-const QDate MyMoneyDateFormat::convertString(const QString& _in, bool _strict, unsigned _centurymidpoint) const
-{
+const QDate MyMoneyDateFormat::convertString(const QString& _in, bool _strict, unsigned _centurymidpoint) const {
   //
   // Break date format string into component parts
   //
 
   QRegExp formatrex("%([mdy]+)(\\W+)%([mdy]+)(\\W+)%([mdy]+)", Qt::CaseInsensitive);
-  if ( formatrex.indexIn(m_format) == -1 )
-  {
+  if ( formatrex.indexIn(m_format) == -1 ) {
     throw new MYMONEYEXCEPTION("Invalid format string");
   }
 
@@ -810,8 +761,7 @@ const QDate MyMoneyDateFormat::convertString(const QString& _in, bool _strict, u
   else
     inputrex.setPattern("(\\w+)\\W+(\\w+)\\W+(\\w+)");
 
-  if ( inputrex.indexIn(_in) == -1 )
-  {
+  if ( inputrex.indexIn(_in) == -1 ) {
     throw new MYMONEYEXCEPTION("Invalid input string");
   }
 
@@ -828,11 +778,9 @@ const QDate MyMoneyDateFormat::convertString(const QString& _in, bool _strict, u
   QRegExp digitrex("(\\d+)");
   QStringList::const_iterator it_scanned = scannedParts.constBegin();
   QStringList::const_iterator it_format = formatParts.constBegin();
-  while ( it_scanned != scannedParts.constEnd() )
-  {
+  while ( it_scanned != scannedParts.constEnd() ) {
     // decide upon the first character of the part
-    switch ( (*it_format).at(0).cell() )
-    {
+    switch ( (*it_format).at(0).cell() ) {
     case 'd':
       // remove any extraneous non-digits (e.g. read "3rd" as 3)
       ok = false;
@@ -843,12 +791,10 @@ const QDate MyMoneyDateFormat::convertString(const QString& _in, bool _strict, u
       break;
     case 'm':
       month = (*it_scanned).toUInt(&ok);
-      if ( !ok )
-      {
+      if ( !ok ) {
         // maybe it's a textual date
         unsigned i = 1;
-        while ( i <= 12 )
-        {
+        while ( i <= 12 ) {
           if(KGlobal::locale()->calendar()->monthName(i, 2000).toLower() == *it_scanned
           || KGlobal::locale()->calendar()->monthName(i, 2000, KCalendarSystem::ShortName).toLower() == *it_scanned)
             month = i;
@@ -876,8 +822,7 @@ const QDate MyMoneyDateFormat::convertString(const QString& _in, bool _strict, u
       // this algorithm will pick a year within +/- 50 years of the
       // centurymidpoint parameter.  i.e. if the midpoint is 2000,
       // then 0-49 will become 2000-2049, and 50-99 will become 1950-1999
-      if ( year < 100 )
-      {
+      if ( year < 100 ) {
         unsigned centuryend = _centurymidpoint + 50;
         unsigned centurybegin = _centurymidpoint - 50;
 
@@ -909,8 +854,7 @@ const QDate MyMoneyDateFormat::convertString(const QString& _in, bool _strict, u
 //
 
 convertertest::QuoteReceiver::QuoteReceiver(WebPriceQuote* q, QObject* parent) :
-  QObject(parent)
-{
+  QObject(parent) {
   connect(q,SIGNAL(quote(const QString&, const QString&, const QDate&, const double&)),
     this,SLOT(slotGetQuote(const QString&, const QString&, const QDate&, const double&)));
   connect(q,SIGNAL(status(const QString&)),
@@ -922,21 +866,18 @@ convertertest::QuoteReceiver::QuoteReceiver(WebPriceQuote* q, QObject* parent) :
 convertertest::QuoteReceiver::~QuoteReceiver()
 { }
 
-void convertertest::QuoteReceiver::slotGetQuote(const QString&, const QString&, const QDate& d, const double& m)
-{
+void convertertest::QuoteReceiver::slotGetQuote(const QString&, const QString&, const QDate& d, const double& m) {
 //   kDebug(2) << "test::QuoteReceiver::slotGetQuote( , " << d << " , " << m.toString() << " )";
 
   m_price = MyMoneyMoney(m);
   m_date = d;
 }
-void convertertest::QuoteReceiver::slotStatus(const QString& msg)
-{
+void convertertest::QuoteReceiver::slotStatus(const QString& msg) {
 //   kDebug(2) << "test::QuoteReceiver::slotStatus( " << msg << " )";
 
   m_statuses += msg;
 }
-void convertertest::QuoteReceiver::slotError(const QString& msg)
-{
+void convertertest::QuoteReceiver::slotError(const QString& msg) {
 //   kDebug(2) << "test::QuoteReceiver::slotError( " << msg << " )";
 
   m_errors += msg;

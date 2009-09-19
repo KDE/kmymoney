@@ -47,8 +47,7 @@ using namespace test;
 #undef private
 
 ConverterTest::ConverterTest()
-{
-}
+{ }
 
 using namespace convertertest;
 
@@ -88,14 +87,12 @@ void ConverterTest::setUp () {
   ft.commit();
 }
 
-void ConverterTest::tearDown ()
-{
+void ConverterTest::tearDown () {
   file->detachStorage(storage);
   delete storage;
 }
 
-void ConverterTest::testWebQuotes()
-{
+void ConverterTest::testWebQuotes() {
 #ifdef PERFORM_ONLINE_TESTS
   try
   {
@@ -208,16 +205,13 @@ void ConverterTest::testWebQuotes()
     CPPUNIT_ASSERT(qr.m_price.isPositive());
 
 //UNTESTED: Other F::Q sources, local files, user custom sources
-  }
-  catch (MyMoneyException* e)
-  {
+  } catch (MyMoneyException* e) {
     CPPUNIT_FAIL(qPrintable(e->what()));
   }
 #endif
 }
 
-void ConverterTest::testDateFormat()
-{
+void ConverterTest::testDateFormat() {
   try
   {
     MyMoneyDateFormat format("%mm-%dd-%yyyy");
@@ -255,9 +249,7 @@ void ConverterTest::testDateFormat()
     CPPUNIT_ASSERT(format.convertString("12/31/50",false,2000) == QDate(1950,12,31));
     CPPUNIT_ASSERT(format.convertString("1/1/90",false,2000) == QDate(1990,1,1));
     CPPUNIT_ASSERT(format.convertString("december 31st, 5",false) == QDate(2005,12,31));
-  }
-  catch (MyMoneyException* e)
-  {
+  } catch (MyMoneyException* e) {
     CPPUNIT_FAIL(qPrintable(e->what()));
   }
 }
