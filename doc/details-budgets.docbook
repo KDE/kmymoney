@@ -390,15 +390,21 @@
 
   <varlistentry>
     <term>Compare Budget and Actual</term>
-    <listitem><para>Reports comparing values from a Budget to actual income and
-      expenses: Budget vs. Actual This Year Month-by-month comparison for the
-      current year so far, with total. Monthly Budget vs. Actual Month-by-month
-      comparison, defaulting to the current month. Yearly Budgeted vs. Actual
-      Month-by-month comparison for the whole of the current year, with
-      total. These reports provide a base from which custom reports can be
-      created by changing the date range and Budget. Of the Budget reports, only
-      the "Budget vs. Actual This Year" does not allow the Budget to be
-      changed.</para>
+    <listitem><para>Reports comparing values from a Budget to actual income and expenses. In
+      each budget report you can find the columns Budget, Actual and
+      Difference. Each report differs in the period that is shown:
+
+      Budget vs. Actual This Year: from the beginning of the year until today
+      Budget vs. Actual This Year (YTM): from the beginning of the year
+      until the last day of the previous month
+      Yearly Budgeted vs. Actual: from the 1st january until the 31st
+      decembre
+      Monthly Budgeted vs. Actual: from the beginning of the year until
+      the last day of the current month
+      Yearly Budgeted vs. Actual (Graph): same as the previous report but it shows the graph by default
+
+      These reports provide a base from which custom reports can be created by
+      changing the date range and Budget, among other options. </para>
     </listitem>
   </varlistentry>
 </variablelist>
