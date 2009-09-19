@@ -347,7 +347,7 @@
 <sect2>
 <title>Interest</title>
 <para>
-  This is how you enter an interest or dividend payment from an invenstment.  As
+  This is how you enter an interest or dividend payment from an investment.  As
   with fees, if  you enter a category, then  a field will be shown  to the right
   where  you can  enter the  amount.   You can  also use  the split  transaction
   feature, if required.
@@ -480,7 +480,7 @@
   In order to get online price quotes, you first have to enable it for each
   investment or currency you want updated, by setting a <quote>Online Quote
   Source</quote>.  This is the name of the service from which the quote should
-  be fetched.  KMyMoney ships with several sources to choose from.  Yahoo is the
+  be fetched.  &kappname; ships with several sources to choose from.  Yahoo is the
   recommended default source, and should work for most investments and all
   currencies.
 </para>

@@ -329,7 +329,7 @@
   For obtaining online price and currency rate quotations, GnuCash uses a
   package called Finance::Quote. Recent versions of &kappname; contain support
   for this package for obtaining stock quotes, and this will be used by default
-  when importing data.  You may however elect to convert to the native method
+  when importing data.  You may however select to convert to the native method
   used by &kappname; which is covered in more detail in
   <link linkend="details.investments.onlinequotes">online quotes</link>.
 </para>
@@ -948,7 +948,7 @@
   &kappname; will import OFX files painlessly.  However, this functionality is
   not built into the core program.  You must obtain and install the OFX Importer
   Plugin.  Once that is installed, the command to import OFX files will
-  automatically show up under the <quote>File | Import</quote> menu.
+  automatically show up under the <guimenu>File</guimenu> <guimenuitem>Import</guimenuitem> menu.
 </para>
 <para>
   Note that many prepackaged versions of &kappname; were built with the OFX

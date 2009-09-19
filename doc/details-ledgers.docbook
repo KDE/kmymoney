@@ -125,8 +125,8 @@
   directly in the list.  In the transactions list, the default arrangement of
   transactions is sorted by date with the most recent transaction on the bottom.
   Clicking the Right Mouse Button on the header of the transaction list brings
-  up a dialog that allows you to change the sort order of the transactions. You
-  can change the default sort order in the <link
+  up a dialog that allows you to change the sort order of the transactions. For
+  instructions on how to change the default sort order, see the <link
   linkend="details.settings.register.sorting">Sorting tab</link> section of the
   <link linkend="details.settings">&kappname; Settings</link> Chapter.
 </para>
@@ -460,7 +460,7 @@
 <title id="details.ledgers.match.title">Matching Transactions</title>
 
 <para>
-  Generally, when importing transactions, either via QIF, OFX, or HBCI, KMyMoney
+  Generally, when importing transactions, either via QIF, OFX, or HBCI, &kappname;
   will automatically attempt to match them against existing transactions. To
   allow for differences in the dates, there is a default setting of 4 days,
   which may be changed in the settings - Register/Import. Any transactions so

@@ -229,7 +229,7 @@
       <shortcut>
         <keycombo>&Ctrl;<keycap>T</keycap></keycombo>
       </shortcut>
-      <guimenu>Settings</guimenu>
+      <guimenu>View</guimenu>
         <guimenuitem>Show Transaction Detail</guimenuitem>
     </menuchoice></term>
     <listitem>
@@ -270,7 +270,7 @@
         <guimenuitem>Hide unused categories</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Hides unused categories on the views.</action></para>
+      <para><action>Hides unused categories in the views.</action></para>
     </listitem>
   </varlistentry>
 
@@ -284,7 +284,7 @@
       <guimenu>View</guimenu><guimenuitem>Show all accounts</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Shows all accounts on the views.</action></para>
+      <para><action>Shows all accounts in the views.</action></para>
     </listitem>
   </varlistentry>
 </variablelist>

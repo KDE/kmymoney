@@ -74,7 +74,7 @@
 </para>
 
 <para>
-  The Forecast window is split into three tabs
+  The Forecast window is split into five tabs
 </para>
 
 <sect2>
@@ -286,5 +286,24 @@
 </variablelist>
 
 </sect2>
+
+<sect2>
+<title>Budget Forecast Tab</title>
+
+<para>
+  The Budget tab displays a forecast calculation for the Income and Expense categories. The columns are similar to the Summary and Detailed tabs.
+</para>
+
+</sect2>
+
+<sect2>
+<title>Chart Tab</title>
+
+<para>
+  It displays a chart showing the forecast. The level of detail varies depending on the detail level selected on the option above.
+</para>
+
+</sect2>
+
 </sect1>
 </chapter>

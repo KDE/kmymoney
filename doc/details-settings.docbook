@@ -626,7 +626,7 @@
 <title id="details.settings.forecast.title">Forecast</title>
 
 <para>
-  These options allow you to modify the forecast options.
+  These options allow you to modify how the forecast is calculated.
 </para>
 
 <variablelist>
