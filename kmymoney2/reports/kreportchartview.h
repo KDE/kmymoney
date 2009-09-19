@@ -34,10 +34,10 @@
 #include <QLabel>
 //Added by qt3to4:
 #include <QMouseEvent>
-#include <KDChartWidget.h>
-#include <KDChartTable.h>
-#include <KDChartParams.h>
-#include <KDChartAxisParams.h>
+#include <KDChartWidget>
+#include <KDChartTable>
+#include <KDChartParams>
+#include <KDChartAxisParams>
 
 // ----------------------------------------------------------------------------
 // Project Includes

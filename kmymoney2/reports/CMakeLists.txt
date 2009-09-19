@@ -1,4 +1,4 @@
-INCLUDE_DIRECTORIES( ${KMyMoney_SOURCE_DIR}/libkdchart)
+INCLUDE_DIRECTORIES( ${KMyMoney_SOURCE_DIR}/libkdchart/include)
 
 SET (libreports_a_SOURCES
   #kreportchartview.cpp 
