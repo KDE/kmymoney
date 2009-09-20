@@ -1,3 +1,5 @@
+INCLUDE_DIRECTORIES( ${KMyMoney_SOURCE_DIR}/libkdchart/include)
+
 ############# next target (views) STATIC ###################
 SET(libviews_a_SOURCES
   kaccountsview.cpp
