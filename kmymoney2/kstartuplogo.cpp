@@ -21,7 +21,7 @@
 
 #include <QApplication>
 #include <QPixmap>
-#include <q3frame.h>
+#include <QPainter>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -30,7 +30,7 @@
 #include <klocale.h>
 #include <kstandarddirs.h>
 #include <kapplication.h>
-
+#include <kcolorscheme.h>
 #include <ksplashscreen.h>
 
 // ----------------------------------------------------------------------------
@@ -40,7 +40,7 @@
 #include "kmymoneyglobalsettings.h"
 
 KStartupLogo::KStartupLogo() :
-  QObject(0, 0),
+  QObject(0),
   m_splash(0)
 {
   // splash screen setting
@@ -49,11 +49,16 @@ KStartupLogo::KStartupLogo() :
 
   QString filename = KGlobal::dirs()->findResource("appdata", "pics/startlogo.png");
   QString localeFilename = KGlobal::locale()->localizedFilePath(filename);
-  QPixmap pm(localeFilename);
+  QPixmap logoOverlay(localeFilename);
 
-  if(!pm.isNull()) {
-    KSplashScreen* splash = new KSplashScreen(pm);
-    splash->setFixedSize(pm.size());
+  QPixmap logoPixmap(logoOverlay.size());
+  logoPixmap.fill(KColorScheme(QPalette::Active, KColorScheme::Selection).background(KColorScheme::NormalBackground).color());
+  QPainter pixmapPainter(&logoPixmap);
+  pixmapPainter.drawPixmap(0, 0, logoOverlay, 0, 0, logoOverlay.width(), logoOverlay.height());
+
+  if(!logoOverlay.isNull()) {
+    KSplashScreen* splash = new KSplashScreen(logoPixmap);
+    splash->setFixedSize(logoPixmap.size());
 
     splash->show();
     m_splash = splash;
