@@ -89,7 +89,7 @@ Q3ListViewItem* KAccountTemplateSelector::Private::hierarchyItem(const QString& 
   if(!m_templateHierarchy.contains(parent)
   || m_templateHierarchy[parent] == 0) {
     QRegExp exp("(.*):(.*)");
-    if(exp.search(parent) != -1)
+    if(exp.indexIn(parent) != -1)
       m_templateHierarchy[parent] = hierarchyItem(exp.cap(1), exp.cap(2));
   }
   return new KTemplateListItem(m_templateHierarchy[parent], name);
@@ -133,7 +133,7 @@ void KAccountTemplateSelector::Private::loadHierarchy(void)
 
   QRegExp exp("(.*):(.*)");
   for(it_m = m_templateHierarchy.begin(); it_m != m_templateHierarchy.end(); ++it_m) {
-    if(exp.search(it_m.key()) == -1) {
+    if(exp.indexIn(it_m.key()) == -1) {
       (*it_m) = new K3ListViewItem(m_parent->m_accountList, it_m.key());
     } else {
       (*it_m) = hierarchyItem(exp.cap(1), exp.cap(2));
@@ -194,7 +194,7 @@ void KAccountTemplateSelector::slotLoadTemplateList(void)
       if((*it_d) == ".." || (*it_d) == "." || (*it_d) == "C")
         continue;
       QRegExp exp("(..)_(..)");
-      if(exp.search(*it_d) != -1) {
+      if(exp.indexIn(*it_d) != -1) {
 
         QString country = KGlobal::locale()->countryCodeToName(exp.cap(2));
         if(country.isEmpty())
@@ -203,7 +203,7 @@ void KAccountTemplateSelector::slotLoadTemplateList(void)
         if(d->countries.contains(country)) {
           if(d->countries[country] != *it_d) {
             QString oName = d->countries[country];
-            exp.search(oName);
+            exp.indexIn(oName);
             QString oCountry = KGlobal::locale()->countryCodeToName(exp.cap(2));
             QString oLang = KGlobal::locale()->languageCodeToName(exp.cap(1));
             d->countries.remove(country);
