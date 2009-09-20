@@ -206,7 +206,7 @@
   <listitem><para>Export: Reports can be saved in &HTML; or CSV
     format.</para></listitem>
   <listitem><para>Delete: Customized reports can be deleted.  The default
-    reports that ship with KMyMoney cannot be deleted.</para></listitem>
+    reports that ship with &kappname; cannot be deleted.</para></listitem>
   <listitem><para>Close: Close the current report.</para></listitem>
 </itemizedlist>
 </sect1>

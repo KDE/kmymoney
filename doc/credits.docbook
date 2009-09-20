@@ -40,7 +40,7 @@
     <formalpara>
       <title>Thomas Baumgart &lt;ipwizard@users.sourceforge.net&gt;</title>
       <para>
-        Release manager and de-facto Maintainer. Core Engine. Project Admin.
+        Release manager and de-facto Maintainer. Core engine. Project admin.
       </para>
     </formalpara>
   </listitem>
@@ -55,7 +55,7 @@
   <listitem>
     <formalpara>
       <title>Robert Wadley &lt;robntina@users.sourceforge.net&gt;</title>
-      <para>Artist.  Icons, splash screen, home view.  Screen shots.</para>
+      <para>Artist. Icons, splash screen, home view. Screenshots.</para>
     </formalpara>
   </listitem>
 
@@ -69,7 +69,7 @@
   <listitem>
     <formalpara>
       <title>Fernando Vilas &lt;fvilas@users.sourceforge.net&gt;</title>
-      <para>Database support</para>
+      <para>Database support.</para>
     </formalpara>
   </listitem>
 </itemizedlist>
@@ -89,21 +89,21 @@
   <listitem>
     <formalpara>
       <title>Kevin Tambascio &lt;ktambascio@users.sourceforge.net&gt;</title>
-      <para>Initial investment support</para>
+      <para>Initial investment support.</para>
     </formalpara>
   </listitem>
 
   <listitem>
     <formalpara>
       <title>Felix Rodriguez &lt;frodriguez@users.sourceforge.net&gt;</title>
-      <para>Project admin</para>
+      <para>Project admin.</para>
     </formalpara>
   </listitem>
  
   <listitem>
     <formalpara>
       <title>John C &lt;tacoturtle@users.sourceforge.net&gt;</title>
-      <para>Developer</para>
+      <para>Developer.</para>
     </formalpara>
   </listitem>
 </itemizedlist>

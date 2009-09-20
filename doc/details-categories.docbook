@@ -109,7 +109,7 @@
 </para>
  
 <para>
-  Categories can be assigned a VAT category, which allows KMyMoney to split a
+  Categories can be assigned a VAT category, which allows &kappname; to split a
   transaction for a category into two parts, one for the category and one for
   the VAT. Depending on the setting of the gross/net amount switch, the amount
   you enter for the transaction is the gross or net amount.
@@ -126,7 +126,7 @@
 <para>
   When I buy goods, I enter them into a transaction. Let's assume I have
   selected the gross amount entry method, once I enter the category and amount,
-  KMyMoney will recognize that there's a VAT assignment and calculate the VAT
+  &kappname; will recognize that there's a VAT assignment and calculate the VAT
   part, create a second split with the VAT account and VAT amount and reduce the
   category amount.
 </para>

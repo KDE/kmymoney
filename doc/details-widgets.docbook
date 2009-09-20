@@ -21,7 +21,7 @@
 <title>Date entry widget</title>
 
 <para>
-  Whenever &kappname; needs information about a specific date, e.g., the posting
+  Whenever &kappname; needs information about a specific date, &eg;, the posting
   date of a transaction or the opening date of an account, it offers the user
   the <emphasis>date entry widget</emphasis>. This widget consists of three
   fields and a button. The fields present the <emphasis>day</emphasis>, the
@@ -95,7 +95,7 @@
   thousands separators, and decimal symbols) as well as a button to the
   right. Use the digits to enter the value. Separate the fractional part by
   entering the decimal separator for your locale. If you click on the button to
-  the right or press a key representing a numeric operation (e.g., +,-,/,* or %)
+  the right or press a key representing a numeric operation (&eg;, +,-,/,* or %)
   a little calculator will pop up and allow you to calculate the final value.
 </para>
 

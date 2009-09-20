@@ -712,7 +712,7 @@
 <para>
   If you are unable to delete an account which looks like it has no transactions
   in it, check your filter. See <menuchoice> <guimenu>Settings</guimenu>
-  <guimenuitem>Configure KMyMoney</guimenuitem>
+  <guimenuitem>Configure &kappname;</guimenuitem>
   <guimenuitem>General</guimenuitem> <guimenuitem>Filter</guimenuitem>
   </menuchoice>. Clear all filters. Set the start date to 1.1.1900 or so.
 </para>

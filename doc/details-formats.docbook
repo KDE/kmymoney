@@ -75,7 +75,7 @@
 
 <para>
   If you want to look at the contents of a GZIP compressed file, rename it to a
-  filename ending in <literal role="extension">.gz</literal> (e.g.,
+  filename ending in <literal role="extension">.gz</literal> (&eg;,
   rename <filename>myfinances.kmy</filename>
   to <filename>myfinances.kmy.gz</filename>), then use <command>gunzip</command>
   to uncompress the file and look at it. You don't have to compress it before

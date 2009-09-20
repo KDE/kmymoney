@@ -49,8 +49,8 @@
 
 <para>
   The import will probably only work correctly if presented with a valid
-  file. It is recommended that the GnuCash 'Check &amp; Repair All' function (in
-  the Actions menu) be run before attempting to import.
+  file. It is recommended that the GnuCash <guimenuitem>Check &amp; Repair All</guimenuitem> function (in
+  the <guimenu>Actions</guimenu> menu) be run before attempting to import.
 </para>
 
 <para>
@@ -98,7 +98,7 @@
 <para>
   For both products, the highest level of structure in the file is the
   account. &kappname; supports 5 main types of account: Asset, Liability,
-  Income, Expense and Equity, each of which may have various subtypes, e.g.,
+  Income, Expense and Equity, each of which may have various subtypes, &eg;,
   Checking, Credit Card, &etc;.  &kappname; includes a 'standard' account for
   each of these five types, and all other accounts are held subordinate to one
   of these. &kappname; enforces more consistency (or less flexibility, depending
@@ -751,7 +751,7 @@
   vendors have taken liberties with the format, and introduced their own
   nuances.  The QIF Profile allows &kappname; to know about the peculiarities of
   your file.  To edit an existing QIF Profile, or to create a new one, press the
-  <quote>New</quote> button on the QIF Import dialog, near the profile selector.
+  <guibutton>New</guibutton> button on the QIF Import dialog, near the profile selector.
 </para>
 
 <para>
@@ -1061,20 +1061,21 @@
 <para>
   The first step is to configure each account for which you wish to download
   statements. Go to the Accounts view, right click on the account you wish to
-  configure, and choose <quote>Map to online account...</quote>. In case more
-  than one online banking plugin is installed on your system you will be asked
-  which one to use. For the internal OFX method select KMyMoney OFX.  A list of
-  banks will be downloaded from the Internet and a wizard will guide you through
-  choosing a bank, entering your username and password, and selecting an
-  account.  Should you find that your bank is not listed, then it may still be
-  possible to use the manual option. Your bank may be able to provide the
-  required parameters, or you may have to do some research to find them.
+  configure, and choose <guimenuitem>Map to online account...</guimenuitem>. 
+  In case more than one online banking plugin is installed on your system
+  you will be asked which one to use. For the internal OFX method select
+  <guimenuitem>KMyMoney OFX</guimenuitem>.  A list of   banks will be downloaded
+  from the Internet and a wizard will guide you through choosing a bank,
+  entering your username and password, and selecting an account.  Should you
+  find that your bank is not listed, then it may still be possible to use the
+  manual option. Your bank may be able to provide the required parameters, or
+  you may have to do some research to find them.
 </para>
 
 <para>
   Once you have an account set up with online banking, go to the ledger for that
-  account.  Then from the <quote>Account</quote> menu, choose <quote>Update
-  account...</quote>.  This will connect to your bank, and download a statement
+  account.  Then from the <guimenu>Account</guimenu> menu, choose <guimenuitem>Update
+  account...</guimenuitem>.  This will connect to your bank, and download a statement
   for the last 60 days.
 </para>
 </sect2>

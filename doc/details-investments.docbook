@@ -128,7 +128,7 @@
   </para></listitem>
 
   <listitem><para> Full name.  The friendly, readable name of the investment
-    you're creating, e.g., <quote>Advanced Micro Devices, Inc.</quote> This name is
+    you're creating, &eg;, <quote>Advanced Micro Devices, Inc.</quote> This name is
     also referred to as the security.
   </para></listitem>
 
@@ -256,46 +256,61 @@
   to the stock.  The following activities are supported:
 </para>
 
-<itemizedlist>
+<variablelist>
+  <varlistentry>
+  <term>Buy/Sell</term>
   <listitem>
     <para>
-      Buy/Sell.  Use to record purchases or sales of individual investments.
+      Use to record purchases or sales of individual investments.
       This action requires an account to transfer the funds from/to.
     </para>
   </listitem>
+  </varlistentry>
 
+  <varlistentry>
+  <term>Dividend/Yield</term>
   <listitem>
     <para>
-      Dividend/Yield.  Also known as a <quote>Cash Dividend</quote>, this action
+      Also known as a <quote>Cash Dividend</quote>, this action
       is used for when you receive an interest or dividend disbursement from
       your investment. This action requires an account to transfer the funds
       from/to.
     </para>
   </listitem>
+  </varlistentry>
 
+  <varlistentry>
+  <term>Reinvest Dividend</term>
   <listitem>
     <para>
       Reinvest Dividend.  This is a dividend where the proceeds are re-invested
       back into the investment.
     </para>
   </listitem>
+  </varlistentry>
 
+  <varlistentry>
+  <term>Add/Remove Shares</term>
   <listitem>
     <para>
-      Add/Remove Shares.  A simple increase or decrease in your balance.  This
+      A simple increase or decrease in your balance.  This
       should be used very rarely, because it's uncommon for shares to just show
       up in your account (or disappear) unless it's a purchase or a sale.
     </para>
   </listitem>
+  </varlistentry>
 
+  <varlistentry>
+  <term>Split Shares</term>
   <listitem>
     <para>
-      Split Shares.  Used when the stock is split.  Enter the ratio of the split
+      Used when the stock is split.  Enter the ratio of the split
       in the <quote>Split Ratio</quote> field.  For example, in a 3:2 split,
       enter 1.5
     </para>
   </listitem>
-</itemizedlist>
+  </varlistentry>
+</variablelist>
 </sect2>
 
 <sect2>
@@ -455,7 +470,7 @@
 <para>
   At your request, &kappname; will fetch a page from the web that contains the
   latest price for each item.  By default, prices are fetched from
-  http://finance.yahoo.com, and are subject to the terms and conditions of that
+  <ulink url="http://finance.yahoo.com">finance.yahoo.com</ulink>, and are subject to the terms and conditions of that
   site.
 </para>
 
@@ -469,7 +484,7 @@
 
 <para>
   To find the trading symbol for a security supported by Yahoo, use the
-  <quote>Symbol Lookup</quote> feature at http://finance.yahoo.com.
+  <quote>Symbol Lookup</quote> feature at <ulink url="http://finance.yahoo.com">finance.yahoo.com</ulink>.
 </para>
 </sect3>
 
@@ -511,8 +526,8 @@
 <title>Adjusting a quote</title>
 
 <para>
-  Some online sources do not report the price in a base quantity (e.g., EUR) but
-  in a fraction (e.g., Cent). Using this information as price will produce wrong
+  Some online sources do not report the price in a base quantity (&eg;, EUR) but
+  in a fraction (&eg;, Cent). Using this information as price will produce wrong
   values for your investments.
 </para>
 
@@ -598,8 +613,8 @@
   The page parser looks for a symbol, a date, and a price.  Regular expressions
   tell it how to extract those items from the page.  Please review the
   documentation for the <ulink
-  url="http://qt.nokia.com/doc/3.3/qregexp.html#1">QRegExp class</ulink> at
-  http://qt.nokia.com/doc/3.3/qregexp.html#1 for the exact makeup of the
+  url="http://qt.nokia.com/doc/4.5/qregexp.html#1">QRegExp class</ulink> at
+  http://qt.nokia.com/doc/4.5/qregexp.html#1 for the exact makeup of the
   regular expressions.  There should be exactly one capture expression,
   surrounded by parentheses, in each regexp.  The date format further tells the
   date parser the order of year, month, and day.  This date format should always

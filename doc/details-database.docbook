@@ -110,7 +110,7 @@
   doesn't exist. However, it is strongly recommended that you pre-create a
   database, because most of the products provide a number of options which may
   be relevant. One that may be of particular importance to some would be the
-  designation of the character set (e.g., UTF-8) to be used for text
+  designation of the character set (&eg;, UTF-8) to be used for text
   fields.
 </para>
 
@@ -247,7 +247,7 @@
 </para>
 
 <para>
-  To extract data, e.g., into a spreadsheet or external file, it is almost
+  To extract data, &eg;, into a spreadsheet or external file, it is almost
   invariably necessary to select linked data from more than one table. This is
   done by 'joining' the tables, using a field which is common to each. You can
   find a lot more information about how this is done from the online database
