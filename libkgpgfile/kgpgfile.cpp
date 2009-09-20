@@ -673,7 +673,7 @@ void KGPGFile::secretKeyList(QStringList& list)
 
  */
 
-#if KMM_DEBUG
+#ifdef KMM_DEBUG
 void KGPGFile::dumpBuffer(char *s, int len) const
 {
   QString data, tmp, chars;

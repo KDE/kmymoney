@@ -757,7 +757,7 @@ void KFindTransactionDlg::loadView(void)
   m_register->setFocusToTop();
   m_register->selectItem(m_register->focusItem());
 
-#if KMM_DEBUG
+#ifdef KMM_DEBUG
   m_foundText->setText(i18n("Found %1 matching transactions (D %2 / P %3 = %4)", splitCount, deposit.formatMoney("", 2), payment.formatMoney("", 2), (deposit-payment).formatMoney("", 2)));
 #else
   m_foundText->setText(i18n("Found %1 matching transactions", splitCount));
