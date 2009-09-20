@@ -1604,7 +1604,7 @@ void KHomeView::showCashFlowSummary()
   QList<MyMoneySchedule>::Iterator finished_it;
   for (finished_it=schedule.begin(); finished_it!=schedule.end();) {
     if ((*finished_it).isFinished()) {
-      finished_it = schedule.remove(finished_it);
+      finished_it = schedule.erase(finished_it);
       continue;
     }
     ++finished_it;
