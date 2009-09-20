@@ -21,6 +21,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QMap>
 #include <QObject>
 #include <QString>
 class QDate;
@@ -43,35 +44,35 @@ class MyMoneyQifProfile : public QObject
 
 public:
   MyMoneyQifProfile();
-  MyMoneyQifProfile(const QString& name);
+  explicit MyMoneyQifProfile(const QString& name);
   ~MyMoneyQifProfile();
 
-  const QString& profileName(void) const { return m_profileName; }
+  inline const QString& profileName(void) const { return m_profileName; }
   void setProfileName(const QString& name);
 
   void loadProfile(const QString& name);
   void saveProfile(void);
 
   const QDate date(const QString& datein) const;
-  QString date(const QDate& datein) const;
+  const QString date(const QDate& datein) const;
 
-  MyMoneyMoney value(const QChar& def, const QString& valuein) const;
-  QString value(const QChar& def, const MyMoneyMoney& valuein) const;
+  const MyMoneyMoney value(const QChar& def, const QString& valuein) const;
+  const QString value(const QChar& def, const MyMoneyMoney& valuein) const;
 
-  const QString& outputDateFormat(void) const { return m_dateFormat; }
-  QString inputDateFormat(void) const;
-  const QString& apostropheFormat(void) const { return m_apostropheFormat; }
-  QChar amountDecimal(const QChar& def) const;
-  QChar amountThousands(const QChar& def) const;
-  const QString& profileDescription(void) const { return m_profileDescription; }
-  const QString& profileType(void) const { return m_profileType; }
-  const QString& openingBalanceText(void) const { return m_openingBalanceText; }
-  QString accountDelimiter(void) const;
-  const QString& voidMark(void) const { return m_voidMark; }
-  const QString& filterScriptImport(void) const { return m_filterScriptImport; }
-  const QString& filterScriptExport(void) const { return m_filterScriptExport; }
-  const QString& filterFileType(void) const { return m_filterFileType; }
-  bool attemptMatchDuplicates(void) const { return m_attemptMatchDuplicates; }
+  inline const QString& outputDateFormat(void) const { return m_dateFormat; }
+  const QString inputDateFormat(void) const;
+  inline const QString& apostropheFormat(void) const { return m_apostropheFormat; }
+  const QChar amountDecimal(const QChar& def) const;
+  const QChar amountThousands(const QChar& def) const;
+  inline const QString& profileDescription(void) const { return m_profileDescription; }
+  inline const QString& profileType(void) const { return m_profileType; }
+  inline const QString& openingBalanceText(void) const { return m_openingBalanceText; }
+  const QString accountDelimiter(void) const;
+  inline const QString& voidMark(void) const { return m_voidMark; }
+  inline const QString& filterScriptImport(void) const { return m_filterScriptImport; }
+  inline const QString& filterScriptExport(void) const { return m_filterScriptExport; }
+  inline const QString& filterFileType(void) const { return m_filterFileType; }
+  inline bool attemptMatchDuplicates(void) const { return m_attemptMatchDuplicates; }
 
   /**
    * This method scans all strings contained in @a lines and tries to figure
@@ -95,7 +96,7 @@ public:
   /**
     * This method is used to determine, if a profile has been changed or not
     */
-  bool isDirty(void) const { return m_isDirty; };
+  inline bool isDirty(void) const { return m_isDirty; };
 
 public slots:
   void setProfileDescription(const QString& desc);
@@ -114,7 +115,7 @@ public slots:
   void setAttemptMatchDuplicates(bool);
 
 private:
-  QString twoDigitYear(const QChar delim, int yr) const;
+  const QString twoDigitYear(const QChar& delim, int yr) const;
   void scanNumeric(const QString& txt, QChar& decimal, QChar& thousands) const;
   void scanDate(const QString& txt) const;
 

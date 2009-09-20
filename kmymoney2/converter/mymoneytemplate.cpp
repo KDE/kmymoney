@@ -15,7 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 
-
+#include "mymoneytemplate.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -23,8 +23,7 @@
 #include <QFile>
 #include <QFileInfo>
 #include <QApplication>
-//Added by qt3to4:
-#include <Q3TextStream>
+#include <QTextStream>
 #include <QList>
 
 // ----------------------------------------------------------------------------
@@ -37,8 +36,6 @@
 #include <KTemporaryFile>
 // ----------------------------------------------------------------------------
 // Project Includes
-
-#include "mymoneytemplate.h"
 
 MyMoneyTemplate::MyMoneyTemplate() :
   m_progressCallback(0)
@@ -60,7 +57,7 @@ bool MyMoneyTemplate::loadTemplate(const KUrl& url)
   QString filename;
 
   if(!url.isValid()) {
-    qDebug("Invalid template URL '%s'", url.url().toLatin1());
+    qDebug("Invalid template URL '%s'", qPrintable(url.url()));
     return false;
   }
 
@@ -395,9 +392,9 @@ bool MyMoneyTemplate::saveTemplate(const KUrl& url)
   if(url.isLocalFile()) {
     filename = url.path();
     KSaveFile qfile(filename/*, 0600*/);
-    if(qfile.status() == 0) {
+    if(qfile.open()) {
       saveToLocalFile(&qfile);
-      if(!qfile.open()) {
+      if(!qfile.finalize()) {
         throw new MYMONEYEXCEPTION(i18n("Unable to write changes to '%1'",filename));
       }
     } else {
@@ -406,19 +403,26 @@ bool MyMoneyTemplate::saveTemplate(const KUrl& url)
   } else {
     KTemporaryFile tmpfile;
     KSaveFile qfile( tmpfile.fileName() );
-    saveToLocalFile(&qfile);
+    if(qfile.open()) {
+      saveToLocalFile(&qfile);
+      if(!qfile.finalize()) {
+        throw new MYMONEYEXCEPTION(i18n("Unable to upload to '%1'",url.url()));
+      }
+    } else {
+      throw new MYMONEYEXCEPTION(i18n("Unable to upload to '%1'",url.url()));
+    }
     if(!KIO::NetAccess::upload(tmpfile.fileName(), url, NULL))
       throw new MYMONEYEXCEPTION(i18n("Unable to upload to '%1'",url.url()));
-    //tmpfile.unlink();
   }
   return true;
 }
 
 bool MyMoneyTemplate::saveToLocalFile(KSaveFile* qfile)
 {
-  Q3TextStream stream(qfile);
-  stream.setEncoding(Q3TextStream::UnicodeUTF8);
+  QTextStream stream(qfile);
+  stream.setCodec("UTF-8");
   stream << m_doc.toString();
+  stream.flush();
 
   return true;
 }

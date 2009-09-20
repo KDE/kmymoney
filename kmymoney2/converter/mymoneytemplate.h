@@ -21,15 +21,17 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <ksavefile.h>
-#include <qdom.h>
+#include <QDomDocument>
+#include <QDomNode>
+
 class QFile;
 class Q3ListViewItem;
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kurl.h>
+#include <KSaveFile>
+#include <KUrl>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -51,7 +53,7 @@ class MyMoneyTemplate
 {
 public:
   MyMoneyTemplate();
-  MyMoneyTemplate(const KUrl& url);
+  explicit MyMoneyTemplate(const KUrl& url);
   ~MyMoneyTemplate();
 
   bool loadTemplate(const KUrl& url);
@@ -59,9 +61,9 @@ public:
   bool importTemplate(void(*callback)(int, int, const QString&));
   bool exportTemplate(void(*callback)(int, int, const QString&));
 
-  const QString& title(void) const { return m_title; }
-  const QString& shortDescription(void) const { return m_shortDesc; }
-  const QString& longDescription(void) const { return m_longDesc; }
+  inline const QString& title(void) const { return m_title; }
+  inline const QString& shortDescription(void) const { return m_shortDesc; }
+  inline const QString& longDescription(void) const { return m_longDesc; }
 
   void hierarchy(QMap<QString, Q3ListViewItem*>& list);
 

@@ -21,6 +21,7 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "mymoneystatementreader.h"
 #include <typeinfo>
 
 // ----------------------------------------------------------------------------
@@ -29,8 +30,9 @@
 #include <QFile>
 #include <QStringList>
 #include <QTimer>
-#include <q3textedit.h>
+#include <QLabel>
 #include <QList>
+#include <QVBoxLayout>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
@@ -40,13 +42,10 @@
 #include <kconfig.h>
 #include <kdebug.h>
 #include <kdialog.h>
-#include <q3vbox.h>
-#include <QLabel>
 
 // ----------------------------------------------------------------------------
 // Project Headers
 
-#include "mymoneystatementreader.h"
 #include <mymoneyfile.h>
 #include <mymoneystatement.h>
 #include <kmymoneyglobalsettings.h>
@@ -841,8 +840,8 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
 
           case MyMoneyPayee::matchKey:
             for(it_s = keys.constBegin(); it_s != keys.constEnd(); ++it_s) {
-              QRegExp exp(*it_s, !ignoreCase);
-              if(exp.search(payeename) != -1) {
+              QRegExp exp(*it_s, ignoreCase ? Qt::CaseInsensitive : Qt::CaseSensitive);
+              if(exp.indexIn(payeename) != -1) {
                 matchMap[exp.matchedLength()] = (*it_p).id();
               }
             }
@@ -911,23 +910,23 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           // during exec() if the parent of the dialog gets deleted.
           // In that case the guarded ptr will reset to 0.
           QPointer<KDialog> dialog = new KDialog(0);
-	  dialog->setCaption(i18n("Default Category for Payee"));
-	  dialog->setButtons(KDialog::Yes | KDialog::No | KDialog::Cancel);
-	  dialog->setModal(true);
-	  dialog->setButtonGuiItem(KDialog::Yes, KGuiItem(i18n("Save Category")));
-	  dialog->setButtonGuiItem(KDialog::No, KGuiItem(i18n("No Category")));
-	  dialog->setButtonGuiItem(KDialog::Cancel, KGuiItem(i18n("Abort")));
+          dialog->setCaption(i18n("Default Category for Payee"));
+          dialog->setButtons(KDialog::Yes | KDialog::No | KDialog::Cancel);
+          dialog->setModal(true);
+          dialog->setButtonGuiItem(KDialog::Yes, KGuiItem(i18n("Save Category")));
+          dialog->setButtonGuiItem(KDialog::No, KGuiItem(i18n("No Category")));
+          dialog->setButtonGuiItem(KDialog::Cancel, KGuiItem(i18n("Abort")));
 
-          Q3VBox *topcontents = new Q3VBox (dialog);
+          QVBoxLayout *topcontents = new QVBoxLayout (dialog);
           topcontents->setSpacing(KDialog::spacingHint()*2);
           topcontents->setMargin(KDialog::marginHint());
 
           //add in caption? and account combo here
-          QLabel *label1 = new QLabel( topcontents);
-          label1->setText(i18n("Please select a default category for payee '%1':",payee.name()));
+          QLabel *label1 = new QLabel(i18n("Please select a default category for payee '%1':",payee.name()));
+          topcontents->addWidget(label1);
 
-          QPointer<KMyMoneyAccountCombo> accountCombo = new KMyMoneyAccountCombo(topcontents);
-          dialog->setMainWidget(topcontents);
+          QPointer<KMyMoneyAccountCombo> accountCombo = new KMyMoneyAccountCombo(dialog);
+          dialog->setLayout(topcontents);
 
           int result = dialog->exec();
 
@@ -957,7 +956,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
 
         } catch(MyMoneyException *e) {
           KMessageBox::detailedSorry(0, i18n("Unable to add payee/receiver"),
-            (e->what() + " " + i18n("thrown in") + " " + e->file()+ ":%1").arg(e->line()));
+            (e->what() + ' ' + i18n("thrown in") + ' ' + e->file()+ ":%1").arg(e->line()));
           delete e;
 
         }
@@ -1014,7 +1013,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
             QList<MyMoneyTransaction>::ConstIterator it_trans = list.constEnd();
             if(it_trans != list.constBegin())
               --it_trans;
-            while ( it_trans != list.constEnd() )
+            while ( it_trans != list.constBegin() )
             {
               MyMoneySplit s = (*it_trans).splitByAccount(thisaccount.id());
               if ( s.value() == s1.value() )
@@ -1023,6 +1022,14 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
                 break;
               }
               --it_trans;
+            }
+            // check constBegin, just in case
+            if (it_trans == list.constBegin()) {
+              MyMoneySplit s = (*it_trans).splitByAccount(thisaccount.id());
+              if ( s.value() == s1.value() )
+              {
+                t_old = *it_trans;
+              }
             }
           }
 

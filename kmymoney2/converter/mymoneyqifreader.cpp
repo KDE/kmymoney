@@ -21,7 +21,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <iostream>
+#include "mymoneyqifreader.h"
 
 // ----------------------------------------------------------------------------
 // QT Headers
@@ -29,11 +29,9 @@
 #include <QFile>
 #include <QStringList>
 #include <QTimer>
-#include <q3textedit.h>
 #include <QRegExp>
 #include <QBuffer>
 //Added by qt3to4:
-#include <Q3ValueList>
 #include <QByteArray>
 
 // ----------------------------------------------------------------------------
@@ -50,7 +48,6 @@
 // ----------------------------------------------------------------------------
 // Project Headers
 
-#include "mymoneyqifreader.h"
 #include "mymoneyfile.h"
 #include "kaccountselectdlg.h"
 #include "kmymoney2.h"
@@ -75,7 +72,7 @@ class MyMoneyQifReader::Private {
       mapCategories(true)
     {}
 
-    QString accountTypeToQif(MyMoneyAccount::accountTypeE type) const;
+    const QString accountTypeToQif(MyMoneyAccount::accountTypeE type) const;
 
     /**
      * finalize the current statement and add it to the statement list
@@ -88,7 +85,7 @@ class MyMoneyQifReader::Private {
      * Converts the QIF specific N-record of investment transactions into
      * a category name
      */
-    QString typeToAccountName(const QString& type) const;
+    const QString typeToAccountName(const QString& type) const;
 
     /**
      * Converts the QIF reconcile state to the KMyMoney reconcile state
@@ -107,7 +104,7 @@ class MyMoneyQifReader::Private {
     /**
      * the list of all statements to be sent to MyMoneyStatementReader
      */
-    Q3ValueList<MyMoneyStatement> statements;
+    QList<MyMoneyStatement> statements;
 
     /**
      * a list of already used hashes in this file
@@ -141,7 +138,7 @@ void MyMoneyQifReader::Private::finishStatement(void)
   st.m_eType = (transactionType == MyMoneyQifReader::EntryTransaction) ? MyMoneyStatement::etCheckings : MyMoneyStatement::etInvestment;
 }
 
-QString MyMoneyQifReader::Private::accountTypeToQif(MyMoneyAccount::accountTypeE type) const
+const QString MyMoneyQifReader::Private::accountTypeToQif(MyMoneyAccount::accountTypeE type) const
 {
   QString rc = "Bank";
 
@@ -167,7 +164,7 @@ QString MyMoneyQifReader::Private::accountTypeToQif(MyMoneyAccount::accountTypeE
   return rc;
 }
 
-QString MyMoneyQifReader::Private::typeToAccountName(const QString& type) const
+const QString MyMoneyQifReader::Private::typeToAccountName(const QString& type) const
 {
   if(type == "reinvdiv")
     return i18nc("Category name", "Reinvested dividend");
@@ -219,7 +216,7 @@ bool MyMoneyQifReader::Private::isTransfer(QString& tmp, const QString& leftDeli
   QRegExp exp(QString("\\%1(.*)\\%2(.*)").arg(leftDelim, rightDelim));
 
   bool rc;
-  if((rc = (exp.search(tmp) != -1)) == true) {
+  if((rc = (exp.indexIn(tmp) != -1)) == true) {
     tmp = exp.cap(1)+exp.cap(2);
     tmp = tmp.trimmed();
   }
@@ -253,10 +250,10 @@ MyMoneyQifReader::MyMoneyQifReader() :
   m_warnedSecurity = false;
   m_warnedPrice = false;
 
-  connect(&m_filter, SIGNAL(wroteStdin(K3Process*)), this, SLOT(slotSendDataToFilter()));
-  connect(&m_filter, SIGNAL(receivedStdout(K3Process*, char*, int)), this, SLOT(slotReceivedDataFromFilter(K3Process*, char*, int)));
-  connect(&m_filter, SIGNAL(processExited(K3Process*)), this, SLOT(slotImportFinished()));
-  connect(&m_filter, SIGNAL(receivedStderr(K3Process*, char*, int)), this, SLOT(slotReceivedErrorFromFilter(K3Process*, char*, int)));
+  connect(&m_filter, SIGNAL(bytesWritten(qint64)), this, SLOT(slotSendDataToFilter()));
+  connect(&m_filter, SIGNAL(readyReadStandardOutput()), this, SLOT(slotReceivedDataFromFilter()));
+  connect(&m_filter, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(slotImportFinished()));
+  connect(&m_filter, SIGNAL(readyReadStandardError()), this, SLOT(slotReceivedErrorFromFilter()));
 }
 
 MyMoneyQifReader::~MyMoneyQifReader()
@@ -286,29 +283,34 @@ void MyMoneyQifReader::slotSendDataToFilter(void)
   Q_LONG len;
 
   if(m_file->atEnd()) {
-    // m_filter.flushStdin();
-    m_filter.closeStdin();
+    m_filter.closeWriteChannel();
   } else {
     len = m_file->read(m_buffer, sizeof(m_buffer));
     if(len == -1) {
       qWarning("Failed to read block from QIF import file");
-      m_filter.closeStdin();
+      m_filter.closeWriteChannel();
       m_filter.kill();
     } else {
-      m_filter.writeStdin(m_buffer, len);
+      m_filter.write(m_buffer, len);
     }
   }
 }
 
-void MyMoneyQifReader::slotReceivedErrorFromFilter(K3Process* /* proc */, char *buff, int len)
+void MyMoneyQifReader::slotReceivedErrorFromFilter()
 {
-  QByteArray data;
-  data.duplicate(buff, len);
-  qWarning("%s",static_cast<const char*>(data));
+  qWarning("%s",qPrintable(QString(m_filter.readAllStandardError())));
 }
 
-void MyMoneyQifReader::slotReceivedDataFromFilter(K3Process* /* proc */, char *buff, int len)
+void MyMoneyQifReader::slotReceivedDataFromFilter()
 {
+  parseReceivedData(m_filter.readAllStandardOutput());
+}
+
+void MyMoneyQifReader::parseReceivedData(const QByteArray& data)
+{
+  const char* buff = data.data();
+  int len = data.length();
+
   m_pos += len;
   // signalProgress(m_pos, 0);
 
@@ -335,7 +337,7 @@ void MyMoneyQifReader::slotImportFinished(void)
   if(!m_lineBuffer.isEmpty()) {
     m_qifLines << QString::fromUtf8(m_lineBuffer.trimmed());
   }
-  qDebug("Read %d bytes", m_pos);
+  qDebug("Read %ld bytes", m_pos);
   QTimer::singleShot(0, this, SLOT(slotProcessData()));
 }
 
@@ -371,7 +373,7 @@ void MyMoneyQifReader::slotProcessData(void)
   for(it = m_qifLines.begin(); m_userAbort == false && it != m_qifLines.end(); ++it) {
     ++m_linenumber;
     // qDebug("Proc: '%s'", (*it).data());
-    if((*it).startsWith("!")) {
+    if((*it).startsWith('!')) {
       processQifSpecial(*it);
       m_qifEntry.clear();
     } else if(*it == "^") {
@@ -402,7 +404,7 @@ bool MyMoneyQifReader::startImport(void)
   m_userAbort = false;
   m_pos = 0;
   m_linenumber = 0;
-  m_filename = QString::null;
+  m_filename.clear();
   m_data.clear();
 
   if(!KIO::NetAccess::download(m_url, m_filename, NULL)) {
@@ -424,24 +426,25 @@ bool MyMoneyQifReader::startImport(void)
       if(len == -1) {
         qWarning("Failed to read block from QIF import file");
       } else {
-        slotReceivedDataFromFilter(0, m_buffer, len);
+        parseReceivedData(QByteArray(m_buffer, len));
       }
     }
     slotImportFinished();
 
 #else
     // start filter process, use 'cat -' as the default filter
-    m_filter.clearArguments();
+    m_filter.clearProgram();
     if(m_qifProfile.filterScriptImport().isEmpty()) {
       m_filter << "cat";
       m_filter << "-";
     } else {
-      m_filter << QStringList::split(" ", m_qifProfile.filterScriptImport(), true);
+      m_filter << m_qifProfile.filterScriptImport().split(' ', QString::KeepEmptyParts);
     }
     m_entryType = EntryUnknown;
 
-    if(m_filter.start(K3Process::NotifyOnExit, K3Process::All)) {
-      m_filter.resume();
+    m_filter.setOutputChannelMode(KProcess::MergedChannels);
+    m_filter.start();
+    if(m_filter.waitForStarted()) {
       signalProgress(0, m_file->size(), i18n("Reading QIF ..."));
       slotSendDataToFilter();
       rc = true;
@@ -477,7 +480,7 @@ bool MyMoneyQifReader::finishImport(void)
   rc = !m_userAbort;
 
 #else
-  if(!m_filter.isRunning()) {
+  if(QProcess::Running != m_filter.state()) {
     delete m_file;
     m_file = 0;
 
@@ -494,7 +497,7 @@ bool MyMoneyQifReader::finishImport(void)
     m_accountTranslation.clear();
 
     signalProgress(-1, -1);
-    rc = !m_userAbort && m_filter.normalExit();
+    rc = !m_userAbort && KProcess::NormalExit == m_filter.exitStatus();
   } else {
     qWarning("MyMoneyQifReader::finishImport() must not be called while the filter\n\tprocess is still running.");
   }
@@ -514,7 +517,7 @@ bool MyMoneyQifReader::finishImport(void)
   dlg.show();
   kapp->processEvents();
   MyMoneyFile* file = MyMoneyFile::instance();
-  Q3ValueList<MyMoneyTransaction>::iterator it = m_transactionCache.begin();
+  QList<MyMoneyTransaction>::iterator it = m_transactionCache.begin();
   MyMoneyFileTransaction ft;
   try
   {
@@ -540,7 +543,7 @@ bool MyMoneyQifReader::finishImport(void)
   }
 #endif
   // Now to import the statements
-  Q3ValueList<MyMoneyStatement>::const_iterator it_st;
+  QList<MyMoneyStatement>::const_iterator it_st;
   for(it_st = d->statements.begin(); it_st != d->statements.end(); ++it_st)
     kmymoney2->slotStatementImport(*it_st);
   return rc;
@@ -678,13 +681,13 @@ void MyMoneyQifReader::processQifEntry(void)
   }
 }
 
-const QString MyMoneyQifReader::extractLine(const QChar id, int cnt)
+const QString MyMoneyQifReader::extractLine(const QChar& id, int cnt)
 {
   QStringList::ConstIterator it;
 
   m_extractedLine = -1;
   for(it = m_qifEntry.constBegin(); it != m_qifEntry.constEnd(); ++it) {
-    m_extractedLine++;
+    ++m_extractedLine;
     if((*it)[0] == id) {
       if(cnt-- == 1) {
         if((*it).mid(1).isEmpty())
@@ -697,7 +700,7 @@ const QString MyMoneyQifReader::extractLine(const QChar id, int cnt)
   return QString();
 }
 
-void MyMoneyQifReader::extractSplits(Q3ValueList<qSplit>& listqSplits) const
+void MyMoneyQifReader::extractSplits(QList<qSplit>& listqSplits) const
 {
 //     *** With apologies to QString MyMoneyQifReader::extractLine ***
 
@@ -870,7 +873,7 @@ void MyMoneyQifReader::processCategoryEntry(void)
   }
 }
 
-QString MyMoneyQifReader::transferAccount(QString name, bool useBrokerage)
+const QString MyMoneyQifReader::transferAccount(const QString& name, bool useBrokerage)
 {
   QString accountId;
   QStringList tmpEntry = m_qifEntry;   // keep temp copies
@@ -886,9 +889,8 @@ QString MyMoneyQifReader::transferAccount(QString name, bool useBrokerage)
   // to switch to the brokerage account instead.
   MyMoneyAccount acc = MyMoneyFile::instance()->account(accountId);
   if(useBrokerage && (acc.accountType() == MyMoneyAccount::Investment)) {
-    name = acc.brokerageName();
     m_qifEntry.clear();               // and construct a temp entry to create/search the account
-    m_qifEntry << QString("N%1").arg(name);
+    m_qifEntry << QString("N%1").arg(acc.brokerageName());
     m_qifEntry << QString("Tunknown");
     m_qifEntry << QString("D%1").arg(i18n("Autogenerated by QIF importer"));
     accountId = processAccountEntry(false);
@@ -1047,7 +1049,7 @@ void MyMoneyQifReader::processTransactionEntry(void)
   }
 
   tmp = extractLine('L');
-  pos = tmp.findRev("--");
+  pos = tmp.lastIndexOf("--");
   if(tmp.left(1) == m_qifProfile.accountDelimiter().left(1)) {
     // it's a transfer, so we wipe the memo
 //   tmp = "";         why??
@@ -1143,12 +1145,12 @@ void MyMoneyQifReader::processTransactionEntry(void)
         if ( account.id() == m_account.id() )
         {
           kDebug(0) << "Line " << m_linenumber << ": Cannot transfer to the same account. Transfer ignored.";
-          accountId = QString();
+          accountId.clear();
         }
 
       } catch (MyMoneyException *e) {
         kDebug(0) << "Line " << m_linenumber << ": Account with id " << accountId.data() << " not found";
-        accountId = QString();
+        accountId.clear();
         delete e;
       }
     }
@@ -1161,7 +1163,7 @@ void MyMoneyQifReader::processTransactionEntry(void)
 
   } else {
     // split transaction
-    Q3ValueList<qSplit> listqSplits;
+    QList<qSplit> listqSplits;
 
     extractSplits(listqSplits);   //      ****** ensure each field is ******
                                   //      *   attached to correct split    *
@@ -1179,7 +1181,7 @@ void MyMoneyQifReader::processTransactionEntry(void)
         accountId = transferAccount(tmp, false);
 
       } else {
-        pos = tmp.findRev("--");
+        pos = tmp.lastIndexOf("--");
         if(pos != -1) {
 ///          t.setValue("Dialog", tmp.mid(pos+2));
           tmp = tmp.left(pos);
@@ -1202,12 +1204,12 @@ void MyMoneyQifReader::processTransactionEntry(void)
           if ( account.id() == m_account.id() )
           {
             kDebug(0) << "Line " << m_linenumber << ": Cannot transfer to the same account. Transfer ignored.";
-            accountId = QString();
+            accountId.clear();
           }
 
         } catch (MyMoneyException *e) {
           kDebug(0) << "Line " << m_linenumber << ": Account with id " << accountId.data() << " not found";
-          accountId = QString();
+          accountId.clear();
           delete e;
         }
       }
@@ -1261,8 +1263,6 @@ void MyMoneyQifReader::processInvestmentTransactionEntry(void)
   "_InterestIncome", etc.
 
   */
-
-  MyMoneyFile* file = MyMoneyFile::instance();
 
   MyMoneyStatement::Transaction tr;
   d->st.m_eType = MyMoneyStatement::etInvestment;
@@ -1430,7 +1430,7 @@ void MyMoneyQifReader::processInvestmentTransactionEntry(void)
 
   // remove trailing X, which seems to have no purpose (?!)
   bool xAction = false;
-  if ( action.endsWith("x") ) {
+  if ( action.endsWith('x') ) {
     action = action.left( action.length() - 1 );
     xAction = true;
   }
@@ -1898,7 +1898,7 @@ const QString MyMoneyQifReader::findOrCreateExpenseAccount(const QString& search
   return result;
 }
 
-QString MyMoneyQifReader::checkCategory(const QString& name, const MyMoneyMoney value, const MyMoneyMoney value2)
+const QString MyMoneyQifReader::checkCategory(const QString& name, const MyMoneyMoney& value, const MyMoneyMoney& value2)
 {
   QString accountId;
   MyMoneyFile *file = MyMoneyFile::instance();
@@ -1960,7 +1960,7 @@ QString MyMoneyQifReader::checkCategory(const QString& name, const MyMoneyMoney 
   return accountId;
 }
 
-QString MyMoneyQifReader::processAccountEntry(bool resetAccountId)
+const QString MyMoneyQifReader::processAccountEntry(bool resetAccountId)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
@@ -2274,7 +2274,7 @@ void MyMoneyQifReader::processPriceEntry(void)
   QRegExp priceExp("\"(.*)\",(.*),\"(.*)\"");
   while ( it_line != m_qifEntry.constEnd() )
   {
-    if(priceExp.search(*it_line) != -1) {
+    if(priceExp.indexIn(*it_line) != -1) {
       MyMoneyStatement::Price price;
       price.m_strSecurity = priceExp.cap(1);
       QString pricestr = priceExp.cap(2);

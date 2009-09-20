@@ -19,13 +19,14 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
+
+#include "mymoneyqifwriter.h"
+
 // ----------------------------------------------------------------------------
 // QT Headers
 
 #include <QFile>
-#include <q3textstream.h>
-//Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
@@ -36,7 +37,6 @@
 // ----------------------------------------------------------------------------
 // Project Headers
 
-#include "mymoneyqifwriter.h"
 #include "mymoneyfile.h"
 
 MyMoneyQifWriter::MyMoneyQifWriter()
@@ -56,7 +56,7 @@ void MyMoneyQifWriter::write(const QString& filename, const QString& profile,
 
   QFile qifFile(filename);
   if(qifFile.open(QIODevice::WriteOnly)) {
-    Q3TextStream s(&qifFile);
+    QTextStream s(&qifFile);
 
     try {
       if(categoryData) {
@@ -82,7 +82,7 @@ void MyMoneyQifWriter::write(const QString& filename, const QString& profile,
   }
 }
 
-void MyMoneyQifWriter::writeAccountEntry(Q3TextStream &s, const QString& accountId, const QDate& startDate, const QDate& endDate)
+void MyMoneyQifWriter::writeAccountEntry(QTextStream &s, const QString& accountId, const QDate& startDate, const QDate& endDate)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
   MyMoneyAccount account;
@@ -90,7 +90,7 @@ void MyMoneyQifWriter::writeAccountEntry(Q3TextStream &s, const QString& account
   account = file->account(accountId);
   MyMoneyTransactionFilter filter(accountId);
   filter.setDateFilter(startDate, endDate);
-  Q3ValueList<MyMoneyTransaction> list = file->transactionList(filter);
+  QList<MyMoneyTransaction> list = file->transactionList(filter);
   QString openingBalanceTransactionId;
 
   s << "!Type:" << m_qifProfile.profileType() << endl;
@@ -118,7 +118,7 @@ void MyMoneyQifWriter::writeAccountEntry(Q3TextStream &s, const QString& account
   s << endl;
   s << "^" << endl;
 
-  Q3ValueList<MyMoneyTransaction>::ConstIterator it;
+  QList<MyMoneyTransaction>::ConstIterator it;
   signalProgress(0, list.count());
   int count = 0;
   for(it = list.begin(); it != list.end(); ++it) {
@@ -129,7 +129,7 @@ void MyMoneyQifWriter::writeAccountEntry(Q3TextStream &s, const QString& account
   }
 }
 
-void MyMoneyQifWriter::writeCategoryEntries(Q3TextStream &s)
+void MyMoneyQifWriter::writeCategoryEntries(QTextStream &s)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
   MyMoneyAccount income;
@@ -149,7 +149,7 @@ void MyMoneyQifWriter::writeCategoryEntries(Q3TextStream &s)
   }
 }
 
-void MyMoneyQifWriter::writeCategoryEntry(Q3TextStream &s, const QString& accountId, const QString& leadIn)
+void MyMoneyQifWriter::writeCategoryEntry(QTextStream &s, const QString& accountId, const QString& leadIn)
 {
   MyMoneyAccount acc = MyMoneyFile::instance()->account(accountId);
   QString name = acc.name();
@@ -166,7 +166,7 @@ void MyMoneyQifWriter::writeCategoryEntry(Q3TextStream &s, const QString& accoun
   }
 }
 
-void MyMoneyQifWriter::writeTransactionEntry(Q3TextStream &s, const MyMoneyTransaction& t, const QString& accountId)
+void MyMoneyQifWriter::writeTransactionEntry(QTextStream &s, const MyMoneyTransaction& t, const QString& accountId)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
   MyMoneySplit split = t.splitByAccount(accountId);
@@ -203,7 +203,7 @@ void MyMoneyQifWriter::writeTransactionEntry(Q3TextStream &s, const MyMoneyTrans
     s << "P" << payee.name() << endl;
   }
 
-  Q3ValueList<MyMoneySplit> list = t.splits();
+  QList<MyMoneySplit> list = t.splits();
   if(list.count() > 1) {
     MyMoneySplit sp = t.splitByAccount(accountId, false);
     MyMoneyAccount acc = file->account(sp.accountId());
@@ -216,7 +216,7 @@ void MyMoneyQifWriter::writeTransactionEntry(Q3TextStream &s, const MyMoneyTrans
       s << "L" << file->accountToCategory(sp.accountId()) << endl;
     }
     if(list.count() > 2) {
-      Q3ValueList<MyMoneySplit>::ConstIterator it;
+      QList<MyMoneySplit>::ConstIterator it;
       for(it = list.begin(); it != list.end(); ++it) {
         if(!((*it) == split)) {
           writeSplitEntry(s, *it);
@@ -227,7 +227,7 @@ void MyMoneyQifWriter::writeTransactionEntry(Q3TextStream &s, const MyMoneyTrans
   s << "^" << endl;
 }
 
-void MyMoneyQifWriter::writeSplitEntry(Q3TextStream& s, const MyMoneySplit& split)
+void MyMoneyQifWriter::writeSplitEntry(QTextStream& s, const MyMoneySplit& split)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 

@@ -26,18 +26,18 @@
 // ----------------------------------------------------------------------------
 // QT Headers
 
+#include <QList>
 #include <QObject>
 #include <QString>
 #include <QStringList>
 //Added by qt3to4:
 #include <QByteArray>
-#include <Q3ValueList>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
 
 #include <ktemporaryfile.h>
-#include <k3process.h>
+#include <kprocess.h>
 #include <kurl.h>
 
 // ----------------------------------------------------------------------------
@@ -139,7 +139,7 @@ public:
 
   void setCategoryMapping(bool map);
 
-  const MyMoneyAccount& account() const { return m_account; };
+  inline const MyMoneyAccount& account() const { return m_account; };
 
   void setProgressCallback(void(*callback)(int, int, const QString&));
 
@@ -177,7 +177,7 @@ private:
     *
     * The id of the account will be returned.
     */
-  QString processAccountEntry(bool resetAccountId = true);
+  const QString processAccountEntry(bool resetAccountId = true);
 
   /**
     * This method scans the m_qifEntry object as a category record specified
@@ -236,7 +236,7 @@ private:
     *            or the account was not found and not created the
     *            return value will be "".
     */
-  QString checkCategory(const QString& name, const MyMoneyMoney value, const MyMoneyMoney value2);
+  const QString checkCategory(const QString& name, const MyMoneyMoney& value, const MyMoneyMoney& value2);
 
   /**
     * This method extracts the line beginning with the letter @p id
@@ -249,14 +249,14 @@ private:
     * @return QString with the remainder of the line or empty if
     *         @p id is not found in @p lines
     */
-  const QString extractLine(const QChar id, int cnt = 1);
+  const QString extractLine(const QChar& id, int cnt = 1);
 
   /**
     * This method examines each line in the QStringList object @p m_qifEntry,
     * searching for split entries, which it extracts into a struct qSplit and
     * stores all splits found in @p listqSplits .
     */
-  void extractSplits(Q3ValueList<qSplit>& listqSplits) const;
+  void extractSplits(QList<qSplit>& listqSplits) const;
 
   enum SelectCreateMode {
     Create = 0,
@@ -326,7 +326,7 @@ private:
    * (the default), the id of the corresponding brokerage account will be
    * returned. In case an account does not exist, it will be created.
    */
-  QString transferAccount(QString name, bool useBrokerage = true);
+  const QString transferAccount(const QString& name, bool useBrokerage = true);
 
   // void processQifLine(void);
   void createOpeningBalance(MyMoneyAccount::_accountTypeE accType = MyMoneyAccount::Checkings);
@@ -339,10 +339,8 @@ signals:
 
 private slots:
   void slotSendDataToFilter(void);
-  void slotReceivedDataFromFilter(K3Process* /* proc */, char *buff, int len);
-  void slotReceivedErrorFromFilter(K3Process* /* proc */, char *buff, int len);
-  // void slotReceivedDataFromFilter(void);
-  // void slotReceivedErrorFromFilter(void);
+  void slotReceivedDataFromFilter(void);
+  void slotReceivedErrorFromFilter(void);
   void slotProcessData(void);
 
   /**
@@ -353,12 +351,16 @@ private slots:
 
 
 private:
+
+  void parseReceivedData(const QByteArray& data);
+
+
   /// \internal d-pointer class.
   class Private;
   /// \internal d-pointer instance.
   Private* const d;
 
-  K3Process                m_filter;
+  KProcess                m_filter;
   QString                 m_filename;
   KUrl                    m_url;
   MyMoneyQifProfile       m_qifProfile;
@@ -370,7 +372,7 @@ private:
   QMap<QString, QString>  m_investmentMap;
   QFile                   *m_file;
   char                    m_buffer[1024];
-  QByteArray                m_lineBuffer;
+  QByteArray              m_lineBuffer;
   QStringList             m_qifEntry;
   int                     m_extractedLine;
   QString                 m_qifLine;
@@ -385,9 +387,9 @@ private:
   bool                    m_warnedInvestment;
   bool                    m_warnedSecurity;
   bool                    m_warnedPrice;
-  Q3ValueList<MyMoneyTransaction> m_transactionCache;
+  QList<MyMoneyTransaction> m_transactionCache;
 
-  Q3ValueList<QByteArray>  m_data;
+  QList<QByteArray>  m_data;
 
   void (*m_progressCallback)(int, int, const QString&);
 

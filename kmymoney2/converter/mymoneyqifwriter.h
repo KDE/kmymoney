@@ -28,8 +28,7 @@
 
 #include <QObject>
 #include <QDateTime>
-//Added by qt3to4:
-#include <Q3TextStream>
+#include <QTextStream>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
@@ -89,7 +88,7 @@ private:
     * @param startDate date from which entries are written
     * @param endDate date until which entries are written
     */
-  void writeAccountEntry(Q3TextStream& s, const QString& accountId, const QDate& startDate, const QDate& endDate);
+  void writeAccountEntry(QTextStream& s, const QString& accountId, const QDate& startDate, const QDate& endDate);
 
   /**
     * This method writes the category entries to the stream
@@ -98,7 +97,7 @@ private:
     *
     * @param s reference to textstream
     */
-  void writeCategoryEntries(Q3TextStream& s);
+  void writeCategoryEntries(QTextStream& s);
 
   /**
     * This method writes the category entry for account with
@@ -109,10 +108,10 @@ private:
     * @param accountId id of the account to be written
     * @param leadIn constant text that will be prepended to the account's name
     */
-  void writeCategoryEntry(Q3TextStream& s, const QString& accountId, const QString& leadIn);
+  void writeCategoryEntry(QTextStream& s, const QString& accountId, const QString& leadIn);
 
-  void writeTransactionEntry(Q3TextStream &s, const MyMoneyTransaction& t, const QString& accountId);
-  void writeSplitEntry(Q3TextStream &s, const MyMoneySplit& t);
+  void writeTransactionEntry(QTextStream &s, const MyMoneyTransaction& t, const QString& accountId);
+  void writeSplitEntry(QTextStream &s, const MyMoneySplit& t);
 
 signals:
   /**
