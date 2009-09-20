@@ -36,7 +36,7 @@ class QLabel;
 #include <kapplication.h>
 #include <kxmlguiwindow.h>
 #include <kaction.h>
-#include <k3process.h>
+#include <kprocess.h>
 #include <kurl.h>
 #include <kfile.h>
 #include <krecentfilesaction.h>
@@ -1229,7 +1229,7 @@ private:
     */
   bool    m_backupMount;
 
-  K3Process proc;
+  KProcess proc;
 
   /// A pointer to the view holding the tabs.
   KMyMoneyView *myMoneyView;

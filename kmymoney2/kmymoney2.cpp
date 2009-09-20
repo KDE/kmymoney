@@ -248,7 +248,7 @@ KMyMoney2App::KMyMoney2App(QWidget * /*parent*/ , const char* name) :
 
   ::timetrace("done");
 
-  connect(&proc,SIGNAL(processExited(K3Process *)),this,SLOT(slotProcessExited()));
+  connect(&proc, SIGNAL(finished (int, QProcess::ExitStatus)), this, SLOT(slotProcessExited()));
 
   // force to show the home page if the file is closed
   connect(action("view_show_transaction_detail"), SIGNAL(toggled(bool)), myMoneyView, SLOT(slotShowTransactionDetail(bool)));
@@ -1899,13 +1899,13 @@ void KMyMoney2App::slotSaveAccountTemplates(void)
   if(!newName.isEmpty())
   {
     // find last . delimiter
-    int nLoc = newName.findRev('.');
+    int nLoc = newName.lastIndexOf('.');
     if(nLoc != -1)
     {
       QString strExt, strTemp;
       strTemp = newName.left(nLoc + 1);
       strExt = newName.right(newName.length() - (nLoc + 1));
-      if((strExt.find("kmt", 0, false) == -1))
+      if((strExt.indexOf("kmt", 0, Qt::CaseInsensitive) == -1))
       {
         strTemp.append("kmt");
         //append to make complete file name
@@ -2264,7 +2264,8 @@ void KMyMoney2App::slotUpdateConfiguration(void)
   }
   // start timer if turned on and needed but not running
   if(!m_autoSaveTimer->isActive() && m_autoSaveEnabled && myMoneyView->dirty()) {
-    m_autoSaveTimer->start(m_autoSavePeriod * 60 * 1000, true);
+    m_autoSaveTimer->setSingleShot(true);
+    m_autoSaveTimer->start(m_autoSavePeriod * 60 * 1000);
   }
 }
 
@@ -2337,13 +2338,13 @@ void KMyMoney2App::slotFileBackup(void)
   {
 
     m_backupMount = backupDlg->mountCheckBox->isChecked();
-    proc.clearArguments();
+    proc.clearProgram();
     m_backupState = BACKUP_MOUNTING;
     m_mountpoint = backupDlg->txtMountPoint->text();
 
     if (m_backupMount) {
       progressCallback(0, 300, i18n("Mounting %1",m_mountpoint));
-      proc << "mount";
+      proc.setProgram("mount");
       proc << m_mountpoint;
       proc.start();
 
@@ -2351,7 +2352,7 @@ void KMyMoney2App::slotFileBackup(void)
       // If we don't have to mount a device, we just issue
       // a dummy command to start the copy operation
       progressCallback(0, 300, "");
-      proc << "echo";
+      proc.setProgram("echo");
       proc.start();
     }
 
@@ -2367,8 +2368,8 @@ void KMyMoney2App::slotProcessExited(void)
   switch(m_backupState) {
     case BACKUP_MOUNTING:
 
-      if(proc.normalExit() && proc.exitStatus() == 0) {
-        proc.clearArguments();
+      if(proc.exitStatus() == QProcess::NormalExit && proc.exitCode() == 0) {
+        proc.clearProgram();
         QString today;
         today.sprintf("-%04d-%02d-%02d.kmy",
           QDate::currentDate().year(),
@@ -2387,8 +2388,8 @@ void KMyMoney2App::slotProcessExited(void)
 
             if (m_backupMount) {
               progressCallback(250, 0, i18n("Unmounting %1",m_mountpoint));
-              proc.clearArguments();
-              proc << "umount";
+              proc.clearProgram();
+              proc.setProgram("umount");
               proc << m_mountpoint;
               m_backupState = BACKUP_UNMOUNTING;
               proc.start();
@@ -2413,8 +2414,8 @@ void KMyMoney2App::slotProcessExited(void)
         m_backupResult = 1;
         if (m_backupMount) {
           progressCallback(250, 0, i18n("Unmounting %1",m_mountpoint));
-          proc.clearArguments();
-          proc << "umount";
+          proc.clearProgram();
+          proc.setProgram("umount");
           proc << m_mountpoint;
           m_backupState = BACKUP_UNMOUNTING;
           proc.start();
@@ -2428,12 +2429,12 @@ void KMyMoney2App::slotProcessExited(void)
       break;
 
     case BACKUP_COPYING:
-      if(proc.normalExit() && proc.exitStatus() == 0) {
+      if(proc.exitStatus() == QProcess::NormalExit && proc.exitCode() == 0) {
 
         if (m_backupMount) {
           progressCallback(250, 0, i18n("Unmounting %1",m_mountpoint));
-          proc.clearArguments();
-          proc << "umount";
+          proc.clearProgram();
+          proc.setProgram("umount");
           proc << m_mountpoint;
           m_backupState = BACKUP_UNMOUNTING;
           proc.start();
@@ -2451,8 +2452,8 @@ void KMyMoney2App::slotProcessExited(void)
 
         if (m_backupMount) {
           progressCallback(250, 0, i18n("Unmounting %1",m_mountpoint));
-          proc.clearArguments();
-          proc << "umount";
+          proc.clearProgram();
+          proc.setProgram("umount");
           proc << m_mountpoint;
           m_backupState = BACKUP_UNMOUNTING;
           proc.start();
@@ -2468,7 +2469,7 @@ void KMyMoney2App::slotProcessExited(void)
 
 
     case BACKUP_UNMOUNTING:
-      if(proc.normalExit() && proc.exitStatus() == 0) {
+      if(proc.exitStatus() == QProcess::NormalExit && proc.exitCode() == 0) {
 
         progressCallback(300, 0, i18nc("Backup done", "Done"));
         if(m_backupResult == 0)
@@ -2666,7 +2667,7 @@ const MyMoneyAccount& KMyMoney2App::findAccount(const MyMoneyAccount& acc, const
       int pos;
       // check for ':' in the name and use it as separator for a hierarchy
       QString name = acc.name();
-      while((pos = name.find(MyMoneyFile::AccountSeperator)) != -1) {
+      while((pos = name.indexOf(MyMoneyFile::AccountSeperator)) != -1) {
         QString part = name.left(pos);
         QString remainder = name.mid(pos+1);
         const MyMoneyAccount& existingAccount = file->subAccountByName(parentAccount, part);
@@ -6017,7 +6018,8 @@ void KMyMoney2App::slotDataChanged(void)
   // As this method is called every time the MyMoneyFile instance
   // notifies a modification, it's the perfect place to start the timer if needed
   if (m_autoSaveEnabled && !m_autoSaveTimer->isActive()) {
-    m_autoSaveTimer->start(m_autoSavePeriod * 60 * 1000, true);  //miliseconds
+    m_autoSaveTimer->setSingleShot(true);
+    m_autoSaveTimer->start(m_autoSavePeriod * 60 * 1000);  //miliseconds
   }
   updateCaption();
 }
@@ -6327,7 +6329,8 @@ void KMyMoney2App::slotAutoSave(void)
     //it the file is not saved, reinitializes the countdown.
     if (myMoneyView->dirty() && m_autoSaveEnabled) {
       if (!slotFileSave() && m_autoSavePeriod > 0) {
-        m_autoSaveTimer->start(m_autoSavePeriod * 60 * 1000, true);
+        m_autoSaveTimer->setSingleShot(true);
+        m_autoSaveTimer->start(m_autoSavePeriod * 60 * 1000);
       }
     }
 
