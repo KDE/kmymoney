@@ -35,7 +35,6 @@
 
 #include <q3valuevector.h>
 #include <qwidget.h>
-//Added by qt3to4:
 #include <QVBoxLayout>
 #include <QList>
 
@@ -60,15 +59,10 @@ class Q3ListViewItem;
 #include "pivottable.h"
 #include "querytable.h"
 #include "../widgets/kmymoneyreportcontrolimpl.h"
-//FIXME: Port to KDE4
-//#include "kreportchartview.h"
+#include "kreportchartview.h"
 #include "kmymoneyview.h"
 
 class MyMoneyReport;
-
-
-
-
 
 /**
   * Displays a page where reports can be placed.
@@ -94,8 +88,7 @@ public:
   {
   private:
     KHTMLPart* m_part;
-#warning  #Port to KDE4
-//    reports::KReportChartView* m_chartView;
+    reports::KReportChartView* m_chartView;
     kMyMoneyReportControl* m_control;
     QVBoxLayout* m_layout;
     MyMoneyReport m_report;

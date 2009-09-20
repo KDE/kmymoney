@@ -378,7 +378,7 @@ void QueryTable::init(void)
     m_postcolumns = "balance";
 
   TableRow::setSortCriteria(sort);
-#warning "port to kde4"
+
   qSort(m_rows);
 }
 

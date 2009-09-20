@@ -489,12 +489,10 @@ void KMyMoney2App::initActions(void)
   account_transaction_report->setIcon(KIcon("view_info"));
   connect(account_transaction_report, SIGNAL(triggered()), this, SLOT(slotAccountTransactionReport()));
 
-#ifdef HAVE_KDCHART
   KAction *account_chart = actionCollection()->addAction("account_chart");
   account_chart->setText(i18n("Show balance chart..."));
   account_chart->setIcon(KIcon("report"));
   connect(account_chart, SIGNAL(triggered()), this, SLOT(slotAccountChart()));
-#endif
 
   KAction *account_online_map = actionCollection()->addAction("account_online_map");
   account_online_map->setText(i18n("Map to online account"));
@@ -2057,13 +2055,11 @@ void KMyMoney2App::slotGncImport(void)
 
 void KMyMoney2App::slotAccountChart(void)
 {
-#ifdef HAVE_KDCHART
   if(!m_selectedAccount.id().isEmpty()) {
     QPointer<KBalanceChartDlg> dlg = new KBalanceChartDlg(m_selectedAccount, this);
     dlg->exec();
     delete dlg;
   }
-#endif
 }
 
 
@@ -5529,9 +5525,7 @@ void KMyMoney2App::slotUpdateActions(void)
   action("account_online_update_all")->setEnabled(false);
   //action("account_online_update_menu")->setEnabled(false);
   action("account_online_unmap")->setEnabled(false);
-#ifdef HAVE_KDCHART
   action("account_chart")->setEnabled(false);
-#endif
 
   action("category_new")->setEnabled(fileOpen);
   action("category_edit")->setEnabled(false);
@@ -5764,12 +5758,11 @@ void KMyMoney2App::slotUpdateActions(void)
                 action("account_online_update_menu")->setEnabled(true);
               }
             }
-          } else
+          } else {
             action("account_online_map")->setEnabled(m_onlinePlugins.count() > 0);
+          }
 
-#ifdef HAVE_KDCHART
           action("account_chart")->setEnabled(true);
-#endif
           break;
 
         case MyMoneyAccount::Income :

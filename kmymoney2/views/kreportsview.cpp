@@ -69,7 +69,6 @@
 #include <mymoneyfile.h>
 #include <mymoneyreport.h>
 #include <kmymoneyglobalsettings.h>
-
 #include "kreportsview.h"
 #include "querytable.h"
 #include "objectinfotable.h"
@@ -91,8 +90,7 @@ using namespace reports;
 KReportsView::KReportTab::KReportTab(KTabWidget* parent, const MyMoneyReport& report ):
   QWidget( parent ),
   m_part( new KHTMLPart( this) ),
-  #warning #Port to KDE4
-  //m_chartView( new KReportChartView( this, "reportchart" ) ),
+  m_chartView( new KReportChartView( this ) ),
   m_control( new kMyMoneyReportControl( this ) ),
   m_layout( new QVBoxLayout( this) ),
   m_report( report ),
@@ -104,21 +102,18 @@ KReportsView::KReportTab::KReportTab(KTabWidget* parent, const MyMoneyReport& re
   m_layout->setSpacing(6);
   m_part->setZoomFactor( KMyMoneyGlobalSettings::fontSizePercentage() );
 
-  #warning #Port to KDE4
-  if (
-  // ! KReportChartView::implemented() || 
-  m_report.reportType() != MyMoneyReport::ePivotTable )
+
+  if (!KReportChartView::implemented() ||
+      m_report.reportType() != MyMoneyReport::ePivotTable )
   {
     m_control->buttonChart->hide();
   }
 
-  #warning #Port to KDE4
-//m_chartView->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );
-//m_chartView->hide();
+  m_chartView->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );
+  m_chartView->hide();
   m_layout->addWidget( m_control );
   m_layout->addWidget( m_part->view() );
-  #warning #Port to KDE4
-//m_layout->addWidget( m_chartView );
+  m_layout->addWidget( m_chartView );
 
   // I like this icon...
   QString icon = KGlobal::dirs()->findResource("icon", "default.kde/16x16/mimetypes/spreadsheet.png");
@@ -129,11 +124,8 @@ KReportsView::KReportTab::KReportTab(KTabWidget* parent, const MyMoneyReport& re
   parent->addTab( this, KIcon(QPixmap(icon)), report.name() );
   parent->setTabEnabled( parent->indexOf(this), true );
 
-#warning #Port to KDE4
-#if 0
   if ( m_report.isChartByDefault() )
     toggleChart();
-#endif
 }
 
 KReportsView::KReportTab::~KReportTab()
@@ -235,9 +227,8 @@ void KReportsView::KReportTab::updateReport(void)
   m_part->write(createTable());
   m_part->end();
 
-  #warning #Port to KDE4
-//  m_table->drawChart( *m_chartView );
-//  m_chartView->update();
+  m_table->drawChart( *m_chartView );
+  m_chartView->update();
 }
 
 QString KReportsView::KReportTab::createTable(const QString& links)
@@ -292,20 +283,19 @@ void KReportsView::KReportTab::toggleChart(void)
   if ( m_showingChart )
   {
     m_part->show();
-  #warning #Port to KDE4
-//    m_chartView->hide();
+    m_chartView->hide();
 
-    //m_control->buttonChart->setText( i18n( "Chart" ) );
-    //m_control->buttonChart->setToolTip( i18n( "Show the chart version of this report" ) );
+    m_control->buttonChart->setText( i18n( "Chart" ) );
+    m_control->buttonChart->setToolTip( i18n( "Show the chart version of this report" ) );
   }
   else
   {
     m_part->hide();
-  #warning #Port to KDE4
-//    m_chartView->show();
 
-    //m_control->buttonChart->setText( i18n( "Report" ) );
-    //m_control->buttonChart->setToolTip( i18n( "Show the report version of this chart" ) );
+    m_chartView->show();
+
+    m_control->buttonChart->setText( i18n( "Report" ) );
+    m_control->buttonChart->setToolTip( i18n( "Show the report version of this chart" ) );
   }
   m_showingChart = ! m_showingChart;
 }
@@ -878,9 +868,9 @@ void KReportsView::addReportTab(const MyMoneyReport& report)
 {
   KReportTab* tab = new KReportTab(m_reportTabWidget, report);
 
-#warning "port to kde4"  
-  //connect( tab->control()->buttonChart, SIGNAL(clicked()),
-    //this, SLOT(slotToggleChart(void )));
+
+  connect( tab->control()->buttonChart, SIGNAL(clicked()),
+    this, SLOT(slotToggleChart(void )));
   connect( tab->control()->buttonConfigure, SIGNAL(clicked()),
     this, SLOT(slotConfigure(void )));
   connect( tab->control()->buttonNew, SIGNAL(clicked()),
@@ -986,7 +976,6 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
       i18n("Default Report")
     ));
 
-#ifdef HAVE_KDCHART
     list.push_back(MyMoneyReport(
       MyMoneyReport::eExpenseIncome,
       MyMoneyReport::eMonths,
@@ -1010,7 +999,6 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
     list.back().setChartByDefault(true);
     list.back().setChartType(MyMoneyReport::eChartPie);
     list.back().setShowingRowTotals(false);
-#endif
 
     groups.push_back(list);
   }
@@ -1052,7 +1040,6 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
     list.back().setIncludingSchedules( true );
     list.back().setColumnsAreDays( true );
 
-#ifdef HAVE_KDCHART
     list.push_back(MyMoneyReport(
       MyMoneyReport::eAssetLiability,
       MyMoneyReport::eMonths,
@@ -1073,7 +1060,6 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
       i18n("Account Balances by Institution"),
       i18n("Default Report")
     ));
-#endif
 
     list.push_back(MyMoneyReport(
       MyMoneyReport::eAccountType,
@@ -1213,7 +1199,6 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
       i18n("Default Report")
     ));
     list.back().setInvestmentsOnly(true);
-#ifdef HAVE_KDCHART
     list.push_back(MyMoneyReport(
       MyMoneyReport::eAssetLiability,
       MyMoneyReport::eMonths,
@@ -1308,7 +1293,6 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
     list.back().setIncludingBudgetActuals(true);
     list.back().setIncludingMovingAverage(true);
     list.back().setMovingAverageDays(10);
-#endif
     groups.push_back(list);
   }
   {
@@ -1422,7 +1406,6 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
     ));
     list.back().setBudget("Any",false);
     list.back().setShowingRowTotals(true);
-#ifdef HAVE_KDCHART
     list.push_back(MyMoneyReport(
       MyMoneyReport::eBudgetActual,
       MyMoneyReport::eMonths,
@@ -1435,7 +1418,6 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
     list.back().setChartGridLines(false);
     list.back().setBudget("Any",true);
     list.back().setChartType(MyMoneyReport::eChartLine);
-#endif
 
     groups.push_back(list);
   }
@@ -1462,7 +1444,6 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
     list.back().setColumnsAreDays( true );
     list.back().setIncludingForecast( true );
 
-#ifdef HAVE_KDCHART
     list.push_back(MyMoneyReport(
       MyMoneyReport::eAssetLiability,
       MyMoneyReport::eMonths,
@@ -1476,7 +1457,6 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
     list.back().setChartByDefault(true);
     list.back().setChartGridLines(false);
     list.back().setChartType(MyMoneyReport::eChartLine);
-#endif
     groups.push_back(list);
   }
   {

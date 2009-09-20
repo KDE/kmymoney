@@ -30,12 +30,14 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 #warning #Port to KDE4
-//#include "kreportchartview.h"
+#include "kreportchartview.h"
 #include "mymoneyfile.h"
 #include "mymoneyreport.h"
 #include "reporttable.h"
 #include "pivotgrid.h"
 #include "reportaccount.h"
+
+using namespace KDChart;
 
 namespace reports {
 
@@ -91,8 +93,7 @@ public:
     *
     * @param view The KReportChartView into which to draw the chart.
     */
-    #warning #Port to KDE4
-    //void drawChart( KReportChartView& view ) const;
+    void drawChart( KReportChartView& view ) const;
 
   /**
     * Dump the report's HTML to a file
@@ -336,7 +337,7 @@ protected:
    /**
      * Draws a PivotGridRowSet in a chart for the given ERowType
      */
-    //unsigned drawChartRowSet(int rowNum, const bool seriesTotals, const bool accountSeries, KDChartTableData& data, const PivotGridRowSet& rowSet, const ERowType rowType ) const;
+    unsigned drawChartRowSet(int rowNum, const bool seriesTotals, const bool accountSeries, KReportChartView& chartView, const PivotGridRowSet& rowSet, const ERowType rowType ) const;
 
    /**
      * Loads m_rowTypeList with the list of PivotGridRow types that the reporttable

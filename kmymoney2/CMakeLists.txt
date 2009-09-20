@@ -35,8 +35,8 @@ ADD_DEPENDENCIES(kmymoney_common generate_base_ui_srcs)
 SET( kmymoney_common_LIBS
   ${QT_AND_KDECORE_LIBS} views reports kmymoney_common newuserwizard
   newaccountwizard wizardpages dialogs settings widgets converter
-  kmm_storage kmm_mymoney kgpgfile interfaces kmm_plugin dialogs
-  ${KDE4_KHTML_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KABC_LIBS})
+  kmm_storage kmm_mymoney kgpgfile interfaces kmm_plugin dialogs kmm_kdchart
+ ${KDE4_KHTML_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KABC_LIBS})
 #kmm_kdchart
 ########### kmymoney2 executable ###############
 

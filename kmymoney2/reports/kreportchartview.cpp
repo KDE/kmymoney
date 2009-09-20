@@ -15,12 +15,11 @@
  *                                                                         *
  ***************************************************************************/
 
-
-//#include "config.h"
-#ifdef HAVE_KDCHART
-
 // ----------------------------------------------------------------------------
 // QT Includes
+#include <QMouseEvent>
+#include <QLabel>
+#include <QFrame>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -29,25 +28,22 @@
 // Project Includes
 
 #include "kreportchartview.h"
-#include <KDChartDataRegion.h>
+//#include <KDChartDataRegion.h>
 //Added by qt3to4:
-#include <QMouseEvent>
-#include <QLabel>
-#include <QFrame>
 
 using namespace reports;
 
-KReportChartView::KReportChartView( QWidget* parent, const char* name ): KDChartWidget(parent,name)
+KReportChartView::KReportChartView( QWidget* parent): KDChart::Widget(parent)
 {
     // ********************************************************************
     // Set KMyMoney's Chart Parameter Defaults
     // ********************************************************************
-    this->setPaletteBackgroundColor( Qt::white );
+//     this->setPaletteBackgroundColor( Qt::white );
 
-    KDChartParams* _params = new KDChartParams();
-    _params->setChartType( KDChartParams::Line );
-    _params->setAxisLabelStringParams( KDChartAxisParams::AxisPosBottom,&m_abscissaNames,0);
-    _params->setDataSubduedColors();
+//     KDChartParams* _params = new KDChartParams();
+//     _params->setChartType( KDChartParams::Line );
+//     _params->setAxisLabelStringParams( KDChartAxisParams::AxisPosBottom,&m_abscissaNames,0);
+//     _params->setDataSubduedColors();
 
     /**
     // use line marker, but only circles.
@@ -59,11 +55,11 @@ KReportChartView::KReportChartView( QWidget* parent, const char* name ): KDChart
     **/
 
     // initialize parameters
-    this->setParams(_params);
+//     this->setParams(_params);
 
     // initialize data
-    KDChartTableData* _data = new KDChartTableData();
-    this->setData(_data);
+//     KDChartTableData* _data = new KDChartTableData();
+//     this->setData(_data);
 
     // ********************************************************************
     // Some Examplatory Chart Table Data
@@ -93,13 +89,13 @@ KReportChartView::KReportChartView( QWidget* parent, const char* name ): KDChart
     // ********************************************************************
     // Tooltip Setup
     // ********************************************************************
-    label = new QLabel( this );
-    label->hide();
+/*    label = new QLabel( this );
+    label->hide();*/
     // mouse tracking on will force the mouseMoveEvent() method to be called from Qt
-    label->setMouseTracking( true );
+/*    label->setMouseTracking( true );
     label->setFrameStyle( QFrame::StyledPanel | QFrame::Raised );
     label->setAlignment( Qt::AlignRight );
-    label->setAutoResize( true );
+    label->setAutoResize( true );*/
 }
 
 /**
@@ -107,7 +103,7 @@ KReportChartView::KReportChartView( QWidget* parent, const char* name ): KDChart
   */
 void KReportChartView::mouseMoveEvent( QMouseEvent* event )
 {
-    QPoint translate, pos; // some movement helpers
+/*    QPoint translate, pos; // some movement helpers
     uint dataset;          // the current dataset (eg. category)
     double value;          // the value of the region
     double pivot_sum;      // the sum over all categories in the current pivot point
@@ -179,16 +175,10 @@ void KReportChartView::mouseMoveEvent( QMouseEvent* event )
         }
     }
     // mouse cursor not found in any data region
-    label->hide();
+    label->hide();*/
 }
 
 void KReportChartView::setProperty(int row, int col, int id)
 {
-#ifdef HAVE_KDCHART_SETPROP
-  this->data()->setProp(row, col, id);
-#else
-  this->data()->cell(row, col).setPropertySet(id);
-#endif
+  //this->data()->cell(row, col).setPropertySet(id);
 }
-
-#endif

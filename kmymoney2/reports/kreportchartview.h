@@ -19,8 +19,6 @@
 #ifndef KREPORTCHARTVIEW_H
 #define KREPORTCHARTVIEW_H
 
-
-#ifdef HAVE_KDCHART
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -35,9 +33,9 @@
 //Added by qt3to4:
 #include <QMouseEvent>
 #include <KDChartWidget>
-#include <KDChartTable>
-#include <KDChartParams>
-#include <KDChartAxisParams>
+// #include <KDChartTable>
+// #include <KDChartParams>
+// #include <KDChartAxisParams>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -45,17 +43,19 @@
   #include <mymoneyutils.h>
 #endif
 
+using namespace KDChart;
+
 namespace reports {
 
-class KReportChartView: public KDChartWidget
+class KReportChartView: public Widget
 {
 public:
-  KReportChartView( QWidget* parent, const char* name );
+  KReportChartView( QWidget* parent );
   ~KReportChartView() {}
   static bool implemented(void) { return true; }
-  void setNewData( const KDChartTableData& newdata ) { this->setData(new KDChartTableData(newdata)); }
+  //void setNewData( const KDChartTableData& newdata ) { this->setData(new KDChartTableData(newdata)); }
   QStringList& abscissaNames(void) { return m_abscissaNames; }
-  void refreshLabels(void) { this->params()->setAxisLabelStringParams( KDChartAxisParams::AxisPosBottom,&m_abscissaNames,0); }
+  //void refreshLabels(void) { this->params()->setAxisLabelStringParams( KDChartAxisParams::AxisPosBottom,&m_abscissaNames,0); }
   void setProperty(int row, int col, int id);
 //   void setCircularLabels(void) { this->params()->setAxisLabelStringParams( KDChartAxisParams::AxisPosCircular,&m_abscissaNames,0); }
 
@@ -74,21 +74,5 @@ private:
 };
 
 } // end namespace reports
-
-#else
-
-namespace reports {
-
-class KReportChartView : public QWidget
-{
-public:
-  KReportChartView( QWidget* parent, const char* name ): QWidget(parent,name) {}
-  ~KReportChartView() {}
-  static bool implemented(void) { return false; }
-};
-
-} // end namespace reports
-
-#endif
 
 #endif // KREPORTCHARTVIEW_H

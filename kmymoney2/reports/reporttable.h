@@ -30,8 +30,7 @@
 
 namespace reports {
 
-#warning #Port to KDE4
-//class KReportChartView;
+class KReportChartView;
 
 /**
   * This class serves as interface definition for both a pivottable
@@ -45,8 +44,7 @@ public:
     virtual ~ReportTable() {}
     virtual QString renderHTML(void) const = 0;
     virtual QString renderCSV(void) const = 0;
-    #warning #Port to KDE4
-    //virtual void drawChart(KReportChartView& view) const = 0;
+    virtual void drawChart(KReportChartView& view) const = 0;
     virtual void dump(const QString& file, const QString& context=QString()) const = 0;
 };
 
