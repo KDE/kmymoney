@@ -392,18 +392,31 @@
     <term>Compare Budget and Actual</term>
     <listitem><para>Reports comparing values from a Budget to actual income and expenses. In
       each budget report you can find the columns Budget, Actual and
-      Difference. Each report differs in the period that is shown:
+      Difference. Each report differs in the period that is shown:</para>
+      <variablelist>
+      <varlistentry>
+      <term>Budget vs. Actual This Year:</term> 
+      <listitem><para>From the beginning of the year until today</para>
+      </listitem></varlistentry>
+      <varlistentry>
+      <term>Budget vs. Actual This Year (YTM):</term> 
+      <listitem><para>From the beginning of the year until the last day of the previous month</para>
+      </listitem></varlistentry>
+      <varlistentry>
+      <term>Yearly Budgeted vs. Actual:</term> 
+      <listitem><para>From the 1st january until the 31st decembre</para>
+      </listitem></varlistentry>
+      <varlistentry>
+      <term>Monthly Budgeted vs. Actual:</term> 
+      <listitem><para>From the beginning of the year until the last day of the current month</para>
+      </listitem></varlistentry>
+      <varlistentry>
+      <term>Yearly Budgeted vs. Actual (Graph):</term> 
+      <listitem><para>Same as the previous report but it shows the graph by default</para>
+      </listitem></varlistentry>
+      </variablelist>
 
-      Budget vs. Actual This Year: from the beginning of the year until today
-      Budget vs. Actual This Year (YTM): from the beginning of the year
-      until the last day of the previous month
-      Yearly Budgeted vs. Actual: from the 1st january until the 31st
-      decembre
-      Monthly Budgeted vs. Actual: from the beginning of the year until
-      the last day of the current month
-      Yearly Budgeted vs. Actual (Graph): same as the previous report but it shows the graph by default
-
-      These reports provide a base from which custom reports can be created by
+      <para>These reports provide a base from which custom reports can be created by
       changing the date range and Budget, among other options. </para>
     </listitem>
   </varlistentry>
