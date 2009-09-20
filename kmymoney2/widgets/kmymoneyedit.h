@@ -63,14 +63,14 @@ public:
     * (whatever QDoubleValidator uses for that) and parent @p
     * parent
     */
-  kMyMoneyMoneyValidator( QObject * parent, const char * name=0 );
+  kMyMoneyMoneyValidator( QObject * parent );
   /**
     * Constuct a locale-aware KDoubleValidator for range [@p bottom,@p
     * top] and a precision of @p decimals decimals after the decimal
     * point.
     */
   kMyMoneyMoneyValidator( double bottom, double top, int decimals,
-                    QObject * parent, const char * name=0 );
+                    QObject * parent );
   /**
     * Destructs the validator.
     */
@@ -141,8 +141,8 @@ protected slots:
   void slotCalculatorOpen(void);
 
 public:
-  kMyMoneyEdit(QWidget *parent=0, const char *name=0, const int prec = -2);
-  kMyMoneyEdit(const MyMoneySecurity& eq, QWidget *parent=0, const char *name=0);
+  kMyMoneyEdit(QWidget *parent=0, const int prec = -2);
+  kMyMoneyEdit(const MyMoneySecurity& eq, QWidget *parent=0);
   ~kMyMoneyEdit();
 
   /**

@@ -61,7 +61,7 @@
 class kMyMoneyCalculator : public QFrame  {
    Q_OBJECT
 public:
-  kMyMoneyCalculator(QWidget* parent = 0, const char *name = 0);
+  kMyMoneyCalculator(QWidget* parent = 0);
   ~kMyMoneyCalculator();
 
   /**

@@ -26,8 +26,7 @@
 #include <QLabel>
 #include <QSignalMapper>
 #include <QRegExp>
-//Added by qt3to4:
-#include <Q3GridLayout>
+#include <QGridLayout>
 #include <QFrame>
 #include <QKeyEvent>
 
@@ -42,20 +41,22 @@
 
 #include "kmymoneycalculator.h"
 
-kMyMoneyCalculator::kMyMoneyCalculator(QWidget* parent, const char *name)
-  : QFrame(parent, name)
+kMyMoneyCalculator::kMyMoneyCalculator(QWidget* parent)
+  : QFrame(parent)
 {
   m_comma = KGlobal::locale()->monetaryDecimalSymbol()[0];
   m_clearOperandOnDigit = false;
 
-  Q3GridLayout* grid = new Q3GridLayout(this, 5, 5, 1, 2);
+  QGridLayout* grid = new QGridLayout(this);
 
   display = new QLabel(this);
-  display->setBackgroundColor(QColor("#BDFFB4"));
+  QPalette palette;
+  palette.setColor(display->backgroundRole(), QColor("#BDFFB4"));
+  display->setPalette(palette);
 
   display->setFrameStyle( QFrame::Panel | QFrame::Sunken );
   display->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
-  grid->addMultiCellWidget(display, 0, 0, 0, 4);
+  grid->addWidget(display, 0, 0, 1, 5);
 
   buttons[0] = new KPushButton("0", this);
   buttons[1] = new KPushButton("1", this);
@@ -139,8 +140,6 @@ kMyMoneyCalculator::kMyMoneyCalculator(QWidget* parent, const char *name)
 
   setMinimumSize(width, height);
   setMaximumSize(width, height);
-
-  show();
 }
 
 kMyMoneyCalculator::~kMyMoneyCalculator()
@@ -164,7 +163,7 @@ void kMyMoneyCalculator::commaClicked(void)
 {
   if(operand.length() == 0)
     operand = "0";
-  if(operand.contains('.', false) == 0)
+  if(operand.contains('.', Qt::CaseInsensitive) == 0)
     operand.append('.');
 
   if(operand.length() > 16)
@@ -178,7 +177,7 @@ void kMyMoneyCalculator::plusminusClicked(void)
     operand = m_result;
 
   if(operand.length() > 0) {
-    if(operand.find('-') != -1)
+    if(operand.indexOf('-') != -1)
       operand.replace('-', QString());
     else
       operand.prepend('-');

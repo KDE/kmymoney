@@ -48,14 +48,14 @@
 #include "kmymoneycalculator.h"
 #include "mymoneymoney.h"
 
-kMyMoneyMoneyValidator::kMyMoneyMoneyValidator(QObject * parent, const char * name) :
-  QDoubleValidator(parent, name)
+kMyMoneyMoneyValidator::kMyMoneyMoneyValidator(QObject * parent) :
+  QDoubleValidator(parent)
 {
 }
 
 kMyMoneyMoneyValidator::kMyMoneyMoneyValidator( double bottom, double top, int decimals,
-                                                QObject * parent, const char * name ) :
-  QDoubleValidator(bottom, top, decimals, parent, name)
+                                                QObject * parent) :
+  QDoubleValidator(bottom, top, decimals, parent)
 {
 }
 
@@ -79,17 +79,17 @@ QValidator::State kMyMoneyMoneyValidator::validate( QString & input, int & _p ) 
           t = l->monetaryThousandsSeparator();
   // first, delete p's and t's:
   if ( !p.isEmpty() )
-    for ( int idx = s.find( p ) ; idx >= 0 ; idx = s.find( p, idx ) )
+    for ( int idx = s.indexOf( p ) ; idx >= 0 ; idx = s.indexOf( p, idx ) )
       s.remove( idx, p.length() );
 
 
   if ( !t.isEmpty() )
-    for ( int idx = s.find( t ) ; idx >= 0 ; idx = s.find( t, idx ) )
+    for ( int idx = s.indexOf( t ) ; idx >= 0 ; idx = s.indexOf( t, idx ) )
       s.remove( idx, t.length() );
 
   // then, replace the d's and n's
-  if ( ( !n.isEmpty() && n.find('.') != -1 ) ||
-       ( !d.isEmpty() && d.find('-') != -1 ) ) {
+  if ( ( !n.isEmpty() && n.indexOf('.') != -1 ) ||
+       ( !d.isEmpty() && d.indexOf('-') != -1 ) ) {
     // make sure we don't replace something twice:
     kWarning() << "KDoubleValidator: decimal symbol contains '-' or "
                    "negative sign contains '.' -> improve algorithm" << endl;
@@ -97,11 +97,11 @@ QValidator::State kMyMoneyMoneyValidator::validate( QString & input, int & _p ) 
   }
 
   if ( !d.isEmpty() && d != "." )
-    for ( int idx = s.find( d ) ; idx >= 0 ; idx = s.find( d, idx + 1 ) )
+    for ( int idx = s.indexOf( d ) ; idx >= 0 ; idx = s.indexOf( d, idx + 1 ) )
       s.replace( idx, d.length(), ".");
 
   if ( !n.isEmpty() && n != "-" )
-    for ( int idx = s.find( n ) ; idx >= 0 ; idx = s.find( n, idx + 1 ) )
+    for ( int idx = s.indexOf( n ) ; idx >= 0 ; idx = s.indexOf( n, idx + 1 ) )
       s.replace( idx, n.length(), "-" );
 
   // Take care of monetary parens around the value if selected via
@@ -111,24 +111,24 @@ QValidator::State kMyMoneyMoneyValidator::validate( QString & input, int & _p ) 
   if(l->negativeMonetarySignPosition() == KLocale::ParensAround
   || l->positiveMonetarySignPosition() == KLocale::ParensAround) {
     QRegExp regExp("^(\\()?([\\d-\\.]*)(\\))?$");
-    if(s.find(regExp) != -1) {
+    if(s.indexOf(regExp) != -1) {
       s = regExp.cap(2);
     }
   }
 
   // check for non numeric values (QDoubleValidator allows an 'e', we don't)
   QRegExp nonNumeric("[^\\d-\\.]+");
-  if(s.find(nonNumeric) != -1)
+  if(s.indexOf(nonNumeric) != -1)
     return Invalid;
 
   // check for minus sign trailing the number
   QRegExp trailingMinus("^([^-]*)\\w*-$");
-  if(s.find(trailingMinus) != -1) {
+  if(s.indexOf(trailingMinus) != -1) {
     s = QString("-%1").arg(trailingMinus.cap(1));
   }
 
   // check for the maximum allowed number of decimal places
-  int decPos = s.find('.');
+  int decPos = s.indexOf('.');
   if(decPos != -1) {
     if(decimals() == 0)
       return Invalid;
@@ -159,7 +159,7 @@ QValidator::State kMyMoneyMoneyValidator::validate( QString & input, int & _p ) 
   return rc;
 }
 
-kMyMoneyEdit::kMyMoneyEdit(QWidget *parent, const char *name, const int prec)
+kMyMoneyEdit::kMyMoneyEdit(QWidget *parent, const int prec)
  : KHBox(parent)
 {
   m_prec = prec;
@@ -168,7 +168,7 @@ kMyMoneyEdit::kMyMoneyEdit(QWidget *parent, const char *name, const int prec)
   init();
 }
 
-kMyMoneyEdit::kMyMoneyEdit(const MyMoneySecurity& sec, QWidget *parent, const char *name)
+kMyMoneyEdit::kMyMoneyEdit(const MyMoneySecurity& sec, QWidget *parent)
  : KHBox(parent)
 {
   m_prec = MyMoneyMoney::denomToPrec(sec.smallestAccountFraction());
@@ -219,6 +219,7 @@ void kMyMoneyEdit::init(void)
   m_edit->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
   m_calculatorFrame = new KVBox(this);
+  m_calculatorFrame->setWindowFlags(Qt::Popup);
 
   m_calculatorFrame->setFrameStyle(Q3Frame::PopupPanel | Q3Frame::Raised);
   m_calculatorFrame->setLineWidth(3);
@@ -381,7 +382,7 @@ void kMyMoneyEdit::ensureFractionalPart(QString& s) const
       }
     } else if(m_prec == 0) {
       while(s.contains(decimalSymbol)) {
-        int pos = s.findRev(decimalSymbol);
+        int pos = s.lastIndexOf(decimalSymbol);
         if(pos != -1) {
           s.truncate(pos);
         }
