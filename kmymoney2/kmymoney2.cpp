@@ -1585,14 +1585,15 @@ bool KMyMoney2App::slotFileSaveAs(void)
 
 bool KMyMoney2App::slotSaveAsDatabase(void)
 {
-
   bool rc = false;
+  KUrl oldUrl;
   // in event of it being a database, ensure that all data is read into storage for saveas
-  if (myMoneyView->isDatabase())
+  if (myMoneyView->isDatabase()) {
     dynamic_cast<IMyMoneySerialize*> (MyMoneyFile::instance()->storage())->fillStorage();
+    oldUrl = m_fileName.isEmpty() ? lastOpenedURL() : m_fileName;
+  }
   KMSTATUS(i18n("Saving file to database..."));
   QPointer<KSelectDatabaseDlg> dialog = new KSelectDatabaseDlg(QIODevice::WriteOnly);
-  KUrl oldUrl = m_fileName.isEmpty() ? lastOpenedURL() : m_fileName;
   KUrl url = oldUrl;
   if (!dialog->checkDrivers()) {
     delete dialog;
@@ -1622,7 +1623,7 @@ bool KMyMoney2App::slotSaveAsDatabase(void)
   if (rc) {
     //KRecentFilesAction *p = dynamic_cast<KRecentFilesAction*>(action("file_open_recent"));
     //if(p)
-      m_recentFiles->addUrl(url.pathOrUrl());
+    m_recentFiles->addUrl(url.pathOrUrl());
     writeLastUsedFile(url.pathOrUrl());
   }
   m_autoSaveTimer->stop();

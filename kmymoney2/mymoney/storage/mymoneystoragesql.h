@@ -606,7 +606,8 @@ public:
   void loadBudgetId(const unsigned long& id);
 
 private:
-  void init(void);
+  //void init(void);
+  bool sqliteExists (const QString& dbName);
   // a function to build a comprehensive error message
   QString& buildError (const QSqlQuery& q, const QString& function, const QString& message) const;
   QString& buildError (const QSqlQuery& q, const QString& function, const QString& message,

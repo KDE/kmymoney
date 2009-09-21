@@ -33,6 +33,7 @@
 #include <QList>
 #include <QSqlRecord>
 #include <QMap>
+#include <QFile>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -155,10 +156,10 @@ MyMoneyStorageSql::MyMoneyStorageSql (IMyMoneySerialize *storage, const KUrl& ur
   : QSqlDatabase(url.queryItem("driver")) {
   DBG("*** Entering MyMoneyStorageSql::MyMoneyStorageSql");
   m_storage = storage;
-  init();
+/*  init();
 }
 
-void MyMoneyStorageSql::init(void) {
+void MyMoneyStorageSql::init(void) {*/
   m_storagePtr = dynamic_cast<IMyMoneyStorage*>(m_storage);
   m_dbVersion = 0;
   m_progressCallback = 0;
@@ -189,6 +190,15 @@ try {
   switch (openMode) {
     case QIODevice::ReadOnly:    // OpenDatabase menu entry (or open last file)
     case QIODevice::ReadWrite:   // Save menu entry with database open
+      // this may be a sqlite file opened from the recently used list
+      // but which no longer exists. In that case, open will work but create an empty file.
+      // This is not what the user's after; he may accuse KMM of deleting all his data!
+      if (m_dbType == Sqlite3) {
+        if (!sqliteExists(dbName)) {
+          rc = 1;
+          break;
+        }
+      }
       if (!QSqlDatabase::open()) {
         buildError(MyMoneySqlQuery(this), __func__,  "opening database");
         rc = 1;
@@ -252,7 +262,7 @@ try {
 
 void MyMoneyStorageSql::close(bool logoff) {
   DBG("*** Entering MyMoneyStorageSql::close");
-  if (QSqlDatabase::open()) {
+  if (QSqlDatabase::isOpen()) {
     if (logoff) {
       MyMoneyDbTransaction t(*this, __func__);
       m_logonUser.clear();
@@ -261,6 +271,15 @@ void MyMoneyStorageSql::close(bool logoff) {
     QSqlDatabase::close();
     QSqlDatabase::removeDatabase(connectionName());
   }
+}
+
+bool MyMoneyStorageSql::sqliteExists(const QString& dbName) {
+  QFile f(dbName);
+  if (!f.exists()) {
+    m_error = i18n("Sqlite file %1 does not exist", dbName);
+    return (false);
+  }
+  return (true);
 }
 
 bool MyMoneyStorageSql::createDatabase (const KUrl& url) {
@@ -1979,9 +1998,15 @@ void MyMoneyStorageSql::writeCurrency(const MyMoneySecurity& currency, MyMoneySq
   // writing the symbol as three short ints is a PITA, but the
   // problem is that database drivers have incompatible ways of declaring UTF8
   QString symbol = currency.tradingSymbol() + "   ";
-  q.bindValue(":symbol1", symbol.mid(0,1).unicode()->unicode());
-  q.bindValue(":symbol2", symbol.mid(1,1).unicode()->unicode());
-  q.bindValue(":symbol3", symbol.mid(2,1).unicode()->unicode());
+  const ushort* symutf = symbol.utf16();
+  //int ix = 0;
+  //while (x[ix] != '\0') qDebug() << "symbol" << symbol << "char" << ix << "=" << x[ix++];
+  //q.bindValue(":symbol1", symbol.mid(0,1).unicode()->unicode());
+  //q.bindValue(":symbol2", symbol.mid(1,1).unicode()->unicode());
+  //q.bindValue(":symbol3", symbol.mid(2,1).unicode()->unicode());
+  q.bindValue(":symbol1", symutf[0]);
+  q.bindValue(":symbol2", symutf[1]);
+  q.bindValue(":symbol3", symutf[2]);
   q.bindValue(":symbolString", symbol);
   q.bindValue(":partsPerUnit", currency.partsPerUnit());
   q.bindValue(":smallestCashFraction", currency.smallestCashFraction());
@@ -4107,10 +4132,15 @@ void MyMoneyDbDef::Balances(void){
 const QString MyMoneyDbDef::generateSQL (const QString& driver) const {
   QString retval;
   databaseTypeE dbType = m_drivers.driverToType(driver);
-  QMap<QString, MyMoneyDbTable>::ConstIterator tt = m_tables.begin();
-  while (tt != m_tables.end()) {
+  table_iterator tt = tableBegin();
+  while (tt != tableEnd()) {
     retval += (*tt).generateCreateSQL(dbType) + '\n';
     ++tt;
+  }
+  view_iterator vt = viewBegin();
+  while (vt != viewEnd()) {
+    retval += (*vt).createString() + '\n';
+    ++vt;
   }
   return retval;
 }

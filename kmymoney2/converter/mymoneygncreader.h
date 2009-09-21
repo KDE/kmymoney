@@ -190,6 +190,7 @@ class MyMoneyGncReader;
      2. Data object elements, which are only followed by data to be stored in a variable (m_v array)
      3. Ignored objects, data not needed and not included herein
 */
+class GncKvp;
 class GncObject {
 public:
   GncObject();
@@ -197,7 +198,6 @@ public:
 protected:
   friend class XmlReader;
   friend class MyMoneyGncReader;
-
   // check for sub object element; if it is, create the object
   GncObject *isSubElement (const QString &elName, const QXmlAttributes& elAttrs);
   // check for data element; if so, set data pointer
@@ -224,6 +224,8 @@ protected:
   QString getElName () const { return (m_elementName);};
   // pass 'main' pointer to object
   void setPm (MyMoneyGncReader *pM) {pMain = pM;};
+  const QString getKvpValue(const QString& key, const QString& type = QString()) const;
+
   // debug only
   void debugDump();
 
@@ -235,6 +237,7 @@ protected:
   virtual QString var (int i) const;
   // anonymize data
   virtual QString hide (QString, unsigned int);
+  unsigned int kvpCount() const { return (m_kvpList.count());}; //!
 
   MyMoneyGncReader *pMain;    // pointer to 'main' class
   // used at start of each transaction so same money hide factor is applied to all splits
@@ -255,6 +258,7 @@ protected:
   enum anonActions {ASIS, SUPPRESS, NXTACC, NXTEQU, NXTPAY, NXTSCHD, MAYBEQ, MONEY1, MONEY2}; // anonymize actions - see hide()
   unsigned int m_anonClass; // class of current data item for anonymizer
   static double m_moneyHideFactor; // a per-transaction factor
+  QList<GncKvp> m_kvpList; //!
 };
 
 // *****************************************************************************
@@ -272,6 +276,42 @@ private:
   bool m_bookFound;  // to  detect multi-book files
 };
 // The following are 'utility' objects, which occur within several other object types
+// ************* GncKvp********************************************
+// Key/value pairs, which are introduced by the 'slot' element
+// Consist of slot:key (the 'name' of the kvp), and slot:value (the data value)
+// the slot value also contains a slot type (string, integer, etc) implemented as an XML attribute
+// kvp's may be nested
+class GncKvp : public GncObject {
+public:
+  GncKvp ();
+  ~GncKvp();
+//protected:
+  friend class MyMoneyGncReader;
+
+  QString key() const { return (var(KEY));};
+  QString value() const { return (var(VALUE));};
+  QString type() const { return (m_kvpType);};
+  const GncKvp getKvp(unsigned int i) const { return (m_kvpList[i]);};
+private:
+  // subsidiary objects/elements
+  enum KvpSubEls {KVP, END_Kvp_SELS };
+  virtual GncObject *startSubEl();
+  virtual void endSubEl(GncObject *);
+  // data elements
+  enum KvpDataEls {KEY, VALUE, END_Kvp_DELS };
+  virtual void dataEl (const QXmlAttributes&);
+  QString m_kvpType;  // type is an XML attribute
+};
+// ************* GncLot********************************************
+// KMM doesn't have support for lots as yet
+class GncLot : public GncObject {
+  public:
+    GncLot ();
+    ~GncLot();
+  protected:
+    friend class MyMoneyGncReader;
+  private:
+};
 // ****************************************************************************
 // commodity specification. consists of
 //  cmdty:space - either ISO4217 if this cmdty is a currency, or, usually, the name of a stock exchange
@@ -311,44 +351,6 @@ private:
   enum DateDataEls {TSDATE, GDATE, END_Date_DELS};
   virtual void dataEl(const QXmlAttributes&) {m_dataPtr = &(m_v[TSDATE]); m_anonClass = GncObject::ASIS;}
   ; // treat both date types the same
-};
-// ************* GncKvp********************************************
-// Key/value pairs, which are introduced by the 'slot' element
-// Consist of slot:key (the 'name' of the kvp), and slot:value (the data value)
-// the slot value also contains a slot type (string, integer, etc) implemented as an XML attribute
-// kvp's may be nested
-class GncKvp : public GncObject {
-public:
-  GncKvp ();
-  ~GncKvp();
-protected:
-  friend class MyMoneyGncReader;
-
-  QString key() const { return (var(KEY));};
-  QString value() const { return (var(VALUE));};
-  QString type() const { return (m_kvpType);};
-  unsigned int kvpCount() const { return (m_kvpList.count());};
-  const GncKvp *getKvp(unsigned int i) const { return (static_cast<GncKvp *>(m_kvpList.at(i)));};
-private:
-  // subsidiary objects/elements
-  enum KvpSubEls {KVP, END_Kvp_SELS };
-  virtual GncObject *startSubEl();
-  virtual void endSubEl(GncObject *);
-  // data elements
-  enum KvpDataEls {KEY, VALUE, END_Kvp_DELS };
-  virtual void dataEl (const QXmlAttributes&);
-  mutable QList<GncObject*> m_kvpList;
-  QString m_kvpType;  // type is an XML attribute
-};
-// ************* GncLot********************************************
-// KMM doesn't have support for lots as yet
-class GncLot : public GncObject {
-  public:
-    GncLot ();
-    ~GncLot();
-  protected:
-    friend class MyMoneyGncReader;
-  private:
 };
 
 /** Following are the main objects within the gnucash file, which correspond largely one-for-one
@@ -429,7 +431,6 @@ private:
   // data elements
   enum AccountDataEls {ID, NAME, DESC, TYPE, PARENT, END_Account_DELS };
   GncCmdtySpec *m_vpCommodity;
-  QList<GncObject*> m_kvpList;
 };
 // ************* GncSplit********************************************
 class GncSplit : public GncObject {
@@ -471,22 +472,20 @@ protected:
   QDate datePosted() const { return (m_vpDatePosted->date());};
   bool isTemplate() const { return (m_template);};
   unsigned int splitCount() const { return (m_splitList.count());};
-  unsigned int kvpCount() const { return (m_kvpList.count());};
   const GncObject *getSplit (unsigned int i) const { return (m_splitList.at(i));};
-  const GncKvp *getKvp(unsigned int i) const { return (static_cast<GncKvp *>(m_kvpList.at(i)));};
 private:
   // subsidiary objects/elements
   enum TransactionSubEls {CURRCY, POSTED, ENTERED, SPLIT, KVP, END_Transaction_SELS };
   virtual GncObject *startSubEl();
   virtual void endSubEl(GncObject *);
   virtual void terminate();
+  const GncKvp getKvp(unsigned int i) const { return (m_kvpList.at(i));};
   // data elements
   enum TransactionDataEls {ID, NO, DESC, END_Transaction_DELS };
   GncCmdtySpec *m_vpCurrency;
   GncDate *m_vpDateEntered, *m_vpDatePosted;
   mutable QList<GncObject*> m_splitList;
   bool m_template; // true if this is a template for scheduled transaction
-  mutable QList<GncObject*> m_kvpList;
 };
 
 // ************* GncTemplateSplit********************************************
@@ -503,16 +502,14 @@ protected:
   QString value() const { return (var(VALUE));};
   QString qty() const { return (var(QTY));};
   QString acct() const { return (var(ACCT));};
-  unsigned int kvpCount() const { return (m_kvpList.count());};
-  const GncKvp *getKvp(unsigned int i) const { return (static_cast<GncKvp *>(m_kvpList.at(i)));};
 private:
+  const GncKvp getKvp(unsigned int i) const { return (m_kvpList[i]);};
   // subsidiary objects/elements
   enum TemplateSplitSubEls {KVP, END_TemplateSplit_SELS };
   virtual GncObject *startSubEl();
   virtual void endSubEl(GncObject *);
   // data elements
   enum TemplateSplitDataEls {ID, MEMO, RECON, VALUE, QTY, ACCT, END_TemplateSplit_DELS };
-  mutable QList<GncObject*> m_kvpList;
 };
 // ************* GncSchedule********************************************
 class GncFreqSpec;

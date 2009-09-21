@@ -60,7 +60,7 @@ email                : mte@users.sourceforge.net
 #else
   #include "mymoneymoney.h"
   #include <QTextEdit>
-  #define i18n QObject::tr
+//  #define i18n QObject::tr
   #define TRY
   #define CATCH
   #define PASS
@@ -163,13 +163,32 @@ bool GncObject::isDataElement (const QString &elName, const QXmlAttributes& elAt
 
 // return the variable string, decoded if required
 QString GncObject::var (int i) const {
-#warning "port to kde4"
-#if 0
-      	return (pMain->m_decoder == 0
+  /* This code was needed because the Qt3 XML reader apparently did not process
+   the encoding parameter in the <xml header.
+   This SEEMS to have been rectified in Qt4 though I have little test data
+   to prove this conclusively.
+   If true, we can remove the encoding option in the import options dialog.
+   FIXME: investigate further!
+        return (pMain->m_decoder == 0
       ? *(m_v.at(i))
       : pMain->m_decoder->toUnicode (*(m_v.at(i))));
-#endif
-        return m_v[i];
+  */
+  return m_v[i];
+}
+
+const QString GncObject::getKvpValue(const QString& key, const QString& type) const {
+  QList<GncKvp>::const_iterator it;
+  // first check for exact match
+  for (it = m_kvpList.begin(); it != m_kvpList.end(); ++it) {
+    if (((*it).key() == key) && ((type.isEmpty()) || ((*it).type() == type)))
+      return (*it).value();
+  }
+  // then for partial match
+  for (it = m_kvpList.begin(); it != m_kvpList.end(); ++it) {
+    if (((*it).key().contains(key)) && ((type.isEmpty()) || ((*it).type() == type)))
+      return (*it).value();
+  }
+  return (QString());
 }
 
 void GncObject::adjustHideFactor () {
@@ -365,7 +384,7 @@ GncObject *GncKvp::startSubEl() {
 
 void GncKvp::endSubEl(GncObject *subObj) {
   if (pMain->xmldebug) qDebug ("Kvp end subel");
-  m_kvpList.append (subObj);
+  m_kvpList.append(*(static_cast <GncKvp*>(subObj)));
   m_dataPtr = 0;
   return ;
 }
@@ -409,7 +428,7 @@ void GncCountData::terminate () {
   if (i != 0) {
     if (m_countType == "budget") pMain->setBudgetsFound(true);
     else if (m_countType.left(7) == "gnc:Gnc") pMain->setSmallBusinessFound(true);
-    else if (pMain->xmldebug) qDebug ("Unknown count type %s", qPrintable(m_countType));
+    else if (pMain->xmldebug) qDebug () << "Unknown count type" << m_countType;
   }
   return ;
 }
@@ -522,7 +541,7 @@ void GncAccount::endSubEl(GncObject *subObj) {
   if (pMain->xmldebug) qDebug ("Account end subel");
   switch (m_state) {
   case CMDTY: m_vpCommodity = static_cast<GncCmdtySpec *>(subObj); break;
-  case KVP: m_kvpList.append (subObj);
+  case KVP: m_kvpList.append(*(static_cast <GncKvp*>(subObj)));
   }
   return ;
 }
@@ -585,7 +604,7 @@ void GncTransaction::endSubEl(GncObject *subObj) {
   case POSTED: m_vpDatePosted = static_cast<GncDate *>(subObj); break;
   case ENTERED: m_vpDateEntered = static_cast<GncDate *>(subObj); break;
   case SPLIT: m_splitList.append (subObj); break;
-  case KVP: m_kvpList.append (subObj);
+  case KVP: m_kvpList.append(*(static_cast <GncKvp*>(subObj)));
   }
   return ;
 }
@@ -667,7 +686,7 @@ GncObject *GncTemplateSplit::startSubEl() {
 
 void GncTemplateSplit::endSubEl(GncObject *subObj) {
   if (pMain->xmldebug) qDebug ("TemplateSplit end subel");
-  m_kvpList.append (subObj);
+  m_kvpList.append(*(static_cast <GncKvp*>(subObj)));
   m_dataPtr = 0;
   return ;
 }
@@ -881,7 +900,7 @@ bool XmlReader::startDocument() {
 bool XmlReader::startElement (const QString&, const QString&, const QString& elName ,
                               const QXmlAttributes& elAttrs) {
   try {
-    if (pMain->gncdebug) qDebug ("XML start - %s", qPrintable(elName));
+    if (pMain->gncdebug) qDebug () << "XML start -" << elName;
 #ifdef _GNCFILEANON
     int i;
     QString spaces;
@@ -942,7 +961,7 @@ bool XmlReader::startElement (const QString&, const QString&, const QString& elN
 
 bool XmlReader::endElement( const QString&, const QString&, const QString&elName ) {
   try {
-    if (pMain->xmldebug) qDebug ("XML end - %s", qPrintable(elName));
+    if (pMain->xmldebug) qDebug () << "XML end -" << elName;
 #ifdef _GNCFILEANON
     QString spaces;
     switch (lastType) {
@@ -979,7 +998,7 @@ bool XmlReader::characters (const QString &data) {
   if (pMain->xmldebug) qDebug ("XML Data received - %d bytes", data.length());
   QString pData = data.trimmed(); // data may contain line feeds and indentation spaces
   if (!pData.isEmpty()) {
-    if (pMain->developerDebug) qDebug ("XML Data - %s", qPrintable(pData));
+    if (pMain->developerDebug) qDebug () << "XML Data -" << pData;
     m_co->storeData (pData); //go store it
 #ifdef _GNCFILEANON
     QString anonData = m_co->getData ();
@@ -1141,7 +1160,7 @@ void MyMoneyGncReader::convertCommodity (const GncCommodity *gcm) {
     m_storage->addSecurity(equ);
 
     //assign the gnucash id as the key into the map to find our id
-    if (gncdebug) qDebug ("mapping, key = %s, id = %s", qPrintable(gcm->id()), qPrintable(equ.id()));
+    if (gncdebug) qDebug () << "mapping, key =" << gcm->id() << "id =" << equ.id();
     m_mapEquities[gcm->id().toUtf8()] = equ.id();
   }
   signalProgress (++m_commodityCount, 0);
@@ -1264,34 +1283,35 @@ void MyMoneyGncReader::convertAccount (const GncAccount* gac) {
     m_stockList.append (gac->id());
     // set the equity type
     MyMoneySecurity e = m_storage->security (m_mapEquities[gac->commodity()->id().toUtf8()]);
-    if (gncdebug) qDebug ("Acct equity search, key = %s, found id = %s",
-                            qPrintable(gac->commodity()->id()), qPrintable(e.id()));
-    acc.setCurrencyId (e.id()); // actually, the security id
+    if (gncdebug) qDebug () << "Acct equity search, key =" << gac->commodity()->id()
+         << "found id =" << e.id();    acc.setCurrencyId (e.id()); // actually, the security id
     if ("MUTUAL" == gac->type()) {
       e.setSecurityType (MyMoneySecurity::SECURITY_MUTUALFUND);
-      if (gncdebug) qDebug ("Setting %s to mutual", qPrintable(e.name()));
+      if (gncdebug) qDebug () << "Setting" << e.name() << "to mutual";
       m_storage->modifySecurity (e);
     }
     // See if he wants online quotes for this account
     // NB: In gnc, this selection is per account, in KMM, per security
     // This is unlikely to cause problems in practice. If it does,
     // we probably need to introduce a 'pricing basis' in the account class
-    QList<GncObject*>::const_iterator kvpi;
-    QList<GncObject*> list = gac->m_kvpList;
+    /*QList<GncObject*>::const_iterator kvpi;
+    //QList<GncObject*> list = gac->m_kvpList;
     GncKvp *k;
-    for (kvpi = list.constBegin(); kvpi != list.constEnd(); ++kvpi) {
-      k = static_cast<GncKvp*> (*(kvpi));
+    for (kvpi = gac->m_kvpList.begin(); kvpi != gac->m_kvpList.end(); ++kvpi) {
+      k = static_cast<GncKvp*> (kvpi);
       if (k->key().contains("price-source") && k->type() == "string") {
         getPriceSource (e, k->value());
         break;
       } else {
         ++kvpi;
       }
-    }
+    }*/
+    QString priceSource = gac->getKvpValue("price-source", "string");
+    if (!priceSource.isEmpty()) getPriceSource (e, priceSource);
   }
 
   // check for tax-related status
-  QList<GncObject*>::const_iterator kvpi;
+  /*QList<GncObject*>::const_iterator kvpi;
   QList<GncObject*> list = gac->m_kvpList;
   GncKvp *k;
   for (kvpi = list.constBegin(); kvpi != list.constEnd(); ++kvpi) {
@@ -1300,8 +1320,8 @@ void MyMoneyGncReader::convertAccount (const GncAccount* gac) {
       acc.setValue ("Tax", "Yes");
       break;
     }
-  }
-
+  }*/
+  if (gac->getKvpValue("tax-related", "integer") == QChar('1')) acc.setValue ("Tax", "Yes");
   // all the details from the file about the account should be known by now.
   // calling addAccount will automatically fill in the account ID.
   m_storage->addAccount(acc);
@@ -1359,10 +1379,9 @@ void MyMoneyGncReader::convertTransaction (const GncTransaction *gtx) {
     m_potentialTransfer = false;
     nonSplitTx = false;
   }
-  for (i = 0; i < gtx->kvpCount(); i++ ) {
-    const GncKvp *slot = gtx->getKvp(i);
-    if (slot->key() == "notes") tx.setMemo(slot->value());
-  }
+  QString slotMemo = gtx->getKvpValue(QString("notes"));
+  if (!slotMemo.isEmpty())  tx.setMemo(slotMemo);
+
   QList<MyMoneySplit>::iterator it = m_splitList.begin();
   while (!m_splitList.isEmpty()) {
     split = *it;
@@ -1462,9 +1481,8 @@ void MyMoneyGncReader::convertSplit (const GncSplit *gsp) {
           // we can't use m_storage->security coz security list is not built yet
           m_storage->currency(m_txCommodity);   // will throw exception if not currency
           e.setTradingCurrency (m_txCommodity);
-          if (gncdebug) qDebug ("added price for %s, %s date %s",
-              qPrintable(e.name()), qPrintable(newPrice.toString()),
-              qPrintable(m_txDatePosted.toString(Qt::ISODate)));
+          if (gncdebug) qDebug () << "added price for" << e.name()
+              << newPrice.toString() << "date" << m_txDatePosted.toString(Qt::ISODate);
           m_storage->modifySecurity(e);
           MyMoneyPrice dealPrice (e.id(), m_txCommodity, m_txDatePosted, newPrice, i18n("Imported Transaction"));
           m_storage->addPrice (dealPrice);
@@ -1601,33 +1619,33 @@ void MyMoneyGncReader::convertTemplateSplit (const QString& schedName, const Gnc
   int validSlotCount = 0;
   QString gncAccountId;
   for (i = 0; i < gsp->kvpCount(); i++ ) {
-    const GncKvp *slot = gsp->getKvp(i);
-    if ((slot->key() == "sched-xaction") && (slot->type() == "frame")) {
+    const GncKvp& slot = gsp->getKvp (i);
+    if ((slot.key() == "sched-xaction") && (slot.type() == "frame")) {
       bool bFoundStringCreditFormula = false;
       bool bFoundStringDebitFormula = false;
       bool bFoundGuidAccountId = false;
       QString gncCreditFormula, gncDebitFormula;
-      for (j = 0; j < slot->kvpCount(); j++) {
-        const GncKvp *subSlot = slot->getKvp (j);
+      for (j = 0; j < slot.kvpCount(); j++) {
+        const GncKvp& subSlot = slot.getKvp (j);
         // again, see comments above. when we have a full specification
         // of all the options available to us, we can no doubt improve on this
-        if ((subSlot->key() == "credit-formula") && (subSlot->type() == "string")) {
-          gncCreditFormula = subSlot->value();
+        if ((subSlot.key() == "credit-formula") && (subSlot.type() == "string")) {
+          gncCreditFormula = subSlot.value();
           bFoundStringCreditFormula = true;
         }
-        if ((subSlot->key() == "debit-formula") && (subSlot->type() == "string")) {
-          gncDebitFormula = subSlot->value();
+        if ((subSlot.key() == "debit-formula") && (subSlot.type() == "string")) {
+          gncDebitFormula = subSlot.value();
           bFoundStringDebitFormula = true;
         }
-        if ((subSlot->key() == "account") && (subSlot->type() == "guid")) {
-          gncAccountId = subSlot->value();
+        if ((subSlot.key() == "account") && (subSlot.type() == "guid")) {
+          gncAccountId = subSlot.value();
           bFoundGuidAccountId = true;
         }
       }
       // all data read, now check we have everything
       if ((bFoundStringCreditFormula) && (bFoundStringDebitFormula) && (bFoundGuidAccountId)) {
-        if (gncdebug) qDebug ("Found valid slot; credit %s, debit %s, acct %s",
-                                qPrintable(gncCreditFormula), qPrintable(gncDebitFormula), qPrintable(gncAccountId));
+        if (gncdebug) qDebug () << "Found valid slot; credit" << gncCreditFormula
+                << "debit" << gncDebitFormula << "acct" << gncAccountId;
         validSlotCount++;
       }
       // validate numeric, work out sign
@@ -1652,13 +1670,13 @@ void MyMoneyGncReader::convertTemplateSplit (const QString& schedName, const Gnc
             exFormula = numericTest;
         }
       } else {
-          if (gncdebug) qDebug ("%s is not numeric", qPrintable(numericTest));
+          if (gncdebug) qDebug () << numericTest << "is not numeric";
           nonNumericFormula = true;
       }
       split.setValue (exFormula);
       xactionCount++;
     } else {
-      postMessage ("SC", 3, schedName.toLatin1(), slot->key().toLatin1(), slot->type().toLatin1());
+      postMessage ("SC", 3, schedName.toLatin1(), slot.key().toLatin1(), slot.type().toLatin1());
       m_suspectSchedule = true;
     }
   }
@@ -1820,7 +1838,7 @@ void MyMoneyGncReader::convertSchedule (const GncSchedule *gsc) {
   numOccurs = gsc->numOccurs().toInt();
   if (sc.lastPayment() == QDate()) {
     nextDate = lastDate = gsc->startDate();
-    while (nextDate < today) {
+    while ((nextDate < today) && (numOccurs-- != 0)) {
       lastDate = nextDate;
       nextDate = incrDate (lastDate, vi[i].interval, vi[i].intervalCount);
     }
@@ -1832,6 +1850,7 @@ void MyMoneyGncReader::convertSchedule (const GncSchedule *gsc) {
   // if an end date was specified, use it, otherwise if the input file had a number
   // of occurs remaining, work out the end date
   sc.setEndDate(gsc->endDate());
+  numOccurs = gsc->numOccurs().toInt();
   remOccurs = gsc->remOccurs().toInt();
   if ((sc.endDate() == QDate()) && (remOccurs > 0)) {
     endDate = sc.lastPayment();
@@ -1850,6 +1869,7 @@ void MyMoneyGncReader::convertSchedule (const GncSchedule *gsc) {
   sc.setFixed (!m_suspectSchedule); // if any probs were found, set it as variable so user will always be prompted
   // we don't currently have a 'disable' option, but just make sure auto-enter is off if not enabled
   //qDebug(QString("%1 and %2").arg(gsc->autoCreate()).arg(schedEnabled));
+  sc.setAutoEnter ((gsc->autoCreate() == QChar('y')) && (schedEnabled == QChar('y')));
   //qDebug(QString("autoEnter set to %1").arg(sc.autoEnter()));
   // type
   QString actionType = tx.splits().first().action();
@@ -1911,30 +1931,29 @@ void MyMoneyGncReader::terminate () {
     if ((*acc).parentAccountId() == m_storage->asset().id()) {
       MyMoneyAccount assets = m_storage->asset();
       m_storage->addAccount(assets, (*acc));
-      if (gncdebug) qDebug("Account id %s is a child of the main asset account", qPrintable((*acc).id()));
-    } else if ((*acc).parentAccountId() == m_storage->liability().id()) {
+      if (gncdebug) qDebug() << "Account id" << (*acc).id() << "is a child of the main asset account";
+  } else if ((*acc).parentAccountId() == m_storage->liability().id()) {
       MyMoneyAccount liabilities = m_storage->liability();
       m_storage->addAccount(liabilities, (*acc));
-      if (gncdebug) qDebug("Account id %s is a child of the main liability account", qPrintable((*acc).id()));
+      if (gncdebug) qDebug() << "Account id" << (*acc).id() << "is a child of the main liability account";
     } else if ((*acc).parentAccountId() == m_storage->income().id()) {
       MyMoneyAccount incomes = m_storage->income();
       m_storage->addAccount(incomes, (*acc));
-      if (gncdebug) qDebug("Account id %s is a child of the main income account", qPrintable((*acc).id()));
+      if (gncdebug) qDebug() << "Account id" << (*acc).id() << "is a child of the main income account";
     } else if ((*acc).parentAccountId() == m_storage->expense().id()) {
       MyMoneyAccount expenses = m_storage->expense();
       m_storage->addAccount(expenses, (*acc));
-      if (gncdebug) qDebug("Account id %s is a child of the main expense account", qPrintable((*acc).id()));
+      if (gncdebug) qDebug() << "Account id" << (*acc).id() << "is a child of the main expense account";
     } else if ((*acc).parentAccountId() == m_storage->equity().id()) {
       MyMoneyAccount equity = m_storage->equity();
       m_storage->addAccount(equity, (*acc));
-      if (gncdebug) qDebug("Account id %s is a child of the main equity account", qPrintable((*acc).id()));
+      if (gncdebug) qDebug() << "Account id" << (*acc).id() << "is a child of the main equity account";
     } else if ((*acc).parentAccountId() == m_rootId) {
-      if (gncdebug) qDebug("Account id %s is a child of root", qPrintable((*acc).id()));
+      if (gncdebug) qDebug() << "Account id" << (*acc).id() << "is a child of the main root account";
     } else {
       // it is not under one of the main accounts, so find gnucash parent
       QString parentKey = (*acc).parentAccountId();
-      if (gncdebug) qDebug ("acc %s, parent %s", qPrintable((*acc).id()),
-                              qPrintable((*acc).parentAccountId()));
+       if (gncdebug) qDebug() << "Account id" << (*acc).id() << "is a child of " << (*acc).parentAccountId();
       map_accountIds::const_iterator id = m_mapIds.constFind(parentKey);
       if (id != m_mapIds.constEnd()) {
         if (gncdebug)
@@ -2388,8 +2407,8 @@ void MyMoneyGncReader::postMessage (const QString& source, const unsigned int co
   // get the number of args this message requires
   const int argCount = GncMessages::argCount (source, code);
   if ((gncdebug) && (argCount != argList.count()))
-    qDebug("%s", qPrintable(QString("MyMoneyGncReader::postMessage debug: Message %1, code %2, requires %3 arguments, got %4")
-        .arg(source).arg(code).arg(argCount).arg(argList.count())));
+    qDebug() << QString("MyMoneyGncReader::postMessage debug: Message %1, code %2, requires %3 arguments, got %4")
+        .arg(source).arg(code).arg(argCount).arg(argList.count());
   // store the arguments
   for (i = 0; i < argCount; ++i) {
     if (i > argList.count()) m->args.append(QString());
