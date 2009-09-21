@@ -28,6 +28,7 @@
 #include <QDateTime>
 #include <QStringList>
 #include <QEventLoop>
+#include <QApplication>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -37,6 +38,7 @@
 #include <klocale.h>
 #include <ktip.h>
 #include <kmessagebox.h>
+#include <kapplication.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes

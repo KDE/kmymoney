@@ -21,28 +21,14 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QApplication>
-#include <Q3ValueList>
-#include <QLabel>
+#include <QList>
 #include <QByteArray>
 #include <QResizeEvent>
-#include <QProgressBar>
-class QTimer;
-class QLabel;
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kapplication.h>
 #include <kxmlguiwindow.h>
-#include <kaction.h>
-#include <kprocess.h>
-#include <kurl.h>
-#include <kfile.h>
-#include <krecentfilesaction.h>
-
-class KComboBox;
-class KPushButton;
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -56,20 +42,9 @@ class KPushButton;
 #include <register.h>
 #include <kmymoneyutils.h>
 
-class QSignalMapper;
-class KProgress;
-class KMyMoneyView;
-class MyMoneyQifReader;
-class MyMoneyStatementReader;
-class MyMoneyStatement;
-class IMyMoneyStorage;
-class KFindTransactionDlg;
-class TransactionEditor;
-class KEndingBalanceDlg;
-class KPluginInfo;
+class QResizeEvent;
 class Q3ListViewItem;
-
-namespace KMyMoneyPlugin { class ImporterPlugin; }
+class KPluginInfo;
 
 /*! \mainpage KMyMoney Main Page for API documentation.
  *
@@ -504,7 +479,7 @@ public:
     *
     * @retval QStringList of process ids
     */
-  const Q3ValueList<QByteArray> instanceList(void) const;
+  const QList<QByteArray> instanceList(void) const;
 
   /**
     * Dump a list of the names of all defined KActions to stdout.
@@ -1193,101 +1168,6 @@ private:
    */
   /// \internal d-pointer instance.
   Private* d;
-
-  /** the configuration object of the application */
-  KSharedConfigPtr config;
-
-  QMap<QString,KMyMoneyPlugin::ImporterPlugin*> m_importerPlugins;
-
-  QMap<QString, KMyMoneyPlugin::OnlinePlugin*> m_onlinePlugins;
-
-  enum backupStateE {
-    BACKUP_IDLE = 0,
-    BACKUP_MOUNTING,
-    BACKUP_COPYING,
-    BACKUP_UNMOUNTING
-  };
-  /**
-    * The following variable represents the state while crafting a backup.
-    * It can have the following values
-    *
-    * - IDLE: the default value if not performing a backup
-    * - MOUNTING: when a mount command has been issued
-    * - COPYING:  when a copy command has been issued
-    * - UNMOUNTING: when an unmount command has been issued
-    */
-  backupStateE   m_backupState;
-
-  /**
-    * This variable keeps the result of the backup operation.
-    */
-  int     m_backupResult;
-
-  /**
-    * This variable is set, when the user selected to mount/unmount
-    * the backup volume.
-    */
-  bool    m_backupMount;
-
-  KProcess proc;
-
-  /// A pointer to the view holding the tabs.
-  KMyMoneyView *myMoneyView;
-
-  /// The URL of the file currently being edited when open.
-  KUrl  m_fileName;
-
-  bool m_startDialog;
-  QString m_mountpoint;
-
-  QProgressBar* progressBar;
-
-  QString m_statusMsg;
-
-  int m_progressUpdate;
-  int m_nextUpdate;
-
-  MyMoneyQifReader* m_qifReader;
-  MyMoneyStatementReader* m_smtReader;
-  KFindTransactionDlg* m_searchDlg;
-
-  bool m_bCheckSchedules;
-  QObject*              m_pluginInterface;
-
-  MyMoneyAccount        m_selectedAccount;
-  MyMoneyAccount        m_reconciliationAccount;
-  MyMoneyAccount        m_selectedInvestment;
-  MyMoneyInstitution    m_selectedInstitution;
-  MyMoneySchedule       m_selectedSchedule;
-  MyMoneySecurity       m_selectedCurrency;
-  QList<MyMoneyPayee>  m_selectedPayees;
-  QList<MyMoneyBudget> m_selectedBudgets;
-  KMyMoneyRegister::SelectedTransactions m_selectedTransactions;
-
-  // This is Auto Saving related
-  bool                  m_autoSaveEnabled;
-  QTimer*               m_autoSaveTimer;
-  int                   m_autoSavePeriod;
-  bool                  m_inAutoSaving;
-
-  // Pointer to the combo box used for key selection during
-  // File/Save as
-  KComboBox*            m_saveEncrypted;
-
-  // pointer to the current transaction editor
-  TransactionEditor*    m_transactionEditor;
-
-  // Reconciliation dialog
-  KEndingBalanceDlg*    m_endingBalanceDlg;
-
-  // id's that need to be remembered
-  QString               m_accountGoto, m_payeeGoto;
-
-  QStringList           m_additionalGpgKeys;
-  QLabel*               m_additionalKeyLabel;
-  KPushButton*          m_additionalKeyButton;
-
-  KRecentFilesAction*    m_recentFiles;
 };
 
 extern  KMyMoney2App *kmymoney2;
