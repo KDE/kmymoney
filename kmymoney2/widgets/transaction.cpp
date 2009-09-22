@@ -591,7 +591,9 @@ void Transaction::setupPalette(const QPalette& palette, QMap<QString, QWidget*>&
 
 void Transaction::setupFormPalette(QMap<QString, QWidget*>& editWidgets)
 {
-  setupPalette(m_parent->palette(), editWidgets);
+  QPalette palette = m_parent->palette();
+  palette.setColor(QPalette::Active, QColorGroup::Base, palette.color(QPalette::Active, QColorGroup::Base));
+  setupPalette(palette, editWidgets);
 }
 
 void Transaction::setupRegisterPalette(QMap<QString, QWidget*>& editWidgets)
