@@ -1093,17 +1093,17 @@ void KHomeView::slotOpenUrl(const KUrl &url, const KParts::OpenUrlArguments&,con
     } else if(view == VIEW_SCHEDULE) {
       if(mode == "enter") {
         emit scheduleSelected(id);
-        KXmlGuiWindow* mw = dynamic_cast<KXmlGuiWindow*>(qApp->mainWidget());
+        KXmlGuiWindow* mw = KMyMoneyUtils::mainWindow();
         Q_CHECK_PTR(mw);
         QTimer::singleShot(0, mw->actionCollection()->action("schedule_enter"), SLOT(trigger()));
       } else if(mode == "edit") {
         emit scheduleSelected(id);
-        KXmlGuiWindow* mw = dynamic_cast<KXmlGuiWindow*>(qApp->mainWidget());
+        KXmlGuiWindow* mw = KMyMoneyUtils::mainWindow();
         Q_CHECK_PTR(mw);
         QTimer::singleShot(0, mw->actionCollection()->action("schedule_edit"), SLOT(trigger()));
       } else if(mode == "skip") {
         emit scheduleSelected(id);
-        KXmlGuiWindow* mw = dynamic_cast<KXmlGuiWindow*>(qApp->mainWidget());
+        KXmlGuiWindow* mw = KMyMoneyUtils::mainWindow();
         Q_CHECK_PTR(mw);
         QTimer::singleShot(0, mw->actionCollection()->action("schedule_skip"), SLOT(trigger()));
       } else if(mode == "full") {
@@ -1119,7 +1119,7 @@ void KHomeView::slotOpenUrl(const KUrl &url, const KParts::OpenUrlArguments&,con
       emit reportSelected(id);
 
     } else if(view == VIEW_WELCOME) {
-      KXmlGuiWindow* mw = dynamic_cast<KXmlGuiWindow*>(qApp->mainWidget());
+      KXmlGuiWindow* mw = KMyMoneyUtils::mainWindow();
       Q_CHECK_PTR(mw);
       if ( mode == "whatsnew" ) {
         m_part->begin();
@@ -1132,7 +1132,7 @@ void KHomeView::slotOpenUrl(const KUrl &url, const KParts::OpenUrlArguments&,con
       }
 
     } else if(view == "action") {
-      KXmlGuiWindow* mw = dynamic_cast<KXmlGuiWindow*>(qApp->mainWidget());
+      KXmlGuiWindow* mw = KMyMoneyUtils::mainWindow();
       Q_CHECK_PTR(mw);
       QTimer::singleShot(0, mw->actionCollection()->action( id ), SLOT(trigger ()));
     } else if(view == VIEW_HOME) {
