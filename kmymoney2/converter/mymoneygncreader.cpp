@@ -986,7 +986,7 @@ bool XmlReader::endElement( const QString&, const QString&, const QString&elName
 #ifndef _GNCFILEANON
     // we can't pass on exceptions here coz the XML reader won't catch them and we just abort
     KMessageBox::error(0, i18n("Import failed:\n\n%1",e->what()), PACKAGE);
-    qFatal (qPrintable(e->what()));
+    qFatal ("%s", qPrintable(e->what()));
 #else
     qFatal ("%s", e->toLatin1());
 #endif // _GNCFILEANON
@@ -1074,7 +1074,7 @@ void MyMoneyGncReader::readFile(QIODevice* pDevice, IMyMoneySerialize* storage) 
     ft.commit();
   } catch (MyMoneyException *e) {
     KMessageBox::error(0, i18n("Import failed:\n\n%1",e->what()), PACKAGE);
-    qFatal (qPrintable( e->what()));
+    qFatal ("%s", qPrintable( e->what()));
   } // end catch
   signalProgress (0, 1, i18n("Import complete")); // switch off progress bar
   delete m_xr;

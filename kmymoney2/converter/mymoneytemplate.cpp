@@ -37,6 +37,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "kmymoneyutils.h"
+
 MyMoneyTemplate::MyMoneyTemplate() :
   m_progressCallback(0)
 {
@@ -67,9 +69,9 @@ bool MyMoneyTemplate::loadTemplate(const KUrl& url)
 
   } else {
     bool rc;
-    rc = KIO::NetAccess::download(url, filename, qApp->mainWidget());
+    rc = KIO::NetAccess::download(url, filename, KMyMoneyUtils::mainWindow());
     if(!rc) {
-      KMessageBox::detailedError(qApp->mainWidget(),
+      KMessageBox::detailedError(KMyMoneyUtils::mainWindow(),
              i18n("Error while loading file '%1'!",url.url()),
              KIO::NetAccess::lastErrorString(),
              i18n("File access error"));
@@ -82,7 +84,7 @@ bool MyMoneyTemplate::loadTemplate(const KUrl& url)
   QFileInfo info(file);
   if(!info.isFile()) {
     QString msg=i18n("<b>%1</b> is not a template file.",filename);
-    KMessageBox::error(qApp->mainWidget(), QString("<p>")+msg, i18n("Filetype Error"));
+    KMessageBox::error(KMyMoneyUtils::mainWindow(), QString("<p>")+msg, i18n("Filetype Error"));
     return false;
   }
 
@@ -91,14 +93,14 @@ bool MyMoneyTemplate::loadTemplate(const KUrl& url)
     int errLine, errColumn;
     if(!m_doc.setContent(&file, &errMsg, &errLine, &errColumn)) {
       QString msg=i18n("Error while reading template file <b>%1</b> in line %2, column %3",filename,errLine,errColumn);
-      KMessageBox::detailedError(qApp->mainWidget(), QString("<p>")+msg, errMsg, i18n("Template Error"));
+      KMessageBox::detailedError(KMyMoneyUtils::mainWindow(), QString("<p>")+msg, errMsg, i18n("Template Error"));
       rc = false;
     } else {
       rc = loadDescription();
     }
     file.close();
   } else {
-    KMessageBox::sorry(qApp->mainWidget(), i18n("File '%1' not found!",filename));
+    KMessageBox::sorry(KMyMoneyUtils::mainWindow(), i18n("File '%1' not found!",filename));
     rc = false;
   }
 
@@ -139,7 +141,7 @@ bool MyMoneyTemplate::loadDescription(void)
         m_longDesc = childElement.text();
         validMask |= validLong;
       } else {
-        KMessageBox::error(qApp->mainWidget(), QString("<p>")+i18n("Invalid tag <b>%1</b> in template file <b>%2</b>!",childElement.tagName(),m_source.prettyUrl()));
+        KMessageBox::error(KMyMoneyUtils::mainWindow(), QString("<p>")+i18n("Invalid tag <b>%1</b> in template file <b>%2</b>!",childElement.tagName(),m_source.prettyUrl()));
         validMask |= invalid;
       }
       child = child.nextSibling();
@@ -238,7 +240,7 @@ bool MyMoneyTemplate::importTemplate(void(*callback)(int, int, const QString&))
           break;
 
         default:
-          KMessageBox::error(qApp->mainWidget(), QString("<p>")+i18n("Invalid top-level account type <b>%1</b> in template file <b>%2</b>!",childElement.attribute("type"),m_source.prettyUrl()));
+          KMessageBox::error(KMyMoneyUtils::mainWindow(), QString("<p>")+i18n("Invalid top-level account type <b>%1</b> in template file <b>%2</b>!",childElement.attribute("type"),m_source.prettyUrl()));
           rc = false;
       }
 
@@ -306,7 +308,7 @@ bool MyMoneyTemplate::setFlags(MyMoneyAccount& acc, QDomNode flags)
         if(value == "Tax") {
           acc.setValue(value.toLatin1(), "Yes");
         } else {
-           KMessageBox::error(qApp->mainWidget(), QString("<p>")+i18n("Invalid flag type <b>%1</b> for account <b>%3</b> in template file <b>%2</b>!",flagElement.attribute("name"),m_source.prettyUrl(),acc.name()));
+           KMessageBox::error(KMyMoneyUtils::mainWindow(), QString("<p>")+i18n("Invalid flag type <b>%1</b> for account <b>%3</b> in template file <b>%2</b>!",flagElement.attribute("name"),m_source.prettyUrl(),acc.name()));
           rc = false;
        }
       }

@@ -22,6 +22,7 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
+#include <QApplication>
 #include <QList>
 #include <QPixmap>
 
@@ -373,7 +374,7 @@ QString KMyMoneyUtils::nextCheckNumber(const MyMoneyAccount& acc)
   // determine next check number
   QString number;
   QRegExp exp(QString("(.*\\D)?(\\d+)(\\D.*)?"));
-  if(exp.search(acc.value("lastNumberUsed")) != -1) {
+  if(exp.indexIn(acc.value("lastNumberUsed")) != -1) {
     number = QString("%1%2%3").arg(exp.cap(1)).arg(exp.cap(2).toULongLong() + 1).arg(exp.cap(3));
   } else {
     number = "1";
@@ -515,4 +516,10 @@ QPixmap KMyMoneyUtils::accountGroupPixmap(const MyMoneyAccount& account, bool re
   return result;
 }
 
-
+KXmlGuiWindow* KMyMoneyUtils::mainWindow() {
+  foreach (QWidget *widget, QApplication::topLevelWidgets()) {
+    KXmlGuiWindow* result = dynamic_cast<KXmlGuiWindow*>(widget);
+    if (result)
+      return result;
+  }
+}

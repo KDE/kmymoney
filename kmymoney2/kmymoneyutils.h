@@ -35,6 +35,7 @@
 // KDE Headers
 
 #include <kguiitem.h>
+#include <kxmlguiwindow.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -384,6 +385,14 @@ public:
    */
   static QPixmap accountGroupPixmap(const MyMoneyAccount& account, bool reconcileFlag = false);
 
+  /**
+   * This method replaces the deprecated QApplication::mainWidget() from Qt 3.x.
+   * It assumes that there is only one KXmlGuiWindow in the application, and
+   * returns it.
+   *
+   * @return the first KXmlGuiWindow found in QApplication::topLevelWidgets()
+   */
+  static KXmlGuiWindow* mainWindow();
 };
 
 #endif
