@@ -33,6 +33,9 @@
 //Added by qt3to4:
 #include <QMouseEvent>
 #include <KDChartWidget>
+#include <KDChartChart>
+#include <KDChartAbstractDiagram>
+#include <KDChartAbstractCoordinatePlane>
 // #include <KDChartTable>
 // #include <KDChartParams>
 // #include <KDChartAxisParams>

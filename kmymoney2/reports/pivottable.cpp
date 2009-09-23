@@ -50,6 +50,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include <KDChartLegend>
 #include "pivottable.h"
 #include "pivotgrid.h"
 #include "reportdebug.h"
@@ -1673,7 +1674,6 @@ QString PivotTable::renderHTML( void ) const
 
       ++it_outergroup_map;
     }
-    #warning #Port to KDE4
     qSort(outergroups.begin(), outergroups.end());
 
     QList<PivotOuterGroup>::const_iterator it_outergroup = outergroups.constBegin();
@@ -2066,12 +2066,12 @@ void PivotTable::drawChart( KReportChartView& chartView ) const
     case MyMoneyReport::eDetailAll:
     {
       int rowNum = 0;
+      Legend* legend = new Legend(chartView.diagram(), chartView.diagram()->coordinatePlane()->parent());
 
       // iterate over outer groups
       PivotGrid::const_iterator it_outergroup = m_grid.begin();
       while ( it_outergroup != m_grid.end() )
       {
-
         // iterate over inner groups
         PivotOuterGroup::const_iterator it_innergroup = (*it_outergroup).begin();
         while ( it_innergroup != (*it_outergroup).end() )
@@ -2093,12 +2093,11 @@ void PivotTable::drawChart( KReportChartView& chartView ) const
 
                   //only show the column type in the header if there is more than one type
                   if(m_rowTypeList.size() > 1) {
-                    /*Legend* legend = Legend(chartView);
-                    legend->setText(m_columnTypeHeaderList[i] + " - " + it_row.key().name());
-                    chartView.addLegend(legend);
-                    *///chartView.params()->setLegendText( rowNum-1, m_columnTypeHeaderList[i] + " - " + it_row.key().name() );
+
+                    legend->setText(rowNum-1, m_columnTypeHeaderList[i] + " - " + it_row.key().name());
+
                   } else {
-//                     chartView.params()->setLegendText( rowNum-1, it_row.key().name() );
+                    legend->setText(rowNum-1, it_row.key().name());
                   }
                 }
               }
@@ -2109,12 +2108,14 @@ void PivotTable::drawChart( KReportChartView& chartView ) const
         }
         ++it_outergroup;
       }
+      chartView.addLegend(legend);
     }
     break;
 
     case MyMoneyReport::eDetailTop:
     {
       int rowNum = 0;
+      Legend* legend = new Legend(chartView.diagram(), chartView.diagram()->coordinatePlane()->parent());
 
       // iterate over outer groups
       PivotGrid::const_iterator it_outergroup = m_grid.begin();
@@ -2133,9 +2134,9 @@ void PivotTable::drawChart( KReportChartView& chartView ) const
 
               //only show the column type in the header if there is more than one type
               if(m_rowTypeList.size() > 1) {
-//                 chartView.params()->setLegendText( rowNum-1, m_columnTypeHeaderList[i] + " - " + it_innergroup.key() );
+                legend->setText(rowNum-1, m_columnTypeHeaderList[i] + " - " + it_innergroup.key());
               } else {
-//                 chartView.params()->setLegendText( rowNum-1, it_innergroup.key() );
+                legend->setText(rowNum-1, it_innergroup.key());
               }
             }
           }
@@ -2143,12 +2144,14 @@ void PivotTable::drawChart( KReportChartView& chartView ) const
         }
         ++it_outergroup;
       }
+      chartView.addLegend(legend);
     }
     break;
 
     case MyMoneyReport::eDetailGroup:
     {
       int rowNum = 0;
+      Legend* legend = new Legend(chartView.diagram(), chartView.diagram()->coordinatePlane()->parent());
 
       // iterate over outer groups
       PivotGrid::const_iterator it_outergroup = m_grid.begin();
@@ -2162,9 +2165,9 @@ void PivotTable::drawChart( KReportChartView& chartView ) const
 
             //only show the column type in the header if there is more than one type
             if(m_rowTypeList.size() > 1) {
-//               chartView.params()->setLegendText( rowNum-1, m_columnTypeHeaderList[i] + " - " + it_outergroup.key() );
+              legend->setText(rowNum-1, m_columnTypeHeaderList[i] + " - " + it_outergroup.key());
             } else {
-//               chartView.params()->setLegendText( rowNum-1, it_outergroup.key() );
+              legend->setText(rowNum-1, it_outergroup.key());
             }
           }
         }
@@ -2182,19 +2185,21 @@ void PivotTable::drawChart( KReportChartView& chartView ) const
 
             //only show the column type in the header if there is more than one type
             if(m_rowTypeList.size() > 1) {
-//               chartView.params()->setLegendText( rowNum-1, m_columnTypeHeaderList[i] + " - " + i18nc("Total balance", "Total") );
+              legend->setText(rowNum -1, m_columnTypeHeaderList[i] + " - " + i18nc("Total balance", "Total"));
             } else {
-//               chartView.params()->setLegendText( rowNum-1, i18nc("Total balance", "Total") );
+              legend->setText(rowNum -1, i18nc("Total balance", "Total"));
             }
           }
         }
       }
+      chartView.addLegend(legend);
     }
     break;
 
     case MyMoneyReport::eDetailTotal:
     {
       int rowNum = 0;
+      Legend* legend = new Legend(chartView.diagram(), chartView.diagram()->coordinatePlane()->parent());
 
       //iterate row types
       for(int i = 0; i < m_rowTypeList.size(); ++i) {
@@ -2204,12 +2209,13 @@ void PivotTable::drawChart( KReportChartView& chartView ) const
 
           //only show the column type in the header if there is more than one type
           if(m_rowTypeList.size() > 1) {
-//             chartView.params()->setLegendText( rowNum-1, m_columnTypeHeaderList[i] + " - " + i18nc("Total balance", "Total") );
-          } else {
-//             chartView.params()->setLegendText( rowNum-1, i18nc("Total balance", "Total") );
+              legend->setText(rowNum -1, m_columnTypeHeaderList[i] + " - " + i18nc("Total balance", "Total"));
+            } else {
+              legend->setText(rowNum -1, i18nc("Total balance", "Total"));//             chartView.params()->setLegendText( rowNum-1, i18nc("Total balance", "Total") );
           }
         }
       }
+      chartView.addLegend(legend);
     }
     break;
   }
