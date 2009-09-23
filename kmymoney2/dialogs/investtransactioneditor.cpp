@@ -438,7 +438,7 @@ void InvestTransactionEditor::slotCreateSecurity(const QString& name, QString& i
 {
   MyMoneyAccount acc;
   QRegExp exp("([^:]+)");
-  if(exp.search(name) != -1) {
+  if(exp.indexIn(name) != -1) {
     acc.setName(exp.cap(1));
 
     emit createSecurity(acc, m_account);

@@ -236,7 +236,7 @@ bool KOnlineBankingSetupWizard::finishLoginPage(void)
     // http://ofxblog.wordpress.com/2007/06/06/ofx-appid-and-appver-for-microsoft-money/
     QString appId = m_appId->appId();
     QRegExp exp("(.*):(.*)");
-    if(exp.search(appId) != -1) {
+    if(exp.indexIn(appId) != -1) {
       strncpy(fi.appid, exp.cap(1).toLatin1(), OFX_APPID_LENGTH-1);
       strncpy(fi.appver, exp.cap(2).toLatin1(), OFX_APPVER_LENGTH-1);
     } else {

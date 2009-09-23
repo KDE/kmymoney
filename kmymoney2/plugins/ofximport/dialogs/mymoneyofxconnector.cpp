@@ -199,7 +199,7 @@ OfxAccountData::AccountType MyMoneyOfxConnector::accounttype(void) const
   // ofx type for an account.  For now, I will stash it in the notes!
 
   QRegExp rexp("OFXTYPE:([A-Z]*)");
-  if ( rexp.search(m_account.description()) != -1 )
+  if ( rexp.indexIn(m_account.description()) != -1 )
   {
     QString override = rexp.cap(1);
     kDebug(2) << "MyMoneyOfxConnector::accounttype() overriding to " << result;
@@ -272,7 +272,7 @@ void MyMoneyOfxConnector::initRequest(OfxFiLogin* fi) const
   // http://ofxblog.wordpress.com/2007/06/06/ofx-appid-and-appver-for-microsoft-money/
   QString appId = m_account.onlineBankingSettings().value("appId");
   QRegExp exp("(.*):(.*)");
-  if(exp.search(appId) != -1) {
+  if(exp.indexIn(appId) != -1) {
     strncpy(fi->appid, exp.cap(1).toLatin1(), OFX_APPID_LENGTH-1);
     strncpy(fi->appver, exp.cap(2).toLatin1(), OFX_APPVER_LENGTH-1);
   } else {

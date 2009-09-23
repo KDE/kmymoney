@@ -80,7 +80,7 @@ QStringList KMyMoneyGlobalSettings::itemList(void)
   QRegExp exp("-?(\\d+)");
   QStringList::iterator it_s;
   for(it_s = all.begin(); it_s != all.end(); ++it_s) {
-    exp.search(*it_s);
+    exp.indexIn(*it_s);
     if(!list.contains(exp.cap(1)) && !list.contains(QString("-%1").arg(exp.cap(1)))) {
       list << *it_s;
     }

@@ -524,12 +524,12 @@ int KMyMoneySelector::slotMakeCompletion(const QString& _txt)
   QString txt(QRegExp::escape(_txt));
   if(KMyMoneyGlobalSettings::stringMatchFromStart() && this->isA("KMyMoneySelector") )
     txt.prepend('^');
-  return slotMakeCompletion(QRegExp(txt, false));
+  return slotMakeCompletion(QRegExp(txt, Qt::CaseInsensitive));
 }
 
 bool KMyMoneySelector::match(const QRegExp& exp, Q3ListViewItem* item) const
 {
-  return exp.search(item->text(0)) != -1;
+  return exp.indexIn(item->text(0)) != -1;
 }
 
 int KMyMoneySelector::slotMakeCompletion(const QRegExp& exp)

@@ -482,8 +482,8 @@ void KReportConfigurationFilterDlg::slotReset(void)
   if ( m_initialState.textFilter(textfilter))
   {
     m_textEdit->setText(textfilter.pattern());
-    m_caseSensitive->setChecked(textfilter.caseSensitive());
-    m_regExp->setChecked(!textfilter.wildcard());
+    m_caseSensitive->setChecked(Qt::CaseSensitive == textfilter.caseSensitivity());
+    m_regExp->setChecked(!(QRegExp::RegExp == textfilter.patternSyntax()));
     m_textNegate->setCurrentIndex(m_initialState.isInvertingText());
   }
 

@@ -346,7 +346,7 @@ bool FilePage::isComplete(void) const
     if(rc) {
       QRegExp exp("(.*)/(.*)");
       rc = false;
-      if(exp.search(m_dataFileEdit->url().path()) != -1) {
+      if(exp.indexIn(m_dataFileEdit->url().path()) != -1) {
         if(exp.cap(2).length() > 0) {
           rc = KIO::NetAccess::exists(exp.cap(1), true, m_wizard);
         }

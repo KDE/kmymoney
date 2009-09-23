@@ -593,7 +593,7 @@ void KFindTransactionDlg::setupFilter(void)
 
   // Text tab
   if(!m_textEdit->text().isEmpty()) {
-    QRegExp exp(m_textEdit->text(), m_caseSensitive->isChecked(), !m_regExp->isChecked());
+    QRegExp exp(m_textEdit->text(), m_caseSensitive->isChecked() ? Qt::CaseSensitive : Qt::CaseInsensitive, !m_regExp->isChecked() ? QRegExp::Wildcard : QRegExp::RegExp);
     m_filter.setTextFilter(exp, m_textNegate->currentItem() != 0);
   }
 

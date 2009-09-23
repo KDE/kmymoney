@@ -718,11 +718,11 @@ bool KMyMoneyView::readFile(const KUrl& url)
                 QRegExp kmyexp("<!DOCTYPE KMYMONEY-FILE>");
                 QRegExp gncexp("<gnc-v(\\d+)");
                 QByteArray txt(hdr, 70);
-                if(kmyexp.search(txt) != -1) {
+                if(kmyexp.indexIn(txt) != -1) {
                   ::timetrace("is XML format");
                   pReader = new MyMoneyStorageXML;
                   m_fileType = KmmXML;
-                } else if(gncexp.search(txt) != -1) {
+                } else if(gncexp.indexIn(txt) != -1) {
                   ::timetrace("is GNC format");
                   MyMoneyFileTransaction ft;
                   loadDefaultCurrencies(); // currency list required for gnc
