@@ -531,7 +531,7 @@ transactions this is currently empty.</para>
     <listitem>
       <para>
         To create an account using the menu select
-        <menuchoice><guimenu>Accounts</guimenu><guimenuitem>Add new
+        <menuchoice><guimenu>Accounts</guimenu><guimenuitem>New
         account</guimenuitem></menuchoice>.
       </para>
     </listitem>
