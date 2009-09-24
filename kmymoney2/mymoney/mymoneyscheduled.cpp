@@ -1274,7 +1274,7 @@ MyMoneySchedule::occurrenceE MyMoneySchedule::stringToOccurrence(const QString& 
     occurrence = MyMoneySchedule::OCCUR_ONCE;
   else if(tmp == i18nc("Occurs daily", "Daily").toLower())
     occurrence = MyMoneySchedule::OCCUR_DAILY;
-  else if(tmp == i18nc("Weekly", "Occurs weekly").toLower())
+  else if(tmp == i18nc("Occurs weekly", "Weekly").toLower())
     occurrence = MyMoneySchedule::OCCUR_WEEKLY;
   else if(tmp == i18n("Fortnightly").toLower())
     occurrence = MyMoneySchedule::OCCUR_FORTNIGHTLY;
