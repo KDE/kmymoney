@@ -267,9 +267,6 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   //set the model
   setModel(m_model);
 
-  // construct an empty file
-  newFile();
-
   #warning "port to kde4"
   #if 0
   // get rid of the title text
