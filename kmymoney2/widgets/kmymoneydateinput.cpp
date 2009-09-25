@@ -19,23 +19,22 @@
 // QT Includes
 
 #include <QPainter>
-#include <qdrawutil.h>
-#include <qpoint.h>
+#include <QPoint>
 #include <QValidator>
 #include <QTimer>
 #include <QStyle>
 #include <QLayout>
 #include <QApplication>
-#include <qdesktopwidget.h>
+#include <QDesktopWidget>
 #include <QPixmap>
 #include <QTimer>
 #include <QLabel>
-//Added by qt3to4:
 #include <QResizeEvent>
 #include <QFrame>
 #include <QKeyEvent>
 #include <QEvent>
-#include <KVBox>
+#include <QDateEdit>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -45,6 +44,8 @@
 #include <kpushbutton.h>
 #include <kshortcut.h>
 #include <kpassivepopup.h>
+#include <kdatepicker.h>
+#include <kvbox.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -64,40 +65,52 @@ bool KMyMoneyDateEdit::event(QEvent* e)
   kMyMoneyDateInput* p = dynamic_cast<kMyMoneyDateInput*>(parentWidget());
   if(e->type() == QEvent::FocusOut && p) {
     QDate d = p->date();
-    rc = Q3DateEdit::event(e);
+    rc = QDateEdit::event(e);
     if(d.isValid())
       d = p->date();
     p->loadDate(d);
   } else {
-    rc = Q3DateEdit::event(e);
+    rc = QDateEdit::event(e);
   }
   return rc;
 }
 
-kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, Qt::AlignmentFlag flags)
- : KHBox(parent)
+struct kMyMoneyDateInput::Private
 {
-  m_qtalignment = flags;
-  m_date = QDate::currentDate();
+  QDateEdit *m_dateEdit;
+  KDatePicker *m_datePicker;
+  QDate m_date;
+  QDate m_prevDate;
+  Qt::AlignmentFlag m_qtalignment;
+  KVBox *m_dateFrame;
+  KPushButton *m_dateButton;
+  KPassivePopup *m_datePopup;
+};
 
-  dateEdit = new KMyMoneyDateEdit(m_date, this, "dateEdit");
-  setFocusProxy(dateEdit);
-  focusWidget()->installEventFilter(this); // To get dateEdit's FocusIn/Out and some KeyPress events
-  dateEdit->installEventFilter(this); // To get dateEdit's FocusIn/Out and some KeyPress events
+kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, Qt::AlignmentFlag flags)
+ : KHBox(parent), d(new Private)
+{
+  d->m_qtalignment = flags;
+  d->m_date = QDate::currentDate();
 
-  m_datePopup = new KPassivePopup(dateEdit);
-  m_datePopup->setObjectName("datePopup");
-  m_datePopup->setTimeout(DATE_POPUP_TIMEOUT);
-  m_datePopup->setView(new QLabel(KGlobal::locale()->formatDate(m_date), m_datePopup));
+  d->m_dateEdit = new KMyMoneyDateEdit(d->m_date, this);
+  setFocusProxy(d->m_dateEdit);
+  focusWidget()->installEventFilter(this); // To get d->m_dateEdit's FocusIn/Out and some KeyPress events
+  d->m_dateEdit->installEventFilter(this); // To get d->m_dateEdit's FocusIn/Out and some KeyPress events
 
-  m_dateFrame = new KVBox(this);
-  m_dateFrame->setWindowFlags(Qt::Popup);
-  m_dateFrame->setFrameStyle(QFrame::PopupPanel | QFrame::Raised);
-  m_dateFrame->setLineWidth(3);
-  m_dateFrame->hide();
+  d->m_datePopup = new KPassivePopup(d->m_dateEdit);
+  d->m_datePopup->setObjectName("datePopup");
+  d->m_datePopup->setTimeout(DATE_POPUP_TIMEOUT);
+  d->m_datePopup->setView(new QLabel(KGlobal::locale()->formatDate(d->m_date), d->m_datePopup));
+
+  d->m_dateFrame = new KVBox(this);
+  d->m_dateFrame->setWindowFlags(Qt::Popup);
+  d->m_dateFrame->setFrameStyle(QFrame::PopupPanel | QFrame::Raised);
+  d->m_dateFrame->setLineWidth(3);
+  d->m_dateFrame->hide();
 
   QString dateFormat = KGlobal::locale()->dateFormatShort().toLower();
-  QString order, separator;
+  QString order;
   for(int i = 0; i < dateFormat.length(); ++i) {
     // DD.MM.YYYY is %d.%m.%y
     // dD.mM.YYYY is %e.%n.%y
@@ -108,43 +121,35 @@ kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, Qt::AlignmentFlag flags)
       if(dateFormat[i] == 'e')
         dateFormat[i] = 'd';
       order += dateFormat[i];
-    } else if(dateFormat[i] != '%' && separator.isEmpty())
-      separator = dateFormat[i];
+    }
     if(order.length() == 3)
       break;
   }
 
   // see if we find a known format. If it's unknown, then we use YMD (international)
-  // set m_focusDatePart to the day position (0-2)
   if(order == "mdy") {
-    dateEdit->setOrder(Q3DateEdit::MDY);
-    m_focusDatePart = 1;
+    d->m_dateEdit->setDisplayFormat("MM.dd.yyyy");
   } else if(order == "dmy") {
-    dateEdit->setOrder(Q3DateEdit::DMY);
-    m_focusDatePart = 0;
+    d->m_dateEdit->setDisplayFormat("dd.MM.yyyy");
   } else if(order == "ydm") {
-    dateEdit->setOrder(Q3DateEdit::YDM);
-    m_focusDatePart = 1;
+    d->m_dateEdit->setDisplayFormat("yyyy.dd.MM");
   } else {
-    dateEdit->setOrder(Q3DateEdit::YMD);
-    m_focusDatePart = 2;
-    separator = '-';
+    d->m_dateEdit->setDisplayFormat("yyyy.MM.dd");
   }
-  dateEdit->setSeparator(separator);
 
-  m_datePicker = new KDatePicker(m_date, m_dateFrame);
+  d->m_datePicker = new KDatePicker(d->m_date, d->m_dateFrame);
   // Let the date picker have a close button (Added in 3.1)
-  m_datePicker->setCloseButton(true);
+  d->m_datePicker->setCloseButton(true);
 
   // the next line is a try to add an icon to the button
-  m_dateButton = new KPushButton(KIcon(QPixmap(KIconLoader::global()->iconPath("view-calendar-day", -KIconLoader::SizeSmall))), QString(""), this);
-  m_dateButton->setMinimumWidth(30);
+  d->m_dateButton = new KPushButton(KIcon(QPixmap(KIconLoader::global()->iconPath("view-calendar-day", -KIconLoader::SizeSmall))), QString(""), this);
+  d->m_dateButton->setMinimumWidth(30);
 
-  connect(m_dateButton,SIGNAL(clicked()),SLOT(toggleDatePicker()));
-  connect(dateEdit, SIGNAL(valueChanged(const QDate&)), this, SLOT(slotDateChosenRef(const QDate&)));
-  connect(m_datePicker, SIGNAL(dateSelected(QDate)), this, SLOT(slotDateChosen(QDate)));
-  connect(m_datePicker, SIGNAL(dateEntered(QDate)), this, SLOT(slotDateChosen(QDate)));
-  connect(m_datePicker, SIGNAL(dateSelected(QDate)), m_dateFrame, SLOT(hide()));
+  connect(d->m_dateButton,SIGNAL(clicked()),SLOT(toggleDatePicker()));
+  connect(d->m_dateEdit, SIGNAL(dateChanged(const QDate&)), this, SLOT(slotDateChosenRef(const QDate&)));
+  connect(d->m_datePicker, SIGNAL(dateSelected(QDate)), this, SLOT(slotDateChosen(QDate)));
+  connect(d->m_datePicker, SIGNAL(dateEntered(QDate)), this, SLOT(slotDateChosen(QDate)));
+  connect(d->m_datePicker, SIGNAL(dateSelected(QDate)), d->m_dateFrame, SLOT(hide()));
 }
 
 void kMyMoneyDateInput::showEvent(QShowEvent* event)
@@ -165,66 +170,67 @@ void kMyMoneyDateInput::fixSize(void)
   // 28 pixels should be added in each direction to obtain a better
   // display of the month button. I decided, (22,14) is good
   // enough and save some space on the screen (ipwizard)
-  m_dateFrame->setFixedSize(m_datePicker->sizeHint() + QSize(22, 14));
+  d->m_dateFrame->setFixedSize(d->m_datePicker->sizeHint() + QSize(22, 14));
 
-  dateEdit->setMinimumWidth(dateEdit->minimumSizeHint().width() + 6);
+  d->m_dateEdit->setMinimumWidth(d->m_dateEdit->minimumSizeHint().width() + 6);
 }
 
 kMyMoneyDateInput::~kMyMoneyDateInput()
 {
-  delete m_dateFrame;
-  delete m_datePopup;
+  delete d->m_dateFrame;
+  delete d->m_datePopup;
+  delete d;
 }
 
 void kMyMoneyDateInput::toggleDatePicker()
 {
-  int w = m_dateFrame->width();
-  int h = m_dateFrame->height();
+  int w = d->m_dateFrame->width();
+  int h = d->m_dateFrame->height();
 
-  if(m_dateFrame->isVisible())
+  if(d->m_dateFrame->isVisible())
   {
-    m_dateFrame->hide();
+    d->m_dateFrame->hide();
   }
   else
   {
-    QPoint tmpPoint = mapToGlobal(m_dateButton->geometry().bottomRight());
+    QPoint tmpPoint = mapToGlobal(d->m_dateButton->geometry().bottomRight());
 
-    // usually, the datepicker widget is shown underneath the dateEdit widget
+    // usually, the datepicker widget is shown underneath the d->m_dateEdit widget
     // if it does not fit on the screen, we show it above this widget
 
     if(tmpPoint.y() + h > QApplication::desktop()->height()) {
-      tmpPoint.setY(tmpPoint.y() - h - m_dateButton->height());
+      tmpPoint.setY(tmpPoint.y() - h - d->m_dateButton->height());
     }
 
-    if((m_qtalignment == Qt::AlignRight && tmpPoint.x()+w <= QApplication::desktop()->width())
+    if((d->m_qtalignment == Qt::AlignRight && tmpPoint.x()+w <= QApplication::desktop()->width())
     || (tmpPoint.x()-w < 0)  )
     {
-      m_dateFrame->setGeometry(tmpPoint.x()-width(), tmpPoint.y(), w, h);
+      d->m_dateFrame->setGeometry(tmpPoint.x()-width(), tmpPoint.y(), w, h);
     }
     else
     {
       tmpPoint.setX(tmpPoint.x() - w);
-      m_dateFrame->setGeometry(tmpPoint.x(), tmpPoint.y(), w, h);
+      d->m_dateFrame->setGeometry(tmpPoint.x(), tmpPoint.y(), w, h);
     }
 
-    if(m_date.isValid())
+    if(d->m_date.isValid())
     {
-      m_datePicker->setDate(m_date);
+      d->m_datePicker->setDate(d->m_date);
     }
     else
     {
-      m_datePicker->setDate(QDate::currentDate());
+      d->m_datePicker->setDate(QDate::currentDate());
     }
-    m_dateFrame->show();
+    d->m_dateFrame->show();
   }
 }
 
 
 void kMyMoneyDateInput::resizeEvent(QResizeEvent* ev)
 {
-  m_dateButton->setMaximumHeight(ev->size().height());
-  m_dateButton->setMaximumWidth(ev->size().height());
-  dateEdit->setMaximumHeight(ev->size().height());
+  d->m_dateButton->setMaximumHeight(ev->size().height());
+  d->m_dateButton->setMaximumWidth(ev->size().height());
+  d->m_dateEdit->setMaximumHeight(ev->size().height());
 
   // qDebug("Received resize-event %d,%d", ev->size().width(), ev->size().height());
 }
@@ -242,11 +248,11 @@ void kMyMoneyDateInput::keyPressEvent(QKeyEvent * k)
   switch(k->key()) {
     case Qt::Key_Equal:
     case Qt::Key_Plus:
-      slotDateChosen(m_date.addDays(1));
+      slotDateChosen(d->m_date.addDays(1));
       break;
 
     case Qt::Key_Minus:
-      slotDateChosen(m_date.addDays(-1));
+      slotDateChosen(d->m_date.addDays(-1));
       break;
 
     default:
@@ -265,15 +271,12 @@ void kMyMoneyDateInput::keyPressEvent(QKeyEvent * k)
 bool kMyMoneyDateInput::eventFilter(QObject *, QEvent *e)
 {
   if (e->type() == QEvent::FocusIn) {
-    m_datePopup->show();
-    // The cast to the base class is needed since setFocusSection
-    // is protected in QDateEdit. This causes some logic in
-    // QDateEdit::setFocusSection not to be executed but this does
-    // not hurt here, because the widget just receives focus.
-    static_cast<Q3DateTimeEditBase *>(dateEdit)->setFocusSection(m_focusDatePart);
+    d->m_datePopup->show(mapToGlobal(QPoint(0, height())));
+    // select the date section
+    d->m_dateEdit->setSelectedSection(QDateTimeEdit::DaySection);
   }
   else if (e->type() == QEvent::FocusOut)
-    m_datePopup->hide();
+    d->m_datePopup->hide();
   else if (e->type() == QEvent::KeyPress) {
     if (QKeyEvent *k = dynamic_cast<QKeyEvent*>(e)) {
       if (k->key() == Qt::Key_Minus) {
@@ -290,13 +293,13 @@ void kMyMoneyDateInput::slotDateChosenRef(const QDate& date)
 {
   if(date.isValid()) {
     emit dateChanged(date);
-    m_date = date;
+    d->m_date = date;
 
-    QLabel *lbl = static_cast<QLabel*>(m_datePopup->view());
+    QLabel *lbl = static_cast<QLabel*>(d->m_datePopup->view());
     lbl->setText(KGlobal::locale()->formatDate(date));
     lbl->adjustSize();
-    if(m_datePopup->isVisible() || hasFocus())
-      m_datePopup->show(); // Repaint
+    if(d->m_datePopup->isVisible() || hasFocus())
+      d->m_datePopup->show(mapToGlobal(QPoint(0, height()))); // Repaint
   }
 }
 
@@ -304,13 +307,13 @@ void kMyMoneyDateInput::slotDateChosen(QDate date)
 {
   if(date.isValid()) {
     // the next line implies a call to slotDateChosenRef() above
-    dateEdit->setDate(date);
+    d->m_dateEdit->setDate(date);
   }
 }
 
 QDate kMyMoneyDateInput::date(void) const
 {
-  return dateEdit->date();
+  return d->m_dateEdit->date();
 }
 
 void kMyMoneyDateInput::setDate(QDate date)
@@ -320,25 +323,30 @@ void kMyMoneyDateInput::setDate(QDate date)
 
 void kMyMoneyDateInput::loadDate(const QDate& date)
 {
-  m_date = m_prevDate = date;
+  d->m_date = d->m_prevDate = date;
 
   blockSignals(true);
-  dateEdit->setDate(date);
-  m_date = date;
+  d->m_dateEdit->setDate(date);
+  d->m_date = date;
   blockSignals(false);
 }
 
 void kMyMoneyDateInput::resetDate(void)
 {
-  setDate(m_prevDate);
+  setDate(d->m_prevDate);
 }
 
 QWidget* kMyMoneyDateInput::focusWidget(void) const
 {
-  QWidget* w = dateEdit;
+  QWidget* w = d->m_dateEdit;
   while(w->focusProxy())
     w = w->focusProxy();
   return w;
+}
+
+void kMyMoneyDateInput::setRange(const QDate & min, const QDate & max) 
+{
+  d->m_dateEdit->setDateRange(min, max); 
 }
 
 #include "kmymoneydateinput.moc"

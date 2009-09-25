@@ -20,23 +20,14 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qwidget.h>
-#include <QLineEdit>
+#include <QWidget>
 #include <QDateTime>
-#include <q3datetimeedit.h>
-#include <khbox.h>
-#include <kvbox.h>
-//Added by qt3to4:
-#include <QResizeEvent>
-#include <QKeyEvent>
-#include <QEvent>
+#include <QDateEdit>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kdatepicker.h>
-class KPushButton;
-class KPassivePopup;
+#include <khbox.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -48,11 +39,11 @@ class KPassivePopup;
 /**
   * Provided to be able to catch the focusOut events before the contents gets changed
   */
-class KMyMoneyDateEdit : public Q3DateEdit
+class KMyMoneyDateEdit : public QDateEdit
 {
   Q_OBJECT
 public:
-  KMyMoneyDateEdit(const QDate& date, QWidget *parent=0, const char *name=0) : Q3DateEdit(date, parent, name) {}
+  KMyMoneyDateEdit(const QDate& date, QWidget *parent=0) : QDateEdit(date, parent) {}
 
 protected:
   /** reimplemented for internal reasons */
@@ -73,15 +64,12 @@ public:
   kMyMoneyDateInput(QWidget *parent=0, Qt::AlignmentFlag flags=Qt::AlignLeft);
   ~kMyMoneyDateInput();
 
-  // Replace calls to this with the new date() method
-  // QDate getQDate(void) KDE_DEPRECATED;
-
   QDate date(void) const;
   void setDate(QDate date);
   void loadDate(const QDate& date);
   void resetDate(void);
   QWidget* focusWidget(void) const;
-  virtual void setRange(const QDate & min, const QDate & max) { dateEdit->setRange(min, max); }
+  void setRange(const QDate & min, const QDate & max);
 
 signals:
   void dateChanged(const QDate& date);
@@ -94,7 +82,7 @@ protected:
     *   The actual key for this to happen might be overridden through
     *   an i18n package. The 'T'-key is always possible.
     */
-  void keyPressEvent(QKeyEvent * k);
+  void keyPressEvent(QKeyEvent* k);
   void resizeEvent(QResizeEvent*);
   void showEvent(QShowEvent* event);
 
@@ -110,15 +98,8 @@ private slots:
   void fixSize(void);
 
 private:
-  Q3DateEdit *dateEdit;
-  KDatePicker *m_datePicker;
-  QDate m_date;  // The date !
-  QDate m_prevDate;
-  Qt::AlignmentFlag m_qtalignment;
-  KVBox *m_dateFrame;
-  KPushButton *m_dateButton;
-  KPassivePopup *m_datePopup;
-  int m_focusDatePart;
+  struct Private;
+  Private * const d;
 };
 
 #endif
