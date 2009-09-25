@@ -130,7 +130,7 @@ void PluginLoader::loadPlugin(KPluginInfo* info)
     if (getPluginFromInfo(info) != NULL) {
       // everybody interested should say goodbye to the plugin
       emit PluginLoader::instance()->unplug(info);
-      d->m_loadedPlugins.erase(info->name());
+      d->m_loadedPlugins.remove(info->name());
     }
   }
 }

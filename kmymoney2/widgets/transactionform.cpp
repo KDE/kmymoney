@@ -448,7 +448,7 @@ void TransactionForm::removeEditWidgets(QMap<QString, QWidget*>& editWidgets)
   QMap<QString, QWidget*>::iterator it;
   for(it = editWidgets.begin(); it != editWidgets.end(); ) {
     if((*it)->parentWidget() == this) {
-      editWidgets.remove(it);
+      editWidgets.erase(it);
       it = editWidgets.begin();
     } else
       ++it;
@@ -465,7 +465,7 @@ void TransactionForm::removeEditWidgets(QMap<QString, QWidget*>& editWidgets)
   // delete all remaining edit widgets   (e.g. tabbar)
   for(it = editWidgets.begin(); it != editWidgets.end(); ) {
     delete (*it); // ->deleteLater();
-    editWidgets.remove(it);
+    editWidgets.erase(it);
     it = editWidgets.begin();
   }
 }

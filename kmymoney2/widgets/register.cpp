@@ -1916,7 +1916,7 @@ void Register::clearCellWidget(int row, int col)
   it_w = m_cellWidgets.find(idx);
   if(it_w != m_cellWidgets.end()) {
     (*it_w)->deleteLater();
-    m_cellWidgets.remove(it_w);
+    m_cellWidgets.erase(it_w);
   }
 }
 
@@ -1951,7 +1951,7 @@ void Register::removeEditWidgets(QMap<QString, QWidget*>& editWidgets)
   QMap<QString, QWidget*>::iterator it;
   for(it = editWidgets.begin(); it != editWidgets.end(); ) {
     if((*it)->parentWidget() == this) {
-      editWidgets.remove(it);
+      editWidgets.erase(it);
       it = editWidgets.begin();
     } else
       ++it;
