@@ -2243,24 +2243,23 @@ unsigned PivotTable::drawChartRowSet(int rowNum, const bool seriesTotals, const 
   // Columns
   if ( seriesTotals )
   {
-    if ( accountSeries )
+    if ( accountSeries ) {
       chartView.setDataCell( rowNum, 0, rowSet[rowType].m_total.toDouble() );
-    else
+    } else {
       chartView.setDataCell( 0, rowNum, rowSet[rowType].m_total.toDouble() );
-  }
-  else
-  {
+    }
+  } else {
     int column = 1;
     while ( column < m_numColumns )
     {
-      if ( accountSeries )
-        chartView.setDataCell( rowNum, column-1, rowSet[rowType][column].toDouble() );
-      else
+      if ( accountSeries ) {
         chartView.setDataCell( column-1, rowNum, rowSet[rowType][column].toDouble() );
+      } else {
+        chartView.setDataCell( rowNum, column-1, rowSet[rowType][column].toDouble() );
+      }
       ++column;
     }
   }
-
   return ++rowNum;
 }
 
