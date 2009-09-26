@@ -309,19 +309,10 @@ void KMyMoneyView::addTitleBar(QWidget* parent, const QString& title)
 
 void KMyMoneyView::showTitleBar(bool show)
 {
-  QObjectList l = queryList( 0, "titleLabel" );
-  QObjectList::iterator it = l.begin(); // iterate over the labels
-  QObject *obj;
+  QList<KMyMoneyTitleLabel *> l = findChildren<KMyMoneyTitleLabel *>("titleLabel");
 
-  while ( (*it) != 0 ) {
-    // for each found object...
-    obj = (*it);
-    ++it;
-    #warning #port to KDE4
-    //((QWidget*)obj)->setVisible( show );
-  }
-  //delete l; // delete the list, not the objects
-  //l.~QList();
+  for (QList<KMyMoneyTitleLabel *>::iterator it = l.begin(); it != l.end(); ++it)
+    (*it)->setVisible(show);
 }
 
 void KMyMoneyView::showPage(KPageWidgetItem* pageItem)
@@ -2196,6 +2187,7 @@ KMyMoneyViewBase* KMyMoneyView::addBasePage(const QString& title, const QString&
   KPageWidgetItem* frm = new KPageWidgetItem(this);
   KMyMoneyViewBase* viewBase = new KMyMoneyViewBase(this, title, title);
   const int iconSize = (KMyMoneyGlobalSettings::iconSize()+1)*16;
+  frm->setIcon(KIcon(icon));
   addPage(frm);
   return viewBase;
 }
