@@ -20,10 +20,10 @@
 
 #include <QString>
 #include <QPainter>
-#include <qwidget.h>
-//Added by qt3to4:
+#include <QWidget>
 #include <QList>
 #include <QPixmap>
+#include <QBoxLayout>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -570,13 +570,8 @@ void Transaction::paintFormCell(QPainter* painter, int row, int col, const QRect
     painter->fillRect(textRect, _cg.base());
   }
 
-  // make sure, we clear the cell
-  // in case of an editable field and edit mode, we just clear the field
-  if(txt.isEmpty() || (editField && m_inEdit))
-    painter->drawText(textRect, align, " ");
-  else
+  if (!m_inEdit)
     painter->drawText(textRect, align, txt);
-
 }
 
 void Transaction::setupPalette(const QPalette& palette, QMap<QString, QWidget*>& editWidgets)
@@ -722,6 +717,11 @@ QString Transaction::reconcileState(bool text) const
 void Transaction::startEditMode(void)
 {
   m_inEdit = true;
+
+  // hide the original tabbar since the edit tabbar will be added
+  KMyMoneyTransactionForm::TransactionForm* form = dynamic_cast<KMyMoneyTransactionForm::TransactionForm*>(m_form);
+  form->tabBar()->setVisible(false);
+
   // only update the number of lines displayed if we edit inside the register
   if(m_inRegisterEdit)
     setNumRowsRegister(numRowsRegister(true));
@@ -729,6 +729,10 @@ void Transaction::startEditMode(void)
 
 void Transaction::leaveEditMode(void)
 {
+  // show the original tabbar since the edit tabbar was removed
+  KMyMoneyTransactionForm::TransactionForm* form = dynamic_cast<KMyMoneyTransactionForm::TransactionForm*>(m_form);
+  form->tabBar()->setVisible(true);
+
   m_inEdit = false;
   m_inRegisterEdit = false;
   setFocus(hasFocus(), true);
@@ -1247,11 +1251,12 @@ void StdTransaction::arrangeWidgetsInForm(QMap<QString, QWidget*>& editWidgets)
       payee->setHint(QString());
   }
 
-  // drop the tabbar on top of the original
   KMyMoneyTransactionForm::TransactionForm* form = dynamic_cast<KMyMoneyTransactionForm::TransactionForm*>(m_form);
   TabBar* w = dynamic_cast<TabBar*>(editWidgets["tabbar"]);
   if(w) {
-    w->reparent(form->tabBar(), QPoint(0, 0), true);
+    // insert the tabbar in the boxlayout so it will take the place of the original tabbar which was hidden
+    QBoxLayout* boxLayout = dynamic_cast<QBoxLayout*>(form->tabBar()->parentWidget()->layout());
+    boxLayout->insertWidget(0, w);
   }
 }
 
