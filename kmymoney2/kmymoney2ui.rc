@@ -88,7 +88,6 @@
    <Separator />
    <Action name="transaction_match" />
    <Action name="transaction_accept" />
-   <!-- <Action name="transaction_combine" /> -->
    <Separator />
    <Action name="transaction_select_all" />
   </Menu>
@@ -226,7 +225,6 @@
   <Separator />
   <Action name="transaction_match" />
   <Action name="transaction_accept" />
-  <!-- <Action name="transaction_combine" /> -->
  </Menu>
  <Menu name="currency_context_menu">
   <title>Currency options</title>
