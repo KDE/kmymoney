@@ -5211,6 +5211,8 @@ void KMyMoney2App::slotTransactionCreateSchedule(void)
     MyMoneySplit s = d->m_selectedTransactions[0].split();
     QString splitId = s.id();
     s.clearId();
+    s.setReconcileFlag(MyMoneySplit::NotReconciled);
+    s.setReconcileDate(QDate());
     t.removeSplits();
     t.addSplit(s);
     const QList<MyMoneySplit>& splits = d->m_selectedTransactions[0].transaction().splits();
@@ -5219,6 +5221,8 @@ void KMyMoney2App::slotTransactionCreateSchedule(void)
       if((*it_s).id() != splitId) {
         MyMoneySplit s0 = (*it_s);
         s0.clearId();
+        s0.setReconcileFlag(MyMoneySplit::NotReconciled);
+        s0.setReconcileDate(QDate());
         t.addSplit(s0);
       }
     }
