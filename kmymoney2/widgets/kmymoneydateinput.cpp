@@ -110,7 +110,7 @@ kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, Qt::AlignmentFlag flags)
   d->m_dateFrame->hide();
 
   QString dateFormat = KGlobal::locale()->dateFormatShort().toLower();
-  QString order;
+  QString order, separator;
   for(int i = 0; i < dateFormat.length(); ++i) {
     // DD.MM.YYYY is %d.%m.%y
     // dD.mM.YYYY is %e.%n.%y
@@ -121,20 +121,21 @@ kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, Qt::AlignmentFlag flags)
       if(dateFormat[i] == 'e')
         dateFormat[i] = 'd';
       order += dateFormat[i];
-    }
+    } else if (dateFormat[i] != '%' && separator.isEmpty())
+      separator = dateFormat[i];
     if(order.length() == 3)
       break;
   }
 
   // see if we find a known format. If it's unknown, then we use YMD (international)
   if(order == "mdy") {
-    d->m_dateEdit->setDisplayFormat("MM.dd.yyyy");
+    d->m_dateEdit->setDisplayFormat(QString("MM") + separator + QString("dd") + separator + QString("yyyy"));
   } else if(order == "dmy") {
-    d->m_dateEdit->setDisplayFormat("dd.MM.yyyy");
+    d->m_dateEdit->setDisplayFormat(QString("dd") + separator + QString("MM") + separator + QString("yyyy"));
   } else if(order == "ydm") {
-    d->m_dateEdit->setDisplayFormat("yyyy.dd.MM");
+    d->m_dateEdit->setDisplayFormat(QString("yyyy") + separator + QString("dd") + separator + QString("MM"));
   } else {
-    d->m_dateEdit->setDisplayFormat("yyyy.MM.dd");
+    d->m_dateEdit->setDisplayFormat(QString("yyyy") + separator + QString("MM") + separator + QString("dd"));
   }
 
   d->m_datePicker = new KDatePicker(d->m_date, d->m_dateFrame);
