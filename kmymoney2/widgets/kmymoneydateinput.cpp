@@ -40,7 +40,6 @@
 
 #include <kglobal.h>
 #include <klocale.h>
-#include <kiconloader.h>
 #include <kpushbutton.h>
 #include <kshortcut.h>
 #include <kpassivepopup.h>
@@ -129,13 +128,13 @@ kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, Qt::AlignmentFlag flags)
 
   // see if we find a known format. If it's unknown, then we use YMD (international)
   if(order == "mdy") {
-    d->m_dateEdit->setDisplayFormat(QString("MM") + separator + QString("dd") + separator + QString("yyyy"));
+    d->m_dateEdit->setDisplayFormat(QString("MM%1dd%2yyyy").arg(separator, separator));
   } else if(order == "dmy") {
-    d->m_dateEdit->setDisplayFormat(QString("dd") + separator + QString("MM") + separator + QString("yyyy"));
+    d->m_dateEdit->setDisplayFormat(QString("dd%1MM%2yyyy").arg(separator, separator));
   } else if(order == "ydm") {
-    d->m_dateEdit->setDisplayFormat(QString("yyyy") + separator + QString("dd") + separator + QString("MM"));
+    d->m_dateEdit->setDisplayFormat(QString("yyyy%1dd%2MM").arg(separator, separator));
   } else {
-    d->m_dateEdit->setDisplayFormat(QString("yyyy") + separator + QString("MM") + separator + QString("dd"));
+    d->m_dateEdit->setDisplayFormat(QString("yyyy%1MM%2dd").arg(separator, separator));
   }
 
   d->m_datePicker = new KDatePicker(d->m_date, d->m_dateFrame);
@@ -143,7 +142,7 @@ kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, Qt::AlignmentFlag flags)
   d->m_datePicker->setCloseButton(true);
 
   // the next line is a try to add an icon to the button
-  d->m_dateButton = new KPushButton(KIcon(QPixmap(KIconLoader::global()->iconPath("view-calendar-day", -KIconLoader::SizeSmall))), QString(""), this);
+  d->m_dateButton = new KPushButton(KIcon("view-calendar-day"), QString(""), this);
   d->m_dateButton->setMinimumWidth(30);
 
   connect(d->m_dateButton,SIGNAL(clicked()),SLOT(toggleDatePicker()));
