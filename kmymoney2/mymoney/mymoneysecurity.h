@@ -23,7 +23,9 @@
 #ifndef MYMONEYSECURITY_H
 #define MYMONEYSECURITY_H
 
-#include <config-kmymoney.h>
+#ifdef HAVE_CONFIG_H
+#include "config-kmymoney.h"
+#endif
 
 // ----------------------------------------------------------------------------
 // QT Includes

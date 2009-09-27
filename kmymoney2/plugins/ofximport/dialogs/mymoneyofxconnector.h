@@ -18,7 +18,9 @@
 #ifndef MYMONEYOFXCONNECTOR_H
 #define MYMONEYOFXCONNECTOR_H
 
+#ifdef HAVE_CONFIG_H
 #include "config-kmymoney.h"
+#endif
 
 
 // ----------------------------------------------------------------------------

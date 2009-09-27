@@ -20,22 +20,30 @@
 #ifndef KSTARTDLG_H
 #define KSTARTDLG_H
 
+#ifdef HAVE_CONFIG_H
 #include "config-kmymoney.h"
+#endif
 
-
-#include <klocale.h>
-#include <kfontdialog.h>
-#include <kurlrequester.h>
-#include <k3iconview.h>
+// ----------------------------------------------------------------------------
+// QT Includes
 
 #include <QString>
 #include <QRadioButton>
 #include <QLineEdit>
 #include <QCheckBox>
 #include <QPushButton>
-//Added by qt3to4:
+
+// ----------------------------------------------------------------------------
+// KDE Includes
+
+#include <klocale.h>
+#include <kfontdialog.h>
+#include <kurlrequester.h>
+#include <k3iconview.h>
 #include <KPageDialog>
 #include <KVBox>
+
+
 /**KMyMoney 2 start dialog
   */
 

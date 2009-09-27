@@ -19,12 +19,14 @@
 #ifndef KMYMONEYVIEW_H
 #define KMYMONEYVIEW_H
 
+#ifdef HAVE_CONFIG_H
+#include "config-kmymoney.h"
+#endif
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <ksavefile.h>
-#include <qwidget.h>
-//Added by qt3to4:
+#include <QWidget>
 #include <QList>
 #include <QVBoxLayout>
 
@@ -33,6 +35,7 @@ class QFile;
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <ksavefile.h>
 #include <kmenu.h>
 #include <KPageWidget>
 
@@ -41,7 +44,6 @@ class QFile;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "config-kmymoney.h"
 #include <mymoneyaccount.h>
 #include <mymoneyinstitution.h>
 #include <mymoneytransaction.h>

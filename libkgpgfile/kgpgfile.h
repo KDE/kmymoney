@@ -18,16 +18,27 @@
 #ifndef KGPGFILE_H
 #define KGPGFILE_H
 
+// ----------------------------------------------------------------------------
+// QT Includes
+
 #include <QFile>
 #include <QObject>
 #include <QString>
 #include <QStringList>
 #include <QEventLoop>
-
-//Added by qt3to4:
 #include <QByteArray>
 #include <Q3ValueList>
-#include <config-kmymoney.h>
+
+// ----------------------------------------------------------------------------
+// KDE Includes
+
+
+// ----------------------------------------------------------------------------
+// Project Includes
+
+#ifdef HAVE_CONFIG_H
+#include "config-kmymoney.h"
+#endif
 
 /**
   * @author Thomas Baumgart

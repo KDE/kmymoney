@@ -23,7 +23,9 @@
 #ifndef MYMONEYFINANCIALCALCULATOR_H
 #define MYMONEYFINANCIALCALCULATOR_H
 
-#include <config-kmymoney.h>
+#ifdef HAVE_CONFIG_H
+#include "config-kmymoney.h"
+#endif
 
 #include <cmath>
 // ----------------------------------------------------------------------------

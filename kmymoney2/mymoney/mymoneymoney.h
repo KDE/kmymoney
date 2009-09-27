@@ -18,7 +18,9 @@
 
 #include <stdlib.h>
 
-#include <config-kmymoney.h>
+#ifdef HAVE_CONFIG_H
+#include "config-kmymoney.h"
+#endif
 
 #ifndef HAVE_ATOLL
 #  ifdef HAVE_STRTOLL

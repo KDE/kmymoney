@@ -16,7 +16,9 @@
 #ifndef KMYMONEY2_H
 #define KMYMONEY2_H
 
-#include <config-kmymoney.h>
+#ifdef HAVE_CONFIG_H
+#include "config-kmymoney.h"
+#endif
 
 // ----------------------------------------------------------------------------
 // QT Includes

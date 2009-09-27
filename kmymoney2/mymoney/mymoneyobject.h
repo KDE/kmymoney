@@ -17,7 +17,9 @@
 #ifndef MYMONEYOBJECT_H
 #define MYMONEYOBJECT_H
 
-#include <config-kmymoney.h>
+#ifdef HAVE_CONFIG_H
+#include "config-kmymoney.h"
+#endif
 
 // ----------------------------------------------------------------------------
 // QT Includes

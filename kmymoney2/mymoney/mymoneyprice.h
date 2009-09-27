@@ -23,7 +23,9 @@
 #ifndef MYMONEYPRICE_H
 #define MYMONEYPRICE_H
 
-#include <config-kmymoney.h>
+#ifdef HAVE_CONFIG_H
+#include "config-kmymoney.h"
+#endif
 
 // ----------------------------------------------------------------------------
 // QT Includes
