@@ -125,6 +125,14 @@
    <label>Start string matches for e.g. payees at start of string</label>
    <default>false</default>
   </entry>
+  <entry name="stdTransactionFormTabOrder" type="String">
+   <label>Tab order of edit widgets in transaction form</label>
+   <default>account,cashflow,payee,category,memo,number,date,amount,state</default>
+  </entry>
+  <entry name="stdTransactionRegisterTabOrder" type="String">
+   <label>Tab order of edit widgets in register</label>
+   <default>number,date,payee,category,memo,payment,deposit,state</default>
+  </entry>
  </group>
  <group name="Homepage Options">
   <entry name="ItemList" type="String">
@@ -348,6 +356,12 @@
   <entry name="qifInvoice" type="String">
    <label>additional names for invoice accounts</label>
    <default>Rechnung</default>
+  </entry>
+ </group>
+ <group name="Account View Settings">
+  <entry name="showAccountsExpanded" type="Bool">
+   <label>Show accounts view expanded when loaded</label>
+   <default>false</default>
   </entry>
  </group>
 </kcfg>

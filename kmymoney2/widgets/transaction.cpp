@@ -1262,35 +1262,42 @@ void StdTransaction::arrangeWidgetsInForm(QMap<QString, QWidget*>& editWidgets)
 
 void StdTransaction::tabOrderInForm(QWidgetList& tabOrderWidgets) const
 {
-  // account
-  tabOrderWidgets.append(focusWidget(m_form->cellWidget(0, ValueColumn1)));
-
-  // cashflow direction
-  tabOrderWidgets.append(focusWidget(m_form->cellWidget(1, LabelColumn1)));
-  // payee
-  tabOrderWidgets.append(focusWidget(m_form->cellWidget(1, ValueColumn1)));
-  // make sure to have the category field and the split button as separate tab order widgets
-  // ok, we have to have some internal knowledge about the KMyMoneyCategory object, but
-  // it's one of our own widgets, so we actually don't care. Just make sure, that we don't
-  // go haywire when someone changes the KMyMoneyCategory object ...
-  QWidget* w = m_form->cellWidget(2, ValueColumn1);
-  tabOrderWidgets.append(focusWidget(w));
-  w = dynamic_cast<QWidget*>(w->child("splitButton"));
-  if(w)
-    tabOrderWidgets.append(w);
-  // memo
-  tabOrderWidgets.append(focusWidget(m_form->cellWidget(3, ValueColumn1)));
-  // number
-  if(haveNumberField()) {
-    if((w = focusWidget(m_form->cellWidget(1, ValueColumn2))))
+  QStringList taborder = QStringList::split(",", KMyMoneyGlobalSettings::stdTransactionFormTabOrder());
+  QStringList::const_iterator it_s = taborder.constBegin();
+  QWidget* w;
+  while(it_s != taborder.constEnd()) {
+    if(*it_s == "account") {
+      tabOrderWidgets.append(focusWidget(m_form->cellWidget(0, ValueColumn1)));
+    } else if(*it_s == "cashflow") {
+      tabOrderWidgets.append(focusWidget(m_form->cellWidget(1, LabelColumn1)));
+    } else if(*it_s == "payee") {
+      tabOrderWidgets.append(focusWidget(m_form->cellWidget(1, ValueColumn1)));
+    } else if(*it_s == "category") {
+    // make sure to have the category field and the split button as separate tab order widgets
+    // ok, we have to have some internal knowledge about the KMyMoneyCategory object, but
+    // it's one of our own widgets, so we actually don't care. Just make sure, that we don't
+    // go haywire when someone changes the KMyMoneyCategory object ...
+    QWidget* w = m_form->cellWidget(2, ValueColumn1);
+    tabOrderWidgets.append(focusWidget(w));
+    w = dynamic_cast<QWidget*>(w->child("splitButton"));
+    if(w)
       tabOrderWidgets.append(w);
+    } else if(*it_s == "memo") {
+      tabOrderWidgets.append(focusWidget(m_form->cellWidget(3, ValueColumn1)));
+    } else if(*it_s == "number") {
+      if(haveNumberField()) {
+        if((w = focusWidget(m_form->cellWidget(1, ValueColumn2))))
+          tabOrderWidgets.append(w);
+      }
+    } else if(*it_s == "date") {
+      tabOrderWidgets.append(focusWidget(m_form->cellWidget(2, ValueColumn2)));
+    } else if(*it_s == "amount") {
+      tabOrderWidgets.append(focusWidget(m_form->cellWidget(3, ValueColumn2)));
+    } else if(*it_s == "state") {
+      tabOrderWidgets.append(focusWidget(m_form->cellWidget(5, ValueColumn2)));
+    }
+    ++it_s;
   }
-  // date
-  tabOrderWidgets.append(focusWidget(m_form->cellWidget(2, ValueColumn2)));
-  // amount
-  tabOrderWidgets.append(focusWidget(m_form->cellWidget(3, ValueColumn2)));
-  // state
-  tabOrderWidgets.append(focusWidget(m_form->cellWidget(5, ValueColumn2)));
 }
 
 void StdTransaction::arrangeWidgetsInRegister(QMap<QString, QWidget*>& editWidgets)
@@ -1316,34 +1323,40 @@ void StdTransaction::arrangeWidgetsInRegister(QMap<QString, QWidget*>& editWidge
 
 void StdTransaction::tabOrderInRegister(QWidgetList& tabOrderWidgets) const
 {
+  QStringList taborder = QStringList::split(",", KMyMoneyGlobalSettings::stdTransactionRegisterTabOrder());
+  QStringList::const_iterator it_s = taborder.constBegin();
   QWidget* w;
-  // number
-  if(haveNumberField()) {
-    if((w = focusWidget(m_parent->cellWidget(m_startRow + 0, NumberColumn))))
-      tabOrderWidgets.append(w);
+  while(it_s != taborder.constEnd()) {
+    if(*it_s == "number") {
+      if(haveNumberField()) {
+        if((w = focusWidget(m_parent->cellWidget(m_startRow + 0, NumberColumn))))
+          tabOrderWidgets.append(w);
+      }
+    } else if(*it_s == "date") {
+      tabOrderWidgets.append(focusWidget(m_parent->cellWidget(m_startRow + 0, DateColumn)));
+    } else if(*it_s == "payee") {
+      tabOrderWidgets.append(focusWidget(m_parent->cellWidget(m_startRow + 0, DetailColumn)));
+    } else if(*it_s == "category") {
+      // make sure to have the category field and the split button as separate tab order widgets
+      // ok, we have to have some internal knowledge about the KMyMoneyCategory object, but
+      // it's one of our own widgets, so we actually don't care. Just make sure, that we don't
+      // go haywire when someone changes the KMyMoneyCategory object ...
+      w = m_parent->cellWidget(m_startRow + 1, DetailColumn);
+      tabOrderWidgets.append(focusWidget(w));
+      w = dynamic_cast<QWidget*>(w->child("splitButton"));
+      if(w)
+        tabOrderWidgets.append(w);
+    } else if(*it_s == "memo") {
+      tabOrderWidgets.append(focusWidget(m_parent->cellWidget(m_startRow + 2, DetailColumn)));
+    } else if(*it_s == "payment") {
+      tabOrderWidgets.append(focusWidget(m_parent->cellWidget(m_startRow + 0, PaymentColumn)));
+    } else if(*it_s == "deposit") {
+      tabOrderWidgets.append(focusWidget(m_parent->cellWidget(m_startRow + 0, DepositColumn)));
+    } else if(*it_s == "state") {
+      tabOrderWidgets.append(focusWidget(m_parent->cellWidget(m_startRow + 1, DateColumn)));
+    }
+    ++it_s;
   }
-
-  // date
-  tabOrderWidgets.append(focusWidget(m_parent->cellWidget(m_startRow + 0, DateColumn)));
-  // payee
-  tabOrderWidgets.append(focusWidget(m_parent->cellWidget(m_startRow + 0, DetailColumn)));
-  // make sure to have the category field and the split button as separate tab order widgets
-  // ok, we have to have some internal knowledge about the KMyMoneyCategory object, but
-  // it's one of our own widgets, so we actually don't care. Just make sure, that we don't
-  // go haywire when someone changes the KMyMoneyCategory object ...
-  w = m_parent->cellWidget(m_startRow + 1, DetailColumn);
-  tabOrderWidgets.append(focusWidget(w));
-  w = dynamic_cast<QWidget*>(w->child("splitButton"));
-  if(w)
-    tabOrderWidgets.append(w);
-  // memo
-  tabOrderWidgets.append(focusWidget(m_parent->cellWidget(m_startRow + 2, DetailColumn)));
-  // payment
-  tabOrderWidgets.append(focusWidget(m_parent->cellWidget(m_startRow + 0, PaymentColumn)));
-  // deposit
-  tabOrderWidgets.append(focusWidget(m_parent->cellWidget(m_startRow + 0, DepositColumn)));
-  // status
-  tabOrderWidgets.append(focusWidget(m_parent->cellWidget(m_startRow + 1, DateColumn)));
 }
 
 int StdTransaction::numRowsRegister(bool expanded) const

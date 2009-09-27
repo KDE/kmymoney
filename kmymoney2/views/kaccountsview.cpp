@@ -167,11 +167,19 @@ KAccountsView::KAccountsView(QWidget *parent) :
   connect(m_accountIcons, SIGNAL(executed(Q3IconViewItem*)), this, SLOT(slotOpenObject(Q3IconViewItem*)));
 
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadAccounts()));
-
+  connect(m_collapseButton, SIGNAL(clicked()), this, SLOT(slotExpandCollapse()));
+  connect(m_expandButton, SIGNAL(clicked()), this, SLOT(slotExpandCollapse()));
 }
 
 KAccountsView::~KAccountsView()
 {
+}
+
+void KAccountsView::slotExpandCollapse(void)
+{
+  if(sender()) {
+    KMyMoneyGlobalSettings::setShowAccountsExpanded(sender() == m_expandButton);
+  }
 }
 
 void KAccountsView::slotLoadAccounts(void)
@@ -445,6 +453,10 @@ void KAccountsView::loadListView(void)
 
   // turn updates back on
   //m_accountTree->setUpdatesEnabled(true);
+
+  // and in case we need to show things expanded, we'll do so
+  if(KMyMoneyGlobalSettings::showAccountsExpanded())
+    m_accountTree->slotExpandAll();
 
   // clear the current contents
   m_securityMap.clear();

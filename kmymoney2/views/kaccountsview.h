@@ -155,6 +155,7 @@ protected slots:
   void slotSelectIcon(Q3IconViewItem* item);
   void slotOpenContext(Q3IconViewItem* item);
   void slotOpenObject(Q3IconViewItem* item);
+  void slotExpandCollapse(void);
 
 signals:
   /**
