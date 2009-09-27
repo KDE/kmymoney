@@ -49,7 +49,8 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-
+#include <KDChartGridAttributes>
+#include <KDChartDataValueAttributes>
 #include <KDChartLegend>
 #include "pivottable.h"
 #include "pivotgrid.h"
@@ -1963,13 +1964,25 @@ void PivotTable::drawChart( KReportChartView& chartView ) const
 //   chartView.params()->setAxisParams( 1, yAxisParams );
 
 #endif
-//   chartView.params()->setLegendFontRelSize(20);
-//   chartView.params()->setLegendTitleFontRelSize(24);
-//   chartView.params()->setLegendTitleText(i18n("Legend"));
-// 
-//   chartView.params()->setAxisShowGrid(0,m_config_f.isChartGridLines());
-//   chartView.params()->setAxisShowGrid(1,m_config_f.isChartGridLines());
-//   chartView.params()->setPrintDataValues(m_config_f.isChartDataLabels());
+  Legend* legend = new Legend(chartView.diagram(), chartView.diagram()->coordinatePlane()->parent());
+  TextAttributes legendTextAttr(legend->textAttributes());
+  legendTextAttr.setFontSize(20);
+  legend->setTextAttributes(legendTextAttr);
+
+  TextAttributes legendTitleTextAttr(legend->titleTextAttributes());
+  legendTitleTextAttr.setFontSize(24);
+  legend->setTitleTextAttributes(legendTitleTextAttr);
+  legend->setTitleText(i18nc("Chart lines legend","Legend"));
+
+  chartView.diagram()->useRainbowColors();
+
+  GridAttributes gridAttr(chartView.diagram()->coordinatePlane()->globalGridAttributes());
+  gridAttr.setGridVisible(m_config_f.isChartGridLines());
+  chartView.diagram()->coordinatePlane()->setGlobalGridAttributes(gridAttr);
+
+  DataValueAttributes valueAttr(chartView.diagram()->dataValueAttributes());
+  valueAttr.setVisible(m_config_f.isChartDataLabels());
+  chartView.diagram()->setDataValueAttributes(valueAttr);
 
   // whether to limit the chart to use series totals only.  Used for reports which only
   // show one dimension (pie).
@@ -1995,6 +2008,7 @@ void PivotTable::drawChart( KReportChartView& chartView ) const
   case MyMoneyReport::eChartEnd:
   case MyMoneyReport::eChartLine:
     chartView.setType( KReportChartView::Line, KReportChartView::Normal );
+
     //chartView.params()->setAxisDatasets( 0,0 );
     break;
   case MyMoneyReport::eChartBar:
@@ -2002,7 +2016,7 @@ void PivotTable::drawChart( KReportChartView& chartView ) const
 //     chartView.params()->setBarChartSubType( KDChartParams::BarNormal );
     break;
   case MyMoneyReport::eChartStackedBar:
-    chartView.setType( KReportChartView::Bar );
+    chartView.setType( KReportChartView::Bar, KReportChartView::Stacked );
 //     chartView.params()->setBarChartSubType( KDChartParams::BarStacked );
     break;
   case MyMoneyReport::eChartPie:
@@ -2018,6 +2032,8 @@ void PivotTable::drawChart( KReportChartView& chartView ) const
     accountSeries = false;
     break;
   }
+
+
 
   // For onMouseOver events, we want to activate mouse tracking
   chartView.setMouseTracking( true );
@@ -2066,7 +2082,6 @@ void PivotTable::drawChart( KReportChartView& chartView ) const
     case MyMoneyReport::eDetailAll:
     {
       int rowNum = 0;
-      Legend* legend = new Legend(chartView.diagram(), chartView.diagram()->coordinatePlane()->parent());
 
       // iterate over outer groups
       PivotGrid::const_iterator it_outergroup = m_grid.begin();
@@ -2115,7 +2130,6 @@ void PivotTable::drawChart( KReportChartView& chartView ) const
     case MyMoneyReport::eDetailTop:
     {
       int rowNum = 0;
-      Legend* legend = new Legend(chartView.diagram(), chartView.diagram()->coordinatePlane()->parent());
 
       // iterate over outer groups
       PivotGrid::const_iterator it_outergroup = m_grid.begin();
@@ -2151,7 +2165,6 @@ void PivotTable::drawChart( KReportChartView& chartView ) const
     case MyMoneyReport::eDetailGroup:
     {
       int rowNum = 0;
-      Legend* legend = new Legend(chartView.diagram(), chartView.diagram()->coordinatePlane()->parent());
 
       // iterate over outer groups
       PivotGrid::const_iterator it_outergroup = m_grid.begin();
@@ -2199,7 +2212,6 @@ void PivotTable::drawChart( KReportChartView& chartView ) const
     case MyMoneyReport::eDetailTotal:
     {
       int rowNum = 0;
-      Legend* legend = new Legend(chartView.diagram(), chartView.diagram()->coordinatePlane()->parent());
 
       //iterate row types
       for(int i = 0; i < m_rowTypeList.size(); ++i) {
