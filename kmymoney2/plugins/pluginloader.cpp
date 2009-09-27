@@ -74,8 +74,6 @@ PluginLoader::PluginLoader(QObject* parent)
   d->m_pluginList = KPluginInfo::fromServices(offers);
 
   d->m_pluginSelector = new KPluginSelector(NULL);
-#warning "port to kde4"
-  //d->m_pluginSelector->setShowEmptyConfigPage(false);
   d->m_pluginSelector->addPlugins(d->m_pluginList);
   d->m_pluginSelector->load();
 
@@ -103,11 +101,8 @@ void PluginLoader::loadPlugin(KPluginInfo* info)
       // the plugin is enabled but it is not loaded
       KService::Ptr service = info->service();
       int error = 0;
-#warning "port to kde4"
-#if 0
-      Plugin* plugin = KService::createInstance<Plugin>(service, d->m_parent, info->name(), QStringList(), &error);
+      Plugin* plugin = KService::createInstance<Plugin>(service, d->m_parent, QStringList(), &error);
       if (plugin) {
-        kDebug() << "KMyMoneyPlugin::PluginLoader: Loaded plugin " << plugin->name();
         d->m_loadedPlugins.insert(info->name(), plugin);
         emit PluginLoader::instance()->plug(info);
       }
@@ -116,14 +111,7 @@ void PluginLoader::loadPlugin(KPluginInfo* info)
                     << info->name()
                     << " with error number "
                     << error << endl;
-#warning "port to kde4"
-#if 0
-	if (error == KParts::ComponentFactory::ErrNoLibrary)
-          kWarning() << "KLibLoader says: "
-                      << KLibLoader::self()->lastErrorMessage() << endl;
-#endif
       }
-#endif      
     }
   }
   else {
