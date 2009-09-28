@@ -36,6 +36,7 @@
 #include <kurl.h>
 #include <kaction.h>
 #include <kmessagebox.h>
+#include <kactioncollection.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -48,12 +49,12 @@
 K_EXPORT_COMPONENT_FACTORY( kmm_ofximport,
                             KGenericFactory<OfxImporterPlugin>( "kmm_ofximport" ) )
 
-OfxImporterPlugin::OfxImporterPlugin(QObject *parent, const char *name, const QStringList&) :
- KMyMoneyPlugin::Plugin( parent, name ),
+OfxImporterPlugin::OfxImporterPlugin(QObject *parent, const QStringList&) :
+ KMyMoneyPlugin::Plugin( parent, "OFX" ),
  KMyMoneyPlugin::ImporterPlugin(),
  m_valid( false )
 {
-  setInstance(KGenericFactory<OfxImporterPlugin>::instance());
+  setComponentData(KGenericFactory<OfxImporterPlugin>::componentData());
   setXMLFile("kmm_ofximport.rc");
   createActions();
 }
@@ -64,7 +65,9 @@ OfxImporterPlugin::~OfxImporterPlugin()
 
 void OfxImporterPlugin::createActions(void)
 {
-  new KAction(i18n("OFX..."), "", 0, this, SLOT(slotImportFile()), actionCollection(), "file_import_ofx");
+  KAction *action = actionCollection()->addAction("file_import_ofx");
+  action->setText(i18n("OFX..."));
+  connect(action, SIGNAL(triggered(bool)), this, SLOT(slotImportFile()));
 }
 
 void OfxImporterPlugin::slotImportFile(void)
@@ -72,12 +75,12 @@ void OfxImporterPlugin::slotImportFile(void)
   KUrl url = importInterface()->selectFile(i18n("OFX import file selection"),
                                              "",
                                              "*.ofx *.qfx *.ofc|OFX files (*.ofx, *.qfx, *.ofc)\n*.*|All files (*.*)",
-                                             static_cast<KFile::Mode>(KFile::File | KFile::ExistingOnly));
+                                             static_cast<KFile::Mode>((int)(KFile::File | KFile::ExistingOnly)));
   if(url.isValid()) {
     if ( isMyFormat(url.path()) ) {
       slotImportFile(url.path());
     } else {
-      KMessageBox::error( 0, i18n("Unable to import %1 using the OFX importer plugin.  This file is not the correct format.",url.prettyUrl(0, KUrl::StripFileProtocol)), i18n("Incorrect format"));
+      KMessageBox::error( 0, i18n("Unable to import %1 using the OFX importer plugin.  This file is not the correct format.",url.prettyUrl()), i18n("Incorrect format"));
     }
 
   }
@@ -577,7 +580,7 @@ void OfxImporterPlugin::protocols(QStringList& protocolList) const
 QWidget* OfxImporterPlugin::accountConfigTab(const MyMoneyAccount& acc, QString& name)
 {
   name = i18n("Online settings");
-  m_statusDlg = new KOnlineBankingStatus(acc, 0, 0);
+  m_statusDlg = new KOnlineBankingStatus(acc, 0);
   return m_statusDlg;
 }
 
@@ -608,7 +611,7 @@ bool OfxImporterPlugin::mapAccount(const MyMoneyAccount& acc, MyMoneyKeyValueCon
   Q_UNUSED(acc);
 
   bool rc = false;
-  QPointer<KOnlineBankingSetupWizard> wiz = new KOnlineBankingSetupWizard(0, "onlinebankingsetup");
+  QPointer<KOnlineBankingSetupWizard> wiz = new KOnlineBankingSetupWizard(0);
   if(wiz->isInit()) {
     if(wiz->exec() == QDialog::Accepted) {
       rc = wiz->chosenSettings( settings );

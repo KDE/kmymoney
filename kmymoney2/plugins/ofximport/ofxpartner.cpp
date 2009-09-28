@@ -18,6 +18,10 @@
 
 #include <config-kmymoney.h>
 
+#ifdef HAVE_UNISTD_H
+#include <unistd.h>
+#endif
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -300,7 +304,11 @@ OfxHttpsRequest::OfxHttpsRequest(const QString& type, const KUrl &url, const QBy
     d->m_fpTrace.open(QIODevice::WriteOnly | QIODevice::Append);
   }
 
-  m_job = KIO::http_post(url, postData, showProgressInfo);
+  KIO::JobFlag jobFlags = KIO::DefaultFlags;
+  if (!showProgressInfo)
+    jobFlags = KIO::HideProgressInfo;
+
+  m_job = KIO::http_post(url, postData, jobFlags);
   m_job->addMetaData("content-type", "Content-type: application/x-ofx" );
 
   if(d->m_fpTrace.isOpen()) {
@@ -356,7 +364,8 @@ void OfxHttpsRequest::slotOfxFinished(KIO::Job* /* e */)
   int error = m_job->error();
   if ( error ) {
     m_job->showErrorDialog();
-    unlink(m_dst.path());
+#warning "FIX on windows"
+    unlink(m_dst.path().toUtf8().data());
 
   } else if ( m_job->isErrorPage() ) {
     QString details;
@@ -370,7 +379,8 @@ void OfxHttpsRequest::slotOfxFinished(KIO::Job* /* e */)
       f.close();
     }
     KMessageBox::detailedSorry( 0, i18n("The HTTP request failed."), details, i18nc("The HTTP request failed", "Failed") );
-    unlink(m_dst.path());
+#warning "FIX on windows"
+    unlink(m_dst.path().toUtf8().data());
   }
 
   qApp->exit_loop();
@@ -410,7 +420,8 @@ OfxHttpRequest::OfxHttpRequest(const QString& type, const KUrl &url, const QByte
 
   if(m_error != Q3Http::NoError) {
     KMessageBox::error(0, errorMsg, i18n("OFX setup error"));
-    unlink(dst.path());
+#warning "FIX on windows"
+    unlink(dst.path().toUtf8().data());
   }
 }
 
