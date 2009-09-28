@@ -38,7 +38,7 @@
 
 typedef KGenericFactory<KMMiCalendarExportPlugin> icalendarexportFactory;
 
-K_EXPORT_COMPONENT_FACTORY(icalendarexport, icalendarexportFactory( "kmm_icalendarexport" ))
+K_EXPORT_COMPONENT_FACTORY(kmm_icalendarexport, icalendarexportFactory( "kmm_icalendarexport" ))
 
 struct KMMiCalendarExportPlugin::Private {
   KAction* m_action;
