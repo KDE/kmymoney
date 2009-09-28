@@ -1,0 +1,17 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=iCalendar
+Name[ro]=iCalendar
+Comment=Exports schedules to iCalendar files
+Comment[ro]=Exportă plățile programate într-un fișier iCalendar
+Type=Service
+Icon=x-office-calendar
+ServiceTypes=KMyMoneyPlugin
+X-KDE-Library=kmm_icalendarexport
+X-KDE-PluginInfo-Author=Cristian Oneț
+X-KDE-PluginInfo-Email=onet.cristian@gmail.com
+X-KDE-PluginInfo-Name=iCalendar
+X-KDE-PluginInfo-Version=${CPACK_PACKAGE_VERSION}-${VERSION_SUFFIX}
+X-KDE-PluginInfo-Website=http://kmymoney2.sourceforge.net/plugins.html
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true

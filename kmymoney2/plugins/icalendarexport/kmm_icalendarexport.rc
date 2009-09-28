@@ -1,0 +1,10 @@
+<!DOCTYPE kpartgui>
+<kpartgui name="kmymoneyplugin-icalendarexport" version="3">
+  <MenuBar>
+    <Menu name="file">
+      <Menu name="export" append="merge_export">
+        <Action name="file_export_icalendar"/>
+      </Menu>
+    </Menu>
+  </MenuBar>
+</kpartgui>

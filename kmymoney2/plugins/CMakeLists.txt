@@ -4,6 +4,9 @@ if(USE_OFX_DIRECTCONNECT)
 	ADD_SUBDIRECTORY( ofximport )
 endif(USE_OFX_DIRECTCONNECT)
 
+IF (LIBICAL_FOUND)
+  ADD_SUBDIRECTORY( icalendarexport )
+ENDIF (LIBICAL_FOUND)
 
 ########### next target ###############
 

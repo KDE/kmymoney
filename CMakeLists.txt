@@ -38,12 +38,12 @@ add_definitions( ${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
 add_definitions (-DQT3_SUPPORT -DQT3_SUPPORT_WARNINGS)
 
 include_directories( ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES} 
-	${CMAKE_CURRENT_BINARY_DIR}/kmymoney2/dialogs/ 
+	${CMAKE_CURRENT_BINARY_DIR}/kmymoney2/dialogs/
 	${CMAKE_CURRENT_SOURCE_DIR}/kmymoney2/widgets/
 	${CMAKE_CURRENT_BINARY_DIR}/kmymoney2/widgets/
 	${CMAKE_CURRENT_SOURCE_DIR}/kmymoney2/mymoney/
 	${CMAKE_CURRENT_SOURCE_DIR}/kmymoney2/mymoney/storage/
-        ${CMAKE_CURRENT_SOURCE_DIR}/libkgpgfile/ 
+  ${CMAKE_CURRENT_SOURCE_DIR}/libkgpgfile/
 	${CMAKE_CURRENT_SOURCE_DIR}/kmymoney2/plugins/
 	${CMAKE_CURRENT_SOURCE_DIR}/kmymoney2/views/
 	${CMAKE_CURRENT_SOURCE_DIR}/kmymoney2/dialogs/
@@ -158,6 +158,8 @@ GET_FILENAME_COMPONENT(QT_BIN_DIR ${QT_MOC_EXECUTABLE} PATH)
 GET_FILENAME_COMPONENT(QT_DIR     ${QT_BIN_DIR}        PATH)
 SET(QT_INSTALL_DIR ${QT_DIR} CACHE PATH
   "Qt install prefix defaults to the Qt prefix: ${QT_DIR}")
+
+FIND_PACKAGE(Libical)
 
 # check for CppUnit to build the tests
 FIND_PACKAGE(CppUnit)
@@ -335,6 +337,7 @@ ENDMACRO(nice_yesno _varname)
 
 nice_yesno("HAVE_LIBOFX_H")
 nice_yesno("USE_OFX_DIRECTCONNECT")
+nice_yesno("LIBICAL_FOUND")
 nice_yesno("QT_SQLITE_FOUND")
 nice_yesno("USE_LEAK_CHECK")
 nice_yesno("USE_QT_DESIGNER")
@@ -348,6 +351,8 @@ Configure results (user options):
 OFX plugin:                              ${nice_HAVE_LIBOFX_H}
 
 OFX direct connect:                      ${nice_USE_OFX_DIRECTCONNECT}
+
+iCalendar export plugin:                 ${nice_LIBICAL_FOUND}
 
 SQLITE3 support:                         ${nice_QT_SQLITE_FOUND}
 --------------------------------------------
