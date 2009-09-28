@@ -121,7 +121,7 @@ void MyMoneyQifWriter::writeAccountEntry(QTextStream &s, const QString& accountI
   QList<MyMoneyTransaction>::ConstIterator it;
   signalProgress(0, list.count());
   int count = 0;
-  for(it = list.begin(); it != list.end(); ++it) {
+  for(it = list.constBegin(); it != list.constEnd(); ++it) {
     // don't include the openingBalanceTransaction again
     if((*it).id() != openingBalanceTransactionId)
       writeTransactionEntry(s, *it, accountId);
@@ -217,7 +217,7 @@ void MyMoneyQifWriter::writeTransactionEntry(QTextStream &s, const MyMoneyTransa
     }
     if(list.count() > 2) {
       QList<MyMoneySplit>::ConstIterator it;
-      for(it = list.begin(); it != list.end(); ++it) {
+      for(it = list.constBegin(); it != list.constEnd(); ++it) {
         if(!((*it) == split)) {
           writeSplitEntry(s, *it);
         }

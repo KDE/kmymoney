@@ -544,7 +544,7 @@ bool MyMoneyQifReader::finishImport(void)
 #endif
   // Now to import the statements
   QList<MyMoneyStatement>::const_iterator it_st;
-  for(it_st = d->statements.begin(); it_st != d->statements.end(); ++it_st)
+  for(it_st = d->statements.constBegin(); it_st != d->statements.constEnd(); ++it_st)
     kmymoney2->slotStatementImport(*it_st);
   return rc;
 }
