@@ -1,9 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=iCalendar
-Name[ro]=iCalendar
 Comment=Exports schedules to iCalendar files
-Comment[ro]=Exportă plățile programate într-un fișier iCalendar
 Type=Service
 Icon=x-office-calendar
 ServiceTypes=KMyMoneyPlugin
