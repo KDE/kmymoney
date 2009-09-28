@@ -29,7 +29,7 @@
 #include <libical/ical.h>
 
 // KMyMoney includes 
-#include <kmymoney/mymoneyfile.h>
+#include "mymoneyfile.h"
 
 // plugin includes
 #include "schedulestoicalendar.h"

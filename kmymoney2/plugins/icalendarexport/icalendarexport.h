@@ -21,9 +21,9 @@
 #ifndef __ICALENDAREXPORT_H__
 #define __ICALENDAREXPORT_H__
 
-#include <kmymoney/kmymoneyplugin.h>
-#include <kmymoney/mymoneyaccount.h>
-#include <kmymoney/mymoneykeyvaluecontainer.h>
+#include "kmymoneyplugin.h"
+#include "mymoneyaccount.h"
+#include "mymoneykeyvaluecontainer.h"
 
 class QStringList;
 class KPluginInfo;

@@ -29,8 +29,8 @@
 #include <kactioncollection.h>
 
 // KMyMoney includes
-#include <kmymoney/mymoneyfile.h>
-#include <kmymoney/pluginloader.h>
+#include "mymoneyfile.h"
+#include "pluginloader.h"
 
 #include "icalendarexport.h"
 #include "schedulestoicalendar.h"
