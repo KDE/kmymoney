@@ -1,7 +1,13 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=iCalendar
+Name[tr]=iCalendar
+Name[uk]=iCalendar
+Name[x-test]=xxiCalendarxx
 Comment=Exports schedules to iCalendar files
+Comment[tr]=Zamanlamaları iCalendar dosyalarına aktarır
+Comment[uk]=Експортує розклади до файлів iCalendar
+Comment[x-test]=xxExports schedules to iCalendar filesxx
 Type=Service
 Icon=x-office-calendar
 ServiceTypes=KMyMoneyPlugin
