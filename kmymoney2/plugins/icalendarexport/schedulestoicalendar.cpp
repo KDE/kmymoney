@@ -287,7 +287,7 @@ void KMMSchedulesToiCalendar::exportToFile(const QString& filePath, bool setting
   // export schedules as TODOs
   MyMoneyFile* file = MyMoneyFile::instance();
   QList<MyMoneySchedule> schedules = file->scheduleList();
-  for (QList<MyMoneySchedule>::const_iterator itSchedule = schedules.begin(); itSchedule != schedules.end(); ++itSchedule) {
+  for (QList<MyMoneySchedule>::const_iterator itSchedule = schedules.constBegin(); itSchedule != schedules.constEnd(); ++itSchedule) {
     const MyMoneySchedule& myMoneySchedule = *itSchedule;
 
     if (myMoneySchedule.isFinished())
