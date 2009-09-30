@@ -552,11 +552,17 @@ bool MyMoneyQifReader::finishImport(void)
 void MyMoneyQifReader::processQifSpecial(const QString& _line)
 {
   QString line = _line.mid(1);   // get rid of exclamation mark
-  // QString test = line.left(5).toLower();
   if(line.left(5).toLower() == QString("type:")) {
     line = line.mid(5);
+
+    // exportable accounts
     if(line.toLower() == "ccard" || KMyMoneyGlobalSettings::qifCreditCard().toLower().contains(line.toLower())) {
       d->accountType = MyMoneyAccount::CreditCard;
+      d->firstTransaction = true;
+      d->transactionType = m_entryType = EntryTransaction;
+
+    } else if(line.toLower() == "bank" || KMyMoneyGlobalSettings::qifBank().toLower().contains(line.toLower())) {
+      d->accountType = MyMoneyAccount::Checkings;
       d->firstTransaction = true;
       d->transactionType = m_entryType = EntryTransaction;
 
@@ -575,39 +581,52 @@ void MyMoneyQifReader::processQifSpecial(const QString& _line)
       d->firstTransaction = true;
       d->transactionType = m_entryType = EntryTransaction;
 
+    } else if(line.toLower() == "invst" || line.toLower() == i18nc("QIF tag for investment account", "Invst").toLower()) {
+      d->transactionType = m_entryType = EntryInvestmentTransaction;
+
+    } else if(line.toLower() == "invoice" || KMyMoneyGlobalSettings::qifInvoice().toLower().contains(line.toLower())) {
+      m_entryType = EntrySkip;
+
+    } else if(line.toLower() == "tax") {
+      m_entryType = EntrySkip;
+
+    } else if(line.toLower() == "bill") {
+      m_entryType = EntrySkip;
+
+    // exportable lists
     } else if(line.toLower() == "cat" || line.toLower() == i18nc("QIF tag for category", "Cat").toLower()) {
       m_entryType = EntryCategory;
 
     } else if(line.toLower() == "security" || line.toLower() == i18nc("QIF tag for security", "Security").toLower()) {
       m_entryType = EntrySecurity;
 
-    } else if(line.toLower() == "invst" || line.toLower() == i18nc("QIF tag for investment account", "Invst").toLower()) {
-      d->transactionType = m_entryType = EntryInvestmentTransaction;
-
     } else if(line.toLower() == "prices" || line.toLower() == i18nc("QIF tag for prices", "Prices").toLower()) {
       m_entryType = EntryPrice;
-
-    } else if(line.toLower() == "bank" || KMyMoneyGlobalSettings::qifBank().toLower().contains(line.toLower())) {
-      d->accountType = MyMoneyAccount::Checkings;
-      d->firstTransaction = true;
-      d->transactionType = m_entryType = EntryTransaction;
 
     } else if(line.toLower() == "payee") {
       m_entryType = EntryPayee;
 
-    } else if(line.toLower() == "invoice" || KMyMoneyGlobalSettings::qifInvoice().toLower().contains(line.toLower())) {
-      m_entryType = EntrySkip;
-#if 0
     } else if(line.toLower() == "memorized") {
       m_entryType = EntryMemorizedTransaction;
 
-#endif
     } else if(line.toLower() == "class" || line.toLower() == i18nc("QIF tag for a class", "Class").toLower()) {
       m_entryType = EntryClass;
 
+    } else if(line.toLower() == "budget") {
+      m_entryType = EntrySkip;
+
+    } else if(line.toLower() == "invitem") {
+      m_entryType = EntrySkip;
+
+    } else if(line.toLower() == "template") {
+      m_entryType = EntrySkip;
+
     } else {
       qWarning("Unknown type code '%s' in QIF file on line %d", qPrintable(line), m_linenumber);
+      m_entryType = EntrySkip;
     }
+
+  // option headers
   } else if(line.toLower() == "account") {
     m_entryType = EntryAccount;
 
@@ -665,6 +684,9 @@ void MyMoneyQifReader::processQifEntry(void)
 
       case EntryMemorizedTransaction:
         kDebug(2) << "Line " << m_linenumber << ": Memorized transactions are not yet implemented!";
+        break;
+
+      case EntrySkip:
         break;
 
       default:
