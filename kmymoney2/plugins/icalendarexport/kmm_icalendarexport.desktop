@@ -1,10 +1,16 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=iCalendar
+Name[el]=iCalendar
+Name[fr]=iCalendar
+Name[pt]=iCalendar
 Name[tr]=iCalendar
 Name[uk]=iCalendar
 Name[x-test]=xxiCalendarxx
 Comment=Exports schedules to iCalendar files
+Comment[el]=Εξαγωγή χρονοδιαγραμμάτων σε αρχεία iCalendar
+Comment[fr]=Exporte les rendez-vous dans des fichiers iCalendar
+Comment[pt]=Exporta as calendarizações para os ficheiros iCalendar
 Comment[tr]=Zamanlamaları iCalendar dosyalarına aktarır
 Comment[uk]=Експортує розклади до файлів iCalendar
 Comment[x-test]=xxExports schedules to iCalendar filesxx

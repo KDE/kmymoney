@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=ServiceType
 Name=KMyMoney Importer Plugin
+Name[el]=Πρόσθετο εισαγωγής για KMyMoney
 Name[en_GB]=KMyMoney Importer Plugin
 Name[et]=KMyMoney impordiplugin
 Name[fr]=Module d'import pour KMyMoney
@@ -17,6 +18,7 @@ Name[x-test]=xxKMyMoney Importer Pluginxx
 Name[zh_TW]=KMyMoney 匯入外掛程式
 X-KDE-ServiceType=KMyMoneyImporterPlugin
 Comment=A KMyMoney plugin
+Comment[el]=Ένα πρόσθετο για το KMyMoney
 Comment[en_GB]=A KMyMoney plugin
 Comment[et]=KMyMoney plugin
 Comment[fr]=Un module pour KMyMoney

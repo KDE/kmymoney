@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=KMyMoney
+Name[el]=KMyMoney
 Name[en_GB]=KMyMoney
 Name[et]=KMyMoney
 Name[fr]=KMyMoney
@@ -15,6 +16,7 @@ Name[uk]=KMyMoney
 Name[x-test]=xxKMyMoneyxx
 Name[zh_TW]=KMyMoney
 GenericName=Personal Finance Manager
+GenericName[el]=Προσωπικός διαχειριστής οικονομικών
 GenericName[en_GB]=Personal Finance Manager
 GenericName[et]=Isiklike rahaasjade haldur
 GenericName[fr]=Outil de gestion des finances personnelles
@@ -31,6 +33,7 @@ GenericName[x-test]=xxPersonal Finance Managerxx
 GenericName[zh_TW]=個人財務管理程式
 Exec=kmymoney2 %u
 Comment=Personal Finance Manager
+Comment[el]=Προσωπικός διαχειριστής οικονομικών
 Comment[en_GB]=Personal Finance Manager
 Comment[et]=Isiklike rahaasjade haldur
 Comment[fr]=Outil de gestion des finances personnelles
