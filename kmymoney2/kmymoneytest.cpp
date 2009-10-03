@@ -104,11 +104,23 @@ int main(int testargc, char** testargv)
 #ifdef HAVE_LIBCPPUNIT
 
   // we seem to need a KApplication object to use KGlobal::locale()
+#ifdef PERFORM_ONLINE_TESTS
+  // set the appname to "kmymoney2" instead of "kmymoneytest" to ensure
+  // we are testing against the actual configuration
+  // This is needed for the online tests, but if someone has a better
+  // solution, it should be implemented.
+  KAboutData aboutData( "kmymoney2",0, ki18n("KMyMoney Unittest"),
+    "0.1", ki18n( "\nKMyMoney, the Personal Finance Manager for KDE.\n\nPlease consider contributing to this project with code and/or suggestions." ), KAboutData::License_GPL,
+                        ki18n( "(c) 2000-2009 The KMyMoney development team" ), /*feature*/KLocalizedString(),
+    I18N_NOOP( "http://kmymoney2.sourceforge.net/" )/*,
+                                                      "kmymoney2-developer@lists.sourceforge.net")*/ );
+#else
   KAboutData aboutData( "kmymoneytest",0, ki18n("KMyMoney Unittest"),
     "0.1", ki18n( "\nKMyMoney, the Personal Finance Manager for KDE.\n\nPlease consider contributing to this project with code and/or suggestions." ), KAboutData::License_GPL,
                         ki18n( "(c) 2000-2009 The KMyMoney development team" ), /*feature*/KLocalizedString(),
     I18N_NOOP( "http://kmymoney2.sourceforge.net/" )/*,
                                                       "kmymoney2-developer@lists.sourceforge.net")*/ );
+#endif
   KCmdLineOptions options;
   options.add("+[test_suite]", ki18n("Optionally specify a test suite") );
   options.add("", ki18n("Optional arguments are for ctest") );
