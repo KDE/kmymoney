@@ -28,7 +28,6 @@
 #include <QCheckBox>
 #include <QTimer>
 #include <QTabWidget>
-#include <q3buttongroup.h>
 #include <QRadioButton>
 #include <q3textedit.h>
 #include <QLayout>
@@ -40,6 +39,7 @@
 // ----------------------------------------------------------------------------
 // KDE Headers
 
+#include <kbuttongroup.h>
 #include <klocale.h>
 #include <kglobal.h>
 #include <kmessagebox.h>
@@ -135,12 +135,12 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
   if (categoryEditor)
   {
     // get rid of the tabs that are not used for categories
-    QWidget* tab = m_tab->page(m_tab->indexOf(m_institutionTab));
-    if(tab)
-      m_tab->removePage(tab);
-    tab = m_tab->page(m_tab->indexOf(m_limitsTab));
-    if(tab)
-      m_tab->removePage(tab);
+    int tab = m_tab->indexOf(m_institutionTab);
+    if(tab != -1)
+      m_tab->removeTab(tab);
+    tab = m_tab->indexOf(m_limitsTab);
+    if(tab != -1)
+      m_tab->removeTab(tab);
 
     //m_qlistviewParentAccounts->setEnabled(true);
     startDateEdit->setEnabled(false);
@@ -149,8 +149,8 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
     m_institutionBox->hide();
     m_qcheckboxNoVat->hide();
 
-    typeCombo->insertItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Income));
-    typeCombo->insertItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Expense));
+    typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Income));
+    typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Expense));
 
     // Hardcoded but acceptable
     switch (account.accountType())
@@ -178,14 +178,14 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
   else
   {
     // get rid of the tabs that are not used for accounts
-    QWidget* taxtab = m_tab->page(m_tab->indexOf(m_taxTab));
-    if (taxtab) {
+    int taxtab = m_tab->indexOf(m_taxTab);
+    if (taxtab != -1) {
       if(m_account.isAssetLiability()) {
         m_vatCategory->setText(i18n( "VAT account"));
         m_vatAssignmentFrame->hide();
         m_qcheckboxTax->setChecked(account.value("Tax") == "Yes");
       } else {
-        m_tab->removePage(taxtab);
+        m_tab->removeTab(taxtab);
       }
     }
 
@@ -206,9 +206,9 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
 
       default:
         // no limit available, so we might get rid of the tab
-        QWidget* tab = m_tab->page(m_tab->indexOf(m_limitsTab));
-        if(tab)
-          m_tab->removePage(tab);
+        int tab = m_tab->indexOf(m_limitsTab);
+        if(tab != -1)
+          m_tab->removeTab(tab);
         // don't try to hide the widgets we just wiped
         // in the next step
         haveMaxCredit = haveMinBalance = true;
@@ -228,19 +228,19 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
       m_minBalanceAbsoluteEdit->hide();
     }
 
-    typeCombo->insertItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Checkings));
-    typeCombo->insertItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Savings));
-    typeCombo->insertItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Cash));
-    typeCombo->insertItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::CreditCard));
-    typeCombo->insertItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Loan));
-    typeCombo->insertItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Investment));
-    typeCombo->insertItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Asset));
-    typeCombo->insertItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Liability));
-    typeCombo->insertItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Stock));
+    typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Checkings));
+    typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Savings));
+    typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Cash));
+    typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::CreditCard));
+    typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Loan));
+    typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Investment));
+    typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Asset));
+    typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Liability));
+    typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Stock));
 /*
-    typeCombo->insertItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::CertificateDep));
-    typeCombo->insertItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::MoneyMarket));
-    typeCombo->insertItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Currency));
+    typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::CertificateDep));
+    typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::MoneyMarket));
+    typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Currency));
 */
 
     // Hardcoded but acceptable
@@ -1015,7 +1015,7 @@ void KNewAccountDlg::slotLoadInstitutions(const QString& name)
   m_qcomboboxInstitutions->clear();
   QString bic;
   // Are we forcing the user to use institutions?
-  m_qcomboboxInstitutions->insertItem(i18n("<No Institution>"));
+  m_qcomboboxInstitutions->addItem(i18n("<No Institution>"));
   m_bicValue->setText(" ");
   ibanEdit->setEnabled(false);
   accountNoEdit->setEnabled(false);
@@ -1032,7 +1032,7 @@ void KNewAccountDlg::slotLoadInstitutions(const QString& name)
         accountNoEdit->setEnabled(true);
         m_bicValue->setText((*institutionIterator).value("bic"));
       }
-      m_qcomboboxInstitutions->insertItem((*institutionIterator).name());
+      m_qcomboboxInstitutions->addItem((*institutionIterator).name());
     }
 
     m_qcomboboxInstitutions->setCurrentItem(name, false);

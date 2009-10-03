@@ -337,62 +337,35 @@
         </attribute>
         <layout class="QVBoxLayout" name="verticalLayout_2">
          <item>
-          <widget class="Q3ButtonGroup" name="buttonGroup1">
+          <widget class="KButtonGroup" name="m_matchType">
            <property name="title">
             <string>Transaction Matching</string>
            </property>
-           <layout class="QHBoxLayout" name="horizontalLayout">
-            <item>
-             <widget class="Q3ButtonGroup" name="m_matchType">
-              <property name="title">
-               <string/>
-              </property>
-              <property name="frameShape">
-               <enum>Q3GroupBox::NoFrame</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>Q3GroupBox::Plain</enum>
-              </property>
-              <property name="exclusive">
-               <bool>true</bool>
-              </property>
-              <layout class="QVBoxLayout" name="verticalLayout">
-               <item>
-                <widget class="QRadioButton" name="radioNoMatch">
-                 <property name="text">
-                  <string>No matching</string>
-                 </property>
-                 <property name="checked">
-                  <bool>true</bool>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string/>
-                 </attribute>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="radioNameMatch">
-                 <property name="text">
-                  <string>Match on Payee name</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string/>
-                 </attribute>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="radioKeyMatch">
-                 <property name="text">
-                  <string>Match on a name listed below</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string/>
-                 </attribute>
-                </widget>
-               </item>
-              </layout>
-             </widget>
-            </item>
+           <layout class="QVBoxLayout" name="horizontalLayout">
+             <item>
+              <widget class="QRadioButton" name="radioNoMatch">
+               <property name="text">
+                <string>No matching</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QRadioButton" name="radioNameMatch">
+               <property name="text">
+                <string>Match on Payee name</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QRadioButton" name="radioKeyMatch">
+               <property name="text">
+                <string>Match on a name listed below</string>
+               </property>
+              </widget>
+             </item>
            </layout>
           </widget>
          </item>
@@ -550,12 +523,6 @@ new transactions with this payee</string>
    <class>Q3GroupBox</class>
    <extends>QGroupBox</extends>
    <header>Qt3Support/Q3GroupBox</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>Q3ButtonGroup</class>
-   <extends>Q3GroupBox</extends>
-   <header>Qt3Support/Q3ButtonGroup</header>
    <container>1</container>
   </customwidget>
   <customwidget>

@@ -18,9 +18,10 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QButtonGroup>
+#include <QGroupBox>
 #include <QTabWidget>
 #include <QLabel>
-#include <q3buttongroup.h>
 #include <QRadioButton>
 #include <q3widgetstack.h>
 #include <QTimer>
@@ -148,12 +149,12 @@ void KBudgetValues::clear(void)
 
 void KBudgetValues::slotClearAllValues(void)
 {
-  QWidget* tab = m_periodGroup->selected();
-  if(tab == m_monthlyButton) {
+  int tab = m_periodGroup->selected();
+  if(tab == m_periodGroup->id(m_monthlyButton)) {
     m_amountMonthly->setValue(MyMoneyMoney());
-  } else if(tab == m_yearlyButton) {
+  } else if(tab == m_periodGroup->id(m_yearlyButton)) {
     m_amountYearly->setValue(MyMoneyMoney());
-  } else if(tab == m_individualButton) {
+  } else if(tab == m_periodGroup->id(m_individualButton)) {
     for(int i=0; i < 12; ++i)
       m_field[i]->setValue(MyMoneyMoney());
   }
@@ -306,15 +307,16 @@ void KBudgetValues::budgetValues(const MyMoneyBudget& budget, MyMoneyBudget::Acc
   QDate date;
 
   budgetAccount.clearPeriods();
-  if(m_periodGroup->selected() == m_monthlyButton) {
+  int tab = m_periodGroup->selected();
+  if(tab == m_periodGroup->id(m_monthlyButton)) {
     budgetAccount.setBudgetLevel(MyMoneyBudget::AccountGroup::eMonthly);
     period.setAmount(m_amountMonthly->value());
     budgetAccount.addPeriod(m_budgetDate, period);
-  } else if(m_periodGroup->selected() == m_yearlyButton) {
+  } else if(tab == m_periodGroup->id(m_yearlyButton)) {
     budgetAccount.setBudgetLevel(MyMoneyBudget::AccountGroup::eYearly);
     period.setAmount(m_amountYearly->value());
     budgetAccount.addPeriod(m_budgetDate, period);
-  } else if(m_periodGroup->selected() == m_individualButton) {
+  } else if(tab == m_periodGroup->id(m_individualButton)) {
     budgetAccount.setBudgetLevel(MyMoneyBudget::AccountGroup::eMonthByMonth);
     date.setYMD(m_budgetDate.year(), 1, 1);
     for(int i = 0; i < 12; ++i) {
@@ -329,11 +331,12 @@ void KBudgetValues::budgetValues(const MyMoneyBudget& budget, MyMoneyBudget::Acc
 void KBudgetValues::slotUpdateClearButton(void)
 {
   bool rc = false;
-  if(m_periodGroup->selected() == m_monthlyButton) {
+  int tab = m_periodGroup->selected();
+  if(tab == m_periodGroup->id(m_monthlyButton)) {
     rc = !m_amountMonthly->value().isZero();
-  } else if(m_periodGroup->selected() == m_yearlyButton) {
+  } else if(tab == m_periodGroup->id(m_yearlyButton)) {
     rc = !m_amountYearly->value().isZero();
-  } else if(m_periodGroup->selected() == m_individualButton) {
+  } else if(tab == m_periodGroup->id(m_individualButton)) {
     for(int i = 0; (i < 12) && (rc == false); ++i) {
       rc |= !m_field[i]->value().isZero();
     }

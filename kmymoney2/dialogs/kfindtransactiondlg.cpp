@@ -106,7 +106,7 @@ KFindTransactionDlg::KFindTransactionDlg(QWidget *parent) :
   m_needReload(false)
 {
   m_register->installEventFilter(this);
-  m_tabWidget->setTabEnabled(m_resultPage, false);
+  m_tabWidget->setTabEnabled(m_tabWidget->indexOf(m_resultPage), false);
 
   // 'cause we don't have a separate setupTextPage
   connect(m_textEdit, SIGNAL(textChanged(const QString&)), this, SLOT(slotUpdateSelections()));
@@ -194,8 +194,8 @@ void KFindTransactionDlg::slotReset(void)
   m_nrButton->setChecked(true);
   m_nrRangeButton->setChecked(false);
 
-  m_tabWidget->setTabEnabled(m_resultPage, false);
-  m_tabWidget->setCurrentPage(m_tabWidget->indexOf(m_criteriaTab));
+  m_tabWidget->setTabEnabled(m_tabWidget->indexOf(m_resultPage), false);
+  m_tabWidget->setCurrentIndex(m_tabWidget->indexOf(m_criteriaTab));
 
   // the following call implies a call to slotUpdateSelections,
   // that's why we call it last
@@ -259,9 +259,9 @@ void KFindTransactionDlg::slotUpdateSelections(void)
   m_payeesView->setEnabled(!m_emptyPayeesButton->isChecked());
 
   // Details tab
-  if(m_typeBox->currentItem() != 0
-  || m_stateBox->currentItem() != 0
-  || m_validityBox->currentItem() != 0
+  if(m_typeBox->currentIndex() != 0
+  || m_stateBox->currentIndex() != 0
+  || m_validityBox->currentIndex() != 0
   || (m_nrButton->isChecked() && m_nrEdit->text().length() != 0)
   || (m_nrRangeButton->isChecked()
      && (m_nrFromEdit->text().length() != 0 || m_nrToEdit->text().length() != 0))) {
@@ -594,7 +594,7 @@ void KFindTransactionDlg::setupFilter(void)
   // Text tab
   if(!m_textEdit->text().isEmpty()) {
     QRegExp exp(m_textEdit->text(), m_caseSensitive->isChecked() ? Qt::CaseSensitive : Qt::CaseInsensitive, !m_regExp->isChecked() ? QRegExp::Wildcard : QRegExp::RegExp);
-    m_filter.setTextFilter(exp, m_textNegate->currentItem() != 0);
+    m_filter.setTextFilter(exp, m_textNegate->currentIndex() != 0);
   }
 
   // Account tab
@@ -660,14 +660,14 @@ void KFindTransactionDlg::setupFilter(void)
   }
 
   // Details tab
-  if(m_typeBox->currentItem() != 0)
-    m_filter.addType(m_typeBox->currentItem());
+  if(m_typeBox->currentIndex() != 0)
+    m_filter.addType(m_typeBox->currentIndex());
 
-  if(m_stateBox->currentItem() != 0)
-    m_filter.addState(m_stateBox->currentItem());
+  if(m_stateBox->currentIndex() != 0)
+    m_filter.addState(m_stateBox->currentIndex());
 
-  if(m_validityBox->currentItem() != 0)
-    m_filter.addValidity(m_validityBox->currentItem());
+  if(m_validityBox->currentIndex() != 0)
+    m_filter.addValidity(m_validityBox->currentIndex());
 
   if(m_nrButton->isChecked() && !m_nrEdit->text().isEmpty())
     m_filter.setNumberFilter(m_nrEdit->text(), m_nrEdit->text());
@@ -763,8 +763,8 @@ void KFindTransactionDlg::loadView(void)
   m_foundText->setText(i18n("Found %1 matching transactions", splitCount));
 #endif
 
-  m_tabWidget->setTabEnabled(m_resultPage, true);
-  m_tabWidget->setCurrentPage(m_tabWidget->indexOf(m_resultPage));
+  m_tabWidget->setTabEnabled(m_tabWidget->indexOf(m_resultPage), true);
+  m_tabWidget->setCurrentIndex(m_tabWidget->indexOf(m_resultPage));
 
   QTimer::singleShot(10, this, SLOT(slotRightSize()));
 }
@@ -856,7 +856,7 @@ bool KFindTransactionDlg::eventFilter(QObject* o, QEvent* e)
 
 void KFindTransactionDlg::slotShowHelp(void)
 {
-  QString anchor = m_helpAnchor[m_criteriaTab->currentPage()];
+  QString anchor = m_helpAnchor[m_criteriaTab->currentWidget()];
   if(anchor.isEmpty())
     anchor = QString("details.search");
 

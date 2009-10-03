@@ -150,7 +150,7 @@ int KSplitTransactionDlg::exec(void)
   // for deposits, we invert the sign of all splits.
   // don't forget to revert when we're done ;-)
   if(m_isDeposit) {
-    for(unsigned i = 0; i < m_transaction.splits().count(); ++i) {
+    for(int i = 0; i < m_transaction.splits().count(); ++i) {
       MyMoneySplit split = m_transaction.splits()[i];
       split.setValue(-split.value());
       split.setShares(-split.shares());
@@ -206,26 +206,23 @@ int KSplitTransactionDlg::exec(void)
         corrDlg->leaveBtn->setText(q);
 
         if((rc = corrDlg->exec()) == QDialog::Accepted) {
-          QAbstractButton* button = corrDlg->buttonGroup->selected();
-          if(button != 0) {
-            switch(corrDlg->buttonGroup->id(button)) {
-              case 0:       // continue to edit
-                rc = QDialog::Rejected;
-                break;
+          switch(corrDlg->buttonGroup->checkedId()) {
+            case 0:       // continue to edit
+              rc = QDialog::Rejected;
+              break;
 
-              case 1:       // modify total
-                split.setValue(-splitsValue());
-                split.setShares(-splitsValue());
-                m_transaction.modifySplit(split);
-                break;
+            case 1:       // modify total
+              split.setValue(-splitsValue());
+              split.setShares(-splitsValue());
+              m_transaction.modifySplit(split);
+              break;
 
-              case 2:       // distribute difference
-                qDebug("distribution of difference not yet supported in KSplitTransactionDlg::slotFinishClicked()");
-                break;
+            case 2:       // distribute difference
+              qDebug("distribution of difference not yet supported in KSplitTransactionDlg::slotFinishClicked()");
+              break;
 
-              case 3:       // leave unassigned
-                break;
-            }
+            case 3:       // leave unassigned
+              break;
           }
         }
         delete corrDlg;
@@ -238,7 +235,7 @@ int KSplitTransactionDlg::exec(void)
   // for deposits, we inverted the sign of all splits.
   // now we revert it back, so that things are left correct
   if(m_isDeposit) {
-    for(unsigned i = 0; i < m_transaction.splits().count(); ++i) {
+    for(int i = 0; i < m_transaction.splits().count(); ++i) {
       MyMoneySplit split = m_transaction.splits()[i];
       split.setValue(-split.value());
       split.setShares(-split.shares());

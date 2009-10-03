@@ -20,6 +20,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kcurrencycalculator.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -32,6 +34,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <kbuttongroup.h>
 #include <klocale.h>
 #include <kpushbutton.h>
 #include <kcombobox.h>
@@ -39,8 +42,6 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-
-#include "kcurrencycalculator.h"
 
 #include <kmymoneyedit.h>
 #include <kmymoneydateinput.h>

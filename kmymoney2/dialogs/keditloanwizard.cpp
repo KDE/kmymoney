@@ -24,7 +24,6 @@
 // QT Includes
 
 #include <QRadioButton>
-#include <q3buttongroup.h>
 #include <QLabel>
 //Added by qt3to4:
 #include <QList>
@@ -32,6 +31,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <kbuttongroup.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <knuminput.h>
@@ -235,12 +235,13 @@ void KEditLoanWizard::loadWidgets(const MyMoneyAccount& /* account */)
 void KEditLoanWizard::next()
 {
   bool dontLeavePage = false;
-  QAbstractButton* button = m_selectionButtonGroup->find(m_lastSelection);
+  QAbstractButton* button = m_selectionButtonGroup->button(m_lastSelection);
 
   if(currentPage() == m_editSelectionPage) {
 
     if(button != 0
-    && m_lastSelection != m_selectionButtonGroup->id(m_selectionButtonGroup->selected())) {
+    && m_lastSelection != m_selectionButtonGroup->checkedId()) {
+
       QString errMsg = i18n(
             "Your previous selection was \"%1\". If you select another option, "
             "KMyMoney will dismiss the changes you have just entered. "
@@ -254,7 +255,7 @@ void KEditLoanWizard::next()
     }
 
     if(!dontLeavePage) {
-      button = m_selectionButtonGroup->selected();
+      button = m_selectionButtonGroup->checkedButton();
 
       // turn off all pages except the summary at the end
       // and the one's we need for the selected option
@@ -290,7 +291,7 @@ void KEditLoanWizard::next()
         setFinishEnabled(m_summaryEditPage, true);
       }
 
-      if(button == m_editInterestRateButton) {
+      if(button ==  m_editInterestRateButton) {
         setAppropriate(m_interestTypePage, true);
         setAppropriate(m_variableInterestDatePage, true);
         setAppropriate(m_paymentEditPage, true);
@@ -322,11 +323,11 @@ void KEditLoanWizard::next()
         qFatal("%s,%d: This should never happen", __FILE__, __LINE__);
       }
 
-      m_lastSelection = m_selectionButtonGroup->id(m_selectionButtonGroup->selected());
+      m_lastSelection = m_selectionButtonGroup->checkedId();
     } // if(!dontLeavePage)
 
   } else if(currentPage() == m_additionalFeesPage) {
-    button = m_selectionButtonGroup->selected();
+    button = m_selectionButtonGroup->checkedButton();
     if(button == m_editOtherCostButton) {
       updateLoanInfo();
       updateEditSummary();

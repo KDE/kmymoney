@@ -55,12 +55,9 @@
             </widget>
           </item>
           <item>
-            <widget class="Q3ButtonGroup" name="buttonGroup">
+            <widget class="QFrame" name="frame">
               <property name="frameShape">
-                <enum>Q3GroupBox::NoFrame</enum>
-              </property>
-              <property name="title">
-                <string/>
+                <enum>QFrame::NoFrame</enum>
               </property>
               <layout class="QVBoxLayout">
                 <property name="margin">
@@ -77,6 +74,9 @@
                     <property name="checked">
                       <bool>true</bool>
                     </property>
+                    <attribute name="buttonGroup">
+                      <string>buttonGroup</string>
+                    </attribute>
                   </widget>
                 </item>
                 <item>
@@ -84,6 +84,9 @@
                     <property name="text">
                       <string>Change total amount of transaction to %1.</string>
                     </property>
+                    <attribute name="buttonGroup">
+                      <string>buttonGroup</string>
+                    </attribute>
                   </widget>
                 </item>
                 <item>
@@ -94,6 +97,9 @@
                     <property name="text">
                       <string>Distribute difference of %1 among all splits.</string>
                     </property>
+                    <attribute name="buttonGroup">
+                      <string>buttonGroup</string>
+                    </attribute>
                   </widget>
                 </item>
                 <item>
@@ -101,6 +107,9 @@
                     <property name="text">
                       <string>Leave %1 unassigned.</string>
                     </property>
+                    <attribute name="buttonGroup">
+                      <string>buttonGroup</string>
+                    </attribute>
                   </widget>
                 </item>
               </layout>
@@ -155,9 +164,7 @@
           <item>
             <widget class="KPushButton" name="okBtn">
               <property name="sizePolicy">
-                <sizepolicy>
-                  <hsizetype>4</hsizetype>
-                  <vsizetype>1</vsizetype>
+                <sizepolicy hsizetype="Maximum" vsizetype="Minimum">
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                 </sizepolicy>
@@ -176,9 +183,7 @@
           <item>
             <widget class="KPushButton" name="cancelBtn">
               <property name="sizePolicy">
-                <sizepolicy>
-                  <hsizetype>4</hsizetype>
-                  <vsizetype>1</vsizetype>
+                <sizepolicy hsizetype="Maximum" vsizetype="Minimum">
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                 </sizepolicy>
@@ -213,4 +218,7 @@
       <slot>reject()</slot>
     </connection>
   </connections>
+  <buttongroups>
+    <buttongroup name="buttonGroup"/>
+  </buttongroups>
 </ui>

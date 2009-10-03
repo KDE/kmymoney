@@ -38,8 +38,7 @@
 KGncImportOptionsDlg::KGncImportOptionsDlg(QWidget *parent)
  : KGncImportOptionsDlgDecl(parent)
 {
-  buttonInvestGroup->setRadioButtonExclusive (true);
-  buttonInvestGroup->setButton (0);
+  buttonInvestGroup->setSelected (0);
   checkFinanceQuote->setChecked(true);
   checkSchedules->setChecked (false);
   buildCodecList (); // build list of codecs and insert into combo box

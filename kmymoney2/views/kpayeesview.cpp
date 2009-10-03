@@ -624,7 +624,7 @@ void KPayeesView::slotSelectPayee(void)
     bool ignorecase = false;
     MyMoneyPayee::payeeMatchType type = m_payee.matchData(ignorecase, keys);
 
-    m_matchType->setButton(static_cast<int>(type));
+    m_matchType->setSelected(static_cast<int>(type));
     matchKeyEditList->clear();
     matchKeyEditList->insertStringList(keys);
     checkMatchIgnoreCase->setChecked(ignorecase);
@@ -774,7 +774,7 @@ void KPayeesView::slotKeyListChanged(void)
   // J.Rodehueser: delete unused variable 'type'
   // orig:  MyMoneyPayee::payeeMatchType type = m_payee.matchData(ignorecase, keys);
   m_payee.matchData(ignorecase, keys);
-  if(m_matchType->selectedId() == MyMoneyPayee::matchKey) {
+  if(m_matchType->selected() == MyMoneyPayee::matchKey) {
     rc |= (keys != matchKeyEditList->items());
   }
   m_updateButton->setEnabled(rc);
@@ -802,19 +802,19 @@ void KPayeesView::slotPayeeDataChanged(void)
     QStringList keys;
 
     MyMoneyPayee::payeeMatchType type = m_payee.matchData(ignorecase, keys);
-    rc |= (static_cast<int>(type) != m_matchType->selectedId());
+    rc |= (static_cast<int>(type) != m_matchType->selected());
 
     checkMatchIgnoreCase->setEnabled(false);
     matchKeyEditList->setEnabled(false);
 
-    if(m_matchType->selectedId() != MyMoneyPayee::matchDisabled) {
+    if(m_matchType->selected() != MyMoneyPayee::matchDisabled) {
       checkMatchIgnoreCase->setEnabled(true);
       // if we turn matching on, we default to 'ignore case'
       // TODO maybe make the default a user option
-      if(type == MyMoneyPayee::matchDisabled && m_matchType->selectedId() != MyMoneyPayee::matchDisabled)
+      if(type == MyMoneyPayee::matchDisabled && m_matchType->selected() != MyMoneyPayee::matchDisabled)
         checkMatchIgnoreCase->setChecked(true);
       rc |= (ignorecase != checkMatchIgnoreCase->isChecked());
-      if(m_matchType->selectedId() == MyMoneyPayee::matchKey) {
+      if(m_matchType->selected() == MyMoneyPayee::matchKey) {
         matchKeyEditList->setEnabled(true);
         rc |= (keys != matchKeyEditList->items());
       }
@@ -854,7 +854,7 @@ void KPayeesView::slotUpdatePayee(void)
       m_payee.setTelephone(telephoneEdit->text());
       m_payee.setEmail(emailEdit->text());
       m_payee.setNotes(notesEdit->text());
-      m_payee.setMatchData(static_cast<MyMoneyPayee::payeeMatchType>(m_matchType->selectedId()), checkMatchIgnoreCase->isChecked(), matchKeyEditList->items());
+      m_payee.setMatchData(static_cast<MyMoneyPayee::payeeMatchType>(m_matchType->selected()), checkMatchIgnoreCase->isChecked(), matchKeyEditList->items());
       m_payee.setDefaultAccountId();
 
       if (checkEnableDefaultAccount->isChecked()) {

@@ -40,7 +40,7 @@
           </widget>
         </item>
         <item>
-          <widget class="Q3ButtonGroup" name="buttonInvestGroup">
+          <widget class="KButtonGroup" name="buttonInvestGroup">
             <property name="title">
               <string>Investment Handling</string>
             </property>
@@ -73,7 +73,7 @@
           </widget>
         </item>
         <item>
-          <widget class="Q3ButtonGroup" name="buttonGroup5">
+          <widget class="KButtonGroup" name="buttonGroup5">
             <property name="title">
               <string>Online price quotes</string>
             </property>
@@ -89,7 +89,7 @@
           </widget>
         </item>
         <item>
-          <widget class="Q3ButtonGroup" name="buttonGroup2">
+          <widget class="KButtonGroup" name="buttonGroup2">
             <property name="title">
               <string>Scheduled Transactions</string>
             </property>
@@ -105,7 +105,7 @@
           </widget>
         </item>
         <item>
-          <widget class="Q3ButtonGroup" name="buttonGroup4">
+          <widget class="KButtonGroup" name="buttonGroup4">
             <property name="title">
               <string>Decoding option</string>
             </property>
@@ -150,7 +150,7 @@
           </widget>
         </item>
         <item>
-          <widget class="Q3ButtonGroup" name="buttonGroup18">
+          <widget class="KButtonGroup" name="buttonGroup18">
             <property name="title">
               <string>Transaction Notes option</string>
             </property>
@@ -170,7 +170,7 @@
           </widget>
         </item>
         <item>
-          <widget class="Q3ButtonGroup" name="buttonGroup3">
+          <widget class="KButtonGroup" name="buttonGroup3">
             <property name="title">
               <string>Debug Options</string>
             </property>

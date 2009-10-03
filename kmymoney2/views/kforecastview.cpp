@@ -20,7 +20,6 @@
 #include <QTabWidget>
 #include <qspinbox.h>
 #include <QLabel>
-#include <q3buttongroup.h>
 #include <q3textedit.h>
 #include <QLayout>
 //Added by qt3to4:
@@ -29,6 +28,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <kbuttongroup.h>
 #include <kdebug.h>
 #include <klocale.h>
 #include <k3listview.h>
@@ -56,7 +56,7 @@ KForecastView::KForecastView(QWidget *parent) :
 
   KSharedConfigPtr config = KGlobal::config();
   KConfigGroup grp = config->group("Last Use Settings");
-  m_tab->setCurrentPage(grp.readEntry("KForecastView_LastType", 0));
+  m_tab->setCurrentIndex(grp.readEntry("KForecastView_LastType", 0));
 
   connect(m_tab, SIGNAL(currentChanged(QWidget*)), this, SLOT(slotTabChanged(QWidget*)));
 
@@ -124,7 +124,7 @@ void KForecastView::show(void)
 {
   // don't forget base class implementation
   KForecastViewDecl::show();
-  slotTabChanged(m_tab->currentPage());
+  slotTabChanged(m_tab->currentWidget());
 }
 
 void KForecastView::slotLoadForecast(void)
@@ -139,7 +139,7 @@ void KForecastView::slotLoadForecast(void)
   loadForecastSettings();
 
   if(isVisible())
-    slotTabChanged(m_tab->currentPage());
+    slotTabChanged(m_tab->currentWidget());
 }
 
 void KForecastView::slotManualForecast(void)
@@ -151,7 +151,7 @@ void KForecastView::slotManualForecast(void)
   m_needReload[ChartView] = true;
 
   if(isVisible())
-    slotTabChanged(m_tab->currentPage());
+    slotTabChanged(m_tab->currentWidget());
 }
 
 void KForecastView::loadForecastSettings(void)
@@ -161,7 +161,7 @@ void KForecastView::loadForecastSettings(void)
   m_accountsCycle->setValue(KMyMoneyGlobalSettings::forecastAccountCycle());
   m_beginDay->setValue(KMyMoneyGlobalSettings::beginForecastDay());
   m_forecastCycles->setValue(KMyMoneyGlobalSettings::forecastCycles());
-  m_historyMethod->setButton(KMyMoneyGlobalSettings::historyMethod());
+  m_historyMethod->setSelected(KMyMoneyGlobalSettings::historyMethod());
   switch(KMyMoneyGlobalSettings::forecastMethod()) {
     case 0:
       m_forecastMethod->setText(i18nc("Scheduled method", "Scheduled"));
@@ -191,7 +191,7 @@ void KForecastView::loadListView(void)
   forecast.setAccountsCycle(m_accountsCycle->value());
   forecast.setBeginForecastDay(m_beginDay->value());
   forecast.setForecastCycles(m_forecastCycles->value());
-  forecast.setHistoryMethod(m_historyMethod->selectedId());
+  forecast.setHistoryMethod(m_historyMethod->selected());
   forecast.doForecast();
 
   //clear the list, including columns
@@ -228,7 +228,7 @@ void KForecastView::loadSummaryView(void)
   forecast.setAccountsCycle(m_accountsCycle->value());
   forecast.setBeginForecastDay(m_beginDay->value());
   forecast.setForecastCycles(m_forecastCycles->value());
-  forecast.setHistoryMethod(m_historyMethod->selectedId());
+  forecast.setHistoryMethod(m_historyMethod->selected());
   forecast.doForecast();
 
   //clear the list, including columns
@@ -373,7 +373,7 @@ void KForecastView::loadAdvancedView(void)
   forecast.setAccountsCycle(m_accountsCycle->value());
   forecast.setBeginForecastDay(m_beginDay->value());
   forecast.setForecastCycles(m_forecastCycles->value());
-  forecast.setHistoryMethod(m_historyMethod->selectedId());
+  forecast.setHistoryMethod(m_historyMethod->selected());
   forecast.doForecast();
 
   //Get all accounts of the right type to calculate forecast
@@ -493,7 +493,7 @@ void KForecastView::loadBudgetView(void)
   QDate historyStartDate = historyEndDate.addDays(-m_accountsCycle->value() * m_forecastCycles->value());
   QDate forecastStartDate = QDate(QDate::currentDate().year(), 1, 1);
   QDate forecastEndDate = QDate::currentDate().addDays(m_forecastDays->value());
-  forecast.setHistoryMethod(m_historyMethod->selectedId());
+  forecast.setHistoryMethod(m_historyMethod->selected());
 
   MyMoneyBudget budget;
   forecast.createBudget(budget, historyStartDate, historyEndDate, forecastStartDate, forecastEndDate, false);
@@ -648,7 +648,7 @@ void KForecastView::loadChartView(void)
     MyMoneyReport::eAssetLiability,
     MyMoneyReport::eMonths,
     MyMoneyTransactionFilter::userDefined, // overridden by the setDateFilter() call below
-    detailLevel[m_comboDetail->currentItem()],
+    detailLevel[m_comboDetail->currentIndex()],
     i18n("Networth Forecast"),
     i18n("Generated Report"));
 

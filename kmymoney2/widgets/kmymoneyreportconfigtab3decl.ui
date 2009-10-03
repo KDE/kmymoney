@@ -128,7 +128,7 @@
       <item>
         <layout class="QHBoxLayout">
           <item>
-            <widget class="Q3ButtonGroup" name="buttonGroup1">
+            <widget class="KButtonGroup" name="buttonGroup1">
               <property name="enabled">
                 <bool>true</bool>
               </property>

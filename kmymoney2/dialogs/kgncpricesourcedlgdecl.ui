@@ -138,7 +138,7 @@
             </widget>
           </item>
           <item>
-            <widget class="Q3ButtonGroup" name="buttonGroup5">
+            <widget class="KButtonGroup" name="buttonGroup5">
               <property name="title">
                 <string/>
               </property>
@@ -148,18 +148,12 @@
                     <property name="text">
                       <string>Do not perform online quotes for this investment</string>
                     </property>
-                    <property name="buttonGroupId">
-                      <number>0</number>
-                    </property>
                   </widget>
                 </item>
                 <item>
                   <widget class="QRadioButton" name="buttonSelectSource">
                     <property name="text">
                       <string>Select a known KMyMoney source from the list below</string>
-                    </property>
-                    <property name="buttonGroupId">
-                      <number>1</number>
                     </property>
                   </widget>
                 </item>
@@ -171,9 +165,6 @@
                     <property name="text">
                       <string>Use the following name for the price source.
 (Click Help for further information.)</string>
-                    </property>
-                    <property name="buttonGroupId">
-                      <number>2</number>
                     </property>
                   </widget>
                 </item>

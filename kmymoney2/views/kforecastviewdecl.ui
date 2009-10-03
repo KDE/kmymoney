@@ -237,7 +237,7 @@
                       </layout>
                     </item>
                     <item row="2" column="0">
-                      <widget class="Q3ButtonGroup" name="m_historyMethod">
+                      <widget class="KButtonGroup" name="m_historyMethod">
                         <property name="title">
                           <string>History Forecast Method</string>
                         </property>
@@ -247,9 +247,6 @@
                               <property name="text">
                                 <string>Simple Moving Average</string>
                               </property>
-                              <property name="buttonGroupId">
-                                <number>0</number>
-                              </property>
                             </widget>
                           </item>
                           <item>
@@ -257,18 +254,12 @@
                               <property name="text">
                                 <string>Weighted Moving Average</string>
                               </property>
-                              <property name="buttonGroupId">
-                                <number>1</number>
-                              </property>
                             </widget>
                           </item>
                           <item>
                             <widget class="QRadioButton" name="radioButton12">
                               <property name="text">
                                 <string>Linear Regression</string>
-                              </property>
-                              <property name="buttonGroupId">
-                                <number>2</number>
                               </property>
                             </widget>
                           </item>

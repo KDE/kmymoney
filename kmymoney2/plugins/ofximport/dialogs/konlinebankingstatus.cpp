@@ -52,6 +52,8 @@ KOnlineBankingStatus::KOnlineBankingStatus(const MyMoneyAccount& acc, QWidget *p
 {
   m_ledOnlineStatus->off();
 
+  buttonGroup2->setContentsMargins(0,0,0,0);
+
   // Set up online banking settings if applicable
   MyMoneyKeyValueContainer settings = acc.onlineBankingSettings();
   m_textOnlineStatus->setText(i18n("Enabled & configured"));
@@ -92,7 +94,7 @@ KOnlineBankingStatus::~KOnlineBankingStatus()
   delete m_appId;
 }
 
-const QString& KOnlineBankingStatus::appId(void) const
+const QString KOnlineBankingStatus::appId(void) const
 {
   if(m_appId)
     return m_appId->appId();

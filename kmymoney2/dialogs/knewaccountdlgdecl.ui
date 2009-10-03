@@ -87,9 +87,7 @@
                           <bool>true</bool>
                         </property>
                         <property name="sizePolicy">
-                          <sizepolicy>
-                            <hsizetype>1</hsizetype>
-                            <vsizetype>0</vsizetype>
+                          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                             <horstretch>1</horstretch>
                             <verstretch>0</verstretch>
                           </sizepolicy>
@@ -239,9 +237,7 @@
                                   <bool>false</bool>
                                 </property>
                                 <property name="sizePolicy">
-                                  <sizepolicy>
-                                    <hsizetype>1</hsizetype>
-                                    <vsizetype>0</vsizetype>
+                                  <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                                     <horstretch>1</horstretch>
                                     <verstretch>0</verstretch>
                                   </sizepolicy>
@@ -305,9 +301,7 @@
                         <item>
                           <widget class="QPushButton" name="m_qbuttonNew">
                             <property name="sizePolicy">
-                              <sizepolicy>
-                                <hsizetype>0</hsizetype>
-                                <vsizetype>0</vsizetype>
+                              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                                 <horstretch>0</horstretch>
                                 <verstretch>0</verstretch>
                               </sizepolicy>
@@ -659,7 +653,7 @@
                           <item>
                             <layout class="QVBoxLayout">
                               <item>
-                                <widget class="Q3ButtonGroup" name="m_amountGroup">
+                                <widget class="KButtonGroup" name="m_amountGroup">
                                   <property name="minimumSize">
                                     <size>
                                       <width>0</width>
@@ -672,31 +666,37 @@
                                       <height>32767</height>
                                     </size>
                                   </property>
-                                  <property name="frameShape">
-                                    <enum>Q3GroupBox::GroupBoxPanel</enum>
-                                  </property>
-                                  <property name="frameShadow">
-                                    <enum>Q3GroupBox::Sunken</enum>
-                                  </property>
                                   <property name="title">
                                     <string>Amount entered</string>
                                   </property>
                                   <layout class="QVBoxLayout">
                                     <item>
-                                      <widget class="QRadioButton" name="m_grossAmount">
-                                        <property name="text">
-                                          <string>Gross amount</string>
+                                      <widget class="QFrame" name="frame">
+                                        <property name="frameShape">
+                                          <enum>QFrame::StyledPanel</enum>
                                         </property>
-                                        <property name="checked">
-                                          <bool>true</bool>
+                                        <property name="frameShadow">
+                                          <enum>QFrame::Sunken</enum>
                                         </property>
-                                      </widget>
-                                    </item>
-                                    <item>
-                                      <widget class="QRadioButton" name="m_netAmount">
-                                        <property name="text">
-                                          <string>Net amount</string>
-                                        </property>
+                                        <layout class="QVBoxLayout">
+                                          <item>
+                                            <widget class="QRadioButton" name="m_grossAmount">
+                                              <property name="text">
+                                                <string>Gross amount</string>
+                                              </property>
+                                              <property name="checked">
+                                                <bool>true</bool>
+                                              </property>
+                                            </widget>
+                                          </item>
+                                          <item>
+                                            <widget class="QRadioButton" name="m_netAmount">
+                                              <property name="text">
+                                                <string>Net amount</string>
+                                              </property>
+                                            </widget>
+                                          </item>
+                                        </layout>
                                       </widget>
                                     </item>
                                   </layout>

@@ -297,7 +297,7 @@
         </layout>
       </item>
       <item row="0" column="0" rowspan="6" colspan="1">
-        <widget class="Q3ButtonGroup" name="m_periodGroup">
+        <widget class="KButtonGroup" name="m_periodGroup">
           <property name="title">
             <string>Period</string>
           </property>

@@ -19,7 +19,6 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
-#include <q3buttongroup.h>
 #include <QCheckBox>
 #include <QTextCodec>
 #include <q3ptrlist.h>
@@ -28,6 +27,7 @@
 
 // ----------------------------------------------------------------------------
 // KDE Includes
+#include <kbuttongroup.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -56,7 +56,7 @@ public:
   KGncImportOptionsDlg(QWidget *parent = 0);
   ~KGncImportOptionsDlg();
 
-  int investmentOption () const {return (buttonInvestGroup->selectedId());};
+  int investmentOption () const {return (buttonInvestGroup->selected());};
   bool quoteOption() const {return (checkFinanceQuote->isChecked());};
   bool scheduleOption () const {return (checkSchedules->isChecked());};
   QTextCodec* decodeOption ();
