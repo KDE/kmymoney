@@ -66,7 +66,7 @@ public:
    * and version (eg. "QWIN:1700").  If current value is the
    * default, an empty string is returned.
    */
-  const QString& appId(void) const;
+  const QString appId(void) const;
 
 private:
   QMap<QString, QString> m_appMap;

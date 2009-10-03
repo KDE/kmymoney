@@ -119,7 +119,7 @@ OfxAppVersion::OfxAppVersion(KComboBox* combo, const QString& appId) :
 #endif
 }
 
-const QString& OfxAppVersion::appId(void) const
+const QString OfxAppVersion::appId(void) const
 {
   static QString defaultAppId("QWIN:1700");
 
