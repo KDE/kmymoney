@@ -131,11 +131,11 @@ KMyMoneyWizard::KMyMoneyWizard(QWidget *parent, const char *name, bool modal, Qt
 
   if ( KGlobalSettings::showIconsOnPushButtons() )
   {
-    m_backButton->setIconSet( KStandardGuiItem::back( KStandardGuiItem::UseRTL ).iconSet() );
-    m_nextButton->setIconSet( KStandardGuiItem::forward( KStandardGuiItem::UseRTL ).iconSet() );
-    m_finishButton->setIconSet( KIcon( "dialog-ok-apply" ) );
-    m_cancelButton->setIconSet( KIcon( "dialog-cancel" ) );
-    m_helpButton->setIconSet( KIcon( "help-contents" ) );
+    m_backButton->setIcon( KStandardGuiItem::back( KStandardGuiItem::UseRTL ).iconSet() );
+    m_nextButton->setIcon( KStandardGuiItem::forward( KStandardGuiItem::UseRTL ).iconSet() );
+    m_finishButton->setIcon( KIcon( "dialog-ok-apply" ) );
+    m_cancelButton->setIcon( KIcon( "dialog-cancel" ) );
+    m_helpButton->setIcon( KIcon( "help-contents" ) );
   }
 
   // create button layout
