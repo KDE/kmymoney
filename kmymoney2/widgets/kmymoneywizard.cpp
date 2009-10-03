@@ -24,9 +24,9 @@
 #include <q3frame.h>
 #include <QToolTip>
 //Added by qt3to4:
-#include <Q3HBoxLayout>
+#include <QHBoxLayout>
 #include <Q3ValueList>
-#include <Q3VBoxLayout>
+#include <QVBoxLayout>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -139,7 +139,7 @@ KMyMoneyWizard::KMyMoneyWizard(QWidget *parent, const char *name, bool modal, Qt
   }
 
   // create button layout
-  m_buttonLayout = new Q3HBoxLayout;
+  m_buttonLayout = new QHBoxLayout;
   m_buttonLayout->addWidget(m_helpButton);
   m_buttonLayout->addStretch(1);
   m_buttonLayout->addWidget(m_backButton);
@@ -148,16 +148,25 @@ KMyMoneyWizard::KMyMoneyWizard(QWidget *parent, const char *name, bool modal, Qt
   m_buttonLayout->addWidget(m_cancelButton);
 
   // create wizard layout
-  m_wizardLayout = new Q3VBoxLayout(this, 6, 0, "wizardLayout");
+  m_wizardLayout = new QVBoxLayout(this);
+  m_wizardLayout->setContentsMargins(6,6,6,6);
+  m_wizardLayout->setSpacing(0);
+  m_wizardLayout->setObjectName("wizardLayout");
   m_titleLabel = new KMyMoneyTitleLabel(this, "titleLabel");
   m_wizardLayout->addWidget(m_titleLabel);
 
-  Q3HBoxLayout* hboxLayout = new Q3HBoxLayout(0, 0, 6, "hboxLayout");
+  QHBoxLayout* hboxLayout = new QHBoxLayout;
+  hboxLayout->setContentsMargins(0,0,0,0);
+  hboxLayout->setSpacing(6);
+  hboxLayout->setObjectName("hboxLayout");
 
   // create stage layout and frame
   m_stepFrame = new Q3Frame(this, "stepFrame");
   m_stepFrame->setPaletteBackgroundColor(KColorScheme::NormalText);
-  m_stepLayout = new Q3VBoxLayout(m_stepFrame, 11, 6, "stepLayout");
+  m_stepLayout = new QVBoxLayout(m_stepFrame);
+  m_stepLayout->setContentsMargins(11,11,11,11);
+  m_stepLayout->setSpacing(6);
+  m_stepLayout->setObjectName("stepLayout");
   m_stepLayout->addWidget(new QLabel("", m_stepFrame));
   m_stepLayout->addItem(new QSpacerItem(20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding));
   m_stepLabel = new QLabel(m_stepFrame, "stepLabel");
@@ -176,7 +185,10 @@ KMyMoneyWizard::KMyMoneyWizard(QWidget *parent, const char *name, bool modal, Qt
   m_stepLabel->setPalette(m_stepPalette);
 
   // create page layout
-  m_pageLayout = new Q3VBoxLayout(0, 0, 6, "pageLayout");
+  m_pageLayout = new QVBoxLayout;
+  m_pageLayout->setContentsMargins(0,0,0,0);
+  m_pageLayout->setSpacing(6);
+  m_pageLayout->setObjectName("pageLayout");
 
   // the page will be inserted later dynamically above this line
   Q3Frame* line = new Q3Frame( this, "line" );

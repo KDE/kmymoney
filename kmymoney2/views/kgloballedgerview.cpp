@@ -164,7 +164,9 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name )
 
   // create the toolbar frame at the top of the view
   m_toolbarFrame = new QFrame(this);
-  QHBoxLayout* toolbarLayout = new QHBoxLayout(m_toolbarFrame, 0, 0);
+  QHBoxLayout* toolbarLayout = new QHBoxLayout(m_toolbarFrame);
+  toolbarLayout->setContentsMargins(0,0,0,0);
+  toolbarLayout->setSpacing(0);
   m_accountComboBox = new KMyMoneyAccountCombo(m_toolbarFrame);
   toolbarLayout->addWidget(m_accountComboBox);
 
@@ -172,7 +174,9 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name )
 
   // create the register frame
   m_registerFrame = new QFrame(this);
-  QVBoxLayout* registerFrameLayout = new QVBoxLayout(m_registerFrame, 0, 0);
+  QVBoxLayout* registerFrameLayout = new QVBoxLayout(m_registerFrame);
+  registerFrameLayout->setContentsMargins(0,0,0,0);
+  registerFrameLayout->setSpacing(0);
   layout()->addWidget(m_registerFrame);
   layout()->setStretchFactor(m_registerFrame, 2);
   m_register = new KMyMoneyRegister::Register(m_registerFrame);
@@ -190,7 +194,9 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name )
 
   // create the summary frame
   m_summaryFrame = new QFrame(this);
-  QHBoxLayout* summaryFrameLayout = new QHBoxLayout(m_summaryFrame, 0, 0);
+  QHBoxLayout* summaryFrameLayout = new QHBoxLayout(m_summaryFrame);
+  summaryFrameLayout->setContentsMargins(0,0,0,0);
+  summaryFrameLayout->setSpacing(0);
   m_leftSummaryLabel = new QLabel(m_summaryFrame);
   m_centerSummaryLabel = new QLabel(m_summaryFrame);
   m_rightSummaryLabel = new QLabel(m_summaryFrame);
@@ -205,7 +211,9 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name )
 
   // create the button frame
   m_buttonFrame = new QFrame(this);
-  QVBoxLayout* buttonLayout = new QVBoxLayout(m_buttonFrame, 0, 0);
+  QVBoxLayout* buttonLayout = new QVBoxLayout(m_buttonFrame);
+  buttonLayout->setContentsMargins(0,0,0,0);
+  buttonLayout->setSpacing(0);
   layout()->addWidget(m_buttonFrame);
   m_buttonbar = new KToolBar(m_buttonFrame, 0, true);
   m_buttonbar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
@@ -221,7 +229,9 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name )
 
   // create the transaction form frame
   m_formFrame = new QFrame(this);
-  QVBoxLayout* frameLayout = new QVBoxLayout(m_formFrame, 5, 0);
+  QVBoxLayout* frameLayout = new QVBoxLayout(m_formFrame);
+  frameLayout->setContentsMargins(5,5,5,5);
+  frameLayout->setSpacing(0);
   m_form = new KMyMoneyTransactionForm::TransactionForm(m_formFrame);
   frameLayout->addWidget(m_form->tabBar(m_formFrame));
   frameLayout->addWidget(m_form);

@@ -25,9 +25,8 @@
 // QT Includes
 #include <qwidget.h>
 //Added by qt3to4:
-#include <Q3VBoxLayout>
 #include <Q3Frame>
-class Q3VBoxLayout;
+class QVBoxLayout;
 class Q3Frame;
 
 // ----------------------------------------------------------------------------
@@ -141,7 +140,7 @@ private:
 
   KHTMLPart*      m_part;
   QString         m_html;
-  Q3VBoxLayout*    m_qvboxlayoutPage;
+  QVBoxLayout*    m_qvboxlayoutPage;
   bool            m_showAllSchedules;
   bool            m_needReload;
   MyMoneyForecast m_forecast;

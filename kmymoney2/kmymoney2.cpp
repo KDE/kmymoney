@@ -41,7 +41,7 @@
 #include <q3vbox.h>
 #include <QEventLoop>
 #include <QByteArray>
-#include <Q3BoxLayout>
+#include <QBoxLayout>
 #include <Q3Frame>
 #include <QResizeEvent>
 #include <QLabel>
@@ -313,7 +313,9 @@ KMyMoney2App::KMyMoney2App(QWidget * /*parent*/ , const char* name) :
   QFrame* frame = new QFrame(this);
   frame->setFrameStyle(QFrame::NoFrame);
   // values for margin (11) and spacing(6) taken from KDialog implementation
-  Q3BoxLayout* layout = new Q3BoxLayout(frame, Q3BoxLayout::TopToBottom, 2, 6);
+  QBoxLayout* layout = new QBoxLayout(QBoxLayout::TopToBottom, frame);
+  layout->setContentsMargins(2,2,2,2);
+  layout->setSpacing(6);
 
   ::timetrace("init statusbar");
   initStatusBar();

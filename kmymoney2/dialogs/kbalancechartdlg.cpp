@@ -23,7 +23,7 @@
 #include <QLayout>
 #include <q3frame.h>
 //Added by qt3to4:
-#include <Q3HBoxLayout>
+#include <QHBoxLayout>
 #include <QVBoxLayout>
 
 // ----------------------------------------------------------------------------
@@ -61,7 +61,11 @@ KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* paren
   setSizeGripEnabled( true );
   setModal( true );
 
-  QVBoxLayout* KBalanceChartDlgLayout = new QVBoxLayout( this, 11, 6, "KBalanceChartDlgLayout");
+  QVBoxLayout* KBalanceChartDlgLayout = new QVBoxLayout(this);
+  KBalanceChartDlgLayout->setContentsMargins(11,11,11,11);
+  KBalanceChartDlgLayout->setSpacing(6);
+  KBalanceChartDlgLayout->setObjectName("KBalanceChartDlgLayout");
+
 
   MyMoneyReport reportCfg = MyMoneyReport(
                                           MyMoneyReport::eAssetLiability,
@@ -189,7 +193,9 @@ KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* paren
   line1->setFrameShape( Q3Frame::HLine );
 
   KBalanceChartDlgLayout->addWidget(line1);
-  Q3HBoxLayout* Layout1 = new Q3HBoxLayout( KBalanceChartDlgLayout, 6, "Layout1");
+  QHBoxLayout* Layout1 = new QHBoxLayout(KBalanceChartDlgLayout);
+  Layout1->setSpacing(6);
+  Layout1->setObjectName("Layout1");
 #if 0
   KPushButton* buttonHelp = new KPushButton( this, "buttonHelp" );
   buttonHelp->setAutoDefault( TRUE );

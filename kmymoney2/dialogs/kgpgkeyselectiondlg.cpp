@@ -21,7 +21,7 @@
 #include <QLabel>
 
 //Added by qt3to4:
-#include <Q3HBoxLayout>
+#include <QHBoxLayout>
 #include <QVBoxLayout>
 
 // ----------------------------------------------------------------------------
@@ -50,7 +50,8 @@ KGpgKeySelectionDlg::KGpgKeySelectionDlg(QWidget *parent, const char *name) :
     setModal( true );
   QWidget* page = new QWidget(this);
   setMainWidget(page);
-  QVBoxLayout* topLayout = new QVBoxLayout(page, spacingHint());
+  QVBoxLayout* topLayout = new QVBoxLayout(page);
+  topLayout->setSpacing(spacingHint());
 
   m_listBox = new KEditListBox(page);
   m_listBox->setTitle(i18n("User identification"));
@@ -60,7 +61,11 @@ KGpgKeySelectionDlg::KGpgKeySelectionDlg(QWidget *parent, const char *name) :
   topLayout->addWidget(m_listBox);
 
   // add a LED for the availability of all keys
-  Q3HBoxLayout* ledBox = new Q3HBoxLayout(0, 0, 6, "ledBoxLayout");
+  QHBoxLayout* ledBox = new QHBoxLayout();
+  ledBox->setContentsMargins(0,0,0,0);
+  ledBox->setSpacing(6);
+  ledBox->setObjectName("ledBoxLayout");
+
   m_keyLed = new KLed(page);
   m_keyLed->setShape( KLed::Circular );
   m_keyLed->setLook( KLed::Sunken );

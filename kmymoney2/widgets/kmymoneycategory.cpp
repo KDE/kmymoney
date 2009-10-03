@@ -24,7 +24,7 @@
 #include <QLayout>
 #include <QTimer>
 //Added by qt3to4:
-#include <Q3HBoxLayout>
+#include <QHBoxLayout>
 #include <QFrame>
 #include <QFocusEvent>
 
@@ -64,7 +64,7 @@ KMyMoneyCategory::KMyMoneyCategory(QWidget* parent, bool splitButton) :
   if(splitButton) {
     d->frame = new QFrame(0);
     d->frame->setFocusProxy(this);
-    Q3HBoxLayout* layout = new Q3HBoxLayout(d->frame);
+    QHBoxLayout* layout = new QHBoxLayout(d->frame);
     // make sure not to use our own overridden version of reparent() here
 
     KMyMoneyCombo::reparent(d->frame, windowFlags ()  & ~Qt::WType_Mask, QPoint(0, 0), true);

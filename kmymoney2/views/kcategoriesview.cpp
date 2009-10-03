@@ -26,7 +26,7 @@
 #include <QLayout>
 //Added by qt3to4:
 #include <Q3ValueList>
-#include <Q3VBoxLayout>
+#include <QVBoxLayout>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -56,7 +56,7 @@ KCategoriesView::KCategoriesView(QWidget *parent) :
   // create the searchline widget
   // and insert it into the existing layout
   m_searchWidget = new K3ListViewSearchLineWidget(m_accountTree, m_accountTree->parentWidget());
-/*  Q3VBoxLayout* layout = dynamic_cast<Q3VBoxLayout*>(m_accountTree->parentWidget()->layout());
+/*  QVBoxLayout* layout = dynamic_cast<QVBoxLayout*>(m_accountTree->parentWidget()->layout());
   if(layout) {
     layout->insertWidget(2, m_searchWidget);
   }*/

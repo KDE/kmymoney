@@ -24,12 +24,10 @@
 #include <q3valuelist.h>
 #include <QPalette>
 //Added by qt3to4:
-#include <Q3HBoxLayout>
-#include <Q3VBoxLayout>
 #include <QLabel>
 #include <Q3Frame>
-class Q3VBoxLayout;
-class Q3HBoxLayout;
+class QVBoxLayout;
+class QHBoxLayout;
 class QLabel;
 class Q3Frame;
 
@@ -511,10 +509,10 @@ private:
   /*
    * The layouts
    */
-  Q3VBoxLayout*          m_wizardLayout;
-  Q3VBoxLayout*          m_stepLayout;
-  Q3VBoxLayout*          m_pageLayout;
-  Q3HBoxLayout*          m_buttonLayout;
+  QVBoxLayout*          m_wizardLayout;
+  QVBoxLayout*          m_stepLayout;
+  QVBoxLayout*          m_pageLayout;
+  QHBoxLayout*          m_buttonLayout;
 
   /*
    * Some misc. widgets required
