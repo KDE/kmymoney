@@ -1262,7 +1262,7 @@ void StdTransaction::arrangeWidgetsInForm(QMap<QString, QWidget*>& editWidgets)
 
 void StdTransaction::tabOrderInForm(QWidgetList& tabOrderWidgets) const
 {
-  QStringList taborder = QStringList::split(",", KMyMoneyGlobalSettings::stdTransactionFormTabOrder());
+  QStringList taborder = KMyMoneyGlobalSettings::stdTransactionFormTabOrder().split(",", QString::SkipEmptyParts);
   QStringList::const_iterator it_s = taborder.constBegin();
   QWidget* w;
   while(it_s != taborder.constEnd()) {
@@ -1323,7 +1323,7 @@ void StdTransaction::arrangeWidgetsInRegister(QMap<QString, QWidget*>& editWidge
 
 void StdTransaction::tabOrderInRegister(QWidgetList& tabOrderWidgets) const
 {
-  QStringList taborder = QStringList::split(",", KMyMoneyGlobalSettings::stdTransactionRegisterTabOrder());
+  QStringList taborder = KMyMoneyGlobalSettings::stdTransactionRegisterTabOrder().split(",", QString::SkipEmptyParts);
   QStringList::const_iterator it_s = taborder.constBegin();
   QWidget* w;
   while(it_s != taborder.constEnd()) {

@@ -68,7 +68,7 @@ void TransactionSortOption::setSettings(const QString& settings)
   m_availableList->clear();
   m_selectedList->clear();
 
-  QStringList list = QStringList::split(',', settings);
+  QStringList list = settings.split(',', QString::SkipEmptyParts);
   QMap<int, bool> selectedMap;
 
   // fill selected list

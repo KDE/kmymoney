@@ -1004,7 +1004,7 @@ void KMyMoneyView::saveToLocalFile(KSaveFile* qfile, IMyMoneyStorageFormat* pWri
       }
     }
 
-    const QStringList keys = QStringList::split(",", keyList);
+    const QStringList keys = keyList.split(',', QString::SkipEmptyParts);
     QStringList::const_iterator it_s;
     for(it_s = keys.constBegin(); it_s != keys.constEnd(); ++it_s) {
       if(!KGPGFile::keyAvailable(*it_s)) {
@@ -1032,7 +1032,7 @@ void KMyMoneyView::saveToLocalFile(KSaveFile* qfile, IMyMoneyStorageFormat* pWri
     base++;
     KGPGFile *kgpg = new KGPGFile(qfile->fileName());
     if(kgpg) {
-      QStringList keys = QStringList::split(",", keyList);
+      QStringList keys = keyList.split(',', QString::SkipEmptyParts);
       QStringList::const_iterator it_s;
       for(it_s = keys.constBegin(); it_s != keys.constEnd(); ++it_s) {
         kgpg->addRecipient((*it_s).toLatin1());

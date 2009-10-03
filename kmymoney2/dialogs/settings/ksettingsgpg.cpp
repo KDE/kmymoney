@@ -147,7 +147,7 @@ void KSettingsGpg::show(void)
   KGPGFile::secretKeyList(keyList);
 
   for(QStringList::iterator it = keyList.begin(); it != keyList.end(); ++it) {
-    QStringList fields = QStringList::split(":", *it);
+    QStringList fields = (*it).split(':', QString::SkipEmptyParts);
     if(fields[0] != RECOVER_KEY_ID_FULL) {
       // replace parenthesis in name field with brackets
       QString name = fields[1];

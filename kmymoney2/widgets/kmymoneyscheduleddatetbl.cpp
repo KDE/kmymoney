@@ -363,7 +363,7 @@ void kMyMoneyScheduledDateTbl::addDayPostfix(QString& text)
 
   if (d >= 1 && d <= 31)
   {
-    QStringList postfixList = QStringList::split("-", i18n("st-nd-rd-th-th-th-th-th-th-th-th-th-th-th-th-th-th-th-th-th-st-nd-rd-th-th-th-th-th-th-th-st"), true);
+    QStringList postfixList = i18n("st-nd-rd-th-th-th-th-th-th-th-th-th-th-th-th-th-th-th-th-th-st-nd-rd-th-th-th-th-th-th-th-st").split("-", QString::KeepEmptyParts);
     text += postfixList[d-1];
   }
 }

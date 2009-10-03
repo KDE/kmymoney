@@ -72,9 +72,9 @@ QColor KMyMoneyGlobalSettings::listBGColor(void)
 QStringList KMyMoneyGlobalSettings::itemList(void)
 {
   bool prevValue = self()->useDefaults(true);
-  QStringList all = QStringList::split(",", KMyMoneySettings::itemList());
+  QStringList all = KMyMoneySettings::itemList().split(',', QString::SkipEmptyParts);
   self()->useDefaults(prevValue);
-  QStringList list = QStringList::split(",", KMyMoneySettings::itemList());
+  QStringList list = KMyMoneySettings::itemList().split(',', QString::SkipEmptyParts);
 
   // now add all from 'all' that are missing in 'list'
   QRegExp exp("-?(\\d+)");

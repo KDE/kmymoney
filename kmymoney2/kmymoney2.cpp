@@ -1572,7 +1572,7 @@ bool KMyMoney2App::slotFileSaveAs(void)
     d->m_saveEncrypted->insertItem(i18n("No encryption"));
 
     for(QStringList::iterator it = keyList.begin(); it != keyList.end(); ++it) {
-      QStringList fields = QStringList::split(":", *it);
+      QStringList fields = (*it).split(':', QString::SkipEmptyParts);
       if(fields[0] != RECOVER_KEY_ID) {
         // replace parenthesis in name field with brackets
         QString name = fields[1];
