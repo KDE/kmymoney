@@ -44,13 +44,20 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#define buttonSQL KDialog::User1
 
-KSelectDatabaseDlg::KSelectDatabaseDlg(int openMode, KUrl openURL, QWidget *parent)
- : KSelectDatabaseDlgDecl(parent) {
+KSelectDatabaseDlg::KSelectDatabaseDlg(int openMode, KUrl openURL, QWidget *) {
+  m_widget = new KSelectDatabaseDlgDecl();
+  setMainWidget(m_widget);
+  setButtons(KDialog::Ok | KDialog::Cancel | KDialog::Help | buttonSQL);
+  setButtonText (buttonSQL, i18n("Generate SQL"));
+  enableButton(buttonSQL, false);
+  connect (this, SIGNAL(user1Clicked()), this, SLOT(slotGenerateSQL()));
+  connect (this, SIGNAL(helpClicked()), this, SLOT(slotHelp()));
   m_requiredFields = 0;
   m_url = openURL;
   m_mode = openMode;
-  checkPreLoad->setEnabled (openMode == QIODevice::ReadWrite);
+  m_widget->checkPreLoad->setEnabled (openMode == QIODevice::ReadWrite);
 }
 
 KSelectDatabaseDlg::~KSelectDatabaseDlg() {
@@ -95,72 +102,68 @@ bool KSelectDatabaseDlg::checkDrivers() {
 }
 
 int KSelectDatabaseDlg::exec() {
-  listDrivers->clear();
+  m_widget->listDrivers->clear();
   if (m_url == KUrl()) {
-    listDrivers->addItems(m_supportedDrivers);
-    textDbName->setText ("KMyMoney");
-    textHostName->setText ("localhost");
-    textUserName->setText("");
+    m_widget->listDrivers->addItems(m_supportedDrivers);
+    m_widget->textDbName->setText ("KMyMoney");
+    m_widget->textHostName->setText ("localhost");
+    m_widget->textUserName->setText("");
     struct passwd * pwd = getpwuid(geteuid());
     if (pwd != 0)
-      textUserName->setText (QString(pwd->pw_name));
-    textPassword->setText ("");
+      m_widget->textUserName->setText (QString(pwd->pw_name));
+    m_widget->textPassword->setText ("");
     m_requiredFields = new kMandatoryFieldGroup(this);
-    m_requiredFields->setOkButton(buttonOK);
-    m_requiredFields->add(listDrivers);
-    m_requiredFields->add(textDbName);
-    connect (listDrivers, SIGNAL(itemClicked(QListWidgetItem *)),
+    m_requiredFields->setOkButton(button(KDialog::Ok));
+    m_requiredFields->add(m_widget->listDrivers);
+    m_requiredFields->add(m_widget->textDbName);
+    connect (m_widget->listDrivers, SIGNAL(itemClicked(QListWidgetItem *)),
            this, SLOT(slotDriverSelected(QListWidgetItem *)));
-    connect (buttonSQL, SIGNAL(clicked()), this, SLOT(slotGenerateSQL()));
-    connect (buttonOK, SIGNAL(clicked()), this, SLOT(accept()));
-    checkPreLoad->setChecked(false);
-    buttonSQL->setEnabled(true);
+    m_widget->checkPreLoad->setChecked(false);
+    enableButton(buttonSQL, false);
     // ensure a driver gets selected; pre-select if only one
-    if (listDrivers->count() == 1) {
-      listDrivers->setCurrentItem(listDrivers->item(0));
-      slotDriverSelected(listDrivers->item(0));
+    if (m_widget->listDrivers->count() == 1) {
+      m_widget->listDrivers->setCurrentItem(m_widget->listDrivers->item(0));
+      slotDriverSelected(m_widget->listDrivers->item(0));
     }
   } else {
     // fill in the fixed data from the URL
     QString driverName = m_url.queryItem("driver");
-    listDrivers->addItem (QString(driverName + " - " + m_map.driverMap()[driverName]));
-    listDrivers->setCurrentItem(listDrivers->item(0));
+    m_widget->listDrivers->addItem (QString(driverName + " - " + m_map.driverMap()[driverName]));
+    m_widget->listDrivers->setCurrentItem(m_widget->listDrivers->item(0));
     QString dbName = m_url.path().right(m_url.path().length() - 1); // remove separator slash
-    textDbName->setText (dbName);
-    textHostName->setText (m_url.host());
-    textUserName->setText(m_url.user());
+    m_widget->textDbName->setText (dbName);
+    m_widget->textHostName->setText (m_url.host());
+    m_widget->textUserName->setText(m_url.user());
     // disable all but the password field, coz that's why we're here
-    textDbName->setEnabled(false);
-    listDrivers->setEnabled(false);
-    textHostName->setEnabled(false);
-    textUserName->setEnabled(false);
-    textPassword->setEnabled(true);
-    textPassword->setFocus();
-    buttonSQL->setEnabled(false);
+    m_widget->textDbName->setEnabled(false);
+    m_widget->listDrivers->setEnabled(false);
+    m_widget->textHostName->setEnabled(false);
+    m_widget->textUserName->setEnabled(false);
+    m_widget->textPassword->setEnabled(true);
+    m_widget->textPassword->setFocus();
+    enableButton(buttonSQL, true);
     // set password required
     m_requiredFields = new kMandatoryFieldGroup(this);
-    m_requiredFields->add(textPassword);
-    m_requiredFields->setOkButton(buttonOK);
+    m_requiredFields->add(m_widget->textPassword);
+    m_requiredFields->setOkButton(button(KDialog::Ok));
 
-    connect (buttonOK, SIGNAL(clicked()), this, SLOT(accept()));
-    checkPreLoad->setChecked(false);
+    m_widget->checkPreLoad->setChecked(false);
   }
 
-  connect (buttonHelp, SIGNAL(clicked()), this, SLOT(slotHelp()));
   return (QDialog::exec());
 }
 
 const KUrl KSelectDatabaseDlg::selectedURL() {
   KUrl url;
   url.setProtocol("sql");
-  url.setUser(textUserName->text());
-  url.setPass(textPassword->text());
-  url.setHost(textHostName->text());
-  url.setPath('/' + textDbName->text());
+  url.setUser(m_widget->textUserName->text());
+  url.setPass(m_widget->textPassword->text());
+  url.setHost(m_widget->textHostName->text());
+  url.setPath('/' + m_widget->textDbName->text());
   QString qs = QString("driver=%1")
-      .arg(listDrivers->currentItem()->text().section (' ', 0, 0));
-  if (checkPreLoad->isChecked()) qs.append("&options=loadAll");
-  if (!textPassword->text().isEmpty()) qs.append("&secure=yes");
+      .arg(m_widget->listDrivers->currentItem()->text().section (' ', 0, 0));
+  if (m_widget->checkPreLoad->isChecked()) qs.append("&options=loadAll");
+  if (!m_widget->textPassword->text().isEmpty()) qs.append("&secure=yes");
   url.setQuery(qs);
   return (url);
 }
@@ -175,10 +178,12 @@ void KSelectDatabaseDlg::slotDriverSelected (QListWidgetItem *driver) {
             "kmymoney2-developer@lists.sourceforge.net", driver->text()),
         "");
     if (rc == KMessageBox::Cancel) {
-      listDrivers->clearSelection();
+      m_widget->listDrivers->clearSelection();
       return;
     }
   }
+
+  enableButton(buttonSQL, true);
 
   if (m_map.driverToType(driver->text().section(' ', 0, 0)) == Sqlite3){
     QString dbName;
@@ -197,19 +202,21 @@ void KSelectDatabaseDlg::slotDriverSelected (QListWidgetItem *driver) {
     if (dbName.isNull())
       return;
 
-    textDbName->setText(dbName);
-    // sqlite databases do not react to host/user/password; file system permissions must be used
-    textHostName->setEnabled (false);
-    textUserName->setEnabled (false);
-    textPassword->setEnabled(false);
+    m_widget->textDbName->setText(dbName);
+    // sqlite databases do not react to host/user/password;
+    // file system permissions must be used
+    m_widget->textHostName->setEnabled (false);
+    m_widget->textUserName->setEnabled (false);
+    m_widget->textPassword->setEnabled(false);
   } else {                         // not sqlite3
-    textUserName->setEnabled (true);
-    textHostName->setEnabled (true);
-    textPassword->setEnabled(true);
+    m_widget->textUserName->setEnabled (true);
+    m_widget->textHostName->setEnabled (true);
+    m_widget->textPassword->setEnabled(true);
   }
 }
 
-void KSelectDatabaseDlg::slotGenerateSQL () {
+// Generate SQL button processing
+void KSelectDatabaseDlg::slotGenerateSQL() {
   QString fileName = KFileDialog::getSaveFileName(
       KUrl(),
       i18n("All files (*.*)"),
@@ -220,12 +227,10 @@ void KSelectDatabaseDlg::slotGenerateSQL () {
   if (!out.open(QIODevice::WriteOnly)) return;
   QTextStream s(&out);
   MyMoneyDbDef db;
-  s << db.generateSQL(listDrivers->currentItem()->text().section (' ', 0, 0));
+  s << db.generateSQL(m_widget->listDrivers->currentItem()->text().section (' ', 0, 0));
   out.close();
 }
 
 void KSelectDatabaseDlg::slotHelp(void) {
   KToolInvocation::invokeHelp("details.database.selectdatabase");
 }
-
-#include "kselectdatabasedlg.moc"

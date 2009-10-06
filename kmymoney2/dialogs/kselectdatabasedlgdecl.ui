@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>KSelectDatabaseDlgDecl</class>
- <widget class="QDialog" name="KSelectDatabaseDlgDecl">
+ <widget class="QWidget" name="KSelectDatabaseDlgDecl">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -60,7 +60,7 @@
       <item>
        <widget class="QPlainTextEdit" name="plainTextEdit">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
+         <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
@@ -134,6 +134,12 @@
           <pointsize>9</pointsize>
          </font>
         </property>
+        <property name="acceptDrops">
+         <bool>false</bool>
+        </property>
+        <property name="undoRedoEnabled">
+         <bool>false</bool>
+        </property>
         <property name="readOnly">
          <bool>true</bool>
         </property>
@@ -179,17 +185,17 @@ As always, please make sure you have adequate backups of your data.</string>
       <item>
        <widget class="KLineEdit" name="textHostName"/>
       </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox4">
+     <property name="title">
+      <string>User Name</string>
+     </property>
+     <layout class="QVBoxLayout">
       <item>
-       <widget class="QGroupBox" name="groupBox4">
-        <property name="title">
-         <string>User Name</string>
-        </property>
-        <layout class="QVBoxLayout">
-         <item>
-          <widget class="KLineEdit" name="textUserName"/>
-         </item>
-        </layout>
-       </widget>
+       <widget class="KLineEdit" name="textUserName"/>
       </item>
      </layout>
     </widget>
@@ -217,73 +223,6 @@ As always, please make sure you have adequate backups of your data.</string>
      </property>
     </widget>
    </item>
-   <item>
-    <layout class="QHBoxLayout">
-     <item>
-      <widget class="QPushButton" name="buttonHelp">
-       <property name="text">
-        <string>Help</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="spacer3">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Expanding</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QPushButton" name="buttonSQL">
-       <property name="text">
-        <string>&amp;Generate SQL</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="spacer2">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Expanding</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>31</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QPushButton" name="buttonOK">
-       <property name="text">
-        <string>OK</string>
-       </property>
-       <property name="default">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="buttonCancel">
-       <property name="text">
-        <string>Ca&amp;ncel</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
@@ -300,38 +239,5 @@ As always, please make sure you have adequate backups of your data.</string>
   </customwidget>
  </customwidgets>
  <resources/>
- <connections>
-  <connection>
-   <sender>buttonOK</sender>
-   <signal>clicked()</signal>
-   <receiver>KSelectDatabaseDlgDecl</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>415</x>
-     <y>620</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>295</x>
-     <y>724</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonCancel</sender>
-   <signal>clicked()</signal>
-   <receiver>KSelectDatabaseDlgDecl</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>476</x>
-     <y>624</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>426</x>
-     <y>720</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

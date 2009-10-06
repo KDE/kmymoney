@@ -25,6 +25,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 #include <kurl.h>
+#include <kdialog.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -33,15 +34,15 @@
 #include "kguiutils.h"
 
 
-class KSelectDatabaseDlgDecl : public QDialog, public Ui::KSelectDatabaseDlgDecl
+class KSelectDatabaseDlgDecl : public QWidget, public Ui::KSelectDatabaseDlgDecl
 {
 public:
-  KSelectDatabaseDlgDecl( QWidget *parent ) : QDialog( parent ) {
+  KSelectDatabaseDlgDecl() {
     setupUi( this );
   }
 };
 
-class KSelectDatabaseDlg : public KSelectDatabaseDlgDecl
+class KSelectDatabaseDlg : public KDialog
 {
 Q_OBJECT
 public:
@@ -65,6 +66,7 @@ public slots:
   void slotHelp();
   void slotGenerateSQL();
 private:
+  KSelectDatabaseDlgDecl* m_widget;
   int m_mode;
   KUrl m_url;
   QList<QString> m_supportedDrivers;
