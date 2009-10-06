@@ -82,6 +82,7 @@ signals:
 
 protected:
   void focusOutEvent(QFocusEvent *ev);
+  void focusInEvent(QFocusEvent *ev);
 
   /** reimplemented to support the hint display */
   void paintEvent(QPaintEvent* ev);

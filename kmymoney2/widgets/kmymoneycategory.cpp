@@ -65,8 +65,9 @@ KMyMoneyCategory::KMyMoneyCategory(QWidget* parent, bool splitButton) :
     d->frame = new QFrame(0);
     d->frame->setFocusProxy(this);
     QHBoxLayout* layout = new QHBoxLayout(d->frame);
-    // make sure not to use our own overridden version of reparent() here
+    layout->setContentsMargins(0, 0, 0, 0);
 
+    // make sure not to use our own overridden version of reparent() here
     KMyMoneyCombo::reparent(d->frame, windowFlags ()  & ~Qt::WType_Mask, QPoint(0, 0), true);
     if(parent)
       d->frame->reparent(parent, QPoint(0, 0), true);

@@ -74,6 +74,13 @@ void kMyMoneyLineEdit::focusOutEvent(QFocusEvent *ev)
     repaint();
 }
 
+void kMyMoneyLineEdit::focusInEvent(QFocusEvent *ev)
+{
+  KLineEdit::focusInEvent(ev);
+  // select the text so it can be edited by the user
+  selectAll();
+}
+
 void kMyMoneyLineEdit::keyReleaseEvent(QKeyEvent* k)
 {
   if(m_forceMonetaryDecimalSymbol) {

@@ -19,12 +19,9 @@
 // QT Includes
 
 #include <QApplication>
-#include <qdesktopwidget.h>
-#include <qwidget.h>
-#include <kvbox.h>
-#include <khbox.h>
-//Added by qt3to4:
-#include <Q3Frame>
+#include <QDesktopWidget>
+#include <QWidget>
+#include <QFrame>
 #include <QPixmap>
 #include <QKeyEvent>
 #include <QEvent>
@@ -38,7 +35,9 @@
 #include <klineedit.h>
 #include <kiconloader.h>
 #include <kconfig.h>
-#include <KConfigGroup>
+#include <kvbox.h>
+#include <khbox.h>
+#include <kconfiggroup.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -221,7 +220,7 @@ void kMyMoneyEdit::init(void)
   m_calculatorFrame = new KVBox(this);
   m_calculatorFrame->setWindowFlags(Qt::Popup);
 
-  m_calculatorFrame->setFrameStyle(Q3Frame::PopupPanel | Q3Frame::Raised);
+  m_calculatorFrame->setFrameStyle(QFrame::Panel | QFrame::Raised);
   m_calculatorFrame->setLineWidth(3);
 
   m_calculator = new kMyMoneyCalculator(m_calculatorFrame);
