@@ -204,10 +204,14 @@ KMyMoneySecurity::~KMyMoneySecurity()
 
 void KMyMoneySecurity::setCurrentTextById(const QString& id)
 {
-  if(!id.isEmpty())
-    KMyMoneyCategory::setCurrentText(MyMoneyFile::instance()->account(id).name());
-  else
-    KMyMoneyCategory::setCurrentText();
+  if(!id.isEmpty()) {
+    QString security = MyMoneyFile::instance()->account(id).name();
+    setCompletedText(security);
+    setEditText(security);
+  } else {
+    setCompletedText(QString());
+    clearEditText();
+  }
 }
 
 #include "kmymoneycategory.moc"
