@@ -297,7 +297,7 @@
         </layout>
       </item>
       <item row="0" column="0" rowspan="6" colspan="1">
-        <widget class="KButtonGroup" name="m_periodGroup">
+        <widget class="QGroupBox" name="periodGroupBox">
           <property name="title">
             <string>Period</string>
           </property>
@@ -307,6 +307,9 @@
                 <property name="text">
                   <string>Monthly</string>
                 </property>
+                <attribute name="buttonGroup">
+                  <string>m_periodGroup</string>
+                </attribute>
               </widget>
             </item>
             <item>
@@ -314,6 +317,9 @@
                 <property name="text">
                   <string>Yearly</string>
                 </property>
+                <attribute name="buttonGroup">
+                  <string>m_periodGroup</string>
+                </attribute>
               </widget>
             </item>
             <item>
@@ -321,6 +327,9 @@
                 <property name="text">
                   <string>Individual</string>
                 </property>
+                <attribute name="buttonGroup">
+                  <string>m_periodGroup</string>
+                </attribute>
               </widget>
             </item>
             <item>
@@ -365,4 +374,8 @@
     <tabstop>m_amount11</tabstop>
     <tabstop>m_amount12</tabstop>
   </tabstops>
+  <buttongroups>
+    <buttongroup name="m_periodGroup"/>
+  </buttongroups>
+
 </ui>
