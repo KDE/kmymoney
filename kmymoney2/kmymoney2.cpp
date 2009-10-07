@@ -3956,9 +3956,9 @@ void KMyMoney2App::slotScheduleNew(const MyMoneyTransaction& _t, MyMoneySchedule
   // schedule in a month.
   if(_t != MyMoneyTransaction()) {
     MyMoneyTransaction t(_t);
-    if(occurrence != MyMoneySchedule::OCCUR_ONCE)
-      t.setPostDate(schedule.nextPayment(t.postDate()));
     schedule.setTransaction(t);
+    if(occurrence != MyMoneySchedule::OCCUR_ONCE)
+      schedule.setNextDueDate(schedule.nextPayment(t.postDate()));
   }
 
   QPointer<KEditScheduleDlg> dlg = new KEditScheduleDlg(schedule, this);
