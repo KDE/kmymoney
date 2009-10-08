@@ -470,7 +470,7 @@ void KMyMoney2App::initActions(void)
 
   KAction *view_personal_data = actionCollection()->addAction("view_personal_data");
   view_personal_data->setText(i18n("Personal Data..."));
-  view_personal_data->setIcon(KIcon("personal_data"));
+  view_personal_data->setIcon(KIcon("user-properties"));
   connect(view_personal_data, SIGNAL(triggered()), this, SLOT(slotFileViewPersonal()));
 
 #if KMM_DEBUG
@@ -498,6 +498,7 @@ void KMyMoney2App::initActions(void)
   // *************
   KToggleAction *view_show_transaction_detail = new KToggleAction(this);
   actionCollection()->addAction("view_show_transaction_detail", view_show_transaction_detail);
+  view_show_transaction_detail->setIcon(KIcon("zoom-in"));
   view_show_transaction_detail->setText(i18n("Show Transaction Detail"));
   view_show_transaction_detail->setShortcut(KShortcut("Ctrl+T"));
 
@@ -825,7 +826,7 @@ void KMyMoney2App::initActions(void)
   //Schedule
   KAction *schedule_new = actionCollection()->addAction("schedule_new");
   schedule_new->setText(i18n("New scheduled transaction"));
-  schedule_new->setIcon(KIcon("document-new"));
+  schedule_new->setIcon(KIcon("appointment-new"));
   connect(schedule_new, SIGNAL(triggered()), this, SLOT(slotScheduleNew()));
 
   KAction *schedule_edit = actionCollection()->addAction("schedule_edit");
@@ -4977,7 +4978,6 @@ void KMyMoney2App::slotTransactionsEnter(void)
   // since we jump here via code, we have to make sure to react only
   // if the action is enabled
   if(kmymoney2->action("transaction_enter")->isEnabled()) {
-    // qDebug("KMyMoney2App::slotTransactionsEnter");
     if(d->m_transactionEditor) {
       QString accountId = d->m_selectedAccount.id();
       QString newId;
