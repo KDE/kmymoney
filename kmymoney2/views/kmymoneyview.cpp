@@ -178,7 +178,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   // Page 3
   m_scheduledView = new KScheduledView();
   m_scheduleViewFrame = m_model->addPage( m_scheduledView, i18n("Scheduled\ntransactions"));
-  m_scheduleViewFrame->setIcon(KIcon("schedule"));
+  m_scheduleViewFrame->setIcon(KIcon("view-pim-calendar"));
   m_scheduleViewFrame->setHeader(QString(""));
   addTitleBar(m_scheduledView, i18n("Scheduled transactions"));
   connect(kmymoney2, SIGNAL(fileLoaded(const KUrl&)), m_scheduledView, SLOT(slotReloadView()));
@@ -203,7 +203,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   // Page 5
   m_payeesView = new KPayeesView();
   m_payeesViewFrame = m_model->addPage( m_payeesView, i18n("Payees"));
-  m_payeesViewFrame->setIcon(KIcon("payee"));
+  m_payeesViewFrame->setIcon(KIcon("system-users"));
   m_payeesViewFrame->setHeader(QString(""));
   addTitleBar(m_payeesView, i18n("Payees"));
   connect(kmymoney2, SIGNAL(payeeCreated(const QString&)), m_payeesView, SLOT(slotSelectPayeeAndTransaction(const QString&)));
