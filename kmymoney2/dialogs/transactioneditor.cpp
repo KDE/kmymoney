@@ -533,11 +533,11 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
           if(askForSchedule && (*it_ts).postDate() > QDate::currentDate()) {
             KGuiItem enterItem;
             KGuiItem enterButton( i18n("&Enter" ),
-                    KIcon("kontact_journal"),
+                    KIcon("dialog-ok"),
                     i18n("Accepts the entered data and stores it"),
                     i18n("Use this to enter the transaction into the ledger."));
             KGuiItem scheduleButton( i18n("&Schedule" ),
-                    KIcon("kontact_date"),
+                    KIcon("appointment-new"),
                     i18n("Accepts the entered data and stores it as schedule"),
                     i18n("Use this to schedule the transaction for later entry into the ledger."));
 
