@@ -115,13 +115,7 @@ KReportsView::KReportTab::KReportTab(KTabWidget* parent, const MyMoneyReport& re
   m_layout->addWidget( m_part->view() );
   m_layout->addWidget( m_chartView );
 
-  // I like this icon...
-  QString icon = KGlobal::dirs()->findResource("icon", "default.kde/16x16/mimetypes/spreadsheet.png");
-  // but if it's not there, we'll use ye ol' standard icon
-  if ( icon.isEmpty() )
-    icon = KGlobal::dirs()->findResource("icon", "hicolor/16x16/apps/kmymoney2.png");
-
-  parent->addTab( this, KIcon(QPixmap(icon)), report.name() );
+  parent->addTab( this, KIcon("application-vnd.oasis.opendocument.spreadsheet"), report.name() );
   parent->setTabEnabled( parent->indexOf(this), true );
 
   if ( m_report.isChartByDefault() )
