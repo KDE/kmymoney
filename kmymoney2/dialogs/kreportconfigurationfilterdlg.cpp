@@ -112,18 +112,16 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
     if ( m_initialState.reportType() == MyMoneyReport::ePivotTable )
     {
       m_tab2 = new kMyMoneyReportConfigTab2Decl( m_criteriaTab );
-     m_tab2->setObjectName( "kMyMoneyReportConfigTab2" );
+      m_tab2->setObjectName( "kMyMoneyReportConfigTab2" );
       m_criteriaTab->insertTab( m_tab2, i18n( "Rows/Columns"), 1 );
       connect(m_tab2->m_comboRows, SIGNAL(highlighted(int)), this, SLOT(slotRowTypeChanged(int)));
       connect(m_tab2->m_comboColumns, SIGNAL(activated(int)), this, SLOT(slotColumnTypeChanged(int)));
       //control the state of the includeTransfer check
       connect(m_categoriesView, SIGNAL(stateChanged()), this, SLOT(slotUpdateCheckTransfers()));
 
-#ifdef HAVE_KDCHART
       m_tabChart = new kMyMoneyReportConfigTabChartDecl( m_criteriaTab);
       m_tabChart->setObjectName("kMyMoneyReportConfigTabChart" );
       m_criteriaTab->insertTab( m_tabChart, i18n( "Chart"), 2 );
-#endif
     }
     else if ( m_initialState.reportType() == MyMoneyReport::eQueryTable )
     {

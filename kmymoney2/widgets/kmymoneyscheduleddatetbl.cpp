@@ -230,7 +230,7 @@ void kMyMoneyScheduledDateTbl::drawCellContents(QPainter *painter, int /*row*/, 
     text = QString::number(theDate.day());
     addDayPostfix(text);
 
-    painter->drawText(0, 0, w-2, h, Qt::AlignRight, QDate::shortDayName(theDate.dayOfWeek()) + " " + text, -1, &rect);
+    painter->drawText(0, 0, w-2, h, Qt::AlignRight, QDate::shortDayName(theDate.dayOfWeek()) + ' ' + text, -1, &rect);
 
     Q3ValueList<MyMoneySchedule> billSchedules;
     Q3ValueList<MyMoneySchedule> depositSchedules;
@@ -363,7 +363,7 @@ void kMyMoneyScheduledDateTbl::addDayPostfix(QString& text)
 
   if (d >= 1 && d <= 31)
   {
-    QStringList postfixList = i18n("st-nd-rd-th-th-th-th-th-th-th-th-th-th-th-th-th-th-th-th-th-st-nd-rd-th-th-th-th-th-th-th-st").split("-", QString::KeepEmptyParts);
+    QStringList postfixList = i18n("st-nd-rd-th-th-th-th-th-th-th-th-th-th-th-th-th-th-th-th-th-st-nd-rd-th-th-th-th-th-th-th-st").split('-', QString::KeepEmptyParts);
     text += postfixList[d-1];
   }
 }
@@ -425,7 +425,7 @@ void kMyMoneyScheduledDateTbl::contentsMouseMoveEvent(QMouseEvent* e)
     {
       // TODO: Handle other start weekdays than Monday
       text = QDate::shortDayName(row);
-      text += " ";
+      text += ' ';
 
       int dayOfWeek = date.dayOfWeek();
       int diff;

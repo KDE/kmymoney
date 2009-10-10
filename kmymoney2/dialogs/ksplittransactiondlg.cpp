@@ -381,9 +381,9 @@ void KSplitTransactionDlg::updateSums(void)
     m_transaction.modifySplit(m_split);
   }
 
-  splitSum->setText("<b>" + splits.formatMoney("", m_precision) + " ");
-  splitUnassigned->setText("<b>" + diffAmount().formatMoney("", m_precision) + " ");
-  transactionAmount->setText("<b>" + (-m_split.value()).formatMoney("", m_precision) + " ");
+  splitSum->setText("<b>" + splits.formatMoney("", m_precision) + ' ');
+  splitUnassigned->setText("<b>" + diffAmount().formatMoney("", m_precision) + ' ');
+  transactionAmount->setText("<b>" + (-m_split.value()).formatMoney("", m_precision) + ' ');
 }
 
 MyMoneyMoney KSplitTransactionDlg::splitsValue(void)

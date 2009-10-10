@@ -873,7 +873,7 @@ bool InvestTransactionEditor::setupPrice(const MyMoneyTransaction& t, MyMoneySpl
 
   if(acc.currencyId() != t.commodity()) {
     QMap<QString, MyMoneyMoney>::Iterator it_p;
-    QString key = t.commodity() + "-" + acc.currencyId();
+    QString key = t.commodity() + '-' + acc.currencyId();
     it_p = m_priceInfo.find(key);
 
     // if it's not found, then collect it from the user first

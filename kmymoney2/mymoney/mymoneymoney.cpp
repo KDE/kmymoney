@@ -273,7 +273,7 @@ QString MyMoneyMoney::formatMoney(const QString& currency, const int prec, bool 
     else {
       rs = rs.rightJustified(8, '0', true);
       // no trailing zeroes or decimal separators
-      while(rs.endsWith("0"))
+      while(rs.endsWith('0'))
         rs.truncate(rs.length()-1);
       while(rs.endsWith(QChar(decimalSeparator())))
         rs.truncate(rs.length()-1);
@@ -338,7 +338,7 @@ const QString MyMoneyMoney::toString(void) const
     resf.prepend(QString("%1").arg(static_cast<int>(tmp % 10)));
     tmp /= 10;
   }
-  return res + "/" + resf;
+  return res + '/' + resf;
 }
 
 void MyMoneyMoney::fromString(const QString& str)

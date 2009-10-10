@@ -34,22 +34,22 @@
 #include "mymoneyfile.h"
 #include "mymoneyreport.h"
 
-const QStringList MyMoneyReport::kRowTypeText = QString("none,assetliability,expenseincome,category,topcategory,account,payee,month,week,topaccount,topaccount-account,equitytype,accounttype,institution,budget,budgetactual,schedule,accountinfo,accountloaninfo,accountreconcile,cashflow").split(",");
-const QStringList MyMoneyReport::kColumnTypeText = QString("none,months,bimonths,quarters,4,5,6,weeks,8,9,10,11,years").split(",");
+const QStringList MyMoneyReport::kRowTypeText = QString("none,assetliability,expenseincome,category,topcategory,account,payee,month,week,topaccount,topaccount-account,equitytype,accounttype,institution,budget,budgetactual,schedule,accountinfo,accountloaninfo,accountreconcile,cashflow").split(',');
+const QStringList MyMoneyReport::kColumnTypeText = QString("none,months,bimonths,quarters,4,5,6,weeks,8,9,10,11,years").split(',');
 
 // if you add names here, don't forget to update the bitmap for EQueryColumns
 // and shift the bit for eQCend one position to the left
-const QStringList MyMoneyReport::kQueryColumnsText = QString("none,number,payee,category,memo,account,reconcileflag,action,shares,price,performance,loan,balance").split(",");
+const QStringList MyMoneyReport::kQueryColumnsText = QString("none,number,payee,category,memo,account,reconcileflag,action,shares,price,performance,loan,balance").split(',');
 
 const MyMoneyReport::EReportType MyMoneyReport::kTypeArray[] = { eNoReport, ePivotTable, ePivotTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, ePivotTable, ePivotTable, eInfoTable, eInfoTable, eInfoTable, eQueryTable, eQueryTable, eNoReport };
-const QStringList MyMoneyReport::kDetailLevelText = QString("none,all,top,group,total,invalid").split(",");
-const QStringList MyMoneyReport::kChartTypeText = QString("none,line,bar,pie,ring,stackedbar,invalid").split(",");
+const QStringList MyMoneyReport::kDetailLevelText = QString("none,all,top,group,total,invalid").split(',');
+const QStringList MyMoneyReport::kChartTypeText = QString("none,line,bar,pie,ring,stackedbar,invalid").split(',');
 
 // This should live in mymoney/mymoneytransactionfilter.h
-static const QStringList kTypeText = QString("all,payments,deposits,transfers,none").split(",");
-static const QStringList kStateText = QString("all,notreconciled,cleared,reconciled,frozen,none").split(",");
-static const QStringList kDateLockText = QString("alldates,untiltoday,currentmonth,currentyear,monthtodate,yeartodate,yeartomonth,lastmonth,lastyear,last7days,last30days,last3months,last6months,last12months,next7days,next30days,next3months,next6months,next12months,userdefined,last3tonext3months,last11Months,currentQuarter,lastQuarter,nextQuarter,currentFiscalYear,lastFiscalYear,today").split(",");
-static const QStringList kAccountTypeText = QString("unknown,checkings,savings,cash,creditcard,loan,certificatedep,investment,moneymarket,asset,liability,currency,income,expense,assetloan,stock,equity,invalid").split(",");
+static const QStringList kTypeText = QString("all,payments,deposits,transfers,none").split(',');
+static const QStringList kStateText = QString("all,notreconciled,cleared,reconciled,frozen,none").split(',');
+static const QStringList kDateLockText = QString("alldates,untiltoday,currentmonth,currentyear,monthtodate,yeartodate,yeartomonth,lastmonth,lastyear,last7days,last30days,last3months,last6months,last12months,next7days,next30days,next3months,next6months,next12months,userdefined,last3tonext3months,last11Months,currentQuarter,lastQuarter,nextQuarter,currentFiscalYear,lastFiscalYear,today").split(',');
+static const QStringList kAccountTypeText = QString("unknown,checkings,savings,cash,creditcard,loan,certificatedep,investment,moneymarket,asset,liability,currency,income,expense,assetloan,stock,equity,invalid").split(',');
 
 MyMoneyReport::MyMoneyReport() :
     m_name ( "Unconfigured Pivot Table Report" ),
@@ -692,7 +692,7 @@ bool MyMoneyReport::read ( const QDomElement& e )
       setColumnType ( static_cast<EColumnType> ( i ) );
 
     unsigned qc = 0;
-    QStringList columns = e.attribute ( "querycolumns", "none" ).split(",");
+    QStringList columns = e.attribute ( "querycolumns", "none" ).split(',');
     QStringList::const_iterator it_column = columns.constBegin();
     while ( it_column != columns.constEnd() )
     {

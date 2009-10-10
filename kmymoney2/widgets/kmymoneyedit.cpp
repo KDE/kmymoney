@@ -330,7 +330,7 @@ void kMyMoneyEdit::theTextChanged(const QString & theText)
   QString nsign, psign;
   if(l->negativeMonetarySignPosition() == KLocale::ParensAround
   || l->positiveMonetarySignPosition() == KLocale::ParensAround) {
-    nsign = psign = "(";
+    nsign = psign = '(';
   } else {
     nsign = l->negativeSign();
     psign = l->positiveSign();
@@ -368,7 +368,7 @@ void kMyMoneyEdit::ensureFractionalPart(QString& s) const
   KLocale* locale = KGlobal::locale();
   QString decimalSymbol = locale->monetaryDecimalSymbol();
   if(decimalSymbol.isEmpty())
-    decimalSymbol = ".";
+    decimalSymbol = '.';
 
   // If text contains no 'monetaryDecimalSymbol' then add it
   // followed by the required number of 0s
@@ -377,7 +377,7 @@ void kMyMoneyEdit::ensureFractionalPart(QString& s) const
       if (!s.contains(decimalSymbol)) {
         s += decimalSymbol;
         for (int i=0; i < m_prec; i++)
-          s += "0";
+          s += '0';
       }
     } else if(m_prec == 0) {
       while(s.contains(decimalSymbol)) {
@@ -388,7 +388,7 @@ void kMyMoneyEdit::ensureFractionalPart(QString& s) const
       }
     } else if(s.contains(decimalSymbol)) {  // m_prec == -1 && fraction
       // no trailing zeroes
-      while(s.endsWith("0")) {
+      while(s.endsWith('0')) {
         s.truncate(s.length()-1);
       }
       // no trailing decimalSymbol

@@ -44,7 +44,7 @@
 #endif
 
 const QString MyMoneyFile::OpeningBalancesPrefix = I18N_NOOP("Opening Balances");
-const QString MyMoneyFile::AccountSeperator = ":";
+const QString MyMoneyFile::AccountSeperator = QChar(':');
 
 // include the following line to get a 'cout' for debug purposes
 // #include <iostream>

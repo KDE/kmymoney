@@ -521,7 +521,7 @@ void KPayeesView::slotRenamePayee(Q3ListViewItem* p , int /* col */, const QStri
 
     } catch(MyMoneyException *e) {
       KMessageBox::detailedSorry(0, i18n("Unable to modify payee"),
-        (e->what() + " " + i18n("thrown in") + " " + e->file()+ ":%1").arg(e->line()));
+        (e->what() + ' ' + i18n("thrown in") + ' ' + e->file()+ ":%1").arg(e->line()));
       delete e;
     }
   }
@@ -870,7 +870,7 @@ void KPayeesView::slotUpdatePayee(void)
 
     } catch(MyMoneyException *e) {
       KMessageBox::detailedSorry(0, i18n("Unable to modify payee"),
-        (e->what() + " " + i18n("thrown in") + " " + e->file()+ ":%1").arg(e->line()));
+        (e->what() + ' ' + i18n("thrown in") + ' ' + e->file()+ ":%1").arg(e->line()));
       delete e;
     }
   }

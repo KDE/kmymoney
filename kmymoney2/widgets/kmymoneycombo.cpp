@@ -371,19 +371,19 @@ void KMyMoneyReconcileCombo::setState(MyMoneySplit::reconcileFlagE state)
   QString id;
   switch(state) {
     case MyMoneySplit::NotReconciled:
-      id = " ";
+      id = ' ';
       break;
     case MyMoneySplit::Cleared:
-      id = "C";
+      id = 'C';
       break;
     case MyMoneySplit::Reconciled:
-      id = "R";
+      id = 'R';
       break;
     case MyMoneySplit::Frozen:
-      id = "F";
+      id = 'F';
       break;
     case MyMoneySplit::Unknown:
-      id = "U";
+      id = 'U';
       break;
     default:
       kDebug(2) << "Unknown reconcile state '" << state << "' in KMyMoneyComboReconcile::setState()\n";

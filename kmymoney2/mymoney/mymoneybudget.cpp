@@ -31,7 +31,7 @@
 
 #include "mymoneybudget.h"
 
-const QStringList MyMoneyBudget::AccountGroup::kBudgetLevelText = QString("none,monthly,monthbymonth,yearly,invalid").split(",");
+const QStringList MyMoneyBudget::AccountGroup::kBudgetLevelText = QString("none,monthly,monthbymonth,yearly,invalid").split(',');
 const int BUDGET_VERSION = 2;
 
 bool MyMoneyBudget::AccountGroup::isZero(void) const

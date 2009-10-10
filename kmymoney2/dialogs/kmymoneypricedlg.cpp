@@ -223,7 +223,7 @@ void KMyMoneyPriceDlg::slotOnlinePriceUpdate(void)
   KMyMoneyPriceItem* item = dynamic_cast<KMyMoneyPriceItem*>(m_priceList->selectedItem());
   if(item)
   {
-    QPointer<KEquityPriceUpdateDlg> dlg = new KEquityPriceUpdateDlg(this, (item->text(COMMODITY_COL)+" "+item->text(CURRENCY_COL)).toUtf8());
+    QPointer<KEquityPriceUpdateDlg> dlg = new KEquityPriceUpdateDlg(this, (item->text(COMMODITY_COL)+' '+item->text(CURRENCY_COL)).toUtf8());
     if(dlg->exec() == QDialog::Accepted)
       dlg->storePrices();
     delete dlg;

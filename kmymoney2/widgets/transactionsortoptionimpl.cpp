@@ -138,12 +138,12 @@ QString TransactionSortOption::settings( void ) const
     // if we look at the EntryOrderSort option, we have to make
     // sure, that the EntryDateSort is prepended
     if(option == KMyMoneyRegister::EntryOrderSort) {
-      rc  += QString::number(static_cast<int>(KMyMoneyRegister::EntryDateSort)*item->direction())+",";
+      rc  += QString::number(static_cast<int>(KMyMoneyRegister::EntryDateSort)*item->direction())+',';
     }
     rc += QString::number(KMyMoneyRegister::textToSortOrder(item->text(0))*item->direction());
     item = dynamic_cast<SortOptionListItem*>(item->itemBelow());
     if(item != 0)
-      rc += ",";
+      rc += ',';
   }
   return rc;
 }

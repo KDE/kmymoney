@@ -333,7 +333,7 @@ void QueryTable::init(void)
     throw new MYMONEYEXCEPTION("QueryTable::QueryTable(): unhandled row type");
   }
 
-  QString sort = m_group + "," + m_columns + ",id,rank";
+  QString sort = m_group + ',' + m_columns + ",id,rank";
 
   switch (m_config.rowType()) {
     case MyMoneyReport::eAccountByTopAccount:
@@ -611,7 +611,7 @@ void QueryTable::constructTransactionTable(void)
             // put the principal amount in the "value" column and convert to lowest fraction
             qA["value"] = ((-(*it_split).shares()) * xr).convert(fraction).toString();
 
-            qA["rank"] = "0";
+            qA["rank"] = '0';
             qA["split"] = "";
 
           } else {
@@ -621,7 +621,7 @@ void QueryTable::constructTransactionTable(void)
               // this is the sub-total of the split detail
               // convert to lowest fraction
               qA["value"] = ((*it_split).shares() * xr).convert(fraction).toString();
-              qA["rank"] = "0";
+              qA["rank"] = '0';
               qA["category"] = i18n("[Split Transaction]");
               qA["topcategory"] = i18nc("Split transaction", "Split");
               qA["categorytype"] = i18nc("Split transaction", "Split");
@@ -684,7 +684,7 @@ void QueryTable::constructTransactionTable(void)
 
               //convert to lowest fraction
               qA["split"] = ((-(*it_split).shares()) * xr).convert(fraction).toString();
-              qA["rank"] = "1";
+              qA["rank"] = '1';
             } else {
               //this applies when the transaction has only 2 splits, or each split is going to be 
               //shown separately, eg. transactions by category
@@ -693,7 +693,7 @@ void QueryTable::constructTransactionTable(void)
 
               //multiply by currency and convert to lowest fraction
               qA["value"] = ((-(*it_split).shares()) * xr).convert(fraction).toString();
-              qA["rank"] = "0";
+              qA["rank"] = '0';
             }
 
             qA ["memo"] = (*it_split).memo();
@@ -735,7 +735,7 @@ void QueryTable::constructTransactionTable(void)
             //multiply by currency and convert to lowest fraction
             qS["value"] = ((*it_split).shares() * xr).convert(fraction).toString();
 
-            qS["rank"] = "0";
+            qS["rank"] = '0';
 
             qS["account"] = splitAcc.name();
             qS["accountid"] = splitAcc.id();
@@ -876,7 +876,7 @@ void QueryTable::constructTransactionTable(void)
     qA["postdate"] = strStartDate;
     qA["balance"] = startBalance.convert(fraction).toString();
     qA["value"] = QString();
-    qA["id"] = "A";
+    qA["id"] = 'A';
     m_rows += qA;
 
     //ending balance
@@ -888,7 +888,7 @@ void QueryTable::constructTransactionTable(void)
 
     qA["postdate"] = strEndDate;
     qA["balance"] = endBalance.toString();
-    qA["id"] = "Z";
+    qA["id"] = 'Z';
     m_rows += qA;
   }
 }
@@ -1120,7 +1120,7 @@ void QueryTable::constructAccountTable(void)
       TableRow qaccountrow;
 
       // help for sort and render functions
-      qaccountrow["rank"] = "0";
+      qaccountrow["rank"] = '0';
 
       //
       // Handle currency conversion
@@ -1363,7 +1363,7 @@ void QueryTable::constructSplitsTable(void)
         // this is the sub-total of the split detail
         // convert to lowest fraction
         qA["value"] = ((*it_split).shares() * xr).convert(fraction).toString();
-        qA["rank"] = "0";
+        qA["rank"] = '0';
 
         //fill in account information
         if (! splitAcc.isIncomeExpense() && it_split != myBegin) {
@@ -1505,7 +1505,7 @@ void QueryTable::constructSplitsTable(void)
     qA["postdate"] = strStartDate;
     qA["balance"] = startBalance.convert(fraction).toString();
     qA["value"] = QString();
-    qA["id"] = "A";
+    qA["id"] = 'A';
     m_rows += qA;
 
     //ending balance
@@ -1517,7 +1517,7 @@ void QueryTable::constructSplitsTable(void)
 
     qA["postdate"] = strEndDate;
     qA["balance"] = endBalance.toString();
-    qA["id"] = "Z";
+    qA["id"] = 'Z';
     m_rows += qA;
   }
 }

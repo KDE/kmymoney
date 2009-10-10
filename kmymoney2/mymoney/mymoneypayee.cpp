@@ -183,7 +183,7 @@ MyMoneyPayee::payeeMatchType MyMoneyPayee::matchData(bool& ignorecase, QStringLi
     type = m_usingMatchKey ? matchKey : matchName;
     ignorecase = m_matchKeyIgnoreCase;
     if(type == matchKey)
-      keys = m_matchKey.split(";");
+      keys = m_matchKey.split(';');
   }
 
   return type;
@@ -215,7 +215,7 @@ void MyMoneyPayee::setMatchData(payeeMatchType type, bool ignorecase, const QStr
 
 void MyMoneyPayee::setMatchData(payeeMatchType type, bool ignorecase, const QString& keys)
 {
-  setMatchData(type, ignorecase, keys.split(";"));
+  setMatchData(type, ignorecase, keys.split(';'));
 }
 
 // vim:cin:si:ai:et:ts=2:sw=2:

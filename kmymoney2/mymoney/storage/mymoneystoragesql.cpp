@@ -177,7 +177,7 @@ try {
   int rc = 0;
   m_dbType = m_drivers.driverToType(url.queryItem("driver"));
   //get the input options
-  QStringList options = url.queryItem("options").split(",");
+  QStringList options = url.queryItem("options").split(',');
   m_loadAll = options.contains("loadAll")/*|| m_mode == 0*/;
   m_override = options.contains("override");
 
@@ -3508,7 +3508,7 @@ const QMap<QString, MyMoneyBudget> MyMoneyStorageSql::fetchBudgets (const QStrin
   MyMoneySqlQuery q(const_cast <MyMoneyStorageSql*> (this));
   QString queryString (t.selectAllString(false));
   if (! idList.empty()) {
-    queryString += " WHERE id = '" + idList.join("' OR id = '") + "'";
+    queryString += " WHERE id = '" + idList.join("' OR id = '") + '\'';
   }
   if (forUpdate)
     queryString += " FOR UPDATE";

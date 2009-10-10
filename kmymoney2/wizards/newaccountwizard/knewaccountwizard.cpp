@@ -533,7 +533,7 @@ void AccountTypePage::slotUpdateCurrency(void)
 
 void AccountTypePage::slotGetOnlineQuote(void)
 {
-  QString id = MyMoneyFile::instance()->baseCurrency().id()+" "+m_currencyComboBox->security().id();
+  QString id = MyMoneyFile::instance()->baseCurrency().id()+' '+m_currencyComboBox->security().id();
   QPointer<KEquityPriceUpdateDlg> dlg = new KEquityPriceUpdateDlg(this, id);
   if(dlg->exec() == QDialog::Accepted) {
     MyMoneyPrice price = dlg->price(id);

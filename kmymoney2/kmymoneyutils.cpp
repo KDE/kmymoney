@@ -377,7 +377,7 @@ QString KMyMoneyUtils::nextCheckNumber(const MyMoneyAccount& acc)
   if(exp.indexIn(acc.value("lastNumberUsed")) != -1) {
     number = QString("%1%2%3").arg(exp.cap(1)).arg(exp.cap(2).toULongLong() + 1).arg(exp.cap(3));
   } else {
-    number = "1";
+    number = '1';
   }
   return number;
 }

@@ -160,7 +160,7 @@ void MyMoneyQifWriter::writeCategoryEntry(QTextStream &s, const QString& account
 
   QStringList list = acc.accountList();
   QStringList::Iterator it;
-  name += ":";
+  name += ':';
   for(it = list.begin(); it != list.end(); ++it) {
     writeCategoryEntry(s, *it, name);
   }

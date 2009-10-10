@@ -141,7 +141,7 @@ const MyMoneyAccount MyMoneySeqAccessMgr::account(const QString& id) const
     return m_accountList[id];
 
   // throw an exception, if it does not exist
-  QString msg = "Unknown account id '" + id + "'";
+  QString msg = "Unknown account id '" + id + '\'';
   throw new MYMONEYEXCEPTION(msg);
 }
 
@@ -177,7 +177,7 @@ const MyMoneyPayee MyMoneySeqAccessMgr::payee(const QString& id) const
   QMap<QString, MyMoneyPayee>::ConstIterator it;
   it = m_payeeList.find(id);
   if(it == m_payeeList.end())
-    throw new MYMONEYEXCEPTION("Unknown payee '" + id + "'");
+    throw new MYMONEYEXCEPTION("Unknown payee '" + id + '\'');
 
   return *it;
 }
@@ -195,7 +195,7 @@ const MyMoneyPayee MyMoneySeqAccessMgr::payeeByName(const QString& payee) const
     }
   }
 
-  throw new MYMONEYEXCEPTION("Unknown payee '" + payee + "'");
+  throw new MYMONEYEXCEPTION("Unknown payee '" + payee + '\'');
 }
 
 void MyMoneySeqAccessMgr::modifyPayee(const MyMoneyPayee& payee)
@@ -204,7 +204,7 @@ void MyMoneySeqAccessMgr::modifyPayee(const MyMoneyPayee& payee)
 
   it = m_payeeList.find(payee.id());
   if(it == m_payeeList.end()) {
-    QString msg = "Unknown payee '" + payee.id() + "'";
+    QString msg = "Unknown payee '" + payee.id() + '\'';
     throw new MYMONEYEXCEPTION(msg);
   }
   m_payeeList.modify((*it).id(), payee);
@@ -218,7 +218,7 @@ void MyMoneySeqAccessMgr::removePayee(const MyMoneyPayee& payee)
 
   it_p = m_payeeList.find(payee.id());
   if(it_p == m_payeeList.end()) {
-    QString msg = "Unknown payee '" + payee.id() + "'";
+    QString msg = "Unknown payee '" + payee.id() + '\'';
     throw new MYMONEYEXCEPTION(msg);
   }
 
@@ -256,14 +256,14 @@ void MyMoneySeqAccessMgr::addAccount(MyMoneyAccount& parent, MyMoneyAccount& acc
   theParent = m_accountList.find(parent.id());
   if(theParent == m_accountList.end()) {
     QString msg = "Unknown parent account '";
-    msg += parent.id() + "'";
+    msg += parent.id() + '\'';
     throw new MYMONEYEXCEPTION(msg);
   }
 
   theChild = m_accountList.find(account.id());
   if(theChild == m_accountList.end()) {
     QString msg = "Unknown child account '";
-    msg += account.id() + "'";
+    msg += account.id() + '\'';
     throw new MYMONEYEXCEPTION(msg);
   }
 
@@ -356,7 +356,7 @@ QString MyMoneySeqAccessMgr::nextPayeeID(void)
 {
   QString id;
   id.setNum(++m_nextPayeeID);
-  id = "P" + id.rightJustified(PAYEE_ID_SIZE, '0');
+  id = 'P' + id.rightJustified(PAYEE_ID_SIZE, '0');
   return id;
 }
 
@@ -364,7 +364,7 @@ QString MyMoneySeqAccessMgr::nextInstitutionID(void)
 {
   QString id;
   id.setNum(++m_nextInstitutionID);
-  id = "I" + id.rightJustified(INSTITUTION_ID_SIZE, '0');
+  id = 'I' + id.rightJustified(INSTITUTION_ID_SIZE, '0');
   return id;
 }
 
@@ -372,7 +372,7 @@ QString MyMoneySeqAccessMgr::nextAccountID(void)
 {
   QString id;
   id.setNum(++m_nextAccountID);
-  id = "A" + id.rightJustified(ACCOUNT_ID_SIZE, '0');
+  id = 'A' + id.rightJustified(ACCOUNT_ID_SIZE, '0');
   return id;
 }
 
@@ -380,7 +380,7 @@ QString MyMoneySeqAccessMgr::nextTransactionID(void)
 {
   QString id;
   id.setNum(++m_nextTransactionID);
-  id = "T" + id.rightJustified(TRANSACTION_ID_SIZE, '0');
+  id = 'T' + id.rightJustified(TRANSACTION_ID_SIZE, '0');
   return id;
 }
 
@@ -396,7 +396,7 @@ QString MyMoneySeqAccessMgr::nextSecurityID(void)
 {
   QString id;
   id.setNum(++m_nextSecurityID);
-  id = "E" + id.rightJustified(SECURITY_ID_SIZE, '0');
+  id = 'E' + id.rightJustified(SECURITY_ID_SIZE, '0');
   return id;
 }
 
@@ -1197,7 +1197,7 @@ void MyMoneySeqAccessMgr::modifySchedule(const MyMoneySchedule& sched)
 
   it = m_scheduleList.find(sched.id());
   if(it == m_scheduleList.end()) {
-    QString msg = "Unknown schedule '" + sched.id() + "'";
+    QString msg = "Unknown schedule '" + sched.id() + '\'';
     throw new MYMONEYEXCEPTION(msg);
   }
 
@@ -1210,7 +1210,7 @@ void MyMoneySeqAccessMgr::removeSchedule(const MyMoneySchedule& sched)
 
   it = m_scheduleList.find(sched.id());
   if(it == m_scheduleList.end()) {
-    QString msg = "Unknown schedule '" + sched.id() + "'";
+    QString msg = "Unknown schedule '" + sched.id() + '\'';
     throw new MYMONEYEXCEPTION(msg);
   }
 
@@ -1228,7 +1228,7 @@ const MyMoneySchedule MyMoneySeqAccessMgr::schedule(const QString& id) const
     return (*pos);
 
   // throw an exception, if it does not exist
-  QString msg = "Unknown schedule id '" + id + "'";
+  QString msg = "Unknown schedule id '" + id + '\'';
   throw new MYMONEYEXCEPTION(msg);
 }
 
@@ -1536,7 +1536,7 @@ void MyMoneySeqAccessMgr::modifyReport( const MyMoneyReport& report )
 
   it = m_reportList.find(report.id());
   if(it == m_reportList.end()) {
-    QString msg = "Unknown report '" + report.id() + "'";
+    QString msg = "Unknown report '" + report.id() + '\'';
     throw new MYMONEYEXCEPTION(msg);
   }
   m_reportList.modify(report.id(), report);
@@ -1546,7 +1546,7 @@ QString MyMoneySeqAccessMgr::nextReportID(void)
 {
   QString id;
   id.setNum(++m_nextReportID);
-  id = "R" + id.rightJustified(REPORT_ID_SIZE, '0');
+  id = 'R' + id.rightJustified(REPORT_ID_SIZE, '0');
   return id;
 }
 
@@ -1566,7 +1566,7 @@ void MyMoneySeqAccessMgr::removeReport( const MyMoneyReport& report )
 
   it = m_reportList.find(report.id());
   if(it == m_reportList.end()) {
-    QString msg = "Unknown report '" + report.id() + "'";
+    QString msg = "Unknown report '" + report.id() + '\'';
     throw new MYMONEYEXCEPTION(msg);
   }
 
@@ -1614,7 +1614,7 @@ const MyMoneyBudget MyMoneySeqAccessMgr::budgetByName(const QString& budget) con
     }
   }
 
-  throw new MYMONEYEXCEPTION("Unknown budget '" + budget + "'");
+  throw new MYMONEYEXCEPTION("Unknown budget '" + budget + '\'');
 }
 
 void MyMoneySeqAccessMgr::modifyBudget( const MyMoneyBudget& budget )
@@ -1623,7 +1623,7 @@ void MyMoneySeqAccessMgr::modifyBudget( const MyMoneyBudget& budget )
 
   it = m_budgetList.find(budget.id());
   if(it == m_budgetList.end()) {
-    QString msg = "Unknown budget '" + budget.id() + "'";
+    QString msg = "Unknown budget '" + budget.id() + '\'';
     throw new MYMONEYEXCEPTION(msg);
   }
   m_budgetList.modify(budget.id(), budget);
@@ -1633,7 +1633,7 @@ QString MyMoneySeqAccessMgr::nextBudgetID(void)
 {
   QString id;
   id.setNum(++m_nextBudgetID);
-  id = "B" + id.rightJustified(BUDGET_ID_SIZE, '0');
+  id = 'B' + id.rightJustified(BUDGET_ID_SIZE, '0');
   return id;
 }
 
@@ -1653,7 +1653,7 @@ void MyMoneySeqAccessMgr::removeBudget( const MyMoneyBudget& budget )
 
   it = m_budgetList.find(budget.id());
   if(it == m_budgetList.end()) {
-    QString msg = "Unknown budget '" + budget.id() + "'";
+    QString msg = "Unknown budget '" + budget.id() + '\'';
     throw new MYMONEYEXCEPTION(msg);
   }
 

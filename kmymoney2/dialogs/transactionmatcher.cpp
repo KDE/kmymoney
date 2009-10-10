@@ -127,7 +127,7 @@ void TransactionMatcher::match(MyMoneyTransaction tm, MyMoneySplit sm, MyMoneyTr
   if(!si.memo().isEmpty() && si.memo() != memo) {
     sm.setValue("kmm-orig-memo", memo);
     if(!memo.isEmpty())
-      memo += "\n";
+      memo += '\n';
     memo += si.memo();
   }
   sm.setMemo(memo);

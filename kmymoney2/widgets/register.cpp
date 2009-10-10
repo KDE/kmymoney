@@ -843,7 +843,7 @@ bool Register::focusNextPrevChild(bool next)
 
 void Register::setSortOrder(const QString& order)
 {
-  const QStringList orderList = order.split(",", QString::SkipEmptyParts);
+  const QStringList orderList = order.split(',', QString::SkipEmptyParts);
   QStringList::const_iterator it;
   m_sortOrder.clear();
   for(it = orderList.constBegin(); it != orderList.constEnd(); ++it) {

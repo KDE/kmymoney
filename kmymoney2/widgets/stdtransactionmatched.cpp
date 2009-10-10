@@ -179,7 +179,7 @@ void StdTransactionMatched::registerCellText(QString& txt, int& align, int row, 
               int pos = memo.findRev(matchedSplit.memo());
               if(pos != -1) {
                 memo = memo.left(pos);
-                if(memo.endsWith("\n"))
+                if(memo.endsWith('\n'))
                   memo = memo.left(pos-1);
               }
             }

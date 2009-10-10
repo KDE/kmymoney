@@ -133,7 +133,7 @@ void KSettingsHome::slotUpdateItemList(void)
     list += QString::number(item);
     it = it->nextSibling();
     if(it)
-      list += ",";
+      list += ',';
   }
 
   // don't update the list

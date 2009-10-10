@@ -244,7 +244,7 @@ void MyMoneySplit::addMatch(const MyMoneyTransaction& _t)
     doc.appendChild(el);
     t.writeXML(doc, el);
     QString xml = doc.toString();
-    xml.replace("<", "&lt;");
+    xml.replace('<', "&lt;");
     setValue("kmm-matched-tx", xml);
   }
 }

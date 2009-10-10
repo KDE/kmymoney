@@ -44,8 +44,8 @@
 #include "mymoneyreport.h"
 #include "mymoneyinstitution.h"
 
-QStringList MyMoneyStorageANON::zKvpNoModify = QString("kmm-baseCurrency,PreferredAccount,Tax,fixed-interest,interest-calculation,payee,schedule,term,kmm-online-source,kmm-brokerage-account,lastStatementDate,kmm-sort-reconcile,kmm-sort-std,kmm-iconpos,mm-closed,payee,schedule,term").split(",");
-QStringList MyMoneyStorageANON::zKvpXNumber = QString("final-payment,loan-amount,periodic-payment").split(",");
+QStringList MyMoneyStorageANON::zKvpNoModify = QString("kmm-baseCurrency,PreferredAccount,Tax,fixed-interest,interest-calculation,payee,schedule,term,kmm-online-source,kmm-brokerage-account,lastStatementDate,kmm-sort-reconcile,kmm-sort-std,kmm-iconpos,mm-closed,payee,schedule,term").split(',');
+QStringList MyMoneyStorageANON::zKvpXNumber = QString("final-payment,loan-amount,periodic-payment").split(',');
 
 
 MyMoneyStorageANON::MyMoneyStorageANON() :
@@ -121,7 +121,7 @@ void MyMoneyStorageANON::writePayee(QDomElement& payee, const MyMoneyPayee& _p)
   QStringList keys;
   MyMoneyPayee::payeeMatchType matchType = p.matchData(ignoreCase, keys);
   QRegExp exp("[A-Za-z]");
-  p.setMatchData(matchType, ignoreCase, keys.join(";").replace(exp, "x").split(";"));
+  p.setMatchData(matchType, ignoreCase, keys.join(";").replace(exp, "x").split(';'));
 
   MyMoneyStorageXML::writePayee(payee, p);
 }

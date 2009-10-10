@@ -252,7 +252,7 @@ kMyMoneyDateTbl::paintCell(QPainter *painter, int row, int col)
     {
       // TODO: Handle other start weekdays than Monday
       text = QDate::shortDayName(row);
-      text += " ";
+      text += ' ';
 
       int dayOfWeek = date.dayOfWeek();
       int diff;
@@ -619,7 +619,7 @@ void kMyMoneyDateTbl::contentsMouseMoveEvent(QMouseEvent* e)
   {
     // TODO: Handle other start weekdays than Monday
     text = QDate::shortDayName(row);
-    text += " ";
+    text += ' ';
 
     int dayOfWeek = date.dayOfWeek();
     int diff;

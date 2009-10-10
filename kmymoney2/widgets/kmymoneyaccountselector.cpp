@@ -179,11 +179,11 @@ bool kMyMoneyAccountSelector::contains(const QString& txt) const
   Q3ListViewItemIterator it(m_listView, Q3ListViewItemIterator::Selectable);
   Q3ListViewItem* it_v;
 
-  QString baseName = i18n("Asset") + "|" +
-                     i18n("Liability") + "|" +
-                     i18n("Income")+ "|" +
-                     i18n("Expense")+ "|" +
-                     i18n("Equity") + "|" +
+  QString baseName = i18n("Asset") + '|' +
+                     i18n("Liability") + '|' +
+                     i18n("Income")+ '|' +
+                     i18n("Expense")+ '|' +
+                     i18n("Equity") + '|' +
                      i18n("Security");
 
   while((it_v = it.current()) != 0) {

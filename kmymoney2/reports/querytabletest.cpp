@@ -284,14 +284,14 @@ void QueryTableTest::testQueryBasics()
   // Test querytable::TableRow::operator> and operator==
 
   QueryTable::TableRow low;
-  low["first"] = "A";
-  low["second"] = "B";
-  low["third"] = "C";
+  low["first"] = 'A';
+  low["second"] = 'B';
+  low["third"] = 'C';
 
   QueryTable::TableRow high;
-  high["first"] = "A";
-  high["second"] = "C";
-  high["third"] = "B";
+  high["first"] = 'A';
+  high["second"] = 'C';
+  high["third"] = 'B';
 
   QueryTable::TableRow::setSortCriteria("first,second,third");
   CPPUNIT_ASSERT( low < high );
@@ -417,8 +417,8 @@ void QueryTableTest::testAccountQuery()
     CPPUNIT_ASSERT(MyMoneyMoney(rows[1]["value"])==(moCreditOpen-(moParent1 + moParent2 + moChild) * 3));
 
     html = qtbl_3.renderHTML();
-    CPPUNIT_ASSERT( searchHTML(html,i18nc("Total balance", "Total")+" "+i18n("Checking")) == moCheckingOpen-moSolo*3 );
-    CPPUNIT_ASSERT( searchHTML(html,i18nc("Total balance", "Total")+" "+i18n("Credit Card")) == moCreditOpen-(moParent1 + moParent2 + moChild) * 3 );
+    CPPUNIT_ASSERT( searchHTML(html,i18nc("Total balance", "Total")+' '+i18n("Checking")) == moCheckingOpen-moSolo*3 );
+    CPPUNIT_ASSERT( searchHTML(html,i18nc("Total balance", "Total")+' '+i18n("Credit Card")) == moCreditOpen-(moParent1 + moParent2 + moChild) * 3 );
     CPPUNIT_ASSERT( searchHTML(html,i18nc("Grand total balance", "Grand Total")) == moCheckingOpen+moCreditOpen-(moParent1 + moParent2 + moSolo + moChild) * 3 );
   }
   catch(MyMoneyException *e)

@@ -106,7 +106,7 @@ void TransactionEditor::slotUpdateAccount(void)
 void TransactionEditor::setupPrecision(void)
 {
   const int prec = (m_account.id().isEmpty()) ? 2 : MyMoneyMoney::denomToPrec(m_account.fraction());
-  QStringList widgets = QString("amount,deposit,payment").split(",");
+  QStringList widgets = QString("amount,deposit,payment").split(',');
   QStringList::const_iterator it_w;
   for(it_w = widgets.constBegin(); it_w != widgets.constEnd(); ++it_w) {
     QWidget * w;

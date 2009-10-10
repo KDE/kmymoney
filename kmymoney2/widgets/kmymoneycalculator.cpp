@@ -162,7 +162,7 @@ void kMyMoneyCalculator::digitClicked(int button)
 void kMyMoneyCalculator::commaClicked(void)
 {
   if(operand.length() == 0)
-    operand = "0";
+    operand = '0';
   if(operand.contains('.', Qt::CaseInsensitive) == 0)
     operand.append('.');
 
@@ -178,7 +178,7 @@ void kMyMoneyCalculator::plusminusClicked(void)
 
   if(operand.length() > 0) {
     if(operand.indexOf('-') != -1)
-      operand.replace('-', QString());
+      operand.replace('-', QChar());
     else
       operand.prepend('-');
     changeDisplay(operand);
@@ -422,19 +422,19 @@ void kMyMoneyCalculator::setInitialValues(const QString& value, QKeyEvent* ev)
   bool negative = false;
   // setup operand
   operand = value;
-  operand.replace(QRegExp(QString("\\")+KGlobal::locale()->thousandsSeparator()), QString());
-  operand.replace(QRegExp(QString("\\")+m_comma), ".");
+  operand.replace(QRegExp(QString('\\')+KGlobal::locale()->thousandsSeparator()), QChar());
+  operand.replace(QRegExp(QString('\\')+m_comma), ".");
   if(operand.contains('(')) {
     negative = true;
-    operand.replace("(", QString());
-    operand.replace(")", QString());
+    operand.replace('(', QChar());
+    operand.replace(')', QChar());
   }
   if(operand.contains('-')) {
     negative = true;
-    operand.replace("-", QString());
+    operand.replace('-', QChar());
   }
   if(operand.isEmpty())
-    operand = "0";
+    operand = '0';
   else if(negative)
     operand = QString("-%1").arg(operand);
 

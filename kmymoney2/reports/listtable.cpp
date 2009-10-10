@@ -78,7 +78,7 @@ namespace reports {
       const QString& groupField ( void ) const { return m_groupField; }
       const QString& subtotalField ( void ) const { return m_subtotalField; }
       // ***DV*** HACK make the currentGroup test different but look the same
-      void force ( void ) { m_currentGroup += " "; }
+      void force ( void ) { m_currentGroup += ' '; }
     private:
       MyMoneyMoney m_currentSubtotal;
       MyMoneyMoney m_previousSubtotal;
@@ -184,10 +184,10 @@ namespace reports {
     // the things that we care about for query reports are:
     // how to group the rows, what columns to display, and what field
     // to subtotal on
-    QStringList groups = m_group.split(",");
-    QStringList columns = m_columns.split(",");
+    QStringList groups = m_group.split(',');
+    QStringList columns = m_columns.split(',');
     columns += m_subtotal;
-    QStringList postcolumns = m_postcolumns.split(",");
+    QStringList postcolumns = m_postcolumns.split(',');
     columns += postcolumns;
 
     //
@@ -246,17 +246,17 @@ namespace reports {
     i18nHeaders["currentbalance"] = i18n ( "Current Balance" );
 
     // the list of columns which represent money, so we can display them correctly
-    QStringList moneyColumns = QString("value,shares,price,latestprice,netinvvalue,buys,sells,cashincome,reinvestincome,startingbal,fees,interest,payment,balance,balancewarning,maxbalancelimit,creditwarning,maxcreditlimit,loanamount,periodicpayment,finalpayment,currentbalance" ).split(",");
+    QStringList moneyColumns = QString("value,shares,price,latestprice,netinvvalue,buys,sells,cashincome,reinvestincome,startingbal,fees,interest,payment,balance,balancewarning,maxbalancelimit,creditwarning,maxcreditlimit,loanamount,periodicpayment,finalpayment,currentbalance" ).split(',');
 
     // the list of columns which represent shares, which is like money except the
     // transaction currency will not be displayed
-    QStringList sharesColumns = QString( "shares" ).split(",");
+    QStringList sharesColumns = QString( "shares" ).split(',');
 
     // the list of columns which represent a percentage, so we can display them correctly
-    QStringList percentColumns = QString("return,returninvestment,interestrate" ).split(",");
+    QStringList percentColumns = QString("return,returninvestment,interestrate" ).split(',');
 
     // the list of columns which represent dates, so we can display them correctly
-    QStringList dateColumns = QString("postdate,entrydate,nextduedate,openingdate,nextinterestchange" ).split(",");
+    QStringList dateColumns = QString("postdate,entrydate,nextduedate,openingdate,nextinterestchange" ).split(',');
 
     result += "<table class=\"report\">\n<thead><tr class=\"itemheader\">";
 
@@ -267,13 +267,13 @@ namespace reports {
       if ( i18nName.isEmpty() )
         i18nName = *it_column;
       result += "<th>" + i18nName + "</th>";
-      csv += i18nName + ",";
+      csv += i18nName + ',';
       ++it_column;
     }
 
     result += "</tr></thead>\n";
     csv = csv.left ( csv.length() - 1 );
-    csv += "\n";
+    csv += '\n';
 
     //
     // Set up group iterators
@@ -360,7 +360,7 @@ namespace reports {
               "<td class=\"left" + QString::number ( ( ( *it_group ).depth() - 1 ) ) + "\" "
               "colspan=\"" +
               QString::number ( columns.count() - 1 - postcolumns.count() ) + "\">" +
-              i18nc ("Total balance", "Total" ) + " " + oldName + "</td>"
+              i18nc ("Total balance", "Total" ) + ' ' + oldName + "</td>"
               "<td>" + subtotal_html + "</td></tr>\n";
 
             csv +=
@@ -532,7 +532,7 @@ namespace reports {
 
       result += "</tr>\n";
       csv = csv.left ( csv.length() - 1 ); // remove final comma
-      csv += "\n";
+      csv += '\n';
     }
 
     //
@@ -562,7 +562,7 @@ namespace reports {
         result += "<tr class=\"sectionfooter\">"
                   "<td class=\"left" + QString::number ( ( *it_group ).depth() - 1 ) + "\" "
                   "colspan=\"" + QString::number ( columns.count() - 1 - postcolumns.count() ) + "\">" +
-                  i18nc ( "Total balance", "Total" ) + " " + ( *it_group ).oldName() + "</td>"
+                  i18nc ( "Total balance", "Total" ) + ' ' + ( *it_group ).oldName() + "</td>"
                   "<td>" + subtotal_html + "</td></tr>\n";
         csv += "\"" + i18nc ( "Total balance", "Total" ) + " " + ( *it_group ).oldName() + "\",\"" + subtotal_csv + "\"\n";
 

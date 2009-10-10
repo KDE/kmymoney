@@ -109,7 +109,7 @@ bool MyMoneyTransaction::accountReferenced(const QString& id) const
 void MyMoneyTransaction::addSplit(MyMoneySplit& split)
 {
   if(!split.id().isEmpty())
-    throw new MYMONEYEXCEPTION("Cannot add split with assigned id (" + split.id() + ")");
+    throw new MYMONEYEXCEPTION("Cannot add split with assigned id (" + split.id() + ')');
 
 /*
   QValueList<MyMoneySplit>::Iterator it;
@@ -255,14 +255,14 @@ const MyMoneySplit& MyMoneyTransaction::splitById(const QString& splitId) const
 const QString MyMoneyTransaction::nextSplitID()
 {
   QString id;
-  id = "S" + id.setNum(m_nextSplitID++).rightJustified(SPLIT_ID_SIZE, '0');
+  id = 'S' + id.setNum(m_nextSplitID++).rightJustified(SPLIT_ID_SIZE, '0');
   return id;
 }
 
 const QString MyMoneyTransaction::firstSplitID()
 {
   QString id;
-  id = "S" + id.setNum(1).rightJustified(SPLIT_ID_SIZE, '0');
+  id = 'S' + id.setNum(1).rightJustified(SPLIT_ID_SIZE, '0');
   return id;
 }
 
@@ -457,7 +457,7 @@ QString MyMoneyTransaction::accountSignature(bool includeSplitCount) const
   QString rc;
   for(it_a = accountList.constBegin(); it_a != accountList.constEnd(); ++it_a) {
     if(it_a != accountList.constBegin())
-      rc += "-";
+      rc += '-';
     rc += it_a.key();
     if(includeSplitCount)
       rc += QString("*%1").arg(*it_a);
@@ -472,6 +472,6 @@ QString MyMoneyTransaction::uniqueSortKey(void) const
   year = year.setNum(postdate.year()).rightJustified(YEAR_SIZE, '0');
   month = month.setNum(postdate.month()).rightJustified(MONTH_SIZE, '0');
   day = day.setNum(postdate.day()).rightJustified(DAY_SIZE, '0');
-  key = year + "-" + month + "-" + day + "-" + m_id;
+  key = year + '-' + month + '-' + day + '-' + m_id;
   return key;
 }

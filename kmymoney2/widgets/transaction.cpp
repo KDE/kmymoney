@@ -177,7 +177,7 @@ Transaction::Transaction(Register *parent, const MyMoneyTransaction& transaction
   m_erronous = !m_transaction.splitSum().isZero();
 
   if(!m_uniqueId.isEmpty()) {
-    m_uniqueId += "-";
+    m_uniqueId += '-';
     QString id;
     id.setNum(uniqueId);
     m_uniqueId += id.rightJustified(3, '0');
@@ -760,7 +760,7 @@ bool Transaction::matches(const QString& txt) const
 
   MyMoneyFile* file = MyMoneyFile::instance();
   QString s(txt);
-  s.replace(MyMoneyMoney::thousandSeparator(), QString());
+  s.replace(MyMoneyMoney::thousandSeparator(), QChar());
 
   const QList<MyMoneySplit>&list = m_transaction.splits();
   QList<MyMoneySplit>::const_iterator it_s;
@@ -1262,7 +1262,7 @@ void StdTransaction::arrangeWidgetsInForm(QMap<QString, QWidget*>& editWidgets)
 
 void StdTransaction::tabOrderInForm(QWidgetList& tabOrderWidgets) const
 {
-  QStringList taborder = KMyMoneyGlobalSettings::stdTransactionFormTabOrder().split(",", QString::SkipEmptyParts);
+  QStringList taborder = KMyMoneyGlobalSettings::stdTransactionFormTabOrder().split(',', QString::SkipEmptyParts);
   QStringList::const_iterator it_s = taborder.constBegin();
   QWidget* w;
   while(it_s != taborder.constEnd()) {
@@ -1323,7 +1323,7 @@ void StdTransaction::arrangeWidgetsInRegister(QMap<QString, QWidget*>& editWidge
 
 void StdTransaction::tabOrderInRegister(QWidgetList& tabOrderWidgets) const
 {
-  QStringList taborder = KMyMoneyGlobalSettings::stdTransactionRegisterTabOrder().split(",", QString::SkipEmptyParts);
+  QStringList taborder = KMyMoneyGlobalSettings::stdTransactionRegisterTabOrder().split(',', QString::SkipEmptyParts);
   QStringList::const_iterator it_s = taborder.constBegin();
   QWidget* w;
   while(it_s != taborder.constEnd()) {

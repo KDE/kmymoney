@@ -104,7 +104,7 @@ void ObjectInfoTable::init ( void )
       throw new MYMONEYEXCEPTION ( "ObjectInfoTable::ObjectInfoTable(): unhandled row type" );
   }
 
-  QString sort = m_group + "," + m_columns + ",id,rank";
+  QString sort = m_group + ',' + m_columns + ",id,rank";
 
   switch ( m_config.rowType() ) {
     case MyMoneyReport::eSchedule:
@@ -160,7 +160,7 @@ void ObjectInfoTable::constructScheduleTable ( void )
       }
 
       // help for sort and render functions
-      scheduleRow["rank"] = "0";
+      scheduleRow["rank"] = '0';
 
       //schedule data
       scheduleRow["id"] = schedule.id();
@@ -193,7 +193,7 @@ void ObjectInfoTable::constructScheduleTable ( void )
           TableRow splitRow;
           ReportAccount splitAcc = ( *split_it ).accountId();
 
-          splitRow["rank"] = "1";
+          splitRow["rank"] = '1';
           splitRow["id"] = schedule.id();
           splitRow["name"] = schedule.name();
           splitRow["type"] = KMyMoneyUtils::scheduleTypeToString ( schedule.type() );
@@ -247,7 +247,7 @@ void ObjectInfoTable::constructAccountTable ( void )
        && !account.isClosed())
     {
       MyMoneyMoney value;
-      accountRow["rank"] = "0";
+      accountRow["rank"] = '0';
       accountRow["topcategory"] = KMyMoneyUtils::accountTypeToString(account.accountGroup());
       accountRow["institution"] = (file->institution(account.institutionId())).name();
       accountRow["type"] = KMyMoneyUtils::accountTypeToString(account.accountType());
@@ -308,7 +308,7 @@ void ObjectInfoTable::constructAccountLoanTable ( void )
          xr = account.baseCurrencyPrice(QDate::currentDate()).reduce();
       }
 
-      accountRow["rank"] = "0";
+      accountRow["rank"] = '0';
       accountRow["topcategory"] = KMyMoneyUtils::accountTypeToString(account.accountGroup());
       accountRow["institution"] = (file->institution(account.institutionId())).name();
       accountRow["type"] = KMyMoneyUtils::accountTypeToString(account.accountType());
