@@ -64,7 +64,7 @@
 #include "mymoneyfile.h"
 #include "mymoneyforecast.h"
 #include "kmymoney2.h"
-//#include "kreportchartview.h"
+#include "kreportchartview.h"
 #include "pivottable.h"
 #include "pivotgrid.h"
 #include "reportaccount.h"
@@ -235,9 +235,6 @@ void KHomeView::loadView(void)
 
 void KHomeView::showNetWorthGraph(void)
 {
-#warning "port to kde4"
-#if 0
-#ifdef HAVE_KDCHART
   m_part->write(QString("<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">%1</div>\n<div class=\"gap\">&nbsp;</div>\n").arg(i18n("Networth Forecast")));
 
   MyMoneyReport reportCfg = MyMoneyReport(
@@ -261,19 +258,19 @@ void KHomeView::showNetWorthGraph(void)
   reportCfg.setDateFilter(QDate::currentDate(),QDate::currentDate().addDays(+90));
   reports::PivotTable table(reportCfg);
 
-  reports::KReportChartView* chartWidget = new reports::KReportChartView(0, 0);
+  reports::KReportChartView* chartWidget = new reports::KReportChartView(0);
 
   table.drawChart(*chartWidget);
 
-  chartWidget->params()->setLineMarker(false);
-  chartWidget->params()->setLegendPosition(KDChartParams::NoLegend);
-  chartWidget->params()->setLineWidth(2);
-  chartWidget->params()->setDataColor(0, KGlobalSettings::textColor());
+  //chartWidget->params()->setLineMarker(false);
+  //chartWidget->params()->setLegendPosition(KDChartParams::NoLegend);
+  //chartWidget->params()->setLineWidth(2);
+  //chartWidget->params()->setDataColor(0, KGlobalSettings::textColor());
 
     // draw future values in a different line style
-  KDChartPropertySet propSetFutureValue("future value", KMM_KDCHART_PROPSET_NORMAL_DATA);
-  propSetFutureValue.setLineStyle(KDChartPropertySet::OwnID, Qt::DotLine);
-  const int idPropFutureValue = chartWidget->params()->registerProperties(propSetFutureValue);
+  //KDChartPropertySet propSetFutureValue("future value", KMM_KDCHART_PROPSET_NORMAL_DATA);
+  //propSetFutureValue.setLineStyle(KDChartPropertySet::OwnID, Qt::DotLine);
+  //const int idPropFutureValue = chartWidget->params()->registerProperties(propSetFutureValue);
 
   //KDChartPropertySet propSetLastValue("last value", idPropFutureValue);
   //propSetLastValue.setExtraLinesAlign(KDChartPropertySet::OwnID, Qt::AlignLeft | Qt::AlignBottom);
@@ -283,9 +280,9 @@ void KHomeView::showNetWorthGraph(void)
   // propSetLastValue.setMarkerStyle(KDChartPropertySet::OwnID, KDChartParams::LineMarkerDiamond);
 
   //const int idPropLastValue = chartWidget->params()->registerProperties(propSetLastValue);
-  for(int iCell = 0; iCell < 90; ++iCell) {
-    chartWidget->setProperty(0, iCell, idPropFutureValue);
-  }
+  //for(int iCell = 0; iCell < 90; ++iCell) {
+    //chartWidget->setProperty(0, iCell, idPropFutureValue);
+  //}
   //chartWidget->setProperty(0, 10, idPropLastValue);
 
   // Adjust the size
@@ -295,25 +292,24 @@ void KHomeView::showNetWorthGraph(void)
     chartWidget->resize(width()-60, nh);
   }
 
-  QPixmap pm(chartWidget->width(), chartWidget->height());
-  pm.fill(KGlobalSettings::baseColor());
-  QPainter p(&pm);
-  chartWidget->paintTo(p);
-
-  QByteArray ba;
+  //QPixmap pm(chartWidget->width(), chartWidget->height());
+  //pm.fill(KGlobalSettings::baseColor());
+  //QPainter p(&pm);
+  //chartWidget->render(&pm);
+  //chartWidget->diagram()->coordinatePlane()->parent()->paint(&p, QRect(QPoint(0, 0), QPoint(chartWidget->width(), chartWidget->height())));
+  QPixmap pm = QPixmap::grabWidget(chartWidget->coordinatePlane()->parent(), QRect(QPoint(0, 0), QPoint(chartWidget->width(), chartWidget->height())));
+  QByteArray* ba;
   QBuffer buffer( ba );
   buffer.open( QIODevice::WriteOnly );
   pm.save( &buffer, "PNG" ); // writes pixmap into ba in PNG format
 
-  m_part->write("<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >");
-  m_part->write("<tr>");
-  m_part->write(QString("<td><center><IMG SRC=\"data:image/png;base64,%1\" ALT=\"Networth\"></center></td>").arg(KCodecs::base64Encode(ba)));
-  m_part->write("</tr>");
-  m_part->write("</table></div></div>");
+  m_html += QString("<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >");
+  m_html += QString("<tr>");
+  //m_html += QString("<td><center><IMG SRC=\"data:image/png;base64,%1\" ALT=\"Networth\"></center></td>").arg(ba->toBase64().data());
+  m_html += QString("</tr>");
+  m_html += QString("</table></div></div>");
 
   delete chartWidget;
-#endif
-#endif
 }
 
 void KHomeView::showPayments(void)
@@ -612,7 +608,7 @@ void KHomeView::showPaymentEntry(const MyMoneySchedule& sched, int cnt)
 
         const MyMoneySecurity& currency = MyMoneyFile::instance()->currency(acc.currencyId());
         QString amount = (sp.value()*cnt).formatMoney(acc, currency);
-        amount.replace(" ","&nbsp;");
+        amount.replace(QChar(' '),"&nbsp;");
         tmp += showColoredAmount(amount, (sp.value()*cnt).isNegative()) ;
         tmp += "</td>";
         //show balance after payments
@@ -621,7 +617,7 @@ void KHomeView::showPaymentEntry(const MyMoneySchedule& sched, int cnt)
         QDate paymentDate = QDate(sched.nextDueDate());
         MyMoneyMoney balanceAfter = forecastPaymentBalance(acc, payment, paymentDate);
         QString balance = balanceAfter.formatMoney(acc, currency);
-        balance.replace(" ","&nbsp;");
+        balance.replace(QChar(' '),"&nbsp;");
         tmp += showColoredAmount(balance, balanceAfter.isNegative());
         tmp += "</td>";
 
@@ -799,10 +795,10 @@ void KHomeView::showAccountEntry(const MyMoneyAccount& acc, const MyMoneyMoney& 
 
   //format amounts
   amount = value.formatMoney(acc, currency);
-  amount.replace(" ","&nbsp;");
+  amount.replace(QChar(' '),"&nbsp;");
   if(showMinBal) {
     amountToMinBal = valueToMinBal.formatMoney(acc, currency);
-    amountToMinBal.replace(" ","&nbsp;");
+    amountToMinBal.replace(QChar(' '),"&nbsp;");
   }
 
   tmp = QString("<td>") +
@@ -976,7 +972,7 @@ void KHomeView::showForecast(void)
         forecastBalance = m_forecast.forecastBalance(*it_account, QDate::currentDate().addDays(f));
         QString amount;
         amount = forecastBalance.formatMoney( *it_account, currency);
-        amount.replace(" ","&nbsp;");
+        amount.replace(QChar(' '),"&nbsp;");
         m_html += QString("<td width=\"%1%\" align=\"right\">").arg(colWidth);
         m_html += QString("%1</td>").arg(showColoredAmount(amount, forecastBalance.isNegative()));
       }
@@ -1060,7 +1056,7 @@ const QString KHomeView::link(const QString& view, const QString& query, const Q
   QString titlePart;
   QString title(_title);
   if(!title.isEmpty())
-    titlePart = QString(" title=\"%1\"").arg(title.replace(" ", "&nbsp;"));
+    titlePart = QString(" title=\"%1\"").arg(title.replace(QChar(' '), "&nbsp;"));
 
   return QString("<a href=\"/%1%2\"%3>").arg(view, query, titlePart);
 }
@@ -1305,9 +1301,9 @@ void KHomeView::showAssetsLiabilities(void)
     QString amountAssets = netAssets.formatMoney(file->baseCurrency().tradingSymbol(), prec);
     QString amountLiabilities = netLiabilities.formatMoney(file->baseCurrency().tradingSymbol(), prec);
     QString amountNetWorth = netWorth.formatMoney(file->baseCurrency().tradingSymbol(), prec);
-    amountAssets.replace(" ","&nbsp;");
-    amountLiabilities.replace(" ","&nbsp;");
-    amountNetWorth.replace(" ","&nbsp;");
+    amountAssets.replace(QChar(' '),"&nbsp;");
+    amountLiabilities.replace(QChar(' '),"&nbsp;");
+    amountNetWorth.replace(QChar(' '),"&nbsp;");
 
     m_html += QString("<tr class=\"row-%1\" style=\"font-weight:bold;\">").arg(i++ & 0x01 ? "even" : "odd");
 
@@ -1582,8 +1578,8 @@ void KHomeView::showCashFlowSummary()
   //format income and expenses
   QString amountIncome = incomeValue.formatMoney(file->baseCurrency().tradingSymbol(), prec);
   QString amountExpense = expenseValue.formatMoney(file->baseCurrency().tradingSymbol(), prec);
-  amountIncome.replace(" ","&nbsp;");
-  amountExpense.replace(" ","&nbsp;");
+  amountIncome.replace(QChar(' '),"&nbsp;");
+  amountExpense.replace(QChar(' '),"&nbsp;");
 
   //calculate schedules
 
@@ -1696,10 +1692,10 @@ void KHomeView::showCashFlowSummary()
   QString amountScheduledLiquidTransfer = scheduledLiquidTransfer.formatMoney(file->baseCurrency().tradingSymbol(), prec);
   QString amountScheduledOtherTransfer = scheduledOtherTransfer.formatMoney(file->baseCurrency().tradingSymbol(), prec);
 
-  amountScheduledIncome.replace(" ","&nbsp;");
-  amountScheduledExpense.replace(" ","&nbsp;");
-  amountScheduledLiquidTransfer.replace(" ","&nbsp;");
-  amountScheduledOtherTransfer.replace(" ","&nbsp;");
+  amountScheduledIncome.replace(QChar(' '),"&nbsp;");
+  amountScheduledExpense.replace(QChar(' '),"&nbsp;");
+  amountScheduledLiquidTransfer.replace(QChar(' '),"&nbsp;");
+  amountScheduledOtherTransfer.replace(QChar(' '),"&nbsp;");
 
   //get liquid assets and liabilities
   QList<MyMoneyAccount> accounts;
@@ -1760,9 +1756,9 @@ void KHomeView::showCashFlowSummary()
   QString amountLiquidAssets = liquidAssets.formatMoney(file->baseCurrency().tradingSymbol(), prec);
   QString amountLiquidLiabilities = liquidLiabilities.formatMoney(file->baseCurrency().tradingSymbol(), prec);
   QString amountLiquidWorth = liquidWorth.formatMoney(file->baseCurrency().tradingSymbol(), prec);
-  amountLiquidAssets.replace(" ","&nbsp;");
-  amountLiquidLiabilities.replace(" ","&nbsp;");
-  amountLiquidWorth.replace(" ","&nbsp;");
+  amountLiquidAssets.replace(QChar(' '),"&nbsp;");
+  amountLiquidLiabilities.replace(QChar(' '),"&nbsp;");
+  amountLiquidWorth.replace(QChar(' '),"&nbsp;");
 
   //show the summary
   m_html += "<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">" + i18n("Cash Flow Summary") + "</div>\n<div class=\"gap\">&nbsp;</div>\n";
@@ -1860,9 +1856,9 @@ void KHomeView::showCashFlowSummary()
   QString amountExpectedAsset = expectedAsset.formatMoney(file->baseCurrency().tradingSymbol(), prec);
   QString amountExpectedLiabilities = expectedLiabilities.formatMoney(file->baseCurrency().tradingSymbol(), prec);
   QString amountProfit = profitValue.formatMoney(file->baseCurrency().tradingSymbol(), prec);
-  amountProfit.replace(" ","&nbsp;");
-  amountExpectedAsset.replace(" ","&nbsp;");
-  amountExpectedLiabilities.replace(" ","&nbsp;");
+  amountProfit.replace(QChar(' '),"&nbsp;");
+  amountExpectedAsset.replace(QChar(' '),"&nbsp;");
+  amountExpectedLiabilities.replace(QChar(' '),"&nbsp;");
 
 
 

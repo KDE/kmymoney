@@ -52,6 +52,8 @@
 #include <KDChartGridAttributes>
 #include <KDChartDataValueAttributes>
 #include <KDChartLegend>
+#include <KDChartLineDiagram>
+#include <KDChartCartesianAxis>
 #include "pivottable.h"
 #include "pivotgrid.h"
 #include "reportdebug.h"
@@ -550,7 +552,7 @@ void PivotTable::calculateColumnHeadings(void)
       int column = 1;
       while ( column++ < m_numColumns )
       {
-        QString heading = KGlobal::locale()->calendar()->monthName(columnDate.month(), columnDate.year(), KCalendarSystem::ShortName) + " " + QString::number(columnDate.day());
+        QString heading = KGlobal::locale()->calendar()->monthName(columnDate.month(), columnDate.year(), KCalendarSystem::ShortName) + ' ' + QString::number(columnDate.day());
         columnDate = columnDate.addDays(1);
         m_columnHeadings.append( heading);
       }
@@ -600,9 +602,9 @@ void PivotTable::calculateColumnHeadings(void)
       {
         QString heading = KGlobal::locale()->calendar()->monthName(1+segment*columnpitch, 2000, KCalendarSystem::ShortName);
         if ( columnpitch != 1 )
-          heading += "-" + KGlobal::locale()->calendar()->monthName((1+segment)*columnpitch, 2000, KCalendarSystem::ShortName);
+          heading += '-' + KGlobal::locale()->calendar()->monthName((1+segment)*columnpitch, 2000, KCalendarSystem::ShortName);
         if ( includeyear )
-          heading += " " + QString::number(year);
+          heading += ' ' + QString::number(year);
         m_columnHeadings.append( heading);
         if ( ++segment >= 12/columnpitch )
         {
@@ -1357,7 +1359,7 @@ QString PivotTable::renderCSV( void ) const
   if ( m_config_f.isShowingRowTotals() )
     result += QString(",%1").arg(i18nc("Total balance", "Total"));
 
-  result += "\n";
+  result += '\n';
 
   int fraction = MyMoneyFile::instance()->baseCurrency().smallestAccountFraction();
 
@@ -1373,7 +1375,7 @@ QString PivotTable::renderCSV( void ) const
     // Outer Group Header
     //
 
-    result += it_outergroup.key() + "\n";
+    result += it_outergroup.key() + '\n';
 
     //
     // Inner Groups
@@ -1432,12 +1434,12 @@ QString PivotTable::renderCSV( void ) const
           if (!m_config_f.isConvertCurrency() && rowname.isForeignCurrency() )
             innergroupdata += QString(" (%1)").arg(rowname.currencyId());
 
-          innergroupdata += "\"";
+          innergroupdata += '\"';
 
           if ( isUsed )
             innergroupdata += rowdata;
 
-          innergroupdata += "\n";
+          innergroupdata += '\n';
         }
         ++it_row;
       }
@@ -1500,7 +1502,7 @@ QString PivotTable::renderCSV( void ) const
             finalRow += QString(",\"%1\"").arg((*it_innergroup).m_total[ m_rowTypeList[i] ].m_total.formatMoney(fraction, false));
         }
 
-        finalRow += "\n";
+        finalRow += '\n';
       }
 
       if(isUsed)
@@ -1531,7 +1533,7 @@ QString PivotTable::renderCSV( void ) const
           result += QString(",\"%1\"").arg((*it_outergroup).m_total[ m_rowTypeList[i] ].m_total.formatMoney(fraction, false));
       }
 
-      result += "\n";
+      result += '\n';
     }
     ++it_outergroup;
   }
@@ -1556,7 +1558,7 @@ QString PivotTable::renderCSV( void ) const
         result += QString(",\"%1\"").arg(m_grid.m_total[ m_rowTypeList[i] ].m_total.formatMoney(fraction, false));
     }
 
-    result += "\n";
+    result += '\n';
   }
 
   return result;
@@ -2007,17 +2009,28 @@ void PivotTable::drawChart( KReportChartView& chartView ) const
   case MyMoneyReport::eChartNone:
   case MyMoneyReport::eChartEnd:
   case MyMoneyReport::eChartLine:
-    chartView.setType( KReportChartView::Line, KReportChartView::Normal );
+    {
+      chartView.setType( KReportChartView::Line, KReportChartView::Normal );
+      if(chartView.lineDiagram()->axes().count() == 0) {
+        CartesianAxis *xAxis = new CartesianAxis( chartView.lineDiagram() );
+        CartesianAxis *yAxis = new CartesianAxis (chartView.lineDiagram() );
+        xAxis->setPosition ( CartesianAxis::Bottom );
+        yAxis->setPosition ( CartesianAxis::Left );
+        xAxis->setTitleText(i18n("Time"));
+        yAxis->setTitleText(i18n("Balance"));
+        chartView.lineDiagram()->addAxis( xAxis );
+        chartView.lineDiagram()->addAxis( yAxis );
+      }
+      break;
+    }
 
-    //chartView.params()->setAxisDatasets( 0,0 );
-    break;
   case MyMoneyReport::eChartBar:
-    chartView.setType( KReportChartView::Bar );
-//     chartView.params()->setBarChartSubType( KDChartParams::BarNormal );
+    chartView.setType( KReportChartView::Bar, KReportChartView::Normal );
     break;
+
   case MyMoneyReport::eChartStackedBar:
     chartView.setType( KReportChartView::Bar, KReportChartView::Stacked );
-//     chartView.params()->setBarChartSubType( KDChartParams::BarStacked );
+
     break;
   case MyMoneyReport::eChartPie:
     chartView.setType( KReportChartView::Pie );
@@ -2123,7 +2136,7 @@ void PivotTable::drawChart( KReportChartView& chartView ) const
         }
         ++it_outergroup;
       }
-      chartView.addLegend(legend);
+      chartView.replaceLegend(legend);
     }
     break;
 
@@ -2158,7 +2171,7 @@ void PivotTable::drawChart( KReportChartView& chartView ) const
         }
         ++it_outergroup;
       }
-      chartView.addLegend(legend);
+      chartView.replaceLegend(legend);
     }
     break;
 
@@ -2205,7 +2218,7 @@ void PivotTable::drawChart( KReportChartView& chartView ) const
           }
         }
       }
-      chartView.addLegend(legend);
+      chartView.replaceLegend(legend);
     }
     break;
 
@@ -2227,7 +2240,7 @@ void PivotTable::drawChart( KReportChartView& chartView ) const
           }
         }
       }
-      chartView.addLegend(legend);
+      chartView.replaceLegend(legend);
     }
     break;
   }
