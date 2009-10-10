@@ -14,6 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kgncimportoptionsdlg.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 #include <QCheckBox>
@@ -32,7 +34,6 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include "kgncimportoptionsdlg.h"
 
 // dialog constructor
 KGncImportOptionsDlg::KGncImportOptionsDlg(QWidget *parent)
@@ -88,20 +89,30 @@ void KGncImportOptionsDlg::buildCodecList () {
   // retrieve all codec pointers
   QTextCodec *codec;
   unsigned int i;
-  for (i = 0; (codec = QTextCodec::codecForIndex(i)); i++) {
+  int len = qstrlen(m_localeCodec->name());
+  for (i = 0; (codec = QTextCodec::codecForName(QTextCodec::availableCodecs().value(i))); i++) {
     int rank;
-#warning "port to kde4"
-#if 0
     if (codec == m_localeCodec) rank = 999; // ensure locale rank comes first
-    else rank = codec->heuristicNameMatch(m_localeCodec->name());
-#endif
+    else rank = qstrlen(codec->name()) - abs(len - qstrlen(codec->name()));
+
+    // We are really just guessing at the order here, but...
+    // This used to be else rank = codec->heuristicNameMatch(m_localeCodec->name())
+    // in Qt3 heuristicNameMatch returned...
+    // if (qstricmp(codec->name(), m_localeCode->name()) == 0)
+    //   qstrlen(m_localeCodec->name());
+    // else if letters and numbers match (only letters and numbers, adding a space at character class transition)
+    //   qstrlen(m_localeCodec->name())-1;
+    // else if letters and numbers strings match after stripping whitespace
+    //   qstrlen(m_localeCodec->name())-2;
+    // else 0
+
     codecData *p = new codecData(rank, codec);
     m_codecList.append (p);
   }
   m_codecList.sort();
   for (i = 0; i < m_codecList.count(); ++i) {
     QString name (m_codecList.at(i)->second->name());
-    comboDecode->insertItem (name);
+    comboDecode->addItem (name);
   }
 }
 
@@ -130,7 +141,7 @@ QTextCodec* KGncImportOptionsDlg::decodeOption(void) {
   if (!checkDecode->isChecked()) {
     return (0);
   } else {
-    return (m_codecList.at(comboDecode->currentItem())->second);
+    return (m_codecList.at(comboDecode->currentIndex())->second);
   }
 }
 
