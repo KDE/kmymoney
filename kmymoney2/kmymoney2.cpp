@@ -1665,7 +1665,7 @@ bool KMyMoney2App::slotFileSaveAs(void)
             }
             if(!d->m_additionalGpgKeys.isEmpty()) {
               if(!encryptionKeys.isEmpty())
-                encryptionKeys += ",";
+                encryptionKeys += ',';
               encryptionKeys += d->m_additionalGpgKeys.join(",");
             }
           }
@@ -2475,7 +2475,7 @@ void KMyMoney2App::slotProcessExited(void)
           QDate::currentDate().year(),
           QDate::currentDate().month(),
           QDate::currentDate().day());
-        QString backupfile = d->m_mountpoint + "/" + d->m_fileName.fileName();
+        QString backupfile = d->m_mountpoint + '/' + d->m_fileName.fileName();
         KMyMoneyUtils::appendCorrectFileExt(backupfile, today);
 
         // check if file already exists and ask what to do
@@ -4463,7 +4463,7 @@ void KMyMoney2App::slotPayeeDelete(void)
         } // for - Schedules
       } catch(MyMoneyException *e) {
         KMessageBox::detailedSorry(0, i18n("Unable to reassign payee of transaction/split"),
-          (e->what() + " " + i18n("thrown in") + " " + e->file()+ ":%1").arg(e->line()));
+          (e->what() + ' ' + i18n("thrown in") + ' ' + e->file()+ ":%1").arg(e->line()));
         delete e;
       }
     } // if !translist.isEmpty()
@@ -4520,7 +4520,7 @@ void KMyMoney2App::slotPayeeDelete(void)
 
   } catch(MyMoneyException *e) {
     KMessageBox::detailedSorry(0, i18n("Unable to remove payee(s)"),
-      (e->what() + " " + i18n("thrown in") + " " + e->file()+ ":%1").arg(e->line()));
+      (e->what() + ' ' + i18n("thrown in") + ' ' + e->file()+ ":%1").arg(e->line()));
     delete e;
   }
 }
