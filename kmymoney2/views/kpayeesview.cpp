@@ -323,6 +323,10 @@ KPayeesView::KPayeesView(QWidget *parent) :
   m_updatesQueued(0),
   m_inSelection(false)
 {
+
+  m_matchType->setId(radioNoMatch, 0);
+  m_matchType->setId(radioNameMatch, 1);
+
   // create the searchline widget
   // and insert it into the existing layout
   m_searchWidget = new K3ListViewSearchLineWidget(m_payeesList, this);
@@ -624,7 +628,7 @@ void KPayeesView::slotSelectPayee(void)
     bool ignorecase = false;
     MyMoneyPayee::payeeMatchType type = m_payee.matchData(ignorecase, keys);
 
-    m_matchType->setSelected(static_cast<int>(type));
+    m_matchType->button(static_cast<int>(type))->setChecked(true);
     matchKeyEditList->clear();
     matchKeyEditList->insertStringList(keys);
     checkMatchIgnoreCase->setChecked(ignorecase);
@@ -774,7 +778,7 @@ void KPayeesView::slotKeyListChanged(void)
   // J.Rodehueser: delete unused variable 'type'
   // orig:  MyMoneyPayee::payeeMatchType type = m_payee.matchData(ignorecase, keys);
   m_payee.matchData(ignorecase, keys);
-  if(m_matchType->selected() == MyMoneyPayee::matchKey) {
+  if(m_matchType->checkedId() == MyMoneyPayee::matchKey) {
     rc |= (keys != matchKeyEditList->items());
   }
   m_updateButton->setEnabled(rc);
@@ -802,19 +806,19 @@ void KPayeesView::slotPayeeDataChanged(void)
     QStringList keys;
 
     MyMoneyPayee::payeeMatchType type = m_payee.matchData(ignorecase, keys);
-    rc |= (static_cast<int>(type) != m_matchType->selected());
+    rc |= (static_cast<int>(type) != m_matchType->checkedId());
 
     checkMatchIgnoreCase->setEnabled(false);
     matchKeyEditList->setEnabled(false);
 
-    if(m_matchType->selected() != MyMoneyPayee::matchDisabled) {
+    if(m_matchType->checkedId() != MyMoneyPayee::matchDisabled) {
       checkMatchIgnoreCase->setEnabled(true);
       // if we turn matching on, we default to 'ignore case'
       // TODO maybe make the default a user option
-      if(type == MyMoneyPayee::matchDisabled && m_matchType->selected() != MyMoneyPayee::matchDisabled)
+      if(type == MyMoneyPayee::matchDisabled && m_matchType->checkedId() != MyMoneyPayee::matchDisabled)
         checkMatchIgnoreCase->setChecked(true);
       rc |= (ignorecase != checkMatchIgnoreCase->isChecked());
-      if(m_matchType->selected() == MyMoneyPayee::matchKey) {
+      if(m_matchType->checkedId() == MyMoneyPayee::matchKey) {
         matchKeyEditList->setEnabled(true);
         rc |= (keys != matchKeyEditList->items());
       }
@@ -854,7 +858,7 @@ void KPayeesView::slotUpdatePayee(void)
       m_payee.setTelephone(telephoneEdit->text());
       m_payee.setEmail(emailEdit->text());
       m_payee.setNotes(notesEdit->text());
-      m_payee.setMatchData(static_cast<MyMoneyPayee::payeeMatchType>(m_matchType->selected()), checkMatchIgnoreCase->isChecked(), matchKeyEditList->items());
+      m_payee.setMatchData(static_cast<MyMoneyPayee::payeeMatchType>(m_matchType->checkedId()), checkMatchIgnoreCase->isChecked(), matchKeyEditList->items());
       m_payee.setDefaultAccountId();
 
       if (checkEnableDefaultAccount->isChecked()) {

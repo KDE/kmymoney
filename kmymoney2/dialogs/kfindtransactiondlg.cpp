@@ -18,6 +18,7 @@
 // QT Includes
 
 #include <QLabel>
+#include <QButtonGroup>
 #include <QRadioButton>
 #include <QCheckBox>
 #include <QTimer>
@@ -105,6 +106,9 @@ KFindTransactionDlg::KFindTransactionDlg(QWidget *parent) :
   KFindTransactionDlgDecl(parent),
   m_needReload(false)
 {
+  ButtonGroup1->setId(m_amountButton, 0);
+  ButtonGroup1->setId(m_amountRangeButton, 1);
+
   m_register->installEventFilter(this);
   m_tabWidget->setTabEnabled(m_tabWidget->indexOf(m_resultPage), false);
 

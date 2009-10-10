@@ -28,6 +28,12 @@
 KSettingsForecast::KSettingsForecast(QWidget* parent) :
   KSettingsForecastDecl(parent)
 {
+  kcfg_forecastMethod->setId(radioButton9, 0); // scheduled and future transactions
+  kcfg_forecastMethod->setId(radioButton10, 1); // history based
+
+  kcfg_historyMethod->setId(radioButton11, 0); // simple moving average
+  kcfg_historyMethod->setId(radioButton12, 1); // weighted moving average
+  kcfg_historyMethod->setId(radioButton13, 2); // linear regression
 }
 
 KSettingsForecast::~KSettingsForecast()

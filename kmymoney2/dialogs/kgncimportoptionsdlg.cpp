@@ -38,13 +38,26 @@
 KGncImportOptionsDlg::KGncImportOptionsDlg(QWidget *parent)
  : KGncImportOptionsDlgDecl(parent)
 {
-  buttonInvestGroup->setSelected (0);
+  buttonInvestGroup->setId(radioInvest1, 0); // one invest acct per stock
+  buttonInvestGroup->setId(radioInvest2, 1); // one invest acct for all stocks
+  buttonInvestGroup->setId(radioInvest3, 2); // prompt for each stock
+
+  buttonGroup5->setExclusive(false);
   checkFinanceQuote->setChecked(true);
+
+  buttonGroup2->setExclusive(false);
   checkSchedules->setChecked (false);
+
   buildCodecList (); // build list of codecs and insert into combo box
+
+  buttonGroup4->setExclusive(false);
   checkDecode->setChecked (false);
   comboDecode->setEnabled (false);
+
+  buttonGroup18->setExclusive(false);
   checkTxNotes->setChecked (false);
+
+  buttonGroup3->setExclusive(false);
   checkDebugGeneral->setChecked (false);
   checkDebugXML->setChecked (false);
   checkAnonymize->setChecked (false);

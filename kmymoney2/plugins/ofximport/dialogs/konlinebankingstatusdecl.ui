@@ -191,7 +191,7 @@
               </layout>
             </item>
             <item>
-              <widget class="KButtonGroup" name="buttonGroup2">
+              <widget class="QGroupBox" name="buttonGroupBox2">
                 <property name="title">
                   <string>Start date of import</string>
                 </property>
@@ -208,6 +208,9 @@
                               <property name="checked">
                                 <bool>true</bool>
                               </property>
+                              <attribute name="buttonGroup">
+                                <string>buttonGroup2</string>
+                              </attribute>
                             </widget>
                           </item>
                           <item>
@@ -236,6 +239,9 @@
                               <property name="text">
                                 <string>Last &amp;update</string>
                               </property>
+                              <attribute name="buttonGroup">
+                                <string>buttonGroup2</string>
+                              </attribute>
                             </widget>
                           </item>
                           <item>
@@ -257,6 +263,9 @@
                               <property name="text">
                                 <string>Pi&amp;ck date</string>
                               </property>
+                              <attribute name="buttonGroup">
+                                <string>buttonGroup2</string>
+                              </attribute>
                             </widget>
                           </item>
                           <item>
@@ -300,7 +309,7 @@
               </widget>
             </item>
             <item>
-              <widget class="KButtonGroup" name="buttonGroup1">
+              <widget class="QGroupBox" name="buttonGroupBox1">
                 <property name="title">
                   <string>Name is derived from</string>
                 </property>
@@ -327,6 +336,9 @@
                                 <property name="checked">
                                   <bool>true</bool>
                                 </property>
+                                <attribute name="buttonGroup">
+                                  <string>buttonGroup1</string>
+                                </attribute>
                               </widget>
                             </item>
                             <item>
@@ -334,6 +346,9 @@
                                 <property name="text">
                                   <string>&amp;NAME</string>
                                 </property>
+                                <attribute name="buttonGroup">
+                                  <string>buttonGroup1</string>
+                                </attribute>
                               </widget>
                             </item>
                           </layout>
@@ -410,12 +425,6 @@
       <header>kled.h</header>
     </customwidget>
     <customwidget>
-      <class>KButtonGroup</class>
-      <extends>QGroupBox</extends>
-      <header>kbuttongroup.h</header>
-      <container>1</container>
-    </customwidget>
-    <customwidget>
       <class>KComboBox</class>
       <extends>QComboBox</extends>
       <header location="global">kcombobox.h</header>
@@ -435,4 +444,8 @@
       <slot>setEnabled(bool)</slot>
     </connection>
   </connections>
+  <buttongroups>
+    <buttongroup name="buttonGroup1"/>
+    <buttongroup name="buttonGroup2"/>
+  </buttongroups>
 </ui>

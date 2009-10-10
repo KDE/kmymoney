@@ -27,7 +27,7 @@
 // QT Includes
 
 #include <QVariant>
-#include <q3buttongroup.h>
+#include <QButtonGroup>
 #include <QCheckBox>
 #include <q3frame.h>
 #include <QLabel>

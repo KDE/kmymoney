@@ -18,6 +18,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QButtonGroup>
 #include <QRadioButton>
 
 // ----------------------------------------------------------------------------
@@ -39,6 +40,10 @@
 KConfirmManualEnterDlg::KConfirmManualEnterDlg(const MyMoneySchedule& schedule, QWidget* parent) :
   KConfirmManualEnterDlgDecl(parent)
 {
+  buttonGroup1->setId(m_discardRadio, 0);
+  buttonGroup1->setId(m_onceRadio, 1);
+  buttonGroup1->setId(m_setRadio, 2);
+
   buttonOk->setGuiItem(KStandardGuiItem::ok());
   buttonCancel->setGuiItem(KStandardGuiItem::cancel());
   m_onceRadio->setChecked(true);

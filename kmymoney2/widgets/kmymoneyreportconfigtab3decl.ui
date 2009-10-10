@@ -128,7 +128,7 @@
       <item>
         <layout class="QHBoxLayout">
           <item>
-            <widget class="KButtonGroup" name="buttonGroup1">
+            <widget class="QGroupBox" name="buttonGroupBox1">
               <property name="enabled">
                 <bool>true</bool>
               </property>
@@ -164,6 +164,9 @@
                     <property name="toolTip" stdset="0">
                       <string>&lt;p&gt;Select this option to show the Memo column&lt;/p&gt;</string>
                     </property>
+                    <attribute name="buttonGroup">
+                      <string>buttonGroup1</string>
+                    </attribute>
                   </widget>
                 </item>
                 <item row="0" column="3">
@@ -174,6 +177,9 @@
                     <property name="toolTip" stdset="0">
                       <string>&lt;p&gt;Select this option to show the Shares column for investments&lt;/p&gt;</string>
                     </property>
+                    <attribute name="buttonGroup">
+                      <string>buttonGroup1</string>
+                    </attribute>
                   </widget>
                 </item>
                 <item row="1" column="3">
@@ -184,6 +190,9 @@
                     <property name="toolTip" stdset="0">
                       <string>&lt;p&gt;Select this option to show the Price column for investments&lt;/p&gt;</string>
                     </property>
+                    <attribute name="buttonGroup">
+                      <string>buttonGroup1</string>
+                    </attribute>
                   </widget>
                 </item>
                 <item row="1" column="2">
@@ -194,6 +203,9 @@
                     <property name="toolTip" stdset="0">
                       <string>&lt;p&gt;Select this option to show the Reconciled column&lt;/p&gt;</string>
                     </property>
+                    <attribute name="buttonGroup">
+                      <string>buttonGroup1</string>
+                    </attribute>
                   </widget>
                 </item>
                 <item row="0" column="2">
@@ -204,6 +216,9 @@
                     <property name="toolTip" stdset="0">
                       <string>&lt;p&gt;Select this option to show the Account column&lt;/p&gt;</string>
                     </property>
+                    <attribute name="buttonGroup">
+                      <string>buttonGroup1</string>
+                    </attribute>
                   </widget>
                 </item>
                 <item row="0" column="0">
@@ -220,6 +235,9 @@
                     <property name="toolTip" stdset="0">
                       <string>&lt;p&gt;Select this option to show the Number column&lt;/p&gt;</string>
                     </property>
+                    <attribute name="buttonGroup">
+                      <string>buttonGroup1</string>
+                    </attribute>
                   </widget>
                 </item>
                 <item row="1" column="0">
@@ -236,6 +254,9 @@
                     <property name="toolTip" stdset="0">
                       <string>&lt;p&gt;Select this option to show the Payee column&lt;/p&gt;</string>
                     </property>
+                    <attribute name="buttonGroup">
+                      <string>buttonGroup1</string>
+                    </attribute>
                   </widget>
                 </item>
                 <item row="0" column="1">
@@ -252,6 +273,9 @@
                     <property name="toolTip" stdset="0">
                       <string>&lt;p&gt;Select this option to show the Category column&lt;/p&gt;</string>
                     </property>
+                    <attribute name="buttonGroup">
+                      <string>buttonGroup1</string>
+                    </attribute>
                   </widget>
                 </item>
                 <item row="0" column="4">
@@ -262,6 +286,9 @@
                     <property name="toolTip" stdset="0">
                       <string>&lt;p&gt;Select this option to show the Action column&lt;/p&gt;</string>
                     </property>
+                    <attribute name="buttonGroup">
+                      <string>buttonGroup1</string>
+                    </attribute>
                   </widget>
                 </item>
                 <item row="1" column="4">
@@ -272,6 +299,9 @@
                     <property name="toolTip" stdset="0">
                       <string>&lt;p&gt;Select this option to show the Running balance column&lt;/p&gt;</string>
                     </property>
+                    <attribute name="buttonGroup">
+                      <string>buttonGroup1</string>
+                    </attribute>
                   </widget>
                 </item>
               </layout>
@@ -400,4 +430,7 @@
       <header location="global">kcombobox.h</header>
     </customwidget>
   </customwidgets>
+  <buttongroups>
+    <buttongroup name="buttonGroup1"/>
+  </buttongroups>
 </ui>

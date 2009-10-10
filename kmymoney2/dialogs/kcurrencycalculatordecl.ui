@@ -194,7 +194,7 @@
             <widget class="kMyMoneyEdit" name="m_conversionRate" native="true"/>
           </item>
           <item row="0" column="0" rowspan="3">
-            <widget class="KButtonGroup" name="buttonGroup1">
+            <widget class="QGroupBox" name="buttonGroupBox1">
               <property name="title">
                 <string/>
               </property>
@@ -222,6 +222,9 @@
                           <property name="text">
                             <string>To amount</string>
                           </property>
+                          <attribute name="buttonGroup">
+                            <string>buttonGroup1</string>
+                          </attribute>
                         </widget>
                       </item>
                       <item>
@@ -229,6 +232,9 @@
                           <property name="text">
                             <string>Exchange rate / Price</string>
                           </property>
+                          <attribute name="buttonGroup">
+                            <string>buttonGroup1</string>
+                          </attribute>
                         </widget>
                       </item>
                     </layout>
@@ -367,4 +373,7 @@ xx</string>
     <tabstop>m_okButton</tabstop>
     <tabstop>m_cancelButton</tabstop>
   </tabstops>
+  <buttongroups>
+    <buttongroup name="buttonGroup1"/>
+  </buttongroups>
 </ui>

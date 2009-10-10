@@ -81,6 +81,9 @@ KBudgetValues::KBudgetValues(QWidget* parent) :
 
   // fill with standard labels
   m_monthlyButton->setChecked(true);
+  m_periodGroup->setId(m_monthlyButton, 0);
+  m_periodGroup->setId(m_yearlyButton, 1);
+  m_periodGroup->setId(m_individualButton, 2);
   slotChangePeriod(m_periodGroup->id(m_monthlyButton));
 
   // connect(m_budgetLevel, SIGNAL(currentChanged(QWidget*)), this, SIGNAL(valuesChanged()));

@@ -161,17 +161,20 @@ void KForecastView::loadForecastSettings(void)
   m_accountsCycle->setValue(KMyMoneyGlobalSettings::forecastAccountCycle());
   m_beginDay->setValue(KMyMoneyGlobalSettings::beginForecastDay());
   m_forecastCycles->setValue(KMyMoneyGlobalSettings::forecastCycles());
-  m_historyMethod->setSelected(KMyMoneyGlobalSettings::historyMethod());
+  m_historyMethod->setId(radioButton11, 0); // simple moving avg
+  m_historyMethod->setId(radioButton12, 1); // weighted moving avg
+  m_historyMethod->setId(radioButton13, 2); // linear regression
+  m_historyMethod->button(KMyMoneyGlobalSettings::historyMethod())->setChecked(true);
   switch(KMyMoneyGlobalSettings::forecastMethod()) {
     case 0:
       m_forecastMethod->setText(i18nc("Scheduled method", "Scheduled"));
       m_forecastCycles->setDisabled(true);
-      m_historyMethod->setDisabled(true);
+      m_historyMethodGroupBox->setDisabled(true);
       break;
     case 1:
       m_forecastMethod->setText(i18nc("History-based method", "History"));
       m_forecastCycles->setEnabled(true);
-      m_historyMethod->setEnabled(true);
+      m_historyMethodGroupBox->setEnabled(true);
       break;
     default:
       m_forecastMethod->setText(i18nc("Unknown forecast method", "Unknown"));
@@ -191,7 +194,7 @@ void KForecastView::loadListView(void)
   forecast.setAccountsCycle(m_accountsCycle->value());
   forecast.setBeginForecastDay(m_beginDay->value());
   forecast.setForecastCycles(m_forecastCycles->value());
-  forecast.setHistoryMethod(m_historyMethod->selected());
+  forecast.setHistoryMethod(m_historyMethod->checkedId());
   forecast.doForecast();
 
   //clear the list, including columns
@@ -228,7 +231,7 @@ void KForecastView::loadSummaryView(void)
   forecast.setAccountsCycle(m_accountsCycle->value());
   forecast.setBeginForecastDay(m_beginDay->value());
   forecast.setForecastCycles(m_forecastCycles->value());
-  forecast.setHistoryMethod(m_historyMethod->selected());
+  forecast.setHistoryMethod(m_historyMethod->checkedId());
   forecast.doForecast();
 
   //clear the list, including columns
@@ -373,7 +376,7 @@ void KForecastView::loadAdvancedView(void)
   forecast.setAccountsCycle(m_accountsCycle->value());
   forecast.setBeginForecastDay(m_beginDay->value());
   forecast.setForecastCycles(m_forecastCycles->value());
-  forecast.setHistoryMethod(m_historyMethod->selected());
+  forecast.setHistoryMethod(m_historyMethod->checkedId());
   forecast.doForecast();
 
   //Get all accounts of the right type to calculate forecast
@@ -493,7 +496,7 @@ void KForecastView::loadBudgetView(void)
   QDate historyStartDate = historyEndDate.addDays(-m_accountsCycle->value() * m_forecastCycles->value());
   QDate forecastStartDate = QDate(QDate::currentDate().year(), 1, 1);
   QDate forecastEndDate = QDate::currentDate().addDays(m_forecastDays->value());
-  forecast.setHistoryMethod(m_historyMethod->selected());
+  forecast.setHistoryMethod(m_historyMethod->checkedId());
 
   MyMoneyBudget budget;
   forecast.createBudget(budget, historyStartDate, historyEndDate, forecastStartDate, forecastEndDate, false);

@@ -25,6 +25,7 @@
 #include <QLabel>
 #include <q3header.h>
 #include <QToolTip>
+#include <QButtonGroup>
 #include <QCheckBox>
 #include <QTimer>
 #include <QTabWidget>
@@ -39,7 +40,6 @@
 // ----------------------------------------------------------------------------
 // KDE Headers
 
-#include <kbuttongroup.h>
 #include <klocale.h>
 #include <kglobal.h>
 #include <kmessagebox.h>
@@ -97,6 +97,8 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
 {
   QString columnName = ( (categoryEditor) ? i18n("Categories") : i18n("Accounts") );
 
+  m_amountGroup->setId(m_grossAmount, 0);
+  m_amountGroup->setId(m_netAmount, 1);
   m_qlistviewParentAccounts->setRootIsDecorated(true);
   m_qlistviewParentAccounts->setAllColumnsShowFocus(true);
   m_qlistviewParentAccounts->setSectionHeader(columnName);
@@ -1140,7 +1142,7 @@ void KNewAccountDlg::slotVatChanged(bool state)
 void KNewAccountDlg::slotVatAssignmentChanged(bool state)
 {
   m_vatAccount->setEnabled(state);
-  m_amountGroup->setEnabled(state);
+  m_amountGroupBox->setEnabled(state);
 }
 
 void KNewAccountDlg::adjustEditWidgets(kMyMoneyEdit* dst, kMyMoneyEdit* src, char mode, int corr)

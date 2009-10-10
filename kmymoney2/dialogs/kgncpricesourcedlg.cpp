@@ -21,11 +21,11 @@
 #include <QLineEdit>
 #include <QLayout>
 #include <QApplication>
+#include <QButtonGroup>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 #include <kapplication.h>
-#include <kbuttongroup.h>
 #include <kurlrequester.h>
 #include <ktextbrowser.h>
 #include <klocale.h>
@@ -52,7 +52,10 @@ KGncPriceSourceDlg::KGncPriceSourceDlg(const QString &stockName, const QString &
   listKnownSource->insertStringList (WebPriceQuote::quoteSources());
   lineUserSource->setText (gncSource);
   checkAlwaysUse->setChecked(true);
-  buttonGroup5->setSelected (0);
+  buttonGroup5->setId(buttonNoSource, 0);
+  buttonGroup5->setId(buttonSelectSource, 1);
+  buttonGroup5->setId(buttonUserSource, 2);
+  buttonGroup5->button(0)->setChecked(true);
   buttonPressed (0);
   return;
 }

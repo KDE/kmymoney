@@ -29,6 +29,11 @@
 KSettingsRegister::KSettingsRegister(QWidget* parent) :
   KSettingsRegisterDecl(parent)
 {
+
+  kcfg_AutoFillTransaction->setId(radioButton1, 0); // no autofill
+  kcfg_AutoFillTransaction->setId(radioButton2, 1); // small amount difference
+  kcfg_AutoFillTransaction->setId(radioButton3, 2); // most common payee
+
   // hide the internally used text fields
   kcfg_sortNormalView->hide();
   kcfg_sortReconcileView->hide();

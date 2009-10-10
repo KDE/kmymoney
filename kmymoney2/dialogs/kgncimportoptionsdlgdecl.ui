@@ -40,7 +40,7 @@
           </widget>
         </item>
         <item>
-          <widget class="KButtonGroup" name="buttonInvestGroup">
+          <widget class="QGroupBox" name="buttonInvestGroupBox">
             <property name="title">
               <string>Investment Handling</string>
             </property>
@@ -53,6 +53,9 @@
                   <property name="checked">
                     <bool>true</bool>
                   </property>
+                  <attribute name="buttonGroup">
+                    <string>buttonInvestGroup</string>
+                  </attribute>
                 </widget>
               </item>
               <item>
@@ -60,6 +63,9 @@
                   <property name="text">
                     <string>One investment account for all stocks</string>
                   </property>
+                  <attribute name="buttonGroup">
+                    <string>buttonInvestGroup</string>
+                  </attribute>
                 </widget>
               </item>
               <item>
@@ -67,13 +73,16 @@
                   <property name="text">
                     <string>Prompt for an investment account for each stock</string>
                   </property>
+                  <attribute name="buttonGroup">
+                    <string>buttonInvestGroup</string>
+                  </attribute>
                 </widget>
               </item>
             </layout>
           </widget>
         </item>
         <item>
-          <widget class="KButtonGroup" name="buttonGroup5">
+          <widget class="QGroupBox" name="buttonGroupBox5">
             <property name="title">
               <string>Online price quotes</string>
             </property>
@@ -83,13 +92,16 @@
                   <property name="text">
                     <string>Use Finance::Quote for share price quotes</string>
                   </property>
+                  <attribute name="buttonGroup">
+                    <string>buttonGroup5</string>
+                  </attribute>
                 </widget>
               </item>
             </layout>
           </widget>
         </item>
         <item>
-          <widget class="KButtonGroup" name="buttonGroup2">
+          <widget class="QGroupBox" name="buttonGroupBox2">
             <property name="title">
               <string>Scheduled Transactions</string>
             </property>
@@ -99,13 +111,16 @@
                   <property name="text">
                     <string>Drop suspect scheduled transactions</string>
                   </property>
+                  <attribute name="buttonGroup">
+                    <string>buttonGroup2</string>
+                  </attribute>
                 </widget>
               </item>
             </layout>
           </widget>
         </item>
         <item>
-          <widget class="KButtonGroup" name="buttonGroup4">
+          <widget class="QGroupBox" name="buttonGroupBox4">
             <property name="title">
               <string>Decoding option</string>
             </property>
@@ -123,6 +138,9 @@
                       <property name="text">
                         <string>Decode using</string>
                       </property>
+                      <attribute name="buttonGroup">
+                        <string>buttonGroup4</string>
+                      </attribute>
                     </widget>
                   </item>
                   <item>
@@ -150,7 +168,7 @@
           </widget>
         </item>
         <item>
-          <widget class="KButtonGroup" name="buttonGroup18">
+          <widget class="QGroupBox" name="buttonGroupBox18">
             <property name="title">
               <string>Transaction Notes option</string>
             </property>
@@ -166,11 +184,14 @@
               <property name="text">
                 <string>Use transaction notes on non-split transactions</string>
               </property>
+              <attribute name="buttonGroup">
+                <string>buttonGroup18</string>
+              </attribute>
             </widget>
           </widget>
         </item>
         <item>
-          <widget class="KButtonGroup" name="buttonGroup3">
+          <widget class="QGroupBox" name="buttonGroupBox3">
             <property name="title">
               <string>Debug Options</string>
             </property>
@@ -180,6 +201,9 @@
                   <property name="text">
                     <string>General debug data</string>
                   </property>
+                  <attribute name="buttonGroup">
+                    <string>buttonGroup3</string>
+                  </attribute>
                 </widget>
               </item>
               <item>
@@ -187,6 +211,9 @@
                   <property name="text">
                     <string>Display XML data</string>
                   </property>
+                  <attribute name="buttonGroup">
+                    <string>buttonGroup3</string>
+                  </attribute>
                 </widget>
               </item>
               <item>
@@ -194,6 +221,9 @@
                   <property name="text">
                     <string>Anonymize data</string>
                   </property>
+                  <attribute name="buttonGroup">
+                    <string>buttonGroup3</string>
+                  </attribute>
                 </widget>
               </item>
             </layout>
@@ -324,4 +354,12 @@
       <header location="global">kcombobox.h</header>
     </customwidget>
   </customwidgets>
+  <buttongroups>
+    <buttongroup name="buttonInvestGroup"/>
+    <buttongroup name="buttonGroup5"/>
+    <buttongroup name="buttonGroup2"/>
+    <buttongroup name="buttonGroup4"/>
+    <buttongroup name="buttonGroup18"/>
+    <buttongroup name="buttonGroup3"/>
+  </buttongroups>
 </ui>

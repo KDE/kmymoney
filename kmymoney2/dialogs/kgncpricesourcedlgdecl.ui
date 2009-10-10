@@ -138,7 +138,7 @@
             </widget>
           </item>
           <item>
-            <widget class="KButtonGroup" name="buttonGroup5">
+            <widget class="QGroupBox" name="buttonGroup5GroupBox">
               <property name="title">
                 <string/>
               </property>
@@ -148,6 +148,9 @@
                     <property name="text">
                       <string>Do not perform online quotes for this investment</string>
                     </property>
+                    <attribute name="buttonGroup">
+                      <string>buttonGroup5</string>
+                    </attribute>
                   </widget>
                 </item>
                 <item>
@@ -201,4 +204,7 @@
       <header location="global">klineedit.h</header>
     </customwidget>
   </customwidgets>
+  <buttongroups>
+    <buttongroup name="buttonGroup5"/>
+  </buttongroups>
 </ui>

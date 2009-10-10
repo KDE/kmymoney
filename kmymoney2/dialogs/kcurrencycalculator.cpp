@@ -25,6 +25,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QButtonGroup>
 #include <QLabel>
 #include <QRadioButton>
 #include <QCheckBox>
@@ -34,7 +35,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kbuttongroup.h>
 #include <klocale.h>
 #include <kpushbutton.h>
 #include <kcombobox.h>
@@ -124,6 +124,9 @@ KCurrencyCalculator::KCurrencyCalculator(const MyMoneySecurity& from, const MyMo
   m_resultFraction(resultFraction)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
+
+  buttonGroup1->setId(m_amountButton, 0);
+  buttonGroup1->setId(m_rateButton, 1);
 
   m_dateFrame->hide();
   m_dateEdit->setDate(date);

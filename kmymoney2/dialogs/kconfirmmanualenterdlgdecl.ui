@@ -47,15 +47,12 @@
         </widget>
       </item>
       <item>
-        <widget class="KButtonGroup" name="buttonGroup1">
+        <widget class="QGroupBox" name="buttonGroupBox1">
           <property name="font">
             <font/>
           </property>
           <property name="title">
             <string>Please choose what you wish to do with the above changes</string>
-          </property>
-          <property name="selectedId" stdset="0">
-            <number>1</number>
           </property>
           <layout class="QVBoxLayout">
             <item>
@@ -63,6 +60,9 @@
                 <property name="text">
                   <string>Discard the changes and enter the original transaction into the register.</string>
                 </property>
+                <attribute name="buttonGroup">
+                  <string>buttonGroup1</string>
+                </attribute>
               </widget>
             </item>
             <item>
@@ -70,6 +70,12 @@
                 <property name="text">
                   <string>Enter these new values this one time, for this occurrence only.</string>
                 </property>
+                <property name="checked">
+                  <bool>true</bool>
+                </property>
+                <attribute name="buttonGroup">
+                  <string>buttonGroup1</string>
+                </attribute>
               </widget>
             </item>
             <item>
@@ -77,6 +83,9 @@
                 <property name="text">
                   <string>Set all further occurrences in this schedule to be these values.</string>
                 </property>
+                <attribute name="buttonGroup">
+                  <string>buttonGroup1</string>
+                </attribute>
               </widget>
             </item>
           </layout>
@@ -139,4 +148,7 @@
       <slot>reject()</slot>
     </connection>
   </connections>
+  <buttongroups>
+    <buttongroup name="buttonGroup1"/>
+  </buttongroups>
 </ui>

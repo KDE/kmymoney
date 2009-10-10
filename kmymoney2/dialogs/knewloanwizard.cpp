@@ -25,6 +25,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QButtonGroup>
 #include <QRadioButton>
 #include <QCheckBox>
 #include <QLabel>
@@ -64,7 +65,26 @@
 KNewLoanWizard::KNewLoanWizard(QWidget *parent) :
   KNewLoanWizardDecl(parent)
 {
-    setModal( true );
+  m_selectionButtonGroup->setId(m_editInterestRateButton, 0);
+  m_selectionButtonGroup->setId(m_editOtherCostButton, 1);
+  m_selectionButtonGroup->setId(m_editOtherInfoButton, 2);
+
+  ButtonGroup1->setId(m_borrowButton, 0);
+  ButtonGroup1->setId(m_lendButton, 1);
+
+  ButtonGroup2->setId(m_fixedInterestButton, 0);
+  ButtonGroup2->setId(m_variableInterestButton, 1);
+
+  ButtonGroup3->setId(m_noPreviousPaymentButton, 0);
+  ButtonGroup3->setId(m_previousPaymentButton, 1);
+
+  ButtonGroup4->setId(m_allPaymentsButton, 0);
+  ButtonGroup4->setId(m_thisYearPaymentButton, 1);
+
+  ButtonGroup5->setId(m_interestOnReceptionButton, 0);
+  ButtonGroup5->setId(m_interestOnPaymentButton, 1);
+
+  setModal( true );
   connect(m_borrowButton, SIGNAL(clicked()), this, SLOT(slotLiabilityLoan()));
   connect(m_lendButton, SIGNAL(clicked()), this, SLOT(slotAssetLoan()));
 

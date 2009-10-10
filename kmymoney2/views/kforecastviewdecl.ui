@@ -237,7 +237,7 @@
                       </layout>
                     </item>
                     <item row="2" column="0">
-                      <widget class="KButtonGroup" name="m_historyMethod">
+                      <widget class="QGroupBox" name="m_historyMethodGroupBox">
                         <property name="title">
                           <string>History Forecast Method</string>
                         </property>
@@ -247,6 +247,9 @@
                               <property name="text">
                                 <string>Simple Moving Average</string>
                               </property>
+                              <attribute name="buttonGroup">
+                                <string>m_historyMethod</string>
+                              </attribute>
                             </widget>
                           </item>
                           <item>
@@ -254,13 +257,19 @@
                               <property name="text">
                                 <string>Weighted Moving Average</string>
                               </property>
+                              <attribute name="buttonGroup">
+                                <string>m_historyMethod</string>
+                              </attribute>
                             </widget>
                           </item>
                           <item>
-                            <widget class="QRadioButton" name="radioButton12">
+                            <widget class="QRadioButton" name="radioButton13">
                               <property name="text">
                                 <string>Linear Regression</string>
                               </property>
+                              <attribute name="buttonGroup">
+                                <string>m_historyMethod</string>
+                              </attribute>
                             </widget>
                           </item>
                         </layout>
@@ -543,4 +552,7 @@
       <header location="global">kcombobox.h</header>
     </customwidget>
   </customwidgets>
+  <buttongroups>
+    <buttongroup name="m_historyMethod"/>
+  </buttongroups>
 </ui>

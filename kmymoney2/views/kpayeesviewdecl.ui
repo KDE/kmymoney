@@ -148,7 +148,7 @@
          </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="tab">
+       <widget class="QWidget" name="tab1">
         <attribute name="title">
          <string comment="Street address">Address</string>
         </attribute>
@@ -337,7 +337,7 @@
         </attribute>
         <layout class="QVBoxLayout" name="verticalLayout_2">
          <item>
-          <widget class="KButtonGroup" name="m_matchType">
+          <widget class="QGroupBox" name="m_matchTypeGroupBox">
            <property name="title">
             <string>Transaction Matching</string>
            </property>
@@ -350,6 +350,9 @@
                <property name="checked">
                 <bool>true</bool>
                </property>
+               <attribute name="buttonGroup">
+                 <string>m_matchType</string>
+               </attribute>
               </widget>
              </item>
              <item>
@@ -357,6 +360,9 @@
                <property name="text">
                 <string>Match on Payee name</string>
                </property>
+               <attribute name="buttonGroup">
+                 <string>m_matchType</string>
+               </attribute>
               </widget>
              </item>
              <item>
@@ -571,4 +577,7 @@ new transactions with this payee</string>
  </includes>
  <resources/>
  <connections/>
+ <buttongroups>
+   <buttongroup name="m_matchType"/>
+ </buttongroups>
 </ui>

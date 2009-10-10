@@ -19,7 +19,7 @@
     <layout class="QVBoxLayout">
       <item>
         <widget class="KTabWidget" name="tab">
-          <widget class="QWidget" name="tab">
+          <widget class="QWidget" name="tab1">
             <attribute name="title">
               <string>Display</string>
             </attribute>
@@ -109,7 +109,7 @@
             <layout class="QVBoxLayout">
               <item>
                 <widget class="KTabWidget" name="tabWidget3">
-                  <widget class="QWidget" name="tab">
+                  <widget class="QWidget" name="tab3">
                     <attribute name="title">
                       <string>Normal view</string>
                     </attribute>
@@ -122,7 +122,7 @@
                       </item>
                     </layout>
                   </widget>
-                  <widget class="QWidget" name="tab">
+                  <widget class="QWidget" name="tab4">
                     <attribute name="title">
                       <string>Reconciliation view</string>
                     </attribute>
@@ -159,7 +159,7 @@
               </item>
             </layout>
           </widget>
-          <widget class="QWidget" name="TabPage">
+          <widget class="QWidget" name="TabPage1">
             <attribute name="title">
               <string>Data entry</string>
             </attribute>
@@ -261,7 +261,7 @@
                 </layout>
               </item>
               <item>
-                <widget class="KButtonGroup" name="kcfg_AutoFillTransaction">
+                <widget class="QGroupBox" name="kcfg_AutoFillTransactionBox">
                   <property name="title">
                     <string>Autofill</string>
                   </property>
@@ -277,6 +277,9 @@
                         <property name="whatsThis" stdset="0">
                           <string>Don't do autofill of transaction data at all.</string>
                         </property>
+                        <attribute name="buttonGroup">
+                          <string>kcfg_AutoFillTransaction</string>
+                        </attribute>
                       </widget>
                     </item>
                     <item>
@@ -294,6 +297,9 @@
 
 Selecting 0% will list all transactions.</string>
                             </property>
+                            <attribute name="buttonGroup">
+                              <string>kcfg_AutoFillTransaction</string>
+                            </attribute>
                           </widget>
                         </item>
                         <item>
@@ -329,6 +335,9 @@ Selecting 0% will list all transactions.</string>
                         <property name="whatsThis" stdset="0">
                           <string>The data of the last transaction assigned to the category used most often for this payee is autofilled into the transaction editor.</string>
                         </property>
+                        <attribute name="buttonGroup">
+                          <string>kcfg_AutoFillTransaction</string>
+                        </attribute>
                       </widget>
                     </item>
                   </layout>
@@ -352,7 +361,7 @@ Selecting 0% will list all transactions.</string>
               </item>
             </layout>
           </widget>
-          <widget class="QWidget" name="TabPage">
+          <widget class="QWidget" name="TabPage2">
             <attribute name="title">
               <string>Import</string>
             </attribute>
@@ -464,4 +473,7 @@ Selecting 0% will list all transactions.</string>
       <header location="global">ktabwidget.h</header>
     </customwidget>
   </customwidgets>
+  <buttongroups>
+    <buttongroup name="kcfg_AutoFillTransaction"/>
+  </buttongroups>
 </ui>

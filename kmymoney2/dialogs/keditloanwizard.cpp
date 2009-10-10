@@ -23,6 +23,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QButtonGroup>
 #include <QRadioButton>
 #include <QLabel>
 //Added by qt3to4:
@@ -31,7 +32,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kbuttongroup.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <knuminput.h>

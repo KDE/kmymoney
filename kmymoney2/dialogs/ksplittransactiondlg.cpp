@@ -171,6 +171,11 @@ int KSplitTransactionDlg::exec(void)
     if(rc == QDialog::Accepted) {
       if(!diffAmount().isZero()) {
         KSplitCorrectionDlgDecl* corrDlg = new KSplitCorrectionDlgDecl(this);
+        corrDlg->buttonGroup->setId(corrDlg->continueBtn, 0);
+        corrDlg->buttonGroup->setId(corrDlg->changeBtn, 1);
+        corrDlg->buttonGroup->setId(corrDlg->distributeBtn, 2);
+        corrDlg->buttonGroup->setId(corrDlg->leaveBtn, 3);
+
         corrDlg->setModal( true );
         // add icons to buttons
         corrDlg->okBtn->setGuiItem(KStandardGuiItem::ok());

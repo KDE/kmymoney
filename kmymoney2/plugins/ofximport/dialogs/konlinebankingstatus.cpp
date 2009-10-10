@@ -52,7 +52,14 @@ KOnlineBankingStatus::KOnlineBankingStatus(const MyMoneyAccount& acc, QWidget *p
 {
   m_ledOnlineStatus->off();
 
-  buttonGroup2->setContentsMargins(0,0,0,0);
+  buttonGroup1->setId(m_payeeidRB, 0);
+  buttonGroup1->setId(m_nameRB, 1);
+
+  buttonGroupBox2->setContentsMargins(0,0,0,0);
+
+  buttonGroup2->setId(m_todayRB, 0);
+  buttonGroup2->setId(m_lastUpdateRB, 1);
+  buttonGroup2->setId(m_pickDateRB, 2);
 
   // Set up online banking settings if applicable
   MyMoneyKeyValueContainer settings = acc.onlineBankingSettings();
