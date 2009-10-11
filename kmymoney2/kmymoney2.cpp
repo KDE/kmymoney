@@ -2333,7 +2333,7 @@ void KMyMoney2App::slotSettings(void)
   dlg->addPage(generalPage, i18nc("General settings", "General"), "system-run");
   dlg->addPage(registerPage, i18nc("Register view settings", "Register"), "ledger");
   dlg->addPage(homePage, i18n("Home"), "go-home");
-  dlg->addPage(schedulesPage, i18n("Scheduled\ntransactions"), "schedule");
+  dlg->addPage(schedulesPage, i18n("Scheduled\ntransactions"), "view-pim-calendar");
   dlg->addPage(encryptionPage, i18n("Encryption"), "kgpg");
   dlg->addPage(colorsPage, i18n("Colors"), "preferences-desktop-color");
   dlg->addPage(fontsPage, i18n("Fonts"), "preferences-desktop-font");
