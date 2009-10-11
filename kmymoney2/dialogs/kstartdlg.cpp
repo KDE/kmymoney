@@ -166,7 +166,7 @@ void KStartDlg::readConfig()
     value = grp.readEntry( QString( "File%1" ).arg( i ));
     if( !value.isNull() && fileExists(value) )
     {
-      QString file_name = value.mid(value.findRev('/')+1);
+      QString file_name = value.mid(value.lastIndexOf('/')+1);
       (void)new KRecentFileItem( value, view_recent, file_name, il->loadIcon("kmy", KIconLoader::Desktop, KIconLoader::SizeLarge));
     }
     i++;

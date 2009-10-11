@@ -176,7 +176,7 @@ void StdTransactionMatched::registerCellText(QString& txt, int& align, int row, 
             }
             memo = m_split.memo();
             if(!matchedSplit.memo().isEmpty() && memo != matchedSplit.memo()) {
-              int pos = memo.findRev(matchedSplit.memo());
+              int pos = memo.lastIndexOf(matchedSplit.memo());
               if(pos != -1) {
                 memo = memo.left(pos);
                 if(memo.endsWith('\n'))

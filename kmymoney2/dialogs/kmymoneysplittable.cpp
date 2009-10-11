@@ -144,7 +144,7 @@ void kMyMoneySplitTable::paintCell(QPainter *p, int row, int col, const QRect& r
   QString qstringCategory;
   QString qstringMemo;
 
-  int intPos = firsttext.find("|");
+  int intPos = firsttext.indexOf('|');
   if(intPos > -1)
   {
     qstringCategory = firsttext.left(intPos);

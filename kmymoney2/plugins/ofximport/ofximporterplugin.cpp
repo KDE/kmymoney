@@ -112,8 +112,8 @@ bool OfxImporterPlugin::isMyFormat( const QString& filename ) const
     while ( !ts.atEnd() && !result  && lineCount != 0)
     {
       QString line = ts.readLine();
-      if ( line.contains("<OFX>",false)
-        || line.contains("<OFC>",false) )
+      if ( line.contains("<OFX>",Qt::CaseInsensitive)
+        || line.contains("<OFC>",Qt::CaseInsensitive) )
         result = true;
       lineCount--;
     }
@@ -134,7 +134,7 @@ bool OfxImporterPlugin::import( const QString& filename )
   m_statementlist.clear();
   m_securitylist.clear();
 
-  QByteArray filename_deep( filename.utf8() );
+  QByteArray filename_deep( filename.toUtf8() );
 
   LibofxContextPtr ctx = libofx_get_new_context();
   Q_CHECK_PTR(ctx);

@@ -228,14 +228,14 @@ bool KMyMoneyUtils::appendCorrectFileExt(QString& str, const QString& strExtToUs
 
   if(!str.isEmpty()) {
     //find last . delminator
-    int nLoc = str.findRev('.');
+    int nLoc = str.lastIndexOf('.');
     if(nLoc != -1) {
       QString strExt, strTemp;
       strTemp = str.left(nLoc + 1);
       strExt = str.right(str.length() - (nLoc + 1));
-      if(strExt.find(strExtToUse, 0, false) == -1) {
+      if(strExt.indexOf(strExtToUse, 0, Qt::CaseInsensitive) == -1) {
         // if the extension given contains a period, we remove our's
-        if(strExtToUse.find('.') != -1)
+        if(strExtToUse.indexOf('.') != -1)
           strTemp = strTemp.left(strTemp.length()-1);
         //append extension to make complete file name
         strTemp.append(strExtToUse);
@@ -281,7 +281,7 @@ QString KMyMoneyUtils::findResource(const char* type, const QString& filename)
   QString rc, mask;
 
   // check that the placeholder is present
-  if(!filename.find("%1")) {
+  if(!filename.indexOf("%1")) {
     qWarning("%%1 not found in '%s'", qPrintable(filename));
     return filename;
   }

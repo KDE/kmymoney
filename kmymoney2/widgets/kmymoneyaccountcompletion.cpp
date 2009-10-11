@@ -78,7 +78,7 @@ void kMyMoneyAccountCompletion::slotMakeCompletion(const QString& txt)
     for(it = parts.begin(); it != parts.end(); ++it) {
       if(pattern.length() > 1)
         pattern += MyMoneyFile::AccountSeperator;
-      pattern += QRegExp::escape(QString(*it).stripWhiteSpace()) + ".*";
+      pattern += QRegExp::escape(QString(*it).trimmed()) + ".*";
     }
     pattern += '$';
     m_lastCompletion = QRegExp(pattern, Qt::CaseInsensitive);

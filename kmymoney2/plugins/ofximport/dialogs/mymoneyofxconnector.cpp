@@ -317,7 +317,7 @@ const QByteArray MyMoneyOfxConnector::statementRequest(void) const
   char* szrequest = libofx_request_statement( &fi, &account, QDateTime(statementStartDate()).toTime_t() );
   QString request = szrequest;
   // remove the trailing zero
-  QByteArray result = request.utf8();
+  QByteArray result = request.toUtf8();
   result.truncate(result.size()-1);
   free(szrequest);
 

@@ -173,7 +173,7 @@ QString extractNodeText(QDomElement& node, const QString& name)
 {
   QString res;
   QRegExp exp("([^/]+)/?([^/].*)?");
-  if(exp.search(name) != -1) {
+  if(exp.indexIn(name) != -1) {
     QDomNodeList olist = node.elementsByTagName(exp.cap(1));
     if(olist.count()) {
       QDomNode onode = olist.item(0);
@@ -194,7 +194,7 @@ QString extractNodeText(QDomDocument& doc, const QString& name)
 {
   QString res;
   QRegExp exp("([^/]+)/?([^/].*)?");
-  if(exp.search(name) != -1) {
+  if(exp.indexIn(name) != -1) {
     QDomNodeList olist = doc.elementsByTagName(exp.cap(1));
     if(olist.count()) {
       QDomNode onode = olist.item(0);
@@ -280,7 +280,7 @@ bool post(const QString& request, const QMap<QString, QString>& attr, const KUrl
 {
   QByteArray req;
   req.fill(0, request.length()+1);
-  req.duplicate(request.ascii(), request.length());
+  req.duplicate(request.toAscii(), request.length());
 
   OfxHttpRequest job("POST", url, req, attr, filename, true);
   return job.error() == Q3Http::NoError;
