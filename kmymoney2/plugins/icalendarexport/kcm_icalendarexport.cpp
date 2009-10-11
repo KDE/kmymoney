@@ -53,7 +53,7 @@ K_EXPORT_PLUGIN(KCMiCalendarExportFactory("kmm_icalendarexport"))
 
 KCMiCalendarExport::KCMiCalendarExport(QWidget *parent, const QVariantList& args) : KCModule(KCMiCalendarExportFactory::componentData(), parent, args)
 {
-  addConfig(PluginSettings::self(), new PluginSettingsWidget(parent));
+  addConfig(PluginSettings::self(), new PluginSettingsWidget(this));
   load();
 }
 

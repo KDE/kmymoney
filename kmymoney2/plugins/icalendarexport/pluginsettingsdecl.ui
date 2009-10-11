@@ -148,7 +148,7 @@
         </widget>
        </item>
        <item>
-        <widget class="KUrlRequester" name="kcfg_icalendarFile" native="true"/>
+        <widget class="KUrlRequester" name="kcfg_icalendarFile"/>
        </item>
       </layout>
      </item>
@@ -176,8 +176,8 @@
  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
  <customwidgets>
   <customwidget>
-   <class>KURLRequester</class>
-   <extends>QWidget</extends>
+   <class>KUrlRequester</class>
+   <extends>QFrame</extends>
    <header>kurlrequester.h</header>
   </customwidget>
  </customwidgets>
