@@ -37,7 +37,7 @@ public:
     kcfg_timeUnitInSeconds->addItem(i18n("Hours"));
     kcfg_timeUnitInSeconds->addItem(i18n("Days"));
 
-    kcfg_intervalBetweenRemindersTimeUnitInSeconds->addItem(0, i18n("Minutes"));
+    kcfg_intervalBetweenRemindersTimeUnitInSeconds->addItem(i18n("Minutes"));
     kcfg_intervalBetweenRemindersTimeUnitInSeconds->addItem(i18n("Hours"));
     kcfg_intervalBetweenRemindersTimeUnitInSeconds->addItem(i18n("Days"));
 

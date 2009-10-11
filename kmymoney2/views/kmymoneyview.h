@@ -552,7 +552,7 @@ private:
     * the final destination is reached over a network
     * protocol (e.g. FTP)
     *
-    * @param qf pointer to QFile representing the opened file
+    * @param localFile the name of the local file
     * @param writer pointer to the formatter
     * @param plaintext whether to override any compression & encryption settings
     * @param keyList QString containing a comma separated list of keys to be used for encryption
@@ -560,7 +560,7 @@ private:
     *
     * @note This method will close the file when it is written.
     */
-  void saveToLocalFile(KSaveFile* qfile, IMyMoneyStorageFormat* writer, bool plaintext=false, const QString& keyList = QString());
+  void saveToLocalFile(const QString& localFile, IMyMoneyStorageFormat* writer, bool plaintext=false, const QString& keyList = QString());
 
   /**
     * Internal method used by slotAccountNew() and slotAccountCategory().
