@@ -171,7 +171,7 @@ const MyMoneyAccount& NewAccountWizard::Wizard::account(void)
 
     if(!m_account.fixedInterestRate()) {
       m_account.setNextInterestChange(m_generalLoanInfoPage->m_interestChangeDateEdit->date());
-      m_account.setInterestChangeFrequency(m_generalLoanInfoPage->m_interestFrequencyAmountEdit->value(), m_generalLoanInfoPage->m_interestFrequencyUnitEdit->currentItem());
+      m_account.setInterestChangeFrequency(m_generalLoanInfoPage->m_interestFrequencyAmountEdit->value(), m_generalLoanInfoPage->m_interestFrequencyUnitEdit->currentIndex());
     }
   }
   return m_account;
@@ -397,9 +397,9 @@ void InstitutionPage::slotLoadWidgets(void)
   qSort(d->m_list);
 
   QList<MyMoneyInstitution>::const_iterator it_l;
-  m_institutionComboBox->insertItem("");
+  m_institutionComboBox->addItem("");
   for(it_l = d->m_list.constBegin(); it_l != d->m_list.constEnd(); ++it_l) {
-    m_institutionComboBox->insertItem((*it_l).name());
+    m_institutionComboBox->addItem((*it_l).name());
   }
 }
 
@@ -437,7 +437,7 @@ const MyMoneyInstitution& InstitutionPage::institution(void) const
   if(m_institutionComboBox->currentIndex() == 0)
     return emptyInstitution;
 
-  return d->m_list[m_institutionComboBox->currentItem()-1];
+  return d->m_list[m_institutionComboBox->currentIndex()-1];
 }
 
 KMyMoneyWizardPage* InstitutionPage::nextPage(void) const
@@ -781,7 +781,7 @@ bool GeneralLoanInfoPage::recordAllPayments(void) const
 {
   bool rc = true;     // all payments
   if(m_recordings->isEnabled()) {
-    if(m_recordings->currentItem() != 0)
+    if(m_recordings->currentIndex() != 0)
       rc = false;
   }
   return rc;
@@ -821,7 +821,7 @@ bool GeneralLoanInfoPage::isComplete(void) const
   }
 
   if(rc
-  && (m_interestType->currentItem() != 0)
+  && (m_interestType->currentIndex() != 0)
   && (m_interestChangeDateEdit->date() <= m_firstPaymentDate->date())) {
     rc = false;
     m_wizard->m_nextButton->setToolTip( i18n("An interest change can only happen after the first payment"));

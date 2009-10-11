@@ -153,30 +153,30 @@ void MyMoneyQifProfileEditor::loadWidgets(void)
     setWindowTitle(i18n("QIF Profile Selector"));
 
   m_editDateFormat->clear();
-  m_editDateFormat->insertItem( "%d/%m/%yy" );
-  m_editDateFormat->insertItem( "%d/%mmm/%yy" );
-  m_editDateFormat->insertItem( "%d/%m/%yyyy" );
-  m_editDateFormat->insertItem( "%d/%mmm/%yyyy" );
-  m_editDateFormat->insertItem( "%d/%m%yy" );
-  m_editDateFormat->insertItem( "%d/%mmm%yy" );
-  m_editDateFormat->insertItem( "%d.%m.%yy" );
-  m_editDateFormat->insertItem( "%d.%m.%yyyy" );
-  m_editDateFormat->insertItem( "%m.%d.%yy" );
-  m_editDateFormat->insertItem( "%m.%d.%yyyy" );
-  m_editDateFormat->insertItem( "%m/%d/%yy" );
-  m_editDateFormat->insertItem( "%mmm/%d/%yy" );
-  m_editDateFormat->insertItem( "%m/%d/%yyyy" );
-  m_editDateFormat->insertItem( "%m-%d-%yyyy" );
-  m_editDateFormat->insertItem( "%mmm/%d/%yyyy" );
-  m_editDateFormat->insertItem( "%m%d%yy" );
-  m_editDateFormat->insertItem( "%mmm/%d%yy" );
-  m_editDateFormat->insertItem( "%yyyy-%mm-%dd" );
-  m_editDateFormat->insertItem( "%m/%d'%yyyy" );
+  m_editDateFormat->addItem( "%d/%m/%yy" );
+  m_editDateFormat->addItem( "%d/%mmm/%yy" );
+  m_editDateFormat->addItem( "%d/%m/%yyyy" );
+  m_editDateFormat->addItem( "%d/%mmm/%yyyy" );
+  m_editDateFormat->addItem( "%d/%m%yy" );
+  m_editDateFormat->addItem( "%d/%mmm%yy" );
+  m_editDateFormat->addItem( "%d.%m.%yy" );
+  m_editDateFormat->addItem( "%d.%m.%yyyy" );
+  m_editDateFormat->addItem( "%m.%d.%yy" );
+  m_editDateFormat->addItem( "%m.%d.%yyyy" );
+  m_editDateFormat->addItem( "%m/%d/%yy" );
+  m_editDateFormat->addItem( "%mmm/%d/%yy" );
+  m_editDateFormat->addItem( "%m/%d/%yyyy" );
+  m_editDateFormat->addItem( "%m-%d-%yyyy" );
+  m_editDateFormat->addItem( "%mmm/%d/%yyyy" );
+  m_editDateFormat->addItem( "%m%d%yy" );
+  m_editDateFormat->addItem( "%mmm/%d%yy" );
+  m_editDateFormat->addItem( "%yyyy-%mm-%dd" );
+  m_editDateFormat->addItem( "%m/%d'%yyyy" );
 
   m_editApostrophe->clear();
-  m_editApostrophe->insertItem( "1900-1949" );
-  m_editApostrophe->insertItem( "1900-1999" );
-  m_editApostrophe->insertItem( "2000-2099" );
+  m_editApostrophe->addItem( "1900-1949" );
+  m_editApostrophe->addItem( "1900-1999" );
+  m_editApostrophe->addItem( "2000-2099" );
 
   m_editAmounts->setColumnAlignment(1, Qt::AlignCenter);
   m_editAmounts->setColumnAlignment(2, Qt::AlignCenter);
@@ -187,13 +187,13 @@ void MyMoneyQifProfileEditor::loadWidgets(void)
   m_editAmounts->setSorting(4);
   m_editAmounts->sort();
 
-  m_decimalBox->insertItem( " " );
-  m_decimalBox->insertItem( "," );
-  m_decimalBox->insertItem( "." );
+  m_decimalBox->addItem( " " );
+  m_decimalBox->addItem( "," );
+  m_decimalBox->addItem( "." );
 
-  m_thousandsBox->insertItem( " " );
-  m_thousandsBox->insertItem( "," );
-  m_thousandsBox->insertItem( "." );
+  m_thousandsBox->addItem( " " );
+  m_thousandsBox->addItem( "," );
+  m_thousandsBox->addItem( "." );
 
   m_editDescription->setEnabled(m_inEdit);
   m_editType->setEnabled(m_inEdit);
@@ -292,8 +292,8 @@ void MyMoneyQifProfileEditor::showProfile(void)
   m_editOutputFilterLocation->setUrl(m_profile.filterScriptExport());
   m_editInputFilterFileType->setText(m_profile.filterFileType());
 
-  m_editDateFormat->setCurrentText(m_profile.outputDateFormat());
-  m_editApostrophe->setCurrentText(m_profile.apostropheFormat());
+  m_editDateFormat->setItemText(m_editDateFormat->currentIndex(), m_profile.outputDateFormat());
+  m_editApostrophe->setItemText(m_editApostrophe->currentIndex(), m_profile.apostropheFormat());
 
   m_attemptMatch->setChecked(m_profile.attemptMatchDuplicates());
 
@@ -456,8 +456,8 @@ void MyMoneyQifProfileEditor::slotHelp(void)
 
 void MyMoneyQifProfileEditor::slotAmountTypeSelected(Q3ListViewItem* item)
 {
-  m_decimalBox->setCurrentText(item->text(2));
-  m_thousandsBox->setCurrentText(item->text(3));
+  m_decimalBox->setItemText(m_decimalBox->currentIndex(), item->text(2));
+  m_thousandsBox->setItemText(m_thousandsBox->currentIndex(), item->text(3));
   m_selectedAmountType = item;
 }
 

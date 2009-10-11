@@ -1573,7 +1573,7 @@ bool KMyMoney2App::slotFileSaveAs(void)
     // fill the secret key list and combo box
     QStringList keyList;
     KGPGFile::secretKeyList(keyList);
-    d->m_saveEncrypted->insertItem(i18n("No encryption"));
+    d->m_saveEncrypted->addItem(i18n("No encryption"));
 
     for(QStringList::iterator it = keyList.begin(); it != keyList.end(); ++it) {
       QStringList fields = (*it).split(':', QString::SkipEmptyParts);
@@ -1583,7 +1583,7 @@ bool KMyMoney2App::slotFileSaveAs(void)
         name.replace('(', "[");
         name.replace(')', "]");
         name = QString("%1 (0x%2)").arg(name).arg(fields[0]);
-        d->m_saveEncrypted->insertItem(name);
+        d->m_saveEncrypted->addItem(name);
         if(name.contains(KMyMoneyGlobalSettings::gpgRecipient())) {
           d->m_saveEncrypted->setCurrentItem(name);
         }

@@ -172,24 +172,24 @@ void KReportConfigurationFilterDlg::slotSearch(void)
   {
     MyMoneyReport::EDetailLevel dl[4] = { MyMoneyReport::eDetailAll, MyMoneyReport::eDetailTop, MyMoneyReport::eDetailGroup, MyMoneyReport::eDetailTotal };
 
-    m_currentState.setDetailLevel( dl[m_tab2->m_comboDetail->currentItem()] );
+    m_currentState.setDetailLevel( dl[m_tab2->m_comboDetail->currentIndex()] );
 
     // modify the rowtype only if the widget is enabled
     if(m_tab2->m_comboRows->isEnabled()) {
       MyMoneyReport::ERowType rt[2] = { MyMoneyReport::eExpenseIncome, MyMoneyReport::eAssetLiability };
-      m_currentState.setRowType( rt[m_tab2->m_comboRows->currentItem()] );
+      m_currentState.setRowType( rt[m_tab2->m_comboRows->currentIndex()] );
     }
 
     m_currentState.setShowingRowTotals(false);
-    if(m_tab2->m_comboRows->currentItem() == 0)
+    if(m_tab2->m_comboRows->currentIndex() == 0)
       m_currentState.setShowingRowTotals(m_tab2->m_checkTotalColumn->isChecked());
 
     MyMoneyReport::EColumnType ct[6] = { MyMoneyReport::eDays, MyMoneyReport::eWeeks, MyMoneyReport::eMonths, MyMoneyReport::eBiMonths, MyMoneyReport::eQuarters, MyMoneyReport::eYears };
     bool dy[6] = { true, true, false, false, false, false };
-    m_currentState.setColumnType( ct[m_tab2->m_comboColumns->currentItem()] );
+    m_currentState.setColumnType( ct[m_tab2->m_comboColumns->currentIndex()] );
 
     //TODO (Ace) This should be implicit in the call above.  MMReport needs fixin'
-    m_currentState.setColumnsAreDays( dy[m_tab2->m_comboColumns->currentItem()] );
+    m_currentState.setColumnsAreDays( dy[m_tab2->m_comboColumns->currentIndex()] );
 
     m_currentState.setIncludingSchedules( m_tab2->m_checkScheduled->isChecked() );
 
@@ -211,7 +211,7 @@ void KReportConfigurationFilterDlg::slotSearch(void)
   else if ( m_tab3 )
   {
     MyMoneyReport::ERowType rtq[7] = { MyMoneyReport::eCategory, MyMoneyReport::eTopCategory, MyMoneyReport::ePayee, MyMoneyReport::eAccount, MyMoneyReport::eTopAccount, MyMoneyReport::eMonth, MyMoneyReport::eWeek };
-    m_currentState.setRowType( rtq[m_tab3->m_comboOrganizeBy->currentItem()] );
+    m_currentState.setRowType( rtq[m_tab3->m_comboOrganizeBy->currentIndex()] );
 
     unsigned qc = MyMoneyReport::eQCnone;
 
@@ -253,7 +253,7 @@ void KReportConfigurationFilterDlg::slotSearch(void)
   if ( m_tabChart )
   {
     MyMoneyReport::EChartType ct[5] = { MyMoneyReport::eChartLine, MyMoneyReport::eChartBar, MyMoneyReport::eChartStackedBar, MyMoneyReport::eChartPie, MyMoneyReport::eChartRing };
-    m_currentState.setChartType( ct[m_tabChart->m_comboType->currentItem()] );
+    m_currentState.setChartType( ct[m_tabChart->m_comboType->currentIndex()] );
 
     m_currentState.setChartGridLines( m_tabChart->m_checkGridLines->isChecked() );
     m_currentState.setChartDataLabels( m_tabChart->m_checkValues->isChecked() );
@@ -327,7 +327,7 @@ void KReportConfigurationFilterDlg::slotReset(void)
     }
     m_tab2->m_checkTotalColumn->setChecked(m_initialState.isShowingRowTotals());
 
-    slotRowTypeChanged(m_tab2->m_comboRows->currentItem());
+    slotRowTypeChanged(m_tab2->m_comboRows->currentIndex());
 
     if ( m_initialState.isColumnsAreDays() )
     {

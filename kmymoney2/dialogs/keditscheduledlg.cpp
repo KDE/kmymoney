@@ -338,7 +338,7 @@ const MyMoneySchedule& KEditScheduleDlg::schedule(void) const
     d->m_schedule.setOccurrencePeriod(static_cast<MyMoneySchedule::occurrenceE>(m_frequencyEdit->currentItem()));
     d->m_schedule.setOccurrenceMultiplier( m_frequencyNoEdit->value() );
 
-    switch(m_weekendOptionEdit->currentItem())  {
+    switch(m_weekendOptionEdit->currentIndex())  {
       case 0:
         d->m_schedule.setWeekendOption(MyMoneySchedule::MoveNothing);
         break;

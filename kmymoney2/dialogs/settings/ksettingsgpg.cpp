@@ -114,7 +114,7 @@ void KSettingsGpg::slotIdChanged(void)
       }
 
       // if we have a master key, we store it in the hidden widget
-      if(m_masterKeyCombo->currentItem() != 0) {
+      if(m_masterKeyCombo->currentIndex() != 0) {
         QRegExp keyExp(".* \\((.*)\\)");
         if(keyExp.indexIn(m_masterKeyCombo->currentText()) != -1) {
           kcfg_GpgRecipient->setText(keyExp.cap(1));
@@ -133,7 +133,7 @@ void KSettingsGpg::show(void)
 {
   QString masterKey;
 
-  if(m_masterKeyCombo->currentItem() != 0) {
+  if(m_masterKeyCombo->currentIndex() != 0) {
     QRegExp keyExp(".* \\((.*)\\)");
     if(keyExp.indexIn(m_masterKeyCombo->currentText()) != -1) {
       masterKey = keyExp.cap(1);
@@ -154,7 +154,7 @@ void KSettingsGpg::show(void)
       name.replace('(', "[");
       name.replace(')', "]");
       name = QString("%1 (0x%2)").arg(name).arg(fields[0]);
-      m_masterKeyCombo->insertItem(name);
+      m_masterKeyCombo->addItem(name);
       if(name.contains(masterKey))
         m_masterKeyCombo->setCurrentItem(name);
     }

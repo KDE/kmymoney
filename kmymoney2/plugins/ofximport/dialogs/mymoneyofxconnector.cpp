@@ -51,8 +51,8 @@ OfxHeaderVersion::OfxHeaderVersion(KComboBox* combo, const QString& headerVersio
   m_combo(combo)
 {
   combo->clear();
-  combo->insertItem("102");
-  combo->insertItem("103");
+  combo->addItem("102");
+  combo->addItem("103");
 
   if(!headerVersion.isEmpty()) {
     combo->setCurrentItem(headerVersion);
@@ -98,7 +98,7 @@ OfxAppVersion::OfxAppVersion(KComboBox* combo, const QString& appId) :
   m_appMap["KMyMoney"] = "KMyMoney:1000";
 
   combo->clear();
-  combo->insertStringList(m_appMap.keys());
+  combo->addItems(m_appMap.keys());
 
   QMap<QString, QString>::const_iterator it_a;
   for(it_a = m_appMap.constBegin(); it_a != m_appMap.constEnd(); ++it_a) {

@@ -45,11 +45,11 @@ KNewBudgetDlg::KNewBudgetDlg(QWidget* parent) :
   int iYear = dToday.year();
 
   for (int i=0; i<=m_icFutureYears; i++)
-    m_cbYear->insertItem( QString::number(iYear++) );
+    m_cbYear->addItem( QString::number(iYear++) );
 
   iYear = dToday.year();
   for (int i=0; i<=m_icFutureYears; i++)
-    m_cbYear->insertItem( QString::number(--iYear) );
+    m_cbYear->addItem( QString::number(--iYear) );
 }
 
 KNewBudgetDlg::~KNewBudgetDlg()

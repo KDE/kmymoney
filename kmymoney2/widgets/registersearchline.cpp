@@ -78,14 +78,14 @@ void RegisterSearchLine::init(Register *reg)
   d->combo = new KComboBox(parentWidget());
   // don't change the order of the following lines unless updating
   // the case labels in RegisterSearchLine::itemMatches() at the same time
-  d->combo->insertItem(SmallIcon("system-run"), i18n("Any status"));
-  d->combo->insertItem(SmallIcon("document-import"), i18n("Imported"));
-  d->combo->insertItem(SmallIcon("process-stop"), i18n("Matched"));
-  d->combo->insertItem(SmallIcon("attention"), i18n("Erroneous"));
-  d->combo->insertItem(i18n("Not marked"));
-  d->combo->insertItem(i18n("Not reconciled"));
-  d->combo->insertItem(i18nc("Reconciliation state 'Cleared'", "Cleared"));
-  d->combo->setCurrentItem(0);
+  d->combo->addItem(SmallIcon("system-run"), i18n("Any status"));
+  d->combo->addItem(SmallIcon("document-import"), i18n("Imported"));
+  d->combo->addItem(SmallIcon("process-stop"), i18n("Matched"));
+  d->combo->addItem(SmallIcon("attention"), i18n("Erroneous"));
+  d->combo->addItem(i18n("Not marked"));
+  d->combo->addItem(i18n("Not reconciled"));
+  d->combo->addItem(i18nc("Reconciliation state 'Cleared'", "Cleared"));
+  d->combo->setCurrentIndex(0);
   connect(d->combo, SIGNAL(activated(int)), this, SLOT(slotStatusChanged(int)));
 
   label->setBuddy(d->combo);

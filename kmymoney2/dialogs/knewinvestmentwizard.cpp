@@ -98,7 +98,7 @@ KNewInvestmentWizard::KNewInvestmentWizard( const MyMoneySecurity& security, QWi
 
 void KNewInvestmentWizard::init1(void)
 {
-  m_onlineSourceCombo->insertStringList( WebPriceQuote::quoteSources() );
+  m_onlineSourceCombo->addItems( WebPriceQuote::quoteSources() );
 
   m_onlineFactor->setValue(MyMoneyMoney(1,1));
   m_onlineFactor->setPrecision(4);
@@ -142,20 +142,20 @@ void KNewInvestmentWizard::init2(void)
 {
   MyMoneySecurity tradingCurrency = MyMoneyFile::instance()->currency(m_security.tradingCurrency());
   m_investmentSymbol->setText(m_security.tradingSymbol());
-  m_tradingMarket->setCurrentText(m_security.tradingMarket());
+  m_tradingMarket->setItemText(m_tradingMarket->currentIndex(), m_security.tradingMarket());
   m_fraction->setValue(MyMoneyMoney(m_security.smallestAccountFraction(), 1));
   m_tradingCurrencyEdit->setSecurity(tradingCurrency);
   if (m_security.value("kmm-online-quote-system") == "Finance::Quote") {
     FinanceQuoteProcess p;
     m_useFinanceQuote->setChecked(true);
-    m_onlineSourceCombo->setCurrentText(p.niceName(m_security.value("kmm-online-source")));
+    m_onlineSourceCombo->setItemText(m_onlineSourceCombo->currentIndex(), p.niceName(m_security.value("kmm-online-source")));
   } else {
-    m_onlineSourceCombo->setCurrentText(m_security.value("kmm-online-source"));
+    m_onlineSourceCombo->setItemText(m_onlineSourceCombo->currentIndex(), m_security.value("kmm-online-source"));
   }
   if(!m_security.value("kmm-online-factor").isEmpty())
     m_onlineFactor->setValue(MyMoneyMoney(m_security.value("kmm-online-factor")));
   m_investmentIdentification->setText(m_security.value("kmm-security-id"));
-  m_securityType->setCurrentText(KMyMoneyUtils::securityTypeToString(m_security.securityType()));
+  m_securityType->setItemText(m_securityType->currentIndex(), KMyMoneyUtils::securityTypeToString(m_security.securityType()));
 
   slotCheckPage(m_security.value("kmm-online-source"));
 }
@@ -200,11 +200,11 @@ void KNewInvestmentWizard::slotCheckForExistingSymbol(const QString& symbol)
 void KNewInvestmentWizard::slotSourceChanged(bool useFQ)
 {
   m_onlineSourceCombo->clear();
-  m_onlineSourceCombo->insertItem(QString(), 0);
+  m_onlineSourceCombo->insertItem(0, QString());
   if (useFQ) {
-    m_onlineSourceCombo->insertStringList( WebPriceQuote::quoteSources( WebPriceQuote::FinanceQuote ) );
+    m_onlineSourceCombo->addItems( WebPriceQuote::quoteSources( WebPriceQuote::FinanceQuote ) );
   } else {
-    m_onlineSourceCombo->insertStringList( WebPriceQuote::quoteSources() );
+    m_onlineSourceCombo->addItems( WebPriceQuote::quoteSources() );
   }
 }
 
