@@ -87,7 +87,7 @@ Quick-start 3: More options
       'Release' 'RelWithDebInfo' 'Debug' 'Debugfull' 'Profile'
     The default value is: 'RelWithDebInfo'
 
--D KDE3_BUILD_TESTS=ON
+-D KDE4_BUILD_TESTS=ON
     To also build the unit tests. This requires CppUnit to be installed.
 
 -----------------------------------------------------
