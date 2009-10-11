@@ -1137,9 +1137,9 @@ bool KMyMoneyView::saveFile(const KUrl& url, const QString& keyList)
         fmode |= fi.permission(QFile::WriteOther) ? 002 : 0;
         if(fi.groupId() != static_cast<uint>(-2))
           gid = fi.groupId();
-      } else {
-        qfile.open();
       }
+      if (plaintext)
+        qfile.open();
 
       // create a new basic block here, so that the object qfile gets
       // deleted, before we reach the chown() call
