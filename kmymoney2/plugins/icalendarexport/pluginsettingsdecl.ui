@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>457</width>
-    <height>359</height>
+    <width>475</width>
+    <height>165</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -15,6 +15,12 @@
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>475</width>
+    <height>165</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Icalendar export settings</string>
@@ -148,7 +154,11 @@
         </widget>
        </item>
        <item>
-        <widget class="KUrlRequester" name="kcfg_icalendarFile"/>
+        <widget class="KUrlRequester" name="kcfg_icalendarFile">
+         <property name="kcfg_property" stdset="0">
+          <cstring>text</cstring>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>

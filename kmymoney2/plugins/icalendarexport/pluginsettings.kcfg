@@ -36,7 +36,7 @@
     </entry>
     <entry name="numberOfReminders" type="Int">
       <label>The number of reminders to be generated for the schedule </label>
-      <default>0</default>
+      <default>1</default>
     </entry>
     <entry name="icalendarFile" type="String"> 
       <label>The icalendar file in which to export the schedules.</label> 
