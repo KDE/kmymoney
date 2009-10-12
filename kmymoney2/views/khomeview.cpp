@@ -115,6 +115,9 @@ KHomeView::~KHomeView()
     //kDebug() << "Storing font size: " << m_part->zoomFactor();
     KMyMoneyGlobalSettings::self()->writeConfig();
   }
+  //This is to prevent a crash on exit with KDE 4.3.2
+  if(m_part)
+      delete m_part;
 }
 
 void KHomeView::slotLoadView(void)
