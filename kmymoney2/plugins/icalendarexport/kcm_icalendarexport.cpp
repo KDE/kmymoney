@@ -49,7 +49,7 @@ public:
 K_PLUGIN_FACTORY(KCMiCalendarExportFactory, 
                  registerPlugin<KCMiCalendarExport>();
                 )
-K_EXPORT_PLUGIN(KCMiCalendarExportFactory("kmm_icalendarexport"))
+K_EXPORT_PLUGIN(KCMiCalendarExportFactory("kmm_icalendarexport", "kmymoney2"))
 
 KCMiCalendarExport::KCMiCalendarExport(QWidget *parent, const QVariantList& args) : KCModule(KCMiCalendarExportFactory::componentData(), parent, args)
 {
