@@ -125,6 +125,8 @@ KReportsView::KReportTab::KReportTab(KTabWidget* parent, const MyMoneyReport& re
 KReportsView::KReportTab::~KReportTab()
 {
   delete m_table;
+  //This is to prevent a crash on exit with KDE 4.3.2
+  delete m_part;
 }
 
 void KReportsView::KReportTab::print(void)
