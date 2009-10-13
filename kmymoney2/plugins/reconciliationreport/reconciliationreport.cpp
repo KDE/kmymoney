@@ -180,7 +180,7 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
   MyMoneyMoney afterDepositAmount, afterPaymentAmount;
   int afterDeposits = 0;
   int afterPayments = 0;
-  for(it = afterTransactionList.begin(); it != afterTransactionList.end(); ++it) {
+  for(it = afterTransactionList.constBegin(); it != afterTransactionList.constEnd(); ++it) {
     // if this split is a stock split, we can't just add the amount of shares
     if ((*it).second.reconcileFlag() == MyMoneySplit::NotReconciled) {
       if((*it).second.shares().isNegative()) {
