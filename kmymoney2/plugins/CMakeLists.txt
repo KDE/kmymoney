@@ -8,6 +8,8 @@ IF (LIBICAL_FOUND)
   ADD_SUBDIRECTORY( icalendarexport )
 ENDIF (LIBICAL_FOUND)
 
+ADD_SUBDIRECTORY( reconciliationreport )
+
 ########### next target ###############
 
 SET(kmm_plugin_LIB_SRCS

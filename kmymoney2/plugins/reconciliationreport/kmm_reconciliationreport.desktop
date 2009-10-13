@@ -1,0 +1,17 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Reconciliation report
+Name[ro]=Raport de reconciliere
+Comment=Creates a report after each reconciliation containing data about the reconciliation process
+Comment[ro]=Creează un raport la încheierea procesului de reconciliere
+Type=Service
+Icon=application-vnd.oasis.opendocument.spreadsheet
+ServiceTypes=KMyMoneyPlugin
+X-KDE-Library=kmm_reconciliationreport
+X-KDE-PluginInfo-Author=Cristian Oneț
+X-KDE-PluginInfo-Email=onet.cristian@gmail.com
+X-KDE-PluginInfo-Name=Reconciliation report
+X-KDE-PluginInfo-Version=${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}-${VERSION_SUFFIX}
+X-KDE-PluginInfo-Website=http://kmymoney2.sourceforge.net/plugins.html
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
