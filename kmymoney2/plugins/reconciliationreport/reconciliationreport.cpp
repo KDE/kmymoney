@@ -39,10 +39,10 @@ typedef KGenericFactory<KMMReconciliationReportPlugin> reconciliationreportFacto
 K_EXPORT_COMPONENT_FACTORY(kmm_reconciliationreport, reconciliationreportFactory( "kmm_reconciliationreport", "kmymoney2" ))
 
 KMMReconciliationReportPlugin::KMMReconciliationReportPlugin(QObject *parent, const QStringList&)
-    : KMyMoneyPlugin::Plugin(parent, "Reconciliation report")
+    : KMyMoneyPlugin::Plugin(parent, "Reconciliation report"/*must be the same as X-KDE-PluginInfo-Name*/)
 {
   // For ease announce that we have been loaded.
-  kdDebug() << "KMyMoney reconciliation report plugin loaded" << endl;
+  qDebug("KMyMoney reconciliation report plugin loaded");
 
   // connect to the pluginloader's relevant signals
   connect(KMyMoneyPlugin::PluginLoader::instance(), SIGNAL(plug(KPluginInfo*)), this, SLOT(slotPlug(KPluginInfo*)));
@@ -308,14 +308,14 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
 
 void KMMReconciliationReportPlugin::slotPlug(KPluginInfo* info)
 {
-  if (info->name() == name()) {
+  if (info->pluginName() == objectName()) {
     connect(viewInterface(), SIGNAL(accountReconciled(const MyMoneyAccount&, const QDate&, const MyMoneyMoney&, const MyMoneyMoney&, const QList<QPair<MyMoneyTransaction, MyMoneySplit> >&)), this, SLOT(slotGenerateReconciliationReport(const MyMoneyAccount&, const QDate&, const MyMoneyMoney&, const MyMoneyMoney&, const QList<QPair<MyMoneyTransaction, MyMoneySplit> >&)));
   }
 }
 
 void KMMReconciliationReportPlugin::slotUnplug(KPluginInfo* info)
 {
-  if (info->name() == name()) {
+  if (info->pluginName() == objectName()) {
     disconnect(viewInterface(), SIGNAL(accountReconciled(const MyMoneyAccount&, const QDate&, const MyMoneyMoney&, const MyMoneyMoney&, const QList<QPair<MyMoneyTransaction, MyMoneySplit> >&)), this, SLOT(slotGenerateReconciliationReport(const MyMoneyAccount&, const QDate&, const MyMoneyMoney&, const MyMoneyMoney&, const QList<QPair<MyMoneyTransaction, MyMoneySplit> >&)));
   }
 }

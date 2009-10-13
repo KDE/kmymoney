@@ -44,17 +44,15 @@ struct KMMiCalendarExportPlugin::Private {
   KAction* m_action;
   QString  m_profileName;
   QString  m_iCalendarFileEntryName;
-  QString  m_name;
   KMMSchedulesToiCalendar m_exporter;
 };
 
 KMMiCalendarExportPlugin::KMMiCalendarExportPlugin(QObject *parent, const QStringList&)
-    : KMyMoneyPlugin::Plugin(parent, "iCalendar"),
+    : KMyMoneyPlugin::Plugin(parent, "iCalendar"/*must be the same as X-KDE-PluginInfo-Name*/),
       d(new Private)
 {
   d->m_profileName = "iCalendarPlugin";
   d->m_iCalendarFileEntryName = "iCalendarFile";
-  d->m_name = "iCalendar";
 
   // Tell the host application to load my GUI component
   setComponentData(icalendarexportFactory::componentData());
@@ -127,14 +125,14 @@ void KMMiCalendarExportPlugin::slotExport(void)
 
 void KMMiCalendarExportPlugin::slotPlug(KPluginInfo* info)
 {
-  if (info->name() == d->m_name) {
+  if (info->pluginName() == objectName()) {
     connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotExport()));
   }
 }
 
 void KMMiCalendarExportPlugin::slotUnplug(KPluginInfo* info)
 {
-  if (info->name() == d->m_name) {
+  if (info->pluginName() == objectName()) {
     disconnect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotExport()));
   }
 }
