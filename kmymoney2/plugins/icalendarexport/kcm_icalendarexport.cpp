@@ -20,6 +20,7 @@
 
 // Qt includes
 #include <qcombobox.h>
+#include <qboxlayout.h>
 
 // KDE includes
 #include <kgenericfactory.h>
@@ -53,7 +54,11 @@ K_EXPORT_PLUGIN(KCMiCalendarExportFactory("kmm_icalendarexport", "kmymoney2"))
 
 KCMiCalendarExport::KCMiCalendarExport(QWidget *parent, const QVariantList& args) : KCModule(KCMiCalendarExportFactory::componentData(), parent, args)
 {
-  addConfig(PluginSettings::self(), new PluginSettingsWidget(this));
+  PluginSettingsWidget *w = new PluginSettingsWidget(this);
+  addConfig(PluginSettings::self(), w);
+  QVBoxLayout *layout = new QVBoxLayout;
+  setLayout(layout);
+  layout->addWidget(w);
   load();
 }
 
