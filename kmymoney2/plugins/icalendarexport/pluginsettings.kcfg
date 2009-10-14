@@ -31,7 +31,7 @@
       <default>60</default>
     </entry>
     <entry name="intervalBetweenRemindersTimeUnitInSeconds" type="Int">
-      <label>The units  of the interval between reminders in seconds </label>
+      <label>The units of the interval between reminders in seconds </label>
       <default>0</default>
     </entry>
     <entry name="numberOfReminders" type="Int">

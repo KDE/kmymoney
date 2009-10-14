@@ -226,7 +226,7 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
   detailsTableHeader += "</tr></thead>\n";
 
 
-  QString detailsReport = QString( "<h2 class=\"report\">%1</h2>\n" ).arg(i18n("Outstandig payments"));
+  QString detailsReport = QString( "<h2 class=\"report\">%1</h2>\n" ).arg(i18n("Outstanding payments"));
   detailsReport += detailsTableHeader;
 
   int index = 0;
@@ -263,7 +263,7 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
   detailsReport += QString("<td class=\"left1\" colspan=\"5\">%1</td><td>%2</td></tr>").arg(i18n("Total of %1 outstanding payments amounting to").arg(outstandingPayments)).arg(outstandingPaymentAmount.formatMoney(currency));
 
   detailsReport += "</table>\n";
-  detailsReport += QString( "<h2 class=\"report\">%1</h2>\n" ).arg(i18n("Outstandig deposits"));
+  detailsReport += QString( "<h2 class=\"report\">%1</h2>\n" ).arg(i18n("Outstanding deposits"));
   detailsReport += detailsTableHeader;
 
   index = 0;

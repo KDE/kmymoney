@@ -493,7 +493,7 @@ void KNewLoanWizard::next()
               "The loan wizard is unable to calculate two different values for your loan "
               "at the same time. "
               "Please enter a value for the %1 on this page or backup to the page where the "
-              " current value to be calculated is defined and fill in a value.");
+              "current value to be calculated is defined and fill in a value.");
 
   if(currentPage() == m_lendBorrowPage) {
     // load the appropriate categories into the list

@@ -17,7 +17,7 @@
       </rect>
     </property>
     <property name="windowTitle">
-      <string>Exchange Rate/Price  Editor</string>
+      <string>Exchange Rate/Price Editor</string>
     </property>
     <property name="sizeGripEnabled">
       <bool>true</bool>
