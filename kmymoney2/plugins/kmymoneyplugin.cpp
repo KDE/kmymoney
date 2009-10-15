@@ -87,17 +87,17 @@ KToggleAction* KMyMoneyPlugin::Plugin::toggleAction(const QString& actionName) c
 
 KMyMoneyPlugin::ViewInterface* KMyMoneyPlugin::Plugin::viewInterface() const
 {
-  return static_cast<ViewInterface*>( parent()->child( 0, "KMyMoneyPlugin::ViewInterface" ) );
+  return parent()->findChild<ViewInterface*>();
 }
 
 KMyMoneyPlugin::StatementInterface* KMyMoneyPlugin::Plugin::statementInterface() const
 {
-  return static_cast<StatementInterface*>( parent()->child( 0, "KMyMoneyPlugin::StatementInterface" ) );
+  return parent()->findChild<StatementInterface*>();
 }
 
 KMyMoneyPlugin::ImportInterface* KMyMoneyPlugin::Plugin::importInterface() const
 {
-  return static_cast<ImportInterface*>( parent()->child( 0, "KMyMoneyPlugin::ImportInterface" ) );
+  return parent()->findChild<ImportInterface*>();
 }
 
 #include "kmymoneyplugin.moc"
