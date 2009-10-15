@@ -1,7 +1,11 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Reconciliation report
+Name[sv]=Avstämningsrapport
+Name[uk]=Звіт щодо звірки
 Comment=Creates a report after each reconciliation containing data about the reconciliation process
+Comment[sv]=Skapar en rapport efter varje avstämning som innehåller information om avstämningsprocessen
+Comment[uk]=Створює звіт після кожної звірки з даними щодо процесу звірки
 Type=Service
 Icon=application-vnd.oasis.opendocument.spreadsheet
 ServiceTypes=KMyMoneyPlugin
