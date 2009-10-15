@@ -57,9 +57,9 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
 
   QString filename;
   if(!MyMoneyFile::instance()->value("reportstylesheet").isEmpty())
-    filename = KGlobal::dirs()->findResource("appdata", QString("html/%1").arg(MyMoneyFile::instance()->value("reportstylesheet")));
+    filename = KGlobal::dirs()->findResource("apps/kmymoney2", QString("html/%1").arg(MyMoneyFile::instance()->value("reportstylesheet")));
   if(filename.isEmpty())
-    filename = KGlobal::dirs()->findResource("appdata", "html/kmymoney2.css");
+    filename = KGlobal::dirs()->findResource("apps/kmymoney2", "html/kmymoney2.css");
   QString header = QString("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\">\n") +
     QString("<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"%1\">").arg(filename);
 

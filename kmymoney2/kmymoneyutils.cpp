@@ -262,7 +262,7 @@ void KMyMoneyUtils::checkConstants(void)
 
 QString KMyMoneyUtils::variableCSS(void)
 {
-  QColor tcolor = /*KGlobalSettings::textColor()*/KColorScheme::NormalText;
+  QColor tcolor = KColorScheme(QPalette::Active).foreground(KColorScheme::NormalText);
 
   QString css;
   css += "<style type=\"text/css\">\n<!--\n";
