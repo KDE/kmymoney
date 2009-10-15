@@ -362,6 +362,7 @@ QString MyMoneyXmlContentHandler::errorString() const
 
 
 MyMoneyStorageXML::MyMoneyStorageXML() :
+  m_progressCallback(0),
   m_storage(0),
   m_doc(0),
   d(new Private())
