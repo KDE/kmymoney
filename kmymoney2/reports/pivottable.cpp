@@ -53,6 +53,7 @@
 #include <KDChartDataValueAttributes>
 #include <KDChartLegend>
 #include <KDChartLineDiagram>
+#include <KDChartBarDiagram>
 #include <KDChartCartesianAxis>
 #include "pivottable.h"
 #include "pivotgrid.h"
@@ -1632,8 +1633,6 @@ QString PivotTable::renderHTML( void ) const
 
       for(int i = 0; i < m_rowTypeList.size(); ++i) {
         result += QString("<td%2>%1</td>")
-            #warning #Port to KDE4
-            //.arg(i18n( m_columnTypeHeaderList[i] ))
             .arg( m_columnTypeHeaderList[i] )
             .arg(i == 0 ? lb : QString() );
       }
@@ -1642,8 +1641,6 @@ QString PivotTable::renderHTML( void ) const
     if ( m_config_f.isShowingRowTotals() ) {
       for(int i = 0; i < m_rowTypeList.size(); ++i) {
         result += QString("<td%2>%1</td>")
-            #warning #Port to KDE4
-            //.arg(i18n( m_columnTypeHeaderList[i] ))
             .arg( m_columnTypeHeaderList[i] )
             .arg(i == 0 ? leftborder : QString() );
       }
@@ -1966,9 +1963,11 @@ void PivotTable::drawChart( KReportChartView& chartView ) const
 //   chartView.params()->setAxisParams( 1, yAxisParams );
 
 #endif
+  //set the legend basic attributes
   Legend* legend = new Legend(chartView.diagram(), chartView.diagram()->coordinatePlane()->parent());
+  legend->setPosition(Position::East);
   TextAttributes legendTextAttr(legend->textAttributes());
-  legendTextAttr.setFontSize(20);
+  legendTextAttr.setFontSize(10);
   legend->setTextAttributes(legendTextAttr);
 
   TextAttributes legendTitleTextAttr(legend->titleTextAttributes());
@@ -1976,12 +1975,12 @@ void PivotTable::drawChart( KReportChartView& chartView ) const
   legend->setTitleTextAttributes(legendTitleTextAttr);
   legend->setTitleText(i18nc("Chart lines legend","Legend"));
 
-  chartView.diagram()->useRainbowColors();
-
+  //set grid attributes
   GridAttributes gridAttr(chartView.diagram()->coordinatePlane()->globalGridAttributes());
   gridAttr.setGridVisible(m_config_f.isChartGridLines());
   chartView.diagram()->coordinatePlane()->setGlobalGridAttributes(gridAttr);
 
+  //set data value attributes
   DataValueAttributes valueAttr(chartView.diagram()->dataValueAttributes());
   valueAttr.setVisible(m_config_f.isChartDataLabels());
   chartView.diagram()->setDataValueAttributes(valueAttr);
@@ -2006,47 +2005,73 @@ void PivotTable::drawChart( KReportChartView& chartView ) const
 
   switch( m_config_f.chartType() )
   {
-  case MyMoneyReport::eChartNone:
-  case MyMoneyReport::eChartEnd:
-  case MyMoneyReport::eChartLine:
-    {
-      chartView.setType( KReportChartView::Line, KReportChartView::Normal );
-      if(chartView.lineDiagram()->axes().count() == 0) {
-        CartesianAxis *xAxis = new CartesianAxis( chartView.lineDiagram() );
-        CartesianAxis *yAxis = new CartesianAxis (chartView.lineDiagram() );
-        xAxis->setPosition ( CartesianAxis::Bottom );
-        yAxis->setPosition ( CartesianAxis::Left );
-        xAxis->setTitleText(i18n("Time"));
-        yAxis->setTitleText(i18n("Balance"));
-        chartView.lineDiagram()->addAxis( xAxis );
-        chartView.lineDiagram()->addAxis( yAxis );
-      }
-      break;
-    }
+      case MyMoneyReport::eChartNone:
+      case MyMoneyReport::eChartEnd:
+      case MyMoneyReport::eChartLine:
+        {
+          chartView.setType( KReportChartView::Line, KReportChartView::Normal );
+          break;
+        }
 
-  case MyMoneyReport::eChartBar:
-    chartView.setType( KReportChartView::Bar, KReportChartView::Normal );
-    break;
+      case MyMoneyReport::eChartBar:
+        chartView.setType( KReportChartView::Bar, KReportChartView::Normal );
+        break;
 
-  case MyMoneyReport::eChartStackedBar:
-    chartView.setType( KReportChartView::Bar, KReportChartView::Stacked );
+      case MyMoneyReport::eChartStackedBar:
+        chartView.setType( KReportChartView::Bar, KReportChartView::Stacked );
 
-    break;
-  case MyMoneyReport::eChartPie:
-    chartView.setType( KReportChartView::Pie );
-    // Charts should only be 3D if this adds any information
-//     chartView.params()->setThreeDPies( false );
-    accountSeries = false;
-    seriesTotals = true;
-    break;
-  case MyMoneyReport::eChartRing:
-    chartView.setType( KReportChartView::Ring );
-//     chartView.params()->setRelativeRingThickness( true );
-    accountSeries = false;
-    break;
+        break;
+      case MyMoneyReport::eChartPie:
+        chartView.setType( KReportChartView::Pie );
+        // Charts should only be 3D if this adds any information
+    //     chartView.params()->setThreeDPies( false );
+        accountSeries = false;
+        seriesTotals = true;
+        break;
+      case MyMoneyReport::eChartRing:
+        chartView.setType( KReportChartView::Ring );
+    //     chartView.params()->setRelativeRingThickness( true );
+        accountSeries = false;
+        break;
   }
 
+  //set up the axes for cartesian diagrams
+  if((chartView.type() == KReportChartView::Line) ||
+      (chartView.type() == KReportChartView::Bar &&
+       chartView.barDiagram()->axes().count()  == 0)) {
+    CartesianAxis *xAxis = new CartesianAxis();
+    CartesianAxis *yAxis = new CartesianAxis ();
+    xAxis->setPosition ( CartesianAxis::Bottom );
+    yAxis->setPosition ( CartesianAxis::Left );
+    xAxis->setTitleText(i18n("Time"));
+    yAxis->setTitleText(i18n("Balance"));
 
+    // Set up X axis labels (ie "abscissa" to use the technical term)
+    QStringList abscissaNames;
+    if ( accountSeries ) // if not, we will set these up while putting in the chart values.
+    {
+      int column = 1;
+      while ( column < m_numColumns ) {
+        abscissaNames += QString(m_columnHeadings[column++]).replace("&nbsp;", " ");
+      }
+      xAxis->setLabels(abscissaNames);
+    }
+
+    //add the axes to the corresponding diagram
+    if(chartView.type() == KReportChartView::Line) {
+      //remove all existing axes before inserting new ones
+      while(chartView.lineDiagram()->axes().count() > 0) {
+        CartesianAxis *delAxis  = chartView.lineDiagram()->axes().at(0);
+        chartView.lineDiagram()->takeAxis(delAxis);
+        delete delAxis;
+      }
+      chartView.lineDiagram()->addAxis( xAxis );
+      chartView.lineDiagram()->addAxis( yAxis );
+    } else if(chartView.type() == KReportChartView::Bar) {
+      chartView.barDiagram()->addAxis( xAxis );
+      chartView.barDiagram()->addAxis( yAxis );
+    }
+  }
 
   // For onMouseOver events, we want to activate mouse tracking
   chartView.setMouseTracking( true );
@@ -2055,38 +2080,23 @@ void PivotTable::drawChart( KReportChartView& chartView ) const
   // In KDChart parlance, a 'series' (or row) is an account (or accountgroup, etc)
   // and an 'item' (or column) is a month
   //
-  int r;
-  int c;
-  if ( accountSeries )
-  {
-    r = 1;
-    c = m_numColumns - 1;
-  }
-  else
-  {
-    c = 1;
-    r = m_numColumns - 1;
-  }
+//  int r;
+//  int c;
+//  if ( accountSeries )
+//  {
+//    r = 1;
+//    c = m_numColumns - 1;
+//  }
+//  else
+//  {
+//    c = 1;
+//    r = m_numColumns - 1;
+//  }
   //KDChartTableData data( r,c );
 
   // The KReportChartView widget needs to know whether the legend
   // corresponds to rows or columns
   chartView.setAccountSeries( accountSeries );
-
-  // Set up X axis labels (ie "abscissa" to use the technical term)
-  QStringList& abscissaNames = chartView.abscissaNames();
-  abscissaNames.clear();
-  if ( accountSeries )
-  {
-    int column = 1;
-    while ( column < m_numColumns ) {
-      abscissaNames += QString(m_columnHeadings[column++]).replace("&nbsp;", " ");
-    }
-  }
-  else
-  {
-    // we will set these up while putting in the chart values.
-  }
 
   switch ( m_config_f.detailLevel() )
   {

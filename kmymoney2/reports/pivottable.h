@@ -29,7 +29,6 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#warning #Port to KDE4
 #include "kreportchartview.h"
 #include "mymoneyfile.h"
 #include "mymoneyreport.h"
@@ -333,7 +332,6 @@ protected:
     */
     MyMoneyMoney cellBalance(const QString& outergroup, const ReportAccount& _row, int column, bool budget);
 
-#warning #port to kde4
    /**
      * Draws a PivotGridRowSet in a chart for the given ERowType
      */

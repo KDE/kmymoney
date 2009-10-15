@@ -28,63 +28,40 @@
 // Project Includes
 
 #include "kreportchartview.h"
-//#include <KDChartDataRegion.h>
-//Added by qt3to4:
+#include <KDChartBackgroundAttributes>
+#include <KDChartDataValueAttributes>
+#include <KDChartMarkerAttributes>
+#include <kcolorscheme.h>
 
 using namespace reports;
 
 KReportChartView::KReportChartView( QWidget* parent): KDChart::Widget(parent)
 {
-    // ********************************************************************
-    // Set KMyMoney's Chart Parameter Defaults
-    // ********************************************************************
-//     this->setPaletteBackgroundColor( Qt::white );
+  // ********************************************************************
+  // Set KMyMoney's Chart Parameter Defaults
+  // ********************************************************************
 
-//     KDChartParams* _params = new KDChartParams();
-//     _params->setChartType( KDChartParams::Line );
-//     _params->setAxisLabelStringParams( KDChartAxisParams::AxisPosBottom,&m_abscissaNames,0);
-//     _params->setDataSubduedColors();
+  //Set the background to white
+  BackgroundAttributes backAttr = this->coordinatePlane()->parent()->backgroundAttributes();
+  KColorScheme colorScheme(QPalette::Normal);
+  backAttr.setBrush(colorScheme.background());
+  backAttr.setVisible(true);
+  this->coordinatePlane()->parent()->setBackgroundAttributes(backAttr);
 
-    /**
-    // use line marker, but only circles.
-    _params->setLineMarker( true );
-    _params->setLineMarkerSize( QSize(8,8) );
-    _params->setLineMarkerStyle( 0, KDChartParams::LineMarkerCircle );
-    _params->setLineMarkerStyle( 1, KDChartParams::LineMarkerCircle );
-    _params->setLineMarkerStyle( 2, KDChartParams::LineMarkerCircle );
-    **/
+  //Line diagram
+  this->setType(Line);
 
-    // initialize parameters
-//     this->setParams(_params);
+  //Subdued colors
+  this->diagram()->useSubduedColors();
 
-    // initialize data
-//     KDChartTableData* _data = new KDChartTableData();
-//     this->setData(_data);
-
-    // ********************************************************************
-    // Some Examplatory Chart Table Data
-    // ********************************************************************
-
-    /**
-    // 1st series
-    this->data()->setCell( 0, 0,    17.5   );
-    this->data()->setCell( 0, 1,   125     );  // highest value
-    this->data()->setCell( 0, 2,     6.67  );  // lowest value
-    this->data()->setCell( 0, 3,    33.333 );
-    this->data()->setCell( 0, 4,    30     );
-    // 2nd series
-    this->data()->setCell( 1, 0,    40     );
-    this->data()->setCell( 1, 1,    40     );
-    this->data()->setCell( 1, 2,    45.5   );
-    this->data()->setCell( 1, 3,    45     );
-    this->data()->setCell( 1, 4,    35     );
-    // 3rd series
-    this->data()->setCell( 2, 0,    25     );
-    // missing value: setCell( 2, 1,   25 );
-    this->data()->setCell( 2, 2,    30     );
-    this->data()->setCell( 2, 3,    45     );
-    this->data()->setCell( 2, 4,    40     );
-    **/
+  //line markers
+  DataValueAttributes dataValueAttr(this->diagram()->dataValueAttributes());
+  MarkerAttributes markerAttr(dataValueAttr.markerAttributes());
+  markerAttr.setVisible(true);
+  markerAttr.setMarkerStyle(MarkerAttributes::MarkerCircle);
+  markerAttr.setMarkerSize(QSize(8,8));
+  dataValueAttr.setMarkerAttributes(markerAttr);
+  this->diagram()->setDataValueAttributes(dataValueAttr);
 
     // ********************************************************************
     // Tooltip Setup
