@@ -668,7 +668,18 @@ void MyMoneyDatabaseMgrTest::testAddTransactions() {
     it = list.begin();
     CPPUNIT_ASSERT((*it).id() == "T000000000000000002");
     ++it;
+
     CPPUNIT_ASSERT((*it).id() == "T000000000000000001");
+    CPPUNIT_ASSERT((*it).postDate() == QDate(2002,5,10));
+    CPPUNIT_ASSERT((*it).splitCount() == 2);
+    QList<MyMoneySplit> splitList = (*it).splits();
+    CPPUNIT_ASSERT(splitList[0].accountId() == "A000006");
+    CPPUNIT_ASSERT(splitList[0].shares() == MyMoneyMoney(100000));
+    CPPUNIT_ASSERT(splitList[0].value() == MyMoneyMoney(100000));
+    CPPUNIT_ASSERT(splitList[1].accountId() == "A000005");
+    CPPUNIT_ASSERT(splitList[1].shares() == MyMoneyMoney(-100000));
+    CPPUNIT_ASSERT(splitList[1].value() == MyMoneyMoney(-100000));
+
     ++it;
     CPPUNIT_ASSERT(it == list.end());
 
