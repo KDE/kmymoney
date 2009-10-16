@@ -227,11 +227,11 @@ private:
     */
   KMenu*         m_contextMenu;
 
-  /// keeps the id of the delete entry in the context menu
-  int                 m_contextMenuDelete;
+  /// keeps the QAction of the delete entry in the context menu
+  QAction*       m_contextMenuDelete;
 
-  /// keeps the id of the duplicate entry in the context menu
-  int                 m_contextMenuDuplicate;
+  /// keeps the QAction of the duplicate entry in the context menu
+  QAction*       m_contextMenuDuplicate;
 
   /**
     * This member contains a pointer to the input widget for the category.

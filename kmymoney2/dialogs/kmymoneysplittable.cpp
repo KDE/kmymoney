@@ -104,9 +104,9 @@ kMyMoneySplitTable::kMyMoneySplitTable(QWidget *parent, const char *name ) :
   m_contextMenu = new KMenu(this);
   m_contextMenu->setTitle(i18n("Split Options"));
   m_contextMenu->setIcon(KIcon("transaction"));
-  m_contextMenu->insertItem(KIcon("document-edit"), i18n("Edit..."), this, SLOT(slotStartEdit()));
-  m_contextMenuDuplicate = m_contextMenu->insertItem(KIcon("edit-copy"), i18nc("To duplicate a split", "Duplicate"), this, SLOT(slotDuplicateSplit()));
-  m_contextMenuDelete = m_contextMenu->insertItem(KIcon("edit-delete"),
+  m_contextMenu->addAction(KIcon("document-edit"), i18n("Edit..."), this, SLOT(slotStartEdit()));
+  m_contextMenuDuplicate = m_contextMenu->addAction(KIcon("edit-copy"), i18nc("To duplicate a split", "Duplicate"), this, SLOT(slotDuplicateSplit()));
+  m_contextMenuDelete = m_contextMenu->addAction(KIcon("edit-delete"),
                         i18n("Delete ..."),
                         this, SLOT(slotDeleteSplit()));
 
@@ -367,9 +367,9 @@ bool kMyMoneySplitTable::eventFilter(QObject *o, QEvent *e)
       case Qt::Key_Menu:
         // if the very last entry is selected, the delete
         // operation is not available otherwise it is
-        m_contextMenu->setItemEnabled(m_contextMenuDelete,
+        m_contextMenuDelete->setEnabled(
               row < static_cast<int> (m_transaction.splits().count()-1));
-        m_contextMenu->setItemEnabled(m_contextMenuDuplicate,
+        m_contextMenuDuplicate->setEnabled(
               row < static_cast<int> (m_transaction.splits().count()-1));
 
         m_contextMenu->exec(QCursor::pos());
@@ -428,9 +428,9 @@ void kMyMoneySplitTable::slotSetFocus(int realrow, int /* col */, int button, co
 
       // if the very last entry is selected, the delete
       // operation is not available otherwise it is
-      m_contextMenu->setItemEnabled(m_contextMenuDelete,
+      m_contextMenuDelete->setEnabled(
             row < static_cast<int> (m_transaction.splits().count()-1));
-      m_contextMenu->setItemEnabled(m_contextMenuDuplicate,
+      m_contextMenuDuplicate->setEnabled(
             row < static_cast<int> (m_transaction.splits().count()-1));
 
       m_contextMenu->exec(QCursor::pos());

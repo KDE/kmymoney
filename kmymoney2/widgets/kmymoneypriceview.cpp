@@ -143,19 +143,19 @@ KMyMoneyPriceView::KMyMoneyPriceView(QWidget *parent, const char *name ) :
 
   m_contextMenu = new KMenu(this);
   m_contextMenu->addTitle(i18n("Price Options"));
-  m_contextMenu->insertItem(kiconloader->loadIcon("document-new", KIconLoader::Small),
+  m_contextMenu->addAction(kiconloader->loadIcon("document-new", KIconLoader::Small),
                         i18nc("New price", "New..."),
                         this, SIGNAL(newPrice()));
 
-  m_contextMenu->insertItem(kiconloader->loadIcon("edit", KIconLoader::Small),
+  m_contextMenu->addAction(kiconloader->loadIcon("edit", KIconLoader::Small),
                         i18n("Edit..."),
                         this, SIGNAL(editPrice()));
 
-  m_contextMenu->insertItem(kiconloader->loadIcon("connect_creating", KIconLoader::Small),
+  m_contextMenu->addAction(kiconloader->loadIcon("connect_creating", KIconLoader::Small),
                         i18n("Online Price Update..."),
                         this, SIGNAL(onlinePriceUpdate()));
 
-  m_contextMenu->insertItem(kiconloader->loadIcon("delete", KIconLoader::Small),
+  m_contextMenu->addAction(kiconloader->loadIcon("delete", KIconLoader::Small),
                         i18n("Delete..."),
                         this, SIGNAL(deletePrice()));
 
@@ -227,28 +227,28 @@ void KMyMoneyPriceView::resizeEvent(QResizeEvent* e)
 
 void KMyMoneyPriceView::slotListClicked(Q3ListViewItem* item, const QPoint&, int)
 {
-  int editId = m_contextMenu->idAt(2);
-  int updateId = m_contextMenu->idAt(3);
-  int delId = m_contextMenu->idAt(4);
+  QAction* editAction = m_contextMenu->actions().value(2);
+  QAction* updateAction = m_contextMenu->actions().value(3);
+  QAction* delAction = m_contextMenu->actions().value(4);
 
-  m_contextMenu->setItemEnabled(editId, item != 0);
-  m_contextMenu->setItemEnabled(delId, item != 0);
+  editAction->setEnabled(item != 0);
+  delAction->setEnabled(item != 0);
 
   KMyMoneyPriceItem* priceitem = dynamic_cast<KMyMoneyPriceItem*>(item);
   if(priceitem) {
     MyMoneySecurity security;
     security = MyMoneyFile::instance()->security(priceitem->price().from());
-    m_contextMenu->setItemEnabled(updateId, security.isCurrency() );
+    updateAction->setEnabled(security.isCurrency());
 
     // Modification of automatically added entries is not allowed
     if(priceitem->price().source() == "KMyMoney") {
-      m_contextMenu->setItemEnabled(editId, false);
-      m_contextMenu->setItemEnabled(updateId, false);
-      m_contextMenu->setItemEnabled(delId, false);
+      editAction->setEnabled(false);
+      updateAction->setEnabled(false);
+      delAction->setEnabled(false);
     }
   }
   else
-    m_contextMenu->setItemEnabled(updateId, false );
+    updateAction->setEnabled(false);
 
   m_contextMenu->exec(QCursor::pos());
 }

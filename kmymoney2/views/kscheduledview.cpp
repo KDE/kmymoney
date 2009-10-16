@@ -88,7 +88,7 @@ KScheduledView::KScheduledView(QWidget *parent) :
 
   // attach popup to 'Filter...' button
   m_kaccPopup = new KMenu(this);
-  m_accountsCombo->setPopup(m_kaccPopup);
+  m_accountsCombo->setMenu(m_kaccPopup);
   connect(m_kaccPopup, SIGNAL(activated(int)), this, SLOT(slotAccountActivated(int)));
 
   m_qbuttonNew->setGuiItem(KMyMoneyUtils::scheduleNewGuiItem());
@@ -145,10 +145,12 @@ void KScheduledView::refresh(bool full, const QString& schedId)
         acc = file->asset();
         for(it_s = acc.accountList().begin(); it_s != acc.accountList().end(); ++it_s)
         {
+          QAction* act;
           MyMoneyAccount a = file->account(*it_s);
-          m_kaccPopup->insertItem(a.name(), accountCount);
-          m_kaccPopup->setItemChecked(accountCount, true);
-          accountCount++;
+          act = m_kaccPopup->addAction(a.name());
+          act->setCheckable(true);
+          act->setChecked(true);
+          ++accountCount;
         }
       }
       catch (MyMoneyException *e)
@@ -402,11 +404,11 @@ void KScheduledView::slotAccountActivated(int /*id*/)
     acc = file->asset();
     for(it_s = acc.accountList().begin(); it_s != acc.accountList().end(); ++it_s)
     {
-      if (!m_kaccPopup->isItemChecked(accountCount))
+      if (!m_kaccPopup->actions().value(accountCount)->isChecked())
       {
         m_filterAccounts.append(*it_s);
       }
-      accountCount++;
+      ++accountCount;
     }
 
     m_calendar->setFilterAccounts(m_filterAccounts);
