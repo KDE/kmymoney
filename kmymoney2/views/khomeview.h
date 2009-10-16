@@ -105,6 +105,10 @@ signals:
   void reportSelected(const QString& id);
 
 private:
+  /// \internal d-pointer class.
+  class Private;
+  /// \internal d-pointer instance.
+  Private* const d;
 
   /**
    * daily balances of an account
