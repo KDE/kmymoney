@@ -22,7 +22,6 @@
 #include <QLayout>
 #include <QDateTime>
 #include <QRegExp>
-// #include <q3dragobject.h>
 #include <QClipboard>
 #include <QApplication>
 #include <QPrinter>
@@ -51,6 +50,7 @@
 // Project Includes
 #include <KDChartGridAttributes>
 #include <KDChartDataValueAttributes>
+#include <KDChartHeaderFooter>
 #include <KDChartLegend>
 #include <KDChartLineDiagram>
 #include <KDChartBarDiagram>
@@ -1050,6 +1050,7 @@ void PivotTable::convertToBaseCurrency( void )
 void PivotTable::convertToDeepCurrency( void )
 {
   DEBUG_ENTER(__PRETTY_FUNCTION__);
+  MyMoneyFile* file = MyMoneyFile::instance();
 
   int fraction;
 
@@ -1074,11 +1075,15 @@ void PivotTable::convertToDeepCurrency( void )
           MyMoneyMoney conversionfactor = it_row.key().deepCurrencyPrice(valuedate);
 
           //use the fraction relevant to the account at hand
-          fraction = it_row.key().fraction();
+          if(it_row.key().isInvest()) {
+            fraction = file->currency(it_row.key().currency().tradingCurrency()).smallestAccountFraction();
+          } else {
+            fraction = it_row.key().currency().smallestAccountFraction();
+          }
 
           //use base currency fraction if not initialized
           if(fraction == -1)
-            fraction = MyMoneyFile::instance()->baseCurrency().smallestAccountFraction();
+            fraction = file->baseCurrency().smallestAccountFraction();
 
           //convert to deep currency
           MyMoneyMoney oldval = it_row.value()[eActual][column];
@@ -1963,6 +1968,16 @@ void PivotTable::drawChart( KReportChartView& chartView ) const
 //   chartView.params()->setAxisParams( 1, yAxisParams );
 
 #endif
+  //remove existing headers
+  while(chartView.allHeadersFooters().count() > 0) {
+    HeaderFooter* delHeader;
+    chartView.takeHeaderFooter(delHeader);
+    delete delHeader;
+  }
+
+  //set the new header
+  chartView.addHeaderFooter(m_config_f.name(), HeaderFooter::Header, Position::North);
+
   //set the legend basic attributes
   Legend* legend = new Legend(chartView.diagram(), chartView.diagram()->coordinatePlane()->parent());
   legend->setPosition(Position::East);
@@ -2034,6 +2049,9 @@ void PivotTable::drawChart( KReportChartView& chartView ) const
         accountSeries = false;
         break;
   }
+
+  //Subdued colors - we set it here again because it is a property of the diagram
+  chartView.diagram()->useSubduedColors();
 
   //set up the axes for cartesian diagrams
   if((chartView.type() == KReportChartView::Line) ||
