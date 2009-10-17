@@ -42,7 +42,7 @@ IncludeFile=kmymoney/kmymoneycombo.h
 [KMyMoneyFrequencyCombo]
 IncludeFile=kmymoney/kmymoneycombo.h
 
-[KMyMoneyOccurencePeriodCombo]
+[KMyMoneyOccurrencePeriodCombo]
 IncludeFile=kmymoney/kmymoneycombo.h
 
 [TransactionSortOption]
