@@ -157,6 +157,10 @@ if( USE_QT_DESIGNER )
      ${CMAKE_CURRENT_BINARY_DIR}/kmymoneywidgets.cpp
   )
 
+  # only the kmymoneywidgets designer plugin needs KMM_DESIGNER defined and the leak checker disabled
+  SET_TARGET_PROPERTIES(kmymoney PROPERTIES
+    COMPILE_FLAGS "-U_CHECK_MEMORY -DKMM_DESIGNER")
+
   kde4_add_widget_files(${kmymoneywidgets_PART_SRCS} kmymoney.widgets)
 
   kde4_add_plugin(kmymoneywidgets ${kmymoneywidgets_PART_SRCS})
