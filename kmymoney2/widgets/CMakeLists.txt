@@ -20,6 +20,16 @@ SET(kmymoney_STAT_HEADERS
   kmymoney_export.h
   )
 
+IF (NOT EXISTS ${KMyMoney_BINARY_DIR}/kmymoney)
+  FILE(MAKE_DIRECTORY ${KMyMoney_BINARY_DIR}/kmymoney)
+ENDIF (NOT EXISTS ${KMyMoney_BINARY_DIR}/kmymoney)
+
+FOREACH(c_FILE ${kmymoney_STAT_HEADERS})
+  EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E create_symlink
+    ${CMAKE_CURRENT_SOURCE_DIR}/${c_FILE}
+    ${KMyMoney_BINARY_DIR}/kmymoney/${c_FILE})
+ENDFOREACH (c_FILE)
+
 ########### Basic Widget Library (kmymoney_base) STATIC #################
 
 # Common sources for libkmymoney.so and libwidgets.a that do not
@@ -156,10 +166,6 @@ if( USE_QT_DESIGNER )
   set(kmymoneywidgets_PART_SRCS
      ${CMAKE_CURRENT_BINARY_DIR}/kmymoneywidgets.cpp
   )
-
-  # only the kmymoneywidgets designer plugin needs KMM_DESIGNER defined and the leak checker disabled
-  SET_TARGET_PROPERTIES(kmymoney PROPERTIES
-    COMPILE_FLAGS "-U_CHECK_MEMORY -DKMM_DESIGNER")
 
   kde4_add_widget_files(${kmymoneywidgets_PART_SRCS} kmymoney.widgets)
 
