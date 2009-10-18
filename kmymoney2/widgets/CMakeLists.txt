@@ -20,15 +20,8 @@ SET(kmymoney_STAT_HEADERS
   kmymoney_export.h
   )
 
-IF (NOT EXISTS ${KMyMoney_BINARY_DIR}/kmymoney)
-  FILE(MAKE_DIRECTORY ${KMyMoney_BINARY_DIR}/kmymoney)
-ENDIF (NOT EXISTS ${KMyMoney_BINARY_DIR}/kmymoney)
-
-FOREACH(c_FILE ${kmymoney_STAT_HEADERS})
-  EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E create_symlink
-    ${CMAKE_CURRENT_SOURCE_DIR}/${c_FILE}
-    ${KMyMoney_BINARY_DIR}/kmymoney/${c_FILE})
-ENDFOREACH (c_FILE)
+KMM_CREATE_LINKS( ${kmymoney_STAT_HEADERS} )
+KMM_CREATE_LINKS_BIN( transactionsortoption.h )
 
 ########### Basic Widget Library (kmymoney_base) STATIC #################
 

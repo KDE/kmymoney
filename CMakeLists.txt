@@ -32,6 +32,7 @@ FIND_PACKAGE(KDE4 REQUIRED)
 
 include( KDE4Defaults )
 include( MacroLibrary )
+include( KMyMoneyMacros )
 find_package(KdepimLibs REQUIRED)
 
 add_definitions( ${QT_DEFINITIONS} ${KDE4_DEFINITIONS})

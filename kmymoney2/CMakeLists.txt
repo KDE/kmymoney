@@ -16,6 +16,10 @@ ADD_SUBDIRECTORY( misc )
 
 SET( _HEADERS kmymoneyutils.h kmymoneyglobalsettings.h )
 
+# we call a macro that creates symbolic links in kmymoney/
+KMM_CREATE_LINKS( ${_HEADERS} )
+KMM_CREATE_LINKS_BIN( kmymoneysettings.h )
+
 ########### common code (kmymoney_common) STATIC ###############
 # will be linked into kmymoney2, kmymoneytest, and libkmymoney.so
 
@@ -33,8 +37,8 @@ TARGET_LINK_LIBRARIES(kmymoney_common
 ADD_DEPENDENCIES(kmymoney_common generate_base_ui_srcs)
 
 SET( kmymoney_common_LIBS
-  ${QT_AND_KDECORE_LIBS} views reports kmymoney_common newuserwizard
-  newaccountwizard wizardpages dialogs settings widgets converter
+  ${QT_AND_KDECORE_LIBS} views reports kmymoney_common newuserwizard 
+  newaccountwizard wizardpages dialogs widgets settings converter
   kmm_storage kmm_mymoney kgpgfile interfaces kmm_plugin dialogs kmm_kdchart
  ${KDE4_KHTML_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KABC_LIBS})
 #kmm_kdchart
