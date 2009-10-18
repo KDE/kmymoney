@@ -121,7 +121,6 @@ SET(libwidgets_a_SOURCES
   kmymoneybriefschedule.cpp
   kmymoneycalendar.cpp
   kmymoneyforecastlistviewitem.cpp
-  kmymoneygpgconfig.cpp
   kmymoneyonlinequoteconfig.cpp
   kmymoneypriceview.cpp
   kmymoneyscheduledcalendar.cpp
@@ -138,7 +137,7 @@ SET(libwidgets_a_UI
   kschedulebriefwidget.ui kmymoneyreportcontroldecl.ui
   kmymoneyreportconfigtab1decl.ui kmymoneyreportconfigtab2decl.ui
   kmymoneyreportconfigtab3decl.ui kmymoneyreportconfigtabchartdecl.ui
-  kmymoneyonlinequoteconfigdecl.ui kmymoneygpgconfigdecl.ui 
+  kmymoneyonlinequoteconfigdecl.ui
   )
 
 # using uic on the above UI files DEPENDS on libkmymoney.so. If uic
@@ -171,7 +170,7 @@ if( USE_QT_DESIGNER )
 
   kde4_add_plugin(kmymoneywidgets ${kmymoneywidgets_PART_SRCS})
 
-  target_link_libraries(kmymoneywidgets ${KDE4_KDECORE_LIBS}  ${QT_QTGUI_LIBRARY} ${KDE4_KDE3SUPPORT_LIBS} widgets kmymoney kmymoney_common dialogs kgpgfile converter)
+  target_link_libraries(kmymoneywidgets ${KDE4_KDECORE_LIBS}  ${QT_QTGUI_LIBRARY} ${KDE4_KDE3SUPPORT_LIBS} widgets kmymoney kmymoney_common dialogs converter)
 
   install(TARGETS kmymoneywidgets DESTINATION ${PLUGIN_INSTALL_DIR}/plugins/designer )
 
