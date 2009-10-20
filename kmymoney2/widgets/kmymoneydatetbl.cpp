@@ -90,13 +90,8 @@ kMyMoneyDateTbl::kMyMoneyDateTbl(QWidget *parent, QDate date_, const char* name,
   }
   setFocusPolicy( Qt::StrongFocus );
 
-
-  viewport()->setEraseColor(KColorScheme::NormalBackground);
-
   setDate(date_); // this initializes firstday, numdays, numDaysPrevMonth
 
-  // So we can emit hoverDate
-//  QApplication::setGlobalMouseTracking(true);
   viewport()->setMouseTracking(true);
 }
 
@@ -109,10 +104,6 @@ kMyMoneyDateTbl::paintCell(QPainter *painter, int row, int col)
   int w=cellWidth();
   int h=cellHeight();
   KColorScheme colorScheme = KColorScheme(QPalette::Active);
-  //QBrush brushBlue(KGlobalSettings::activeTitleColor());
-  QBrush brushBlue = colorScheme.background(KColorScheme::PositiveBackground);
-  //QBrush brushLightblue(KGlobalSettings::baseColor());
-  QBrush brushLightblue = colorScheme.background(KColorScheme::NormalBackground);
   QFont font=KGlobalSettings::generalFont();
 
   // -----
@@ -139,25 +130,20 @@ kMyMoneyDateTbl::paintCell(QPainter *painter, int row, int col)
 
       if (!normalday)
       {
-        //painter->setPen(KGlobalSettings::baseColor());
         painter->setPen(colorScheme.background(KColorScheme::NormalBackground).color());
-        painter->setBrush(brushLightblue);
+        painter->setBrush(palette().color(QPalette::Base));
         painter->drawRect(0, 0, w, h);
-        //painter->setPen(KGlobalSettings::activeTitleColor());
-        painter->setPen(colorScheme.foreground(KColorScheme::PositiveText).color());
+        painter->setPen(palette().color(QPalette::Highlight));
       } else {
-        //painter->setPen(KGlobalSettings::activeTitleColor());
         painter->setPen(colorScheme.foreground(KColorScheme::PositiveText).color());
-        painter->setBrush(brushBlue);
+        painter->setBrush(palette().color(QPalette::Highlight));
         painter->drawRect(0, 0, w, h);
-        //painter->setPen(KGlobalSettings::activeTextColor());
-        painter->setPen(colorScheme.foreground(KColorScheme::PositiveText).color());
+        painter->setPen(palette().color(QPalette::HighlightedText));
       }
       painter->drawText(0, 0, w, h-1, Qt::AlignCenter,
-                        daystr, -1, &rect);
-      //painter->setPen(KGlobalSettings::textColor());
+                        daystr, &rect);
       painter->setPen(colorScheme.foreground(KColorScheme::NormalText).color());
-      
+
       QPainterPath path;
       path.moveTo(0, h-1);
       path.lineTo(w-1, h-1);
@@ -172,21 +158,18 @@ kMyMoneyDateTbl::paintCell(QPainter *painter, int row, int col)
     }
     else if (m_type == WEEKLY)
     {
-      //painter->setPen(KGlobalSettings::activeTitleColor());
       painter->setPen(colorScheme.foreground(KColorScheme::PositiveText).color());
-      painter->setBrush(brushBlue);
+      painter->setBrush(palette().color(QPalette::Highlight));
       painter->drawRect(0, 0, w, h);
-      //painter->setPen(KGlobalSettings::activeTextColor());
-      painter->setPen(colorScheme.foreground(KColorScheme::PositiveText).color());
+      painter->setPen(palette().color(QPalette::HighlightedText));
 
       int year=date.year();
       QString headerText;
-      // FIXME: Shouldn't that be i18n()'ed as well
       QString weekStr = QString::number(date.weekNumber(&year));
       QString yearStr = QString::number(year);
       headerText = i18n("Week %1 for year %2.", weekStr, yearStr);
 
-      painter->drawText(0, 0, w, h-1, Qt::AlignCenter, headerText, -1, &rect);
+      painter->drawText(0, 0, w, h-1, Qt::AlignCenter, headerText, &rect);
 
       maxCell.setWidth(width());
 
@@ -198,19 +181,19 @@ kMyMoneyDateTbl::paintCell(QPainter *painter, int row, int col)
       int athird = width()/3;
 
       painter->setPen(KGlobalSettings::activeTitleColor());
-      painter->setBrush(brushBlue);
-      painter->setPen(/*KGlobalSettings::activeTextColor()*/QColor(Qt::black));
+      painter->setBrush(palette().color(QPalette::Highlight));
+      painter->setPen(palette().color(QPalette::HighlightedText));
 
       if (col == 0)
       {
         painter->drawRect(0, 0, athird, h);
-        painter->drawText(0, 0, athird, h-1, Qt::AlignCenter, "Month 1", -1, &rect);
+        painter->drawText(0, 0, athird, h-1, Qt::AlignCenter, "Month 1", &rect);
 
         painter->drawRect(athird, 0, athird, h);
-        painter->drawText(athird, 0, athird, h-1, Qt::AlignCenter, "Month 2", -1, &rect);
+        painter->drawText(athird, 0, athird, h-1, Qt::AlignCenter, "Month 2", &rect);
 
         painter->drawRect(athird*2, 0, athird, h);
-        painter->drawText(athird*2, 0, athird, h-1, Qt::AlignCenter, "Month 3", -1, &rect);
+        painter->drawText(athird*2, 0, athird, h-1, Qt::AlignCenter, "Month 3", &rect);
       }
     }
   }
