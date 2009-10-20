@@ -349,8 +349,8 @@ void MyMoneyMoney::fromString(const QString& str)
   QRegExp regExp("(\\-?\\d+)/(\\d+)");
   int pos = regExp.indexIn(str);
   if(pos > -1) {
-    m_num = regExp.cap(1).toLong();
-    m_denom = regExp.cap(2).toLong();
+    m_num = regExp.cap(1).toLongLong();
+    m_denom = regExp.cap(2).toLongLong();
   }
 }
 
