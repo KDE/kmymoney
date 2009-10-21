@@ -43,7 +43,7 @@
 KMyMoneyTitleLabel::KMyMoneyTitleLabel(QWidget *parent, const char *name) :
   QLabel(parent, name)
 {
-  m_bgColor = KColorScheme(isEnabled() ? QPalette::Active : QPalette::Inactive, KColorScheme::Selection).background(KColorScheme::NormalBackground);
+  m_bgColor = KColorScheme(isEnabled() ? QPalette::Active : QPalette::Inactive, KColorScheme::Selection).background(KColorScheme::NormalBackground).color();
 
   setFont(KGlobalSettings::windowTitleFont());
 }
