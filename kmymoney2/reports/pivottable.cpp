@@ -33,13 +33,6 @@
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-// This is just needed for i18n() and weekStartDay().
-// Once I figure out how to handle i18n
-// without using this macro directly, I'll be freed of KDE dependency.  This
-// is a minor problem because we use these terms when rendering to HTML,
-// and a more major problem because we need it to translate account types
-// (e.g. MyMoneyAccount::Checkings) into their text representation.  We also
-// use that text representation in the core data structure of the report. (Ace)
 
 #include <kglobal.h>
 #include <klocale.h>
@@ -48,13 +41,6 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include <KDChartGridAttributes>
-#include <KDChartDataValueAttributes>
-#include <KDChartHeaderFooter>
-#include <KDChartLegend>
-#include <KDChartLineDiagram>
-#include <KDChartBarDiagram>
-#include <KDChartCartesianAxis>
 #include "pivottable.h"
 #include "pivotgrid.h"
 #include "reportdebug.h"
@@ -1052,8 +1038,6 @@ void PivotTable::convertToDeepCurrency( void )
   DEBUG_ENTER(__PRETTY_FUNCTION__);
   MyMoneyFile* file = MyMoneyFile::instance();
 
-  int fraction;
-
   PivotGrid::iterator it_outergroup = m_grid.begin();
   while ( it_outergroup != m_grid.end() )
   {
@@ -1075,11 +1059,7 @@ void PivotTable::convertToDeepCurrency( void )
           MyMoneyMoney conversionfactor = it_row.key().deepCurrencyPrice(valuedate);
 
           //use the fraction relevant to the account at hand
-          if(it_row.key().isInvest()) {
-            fraction = file->currency(it_row.key().currency().tradingCurrency()).smallestAccountFraction();
-          } else {
-            fraction = it_row.key().currency().smallestAccountFraction();
-          }
+          int fraction = it_row.key().currency().smallestAccountFraction();
 
           //use base currency fraction if not initialized
           if(fraction == -1)
@@ -1400,7 +1380,7 @@ QString PivotTable::renderCSV( void ) const
       while ( it_row != (*it_innergroup).end() )
       {
         ReportAccount rowname = it_row.key();
-        int fraction = rowname.fraction(rowname.currency());
+        int fraction = rowname.currency().smallestAccountFraction();
 
         //
         // Columns
@@ -1952,370 +1932,8 @@ void PivotTable::dump( const QString& file, const QString& /* context */) const
 
 void PivotTable::drawChart( KReportChartView& chartView ) const
 {
-#if 1 // make this "#if 1" if you want to play with the axis settings
-  // not sure if 0 is X and 1 is Y.
-//   KDChartAxisParams xAxisParams, yAxisParams;
-//   KDChartAxisParams::deepCopy(xAxisParams, chartView.params()->axisParams(0));
-//   KDChartAxisParams::deepCopy(yAxisParams, chartView.params()->axisParams(1));
-// 
-//   // modify axis settings here
-//   xAxisParams.setAxisLabelsFontMinSize(12);
-//   xAxisParams.setAxisLabelsFontRelSize(20);
-//   yAxisParams.setAxisLabelsFontMinSize(12);
-//   yAxisParams.setAxisLabelsFontRelSize(20);
-// 
-//   chartView.params()->setAxisParams( 0, xAxisParams );
-//   chartView.params()->setAxisParams( 1, yAxisParams );
-
-#endif
-  //remove existing headers
-  while(chartView.allHeadersFooters().count() > 0) {
-    HeaderFooter* delHeader;
-    chartView.takeHeaderFooter(delHeader);
-    delete delHeader;
-  }
-
-  //set the new header
-  chartView.addHeaderFooter(m_config_f.name(), HeaderFooter::Header, Position::North);
-
-  //set the legend basic attributes
-  Legend* legend = new Legend(chartView.diagram(), chartView.diagram()->coordinatePlane()->parent());
-  legend->setPosition(Position::East);
-  TextAttributes legendTextAttr(legend->textAttributes());
-  legendTextAttr.setFontSize(10);
-  legend->setTextAttributes(legendTextAttr);
-
-  TextAttributes legendTitleTextAttr(legend->titleTextAttributes());
-  legendTitleTextAttr.setFontSize(24);
-  legend->setTitleTextAttributes(legendTitleTextAttr);
-  legend->setTitleText(i18nc("Chart lines legend","Legend"));
-
-  //set grid attributes
-  GridAttributes gridAttr(chartView.diagram()->coordinatePlane()->globalGridAttributes());
-  gridAttr.setGridVisible(m_config_f.isChartGridLines());
-  chartView.diagram()->coordinatePlane()->setGlobalGridAttributes(gridAttr);
-
-  //set data value attributes
-  DataValueAttributes valueAttr(chartView.diagram()->dataValueAttributes());
-  valueAttr.setVisible(m_config_f.isChartDataLabels());
-  chartView.diagram()->setDataValueAttributes(valueAttr);
-
-  // whether to limit the chart to use series totals only.  Used for reports which only
-  // show one dimension (pie).
-  bool seriesTotals = false;
-
-  // whether series (rows) are accounts (true) or months (false). This causes a lot
-  // of complexity in the charts.  The problem is that circular reports work best with
-  // an account in a COLUMN, while line/bar prefer it in a ROW.
-  bool accountSeries = true;
-
-  //what values should be shown
-  bool showBudget = m_config_f.hasBudget();
-  bool showForecast = m_config_f.isIncludingForecast();
-  bool showActual = false;
-  if( (m_config_f.isIncludingBudgetActuals()) || ( !showBudget && !showForecast) )
-    showActual = true;
-
-//   chartView.params()->setLineWidth( m_config_f.chartLineWidth() );
-
-  switch( m_config_f.chartType() )
-  {
-      case MyMoneyReport::eChartNone:
-      case MyMoneyReport::eChartEnd:
-      case MyMoneyReport::eChartLine:
-        {
-          chartView.setType( KReportChartView::Line, KReportChartView::Normal );
-          break;
-        }
-
-      case MyMoneyReport::eChartBar:
-        chartView.setType( KReportChartView::Bar, KReportChartView::Normal );
-        break;
-
-      case MyMoneyReport::eChartStackedBar:
-        chartView.setType( KReportChartView::Bar, KReportChartView::Stacked );
-
-        break;
-      case MyMoneyReport::eChartPie:
-        chartView.setType( KReportChartView::Pie );
-        // Charts should only be 3D if this adds any information
-    //     chartView.params()->setThreeDPies( false );
-        accountSeries = false;
-        seriesTotals = true;
-        break;
-      case MyMoneyReport::eChartRing:
-        chartView.setType( KReportChartView::Ring );
-    //     chartView.params()->setRelativeRingThickness( true );
-        accountSeries = false;
-        break;
-  }
-
-  //Subdued colors - we set it here again because it is a property of the diagram
-  chartView.diagram()->useSubduedColors();
-
-  //set up the axes for cartesian diagrams
-  if((chartView.type() == KReportChartView::Line) ||
-      (chartView.type() == KReportChartView::Bar &&
-       chartView.barDiagram()->axes().count()  == 0)) {
-    CartesianAxis *xAxis = new CartesianAxis();
-    CartesianAxis *yAxis = new CartesianAxis ();
-    xAxis->setPosition ( CartesianAxis::Bottom );
-    yAxis->setPosition ( CartesianAxis::Left );
-    xAxis->setTitleText(i18n("Time"));
-    yAxis->setTitleText(i18n("Balance"));
-
-    // Set up X axis labels (ie "abscissa" to use the technical term)
-    QStringList abscissaNames;
-    if ( accountSeries ) // if not, we will set these up while putting in the chart values.
-    {
-      int column = 1;
-      while ( column < m_numColumns ) {
-        abscissaNames += QString(m_columnHeadings[column++]).replace("&nbsp;", " ");
-      }
-      xAxis->setLabels(abscissaNames);
-    }
-
-    //add the axes to the corresponding diagram
-    if(chartView.type() == KReportChartView::Line) {
-      //remove all existing axes before inserting new ones
-      while(chartView.lineDiagram()->axes().count() > 0) {
-        CartesianAxis *delAxis  = chartView.lineDiagram()->axes().at(0);
-        chartView.lineDiagram()->takeAxis(delAxis);
-        delete delAxis;
-      }
-      chartView.lineDiagram()->addAxis( xAxis );
-      chartView.lineDiagram()->addAxis( yAxis );
-    } else if(chartView.type() == KReportChartView::Bar) {
-      chartView.barDiagram()->addAxis( xAxis );
-      chartView.barDiagram()->addAxis( yAxis );
-    }
-  }
-
-  // For onMouseOver events, we want to activate mouse tracking
-  chartView.setMouseTracking( true );
-
-  //
-  // In KDChart parlance, a 'series' (or row) is an account (or accountgroup, etc)
-  // and an 'item' (or column) is a month
-  //
-//  int r;
-//  int c;
-//  if ( accountSeries )
-//  {
-//    r = 1;
-//    c = m_numColumns - 1;
-//  }
-//  else
-//  {
-//    c = 1;
-//    r = m_numColumns - 1;
-//  }
-  //KDChartTableData data( r,c );
-
-  // The KReportChartView widget needs to know whether the legend
-  // corresponds to rows or columns
-  chartView.setAccountSeries( accountSeries );
-
-  switch ( m_config_f.detailLevel() )
-  {
-    case MyMoneyReport::eDetailNone:
-    case MyMoneyReport::eDetailEnd:
-    case MyMoneyReport::eDetailAll:
-    {
-      int rowNum = 0;
-
-      // iterate over outer groups
-      PivotGrid::const_iterator it_outergroup = m_grid.begin();
-      while ( it_outergroup != m_grid.end() )
-      {
-        // iterate over inner groups
-        PivotOuterGroup::const_iterator it_innergroup = (*it_outergroup).begin();
-        while ( it_innergroup != (*it_outergroup).end() )
-        {
-          //
-          // Rows
-          //
-          QString innergroupdata;
-          PivotInnerGroup::const_iterator it_row = (*it_innergroup).begin();
-          while ( it_row != (*it_innergroup).end() )
-          {
-            //Do not include investments accounts in the chart because they are merely container of stock and other accounts
-            if( it_row.key().accountType() != MyMoneyAccount::Investment) {
-              //iterate row types
-              for(int i = 0; i < m_rowTypeList.size(); ++i) {
-                //skip the budget difference rowset
-                if(m_rowTypeList[i] != eBudgetDiff ) {
-                  rowNum = drawChartRowSet(rowNum, seriesTotals, accountSeries, chartView, it_row.value(), m_rowTypeList[i]);
-
-                  //only show the column type in the header if there is more than one type
-                  if(m_rowTypeList.size() > 1) {
-
-                    legend->setText(rowNum-1, m_columnTypeHeaderList[i] + " - " + it_row.key().name());
-
-                  } else {
-                    legend->setText(rowNum-1, it_row.key().name());
-                  }
-                }
-              }
-            }
-            ++it_row;
-          }
-          ++it_innergroup;
-        }
-        ++it_outergroup;
-      }
-      chartView.replaceLegend(legend);
-    }
-    break;
-
-    case MyMoneyReport::eDetailTop:
-    {
-      int rowNum = 0;
-
-      // iterate over outer groups
-      PivotGrid::const_iterator it_outergroup = m_grid.begin();
-      while ( it_outergroup != m_grid.end() )
-      {
-
-        // iterate over inner groups
-        PivotOuterGroup::const_iterator it_innergroup = (*it_outergroup).begin();
-        while ( it_innergroup != (*it_outergroup).end() )
-        {
-          //iterate row types
-          for(int i = 0; i < m_rowTypeList.size(); ++i) {
-            //skip the budget difference rowset
-            if(m_rowTypeList[i] != eBudgetDiff ) {
-              rowNum = drawChartRowSet(rowNum, seriesTotals, accountSeries, chartView, (*it_innergroup).m_total, m_rowTypeList[i]);
-
-              //only show the column type in the header if there is more than one type
-              if(m_rowTypeList.size() > 1) {
-                legend->setText(rowNum-1, m_columnTypeHeaderList[i] + " - " + it_innergroup.key());
-              } else {
-                legend->setText(rowNum-1, it_innergroup.key());
-              }
-            }
-          }
-          ++it_innergroup;
-        }
-        ++it_outergroup;
-      }
-      chartView.replaceLegend(legend);
-    }
-    break;
-
-    case MyMoneyReport::eDetailGroup:
-    {
-      int rowNum = 0;
-
-      // iterate over outer groups
-      PivotGrid::const_iterator it_outergroup = m_grid.begin();
-      while ( it_outergroup != m_grid.end() )
-      {
-        //iterate row types
-        for(int i = 0; i < m_rowTypeList.size(); ++i) {
-          //skip the budget difference rowset
-          if(m_rowTypeList[i] != eBudgetDiff ) {
-            rowNum = drawChartRowSet(rowNum, seriesTotals, accountSeries, chartView, (*it_outergroup).m_total, m_rowTypeList[i]);
-
-            //only show the column type in the header if there is more than one type
-            if(m_rowTypeList.size() > 1) {
-              legend->setText(rowNum-1, m_columnTypeHeaderList[i] + " - " + it_outergroup.key());
-            } else {
-              legend->setText(rowNum-1, it_outergroup.key());
-            }
-          }
-        }
-        ++it_outergroup;
-      }
-
-      //if selected, show totals too
-      if (m_config_f.isShowingRowTotals())
-      {
-        //iterate row types
-        for(int i = 0; i < m_rowTypeList.size(); ++i) {
-          //skip the budget difference rowset
-          if(m_rowTypeList[i] != eBudgetDiff ) {
-            rowNum = drawChartRowSet(rowNum, seriesTotals, accountSeries, chartView, m_grid.m_total, m_rowTypeList[i]);
-
-            //only show the column type in the header if there is more than one type
-            if(m_rowTypeList.size() > 1) {
-              legend->setText(rowNum -1, m_columnTypeHeaderList[i] + " - " + i18nc("Total balance", "Total"));
-            } else {
-              legend->setText(rowNum -1, i18nc("Total balance", "Total"));
-            }
-          }
-        }
-      }
-      chartView.replaceLegend(legend);
-    }
-    break;
-
-    case MyMoneyReport::eDetailTotal:
-    {
-      int rowNum = 0;
-
-      //iterate row types
-      for(int i = 0; i < m_rowTypeList.size(); ++i) {
-        //skip the budget difference rowset
-        if(m_rowTypeList[i] != eBudgetDiff ) {
-          rowNum = drawChartRowSet(rowNum, seriesTotals, accountSeries, chartView, m_grid.m_total, m_rowTypeList[i]);
-
-          //only show the column type in the header if there is more than one type
-          if(m_rowTypeList.size() > 1) {
-              legend->setText(rowNum -1, m_columnTypeHeaderList[i] + " - " + i18nc("Total balance", "Total"));
-            } else {
-              legend->setText(rowNum -1, i18nc("Total balance", "Total"));//             chartView.params()->setLegendText( rowNum-1, i18nc("Total balance", "Total") );
-          }
-        }
-      }
-      chartView.replaceLegend(legend);
-    }
-    break;
-  }
-
-  //chartView.setNewData(data);
-
-  // make sure to show only the required number of fractional digits on the labels of the graph
-//   chartView.params()->setDataValuesCalc(0, MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
-//   chartView.refreshLabels();
-
+  chartView.drawPivotChart(m_grid, m_config_f, m_numColumns, m_columnHeadings, m_rowTypeList, m_columnTypeHeaderList);
 }
-
-unsigned PivotTable::drawChartRowSet(int rowNum, const bool seriesTotals, const bool accountSeries, KReportChartView& chartView, const PivotGridRowSet& rowSet, const ERowType rowType ) const
-{
-  //only add a row if one has been added before
-  // TODO: This is inefficient. Really we should total up how many rows
-  // there will be and allocate it all at once.
-//   if(rowNum > 0) {
-//     if ( accountSeries )
-//       data.expand( rowNum+1, m_numColumns-1 );
-//     else
-//       data.expand( m_numColumns-1, rowNum+1 );
-//   }
-
-  // Columns
-  if ( seriesTotals )
-  {
-    if ( accountSeries ) {
-      chartView.setDataCell( rowNum, 0, rowSet[rowType].m_total.toDouble() );
-    } else {
-      chartView.setDataCell( 0, rowNum, rowSet[rowType].m_total.toDouble() );
-    }
-  } else {
-    int column = 1;
-    while ( column < m_numColumns )
-    {
-      if ( accountSeries ) {
-        chartView.setDataCell( column-1, rowNum, rowSet[rowType][column].toDouble() );
-      } else {
-        chartView.setDataCell( rowNum, column-1, rowSet[rowType][column].toDouble() );
-      }
-      ++column;
-    }
-  }
-  return ++rowNum;
-}
-
 
 QString PivotTable::coloredAmount(const MyMoneyMoney& amount, const QString& currencySymbol, int prec) const
 {

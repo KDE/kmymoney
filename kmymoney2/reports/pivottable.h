@@ -22,7 +22,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 #include <qmap.h>
-#include <q3valuelist.h>
+#include <qlist.h>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -131,12 +131,12 @@ private:
     /**
       * This list contains the types of PivotGridRows that are going to be shown in the report
       */
-    Q3ValueList<ERowType> m_rowTypeList;
+    QList<ERowType> m_rowTypeList;
 
     /**
      * This list contains the i18n headers for the column types
      */
-    Q3ValueList<QString> m_columnTypeHeaderList;
+    QStringList m_columnTypeHeaderList;
 
     MyMoneyReport m_config_f;
 

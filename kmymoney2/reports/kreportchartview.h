@@ -30,7 +30,7 @@
 #endif
 
 #include <QLabel>
-//Added by qt3to4:
+#include <QStandardItemModel>
 #include <QMouseEvent>
 #include <KDChartWidget>
 #include <KDChartChart>
@@ -46,34 +46,55 @@
   #include <mymoneyutils.h>
 #endif
 
+#include "pivotgrid.h"
+#include "mymoneyreport.h"
+
 using namespace KDChart;
 
 namespace reports {
 
-class KReportChartView: public Widget
+class KReportChartView: public Chart
 {
 public:
   KReportChartView( QWidget* parent );
   ~KReportChartView() {}
   static bool implemented(void) { return true; }
-  //void setNewData( const KDChartTableData& newdata ) { this->setData(new KDChartTableData(newdata)); }
   QStringList& abscissaNames(void) { return m_abscissaNames; }
-  //void refreshLabels(void) { this->params()->setAxisLabelStringParams( KDChartAxisParams::AxisPosBottom,&m_abscissaNames,0); }
   void setProperty(int row, int col, int id);
-//   void setCircularLabels(void) { this->params()->setAxisLabelStringParams( KDChartAxisParams::AxisPosCircular,&m_abscissaNames,0); }
 
   void setAccountSeries(bool accountSeries) {_accountSeries = accountSeries; }
   bool getAccountSeries(void) {return _accountSeries; }
 
+ /**
+   * Draw the chart for a pivot table report
+   */
+  void drawPivotChart(const PivotGrid &grid, const MyMoneyReport &config, int numColumns, const QStringList& columnHeadings, const QList<ERowType>& rowTypeList, const QStringList& columnTypeHeaderList);
+
 protected:
-  virtual void mouseMoveEvent( QMouseEvent* event );
+  bool event( QEvent* event );
 
 private:
+
+/**
+  * Draw a PivotGridRowSet in a chart
+  */
+  unsigned drawPivotRowSet(int rowNum, const bool seriesTotals, const bool accountSeries, const PivotGridRowSet& rowSet, const ERowType rowType, int numColumns, const QString& legendText);
+
+  void setDataCell( int row, int column, const double data);
+
+  void setCellTip( int row, int column, QString tip );
+
+  void justifyModelSize( int rows, int columns );
+
   QStringList m_abscissaNames;
   bool _accountSeries;
 
-  // label to display when hovering on a data region
   QLabel *label;
+
+/**
+  * Model to store chart data
+  */
+  QStandardItemModel m_model;
 };
 
 } // end namespace reports
