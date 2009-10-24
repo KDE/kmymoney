@@ -569,13 +569,13 @@ void KHomeView::showPayments(void)
 
       if (needMoreLess) {
         m_html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");
-        m_html += "<td>";
+        m_html += "<td colspan=\"5\">";
         if(m_showAllSchedules) {
           m_html += link(VIEW_SCHEDULE,  QString("?mode=%1").arg("reduced")) + i18nc("Less...", "Show less schedules on the list") + linkend();
         } else {
           m_html += link(VIEW_SCHEDULE,  QString("?mode=%1").arg("full")) + i18nc("More...", "Show more schedules on the list") + linkend();
         }
-        m_html += "</td><td></td><td></td><td></td><td></td>";
+        m_html += "</td>";
         m_html += "</tr>";
       }
       m_html += "</table>";
