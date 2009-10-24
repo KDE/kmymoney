@@ -419,12 +419,12 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   //this is done after adding the legend because the values are overriden when adding the legend to the chart
   legend->setPosition(Position::East);
   TextAttributes legendTextAttr(legend->textAttributes());
-  legendTextAttr.setFontSize(10);
+  legendTextAttr.setFontSize(14);
   legendTextAttr.setAutoShrink(true);
   legend->setTextAttributes(legendTextAttr);
 
   TextAttributes legendTitleTextAttr(legend->titleTextAttributes());
-  legendTitleTextAttr.setFontSize(24);
+  legendTitleTextAttr.setFontSize(20);
   legendTitleTextAttr.setAutoShrink(true);
   legend->setTitleTextAttributes(legendTitleTextAttr);
   legend->setTitleText(i18nc("Chart lines legend","Legend"));
