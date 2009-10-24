@@ -64,13 +64,6 @@ KReportChartView::KReportChartView( QWidget* parent): KDChart::Chart(parent)
 
   //Subdued colors
   diagram->useSubduedColors();
-
-
-}
-
-void KReportChartView::setProperty(int row, int col, int id)
-{
-  //this->data()->cell(row, col).setPropertySet(id);
 }
 
 void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport &config, int numColumns, const QStringList& columnHeadings, const QList<ERowType>& rowTypeList, const QStringList& columnTypeHeaderList)
@@ -168,26 +161,8 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   //Subdued colors - we set it here again because it is a property of the diagram
   coordinatePlane()->diagram()->useSubduedColors();
 
-  //set the legend basic attributes
+  //the legend will be used later
   Legend* legend = new Legend(coordinatePlane()->diagram(), this);
-  legend->setPosition(Position::East);
-  TextAttributes legendTextAttr(legend->textAttributes());
-  legendTextAttr.setFontSize(10);
-  legend->setTextAttributes(legendTextAttr);
-
-  TextAttributes legendTitleTextAttr(legend->titleTextAttributes());
-  legendTitleTextAttr.setFontSize(24);
-  legend->setTitleTextAttributes(legendTitleTextAttr);
-  legend->setTitleText(i18nc("Chart lines legend","Legend"));
-
-  //line markers
-  DataValueAttributes dataValueAttr(coordinatePlane()->diagram()->dataValueAttributes());
-  MarkerAttributes markerAttr(dataValueAttr.markerAttributes());
-  markerAttr.setVisible(true);
-  markerAttr.setMarkerStyle(MarkerAttributes::MarkerCircle);
-  markerAttr.setMarkerSize(QSize(8,8));
-  dataValueAttr.setMarkerAttributes(markerAttr);
-  coordinatePlane()->diagram()->setDataValueAttributes(dataValueAttr);
 
   //set up the axes for cartesian diagrams
   if(qobject_cast<LineDiagram*>(coordinatePlane()->diagram()) ||
@@ -439,6 +414,30 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     }
     break;
   }
+
+  //set the legend basic attributes
+  //this is done after adding the legend because the values are overriden when adding the legend to the chart
+  legend->setPosition(Position::East);
+  TextAttributes legendTextAttr(legend->textAttributes());
+  legendTextAttr.setFontSize(10);
+  legendTextAttr.setAutoShrink(true);
+  legend->setTextAttributes(legendTextAttr);
+
+  TextAttributes legendTitleTextAttr(legend->titleTextAttributes());
+  legendTitleTextAttr.setFontSize(24);
+  legendTitleTextAttr.setAutoShrink(true);
+  legend->setTitleTextAttributes(legendTitleTextAttr);
+  legend->setTitleText(i18nc("Chart lines legend","Legend"));
+  legend->setUseAutomaticMarkerSize( false );
+
+  //line markers
+  DataValueAttributes dataValueAttr(coordinatePlane()->diagram()->dataValueAttributes());
+  MarkerAttributes markerAttr(dataValueAttr.markerAttributes());
+  markerAttr.setVisible(true);
+  markerAttr.setMarkerStyle(MarkerAttributes::MarkerCircle);
+  markerAttr.setMarkerSize(QSize(8,8));
+  dataValueAttr.setMarkerAttributes(markerAttr);
+  coordinatePlane()->diagram()->setDataValueAttributes(dataValueAttr);
 
   //make sure to show only the required number of fractional digits on the labels of the graph
   //chartView.params()->setDataValuesCalc(0, MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));

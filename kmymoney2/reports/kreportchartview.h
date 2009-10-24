@@ -60,7 +60,6 @@ public:
   ~KReportChartView() {}
   static bool implemented(void) { return true; }
   QStringList& abscissaNames(void) { return m_abscissaNames; }
-  void setProperty(int row, int col, int id);
 
   void setAccountSeries(bool accountSeries) {_accountSeries = accountSeries; }
   bool getAccountSeries(void) {return _accountSeries; }
