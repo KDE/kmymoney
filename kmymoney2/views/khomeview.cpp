@@ -315,13 +315,9 @@ void KHomeView::showNetWorthGraph(void)
   //chartWidget->setProperty(0, 10, idPropLastValue);
 
   // Adjust the size
-  if(width() < chartWidget->width()) {
-    int nh;
-    nh = (width()*chartWidget->height() ) / chartWidget->width();
-    chartWidget->resize(width()-60, height()-30);
-  }
+  chartWidget->resize(width()-60, height()-30);
 
-  QPixmap pixmap= QPixmap::grabWidget(chartWidget->coordinatePlane()->parent(), QRect(QPoint(0, 0), QPoint(chartWidget->width(), chartWidget->height())));
+  QPixmap pixmap= QPixmap::grabWidget(chartWidget->coordinatePlane()->parent());
   QByteArray bytes;
   QBuffer buffer(&bytes);
   buffer.open(QIODevice::WriteOnly);
