@@ -318,23 +318,18 @@ void KHomeView::showNetWorthGraph(void)
   if(width() < chartWidget->width()) {
     int nh;
     nh = (width()*chartWidget->height() ) / chartWidget->width();
-    chartWidget->resize(width()-60, nh);
+    chartWidget->resize(width()-60, height()-30);
   }
 
-  //QPixmap pm(chartWidget->width(), chartWidget->height());
-  //pm.fill(KGlobalSettings::baseColor());
-  //QPainter p(&pm);
-  //chartWidget->render(&pm);
-  //chartWidget->diagram()->coordinatePlane()->parent()->paint(&p, QRect(QPoint(0, 0), QPoint(chartWidget->width(), chartWidget->height())));
-  QPixmap pm = QPixmap::grabWidget(chartWidget->coordinatePlane()->parent(), QRect(QPoint(0, 0), QPoint(chartWidget->width(), chartWidget->height())));
-  QByteArray* ba;
-  QBuffer buffer( ba );
-  buffer.open( QIODevice::WriteOnly );
-  pm.save( &buffer, "PNG" ); // writes pixmap into ba in PNG format
+  QPixmap pixmap= QPixmap::grabWidget(chartWidget->coordinatePlane()->parent(), QRect(QPoint(0, 0), QPoint(chartWidget->width(), chartWidget->height())));
+  QByteArray bytes;
+  QBuffer buffer(&bytes);
+  buffer.open(QIODevice::WriteOnly);
+  pixmap.save(&buffer, "PNG"); // writes pixmap into bytes in PNG format
 
   m_html += QString("<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >");
   m_html += QString("<tr>");
-  //m_html += QString("<td><center><IMG SRC=\"data:image/png;base64,%1\" ALT=\"Networth\"></center></td>").arg(ba->toBase64().data());
+  m_html += QString("<td><center><IMG SRC=\"data:image/png;base64,%1\" ALT=\"Networth\"></center></td>").arg(buffer.data().toBase64().data());
   m_html += QString("</tr>");
   m_html += QString("</table></div></div>");
 
