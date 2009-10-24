@@ -18,7 +18,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QPushButton>
 #include <QLabel>
 //Added by qt3to4:
 #include <QList>
@@ -39,10 +38,6 @@
 KMyMoneyFileInfoDlg::KMyMoneyFileInfoDlg(QWidget *parent)
  : KMyMoneyFileInfoDlgDecl(parent)
 {
-  // Hide the unused buttons.
-  buttonCancel->hide();
-  buttonHelp->hide();
-
   // Now fill the fields with data
   IMyMoneyStorage* storage = MyMoneyFile::instance()->storage();
 
