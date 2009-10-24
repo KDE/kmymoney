@@ -30,14 +30,12 @@
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-// This is just needed for i18n().  Once I figure out how to handle i18n
-// without using this macro directly, I'll be freed of KDE dependency.
-
 #include <klocale.h>
 #include <kdebug.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
+#include "querytable.h"
 #include "mymoneyfile.h"
 #include "mymoneytransaction.h"
 #include "mymoneyreport.h"
@@ -45,7 +43,7 @@
 #include "kmymoneyutils.h"
 #include "reportaccount.h"
 #include "reportdebug.h"
-#include "querytable.h"
+#include "kmymoneyglobalsettings.h"
 
 namespace reports {
 
@@ -496,25 +494,6 @@ void QueryTable::constructTransactionTable(void)
       loan_special_case = splitAcc.isLoan();
     }
 
-#if 0
-    // a stock dividend or yield transaction is also a special case.
-    // [dv: the original comment follows]
-    // handle cash dividends. these little fellas require very special handling.
-    // the stock account will produce a row with zero value & zero shares. Then
-    // there will be 2 split rows, a category and a transfer account. We are
-    // only concerned with the transfer account, and we will NOT show the income
-    // account. (This may have to be changed later if we feel we need it.)
-
-    // [dv: this special case just doesn't make sense to me -- it seems to
-    // violate the "zero sum" transaction concept. for now, then, the stock
-    // dividend / yield special case goes unimplemented.]
-
-    bool stock_special_case =
-      (a.isInvest() &&
-       ((* is).action() == MyMoneySplit::ActionDividend ||
-        (* is).action() == MyMoneySplit::ActionYield));
-#endif
-
     bool include_me = true;
     bool transaction_text = false; //indicates whether a text should be considered as a match for the transaction or for a split only
     QString a_fullname = "";
@@ -547,12 +526,6 @@ void QueryTable::constructTransactionTable(void)
         }
       }
 
-      //there is a bug where the price sometimes returns 1
-      //get the price from the split in that case
-      /*if(m_config.isConvertCurrency() && xr == MyMoneyMoney(1,1)) {
-        xr = (*it_split).price();
-      }*/
-
       if (splitAcc.isInvest()) {
 
         // use the institution of the parent for stock accounts
@@ -561,7 +534,7 @@ void QueryTable::constructTransactionTable(void)
 
         qA["action"] = (*it_split).action();
         qA["shares"] = shares.isZero() ? "" : (*it_split).shares().toString();
-        qA["price"] = shares.isZero() ? "" : xr.toString();
+        qA["price"] = shares.isZero() ? "" : xr.convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision())).toString();
 
         if (((*it_split).action() == MyMoneySplit::ActionBuyShares) && (*it_split).shares().isNegative())
           qA["action"] = "Sell";
@@ -674,7 +647,6 @@ void QueryTable::constructTransactionTable(void)
           else if (hide_details && (splits.count() > 2)) {
             // essentially, don't add any qA entries
           }
-
           //--- default case includes all transaction details
           else {
 
@@ -868,7 +840,7 @@ void QueryTable::constructTransactionTable(void)
     qA["institution"] = institution.isEmpty() ? i18n("No Institution") : file->institution(institution).name();
     qA["rank"] = "-2";
 
-    qA["price"] = startPrice.toString();
+    qA["price"] = startPrice.convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision())).toString();
     if (account.isInvest()) {
       qA["shares"] = startShares.toString();
     }
@@ -880,7 +852,7 @@ void QueryTable::constructTransactionTable(void)
     m_rows += qA;
 
     //ending balance
-    qA["price"] = endPrice.toString();
+    qA["price"] = endPrice.convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision())).toString();
 
     if (account.isInvest()) {
       qA["shares"] = endShares.toString();
@@ -1150,7 +1122,7 @@ void QueryTable::constructAccountTable(void)
       qaccountrow["shares"] = shares.toString();
 
       MyMoneyMoney netprice = account.deepCurrencyPrice(m_config.toDate()).reduce() * displayprice;
-      qaccountrow["price"] = ( netprice.reduce() ).convert(fraction).toString();
+      qaccountrow["price"] = ( netprice.reduce() ).convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision())).toString();
       qaccountrow["value"] = ( netprice.reduce() * shares.reduce() ).convert(fraction).toString();
 
       QString iid = (*it_account).institutionId();
@@ -1307,12 +1279,6 @@ void QueryTable::constructSplitsTable(void)
         xr = splitAcc.deepCurrencyPrice((*it_transaction).postDate()).reduce();
       }
 
-      //there is a bug where the price sometimes returns 1
-      //get the price from the split in that case
-      /*if(m_config.isConvertCurrency() && xr == MyMoneyMoney(1,1)) {
-      xr = (*it_split).price();
-    }*/
-
       if (splitAcc.isInvest()) {
 
         // use the institution of the parent for stock accounts
@@ -1321,7 +1287,7 @@ void QueryTable::constructSplitsTable(void)
 
         qA["action"] = (*it_split).action();
         qA["shares"] = shares.isZero() ? "" : (*it_split).shares().toString();
-        qA["price"] = shares.isZero() ? "" : xr.toString();
+        qA["price"] = shares.isZero() ? "" : xr.convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision())).toString();
 
         if (((*it_split).action() == MyMoneySplit::ActionBuyShares) && (*it_split).shares().isNegative())
           qA["action"] = "Sell";
@@ -1335,7 +1301,7 @@ void QueryTable::constructSplitsTable(void)
 
       transaction_text = m_config.match(&(*it_split));
 
-      qA["price"] = xr.toString();
+      qA["price"] = xr.convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision())).toString();
       qA["account"] = splitAcc.name();
       qA["accountid"] = splitAcc.id();
       qA["topaccount"] = splitAcc.topParentName();
@@ -1500,7 +1466,7 @@ void QueryTable::constructSplitsTable(void)
     qA["institution"] = institution.isEmpty() ? i18n("No Institution") : file->institution(institution).name();
     qA["rank"] = "-2";
 
-    qA["price"] = startPrice.toString();
+    qA["price"] = startPrice.convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision())).toString();
     if (account.isInvest()) {
       qA["shares"] = startShares.toString();
     }
@@ -1512,7 +1478,7 @@ void QueryTable::constructSplitsTable(void)
     m_rows += qA;
 
     //ending balance
-    qA["price"] = endPrice.toString();
+    qA["price"] = endPrice.convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision())).toString();
 
     if (account.isInvest()) {
       qA["shares"] = endShares.toString();
