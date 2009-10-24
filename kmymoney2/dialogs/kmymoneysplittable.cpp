@@ -20,12 +20,12 @@
  *                                                                         *
  ***************************************************************************/
 
-
+#include "kmymoneysplittable.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qglobal.h>
+#include <QGlobalStatic>
 #include <QPainter>
 #include <QCursor>
 #include <QApplication>
@@ -35,7 +35,6 @@
 //Added by qt3to4:
 #include <QHBoxLayout>
 #include <QKeyEvent>
-#include <Q3ValueList>
 #include <QFrame>
 #include <QResizeEvent>
 #include <QMouseEvent>
@@ -57,48 +56,57 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneysplittable.h"
-#include <mymoneyfile.h>
-#include <kmymoneyedit.h>
-#include <kmymoneycategory.h>
-#include <kmymoneyaccountselector.h>
-#include <kmymoneylineedit.h>
-#include <mymoneysecurity.h>
-#include <kmymoneyglobalsettings.h>
+#include "mymoneyfile.h"
+#include "kmymoneyedit.h"
+#include "kmymoneycategory.h"
+#include "kmymoneyaccountselector.h"
+#include "kmymoneylineedit.h"
+#include "mymoneysecurity.h"
+#include "kmymoneyglobalsettings.h"
 
 #include "kcurrencycalculator.h"
 
 #include "mymoneyutils.h"
 
-kMyMoneySplitTable::kMyMoneySplitTable(QWidget *parent, const char *name ) :
-  Q3Table(parent,name),
+kMyMoneySplitTable::kMyMoneySplitTable(QWidget *parent) :
+  QTableWidget(parent),
   m_currentRow(0),
   m_maxRows(0),
-  m_editMode(false),
   m_amountWidth(80),
   m_editCategory(0),
   m_editMemo(0),
   m_editAmount(0)
 {
   // setup the transactions table
-  setNumRows(1);
-  setNumCols(3);
-  horizontalHeader()->setLabel(0, i18n("Category"));
-  horizontalHeader()->setLabel(1, i18n("Memo"));
-  horizontalHeader()->setLabel(2, i18n("Amount"));
-  setSelectionMode(Q3Table::NoSelection);
-  setLeftMargin(0);
+  setRowCount(1);
+  setColumnCount(3);
+  QStringList labels;
+  labels << i18n("Category") << i18n("Memo") << i18n("Amount");
+  setHorizontalHeaderLabels(labels);
+  setSelectionMode(QAbstractItemView::SingleSelection);
+  setSelectionBehavior(QAbstractItemView::SelectRows);
+  int left, top, right, bottom;
+  getContentsMargins(&left, &top, &right, &bottom);
+  setContentsMargins(0, top, right, bottom);
+
+  setFont(KMyMoneyGlobalSettings::listCellFont());
+
+  setAlternatingRowColors(true);
+
   verticalHeader()->hide();
-  setColumnStretchable(0, false);
-  setColumnStretchable(1, false);
-  setColumnStretchable(2, false);
-  horizontalHeader()->setResizeEnabled(false);
-  horizontalHeader()->setMovingEnabled(false);
+  horizontalHeader()->setResizeMode(QHeaderView::Fixed);
+  horizontalHeader()->setMovable(false);
   horizontalHeader()->setFont(KMyMoneyGlobalSettings::listHeaderFont());
 
-  setVScrollBarMode(Q3ScrollView::AlwaysOn);
+  setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
   // never show a horizontal scroll bar
-  setHScrollBarMode(Q3ScrollView::AlwaysOff);
+  setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+  setStyleSheet("QTableWidget { gridline-color: " + KMyMoneyGlobalSettings::listGridColor().name() + "; background-color: " + KMyMoneyGlobalSettings::listColor().name() + "; alternate-background-color: " + KMyMoneyGlobalSettings::listBGColor().name() + "; }");
+
+  setShowGrid(KMyMoneyGlobalSettings::showGrid());
+
+  setEditTriggers(QAbstractItemView::NoEditTriggers);
 
   // setup the context menu
   m_contextMenu = new KMenu(this);
@@ -110,8 +118,8 @@ kMyMoneySplitTable::kMyMoneySplitTable(QWidget *parent, const char *name ) :
                         i18n("Delete ..."),
                         this, SLOT(slotDeleteSplit()));
 
-  connect(this, SIGNAL(clicked(int, int, int, const QPoint&)),
-    this, SLOT(slotSetFocus(int, int, int, const QPoint&)));
+  connect(this, SIGNAL(clicked(QModelIndex)),
+    this, SLOT(slotSetFocus(QModelIndex)));
 
   connect(this, SIGNAL(transactionChanged(const MyMoneyTransaction&)),
     this, SLOT(slotUpdateData(const MyMoneyTransaction&)));
@@ -121,94 +129,12 @@ kMyMoneySplitTable::~kMyMoneySplitTable()
 {
 }
 
+int kMyMoneySplitTable::currentRow() const
+{ return m_currentRow; }
+
 void kMyMoneySplitTable::setup(const QMap<QString, MyMoneyMoney>& priceInfo)
 {
   m_priceInfo = priceInfo;
-}
-
-const QColor kMyMoneySplitTable::rowBackgroundColor(const int row) const
-{
-  return (row % 2) ? KMyMoneyGlobalSettings::listColor() : KMyMoneyGlobalSettings::listBGColor();
-}
-
-void kMyMoneySplitTable::paintCell(QPainter *p, int row, int col, const QRect& r, bool /*selected*/)
-{
-  QColorGroup g = colorGroup();
-  QColor textColor;
-
-  g.setColor(QColorGroup::Base, rowBackgroundColor(row));
-
-  p->setFont(KMyMoneyGlobalSettings::listCellFont());
-
-  QString firsttext = text(row, col);
-  QString qstringCategory;
-  QString qstringMemo;
-
-  int intPos = firsttext.indexOf('|');
-  if(intPos > -1)
-  {
-    qstringCategory = firsttext.left(intPos);
-    qstringMemo = firsttext.mid(intPos + 1);
-  }
-
-  QRect rr = r;
-  QRect rr2 = r;
-  rr.setX(0);
-  rr.setY(0);
-  rr.setWidth(columnWidth(col));
-  rr.setHeight(rowHeight(row));
-
-  rr2.setX(2);
-  rr2.setY(0);
-  rr2.setWidth(columnWidth(col)-4);
-  rr2.setHeight(rowHeight(row));
-
-
-  if(row == m_currentRow) {
-    QBrush backgroundBrush(g.highlight());
-    textColor = g.highlightedText();
-    p->fillRect(rr,backgroundBrush);
-
-  } else {
-    QBrush backgroundBrush(g.base());
-    textColor = g.text();
-    p->fillRect(rr,backgroundBrush);
-  }
-
-  if (KMyMoneyGlobalSettings::showGrid()) {
-    p->setPen(KMyMoneyGlobalSettings::listGridColor());
-    if(col != 0)
-      p->drawLine(rr.x(), 0, rr.x(), rr.height()-1);    // left frame
-    p->drawLine(rr.x(), rr.y(), rr.width(), 0);         // bottom frame
-    p->setPen(textColor);
-  }
-
-  switch (col) {
-    case 0:     // category
-    case 1:     // memo
-      p->drawText(rr2, Qt::AlignLeft | Qt::AlignVCenter, text(row, col));
-      break;
-
-    case 2:     // amount
-      p->drawText(rr2, Qt::AlignRight | Qt::AlignVCenter,firsttext);
-      break;
-  }
-}
-
-/** Override the QTable member function to avoid display of focus */
-void kMyMoneySplitTable::paintFocus(QPainter * /* p */, const QRect & /*cr*/)
-{
-}
-
-void kMyMoneySplitTable::columnWidthChanged(int col)
-{
-  for (int i=0; i<numRows(); i++)
-    updateCell(i, col);
-}
-
-/** Override the QTable member function to avoid confusion with our own functionality */
-void kMyMoneySplitTable::endEdit(int /*row*/, int /*col*/, bool /*accept*/, bool /*replace*/ )
-{
 }
 
 bool kMyMoneySplitTable::eventFilter(QObject *o, QEvent *e)
@@ -217,7 +143,7 @@ bool kMyMoneySplitTable::eventFilter(QObject *o, QEvent *e)
   QKeyEvent *k = static_cast<QKeyEvent *> (e);
   bool rc = false;
   int row = currentRow();
-  int lines = visibleHeight()/rowHeight(0);
+  int lines = viewport()->height()/rowHeight(0);
   QWidget* w;
 
   if(e->type() == QEvent::KeyPress && !isEditMode()) {
@@ -225,35 +151,35 @@ bool kMyMoneySplitTable::eventFilter(QObject *o, QEvent *e)
     switch(k->key()) {
       case Qt::Key_Up:
         if(row)
-          slotSetFocus(row-1);
+          slotSetFocus(model()->index(row-1, 0));
         break;
 
       case Qt::Key_Down:
-        if(row < static_cast<int> (m_transaction.splits().count()-1))
-          slotSetFocus(row+1);
+        if(row < m_transaction.splits().count()-1)
+          slotSetFocus(model()->index(row+1, 0));
         break;
 
       case Qt::Key_Home:
-        slotSetFocus(0);
+        slotSetFocus(model()->index(0, 0));
         break;
 
       case Qt::Key_End:
-        slotSetFocus(m_transaction.splits().count()-1);
+        slotSetFocus(model()->index(m_transaction.splits().count()-1, 0));
         break;
 
       case Qt::Key_PageUp:
         if(lines) {
           while(lines-- > 0 && row)
-            row--;
-          slotSetFocus(row);
+            --row;
+          slotSetFocus(model()->index(row, 0));
         }
         break;
 
       case Qt::Key_PageDown:
-        if(row < static_cast<int> (m_transaction.splits().count()-1)) {
-          while(lines-- > 0 && row < static_cast<int> (m_transaction.splits().count()-1))
-            row++;
-          slotSetFocus(row);
+        if(row < m_transaction.splits().count()-1) {
+          while(lines-- > 0 && row < m_transaction.splits().count()-1)
+            ++row;
+          slotSetFocus(model()->index(row, 0));
         }
         break;
 
@@ -263,7 +189,7 @@ bool kMyMoneySplitTable::eventFilter(QObject *o, QEvent *e)
 
       case Qt::Key_Return:
       case Qt::Key_Enter:
-        if(row < static_cast<int> (m_transaction.splits().count()-1)
+        if(row < m_transaction.splits().count()-1
         && KMyMoneyGlobalSettings::enterMovesBetweenFields()) {
           slotStartEdit();
         } else
@@ -280,15 +206,14 @@ bool kMyMoneySplitTable::eventFilter(QObject *o, QEvent *e)
 
       default:
         rc = true;
-        KShortcut copySplit(i18nc("Duplicate split", "Qt::CTRL+c"));
-        KShortcut newSplit(QKeySequence(Qt::CTRL | Qt::Key_Insert));
-#warning "port to kde4"
-#if 0
-        if(copySplit.contains(KKey(k))) {
+
+        // duplicate split
+        if(Qt::Key_C == k->key() && Qt::ControlModifier == k->modifiers()) {
           slotDuplicateSplit();
 
-        } else if(newSplit.contains(KKey(k))) {
-          slotSetFocus(m_transaction.splits().count()-1);
+        // new split
+        } else if(Qt::Key_Insert == k->key() && Qt::ControlModifier == k->modifiers()) {
+          slotSetFocus(model()->index(m_transaction.splits().count()-1, 0));
           slotStartEdit();
 
         } else if ( k->text()[ 0 ].isPrint() ) {
@@ -296,7 +221,6 @@ bool kMyMoneySplitTable::eventFilter(QObject *o, QEvent *e)
           // make sure, the widget receives the key again
           QApplication::sendEvent(w, e);
         }
-#endif
         break;
     }
 
@@ -336,7 +260,7 @@ bool kMyMoneySplitTable::eventFilter(QObject *o, QEvent *e)
           if(o == m_editCategory->lineEdit() || o == m_editMemo) {
             terminate = false;
             QKeyEvent evt(e->type(),
-                          Qt::Key_Tab, 0, k->state(), QString::null,
+                          Qt::Key_Tab, k->modifiers(), QString::null,
                           k->isAutoRepeat(), k->count());
 
             QApplication::sendEvent( o, &evt );
@@ -368,9 +292,9 @@ bool kMyMoneySplitTable::eventFilter(QObject *o, QEvent *e)
         // if the very last entry is selected, the delete
         // operation is not available otherwise it is
         m_contextMenuDelete->setEnabled(
-              row < static_cast<int> (m_transaction.splits().count()-1));
+              row < m_transaction.splits().count()-1);
         m_contextMenuDuplicate->setEnabled(
-              row < static_cast<int> (m_transaction.splits().count()-1));
+              row < m_transaction.splits().count()-1);
 
         m_contextMenu->exec(QCursor::pos());
         rc = true;
@@ -385,26 +309,26 @@ bool kMyMoneySplitTable::eventFilter(QObject *o, QEvent *e)
   if(rc == false) {
     if(e->type() != QEvent::KeyPress
     && e->type() != QEvent::KeyRelease) {
-      rc = Q3Table::eventFilter(o, e);
+      rc = QTableWidget::eventFilter(o, e);
     }
   }
 
   return rc;
 }
 
-void kMyMoneySplitTable::slotSetFocus(int realrow, int /* col */, int button, const QPoint& /* point */)
+void kMyMoneySplitTable::slotSetFocus(const QModelIndex& index, int button)
 {
   MYMONEYTRACER(tracer);
-  int   row = realrow;
+  int   row = index.row();
 
   // adjust row to used area
-  if(row > static_cast<int> (m_transaction.splits().count()-1))
+  if(row > m_transaction.splits().count()-1)
     row = m_transaction.splits().count()-1;
   if(row < 0)
     row = 0;
 
   // make sure the row will be on the screen
-  ensureCellVisible(row, 0);
+  scrollTo(model()->index(row, 0));
 
   if(button == Qt::LeftButton) {          // left mouse button
     if(isEditMode()) {                    // in edit mode?
@@ -413,47 +337,47 @@ void kMyMoneySplitTable::slotSetFocus(int realrow, int /* col */, int button, co
       else
         slotCancelEdit();
     }
-    if(row != static_cast<int> (currentRow())) {
+    if(row != currentRow()) {
       // setup new current row and update visible selection
-      setCurrentCell(row, 0);
+      selectRow(row);
       slotUpdateData(m_transaction);
     }
   } else if(button == Qt::RightButton) {
     // context menu is only available when cursor is on
     // an existing transaction or the first line after this area
-    if(row == realrow) {
+    if(row == index.row()) {
       // setup new current row and update visible selection
-      setCurrentCell(row, 0);
+      selectRow(row);
       slotUpdateData(m_transaction);
 
       // if the very last entry is selected, the delete
       // operation is not available otherwise it is
       m_contextMenuDelete->setEnabled(
-            row < static_cast<int> (m_transaction.splits().count()-1));
+            row < m_transaction.splits().count()-1);
       m_contextMenuDuplicate->setEnabled(
-            row < static_cast<int> (m_transaction.splits().count()-1));
+            row < m_transaction.splits().count()-1);
 
       m_contextMenu->exec(QCursor::pos());
     }
   }
 }
 
-void kMyMoneySplitTable::contentsMousePressEvent( QMouseEvent* e )
+void kMyMoneySplitTable::mousePressEvent( QMouseEvent* e )
 {
-  slotSetFocus( rowAt(e->pos().y()), columnAt(e->pos().x()), e->button(), e->pos() );
+  slotSetFocus(indexAt(e->pos()), e->button());
 }
 
 /* turn off QTable behaviour */
-void kMyMoneySplitTable::contentsMouseReleaseEvent( QMouseEvent* /* e */ )
+void kMyMoneySplitTable::mouseReleaseEvent( QMouseEvent* /* e */ )
 {
 }
 
-void kMyMoneySplitTable::contentsMouseDoubleClickEvent( QMouseEvent *e )
+void kMyMoneySplitTable::mouseDoubleClickEvent( QMouseEvent *e )
 {
   MYMONEYTRACER(tracer);
 
   int col = columnAt(e->pos().x());
-  slotSetFocus( rowAt(e->pos().y()), col, e->button(), e->pos() );
+  slotSetFocus(model()->index(rowAt(e->pos().y()), col), e->button());
   slotStartEdit();
 
   KLineEdit* editWidget = 0;
@@ -478,24 +402,24 @@ void kMyMoneySplitTable::contentsMouseDoubleClickEvent( QMouseEvent *e )
   }
 }
 
-void kMyMoneySplitTable::setCurrentCell(int row, int /* col */)
+void kMyMoneySplitTable::selectRow(int row)
 {
   MYMONEYTRACER(tracer);
 
   if(row > m_maxRows)
     row = m_maxRows;
   m_currentRow = row;
-  Q3Table::setCurrentCell(row, 0);
-  Q3ValueList<MyMoneySplit> list = getSplits(m_transaction);
-  if(row < static_cast<int>(list.count()))
+  QTableWidget::selectRow(row);
+  QList<MyMoneySplit> list = getSplits(m_transaction);
+  if(row < list.count())
     m_split = list[row];
   else
     m_split = MyMoneySplit();
 }
 
-void kMyMoneySplitTable::setNumRows(int irows)
+void kMyMoneySplitTable::setRowCount(int irows)
 {
-  Q3Table::setNumRows(irows);
+  QTableWidget::setRowCount(irows);
 
   // determine row height according to the edit widgets
   // we use the category widget as the base
@@ -513,9 +437,6 @@ void kMyMoneySplitTable::setNumRows(int irows)
     verticalHeader()->resizeSection(i, height);
 
   verticalHeader()->setUpdatesEnabled(true);
-
-  // add or remove scrollbars as required
-  updateScrollBars();
 }
 
 void kMyMoneySplitTable::setTransaction(const MyMoneyTransaction& t, const MyMoneySplit& s, const MyMoneyAccount& acc)
@@ -524,23 +445,20 @@ void kMyMoneySplitTable::setTransaction(const MyMoneyTransaction& t, const MyMon
   m_transaction = t;
   m_account = acc;
   m_hiddenSplit = s;
-  setCurrentCell(0, 0);
+  selectRow(0);
   slotUpdateData(m_transaction);
 }
 
-const Q3ValueList<MyMoneySplit> kMyMoneySplitTable::getSplits(const MyMoneyTransaction& t) const
+const QList<MyMoneySplit> kMyMoneySplitTable::getSplits(const MyMoneyTransaction& t) const
 {
-  Q3ValueList<MyMoneySplit> list;
-  Q3ValueList<MyMoneySplit>::Iterator it;
-
   // get list of splits
-  list = t.splits();
+  QList<MyMoneySplit> list = t.splits();
 
   // and ignore the one that should be hidden
-
+  QList<MyMoneySplit>::Iterator it;
   for(it = list.begin(); it != list.end(); ++it) {
     if((*it).id() == m_hiddenSplit.id()) {
-      list.remove(it);
+      list.erase(it);
       break;
     }
   }
@@ -550,13 +468,14 @@ const Q3ValueList<MyMoneySplit> kMyMoneySplitTable::getSplits(const MyMoneyTrans
 void kMyMoneySplitTable::slotUpdateData(const MyMoneyTransaction& t)
 {
   MYMONEYTRACER(tracer);
-  unsigned long rowCount=0;
+  unsigned long numRows=0;
+  QTableWidgetItem* textItem;
 
-  Q3ValueList<MyMoneySplit> list = getSplits(t);
+  QList<MyMoneySplit> list = getSplits(t);
   updateTransactionTableSize();
 
   // fill the part that is used by transactions
-  Q3ValueList<MyMoneySplit>::Iterator it;
+  QList<MyMoneySplit>::Iterator it;
   for(it = list.begin(); it != list.end(); ++it) {
     QString colText;
     MyMoneyMoney value = (*it).value();
@@ -585,26 +504,46 @@ void kMyMoneySplitTable::slotUpdateData(const MyMoneyTransaction& t)
     if(width > m_amountWidth)
       m_amountWidth = width;
 
-    setText(rowCount, 0, colText);
-    setText(rowCount, 1, (*it).memo());
-    setText(rowCount, 2, amountTxt);
+    textItem = item(numRows, 0);
+    if (textItem)
+      textItem->setText(colText);
+    else
+      setItem(numRows, 0, new QTableWidgetItem(colText));
 
-    rowCount++;
+    textItem = item(numRows, 1);
+    if (textItem)
+      textItem->setText((*it).memo());
+    else
+      setItem(numRows, 1, new QTableWidgetItem((*it).memo()));
+
+    textItem = item(numRows, 2);
+    if (textItem)
+      textItem->setText(amountTxt);
+    else
+      setItem(numRows, 2, new QTableWidgetItem(amountTxt));
+
+    item(numRows, 2)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+
+    ++numRows;
   }
 
   // now clean out the remainder of the table
-  while(rowCount < static_cast<unsigned long> (numRows())) {
-    setText(rowCount, 0, "");
-    setText(rowCount, 1, "");
-    setText(rowCount, 2, "");
-    ++rowCount;
+  while(numRows < static_cast<unsigned long> (rowCount())) {
+    for (int i = 0 ; i < 3; ++i) {
+      textItem = item(numRows, i);
+      if (textItem)
+        textItem->setText("");
+      else
+        setItem(numRows, i, new QTableWidgetItem(""));
+    }
+    item(numRows, 2)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+    ++numRows;
   }
 }
 
 void kMyMoneySplitTable::updateTransactionTableSize(void)
 {
   // get current size of transactions table
-  int rowHeight = cellGeometry(0, 0).height();
   int tableHeight = height();
   int splitCount = m_transaction.splits().count()-1;
 
@@ -612,18 +551,17 @@ void kMyMoneySplitTable::updateTransactionTableSize(void)
     splitCount = 0;
 
   // see if we need some extra lines to fill the current size with the grid
-  int numExtraLines = (tableHeight / rowHeight) - splitCount;
+  int numExtraLines = (tableHeight / rowHeight(0)) - splitCount;
   if(numExtraLines < 2)
     numExtraLines = 2;
 
-  setNumRows(splitCount + numExtraLines);
-  // setMaxRows(splitCount);
+  setRowCount(splitCount + numExtraLines);
   m_maxRows = splitCount;
 }
 
 void kMyMoneySplitTable::resizeEvent(QResizeEvent* /* ev */)
 {
-  int w = visibleWidth() - m_amountWidth;
+  int w = viewport()->width() - m_amountWidth;
 
   // resize the columns
   setColumnWidth(0, w/2);
@@ -636,8 +574,8 @@ void kMyMoneySplitTable::resizeEvent(QResizeEvent* /* ev */)
 void kMyMoneySplitTable::slotDuplicateSplit(void)
 {
   MYMONEYTRACER(tracer);
-  Q3ValueList<MyMoneySplit> list = getSplits(m_transaction);
-  if(m_currentRow < static_cast<int> (list.count())) {
+  QList<MyMoneySplit> list = getSplits(m_transaction);
+  if(m_currentRow < list.count()) {
     MyMoneySplit split = list[m_currentRow];
     split.clearId();
     try {
@@ -653,8 +591,8 @@ void kMyMoneySplitTable::slotDuplicateSplit(void)
 void kMyMoneySplitTable::slotDeleteSplit(void)
 {
   MYMONEYTRACER(tracer);
-  Q3ValueList<MyMoneySplit> list = getSplits(m_transaction);
-  if(m_currentRow < static_cast<int> (list.count())) {
+  QList<MyMoneySplit> list = getSplits(m_transaction);
+  if(m_currentRow < list.count()) {
     if(KMessageBox::warningContinueCancel (this,
         i18n("You are about to delete the selected split. "
             "Do you really want to continue?"),
@@ -664,10 +602,10 @@ void kMyMoneySplitTable::slotDeleteSplit(void)
       try {
         m_transaction.removeSplit(list[m_currentRow]);
         // if we removed the last split, select the previous
-        if(m_currentRow && m_currentRow == static_cast<int>(list.count())-1)
-          setCurrentCell(m_currentRow-1, 0);
+        if(m_currentRow && m_currentRow == list.count()-1)
+          selectRow(m_currentRow-1);
         else
-          setCurrentCell(m_currentRow, 0);
+          selectRow(m_currentRow);
         emit transactionChanged(m_transaction);
       } catch(MyMoneyException *e) {
         qDebug("Cannot remove split: %s", qPrintable(e->what()));
@@ -788,12 +726,12 @@ void kMyMoneySplitTable::endEdit(bool keyBoardDriven)
   }
   this->setFocus();
   destroyEditWidgets();
-  slotSetFocus(currentRow()+1);
+  slotSetFocus(model()->index(currentRow()+1, 0));
 
   // if we still have more splits, we start editing right away
   // in case we have selected 'enter moves between fields'
   if(keyBoardDriven
-  && currentRow() < static_cast<int> (m_transaction.splits().count()-1)
+  && currentRow() < m_transaction.splits().count()-1
   && KMyMoneyGlobalSettings::enterMovesBetweenFields()) {
     slotStartEdit();
   }
@@ -811,7 +749,7 @@ void kMyMoneySplitTable::slotCancelEdit(void)
 
 bool kMyMoneySplitTable::isEditMode(void) const
 {
-  return m_editMode;
+  return state() == QAbstractItemView::EditingState;
 }
 
 void kMyMoneySplitTable::destroyEditWidgets(void)
@@ -820,11 +758,11 @@ void kMyMoneySplitTable::destroyEditWidgets(void)
 
   disconnect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadEditWidgets()));
 
-  clearCellWidget(m_currentRow, 0);
-  clearCellWidget(m_currentRow, 1);
-  clearCellWidget(m_currentRow, 2);
-  clearCellWidget(m_currentRow+1, 0);
-  m_editMode = false;
+  removeCellWidget(m_currentRow, 0);
+  removeCellWidget(m_currentRow, 1);
+  removeCellWidget(m_currentRow, 2);
+  removeCellWidget(m_currentRow+1, 0);
+  setState(QAbstractItemView::NoState);
   QCoreApplication::processEvents(QEventLoop::ExcludeUserInput, 100);
 }
 
@@ -853,7 +791,7 @@ QWidget* kMyMoneySplitTable::createEditWidgets(void)
   // create buttons for the mouse users
   m_registerButtonFrame = new QFrame(this);
   QPalette palette = m_registerButtonFrame->palette();
-  palette.setColor(QColorGroup::Background, rowBackgroundColor(m_currentRow+1) );
+  //palette.setColor(QPalette::Background, rowBackgroundColor(m_currentRow+1) );
   m_registerButtonFrame->setPalette(palette);
 
   QHBoxLayout* l = new QHBoxLayout(m_registerButtonFrame);
@@ -881,9 +819,9 @@ QWidget* kMyMoneySplitTable::createEditWidgets(void)
     // check if the transaction is balanced or not. If not,
     // assign the remainder to the amount.
     MyMoneyMoney diff;
-    Q3ValueList<MyMoneySplit> list = m_transaction.splits();
-    Q3ValueList<MyMoneySplit>::ConstIterator it_s;
-    for(it_s = list.begin(); it_s != list.end(); ++it_s) {
+    QList<MyMoneySplit> list = m_transaction.splits();
+    QList<MyMoneySplit>::ConstIterator it_s;
+    for(it_s = list.constBegin(); it_s != list.constEnd(); ++it_s) {
       if(!(*it_s).accountId().isEmpty())
         diff += (*it_s).value();
     }
@@ -907,17 +845,15 @@ QWidget* kMyMoneySplitTable::createEditWidgets(void)
   slotLoadEditWidgets();
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadEditWidgets()));
 
-  for (int i = 0; i < m_tabOrderWidgets.size(); ++i) {
-      QWidget* w = m_tabOrderWidgets.at(i);
-      if(w) {
-          w->installEventFilter(this);
-      }
+  foreach(QWidget* w, m_tabOrderWidgets) {
+    if(w) {
+      w->installEventFilter(this);
+    }
   }
-
 
   m_editCategory->setFocus();
   m_editCategory->lineEdit()->selectAll();
-  m_editMode = true;
+  setState(QAbstractItemView::EditingState);
 
   return m_editCategory->lineEdit();
 }
@@ -950,7 +886,6 @@ void kMyMoneySplitTable::slotLoadEditWidgets(void)
 
   if(!categoryId.isEmpty())
     m_editCategory->setSelectedItem(categoryId);
-
 }
 
 void kMyMoneySplitTable::addToTabOrder(QWidget* w)
@@ -966,7 +901,7 @@ bool kMyMoneySplitTable::focusNextPrevChild(bool next)
 {
   MYMONEYTRACER(tracer);
   bool  rc = false;
-  if(m_editCategory) {
+  if(isEditMode()) {
     QWidget *w = 0;
 
     w = qApp->focusWidget();
@@ -992,10 +927,8 @@ bool kMyMoneySplitTable::focusNextPrevChild(bool next)
       }
     }
   } else
-    rc = Q3Table::focusNextPrevChild(next);
+    rc = QTableWidget::focusNextPrevChild(next);
   return rc;
 }
-
-
 
 #include "kmymoneysplittable.moc"

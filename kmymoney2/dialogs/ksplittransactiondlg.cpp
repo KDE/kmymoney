@@ -32,7 +32,7 @@
 #include <QRadioButton>
 #include <QCursor>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -281,11 +281,11 @@ void KSplitTransactionDlg::slotClearAllSplits(void)
 
   if(answer == KMessageBox::Continue) {
     transactionsTable->slotCancelEdit();
-    Q3ValueList<MyMoneySplit> list = transactionsTable->getSplits(m_transaction);
-    Q3ValueList<MyMoneySplit>::ConstIterator it;
+    QList<MyMoneySplit> list = transactionsTable->getSplits(m_transaction);
+    QList<MyMoneySplit>::ConstIterator it;
 
     // clear all but the one referencing the account
-    for(it = list.begin(); it != list.end(); ++it) {
+    for(it = list.constBegin(); it != list.constEnd(); ++it) {
       m_transaction.removeSplit(*it);
     }
 
@@ -296,12 +296,12 @@ void KSplitTransactionDlg::slotClearAllSplits(void)
 
 void KSplitTransactionDlg::slotClearUnusedSplits(void)
 {
-  Q3ValueList<MyMoneySplit> list = transactionsTable->getSplits(m_transaction);
-  Q3ValueList<MyMoneySplit>::ConstIterator it;
+  QList<MyMoneySplit> list = transactionsTable->getSplits(m_transaction);
+  QList<MyMoneySplit>::ConstIterator it;
 
   try {
     // remove all splits that don't have a value assigned
-    for(it = list.begin(); it != list.end(); ++it) {
+    for(it = list.constBegin(); it != list.constEnd(); ++it) {
       if((*it).shares().isZero()) {
         m_transaction.removeSplit(*it);
       }
@@ -316,14 +316,14 @@ void KSplitTransactionDlg::slotClearUnusedSplits(void)
 
 void KSplitTransactionDlg::slotMergeSplits(void)
 {
-  Q3ValueList<MyMoneySplit> list = transactionsTable->getSplits(m_transaction);
-  Q3ValueList<MyMoneySplit>::ConstIterator it;
+  QList<MyMoneySplit> list = transactionsTable->getSplits(m_transaction);
+  QList<MyMoneySplit>::ConstIterator it;
 
   try {
     // collect all splits, merge them if needed and remove from transaction
-    Q3ValueList<MyMoneySplit> splits;
-    for(it = list.begin(); it != list.end(); ++it) {
-      Q3ValueList<MyMoneySplit>::iterator it_s;
+    QList<MyMoneySplit> splits;
+    for(it = list.constBegin(); it != list.constEnd(); ++it) {
+      QList<MyMoneySplit>::iterator it_s;
       for(it_s = splits.begin(); it_s != splits.end(); ++it_s) {
         if((*it_s).accountId() == (*it).accountId()
         && (*it_s).memo().isEmpty() && (*it).memo().isEmpty())
@@ -339,7 +339,7 @@ void KSplitTransactionDlg::slotMergeSplits(void)
     }
 
     // now add them back to the transaction
-    Q3ValueList<MyMoneySplit>::iterator it_s;
+    QList<MyMoneySplit>::iterator it_s;
     for(it_s = splits.begin(); it_s != splits.end(); ++it_s) {
       (*it_s).clearId();
       m_transaction.addSplit(*it_s);
@@ -355,13 +355,13 @@ void KSplitTransactionDlg::slotMergeSplits(void)
 void KSplitTransactionDlg::slotSetTransaction(const MyMoneyTransaction& t)
 {
   m_transaction = t;
-  Q3ValueList<MyMoneySplit> list = transactionsTable->getSplits(m_transaction);
-  Q3ValueList<MyMoneySplit>::ConstIterator it;
+  QList<MyMoneySplit> list = transactionsTable->getSplits(m_transaction);
+  QList<MyMoneySplit>::ConstIterator it;
 
   // check if we can merge splits or not, have zero splits or not
   QMap<QString, int> splits;
   bool haveZeroSplit = false;
-  for(it = list.begin(); it != list.end(); ++it) {
+  for(it = list.constBegin(); it != list.constEnd(); ++it) {
     splits[(*it).accountId()]++;
     if(((*it).id() != m_split.id()) && ((*it).shares().isZero()))
       haveZeroSplit = true;
@@ -394,11 +394,11 @@ void KSplitTransactionDlg::updateSums(void)
 MyMoneyMoney KSplitTransactionDlg::splitsValue(void)
 {
   MyMoneyMoney splitsValue(m_calculatedValue);
-  Q3ValueList<MyMoneySplit> list = transactionsTable->getSplits(m_transaction);
-  Q3ValueList<MyMoneySplit>::ConstIterator it;
+  QList<MyMoneySplit> list = transactionsTable->getSplits(m_transaction);
+  QList<MyMoneySplit>::ConstIterator it;
 
   // calculate the current sum of all split parts
-  for(it = list.begin(); it != list.end(); ++it) {
+  for(it = list.constBegin(); it != list.constEnd(); ++it) {
     if((*it).value() != MyMoneyMoney::autoCalc)
       splitsValue += (*it).value();
   }

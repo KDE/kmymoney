@@ -26,15 +26,14 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qwidget.h>
-#include <q3table.h>
-#include <qwidget.h>
+#include <QTableWidget>
+#include <QWidget>
 #include <QPointer>
 //Added by qt3to4:
 #include <QResizeEvent>
 #include <QEvent>
 #include <QMouseEvent>
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -55,15 +54,12 @@ class kMyMoneyEdit;
 /**
   * @author Thomas Baumgart
   */
-class kMyMoneySplitTable : public Q3Table
+class kMyMoneySplitTable : public QTableWidget
 {
   Q_OBJECT
 public:
-  kMyMoneySplitTable(QWidget *parent=0, const char *name=0);
+  explicit kMyMoneySplitTable(QWidget *parent=0);
   virtual ~kMyMoneySplitTable();
-
-  void paintCell(QPainter *p, int row, int col, const QRect& r, bool /*selected*/);
-  void paintFocus(QPainter *p, const QRect &cr);
 
   /**
     * This method is used to load the widget with the information about
@@ -88,16 +84,17 @@ public:
     * @param t reference to transaction
     * @return list of splits
     */
-  const Q3ValueList<MyMoneySplit> getSplits(const MyMoneyTransaction& t) const;
+  const QList<MyMoneySplit> getSplits(const MyMoneyTransaction& t) const;
 
   void setup(const QMap<QString, MyMoneyMoney>& priceInfo);
 
+  int currentRow() const;
+
 protected:
-  void contentsMousePressEvent( QMouseEvent* e );
-  void contentsMouseReleaseEvent( QMouseEvent* e );
-  void contentsMouseDoubleClickEvent( QMouseEvent* e );
+  void mousePressEvent( QMouseEvent* e );
+  void mouseReleaseEvent( QMouseEvent* e );
+  void mouseDoubleClickEvent( QMouseEvent* e );
   bool eventFilter(QObject *o, QEvent *e);
-  void endEdit(int row, int col, bool accept, bool replace );
 
   void resizeEvent(QResizeEvent*);
   QWidget* createEditWidgets(void);
@@ -115,11 +112,6 @@ protected:
   virtual bool focusNextPrevChild(bool next);
   void addToTabOrder(QWidget* w);
 
-  /**
-    * convenience function for setCurrentCell(int row, int col)
-    */
-  void setCurrentCell(int row) { setCurrentCell(row, 0); }
-
   void updateTransactionTableSize(void);
 
   /**
@@ -129,21 +121,13 @@ protected:
     */
   bool isEditMode(void) const;
 
-  /**
-    * This method retuns the background color for a given @p row.
-    *
-    * @param row the row in question
-    * @return the color as QColor object
-    */
-  const QColor rowBackgroundColor(const int row) const;
-
   void endEdit(bool keyboardDriven);
 
 public slots:
   /** No descriptions */
-  virtual void setCurrentCell(int row, int col);
+  virtual void setRowCount(int r);
 
-  virtual void setNumRows(int r);
+  void selectRow(int row);
 
   QWidget* slotStartEdit(void);
   void slotEndEdit(void);
@@ -153,10 +137,8 @@ public slots:
   void slotDuplicateSplit(void);
 
 protected slots:
-  virtual void columnWidthChanged(int col);
-
   /// move the focus to the selected @p row.
-  void slotSetFocus(int row, int col = 0, int button = Qt::LeftButton, const QPoint & mousePos = QPoint(0, 0));
+  void slotSetFocus(const QModelIndex& index, int button = Qt::LeftButton);
 
   /**
     * Calling this slot refills the widget with the data
@@ -211,9 +193,6 @@ private:
 
   /// the number of rows filled with data
   int                 m_maxRows;
-
-  /// indication if inline editing mode is on or not
-  bool                m_editMode;
 
   MyMoneyTransaction  m_transaction;
   MyMoneyAccount      m_account;
