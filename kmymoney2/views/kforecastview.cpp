@@ -22,7 +22,6 @@
 #include <QLabel>
 #include <q3textedit.h>
 #include <QLayout>
-//Added by qt3to4:
 #include <QList>
 
 // ----------------------------------------------------------------------------
@@ -45,8 +44,8 @@
 #include "mymoneyforecast.h"
 #include "kmymoneyforecastlistviewitem.h"
 #include "kmymoneyaccounttreeforecast.h"
-//#include "pivottable.h"
-//#include "pivotgrid.h"
+#include "pivottable.h"
+#include "pivotgrid.h"
 
 KForecastView::KForecastView(QWidget *parent) :
   KForecastViewDecl(parent)
@@ -66,11 +65,10 @@ KForecastView::KForecastView(QWidget *parent) :
 
   m_forecastList->setAllColumnsShowFocus(true);
   m_summaryList->setAllColumnsShowFocus(true);
-  //m_adviceList->setAllColumnsShowFocus(true);
   m_advancedList->setAllColumnsShowFocus(true);
 
-  //m_forecastChart = new KReportChartView(m_tabChart, "forecastChart" );
-  //m_forecastChart->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );
+  m_forecastChart = new KReportChartView(m_tabChart);
+  m_forecastChart->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );
 
   loadForecastSettings();
 
@@ -86,9 +84,8 @@ void KForecastView::slotTabChanged(QWidget* _tab)
 
   // remember this setting for startup
   KSharedConfigPtr config = KGlobal::config();
-#warning "port to kde4"
-  //KConfigGroup grp = config->group("Last Use Settings");
-  //grp.writeEntry("KForecastView_LastType", tab);
+  KConfigGroup grp = config->group("Last Use Settings");
+  grp.writeEntry("KForecastView_LastType", QVariant(tab).toString());
 
   loadForecast(tab);
 
@@ -665,16 +662,13 @@ void KForecastView::loadChartView(void)
   reportCfg.setConvertCurrency( true );
   reportCfg.setIncludingForecast( true );
   reportCfg.setDateFilter(QDate::currentDate(),QDate::currentDate().addDays(m_forecastDays->value()));
-#warning "port to kde4"
-#if 0
   reports::PivotTable table(reportCfg);
 
   table.drawChart(*m_forecastChart);
-#endif
-  // Adjust the size
-  //m_forecastChart->resize(m_tab->width()-30, m_tab->height()-60);
 
-  //m_forecastChart->update();
+  // Adjust the size
+  m_forecastChart->resize(m_tab->width()-30, m_tab->height()-60);
+  m_forecastChart->update();
 }
 
 #include "kforecastview.moc"
