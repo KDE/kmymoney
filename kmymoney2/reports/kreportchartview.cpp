@@ -61,19 +61,23 @@ KReportChartView::KReportChartView( QWidget* parent): KDChart::Chart(parent)
   KDChart::LineDiagram* diagram = new KDChart::LineDiagram;
   diagram->setModel(&m_model);
   this->coordinatePlane()->replaceDiagram(diagram);
-
-  //Subdued colors
-  diagram->useSubduedColors();
 }
 
-void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport &config, int numColumns, const QStringList& columnHeadings, const QList<ERowType>& rowTypeList, const QStringList& columnTypeHeaderList)
+void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport &config, int numberColumns, const QStringList& columnHeadings, const QList<ERowType>& rowTypeList, const QStringList& columnTypeHeaderList)
 {
+  //set the number of columns
+  setNumColumns(numberColumns);
+
   //remove existing headers
   while(headerFooters().count() > 0) {
     HeaderFooter* delHeader = headerFooters().at(0);
     takeHeaderFooter(delHeader);
     delete delHeader;
   }
+
+  //make sure the model is clear
+  m_model.removeColumns(0, m_model.columnCount());
+  m_model.removeRows(0, m_model.rowCount());
 
   //set the new header
   HeaderFooter* header = new HeaderFooter(this);
@@ -89,12 +93,12 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
   // whether to limit the chart to use series totals only.  Used for reports which only
   // show one dimension (pie).
-  bool seriesTotals = false;
+  setSeriesTotals(false);
 
   // whether series (rows) are accounts (true) or months (false). This causes a lot
   // of complexity in the charts.  The problem is that circular reports work best with
   // an account in a COLUMN, while line/bar prefer it in a ROW.
-  bool accountSeries = true;
+  setAccountSeries(true);
 
   //what values should be shown
   bool showBudget = config.hasBudget();
@@ -136,8 +140,8 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
       PolarCoordinatePlane* polarPlane = new PolarCoordinatePlane;
       replaceCoordinatePlane(polarPlane);
       coordinatePlane()->replaceDiagram(diagram);
-      accountSeries = false;
-      seriesTotals = true;
+      setAccountSeries(false);
+      setSeriesTotals(true);
       break;
     }
     case MyMoneyReport::eChartRing:
@@ -148,7 +152,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
       replaceCoordinatePlane(polarPlane);
       coordinatePlane()->replaceDiagram(diagram);
       //chartView.params()->setRelativeRingThickness( true );
-      accountSeries = false;
+      setAccountSeries(false);
       break;
     }
   }
@@ -177,10 +181,10 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
     // Set up X axis labels (ie "abscissa" to use the technical term)
     QStringList abscissaNames;
-    if ( accountSeries ) // if not, we will set these up while putting in the chart values.
+    if ( accountSeries() ) // if not, we will set these up while putting in the chart values.
     {
       int column = 1;
-      while ( column < numColumns ) {
+      while ( column < numColumns() ) {
         abscissaNames += QString(columnHeadings[column++]).replace("&nbsp;", " ");
       }
       xAxis->setLabels(abscissaNames);
@@ -221,12 +225,17 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     }
   }
 
+  //line markers
+  DataValueAttributes dataValueAttr(coordinatePlane()->diagram()->dataValueAttributes());
+  MarkerAttributes markerAttr(dataValueAttr.markerAttributes());
+  markerAttr.setVisible(true);
+  markerAttr.setMarkerStyle(MarkerAttributes::MarkerCircle);
+  markerAttr.setMarkerSize(QSize(8,8));
+  dataValueAttr.setMarkerAttributes(markerAttr);
+  coordinatePlane()->diagram()->setDataValueAttributes(dataValueAttr);
+
   // For onMouseOver events, we want to activate mouse tracking
   setMouseTracking( true );
-
-  // The KReportChartView widget needs to know whether the legend
-  // corresponds to rows or columns
-  setAccountSeries( accountSeries );
 
   switch ( config.detailLevel() )
   {
@@ -267,7 +276,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
                   }
 
                   //set the cell value and tooltip
-                  rowNum = drawPivotRowSet(rowNum, seriesTotals, accountSeries, it_row.value(), rowTypeList[i], numColumns, legendText);
+                  rowNum = drawPivotRowSet(rowNum, it_row.value(), rowTypeList[i], legendText);
 
                   //set the legend text
                   legend->setText(rowNum-1, legendText);
@@ -312,7 +321,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
               }
 
               //set the cell value and tooltip
-              rowNum = drawPivotRowSet(rowNum, seriesTotals, accountSeries, (*it_innergroup).m_total, rowTypeList[i], numColumns, legendText);
+              rowNum = drawPivotRowSet(rowNum, (*it_innergroup).m_total, rowTypeList[i], legendText);
 
               //set the legend text
               legend->setText(rowNum-1, legendText);
@@ -348,7 +357,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
             }
 
             //set the cell value and tooltip
-            rowNum = drawPivotRowSet(rowNum, seriesTotals, accountSeries, (*it_outergroup).m_total, rowTypeList[i], numColumns, legendText);
+            rowNum = drawPivotRowSet(rowNum, (*it_outergroup).m_total, rowTypeList[i], legendText);
 
             //set the legend
             legend->setText(rowNum-1, legendText);
@@ -374,7 +383,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
             }
 
             //set the cell value
-            rowNum = drawPivotRowSet(rowNum, seriesTotals, accountSeries, grid.m_total, rowTypeList[i], numColumns, legendText);
+            rowNum = drawPivotRowSet(rowNum, grid.m_total, rowTypeList[i], legendText);
 
             //set the legend
             legend->setText(rowNum -1, legendText);
@@ -404,7 +413,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
           }
 
           //set cell value
-          rowNum = drawPivotRowSet(rowNum, seriesTotals, accountSeries, grid.m_total, rowTypeList[i], numColumns, legendText);
+          rowNum = drawPivotRowSet(rowNum, grid.m_total, rowTypeList[i], legendText);
 
           //set legend text
           legend->setText(rowNum -1, legendText);
@@ -430,25 +439,14 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   legend->setTitleText(i18nc("Chart lines legend","Legend"));
   legend->setUseAutomaticMarkerSize( false );
 
-  //line markers
-  DataValueAttributes dataValueAttr(coordinatePlane()->diagram()->dataValueAttributes());
-  MarkerAttributes markerAttr(dataValueAttr.markerAttributes());
-  markerAttr.setVisible(true);
-  markerAttr.setMarkerStyle(MarkerAttributes::MarkerCircle);
-  markerAttr.setMarkerSize(QSize(8,8));
-  dataValueAttr.setMarkerAttributes(markerAttr);
-  coordinatePlane()->diagram()->setDataValueAttributes(dataValueAttr);
-
   //make sure to show only the required number of fractional digits on the labels of the graph
   //chartView.params()->setDataValuesCalc(0, MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
-  //chartView.refreshLabels();
 }
 
-unsigned KReportChartView::drawPivotRowSet(int rowNum, const bool seriesTotals, const bool accountSeries, const PivotGridRowSet& rowSet, const ERowType rowType, int numColumns, const QString& legendText )
+unsigned KReportChartView::drawPivotRowSet(int rowNum, const PivotGridRowSet& rowSet, const ERowType rowType, const QString& legendText )
 {
-
   // Columns
-  if ( seriesTotals )
+  if ( seriesTotals() )
   {
     double value = rowSet[rowType].m_total.toDouble();
 
@@ -457,7 +455,7 @@ unsigned KReportChartView::drawPivotRowSet(int rowNum, const bool seriesTotals, 
         .arg(legendText)
         .arg(value, 0, 'f', 2);
 
-    if ( accountSeries ) {
+    if ( accountSeries() ) {
       //set the cell value
       this->setDataCell(rowNum, 0, value);
       this->setCellTip(rowNum, 0, toolTip);
@@ -467,14 +465,14 @@ unsigned KReportChartView::drawPivotRowSet(int rowNum, const bool seriesTotals, 
     }
   } else {
     int column = 1;
-    while ( column < numColumns )
+    while ( column < numColumns() )
     {
       double value = rowSet[rowType][column].toDouble();
       QString toolTip = QString("<h2>%1</h2><strong>%2</strong><br>")
         .arg(legendText)
         .arg(value, 0, 'f', 2);
 
-      if ( accountSeries ) {
+      if ( accountSeries() ) {
         this->setDataCell(column-1, rowNum, value);
         this->setCellTip(column-1, rowNum, toolTip);
       } else {

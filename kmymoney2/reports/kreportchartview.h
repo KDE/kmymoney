@@ -58,18 +58,27 @@ class KReportChartView: public Chart
 public:
   KReportChartView( QWidget* parent );
   ~KReportChartView() {}
+
+/**
+  * Whether the calling report has chart capabilities
+  */
   static bool implemented(void) { return true; }
+
+/**
+  * Returns the labels for the X axis
+  * @see m_abscissaNames
+  */
   QStringList& abscissaNames(void) { return m_abscissaNames; }
 
-  void setAccountSeries(bool accountSeries) {_accountSeries = accountSeries; }
-  bool getAccountSeries(void) {return _accountSeries; }
-
- /**
-   * Draw the chart for a pivot table report
-   */
-  void drawPivotChart(const PivotGrid &grid, const MyMoneyReport &config, int numColumns, const QStringList& columnHeadings, const QList<ERowType>& rowTypeList, const QStringList& columnTypeHeaderList);
+/**
+  * Draw the chart for a pivot table report
+  */
+  void drawPivotChart(const PivotGrid &grid, const MyMoneyReport &config, int numberColumns, const QStringList& columnHeadings, const QList<ERowType>& rowTypeList, const QStringList& columnTypeHeaderList);
 
 protected:
+/**
+  * This is an overload method needed to capture the mouse events
+  */
   bool event( QEvent* event );
 
 private:
@@ -77,18 +86,81 @@ private:
 /**
   * Draw a PivotGridRowSet in a chart
   */
-  unsigned drawPivotRowSet(int rowNum, const bool seriesTotals, const bool accountSeries, const PivotGridRowSet& rowSet, const ERowType rowType, int numColumns, const QString& legendText);
+  unsigned drawPivotRowSet(int rowNum, const PivotGridRowSet& rowSet, const ERowType rowType, const QString& legendText);
 
+/**
+  * Set the data value
+  */
   void setDataCell( int row, int column, const double data);
 
+/**
+  * Set the tooltip for a data value
+  */
   void setCellTip( int row, int column, QString tip );
 
+/**
+  * Make sure the model has the right size
+  */
   void justifyModelSize( int rows, int columns );
 
-  QStringList m_abscissaNames;
-  bool _accountSeries;
+/**
+  * Set the accountSeries
+  * @see m_accountSeries
+  */
+  void setAccountSeries(bool accountSeries) { m_accountSeries = accountSeries; }
 
-  QLabel *label;
+/**
+  * Returns accountSeries
+  * @see m_accountSeries
+  */
+  bool accountSeries(void) { return m_accountSeries; }
+
+/**
+  * Set the seriesTotals
+  * @see m_seriesTotals
+  */
+  void setSeriesTotals(bool seriesTotals) { m_seriesTotals = seriesTotals; }
+
+/**
+  * Returns accountSeries
+  * @see m_seriesTotals
+  */
+  bool seriesTotals(void) { return m_seriesTotals; }
+
+/**
+  * Set the number of columns
+  * @see m_numColumns
+  */
+  void setNumColumns(int numColumns) { m_numColumns = numColumns; }
+
+/**
+  * Returns number of columns
+  * @see m_numColumns
+  */
+  int numColumns(void) { return m_numColumns; }
+
+/**
+  * The labels of the X axis
+  */
+  QStringList m_abscissaNames;
+
+/**
+  * whether series (rows) are accounts (true) or months (false). This causes a lot
+  * of complexity in the charts.  The problem is that circular reports work best with
+  * an account in a COLUMN, while line/bar prefer it in a ROW.
+  */
+  bool m_accountSeries;
+
+/**
+  * whether to limit the chart to use series totals only.  Used for reports which only
+  * show one dimension (pie)
+  */
+  bool m_seriesTotals;
+
+/**
+  * Number of columns on the report
+  */
+  int m_numColumns;
 
 /**
   * Model to store chart data
