@@ -658,7 +658,8 @@ void KForecastView::loadChartView(void)
   reportCfg.setIncludingSchedules( false );
   reportCfg.addAccountGroup(MyMoneyAccount::Asset);
   reportCfg.addAccountGroup(MyMoneyAccount::Liability);
-  reportCfg.setColumnsAreDays( true );
+  // FIXME: this causes a crash
+  //reportCfg.setColumnsAreDays( true );
   reportCfg.setConvertCurrency( true );
   reportCfg.setIncludingForecast( true );
   reportCfg.setDateFilter(QDate::currentDate(),QDate::currentDate().addDays(m_forecastDays->value()));
@@ -667,7 +668,7 @@ void KForecastView::loadChartView(void)
   table.drawChart(*m_forecastChart);
 
   // Adjust the size
-  m_forecastChart->resize(m_tab->width()-30, m_tab->height()-60);
+  m_forecastChart->resize(m_tab->width() - 10, m_tab->height());
   m_forecastChart->update();
 }
 
