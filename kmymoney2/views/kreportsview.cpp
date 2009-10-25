@@ -1238,6 +1238,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
     list.back().setIncludingBudgetActuals(false);
     list.back().setIncludingPrice(true);
     list.back().setConvertCurrency(true);
+    list.back().setChartDataLabels(false);
 
     list.push_back(MyMoneyReport(
       MyMoneyReport::eAssetLiability,
@@ -1256,6 +1257,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
     list.back().setIncludingAveragePrice(true);
     list.back().setMovingAverageDays(10);
     list.back().setConvertCurrency(true);
+    list.back().setChartDataLabels(false);
 
     list.push_back(MyMoneyReport(
       MyMoneyReport::eAssetLiability,
@@ -1429,6 +1431,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
       i18n("Default Report")
     ));
     list.back().setIncludingForecast( true );
+
     list.push_back(MyMoneyReport(
       MyMoneyReport::eAssetLiability,
       MyMoneyReport::eMonths,

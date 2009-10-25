@@ -161,6 +161,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   DataValueAttributes valueAttr(coordinatePlane()->diagram()->dataValueAttributes());
   valueAttr.setVisible(config.isChartDataLabels());
   coordinatePlane()->diagram()->setDataValueAttributes(valueAttr);
+  coordinatePlane()->diagram()->setAllowOverlappingDataValueTexts(false);
 
   //Subdued colors - we set it here again because it is a property of the diagram
   coordinatePlane()->diagram()->useSubduedColors();
@@ -289,7 +290,6 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
         }
         ++it_outergroup;
       }
-      replaceLegend(legend);
     }
     break;
 
@@ -324,14 +324,13 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
               rowNum = drawPivotRowSet(rowNum, (*it_innergroup).m_total, rowTypeList[i], legendText);
 
               //set the legend text
-              legend->setText(rowNum-1, legendText);
+              legend->setText(rowNum - 1, legendText);
             }
           }
           ++it_innergroup;
         }
         ++it_outergroup;
       }
-      replaceLegend(legend);
     }
     break;
 
@@ -360,7 +359,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
             rowNum = drawPivotRowSet(rowNum, (*it_outergroup).m_total, rowTypeList[i], legendText);
 
             //set the legend
-            legend->setText(rowNum-1, legendText);
+            legend->setText(rowNum - 1, legendText);
           }
         }
         ++it_outergroup;
@@ -386,12 +385,11 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
             rowNum = drawPivotRowSet(rowNum, grid.m_total, rowTypeList[i], legendText);
 
             //set the legend
-            legend->setText(rowNum -1, legendText);
+            legend->setText(rowNum - 1, legendText);
 
           }
         }
       }
-      replaceLegend(legend);
     }
     break;
 
@@ -416,10 +414,9 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
           rowNum = drawPivotRowSet(rowNum, grid.m_total, rowTypeList[i], legendText);
 
           //set legend text
-          legend->setText(rowNum -1, legendText);
+          legend->setText(rowNum - 1, legendText);
         }
       }
-      replaceLegend(legend);
     }
     break;
   }
@@ -438,6 +435,8 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   legend->setTitleTextAttributes(legendTitleTextAttr);
   legend->setTitleText(i18nc("Chart lines legend","Legend"));
   legend->setUseAutomaticMarkerSize( false );
+
+  replaceLegend(legend);
 
   //make sure to show only the required number of fractional digits on the labels of the graph
   //chartView.params()->setDataValuesCalc(0, MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));

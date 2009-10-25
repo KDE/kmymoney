@@ -484,7 +484,6 @@ void KForecastView::loadBudgetView(void)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
   MyMoneyForecast forecast;
-//  QValueList<MyMoneyAccount> accList;
 
   m_budgetList->setBaseCurrency(file->baseCurrency());
 
@@ -656,10 +655,9 @@ void KForecastView::loadChartView(void)
   reportCfg.setChartGridLines(false);
   reportCfg.setChartType(MyMoneyReport::eChartLine);
   reportCfg.setIncludingSchedules( false );
-  reportCfg.addAccountGroup(MyMoneyAccount::Asset);
-  reportCfg.addAccountGroup(MyMoneyAccount::Liability);
   // FIXME: this causes a crash
   //reportCfg.setColumnsAreDays( true );
+  reportCfg.setChartDataLabels(false);
   reportCfg.setConvertCurrency( true );
   reportCfg.setIncludingForecast( true );
   reportCfg.setDateFilter(QDate::currentDate(),QDate::currentDate().addDays(m_forecastDays->value()));
