@@ -124,13 +124,14 @@
 <sect2 id="details.formats.encrypted.keysettings">
 <title>Setting the keys in &kappname;</title>
 <para>
-  On the encryption page of the settings dialog, there is a field where you can
-  enter the key-id of the key that should be used for encryption and
-  decryption. You can use either the key-id, the email address associated with
-  this key, or any other valid GPG key identification as the value for this
-  field. When you enter the key-id, &kappname; will check its validity and 
-  display a green LED icon in the dialog if a key is found.
-
+  On the encryption page of the settings dialog, there is a drop down 
+  list where you can select the key that should be used for encryption and 
+  decryption. Additionally you can find a field where you can enter the 
+  key-id of a key not in the listbox. You can use either the key-id, the 
+  email address associated with this key, or any other valid GPG key 
+  identification as the value for this field. When you enter the key-id, 
+  &kappname; will check its validity and display a green LED icon in the 
+  dialog if a key is found.
   <caution>
     <para>
       Make sure you have both the public and the private key for this id. If you
