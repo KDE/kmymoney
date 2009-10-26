@@ -35,7 +35,7 @@ include( MacroLibrary )
 include( KMyMoneyMacros )
 find_package(KdepimLibs REQUIRED)
 
-add_definitions( ${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
+add_definitions( ${QT_DEFINITIONS} ${KDE4_DEFINITIONS} -DQT_STRICT_ITERATORS)
 add_definitions (-DQT3_SUPPORT -DQT3_SUPPORT_WARNINGS)
 
 include_directories( ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES} 
