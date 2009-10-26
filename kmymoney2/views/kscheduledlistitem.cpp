@@ -25,7 +25,6 @@
 
 #include <QPainter>
 #include <QStyle>
-//Added by qt3to4:
 #include <QList>
 #include <QPixmap>
 
@@ -36,6 +35,7 @@
 #include <klocale.h>
 #include <kglobal.h>
 #include <kglobalsettings.h>
+#include <kcolorscheme.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -64,8 +64,8 @@ KScheduledListItem::KScheduledListItem(KScheduledListItem *parent, const MyMoney
   try
   {
     MyMoneyTransaction transaction = schedule.transaction();
-    MyMoneySplit s1 = transaction.splits()[0];
-    MyMoneySplit s2 = transaction.splits()[1];
+    MyMoneySplit s1 = (transaction.splits().size() < 1) ? MyMoneySplit() : transaction.splits()[0];
+    MyMoneySplit s2 = (transaction.splits().size() < 2) ? MyMoneySplit() : transaction.splits()[1];
     QList<MyMoneySplit>::ConstIterator it_s;
     MyMoneySplit split;
     MyMoneyAccount acc;
@@ -161,9 +161,7 @@ void KScheduledListItem::paintCell(QPainter* p, const QColorGroup& cg, int colum
 {
   QColorGroup cg2(cg);
 
-  QColor textColour;
-#warning "port to kde4";  
-  //QColor textColour = KGlobalSettings::textColor();
+  QColor textColour = KColorScheme(QPalette::Active).foreground(KColorScheme::NormalText).color();
   QFont cellFont = KMyMoneyGlobalSettings::listCellFont();
 
   // avoid colorizing lines that do not contain a schedule

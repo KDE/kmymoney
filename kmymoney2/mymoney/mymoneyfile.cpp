@@ -1571,9 +1571,10 @@ const QStringList MyMoneyFile::consistencyCheck(void)
   }
   for(it_t = tList.begin(); it_t != tList.end(); ++it_t) {
     MyMoneyTransaction t = (*it_t);
+    QList<MyMoneySplit> splits = t.splits();
     QList<MyMoneySplit>::const_iterator it_s;
     bool tChanged = false;
-    for(it_s = t.splits().constBegin(); it_s != t.splits().constEnd(); ++it_s) {
+    for(it_s = splits.constBegin(); it_s != splits.constEnd(); ++it_s) {
       bool sChanged = false;
       MyMoneySplit s = (*it_s);
       if(payeeConversionMap.find((*it_s).payeeId()) != payeeConversionMap.end()) {
@@ -1631,9 +1632,10 @@ const QStringList MyMoneyFile::consistencyCheck(void)
   for(it_sch = schList.begin(); it_sch != schList.end(); ++it_sch) {
     MyMoneySchedule sch = (*it_sch);
     MyMoneyTransaction t = sch.transaction();
+    QList<MyMoneySplit> splits = t.splits();
     bool tChanged = false;
     QList<MyMoneySplit>::const_iterator it_s;
-    for(it_s = t.splits().constBegin(); it_s != t.splits().constEnd(); ++it_s) {
+    for(it_s = splits.constBegin(); it_s != splits.constEnd(); ++it_s) {
       MyMoneySplit s = (*it_s);
       bool sChanged = false;
       if(payeeConversionMap.find((*it_s).payeeId()) != payeeConversionMap.end()) {
