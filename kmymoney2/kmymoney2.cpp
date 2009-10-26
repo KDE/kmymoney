@@ -1055,17 +1055,7 @@ void KMyMoney2App::readOptions(void)
   toggleAction("view_hide_reconciled_transactions")->setChecked(KMyMoneyGlobalSettings::hideReconciledTransactions());
   toggleAction("view_hide_unused_categories")->setChecked(KMyMoneyGlobalSettings::hideUnusedCategory());
 
-  //FIXME: Port to KDE4
-// initialize the recent file list
-  //KRecentFilesAction *p = dynamic_cast<KRecentFilesAction*>(action(KStandardAction::name(KStandardAction::OpenRecent)));
-  //if(p)
   d->m_recentFiles->loadEntries(d->m_config->group("Recent Files"));
-
-  //QSize size=grp.readEntry("Geometry");
-  //if(!size.isEmpty())
-  //{
-    //resize(size);
-  //}
 
   // Startdialog is written in the settings dialog
   d->m_startDialog = grp.readEntry("StartDialog", true);
@@ -1409,24 +1399,20 @@ void KMyMoney2App::slotFileOpenRecent(const KUrl& url)
   KUrl lastFile = d->m_fileName;
 
   // check if there are other instances which might have this file open
-  Q3ValueList<QByteArray> list = instanceList();
-  Q3ValueList<QByteArray>::ConstIterator it;
+  QList<QString> list = instanceList();
+  QList<QString>::ConstIterator it;
   bool duplicate = false;
-#warning "port kde4"
-#if 0
   for(it = list.begin(); duplicate == false && it != list.end(); ++it) {
-    KMyMoney2App_stub* remoteApp = new KMyMoney2App_stub(kapp->dcopClient(), (*it), "kmymoney2app");
-    QString remoteFile = remoteApp->filename();
-    if(!remoteApp->ok()) {
-      qDebug("DCOP error while calling app->filename()");
+    QDBusInterface remoteApp(*it, "/KMymoney", "org.kde.kmymoney");
+    QDBusReply<QString> reply = remoteApp.call("filename");
+    if(!reply.isValid()) {
+      qDebug("D-Bus error while calling app->filename()");
     } else {
-      if(remoteFile == url.url()) {
+      if(reply.value() == url.url()) {
         duplicate = true;
       }
     }
-    delete remoteApp;
   }
-#endif
   if(!duplicate) {
     KUrl newurl = url;
     if((newurl.protocol() == "sql")) {
@@ -6268,21 +6254,27 @@ const QString KMyMoney2App::filename(void) const
   return d->m_fileName.url();
 }
 
-const QList<QByteArray> KMyMoney2App::instanceList(void) const
+const QList<QString> KMyMoney2App::instanceList(void) const
 {
-  QList<QByteArray> list;
-  //FIXME: Port to KDE4
-//   Q3ValueList<QByteArray> apps = kapp->dcopClient()->registeredApplications();
-//   Q3ValueList<QByteArray>::ConstIterator it;
-//
-//   for(it = apps.begin(); it != apps.end(); ++it) {
-//     // skip over myself
-//     if((*it) == kapp->dcopClient()->appId())
-//       continue;
-//     if((*it).find("kmymoney-") == 0) {
-//       list += (*it);
-//     }
-//   }
+  QList<QString> list;
+  QDBusReply<QStringList> reply = QDBusConnection::sessionBus().interface()->registeredServiceNames();
+
+  if (reply.isValid()) {
+    QStringList apps = reply.value();
+    QStringList::ConstIterator it;
+
+    for(it = apps.begin(); it != apps.end(); ++it) {
+      // skip over myself
+      QDBusReply<uint> pid = QDBusConnection::sessionBus().interface()->servicePid(*it);
+      if (pid.isValid() && pid.value() == getpid())
+        continue;
+      if((*it).indexOf("org.kde.kmymoney2") == 0) {
+        list += (*it);
+      }
+    }
+  } else {
+    reply.error();
+  }
   return list;
 }
 

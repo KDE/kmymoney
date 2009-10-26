@@ -15,20 +15,19 @@
  ***************************************************************************/
 
 
-# include <config-kmymoney.h>
-
-#include <QDBusConnection>
-#include <QDBusConnectionInterface>
-#include <stdio.h>
+#include <config-kmymoney.h>
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qwidget.h>
+#include <QWidget>
 #include <QDateTime>
 #include <QStringList>
 #include <QEventLoop>
 #include <QApplication>
+#include <QDBusConnection>
+#include <QDBusConnectionInterface>
+#include <QDBusInterface>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -187,7 +186,7 @@ int main(int argc, char *argv[])
   try {
       do {
           if ( QDBusConnection::sessionBus().interface()->isServiceRegistered("org.kde.kmymoney") ) {
-        const Q3ValueList<QByteArray> instances = kmymoney2->instanceList();
+        const QList<QString> instances = kmymoney2->instanceList();
         if(instances.count() > 0) {
 
           // If the user launches a second copy of the app and includes a file to
@@ -199,19 +198,15 @@ int main(int argc, char *argv[])
             KUrl url = args->url(0);
             if ( kmymoney2->isImportableFile( url.path() ) )
             {
-#warning "port to kde4"
-#if 0
                 // if there are multiple instances, we'll send this to the first one
-              QByteArray primary = instances[0];
+              QString primary = instances[0];
 
               // send a message to the primary client to import this file
-              QByteArray data;
-              QDataStream arg(data, QIODevice::WriteOnly);
-              arg << url.path();
-              arg << kapp->startupId();
-              if (!client->send(primary, "kmymoney2app", "webConnect(QString,QCString)",data))
-                qDebug("Unable to launch WebConnect via DCOP.");
-#endif
+              QDBusInterface remoteApp(primary, "/KMymoney", "org.kde.kmymoney");
+              QDBusReply<QString> reply = remoteApp.call("webConnect", url.path(), kapp->startupId());
+              if(!reply.isValid())
+                qDebug("Unable to launch WebConnect via D-Bus.");
+
               // Before we delete the application, we make sure that we destroy all
               // widgets by running the event loop for some time to catch all those
               // widgets that are requested to be destroyed using the deleteLater() method.

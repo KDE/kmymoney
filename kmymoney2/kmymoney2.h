@@ -481,7 +481,7 @@ public:
     *
     * @retval QStringList of process ids
     */
-  const QList<QByteArray> instanceList(void) const;
+  const QList<QString> instanceList(void) const;
 
   /**
     * Dump a list of the names of all defined KActions to stdout.
