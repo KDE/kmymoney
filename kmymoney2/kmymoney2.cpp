@@ -1022,11 +1022,6 @@ void KMyMoney2App::initStatusBar(void)
 
   // Initialization of progress bar taken from KDevelop ;-)
   d->m_progressBar = new QProgressBar(statusBar());
-  //FIXME: Port to KDE4
-  //progressBar->setFrameStyle(Q3Frame::NoFrame | Q3Frame::Plain);
-  //progressBar->setMargin(0);
-  //progressBar->setLineWidth(0);
-  //progressBar->setBackgroundMode(QWidget::PaletteBackground);
   statusBar()->addWidget(d->m_progressBar);
   d->m_progressBar->setFixedHeight(d->m_progressBar->sizeHint().height() - 8);
 
@@ -6508,8 +6503,6 @@ void KMyMoney2App::slotAccountUnmapOnline(void)
 
 void KMyMoney2App::slotAccountMapOnline(void)
 {
-    #warning "port to kde4"
-#if 0
   // no account selected
   if(d->m_selectedAccount.id().isEmpty())
     return;
@@ -6525,10 +6518,7 @@ void KMyMoney2App::slotAccountMapOnline(void)
     }
   }
 
-  // if we have more than one provider display a dialog to select the current providers
-  KPluginDlg dlg(this);
-  dlg.setCaption(i18n("Select online banking plugin"));
-  dlg.closeButton->hide();
+  // if we have more than one provider let the user select the current provider
   QString provider;
   QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p;
   switch(d->m_onlinePlugins.count()) {
@@ -6538,15 +6528,28 @@ void KMyMoney2App::slotAccountMapOnline(void)
       provider = d->m_onlinePlugins.begin().key();
       break;
     default:
-      for(it_p = d->m_onlinePlugins.begin(); it_p != d->m_onlinePlugins.end(); ++it_p) {
-        QStringList protocolList;
-        (*it_p)->protocols(protocolList);
-        new K3ListViewItem(dlg.d->m_listView, it_p.key(), "Loaded", protocolList.join(", "));
-      }
-      if(dlg.exec() == QDialog::Accepted) {
-        if(dlg.d->m_listView->selectedItem()) {
-          provider = dlg.d->m_listView->selectedItem()->text(0);
+      {
+        QMenu popup(this);
+        popup.setTitle(i18n("Select online banking plugin"));
+
+        // Populate the pick list with all the provider
+        for (it_p = d->m_onlinePlugins.constBegin(); it_p != d->m_onlinePlugins.constEnd(); ++it_p) {
+          popup.addAction(it_p.key())->setData(it_p.key());
         }
+
+        QAction *item = popup.actions()[0];
+        if (item) {
+          popup.setActiveAction(item);
+        }
+
+        // cancelled
+        if ((item = popup.exec(QCursor::pos(), item)) == 0) {
+          return;
+        }
+
+        // We need to create a valid date in the month selected so we can find out how many days are
+        // in the month.
+        provider = item->data().toString();
       }
       break;
   }
@@ -6555,8 +6558,8 @@ void KMyMoney2App::slotAccountMapOnline(void)
     return;
 
   // find the provider
-  it_p = d->m_onlinePlugins.find(provider);
-  if(it_p != d->m_onlinePlugins.end()) {
+  it_p = d->m_onlinePlugins.constFind(provider);
+  if(it_p != d->m_onlinePlugins.constEnd()) {
     // plugin found, call it
     MyMoneyKeyValueContainer settings;
     if((*it_p)->mapAccount(d->m_selectedAccount, settings)) {
@@ -6573,7 +6576,6 @@ void KMyMoney2App::slotAccountMapOnline(void)
       }
     }
   }
-#endif
 }
 
 void KMyMoney2App::slotAccountUpdateOnlineAll(void)
