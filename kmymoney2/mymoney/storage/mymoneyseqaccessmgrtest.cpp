@@ -598,12 +598,12 @@ void MyMoneySeqAccessMgrTest::testAddTransactions() {
 		CPPUNIT_ASSERT(list.size() == 2);
 
 		QList<MyMoneyTransaction>::ConstIterator it;
-		it = list.begin();
+		it = list.constBegin();
 		CPPUNIT_ASSERT((*it).id() == "T000000000000000002");
 		++it;
 		CPPUNIT_ASSERT((*it).id() == "T000000000000000001");
 		++it;
-		CPPUNIT_ASSERT(it == list.end());
+		CPPUNIT_ASSERT(it == list.constEnd());
 
 /* removed with MyMoneyAccount::Transaction
 		CPPUNIT_ASSERT(ch.transactionCount() == 2);
@@ -714,12 +714,12 @@ void MyMoneySeqAccessMgrTest::testModifyTransaction() {
 		CPPUNIT_ASSERT(list.size() == 2);
 
 		QList<MyMoneyTransaction>::ConstIterator it;
-		it = list.begin();
+		it = list.constBegin();
 		CPPUNIT_ASSERT((*it).id() == "T000000000000000001");
 		++it;
 		CPPUNIT_ASSERT((*it).id() == "T000000000000000002");
 		++it;
-		CPPUNIT_ASSERT(it == list.end());
+		CPPUNIT_ASSERT(it == list.constEnd());
 
 /* removed with MyMoneyAccount::Transaction
 		// CPPUNIT_ASSERT(ch.transactionCount() == 2);

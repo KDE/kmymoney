@@ -643,7 +643,7 @@ void MyMoneyDatabaseMgrTest::testAddTransactions() {
     //QMap<QString, QString>::ConstIterator it_k;
     MyMoneyTransactionFilter f;
     QList<MyMoneyTransaction> transactionList (m->transactionList(f));
-    QList<MyMoneyTransaction>::ConstIterator it_t (transactionList.begin());
+    QList<MyMoneyTransaction>::ConstIterator it_t (transactionList.constBegin());
 
     //CPPUNIT_ASSERT((*it_k) == "2002-05-10-T000000000000000001");
     CPPUNIT_ASSERT((*it_t).id() == "T000000000000000002");
@@ -654,7 +654,7 @@ void MyMoneyDatabaseMgrTest::testAddTransactions() {
     //++it_k;
     ++it_t;
     //CPPUNIT_ASSERT(it_k == m->m_transactionKeys.end());
-    CPPUNIT_ASSERT(it_t == transactionList.end());
+    CPPUNIT_ASSERT(it_t == transactionList.constEnd());
 
     ch = m->account("A000006");
 
@@ -665,7 +665,7 @@ void MyMoneyDatabaseMgrTest::testAddTransactions() {
     CPPUNIT_ASSERT(list.size() == 2);
 
     QList<MyMoneyTransaction>::ConstIterator it;
-    it = list.begin();
+    it = list.constBegin();
     CPPUNIT_ASSERT((*it).id() == "T000000000000000002");
     ++it;
 
@@ -681,7 +681,7 @@ void MyMoneyDatabaseMgrTest::testAddTransactions() {
     CPPUNIT_ASSERT(splitList[1].value() == MyMoneyMoney(-100000));
 
     ++it;
-    CPPUNIT_ASSERT(it == list.end());
+    CPPUNIT_ASSERT(it == list.constEnd());
 
   } catch (MyMoneyException *e) {
     unexpectedException(e);
@@ -909,7 +909,7 @@ void MyMoneyDatabaseMgrTest::testModifyTransaction() {
     //QMap<QString, QString>::ConstIterator it_k;
     MyMoneyTransactionFilter f;
     QList<MyMoneyTransaction> transactionList (m->transactionList(f));
-    QList<MyMoneyTransaction>::ConstIterator it_t (transactionList.begin());
+    QList<MyMoneyTransaction>::ConstIterator it_t (transactionList.constBegin());
     //it_k = m->m_transactionKeys.begin();
     //CPPUNIT_ASSERT((*it_k) == "2002-05-10-T000000000000000001");
     CPPUNIT_ASSERT((*it_t).id() == "T000000000000000001");
@@ -920,7 +920,7 @@ void MyMoneyDatabaseMgrTest::testModifyTransaction() {
     //++it_k;
     ++it_t;
     //CPPUNIT_ASSERT(it_k == m->m_transactionKeys.end());
-    CPPUNIT_ASSERT(it_t == transactionList.end());
+    CPPUNIT_ASSERT(it_t == transactionList.constEnd());
 
     ch = m->account("A000006");
 
@@ -931,12 +931,12 @@ void MyMoneyDatabaseMgrTest::testModifyTransaction() {
     CPPUNIT_ASSERT(list.size() == 2);
 
     QList<MyMoneyTransaction>::ConstIterator it;
-    it = list.begin();
+    it = list.constBegin();
     CPPUNIT_ASSERT((*it).id() == "T000000000000000001");
     ++it;
     CPPUNIT_ASSERT((*it).id() == "T000000000000000002");
     ++it;
-    CPPUNIT_ASSERT(it == list.end());
+    CPPUNIT_ASSERT(it == list.constEnd());
 
   } catch (MyMoneyException *e) {
     unexpectedException(e);

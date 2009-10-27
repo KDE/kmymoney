@@ -1402,7 +1402,7 @@ void KMyMoney2App::slotFileOpenRecent(const KUrl& url)
   QList<QString> list = instanceList();
   QList<QString>::ConstIterator it;
   bool duplicate = false;
-  for(it = list.begin(); duplicate == false && it != list.end(); ++it) {
+  for(it = list.constBegin(); duplicate == false && it != list.constEnd(); ++it) {
     QDBusInterface remoteApp(*it, "/KMymoney", "org.kde.kmymoney");
     QDBusReply<QString> reply = remoteApp.call("filename");
     if(!reply.isValid()) {
@@ -6263,7 +6263,7 @@ const QList<QString> KMyMoney2App::instanceList(void) const
     QStringList apps = reply.value();
     QStringList::ConstIterator it;
 
-    for(it = apps.begin(); it != apps.end(); ++it) {
+    for(it = apps.constBegin(); it != apps.constEnd(); ++it) {
       // skip over myself
       QDBusReply<uint> pid = QDBusConnection::sessionBus().interface()->servicePid(*it);
       if (pid.isValid() && pid.value() == getpid())
