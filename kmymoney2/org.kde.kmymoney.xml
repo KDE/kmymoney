@@ -4,5 +4,9 @@
     <method name="filename">
       <arg type="s" direction="out"/>
     </method>
+    <method name="webConnect">
+      <arg name="url" type="s" direction="in"/>
+      <arg name="asn_id" type="ay" direction="in"/>
+    </method>
   </interface>
 </node>
