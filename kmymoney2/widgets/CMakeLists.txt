@@ -28,8 +28,8 @@ KMM_CREATE_LINKS_BIN( transactionsortoption.h )
 # Common sources for libkmymoney.so and libwidgets.a that do not
 # contain the KMM_DESIGNER flag
 SET(_uncritial_common_sources
-	kbudgetvalues.cpp
-	kguiutils.cpp
+  kbudgetvalues.cpp
+  kguiutils.cpp
   kmymoneyaccountselector.cpp
   kmymoneyaccounttreebudget.cpp
   kmymoneyaccounttree.cpp
@@ -85,27 +85,40 @@ KDE4_ADD_KCFG_FILES(_uncritial_common_sources ../kmymoneysettings.kcfgc)
 # We can compile the uncritical sources without KMM_DESIGNER flags
 KDE4_ADD_LIBRARY(kmymoney_base STATIC ${_uncritial_common_sources})
 
-########### QtDesigner Widget Library (kmymoney) SHARED #################
+########### QtDesigner Widget Library (kmymoneywidgets) #################
 # we never link against this library,
 # but it is needed for uic and QtDesigner
+set(kmymoneywidgets_PART_SRCS
+   ${CMAKE_CURRENT_BINARY_DIR}/kmymoneywidgets.cpp
+)
 
-KDE4_ADD_LIBRARY(kmymoney SHARED
- ${_critial_common_sources} ${_uncritial_common_sources} )
-TARGET_LINK_LIBRARIES(kmymoney  dialogs widgets kmymoney_common kmm_mymoney converter ${KDE4_KDE3SUPPORT_LIBS} ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS})
+kde4_add_widget_files(${kmymoneywidgets_PART_SRCS} kmymoney.widgets)
+
+set(kmymoneywidgets_PART_SRCS
+   ${_critial_common_sources} 
+   ${_uncritial_common_sources}
+   ${kmymoneywidgets_PART_SRCS}
+)
+
+kde4_add_plugin(kmymoneywidgets ${kmymoneywidgets_PART_SRCS})
 
 # For now, be NOT pedantic about this library.
 # Some undefined references remain.
-SET_TARGET_PROPERTIES(kmymoney PROPERTIES
+SET_TARGET_PROPERTIES(kmymoneywidgets PROPERTIES
   LINK_FLAGS "-Wl,--undefined")
 
 ##### Is the option -DKMM_DESIGNER needed??
 # The option -DKMM_DESIGNER will leave away any code that breaks uic.
-#SET_TARGET_PROPERTIES(kmymoney PROPERTIES
-#  COMPILE_FLAGS "-U_CHECK_MEMORY -DKMM_DESIGNER")
+SET_TARGET_PROPERTIES(kmymoneywidgets PROPERTIES
+  COMPILE_FLAGS "-U_CHECK_MEMORY -DKMM_DESIGNER")
 #####
 
-set_target_properties(kmymoney PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
-install(TARGETS kmymoney ${INSTALL_TARGETS_DEFAULT_ARGS} )
+target_link_libraries(kmymoneywidgets kmymoney_base kmm_mymoney kmymoney_common dialogs widgets converter ${KDE4_KDE3SUPPORT_LIBS} ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS})
+
+if( USE_QT_DESIGNER )
+  install(TARGETS kmymoneywidgets DESTINATION ${PLUGIN_INSTALL_DIR}/plugins/designer )
+  INSTALL(FILES kmymoneytitlelabel.png DESTINATION ${DATA_INSTALL_DIR}/kmymoney2/pics)
+endif( USE_QT_DESIGNER )
 
 ########### Widget Library (widgets) STATIC #################
  
@@ -154,19 +167,3 @@ TARGET_LINK_LIBRARIES(widgets kmymoney_base)
 INSTALL(FILES ${kmymoney_STAT_HEADERS} 
   DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney COMPONENT Devel)
 
-if( USE_QT_DESIGNER )
-  set(kmymoneywidgets_PART_SRCS
-     ${CMAKE_CURRENT_BINARY_DIR}/kmymoneywidgets.cpp
-  )
-
-  kde4_add_widget_files(${kmymoneywidgets_PART_SRCS} kmymoney.widgets)
-
-  kde4_add_plugin(kmymoneywidgets ${kmymoneywidgets_PART_SRCS})
-
-  target_link_libraries(kmymoneywidgets ${KDE4_KDECORE_LIBS}  ${QT_QTGUI_LIBRARY} ${KDE4_KDE3SUPPORT_LIBS} widgets kmymoney kmymoney_common dialogs converter)
-
-  install(TARGETS kmymoneywidgets DESTINATION ${PLUGIN_INSTALL_DIR}/plugins/designer )
-
-  INSTALL(FILES kmymoneytitlelabel.png DESTINATION ${DATA_INSTALL_DIR}/kmymoney2/pics)
-
-endif( USE_QT_DESIGNER )
