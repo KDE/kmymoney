@@ -360,7 +360,7 @@ int KOnlineBankingSetupWizard::ofxAccountCallback(struct OfxAccountData data, vo
 
     kvps.setValue("kmmofx-acc-ref", QString("%1-%2").arg(kvps.value("bankid"), kvps.value("uniqueId")));
   } else {
-    qDebug("Cannot setup kmmofx-acc-ref for '%s'", kvps.value("bankname").data());
+    qDebug("Cannot setup kmmofx-acc-ref for '%s'", qPrintable(kvps.value("bankname")));
   }
   kvps.setValue("protocol","OFX");
 

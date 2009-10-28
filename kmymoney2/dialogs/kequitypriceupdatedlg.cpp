@@ -367,7 +367,7 @@ void KEquityPriceUpdateDlg::storePrices(void)
     ft.commit();
 
   } catch(MyMoneyException *e) {
-    qDebug("Unable to add price information for %s", name.data());
+    qDebug("Unable to add price information for %s", qPrintable(name));
     delete e;
   }
 }

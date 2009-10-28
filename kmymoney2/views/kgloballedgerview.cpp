@@ -558,9 +558,9 @@ void KGlobalLedgerView::loadView(void)
       paymentAmount[it_b.key()] = MyMoneyMoney();
     }
 
-    tracer.printf("total balance of %s = %s", m_account.name().data(), actBalance[m_account.id()].formatMoney("", 2).data());
-    tracer.printf("future balance of %s = %s", m_account.name().data(), futureBalance[m_account.id()].formatMoney("", 2).data());
-    tracer.printf("cleared balance of %s = %s", m_account.name().data(), clearedBalance[m_account.id()].formatMoney("", 2).data());
+    tracer.printf("total balance of %s = %s", qPrintable(m_account.name()), qPrintable(actBalance[m_account.id()].formatMoney("", 2)));
+    tracer.printf("future balance of %s = %s", qPrintable(m_account.name()), qPrintable(futureBalance[m_account.id()].formatMoney("", 2)));
+    tracer.printf("cleared balance of %s = %s", qPrintable(m_account.name()), qPrintable(clearedBalance[m_account.id()].formatMoney("", 2)));
 
     KMyMoneyRegister::RegisterItem* p = m_register->lastItem();
     focusItem = 0;
@@ -610,11 +610,11 @@ void KGlobalLedgerView::loadView(void)
 
         if(!t->isScheduled()) {
           if(split.reconcileFlag() == MyMoneySplit::NotReconciled) {
-            tracer.printf("Reducing cleared balance by %s because %s/%s(%s) is not reconciled", (split.shares() * factor).formatMoney("", 2).data(), t->transaction().id().data(), split.id().data(), t->transaction().postDate().toString(Qt::ISODate).data());
+            tracer.printf("Reducing cleared balance by %s because %s/%s(%s) is not reconciled", qPrintable((split.shares() * factor).formatMoney("", 2)), qPrintable(t->transaction().id()), qPrintable(split.id()), qPrintable(t->transaction().postDate().toString(Qt::ISODate)));
             clearedBalance[split.accountId()] -= split.shares() * factor;
           }
           if(isReconciliationAccount() && t->transaction().postDate() > reconciliationDate && split.reconcileFlag() == MyMoneySplit::Cleared) {
-            tracer.printf("Reducing cleared balance by %s because we are in reconciliation, %s/%s(%s)'s date is after or on reconciliation date (%s) and is cleared", (split.shares() * factor).formatMoney("", 2).data(), t->transaction().id().data(), split.id().data(), t->transaction().postDate().toString(Qt::ISODate).data(), reconciliationDate.toString(Qt::ISODate).data());
+            tracer.printf("Reducing cleared balance by %s because we are in reconciliation, %s/%s(%s)'s date is after or on reconciliation date (%s) and is cleared", qPrintable((split.shares() * factor).formatMoney("", 2)), qPrintable(t->transaction().id()), qPrintable(split.id()), qPrintable(t->transaction().postDate().toString(Qt::ISODate)), qPrintable(reconciliationDate.toString(Qt::ISODate)));
 
             clearedBalance[split.accountId()] -= split.shares() * factor;
           }
@@ -629,7 +629,7 @@ void KGlobalLedgerView::loadView(void)
           }
 
           if(t->transaction().postDate() > QDate::currentDate()) {
-            tracer.printf("Reducing actual balance by %s because %s/%s(%s) is in the future", (split.shares() * factor).formatMoney("", 2).data(), t->transaction().id().data(), split.id().data(), t->transaction().postDate().toString(Qt::ISODate).data());
+            tracer.printf("Reducing actual balance by %s because %s/%s(%s) is in the future", qPrintable((split.shares() * factor).formatMoney("", 2)), qPrintable(t->transaction().id()), qPrintable(split.id()), qPrintable(t->transaction().postDate().toString(Qt::ISODate)));
             actBalance[split.accountId()] -= split.shares() * factor;
           }
         }
@@ -951,7 +951,7 @@ bool KGlobalLedgerView::slotSelectAccount(const QString& id, const QString& tran
         m_newAccountLoaded = true;
         slotLoadView();
       } catch(MyMoneyException* e) {
-        qDebug("Unable to retrieve account %s", id.data());
+        qDebug("Unable to retrieve account %s", qPrintable(id));
         delete e;
         rc = false;
       }
