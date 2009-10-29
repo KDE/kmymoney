@@ -203,9 +203,7 @@ int main(int argc, char *argv[])
 
               // send a message to the primary client to import this file
               QDBusInterface remoteApp(primary, "/KMymoney", "org.kde.kmymoney");
-              QDBusReply<QString> reply = remoteApp.call("webConnect", url.path(), kapp->startupId());
-              if(!reply.isValid())
-                qDebug("Unable to launch WebConnect via D-Bus.");
+              remoteApp.call("webConnect", url.path(), kapp->startupId());
 
               // Before we delete the application, we make sure that we destroy all
               // widgets by running the event loop for some time to catch all those
