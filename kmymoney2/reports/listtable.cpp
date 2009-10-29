@@ -496,6 +496,10 @@ namespace reports {
                 .arg ( ( *it_column == "value" ) ? " class=\"value\"" : "" )
                 .arg (i18n("Calculated"));
             csv += "\""+ i18n("Calculated") +"\",";
+          } else if ( *it_column == "price" ) {
+            result += QString ( "<td>%2</td>" )
+                .arg ( MyMoneyMoney ( data ).formatMoney ( MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision()) ) );
+            csv += "\"" + ( *it_row ) ["currency"] + " " + MyMoneyMoney ( data ).formatMoney ( MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision()), false ) + "\",";
           } else {
             result += QString ( "<td%1>%2&nbsp;%3</td>" )
                       .arg ( ( *it_column == "value" ) ? " class=\"value\"" : "" )
