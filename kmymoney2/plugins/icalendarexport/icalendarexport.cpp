@@ -59,7 +59,7 @@ KMMiCalendarExportPlugin::KMMiCalendarExportPlugin(QObject *parent, const QStrin
   setXMLFile("kmm_icalendarexport.rc");
 
   // For ease announce that we have been loaded.
- qDebug("KMyMoney iCalendar plugin loaded");
+  qDebug("KMyMoney iCalendar plugin loaded");
 
   // Create the actions of this plugin
   QString actionName = i18n("Schedules to icalendar");

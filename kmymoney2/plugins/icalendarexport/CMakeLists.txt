@@ -21,7 +21,7 @@ TARGET_LINK_LIBRARIES(kmm_icalendarexport
                       ${LIBICAL_LIBRARIES}
                       )
 
-install(FILES kmm_icalendarexport.rc
+INSTALL(FILES kmm_icalendarexport.rc
         DESTINATION  ${DATA_INSTALL_DIR}/kmm_icalendarexport)
 
 INSTALL(TARGETS kmm_icalendarexport
