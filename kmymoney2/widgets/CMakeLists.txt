@@ -116,7 +116,7 @@ SET_TARGET_PROPERTIES(kmymoneywidgets PROPERTIES
 target_link_libraries(kmymoneywidgets kmymoney_base kmm_mymoney kmymoney_common dialogs widgets converter ${KDE4_KDE3SUPPORT_LIBS} ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS})
 
 if( USE_QT_DESIGNER )
-  install(TARGETS kmymoneywidgets DESTINATION ${PLUGIN_INSTALL_DIR}/plugins/designer )
+  install(TARGETS kmymoneywidgets DESTINATION ${QT_PLUGINS_DIR}/designer )
   INSTALL(FILES kmymoneytitlelabel.png DESTINATION ${DATA_INSTALL_DIR}/kmymoney2/pics)
 endif( USE_QT_DESIGNER )
 
