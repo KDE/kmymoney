@@ -7,13 +7,17 @@ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/dialogs
 SET(kmm_ofximport_PART_SRCS ofximporterplugin.cpp ofxpartner.cpp)
 
 KDE4_ADD_PLUGIN(kmm_ofximport ${kmm_ofximport_PART_SRCS})
+
 TARGET_LINK_LIBRARIES(kmm_ofximport
                       ${KDE4_KDEUI_LIBS} ${KDE4_KDE3SUPPORT_LIBS} kmm_mymoney kmm_ofximport_dialogs kmm_plugin ofx)
 
 ########### install files ###############
 
+INSTALL(FILES kmm_ofximport.rc
+        DESTINATION  ${DATA_INSTALL_DIR}/kmm_ofximport)
+
 INSTALL(TARGETS kmm_ofximport
-  ${INSTALL_TARGETS_DEFAULT_ARGS}/kde4)
+        DESTINATION ${PLUGIN_INSTALL_DIR})
 
 INSTALL(FILES kmm_ofximport.desktop
-  DESTINATION ${SERVICES_INSTALL_DIR})
+        DESTINATION ${SERVICES_INSTALL_DIR})

@@ -50,13 +50,16 @@ K_EXPORT_COMPONENT_FACTORY( kmm_ofximport,
                             KGenericFactory<OfxImporterPlugin>( "kmm_ofximport" ) )
 
 OfxImporterPlugin::OfxImporterPlugin(QObject *parent, const QStringList&) :
- KMyMoneyPlugin::Plugin( parent, "OFX" ),
+ KMyMoneyPlugin::Plugin( parent, "OFX"/*must be the same as X-KDE-PluginInfo-Name*/ ),
  KMyMoneyPlugin::ImporterPlugin(),
  m_valid( false )
 {
   setComponentData(KGenericFactory<OfxImporterPlugin>::componentData());
   setXMLFile("kmm_ofximport.rc");
   createActions();
+
+  // For ease announce that we have been loaded.
+  qDebug("KMyMoney iCalendar plugin loaded");
 }
 
 OfxImporterPlugin::~OfxImporterPlugin()

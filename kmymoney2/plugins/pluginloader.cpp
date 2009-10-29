@@ -107,10 +107,7 @@ void PluginLoader::loadPlugin(KPluginInfo* info)
         emit PluginLoader::instance()->plug(info);
       }
       else {
-        kWarning() << "KMyMoneyPlugin::PluginLoader:: createInstanceFromService returned 0 for "
-                    << info->name()
-                    << " with error number "
-                    << error << endl;
+        qDebug("KMyMoneyPlugin::PluginLoader:: createInstanceFromService returned 0 for %s with error number %d", qPrintable(info->name()), error);
       }
     }
   }
