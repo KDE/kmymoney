@@ -11,7 +11,7 @@
 			<default>TRUE</default>
 		</entry>
     <entry name="beforeAfter" type="Int">
-      <label>Tells wheter the reminder should be triggered before or after the schedule start</label>
+      <label>Tells whether the reminder should be triggered before or after the schedule start</label>
       <default>0</default>
     </entry>
     <entry name="timeUnits" type="Int">
