@@ -438,6 +438,9 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
   replaceLegend(legend);
 
+  //this sets the line width only for line diagrams
+  setLineWidth(config.chartLineWidth());
+
   //make sure to show only the required number of fractional digits on the labels of the graph
   //chartView.params()->setDataValuesCalc(0, MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
 }
@@ -528,4 +531,17 @@ void KReportChartView::justifyModelSize( int rows, int columns )
 bool KReportChartView::event( QEvent* event )
 {
   return Chart::event(event);
+}
+
+void KReportChartView::setLineWidth(const int lineWidth)
+{
+  if(qobject_cast<LineDiagram*>(coordinatePlane()->diagram())) {
+    LineDiagram* lineDiagram = qobject_cast<LineDiagram*>(coordinatePlane()->diagram());
+    const int currentCols = m_model.columnCount();
+    for(int col = 0; col < currentCols; ++col) {
+      QPen pen = lineDiagram->pen(col);
+      pen.setWidth(lineWidth);
+      lineDiagram->setPen(col, pen);
+    }
+  }
 }

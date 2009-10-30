@@ -104,6 +104,11 @@ private:
   void justifyModelSize( int rows, int columns );
 
 /**
+  * Adjust line width of all datasets
+  */
+  void setLineWidth(const int lineWidth);
+
+/**
   * Set the accountSeries
   * @see m_accountSeries
   */
