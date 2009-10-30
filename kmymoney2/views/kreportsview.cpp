@@ -278,7 +278,7 @@ void KReportsView::KReportTab::toggleChart(void)
 
   if ( m_showingChart )
   {
-    m_part->show();
+    m_part->view()->show();
     m_chartView->hide();
 
     m_control->buttonChart->setText( i18n( "Chart" ) );
@@ -286,7 +286,7 @@ void KReportsView::KReportTab::toggleChart(void)
   }
   else
   {
-    m_part->hide();
+    m_part->view()->hide();
 
     m_chartView->show();
 
