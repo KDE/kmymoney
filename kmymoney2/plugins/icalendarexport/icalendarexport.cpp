@@ -99,21 +99,19 @@ KMMiCalendarExportPlugin::~KMMiCalendarExportPlugin()
 
 void KMMiCalendarExportPlugin::slotFirstExport(void)
 {
-  KFileDialog fileDialog(KUrl(), QString("%1|%2\n").arg("*.ics").arg(i18nc("ICS (Filefilter)", "iCalendar files")), d->m_action->parentWidget());
+  QPointer<KFileDialog> fileDialog = new KFileDialog(KUrl(), QString("%1|%2\n").arg("*.ics").arg(i18nc("ICS (Filefilter)", "iCalendar files")), d->m_action->parentWidget());
 
-  fileDialog.setOperationMode( KFileDialog::Saving );
-  fileDialog.setCaption(i18n("Export as"));
+  fileDialog->setOperationMode( KFileDialog::Saving );
+  fileDialog->setCaption(i18n("Export as"));
 
-  if(fileDialog.exec() == QDialog::Accepted) 
-  {
-    KUrl newURL = fileDialog.selectedUrl();
-    if (!newURL.isLocalFile())
-      return;
-
-    PluginSettings::setIcalendarFile(newURL.path());
-
-    slotExport();
+  if(fileDialog->exec() == QDialog::Accepted) {
+    KUrl newURL = fileDialog->selectedUrl();
+    if (newURL.isLocalFile()) {
+      PluginSettings::setIcalendarFile(newURL.path());
+      slotExport();
+    }
   }
+  delete fileDialog;
 }
 
 void KMMiCalendarExportPlugin::slotExport(void)
