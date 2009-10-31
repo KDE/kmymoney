@@ -28,6 +28,7 @@
 
 // ----------------------------------------------------------------------------
 // KDE Includes
+#include <kdialog.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -41,29 +42,29 @@ class codecDataList : public Q3PtrList<codecData> {
 };
 
 
-class KGncImportOptionsDlgDecl : public QDialog, public Ui::KGncImportOptionsDlgDecl
+class KGncImportOptionsDlgDecl : public QWidget, public Ui::KGncImportOptionsDlgDecl
 {
 public:
-  KGncImportOptionsDlgDecl( QWidget *parent ) : QDialog( parent ) {
+  KGncImportOptionsDlgDecl() {
     setupUi( this );
   }
 };
 
-class KGncImportOptionsDlg : public KGncImportOptionsDlgDecl
+class KGncImportOptionsDlg : public KDialog
 {
 Q_OBJECT
 public:
   KGncImportOptionsDlg(QWidget *parent = 0);
   ~KGncImportOptionsDlg();
 
-  int investmentOption () const {return (buttonInvestGroup->checkedId());};
-  bool quoteOption() const {return (checkFinanceQuote->isChecked());};
-  bool scheduleOption () const {return (checkSchedules->isChecked());};
+  int investmentOption () const {return (m_widget->buttonInvestGroup->checkedId());};
+  bool quoteOption() const {return (m_widget->checkFinanceQuote->isChecked());};
+  bool scheduleOption () const {return (m_widget->checkSchedules->isChecked());};
   QTextCodec* decodeOption ();
-  bool txNotesOption () const {return (checkTxNotes->isChecked());};
-  bool generalDebugOption () const {return (checkDebugGeneral->isChecked());};
-  bool xmlDebugOption () const {return (checkDebugXML->isChecked());};
-  bool anonymizeOption () const {return (checkAnonymize->isChecked());};
+  bool txNotesOption () const {return (m_widget->checkTxNotes->isChecked());};
+  bool generalDebugOption () const {return (m_widget->checkDebugGeneral->isChecked());};
+  bool xmlDebugOption () const {return (m_widget->checkDebugXML->isChecked());};
+  bool anonymizeOption () const {return (m_widget->checkAnonymize->isChecked());};
 
 public slots:
   void slotDecodeOptionChanged (bool);
@@ -74,7 +75,7 @@ private:
 
   QTextCodec* m_localeCodec;
   codecDataList m_codecList;
-
+  KGncImportOptionsDlgDecl* m_widget;
 };
 
 #endif
