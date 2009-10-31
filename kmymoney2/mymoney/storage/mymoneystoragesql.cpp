@@ -293,24 +293,26 @@ bool MyMoneyStorageSql::createDatabase (const KUrl& url) {
     return (false);
   }
   // create the database (only works for mysql at present)
-  QSqlDatabase maindb = QSqlDatabase::addDatabase(driverName(), "main");
-  maindb.setDatabaseName ("mysql");
-  maindb.setHostName (url.host());
-  maindb.setUserName (url.user());
-  maindb.setPassword (url.pass());
-  if (!maindb.open()) {
-    throw new MYMONEYEXCEPTION (QString("opening maindb in function %1").arg(__func__));
-  } else {
-    QSqlQuery qm(maindb);
-    QString qs = QString("CREATE DATABASE %1;").arg(dbName);
-    if (!qm.exec(qs)) {
-      buildError (qm, __func__,
+  { // for this code block, see QSqlDatabase API re removeDatabase
+    QSqlDatabase maindb = QSqlDatabase::addDatabase(driverName(), "main");
+    maindb.setDatabaseName ("mysql");
+    maindb.setHostName (url.host());
+    maindb.setUserName (url.user());
+    maindb.setPassword (url.pass());
+    if (!maindb.open()) {
+      throw new MYMONEYEXCEPTION (QString("opening maindb in function %1").arg(__func__));
+    } else {
+      QSqlQuery qm(maindb);
+      QString qs = QString("CREATE DATABASE %1;").arg(dbName);
+      if (!qm.exec(qs)) {
+        buildError (qm, __func__,
            i18n("Error in create database %1; do you have create permissions?",dbName), &maindb);
-      rc = false;
+        rc = false;
+      }
+      maindb.close();
     }
-    maindb.close();
   }
-  QSqlDatabase::removeDatabase (maindb.connectionName());
+  QSqlDatabase::removeDatabase ("main");
   return (rc);
 }
 

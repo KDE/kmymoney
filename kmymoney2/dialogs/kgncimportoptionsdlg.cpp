@@ -37,33 +37,37 @@
 
 // dialog constructor
 KGncImportOptionsDlg::KGncImportOptionsDlg(QWidget *parent)
- : KGncImportOptionsDlgDecl(parent)
 {
-  buttonInvestGroup->setId(radioInvest1, 0); // one invest acct per stock
-  buttonInvestGroup->setId(radioInvest2, 1); // one invest acct for all stocks
-  buttonInvestGroup->setId(radioInvest3, 2); // prompt for each stock
+  setButtons(Ok | Cancel | Help);
+  m_widget = new KGncImportOptionsDlgDecl();
+  setMainWidget(m_widget);
 
-  buttonGroup5->setExclusive(false);
-  checkFinanceQuote->setChecked(true);
+  m_widget->buttonInvestGroup->setId(m_widget->radioInvest1, 0); // one invest acct per stock
+  m_widget->buttonInvestGroup->setId(m_widget->radioInvest2, 1); // one invest acct for all stocks
+  m_widget->buttonInvestGroup->setId(m_widget->radioInvest3, 2); // prompt for each stock
 
-  buttonGroup2->setExclusive(false);
-  checkSchedules->setChecked (false);
+  m_widget->buttonGroup5->setExclusive(false);
+  m_widget->checkFinanceQuote->setChecked(true);
+
+  m_widget->buttonGroup2->setExclusive(false);
+  m_widget->checkSchedules->setChecked (false);
 
   buildCodecList (); // build list of codecs and insert into combo box
 
-  buttonGroup4->setExclusive(false);
-  checkDecode->setChecked (false);
-  comboDecode->setEnabled (false);
+  m_widget->buttonGroup4->setExclusive(false);
+  m_widget->checkDecode->setChecked (false);
+  m_widget->comboDecode->setEnabled (false);
 
-  buttonGroup18->setExclusive(false);
-  checkTxNotes->setChecked (false);
+  m_widget->buttonGroup18->setExclusive(false);
+  m_widget->checkTxNotes->setChecked (false);
 
-  buttonGroup3->setExclusive(false);
-  checkDebugGeneral->setChecked (false);
-  checkDebugXML->setChecked (false);
-  checkAnonymize->setChecked (false);
+  m_widget->buttonGroup3->setExclusive(false);
+  m_widget->checkDebugGeneral->setChecked (false);
+  m_widget->checkDebugXML->setChecked (false);
+  m_widget->checkAnonymize->setChecked (false);
 
-  connect (checkDecode, SIGNAL(toggled(bool)), this, SLOT(slotDecodeOptionChanged(bool)));
+  connect (m_widget->checkDecode, SIGNAL(toggled(bool)), this, SLOT(slotDecodeOptionChanged(bool)));
+  connect (this, SIGNAL(helpClicked()), this, SLOT(slotHelp()));
 }
 
 KGncImportOptionsDlg::~KGncImportOptionsDlg()
@@ -73,10 +77,10 @@ KGncImportOptionsDlg::~KGncImportOptionsDlg()
 // enable the combo box for selection if required
 void KGncImportOptionsDlg::slotDecodeOptionChanged(bool isOn) {
   if (isOn) {
-    comboDecode->setEnabled (true);
-    comboDecode->setCurrentItem (0);
+    m_widget->comboDecode->setEnabled (true);
+    m_widget->comboDecode->setCurrentItem (0);
   } else {
-    comboDecode->setEnabled (false);
+    m_widget->comboDecode->setEnabled (false);
   }
 }
 
@@ -112,7 +116,7 @@ void KGncImportOptionsDlg::buildCodecList () {
   m_codecList.sort();
   for (i = 0; i < m_codecList.count(); ++i) {
     QString name (m_codecList.at(i)->second->name());
-    comboDecode->addItem (name);
+    m_widget->comboDecode->addItem (name);
   }
 }
 
@@ -138,10 +142,10 @@ int codecDataList::compareItems (void *a, void *b) {
 
 // return selected codec or 0
 QTextCodec* KGncImportOptionsDlg::decodeOption(void) {
-  if (!checkDecode->isChecked()) {
+  if (!m_widget->checkDecode->isChecked()) {
     return (0);
   } else {
-    return (m_codecList.at(comboDecode->currentIndex())->second);
+    return (m_codecList.at(m_widget->comboDecode->currentIndex())->second);
   }
 }
 
@@ -149,5 +153,3 @@ void KGncImportOptionsDlg::slotHelp(void)
 {
   KToolInvocation::invokeHelp ("details.impexp.gncoptions");
 }
-
-#include "kgncimportoptionsdlg.moc"
