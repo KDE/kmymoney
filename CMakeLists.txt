@@ -34,6 +34,7 @@ include( KDE4Defaults )
 include( MacroLibrary )
 include( KMyMoneyMacros )
 find_package(KdepimLibs REQUIRED)
+find_package(SharedMimeInfo REQUIRED)
 
 add_definitions( ${QT_DEFINITIONS} ${KDE4_DEFINITIONS} -DQT_STRICT_ITERATORS)
 add_definitions (-DQT3_SUPPORT -DQT3_SUPPORT_WARNINGS)
