@@ -20,7 +20,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qframe.h>
+#include <QFrame>
 #include <QLayout>
 #include <QTimer>
 #include <QHBoxLayout>
@@ -41,28 +41,24 @@
 #include <kmessagebox.h>
 #include <kiconloader.h>
 #include <ktoolbar.h>
-
+#include <kdialog.h>
 #include <kpassivepopup.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "kgloballedgerview.h"
-
-#include <mymoneyaccount.h>
-#include <mymoneyfile.h>
-#include <kmymoneyaccountcombo.h>
-#include <kmymoneytitlelabel.h>
-#include <register.h>
-#include <transactioneditor.h>
-#include <selectedtransaction.h>
-
-#include <kmymoneyglobalsettings.h>
-
+#include "mymoneyaccount.h"
+#include "mymoneyfile.h"
+#include "kmymoneyaccountcombo.h"
+#include "kmymoneytitlelabel.h"
+#include "register.h"
+#include "transactioneditor.h"
+#include "selectedtransaction.h"
+#include "kmymoneyglobalsettings.h"
 #include "registersearchline.h"
 #include "kfindtransactiondlg.h"
 #include "kmymoney2.h"
-
 #include "scheduledtransaction.h"
 
 class KGlobalLedgerView::Private
@@ -106,9 +102,11 @@ bool MousePressFilter::isChildOf( QWidget* child, QWidget *parent )
   while(child) {
     if(child == parent)
       return true;
-    // If one of the ancestors is a KPassivePopup then it's as
-    // if it is a child of our own
-    if(dynamic_cast<KPassivePopup*>(child))
+    // If one of the ancestors is a KPassivePopup or a KDialog then
+    // it's as if it is a child of our own because these widgets could
+    // appear during transaction entry (message boxes, completer widgets)
+    if(dynamic_cast<KPassivePopup*>(child) ||
+       dynamic_cast<KDialog*>(child))
       return true;
     child = child->parentWidget();
   }
