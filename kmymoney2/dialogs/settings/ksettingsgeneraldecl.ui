@@ -25,7 +25,7 @@
             </attribute>
             <layout class="QVBoxLayout">
               <item>
-                <widget class="QGroupBox" name="kcfg_StartLastViewSelectedBox">
+                <widget class="KButtonGroup" name="kcfg_StartLastViewSelected">
                   <property name="title">
                     <string>Startup page options</string>
                   </property>
@@ -38,9 +38,6 @@
                         <property name="checked">
                           <bool>true</bool>
                         </property>
-                        <attribute name="buttonGroup">
-                          <string>kcfg_StartLastViewSelected</string>
-                        </attribute>
                       </widget>
                     </item>
                     <item>
@@ -48,9 +45,6 @@
                         <property name="text">
                           <string>Start with last selected view</string>
                         </property>
-                        <attribute name="buttonGroup">
-                          <string>kcfg_StartLastViewSelected</string>
-                        </attribute>
                       </widget>
                     </item>
                   </layout>
@@ -340,7 +334,7 @@
                 </widget>
               </item>
               <item>
-                <widget class="QGroupBox" name="kcfg_iconSizeBox">
+                <widget class="KButtonGroup" name="kcfg_iconSize">
                   <property name="title">
                     <string>Icon size of navigation bar</string>
                   </property>
@@ -350,9 +344,6 @@
                         <property name="text">
                           <string>Micro (16px)</string>
                         </property>
-                        <attribute name="buttonGroup">
-                          <string>kcfg_iconSize</string>
-                        </attribute>
                       </widget>
                     </item>
                     <item row="1" column="0">
@@ -360,9 +351,6 @@
                         <property name="text">
                           <string>Small (32px)</string>
                         </property>
-                        <attribute name="buttonGroup">
-                          <string>kcfg_iconSize</string>
-                        </attribute>
                       </widget>
                     </item>
                     <item row="0" column="1">
@@ -373,9 +361,6 @@
                         <property name="checked">
                           <bool>true</bool>
                         </property>
-                        <attribute name="buttonGroup">
-                          <string>kcfg_iconSize</string>
-                        </attribute>
                       </widget>
                     </item>
                     <item row="1" column="1">
@@ -383,9 +368,6 @@
                         <property name="text">
                           <string>Large (64px)</string>
                         </property>
-                        <attribute name="buttonGroup">
-                          <string>kcfg_iconSize</string>
-                        </attribute>
                       </widget>
                     </item>
                   </layout>
@@ -586,8 +568,4 @@ You can use &lt;b&gt;View/Show all accounts&lt;/b&gt; to temporarily show hidden
       <slot>setEnabled(bool)</slot>
     </connection>
   </connections>
-  <buttongroups>
-    <buttongroup name="kcfg_StartLastViewSelected"/>
-    <buttongroup name="kcfg_iconSize"/>
-  </buttongroups>
 </ui>

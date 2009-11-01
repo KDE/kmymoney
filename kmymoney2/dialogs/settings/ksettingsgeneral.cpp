@@ -35,14 +35,6 @@
 KSettingsGeneral::KSettingsGeneral(QWidget* parent) :
   KSettingsGeneralDecl(parent)
 {
-  kcfg_StartLastViewSelected->setId(radioButton1, 0);
-  kcfg_StartLastViewSelected->setId(radioButton2, 1);
-
-  kcfg_iconSize->setId(radioButton3, 0);
-  kcfg_iconSize->setId(radioButton4, 1);
-  kcfg_iconSize->setId(radioButton5, 2);
-  kcfg_iconSize->setId(radioButton6, 3);
-
   // hide the internally used date field
   kcfg_StartDate->hide();
   kcfg_hiddenViews->hide();

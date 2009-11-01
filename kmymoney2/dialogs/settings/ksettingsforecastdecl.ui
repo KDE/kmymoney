@@ -95,7 +95,7 @@
               </layout>
             </item>
             <item row="1" column="0">
-              <widget class="QGroupBox" name="kcfg_forecastMethodBox">
+              <widget class="KButtonGroup" name="kcfg_forecastMethod">
                 <property name="title">
                   <string>Forecast Method</string>
                 </property>
@@ -105,9 +105,6 @@
                       <property name="text">
                         <string>Scheduled and Future Transactions</string>
                       </property>
-                      <attribute name="buttonGroup">
-                        <string>kcfg_forecastMethod</string>
-                      </attribute>
                     </widget>
                   </item>
                   <item>
@@ -115,9 +112,6 @@
                       <property name="text">
                         <string>History-based</string>
                       </property>
-                      <attribute name="buttonGroup">
-                        <string>kcfg_forecastMethod</string>
-                      </attribute>
                     </widget>
                   </item>
                 </layout>
@@ -163,7 +157,7 @@
                     </layout>
                   </item>
                   <item row="1" column="0">
-                    <widget class="QGroupBox" name="kcfg_historyMethodBox">
+                    <widget class="KButtonGroup" name="kcfg_historyMethod">
                       <property name="title">
                         <string>History Forecast Method</string>
                       </property>
@@ -173,9 +167,6 @@
                             <property name="text">
                               <string>Simple Moving Average</string>
                             </property>
-                            <attribute name="buttonGroup">
-                              <string>kcfg_historyMethod</string>
-                            </attribute>
                           </widget>
                         </item>
                         <item>
@@ -183,9 +174,6 @@
                             <property name="text">
                               <string>Weighted Moving Average</string>
                             </property>
-                            <attribute name="buttonGroup">
-                              <string>kcfg_historyMethod</string>
-                            </attribute>
                           </widget>
                         </item>
                         <item>
@@ -193,9 +181,6 @@
                             <property name="text">
                               <string>Linear Regression</string>
                             </property>
-                            <attribute name="buttonGroup">
-                              <string>kcfg_historyMethod</string>
-                            </attribute>
                           </widget>
                         </item>
                       </layout>
@@ -226,8 +211,4 @@
     </layout>
   </widget>
   <layoutdefault spacing="6" margin="11"/>
-  <buttongroups>
-    <buttongroup name="kcfg_forecastMethod"/>
-    <buttongroup name="kcfg_historyMethod"/>
-  </buttongroups>
 </ui>
