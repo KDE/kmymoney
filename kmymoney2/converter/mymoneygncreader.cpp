@@ -1284,43 +1284,18 @@ void MyMoneyGncReader::convertAccount (const GncAccount* gac) {
     // set the equity type
     MyMoneySecurity e = m_storage->security (m_mapEquities[gac->commodity()->id().toUtf8()]);
     if (gncdebug) qDebug () << "Acct equity search, key =" << gac->commodity()->id()
-         << "found id =" << e.id();    acc.setCurrencyId (e.id()); // actually, the security id
+         << "found id =" << e.id();
+    acc.setCurrencyId (e.id()); // actually, the security id
     if ("MUTUAL" == gac->type()) {
       e.setSecurityType (MyMoneySecurity::SECURITY_MUTUALFUND);
       if (gncdebug) qDebug () << "Setting" << e.name() << "to mutual";
       m_storage->modifySecurity (e);
     }
-    // See if he wants online quotes for this account
-    // NB: In gnc, this selection is per account, in KMM, per security
-    // This is unlikely to cause problems in practice. If it does,
-    // we probably need to introduce a 'pricing basis' in the account class
-    /*QList<GncObject*>::const_iterator kvpi;
-    //QList<GncObject*> list = gac->m_kvpList;
-    GncKvp *k;
-    for (kvpi = gac->m_kvpList.begin(); kvpi != gac->m_kvpList.end(); ++kvpi) {
-      k = static_cast<GncKvp*> (kvpi);
-      if (k->key().contains("price-source") && k->type() == "string") {
-        getPriceSource (e, k->value());
-        break;
-      } else {
-        ++kvpi;
-      }
-    }*/
+
     QString priceSource = gac->getKvpValue("price-source", "string");
     if (!priceSource.isEmpty()) getPriceSource (e, priceSource);
   }
 
-  // check for tax-related status
-  /*QList<GncObject*>::const_iterator kvpi;
-  QList<GncObject*> list = gac->m_kvpList;
-  GncKvp *k;
-  for (kvpi = list.constBegin(); kvpi != list.constEnd(); ++kvpi) {
-    k = static_cast<GncKvp*> (*(kvpi));
-    if (k->key().contains("tax-related") && k->type() == "integer" && k->value() == "1") {
-      acc.setValue ("Tax", "Yes");
-      break;
-    }
-  }*/
   if (gac->getKvpValue("tax-related", "integer") == QChar('1')) acc.setValue ("Tax", "Yes");
   // all the details from the file about the account should be known by now.
   // calling addAccount will automatically fill in the account ID.
@@ -1394,8 +1369,6 @@ void MyMoneyGncReader::convertTransaction (const GncTransaction *gtx) {
     tx.addSplit(split);
     it = m_splitList.erase(it);
   }
-  // memo - set from split - not any more
-  //tx.setMemo(txMemo);
   m_storage->addTransaction(tx, true); // all done, add the transaction to storage
   signalProgress (++m_transactionCount, 0);
   return ;
@@ -1556,14 +1529,7 @@ MyMoneyTransaction MyMoneyGncReader::convertTemplateTransaction (const QString& 
     convertTemplateSplit (schedName, static_cast<const GncTemplateSplit *>(gtx->getSplit (i)));
   }
   // determine the action type for the splits and link them to the template tx
-  /*QString negativeActionType, positiveActionType;
-  if (!m_splitList.isEmpty()) { // if there are asset splits
-    positiveActionType = MyMoneySplit::ActionDeposit;
-    negativeActionType = MyMoneySplit::ActionWithdrawal;
-  } else { // if there are liability splits
-    positiveActionType = MyMoneySplit::ActionWithdrawal;
-    negativeActionType = MyMoneySplit::ActionDeposit;
-} */
+
   if (!m_otherSplitList.isEmpty()) m_potentialTransfer = false; // tfrs can occur only between assets and asset/liabilities
   m_splitList += m_liabilitySplitList += m_otherSplitList;
   // the splits are in order in splitList. Transfer them to the tx
@@ -1741,7 +1707,6 @@ void MyMoneyGncReader::convertSchedule (const GncSchedule *gsc) {
   sc.setName(gsc->name());
   // find the transaction template as stored earlier
   QList<GncTransaction*>::const_iterator itt;
-  //GncTransaction *ttx;
   for (itt = m_templateList.constBegin(); itt != m_templateList.constEnd(); ++itt) {
     // the id to match against is the split:account value in the splits
     if (static_cast<const GncTemplateSplit *>((*itt)->getSplit(0))->acct() == gsc->templId()) break;
@@ -2464,13 +2429,6 @@ unsigned int GncMessages::argCount (const QString source, const unsigned int cod
     throw new MYMONEYEXCEPTION (mess);
   }
   QRegExp argConst ("%\\d");
-  /*int offset = 0;
-  unsigned int argCount = 0;
-  while ((offset = argConst.search (texts[i].text, offset)) != -1) {
-    argCount++;
-    offset += 2;
-  }
-  return (argCount);*/
   return (texts[i].text.count(argConst));
   PASS
 }

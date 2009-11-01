@@ -64,7 +64,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QGroupBox" name="buttonGroup5GroupBox">
+      <widget class="QGroupBox" name="buttonsSourceGroupBox">
        <property name="title">
         <string/>
        </property>
@@ -75,7 +75,7 @@
            <string>Do not perform online quotes for this investment</string>
           </property>
           <attribute name="buttonGroup">
-           <string>buttonGroup5</string>
+           <string>buttonsSource</string>
           </attribute>
          </widget>
         </item>
@@ -85,12 +85,12 @@
            <string>Select a known KMyMoney source from the list below</string>
           </property>
           <attribute name="buttonGroup">
-           <string>buttonGroup5</string>
+           <string>buttonsSource</string>
           </attribute>
          </widget>
         </item>
         <item>
-         <widget class="Q3ListBox" name="listKnownSource"/>
+         <widget class="KListWidget" name="listKnownSource"/>
         </item>
         <item>
          <widget class="QRadioButton" name="buttonUserSource">
@@ -99,7 +99,7 @@
 (Click Help for further information.)</string>
           </property>
           <attribute name="buttonGroup">
-           <string>buttonGroup5</string>
+           <string>buttonsSource</string>
           </attribute>
          </widget>
         </item>
@@ -123,15 +123,9 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>Q3Frame</class>
-   <extends>QFrame</extends>
-   <header>Qt3Support/Q3Frame</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>Q3ListBox</class>
-   <extends>Q3Frame</extends>
-   <header>q3listbox.h</header>
+   <class>KListWidget</class>
+   <extends>QListWidget</extends>
+   <header>klistwidget.h</header>
   </customwidget>
   <customwidget>
    <class>KLineEdit</class>
@@ -142,6 +136,6 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroup5"/>
+  <buttongroup name="buttonsSource"/>
  </buttongroups>
 </ui>

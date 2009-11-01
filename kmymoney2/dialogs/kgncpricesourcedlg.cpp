@@ -17,7 +17,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 #include <QLabel>
-#include <q3listbox.h>
 #include <QLineEdit>
 #include <QLayout>
 #include <QApplication>
@@ -30,6 +29,7 @@
 #include <ktextbrowser.h>
 #include <klocale.h>
 #include <ktoolinvocation.h>
+#include <klistwidget.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -44,18 +44,19 @@ KGncPriceSourceDlg::KGncPriceSourceDlg(const QString &stockName, const QString &
   m_widget = new KGncPriceSourceDlgDecl();
   setMainWidget(m_widget);
   // signals and slots connections
-  connect( m_widget->buttonGroup5, SIGNAL(buttonClicked(int) ), this, SLOT( buttonPressed(int) ) );
+  connect( m_widget->buttonsSource, SIGNAL(buttonClicked(int) ), this, SLOT( buttonPressed(int) ) );
   connect( this, SIGNAL(helpClicked()), this, SLOT( slotHelp() ) );
   // initialize data fields
   m_widget->textStockName->setText (i18n ("Investment: %1",stockName));
   m_widget->textGncSource->setText (i18n ("Quote source: %1",gncSource));
-  m_widget->listKnownSource->insertStringList (WebPriceQuote::quoteSources());
+  m_widget->listKnownSource->clear();
+  m_widget->listKnownSource->insertItems (0, WebPriceQuote::quoteSources());
   m_widget->lineUserSource->setText (gncSource);
   m_widget->checkAlwaysUse->setChecked(true);
-  m_widget->buttonGroup5->setId(m_widget->buttonNoSource, 0);
-  m_widget->buttonGroup5->setId(m_widget->buttonSelectSource, 1);
-  m_widget->buttonGroup5->setId(m_widget->buttonUserSource, 2);
-  m_widget->buttonGroup5->button(0)->setChecked(true);
+  m_widget->buttonsSource->setId(m_widget->buttonNoSource, 0);
+  m_widget->buttonsSource->setId(m_widget->buttonSelectSource, 1);
+  m_widget->buttonsSource->setId(m_widget->buttonUserSource, 2);
+  m_widget->buttonsSource->button(0)->setChecked(true);
   buttonPressed (0);
   return;
 }
@@ -80,7 +81,7 @@ void KGncPriceSourceDlg::buttonPressed (int buttonId) {
       m_widget->lineUserSource->setEnabled (false);
       m_widget->listKnownSource->setEnabled (true);
       m_widget->listKnownSource->setFocus();
-      m_widget->listKnownSource->setSelected (0, true);
+      m_widget->listKnownSource->setCurrentRow (0);
       break;
     case USERSOURCE:
       m_widget->listKnownSource->clearSelection();
@@ -96,7 +97,7 @@ QString KGncPriceSourceDlg::selectedSource() const {
   QString s;
   switch (m_currentButton) {
     case NOSOURCE: s = ""; break;
-    case KMMSOURCE: s = m_widget->listKnownSource->currentText(); break;
+    case KMMSOURCE: s = m_widget->listKnownSource->currentItem()->text(); break;
     case USERSOURCE: s = m_widget->lineUserSource->text(); break;
   }
   return (s);
