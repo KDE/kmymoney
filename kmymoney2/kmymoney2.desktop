@@ -55,5 +55,4 @@ MimeType=application/x-kmymoney;application/vnd.intu.qfx;application/x-ofx;
 Type=Application
 X-DocPath=kmymoney/index.html
 Icon=kmymoney2
-ServiceTypes=
 Categories=Office;Finance;
