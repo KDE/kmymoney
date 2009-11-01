@@ -48,7 +48,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="kcfg_timeUnitInSeconds">
+        <widget class="KComboBox" name="kcfg_timeUnitInSeconds">
          <property name="maxCount">
           <number>3</number>
          </property>
@@ -58,7 +58,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="kcfg_beforeAfter"/>
+        <widget class="KComboBox" name="kcfg_beforeAfter"/>
        </item>
       </layout>
      </item>
@@ -129,7 +129,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="kcfg_intervalBetweenRemindersTimeUnitInSeconds"/>
+          <widget class="KComboBox" name="kcfg_intervalBetweenRemindersTimeUnitInSeconds"/>
          </item>
         </layout>
        </item>
@@ -195,6 +195,7 @@
   <include location="local">kurlrequester.h</include>
   <include location="local">klineedit.h</include>
   <include location="local">kpushbutton.h</include>
+  <include location="local">kcombobox.h</include>
  </includes>
  <resources/>
  <connections/>

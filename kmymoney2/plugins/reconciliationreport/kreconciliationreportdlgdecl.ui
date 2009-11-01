@@ -18,7 +18,7 @@
   </property>
   <layout class="QVBoxLayout">
    <item>
-    <widget class="QTabWidget" name="m_tabWidget">
+    <widget class="KTabWidget" name="m_tabWidget">
      <widget class="QWidget" name="tab">
       <attribute name="title">
        <string>Summar&amp;y</string>
@@ -103,6 +103,9 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <includes>
+  <include location="local">ktabwidget.h</include>
+ </includes>
  <resources/>
  <connections>
   <connection>

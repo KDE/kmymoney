@@ -21,10 +21,9 @@
 #ifndef KRECONCILIATIONREPORTDLG_H
 #define KRECONCILIATIONREPORTDLG_H
 
-// KDE includes
-#include <khtml_part.h>
-
 #include "ui_kreconciliationreportdlgdecl.h"
+
+class KHTMLPart;
 
 class KReportDlg : public QDialog, public Ui::KReconciliationReportDlgDecl
 {

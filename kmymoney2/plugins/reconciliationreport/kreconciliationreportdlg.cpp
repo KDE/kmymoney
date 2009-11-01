@@ -24,9 +24,11 @@
 #include <qlayout.h>
 #include <qtabwidget.h>
 #include <qprinter.h>
+#include <qprintdialog.h>
 
 // KDE includes
 #include <khtmlview.h>
+#include <khtml_part.h>
 
 #include "kreconciliationreportdlg.h"
 
@@ -60,14 +62,16 @@ void KReportDlg::print()
   // create the QPrinter object with default options
   QPrinter printer;
 
-  // start the print dialog to initialize the KPrinter object
-  if (printer.setup(this))
+  // start the print dialog to initialize the QPrinter object
+  QPointer<QPrintDialog> dlg = new QPrintDialog(&printer, this);
+
+  if (dlg->exec())
   {
     // create the painter object
     QPainter painter(&printer);
 
     // do the actual painting job
-    switch (m_tabWidget->currentPageIndex())
+    switch (m_tabWidget->currentIndex())
     {
       case 0:
         m_summaryHTMLPart->paint(&painter, QRect(0, 0, 800, 600));
@@ -76,9 +80,10 @@ void KReportDlg::print()
         m_detailsHTMLPart->paint(&painter, QRect(0, 0, 800, 600));
       break;
       default:
-        kdWarning() << "KReportDlg::print() current page index not handled correctly" << endl;
+        qDebug("KReportDlg::print() current page index not handled correctly");
     }
   }
+  delete dlg;
 }
 
 #include "kreconciliationreportdlg.moc"
