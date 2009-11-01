@@ -24,6 +24,7 @@
 
 // ----------------------------------------------------------------------------
 // KDE Includes
+#include <kdialog.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -31,15 +32,15 @@
 #include "ui_kgncpricesourcedlgdecl.h"
 
 
-class KGncPriceSourceDlgDecl : public QDialog, public Ui::KGncPriceSourceDlgDecl
+class KGncPriceSourceDlgDecl : public QWidget, public Ui::KGncPriceSourceDlgDecl
 {
 public:
-  KGncPriceSourceDlgDecl( QWidget *parent ) : QDialog( parent ) {
+  KGncPriceSourceDlgDecl(){
     setupUi( this );
   }
 };
 
-class KGncPriceSourceDlg : public KGncPriceSourceDlgDecl
+class KGncPriceSourceDlg : public KDialog
 {
   Q_OBJECT
 public:
@@ -48,7 +49,7 @@ public:
   ~KGncPriceSourceDlg();
 
   QString selectedSource () const;
-  bool alwaysUse() const { return (checkAlwaysUse->isChecked()); }
+  bool alwaysUse() const { return (m_widget->checkAlwaysUse->isChecked()); }
 
 public slots:
   void buttonPressed(int);
@@ -56,6 +57,7 @@ public slots:
 
 private:
   int m_currentButton;
+  KGncPriceSourceDlgDecl* m_widget;
 };
 
 #endif
