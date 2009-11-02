@@ -10,6 +10,10 @@ ENDIF (LIBICAL_FOUND)
 
 ADD_SUBDIRECTORY( reconciliationreport )
 
+IF (KBANKING_FOUND)
+  ADD_SUBDIRECTORY( kbanking )
+ENDIF (KBANKING_FOUND)
+
 ########### next target ###############
 
 SET(kmm_plugin_LIB_SRCS

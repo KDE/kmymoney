@@ -162,6 +162,11 @@ SET(QT_INSTALL_DIR ${QT_DIR} CACHE PATH
   "Qt install prefix defaults to the Qt prefix: ${QT_DIR}")
 
 FIND_PACKAGE(Libical)
+FIND_PACKAGE(Gwenhywfar)
+FIND_PACKAGE(AqBanking)
+
+SET(KBANKING_FOUND ${AQBANKING_FOUND} AND ${GWENHYWFAR_FOUND})
+MARK_AS_ADVANCED(KBANKING_FOUND)
 
 # check for CppUnit to build the tests
 FIND_PACKAGE(CppUnit)
@@ -335,6 +340,7 @@ ENDMACRO(nice_yesno _varname)
 
 nice_yesno("HAVE_LIBOFX_H")
 nice_yesno("USE_OFX_DIRECTCONNECT")
+nice_yesno("KBANKING_FOUND")
 nice_yesno("LIBICAL_FOUND")
 nice_yesno("QT_SQLITE_FOUND")
 nice_yesno("USE_LEAK_CHECK")
@@ -349,6 +355,8 @@ Configure results (user options):
 OFX plugin:                              ${nice_HAVE_LIBOFX_H}
 
 OFX direct connect:                      ${nice_USE_OFX_DIRECTCONNECT}
+
+KBanking plugin:                         ${nice_KBANKING_FOUND}
 
 iCalendar export plugin:                 ${nice_LIBICAL_FOUND}
 

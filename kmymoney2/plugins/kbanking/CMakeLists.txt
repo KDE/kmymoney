@@ -1,0 +1,43 @@
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}
+                    ${CMAKE_CURRENT_BINARY_DIR}
+                    ${CMAKE_CURRENT_SOURCE_DIR}/dialogs
+                    ${CMAKE_CURRENT_BINARY_DIR}/dialogs
+                    ${CMAKE_CURRENT_SOURCE_DIR}/views
+                    ${CMAKE_CURRENT_BINARY_DIR}/views
+                    ${CMAKE_CURRENT_SOURCE_DIR}/widgets
+                    ${CMAKE_CURRENT_BINARY_DIR}/widgets
+                    ${GWENHYWFAR_INCLUDE_DIRS}
+                    ${AQBANKING_INCLUDE_DIRS})
+
+ADD_SUBDIRECTORY( dialogs )
+ADD_SUBDIRECTORY( views )
+ADD_SUBDIRECTORY( widgets )
+
+########### next target ###############
+
+SET(kmm_kbanking_PART_SRCS kbanking.cpp mymoneybanking.cpp)
+
+KDE4_ADD_PLUGIN(kmm_kbanking ${kmm_kbanking_PART_SRCS})
+
+TARGET_LINK_LIBRARIES(kmm_kbanking
+                      ${KDE4_KDEUI_LIBS}
+                      ${KDE4_KDE3SUPPORT_LIBS}
+                      kmm_mymoney
+                      kmm_kbanking_dialogs
+                      kmm_kbanking_views
+                      kmm_kbanking_widgets
+                      kmm_plugin
+                      ${GWENHYWFAR_LIBRARIES}
+                      ${AQBANKING_LIBRARIES}
+                      )
+
+########### install files ###############
+
+INSTALL(FILES kmm_kbanking.rc
+        DESTINATION  ${DATA_INSTALL_DIR}/kmm_kbanking)
+
+INSTALL(TARGETS kmm_kbanking
+        DESTINATION ${PLUGIN_INSTALL_DIR})
+
+INSTALL(FILES kmm_kbanking.desktop
+        DESTINATION ${SERVICES_INSTALL_DIR})
