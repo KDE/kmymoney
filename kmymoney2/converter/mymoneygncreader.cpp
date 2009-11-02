@@ -164,16 +164,14 @@ bool GncObject::isDataElement (const QString &elName, const QXmlAttributes& elAt
 // return the variable string, decoded if required
 QString GncObject::var (int i) const {
   /* This code was needed because the Qt3 XML reader apparently did not process
-   the encoding parameter in the <xml header.
+   the encoding parameter in the <?xml header.
    This SEEMS to have been rectified in Qt4 though I have little test data
    to prove this conclusively.
-   If true, we can remove the encoding option in the import options dialog.
-   FIXME: investigate further!
-        return (pMain->m_decoder == 0
-      ? *(m_v.at(i))
-      : pMain->m_decoder->toUnicode (*(m_v.at(i))));
-  */
-  return m_v[i];
+   If true, we can remove the encoding option in the import options dialog
+   and this code too.*/
+  return (pMain->m_decoder == 0
+      ? m_v[i]
+      : pMain->m_decoder->toUnicode (m_v[i].toUtf8()));
 }
 
 const QString GncObject::getKvpValue(const QString& key, const QString& type) const {

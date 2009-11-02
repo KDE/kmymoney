@@ -22,9 +22,6 @@
 #include <QButtonGroup>
 #include <QCheckBox>
 #include <QTextCodec>
-#include <q3ptrlist.h>
-//Added by qt3to4:
-#include <Q3PtrCollection>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -33,14 +30,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 #include "ui_kgncimportoptionsdlgdecl.h"
-
-typedef QPair<int, QTextCodec*> codecData;
-
-// class to sort codec list
-class codecDataList : public Q3PtrList<codecData> {
-    int compareItems (Q3PtrCollection::Item a, Q3PtrCollection::Item b);
-};
-
 
 class KGncImportOptionsDlgDecl : public QWidget, public Ui::KGncImportOptionsDlgDecl
 {
@@ -74,7 +63,6 @@ private:
   void buildCodecList ();
 
   QTextCodec* m_localeCodec;
-  codecDataList m_codecList;
   KGncImportOptionsDlgDecl* m_widget;
 };
 
