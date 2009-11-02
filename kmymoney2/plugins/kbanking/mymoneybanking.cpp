@@ -129,15 +129,15 @@ KBankingPlugin::KBankingPlugin(QObject *parent, const QStringList&) :
 
 #if AQB_IS_VERSION(3,9,0,0)
     if(AB_Banking_HasConf4(m_kbanking->getCInterface(), 0)) {
-      kdDebug() << "KBankingPlugin: No AqB4 config found." << endl;
+      qDebug("KBankingPlugin: No AqB4 config found.");
       if(AB_Banking_HasConf3(m_kbanking->getCInterface(), 0)) {
-        kdDebug() << "KBankingPlugin: No AqB3 config found." << endl;
+        qDebug("KBankingPlugin: No AqB3 config found.");
         if(!AB_Banking_HasConf2(m_kbanking->getCInterface(), 0)) {
-          kdDebug() << "KBankingPlugin: AqB2 config found - converting." << endl;
+          qDebug("KBankingPlugin: AqB2 config found - converting.");
           AB_Banking_ImportConf2(m_kbanking->getCInterface(), 0);
         }
       } else {
-        kdDebug() << "KBankingPlugin: AqB3 config found - converting." << endl;
+        qDebug("KBankingPlugin: AqB3 config found - converting.");
         AB_Banking_ImportConf3(m_kbanking->getCInterface(), 0);
       }
     }
@@ -163,7 +163,7 @@ KBankingPlugin::KBankingPlugin(QObject *parent, const QStringList&) :
       loadProtocolConversion();
     }
     else {
-      kdWarning() << "Could not initialize KBanking online banking interface" << endl;
+      qWarning("Could not initialize KBanking online banking interface");
       delete m_kbanking;
       m_kbanking = 0;
     }
@@ -228,7 +228,7 @@ QWidget* KBankingPlugin::accountConfigTab(const MyMoneyAccount& acc, QString& na
       m_accountSettings->m_payeeRegExpEdit->setText(kvp.value("kbanking-payee-regexp"));
       m_accountSettings->m_memoRegExpEdit->setText(kvp.value("kbanking-memo-regexp"));
       m_accountSettings->m_payeeExceptions->clear();
-      m_accountSettings->m_payeeExceptions->insertStringList(QStringList::split(";", kvp.value("kbanking-payee-exceptions")));
+      m_accountSettings->m_payeeExceptions->insertStringList(kvp.value("kbanking-payee-exceptions").split(";", QString::SkipEmptyParts));
     }
     return m_accountSettings;
   }
@@ -240,7 +240,7 @@ QWidget* KBankingPlugin::accountConfigTab(const MyMoneyAccount& acc, QString& na
 MyMoneyKeyValueContainer KBankingPlugin::onlineBankingSettings(const MyMoneyKeyValueContainer& current)
 {
   MyMoneyKeyValueContainer kvp(current);
-  kvp["provider"] = name();
+  kvp["provider"] = objectName();
   if(m_accountSettings) {
     kvp.deletePair("kbanking-payee-regexp");
     kvp.deletePair("kbanking-memo-regexp");
@@ -257,8 +257,8 @@ MyMoneyKeyValueContainer KBankingPlugin::onlineBankingSettings(const MyMoneyKeyV
     }
     if(!m_accountSettings->m_transactionDownload->isChecked())
       kvp["kbanking-txn-download"] = "no";
-    kvp["kbanking-jobexec"] = QString("%1").arg(m_accountSettings->m_preferredJobMethod->currentItem());
-    kvp["kbanking-statementDate"] = QString("%1").arg(m_accountSettings->m_preferredStatementDate->currentItem());
+    kvp["kbanking-jobexec"] = QString("%1").arg(m_accountSettings->m_preferredJobMethod->currentIndex());
+    kvp["kbanking-statementDate"] = QString("%1").arg(m_accountSettings->m_preferredStatementDate->currentIndex());
   }
   return kvp;
 }
@@ -291,11 +291,11 @@ void KBankingPlugin::slotSettings(void)
 {
   KBankingSettings bs(m_kbanking);
   if (bs.init())
-    kdWarning() << "Error on ini of settings dialog." << endl;
+    qWarning("Error on ini of settings dialog.");
   else {
     bs.exec();
     if (bs.fini())
-      kdWarning() << "Error on fini of settings dialog." << endl;
+      qWarning("Error on fini of settings dialog.");
   }
 }
 
@@ -381,7 +381,7 @@ void KBankingPlugin::setupAccountReference(const MyMoneyAccount& acc, AB_ACCOUNT
       }
 
       kvp.setValue("kbanking-acc-ref", val);
-      kvp.setValue("provider", name());
+      kvp.setValue("provider", objectName());
       setAccountOnlineParameters(acc, kvp);
     }
   } else {
@@ -619,7 +619,7 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
 void KBankingPlugin::slotImport(void)
 {
   if (!m_kbanking->interactiveImport())
-    kdWarning() << "Error on import dialog" << endl;
+    qWarning("Error on import dialog");
 }
 
 
@@ -721,7 +721,7 @@ void KMyMoneyBanking::_xaToStatement(MyMoneyStatement &ks,
     }
   }
   kt.m_strPayee=s;
-  h = MyMoneyTransaction::hash(s.simplifyWhiteSpace());
+  h = MyMoneyTransaction::hash(s.trimmed());
 
   // memo
   s.truncate(0);
@@ -742,29 +742,29 @@ void KMyMoneyBanking::_xaToStatement(MyMoneyStatement &ks,
     } // while
   }
   kt.m_strMemo = s;
-  h = MyMoneyTransaction::hash(s.simplifyWhiteSpace(), h);
+  h = MyMoneyTransaction::hash(s.trimmed(), h);
 
   // see, if we need to extract the payee from the memo field
   const MyMoneyKeyValueContainer& kvp = acc.onlineBankingSettings();
   QString rePayee = kvp.value("kbanking-payee-regexp");
   if(!rePayee.isEmpty() && kt.m_strPayee.isEmpty()) {
     QString reMemo = kvp.value("kbanking-memo-regexp");
-    QStringList exceptions = QStringList::split(";", kvp.value("kbanking-payee-exceptions"));
+    QStringList exceptions = kvp.value("kbanking-payee-exceptions").split(";", QString::SkipEmptyParts);
 
     bool needExtract = true;
     QStringList::const_iterator it_s;
     for(it_s = exceptions.constBegin(); needExtract && it_s != exceptions.constEnd(); ++it_s) {
-      QRegExp exp(*it_s, false);
-      if(exp.search(kt.m_strMemo) != -1) {
+      QRegExp exp(*it_s, Qt::CaseInsensitive);
+      if(exp.indexIn(kt.m_strMemo) != -1) {
         needExtract = false;
       }
     }
     if(needExtract) {
-      QRegExp expPayee(rePayee, false);
-      QRegExp expMemo(reMemo, false);
-      if(expPayee.search(kt.m_strMemo) != -1) {
+      QRegExp expPayee(rePayee, Qt::CaseInsensitive);
+      QRegExp expMemo(reMemo, Qt::CaseInsensitive);
+      if(expPayee.indexIn(kt.m_strMemo) != -1) {
         kt.m_strPayee = expPayee.cap(1);
-        if(expMemo.search(kt.m_strMemo) != -1) {
+        if(expMemo.indexIn(kt.m_strMemo) != -1) {
           kt.m_strMemo = expMemo.cap(1);
         }
       }
@@ -775,8 +775,8 @@ void KMyMoneyBanking::_xaToStatement(MyMoneyStatement &ks,
   // - remove leading blanks
   // - remove trailing blanks
   // - reduce multiple blanks to one
-  kt.m_strMemo = kt.m_strMemo.simplifyWhiteSpace();
-  kt.m_strPayee = kt.m_strPayee.simplifyWhiteSpace();
+  kt.m_strMemo = kt.m_strMemo.trimmed();
+  kt.m_strPayee = kt.m_strPayee.trimmed();
 
   // date
   ti=AB_Transaction_GetDate(t);
@@ -811,7 +811,7 @@ void KMyMoneyBanking::_xaToStatement(MyMoneyStatement &ks,
       p=AB_Value_GetCurrency(val);
       if (p)
         s=p;
-      if (ks.m_strCurrency.lower()!=s.lower()) {
+      if (ks.m_strCurrency.toLower()!=s.toLower()) {
         // TODO: handle currency difference
         DBG_ERROR(0, "Mixed currencies currently not allowed");
       }
@@ -848,7 +848,7 @@ void KMyMoneyBanking::_xaToStatement(MyMoneyStatement &ks,
   // make hash value unique in case we don't have one already
   if(kt.m_strBankID.isEmpty()) {
     QString hashBase;
-    hashBase.sprintf("%s-%07lx", kt.m_datePosted.toString(Qt::ISODate).data(), h);
+    hashBase.sprintf("%s-%07lx", qPrintable(kt.m_datePosted.toString(Qt::ISODate)), h);
     int idx = 1;
     QString hash;
     for(;;) {

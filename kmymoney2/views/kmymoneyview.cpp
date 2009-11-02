@@ -2184,6 +2184,7 @@ KMyMoneyViewBase* KMyMoneyView::addBasePage(const QString& title, const QString&
   const int iconSize = (KMyMoneyGlobalSettings::iconSize()+1)*16;
   KPageWidgetItem* frm = m_model->addPage(viewBase, title);
   frm->setIcon(KIcon(icon));
+  frm->setHeader(QString("")); // hide the header and let the title bar do it's job
   return viewBase;
 }
 
