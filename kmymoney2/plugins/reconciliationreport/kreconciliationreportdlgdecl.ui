@@ -19,41 +19,20 @@
   <layout class="QVBoxLayout">
    <item>
     <widget class="KTabWidget" name="m_tabWidget">
-     <widget class="QWidget" name="tab">
+     <property name="currentIndex">
+      <number>1</number>
+     </property>
+     <widget class="QWidget" name="m_summaryTab">
       <attribute name="title">
        <string>Summar&amp;y</string>
       </attribute>
-      <layout class="QVBoxLayout">
-       <item>
-        <widget class="Q3Frame" name="m_summaryFrame">
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-         <layout class="QVBoxLayout"/>
-        </widget>
-       </item>
-      </layout>
+      <layout class="QVBoxLayout" name="m_summaryLayout"/>
      </widget>
-     <widget class="QWidget" name="tab">
+     <widget class="QWidget" name="m_detailsTab">
       <attribute name="title">
        <string>&amp;Details</string>
       </attribute>
-      <layout class="QVBoxLayout">
-       <item>
-        <widget class="Q3Frame" name="m_detailsFrame">
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-         <layout class="QVBoxLayout"/>
-        </widget>
-       </item>
-      </layout>
+      <layout class="QVBoxLayout" name="m_detailsLayout"/>
      </widget>
     </widget>
    </item>
@@ -97,9 +76,9 @@
  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
  <customwidgets>
   <customwidget>
-   <class>Q3Frame</class>
-   <extends>QFrame</extends>
-   <header>Qt3Support/Q3Frame</header>
+   <class>KTabWidget</class>
+   <extends>QTabWidget</extends>
+   <header>ktabwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -35,11 +35,11 @@
 KReportDlg::KReportDlg(QWidget* parent, const QString& summaryReportHTML, const QString& detailsReportHTML) : QDialog(parent)
 {
   setupUi(this);
-  m_summaryHTMLPart = new KHTMLPart(m_summaryFrame);
-  m_summaryFrame->layout()->addWidget(m_summaryHTMLPart->view());
+  m_summaryHTMLPart = new KHTMLPart(m_summaryTab);
+  m_summaryLayout->addWidget(m_summaryHTMLPart->view());
 
-  m_detailsHTMLPart = new KHTMLPart(m_detailsFrame);
-  m_detailsFrame->layout()->addWidget(m_detailsHTMLPart->view());
+  m_detailsHTMLPart = new KHTMLPart(m_detailsTab);
+  m_detailsLayout->addWidget(m_detailsHTMLPart->view());
 
   m_summaryHTMLPart->begin();
   m_summaryHTMLPart->write(summaryReportHTML);

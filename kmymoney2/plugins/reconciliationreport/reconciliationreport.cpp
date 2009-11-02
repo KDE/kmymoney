@@ -26,6 +26,7 @@
 #include <klocale.h>
 #include <kstandarddirs.h>
 #include <kplugininfo.h>
+#include <kcolorscheme.h>
 
 // KMyMoney includes
 #include "mymoneyfile.h"
@@ -64,6 +65,16 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
     QString("<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"%1\">").arg(filename);
 
   header += "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />";
+
+  QColor tcolor = KColorScheme(QPalette::Active).foreground(KColorScheme::NormalText).color();
+  QString css;
+  css += "<style type=\"text/css\">\n<!--\n";
+  css += QString(".row-even, .item0 { background-color: %1; color: %2 }\n")
+    .arg((KColorScheme(QPalette::Normal).background(KColorScheme::AlternateBackground).color()).name()).arg(tcolor.name());
+  css += QString(".row-odd, .item1  { background-color: %1; color: %2 }\n")
+    .arg((KColorScheme(QPalette::Normal).background(KColorScheme::NormalBackground).color()).name()).arg(tcolor.name());
+  css += "-->\n</style>\n";
+  header += css;
 
   header += "</head><body>\n";
 
