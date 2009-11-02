@@ -276,10 +276,14 @@ void KBankingPlugin::createJobView(void)
 
 void KBankingPlugin::createActions(void)
 {
-/*  new KAction(i18n("Configure Aq&Banking..."), "configure", 0, this, SLOT(slotSettings()), actionCollection(), "settings_aqbanking");
-  new KAction(i18n("AqBanking importer..."), "", 0, this, SLOT(slotImport()), actionCollection(), "file_import_aqbanking");*/
-  actionCollection()->addAction("settings_aqbanking");
-  actionCollection()->addAction("file_import_aqbanking");
+  KAction *settings_aqbanking  = actionCollection()->addAction("settings_aqbanking");
+  settings_aqbanking->setText(i18n("Configure Aq&Banking..."));
+  connect(settings_aqbanking, SIGNAL(triggered()), this, SLOT(slotSettings()));
+
+  KAction *file_import_aqbanking  = actionCollection()->addAction("file_import_aqbanking");
+  file_import_aqbanking->setText(i18n("AqBanking importer..."));
+  connect(file_import_aqbanking, SIGNAL(triggered()), this, SLOT(slotImport()));
+
   connect(viewInterface(), SIGNAL(viewStateChanged(bool)), action("file_import_aqbanking"), SLOT(setEnabled(bool)));
 }
 

@@ -54,6 +54,7 @@ KBJobView::KBJobView(KBanking *kb,
                      Qt::WFlags fl)
   : QWidget(parent, name, fl), _app(kb) {
   assert(kb);
+  setupUi(this);
 
   // Manually create and add layout here because the .ui-generated
   // QGroupBox doesn't have one.
@@ -76,11 +77,11 @@ KBJobView::KBJobView(KBanking *kb,
   // add some icons to the buttons
   KIconLoader* il = KIconLoader::global();
   KGuiItem dequeueItem(i18n("Dequeue"),
-                       KIcon(il->loadIcon("editshred", KIconLoader::Small, KIconLoader::SizeSmall)),
+                       KIcon(il->loadIcon("edit-delete-shred", KIconLoader::Small, KIconLoader::SizeSmall)),
                        i18n("Dequeue selected job"),
                        i18n("Remove the selected job from the list"));
   KGuiItem executeItem(i18n("Execute"),
-                       KIcon(il->loadIcon("wizard", KIconLoader::Small, KIconLoader::SizeSmall)),
+                       KIcon(il->loadIcon("system-run", KIconLoader::Small, KIconLoader::SizeSmall)),
                        i18n("Execute all jobs in the queue"),
                        i18n("Execute all jobs in the queue"));
 

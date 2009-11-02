@@ -2180,11 +2180,10 @@ void KMyMoneyView::slotPrintView(void)
 
 KMyMoneyViewBase* KMyMoneyView::addBasePage(const QString& title, const QString& icon)
 {
-  KPageWidgetItem* frm = new KPageWidgetItem(this);
   KMyMoneyViewBase* viewBase = new KMyMoneyViewBase(this, title, title);
   const int iconSize = (KMyMoneyGlobalSettings::iconSize()+1)*16;
+  KPageWidgetItem* frm = m_model->addPage(viewBase, title);
   frm->setIcon(KIcon(icon));
-  addPage(frm);
   return viewBase;
 }
 
