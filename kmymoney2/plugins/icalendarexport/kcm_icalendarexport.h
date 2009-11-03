@@ -29,7 +29,7 @@ class KPluginInfo;
 class KCMiCalendarExport : public KCModule
 {
 public:
-  KCMiCalendarExport(QWidget *parent = 0, const QVariantList& args = QVariantList());
+  explicit KCMiCalendarExport(QWidget *parent = 0, const QVariantList& args = QVariantList());
   ~KCMiCalendarExport();
 };
 

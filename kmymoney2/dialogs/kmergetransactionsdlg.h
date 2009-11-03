@@ -44,7 +44,7 @@ class KMergeTransactionsDlg: public KSelectTransactionsDlg
 {
   Q_OBJECT
 public:
-  KMergeTransactionsDlg(const MyMoneyAccount& account, QWidget* parent = 0);
+  explicit KMergeTransactionsDlg(const MyMoneyAccount& account, QWidget* parent = 0);
 
   bool eventFilter(QObject* , QEvent* ) { return false; }
 

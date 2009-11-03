@@ -63,7 +63,7 @@ class MyMoneyQifProfileEditor : public MyMoneyQifProfileEditorDecl
   Q_OBJECT
 
 public:
-  MyMoneyQifProfileEditor(const bool edit = false, QWidget *parent=0);
+  explicit MyMoneyQifProfileEditor(const bool edit = false, QWidget *parent=0);
   virtual ~MyMoneyQifProfileEditor();
 
   /**

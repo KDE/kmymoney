@@ -59,7 +59,7 @@ class KEndingBalanceDlg : public KEndingBalanceDlgDecl
 {
   Q_OBJECT
 public:
-  KEndingBalanceDlg(const MyMoneyAccount& account, QWidget *parent=0);
+  explicit KEndingBalanceDlg(const MyMoneyAccount& account, QWidget *parent=0);
   ~KEndingBalanceDlg();
 
   const MyMoneyMoney endingBalance(void) const;

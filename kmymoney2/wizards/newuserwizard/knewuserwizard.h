@@ -68,7 +68,7 @@ class Wizard : public KMyMoneyWizard
 
   Q_OBJECT
 public:
-  Wizard(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WFlags flags = 0);
+  explicit Wizard(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WFlags flags = 0);
   /**
     * Returns the personal information of the user (e.g. name, address, etc.)
     */

@@ -46,7 +46,7 @@ class OfxImporterPlugin : public KMyMoneyPlugin::Plugin, public KMyMoneyPlugin::
 {
 Q_OBJECT
 public:
-    OfxImporterPlugin(QObject *parent = 0, const QStringList& = QStringList());
+    explicit OfxImporterPlugin(QObject *parent = 0, const QStringList& = QStringList());
 
     ~OfxImporterPlugin();
 

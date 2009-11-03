@@ -50,7 +50,7 @@ class KMM_PLUGINS_EXPORT ImportInterface : public QObject
   Q_OBJECT
 
 public:
-  ImportInterface(QObject* parent, const char* name = 0);
+  explicit ImportInterface(QObject* parent, const char* name = 0);
   ~ImportInterface() {}
 
   virtual KUrl selectFile(const QString& title, const QString& path, const QString& mask, KFile::Mode mode) const = 0;

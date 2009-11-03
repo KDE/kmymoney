@@ -57,7 +57,7 @@ class KAccountSelectDlg : public KAccountSelectDlgDecl
 {
    Q_OBJECT
 public:
-  KAccountSelectDlg(const KMyMoneyUtils::categoryTypeE type, const QString& purpose = "General", QWidget *parent=0);
+  explicit KAccountSelectDlg(const KMyMoneyUtils::categoryTypeE type, const QString& purpose = "General", QWidget *parent=0);
   ~KAccountSelectDlg();
 
   /**

@@ -46,7 +46,7 @@ class KConfirmManualEnterDlg : public KConfirmManualEnterDlgDecl
 {
   Q_OBJECT
 public:
-  KConfirmManualEnterDlg(const MyMoneySchedule& schedule, QWidget* parent = 0);
+  explicit KConfirmManualEnterDlg(const MyMoneySchedule& schedule, QWidget* parent = 0);
 
   typedef enum {
     UseOriginal = 0,

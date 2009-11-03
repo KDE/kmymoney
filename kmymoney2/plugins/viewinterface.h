@@ -55,7 +55,7 @@ class KMM_PLUGINS_EXPORT ViewInterface : public QObject {
   Q_OBJECT
 
 public:
-  ViewInterface(QObject* parent, const char* name = 0);
+  explicit ViewInterface(QObject* parent, const char* name = 0);
   ~ViewInterface() {}
 
   /**

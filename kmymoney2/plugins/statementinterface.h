@@ -47,7 +47,7 @@ class KMM_PLUGINS_EXPORT StatementInterface : public QObject {
   Q_OBJECT
 
 public:
-  StatementInterface(QObject* parent, const char* name = 0);
+  explicit StatementInterface(QObject* parent, const char* name = 0);
   ~StatementInterface() {}
 
   /**

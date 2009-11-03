@@ -50,7 +50,7 @@
 class KStartDlg : public KPageDialog  {
    Q_OBJECT
 public:
-	KStartDlg( QWidget *parent=0, const char *name=0, bool modal=true );
+	explicit KStartDlg( QWidget *parent=0, const char *name=0, bool modal=true );
 	virtual ~KStartDlg();
   bool isNewFile(void)  const        { return isnewfile;           }
   bool isOpenFile(void) const        { return !kurlrequest->url().isEmpty();          }

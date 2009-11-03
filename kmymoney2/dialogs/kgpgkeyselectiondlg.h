@@ -38,7 +38,7 @@ class KGpgKeySelectionDlg : public KDialog
   Q_OBJECT
 public:
 
-  KGpgKeySelectionDlg(QWidget *parent=0, const char *name=0);
+  explicit KGpgKeySelectionDlg(QWidget *parent=0, const char *name=0);
   virtual ~KGpgKeySelectionDlg() {}
 
   /**

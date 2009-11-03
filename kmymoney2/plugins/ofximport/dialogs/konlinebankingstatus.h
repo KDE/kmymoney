@@ -53,7 +53,7 @@ class KOnlineBankingStatus : public KOnlineBankingStatusDecl
 {
   Q_OBJECT
 public:
-  KOnlineBankingStatus(const MyMoneyAccount& acc, QWidget *parent=0);
+  explicit KOnlineBankingStatus(const MyMoneyAccount& acc, QWidget *parent=0);
   ~KOnlineBankingStatus();
   const QString appId(void) const;
   QString headerVersion(void) const;

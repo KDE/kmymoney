@@ -45,7 +45,7 @@ class KReportConfigurationFilterDlg : public KFindTransactionDlg
 {
 Q_OBJECT
 public:
-    KReportConfigurationFilterDlg(MyMoneyReport report, QWidget *parent = 0);
+    explicit KReportConfigurationFilterDlg(MyMoneyReport report, QWidget *parent = 0);
     ~KReportConfigurationFilterDlg();
 
     const MyMoneyReport& getConfig(void) const { return m_currentState; }

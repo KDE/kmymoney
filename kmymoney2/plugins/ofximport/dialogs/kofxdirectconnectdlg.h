@@ -58,7 +58,7 @@ class KOfxDirectConnectDlg : public KOfxDirectConnectDlgDecl
 {
 Q_OBJECT
 public:
-  KOfxDirectConnectDlg(const MyMoneyAccount&, QWidget *parent = 0);
+  explicit KOfxDirectConnectDlg(const MyMoneyAccount&, QWidget *parent = 0);
   ~KOfxDirectConnectDlg();
 
   void init(void);

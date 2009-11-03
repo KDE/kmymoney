@@ -39,7 +39,7 @@
 class KNewBankDlgDecl : public QDialog, public Ui::KNewBankDlgDecl
 {
 public:
-  KNewBankDlgDecl( QWidget *parent ) : QDialog( parent ) {
+  explicit KNewBankDlgDecl( QWidget *parent ) : QDialog( parent ) {
     setupUi( this );
   }
 };

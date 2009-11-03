@@ -58,7 +58,7 @@ class KEquityPriceUpdateDlg : public KEquityPriceUpdateDlgDecl
 {
   Q_OBJECT
 public:
-  KEquityPriceUpdateDlg(QWidget *parent, const QString& securityId = QString());
+  explicit KEquityPriceUpdateDlg(QWidget *parent, const QString& securityId = QString());
   ~KEquityPriceUpdateDlg();
   void storePrices(void);
   MyMoneyPrice price(const QString& id) const;

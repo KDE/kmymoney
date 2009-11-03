@@ -108,7 +108,7 @@ namespace reports {
   class PivotOuterGroup: public QMap<QString,PivotInnerGroup>
   {
   public:
-    PivotOuterGroup( unsigned _numcolumns = 0, unsigned _sort=m_kDefaultSortOrder, bool _inverted=false): m_total(_numcolumns), m_inverted(_inverted), m_sortOrder(_sort) {}
+    explicit PivotOuterGroup(unsigned _numcolumns = 0, unsigned _sort=m_kDefaultSortOrder, bool _inverted=false): m_total(_numcolumns), m_inverted(_inverted), m_sortOrder(_sort) {}
     bool operator<( const PivotOuterGroup& _right ) const
     {
       if ( m_sortOrder != _right.m_sortOrder )

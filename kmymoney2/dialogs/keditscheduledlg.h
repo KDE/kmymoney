@@ -41,7 +41,7 @@ class TransactionEditor;
 class KEditScheduleDlgDecl : public QDialog, public Ui::KEditScheduleDlgDecl
 {
 public:
-  KEditScheduleDlgDecl( QWidget *parent ) : QDialog( parent ) {
+  explicit KEditScheduleDlgDecl( QWidget *parent ) : QDialog( parent ) {
     setupUi( this );
   }
 };

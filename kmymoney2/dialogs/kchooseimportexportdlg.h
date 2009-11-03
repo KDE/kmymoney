@@ -31,7 +31,7 @@
 class KChooseImportExportDlgDecl : public QDialog, public Ui::KChooseImportExportDlgDecl
 {
 public:
-  KChooseImportExportDlgDecl( QWidget *parent ) : QDialog( parent ) {
+  explicit KChooseImportExportDlgDecl( QWidget *parent ) : QDialog( parent ) {
     setupUi( this );
   }
 };
