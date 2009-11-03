@@ -154,8 +154,6 @@
    <default>true</default>
   </entry>
  </group>
- <group name="Investment Settings">
- </group>
  <group name="List Options">
   <entry name="HideUnusedCategory" type="Bool">
    <label>Hide unused categories</label>
@@ -285,8 +283,6 @@
    <label>During import, ask for a new payee's default category</label>
    <default>false</default>
   </entry>
- </group>
- <group name="Schedule Options">
  </group>
  <group name="Forecast Options">
   <entry name="forecastMethod" type="Int">
