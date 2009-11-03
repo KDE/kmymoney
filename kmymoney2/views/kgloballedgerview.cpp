@@ -1266,7 +1266,8 @@ bool KGlobalLedgerView::eventFilter(QObject* o, QEvent* e)
     } else {
       // qDebug("object = %s, key = %d", o->className(), k->key());
       if(o == m_register) {
-        if((k->modifiers() & Qt::KeyboardModifierMask) == 0) {
+        if((k->modifiers() & Qt::KeyboardModifierMask) == 0
+           || (k->modifiers() & Qt::KeypadModifier) != 0) {
           switch(k->key()) {
             case Qt::Key_Return:
             case Qt::Key_Enter:

@@ -165,7 +165,8 @@ bool TransactionEditor::eventFilter(QObject* o, QEvent* e)
   && (e->type() == QEvent::KeyPress)
   && m_editWidgets.values().contains(dynamic_cast<QWidget*>(o))) {
     QKeyEvent* k = dynamic_cast<QKeyEvent*>(e);
-    if((k->modifiers() & Qt::KeyboardModifierMask) == 0) {
+    if((k->modifiers() & Qt::KeyboardModifierMask) == 0
+       || (k->modifiers() & Qt::KeypadModifier) != 0) {
       bool isFinal = false;
       QList<const QWidget*>::const_iterator it_w;
       switch(k->key()) {
