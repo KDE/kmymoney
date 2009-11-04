@@ -33,7 +33,7 @@
 using namespace reports;
 
 KMyMoneyAccountTreeForecast::KMyMoneyAccountTreeForecast(QWidget* parent) :
-  KMyMoneyAccountTreeBase::KMyMoneyAccountTreeBase(parent)
+  KMyMoneyAccountTreeBase(parent)
 {
   setResizeMode(Q3ListView::NoColumn);
 }

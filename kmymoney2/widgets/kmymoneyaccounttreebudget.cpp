@@ -22,7 +22,7 @@
 #include <QList>
 
 KMyMoneyAccountTreeBudget::KMyMoneyAccountTreeBudget(QWidget* parent) :
-  KMyMoneyAccountTreeBase::KMyMoneyAccountTreeBase(parent)
+  KMyMoneyAccountTreeBase(parent)
 {
   showType();
   showValue();
