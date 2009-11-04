@@ -36,7 +36,11 @@ include( KMyMoneyMacros )
 find_package(KdepimLibs REQUIRED)
 find_package(SharedMimeInfo REQUIRED)
 
-add_definitions( ${QT_DEFINITIONS} ${KDE4_DEFINITIONS} -DQT_STRICT_ITERATORS)
+add_definitions( ${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
+string(TOLOWER ${CMAKE_BUILD_TYPE} CMAKE_BUILD_TYPE_TOLOWER)
+if(CMAKE_BUILD_TYPE_TOLOWER MATCHES debugfull)
+  add_definitions (-DQT_STRICT_ITERATORS)
+endif()
 add_definitions (-DQT3_SUPPORT -DQT3_SUPPORT_WARNINGS)
 
 include_directories( ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES} 
