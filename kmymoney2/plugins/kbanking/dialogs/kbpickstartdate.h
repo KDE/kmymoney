@@ -49,7 +49,7 @@ public:
                   const QString& accountName,
                   int defaultChoice,
                   QWidget* parent=0, const char* name=0,
-                  bool modal=FALSE, Qt::WFlags fl=0);
+                  bool modal=false, Qt::WFlags fl=0);
   ~KBPickStartDate();
 
   QDate date();

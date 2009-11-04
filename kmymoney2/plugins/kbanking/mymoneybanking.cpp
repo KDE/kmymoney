@@ -228,7 +228,7 @@ QWidget* KBankingPlugin::accountConfigTab(const MyMoneyAccount& acc, QString& na
       m_accountSettings->m_payeeRegExpEdit->setText(kvp.value("kbanking-payee-regexp"));
       m_accountSettings->m_memoRegExpEdit->setText(kvp.value("kbanking-memo-regexp"));
       m_accountSettings->m_payeeExceptions->clear();
-      m_accountSettings->m_payeeExceptions->insertStringList(kvp.value("kbanking-payee-exceptions").split(";", QString::SkipEmptyParts));
+      m_accountSettings->m_payeeExceptions->insertStringList(kvp.value("kbanking-payee-exceptions").split(';', QString::SkipEmptyParts));
     }
     return m_accountSettings;
   }
@@ -289,14 +289,15 @@ void KBankingPlugin::createActions(void)
 
 void KBankingPlugin::slotSettings(void)
 {
-  KBankingSettings bs(m_kbanking);
-  if (bs.init())
+  QPointer<KBankingSettings> bs = new KBankingSettings(m_kbanking);
+  if (bs->init())
     qWarning("Error on ini of settings dialog.");
   else {
-    bs.exec();
-    if (bs.fini())
+    bs->exec();
+    if (bs && bs->fini())
       qWarning("Error on fini of settings dialog.");
   }
+  delete bs;
 }
 
 
@@ -502,14 +503,16 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
           // and the qd is invalid
           if(dateOption == 0
           || (dateOption > 1 && !qd.isValid())) {
-            KBPickStartDate psd(m_kbanking, qd, lastUpdate, acc.name(),
-                              lastUpdate.isValid() ? 2 : 3, 0,
-                              "PickStartDate", true);
-            if (psd.exec() != QDialog::Accepted) {
+            QPointer<KBPickStartDate> psd = new KBPickStartDate(m_kbanking, qd, lastUpdate, acc.name(),
+                                                                lastUpdate.isValid() ? 2 : 3, 0,
+                                                                "PickStartDate", true);
+            if (psd->exec() != QDialog::Accepted) {
               AB_Job_free(job);
+              delete psd;
               return rc;
             }
-            qd=psd.date();
+            qd=psd->date();
+            delete psd;
           }
 
           if (qd.isValid()) {
@@ -735,7 +738,7 @@ void KMyMoneyBanking::_xaToStatement(MyMoneyStatement &ks,
       p = GWEN_StringListEntry_Data(se);
       assert(p);
       if (insertSpace)
-	s += " ";
+        s += ' ';
       insertSpace = true;
       s += QString::fromUtf8(p);
       se = GWEN_StringListEntry_Next(se);
@@ -749,7 +752,7 @@ void KMyMoneyBanking::_xaToStatement(MyMoneyStatement &ks,
   QString rePayee = kvp.value("kbanking-payee-regexp");
   if(!rePayee.isEmpty() && kt.m_strPayee.isEmpty()) {
     QString reMemo = kvp.value("kbanking-memo-regexp");
-    QStringList exceptions = kvp.value("kbanking-payee-exceptions").split(";", QString::SkipEmptyParts);
+    QStringList exceptions = kvp.value("kbanking-payee-exceptions").split(';', QString::SkipEmptyParts);
 
     bool needExtract = true;
     QStringList::const_iterator it_s;
