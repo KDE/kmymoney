@@ -32,7 +32,6 @@
 // Project Includes
 
 #include <register.h>
-#include <kmymoney_export.h>
 
 namespace KMyMoneyRegister {
 
@@ -43,7 +42,7 @@ namespace KMyMoneyRegister {
   *
   * @author Thomas Baumgart
   */
-class KMYMONEY_EXPORT RegisterSearchLine : public KLineEdit
+class RegisterSearchLine : public KLineEdit
 {
   Q_OBJECT
 public:
@@ -106,7 +105,7 @@ private:
   *
   * @author Thomas Baumgart
   */
-class KMYMONEY_EXPORT RegisterSearchLineWidget : public KHBox
+class RegisterSearchLineWidget : public KHBox
 {
   Q_OBJECT
 public:
