@@ -59,7 +59,7 @@ public:
     SignalAlways           // always signal selection of a tab
   } SignalEmissionE;
 
-  TabBar(QWidget* parent = 0, const char* name = 0);
+  explicit TabBar(QWidget* parent = 0);
   virtual ~TabBar() {}
 
   SignalEmissionE setSignalEmission(SignalEmissionE type);
@@ -126,7 +126,7 @@ class TransactionForm : public TransactionEditorContainer
 {
   Q_OBJECT
 public:
-  TransactionForm(QWidget *parent = 0, const char *name = 0);
+  explicit TransactionForm(QWidget *parent = 0);
   virtual ~TransactionForm() {}
 
   /**

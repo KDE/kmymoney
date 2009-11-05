@@ -48,7 +48,7 @@
 
 using namespace KMyMoneyTransactionForm;
 
-TabBar::TabBar(QWidget* parent, const char* name) :
+TabBar::TabBar(QWidget* parent) :
   KTabWidget(parent),
   m_signalType(SignalNormal)
 {
@@ -167,8 +167,8 @@ void TabBar::copyTabs(const TabBar* otabbar)
   }
 }
 
-TransactionForm::TransactionForm(QWidget *parent, const char *name) :
-  TransactionEditorContainer(parent, name),
+TransactionForm::TransactionForm(QWidget *parent) :
+  TransactionEditorContainer(parent),
   m_transaction(0),
   m_tabBar(0)
 {

@@ -48,8 +48,8 @@
 #include <ktoolinvocation.h>
 #include <KColorScheme>
 
-KMyMoneyWizardPagePrivate::KMyMoneyWizardPagePrivate(QObject* parent, const char* name) :
-  QObject(parent, name)
+KMyMoneyWizardPagePrivate::KMyMoneyWizardPagePrivate(QObject* parent) :
+  QObject(parent)
 {
 }
 
@@ -59,10 +59,10 @@ void KMyMoneyWizardPagePrivate::emitCompleteStateChanged(void)
 }
 
 
-KMyMoneyWizardPage::KMyMoneyWizardPage(unsigned int step, QWidget* widget, const char* name) :
+KMyMoneyWizardPage::KMyMoneyWizardPage(unsigned int step, QWidget* widget) :
   m_step(step),
   m_widget(widget),
-  d(new KMyMoneyWizardPagePrivate(widget, name))
+  d(new KMyMoneyWizardPagePrivate(widget))
 {
   m_mandatoryGroup = new kMandatoryFieldGroup(widget);
   QObject::connect(m_mandatoryGroup, SIGNAL(stateChanged()), object(), SIGNAL(completeStateChanged()));
@@ -152,7 +152,8 @@ KMyMoneyWizard::KMyMoneyWizard(QWidget *parent, const char *name, bool modal, Qt
   m_wizardLayout->setContentsMargins(6,6,6,6);
   m_wizardLayout->setSpacing(0);
   m_wizardLayout->setObjectName("wizardLayout");
-  m_titleLabel = new KMyMoneyTitleLabel(this, "titleLabel");
+  m_titleLabel = new KMyMoneyTitleLabel(this);
+  m_titleLabel->setObjectName("titleLabel");
   m_wizardLayout->addWidget(m_titleLabel);
 
   QHBoxLayout* hboxLayout = new QHBoxLayout;

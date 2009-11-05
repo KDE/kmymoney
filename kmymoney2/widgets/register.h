@@ -261,7 +261,7 @@ class Register : public TransactionEditorContainer
   friend class InvestTransaction;
 
 public:
-  Register(QWidget *parent = 0, const char *name = 0);
+  Register(QWidget *parent = 0);
   virtual ~Register();
 
   /**

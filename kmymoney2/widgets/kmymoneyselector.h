@@ -54,7 +54,7 @@ class KMyMoneySelector : public QWidget
 {
   Q_OBJECT
 public:
-  KMyMoneySelector(QWidget *parent=0, const char *name=0, Qt::WFlags flags = 0);
+  explicit KMyMoneySelector(QWidget *parent=0, const char *name=0, Qt::WFlags flags = 0);
   virtual ~KMyMoneySelector();
 
   /**

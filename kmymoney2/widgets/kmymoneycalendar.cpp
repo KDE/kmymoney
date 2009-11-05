@@ -210,8 +210,8 @@ public:
   QPushButton *userButton2;
 };
 
-kMyMoneyCalendar::kMyMoneyCalendar(QWidget *parent, const char *name ) :
-  Q3Frame(parent,name),
+kMyMoneyCalendar::kMyMoneyCalendar(QWidget *parent) :
+  Q3Frame(parent),
   table(0),
   d(new kMyMoneyCalendarPrivate)
 {

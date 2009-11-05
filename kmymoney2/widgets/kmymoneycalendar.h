@@ -86,7 +86,7 @@ public:
   /**
     * Standard constructor.
   **/
-  kMyMoneyCalendar(QWidget *parent=0, const char *name=0);
+  explicit kMyMoneyCalendar(QWidget *parent=0);
 
   /**
     * Standard destructor.

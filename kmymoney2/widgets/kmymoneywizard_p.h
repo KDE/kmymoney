@@ -43,7 +43,7 @@ public:
   /**
     * Constructor
     */
-  KMyMoneyWizardPagePrivate(QObject* parent, const char* name = 0);
+  explicit KMyMoneyWizardPagePrivate(QObject* parent);
 
   void emitCompleteStateChanged(void);
 

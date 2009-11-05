@@ -79,7 +79,7 @@ public:
     /**
      * The constructor.
      */
-    kMyMoneyDateTbl(QWidget *parent=0,
+    explicit kMyMoneyDateTbl(QWidget *parent=0,
          QDate date=QDate::currentDate(),
          const char* name=0, Qt::WFlags f=0);
     /**

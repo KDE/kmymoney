@@ -291,7 +291,7 @@ public:
   KRecentFilesAction*   m_recentFiles;
 };
 
-KMyMoney2App::KMyMoney2App(QWidget * /*parent*/ , const char* name) :
+KMyMoney2App::KMyMoney2App(QWidget* parent) :
   KXmlGuiWindow(0),
   d(new Private)
 {
@@ -302,7 +302,6 @@ KMyMoney2App::KMyMoney2App(QWidget * /*parent*/ , const char* name) :
 
   ::timetrace("start kmymoney2app constructor");
   // preset the pointer because we need it during the course of this constructor
-  setObjectName(name);
   kmymoney2 = this;
   d->m_config = KGlobal::config();
 

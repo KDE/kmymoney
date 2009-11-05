@@ -528,8 +528,8 @@ void RegisterToolTip::maybeTip(const QPoint& pos)
 }
 #endif
 
-Register::Register(QWidget *parent, const char *name ) :
-  TransactionEditorContainer(parent, name),
+Register::Register(QWidget *parent) :
+  TransactionEditorContainer(parent),
   m_selectAnchor(0),
   m_focusItem(0),
   m_firstItem(0),

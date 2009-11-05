@@ -443,7 +443,7 @@ public:
   /**
     * construtor of KMyMoney2App, calls all init functions to create the application.
     */
-  KMyMoney2App(QWidget* parent=0, const char* name=0);
+  explicit KMyMoney2App(QWidget* parent=0);
 
   /**
     * Destructor

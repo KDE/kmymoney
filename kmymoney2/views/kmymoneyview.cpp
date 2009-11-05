@@ -298,7 +298,8 @@ KMyMoneyView::~KMyMoneyView()
 
 void KMyMoneyView::addTitleBar(QWidget* parent, const QString& title)
 {
-  KMyMoneyTitleLabel* label = new KMyMoneyTitleLabel( parent, "titleLabel" );
+  KMyMoneyTitleLabel* label = new KMyMoneyTitleLabel(parent);
+  label->setObjectName("titleLabel");
   label->setMinimumSize( QSize( 100, 30 ) );
   label->setRightImageFile("pics/titlelabel_background.png" );
   label->setText(title);
@@ -2223,7 +2224,8 @@ KMyMoneyViewBase::KMyMoneyViewBase(QWidget* parent, const QString& name, const Q
   d->m_viewLayout->setSpacing( 6 );
   d->m_viewLayout->setMargin( 0 );
 
-  d->m_titleLabel = new KMyMoneyTitleLabel( this, "titleLabel" );
+  d->m_titleLabel = new KMyMoneyTitleLabel(this);
+  d->m_titleLabel->setObjectName("titleLabel");
   d->m_titleLabel->setMinimumSize( QSize( 100, 30 ) );
   d->m_titleLabel->setRightImageFile("pics/titlelabel_background.png" );
   d->m_titleLabel->setText(title);

@@ -141,8 +141,8 @@ protected slots:
   void slotCalculatorOpen(void);
 
 public:
-  kMyMoneyEdit(QWidget *parent=0, const int prec = -2);
-  kMyMoneyEdit(const MyMoneySecurity& eq, QWidget *parent=0);
+  explicit kMyMoneyEdit(QWidget *parent=0, const int prec = -2);
+  explicit kMyMoneyEdit(const MyMoneySecurity& eq, QWidget *parent=0);
   ~kMyMoneyEdit();
 
   /**

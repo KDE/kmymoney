@@ -36,8 +36,8 @@
 #include "kmymoneyscheduledcalendar.h"
 #include "mymoneyfile.h"
 
-kMyMoneyScheduledCalendar::kMyMoneyScheduledCalendar(QWidget *parent, const char *name )
-  : kMyMoneyCalendar(parent,name)
+kMyMoneyScheduledCalendar::kMyMoneyScheduledCalendar(QWidget *parent)
+  : kMyMoneyCalendar(parent)
 {
   QPushButton *pb1 = new QPushButton(i18n("Select Schedules"), this);
 

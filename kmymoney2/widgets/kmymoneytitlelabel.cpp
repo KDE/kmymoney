@@ -40,8 +40,8 @@
 
 #include "kmymoneytitlelabel.h"
 
-KMyMoneyTitleLabel::KMyMoneyTitleLabel(QWidget *parent, const char *name) :
-  QLabel(parent, name)
+KMyMoneyTitleLabel::KMyMoneyTitleLabel(QWidget *parent) :
+  QLabel(parent)
 {
   m_bgColor = KColorScheme(isEnabled() ? QPalette::Active : QPalette::Inactive, KColorScheme::Selection).background(KColorScheme::NormalBackground).color();
 

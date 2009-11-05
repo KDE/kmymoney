@@ -45,7 +45,7 @@ typedef enum {
 class TransactionEditorContainer : public Q3Table
 {
 public:
-  TransactionEditorContainer(QWidget* parent, const char* name) : Q3Table(parent, name) {}
+  TransactionEditorContainer(QWidget* parent) : Q3Table(parent) {}
 
   virtual void arrangeEditWidgets(QMap<QString, QWidget*>& editWidgets, KMyMoneyRegister::Transaction* t) = 0;
   virtual void removeEditWidgets(QMap<QString, QWidget*>& editWidgets) = 0;

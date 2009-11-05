@@ -54,7 +54,7 @@ public:
   /**
     * Standard constructor.
   **/
-  kMyMoneyScheduledCalendar(QWidget *parent=0, const char *name=0);
+  kMyMoneyScheduledCalendar(QWidget *parent=0);
 
   /**
     * Standard destructor.

@@ -241,7 +241,7 @@ protected:
   /**
     * Constructor (kept protected, so that one cannot create such an object directly)
     */
-  KMyMoneyWizardPage(unsigned int step, QWidget* widget, const char* name = 0);
+  KMyMoneyWizardPage(unsigned int step, QWidget* widget);
 
   /**
     * This method must be called by the implementation when the
