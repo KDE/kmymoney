@@ -18,8 +18,9 @@
 
 #include <config-kmymoney.h>
 
-
-
+#ifdef _MSC_VER
+#include <process.h> // for _getpid
+#endif
 // ----------------------------------------------------------------------------
 // Std C++ / STL Includes
 
@@ -6260,14 +6261,19 @@ const QList<QString> KMyMoney2App::instanceList(void) const
     for(it = apps.constBegin(); it != apps.constEnd(); ++it) {
       // skip over myself
       QDBusReply<uint> pid = QDBusConnection::sessionBus().interface()->servicePid(*it);
-      if (pid.isValid() && pid.value() == getpid())
+#ifdef _MSC_VER
+      uint thisProcPid = _getpid();
+#else
+      uint thisProcPid = getpid();
+#endif
+      if (pid.isValid() && pid.value() == thisProcPid)
         continue;
       if((*it).indexOf("org.kde.kmymoney2") == 0) {
         list += (*it);
       }
     }
   } else {
-    reply.error();
+    qDebug("D-Bus returned the following error while obtaining instances: %s", qPrintable(reply.error().message()));
   }
   return list;
 }
