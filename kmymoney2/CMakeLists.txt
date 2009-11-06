@@ -37,21 +37,22 @@ TARGET_LINK_LIBRARIES(kmymoney_common
 ADD_DEPENDENCIES(kmymoney_common generate_base_ui_srcs)
 
 SET( kmymoney_common_LIBS
-  ${QT_AND_KDECORE_LIBS} views reports kmymoney_common newuserwizard 
+  views reports kmymoney_common newuserwizard 
   newaccountwizard wizardpages dialogs widgets settings converter
   kmm_storage kmm_mymoney kgpgfile interfaces kmm_plugin dialogs kmm_kdchart
- ${KDE4_KHTML_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KABC_LIBS})
-#kmm_kdchart
+  ${QT_AND_KDECORE_LIBS} ${QT_QT3SUPPORT_LIBRARY} ${QT_QTSQL_LIBRARY}
+  ${KDE4_KHTML_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KABC_LIBS} ${KDE4_KFILE_LIBS} ${KDE4_KDE3SUPPORT_LIBS} ${KDE4_KUTILS_LIBRARY})
+
 ########### kmymoney2 executable ###############
 
-SET( kmymoney2_SRCS 
-	main.cpp 
+SET( kmymoney2_SRCS
+	main.cpp
 	kmymoney2.cpp )
 
 qt4_add_dbus_adaptor(kmymoney2_SRCS org.kde.kmymoney.xml kmymoney2.h KMyMoney2App)
 
 KDE4_ADD_EXECUTABLE( kmymoney2 ${kmymoney2_SRCS} )
-TARGET_LINK_LIBRARIES( kmymoney2 ${kmymoney_common_LIBS} kmymoney_base ${KDE4_KDEUI_LIBS} ${QT_QT3SUPPORT_LIBRARY} ${KDE4_KDE3SUPPORT_LIBS} ${KDE4_KFILE_LIBS} )
+TARGET_LINK_LIBRARIES( kmymoney2 ${kmymoney_common_LIBS} kmymoney_base )
 
 ########### kmymoneytest executable ###############
 
