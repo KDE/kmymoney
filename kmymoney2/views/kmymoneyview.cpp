@@ -1800,7 +1800,7 @@ void KMyMoneyView::fixFile_0(void)
         // can re-parent it
         acc.setParentAccountId(QString());
         file->reparentAccount(acc, equity);
-        kDebug(2) << __func__ << " fixed account " << acc.id() << " reparented to " << equity.id();
+        kDebug(2) << Q_FUNC_INFO << " fixed account " << acc.id() << " reparented to " << equity.id();
       }
     }
   }
@@ -1829,7 +1829,7 @@ void KMyMoneyView::fixSchedule_0(MyMoneySchedule sched)
       // the first split is always the account on which this transaction operates
       // and if the transaction commodity is not set, we take this
       if(it_s == splitList.constBegin() && t.commodity().isEmpty()) {
-        kDebug(2) << __func__ << " " << t.id() << " has no commodity";
+        kDebug(2) << Q_FUNC_INFO << " " << t.id() << " has no commodity";
         try {
           MyMoneyAccount acc = MyMoneyFile::instance()->account((*it_s).accountId());
           t.setCommodity(acc.currencyId());
@@ -1842,13 +1842,13 @@ void KMyMoneyView::fixSchedule_0(MyMoneySchedule sched)
       try {
         MyMoneyFile::instance()->account((*it_s).accountId());
       } catch(MyMoneyException *e) {
-        kDebug(2) << __func__ << " " << sched.id() << " " << (*it_s).id() << " removed, because account '" << (*it_s).accountId() << "' does not exist.";
+        kDebug(2) << Q_FUNC_INFO << " " << sched.id() << " " << (*it_s).id() << " removed, because account '" << (*it_s).accountId() << "' does not exist.";
         t.removeSplit(*it_s);
         updated = true;
         delete e;
       }
       if((*it_s).reconcileFlag() != MyMoneySplit::NotReconciled) {
-        kDebug(2) << __func__ << " " << sched.id() << " " << (*it_s).id() << " should be 'not reconciled'";
+        kDebug(2) << Q_FUNC_INFO << " " << sched.id() << " " << (*it_s).id() << " should be 'not reconciled'";
         MyMoneySplit split = *it_s;
         split.setReconcileDate(QDate());
         split.setReconcileFlag(MyMoneySplit::NotReconciled);
@@ -1981,7 +1981,7 @@ void KMyMoneyView::fixTransactions_0(void)
     for(it_s = t.splits().constBegin(); it_s != t.splits().constEnd(); ++it_s) {
       if(accounts.contains((*it_s).accountId())) {
         hasDuplicateAccounts = true;
-        kDebug(2) << __func__ << " " << t.id() << " has multiple splits with account " << (*it_s).accountId();
+        kDebug(2) << Q_FUNC_INFO << " " << t.id() << " has multiple splits with account " << (*it_s).accountId();
       } else {
         accounts << (*it_s).accountId();
       }
@@ -2011,7 +2011,7 @@ void KMyMoneyView::fixTransactions_0(void)
 
     // check if base commodity is set. if not, set baseCurrency
     if((*it_t).commodity().isEmpty()) {
-      kDebug(2) << __func__ << " " << (*it_t).id() << " has no base currency";
+      kDebug(2) << Q_FUNC_INFO << " " << (*it_t).id() << " has no base currency";
       (*it_t).setCommodity(file->baseCurrency().id());
       file->modifyTransaction(*it_t);
     }
@@ -2104,7 +2104,7 @@ void KMyMoneyView::fixTransactions_0(void)
       // must be of type ActionInterest
       if(interestAccounts.contains((*it_s).accountId())) {
         if((*it_s).action() != MyMoneySplit::ActionInterest) {
-          kDebug(2) << __func__ << " " << (*it_t).id() << " contains an interest account (" << (*it_s).accountId() << ") but does not have ActionInterest";
+          kDebug(2) << Q_FUNC_INFO << " " << (*it_t).id() << " contains an interest account (" << (*it_s).accountId() << ") but does not have ActionInterest";
           (*it_s).setAction(MyMoneySplit::ActionInterest);
           (*it_t).modifySplit(*it_s);
           file->modifyTransaction(*it_t);
@@ -2114,7 +2114,7 @@ void KMyMoneyView::fixTransactions_0(void)
       // of type ActionInterest
       } else {
         if((*it_s).action() == MyMoneySplit::ActionInterest) {
-          kDebug(2) << __func__ << " " << (*it_t).id() << " does not contain an interest account so it should not have ActionInterest";
+          kDebug(2) << Q_FUNC_INFO << " " << (*it_t).id() << " does not contain an interest account so it should not have ActionInterest";
           (*it_s).setAction(defaultAction);
           (*it_t).modifySplit(*it_s);
           file->modifyTransaction(*it_t);
@@ -2127,7 +2127,7 @@ void KMyMoneyView::fixTransactions_0(void)
       // and shares field are the same.
       if((*it_t).commodity() == splitAccount.currencyId()
       && (*it_s).value() != (*it_s).shares()) {
-        kDebug(2) << __func__ << " " << (*it_t).id() << " " << (*it_s).id() << " uses the transaction currency, but shares != value";
+        kDebug(2) << Q_FUNC_INFO << " " << (*it_t).id() << " " << (*it_s).id() << " uses the transaction currency, but shares != value";
         (*it_s).setShares((*it_s).value());
         (*it_t).modifySplit(*it_s);
         file->modifyTransaction(*it_t);

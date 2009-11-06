@@ -175,7 +175,7 @@ QString OfxImporterPlugin::lastError(void) const
 
 int OfxImporterPlugin::ofxTransactionCallback(struct OfxTransactionData data, void * pv)
 {
-//   kDebug(2) << __func__;
+//   kDebug(2) << Q_FUNC_INFO;
 
   OfxImporterPlugin* pofx = reinterpret_cast<OfxImporterPlugin*>(pv);
   MyMoneyStatement& s = pofx->back();
@@ -389,14 +389,14 @@ int OfxImporterPlugin::ofxTransactionCallback(struct OfxTransactionData data, vo
   else
     s.m_listTransactions += t;
 
-//   kDebug(2) << __func__ << "return 0 ";
+//   kDebug(2) << Q_FUNC_INFO << "return 0 ";
 
   return 0;
 }
 
 int OfxImporterPlugin::ofxStatementCallback(struct OfxStatementData data, void* pv)
 {
-//   kDebug(2) << __func__;
+//   kDebug(2) << Q_FUNC_INFO;
 
   OfxImporterPlugin* pofx = reinterpret_cast<OfxImporterPlugin*>(pv);
   MyMoneyStatement& s = pofx->back();
@@ -431,14 +431,14 @@ int OfxImporterPlugin::ofxStatementCallback(struct OfxStatementData data, void* 
     s.m_closingBalance = MyMoneyMoney(data.ledger_balance);
   }
 
-//   kDebug(2) << __func__ << " return 0";
+//   kDebug(2) << Q_FUNC_INFO << " return 0";
 
   return 0;
 }
 
 int OfxImporterPlugin::ofxAccountCallback(struct OfxAccountData data, void * pv)
 {
-//   kDebug(2) << __func__;
+//   kDebug(2) << Q_FUNC_INFO;
 
   OfxImporterPlugin* pofx = reinterpret_cast<OfxImporterPlugin*>(pv);
   pofx->addnew();
@@ -492,14 +492,14 @@ int OfxImporterPlugin::ofxAccountCallback(struct OfxAccountData data, void * pv)
   // copy over the securities
   s.m_listSecurities = pofx->m_securitylist;
 
-//   kDebug(2) << __func__ << " return 0";
+//   kDebug(2) << Q_FUNC_INFO << " return 0";
 
   return 0;
 }
 
 int OfxImporterPlugin::ofxSecurityCallback(struct OfxSecurityData data, void* pv)
 {
-  //   kDebug(2) << __func__;
+  //   kDebug(2) << Q_FUNC_INFO;
 
   OfxImporterPlugin* pofx = reinterpret_cast<OfxImporterPlugin*>(pv);
   MyMoneyStatement::Security sec;
@@ -521,7 +521,7 @@ int OfxImporterPlugin::ofxSecurityCallback(struct OfxSecurityData data, void* pv
 
 int OfxImporterPlugin::ofxStatusCallback(struct OfxStatusData data, void * pv)
 {
-//   kDebug(2) << __func__;
+//   kDebug(2) << Q_FUNC_INFO;
 
   OfxImporterPlugin* pofx = reinterpret_cast<OfxImporterPlugin*>(pv);
   QString message;
@@ -558,7 +558,7 @@ int OfxImporterPlugin::ofxStatusCallback(struct OfxStatusData data, void * pv)
     }
   }
 
-//   kDebug(2) << __func__ << " return 0 ";
+//   kDebug(2) << Q_FUNC_INFO << " return 0 ";
 
   return 0;
 }

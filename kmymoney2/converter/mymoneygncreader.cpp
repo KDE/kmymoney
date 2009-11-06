@@ -116,7 +116,7 @@ void GncObject::checkVersion (const QString& elName, const QXmlAttributes& elAtt
   TRY
   if (map.contains(elName)) { // if it's not in the map, there's nothing to check
     if (!map[elName].contains(elAttrs.value("version"))) {
-      QString em = __func__ +i18n(": Sorry. This importer cannot handle version %1 of element %2"
+      QString em = Q_FUNC_INFO +i18n(": Sorry. This importer cannot handle version %1 of element %2"
                           ,elAttrs.value("version"),elName);
       throw new MYMONEYEXCEPTION (em);
     }

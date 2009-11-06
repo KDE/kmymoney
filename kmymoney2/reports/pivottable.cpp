@@ -99,7 +99,7 @@ PivotTable::PivotTable( const MyMoneyReport& _config_f ):
 
 void PivotTable::init(void)
 {
-  DEBUG_ENTER(__PRETTY_FUNCTION__);
+  DEBUG_ENTER(Q_FUNC_INFO);
 
   //
   // Initialize locals
@@ -424,7 +424,7 @@ void PivotTable::init(void)
 
 void PivotTable::collapseColumns(void)
 {
-  DEBUG_ENTER(__PRETTY_FUNCTION__);
+  DEBUG_ENTER(Q_FUNC_INFO);
 
   int columnpitch = m_config_f.columnPitch();
   if ( columnpitch != 1 )
@@ -462,7 +462,7 @@ void PivotTable::collapseColumns(void)
 
 void PivotTable::accumulateColumn(int destcolumn, int sourcecolumn)
 {
-  DEBUG_ENTER(__PRETTY_FUNCTION__);
+  DEBUG_ENTER(Q_FUNC_INFO);
   DEBUG_OUTPUT(QString("From Column %1 to %2").arg(sourcecolumn).arg(destcolumn));
 
   // iterate over outer groups
@@ -494,7 +494,7 @@ void PivotTable::accumulateColumn(int destcolumn, int sourcecolumn)
 
 void PivotTable::clearColumn(int column)
 {
-  DEBUG_ENTER(__PRETTY_FUNCTION__);
+  DEBUG_ENTER(Q_FUNC_INFO);
   DEBUG_OUTPUT(QString("Column %1").arg(column));
 
   // iterate over outer groups
@@ -523,7 +523,7 @@ void PivotTable::clearColumn(int column)
 
 void PivotTable::calculateColumnHeadings(void)
 {
-  DEBUG_ENTER(__PRETTY_FUNCTION__);
+  DEBUG_ENTER(Q_FUNC_INFO);
 
   // one column for the opening balance
   m_columnHeadings.append( "Opening" );
@@ -605,7 +605,7 @@ void PivotTable::calculateColumnHeadings(void)
 
 void PivotTable::createAccountRows(void)
 {
-  DEBUG_ENTER(__PRETTY_FUNCTION__);
+  DEBUG_ENTER(Q_FUNC_INFO);
   MyMoneyFile* file = MyMoneyFile::instance();
 
   QList<MyMoneyAccount> accounts;
@@ -634,7 +634,7 @@ void PivotTable::createAccountRows(void)
 
 void PivotTable::calculateOpeningBalances( void )
 {
-  DEBUG_ENTER(__PRETTY_FUNCTION__);
+  DEBUG_ENTER(Q_FUNC_INFO);
 
   // First, determine the inclusive dates of the report.  Normally, that's just
   // the begin & end dates of m_config_f.  However, if either of those dates are
@@ -718,7 +718,7 @@ void PivotTable::calculateRunningSums( PivotInnerGroup::iterator& it_row)
 
 void PivotTable::calculateRunningSums( void )
 {
-  DEBUG_ENTER(__PRETTY_FUNCTION__);
+  DEBUG_ENTER(Q_FUNC_INFO);
 
   m_runningSumsCalculated = true;
 
@@ -809,7 +809,7 @@ MyMoneyMoney PivotTable::cellBalance(const QString& outergroup, const ReportAcco
 
 void PivotTable::calculateBudgetMapping( void )
 {
-  DEBUG_ENTER(__PRETTY_FUNCTION__);
+  DEBUG_ENTER(Q_FUNC_INFO);
 
   MyMoneyFile* file = MyMoneyFile::instance();
 
@@ -985,7 +985,7 @@ void PivotTable::calculateBudgetMapping( void )
 
 void PivotTable::convertToBaseCurrency( void )
 {
-  DEBUG_ENTER(__PRETTY_FUNCTION__);
+  DEBUG_ENTER(Q_FUNC_INFO);
 
   int fraction = MyMoneyFile::instance()->baseCurrency().smallestAccountFraction();
 
@@ -1035,7 +1035,7 @@ void PivotTable::convertToBaseCurrency( void )
 
 void PivotTable::convertToDeepCurrency( void )
 {
-  DEBUG_ENTER(__PRETTY_FUNCTION__);
+  DEBUG_ENTER(Q_FUNC_INFO);
   MyMoneyFile* file = MyMoneyFile::instance();
 
   PivotGrid::iterator it_outergroup = m_grid.begin();
@@ -1228,7 +1228,7 @@ void PivotTable::calculateTotals( void )
 
 void PivotTable::assignCell( const QString& outergroup, const ReportAccount& _row, int column, MyMoneyMoney value, bool budget, bool stockSplit )
 {
-  DEBUG_ENTER(__PRETTY_FUNCTION__);
+  DEBUG_ENTER(Q_FUNC_INFO);
   DEBUG_OUTPUT(QString("Parameters: %1,%2,%3,%4,%5").arg(outergroup).arg(_row.debugName()).arg(column).arg(DEBUG_SENSITIVE(value.toDouble())).arg(budget));
 
   // for budget reports, if this is the actual value, map it to the account which
@@ -1275,7 +1275,7 @@ void PivotTable::assignCell( const QString& outergroup, const ReportAccount& _ro
 
 void PivotTable::createRow( const QString& outergroup, const ReportAccount& row, bool recursive )
 {
-  DEBUG_ENTER(__PRETTY_FUNCTION__);
+  DEBUG_ENTER(Q_FUNC_INFO);
 
   // Determine the inner group from the top-most parent account
   QString innergroup( row.topParentName() );
@@ -1320,7 +1320,7 @@ QDate PivotTable::columnDate(int column) const
 
 QString PivotTable::renderCSV( void ) const
 {
-  DEBUG_ENTER(__PRETTY_FUNCTION__);
+  DEBUG_ENTER(Q_FUNC_INFO);
 
   //
   // Report Title
@@ -1552,7 +1552,7 @@ QString PivotTable::renderCSV( void ) const
 
 QString PivotTable::renderHTML( void ) const
 {
-  DEBUG_ENTER(__PRETTY_FUNCTION__);
+  DEBUG_ENTER(Q_FUNC_INFO);
 
   QString colspan = QString(" colspan=\"%1\"").arg(m_numColumns + 1 + (m_config_f.isShowingRowTotals() ? 1 : 0) );
 

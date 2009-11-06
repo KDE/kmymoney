@@ -801,7 +801,7 @@ void KReportsView::slotOpenReport(Q3ListViewItem* item)
 
 void KReportsView::slotOpenReport(const MyMoneyReport& report)
 {
-  kDebug(2) << __func__ << " " << report.name();
+  kDebug(2) << Q_FUNC_INFO << " " << report.name();
     KReportTab* page = NULL;
 
     // Find the tab which contains the report indicated by this list item

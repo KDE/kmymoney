@@ -250,7 +250,7 @@ void KInstitutionsView::loadSubAccounts(KMyMoneyAccountTreeItem* parent, const Q
             }
 
           } catch(MyMoneyException *e) {
-            kDebug(2) << __PRETTY_FUNCTION__ << " caught exception while adding " << acc.name() << "[" << acc.id() << "]: " << e->what();
+            kDebug(2) << Q_FUNC_INFO << " caught exception while adding " << acc.name() << "[" << acc.id() << "]: " << e->what();
             delete e;
           }
 

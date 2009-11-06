@@ -36,7 +36,7 @@ NodeParser::NodeParser(const xmlpp::DomParser& parser)
 
 NodeParser NodeParser::Path(const xmlpp::Node* node,const std::string& path)
 {
-  //std::cout << __PRETTY_FUNCTION__ << std::endl;
+  //std::cout << Q_FUNC_INFO << std::endl;
 
   NodeParser result;
   
@@ -74,7 +74,7 @@ NodeParser NodeParser::Path(const xmlpp::Node* node,const std::string& path)
 
 NodeParser NodeParser::Path(const std::string& path) const
 {
-  //std::cout << __PRETTY_FUNCTION__ << std::endl;
+  //std::cout << Q_FUNC_INFO << std::endl;
   NodeParser result;
   
   for(const_iterator iter = begin(); iter != end(); ++iter)
@@ -88,7 +88,7 @@ NodeParser NodeParser::Path(const std::string& path) const
 
 NodeParser NodeParser::Select(const std::string& key, const std::string& value) const
 {
-  //std::cout << __PRETTY_FUNCTION__ << std::endl;
+  //std::cout << Q_FUNC_INFO << std::endl;
   NodeParser result;
   for(const_iterator iter = begin(); iter != end(); ++iter)
   {
@@ -113,7 +113,7 @@ NodeParser NodeParser::Select(const std::string& key, const std::string& value) 
 
 vector<string> NodeParser::Text(void) const
 {
-  //std::cout << __PRETTY_FUNCTION__ << std::endl;
+  //std::cout << Q_FUNC_INFO << std::endl;
   vector<string> result;
   
   // Go through the list of nodes

@@ -633,7 +633,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
             thisaccount.setCurrencyId(security.id());
 
             file->addAccount(thisaccount, m_account);
-            kDebug(0) << __func__ << ": created account " << thisaccount.id() << " for security " << t_in.m_strSecurity << " under account " << m_account.id();
+            kDebug(0) << Q_FUNC_INFO << ": created account " << thisaccount.id() << " for security " << t_in.m_strSecurity << " under account " << m_account.id();
           }
           // this security does not exist in the file.
           else

@@ -49,13 +49,13 @@ ReportAccount::ReportAccount( const ReportAccount& copy ):
 {
   // NOTE: I implemented the copy constructor solely for debugging reasons
 
-  DEBUG_ENTER(__PRETTY_FUNCTION__);
+  DEBUG_ENTER(Q_FUNC_INFO);
 }
 
 ReportAccount::ReportAccount( const QString& accountid ):
   MyMoneyAccount( MyMoneyFile::instance()->account(accountid) )
 {
-  DEBUG_ENTER(__PRETTY_FUNCTION__);
+  DEBUG_ENTER(Q_FUNC_INFO);
   DEBUG_OUTPUT(QString("Account %1").arg(accountid));
   calculateAccountHierarchy();
 }
@@ -63,14 +63,14 @@ ReportAccount::ReportAccount( const QString& accountid ):
 ReportAccount::ReportAccount( const MyMoneyAccount& account ):
   MyMoneyAccount( account )
 {
-  DEBUG_ENTER(__PRETTY_FUNCTION__);
+  DEBUG_ENTER(Q_FUNC_INFO);
   DEBUG_OUTPUT(QString("Account %1").arg(account.id()));
   calculateAccountHierarchy();
 }
 
 void ReportAccount::calculateAccountHierarchy( void )
 {
-  DEBUG_ENTER(__PRETTY_FUNCTION__);
+  DEBUG_ENTER(Q_FUNC_INFO);
 
   MyMoneyFile* file = MyMoneyFile::instance();
   QString resultid = id();
@@ -98,7 +98,7 @@ void ReportAccount::calculateAccountHierarchy( void )
 
 MyMoneyMoney ReportAccount::deepCurrencyPrice( const QDate& date ) const
 {
-  DEBUG_ENTER(__PRETTY_FUNCTION__);
+  DEBUG_ENTER(Q_FUNC_INFO);
 
   MyMoneyMoney result(1, 1);
   MyMoneyFile* file = MyMoneyFile::instance();
@@ -143,7 +143,7 @@ MyMoneyMoney ReportAccount::baseCurrencyPrice( const QDate& date ) const
   // currency.  This confused me for a while, which is why I wrote this comment.
   //    --acejones
 
-  DEBUG_ENTER(__PRETTY_FUNCTION__);
+  DEBUG_ENTER(Q_FUNC_INFO);
 
   MyMoneyMoney result(1, 1);
   MyMoneyFile* file = MyMoneyFile::instance();
@@ -158,7 +158,7 @@ MyMoneyMoney ReportAccount::baseCurrencyPrice( const QDate& date ) const
 
 MyMoneyMoney ReportAccount::foreignCurrencyPrice( const QString foreignCurrency, const QDate& date ) const
 {
-  DEBUG_ENTER(__PRETTY_FUNCTION__);
+  DEBUG_ENTER(Q_FUNC_INFO);
 
   MyMoneyPrice price;
   MyMoneyMoney result(1, 1);
@@ -228,7 +228,7 @@ bool ReportAccount::isForeignCurrency( void ) const
 
 bool ReportAccount::operator<(const ReportAccount& second) const
 {
-//   DEBUG_ENTER(__PRETTY_FUNCTION__);
+//   DEBUG_ENTER(Q_FUNC_INFO);
 
   bool result = false;
   bool haveresult = false;
@@ -312,7 +312,7 @@ ReportAccount ReportAccount::parent( void ) const
 
 ReportAccount ReportAccount::topParent( void ) const
 {
-  DEBUG_ENTER(__PRETTY_FUNCTION__);
+  DEBUG_ENTER(Q_FUNC_INFO);
 
   MyMoneyFile* file = MyMoneyFile::instance();
   QString resultid = id();

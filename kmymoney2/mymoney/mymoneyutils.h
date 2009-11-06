@@ -73,7 +73,7 @@ class KMM_MYMONEY_EXPORT MyMoneyTracer
 {
 public:
   MyMoneyTracer(const char* prettyName);
-#define MYMONEYTRACER(a) MyMoneyTracer a(__PRETTY_FUNCTION__)
+#define MYMONEYTRACER(a) MyMoneyTracer a(Q_FUNC_INFO)
 
   MyMoneyTracer(const QString& className, const QString& methodName);
   ~MyMoneyTracer();

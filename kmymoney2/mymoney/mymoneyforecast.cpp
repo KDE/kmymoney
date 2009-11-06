@@ -734,7 +734,7 @@ void MyMoneyForecast::addScheduledTransactions (void)
           (*it).setLastPayment(nextDate);
 
         } catch(MyMoneyException* e) {
-          kDebug(2) << __func__ << " Schedule " << (*it).id() << " (" << (*it).name() << "): " << e->what();
+          kDebug(2) << Q_FUNC_INFO << " Schedule " << (*it).id() << " (" << (*it).name() << "): " << e->what();
 
           schedule.erase(it);
           delete e;
