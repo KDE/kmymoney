@@ -546,7 +546,7 @@ Register::Register(QWidget *parent) :
   m_buttonState(Qt::ButtonState(0)),
   m_drawCounter(0)
 {
-#warning "port to kde4"	
+//FIXME: Port to KDE4	
   //m_tooltip = new RegisterToolTip(viewport(), this);
 
   setNumCols(MaxColumns);
@@ -1096,7 +1096,7 @@ void Register::suppressAdjacentMarkers(void)
 
 void Register::updateRegister(bool forceUpdateRowHeight)
 {
-#warning "port to kde4"	
+//FIXME: Port to KDE4	
   //::timetrace("Update register");
   if(m_listsDirty || forceUpdateRowHeight) {
     // don't get in here recursively
@@ -1169,7 +1169,7 @@ void Register::updateRegister(bool forceUpdateRowHeight)
         QTimer::singleShot(0, this, SLOT(resize()));
     }
   }
-#warning "port to kde4"  
+//FIXME: Port to KDE4  
   //::timetrace("Done updateing register");
 }
 
@@ -1350,7 +1350,7 @@ void Register::adjustColumn(int col)
   Q_UNUSED(col)
 #else
   QString msg = "%1 adjusting column %2";
-#warning "port to kde4"
+//FIXME: Port to KDE4
   //::timetrace((msg.arg("Start").arg(col)).data());
   Q3Header *topHeader = horizontalHeader();
   QFontMetrics cellFontMetrics(KMyMoneyGlobalSettings::listCellFont());
@@ -1431,7 +1431,7 @@ void Register::repaintItems(RegisterItem* first, RegisterItem* last)
     QCoreApplication::processEvents(QEventLoop::ExcludeUserInput, 10);
   }
   m_lastRepaintRect = r;
-#warning "port to kde4"
+//FIXME: Port to KDE4
   QApplication::postEvent( viewport(), new QPaintEvent( r ) );
 
 }

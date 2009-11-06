@@ -364,7 +364,7 @@ void OfxHttpsRequest::slotOfxFinished(KIO::Job* /* e */)
   int error = m_job->error();
   if ( error ) {
     m_job->showErrorDialog();
-#warning "FIX on windows"
+//FIXME: FIX on windows
     unlink(m_dst.path().toUtf8().data());
 
   } else if ( m_job->isErrorPage() ) {
@@ -379,7 +379,7 @@ void OfxHttpsRequest::slotOfxFinished(KIO::Job* /* e */)
       f.close();
     }
     KMessageBox::detailedSorry( 0, i18n("The HTTP request failed."), details, i18nc("The HTTP request failed", "Failed") );
-#warning "FIX on windows"
+//FIXME: FIX on windows
     unlink(m_dst.path().toUtf8().data());
   }
 
@@ -420,7 +420,7 @@ OfxHttpRequest::OfxHttpRequest(const QString& type, const KUrl &url, const QByte
 
   if(m_error != Q3Http::NoError) {
     KMessageBox::error(0, errorMsg, i18n("OFX setup error"));
-#warning "FIX on windows"
+//FIXME: FIX on windows
     unlink(dst.path().toUtf8().data());
   }
 }

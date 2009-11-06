@@ -62,7 +62,9 @@
 // #define DEBUG_IMPORT
 
 #ifdef DEBUG_IMPORT
-#warning "DEBUG_IMPORT defined --> external filter not available!!!!!!!"
+#ifdef __GNUC__
+  #warning "DEBUG_IMPORT defined --> external filter not available!!!!!!!"
+#endif
 #endif
 
 class MyMoneyQifReader::Private {

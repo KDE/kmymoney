@@ -267,7 +267,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   //set the model
   setModel(m_model);
 
-  #warning "port to kde4"
+  //FIXME: Port to KDE4
   #if 0
   // get rid of the title text
   QWidget* widget = dynamic_cast<QWidget*>(child("KJanusWidgetTitleLabel", "QLabel"));

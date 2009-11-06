@@ -89,7 +89,7 @@ KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* paren
   reportCfg.setColumnsAreDays( true );
   reportCfg.setConvertCurrency( false );
   reportCfg.setDateFilter(QDate::currentDate().addDays(-90),QDate::currentDate().addDays(+90));
-#warning "port to kde4"
+//FIXME: Port to KDE4
 #if 0  
   reports::PivotTable table(reportCfg);
 
@@ -160,7 +160,7 @@ KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* paren
     haveMinBalance = true;
     minBalance = MyMoneyMoney(account.value("minBalanceAbsolute"));
   }
-#warning "port to kde4"  
+//FIXME: Port to KDE4  
 #if 0
   KDChartTableDataBase* data = chartWidget->data();
   if(!needRow && data->usedRows() == 2) {

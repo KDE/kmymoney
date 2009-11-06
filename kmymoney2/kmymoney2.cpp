@@ -326,7 +326,7 @@ KMyMoney2App::KMyMoney2App(QWidget* parent) :
   ::timetrace("create view");
   d->m_myMoneyView = new KMyMoneyView(frame, "KMyMoneyView");
   layout->addWidget(d->m_myMoneyView, 10);
-  #warning #port to KDE4
+  //FIXME: Port to KDE4
   //connect(myMoneyView, SIGNAL(aboutToShowPage(QWidget*)), this, SLOT(slotResetSelections()));
 
   ///////////////////////////////////////////////////////////////////
@@ -967,7 +967,7 @@ void KMyMoney2App::dumpActions(void) const
   const QList<QAction*> list = actionCollection()->actions();
   QList<QAction*>::const_iterator it;
   for(it = list.begin(); it != list.end(); ++it) {
-    #warning "port kde4"
+    //FIXME: Port to KDE4
     #if 0
     std::cout << (*it)->name() << ": " << (*it)->text() << std::endl;
     #endif
@@ -2483,7 +2483,7 @@ void KMyMoney2App::slotProcessExited(void)
 
         if(d->m_backupResult == 0) {
           progressCallback(50, 0, i18n("Writing %1",backupfile));
-#warning "fix me on windows"
+//FIXME: FIX on windows
           d->m_proc << "cp" << "-f" << d->m_fileName.path(KUrl::LeaveTrailingSlash) << backupfile;
           d->m_backupState = BACKUP_COPYING;
           d->m_proc.start();
@@ -6646,7 +6646,7 @@ void KMyMoney2App::Private::unlinkStatementXML(void)
   QDir d("/home/thb", "kmm-statement*");
   for(uint i = 0; i < d.count(); ++i) {
     qDebug("Remove %s", qPrintable(d[i]));
-#warning "fix me on windows"
+//FIXME: FIX on windows
     d.remove(QString("/home/thb/%1").arg(d[i]));
   }
   m_statementXMLindex = 0;

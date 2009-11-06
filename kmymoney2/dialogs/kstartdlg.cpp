@@ -179,7 +179,7 @@ void KStartDlg::readConfig()
   // Restore the last page viewed
   // default to the recent files page if no entry exists but files have been found
   // otherwise, default to template page
-#warning "port to kde4"
+//FIXME: Port to KDE4
 #if 0
   if(view_recent->count() > 0)
     setCurrentPage(grp.readEntry("LastPage", this->pageIndex(recentMainFrame)));
@@ -197,7 +197,7 @@ void KStartDlg::writeConfig()
 
   KConfigGroup grp = config->group("Start Dialog");
   grp.writeEntry("Geometry", this->size() );
-#warning "port to kde4"
+//FIXME: Port to KDE4
   //grp.writeEntry("LastPage", this->activePageIndex());
   config->sync();
 }

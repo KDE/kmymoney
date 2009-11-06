@@ -364,7 +364,7 @@ void MyMoneyQifProfileEditor::slotReset(void)
   m_profile.saveProfile();
 
   KSharedConfigPtr config = KGlobal::config();
-#warning "port to kde4"
+//FIXME: Port to KDE4
   //config->rollback();
   config->reparseConfiguration();
 

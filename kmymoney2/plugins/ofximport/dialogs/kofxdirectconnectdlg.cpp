@@ -84,7 +84,7 @@ void KOfxDirectConnectDlg::init(void)
   g.close();
 #endif
 
-#warning "port to kde4"
+//FIXME: Port to KDE4
 #if 0
 
   QDir homeDir(QDir::home());

@@ -358,7 +358,7 @@ void Transaction::paintRegisterCellFocus(QPainter* painter, int row, int col, co
         end.rx()--;
       }
       // painter->drawLine(start, end);
-#warning "port to kde4"
+//FIXME: Port to KDE4
       //painter->drawWinFocusRect(QRect(start, end));
     }
     // for the last Row, we need to paint the bottom
@@ -371,7 +371,7 @@ void Transaction::paintRegisterCellFocus(QPainter* painter, int row, int col, co
         end.rx()--;
       }
       // painter->drawLine(start, end);
-#warning "port to kde4"
+//FIXME: Port to KDE4
       //painter->drawWinFocusRect(QRect(start, end));
     }
     // for the first col, we need to paint the left
@@ -384,7 +384,7 @@ void Transaction::paintRegisterCellFocus(QPainter* painter, int row, int col, co
         end.ry()--;
       }
       //painter->drawLine(start, end);
-#warning "port to kde4"
+//FIXME: Port to KDE4
       //painter->drawWinFocusRect(QRect(start, end));
     }
     // for the last col, we need to paint the left
@@ -397,7 +397,7 @@ void Transaction::paintRegisterCellFocus(QPainter* painter, int row, int col, co
         end.ry()--;
       }
       //painter->drawLine(start, end);
-#warning "port to kde4"
+//FIXME: Port to KDE4
       //painter->drawWinFocusRect(QRect(start, end));
     }
     painter->setPen(oldPen);

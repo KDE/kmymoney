@@ -44,7 +44,7 @@ KMyMoneyPlugin::Plugin::~Plugin()
 
 KAction* KMyMoneyPlugin::Plugin::action(const QString& actionName) const
 {
-#warning "port to kde4"
+//FIXME: Port to KDE4
 #if 0
   static KShortcut shortcut("");
   static KAction dummyAction(QString("Dummy"), QString(), shortcut, static_cast<const QObject*>(this), 0, static_cast<KActionCollection*>(0), "");
@@ -61,7 +61,7 @@ KAction* KMyMoneyPlugin::Plugin::action(const QString& actionName) const
 
 KToggleAction* KMyMoneyPlugin::Plugin::toggleAction(const QString& actionName) const
 {
-#warning "port to kde4"
+//FIXME: Port to KDE4
 #if 0
   static KShortcut shortcut("");
   static KToggleAction dummyAction( QString("Dummy"), static_cast<const QObject*>(this ) );
