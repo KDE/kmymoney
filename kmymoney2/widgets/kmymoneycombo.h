@@ -106,7 +106,7 @@ public:
     * @param id reference to QString containing the id. If no item
     *           is selected id will be empty.
     */
-  void selectedItem(QString& id) const KDE_DEPRECATED;
+  KDE_DEPRECATED void selectedItem(QString& id) const;
 
   /**
     * This method returns the id of the first selected item.
@@ -354,8 +354,8 @@ public:
 
   void insertItem(const QString& txt, int id, int idx = -1);
 
-  void setItem(int id) KDE_DEPRECATED;  // replace with setCurrentItem(id)
-  int item(void) const KDE_DEPRECATED;  // replace with currentItem()
+  KDE_DEPRECATED void setItem(int id);  // replace with setCurrentItem(id)
+  KDE_DEPRECATED int item(void) const;  // replace with currentItem()
 
   void setCurrentItem(int id);
   int currentItem(void) const;

@@ -148,7 +148,7 @@ public:
   /**
     * @deprecated Use value() instead
     */
-  // MyMoneyMoney getMoneyValue(void) KDE_DEPRECATED;
+  //KDE_DEPRECATED MyMoneyMoney getMoneyValue(void);
 
   MyMoneyMoney value(void) const;
 
