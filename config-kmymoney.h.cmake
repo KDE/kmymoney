@@ -164,3 +164,8 @@
 #cmakedefine KMM_DEBUG 1
 
 #cmakedefine KMM_DESIGNER 1
+
+/* If we're not using GNU C, elide __attribute__ */
+#ifndef __GNUC__
+#  define  __attribute__(x)  /*NOTHING*/
+#endif
