@@ -34,7 +34,6 @@
 // KDE Headers
 
 #include <ktemporaryfile.h>
-#include <k3process.h>
 
 // ----------------------------------------------------------------------------
 // Project Headers
