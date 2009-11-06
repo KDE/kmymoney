@@ -48,7 +48,8 @@ SET( kmymoney2_SRCS
 	main.cpp
 	kmymoney2.cpp )
 
-qt4_add_dbus_adaptor(kmymoney2_SRCS org.kde.kmymoney.xml kmymoney2.h KMyMoney2App)
+QT4_ADD_DBUS_ADAPTOR(kmymoney2_SRCS org.kde.kmymoney.xml kmymoney2.h KMyMoney2App)
+KDE4_ADD_APP_ICON( kmymoney2_SRCS hi*-app-kmymoney2.png )
 
 KDE4_ADD_EXECUTABLE( kmymoney2 ${kmymoney2_SRCS} )
 TARGET_LINK_LIBRARIES( kmymoney2 ${kmymoney_common_LIBS} kmymoney_base )
