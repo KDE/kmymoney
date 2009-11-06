@@ -41,7 +41,7 @@
 
 #include <kapplication.h>
 #include <klocale.h>
-#include <k3process.h>
+//#include <k3process.h>
 #include <kpassworddialog.h>
 #include <klibloader.h>
 //#include <kdialog.h>
@@ -123,6 +123,7 @@ bool KGPGFile::open(int mode)
 
 bool KGPGFile::open(int mode, const QString& cmdArgs, bool skipPasswd)
 {
+#if 0
   bool useOwnPassphrase = qgetenv("GPG_AGENT_INFO").isEmpty();
 
   // qDebug("KGPGFile::open(%d)", mode);
@@ -231,11 +232,13 @@ bool KGPGFile::open(int mode, const QString& cmdArgs, bool skipPasswd)
  //setState( IO_Open );
 //  ioIndex = 0;
   // qDebug("File open");
+#endif
   return true;
 }
 
 bool KGPGFile::startProcess(const QStringList& args)
 {
+#if 0
   // now start the K3Process with GPG
   m_process = new K3ShellProcess();
   *m_process << "gpg";
@@ -265,11 +268,13 @@ bool KGPGFile::startProcess(const QStringList& args)
 
   // let the process settle and see if it starts and survives ;-)
   kapp->processEvents(QEventLoop::AllEvents, 100);
+#endif
   return true;
 }
 
 void KGPGFile::close(void)
 {
+#if 0
   // qDebug("KGPGFile::close()");
   if(!isOpen()) {
     // qDebug("File not open");
@@ -305,6 +310,7 @@ void KGPGFile::close(void)
 //  setState(0);
   m_recipient.clear();
   // qDebug("File closed");
+#endif
 }
 
 int KGPGFile::getch(void)
@@ -365,6 +371,7 @@ qint64 KGPGFile::write(const char *data, qint64 maxlen)
 
 qint64 KGPGFile::_write(const char *data, qint64 maxlen)
 {
+#if 0
   if(!m_process)
     return EOF;
   if(!m_process->isRunning())
@@ -380,10 +387,13 @@ qint64 KGPGFile::_write(const char *data, qint64 maxlen)
 
   } else
     return EOF;
+#endif
+  return EOF;
 }
 
 qint64 KGPGFile::read(char *data, qint64 maxlen)
 {
+#if 0
   // char *oridata = data;
   if(maxlen == 0)
     return 0;
@@ -431,6 +441,8 @@ qint64 KGPGFile::read(char *data, qint64 maxlen)
   // qDebug("return %d bytes", maxlen - m_readRemain);
   // dumpBuffer(oridata, maxlen - m_readRemain);
   return maxlen - m_readRemain;
+#endif
+  return EOF;
 }
 
 QByteArray KGPGFile::readAll(void)
@@ -452,6 +464,7 @@ QByteArray KGPGFile::readAll(void)
 
 void KGPGFile::slotGPGExited(K3Process* )
 {
+#if 0
   // qDebug("GPG finished");
   if(m_process) {
     if(m_process->normalExit()) {
@@ -472,10 +485,12 @@ void KGPGFile::slotGPGExited(K3Process* )
     m_needExitLoop = false;
     m_event->quit();
   }
+#endif
 }
 
 void KGPGFile::slotDataFromGPG(K3Process* proc, char* buf, int len)
 {
+#if 0
   // qDebug("Received %d bytes on stdout", len);
 
   // copy current buffer to application
@@ -504,6 +519,7 @@ void KGPGFile::slotDataFromGPG(K3Process* proc, char* buf, int len)
     }
   }
   // qDebug("end slotDataFromGPG");
+#endif
 }
 
 void KGPGFile::slotErrorFromGPG(K3Process *, char *buf, int len)
