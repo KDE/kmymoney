@@ -18,7 +18,6 @@ SET( _HEADERS kmymoneyutils.h kmymoneyglobalsettings.h )
 
 # we call a macro that creates symbolic links in kmymoney/
 KMM_CREATE_LINKS( ${_HEADERS} )
-KMM_CREATE_LINKS_BIN( kmymoneysettings.h )
 
 ########### common code (kmymoney_common) STATIC ###############
 # will be linked into kmymoney2, kmymoneytest, and libkmymoney.so

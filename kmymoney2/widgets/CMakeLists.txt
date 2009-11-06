@@ -21,7 +21,6 @@ SET(kmymoney_STAT_HEADERS
   )
 
 KMM_CREATE_LINKS( ${kmymoney_STAT_HEADERS} )
-KMM_CREATE_LINKS_BIN( transactionsortoption.h )
 
 ########### Basic Widget Library (kmymoney_base) STATIC #################
 
