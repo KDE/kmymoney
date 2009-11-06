@@ -220,21 +220,23 @@ ENDIF()
 
 # tells gcc to enable exception handling
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${KDE4_ENABLE_EXCEPTIONS}")
-# use position independent code
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
-# be more pedantic about common symbols
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-common")
+IF(NOT MSVC)
+  # use position independent code
+  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
+  # be more pedantic about common symbols
+  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-common")
 
-# Debug, Debugfull, Profile
-SET(CMAKE_CXX_FLAGS_DEBUG
-  "-g -O2 -fno-reorder-blocks -fno-schedule-insns -fno-inline")
-SET(CMAKE_CXX_FLAGS_DEBUGFULL
-  "-g3 -fno-inline")
-SET(CMAKE_CXX_FLAGS_PROFILE
-  "-g3 -fno-inline -ftest-coverage -fprofile-arcs")
+  # Debug, Debugfull, Profile
+  SET(CMAKE_CXX_FLAGS_DEBUG
+    "-g -O2 -fno-reorder-blocks -fno-schedule-insns -fno-inline")
+  SET(CMAKE_CXX_FLAGS_DEBUGFULL
+    "-g3 -fno-inline")
+  SET(CMAKE_CXX_FLAGS_PROFILE
+    "-g3 -fno-inline -ftest-coverage -fprofile-arcs")
 
-# be pedantic about undefined symbols when linking shared libraries
-SET(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--no-undefined")
+  # be pedantic about undefined symbols when linking shared libraries
+  SET(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--no-undefined")
+ENDIF(NOT MSVC)
 
 OPTION(USE_LEAK_CHECK "Enable to compile with memory leak check support (deprecated)" OFF)
 if(USE_LEAK_CHECK)
