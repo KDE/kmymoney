@@ -838,7 +838,7 @@ QString GncRecurrence::getFrequency() const {
   // This function converts a gnucash 2.2 recurrence specification into it's previous equivalent
   // This will all need re-writing when MTE finishes the schedule re-write
   if (periodType() == "once") return("once");
-  if ((periodType() == "day") and (mult() == "1")) return("daily");
+  if ((periodType() == "day") && (mult() == "1")) return("daily");
   if (periodType() == "week") {
     if (mult() == "1") return ("weekly");
     if (mult() == "2") return ("bi_weekly");
