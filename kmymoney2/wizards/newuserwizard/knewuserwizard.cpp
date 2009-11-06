@@ -66,11 +66,11 @@
 #include "kmymoney2.h"
 #include "kmymoneyglobalsettings.h"
 
-using namespace NewUserWizard;
+namespace NewUserWizard {
 
 static int stepCount;
 
-NewUserWizard::Wizard::Wizard(QWidget *parent, const char *name, bool modal, Qt::WFlags flags) :
+Wizard::Wizard(QWidget *parent, const char *name, bool modal, Qt::WFlags flags) :
   KMyMoneyWizard(parent, name, modal, flags),
   m_introPage(0)
 {
@@ -105,17 +105,17 @@ NewUserWizard::Wizard::Wizard(QWidget *parent, const char *name, bool modal, Qt:
   setHelpContext("firsttime-3");
 }
 
-MyMoneyPayee NewUserWizard::Wizard::user(void) const
+MyMoneyPayee Wizard::user(void) const
 {
   return m_generalPage->user();
 }
 
-QString NewUserWizard::Wizard::url(void) const
+QString Wizard::url(void) const
 {
   return m_filePage->m_dataFileEdit->url().path();
 }
 
-MyMoneyInstitution NewUserWizard::Wizard::institution(void) const
+MyMoneyInstitution Wizard::institution(void) const
 {
   MyMoneyInstitution inst;
   if(m_accountPage->m_haveCheckingAccountButton->isChecked()) {
@@ -128,7 +128,7 @@ MyMoneyInstitution NewUserWizard::Wizard::institution(void) const
   return inst;
 }
 
-MyMoneyAccount NewUserWizard::Wizard::account(void) const
+MyMoneyAccount Wizard::account(void) const
 {
   MyMoneyAccount acc;
   if(m_accountPage->m_haveCheckingAccountButton->isChecked()) {
@@ -142,17 +142,17 @@ MyMoneyAccount NewUserWizard::Wizard::account(void) const
   return acc;
 }
 
-MyMoneyMoney NewUserWizard::Wizard::openingBalance(void) const
+MyMoneyMoney Wizard::openingBalance(void) const
 {
   return m_accountPage->m_openingBalanceEdit->value();
 }
 
-MyMoneySecurity NewUserWizard::Wizard::baseCurrency(void) const
+MyMoneySecurity Wizard::baseCurrency(void) const
 {
   return m_baseCurrency;
 }
 
-Q3ValueList<MyMoneyTemplate> NewUserWizard::Wizard::templates(void) const
+Q3ValueList<MyMoneyTemplate> Wizard::templates(void) const
 {
   return m_categoriesPage->selectedTemplates();
 }
@@ -356,6 +356,7 @@ bool FilePage::isComplete(void) const
     m_finishLabel->setVisible(rc);
   }
   return rc;
+}
 }
 
 #include "knewuserwizard.moc"

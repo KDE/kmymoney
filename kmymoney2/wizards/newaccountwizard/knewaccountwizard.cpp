@@ -77,8 +77,8 @@ namespace NewAccountWizard {
     StepParentAccount,
     StepFinish
   };
-}
-NewAccountWizard::Wizard::Wizard(QWidget *parent, const char *name, bool modal, Qt::WFlags flags)
+
+Wizard::Wizard(QWidget *parent, const char *name, bool modal, Qt::WFlags flags)
   : KMyMoneyWizard(parent, name, modal, flags)
 {
   setTitle(i18n("KMyMoney New Account Setup"));
@@ -119,28 +119,28 @@ NewAccountWizard::Wizard::Wizard(QWidget *parent, const char *name, bool modal, 
   setFirstPage(m_institutionPage);
 }
 
-void NewAccountWizard::Wizard::setAccount(const MyMoneyAccount& acc)
+void Wizard::setAccount(const MyMoneyAccount& acc)
 {
   m_account = acc;
   m_accountTypePage->setAccount(m_account);
 }
 
-const MyMoneySecurity& NewAccountWizard::Wizard::currency(void) const
+const MyMoneySecurity& Wizard::currency(void) const
 {
   return m_accountTypePage->currency();
 }
 
-MyMoneyMoney NewAccountWizard::Wizard::interestRate(void) const
+MyMoneyMoney Wizard::interestRate(void) const
 {
   return m_loanDetailsPage->m_interestRate->value() / MyMoneyMoney(100,1);
 }
 
-int NewAccountWizard::Wizard::precision(void) const
+int Wizard::precision(void) const
 {
   return MyMoneyMoney::denomToPrec(currency().smallestAccountFraction());
 }
 
-const MyMoneyAccount& NewAccountWizard::Wizard::account(void)
+const MyMoneyAccount& Wizard::account(void)
 {
   m_account = MyMoneyAccountLoan();
   m_account.setName(m_accountTypePage->m_accountName->text());
@@ -177,7 +177,7 @@ const MyMoneyAccount& NewAccountWizard::Wizard::account(void)
   return m_account;
 }
 
-MyMoneyTransaction NewAccountWizard::Wizard::payoutTransaction(void)
+MyMoneyTransaction Wizard::payoutTransaction(void)
 {
   MyMoneyTransaction t;
   if(m_account.isLoan()                                       // we're creating a loan
@@ -204,7 +204,7 @@ MyMoneyTransaction NewAccountWizard::Wizard::payoutTransaction(void)
   return t;
 }
 
-const MyMoneyAccount& NewAccountWizard::Wizard::parentAccount(void)
+const MyMoneyAccount& Wizard::parentAccount(void)
 {
   return m_accountTypePage->allowsParentAccount()
          ? m_hierarchyPage->parentAccount()
@@ -213,7 +213,7 @@ const MyMoneyAccount& NewAccountWizard::Wizard::parentAccount(void)
            : m_accountTypePage->parentAccount() );
 }
 
-MyMoneyAccount NewAccountWizard::Wizard::brokerageAccount(void) const
+MyMoneyAccount Wizard::brokerageAccount(void) const
 {
   MyMoneyAccount account;
   if(m_account.accountType() == MyMoneyAccount::Investment
@@ -231,7 +231,7 @@ MyMoneyAccount NewAccountWizard::Wizard::brokerageAccount(void) const
   return account;
 }
 
-const MyMoneySchedule& NewAccountWizard::Wizard::schedule(void)
+const MyMoneySchedule& Wizard::schedule(void)
 {
   m_schedule = MyMoneySchedule();
 
@@ -327,7 +327,7 @@ const MyMoneySchedule& NewAccountWizard::Wizard::schedule(void)
   return m_schedule;
 }
 
-MyMoneyMoney NewAccountWizard::Wizard::openingBalance(void) const
+MyMoneyMoney Wizard::openingBalance(void) const
 {
   // equity accounts don't have an opening balance
   if(m_accountTypePage->accountType() == MyMoneyAccount::Equity)
@@ -343,7 +343,7 @@ MyMoneyMoney NewAccountWizard::Wizard::openingBalance(void) const
   return m_accountTypePage->m_openingBalance->value();
 }
 
-MyMoneyPrice NewAccountWizard::Wizard::conversionRate(void) const
+MyMoneyPrice Wizard::conversionRate(void) const
 {
   if(MyMoneyFile::instance()->baseCurrency().id() == m_accountTypePage->m_currencyComboBox->security().id())
     return MyMoneyPrice(MyMoneyFile::instance()->baseCurrency().id(),
@@ -358,12 +358,12 @@ MyMoneyPrice NewAccountWizard::Wizard::conversionRate(void) const
                       i18n("User"));
 }
 
-bool NewAccountWizard::Wizard::moneyBorrowed(void) const
+bool Wizard::moneyBorrowed(void) const
 {
   return m_generalLoanInfoPage->m_loanDirection->currentIndex() == 0;
 }
 
-class NewAccountWizard::InstitutionPage::Private
+class InstitutionPage::Private
 {
 public:
   QList<MyMoneyInstitution>  m_list;
@@ -1200,7 +1200,7 @@ KMyMoneyWizardPage* LoanDetailsPage::nextPage(void) const
 }
 
 
-class NewAccountWizard::LoanPaymentPage::Private
+class LoanPaymentPage::Private
 {
 public:
   MyMoneyAccount      phonyAccount;
@@ -1678,6 +1678,7 @@ void AccountSummaryPage::enterPage(void)
       p = new K3ListViewItem(group, p, i18n("First payment due"), KGlobal::locale()->formatDate(m_wizard->m_loanSchedulePage->firstPaymentDueDate()));
     }
   }
+}
 }
 
 #include "knewaccountwizard.moc"
