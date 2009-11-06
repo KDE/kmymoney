@@ -77,7 +77,7 @@ public:
     *
     * @author Darren Gould
     */
-  class PeriodGroup
+  class KMM_MYMONEY_EXPORT PeriodGroup
   {
   public:
     // get functions
@@ -102,7 +102,7 @@ public:
     *
     * @author Darren Gould
     */
-  class AccountGroup
+  class KMM_MYMONEY_EXPORT AccountGroup
   {
   public:
     typedef enum
