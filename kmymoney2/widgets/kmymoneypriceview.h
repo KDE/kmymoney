@@ -62,7 +62,7 @@ class KMyMoneyPriceView : public K3ListView
 {
    Q_OBJECT
 public:
-  KMyMoneyPriceView(QWidget *parent=0, const char *name=0);
+  KMyMoneyPriceView(QWidget *parent=0);
   ~KMyMoneyPriceView();
 
 protected:

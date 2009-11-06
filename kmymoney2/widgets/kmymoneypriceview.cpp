@@ -120,7 +120,7 @@ int KMyMoneyPriceItem::compare(Q3ListViewItem* i, int col, bool ascending) const
   return rc;
 }
 
-KMyMoneyPriceView::KMyMoneyPriceView(QWidget *parent, const char *name ) :
+KMyMoneyPriceView::KMyMoneyPriceView(QWidget *parent) :
   K3ListView(parent),
   m_contextMenu(0),
   m_showAll(false)
