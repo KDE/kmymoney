@@ -107,7 +107,7 @@ void KMMiCalendarExportPlugin::slotFirstExport(void)
   if(fileDialog->exec() == QDialog::Accepted) {
     KUrl newURL = fileDialog->selectedUrl();
     if (newURL.isLocalFile()) {
-      PluginSettings::setIcalendarFile(newURL.path());
+      PluginSettings::setIcalendarFile(newURL.toLocalFile());
       slotExport();
     }
   }

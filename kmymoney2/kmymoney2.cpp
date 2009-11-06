@@ -2370,8 +2370,8 @@ bool KMyMoney2App::initWizard(void)
     //save off directory as the last one used.
     if(d->m_fileName.isLocalFile() && d->m_fileName.hasPath())
     {
-      writeLastUsedDir(d->m_fileName.path(KUrl::LeaveTrailingSlash));
-      writeLastUsedFile(d->m_fileName.path(KUrl::LeaveTrailingSlash));
+      writeLastUsedDir(d->m_fileName.toLocalFile(KUrl::LeaveTrailingSlash));
+      writeLastUsedFile(d->m_fileName.toLocalFile(KUrl::LeaveTrailingSlash));
     }
 
     return true;

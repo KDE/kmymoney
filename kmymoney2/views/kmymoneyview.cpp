@@ -594,7 +594,7 @@ bool KMyMoneyView::readFile(const KUrl& url)
   newStorage();
 
   if(url.isLocalFile()) {
-    filename = url.path();
+    filename = url.toLocalFile();
   } else {
     if(!KIO::NetAccess::download(url, filename, NULL)) {
       KMessageBox::detailedError(this,
@@ -1129,7 +1129,7 @@ bool KMyMoneyView::saveFile(const KUrl& url, const QString& keyList)
     }
 
     if(url.isLocalFile()) {
-      filename = url.path();
+      filename = url.toLocalFile();
       int fmode = 0600;
       gid_t gid = static_cast<gid_t>(-1);      // don't change the group id (see "man 2 chown")
       QFileInfo fi(filename);

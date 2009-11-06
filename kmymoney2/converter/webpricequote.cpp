@@ -102,10 +102,10 @@ bool WebPriceQuote::launchNative( const QString& _symbol, const QString& _id, co
     url = KUrl(m_source.m_url.arg(m_symbol));
 
   if ( url.isLocalFile() ) {
-    emit status(i18nc("The process x is executing", "Executing %1...",url.path()));
+    emit status(i18nc("The process x is executing", "Executing %1...",url.toLocalFile()));
 
     m_filter.clearProgram();
-    m_filter << url.path().split(' ', QString::SkipEmptyParts);
+    m_filter << url.toLocalFile().split(' ', QString::SkipEmptyParts);
     m_filter.setSymbol(m_symbol);
 
     m_filter.setOutputChannelMode(KProcess::MergedChannels);
@@ -114,7 +114,7 @@ bool WebPriceQuote::launchNative( const QString& _symbol, const QString& _id, co
     if(m_filter.waitForStarted()) {
       result = true;
     } else {
-      emit error(i18n("Unable to launch: %1",url.path()));
+      emit error(i18n("Unable to launch: %1",url.toLocalFile()));
       slotParseQuote(QString());
     }
   } else {

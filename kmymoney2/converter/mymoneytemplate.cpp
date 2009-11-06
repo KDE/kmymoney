@@ -65,7 +65,7 @@ bool MyMoneyTemplate::loadTemplate(const KUrl& url)
 
   m_source = url;
   if(url.isLocalFile()) {
-    filename = url.path();
+    filename = url.toLocalFile();
 
   } else {
     bool rc;
@@ -392,7 +392,7 @@ bool MyMoneyTemplate::saveTemplate(const KUrl& url)
   }
 
   if(url.isLocalFile()) {
-    filename = url.path();
+    filename = url.toLocalFile();
     KSaveFile qfile(filename/*, 0600*/);
     if(qfile.open()) {
       saveToLocalFile(&qfile);
