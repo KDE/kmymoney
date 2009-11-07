@@ -83,8 +83,8 @@ class KBankingPlugin::Private
 {
 public:
   Private() {
-    char *p = getenv("GWEN_PROXY");
-    if(!p || (strlen(p) == 0)) {
+    QString gwenProxy = QString::fromLocal8Bit(qgetenv("GWEN_PROXY"));
+    if(gwenProxy.isEmpty()) {
       KConfig *cfg = new KConfig("kioslaverc");
       QRegExp exp("(\\w+://)?(.*)");
       QString proxy;
