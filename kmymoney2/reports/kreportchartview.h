@@ -75,6 +75,17 @@ public:
   */
   void drawPivotChart(const PivotGrid &grid, const MyMoneyReport &config, int numberColumns, const QStringList& columnHeadings, const QList<ERowType>& rowTypeList, const QStringList& columnTypeHeaderList);
 
+/**
+  * Draw a limit chart
+  * @param limit is either a maximum credit or minimum balance for an account
+  */
+  void drawLimitLine(const double limit);
+
+/**
+  * Remove the chart legend
+  */
+  void removeLegend(void);
+
 protected:
 /**
   * This is an overload method needed to capture the mouse events

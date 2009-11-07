@@ -38,7 +38,7 @@ class KBalanceChartDlg : public KDialog
 {
   Q_OBJECT
   public:
-    explicit KBalanceChartDlg(const MyMoneyAccount& account, QWidget* parent = 0, const char* name = 0);
+    explicit KBalanceChartDlg(const MyMoneyAccount& account, QWidget* parent = 0);
     ~KBalanceChartDlg();
 
 };

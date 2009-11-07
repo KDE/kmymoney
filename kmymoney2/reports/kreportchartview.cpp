@@ -545,3 +545,20 @@ void KReportChartView::setLineWidth(const int lineWidth)
     }
   }
 }
+
+void KReportChartView::drawLimitLine(const double limit)
+{
+  //we get the current number of rows and we add one after that
+  int row = m_model.rowCount();
+
+  for(int col = 0; col < m_numColumns; ++col) {
+    setDataCell(row, col, limit);
+  }
+//TODO: add format to the line
+}
+
+void KReportChartView::removeLegend( void )
+{
+  Legend* chartLegend = legend();
+  delete chartLegend;
+}

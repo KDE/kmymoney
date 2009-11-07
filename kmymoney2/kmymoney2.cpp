@@ -2142,6 +2142,8 @@ void KMyMoney2App::slotAccountChart(void)
 {
   if(!d->m_selectedAccount.id().isEmpty()) {
     QPointer<KBalanceChartDlg> dlg = new KBalanceChartDlg(d->m_selectedAccount, this);
+    dlg->setButtons( KDialog::Ok);
+    dlg->setButtonsOrientation(Qt::Horizontal);
     dlg->exec();
     delete dlg;
   }
