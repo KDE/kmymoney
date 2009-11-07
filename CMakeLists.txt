@@ -220,9 +220,11 @@ ENDIF()
 
 # tells gcc to enable exception handling
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${KDE4_ENABLE_EXCEPTIONS}")
-IF(NOT MSVC)
+IF(NOT WIN32)
   # use position independent code
   SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
+ENDIF(NOT WIN32)
+IF(NOT MSVC)
   # be more pedantic about common symbols
   SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-common")
 
