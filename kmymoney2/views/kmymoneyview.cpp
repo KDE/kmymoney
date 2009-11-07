@@ -911,8 +911,8 @@ bool KMyMoneyView::initializeStorage()
   KConfigGroup grp = config->group("General Options");
 
   if(KMyMoneyGlobalSettings::startLastViewSelected() != 0) {
-    KConfigGroup grp2 = config->group("Last Use Settings");
-    pageIndex = grp2.readEntry("LastViewSelected", 0);
+    KConfigGroup _grp2 = config->group("Last Use Settings");
+    pageIndex = _grp2.readEntry("LastViewSelected", 0);
     page = m_model->item(m_model->index(pageIndex, 0));
   } else {
     page = m_homeViewFrame;
