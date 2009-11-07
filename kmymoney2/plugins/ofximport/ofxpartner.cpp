@@ -44,8 +44,14 @@
 #include <kmessagebox.h>
 
 // ----------------------------------------------------------------------------
-// Project Includes
+// Some standard defined stuff collides with libofx.h
+#ifdef Q_CC_MSVC
+#undef ERROR
+#undef DELETE
+#endif
 
+// ----------------------------------------------------------------------------
+// Project Includes
 #include "ofxpartner.h"
 
 namespace OfxPartner
