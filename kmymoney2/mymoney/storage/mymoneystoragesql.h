@@ -351,9 +351,12 @@ class MyMoneyDbTable {
     typedef QList<KSharedPtr <MyMoneyDbColumn> >::const_iterator field_iterator;
     inline field_iterator begin(void) const {return m_fields.constBegin();}
     inline field_iterator end(void) const {return m_fields.constEnd(); }
+
+    int fieldNumber (const QString& name) const;
   private:
     QString m_name;
     QList<KSharedPtr <MyMoneyDbColumn> > m_fields;
+    QHash<QString, int> m_fieldOrder;
 
     typedef QList<MyMoneyDbIndex>::const_iterator index_iterator;
     QList<MyMoneyDbIndex> m_indices;
@@ -545,7 +548,7 @@ public:
   void removeBudget(const MyMoneyBudget& bud);
 
   unsigned long transactionCount  (const QString& aid = QString()) const;
-  inline const QMap<QString, unsigned long> transactionCountMap () const
+  inline const QHash<QString, unsigned long> transactionCountMap () const
       {return (m_transactionCountMap);};
   /**
     * the storage manager also needs the following read entry points
@@ -556,8 +559,8 @@ public:
   const QMap<QString, MyMoneySecurity> fetchCurrencies (const QStringList& idList = QStringList (), bool forUpdate = false) const;
   const QMap<QString, MyMoneyInstitution> fetchInstitutions (const QStringList& idList = QStringList (), bool forUpdate = false) const;
   const QMap<QString, MyMoneyPayee> fetchPayees (const QStringList& idList = QStringList (), bool forUpdate = false) const;
-  const  MyMoneyPriceList fetchPrices (const QStringList& fromIdList = QStringList (), const QStringList& toIdList = QStringList(), bool forUpdate = false) const;
-  const  MyMoneyPrice fetchSinglePrice (const QString& fromIdList, const QString& toIdList, const QDate& date, bool exactDate, bool forUpdate = false) const;
+  const MyMoneyPriceList fetchPrices (const QStringList& fromIdList = QStringList (), const QStringList& toIdList = QStringList(), bool forUpdate = false) const;
+  const MyMoneyPrice fetchSinglePrice (const QString& fromIdList, const QString& toIdList, const QDate& date, bool exactDate, bool forUpdate = false) const;
   const QMap<QString, MyMoneyReport> fetchReports (const QStringList& idList = QStringList (), bool forUpdate = false) const;
   const QMap<QString, MyMoneySchedule> fetchSchedules (const QStringList& idList = QStringList (), bool forUpdate = false) const;
   const QMap<QString, MyMoneySecurity> fetchSecurities (const QStringList& idList = QStringList (), bool forUpdate = false) const;
@@ -566,7 +569,7 @@ public:
   bool isReferencedByTransaction(const QString& id) const;
 
   void readPayees(const QString&);
-  void readPayees(const QList<QString> payeeList = QList<QString>());
+  void readPayees(const QList<QString>& payeeList = QList<QString>());
   void readTransactions(const MyMoneyTransactionFilter& filter);
   void setProgressCallback(void(*callback)(int, int, const QString&));
 
@@ -640,8 +643,7 @@ private:
   void writeReport (const MyMoneyReport& rep, MyMoneySqlQuery& q);
   void writeBudget (const MyMoneyBudget& bud, MyMoneySqlQuery& q);
   void writeKeyValuePairs(const QString& kvpType, const QString& kvpId, const QMap<QString, QString>& pairs);
-  void writeKeyValuePair(const QString& kvpType, const QString& kvpId,
-                         const QString& kvpKey, const QString& kvpData);
+
   // read routines
   void readFileInfo(void);
   void readLogonData(void);
@@ -653,7 +655,7 @@ private:
   void readTransaction(MyMoneyTransaction &tx, const QString& tid);
   void readSplit (MyMoneySplit& s, const MyMoneySqlQuery& q, const MyMoneyDbTable& t) const;
   const MyMoneyKeyValueContainer readKeyValuePairs (const QString& kvpType, const QString& kvpId) const;
-  const QMap<QString, MyMoneyKeyValueContainer> readKeyValuePairs (const QString& kvpType, const QStringList& kvpIdList) const;
+  const QHash<QString, MyMoneyKeyValueContainer> readKeyValuePairs (const QString& kvpType, const QStringList& kvpIdList) const;
   void readSchedules(void);
   void readSecurities(void);
   void readPrices(void);
@@ -804,7 +806,7 @@ private:
     * probably be moved into the MyMoneyAccount object; maybe we will do that once
     * the database code has been properly checked out
     */
-  QMap<QString, unsigned long> m_transactionCountMap;
+  QHash<QString, unsigned long> m_transactionCountMap;
   /**
     * These member variables hold the user name and date/time of logon
     */

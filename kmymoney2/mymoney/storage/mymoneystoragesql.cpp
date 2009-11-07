@@ -44,7 +44,7 @@
 // Project Includes
 
 #include "imymoneyserialize.h"
-#include <kmymoneyglobalsettings.h>
+#include "kmymoneyglobalsettings.h"
 
 
 #define TRY try {
@@ -69,9 +69,10 @@ MyMoneySqlQuery::~MyMoneySqlQuery () {
 bool MyMoneySqlQuery::exec () {
   TRACE(QString("start sql - %1").arg(lastQuery()).toLatin1());
   bool rc = QSqlQuery::exec();
-  QString msg("end sql\n%1\n***Query returned %2, row count %3");
-  TRACE (msg.arg(QSqlQuery::executedQuery()).arg(rc).arg(numRowsAffected()).toLatin1());
-  //DBG (QString("%1\n***Query returned %2, row count %3").arg(QSqlQuery::executedQuery()).arg(rc).arg(size()));
+  TRACE (QString("end sql\n%1\n***Query returned %2, row count %3")
+      .arg(QSqlQuery::executedQuery())
+      .arg(rc)
+      .arg(numRowsAffected()).toLatin1());
   return (rc);
 }
 
@@ -156,10 +157,7 @@ MyMoneyStorageSql::MyMoneyStorageSql (IMyMoneySerialize *storage, const KUrl& ur
   : QSqlDatabase(url.queryItem("driver")) {
   DBG("*** Entering MyMoneyStorageSql::MyMoneyStorageSql");
   m_storage = storage;
-/*  init();
-}
 
-void MyMoneyStorageSql::init(void) {*/
   m_storagePtr = dynamic_cast<IMyMoneyStorage*>(m_storage);
   m_dbVersion = 0;
   m_progressCallback = 0;
@@ -577,7 +575,7 @@ int MyMoneyStorageSql::upgradeToV1() {
     lastAcc = thisAcc;
     lastTx = thisTx;
   }
-  QMap<QString, unsigned long>::ConstIterator itm;
+  QHash<QString, unsigned long>::ConstIterator itm;
   q.prepare("UPDATE kmmAccounts SET transactionCount = :txCount WHERE id = :id;");
   for (itm = m_transactionCountMap.constBegin(); itm != m_transactionCountMap.constEnd(); ++itm) {
     q.bindValue (":txCount", QString::number(itm.value()));
@@ -2241,22 +2239,30 @@ void MyMoneyStorageSql::writeFileInfo() {
 // **** Key/value pairs ****
 void MyMoneyStorageSql::writeKeyValuePairs(const QString& kvpType, const QString& kvpId, const QMap<QString,  QString>& pairs) {
   DBG("*** Entering MyMoneyStorageSql::writeKeyValuePairs");
+
+  if (pairs.empty())
+    return;
+
+  QVariantList type;
+  QVariantList id;
+  QVariantList key;
+  QVariantList value;
+
   QMap<QString, QString>::ConstIterator it;
   for(it = pairs.begin(); it != pairs.end(); ++it) {
-    writeKeyValuePair (kvpType, kvpId, it.key(), it.value());
+    type << kvpType;
+    id << kvpId;
+    key << it.key();
+    value << it.value();
   }
-}
-
-void MyMoneyStorageSql::writeKeyValuePair (const QString& kvpType, const QString& kvpId, const QString& kvpKey, const QString& kvpData) {
-  DBG("*** Entering MyMoneyStorageSql::writeKeyValuePair");
   MyMoneySqlQuery q(this);
   q.prepare (m_db.m_tables["kmmKeyValuePairs"].insertString());
-  q.bindValue(":kvpType", kvpType);
-  q.bindValue(":kvpId", kvpId);
-  q.bindValue(":kvpKey", kvpKey);
-  q.bindValue(":kvpData", kvpData);
-  if (!q.exec()) throw new MYMONEYEXCEPTION(buildError (q, Q_FUNC_INFO, QString("writing KVP")));
-  ++m_kvps;
+  q.bindValue(":kvpType", type);
+  q.bindValue(":kvpId", id);
+  q.bindValue(":kvpKey", key);
+  q.bindValue(":kvpData", value);
+  if (!q.execBatch()) throw new MYMONEYEXCEPTION(buildError (q, Q_FUNC_INFO, QString("writing KVP")));
+  m_kvps += pairs.size();
 }
 
 void MyMoneyStorageSql::deleteKeyValuePairs (const QString& kvpType, const QString& kvpId) {
@@ -2270,12 +2276,11 @@ void MyMoneyStorageSql::deleteKeyValuePairs (const QString& kvpType, const QStri
 }
 
 //******************************** read SQL routines **************************************
-#define CASE(a) if ((*ft)->name() == #a)
-#define GETSTRING q.value(i).toString()
-#define GETDATE getDate(GETSTRING)
-#define GETDATETIME getDateTime(GETSTRING)
-#define GETINT q.value(i).toInt()
-#define GETULL q.value(i).toULongLong()
+#define GETSTRING(a) q.value(a).toString()
+#define GETDATE(a) getDate(GETSTRING(a))
+#define GETDATETIME(a) getDateTime(GETSTRING(a))
+#define GETINT(a) q.value(a).toInt()
+#define GETULL(a) q.value(a).toULongLong()
 
 void MyMoneyStorageSql::readFileInfo(void) {
   DBG("*** Entering MyMoneyStorageSql::readFileInfo");
@@ -2285,40 +2290,33 @@ void MyMoneyStorageSql::readFileInfo(void) {
   q.prepare (t.selectAllString());
   if (!q.exec()) throw new MYMONEYEXCEPTION(buildError (q, Q_FUNC_INFO, QString("reading FileInfo")));
   if (!q.next()) throw new MYMONEYEXCEPTION(buildError (q, Q_FUNC_INFO, QString("retrieving FileInfo")));
-  MyMoneyDbTable::field_iterator ft = t.begin();
-  int i = 0;
-  while (ft != t.end()) {
-    // versioning is now handled in open routine
-/*    CASE(version)  setVersion(GETSTRING); // check version == current version...
-    else*/
-    CASE(created) m_storage->setCreationDate(GETDATE);
-    else CASE(lastModified) m_storage->setLastModificationDate(GETDATE);
-    else CASE(hiInstitutionId) m_hiIdInstitutions = (unsigned long) GETULL;
-    else CASE(hiPayeeId)       m_hiIdPayees = (unsigned long) GETULL;
-    else CASE(hiAccountId)     m_hiIdAccounts = (unsigned long) GETULL;
-    else CASE(hiTransactionId) m_hiIdTransactions = (unsigned long) GETULL;
-    else CASE(hiScheduleId)    m_hiIdSchedules = (unsigned long) GETULL;
-    else CASE(hiSecurityId)    m_hiIdSecurities = (unsigned long) GETULL;
-    else CASE(hiReportId  )    m_hiIdReports = (unsigned long) GETULL;
-    else CASE(hiBudgetId  )    m_hiIdBudgets = (unsigned long) GETULL;
-    else CASE(institutions) m_institutions = (unsigned long) GETULL;
-    else CASE(accounts    ) m_accounts = (unsigned long) GETULL;
-    else CASE(payees      ) m_payees = (unsigned long) GETULL;
-    else CASE(transactions) m_transactions = (unsigned long) GETULL;
-    else CASE(splits      ) m_splits = (unsigned long) GETULL;
-    else CASE(securities  ) m_securities = (unsigned long) GETULL;
-    else CASE(currencies  ) m_currencies = (unsigned long) GETULL;
-    else CASE(schedules   ) m_schedules = (unsigned long) GETULL;
-    else CASE(prices      ) m_prices = (unsigned long) GETULL;
-    else CASE(kvps        ) m_kvps = (unsigned long) GETULL;
-    else CASE(reports     ) m_reports = (unsigned long) GETULL;
-    else CASE(budgets     ) m_budgets = (unsigned long) GETULL;
-    else CASE(encryptData) m_encryptData = GETSTRING;
-    else CASE(logonUser)  m_logonUser = GETSTRING;
-    else CASE(logonAt)  m_logonAt = GETDATETIME;
-    ++ft; ++i;
-    signalProgress(i,0);
-  }
+  QSqlRecord rec = q.record();
+  m_storage->setCreationDate(GETDATE(t.fieldNumber("created")));
+  m_storage->setLastModificationDate(GETDATE(t.fieldNumber("lastModified")));
+  m_hiIdInstitutions = (unsigned long) GETULL(t.fieldNumber("hiInstitutionId"));
+  m_hiIdPayees = (unsigned long) GETULL(t.fieldNumber("hiPayeeId"));
+  m_hiIdAccounts = (unsigned long) GETULL(t.fieldNumber("hiAccountId"));
+  m_hiIdTransactions = (unsigned long) GETULL(t.fieldNumber("hiTransactionId"));
+  m_hiIdSchedules = (unsigned long) GETULL(t.fieldNumber("hiScheduleId"));
+  m_hiIdSecurities = (unsigned long) GETULL(t.fieldNumber("hiSecurityId"));
+  m_hiIdReports = (unsigned long) GETULL(t.fieldNumber("hiReportId"));
+  m_hiIdBudgets = (unsigned long) GETULL(t.fieldNumber("hiBudgetId"));
+  m_institutions = (unsigned long) GETULL(t.fieldNumber("institutions"));
+  m_accounts = (unsigned long) GETULL(t.fieldNumber("accounts"));
+  m_payees = (unsigned long) GETULL(t.fieldNumber("payees"));
+  m_transactions = (unsigned long) GETULL(t.fieldNumber("transactions"));
+  m_splits = (unsigned long) GETULL(t.fieldNumber("splits"));
+  m_securities = (unsigned long) GETULL(t.fieldNumber("securities"));
+  m_currencies = (unsigned long) GETULL(t.fieldNumber("currencies"));
+  m_schedules = (unsigned long) GETULL(t.fieldNumber("schedules"));
+  m_prices = (unsigned long) GETULL(t.fieldNumber("prices"));
+  m_kvps = (unsigned long) GETULL(t.fieldNumber("kvps"));
+  m_reports = (unsigned long) GETULL(t.fieldNumber("reports"));
+  m_budgets = (unsigned long) GETULL(t.fieldNumber("budgets"));
+  m_encryptData = GETSTRING(t.fieldNumber("encryptData"));
+  m_logonUser = GETSTRING(t.fieldNumber("logonUser"));
+  m_logonAt = GETDATETIME(t.fieldNumber("logonAt"));
+  signalProgress(1,0);
   m_storage->setPairs(readKeyValuePairs("STORAGE", QString("")).pairs());
 }
 
@@ -2359,7 +2357,7 @@ const QMap<QString, MyMoneyInstitution> MyMoneyStorageSql::fetchInstitutions (co
   if (! idList.empty()) {
     queryString += " WHERE";
     for (int i = 0; i < idList.count(); ++i)
-      queryString += " id = :id" + QString::number(i) + " OR";
+      queryString += QString(" id = :id%1 OR").arg(i);
     queryString = queryString.left(queryString.length() - 2);
   }
   if (forUpdate)
@@ -2372,27 +2370,30 @@ const QMap<QString, MyMoneyInstitution> MyMoneyStorageSql::fetchInstitutions (co
   if (! idList.empty()) {
     QStringList::ConstIterator bindVal = idList.begin();
     for (int i = 0; bindVal != idList.end(); ++i, ++bindVal) {
-      q.bindValue (":id" + QString::number(i), *bindVal);
+      q.bindValue (QString(":id%1").arg(i), *bindVal);
     }
   }
 
   if (!q.exec()) throw new MYMONEYEXCEPTION(buildError (q, Q_FUNC_INFO, QString("reading Institution")));
+  int idCol = t.fieldNumber("id");
+  int nameCol = t.fieldNumber("name");
+  int managerCol = t.fieldNumber("manager");
+  int routingCodeCol = t.fieldNumber("routingCode");
+  int addressStreetCol = t.fieldNumber("addressStreet");
+  int addressCityCol = t.fieldNumber("addressCity");
+  int addressZipcodeCol = t.fieldNumber("addressZipcode");
+  int telephoneCol = t.fieldNumber("telephone");
+
   while (q.next()) {
-    MyMoneyDbTable::field_iterator ft = t.begin();
-    int i = 0;
-    QString iid;
     MyMoneyInstitution inst;
-    while (ft != t.end()) {
-      CASE(id) iid = GETSTRING;
-      else CASE(name) inst.setName(GETSTRING);
-      else CASE(manager) inst.setManager(GETSTRING);
-      else CASE(routingCode) inst.setSortcode(GETSTRING);
-      else CASE(addressStreet) inst.setStreet(GETSTRING);
-      else CASE(addressCity) inst.setCity(GETSTRING);
-      else CASE(addressZipcode) inst.setPostcode(GETSTRING);
-      else CASE(telephone)  inst.setTelephone(GETSTRING);
-      ++ft; ++i;
-    }
+    QString iid = GETSTRING(idCol);
+    inst.setName(GETSTRING(nameCol));
+    inst.setManager(GETSTRING(managerCol));
+    inst.setSortcode(GETSTRING(routingCodeCol));
+    inst.setStreet(GETSTRING(addressStreetCol));
+    inst.setCity(GETSTRING(addressCityCol));
+    inst.setPostcode(GETSTRING(addressZipcodeCol));
+    inst.setTelephone(GETSTRING(telephoneCol));
     // get list of subaccounts
     sq.bindValue(":id", iid);
     if (!sq.exec()) throw new MYMONEYEXCEPTION(buildError (q, Q_FUNC_INFO, QString("reading Institution AccountList")));
@@ -2418,7 +2419,7 @@ void MyMoneyStorageSql::readPayees (const QString& id) {
   readPayees(list);
 }
 
-void MyMoneyStorageSql::readPayees(const QList<QString> pid) {
+void MyMoneyStorageSql::readPayees(const QList<QString>& pid) {
   DBG("*** Entering MyMoneyStorageSql::readPayees(list)");
   TRY
   //QStringList pidList(pid);
@@ -2445,7 +2446,6 @@ const QMap<QString, MyMoneyPayee> MyMoneyStorageSql::fetchPayees (const QStringL
   QMap<QString, MyMoneyPayee> pList;
   //unsigned long lastId;
   const MyMoneyDbTable& t = m_db.m_tables["kmmPayees"];
-  MyMoneyDbTable::field_iterator payeeEnd = t.end();
   MyMoneySqlQuery q(const_cast <MyMoneyStorageSql*> (this));
   if (idList.isEmpty()) {
     q.prepare (t.selectAllString());
@@ -2453,7 +2453,7 @@ const QMap<QString, MyMoneyPayee> MyMoneyStorageSql::fetchPayees (const QStringL
     QString whereClause = " where (";
     QString itemConnector = "";
     QStringList::ConstIterator it;
-    for (it = idList.begin(); it != idList.end(); ++it) {
+    for (it = idList.constBegin(); it != idList.constEnd(); ++it) {
       whereClause.append(QString("%1id = '%2'").arg(itemConnector).arg(*it));
       itemConnector = " or ";
     }
@@ -2461,32 +2461,43 @@ const QMap<QString, MyMoneyPayee> MyMoneyStorageSql::fetchPayees (const QStringL
     q.prepare (t.selectAllString(false) + whereClause);
   }
   if (!q.exec()) throw new MYMONEYEXCEPTION(buildError (q, Q_FUNC_INFO, QString("reading Payee")));
+  int idCol = t.fieldNumber("id");
+  int nameCol = t.fieldNumber("name");
+  int referenceCol = t.fieldNumber("reference");
+  int emailCol = t.fieldNumber("email");
+  int addressStreetCol = t.fieldNumber("addressStreet");
+  int addressCityCol = t.fieldNumber("addressCity");
+  int addressZipcodeCol = t.fieldNumber("addressZipcode");
+  int addressStateCol = t.fieldNumber("addressState");
+  int telephoneCol = t.fieldNumber("telephone");
+  int notesCol = t.fieldNumber("notes");
+  int defaultAccountIdCol = t.fieldNumber("defaultAccountId");
+  int matchDataCol = t.fieldNumber("matchData");
+  int matchIgnoreCaseCol = t.fieldNumber("matchIgnoreCase");
+  int matchKeysCol = t.fieldNumber("matchKeys");
+
   while (q.next()) {
-    MyMoneyDbTable::field_iterator ft = t.begin();
-    int i = 0;
     QString pid;
     QString boolChar;
     MyMoneyPayee payee;
     unsigned int type;
     bool ignoreCase;
     QString matchKeys;
-    while (ft != payeeEnd) {
-      CASE(id) pid = GETSTRING;
-      else CASE(name) payee.setName(GETSTRING);
-      else CASE(reference) payee.setReference(GETSTRING);
-      else CASE(email) payee.setEmail(GETSTRING);
-      else CASE(addressStreet) payee.setAddress(GETSTRING);
-      else CASE(addressCity) payee.setCity(GETSTRING);
-      else CASE(addressZipcode) payee.setPostcode(GETSTRING);
-      else CASE(addressState) payee.setState(GETSTRING);
-      else CASE(telephone) payee.setTelephone(GETSTRING);
-      else CASE(notes) payee.setNotes(GETSTRING);
-      else CASE(defaultAccountId) payee.setDefaultAccountId(GETSTRING);
-      else CASE(matchData) type = GETINT;
-      else CASE(matchIgnoreCase) ignoreCase = (GETSTRING == "Y");
-      else CASE(matchKeys) matchKeys = GETSTRING;
-      ++ft; ++i;
-    }
+    pid = GETSTRING(idCol);
+    payee.setName(GETSTRING(nameCol));
+    payee.setReference(GETSTRING(referenceCol));
+    payee.setEmail(GETSTRING(emailCol));
+    payee.setAddress(GETSTRING(addressStreetCol));
+    payee.setCity(GETSTRING(addressCityCol));
+    payee.setPostcode(GETSTRING(addressZipcodeCol));
+    payee.setState(GETSTRING(addressStateCol));
+    payee.setTelephone(GETSTRING(telephoneCol));
+    payee.setNotes(GETSTRING(notesCol));
+    payee.setDefaultAccountId(GETSTRING(defaultAccountIdCol));
+    type = GETINT(matchDataCol);
+    ignoreCase = (GETSTRING(matchIgnoreCaseCol) == "Y");
+    matchKeys = GETSTRING(matchKeysCol);
+
     payee.setMatchData (static_cast<MyMoneyPayee::payeeMatchType>(type), ignoreCase, matchKeys);
     if (pid == "USER") {
       TRY
@@ -2511,7 +2522,6 @@ const QMap<QString, MyMoneyAccount> MyMoneyStorageSql::fetchAccounts (const QStr
   QStringList kvpAccountList;
 
   const MyMoneyDbTable& t = m_db.m_tables["kmmAccounts"];
-  MyMoneyDbTable::field_iterator accEnd = t.end();
   MyMoneySqlQuery q(const_cast <MyMoneyStorageSql*> (this));
   MyMoneySqlQuery sq(const_cast <MyMoneyStorageSql*> (this));
 
@@ -2525,8 +2535,8 @@ const QMap<QString, MyMoneyAccount> MyMoneyStorageSql::fetchAccounts (const QStr
     queryString += " WHERE id IN (";
     childQueryString += " parentId IN (";
     for (int i = 0; i < idList.count(); ++i) {
-      queryString += " :id" + QString::number(i) + ", ";
-      childQueryString += ":id" + QString::number(i) + ", ";
+      queryString += QString(":id%1, ").arg(i);
+      childQueryString += QString(":id%1, ").arg(i);
     }
     queryString = queryString.left(queryString.length() - 2) + ')';
     childQueryString = childQueryString.left(childQueryString.length() - 2) + ')';
@@ -2546,39 +2556,54 @@ const QMap<QString, MyMoneyAccount> MyMoneyStorageSql::fetchAccounts (const QStr
   sq.prepare (childQueryString);
 
   if (! idList.empty()) {
-    QStringList::ConstIterator bindVal = idList.begin();
-    for (int i = 0; bindVal != idList.end(); ++i, ++bindVal) {
-      q.bindValue (":id" + QString::number(i), *bindVal);
-      sq.bindValue (":id" + QString::number(i), *bindVal);
+    QStringList::ConstIterator bindVal = idList.constBegin();
+    for (int i = 0; bindVal != idList.constEnd(); ++i, ++bindVal) {
+      q.bindValue (QString(":id%1").arg(i), *bindVal);
+      sq.bindValue (QString(":id%1").arg(i), *bindVal);
     }
   }
 
   if (!q.exec()) throw new MYMONEYEXCEPTION(buildError (q, Q_FUNC_INFO, QString("reading Account")));
   if (!sq.exec()) throw new MYMONEYEXCEPTION(buildError (q, Q_FUNC_INFO, QString("reading subAccountList")));
+
+  // Reserve enough space for all values. Approximate it with the size of the
+  // idList in case the db doesn't support reporting the size of the
+  // resultset to the caller.
+  //FIXME: this is for if/when there is a QHash conversion
+  //accList.reserve(q.size() > 0 ? q.size() : idList.size());
+
+  int idCol = t.fieldNumber("id");
+  int institutionIdCol = t.fieldNumber("institutionId");
+  int parentIdCol = t.fieldNumber("parentId");
+  int lastReconciledCol = t.fieldNumber("lastReconciled");
+  int lastModifiedCol = t.fieldNumber("lastModified");
+  int openingDateCol = t.fieldNumber("openingDate");
+  int accountNumberCol = t.fieldNumber("accountNumber");
+  int accountTypeCol = t.fieldNumber("accountType");
+  int accountNameCol = t.fieldNumber("accountName");
+  int descriptionCol = t.fieldNumber("description");
+  int currencyIdCol = t.fieldNumber("currencyId");
+  int balanceCol = t.fieldNumber("balance");
+  int transactionCountCol = t.fieldNumber("transactionCount");
+
   while (q.next()) {
-    MyMoneyDbTable::field_iterator ft = t.begin();
-    int i = 0;
     QString aid;
     QString balance;
     MyMoneyAccount acc;
 
-    while (ft != accEnd) {
-      CASE(id) aid = GETSTRING;
-      else CASE(institutionId) acc.setInstitutionId(GETSTRING);
-      else CASE(parentId) acc.setParentAccountId(GETSTRING);
-      else CASE(lastReconciled) acc.setLastReconciliationDate(GETDATE);
-      else CASE(lastModified) acc.setLastModified(GETDATE);
-      else CASE(openingDate) acc.setOpeningDate(GETDATE);
-      else CASE(accountNumber) acc.setNumber(GETSTRING);
-      else CASE(accountType) acc.setAccountType(static_cast<MyMoneyAccount::accountTypeE>(GETINT));
-      else CASE(accountName) acc.setName(GETSTRING);
-      else CASE(description) acc.setDescription(GETSTRING);
-      else CASE(currencyId) acc.setCurrencyId(GETSTRING);
-      else CASE(balance) acc.setBalance(GETSTRING);
-      else CASE(transactionCount)
-        const_cast <MyMoneyStorageSql*> (this)->m_transactionCountMap[aid] = (unsigned long) GETULL;
-      ++ft; ++i;
-    }
+    aid = GETSTRING(idCol);
+    acc.setInstitutionId(GETSTRING(institutionIdCol));
+    acc.setParentAccountId(GETSTRING(parentIdCol));
+    acc.setLastReconciliationDate(GETDATE(lastReconciledCol));
+    acc.setLastModified(GETDATE(lastModifiedCol));
+    acc.setOpeningDate(GETDATE(openingDateCol));
+    acc.setNumber(GETSTRING(accountNumberCol));
+    acc.setAccountType(static_cast<MyMoneyAccount::accountTypeE>(GETINT(accountTypeCol)));
+    acc.setName(GETSTRING(accountNameCol));
+    acc.setDescription(GETSTRING(descriptionCol));
+    acc.setCurrencyId(GETSTRING(currencyIdCol));
+    acc.setBalance(GETSTRING(balanceCol));
+    const_cast <MyMoneyStorageSql*> (this)->m_transactionCountMap[aid] = (unsigned long) GETULL(transactionCountCol);
 
     // Process any key value pair
     if (idList.empty())
@@ -2611,16 +2636,16 @@ const QMap<QString, MyMoneyAccount> MyMoneyStorageSql::fetchAccounts (const QStr
   // where it may be able to be done in O(n), if things are just right.
   // The operator[] call in the loop is the most expensive call in this function, according
   // to several profile runs.
-  QMap <QString, MyMoneyKeyValueContainer> kvpResult = readKeyValuePairs("ACCOUNT", kvpAccountList);
-  QMap <QString, MyMoneyKeyValueContainer>::const_iterator kvp_end = kvpResult.constEnd();
-  for (QMap <QString, MyMoneyKeyValueContainer>::const_iterator it_kvp = kvpResult.constBegin();
+  QHash <QString, MyMoneyKeyValueContainer> kvpResult = readKeyValuePairs("ACCOUNT", kvpAccountList);
+  QHash <QString, MyMoneyKeyValueContainer>::const_iterator kvp_end = kvpResult.constEnd();
+  for (QHash <QString, MyMoneyKeyValueContainer>::const_iterator it_kvp = kvpResult.constBegin();
          it_kvp != kvp_end; ++it_kvp) {
     accList[it_kvp.key()].setPairs(it_kvp.value().pairs());
   }
 
   kvpResult = readKeyValuePairs("ONLINEBANKING", kvpAccountList);
   kvp_end = kvpResult.constEnd();
-  for (QMap <QString, MyMoneyKeyValueContainer>::const_iterator it_kvp = kvpResult.constBegin();
+  for (QHash <QString, MyMoneyKeyValueContainer>::const_iterator it_kvp = kvpResult.constBegin();
          it_kvp != kvp_end; ++it_kvp) {
     accList[it_kvp.key()].setOnlineBankingSettings(it_kvp.value());
   }
@@ -2641,9 +2666,9 @@ const QMap<QString, MyMoneyMoney> MyMoneyStorageSql::fetchBalance(const QStringL
                         "FROM kmmSplits WHERE txType = 'N' AND accountId in (";
 
   for (int i = 0; i < idList.count(); ++i) {
-    queryString += " :id" + QString::number(i) + ", ";
+    queryString += QString(":id%1, ").arg(i);
   }
-  queryString = queryString.left(queryString.length() - 2) + " )";
+  queryString = queryString.left(queryString.length() - 2) + ')';
 
   // SQLite stores dates as YYYY-MM-DDTHH:mm:ss with 0s for the time part. This makes
   // the <= operator misbehave when the date matches. To avoid this, add a day to the
@@ -2653,21 +2678,21 @@ const QMap<QString, MyMoneyMoney> MyMoneyStorageSql::fetchBalance(const QStringL
   DBG (queryString);
   q.prepare(queryString);
 
-  QStringList::ConstIterator bindVal = idList.begin();
-  for (int i = 0; bindVal != idList.end(); ++i, ++bindVal) {
-    q.bindValue (":id" + QString::number(i), *bindVal);
-    returnValue[*bindVal] = MyMoneyMoney(0);
+  int i = 0;
+  foreach (QString bindVal, idList) {
+    q.bindValue (QString(":id%1").arg(i), bindVal);
+    returnValue[bindVal] = MyMoneyMoney(0);
+    ++i;
   }
+
   if (!q.exec())
     throw new MYMONEYEXCEPTION(buildError (q, Q_FUNC_INFO, QString("fetching balance")));
   QString id;
   QString shares;
-  QString action;
   while (q.next()) {
     id = q.value(2).toString();
     shares = q.value(1).toString();
-    action = q.value(0).toString();
-    if (MyMoneySplit::ActionSplitShares == action)
+    if (MyMoneySplit::ActionSplitShares == q.value(0).toString())
       returnValue[id] = returnValue[id] * MyMoneyMoney(shares);
     else
       returnValue[id] += MyMoneyMoney(shares);
@@ -2695,8 +2720,7 @@ const QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions (co
   if (m_displayStatus) signalProgress(0, m_transactions, QObject::tr("Loading transactions..."));
   int progress = 0;
 //  m_payeeList.clear();
-  QString whereClause;
-  whereClause = " WHERE txType = 'N' ";
+  QString whereClause = " WHERE txType = 'N' ";
   if (! tidList.isEmpty()) {
     whereClause += " AND id IN " + tidList;
   }
@@ -2726,22 +2750,25 @@ const QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions (co
   }
   QMap <QString, MyMoneyTransaction> txMap;
   QStringList txList;
-  MyMoneyDbTable::field_iterator txEnd = t.end();
+  int idCol = t.fieldNumber("id");
+  int postDateCol = t.fieldNumber("postDate");
+  int memoCol = t.fieldNumber("memo");
+  int entryDateCol = t.fieldNumber("entryDate");
+  int currencyIdCol = t.fieldNumber("currencyId");
+  int bankIdCol = t.fieldNumber("bankId");
+
   while (q.next()) {
     MyMoneyTransaction tx;
-    QString txId;
-    MyMoneyDbTable::field_iterator ft = t.begin();
-    int i = 0;
-    while (ft != txEnd) {
-      CASE(id) txId = GETSTRING;
-      else CASE(postDate) tx.setPostDate(GETDATE);
-      else CASE(memo) tx.setMemo(GETSTRING);
-      else CASE(entryDate) tx.setEntryDate(GETDATE);
-      else CASE(currencyId) tx.setCommodity(GETSTRING);
-      else CASE(bankId) tx.setBankID(GETSTRING);
-      ++ft; ++i;
-    }
+    QString txId = GETSTRING(idCol);
+    tx.setPostDate(GETDATE(postDateCol));
+    tx.setMemo(GETSTRING(memoCol));
+    tx.setEntryDate(GETDATE(entryDateCol));
+    tx.setCommodity(GETSTRING(currencyIdCol));
+    tx.setBankID(GETSTRING(bankIdCol));
 
+    // skip all splits while the transaction id of the split is less than
+    // the transaction id of the current transaction. Don't forget to check
+    // for the ZZZ flag for the end of the list.
     while (txId < splitTxId && splitTxId != "ZZZ") {
       if (qs.next()) {
         splitTxId = qs.value(0).toString();
@@ -2751,6 +2778,9 @@ const QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions (co
       }
     }
 
+    // while the split transaction id matches the current transaction id,
+    // add the split to the current transaction. Set the ZZZ flag if
+    // all splits for this transaction have been read.
     while (txId == splitTxId) {
       tx.addSplit (s);
       if (qs.next()) {
@@ -2760,26 +2790,28 @@ const QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions (co
         splitTxId = "ZZZ";
       }
     }
-  // Process any key value pair
+
+    // Process any key value pair
     if (! txId.isEmpty()) {
       txList.append(txId);
       tx = MyMoneyTransaction(txId, tx);
       txMap.insert(tx.uniqueSortKey(), tx);
     }
   }
-  QMap <QString, MyMoneyKeyValueContainer> kvpMap = readKeyValuePairs("TRANSACTION", txList);
-  QMap<QString, MyMoneyTransaction> tList;
+
+  // get the kvps
+  QHash <QString, MyMoneyKeyValueContainer> kvpMap = readKeyValuePairs("TRANSACTION", txList);
   QMap<QString, MyMoneyTransaction>::Iterator txMapEnd = txMap.end();
   for (QMap<QString, MyMoneyTransaction>::Iterator i = txMap.begin();
        i != txMapEnd; ++i) {
-         i.value().setPairs(kvpMap[i.value().id()].pairs());
+    i.value().setPairs(kvpMap[i.value().id()].pairs());
 
-         if (m_displayStatus) signalProgress(++progress, 0);
-       }
+    if (m_displayStatus) signalProgress(++progress, 0);
+  }
 
-       if ((tidList.isEmpty()) && (dateClause.isEmpty())) {
-         //qDebug("setting full list read");
-       }
+  if ((tidList.isEmpty()) && (dateClause.isEmpty())) {
+    //qDebug("setting full list read");
+  }
   return txMap;
 }
 
@@ -2989,7 +3021,7 @@ const QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions (co
 
 unsigned long MyMoneyStorageSql::transactionCount (const QString& aid) const {
   DBG("*** Entering MyMoneyStorageSql::transactionCount");
-  if (aid.length() == 0)
+  if (aid.isEmpty())
     return m_transactions;
   else
     return m_transactionCountMap[aid];
@@ -2998,28 +3030,19 @@ unsigned long MyMoneyStorageSql::transactionCount (const QString& aid) const {
 void MyMoneyStorageSql::readSplit (MyMoneySplit& s, const MyMoneySqlQuery& q, const MyMoneyDbTable& t) const {
   DBG("*** Entering MyMoneyStorageSql::readSplit");
   s.clearId();
-  MyMoneyDbTable::field_iterator ft = t.begin();
-  MyMoneyDbTable::field_iterator splitEnd = t.end();
-  int i = 0;
 
-  // Use the QString here instead of CASE, since this is called so often.
-  QString fieldName;
-  while (ft != splitEnd) {
-    fieldName = (*ft)->name();
-    if (fieldName == "payeeId") s.setPayeeId(GETSTRING);
-    else if (fieldName == "reconcileDate") s.setReconcileDate(GETDATE);
-    else if (fieldName == "action") s.setAction(GETSTRING);
-    else if (fieldName == "reconcileFlag") s.setReconcileFlag(static_cast<MyMoneySplit::reconcileFlagE>(GETINT));
-    else if (fieldName == "value") s.setValue(MyMoneyMoney(QStringEmpty(GETSTRING)));
-    else if (fieldName == "shares") s.setShares(MyMoneyMoney(QStringEmpty(GETSTRING)));
-    else if (fieldName == "price") s.setPrice(MyMoneyMoney(QStringEmpty(GETSTRING)));
-    else if (fieldName == "memo") s.setMemo(GETSTRING);
-    else if (fieldName == "accountId") s.setAccountId(GETSTRING);
-    else if (fieldName == "checkNumber") s.setNumber(GETSTRING);
-    //else if (fieldName == "postDate") s.setPostDate(GETDATETIME); // FIXME - when Tom puts date into split object
-    else if (fieldName == "bankId") s.setBankID(GETSTRING);
-    ++ft; ++i;
-  }
+  s.setPayeeId(GETSTRING(t.fieldNumber("payeeId")));
+  s.setReconcileDate(GETDATE(t.fieldNumber("reconcileDate")));
+  s.setAction(GETSTRING(t.fieldNumber("action")));
+  s.setReconcileFlag(static_cast<MyMoneySplit::reconcileFlagE>(GETINT(t.fieldNumber("reconcileFlag"))));
+  s.setValue(MyMoneyMoney(QStringEmpty(GETSTRING(t.fieldNumber("value")))));
+  s.setShares(MyMoneyMoney(QStringEmpty(GETSTRING(t.fieldNumber("shares")))));
+  s.setPrice(MyMoneyMoney(QStringEmpty(GETSTRING(t.fieldNumber("price")))));
+  s.setMemo(GETSTRING(t.fieldNumber("memo")));
+  s.setAccountId(GETSTRING(t.fieldNumber("accountId")));
+  s.setNumber(GETSTRING(t.fieldNumber("checkNumber")));
+  //s.setPostDate(GETDATETIME(t.fieldNumber("postDate"))); // FIXME - when Tom puts date into split object
+  s.setBankID(GETSTRING(t.fieldNumber("bankId")));
 
   return;
 }
@@ -3069,7 +3092,7 @@ const QMap<QString, MyMoneySchedule> MyMoneyStorageSql::fetchSchedules (const QS
   if (! idList.empty()) {
     queryString += " WHERE";
     for (int i = 0; i < idList.count(); ++i)
-      queryString += " id = :id" + QString::number(i) + " OR";
+      queryString += QString(" id = :id%1 OR").arg(i);
     queryString = queryString.left(queryString.length() - 2);
   }
   queryString += " ORDER BY id;";
@@ -3084,35 +3107,43 @@ const QMap<QString, MyMoneySchedule> MyMoneyStorageSql::fetchSchedules (const QS
   if (! idList.empty()) {
     QStringList::ConstIterator bindVal = idList.begin();
     for (int i = 0; bindVal != idList.end(); ++i, ++bindVal) {
-      q.bindValue (":id" + QString::number(i), *bindVal);
+      q.bindValue (QString(":id%1").arg(i), *bindVal);
     }
   }
 
   if (!q.exec()) throw new MYMONEYEXCEPTION(buildError (q, Q_FUNC_INFO, QString("reading Schedules")));
+  int idCol = t.fieldNumber("id");
+  int nameCol = t.fieldNumber("name");
+  int typeCol = t.fieldNumber("type");
+  int occurenceCol = t.fieldNumber("occurence");
+  int occurenceMultiplierCol = t.fieldNumber("occurenceMultiplier");
+  int paymentTypeCol = t.fieldNumber("paymentType");
+  int startDateCol = t.fieldNumber("startDate");
+  int endDateCol = t.fieldNumber("endDate");
+  int fixedCol = t.fieldNumber("fixed");
+  int autoEnterCol = t.fieldNumber("autoEnter");
+  int lastPaymentCol = t.fieldNumber("lastPayment");
+  int weekendOptionCol = t.fieldNumber("weekendOption");
+  int nextPaymentDueCol = t.fieldNumber("nextPaymentDue");
+
   while (q.next()) {
-    MyMoneyDbTable::field_iterator ft = t.begin();
-    int i = 0;
     MyMoneySchedule s;
-    QString sId;
     QString boolChar;
-    QDate nextPaymentDue;
-    while (ft != t.end()) {
-      CASE(id) sId = GETSTRING;
-      else CASE(name)  s.setName (GETSTRING);
-      else CASE(type)  s.setType (static_cast<MyMoneySchedule::typeE>(GETINT));
-      else CASE(occurence)  s.setOccurrencePeriod (static_cast<MyMoneySchedule::occurrenceE>(GETINT));
-      else CASE(occurenceMultiplier) s.setOccurrenceMultiplier (GETINT);
-      else CASE(paymentType)  s.setPaymentType (static_cast<MyMoneySchedule::paymentTypeE>(GETINT));
-      else CASE(startDate)  s.setStartDate (GETDATE);
-      else CASE(endDate)  s.setEndDate (GETDATE);
-      else CASE(fixed) {boolChar = GETSTRING; s.setFixed (boolChar == "Y");}
-      else CASE(autoEnter)  {boolChar = GETSTRING; s.setAutoEnter (boolChar == "Y");}
-      else CASE(lastPayment)  s.setLastPayment (GETDATE);
-      else CASE(weekendOption)
-        s.setWeekendOption (static_cast<MyMoneySchedule::weekendOptionE>(GETINT));
-      else CASE(nextPaymentDue) nextPaymentDue = GETDATE;
-      ++ft; ++i;
-    }
+
+    QString sId = GETSTRING(idCol);
+    s.setName (GETSTRING(nameCol));
+    s.setType (static_cast<MyMoneySchedule::typeE>(GETINT(typeCol)));
+    s.setOccurrencePeriod (static_cast<MyMoneySchedule::occurrenceE>(GETINT(occurenceCol)));
+    s.setOccurrenceMultiplier (GETINT(occurenceMultiplierCol));
+    s.setPaymentType (static_cast<MyMoneySchedule::paymentTypeE>(GETINT(paymentTypeCol)));
+    s.setStartDate (GETDATE(startDateCol));
+    s.setEndDate (GETDATE(endDateCol));
+    boolChar = GETSTRING(fixedCol); s.setFixed (boolChar == "Y");
+    boolChar = GETSTRING(autoEnterCol); s.setAutoEnter (boolChar == "Y");
+    s.setLastPayment (GETDATE(lastPaymentCol));
+    s.setWeekendOption (static_cast<MyMoneySchedule::weekendOptionE>(GETINT(weekendOptionCol)));
+    QDate nextPaymentDue = GETDATE(nextPaymentDueCol);
+
     // convert simple occurrence to compound occurrence
     int mult = s.occurrenceMultiplier();
     MyMoneySchedule::occurrenceE occ = s.occurrencePeriod();
@@ -3124,23 +3155,20 @@ const QMap<QString, MyMoneySchedule> MyMoneyStorageSql::fetchSchedules (const QS
     s = _s;
     // read the associated transaction
 //    m_payeeList.clear();
+
     const MyMoneyDbTable& t = m_db.m_tables["kmmTransactions"];
-    MyMoneySqlQuery q(const_cast <MyMoneyStorageSql*> (this));
-    q.prepare (t.selectAllString(false) + " WHERE id = :id;");
-    q.bindValue(":id", s.id());
-    if (!q.exec()) throw new MYMONEYEXCEPTION(buildError (q, Q_FUNC_INFO, QString("reading Scheduled Transaction")));
-    if (!q.next()) throw new MYMONEYEXCEPTION(buildError (q, Q_FUNC_INFO, QString("retrieving scheduled transaction")));
+    MyMoneySqlQuery q2(const_cast <MyMoneyStorageSql*> (this));
+    q2.prepare (t.selectAllString(false) + " WHERE id = :id;");
+    q2.bindValue(":id", s.id());
+    if (!q2.exec()) throw new MYMONEYEXCEPTION(buildError (q2, Q_FUNC_INFO, QString("reading Scheduled Transaction")));
+    QSqlRecord rec = q2.record();
+    if (!q2.next()) throw new MYMONEYEXCEPTION(buildError (q2, Q_FUNC_INFO, QString("retrieving scheduled transaction")));
     MyMoneyTransaction tx(s.id(), MyMoneyTransaction());
-    ft = t.begin();
-    i = 0;
-    while (ft != t.end()) {
-      CASE(postDate) tx.setPostDate(GETDATE);
-      else CASE(memo) tx.setMemo(GETSTRING);
-      else CASE(entryDate) tx.setEntryDate(GETDATE);
-      else CASE(currencyId) tx.setCommodity(GETSTRING);
-      else CASE(bankId) tx.setBankID(GETSTRING);
-      ++ft; ++i;
-    }
+    tx.setPostDate(getDate(q2.value(t.fieldNumber("postDate")).toString()));
+    tx.setMemo(q2.value(t.fieldNumber("memo")).toString());
+    tx.setEntryDate(getDate(q2.value(t.fieldNumber("entryDate")).toString()));
+    tx.setCommodity(q2.value(t.fieldNumber("currencyId")).toString());
+    tx.setBankID(q2.value(t.fieldNumber("bankId")).toString());
 
     qs.bindValue(":id", s.id());
     if (!qs.exec()) throw new MYMONEYEXCEPTION(buildError (qs, Q_FUNC_INFO, "reading Scheduled Splits"));
@@ -3202,22 +3230,26 @@ const QMap<QString, MyMoneySecurity> MyMoneyStorageSql::fetchSecurities (const Q
   MyMoneySqlQuery q(const_cast <MyMoneyStorageSql*> (this));
   q.prepare (t.selectAllString(false) + " ORDER BY id;");
   if (!q.exec()) throw new MYMONEYEXCEPTION(buildError (q, Q_FUNC_INFO, QString("reading Securities")));
+  int idCol = t.fieldNumber("id");
+  int nameCol = t.fieldNumber("name");
+  int symbolCol = t.fieldNumber("symbol");
+  int typeCol = t.fieldNumber("type");
+  int smallestAccountFractionCol = t.fieldNumber("smallestAccountFraction");
+  int tradingCurrencyCol = t.fieldNumber("tradingCurrency");
+  int tradingMarketCol = t.fieldNumber("tradingMarket");
+
   while (q.next()) {
-    MyMoneyDbTable::field_iterator ft = t.begin();
-    int i = 0;
     MyMoneySecurity e;
     QString eid;
     int saf = 0;
-    while (ft != t.end()) {
-      CASE(id) eid = GETSTRING;
-      else CASE(name) e.setName(GETSTRING);
-      else CASE(symbol) e.setTradingSymbol(GETSTRING);
-      else CASE(type) e.setSecurityType(static_cast<MyMoneySecurity::eSECURITYTYPE>(GETINT));
-      else CASE(smallestAccountFraction) saf = GETINT;
-      else CASE(tradingCurrency) e.setTradingCurrency(GETSTRING);
-      else CASE(tradingMarket) e.setTradingMarket(GETSTRING);
-      ++ft; ++i;
-    }
+    eid = GETSTRING(idCol);
+    e.setName(GETSTRING(nameCol));
+    e.setTradingSymbol(GETSTRING(symbolCol));
+    e.setSecurityType(static_cast<MyMoneySecurity::eSECURITYTYPE>(GETINT(typeCol)));
+    saf = GETINT(smallestAccountFractionCol);
+    e.setTradingCurrency(GETSTRING(tradingCurrencyCol));
+    e.setTradingMarket(GETSTRING(tradingMarketCol));
+
     if(e.tradingCurrency().isEmpty())
       e.setTradingCurrency(m_storage->pairs()["kmm-baseCurrency"]);
     if(saf == 0)
@@ -3250,17 +3282,17 @@ void MyMoneyStorageSql::readPrices(void) {
 
 }
 
-const  MyMoneyPrice MyMoneyStorageSql::fetchSinglePrice (const QString& fromIdList, const QString& toIdList, const QDate& date_, bool exactDate, bool /*forUpdate*/) const {
+const  MyMoneyPrice MyMoneyStorageSql::fetchSinglePrice (const QString& fromId, const QString& toId, const QDate& date_, bool exactDate, bool /*forUpdate*/) const {
   DBG("*** Entering MyMoneyStorageSql::fetchSinglePrice");
   const MyMoneyDbTable& t = m_db.m_tables["kmmPrices"];
-  MyMoneyDbTable::field_iterator tableEnd = t.end();
   MyMoneySqlQuery q(const_cast <MyMoneyStorageSql*> (this));
-  QString queryString = t.selectAllString(false);
 
   // Use bind variables, instead of just inserting the values in the queryString,
   // so that values containing a ':' will work.
   // See balance query for why the date logic seems odd.
-  queryString += " WHERE fromId = :fromId  AND toId = :toId AND priceDate < :priceDate ";
+  QString queryString = t.selectAllString(false) +
+    " WHERE fromId = :fromId  AND toId = :toId AND priceDate < :priceDate ";
+
   if (exactDate)
     queryString += "AND priceDate > :exactDate ";
 
@@ -3273,62 +3305,34 @@ const  MyMoneyPrice MyMoneyStorageSql::fetchSinglePrice (const QString& fromIdLi
   if(!date.isValid())
     date = QDate::currentDate();
 
-  q.bindValue(":fromId", fromIdList);
-  q.bindValue(":toId", toIdList);
+  q.bindValue(":fromId", fromId);
+  q.bindValue(":toId", toId);
   q.bindValue(":priceDate", date.addDays(1).toString(Qt::ISODate));
 
   if (exactDate)
     q.bindValue(":exactDate", date.toString(Qt::ISODate));
 
-  if (! q.exec()) {}
+  if (! q.exec()) return MyMoneyPrice();
 
   if (q.next()) {
-    MyMoneyDbTable::field_iterator ft = t.begin();
-    int i = 0;
-    QString from;
-    QString to;
-    QDate date;
-    MyMoneyMoney rate;
-    QString source;
-    bool foundFromId = false;
-    bool foundToId = false;
-    bool foundPriceDate = false;
-    bool foundPrice = false;
-    bool foundPriceSource = false;
-    while (ft != tableEnd) {
-      bool foundSomething = false;
-      if (!foundFromId && !foundSomething) {
-        CASE(fromId) {from = GETSTRING; foundFromId = true; foundSomething = true;}
-      }
-      if (!foundToId && !foundSomething) {
-        CASE(toId) {to = GETSTRING; foundToId = true; foundSomething = true;}
-      }
-      if (!foundPriceDate && !foundSomething) {
-        CASE(priceDate) {date = GETDATE; foundPriceDate = true; foundSomething = true;}
-      }
-      if (!foundPrice && !foundSomething) {
-        CASE(price) {rate = GETSTRING; foundPrice = true; foundSomething = true;}
-      }
-      if (!foundPriceSource && !foundSomething) {
-        CASE(priceSource) {source = GETSTRING; foundPriceSource = true; foundSomething = true;}
-      }
-      ++ft; ++i;
-    }
 
-    return MyMoneyPrice(fromIdList, toIdList, date, rate, source);
+    return MyMoneyPrice(fromId,
+                        toId,
+                        GETDATE(t.fieldNumber("priceDate")),
+                        MyMoneyMoney(GETSTRING(t.fieldNumber("price"))),
+                        GETSTRING(t.fieldNumber("priceSource")));
   }
 
   return MyMoneyPrice();
 }
 
-const  MyMoneyPriceList MyMoneyStorageSql::fetchPrices (const QStringList& fromIdList, const QStringList& toIdList,  bool forUpdate) const {
+const MyMoneyPriceList MyMoneyStorageSql::fetchPrices (const QStringList& fromIdList, const QStringList& toIdList, bool forUpdate) const {
   DBG("*** Entering MyMoneyStorageSql::fetchPrices");
   signalProgress(0, m_prices, QObject::tr("Loading prices..."));
   int progress = 0;
   const_cast <MyMoneyStorageSql*> (this)->m_readingPrices = true;
   MyMoneyPriceList pList;
   const MyMoneyDbTable& t = m_db.m_tables["kmmPrices"];
-  MyMoneyDbTable::field_iterator tableEnd = t.end();
   MyMoneySqlQuery q(const_cast <MyMoneyStorageSql*> (this));
   QString queryString = t.selectAllString(false);
 
@@ -3337,18 +3341,17 @@ const  MyMoneyPriceList MyMoneyStorageSql::fetchPrices (const QStringList& fromI
   if (! fromIdList.empty()) {
     queryString += " WHERE (";
     for (int i = 0; i < fromIdList.count(); ++i) {
-      queryString += " fromId = :fromId" + QString::number(i) + " OR";
+      queryString += QString(" fromId = :fromId%1 OR").arg(i);
     }
     queryString = queryString.left(queryString.length() - 2) + ')';
   }
   if (! toIdList.empty()) {
     queryString += " AND (";
     for (int i = 0; i < toIdList.count(); ++i) {
-      queryString += " toId = :toId" + QString::number(i) + " OR";
+      queryString += QString(" toId = :toId%1 OR").arg(i);
     }
     queryString = queryString.left(queryString.length() - 2) + ')';
   }
-
 
   if (forUpdate)
     queryString += " FOR UPDATE";
@@ -3358,37 +3361,31 @@ const  MyMoneyPriceList MyMoneyStorageSql::fetchPrices (const QStringList& fromI
   q.prepare (queryString);
 
   if (! fromIdList.empty()) {
-    QStringList::ConstIterator bindVal = fromIdList.begin();
-    for (int i = 0; bindVal != fromIdList.end(); ++i, ++bindVal) {
-      q.bindValue (":fromId" + QString::number(i), *bindVal);
+    QStringList::ConstIterator bindVal = fromIdList.constBegin();
+    for (int i = 0; bindVal != fromIdList.constEnd(); ++i, ++bindVal) {
+      q.bindValue (QString(":fromId%1").arg(i), *bindVal);
     }
   }
   if (! toIdList.empty()) {
-    QStringList::ConstIterator bindVal = toIdList.begin();
-    for (int i = 0; bindVal != toIdList.end(); ++i, ++bindVal) {
-      q.bindValue (":toId" + QString::number(i), *bindVal);
+    QStringList::ConstIterator bindVal = toIdList.constBegin();
+    for (int i = 0; bindVal != toIdList.constEnd(); ++i, ++bindVal) {
+      q.bindValue (QString(":toId%1").arg(i), *bindVal);
     }
   }
 
   if (!q.exec()) throw new MYMONEYEXCEPTION(buildError (q, Q_FUNC_INFO, QString("reading Prices")));
-  while (q.next()) {
-    MyMoneyDbTable::field_iterator ft = t.begin();
-    int i = 0;
-    QString from;
-    QString to;
-    QDate date;
-    MyMoneyMoney rate;
-    QString source;
+  int fromIdCol = t.fieldNumber("fromId");
+  int toIdCol = t.fieldNumber("toId");
+  int priceDateCol = t.fieldNumber("priceDate");
+  int priceCol = t.fieldNumber("price");
+  int priceSourceCol = t.fieldNumber("priceSource");
 
-    while (ft != tableEnd) {
-      CASE(fromId) from = GETSTRING;
-      else CASE(toId) to = GETSTRING;
-      else CASE(priceDate) date = GETDATE;
-      else CASE(price) rate = GETSTRING;
-      else CASE(priceSource) source = GETSTRING;
-      ++ft; ++i;
-    }
-    pList [MyMoneySecurityPair(from, to)].insert(date, MyMoneyPrice(from, to,  date, rate, source));
+  while (q.next()) {
+    QString from = GETSTRING(fromIdCol);
+    QString to = GETSTRING(toIdCol);
+    QDate date = GETDATE(priceDateCol);
+
+    pList [MyMoneySecurityPair(from, to)].insert(date, MyMoneyPrice(from, to, date, MyMoneyMoney(GETSTRING(priceCol)), GETSTRING(priceSourceCol)));
     signalProgress(++progress, 0);
   }
   const_cast <MyMoneyStorageSql*> (this)->m_readingPrices = false;
@@ -3417,7 +3414,7 @@ const QMap<QString, MyMoneySecurity> MyMoneyStorageSql::fetchCurrencies (const Q
   if (! idList.empty()) {
     queryString += " WHERE";
     for (int i = 0; i < idList.count(); ++i)
-      queryString += " isocode = :id" + QString::number(i) + " OR";
+      queryString += QString(" isocode = :id%1 OR").arg(i);
     queryString = queryString.left(queryString.length() - 2);
   }
 
@@ -3433,29 +3430,34 @@ const QMap<QString, MyMoneySecurity> MyMoneyStorageSql::fetchCurrencies (const Q
   if (! idList.empty()) {
     QStringList::ConstIterator bindVal = idList.begin();
     for (int i = 0; bindVal != idList.end(); ++i, ++bindVal) {
-      q.bindValue (":id" + QString::number(i), *bindVal);
+      q.bindValue (QString(":id%1").arg(i), *bindVal);
     }
   }
 
   if (!q.exec()) throw new MYMONEYEXCEPTION(buildError (q, Q_FUNC_INFO, QString("reading Currencies")));
+  int ISOcodeCol = t.fieldNumber("ISOcode");
+  int nameCol = t.fieldNumber("name");
+  int typeCol = t.fieldNumber("type");
+  int symbol1Col = t.fieldNumber("symbol1");
+  int symbol2Col = t.fieldNumber("symbol2");
+  int symbol3Col = t.fieldNumber("symbol3");
+  int partsPerUnitCol = t.fieldNumber("partsPerUnit");
+  int smallestCashFractionCol = t.fieldNumber("smallestCashFraction");
+  int smallestAccountFractionCol = t.fieldNumber("smallestAccountFraction");
+
   while (q.next()) {
-    MyMoneyDbTable::field_iterator ft = t.begin();
-    int i = 0;
     QString id;
     MyMoneySecurity c;
     QChar symbol[3];
-    while (ft != t.end()) {
-      CASE(ISOcode) id = GETSTRING;
-      else CASE(name) c.setName(GETSTRING);
-      else CASE(type) c.setSecurityType(static_cast<MyMoneySecurity::eSECURITYTYPE>(GETINT));
-      else CASE(symbol1) symbol[0] = QChar(GETINT);
-      else CASE(symbol2) symbol[1] = QChar(GETINT);
-      else CASE(symbol3) symbol[2] = QChar(GETINT);
-      else CASE(partsPerUnit) c.setPartsPerUnit(GETINT);
-      else CASE(smallestCashFraction) c.setSmallestCashFraction(GETINT);
-      else CASE(smallestAccountFraction) c.setSmallestAccountFraction(GETINT);
-      ++ft; ++i;
-    }
+    id = GETSTRING(ISOcodeCol);
+    c.setName(GETSTRING(nameCol));
+    c.setSecurityType(static_cast<MyMoneySecurity::eSECURITYTYPE>(GETINT(typeCol)));
+    symbol[0] = QChar(GETINT(symbol1Col));
+    symbol[1] = QChar(GETINT(symbol2Col));
+    symbol[2] = QChar(GETINT(symbol3Col));
+    c.setPartsPerUnit(GETINT(partsPerUnitCol));
+    c.setSmallestCashFraction(GETINT(smallestCashFractionCol));
+    c.setSmallestAccountFraction(GETINT(smallestAccountFractionCol));
     c.setTradingSymbol(QString(symbol, 3).trimmed());
 
     cList[id] = MyMoneySecurity(id, c);
@@ -3481,15 +3483,12 @@ const QMap<QString, MyMoneyReport> MyMoneyStorageSql::fetchReports (const QStrin
   MyMoneySqlQuery q(const_cast <MyMoneyStorageSql*> (this));
   q.prepare (t.selectAllString(true));
   if (!q.exec()) throw new MYMONEYEXCEPTION(buildError (q, Q_FUNC_INFO, QString("reading reports")));
+  int xmlCol = t.fieldNumber("XML");
   QMap<QString, MyMoneyReport> rList;
   while (q.next()) {
-    MyMoneyDbTable::field_iterator ft = t.begin();
-    int i = 0;
     QDomDocument d;
-    while (ft != t.end()) {
-      CASE(XML) d.setContent(GETSTRING, false);
-      ++ft; ++i;
-    }
+    d.setContent(GETSTRING(xmlCol), false);
+
     QDomNode child = d.firstChild();
     child = child.firstChild();
     MyMoneyReport report;
@@ -3520,14 +3519,11 @@ const QMap<QString, MyMoneyBudget> MyMoneyStorageSql::fetchBudgets (const QStrin
   q.prepare (queryString);
   if (!q.exec()) throw new MYMONEYEXCEPTION(buildError (q, Q_FUNC_INFO, QString("reading budgets")));
   QMap<QString, MyMoneyBudget> budgets;
+  int xmlCol = t.fieldNumber("XML");
   while (q.next()) {
-    MyMoneyDbTable::field_iterator ft = t.begin();
-    int i = 0;
     QDomDocument d;
-    while (ft != t.end()) {
-      CASE(XML) d.setContent(GETSTRING, false);
-      ++ft; ++i;
-    }
+    d.setContent(GETSTRING(xmlCol), false);
+
     QDomNode child = d.firstChild();
     child = child.firstChild();
     MyMoneyBudget budget (child.toElement());
@@ -3554,21 +3550,25 @@ const MyMoneyKeyValueContainer MyMoneyStorageSql::readKeyValuePairs (const QStri
   return (list);
 }
 
-const QMap<QString, MyMoneyKeyValueContainer> MyMoneyStorageSql::readKeyValuePairs (const QString& kvpType, const QStringList& kvpIdList) const {
+const QHash<QString, MyMoneyKeyValueContainer> MyMoneyStorageSql::readKeyValuePairs (const QString& kvpType, const QStringList& kvpIdList) const {
   DBG("*** Entering MyMoneyStorageSql::readKeyValuePairs");
-  QMap<QString, MyMoneyKeyValueContainer> retval;
+  QHash<QString, MyMoneyKeyValueContainer> retval;
 
   MyMoneySqlQuery q(const_cast <MyMoneyStorageSql*> (this));
   QString query ("SELECT kvpId, kvpKey, kvpData from kmmKeyValuePairs where kvpType = :type");
 
   if (!kvpIdList.empty()) {
-    query += " and kvpId IN ('" + kvpIdList.join("', '") + "')";
+    query += QString(" and kvpId IN ('%1')").arg(kvpIdList.join("', '"));
   }
 
   query += " order by kvpId;";
   q.prepare (query);
   q.bindValue(":type", kvpType);
   if (!q.exec()) throw new MYMONEYEXCEPTION(buildError (q, Q_FUNC_INFO, QString("reading Kvp List for %1").arg(kvpType)));
+  // Reserve enough space for all values. Approximate it with the size of the
+  // kvpIdList in case the db doesn't support reporting the size of the
+  // resultset to the caller.
+  retval.reserve(q.size() > 0 ? q.size() : kvpIdList.size());
   while (q.next()) {
     retval [q.value(0).toString()].setValue(q.value(1).toString(), q.value(2).toString());
   }
@@ -3625,7 +3625,7 @@ long unsigned MyMoneyStorageSql::incrementBudgetId() {
   q.next();
   long unsigned returnValue = (unsigned long) q.value(0).toULongLong();
   ++returnValue;
-  q.prepare("UPDATE kmmFileInfo SET hiBudgetId = " + QString::number(returnValue));
+  q.prepare(QString("UPDATE kmmFileInfo SET hiBudgetId = %1").arg(returnValue));
   q.exec();
   m_hiIdBudgets = returnValue;
   return returnValue;
@@ -3640,7 +3640,7 @@ long unsigned MyMoneyStorageSql::incrementAccountId() {
   q.next();
   long unsigned returnValue = (unsigned long) q.value(0).toULongLong();
   ++returnValue;
-  q.prepare("UPDATE kmmFileInfo SET hiAccountId = " + QString::number(returnValue));
+  q.prepare(QString("UPDATE kmmFileInfo SET hiAccountId = %1").arg(returnValue));
   q.exec();
   m_hiIdAccounts = returnValue;
   return returnValue;
@@ -3655,7 +3655,7 @@ long unsigned MyMoneyStorageSql::incrementInstitutionId() {
   q.next();
   long unsigned returnValue = (unsigned long) q.value(0).toULongLong();
   ++returnValue;
-  q.prepare("UPDATE kmmFileInfo SET hiInstitutionId = " + QString::number(returnValue));
+  q.prepare(QString("UPDATE kmmFileInfo SET hiInstitutionId = %1").arg(returnValue));
   q.exec();
   m_hiIdInstitutions = returnValue;
   return returnValue;
@@ -3670,7 +3670,7 @@ long unsigned MyMoneyStorageSql::incrementPayeeId() {
   q.next();
   long unsigned returnValue = (unsigned long) q.value(0).toULongLong();
   ++returnValue;
-  q.prepare("UPDATE kmmFileInfo SET hiPayeeId = " + QString::number(returnValue));
+  q.prepare(QString("UPDATE kmmFileInfo SET hiPayeeId = %1").arg(returnValue));
   q.exec();
   m_hiIdPayees = returnValue;
   return returnValue;
@@ -3685,7 +3685,7 @@ long unsigned MyMoneyStorageSql::incrementReportId() {
   q.next();
   long unsigned returnValue = (unsigned long) q.value(0).toULongLong();
   ++returnValue;
-  q.prepare("UPDATE kmmFileInfo SET hiReportId = " + QString::number(returnValue));
+  q.prepare(QString("UPDATE kmmFileInfo SET hiReportId = %1").arg(returnValue));
   q.exec();
   m_hiIdReports = returnValue;
   return returnValue;
@@ -3700,7 +3700,7 @@ long unsigned MyMoneyStorageSql::incrementScheduleId() {
   q.next();
   long unsigned returnValue = (unsigned long) q.value(0).toULongLong();
   ++returnValue;
-  q.prepare("UPDATE kmmFileInfo SET hiScheduleId = " + QString::number(returnValue));
+  q.prepare(QString("UPDATE kmmFileInfo SET hiScheduleId = %1").arg(returnValue));
   q.exec();
   m_hiIdSchedules = returnValue;
   return returnValue;
@@ -3715,7 +3715,7 @@ long unsigned MyMoneyStorageSql::incrementSecurityId() {
   q.next();
   long unsigned returnValue = (unsigned long) q.value(0).toULongLong();
   ++returnValue;
-  q.prepare("UPDATE kmmFileInfo SET hiSecurityId = " + QString::number(returnValue));
+  q.prepare(QString("UPDATE kmmFileInfo SET hiSecurityId = %1").arg(returnValue));
   q.exec();
   m_hiIdSecurities = returnValue;
   return returnValue;
@@ -3730,7 +3730,7 @@ long unsigned MyMoneyStorageSql::incrementTransactionId() {
   q.next();
   long unsigned returnValue = (unsigned long) q.value(0).toULongLong();
   ++returnValue;
-  q.prepare("UPDATE kmmFileInfo SET hiTransactionId = " + QString::number(returnValue));
+  q.prepare(QString("UPDATE kmmFileInfo SET hiTransactionId = %1").arg(returnValue));
   q.exec();
   m_hiIdTransactions = returnValue;
   return returnValue;
@@ -4169,7 +4169,7 @@ void MyMoneyDbTable::buildSQLStrings (void) {
   m_insertString = qs + ws + ");";
   // build a 'select all' string (select * is deprecated)
   // don't terminate with semicolon coz we may want a where or order clause
-  m_selectAllString = "SELECT " + columnList() + " FROM " + name();;
+  m_selectAllString = "SELECT " + columnList() + " FROM " + name();
 
   // build an update string; key fields go in the where clause
   qs = "UPDATE " + name() + " SET ";
@@ -4191,6 +4191,15 @@ void MyMoneyDbTable::buildSQLStrings (void) {
   qs = "DELETE FROM " + name();
   if (!ws.isEmpty()) qs += " WHERE " + ws;
   m_deleteString = qs + ';';
+
+  // Setup the column name hash
+  ft = m_fields.constBegin();
+  m_fieldOrder.reserve(m_fields.size());
+  int i = 0;
+  while (ft != m_fields.constEnd()) {
+    m_fieldOrder[(*ft)->name()] = i;
+    ++i; ++ft;
+  }
  }
 
 const QString MyMoneyDbTable::columnList() const {
@@ -4255,6 +4264,14 @@ const QString MyMoneyDbTable::modifyColumnString(databaseTypeE dbType, const QSt
     qs = "MODIFY " + columnName + ' ' + newDef.generateDDL(dbType);
 
   return qs;
+}
+
+int MyMoneyDbTable::fieldNumber (const QString& name) const {
+  QHash<QString, int>::ConstIterator i = m_fieldOrder.find(name);
+  if (m_fieldOrder.constEnd() == i) {
+    throw new MYMONEYEXCEPTION (QString("Unknown field %1 in table %2").arg(name).arg(m_name));
+  }
+  return i.value();
 }
 
 //*****************************************************************************

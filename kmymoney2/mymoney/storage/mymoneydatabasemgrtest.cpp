@@ -647,6 +647,7 @@ void MyMoneyDatabaseMgrTest::testAddTransactions() {
 
     //CPPUNIT_ASSERT((*it_k) == "2002-05-10-T000000000000000001");
     CPPUNIT_ASSERT((*it_t).id() == "T000000000000000002");
+
     //++it_k;
     ++it_t;
     //CPPUNIT_ASSERT((*it_k) == "2002-05-09-T000000000000000002");
@@ -666,20 +667,11 @@ void MyMoneyDatabaseMgrTest::testAddTransactions() {
 
     QList<MyMoneyTransaction>::ConstIterator it;
     it = list.constBegin();
-    CPPUNIT_ASSERT((*it).id() == "T000000000000000002");
+    //CPPUNIT_ASSERT((*it).id() == "T000000000000000002");
+    CPPUNIT_ASSERT((*it) == t2);
     ++it;
 
-    CPPUNIT_ASSERT((*it).id() == "T000000000000000001");
-    CPPUNIT_ASSERT((*it).postDate() == QDate(2002,5,10));
-    CPPUNIT_ASSERT((*it).splitCount() == 2);
-    QList<MyMoneySplit> splitList = (*it).splits();
-    CPPUNIT_ASSERT(splitList[0].accountId() == "A000006");
-    CPPUNIT_ASSERT(splitList[0].shares() == MyMoneyMoney(100000));
-    CPPUNIT_ASSERT(splitList[0].value() == MyMoneyMoney(100000));
-    CPPUNIT_ASSERT(splitList[1].accountId() == "A000005");
-    CPPUNIT_ASSERT(splitList[1].shares() == MyMoneyMoney(-100000));
-    CPPUNIT_ASSERT(splitList[1].value() == MyMoneyMoney(-100000));
-
+    CPPUNIT_ASSERT((*it) == t1);
     ++it;
     CPPUNIT_ASSERT(it == list.constEnd());
 

@@ -758,8 +758,17 @@ void MyMoneyDatabaseMgr::removeTransaction(const MyMoneyTransaction& transaction
 unsigned int MyMoneyDatabaseMgr::transactionCount(const QString& account) const
 { return (m_sql->transactionCount(account)); }
 
-const QMap<QString, unsigned long> MyMoneyDatabaseMgr::transactionCountMap(void) const
-{ return (m_sql->transactionCountMap()); }
+const QMap<QString, unsigned long> MyMoneyDatabaseMgr::transactionCountMap(void) const {
+
+  QMap<QString, unsigned long> retval;
+  QHash<QString, unsigned long> hash = m_sql->transactionCountMap();
+
+  for (QHash<QString, unsigned long>::ConstIterator i = hash.constBegin();
+       i != hash.constEnd(); ++i) {
+    retval[i.key()] = i.value();
+  }
+  return retval;
+}
 
 const QList<MyMoneyTransaction> MyMoneyDatabaseMgr::transactionList(MyMoneyTransactionFilter& filter) const
 {
