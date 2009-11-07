@@ -838,15 +838,15 @@ void MyMoneyQifProfile::autoDetect(const QStringList& lines)
     if(c == '!') {
       QString sname = (*it).toLower();
       section = 0;
-      if(sname.startsWith("!account"))
+      if(sname.startsWith(QLatin1String("!account")))
         section = 1;
-      else if(sname.startsWith("!type")) {
-        if(sname.startsWith("!type:cat")
-           || sname.startsWith("!type:payee")
-           || sname.startsWith("!type:security")
-           || sname.startsWith("!type:class")) {
+      else if(sname.startsWith(QLatin1String("!type"))) {
+        if(sname.startsWith(QLatin1String("!type:cat"))
+           || sname.startsWith(QLatin1String("!type:payee"))
+           || sname.startsWith(QLatin1String("!type:security"))
+           || sname.startsWith(QLatin1String("!type:class"))) {
           section = 0;
-        } else if(sname.startsWith("!type:price")) {
+        } else if(sname.startsWith(QLatin1String("!type:price"))) {
           section = 3;
         } else
           section = 2;
