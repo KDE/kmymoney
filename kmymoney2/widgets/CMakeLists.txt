@@ -87,40 +87,38 @@ KDE4_ADD_LIBRARY(kmymoney_base STATIC ${_uncritial_common_sources})
 ########### QtDesigner Widget Library (kmymoneywidgets) #################
 # we never link against this library,
 # but it is needed for uic and QtDesigner
-set(kmymoneywidgets_PART_SRCS
-   ${CMAKE_CURRENT_BINARY_DIR}/kmymoneywidgets.cpp
-)
+IF( USE_QT_DESIGNER )
+  SET(kmymoneywidgets_PART_SRCS
+      ${CMAKE_CURRENT_BINARY_DIR}/kmymoneywidgets.cpp)
 
-kde4_add_widget_files(${kmymoneywidgets_PART_SRCS} kmymoney.widgets)
+  KDE4_ADD_WIDGET_FILES(${kmymoneywidgets_PART_SRCS} kmymoney.widgets)
 
-set(kmymoneywidgets_PART_SRCS
-   ${_critial_common_sources} 
-   ${_uncritial_common_sources}
-   ${kmymoneywidgets_PART_SRCS}
-)
+  SET(kmymoneywidgets_PART_SRCS
+    ${_critial_common_sources}
+    ${_uncritial_common_sources}
+    ${kmymoneywidgets_PART_SRCS})
 
-kde4_add_plugin(kmymoneywidgets ${kmymoneywidgets_PART_SRCS})
+  KDE4_ADD_PLUGIN(kmymoneywidgets ${kmymoneywidgets_PART_SRCS})
 
-# For now, be NOT pedantic about this library.
-# Some undefined references remain.
-SET_TARGET_PROPERTIES(kmymoneywidgets PROPERTIES
-  LINK_FLAGS "-Wl,--undefined")
+  # For now, be NOT pedantic about this library.
+  # Some undefined references remain.
+  SET_TARGET_PROPERTIES(kmymoneywidgets PROPERTIES
+    LINK_FLAGS "-Wl,--undefined")
 
-##### Is the option -DKMM_DESIGNER needed??
-# The option -DKMM_DESIGNER will leave away any code that breaks uic.
-SET_TARGET_PROPERTIES(kmymoneywidgets PROPERTIES
-  COMPILE_FLAGS "-U_CHECK_MEMORY -DKMM_DESIGNER")
-#####
+  ##### Is the option -DKMM_DESIGNER needed??
+  # The option -DKMM_DESIGNER will leave away any code that breaks uic.
+  SET_TARGET_PROPERTIES(kmymoneywidgets PROPERTIES
+    COMPILE_FLAGS "-U_CHECK_MEMORY -DKMM_DESIGNER")
+  #####
 
-target_link_libraries(kmymoneywidgets kmymoney_base kmm_mymoney kmymoney_common dialogs widgets converter ${KDE4_KDE3SUPPORT_LIBS} ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS})
+  TARGET_LINK_LIBRARIES(kmymoneywidgets kmymoney_base kmm_mymoney kmymoney_common dialogs widgets converter ${KDE4_KDE3SUPPORT_LIBS} ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS})
 
-if( USE_QT_DESIGNER )
-  install(TARGETS kmymoneywidgets DESTINATION ${QT_PLUGINS_DIR}/designer )
+  INSTALL(TARGETS kmymoneywidgets DESTINATION ${QT_PLUGINS_DIR}/designer )
   INSTALL(FILES kmymoneytitlelabel.png DESTINATION ${DATA_INSTALL_DIR}/kmymoney2/pics)
-endif( USE_QT_DESIGNER )
+ENDIF( USE_QT_DESIGNER )
 
 ########### Widget Library (widgets) STATIC #################
- 
+
 SET(libwidgets_a_SOURCES
   ${_critial_common_sources}
   kmymoneybriefschedule.cpp
