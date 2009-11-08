@@ -6260,17 +6260,15 @@ const QList<QString> KMyMoney2App::instanceList(void) const
     QStringList apps = reply.value();
     QStringList::ConstIterator it;
 
+    // build a list of service names of all running kmymoney applications without this one
     for(it = apps.constBegin(); it != apps.constEnd(); ++it) {
-      // skip over myself
-      QDBusReply<uint> pid = QDBusConnection::sessionBus().interface()->servicePid(*it);
-#ifdef _MSC_VER
-      uint thisProcPid = _getpid();
-#else
-      uint thisProcPid = getpid();
-#endif
-      if (pid.isValid() && pid.value() == thisProcPid)
-        continue;
       if((*it).indexOf("org.kde.kmymoney2") == 0) {
+#ifdef _MSC_VER
+      if ((*it).indexOf(QString("org.kde.kmymoney2-%1").arg(_getpid())) != 0) // on Windows calling servicePid("this prcess service id") causes D-Bus to crash
+#else
+      QDBusReply<uint> pid = QDBusConnection::sessionBus().interface()->servicePid(*it);
+      if (pid.isValid() && pid.value() != getpid())
+#endif
         list += (*it);
       }
     }
