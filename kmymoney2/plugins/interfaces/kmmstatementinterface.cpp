@@ -27,7 +27,7 @@
 // Project Includes
 
 #include "kmmstatementinterface.h"
-#include "kmymoney2.h"
+#include "kmymoney.h"
 #include <mymoneyaccount.h>
 #include <mymoneykeyvaluecontainer.h>
 

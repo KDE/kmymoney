@@ -43,7 +43,7 @@
 #include <kmymoneyaccounttree.h>
 #include "kcategoriesview.h"
 #include "kmymoneyglobalsettings.h"
-#include "kmymoney2.h"
+#include "kmymoney.h"
 #include <K3ListViewSearchLineWidget>
 
 KCategoriesView::KCategoriesView(QWidget *parent) :

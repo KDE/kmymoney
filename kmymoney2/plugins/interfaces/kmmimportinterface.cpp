@@ -24,7 +24,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoney2.h"
+#include "kmymoney.h"
 #include "kmmimportinterface.h"
 
 KMyMoneyPlugin::KMMImportInterface::KMMImportInterface(KMyMoney2App* app, QObject* parent, const char* name) :

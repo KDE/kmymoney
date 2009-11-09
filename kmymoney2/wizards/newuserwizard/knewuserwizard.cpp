@@ -62,7 +62,7 @@
 #include <kmymoneyedit.h>
 #include <kaccounttemplateselector.h>
 
-#include "kmymoney2.h"
+#include "kmymoney.h"
 #include "kmymoneyglobalsettings.h"
 
 namespace NewUserWizard {

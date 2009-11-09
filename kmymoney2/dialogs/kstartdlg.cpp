@@ -52,7 +52,7 @@
 
 #include "kstartdlg.h"
 #include "krecentfileitem.h"
-#include "kmymoney2.h"
+#include "kmymoney.h"
 
 #include <QToolTip>
 

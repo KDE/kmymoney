@@ -46,7 +46,7 @@
 #include <kmymoneycategory.h>
 #include "kmymoneyaccountselector.h"
 
-#include <../kmymoney2.h>
+#include <../kmymoney.h>
 
 KAccountSelectDlg::KAccountSelectDlg(const KMyMoneyUtils::categoryTypeE accountType, const QString& purpose, QWidget *parent )
  : KAccountSelectDlgDecl(parent),

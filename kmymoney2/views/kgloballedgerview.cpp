@@ -58,7 +58,7 @@
 #include "kmymoneyglobalsettings.h"
 #include "registersearchline.h"
 #include "kfindtransactiondlg.h"
-#include "kmymoney2.h"
+#include "kmymoney.h"
 #include "scheduledtransaction.h"
 
 class KGlobalLedgerView::Private

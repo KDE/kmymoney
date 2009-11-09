@@ -24,7 +24,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoney2.h"
+#include "kmymoney.h"
 #include "kmymoneyview.h"
 #include "selectedtransaction.h"
 #include "kmmviewinterface.h"

@@ -1,5 +1,5 @@
 /***************************************************************************
-                          kmymoney2.h
+                          kmymoney.h
                              -------------------
     copyright            : (C) 2000-2001 by Michael Edwardes <mte@users.sourceforge.net>
 

@@ -50,7 +50,7 @@
 
 #include "mymoneyfile.h"
 #include "kaccountselectdlg.h"
-#include "kmymoney2.h"
+#include "kmymoney.h"
 #include "kmymoneyglobalsettings.h"
 
 #include "mymoneystatementreader.h"

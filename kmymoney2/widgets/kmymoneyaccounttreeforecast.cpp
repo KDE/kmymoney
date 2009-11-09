@@ -23,7 +23,7 @@
 // Project Includes
 #include <mymoneyfile.h>
 #include <kmymoneyaccounttreeforecast.h>
-#include "kmymoney2.h"
+#include "kmymoney.h"
 #include "kmymoneyglobalsettings.h"
 #include "mymoneyforecast.h"
 #include "reportaccount.h"

@@ -50,7 +50,7 @@
 #include <kmymoneydateinput.h>
 #include <ktoolinvocation.h>
 
-#include "kmymoney2.h"
+#include "kmymoney.h"
 
 class KEnterScheduleDlg::Private
 {

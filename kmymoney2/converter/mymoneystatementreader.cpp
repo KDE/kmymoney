@@ -54,7 +54,7 @@
 #include "kaccountselectdlg.h"
 #include "transactionmatcher.h"
 #include "kenterscheduledlg.h"
-#include "kmymoney2.h"
+#include "kmymoney.h"
 #include <kmymoneyaccountcombo.h>
 
 class MyMoneyStatementReader::Private

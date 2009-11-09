@@ -42,7 +42,7 @@
 #include "kaccountsview.h"
 #include "kmymoneyview.h"
 #include "kmymoneyglobalsettings.h"
-#include "kmymoney2.h"
+#include "kmymoney.h"
 #include <K3ListViewSearchLineWidget>
 
 QPixmap accountPixmap(const MyMoneyAccount& account, bool reconcileFlag)

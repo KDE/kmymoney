@@ -43,7 +43,7 @@
 // Project Includes
 
 #include "mymoney/mymoneyfile.h"
-#include "kmymoney2.h"
+#include "kmymoney.h"
 #include "kstartuplogo.h"
 #include "kmymoneyutils.h"
 #include "kmymoneyglobalsettings.h"

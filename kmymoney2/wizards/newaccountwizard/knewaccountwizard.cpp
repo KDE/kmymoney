@@ -60,7 +60,7 @@
 
 #include "ksplittransactiondlg.h"
 #include "kequitypriceupdatedlg.h"
-#include "kmymoney2.h"
+#include "kmymoney.h"
 
 using namespace NewAccountWizard;
 

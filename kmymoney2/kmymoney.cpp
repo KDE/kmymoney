@@ -1,5 +1,5 @@
 /***************************************************************************
-                          kmymoney2.cpp
+                          kmymoney.cpp
                              -------------------
     copyright            : (C) 2000 by Michael Edwardes <mte@users.sourceforge.net>
                            (C) 2007 by Thomas Baumgart <ipwizard@users.sourceforge.net>
@@ -83,7 +83,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoney2.h"
+#include "kmymoney.h"
 #include "kmymoneyglobalsettings.h"
 #include "kmymoneyadaptor.h"
 
@@ -6638,6 +6638,6 @@ void KMyMoney2App::Private::unlinkStatementXML(void)
   m_statementXMLindex = 0;
 }
 
-#include "kmymoney2.moc"
+#include "kmymoney.moc"
 // vim:cin:si:ai:et:ts=2:sw=2:
 

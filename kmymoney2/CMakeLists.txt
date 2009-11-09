@@ -44,11 +44,9 @@ SET( kmymoney_common_LIBS
 
 ########### kmymoney executable ###############
 
-SET( kmymoney_SRCS
-	main.cpp
-	kmymoney2.cpp )
+SET( kmymoney_SRCS main.cpp kmymoney.cpp )
 
-QT4_ADD_DBUS_ADAPTOR(kmymoney_SRCS org.kde.kmymoney.xml kmymoney2.h KMyMoney2App)
+QT4_ADD_DBUS_ADAPTOR(kmymoney_SRCS org.kde.kmymoney.xml kmymoney.h KMyMoney2App)
 KDE4_ADD_APP_ICON( kmymoney_SRCS hi*-app-kmymoney.png )
 
 KDE4_ADD_EXECUTABLE( kmymoney ${kmymoney_SRCS} )

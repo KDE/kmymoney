@@ -107,7 +107,7 @@
 #include "kreportsview.h"
 #include "kbudgetview.h"
 #include "kforecastview.h"
-#include "kmymoney2.h"
+#include "kmymoney.h"
 #include "kmymoneyutils.h"
 
 #define COMPRESSION_MIME_TYPE "application/x-gzip"

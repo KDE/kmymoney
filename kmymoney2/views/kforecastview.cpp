@@ -39,7 +39,7 @@
 #include <mymoneyfile.h>
 #include "kforecastview.h"
 #include "kmymoneyglobalsettings.h"
-#include "kmymoney2.h"
+#include "kmymoney.h"
 #include "kmymoneyutils.h"
 #include "mymoneyforecast.h"
 #include "kmymoneyforecastlistviewitem.h"

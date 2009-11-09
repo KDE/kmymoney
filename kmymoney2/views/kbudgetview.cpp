@@ -61,7 +61,7 @@
 #include "kmymoneyaccounttreebudget.h"
 #include "kbudgetview.h"
 #include "knewbudgetdlg.h"
-#include "kmymoney2.h"
+#include "kmymoney.h"
 
 // *** KBudgetListItem Implementation ***
 KBudgetListItem::KBudgetListItem(K3ListView *parent, const MyMoneyBudget& budget) :

@@ -53,7 +53,7 @@
 #include <kmymoneyutils.h>
 #include <kmymoneyglobalsettings.h>
 
-#include "kmymoney2.h"
+#include "kmymoney.h"
 
 KScheduledView::KScheduledView(QWidget *parent) :
   KScheduledViewDecl(parent),

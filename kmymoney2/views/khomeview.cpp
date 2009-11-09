@@ -63,7 +63,7 @@
 #include "kmymoneyglobalsettings.h"
 #include "mymoneyfile.h"
 #include "mymoneyforecast.h"
-#include "kmymoney2.h"
+#include "kmymoney.h"
 #include "kreportchartview.h"
 #include "pivottable.h"
 #include "pivotgrid.h"
