@@ -15,7 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <config-kmymoney.h>
+//#include <config-kmymoney.h>
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -35,11 +35,8 @@
 // Project Includes
 
 #include "kbalancechartdlg.h"
-
 #include <mymoneyreport.h>
-#include "kreportchartview.h"
-#include "pivottable.h"
-
+#include <pivottable.h>
 #include <kmymoneyglobalsettings.h>
 
 KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* parent) :
@@ -48,13 +45,22 @@ KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* paren
   setCaption(i18n("Balance of %1",account.name()));
   setSizeGripEnabled( true );
   setModal( true );
+  setButtons( KDialog::Close);
+  setButtonsOrientation(Qt::Horizontal);
+  resize( QSize(700, 500).expandedTo(minimumSizeHint()) );
 
-  QVBoxLayout* KBalanceChartDlgLayout = new QVBoxLayout(this);
-  KBalanceChartDlgLayout->setContentsMargins(11,11,11,11);
-  KBalanceChartDlgLayout->setSpacing(6);
-  KBalanceChartDlgLayout->setObjectName("KBalanceChartDlgLayout");
+  //draw the chart and add it to the main layout
+  KReportChartView* chartWidget = drawChart(account);
+  setMainWidget(chartWidget);
+}
 
 
+KBalanceChartDlg::~KBalanceChartDlg()
+{
+}
+
+KReportChartView* KBalanceChartDlg::drawChart(const MyMoneyAccount& account)
+{
   MyMoneyReport reportCfg = MyMoneyReport(
                                           MyMoneyReport::eAssetLiability,
                                           MyMoneyReport::eMonths,
@@ -81,12 +87,6 @@ KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* paren
   reports::KReportChartView* chartWidget = new reports::KReportChartView(this);
 
   table.drawChart(*chartWidget);
-
-  //resize the chart
-  chartWidget->resize(height()-20, width()-20);
-
-  KBalanceChartDlgLayout->addWidget(chartWidget, 10, Qt::AlignVCenter);
-
 
   // add another row for limit
   bool needRow = false;
@@ -131,47 +131,7 @@ KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* paren
   //remove the legend
   chartWidget->removeLegend();
 
-  QFrame* line1 = new QFrame( this );
-  line1->setFrameShape( QFrame::HLine );
-  line1->setFrameShadow( QFrame::Sunken );
-  line1->setFrameShape( QFrame::HLine );
-
-  KBalanceChartDlgLayout->addWidget(line1);
-  //QVBoxLayout* Layout1 = new QVBoxLayout(KBalanceChartDlgLayout);
-  //Layout1->setSpacing(6);
-  //Layout1->setObjectName("Layout1");
-#if 0
-  KPushButton* buttonHelp = new KPushButton( this, "buttonHelp" );
-  buttonHelp->setAutoDefault( TRUE );
-  buttonHelp->setText(i18n("&Help"));
-  Layout1->addWidget( buttonHelp );
-#endif
-
-  //QSpacerItem* Horizontal_Spacing2 = new QSpacerItem( 20, 20, QSizePolicy::Expanding, QSizePolicy::Minimum );
-  //Layout1->addItem( Horizontal_Spacing2 );
-
-#if 0
-  KPushButton* buttonOk = new KPushButton( this, "buttonOk" );
-  buttonOk->setAutoDefault( TRUE );
-  buttonOk->setDefault( TRUE );
-  buttonOk->setText(i18n("&OK"));
-  Layout1->addWidget( buttonOk );
-
-  KPushButton* buttonClose = new KPushButton( this );
-  buttonClose->setEnabled( true );
-  buttonClose->setAutoDefault( true );
-  buttonClose->setGuiItem(KStandardGuiItem::Close);
-  Layout1->addWidget( buttonClose );
-
-  // connect( buttonOk, SIGNAL( clicked() ), this, SLOT( accept() ) );
-  connect( buttonClose, SIGNAL( clicked() ), this, SLOT( accept() ) );
-#endif
-  resize( QSize(700, 500).expandedTo(minimumSizeHint()) );
-}
-
-
-KBalanceChartDlg::~KBalanceChartDlg()
-{
+  return chartWidget;
 }
 
 #include "kbalancechartdlg.moc"

@@ -552,7 +552,7 @@ void KReportChartView::drawLimitLine(const double limit)
   int row = m_model.rowCount();
 
   for(int col = 0; col < m_numColumns; ++col) {
-    setDataCell(row, col, limit);
+    setDataCell(col, row, limit);
   }
 //TODO: add format to the line
 }
