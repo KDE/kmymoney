@@ -20,7 +20,7 @@ SET( _HEADERS kmymoneyutils.h kmymoneyglobalsettings.h )
 KMM_CREATE_LINKS( ${_HEADERS} )
 
 ########### common code (kmymoney_common) STATIC ###############
-# will be linked into kmymoney2, kmymoneytest, and libkmymoney.so
+# will be linked into kmymoney, kmymoneytest, and libkmymoney.so
 
 SET( kmymoney_common_SRCS
   kmymoneyutils.cpp kstartuplogo.cpp kmymoneyglobalsettings.cpp )
@@ -42,17 +42,17 @@ SET( kmymoney_common_LIBS
   ${QT_AND_KDECORE_LIBS} ${QT_QT3SUPPORT_LIBRARY} ${QT_QTSQL_LIBRARY}
   ${KDE4_KHTML_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KABC_LIBS} ${KDE4_KFILE_LIBS} ${KDE4_KDE3SUPPORT_LIBS} ${KDE4_KUTILS_LIBRARY})
 
-########### kmymoney2 executable ###############
+########### kmymoney executable ###############
 
-SET( kmymoney2_SRCS
+SET( kmymoney_SRCS
 	main.cpp
 	kmymoney2.cpp )
 
-QT4_ADD_DBUS_ADAPTOR(kmymoney2_SRCS org.kde.kmymoney.xml kmymoney2.h KMyMoney2App)
-KDE4_ADD_APP_ICON( kmymoney2_SRCS hi*-app-kmymoney2.png )
+QT4_ADD_DBUS_ADAPTOR(kmymoney_SRCS org.kde.kmymoney.xml kmymoney2.h KMyMoney2App)
+KDE4_ADD_APP_ICON( kmymoney_SRCS hi*-app-kmymoney2.png )
 
-KDE4_ADD_EXECUTABLE( kmymoney2 ${kmymoney2_SRCS} )
-TARGET_LINK_LIBRARIES( kmymoney2 ${kmymoney_common_LIBS} kmymoney_base )
+KDE4_ADD_EXECUTABLE( kmymoney ${kmymoney_SRCS} )
+TARGET_LINK_LIBRARIES( kmymoney ${kmymoney_common_LIBS} kmymoney_base )
 
 ########### kmymoneytest executable ###############
 
@@ -136,12 +136,8 @@ ENDIF( KDE4_BUILD_TESTS )
 
 ########### install files ###############
 
-INSTALL(TARGETS kmymoney2 ${INSTALL_TARGETS_DEFAULT_ARGS})
-INSTALL(CODE
-  "EXECUTE_PROCESS(
-  COMMAND ${CMAKE_COMMAND} -E create_symlink kmymoney2 kmymoney
-  WORKING_DIRECTORY \$ENV{DESTDIR}\${CMAKE_INSTALL_PREFIX}/bin/)"
-  )
+INSTALL(TARGETS kmymoney ${INSTALL_TARGETS_DEFAULT_ARGS})
+
 INSTALL(FILES kmymoney2.kcfg
   DESTINATION ${KCFG_INSTALL_DIR}
   )
@@ -172,7 +168,7 @@ INSTALL(DIRECTORY icons/oxygen
   )
 INSTALL(FILES hi16-app-kmymoney2.png
   DESTINATION ${ICON_INSTALL_DIR}/oxygen/16x16/apps
-  RENAME kmymoney2.png
+  RENAME kmymoney.png
   )
 INSTALL(FILES mimetype_kmy_16x16.png
   DESTINATION ${ICON_INSTALL_DIR}/oxygen/16x16/mimetypes
@@ -180,7 +176,7 @@ INSTALL(FILES mimetype_kmy_16x16.png
   )
 INSTALL(FILES hi32-app-kmymoney2.png
   DESTINATION ${ICON_INSTALL_DIR}/oxygen/32x32/apps
-  RENAME kmymoney2.png
+  RENAME kmymoney.png
   )
 INSTALL(FILES mimetype_kmy_22x22.png
   DESTINATION ${ICON_INSTALL_DIR}/oxygen/22x22/mimetypes
@@ -192,7 +188,7 @@ INSTALL(FILES mimetype_kmy_32x32.png
   )
 INSTALL(FILES hi48-app-kmymoney2.png
   DESTINATION ${ICON_INSTALL_DIR}/oxygen/48x48/apps
-  RENAME kmymoney2.png
+  RENAME kmymoney.png
   )
 INSTALL(FILES mimetype_kmy_48x48.png
   DESTINATION ${ICON_INSTALL_DIR}/oxygen/48x48/mimetypes
@@ -200,7 +196,7 @@ INSTALL(FILES mimetype_kmy_48x48.png
   )
 INSTALL(FILES hi64-app-kmymoney2.png
   DESTINATION ${ICON_INSTALL_DIR}/oxygen/68x68/apps
-  RENAME kmymoney2.png
+  RENAME kmymoney.png
   )
 INSTALL(FILES mimetype_kmy_64x64.png
   DESTINATION ${ICON_INSTALL_DIR}/oxygen/64x64/mimetypes
@@ -208,7 +204,7 @@ INSTALL(FILES mimetype_kmy_64x64.png
   )
 INSTALL(FILES hi128-app-kmymoney2.png
   DESTINATION ${ICON_INSTALL_DIR}/oxygen/128x128/apps
-  RENAME kmymoney2.png
+  RENAME kmymoney.png
   )
 INSTALL(FILES mimetype_kmy_128x128.png
   DESTINATION ${ICON_INSTALL_DIR}/oxygen/128x128/mimetypes
@@ -216,9 +212,9 @@ INSTALL(FILES mimetype_kmy_128x128.png
   )
 INSTALL(FILES lo16-app-kmymoney2.png
   DESTINATION ${ICON_INSTALL_DIR}/locolor/16x16/apps
-  RENAME kmymoney2.png
+  RENAME kmymoney.png
   )
 INSTALL(FILES lo32-app-kmymoney2.png
   DESTINATION ${ICON_INSTALL_DIR}/locolor/32x32/apps
-  RENAME kmymoney2.png
+  RENAME kmymoney.png
   )
