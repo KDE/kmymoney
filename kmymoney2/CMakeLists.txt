@@ -49,7 +49,7 @@ SET( kmymoney_SRCS
 	kmymoney2.cpp )
 
 QT4_ADD_DBUS_ADAPTOR(kmymoney_SRCS org.kde.kmymoney.xml kmymoney2.h KMyMoney2App)
-KDE4_ADD_APP_ICON( kmymoney_SRCS hi*-app-kmymoney2.png )
+KDE4_ADD_APP_ICON( kmymoney_SRCS hi*-app-kmymoney.png )
 
 KDE4_ADD_EXECUTABLE( kmymoney ${kmymoney_SRCS} )
 TARGET_LINK_LIBRARIES( kmymoney ${kmymoney_common_LIBS} kmymoney_base )
@@ -166,7 +166,7 @@ INSTALL(DIRECTORY icons/oxygen
   PATTERN "*Make*" EXCLUDE
   PATTERN ".svn" EXCLUDE
   )
-INSTALL(FILES hi16-app-kmymoney2.png
+INSTALL(FILES hi16-app-kmymoney.png
   DESTINATION ${ICON_INSTALL_DIR}/oxygen/16x16/apps
   RENAME kmymoney.png
   )
@@ -174,7 +174,7 @@ INSTALL(FILES mimetype_kmy_16x16.png
   DESTINATION ${ICON_INSTALL_DIR}/oxygen/16x16/mimetypes
   RENAME kmy.png
   )
-INSTALL(FILES hi32-app-kmymoney2.png
+INSTALL(FILES hi32-app-kmymoney.png
   DESTINATION ${ICON_INSTALL_DIR}/oxygen/32x32/apps
   RENAME kmymoney.png
   )
@@ -186,7 +186,7 @@ INSTALL(FILES mimetype_kmy_32x32.png
   DESTINATION ${ICON_INSTALL_DIR}/oxygen/32x32/mimetypes
   RENAME kmy.png
   )
-INSTALL(FILES hi48-app-kmymoney2.png
+INSTALL(FILES hi48-app-kmymoney.png
   DESTINATION ${ICON_INSTALL_DIR}/oxygen/48x48/apps
   RENAME kmymoney.png
   )
@@ -194,7 +194,7 @@ INSTALL(FILES mimetype_kmy_48x48.png
   DESTINATION ${ICON_INSTALL_DIR}/oxygen/48x48/mimetypes
   RENAME kmy.png
   )
-INSTALL(FILES hi64-app-kmymoney2.png
+INSTALL(FILES hi64-app-kmymoney.png
   DESTINATION ${ICON_INSTALL_DIR}/oxygen/68x68/apps
   RENAME kmymoney.png
   )
@@ -202,7 +202,7 @@ INSTALL(FILES mimetype_kmy_64x64.png
   DESTINATION ${ICON_INSTALL_DIR}/oxygen/64x64/mimetypes
   RENAME kmy.png
   )
-INSTALL(FILES hi128-app-kmymoney2.png
+INSTALL(FILES hi128-app-kmymoney.png
   DESTINATION ${ICON_INSTALL_DIR}/oxygen/128x128/apps
   RENAME kmymoney.png
   )
@@ -210,11 +210,11 @@ INSTALL(FILES mimetype_kmy_128x128.png
   DESTINATION ${ICON_INSTALL_DIR}/oxygen/128x128/mimetypes
   RENAME kmy.png
   )
-INSTALL(FILES lo16-app-kmymoney2.png
+INSTALL(FILES lo16-app-kmymoney.png
   DESTINATION ${ICON_INSTALL_DIR}/locolor/16x16/apps
   RENAME kmymoney.png
   )
-INSTALL(FILES lo32-app-kmymoney2.png
+INSTALL(FILES lo32-app-kmymoney.png
   DESTINATION ${ICON_INSTALL_DIR}/locolor/32x32/apps
   RENAME kmymoney.png
   )
