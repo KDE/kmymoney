@@ -1,7 +1,7 @@
 /* config.h.  Generated from config.h.cmake by cmake  */
 
 /* Name of package */
-#define PACKAGE "kmymoney2"
+#define PACKAGE "kmymoney"
 
 /* Version number of package */
 #define VERSION "@VERSION_MAJOR@.@VERSION_MINOR@.@VERSION_PATCH@-@VERSION_SUFFIX@"

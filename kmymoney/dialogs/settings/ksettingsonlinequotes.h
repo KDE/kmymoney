@@ -30,7 +30,7 @@
 // Project Includes
 
 #include "ui_ksettingsonlinequotesdecl.h"
-#include "kmymoney2/converter/webpricequote.h"
+#include "kmymoney/converter/webpricequote.h"
 
 
 class KSettingsOnlineQuotesDecl : public QWidget, public Ui::KSettingsOnlineQuotesDecl

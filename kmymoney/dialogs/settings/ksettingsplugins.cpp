@@ -34,7 +34,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoney2/plugins/pluginloader.h"
+#include "kmymoney/plugins/pluginloader.h"
 #include "ksettingsplugins.h"
 
 KSettingsPlugins::KSettingsPlugins(QWidget* parent)

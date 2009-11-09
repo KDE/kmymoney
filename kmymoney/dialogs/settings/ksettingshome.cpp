@@ -35,8 +35,8 @@
 // Project Includes
 
 #include "ksettingshome.h"
-#include "kmymoney2/kmymoneyglobalsettings.h"
-#include "kmymoney2/kmymoneyutils.h"
+#include "kmymoney/kmymoneyglobalsettings.h"
+#include "kmymoney/kmymoneyutils.h"
 
 KSettingsHome::KSettingsHome(QWidget* parent) :
   KSettingsHomeDecl(parent),
