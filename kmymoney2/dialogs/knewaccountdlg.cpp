@@ -1176,12 +1176,12 @@ void KNewAccountDlg::slotAdjustMinBalanceEarlyEdit(const QString&)
 
 void KNewAccountDlg::slotAdjustMaxCreditAbsoluteEdit(const QString&)
 {
-  adjustEditWidgets(m_maxCreditAbsoluteEdit, m_maxCreditEarlyEdit, '<', 1);
+  adjustEditWidgets(m_maxCreditAbsoluteEdit, m_maxCreditEarlyEdit, '>', 1);
 }
 
 void KNewAccountDlg::slotAdjustMaxCreditEarlyEdit(const QString&)
 {
-  adjustEditWidgets(m_maxCreditEarlyEdit, m_maxCreditAbsoluteEdit, '>', 1);
+  adjustEditWidgets(m_maxCreditEarlyEdit, m_maxCreditAbsoluteEdit, '<', 1);
 }
 
 void KNewAccountDlg::addTab(QWidget* w, const QString& name)
