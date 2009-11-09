@@ -40,7 +40,7 @@
 #ifndef HAVE_CONFIG_H
 #define VERSION "UNKNOWN"
 #else
-#include "config-kmymoney.h"
+#include <config-kmymoney.h>
 #endif
 
 const QString MyMoneyFile::OpeningBalancesPrefix = I18N_NOOP("Opening Balances");

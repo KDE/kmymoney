@@ -18,7 +18,7 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>  *
  ***************************************************************************/
 
-#include "config-kmymoney.h"
+#include <config-kmymoney.h>
 
 // KDE includes
 #include <kgenericfactory.h>

@@ -18,7 +18,7 @@
 #define KMYMONEYGLOBALSETTINGS_H
 
 #ifdef HAVE_CONFIG_H
-#include "config-kmymoney.h"
+#include <config-kmymoney.h>
 #endif
 
 // ----------------------------------------------------------------------------

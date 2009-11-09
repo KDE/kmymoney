@@ -24,7 +24,7 @@
 #define _MYMONEYUTILS_H_
 
 #ifdef HAVE_CONFIG_H
-#include "config-kmymoney.h"
+#include <config-kmymoney.h>
 #endif
 
 #include <QString>
