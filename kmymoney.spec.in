@@ -126,7 +126,7 @@ cd ..
 %{_libdir}/kde3/libkmm_ofximport_dialogs.so
 %{_libdir}/kde3/kmm_ofximport.so
 %{_libdir}/kde3/kmm_ofximport.la
-%{_datadir}/applications/kde/kmymoney2.desktop
+%{_datadir}/applications/kde/kmymoney.desktop
 %{_datadir}/apps/*
 %{_datadir}/icons/*
 %{_datadir}/mimelnk/*/*.desktop

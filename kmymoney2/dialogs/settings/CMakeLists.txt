@@ -1,7 +1,7 @@
 ADD_CUSTOM_COMMAND(
   OUTPUT ${KMyMoney2_BINARY_DIR}/kmymoneysettings.h  ${KMyMoney2_BINARY_DIR}/kmymoneysettings.cpp
-  DEPENDS ${KMyMoney2_SOURCE_DIR}/kmymoney2.kcfg ${KMyMoney2_SOURCE_DIR}/kmymoneysettings.kcfgc
-  COMMAND ${KDE4_KCFGC_EXECUTABLE} -d ${KMyMoney2_BINARY_DIR}/ ${KMyMoney2_SOURCE_DIR}/kmymoney2.kcfg ${KMyMoney2_SOURCE_DIR}/kmymoneysettings.kcfgc
+  DEPENDS ${KMyMoney2_SOURCE_DIR}/kmymoney.kcfg ${KMyMoney2_SOURCE_DIR}/kmymoneysettings.kcfgc
+  COMMAND ${KDE4_KCFGC_EXECUTABLE} -d ${KMyMoney2_BINARY_DIR}/ ${KMyMoney2_SOURCE_DIR}/kmymoney.kcfg ${KMyMoney2_SOURCE_DIR}/kmymoneysettings.kcfgc
   )
 
 

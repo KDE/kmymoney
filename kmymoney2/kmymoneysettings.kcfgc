@@ -1,4 +1,4 @@
-File=kmymoney2.kcfg
+File=kmymoney.kcfg
 ClassName=KMyMoneySettings
 Singleton=true
 Mutators=true
