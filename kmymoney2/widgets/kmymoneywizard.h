@@ -21,9 +21,8 @@
 // QT Includes
 
 #include <QDialog>
-#include <q3valuelist.h>
+#include <QList>
 #include <QPalette>
-//Added by qt3to4:
 #include <QLabel>
 #include <Q3Frame>
 class QVBoxLayout;
@@ -407,7 +406,7 @@ public:
     */
   void addStep(const QString& text);
 
-  Q3ValueList<KMyMoneyWizardPage*> historyPages(void) const { return m_history; }
+  QList<KMyMoneyWizardPage*> historyPages(void) const { return m_history; }
 
   /**
     * This method repeats selection of the current step in the
@@ -521,7 +520,7 @@ private:
   QLabel*               m_stepLabel;
   QPalette              m_stepPalette;
 
-  Q3ValueList<QLabel*>   m_steps;      // the list of step labels
+  QList<QLabel*>   m_steps;      // the list of step labels
   int                   m_step;       // the currently selected step
 
   /*
@@ -532,7 +531,7 @@ private:
   /*
    * The history stack
    */
-  Q3ValueList<KMyMoneyWizardPage*> m_history;
+  QList<KMyMoneyWizardPage*> m_history;
 
   QString               m_helpContext;
 };

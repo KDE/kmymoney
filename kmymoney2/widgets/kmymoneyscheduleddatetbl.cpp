@@ -49,8 +49,7 @@
 #include <qdrawutil.h>
 #include <QCursor>
 #include <QApplication>
-//Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 #include <QMouseEvent>
 #include <QDesktopWidget>
 // ----------------------------------------------------------------------------
@@ -142,7 +141,7 @@ void kMyMoneyScheduledDateTbl::drawCellContents(QPainter *painter, int /*row*/, 
     painter->drawText(0, 0, w-2, h, Qt::AlignRight, text, -1, &rect);
 
     MyMoneyFile *file = MyMoneyFile::instance();
-    Q3ValueList<MyMoneySchedule> schedules;
+    QList<MyMoneySchedule> schedules;
     try
     {
 
@@ -182,7 +181,7 @@ void kMyMoneyScheduledDateTbl::drawCellContents(QPainter *painter, int /*row*/, 
 
     if (schedules.count() >= 1)
     {
-      Q3ValueList<MyMoneySchedule>::Iterator iter;
+      QList<MyMoneySchedule>::Iterator iter;
       bool anyOverdue=false;
       for (iter=schedules.begin(); iter!=schedules.end(); ++iter)
       {
@@ -232,9 +231,9 @@ void kMyMoneyScheduledDateTbl::drawCellContents(QPainter *painter, int /*row*/, 
 
     painter->drawText(0, 0, w-2, h, Qt::AlignRight, QDate::shortDayName(theDate.dayOfWeek()) + ' ' + text, -1, &rect);
 
-    Q3ValueList<MyMoneySchedule> billSchedules;
-    Q3ValueList<MyMoneySchedule> depositSchedules;
-    Q3ValueList<MyMoneySchedule> transferSchedules;
+    QList<MyMoneySchedule> billSchedules;
+    QList<MyMoneySchedule> depositSchedules;
+    QList<MyMoneySchedule> transferSchedules;
     try
     {
       text = QString();
@@ -293,7 +292,7 @@ void kMyMoneyScheduledDateTbl::drawCellContents(QPainter *painter, int /*row*/, 
     }
 
     bool anyOverdue=false;
-    Q3ValueList<MyMoneySchedule>::Iterator iter;
+    QList<MyMoneySchedule>::Iterator iter;
     for (iter=transferSchedules.begin(); iter!=transferSchedules.end(); ++iter)
     {
       MyMoneySchedule schedule = *iter;
@@ -447,7 +446,7 @@ void kMyMoneyScheduledDateTbl::contentsMouseMoveEvent(QMouseEvent* e)
 
     m_drawDateOrig = drawDate;
     MyMoneyFile *file = MyMoneyFile::instance();
-    Q3ValueList<MyMoneySchedule> schedules;
+    QList<MyMoneySchedule> schedules;
 
     try
     {

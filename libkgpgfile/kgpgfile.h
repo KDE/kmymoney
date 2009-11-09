@@ -25,9 +25,9 @@
 #include <QObject>
 #include <QString>
 #include <QStringList>
+#include <QLinkedList>
 #include <QEventLoop>
 #include <QByteArray>
-#include <Q3ValueList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

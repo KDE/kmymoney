@@ -29,12 +29,8 @@
 #include <QFile>
 #include <QDir>
 #include <QString>
-
 #include <QEventLoop>
-//Added by qt3to4:
 #include <QByteArray>
-#include <Q3ValueList>
-
 
 // ----------------------------------------------------------------------------
 // KDE Includes

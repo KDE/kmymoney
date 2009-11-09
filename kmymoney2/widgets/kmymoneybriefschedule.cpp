@@ -27,8 +27,7 @@
 #include <QLineEdit>
 #include <q3textedit.h>
 #include <QToolButton>
-//Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -74,7 +73,7 @@ KMyMoneyBriefSchedule::~KMyMoneyBriefSchedule()
 {
 }
 
-void KMyMoneyBriefSchedule::setSchedules(Q3ValueList<MyMoneySchedule> list, const QDate& date)
+void KMyMoneyBriefSchedule::setSchedules(QList<MyMoneySchedule> list, const QDate& date)
 {
   m_scheduleList = list;
   m_date = date;

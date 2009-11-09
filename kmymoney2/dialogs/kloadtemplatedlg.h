@@ -28,8 +28,7 @@
 
 #include <mymoneytemplate.h>
 #include "ui_kloadtemplatedlgdecl.h"
-//Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 
 class KLoadTemplateDlgDecl : public QDialog, public Ui::KLoadTemplateDlgDecl
@@ -48,7 +47,7 @@ class KLoadTemplateDlg : public KLoadTemplateDlgDecl
   public:
     KLoadTemplateDlg(QWidget *parent = 0);
 
-    Q3ValueList<MyMoneyTemplate> templates(void) const;
+    QList<MyMoneyTemplate> templates(void) const;
 
   private slots:
     void slotHelp(void);

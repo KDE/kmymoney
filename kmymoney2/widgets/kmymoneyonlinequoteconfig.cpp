@@ -19,8 +19,7 @@
 // QT Includes
 
 #include <QRegExp>
-//Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -117,7 +116,7 @@ void kMyMoneyOnlineQuoteConfig::resetConfig(void)
   }
 
   // and write back the one's from the reset list
-  Q3ValueList<WebPriceQuoteSource>::ConstIterator itr;
+  QList<WebPriceQuoteSource>::ConstIterator itr;
   for(itr = m_resetList.constBegin(); itr != m_resetList.constEnd(); ++itr) {
     (*itr).write();
   }

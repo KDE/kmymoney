@@ -22,11 +22,9 @@
 // QT Includes
 
 #include <q3table.h>
-#include <q3valuelist.h>
 #include <q3valuevector.h>
 #include <QPalette>
 #include <qwidget.h>
-//Added by qt3to4:
 #include <QMouseEvent>
 #include <QKeyEvent>
 

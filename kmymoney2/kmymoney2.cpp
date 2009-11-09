@@ -1267,8 +1267,8 @@ void KMyMoney2App::slotFileNew(void)
         }
 
         // import the account templates
-        Q3ValueList<MyMoneyTemplate> templates = wizard->templates();
-        Q3ValueList<MyMoneyTemplate>::iterator it_t;
+        QList<MyMoneyTemplate> templates = wizard->templates();
+        QList<MyMoneyTemplate>::iterator it_t;
         for(it_t = templates.begin(); it_t != templates.end(); ++it_t) {
           (*it_t).importTemplate(&progressCallback);
         }
@@ -1954,8 +1954,8 @@ void KMyMoney2App::slotLoadAccountTemplates(void)
     MyMoneyFileTransaction ft;
     try {
     // import the account templates
-      Q3ValueList<MyMoneyTemplate> templates = dlg->templates();
-      Q3ValueList<MyMoneyTemplate>::iterator it_t;
+      QList<MyMoneyTemplate> templates = dlg->templates();
+      QList<MyMoneyTemplate>::iterator it_t;
       for(it_t = templates.begin(); it_t != templates.end(); ++it_t) {
         (*it_t).importTemplate(&progressCallback);
       }
@@ -3115,23 +3115,6 @@ void KMyMoney2App::createSchedule(MyMoneySchedule newSchedule, MyMoneyAccount& n
       if(t.splitCount() < 2) {
         throw new MYMONEYEXCEPTION("Transaction for schedule has less than 2 splits!");
       }
-#if 0
-      // now search the split that does not have an account reference
-      // and set it up to be the one of the account we just added
-      // to the account pool. Note: the schedule code used to leave
-      // this always the first split, but the loan code leaves it as
-      // the second one. So I thought, searching is a good alternative ....
-      Q3ValueList<MyMoneySplit>::ConstIterator it_s;
-      for(it_s = t.splits().begin(); it_s != t.splits().end(); ++it_s) {
-        if((*it_s).accountId().isEmpty()) {
-          MyMoneySplit s = (*it_s);
-          s.setAccountId(newAccount.id());
-          t.modifySplit(s);
-          break;
-        }
-      }
-      newSchedule.setTransaction(t);
-#endif
 
       MyMoneyFileTransaction ft;
       try {
@@ -6314,7 +6297,7 @@ void KMyMoney2App::webConnect(const QString& url, const QByteArray& asn_id)
     {
       if ( (*it_plugin)->isMyFormat(url) )
       {
-        Q3ValueList<MyMoneyStatement> statements;
+        QList<MyMoneyStatement> statements;
         if (!(*it_plugin)->import(url) )
         {
           KMessageBox::error( this, i18n("Unable to import %1 using %2 plugin.  The plugin returned the following error: %3", url,(*it_plugin)->formatName(),(*it_plugin)->lastError()), i18n("Importing error"));

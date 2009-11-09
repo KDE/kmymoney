@@ -29,8 +29,7 @@
 #include <QTabWidget>
 #include <QLayout>
 #include <QTimer>
-//Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -164,7 +163,7 @@ void KScheduledView::refresh(bool full, const QString& schedId)
     m_calendar->refresh();
 
     MyMoneyFile *file = MyMoneyFile::instance();
-    Q3ValueList<MyMoneySchedule> scheduledItems = file->scheduleList();
+    QList<MyMoneySchedule> scheduledItems = file->scheduleList();
 
     if (scheduledItems.count() == 0)
       return;
@@ -174,7 +173,7 @@ void KScheduledView::refresh(bool full, const QString& schedId)
     KScheduledListItem *itemLoans = new KScheduledListItem(m_qlistviewScheduled, i18n("Loans"), KMyMoneyUtils::transferScheduleIcon(KIconLoader::Small), "2");
     KScheduledListItem *itemTransfers = new KScheduledListItem(m_qlistviewScheduled, i18n("Transfers"), KMyMoneyUtils::transferScheduleIcon(KIconLoader::Small), "3");
 
-    Q3ValueList<MyMoneySchedule>::Iterator it;
+    QList<MyMoneySchedule>::Iterator it;
 
     KScheduledListItem *openItem=0;
 

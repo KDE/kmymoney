@@ -29,7 +29,7 @@
 #include <qmap.h>
 #include <QDateTime>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 
 // ----------------------------------------------------------------------------
@@ -408,7 +408,7 @@ public:
     * @param endDate The end date for the range calculations.
     * @return QValueList<QDate> The dates on which the payments are due.
     */
-  Q3ValueList<QDate> paymentDates(const QDate& startDate, const QDate& endDate) const;
+  QList<QDate> paymentDates(const QDate& startDate, const QDate& endDate) const;
 
   /**
     * Returns the instances name
@@ -438,7 +438,7 @@ public:
   bool isFinished() const;
   bool hasRecordedPayment(const QDate&) const;
   void recordPayment(const QDate&);
-  Q3ValueList<QDate> recordedPayments(void) const { return m_recordedPayments; }
+  QList<QDate> recordedPayments(void) const { return m_recordedPayments; }
 
   void writeXML(QDomDocument& document, QDomElement& parent) const;
 
@@ -662,7 +662,7 @@ private:
   QString m_name;
 
   /// The recorded payments
-  Q3ValueList<QDate> m_recordedPayments;
+  QList<QDate> m_recordedPayments;
 
   /// The weekday option
   weekendOptionE m_weekendOption;

@@ -26,7 +26,6 @@
 
 #include <QString>
 #include <QDateTime>
-#include <q3valuelist.h>
 #include <QStringList>
 #include <qdom.h>
 #include <QPixmap>

@@ -23,9 +23,8 @@
 #include <qfont.h>
 #include <q3frame.h>
 #include <QToolTip>
-//Added by qt3to4:
 #include <QHBoxLayout>
-#include <Q3ValueList>
+#include <QList>
 #include <QVBoxLayout>
 
 // ----------------------------------------------------------------------------
@@ -257,7 +256,7 @@ void KMyMoneyWizard::selectStep(unsigned int step)
     return;
 
   m_step = step;
-  Q3ValueList<QLabel*>::iterator it_l;
+  QList<QLabel*>::iterator it_l;
   QFont f = m_steps[0]->font();
   for(it_l = m_steps.begin(); it_l != m_steps.end(); ++it_l) {
     f.setBold(false);
@@ -278,7 +277,7 @@ void KMyMoneyWizard::reselectStep(void)
 
 void KMyMoneyWizard::updateStepCount(void)
 {
-  Q3ValueList<QLabel*>::iterator it_l;
+  QList<QLabel*>::iterator it_l;
   int stepCount = 0;
   int hiddenAdjust = 0;
   int step = 0;

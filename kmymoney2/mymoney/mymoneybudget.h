@@ -27,7 +27,7 @@
 // QT Includes
 
 #include <qmap.h>
-#include <q3valuelist.h>
+#include <QList>
 #include <QString>
 class QDomElement;
 class QDomDocument;
@@ -190,7 +190,7 @@ public:
   QString id(void) const { return m_id; }
   const AccountGroup & account(const QString _id) const;
   bool contains(const QString _id) const { return m_accounts.contains(_id); }
-  Q3ValueList<AccountGroup> getaccounts(void) const { return m_accounts.values(); }
+  QList<AccountGroup> getaccounts(void) const { return m_accounts.values(); }
 
   // Simple set operations
   void setName(const QString& _name) { m_name = _name; }

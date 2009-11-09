@@ -23,8 +23,7 @@
 #include <QLineEdit>
 #include <QLabel>
 #include <QPixmap>
-//Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
@@ -198,8 +197,8 @@ void KExportDlg::checkData(const QString& accountId)
     account = file->account(accountId);
     if(m_lastAccount != accountId) {
       MyMoneyTransactionFilter filter(accountId);
-      Q3ValueList<MyMoneyTransaction> list = file->transactionList(filter);
-      Q3ValueList<MyMoneyTransaction>::Iterator it;
+      QList<MyMoneyTransaction> list = file->transactionList(filter);
+      QList<MyMoneyTransaction>::Iterator it;
 
       if(!list.isEmpty()) {
         it = list.begin();

@@ -21,8 +21,7 @@
 #include <QDir>
 #include <q3header.h>
 #include <QTimer>
-//Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -65,7 +64,7 @@ class KAccountTemplateSelector::Private
   public:
     Private(KAccountTemplateSelector* p) { m_parent = p; }
 #ifndef KMM_DESIGNER
-    Q3ValueList<MyMoneyTemplate> selectedTemplates(void) const;
+    QList<MyMoneyTemplate> selectedTemplates(void) const;
     Q3ListViewItem* hierarchyItem(const QString& parent, const QString& name);
     void loadHierarchy(void);
 #endif
@@ -111,8 +110,8 @@ void KAccountTemplateSelector::Private::loadHierarchy(void)
 #if 0
 
   // add the hierarchy from the MyMoneyFile object
-  Q3ValueList<MyMoneyAccount> aList;
-  Q3ValueList<MyMoneyAccount>::const_iterator it_a;
+  QList<MyMoneyAccount> aList;
+  QList<MyMoneyAccount>::const_iterator it_a;
   MyMoneyFile* file = MyMoneyFile::instance();
   file->accountList(aList);
   if(aList.count() > 0) {
@@ -147,9 +146,9 @@ void KAccountTemplateSelector::Private::loadHierarchy(void)
   }
 }
 
-Q3ValueList<MyMoneyTemplate> KAccountTemplateSelector::Private::selectedTemplates(void) const
+QList<MyMoneyTemplate> KAccountTemplateSelector::Private::selectedTemplates(void) const
 {
-  Q3ValueList<MyMoneyTemplate> list;
+  QList<MyMoneyTemplate> list;
   Q3ListViewItemIterator it(m_parent->m_groupList, Q3ListViewItemIterator::Selected);
   Q3ListViewItem* it_v;
   while((it_v = it.current()) != 0) {
@@ -270,12 +269,12 @@ void KAccountTemplateSelector::slotLoadHierarchy(void)
 #endif
 }
 
-Q3ValueList<MyMoneyTemplate> KAccountTemplateSelector::selectedTemplates(void) const
+QList<MyMoneyTemplate> KAccountTemplateSelector::selectedTemplates(void) const
 {
 #ifndef KMM_DESIGNER
   return d->selectedTemplates();
 #else
-  return Q3ValueList<MyMoneyTemplate>();
+  return QList<MyMoneyTemplate>();
 #endif
 }
 

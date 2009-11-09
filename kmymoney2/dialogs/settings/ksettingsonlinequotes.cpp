@@ -117,7 +117,7 @@ void KSettingsOnlineQuotes::resetConfig(void)
   }
 
   // and write back the one's from the reset list
-  Q3ValueList<WebPriceQuoteSource>::ConstIterator itr;
+  QList<WebPriceQuoteSource>::ConstIterator itr;
   for(itr = m_resetList.begin(); itr != m_resetList.end(); ++itr) {
     (*itr).write();
   }

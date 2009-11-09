@@ -21,7 +21,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <q3valuelist.h>
 #include <QCheckBox>
 
 // ----------------------------------------------------------------------------
@@ -66,7 +65,7 @@ public:
     * @return Returns the id of the selected payee in the list or QString() if
     *         the dialog was aborted. QString() is also returned if the payeeslist is empty.
     */
-  QString show(const Q3ValueList<MyMoneyPayee>& payeeslist);
+  QString show(const QList<MyMoneyPayee>& payeeslist);
 
   /**
    * Returns true, if the names of the payees to be deleted should be copied

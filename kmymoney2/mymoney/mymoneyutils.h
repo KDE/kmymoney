@@ -29,7 +29,6 @@
 
 #include <QString>
 #include <QDateTime>
-#include <q3valuelist.h>
 #include <kmm_mymoney_export.h>
 #if 0
 

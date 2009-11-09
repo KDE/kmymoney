@@ -28,8 +28,7 @@
 // Project Includes
 
 #include "ui_kaccounttemplateselectordecl.h"
-//Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 class MyMoneyTemplate;
 
 /**
@@ -52,7 +51,7 @@ class KAccountTemplateSelector : public KAccountTemplateSelectorDecl
     KAccountTemplateSelector(QWidget* parent = 0);
     ~KAccountTemplateSelector();
 
-    Q3ValueList<MyMoneyTemplate> selectedTemplates(void) const;
+    QList<MyMoneyTemplate> selectedTemplates(void) const;
 
   private slots:
     void slotLoadHierarchy(void);

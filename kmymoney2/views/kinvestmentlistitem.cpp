@@ -24,8 +24,7 @@
 // QT Includes
 
 #include <QPainter>
-//Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -63,7 +62,7 @@ KInvestmentListItem::KInvestmentListItem(K3ListView* parent, const MyMoneyAccoun
 
   int prec = MyMoneyMoney::denomToPrec(m_tradingCurrency.smallestAccountFraction());
 
-  Q3ValueList<MyMoneyTransaction> transactionList;
+  QList<MyMoneyTransaction> transactionList;
   // FIXME PRICE
   // equity_price_history history = equity.priceHistory();
 

@@ -21,6 +21,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QList>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -29,8 +31,7 @@
 
 #include "ui_ksettingsonlinequotesdecl.h"
 #include "kmymoney2/converter/webpricequote.h"
-//Added by qt3to4:
-#include <Q3ValueList>
+
 
 class KSettingsOnlineQuotesDecl : public QWidget, public Ui::KSettingsOnlineQuotesDecl
 {
@@ -62,7 +63,7 @@ protected:
   void loadList(const bool updateResetList = false);
 
 private:
-  Q3ValueList<WebPriceQuoteSource>  m_resetList;
+  QList<WebPriceQuoteSource>  m_resetList;
   WebPriceQuoteSource              m_currentItem;
 };
 

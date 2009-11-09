@@ -24,8 +24,7 @@
 
 #include <QLabel>
 #include <QLayout>
-//Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 #include <QVBoxLayout>
 
 // ----------------------------------------------------------------------------
@@ -163,9 +162,9 @@ void KCategoriesView::loadAccounts(void)
 
   MyMoneyFile* file = MyMoneyFile::instance();
 
-  Q3ValueList<MyMoneySecurity> slist = file->currencyList();
+  QList<MyMoneySecurity> slist = file->currencyList();
   slist += file->securityList();
-  Q3ValueList<MyMoneySecurity>::const_iterator it_s;
+  QList<MyMoneySecurity>::const_iterator it_s;
   for(it_s = slist.begin(); it_s != slist.end(); ++it_s) {
     m_securityMap[(*it_s).id()] = *it_s;
   }
@@ -234,7 +233,7 @@ bool KCategoriesView::loadSubAccounts(KMyMoneyAccountTreeItem* parent, const QSt
   QStringList::const_iterator it_a;
   for(it_a = accountList.begin(); it_a != accountList.end(); ++it_a) {
     const MyMoneyAccount& acc = file->account(*it_a);
-    Q3ValueList<MyMoneyPrice> prices;
+    QList<MyMoneyPrice> prices;
     MyMoneySecurity security = file->baseCurrency();
     try {
       if(acc.isInvest()) {

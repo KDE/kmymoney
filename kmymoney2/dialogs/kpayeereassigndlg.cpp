@@ -34,7 +34,7 @@
 #include <kmymoneycombo.h>
 #include <kguiutils.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 KPayeeReassignDlg::KPayeeReassignDlg( QWidget* parent) :
   KPayeeReassignDlgDecl( parent)
@@ -50,7 +50,7 @@ KPayeeReassignDlg::~KPayeeReassignDlg()
 {
 }
 
-QString KPayeeReassignDlg::show(const Q3ValueList<MyMoneyPayee>& payeeslist)
+QString KPayeeReassignDlg::show(const QList<MyMoneyPayee>& payeeslist)
 {
   if (payeeslist.isEmpty())
    return QString(); // no payee available? nothing can be selected...

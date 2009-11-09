@@ -17,6 +17,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QList>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -28,8 +30,8 @@
 #include "mymoneyscheduled.h"
 #include "mymoneyexception.h"
 #include "mymoneyfile.h"
-//Added by qt3to4:
-#include <Q3ValueList>
+
+
 
 MyMoneySchedule::MyMoneySchedule() :
   MyMoneyObject()
@@ -191,9 +193,9 @@ void MyMoneySchedule::setTransaction(const MyMoneyTransaction& transaction, bool
   // make sure to clear out some unused information in scheduled transactions
   // we need to do this for the case that the transaction passed as argument
   // is a matched or imported transaction.
-  Q3ValueList<MyMoneySplit> splits = t.splits();
+  QList<MyMoneySplit> splits = t.splits();
   if(splits.count() > 0) {
-    Q3ValueList<MyMoneySplit>::const_iterator it_s;
+    QList<MyMoneySplit>::const_iterator it_s;
     for(it_s = splits.begin(); it_s != splits.end(); ++it_s) {
       MyMoneySplit s = *it_s;
       // clear out the bankID
@@ -288,8 +290,8 @@ void MyMoneySchedule::setNextDueDate(const QDate& date)
 void MyMoneySchedule::setLastPayment(const QDate& date)
 {
   // Delete all payments older than date
-  Q3ValueList<QDate>::Iterator it;
-  Q3ValueList<QDate> delList;
+  QList<QDate>::Iterator it;
+  QList<QDate> delList;
 
   for (it=m_recordedPayments.begin(); it!=m_recordedPayments.end(); ++it)
   {
@@ -499,10 +501,10 @@ QDate MyMoneySchedule::nextPayment(const QDate& refDate) const
   return paymentDate;
 }
 
-Q3ValueList<QDate> MyMoneySchedule::paymentDates(const QDate& _startDate, const QDate& _endDate) const
+QList<QDate> MyMoneySchedule::paymentDates(const QDate& _startDate, const QDate& _endDate) const
 {
   QDate paymentDate(nextDueDate());
-  Q3ValueList<QDate> theDates;
+  QList<QDate> theDates;
 
   QDate endDate(_endDate);
   if ( willEnd() && m_endDate < endDate )
@@ -622,7 +624,7 @@ int MyMoneySchedule::transactionsRemaining(void) const
 
   if (m_endDate.isValid())
   {
-    Q3ValueList<QDate> dates = paymentDates(m_lastPayment, m_endDate);
+    QList<QDate> dates = paymentDates(m_lastPayment, m_endDate);
     // Do not include the last payment so -1
     counter = dates.count();
   }
@@ -631,8 +633,8 @@ int MyMoneySchedule::transactionsRemaining(void) const
 
 MyMoneyAccount MyMoneySchedule::account(int cnt) const
 {
-  Q3ValueList<MyMoneySplit> splits = m_transaction.splits();
-  Q3ValueList<MyMoneySplit>::ConstIterator it;
+  QList<MyMoneySplit> splits = m_transaction.splits();
+  QList<MyMoneySplit>::ConstIterator it;
   MyMoneyFile* file = MyMoneyFile::instance();
   MyMoneyAccount acc;
 
@@ -712,58 +714,6 @@ bool MyMoneySchedule::isOverdue() const
     return false;
 
   return true;
-
-#if 0
-  bool bOverdue = true;
-
-  // Check the payment dates first
-  Q3ValueList<QDate> datesBeforeToday = paymentDates(m_startDate, QDate::currentDate().addDays(-1));
-  if (datesBeforeToday.count() == 0)
-  {
-    bOverdue = false;
-  }
-  else if (datesBeforeToday.count() == 1)
-  {
-    if (nextPayment(m_lastPayment).isValid() &&
-        (nextPayment(m_lastPayment) >= QDate::currentDate()))
-      bOverdue = false;
-  }
-  else
-  {
-    // Check the dates
-    // Remove all dates before m_lastPayment
-    Q3ValueList<QDate> delList;
-    Q3ValueList<QDate>::ConstIterator it;
-
-    for (it=datesBeforeToday.begin(); it!=datesBeforeToday.end(); ++it)
-    {
-      if (*it <= m_lastPayment)
-        delList.append(*it);
-    }
-    for (it=delList.begin(); it!=delList.end(); ++it)
-    {
-      datesBeforeToday.remove(*it);
-    }
-
-    // Remove nextPayment (lastPayments returns it?)
-    if (datesBeforeToday.contains(nextPayment(m_lastPayment)))
-      datesBeforeToday.remove(nextPayment(m_lastPayment));
-
-    for (it=m_recordedPayments.begin(); it!=m_recordedPayments.end(); ++it)
-    {
-      if (datesBeforeToday.contains(*it))
-        datesBeforeToday.remove(*it);
-    }
-
-    if (datesBeforeToday.contains(m_lastPayment))
-      datesBeforeToday.remove(m_lastPayment);
-
-    // Now finally check
-    if (datesBeforeToday.count() == 0)
-      bOverdue = false;
-  }
-  return bOverdue;
-#endif
 }
 
 bool MyMoneySchedule::isFinished() const
@@ -846,8 +796,8 @@ void MyMoneySchedule::writeXML(QDomDocument& document, QDomElement& parent) cons
   el.setAttribute("weekendOption", m_weekendOption);
 
   //store the payment history for this scheduled task.
-  Q3ValueList<QDate> payments = recordedPayments();
-  Q3ValueList<QDate>::ConstIterator it;
+  QList<QDate> payments = recordedPayments();
+  QList<QDate>::ConstIterator it;
   QDomElement paymentsElement = document.createElement("PAYMENTS");
   for (it=payments.begin(); it!=payments.end(); ++it) {
     QDomElement paymentEntry = document.createElement("PAYMENT");

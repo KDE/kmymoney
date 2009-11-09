@@ -27,8 +27,7 @@
 // QT Includes
 #include <qwidget.h>
 #include <QStringList>
-//Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -55,7 +54,7 @@ class KMyMoneyBriefSchedule : public kScheduleBriefWidget  {
 public:
   KMyMoneyBriefSchedule(QWidget *parent=0);
   ~KMyMoneyBriefSchedule();
-  void setSchedules(Q3ValueList<MyMoneySchedule> list, const QDate& date);
+  void setSchedules(QList<MyMoneySchedule> list, const QDate& date);
 
 signals:
   void enterClicked(const MyMoneySchedule&, const QDate&);
@@ -68,7 +67,7 @@ protected slots:
   void slotSkipClicked();
 
 private:
-  Q3ValueList<MyMoneySchedule> m_scheduleList;
+  QList<MyMoneySchedule> m_scheduleList;
   unsigned int m_index;
   QDate m_date;
 

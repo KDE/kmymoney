@@ -32,9 +32,8 @@
 #include <QBitmap>
 #include <QLabel>
 #include <q3groupbox.h>
-//Added by qt3to4:
 #include <QResizeEvent>
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -125,8 +124,8 @@ void KCurrencyEditDlg::resizeEvent(QResizeEvent* /* e*/)
 
 void KCurrencyEditDlg::slotLoadCurrencies(void)
 {
-  Q3ValueList<MyMoneySecurity> list = MyMoneyFile::instance()->currencyList();
-  Q3ValueList<MyMoneySecurity>::ConstIterator it;
+  QList<MyMoneySecurity> list = MyMoneyFile::instance()->currencyList();
+  QList<MyMoneySecurity>::ConstIterator it;
   Q3ListViewItem *first = 0;
 
   QString localCurrency(localeconv()->int_curr_symbol);

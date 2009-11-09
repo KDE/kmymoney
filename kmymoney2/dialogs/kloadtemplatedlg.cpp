@@ -31,8 +31,7 @@
 
 #include "kloadtemplatedlg.h"
 #include "kaccounttemplateselector.h"
-//Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 KLoadTemplateDlg::KLoadTemplateDlg(QWidget* parent) :
   KLoadTemplateDlgDecl(parent)
@@ -44,7 +43,7 @@ KLoadTemplateDlg::KLoadTemplateDlg(QWidget* parent) :
   connect(buttonHelp, SIGNAL(clicked()), this, SLOT(slotHelp()));
 }
 
-Q3ValueList<MyMoneyTemplate> KLoadTemplateDlg::templates(void) const
+QList<MyMoneyTemplate> KLoadTemplateDlg::templates(void) const
 {
   return m_templateSelector->selectedTemplates();
 }

@@ -26,8 +26,7 @@
 #include <QPushButton>
 #include <QDir>
 #include <QLabel>
-//Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -152,7 +151,7 @@ MyMoneySecurity Wizard::baseCurrency(void) const
   return m_baseCurrency;
 }
 
-Q3ValueList<MyMoneyTemplate> Wizard::templates(void) const
+QList<MyMoneyTemplate> Wizard::templates(void) const
 {
   return m_categoriesPage->selectedTemplates();
 }
@@ -226,8 +225,8 @@ CurrencyPage::CurrencyPage(Wizard* wizard) :
   WizardPage<Wizard>(stepCount++, this, wizard)
 {
   Q3ListViewItem *first = 0;
-  Q3ValueList<MyMoneySecurity> list = MyMoneyFile::instance()->currencyList();
-  Q3ValueList<MyMoneySecurity>::const_iterator it;
+  QList<MyMoneySecurity> list = MyMoneyFile::instance()->currencyList();
+  QList<MyMoneySecurity>::const_iterator it;
 
   QString localCurrency(localeconv()->int_curr_symbol);
   localCurrency.truncate(3);
@@ -305,7 +304,7 @@ KMyMoneyWizardPage* CategoriesPage::nextPage(void) const
   return m_wizard->m_preferencePage;
 }
 
-Q3ValueList<MyMoneyTemplate> CategoriesPage::selectedTemplates(void) const
+QList<MyMoneyTemplate> CategoriesPage::selectedTemplates(void) const
 {
   return m_templateSelector->selectedTemplates();
 }

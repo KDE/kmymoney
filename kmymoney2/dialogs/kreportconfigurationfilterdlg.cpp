@@ -42,8 +42,7 @@
 #include <q3textedit.h>
 #include <QLayout>
 #include <QApplication>
-//Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -138,8 +137,8 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
     m_criteriaTab->showPage( m_tab1 );
     m_criteriaTab->setMinimumSize( 500,200 );
 
-    Q3ValueList<MyMoneyBudget> list = MyMoneyFile::instance()->budgetList();
-    Q3ValueList<MyMoneyBudget>::const_iterator it_b;
+    QList<MyMoneyBudget> list = MyMoneyFile::instance()->budgetList();
+    QList<MyMoneyBudget>::const_iterator it_b;
     for(it_b = list.begin(); it_b != list.end(); ++it_b) {
       m_budgets.push_back(*it_b);
     }

@@ -29,8 +29,7 @@
 
 #include "ui_kmymoneyonlinequoteconfigdecl.h"
 #include "webpricequote.h"
-//Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 
 class kMyMoneyOnlineQuoteConfigDecl : public QWidget, public Ui::kMyMoneyOnlineQuoteConfigDecl
@@ -62,7 +61,7 @@ protected:
   void loadList(const bool updateResetList = false);
 
 private:
-  Q3ValueList<WebPriceQuoteSource>  m_resetList;
+  QList<WebPriceQuoteSource>  m_resetList;
   WebPriceQuoteSource              m_currentItem;
 };
 

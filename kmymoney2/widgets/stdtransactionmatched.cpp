@@ -19,8 +19,7 @@
 // QT Includes
 
 #include <qregion.h>
-//Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -115,8 +114,8 @@ void StdTransactionMatched::registerCellText(QString& txt, int& align, int row, 
       delete e;
     }
 
-    Q3ValueList<MyMoneySplit>::const_iterator it_s;
-    const Q3ValueList<MyMoneySplit>& list = matchedTransaction.splits();
+    QList<MyMoneySplit>::const_iterator it_s;
+    const QList<MyMoneySplit>& list = matchedTransaction.splits();
     MyMoneyMoney importedValue;
     for(it_s = list.begin(); it_s != list.end(); ++it_s) {
       if((*it_s).accountId() == m_account.id()) {

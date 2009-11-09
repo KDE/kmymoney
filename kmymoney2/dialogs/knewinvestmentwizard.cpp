@@ -20,8 +20,7 @@
 
 #include <QCheckBox>
 #include <QLabel>
-//Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -178,8 +177,8 @@ void KNewInvestmentWizard::next(void)
 void KNewInvestmentWizard::slotCheckForExistingSymbol(const QString& symbol)
 {
   if(m_investmentName->text().isEmpty()) {
-    Q3ValueList<MyMoneySecurity> list = MyMoneyFile::instance()->securityList();
-    Q3ValueList<MyMoneySecurity>::const_iterator it_s;
+    QList<MyMoneySecurity> list = MyMoneyFile::instance()->securityList();
+    QList<MyMoneySecurity>::const_iterator it_s;
     MyMoneySecurity::eSECURITYTYPE type = KMyMoneyUtils::stringToSecurity(m_securityType->currentText());
 
     for(it_s = list.begin(); it_s != list.end(); ++it_s) {
@@ -239,8 +238,8 @@ void KNewInvestmentWizard::createObjects(const QString& parentId)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
-  Q3ValueList<MyMoneySecurity> list = MyMoneyFile::instance()->securityList();
-  Q3ValueList<MyMoneySecurity>::ConstIterator it;
+  QList<MyMoneySecurity> list = MyMoneyFile::instance()->securityList();
+  QList<MyMoneySecurity>::ConstIterator it;
 
   MyMoneySecurity::eSECURITYTYPE type = KMyMoneyUtils::stringToSecurity(m_securityType->currentText());
   MyMoneyFileTransaction ft;

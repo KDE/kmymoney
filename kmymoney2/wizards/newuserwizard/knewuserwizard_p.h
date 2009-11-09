@@ -36,8 +36,7 @@
 #include "accounts.h"
 
 #include <mymoneytemplate.h>
-//Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 class Wizard;
 
@@ -123,7 +122,7 @@ class CategoriesPage : public Accounts, public WizardPage<Wizard>
 public:
   CategoriesPage(Wizard* parent );
   KMyMoneyWizardPage* nextPage(void) const;
-  Q3ValueList<MyMoneyTemplate> selectedTemplates(void) const;
+  QList<MyMoneyTemplate> selectedTemplates(void) const;
 };
 
 /**

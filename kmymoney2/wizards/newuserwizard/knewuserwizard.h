@@ -1,5 +1,3 @@
-//Added by qt3to4:
-#include <Q3ValueList>
 /***************************************************************************
                              knewuserwizard.h
                              -------------------
@@ -23,6 +21,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QList>
 class QString;
 
 // ----------------------------------------------------------------------------
@@ -106,7 +105,7 @@ public:
   /**
     * Returns a list of templates including accounts to be created
     */
-  Q3ValueList<MyMoneyTemplate> templates(void) const;
+  QList<MyMoneyTemplate> templates(void) const;
 
 private:
   MyMoneySecurity   m_baseCurrency;

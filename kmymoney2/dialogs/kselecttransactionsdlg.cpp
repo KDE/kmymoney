@@ -17,10 +17,10 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
-//Added by qt3to4:
+
 #include <QResizeEvent>
 #include <QEvent>
-#include <Q3ValueList>
+#include <QList>
 #include <QKeyEvent>
 
 // ----------------------------------------------------------------------------
@@ -139,7 +139,7 @@ MyMoneyTransaction KSelectTransactionsDlg::transaction(void) const
 {
   MyMoneyTransaction t;
 
-  Q3ValueList<KMyMoneyRegister::RegisterItem*> list;
+  QList<KMyMoneyRegister::RegisterItem*> list;
   list = m_register->selectedItems();
   if(list.count()) {
     KMyMoneyRegister::Transaction* _t = dynamic_cast<KMyMoneyRegister::Transaction*>(list[0]);

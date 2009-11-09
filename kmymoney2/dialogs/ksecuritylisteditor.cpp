@@ -19,8 +19,7 @@
 // QT Includes
 
 #include <QCheckBox>
-//Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -110,8 +109,8 @@ void KSecurityListEditor::slotLoadList(void)
 {
   m_listView->clear();
 
-  Q3ValueList<MyMoneySecurity> list = MyMoneyFile::instance()->securityList();
-  Q3ValueList<MyMoneySecurity>::ConstIterator it;
+  QList<MyMoneySecurity> list = MyMoneyFile::instance()->securityList();
+  QList<MyMoneySecurity>::ConstIterator it;
   if(m_showCurrencyButton->isChecked()) {
     list += MyMoneyFile::instance()->currencyList();
   }
