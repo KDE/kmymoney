@@ -83,14 +83,15 @@ int main(int argc, char *argv[])
     I18N_NOOP( "http://kmymoney2.sourceforge.net/" )/*,
                                                       "kmymoney2-developer@lists.sourceforge.net")*/ );
 
-  aboutData.addAuthor(ki18n( "Michael Edwardes." ), ki18n("Initial idea, much initial source code, Project admin"), "mte@users.sourceforge.net");
-  aboutData.addAuthor(ki18n( "Thomas Baumgart" ), ki18n("Core engine, Release Manager, Project admin"), "ipwizard@users.sourceforge.net");
-  aboutData.addAuthor(ki18n("Ace Jones" ), ki18n("Reporting logic, OFX Import"), "acejones@users.sourceforge.net");
-  aboutData.addAuthor(ki18n("Tony Bloomfield" ), ki18n("Database backend, maintainer stable branch"), "tonybloom@users.sourceforge.net");
-  aboutData.addAuthor(ki18n("Alvaro Soliverez" ), ki18n("Forecast, Reports"), "asoliverez@gmail.com");
-  aboutData.addAuthor(ki18n("Felix Rodriguez" ), ki18n("Project Admin"), "frodriguez@users.sourceforge.net");
-  aboutData.addAuthor(ki18n("John C" ), ki18n("Developer"), "tacoturtle@users.sourceforge.net");
-  aboutData.addAuthor(ki18n("Fernando Vilas" ), ki18n("Database backend"), "fvilas@iname.com");
+  aboutData.addAuthor(ki18n("Michael Edwardes."), ki18n("Initial idea, much initial source code, Project admin"), "mte@users.sourceforge.net");
+  aboutData.addAuthor(ki18n("Thomas Baumgart"), ki18n("Core engine, Release Manager, Project admin"), "ipwizard@users.sourceforge.net");
+  aboutData.addAuthor(ki18n("Ace Jones"), ki18n("Reporting logic, OFX Import"), "acejones@users.sourceforge.net");
+  aboutData.addAuthor(ki18n("Tony Bloomfield"), ki18n("Database backend, maintainer stable branch"), "tonybloom@users.sourceforge.net");
+  aboutData.addAuthor(ki18n("Alvaro Soliverez"), ki18n("Forecast, Reports"), "asoliverez@gmail.com");
+  aboutData.addAuthor(ki18n("Felix Rodriguez"), ki18n("Project Admin"), "frodriguez@users.sourceforge.net");
+  aboutData.addAuthor(ki18n("John C"), ki18n("Developer"), "tacoturtle@users.sourceforge.net");
+  aboutData.addAuthor(ki18n("Fernando Vilas"), ki18n("Database backend"), "fvilas@iname.com");
+  aboutData.addAuthor(ki18n("Cristian Oneț"), ki18n("Plugins, maintainer"), "onet.cristian@gmail.com");
 
   aboutData.addCredit(ki18n("Kevin Tambascio" ), ki18n("Initial investment support"), "ktambascio@users.sourceforge.net");
   aboutData.addCredit(ki18n("Javier Campos Morales" ), ki18n("Developer & Artist"), "javi_c@users.sourceforge.net");
