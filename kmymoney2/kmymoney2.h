@@ -490,7 +490,7 @@ public:
 
   /**
     * Popup the context menu with the respective @p containerName.
-    * Valid container names are defined in kmymoney2ui.rc
+    * Valid container names are defined in kmymoneyui.rc
     */
   void showContextMenu(const QString& containerName);
 

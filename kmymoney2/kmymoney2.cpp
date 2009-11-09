@@ -958,8 +958,7 @@ void KMyMoney2App::initActions(void)
   toggleAction("view_hide_unused_categories")->setChecked(KMyMoneyGlobalSettings::hideUnusedCategory());
   toggleAction("view_show_all_accounts")->setChecked(false);
 
-  // use the absolute path to your kmymoney2ui.rc file for testing purpose in createGUI();
-  // createGUI(QString::null, false);
+  // use the absolute path to your kmymoneyui.rc file for testing purpose in createGUI();
   setupGUI();
 }
 
