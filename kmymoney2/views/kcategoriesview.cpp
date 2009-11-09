@@ -165,7 +165,7 @@ void KCategoriesView::loadAccounts(void)
   QList<MyMoneySecurity> slist = file->currencyList();
   slist += file->securityList();
   QList<MyMoneySecurity>::const_iterator it_s;
-  for(it_s = slist.begin(); it_s != slist.end(); ++it_s) {
+  for(it_s = slist.constBegin(); it_s != slist.constEnd(); ++it_s) {
     m_securityMap[(*it_s).id()] = *it_s;
   }
 

@@ -114,7 +114,7 @@ void KSecurityListEditor::slotLoadList(void)
   if(m_showCurrencyButton->isChecked()) {
     list += MyMoneyFile::instance()->currencyList();
   }
-  for(it = list.begin(); it != list.end(); ++it) {
+  for(it = list.constBegin(); it != list.constEnd(); ++it) {
     K3ListViewItem* newItem = new K3ListViewItem(m_listView, QString((*it).id()));
     fillItem(newItem, *it);
 

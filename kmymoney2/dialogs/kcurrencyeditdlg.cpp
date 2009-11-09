@@ -137,7 +137,7 @@ void KCurrencyEditDlg::slotLoadCurrencies(void)
   empty.setMask(QBitmap(16, 16, true));
 
   m_currencyList->clear();
-  for(it = list.begin(); it != list.end(); ++it) {
+  for(it = list.constBegin(); it != list.constEnd(); ++it) {
     KMyMoneyListViewItem* p = new KMyMoneyListViewItem(m_currencyList, (*it).name(), QString(), (*it).id());
     p->setRenameEnabled(0, true);
 

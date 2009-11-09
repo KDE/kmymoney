@@ -196,7 +196,7 @@ void MyMoneySchedule::setTransaction(const MyMoneyTransaction& transaction, bool
   QList<MyMoneySplit> splits = t.splits();
   if(splits.count() > 0) {
     QList<MyMoneySplit>::const_iterator it_s;
-    for(it_s = splits.begin(); it_s != splits.end(); ++it_s) {
+    for(it_s = splits.constBegin(); it_s != splits.constEnd(); ++it_s) {
       MyMoneySplit s = *it_s;
       // clear out the bankID
       if(!(*it_s).bankID().isEmpty()) {
@@ -205,7 +205,7 @@ void MyMoneySchedule::setTransaction(const MyMoneyTransaction& transaction, bool
       }
 
       // only clear payees from second split onwards
-      if(it_s == splits.begin())
+      if(it_s == splits.constBegin())
         continue;
 
       if(!(*it_s).payeeId().isEmpty()) {
@@ -639,7 +639,7 @@ MyMoneyAccount MyMoneySchedule::account(int cnt) const
   MyMoneyAccount acc;
 
   // search the first asset or liability account
-  for(it = splits.begin(); it != splits.end() && (acc.id().isEmpty() || cnt); ++it) {
+  for(it = splits.constBegin(); it != splits.constEnd() && (acc.id().isEmpty() || cnt); ++it) {
     try {
       acc = file->account((*it).accountId());
       if(acc.isAssetLiability())
@@ -799,7 +799,7 @@ void MyMoneySchedule::writeXML(QDomDocument& document, QDomElement& parent) cons
   QList<QDate> payments = recordedPayments();
   QList<QDate>::ConstIterator it;
   QDomElement paymentsElement = document.createElement("PAYMENTS");
-  for (it=payments.begin(); it!=payments.end(); ++it) {
+  for (it = payments.constBegin(); it != payments.constEnd(); ++it) {
     QDomElement paymentEntry = document.createElement("PAYMENT");
     paymentEntry.setAttribute("date", dateToString(*it));
     paymentsElement.appendChild(paymentEntry);

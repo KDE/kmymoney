@@ -139,7 +139,7 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
 
     QList<MyMoneyBudget> list = MyMoneyFile::instance()->budgetList();
     QList<MyMoneyBudget>::const_iterator it_b;
-    for(it_b = list.begin(); it_b != list.end(); ++it_b) {
+    for(it_b = list.constBegin(); it_b != list.constEnd(); ++it_b) {
       m_budgets.push_back(*it_b);
     }
 

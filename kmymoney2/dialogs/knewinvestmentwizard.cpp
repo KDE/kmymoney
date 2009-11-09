@@ -181,7 +181,7 @@ void KNewInvestmentWizard::slotCheckForExistingSymbol(const QString& symbol)
     QList<MyMoneySecurity>::const_iterator it_s;
     MyMoneySecurity::eSECURITYTYPE type = KMyMoneyUtils::stringToSecurity(m_securityType->currentText());
 
-    for(it_s = list.begin(); it_s != list.end(); ++it_s) {
+    for(it_s = list.constBegin(); it_s != list.constEnd(); ++it_s) {
       if((*it_s).securityType() == type
       && (*it_s).tradingSymbol() == m_investmentSymbol->text()) {
         m_security = MyMoneySecurity();

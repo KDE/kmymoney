@@ -238,7 +238,7 @@ CurrencyPage::CurrencyPage(Wizard* wizard) :
   empty.setMask(QBitmap(16, 16, true));
 
   m_currencyList->clear();
-  for(it = list.begin(); it != list.end(); ++it) {
+  for(it = list.constBegin(); it != list.constEnd(); ++it) {
     Q3ListViewItem* p = insertCurrency(*it);
     if((*it).id() == baseCurrency) {
       first = p;
