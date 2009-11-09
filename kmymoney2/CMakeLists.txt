@@ -142,7 +142,7 @@ INSTALL(FILES kmymoney2.kcfg
   DESTINATION ${KCFG_INSTALL_DIR}
   )
 INSTALL(FILES kmymoney2ui.rc tips
-  DESTINATION ${DATA_INSTALL_DIR}/kmymoney2
+  DESTINATION ${DATA_INSTALL_DIR}/kmymoney
   )
 INSTALL(FILES ${_HEADERS}
   DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney
@@ -157,12 +157,12 @@ INSTALL(FILES x-kmymoney.xml
 UPDATE_XDG_MIMETYPES(${XDG_MIME_INSTALL_DIR})
 
 INSTALL(FILES misc/financequote.pl
-  DESTINATION ${DATA_INSTALL_DIR}/kmymoney2/misc
+  DESTINATION ${DATA_INSTALL_DIR}/kmymoney/misc
   )
 
 ########## Application Icons #############
 INSTALL(DIRECTORY icons/oxygen
-  DESTINATION ${DATA_INSTALL_DIR}/kmymoney2/icons
+  DESTINATION ${DATA_INSTALL_DIR}/kmymoney/icons
   PATTERN "*Make*" EXCLUDE
   PATTERN ".svn" EXCLUDE
   )

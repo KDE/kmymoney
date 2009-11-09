@@ -242,7 +242,7 @@ CurrencyPage::CurrencyPage(Wizard* wizard) :
     Q3ListViewItem* p = insertCurrency(*it);
     if((*it).id() == baseCurrency) {
       first = p;
-      p->setPixmap(0, QPixmap( KStandardDirs::locate("icon","hicolor/16x16/apps/kmymoney2.png")));
+      p->setPixmap(0, QPixmap( KStandardDirs::locate("icon","hicolor/16x16/apps/kmymoney.png")));
     } else {
       p->setPixmap(0, empty);
     }

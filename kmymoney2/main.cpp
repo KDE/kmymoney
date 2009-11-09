@@ -77,7 +77,7 @@ int main(int argc, char *argv[])
   if(!feature.isEmpty())
     feature = I18N_NOOP("Compiled with the following settings:\n") + feature;
 
-  KAboutData aboutData( "kmymoney2",0, ki18n("KMyMoney"),
+  KAboutData aboutData( "kmymoney",0, ki18n("KMyMoney"),
     VERSION, ki18n( "\nKMyMoney, the Personal Finance Manager for KDE.\n\nPlease consider contributing to this project with code and/or suggestions." ), KAboutData::License_GPL,
                         ki18n( "(c) 2000-2009 The KMyMoney development team" ), /*feature*/KLocalizedString(),
     I18N_NOOP( "http://kmymoney2.sourceforge.net/" )/*,

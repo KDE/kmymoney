@@ -142,7 +142,7 @@ void KCurrencyEditDlg::slotLoadCurrencies(void)
     p->setRenameEnabled(0, true);
 
     if((*it).id() == baseCurrency) {
-        p->setPixmap(0, QPixmap( KStandardDirs::locate("icon","hicolor/16x16/apps/kmymoney2.png")));
+        p->setPixmap(0, QPixmap( KStandardDirs::locate("icon","hicolor/16x16/apps/kmymoney.png")));
       if(m_currency.id().isEmpty())
         first = p;
     } else {

@@ -112,7 +112,7 @@ void KMyMoneySecuritySelector::update(const QString& id)
         break;
     }
     if((*it).id() == baseCurrency) {
-      insertItem(itemId, QIcon(KStandardDirs::locate("icon","hicolor/16x16/apps/kmymoney2.png")), display);
+      insertItem(itemId, QIcon(KStandardDirs::locate("icon","hicolor/16x16/apps/kmymoney.png")), display);
     } else {
       insertItem(itemId, QIcon(empty), display);
     }

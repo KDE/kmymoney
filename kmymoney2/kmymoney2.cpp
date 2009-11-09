@@ -921,7 +921,7 @@ void KMyMoney2App::initActions(void)
 
   KAction *currency_setbase = actionCollection()->addAction("currency_setbase");
   currency_setbase->setText(i18n("Select as base currency"));
-  currency_setbase->setIcon(KIcon("kmymoney2"));
+  currency_setbase->setIcon(KIcon("kmymoney"));
   connect(currency_setbase, SIGNAL(triggered()), this, SLOT(slotCurrencySetBase()));
 
 #ifdef KMM_DEBUG
