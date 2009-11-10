@@ -7,7 +7,7 @@ cd kmymoney2/ && $PREPARETIPS > tips.cpp
 cd ..
 # call xgettext on all source files. If your sources have other filename
 # extensions besides .cc, .cpp, and .h, just add them in the find call.
-$XGETTEXT `find . -name \*.cc -o -name \*.cpp -o -name \*.h` -o $podir/kmymoney2.pot
+$XGETTEXT `find . -name \*.cc -o -name \*.cpp -o -name \*.h` -o $podir/kmymoney.pot
 
 # Remove these two generated files again
 rm kmymoney2/tips.cpp rc.cpp
