@@ -2,9 +2,10 @@
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
   <!-- Define an entity for your application if it is not part of KDE
        CVS -->
-  <!ENTITY kappname "<application>KMyMoney</application>"><!-- replace kmyapplication here
+  <!ENTITY kmymoney "<application>KMyMoney</application>">
+  <!ENTITY kappname "&kmymoney;"><!-- replace kmyapplication here
                                             do *not* replace kappname-->
-  <!ENTITY package "kde-finance"><!-- kdebase, kdeadmin, etc.  Leave
+  <!ENTITY package "office"><!-- kdebase, kdeadmin, etc.  Leave
                                      this unchanged if your
                                      application is not maintained in KDE CVS -->
   <!ENTITY % addindex "IGNORE">
