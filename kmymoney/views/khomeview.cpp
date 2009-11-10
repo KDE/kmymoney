@@ -186,7 +186,7 @@ void KHomeView::loadView(void)
     //clear the forecast flag so it will be reloaded
     m_forecast.setForecastDone(false);
 
-    const QString filename = KGlobal::dirs()->findResource("appdata", "html/kmymoney2.css");
+    const QString filename = KGlobal::dirs()->findResource("appdata", "html/kmymoney.css");
     QString header = QString("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\">\n<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"%1\">\n").arg(filename);
 
     header += KMyMoneyUtils::variableCSS();
