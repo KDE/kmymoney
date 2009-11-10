@@ -3,11 +3,11 @@
 # the results are stored in a pseudo .cpp file to be picked up by xgettext.
 $EXTRACTRC `find . -name \*.rc -o -name \*.ui -o -name \*.kcfg` >> rc.cpp
 # if your application contains tips-of-the-day, call preparetips as well.
-cd kmymoney2/ && $PREPARETIPS > tips.cpp
+cd kmymoney/ && $PREPARETIPS > tips.cpp
 cd ..
 # call xgettext on all source files. If your sources have other filename
 # extensions besides .cc, .cpp, and .h, just add them in the find call.
 $XGETTEXT `find . -name \*.cc -o -name \*.cpp -o -name \*.h` -o $podir/kmymoney.pot
 
 # Remove these two generated files again
-rm kmymoney2/tips.cpp rc.cpp
+rm kmymoney/tips.cpp rc.cpp
