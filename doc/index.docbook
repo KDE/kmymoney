@@ -2,8 +2,7 @@
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
   <!-- Define an entity for your application if it is not part of KDE
        CVS -->
-  <!ENTITY kmyapplication "<application>KMyMoney</application>">
-  <!ENTITY kappname "KMyMoney"><!-- replace kmyapplication here
+  <!ENTITY kappname "<application>KMyMoney</application>"><!-- replace kmyapplication here
                                             do *not* replace kappname-->
   <!ENTITY package "kde-finance"><!-- kdebase, kdeadmin, etc.  Leave
                                      this unchanged if your
@@ -49,7 +48,7 @@
 <book lang="&language;">
 
 <bookinfo>
-<title>The &kmyapplication; Handbook</title>
+<title>The &kappname; Handbook</title>
 <subtitle>for &kappname; version 1.0</subtitle>
 
 <authorgroup>
@@ -130,7 +129,7 @@ and use `&George.N.Ugnacious; &George.N.Ugnacious.mail;' in the author element.
 <year>2007</year>
 <year>2008</year>
 <year>2009</year>
-<holder>The &kmyapplication; Development Team</holder>
+<holder>The &kappname; Development Team</holder>
 </copyright>
 <!-- Translators: put here the copyright notice of the translation -->
 <!-- Put here the FDL notice.  Read the explanation in fdl-notice.docbook
