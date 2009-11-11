@@ -935,7 +935,7 @@ void KNewLoanWizard::loadAccountList(void)
 
 void KNewLoanWizard::slotAdditionalFees(void)
 {
-  // KMessageBox::information(0, QString("Not yet implemented ... if you want to help, contact kmymoney2-developer@lists.sourceforge.net"), QString("Development notice"));
+  // KMessageBox::information(0, QString("Not yet implemented ... if you want to help, contact kmymoney-devel@kde.org"), QString("Development notice"));
   MyMoneyAccount account("Phony-ID", MyMoneyAccount());
 
   QMap<QString, MyMoneyMoney> priceInfo;

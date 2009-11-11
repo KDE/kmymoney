@@ -81,7 +81,7 @@ int main(int argc, char *argv[])
     VERSION, ki18n( "\nKMyMoney, the Personal Finance Manager for KDE.\n\nPlease consider contributing to this project with code and/or suggestions." ), KAboutData::License_GPL,
                         ki18n( "(c) 2000-2009 The KMyMoney development team" ), /*feature*/KLocalizedString(),
     I18N_NOOP( "http://kmymoney2.sourceforge.net/" )/*,
-                                                      "kmymoney2-developer@lists.sourceforge.net")*/ );
+                                                      "kmymoney-devel@kde.org")*/ );
 
   aboutData.addAuthor(ki18n("Michael Edwardes."), ki18n("Initial idea, much initial source code, Project admin"), "mte@users.sourceforge.net");
   aboutData.addAuthor(ki18n("Thomas Baumgart"), ki18n("Core engine, Release Manager, Project admin"), "ipwizard@users.sourceforge.net");

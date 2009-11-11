@@ -175,7 +175,7 @@ void KSelectDatabaseDlg::slotDriverSelected (QListWidgetItem *driver) {
        i18n("Database type %1 has not been fully tested in a KMyMoney environment.\n"
             "Please make sure you have adequate backups of your data.\n"
             "Please report any problems to the developer mailing list at "
-            "kmymoney2-developer@lists.sourceforge.net", driver->text()),
+            "kmymoney-devel@kde.org", driver->text()),
         "");
     if (rc == KMessageBox::Cancel) {
       m_widget->listDrivers->clearSelection();

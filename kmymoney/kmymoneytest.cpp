@@ -113,13 +113,13 @@ int main(int testargc, char** testargv)
     "0.1", ki18n( "\nKMyMoney, the Personal Finance Manager for KDE.\n\nPlease consider contributing to this project with code and/or suggestions." ), KAboutData::License_GPL,
                         ki18n( "(c) 2000-2009 The KMyMoney development team" ), /*feature*/KLocalizedString(),
     I18N_NOOP( "http://kmymoney2.sourceforge.net/" )/*,
-                                                      "kmymoney2-developer@lists.sourceforge.net")*/ );
+                                                      "kmymoney-devel@kde.org")*/ );
 #else
   KAboutData aboutData( "kmymoneytest",0, ki18n("KMyMoney Unittest"),
     "0.1", ki18n( "\nKMyMoney, the Personal Finance Manager for KDE.\n\nPlease consider contributing to this project with code and/or suggestions." ), KAboutData::License_GPL,
                         ki18n( "(c) 2000-2009 The KMyMoney development team" ), /*feature*/KLocalizedString(),
     I18N_NOOP( "http://kmymoney2.sourceforge.net/" )/*,
-                                                      "kmymoney2-developer@lists.sourceforge.net")*/ );
+                                                      "kmymoney-devel@kde.org")*/ );
 #endif
   KCmdLineOptions options;
   options.add("+[test_suite]", ki18n("Optionally specify a test suite") );

@@ -3,7 +3,7 @@
                             -------------------
    begin                : Sat Dec 4 2004
    copyright            : (C) 2004 by Thomas Baumgart
-   email                : kmymoney2-developer@lists.sourceforge.net
+   email                : kmymoney-devel@kde.org
 ***************************************************************************/
 
 /***************************************************************************
