@@ -18,9 +18,18 @@
 
 #include <config-kmymoney.h>
 
+// for _getpid
 #ifdef _MSC_VER
-#include <process.h> // for _getpid
+#include <process.h>
+#else
+#if HAVE_SYS_TYPES_H
+#include <sys/types.h>
 #endif
+#if HAVE_UNISTD_H
+#include <unistd.h>
+#endif
+#endif
+
 // ----------------------------------------------------------------------------
 // Std C++ / STL Includes
 
@@ -6242,14 +6251,16 @@ const QList<QString> KMyMoney2App::instanceList(void) const
 
     // build a list of service names of all running kmymoney applications without this one
     for(it = apps.constBegin(); it != apps.constEnd(); ++it) {
-      if((*it).indexOf("org.kde.kmymoney2") == 0) {
+      // please shange this method of creating a list of 'all the other kmymoney instances that are running on the system'
+      // since assuming that D-Bus creates service names with org.kde.kmymoney-PID is an observation I don't think that it's documented somwhere
+      if((*it).indexOf("org.kde.kmymoney-") == 0) {
 #ifdef _MSC_VER
-      if ((*it).indexOf(QString("org.kde.kmymoney2-%1").arg(_getpid())) != 0) // on Windows calling servicePid("this prcess service id") causes D-Bus to crash
+      uint thisProcPid = _getpid();
 #else
-      QDBusReply<uint> pid = QDBusConnection::sessionBus().interface()->servicePid(*it);
-      if (pid.isValid() && pid.value() != getpid())
+      uint thisProcPid = getpid();
 #endif
-        list += (*it);
+        if ((*it).indexOf(QString("org.kde.kmymoney-%1").arg(thisProcPid)) != 0)
+          list += (*it);
       }
     }
   } else {
