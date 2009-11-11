@@ -25,7 +25,6 @@
 #include <QLayout>
 #include <QDateTime>
 #include <QApplication>
-//Added by qt3to4:
 #include <QList>
 #include <QPixmap>
 #include <dom/dom_element.h>
@@ -291,32 +290,10 @@ void KHomeView::showNetWorthGraph(void)
 
   table.drawChart(*chartWidget);
 
-  //chartWidget->params()->setLineMarker(false);
-  //chartWidget->params()->setLegendPosition(KDChartParams::NoLegend);
-  //chartWidget->params()->setLineWidth(2);
-  //chartWidget->params()->setDataColor(0, KGlobalSettings::textColor());
-
-    // draw future values in a different line style
-  //KDChartPropertySet propSetFutureValue("future value", KMM_KDCHART_PROPSET_NORMAL_DATA);
-  //propSetFutureValue.setLineStyle(KDChartPropertySet::OwnID, Qt::DotLine);
-  //const int idPropFutureValue = chartWidget->params()->registerProperties(propSetFutureValue);
-
-  //KDChartPropertySet propSetLastValue("last value", idPropFutureValue);
-  //propSetLastValue.setExtraLinesAlign(KDChartPropertySet::OwnID, Qt::AlignLeft | Qt::AlignBottom);
-  //propSetLastValue.setExtraLinesWidth(KDChartPropertySet::OwnID, -4);
-  //propSetLastValue.setExtraLinesColor(KDChartPropertySet::OwnID, KMyMoneyGlobalSettings::listGridColor());
-  // propSetLastValue.setShowMarker(KDChartPropertySet::OwnID, true);
-  // propSetLastValue.setMarkerStyle(KDChartPropertySet::OwnID, KDChartParams::LineMarkerDiamond);
-
-  //const int idPropLastValue = chartWidget->params()->registerProperties(propSetLastValue);
-  //for(int iCell = 0; iCell < 90; ++iCell) {
-    //chartWidget->setProperty(0, iCell, idPropFutureValue);
-  //}
-  //chartWidget->setProperty(0, 10, idPropLastValue);
-
   // Adjust the size
-  chartWidget->resize(width()-60, height()-30);
+  chartWidget->resize(width()-70, height()-30);
 
+  //save the chart to an image
   QPixmap pixmap= QPixmap::grabWidget(chartWidget->coordinatePlane()->parent());
   QByteArray bytes;
   QBuffer buffer(&bytes);
