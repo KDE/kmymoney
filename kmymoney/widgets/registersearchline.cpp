@@ -87,6 +87,7 @@ void RegisterSearchLine::init(Register *reg)
   d->combo->addItem(i18nc("Reconciliation state 'Cleared'", "Cleared"));
   d->combo->setCurrentIndex(0);
   connect(d->combo, SIGNAL(activated(int)), this, SLOT(slotStatusChanged(int)));
+  connect(this, SIGNAL(clearButtonClicked()), this, SLOT(reset()));
 
   label->setBuddy(d->combo);
 
@@ -223,7 +224,7 @@ bool RegisterSearchLine::itemMatches(const RegisterItem* item, const QString& s)
 void RegisterSearchLine::reset(void)
 {
   clear();
-  d->combo->setCurrentItem(0);
+  d->combo->setCurrentIndex(0);
   slotStatusChanged(0);
 }
 
