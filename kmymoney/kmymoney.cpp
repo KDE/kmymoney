@@ -976,47 +976,34 @@ void KMyMoney2App::dumpActions(void) const
   const QList<QAction*> list = actionCollection()->actions();
   QList<QAction*>::const_iterator it;
   for(it = list.begin(); it != list.end(); ++it) {
-    //FIXME: Port to KDE4
-    #if 0
-    std::cout << (*it)->name() << ": " << (*it)->text() << std::endl;
-    #endif
+    std::cout << qPrintable((*it)->objectName()) << ": " << qPrintable((*it)->text()) << std::endl;
   }
 }
 
 QAction* KMyMoney2App::action(const QString& actionName) const
 {
-  //static KShortcut shortcut("");
-  //FIXME: Port to KDE4
-  //static QAction dummyAction(QString("Dummy"), static_cast<QObject*>(this));
+  static QAction dummyAction(QString("Dummy"), 0);
 
-  //FIXME: Port to KDE4
   QAction* p = actionCollection()->action(QString(actionName.toLatin1()));
-  if(p)
-    return p;
-
-  qWarning("Action with name '%s' not found!", qPrintable(actionName));
+  if(!p) {
+    p = &dummyAction;
+    qWarning("Action with name '%s' not found!", qPrintable(actionName));
+  }
   return p;
 }
 
 KToggleAction* KMyMoney2App::toggleAction(const QString& actionName) const
 {
-  //FIXME: Port to KDE4
-  //static KShortcut shortcut("");
-  //static KToggleAction dummyAction(QString("Dummy"), QString(), shortcut, static_cast<const QObject*>(this), 0, static_cast<KActionCollection*>(0), "");
+  static KToggleAction dummyAction(QString("Dummy"), 0);
 
-  QAction* q = actionCollection()->action(QString(actionName.toLatin1()));
-
-  if(q) {
-    KToggleAction* p = dynamic_cast<KToggleAction*>(q);
-    if(!p) {
-      qWarning("Action '%s' is not of type KToggleAction", qPrintable(actionName));
-      //p = &dummyAction;
-    }
-    return p;
+  KToggleAction* p = dynamic_cast<KToggleAction*>(actionCollection()->action(QString(actionName.toLatin1())));
+  if(!p) {
+    qWarning("Action '%s' is not of type KToggleAction", qPrintable(actionName));
+    p = &dummyAction;
   }
 
   qWarning("Action with name '%s' not found!", qPrintable(actionName));
-  return dynamic_cast<KToggleAction*>(q);
+  return p;
 }
 
 
@@ -5602,7 +5589,6 @@ void KMyMoney2App::slotUpdateActions(void)
   action("account_online_map")->setEnabled(false);
   action("account_online_update")->setEnabled(false);
   action("account_online_update_all")->setEnabled(false);
-  //action("account_online_update_menu")->setEnabled(false);
   action("account_online_unmap")->setEnabled(false);
   action("account_chart")->setEnabled(false);
 
