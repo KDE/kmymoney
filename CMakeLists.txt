@@ -237,7 +237,11 @@ IF(NOT MSVC)
     "-g3 -fno-inline -ftest-coverage -fprofile-arcs")
 
   # be pedantic about undefined symbols when linking shared libraries
-  SET(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--no-undefined")
+  IF(CMAKE_SYSTEM_NAME MATCHES Linux)
+    SET(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--no-undefined")
+  ELSE(CMAKE_SYSTEM_NAME MATCHES Linux)
+    SET(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl")
+  ENDIF(CMAKE_SYSTEM_NAME MATCHES Linux)
 ENDIF(NOT MSVC)
 
 OPTION(USE_LEAK_CHECK "Enable to compile with memory leak check support (deprecated)" OFF)
