@@ -416,6 +416,9 @@ public:
     inline unsigned int currentVersion() const {return (m_currentVersion);};
 
 private:
+  const QString enclose(const QString& text) const
+  {return (QString("'" + text + "'"));}
+
   static unsigned int m_currentVersion; // The current version of the database layout
   MyMoneyDbDrivers m_drivers;
 #define TABLE(name) void name();

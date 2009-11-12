@@ -285,7 +285,7 @@ bool MyMoneyStorageSql::createDatabase (const KUrl& url) {
   int rc = true;
   if (isSqlite3()) return(true); // not needed for sqlite
   QString dbName = url.path().right(url.path().length() - 1); // remove separator slash
-  if (!isMysql()) {
+  if (! (isMysql() || isPostgresql())) {
     m_error = i18n("Automatic database creation for type %1 is not currently implemented.\n"
                    "Please create database %2 manually", driverName(), dbName);
     return (false);
@@ -293,15 +293,23 @@ bool MyMoneyStorageSql::createDatabase (const KUrl& url) {
   // create the database (only works for mysql at present)
   { // for this code block, see QSqlDatabase API re removeDatabase
     QSqlDatabase maindb = QSqlDatabase::addDatabase(driverName(), "main");
-    maindb.setDatabaseName ("mysql");
+    if (isMysql()) {
+      maindb.setDatabaseName ("mysql");
+    } else if (isPostgresql()) {
+      maindb.setDatabaseName ("template1");
+    }
     maindb.setHostName (url.host());
     maindb.setUserName (url.user());
     maindb.setPassword (url.pass());
     if (!maindb.open()) {
-      throw new MYMONEYEXCEPTION (QString("opening maindb in function %1").arg(Q_FUNC_INFO));
+      throw new MYMONEYEXCEPTION (QString("opening database %1 in function %2").arg(maindb.databaseName()).arg(Q_FUNC_INFO));
     } else {
       QSqlQuery qm(maindb);
-      QString qs = QString("CREATE DATABASE %1;").arg(dbName);
+      QString qs = QString("CREATE DATABASE %1").arg(dbName);
+      if (isPostgresql()) {
+        qs += " WITH ENCODING='UTF8'";
+      }
+      qs += ';';
       if (!qm.exec(qs)) {
         buildError (qm, Q_FUNC_INFO,
            i18n("Error in create database %1; do you have create permissions?",dbName), &maindb);
@@ -4134,16 +4142,82 @@ void MyMoneyDbDef::Balances(void){
 const QString MyMoneyDbDef::generateSQL (const QString& driver) const {
   QString retval;
   databaseTypeE dbType = m_drivers.driverToType(driver);
+
+  // Add the CREATE TABLE strings
   table_iterator tt = tableBegin();
   while (tt != tableEnd()) {
     retval += (*tt).generateCreateSQL(dbType) + '\n';
     ++tt;
   }
+
+  // Add the CREATE OR REPLACE VIEW strings
   view_iterator vt = viewBegin();
   while (vt != viewEnd()) {
     retval += (*vt).createString() + '\n';
     ++vt;
   }
+  retval += '\n';
+
+  // Add the strings to populate kmmFileInfo with initial values
+  MyMoneyDbTable fi = m_tables["kmmFileInfo"];
+  QString qs = fi.insertString();
+  MyMoneyDbTable::field_iterator fit;
+  for (fit = fi.begin(); fit != fi.end(); ++fit) {
+    QString toReplace = (*fit)->name();
+    toReplace.prepend(':');
+    QString replace = "NULL";
+    if ((*fit)->name() == "version")
+      replace = QString::number(m_currentVersion);
+    if ((*fit)->name() == "fixLevel")
+      replace =  QString::number
+          (MyMoneyFile::instance()->storage()->currentFixVersion());
+    if ((*fit)->name() == "created")
+      replace = QDate::currentDate().toString(Qt::ISODate);
+    if ((*fit)->name() == "lastModified")
+      replace = QDate::currentDate().toString(Qt::ISODate);
+    if ((*fit)->name() == "updateInProgress")
+      replace = enclose("N");
+    qs.replace(toReplace, replace);
+  }
+  qs += "\n\n";
+  retval += qs;
+
+  // Add the strings to create the initial accounts
+  qs = QString();
+  QList<MyMoneyAccount> stdList;
+  stdList.append (MyMoneyFile::instance()->asset());
+  stdList.append (MyMoneyFile::instance()->equity());
+  stdList.append (MyMoneyFile::instance()->expense());
+  stdList.append (MyMoneyFile::instance()->income());
+  stdList.append (MyMoneyFile::instance()->liability());
+  for (int i = 0; i < stdList.count(); ++i) {
+    MyMoneyAccount* pac = &stdList[i];
+    MyMoneyDbTable ac = m_tables["kmmAccounts"];
+    qs = ac.insertString();
+    MyMoneyDbTable::field_iterator act;
+    // do the following in reverse so the 'formatted' fields are
+    // correctly handled.
+    // Hmm, how does one use a QValueListIterator in reverse
+    // It'll be okay in Qt4 with QListIterator
+    for (act = ac.end(), --act; act != ac.begin(); --act) {
+      QString toReplace = (*act)->name();
+      toReplace.prepend(':');
+      QString replace = "NULL";
+      if ((*act)->name() == "accountType")
+        replace = QString::number(pac->accountType());
+      if ((*act)->name() == "accountTypeString")
+        replace = enclose(pac->name());
+      if ((*act)->name() == "isStockAccount")
+        replace = enclose("N");
+      if ((*act)->name() == "accountName")
+        replace = enclose(pac->name());
+      qs.replace(toReplace, replace);
+    }
+    qs.replace (":id", enclose(pac->id())); // a real kludge
+    qs += "\n\n";
+    retval += qs;
+  }
+
   return retval;
 }
 
