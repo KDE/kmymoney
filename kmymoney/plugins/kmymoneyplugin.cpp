@@ -42,47 +42,30 @@ KMyMoneyPlugin::Plugin::~Plugin()
 {
 }
 
-KAction* KMyMoneyPlugin::Plugin::action(const QString& actionName) const
+QAction* KMyMoneyPlugin::Plugin::action(const QString& actionName) const
 {
-//FIXME: Port to KDE4
-#if 0
-  static KShortcut shortcut("");
-  static KAction dummyAction(QString("Dummy"), QString(), shortcut, static_cast<const QObject*>(this), 0, static_cast<KActionCollection*>(0), "");
+  static QAction dummyAction(QString("Dummy"), 0);
 
-  KAction* p = actionCollection()->action(actionName);
-  if(p)
-    return p;
-
-  qWarning("Action with name '%s' not found!", actionName);
-  return &dummyAction;
-#endif
-  return 0;
+  QAction* p = actionCollection()->action(QString(actionName.toLatin1()));
+  if(!p) {
+    p = &dummyAction;
+    qWarning("Action with name '%s' not found!", qPrintable(actionName));
+  }
+  return p;
 }
 
 KToggleAction* KMyMoneyPlugin::Plugin::toggleAction(const QString& actionName) const
 {
-//FIXME: Port to KDE4
-#if 0
-  static KShortcut shortcut("");
-  static KToggleAction dummyAction( QString("Dummy"), static_cast<const QObject*>(this ) );
-  dummyAction.setShortcut( shortcut );
-  //static KToggleAction dummyAction(QString("Dummy"), QString(), shortcut, static_cast<const QObject*>(this), 0, static_cast<KActionCollection*>(0), "");
+  static KToggleAction dummyAction(QString("Dummy"), 0);
 
-  KAction* q = actionCollection()->action(actionName);
-
-  if(q) {
-    KToggleAction* p = dynamic_cast<KToggleAction*>(q);
-    if(!p) {
-      qWarning("Action '%1' is not of type KToggleAction", actionName);
-      p = &dummyAction;
-    }
-    return p;
+  KToggleAction* p = dynamic_cast<KToggleAction*>(actionCollection()->action(QString(actionName.toLatin1())));
+  if(!p) {
+    qWarning("Action '%s' is not of type KToggleAction", qPrintable(actionName));
+    p = &dummyAction;
   }
 
-  qWarning("Action with name '%s' not found!", actionName);
-  return &dummyAction;
-#endif
-  return 0;
+  qWarning("Action with name '%s' not found!", qPrintable(actionName));
+  return p;
 }
 
 KMyMoneyPlugin::ViewInterface* KMyMoneyPlugin::Plugin::viewInterface() const
