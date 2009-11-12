@@ -18,6 +18,8 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>  *
  ***************************************************************************/
 
+#include "kcm_icalendarexport.h"
+
 // Qt includes
 #include <qcombobox.h>
 #include <qboxlayout.h>
@@ -25,7 +27,6 @@
 // KDE includes
 #include <kgenericfactory.h>
 
-#include "kcm_icalendarexport.h"
 #include "pluginsettings.h"
 #include "ui_pluginsettingsdecl.h"
 

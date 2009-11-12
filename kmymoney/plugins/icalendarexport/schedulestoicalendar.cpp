@@ -20,6 +20,8 @@
 
 #include <config-kmymoney.h>
 
+#include "schedulestoicalendar.h"
+
 // KDE includes
 #include <kgenericfactory.h>
 #include <kglobal.h>
@@ -32,7 +34,6 @@
 #include "mymoneyfile.h"
 
 // plugin includes
-#include "schedulestoicalendar.h"
 #include "pluginsettings.h"
 
 #define i18nc i18n

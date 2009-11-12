@@ -20,6 +20,8 @@
 
 #include <config-kmymoney.h>
 
+#include "icalendarexport.h"
+
 // KDE includes
 #include <kgenericfactory.h>
 #include <kaction.h>
@@ -32,7 +34,6 @@
 #include "mymoneyfile.h"
 #include "pluginloader.h"
 
-#include "icalendarexport.h"
 #include "schedulestoicalendar.h"
 #include "pluginsettings.h"
 
