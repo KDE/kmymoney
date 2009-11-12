@@ -15,6 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kmymoneyplugin.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -28,9 +30,6 @@
 #include <KActionCollection>
 // ----------------------------------------------------------------------------
 // Project Includes
-
-
-#include "kmymoneyplugin.h"
 
 KMyMoneyPlugin::Plugin::Plugin(QObject* o, const char* name) :
   QObject(o)

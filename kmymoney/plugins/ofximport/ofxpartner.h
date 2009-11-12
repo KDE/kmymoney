@@ -21,9 +21,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-
 #include <QObject>
-#include <q3http.h>
+#include <Q3Http>
+#include <QFile>
 //Added by qt3to4:
 #include <Q3ValueList>
 
@@ -98,7 +98,7 @@ private:
   Private*          d;
   KUrl              m_dst;
   QFile             m_file;
-  Q3Http::Error      m_error;
+  Q3Http::Error     m_error;
   KIO::TransferJob* m_job;
 };
 #endif // OFXPARTNER_H

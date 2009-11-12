@@ -15,8 +15,12 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kmmviewinterface.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
+
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -27,9 +31,6 @@
 #include "kmymoney.h"
 #include "kmymoneyview.h"
 #include "selectedtransaction.h"
-#include "kmmviewinterface.h"
-//Added by qt3to4:
-#include <QList>
 
 KMyMoneyPlugin::KMMViewInterface::KMMViewInterface(KMyMoney2App* app, KMyMoneyView* view, QObject* parent, const char* name) :
   ViewInterface(parent, name),

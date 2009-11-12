@@ -15,6 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kmmstatementinterface.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -26,7 +28,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmmstatementinterface.h"
 #include "kmymoney.h"
 #include <mymoneyaccount.h>
 #include <mymoneykeyvaluecontainer.h>

@@ -22,6 +22,8 @@
 #include <unistd.h>
 #endif
 
+#include "ofxpartner.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -52,7 +54,6 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include "ofxpartner.h"
 
 namespace OfxPartner
 {

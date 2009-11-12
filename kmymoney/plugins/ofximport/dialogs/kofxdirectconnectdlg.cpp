@@ -17,6 +17,8 @@
 
 #include <config-kmymoney.h>
 
+#include "kofxdirectconnectdlg.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -43,8 +45,6 @@
 #include <mymoneyinstitution.h>
 #include <mymoneyfile.h>
 #include "mymoneyofxconnector.h"
-#include "kofxdirectconnectdlg.h"
-
 
 class KOfxDirectConnectDlg::Private
 {

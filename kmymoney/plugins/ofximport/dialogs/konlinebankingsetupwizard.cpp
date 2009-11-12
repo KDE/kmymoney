@@ -17,6 +17,8 @@
 
 #include <config-kmymoney.h>
 
+#include "konlinebankingsetupwizard.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -47,7 +49,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "konlinebankingsetupwizard.h"
 #include <../ofxpartner.h>
 #include <mymoneyofxconnector.h>
 

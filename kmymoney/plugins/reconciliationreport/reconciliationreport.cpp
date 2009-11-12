@@ -18,6 +18,8 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>  *
  ***************************************************************************/
 
+#include "reconciliationreport.h"
+
 // KDE includes
 #include <kgenericfactory.h>
 #include <kaction.h>
@@ -32,7 +34,6 @@
 #include "mymoneyfile.h"
 #include "pluginloader.h"
 
-#include "reconciliationreport.h"
 #include "kreconciliationreportdlg.h"
 
 typedef KGenericFactory<KMMReconciliationReportPlugin> reconciliationreportFactory;

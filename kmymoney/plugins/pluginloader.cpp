@@ -15,13 +15,14 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "pluginloader.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
 #include <QStringList>
 #include <QCheckBox>
 #include <QLayout>
-//Added by qt3to4:
 #include <QByteArray>
 
 // ----------------------------------------------------------------------------
@@ -36,11 +37,11 @@
 #include <klocale.h>
 #include <KServiceTypeTrader>
 #include <KService>
+
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "kmymoneyplugin.h"
-#include "pluginloader.h"
 
 namespace KMyMoneyPlugin {
 

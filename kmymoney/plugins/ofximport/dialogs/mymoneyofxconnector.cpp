@@ -17,6 +17,8 @@
 
 #include <config-kmymoney.h>
 
+#include "mymoneyofxconnector.h"
+
 // ----------------------------------------------------------------------------
 // System Includes
 
@@ -45,8 +47,8 @@
 #include <mymoneyaccount.h>
 #include <mymoneyinstitution.h>
 #include <mymoneykeyvaluecontainer.h>
-#include "mymoneyofxconnector.h"
 #include <kdeversion.h>
+
 OfxHeaderVersion::OfxHeaderVersion(KComboBox* combo, const QString& headerVersion) :
   m_combo(combo)
 {

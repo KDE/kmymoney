@@ -18,8 +18,8 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>  *
  ***************************************************************************/
-#ifndef AQHBCI_KDE_JOBLIST_H
-#define AQHBCI_KDE_JOBLIST_H
+#ifndef AQHBCI_KJOBLIST_H
+#define AQHBCI_KJOBLIST_H
 
 
 #include <k3listview.h>
@@ -69,7 +69,7 @@ public:
 
 
 
-#endif /* AQHBCI_KDE_JOBLIST_H */
+#endif /* AQHBCI_KJOBLIST_H */
 
 
 

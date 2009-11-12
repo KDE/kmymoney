@@ -18,9 +18,12 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>  *
  ***************************************************************************/
+
 #ifdef HAVE_CONFIG_H
 # include <config-kmymoney.h>
 #endif
+
+#include "kbjobview.h"
 
 #include <qevent.h>
 #include <q3groupbox.h>
@@ -37,7 +40,6 @@
 #include <kglobal.h>
 #include <kiconloader.h>
 
-#include "kbjobview.h"
 #include "kbanking.h"
 #include <aqbanking/jobgetbalance.h>
 #include <aqbanking/jobgettransactions.h>

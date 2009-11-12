@@ -15,6 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "ofximporterplugin.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -41,7 +43,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ofximporterplugin.h"
 #include "konlinebankingstatus.h"
 #include "konlinebankingsetupwizard.h"
 #include "kofxdirectconnectdlg.h"

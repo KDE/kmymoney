@@ -22,6 +22,8 @@
 # include <config-kmymoney.h>
 #endif
 
+#include "mymoneybanking.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -67,7 +69,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneybanking.h"
 #include "kbjobview.h"
 #include "kbsettings.h"
 #include "kbaccountsettings.h"

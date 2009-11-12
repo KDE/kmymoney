@@ -18,6 +18,8 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>  *
  ***************************************************************************/
 
+#include "kreconciliationreportdlg.h"
+
 // Qt includes
 #include <qpainter.h>
 #include <qpushbutton.h>
@@ -29,8 +31,6 @@
 // KDE includes
 #include <khtmlview.h>
 #include <khtml_part.h>
-
-#include "kreconciliationreportdlg.h"
 
 KReportDlg::KReportDlg(QWidget* parent, const QString& summaryReportHTML, const QString& detailsReportHTML) : QDialog(parent)
 {

@@ -17,6 +17,7 @@
 
 #include <config-kmymoney.h>
 
+#include "konlinebankingstatus.h"
 
 // ----------------------------------------------------------------------------
 // System Includes
@@ -40,7 +41,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "konlinebankingstatus.h"
 #include <mymoneykeyvaluecontainer.h>
 #include <mymoneyaccount.h>
 #include <libofx/libofx.h>
