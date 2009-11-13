@@ -82,7 +82,7 @@ void KMyMoneyTitleLabel::paintEvent(QPaintEvent *e)
   QRect cr = contentsRect();
 
   // prepare the pixmap
-  QImage output( cr.width(), cr.height(), 32 );
+  QImage output( cr.width(), cr.height(), QImage::Format_RGB32 );
   output.fill( m_bgColor.rgb() );
 
   QPixmap result = QPixmap::fromImage(output);
