@@ -36,9 +36,11 @@
 #include "kgncpricesourcedlg.h"
 #include "webpricequote.h"
 
-KGncPriceSourceDlg::KGncPriceSourceDlg(QWidget *parent){}
+KGncPriceSourceDlg::KGncPriceSourceDlg(QWidget *parent) : KDialog(parent)
+{
+}
 
-KGncPriceSourceDlg::KGncPriceSourceDlg(const QString &stockName, const QString &gncSource,QWidget * parent)
+KGncPriceSourceDlg::KGncPriceSourceDlg(const QString &stockName, const QString& gncSource, QWidget * parent) : KDialog(parent)
 {
   setButtons(Ok | Help);
   m_widget = new KGncPriceSourceDlgDecl();

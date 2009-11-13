@@ -301,7 +301,7 @@ void MyMoneySchedule::setLastPayment(const QDate& date)
 
   for (it=delList.begin(); it!=delList.end(); ++it)
   {
-    m_recordedPayments.remove(*it);
+    m_recordedPayments.removeAll(*it);
   }
 
   m_lastPayment = date;
