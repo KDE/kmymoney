@@ -32,7 +32,6 @@ FIND_PACKAGE(KDE4 REQUIRED)
 
 include( KDE4Defaults )
 include( MacroLibrary )
-include( KMyMoneyMacros )
 find_package(KdepimLibs REQUIRED)
 find_package(SharedMimeInfo REQUIRED)
 
