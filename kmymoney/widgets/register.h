@@ -304,7 +304,7 @@ public:
   void paintCell(QPainter* painter, int row, int col, const QRect& r, bool selected, const QColorGroup& cg);
 
   void resizeData(int) {}
-  Q3TableItem* item(int, int) { return 0; }
+  Q3TableItem* item(int, int) const { return 0; }
   void setItem(int, int, Q3TableItem*) {}
   void clearCell(int, int) {}
   void clearCellWidget(int, int);
