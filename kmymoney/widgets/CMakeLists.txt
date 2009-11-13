@@ -20,6 +20,8 @@ SET(kmymoney_STAT_HEADERS
   kmymoney_export.h
   )
 
+KMM_CREATE_LINKS( ${kmymoney_STAT_HEADERS} )
+
 ########### Basic Widget Library (kmymoney_base) STATIC #################
 
 # Common sources for libkmymoney.so and libwidgets.a that do not
