@@ -7,7 +7,5 @@ SET(kgpgfile_STAT_SRCS
    kgpgfile.cpp
    )
 
-KMM_CREATE_LINKS(kgpgfile.h)
-
 KDE4_ADD_LIBRARY(kgpgfile STATIC ${kgpgfile_STAT_SRCS})
 

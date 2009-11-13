@@ -8,8 +8,6 @@ SET (libconverter_a_SOURCES
 	webpricequote.cpp
 	)
 
-KMM_CREATE_LINKS( mymoneytemplate.h )
-
 KDE4_ADD_LIBRARY(converter STATIC ${libconverter_a_SOURCES})
 
 ########### install files ###############

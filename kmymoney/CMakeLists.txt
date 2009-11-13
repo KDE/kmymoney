@@ -16,9 +16,6 @@ ADD_SUBDIRECTORY( misc )
 
 SET( _HEADERS kmymoneyutils.h kmymoneyglobalsettings.h )
 
-# we call a macro that creates symbolic links in kmymoney/
-KMM_CREATE_LINKS( ${_HEADERS} )
-
 ########### common code (kmymoney_common) STATIC ###############
 # will be linked into kmymoney, kmymoneytest, and libkmymoney.so
 

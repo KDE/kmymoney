@@ -34,8 +34,6 @@ SET(libviews_a_UI
   kscheduledviewdecl.ui
   )
 
-KMM_CREATE_LINKS( ${libviews_a_HEADER} )
-
 # The handling of these ui files depends
 # on libkmymoney.so (the widgets library)
 kde4_add_ui_files(libviews_a_SOURCES ${libviews_a_UI})
