@@ -1440,7 +1440,7 @@ void MyMoneyStorageSql::addTransaction (const MyMoneyTransaction& tx) {
   ++m_transactions;
   // for each split account, update lastMod date, balance, txCount
   QList<MyMoneySplit>::ConstIterator it_s;
-  for(it_s = tx.splits().begin(); it_s != tx.splits().end(); ++it_s) {
+  for(it_s = tx.splits().constBegin(); it_s != tx.splits().constEnd(); ++it_s) {
     MyMoneyAccount acc = MyMoneyFile::instance()->account((*it_s).accountId());
     ++m_transactionCountMap[acc.id()];
     modifyAccount(acc);
@@ -1466,7 +1466,7 @@ void MyMoneyStorageSql::modifyTransaction (const MyMoneyTransaction& tx) {
   writeTransaction(tx.id(), tx, q, "N");
   // for each split account, update lastMod date, balance, txCount
   QList<MyMoneySplit>::ConstIterator it_s;
-  for(it_s = tx.splits().begin(); it_s != tx.splits().end(); ++it_s) {
+  for(it_s = tx.splits().constBegin(); it_s != tx.splits().constEnd(); ++it_s) {
     //MyMoneyAccount acc = m_storagePtr->account((*it_s).accountId());
     MyMoneyAccount acc = MyMoneyFile::instance()->account((*it_s).accountId());
     ++m_transactionCountMap[acc.id()];
@@ -1485,7 +1485,7 @@ void MyMoneyStorageSql::removeTransaction(const MyMoneyTransaction& tx) {
 
   // for each split account, update lastMod date, balance, txCount
   QList<MyMoneySplit>::ConstIterator it_s;
-  for(it_s = tx.splits().begin(); it_s != tx.splits().end(); ++it_s) {
+  for(it_s = tx.splits().constBegin(); it_s != tx.splits().constEnd(); ++it_s) {
     MyMoneyAccount acc = m_storagePtr->account((*it_s).accountId());
     --m_transactionCountMap[acc.id()];
     modifyAccount(acc);
@@ -1549,7 +1549,7 @@ void MyMoneyStorageSql::writeSplits(const QString& txId, const QString& type, co
   MyMoneySqlQuery q2(this);
   q.prepare (m_db.m_tables["kmmSplits"].updateString());
   q2.prepare (m_db.m_tables["kmmSplits"].insertString());
-  for(it = splitList.begin(), i = 0; it != splitList.end(); ++it, ++i) {
+  for(it = splitList.constBegin(), i = 0; it != splitList.constEnd(); ++it, ++i) {
     if (dbList.contains(i)) {
       dbList.removeAll (i);
       writeSplit(txId, (*it), type, i, q);
@@ -1631,7 +1631,7 @@ void MyMoneyStorageSql::writeSchedules() {
   //TODO: find a way to prepare the queries outside of the loop.  writeSchedule()
   // modifies the query passed to it, so they have to be re-prepared every pass.
   signalProgress(0, list.count(), "Writing Schedules...");
-  for(it = list.begin(); it != list.end(); ++it) {
+  for(it = list.constBegin(); it != list.constEnd(); ++it) {
     q.prepare (m_db.m_tables["kmmSchedules"].updateString());
     q2.prepare (m_db.m_tables["kmmSchedules"].insertString());
     bool insert = true;
@@ -1770,7 +1770,7 @@ void MyMoneyStorageSql::writeSecurities() {
   signalProgress(0, securityList.count(), "Writing Securities...");
   q.prepare (m_db.m_tables["kmmSecurities"].updateString());
   q2.prepare (m_db.m_tables["kmmSecurities"].insertString());
-  for(QList<MyMoneySecurity>::ConstIterator it = securityList.begin(); it != securityList.end(); ++it) {
+  for(QList<MyMoneySecurity>::ConstIterator it = securityList.constBegin(); it != securityList.constEnd(); ++it) {
     if (dbList.contains((*it).id())) {
       dbList.removeAll ((*it).id());
       writeSecurity((*it), q);
@@ -1858,7 +1858,7 @@ void MyMoneyStorageSql::writePrices() {
   const MyMoneyPriceList list = m_storage->priceList();
   signalProgress(0, list.count(), "Writing Prices...");
   MyMoneyPriceList::ConstIterator it;
-  for(it = list.begin(); it != list.end(); ++it)   {
+  for(it = list.constBegin(); it != list.constEnd(); ++it)   {
     writePricePair(*it);
   }
 }
@@ -1866,7 +1866,7 @@ void MyMoneyStorageSql::writePrices() {
 void MyMoneyStorageSql::writePricePair(const MyMoneyPriceEntries& p) {
   DBG("*** Entering MyMoneyStorageSql::writePricePair");
   MyMoneyPriceEntries::ConstIterator it;
-  for(it = p.begin(); it != p.end(); ++it) {
+  for(it = p.constBegin(); it != p.constEnd(); ++it) {
     writePrice (*it);
     signalProgress(++m_prices, 0);
   }
@@ -1946,7 +1946,7 @@ void MyMoneyStorageSql::writeCurrencies() {
   signalProgress(0, currencyList.count(), "Writing Currencies...");
   q.prepare (m_db.m_tables["kmmCurrencies"].updateString());
   q2.prepare (m_db.m_tables["kmmCurrencies"].insertString());
-  for(QList<MyMoneySecurity>::ConstIterator it = currencyList.begin(); it != currencyList.end(); ++it) {
+  for(QList<MyMoneySecurity>::ConstIterator it = currencyList.constBegin(); it != currencyList.constEnd(); ++it) {
     if (dbList.contains((*it).id())) {
       dbList.removeAll ((*it).id());
       writeCurrency((*it), q);
@@ -2257,7 +2257,7 @@ void MyMoneyStorageSql::writeKeyValuePairs(const QString& kvpType, const QString
   QVariantList value;
 
   QMap<QString, QString>::ConstIterator it;
-  for(it = pairs.begin(); it != pairs.end(); ++it) {
+  for(it = pairs.constBegin(); it != pairs.constEnd(); ++it) {
     type << kvpType;
     id << kvpId;
     key << it.key();
@@ -2376,8 +2376,8 @@ const QMap<QString, MyMoneyInstitution> MyMoneyStorageSql::fetchInstitutions (co
   q.prepare (queryString);
 
   if (! idList.empty()) {
-    QStringList::ConstIterator bindVal = idList.begin();
-    for (int i = 0; bindVal != idList.end(); ++i, ++bindVal) {
+    QStringList::ConstIterator bindVal = idList.constBegin();
+    for (int i = 0; bindVal != idList.constEnd(); ++i, ++bindVal) {
       q.bindValue (QString(":id%1").arg(i), *bindVal);
     }
   }
@@ -3436,7 +3436,7 @@ const QMap<QString, MyMoneySecurity> MyMoneyStorageSql::fetchCurrencies (const Q
   q.prepare (queryString);
 
   if (! idList.empty()) {
-    QStringList::ConstIterator bindVal = idList.begin();
+    QStringList::ConstIterator bindVal = idList.constBegin();
     for (int i = 0; bindVal != idList.end(); ++i, ++bindVal) {
       q.bindValue (QString(":id%1").arg(i), *bindVal);
     }
@@ -4366,7 +4366,7 @@ const QString MyMoneyDbIndex::generateDDL (databaseTypeE dbType) const
   // the result of an SQL function, but not a partial column.  There should be
   // a way to merge these, and support other DBMSs like SQLite at the same time.
   // For now, if we just use plain columns, this will work fine.
-  for (QStringList::ConstIterator it = m_columns.begin(); it != m_columns.end(); ++it) {
+  for (QStringList::ConstIterator it = m_columns.constBegin(); it != m_columns.constEnd(); ++it) {
     qs += *it + ',';
   }
 

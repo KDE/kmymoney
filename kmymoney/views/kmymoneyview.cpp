@@ -1667,7 +1667,7 @@ void KMyMoneyView::fixFile_2(void)
       QString categoryMemo;
       const QList<MyMoneySplit>& splits = (*it_t).splits();
       QList<MyMoneySplit>::const_iterator it_s;
-      for(it_s = splits.begin(); it_s != splits.end(); ++it_s) {
+      for(it_s = splits.constBegin(); it_s != splits.constEnd(); ++it_s) {
         MyMoneyAccount acc = file->account((*it_s).accountId());
         if(acc.isIncomeExpense()) {
           categoryId = (*it_s).id();
