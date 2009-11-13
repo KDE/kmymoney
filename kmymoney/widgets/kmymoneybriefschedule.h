@@ -68,7 +68,7 @@ protected slots:
 
 private:
   QList<MyMoneySchedule> m_scheduleList;
-  unsigned int m_index;
+  int m_index;
   QDate m_date;
 
   void loadSchedule();

@@ -1184,7 +1184,7 @@ int Register::rowHeightHint(void) const
 void Register::paintCell(QPainter* painter, int row, int col, const QRect& r, bool selected, const QColorGroup& cg)
 {
   // determine the item that we need to paint in the row and call it's paintRegisterCell() method
-  if((row < 0) || ((unsigned)row > m_itemIndex.size())) {
+  if((row < 0) || (row > m_itemIndex.size())) {
     qDebug("Register::paintCell: row %d out of bounds %d", row, (int)m_itemIndex.size());
     return;
   }
@@ -1377,7 +1377,7 @@ void Register::adjustColumn(int col)
   } else {
 
     // scan through the transactions
-    for(unsigned i = 0; i < m_items.size(); ++i) {
+    for(int i = 0; i < m_items.size(); ++i) {
       RegisterItem* const item = m_items[i];
       if(!item)
         continue;
@@ -1455,7 +1455,7 @@ void Register::doSelectItems(int from, int to, bool selected)
   // make sure we stay in bounds
   if(start < 0)
     start = 0;
-  if((end <= -1) || ((unsigned)end > (m_items.size()-1)))
+  if((end <= -1) || (end > (m_items.size()-1)))
     end = m_items.size()-1;
 
   RegisterItem* firstItem;
@@ -1480,7 +1480,7 @@ void Register::doSelectItems(int from, int to, bool selected)
 
 RegisterItem* Register::itemAtRow(int row) const
 {
-  if(row >= 0 && (unsigned)row < m_itemIndex.size()) {
+  if(row >= 0 && row < m_itemIndex.size()) {
     return m_itemIndex[row];
   }
   return 0;
@@ -1488,7 +1488,7 @@ RegisterItem* Register::itemAtRow(int row) const
 
 int Register::rowToIndex(int row) const
 {
-  for(unsigned i = 0; i < m_items.size(); ++i) {
+  for(int i = 0; i < m_items.size(); ++i) {
     RegisterItem* const item = m_items[i];
     if(!item)
       continue;
@@ -1511,7 +1511,7 @@ void Register::selectedTransactions(SelectedTransactions& list) const
     }
   }
 
-  for(unsigned i = 0; i < m_items.size(); ++i) {
+  for(int i = 0; i < m_items.size(); ++i) {
     RegisterItem* const item = m_items[i];
     // make sure, we don't include the focus item twice
     if(item == m_focusItem)
@@ -1568,7 +1568,7 @@ void Register::contentsMouseReleaseEvent( QMouseEvent *e )
 
 void Register::selectItem(int row, int col, int button, const QPoint& /* mousePos */)
 {
-  if(row >= 0 && (unsigned)row < m_itemIndex.size()) {
+  if(row >= 0 && row < m_itemIndex.size()) {
     RegisterItem* item = m_itemIndex[row];
 
     // don't support selecting when the item has an editor
@@ -1769,7 +1769,7 @@ void Register::ensureItemVisible(RegisterItem* item)
 
 void Register::slotDoubleClicked(int row, int, int, const QPoint&)
 {
-  if(row >= 0 && (unsigned)row < m_itemIndex.size()) {
+  if(row >= 0 && row < m_itemIndex.size()) {
     RegisterItem* p = m_itemIndex[row];
     if(p->isSelectable()) {
       m_ignoreNextButtonRelease = true;

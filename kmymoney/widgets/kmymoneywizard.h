@@ -464,7 +464,7 @@ protected:
     * @param step step to be shown/hidden
     * @param hidden hide step if true (the default) or show it if false
     */
-  void setStepHidden(unsigned int step, bool hidden = true);
+  void setStepHidden(int step, bool hidden = true);
 
 protected slots:
   virtual void accept(void);
@@ -503,7 +503,7 @@ private:
     *
     * @param step step to be selected
     */
-  void selectStep(unsigned int step);
+  void selectStep(int step);
 
   /*
    * The layouts

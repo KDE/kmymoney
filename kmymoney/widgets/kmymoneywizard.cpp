@@ -241,7 +241,7 @@ void KMyMoneyWizard::addStep(const QString& text)
   }
 }
 
-void KMyMoneyWizard::setStepHidden(unsigned int step, bool hidden)
+void KMyMoneyWizard::setStepHidden(int step, bool hidden)
 {
   if((step < 1) || (step > m_steps.count()))
     return;
@@ -250,7 +250,7 @@ void KMyMoneyWizard::setStepHidden(unsigned int step, bool hidden)
   updateStepCount();
 }
 
-void KMyMoneyWizard::selectStep(unsigned int step)
+void KMyMoneyWizard::selectStep(int step)
 {
   if((step < 1) || (step > m_steps.count()))
     return;

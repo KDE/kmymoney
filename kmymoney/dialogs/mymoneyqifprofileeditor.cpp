@@ -250,7 +250,7 @@ void MyMoneyQifProfileEditor::loadProfileListFromConfig(void)
     m_profileListBox->setSelected(0, true);
     slotLoadProfileFromConfig(list[0]);
   }
-  for(unsigned int i = 0; i < list.count(); ++i) {
+  for(int i = 0; i < list.count(); ++i) {
     int nw = fontMetrics.width(list[i]) + 10;
     w = qMax( w, nw );
   }
