@@ -65,6 +65,7 @@
 #include <kdebug.h>
 #include <kapplication.h>
 #include <kshortcut.h>
+#include <ktoolbar.h>
 #include <kiconloader.h>
 #include <kmessagebox.h>
 #include <kfiledialog.h>
@@ -336,8 +337,6 @@ KMyMoney2App::KMyMoney2App(QWidget* parent) :
   ::timetrace("create view");
   d->m_myMoneyView = new KMyMoneyView(frame, "KMyMoneyView");
   layout->addWidget(d->m_myMoneyView, 10);
-  //FIXME: Port to KDE4
-  //connect(myMoneyView, SIGNAL(aboutToShowPage(QWidget*)), this, SLOT(slotResetSelections()));
 
   ///////////////////////////////////////////////////////////////////
   // call inits to invoke all other construction parts
@@ -1026,12 +1025,13 @@ void KMyMoney2App::initStatusBar(void)
 
 void KMyMoney2App::saveOptions(void)
 {
-  //FIXME: Port to KDE4
   KConfigGroup grp = d->m_config->group("General Options");
   grp.writeEntry("Geometry", size());
 
   grp.writeEntry("Show Statusbar", toggleAction("options_show_statusbar")->isChecked());
-  //toolBar("mainToolBar")->saveSettings(grp, "mainToolBar");
+
+  KConfigGroup toolbarGrp = d->m_config->group("mainToolBar");
+  toolBar("mainToolBar")->saveSettings(toolbarGrp);
 
   d->m_recentFiles->saveEntries(d->m_config->group("Recent Files"));
 

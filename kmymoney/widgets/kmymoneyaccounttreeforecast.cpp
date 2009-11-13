@@ -359,9 +359,7 @@ void KMyMoneyAccountTreeForecastItem::setValue(int column, MyMoneyMoney amount, 
 
   //calculate the balance in base currency for the total row
   if(m_account.currencyId() != listView()->baseCurrency().id()) {
-//FIXME: Port to KDE4
-#if 0
-      	  ReportAccount repAcc = ReportAccount(m_account.id());
+    ReportAccount repAcc = ReportAccount(m_account.id());
     MyMoneyMoney curPrice = repAcc.baseCurrencyPrice(forecastDate);
     MyMoneyMoney baseAmountMM = amount * curPrice;
     m_values[column] = baseAmountMM.convert(listView()->baseCurrency().smallestAccountFraction());
@@ -369,7 +367,6 @@ void KMyMoneyAccountTreeForecastItem::setValue(int column, MyMoneyMoney amount, 
     if(p != 0) {
       p->adjustParentValue(column, m_values[column]);
     }
-#endif    
   } else {
     m_values[column] += amount;
     if(p != 0) {

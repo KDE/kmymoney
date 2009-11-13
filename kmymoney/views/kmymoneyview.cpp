@@ -267,23 +267,6 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   //set the model
   setModel(m_model);
 
-  //FIXME: Port to KDE4
-  #if 0
-  // get rid of the title text
-  QWidget* widget = dynamic_cast<QWidget*>(child("KJanusWidgetTitleLabel", "QLabel"));
-  if(widget)
-    widget->hide();
-
-  // and the separator below it
-  widget = dynamic_cast<QWidget*>(child(0, "KSeparator"));
-  if(widget)
-    widget->hide();
-  #endif
-
-  // select the page first, before connecting the aboutToShow signal
-  // because we don't want to override the information stored in the config file
-
-
   setCurrentPage(m_homeViewFrame);
   connect(this, SIGNAL(currentPageChanged(const QModelIndex, const QModelIndex)), this, SLOT(slotRememberPage(const QModelIndex, const QModelIndex)));
 
