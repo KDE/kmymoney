@@ -44,7 +44,7 @@ KRecentFileItem::KRecentFileItem(const QString& url, Q3IconView* parent, const Q
     m_url(url),
     m_parent(parent)
 {
-  QToolTip::add(parent, rect(), url);
+  parent->setToolTip(url);
   // avoid moving this item around
   setDragEnabled(false);
 }
@@ -55,10 +55,7 @@ KRecentFileItem::~KRecentFileItem()
 
 bool KRecentFileItem::move( int x, int y )
 {
-  QRect r = rect();
-  QToolTip::remove(m_parent);
-  r.moveTopLeft(QPoint(x,y));
-  QToolTip::add(m_parent, r, m_url);
+  m_parent->setToolTip(m_url);
   return Q3IconViewItem::move(x,y);
 }
 

@@ -42,6 +42,7 @@
 
 
 #include <kio/job.h>
+#include <kio/jobuidelegate.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 
@@ -370,7 +371,8 @@ void OfxHttpsRequest::slotOfxFinished(KIO::Job* /* e */)
 
   int error = m_job->error();
   if ( error ) {
-    m_job->showErrorDialog();
+    m_job->ui()->setWindow(0);
+    m_job->ui()->showErrorMessage();
 //FIXME: FIX on windows
     unlink(m_dst.path().toUtf8().data());
 

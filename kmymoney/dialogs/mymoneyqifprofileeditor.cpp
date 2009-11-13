@@ -80,8 +80,8 @@ MyMoneyQifProfileEditor::MyMoneyQifProfileEditor(const bool edit, QWidget *paren
   m_selectedAmountType(0)
 {
   // we don't need the date and amounts tab anymore, so we just hide them for now
-  profileTabs->removePage( tabMoney );
-  profileTabs->removePage( tabDate );
+  profileTabs->removeTab( profileTabs->indexOf(tabMoney) );
+  profileTabs->removeTab( profileTabs->indexOf(tabDate) );
 
   loadWidgets();
   loadProfileListFromConfig();

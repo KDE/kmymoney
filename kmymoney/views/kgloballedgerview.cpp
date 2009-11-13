@@ -735,7 +735,8 @@ void KGlobalLedgerView::updateSummaryLine(const QMap<QString, MyMoneyMoney>& act
       m_leftSummaryLabel->setText(i18n("Never reconciled"));
     }
 
-    m_rightSummaryLabel->setPaletteForegroundColor(m_leftSummaryLabel->paletteForegroundColor());
+    QPalette palette = m_rightSummaryLabel->palette();
+    palette.setColor(m_rightSummaryLabel->foregroundRole(), m_leftSummaryLabel->palette().color(foregroundRole()));
     if(m_account.accountType() != MyMoneyAccount::Investment) {
       m_centerSummaryLabel->setText(i18nc("Cleared balance", "Cleared: %1", clearedBalance[m_account.id()].formatMoney("", d->m_precision)));
       m_rightSummaryLabel->setText(i18n("Balance: %1", actBalance[m_account.id()].formatMoney("", d->m_precision)));
@@ -743,7 +744,7 @@ void KGlobalLedgerView::updateSummaryLine(const QMap<QString, MyMoneyMoney>& act
       if(m_account.accountGroup() == MyMoneyAccount::Liability && !actBalance[m_account.id()].isZero())
         showNegative = !showNegative;
       if(showNegative) {
-        m_rightSummaryLabel->setPaletteForegroundColor(KMyMoneyGlobalSettings::listNegativeValueColor());
+        palette.setColor(m_rightSummaryLabel->foregroundRole(), KMyMoneyGlobalSettings::listNegativeValueColor());
       }
     } else {
       m_centerSummaryLabel->hide();
@@ -774,6 +775,7 @@ void KGlobalLedgerView::updateSummaryLine(const QMap<QString, MyMoneyMoney>& act
       }
       m_rightSummaryLabel->setText(i18n("Investment value: %1%2", approx ? "~" : "", balance.formatMoney(base.tradingSymbol(), d->m_precision)));
     }
+    m_rightSummaryLabel->setPalette(palette);
   }
 }
 

@@ -162,7 +162,9 @@ KMyMoneyWizard::KMyMoneyWizard(QWidget *parent, const char *name, bool modal, Qt
 
   // create stage layout and frame
   m_stepFrame = new Q3Frame(this, "stepFrame");
-  m_stepFrame->setPaletteBackgroundColor(KColorScheme::NormalText);
+  QPalette palette = m_stepFrame->palette();
+  palette.setColor(m_stepFrame->backgroundRole(), KColorScheme::NormalText);
+  m_stepFrame->setPalette(palette);
   m_stepLayout = new QVBoxLayout(m_stepFrame);
   m_stepLayout->setContentsMargins(11,11,11,11);
   m_stepLayout->setSpacing(6);
@@ -303,7 +305,7 @@ void KMyMoneyWizard::switchPage(KMyMoneyWizardPage* oldPage)
 {
   if(oldPage) {
     oldPage->widget()->hide();
-    m_pageLayout->remove(oldPage->widget());
+    m_pageLayout->removeWidget(oldPage->widget());
     disconnect(oldPage->object(), SIGNAL(completeStateChanged()), this, SLOT(completeStateChanged()));
   }
   KMyMoneyWizardPage* newPage = m_history.back();

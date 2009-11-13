@@ -697,7 +697,7 @@ bool Register::eventFilter(QObject* o, QEvent* e)
 void Register::setupRegister(const MyMoneyAccount& account, const QList<Column>& cols)
 {
   m_account = account;
-  bool enabled = isUpdatesEnabled();
+  bool enabled = updatesEnabled();
   setUpdatesEnabled(false);
 
   for(int i = 0; i < MaxColumns; ++i)
@@ -721,7 +721,7 @@ void Register::setupRegister(const MyMoneyAccount& account, const QList<Column>&
 void Register::setupRegister(const MyMoneyAccount& account, bool showAccountColumn)
 {
   m_account = account;
-  bool enabled = isUpdatesEnabled();
+  bool enabled = updatesEnabled();
   setUpdatesEnabled(false);
 
   for(int i = 0; i < MaxColumns; ++i)
@@ -1128,7 +1128,7 @@ void Register::updateRegister(bool forceUpdateRowHeight)
     bool needUpdateHeaders = (numRows() != rowCount) | forceUpdateRowHeight;
 
     // setup QTable.  Make sure to suppress screen updates for now
-    bool updatesEnabled = isUpdatesEnabled();
+    bool enabled = updatesEnabled();
     setUpdatesEnabled(false);
     setNumRows(rowCount);
 
@@ -1154,7 +1154,7 @@ void Register::updateRegister(bool forceUpdateRowHeight)
     // add or remove scrollbars as required
     updateScrollBars();
 
-    setUpdatesEnabled(updatesEnabled);
+    setUpdatesEnabled(enabled);
 
     // force resizeing of the columns if necessary
     if(m_needInitialColumnResize) {
@@ -1219,7 +1219,7 @@ void Register::resize(void)
 
 void Register::resize(int col)
 {
-  bool enabled = isUpdatesEnabled();
+  bool enabled = updatesEnabled();
   setUpdatesEnabled(false);
 
   // resize the register
@@ -1798,7 +1798,7 @@ void Register::slotEnsureItemVisible(void)
     return;
 
   // make sure to catch latest changes
-  bool enabled = isUpdatesEnabled();
+  bool enabled = updatesEnabled();
   setUpdatesEnabled(false);
   updateRegister();
   setUpdatesEnabled(enabled);

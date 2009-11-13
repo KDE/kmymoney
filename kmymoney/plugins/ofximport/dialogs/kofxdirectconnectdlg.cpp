@@ -33,6 +33,7 @@
 #include <kurl.h>
 #include <kio/job.h>
 #include <kio/jobclasses.h>
+#include <kio/jobuidelegate.h>
 #include <kdebug.h>
 #include <ktemporaryfile.h>
 #include <kprogressdialog.h>
@@ -178,7 +179,8 @@ void KOfxDirectConnectDlg::slotOfxFinished(KIO::Job* /* e */)
 
   if ( error )
   {
-    m_job->showErrorDialog();
+    m_job->ui()->setWindow(0);
+    m_job->ui()->showErrorMessage();
   }
   else if ( m_job->isErrorPage() )
   {

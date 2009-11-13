@@ -151,7 +151,7 @@ void RegisterSearchLine::updateSearch(const QString& s)
   // keep track of the current focus item
   RegisterItem* focusItem = d->reg->focusItem();
 
-  bool enabled = d->reg->isUpdatesEnabled();
+  bool enabled = d->reg->updatesEnabled();
   d->reg->setUpdatesEnabled(false);
 
   bool scrollBarVisible = d->reg->verticalScrollBar()->isVisible();

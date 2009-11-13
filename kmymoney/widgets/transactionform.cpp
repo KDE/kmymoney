@@ -172,7 +172,6 @@ TransactionForm::TransactionForm(QWidget *parent) :
   m_transaction(0),
   m_tabBar(0)
 {
-  setBackgroundOrigin(Q3Table::WindowOrigin);
   setFrameShape( Q3Table::NoFrame);
   setShowGrid( false );
   setSelectionMode( Q3Table::NoSelection );

@@ -106,13 +106,13 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
 
     m_tab1 = new kMyMoneyReportConfigTab1Decl( m_criteriaTab);
     m_tab1->setObjectName("kMyMoneyReportConfigTab1" );
-    m_criteriaTab->insertTab( m_tab1, i18n("Report"), 0 );
+    m_criteriaTab->insertTab( 0, m_tab1, i18n("Report") );
 
     if ( m_initialState.reportType() == MyMoneyReport::ePivotTable )
     {
       m_tab2 = new kMyMoneyReportConfigTab2Decl( m_criteriaTab );
       m_tab2->setObjectName( "kMyMoneyReportConfigTab2" );
-      m_criteriaTab->insertTab( m_tab2, i18n( "Rows/Columns"), 1 );
+      m_criteriaTab->insertTab( 1, m_tab2, i18n( "Rows/Columns") );
       connect(m_tab2->m_comboRows, SIGNAL(highlighted(int)), this, SLOT(slotRowTypeChanged(int)));
       connect(m_tab2->m_comboColumns, SIGNAL(activated(int)), this, SLOT(slotColumnTypeChanged(int)));
       //control the state of the includeTransfer check
@@ -120,7 +120,7 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
 
       m_tabChart = new kMyMoneyReportConfigTabChartDecl( m_criteriaTab);
       m_tabChart->setObjectName("kMyMoneyReportConfigTabChart" );
-      m_criteriaTab->insertTab( m_tabChart, i18n( "Chart"), 2 );
+      m_criteriaTab->insertTab( 2, m_tabChart, i18n( "Chart") );
     }
     else if ( m_initialState.reportType() == MyMoneyReport::eQueryTable )
     {
@@ -129,12 +129,12 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
       if ( m_initialState.rowType() < MyMoneyReport::eAccountByTopAccount )
       {
         m_tab3 = new kMyMoneyReportConfigTab3Decl( m_criteriaTab);
-       	m_tab3->setObjectName("kMyMoneyReportConfigTab3" );
-        m_criteriaTab->insertTab( m_tab3, i18n("Rows/Columns"), 1 );
+        m_tab3->setObjectName("kMyMoneyReportConfigTab3" );
+        m_criteriaTab->insertTab( 1, m_tab3, i18n("Rows/Columns") );
       }
     }
 
-    m_criteriaTab->showPage( m_tab1 );
+    m_criteriaTab->setCurrentIndex( m_criteriaTab->indexOf(m_tab1) );
     m_criteriaTab->setMinimumSize( 500,200 );
 
     QList<MyMoneyBudget> list = MyMoneyFile::instance()->budgetList();
