@@ -869,7 +869,7 @@ All information you have entered into this wizard will be shown and all transact
   <customwidget>
    <class>KMyMoneyCategory</class>
    <extends>KComboBox</extends>
-   <header>kmymoney/kmymoneycategory.h</header>
+   <header>kmymoneycategory.h</header>
   </customwidget>
   <customwidget>
    <class>kMyMoneyEdit</class>
@@ -879,13 +879,13 @@ All information you have entered into this wizard will be shown and all transact
   <customwidget>
    <class>KMyMoneyPayeeCombo</class>
    <extends>KComboBox</extends>
-   <header>kmymoney/kmymoneycombo.h</header>
+   <header>kmymoneycombo.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>kMyMoneyAccountSelector</class>
    <extends>QWidget</extends>
-   <header location="global">../widgets/kmymoneyaccountselector.h</header>
+   <header>kmymoneyaccountselector.h</header>
   </customwidget>
   <customwidget>
    <class>K3ActiveLabel</class>
