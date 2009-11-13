@@ -280,39 +280,39 @@ void InvestTransactionEditor::createEditWidgets(void)
   }
 
   QLabel* label = new QLabel("", 0);
-  label->setAlignment(Qt::AlignVCenter | Qt::AlignRight | Qt::TextDontClip);
+  label->setAlignment(Qt::AlignVCenter | Qt::AlignRight);
   m_editWidgets["total"] = label;
 
   label = new QLabel("", 0);
-  label->setAlignment(Qt::AlignVCenter | Qt::TextDontClip);
+  label->setAlignment(Qt::AlignVCenter);
   m_editWidgets["total-label"] = label;
 
   label = new QLabel("", 0);
-  label->setAlignment(Qt::AlignVCenter | Qt::TextDontClip);
+  label->setAlignment(Qt::AlignVCenter);
   m_editWidgets["asset-label"] = label;
 
   label = new QLabel("", 0);
-  label->setAlignment(Qt::AlignVCenter | Qt::TextDontClip);
+  label->setAlignment(Qt::AlignVCenter);
   m_editWidgets["fee-label"] = label;
 
   label = new QLabel("", 0);
-  label->setAlignment(Qt::AlignVCenter | Qt::TextDontClip);
+  label->setAlignment(Qt::AlignVCenter);
   m_editWidgets["fee-amount-label"] = label;
 
   label = new QLabel("", 0);
-  label->setAlignment(Qt::AlignVCenter | Qt::TextDontClip);
+  label->setAlignment(Qt::AlignVCenter);
   m_editWidgets["interest-label"] = label;
 
   label = new QLabel("", 0);
-  label->setAlignment(Qt::AlignVCenter | Qt::TextDontClip);
+  label->setAlignment(Qt::AlignVCenter);
   m_editWidgets["interest-amount-label"] = label;
 
   label = new QLabel("", 0);
-  label->setAlignment(Qt::AlignVCenter | Qt::TextDontClip);
+  label->setAlignment(Qt::AlignVCenter);
   m_editWidgets["price-label"] = label;
 
   label = new QLabel("", 0);
-  label->setAlignment(Qt::AlignVCenter | Qt::TextDontClip);
+  label->setAlignment(Qt::AlignVCenter);
   m_editWidgets["shares-label"] = label;
 
   // if we don't have more than 1 selected transaction, we don't need
