@@ -62,9 +62,6 @@ namespace KMyMoneyPlugin {
     virtual ~Plugin();
 
   protected:
-    /** See KMyMoney2App::action() for a description */
-    QAction* action(const QString& name) const;
-
     /** See KMyMoney2App::toggleAction() for a description */
     KToggleAction* toggleAction(const QString& name) const;
 

@@ -1140,17 +1140,6 @@ signals:
 
 public:
   /**
-    * This method retrieves a pointer to a QAction object from actionCollection().
-    * If the action with the name @p actionName is not found, a pointer to
-    * a static non-configured QAction object is returned and a warning is
-    * printed to stderr.
-    *
-    * @param actionName name of the action to be retrieved
-    * @return pointer to QAction object (or derivative)
-    */
-  QAction* action(const QString& actionName) const;
-
-  /**
     * This method is implemented for convenience. It returns a dynamic_cast-ed
     * pointer to an action found in actionCollection().
     * If the action with the name @p actionName is not found or the object

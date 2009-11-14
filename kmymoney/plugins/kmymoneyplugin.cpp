@@ -41,18 +41,6 @@ KMyMoneyPlugin::Plugin::~Plugin()
 {
 }
 
-QAction* KMyMoneyPlugin::Plugin::action(const QString& actionName) const
-{
-  static QAction dummyAction(QString("Dummy"), 0);
-
-  QAction* p = actionCollection()->action(QString(actionName.toLatin1()));
-  if(!p) {
-    p = &dummyAction;
-    qWarning("Action with name '%s' not found!", qPrintable(actionName));
-  }
-  return p;
-}
-
 KToggleAction* KMyMoneyPlugin::Plugin::toggleAction(const QString& actionName) const
 {
   static KToggleAction dummyAction(QString("Dummy"), 0);

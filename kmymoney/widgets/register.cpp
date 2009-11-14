@@ -311,7 +311,6 @@ void GroupMarker::paintRegisterCell(QPainter* painter, int row, int /* col */, c
   painter->drawText(cellRect, Qt::AlignVCenter | Qt::AlignCenter, m_txt);
 
   cellRect.setHeight(m_bg->height());
-  int curWidth = m_bg->width();
 
   // now it's time to draw the background
   painter->drawPixmap(cellRect, *m_bg);

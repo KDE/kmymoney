@@ -186,13 +186,13 @@ int OfxImporterPlugin::ofxTransactionCallback(struct OfxTransactionData data, vo
   if(data.date_posted_valid==true)
   {
     QDateTime dt;
-    dt.setTime_t(data.date_posted, Qt::UTC);
+    dt.setTime_t(data.date_posted);
     t.m_datePosted = dt.date();
   }
   else if(data.date_initiated_valid==true)
   {
     QDateTime dt;
-    dt.setTime_t(data.date_initiated, Qt::UTC);
+    dt.setTime_t(data.date_initiated);
     t.m_datePosted = dt.date();
   }
 
@@ -416,14 +416,14 @@ int OfxImporterPlugin::ofxStatementCallback(struct OfxStatementData data, void* 
   if(data.date_start_valid==true)
   {
     QDateTime dt;
-    dt.setTime_t(data.date_start, Qt::UTC);
+    dt.setTime_t(data.date_start);
     s.m_dateBegin = dt.date();
   }
 
   if(data.date_end_valid==true)
   {
     QDateTime dt;
-    dt.setTime_t(data.date_end, Qt::UTC);
+    dt.setTime_t(data.date_end);
     s.m_dateEnd = dt.date();
   }
 

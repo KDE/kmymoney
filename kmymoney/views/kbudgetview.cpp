@@ -23,14 +23,12 @@
 #include <QComboBox>
 #include <QLineEdit>
 #include <QLabel>
-#include <q3multilineedit.h>
 #include <QPixmap>
 #include <QTabWidget>
 #include <q3listbox.h>
 #include <QCheckBox>
 #include <q3groupbox.h>
 #include <QToolTip>
-//Added by qt3to4:
 #include <QList>
 #include <QResizeEvent>
 
