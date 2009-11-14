@@ -17,7 +17,7 @@
 
 
 
-
+#include "kmymoneyview.h"
 #include <unistd.h>
 
 // ----------------------------------------------------------------------------
@@ -29,12 +29,10 @@
 #include <q3progressdialog.h>
 #include <QTextCodec>
 #include <QStatusBar>
-
 #include <QCursor>
 #include <QRegExp>
 #include <QLayout>
 #include <QObject>
-//Added by qt3to4:
 #include <QList>
 #include <QVBoxLayout>
 #include <Q3Frame>
@@ -95,7 +93,6 @@
 #include "mymoneygncreader.h"
 #include "mymoneystorageanon.h"
 #include <transactioneditor.h>
-#include "kmymoneyview.h"
 #include "khomeview.h"
 #include "kaccountsview.h"
 #include "kcategoriesview.h"
@@ -123,7 +120,8 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
 {
   // the global variable kmymoney2 is not yet assigned. So we construct it here
   QObject* kmymoney2 = parent->parent();
-  const int iconSize = (KMyMoneyGlobalSettings::iconSize()+1)*16;
+  //FIXME: Port to kde4
+  //const int iconSize = (KMyMoneyGlobalSettings::iconSize()+1)*16;
   newStorage();
 
   m_model = new KPageWidgetModel();
@@ -2165,7 +2163,9 @@ void KMyMoneyView::slotPrintView(void)
 KMyMoneyViewBase* KMyMoneyView::addBasePage(const QString& title, const QString& icon)
 {
   KMyMoneyViewBase* viewBase = new KMyMoneyViewBase(this, title, title);
-  const int iconSize = (KMyMoneyGlobalSettings::iconSize()+1)*16;
+  //FIXME:: Port to kde4
+  //I have not found how to set the icon size of KPageWidget -- asoliverez
+  //const int iconSize = (KMyMoneyGlobalSettings::iconSize()+1)*16;
   KPageWidgetItem* frm = m_model->addPage(viewBase, title);
   frm->setIcon(KIcon(icon));
   frm->setHeader(QString("")); // hide the header and let the title bar do it's job
