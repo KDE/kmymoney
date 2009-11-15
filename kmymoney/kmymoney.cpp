@@ -871,7 +871,7 @@ void KMyMoney2App::initActions(void)
 
   KAction *payee_rename = actionCollection()->addAction("payee_rename");
   payee_rename->setText(i18n("Rename payee"));
-  payee_rename->setIcon(KIcon("edit-delete"));
+  payee_rename->setIcon(KIcon("edit-rename"));
   connect(payee_rename, SIGNAL(triggered()), this, SIGNAL(payeeRename()));
 
   KAction *payee_delete = actionCollection()->addAction("payee_delete");
@@ -887,7 +887,7 @@ void KMyMoney2App::initActions(void)
 
   KAction *budget_rename = actionCollection()->addAction("budget_rename");
   budget_rename->setText(i18n("Rename budget"));
-  budget_rename->setIcon(KIcon("document-properties"));
+  budget_rename->setIcon(KIcon("edit-rename"));
   connect(budget_rename, SIGNAL(triggered()), this, SIGNAL(budgetRename()));
 
   KAction *budget_delete = actionCollection()->addAction("budget_delete");
@@ -920,7 +920,7 @@ void KMyMoney2App::initActions(void)
 
   KAction *currency_rename = actionCollection()->addAction("currency_rename");
   currency_rename->setText(i18n("Rename currency"));
-  currency_rename->setIcon(KIcon("edit-delete"));
+  currency_rename->setIcon(KIcon("edit-rename"));
   connect(currency_rename, SIGNAL(triggered()), this, SIGNAL(currencyRename()));
 
   KAction *currency_delete = actionCollection()->addAction("currency_delete");

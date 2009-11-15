@@ -92,7 +92,7 @@ QPixmap accountPixmap(const MyMoneyAccount& account, bool reconcileFlag)
     QPainter pixmapPainter(&result);
     pixmapPainter.drawPixmap(0, 0, overlay, 0, 0, overlay.width(), overlay.height());
   } else if(reconcileFlag) {
-    QPixmap overlay = DesktopIcon("account-types_reconcile");
+    QPixmap overlay = DesktopIcon("account-types_reconciled");
     QPainter pixmapPainter(&result);
     pixmapPainter.drawPixmap(0, 0, overlay, 0, 0, overlay.width(), overlay.height());
   }

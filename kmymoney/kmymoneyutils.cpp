@@ -505,7 +505,7 @@ QPixmap KMyMoneyUtils::accountGroupPixmap(const MyMoneyAccount& account, bool re
     QPainter pixmapPainter(&result);
     pixmapPainter.drawPixmap(0, 0, overlay, 0, 0, overlay.width(), overlay.height());
   } else if(reconcileFlag) {
-    QPixmap overlay = QPixmap(KGlobal::dirs()->findResource("appdata", QString( "icons/hicolor/22x22/actions/account-types_reconcile.png")));
+    QPixmap overlay = QPixmap(KGlobal::dirs()->findResource("appdata", QString( "icons/hicolor/22x22/actions/account-types_reconciled.png")));
     QPainter pixmapPainter(&result);
     pixmapPainter.drawPixmap(0, 0, overlay, 0, 0, overlay.width(), overlay.height());
   } else if(!account.onlineBankingSettings().value("provider").isEmpty()) {
