@@ -1,11 +1,13 @@
 [Desktop Entry]
 Name=KBanking
+Name[en_GB]=KBanking
 Name[pt]=KBanking
 Name[sv]=Kbank
 Name[tr]=KBanking
 Name[uk]=KBanking
 Name[x-test]=xxKBankingxx
 Comment=Add online banking to KMyMoney
+Comment[en_GB]=Add online banking to KMyMoney
 Comment[pt]=Adicionar a banca 'online' ao KMyMoney
 Comment[sv]=Lägg till Internetbank till Kmymoney
 Comment[tr]=KMyMoney uygulamasına çevrimiçi bankacılık özelliği ekle
