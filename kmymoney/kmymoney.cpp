@@ -612,6 +612,7 @@ void KMyMoney2App::initActions(void)
 
   KAction *account_online_unmap = actionCollection()->addAction("account_online_unmap");
   account_online_unmap->setText(i18n("Unmap account..."));
+  account_online_unmap->setIcon(KIcon("news-unsubscribe"));
   connect(account_online_unmap, SIGNAL(triggered()), this, SLOT(slotAccountUnmapOnline()));
 
   KActionMenu* menu = new KActionMenu(KIcon("view-refresh"), i18nc("Update online accounts menu", "Update"), actionCollection());
@@ -633,7 +634,7 @@ void KMyMoney2App::initActions(void)
   // *******************
   KAction *category_new = actionCollection()->addAction("category_new");
   category_new->setText(i18n("New category..."));
-  category_new->setIcon(KIcon("account_add"));
+  category_new->setIcon(KIcon("folder-new"));
   connect(category_new, SIGNAL(triggered()), this, SLOT(slotCategoryNew()));
 
   KAction *category_edit = actionCollection()->addAction("category_edit");
@@ -865,7 +866,7 @@ void KMyMoney2App::initActions(void)
   //Payees
   KAction *payee_new = actionCollection()->addAction("payee_new");
   payee_new->setText(i18n("New payee"));
-  payee_new->setIcon(KIcon("document-new"));
+  payee_new->setIcon(KIcon("list-add-user"));
   connect(payee_new, SIGNAL(triggered()), this, SLOT(slotPayeeNew()));
 
   KAction *payee_rename = actionCollection()->addAction("payee_rename");
@@ -875,7 +876,7 @@ void KMyMoney2App::initActions(void)
 
   KAction *payee_delete = actionCollection()->addAction("payee_delete");
   payee_delete->setText(i18n("Delete payee"));
-  payee_delete->setIcon(KIcon("edit-delete"));
+  payee_delete->setIcon(KIcon("list-remove-user"));
   connect(payee_delete, SIGNAL(triggered()), this, SLOT(slotPayeeDelete()));
 
   //Budget
@@ -901,12 +902,12 @@ void KMyMoney2App::initActions(void)
 
   KAction *budget_change_year = actionCollection()->addAction("budget_change_year");
   budget_change_year->setText(i18n("Change budget year"));
-  //budget_change_year->setIcon(KIcon(""));
+  budget_change_year->setIcon(KIcon("view-calendar"));
   connect(budget_change_year, SIGNAL(triggered()), this, SLOT(slotBudgetChangeYear()));
 
   KAction *budget_forecast = actionCollection()->addAction("budget_forecast");
   budget_forecast->setText(i18n("Budget based on forecast"));
-  budget_forecast->setIcon(KIcon("forcast"));
+  budget_forecast->setIcon(KIcon("forecast"));
   connect(budget_forecast, SIGNAL(triggered()), this, SLOT(slotBudgetForecast()));
 
   // ************************
@@ -2302,7 +2303,7 @@ void KMyMoney2App::slotSettings(void)
   dlg->addPage(colorsPage, i18n("Colors"), "preferences-desktop-color");
   dlg->addPage(fontsPage, i18n("Fonts"), "preferences-desktop-font");
   dlg->addPage(onlineQuotesPage, i18n("Online Quotes"), "preferences-system-network");
-  dlg->addPage(forecastPage, i18nc("Forecast settings", "Forecast"), "forcast");
+  dlg->addPage(forecastPage, i18nc("Forecast settings", "Forecast"), "forecast");
   dlg->addPage(pluginsPage, i18n("Plugins"), "network-disconnect");
 
   connect(dlg, SIGNAL(settingsChanged(const QString&)), this, SLOT(slotUpdateConfiguration()));

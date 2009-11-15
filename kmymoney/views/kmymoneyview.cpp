@@ -258,7 +258,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   // Page 10
   m_forecastView = new KForecastView();
   m_forecastViewFrame = m_model->addPage( m_forecastView, i18n("Forecast"));
-  m_forecastViewFrame->setIcon(KIcon("forcast"));
+  m_forecastViewFrame->setIcon(KIcon("forecast"));
   m_forecastViewFrame->setHeader(QString(""));
   addTitleBar(m_forecastView, i18n("Forecast"));
 
