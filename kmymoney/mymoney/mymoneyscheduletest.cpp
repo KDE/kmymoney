@@ -13,10 +13,11 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-// Include internationalization
-#include <klocale.h>
 
 #include "mymoneyscheduletest.h"
+
+// Include internationalization
+#include <klocale.h>
 
 #include "mymoneysplit.h"
 #include "mymoneymoney.h"

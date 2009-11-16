@@ -15,8 +15,12 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "mymoneyinstitution.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
+
+#include <QPixmap>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -26,10 +30,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyinstitution.h"
 #include <mymoneyexception.h>
-//Added by qt3to4:
-#include <QPixmap>
 
 MyMoneyInstitution::MyMoneyInstitution()
 {

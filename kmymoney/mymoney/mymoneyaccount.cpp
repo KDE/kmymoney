@@ -15,11 +15,12 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "mymoneyaccount.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
 #include <QRegExp>
-//Added by qt3to4:
 #include <QPixmap>
 #include <QPainter>
 #include <kstandarddirs.h>
@@ -34,7 +35,6 @@
 // Project Includes
 
 #include <mymoneyexception.h>
-#include <mymoneyaccount.h>
 #include <mymoneysplit.h>
 
 MyMoneyAccount::MyMoneyAccount() :

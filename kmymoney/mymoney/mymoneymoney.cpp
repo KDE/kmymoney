@@ -25,6 +25,8 @@
   #define __STDC_LIMIT_MACROS         // force definition of min and max values
 #endif
 
+#include "mymoneymoney.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -33,7 +35,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneymoney.h"
 #include "mymoneyaccount.h"
 #include "mymoneysecurity.h"
 

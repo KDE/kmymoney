@@ -13,11 +13,13 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-#include <iostream>
 
-#include <math.h>
-#include "mymoneymoney.h"
 #include "mymoneyfinancialcalculatortest.h"
+
+#include <iostream>
+#include <math.h>
+
+#include "mymoneymoney.h"
 
 MyMoneyFinancialCalculatorTest::MyMoneyFinancialCalculatorTest () {}
 

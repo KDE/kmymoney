@@ -20,6 +20,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "mymoneysecurity.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -31,7 +33,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneysecurity.h"
 #include "mymoneyexception.h"
 
 MyMoneySecurity::MyMoneySecurity() :

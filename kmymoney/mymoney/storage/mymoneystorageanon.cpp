@@ -23,13 +23,14 @@
 
 #include <config-kmymoney.h>
 
+#include "mymoneystorageanon.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
 #include <QFile>
 #include <qdom.h>
-#include <qmap.h>
-//Added by qt3to4:
+#include <QMap>
 #include <QList>
 
 // ----------------------------------------------------------------------------
@@ -40,7 +41,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneystorageanon.h"
 #include "mymoneyreport.h"
 #include "mymoneyinstitution.h"
 

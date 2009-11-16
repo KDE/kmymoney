@@ -20,8 +20,13 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "mymoneytransactionfilter.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
+
+#include <QList>
+#include <Q3PtrList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -30,10 +35,6 @@
 // Project Includes
 
 #include <mymoneyfile.h>
-#include "mymoneytransactionfilter.h"
-//Added by qt3to4:
-#include <QList>
-#include <Q3PtrList>
 
 MyMoneyTransactionFilter::MyMoneyTransactionFilter()
 {

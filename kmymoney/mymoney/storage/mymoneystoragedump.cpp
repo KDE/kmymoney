@@ -20,6 +20,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "mymoneystoragedump.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -36,7 +38,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneystoragedump.h"
 #include "imymoneystorage.h"
 #include "mymoneyaccount.h"
 #include "mymoneysecurity.h"

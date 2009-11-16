@@ -18,6 +18,8 @@
 
 #include <config-kmymoney.h>
 
+#include "mymoneystoragexml.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -39,7 +41,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneystoragexml.h"
 #include "mymoneyreport.h"
 #include "mymoneybudget.h"
 #include "mymoneyinstitution.h"

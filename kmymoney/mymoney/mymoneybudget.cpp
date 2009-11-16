@@ -17,6 +17,8 @@
 
 #include <config-kmymoney.h>
 
+#include "mymoneybudget.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -28,8 +30,6 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-
-#include "mymoneybudget.h"
 
 const QStringList MyMoneyBudget::AccountGroup::kBudgetLevelText = QString("none,monthly,monthbymonth,yearly,invalid").split(',');
 const int BUDGET_VERSION = 2;

@@ -14,6 +14,9 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
+
+#include "mymoneyscheduled.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -27,7 +30,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyscheduled.h"
 #include "mymoneyexception.h"
 #include "mymoneyfile.h"
 

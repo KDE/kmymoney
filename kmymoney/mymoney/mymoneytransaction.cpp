@@ -15,15 +15,16 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "mymoneytransaction.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
+
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneytransaction.h"
-//Added by qt3to4:
-#include <QList>
 
 MyMoneyTransaction::MyMoneyTransaction() :
   MyMoneyObject()

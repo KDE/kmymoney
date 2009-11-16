@@ -17,6 +17,8 @@
 
 #include <config-kmymoney.h>
 
+#include "mymoneyreport.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -32,7 +34,6 @@
 // Project Includes
 
 #include "mymoneyfile.h"
-#include "mymoneyreport.h"
 
 const QStringList MyMoneyReport::kRowTypeText = QString("none,assetliability,expenseincome,category,topcategory,account,payee,month,week,topaccount,topaccount-account,equitytype,accounttype,institution,budget,budgetactual,schedule,accountinfo,accountloaninfo,accountreconcile,cashflow").split(',');
 const QStringList MyMoneyReport::kColumnTypeText = QString("none,months,bimonths,quarters,4,5,6,weeks,8,9,10,11,years").split(',');

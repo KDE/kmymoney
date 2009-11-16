@@ -17,6 +17,8 @@
 
 #include <config-kmymoney.h>
 
+#include "mymoneyforecast.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -32,7 +34,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyforecast.h"
 #include "kmymoneyglobalsettings.h"
 #include "mymoneyfile.h"
 #include "mymoneytransactionfilter.h"

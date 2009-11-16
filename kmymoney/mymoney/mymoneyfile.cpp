@@ -15,6 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "mymoneyfile.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -31,7 +33,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 #include "storage/mymoneyseqaccessmgr.h"
-#include "mymoneyfile.h"
 #include "mymoneyreport.h"
 #include "mymoneybudget.h"
 #include "mymoneyprice.h"

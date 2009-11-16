@@ -20,9 +20,12 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <config-kmymoney.h>
+
+#include "mymoneyfinancialcalculator.h"
+
 #include <math.h>
 #include <stdio.h>
-#include <config-kmymoney.h>
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -33,8 +36,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-
-#include "mymoneyfinancialcalculator.h"
 #include "mymoneyexception.h"
 
 // #ifndef HAVE_ROUND
