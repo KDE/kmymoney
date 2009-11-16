@@ -20,6 +20,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kmymoneypriceview.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -28,7 +30,6 @@
 #include <QTimer>
 #include <QCheckBox>
 #include <q3groupbox.h>
-//Added by qt3to4:
 #include <QResizeEvent>
 
 // ----------------------------------------------------------------------------
@@ -44,18 +45,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneypriceview.h"
 #include <mymoneysecurity.h>
 #include <mymoneyfile.h>
 #include "kmymoneyglobalsettings.h"
-#if 0
-#include "kmymoneycurrencyselector.h"
-#include "kupdatestockpricedlg.h"
-#include "kcurrencycalculator.h"
-#include "kequitypriceupdatedlg.h"
-#include "kmymoneyutils.h"
-#include "mymoneyfile.h"
-#endif
 
 #define COMMODITY_COL   0
 #define CURRENCY_COL    1

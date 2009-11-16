@@ -15,19 +15,20 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "stdtransactiondownloaded.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
-#include <kdebug.h>
+#include <KLocale>
+#include <KDebug>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <stdtransactiondownloaded.h>
 #include <kmymoneyglobalsettings.h>
 #include <register.h>
 

@@ -15,6 +15,10 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <config-kmymoney.h>
+
+#include "kmymoneyselector.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -31,12 +35,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoneyselector.h>
-#include <kmymoneylistviewitem.h>
-#include <kmymoneychecklistitem.h>
-
+#include "kmymoneylistviewitem.h"
+#include "kmymoneychecklistitem.h"
 #include "kmymoneyglobalsettings.h"
-#include <config-kmymoney.h>
 
 KMyMoneySelector::KMyMoneySelector(QWidget *parent, const char *name, Qt::WFlags flags) :
   QWidget(parent, name, flags)

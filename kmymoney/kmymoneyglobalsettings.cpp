@@ -14,6 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kmymoneyglobalsettings.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -22,12 +24,11 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kglobalsettings.h>
+#include <KGlobalSettings>
 #include <KColorScheme>
+
 // ----------------------------------------------------------------------------
 // Project Includes
-
-#include <kmymoneyglobalsettings.h>
 
 QFont KMyMoneyGlobalSettings::listCellFont(void)
 {

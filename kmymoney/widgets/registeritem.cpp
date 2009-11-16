@@ -15,6 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "registeritem.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -24,9 +26,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <registeritem.h>
-#include <register.h>
-
+#include "register.h"
 #include "kmymoneyglobalsettings.h"
 
 using namespace KMyMoneyRegister;

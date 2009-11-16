@@ -20,6 +20,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kmymoneyaccountselector.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -43,12 +45,10 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyaccountselector.h"
 #include <mymoneyutils.h>
 #include <mymoneyfile.h>
 #include <kmymoneylistviewitem.h>
 #include <kmymoneychecklistitem.h>
-
 #include "kmymoneyutils.h"
 #include "kmymoneyglobalsettings.h"
 

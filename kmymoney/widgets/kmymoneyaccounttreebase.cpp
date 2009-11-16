@@ -15,6 +15,10 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <config-kmymoney.h>
+
+#include "kmymoneyaccounttreebase.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -28,7 +32,6 @@
 #include <QPixmap>
 #include <QStyle>
 #include <QStyleOptionFocusRect>
-//Added by qt3to4:
 #include <QList>
 #include <QDragMoveEvent>
 #include <QDropEvent>
@@ -45,9 +48,7 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include <config-kmymoney.h>
 #include <mymoneyfile.h>
-#include <kmymoneyaccounttree.h>
 #include <kmymoneyglobalsettings.h>
 
 #include <kmymoneyutils.h>

@@ -15,6 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kmymoneychecklistitem.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -27,7 +29,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneychecklistitem.h"
 #include "kmymoneylistviewitem.h"
 #include "kmymoneyglobalsettings.h"
 

@@ -20,6 +20,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kmymoneyaccountcompletion.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -34,7 +36,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyaccountcompletion.h"
 #include <mymoneyfile.h>
 
 kMyMoneyAccountCompletion::kMyMoneyAccountCompletion(QWidget *parent) :

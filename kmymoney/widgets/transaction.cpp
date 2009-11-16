@@ -15,6 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "transaction.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -36,7 +38,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <transaction.h>
 #include <mymoneytransaction.h>
 #include <mymoneysplit.h>
 #include <mymoneyfile.h>

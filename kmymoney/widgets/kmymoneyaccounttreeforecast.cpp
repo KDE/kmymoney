@@ -15,20 +15,25 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kmymoneyaccounttreeforecast.h"
+
+// ----------------------------------------------------------------------------
+// QT Includes
+
+#include <QList>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 #include <klocale.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include <mymoneyfile.h>
-#include <kmymoneyaccounttreeforecast.h>
+
+#include "mymoneyfile.h"
 #include "kmymoney.h"
 #include "kmymoneyglobalsettings.h"
 #include "mymoneyforecast.h"
 #include "reportaccount.h"
-//Added by qt3to4:
-#include <QList>
 
 using namespace reports;
 

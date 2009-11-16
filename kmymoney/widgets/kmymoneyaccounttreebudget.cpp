@@ -15,11 +15,15 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kmymoneyaccounttreebudget.h"
+
+// ----------------------------------------------------------------------------
+// QT Includes
+
+#include <QList>
+
 // ----------------------------------------------------------------------------
 // Project Includes
-#include <kmymoneyaccounttreebudget.h>
-//Added by qt3to4:
-#include <QList>
 
 KMyMoneyAccountTreeBudget::KMyMoneyAccountTreeBudget(QWidget* parent) :
   KMyMoneyAccountTreeBase(parent)

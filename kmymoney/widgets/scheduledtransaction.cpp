@@ -15,20 +15,21 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "scheduledtransaction.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
+#include <KLocale>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <scheduledtransaction.h>
-#include <kmymoneyglobalsettings.h>
-#include <register.h>
+#include "kmymoneyglobalsettings.h"
+#include "register.h"
 
 using namespace KMyMoneyRegister;
 using namespace KMyMoneyTransactionForm;

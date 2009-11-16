@@ -15,6 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "transactionform.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -42,7 +44,6 @@
 #include <kmymoneyedit.h>
 #include <kmymoneycategory.h>
 
-#include "transactionform.h"
 #include "kmymoneyutils.h"
 #include "kmymoneyglobalsettings.h"
 

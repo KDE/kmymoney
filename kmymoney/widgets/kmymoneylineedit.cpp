@@ -16,6 +16,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kmymoneylineedit.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -34,8 +36,6 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-
-#include "kmymoneylineedit.h"
 
 kMyMoneyLineEdit::kMyMoneyLineEdit(QWidget *w, bool forceMonetaryDecimalSymbol, Qt::Alignment alignment) :
   KLineEdit(w),

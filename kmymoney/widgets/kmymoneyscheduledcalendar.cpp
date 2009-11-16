@@ -20,6 +20,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kmymoneyscheduledcalendar.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 #include <QPushButton>
@@ -33,7 +35,7 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include "kmymoneyscheduledcalendar.h"
+
 #include "mymoneyfile.h"
 
 kMyMoneyScheduledCalendar::kMyMoneyScheduledCalendar(QWidget *parent)

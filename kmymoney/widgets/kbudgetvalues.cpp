@@ -15,6 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kbudgetvalues.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -44,7 +46,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kbudgetvalues.h"
 #include <kmymoneyedit.h>
 
 KBudgetValues::KBudgetValues(QWidget* parent) :

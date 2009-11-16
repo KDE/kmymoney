@@ -14,6 +14,9 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kmymoneywizard.h"
+#include "kmymoneywizard_p.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -36,16 +39,14 @@
 #include <kglobalsettings.h>
 #include <kiconloader.h>
 #include <kapplication.h>
+#include <KColorScheme>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoneywizard.h>
-#include "kmymoneywizard_p.h"
-#include <kmymoneytitlelabel.h>
-#include <kguiutils.h>
-#include <ktoolinvocation.h>
-#include <KColorScheme>
+#include "kmymoneytitlelabel.h"
+#include "kguiutils.h"
+#include "ktoolinvocation.h"
 
 KMyMoneyWizardPagePrivate::KMyMoneyWizardPagePrivate(QObject* parent) :
   QObject(parent)

@@ -43,6 +43,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kmymoneycalendar.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 #include <QPainter>
@@ -56,7 +58,6 @@
 #include <qfont.h>
 #include <QValidator>
 #include <QPushButton>
-//Added by qt3to4:
 #include <QResizeEvent>
 #include <QKeyEvent>
 #include <QEvent>
@@ -80,7 +81,7 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include "kmymoneycalendar.h"
+
 #include "kmymoneydatetbl.h"
 
 KDatePickerPrivateYearSelector::KDatePickerPrivateYearSelector(

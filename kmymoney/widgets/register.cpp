@@ -15,6 +15,10 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <config-kmymoney.h>
+
+#include "register.h"
+
 #include <typeinfo>
 
 // ----------------------------------------------------------------------------
@@ -48,14 +52,12 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include <config-kmymoney.h>
-#include <kmymoneydateinput.h>
-#include <kmymoneyedit.h>
-#include <kmymoneycategory.h>
-#include <register.h>
-#include <transactionform.h>
-#include <stdtransactiondownloaded.h>
-#include <stdtransactionmatched.h>
+#include "kmymoneydateinput.h"
+#include "kmymoneyedit.h"
+#include "kmymoneycategory.h"
+#include "transactionform.h"
+#include "stdtransactiondownloaded.h"
+#include "stdtransactionmatched.h"
 #include "scheduledtransaction.h"
 #include "kmymoneyglobalsettings.h"
 

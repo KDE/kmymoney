@@ -20,6 +20,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kmymoneycalculator.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -38,8 +40,6 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-
-#include "kmymoneycalculator.h"
 
 kMyMoneyCalculator::kMyMoneyCalculator(QWidget* parent)
   : QFrame(parent)

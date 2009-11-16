@@ -15,6 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kmymoneycombo.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -40,7 +42,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneycombo.h"
 #include <kconfiggroup.h>
 #include "kmymoneyselector.h"
 #include <kmymoneycompletion.h>

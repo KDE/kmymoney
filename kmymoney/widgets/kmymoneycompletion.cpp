@@ -20,11 +20,12 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kmymoneycompletion.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
 #include <QApplication>
-//Added by qt3to4:
 #include <QFrame>
 #include <QKeyEvent>
 #include <QEvent>
@@ -38,7 +39,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneycompletion.h"
 #include <kmymoneyselector.h>
 #include <kmymoneylistviewitem.h>
 #include "./kmymoneycombo.h"

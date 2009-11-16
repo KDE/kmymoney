@@ -20,6 +20,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kmymoneybriefschedule.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -40,8 +42,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneyscheduled.h>
-#include "kmymoneybriefschedule.h"
+#include "mymoneyscheduled.h"
 #include "kmymoneyutils.h"
 
 KMyMoneyBriefSchedule::KMyMoneyBriefSchedule(QWidget *parent)

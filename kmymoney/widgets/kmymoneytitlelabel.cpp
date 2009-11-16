@@ -15,6 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kmymoneytitlelabel.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -37,8 +39,6 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-
-#include "kmymoneytitlelabel.h"
 
 KMyMoneyTitleLabel::KMyMoneyTitleLabel(QWidget *parent) :
   QLabel(parent)

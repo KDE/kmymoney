@@ -18,6 +18,8 @@
 
 #include <config-kmymoney.h>
 
+#include "kmymoney.h"
+
 // for _getpid
 #ifdef _MSC_VER
 #include <process.h>
@@ -93,7 +95,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoney.h"
 #include "kmymoneyglobalsettings.h"
 #include "kmymoneyadaptor.h"
 

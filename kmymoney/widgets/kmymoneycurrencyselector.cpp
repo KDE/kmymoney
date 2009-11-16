@@ -20,6 +20,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kmymoneycurrencyselector.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -33,8 +35,6 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-
-#include "kmymoneycurrencyselector.h"
 
 KMyMoneySecuritySelector::KMyMoneySecuritySelector(QWidget *parent) :
   KComboBox(parent),

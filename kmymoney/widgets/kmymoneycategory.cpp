@@ -15,6 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kmymoneycategory.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -40,7 +42,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneycategory.h"
 #include <mymoneyfile.h>
 #include "kmymoneyaccountcompletion.h"
 

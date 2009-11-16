@@ -15,6 +15,10 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <config-kmymoney.h>
+
+#include "kaccounttemplateselector.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -34,10 +38,7 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include <config-kmymoney.h>
 #include <mymoneytemplate.h>
-
-#include "kaccounttemplateselector.h"
 
 class KTemplateListItem : public K3ListViewItem
 {

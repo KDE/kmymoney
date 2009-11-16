@@ -17,14 +17,23 @@
 
 #include "selectedtransaction.h"
 
-#include "register.h"
-#include <mymoneysplit.h>
-#include <mymoneyfile.h>
-//Added by qt3to4:
+// ----------------------------------------------------------------------------
+// QT Includes
+
 #include <QList>
 
+// ----------------------------------------------------------------------------
+// KDE Includes
+
+// ----------------------------------------------------------------------------
+// Project Includes
+
+#include "register.h"
+#include "mymoneysplit.h"
+#include "mymoneyfile.h"
+
 namespace KMyMoneyRegister {
-  
+
 int SelectedTransaction::warnLevel() const
 {
   int warnLevel = 0;

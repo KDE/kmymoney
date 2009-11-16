@@ -42,15 +42,17 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kmymoneydatetbl.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
+
 #include <qglobal.h>
 #include <QDateTime>
 #include <QString>
 #include <QPen>
 #include <QPainter>
 #include <QDialog>
-//Added by qt3to4:
 #include <QWheelEvent>
 #include <QResizeEvent>
 #include <QFocusEvent>
@@ -73,7 +75,6 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include "kmymoneydatetbl.h"
 
 kMyMoneyDateTbl::kMyMoneyDateTbl(QWidget *parent, QDate date_, const char* name, Qt::WFlags f)
   : Q3GridView(parent, name, f)

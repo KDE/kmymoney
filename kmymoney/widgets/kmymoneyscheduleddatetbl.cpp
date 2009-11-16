@@ -40,8 +40,11 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kmymoneyscheduleddatetbl.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
+
 #include <QString>
 #include <QPen>
 #include <QPainter>
@@ -52,6 +55,7 @@
 #include <QList>
 #include <QMouseEvent>
 #include <QDesktopWidget>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -62,7 +66,7 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include "kmymoneyscheduleddatetbl.h"
+
 #include "mymoneyfile.h"
 
 kMyMoneyScheduledDateTbl::kMyMoneyScheduledDateTbl(QWidget *parent, QDate date_, const char* name, Qt::WFlags f )

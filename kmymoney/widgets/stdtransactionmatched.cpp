@@ -15,6 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "stdtransactionmatched.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -30,7 +32,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <stdtransactionmatched.h>
 #include <kmymoneyglobalsettings.h>
 #include <register.h>
 

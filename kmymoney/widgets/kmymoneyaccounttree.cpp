@@ -15,6 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kmymoneyaccounttree.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -43,9 +45,7 @@
 // Project Includes
 
 #include <mymoneyfile.h>
-#include <kmymoneyaccounttree.h>
 #include <kmymoneyglobalsettings.h>
-
 #include <kmymoneyutils.h>
 
 KMyMoneyAccountTree::KMyMoneyAccountTree(QWidget* parent) :

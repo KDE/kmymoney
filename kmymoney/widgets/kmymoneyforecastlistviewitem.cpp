@@ -15,6 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kmymoneyforecastlistviewitem.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -28,8 +30,6 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-
-#include "kmymoneyforecastlistviewitem.h"
 
 #include <kmymoneyglobalsettings.h>
 

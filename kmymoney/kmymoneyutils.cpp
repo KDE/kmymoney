@@ -20,6 +20,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kmymoneyutils.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 #include <QApplication>
@@ -44,9 +46,6 @@
 #include <mymoneyforecast.h>
 #include <kmymoneyglobalsettings.h>
 #include <investtransactioneditor.h>
-
-#include "kmymoneyutils.h"
-
 
 KMyMoneyUtils::KMyMoneyUtils()
 {

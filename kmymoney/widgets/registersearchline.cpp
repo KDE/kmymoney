@@ -14,6 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "registersearchline.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -30,10 +32,9 @@
 #include <kiconloader.h>
 #include <klocale.h>
 #include <KIcon>
+
 // ----------------------------------------------------------------------------
 // Project Includes
-
-#include <registersearchline.h>
 
 using namespace KMyMoneyRegister;
 

@@ -15,6 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kmymoneyedit.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -42,8 +44,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoneylineedit.h>
-#include "kmymoneyedit.h"
+#include "kmymoneylineedit.h"
 #include "kmymoneycalculator.h"
 #include "mymoneymoney.h"
 
