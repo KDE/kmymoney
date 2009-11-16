@@ -2687,7 +2687,7 @@ const QMap<QString, MyMoneyMoney> MyMoneyStorageSql::fetchBalance(const QStringL
   q.prepare(queryString);
 
   int i = 0;
-  foreach (QString bindVal, idList) {
+  foreach (const QString& bindVal, idList) {
     q.bindValue (QString(":id%1").arg(i), bindVal);
     returnValue[bindVal] = MyMoneyMoney(0);
     ++i;
