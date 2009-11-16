@@ -386,7 +386,7 @@ MyMoneyTransaction KEditScheduleDlg::transaction(void) const
   MyMoneyTransaction t = d->m_schedule.transaction();
 
   if(d->m_editor) {
-    d->m_editor->createTransaction(t, d->m_schedule.transaction(), d->m_schedule.transaction().splits()[0], false);
+    d->m_editor->createTransaction(t, d->m_schedule.transaction(), (d->m_schedule.transaction().splits().size() > 0) ? d->m_schedule.transaction().splits()[0] : MyMoneySplit(), false);
   }
 
   t.clearId();
