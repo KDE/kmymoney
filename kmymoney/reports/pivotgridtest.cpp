@@ -14,29 +14,6 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-/*
-#include <Q3ValueList>
-#include <qvaluevector.h>
-#include <qdom.h>
-#include <QFile>
-
-#include <kdebug.h>
-#include <kdeversion.h>
-#include <kglobal.h>
-#include <kglobalsettings.h>
-#include <klocale.h>
-#include <kstandarddirs.h>
-
-// DOH, mmreport.h uses this without including it!!
-#include "mymoneyaccount.h"
-
-#include "mymoneysecurity.h"
-#include "mymoneyprice.h"
-#include "mymoneyreport.h"
-#include "mymoneystatement.h"
-#include "mymoneystoragedump.h"
-#include "mymoneystoragexml.h"
-*/
 
 #include "pivotgridtest.h"
 

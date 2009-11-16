@@ -17,6 +17,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "pivottable.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 #include <QLayout>
@@ -41,16 +43,12 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include "pivottable.h"
 #include "pivotgrid.h"
 #include "reportdebug.h"
 #include "kreportchartview.h"
 #include "kmymoneyglobalsettings.h"
 #include "kmymoneyutils.h"
 #include "mymoneyforecast.h"
-#include <kmymoneyutils.h>
-
-
 
 namespace reports {
 

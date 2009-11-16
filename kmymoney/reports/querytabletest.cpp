@@ -15,6 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "querytabletest.h"
+
 #include <QFile>
 
 #include <kdebug.h>
@@ -24,7 +26,6 @@
 #include <klocale.h>
 #include <kstandarddirs.h>
 
-#include "querytabletest.h"
 #include "reportstestcommon.h"
 
 #define private public

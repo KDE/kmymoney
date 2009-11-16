@@ -22,6 +22,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "querytable.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 #include <QList>
@@ -35,7 +37,6 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include "querytable.h"
 #include "mymoneyfile.h"
 #include "mymoneytransaction.h"
 #include "mymoneyreport.h"

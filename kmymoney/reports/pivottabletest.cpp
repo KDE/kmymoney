@@ -15,6 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "pivottabletest.h"
+
 #include <q3valuelist.h>
 #include <q3valuevector.h>
 #include <qdom.h>
@@ -42,7 +44,6 @@
 #undef private
 
 #include "reportstestcommon.h"
-#include "pivottabletest.h"
 
 using namespace reports;
 using namespace test;

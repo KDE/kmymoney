@@ -16,6 +16,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "reportaccount.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -36,7 +38,6 @@
 #include "mymoneyfile.h"
 #include "mymoneysecurity.h"
 #include "reportdebug.h"
-#include "reportaccount.h"
 
 namespace reports {
 

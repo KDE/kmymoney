@@ -16,6 +16,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "listtable.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 #include <QList>
@@ -39,7 +41,6 @@
 #include "kmymoneyutils.h"
 #include "kmymoneyglobalsettings.h"
 #include "reportdebug.h"
-#include "listtable.h"
 
 namespace reports {
 

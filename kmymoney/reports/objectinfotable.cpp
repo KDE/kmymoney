@@ -16,6 +16,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "objectinfotable.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 #include <QList>
@@ -38,7 +40,6 @@
 #include "kmymoneyutils.h"
 #include "reportaccount.h"
 #include "reportdebug.h"
-#include "objectinfotable.h"
 
 namespace reports {
 

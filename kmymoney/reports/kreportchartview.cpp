@@ -15,6 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kreportchartview.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 #include <QMouseEvent>
@@ -29,7 +31,6 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include "kreportchartview.h"
 #include <KDChartBackgroundAttributes>
 #include <KDChartDataValueAttributes>
 #include <KDChartMarkerAttributes>

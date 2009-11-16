@@ -15,6 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "reportstestcommon.h"
+
 #include <q3valuelist.h>
 #include <q3valuevector.h>
 #include <qdom.h>
@@ -42,7 +44,6 @@ using namespace reports;
 #include "mymoneyreport.h"
 #include "mymoneystatement.h"
 #include "mymoneystoragexml.h"
-#include "reportstestcommon.h"
 
 namespace test {
 
