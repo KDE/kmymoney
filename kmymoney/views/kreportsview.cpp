@@ -23,7 +23,7 @@
 
 #include <config-kmymoney.h>
 
-
+#include "kreportsview.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -69,7 +69,6 @@
 #include <mymoneyfile.h>
 #include <mymoneyreport.h>
 #include <kmymoneyglobalsettings.h>
-#include "kreportsview.h"
 #include "querytable.h"
 #include "objectinfotable.h"
 #include "kreportconfigurationfilterdlg.h"

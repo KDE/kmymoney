@@ -19,6 +19,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kcategoriesview.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -41,7 +43,6 @@
 
 #include <mymoneyfile.h>
 #include <kmymoneyaccounttree.h>
-#include "kcategoriesview.h"
 #include "kmymoneyglobalsettings.h"
 #include "kmymoney.h"
 #include <K3ListViewSearchLineWidget>

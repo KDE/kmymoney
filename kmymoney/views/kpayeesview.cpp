@@ -20,6 +20,7 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kpayeesview.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -65,7 +66,6 @@
 #include <kmymoneyaccounttree.h>
 #include <kmymoneyglobalsettings.h>
 #include <ktoolinvocation.h>
-#include "kpayeesview.h"
 
 /* -------------------------------------------------------------------------------*/
 /*                               KTransactionPtrVector                            */

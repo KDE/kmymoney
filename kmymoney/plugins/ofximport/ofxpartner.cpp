@@ -18,11 +18,11 @@
 
 #include <config-kmymoney.h>
 
+#include "ofxpartner.h"
+
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>
 #endif
-
-#include "ofxpartner.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes

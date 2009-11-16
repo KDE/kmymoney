@@ -14,6 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kforecastview.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -37,7 +39,6 @@
 // Project Includes
 
 #include <mymoneyfile.h>
-#include "kforecastview.h"
 #include "kmymoneyglobalsettings.h"
 #include "kmymoney.h"
 #include "kmymoneyutils.h"

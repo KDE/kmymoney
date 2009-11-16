@@ -20,6 +20,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kscheduledlistitem.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -40,7 +42,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kscheduledlistitem.h"
 #include "mymoneyfile.h"
 #include "kmymoneyglobalsettings.h"
 #include "kmymoneyutils.h"

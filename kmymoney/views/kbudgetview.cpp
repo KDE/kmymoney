@@ -15,6 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kbudgetview.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -57,7 +58,6 @@
 #include <kmymoneyedit.h>
 #include <kbudgetvalues.h>
 #include "kmymoneyaccounttreebudget.h"
-#include "kbudgetview.h"
 #include "knewbudgetdlg.h"
 #include "kmymoney.h"
 

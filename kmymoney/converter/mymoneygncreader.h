@@ -137,8 +137,8 @@ enable users to safely provide us with a copy of their GnuCash files, and will
 allow us to test the structure, if not the data content, of the file.
 */
 
-#ifndef MYMONEYSTORAGEGNC_H
-#define MYMONEYSTORAGEGNC_H
+#ifndef MYMONEYGNCREADER_H
+#define MYMONEYGNCREADER_H
 
 // Some STL headers in GCC4.3 contain operator new. Memory checker mangles these
 #ifdef _CHECK_MEMORY
@@ -898,4 +898,4 @@ private:
 #endif // _GNCFILEANON
 };
 
-#endif // MYMONEYSTORAGEGNC_H
+#endif // MYMONEYGNCREADER_H

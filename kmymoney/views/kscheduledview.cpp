@@ -20,6 +20,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kscheduledview.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -47,7 +49,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kscheduledview.h"
 #include "kscheduledlistitem.h"
 #include "kmymoneyscheduleddatetbl.h"
 #include <kmymoneyutils.h>

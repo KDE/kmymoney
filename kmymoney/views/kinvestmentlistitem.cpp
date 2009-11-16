@@ -20,6 +20,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kinvestmentlistitem.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -35,9 +37,6 @@
 // Project Includes
 
 #include <kmymoneyglobalsettings.h>
-
-#include "kinvestmentlistitem.h"
-
 #include <mymoneysecurity.h>
 #include <mymoneyfile.h>
 #include <config-kmymoney.h>

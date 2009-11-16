@@ -15,6 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kwelcomepage.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 #include <QString>
@@ -27,7 +29,6 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include "kwelcomepage.h"
 #include "kmymoneyutils.h"
 
 KWelcomePage::KWelcomePage()

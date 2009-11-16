@@ -14,6 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kaccountsview.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -39,7 +41,6 @@
 // Project Includes
 
 #include <mymoneyfile.h>
-#include "kaccountsview.h"
 #include "kmymoneyview.h"
 #include "kmymoneyglobalsettings.h"
 #include "kmymoney.h"

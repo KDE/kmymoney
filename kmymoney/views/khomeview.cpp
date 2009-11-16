@@ -19,8 +19,11 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "khomeview.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
+
 #include <q3tl.h>
 #include <QLayout>
 #include <QDateTime>
@@ -54,9 +57,9 @@
 #include <kiconloader.h>
 #include <ktoolinvocation.h>
 #include <KToggleAction>
+
 // ----------------------------------------------------------------------------
 // Project Includes
-#include "khomeview.h"
 #include "kmymoneyutils.h"
 #include "kwelcomepage.h"
 #include "kmymoneyglobalsettings.h"

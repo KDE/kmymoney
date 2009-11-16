@@ -15,6 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kgloballedgerview.h"
+
 #include <typeinfo>
 
 // ----------------------------------------------------------------------------
@@ -47,7 +49,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kgloballedgerview.h"
 #include "mymoneyaccount.h"
 #include "mymoneyfile.h"
 #include "kmymoneyaccountcombo.h"

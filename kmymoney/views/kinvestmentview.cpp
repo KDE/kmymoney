@@ -15,6 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kinvestmentview.h"
+
 #include <typeinfo>
 
 // ----------------------------------------------------------------------------
@@ -39,10 +41,7 @@
 #include <kmymoneyglobalsettings.h>
 #include <kmymoneyaccountcombo.h>
 #include <kmymoneycurrencyselector.h>
-
 #include "kmymoney.h"
-
-#include "kinvestmentview.h"
 #include "kinvestmentlistitem.h"
 
 class KInvestmentView::Private
