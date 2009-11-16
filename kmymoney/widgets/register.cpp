@@ -1095,8 +1095,7 @@ void Register::suppressAdjacentMarkers(void)
 
 void Register::updateRegister(bool forceUpdateRowHeight)
 {
-//FIXME: Port to KDE4	
-  //::timetrace("Update register");
+  ::timetrace("Update register");
   if(m_listsDirty || forceUpdateRowHeight) {
     // don't get in here recursively
     m_listsDirty = false;
@@ -1168,8 +1167,7 @@ void Register::updateRegister(bool forceUpdateRowHeight)
         QTimer::singleShot(0, this, SLOT(resize()));
     }
   }
-//FIXME: Port to KDE4  
-  //::timetrace("Done updateing register");
+  ::timetrace("Done updateing register");
 }
 
 int Register::rowHeightHint(void) const
@@ -1349,8 +1347,7 @@ void Register::adjustColumn(int col)
   Q_UNUSED(col)
 #else
   QString msg = "%1 adjusting column %2";
-//FIXME: Port to KDE4
-  //::timetrace((msg.arg("Start").arg(col)).data());
+  ::timetrace(qPrintable(msg.arg("Start").arg(col)));
   Q3Header *topHeader = horizontalHeader();
   QFontMetrics cellFontMetrics(KMyMoneyGlobalSettings::listCellFont());
 
@@ -1430,7 +1427,6 @@ void Register::repaintItems(RegisterItem* first, RegisterItem* last)
     QCoreApplication::processEvents(QEventLoop::ExcludeUserInput, 10);
   }
   m_lastRepaintRect = r;
-//FIXME: Port to KDE4
   QApplication::postEvent( viewport(), new QPaintEvent( r ) );
 
 }

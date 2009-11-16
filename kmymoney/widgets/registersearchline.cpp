@@ -53,7 +53,7 @@ public:
   int status;
 };
 
-RegisterSearchLine::RegisterSearchLine(QWidget* parent, Register* reg, const char* name) :
+RegisterSearchLine::RegisterSearchLine(QWidget* parent, Register* reg) :
   KLineEdit(parent),
   d(new RegisterSearchLinePrivate)
 {
@@ -61,7 +61,7 @@ RegisterSearchLine::RegisterSearchLine(QWidget* parent, Register* reg, const cha
   init(reg);
 }
 
-RegisterSearchLine::RegisterSearchLine(QWidget* parent, const char* name) :
+RegisterSearchLine::RegisterSearchLine(QWidget* parent) :
   KLineEdit(parent),
   d(new RegisterSearchLinePrivate)
 {
@@ -252,7 +252,7 @@ class RegisterSearchLineWidget::RegisterSearchLineWidgetPrivate
 };
 
 
-RegisterSearchLineWidget::RegisterSearchLineWidget(Register* reg, QWidget* parent, const char* name) :
+RegisterSearchLineWidget::RegisterSearchLineWidget(Register* reg, QWidget* parent) :
   KHBox(parent),
   d(new RegisterSearchLineWidgetPrivate)
 {
