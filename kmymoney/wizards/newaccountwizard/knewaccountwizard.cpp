@@ -15,17 +15,15 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <locale.h>
+#include "knewaccountwizard.h"
+#include "knewaccountwizard_p.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
 #include <QCheckBox>
-//#include <qfocusdata.h>
 #include <QToolTip>
-
 #include <QLabel>
-//Added by qt3to4:
 #include <QList>
 
 // ----------------------------------------------------------------------------
@@ -43,7 +41,6 @@
 #include <kmymoneycombo.h>
 #include <kmymoneyedit.h>
 #include <kmymoneycategory.h>
-#include <mymoneyfile.h>
 #include <kmymoneycurrencyselector.h>
 #include <kmymoneyaccountselector.h>
 #include <kmymoneyaccounttree.h>
@@ -53,9 +50,6 @@
 #include <kcurrencycalculator.h>
 #include <mymoneyaccount.h>
 #include <kmymoneyglobalsettings.h>
-
-#include "knewaccountwizard.h"
-#include "knewaccountwizard_p.h"
 #include <kguiutils.h>
 
 #include "ksplittransactiondlg.h"

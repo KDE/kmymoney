@@ -15,6 +15,9 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "knewuserwizard.h"
+#include "knewuserwizard_p.h"
+
 #include <locale.h>
 
 // ----------------------------------------------------------------------------
@@ -48,8 +51,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "knewuserwizard.h"
-#include "knewuserwizard_p.h"
 #include <mymoneysecurity.h>
 #include <mymoneyfile.h>
 #include <kguiutils.h>
