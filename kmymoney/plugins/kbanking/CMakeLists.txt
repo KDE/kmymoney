@@ -1,3 +1,5 @@
+# patch the version with the version defined in the build system
+CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/kmm_kbanking.desktop ${CMAKE_CURRENT_BINARY_DIR}/kmm_kbanking.desktop)
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}
                     ${CMAKE_CURRENT_BINARY_DIR}
                     ${CMAKE_CURRENT_SOURCE_DIR}/dialogs
@@ -39,5 +41,5 @@ INSTALL(FILES kmm_kbanking.rc
 INSTALL(TARGETS kmm_kbanking
         DESTINATION ${PLUGIN_INSTALL_DIR})
 
-INSTALL(FILES kmm_kbanking.desktop
+INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/kmm_kbanking.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})

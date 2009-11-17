@@ -1,3 +1,5 @@
+# patch the version with the version defined in the build system
+CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/kmm_ofximport.desktop ${CMAKE_CURRENT_BINARY_DIR}/kmm_ofximport.desktop)
 ADD_SUBDIRECTORY( dialogs )
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/dialogs
                     ${CMAKE_CURRENT_BINARY_DIR}/dialogs)
@@ -19,5 +21,5 @@ INSTALL(FILES kmm_ofximport.rc
 INSTALL(TARGETS kmm_ofximport
         DESTINATION ${PLUGIN_INSTALL_DIR})
 
-INSTALL(FILES kmm_ofximport.desktop
+INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/kmm_ofximport.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})
