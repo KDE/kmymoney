@@ -555,7 +555,9 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
             t = (*it_ts);
 
             // if a new transaction has a valid number, keep it with the account
-            QString number = (*it_ts).splits()[0].number();
+            QString number;
+            if (!(*it_ts).splits().isEmpty())
+              number= (*it_ts).splits().front().number();
             if(!number.isEmpty()) {
               m_account.setValue("lastNumberUsed", number);
               file->modifyAccount(m_account);
@@ -591,7 +593,7 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
         // should throw an exception in MyMoneyFile::addTransaction, but we
         // remain on the save side of things to check for it
         if(t.splitCount() > 0)
-          s = t.splits()[0];
+          s = t.splits().front();
         KMyMoneyRegister::SelectedTransaction st(t, s);
         m_transactions.append(st);
       }
@@ -1512,7 +1514,8 @@ void StdTransactionEditor::updateVAT(bool amountChanged)
   if(createTransaction(transaction, m_transaction, m_split)) {
     if(addVatSplit(transaction, newAmount)) {
       m_transaction = transaction;
-      m_split = m_transaction.splits()[0];
+      if (!m_transaction.splits().isEmpty())
+        m_split = m_transaction.splits().front();
 
       loadEditWidgets();
 
@@ -1766,7 +1769,7 @@ int StdTransactionEditor::slotEditSplits(void)
 
       QPointer<KSplitTransactionDlg> dlg =
                                  new KSplitTransactionDlg(transaction,
-                                                          transaction.splits()[0],
+                                                          transaction.splits().isEmpty() ? MyMoneySplit() : transaction.splits().front(),
                                                           m_account,
                                                           isValidAmount,
                                                           dir == KMyMoneyRegister::Deposit,
@@ -1778,7 +1781,8 @@ int StdTransactionEditor::slotEditSplits(void)
 
       if((rc = dlg->exec()) == QDialog::Accepted) {
         m_transaction = dlg->transaction();
-        m_split = m_transaction.splits()[0];
+        if (!m_transaction.splits().isEmpty())
+          m_split = m_transaction.splits().front();
         loadEditWidgets();
       }
 

@@ -62,22 +62,27 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
 
   try
   {
+    if (to.splits().isEmpty())
+      throw new MYMONEYEXCEPTION(i18n("Transaction %1 has no splits").arg(to.id()));
+    if (tn.splits().isEmpty())
+      throw new MYMONEYEXCEPTION(i18n("Transaction %1 has no splits").arg(tn.id()));
+
     QString po, pn;
-    if(!to.splits()[0].payeeId().isEmpty())
-      po = file->payee(to.splits()[0].payeeId()).name();
-    if(!tn.splits()[0].payeeId().isEmpty())
-      pn = file->payee(tn.splits()[0].payeeId()).name();
+    if(!to.splits().front().payeeId().isEmpty())
+      po = file->payee(to.splits().front().payeeId()).name();
+    if(!tn.splits().front().payeeId().isEmpty())
+      pn = file->payee(tn.splits().front().payeeId()).name();
 
     if (po != pn) {
       noItemsChanged++;
       messageDetail += i18n("Payee changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b><p>", po, pn);
     }
 
-    if(to.splits()[0].accountId() != tn.splits()[0].accountId()) {
+    if(to.splits().front().accountId() != tn.splits().front().accountId()) {
       noItemsChanged++;
       messageDetail += i18n("Account changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b><p>"
-        , file->account(to.splits()[0].accountId()).name()
-	, file->account(tn.splits()[0].accountId()).name());
+        , file->account(to.splits().front().accountId()).name()
+	, file->account(tn.splits().front().accountId()).name());
     }
 
     if(file->isTransfer(to) && file->isTransfer(tn)) {
@@ -116,8 +121,8 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
     }
 
     QString mo, mn;
-    mo = to.splits()[0].memo();
-    mn = tn.splits()[0].memo();
+    mo = to.splits().front().memo();
+    mn = tn.splits().front().memo();
     if(mo.isEmpty())
        mo = QString("<i>")+i18nc("Empty memo", "empty")+QString("</i>");
     if(mn.isEmpty())
@@ -130,16 +135,16 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
 
     const MyMoneySecurity& sec = MyMoneyFile::instance()->security(to.commodity());
     MyMoneyMoney ao, an;
-    ao = to.splits()[0].value();
-    an = tn.splits()[0].value();
+    ao = to.splits().front().value();
+    an = tn.splits().front().value();
     if (ao != an) {
       noItemsChanged++;
       messageDetail += i18n("Amount changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b><p>", ao.formatMoney(sec.smallestAccountFraction()), an.formatMoney(sec.smallestAccountFraction()));
     }
 
     MyMoneySplit::reconcileFlagE fo, fn;
-    fo = to.splits()[0].reconcileFlag();
-    fn = tn.splits()[0].reconcileFlag();
+    fo = to.splits().front().reconcileFlag();
+    fn = tn.splits().front().reconcileFlag();
     if(fo != fn) {
       noItemsChanged++;
       messageDetail += i18n("Reconciliation flag changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b><p>",    KMyMoneyUtils::reconcileStateToString(fo, true), KMyMoneyUtils::reconcileStateToString(fn, true));

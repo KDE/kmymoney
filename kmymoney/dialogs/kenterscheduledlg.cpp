@@ -92,7 +92,8 @@ KEnterScheduleDlg::KEnterScheduleDlg(QWidget *parent, const MyMoneySchedule& sch
 
   // ... now add the transaction to register and form ...
   MyMoneyTransaction t = transaction();
-  d->m_item = KMyMoneyRegister::Register::transactionFactory(m_register, t, d->m_schedule.transaction().splits()[0], 0);
+  d->m_item = KMyMoneyRegister::Register::transactionFactory(m_register, t,
+                d->m_schedule.transaction().splits().isEmpty() ? MyMoneySplit() : d->m_schedule.transaction().splits().front(), 0);
   m_register->selectItem(d->m_item);
   // show the account row
   d->m_item->setShowRowInForm(0, true);
