@@ -517,8 +517,10 @@ int MyMoneyTransactionFilter::splitType(const MyMoneyTransaction& t, const MyMon
 
   if(t.splitCount() == 2) {
     QString ida, idb;
-    ida = t.splits()[0].accountId();
-    idb = t.splits()[1].accountId();
+    if (t.splits().size() < 1)
+      ida = t.splits()[0].accountId();
+    if (t.splits().size() < 2)
+      idb = t.splits()[1].accountId();
 
     a = file->account(ida);
     b = file->account(idb);

@@ -97,7 +97,8 @@ KEditScheduleDlg::KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget *par
   if( d->m_schedule.transaction().splits().isEmpty())
 	  d->m_item = KMyMoneyRegister::Register::transactionFactory(m_register, t, MyMoneySplit(), 0);
   else
-          d->m_item = KMyMoneyRegister::Register::transactionFactory(m_register, t, d->m_schedule.transaction().splits()[0], 0);
+          d->m_item = KMyMoneyRegister::Register::transactionFactory(m_register, t, 
+                        d->m_schedule.transaction().splits().isEmpty() ? MyMoneySplit() : d->m_schedule.transaction().splits().front(), 0);
   m_register->selectItem(d->m_item);
   // show the account row
   d->m_item->setShowRowInForm(0, true);
@@ -386,7 +387,7 @@ MyMoneyTransaction KEditScheduleDlg::transaction(void) const
   MyMoneyTransaction t = d->m_schedule.transaction();
 
   if(d->m_editor) {
-    d->m_editor->createTransaction(t, d->m_schedule.transaction(), (d->m_schedule.transaction().splits().size() > 0) ? d->m_schedule.transaction().splits()[0] : MyMoneySplit(), false);
+    d->m_editor->createTransaction(t, d->m_schedule.transaction(), d->m_schedule.transaction().splits().isEmpty() ? MyMoneySplit() : d->m_schedule.transaction().splits().front(), false);
   }
 
   t.clearId();

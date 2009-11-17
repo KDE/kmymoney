@@ -4120,7 +4120,8 @@ KMyMoneyUtils::EnterScheduleResultCodeE KMyMoney2App::enterSchedule(MyMoneySched
       d->m_transactionEditor = dlg->startEdit();
       if(d->m_transactionEditor) {
         MyMoneyTransaction torig, taccepted;
-        d->m_transactionEditor->createTransaction(torig, dlg->transaction(), schedule.transaction().splits()[0], true);
+        d->m_transactionEditor->createTransaction(torig, dlg->transaction(),
+                                  schedule.transaction().splits().isEmpty() ? MyMoneySplit() : schedule.transaction().splits().front(), true);
         // force actions to be available no matter what (will be updated according to the state during
         // slotTransactionsEnter or slotTransactionsCancel)
         kmymoney2->action("transaction_cancel")->setEnabled(true);
@@ -4133,7 +4134,7 @@ KMyMoneyUtils::EnterScheduleResultCodeE KMyMoney2App::enterSchedule(MyMoneySched
             if(dlg->exec() == QDialog::Accepted) {
               rc = dlg->resultCode();
               if(rc == KMyMoneyUtils::Enter) {
-                d->m_transactionEditor->createTransaction(taccepted, torig, torig.splits()[0], true);
+                d->m_transactionEditor->createTransaction(taccepted, torig, torig.splits().isEmpty() ? MyMoneySplit() : torig.splits().front(), true);
                 // make sure to suppress comparison of some data: postDate
                 torig.setPostDate(taccepted.postDate());
                 if(torig != taccepted) {
@@ -4179,10 +4180,11 @@ KMyMoneyUtils::EnterScheduleResultCodeE KMyMoney2App::enterSchedule(MyMoneySched
             switch(action) {
               case KConfirmManualEnterDlg::UseOriginal:
                 // setup widgets with original transaction data
-                d->m_transactionEditor->setTransaction(dlg->transaction(), dlg->transaction().splits()[0]);
+                d->m_transactionEditor->setTransaction(dlg->transaction(), dlg->transaction().splits().isEmpty() ? MyMoneySplit() : dlg->transaction().splits().front());
                 // and create a transaction based on that data
                 taccepted = MyMoneyTransaction();
-                d->m_transactionEditor->createTransaction(taccepted, dlg->transaction(), dlg->transaction().splits()[0], true);
+                d->m_transactionEditor->createTransaction(taccepted, dlg->transaction(),
+                                          dlg->transaction().splits().isEmpty() ? MyMoneySplit() : dlg->transaction().splits().front(), true);
                 break;
 
               case KConfirmManualEnterDlg::ModifyAlways:

@@ -1201,7 +1201,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
                 }
               }
 
-              editor->createTransaction(torig, dlg.transaction(), dlg.transaction().splits()[0], true);
+              editor->createTransaction(torig, dlg.transaction(), dlg.transaction().splits().isEmpty() ? MyMoneySplit() : dlg.transaction().splits().front(), true);
               QString newId;
               if(editor->enterTransactions(newId, false, true)) {
                 if(!newId.isEmpty()) {
