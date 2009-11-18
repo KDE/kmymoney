@@ -21,6 +21,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QList>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -29,8 +31,8 @@
 
 #include <register.h>
 #include <investtransactioneditor.h>
-//Added by qt3to4:
-#include <QList>
+
+class kMyMoneyEdit;
 
 namespace Invest {
 

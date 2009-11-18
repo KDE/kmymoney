@@ -15,13 +15,14 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kenterscheduledlg.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
 #include <QTimer>
 #include <qwidget.h>
 #include <QLabel>
-//Added by qt3to4:
 #include <QResizeEvent>
 
 // ----------------------------------------------------------------------------
@@ -36,7 +37,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kenterscheduledlg.h"
 #include "kcurrencycalculator.h"
 #include <register.h>
 #include <transactionform.h>

@@ -70,8 +70,6 @@
 #include "pivottable.h"
 #include "pivotgrid.h"
 #include "reportaccount.h"
-#include "kmymoneyglobalsettings.h"
-
 
 #define VIEW_LEDGER         "ledger"
 #define VIEW_SCHEDULE       "schedule"

@@ -15,6 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "knewinvestmentwizard.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -34,8 +36,6 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-
-#include "knewinvestmentwizard.h"
 
 #include <kmymoneylineedit.h>
 #include <kmymoneyedit.h>

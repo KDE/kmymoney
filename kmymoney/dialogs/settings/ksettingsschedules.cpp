@@ -14,6 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "ksettingsschedules.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -22,8 +24,6 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-
-#include "ksettingsschedules.h"
 
 KSettingsSchedules::KSettingsSchedules(QWidget* parent) :
   KSettingsSchedulesDecl(parent)

@@ -14,13 +14,13 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kgpgkeyselectiondlg.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
 #include <QLayout>
 #include <QLabel>
-
-//Added by qt3to4:
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 
@@ -34,7 +34,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kgpgkeyselectiondlg.h"
 #include <kgpgfile.h>
 #include <ktoolinvocation.h>
 

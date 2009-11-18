@@ -15,11 +15,12 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kmymoneyfileinfodlg.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
 #include <QLabel>
-//Added by qt3to4:
 #include <QList>
 
 // ----------------------------------------------------------------------------
@@ -30,7 +31,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyfileinfodlg.h"
 #include <imymoneystorage.h>
 #include <mymoneyfile.h>
 #include <kmymoneyutils.h>

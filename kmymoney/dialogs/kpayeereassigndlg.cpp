@@ -15,8 +15,12 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kpayeereassigndlg.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
+
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -30,11 +34,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kpayeereassigndlg.h"
 #include <kmymoneycombo.h>
 #include <kguiutils.h>
-//Added by qt3to4:
-#include <QList>
 
 KPayeeReassignDlg::KPayeeReassignDlg( QWidget* parent) :
   KPayeeReassignDlgDecl( parent)

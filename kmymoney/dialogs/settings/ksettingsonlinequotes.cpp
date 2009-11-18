@@ -15,6 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "ksettingsonlinequotes.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -36,7 +38,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ksettingsonlinequotes.h"
 #include "kmymoney/converter/webpricequote.h"
 
 KSettingsOnlineQuotes::KSettingsOnlineQuotes(QWidget *parent)

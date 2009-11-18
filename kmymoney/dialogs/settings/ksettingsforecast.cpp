@@ -14,6 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "ksettingsforecast.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -22,8 +24,6 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-
-#include "ksettingsforecast.h"
 
 KSettingsForecast::KSettingsForecast(QWidget* parent) :
   KSettingsForecastDecl(parent)

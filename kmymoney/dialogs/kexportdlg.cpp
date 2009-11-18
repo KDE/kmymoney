@@ -17,6 +17,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kexportdlg.h"
+
 // ----------------------------------------------------------------------------
 // QT Headers
 
@@ -39,7 +41,6 @@
 // ----------------------------------------------------------------------------
 // Project Headers
 
-#include "kexportdlg.h"
 #include "mymoneycategory.h"
 #include "mymoneyqifprofileeditor.h"
 #include "mymoneyfile.h"

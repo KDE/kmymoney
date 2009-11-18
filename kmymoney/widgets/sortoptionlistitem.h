@@ -1,5 +1,3 @@
-//Added by qt3to4:
-#include <QPixmap>
 /***************************************************************************
                              sortoptionlistitem.h
                              ----------
@@ -18,6 +16,11 @@
  ***************************************************************************/
 
 // Note: This file will be included from transactionsortoption.ui.h
+
+#ifndef SORTOPTIONLISTITEM_H
+#define SORTOPTIONLISTITEM_H
+
+#include <QPixmap>
 
 static const char * sortAscendingXpm[] = {
 "16 16 145 2",
@@ -390,3 +393,4 @@ int SortOptionListItem::direction(void) const
   return m_direction;
 }
 
+#endif // SORTOPTIONLISTITEM_H

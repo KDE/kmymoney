@@ -15,6 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kmergetransactionsdlg.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -29,8 +31,6 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-
-#include "kmergetransactionsdlg.h"
 
 KMergeTransactionsDlg::KMergeTransactionsDlg(const MyMoneyAccount& account, QWidget* parent) :
   KSelectTransactionsDlg(account, parent)

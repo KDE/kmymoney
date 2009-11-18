@@ -15,11 +15,12 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "investactivities.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
 #include <QLabel>
-//Added by qt3to4:
 #include <QList>
 
 // ----------------------------------------------------------------------------
@@ -35,8 +36,6 @@
 #include <kmymoneyaccountselector.h>
 #include <kmymoneycompletion.h>
 #include <mymoneyfile.h>
-
-#include "investactivities.h"
 
 using namespace Invest;
 using namespace KMyMoneyRegister;

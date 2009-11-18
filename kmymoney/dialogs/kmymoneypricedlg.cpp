@@ -20,6 +20,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kmymoneypricedlg.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -37,14 +39,12 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneypricedlg.h"
 #include "kupdatestockpricedlg.h"
 #include "kcurrencycalculator.h"
 #include "kmymoneypriceview.h"
 #include "kequitypriceupdatedlg.h"
 #include <kmymoneycurrencyselector.h>
 #include <mymoneyfile.h>
-
 #include "kmymoneyglobalsettings.h"
 
 #define COMMODITY_COL     0

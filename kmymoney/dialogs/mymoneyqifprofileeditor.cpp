@@ -15,6 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "mymoneyqifprofileeditor.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -27,7 +29,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-
 #include <klocale.h>
 #include <kglobal.h>
 #include <kconfig.h>
@@ -37,13 +38,11 @@
 #include <kurlrequester.h>
 #include <kiconloader.h>
 #include <kapplication.h>
-
 #include <kinputdialog.h>
 #include <ktoolinvocation.h>
+
 // ----------------------------------------------------------------------------
 // Project Includes
-
-#include "mymoneyqifprofileeditor.h"
 
 MyMoneyQifProfileNameValidator::MyMoneyQifProfileNameValidator(QObject *o, const char *name)
   : QValidator(o, name)

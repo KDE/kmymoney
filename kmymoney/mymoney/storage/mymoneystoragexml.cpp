@@ -26,8 +26,7 @@
 #include <QFile>
 #include <qdom.h>
 #include <qmap.h>
-#include <QtXml>
-//Added by qt3to4:
+#include <QXmlLocator>
 #include <Q3TextStream>
 #include <QList>
 

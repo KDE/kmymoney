@@ -71,7 +71,7 @@ protected slots:
   void slotSetProgress(int progress);
 
 public:
-  KCsvProgressDlg(int type, MyMoneyAccount *account, QWidget *parent=0, const char *name=0);
+  KCsvProgressDlg(int type, MyMoneyAccount* account, QWidget* parent = 0);
   ~KCsvProgressDlg();
 };
 

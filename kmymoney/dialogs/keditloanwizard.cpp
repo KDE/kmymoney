@@ -20,6 +20,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "keditloanwizard.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -41,7 +43,6 @@
 // Project Includes
 
 #include <knewloanwizard.h>
-#include "keditloanwizard.h"
 #include "kmymoneylineedit.h"
 #include "kmymoneyedit.h"
 #include "kmymoneycombo.h"

@@ -15,8 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KONLINEQUOTECONFIGURATIONDIALOG_H
-#define KONLINEQUOTECONFIGURATIONDIALOG_H
+#ifndef KONLINEQUOTECONFIGURATIONDLG_H
+#define KONLINEQUOTECONFIGURATIONDLG_H
 
 // ----------------------------------------------------------------------------
 // QT Includes

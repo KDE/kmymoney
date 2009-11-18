@@ -14,8 +14,9 @@
  *                                                                         *
  ***************************************************************************/
 
-
 # include <config-kmymoney.h>
+
+#include "kloadtemplatedlg.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -29,7 +30,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kloadtemplatedlg.h"
 #include "kaccounttemplateselector.h"
 #include <QList>
 

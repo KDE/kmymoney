@@ -15,6 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kbalancewarning.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -31,7 +33,6 @@
 // Project Includes
 
 #include "mymoneyaccount.h"
-#include "kbalancewarning.h"
 
 class KBalanceWarning::Private
 {

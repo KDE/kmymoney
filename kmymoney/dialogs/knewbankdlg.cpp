@@ -14,8 +14,9 @@
  *                                                                         *
  ***************************************************************************/
 
-
 #include <config-kmymoney.h>
+
+#include "knewbankdlg.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -39,8 +40,6 @@
 
 #include <mymoneyinstitution.h>
 #include <kguiutils.h>
-
-#include "knewbankdlg.h"
 
 KNewBankDlg::KNewBankDlg(MyMoneyInstitution& institution, QWidget *parent)
   : KNewBankDlgDecl(parent), m_institution(institution)

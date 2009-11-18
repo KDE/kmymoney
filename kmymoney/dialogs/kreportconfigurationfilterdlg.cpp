@@ -23,6 +23,8 @@
 
 #include <config-kmymoney.h>
 
+#include "kreportconfigurationfilterdlg.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -61,7 +63,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kreportconfigurationfilterdlg.h"
 #include <kmymoneydateinput.h>
 #include <kmymoneyedit.h>
 #include <kmymoneylineedit.h>

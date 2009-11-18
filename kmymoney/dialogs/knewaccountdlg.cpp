@@ -17,6 +17,8 @@
 
 #include <config-kmymoney.h>
 
+#include "knewaccountdlg.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -54,8 +56,6 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-
-#include "knewaccountdlg.h"
 
 #include <kmymoneyedit.h>
 #include <kmymoneydateinput.h>

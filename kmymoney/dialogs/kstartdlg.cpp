@@ -18,6 +18,8 @@
 
 #include <config-kmymoney.h>
 
+#include "kstartdlg.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -27,16 +29,12 @@
 #include <QPixmap>
 #include <q3textview.h>
 #include <QLabel>
-//Added by qt3to4:
 #include <QVBoxLayout>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-
-
 #include <kstandarddirs.h>
-
 #include <kiconloader.h>
 #include <kconfig.h>
 #include <kglobalsettings.h>
@@ -50,7 +48,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kstartdlg.h"
 #include "krecentfileitem.h"
 #include "kmymoney.h"
 

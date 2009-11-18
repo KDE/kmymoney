@@ -14,6 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "ksettingsgeneral.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -30,7 +32,6 @@
 // Project Includes
 
 #include <kmymoneydateinput.h>
-#include "ksettingsgeneral.h"
 
 KSettingsGeneral::KSettingsGeneral(QWidget* parent) :
   KSettingsGeneralDecl(parent)

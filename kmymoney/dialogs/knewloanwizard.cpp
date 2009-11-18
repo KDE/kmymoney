@@ -20,6 +20,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "knewloanwizard.h"
+
 #include <math.h>
 
 // ----------------------------------------------------------------------------
@@ -45,15 +47,12 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "knewloanwizard.h"
-
 #include "kmymoneyutils.h"
 #include <kmymoneylineedit.h>
 #include <kmymoneydateinput.h>
 #include <kmymoneyedit.h>
 #include <kmymoneyaccountselector.h>
 #include "kmymoneycombo.h"
-
 #include "knewaccountdlg.h"
 #include "ksplittransactiondlg.h"
 

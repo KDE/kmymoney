@@ -14,7 +14,7 @@
  *                                                                         *
  ***************************************************************************/
 
-
+#include "knewfiledlg.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -38,8 +38,6 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-
-#include "knewfiledlg.h"
 
 KNewFileDlg::KNewFileDlg(QWidget *parent, const char *name, const QString& title)
   : KNewFileDlgDecl(parent)

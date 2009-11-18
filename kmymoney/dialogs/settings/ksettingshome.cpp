@@ -14,6 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "ksettingshome.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -34,7 +36,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ksettingshome.h"
 #include "kmymoney/kmymoneyglobalsettings.h"
 #include "kmymoney/kmymoneyutils.h"
 

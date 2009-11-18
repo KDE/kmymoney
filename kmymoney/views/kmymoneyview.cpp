@@ -2179,16 +2179,11 @@ KMyMoneyViewBase* KMyMoneyView::addBasePage(const QString& title, const QString&
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QLayout>
-#include <q3vbox.h>
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 // ----------------------------------------------------------------------------
 // Project Includes
-
-#include "kmymoneytitlelabel.h"
 
 class KMyMoneyViewBase::Private {
   public:

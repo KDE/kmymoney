@@ -14,6 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kfindtransactiondlg.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -24,7 +26,6 @@
 #include <QTimer>
 #include <QTabWidget>
 #include <QLayout>
-//Added by qt3to4:
 #include <QKeyEvent>
 #include <QList>
 #include <QResizeEvent>
@@ -46,8 +47,6 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-
-#include "kfindtransactiondlg.h"
 
 #include <kmymoneydateinput.h>
 #include <kmymoneyedit.h>

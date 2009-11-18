@@ -13,6 +13,7 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
+
 #include "kselectdatabasedlg.h"
 
 #include <unistd.h>
@@ -41,6 +42,7 @@
 #include <kmessagebox.h>
 #include <ktoolinvocation.h>
 #include <kfiledialog.h>
+
 // ----------------------------------------------------------------------------
 // Project Includes
 

@@ -15,11 +15,12 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kendingbalancedlg.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
 #include <QPixmap>
-//Added by qt3to4:
 #include <QList>
 
 // ----------------------------------------------------------------------------
@@ -33,7 +34,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kendingbalancedlg.h"
 #include <kmymoneyedit.h>
 #include <mymoneysplit.h>
 #include <mymoneyfile.h>

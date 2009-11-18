@@ -23,7 +23,6 @@
 #include <QPainter>
 #include <QPoint>
 #include <QValidator>
-#include <QTimer>
 #include <QStyle>
 #include <QLayout>
 #include <QApplication>

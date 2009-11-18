@@ -15,6 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "keditscheduledlg.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -24,7 +26,6 @@
 #include <QLabel>
 #include <QLayout>
 #include <q3valuevector.h>
-//Added by qt3to4:
 #include <QList>
 #include <QResizeEvent>
 
@@ -37,6 +38,7 @@
 #include <kstdguiitem.h>
 #include <klineedit.h>
 #include <knuminput.h>
+#include <KToolInvocation>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -50,9 +52,7 @@
 #include <kmymoneycombo.h>
 #include <kguiutils.h>
 #include <kmymoneyutils.h>
-#include <KToolInvocation>
 
-#include "keditscheduledlg.h"
 #include "kmymoney.h"
 
 class KEditScheduleDlg::Private {

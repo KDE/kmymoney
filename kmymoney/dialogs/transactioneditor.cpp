@@ -15,6 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "transactioneditor.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -23,7 +25,6 @@
 #include <QEventLoop>
 #include <QRadioButton>
 #include <q3buttongroup.h>
-//Added by qt3to4:
 #include <QKeyEvent>
 #include <QList>
 #include <QEvent>
@@ -44,7 +45,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <transactioneditor.h>
 #include <kmymoneycategory.h>
 #include <kmymoneydateinput.h>
 #include <kmymoneyedit.h>

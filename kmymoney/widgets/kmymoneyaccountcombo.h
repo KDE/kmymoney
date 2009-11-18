@@ -1,5 +1,5 @@
 /***************************************************************************
-                         kmymoneyaccountbutton  -  description
+                         kmymoneyaccountcombo  -  description
                             -------------------
    begin                : Mon May 31 2004
    copyright            : (C) 2000-2004 by Michael Edwardes
@@ -20,8 +20,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KMYMONEYACCOUNTBUTTON_H
-#define KMYMONEYACCOUNTBUTTON_H
+#ifndef KMYMONEYACCOUNTCOMBO_H
+#define KMYMONEYACCOUNTCOMBO_H
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -36,7 +36,6 @@
 // Project Includes
 
 #include <kmymoneyutils.h>
-//Added by qt3to4:
 #include <QMouseEvent>
 #include <QKeyEvent>
 #include <QList>

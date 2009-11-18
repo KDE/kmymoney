@@ -50,7 +50,6 @@
 #include <QPainter>
 #include <qdrawutil.h>
 #include <q3frame.h>
-#include <QPainter>
 #include <QDialog>
 #include <QStyle>
 #include <QToolButton>

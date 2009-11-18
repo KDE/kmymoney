@@ -15,6 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "knewbudgetdlg.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -32,7 +34,6 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include "knewbudgetdlg.h"
 
 const int KNewBudgetDlg::m_icFutureYears = 5;
 const int KNewBudgetDlg::m_icPastYears = 2;

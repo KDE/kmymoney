@@ -61,7 +61,6 @@
 #include <kfiledialog.h>
 #include <kmessagebox.h>
 #include <k3listview.h>
-#include <kmessagebox.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes

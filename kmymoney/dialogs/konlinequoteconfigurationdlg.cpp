@@ -15,6 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "konlinequoteconfigurationdlg.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -33,9 +35,6 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-
-#include "konlinequoteconfigurationdlg.h"
-
 
 KOnlineQuoteConfigurationDlg::KOnlineQuoteConfigurationDlg(QWidget *parent) : kOnlineQuoteConfigurationDecl(parent)
 {

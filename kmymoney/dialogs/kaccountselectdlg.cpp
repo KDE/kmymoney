@@ -20,6 +20,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kaccountselectdlg.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -40,7 +42,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kaccountselectdlg.h"
 #include <mymoneyinstitution.h>
 #include <mymoneyfile.h>
 #include <kmymoneycategory.h>

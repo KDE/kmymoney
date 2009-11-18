@@ -17,6 +17,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kbackupdlg.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -31,7 +33,6 @@
 #include <kglobal.h>
 #include <klocale.h>
 #include <kstandarddirs.h>
-
 #include <kconfig.h>
 #include <kdirselectdialog.h>
 #include <kglobalsettings.h>
@@ -41,8 +42,6 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-
-#include "kbackupdlg.h"
 
 KBackupDlg::KBackupDlg( QWidget* parent)
   : kbackupdlgdecl( parent)

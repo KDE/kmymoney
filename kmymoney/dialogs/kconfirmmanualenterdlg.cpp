@@ -15,6 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kconfirmmanualenterdlg.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -35,7 +37,6 @@
 
 #include <mymoneyfile.h>
 #include <kmymoneyutils.h>
-#include "kconfirmmanualenterdlg.h"
 
 KConfirmManualEnterDlg::KConfirmManualEnterDlg(const MyMoneySchedule& schedule, QWidget* parent) :
   KConfirmManualEnterDlgDecl(parent)

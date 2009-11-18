@@ -23,8 +23,9 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kdialog.h>
-class KEditListBox;
+#include <KDialog>
+#include <KEditListBox>
+
 class KLed;
 
 // ----------------------------------------------------------------------------

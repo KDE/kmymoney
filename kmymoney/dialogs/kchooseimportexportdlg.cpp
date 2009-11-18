@@ -17,21 +17,28 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-#include <kglobal.h>
-#include <klocale.h>
-#include <kstandarddirs.h>
+
+#include "kchooseimportexportdlg.h"
+
+// ----------------------------------------------------------------------------
+// QT Includes
 
 #include <QPixmap>
-
 #include <QLabel>
 #include <QComboBox>
 #include <QPushButton>
 
+// ----------------------------------------------------------------------------
+// KDE Includes
+
 #include <kglobal.h>
 #include <kconfig.h>
 #include <klocale.h>
+#include <kstandarddirs.h>
 
-#include "kchooseimportexportdlg.h"
+// ----------------------------------------------------------------------------
+// Project Includes
+
 
 KChooseImportExportDlg::KChooseImportExportDlg(int type, QWidget *parent)
  : KChooseImportExportDlgDecl(parent)

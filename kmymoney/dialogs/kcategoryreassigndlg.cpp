@@ -14,6 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kcategoryreassigndlg.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -29,7 +31,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kcategoryreassigndlg.h"
 #include <mymoneyfile.h>
 #include <kmymoneycategory.h>
 #include <kmymoneyaccountselector.h>

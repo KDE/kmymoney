@@ -15,6 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "ksecuritylisteditor.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -35,12 +37,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ksecuritylisteditor.h"
-
 #include "mymoneysecurity.h"
 #include "mymoneyfile.h"
 #include "knewinvestmentwizard.h"
-
 #include "kmymoneyutils.h"
 
 #define ID_COL        0

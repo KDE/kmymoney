@@ -20,6 +20,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kcurrencyeditdlg.h"
+
 #include <locale.h>
 
 // ----------------------------------------------------------------------------
@@ -27,7 +29,6 @@
 
 #include <q3header.h>
 #include <QTimer>
-
 #include <QPixmap>
 #include <QBitmap>
 #include <QLabel>
@@ -47,8 +48,6 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-
-#include "kcurrencyeditdlg.h"
 
 #include <mymoneysecurity.h>
 #include <mymoneyfile.h>

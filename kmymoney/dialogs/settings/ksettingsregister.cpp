@@ -14,6 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "ksettingsregister.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -25,7 +27,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ksettingsregister.h"
 KSettingsRegister::KSettingsRegister(QWidget* parent) :
   KSettingsRegisterDecl(parent)
 {

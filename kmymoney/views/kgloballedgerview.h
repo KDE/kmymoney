@@ -20,16 +20,14 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KACCOUNTVIEW_H
-#define KACCOUNTVIEW_H
+#ifndef KGLOBALLEDGERVIEW_H
+#define KGLOBALLEDGERVIEW_H
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
 #include <qwidget.h>
-#include <qwidget.h>
 #include <QString>
-//Added by qt3to4:
 #include <QResizeEvent>
 #include <QFrame>
 #include <QList>

@@ -15,7 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 
-//#include <config-kmymoney.h>
+#include "kbalancechartdlg.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -34,7 +34,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kbalancechartdlg.h"
 #include <mymoneyreport.h>
 #include <pivottable.h>
 #include <kmymoneyglobalsettings.h>

@@ -15,6 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "transactionmatcher.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -26,7 +28,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "transactionmatcher.h"
 #include <mymoneyfile.h>
 #include <mymoneyscheduled.h>
 #include <kmymoneyutils.h>

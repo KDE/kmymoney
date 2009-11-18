@@ -20,6 +20,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "krecentfileitem.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -27,7 +29,6 @@
 #include <qwidget.h>
 #include <QRect>
 #include <qpoint.h>
-//Added by qt3to4:
 #include <QPixmap>
 
 // ----------------------------------------------------------------------------
@@ -36,8 +37,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-
-#include "krecentfileitem.h"
 
 KRecentFileItem::KRecentFileItem(const QString& url, Q3IconView* parent, const QString& text, const QPixmap& icon)
   : Q3IconViewItem(parent, text, icon),

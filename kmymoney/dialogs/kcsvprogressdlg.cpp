@@ -17,11 +17,9 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-#include <kglobal.h>
-#include <klocale.h>
-#include <kstandarddirs.h>
 
-#include <QPixmap>
+#include "kcsvprogressdlg.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 #include <QFile>
@@ -31,9 +29,11 @@
 #include <q3progressbar.h>
 #include <QLineEdit>
 #include <q3groupbox.h>
+#include <QPixmap>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
+#include <kstandarddirs.h>
 #include <kfiledialog.h>
 #include <kglobal.h>
 #include <klocale.h>
@@ -42,12 +42,11 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include "kcsvprogressdlg.h"
 #include "kmymoneydateinput.h"
 #include "kmymoneyutils.h"
 
 /** Simple constructor */
-KCsvProgressDlg::KCsvProgressDlg(int type, MyMoneyAccount *account, QWidget *parent, const char *name )
+KCsvProgressDlg::KCsvProgressDlg(int type, MyMoneyAccount *account, QWidget *parent)
  : KCsvProgressDlgDecl(parent)
 {
   m_nType = type;

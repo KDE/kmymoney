@@ -15,13 +15,14 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "ksettingsplugins.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
 #include <QLayout>
 #include <QString>
 #include <QLabel>
-//Added by qt3to4:
 #include <QVBoxLayout>
 
 // ----------------------------------------------------------------------------
@@ -35,7 +36,6 @@
 // Project Includes
 
 #include "kmymoney/plugins/pluginloader.h"
-#include "ksettingsplugins.h"
 
 KSettingsPlugins::KSettingsPlugins(QWidget* parent)
   : QWidget(parent)

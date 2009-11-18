@@ -15,8 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KTITLELABEL_H
-#define KTITLELABEL_H
+#ifndef KMYMONEYTITLELABEL_H
+#define KMYMONEYTITLELABEL_H
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -24,9 +24,6 @@
 #include <QLabel>
 #include <QImage>
 #include <QColor>
-//Added by qt3to4:
-#include <QResizeEvent>
-#include <QPixmap>
 class QPixmap;
 
 // ----------------------------------------------------------------------------

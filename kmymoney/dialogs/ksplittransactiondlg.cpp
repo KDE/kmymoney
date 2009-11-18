@@ -20,6 +20,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "ksplittransactiondlg.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -31,7 +33,6 @@
 #include <q3buttongroup.h>
 #include <QRadioButton>
 #include <QCursor>
-//Added by qt3to4:
 #include <QList>
 
 // ----------------------------------------------------------------------------
@@ -49,7 +50,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ksplittransactiondlg.h"
 #include <kmymoneyedit.h>
 #include <kmymoneylineedit.h>
 #include <mymoneyfile.h>

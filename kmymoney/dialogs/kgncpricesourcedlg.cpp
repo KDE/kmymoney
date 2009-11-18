@@ -14,6 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kgncpricesourcedlg.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 #include <QLabel>
@@ -33,7 +35,7 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include "kgncpricesourcedlg.h"
+
 #include "webpricequote.h"
 
 KGncPriceSourceDlg::KGncPriceSourceDlg(QWidget *parent) : KDialog(parent)

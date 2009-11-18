@@ -14,6 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "ksettingscolors.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -22,8 +24,6 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-
-#include "ksettingscolors.h"
 
 KSettingsColors::KSettingsColors(QWidget* parent) :
   KSettingsColorsDecl(parent)

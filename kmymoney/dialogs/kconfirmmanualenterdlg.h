@@ -33,6 +33,8 @@
 #include <mymoneytransaction.h>
 #include "ui_kconfirmmanualenterdlgdecl.h"
 
+class MyMoneySchedule;
+
 class KConfirmManualEnterDlgDecl : public QDialog, public Ui::KConfirmManualEnterDlgDecl
 {
 public:

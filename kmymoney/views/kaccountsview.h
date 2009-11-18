@@ -14,8 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KACCOUNTSSVIEW_H
-#define KACCOUNTSSVIEW_H
+#ifndef KACCOUNTSVIEW_H
+#define KACCOUNTSVIEW_H
 
 // ----------------------------------------------------------------------------
 // QT Includes

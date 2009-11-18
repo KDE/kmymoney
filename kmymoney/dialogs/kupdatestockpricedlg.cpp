@@ -20,6 +20,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kupdatestockpricedlg.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -31,7 +33,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kupdatestockpricedlg.h"
 #include "kmymoneycurrencyselector.h"
 
 KUpdateStockPriceDlg::KUpdateStockPriceDlg(QWidget* parent) :

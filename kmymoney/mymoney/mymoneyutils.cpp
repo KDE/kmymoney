@@ -20,9 +20,10 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "mymoneyutils.h"
+
 #include <iostream>
 
-#include "mymoneyutils.h"
 #include "mymoneyaccount.h"
 
 #include <cstdio>

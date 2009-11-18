@@ -21,6 +21,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kequitypriceupdatedlg.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -50,7 +52,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kequitypriceupdatedlg.h"
 #include "mymoneyfile.h"
 #include "mymoneysecurity.h"
 #include "mymoneyprice.h"

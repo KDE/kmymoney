@@ -14,6 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "ksettingsfonts.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -22,8 +24,6 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-
-#include "ksettingsfonts.h"
 
 KSettingsFonts::KSettingsFonts(QWidget* parent) :
   KSettingsFontsDecl(parent)

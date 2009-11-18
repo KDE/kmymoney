@@ -14,15 +14,23 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kreconciledlg.h"
+
+// ----------------------------------------------------------------------------
+// QT Includes
+
+#include <QResizeEvent>
+
+// ----------------------------------------------------------------------------
+// KDE Includes
+
 #include <kmessagebox.h>
 #include <kglobal.h>
 #include <klocale.h>
 #include <kstandarddirs.h>
 
-
-#include "kreconciledlg.h"
-//Added by qt3to4:
-#include <QResizeEvent>
+// ----------------------------------------------------------------------------
+// Project Includes
 
 KReconcileDlg::KReconcileDlg(const MyMoneyMoney /* previousBal */, const MyMoneyMoney /* endingBal */,
   const QDate /* endingDate */, MyMoneyAccount* /*accountIndex */,
