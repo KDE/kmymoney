@@ -39,7 +39,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-KNewFileDlg::KNewFileDlg(QWidget *parent, const char *name, const QString& title)
+KNewFileDlg::KNewFileDlg(QWidget *parent, const QString& title)
   : KNewFileDlgDecl(parent)
 {
     setModal( true );
@@ -48,7 +48,7 @@ KNewFileDlg::KNewFileDlg(QWidget *parent, const char *name, const QString& title
 
 KNewFileDlg::KNewFileDlg(QString userName, QString userStreet,
   QString userTown, QString userCounty, QString userPostcode, QString userTelephone,
-  QString userEmail, QWidget *parent, const char *name, const QString& title)
+  QString userEmail, QWidget *parent, const QString& title)
   : KNewFileDlgDecl(parent)
 {
     setModal( true );

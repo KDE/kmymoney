@@ -36,7 +36,7 @@ class KBalanceWarning : public QObject
 {
   Q_OBJECT
 public:
-  explicit KBalanceWarning(QObject* parent, const char* name = 0);
+  explicit KBalanceWarning(QObject* parent);
   virtual ~KBalanceWarning();
 
 public slots:

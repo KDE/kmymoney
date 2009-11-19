@@ -970,8 +970,8 @@ bool InvestTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyM
   //       by the user
   KTextEdit* memo = dynamic_cast<KTextEdit*>(m_editWidgets["memo"]);
   if(memo) {
-    if(!isMultiSelection() || (isMultiSelection() && !memo->text().isEmpty() ) )
-      s0.setMemo(memo->text());
+    if(!isMultiSelection() || (isMultiSelection() && !memo->toPlainText().isEmpty() ) )
+      s0.setMemo(memo->toPlainText());
   }
 
   MyMoneySplit assetAccountSplit;

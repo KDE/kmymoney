@@ -43,10 +43,10 @@ public:
 class KNewFileDlg : public KNewFileDlgDecl  {
    Q_OBJECT
 public:
-  explicit KNewFileDlg(QWidget *parent=0, const char *name=0, const QString& title=QString());
+  explicit KNewFileDlg(QWidget *parent=0, const QString& title=QString());
   explicit KNewFileDlg(QString userName, QString userStreet,
                        QString userTown, QString userCounty, QString userPostcode, QString userTelephone,
-                       QString userEmail, QWidget *parent=0, const char *name=0, const QString& title=QString());
+                       QString userEmail, QWidget *parent=0, const QString& title=QString());
   ~KNewFileDlg();
 
   KPushButton* cancelButton(void) { return cancelBtn; };

@@ -304,7 +304,7 @@ public:
 };
 
 KMyMoney2App::KMyMoney2App(QWidget* parent) :
-  KXmlGuiWindow(0),
+  KXmlGuiWindow(parent),
   d(new Private)
 {
   new KmymoneyAdaptor(this);
@@ -1417,7 +1417,7 @@ void KMyMoney2App::slotFileOpenRecent(const KUrl& url)
       }
       delete dialog;
     }
-    if ((newurl.protocol() == "sql") || (newurl.isValid() && KIO::NetAccess::exists(newurl, true, this))) {
+    if ((newurl.protocol() == "sql") || (newurl.isValid() && KIO::NetAccess::exists(newurl, KIO::NetAccess::SourceSide, this))) {
       slotFileClose();
       if(!d->m_myMoneyView->fileOpen()) {
         if(d->m_myMoneyView->readFile(newurl)) {
@@ -1891,7 +1891,7 @@ void KMyMoney2App::slotFileViewPersonal(void)
 
   QPointer<KNewFileDlg> newFileDlg = new KNewFileDlg(user.name(), user.address(),
     user.city(), user.state(), user.postcode(), user.telephone(),
-    user.email(), this, "NewFileDlg", i18n("Edit Personal Data"));
+    user.email(), this, i18n("Edit Personal Data"));
 
   if (newFileDlg->exec() == QDialog::Accepted)
   {
@@ -2268,7 +2268,7 @@ bool KMyMoney2App::okToWriteFile(const KUrl& url)
   // check if the file exists and warn the user
   bool reallySaveFile = true;
 
-  if(KIO::NetAccess::exists(url, true, this)) {
+  if(KIO::NetAccess::exists(url, KIO::NetAccess::SourceSide, this)) {
     if(KMessageBox::warningYesNo(this, QString("<qt>")+i18n("The file <b>%1</b> already exists. Do you really want to override it?",url.pathOrUrl())+QString("</qt>"), i18n("File already exists")) != KMessageBox::Yes)
       reallySaveFile = false;
   }
@@ -6321,11 +6321,11 @@ void KMyMoney2App::slotSecurityEditor(void)
 void KMyMoney2App::createInterfaces(void)
 {
   // Sets up the plugin interface, and load the plugins
-  d->m_pluginInterface = new QObject( this, "_pluginInterface" );
+  d->m_pluginInterface = new QObject( this );
 
-  new KMyMoneyPlugin::KMMViewInterface(this, d->m_myMoneyView, d->m_pluginInterface, "view interface");
-  new KMyMoneyPlugin::KMMStatementInterface(this, d->m_pluginInterface, "statement interface");
-  new KMyMoneyPlugin::KMMImportInterface(this, d->m_pluginInterface, "import interface");
+  new KMyMoneyPlugin::KMMViewInterface(this, d->m_myMoneyView, d->m_pluginInterface);
+  new KMyMoneyPlugin::KMMStatementInterface(this, d->m_pluginInterface);
+  new KMyMoneyPlugin::KMMImportInterface(this, d->m_pluginInterface);
 }
 
 void KMyMoney2App::loadPlugins(void)

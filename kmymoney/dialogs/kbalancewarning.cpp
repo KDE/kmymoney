@@ -41,8 +41,8 @@ public:
   QMap<QString, bool> m_deselectedAccounts;
 };
 
-KBalanceWarning::KBalanceWarning(QObject* parent, const char* name) :
-  QObject(parent, name),
+KBalanceWarning::KBalanceWarning(QObject* parent) :
+  QObject(parent),
   d(new Private)
 {
   KMessageBox::enableMessage(d->dontShowAgain());

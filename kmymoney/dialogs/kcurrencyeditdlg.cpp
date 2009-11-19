@@ -133,7 +133,9 @@ void KCurrencyEditDlg::slotLoadCurrencies(void)
   QString baseCurrency = MyMoneyFile::instance()->baseCurrency().id();
   // construct a transparent 16x16 pixmap
   QPixmap empty(16, 16);
-  empty.setMask(QBitmap(16, 16, true));
+  QBitmap mask(16, 16);
+  mask.clear();
+  empty.setMask(mask);
 
   m_currencyList->clear();
   for(it = list.constBegin(); it != list.constEnd(); ++it) {

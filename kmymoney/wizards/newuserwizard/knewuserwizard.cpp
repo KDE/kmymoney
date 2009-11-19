@@ -236,7 +236,9 @@ CurrencyPage::CurrencyPage(Wizard* wizard) :
 
   // construct a transparent 16x16 pixmap
   QPixmap empty(16, 16);
-  empty.setMask(QBitmap(16, 16, true));
+  QBitmap mask(16, 16);
+  mask.clear();
+  empty.setMask(mask);
 
   m_currencyList->clear();
   for(it = list.constBegin(); it != list.constEnd(); ++it) {
@@ -342,13 +344,13 @@ bool FilePage::isComplete(void) const
     // if a filename is present, check that
     // a) the file does not exist
     // b) the directory does exist
-    rc = !KIO::NetAccess::exists(m_dataFileEdit->url(), false, m_wizard);
+    rc = !KIO::NetAccess::exists(m_dataFileEdit->url(), KIO::NetAccess::DestinationSide, m_wizard);
     if(rc) {
       QRegExp exp("(.*)/(.*)");
       rc = false;
       if(exp.indexIn(m_dataFileEdit->url().path()) != -1) {
         if(exp.cap(2).length() > 0) {
-          rc = KIO::NetAccess::exists(exp.cap(1), true, m_wizard);
+          rc = KIO::NetAccess::exists(exp.cap(1), KIO::NetAccess::SourceSide, m_wizard);
         }
       }
     }
