@@ -220,6 +220,13 @@ ENDIF()
 
 # tells gcc to enable exception handling
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${KDE4_ENABLE_EXCEPTIONS}")
+
+# temporarily disable the hidden base class virtual functions warning
+# so we can concetrate on the more important compiler warnings
+IF(CMAKE_SYSTEM_NAME MATCHES Linux)
+  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-overloaded-virtual")
+ENDIF(CMAKE_SYSTEM_NAME MATCHES Linux)
+
 IF(NOT WIN32)
   # use position independent code
   SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
