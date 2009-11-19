@@ -505,8 +505,7 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
           if(dateOption == 0
           || (dateOption > 1 && !qd.isValid())) {
             QPointer<KBPickStartDate> psd = new KBPickStartDate(m_kbanking, qd, lastUpdate, acc.name(),
-                                                                lastUpdate.isValid() ? 2 : 3, 0,
-                                                                "PickStartDate", true);
+                                                                lastUpdate.isValid() ? 2 : 3, 0, true);
             if (psd->exec() != QDialog::Accepted) {
               AB_Job_free(job);
               delete psd;

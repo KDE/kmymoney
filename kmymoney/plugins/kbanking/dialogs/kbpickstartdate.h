@@ -48,8 +48,8 @@ public:
                   const QDate &lastUpdate,
                   const QString& accountName,
                   int defaultChoice,
-                  QWidget* parent=0, const char* name=0,
-                  bool modal=false, Qt::WFlags fl=0);
+                  QWidget* parent=0,
+                  bool modal=false);
   ~KBPickStartDate();
 
   QDate date();

@@ -523,4 +523,5 @@ KXmlGuiWindow* KMyMoneyUtils::mainWindow() {
     if (result)
       return result;
   }
+  return 0;
 }

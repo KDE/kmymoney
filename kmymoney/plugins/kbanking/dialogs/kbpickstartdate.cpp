@@ -51,13 +51,14 @@ KBPickStartDate::KBPickStartDate(QBanking *qb,
                                  const QDate &lastUpdate,
                                  const QString& accountName,
                                  int defaultChoice,
-                                 QWidget* parent, const char* name,
-                                 bool modal, Qt::WFlags fl) :
+                                 QWidget* parent, bool modal) :
+  QDialog(parent),
   _banking(qb),
   _firstPossible(firstPossible),
   _lastUpdate(lastUpdate)
 {
   setupUi(this);
+  setModal(modal);
   QObject::connect(buttonHelp, SIGNAL(clicked()),
                    this, SLOT(slotHelpClicked()));
   label->setText(i18n("<qt><p>Please select the first date for which transactions are to be retrieved from <b>%1</b>.</p><p>If you specify no date then the bank will choose one.</p></qt>").arg(accountName));

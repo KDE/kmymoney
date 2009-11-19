@@ -175,9 +175,9 @@ protected:
   void setupPrecision(void);
 
 protected slots:
-  virtual void slotUpdateButtonState(void);
-  virtual void slotUpdateAccount(void);
-  virtual void slotNumberChanged(const QString&);
+  void slotUpdateButtonState(void);
+  void slotUpdateAccount(void);
+  void slotNumberChanged(const QString&);
 
 signals:
   /**

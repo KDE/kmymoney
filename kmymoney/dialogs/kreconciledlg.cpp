@@ -34,10 +34,10 @@
 
 KReconcileDlg::KReconcileDlg(const MyMoneyMoney /* previousBal */, const MyMoneyMoney /* endingBal */,
   const QDate /* endingDate */, MyMoneyAccount* /*accountIndex */,
-  const MyMoneyFile* /* file */, QWidget *parent, const char *name)
+  const MyMoneyFile* /* file */, QWidget *parent)
  : KReconcileDlgDecl(parent)
 {
-    setModal( true );
+  setModal( true );
 }
 
 KReconcileDlg::~KReconcileDlg()

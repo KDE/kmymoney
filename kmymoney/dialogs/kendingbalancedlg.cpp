@@ -383,7 +383,7 @@ void KEndingBalanceDlg::help(void)
   KToolInvocation::invokeHelp(anchor);
 }
 
-KEndingBalanceLoanDlg::KEndingBalanceLoanDlg(const MyMoneyAccount& account, QWidget *parent, const char *name) :
+KEndingBalanceLoanDlg::KEndingBalanceLoanDlg(const MyMoneyAccount& account, QWidget *parent) :
   KEndingBalanceDlgDecl(parent),
   d(new Private)
 {

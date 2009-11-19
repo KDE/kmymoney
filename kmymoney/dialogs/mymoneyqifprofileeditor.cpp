@@ -44,8 +44,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-MyMoneyQifProfileNameValidator::MyMoneyQifProfileNameValidator(QObject *o, const char *name)
-  : QValidator(o, name)
+MyMoneyQifProfileNameValidator::MyMoneyQifProfileNameValidator(QObject *o)
+  : QValidator(o)
 {
 }
 
@@ -363,8 +363,6 @@ void MyMoneyQifProfileEditor::slotReset(void)
   m_profile.saveProfile();
 
   KSharedConfigPtr config = KGlobal::config();
-//FIXME: Port to KDE4
-  //config->rollback();
   config->reparseConfiguration();
 
   QString currentProfile = m_profile.profileName().mid(8);
@@ -401,7 +399,7 @@ void MyMoneyQifProfileEditor::slotNew(void)
 
 const QString MyMoneyQifProfileEditor::enterName(bool& ok)
 {
-  MyMoneyQifProfileNameValidator val(this, "Validator");
+  MyMoneyQifProfileNameValidator val(this);
 #if KDE_IS_VERSION(3,2,0)
   return KInputDialog::getText(i18n("QIF Profile Editor"),
                                i18n("Enter new profile name"),

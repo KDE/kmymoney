@@ -110,7 +110,7 @@ class KEndingBalanceLoanDlg : public KEndingBalanceDlgDecl
 {
   Q_OBJECT
 public:
-  KEndingBalanceLoanDlg(const MyMoneyAccount& account, QWidget *parent=0, const char *name=0);
+  KEndingBalanceLoanDlg(const MyMoneyAccount& account, QWidget* parent = 0);
   ~KEndingBalanceLoanDlg();
 
   /**

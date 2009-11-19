@@ -41,7 +41,7 @@ public:
 class KReconcileDlg : public KReconcileDlgDecl  {
    Q_OBJECT
 public:
-	KReconcileDlg(const MyMoneyMoney previousBal, const MyMoneyMoney endingBal, const QDate endingDate, MyMoneyAccount *accountIndex, const MyMoneyFile* file, QWidget *parent=0, const char *name=0);
+	KReconcileDlg(const MyMoneyMoney previousBal, const MyMoneyMoney endingBal, const QDate endingDate, MyMoneyAccount *accountIndex, const MyMoneyFile* file, QWidget *parent=0);
 	~KReconcileDlg();
 //  void updateData(void);
   void resetData(const MyMoneyMoney previousBal, const MyMoneyMoney endingBal, const QDate endingDate, MyMoneyAccount *accountIndex, const MyMoneyFile* file);
