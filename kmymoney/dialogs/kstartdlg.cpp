@@ -53,14 +53,14 @@
 
 #include <QToolTip>
 
-KStartDlg::KStartDlg(QWidget *parent, const char *name, bool modal)
+KStartDlg::KStartDlg(QWidget *parent, bool modal)
     : KPageDialog(parent)
 {
-    setCaption( i18n("Start Dialog") );
-    setModal( true );
-    setFaceType( List );
-    setButtons( Ok | Cancel|Help );
-    setDefaultButton( Ok );
+  setCaption( i18n("Start Dialog") );
+  setModal( modal );
+  setFaceType( List );
+  setButtons( Ok | Cancel|Help );
+  setDefaultButton( Ok );
   setPage_Template();
   setPage_Documents();
 
@@ -220,7 +220,7 @@ void KStartDlg::slotOk()
 
 bool KStartDlg::fileExists(KUrl url)
 {
-  return KIO::NetAccess::exists(url, true, this);
+  return KIO::NetAccess::exists(url, KIO::NetAccess::SourceSide, this);
 }
 
 void KStartDlg::slotTemplateSelectionChanged(Q3IconViewItem* item)

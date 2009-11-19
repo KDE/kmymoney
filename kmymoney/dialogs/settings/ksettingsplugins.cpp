@@ -41,7 +41,7 @@ KSettingsPlugins::KSettingsPlugins(QWidget* parent)
   : QWidget(parent)
 {
   QVBoxLayout *layout = new QVBoxLayout(this);
-  KMyMoneyPlugin::PluginLoader::instance()->pluginSelectorWidget()->reparent(this, QPoint());
+  KMyMoneyPlugin::PluginLoader::instance()->pluginSelectorWidget()->setParent(this);
   layout->addWidget(KMyMoneyPlugin::PluginLoader::instance()->pluginSelectorWidget());
   layout->setSpacing(KDialog::spacingHint());
 }
