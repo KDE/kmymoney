@@ -73,7 +73,7 @@
                     <string/>
                   </property>
                   <property name="whatsThis" stdset="0">
-                    <string>Draws a larger header above each group of transaction. The grouping depends on the current sort order.</string>
+                    <string>Draws a larger header above each group of transactions. The grouping depends on the current sort order.</string>
                   </property>
                 </widget>
               </item>
@@ -275,7 +275,7 @@
                           <string>No Autofill</string>
                         </property>
                         <property name="whatsThis" stdset="0">
-                          <string>Don't do autofill of transaction data at all.</string>
+                          <string>Do not auto-fill transaction data at all.</string>
                         </property>
                       </widget>
                     </item>

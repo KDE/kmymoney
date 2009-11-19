@@ -578,7 +578,7 @@ bool KMyMoneyView::readFile(const KUrl& url)
   } else {
     if(!KIO::NetAccess::download(url, filename, NULL)) {
       KMessageBox::detailedError(this,
-             i18n("Error while loading file '%1'!",url.url()),
+             i18n("Error while loading file '%1'.",url.url()),
              KIO::NetAccess::lastErrorString(),
              i18n("File access error"));
       return false;
@@ -711,12 +711,12 @@ bool KMyMoneyView::readFile(const KUrl& url)
               if(m_fileType == KmmBinary) {
                 KMessageBox::sorry(this, QString("<qt>%1</qt>"). arg(i18n("File <b>%1</b> contains the old binary format used by KMyMoney. Please use an older version of KMyMoney (0.8.x) that still supports this format to convert it to the new XML based format.",filename)));
               } else {
-                KMessageBox::sorry(this, QString("<qt>%1</qt>"). arg(i18n("File <b>%1</b> contains an unknown file format!",filename)));
+                KMessageBox::sorry(this, QString("<qt>%1</qt>"). arg(i18n("File <b>%1</b> contains an unknown file format.",filename)));
               }
               rc = false;
             }
           } else {
-            KMessageBox::sorry(this, QString("<qt>%1</qt>"). arg(i18n("Cannot read from file <b>%1</b>!",filename)));
+            KMessageBox::sorry(this, QString("<qt>%1</qt>"). arg(i18n("Cannot read from file <b>%1</b>.",filename)));
             rc = false;
           }
         } catch (MyMoneyException *e) {
@@ -730,13 +730,13 @@ bool KMyMoneyView::readFile(const KUrl& url)
         }
         qfile->close();
       } else {
-        KMessageBox::sorry(this, QString("<qt>%1</qt>"). arg(i18n("File <b>%1</b> not found!",filename)));
+        KMessageBox::sorry(this, QString("<qt>%1</qt>"). arg(i18n("File <b>%1</b> not found.",filename)));
         rc = false;
       }
       delete qfile;
     }
   } else {
-    KMessageBox::sorry(this, QString("<qt>%1</qt>"). arg(i18n("File <b>%1</b> not found!",filename)));
+    KMessageBox::sorry(this, QString("<qt>%1</qt>"). arg(i18n("File <b>%1</b> not found.",filename)));
     rc = false;
   }
 
@@ -800,7 +800,7 @@ bool KMyMoneyView::openDatabase (const KUrl& url) {
       retry = false;
       break;
     case 1: // permanent error
-      KMessageBox::detailedError (this, i18n("Can't open database %1\n",dbURL.prettyUrl()), reader->lastError());
+      KMessageBox::detailedError (this, i18n("Cannot open database %1\n",dbURL.prettyUrl()), reader->lastError());
       if (pDBMgr) {
         removeStorage();
         delete pDBMgr;
@@ -1171,7 +1171,7 @@ bool KMyMoneyView::saveAsDatabase(const KUrl& url)
         break;
       case -1: // dbase already has data, see if he wants to clear it out
         if (KMessageBox::warningContinueCancel (0,
-            i18n("Database contains data which must be removed before using SaveAs.\n"
+            i18n("Database contains data which must be removed before using Save As.\n"
                 "Do you wish to continue?"), "Database not empty") == KMessageBox::Continue) {
           if (writer->open(url, QIODevice::WriteOnly, true) == 0) canWrite = true;
         } else {
@@ -1194,9 +1194,9 @@ bool KMyMoneyView::saveAsDatabase(const KUrl& url)
     rc = true;
   } else {
     KMessageBox::detailedError (this,
-      i18n("Can't open or create database %1\n"
-          "Retry SaveAsDatabase and click Help"
-          " for further info",url.prettyUrl()), writer->lastError());
+      i18n("Cannot open or create database %1.\n"
+          "Retry Save As Database and click Help"
+          " for further info.",url.prettyUrl()), writer->lastError());
   }
   delete writer;
   return (rc);

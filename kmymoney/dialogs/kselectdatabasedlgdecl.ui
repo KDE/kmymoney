@@ -191,7 +191,7 @@ As always, please make sure you have adequate backups of your data.</string>
    <item>
     <widget class="QGroupBox" name="groupBox4">
      <property name="title">
-      <string>User Name</string>
+      <string>Username</string>
      </property>
      <layout class="QVBoxLayout">
       <item>

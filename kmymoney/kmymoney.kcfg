@@ -14,7 +14,7 @@
    <default>1</default>
   </entry>
   <entry name="AutoFillDifference" type="Int">
-    <label>Treat two transactions as identical, if amount differs less than</label>
+    <label>Treat two transactions as identical, if amount differs by less than</label>
     <default>10</default>
   </entry>
   <entry name="AutoIncCheckNumber" type="Bool">
@@ -116,7 +116,7 @@
    <default/>
   </entry>
   <entry name="firstTimeRun" type="Bool">
-   <label>Firsttime switch to start new user wizard</label>
+   <label>First time switch to start new user wizard</label>
    <default>true</default>
   </entry>
   <entry name="showTitleBar" type="Bool">
@@ -228,7 +228,7 @@
    <default>152,251,152</default>
   </entry>
   <entry name="listErronousTransactionColor" type="Color">
-   <label>List color for erronous transactions</label>
+   <label>List color for erroneous transactions</label>
    <default>255,0,0</default>
   </entry>
   <entry name="listMissingConversionRate" type="Color">

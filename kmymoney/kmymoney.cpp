@@ -1494,7 +1494,7 @@ void KMyMoney2App::slotManageGpgKeys(void)
   dlg->setKeys(d->m_additionalGpgKeys);
   if(dlg->exec() == QDialog::Accepted) {
     d->m_additionalGpgKeys = dlg->keys();
-    d->m_additionalKeyLabel->setText(i18n("Additional encryption key(s) to be used: %1", d->m_additionalGpgKeys.count()));
+    d->m_additionalKeyLabel->setText(i18n("Additional encryption keys to be used: %1", d->m_additionalGpgKeys.count()));
   }
   delete dlg;
 }
@@ -1507,7 +1507,7 @@ void KMyMoney2App::slotKeySelected(int idx)
   }
   d->m_additionalKeyLabel->setEnabled(idx != 0);
   d->m_additionalKeyButton->setEnabled(idx != 0);
-  d->m_additionalKeyLabel->setText(i18n("Additional encryption key(s) to be used: %1", cnt));
+  d->m_additionalKeyLabel->setText(i18n("Additional encryption keys to be used: %1", cnt));
 }
 
 bool KMyMoney2App::slotFileSaveAs(void)
@@ -1531,7 +1531,7 @@ bool KMyMoney2App::slotFileSaveAs(void)
     d->m_saveEncrypted = new KComboBox(keyBox);
 
     Q3HBox* labelBox = new Q3HBox(vbox);
-    d->m_additionalKeyLabel = new QLabel(i18n("Additional encryption key(s) to be used: %1", d->m_additionalGpgKeys.count()), labelBox);
+    d->m_additionalKeyLabel = new QLabel(i18n("Additional encryption keys to be used: %1", d->m_additionalGpgKeys.count()), labelBox);
     d->m_additionalKeyButton = new KPushButton(i18n("Manage additional keys"), labelBox);
     connect(d->m_additionalKeyButton, SIGNAL(clicked()), this, SLOT(slotManageGpgKeys()));
     connect(d->m_saveEncrypted, SIGNAL(activated(int)), this, SLOT(slotKeySelected(int)));
@@ -2269,7 +2269,7 @@ bool KMyMoney2App::okToWriteFile(const KUrl& url)
   bool reallySaveFile = true;
 
   if(KIO::NetAccess::exists(url, KIO::NetAccess::SourceSide, this)) {
-    if(KMessageBox::warningYesNo(this, QString("<qt>")+i18n("The file <b>%1</b> already exists. Do you really want to override it?",url.pathOrUrl())+QString("</qt>"), i18n("File already exists")) != KMessageBox::Yes)
+    if(KMessageBox::warningYesNo(this, QString("<qt>")+i18n("The file <b>%1</b> already exists. Do you really want to overwrite it?",url.pathOrUrl())+QString("</qt>"), i18n("File already exists")) != KMessageBox::Yes)
       reallySaveFile = false;
   }
   return reallySaveFile;
@@ -2688,7 +2688,7 @@ void KMyMoney2App::slotInstitutionDelete(void)
   try {
 
     MyMoneyInstitution institution = file->institution(d->m_selectedInstitution.id());
-    if ((KMessageBox::questionYesNo(this, QString("<p>")+i18n("Do you really want to delete institution <b>%1</b> ?",institution.name()))) == KMessageBox::No)
+    if ((KMessageBox::questionYesNo(this, QString("<p>")+i18n("Do you really want to delete the institution <b>%1</b>?",institution.name()))) == KMessageBox::No)
       return;
     MyMoneyFileTransaction ft;
 
@@ -3637,7 +3637,7 @@ void KMyMoney2App::slotAccountReconcileFinish(void)
 
     if(d->m_endingBalanceDlg->endingBalance() != clearedBalance) {
       QString message = i18n("You are about to finish the reconciliation of this account with a difference between your bank statement and the transactions marked as cleared.\n"
-                             "Are you sure you want to finish the reconciliation ?");
+                             "Are you sure you want to finish the reconciliation?");
       if (KMessageBox::questionYesNo(this, message, i18n("Confirm end of reconciliation"), KStandardGuiItem::yes(), KStandardGuiItem::no()) == KMessageBox::No)
         return;
     }
@@ -3812,7 +3812,7 @@ void KMyMoney2App::slotAccountClose(void)
     MyMoneyFile::instance()->modifyAccount(a);
     ft.commit();
     if(KMyMoneyGlobalSettings::hideClosedAccounts()) {
-      KMessageBox::information(this, QString("<qt>")+i18n("You have closed this account. It remains in the system because you have transactions which still refer to it, but is not shown in the views. You can make it visible again by going to the View menu and selecting <b>Show all accounts</b> or by unselecting the <b>Don't show closed accounts</b> setting.")+QString("</qt>"), i18n("Information"), "CloseAccountInfo");
+      KMessageBox::information(this, QString("<qt>")+i18n("You have closed this account. It remains in the system because you have transactions which still refer to it, but it is not shown in the views. You can make it visible again by going to the View menu and selecting <b>Show all accounts</b> or by deselecting the <b>Do not show closed accounts</b> setting.")+QString("</qt>"), i18n("Information"), "CloseAccountInfo");
     }
   } catch(MyMoneyException* e) {
     delete e;
@@ -4740,12 +4740,11 @@ void KMyMoney2App::slotTransactionsDelete(void)
                 KGuiItem("DeleteReconciledTransaction")) == KMessageBox::Cancel)
                  return;
   }
-  QString msg;
-  if(d->m_selectedTransactions.count() == 1) {
-    msg = i18n("Do you really want to delete the selected transaction?");
-  } else {
-    msg = i18n("Do you really want to delete all %1 selected transactions?",d->m_selectedTransactions.count());
-  }
+  QString msg = 
+      i18np("Do you really want to delete the selected transaction?",
+            "Do you really want to delete all %1 selected transactions?",
+            d->m_selectedTransactions.count());
+
   if(KMessageBox::questionYesNo(this, msg, i18n("Delete transaction")) == KMessageBox::Yes) {
     KMSTATUS(i18n("Deleting transactions"));
     doDeleteTransactions();
@@ -4962,10 +4961,10 @@ void KMyMoney2App::slotTransactionsCancelOrEnter(bool& okToSelect)
         // okToSelect is preset to true if a cancel of the dialog is useful and false if it is not
         int rc;
         if(okToSelect == true) {
-          rc = KMessageBox::warningYesNoCancel(0, QString("<p>")+i18n("Do you really want to cancel editing this transaction without saving it?</p>- <b>Yes</b> cancels editing the transaction<br/>- <b>No</b> saves the transaction prior to cancelling and<br/>- <b>Cancel</b> returns to the transaction editor.<p>You can also select an option to save the transaction automatically when e.g. selecting another transaction.</p>"), i18n("Cancel transaction edit"), KStandardGuiItem::yes(), KStandardGuiItem::no(), KStandardGuiItem::cancel(), dontShowAgain);
+          rc = KMessageBox::warningYesNoCancel(0, QString("<p>")+i18n("Do you really want to cancel editing this transaction without saving it?</p>- <b>Yes</b> cancels editing the transaction<br/>- <b>No</b> saves the transaction prior to canceling and<br/>- <b>Cancel</b> returns to the transaction editor.<p>You can also select an option to save the transaction automatically when e.g. selecting another transaction.</p>"), i18n("Cancel transaction edit"), KStandardGuiItem::yes(), KStandardGuiItem::no(), KStandardGuiItem::cancel(), dontShowAgain);
 
         } else {
-          rc = KMessageBox::warningYesNo(0, QString("<p>")+i18n("Do you really want to cancel editing this transaction without saving it?</p>- <b>Yes</b> cancels editing the transaction<br/>- <b>No</b> saves the transaction prior to cancelling.<p>You can also select an option to save the transaction automatically when e.g. selecting another transaction.</p>"), i18n("Cancel transaction edit"), KStandardGuiItem::yes(), KStandardGuiItem::no(), dontShowAgain);
+          rc = KMessageBox::warningYesNo(0, QString("<p>")+i18n("Do you really want to cancel editing this transaction without saving it?</p>- <b>Yes</b> cancels editing the transaction<br/>- <b>No</b> saves the transaction prior to canceling.<p>You can also select an option to save the transaction automatically when e.g. selecting another transaction.</p>"), i18n("Cancel transaction edit"), KStandardGuiItem::yes(), KStandardGuiItem::no(), dontShowAgain);
         }
 
         switch(rc) {

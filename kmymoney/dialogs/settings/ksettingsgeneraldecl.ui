@@ -311,7 +311,7 @@
               <item>
                 <widget class="QLabel" name="m_viewLabel">
                   <property name="text">
-                    <string>Check the views you want to enable, uncheck those you want to hide, because you don't need the functionality.</string>
+                    <string>Check the views you want to enable; uncheck those you want to hide because you do not need the functionality.</string>
                   </property>
                   <property name="alignment">
                     <set>Qt::AlignTop</set>
@@ -422,7 +422,7 @@
                     <item>
                       <widget class="QCheckBox" name="kcfg_HideClosedAccounts">
                         <property name="text">
-                          <string>Don't show closed accounts</string>
+                          <string>Do not show closed accounts</string>
                         </property>
                         <property name="whatsThis" stdset="0">
                           <string>This option hides all accounts that have been closed by the user in views and selection lists.
@@ -450,7 +450,7 @@ You can use &lt;b&gt;View/Show all accounts&lt;/b&gt; to temporarily show hidden
                     <item>
                       <widget class="QCheckBox" name="kcfg_HideFinishedSchedules">
                         <property name="text">
-                          <string>Don't show finished schedules</string>
+                          <string>Do not show finished schedules</string>
                         </property>
                         <property name="whatsThis" stdset="0">
                           <string>This option hides all finished schedules in the schedules view.</string>
@@ -471,7 +471,7 @@ You can use &lt;b&gt;View/Show all accounts&lt;/b&gt; to temporarily show hidden
                         <item>
                           <widget class="QLabel" name="textLabel1_3">
                             <property name="text">
-                              <string>Don't show transactions prior to</string>
+                              <string>Do not show transactions prior to</string>
                             </property>
                             <property name="wordWrap">
                               <bool>false</bool>
@@ -505,7 +505,7 @@ You can use &lt;b&gt;View/Show all accounts&lt;/b&gt; to temporarily show hidden
                     <item>
                       <widget class="QCheckBox" name="kcfg_HideReconciledTransactions">
                         <property name="text">
-                          <string>Don't show reconciled transactions</string>
+                          <string>Do not show reconciled transactions</string>
                         </property>
                         <property name="whatsThis" stdset="0">
                           <string>This option hides all reconciled transactions in the ledger view.</string>

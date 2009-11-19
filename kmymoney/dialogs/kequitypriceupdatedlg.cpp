@@ -554,7 +554,7 @@ void KEquityPriceUpdateDlg::slotReceivedQuote(const QString& _id, const QString&
   }
   else
   {
-    logErrorMessage(i18n("Received a price for %1 (id %2), but this symbol is not on the list!  Aborting entire update.",_symbol,_id));
+    logErrorMessage(i18n("Received a price for %1 (id %2), but this symbol is not on the list. Aborting entire update.",_symbol,_id));
   }
 
   if (next)

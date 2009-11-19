@@ -20,7 +20,7 @@
             <enum>Qt::NoFocus</enum>
           </property>
           <property name="text">
-            <string>A typical KMyMoney user maintains a checking a account with some institution and uses it to receive money or pay bills. If this is not the case, please deselect the checkbox below and continue on the next page.</string>
+            <string>A typical KMyMoney user maintains a checking account with some institution and uses it to receive money or pay bills. If this is not the case, please deselect the checkbox below and continue on the next page.</string>
           </property>
         </widget>
       </item>
@@ -46,7 +46,7 @@
             <item row="5" column="1">
               <widget class="KLineEdit" name="m_institutionNameEdit">
                 <property name="whatsThis" stdset="0">
-                  <string>The name of the instititution that issued the account.</string>
+                  <string>The name of the institution that issued the account.</string>
                 </property>
               </widget>
             </item>

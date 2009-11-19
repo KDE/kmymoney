@@ -302,7 +302,9 @@ void KForecastView::loadSummaryView(void)
           break;
         default:
           msg = QString("<font color=\"%1\">").arg(KMyMoneyGlobalSettings::listNegativeValueColor().name());
-          msg += i18n("The balance of %1 will drop below the minimum balance %2 in %3 days.",acc.name(),minBalance.formatMoney(acc, currency),dropMinimum-1);
+          msg += i18n("The balance of %2 will drop below the minimum balance %3 in %1 day.",
+                      "The balance of %2 will drop below the minimum balance %3 in %1 days.",
+                      dropMinimum-1,acc.name(),minBalance.formatMoney(acc, currency));
           msg += QString("</font>");
       }
 
@@ -331,12 +333,16 @@ void KForecastView::loadSummaryView(void)
       default:
         if(acc.accountGroup() == MyMoneyAccount::Asset) {
           msg = QString("<font color=\"%1\">").arg(KMyMoneyGlobalSettings::listNegativeValueColor().name());
-          msg += i18n("The balance of %1 will drop below %2 in %3 days.",acc.name(),MyMoneyMoney().formatMoney(acc, currency),dropZero);
+          msg += i18np("The balance of %2 will drop below %3 in %1 day.",
+                       "The balance of %2 will drop below %3 in %1 days.",
+                       dropZero,acc.name(),MyMoneyMoney().formatMoney(acc, currency));
           msg += QString("</font>");
           break;
         }
         if(acc.accountGroup() == MyMoneyAccount::Liability) {
-          msg = i18n("The balance of %1 will raise above %2 in %3 days.",acc.name(),MyMoneyMoney().formatMoney(acc, currency),dropZero);
+          msg = i18np("The balance of %2 will raise above %3 in %1 day.",
+                      "The balance of %2 will raise above %3 in %1 days.",
+                      dropZero,acc.name(),MyMoneyMoney().formatMoney(acc, currency));
           break;
         }
     }
@@ -649,7 +655,7 @@ void KForecastView::loadChartView(void)
     MyMoneyReport::eMonths,
     MyMoneyTransactionFilter::userDefined, // overridden by the setDateFilter() call below
     detailLevel[m_comboDetail->currentIndex()],
-    i18n("Networth Forecast"),
+    i18n("Net Worth Forecast"),
     i18n("Generated Report"));
 
   reportCfg.setChartByDefault(true);

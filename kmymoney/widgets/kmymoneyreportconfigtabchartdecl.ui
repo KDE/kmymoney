@@ -20,7 +20,7 @@
       <string/>
     </property>
     <property name="whatsThis" stdset="0">
-      <string>&lt;p&gt;On this tab, you configure the chart drawn forthis report.&lt;/p&gt;</string>
+      <string>&lt;p&gt;On this tab, you configure the chart drawn for this report.&lt;/p&gt;</string>
     </property>
     <layout class="QVBoxLayout">
       <item>

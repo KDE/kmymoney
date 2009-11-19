@@ -72,7 +72,7 @@ bool MyMoneyTemplate::loadTemplate(const KUrl& url)
     rc = KIO::NetAccess::download(url, filename, KMyMoneyUtils::mainWindow());
     if(!rc) {
       KMessageBox::detailedError(KMyMoneyUtils::mainWindow(),
-             i18n("Error while loading file '%1'!",url.url()),
+             i18n("Error while loading file '%1'.",url.url()),
              KIO::NetAccess::lastErrorString(),
              i18n("File access error"));
       return false;

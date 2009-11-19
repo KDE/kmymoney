@@ -395,7 +395,7 @@
             <item>
               <widget class="QLabel" name="m_labelFinal">
                 <property name="text">
-                  <string>Congratulations!  You have successfully set up your bank for online banking via OFX.</string>
+                  <string>Congratulations: you have successfully set up your bank for online banking via OFX.</string>
                 </property>
                 <property name="alignment">
                   <set>Qt::AlignVCenter</set>

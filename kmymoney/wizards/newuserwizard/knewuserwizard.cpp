@@ -196,7 +196,7 @@ void GeneralPage::slotLoadFromKABC(void)
 
   KABC::Addressee addr = ab->whoAmI();
   if ( addr.isEmpty() ) {
-    KMessageBox::sorry(this, i18n("Unable to load data, because no contact has been associated with the owner of the standard addressbook."), i18n("Addressbook import"));
+    KMessageBox::sorry(this, i18n("Unable to load data, because no contact has been associated with the owner of the standard address book."), i18n("Address book import"));
     return;
   }
 

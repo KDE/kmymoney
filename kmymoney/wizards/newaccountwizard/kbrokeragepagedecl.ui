@@ -24,7 +24,7 @@
 
 &lt;b&gt;Check&lt;/b&gt; the mark if this investment account has an associated account for money that is not invested.&lt;br&gt;
 
-&lt;b&gt;Uncheck&lt;/b&gt; it if you don't use this account for active stock brokerage. You should also uncheck it if this account is not maintained by a bank or broker.</string>
+&lt;b&gt;Uncheck&lt;/b&gt; it if you do not use this account for active stock brokerage. You should also uncheck it if the account is not maintained by a bank or broker.</string>
           </property>
         </widget>
       </item>

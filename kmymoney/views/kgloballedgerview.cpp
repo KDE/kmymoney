@@ -643,18 +643,19 @@ void KGlobalLedgerView::loadView(void)
 
     // update statement information
     if(statement) {
-      statement->setText(i18n("%1 deposits (%3), %2 payments (%4)"
-          , deposits[m_account.id()]
-          , payments[m_account.id()]
-          , depositAmount[m_account.id()].abs().formatMoney(m_account.fraction())
-          , paymentAmount[m_account.id()].abs().formatMoney(m_account.fraction())) );
+      const QString aboutDeposits = i18np("%1 deposit (%2)", "%1 deposits (%2)",
+                                          deposits[m_account.id()], depositAmount[m_account.id()].abs().formatMoney(m_account.fraction()) );
+      const QString aboutPayments = i18np("%1 payment (%2)", "%1 payments (%2)",
+                                          payments[m_account.id()], paymentAmount[m_account.id()].abs().formatMoney(m_account.fraction()) );
+
+      statement->setText(i18nc("%1 is a string, e.g. 7 deposits; %2 is a string, e.g. 4 payments", "%1, %2", aboutDeposits, aboutPayments) );
     }
     if(pStatement) {
-      pStatement->setText(i18n("%1 payments (%2)", payments[m_account.id()]
+      pStatement->setText(i18np("%1 payment (%2)", "%1 payments (%2)", payments[m_account.id()]
         , paymentAmount[m_account.id()].abs().formatMoney(m_account.fraction())) );
     }
     if(dStatement) {
-      dStatement->setText(i18n("%1 deposits (%2)", deposits[m_account.id()]
+      dStatement->setText(i18np("%1 deposit (%2)", "%1 deposits (%2)", deposits[m_account.id()]
         , depositAmount[m_account.id()].abs().formatMoney(m_account.fraction())) );
     }
 

@@ -97,7 +97,7 @@ void KCategoryReassignDlg::accept(void)
   buttonOk->setFocus();
 
   if(m_category->selectedItem().isEmpty()) {
-    KMessageBox::information(this, i18n("This dialog does not allow to create new categories. Please pick a category from the list."), i18n("Category creation"));
+    KMessageBox::information(this, i18n("This dialog does not allow new categories to be created. Please pick a category from the list."), i18n("Category creation"));
   } else {
     KCategoryReassignDlgDecl::accept();
   }

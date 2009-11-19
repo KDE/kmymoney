@@ -264,14 +264,14 @@ void KHomeView::loadView(void)
 
 void KHomeView::showNetWorthGraph(void)
 {
-  m_part->write(QString("<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">%1</div>\n<div class=\"gap\">&nbsp;</div>\n").arg(i18n("Networth Forecast")));
+  m_part->write(QString("<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">%1</div>\n<div class=\"gap\">&nbsp;</div>\n").arg(i18n("Net Worth Forecast")));
 
   MyMoneyReport reportCfg = MyMoneyReport(
       MyMoneyReport::eAssetLiability,
       MyMoneyReport::eMonths,
       MyMoneyTransactionFilter::userDefined, // overridden by the setDateFilter() call below
       MyMoneyReport::eDetailTotal,
-      i18n("Networth Forecast"),
+      i18n("Net Worth Forecast"),
       i18n("Generated Report"));
 
   reportCfg.setChartByDefault(true);
@@ -549,7 +549,7 @@ void KHomeView::showPayments(void)
         m_html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");
         m_html += "<td colspan=\"5\">";
         if(m_showAllSchedules) {
-          m_html += link(VIEW_SCHEDULE,  QString("?mode=%1").arg("reduced")) + i18nc("Less...", "Show less schedules on the list") + linkend();
+          m_html += link(VIEW_SCHEDULE,  QString("?mode=%1").arg("reduced")) + i18nc("Less...", "Show fewer schedules on the list") + linkend();
         } else {
           m_html += link(VIEW_SCHEDULE,  QString("?mode=%1").arg("full")) + i18nc("More...", "Show more schedules on the list") + linkend();
         }
@@ -595,7 +595,7 @@ void KHomeView::showPaymentEntry(const MyMoneySchedule& sched, int cnt)
 
         //show quantity of payments overdue if any
         if(cnt > 1)
-          tmp += i18n(" (%1 payments)",cnt);
+          tmp += i18np(" (%1 payment)", " (%1 payments)", cnt);
 
         //show account of the main split
         tmp += "</td><td>";
@@ -912,7 +912,7 @@ void KHomeView::showForecast(void)
     for(i = 0; (i*m_forecast.accountsCycle() + beginDay) <= m_forecast.forecastDays(); ++i) {
       m_html += QString("<td width=\"%1%\" class=\"right\">").arg(colWidth);
 
-      m_html += i18nc("Forecast days", "%1 days", i*m_forecast.accountsCycle() + beginDay);
+      m_html += i18ncp("Forecast days", "%1 day", "%1 days", i*m_forecast.accountsCycle() + beginDay);
       m_html += "</td>";
       colspan++;
     }
@@ -982,7 +982,9 @@ void KHomeView::showForecast(void)
             msg = showColoredAmount(msg, true);
             break;
           default:
-            msg = i18n("The balance of %1 will drop below the minimum balance %2 in %3 days.",(*it_account).name(),minBalance.formatMoney(*it_account, currency),dropMinimum-1);
+            msg = i18np("The balance of %2 will drop below the minimum balance %3 in %1 day.",
+                        "The balance of %2 will drop below the minimum balance %3 in %1 days.",
+                        dropMinimum-1,(*it_account).name(),minBalance.formatMoney(*it_account, currency));
             msg = showColoredAmount(msg, true);
             break;
         }
@@ -1009,12 +1011,16 @@ void KHomeView::showForecast(void)
              break;
            default:
              if((*it_account).accountGroup() == MyMoneyAccount::Asset) {
-               msg = i18n("The balance of %1 will drop below %2 in %3 days.",(*it_account).name(),MyMoneyMoney().formatMoney(*it_account, currency),dropZero);
+               msg = i18np("The balance of %2 will drop below %3 in %1 day.",
+                           "The balance of %2 will drop below %3 in %1 days.",
+                           dropZero,(*it_account).name(),MyMoneyMoney().formatMoney(*it_account, currency));
                msg = showColoredAmount(msg, true);
                break;
              }
              if((*it_account).accountGroup() == MyMoneyAccount::Liability) {
-               msg = i18n("The balance of %1 will raise above %2 in %3 days.",(*it_account).name(),MyMoneyMoney().formatMoney(*it_account, currency),dropZero);
+               msg = i18np("The balance of %2 will raise above %3 in %1 day.",
+                           "The balance of %2 will raise above %3 in %1 days.",
+                           dropZero,(*it_account).name(),MyMoneyMoney().formatMoney(*it_account, currency));
                break;
              }
          }

@@ -101,7 +101,7 @@ int main(int argc, char *argv[])
   aboutData.setOrganizationDomain("kde.org");
   KCmdLineOptions options;
   options.add( "lang <lang-code>", ki18n("language to be used") );
-  options.add( "n", ki18n("don't open last used file") );
+  options.add( "n", ki18n("do not open last used file") );
   options.add( "timers", ki18n("enable performance timers") );
 
 #if KMM_DEBUG

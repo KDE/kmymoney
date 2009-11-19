@@ -134,13 +134,13 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
   report += "</td></tr>";
   // row 2
   report += "<tr class=\"row-even\"><td class=\"left\">";
-  report += i18n("%1 cleared payments total").arg(clearedPayments);
+  report += i18np("%1 cleared payment", "%1 cleared payments in total", clearedPayments);
   report += "</td><td>";
   report += clearedPaymentAmount.formatMoney(currency);
   report += "</td></tr>";
   // row 3
   report += "<tr class=\"row-odd\"><td class=\"left\">";
-  report += i18n("%1 cleared deposits total ").arg(clearedDeposits);
+  report += i18np("%1 cleared deposit", "%1 cleared deposits in total", clearedDeposits);
   report += "</td><td>";
   report += clearedDepositAmount.formatMoney(currency);
   report += "</td></tr>";
@@ -162,13 +162,13 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
   report += "</td></tr>";
   // row 6
   report += "<tr class=\"row-even\"><td class=\"left\">";
-  report += i18n("%1 outstanding payments total").arg(outstandingPayments);
+  report += i18np("%1 outstanding payment", "%1 outstanding payments in total", outstandingPayments);
   report += "</td><td>";
   report += outstandingPaymentAmount.formatMoney(currency);
   report += "</td></tr>";
   // row 7
   report += "<tr class=\"row-odd\"><td class=\"left\">";
-  report += i18n("%1 outstanding deposits total ").arg(outstandingDeposits);
+  report += i18np("%1 outstanding deposit", "%1 outstanding deposits in total", outstandingDeposits);
   report += "</td><td>";
   report += outstandingDepositAmount.formatMoney(currency);
   report += "</td></tr>";
@@ -207,13 +207,13 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
 
   // row 9
   report += "<tr class=\"row-odd\"><td class=\"left\">";
-  report += i18n("%2 payments after %1").arg(KGlobal::locale()->formatDate(date, KLocale::ShortDate)).arg(afterPayments);
+  report += i18np("%1 payment after %2", "%1 payments after %2", afterPayments, KGlobal::locale()->formatDate(date, KLocale::ShortDate));
   report += "</td><td>";
   report += afterPaymentAmount.formatMoney(currency);
   report += "</td></tr>";
   // row 10
   report += "<tr class=\"row-even\"><td class=\"left\">";
-  report += i18n("%2 deposits after %1").arg(KGlobal::locale()->formatDate(date, KLocale::ShortDate)).arg(afterDeposits);
+  report += i18np("%1 deposit after %2", "%1 deposits after %2", afterDeposits, KGlobal::locale()->formatDate(date, KLocale::ShortDate));
   report += "</td><td>";
   report += afterDepositAmount.formatMoney(currency);
   report += "</td></tr>";
@@ -272,7 +272,7 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
   }
 
   detailsReport += "<tr class=\"sectionfooter\">";
-  detailsReport += QString("<td class=\"left1\" colspan=\"5\">%1</td><td>%2</td></tr>").arg(i18n("Total of %1 outstanding payments amounting to").arg(outstandingPayments)).arg(outstandingPaymentAmount.formatMoney(currency));
+  detailsReport += QString("<td class=\"left1\" colspan=\"5\">%1</td><td>%2</td></tr>").arg(i18np("One outstanding payment of", "Total of %1 outstanding payments amounting to", outstandingPayments)).arg(outstandingPaymentAmount.formatMoney(currency));
 
   detailsReport += "</table>\n";
   detailsReport += QString( "<h2 class=\"report\">%1</h2>\n" ).arg(i18n("Outstanding deposits"));
@@ -309,7 +309,7 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
   }
 
   detailsReport += "<tr class=\"sectionfooter\">";
-  detailsReport += QString("<td class=\"left1\" colspan=\"5\">%1</td><td>%2</td></tr>").arg(i18n("Total of %1 outstanding deposits amounting to").arg(outstandingDeposits)).arg(outstandingDepositAmount.formatMoney(currency));
+  detailsReport += QString("<td class=\"left1\" colspan=\"5\">%1</td><td>%2</td></tr>").arg(i18np("One outstanding deposit of", "Total of %1 outstanding deposits amounting to", outstandingDeposits)).arg(outstandingDepositAmount.formatMoney(currency));
 
   // end of the table
   detailsReport += "</table>\n";

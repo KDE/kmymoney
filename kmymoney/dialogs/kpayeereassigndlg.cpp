@@ -73,7 +73,7 @@ void KPayeeReassignDlg::accept(void)
   buttonOk->setFocus();
 
   if(payeeCombo->selectedItem().isEmpty()) {
-    KMessageBox::information(this, i18n("This dialog does not allow to create new payees. Please pick a payee from the list."), i18n("Payee creation"));
+    KMessageBox::information(this, i18n("This dialog does not allow new payees to be created. Please pick a payee from the list."), i18n("Payee creation"));
   } else {
     KPayeeReassignDlgDecl::accept();
   }

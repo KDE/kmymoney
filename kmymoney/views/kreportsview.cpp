@@ -700,7 +700,7 @@ void KReportsView::slotDelete(void)
     MyMoneyReport report = tab->report();
     if ( ! report.id().isEmpty() )
     {
-      if ( KMessageBox::Continue == KMessageBox::warningContinueCancel(this, QString("<qt>")+i18n("Are you sure you want to delete report <b>%1</b>?  There is no way to recover it!",report.name())+QString("</qt>"), i18n("Delete Report?")))
+      if ( KMessageBox::Continue == KMessageBox::warningContinueCancel(this, QString("<qt>")+i18n("Are you sure you want to delete report <b>%1</b>?  There is no way to recover it.",report.name())+QString("</qt>"), i18n("Delete Report?")))
       {
         // close the tab and then remove the report so that it is not
         // generated again during the following loadView() call
@@ -712,7 +712,7 @@ void KReportsView::slotDelete(void)
       }
     }
     else
-      KMessageBox::information(this, QString("<qt>")+i18n("Sorry, <b>%1</b> is a default report.  You may not delete it.",report.name())+QString("</qt>"), i18n("Delete Report?"));
+      KMessageBox::information(this, QString("<qt>")+i18n("<b>%1</b> is a default report, so it cannot be deleted.",report.name())+QString("</qt>"), i18n("Delete Report?"));
   }
 }
 

@@ -1728,11 +1728,14 @@ const QStringList MyMoneyFile::consistencyCheck(void)
 
   // add more checks here
 
-  if(problemCount == 0)
-    rc << i18n("Finish! Data is consistent.");
-  else
-    rc << i18n("Finish! %1 problem(s) corrected. %2 problem(s) still present.",problemCount,unfixedCount);
+  if(problemCount == 0) {
+    rc << i18n("Finished: data is consistent.");
+  } else {
+    const QString problemsCorrected = i18np("%1 problem corrected.", "%1 problems corrected.", problemCount);
+    const QString problemsRemaining = i18np("%1 problem still present.", "%1 problems still present.", unfixedCount);
 
+    rc << i18nc("%1 is a string, e.g. 7 problems corrected; %2 is a string, e.g. 3 problems still present", "Finished: %1 %2",problemsCorrected,problemsRemaining);
+  }
   return rc;
 }
 

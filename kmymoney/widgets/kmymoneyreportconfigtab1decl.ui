@@ -71,7 +71,7 @@
             <string>Convert values to base currency</string>
           </property>
           <property name="toolTip" stdset="0">
-            <string comment="Convert 'em!!">&lt;p&gt;Select this option to convert all values in the report to your base currency.&lt;/p&gt;&lt;p&gt;Leave it unchecked if you'd like to see values in their original currency.&lt;/p&gt;&lt;p&gt;If currencies are not converted, then subtotals will not be shown.&lt;/p&gt;</string>
+            <string comment="Convert 'em!!">&lt;p&gt;Select this option to convert all values in the report to your base currency.&lt;/p&gt;&lt;p&gt;Leave it unchecked if you would like to see values in their original currency.&lt;/p&gt;&lt;p&gt;If currencies are not converted, then subtotals will not be shown.&lt;/p&gt;</string>
           </property>
         </widget>
       </item>

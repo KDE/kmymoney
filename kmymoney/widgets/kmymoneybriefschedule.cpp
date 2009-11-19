@@ -105,11 +105,12 @@ void KMyMoneyBriefSchedule::loadSchedule()
       if (sched.willEnd())
       {
         int transactions = sched.paymentDates(m_date, sched.endDate()).count()-1;
-        text = i18n("Payment on %1 for %2 with %3 transactions remaining occurring %4.",
-                KGlobal::locale()->formatDate(m_date),
-                amount.formatMoney(sched.account().fraction()),
-                QString::number(transactions),
-                i18n(sched.occurrenceToString().toLatin1()));
+        text = i18np("Payment on %2 for %3 with %1 transaction remaining occurring %4.",
+                     "Payment on %2 for %3 with %1 transactions remaining occurring %4.",
+                     transactions,
+                     KGlobal::locale()->formatDate(m_date),
+                     amount.formatMoney(sched.account().fraction()),
+                     i18n(sched.occurrenceToString().toLatin1()));
       } else {
         text = i18n("Payment on %1 for %2 occurring %3.",
                 KGlobal::locale()->formatDate(m_date),
@@ -132,9 +133,9 @@ void KMyMoneyBriefSchedule::loadSchedule()
           int transactions = sched.paymentDates(startD, QDate::currentDate()).count();
 
           text += "<br><font color=red>";
-          text += i18n("%1 days overdue (%2 occurrences).",
-                      QString::number(days),
-                      QString::number(transactions));
+          text += i18np("%1 day overdue", "%1 days overdue", days);
+          text += QString(" ");
+          text += i18np("(%1 occurrence.)", "(%1 occurrences.)", transactions);
           text += "</color>";
         }
       }

@@ -35,11 +35,11 @@
     <item>
      <widget class="QLabel" name="TextLabel6">
       <property name="text">
-       <string>Reconciling your account assures, that your recordings match those of your institution and that there are no mistakes on either side. You should reconcile your account whenever you receive a statement from your institution.
+       <string>Reconciling your account ensures your records match those of your institution, and that there are no mistakes on either side. You should reconcile your account whenever you receive a statement from your institution.
 
 All relevant information necessary for this process is usually printed on your statement.
 
-On the next page you will verify, that the starting and ending balance are matching those on your statement. If not, please modify the figures.</string>
+On the next page you will verify that the starting and ending balances match those on your statement. If not, please modify the figures.</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignTop</set>
