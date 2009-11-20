@@ -302,9 +302,9 @@ void KForecastView::loadSummaryView(void)
           break;
         default:
           msg = QString("<font color=\"%1\">").arg(KMyMoneyGlobalSettings::listNegativeValueColor().name());
-          msg += i18n("The balance of %2 will drop below the minimum balance %3 in %1 day.",
-                      "The balance of %2 will drop below the minimum balance %3 in %1 days.",
-                      dropMinimum-1,acc.name(),minBalance.formatMoney(acc, currency));
+          msg += i18np("The balance of %2 will drop below the minimum balance %3 in %1 day.",
+                       "The balance of %2 will drop below the minimum balance %3 in %1 days.",
+                       dropMinimum-1,acc.name(),minBalance.formatMoney(acc, currency));
           msg += QString("</font>");
       }
 
