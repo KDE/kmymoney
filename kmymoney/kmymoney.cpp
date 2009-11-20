@@ -797,7 +797,7 @@ void KMyMoney2App::initActions(void)
 
   KAction *transaction_create_schedule = actionCollection()->addAction("transaction_create_schedule");
   transaction_create_schedule->setText(i18n("Create scheduled transaction..."));
-  transaction_create_schedule->setIcon(KIcon("bookmark-new"));
+  transaction_create_schedule->setIcon(KIcon("appointment-new"));
   connect(transaction_create_schedule, SIGNAL(triggered()), this, SLOT(slotTransactionCreateSchedule()));
 
   KAction *transaction_assign_number = actionCollection()->addAction("transaction_assign_number");
