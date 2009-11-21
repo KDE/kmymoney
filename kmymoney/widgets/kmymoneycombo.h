@@ -59,7 +59,7 @@ class KMyMoneyCombo : public KComboBox
   Q_OBJECT
 public:
   KMyMoneyCombo(QWidget *w = 0);
-  KMyMoneyCombo(bool rw, QWidget *w = 0);
+  explicit KMyMoneyCombo(bool rw, QWidget *w = 0);
 
   /**
     * This method is used to turn on/off the hint display and to setup the appropriate text.
@@ -276,7 +276,7 @@ public:
     * Create a combo box that contains the entries "Pay to", "From" and
     * "  " for don't care.
     */
-  KMyMoneyCashFlowCombo(QWidget *w = 0, MyMoneyAccount::accountTypeE type = MyMoneyAccount::Asset);
+  explicit KMyMoneyCashFlowCombo(QWidget *w = 0, MyMoneyAccount::accountTypeE type = MyMoneyAccount::Asset);
 
   void setDirection(KMyMoneyRegister::CashFlowDirection dir);
   KMyMoneyRegister::CashFlowDirection direction(void) const { return m_dir; }

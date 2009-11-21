@@ -56,8 +56,8 @@ private:
   AB_JOB_LIST2 *_jobQueue;
 
 public:
-  KBanking(const char *appname,
-           const char *cfgDir=0);
+  explicit KBanking(const char *appname,
+                    const char *cfgDir=0);
   virtual ~KBanking();
 
   int init();

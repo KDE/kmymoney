@@ -34,8 +34,6 @@
 #include <QRadioButton>
 #include <q3textedit.h>
 #include <QLayout>
-#include <QTabWidget>
-//Added by qt3to4:
 #include <QList>
 #include <QResizeEvent>
 
@@ -66,27 +64,12 @@
 #include <mymoneyreport.h>
 #include <kguiutils.h>
 #include <kmymoneycombo.h>
-
 #include "kmymoneycurrencyselector.h"
 #include "kmymoneyaccountselector.h"
-
-#include "mymoneyexception.h"
 #include "mymoneykeyvaluecontainer.h"
 #include "knewbankdlg.h"
 #include "kmymoneyfile.h"
 #include "kmymoneyutils.h"
-
-//#include "kreportchartview.h"
-//#include "pivottable.h"
-
-// in KOffice version < 1.5 KDCHART_PROPSET_NORMAL_DATA was a static const
-// but in 1.5 this has been changed into a #define'd value. So we have to
-// make sure, we use the right one.
-#ifndef KDCHART_PROPSET_NORMAL_DATA
-#define KMM_KDCHART_PROPSET_NORMAL_DATA KDChartParams::KDCHART_PROPSET_NORMAL_DATA
-#else
-#define KMM_KDCHART_PROPSET_NORMAL_DATA KDCHART_PROPSET_NORMAL_DATA
-#endif
 
 KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bool categoryEditor, QWidget *parent, const char *name, const QString& title)
   : KNewAccountDlgDecl(parent),

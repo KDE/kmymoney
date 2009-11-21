@@ -97,12 +97,12 @@ public:
 
   // construction
   MyMoneyMoney();
-  MyMoneyMoney( const int iAmount, const signed64 denom = 100 );
+  explicit MyMoneyMoney( const int iAmount, const signed64 denom = 100 );
   MyMoneyMoney( const QString& pszAmount );
-  MyMoneyMoney( const signed64 Amount, const signed64 denom = 100  );
-  MyMoneyMoney( const double dAmount, const signed64 denom = 100  );
+  explicit MyMoneyMoney( const signed64 Amount, const signed64 denom = 100  );
+  explicit MyMoneyMoney( const double dAmount, const signed64 denom = 100  );
 #if HAVE_LONG_DOUBLE
-  MyMoneyMoney( const long double dAmount, const signed64 denom = 100  );
+  explicit MyMoneyMoney( const long double dAmount, const signed64 denom = 100  );
 #endif
 
   // copy constructor

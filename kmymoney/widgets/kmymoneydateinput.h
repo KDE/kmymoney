@@ -43,7 +43,7 @@ class KMyMoneyDateEdit : public QDateEdit
 {
   Q_OBJECT
 public:
-  KMyMoneyDateEdit(const QDate& date, QWidget *parent=0) : QDateEdit(date, parent) {}
+  explicit KMyMoneyDateEdit(const QDate& date, QWidget *parent=0) : QDateEdit(date, parent) {}
 
 protected:
   /** reimplemented for internal reasons */
@@ -61,7 +61,7 @@ class kMyMoneyDateInput : public KHBox
   Q_OBJECT
 
 public:
-  kMyMoneyDateInput(QWidget *parent=0, Qt::AlignmentFlag flags=Qt::AlignLeft);
+  explicit kMyMoneyDateInput(QWidget *parent=0, Qt::AlignmentFlag flags=Qt::AlignLeft);
   ~kMyMoneyDateInput();
 
   QDate date(void) const;

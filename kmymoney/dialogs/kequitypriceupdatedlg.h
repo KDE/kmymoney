@@ -20,8 +20,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KEQUITYPRICEUPDATEDIALOG_H
-#define KEQUITYPRICEUPDATEDIALOG_H
+#ifndef KEQUITYPRICEUPDATEDLG_H
+#define KEQUITYPRICEUPDATEDLG_H
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -81,5 +81,4 @@ private:
   WebPriceQuote m_webQuote;
 };
 
-#endif
-// vim:cin:si:ai:et:ts=2:sw=2:
+#endif // KEQUITYPRICEUPDATEDLG_H

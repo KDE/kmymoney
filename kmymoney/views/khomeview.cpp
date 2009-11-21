@@ -77,14 +77,6 @@
 #define VIEW_HOME           "home"
 #define VIEW_REPORTS        "reports"
 
-// in KOffice version < 1.5 KDCHART_PROPSET_NORMAL_DATA was a static const
-// but in 1.5 this has been changed into a #define'd value. So we have to
-// make sure, we use the right one.
-#ifndef KDCHART_PROPSET_NORMAL_DATA
-#define KMM_KDCHART_PROPSET_NORMAL_DATA KDChartParams::KDCHART_PROPSET_NORMAL_DATA
-#else
-#define KMM_KDCHART_PROPSET_NORMAL_DATA KDCHART_PROPSET_NORMAL_DATA
-#endif
 
 using namespace reports;
 

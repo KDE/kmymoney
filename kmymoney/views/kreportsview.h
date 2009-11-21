@@ -197,7 +197,7 @@ public:
     *
     * @see ~KReportsView
     */
-  KReportsView(QWidget *parent=0, const char *name=0);
+  explicit KReportsView(QWidget *parent=0, const char *name=0);
 
   /**
     * Standard destructor.

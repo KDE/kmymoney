@@ -70,11 +70,11 @@ void QueryTableTest::setUp () {
   acIncome = (MyMoneyFile::instance()->income().id());
   acChecking = makeAccount(QString("Checking Account"),MyMoneyAccount::Checkings,moCheckingOpen,QDate(2004,5,15),acAsset);
   acCredit = makeAccount(QString("Credit Card"),MyMoneyAccount::CreditCard,moCreditOpen,QDate(2004,7,15),acLiability);
-  acSolo = makeAccount(QString("Solo"),MyMoneyAccount::Expense,0,QDate(2004,1,11),acExpense);
-  acParent = makeAccount(QString("Parent"),MyMoneyAccount::Expense,0,QDate(2004,1,11),acExpense);
-  acChild = makeAccount(QString("Child"),MyMoneyAccount::Expense,0,QDate(2004,2,11),acParent);
-  acForeign = makeAccount(QString("Foreign"),MyMoneyAccount::Expense,0,QDate(2004,1,11),acExpense);
-  acTax = makeAccount(QString("Tax"), MyMoneyAccount::Expense,0,QDate(2005,1,11),acExpense, "", true);
+  acSolo = makeAccount(QString("Solo"),MyMoneyAccount::Expense,MyMoneyMoney(0),QDate(2004,1,11),acExpense);
+  acParent = makeAccount(QString("Parent"),MyMoneyAccount::Expense,MyMoneyMoney(0),QDate(2004,1,11),acExpense);
+  acChild = makeAccount(QString("Child"),MyMoneyAccount::Expense,MyMoneyMoney(0),QDate(2004,2,11),acParent);
+  acForeign = makeAccount(QString("Foreign"),MyMoneyAccount::Expense,MyMoneyMoney(0),QDate(2004,1,11),acExpense);
+  acTax = makeAccount(QString("Tax"), MyMoneyAccount::Expense,MyMoneyMoney(0),QDate(2005,1,11),acExpense, "", true);
 
   MyMoneyInstitution i("Bank of the World","","","","","","");
   file->addInstitution(i);
@@ -310,23 +310,23 @@ void QueryTableTest::testCashFlowAnalysis()
 
   CashFlowList list;
 
-  list += CashFlowListItem( QDate(2004,5,3),1000.0 );
-  list += CashFlowListItem( QDate(2004,5,20),59.0 );
-  list += CashFlowListItem( QDate(2004,6,3),14.0 );
-  list += CashFlowListItem( QDate(2004,6,24),92.0 );
-  list += CashFlowListItem( QDate(2004,7,6),63.0 );
-  list += CashFlowListItem( QDate(2004,7,25),15.0 );
-  list += CashFlowListItem( QDate(2004,8,5),92.0 );
-  list += CashFlowListItem( QDate(2004,9,2),18.0 );
-  list += CashFlowListItem( QDate(2004,9,21),5.0 );
-  list += CashFlowListItem( QDate(2004,10,16),-2037.0 );
+  list += CashFlowListItem( QDate(2004,5,3), MyMoneyMoney(1000.0) );
+  list += CashFlowListItem( QDate(2004,5,20), MyMoneyMoney(59.0) );
+  list += CashFlowListItem( QDate(2004,6,3), MyMoneyMoney(14.0) );
+  list += CashFlowListItem( QDate(2004,6,24), MyMoneyMoney(92.0) );
+  list += CashFlowListItem( QDate(2004,7,6), MyMoneyMoney(63.0) );
+  list += CashFlowListItem( QDate(2004,7,25), MyMoneyMoney(15.0) );
+  list += CashFlowListItem( QDate(2004,8,5), MyMoneyMoney(92.0) );
+  list += CashFlowListItem( QDate(2004,9,2), MyMoneyMoney(18.0) );
+  list += CashFlowListItem( QDate(2004,9,21), MyMoneyMoney(5.0) );
+  list += CashFlowListItem( QDate(2004,10,16), MyMoneyMoney(-2037.0) );
 
   MyMoneyMoney IRR(list.IRR(),1000);
 
   CPPUNIT_ASSERT( IRR == MyMoneyMoney(1676,1000) );
 
   list.pop_back();
-  list += CashFlowListItem( QDate(2004,10,16),-1358.0 );
+  list += CashFlowListItem( QDate(2004,10,16), MyMoneyMoney(-1358.0) );
 
   IRR = MyMoneyMoney( list.IRR(), 1000 );
 
@@ -445,18 +445,18 @@ void QueryTableTest::testInvestment(void)
   acInterest = makeAccount("Interest",MyMoneyAccount::Income,moZero,QDate(2004,1,1),acIncome);
 
   // Transactions
-  //                         Date             Action                              Shares  Price   Stock     Asset       Income
-  InvTransactionHelper s1b1( QDate(2004,2,1), MyMoneySplit::ActionBuyShares,      1000.00, 100.00, acStock1, acChecking, QString() );
-  InvTransactionHelper s1b2( QDate(2004,3,1), MyMoneySplit::ActionBuyShares,      1000.00, 110.00, acStock1, acChecking, QString() );
-  InvTransactionHelper s1s1( QDate(2004,4,1), MyMoneySplit::ActionBuyShares,      -200.00, 120.00, acStock1, acChecking, QString() );
-  InvTransactionHelper s1s2( QDate(2004,5,1), MyMoneySplit::ActionBuyShares,      -200.00, 100.00, acStock1, acChecking, QString() );
-  InvTransactionHelper s1r1( QDate(2004,6,1), MyMoneySplit::ActionReinvestDividend, 50.00, 100.00, acStock1, QString(), acDividends );
-  InvTransactionHelper s1r2( QDate(2004,7,1), MyMoneySplit::ActionReinvestDividend, 50.00,  80.00, acStock1, QString(), acDividends );
-  InvTransactionHelper s1c1( QDate(2004,8,1), MyMoneySplit::ActionDividend,         10.00, 100.00, acStock1, acChecking, acDividends );
-  InvTransactionHelper s1c2( QDate(2004,9,1), MyMoneySplit::ActionDividend,         10.00, 120.00, acStock1, acChecking, acDividends );
-  InvTransactionHelper s1y1( QDate(2004,9,15), MyMoneySplit::ActionYield,           10.00, 110.00, acStock1, acChecking, acInterest );
+  //                         Date             Action                                               Shares                Price   Stock     Asset       Income
+  InvTransactionHelper s1b1( QDate(2004,2,1), MyMoneySplit::ActionBuyShares,        MyMoneyMoney(1000.00), MyMoneyMoney(100.00), acStock1, acChecking, QString() );
+  InvTransactionHelper s1b2( QDate(2004,3,1), MyMoneySplit::ActionBuyShares,        MyMoneyMoney(1000.00), MyMoneyMoney(110.00), acStock1, acChecking, QString() );
+  InvTransactionHelper s1s1( QDate(2004,4,1), MyMoneySplit::ActionBuyShares,        MyMoneyMoney(-200.00), MyMoneyMoney(120.00), acStock1, acChecking, QString() );
+  InvTransactionHelper s1s2( QDate(2004,5,1), MyMoneySplit::ActionBuyShares,        MyMoneyMoney(-200.00), MyMoneyMoney(100.00), acStock1, acChecking, QString() );
+  InvTransactionHelper s1r1( QDate(2004,6,1), MyMoneySplit::ActionReinvestDividend, MyMoneyMoney(  50.00), MyMoneyMoney(100.00), acStock1, QString(), acDividends );
+  InvTransactionHelper s1r2( QDate(2004,7,1), MyMoneySplit::ActionReinvestDividend, MyMoneyMoney(  50.00), MyMoneyMoney( 80.00), acStock1, QString(), acDividends );
+  InvTransactionHelper s1c1( QDate(2004,8,1), MyMoneySplit::ActionDividend,         MyMoneyMoney(  10.00), MyMoneyMoney(100.00), acStock1, acChecking, acDividends );
+  InvTransactionHelper s1c2( QDate(2004,9,1), MyMoneySplit::ActionDividend,         MyMoneyMoney(  10.00), MyMoneyMoney(120.00), acStock1, acChecking, acDividends );
+  InvTransactionHelper s1y1( QDate(2004,9,15), MyMoneySplit::ActionYield,           MyMoneyMoney(  10.00), MyMoneyMoney(110.00), acStock1, acChecking, acInterest );
 
-  makeEquityPrice( eqStock1, QDate(2004,10,1), 100.00 );
+  makeEquityPrice( eqStock1, QDate(2004,10,1), MyMoneyMoney(100.00) );
 
   //
   // Investment Transactions Report

@@ -123,7 +123,7 @@ public:
 class GroupMarker : public RegisterItem
 {
 public:
-  GroupMarker(Register* parent, const QString& txt = QString());
+  explicit GroupMarker(Register* parent, const QString& txt = QString());
   ~GroupMarker();
   void setText(const QString& txt) { m_txt = txt; }
   const QString& text(void) const { return m_txt; }

@@ -1776,7 +1776,7 @@ int StdTransactionEditor::slotEditSplits(void)
                                                           m_account,
                                                           isValidAmount,
                                                           dir == KMyMoneyRegister::Deposit,
-                                                          0,
+                                                          MyMoneyMoney(0),
                                                           m_priceInfo,
                                                           m_regForm);
       connect(dlg, SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));

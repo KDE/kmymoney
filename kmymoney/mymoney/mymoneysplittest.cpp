@@ -47,8 +47,8 @@ void MyMoneySplitTest::testSetFunctions() {
 	m->setMemo("Memo");
 	m->setReconcileDate(QDate(1,2,3));
 	m->setReconcileFlag(MyMoneySplit::Cleared);
-	m->setShares(1234);
-	m->setValue(3456);
+	m->setShares(MyMoneyMoney(1234));
+	m->setValue(MyMoneyMoney(3456));
 	m->setId("MyID");
 	m->setPayeeId("Payee");
 	m->setAction("Action");
@@ -120,7 +120,7 @@ void MyMoneySplitTest::testInequality() {
 
 	MyMoneySplit n(*m);
 
-	n.setShares(3456);
+	n.setShares(MyMoneyMoney(3456));
 	CPPUNIT_ASSERT(!(n == *m));
 
 	n = *m;
@@ -156,11 +156,11 @@ void MyMoneySplitTest::testInequality() {
 	CPPUNIT_ASSERT(!(n == *m));
 
 	n = *m;
-	n.setShares(4567);
+	n.setShares(MyMoneyMoney(4567));
 	CPPUNIT_ASSERT(!(n == *m));
 
 	n = *m;
-	n.setValue(9876);
+	n.setValue(MyMoneyMoney(9876));
 	CPPUNIT_ASSERT(!(n == *m));
 
 	n = *m;
@@ -182,8 +182,8 @@ void MyMoneySplitTest::testAmortization() {
 }
 
 void MyMoneySplitTest::testValue() {
-	m->setValue(1);
-	m->setShares(2);
+	m->setValue(MyMoneyMoney(1));
+	m->setShares(MyMoneyMoney(2));
 	CPPUNIT_ASSERT(m->value("EUR", "EUR") == MyMoneyMoney(1));
 	CPPUNIT_ASSERT(m->value("EUR", "USD") == MyMoneyMoney(2));
 }
@@ -191,10 +191,10 @@ void MyMoneySplitTest::testValue() {
 void MyMoneySplitTest::testSetValue() {
 	CPPUNIT_ASSERT(m->value().isZero());
 	CPPUNIT_ASSERT(m->shares().isZero());
-	m->setValue(1, "EUR", "EUR");
+	m->setValue(MyMoneyMoney(1), "EUR", "EUR");
 	CPPUNIT_ASSERT(m->value() == MyMoneyMoney(1));
 	CPPUNIT_ASSERT(m->shares().isZero());
-	m->setValue(3, "EUR", "USD");
+	m->setValue(MyMoneyMoney(3), "EUR", "USD");
 	CPPUNIT_ASSERT(m->value() == MyMoneyMoney(1));
 	CPPUNIT_ASSERT(m->shares() == MyMoneyMoney(3));
 }
@@ -225,9 +225,9 @@ void MyMoneySplitTest::testIsAutoCalc() {
 	CPPUNIT_ASSERT(m->isAutoCalc() == true);
 	m->setShares(MyMoneyMoney::autoCalc);
 	CPPUNIT_ASSERT(m->isAutoCalc() == true);
-	m->setValue(0);
+	m->setValue(MyMoneyMoney(0));
 	CPPUNIT_ASSERT(m->isAutoCalc() == true);
-	m->setShares(1);
+	m->setShares(MyMoneyMoney(1));
 	CPPUNIT_ASSERT(m->isAutoCalc() == false);
 }
 

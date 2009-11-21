@@ -61,7 +61,7 @@ class MousePressFilter : public QObject
 {
   Q_OBJECT
 public:
-  MousePressFilter(QWidget* parent = 0, const char* name = 0);
+  explicit MousePressFilter(QWidget* parent = 0, const char* name = 0);
 
   /**
     * Add widget @p w to the list of possible parent objects. See eventFilter() how
@@ -125,7 +125,7 @@ class KGlobalLedgerView : public KMyMoneyViewBase
 {
   Q_OBJECT
 public:
-  KGlobalLedgerView(QWidget *parent=0, const char *name=0);
+  explicit KGlobalLedgerView(QWidget *parent=0, const char *name=0);
   ~KGlobalLedgerView();
 
   /**

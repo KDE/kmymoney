@@ -113,8 +113,8 @@ void MyMoneyTransactionTest::testAddSplits() {
 	MyMoneySplit split1, split2;
 	split1.setAccountId("A000001");
 	split2.setAccountId("A000002");
-	split1.setValue(100);
-	split2.setValue(200);
+	split1.setValue(MyMoneyMoney(100));
+	split2.setValue(MyMoneyMoney(200));
 
 	try {
 		CPPUNIT_ASSERT(m->accountReferenced("A000001") == false);
@@ -268,23 +268,23 @@ void MyMoneyTransactionTest::testSplitSum() {
 	MyMoneySplit s1, s2;
 
 	s1 = m->splits()[0];
-	s1.setValue(0);
+	s1.setValue(MyMoneyMoney(0));
 	s2 = m->splits()[1];
-	s2.setValue(0);
+	s2.setValue(MyMoneyMoney(0));
 
 	m->modifySplit(s1);
 	m->modifySplit(s2);
 	CPPUNIT_ASSERT(m->splitSum().isZero());
 
-	s1.setValue(1234);
+	s1.setValue(MyMoneyMoney(1234));
 	m->modifySplit(s1);
 	CPPUNIT_ASSERT(m->splitSum() == MyMoneyMoney(1234));
 
-	s2.setValue(-1234);
+	s2.setValue(MyMoneyMoney(-1234));
 	m->modifySplit(s2);
 	CPPUNIT_ASSERT(m->splitSum().isZero());
 
-	s1.setValue(5678);
+	s1.setValue(MyMoneyMoney(5678));
 	m->modifySplit(s1);
 	CPPUNIT_ASSERT(m->splitSum() == MyMoneyMoney(4444));
 }
@@ -318,8 +318,8 @@ void MyMoneyTransactionTest::testAddDuplicateAccount() {
 	MyMoneySplit split1, split2;
 	split1.setAccountId("A000001");
 	split2.setAccountId("A000002");
-	split1.setValue(100);
-	split2.setValue(200);
+	split1.setValue(MyMoneyMoney(100));
+	split2.setValue(MyMoneyMoney(200));
 
 	try {
 		CPPUNIT_ASSERT(m->accountReferenced("A000001") == true);

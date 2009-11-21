@@ -727,11 +727,11 @@ void MyMoneyFileTest::testAddTransaction () {
         MyMoneySplit split2;
 
         split1.setAccountId("A000001");
-        split1.setShares(-1000);
-        split1.setValue(-1000);
+        split1.setShares(MyMoneyMoney(-1000));
+        split1.setValue(MyMoneyMoney(-1000));
         split2.setAccountId("A000003");
-        split2.setValue(1000);
-        split2.setShares(1000);
+        split2.setValue(MyMoneyMoney(1000));
+        split2.setShares(MyMoneyMoney(1000));
         try {
                 t.addSplit(split1);
                 t.addSplit(split2);
@@ -997,11 +997,11 @@ void MyMoneyFileTest::testBalanceTotal() {
         MyMoneyFileTransaction ft;
         try {
                 split1.setAccountId("A000002");
-                split1.setShares(-1000);
-                split1.setValue(-1000);
+                split1.setShares(MyMoneyMoney(-1000));
+                split1.setValue(MyMoneyMoney(-1000));
                 split2.setAccountId("A000004");
-                split2.setValue(1000);
-                split2.setShares(1000);
+                split2.setValue(MyMoneyMoney(1000));
+                split2.setShares(MyMoneyMoney(1000));
                 t.addSplit(split1);
                 t.addSplit(split2);
                 m->addTransaction(t);
@@ -1144,11 +1144,11 @@ void MyMoneyFileTest::testAddTransactionStd() {
         MyMoneySplit split2;
 
         split1.setAccountId("A000001");
-        split1.setShares(-1000);
-        split1.setValue(-1000);
+        split1.setShares(MyMoneyMoney(-1000));
+        split1.setValue(MyMoneyMoney(-1000));
         split2.setAccountId(STD_ACC_EXPENSE);
-        split2.setValue(1000);
-        split2.setShares(1000);
+        split2.setValue(MyMoneyMoney(1000));
+        split2.setShares(MyMoneyMoney(1000));
         try {
                 t.addSplit(split1);
                 t.addSplit(split2);

@@ -94,7 +94,6 @@ TransactionHelper::TransactionHelper( const QDate& _date, const QString& _action
   // both the account and category can have their own currency (athough the category having
   // a foreign currency is not yet supported by the program, the reports will still allow it,
   // so it must be tested.)
-
     MyMoneyFile* file = MyMoneyFile::instance();
     bool haspayee = ! _payee.isEmpty();
     MyMoneyPayee payeeTest = file->payeeByName(_payee);
@@ -185,8 +184,8 @@ void InvTransactionHelper::init( const QDate& _date, const QString& _action, MyM
     // mark this transaction as a cash dividend and note which stock account
     // it belongs to.
     MyMoneySplit s2;
-    s2.setValue(0);
-    s2.setShares(0);
+    s2.setValue(MyMoneyMoney(0));
+    s2.setShares(MyMoneyMoney(0));
     s2.setAction(_action);
     s2.setAccountId(_stockaccountid);
     addSplit(s2);

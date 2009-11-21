@@ -76,14 +76,14 @@ void PivotTableTest::setUp ()
   acIncome = (MyMoneyFile::instance()->income().id());
   acChecking = makeAccount(QString("Checking Account"),MyMoneyAccount::Checkings,moCheckingOpen,QDate(2004,5,15),acAsset);
   acCredit = makeAccount(QString("Credit Card"),MyMoneyAccount::CreditCard,moCreditOpen,QDate(2004,7,15),acLiability);
-  acSolo = makeAccount(QString("Solo"),MyMoneyAccount::Expense,0,QDate(2004,1,11),acExpense);
-  acParent = makeAccount(QString("Parent"),MyMoneyAccount::Expense,0,QDate(2004,1,11),acExpense);
-  acChild = makeAccount(QString("Child"),MyMoneyAccount::Expense,0,QDate(2004,2,11),acParent);
-  acForeign = makeAccount(QString("Foreign"),MyMoneyAccount::Expense,0,QDate(2004,1,11),acExpense);
+  acSolo = makeAccount(QString("Solo"),MyMoneyAccount::Expense,MyMoneyMoney(0),QDate(2004,1,11),acExpense);
+  acParent = makeAccount(QString("Parent"),MyMoneyAccount::Expense,MyMoneyMoney(0),QDate(2004,1,11),acExpense);
+  acChild = makeAccount(QString("Child"),MyMoneyAccount::Expense,MyMoneyMoney(0),QDate(2004,2,11),acParent);
+  acForeign = makeAccount(QString("Foreign"),MyMoneyAccount::Expense,MyMoneyMoney(0),QDate(2004,1,11),acExpense);
 
-  acSecondChild = makeAccount(QString("Second Child"),MyMoneyAccount::Expense,0,QDate(2004,2,11),acParent);
-  acGrandChild1 = makeAccount(QString("Grand Child 1"),MyMoneyAccount::Expense,0,QDate(2004,2,11),acChild);
-  acGrandChild2 = makeAccount(QString("Grand Child 2"),MyMoneyAccount::Expense,0,QDate(2004,2,11),acChild);
+  acSecondChild = makeAccount(QString("Second Child"),MyMoneyAccount::Expense,MyMoneyMoney(0),QDate(2004,2,11),acParent);
+  acGrandChild1 = makeAccount(QString("Grand Child 1"),MyMoneyAccount::Expense,MyMoneyMoney(0),QDate(2004,2,11),acChild);
+  acGrandChild2 = makeAccount(QString("Grand Child 2"),MyMoneyAccount::Expense,MyMoneyMoney(0),QDate(2004,2,11),acChild);
 
   MyMoneyInstitution i("Bank of the World","","","","","","");
   file->addInstitution(i);
@@ -395,8 +395,8 @@ void PivotTableTest::testMultipleCurrencies()
 
   QString acCanChecking = makeAccount(QString("Canadian Checking"),MyMoneyAccount::Checkings,moCanOpening,QDate(2003,11,15),acAsset,"CAD");
   QString acJpyChecking = makeAccount(QString("Japanese Checking"),MyMoneyAccount::Checkings,moJpyOpening,QDate(2003,11,15),acAsset,"JPY");
-  QString acCanCash = makeAccount(QString("Canadian"),MyMoneyAccount::Expense,0,QDate(2004,2,11),acForeign,"CAD");
-  QString acJpyCash = makeAccount(QString("Japanese"),MyMoneyAccount::Expense,0,QDate(2004,2,11),acForeign,"JPY");
+  QString acCanCash = makeAccount(QString("Canadian"),MyMoneyAccount::Expense,MyMoneyMoney(0),QDate(2004,2,11),acForeign,"CAD");
+  QString acJpyCash = makeAccount(QString("Japanese"),MyMoneyAccount::Expense,MyMoneyMoney(0),QDate(2004,2,11),acForeign,"JPY");
 
   makePrice("CAD",QDate(2004,1,1),MyMoneyMoney(moCanPrice));
   makePrice("JPY",QDate(2004,1,1),MyMoneyMoney(moJpyPrice));
@@ -875,17 +875,17 @@ void PivotTableTest::testInvestment(void)
   acDividends = makeAccount("Dividends",MyMoneyAccount::Income,moZero,QDate(2004,1,1),acIncome);
 
   // Transactions
-  //                         Date             Action                              Shares  Price   Stock     Asset       Income
-  InvTransactionHelper s1b1( QDate(2004,2,1), MyMoneySplit::ActionBuyShares,      1000.00, 100.00, acStock1, acChecking, QString() );
-  InvTransactionHelper s1b2( QDate(2004,3,1), MyMoneySplit::ActionBuyShares,      1000.00, 110.00, acStock1, acChecking, QString() );
-  InvTransactionHelper s1s1( QDate(2004,4,1), MyMoneySplit::ActionBuyShares,      -200.00, 120.00, acStock1, acChecking, QString() );
-  InvTransactionHelper s1s2( QDate(2004,5,1), MyMoneySplit::ActionBuyShares,      -200.00, 100.00, acStock1, acChecking, QString() );
-  InvTransactionHelper s1r1( QDate(2004,6,1), MyMoneySplit::ActionReinvestDividend, 50.00, 100.00, acStock1, QString(), acDividends );
-  InvTransactionHelper s1r2( QDate(2004,7,1), MyMoneySplit::ActionReinvestDividend, 50.00,  80.00, acStock1, QString(), acDividends );
-  InvTransactionHelper s1c1( QDate(2004,8,1), MyMoneySplit::ActionDividend,         10.00, 100.00, acStock1, acChecking, acDividends );
-  InvTransactionHelper s1c2( QDate(2004,9,1), MyMoneySplit::ActionDividend,         10.00, 120.00, acStock1, acChecking, acDividends );
+  //                         Date             Action                                              Shares                 Price   Stock     Asset       Income
+  InvTransactionHelper s1b1( QDate(2004,2,1), MyMoneySplit::ActionBuyShares,        MyMoneyMoney(1000.00), MyMoneyMoney(100.00), acStock1, acChecking, QString() );
+  InvTransactionHelper s1b2( QDate(2004,3,1), MyMoneySplit::ActionBuyShares,        MyMoneyMoney(1000.00), MyMoneyMoney(110.00), acStock1, acChecking, QString() );
+  InvTransactionHelper s1s1( QDate(2004,4,1), MyMoneySplit::ActionBuyShares,        MyMoneyMoney(-200.00), MyMoneyMoney(120.00), acStock1, acChecking, QString() );
+  InvTransactionHelper s1s2( QDate(2004,5,1), MyMoneySplit::ActionBuyShares,        MyMoneyMoney(-200.00), MyMoneyMoney(100.00), acStock1, acChecking, QString() );
+  InvTransactionHelper s1r1( QDate(2004,6,1), MyMoneySplit::ActionReinvestDividend, MyMoneyMoney(  50.00), MyMoneyMoney(100.00), acStock1, QString(), acDividends );
+  InvTransactionHelper s1r2( QDate(2004,7,1), MyMoneySplit::ActionReinvestDividend, MyMoneyMoney(  50.00), MyMoneyMoney( 80.00), acStock1, QString(), acDividends );
+  InvTransactionHelper s1c1( QDate(2004,8,1), MyMoneySplit::ActionDividend,         MyMoneyMoney(  10.00), MyMoneyMoney(100.00), acStock1, acChecking, acDividends );
+  InvTransactionHelper s1c2( QDate(2004,9,1), MyMoneySplit::ActionDividend,         MyMoneyMoney(  10.00), MyMoneyMoney(120.00), acStock1, acChecking, acDividends );
 
-  makeEquityPrice( eqStock1, QDate(2004,10,1), 100.00 );
+  makeEquityPrice( eqStock1, QDate(2004,10,1), MyMoneyMoney(100.00) );
 
   //
   // Net Worth Report (with investments)
@@ -946,7 +946,7 @@ void PivotTableTest::testBudget(void)
   // 1. Budget on A, transactions on A
   {
     BudgetHelper budget;
-    budget += BudgetEntryHelper( QDate(2006,1,1), acSolo, false, 100.0 );
+    budget += BudgetEntryHelper( QDate(2006,1,1), acSolo, false, MyMoneyMoney(100.0) );
 
     MyMoneyReport report(MyMoneyReport::eBudgetActual,
                          MyMoneyReport::eMonths,
@@ -959,7 +959,7 @@ void PivotTableTest::testBudget(void)
   // 2. Budget on B, not applying to sub accounts, transactions on B and B:1
   {
     BudgetHelper budget;
-    budget += BudgetEntryHelper( QDate(2006,1,1), acParent, false, 100.0 );
+    budget += BudgetEntryHelper( QDate(2006,1,1), acParent, false, MyMoneyMoney(100.0) );
     MyMoneyReport report(MyMoneyReport::eBudgetActual,
                          MyMoneyReport::eMonths,
                          MyMoneyTransactionFilter::yearToDate,
@@ -975,7 +975,7 @@ void PivotTableTest::testBudget(void)
   // 3. Budget on C, applying to sub accounts, transactions on C and C:1 and C:1:a
   {
     BudgetHelper budget;
-    budget += BudgetEntryHelper( QDate(2006,1,1), acParent, true, 100.0 );
+    budget += BudgetEntryHelper( QDate(2006,1,1), acParent, true, MyMoneyMoney(100.0) );
     MyMoneyReport report(MyMoneyReport::eBudgetActual,
                          MyMoneyReport::eMonths,
                          MyMoneyTransactionFilter::yearToDate,
@@ -990,9 +990,9 @@ void PivotTableTest::testBudget(void)
   // 4. Budget on D, not applying to sub accounts, budget on D:1 not applying, budget on D:2 applying.  Transactions on D, D:1, D:2, D:2:a, D:2:b
   {
     BudgetHelper budget;
-    budget += BudgetEntryHelper( QDate(2006,1,1), acParent, false, 100.0 );
-    budget += BudgetEntryHelper( QDate(2006,1,1), acChild, false, 100.0 );
-    budget += BudgetEntryHelper( QDate(2006,1,1), acSecondChild, true, 100.0 );
+    budget += BudgetEntryHelper( QDate(2006,1,1), acParent, false, MyMoneyMoney(100.0) );
+    budget += BudgetEntryHelper( QDate(2006,1,1), acChild, false, MyMoneyMoney(100.0) );
+    budget += BudgetEntryHelper( QDate(2006,1,1), acSecondChild, true, MyMoneyMoney(100.0) );
     MyMoneyReport report(MyMoneyReport::eBudgetActual,
                          MyMoneyReport::eMonths,
                          MyMoneyTransactionFilter::yearToDate,
@@ -1009,7 +1009,7 @@ void PivotTableTest::testBudget(void)
   // 5. Budget on E, no transactions on E
   {
     BudgetHelper budget;
-    budget += BudgetEntryHelper( QDate(2006,1,1), acSolo, false, 100.0 );
+    budget += BudgetEntryHelper( QDate(2006,1,1), acSolo, false, MyMoneyMoney(100.0) );
     MyMoneyReport report(MyMoneyReport::eBudgetActual,
                          MyMoneyReport::eMonths,
                          MyMoneyTransactionFilter::yearToDate,

@@ -61,7 +61,7 @@ public:
     Payment = 2             ///< show payment accounts
   };
 
-  KHomeView(QWidget *parent=0, const char *name=0);
+  explicit KHomeView(QWidget *parent=0, const char *name=0);
   ~KHomeView();
 
 protected:

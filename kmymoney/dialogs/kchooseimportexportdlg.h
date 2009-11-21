@@ -47,7 +47,7 @@ protected slots:
   void slotTypeActivated(const QString& text);
 
 public:
-	KChooseImportExportDlg(int type, QWidget *parent=0);
+	explicit KChooseImportExportDlg(int type, QWidget *parent=0);
 	~KChooseImportExportDlg();
 	QString importExportType(void);
 };

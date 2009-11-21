@@ -31,9 +31,9 @@
 class KBankingSettings: public QBCfgTabSettings {
 private:
 public:
-  KBankingSettings(KBanking *ab,
-                   QWidget* parent = 0,
-                   const char* name = 0, Qt::WFlags fl = 0);
+  explicit KBankingSettings(KBanking *ab,
+                            QWidget* parent = 0,
+                            const char* name = 0, Qt::WFlags fl = 0);
   ~KBankingSettings();
 
   int init();

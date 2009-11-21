@@ -52,7 +52,7 @@ public:
   /**
     * Standard QWidget constructor.
     **/
-  KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget *parent=0);
+  explicit KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget *parent=0);
 
   /**
     * Standard destructor.

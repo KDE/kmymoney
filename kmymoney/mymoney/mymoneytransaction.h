@@ -59,7 +59,7 @@ public:
     * @param node reference to QDomNode
     * @param forceId see MyMoneyObject(const QDomElement&, const bool)
     */
-  MyMoneyTransaction(const QDomElement& node, const bool forceId = true);
+  explicit MyMoneyTransaction(const QDomElement& node, const bool forceId = true);
   ~MyMoneyTransaction();
 
 public:

@@ -181,7 +181,7 @@ KNewLoanWizard::KNewLoanWizard(QWidget *parent) :
   // setup a phony transaction for additional fee processing
   m_account = MyMoneyAccount("Phony-ID", MyMoneyAccount());
   m_split.setAccountId(m_account.id());
-  m_split.setValue(0);
+  m_split.setValue(MyMoneyMoney(0));
   m_transaction.addSplit(m_split);
 }
 

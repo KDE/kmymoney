@@ -572,15 +572,15 @@ void MyMoneyDatabaseMgrTest::testAddTransactions() {
   try {
     // I made some money, great
     s.setAccountId("A000006");  // Checkings
-    s.setShares(100000);
-    s.setValue(100000);
+    s.setShares(MyMoneyMoney(100000));
+    s.setValue(MyMoneyMoney(100000));
     CPPUNIT_ASSERT(s.id().isEmpty());
     t1.addSplit(s);
 
     s.setId(QString());  // enable re-usage of split variable
     s.setAccountId("A000005");  // Salary
-    s.setShares(-100000);
-    s.setValue(-100000);
+    s.setShares(MyMoneyMoney(-100000));
+    s.setValue(MyMoneyMoney(-100000));
     CPPUNIT_ASSERT(s.id().isEmpty());
     t1.addSplit(s);
 
@@ -603,29 +603,29 @@ void MyMoneyDatabaseMgrTest::testAddTransactions() {
     // I spent some money, not so great
     s.setId(QString());  // enable re-usage of split variable
     s.setAccountId("A000004");  // Grosseries
-    s.setShares(10000);
-    s.setValue(10000);
+    s.setShares(MyMoneyMoney(10000));
+    s.setValue(MyMoneyMoney(10000));
     CPPUNIT_ASSERT(s.id().isEmpty());
     t2.addSplit(s);
 
     s.setId(QString());  // enable re-usage of split variable
     s.setAccountId("A000002");  // 16% sales tax
-    s.setShares(1200);
-    s.setValue(1200);
+    s.setShares(MyMoneyMoney(1200));
+    s.setValue(MyMoneyMoney(1200));
     CPPUNIT_ASSERT(s.id().isEmpty());
     t2.addSplit(s);
 
     s.setId(QString());  // enable re-usage of split variable
     s.setAccountId("A000003");  // 7% sales tax
-    s.setShares(400);
-    s.setValue(400);
+    s.setShares(MyMoneyMoney(400));
+    s.setValue(MyMoneyMoney(400));
     CPPUNIT_ASSERT(s.id().isEmpty());
     t2.addSplit(s);
 
     s.setId(QString());  // enable re-usage of split variable
     s.setAccountId("A000006");  // Checkings account
-    s.setShares(-11600);
-    s.setValue(-11600);
+    s.setShares(MyMoneyMoney(-11600));
+    s.setValue(MyMoneyMoney(-11600));
     CPPUNIT_ASSERT(s.id().isEmpty());
     t2.addSplit(s);
 
@@ -815,15 +815,15 @@ void MyMoneyDatabaseMgrTest::testBalance() {
     MyMoneySplit s;
 
     s.setAccountId("A000003");
-    s.setShares(-400);
-    s.setValue(-400);
+    s.setShares(MyMoneyMoney(-400));
+    s.setValue(MyMoneyMoney(-400));
     CPPUNIT_ASSERT(s.id().isEmpty());
     t1.addSplit(s);
 
     s.setId(QString());  // enable re-usage of split variable
     s.setAccountId("A000002");
-    s.setShares(400);
-    s.setValue(400);
+    s.setShares(MyMoneyMoney(400));
+    s.setValue(MyMoneyMoney(400));
     CPPUNIT_ASSERT(s.id().isEmpty());
     t1.addSplit(s);
 
@@ -868,14 +868,14 @@ void MyMoneyDatabaseMgrTest::testModifyTransaction() {
   CPPUNIT_ASSERT(t.splitCount() == 4);
 
   s = t.splits()[0];
-  s.setShares(11000);
-  s.setValue(11000);
+  s.setShares(MyMoneyMoney(11000));
+  s.setValue(MyMoneyMoney(11000));
   t.modifySplit(s);
 
   CPPUNIT_ASSERT(t.splitCount() == 4);
   s = t.splits()[3];
-  s.setShares(-12600);
-  s.setValue(-12600);
+  s.setShares(MyMoneyMoney(-12600));
+  s.setValue(MyMoneyMoney(-12600));
   t.modifySplit(s);
 
   try {

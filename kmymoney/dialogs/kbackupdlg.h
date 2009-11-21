@@ -17,8 +17,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KBACKUPDIALOG_H
-#define KBACKUPDIALOG_H
+#ifndef KBACKUPDLG_H
+#define KBACKUPDLG_H
 
 #include <qwidget.h>
 #include "ui_kbackupdlgdecl.h"
@@ -50,4 +50,4 @@ public:
 	~KBackupDlg();
 };
 
-#endif
+#endif // KBACKUPDLG_H

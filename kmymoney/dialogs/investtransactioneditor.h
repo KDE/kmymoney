@@ -15,8 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef INVESTMENTTRANSACTIONEDITOR_H
-#define INVESTMENTTRANSACTIONEDITOR_H
+#ifndef INVESTTRANSACTIONEDITOR_H
+#define INVESTTRANSACTIONEDITOR_H
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -172,4 +172,4 @@ private:
   Private* const d;
 };
 
-#endif
+#endif // INVESTTRANSACTIONEDITOR_H

@@ -1211,8 +1211,8 @@ LoanPaymentPage::LoanPaymentPage(Wizard* wizard) :
   d->phonyAccount = MyMoneyAccount(QString("Phony-ID"), MyMoneyAccount());
 
   d->phonySplit.setAccountId(d->phonyAccount.id());
-  d->phonySplit.setValue(0);
-  d->phonySplit.setShares(0);
+  d->phonySplit.setValue(MyMoneyMoney(0));
+  d->phonySplit.setShares(MyMoneyMoney(0));
 
   d->additionalFeesTransaction.addSplit(d->phonySplit);
 

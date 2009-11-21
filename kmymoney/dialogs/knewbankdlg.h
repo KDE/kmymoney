@@ -50,7 +50,7 @@ class KNewBankDlg : public KNewBankDlgDecl
   Q_OBJECT
 
 public:
-  KNewBankDlg(MyMoneyInstitution& institution, QWidget *parent = 0);
+  explicit KNewBankDlg(MyMoneyInstitution& institution, QWidget *parent = 0);
   ~KNewBankDlg();
   const MyMoneyInstitution& institution(void);
 

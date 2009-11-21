@@ -42,7 +42,6 @@
 #include <q3whatsthis.h>
 #include <QTabWidget>
 #include <q3textedit.h>
-#include <QLayout>
 #include <QApplication>
 #include <QList>
 

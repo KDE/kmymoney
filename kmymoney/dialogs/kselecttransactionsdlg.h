@@ -51,7 +51,7 @@ class KSelectTransactionsDlg: public KSelectTransactionsDlgDecl
 {
   Q_OBJECT
 public:
-  KSelectTransactionsDlg(const MyMoneyAccount& account, QWidget* parent = 0);
+  explicit KSelectTransactionsDlg(const MyMoneyAccount& account, QWidget* parent = 0);
 
   /**
    * Adds the transaction @a t to the dialog

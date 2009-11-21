@@ -94,7 +94,7 @@ public:
     * table->setCellWidget(category->parentWidget());
     * @endcode
     */
-  KMyMoneyCategory(QWidget* parent = 0, bool splitButton = false);
+  explicit KMyMoneyCategory(QWidget* parent = 0, bool splitButton = false);
 
   virtual ~KMyMoneyCategory();
 
