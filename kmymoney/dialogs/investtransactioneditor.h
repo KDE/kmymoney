@@ -56,9 +56,13 @@ public:
     * @retval false if not enough information is present to enter the
     * transaction into the engine
     *
+    * @param reason will be filled with a string about the reason why the
+    *               completeness is not reached.  Empty if the return value
+    *               is @c true.
+    *
     * @sa transactionDataSufficient()
     */
-  virtual bool isComplete(void) const;
+  virtual bool isComplete(QString& reason) const;
 
   virtual QWidget* firstWidget(void) const;
 

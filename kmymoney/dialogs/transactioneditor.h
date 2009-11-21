@@ -106,9 +106,13 @@ public:
     * @retval false if not enough information is present to enter the
     * transaction into the engine
     *
+    * @param reason will be filled with a string about the reason why the
+    *               completeness is not reached.  Empty if the return value
+    *               is @c true.
+    *
     * @sa transactionDataSufficient()
     */
-  virtual bool isComplete(void) const = 0;
+  virtual bool isComplete(QString& reason) const = 0;
 
   /**
     * This method returns information if the editor is started with multiple transactions
@@ -300,7 +304,7 @@ public:
   StdTransactionEditor(TransactionEditorContainer* regForm, KMyMoneyRegister::Transaction* item, const KMyMoneyRegister::SelectedTransactions& list, const QDate& lastPostDate);
   ~StdTransactionEditor();
 
-  bool isComplete(void) const;
+  bool isComplete(QString& reason) const;
   QWidget* firstWidget(void) const;
 
   /**

@@ -41,7 +41,7 @@ class Activity
 public:
   virtual MyMoneySplit::investTransactionTypeE type(void) const = 0;
   virtual void showWidgets(void) const = 0;
-  virtual bool isComplete(void) const = 0;
+  virtual bool isComplete(QString& reason) const = 0;
 
   /**
     * Create a transaction @p t based on the split @p s0 and the data contained
@@ -84,7 +84,7 @@ public:
   virtual ~Buy() {}
   virtual MyMoneySplit::investTransactionTypeE type(void) const { return MyMoneySplit::BuyShares; }
   virtual void showWidgets(void) const;
-  virtual bool isComplete(void) const;
+  virtual bool isComplete(QString& reason) const;
   virtual bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency);
 };
 
@@ -95,7 +95,7 @@ public:
   virtual ~Sell() {}
   virtual MyMoneySplit::investTransactionTypeE type(void) const { return MyMoneySplit::SellShares; }
   virtual void showWidgets(void) const;
-  virtual bool isComplete(void) const;
+  virtual bool isComplete(QString& reason) const;
   virtual bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency);
 };
 
@@ -106,7 +106,7 @@ public:
   virtual ~Div() {}
   virtual MyMoneySplit::investTransactionTypeE type(void) const { return MyMoneySplit::Dividend; }
   virtual void showWidgets(void) const;
-  virtual bool isComplete(void) const;
+  virtual bool isComplete(QString& reason) const;
   virtual bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency);
 };
 
@@ -117,7 +117,7 @@ public:
   virtual ~Reinvest() {}
   virtual MyMoneySplit::investTransactionTypeE type(void) const { return MyMoneySplit::ReinvestDividend; }
   virtual void showWidgets(void) const;
-  virtual bool isComplete(void) const;
+  virtual bool isComplete(QString& reason) const;
   virtual bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency);
 };
 
@@ -128,7 +128,7 @@ public:
   virtual ~Add() {}
   virtual MyMoneySplit::investTransactionTypeE type(void) const { return MyMoneySplit::AddShares; }
   virtual void showWidgets(void) const;
-  virtual bool isComplete(void) const;
+  virtual bool isComplete(QString& reason) const;
   virtual bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency);
 };
 
@@ -139,7 +139,7 @@ public:
   virtual ~Remove() {}
   virtual MyMoneySplit::investTransactionTypeE type(void) const { return MyMoneySplit::RemoveShares; }
   virtual void showWidgets(void) const;
-  virtual bool isComplete(void) const;
+  virtual bool isComplete(QString& reason) const;
   virtual bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency);
 };
 
@@ -150,7 +150,7 @@ public:
   virtual ~Split() {}
   virtual MyMoneySplit::investTransactionTypeE type(void) const { return MyMoneySplit::SplitShares; }
   virtual void showWidgets(void) const;
-  virtual bool isComplete(void) const;
+  virtual bool isComplete(QString& reason) const;
   virtual bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency);
 };
 

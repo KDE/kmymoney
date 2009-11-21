@@ -5748,7 +5748,9 @@ void KMyMoney2App::slotUpdateActions(void)
       action("transaction_assign_number")->setEnabled(d->m_transactionEditor->canAssignNumber());
       action("transaction_new")->setEnabled(false);
       action("transaction_delete")->setEnabled(false);
-      action("transaction_enter")->setEnabled(d->m_transactionEditor->isComplete());
+      QString reason;
+      action("transaction_enter")->setEnabled(d->m_transactionEditor->isComplete(reason));
+      action("transaction_enter")->setToolTip(reason);
       action("transaction_cancel")->setEnabled(true);
     }
   }
