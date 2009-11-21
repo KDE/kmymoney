@@ -446,6 +446,7 @@ void KMyMoney2App::initActions(void)
 
   KAction *saveas_database = actionCollection()->addAction("saveas_database");
   saveas_database->setText(i18n("Save as database..."));
+  saveas_database->setIcon(KIcon("svn-update"));
   connect(saveas_database, SIGNAL(triggered()), this, SLOT(slotSaveAsDatabase()));
 
   KAction *file_backup = actionCollection()->addAction("file_backup");
@@ -541,12 +542,12 @@ void KMyMoney2App::initActions(void)
 
   KAction *institution_edit = actionCollection()->addAction("institution_edit");
   institution_edit->setText(i18n("Edit institution..."));
-  institution_edit->setIcon(KIcon("document-properties"));
+  institution_edit->setIcon(KIcon("institution-edit"));
   connect(institution_edit, SIGNAL(triggered()), this, SLOT(slotInstitutionEdit()));
 
   KAction *institution_delete = actionCollection()->addAction("institution_delete");
   institution_delete->setText(i18n("Delete institution..."));
-  institution_delete->setIcon(KIcon("edit-delete"));
+  institution_delete->setIcon(KIcon("institution-delete"));
   connect(institution_delete, SIGNAL(triggered()), this, SLOT(slotInstitutionDelete()));
 
   // *****************
@@ -571,7 +572,7 @@ void KMyMoney2App::initActions(void)
 
   KAction *account_reconcile_finish = actionCollection()->addAction("account_reconcile_finish");
   account_reconcile_finish->setText(i18nc("Finish reconciliation", "Finish"));
-  account_reconcile_finish->setIcon(KIcon("media-skip-forward"));
+  account_reconcile_finish->setIcon(KIcon("reconcile-finish"));
   connect(account_reconcile_finish, SIGNAL(triggered()), this, SLOT(slotAccountReconcileFinish()));
 
   KAction *account_reconcile_postpone = actionCollection()->addAction("account_reconcile_postpone");
@@ -581,19 +582,22 @@ void KMyMoney2App::initActions(void)
 
   KAction *account_edit = actionCollection()->addAction("account_edit");
   account_edit->setText(i18n("Edit account..."));
-  account_edit->setIcon(KIcon("document-properties"));
+  account_edit->setIcon(KIcon("account-edit"));
   connect(account_edit, SIGNAL(triggered()), this, SLOT(slotAccountEdit()));
 
   KAction *account_delete = actionCollection()->addAction("account_delete");
   account_delete->setText(i18n("Delete account..."));
+  account_delete->setIcon(KIcon("account-delete"));
   connect(account_delete, SIGNAL(triggered()), this, SLOT(slotAccountDelete()));
 
   KAction *account_close = actionCollection()->addAction("account_close");
   account_close->setText(i18n("Close account"));
+  account_close->setIcon(KIcon("account-close"));
   connect(account_close, SIGNAL(triggered()), this, SLOT(slotAccountClose()));
 
   KAction *account_reopen = actionCollection()->addAction("account_reopen");
   account_reopen->setText(i18n("Reopen account"));
+  account_reopen->setIcon(KIcon("account-reopen"));
   connect(account_reopen, SIGNAL(triggered()), this, SLOT(slotAccountReopen()));
 
   KAction *account_transaction_report = actionCollection()->addAction("account_transaction_report");
@@ -622,11 +626,13 @@ void KMyMoney2App::initActions(void)
 
   KAction *account_online_update = actionCollection()->addAction("account_online_update");
   account_online_update->setText(i18n("Update account..."));
+  account_online_update->setIcon(KIcon("account-update-online"));
   connect(account_online_update, SIGNAL(triggered()), this, SLOT(slotAccountUpdateOnline()));
   menu->addAction(account_online_update);
 
   KAction *account_online_update_all = actionCollection()->addAction("account_online_update_all");
   account_online_update_all->setText(i18n("Update all accounts..."));
+  account_online_update_all->setIcon(KIcon("account-update-online-all"));
   connect(account_online_update_all, SIGNAL(triggered()), this, SLOT(slotAccountUpdateOnlineAll()));
   menu->addAction(account_online_update_all);
 
@@ -640,12 +646,12 @@ void KMyMoney2App::initActions(void)
 
   KAction *category_edit = actionCollection()->addAction("category_edit");
   category_edit->setText(i18n("Edit category..."));
-  category_edit->setIcon(KIcon("document-properties"));
+  category_edit->setIcon(KIcon("category-edit"));
   connect(category_edit, SIGNAL(triggered()), this, SLOT(slotAccountEdit()));
 
   KAction *category_delete = actionCollection()->addAction("category_delete");
   category_delete->setText(i18n("Delete category..."));
-  category_delete->setIcon(KIcon("edit-delete"));
+  category_delete->setIcon(KIcon("category-delete"));
   connect(category_delete, SIGNAL(triggered()), this, SLOT(slotAccountDelete()));
 
   // **************
@@ -670,6 +676,7 @@ void KMyMoney2App::initActions(void)
 
   KAction *tools_update_prices = actionCollection()->addAction("tools_update_prices");
   tools_update_prices->setText(i18n("Update Stock and Currency Prices..."));
+  tools_update_prices->setIcon(KIcon("investment-update-online-all"));
   connect(tools_update_prices, SIGNAL(triggered()), this, SLOT(slotEquityPriceUpdate()));
 
   KAction *tools_consistency_check = actionCollection()->addAction("tools_consistency_check");
@@ -812,21 +819,22 @@ void KMyMoney2App::initActions(void)
   //Investment
   KAction *investment_new = actionCollection()->addAction("investment_new");
   investment_new->setText(i18n("New investment..."));
-  investment_new->setIcon(KIcon("document-new"));
+  investment_new->setIcon(KIcon("investment-add"));
   connect(investment_new, SIGNAL(triggered()), this, SLOT(slotInvestmentNew()));
 
   KAction *investment_edit = actionCollection()->addAction("investment_edit");
   investment_edit->setText(i18n("Edit investment..."));
-  investment_edit->setIcon(KIcon("document-properties"));
+  investment_edit->setIcon(KIcon("investment-edit"));
   connect(investment_edit, SIGNAL(triggered()), this, SLOT(slotInvestmentEdit()));
 
   KAction *investment_delete = actionCollection()->addAction("investment_delete");
   investment_delete->setText(i18n("Delete investment..."));
-  investment_delete->setIcon(KIcon("edit-delete"));
+  investment_delete->setIcon(KIcon("investment-delete"));
   connect(investment_delete, SIGNAL(triggered()), this, SLOT(slotInvestmentDelete()));
 
   KAction *investment_online_price_update = actionCollection()->addAction("investment_online_price_update");
   investment_online_price_update->setText(i18n("Online price update..."));
+  investment_online_price_update->setIcon(KIcon("investment-update-online"));
   connect(investment_online_price_update, SIGNAL(triggered()), this, SLOT(slotOnlinePriceUpdate()));
 
   KAction *investment_manual_price_update = actionCollection()->addAction("investment_manual_price_update");
@@ -872,7 +880,7 @@ void KMyMoney2App::initActions(void)
 
   KAction *payee_rename = actionCollection()->addAction("payee_rename");
   payee_rename->setText(i18n("Rename payee"));
-  payee_rename->setIcon(KIcon("edit-rename"));
+  payee_rename->setIcon(KIcon("payee-rename"));
   connect(payee_rename, SIGNAL(triggered()), this, SIGNAL(payeeRename()));
 
   KAction *payee_delete = actionCollection()->addAction("payee_delete");
