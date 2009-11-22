@@ -42,6 +42,8 @@ using namespace KMyMoneyRegister;
 
 bool Activity::isComplete(QString& reason) const
 {
+  Q_UNUSED(reason)
+
   bool rc = false;
   KMyMoneySecurity* security = dynamic_cast<KMyMoneySecurity*>(haveWidget("security"));
   if(!security->currentText().isEmpty()) {
@@ -373,6 +375,8 @@ void Div::showWidgets(void) const
 
 bool Div::isComplete(QString& reason) const
 {
+  Q_UNUSED(reason)
+
   bool rc = haveAssetAccount();
   rc &= haveInterest(false);
   return rc;
