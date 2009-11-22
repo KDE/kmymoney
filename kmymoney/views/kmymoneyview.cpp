@@ -1080,7 +1080,7 @@ bool KMyMoneyView::saveFile(const KUrl& url, const QString& keyList)
   QString filename = url.path();
 
   if (!fileOpen()) {
-    KMessageBox::error(this, i18n("Tried to access a file when it's not open"));
+    KMessageBox::error(this, i18n("Tried to access a file when it has not been opened"));
     return false;
   }
 
@@ -1160,7 +1160,7 @@ bool KMyMoneyView::saveAsDatabase(const KUrl& url)
 {
   bool rc = false;
   if (!fileOpen()) {
-    KMessageBox::error(this, i18n("Tried to access a file when it's not open"));
+    KMessageBox::error(this, i18n("Tried to access a file when it has not been opened"));
     return (rc);
   }
   MyMoneyStorageSql *writer = new MyMoneyStorageSql(dynamic_cast<IMyMoneySerialize*> (MyMoneyFile::instance()->storage()), url);
