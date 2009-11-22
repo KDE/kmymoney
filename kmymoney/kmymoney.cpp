@@ -620,7 +620,9 @@ void KMyMoney2App::initActions(void)
   account_online_unmap->setIcon(KIcon("news-unsubscribe"));
   connect(account_online_unmap, SIGNAL(triggered()), this, SLOT(slotAccountUnmapOnline()));
 
-  KActionMenu* menu = new KActionMenu(KIcon("view-refresh"), i18nc("Update online accounts menu", "Update"), actionCollection());
+  KActionMenu* menu = new KActionMenu(KIcon("view-refresh"), i18nc("Update online accounts menu", "Update"), this);
+  actionCollection()->addAction("account_online_update_menu", menu);
+
   // activating the menu button is the same as selecting the current account
   connect( menu, SIGNAL( activated() ), this, SLOT(slotAccountUpdateOnline()));
 
