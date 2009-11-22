@@ -342,9 +342,9 @@ KMyMoneyUtils::transactionTypeE KMyMoneyUtils::transactionType(const MyMoneyTran
     return SplitTransaction;
   }
   QString ida, idb;
-  if (t.splits().size() < 1)
+  if (t.splits().size() > 0)
     ida = t.splits()[0].accountId();
-  if (t.splits().size() < 2)
+  if (t.splits().size() > 1)
     idb = t.splits()[1].accountId();
   if(ida.isEmpty() || idb.isEmpty())
     return Unknown;
