@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Configure the print check plugin
+Icon=document-print
+Type=Service
+ServiceTypes=KCModule
+Exec=kcmshell kmm_printcheck
+Categories=QT;KDE;kmymoney;
+Keywords=printcheck;kmymoney
+X-KDE-Library=printcheck
+X-KDE-ParentApp=Print check
+X-KDE-ParentComponents=Print check
+Comment=Permits the configuration of the print check plugin's options

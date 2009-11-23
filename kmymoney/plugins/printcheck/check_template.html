@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+@media screen {
+
+  table.check {
+    width:16cm;
+    height:7cm;
+    empty-cells:show
+  }
+
+  table.check td.owner {
+    font-size: 8pt;
+    text-align: center
+  }
+  
+  table.check td.institution {
+    font-size: 8pt;
+    text-align: center
+  }
+
+  table.check td.date {
+    font-size: 12pt;
+    text-align: center;
+  }
+
+  table.check td.amountnumeric {
+    font-size: 12pt;
+    text-align: right;
+    height: 2cm
+  }
+
+  table.check td.amountliteral {
+    font-size: 12pt;
+    text-align: left;
+    height: 2cm
+  }
+
+  table.check td.text {
+    font-size: 8pt;
+    text-align: center;
+    max-width: 2cm
+  }
+
+  table.check td.payee {
+    font-size: 12pt;
+    text-align: left;
+    min-width: 70%
+  }
+}
+
+@media print {
+  table.check {
+    width:16cm;
+    height:7cm;
+    empty-cells:show
+  }
+
+  table.check td.owner {
+    font-size: 8pt;
+    text-align: center
+  }
+  
+  table.check td.institution {
+    font-size: 8pt;
+    text-align: center
+  }
+
+  table.check td.date {
+    font-size: 12pt;
+    text-align: center;
+  }
+
+  table.check td.amountnumeric {
+    font-size: 12pt;
+    text-align: right;
+    height: 2cm
+  }
+
+  table.check td.amountliteral {
+    font-size: 12pt;
+    text-align: left;
+    height: 2cm
+  }
+
+  table.check td.text {
+    font-size: 8pt;
+    text-align: center;
+    max-width: 2cm
+  }
+
+  table.check td.payee {
+    font-size: 12pt;
+    text-align: left;
+    min-width: 70%
+  }
+}
+
+</style>
+</head><body>
+<table class="check">
+<tr>
+  <td class="text" rowspan="3"></td>
+  <td class="owner">$OWNER_NAME</td>
+  <td class="institution">$INSTITUTION_NAME</td>
+  <td class="text" rowspan="3"></td>
+  <td class="date" rowspan="3">$DATE</td>
+</tr>
+<tr>
+  <td class="owner">$OWNER_ADDRESS</td>
+  <td class="institution">$INSTITUTION_STREET</td>
+</tr>
+<tr>
+  <td class="owner">$OWNER_CITY $OWNER_STATE</td>
+  <td class="institution">$INSTITUTION_CITY</td>
+</tr>
+<tr>
+  <td class="space" colspan="4"></td>
+</tr>
+<tr>
+  <td class="text">Pay</td>
+  <td class="amountliteral" colspan="2">$AMMOUNT_STRING</td>
+  <td class="text"></td>
+  <td class="amountnumeric">$AMMOUNT_DECIMAL</td>
+</tr>
+<tr>
+  <td class="space" colspan="4"></td>
+</tr>
+<tr>
+  <td class="text" rowspan="3">To the order of</td>
+  <td class="payee" colspan="2">$PAYEE_NAME</td>
+  <td class="text" rowspan="3">Per</td>
+  <td class="text" rowspan="3">$MEMO</td>
+</tr>
+<tr>
+  <td class="payee" colspan="2">$PAYEE_ADDRESS</td>
+</tr>
+<tr>
+  <td class="payee" colspan="2">$PAYEE_CITY $PAYEE_STATE</td>
+</tr>
+</table>
+</body></html>

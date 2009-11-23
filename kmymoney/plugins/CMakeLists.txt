@@ -1,4 +1,4 @@
-ADD_SUBDIRECTORY( interfaces ) 
+ADD_SUBDIRECTORY( interfaces )
 
 if(USE_OFX_DIRECTCONNECT)
 	ADD_SUBDIRECTORY( ofximport )
@@ -9,6 +9,7 @@ IF (LIBICAL_FOUND)
 ENDIF (LIBICAL_FOUND)
 
 ADD_SUBDIRECTORY( reconciliationreport )
+ADD_SUBDIRECTORY( printcheck )
 
 IF (KBANKING_FOUND)
   ADD_SUBDIRECTORY( kbanking )

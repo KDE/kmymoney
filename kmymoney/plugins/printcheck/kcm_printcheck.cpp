@@ -18,51 +18,56 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>  *
  ***************************************************************************/
 
-#include "kcm_icalendarexport.h"
+#include "kcm_printcheck.h"
 
 // Qt includes
 #include <qcombobox.h>
-#include <qboxlayout.h>
+#include <qlayout.h>
+#include <qgroupbox.h>
+#include <qframe.h>
 
 // KDE includes
+#include <khtml_part.h>
+#include <khtmlview.h>
 #include <kgenericfactory.h>
+#include <kurlrequester.h>
 
 #include "pluginsettings.h"
 #include "ui_pluginsettingsdecl.h"
 
-class PluginSettingsWidget : public QWidget, public Ui::PluginSettingsDecl {
+class PluginSettingsWidget : public QWidget, public Ui::PluginSettingsDecl
+{
 public:
-  PluginSettingsWidget( QWidget* parent = 0 ) : QWidget(parent) {
+  PluginSettingsWidget( QWidget* parent = 0 ) : QWidget(parent)
+  {
     setupUi(this);
-
-    kcfg_timeUnitInSeconds->addItem(i18n("Minutes"));
-    kcfg_timeUnitInSeconds->addItem(i18n("Hours"));
-    kcfg_timeUnitInSeconds->addItem(i18n("Days"));
-
-    kcfg_intervalBetweenRemindersTimeUnitInSeconds->addItem(i18n("Minutes"));
-    kcfg_intervalBetweenRemindersTimeUnitInSeconds->addItem(i18n("Hours"));
-    kcfg_intervalBetweenRemindersTimeUnitInSeconds->addItem(i18n("Days"));
-
-    kcfg_beforeAfter->addItem(i18n("Before"));
-    kcfg_beforeAfter->addItem(i18n("After"));
+    m_checkTemplatePreviewHTMLPart = new KHTMLPart(m_previewFrame);
+    m_previewFrame->layout()->addWidget(m_checkTemplatePreviewHTMLPart->view());
   }
+
+public slots:
+  virtual void urlSelected( const QString& url) 
+  {
+    m_checkTemplatePreviewHTMLPart->openUrl(url);
+  }
+
+private:
+  KHTMLPart* m_checkTemplatePreviewHTMLPart;
 };
 
-K_PLUGIN_FACTORY(KCMiCalendarExportFactory,
-                 registerPlugin<KCMiCalendarExport>();
+K_PLUGIN_FACTORY(KCMPrintCheckFactory,
+                 registerPlugin<KCMPrintCheck>();
                 )
-K_EXPORT_PLUGIN(KCMiCalendarExportFactory("kmm_icalendarexport", "kmymoney"))
+K_EXPORT_PLUGIN(KCMPrintCheckFactory( "kmm_printcheck", "kmymoney" ) )
 
-KCMiCalendarExport::KCMiCalendarExport(QWidget *parent, const QVariantList& args) : KCModule(KCMiCalendarExportFactory::componentData(), parent, args)
+KCMPrintCheck::KCMPrintCheck(QWidget *parent, const QVariantList& args) : KCModule(KCMPrintCheckFactory::componentData(), parent, args)
 {
-  PluginSettingsWidget *w = new PluginSettingsWidget(this);
-  addConfig(PluginSettings::self(), w);
-  QVBoxLayout *layout = new QVBoxLayout;
-  setLayout(layout);
-  layout->addWidget(w);
+  PluginSettingsWidget* p = new PluginSettingsWidget(this);
+  addConfig(PluginSettings::self(), p);
   load();
+  p->urlSelected(PluginSettings::checkTemplateFile());
 }
 
-KCMiCalendarExport::~KCMiCalendarExport()
+KCMPrintCheck::~KCMPrintCheck()
 {
 }

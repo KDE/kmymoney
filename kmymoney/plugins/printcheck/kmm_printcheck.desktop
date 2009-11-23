@@ -1,0 +1,17 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Print check
+Name[ro]=Tipărește cec
+Comment=Provides the capability to print checks
+Comment[ro]=Permite tipărirea cecurilor
+Type=Service
+Icon=document-print
+ServiceTypes=KMyMoneyPlugin
+X-KDE-Library=printcheck
+X-KDE-PluginInfo-Author=Cristian Oneț
+X-KDE-PluginInfo-Email=onet.cristian@gmail.com
+X-KDE-PluginInfo-Name=Print check
+X-KDE-PluginInfo-Version=${KMMPLUGINS_VERSION_FULL}
+X-KDE-PluginInfo-Website=http://kmymoney2.sourceforge.net/plugins.html
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true

@@ -17,52 +17,20 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>  *
  ***************************************************************************/
+#ifndef __KCM_PRINTCHECK_H__
+#define __KCM_PRINTCHECK_H__
 
-#include "kcm_icalendarexport.h"
+#include <kcmodule.h>
 
-// Qt includes
-#include <qcombobox.h>
-#include <qboxlayout.h>
+class QStringList;
+class KPluginInfo;
 
-// KDE includes
-#include <kgenericfactory.h>
-
-#include "pluginsettings.h"
-#include "ui_pluginsettingsdecl.h"
-
-class PluginSettingsWidget : public QWidget, public Ui::PluginSettingsDecl {
+class KCMPrintCheck : public KCModule
+{
 public:
-  PluginSettingsWidget( QWidget* parent = 0 ) : QWidget(parent) {
-    setupUi(this);
-
-    kcfg_timeUnitInSeconds->addItem(i18n("Minutes"));
-    kcfg_timeUnitInSeconds->addItem(i18n("Hours"));
-    kcfg_timeUnitInSeconds->addItem(i18n("Days"));
-
-    kcfg_intervalBetweenRemindersTimeUnitInSeconds->addItem(i18n("Minutes"));
-    kcfg_intervalBetweenRemindersTimeUnitInSeconds->addItem(i18n("Hours"));
-    kcfg_intervalBetweenRemindersTimeUnitInSeconds->addItem(i18n("Days"));
-
-    kcfg_beforeAfter->addItem(i18n("Before"));
-    kcfg_beforeAfter->addItem(i18n("After"));
-  }
+  KCMPrintCheck(QWidget* parent, const QVariantList& args);
+  ~KCMPrintCheck();
 };
 
-K_PLUGIN_FACTORY(KCMiCalendarExportFactory,
-                 registerPlugin<KCMiCalendarExport>();
-                )
-K_EXPORT_PLUGIN(KCMiCalendarExportFactory("kmm_icalendarexport", "kmymoney"))
+#endif // __KCM_PRINTCHECK_H__
 
-KCMiCalendarExport::KCMiCalendarExport(QWidget *parent, const QVariantList& args) : KCModule(KCMiCalendarExportFactory::componentData(), parent, args)
-{
-  PluginSettingsWidget *w = new PluginSettingsWidget(this);
-  addConfig(PluginSettings::self(), w);
-  QVBoxLayout *layout = new QVBoxLayout;
-  setLayout(layout);
-  layout->addWidget(w);
-  load();
-}
-
-KCMiCalendarExport::~KCMiCalendarExport()
-{
-}

@@ -17,52 +17,45 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>  *
  ***************************************************************************/
+#ifndef __PRINTCHECK_H__
+#define __PRINTCHECK_H__
 
-#include "kcm_icalendarexport.h"
+#include <kmymoney/kmymoneyplugin.h>
+#include <kmymoney/mymoneyaccount.h>
+#include <kmymoney/mymoneykeyvaluecontainer.h>
+#include <kmymoney/selectedtransaction.h>
 
-// Qt includes
-#include <qcombobox.h>
-#include <qboxlayout.h>
+class QStringList;
+class KPluginInfo;
 
-// KDE includes
-#include <kgenericfactory.h>
+class KMMPrintCheckPlugin: public KMyMoneyPlugin::Plugin
+{
+  Q_OBJECT
 
-#include "pluginsettings.h"
-#include "ui_pluginsettingsdecl.h"
-
-class PluginSettingsWidget : public QWidget, public Ui::PluginSettingsDecl {
 public:
-  PluginSettingsWidget( QWidget* parent = 0 ) : QWidget(parent) {
-    setupUi(this);
+  KMMPrintCheckPlugin( QObject *parent, const char *name, const QStringList&);
+  ~KMMPrintCheckPlugin();
 
-    kcfg_timeUnitInSeconds->addItem(i18n("Minutes"));
-    kcfg_timeUnitInSeconds->addItem(i18n("Hours"));
-    kcfg_timeUnitInSeconds->addItem(i18n("Days"));
+private:
+  void readCheckTemplate();
 
-    kcfg_intervalBetweenRemindersTimeUnitInSeconds->addItem(i18n("Minutes"));
-    kcfg_intervalBetweenRemindersTimeUnitInSeconds->addItem(i18n("Hours"));
-    kcfg_intervalBetweenRemindersTimeUnitInSeconds->addItem(i18n("Days"));
+  bool canBePrinted(const KMyMoneyRegister::SelectedTransaction & selectedTransaction) const;
+  void markAsPrinted(const KMyMoneyRegister::SelectedTransaction & selectedTransaction);
 
-    kcfg_beforeAfter->addItem(i18n("Before"));
-    kcfg_beforeAfter->addItem(i18n("After"));
-  }
+protected slots:
+  void slotPrintCheck(void);
+  void slotTransactionsSelected(const KMyMoneyRegister::SelectedTransactions& transactions);
+  // the plugin loader plugs in a plugin
+  void slotPlug(KPluginInfo*);
+  // the plugin loader unplugs a plugin
+  void slotUnplug(KPluginInfo*);
+  // the plugin's configurations has changed
+  void slotUpdateConfig(void);
+
+private:
+  struct Private;
+  Private *d;
 };
 
-K_PLUGIN_FACTORY(KCMiCalendarExportFactory,
-                 registerPlugin<KCMiCalendarExport>();
-                )
-K_EXPORT_PLUGIN(KCMiCalendarExportFactory("kmm_icalendarexport", "kmymoney"))
+#endif // __PRINTCHECK_H__
 
-KCMiCalendarExport::KCMiCalendarExport(QWidget *parent, const QVariantList& args) : KCModule(KCMiCalendarExportFactory::componentData(), parent, args)
-{
-  PluginSettingsWidget *w = new PluginSettingsWidget(this);
-  addConfig(PluginSettings::self(), w);
-  QVBoxLayout *layout = new QVBoxLayout;
-  setLayout(layout);
-  layout->addWidget(w);
-  load();
-}
-
-KCMiCalendarExport::~KCMiCalendarExport()
-{
-}
