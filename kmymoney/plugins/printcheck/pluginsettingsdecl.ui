@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>886</width>
-    <height>522</height>
+    <width>810</width>
+    <height>442</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -54,6 +54,12 @@
      </item>
      <item>
       <widget class="QFrame" name="m_previewFrame">
+       <property name="minimumSize">
+        <size>
+         <width>800</width>
+         <height>400</height>
+        </size>
+       </property>
        <property name="frameShape">
         <enum>QFrame::StyledPanel</enum>
        </property>
@@ -84,13 +90,13 @@
  <connections>
   <connection>
    <sender>kcfg_checkTemplateFile</sender>
-   <signal>urlSelected(QString)</signal>
+   <signal>urlSelected(KUrl)</signal>
    <receiver>PluginSettingsDecl</receiver>
-   <slot>urlSelected(QString)</slot>
+   <slot>urlSelected(KUrl)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>20</x>
-     <y>20</y>
+     <x>150</x>
+     <y>31</y>
     </hint>
     <hint type="destinationlabel">
      <x>20</x>
@@ -98,5 +104,25 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>kcfg_checkTemplateFile</sender>
+   <signal>returnPressed(QString)</signal>
+   <receiver>PluginSettingsDecl</receiver>
+   <slot>returnPressed(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>466</x>
+     <y>18</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>404</x>
+     <y>220</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
+ <slots>
+  <slot>urlSelected(KUrl)</slot>
+  <slot>returnPressed(QString)</slot>
+ </slots>
 </ui>

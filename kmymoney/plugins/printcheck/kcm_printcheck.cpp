@@ -48,7 +48,12 @@ public:
   }
 
 public slots:
-  virtual void urlSelected( const QString& url) 
+  virtual void urlSelected(const KUrl& url)
+  {
+    m_checkTemplatePreviewHTMLPart->openUrl(url);
+  }
+
+  virtual void returnPressed(const QString& url)
   {
     m_checkTemplatePreviewHTMLPart->openUrl(url);
   }
