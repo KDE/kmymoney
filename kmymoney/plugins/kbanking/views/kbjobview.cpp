@@ -27,10 +27,8 @@
 
 #include <qevent.h>
 #include <q3groupbox.h>
-#include <qmessagebox.h>
 #include <qlayout.h>
 #include <qtooltip.h>
-//Added by qt3to4:
 #include <Q3BoxLayout>
 #include <Q3HBoxLayout>
 
@@ -39,6 +37,7 @@
 #include <klocale.h>
 #include <kglobal.h>
 #include <kiconloader.h>
+#include <kmessagebox.h>
 
 #include "kbanking.h"
 #include <aqbanking/jobgetbalance.h>
@@ -138,7 +137,7 @@ bool KBJobView::fini(){
   assert(db);
   assert(db);
   GWEN_DB_ClearGroup(db, "gui/views/jobview");
-  for (i=0; i<_jobList->columns(); i++) {
+  for (i=0; i<_jobList->columns(); ++i) {
     j=_jobList->columnWidth(i);
     GWEN_DB_SetIntValue(db, GWEN_DB_FLAGS_DEFAULT,
                         "gui/views/jobview/columns", j);
@@ -170,10 +169,9 @@ void KBJobView::slotExecute(){
   updated=false;
   jl=_app->getEnqueuedJobs();
   if (jl.size()==0) {
-    QMessageBox::warning(this,
-                         tr("No Jobs"),
-                         tr("There are no jobs in the queue."),
-                         QMessageBox::Ok,QMessageBox::NoButton);
+    KMessageBox::warningContinueCancel(this,
+                                       tr("No Jobs"),
+                                       tr("There are no jobs in the queue."));
     return;
   }
 

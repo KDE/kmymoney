@@ -209,7 +209,7 @@ void KBJobListView::addJobs(const std::list<AB_JOB*> &js){
   std::list<AB_JOB*>::const_iterator it;
 
   fprintf(stderr, "Adding jobs...\n");
-  for (it=js.begin(); it!=js.end(); it++) {
+  for (it=js.begin(); it!=js.end(); ++it) {
     KBJobListViewItem *entry;
 
     fprintf(stderr, "Adding job...\n");
