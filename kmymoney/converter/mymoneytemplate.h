@@ -61,9 +61,9 @@ public:
   bool importTemplate(void(*callback)(int, int, const QString&));
   bool exportTemplate(void(*callback)(int, int, const QString&));
 
-  inline const QString& title(void) const { return m_title; }
-  inline const QString& shortDescription(void) const { return m_shortDesc; }
-  inline const QString& longDescription(void) const { return m_longDesc; }
+  const QString& title(void) const;
+  const QString& shortDescription(void) const;
+  const QString& longDescription(void) const;
 
   void hierarchy(QMap<QString, Q3ListViewItem*>& list);
 

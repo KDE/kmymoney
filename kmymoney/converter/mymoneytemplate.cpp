@@ -357,6 +357,21 @@ bool MyMoneyTemplate::exportTemplate(void(*callback)(int, int, const QString&))
   return true;
 }
 
+const QString& MyMoneyTemplate::title(void) const
+{
+  return m_title;
+}
+
+const QString& MyMoneyTemplate::shortDescription(void) const
+{
+  return m_shortDesc;
+}
+
+const QString& MyMoneyTemplate::longDescription(void) const
+{
+  return m_longDesc;
+}
+
 bool MyMoneyTemplate::addAccountStructure(QDomElement& parent, const MyMoneyAccount& acc)
 {
   QDomElement account = m_doc.createElement("account");

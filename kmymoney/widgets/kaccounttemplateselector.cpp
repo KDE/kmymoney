@@ -187,7 +187,7 @@ void KAccountTemplateSelector::slotLoadTemplateList(void)
   for(it = d->dirlist.begin(); it != d->dirlist.end(); ++it) {
     QDir dir(*it);
     // qDebug("Reading dir '%s' with %d entries", (*it).data(), dir.count());
-    dirs = dir.entryList("*", QDir::Dirs);
+    dirs = dir.entryList(QStringList("*"), QDir::Dirs);
     QStringList::iterator it_d;
     for(it_d= dirs.begin(); it_d != dirs.end(); ++it_d) {
       // we don't care about . and ..
@@ -243,7 +243,7 @@ void KAccountTemplateSelector::slotLoadCountry(void)
     QStringList::iterator it_f;
     QDir dir(QString("%1%2").arg(*it).arg(*(d->it_m)));
     if(dir.exists()) {
-      QStringList files = dir.entryList("*", QDir::Files);
+      QStringList files = dir.entryList(QStringList("*"), QDir::Files);
       for(it_f = files.begin(); it_f != files.end(); ++it_f) {
         MyMoneyTemplate templ(QString("%1/%2").arg(dir.canonicalPath()).arg(*it_f));
         d->m_templates[QString("%1").arg(d->id)] = templ;
