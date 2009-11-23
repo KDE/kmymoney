@@ -60,7 +60,7 @@ OfxImporterPlugin::OfxImporterPlugin(QObject *parent, const QStringList&) :
   createActions();
 
   // For ease announce that we have been loaded.
-  qDebug("KMyMoney iCalendar plugin loaded");
+  qDebug("KMyMoney ofximport plugin loaded");
 }
 
 OfxImporterPlugin::~OfxImporterPlugin()

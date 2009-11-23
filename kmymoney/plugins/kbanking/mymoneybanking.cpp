@@ -153,6 +153,7 @@ KBankingPlugin::KBankingPlugin(QObject *parent, const QStringList&) :
       // Tell the host application to load my GUI component
       setComponentData(KGenericFactory<KBankingPlugin>::componentData());
       setXMLFile("kmm_kbanking.rc");
+      qDebug("KMyMoney kbanking plugin loaded");
 
       // create view
       createJobView();
