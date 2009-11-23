@@ -342,36 +342,39 @@
             <string>Transaction Matching</string>
            </property>
            <layout class="QVBoxLayout" name="horizontalLayout">
-             <item>
-              <widget class="QRadioButton" name="radioNoMatch">
-               <property name="text">
-                <string>No matching</string>
-               </property>
-               <property name="checked">
-                <bool>true</bool>
-               </property>
-               <attribute name="buttonGroup">
-                 <string>m_matchType</string>
-               </attribute>
-              </widget>
-             </item>
-             <item>
-              <widget class="QRadioButton" name="radioNameMatch">
-               <property name="text">
-                <string>Match on Payee name</string>
-               </property>
-               <attribute name="buttonGroup">
-                 <string>m_matchType</string>
-               </attribute>
-              </widget>
-             </item>
-             <item>
-              <widget class="QRadioButton" name="radioKeyMatch">
-               <property name="text">
-                <string>Match on a name listed below</string>
-               </property>
-              </widget>
-             </item>
+            <item>
+             <widget class="QRadioButton" name="radioNoMatch">
+              <property name="text">
+               <string>No matching</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+              <attribute name="buttonGroup">
+               <string>m_matchType</string>
+              </attribute>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="radioNameMatch">
+              <property name="text">
+               <string>Match on Payee name</string>
+              </property>
+              <attribute name="buttonGroup">
+               <string>m_matchType</string>
+              </attribute>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="radioKeyMatch">
+              <property name="text">
+               <string>Match on a name listed below</string>
+              </property>
+              <attribute name="buttonGroup">
+               <string>m_matchType</string>
+              </attribute>
+             </widget>
+            </item>
            </layout>
           </widget>
          </item>
@@ -524,11 +527,17 @@ new transactions with this payee</string>
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
-  <customwidgets>
+ <customwidgets>
   <customwidget>
    <class>Q3GroupBox</class>
    <extends>QGroupBox</extends>
    <header>Qt3Support/Q3GroupBox</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Q3Frame</class>
+   <extends>QFrame</extends>
+   <header>Qt3Support/Q3Frame</header>
    <container>1</container>
   </customwidget>
   <customwidget>
@@ -552,14 +561,15 @@ new transactions with this payee</string>
    <header>kpushbutton.h</header>
   </customwidget>
   <customwidget>
-    <class>KTabWidget</class>
-    <extends>QTabWidget</extends>
-    <header location="global">ktabwidget.h</header>
+   <class>KLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>klineedit.h</header>
   </customwidget>
   <customwidget>
-    <class>KLineEdit</class>
-    <extends>QLineEdit</extends>
-    <header location="global">klineedit.h</header>
+   <class>KTabWidget</class>
+   <extends>QTabWidget</extends>
+   <header>ktabwidget.h</header>
+   <container>1</container>
   </customwidget>
   <customwidget>
    <class>Q3MultiLineEdit</class>
@@ -578,6 +588,6 @@ new transactions with this payee</string>
  <resources/>
  <connections/>
  <buttongroups>
-   <buttongroup name="m_matchType"/>
+  <buttongroup name="m_matchType"/>
  </buttongroups>
 </ui>

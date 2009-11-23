@@ -326,6 +326,7 @@ KPayeesView::KPayeesView(QWidget *parent) :
 
   m_matchType->setId(radioNoMatch, 0);
   m_matchType->setId(radioNameMatch, 1);
+  m_matchType->setId(radioKeyMatch, 2);
 
   // create the searchline widget
   // and insert it into the existing layout
