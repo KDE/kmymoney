@@ -42,7 +42,9 @@ public:
   {
     setupUi(this);
     m_checkTemplatePreviewHTMLPart = new KHTMLPart(m_previewFrame);
-    m_previewFrame->layout()->addWidget(m_checkTemplatePreviewHTMLPart->view());
+    QVBoxLayout *layout = new QVBoxLayout;
+    m_previewFrame->setLayout(layout);
+    layout->addWidget(m_checkTemplatePreviewHTMLPart->view());
   }
 
 public slots:
@@ -62,10 +64,13 @@ K_EXPORT_PLUGIN(KCMPrintCheckFactory( "kmm_printcheck", "kmymoney" ) )
 
 KCMPrintCheck::KCMPrintCheck(QWidget *parent, const QVariantList& args) : KCModule(KCMPrintCheckFactory::componentData(), parent, args)
 {
-  PluginSettingsWidget* p = new PluginSettingsWidget(this);
-  addConfig(PluginSettings::self(), p);
+  PluginSettingsWidget* w = new PluginSettingsWidget(this);
+  addConfig(PluginSettings::self(), w);
+  QVBoxLayout *layout = new QVBoxLayout;
+  setLayout(layout);
+  layout->addWidget(w);
   load();
-  p->urlSelected(PluginSettings::checkTemplateFile());
+  w->urlSelected(PluginSettings::checkTemplateFile());
 }
 
 KCMPrintCheck::~KCMPrintCheck()
