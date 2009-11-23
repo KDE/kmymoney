@@ -56,7 +56,7 @@ KMMPrintCheckPlugin::KMMPrintCheckPlugin(QObject *parent, const QStringList&)
   setXMLFile("kmm_printcheck.rc");
 
   // For ease announce that we have been loaded.
-  kdDebug() << "KMyMoney printcheck plugin loaded" << endl;
+  qDebug("KMyMoney printcheck plugin loaded");
 
   d = new Private;
 
@@ -92,11 +92,11 @@ void KMMPrintCheckPlugin::readCheckTemplate()
   }
 
   QFile checkTemplateHTMLFile(PluginSettings::checkTemplateFile());
-  checkTemplateHTMLFile.open(IO_ReadOnly);
+  checkTemplateHTMLFile.open(QIODevice::ReadOnly);
 
   QTextStream stream(&checkTemplateHTMLFile);
 
-  d->m_checkTemplateHTML = stream.read();
+  d->m_checkTemplateHTML = stream.readAll();
 
   checkTemplateHTMLFile.close();
 }
