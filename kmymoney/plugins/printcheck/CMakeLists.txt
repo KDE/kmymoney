@@ -25,8 +25,11 @@ INSTALL(TARGETS kmm_printcheck
 INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/kmm_printcheck.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})
 
-INSTALL_FILES( ${DATA_INSTALL_DIR}/kmm_printcheck printcheck.rc)
-INSTALL_FILES( ${DATA_INSTALL_DIR}/kmm_printcheck check_template.html)
+INSTALL(FILES kmm_printcheck.rc
+        DESTINATION  ${DATA_INSTALL_DIR}/kmm_printcheck)
+
+INSTALL(FILES check_template.html
+        DESTINATION  ${DATA_INSTALL_DIR}/kmm_printcheck)
 
 # the KCM module
 

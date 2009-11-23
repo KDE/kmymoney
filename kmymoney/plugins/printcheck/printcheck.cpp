@@ -46,14 +46,14 @@ struct KMMPrintCheckPlugin::Private
 
 typedef KGenericFactory<KMMPrintCheckPlugin> printcheckFactory;
 
-K_EXPORT_COMPONENT_FACTORY(printcheck, printcheckFactory( "printcheck" ))
+K_EXPORT_COMPONENT_FACTORY(printcheck, printcheckFactory( "kmm_printcheck" ))
 
 KMMPrintCheckPlugin::KMMPrintCheckPlugin(QObject *parent, const char *name, const QStringList&)
     : KMyMoneyPlugin::Plugin(parent, name)
 {
   // Tell the host application to load my GUI component
   setInstance(printcheckFactory::instance());
-  setXMLFile("printcheck.rc");
+  setXMLFile("kmm_printcheck.rc");
 
   // For ease announce that we have been loaded.
   kdDebug() << "KMyMoney printcheck plugin loaded" << endl;
