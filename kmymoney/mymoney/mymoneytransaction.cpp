@@ -78,7 +78,7 @@ MyMoneyTransaction::MyMoneyTransaction(const QDomElement& node, const bool force
     }
   }
 
-  m_bankID = QString();
+  m_bankID.clear();
 }
 
 MyMoneyTransaction::~MyMoneyTransaction()

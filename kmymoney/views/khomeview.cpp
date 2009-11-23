@@ -986,7 +986,7 @@ void KHomeView::showForecast(void)
         }
          }
       // a drop below zero is always shown
-         msg = QString();
+         msg.clear();
          switch(dropZero) {
            case -1:
              break;

@@ -314,7 +314,7 @@ void KForecastView::loadSummaryView(void)
     }
 
     // a drop below zero is always shown
-    msg = QString();
+    msg.clear();
     switch(dropZero) {
       case -1:
         break;
@@ -351,7 +351,7 @@ void KForecastView::loadSummaryView(void)
     }
 
     //advice about trends
-    msg = QString();
+    msg.clear();
     MyMoneyMoney accCycleVariation = forecast.accountCycleVariation(acc);
     if (accCycleVariation < MyMoneyMoney(0, 1)) {
       msg = QString("<font color=\"%1\">").arg(KMyMoneyGlobalSettings::listNegativeValueColor().name());

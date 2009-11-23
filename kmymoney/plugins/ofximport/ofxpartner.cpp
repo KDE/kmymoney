@@ -129,13 +129,13 @@ static void ParseFile(QMap<QString, QString>& result, const QString& fileName, c
             QDomElement el = inode.toElement();
             if(el.tagName() == "name") {
               if(bankName.isEmpty())
-                result[el.text()] = QString();
+                result[el.text()].clear();
               else if(el.text() == bankName) {
                 collectGuid = true;
               }
             }
             if(el.tagName() == "guid" && collectGuid) {
-              result[el.text()] = QString();
+              result[el.text()].clear();
             }
           }
         }
@@ -157,7 +157,7 @@ QStringList BankNames(void)
   ParseFile(result, directory + kInvFilename, QString());
 
   // Add Innovision
-  result["Innovision"] = QString();
+  result["Innovision"].clear();
 
   return QStringList()<<result.keys();
 }
@@ -172,7 +172,7 @@ QStringList FipidForBank(const QString& bank)
 
   // the fipid for Innovision is 1.
   if ( bank == "Innovision" )
-    result["1"] = QString();
+    result["1"].clear();
 
   return QStringList()<<result.keys();
 }

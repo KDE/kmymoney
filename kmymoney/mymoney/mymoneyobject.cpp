@@ -59,7 +59,7 @@ bool MyMoneyObject::operator == (const MyMoneyObject& right) const
 
 void MyMoneyObject::clearId(void)
 {
-  m_id = QString();
+  m_id.clear();
 }
 
 const QString& MyMoneyObject::emptyId(void)

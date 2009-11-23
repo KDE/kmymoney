@@ -711,7 +711,7 @@ QString Transaction::reconcileState(bool text) const
   if((text == true)
   && (txt == i18nc("Unknown reconciliation state", "Unknown"))
   && (m_transaction == MyMoneyTransaction()))
-    txt = QString();
+    txt.clear();
   return txt;
 }
 

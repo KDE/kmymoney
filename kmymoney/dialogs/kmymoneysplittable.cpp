@@ -492,7 +492,7 @@ void kMyMoneySplitTable::slotUpdateData(const MyMoneyTransaction& t)
     }
 
     if(colText.isEmpty() && (*it).memo().isEmpty() && value.isZero())
-      amountTxt = QString();
+      amountTxt.clear();
 
     unsigned width = fontMetrics().width(amountTxt);
     kMyMoneyEdit* valfield = new kMyMoneyEdit();

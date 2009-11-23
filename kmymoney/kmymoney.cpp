@@ -3430,7 +3430,7 @@ void KMyMoney2App::slotAccountEdit(void)
               }
             } catch(MyMoneyException *e) {
               kDebug(2) << "Error retrieving opening balance transaction " << tid << ": " << e->what() << "\n";
-              tid = QString();
+              tid.clear();
               delete e;
             }
           }
@@ -4876,7 +4876,7 @@ void KMyMoney2App::slotTransactionsEdit(void)
   // if the action is enabled
   if(kmymoney2->action("transaction_edit")->isEnabled()) {
     // as soon as we edit a transaction, we don't remember the last payee entered
-    d->m_lastPayeeEntered = QString();
+    d->m_lastPayeeEntered.clear();
     d->m_transactionEditor = d->m_myMoneyView->startEdit(d->m_selectedTransactions);
     slotUpdateActions();
   }
@@ -4897,7 +4897,7 @@ void KMyMoney2App::slotTransactionsEditSplits(void)
   // if the action is enabled
   if(kmymoney2->action("transaction_editsplits")->isEnabled()) {
     // as soon as we edit a transaction, we don't remember the last payee entered
-    d->m_lastPayeeEntered = QString();
+    d->m_lastPayeeEntered.clear();
     d->m_transactionEditor = d->m_myMoneyView->startEdit(d->m_selectedTransactions);
     slotUpdateActions();
 
@@ -5266,7 +5266,7 @@ void KMyMoney2App::Private::moveInvestmentTransaction(const QString& /*fromId*/,
   }
   // Now check the target investment account to see if it
   // contains a stock with this id
-  QString newStockAccountId = QString();
+  QString newStockAccountId;
   QStringList accountList = toInvAcc.accountList();
   QStringList::const_iterator it_a;
   for (it_a = accountList.constBegin(); it_a != accountList.constEnd(); ++it_a) {
@@ -5963,8 +5963,8 @@ void KMyMoney2App::slotSelectTransactions(const KMyMoneyRegister::SelectedTransa
   d->m_selectedTransactions.clear();
   d->m_selectedSchedule = MyMoneySchedule();
 
-  d->m_accountGoto = QString();
-  d->m_payeeGoto = QString();
+  d->m_accountGoto.clear();
+  d->m_payeeGoto.clear();
   if(!list.isEmpty() && !list.first().isScheduled()) {
     d->m_selectedTransactions = list;
     if(list.count() == 1) {

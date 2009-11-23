@@ -848,7 +848,7 @@ void QueryTable::constructTransactionTable(void)
 
     qA["postdate"] = strStartDate;
     qA["balance"] = startBalance.convert(fraction).toString();
-    qA["value"] = QString();
+    qA["value"].clear();
     qA["id"] = 'A';
     m_rows += qA;
 
@@ -1149,7 +1149,7 @@ void QueryTable::constructAccountTable(void)
         constructPerformanceRow( account, qaccountrow );
       }
       else
-        qaccountrow["equitytype"] = QString();
+        qaccountrow["equitytype"].clear();
 
       // don't add the account if it is closed. In fact, the business logic
       // should prevent that an account can be closed with a balance not equal
@@ -1474,7 +1474,7 @@ void QueryTable::constructSplitsTable(void)
 
     qA["postdate"] = strStartDate;
     qA["balance"] = startBalance.convert(fraction).toString();
-    qA["value"] = QString();
+    qA["value"].clear();
     qA["id"] = 'A';
     m_rows += qA;
 

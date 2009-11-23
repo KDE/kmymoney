@@ -699,7 +699,7 @@ void KGPGFile::dumpBuffer(char *s, int len) const
     }
     if(!(addr & 0x0f)) {
       data = tmp.sprintf("%08lX", addr);
-      chars = QString();
+      chars.clear();
     }
     if(!(addr & 0x03)) {
       data += ' ';

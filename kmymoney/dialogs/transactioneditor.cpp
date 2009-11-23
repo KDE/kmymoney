@@ -418,7 +418,7 @@ void TransactionEditor::setupCategoryWidget(KMyMoneyCategory* category, const QL
 
   switch(splits.count()) {
     case 0:
-      categoryId = QString();
+      categoryId.clear();
       if(!category->currentText().isEmpty()) {
         category->setCurrentText();
         // make sure, we don't see the selector
@@ -434,7 +434,7 @@ void TransactionEditor::setupCategoryWidget(KMyMoneyCategory* category, const QL
       break;
 
     default:
-      categoryId = QString();
+      categoryId.clear();
       category->setSplitTransaction();
       connect(category, SIGNAL(focusIn()), this, splitEditSlot);
 #if 0
@@ -449,7 +449,7 @@ void TransactionEditor::setupCategoryWidget(KMyMoneyCategory* category, const QL
 
 bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, bool suppressBalanceWarnings)
 {
-  newId = QString();
+  newId.clear();
   MyMoneyFile* file = MyMoneyFile::instance();
 
   // make sure to run through all stuff that is tied to 'focusout events'.

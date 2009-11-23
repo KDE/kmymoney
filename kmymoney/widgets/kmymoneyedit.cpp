@@ -313,7 +313,7 @@ void kMyMoneyEdit::loadText(const QString& txt)
 
 void kMyMoneyEdit::clearText(void)
 {
-  m_text = QString();
+  m_text.clear();
   m_edit->setText(m_text);
 }
 

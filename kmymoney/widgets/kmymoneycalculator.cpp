@@ -105,7 +105,7 @@ kMyMoneyCalculator::kMyMoneyCalculator(QWidget* parent)
 
   op1 = 0.0;
   stackedOp = op = 0;
-  operand = QString();
+  operand.clear();
   changeDisplay("0");
 
   // connect the digit signals through a signal mapper
@@ -149,7 +149,7 @@ kMyMoneyCalculator::~kMyMoneyCalculator()
 void kMyMoneyCalculator::digitClicked(int button)
 {
   if(m_clearOperandOnDigit) {
-    operand = QString();
+    operand.clear();
     m_clearOperandOnDigit = false;
   }
 
@@ -240,7 +240,7 @@ void kMyMoneyCalculator::calculationClicked(int button)
     if(error) {
       op = 0;
       changeDisplay("Error");
-      operand = QString();
+      operand.clear();
     } else {
       op1 = op2;
       m_result = normalizeString(op1);
@@ -258,7 +258,7 @@ void kMyMoneyCalculator::calculationClicked(int button)
     op = 0;
     emit signalResultAvailable();
   }
-  operand = QString();
+  operand.clear();
 }
 
 QString kMyMoneyCalculator::normalizeString(const double& val)
@@ -293,7 +293,7 @@ void kMyMoneyCalculator::clearClicked(void)
 
 void kMyMoneyCalculator::clearAllClicked(void)
 {
-  operand = QString();
+  operand.clear();
   op = 0;
   changeDisplay("0");
 }
@@ -368,7 +368,7 @@ void kMyMoneyCalculator::keyPressEvent(QKeyEvent* ev)
     case Qt::Key_8:
     case Qt::Key_9:
       if(m_clearOperandOnDigit) {
-        operand = QString();
+        operand.clear();
         m_clearOperandOnDigit = false;
       }
       button = ev->key() - Qt::Key_0;
@@ -382,7 +382,7 @@ void kMyMoneyCalculator::keyPressEvent(QKeyEvent* ev)
     case Qt::Key_Comma:
     case Qt::Key_Period:
       if(m_clearOperandOnDigit) {
-        operand = QString();
+        operand.clear();
         m_clearOperandOnDigit = false;
       }
       button = COMMA;

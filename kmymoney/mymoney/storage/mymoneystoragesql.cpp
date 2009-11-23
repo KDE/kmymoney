@@ -4183,7 +4183,7 @@ const QString MyMoneyDbDef::generateSQL (const QString& driver) const {
   retval += qs;
 
   // Add the strings to create the initial accounts
-  qs = QString();
+  qs.clear();
   QList<MyMoneyAccount> stdList;
   stdList.append (MyMoneyFile::instance()->asset());
   stdList.append (MyMoneyFile::instance()->equity());

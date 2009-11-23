@@ -445,7 +445,8 @@ MyMoneyTransaction KMyMoneyUtils::scheduledTransaction(const MyMoneySchedule& sc
 
 void KMyMoneyUtils::previouslyUsedCategories(const QString& investmentAccount, QString& feesId, QString& interestId)
 {
-  feesId = interestId = QString();
+  feesId.clear();
+  interestId.clear();
   MyMoneyFile* file = MyMoneyFile::instance();
   try {
     MyMoneyAccount acc = file->account(investmentAccount);

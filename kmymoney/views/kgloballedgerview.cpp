@@ -1418,7 +1418,7 @@ bool KGlobalLedgerView::canEditTransactions(const KMyMoneyRegister::SelectedTran
   KMyMoneyRegister::SelectedTransactions::const_iterator it_t;
   for(it_t = list.begin(); rc && it_t != list.end(); ++it_t) {
     if((*it_t).transaction().id().isEmpty()) {
-      tooltip = QString();
+      tooltip.clear();
       rc = false;
       continue;
     }

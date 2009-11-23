@@ -202,7 +202,7 @@ void MyMoneyPayee::setMatchData(payeeMatchType type, bool ignorecase, const QStr
 {
   m_matchingEnabled = (type != matchDisabled);
   m_matchKeyIgnoreCase = false;
-  m_matchKey = QString();
+  m_matchKey.clear();
 
   if ( m_matchingEnabled )
   {

@@ -240,7 +240,7 @@ MyMoneyTracer::MyMoneyTracer(const char* name)
       m_memberName = exp.cap(2);
     } else {
       m_className = QString(name);
-      m_memberName = QString();
+      m_memberName.clear();
     }
     QString indent;
     indent.fill(' ', m_indentLevel);

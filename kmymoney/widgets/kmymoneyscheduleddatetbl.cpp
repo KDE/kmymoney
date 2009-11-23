@@ -240,7 +240,7 @@ void kMyMoneyScheduledDateTbl::drawCellContents(QPainter *painter, int /*row*/, 
     QList<MyMoneySchedule> transferSchedules;
     try
     {
-      text = QString();
+      text.clear();
 
       if (!m_filterBills)
       {

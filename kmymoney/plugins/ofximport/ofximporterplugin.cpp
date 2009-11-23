@@ -153,7 +153,7 @@ bool OfxImporterPlugin::import( const QString& filename )
 
   if ( m_valid )
   {
-    m_fatalerror = QString();
+    m_fatalerror.clear();
     m_valid = storeStatements(m_statementlist);
   }
   return m_valid;
