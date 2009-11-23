@@ -83,7 +83,7 @@ KMMiCalendarExportPlugin::KMMiCalendarExportPlugin(QObject *parent, const QStrin
   }
 
   if (!icalFilePath.isEmpty())
-    actionName = i18n("Schedules to icalendar [%1]").arg(icalFilePath);
+    actionName = i18n("Schedules to icalendar [%1]", icalFilePath);
 
   d->m_action = actionCollection()->addAction("file_export_icalendar");
   d->m_action->setText(actionName);

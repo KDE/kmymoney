@@ -431,8 +431,8 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
                                  "has not been mapped to an online "
                                  "account."
                                  "</p>"
-                                 "</qt>"
-                            ).arg(acc.name()),
+                                 "</qt>",
+                                 acc.name()),
                             QMessageBox::Ok,Qt::NoButton);
       // clear the connection between the KMyMoney account
       // and the AqBanking equivalent

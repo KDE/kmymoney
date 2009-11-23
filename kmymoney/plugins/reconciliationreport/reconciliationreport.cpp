@@ -111,14 +111,14 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
     }
   }
 
-  QString reportName = i18n("Reconcliation report of account %1").arg(account.name());
-  QString report = QString ( "<h2 class=\"report\">%1</h2>\n" ).arg(reportName);
+  QString reportName = i18n("Reconcliation report of account %1", account.name());
+  QString report = QString ("<h2 class=\"report\">%1</h2>\n").arg(reportName);
   report += QString("<div class=\"subtitle\">");
   report += QString("%1").arg(KGlobal::locale()->formatDate(date, KLocale::ShortDate));
   report += QString("</div>\n");
   report += QString("<div class=\"gap\">&nbsp;</div>\n");
-  report += QString ( "<div class=\"subtitle\">");
-  report += i18n("All values shown in %1").arg(file->baseCurrency().name());
+  report += QString("<div class=\"subtitle\">");
+  report += i18n("All values shown in %1", file->baseCurrency().name());
   report += QString("</div>\n");
   report += QString("<div class=\"gap\">&nbsp;</div>\n");
 
@@ -174,7 +174,7 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
   report += "</td></tr>";
   // row 8
   report += "<tr class=\"row-even\"><td class=\"left\">";
-  report += i18n("Register balance as of %1 ").arg(KGlobal::locale()->formatDate(date, KLocale::ShortDate));
+  report += i18n("Register balance as of %1", KGlobal::locale()->formatDate(date, KLocale::ShortDate));
   report += "</td><td>";
   report += MyMoneyFile::instance()->balance(account.id(), date).formatMoney(currency);
   report += "</td></tr>";

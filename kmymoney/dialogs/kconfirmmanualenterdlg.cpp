@@ -64,9 +64,9 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
   try
   {
     if (to.splits().isEmpty())
-      throw new MYMONEYEXCEPTION(i18n("Transaction %1 has no splits").arg(to.id()));
+      throw new MYMONEYEXCEPTION(i18n("Transaction %1 has no splits", to.id()));
     if (tn.splits().isEmpty())
-      throw new MYMONEYEXCEPTION(i18n("Transaction %1 has no splits").arg(tn.id()));
+      throw new MYMONEYEXCEPTION(i18n("Transaction %1 has no splits", tn.id()));
 
     QString po, pn;
     if(!to.splits().front().payeeId().isEmpty())
