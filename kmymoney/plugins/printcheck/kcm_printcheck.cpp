@@ -45,6 +45,9 @@ public:
     QVBoxLayout *layout = new QVBoxLayout;
     m_previewFrame->setLayout(layout);
     layout->addWidget(m_checkTemplatePreviewHTMLPart->view());
+
+    connect(kcfg_checkTemplateFile, SIGNAL(urlSelected(const KUrl&)), this, SLOT(urlSelected(const KUrl&)));
+    connect(kcfg_checkTemplateFile, SIGNAL(returnPressed(const QString&)), this, SLOT(returnPressed(const QString&)));
   }
 
 public slots:

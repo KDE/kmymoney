@@ -84,7 +84,7 @@ KMMPrintCheckPlugin::~KMMPrintCheckPlugin()
 
 void KMMPrintCheckPlugin::readCheckTemplate()
 {
-  QString checkTemplateHTMLPath = KGlobal::dirs()->findResource("data", "printcheck/check_template.html");
+  QString checkTemplateHTMLPath = KGlobal::dirs()->findResource("appdata", "check_template.html");
 
   if (PluginSettings::checkTemplateFile().isEmpty()) {
     PluginSettings::setCheckTemplateFile(checkTemplateHTMLPath);

@@ -87,40 +87,7 @@
   <include location="local">kpushbutton.h</include>
  </includes>
  <resources/>
- <connections>
-  <connection>
-   <sender>kcfg_checkTemplateFile</sender>
-   <signal>urlSelected(KUrl)</signal>
-   <receiver>PluginSettingsDecl</receiver>
-   <slot>urlSelected(KUrl)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>150</x>
-     <y>31</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>20</x>
-     <y>20</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>kcfg_checkTemplateFile</sender>
-   <signal>returnPressed(QString)</signal>
-   <receiver>PluginSettingsDecl</receiver>
-   <slot>returnPressed(QString)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>466</x>
-     <y>18</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>404</x>
-     <y>220</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
  <slots>
   <slot>urlSelected(KUrl)</slot>
   <slot>returnPressed(QString)</slot>
