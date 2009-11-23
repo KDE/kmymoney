@@ -4,7 +4,7 @@ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}
                     ${CMAKE_CURRENT_BINARY_DIR}
                     )
 
-SET(printcheck_PART_SRCS
+SET(kmm_printcheck_PART_SRCS
     numbertowords.cpp
     printcheck.cpp
     )
@@ -15,7 +15,9 @@ KDE4_ADD_PLUGIN(kmm_printcheck ${kmm_printcheck_PART_SRCS})
 
 TARGET_LINK_LIBRARIES(kmm_printcheck
                       ${KDE4_KDEUI_LIBS}
+                      ${KDE4_KHTML_LIBS}
                       ${KDE4_KDE3SUPPORT_LIBS}
+                      kmm_mymoney kmm_plugin
                       )
 
 

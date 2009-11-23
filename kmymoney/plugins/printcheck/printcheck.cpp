@@ -27,6 +27,7 @@
 #include <klocale.h>
 #include <khtmlview.h>
 #include <khtml_part.h>
+#include <kactioncollection.h>
 
 // KMyMoney includes
 #include <kmymoney/mymoneyfile.h>
@@ -39,20 +40,19 @@ struct KMMPrintCheckPlugin::Private
 {
   KAction* m_action;
   QString  m_checkTemplateHTML;
-  QString  m_name;
   QStringList m_printedTransactionIdList;
   KMyMoneyRegister::SelectedTransactions m_transactions;
 };
 
 typedef KGenericFactory<KMMPrintCheckPlugin> printcheckFactory;
 
-K_EXPORT_COMPONENT_FACTORY(printcheck, printcheckFactory( "kmm_printcheck" ))
+K_EXPORT_COMPONENT_FACTORY(kmm_printcheck, printcheckFactory( "kmm_printcheck" ))
 
-KMMPrintCheckPlugin::KMMPrintCheckPlugin(QObject *parent, const char *name, const QStringList&)
-    : KMyMoneyPlugin::Plugin(parent, name)
+KMMPrintCheckPlugin::KMMPrintCheckPlugin(QObject *parent, const QStringList&)
+    : KMyMoneyPlugin::Plugin(parent, "iCalendar"/*must be the same as X-KDE-PluginInfo-Name*/)
 {
   // Tell the host application to load my GUI component
-  setInstance(printcheckFactory::instance());
+  setComponentData(printcheckFactory::componentData());
   setXMLFile("kmm_printcheck.rc");
 
   // For ease announce that we have been loaded.
@@ -60,19 +60,11 @@ KMMPrintCheckPlugin::KMMPrintCheckPlugin(QObject *parent, const char *name, cons
 
   d = new Private;
 
-  d->m_name = QString::fromUtf8(name);
-
   // Create the actions of this plugin
   QString actionName = i18n("Print check");
 
-  d->m_action = new KAction (actionName,                            // Menu message.
-                         "transaction_printcheck",              // Menu icon.
-                         0,                                     // default shortcut.
-                         this,
-                         SLOT(slotPrintCheck()),
-                         actionCollection(),
-                         "transaction_printcheck");
-
+  d->m_action = actionCollection()->addAction("transaction_printcheck", this, SLOT(slotPrintCheck()));
+  d->m_action->setText(actionName);
 
   // wait until a transaction is selected before enableing the action
   d->m_action->setEnabled(false);
@@ -96,7 +88,7 @@ void KMMPrintCheckPlugin::readCheckTemplate()
 
   if (PluginSettings::checkTemplateFile().isEmpty()) {
     PluginSettings::setCheckTemplateFile(checkTemplateHTMLPath);
-    PluginSettings::writeConfig();
+    PluginSettings::self()->writeConfig();
   }
 
   QFile checkTemplateHTMLFile(PluginSettings::checkTemplateFile());
@@ -126,9 +118,9 @@ void KMMPrintCheckPlugin::slotPrintCheck(void)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
   MyMoneyMoneyToWordsConverter converter;
-  KHTMLPart *htmlPart = new KHTMLPart(NULL, "printcheckpart");
+  KHTMLPart *htmlPart = new KHTMLPart((QWidget*)NULL);
   KMyMoneyRegister::SelectedTransactions::const_iterator it;
-  for(it = d->m_transactions.begin(); it != d->m_transactions.end(); ++it) {
+  for(it = d->m_transactions.constBegin(); it != d->m_transactions.constEnd(); ++it) {
     if (!canBePrinted(*it))
       continue; // skip this check since it was already printed
 
@@ -151,7 +143,7 @@ void KMMPrintCheckPlugin::slotPrintCheck(void)
     checkHTML.replace("$INSTITUTION_POSTCODE", institution.postcode());
     checkHTML.replace("$INSTITUTION_MANAGER", institution.manager());
     // data about the transaction
-    checkHTML.replace("$DATE", KGlobal::locale()->formatDate(QDate::currentDate(), true));
+    checkHTML.replace("$DATE", KGlobal::locale()->formatDate(QDate::currentDate(), KLocale::LongDate));
     checkHTML.replace("$CHECK_NUMBER", (*it).split().number());
     checkHTML.replace("$PAYEE_NAME", file->payee((*it).split().payeeId()).name());
     checkHTML.replace("$PAYEE_ADDRESS", file->payee((*it).split().payeeId()).address());
@@ -181,7 +173,7 @@ void KMMPrintCheckPlugin::slotTransactionsSelected(const KMyMoneyRegister::Selec
   // enable/disable the action depending if there are transactions selected or not
   // and wheter they can be printed or not
   KMyMoneyRegister::SelectedTransactions::const_iterator it;
-  for(it = d->m_transactions.begin(); it != d->m_transactions.end(); ++it) {
+  for(it = d->m_transactions.constBegin(); it != d->m_transactions.constEnd(); ++it) {
     if (canBePrinted(*it)) {
       actionEnabled = true;
       break;
@@ -193,7 +185,7 @@ void KMMPrintCheckPlugin::slotTransactionsSelected(const KMyMoneyRegister::Selec
 // the plugin loader plugs in a plugin
 void KMMPrintCheckPlugin::slotPlug(KPluginInfo *info)
 {
-  if (info->name() == d->m_name) {
+  if (info->name() == objectName()) {
     connect(viewInterface(), SIGNAL(transactionsSelected(const KMyMoneyRegister::SelectedTransactions&)), 
     this, SLOT(slotTransactionsSelected(const KMyMoneyRegister::SelectedTransactions& )));
   }
@@ -202,7 +194,7 @@ void KMMPrintCheckPlugin::slotPlug(KPluginInfo *info)
 // the plugin loader unplugs a plugin
 void KMMPrintCheckPlugin::slotUnplug(KPluginInfo *info)
 {
-  if (info->name() == d->m_name) {
+  if (info->name() == objectName()) {
     disconnect(viewInterface(), SIGNAL(transactionsSelected(const KMyMoneyRegister::SelectedTransactions&)), 
     this, SLOT(slotTransactionsSelected(const KMyMoneyRegister::SelectedTransactions& )));
   }

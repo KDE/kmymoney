@@ -77,7 +77,7 @@ QString MyMoneyMoneyToWordsConverter::convert(const MyMoneyMoney & money)
     return m_smallNumbers[0];
 
   // hold three-digit groups
-  QValueList<int> digitGroups;
+  QList<int> digitGroups;
 
   int precision = KGlobal::locale()->fracDigits(); 
   int integer = static_cast<int>(money.toDouble()); // retain the integer part
