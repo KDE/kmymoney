@@ -1,12 +1,15 @@
 [Desktop Entry]
 Name=Configure the print check plugin
+Name[uk]=Налаштувати додаток друку чеків
 Icon=document-print
 Type=Service
 ServiceTypes=KCModule
 Exec=kcmshell kmm_printcheck
 Categories=QT;KDE;kmymoney;
 Keywords=printcheck;kmymoney
+Keywords[uk]=printcheck;kmymoney
 X-KDE-Library=kcm_kmm_printcheck
 X-KDE-ParentApp=Print check
 X-KDE-ParentComponents=Print check
 Comment=Permits the configuration of the print check plugin's options
+Comment[uk]=Надає змогу налаштовувати параметри додатка друку чеків

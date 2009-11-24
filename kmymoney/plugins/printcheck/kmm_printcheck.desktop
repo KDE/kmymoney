@@ -1,9 +1,9 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Print check
-Name[ro]=Tipărește cec
+Name[uk]=Надрукувати чек
 Comment=Provides the capability to print checks
-Comment[ro]=Permite tipărirea cecurilor
+Comment[uk]=Надає змогу друкувати чеки
 Type=Service
 Icon=document-print
 ServiceTypes=KMyMoneyPlugin
