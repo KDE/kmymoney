@@ -30,7 +30,6 @@
 #include <QEventLoop>
 #include <QToolTip>
 #include <QImage>
-//Added by qt3to4:
 #include <QPixmap>
 #include <QFocusEvent>
 #include <QMouseEvent>
@@ -479,55 +478,6 @@ ReconcileGroupMarker::ReconcileGroupMarker(Register* parent, MyMoneySplit::recon
       break;
   }
 }
-#if 0
-class RegisterToolTip : public QToolTip
-{
-public:
-  RegisterToolTip(QWidget* parent, Register* reg);
-  void maybeTip(const QPoint& pos);
-  virtual ~RegisterToolTip() {}
-
-private:
-  Register* m_register;
-};
-
-RegisterToolTip::RegisterToolTip(QWidget* parent, Register * reg) :
-  QToolTip(parent),
-  m_register(reg)
-{
-}
-
-void RegisterToolTip::maybeTip(const QPoint& pos)
-{
-  // if we update the register, there's no need to show tooltips
-  if(!m_register->isUpdatesEnabled())
-    return;
-
-  QPoint cpos = m_register->viewportToContents(pos);
-  // qDebug("RegisterToolTip::mayBeTip(%d,%d)", cpos.x(), cpos.y());
-  int row = m_register->rowAt(cpos.y());
-  int col = m_register->columnAt(cpos.x());
-  RegisterItem* item = m_register->itemAtRow(row);
-  if(!item)
-    return;
-
-  QPoint relPos(cpos.x() - m_register->columnPos(0), cpos.y() - m_register->rowPos(item->startRow()));
-  row = row - item->startRow();
-
-  // qDebug("row = %d, col = %d", row, col);
-  // qDebug("relpos = %d,%d", relPos.x(), relPos.y());
-  QString msg;
-  QRect rect;
-  if(!item->maybeTip(cpos, row, col, rect, msg))
-    return;
-
-  QPoint tl(rect.topLeft());
-  QPoint br(rect.bottomRight());
-  QRect r = QRect(m_register->contentsToViewport(tl), m_register->contentsToViewport(br));
-  tip(r, msg);
-  return;
-}
-#endif
 
 Register::Register(QWidget *parent) :
   TransactionEditorContainer(parent),
@@ -547,9 +497,6 @@ Register::Register(QWidget *parent) :
   m_buttonState(Qt::ButtonState(0)),
   m_drawCounter(0)
 {
-//FIXME: Port to KDE4	
-  //m_tooltip = new RegisterToolTip(viewport(), this);
-
   setNumCols(MaxColumns);
   setCurrentCell(0, 1);
   // we do our own sorting
@@ -1200,6 +1147,38 @@ void Register::focusInEvent(QFocusEvent* ev)
     m_focusItem->setFocus(true, false);
     repaintItems(m_focusItem);
   }
+}
+
+bool Register::event(QEvent* event)
+{
+  if (event->type() == QEvent::ToolTip) {
+    QHelpEvent *helpEvent = static_cast<QHelpEvent *>(event);
+
+    QPoint cpos(helpEvent->x() + contentsX(), helpEvent->y() + contentsY());
+    int row = rowAt(cpos.y());
+    int col = columnAt(cpos.x());
+    //qDebug("R:%d C:%d (X:%d Y:%d)", row, col, cpos.x(), cpos.y());
+    RegisterItem* item = itemAtRow(row);
+    if(!item)
+      return true;
+
+    QPoint relPos(cpos.x() - columnPos(0), cpos.y() - rowPos(item->startRow()));
+    row = row - item->startRow();
+
+    QString msg;
+    QRect rect;
+    if(!item->maybeTip(cpos, row, col, rect, msg))
+      return true;
+
+    if (!msg.isEmpty()) {
+      QToolTip::showText(helpEvent->globalPos(), msg);
+    } else {
+      QToolTip::hideText();
+      event->ignore();
+    }
+    return true;
+  }
+  return TransactionEditorContainer::event(event);
 }
 
 void Register::focusOutEvent(QFocusEvent* ev)

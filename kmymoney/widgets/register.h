@@ -34,7 +34,6 @@
 #include <qmap.h>
 #include <QPair>
 #include <QEvent>
-//Added by qt3to4:
 #include <QList>
 #include <QKeyEvent>
 #include <QPixmap>
@@ -57,9 +56,6 @@
 #include <transaction.h>
 #include <transactioneditorcontainer.h>
 #include <selectedtransaction.h>
-//#include <transactionsortoption.h>
-
-class RegisterToolTip;
 
 namespace KMyMoneyRegister {
 
@@ -253,9 +249,6 @@ class Register : public TransactionEditorContainer
 {
   Q_OBJECT
 
-  // friend class QHeader;
-  // friend class QTableHeader;
-  // friend class RegisterItem;
   friend class Transaction;
   friend class StdTransaction;
   friend class InvestTransaction;
@@ -470,6 +463,7 @@ protected:
   void doSelectItems(int from, int to, bool selected);
   int selectedItemsCount(void) const;
 
+  bool event(QEvent*);
   void focusOutEvent(QFocusEvent*);
   void focusInEvent(QFocusEvent*);
   void keyPressEvent(QKeyEvent*);
@@ -601,7 +595,6 @@ private:
   Column                       m_lastCol;
   QList<TransactionSortField>  m_sortOrder;
   QMap<QPair<int, int>, QWidget*> m_cellWidgets;
-  //RegisterToolTip*             m_tooltip;
   QRect                        m_lastRepaintRect;
   unsigned int                 m_drawCounter;
 };
