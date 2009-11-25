@@ -89,12 +89,12 @@ public:
   MyMoneyPayee();
   MyMoneyPayee(const QString& id, const MyMoneyPayee& payee);
   explicit MyMoneyPayee(const QString& name,
-                        const QString& address=QString::null,
-                        const QString& city=QString::null,
-                        const QString& state=QString::null,
-                        const QString& postcode=QString::null,
-                        const QString& telephone=QString::null,
-                        const QString& email=QString::null);
+                        const QString& address=QString(),
+                        const QString& city=QString(),
+                        const QString& state=QString(),
+                        const QString& postcode=QString(),
+                        const QString& telephone=QString(),
+                        const QString& email=QString());
   /**
     * This is the constructor for a payee that is described by a
     * QDomElement (e.g. from a file).

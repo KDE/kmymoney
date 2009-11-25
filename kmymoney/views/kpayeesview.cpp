@@ -994,7 +994,7 @@ void KPayeesView::loadPayees(void)
   // reposition viewport
   m_payeesList->setContentsPos(startPoint.x(), startPoint.y());
 
-  m_searchWidget->searchLine()->updateSearch(QString::null);
+  m_searchWidget->searchLine()->updateSearch(QString());
 
   // turn updates back on
   //m_payeesList->setUpdatesEnabled(true);

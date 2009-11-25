@@ -259,7 +259,7 @@ bool kMyMoneySplitTable::eventFilter(QObject *o, QEvent *e)
           if(o == m_editCategory->lineEdit() || o == m_editMemo) {
             terminate = false;
             QKeyEvent evt(e->type(),
-                          Qt::Key_Tab, k->modifiers(), QString::null,
+                          Qt::Key_Tab, k->modifiers(), QString(),
                           k->isAutoRepeat(), k->count());
 
             QApplication::sendEvent( o, &evt );

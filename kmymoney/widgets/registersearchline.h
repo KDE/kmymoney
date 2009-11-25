@@ -79,7 +79,7 @@ protected:
   virtual bool itemMatches(const RegisterItem* item, const QString& s) const;
 
 public slots:
-  virtual void updateSearch(const QString& s = QString::null);
+  virtual void updateSearch(const QString& s = QString());
   virtual void reset(void);
 
 protected slots:

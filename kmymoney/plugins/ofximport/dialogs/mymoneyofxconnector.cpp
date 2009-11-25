@@ -128,7 +128,7 @@ const QString OfxAppVersion::appId(void) const
   QString app = m_combo->currentText();
   if(m_appMap[app] != defaultAppId)
     return m_appMap[app];
-  return QString::null;
+  return QString();
 }
 
 MyMoneyOfxConnector::MyMoneyOfxConnector(const MyMoneyAccount& _account):

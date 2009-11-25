@@ -193,7 +193,7 @@ bool TransactionEditor::eventFilter(QObject* o, QEvent* e)
           // for the non-final objects, we treat the return key as a TAB
           if(!isFinal) {
             QKeyEvent evt(e->type(),
-                          Qt::Key_Tab, k->modifiers(), QString::null,
+                          Qt::Key_Tab, k->modifiers(), QString(),
                           k->isAutoRepeat(), k->count());
 
             QApplication::sendEvent( o, &evt );

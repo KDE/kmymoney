@@ -1572,7 +1572,7 @@ bool KMyMoney2App::slotFileSaveAs(void)
   // enhanced to show the d->m_saveEncrypted combo box
   bool specialDir = prevDir.at(0) == ':';
   QPointer<KFileDialog> dlg =
-    new KFileDialog( specialDir ? prevDir : QString::null,
+    new KFileDialog( specialDir ? prevDir : QString(),
                    QString("%1|%2\n").arg("*.kmy").arg(i18nc("KMyMoney (Filefilter)", "KMyMoney files")) +
                    QString("%1|%2\n").arg("*.xml").arg(i18nc("XML (Filefilter)", "XML files")) +
                    QString("%1|%2\n").arg("*.anon.xml").arg(i18nc("Anonymous (Filefilter)", "Anonymous files")) +
@@ -3310,7 +3310,7 @@ void KMyMoney2App::slotAccountDelete(void)
           i18n("Do you want to delete category <b>%1</b> with all its sub-categories or only "
                "the category itself? If you only delete the category itself, all its sub-categories "
                "will be made sub-categories of <b>%2</b>.",d->m_selectedAccount.name(),parentAccount.name())+QString("</qt>"),
-          QString::null,
+          QString(),
           KGuiItem(i18n("Delete all")),
           KGuiItem(i18n("Just the category")));
       if (result == KMessageBox::Cancel)
@@ -4488,7 +4488,7 @@ void KMyMoney2App::slotPayeeDelete(void)
 
 void KMyMoney2App::slotCurrencyNew(void)
 {
-  QString sid = KInputDialog::getText(i18n("New currency"), i18n("Enter ISO 4217 code for the new currency"), QString::null, 0, 0, 0, 0, ">AAA");
+  QString sid = KInputDialog::getText(i18n("New currency"), i18n("Enter ISO 4217 code for the new currency"), QString(), 0, 0, 0, 0, ">AAA");
   if(!sid.isEmpty()) {
     QString id(sid);
     MyMoneySecurity currency(id, i18n("New currency"));

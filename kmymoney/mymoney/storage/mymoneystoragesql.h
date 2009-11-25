@@ -137,7 +137,7 @@ class MyMoneyDbDrivers {
 class MyMoneyDbColumn : public KShared {
   public:
     explicit MyMoneyDbColumn (const QString& iname,
-             const QString& itype = QString::null,
+             const QString& itype = QString(),
              const bool iprimary = false,
              const bool inotnull = false,
              const QString &initVersion = "0.1"):

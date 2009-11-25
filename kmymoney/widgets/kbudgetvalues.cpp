@@ -124,7 +124,7 @@ bool KBudgetValues::eventFilter(QObject* o, QEvent* e)
     if((k->modifiers() & Qt::KeyboardModifierMask) == 0
        || (k->modifiers() & Qt::KeypadModifier) != 0) {
       QKeyEvent evt(e->type(),
-                    Qt::Key_Tab, k->modifiers(), QString::null,
+                    Qt::Key_Tab, k->modifiers(), QString(),
                     k->isAutoRepeat(), k->count());
       switch(k->key()) {
         case Qt::Key_Return:

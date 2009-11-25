@@ -112,7 +112,7 @@ bool KMyMoneyWizardPage::isComplete(void) const
 
 QString KMyMoneyWizardPage::helpContext(void) const
 {
-  return QString::null;
+  return QString();
 }
 
 KMyMoneyWizard::KMyMoneyWizard(QWidget *parent, const char *name, bool modal, Qt::WFlags f) :

@@ -403,7 +403,7 @@ const QString MyMoneyQifProfileEditor::enterName(bool& ok)
 #if KDE_IS_VERSION(3,2,0)
   return KInputDialog::getText(i18n("QIF Profile Editor"),
                                i18n("Enter new profile name"),
-                               QString::null,
+                               QString(),
                                &ok,
                                this,
 

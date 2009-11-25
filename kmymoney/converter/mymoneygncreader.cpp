@@ -2072,7 +2072,7 @@ QString MyMoneyGncReader::buildReportSection (const QString& source) {
 bool MyMoneyGncReader::writeReportToFile (const QList<QString>& sectionsToReport) {
   TRY
   int i;
-  QString fd = KFileDialog::getSaveFileName (KUrl(), QString::null,
+  QString fd = KFileDialog::getSaveFileName (KUrl(), QString(),
                    0, i18n("Save report as"));
   if (fd.isEmpty()) return (false);
   QFile reportFile(fd);

@@ -56,7 +56,7 @@ KBalanceWarning::~KBalanceWarning()
 void KBalanceWarning::slotShowMessage(QWidget* parent, const MyMoneyAccount& account, const QString& msg)
 {
   if(d->m_deselectedAccounts.find(account.id()) == d->m_deselectedAccounts.end()) {
-    KMessageBox::information(parent, msg, QString::null, d->dontShowAgain());
+    KMessageBox::information(parent, msg, QString(), d->dontShowAgain());
     if(!KMessageBox::shouldBeShownContinue(d->dontShowAgain())) {
       d->m_deselectedAccounts[account.id()] = true;
       KMessageBox::enableMessage(d->dontShowAgain());

@@ -105,14 +105,14 @@ const QString KOnlineBankingStatus::appId(void) const
 {
   if(m_appId)
     return m_appId->appId();
-  return QString::null;
+  return QString();
 }
 
 QString KOnlineBankingStatus::headerVersion(void) const
 {
   if(m_headerVersion)
     return m_headerVersion->headerVersion();
-  return QString::null;
+  return QString();
 }
 
 #include "konlinebankingstatus.moc"

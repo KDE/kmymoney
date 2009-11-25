@@ -209,7 +209,7 @@ void KCategoriesView::loadAccounts(void)
   // reposition viewport
   m_accountTree->setContentsPos(startPoint.x(), startPoint.y());
 
-  m_searchWidget->searchLine()->updateSearch(QString::null);
+  m_searchWidget->searchLine()->updateSearch(QString());
 
   // turn updates back on
   //m_accountTree->setUpdatesEnabled(true);

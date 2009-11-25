@@ -182,10 +182,10 @@ bool kMyMoneyCompletion::eventFilter(QObject* o, QEvent* e)
       if(e->type() == QEvent::KeyPress) {
         QKeyEvent* ev = static_cast<QKeyEvent*> (e);
         QKeyEvent evt(QEvent::KeyPress,
-                      Qt::Key_Down, ev->modifiers(), QString::null,
+                      Qt::Key_Down, ev->modifiers(), QString(),
                       ev->isAutoRepeat(), ev->count());
         QKeyEvent evbt(QEvent::KeyPress,
-                      Qt::Key_Up, ev->modifiers(), QString::null,
+                      Qt::Key_Up, ev->modifiers(), QString(),
                       ev->isAutoRepeat(), ev->count());
 
         switch(ev->key()) {

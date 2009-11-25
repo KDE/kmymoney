@@ -455,7 +455,7 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
                                     "The update job is not supported by the "
                                     "bank/account/backend.\n"
                                     "</qt>"),
-                                i18n("Dismiss"), QString::null);
+                                i18n("Dismiss"), QString());
           AB_Job_free(job);
           job = 0;
         }
@@ -533,7 +533,7 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
                                   i18n("<qt>"
                                       "Could not enqueue the job.\n"
                                       "</qt>"),
-                                  i18n("Dismiss"), QString::null);
+                                  i18n("Dismiss"), QString());
           }
         }
       }
@@ -554,7 +554,7 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
                               i18n("<qt>"
                                   "Could not enqueue the job.\n"
                                   "</qt>"),
-                              i18n("Dismiss"), QString::null);
+                              i18n("Dismiss"), QString());
       }
     }
 

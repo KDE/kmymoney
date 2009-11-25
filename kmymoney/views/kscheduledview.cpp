@@ -242,7 +242,7 @@ void KScheduledView::refresh(bool full, const QString& schedId)
     m_qlistviewScheduled->update();
 
     // force repaint in case the filter is set
-    m_searchWidget->searchLine()->updateSearch(QString::null);
+    m_searchWidget->searchLine()->updateSearch(QString());
 
     if (m_openBills)
       itemBills->setOpen(true);

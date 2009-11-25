@@ -88,14 +88,14 @@ public:
   virtual const QDate sortPostDate(void) const { return nullDate; }
   virtual int sortSamePostDate(void) const = 0;
   virtual const QDate sortEntryDate(void) const { return nullDate; }
-  virtual const QString sortPayee(void) const { return QString::null; }
+  virtual const QString sortPayee(void) const { return QString(); }
   virtual const MyMoneyMoney sortValue(void) const { return nullValue; }
-  virtual const QString sortNumber(void) const { return QString::null; }
-  virtual const QString sortEntryOrder(void) const { return QString::null; }
+  virtual const QString sortNumber(void) const { return QString(); }
+  virtual const QString sortEntryOrder(void) const { return QString(); }
   virtual CashFlowDirection sortType(void) const { return Deposit; }
-  virtual const QString sortCategory(void) const { return QString::null; }
+  virtual const QString sortCategory(void) const { return QString(); }
   virtual MyMoneySplit::reconcileFlagE sortReconcileState(void) const { return MyMoneySplit::MaxReconcileState; }
-  virtual const QString sortSecurity(void) const { return QString::null; }
+  virtual const QString sortSecurity(void) const { return QString(); }
 
   /**
     * This method sets the row offset of the item in the register
