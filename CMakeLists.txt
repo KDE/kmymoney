@@ -184,9 +184,10 @@ ENDIF( CPPUNIT_FOUND )
 
 # check wether the user requests to build the test although it's not possible
 IF( KDE4_BUILD_TESTS AND NOT CPPUNIT_FOUND )
-  message( SEND_ERROR
+  message( STATUS
     "CppUnit has not been found. Tests have been deactivated." )
-  SET( KDE4_BUILD_TESTS OFF FORCE )
+  SET( KDE4_BUILD_TESTS OFF )
+  MARK_AS_ADVANCED( FORCE KDE4_BUILD_TESTS )
 ENDIF( KDE4_BUILD_TESTS AND NOT CPPUNIT_FOUND )
 
 # do we build the tests?
