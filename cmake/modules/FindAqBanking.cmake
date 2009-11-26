@@ -33,17 +33,20 @@ if(DEFINED AQBANKING_BASE)
 endif(DEFINED AQBANKING_BASE)
 
 find_path(AQBANKING_INCLUDE_DIR NAMES aqbanking/version.h
-  HINTS ${aqbanking_root}/include ${_program_FILES_DIR}/aqbanking/include
+  HINTS ${aqbanking_root}/include /usr/local/qt4/include /usr/local/include ${_program_FILES_DIR}/aqbanking/include
 )
 
+string(REPLACE /include "" AQBASEDIR ${AQBANKING_INCLUDE_DIR})
+
 find_library(AQBANKING_LIBRARY NAMES aqbanking libaqbanking
-  HINTS ${aqbanking_root}/lib ${_program_FILES_DIR}/aqbanking/lib
+  HINTS ${AQBASEDIR}/lib
 )
 
 find_library(QBANKING_LIBRARY NAMES qbanking libqbanking
-  HINTS ${aqbanking_root}/lib ${_program_FILES_DIR}/qbanking/lib
+  HINTS ${AQBASEDIR}/lib
 )
 
+unset(AQBASEDIR)
 set(AQBANKING_INCLUDE_DIRS ${AQBANKING_INCLUDE_DIR})
 set(AQBANKING_LIBRARIES ${AQBANKING_LIBRARY} ${QBANKING_LIBRARY})
 
