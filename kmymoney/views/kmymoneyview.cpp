@@ -623,8 +623,9 @@ bool KMyMoneyView::readFile(const KUrl& url)
       if(QString(hdr) == QString("\037\213")) {         // gzipped?
         ::timetrace("detected GZIP");
         qfile = KFilterDev::deviceForFile(filename, COMPRESSION_MIME_TYPE);
-      } else if(QString(hdr) == QString("--")   // PGP ASCII armored?
-             || QString(hdr) == QString("\205\001")) {  // PGP binary?
+      } else if(QString(hdr) == QString("--")           // PGP ASCII armored?
+             || QString(hdr) == QString("\205\001")     // PGP binary?
+             || QString(hdr) == QString("\205\002")) {  // PGP binary?
         ::timetrace("detected GPG");
         if(KGPGFile::GPGAvailable()) {
           ::timetrace("have GPG");
