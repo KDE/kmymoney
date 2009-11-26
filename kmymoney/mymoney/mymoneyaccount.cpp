@@ -623,48 +623,48 @@ QPixmap MyMoneyAccount::accountPixmap(bool reconcileFlag, int size) const
   switch(accountType()) {
     default:
       if(accountGroup() == MyMoneyAccount::Asset)
-        icon = "account-types_asset";
+        icon = "account-types-asset";
       else
-        icon = "account-types_liability";
+        icon = "account-types-liability";
       break;
 
     case MyMoneyAccount::Investment:
     case MyMoneyAccount::Stock:
     case MyMoneyAccount::MoneyMarket:
     case MyMoneyAccount::CertificateDep:
-      icon = "account-types_investments";
+      icon = "account-types-investments";
       break;
 
     case MyMoneyAccount::Checkings:
-      icon = "account-types_checking";
+      icon = "account-types-checking";
       break;
     case MyMoneyAccount::Savings:
-      icon = "account-types_savings";
+      icon = "account-types-savings";
       break;
 
     case MyMoneyAccount::AssetLoan:
     case MyMoneyAccount::Loan:
-      icon = "account-types_loan";
+      icon = "account-types-loan";
       break;
 
     case MyMoneyAccount::CreditCard:
-      icon = "account-types_credit-card";
+      icon = "account-types-credit-card";
       break;
 
     case MyMoneyAccount::Asset:
-      icon = "account-types_asset";
+      icon = "account-types-asset";
       break;
 
     case MyMoneyAccount::Cash:
-      icon = "account-types_cash";
+      icon = "account-types-cash";
       break;
 
     case MyMoneyAccount::Income:
-      icon = "account-types_income";
+      icon = "account-types-income";
       break;
 
     case MyMoneyAccount::Expense:
-      icon = "account-types_expense";
+      icon = "account-types-expense";
       break;
 
     case MyMoneyAccount::Equity:
@@ -675,13 +675,13 @@ QPixmap MyMoneyAccount::accountPixmap(bool reconcileFlag, int size) const
   QPixmap result = DesktopIcon(icon, size);
   QPainter pixmapPainter(&result);
   if(isClosed()) {
-    QPixmap ovly = DesktopIcon("account-types_closed", size);
+    QPixmap ovly = DesktopIcon("account-types-closed", size);
     pixmapPainter.drawPixmap(0, 0, ovly.width(), ovly.height(), ovly);
   } else if(reconcileFlag) {
-    QPixmap ovly = DesktopIcon("account-types_reconciled.png", size);
+    QPixmap ovly = DesktopIcon("account-types-reconciled.png", size);
     pixmapPainter.drawPixmap(0, 0, ovly.width(), ovly.height(), ovly);
   } else if(!onlineBankingSettings().value("provider").isEmpty()) {
-    QPixmap ovly = DesktopIcon("account-types_online.png", size);
+    QPixmap ovly = DesktopIcon("account-types-online.png", size);
     pixmapPainter.drawPixmap(0, 0, ovly.width(), ovly.height(), ovly);
   }
   return result;

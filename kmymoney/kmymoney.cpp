@@ -499,7 +499,7 @@ void KMyMoney2App::initActions(void)
   // *************
   KAction *edit_find_transaction = actionCollection()->addAction("edit_find_transaction");
   edit_find_transaction->setText(i18n("Find transaction..."));
-  edit_find_transaction->setIcon(KIcon("transaction_find"));
+  edit_find_transaction->setIcon(KIcon("transaction-find"));
   edit_find_transaction->setShortcut(KShortcut("Ctrl+F"));
   connect(edit_find_transaction, SIGNAL(triggered()), this, SLOT(slotFindTransaction()));
 
@@ -515,14 +515,14 @@ void KMyMoney2App::initActions(void)
   KToggleAction *view_hide_reconciled_transactions = new KToggleAction(this);
   actionCollection()->addAction("view_hide_reconciled_transactions", view_hide_reconciled_transactions);
   view_hide_reconciled_transactions->setText(i18n("Hide reconciled transactions"));
-  view_hide_reconciled_transactions->setIcon(KIcon("hide_reconciled"));
+  view_hide_reconciled_transactions->setIcon(KIcon("hide-reconciled"));
   view_hide_reconciled_transactions->setShortcut(KShortcut("Ctrl+R"));
   connect(view_hide_reconciled_transactions, SIGNAL(triggered()), this, SLOT(slotHideReconciledTransactions()));
 
   KToggleAction *view_hide_unused_categories = new KToggleAction(this);
   actionCollection()->addAction("view_hide_unused_categories", view_hide_unused_categories);
   view_hide_unused_categories->setText(i18n("Hide unused categories"));
-  view_hide_unused_categories->setIcon(KIcon("hide_categories"));
+  view_hide_unused_categories->setIcon(KIcon("hide-categories"));
   view_hide_unused_categories->setShortcut(KShortcut("Ctrl+U"));
   connect(view_hide_unused_categories, SIGNAL(triggered()), this, SLOT(slotHideUnusedCategories()));
 
@@ -537,7 +537,7 @@ void KMyMoney2App::initActions(void)
   // *********************
   KAction *institution_new = actionCollection()->addAction("institution_new");
   institution_new->setText(i18n("New institution..."));
-  institution_new->setIcon(KIcon("institution_add"));
+  institution_new->setIcon(KIcon("institution-add"));
   connect(institution_new, SIGNAL(triggered()), this, SLOT(slotInstitutionNew()));
 
   KAction *institution_edit = actionCollection()->addAction("institution_edit");
@@ -555,7 +555,7 @@ void KMyMoney2App::initActions(void)
   // *****************
   KAction *account_new = actionCollection()->addAction("account_new");
   account_new->setText(i18n("New account..."));
-  account_new->setIcon(KIcon("account_add"));
+  account_new->setIcon(KIcon("account-add"));
   connect(account_new, SIGNAL(triggered()), this, SLOT(slotAccountNew()));
 
   // note : action "category_new" is included in this menu but defined below
@@ -602,12 +602,12 @@ void KMyMoney2App::initActions(void)
 
   KAction *account_transaction_report = actionCollection()->addAction("account_transaction_report");
   account_transaction_report->setText(i18n("Transaction report"));
-  account_transaction_report->setIcon(KIcon("view_info"));
+  account_transaction_report->setIcon(KIcon("transaction-report"));
   connect(account_transaction_report, SIGNAL(triggered()), this, SLOT(slotAccountTransactionReport()));
 
   KAction *account_chart = actionCollection()->addAction("account_chart");
   account_chart->setText(i18n("Show balance chart..."));
-  account_chart->setIcon(KIcon("report"));
+  account_chart->setIcon(KIcon("office-chart-tall-pie"));
   connect(account_chart, SIGNAL(triggered()), this, SLOT(slotAccountChart()));
 
   KAction *account_online_map = actionCollection()->addAction("account_online_map");
@@ -620,7 +620,7 @@ void KMyMoney2App::initActions(void)
   account_online_unmap->setIcon(KIcon("news-unsubscribe"));
   connect(account_online_unmap, SIGNAL(triggered()), this, SLOT(slotAccountUnmapOnline()));
 
-  KActionMenu* menu = new KActionMenu(KIcon("view-refresh"), i18nc("Update online accounts menu", "Update"), this);
+  KActionMenu* menu = new KActionMenu(KIcon("account-update-online"), i18nc("Update online accounts menu", "Update"), this);
   actionCollection()->addAction("account_online_update_menu", menu);
 
   // activating the menu button is the same as selecting the current account
@@ -721,7 +721,7 @@ void KMyMoney2App::initActions(void)
   // ***************************
   KAction *transaction_new = actionCollection()->addAction("transaction_new");
   transaction_new->setText(i18nc("New transaction button", "New"));
-  transaction_new->setIcon(KIcon("document-new"));
+  transaction_new->setIcon(KIcon("transaction-add"));
   transaction_new->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_Insert));
   connect(transaction_new, SIGNAL(triggered()), this, SLOT(slotTransactionsNew()));
 
@@ -731,7 +731,7 @@ void KMyMoney2App::initActions(void)
   // the same shortcut to two actions)
   KAction *transaction_edit = actionCollection()->addAction("transaction_edit");
   transaction_edit->setText(i18nc("Edit transaction button", "Edit"));
-  transaction_edit->setIcon(KIcon("document-properties"));
+  transaction_edit->setIcon(KIcon("transaction-edit"));
   transaction_edit->setShortcutConfigurable(false);
   connect(transaction_edit, SIGNAL(triggered()), this, SLOT(slotTransactionsEdit()));
 
@@ -743,7 +743,7 @@ void KMyMoney2App::initActions(void)
 
   KAction *transaction_editsplits = actionCollection()->addAction("transaction_editsplits");
   transaction_editsplits->setText(i18nc("Edit split button", "Edit splits"));
-  transaction_editsplits->setIcon(KIcon("split_transaction"));
+  transaction_editsplits->setIcon(KIcon("transaction-split"));
   connect(transaction_editsplits, SIGNAL(triggered()), this, SLOT(slotTransactionsEditSplits()));
 
   KAction *transaction_cancel = actionCollection()->addAction("transaction_cancel");
@@ -753,7 +753,7 @@ void KMyMoney2App::initActions(void)
 
   KAction *transaction_delete = actionCollection()->addAction("transaction_delete");
   transaction_delete->setText(i18nc("Delete transaction", "Delete"));
-  transaction_delete->setIcon(KIcon("edit-delete"));
+  transaction_delete->setIcon(KIcon("transaction-delete"));
   connect(transaction_delete, SIGNAL(triggered()), this, SLOT(slotTransactionsDelete()));
 
   KAction *transaction_duplicate = actionCollection()->addAction("transaction_duplicate");
@@ -893,17 +893,17 @@ void KMyMoney2App::initActions(void)
   //Budget
   KAction *budget_new = actionCollection()->addAction("budget_new");
   budget_new->setText(i18n("New budget"));
-  budget_new->setIcon(KIcon("document-new"));
+  budget_new->setIcon(KIcon("budget-add"));
   connect(budget_new, SIGNAL(triggered()), this, SLOT(slotBudgetNew()));
 
   KAction *budget_rename = actionCollection()->addAction("budget_rename");
   budget_rename->setText(i18n("Rename budget"));
-  budget_rename->setIcon(KIcon("edit-rename"));
+  budget_rename->setIcon(KIcon("budget-edit"));
   connect(budget_rename, SIGNAL(triggered()), this, SIGNAL(budgetRename()));
 
   KAction *budget_delete = actionCollection()->addAction("budget_delete");
   budget_delete->setText(i18n("Delete budget"));
-  budget_delete->setIcon(KIcon("edit-delete"));
+  budget_delete->setIcon(KIcon("budget-delete"));
   connect(budget_delete, SIGNAL(triggered()), this, SLOT(slotBudgetDelete()));
 
   KAction *budget_copy = actionCollection()->addAction("budget_copy");
