@@ -168,7 +168,7 @@ void PivotTable::init(void)
 
   //
   // Calculate budget mapping
-  // (for budget-vs-actual reports only)
+  // (for budget reports only)
   //
   if ( m_config_f.hasBudget())
     calculateBudgetMapping();
@@ -821,6 +821,12 @@ void PivotTable::calculateBudgetMapping( void )
     //if no budget has been selected
     if (m_config_f.budget() == "Any" ) {
       QList<MyMoneyBudget> budgets = file->budgetList();
+
+      //if the budget list is empty, just return
+      if (budgets.count() == 0) {
+        return;
+      }
+
       QList<MyMoneyBudget>::const_iterator budgets_it = budgets.constBegin();
       while( budgets_it != budgets.constEnd() ) {
         //pick the first budget that matches the report start year
@@ -830,9 +836,10 @@ void PivotTable::calculateBudgetMapping( void )
         }
         ++budgets_it;
       }
-      //if we can't find a matching budget, take the first of the list
-      if( budget.id().isEmpty() )
+      //if it can't find a matching budget, take the first one on the list
+      if( budget.id().isEmpty() ) {
         budget = budgets[0];
+      }
 
       //assign the budget to the report
       m_config_f.setBudget(budget.id(), m_config_f.isIncludingBudgetActuals());
