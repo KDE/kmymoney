@@ -2166,9 +2166,16 @@ KMyMoneyViewBase* KMyMoneyView::addBasePage(const QString& title, const QString&
   //FIXME:: Port to kde4
   //I have not found how to set the icon size of KPageWidget -- asoliverez
   //const int iconSize = (KMyMoneyGlobalSettings::iconSize()+1)*16;
+
+  //avoid setting this page as the last selected page since this is called by plugins adding to the view interface
+  disconnect(this, SIGNAL(currentPageChanged(const QModelIndex, const QModelIndex)), this, SLOT(slotRememberPage(const QModelIndex, const QModelIndex)));
+
   KPageWidgetItem* frm = m_model->addPage(viewBase, title);
   frm->setIcon(KIcon(icon));
   frm->setHeader(QString("")); // hide the header and let the title bar do it's job
+
+  connect(this, SIGNAL(currentPageChanged(const QModelIndex, const QModelIndex)), this, SLOT(slotRememberPage(const QModelIndex, const QModelIndex)));
+
   return viewBase;
 }
 
