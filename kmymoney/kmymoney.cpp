@@ -4750,7 +4750,7 @@ void KMyMoney2App::slotTransactionsDelete(void)
                 KGuiItem("DeleteReconciledTransaction")) == KMessageBox::Cancel)
                  return;
   }
-  QString msg = 
+  QString msg =
       i18np("Do you really want to delete the selected transaction?",
             "Do you really want to delete all %1 selected transactions?",
             d->m_selectedTransactions.count());

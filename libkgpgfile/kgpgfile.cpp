@@ -1,9 +1,7 @@
 /***************************************************************************
                              kgpgfile.cpp
                              -------------------
-    begin                : Fri Jan 23 2004
-    copyright            : (C) 2004,2005 by Thomas Baumgart
-    email                : thb@net-bembel.de
+    copyright            : (C) 2004,2005,2009 by Thomas Baumgart <ipwizard@users.sourceforge.net>
  ***************************************************************************/
 
 /***************************************************************************
@@ -21,7 +19,6 @@
 
 #include "kgpgfile.h"
 
-
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -29,77 +26,79 @@
 #include <QFile>
 #include <QDir>
 #include <QString>
-#include <QEventLoop>
 #include <QByteArray>
+#include <QBuffer>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kapplication.h>
-#include <klocale.h>
-//#include <k3process.h>
-#include <kpassworddialog.h>
-#include <klibloader.h>
-//#include <kdialog.h>
+#include <kstandarddirs.h>
 
-#if 0
-class KGPGFileFactory : public KLibFactory
-{
-public:
-    KGPGFileFactory() : KLibFactory() {}
-    ~KGPGFileFactory(){}
-    QObject *createObject( QObject *, const char *, const char*, const QStringList & )
+#include <kleo/cryptplugwrapper.h>
+#include <kleo/keylistjob.h>
+#include <kleo/decryptjob.h>
+#include <kleo/encryptjob.h>
+
+#include <gpgme++/key.h>
+
+class KGPGFile::Private {
+  public:
+    Private() : m_remain(0)
     {
-        return new KGPGFile;
+      cw = new CryptPlugWrapper("gpg", "openpgp");
     }
+
+    ~Private()
+    {
+      delete cw;
+    }
+
+    QString m_fn;
+    QByteArray m_buffer;
+    QEventLoop	evLoop;
+    QFile* m_file;
+
+    qint64  m_remain;
+
+    std::vector< GpgME::Key > m_recipients;
+
+    // the result set of the last key list job
+    std::vector< GpgME::Key > m_keys;
+
+    QStringList* keyList;
+    CryptPlugWrapper* cw;
 };
 
-extern "C" {
-    void *init_libkgpgfile()
-    {
-        return new KGPGFileFactory;
-    }
-}
-#endif
+
 
 KGPGFile::KGPGFile(const QString& fn, const QString& homedir, const QString& options) :
-  m_options(options),
-  m_homedir(homedir),
-  m_readRemain(0),
-  m_event(0),
-  m_needExitLoop(false)
+  d(new Private)
 {
-  setName(fn);
-  m_exitStatus = -2;
-  m_comment = "created by KGPGFile";
-  // qDebug("ungetchbuffer %d", m_ungetchBuffer.length());
-  m_event = new QEventLoop(this);
+  // only kept for interface compatability
+  Q_UNUSED(homedir);
+  Q_UNUSED(options);
+
+  setFileName(fn);
 }
 
 KGPGFile::~KGPGFile()
 {
   close();
+  delete d;
 }
 
-void KGPGFile::init(void)
+void KGPGFile::setFileName(const QString& fn)
 {
-//FIXME:Port to Qt4
-//setFlags(IO_Sequential);
-//setStatus(IO_Ok);
-//setState(0);
-}
-
-void KGPGFile::setName(const QString& fn)
-{
-  m_fn = fn;
+  d->m_fn = fn;
   if(!fn.isEmpty() && fn[0] == '~') {
-    m_fn = QDir::homePath()+fn.mid(1);
+    d->m_fn = QDir::homePath()+fn.mid(1);
 
-  } else if(QDir::isRelativePath(m_fn)) {
+  } else if(QDir::isRelativePath(d->m_fn)) {
     QDir dir(fn);
-    m_fn = dir.absolutePath();
+    d->m_fn = dir.absolutePath();
   }
-  // qDebug("setName: '%s'", m_fn.data());
+  // qDebug("setName: '%s'", d->m_fn.toLatin1().data());
 }
 
 void KGPGFile::flush(void)
@@ -107,290 +106,120 @@ void KGPGFile::flush(void)
   // no functionality
 }
 
-void KGPGFile::addRecipient(const QByteArray& recipient)
+void KGPGFile::addRecipient(const QString& recipient)
 {
-  m_recipient << recipient;
+  // skip a possible leading 0x in the id
+  QString cmp = recipient;
+  if(cmp.startsWith("0x"))
+    cmp = cmp.mid(2);
+
+  QStringList patterns;
+  patterns << cmp;
+  QStringList keylist;
+  keyList(keylist, false, patterns);
+
+  if(d->m_keys.size() > 0)
+    d->m_recipients.push_back(d->m_keys.front());
 }
 
-bool KGPGFile::open(int mode)
+bool KGPGFile::open(OpenMode mode)
 {
-  return open(mode, QString(), false);
-}
-
-bool KGPGFile::open(int mode, const QString& cmdArgs, bool skipPasswd)
-{
-#if 0
-  bool useOwnPassphrase = qgetenv("GPG_AGENT_INFO").isEmpty();
-
   // qDebug("KGPGFile::open(%d)", mode);
-  m_errmsg.resize(1);
   if(isOpen()) {
-    // qDebug("File already open");
     return false;
   }
 
-  // qDebug("check filename empty");
-  if(m_fn.isEmpty())
+  if(d->m_fn.isEmpty())
     return false;
 
-  // qDebug("setup file structures");
-  init();
-
-//FIXME:Port to Qt4
-  //setMode(mode);
+  setOpenMode(mode);
 
   // qDebug("check valid access mode");
   if(!(isReadable() || isWritable()))
     return false;
 
+  d->m_buffer.clear();
+
   if(isWritable()) {
+
     // qDebug("check recipient count");
-    if(m_recipient.count() == 0)
+    if(d->m_recipients.size() == 0) {
+      setOpenMode(NotOpen);
       return false;
+    }
+
     // qDebug("check access rights");
-    //FIXME:Port to Qt4
-    //if(!checkAccess(m_fn, W_OK))
-    //  return false;
-  }
-
-  QStringList args;
-  if(cmdArgs.isEmpty()) {
-    args << "--homedir" << QString("\"%1\"").arg(m_homedir)
-        << "-q"
-        << "--batch";
-
-    if(isWritable()) {
-      args << "-ea"
-          << "-z" << "6"
-          << "--comment" << QString("\"%1\"").arg(m_comment)
-          << "--trust-model=always"
-          << "-o" << QString("\"%1\"").arg(m_fn);
-      QLinkedList<QByteArray>::Iterator it;
-      for(it = m_recipient.begin(); it != m_recipient.end(); ++it)
-        args << "-r" << QString("\"%1\"").arg(QString(*it));
-
-      // some versions of GPG had trouble to replace a file
-      // so we delete it first
-      QFile::remove(m_fn);
-    } else {
-      args << "-da";
-      if(useOwnPassphrase)
-        args << "--passphrase-fd" << "0";
-      else
-        args << "--use-agent";
-      args << "--no-default-recipient" << QString("\"%1\"").arg(m_fn);
-    }
-  } else {
-    args = cmdArgs.split(' ');
-  }
-
-  QByteArray pwd;
-  if(isReadable() && useOwnPassphrase && !skipPasswd) {
-    QPointer<KPasswordDialog> dlg = new KPasswordDialog(0, KPasswordDialog::NoFlags,KDialog::None);
-    dlg->setPrompt(i18n("Enter passphrase"));
-    dlg->addCommentLine(i18n("File"), m_fn);
-    dlg->adjustSize();
-    if (dlg->exec() == QDialog::Rejected) {
-      delete dlg;
-      return false;
-    }
-    pwd = QByteArray(dlg->password().toUtf8());
-    delete dlg;
-  }
-
-  // qDebug("starting GPG process");
-  if(!startProcess(args))
-    return false;
-
-  // qDebug("check GPG process running");
-  if(!m_process) {
-    // if the process is not present anymore, we have to check
-    // if it was a read operation and we might already have data
-    // and the process finished normally. In that case, we
-    // just continue.
-    if(isReadable()) {
-      if(m_ungetchBuffer.isEmpty())
-        return false;
-    } else
+    if(!KStandardDirs::checkAccess(d->m_fn, W_OK))
       return false;
   }
 
-  if(isReadable() && useOwnPassphrase && !skipPasswd) {
-    // qDebug("Passphrase is '%s'", pwd.data());
-    if(_write(pwd.data(), pwd.length()) == -1) {
-      // qDebug("Sending passphrase failed");
-      return false;
-    }
-    m_process->closeStdin();
-  }
-
-//FIXME: Port to Qt4
- //setState( IO_Open );
-//  ioIndex = 0;
-  // qDebug("File open");
-#endif
-  return true;
-}
-
-bool KGPGFile::startProcess(const QStringList& args)
-{
-#if 0
-  // now start the K3Process with GPG
-  m_process = new K3ShellProcess();
-  *m_process << "gpg";
-  *m_process << args;
-
-  // QString arglist = args.join(":");
-  // qDebug("gpg '%s'", arglist.data());
-
-  connect(m_process, SIGNAL(processExited(K3Process *)),
-          this, SLOT(slotGPGExited(K3Process *)));
-
-  connect(m_process, SIGNAL(receivedStdout(K3Process*, char*, int)),
-          this, SLOT(slotDataFromGPG(K3Process*, char*, int)));
-
-  connect(m_process, SIGNAL(receivedStderr(K3Process*, char*, int)),
-          this, SLOT(slotErrorFromGPG(K3Process*, char*, int)));
-
-  connect(m_process, SIGNAL(wroteStdin(K3Process *)),
-          this, SLOT(slotSendDataToGPG(K3Process *)));
-
-  if(!m_process->start(K3Process::NotifyOnExit, (K3Process::Communication)(K3Process::Stdin|K3Process::Stdout|K3Process::Stderr))) {
-    // qDebug("m_process->start failed");
-    delete m_process;
-    m_process = 0;
+  // open the 'physical' file
+  d->m_file = new QFile;
+  d->m_file->setFileName(d->m_fn);
+  if(!d->m_file->open(mode)) {
+    setOpenMode(NotOpen);
     return false;
   }
-
-  // let the process settle and see if it starts and survives ;-)
-  kapp->processEvents(QEventLoop::AllEvents, 100);
-#endif
   return true;
 }
 
 void KGPGFile::close(void)
 {
-#if 0
-  // qDebug("KGPGFile::close()");
   if(!isOpen()) {
-    // qDebug("File not open");
     return;
   }
 
-  // finish the K3Process and clean up things
-  if(m_process) {
-    if(isWritable()) {
-      // qDebug("Finish writing");
-      if(m_process->isRunning()) {
-        m_process->closeStdin();
-        // now wait for GPG to finish
-        m_needExitLoop = true;
-        m_event->exec(QEventLoop::ExcludeUserInputEvents);
-      } else
-        m_process->kill();
+  if(isWritable() && (d->m_buffer.size() != 0)) {
 
-    } else if(isReadable()) {
-      // qDebug("Finish reading");
-      if(m_process->isRunning()) {
-        m_process->closeStdout();
-        // now wait for GPG to finish
-        m_needExitLoop = true;
-        m_event->exec(QEventLoop::ExcludeUserInputEvents);
-      } else
-        m_process->kill();
+    // start the encryption job
+    Kleo::EncryptJob* job = d->cw->encryptJob();
+    connect(job, SIGNAL(result(const GpgME::EncryptionResult &, const QByteArray &, const QString &)),
+            this, SLOT(slotEncryptJobResult(const GpgME::EncryptionResult &, const QByteArray &, const QString &)));
+
+    const boost::shared_ptr<QBuffer> buffer(new QBuffer);
+    buffer->setBuffer(&d->m_buffer);
+    if(!buffer->open(QIODevice::ReadOnly)) {
+      qDebug("Unable to open buffer in KGPGFile::close");
+      return;
     }
-  }
-  m_ungetchBuffer = QByteArray();
 
-//FIXME: Port to Qt4
-//  setState(0);
-  m_recipient.clear();
-  // qDebug("File closed");
-#endif
+    // start encryption job
+    job->start(d->m_recipients, buffer, boost::shared_ptr<QIODevice>(), true);
+
+    // wait for it to finish
+    d->evLoop.exec();
+
+    // write out the data to the file
+    qint64 bytesWritten = d->m_file->write(d->m_buffer);
+    if(bytesWritten != d->m_buffer.size()) {
+      qDebug("Only %d of %d bytes written to file", qint32(bytesWritten & 0xFFFFFFFF), d->m_buffer.size());
+  }
+  }
+
+  d->m_file->close();
+  setOpenMode(NotOpen);
+
+  d->m_recipients.clear();
+  delete d->m_file;
+  d->m_file = 0;
 }
 
-int KGPGFile::getch(void)
+qint64 KGPGFile::writeData(const char *data, qint64 maxlen)
 {
   if(!isOpen())
     return EOF;
-  if(!isReadable())
-    return EOF;
 
-  int ch;
-
-  if(!m_ungetchBuffer.isEmpty()) {
-    ch = (m_ungetchBuffer)[0] & 0xff;
-    m_ungetchBuffer.remove(0, 1);
-
-  } else {
-    char buf[1];
-    ch = (read(buf,1) == 1) ? (buf[0] & 0xff) : EOF;
-  }
-
-  // qDebug("getch returns 0x%02X", ch);
-  return ch;
-}
-
-int KGPGFile::ungetch(int ch)
-{
-  if(!isOpen())
-    return EOF;
-  if(!isReadable())
-    return EOF;
-
-  if(ch != EOF) {
-    // qDebug("store 0x%02X in ungetchbuffer", ch & 0xff);
-    m_ungetchBuffer.insert(0, ch & 0xff);
-  }
-
-  return ch;
-}
-
-int KGPGFile::putch(int c)
-{
-  char  buf[1];
-  buf[0] = c;
-  if(write(buf, 1) != EOF)
-    return c;
-  return EOF;
-}
-
-qint64 KGPGFile::write(const char *data, qint64 maxlen)
-{
-  if(!isOpen())
-    return EOF;
   if(!isWritable())
     return EOF;
 
-  return _write(data, maxlen);
+  qDebug("write %d bytes", qint32(maxlen & 0xFFFFFFFF));
+  d->m_buffer.append(data, maxlen);
+
+  return maxlen;
 }
 
-qint64 KGPGFile::_write(const char *data, qint64 maxlen)
+qint64 KGPGFile::readData(char *data, qint64 maxlen)
 {
-#if 0
-  if(!m_process)
-    return EOF;
-  if(!m_process->isRunning())
-    return EOF;
-
-  if(m_process->writeStdin(data, maxlen)) {
-    // wait until the data has been written
-    m_needExitLoop = true;
-    m_event->exec(QEventLoop::ExcludeUserInputEvents);
-    if(!m_process)
-      return EOF;
-    return maxlen;
-
-  } else
-    return EOF;
-#endif
-  return EOF;
-}
-
-qint64 KGPGFile::read(char *data, qint64 maxlen)
-{
-#if 0
-  // char *oridata = data;
   if(maxlen == 0)
     return 0;
 
@@ -399,328 +228,127 @@ qint64 KGPGFile::read(char *data, qint64 maxlen)
   if(!isReadable())
     return EOF;
 
-  qint64 nread = 0;
-  if(!m_ungetchBuffer.isEmpty()) {
-    unsigned l = m_ungetchBuffer.length();
-    if(maxlen < l)
-      l = maxlen;
-    memcpy(data, m_ungetchBuffer, l);
-    nread += l;
-    data = &data[l];
-    m_ungetchBuffer.remove(0, l);
+  // check if we need to fill the buffer
+  if(d->m_buffer.isNull()) {
+    d->m_buffer = d->m_file->readAll();
 
-    if(!m_process) {
-      // qDebug("read %d bytes from unget buffer", nread);
-      // dumpBuffer(oridata, nread);
-      return nread;
-    }
+    Kleo::DecryptJob* job = d->cw->decryptJob();
+    connect(job, SIGNAL(result(const GpgME::DecryptionResult &, const QByteArray &, const QString &, const GpgME::Error &)),
+this, SLOT(slotDecryptJobResult(const GpgME::DecryptionResult &, const QByteArray &, const QString &, const GpgME::Error &)));
+
+    const boost::shared_ptr<QBuffer> buffer(new QBuffer);
+    buffer->setBuffer(&d->m_buffer);
+    if(!buffer->open(QIODevice::ReadOnly))
+      return EOF;
+
+    // Start decryption job
+    job->start(buffer);
+
+    // wait for job to finish
+    d->evLoop.exec();
+    d->m_remain = 0;
   }
 
-  // check for EOF
-  if(!m_process) {
-    // qDebug("EOF (no process)");
+  // check if all was read
+  if((d->m_buffer.size() - d->m_remain) == 0)
     return EOF;
-  }
 
-  m_readRemain = maxlen - nread;
-  m_ptrRemain = data;
-  if(m_readRemain) {
-    m_process->resume();
-    m_needExitLoop = true;
-    m_event->exec(QEventLoop::ExcludeUserInputEvents);
+  qint64 nread = maxlen;
+  if((d->m_buffer.size() - d->m_remain) < nread) {
+    nread = d->m_buffer.size() - d->m_remain;
   }
-  // if nothing has been read (maxlen-m_readRemain == 0) then we assume EOF
-  if((maxlen - m_readRemain) == 0) {
-    // qDebug("EOF (nothing read)");
-    return EOF;
-  }
-  // qDebug("return %d bytes", maxlen - m_readRemain);
-  // dumpBuffer(oridata, maxlen - m_readRemain);
-  return maxlen - m_readRemain;
-#endif
-  return EOF;
+  memcpy(data, &d->m_buffer.data()[d->m_remain], nread);
+  d->m_remain += nread;
+
+  // qDebug("Read %d bytes", qint32(nread & 0xFFFFFFFF));
+  return nread;
 }
 
-QByteArray KGPGFile::readAll(void)
+void KGPGFile::slotEncryptJobResult( const GpgME::EncryptionResult & result, const QByteArray & cipherText, const QString & auditLogAsHtml)
 {
-  // use a larger blocksize than in the QIODevice version
-  const int blocksize = 8192;
-  int nread = 0;
-  QByteArray ba;
-  while ( !atEnd() ) {
-    ba.resize( nread + blocksize );
-    int r = read( ba.data()+nread, blocksize );
-    if ( r < 0 )
-      return QByteArray();
-    nread += r;
-  }
-  ba.resize( nread );
-  return ba;
+  Q_UNUSED(result)
+  Q_UNUSED(auditLogAsHtml)
+
+  // qDebug("Done encrypting: got %d bytes", cipherText.size());
+  d->m_buffer = cipherText;
+  d->evLoop.exit();
 }
 
-void KGPGFile::slotGPGExited(K3Process* )
+
+void KGPGFile::slotDecryptJobResult( const GpgME::DecryptionResult & result, const QByteArray & plainText, const QString & auditLogAsHtml, const GpgME::Error & auditLogError )
 {
-#if 0
-  // qDebug("GPG finished");
-  if(m_process) {
-    if(m_process->normalExit()) {
-      m_exitStatus = m_process->exitStatus();
-      if(m_exitStatus != 0)
-        {
-//FIXME: Port to Qt4
-//        setStatus(IO_UnspecifiedError);
-        }
-    } else {
-      m_exitStatus = -1;
-    }
-    delete m_process;
-    m_process = 0;
-  }
+  Q_UNUSED(result)
+  Q_UNUSED(auditLogAsHtml)
+  Q_UNUSED(auditLogError)
 
-  if(m_needExitLoop) {
-    m_needExitLoop = false;
-    m_event->quit();
-  }
-#endif
-}
-
-void KGPGFile::slotDataFromGPG(K3Process* proc, char* buf, int len)
-{
-#if 0
-  // qDebug("Received %d bytes on stdout", len);
-
-  // copy current buffer to application
-  int copylen;
-  copylen = m_readRemain < len ? m_readRemain : len;
-  if(copylen != 0) {
-    memcpy(m_ptrRemain, buf, copylen);
-    m_ptrRemain += copylen;
-    buf += copylen;
-    m_readRemain -= copylen;
-    len -= copylen;
-  }
-
-  // store rest of buffer in ungetch buffer
-  while(len--) {
-    m_ungetchBuffer += *buf++;
-  }
-
-  // if we have all the data the app requested, we can safely suspend
-  if(m_readRemain == 0) {
-    proc->suspend();
-    // wake up the recipient
-    if(m_needExitLoop) {
-      m_needExitLoop = false;
-      m_event->quit();
-    }
-  }
-  // qDebug("end slotDataFromGPG");
-#endif
-}
-
-void KGPGFile::slotErrorFromGPG(K3Process *, char *buf, int len)
-{
-  // qDebug("Received %d bytes on stderr", len);
-  QByteArray msg;
-  msg.fromRawData(buf, len);
-  m_errmsg += msg;
-  msg.clear();
-}
-
-void KGPGFile::slotSendDataToGPG(K3Process *)
-{
-  // qDebug("wrote stdin");
-  if(m_needExitLoop) {
-    m_needExitLoop = false;
-    m_event->quit();
-  }
+  // qDebug("Done decrypting: got %d bytes", plainText.size());
+  d->m_buffer = plainText;
+  d->evLoop.exit();
 }
 
 bool KGPGFile::GPGAvailable(void)
 {
-  QString output;
-  char  buffer[1024];
-  qint64 len;
-
   KGPGFile file;
-  file.open(QIODevice::ReadOnly, "--version", true);
-  while((len = file.read(buffer, sizeof(buffer)-1)) != EOF) {
-    buffer[len] = 0;
-    output += QString(buffer);
-  }
-  file.close();
-  return !output.isEmpty();
+  return file.d->cw->initStatus(0) == CryptPlugWrapper::InitStatus_Ok;
 }
 
 bool KGPGFile::keyAvailable(const QString& name)
 {
-  QString output;
-  char  buffer[1024];
-  qint64 len;
-
   KGPGFile file;
-  QString args = QString("--list-keys --list-options no-show-photos %1").arg(name);
-  file.open(QIODevice::ReadOnly, args, true);
-  while((len = file.read(buffer, sizeof(buffer)-1)) != EOF) {
-    buffer[len] = 0;
-    output += QString(buffer);
-  }
-  file.close();
-  return !output.isEmpty();
+  QStringList keys;
+  QStringList patterns;
+  patterns << name;
+  file.keyList(keys, false, patterns);
+  // qDebug("keyAvailable returns %d for '%s'", keys.count(), qPrintable(name));
+  return keys.count() != 0;
 }
 
 void KGPGFile::publicKeyList(QStringList& list)
 {
-  QMap<QString, QString> map;
-  QString output;
-  char  buffer[1024];
-  qint64 len;
-
-  list.clear();
+  // qDebug("Reading public keys");
   KGPGFile file;
-  file.open(QIODevice::ReadOnly, "--list-keys --with-colons", true);
-  while((len = file.read(buffer, sizeof(buffer)-1)) != EOF) {
-    buffer[len] = 0;
-    output += QString(buffer);
-  }
-  file.close();
-
-  // now parse the data. it looks like:
-  /*
-    tru::0:1210616414:1214841688:3:1:5
-    pub:u:1024:17:9C59DB40B75DD3BA:2001-06-23:::u:Thomas Baumgart <thomas.baumgart@syrocon.de>::scaESCA:
-    uid:u::::2001-11-29::63493BF182C494227E198FE5DA00ACDF63961AFB::Thomas Baumgart <thb@net-bembel.de>:
-    uid:u::::2001-11-29::00A393737BC120C98A6402B921599F6D72058DD8::Thomas Baumgart <ipwizard@users.sourceforge.net>:
-    sub:u:1024:16:85968A70D1F83C2B:2001-06-23::::::e:
-  */
-  QStringList lines = output.split('\n');
-  QStringList::iterator it;
-  QString currentKey;
-  for(it = lines.begin(); it != lines.end(); ++it) {
-    // qDebug("Parsing: '%s'", (*it).data());
-    QStringList fields = (*it).split(':');
-    QString val;
-    if(fields[0] == "pub") {
-      currentKey = fields[4];
-      val = QString("%1:%2").arg(currentKey).arg(fields[9]);
-      map[val] = val;
-    } else if(fields[0] == "uid") {
-      val = QString("%1:%2").arg(currentKey).arg(fields[9]);
-      map[val] = val;
-    }
-  }
-  list = map.values();
+  file.keyList(list);
 }
-
 
 void KGPGFile::secretKeyList(QStringList& list)
 {
-  QString output;
-  char  buffer[1024];
-  qint64 len;
-
-  list.clear();
+  // qDebug("Reading secrect keys");
   KGPGFile file;
-  file.open(QIODevice::ReadOnly, "--list-secret-keys --with-colons", true);
-  while((len = file.read(buffer, sizeof(buffer)-1)) != EOF) {
-    buffer[len] = 0;
-    output += QString(buffer);
-  }
-  file.close();
-
-  // now parse the data. it looks like:
-  /*
-    sec::1024:17:9C59DB40B75DD3BA:2001-06-23::::Thomas Baumgart <ipwizard@users.sourceforge.net>:::
-    uid:::::::::Thomas Baumgart <thb@net-bembel.de>:
-    ssb::1024:16:85968A70D1F83C2B:2001-06-23:::::::
-    sec::1024:17:59B0F826D2B08440:2005-01-03:2010-01-02:::KMyMoney emergency data recovery <kmymoney-recover@users.sourceforge.net>:::
-    ssb::2048:16:B3DABDC48C0FE2F3:2005-01-03:::::::
-  */
-  QStringList lines = output.split('\n');
-  QStringList::iterator it;
-  QString currentKey;
-  for(it = lines.begin(); it != lines.end(); ++it) {
-    // qDebug("Parsing: '%s'", (*it).data());
-    QStringList fields = (*it).split(':');
-    if(fields[0] == "sec") {
-      currentKey = fields[4];
-      list << QString("%1:%2").arg(currentKey).arg(fields[9]);
-    } else if(fields[0] == "uid") {
-      list << QString("%1:%2").arg(currentKey).arg(fields[9]);
-    }
-  }
+  file.keyList(list, true);
 }
 
-/*
-// key generation
-  char * gpg_input =
-    g_strdup_printf("Key-Type: DSA\n"
-                    "Key-Length: 1024\n"
-                    "Subkey-Type: ELG-E\n"
-                    "Subkey-Length: 1024\n"
-                    "Name-Real: %s\n"
-                    "Name-Comment: %s\n"
-                    "Name-Email: %s\n"
-                    "Passphrase: %s\n"
-                    "%%commit\n",
-                    username ? username : "",
-                    idstring ? idstring : "",
-                    email ? email : "",
-                    passphrase ? passphrase : "");
-  char * argv [] =
-  { "gpg",
-    "--batch",
-    "-q",
-    "--gen-key",
-    "--keyring",
-    "~/.gnucash/gnucash.pub",
-    "--secret-keyring",
-    "~/.gnucash/gnucash.sec",
-    NULL
-  };
-
-  char * retval = gnc_gpg_transform(gpg_input, strlen(gpg_input), NULL, argv);
-  g_free(gpg_input);
-  return retval;
-
- */
-
-#ifdef KMM_DEBUG
-void KGPGFile::dumpBuffer(char *s, int len) const
+void KGPGFile::keyList(QStringList& list, bool secretKeys, const QStringList& patterns)
 {
-  QString data, tmp, chars;
-  unsigned long addr = 0x0;
+  d->keyList = &list;
+  list.clear();
+  Kleo::KeyListJob* job = d->cw->keyListJob();
 
-  while(1) {
-    if(addr && !(addr & 0x0f)) {
-      qDebug("%s %s", qPrintable(data), qPrintable(chars));
-      if(!len)
-        break;
-    }
-    if(!(addr & 0x0f)) {
-      data = tmp.sprintf("%08lX", addr);
-      chars.clear();
-    }
-    if(!(addr & 0x03)) {
-      data += ' ';
-    }
-    ++addr;
+  connect(job, SIGNAL(nextKey(const GpgME::Key &)), this, SLOT(slotNextKey(const GpgME::Key &)));
+  connect(job, SIGNAL(result(const GpgME::KeyListResult &, const std::vector<GpgME::Key> &, const QString &, const GpgME::Error &)), this, SLOT(slotKeyJobResult(const GpgME::KeyListResult &, const std::vector<GpgME::Key> &, const QString &, const GpgME::Error &)));
 
-    if(!len) {
-      data += "  ";
-      chars += ' ';
-      continue;
-    }
+  GpgME::Error jobstatus = job->start(patterns, secretKeys);
+  d->evLoop.exec();
+}
 
-    data += tmp.sprintf("%02X", *s & 0xff);
-    if(*s >= ' ' && *s <= '~')
-      chars += *s & 0xff;
-    else
-      chars += '.';
-    ++s;
-    --len;
+void KGPGFile::slotNextKey(const GpgME::Key & key)
+{
+  std::vector<GpgME::UserID> userIDs = key.userIDs();
+  for(unsigned int i = 0; i < userIDs.size(); ++i) {
+    QString entry = QString("%1:%2").arg(key.shortKeyID()).arg(userIDs[i].id());
+    *(d->keyList) += entry;
+    // qDebug("Added ''%s'", qPrintable(entry));
   }
 }
-#endif
+
+void KGPGFile::slotKeyJobResult(const GpgME::KeyListResult & result, const std::vector<GpgME::Key> & keys, const QString & auditLogAsHtml, const GpgME::Error & auditLogError )
+{
+  Q_UNUSED(result)
+  Q_UNUSED(auditLogAsHtml)
+  Q_UNUSED(auditLogError)
+
+  d->m_keys = keys;
+  d->evLoop.exit();
+}
+
 
 #include "kgpgfile.moc"

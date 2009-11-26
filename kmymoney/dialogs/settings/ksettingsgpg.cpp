@@ -130,7 +130,7 @@ void KSettingsGpg::slotIdChanged(void)
   }
 }
 
-void KSettingsGpg::show(void)
+void KSettingsGpg::showEvent(QShowEvent * event)
 {
   QString masterKey;
 
@@ -168,7 +168,7 @@ void KSettingsGpg::show(void)
   }
 
   slotStatusChanged(kcfg_WriteDataEncrypted->isChecked());
-  KSettingsGpgDecl::show();
+  KSettingsGpgDecl::showEvent(event);
 }
 
 void KSettingsGpg::slotStatusChanged(bool state)

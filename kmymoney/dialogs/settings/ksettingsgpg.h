@@ -20,6 +20,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+class QShowEvent;
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -46,7 +48,7 @@ public:
   ~KSettingsGpg();
 
 public slots:
-  void show(void);
+  void showEvent(QShowEvent * event);
 
 protected slots:
   void slotStatusChanged(bool state);

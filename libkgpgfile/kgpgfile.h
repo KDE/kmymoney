@@ -1,9 +1,7 @@
 /***************************************************************************
                              kgpgfile.h
                              -------------------
-    begin                : Fri Jan 23 2004
-    copyright            : (C) 2004,2005 by Thomas Baumgart
-    email                : <thb@net-bembel.de>
+    copyright            : (C) 2004,2005,2009 by Thomas Baumgart <ipwizard@users.sourceforge.net>
  ***************************************************************************/
 
 /***************************************************************************
@@ -29,23 +27,35 @@
 #include <QEventLoop>
 #include <QByteArray>
 
+#include <vector>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+namespace GpgME {
+  class Key;
+  class KeyListResult;
+  class Error;
+  class DecryptionResult;
+  class EncryptionResult;
+};
 
 // ----------------------------------------------------------------------------
 // Project Includes
+
 
 #ifdef HAVE_CONFIG_H
 #include <config-kmymoney.h>
 #endif
 
+namespace GpgME {
+  class Error;
+  class KeyListResult;
+}
+
 /**
   * @author Thomas Baumgart
   */
-
-class K3ShellProcess;
-class K3Process;
 
 /**
   * A class for reading and writing data to/from an
@@ -56,13 +66,17 @@ class K3Process;
   *
   * @code
   *
-  *  +------------------+   write  +-----------+     stdin +-------+     +--------+
-  *  |                  |--------->|\          |---------->|       |---->|        |
-  *  | Application code |   read   | QFile     |    stdout |  GPG  |     |  File  |
-  *  |                  |<---------|/          |<----------|       |<----|        |
-  *  +------------------+          |  KGPGFile |           +-------+     +--------+
-  *                |        control|           |
-  *                +-------------->|           |
+  *  +------------------+   write  +-----------+      +---------+
+  *  |                  |--------->|\          |----->|         |
+  *  | Application code |   read   | QFile     |      | libkleo |
+  *  |                  |<---------|/          |<-----|         |
+  *  +------------------+          |  KGPGFile |      +---------+
+  *                |               |           |               
+  *                |        control|           |      +-------+
+  *                +-------------->|           |----->|       |
+  *                                |           |      | File  |
+  *                                |           |----->|       |
+  *                                |           |      +-------+
   *                                +-----------+
   * @endcode
   *
@@ -83,20 +97,12 @@ public:
 
   ~KGPGFile();
 
-  virtual bool open(int mode);
+  virtual bool open(OpenMode mode);
   virtual void close(void);
   virtual void flush(void);
-  // Port to Qt4
-  // Btw is this function really needed ?
-  //virtual Offset size(void) const { return 0; };
 
-  virtual qint64 read(char *data, qint64 maxlen);
-  virtual qint64 write(const char *data, qint64 maxlen);
-  virtual QByteArray readAll(void);
-
-  virtual int getch(void);
-  virtual int putch(int c);
-  virtual int ungetch(int c);
+  virtual qint64 readData(char *data, qint64 maxlen);
+  virtual qint64 writeData(const char *data, qint64 maxlen);
 
   /**
     * Adds a recipient for whom the file should be encrypted.
@@ -107,17 +113,13 @@ public:
     *
     * @param recipient recipients identification (e.g. e-mail address)
     */
-  void addRecipient(const QByteArray& recipient);
+  void addRecipient(const QString& recipient);
 
   /**
     * sets the name of the file to @p fn. This method must be
     * called prior to open().
     */
-  void setName(const QString& fn);
-  void setComment(const QString& txt);
-
-  const QByteArray errmsg(void) const { return m_errmsg; };
-  int exitStatus(void) const { return m_exitStatus; };
+  void setFileName(const QString& fn);
 
   /**
     * Checks whether GPG is available or not
@@ -164,41 +166,22 @@ public:
     */
   static void publicKeyList(QStringList& list);
 
-#ifdef KMM_DEBUG
-  void dumpUngetBuffer(void);
-  void dumpBuffer(char *s, int len) const;
-#endif
-
-protected slots:
-  void slotGPGExited(K3Process *);
-  void slotDataFromGPG(K3Process *, char *buf, int len);
-  void slotErrorFromGPG(K3Process *, char *buf, int len);
-  void slotSendDataToGPG(K3Process *);
+private:
+  void keyList(QStringList& list, bool secretKeys = false, const QStringList& patterns = QStringList());
 
 private:
-  void init(void);
-  bool startProcess(const QStringList& args);
-  qint64 _write(const char *data, qint64 maxlen);
-  bool open(int mode, const QString&, bool skipPasswd);
+  /// \internal d-pointer class.
+  class Private;
+  /// \internal d-pointer instance.
+  Private* const d;
 
-private:
-  QString m_fn;
-  QString m_pubring;
-  QString m_secring;
-  QString m_options;
-  QString m_comment;
-  QString m_homedir;
+private slots:
+  void slotNextKey(const GpgME::Key & key);
+  void slotKeyJobResult(const GpgME::KeyListResult & result, const std::vector<GpgME::Key> & keys, const QString & auditLogAsHtml, const GpgME::Error & auditLogError );
 
-  K3ShellProcess* m_process;
-  qint64   m_readRemain;
-  QEventLoop* m_event;
+  void slotDecryptJobResult( const GpgME::DecryptionResult & result, const QByteArray & plainText, const QString & auditLogAsHtml, const GpgME::Error & auditLogError );
+  void slotEncryptJobResult( const GpgME::EncryptionResult & result, const QByteArray & cipherText, const QString & auditLogAsHtml);
 
-  QLinkedList<QByteArray> m_recipient;
-  QByteArray m_ungetchBuffer;
-  QByteArray m_errmsg;
-  int      m_exitStatus;
-  char*   m_ptrRemain;
-  bool    m_needExitLoop;
 };
 
 #endif
