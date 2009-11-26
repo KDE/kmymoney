@@ -3114,7 +3114,7 @@ const QMap<QString, MyMoneySchedule> MyMoneyStorageSql::fetchSchedules (const QS
 
   if (! idList.empty()) {
     QStringList::ConstIterator bindVal = idList.constBegin();
-    for (int i = 0; bindVal != idList.end(); ++i, ++bindVal) {
+    for (int i = 0; bindVal != idList.constEnd(); ++i, ++bindVal) {
       q.bindValue (QString(":id%1").arg(i), *bindVal);
     }
   }
