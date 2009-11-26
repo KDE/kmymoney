@@ -1577,7 +1577,7 @@ bool KMyMoney2App::slotFileSaveAs(void)
                    QString("%1|%2\n").arg("*.xml").arg(i18nc("XML (Filefilter)", "XML files")) +
                    QString("%1|%2\n").arg("*.anon.xml").arg(i18nc("Anonymous (Filefilter)", "Anonymous files")) +
                    QString("%1|%2\n").arg("*").arg(i18nc("All files (Filefilter)", "All files")),
-                   this);
+                   this, vbox);
   connect(dlg, SIGNAL(filterChanged(const QString&)), this, SLOT(slotFileSaveAsFilterChanged(const QString&)));
 
   if ( !specialDir )
@@ -1590,12 +1590,19 @@ bool KMyMoney2App::slotFileSaveAs(void)
 
     KUrl newURL = dlg->selectedUrl();
 
+    // deleting the dialog will delete the combobox pointed to by d->m_saveEncrypted so get the key name here
+    QString selectedKeyName;
+    if(d->m_saveEncrypted && d->m_saveEncrypted->currentIndex() != 0)
+      selectedKeyName = d->m_saveEncrypted->currentText();
+
+    d->m_saveEncrypted = 0;
+
     delete dlg;
 
     if (!newURL.isEmpty()) {
       QString newName = newURL.pathOrUrl();
 
-  // end of copy
+      // end of copy
 
       // find last . delimiter
       int nLoc = newName.lastIndexOf('.');
@@ -1634,16 +1641,14 @@ bool KMyMoney2App::slotFileSaveAs(void)
 
           d->m_fileName = newName;
           QString encryptionKeys;
-          if(d->m_saveEncrypted && d->m_saveEncrypted->currentIndex() != 0) {
-            QRegExp keyExp(".* \\((.*)\\)");
-            if(keyExp.indexIn(d->m_saveEncrypted->currentText()) != -1) {
-              encryptionKeys = keyExp.cap(1);
-            }
-            if(!d->m_additionalGpgKeys.isEmpty()) {
-              if(!encryptionKeys.isEmpty())
-                encryptionKeys += ',';
-              encryptionKeys += d->m_additionalGpgKeys.join(",");
-            }
+          QRegExp keyExp(".* \\((.*)\\)");
+          if(keyExp.indexIn(selectedKeyName) != -1) {
+            encryptionKeys = keyExp.cap(1);
+          }
+          if(!d->m_additionalGpgKeys.isEmpty()) {
+            if(!encryptionKeys.isEmpty())
+              encryptionKeys += ',';
+            encryptionKeys += d->m_additionalGpgKeys.join(",");
           }
           rc = d->m_myMoneyView->saveFile(newName, encryptionKeys);
           //write the directory used for this file as the default one for next time.
