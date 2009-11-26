@@ -381,11 +381,6 @@ public:
   static void previouslyUsedCategories(const QString& investmentAccount, QString& feesId, QString& interestId);
 
   /**
-   * @return a 22x22 pixmap for the group type of @a account
-   */
-  static QPixmap accountGroupPixmap(const MyMoneyAccount& account, bool reconcileFlag = false);
-
-  /**
    * This method replaces the deprecated QApplication::mainWidget() from Qt 3.x.
    * It assumes that there is only one KXmlGuiWindow in the application, and
    * returns it.
