@@ -143,7 +143,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   // Page 1
   m_institutionsView = new KInstitutionsView();
   m_institutionsViewFrame = m_model->addPage( m_institutionsView, i18n("Institutions"));
-  m_institutionsViewFrame->setIcon(KIcon("institutions"));
+  m_institutionsViewFrame->setIcon(KIcon("institution"));
   m_institutionsViewFrame->setHeader(QString(""));
   addTitleBar(m_institutionsView, i18n("Institutions"));
 
@@ -159,7 +159,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   // Page 2
   m_accountsView = new KAccountsView();
   m_accountsViewFrame = m_model->addPage( m_accountsView, i18n("Accounts"));
-  m_accountsViewFrame->setIcon(KIcon("accounts"));
+  m_accountsViewFrame->setIcon(KIcon("account"));
   m_accountsViewFrame->setHeader(QString(""));
   addTitleBar(m_accountsView, i18n("Accounts"));
 
@@ -229,7 +229,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   // Page 7
   m_investmentView = new KInvestmentView();
   m_investmentViewFrame = m_model->addPage( m_investmentView, i18n("Investments"));
-  m_investmentViewFrame->setIcon(KIcon("investments"));
+  m_investmentViewFrame->setIcon(KIcon("investment"));
   m_investmentViewFrame->setHeader(QString(""));
   addTitleBar(m_investmentView, i18n("Investments"));
   connect(m_investmentView, SIGNAL(accountSelected(const QString&, const QString&)),
@@ -240,7 +240,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
   // Page 8
   m_reportsView = new KReportsView();
   m_reportsViewFrame = m_model->addPage( m_reportsView, i18n("Reports"));
-  m_reportsViewFrame->setIcon(KIcon("report"));
+  m_reportsViewFrame->setIcon(KIcon("office-chart-tall-pie"));
   m_reportsViewFrame->setHeader(QString(""));
 
   // Page 9

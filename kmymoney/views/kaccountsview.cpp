@@ -53,47 +53,47 @@ QPixmap accountPixmap(const MyMoneyAccount& account, bool reconcileFlag)
   switch(account.accountType()) {
     default:
       if(account.accountGroup() == MyMoneyAccount::Asset)
-        pixmap = "account-types_asset";
+        pixmap = "account-types-asset";
       else
-        pixmap = "account-types_liability";
+        pixmap = "account-types-liability";
       break;
 
     case MyMoneyAccount::Investment:
-      pixmap = "account-types_investments";
+      pixmap = "account-types-investments";
       break;
 
     case MyMoneyAccount::Checkings:
-      pixmap = "account-types_checking";
+      pixmap = "account-types-checking";
       break;
     case MyMoneyAccount::Savings:
-      pixmap = "account-types_savings";
+      pixmap = "account-types-savings";
       break;
 
     case MyMoneyAccount::AssetLoan:
     case MyMoneyAccount::Loan:
-      pixmap = "account-types_loan";
+      pixmap = "account-types-loan";
       break;
 
     case MyMoneyAccount::CreditCard:
-      pixmap = "account-types_credit-card";
+      pixmap = "account-types-credit-card";
       break;
 
     case MyMoneyAccount::Asset:
-      pixmap = "account-types_asset";
+      pixmap = "account-types-asset";
       break;
 
     case MyMoneyAccount::Cash:
-      pixmap = "account-types_cash";
+      pixmap = "account-types-cash";
       break;
   }
   QPixmap result = DesktopIcon(pixmap);
 
   if(account.isClosed()) {
-    QPixmap overlay = DesktopIcon("account-types_closed");
+    QPixmap overlay = DesktopIcon("account-types-closed");
     QPainter pixmapPainter(&result);
     pixmapPainter.drawPixmap(0, 0, overlay, 0, 0, overlay.width(), overlay.height());
   } else if(reconcileFlag) {
-    QPixmap overlay = DesktopIcon("account-types_reconciled");
+    QPixmap overlay = DesktopIcon("account-types-reconciled");
     QPainter pixmapPainter(&result);
     pixmapPainter.drawPixmap(0, 0, overlay, 0, 0, overlay.width(), overlay.height());
   }
