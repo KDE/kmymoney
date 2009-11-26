@@ -36,8 +36,6 @@
 // plugin includes
 #include "pluginsettings.h"
 
-#define i18nc i18n
-
 int timeUnitsInSeconds(int optionValue) {
   // see how the items are added in the combobox of the settings editor widget
   static const int minute = 0;

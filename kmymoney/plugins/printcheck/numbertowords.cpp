@@ -106,9 +106,9 @@ QString MyMoneyMoneyToWordsConverter::convert(const MyMoneyMoney & money)
     // Only add non-zero items
     if (digitGroups[i] != 0) {
       // Build the string to add as a prefix
-      QString prefix = groupText[i] + " " + m_scaleNumbers[i];
+      QString prefix = groupText[i] + ' ' + m_scaleNumbers[i];
       if (!combined.isEmpty())
-	prefix += appendAnd ? i18nc("Appears last as separator", " and ") : i18nc("Separator", ", ");
+        prefix += appendAnd ? i18nc("Appears last as separator", " and ") : i18nc("Separator", ", ");
 
       // Opportunity to add 'and' is ended
       appendAnd = false;
