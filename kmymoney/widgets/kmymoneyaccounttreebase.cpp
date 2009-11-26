@@ -104,6 +104,7 @@ KMyMoneyAccountTreeBase::~KMyMoneyAccountTreeBase()
   {
     KConfigGroup grp = KGlobal::config()->group(m_configGroup);
     saveLayout(grp);
+    grp.sync();
   }
 }
 
