@@ -506,28 +506,24 @@ void KMyMoney2App::initActions(void)
   // *************
   // The View menu
   // *************
-  KToggleAction *view_show_transaction_detail = new KToggleAction(this);
-  actionCollection()->addAction("view_show_transaction_detail", view_show_transaction_detail);
+  KToggleAction *view_show_transaction_detail = actionCollection()->add<KToggleAction>("view_show_transaction_detail");
   view_show_transaction_detail->setIcon(KIcon("zoom-in"));
   view_show_transaction_detail->setText(i18n("Show Transaction Detail"));
   view_show_transaction_detail->setShortcut(KShortcut("Ctrl+T"));
 
-  KToggleAction *view_hide_reconciled_transactions = new KToggleAction(this);
-  actionCollection()->addAction("view_hide_reconciled_transactions", view_hide_reconciled_transactions);
+  KToggleAction *view_hide_reconciled_transactions = actionCollection()->add<KToggleAction>("view_hide_reconciled_transactions");
   view_hide_reconciled_transactions->setText(i18n("Hide reconciled transactions"));
   view_hide_reconciled_transactions->setIcon(KIcon("hide-reconciled"));
   view_hide_reconciled_transactions->setShortcut(KShortcut("Ctrl+R"));
   connect(view_hide_reconciled_transactions, SIGNAL(triggered()), this, SLOT(slotHideReconciledTransactions()));
 
-  KToggleAction *view_hide_unused_categories = new KToggleAction(this);
-  actionCollection()->addAction("view_hide_unused_categories", view_hide_unused_categories);
+  KToggleAction *view_hide_unused_categories = actionCollection()->add<KToggleAction>("view_hide_unused_categories");
   view_hide_unused_categories->setText(i18n("Hide unused categories"));
   view_hide_unused_categories->setIcon(KIcon("hide-categories"));
   view_hide_unused_categories->setShortcut(KShortcut("Ctrl+U"));
   connect(view_hide_unused_categories, SIGNAL(triggered()), this, SLOT(slotHideUnusedCategories()));
 
-  KToggleAction *view_show_all_accounts = new KToggleAction(this);
-  actionCollection()->addAction("view_show_all_accounts", view_show_all_accounts);
+  KToggleAction *view_show_all_accounts = actionCollection()->add<KToggleAction>("view_show_all_accounts");
   view_show_all_accounts->setText(i18n("Show all accounts"));
   view_show_all_accounts->setShortcut(KShortcut("Ctrl+Shift+A"));
   connect(view_show_all_accounts, SIGNAL(triggered()), this, SLOT(slotShowAllAccounts()));
@@ -950,13 +946,11 @@ void KMyMoney2App::initActions(void)
   new_user_wizard->setShortcut(KShortcut("Ctrl+G"));
   connect(new_user_wizard, SIGNAL(triggered()), this, SLOT(slotNewFeature()));
 
-  KToggleAction *debug_traces = new KToggleAction(this);
-  actionCollection()->addAction("debug_traces", debug_traces);
+  KToggleAction *debug_traces = actionCollection()->add<KToggleAction>("debug_traces");
   debug_traces->setText(i18n("Debug Traces"));
   connect(debug_traces, SIGNAL(triggered()), this, SLOT(slotToggleTraces()));
 
-  KToggleAction *debug_timers = new KToggleAction(this);
-  actionCollection()->addAction("debug_timers", debug_timers);
+  KToggleAction *debug_timers = actionCollection()->add<KToggleAction>("debug_timers");
   debug_timers->setText(i18n("Debug Timers"));
   connect(debug_timers, SIGNAL(triggered()), this, SLOT(slotToggleTimers()));
 #endif
@@ -997,11 +991,9 @@ KToggleAction* KMyMoney2App::toggleAction(const QString& actionName) const
 
   KToggleAction* p = dynamic_cast<KToggleAction*>(actionCollection()->action(QString(actionName.toLatin1())));
   if(!p) {
-    qWarning("Action '%s' is not of type KToggleAction", qPrintable(actionName));
+    qWarning("ToggleAction with name '%s' not found!", qPrintable(actionName));
     p = &dummyAction;
   }
-
-  qWarning("Action with name '%s' not found!", qPrintable(actionName));
   return p;
 }
 
