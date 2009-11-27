@@ -70,6 +70,7 @@ public:
   void resetDate(void);
   QWidget* focusWidget(void) const;
   void setRange(const QDate & min, const QDate & max);
+  void markAsBadDate(bool bad = false, const QColor& = QColor());
 
 signals:
   void dateChanged(const QDate& date);
