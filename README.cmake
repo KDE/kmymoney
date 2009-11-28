@@ -140,9 +140,3 @@ $ make developer-doc
 
 $ make test
     to process all unit tests.
-
-$ make qsqlite3
-    to compile qsqlite3 (in case it is not installed on the system)
-
-$ make install-qsqlite3
-    to install qsqlite3 (this is implied by 'make install')

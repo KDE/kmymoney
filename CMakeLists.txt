@@ -366,7 +366,6 @@ nice_yesno("HAVE_LIBOFX_H")
 nice_yesno("USE_OFX_DIRECTCONNECT")
 nice_yesno("KBANKING_FOUND")
 nice_yesno("LIBICAL_FOUND")
-nice_yesno("QT_SQLITE_FOUND")
 nice_yesno("USE_LEAK_CHECK")
 nice_yesno("USE_QT_DESIGNER")
 nice_yesno("HAVE_LIBCPPUNIT")
@@ -383,8 +382,6 @@ OFX direct connect:                      ${nice_USE_OFX_DIRECTCONNECT}
 KBanking plugin:                         ${nice_KBANKING_FOUND}
 
 iCalendar export plugin:                 ${nice_LIBICAL_FOUND}
-
-SQLITE3 support:                         ${nice_QT_SQLITE_FOUND}
 --------------------------------------------
 
 
@@ -406,12 +403,6 @@ endif(USE_LEAK_CHECK)
 
 message("--------------------------------------------
 ")
-
-# Display this message the first time only.
-if(QT_SQLITE_FALLBACK AND QT_SQLITE_FOUND AND NOT Sqlite_FIND_QUIETLY)
-  message("Note: You should run 'make install-qsqlite3' to enable Sqlite3 support.
-  ")
-endif(QT_SQLITE_FALLBACK AND QT_SQLITE_FOUND AND NOT Sqlite_FIND_QUIETLY)
 
 message("Good - your configure finished.
 Now type 'make' to build KMyMoney. For more help, consult README.cmake
