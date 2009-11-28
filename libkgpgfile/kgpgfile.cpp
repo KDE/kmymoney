@@ -75,7 +75,7 @@ class KGPGFile::Private {
 KGPGFile::KGPGFile(const QString& fn, const QString& homedir, const QString& options) :
   d(new Private)
 {
-  // only kept for interface compatability
+  // only kept for interface compatibility
   Q_UNUSED(homedir);
   Q_UNUSED(options);
 
@@ -110,7 +110,7 @@ void KGPGFile::addRecipient(const QString& recipient)
 {
   // skip a possible leading 0x in the id
   QString cmp = recipient;
-  if(cmp.startsWith("0x"))
+  if(cmp.startsWith(QLatin1String("0x")))
     cmp = cmp.mid(2);
 
   QStringList patterns;
