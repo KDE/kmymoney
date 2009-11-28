@@ -96,7 +96,7 @@
           <string>Use Finance::Quote for share price quotes</string>
          </property>
          <attribute name="buttonGroup">
-          <string>buttonGroup5</string>
+          <string comment="KDE::DoNotExtract">buttonGroup5</string>
          </attribute>
         </widget>
        </item>
@@ -115,7 +115,7 @@
           <string>Drop suspect scheduled transactions</string>
          </property>
          <attribute name="buttonGroup">
-          <string>buttonGroup2</string>
+          <string comment="KDE::DoNotExtract">buttonGroup2</string>
          </attribute>
         </widget>
        </item>
@@ -142,7 +142,7 @@
             <string>Decode using</string>
            </property>
            <attribute name="buttonGroup">
-            <string>buttonGroup4</string>
+            <string comment="KDE::DoNotExtract">buttonGroup4</string>
            </attribute>
           </widget>
          </item>
@@ -188,7 +188,7 @@
         <string>Use transaction notes on non-split transactions</string>
        </property>
        <attribute name="buttonGroup">
-        <string>buttonGroup18</string>
+        <string comment="KDE::DoNotExtract">buttonGroup18</string>
        </attribute>
       </widget>
      </widget>
@@ -205,7 +205,7 @@
           <string>General debug data</string>
          </property>
          <attribute name="buttonGroup">
-          <string>buttonGroup3</string>
+          <string comment="KDE::DoNotExtract">buttonGroup3</string>
          </attribute>
         </widget>
        </item>
@@ -215,7 +215,7 @@
           <string>Display XML data</string>
          </property>
          <attribute name="buttonGroup">
-          <string>buttonGroup3</string>
+          <string comment="KDE::DoNotExtract">buttonGroup3</string>
          </attribute>
         </widget>
        </item>
@@ -225,7 +225,7 @@
           <string>Anonymize data</string>
          </property>
          <attribute name="buttonGroup">
-          <string>buttonGroup3</string>
+          <string comment="KDE::DoNotExtract">buttonGroup3</string>
          </attribute>
         </widget>
        </item>

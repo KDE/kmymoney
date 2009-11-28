@@ -223,7 +223,7 @@
                             <string>To amount</string>
                           </property>
                           <attribute name="buttonGroup">
-                            <string>buttonGroup1</string>
+                            <string comment="KDE::DoNotExtract">buttonGroup1</string>
                           </attribute>
                         </widget>
                       </item>
@@ -233,7 +233,7 @@
                             <string>Exchange rate / Price</string>
                           </property>
                           <attribute name="buttonGroup">
-                            <string>buttonGroup1</string>
+                            <string comment="KDE::DoNotExtract">buttonGroup1</string>
                           </attribute>
                         </widget>
                       </item>

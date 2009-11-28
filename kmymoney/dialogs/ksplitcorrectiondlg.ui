@@ -75,7 +75,7 @@
                       <bool>true</bool>
                     </property>
                     <attribute name="buttonGroup">
-                      <string>buttonGroup</string>
+                      <string comment="KDE::DoNotExtract">buttonGroup</string>
                     </attribute>
                   </widget>
                 </item>
@@ -85,7 +85,7 @@
                       <string>Change total amount of transaction to %1.</string>
                     </property>
                     <attribute name="buttonGroup">
-                      <string>buttonGroup</string>
+                      <string comment="KDE::DoNotExtract">buttonGroup</string>
                     </attribute>
                   </widget>
                 </item>
@@ -98,7 +98,7 @@
                       <string>Distribute difference of %1 among all splits.</string>
                     </property>
                     <attribute name="buttonGroup">
-                      <string>buttonGroup</string>
+                      <string comment="KDE::DoNotExtract">buttonGroup</string>
                     </attribute>
                   </widget>
                 </item>
@@ -108,7 +108,7 @@
                       <string>Leave %1 unassigned.</string>
                     </property>
                     <attribute name="buttonGroup">
-                      <string>buttonGroup</string>
+                      <string comment="KDE::DoNotExtract">buttonGroup</string>
                     </attribute>
                   </widget>
                 </item>

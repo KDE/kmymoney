@@ -209,7 +209,7 @@
                                 <bool>true</bool>
                               </property>
                               <attribute name="buttonGroup">
-                                <string>buttonGroup2</string>
+                                <string comment="KDE::DoNotExtract">buttonGroup2</string>
                               </attribute>
                             </widget>
                           </item>
@@ -240,7 +240,7 @@
                                 <string>Last &amp;update</string>
                               </property>
                               <attribute name="buttonGroup">
-                                <string>buttonGroup2</string>
+                                <string comment="KDE::DoNotExtract">buttonGroup2</string>
                               </attribute>
                             </widget>
                           </item>
@@ -264,7 +264,7 @@
                                 <string>Pi&amp;ck date</string>
                               </property>
                               <attribute name="buttonGroup">
-                                <string>buttonGroup2</string>
+                                <string comment="KDE::DoNotExtract">buttonGroup2</string>
                               </attribute>
                             </widget>
                           </item>
@@ -337,7 +337,7 @@
                                   <bool>true</bool>
                                 </property>
                                 <attribute name="buttonGroup">
-                                  <string>buttonGroup1</string>
+                                  <string comment="KDE::DoNotExtract">buttonGroup1</string>
                                 </attribute>
                               </widget>
                             </item>
@@ -347,7 +347,7 @@
                                   <string>&amp;NAME</string>
                                 </property>
                                 <attribute name="buttonGroup">
-                                  <string>buttonGroup1</string>
+                                  <string comment="KDE::DoNotExtract">buttonGroup1</string>
                                 </attribute>
                               </widget>
                             </item>

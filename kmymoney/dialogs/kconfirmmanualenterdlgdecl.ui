@@ -61,7 +61,7 @@
                   <string>Discard the changes and enter the original transaction into the register.</string>
                 </property>
                 <attribute name="buttonGroup">
-                  <string>buttonGroup1</string>
+                  <string comment="KDE::DoNotExtract">buttonGroup1</string>
                 </attribute>
               </widget>
             </item>
@@ -74,7 +74,7 @@
                   <bool>true</bool>
                 </property>
                 <attribute name="buttonGroup">
-                  <string>buttonGroup1</string>
+                  <string comment="KDE::DoNotExtract">buttonGroup1</string>
                 </attribute>
               </widget>
             </item>
@@ -84,7 +84,7 @@
                   <string>Set all further occurrences in this schedule to be these values.</string>
                 </property>
                 <attribute name="buttonGroup">
-                  <string>buttonGroup1</string>
+                  <string comment="KDE::DoNotExtract">buttonGroup1</string>
                 </attribute>
               </widget>
             </item>

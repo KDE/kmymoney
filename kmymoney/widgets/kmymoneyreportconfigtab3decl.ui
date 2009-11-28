@@ -165,7 +165,7 @@
                       <string>&lt;p&gt;Select this option to show the Memo column&lt;/p&gt;</string>
                     </property>
                     <attribute name="buttonGroup">
-                      <string>buttonGroup1</string>
+                      <string comment="KDE::DoNotExtract">buttonGroup1</string>
                     </attribute>
                   </widget>
                 </item>
@@ -178,7 +178,7 @@
                       <string>&lt;p&gt;Select this option to show the Shares column for investments&lt;/p&gt;</string>
                     </property>
                     <attribute name="buttonGroup">
-                      <string>buttonGroup1</string>
+                      <string comment="KDE::DoNotExtract">buttonGroup1</string>
                     </attribute>
                   </widget>
                 </item>
@@ -191,7 +191,7 @@
                       <string>&lt;p&gt;Select this option to show the Price column for investments&lt;/p&gt;</string>
                     </property>
                     <attribute name="buttonGroup">
-                      <string>buttonGroup1</string>
+                      <string comment="KDE::DoNotExtract">buttonGroup1</string>
                     </attribute>
                   </widget>
                 </item>
@@ -204,7 +204,7 @@
                       <string>&lt;p&gt;Select this option to show the Reconciled column&lt;/p&gt;</string>
                     </property>
                     <attribute name="buttonGroup">
-                      <string>buttonGroup1</string>
+                      <string comment="KDE::DoNotExtract">buttonGroup1</string>
                     </attribute>
                   </widget>
                 </item>
@@ -217,7 +217,7 @@
                       <string>&lt;p&gt;Select this option to show the Account column&lt;/p&gt;</string>
                     </property>
                     <attribute name="buttonGroup">
-                      <string>buttonGroup1</string>
+                      <string comment="KDE::DoNotExtract">buttonGroup1</string>
                     </attribute>
                   </widget>
                 </item>
@@ -236,7 +236,7 @@
                       <string>&lt;p&gt;Select this option to show the Number column&lt;/p&gt;</string>
                     </property>
                     <attribute name="buttonGroup">
-                      <string>buttonGroup1</string>
+                      <string comment="KDE::DoNotExtract">buttonGroup1</string>
                     </attribute>
                   </widget>
                 </item>
@@ -255,7 +255,7 @@
                       <string>&lt;p&gt;Select this option to show the Payee column&lt;/p&gt;</string>
                     </property>
                     <attribute name="buttonGroup">
-                      <string>buttonGroup1</string>
+                      <string comment="KDE::DoNotExtract">buttonGroup1</string>
                     </attribute>
                   </widget>
                 </item>
@@ -274,7 +274,7 @@
                       <string>&lt;p&gt;Select this option to show the Category column&lt;/p&gt;</string>
                     </property>
                     <attribute name="buttonGroup">
-                      <string>buttonGroup1</string>
+                      <string comment="KDE::DoNotExtract">buttonGroup1</string>
                     </attribute>
                   </widget>
                 </item>
@@ -287,7 +287,7 @@
                       <string>&lt;p&gt;Select this option to show the Action column&lt;/p&gt;</string>
                     </property>
                     <attribute name="buttonGroup">
-                      <string>buttonGroup1</string>
+                      <string comment="KDE::DoNotExtract">buttonGroup1</string>
                     </attribute>
                   </widget>
                 </item>
@@ -300,7 +300,7 @@
                       <string>&lt;p&gt;Select this option to show the Running balance column&lt;/p&gt;</string>
                     </property>
                     <attribute name="buttonGroup">
-                      <string>buttonGroup1</string>
+                      <string comment="KDE::DoNotExtract">buttonGroup1</string>
                     </attribute>
                   </widget>
                 </item>
