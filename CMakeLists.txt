@@ -262,6 +262,9 @@ endif(USE_LEAK_CHECK)
 OPTION(USE_QT_DESIGNER
   "Install KMyMoney specific widget library for Qt-Designer (default=OFF)" OFF)
 
+OPTION(USE_DEVELOPER_DOC
+  "Install KMyMoney specific developer documentation (default=OFF)" OFF)
+
 IF(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   SET(CMAKE_INSTALL_PREFIX "${KDE4PREFIX}" CACHE PATH
     "KMyMoney install prefix defaults
@@ -290,7 +293,9 @@ INCLUDE_DIRECTORIES(
 ADD_SUBDIRECTORY( libkgpgfile )
 ADD_SUBDIRECTORY( libkdchart )
 ADD_SUBDIRECTORY( kmymoney )
-#ADD_SUBDIRECTORY( developer-doc )
+IF (USE_DEVELOPER_DOC)
+  ADD_SUBDIRECTORY( developer-doc )
+ENDIF (USE_DEVELOPER_DOC)
 
 #CONFIGURE_FILE(
 #  "${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in"
@@ -367,6 +372,7 @@ nice_yesno("KBANKING_FOUND")
 nice_yesno("LIBICAL_FOUND")
 nice_yesno("USE_LEAK_CHECK")
 nice_yesno("USE_QT_DESIGNER")
+nice_yesno("USE_DEVELOPER_DOC")
 nice_yesno("HAVE_LIBCPPUNIT")
 nice_yesno("KDE4_BUILD_TESTS")
 message("
@@ -388,7 +394,7 @@ Configure results (developer options):
 --------------------------------------------
 Qt-Designer library support:             ${nice_USE_QT_DESIGNER}
 
-PDF document generation:                 ?
+Developer documentation generation:      ${nice_USE_DEVELOPER_DOC}
 
 CPPUNIT support:                         ${nice_HAVE_LIBCPPUNIT}
         build tests:                     ${nice_KDE4_BUILD_TESTS}
