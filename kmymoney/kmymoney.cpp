@@ -5757,6 +5757,9 @@ void KMyMoney2App::slotUpdateActions(void)
       action("transaction_delete")->setEnabled(false);
       QString reason;
       action("transaction_enter")->setEnabled(d->m_transactionEditor->isComplete(reason));
+      //FIXME: Port to KDE4
+      // the next line somehow worked in KDE3 but does not have
+      // any influence under KDE4
       action("transaction_enter")->setToolTip(reason);
       action("transaction_cancel")->setEnabled(true);
     }

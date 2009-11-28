@@ -731,6 +731,7 @@ void StdTransactionEditor::createEditWidgets(void)
   }
 
   m_editWidgets["postdate"] = new kMyMoneyDateInput;
+  connect(m_editWidgets["postdate"], SIGNAL(dateChanged(const QDate&)), this, SLOT(slotUpdateButtonState()));
 
   kMyMoneyEdit* value = new kMyMoneyEdit;
   m_editWidgets["amount"] = value;
@@ -1653,14 +1654,14 @@ bool StdTransactionEditor::isComplete(QString& reason) const
 
   kMyMoneyDateInput* postDate = dynamic_cast<kMyMoneyDateInput*>(m_editWidgets["postdate"]);
   if(postDate) {
-    postDate->markAsBadDate();
-    QToolTip::remove(postDate);
     if(postDate->date().isValid() && (postDate->date() < m_account.openingDate())) {
       postDate->markAsBadDate(true, KMyMoneyGlobalSettings::listNegativeValueColor());
       reason = i18n("Cannot enter transaction with postdate prior to account's opening date.");
-      QToolTip::add(postDate, reason);
+      postDate->setToolTip(reason);
       return false;
     }
+    postDate->markAsBadDate();
+    postDate->setToolTip("");
   }
 
   for(it_w = m_editWidgets.begin(); it_w != m_editWidgets.end(); ++it_w) {

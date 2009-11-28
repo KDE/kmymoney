@@ -35,6 +35,7 @@
 #include <QKeyEvent>
 #include <QEvent>
 #include <QDateEdit>
+#include <QLineEdit>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -153,10 +154,16 @@ kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, Qt::AlignmentFlag flags)
 
 void kMyMoneyDateInput::markAsBadDate(bool bad, const QColor& color)
 {
-  if(d->m_dateEdit->focusProxy()) {
-    d->m_dateEdit->focusProxy()->setPaletteForegroundColor(paletteForegroundColor());
-    if(bad)
-      d->m_dateEdit->focusProxy()->setPaletteForegroundColor(color);
+  // the next line knows a bit about the internals of QAbstractSpinBox
+  QLineEdit* le = d->m_dateEdit->findChild<QLineEdit *>();
+
+  if(le) {
+    QPalette palette = this->palette();
+    le->setPalette(palette);
+    if(bad) {
+      palette.setColor(foregroundRole(), color);
+      le->setPalette(palette);
+    }
   }
 }
 
