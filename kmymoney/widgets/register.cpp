@@ -1044,7 +1044,9 @@ void Register::suppressAdjacentMarkers(void)
 
 void Register::updateRegister(bool forceUpdateRowHeight)
 {
+#ifndef KMM_DESIGNER
   ::timetrace("Update register");
+#endif
   if(m_listsDirty || forceUpdateRowHeight) {
     // don't get in here recursively
     m_listsDirty = false;
@@ -1116,7 +1118,9 @@ void Register::updateRegister(bool forceUpdateRowHeight)
         QTimer::singleShot(0, this, SLOT(resize()));
     }
   }
+#ifndef KMM_DESIGNER
   ::timetrace("Done updateing register");
+#endif
 }
 
 int Register::rowHeightHint(void) const
