@@ -1048,7 +1048,7 @@ TransactionEditor* KGlobalLedgerView::startEdit(const KMyMoneyRegister::Selected
           "At least one split of the selected transactions has been reconciled. "
           "Do you wish to continue to edit the transactions anyway?"
         ),
-        i18n("Transaction already reconciled"), KStandardGuiItem::cont(), KGuiItem(),
+        i18n("Transaction already reconciled"), KStandardGuiItem::cont(), KStandardGuiItem::cancel(),
         "EditReconciledTransaction") == KMessageBox::Cancel) {
         warnLevel = 2;
       }
