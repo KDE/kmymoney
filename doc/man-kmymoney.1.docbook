@@ -1,0 +1,84 @@
+<?xml version="1.0" ?>
+<!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
+<!ENTITY kmymoney "KMyMoney">
+<!ENTITY kappname "&kmymoney;">
+<!ENTITY % English "INCLUDE">
+]>
+
+<refentry lang="&language;">
+<refentryinfo>
+<author><personname><firstname>Michael</firstname><surname>Edwardes</surname></personname>
+<email>mte@users.sourceforge.net</email></author>
+<author><personname><firstname>Thomas</firstname><surname>Baumgart</surname></personname>
+<email>ipwizard@users.sourceforge.net</email></author>
+<author><personname><firstname>Felix</firstname><surname>Rodriguez</surname></personname>
+<email>frodriguez@users.sourceforge.net</email></author>
+</refentryinfo>
+
+<refmeta>
+<refentrytitle><command>kmymoney</command></refentrytitle>
+<manvolnum>1</manvolnum>
+</refmeta>
+
+<refnamediv>
+<refname><command>kmymoney</command></refname>
+<refpurpose>&kmymoney; \- the personal finances manager for &kde;</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<cmdsynopsis>
+<command>kmymoney</command>
+
+<group><option>Qt Generic Options</option></group>
+<group><option>KDE Generic Options</option></group>
+<group><option>File</option></group>
+
+</cmdsynopsis>
+</refsynopsisdiv>
+
+<refsect1>
+<title>Description</title>
+
+<para>&kmymoney; is the Personal Finance Manager for the KDE environment.
+It provides the functions required to balance your checkbooks,
+manage your personal loans and categorise your incomes and
+expenses using a checkbook style graphical user interface.</para>
+
+</refsect1>
+
+<refsect1>
+<title>Options</title>
+
+<variablelist>
+<varlistentry>
+<term><replaceable>File</replaceable></term>
+<listitem>
+<para>
+file to open
+</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><option>-n</option></term>
+<listitem>
+<para>
+start without opening a file
+</para>
+</listitem>
+</varlistentry>
+</variablelist>
+
+</refsect1>
+
+<refsect1>
+<title>See Also</title>
+
+<para>The full documentation for &kmymoney; is maintained as a docbook manual. 
+If the &khelpcenter; program is properly installed at your site, the command <userinput><command>khelpcenter</command>
+<parameter>help:/kmymoney</parameter></userinput> should give you access to the complete manual. 
+Alternatively the manual can be browsed in &konqueror; giving it the <acronym>URL</acronym> <ulink
+url="help:/kmymoney">help:/kmymoney</ulink></para>
+
+</refsect1>
+
+</refentry>
