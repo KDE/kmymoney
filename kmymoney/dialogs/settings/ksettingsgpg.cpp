@@ -178,7 +178,7 @@ void KSettingsGpg::slotStatusChanged(bool state)
     state = false;
 
   if((state == true) && (oncePerSession == true) && isVisible()) {
-    KMessageBox::information(this, QString("<qt>%1</qt>").arg(i18n("You have turned on the GPG encryption support. This means, that new files will be stored encrypted. Existing files will not be encrypted automatically.  To achieve encryption of existing files, please use the <b>File/Save as...</b> feature and store the file under a different name. Once confident with the result, feel free to delete the old file and rename the encrypted one to the old name.")), i18n("GPG encryption activated"), "GpgEncryptionActivated");
+    KMessageBox::information(this, QString("<qt>%1</qt>").arg(i18n("<p>You have turned on the GPG encryption support. This means, that new files will be stored encrypted.</p><p>Existing files will not be encrypted automatically.  To achieve encryption of existing files, please use the <b>File/Save as...</b> feature and store the file under a different name.<br/>Once confident with the result, feel free to delete the old file and rename the encrypted one to the old name.</p>")), i18n("GPG encryption activated"), "GpgEncryptionActivated");
     oncePerSession = false;
   }
 
