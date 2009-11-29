@@ -256,7 +256,7 @@ void KHomeView::loadView(void)
 
 void KHomeView::showNetWorthGraph(void)
 {
-  m_part->write(QString("<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">%1</div>\n<div class=\"gap\">&nbsp;</div>\n").arg(i18n("Net Worth Forecast")));
+  m_html += QString("<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">%1</div>\n<div class=\"gap\">&nbsp;</div>\n").arg(i18n("Net Worth Forecast"));
 
   MyMoneyReport reportCfg = MyMoneyReport(
       MyMoneyReport::eAssetLiability,
@@ -284,7 +284,7 @@ void KHomeView::showNetWorthGraph(void)
   table.drawChart(*chartWidget);
 
   // Adjust the size
-  chartWidget->resize(width()-70, height()-30);
+  chartWidget->resize(width()-80, height()-30);
 
   //save the chart to an image
   QPixmap pixmap= QPixmap::grabWidget(chartWidget->coordinatePlane()->parent());
@@ -299,6 +299,7 @@ void KHomeView::showNetWorthGraph(void)
   m_html += QString("</tr>");
   m_html += QString("</table></div></div>");
 
+  //delete the widget since we no longer need it
   delete chartWidget;
 }
 
