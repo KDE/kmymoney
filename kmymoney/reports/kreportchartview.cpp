@@ -169,6 +169,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
   //the legend will be used later
   Legend* legend = new Legend(coordinatePlane()->diagram(), this);
+  legend->setTitleText(i18nc("Chart legend title", "Legend"));
 
   //set up the axes for cartesian diagrams
   if(qobject_cast<LineDiagram*>(coordinatePlane()->diagram()) ||
