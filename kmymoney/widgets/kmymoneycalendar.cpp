@@ -380,7 +380,7 @@ void
 kMyMoneyCalendar::dateChangedSlot(QDate date)
 {
     kDebug() << "kMyMoneyCalendar::dateChangedSlot: date changed (" << date.year() << "/" << date.month() << "/" << date.day() << ").";
-    line->setText(KGlobal::locale()->formatDate(date));
+    line->setText(KGlobal::locale()->formatDate(date, KLocale::ShortDate));
     d->selectWeek->setText(i18n("Week %1",weekOfYear(date)));
     selectMonth->setText(MONTH_NAME(date.month(), date.year(), KCalendarSystem::ShortName));
     selectYear->setText(date.toString("yyyy"));
@@ -421,7 +421,7 @@ kMyMoneyCalendar::setDate(const QDate& date)
   selectMonth->setText(MONTH_NAME(date.month(), date.year(), KCalendarSystem::LongName));
   temp.setNum(date.year());
   selectYear->setText(temp);
-  line->setText(KGlobal::locale()->formatDate(date));
+  line->setText(KGlobal::locale()->formatDate(date, KLocale::ShortDate));
   return true;
     } else {
   kDebug() << "kMyMoneyCalendar::setDate: refusing to set invalid date.";

@@ -79,7 +79,7 @@ KMyMoneyPriceItem::KMyMoneyPriceItem(K3ListView *view, const MyMoneyPrice& pr) :
 
     setText(COMMODITY_COL, (from.isCurrency()) ? from.id() : from.tradingSymbol());
     setText(CURRENCY_COL, to.id());
-    setText(DATE_COL, KGlobal::locale()->formatDate(m_pr.date()));
+    setText(DATE_COL, KGlobal::locale()->formatDate(m_pr.date(), KLocale::ShortDate));
     setText(PRICE_COL, m_pr.rate(priceBase).formatMoney("", prec));
     setText(SOURCE_COL, m_pr.source());
   }
