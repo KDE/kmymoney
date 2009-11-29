@@ -687,7 +687,7 @@ void KMyMoney2App::initActions(void)
   connect(tools_performancetest, SIGNAL(triggered()), this, SLOT(slotPerformanceTest()));
 
   KAction *tools_kcalc = actionCollection()->addAction("tools_kcalc");
-  tools_kcalc->setText(i18n("KCalc..."));
+  tools_kcalc->setText(i18n("Calculator..."));
   tools_kcalc->setIcon(KIcon("accessories-calculator"));
   connect(tools_kcalc, SIGNAL(triggered()), this, SLOT(slotToolsStartKCalc()));
 
@@ -2599,7 +2599,11 @@ void KMyMoney2App::slotQifProfileEditor(void)
 
 void KMyMoney2App::slotToolsStartKCalc(void)
 {
-  KRun::runCommand("kcalc", this);
+  QString cmd = KMyMoneyGlobalSettings::externalCalculator();
+  // if none is present, we fall back to the default
+  if(cmd.isEmpty())
+    cmd = QLatin1String("kcalc");
+  KRun::runCommand(cmd, this);
 }
 
 void KMyMoney2App::slotFindTransaction(void)

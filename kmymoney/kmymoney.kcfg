@@ -41,6 +41,10 @@
    <min>0</min>
    <max>999</max>
   </entry>
+  <entry name="ExternalCalculator" type="String">
+   <label>Name of external calculator program</label>
+   <default>kcalc</default>
+  </entry>
   <entry name="SchedulePreview" type="Int">
    <label>Number of days to preview schedules in ledger</label>
    <default>0</default>
