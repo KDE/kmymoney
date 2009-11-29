@@ -19,6 +19,9 @@
 
 #include "kgpgfile.h"
 
+// C Includes
+#include <unistd.h>
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
