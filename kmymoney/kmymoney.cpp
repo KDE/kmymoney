@@ -1445,10 +1445,10 @@ void KMyMoney2App::slotFileOpenRecent(const KUrl& url)
       }
     } else { // newurl invalid
       slotFileClose();
-      KMessageBox::sorry(this, QString("<p>")+i18n("<b>%1</b> is either an invalid filename or the file does not exist. You can open another file or create a new one.", url.pathOrUrl()), i18n("File not found"));
+      KMessageBox::sorry(this, i18n("<p><b>%1</b> is either an invalid filename or the file does not exist. You can open another file or create a new one.</p>", url.pathOrUrl()), i18n("File not found"));
     }
   } else { // isDuplicate
-    KMessageBox::sorry(this, QString("<p>")+i18n("File <b>%1</b> is already opened in another instance of KMyMoney", url.pathOrUrl()), i18n("Duplicate open"));
+    KMessageBox::sorry(this, i18n("<p>File <b>%1</b> is already opened in another instance of KMyMoney</p>", url.pathOrUrl()), i18n("Duplicate open"));
   }
 }
 
@@ -2695,7 +2695,7 @@ void KMyMoney2App::slotInstitutionDelete(void)
   try {
 
     MyMoneyInstitution institution = file->institution(d->m_selectedInstitution.id());
-    if ((KMessageBox::questionYesNo(this, QString("<p>")+i18n("Do you really want to delete the institution <b>%1</b>?",institution.name()))) == KMessageBox::No)
+    if ((KMessageBox::questionYesNo(this, i18n("<p>Do you really want to delete the institution <b>%1</b>?</p>",institution.name()))) == KMessageBox::No)
       return;
     MyMoneyFileTransaction ft;
 
@@ -3045,7 +3045,7 @@ void KMyMoney2App::slotInvestmentEdit(void)
 
 void KMyMoney2App::slotInvestmentDelete(void)
 {
-  if(KMessageBox::questionYesNo(this, QString("<p>")+i18n("Do you really want to delete the investment <b>%1</b>?",d->m_selectedInvestment.name()), i18n("Delete investment"), KStandardGuiItem::yes(), KStandardGuiItem::no(), "DeleteInvestment") == KMessageBox::Yes) {
+  if(KMessageBox::questionYesNo(this, i18n("<p>Do you really want to delete the investment <b>%1</b>?</p>",d->m_selectedInvestment.name()), i18n("Delete investment"), KStandardGuiItem::yes(), KStandardGuiItem::no(), "DeleteInvestment") == KMessageBox::Yes) {
     MyMoneyFile* file = MyMoneyFile::instance();
     MyMoneyFileTransaction ft;
     try {
@@ -3339,8 +3339,8 @@ void KMyMoney2App::slotAccountDelete(void)
           need_confirmation = true;
       }
       if (!accountsToReparent.isEmpty() && need_confirmation) {
-        if (KMessageBox::questionYesNo(this, QString("<p>")+i18n("Some sub-categories of category <b>%1</b> cannot "
-          "be deleted, because they are still used. They will be made sub-categories of <b>%2</b>. Proceed?",d->m_selectedAccount.name(),parentAccount.name())) != KMessageBox::Yes) {
+        if (KMessageBox::questionYesNo(this, i18n("<p>Some sub-categories of category <b>%1</b> cannot "
+          "be deleted, because they are still used. They will be made sub-categories of <b>%2</b>. Proceed?</p>",d->m_selectedAccount.name(),parentAccount.name())) != KMessageBox::Yes) {
           return; // user gets wet feet...
         }
       }
@@ -3370,8 +3370,8 @@ void KMyMoney2App::slotAccountDelete(void)
       if (!d->m_selectedAccount.accountList().isEmpty())
         return; // can't delete accounts which still have subaccounts
 
-      if (KMessageBox::questionYesNo(this, QString("<p>")+i18n("Do you really want to "
-          "delete account <b>%1</b>?",d->m_selectedAccount.name())) != KMessageBox::Yes) {
+      if (KMessageBox::questionYesNo(this, i18n("<p>Do you really want to "
+          "delete account <b>%1</b>?<p>",d->m_selectedAccount.name())) != KMessageBox::Yes) {
         return; // ok, you don't want to? why did you click then, hmm?
       }
   } // switch;
@@ -3859,7 +3859,7 @@ void KMyMoney2App::slotReparentAccount(const MyMoneyAccount& _src, const MyMoney
     MyMoneyFile::instance()->modifyAccount(src);
     ft.commit();
   } catch(MyMoneyException* e) {
-    KMessageBox::sorry(this, QString("<p>")+i18n("<b>%1</b> cannot be moved to institution <b>%2</b>. Reason: %3",src.name(),_dst.name(),e->what()));
+    KMessageBox::sorry(this, i18n("<p><b>%1</b> cannot be moved to institution <b>%2</b>. Reason: %3</p>",src.name(),_dst.name(),e->what()));
     delete e;
   }
 }
@@ -3873,7 +3873,7 @@ void KMyMoney2App::slotReparentAccount(const MyMoneyAccount& _src, const MyMoney
     MyMoneyFile::instance()->reparentAccount(src, dst);
     ft.commit();
   } catch(MyMoneyException* e) {
-    KMessageBox::sorry(this, QString("<p>")+i18n("<b>%1</b> cannot be moved to <b>%2</b>. Reason: %3",src.name(),dst.name(),e->what()));
+    KMessageBox::sorry(this, i18n("<p><b>%1</b> cannot be moved to <b>%2</b>. Reason: %3</p>",src.name(),dst.name(),e->what()));
     delete e;
   }
 }
@@ -4024,7 +4024,7 @@ void KMyMoney2App::slotScheduleDelete(void)
     MyMoneyFileTransaction ft;
     try {
       MyMoneySchedule sched = MyMoneyFile::instance()->schedule(d->m_selectedSchedule.id());
-      QString msg = QString("<p>")+i18n("Are you sure you want to delete the scheduled transaction <b>%1</b>?",d->m_selectedSchedule.name());
+      QString msg = i18n("<p>Are you sure you want to delete the scheduled transaction <b>%1</b>?</p>",d->m_selectedSchedule.name());
       if(sched.type() == MyMoneySchedule::TYPE_LOANPAYMENT) {
         msg += QString(" ");
         msg += i18n("In case of loan payments it is currently not possible to recreate the scheduled transaction.");
@@ -4321,7 +4321,7 @@ void KMyMoney2App::slotPayeeDelete(void)
   // get confirmation from user
   QString prompt;
   if (d->m_selectedPayees.size() == 1)
-    prompt = QString("<p>")+i18n("Do you really want to remove the payee <b>%1</b>?",d->m_selectedPayees.front().name());
+    prompt = i18n("<p>Do you really want to remove the payee <b>%1</b>?</p>",d->m_selectedPayees.front().name());
   else
     prompt = i18n("Do you really want to remove all selected payees?");
 
@@ -4600,7 +4600,7 @@ void KMyMoney2App::slotBudgetDelete(void)
   // get confirmation from user
   QString prompt;
   if (d->m_selectedBudgets.size() == 1)
-    prompt = QString("<p>")+i18n("Do you really want to remove the budget <b>%1</b>?",d->m_selectedBudgets.front().name());
+    prompt = i18n("<p>Do you really want to remove the budget <b>%1</b>?</p>",d->m_selectedBudgets.front().name());
   else
     prompt = i18n("Do you really want to remove all selected budgets?");
 
@@ -4968,10 +4968,10 @@ void KMyMoney2App::slotTransactionsCancelOrEnter(bool& okToSelect)
         // okToSelect is preset to true if a cancel of the dialog is useful and false if it is not
         int rc;
         if(okToSelect == true) {
-          rc = KMessageBox::warningYesNoCancel(0, QString("<p>")+i18n("Do you really want to cancel editing this transaction without saving it?</p>- <b>Yes</b> cancels editing the transaction<br/>- <b>No</b> saves the transaction prior to canceling and<br/>- <b>Cancel</b> returns to the transaction editor.<p>You can also select an option to save the transaction automatically when e.g. selecting another transaction.</p>"), i18n("Cancel transaction edit"), KStandardGuiItem::yes(), KStandardGuiItem::no(), KStandardGuiItem::cancel(), dontShowAgain);
+          rc = KMessageBox::warningYesNoCancel(0, i18n("<p>Do you really want to cancel editing this transaction without saving it?</p><p>- <b>Yes</b> cancels editing the transaction<br/>- <b>No</b> saves the transaction prior to canceling and</p><p>- <b>Cancel</b> returns to the transaction editor.</p><p>You can also select an option to save the transaction automatically when e.g. selecting another transaction.</p>"), i18n("Cancel transaction edit"), KStandardGuiItem::yes(), KStandardGuiItem::no(), KStandardGuiItem::cancel(), dontShowAgain);
 
         } else {
-          rc = KMessageBox::warningYesNo(0, QString("<p>")+i18n("Do you really want to cancel editing this transaction without saving it?</p>- <b>Yes</b> cancels editing the transaction<br/>- <b>No</b> saves the transaction prior to canceling.<p>You can also select an option to save the transaction automatically when e.g. selecting another transaction.</p>"), i18n("Cancel transaction edit"), KStandardGuiItem::yes(), KStandardGuiItem::no(), dontShowAgain);
+          rc = KMessageBox::warningYesNo(0, i18n("<p>Do you really want to cancel editing this transaction without saving it?</p><p>- <b>Yes</b> cancels editing the transaction</p><p>- <b>No</b> saves the transaction prior to canceling.</p><p>You can also select an option to save the transaction automatically when e.g. selecting another transaction.</p>"), i18n("Cancel transaction edit"), KStandardGuiItem::yes(), KStandardGuiItem::no(), dontShowAgain);
         }
 
         switch(rc) {

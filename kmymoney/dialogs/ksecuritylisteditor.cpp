@@ -187,10 +187,10 @@ void KSecurityListEditor::slotDeleteSecurity(void)
     QString msg;
     QString dontAsk;
     if(security.isCurrency()) {
-      msg = QString("<p>") + i18n("Do you really want to remove the currency <b>%1</b> from the file?</p><p><i>Note: adding currencies is not currently supported.</i></p>",security.name());
+      msg = i18n("<p>Do you really want to remove the currency <b>%1</b> from the file?</p><p><i>Note: adding currencies is not currently supported.</i></p>",security.name());
       dontAsk = "DeleteCurrency";
     } else {
-      msg = QString("<p>") + i18n("Do you really want to remove the %1 <b>%2</b> from the file?</p>",KMyMoneyUtils::securityTypeToString(security.securityType()),security.name());
+      msg = i18n("<p>Do you really want to remove the %1 <b>%2</b> from the file?</p>",KMyMoneyUtils::securityTypeToString(security.securityType()),security.name());
       dontAsk = "DeleteSecurity";
     }
     if(KMessageBox::questionYesNo(this, msg, i18n("Delete security"), KStandardGuiItem::yes(), KStandardGuiItem::no(), dontAsk) == KMessageBox::Yes) {

@@ -590,8 +590,8 @@ bool KMyMoneyView::readFile(const KUrl& url)
   QFile file(filename);
   QFileInfo info(file);
   if(!info.isFile()) {
-    QString msg=i18n("<b>%1</b> is not a KMyMoney file.",filename);
-    KMessageBox::error(this, QString("<p>")+msg, i18n("Filetype Error"));
+    QString msg=i18n("<p><b>%1</b> is not a KMyMoney file.</p>",filename);
+    KMessageBox::error(this, msg, i18n("Filetype Error"));
     return false;
   }
   m_fmode = 0600;
@@ -992,13 +992,13 @@ void KMyMoneyView::saveToLocalFile(const QString& localFile, IMyMoneyStorageForm
     QStringList::const_iterator it_s;
     for(it_s = keys.constBegin(); it_s != keys.constEnd(); ++it_s) {
       if(!KGPGFile::keyAvailable(*it_s)) {
-        KMessageBox::sorry(this, QString("<p>")+i18n("You have specified to encrypt your data for the user-id</p><p><center><b>%1</b>.</center></p><p>Unfortunately, a valid key for this user-id was not found in your keyring. Please make sure to import a valid key for this user-id. This time, encryption is disabled.</p>",*it_s), i18n("GPG-Key not found"));
+        KMessageBox::sorry(this, i18n("<p>You have specified to encrypt your data for the user-id</p><p><center><b>%1</b>.</center></p><p>Unfortunately, a valid key for this user-id was not found in your keyring. Please make sure to import a valid key for this user-id. This time, encryption is disabled.</p>",*it_s), i18n("GPG-Key not found"));
         encryptedOk = false;
       }
     }
 
     if(encryptedOk == true) {
-      QString msg = QString("<p>") + i18n("You have configured to save your data in encrypted form using GPG. Please be aware, that this is a brand new feature which is yet untested. Make sure, you have the necessary understanding that you might loose all your data if you store it encrypted and cannot decrypt it later on! If unsure, answer <b>No</b>.");
+      QString msg = i18n("<p>You have configured to save your data in encrypted form using GPG. Please be aware, that this is a brand new feature which is yet untested. Make sure, you have the necessary understanding that you might loose all your data if you store it encrypted and cannot decrypt it later on. If unsure, answer <b>No</b>.</p>");
 
       if(KMessageBox::questionYesNo(this, msg, i18n("Store GPG encrypted"), KStandardGuiItem::yes(), KStandardGuiItem::no(), "StoreEncrypted") == KMessageBox::No) {
         encryptedOk = false;
