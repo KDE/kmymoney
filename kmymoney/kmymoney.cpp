@@ -949,11 +949,12 @@ void KMyMoney2App::initActions(void)
   KToggleAction *debug_traces = actionCollection()->add<KToggleAction>("debug_traces");
   debug_traces->setText(i18n("Debug Traces"));
   connect(debug_traces, SIGNAL(triggered()), this, SLOT(slotToggleTraces()));
+#endif
 
   KToggleAction *debug_timers = actionCollection()->add<KToggleAction>("debug_timers");
   debug_timers->setText(i18n("Debug Timers"));
   connect(debug_timers, SIGNAL(triggered()), this, SLOT(slotToggleTimers()));
-#endif
+
 
   // ************************
   // Currently unused actions
@@ -2926,7 +2927,7 @@ void KMyMoney2App::createCategory(MyMoneyAccount& account, const MyMoneyAccount&
   }
 
   QPointer<KNewAccountDlg> dialog =
-    new KNewAccountDlg(account, false, true, 0, 0, i18n("Create a new Category"));
+    new KNewAccountDlg(account, false, true, 0, i18n("Create a new Category"));
 
   if(dialog->exec() == QDialog::Accepted) {
     MyMoneyAccount parentAccount, brokerageAccount;
@@ -3415,7 +3416,7 @@ void KMyMoney2App::slotAccountEdit(void)
         MyMoneyTransaction t;
         MyMoneySplit s0, s1;
         QPointer<KNewAccountDlg> dlg =
-          new KNewAccountDlg(d->m_selectedAccount, true, category, 0, 0, caption);
+          new KNewAccountDlg(d->m_selectedAccount, true, category, 0, caption);
 
         if(category || d->m_selectedAccount.accountType() == MyMoneyAccount::Investment) {
           dlg->setOpeningBalanceShown(false);

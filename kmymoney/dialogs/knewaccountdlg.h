@@ -100,7 +100,7 @@ public:
     * @param name Name of the object (passed to QDialog). Default is 0.
     * @param title Caption of the object (passed to QDialog). Default is empty string.
     */
-  KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bool categoryEditor, QWidget *parent=0, const char *name=0, const QString& title=QString());
+  KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bool categoryEditor, QWidget *parent=0, const QString& title=QString());
 
   /**
     * This method returns the edited account object.

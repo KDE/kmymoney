@@ -71,7 +71,7 @@
 #include "kmymoneyfile.h"
 #include "kmymoneyutils.h"
 
-KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bool categoryEditor, QWidget *parent, const char *name, const QString& title)
+KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bool categoryEditor, QWidget *parent, const QString& title)
   : KNewAccountDlgDecl(parent),
     m_account(account),
     m_bSelectedParentAccount(false),
