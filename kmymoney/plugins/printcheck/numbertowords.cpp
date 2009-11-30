@@ -119,7 +119,7 @@ QString MyMoneyMoneyToWordsConverter::convert(const MyMoneyMoney & money)
   }
 
   if (fraction != 0)
-    return i18nc("The first argument is the ammount in words, the second is the fractional part and the third is the denominator of the fractional part", 
+    return i18nc("The first argument is the amount in words, the second is the fractional part and the third is the denominator of the fractional part", 
     "%1 and %2/%3").arg(combined).arg(fraction).arg(MyMoneyMoney::precToDenom(precision));
   else
     return combined;

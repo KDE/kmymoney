@@ -171,7 +171,7 @@ void KMMPrintCheckPlugin::slotTransactionsSelected(const KMyMoneyRegister::Selec
   d->m_transactions = transactions;
   bool actionEnabled = false;
   // enable/disable the action depending if there are transactions selected or not
-  // and wheter they can be printed or not
+  // and whether they can be printed or not
   KMyMoneyRegister::SelectedTransactions::const_iterator it;
   for(it = d->m_transactions.constBegin(); it != d->m_transactions.constEnd(); ++it) {
     if (canBePrinted(*it)) {
