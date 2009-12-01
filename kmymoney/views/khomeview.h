@@ -24,10 +24,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 #include <qwidget.h>
-//Added by qt3to4:
-#include <Q3Frame>
-class QVBoxLayout;
-class Q3Frame;
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -38,7 +34,6 @@ class Q3Frame;
 
 #include "mymoneyscheduled.h"
 #include "mymoneyaccount.h"
-#include "mymoneyforecast.h"
 #include "kmymoneyview.h"
 
 /**
@@ -114,11 +109,6 @@ private:
   Private* const d;
 
   /**
-   * daily balances of an account
-   */
-  typedef QMap<QDate, MyMoneyMoney> dailyBalances;
-
-  /**
     * Print an account and its balance and limit
     */
   void showAccountEntry(const MyMoneyAccount& acc, const MyMoneyMoney& value, const MyMoneyMoney& valueToMinBal, const bool showMinBal);
@@ -144,19 +134,6 @@ private:
    * Calculate the forecast balance after a payment has been made
    */
   MyMoneyMoney forecastPaymentBalance(const MyMoneyAccount& acc, const MyMoneyMoney& payment, QDate& paymentDate);
-
-  KHTMLPart*      m_part;
-  QString         m_html;
-  QVBoxLayout*    m_qvboxlayoutPage;
-  bool            m_showAllSchedules;
-  bool            m_needReload;
-  MyMoneyForecast m_forecast;
-
-  /**
-    * daily forecast balance of accounts
-    */
-  QMap<QString, dailyBalances> m_accountList;
-
 };
 
 #endif
