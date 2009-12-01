@@ -92,6 +92,11 @@ protected:
   */
   bool event( QEvent* event );
 
+/**
+  * Set the legend text or remove the legend text altogether if it is over the limit
+  */
+  void setLegendText(const int row, const QString legendText);
+
 private:
 
 /**

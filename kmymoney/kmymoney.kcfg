@@ -366,6 +366,13 @@
    <default>false</default>
   </entry>
  </group>
+ <group name="Chart Settings">
+  <entry name="maximumLegendItems" type="Int">
+   <label>Maximum quantity of legend items to display on charts</label>
+   <default>10</default>
+   <min>0</min>
+  </entry>
+ </group>
 </kcfg>
 <!-- 
   <entry name="" type="">

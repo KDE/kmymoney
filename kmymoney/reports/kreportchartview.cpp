@@ -42,6 +42,7 @@
 #include <KDChartPieDiagram>
 #include <KDChartRingDiagram>
 #include <KDChartCartesianAxis>
+#include "kmymoneyglobalsettings.h"
 
 using namespace reports;
 
@@ -563,4 +564,19 @@ void KReportChartView::removeLegend( void )
 {
   Legend* chartLegend = legend();
   delete chartLegend;
+}
+
+void KReportChartView::setLegendText(const int row, const QString legendText)
+{
+  //return if the legend is not going to be shown
+  Legend* chartLegend = legend();
+  if(!chartLegend)
+    return;
+
+  //if it is over the limit delete the legend
+  if(row > KMyMoneyGlobalSettings::maximumLegendItems()) {
+    removeLegend();
+  } else {
+    chartLegend->setText(row, legendText);
+  }
 }
