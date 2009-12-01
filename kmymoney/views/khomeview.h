@@ -83,13 +83,14 @@ protected:
   const QString linkend(void) const;
   void loadView(void);
 
-public slots:
   /**
     * Overridden so we can emit the activated signal.
     *
     * @return Nothing.
     */
-  void show(void);
+  void showEvent(QShowEvent* event);
+
+public slots:
 
   void slotOpenUrl(const KUrl &url, const KParts::OpenUrlArguments &args,const KParts::BrowserArguments &browArgs );
   void slotLoadView(void);
@@ -98,6 +99,8 @@ public slots:
     * Print the current view
     */
   void slotPrintView(void);
+
+  void slotZoomView(int);
 
 signals:
   void ledgerSelected(const QString& id, const QString& transaction);

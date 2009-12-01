@@ -116,6 +116,11 @@ KHomeView::KHomeView(QWidget *parent, const char *name ) :
   m_part->begin();
   m_part->write(KWelcomePage::welcomePage());
   m_part->end();
+
+  // we are going to handle the zoom view signal to change the font scale
+  connect(m_part->view(), SIGNAL(zoomView(int)), this, SLOT(slotZoomView(int)));
+  disconnect(m_part->view(), SIGNAL(zoomView(int)), m_part, SLOT(slotZoomView(int)));
+
   connect(m_part->browserExtension(), SIGNAL(openUrlRequest(const KUrl &,
           const KParts::OpenUrlArguments &,const KParts::BrowserArguments & )),
           this, SLOT(slotOpenUrl(const KUrl&, const KParts::OpenUrlArguments &,const KParts::BrowserArguments & )));
@@ -128,8 +133,7 @@ KHomeView::~KHomeView()
   // if user wants to remember the font size, store it here
   if (KMyMoneyGlobalSettings::rememberFontSize())
   {
-    KMyMoneyGlobalSettings::setFontSizePercentage(m_part->zoomFactor());
-    //kDebug() << "Storing font size: " << m_part->zoomFactor();
+    KMyMoneyGlobalSettings::setFontSizePercentage(m_part->fontScaleFactor());
     KMyMoneyGlobalSettings::self()->writeConfig();
   }
   //This is to prevent a crash on exit with KDE 4.3.2
@@ -147,13 +151,14 @@ void KHomeView::slotLoadView(void)
   }
 }
 
-void KHomeView::show(void)
+void KHomeView::showEvent(QShowEvent* event)
 {
   if(m_needReload) {
     loadView();
     m_needReload = false;
   }
-  QWidget::show();
+
+  QWidget::showEvent(event);
 }
 
 void KHomeView::slotPrintView(void)
@@ -162,10 +167,18 @@ void KHomeView::slotPrintView(void)
     m_part->view()->print();
 }
 
+void KHomeView::slotZoomView(int delta)
+{
+  const int fontScaleStepping = 10;
+  if (delta > 0)
+    m_part->setFontScaleFactor(m_part->fontScaleFactor() + fontScaleStepping);
+  else
+    m_part->setFontScaleFactor(m_part->fontScaleFactor() - fontScaleStepping);
+}
+
 void KHomeView::loadView(void)
 {
-  m_part->setZoomFactor( KMyMoneyGlobalSettings::fontSizePercentage() );
-  //kDebug() << "Setting font size: " << m_part->zoomFactor();
+  m_part->setFontScaleFactor(KMyMoneyGlobalSettings::fontSizePercentage());
 
   QList<MyMoneyAccount> list;
   MyMoneyFile::instance()->accountList(list);

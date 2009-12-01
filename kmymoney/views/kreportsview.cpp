@@ -98,7 +98,7 @@ KReportsView::KReportTab::KReportTab(KTabWidget* parent, const MyMoneyReport& re
   m_table(0)
 {
   m_layout->setSpacing(6);
-  m_part->setZoomFactor( KMyMoneyGlobalSettings::fontSizePercentage() );
+  m_part->setFontScaleFactor( KMyMoneyGlobalSettings::fontSizePercentage() );
 
 
   if (!KReportChartView::implemented() ||
