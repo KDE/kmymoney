@@ -25,8 +25,6 @@
 #include <QRadioButton>
 #include <qspinbox.h>
 #include <q3datetimeedit.h>
-//Added by qt3to4:
-#include <Q3ValueList>
 #include <QByteArray>
 
 // ----------------------------------------------------------------------------
@@ -660,7 +658,7 @@ void OfxImporterPlugin::slotImportFile(const QString& url)
   }
 }
 
-bool OfxImporterPlugin::storeStatements(Q3ValueList<MyMoneyStatement>& statements)
+bool OfxImporterPlugin::storeStatements(QList<MyMoneyStatement>& statements)
 {
   bool hasstatements = (statements.count() > 0);
   bool ok = true;
@@ -680,8 +678,8 @@ bool OfxImporterPlugin::storeStatements(Q3ValueList<MyMoneyStatement>& statement
   }*/
 
   qDebug("OfxImporterPlugin::storeStatements() with %d statements called", static_cast<int>(statements.count()));
-  Q3ValueList<MyMoneyStatement>::const_iterator it_s = statements.begin();
-  while ( it_s != statements.end() && !abort ) {
+  QList<MyMoneyStatement>::const_iterator it_s = statements.constBegin();
+  while ( it_s != statements.constEnd() && !abort ) {
     ok = ok && importStatement((*it_s));
     ++it_s;
   }

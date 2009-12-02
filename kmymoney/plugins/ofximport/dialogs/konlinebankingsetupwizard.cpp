@@ -130,7 +130,7 @@ bool KOnlineBankingSetupWizard::finishFiPage(void)
   m_bankInfo.clear();
   OfxFiServiceInfo info;
 
-  if(m_selectionTab->currentPageIndex() == 0) {
+  if(m_selectionTab->currentIndex() == 0) {
 
     // Get the fipids for the selected bank
     Q3ListViewItem* item = m_listFi->currentItem();
@@ -254,9 +254,9 @@ bool KOnlineBankingSetupWizard::finishLoginPage(void)
 
     KUrl filename(QString("%1response.ofx").arg(KStandardDirs::locateLocal("appdata", "")));
     QByteArray req;
-    req.setRawData(request, strlen(request));
+    req.fromRawData(request, strlen(request));
     OfxHttpsRequest(QString( "POST" ), KUrl( (*m_it_info).url ), req, QMap<QString, QString>(), filename, true);
-    req.resetRawData(request, strlen(request));
+    req.clear();
 
     LibofxContextPtr ctx = libofx_get_new_context();
     Q_CHECK_PTR(ctx);

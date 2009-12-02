@@ -24,9 +24,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QList>
 #include <QStringList>
-//Added by qt3to4:
-#include <Q3ValueList>
 
 // ----------------------------------------------------------------------------
 // Library Includes
@@ -122,7 +121,7 @@ protected:
     const QStringList& infos(void) const { return m_infos; }
     const QStringList& warnings(void) const { return m_warnings; }
     const QStringList& errors(void) const { return m_errors; }
-    bool storeStatements(Q3ValueList<MyMoneyStatement>& statements);
+    bool storeStatements(QList<MyMoneyStatement>& statements);
     bool importStatement(const MyMoneyStatement& s);
 
 
@@ -135,8 +134,8 @@ protected:
 private:
   bool m_valid;
   bool m_preferName;
-  Q3ValueList<MyMoneyStatement> m_statementlist;
-  Q3ValueList<MyMoneyStatement::Security> m_securitylist;
+  QList<MyMoneyStatement> m_statementlist;
+  QList<MyMoneyStatement::Security> m_securitylist;
   QString m_fatalerror;
   QStringList m_infos;
   QStringList m_warnings;

@@ -24,8 +24,6 @@
 #include <QObject>
 #include <Q3Http>
 #include <QFile>
-//Added by qt3to4:
-#include <Q3ValueList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

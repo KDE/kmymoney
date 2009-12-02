@@ -28,6 +28,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <kplugininfo.h>
 #include <ktrader.h>
 #include <kparts/componentfactory.h>
 #include <kdebug.h>

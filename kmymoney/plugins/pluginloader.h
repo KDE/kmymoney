@@ -25,14 +25,11 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qwidget.h>
-#include <q3scrollview.h>
-//Added by qt3to4:
+#include <QObject>
 #include <QByteArray>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-#include <kplugininfo.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -40,6 +37,7 @@
 #include <kmm_plugin_export.h>
 
 class KPluginSelector;
+class KPluginInfo;
 
 namespace KMyMoneyPlugin
 {

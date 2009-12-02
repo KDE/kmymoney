@@ -28,6 +28,7 @@
 #include <khtmlview.h>
 #include <khtml_part.h>
 #include <kactioncollection.h>
+#include <kplugininfo.h>
 
 // KMyMoney includes
 #include <kmymoney/mymoneyfile.h>
