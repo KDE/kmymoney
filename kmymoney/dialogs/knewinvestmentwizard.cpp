@@ -176,6 +176,7 @@ void KNewInvestmentWizard::next(void)
 
 void KNewInvestmentWizard::slotCheckForExistingSymbol(const QString& symbol)
 {
+  Q_UNUSED(symbol);
   if(m_investmentName->text().isEmpty()) {
     QList<MyMoneySecurity> list = MyMoneyFile::instance()->securityList();
     QList<MyMoneySecurity>::const_iterator it_s;

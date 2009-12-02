@@ -160,7 +160,7 @@ bool KSelectTransactionsDlg::eventFilter(QObject* o, QEvent* e)
     switch(e->type()) {
       case QEvent::KeyPress:
         k = dynamic_cast<QKeyEvent*>(e);
-        if((k->state() & Qt::KeyboardModifierMask) == 0
+        if((k->modifiers() & Qt::KeyboardModifierMask) == 0
            || (k->modifiers() & Qt::KeypadModifier) != 0) {
           switch(k->key()) {
             case Qt::Key_Return:

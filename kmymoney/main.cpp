@@ -107,7 +107,7 @@ int main(int argc, char *argv[])
 #if KMM_DEBUG
   // The following options are only available when compiled in debug mode
   options.add( "trace", ki18n("turn on program traces") );
-  options.add(  "dump-actions", ki18n("dump the names of all defined KAction objects to stdout and quit") );
+  options.add( "dump-actions", ki18n("dump the names of all defined KAction objects to stdout and quit") );
 #endif
 
   // INSERT YOUR COMMANDLINE OPTIONS HERE
@@ -164,7 +164,6 @@ int main(int argc, char *argv[])
 
   kmymoney2 = 0;
   kmymoney2 = new KMyMoney2App();
-  a->setMainWidget( kmymoney2 );
 
 #if KMM_DEBUG
   if(args->isSet("dump-actions")) {

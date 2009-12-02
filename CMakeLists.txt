@@ -232,8 +232,10 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${KDE4_ENABLE_EXCEPTIONS}")
 
 # temporarily disable the hidden base class virtual functions warning
 # so we can concetrate on the more important compiler warnings
+# also disable "type qualifiers ignored on function return type"
+#since we can't do anything about KDChart code
 IF(CMAKE_SYSTEM_NAME MATCHES Linux)
-  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-overloaded-virtual")
+  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-overloaded-virtual -Wno-ignored-qualifiers")
 ENDIF(CMAKE_SYSTEM_NAME MATCHES Linux)
 
 IF(NOT WIN32)

@@ -220,9 +220,6 @@
                 <property name="enabled">
                   <bool>true</bool>
                 </property>
-                <property name="textFormat">
-                  <enum>Qt::RichText</enum>
-                </property>
                 <property name="text">
                   <string>1</string>
                 </property>

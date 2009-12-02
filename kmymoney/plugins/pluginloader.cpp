@@ -101,14 +101,14 @@ void PluginLoader::loadPlugin(KPluginInfo* info)
     if (!plugin) {
       // the plugin is enabled but it is not loaded
       KService::Ptr service = info->service();
-      int error = 0;
-      Plugin* plugin = KService::createInstance<Plugin>(service, d->m_parent, QStringList(), &error);
+      QString error;
+      Plugin* plugin = service->createInstance<Plugin>(d->m_parent, QVariantList(), &error);
       if (plugin) {
         d->m_loadedPlugins.insert(info->name(), plugin);
         emit PluginLoader::instance()->plug(info);
       }
       else {
-        qDebug("KMyMoneyPlugin::PluginLoader:: createInstanceFromService returned 0 for %s with error number %d", qPrintable(info->name()), error);
+        qDebug("KMyMoneyPlugin::PluginLoader:: createInstanceFromService returned 0 for %s with error %s", qPrintable(info->name()), qPrintable(error));
       }
     }
   }

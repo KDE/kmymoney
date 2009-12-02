@@ -98,9 +98,6 @@
       </item>
       <item>
         <widget class="KTextEdit" name="lbStatus">
-          <property name="textFormat">
-            <enum>Qt::LogText</enum>
-          </property>
           <property name="readOnly">
             <bool>true</bool>
           </property>

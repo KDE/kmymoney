@@ -61,7 +61,7 @@ class MousePressFilter : public QObject
 {
   Q_OBJECT
 public:
-  explicit MousePressFilter(QWidget* parent = 0, const char* name = 0);
+  explicit MousePressFilter(QWidget* parent = 0);
 
   /**
     * Add widget @p w to the list of possible parent objects. See eventFilter() how

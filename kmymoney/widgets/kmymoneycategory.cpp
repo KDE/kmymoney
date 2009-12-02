@@ -69,9 +69,12 @@ KMyMoneyCategory::KMyMoneyCategory(QWidget* parent, bool splitButton) :
     layout->setContentsMargins(0, 0, 0, 0);
 
     // make sure not to use our own overridden version of reparent() here
-    KMyMoneyCombo::reparent(d->frame, windowFlags ()  & ~Qt::WType_Mask, QPoint(0, 0), true);
-    if(parent)
-      d->frame->reparent(parent, QPoint(0, 0), true);
+    KMyMoneyCombo::setParent(d->frame, windowFlags ()  & ~Qt::WType_Mask);
+    KMyMoneyCombo::show();
+    if(parent) {
+      d->frame->setParent(parent);
+      d->frame->show();
+    }
 
     // create button
     KGuiItem splitButtonItem("",
@@ -109,12 +112,17 @@ void KMyMoneyCategory::setPalette(const QPalette& palette)
   KMyMoneyCombo::setPalette(palette);
 }
 
-void KMyMoneyCategory::reparent(QWidget *parent, Qt::WFlags w, const QPoint& pos, bool showIt)
+void KMyMoneyCategory::reparent(QWidget *parent, Qt::WFlags w, const QPoint&, bool showIt)
 {
-  if(d->frame)
-    d->frame->reparent(parent, w, pos, showIt);
-  else
-    KMyMoneyCombo::reparent(parent, w, pos, showIt);
+  if(d->frame) {
+    d->frame->setParent(parent, w);
+    if (showIt)
+      d->frame->show();
+  } else {
+    KMyMoneyCombo::setParent(parent, w);
+    if (showIt)
+      KMyMoneyCombo::show();
+  }
 }
 
 kMyMoneyAccountSelector* KMyMoneyCategory::selector(void) const

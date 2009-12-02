@@ -314,7 +314,7 @@ KReportsView::KReportsView(QWidget *parent, const char *name ) :
 {
   m_reportTabWidget = new KTabWidget( this);
   addWidget( m_reportTabWidget );
-  m_reportTabWidget->setCloseButtonEnabled( true );
+  m_reportTabWidget->setTabsClosable( true );
 
   m_listTab = (new QWidget( m_reportTabWidget));
   m_listTabLayout = ( new QVBoxLayout( m_listTab) );

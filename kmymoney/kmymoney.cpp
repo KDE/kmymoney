@@ -336,7 +336,7 @@ KMyMoney2App::KMyMoney2App(QWidget* parent) :
   initDynamicMenus();
 
   ::timetrace("create view");
-  d->m_myMoneyView = new KMyMoneyView(frame, "KMyMoneyView");
+  d->m_myMoneyView = new KMyMoneyView(frame);
   layout->addWidget(d->m_myMoneyView, 10);
 
   ///////////////////////////////////////////////////////////////////

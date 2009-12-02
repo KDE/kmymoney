@@ -347,7 +347,6 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
     setWindowTitle(title);
 
   // load button icons
-  KIconLoader* il = KIconLoader::global();
   cancelButton->setGuiItem(KStandardGuiItem::cancel());
   createButton->setGuiItem(KStandardGuiItem::ok());
 
@@ -1170,7 +1169,7 @@ void KNewAccountDlg::slotAdjustMaxCreditEarlyEdit(const QString&)
 void KNewAccountDlg::addTab(QWidget* w, const QString& name)
 {
   if(w) {
-    w->reparent(m_tab, QPoint(0,0));
+    w->setParent(m_tab);
     m_tab->addTab(w, name);
   }
 }

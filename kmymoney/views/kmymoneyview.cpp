@@ -110,7 +110,7 @@
 #define RECOVER_KEY_ID        "0xD2B08440"
 
 
-KMyMoneyView::KMyMoneyView(QWidget *parent, const char *name)
+KMyMoneyView::KMyMoneyView(QWidget *parent)
     : KPageWidget(parent),
   // m_bankRightClick(false),
   m_inConstructor(true),

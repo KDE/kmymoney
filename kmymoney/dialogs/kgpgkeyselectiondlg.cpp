@@ -37,7 +37,7 @@
 #include <kgpgfile.h>
 #include <ktoolinvocation.h>
 
-KGpgKeySelectionDlg::KGpgKeySelectionDlg(QWidget *parent, const char *name) :
+KGpgKeySelectionDlg::KGpgKeySelectionDlg(QWidget *parent) :
   KDialog(parent),
   m_needCheckList(true),
   m_listOk(false),

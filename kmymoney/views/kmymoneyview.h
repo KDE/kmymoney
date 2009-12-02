@@ -235,7 +235,7 @@ public:
     * The constructor for KMyMoneyView. Just creates all the tabs for the
     * different aspects of the MyMoneyFile.
     */
-  explicit KMyMoneyView(QWidget *parent=0, const char *name=0);
+  explicit KMyMoneyView(QWidget *parent=0);
 
   /**
     * Destructor

@@ -81,8 +81,8 @@ public:
   QTimer               m_viewPosTimer;
 };
 
-MousePressFilter::MousePressFilter(QWidget* parent, const char* name) :
-  QObject(parent, name),
+MousePressFilter::MousePressFilter(QWidget* parent) :
+  QObject(parent),
   m_lastMousePressEvent(0),
   m_filterActive(true)
 {
@@ -704,7 +704,8 @@ void KGlobalLedgerView::loadView(void)
     }
   }
   if(!d->m_inLoading) {
-    d->m_viewPosTimer.start(30, true);
+    d->m_viewPosTimer.setSingleShot(true);
+    d->m_viewPosTimer.start(30);
     d->m_inLoading = true;
   }
 

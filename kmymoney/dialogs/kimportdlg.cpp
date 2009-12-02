@@ -148,7 +148,7 @@ void KImportDlg::writeConfig(void)
 /** Make sure the text input is ok */
 void KImportDlg::slotFileTextChanged(const QString& text)
 {
-  if (!text.isEmpty() && KIO::NetAccess::exists(text, true, KMyMoneyUtils::mainWindow())) {
+  if (!text.isEmpty() && KIO::NetAccess::exists(text, KIO::NetAccess::SourceSide, KMyMoneyUtils::mainWindow())) {
     // m_qcomboboxDateFormat->setEnabled(true);
     m_qbuttonOk->setEnabled(true);
     m_qlineeditFile->setText(text);

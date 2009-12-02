@@ -48,8 +48,8 @@
 KMyMoneyBriefSchedule::KMyMoneyBriefSchedule(QWidget *parent)
     : kScheduleBriefWidget(parent/*,name, Qt::WStyle_Customize | Qt::WStyle_NoBorder*/)
 {
-  m_nextButton->setPixmap(BarIcon(QString::fromLatin1("arrow-right")));
-  m_prevButton->setPixmap(BarIcon(QString::fromLatin1("arrow-left")));
+  m_nextButton->setIcon(KIcon(QString::fromLatin1("arrow-right")));
+  m_prevButton->setIcon(KIcon(QString::fromLatin1("arrow-left")));
 
   connect(m_prevButton, SIGNAL(clicked()), this, SLOT(slotPrevClicked()));
   connect(m_nextButton, SIGNAL(clicked()), this, SLOT(slotNextClicked()));
