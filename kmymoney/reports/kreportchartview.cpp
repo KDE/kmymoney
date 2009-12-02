@@ -42,6 +42,7 @@
 #include <KDChartPieDiagram>
 #include <KDChartRingDiagram>
 #include <KDChartCartesianAxis>
+#include <KDChartFrameAttributes>
 #include "kmymoneyglobalsettings.h"
 
 using namespace reports;
@@ -426,20 +427,28 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
   //set the legend basic attributes
   //this is done after adding the legend because the values are overridden when adding the legend to the chart
-  legend->setPosition(Position::East);
-  TextAttributes legendTextAttr(legend->textAttributes());
-  legendTextAttr.setFontSize(14);
-  legendTextAttr.setAutoShrink(true);
-  legend->setTextAttributes(legendTextAttr);
+  if(legend->texts().count() <= KMyMoneyGlobalSettings::maximumLegendItems()) {
+    legend->setPosition(Position::East);
+    TextAttributes legendTextAttr(legend->textAttributes());
+    legendTextAttr.setFontSize(14);
+    legendTextAttr.setAutoShrink(true);
+    legend->setTextAttributes(legendTextAttr);
 
-  TextAttributes legendTitleTextAttr(legend->titleTextAttributes());
-  legendTitleTextAttr.setFontSize(20);
-  legendTitleTextAttr.setAutoShrink(true);
-  legend->setTitleTextAttributes(legendTitleTextAttr);
-  legend->setTitleText(i18nc("Chart lines legend","Legend"));
-  legend->setUseAutomaticMarkerSize( false );
+    TextAttributes legendTitleTextAttr(legend->titleTextAttributes());
+    legendTitleTextAttr.setFontSize(20);
+    legendTitleTextAttr.setAutoShrink(true);
+    legend->setTitleTextAttributes(legendTitleTextAttr);
+    legend->setTitleText(i18nc("Chart lines legend","Legend"));
+    legend->setUseAutomaticMarkerSize( false );
 
-  replaceLegend(legend);
+    replaceLegend(legend);
+  } else {
+    //if it is over the limit delete the legend
+    legend->resetTexts();
+    FrameAttributes frameAttr = legend->frameAttributes();
+    frameAttr.setVisible(false);
+    legend->setFrameAttributes(frameAttr);
+  }
 
   //this sets the line width only for line diagrams
   setLineWidth(config.chartLineWidth());
@@ -564,19 +573,4 @@ void KReportChartView::removeLegend( void )
 {
   Legend* chartLegend = legend();
   delete chartLegend;
-}
-
-void KReportChartView::setLegendText(const int row, const QString legendText)
-{
-  //return if the legend is not going to be shown
-  Legend* chartLegend = legend();
-  if(!chartLegend)
-    return;
-
-  //if it is over the limit delete the legend
-  if(row > KMyMoneyGlobalSettings::maximumLegendItems()) {
-    removeLegend();
-  } else {
-    chartLegend->setText(row, legendText);
-  }
 }
