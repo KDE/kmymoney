@@ -68,6 +68,7 @@ KReportChartView::KReportChartView( QWidget* parent): KDChart::Chart(parent)
 
 void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport &config, int numberColumns, const QStringList& columnHeadings, const QList<ERowType>& rowTypeList, const QStringList& columnTypeHeaderList)
 {
+  ::timetrace("start drawing chart");
   //set the number of columns
   setNumColumns(numberColumns);
 
@@ -117,14 +118,12 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     case MyMoneyReport::eChartLine:
     {
       KDChart::LineDiagram* diagram = new KDChart::LineDiagram;
-      diagram->setModel(&m_model);
       coordinatePlane()->replaceDiagram(diagram);
       break;
     }
     case MyMoneyReport::eChartBar:
     {
       KDChart::BarDiagram* diagram = new KDChart::BarDiagram;
-      diagram->setModel(&m_model);
       coordinatePlane()->replaceDiagram(diagram);
       break;
     }
@@ -132,14 +131,12 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     {
       KDChart::BarDiagram* diagram = new KDChart::BarDiagram;
       diagram->setType(BarDiagram::Stacked);
-      diagram->setModel(&m_model);
       coordinatePlane()->replaceDiagram(diagram);
       break;
     }
     case MyMoneyReport::eChartPie:
     {
       KDChart::PieDiagram* diagram = new KDChart::PieDiagram;
-      diagram->setModel(&m_model);
       PolarCoordinatePlane* polarPlane = new PolarCoordinatePlane;
       replaceCoordinatePlane(polarPlane);
       coordinatePlane()->replaceDiagram(diagram);
@@ -150,7 +147,6 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     case MyMoneyReport::eChartRing:
     {
       KDChart::RingDiagram* diagram = new KDChart::RingDiagram;
-      diagram->setModel(&m_model);
       PolarCoordinatePlane* polarPlane = new PolarCoordinatePlane;
       replaceCoordinatePlane(polarPlane);
       coordinatePlane()->replaceDiagram(diagram);
@@ -242,6 +238,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   // For onMouseOver events, we want to activate mouse tracking
   setMouseTracking( true );
 
+  ::timetrace("loading rows");
   switch ( config.detailLevel() )
   {
     case MyMoneyReport::eDetailNone:
@@ -424,6 +421,10 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     }
     break;
   }
+  ::timetrace("rows loaded");
+
+  //assign model to the diagram
+  coordinatePlane()->diagram()->setModel(&m_model);
 
   //set the legend basic attributes
   //this is done after adding the legend because the values are overridden when adding the legend to the chart
@@ -452,7 +453,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
   //this sets the line width only for line diagrams
   setLineWidth(config.chartLineWidth());
-
+  ::timetrace("finished drawing chart");
   //make sure to show only the required number of fractional digits on the labels of the graph
   //chartView.params()->setDataValuesCalc(0, MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
 }
