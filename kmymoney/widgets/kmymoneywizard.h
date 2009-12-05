@@ -449,7 +449,7 @@ protected:
   /**
     * Constructor (kept protected, so that one cannot create such an object directly)
     */
-  KMyMoneyWizard(QWidget *parent = 0, const char *name = 0, bool modal = false, Qt::WFlags f = 0);
+  KMyMoneyWizard(QWidget *parent = 0, bool modal = false, Qt::WFlags f = 0);
 
   /**
     * This method sets up the first page after creation of the object

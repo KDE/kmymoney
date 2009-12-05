@@ -39,8 +39,8 @@
 #include "kmymoneychecklistitem.h"
 #include "kmymoneyglobalsettings.h"
 
-KMyMoneySelector::KMyMoneySelector(QWidget *parent, const char *name, Qt::WFlags flags) :
-  QWidget(parent, name, flags)
+KMyMoneySelector::KMyMoneySelector(QWidget *parent, Qt::WFlags flags) :
+  QWidget(parent, flags)
 {
   m_selMode = Q3ListView::Single;
 
@@ -523,7 +523,7 @@ void KMyMoneySelector::slotShowSelected(void)
 int KMyMoneySelector::slotMakeCompletion(const QString& _txt)
 {
   QString txt(QRegExp::escape(_txt));
-  if(KMyMoneyGlobalSettings::stringMatchFromStart() && this->isA("KMyMoneySelector") )
+  if(KMyMoneyGlobalSettings::stringMatchFromStart() && QLatin1String(this->metaObject()->className()) == QLatin1String("KMyMoneySelector") )
     txt.prepend('^');
   return slotMakeCompletion(QRegExp(txt, Qt::CaseInsensitive));
 }
@@ -677,7 +677,7 @@ void KMyMoneySelector::slotListRightMouse(Q3ListViewItem* it_v, const QPoint& po
 
       QRect r( 0, y, boxsize-3, boxsize-3 );
       // columns might have been swapped
-      r.moveBy( m_listView->header()->sectionPos( 0 ), 0 );
+      r.translate( m_listView->header()->sectionPos( 0 ), 0 );
 
       QPoint topLeft = m_listView->itemRect(it_v).topLeft(); //### inefficient?
       QPoint p = m_listView->mapFromGlobal( pos ) - topLeft;

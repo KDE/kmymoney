@@ -70,8 +70,8 @@ namespace NewUserWizard {
 
 static int stepCount;
 
-Wizard::Wizard(QWidget *parent, const char *name, bool modal, Qt::WFlags flags) :
-  KMyMoneyWizard(parent, name, modal, flags),
+Wizard::Wizard(QWidget *parent, bool modal, Qt::WFlags flags) :
+  KMyMoneyWizard(parent, modal, flags),
   m_introPage(0)
 {
   bool isFirstTime = KMyMoneyGlobalSettings::firstTimeRun();

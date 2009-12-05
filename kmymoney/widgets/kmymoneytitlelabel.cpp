@@ -57,7 +57,6 @@ void KMyMoneyTitleLabel::setLeftImageFile(const QString& _file)
   m_leftImageFile = _file;
   QString lfullpath = KGlobal::dirs()->findResource("appdata", m_leftImageFile);
   m_leftImage.load(lfullpath);
-  m_leftImage.setAlphaBuffer(true);
 }
 
 void KMyMoneyTitleLabel::setRightImageFile(const QString& _file)
@@ -65,7 +64,6 @@ void KMyMoneyTitleLabel::setRightImageFile(const QString& _file)
   m_rightImageFile = _file;
   QString rfullpath = KGlobal::dirs()->findResource("appdata", m_rightImageFile);
   m_rightImage.load(rfullpath);
-  m_rightImage.setAlphaBuffer(true);
   if(m_rightImage.height() < 30)
     setMinimumHeight(30);
   else {

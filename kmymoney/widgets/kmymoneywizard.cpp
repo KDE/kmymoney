@@ -115,10 +115,12 @@ QString KMyMoneyWizardPage::helpContext(void) const
   return QString();
 }
 
-KMyMoneyWizard::KMyMoneyWizard(QWidget *parent, const char *name, bool modal, Qt::WFlags f) :
-  QDialog(parent, name, modal, f),
+KMyMoneyWizard::KMyMoneyWizard(QWidget *parent, bool modal, Qt::WFlags f) :
+  QDialog(parent, f),
   m_step(0)
 {
+  setModal(modal);
+
   // enable the little grip in the right corner
   setSizeGripEnabled(true);
 
@@ -131,8 +133,8 @@ KMyMoneyWizard::KMyMoneyWizard(QWidget *parent, const char *name, bool modal, Qt
 
   if ( KGlobalSettings::showIconsOnPushButtons() )
   {
-    m_backButton->setIcon( KStandardGuiItem::back( KStandardGuiItem::UseRTL ).iconSet() );
-    m_nextButton->setIcon( KStandardGuiItem::forward( KStandardGuiItem::UseRTL ).iconSet() );
+    m_backButton->setIcon( KStandardGuiItem::back( KStandardGuiItem::UseRTL ).icon() );
+    m_nextButton->setIcon( KStandardGuiItem::forward( KStandardGuiItem::UseRTL ).icon() );
     m_finishButton->setIcon( KIcon( "dialog-ok-apply" ) );
     m_cancelButton->setIcon( KIcon( "dialog-cancel" ) );
     m_helpButton->setIcon( KIcon( "help-contents" ) );
@@ -172,7 +174,7 @@ KMyMoneyWizard::KMyMoneyWizard(QWidget *parent, const char *name, bool modal, Qt
   m_stepLayout->setObjectName("stepLayout");
   m_stepLayout->addWidget(new QLabel("", m_stepFrame));
   m_stepLayout->addItem(new QSpacerItem(20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding));
-  m_stepLabel = new QLabel(m_stepFrame, "stepLabel");
+  m_stepLabel = new QLabel(m_stepFrame);
   m_stepLabel->setAlignment(Qt::AlignHCenter);
   m_stepLayout->addWidget(m_stepLabel);
   hboxLayout->addWidget(m_stepFrame);

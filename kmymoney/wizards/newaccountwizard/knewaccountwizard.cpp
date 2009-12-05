@@ -72,8 +72,8 @@ namespace NewAccountWizard {
     StepFinish
   };
 
-Wizard::Wizard(QWidget *parent, const char *name, bool modal, Qt::WFlags flags)
-  : KMyMoneyWizard(parent, name, modal, flags)
+Wizard::Wizard(QWidget *parent, bool modal, Qt::WFlags flags)
+  : KMyMoneyWizard(parent, modal, flags)
 {
   setTitle(i18n("KMyMoney New Account Setup"));
   addStep(i18n("Institution"));

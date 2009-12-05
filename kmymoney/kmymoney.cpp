@@ -415,7 +415,7 @@ void KMyMoney2App::initDynamicMenus(void)
   KMenu *menu = dynamic_cast<KMenu*>(w);
   if(menu) {
     QWidgetAction *accountSelectorAction = new QWidgetAction(menu);
-    d->m_moveToAccountSelector = new kMyMoneyAccountSelector(menu, 0, 0, false);
+    d->m_moveToAccountSelector = new kMyMoneyAccountSelector(menu, 0, false);
     accountSelectorAction->setDefaultWidget(d->m_moveToAccountSelector);
     menu->addAction(accountSelectorAction);
     connect(d->m_moveToAccountSelector, SIGNAL(itemSelected(const QString&)), this, SLOT(slotMoveToAccount(const QString&)));
