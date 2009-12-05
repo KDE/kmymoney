@@ -46,8 +46,7 @@ bool StdTransactionDownloaded::paintRegisterCellSetup(QPainter* painter, int& ro
   bool rc = Transaction::paintRegisterCellSetup(painter, row, col, cellRect, textRect, cg, brush);
   // if not selected paint in selected background color
   if(!isSelected()) {
-    cg.setColor(QColorGroup::Base, KMyMoneyGlobalSettings::importedTransactionColor());
-    brush = QBrush(cg.base());
+    brush = KMyMoneyGlobalSettings::importedTransactionColor();
   }
   return rc;
 }
@@ -63,8 +62,7 @@ bool InvestTransactionDownloaded::paintRegisterCellSetup(QPainter* painter, int&
   bool rc = Transaction::paintRegisterCellSetup(painter, row, col, cellRect, textRect, cg, brush);
   // if not selected paint in selected background color
   if(!isSelected()) {
-    cg.setColor(QColorGroup::Base, KMyMoneyGlobalSettings::importedTransactionColor());
-    brush = QBrush(cg.base());
+    brush = KMyMoneyGlobalSettings::importedTransactionColor();
   }
   return rc;
 }

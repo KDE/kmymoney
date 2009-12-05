@@ -54,8 +54,7 @@ bool StdTransactionMatched::paintRegisterCellSetup(QPainter* painter, int& row, 
 
   // if not selected paint in matched background color
   if(!isSelected()) {
-    cg.setColor(QColorGroup::Base, KMyMoneyGlobalSettings::matchedTransactionColor());
-    brush = QBrush(cg.base());
+    brush = KMyMoneyGlobalSettings::matchedTransactionColor();
   }
 
   // the first line needs to be painted across all columns

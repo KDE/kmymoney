@@ -185,12 +185,10 @@ TransactionForm::TransactionForm(QWidget *parent) :
   // make sure, that the table is 'invisible' by setting up the right background
   // keep the original color group for painting the cells though
   QPalette p = palette();
-  QColorGroup cg = p.active();
-  m_cellColorGroup = cg;
-  cg.setBrush(QColorGroup::Base, cg.brush(QColorGroup::Background));
-  p.setActive(cg);
-  p.setInactive(cg);
-  p.setDisabled(cg);
+  m_cellColorGroup = QColorGroup(p);
+  p.setBrush(QPalette::Active, QPalette::Base, p.brush(QPalette::Background));
+  p.setBrush(QPalette::Inactive, QPalette::Base, p.brush(QPalette::Background));
+  p.setBrush(QPalette::Disabled, QPalette::Base, p.brush(QPalette::Background));
   setPalette(p);
 
   // never show vertical scroll bars
@@ -277,7 +275,9 @@ TabBar* TransactionForm::tabBar(QWidget* parent)
     // create the tab bar
     m_tabBar = new TabBar( parent );
     m_tabBar->setSignalEmission(TabBar::SignalAlways);
-    m_tabBar->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)5, (QSizePolicy::SizeType)0, 0, 0, m_tabBar->sizePolicy().hasHeightForWidth() ) );
+    QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    sizePolicy.setHeightForWidth(m_tabBar->sizePolicy().hasHeightForWidth());
+    m_tabBar->setSizePolicy(sizePolicy);
     connect(m_tabBar, SIGNAL(tabCurrentChanged(int)), this, SLOT(slotActionSelected(int)));
   }
   return m_tabBar;

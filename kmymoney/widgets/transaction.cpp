@@ -34,6 +34,7 @@
 #include <kglobal.h>
 #include <kiconloader.h>
 #include <kdebug.h>
+#include <kpushbutton.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -1280,7 +1281,7 @@ void StdTransaction::tabOrderInForm(QWidgetList& tabOrderWidgets) const
     // go haywire when someone changes the KMyMoneyCategory object ...
     QWidget* w = m_form->cellWidget(2, ValueColumn1);
     tabOrderWidgets.append(focusWidget(w));
-    w = dynamic_cast<QWidget*>(w->child("splitButton"));
+    w = w->findChild<KPushButton*>("splitButton");
     if(w)
       tabOrderWidgets.append(w);
     } else if(*it_s == "memo") {
@@ -1344,7 +1345,7 @@ void StdTransaction::tabOrderInRegister(QWidgetList& tabOrderWidgets) const
       // go haywire when someone changes the KMyMoneyCategory object ...
       w = m_parent->cellWidget(m_startRow + 1, DetailColumn);
       tabOrderWidgets.append(focusWidget(w));
-      w = dynamic_cast<QWidget*>(w->child("splitButton"));
+      w = w->findChild<KPushButton*>("splitButton");
       if(w)
         tabOrderWidgets.append(w);
     } else if(*it_s == "memo") {
@@ -1967,7 +1968,7 @@ void InvestTransaction::tabOrderInForm(QWidgetList& tabOrderWidgets) const
   // go haywire when someone changes the KMyMoneyCategory object ...
   QWidget* w = m_form->cellWidget(3, ValueColumn1);
   tabOrderWidgets.append(focusWidget(w));
-  w = dynamic_cast<QWidget*>(w->child("splitButton"));
+  w = w->findChild<KPushButton*>("splitButton");
   if(w)
     tabOrderWidgets.append(w);
 
@@ -1977,7 +1978,7 @@ void InvestTransaction::tabOrderInForm(QWidgetList& tabOrderWidgets) const
   // the same applies for the interest categories
   w = m_form->cellWidget(4, ValueColumn1);
   tabOrderWidgets.append(focusWidget(w));
-  w = dynamic_cast<QWidget*>(w->child("splitButton"));
+  w = w->findChild<KPushButton*>("splitButton");
   if(w)
     tabOrderWidgets.append(w);
 
@@ -2042,7 +2043,7 @@ void InvestTransaction::tabOrderInRegister(QWidgetList& tabOrderWidgets) const
   // go haywire when someone changes the KMyMoneyCategory object ...
   w = m_parent->cellWidget(m_startRow + 2, DetailColumn);    // interest account
   tabOrderWidgets.append(focusWidget(w));
-  w = dynamic_cast<QWidget*>(w->child("splitButton"));
+  w = w->findChild<KPushButton*>("splitButton");
   if(w)
     tabOrderWidgets.append(w);
 
@@ -2051,7 +2052,7 @@ void InvestTransaction::tabOrderInRegister(QWidgetList& tabOrderWidgets) const
 
   w = m_parent->cellWidget(m_startRow + 3, DetailColumn);    // fee account
   tabOrderWidgets.append(focusWidget(w));
-  w = dynamic_cast<QWidget*>(w->child("splitButton"));
+  w = w->findChild<KPushButton*>("splitButton");
   if(w)
     tabOrderWidgets.append(w);
 
