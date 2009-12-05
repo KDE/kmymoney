@@ -77,8 +77,10 @@ void kMyMoneyLineEdit::focusOutEvent(QFocusEvent *ev)
 void kMyMoneyLineEdit::focusInEvent(QFocusEvent *ev)
 {
   KLineEdit::focusInEvent(ev);
-  // select the text so it can be edited by the user
-  selectAll();
+  // select the text so it can be edited by the user - only if the widget is not focused
+  // after a popup is closed (which could be the completer of the KMyMoneyCombo)
+  if (ev->reason() != Qt::PopupFocusReason)
+    selectAll();
 }
 
 void kMyMoneyLineEdit::keyReleaseEvent(QKeyEvent* k)
