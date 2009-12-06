@@ -374,7 +374,7 @@ void KHomeView::showPayments(void)
     ++d_it;
   }
 
-  for (d_it=overdues.begin(); d_it!=overdues.end();)
+  for (d_it = overdues.begin(); d_it != overdues.end(); ++d_it)
   {
     // FIXME cleanup old code
     // if ((*d_it).isFinished() || (*d_it).nextPayment((*d_it).lastPayment()) == QDate())
@@ -383,7 +383,6 @@ void KHomeView::showPayments(void)
       d_it = overdues.erase(d_it);
       continue;
     }
-    ++d_it;
   }
 
   d->m_html += "<div class=\"shadow\"><div class=\"displayblock\">";
