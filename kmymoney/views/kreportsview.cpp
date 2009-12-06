@@ -115,9 +115,6 @@ KReportsView::KReportTab::KReportTab(KTabWidget* parent, const MyMoneyReport& re
 
   parent->addTab( this, KIcon("application-vnd.oasis.opendocument.spreadsheet"), report.name() );
   parent->setTabEnabled( parent->indexOf(this), true );
-
-  if ( m_report.isChartByDefault() )
-    toggleChart();
 }
 
 KReportsView::KReportTab::~KReportTab()
@@ -223,6 +220,7 @@ void KReportsView::KReportTab::updateReport(void)
 
   m_table->drawChart( *m_chartView );
   m_chartView->update();
+  toggleChart();
 }
 
 QString KReportsView::KReportTab::createTable(const QString& links)
