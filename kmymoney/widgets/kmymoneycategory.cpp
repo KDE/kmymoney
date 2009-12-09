@@ -51,11 +51,13 @@ public:
   Private() :
     splitButton(0),
     frame(0),
-    recursive(false) {}
+    recursive(false),
+    isSplit(false) {}
 
   KPushButton*      splitButton;
   QFrame*           frame;
   bool              recursive;
+  bool              isSplit;
 };
 
 KMyMoneyCategory::KMyMoneyCategory(QWidget* parent, bool splitButton) :
@@ -176,13 +178,14 @@ void KMyMoneyCategory::focusInEvent(QFocusEvent *ev)
 
 void KMyMoneyCategory::setSplitTransaction(void)
 {
-  setCurrentText(i18nc("Split transaction (category replacement)", "Split transaction"));
+  d->isSplit = true;
+  setEditText(i18nc("Split transaction (category replacement)", "Split transaction"));
   setSuppressObjectCreation(true);
 }
 
 bool KMyMoneyCategory::isSplitTransaction(void) const
 {
-  return currentText() == i18nc("Split transaction (category replacement)", "Split transaction");
+  return d->isSplit;
 }
 
 void KMyMoneyCategory::setEnabled(bool enable)
