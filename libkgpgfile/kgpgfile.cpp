@@ -43,6 +43,9 @@
 #include <kleo/decryptjob.h>
 #include <kleo/encryptjob.h>
 
+#include <gpgme++/encryptionresult.h>
+#include <gpgme++/decryptionresult.h>
+#include <gpgme++/keylistresult.h>
 #include <gpgme++/key.h>
 
 class KGPGFile::Private {
