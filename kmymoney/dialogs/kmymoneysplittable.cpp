@@ -854,6 +854,9 @@ QWidget* kMyMoneySplitTable::createEditWidgets(void)
   m_editCategory->lineEdit()->selectAll();
   setState(QAbstractItemView::EditingState);
 
+  // resize the rows so the added edit widgets would fit appropriately
+  resizeRowsToContents();
+
   return m_editCategory->lineEdit();
 }
 
