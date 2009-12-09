@@ -1224,10 +1224,13 @@ void StdTransaction::arrangeWidgetsInForm(QMap<QString, QWidget*>& editWidgets)
 
   setupFormPalette(editWidgets);
 
+  arrangeWidget(m_form, 0, LabelColumn1, editWidgets["account-label"]);
   arrangeWidget(m_form, 0, ValueColumn1, editWidgets["account"]);
   arrangeWidget(m_form, 1, LabelColumn1, editWidgets["cashflow"]);
   arrangeWidget(m_form, 1, ValueColumn1, editWidgets["payee"]);
+  arrangeWidget(m_form, 2, LabelColumn1, editWidgets["category-label"]);
   arrangeWidget(m_form, 2, ValueColumn1, editWidgets["category"]->parentWidget());
+  arrangeWidget(m_form, 3, LabelColumn1, editWidgets["memo-label"]);
   arrangeWidget(m_form, 3, ValueColumn1, editWidgets["memo"]);
   if(haveNumberField()) {
     arrangeWidget(m_form, 1, LabelColumn2, editWidgets["number-label"]);
@@ -1235,9 +1238,10 @@ void StdTransaction::arrangeWidgetsInForm(QMap<QString, QWidget*>& editWidgets)
   }
   arrangeWidget(m_form, 2, LabelColumn2, editWidgets["date-label"]);
   arrangeWidget(m_form, 2, ValueColumn2, editWidgets["postdate"]);
+  arrangeWidget(m_form, 3, LabelColumn2, editWidgets["amount-label"]);
   arrangeWidget(m_form, 3, ValueColumn2, editWidgets["amount"]);
+  arrangeWidget(m_form, 5, LabelColumn2, editWidgets["status-label"]);
   arrangeWidget(m_form, 5, ValueColumn2, editWidgets["status"]);
-  arrangeWidget(m_form, 2, LabelColumn1, editWidgets["category-label"]);
 
   // get rid of the hints. we don't need them for the form
   QMap<QString, QWidget*>::iterator it;

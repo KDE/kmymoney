@@ -772,7 +772,25 @@ void StdTransactionEditor::createEditWidgets(void)
   }
 
   QLabel* label;
-  m_editWidgets["category-label"] = label = new QLabel(i18n("Category"), 0);
+  m_editWidgets["account-label"] = label = new QLabel(i18n("Account"));
+  label->setAlignment(Qt::AlignVCenter);
+
+  m_editWidgets["category-label"] = label = new QLabel(i18n("Category"));
+  label->setAlignment(Qt::AlignVCenter);
+
+  m_editWidgets["memo-label"] = label = new QLabel(i18n("Memo"));
+  label->setAlignment(Qt::AlignVCenter);
+
+  m_editWidgets["number-label"] = label = new QLabel(i18n("Number"));
+  label->setAlignment(Qt::AlignVCenter);
+
+  m_editWidgets["date-label"] = label = new QLabel(i18n("Date"));
+  label->setAlignment(Qt::AlignVCenter);
+
+  m_editWidgets["amount-label"] = label = new QLabel(i18n("Amount"));
+  label->setAlignment(Qt::AlignVCenter);
+
+  m_editWidgets["status-label"] = label = new QLabel(i18n("Status"));
   label->setAlignment(Qt::AlignVCenter);
 
   // create a copy of tabbar above the form (if we are created for a form)
@@ -783,13 +801,6 @@ void StdTransactionEditor::createEditWidgets(void)
     tabbar->copyTabs(form->tabBar());
     connect(tabbar, SIGNAL(tabCurrentChanged(int)), this, SLOT(slotUpdateAction(int)));
   }
-  label = new QLabel(i18n("Date"), 0);
-  label->setAlignment(Qt::AlignVCenter);
-  m_editWidgets["date-label"] = label;
-
-  label = new QLabel(i18n("Number"), 0);
-  label->setAlignment(Qt::AlignVCenter);
-  m_editWidgets["number-label"] = label;
 
   setupPrecision();
 }
