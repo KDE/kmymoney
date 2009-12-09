@@ -279,41 +279,49 @@ void InvestTransactionEditor::createEditWidgets(void)
     (*it_w)->installEventFilter(this);
   }
 
-  QLabel* label = new QLabel("", 0);
+  QLabel* label;
+
+  m_editWidgets["activity-label"] = label = new QLabel(i18n("Activity"));
+  label->setAlignment(Qt::AlignVCenter);
+
+  m_editWidgets["postdate-label"] = label = new QLabel(i18n("Date"));
+  label->setAlignment(Qt::AlignVCenter);
+
+  m_editWidgets["security-label"] = label = new QLabel(i18n("Security"));
+  label->setAlignment(Qt::AlignVCenter);
+
+  m_editWidgets["shares-label"] = label = new QLabel(i18n("Shares"));
+  label->setAlignment(Qt::AlignVCenter);
+
+  m_editWidgets["asset-label"] = label = new QLabel(i18n("Account"));
+  label->setAlignment(Qt::AlignVCenter);
+
+  m_editWidgets["price-label"] = label = new QLabel(i18n("Price/share"));
+  label->setAlignment(Qt::AlignVCenter);
+
+  m_editWidgets["fee-label"] = label = new QLabel(i18n("Fees"));
+  label->setAlignment(Qt::AlignVCenter);
+
+  m_editWidgets["fee-amount-label"] = label = new QLabel("");
+  label->setAlignment(Qt::AlignVCenter);
+
+  m_editWidgets["interest-label"] = label = new QLabel(i18n("Interest"));
+  label->setAlignment(Qt::AlignVCenter);
+
+  m_editWidgets["interest-amount-label"] = label = new QLabel(i18n("Amount"));
+  label->setAlignment(Qt::AlignVCenter);
+
+  m_editWidgets["memo-label"] = label = new QLabel(i18n("Memo"));
+  label->setAlignment(Qt::AlignVCenter);
+
+  m_editWidgets["total"] = label = new QLabel("");
   label->setAlignment(Qt::AlignVCenter | Qt::AlignRight);
-  m_editWidgets["total"] = label;
 
-  label = new QLabel("", 0);
+  m_editWidgets["total-label"] = label = new QLabel(i18nc("Total value", "Total"));
   label->setAlignment(Qt::AlignVCenter);
-  m_editWidgets["total-label"] = label;
 
-  label = new QLabel("", 0);
+  m_editWidgets["status-label"] = label = new QLabel(i18n("Status"));
   label->setAlignment(Qt::AlignVCenter);
-  m_editWidgets["asset-label"] = label;
-
-  label = new QLabel("", 0);
-  label->setAlignment(Qt::AlignVCenter);
-  m_editWidgets["fee-label"] = label;
-
-  label = new QLabel("", 0);
-  label->setAlignment(Qt::AlignVCenter);
-  m_editWidgets["fee-amount-label"] = label;
-
-  label = new QLabel("", 0);
-  label->setAlignment(Qt::AlignVCenter);
-  m_editWidgets["interest-label"] = label;
-
-  label = new QLabel("", 0);
-  label->setAlignment(Qt::AlignVCenter);
-  m_editWidgets["interest-amount-label"] = label;
-
-  label = new QLabel("", 0);
-  label->setAlignment(Qt::AlignVCenter);
-  m_editWidgets["price-label"] = label;
-
-  label = new QLabel("", 0);
-  label->setAlignment(Qt::AlignVCenter);
-  m_editWidgets["shares-label"] = label;
 
   // if we don't have more than 1 selected transaction, we don't need
   // the "don't change" item in some of the combo widgets

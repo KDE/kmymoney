@@ -1919,6 +1919,9 @@ void InvestTransaction::arrangeWidgetsInForm(QMap<QString, QWidget*>& editWidget
   arrangeWidget(m_form, 6, ValueColumn2, editWidgets["status"]);
 
   // arrange dynamic labels
+  arrangeWidget(m_form, 0, LabelColumn1, editWidgets["activity-label"]);
+  arrangeWidget(m_form, 0, LabelColumn2, editWidgets["postdate-label"]);
+  arrangeWidget(m_form, 1, LabelColumn1, editWidgets["security-label"]);
   arrangeWidget(m_form, 1, LabelColumn2, editWidgets["shares-label"]);
   arrangeWidget(m_form, 2, LabelColumn1, editWidgets["asset-label"]);
   arrangeWidget(m_form, 2, LabelColumn2, editWidgets["price-label"]);
@@ -1926,7 +1929,9 @@ void InvestTransaction::arrangeWidgetsInForm(QMap<QString, QWidget*>& editWidget
   arrangeWidget(m_form, 3, LabelColumn2, editWidgets["fee-amount-label"]);
   arrangeWidget(m_form, 4, LabelColumn1, editWidgets["interest-label"]);
   arrangeWidget(m_form, 4, LabelColumn2, editWidgets["interest-amount-label"]);
+  arrangeWidget(m_form, 5, LabelColumn1, editWidgets["memo-label"]);
   arrangeWidget(m_form, 5, LabelColumn2, editWidgets["total-label"]);
+  arrangeWidget(m_form, 6, LabelColumn2, editWidgets["status-label"]);
 
   // get rid of the hints. we don't need them for the form
   QMap<QString, QWidget*>::iterator it;
