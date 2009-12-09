@@ -90,7 +90,7 @@ void KMyMoneyAccountTreeItem::fillColumns()
   if (!lv)
     return;
   KMyMoneyAccountTreeBaseItem::fillColumns();
-  QPixmap checkMark = QPixmap(KIconLoader::global()->loadIcon("ok", KIconLoader::Small));
+  QPixmap checkMark = QPixmap(KIconLoader::global()->loadIcon("dialog-ok", KIconLoader::Small));
   MyMoneyMoney vatRate;
   if (!isInstitution())
     setPixmap(lv->nameColumn(), m_account.accountPixmap(m_reconcileFlag, 22));
