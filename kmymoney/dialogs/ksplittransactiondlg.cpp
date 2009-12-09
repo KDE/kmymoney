@@ -83,9 +83,7 @@ KSplitTransactionDlg::KSplitTransactionDlg(const MyMoneyTransaction& t,
   clearAllBtn->setGuiItem(clearButtenItem);
 
 
-  KGuiItem mergeButtenItem( i18n( "&Merge" ),
-                             KIcon("math_sum"),
-                                      "", "");
+  KGuiItem mergeButtenItem( i18n( "&Merge" ));
   mergeBtn->setGuiItem(mergeButtenItem);
 
   // make finish the default
