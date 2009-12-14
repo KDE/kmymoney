@@ -2,12 +2,14 @@
 Encoding=UTF-8
 Name=Print check
 Name[en_GB]=Print cheque
+Name[fr]=Imprimer un chèque
 Name[pt]=Imprimir o cheque
 Name[sv]=Skriv ut check
 Name[uk]=Надрукувати чек
 Name[x-test]=xxPrint checkxx
 Comment=Provides the capability to print checks
 Comment[en_GB]=Provides the capability to print cheques
+Comment[fr]=Fourni la possibilité d'imprimer des chèques
 Comment[pt]=Oferece a capacidade de imprimir cheques
 Comment[sv]=Tillhandahåller möjlighet att skriva ut checkar
 Comment[uk]=Надає змогу друкувати чеки
