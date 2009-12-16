@@ -40,7 +40,7 @@ else (WIN32)
   find_package(Boost "1.33.1" COMPONENTS graph)
 endif (WIN32)
 # needed by libkgpgfile
-find_package(Gpgme REQUIRED)
+find_package(QGpgme REQUIRED)
 find_package(KdepimLibs REQUIRED)
 find_package(SharedMimeInfo REQUIRED)
 
