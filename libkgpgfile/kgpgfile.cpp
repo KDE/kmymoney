@@ -48,6 +48,8 @@
 #include <gpgme++/keylistresult.h>
 #include <gpgme++/key.h>
 
+#ifndef _MSC_VER
+
 class KGPGFile::Private {
   public:
     Private() : m_remain(0)
@@ -356,5 +358,125 @@ void KGPGFile::slotKeyJobResult(const GpgME::KeyListResult & result, const std::
   d->evLoop.exit();
 }
 
+#else //_MSC_VER
+
+class KGPGFile::Private {
+};
+
+KGPGFile::KGPGFile(const QString& fn, const QString& homedir, const QString& options) :
+  d(new Private)
+{
+  // only kept for interface compatibility
+  Q_UNUSED(homedir)
+  Q_UNUSED(options)
+
+  Q_UNUSED(fn);
+}
+
+KGPGFile::~KGPGFile()
+{
+  close();
+}
+
+void KGPGFile::setFileName(const QString& fn)
+{
+  Q_UNUSED(fn)
+}
+
+void KGPGFile::flush(void)
+{
+  // no functionality
+}
+
+void KGPGFile::addRecipient(const QString& recipient)
+{
+  Q_UNUSED(recipient)
+}
+
+bool KGPGFile::open(OpenMode mode)
+{
+  Q_UNUSED(mode)
+  return false;
+}
+
+void KGPGFile::close(void)
+{
+  if(!isOpen()) {
+    return;
+  }
+}
+
+qint64 KGPGFile::writeData(const char *data, qint64 maxlen)
+{
+  Q_UNUSED(data)
+  Q_UNUSED(maxlen)
+  return 0;
+}
+
+qint64 KGPGFile::readData(char *data, qint64 maxlen)
+{
+  Q_UNUSED(data)
+  Q_UNUSED(maxlen)
+  return 0;
+}
+
+void KGPGFile::slotEncryptJobResult( const GpgME::EncryptionResult & result, const QByteArray & cipherText, const QString & auditLogAsHtml)
+{
+  Q_UNUSED(result)
+  Q_UNUSED(auditLogAsHtml)
+  Q_UNUSED(cipherText)
+}
+
+
+void KGPGFile::slotDecryptJobResult( const GpgME::DecryptionResult & result, const QByteArray & plainText, const QString & auditLogAsHtml, const GpgME::Error & auditLogError )
+{
+  Q_UNUSED(result)
+  Q_UNUSED(auditLogAsHtml)
+  Q_UNUSED(auditLogError)
+  Q_UNUSED(plainText)
+}
+
+bool KGPGFile::GPGAvailable(void)
+{
+  return false;
+}
+
+bool KGPGFile::keyAvailable(const QString& name)
+{
+  Q_UNUSED(name)
+  return false;
+}
+
+void KGPGFile::publicKeyList(QStringList& list)
+{
+  Q_UNUSED(list)
+}
+
+void KGPGFile::secretKeyList(QStringList& list)
+{
+  Q_UNUSED(list)
+}
+
+void KGPGFile::keyList(QStringList& list, bool secretKeys, const QStringList& patterns)
+{
+  Q_UNUSED(list)
+  Q_UNUSED(secretKeys)
+  Q_UNUSED(patterns)
+}
+
+void KGPGFile::slotNextKey(const GpgME::Key & key)
+{
+  Q_UNUSED(key)
+}
+
+void KGPGFile::slotKeyJobResult(const GpgME::KeyListResult & result, const std::vector<GpgME::Key> & keys, const QString & auditLogAsHtml, const GpgME::Error & auditLogError )
+{
+  Q_UNUSED(result)
+  Q_UNUSED(auditLogAsHtml)
+  Q_UNUSED(auditLogError)
+  Q_UNUSED(keys)
+}
+
+#endif // else _MSC_VER
 
 #include "kgpgfile.moc"
