@@ -150,10 +150,6 @@
 /* Define to 1 if you have the ANSI C header files. */
 #cmakedefine STDC_HEADERS 1
 
-/* whether to use OFX directconnect */
-#cmakedefine USE_OFX_DIRECTCONNECT 
-
-
 /* type to use in place of socklen_t if not defined */
 #cmakedefine kde_socklen_t socklen_t
 

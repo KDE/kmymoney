@@ -159,13 +159,6 @@ MARK_AS_ADVANCED(
 
 ######################### Special Requirements ##########################
 
-CHECK_INCLUDE_FILE("libofx/libofx.h" HAVE_LIBOFX_H)
-IF(HAVE_LIBOFX_H)
-  OPTION(USE_OFX_DIRECTCONNECT "Enable to compile with ofximport support" ON)
-  # the USE_OFX_DIRECTCONNECT preprocessor definition will be written
-  # to config.h as specified in config.h.cmake
-ENDIF(HAVE_LIBOFX_H)
-
 # This is needed for QtSqlite and QtDesigner
 # (they'll install files to ${QT_INSTALL_DIR}/plugins/)
 GET_FILENAME_COMPONENT(QT_BIN_DIR ${QT_MOC_EXECUTABLE} PATH)
@@ -174,6 +167,7 @@ SET(QT_INSTALL_DIR ${QT_DIR} CACHE PATH
   "Qt install prefix defaults to the Qt prefix: ${QT_DIR}")
 
 FIND_PACKAGE(Libical)
+FIND_PACKAGE(LibOfx)
 FIND_PACKAGE(Gwenhywfar)
 FIND_PACKAGE(AqBanking)
 
@@ -375,8 +369,7 @@ MACRO(nice_yesno _varname)
   endif(${${_varname}})
 ENDMACRO(nice_yesno _varname)
 
-nice_yesno("HAVE_LIBOFX_H")
-nice_yesno("USE_OFX_DIRECTCONNECT")
+nice_yesno("LIBOFX_FOUND")
 nice_yesno("KBANKING_FOUND")
 nice_yesno("LIBICAL_FOUND")
 nice_yesno("USE_LEAK_CHECK")
@@ -389,9 +382,7 @@ message("
 
 Configure results (user options):
 --------------------------------------------
-OFX plugin:                              ${nice_HAVE_LIBOFX_H}
-
-OFX direct connect:                      ${nice_USE_OFX_DIRECTCONNECT}
+OFX plugin:                              ${nice_LIBOFX_FOUND}
 
 KBanking plugin:                         ${nice_KBANKING_FOUND}
 

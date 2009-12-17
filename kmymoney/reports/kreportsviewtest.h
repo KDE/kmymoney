@@ -44,9 +44,6 @@ class KReportsViewTest : public CppUnit::TestFixture  {
   CPPUNIT_TEST(testCashFlowAnalysis);
   CPPUNIT_TEST(testAccountQuery);
   CPPUNIT_TEST(testInvestment);
-#ifdef USE_OFX_DIRECTCONNECT
-  CPPUNIT_TEST(testOfxImport);
-#endif
   CPPUNIT_TEST(testWebQuotes);
   CPPUNIT_TEST(testDateFormat);
   CPPUNIT_TEST(testHasReferenceTo);
@@ -81,7 +78,6 @@ public:
   void testQueryBasics();
   void testCashFlowAnalysis();
   void testAccountQuery();
-  void testOfxImport();
   void testInvestment();
   void testWebQuotes();
   void testDateFormat();
