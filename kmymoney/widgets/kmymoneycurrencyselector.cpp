@@ -150,7 +150,11 @@ void KMyMoneySecuritySelector::slotSetInitialSecurity(void)
 
 const MyMoneySecurity& KMyMoneySecuritySelector::security(void) const
 {
-  return m_list[currentIndex()];
+  int index = currentIndex();
+  if ((0 <= index) && (index < m_list.size()))
+    return m_list[index];
+  else
+    return m_currency;
 }
 
 void KMyMoneySecuritySelector::setSecurity(const MyMoneySecurity& currency)
