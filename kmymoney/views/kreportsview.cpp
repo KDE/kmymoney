@@ -220,7 +220,9 @@ void KReportsView::KReportTab::updateReport(void)
 
   m_table->drawChart( *m_chartView );
   m_chartView->update();
-  toggleChart();
+
+  if ( m_report.isChartByDefault() && !m_showingChart)
+      toggleChart();
 }
 
 QString KReportsView::KReportTab::createTable(const QString& links)
