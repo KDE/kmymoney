@@ -41,7 +41,6 @@
 #include <q3buttongroup.h>
 #include <QSplitter>
 #include <qmap.h>
-//Added by qt3to4:
 #include <QList>
 #include <QResizeEvent>
 
@@ -333,30 +332,11 @@ KPayeesView::KPayeesView(QWidget *parent) :
   m_searchWidget = new K3ListViewSearchLineWidget(m_payeesList, this);
   m_searchWidget->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed));
 
-  vboxLayout->insertWidget(0, m_searchWidget);
-
-  m_splitter = new QSplitter(this);
-  m_payeesList->setParent(m_splitter);
-  m_payeesList->move(QPoint(0,0));
-  m_payeesList->show();
-  m_tabWidget->setParent(m_splitter);
-  m_tabWidget->move(QPoint(0,0));
-  m_tabWidget->show();
-
-  m_splitter->setStretchFactor(m_splitter->indexOf(m_tabWidget), 2);
-  m_splitter->setOpaqueResize();
-  hboxLayout->addWidget(m_splitter);
-
-  // use the size settings of the last run (if any)
-  KSharedConfigPtr config = KGlobal::config();
-  KConfigGroup grp = config->group("Last Use Settings");
-  QList<int> sizes = grp.readEntry("KPayeesViewSplitterSize", QList<int>());
-  if(sizes.size() == 2)
-    m_splitter->setSizes(sizes);
+  verticalLayout->insertWidget(0, m_searchWidget);
 
   m_transactionView->setSorting(-1);
   m_transactionView->setColumnWidthMode(2, Q3ListView::Manual);
- m_transactionView->setColumnAlignment(3, Qt::AlignRight);
+  m_transactionView->setColumnAlignment(3, Qt::AlignRight);
   // never show horizontal scroll bars
   m_transactionView->setHScrollBarMode(Q3ScrollView::AlwaysOff);
 
@@ -401,23 +381,26 @@ KPayeesView::KPayeesView(QWidget *parent) :
 
   connect(m_payeesList, SIGNAL(contextMenu(K3ListView*, Q3ListViewItem*, const QPoint&)), this, SLOT(slotOpenContextMenu(K3ListView*, Q3ListViewItem*, const QPoint&)));
 
-//  connect(m_payeesList, SIGNAL(rightButtonClicked(QListViewItem* , const QPoint&, int)),
-//    this, SLOT(slotOpenContextMenu(QListViewItem*)));
-
   connect(m_transactionView, SIGNAL(doubleClicked(Q3ListViewItem*)),
           this, SLOT(slotTransactionDoubleClicked(Q3ListViewItem*)));
 
   connect(m_tabWidget, SIGNAL(currentChanged(QWidget*)), this, SLOT(rearrange(void)));
 
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadPayees()));
+
+  // use the size settings of the last run (if any)
+  KConfigGroup grp = KGlobal::config()->group("Last Use Settings");
+  QList<int> sizes = grp.readEntry("KPayeesViewSplitterSize", QList<int>());
+  if(sizes.size() == 2)
+    m_splitter->setSizes(sizes);
 }
 
 KPayeesView::~KPayeesView()
 {
   // remember the splitter settings for startup
-  KSharedConfigPtr config = KGlobal::config();
-  KConfigGroup grp =  config->group("Last Use Settings");
+  KConfigGroup grp = KGlobal::config()->group("Last Use Settings");
   grp.writeEntry("KPayeesViewSplitterSize", m_splitter->sizes());
+  grp.sync();
 }
 
 void KPayeesView::slotQueueUpdate(void)

@@ -29,10 +29,8 @@
 
 #include <Q3PtrVector>
 #include <qwidget.h>
-//Added by qt3to4:
 #include <QResizeEvent>
 #include <QList>
-class QSplitter;
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -295,8 +293,6 @@ signals:
 private:
   MyMoneyPayee m_payee;
   QString      m_newName;
-
-  QSplitter*    m_splitter;
 
   /**
     * This member holds a list of all transactions
