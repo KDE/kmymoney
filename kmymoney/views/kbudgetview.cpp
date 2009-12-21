@@ -167,10 +167,18 @@ KBudgetView::KBudgetView(QWidget *parent) :
   m_deleteButton->setEnabled(kmymoney2->action("budget_delete")->isEnabled());
 
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotRefreshView()));
+
+  KConfigGroup grp = KGlobal::config()->group("Last Use Settings");
+  QList<int> sizes = grp.readEntry("KBudgetViewSplitterSize", QList<int>());
+  if(sizes.size() == 2)
+    m_splitter->setSizes(sizes);
 }
 
 KBudgetView::~KBudgetView()
 {
+  // remember the splitter settings for startup
+  KConfigGroup grp = KGlobal::config()->group("Last Use Settings");
+  grp.writeEntry("KBudgetViewSplitterSize", m_splitter->sizes());
 }
 
 void KBudgetView::showEvent(QShowEvent * event)

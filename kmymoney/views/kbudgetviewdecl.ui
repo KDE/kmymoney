@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>957</width>
+    <width>1022</width>
     <height>610</height>
    </rect>
   </property>
@@ -19,120 +19,121 @@
   <property name="focusPolicy">
    <enum>Qt::TabFocus</enum>
   </property>
-  <layout class="QVBoxLayout">
+  <layout class="QVBoxLayout" name="verticalLayout">
    <property name="margin">
     <number>0</number>
    </property>
    <item>
-    <layout class="QHBoxLayout">
-     <item>
-      <widget class="QGroupBox" name="groupBox1">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="title">
-        <string>Your budgets</string>
-       </property>
-       <layout class="QVBoxLayout">
-        <item>
-         <layout class="QHBoxLayout">
-          <item>
-           <widget class="KPushButton" name="m_newButton">
-            <property name="text">
-             <string comment="New budget">New</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="KPushButton" name="m_renameButton">
-            <property name="text">
-             <string>Ren</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="KPushButton" name="m_deleteButton">
-            <property name="text">
-             <string>Del</string>
-            </property>
-            <property name="shortcut">
-             <string/>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="KPushButton" name="m_resetButton">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="text">
-             <string>Res</string>
-            </property>
-            <property name="shortcut">
-             <string/>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="KPushButton" name="m_updateButton">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="text">
-             <string>Upd</string>
-            </property>
-            <property name="shortcut">
-             <string/>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <widget class="K3ListView" name="m_budgetList">
-          <property name="allColumnsShowFocus">
-           <bool>true</bool>
-          </property>
-          <property name="showSortIndicator">
-           <bool>true</bool>
-          </property>
-          <property name="fullWidth">
-           <bool>false</bool>
-          </property>
-          <property name="shadeSortColumn">
-           <bool>false</bool>
-          </property>
-          <column>
+    <widget class="QSplitter" name="m_splitter">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <widget class="QGroupBox" name="groupBox1">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="title">
+       <string>Your budgets</string>
+      </property>
+      <layout class="QVBoxLayout">
+       <item>
+        <layout class="QHBoxLayout">
+         <item>
+          <widget class="KPushButton" name="m_newButton">
            <property name="text">
-            <string comment="Budget name">Name</string>
+            <string comment="New budget">New</string>
            </property>
-           <property name="clickable">
-            <bool>true</bool>
-           </property>
-           <property name="resizable">
-            <bool>true</bool>
-           </property>
-          </column>
-          <column>
+          </widget>
+         </item>
+         <item>
+          <widget class="KPushButton" name="m_renameButton">
            <property name="text">
-            <string>Year</string>
+            <string>Ren</string>
            </property>
-           <property name="clickable">
-            <bool>true</bool>
+          </widget>
+         </item>
+         <item>
+          <widget class="KPushButton" name="m_deleteButton">
+           <property name="text">
+            <string>Del</string>
            </property>
-           <property name="resizable">
+           <property name="shortcut">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="KPushButton" name="m_resetButton">
+           <property name="enabled">
             <bool>false</bool>
            </property>
-          </column>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-     </item>
-     <item>
+           <property name="text">
+            <string>Res</string>
+           </property>
+           <property name="shortcut">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="KPushButton" name="m_updateButton">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Upd</string>
+           </property>
+           <property name="shortcut">
+            <string/>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="K3ListView" name="m_budgetList">
+         <property name="allColumnsShowFocus">
+          <bool>true</bool>
+         </property>
+         <property name="showSortIndicator">
+          <bool>true</bool>
+         </property>
+         <property name="fullWidth">
+          <bool>false</bool>
+         </property>
+         <property name="shadeSortColumn">
+          <bool>false</bool>
+         </property>
+         <column>
+          <property name="text">
+           <string>Name</string>
+          </property>
+          <property name="clickable">
+           <bool>true</bool>
+          </property>
+          <property name="resizable">
+           <bool>true</bool>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Year</string>
+          </property>
+          <property name="clickable">
+           <bool>true</bool>
+          </property>
+          <property name="resizable">
+           <bool>false</bool>
+          </property>
+         </column>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="layoutWidget">
       <layout class="QVBoxLayout">
        <item>
         <widget class="KMyMoneyAccountTreeBudget" name="m_accountTree" native="true">
@@ -202,7 +203,7 @@
              </widget>
             </item>
             <item>
-             <widget class="kMyMoneyEdit" name="m_accountTotal" native="true">
+             <widget class="kMyMoneyEdit" name="m_accountTotal">
               <property name="focusPolicy">
                <enum>Qt::NoFocus</enum>
               </property>
@@ -212,7 +213,7 @@
               <property name="resetButtonVisibility" stdset="0">
                <bool>false</bool>
               </property>
-              <property name="readOnly" stdset="0">
+              <property name="readOnly">
                <bool>true</bool>
               </property>
              </widget>
@@ -229,7 +230,7 @@
           <item>
            <layout class="QHBoxLayout">
             <item>
-             <widget class="KBudgetValues" name="m_budgetValue" native="true"/>
+             <widget class="KBudgetValues" name="m_budgetValue"/>
             </item>
             <item>
              <spacer name="spacer2">
@@ -253,17 +254,33 @@
         </widget>
        </item>
       </layout>
-     </item>
-    </layout>
+     </widget>
+    </widget>
    </item>
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>KPushButton</class>
-   <extends>QPushButton</extends>
-   <header>kpushbutton.h</header>
+   <class>kMyMoneyEdit</class>
+   <extends>QFrame</extends>
+   <header>kmymoneyedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KBudgetValues</class>
+   <extends>QWidget</extends>
+   <header>kmymoney/kbudgetvalues.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Q3Frame</class>
+   <extends>QFrame</extends>
+   <header>Qt3Support/Q3Frame</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Q3ListView</class>
+   <extends>Q3Frame</extends>
+   <header>q3listview.h</header>
   </customwidget>
   <customwidget>
    <class>K3ListView</class>
@@ -271,24 +288,19 @@
    <header>k3listview.h</header>
   </customwidget>
   <customwidget>
+   <class>KPushButton</class>
+   <extends>QPushButton</extends>
+   <header>kpushbutton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>klineedit.h</header>
+  </customwidget>
+  <customwidget>
    <class>KMyMoneyAccountTreeBudget</class>
    <extends>QWidget</extends>
    <header>../widgets/kmymoneyaccounttreebudget.h</header>
-  </customwidget>
-  <customwidget>
-   <class>kMyMoneyEdit</class>
-   <extends>QWidget</extends>
-   <header>kmymoneyedit.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KBudgetValues</class>
-   <extends>QWidget</extends>
-   <header>kbudgetvalues.h</header>
-  </customwidget>
-  <customwidget>
-    <class>KLineEdit</class>
-    <extends>QLineEdit</extends>
-    <header location="global">klineedit.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
