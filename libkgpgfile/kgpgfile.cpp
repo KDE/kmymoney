@@ -48,7 +48,7 @@
 #include <gpgme++/keylistresult.h>
 #include <gpgme++/key.h>
 
-#ifndef _MSC_VER
+#ifndef Q_OS_WIN
 
 class KGPGFile::Private {
   public:
@@ -358,7 +358,7 @@ void KGPGFile::slotKeyJobResult(const GpgME::KeyListResult & result, const std::
   d->evLoop.exit();
 }
 
-#else //_MSC_VER
+#else //Q_OS_WIN
 
 class KGPGFile::Private {
 };
@@ -477,6 +477,6 @@ void KGPGFile::slotKeyJobResult(const GpgME::KeyListResult & result, const std::
   Q_UNUSED(keys)
 }
 
-#endif // else _MSC_VER
+#endif // else Q_OS_WIN
 
 #include "kgpgfile.moc"
