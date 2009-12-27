@@ -269,9 +269,8 @@ OPTION(USE_DEVELOPER_DOC
   "Install KMyMoney specific developer documentation (default=OFF)" OFF)
 
 IF(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
-  SET(CMAKE_INSTALL_PREFIX "${KDE4PREFIX}" CACHE PATH
-    "KMyMoney install prefix defaults
-    to the KDE4 install prefix: ${KDE4PREFIX}" FORCE)
+  SET(CMAKE_INSTALL_PREFIX "${KDE4_INSTALL_DIR}" CACHE PATH
+    "KMyMoney install prefix defaults to the KDE4 install prefix: ${KDE4_INSTALL_DIR}" FORCE)
 ENDIF(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
 
 # the RPATH to be used when installing
