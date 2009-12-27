@@ -15,9 +15,9 @@
    id="svg2"
    sodipodi:version="0.32"
    inkscape:version="0.47+devel"
-   sodipodi:docname="startlogo_uk.svg"
+   sodipodi:docname="startlogo_ru.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
-   inkscape:export-filename="startlogo_uk.png"
+   inkscape:export-filename="startlogo_ru.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90"
    version="1.1">
@@ -64,7 +64,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -80,7 +80,7 @@
        id="image2466"
        height="300"
        width="400"
-       inkscape:export-filename="startlogo_uk.png"
+       inkscape:export-filename="startlogo_ru.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <flowRoot
@@ -88,7 +88,7 @@
        id="flowRoot2470"
        style="font-size:40px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:URW Bookman L;-inkscape-font-specification:URW Bookman L Bold"
        transform="matrix(1.2995944,0,-0.3664818,2.5910364,15.150042,-144.93023)"
-       inkscape:export-filename="startlogo_uk.png"
+       inkscape:export-filename="startlogo_ru.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90"><flowRegion
          id="flowRegion2472"><rect
@@ -129,7 +129,7 @@
        id="flowRoot2445"
        style="font-size:40px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Serif;-inkscape-font-specification:Serif Bold Italic"
        transform="matrix(1,0,0,1.1888776,37.857143,-45.675432)"
-       inkscape:export-filename="startlogo_uk.png"
+       inkscape:export-filename="startlogo_ru.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90"><flowRegion
          id="flowRegion2447"><rect
@@ -146,7 +146,7 @@
        transform="translate(-6.4285714,-3.5714286)"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90"
-       inkscape:export-filename="startlogo_uk.png"><flowRegion
+       inkscape:export-filename="startlogo_ru.png"><flowRegion
          id="flowRegion3225"><rect
            id="rect3227"
            width="277.14285"
@@ -154,7 +154,5 @@
            x="96.428574"
            y="209.50504"
            style="font-size:16px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;font-family:Sans;-inkscape-font-specification:Sans Italic" /></flowRegion><flowPara
-         id="flowPara3229">Вільний</flowPara><flowPara
-         id="flowPara3231">простий у користуванні</flowPara><flowPara
-         id="flowPara3233">інструмент керування особистими фінансами для KDE</flowPara></flowRoot>  </g>
+         id="flowPara3229">Программа для учёта персональных финансов для KDE</flowPara></flowRoot>  </g>
 </svg>
