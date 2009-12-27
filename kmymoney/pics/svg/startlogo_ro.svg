@@ -14,9 +14,9 @@
    id="svg2"
    sodipodi:version="0.32"
    inkscape:version="0.46"
-   sodipodi:docname="startlogo.svg"
+   sodipodi:docname="startlogo_ro.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
-   inkscape:export-filename="../startlogo1.png"
+   inkscape:export-filename="../l10n/ro/startlogo.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
@@ -49,10 +49,10 @@
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1280"
-     inkscape:window-height="974"
-     inkscape:window-x="408"
-     inkscape:window-y="145" />
+     inkscape:window-width="1912"
+     inkscape:window-height="1120"
+     inkscape:window-x="0"
+     inkscape:window-y="0" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -142,15 +142,15 @@
        transform="translate(-6.4285714,-3.5714286)"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90"
-       inkscape:export-filename="../startlogo1.png"><flowRegion
+       inkscape:export-filename="../l10n/ro/startlogo.png"><flowRegion
          id="flowRegion3225"><rect
            id="rect3227"
-           width="277.14285"
-           height="80"
+           width="387.14285"
+           height="71.428574"
            x="96.428574"
            y="209.50504"
            style="font-size:16px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;font-family:Sans;-inkscape-font-specification:Sans Italic" /></flowRegion><flowPara
-         id="flowPara3229">The free,</flowPara><flowPara
-         id="flowPara3231">easy to use,</flowPara><flowPara
-         id="flowPara3233">personal finance manager for KDE</flowPara></flowRoot>  </g>
+         id="flowPara2416">Programul de gestionare a finanțelor personale, </flowPara><flowPara
+         id="flowPara2412">liber și ușor de folosit,</flowPara><flowPara
+         id="flowPara2417">pentru KDE</flowPara></flowRoot>  </g>
 </svg>
