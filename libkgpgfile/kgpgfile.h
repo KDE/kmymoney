@@ -68,7 +68,7 @@ namespace GpgME {
   *
   *  +------------------+   write  +-----------+      +---------+
   *  |                  |--------->|\          |----->|         |
-  *  | Application code |   read   | QFile     |      | libkleo |
+  *  | Application code |   read   | QFile     |      | gpgme++ |
   *  |                  |<---------|/          |<-----|         |
   *  +------------------+          |  KGPGFile |      +---------+
   *                |               |           |               
@@ -167,20 +167,13 @@ public:
   static void publicKeyList(QStringList& list);
 
 private:
-  void keyList(QStringList& list, bool secretKeys = false, const QStringList& patterns = QStringList());
+  void keyList(QStringList& list, bool secretKeys = false, const QString& pattern = QString());
 
 private:
   /// \internal d-pointer class.
   class Private;
   /// \internal d-pointer instance.
   Private* const d;
-
-private slots:
-  void slotNextKey(const GpgME::Key & key);
-  void slotKeyJobResult(const GpgME::KeyListResult & result, const std::vector<GpgME::Key> & keys, const QString & auditLogAsHtml, const GpgME::Error & auditLogError );
-
-  void slotDecryptJobResult( const GpgME::DecryptionResult & result, const QByteArray & plainText, const QString & auditLogAsHtml, const GpgME::Error & auditLogError );
-  void slotEncryptJobResult( const GpgME::EncryptionResult & result, const QByteArray & cipherText, const QString & auditLogAsHtml);
 
 };
 
