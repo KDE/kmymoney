@@ -53,8 +53,9 @@ KBJobView::KBJobView(KBanking *kb,
                      QWidget* parent,
                      const char* name,
                      Qt::WFlags fl)
-  : QWidget(parent, name, fl), _app(kb) {
+  : QWidget(parent, fl), _app(kb) {
   assert(kb);
+  setObjectName(name);
   setupUi(this);
 
   // Manually create and add layout here because the .ui-generated
@@ -88,8 +89,8 @@ KBJobView::KBJobView(KBanking *kb,
 
   dequeueButton->setGuiItem(dequeueItem);
   executeButton->setGuiItem(executeItem);
-  QToolTip::add(dequeueButton, dequeueItem.toolTip());
-  QToolTip::add(executeButton, executeItem.toolTip());
+  dequeueButton->setToolTip(dequeueItem.toolTip());
+  executeButton->setToolTip(executeItem.toolTip());
 }
 
 
