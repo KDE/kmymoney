@@ -189,7 +189,7 @@ void KSettingsGpg::slotStatusChanged(bool state)
 
   if(state) {
     m_recoverKeyFound->setState((KLed::State) (KGPGFile::keyAvailable(RECOVER_KEY_ID) ? KLed::On : KLed::Off));
-    kcfg_EncryptRecover->setEnabled(m_recoverKeyFound);
+    kcfg_EncryptRecover->setEnabled(m_recoverKeyFound->state() == KLed::On);
     slotIdChanged();
 
   } else {

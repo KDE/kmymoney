@@ -252,7 +252,9 @@ qint64 KGPGFile::readData(char *data, qint64 maxlen)
 
 bool KGPGFile::GPGAvailable(void)
 {
-  return (GpgME::checkEngine(GpgME::OpenPGP) == 0);
+  bool rc = (GpgME::checkEngine(GpgME::OpenPGP) == 0);
+  // qDebug("KGPGFile::GPGAvailable returns %d", rc);
+  return rc;
 }
 
 bool KGPGFile::keyAvailable(const QString& name)
@@ -290,12 +292,23 @@ void KGPGFile::keyList(QStringList& list, bool secretKeys, const QString& patter
       if(error.encodedError() != GPG_ERR_NO_ERROR)
         break;
 
-      d->m_keys.push_back(key);
+      bool needPushBack = true;
 
       std::vector<GpgME::UserID> userIDs = key.userIDs();
+      std::vector<GpgME::Subkey> subkeys = key.subkeys();
       for(unsigned int i = 0; i < userIDs.size(); ++i) {
-        QString entry = QString("%1:%2").arg(key.shortKeyID()).arg(userIDs[i].id());
-        list += entry;
+        const GpgME::Subkey& skey = subkeys[i];
+
+        if(!(skey.isRevoked() || skey.isExpired() || skey.isInvalid()  || skey.isDisabled())) {
+          QString entry = QString("%1:%2").arg(key.shortKeyID()).arg(userIDs[i].id());
+          list += entry;
+          if(needPushBack) {
+            d->m_keys.push_back(key);
+            needPushBack = false;
+          }
+        } else {
+          // qDebug("Skip key '%s'", key.shortKeyID());
+        }
       }
     }
     d->ctx->endKeyListing();
