@@ -46,15 +46,10 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#define buttonSQL KDialog::User1
-
 KSelectDatabaseDlg::KSelectDatabaseDlg(int openMode, KUrl openURL, QWidget *) {
   m_widget = new KSelectDatabaseDlgDecl();
   setMainWidget(m_widget);
-  setButtons(KDialog::Ok | KDialog::Cancel | KDialog::Help | buttonSQL);
-  setButtonText (buttonSQL, i18n("Generate SQL"));
-  enableButton(buttonSQL, false);
-  connect (this, SIGNAL(user1Clicked()), this, SLOT(slotGenerateSQL()));
+  setButtons(KDialog::Ok | KDialog::Cancel | KDialog::Help );
   connect (this, SIGNAL(helpClicked()), this, SLOT(slotHelp()));
   m_requiredFields = 0;
   m_url = openURL;
@@ -83,7 +78,9 @@ bool KSelectDatabaseDlg::checkDrivers() {
   }
   if (m_url != KUrl()) {
     QString driverName = m_url.queryItem("driver");
-    if (!list.contains(driverName)) {
+    //qDebug() << driverName;
+    //qDebug() << m_supportedDrivers;
+    if (!m_supportedDrivers.join(",").contains(driverName)) {
       KMessageBox::error (0, i18n("Qt SQL driver %1 is no longer installed on your system", driverName),
         "");
       return (false);
@@ -121,7 +118,6 @@ int KSelectDatabaseDlg::exec() {
     connect (m_widget->listDrivers, SIGNAL(itemClicked(QListWidgetItem *)),
            this, SLOT(slotDriverSelected(QListWidgetItem *)));
     m_widget->checkPreLoad->setChecked(false);
-    enableButton(buttonSQL, false);
     // ensure a driver gets selected; pre-select if only one
     if (m_widget->listDrivers->count() == 1) {
       m_widget->listDrivers->setCurrentItem(m_widget->listDrivers->item(0));
@@ -138,12 +134,12 @@ int KSelectDatabaseDlg::exec() {
     m_widget->textUserName->setText(m_url.user());
     // disable all but the password field, coz that's why we're here
     m_widget->textDbName->setEnabled(false);
+    m_widget->urlSqlite->setEnabled(false);
     m_widget->listDrivers->setEnabled(false);
     m_widget->textHostName->setEnabled(false);
     m_widget->textUserName->setEnabled(false);
     m_widget->textPassword->setEnabled(true);
     m_widget->textPassword->setFocus();
-    enableButton(buttonSQL, true);
     // set password required
     m_requiredFields = new kMandatoryFieldGroup(this);
     m_requiredFields->add(m_widget->textPassword);
@@ -161,7 +157,10 @@ const KUrl KSelectDatabaseDlg::selectedURL() {
   url.setUser(m_widget->textUserName->text());
   url.setPass(m_widget->textPassword->text());
   url.setHost(m_widget->textHostName->text());
-  url.setPath('/' + m_widget->textDbName->text());
+  if (m_sqliteSelected)
+      url.setPath('/' + m_widget->urlSqlite->url().path());
+  else
+      url.setPath('/' + m_widget->textDbName->text());
   QString qs = QString("driver=%1")
       .arg(m_widget->listDrivers->currentItem()->text().section (' ', 0, 0));
   if (m_widget->checkPreLoad->isChecked()) qs.append("&options=loadAll");
@@ -185,52 +184,32 @@ void KSelectDatabaseDlg::slotDriverSelected (QListWidgetItem *driver) {
     }
   }
 
-  enableButton(buttonSQL, true);
-
   if (m_map.driverToType(driver->text().section(' ', 0, 0)) == Sqlite3){
-    QString dbName;
+    m_sqliteSelected = true;
     if (m_mode == QIODevice::WriteOnly)
-      dbName = KFileDialog::getSaveFileName(
-      KUrl(),
-      i18n("*.sql *.*|SQLite files (*.sql)| All files (*.*)"),
-      this,
-      i18n("Select SQLite file"));
+        m_widget->urlSqlite->setMode(KFile::Modes(KFile::Files));
     else
-      dbName = KFileDialog::getOpenFileName(
-      KUrl(),
-      i18n("*.sql *.*|SQLite files (*.sql)| All files (*.*)"),
-      this,
-      i18n("Select SQLite file"));
-    if (dbName.isNull())
-      return;
+        m_widget->urlSqlite->setMode(KFile::Modes(KFile::Files || KFile::ExistingOnly));
 
-    m_widget->textDbName->setText(dbName);
+    m_requiredFields->remove(m_widget->textDbName);
+    m_requiredFields->add(m_widget->urlSqlite);
+    m_widget->textDbName->setEnabled(false);
+    m_widget->urlSqlite->setEnabled(true);
     // sqlite databases do not react to host/user/password;
     // file system permissions must be used
     m_widget->textHostName->setEnabled (false);
     m_widget->textUserName->setEnabled (false);
     m_widget->textPassword->setEnabled(false);
   } else {                         // not sqlite3
+    m_sqliteSelected = false;
+    m_requiredFields->add(m_widget->textDbName);
+    m_requiredFields->remove(m_widget->urlSqlite);
+    m_widget->textDbName->setEnabled(true);
+    m_widget->urlSqlite->setEnabled(false);
     m_widget->textUserName->setEnabled (true);
     m_widget->textHostName->setEnabled (true);
     m_widget->textPassword->setEnabled(true);
   }
-}
-
-// Generate SQL button processing
-void KSelectDatabaseDlg::slotGenerateSQL() {
-  QString fileName = KFileDialog::getSaveFileName(
-      KUrl(),
-      i18n("All files (*.*)"),
-      this,
-      i18n("Select output file"));
-  if (fileName == "") return;
-  QFile out(fileName);
-  if (!out.open(QIODevice::WriteOnly)) return;
-  QTextStream s(&out);
-  MyMoneyDbDef db;
-  s << db.generateSQL(m_widget->listDrivers->currentItem()->text().section (' ', 0, 0));
-  out.close();
 }
 
 void KSelectDatabaseDlg::slotHelp(void) {

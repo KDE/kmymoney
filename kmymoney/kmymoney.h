@@ -102,7 +102,15 @@ protected slots:
     */
   void slotFileFileInfo(void);
 
+  /**
+    * Called to run performance test.
+    */
   void slotPerformanceTest(void);
+
+  /**
+    * Called to generate the sql to create kmymoney database tables etc.
+    */
+  void slotGenerateSql(void);
 
   /**
     * Debugging only: turn on/off traces

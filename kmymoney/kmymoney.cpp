@@ -135,6 +135,7 @@
 #include "dialogs/kmergetransactionsdlg.h"
 #include "dialogs/kendingbalancedlg.h"
 #include "dialogs/kbalancechartdlg.h"
+#include "dialogs/kgeneratesqldlg.h"
 #include "ui_kplugindlg.h"
 #include "dialogs/kloadtemplatedlg.h"
 #include "dialogs/kgpgkeyselectiondlg.h"
@@ -685,6 +686,10 @@ void KMyMoney2App::initActions(void)
   tools_performancetest->setText(i18n("Performance-Test"));
   tools_performancetest->setIcon(KIcon("fork"));
   connect(tools_performancetest, SIGNAL(triggered()), this, SLOT(slotPerformanceTest()));
+
+  KAction *tools_generate_sql = actionCollection()->addAction("tools_generate_sql");
+  tools_generate_sql->setText(i18n("Generate Database SQL"));
+  connect(tools_generate_sql, SIGNAL(triggered()), this, SLOT(slotGenerateSql()));
 
   KAction *tools_kcalc = actionCollection()->addAction("tools_kcalc");
   tools_kcalc->setText(i18n("Calculator..."));
@@ -2584,6 +2589,14 @@ void KMyMoney2App::slotShowPreviousView(void)
 void KMyMoney2App::slotShowNextView(void)
 {
 
+}
+
+void KMyMoney2App::slotGenerateSql(void)
+{
+  QPointer<KGenerateSqlDlg> editor = new KGenerateSqlDlg(this );
+  editor->setObjectName( "Generate Database SQL");
+  editor->exec();
+  delete editor;
 }
 
 void KMyMoney2App::slotQifProfileEditor(void)

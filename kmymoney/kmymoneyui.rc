@@ -101,6 +101,7 @@
    <Action name="tools_update_prices" />
    <Action name="tools_consistency_check" />
    <Action name="tools_performancetest" />
+   <Action name="tools_generate_sql" />
    <Separator/>
    <Action name="tools_plugin_list" />
    <Action name="debug_traces" />

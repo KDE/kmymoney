@@ -22,18 +22,17 @@
  // No need for QDateEdit, QSpinBox, etc., since these always return values
 
 #include <QCheckBox>
-#include <q3listbox.h>
+//#include <q3listbox.h>
 #include <QPushButton>
-#include <qwidget.h>
-#include <q3hbox.h>
-#include <qspinbox.h>
+#include <QWidget>
+#include <QSpinBox>
 #include <QApplication>
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 #include <klistwidget.h>
 #include <kcombobox.h>
 #include <klineedit.h>
+#include <kurlrequester.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -51,9 +50,7 @@
   *                                                                        *
   **************************************************************************/
 
-void kMandatoryFieldGroup::add(QWidget *widget)
-{
-
+void kMandatoryFieldGroup::add(QWidget *widget) {
   if (!m_widgets.contains(widget)) {
     if (qobject_cast<QCheckBox*>( widget))
       connect(qobject_cast<QCheckBox*>(widget),
@@ -80,14 +77,19 @@ void kMandatoryFieldGroup::add(QWidget *widget)
                SIGNAL(valueChanged(const QString&)),
                       this, SLOT(changed()));
 
-    else if (qobject_cast<Q3ListBox*>(widget))
+   /* else if (qobject_cast<Q3ListBox*>(widget))
       connect(qobject_cast<Q3ListBox*>(widget),
                SIGNAL(selectionChanged()),
-                      this, SLOT(changed()));
+                      this, SLOT(changed()));*/
 
     else if (qobject_cast<KListWidget*>(widget))
       connect(qobject_cast<KListWidget*>(widget),
                SIGNAL(itemSelectionChanged()),
+                      this, SLOT(changed()));
+
+    else if (qobject_cast<KUrlRequester*>(widget))
+      connect(qobject_cast<KUrlRequester*>(widget),
+               SIGNAL(textChanged(const QString&)),
                       this, SLOT(changed()));
 
     else {
@@ -152,15 +154,22 @@ void kMandatoryFieldGroup::changed(void)
       } else
         continue;
     }
-    if ((qobject_cast<Q3ListBox*>(widget))) {
+ /*   if ((qobject_cast<Q3ListBox*>(widget))) {
       if ((qobject_cast<Q3ListBox*>(widget))->selectedItem() == 0) {
         enable = false;
         break;
       } else
         continue;
-    }
+    }*/
     if ((qobject_cast<KListWidget*>(widget))) {
       if ((qobject_cast<KListWidget*>(widget))->selectedItems().count() == 0) {
+        enable = false;
+        break;
+      } else
+        continue;
+    }
+    if ((qobject_cast<KUrlRequester*>(widget))) {
+      if ((qobject_cast<KUrlRequester*>(widget))->text().isEmpty()){
         enable = false;
         break;
       } else

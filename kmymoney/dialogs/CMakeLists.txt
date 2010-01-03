@@ -22,11 +22,12 @@ SET(libdialogs_a_SOURCES
   kenterscheduledlg.cpp
   kequitypriceupdatedlg.cpp 
   kexportdlg.cpp 
-  kfindtransactiondlg.cpp
+  kfindtransactiondlg.cpp 
+  kgeneratesqldlg.cpp
   kgncimportoptionsdlg.cpp 
   kgncpricesourcedlg.cpp
   kgpgkeyselectiondlg.cpp 
-  kimportdlg.cpp 
+  kimportdlg.cpp
   kloadtemplatedlg.cpp
   kmergetransactionsdlg.cpp 
   kmymoneyfileinfodlg.cpp
@@ -70,7 +71,7 @@ SET(dialogs_UI
   keditequityentrydecl.ui keditscheduledlgdecl.ui
   kendingbalancedlgdecl.ui kenterscheduledlgdecl.ui
   kequitypriceupdatedlgdecl.ui kexportdlgdecl.ui
-  kfindtransactiondlgdecl.ui kgncimportoptionsdlgdecl.ui
+  kfindtransactiondlgdecl.ui kgeneratesqldlgdecl.ui kgncimportoptionsdlgdecl.ui
   kgncpricesourcedlgdecl.ui kimportdlgdecl.ui kloadtemplatedlgdecl.ui
   kmymoneyfileinfodlgdecl.ui kmymoneypricedlgdecl.ui
   knewaccountdlgdecl.ui knewbankdlgdecl.ui knewbudgetdlgdecl.ui

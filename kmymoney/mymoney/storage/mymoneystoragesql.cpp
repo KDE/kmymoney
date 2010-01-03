@@ -290,7 +290,7 @@ bool MyMoneyStorageSql::createDatabase (const KUrl& url) {
                    "Please create database %2 manually", driverName(), dbName);
     return (false);
   }
-  // create the database (only works for mysql at present)
+  // create the database (only works for mysql and postgre at present)
   { // for this code block, see QSqlDatabase API re removeDatabase
     QSqlDatabase maindb = QSqlDatabase::addDatabase(driverName(), "main");
     if (isMysql()) {
@@ -302,12 +302,16 @@ bool MyMoneyStorageSql::createDatabase (const KUrl& url) {
     maindb.setUserName (url.user());
     maindb.setPassword (url.pass());
     if (!maindb.open()) {
-      throw new MYMONEYEXCEPTION (QString("opening database %1 in function %2").arg(maindb.databaseName()).arg(Q_FUNC_INFO));
+      throw new MYMONEYEXCEPTION (QString("opening database %1 in function %2")
+                                  .arg(maindb.databaseName()).arg(Q_FUNC_INFO));
     } else {
       QSqlQuery qm(maindb);
       QString qs = QString("CREATE DATABASE %1").arg(dbName);
       if (isPostgresql()) {
         qs += " WITH ENCODING='UTF8'";
+      }
+      if (isMysql()) {
+        qs += " CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci'";
       }
       qs += ';';
       if (!qm.exec(qs)) {

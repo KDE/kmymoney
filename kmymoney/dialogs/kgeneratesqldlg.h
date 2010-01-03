@@ -1,5 +1,5 @@
 /***************************************************************************
-                          kselectdatabase.h
+                          kgeneratesql.h
                              -------------------
     copyright            : (C) 2005 by Tony Bloomfield <tonybloom@users.sourceforge.net>
 
@@ -14,14 +14,13 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KSELECTDATABASEDLG_H
-#define KSELECTDATABASEDLG_H
+#ifndef KGENERATESQLDLG_H
+#define KGENERATESQLDLG_H
 
 // ----------------------------------------------------------------------------
 // QT Includes
 #include <QLineEdit>
 #include <QLabel>
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 #include <kurl.h>
@@ -29,49 +28,47 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include "ui_kselectdatabasedlgdecl.h"
+#include "ui_kgeneratesqldlgdecl.h"
 #include "storage/mymoneystoragesql.h"
+#include "storage/mymoneyseqaccessmgr.h"
 #include "kguiutils.h"
 
-
-class KSelectDatabaseDlgDecl : public QWidget, public Ui::KSelectDatabaseDlgDecl
+class KGenerateSqlDlgDecl : public QWidget, public Ui::KGenerateSqlDlgDecl
 {
 public:
-  KSelectDatabaseDlgDecl() {
+  KGenerateSqlDlgDecl() {
     setupUi( this );
   }
 };
 
-class KSelectDatabaseDlg : public KDialog
+class KGenerateSqlDlg : public KDialog
 {
 Q_OBJECT
 public:
-  explicit KSelectDatabaseDlg(int openMode, KUrl openURL = KUrl(), QWidget *parent = 0);
-  ~KSelectDatabaseDlg();
+  explicit KGenerateSqlDlg(QWidget *parent = 0);
+  ~KGenerateSqlDlg();
   /**
-    * Check whether we have required database drivers
-    * @return - false, no drivers available, true, can proceed
-  **/
-  bool checkDrivers();
-  /** Return URL of database
-    * @return - pseudo-URL of database selected by user
-  **/
-  const KUrl selectedURL();
-  /** Execute the database selection dialog
-    * @return - as QDialog::exec()
+    * execute the generation
   **/
   int exec();
 public slots:
-  void slotDriverSelected(QListWidgetItem *driver);
   void slotHelp();
+  void slotdriverSelected();
+  void slotcreateTables();
+  void slotsaveSQL();
 private:
-  KSelectDatabaseDlgDecl* m_widget;
-  int m_mode;
-  KUrl m_url;
-  QStringList m_supportedDrivers;
+  void initializeForm();
+
+  KGenerateSqlDlgDecl* m_widget;
+  QList<QString> m_supportedDrivers;
   MyMoneyDbDrivers m_map;
   kMandatoryFieldGroup* m_requiredFields;
   bool m_sqliteSelected;
+  QString m_dbDriver;
+  QString m_dbName;
+  databaseTypeE m_dbType;
+  MyMoneySeqAccessMgr* m_storage;
+  bool m_mustDetachStorage;
 };
 
 #endif
