@@ -47,8 +47,6 @@
 #include <gpgme++/data.h>
 #include <qgpgme/dataprovider.h>
 
-#ifndef Q_OS_WIN
-
 class KGPGFile::Private {
   public:
     Private()
@@ -314,97 +312,5 @@ void KGPGFile::keyList(QStringList& list, bool secretKeys, const QString& patter
     d->ctx->endKeyListing();
   }
 }
-
-#else //Q_OS_WIN
-
-class KGPGFile::Private {
-};
-
-KGPGFile::KGPGFile(const QString& fn, const QString& homedir, const QString& options) :
-  d(new Private)
-{
-  // only kept for interface compatibility
-  Q_UNUSED(homedir)
-  Q_UNUSED(options)
-
-  Q_UNUSED(fn);
-}
-
-KGPGFile::~KGPGFile()
-{
-  close();
-}
-
-void KGPGFile::setFileName(const QString& fn)
-{
-  Q_UNUSED(fn)
-}
-
-void KGPGFile::flush(void)
-{
-  // no functionality
-}
-
-void KGPGFile::addRecipient(const QString& recipient)
-{
-  Q_UNUSED(recipient)
-}
-
-bool KGPGFile::open(OpenMode mode)
-{
-  Q_UNUSED(mode)
-  return false;
-}
-
-void KGPGFile::close(void)
-{
-  if(!isOpen()) {
-    return;
-  }
-}
-
-qint64 KGPGFile::writeData(const char *data, qint64 maxlen)
-{
-  Q_UNUSED(data)
-  Q_UNUSED(maxlen)
-  return 0;
-}
-
-qint64 KGPGFile::readData(char *data, qint64 maxlen)
-{
-  Q_UNUSED(data)
-  Q_UNUSED(maxlen)
-  return 0;
-}
-
-bool KGPGFile::GPGAvailable(void)
-{
-  return false;
-}
-
-bool KGPGFile::keyAvailable(const QString& name)
-{
-  Q_UNUSED(name)
-  return false;
-}
-
-void KGPGFile::publicKeyList(QStringList& list)
-{
-  Q_UNUSED(list)
-}
-
-void KGPGFile::secretKeyList(QStringList& list)
-{
-  Q_UNUSED(list)
-}
-
-void KGPGFile::keyList(QStringList& list, bool secretKeys, const QStringList& patterns)
-{
-  Q_UNUSED(list)
-  Q_UNUSED(secretKeys)
-  Q_UNUSED(patterns)
-}
-
-#endif // else Q_OS_WIN
 
 #include "kgpgfile.moc"
