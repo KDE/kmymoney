@@ -133,9 +133,9 @@ void KGenerateSqlDlg::slotcreateTables(){
   dbase.setPassword(m_widget->textPassword->text());
   if (!dbase.open()) {
     KMessageBox::error(this,
-          i18n("Unable to open database\n"
-               "You must use a SQL CREATE DATABASE statement before creating the tables.\n"
-               "Click Help for more information"));
+          i18n("Unable to open database.\n"
+               "You must use an SQL CREATE DATABASE statement before creating the tables.\n"
+               "Click Help for more information."));
     return;
   }
   QSqlQuery q(dbase);

@@ -29,7 +29,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>KMyMoney - Generate Sql</string>
+   <string>KMyMoney - Generate SQL</string>
   </property>
   <widget class="QGroupBox" name="groupBox_2">
    <property name="geometry">
