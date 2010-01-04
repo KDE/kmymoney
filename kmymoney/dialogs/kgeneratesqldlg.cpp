@@ -166,7 +166,7 @@ void KGenerateSqlDlg::slotcreateTables(){
 void KGenerateSqlDlg::slotsaveSQL(){
   QString fileName = KFileDialog::getSaveFileName(
       KUrl(),
-      i18n(""),
+      QString(),
       this,
       i18n("Select output file"));
   if (fileName.isEmpty()) return;
