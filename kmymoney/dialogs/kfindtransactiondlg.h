@@ -128,17 +128,17 @@ protected slots:
 
   void slotUpdateSelections(void);
 
-  void slotDateRangeChanged(int);
-  void slotDateChanged(void);
+  virtual void slotDateRangeChanged(int);
+  virtual void slotDateChanged(void);
 
-  void slotAmountSelected(void);
-  void slotAmountRangeSelected(void);
+  virtual void slotAmountSelected(void);
+  virtual void slotAmountRangeSelected(void);
 
-  void slotSelectAllPayees(void);
-  void slotDeselectAllPayees(void);
+  virtual void slotSelectAllPayees(void);
+  virtual void slotDeselectAllPayees(void);
 
-  void slotNrSelected(void);
-  void slotNrRangeSelected(void);
+  virtual void slotNrSelected(void);
+  virtual void slotNrRangeSelected(void);
 
   void slotRefreshView(void);
 

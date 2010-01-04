@@ -69,6 +69,8 @@ protected slots:
    * This is to enable/disable the check to Include Transfers based on whether Categories are filtered or not.
    * This is because if Categories are filtered, transfers will not be included anyway
    */
+  virtual void slotDateChanged(void);
+
   void slotUpdateCheckTransfers(void);
 
 private:

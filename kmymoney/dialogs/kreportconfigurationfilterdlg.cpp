@@ -652,6 +652,14 @@ void KReportConfigurationFilterDlg::slotReset(void)
   slotRightSize();
 }
 
+void KReportConfigurationFilterDlg::slotDateChanged(void)
+{
+  m_dateRange->blockSignals(true);
+  m_dateRange->setCurrentItem(MyMoneyTransactionFilter::userDefined);
+  m_dateRange->blockSignals(false);
+  slotUpdateSelections();
+}
+
 void KReportConfigurationFilterDlg::slotShowHelp(void)
 {
   KToolInvocation::invokeHelp("details.reports.config");
