@@ -52,6 +52,8 @@ class KGPGFile::Private {
     Private()
     {
       ctx = GpgME::Context::createForProtocol(GpgME::OpenPGP);
+      if (!ctx)
+        qDebug("Failed to create the GpgME context for the OpenPGP protocol");
     }
 
     ~Private()
@@ -131,6 +133,9 @@ bool KGPGFile::open(OpenMode mode)
   if(d->m_fn.isEmpty())
     return false;
 
+  if (!d->ctx)
+    return false;
+
   setOpenMode(mode);
 
   // qDebug("check valid access mode");
@@ -180,6 +185,9 @@ void KGPGFile::close(void)
   if(!isOpen()) {
     return;
   }
+
+  if (!d->ctx)
+    return;
 
   if(isWritable()) {
     d->m_data.seek(0, SEEK_SET);
@@ -282,7 +290,7 @@ void KGPGFile::keyList(QStringList& list, bool secretKeys, const QString& patter
 {
   d->m_keys.clear();
   list.clear();
-  if(!d->ctx->startKeyListing(pattern.toUtf8().constData(), secretKeys)) {
+  if(d->ctx && !d->ctx->startKeyListing(pattern.toUtf8().constData(), secretKeys)) {
     GpgME::Error error;
     for(;;) {
       GpgME::Key key;
