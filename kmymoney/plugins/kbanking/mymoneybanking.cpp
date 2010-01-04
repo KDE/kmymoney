@@ -274,8 +274,6 @@ void KBankingPlugin::createJobView(void)
   connect(viewInterface(), SIGNAL(viewStateChanged(bool)), frm, SLOT(setEnabled(bool)));
 }
 
-
-
 void KBankingPlugin::createActions(void)
 {
   KAction *settings_aqbanking  = actionCollection()->addAction("settings_aqbanking");
@@ -301,8 +299,6 @@ void KBankingPlugin::slotSettings(void)
   }
   delete bs;
 }
-
-
 
 bool KBankingPlugin::mapAccount(const MyMoneyAccount& acc, MyMoneyKeyValueContainer& settings)
 {

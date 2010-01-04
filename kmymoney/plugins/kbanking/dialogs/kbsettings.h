@@ -21,12 +21,8 @@
 #ifndef KBANKING_KBSETTINGS_H
 #define KBANKING_KBSETTINGS_H
 
-
-
 #include "kbanking.h"
 #include <qbanking/qbcfgtabsettings.h>
-
-
 
 class KBankingSettings: public QBCfgTabSettings {
 private:
@@ -39,6 +35,5 @@ public:
   int init();
   int fini();
 };
-
 
 #endif /* KBANKING_KBSETTINGS_H */

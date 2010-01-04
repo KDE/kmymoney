@@ -22,11 +22,9 @@
 # include <config-kmymoney.h>
 #endif
 
-
 #include "kbsettings.h"
 
 #include <gwenhywfar/debug.h>
-
 
 KBankingSettings::KBankingSettings(KBanking *ab,
                                    QWidget* parent,
@@ -38,11 +36,8 @@ KBankingSettings::KBankingSettings(KBanking *ab,
   addBackendsPage();
 }
 
-
 KBankingSettings::~KBankingSettings() {
 }
-
-
 
 int KBankingSettings::init() {
   if (!toGui()) {
@@ -52,24 +47,8 @@ int KBankingSettings::init() {
   return 0;
 }
 
-
-
 int KBankingSettings::fini() {
   if (!fromGui())
     return -1;
   return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
