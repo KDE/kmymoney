@@ -2331,6 +2331,8 @@ void KMyMoney2App::slotUpdateConfiguration(void)
 {
   MyMoneyTransactionFilter::setFiscalYearStart(KMyMoneyGlobalSettings::firstFiscalMonth(), KMyMoneyGlobalSettings::firstFiscalDay());
 
+  d->m_myMoneyView->updateViewType();
+
   d->m_myMoneyView->slotRefreshViews();
 
   // re-read autosave configuration

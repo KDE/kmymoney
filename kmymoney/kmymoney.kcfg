@@ -111,9 +111,9 @@
    <label>Synchronize account in ledger and investment view</label>
    <default>true</default>
   </entry>
-  <entry name="iconSize" type="Int">
-   <label>Icon size for view selection</label>
-   <default>2</default>
+  <entry name="viewType" type="Int">
+   <label>The type of the KMyMoney view</label>
+   <default>0</default>
   </entry>
   <entry name="hiddenViews" type="String">
    <label>list of hidden views</label>

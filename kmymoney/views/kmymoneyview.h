@@ -435,6 +435,11 @@ public:
 
   void showTitleBar(bool show);
 
+  /**
+    * This method changes the view type according to the settings.
+    */
+  void updateViewType(void);
+
 public slots:
   /**
     * This slot writes information about the page passed as argument @current

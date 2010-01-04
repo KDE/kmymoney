@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>614</width>
-    <height>436</height>
+    <height>438</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -161,7 +161,6 @@
          <zorder>kcfg_AutoSaveFile</zorder>
          <zorder>spacer3</zorder>
          <zorder>m_periodFrame</zorder>
-         <zorder>textLabel3</zorder>
         </widget>
        </item>
        <item>
@@ -346,39 +345,32 @@
         </widget>
        </item>
        <item>
-        <widget class="KButtonGroup" name="kcfg_iconSize">
+        <widget class="KButtonGroup" name="kcfg_viewType">
          <property name="title">
-          <string>Icon size of navigation bar</string>
+          <string>Type of the KMyMoney view</string>
          </property>
          <layout class="QGridLayout">
           <item row="0" column="0">
            <widget class="QRadioButton" name="radioButton3">
             <property name="text">
-             <string>Micro (16px)</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QRadioButton" name="radioButton4">
-            <property name="text">
-             <string>Small (32px)</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QRadioButton" name="radioButton5">
-            <property name="text">
-             <string>Normal (48px)</string>
+             <string>List</string>
             </property>
             <property name="checked">
              <bool>true</bool>
             </property>
            </widget>
           </item>
-          <item row="1" column="1">
-           <widget class="QRadioButton" name="radioButton6">
+          <item row="0" column="1">
+           <widget class="QRadioButton" name="radioButton4">
             <property name="text">
-             <string>Large (64px)</string>
+             <string>Tree</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QRadioButton" name="radioButton5">
+            <property name="text">
+             <string>Tabbed</string>
             </property>
            </widget>
           </item>

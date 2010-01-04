@@ -119,8 +119,6 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
 {
   // the global variable kmymoney2 is not yet assigned. So we construct it here
   QObject* kmymoney2 = parent->parent();
-  //FIXME: Port to kde4
-  //const int iconSize = (KMyMoneyGlobalSettings::iconSize()+1)*16;
   newStorage();
 
   m_model = new KPageWidgetModel();
@@ -267,6 +265,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   setCurrentPage(m_homeViewFrame);
   connect(this, SIGNAL(currentPageChanged(const QModelIndex, const QModelIndex)), this, SLOT(slotRememberPage(const QModelIndex, const QModelIndex)));
 
+  updateViewType();
 
   m_inConstructor = false;
 }
@@ -294,6 +293,25 @@ void KMyMoneyView::showTitleBar(bool show)
 
   for (QList<KMyMoneyTitleLabel *>::iterator it = l.begin(); it != l.end(); ++it)
     (*it)->setVisible(show);
+}
+
+void KMyMoneyView::updateViewType(void)
+{
+  // set the face type
+  KPageView::FaceType faceType = KPageView::List;
+  switch(KMyMoneySettings::viewType())
+  {
+    case 0:
+      faceType = KPageView::List;
+      break;
+    case 1:
+      faceType = KPageView::Tree;
+      break;
+    case 2:
+      faceType = KPageView::Tabbed;
+      break;
+  }
+  setFaceType(faceType);
 }
 
 void KMyMoneyView::showPage(KPageWidgetItem* pageItem)
@@ -2164,9 +2182,6 @@ void KMyMoneyView::slotPrintView(void)
 KMyMoneyViewBase* KMyMoneyView::addBasePage(const QString& title, const QString& icon)
 {
   KMyMoneyViewBase* viewBase = new KMyMoneyViewBase(this, title, title);
-  //FIXME:: Port to kde4
-  //I have not found how to set the icon size of KPageWidget -- asoliverez
-  //const int iconSize = (KMyMoneyGlobalSettings::iconSize()+1)*16;
 
   //avoid setting this page as the last selected page since this is called by plugins adding to the view interface
   disconnect(this, SIGNAL(currentPageChanged(const QModelIndex, const QModelIndex)), this, SLOT(slotRememberPage(const QModelIndex, const QModelIndex)));
