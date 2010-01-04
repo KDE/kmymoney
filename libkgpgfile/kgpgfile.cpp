@@ -51,6 +51,7 @@ class KGPGFile::Private {
   public:
     Private()
     {
+      GpgME::initializeLibrary();
       ctx = GpgME::Context::createForProtocol(GpgME::OpenPGP);
       if (!ctx)
         qDebug("Failed to create the GpgME context for the OpenPGP protocol");
