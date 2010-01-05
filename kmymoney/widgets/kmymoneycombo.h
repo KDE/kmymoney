@@ -23,12 +23,12 @@
 
 #include <QTimer>
 #include <QMutex>
-//Added by qt3to4:
 #include <QPaintEvent>
 #include <QFocusEvent>
 #include <QList>
 #include <QMouseEvent>
 #include <QKeyEvent>
+#include <QStandardItemModel>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -50,6 +50,87 @@
 class kMyMoneyCompletion;
 class KMyMoneySelector;
 class kMyMoneyLineEdit;
+
+/**
+  * @author Cristian Onet
+  * This class will replace the KMyMoneyCombo class when all widgets will use the MVC
+  */
+class KMyMoneyMVCCombo : public KComboBox
+{
+  Q_OBJECT
+
+public:
+  KMyMoneyMVCCombo(QWidget* parent = 0);
+  explicit KMyMoneyMVCCombo(bool editable, QWidget* parent = 0);
+
+  void setHint(const QString& hint) const;
+
+  /**
+    * This method returns the id of the first selected item.
+    *
+    * @return reference to QString containing the id. If no item
+    *         is selected the QString will be empty.
+    */
+  const QString& selectedItem(void) const;
+
+  /**
+    * This method selects the item with the respective @a id.
+    *
+    * @param id reference to QString containing the id
+    */
+  void setSelectedItem(const QString& id);
+
+protected slots:
+  void activated(int index);
+
+protected:
+  /**
+    * reimplemented to support detection of new items
+    */
+  void focusOutEvent(QFocusEvent* );
+
+  /**
+    * set the widgets text area based on the item with the given @a id.
+    */
+  virtual void setCurrentTextById(const QString& id);
+
+  /**
+    * Overridden for internal reasons, no API change
+    */
+  void connectNotify(const char* signal);
+
+  /**
+    * Overridden for internal reasons, no API change
+    */
+  void disconnectNotify(const char* signal);
+
+  /**
+    * overridden for internal reasons, no API change
+    */
+  void setCurrentText(const QString& txt = QString()) { KComboBox::setItemText(KComboBox::currentIndex(), txt); }
+
+signals:
+  void itemSelected(const QString& id);
+  void objectCreation(bool);
+  void createItem(const QString&, QString&);
+
+private:
+  /**
+    * This is just a cache to be able to implement the old interface.
+    */
+  mutable QString m_id;
+
+  /**
+    * Flag to control object creation. Use setSuppressObjectCreation()
+    * to modify it's setting. Defaults to @a false.
+    */
+  bool            m_canCreateObjects;
+
+  /**
+    * Flag to check whether a focusOutEvent processing is underway or not
+    */
+  bool            m_inFocusOutEvent;
+};
 
 /**
   * @author Thomas Baumgart
@@ -336,7 +417,8 @@ private:
   *
   * @author Thomas Baumgart
   */
-class KMyMoneyPayeeCombo : public KMyMoneyCombo
+class KMyMoneyPayeeCombo : public KMyMoneyMVCCombo
+
 {
    Q_OBJECT
 public:

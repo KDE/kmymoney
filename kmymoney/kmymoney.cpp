@@ -212,7 +212,7 @@ public:
   bool                          m_collectingStatements;
   QStringList                   m_statementResults;
   KMyMoneyPlugin::PluginLoader* m_pluginLoader;
-  QString                       m_lastPayeeEntered;
+  QString                       m_lastPayeeEnteredId;
 
   /** the configuration object of the application */
   KSharedConfigPtr m_config;
@@ -4860,20 +4860,12 @@ void KMyMoney2App::slotTransactionsNew(void)
       d->m_transactionEditor = d->m_myMoneyView->startEdit(d->m_selectedTransactions);
        if(d->m_transactionEditor){
       KMyMoneyPayeeCombo* payeeEdit = dynamic_cast<KMyMoneyPayeeCombo*>(d->m_transactionEditor->haveWidget("payee"));
-      if(payeeEdit && !d->m_lastPayeeEntered.isEmpty()) {
+      if(payeeEdit && !d->m_lastPayeeEnteredId.isEmpty()) {
         // in case we entered a new transaction before and used a payee,
         // we reuse it here. Save the text to the edit widget, select it
         // so that hitting any character will start entering another payee.
-        // close the completion list
-        payeeEdit->setCurrentText(d->m_lastPayeeEntered);
-        payeeEdit->completion()->slotMakeCompletion(d->m_lastPayeeEntered);
-        QStringList payeeId;
-        payeeEdit->selector()->selectedItems(payeeId);
-        if(payeeId.count() == 1) {
-          payeeEdit->setSelectedItem(payeeId[0]);
-        }
+        payeeEdit->setSelectedItem(d->m_lastPayeeEnteredId);
         payeeEdit->lineEdit()->selectAll();
-        payeeEdit->completion()->hide();
       }
       if(d->m_transactionEditor) {
         connect(d->m_transactionEditor, SIGNAL(statusProgress(int, int)), this, SLOT(slotStatusProgressBar(int, int)));
@@ -4893,7 +4885,7 @@ void KMyMoney2App::slotTransactionsEdit(void)
   // if the action is enabled
   if(kmymoney2->action("transaction_edit")->isEnabled()) {
     // as soon as we edit a transaction, we don't remember the last payee entered
-    d->m_lastPayeeEntered.clear();
+    d->m_lastPayeeEnteredId.clear();
     d->m_transactionEditor = d->m_myMoneyView->startEdit(d->m_selectedTransactions);
     slotUpdateActions();
   }
@@ -4914,7 +4906,7 @@ void KMyMoney2App::slotTransactionsEditSplits(void)
   // if the action is enabled
   if(kmymoney2->action("transaction_editsplits")->isEnabled()) {
     // as soon as we edit a transaction, we don't remember the last payee entered
-    d->m_lastPayeeEntered.clear();
+    d->m_lastPayeeEnteredId.clear();
     d->m_transactionEditor = d->m_myMoneyView->startEdit(d->m_selectedTransactions);
     slotUpdateActions();
 
@@ -4962,7 +4954,7 @@ void KMyMoney2App::slotTransactionsEnter(void)
       if(d->m_transactionEditor->enterTransactions(newId)) {
         KMyMoneyPayeeCombo* payeeEdit = dynamic_cast<KMyMoneyPayeeCombo*>(d->m_transactionEditor->haveWidget("payee"));
         if(payeeEdit && !newId.isEmpty()) {
-          d->m_lastPayeeEntered = payeeEdit->currentText();
+          d->m_lastPayeeEnteredId = payeeEdit->selectedItem();
         }
         deleteTransactionEditor();
       }

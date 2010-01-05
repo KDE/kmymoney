@@ -24,12 +24,13 @@
 #include <QStyle>
 #include <QPainter>
 #include <QApplication>
-//Added by qt3to4:
 #include <QKeyEvent>
 #include <QList>
 #include <QFocusEvent>
 #include <QMouseEvent>
 #include <QPaintEvent>
+#include <QSortFilterProxyModel>
+#include <QCompleter>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -50,6 +51,136 @@
 #include <registeritem.h>
 #include <mymoneyscheduled.h>
 #include "kmymoneyutils.h"
+
+
+KMyMoneyMVCCombo::KMyMoneyMVCCombo(QWidget* parent) :
+  KComboBox(parent),
+  m_canCreateObjects(false),
+  m_inFocusOutEvent(false)
+{
+  QCompleter *completer = new QCompleter(this);
+  setCompleter(completer);
+}
+
+KMyMoneyMVCCombo::KMyMoneyMVCCombo(bool editable, QWidget* parent) :
+  KComboBox(editable, parent),
+  m_canCreateObjects(false),
+  m_inFocusOutEvent(false)
+{
+  QCompleter *completer = new QCompleter(this);
+  completer->setCaseSensitivity(Qt::CaseInsensitive);
+  completer->setCompletionMode(QCompleter::PopupCompletion);
+  completer->setModel(model());
+  setCompleter(completer);
+  setInsertPolicy(QComboBox::NoInsert); // don't instert new objects due to object creation
+  connect(this, SIGNAL(activated(int)), SLOT(activated(int)));
+}
+
+void KMyMoneyMVCCombo::setHint(const QString& hint) const
+{
+  Q_UNUSED(hint);
+}
+
+const QString& KMyMoneyMVCCombo::selectedItem(void) const
+{
+  QVariant data = itemData(currentIndex());
+  if (data.isValid())
+    m_id = data.toString();
+  else
+    m_id.clear();
+  return m_id;
+}
+
+void KMyMoneyMVCCombo::setSelectedItem(const QString& id)
+{
+  m_id = id;
+  setCurrentIndex(findData(QVariant(m_id)));
+}
+
+void KMyMoneyMVCCombo::activated(int index)
+{
+  QVariant data = itemData(index);
+  if (data.isValid()) {
+    m_id = data.toString();
+    emit itemSelected(m_id);
+  }
+}
+
+void KMyMoneyMVCCombo::connectNotify(const char* signal)
+{
+  if(signal && QLatin1String(signal) != QLatin1String(QMetaObject::normalizedSignature(SIGNAL(createItem(const QString&,QString&))))) {
+    m_canCreateObjects = true;
+  }
+}
+
+void KMyMoneyMVCCombo::disconnectNotify(const char* signal)
+{
+  if(signal && QLatin1String(signal) != QLatin1String(QMetaObject::normalizedSignature(SIGNAL(createItem(const QString&,QString&))))) {
+    m_canCreateObjects = false;
+  }
+}
+
+void KMyMoneyMVCCombo::focusOutEvent(QFocusEvent* e)
+{
+  if(m_inFocusOutEvent) {
+    KComboBox::focusOutEvent(e);
+    return;
+  }
+
+  m_inFocusOutEvent = true;
+  if(isEditable() && !currentText().isEmpty()) {
+    if(m_canCreateObjects) {
+      if(!contains(currentText())) {
+        QString id;
+        // annouce that we go into a possible dialog to create an object
+        // This can be used by upstream widgets to disable filters etc.
+        emit objectCreation(true);
+
+        emit createItem(currentText(), id);
+
+        // Announce that we return from object creation
+        emit objectCreation(false);
+
+        // update the field to a possibly created object
+        m_id = id;
+        setCurrentTextById(id);
+
+        // make sure the completion does not show through
+        //m_completion->hide();
+      }
+
+    // else if we cannot create objects, and the current text is not
+    // in the list, then we clear the text and the selection.
+    } else if(!contains(currentText())) {
+      setCurrentText(QString());
+    }
+  }
+
+  KComboBox::focusOutEvent(e);
+
+  // force update of hint and id if there is no text in the widget
+  if(isEditable() && currentText().isEmpty()) {
+    QString id = m_id;
+    m_id.clear();
+    if(!id.isEmpty())
+      emit itemSelected(m_id);
+    update();
+  }
+
+  m_inFocusOutEvent = false;
+}
+
+void KMyMoneyMVCCombo::setCurrentTextById(const QString& id)
+{
+    setCurrentText();
+    if(!id.isEmpty()) {
+      int index = findData(QVariant(id), Qt::UserRole, Qt::MatchExactly);
+      if(index > -1 ) {
+        setCompletedText(itemText(index));
+        setEditText(itemText(index));
+      }
+    }
+}
 
 KMyMoneyCombo::KMyMoneyCombo(QWidget *w) :
   KComboBox(w),
@@ -338,8 +469,6 @@ QSize KMyMoneyCombo::sizeHint() const
 #endif
 }
 
-
-
 KMyMoneyReconcileCombo::KMyMoneyReconcileCombo(QWidget* w) :
   KMyMoneyCombo(false, w)
 {
@@ -552,24 +681,26 @@ void KMyMoneyActivityCombo::slotSetActivity(const QString& id)
 }
 
 KMyMoneyPayeeCombo::KMyMoneyPayeeCombo(QWidget* parent) :
-  KMyMoneyCombo(true, parent)
+KMyMoneyMVCCombo(true, parent)
 {
-  m_completion = new kMyMoneyCompletion(this);
-
-  // set to ascending sort
-  selector()->listView()->setSorting(0);
-
-  connect(m_completion, SIGNAL(itemSelected(const QString&)), this, SLOT(slotItemSelected(const QString&)));
-  connect(this, SIGNAL(textChanged(const QString&)), m_completion, SLOT(slotMakeCompletion(const QString&)));
 }
 
 void KMyMoneyPayeeCombo::loadPayees(const QList<MyMoneyPayee>& list)
 {
-  selector()->listView()->clear();
+  clear();
   QList<MyMoneyPayee>::const_iterator it;
-  for(it = list.begin(); it != list.end(); ++it) {
-    selector()->newTopItem((*it).name(), QString(), (*it).id());
+
+  //add all payees
+  for(it = list.constBegin(); it != list.constEnd(); ++it) {
+    addItem((*it).name(),QVariant((*it).id()));
   }
+
+  //sort the model, which will sort the list in the combo
+  model()->sort(Qt::DisplayRole, Qt::AscendingOrder);
+
+  //set the text to empty and the index to the first item on the list
+  setCurrentIndex(0);
+  clearEditText();
 }
 
 
