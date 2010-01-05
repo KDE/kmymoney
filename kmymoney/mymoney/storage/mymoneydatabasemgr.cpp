@@ -928,9 +928,9 @@ const MyMoneyMoney MyMoneyDatabaseMgr::balance(const QString& id, const QDate& d
   idList.append(id);
   QMap<QString,MyMoneyMoney> tempMap = m_sql->fetchBalance(idList, date);
 
-  MyMoneyMoney returnValue = tempMap[id];
-  if (returnValue != MyMoneyMoney()) {
-    return returnValue;
+  QMap<QString,MyMoneyMoney>::ConstIterator returnValue = tempMap.constFind(id);
+  if (returnValue != tempMap.constEnd()) {
+    return returnValue.value();
   }
 
 //DEBUG

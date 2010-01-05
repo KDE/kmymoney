@@ -2531,7 +2531,7 @@ const QMap<QString, MyMoneyAccount> MyMoneyStorageSql::fetchAccounts (const QStr
   signalProgress(0, m_accounts, QObject::tr("Loading accounts..."));
   int progress = 0;
   QMap<QString, MyMoneyAccount> accList;
-  QStringList kvpAccountList;
+  QStringList kvpAccountList (idList);
 
   const MyMoneyDbTable& t = m_db.m_tables["kmmAccounts"];
   MyMoneySqlQuery q(const_cast <MyMoneyStorageSql*> (this));
@@ -2543,15 +2543,16 @@ const QMap<QString, MyMoneyAccount> MyMoneyStorageSql::fetchAccounts (const QStr
   // Use bind variables, instead of just inserting the values in the queryString,
   // so that values containing a ':' will work.
   if (! idList.empty()) {
-    kvpAccountList = idList;
     queryString += " WHERE id IN (";
     childQueryString += " parentId IN (";
+    QString inString;
     for (int i = 0; i < idList.count(); ++i) {
-      queryString += QString(":id%1, ").arg(i);
-      childQueryString += QString(":id%1, ").arg(i);
+      inString += QString(":id%1, ").arg(i);
     }
-    queryString = queryString.left(queryString.length() - 2) + ')';
-    childQueryString = childQueryString.left(childQueryString.length() - 2) + ')';
+    inString = inString.left(inString.length() - 2) + ')';
+    
+    queryString += inString;
+    childQueryString += inString;
   } else {
     childQueryString += " NOT parentId IS NULL";
   }
@@ -2584,19 +2585,19 @@ const QMap<QString, MyMoneyAccount> MyMoneyStorageSql::fetchAccounts (const QStr
   //FIXME: this is for if/when there is a QHash conversion
   //accList.reserve(q.size() > 0 ? q.size() : idList.size());
 
-  int idCol = t.fieldNumber("id");
-  int institutionIdCol = t.fieldNumber("institutionId");
-  int parentIdCol = t.fieldNumber("parentId");
-  int lastReconciledCol = t.fieldNumber("lastReconciled");
-  int lastModifiedCol = t.fieldNumber("lastModified");
-  int openingDateCol = t.fieldNumber("openingDate");
-  int accountNumberCol = t.fieldNumber("accountNumber");
-  int accountTypeCol = t.fieldNumber("accountType");
-  int accountNameCol = t.fieldNumber("accountName");
-  int descriptionCol = t.fieldNumber("description");
-  int currencyIdCol = t.fieldNumber("currencyId");
-  int balanceCol = t.fieldNumber("balance");
-  int transactionCountCol = t.fieldNumber("transactionCount");
+  static const int idCol = t.fieldNumber("id");
+  static const int institutionIdCol = t.fieldNumber("institutionId");
+  static const int parentIdCol = t.fieldNumber("parentId");
+  static const int lastReconciledCol = t.fieldNumber("lastReconciled");
+  static const int lastModifiedCol = t.fieldNumber("lastModified");
+  static const int openingDateCol = t.fieldNumber("openingDate");
+  static const int accountNumberCol = t.fieldNumber("accountNumber");
+  static const int accountTypeCol = t.fieldNumber("accountType");
+  static const int accountNameCol = t.fieldNumber("accountName");
+  static const int descriptionCol = t.fieldNumber("description");
+  static const int currencyIdCol = t.fieldNumber("currencyId");
+  static const int balanceCol = t.fieldNumber("balance");
+  static const int transactionCountCol = t.fieldNumber("transactionCount");
 
   while (q.next()) {
     QString aid;
@@ -2687,28 +2688,42 @@ const QMap<QString, MyMoneyMoney> MyMoneyStorageSql::fetchBalance(const QStringL
   // requested date and use the < operator.
   if (date.isValid() && !date.isNull())
     queryString += QString(" AND postDate < '%1'").arg(date.addDays(1).toString(Qt::ISODate));
+  
+  queryString += " ORDER BY accountId, postDate;";
   DBG (queryString);
   q.prepare(queryString);
 
   int i = 0;
   foreach (const QString& bindVal, idList) {
     q.bindValue (QString(":id%1").arg(i), bindVal);
-    returnValue[bindVal] = MyMoneyMoney(0);
     ++i;
   }
 
   if (!q.exec())
     throw new MYMONEYEXCEPTION(buildError (q, Q_FUNC_INFO, QString("fetching balance")));
   QString id;
-  QString shares;
+  QString oldId;
+  MyMoneyMoney temp;
   while (q.next()) {
     id = q.value(2).toString();
-    shares = q.value(1).toString();
+    // If the old ID does not match the new ID, then the account being summed has changed.
+    // Write the balance into the returnValue map and update the oldId to the current one.
+    if (id != oldId) {
+      if (!oldId.isEmpty()) {
+        returnValue.insert(oldId, temp);
+        temp = 0;
+      }
+      oldId = id;
+    }
     if (MyMoneySplit::ActionSplitShares == q.value(0).toString())
-      returnValue[id] = returnValue[id] * MyMoneyMoney(shares);
+      temp *= MyMoneyMoney(q.value(1).toString());
     else
-      returnValue[id] += MyMoneyMoney(shares);
+      temp += MyMoneyMoney(q.value(1).toString());
   }
+  // Do not forget the last id in the list.
+  returnValue.insert(id, temp);
+  
+  // Return the map.
   return returnValue;
 }
 
@@ -2756,7 +2771,7 @@ const QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions (co
   MyMoneySplit s;
   if (qs.next()) {
     splitTxId = qs.value(0).toString();
-    readSplit (s, qs, ts);
+    readSplit (s, qs);
   } else {
     splitTxId = "ZZZ";
   }
@@ -2784,7 +2799,7 @@ const QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions (co
     while (txId < splitTxId && splitTxId != "ZZZ") {
       if (qs.next()) {
         splitTxId = qs.value(0).toString();
-        readSplit (s, qs, ts);
+        readSplit (s, qs);
       } else {
         splitTxId = "ZZZ";
       }
@@ -2797,7 +2812,7 @@ const QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions (co
       tx.addSplit (s);
       if (qs.next()) {
         splitTxId = qs.value(0).toString();
-        readSplit (s, qs, ts);
+        readSplit (s, qs);
       } else {
         splitTxId = "ZZZ";
       }
@@ -3039,22 +3054,37 @@ unsigned long MyMoneyStorageSql::transactionCount (const QString& aid) const {
     return m_transactionCountMap[aid];
 }
 
-void MyMoneyStorageSql::readSplit (MyMoneySplit& s, const MyMoneySqlQuery& q, const MyMoneyDbTable& t) const {
+void MyMoneyStorageSql::readSplit (MyMoneySplit& s, const MyMoneySqlQuery& q) const {
   DBG("*** Entering MyMoneyStorageSql::readSplit");
+  const MyMoneyDbTable& t = m_db.m_tables["kmmSplits"];
+  
+  static const int payeeIdCol = t.fieldNumber("payeeId");
+  static const int reconcileDateCol = t.fieldNumber("reconcileDate");
+  static const int actionCol = t.fieldNumber("action");
+  static const int reconcileFlagCol = t.fieldNumber("reconcileFlag");
+  static const int valueCol = t.fieldNumber("value");
+  static const int sharesCol = t.fieldNumber("shares");
+  static const int priceCol = t.fieldNumber("price");
+  static const int memoCol = t.fieldNumber("memo");
+  static const int accountIdCol = t.fieldNumber("accountId");
+  static const int checkNumberCol = t.fieldNumber("checkNumber");
+  //static const int postDateCol = t.fieldNumber("postDate"); // FIXME - when Tom puts date into split object
+  static const int bankIdCol = t.fieldNumber("bankId");
+  
   s.clearId();
 
-  s.setPayeeId(GETSTRING(t.fieldNumber("payeeId")));
-  s.setReconcileDate(GETDATE(t.fieldNumber("reconcileDate")));
-  s.setAction(GETSTRING(t.fieldNumber("action")));
-  s.setReconcileFlag(static_cast<MyMoneySplit::reconcileFlagE>(GETINT(t.fieldNumber("reconcileFlag"))));
-  s.setValue(MyMoneyMoney(QStringEmpty(GETSTRING(t.fieldNumber("value")))));
-  s.setShares(MyMoneyMoney(QStringEmpty(GETSTRING(t.fieldNumber("shares")))));
-  s.setPrice(MyMoneyMoney(QStringEmpty(GETSTRING(t.fieldNumber("price")))));
-  s.setMemo(GETSTRING(t.fieldNumber("memo")));
-  s.setAccountId(GETSTRING(t.fieldNumber("accountId")));
-  s.setNumber(GETSTRING(t.fieldNumber("checkNumber")));
-  //s.setPostDate(GETDATETIME(t.fieldNumber("postDate"))); // FIXME - when Tom puts date into split object
-  s.setBankID(GETSTRING(t.fieldNumber("bankId")));
+  s.setPayeeId(GETSTRING(payeeIdCol));
+  s.setReconcileDate(GETDATE(reconcileDateCol));
+  s.setAction(GETSTRING(actionCol));
+  s.setReconcileFlag(static_cast<MyMoneySplit::reconcileFlagE>(GETINT(reconcileFlagCol)));
+  s.setValue(MyMoneyMoney(QStringEmpty(GETSTRING(valueCol))));
+  s.setShares(MyMoneyMoney(QStringEmpty(GETSTRING(sharesCol))));
+  s.setPrice(MyMoneyMoney(QStringEmpty(GETSTRING(priceCol))));
+  s.setMemo(GETSTRING(memoCol));
+  s.setAccountId(GETSTRING(accountIdCol));
+  s.setNumber(GETSTRING(checkNumberCol));
+  //s.setPostDate(GETDATETIME(postDateCol)); // FIXME - when Tom puts date into split object
+  s.setBankID(GETSTRING(bankIdCol));
 
   return;
 }
@@ -3186,7 +3216,7 @@ const QMap<QString, MyMoneySchedule> MyMoneyStorageSql::fetchSchedules (const QS
     if (!qs.exec()) throw new MYMONEYEXCEPTION(buildError (qs, Q_FUNC_INFO, "reading Scheduled Splits"));
     while (qs.next()) {
       MyMoneySplit sp;
-      readSplit (sp, qs, ts);
+      readSplit (sp, qs);
       tx.addSplit (sp);
     }
 //    if (!m_payeeList.isEmpty())
@@ -3297,6 +3327,11 @@ void MyMoneyStorageSql::readPrices(void) {
 const  MyMoneyPrice MyMoneyStorageSql::fetchSinglePrice (const QString& fromId, const QString& toId, const QDate& date_, bool exactDate, bool /*forUpdate*/) const {
   DBG("*** Entering MyMoneyStorageSql::fetchSinglePrice");
   const MyMoneyDbTable& t = m_db.m_tables["kmmPrices"];
+  
+  static const int priceDateCol = t.fieldNumber("priceDate");
+  static const int priceCol = t.fieldNumber("price");
+  static const int priceSourceCol = t.fieldNumber("priceSource");
+  
   MyMoneySqlQuery q(const_cast <MyMoneyStorageSql*> (this));
 
   // Use bind variables, instead of just inserting the values in the queryString,
@@ -3330,9 +3365,9 @@ const  MyMoneyPrice MyMoneyStorageSql::fetchSinglePrice (const QString& fromId, 
 
     return MyMoneyPrice(fromId,
                         toId,
-                        GETDATE(t.fieldNumber("priceDate")),
-                        MyMoneyMoney(GETSTRING(t.fieldNumber("price"))),
-                        GETSTRING(t.fieldNumber("priceSource")));
+                        GETDATE(priceDateCol),
+                        MyMoneyMoney(GETSTRING(priceCol)),
+                        GETSTRING(priceSourceCol));
   }
 
   return MyMoneyPrice();
@@ -3386,11 +3421,11 @@ const MyMoneyPriceList MyMoneyStorageSql::fetchPrices (const QStringList& fromId
   }
 
   if (!q.exec()) throw new MYMONEYEXCEPTION(buildError (q, Q_FUNC_INFO, QString("reading Prices")));
-  int fromIdCol = t.fieldNumber("fromId");
-  int toIdCol = t.fieldNumber("toId");
-  int priceDateCol = t.fieldNumber("priceDate");
-  int priceCol = t.fieldNumber("price");
-  int priceSourceCol = t.fieldNumber("priceSource");
+  static const int fromIdCol = t.fieldNumber("fromId");
+  static const int toIdCol = t.fieldNumber("toId");
+  static const int priceDateCol = t.fieldNumber("priceDate");
+  static const int priceCol = t.fieldNumber("price");
+  static const int priceSourceCol = t.fieldNumber("priceSource");
 
   while (q.next()) {
     QString from = GETSTRING(fromIdCol);

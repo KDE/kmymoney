@@ -209,6 +209,7 @@ public:
   // unary operators
   MyMoneyMoney& operator+= ( const MyMoneyMoney&  Amount );
   MyMoneyMoney& operator-= ( const MyMoneyMoney&  Amount );
+  MyMoneyMoney& operator*= ( const MyMoneyMoney&  Amount );
   MyMoneyMoney& operator/= ( const MyMoneyMoney&  Amount );
 
   // conversion
@@ -343,10 +344,8 @@ inline MyMoneyMoney::MyMoneyMoney(const int iAmount, const signed64 denom)
 //
 ////////////////////////////////////////////////////////////////////////////////
 inline MyMoneyMoney::MyMoneyMoney(const MyMoneyMoney& Amount)
-{
-  m_num = Amount.m_num;
-  m_denom = Amount.m_denom;
-}
+ : m_num (Amount.m_num), m_denom(Amount.m_denom)
+{ }
 
 ////////////////////////////////////////////////////////////////////////////////
 //      Name: operator=
@@ -600,6 +599,20 @@ inline MyMoneyMoney& MyMoneyMoney::operator+=(const MyMoneyMoney& AmountInPence)
 inline MyMoneyMoney& MyMoneyMoney::operator-=(const MyMoneyMoney& AmountInPence)
 {
   *this = *this - AmountInPence;
+  return *this;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+//      Name: operator*=
+//   Purpose: Multiplication operator - multiplies the input amount by the object
+//   Returns: Reference to the current object
+//    Throws: Nothing.
+// Arguments: AmountInPence - MyMoneyMoney object to be multiplied
+//
+////////////////////////////////////////////////////////////////////////////////
+inline MyMoneyMoney& MyMoneyMoney::operator*=(const MyMoneyMoney& AmountInPence)
+{
+  *this = *this * AmountInPence;
   return *this;
 }
 

@@ -656,7 +656,7 @@ private:
   void readTransaction(const QString id);
   void readTransactions(const QString& tidList = QString(), const QString& dateClause = QString());
   void readTransaction(MyMoneyTransaction &tx, const QString& tid);
-  void readSplit (MyMoneySplit& s, const MyMoneySqlQuery& q, const MyMoneyDbTable& t) const;
+  void readSplit (MyMoneySplit& s, const MyMoneySqlQuery& q) const;
   const MyMoneyKeyValueContainer readKeyValuePairs (const QString& kvpType, const QString& kvpId) const;
   const QHash<QString, MyMoneyKeyValueContainer> readKeyValuePairs (const QString& kvpType, const QStringList& kvpIdList) const;
   void readSchedules(void);
