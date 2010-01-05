@@ -6,9 +6,9 @@
         <Separator/>
         <Action name="file_import_aqbanking"/>
       </Menu>
-      <Menu name="settings">
-        <Action name="settings_aqbanking" append="configure_merge"/>
-      </Menu>
+    </Menu>
+    <Menu name="settings">
+      <Action name="settings_aqbanking" append="configure_merge"/>
     </Menu>
   </MenuBar>
 </kpartgui>
