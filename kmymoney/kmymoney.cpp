@@ -190,15 +190,24 @@ public:
     m_ft(0),
     m_moveToAccountSelector(0),
     m_statementXMLindex(0),
+    m_balanceWarning(0),
     m_collectingStatements(false),
+    m_pluginLoader(0),
     m_myMoneyView(0),
+    m_progressBar(0),
+    m_qifReader(0),
+    m_smtReader(0),
     m_searchDlg(0),
     m_autoSaveTimer(0),
     m_inAutoSaving(false),
     m_transactionEditor(0),
     m_endingBalanceDlg(0),
-    m_saveEncrypted(0)
+    m_saveEncrypted(0),
+    m_additionalKeyLabel(0),
+    m_additionalKeyButton(0),
+    m_recentFiles(0)
   {}
+
   void unlinkStatementXML(void);
   void moveInvestmentTransaction(const QString& fromId,
                                  const QString& toId,
@@ -365,9 +374,6 @@ KMyMoney2App::KMyMoney2App(QWidget* parent) :
   connect(action("view_show_transaction_detail"), SIGNAL(toggled(bool)), d->m_myMoneyView, SLOT(slotShowTransactionDetail(bool)));
 
   d->m_backupState = BACKUP_IDLE;
-
-  d->m_qifReader = 0;
-  d->m_smtReader = 0;
 
   d->m_autoSaveEnabled = KMyMoneyGlobalSettings::autoSaveFile();
   d->m_autoSavePeriod = KMyMoneyGlobalSettings::autoSavePeriod();
