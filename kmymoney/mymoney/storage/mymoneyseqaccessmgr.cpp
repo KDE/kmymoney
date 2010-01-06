@@ -769,8 +769,9 @@ void MyMoneySeqAccessMgr::transactionList(QList<MyMoneyTransaction>& list, MyMon
   list.clear();
 
   QMap<QString, MyMoneyTransaction>::ConstIterator it_t;
+  QMap<QString, MyMoneyTransaction>::ConstIterator it_t_end = m_transactionList.end();
 
-  for(it_t = m_transactionList.begin(); it_t != m_transactionList.end(); ++it_t) {
+  for(it_t = m_transactionList.begin(); it_t != it_t_end; ++it_t) {
     // This code is used now. It adds the transaction to the list for
     // each matching split exactly once. This allows to show information
     // about different splits in the same register view (e.g. search result)
@@ -794,11 +795,14 @@ void MyMoneySeqAccessMgr::transactionList(QList< QPair<MyMoneyTransaction, MyMon
   list.clear();
 
   QMap<QString, MyMoneyTransaction>::ConstIterator it_t;
+  QMap<QString, MyMoneyTransaction>::ConstIterator it_t_end = m_transactionList.end();
 
-  for(it_t = m_transactionList.begin(); it_t != m_transactionList.end(); ++it_t) {
+  for(it_t = m_transactionList.begin(); it_t != it_t_end; ++it_t) {
     if(filter.match(*it_t)) {
-      QList<MyMoneySplit>::const_iterator it_s;
-      for(it_s = filter.matchingSplits().begin(); it_s != filter.matchingSplits().end(); ++it_s) {
+      const QList<MyMoneySplit>& splits = filter.matchingSplits();
+      QList<MyMoneySplit>::ConstIterator it_s;
+      QList<MyMoneySplit>::ConstIterator it_s_end = splits.end();
+      for(it_s = splits.constBegin(); it_s != it_s_end; ++it_s) {
         list.append(qMakePair(*it_t, *it_s));
       }
     }
