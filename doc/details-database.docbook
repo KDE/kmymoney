@@ -10,22 +10,13 @@
       </affiliation>
     </author>
   </authorgroup>
-  <date>2009-08-05</date>
-  <releaseinfo>1.0</releaseinfo>
+  <date>2010-01-05</date>
+  <releaseinfo>4.0</releaseinfo>
 </chapterinfo>
 <title>Database</title>
 
 <sect1 id="details.database.usage">
-<title>Caution when using the database</title>
-
-<caution>
-  <para>
-    At the time of writing, the software described in this chapter is still in
-    an experimental stage, and loss of data is possible. Please ensure that you
-    have an alternative backup copy of your data before committing to database
-    usage.
-  </para>
-</caution>
+<title>Using relational databases</title>
 
 <sect2>
 <title>Introduction</title>
@@ -37,7 +28,9 @@
   &kappname; currently doesn't provide. Also, a little knowledge of SQL
   (Structured Query Language, the language used world-wide to access relational
   databases) should enable you more easily to export data to an external
-  program, for example, a budgeting application.</para> <para/>
+  program, for example, a budgeting application.
+</para>
+<para/>
 </sect2>
 
 <sect2><title>Preparation</title>
@@ -47,7 +40,7 @@
   Software as part of their &Qt; programming system. This module supports a
   number of different database systems through a collection of drivers. Among
   the more popular open-source systems for which drivers are available are
-  MySQL<trademark class="registered"/>, SQLite, and PostgreSQL. The module also
+  MySQL<trademark class="registered"/>, SQLite (version 3 and upwards only), and PostgreSQL. The module also
   supports the 'heavier', more industrial, systems such as Oracle<trademark
   class="registered"/> and IBM DB2<trademark class="registered"/>.
 </para>
@@ -61,7 +54,7 @@
   therefore, having decided which database system you wish to use, is to install
   the client, and most probably server, software.
 </para>
-  
+
 <para>
   In addition to the database software itself, you must also install the
   corresponding &Qt; driver module. Most distributions will include driver
@@ -75,18 +68,10 @@
     SQLite does not operate on a client/server model; each database is held in a
     regular file, local or remote, accessed using the normal methods supplied by
     the underlying operating system. In this case, therefore, there is only one
-    software package to install. Also, some of the following information,
+    software package and the driver to install. Also, some of the following information,
     particularly that related to administration, may not apply to SQLite.
   </para>
-
-  <para>
-    Due to limitations in prior releases, only version 3 of SQLite is
-    supported. Unfortunately, the release of the &Qt; toolkit used by &kappname;
-    does not provide a driver for this version. However, an unofficial,
-    extensively tested, driver is available; if you wish to use SQLite, ask on
-    &devlist; for further information.
-  </para>
-</note>  
+</note>
 </sect2>
 
 <sect2>
@@ -118,7 +103,8 @@
   At this time, you will also need to specify permissions for various users to
   perform different operations on the database. In most systems, the user who
   creates the database will be automatically assigned all permissions, but this
-  is an area in which the documentation should be consulted.</para>
+  is an area in which the documentation should be consulted.
+</para>
 
 <para>
   For your first use of the database, and occasionally at other times when the
@@ -142,19 +128,20 @@
   this case, provision has been made to generate the SQL code necessary to
   create tables. This code can then be modified as required and used to create
   the tables outside of &kappname;. Should you find yourself in this situation,
-  help can usually be obtained from &devlist;.
+  help can usually be obtained from &devlist;. See <link
+  linkend="details.database.generatesql">Manual Database Creation</link> for more information.
 </para>
 </sect3>
 </sect2>
 
 <sect2 id="details.database.selectdatabase">
-<title>Initialisation</title>
+<title>Creating a Database</title>
 
 <para>
   Using &kappname;, open or import an existing data file, or create a new
   one. Then select <guimenuitem>Save as Database</guimenuitem> from the
   <guimenu>File</guimenu> menu. This will present the following dialog:
-</para> 
+</para>
 
 <screenshot>
   <mediaobject>
@@ -163,6 +150,12 @@
   </imageobject>
   </mediaobject>
 </screenshot>
+
+<para>
+  Complete the fields appropriate to the database type you have selected
+  (as usual, mandatory fields will be highlighted)
+  and click OK to create the database.
+</para>
 
 <sect3>
 <title>Database Type</title>
@@ -177,15 +170,27 @@
 </sect3>
 
 <sect3>
-<title>Database name</title>
+<title>File (Sqlite only)</title>
+<para>
+  SQLite has one database per file so enter the file name in which you wish to create the database.
+  To browse the file system, click the icon to the right of the file name.
+  For SQLite databases, the Host name, User name, and Password fields
+  are not relevant. The SQLite file must have the appropriate read/write
+  permissions set by the underlying file system to enable the appropriate
+  access for the currently logged-in user.
+</para>
+</sect3>
+
+<sect3>
+<title>Database name (others)</title>
 <para>
   The default database name is KMyMoney, but you may choose some other name if
-  you like. SQLite has one database per file; selecting this driver will open
-  the standard 'Open File' dialog from which a file may be selected or
-  created. For some database types, &kappname; may not be able to create the
+  you like.
+  For some database types, &kappname; may not be able to create the
   database, so it must be pre-created using the appropriate administrative
-  procedure. However, &kappname; will create all table structures where
-  necessary.
+  procedure. However, &kappname; will usually be able to create all table structures where
+  necessary. If not, you can create them yourself;  See <link
+  linkend="details.database.generatesql">Manual Database Creation</link> for more information.
 </para>
 </sect3>
 
@@ -196,14 +201,6 @@
   the connected host name.
 </para>
 
-<note>
-  <para>
-    NOTE: For SQLite databases, the Host name, User name, and Password fields
-    are not relevant. The SQLite file must have the appropriate read/write
-    permissions set by the underlying file system to enable the appropriate
-    access for the currently logged-in user.
-  </para>
-</note>
 </sect3>
 
 <sect3>
@@ -213,15 +210,6 @@
   administrator, for the correct values to use here. The user name must be
   capable of selecting, inserting, updating, and deleting records. If the user
   name is the same as your login name, a password is not normally required.
-</para>
-</sect3>
-
-<sect3>
-<title>Generate SQL</title>
-<para>
-  This button will generate the CREATE TABLE commands and save them to a text
-  file, which may be edited if the in-built commands do not work for your
-  database system (see previous paragraph).
 </para>
 </sect3>
 </sect2>
@@ -444,10 +432,78 @@
   database itself. As you will have guessed from the above, all the tables used
   by &kappname; begin with the lowercase letters 'kmm'. This standard will be
   maintained, and only tables beginning with these letters will be
-  updated. Thus, provided you avoid these in the naming of your queries etc.,
+  updated. Thus, provided you avoid these in the naming of your queries &etc;.,
   you should not experience any problems.
 </para>
 </sect3>
+</sect2>
+
+<sect2 id="details.database.generatesql">
+<title>Manual database creation</title>
+<note>
+  <para>
+    This section covers more advanced database usage and may be skipped by the general user.
+  </para>
+</note>
+<sect3>
+<title>When to use</title>
+<para>
+  There may be occasions when &kappname; is unable to create the database automatically, or creates it without some
+  options required by the user. For example, the database system used may not completely conform
+  to standard SQL usage, or support may be introduced for new systems which have not been fully tested in &kappname;.
+</para>
+<para>
+  Prior to using this facility, you should try just creating the database entry itself (i.e. with the CREATE DATABASE
+  statement). Provided the database exists, &kappname; may well be able to create the tables, &etc;. in the normal
+  database save procedure described above.
+</para>
+</sect3>
+
+<sect3>
+<title>Generating the SQL</title>
+<para>
+  If this fails, it is possible to generate the basic SQL commands needed to create the various tables, views and indexes 
+  required by the application. Select <guimenuitem>'Generate Database SQL'</guimenuitem> from the
+  <guimenu>Tools</guimenu> menu. This will present the following dialog:
+</para>
+<screenshot>
+  <mediaobject>
+  <imageobject>
+  <imagedata fileref="generate_sql.png" format="PNG" />
+  </imageobject>
+  </mediaobject>
+</screenshot>
+
+<para>
+  On selecting the database type, the appropriate SQL will appear in the 'SQL for creation text box'; this can be edited by the user,
+  or saved to a text file by clicking <guibutton>Save SQL</guibutton>. In the latter case, the database
+  must be created using the administrative functions provided by the database system.
+</para>
+<para>
+  If after editing the text in the dialog, you want &kappname; to create the database, you will need
+  to complete the other fields in the dialog, as detailed in <link
+  linkend="details.database.selectdatabase">Creating a Database</link> above,
+  and click <guibutton>Create Tables</guibutton>. Note that,
+  except in the case of Sqlite, you will need either to include a suitable CREATE DATABASE statement
+  as the first command, or have previously issued such a command externally to &kappname;
+</para>
+</sect3>
+
+<sect3>
+<title>Warning</title>
+<para>
+  You should be very careful editing the definitions of any of the basic tables or views
+  (those with names beginning with 'kmm'). Some changes,
+  such as increasing the length of an integer field, may have little impact, but you should not
+  remove or change the sequence of any fields, or &kappname; may refuse to function, or may corrupt your data.
+</para>
+<para>
+  Whilst adding or removing indexes may improve performance, you should also be aware that the opposite
+  may happen. Some knowledge of the internal operation of &kappname; may help to get the
+  best performance in these circumstances.
+</para>
+</sect3>
+
 </sect2>
 
 <sect2>
