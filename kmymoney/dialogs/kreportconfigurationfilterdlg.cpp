@@ -654,9 +654,13 @@ void KReportConfigurationFilterDlg::slotReset(void)
 
 void KReportConfigurationFilterDlg::slotDateChanged(void)
 {
-  m_dateRange->blockSignals(true);
-  m_dateRange->setCurrentItem(MyMoneyTransactionFilter::userDefined);
-  m_dateRange->blockSignals(false);
+  if(m_initialState.isUserDefined()) {
+    m_dateRange->blockSignals(true);
+    m_dateRange->setCurrentItem(MyMoneyTransactionFilter::userDefined);
+    m_dateRange->blockSignals(false);
+  } else {
+    KFindTransactionDlg::slotDateChanged();
+  }
   slotUpdateSelections();
 }
 

@@ -125,6 +125,7 @@ public:
   int movingAverageDays(void) const { return m_movingAverageDays; }
   bool isIncludingPrice(void) const { return m_includePrice; }
   bool isIncludingAveragePrice(void) const { return m_includeAveragePrice; }
+  bool isUserDefined(void) const { return m_dateLock == userDefined; }
 
   // Simple set operations
   void setName(const QString& _s) { m_name = _s; }
