@@ -19,12 +19,13 @@ SET(VERSION_MAJOR "3")
 SET(VERSION_MINOR "95")
 SET(VERSION_PATCH "0")
 
-# Get the date of the last change from the ChangeLog
-SET(date_format "([0-9][0-9][0-9][0-9])-([0-9][0-9])-([0-9][0-9])")
-FILE(STRINGS ${CMAKE_CURRENT_SOURCE_DIR}/ChangeLog LAST_CHANGE
-  REGEX ${date_format} LIMIT_COUNT 1 LENGTH_MINIMUM 10 LENGTH_MAXIMUM 10)
-STRING(REGEX MATCH ${date_format} _ign "${LAST_CHANGE}")
-SET(VERSION_SUFFIX "svn${CMAKE_MATCH_1}${CMAKE_MATCH_2}${CMAKE_MATCH_3}")
+# Determince the SVN revision number (if we're based on SVN)
+IF(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/.svn)
+  EXECUTE_PROCESS(COMMAND svn info ${CMAKE_CURRENT_SOURCE_DIR} OUTPUT_VARIABLE VERSION_SUFFIX)
+  STRING(REGEX MATCH "Changed Rev: ([0-9]+)" VERSION_SUFFIX ${VERSION_SUFFIX}) 
+  STRING(REPLACE "Changed Rev: " "" VERSION_SUFFIX ${VERSION_SUFFIX})
+  SET(VERSION_SUFFIX "svn${VERSION_SUFFIX}")
+ENDIF(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/.svn)
 
 ######################### General Requirements ##########################
 FIND_PACKAGE(KDE4 REQUIRED)
