@@ -182,6 +182,7 @@ public:
 
   // Equality operator
   bool operator == (const MyMoneyPayee &) const;
+  bool operator <(const MyMoneyPayee& right) const;
 
   void writeXML(QDomDocument& document, QDomElement& parent) const;
 

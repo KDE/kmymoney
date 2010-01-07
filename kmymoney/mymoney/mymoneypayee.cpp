@@ -131,6 +131,11 @@ bool MyMoneyPayee::operator == (const MyMoneyPayee& right) const
       ((m_defaultAccountId.length() == 0 && right.m_defaultAccountId.length() == 0) || m_defaultAccountId == right.m_defaultAccountId) );
 }
 
+bool MyMoneyPayee::operator < (const MyMoneyPayee& right) const
+{
+  return m_name < right.name();
+}
+
 void MyMoneyPayee::writeXML(QDomDocument& document, QDomElement& parent) const
 {
   QDomElement el = document.createElement("PAYEE");
