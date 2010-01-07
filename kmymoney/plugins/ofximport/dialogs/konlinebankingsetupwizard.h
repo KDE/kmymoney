@@ -33,6 +33,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <k3wizard.h>
+
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -59,10 +61,10 @@ class OfxHeaderVersion;
   *
   */
 
-class KOnlineBankingSetupDecl : public Q3Wizard, public Ui::KOnlineBankingSetupDecl
+class KOnlineBankingSetupDecl : public K3Wizard, public Ui::KOnlineBankingSetupDecl
 {
 public:
-  KOnlineBankingSetupDecl( QWidget *parent ) : Q3Wizard( parent ) {
+  KOnlineBankingSetupDecl( QWidget *parent ) : K3Wizard( parent ) {
     setupUi( this );
   }
 };
