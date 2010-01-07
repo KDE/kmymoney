@@ -154,7 +154,7 @@
 <para>
   Complete the fields appropriate to the database type you have selected
   (as usual, mandatory fields will be highlighted)
-  and click OK to create the database.
+  and click <guibutton>OK</guibutton> to create the database.
 </para>
 
 <sect3>
@@ -174,9 +174,9 @@
 <para>
   SQLite has one database per file so enter the file name in which you wish to create the database.
   To browse the file system, click the icon to the right of the file name.
-  For SQLite databases, the Host name, User name, and Password fields
-  are not relevant. The SQLite file must have the appropriate read/write
-  permissions set by the underlying file system to enable the appropriate
+  For SQLite databases, the <guilabel>Host name</guilabel>, <guilabel>Username</guilabel>, and 
+  <guilabel>Password</guilabel> fields are not relevant. The SQLite file must have the 
+  appropriate read/write permissions set by the underlying file system to enable the appropriate
   access for the currently logged-in user.
 </para>
 </sect3>
@@ -189,7 +189,7 @@
   For some database types, &kappname; may not be able to create the
   database, so it must be pre-created using the appropriate administrative
   procedure. However, &kappname; will usually be able to create all table structures where
-  necessary. If not, you can create them yourself;  See <link
+  necessary. If not, you can create them yourself. See <link
   linkend="details.database.generatesql">Manual Database Creation</link> for more information.
 </para>
 </sect3>
@@ -432,7 +432,7 @@
   database itself. As you will have guessed from the above, all the tables used
   by &kappname; begin with the lowercase letters 'kmm'. This standard will be
   maintained, and only tables beginning with these letters will be
-  updated. Thus, provided you avoid these in the naming of your queries &etc;.,
+  updated. Thus, provided you avoid these in the naming of your queries &etc;,
   you should not experience any problems.
 </para>
 </sect3>
@@ -453,8 +453,8 @@
   to standard SQL usage, or support may be introduced for new systems which have not been fully tested in &kappname;.
 </para>
 <para>
-  Prior to using this facility, you should try just creating the database entry itself (i.e. with the CREATE DATABASE
-  statement). Provided the database exists, &kappname; may well be able to create the tables, &etc;. in the normal
+  Prior to using this facility, you should try just creating the database entry itself (&ie; with the CREATE DATABASE
+  statement). Provided the database exists, &kappname; may well be able to create the tables, &etc; in the normal
   database save procedure described above.
 </para>
 </sect3>
@@ -463,7 +463,7 @@
 <title>Generating the SQL</title>
 <para>
   If this fails, it is possible to generate the basic SQL commands needed to create the various tables, views and indexes 
-  required by the application. Select <guimenuitem>'Generate Database SQL'</guimenuitem> from the
+  required by the application. Select <guimenuitem>Generate Database SQL</guimenuitem> from the
   <guimenu>Tools</guimenu> menu. This will present the following dialog:
 </para>
 <screenshot>
@@ -475,7 +475,7 @@
 </screenshot>
 
 <para>
-  On selecting the database type, the appropriate SQL will appear in the 'SQL for creation text box'; this can be edited by the user,
+  On selecting the database type, the appropriate SQL will appear in the <guilabel>SQL for creation</guilabel> text box; this can be edited by the user,
   or saved to a text file by clicking <guibutton>Save SQL</guibutton>. In the latter case, the database
   must be created using the administrative functions provided by the database system.
 </para>
