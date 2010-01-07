@@ -418,7 +418,7 @@ public:
     *
     * @param from result value for the beginning of the date range
     * @param to result value for the end of the date range
-    * @return true if an amount filter is set
+    * @return true if a date filter is set
     */
   bool dateFilter( QDate& from, QDate& to ) const;
 
