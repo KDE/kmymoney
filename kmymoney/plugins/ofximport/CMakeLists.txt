@@ -12,7 +12,9 @@ SET(kmm_ofximport_PART_SRCS ofximporterplugin.cpp ofxpartner.cpp)
 KDE4_ADD_PLUGIN(kmm_ofximport ${kmm_ofximport_PART_SRCS})
 
 TARGET_LINK_LIBRARIES(kmm_ofximport
-                      ${KDE4_KDEUI_LIBS} ${KDE4_KDE3SUPPORT_LIBS} kmm_mymoney kmm_ofximport_dialogs kmm_plugin ${LIBOFX_LIBRARIES})
+                      kmm_mymoney kmm_ofximport_dialogs kmm_plugin
+                      ${KDE4_KDEUI_LIBS} ${KDE4_KDE3SUPPORT_LIBS}
+                      ${LIBOFX_LIBRARIES})
 
 ########### install files ###############
 
