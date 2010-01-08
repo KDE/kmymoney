@@ -3,11 +3,12 @@
 /* Name of package */
 #define PACKAGE "kmymoney"
 
+
 /* Version number of package */
 #define VERSION "@VERSION_MAJOR@.@VERSION_MINOR@.@VERSION_PATCH@-@VERSION_SUFFIX@"
 
 /* Define to the address where bug reports for this package should be sent. */
-#define PACKAGE_BUGREPORT "kmymoney2-developer@lists.sourceforge.net"
+#define PACKAGE_BUGREPORT "kmymoney-devel@kde.org"
 
 /* Define to the full name of this package. */
 #define PACKAGE_NAME "KMyMoney"
