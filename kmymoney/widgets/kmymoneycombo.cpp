@@ -688,9 +688,12 @@ KMyMoneyMVCCombo(true, parent)
 void KMyMoneyPayeeCombo::loadPayees(const QList<MyMoneyPayee>& list)
 {
   clear();
-  QList<MyMoneyPayee>::const_iterator it;
+
+  //add a blank item, since the field is optional
+  addItem(QString(), QVariant(QString()));
 
   //add all payees
+  QList<MyMoneyPayee>::const_iterator it;
   for(it = list.constBegin(); it != list.constEnd(); ++it) {
     addItem((*it).name(),QVariant((*it).id()));
   }
