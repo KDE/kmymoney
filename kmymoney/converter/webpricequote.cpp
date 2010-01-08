@@ -663,12 +663,12 @@ FinanceQuoteProcess::FinanceQuoteProcess(void) {
   m_fqNames["yahoo_europe"] = "Yahoo Europe";
   m_fqNames["yahoo_nz"] = "Yahoo New Zealand";
   m_fqNames["zifunds"] = "Zuerich Investments";
-  connect(this, SIGNAL(receivedStdout(KProcess*, char*, int)), this, SLOT(slotReceivedDataFromFilter(KProcess*, char*, int)));
+  connect(this, SIGNAL(readyReadStandardOutput()), this, SLOT(slotReceivedDataFromFilter()));
   connect(this, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(slotProcessExited(int, QProcess::ExitStatus)));
 }
 
-void FinanceQuoteProcess::slotReceivedDataFromFilter(KProcess* /*_process*/, char* _pcbuffer, int _nbufferlen) {
-  QByteArray data(_pcbuffer, _nbufferlen);
+void FinanceQuoteProcess::slotReceivedDataFromFilter() {
+  QByteArray data(readAllStandardOutput());
 
 //   kDebug(2) << "WebPriceQuoteProcess::slotReceivedDataFromFilter(): " << QString(data);
   m_string += QString(data);

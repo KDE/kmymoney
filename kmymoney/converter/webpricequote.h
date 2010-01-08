@@ -84,7 +84,7 @@ class FinanceQuoteProcess: public KProcess
     const QString niceName(const QString& crypticName) const;
 
   public slots:
-    void slotReceivedDataFromFilter(KProcess*, char*, int);
+    void slotReceivedDataFromFilter();
     void slotProcessExited(int exitCode, QProcess::ExitStatus exitStatus);
 
   private:
