@@ -21,10 +21,15 @@ SET(VERSION_PATCH "0")
 
 # Determince the SVN revision number (if we're based on SVN)
 IF(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/.svn)
+  # make sure we don't use translated messages here
+  SET(LANG $ENV{LANG})
+  SET(ENV{LANG} "C")
   EXECUTE_PROCESS(COMMAND svn info ${CMAKE_CURRENT_SOURCE_DIR} OUTPUT_VARIABLE VERSION_SUFFIX)
   STRING(REGEX MATCH "Changed Rev: ([0-9]+)" VERSION_SUFFIX ${VERSION_SUFFIX}) 
   STRING(REPLACE "Changed Rev: " "" VERSION_SUFFIX ${VERSION_SUFFIX})
-  SET(VERSION_SUFFIX "svn${VERSION_SUFFIX}")
+  SET(VERSION_SUFFIX "-svn${VERSION_SUFFIX}")
+  # switch back to the origianl language setting
+  SET(ENV{LANG} ${LANG})
 ENDIF(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/.svn)
 
 ######################### General Requirements ##########################
@@ -340,6 +345,12 @@ INCLUDE(CPack)
 INCLUDE(UseRPMTools)
 IF(RPMTools_FOUND)
   SET(RPM_VERSION_SUFFIX  ${VERSION_SUFFIX})
+  IF(${RPM_VERSION_SUFFIX} MATCHES "-.*")
+    # remove the leading dash from the version suffix
+    STRING(LENGTH ${RPM_VERSION_SUFFIX} LEN)
+    MATH(EXPR LEN ${LEN}-1)
+    STRING(SUBSTRING ${RPM_VERSION_SUFFIX} 1 ${LEN} RPM_VERSION_SUFFIX) 
+  ENDIF(${RPM_VERSION_SUFFIX} MATCHES "-.*")
 
   # kmymoney conflicts with kmymoney-unstable
   SET(RPM_CONFLICTING kmymoney-unstable)
@@ -378,7 +389,7 @@ nice_yesno("USE_DEVELOPER_DOC")
 nice_yesno("HAVE_LIBCPPUNIT")
 nice_yesno("KDE4_BUILD_TESTS")
 message("
--------- KMyMoney ${CPACK_PACKAGE_VERSION}-${VERSION_SUFFIX} --------
+-------- KMyMoney ${CPACK_PACKAGE_VERSION}${VERSION_SUFFIX} --------
 
 Configure results (user options):
 --------------------------------------------
