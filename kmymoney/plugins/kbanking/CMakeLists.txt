@@ -22,13 +22,13 @@ SET(kmm_kbanking_PART_SRCS kbanking.cpp mymoneybanking.cpp)
 KDE4_ADD_PLUGIN(kmm_kbanking ${kmm_kbanking_PART_SRCS})
 
 TARGET_LINK_LIBRARIES(kmm_kbanking
-                      ${KDE4_KDEUI_LIBS}
-                      ${KDE4_KDE3SUPPORT_LIBS}
                       kmm_mymoney
                       kmm_kbanking_dialogs
                       kmm_kbanking_views
                       kmm_kbanking_widgets
                       kmm_plugin
+                      ${KDE4_KDEUI_LIBS}
+                      ${KDE4_KDE3SUPPORT_LIBS}
                       ${GWENHYWFAR_LIBRARIES}
                       ${AQBANKING_LIBRARIES}
                       )
