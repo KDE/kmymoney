@@ -558,7 +558,7 @@ void KMyMoneyView::ungetString(QIODevice *qfile, char *buf, int len)
 {
   buf = &buf[len-1];
   while(len--) {
-    qfile->ungetch(*buf--);
+    qfile->ungetChar(*buf--);
   }
 }
 
@@ -632,7 +632,7 @@ bool KMyMoneyView::readFile(const KUrl& url)
   emit kmmFilePlugin (preOpen);
   ::timetrace("start reading file");
   if(file.open(QIODevice::ReadOnly)) {
-    QByteArray hdr(2);
+    QByteArray hdr(2, '\0');
     int cnt;
     cnt = file.read(hdr.data(), 2);
     file.close();
@@ -652,11 +652,11 @@ bool KMyMoneyView::readFile(const KUrl& url)
           isEncrypted = true;
         } else {
           KMessageBox::sorry(this, QString("<qt>%1</qt>"). arg(i18n("GPG is not available for decryption of file <b>%1</b>",filename)));
-          qfile = new QFile(file.name());
+          qfile = new QFile(file.fileName());
         }
       } else {
         // we can't use file directly, as we delete qfile later on
-        qfile = new QFile(file.name());
+        qfile = new QFile(file.fileName());
       }
 
       ::timetrace("open file");
@@ -665,7 +665,7 @@ bool KMyMoneyView::readFile(const KUrl& url)
           hdr.resize(8);
           if(qfile->read(hdr.data(), 8) == 8) {
             if(haveAt)
-              qfile->at(0);
+              qfile->seek(0);
             else
               ungetString(qfile, hdr.data(), 8);
 
@@ -701,7 +701,7 @@ bool KMyMoneyView::readFile(const KUrl& url)
               hdr.resize(70);
               if(qfile->read(hdr.data(), 70) == 70) {
                 if(haveAt)
-                  qfile->at(0);
+                  qfile->seek(0);
                 else
                   ungetString(qfile, hdr.data(), 70);
                 QRegExp kmyexp("<!DOCTYPE KMYMONEY-FILE>");
