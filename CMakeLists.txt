@@ -407,15 +407,11 @@ CONFIGURE_FILE  (config-kmymoney.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-kmym
 # this macro maps the boolean variable ${_varname} to "yes"/"no"
 # and writes the output to the variable nice_${_varname}
 MACRO(nice_yesno _varname)
-  if(${${_varname}})
+  if(${_varname})
     SET("nice_${_varname}" "yes")
-  else(${${_varname}})
-    if(${_varname})
-      SET("nice_${_varname}" "yes")
-    else(${_varname})
-      SET("nice_${_varname}" "no")
-    endif(${_varname})
-  endif(${${_varname}})
+  else(${_varname})
+    SET("nice_${_varname}" "no")
+  endif(${_varname})
 ENDMACRO(nice_yesno _varname)
 
 nice_yesno("LIBOFX_FOUND")
