@@ -188,14 +188,16 @@ void MyMoneyTransaction::modifySplit(MyMoneySplit& split)
 void MyMoneyTransaction::removeSplit(const MyMoneySplit& split)
 {
   QList<MyMoneySplit>::Iterator it;
+  bool removed = false;
 
   for(it = m_splits.begin(); it != m_splits.end(); ++it) {
     if(split.id() == (*it).id()) {
       m_splits.erase(it);
+      removed = true;
       break;
     }
   }
-  if(it == m_splits.end())
+  if(!removed)
     throw new MYMONEYEXCEPTION(QString("Invalid split id '%1'").arg(split.id()));
 }
 
