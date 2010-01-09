@@ -490,7 +490,7 @@ void KMyMoney2App::initActions(void)
   view_personal_data->setIcon(KIcon("user-properties"));
   connect(view_personal_data, SIGNAL(triggered()), this, SLOT(slotFileViewPersonal()));
 
-#if KMM_DEBUG
+#ifdef KMM_DEBUG
   KAction *file_dump = actionCollection()->addAction("file_dump");
   file_dump->setText(i18n("Dump Memory"));
   connect(file_dump, SIGNAL(triggered()), this, SLOT(slotFileFileInfo()));
@@ -5536,7 +5536,7 @@ void KMyMoney2App::updateCaption(bool skipActions)
     skipActions = true;
   }
 
-#if KMM_DEBUG
+#ifdef KMM_DEBUG
   caption += QString(" (%1 x %2)").arg(width()).arg(height());
 #endif
   if(modified) {
@@ -5571,7 +5571,7 @@ void KMyMoney2App::slotUpdateActions(void)
   action("view_personal_data")->setEnabled(fileOpen);
   action("file_backup")->setEnabled(fileOpen && !d->m_myMoneyView->isDatabase());
   action("file_print")->setEnabled(fileOpen && d->m_myMoneyView->canPrint());
-#if KMM_DEBUG
+#ifdef KMM_DEBUG
   action("view_file_info")->setEnabled(fileOpen);
   action("file_dump")->setEnabled(fileOpen);
 #endif

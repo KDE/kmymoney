@@ -104,7 +104,7 @@ int main(int argc, char *argv[])
   options.add( "n", ki18n("do not open last used file") );
   options.add( "timers", ki18n("enable performance timers") );
 
-#if KMM_DEBUG
+#ifdef KMM_DEBUG
   // The following options are only available when compiled in debug mode
   options.add( "trace", ki18n("turn on program traces") );
   options.add( "dump-actions", ki18n("dump the names of all defined KAction objects to stdout and quit") );
@@ -156,7 +156,7 @@ int main(int argc, char *argv[])
     }
   }
 
-#if KMM_DEBUG
+#ifdef KMM_DEBUG
   if(args->isSet("trace"))
     MyMoneyTracer::on();
   timersOn = args->isSet("timers");
@@ -165,7 +165,7 @@ int main(int argc, char *argv[])
   kmymoney2 = 0;
   kmymoney2 = new KMyMoney2App();
 
-#if KMM_DEBUG
+#ifdef KMM_DEBUG
   if(args->isSet("dump-actions")) {
     kmymoney2->dumpActions();
 
