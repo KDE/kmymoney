@@ -15,5 +15,5 @@ SET (libnewuserwizard_a_UI
 kde4_add_ui_files(libnewuserwizard_a_SOURCES ${libnewuserwizard_a_UI})
 
 KDE4_ADD_LIBRARY(newuserwizard STATIC ${libnewuserwizard_a_SOURCES})
-ADD_DEPENDENCIES(newuserwizard generate_wizardpages_ui_srcs)
+ADD_DEPENDENCIES(newuserwizard widgets)
 

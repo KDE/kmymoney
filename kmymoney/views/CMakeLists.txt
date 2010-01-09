@@ -42,8 +42,8 @@ kde4_add_ui_files(libviews_a_SOURCES ${libviews_a_UI})
 
 KDE4_ADD_LIBRARY(views STATIC ${libviews_a_SOURCES})
 
-ADD_DEPENDENCIES(views generate_dialogs_ui_srcs generate_base_ui_srcs
-  generate_widgets_ui_srcs)
+# we rely on some of the dialogs to be generated
+ADD_DEPENDENCIES(views dialogs)
 
 ########### install files ###############
 

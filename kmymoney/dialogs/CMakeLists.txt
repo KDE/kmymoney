@@ -94,9 +94,8 @@ ADD_CUSTOM_TARGET(generate_dialogs_ui_srcs DEPENDS ${dialogs_ui_srcs})
 
 KDE4_ADD_LIBRARY(dialogs STATIC ${libdialogs_a_SOURCES} ${dialogs_ui_srcs})
 
-# Must build widgets/kmymoneyreportconfigtab1decl.h from .ui
-# before kreportconfigurationfilterdlg.cpp can be compiled.
-ADD_DEPENDENCIES(dialogs generate_widgets_ui_srcs)
+# we rely on the widgets to be generated
+ADD_DEPENDENCIES(dialogs widgets)
 
 ########### install files ###############
 

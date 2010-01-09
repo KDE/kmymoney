@@ -12,11 +12,9 @@ SET (libnewaccountwizard_a_UI
   kloanpayoutpagedecl.ui kloanschedulepagedecl.ui kschedulepagedecl.ui
 	)
 
-# The handling of these ui files depends
-# on libkmymoney.so (the widgets library)
-
-
 kde4_add_ui_files(libnewaccountwizard_a_SOURCES ${libnewaccountwizard_a_UI} )
 
-
 KDE4_ADD_LIBRARY(newaccountwizard STATIC ${libnewaccountwizard_a_SOURCES})
+
+# we rely on some dialogs to be generated
+ADD_DEPENDENCIES(newaccountwizard dialogs)
