@@ -1965,7 +1965,7 @@ bool StdTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyMone
   QList<MyMoneySplit> splits = m_splits;
 
   MyMoneySplit s1;
-  if(torig.splitCount() < 2 && splits.count() == 0) {
+  if(splits.isEmpty()) {
     s1.setMemo(s0.memo());
     splits.append(s1);
 
