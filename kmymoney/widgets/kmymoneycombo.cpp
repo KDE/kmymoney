@@ -152,7 +152,7 @@ void KMyMoneyMVCCombo::focusOutEvent(QFocusEvent* e)
     // else if we cannot create objects, and the current text is not
     // in the list, then we clear the text and the selection.
     } else if(!contains(currentText())) {
-      setCurrentText(QString());
+      clearEditText();
     }
   }
 
@@ -172,7 +172,7 @@ void KMyMoneyMVCCombo::focusOutEvent(QFocusEvent* e)
 
 void KMyMoneyMVCCombo::setCurrentTextById(const QString& id)
 {
-    setCurrentText();
+    clearEditText();
     if(!id.isEmpty()) {
       int index = findData(QVariant(id), Qt::UserRole, Qt::MatchExactly);
       if(index > -1 ) {
@@ -206,7 +206,7 @@ KMyMoneyCombo::KMyMoneyCombo(bool rw, QWidget *w) :
 
 void KMyMoneyCombo::setCurrentTextById(const QString& id)
 {
-    setCurrentText();
+    clearEditText();
     if(!id.isEmpty()) {
       Q3ListViewItem* item = selector()->item(id);
       if(item) {
@@ -391,7 +391,7 @@ void KMyMoneyCombo::focusOutEvent(QFocusEvent* e)
     // else if we cannot create objects, and the current text is not
     // in the list, then we clear the text and the selection.
     } else if(!m_completion->selector()->contains(currentText())) {
-      setCurrentText(QString());
+      clearEditText();
     }
   }
 
