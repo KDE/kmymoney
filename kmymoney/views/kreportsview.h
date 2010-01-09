@@ -33,7 +33,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <q3valuevector.h>
+//#include <q3valuevector.h>
 #include <qwidget.h>
 #include <QVBoxLayout>
 #include <QList>

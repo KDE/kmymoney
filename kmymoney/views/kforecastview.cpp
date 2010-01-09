@@ -49,7 +49,9 @@
 #include "pivotgrid.h"
 
 KForecastView::KForecastView(QWidget *parent) :
-  KForecastViewDecl(parent)
+  KForecastViewDecl(parent),
+  m_chartLayout(new QVBoxLayout(m_tabChart)),
+  m_forecastChart(new KReportChartView(m_tabChart))
 {
   for(int i=0; i < MaxViewTabs; ++i)
     m_needReload[i] = false;
@@ -68,11 +70,11 @@ KForecastView::KForecastView(QWidget *parent) :
   m_summaryList->setAllColumnsShowFocus(true);
   m_advancedList->setAllColumnsShowFocus(true);
 
-  m_forecastChart = new KReportChartView(m_tabChart);
   m_forecastChart->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );
+  m_chartLayout->setSpacing(6);
+  m_chartLayout->addWidget( m_forecastChart );
 
   loadForecastSettings();
-
 }
 
 KForecastView::~KForecastView()
@@ -674,7 +676,9 @@ void KForecastView::loadChartView(void)
 
   // Adjust the size
   m_forecastChart->resize(m_tab->width() - 10, m_tab->height());
+  //m_forecastChart->show();
   m_forecastChart->update();
+
 }
 
 #include "kforecastview.moc"

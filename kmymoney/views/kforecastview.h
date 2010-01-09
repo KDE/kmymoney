@@ -19,6 +19,8 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
+#include <QList>
+#include <QVBoxLayout>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -33,7 +35,6 @@
 #include "ui_kforecastviewdecl.h"
 #include "kmymoneyaccounttreeforecast.h"
 #include "kreportchartview.h"
-#include <QList>
 
 using namespace reports;
 
@@ -140,6 +141,7 @@ private:
   KMyMoneyAccountTreeForecastItem*    m_incomeItem;
   KMyMoneyAccountTreeForecastItem*    m_expenseItem;
 
+  QVBoxLayout* m_chartLayout;
   KReportChartView* m_forecastChart;
 
 };
