@@ -339,56 +339,6 @@ QSize KMyMoneyCombo::sizeHint() const
 #endif
 }
 
-KMyMoneyComboAction::KMyMoneyComboAction(QWidget* w) :
-  KMyMoneyCombo(false, w)
-{
-  m_completion = new kMyMoneyCompletion(this);
-  QString num;
-  // add the items in reverse order of appearance (see KMyMoneySelector::newItem() for details)
-  selector()->newTopItem(i18n("ATM"), QString(), num.setNum(KMyMoneyRegister::ActionAtm));
-  selector()->newTopItem(i18n("Withdrawal"), QString(), num.setNum(KMyMoneyRegister::ActionWithdrawal));
-  selector()->newTopItem(i18n("Transfer"), QString(), num.setNum(KMyMoneyRegister::ActionTransfer));
-  selector()->newTopItem(i18n("Deposit"), QString(), num.setNum(KMyMoneyRegister::ActionDeposit));
-  selector()->newTopItem(i18n("Cheque"), QString(), num.setNum(KMyMoneyRegister::ActionCheck));
-  connect(m_completion, SIGNAL(itemSelected(const QString&)), this, SLOT(slotItemSelected(const QString&)));
-  connect(this, SIGNAL(itemSelected(const QString&)), this, SLOT(slotSetAction(const QString&)));
-}
-
-void KMyMoneyComboAction::protectItem(int id, bool protect)
-{
-  QString num;
-  selector()->protectItem(num.setNum(id), protect);
-}
-
-void KMyMoneyComboAction::slotSetAction(const QString& act)
-{
-  setSelectedItem(act);
-  update();
-  emit actionSelected(action());
-}
-
-void KMyMoneyComboAction::setAction(int action)
-{
-  if(action < 0 || action > 5) {
-    kDebug(2) << "KMyMoneyComboAction::slotSetAction(" << action << ") invalid. Replaced with 2\n";
-    action = 2;
-  }
-  QString act;
-  act.setNum(action);
-  setSelectedItem(act);
-}
-
-int KMyMoneyComboAction::action(void) const
-{
-  QStringList list;
-  selector()->selectedItems(list);
-  if(!list.isEmpty()) {
-    return list[0].toInt();
-  }
-  kDebug(2) << "KMyMoneyComboAction::action(void): unknown selection\n";
-  return 0;
-}
-
 KMyMoneyCashFlowCombo::KMyMoneyCashFlowCombo(QWidget* w, MyMoneyAccount::accountTypeE accountType) :
   KMyMoneyCombo(false, w)
 {

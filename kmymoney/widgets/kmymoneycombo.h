@@ -224,30 +224,6 @@ private:
   * @author Thomas Baumgart
   * This class implements a combo box with the possible states for
   * actions (Deposit, Withdrawal, etc.).
-  *
-  * @deprecated
-  */
-class KMyMoneyComboAction : public KMyMoneyCombo
-{
-  Q_OBJECT
-public:
-  KMyMoneyComboAction(QWidget *w = 0);
-
-  void setAction(int state);
-  int action(void) const;
-  void protectItem(int id, bool protect);
-
-protected slots:
-  void slotSetAction(const QString&);
-
-signals:
-  void actionSelected(int);
-};
-
-/**
-  * @author Thomas Baumgart
-  * This class implements a combo box with the possible states for
-  * actions (Deposit, Withdrawal, etc.).
   */
 class KMyMoneyCashFlowCombo : public KMyMoneyCombo
 {
