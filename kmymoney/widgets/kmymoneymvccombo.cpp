@@ -35,9 +35,11 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-/*#include <klocale.h>
-#include <k3listview.h>
+#include <klocale.h>
 #include <kdebug.h>
+/*
+#include <k3listview.h>
+
 #include <kconfig.h>*/
 
 // ----------------------------------------------------------------------------
@@ -206,6 +208,80 @@ void KMyMoneyPayeeCombo::loadPayees(const QList<MyMoneyPayee>& list)
   //set the text to empty and the index to the first item on the list
   setCurrentIndex(0);
   clearEditText();
+}
+
+KMyMoneyReconcileCombo::KMyMoneyReconcileCombo(QWidget* w) :
+  KMyMoneyMVCCombo(false, w)
+{
+  // add the items in reverse order of appearance (see KMyMoneySelector::newItem() for details)
+  addItem(i18n("Reconciled"), QVariant("R"));
+  addItem(i18nc("Reconciliation state 'Cleared'", "Cleared"), QVariant("C"));
+  addItem(i18n("Not reconciled"), QVariant(" "));
+  addItem(" ", QVariant("U"));
+
+  connect(this, SIGNAL(itemSelected(const QString&)), this, SLOT(slotSetState(const QString&)));
+}
+
+void KMyMoneyReconcileCombo::slotSetState(const QString& state)
+{
+  setSelectedItem(state);
+}
+
+void KMyMoneyReconcileCombo::removeDontCare(void)
+{
+  //Remove unknown state
+  removeItem(3);
+}
+
+void KMyMoneyReconcileCombo::setState(MyMoneySplit::reconcileFlagE state)
+{
+  QString id;
+
+  switch(state) {
+    case MyMoneySplit::NotReconciled:
+      id = ' ';
+      break;
+    case MyMoneySplit::Cleared:
+      id = 'C';
+      break;
+    case MyMoneySplit::Reconciled:
+      id = 'R';
+      break;
+    case MyMoneySplit::Frozen:
+      id = 'F';
+      break;
+    case MyMoneySplit::Unknown:
+      id = 'U';
+      break;
+    default:
+      kDebug(2) << "Unknown reconcile state '" << state << "' in KMyMoneyReconcileCombo::setState()\n";
+      break;
+  }
+  setSelectedItem(id);
+}
+
+MyMoneySplit::reconcileFlagE KMyMoneyReconcileCombo::state(void) const
+{
+  MyMoneySplit::reconcileFlagE state = MyMoneySplit::NotReconciled;
+
+  QVariant data = itemData(currentIndex());
+  QString dataVal;
+  if (data.isValid())
+    dataVal = data.toString();
+  else
+    return state;
+
+  if(!dataVal.isEmpty()) {
+    if(dataVal == "C")
+      state = MyMoneySplit::Cleared;
+    if(dataVal == "R")
+      state = MyMoneySplit::Reconciled;
+    if(dataVal == "F")
+      state = MyMoneySplit::Frozen;
+    if(dataVal == "U")
+      state = MyMoneySplit::Unknown;
+  }
+  return state;
 }
 
 #include "kmymoneymvccombo.moc"

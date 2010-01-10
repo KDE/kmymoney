@@ -48,14 +48,12 @@
 #include <kmymoneylineedit.h>
 #include <kmymoneyaccountcompletion.h>
 #include <kmymoneyaccountselector.h>
+#include "kmymoneymvccombo.h"
 #include <mymoneyfile.h>
 #include <transactionform.h>
-
 #include "ksplittransactiondlg.h"
 #include "kcurrencycalculator.h"
-
 #include "kmymoneyglobalsettings.h"
-
 #include "investactivities.h"
 
 using namespace KMyMoneyRegister;

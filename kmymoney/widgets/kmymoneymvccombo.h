@@ -40,9 +40,10 @@
 // Project Includes
 
 #include <mymoneypayee.h>
+#include <mymoneysplit.h>
 
 /*#include <mymoneyutils.h>
-#include <mymoneysplit.h>
+
 #include <register.h>
 #include <mymoneyaccount.h>
 #include <transaction.h>
@@ -162,5 +163,23 @@ public:
   void loadPayees(const QList<MyMoneyPayee>& list);
 };
 
+/**
+  * @author Thomas Baumgart
+  * This class implements a combo box with the possible states for
+  * reconciliation.
+  */
+class KMyMoneyReconcileCombo : public KMyMoneyMVCCombo
+{
+  Q_OBJECT
+public:
+  KMyMoneyReconcileCombo(QWidget *w = 0);
+
+  void setState(MyMoneySplit::reconcileFlagE state);
+  MyMoneySplit::reconcileFlagE state(void) const;
+  void removeDontCare(void);
+
+protected slots:
+  void slotSetState(const QString&);
+};
 
 #endif

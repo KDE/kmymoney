@@ -223,25 +223,6 @@ private:
 /**
   * @author Thomas Baumgart
   * This class implements a combo box with the possible states for
-  * reconciliation.
-  */
-class KMyMoneyReconcileCombo : public KMyMoneyCombo
-{
-  Q_OBJECT
-public:
-  KMyMoneyReconcileCombo(QWidget *w = 0);
-
-  void setState(MyMoneySplit::reconcileFlagE state);
-  MyMoneySplit::reconcileFlagE state(void) const;
-  void removeDontCare(void);
-
-protected slots:
-  void slotSetState(const QString&);
-};
-
-/**
-  * @author Thomas Baumgart
-  * This class implements a combo box with the possible states for
   * actions (Deposit, Withdrawal, etc.).
   *
   * @deprecated
