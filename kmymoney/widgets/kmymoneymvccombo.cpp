@@ -20,6 +20,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QStandardItemModel>
+#include <QStandardItem>
 /*#include <QRect>
 #include <QStyle>
 #include <QPainter>
@@ -45,12 +47,14 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include <registeritem.h>
+
 /*#include <kconfiggroup.h>
 #include "kmymoneyselector.h"
 #include <kmymoneycompletion.h>
 #include <kmymoneylineedit.h>
 #include <mymoneysplit.h>
-#include <registeritem.h>
+
 #include <mymoneyscheduled.h>
 #include "kmymoneyutils.h"*/
 
@@ -174,14 +178,23 @@ void KMyMoneyMVCCombo::focusOutEvent(QFocusEvent* e)
 
 void KMyMoneyMVCCombo::setCurrentTextById(const QString& id)
 {
-    setCurrentText();
+    clearEditText();
     if(!id.isEmpty()) {
       int index = findData(QVariant(id), Qt::UserRole, Qt::MatchExactly);
       if(index > -1 ) {
         setCompletedText(itemText(index));
         setEditText(itemText(index));
+        setCurrentIndex(index);
       }
     }
+}
+
+
+void KMyMoneyMVCCombo::protectItem(int id, bool protect)
+{
+  QStandardItemModel* standardModel = dynamic_cast<QStandardItemModel*> (model());
+  QStandardItem* standardItem = standardModel->item(id);
+  standardItem->setSelectable(protect);
 }
 
 KMyMoneyPayeeCombo::KMyMoneyPayeeCombo(QWidget* parent) :

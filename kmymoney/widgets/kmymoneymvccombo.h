@@ -84,6 +84,8 @@ public:
     */
   void setSelectedItem(const QString& id);
 
+  void protectItem(int id, bool protect);
+
 protected slots:
   void activated(int index);
 
