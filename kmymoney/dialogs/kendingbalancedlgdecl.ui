@@ -879,7 +879,7 @@ All information you have entered into this wizard will be shown and all transact
   <customwidget>
    <class>KMyMoneyPayeeCombo</class>
    <extends>KComboBox</extends>
-   <header>kmymoneycombo.h</header>
+   <header>kmymoneymvccombo.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>

@@ -9,11 +9,11 @@ SET(kmymoney_STAT_HEADERS
   kmymoneyaccountselector.h kmymoneyaccounttreebase.h
   kmymoneyaccounttreebudget.h kmymoneyaccounttreeforecast.h
   kmymoneyaccounttree.h kmymoneycategory.h kmymoneychecklistitem.h
-  kmymoneycombo.h kmymoneycompletion.h kmymoneycurrencyselector.h
-  kmymoneydateinput.h kmymoneyedit.h kmymoneylineedit.h
-  kmymoneylistviewitem.h kmymoneyselector.h kmymoneytitlelabel.h
-  kmymoneywizard.h register.h registeritem.h scheduledtransaction.h
-  selectedtransaction.h stdtransactiondownloaded.h
+  kmymoneycombo.h kmymoneymvccombo.h kmymoneycompletion.h
+  kmymoneycurrencyselector.h  kmymoneydateinput.h kmymoneyedit.h
+  kmymoneylineedit.h kmymoneylistviewitem.h kmymoneyselector.h
+  kmymoneytitlelabel.h kmymoneywizard.h register.h registeritem.h
+  scheduledtransaction.h selectedtransaction.h stdtransactiondownloaded.h
   stdtransactionmatched.h transactioneditorcontainer.h
   transactionform.h transaction.h transactionsortoptionimpl.h
   kmymoneyreportconfigtabimpl.h kmymoneyreportcontrolimpl.h
@@ -36,6 +36,7 @@ SET(_uncritial_common_sources
   kmymoneycalculator.cpp
   kmymoneychecklistitem.cpp
   kmymoneycombo.cpp
+  kmymoneymvccombo.cpp
   kmymoneycompletion.cpp
   kmymoneycurrencyselector.cpp
   kmymoneydateinput.cpp

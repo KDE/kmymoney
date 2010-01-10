@@ -145,6 +145,7 @@
 #include "dialogs/kbalancewarning.h"
 
 #include "widgets/kmymoneycombo.h"
+#include "widgets/kmymoneymvccombo.h"
 #include "widgets/kmymoneycompletion.h"
 
 #include "views/kmymoneyview.h"

@@ -52,6 +52,7 @@
 #include <transactioneditor.h>
 #include <investtransactioneditor.h>
 #include <kmymoneyutils.h>
+#include "kmymoneymvccombo.h"
 
 #include "kmymoneyglobalsettings.h"
 

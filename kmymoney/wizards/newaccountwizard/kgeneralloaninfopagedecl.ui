@@ -354,7 +354,7 @@ Enter the due date of the first payment in the current year</string>
   <customwidget>                                                                                 
    <class>KMyMoneyPayeeCombo</class>                                                             
    <extends>QWidget</extends>                                                                    
-   <header>kmymoneycombo.h</header>                                                              
+   <header>kmymoneymvccombo.h</header>
    <container>1</container>                                                                      
   </customwidget>        
   <customwidget>

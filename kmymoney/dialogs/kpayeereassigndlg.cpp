@@ -34,7 +34,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoneycombo.h>
+#include <kmymoneymvccombo.h>
 #include <kguiutils.h>
 
 KPayeeReassignDlg::KPayeeReassignDlg( QWidget* parent) :

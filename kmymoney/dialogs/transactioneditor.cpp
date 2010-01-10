@@ -47,6 +47,7 @@
 // Project Includes
 
 #include <kmymoneycategory.h>
+#include "kmymoneymvccombo.h"
 #include <kmymoneydateinput.h>
 #include <kmymoneyedit.h>
 #include <kmymoneylineedit.h>
