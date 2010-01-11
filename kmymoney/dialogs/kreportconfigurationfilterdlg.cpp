@@ -284,6 +284,7 @@ void KReportConfigurationFilterDlg::slotReset(void)
   //
   // Set up the widget from the initial filter
   //
+  m_currentState = m_initialState;
 
   //
   // Report Properties
@@ -638,10 +639,15 @@ void KReportConfigurationFilterDlg::slotReset(void)
   QDate dateFrom, dateTo;
   if ( m_initialState.dateFilter( dateFrom, dateTo ) )
   {
-    m_dateRange->setCurrentItem(MyMoneyTransactionFilter::userDefined);
-    m_fromDate->setDate(dateFrom);
-    m_toDate->setDate(dateTo);
-    slotDateChanged();
+    if(m_initialState.isUserDefined()) {
+      m_dateRange->setCurrentItem(MyMoneyTransactionFilter::userDefined);
+      m_fromDate->setDate(dateFrom);
+      m_toDate->setDate(dateTo);
+    } else {
+      m_fromDate->setDate(dateFrom);
+      m_toDate->setDate(dateTo);
+      KFindTransactionDlg::slotDateChanged();
+    }
   }
   else
   {
@@ -654,11 +660,7 @@ void KReportConfigurationFilterDlg::slotReset(void)
 
 void KReportConfigurationFilterDlg::slotDateChanged(void)
 {
-  if(m_initialState.isUserDefined()) {
-    m_dateRange->blockSignals(true);
-    m_dateRange->setCurrentItem(MyMoneyTransactionFilter::userDefined);
-    m_dateRange->blockSignals(false);
-  } else {
+  if(m_dateRange->currentItem() != MyMoneyTransactionFilter::userDefined) {
     KFindTransactionDlg::slotDateChanged();
   }
   slotUpdateSelections();
