@@ -49,7 +49,7 @@
 #include <transactioneditor.h>
 #include <kmymoneylineedit.h>
 #include <kmymoneydateinput.h>
-#include <kmymoneycombo.h>
+#include <kmymoneymvccombo.h>
 #include <kguiutils.h>
 #include <kmymoneyutils.h>
 

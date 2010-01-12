@@ -40,7 +40,9 @@
 // Project Includes
 
 #include <mymoneypayee.h>
+#include <mymoneyscheduled.h>
 #include <mymoneysplit.h>
+#include <mymoneytransactionfilter.h>
 
 /*#include <mymoneyutils.h>
 
@@ -48,8 +50,7 @@
 #include <mymoneyaccount.h>
 #include <transaction.h>
 
-#include <mymoneytransactionfilter.h>
-#include <mymoneyscheduled.h>
+
 
 class kMyMoneyCompletion;
 class KMyMoneySelector;
@@ -184,4 +185,114 @@ protected slots:
   void slotSetState(const QString&);
 };
 
+class KMyMoneyGeneralCombo : public KComboBox
+{
+  Q_OBJECT
+public:
+  KMyMoneyGeneralCombo(QWidget* parent = 0);
+  virtual ~KMyMoneyGeneralCombo();
+
+  void insertItem(const QString& txt, int id, int idx = -1);
+
+  void setCurrentItem(int id);
+  int currentItem(void) const;
+
+  void removeItem(int id);
+
+public slots:
+  void clear(void);
+
+signals:
+  void itemSelected(int id);
+
+protected:
+  // prevent the caller to use the standard KComboBox insertItem function with a default idx
+  void insertItem(const QString&);
+
+protected slots:
+  void slotChangeItem(int idx);
+
+};
+
+/**
+ * This class implements a time period selector
+ * @author Thomas Baumgart
+ */
+class KMyMoneyPeriodCombo : public KMyMoneyGeneralCombo
+{
+  Q_OBJECT
+public:
+  KMyMoneyPeriodCombo(QWidget* parent = 0);
+
+  MyMoneyTransactionFilter::dateOptionE currentItem(void) const;
+  void setCurrentItem(MyMoneyTransactionFilter::dateOptionE id);
+
+  /**
+   * This function returns the actual start date for the given
+   * period definition given by @p id. For user defined periods
+   * the returned value is QDate()
+   */
+  static QDate start(MyMoneyTransactionFilter::dateOptionE id);
+
+  /**
+   * This function returns the actual end date for the given
+   * period definition given by @p id. For user defined periods
+   * the returned value is QDate()
+   */
+  static QDate end(MyMoneyTransactionFilter::dateOptionE id);
+
+  // static void dates(QDate& start, QDate& end, MyMoneyTransactionFilter::dateOptionE id);
+};
+
+/**
+ * This class implements an occurrence selector
+ * as a parent class for both OccurrencePeriod and Frequency combos
+ *
+ * @author Colin Wright
+ */
+class KMyMoneyOccurrenceCombo : public KMyMoneyGeneralCombo
+{
+  Q_OBJECT
+public:
+  KMyMoneyOccurrenceCombo(QWidget* parent = 0);
+
+  MyMoneySchedule::occurrenceE currentItem(void) const;
+};
+
+/**
+ * This class implements an occurrence period selector
+ *
+ * @author Colin Wright
+ */
+class KMyMoneyOccurrencePeriodCombo : public KMyMoneyOccurrenceCombo
+{
+  Q_OBJECT
+public:
+  KMyMoneyOccurrencePeriodCombo(QWidget* parent = 0);
+};
+
+/**
+ * This class implements a payment frequency selector
+ * @author Thomas Baumgart
+ */
+class KMyMoneyFrequencyCombo : public KMyMoneyOccurrenceCombo
+{
+  Q_OBJECT
+public:
+  KMyMoneyFrequencyCombo(QWidget* parent = 0);
+
+  /**
+   * This method returns the number of events for the selected payment
+   * frequency (eg for yearly the return value is 1 and for monthly it
+   * is 12). In case, the frequency cannot be converted (once, every other year, etc.)
+   * the method returns 0.
+   */
+  int eventsPerYear(void) const;
+  /**
+   * This method returns the number of days between two events of
+   * the selected frequency. The return value for months is based
+   * on 30 days and the year is 360 days long.
+   */
+  int daysBetweenEvents(void) const;
+};
 #endif
