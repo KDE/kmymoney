@@ -63,32 +63,6 @@
            </property>
           </widget>
          </item>
-         <item>
-          <widget class="KPushButton" name="m_resetButton">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="text">
-            <string>Res</string>
-           </property>
-           <property name="shortcut">
-            <string/>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="KPushButton" name="m_updateButton">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="text">
-            <string>Upd</string>
-           </property>
-           <property name="shortcut">
-            <string/>
-           </property>
-          </widget>
-         </item>
         </layout>
        </item>
        <item>
@@ -149,6 +123,36 @@
           <string>Hide unused budget categories</string>
          </property>
         </widget>
+       </item>
+       <item>
+         <layout class="QHBoxLayout">
+          <item>
+           <widget class="KPushButton" name="m_resetButton">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>Res</string>
+             </property>
+             <property name="shortcut">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="KPushButton" name="m_updateButton">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>Upd</string>
+             </property>
+             <property name="shortcut">
+              <string/>
+             </property>
+            </widget>
+           </item>
+         </layout>
        </item>
        <item>
         <widget class="QGroupBox" name="m_assignmentBox">
