@@ -86,6 +86,15 @@ public:
     */
   void setSelectedItem(const QString& id);
 
+  /**
+    * Protect an entry from selection. Protection is controlled by
+    * the parameter @p protect.
+    *
+    * @param itemId id of item for which to modify the protection
+    * @param protect if true, the entry specified by @p accId cannot be
+    *                selected. If false, it can be selected.
+    *                Defaults to @p true.
+    */
   void protectItem(int id, bool protect);
 
 protected slots:

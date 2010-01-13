@@ -190,9 +190,9 @@ void KMyMoneyMVCCombo::setCurrentTextById(const QString& id)
 
 void KMyMoneyMVCCombo::protectItem(int id, bool protect)
 {
-  QStandardItemModel* standardModel = dynamic_cast<QStandardItemModel*> (model());
+  QStandardItemModel* standardModel = qobject_cast<QStandardItemModel*> (model());
   QStandardItem* standardItem = standardModel->item(id);
-  standardItem->setSelectable(protect);
+  standardItem->setSelectable(!protect);
 }
 
 KMyMoneyPayeeCombo::KMyMoneyPayeeCombo(QWidget* parent) :
