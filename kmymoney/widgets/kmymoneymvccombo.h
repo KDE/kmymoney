@@ -43,10 +43,11 @@
 #include <mymoneyscheduled.h>
 #include <mymoneysplit.h>
 #include <mymoneytransactionfilter.h>
+#include <register.h>
 
 /*#include <mymoneyutils.h>
 
-#include <register.h>
+
 #include <mymoneyaccount.h>
 #include <transaction.h>
 
@@ -183,6 +184,62 @@ public:
 
 protected slots:
   void slotSetState(const QString&);
+};
+
+/**
+  * @author Thomas Baumgart
+  * This class implements a combo box with the possible states for
+  * actions (Deposit, Withdrawal, etc.).
+  */
+class KMyMoneyCashFlowCombo : public KMyMoneyMVCCombo
+{
+  Q_OBJECT
+public:
+  /**
+    * Create a combo box that contains the entries "Pay to", "From" and
+    * "  " for don't care.
+    */
+  explicit KMyMoneyCashFlowCombo(QWidget *w = 0, MyMoneyAccount::accountTypeE type = MyMoneyAccount::Asset);
+
+  void setDirection(KMyMoneyRegister::CashFlowDirection dir);
+  KMyMoneyRegister::CashFlowDirection direction(void) const { return m_dir; }
+  void removeDontCare(void);
+
+protected slots:
+  void slotSetDirection(const QString& id);
+
+signals:
+  void directionSelected(KMyMoneyRegister::CashFlowDirection);
+
+private:
+  KMyMoneyRegister::CashFlowDirection   m_dir;
+};
+
+/**
+  * @author Thomas Baumgart
+  * This class implements a combo box with the possible activities
+  * for investment transactions (buy, sell, dividend, etc.)
+  */
+class KMyMoneyActivityCombo : public KMyMoneyMVCCombo
+{
+  Q_OBJECT
+public:
+  /**
+    * Create a combo box that contains the entries "Buy", "Sell" etc.
+    */
+  KMyMoneyActivityCombo(QWidget *w = 0);
+
+  void setActivity(MyMoneySplit::investTransactionTypeE activity);
+  MyMoneySplit::investTransactionTypeE activity(void) const { return m_activity; }
+
+protected slots:
+  void slotSetActivity(const QString& id);
+
+signals:
+  void activitySelected(MyMoneySplit::investTransactionTypeE);
+
+private:
+  MyMoneySplit::investTransactionTypeE  m_activity;
 };
 
 class KMyMoneyGeneralCombo : public KComboBox

@@ -295,6 +295,86 @@ MyMoneySplit::reconcileFlagE KMyMoneyReconcileCombo::state(void) const
   return state;
 }
 
+KMyMoneyCashFlowCombo::KMyMoneyCashFlowCombo(QWidget* w, MyMoneyAccount::accountTypeE accountType) :
+  KMyMoneyMVCCombo(false, w)
+{
+  addItem(" ", QVariant(KMyMoneyRegister::Unknown));
+  if(accountType == MyMoneyAccount::Income || accountType == MyMoneyAccount::Expense) {
+    // this is used for income/expense accounts to just show the reverse sense
+    addItem(i18nc("Activity for income categories", "Received"), QVariant(KMyMoneyRegister::Payment));
+    addItem(i18nc("Activity for expense categories", "Paid"), QVariant(KMyMoneyRegister::Deposit));
+  } else {
+    addItem(i18n("Pay to"), QVariant(KMyMoneyRegister::Payment));
+    addItem(i18n("From"), QVariant(KMyMoneyRegister::Deposit));
+  }
+
+  connect(this, SIGNAL(itemSelected(const QString&)), this, SLOT(slotSetDirection(const QString&)));
+}
+
+void KMyMoneyCashFlowCombo::setDirection(KMyMoneyRegister::CashFlowDirection dir)
+{
+  m_dir = dir;
+  QString num;
+  setSelectedItem(num.setNum(dir));
+}
+
+void KMyMoneyCashFlowCombo::slotSetDirection(const QString& id)
+{
+  QString num;
+  for(int i = KMyMoneyRegister::Deposit; i <= KMyMoneyRegister::Unknown; ++i) {
+    num.setNum(i);
+    if(num == id) {
+      m_dir = static_cast<KMyMoneyRegister::CashFlowDirection>(i);
+      break;
+    }
+  }
+  emit directionSelected(m_dir);
+  update();
+}
+
+void KMyMoneyCashFlowCombo::removeDontCare(void)
+{
+  removeItem(findData(QVariant(KMyMoneyRegister::Unknown), Qt::UserRole, Qt::MatchExactly));
+}
+
+
+KMyMoneyActivityCombo::KMyMoneyActivityCombo(QWidget* w) :
+  KMyMoneyMVCCombo(false, w),
+  m_activity(MyMoneySplit::UnknownTransactionType)
+{
+  addItem(i18n("Buy shares"), QVariant(MyMoneySplit::BuyShares));
+  addItem(i18n("Sell shares"), QVariant(MyMoneySplit::SellShares));
+  addItem(i18n("Dividend"), QVariant(MyMoneySplit::Dividend));
+  addItem(i18n("Reinvest dividend"), QVariant(MyMoneySplit::ReinvestDividend));
+  addItem(i18n("Yield"), QVariant(MyMoneySplit::Yield));
+  addItem(i18n("Add shares"), QVariant(MyMoneySplit::AddShares));
+  addItem(i18n("Remove shares"), QVariant(MyMoneySplit::RemoveShares));
+  addItem(i18n("Split shares"), QVariant(MyMoneySplit::SplitShares));
+
+  connect(this, SIGNAL(itemSelected(const QString&)), this, SLOT(slotSetActivity(const QString&)));
+}
+
+void KMyMoneyActivityCombo::setActivity(MyMoneySplit::investTransactionTypeE activity)
+{
+  m_activity = activity;
+  QString num;
+  setSelectedItem(num.setNum(activity));
+}
+
+void KMyMoneyActivityCombo::slotSetActivity(const QString& id)
+{
+  QString num;
+  for(int i = MyMoneySplit::BuyShares; i <= MyMoneySplit::SplitShares; ++i) {
+    num.setNum(i);
+    if(num == id) {
+      m_activity = static_cast<MyMoneySplit::investTransactionTypeE>(i);
+      break;
+    }
+  }
+  emit activitySelected(m_activity);
+  update();
+}
+
 KMyMoneyGeneralCombo::KMyMoneyGeneralCombo(QWidget* w) :
   KComboBox(w)
 {
@@ -312,7 +392,7 @@ void KMyMoneyGeneralCombo::setCurrentItem(int id)
 
 int KMyMoneyGeneralCombo::currentItem(void) const
 {
-  return currentIndex();
+  return itemData(currentIndex()).toInt();
 }
 
 void KMyMoneyGeneralCombo::clear(void)
@@ -322,7 +402,7 @@ void KMyMoneyGeneralCombo::clear(void)
 
 void KMyMoneyGeneralCombo::insertItem(const QString& txt, int id, int idx)
 {
-  addItem(txt, QVariant(id));
+  KComboBox::insertItem(idx, txt, QVariant(id));
 }
 
 void KMyMoneyGeneralCombo::removeItem(int id)
