@@ -292,7 +292,7 @@ void KAccountsView::loadIconView(void)
     accountMap[QString("%1-%2").arg((*it_a).name()).arg((*it_a).id())] = *it_a;
   }
 
-  bool showClosedAccounts = kmymoney2->toggleAction("view_show_all_accounts")->isChecked()
+  bool showClosedAccounts = kmymoney->toggleAction("view_show_all_accounts")->isChecked()
       || !KMyMoneyGlobalSettings::hideClosedAccounts();
   bool existNewIcons = false;
 
@@ -469,7 +469,7 @@ bool KAccountsView::loadSubAccounts(KMyMoneyAccountTreeItem* parent, const QStri
 {
   MyMoneyFile* file = MyMoneyFile::instance();
   bool unused = false;
-  bool showClosedAccounts = kmymoney2->toggleAction("view_show_all_accounts")->isChecked()
+  bool showClosedAccounts = kmymoney->toggleAction("view_show_all_accounts")->isChecked()
                          || !KMyMoneyGlobalSettings::hideClosedAccounts();
 
   QStringList::const_iterator it_a;

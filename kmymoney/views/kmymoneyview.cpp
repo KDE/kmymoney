@@ -117,8 +117,8 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   m_fileOpen(false),
   m_fmode(0600)
 {
-  // the global variable kmymoney2 is not yet assigned. So we construct it here
-  QObject* kmymoney2 = parent->parent();
+  // the global variable kmymoney is not yet assigned. So we construct it here
+  QObject* kmymoney = parent->parent();
   newStorage();
 
   m_model = new KPageWidgetModel();
@@ -145,13 +145,13 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   m_institutionsViewFrame->setHeader(QString(""));
   addTitleBar(m_institutionsView, i18n("Institutions"));
 
-  connect(m_institutionsView, SIGNAL(selectObject(const MyMoneyObject&)), kmymoney2, SLOT(slotSelectAccount(const MyMoneyObject&)));
-  connect(m_institutionsView, SIGNAL(selectObject(const MyMoneyObject&)), kmymoney2, SLOT(slotSelectInstitution(const MyMoneyObject&)));
-  connect(m_institutionsView, SIGNAL(openContextMenu(const MyMoneyObject&)), kmymoney2, SLOT(slotShowAccountContextMenu(const MyMoneyObject&)));
-  connect(m_institutionsView, SIGNAL(openContextMenu(const MyMoneyObject&)), kmymoney2, SLOT(slotShowInstitutionContextMenu(const MyMoneyObject&)));
-  connect(m_institutionsView, SIGNAL(openObject(const MyMoneyObject&)), kmymoney2, SLOT(slotInstitutionEdit(const MyMoneyObject&)));
-  connect(m_institutionsView, SIGNAL(openObject(const MyMoneyObject&)), kmymoney2, SLOT(slotAccountOpen(const MyMoneyObject&)));
-  connect(m_institutionsView, SIGNAL(reparent(const MyMoneyAccount&, const MyMoneyInstitution&)), kmymoney2, SLOT(slotReparentAccount(const MyMoneyAccount&, const MyMoneyInstitution&)));
+  connect(m_institutionsView, SIGNAL(selectObject(const MyMoneyObject&)), kmymoney, SLOT(slotSelectAccount(const MyMoneyObject&)));
+  connect(m_institutionsView, SIGNAL(selectObject(const MyMoneyObject&)), kmymoney, SLOT(slotSelectInstitution(const MyMoneyObject&)));
+  connect(m_institutionsView, SIGNAL(openContextMenu(const MyMoneyObject&)), kmymoney, SLOT(slotShowAccountContextMenu(const MyMoneyObject&)));
+  connect(m_institutionsView, SIGNAL(openContextMenu(const MyMoneyObject&)), kmymoney, SLOT(slotShowInstitutionContextMenu(const MyMoneyObject&)));
+  connect(m_institutionsView, SIGNAL(openObject(const MyMoneyObject&)), kmymoney, SLOT(slotInstitutionEdit(const MyMoneyObject&)));
+  connect(m_institutionsView, SIGNAL(openObject(const MyMoneyObject&)), kmymoney, SLOT(slotAccountOpen(const MyMoneyObject&)));
+  connect(m_institutionsView, SIGNAL(reparent(const MyMoneyAccount&, const MyMoneyInstitution&)), kmymoney, SLOT(slotReparentAccount(const MyMoneyAccount&, const MyMoneyInstitution&)));
   connect(this, SIGNAL(reconciliationStarts(const MyMoneyAccount&, const QDate&, const MyMoneyMoney&)), m_institutionsView, SLOT(slotReconcileAccount(const MyMoneyAccount&, const QDate&, const MyMoneyMoney&)));
 
   // Page 2
@@ -161,12 +161,12 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   m_accountsViewFrame->setHeader(QString(""));
   addTitleBar(m_accountsView, i18n("Accounts"));
 
-  connect(m_accountsView, SIGNAL(selectObject(const MyMoneyObject&)), kmymoney2, SLOT(slotSelectAccount(const MyMoneyObject&)));
-  connect(m_accountsView, SIGNAL(selectObject(const MyMoneyObject&)), kmymoney2, SLOT(slotSelectInstitution(const MyMoneyObject&)));
-  connect(m_accountsView, SIGNAL(selectObject(const MyMoneyObject&)), kmymoney2, SLOT(slotSelectInvestment(const MyMoneyObject&)));
-  connect(m_accountsView, SIGNAL(openContextMenu(const MyMoneyObject&)), kmymoney2, SLOT(slotShowAccountContextMenu(const MyMoneyObject&)));
-  connect(m_accountsView, SIGNAL(openObject(const MyMoneyObject&)), kmymoney2, SLOT(slotAccountOpen(const MyMoneyObject&)));
-  connect(m_accountsView, SIGNAL(reparent(const MyMoneyAccount&, const MyMoneyAccount&)), kmymoney2, SLOT(slotReparentAccount(const MyMoneyAccount&, const MyMoneyAccount&)));
+  connect(m_accountsView, SIGNAL(selectObject(const MyMoneyObject&)), kmymoney, SLOT(slotSelectAccount(const MyMoneyObject&)));
+  connect(m_accountsView, SIGNAL(selectObject(const MyMoneyObject&)), kmymoney, SLOT(slotSelectInstitution(const MyMoneyObject&)));
+  connect(m_accountsView, SIGNAL(selectObject(const MyMoneyObject&)), kmymoney, SLOT(slotSelectInvestment(const MyMoneyObject&)));
+  connect(m_accountsView, SIGNAL(openContextMenu(const MyMoneyObject&)), kmymoney, SLOT(slotShowAccountContextMenu(const MyMoneyObject&)));
+  connect(m_accountsView, SIGNAL(openObject(const MyMoneyObject&)), kmymoney, SLOT(slotAccountOpen(const MyMoneyObject&)));
+  connect(m_accountsView, SIGNAL(reparent(const MyMoneyAccount&, const MyMoneyAccount&)), kmymoney, SLOT(slotReparentAccount(const MyMoneyAccount&, const MyMoneyAccount&)));
   connect(this, SIGNAL(kmmFilePlugin(unsigned int)), m_accountsView, SLOT(slotUpdateIconPos(unsigned int)));
   connect(this, SIGNAL(reconciliationStarts(const MyMoneyAccount&, const QDate&, const MyMoneyMoney&)), m_accountsView, SLOT(slotReconcileAccount(const MyMoneyAccount&, const QDate&, const MyMoneyMoney&)));
 
@@ -176,12 +176,12 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   m_scheduleViewFrame->setIcon(KIcon("view-pim-calendar"));
   m_scheduleViewFrame->setHeader(QString(""));
   addTitleBar(m_scheduledView, i18n("Scheduled transactions"));
-  connect(kmymoney2, SIGNAL(fileLoaded(const KUrl&)), m_scheduledView, SLOT(slotReloadView()));
-  connect(m_scheduledView, SIGNAL(scheduleSelected(const MyMoneySchedule&)), kmymoney2, SLOT(slotSelectSchedule(const MyMoneySchedule&)));
-  connect(m_scheduledView, SIGNAL(openContextMenu()), kmymoney2, SLOT(slotShowScheduleContextMenu()));
-  connect(m_scheduledView, SIGNAL(enterSchedule()), kmymoney2, SLOT(slotScheduleEnter()));
-  connect(m_scheduledView, SIGNAL(skipSchedule()), kmymoney2, SLOT(slotScheduleSkip()));
-  connect(m_scheduledView, SIGNAL(editSchedule()), kmymoney2, SLOT(slotScheduleEdit()));
+  connect(kmymoney, SIGNAL(fileLoaded(const KUrl&)), m_scheduledView, SLOT(slotReloadView()));
+  connect(m_scheduledView, SIGNAL(scheduleSelected(const MyMoneySchedule&)), kmymoney, SLOT(slotSelectSchedule(const MyMoneySchedule&)));
+  connect(m_scheduledView, SIGNAL(openContextMenu()), kmymoney, SLOT(slotShowScheduleContextMenu()));
+  connect(m_scheduledView, SIGNAL(enterSchedule()), kmymoney, SLOT(slotScheduleEnter()));
+  connect(m_scheduledView, SIGNAL(skipSchedule()), kmymoney, SLOT(slotScheduleSkip()));
+  connect(m_scheduledView, SIGNAL(editSchedule()), kmymoney, SLOT(slotScheduleEdit()));
 
   // Page 4
   m_categoriesView = new KCategoriesView();
@@ -189,11 +189,11 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   m_categoriesViewFrame->setIcon(KIcon("categories"));
   m_categoriesViewFrame->setHeader(QString(""));
   addTitleBar(m_categoriesView, i18n("Categories"));
-  connect(m_categoriesView, SIGNAL(selectObject(const MyMoneyObject&)), kmymoney2, SLOT(slotSelectAccount(const MyMoneyObject&)));
-  connect(m_categoriesView, SIGNAL(selectObject(const MyMoneyObject&)), kmymoney2, SLOT(slotSelectInstitution(const MyMoneyObject&)));
-  connect(m_categoriesView, SIGNAL(openContextMenu(const MyMoneyObject&)), kmymoney2, SLOT(slotShowAccountContextMenu(const MyMoneyObject&)));
-  connect(m_categoriesView, SIGNAL(openObject(const MyMoneyObject&)), kmymoney2, SLOT(slotAccountOpen(const MyMoneyObject&)));
-  connect(m_categoriesView, SIGNAL(reparent(const MyMoneyAccount&, const MyMoneyAccount&)), kmymoney2, SLOT(slotReparentAccount(const MyMoneyAccount&, const MyMoneyAccount&)));
+  connect(m_categoriesView, SIGNAL(selectObject(const MyMoneyObject&)), kmymoney, SLOT(slotSelectAccount(const MyMoneyObject&)));
+  connect(m_categoriesView, SIGNAL(selectObject(const MyMoneyObject&)), kmymoney, SLOT(slotSelectInstitution(const MyMoneyObject&)));
+  connect(m_categoriesView, SIGNAL(openContextMenu(const MyMoneyObject&)), kmymoney, SLOT(slotShowAccountContextMenu(const MyMoneyObject&)));
+  connect(m_categoriesView, SIGNAL(openObject(const MyMoneyObject&)), kmymoney, SLOT(slotAccountOpen(const MyMoneyObject&)));
+  connect(m_categoriesView, SIGNAL(reparent(const MyMoneyAccount&, const MyMoneyAccount&)), kmymoney, SLOT(slotReparentAccount(const MyMoneyAccount&, const MyMoneyAccount&)));
 
   // Page 5
   m_payeesView = new KPayeesView();
@@ -201,10 +201,10 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   m_payeesViewFrame->setIcon(KIcon("system-users"));
   m_payeesViewFrame->setHeader(QString(""));
   addTitleBar(m_payeesView, i18n("Payees"));
-  connect(kmymoney2, SIGNAL(payeeCreated(const QString&)), m_payeesView, SLOT(slotSelectPayeeAndTransaction(const QString&)));
-  connect(kmymoney2, SIGNAL(payeeRename()), m_payeesView, SLOT(slotStartRename()));
-  connect(m_payeesView, SIGNAL(openContextMenu(const MyMoneyObject&)), kmymoney2, SLOT(slotShowPayeeContextMenu()));
-  connect(m_payeesView, SIGNAL(selectObjects(const QList<MyMoneyPayee>&)), kmymoney2, SLOT(slotSelectPayees(const QList<MyMoneyPayee>&)));
+  connect(kmymoney, SIGNAL(payeeCreated(const QString&)), m_payeesView, SLOT(slotSelectPayeeAndTransaction(const QString&)));
+  connect(kmymoney, SIGNAL(payeeRename()), m_payeesView, SLOT(slotStartRename()));
+  connect(m_payeesView, SIGNAL(openContextMenu(const MyMoneyObject&)), kmymoney, SLOT(slotShowPayeeContextMenu()));
+  connect(m_payeesView, SIGNAL(selectObjects(const QList<MyMoneyPayee>&)), kmymoney, SLOT(slotSelectPayees(const QList<MyMoneyPayee>&)));
   connect(m_payeesView, SIGNAL(transactionSelected(const QString&, const QString&)),
           this, SLOT(slotLedgerSelected(const QString&, const QString&)));
   // Page 6
@@ -212,16 +212,16 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   m_ledgerViewFrame = m_model->addPage( m_ledgerView, i18n("Ledgers"));
   m_ledgerViewFrame->setIcon(KIcon("ledger"));
   m_ledgerViewFrame->setHeader(QString(""));
-  connect(m_ledgerView, SIGNAL(accountSelected(const MyMoneyObject&)), kmymoney2, SLOT(slotSelectAccount(const MyMoneyObject&)));
-  connect(m_ledgerView, SIGNAL(openContextMenu()), kmymoney2, SLOT(slotShowTransactionContextMenu()));
-  connect(m_ledgerView, SIGNAL(transactionsSelected(const KMyMoneyRegister::SelectedTransactions&)), kmymoney2, SLOT(slotSelectTransactions(const KMyMoneyRegister::SelectedTransactions&)));
-  connect(m_ledgerView, SIGNAL(newTransaction()), kmymoney2, SLOT(slotTransactionsNew()));
-  connect(m_ledgerView, SIGNAL(cancelOrEndEdit(bool&)), kmymoney2, SLOT(slotTransactionsCancelOrEnter(bool&)));
-  connect(m_ledgerView, SIGNAL(startEdit()), kmymoney2, SLOT(slotTransactionsEdit()));
-  connect(m_ledgerView, SIGNAL(endEdit()), kmymoney2, SLOT(slotTransactionsEnter()));
-  connect(m_ledgerView, SIGNAL(toggleReconciliationFlag()), kmymoney2, SLOT(slotToggleReconciliationFlag()));
+  connect(m_ledgerView, SIGNAL(accountSelected(const MyMoneyObject&)), kmymoney, SLOT(slotSelectAccount(const MyMoneyObject&)));
+  connect(m_ledgerView, SIGNAL(openContextMenu()), kmymoney, SLOT(slotShowTransactionContextMenu()));
+  connect(m_ledgerView, SIGNAL(transactionsSelected(const KMyMoneyRegister::SelectedTransactions&)), kmymoney, SLOT(slotSelectTransactions(const KMyMoneyRegister::SelectedTransactions&)));
+  connect(m_ledgerView, SIGNAL(newTransaction()), kmymoney, SLOT(slotTransactionsNew()));
+  connect(m_ledgerView, SIGNAL(cancelOrEndEdit(bool&)), kmymoney, SLOT(slotTransactionsCancelOrEnter(bool&)));
+  connect(m_ledgerView, SIGNAL(startEdit()), kmymoney, SLOT(slotTransactionsEdit()));
+  connect(m_ledgerView, SIGNAL(endEdit()), kmymoney, SLOT(slotTransactionsEnter()));
+  connect(m_ledgerView, SIGNAL(toggleReconciliationFlag()), kmymoney, SLOT(slotToggleReconciliationFlag()));
   connect(this, SIGNAL(reconciliationStarts(const MyMoneyAccount&, const QDate&, const MyMoneyMoney&)), m_ledgerView, SLOT(slotSetReconcileAccount(const MyMoneyAccount&, const QDate&, const MyMoneyMoney&)));
-  connect(kmymoney2, SIGNAL(selectAllTransactions()), m_ledgerView, SLOT(slotSelectAllTransactions()));
+  connect(kmymoney, SIGNAL(selectAllTransactions()), m_ledgerView, SLOT(slotSelectAllTransactions()));
 
 
   // Page 7
@@ -232,8 +232,8 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   addTitleBar(m_investmentView, i18n("Investments"));
   connect(m_investmentView, SIGNAL(accountSelected(const QString&, const QString&)),
       this, SLOT(slotLedgerSelected(const QString&, const QString&)));
-  connect(m_investmentView, SIGNAL(accountSelected(const MyMoneyObject&)), kmymoney2, SLOT(slotSelectAccount(const MyMoneyObject&)));
-  connect(m_investmentView, SIGNAL(investmentRightMouseClick()), kmymoney2, SLOT(slotShowInvestmentContextMenu()));
+  connect(m_investmentView, SIGNAL(accountSelected(const MyMoneyObject&)), kmymoney, SLOT(slotSelectAccount(const MyMoneyObject&)));
+  connect(m_investmentView, SIGNAL(investmentRightMouseClick()), kmymoney, SLOT(slotShowInvestmentContextMenu()));
 
   // Page 8
   m_reportsView = new KReportsView();
@@ -247,10 +247,10 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   m_budgetViewFrame->setIcon(KIcon("budget"));
   m_budgetViewFrame->setHeader(QString(""));
   addTitleBar(m_budgetView, i18n("Budgets"));
-  connect(kmymoney2, SIGNAL(fileLoaded(const KUrl&)), m_budgetView, SLOT(slotRefreshView()));
-  connect(m_budgetView, SIGNAL(openContextMenu(const MyMoneyObject&)), kmymoney2, SLOT(slotShowBudgetContextMenu()));
-  connect(m_budgetView, SIGNAL(selectObjects(const QList<MyMoneyBudget>&)), kmymoney2, SLOT(slotSelectBudget(const QList<MyMoneyBudget>&)));
-  connect(kmymoney2, SIGNAL(budgetRename()), m_budgetView, SLOT(slotStartRename()));
+  connect(kmymoney, SIGNAL(fileLoaded(const KUrl&)), m_budgetView, SLOT(slotRefreshView()));
+  connect(m_budgetView, SIGNAL(openContextMenu(const MyMoneyObject&)), kmymoney, SLOT(slotShowBudgetContextMenu()));
+  connect(m_budgetView, SIGNAL(selectObjects(const QList<MyMoneyBudget>&)), kmymoney, SLOT(slotSelectBudget(const QList<MyMoneyBudget>&)));
+  connect(kmymoney, SIGNAL(budgetRename()), m_budgetView, SLOT(slotStartRename()));
 
   // Page 10
   m_forecastView = new KForecastView();
@@ -320,7 +320,7 @@ void KMyMoneyView::showPage(KPageWidgetItem* pageItem)
   // reset all selected items before showing the selected view
   // but not while we're in our own constructor
   if(!m_inConstructor && pageItem != currentPage()) {
-    kmymoney2->slotResetSelections();
+    kmymoney->slotResetSelections();
   }
 
   // pretend we're in the constructor to avoid calling the
@@ -339,7 +339,7 @@ void KMyMoneyView::showPage(KPageWidgetItem* pageItem)
   if(!m_inConstructor) {
     // fixup some actions that are dependant on the view
     // this does not work during construction
-    kmymoney2->slotUpdateActions();
+    kmymoney->slotUpdateActions();
   }
 }
 
@@ -518,7 +518,7 @@ void KMyMoneyView::slotPayeeSelected(const QString& payee, const QString& accoun
 void KMyMoneyView::slotScheduleSelected(const QString& scheduleId)
 {
   MyMoneySchedule sched = MyMoneyFile::instance()->schedule(scheduleId);
-  kmymoney2->slotSelectSchedule(sched);
+  kmymoney->slotSelectSchedule(sched);
 }
 
 void KMyMoneyView::slotShowReport(const QString& reportid)
@@ -920,7 +920,7 @@ bool KMyMoneyView::initializeStorage()
   ::timetrace("start fixing file");
 
   // For debugging purposes, we can turn off the automatic fix manually
-  // by setting the entry in kmymoney2rc to true
+  // by setting the entry in kmymoneyrc to true
   grp = config->group("General Options");
   if(grp.readEntry("SkipFix", false) != true) {
     MyMoneyFileTransaction ft;
@@ -966,7 +966,7 @@ bool KMyMoneyView::initializeStorage()
   //        automatic funcitonality
   // if there's no asset account, then automatically start the
   // new account wizard
-  // kmymoney2->createInitialAccount();
+  // kmymoney->createInitialAccount();
 
   ::timetrace("file open");
   m_fileOpen = true;
@@ -1631,7 +1631,7 @@ void KMyMoneyView::slotShowTransactionDetail(bool detailed)
 
 void KMyMoneyView::progressCallback(int current, int total, const QString& msg)
 {
-  kmymoney2->progressCallback(current, total, msg);
+  kmymoney->progressCallback(current, total, msg);
 }
 
 void KMyMoneyView::slotRememberPage(const QModelIndex current, const QModelIndex)
@@ -1968,7 +1968,7 @@ void KMyMoneyView::fixTransactions_0(void)
   QStringList interestAccounts;
 
   KMSTATUS(i18n("Fix transactions"));
-  kmymoney2->slotStatusProgressBar(0, scheduleList.count() + transactionList.count());
+  kmymoney->slotStatusProgressBar(0, scheduleList.count() + transactionList.count());
 
   int cnt = 0;
   // scan the schedules to find interest accounts
@@ -1997,7 +1997,7 @@ void KMyMoneyView::fixTransactions_0(void)
     }
     ++cnt;
     if(!(cnt % 10))
-      kmymoney2->slotStatusProgressBar(cnt);
+      kmymoney->slotStatusProgressBar(cnt);
   }
 
   ::timetrace("fixTransactions: start loop");
@@ -2160,10 +2160,10 @@ void KMyMoneyView::fixTransactions_0(void)
 */
     ++cnt;
     if(!(cnt % 10))
-      kmymoney2->slotStatusProgressBar(cnt);
+      kmymoney->slotStatusProgressBar(cnt);
   }
 
-  kmymoney2->slotStatusProgressBar(-1, -1);
+  kmymoney->slotStatusProgressBar(-1, -1);
 }
 
 void KMyMoneyView::fixDuplicateAccounts_0(MyMoneyTransaction& t)

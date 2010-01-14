@@ -52,7 +52,7 @@
 QTime timer;
 bool timersOn = false;
 
-KMyMoney2App* kmymoney2;
+KMyMoneyApp* kmymoney;
 
 static KCmdLineArgs* args = 0;
 
@@ -162,12 +162,12 @@ int main(int argc, char *argv[])
   timersOn = args->isSet("timers");
 #endif
 
-  kmymoney2 = 0;
-  kmymoney2 = new KMyMoney2App();
+  kmymoney = 0;
+  kmymoney = new KMyMoneyApp();
 
 #ifdef KMM_DEBUG
   if(args->isSet("dump-actions")) {
-    kmymoney2->dumpActions();
+    kmymoney->dumpActions();
 
     // Before we delete the application, we make sure that we destroy all
     // widgets by running the event loop for some time to catch all those
@@ -175,7 +175,7 @@ int main(int argc, char *argv[])
     //QApplication::eventLoop()->processEvents(QEventLoop::ExcludeUserInput, 10);
     QCoreApplication::processEvents(QEventLoop::ExcludeUserInput, 10);
 
-    delete kmymoney2;
+    delete kmymoney;
     delete splash;
     delete a;
     exit(0);
@@ -186,7 +186,7 @@ int main(int argc, char *argv[])
   try {
       do {
           if ( QDBusConnection::sessionBus().interface()->isServiceRegistered("org.kde.kmymoney") ) {
-        const QList<QString> instances = kmymoney2->instanceList();
+        const QList<QString> instances = kmymoney->instanceList();
         if(instances.count() > 0) {
 
           // If the user launches a second copy of the app and includes a file to
@@ -196,7 +196,7 @@ int main(int argc, char *argv[])
 
           if(args->count() > 0) {
             KUrl url = args->url(0);
-            if ( kmymoney2->isImportableFile( url.path() ) )
+            if ( kmymoney->isImportableFile( url.path() ) )
             {
                 // if there are multiple instances, we'll send this to the first one
               QString primary = instances[0];
@@ -210,7 +210,7 @@ int main(int argc, char *argv[])
               // widgets that are requested to be destroyed using the deleteLater() method.
               QCoreApplication::processEvents(QEventLoop::ExcludeUserInput, 10);
 
-              delete kmymoney2;
+              delete kmymoney;
               delete splash;
               break;
             }
@@ -218,7 +218,7 @@ int main(int argc, char *argv[])
 
           if(KMessageBox::questionYesNo(0, i18n("Another instance of KMyMoney is already running. Do you want to quit?")) == KMessageBox::Yes) {
             rc = 1;
-            delete kmymoney2;
+            delete kmymoney;
             delete splash;
             break;
           }
@@ -226,8 +226,8 @@ int main(int argc, char *argv[])
       } else {
         qDebug("D-Bus registration failed. Some functions are not available.");
       }
-      kmymoney2->show();
-      kmymoney2->setEnabled(false);
+      kmymoney->show();
+      kmymoney->setEnabled(false);
 
       delete splash;
 
@@ -247,31 +247,31 @@ int main(int argc, char *argv[])
         // implements a "web connect" session where there is not already an
         // instance of the program running.
 
-        if ( kmymoney2->isImportableFile( url.path() ) )
+        if ( kmymoney->isImportableFile( url.path() ) )
         {
           importfile = url.path();
-          url = kmymoney2->readLastUsedFile();
+          url = kmymoney->readLastUsedFile();
         }
 
       } else {
-        url = kmymoney2->readLastUsedFile();
+        url = kmymoney->readLastUsedFile();
       }
 
-      KTipDialog::showTip(kmymoney2, "", false);
+      KTipDialog::showTip(kmymoney, "", false);
       if(url.isValid() && !args->isSet("n")) {
-        kmymoney2->slotFileOpenRecent(url);
+        kmymoney->slotFileOpenRecent(url);
       } else if(KMyMoneyGlobalSettings::firstTimeRun()) {
-        kmymoney2->slotFileNew();
+        kmymoney->slotFileNew();
       }
       KMyMoneyGlobalSettings::setFirstTimeRun(false);
 
       if ( ! importfile.isEmpty() )
-        kmymoney2->webConnect( importfile, kapp->startupId() );
+        kmymoney->webConnect( importfile, kapp->startupId() );
 
-      if(kmymoney2 != 0) {
-        kmymoney2->updateCaption();
+      if(kmymoney != 0) {
+        kmymoney->updateCaption();
         args->clear();
-        kmymoney2->setEnabled(true);
+        kmymoney->setEnabled(true);
         rc = a->exec();
       }
     } while(0);

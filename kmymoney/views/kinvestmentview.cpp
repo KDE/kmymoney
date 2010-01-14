@@ -95,7 +95,7 @@ KInvestmentView::KInvestmentView(QWidget *parent) :
   connect(m_accountComboBox, SIGNAL(accountSelected(const QString&)),
     this, SLOT(slotSelectAccount(const QString&)));
 
-  connect(m_table, SIGNAL(doubleClicked(Q3ListViewItem*,const QPoint&, int)), kmymoney2->action("investment_edit"), SLOT(trigger()));
+  connect(m_table, SIGNAL(doubleClicked(Q3ListViewItem*,const QPoint&, int)), kmymoney->action("investment_edit"), SLOT(trigger()));
 
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadView()));
 }
@@ -109,13 +109,13 @@ KInvestmentView::~KInvestmentView()
 
 void KInvestmentView::slotSelectionChanged(Q3ListViewItem *item)
 {
-  kmymoney2->slotSelectInvestment();
+  kmymoney->slotSelectInvestment();
 
   KInvestmentListItem *pItem = dynamic_cast<KInvestmentListItem*>(item);
   if(pItem) {
     try {
       MyMoneyAccount account = MyMoneyFile::instance()->account(pItem->account().id());
-      kmymoney2->slotSelectInvestment(account);
+      kmymoney->slotSelectInvestment(account);
 
     } catch (MyMoneyException *e) {
       delete e;
@@ -125,10 +125,10 @@ void KInvestmentView::slotSelectionChanged(Q3ListViewItem *item)
 
 void KInvestmentView::slotListContextMenu(K3ListView* /* lv */, Q3ListViewItem* /*item*/, const QPoint& /*point*/)
 {
-  kmymoney2->slotSelectInvestment();
+  kmymoney->slotSelectInvestment();
   KInvestmentListItem *pItem = dynamic_cast<KInvestmentListItem*>(m_table->selectedItem());
   if(pItem) {
-    kmymoney2->slotSelectInvestment(MyMoneyFile::instance()->account(pItem->account().id()));
+    kmymoney->slotSelectInvestment(MyMoneyFile::instance()->account(pItem->account().id()));
   }
   emit investmentRightMouseClick();
 }
@@ -285,7 +285,7 @@ void KInvestmentView::loadView(void)
   setEnabled(true);
 
   MyMoneyFile* file = MyMoneyFile::instance();
-  bool showClosedAccounts = kmymoney2->toggleAction("view_show_all_accounts")->isChecked()
+  bool showClosedAccounts = kmymoney->toggleAction("view_show_all_accounts")->isChecked()
                          || !KMyMoneyGlobalSettings::hideClosedAccounts();
   try {
     d->m_account = file->account(d->m_account.id());

@@ -30,7 +30,7 @@
 
 #include <kfile.h>
 #include <kurl.h>
-class KMyMoney2App;
+class KMyMoneyApp;
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -47,13 +47,13 @@ class KMMImportInterface : public ImportInterface {
   Q_OBJECT
 
 public:
-  KMMImportInterface(KMyMoney2App* app, QObject* parent, const char* name = 0);
+  KMMImportInterface(KMyMoneyApp* app, QObject* parent, const char* name = 0);
   ~KMMImportInterface() {}
 
   KUrl selectFile(const QString& title, const QString& path, const QString& mask, KFile::Mode mode) const;
 
 private:
-  KMyMoney2App*    m_app;
+  KMyMoneyApp*    m_app;
 };
 
 } // namespace

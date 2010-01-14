@@ -74,7 +74,7 @@ class KPluginInfo;
   *
   * @short Main application class.
   */
-class KMyMoney2App : public KXmlGuiWindow
+class KMyMoneyApp : public KXmlGuiWindow
 {
   Q_OBJECT
 
@@ -87,7 +87,7 @@ protected slots:
     * received modifications to it's contents), and call the appropriate method to
     * save the file. Furthermore, re-starts the timer (possibly not needed).
     * @author mvillarino 2005
-    * @see KMyMoney2App::slotDataChanged()
+    * @see KMyMoneyApp::slotDataChanged()
     */
   void slotAutoSave(void);
 
@@ -449,14 +449,14 @@ public:
   const KUrl lastOpenedURL(void);
 
   /**
-    * construtor of KMyMoney2App, calls all init functions to create the application.
+    * construtor of KMyMoneyApp, calls all init functions to create the application.
     */
-  explicit KMyMoney2App(QWidget* parent=0);
+  explicit KMyMoneyApp(QWidget* parent=0);
 
   /**
     * Destructor
     */
-  ~KMyMoney2App();
+  ~KMyMoneyApp();
 
   /** Init wizard dialog */
   bool initWizard(void);
@@ -1169,7 +1169,7 @@ private:
   Private* d;
 };
 
-extern  KMyMoney2App *kmymoney2;
+extern  KMyMoneyApp *kmymoney;
 
 class KMStatus
 {

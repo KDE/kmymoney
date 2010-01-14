@@ -62,7 +62,7 @@ namespace KMyMoneyPlugin {
     virtual ~Plugin();
 
   protected:
-    /** See KMyMoney2App::toggleAction() for a description */
+    /** See KMyMoneyApp::toggleAction() for a description */
     KToggleAction* toggleAction(const QString& name) const;
 
     // define interface classes here. The interface classes provide a mechanism

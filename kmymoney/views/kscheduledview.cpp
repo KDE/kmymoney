@@ -84,7 +84,7 @@ KScheduledView::KScheduledView(QWidget *parent) :
   if(m_qlistviewScheduled->sortColumn() == -1)
     m_qlistviewScheduled->setSorting(0);
 
-  connect(m_qbuttonNew, SIGNAL(clicked()), kmymoney2->action("schedule_new"), SLOT(trigger()));
+  connect(m_qbuttonNew, SIGNAL(clicked()), kmymoney->action("schedule_new"), SLOT(trigger()));
 
   // attach popup to 'Filter...' button
   m_kaccPopup = new KMenu(this);

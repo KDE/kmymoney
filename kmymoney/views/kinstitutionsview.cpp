@@ -199,7 +199,7 @@ void KInstitutionsView::loadAccounts(void)
 
 void KInstitutionsView::loadSubAccounts(KMyMoneyAccountTreeItem* parent)
 {
-  bool showClosedAccounts = kmymoney2->toggleAction("view_show_all_accounts")->isChecked();
+  bool showClosedAccounts = kmymoney->toggleAction("view_show_all_accounts")->isChecked();
   const MyMoneyAccount& account = dynamic_cast<const MyMoneyAccount&>(parent->itemObject());
   QList<QString>::const_iterator it_a;
   MyMoneyFile* file = MyMoneyFile::instance();
@@ -228,7 +228,7 @@ void KInstitutionsView::loadSubAccounts(KMyMoneyAccountTreeItem* parent, const Q
 
   QMap<QString, MyMoneyAccount>::const_iterator it_a;
   MyMoneyMoney  value;
-  bool showClosedAccounts = kmymoney2->toggleAction("view_show_all_accounts")->isChecked();
+  bool showClosedAccounts = kmymoney->toggleAction("view_show_all_accounts")->isChecked();
 
   for(it_a = m_accountMap.constBegin(); it_a != m_accountMap.constEnd(); ++it_a) {
     const MyMoneyAccount& acc = *it_a;

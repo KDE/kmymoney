@@ -57,7 +57,7 @@ class K3ListViewSearchLineWidget;
   * in enabling/disabling the user actions for the categories view.
   *
   * For the categories view three user actions are important (all created in
-  * kmymoney2.cpp): category_new, category_edit and category_delete. They are
+  * kmymoney.cpp): category_new, category_edit and category_delete. They are
   * accessible from either the main menu or the context menu.
   */
 

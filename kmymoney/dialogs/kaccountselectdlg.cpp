@@ -128,13 +128,13 @@ void KAccountSelectDlg::setAccount(const MyMoneyAccount& account, const QString&
 
 void KAccountSelectDlg::slotCreateInstitution(void)
 {
-  kmymoney2->slotInstitutionNew();
+  kmymoney->slotInstitutionNew();
 }
 
 void KAccountSelectDlg::slotCreateAccount(void)
 {
   if(!(m_accountType & (KMyMoneyUtils::expense | KMyMoneyUtils::income))) {
-    kmymoney2->slotAccountNew(m_account);
+    kmymoney->slotAccountNew(m_account);
     if(!m_account.id().isEmpty()) {
       slotReloadWidget();
       m_accountSelector->setSelectedItem(m_account.id());
@@ -142,9 +142,9 @@ void KAccountSelectDlg::slotCreateAccount(void)
     }
   } else {
     if(m_account.accountType() == MyMoneyAccount::Expense)
-      kmymoney2->createCategory(m_account, MyMoneyFile::instance()->expense());
+      kmymoney->createCategory(m_account, MyMoneyFile::instance()->expense());
     else
-      kmymoney2->createCategory(m_account, MyMoneyFile::instance()->income());
+      kmymoney->createCategory(m_account, MyMoneyFile::instance()->income());
     if(!m_account.id().isEmpty()) {
       slotReloadWidget();
       m_accountSelector->setSelectedItem(m_account.id());

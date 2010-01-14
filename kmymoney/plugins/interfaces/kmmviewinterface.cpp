@@ -32,7 +32,7 @@
 #include "kmymoneyview.h"
 #include "selectedtransaction.h"
 
-KMyMoneyPlugin::KMMViewInterface::KMMViewInterface(KMyMoney2App* app, KMyMoneyView* view, QObject* parent, const char* name) :
+KMyMoneyPlugin::KMMViewInterface::KMMViewInterface(KMyMoneyApp* app, KMyMoneyView* view, QObject* parent, const char* name) :
   ViewInterface(parent, name),
   m_app(app),
   m_view(view)

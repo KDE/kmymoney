@@ -443,7 +443,7 @@ public:
 public slots:
   /**
     * This slot writes information about the page passed as argument @current
-    * in the kmymoney2.rc file so that in can be selected automatically when
+    * in the kmymoney.rc file so that in can be selected automatically when
     * the application is started again.
     *
     * @param widget pointer to page widget
@@ -524,7 +524,7 @@ protected slots:
   void slotShowTransactionDetail(bool detailed);
 
   /**
-   * eventually replace this with KMyMoney2App::slotCurrencySetBase(void).
+   * eventually replace this with KMyMoneyApp::slotCurrencySetBase(void).
    * it contains the same code
    *
    * @deprecated

@@ -28,7 +28,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-class KMyMoney2App;
+class KMyMoneyApp;
 class KMyMoneyView;
 class KMyMoneyViewBase;
 
@@ -47,7 +47,7 @@ class KMMViewInterface : public ViewInterface {
   Q_OBJECT
 
 public:
-  KMMViewInterface(KMyMoney2App* app, KMyMoneyView* view, QObject* parent, const char* name = 0);
+  KMMViewInterface(KMyMoneyApp* app, KMyMoneyView* view, QObject* parent, const char* name = 0);
   ~KMMViewInterface() {}
 
   /**
@@ -71,7 +71,7 @@ public:
   void addWidget(KMyMoneyViewBase* view, QWidget* w);
 
 private:
-  KMyMoney2App*    m_app;
+  KMyMoneyApp*    m_app;
   KMyMoneyView*    m_view;
 };
 

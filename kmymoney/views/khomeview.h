@@ -42,7 +42,7 @@
   *
   * @author Michael Edwardes
   *
-  * @short A view containing the home page for kmymoney2.
+  * @short A view containing the home page for kmymoney.
 **/
 class KHomeView : public KMyMoneyViewBase
 {

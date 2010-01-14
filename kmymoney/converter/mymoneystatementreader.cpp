@@ -249,7 +249,7 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
       case MyMoneyStatement::etInvestment:
         //testing support for investment statements!
         //m_userAbort = true;
-        //KMessageBox::error(kmymoney2, i18n("This is an investment statement.  These are not supported currently."), i18n("Critical Error"));
+        //KMessageBox::error(kmymoney, i18n("This is an investment statement.  These are not supported currently."), i18n("Critical Error"));
         m_account.setAccountType(MyMoneyAccount::Investment);
         break;
       case MyMoneyStatement::etCreditCard:
@@ -1300,7 +1300,7 @@ bool MyMoneyStatementReader::selectOrCreateAccount(const SelectCreateMode /*mode
   }
 
   KMyMoneyUtils::categoryTypeE type = static_cast<KMyMoneyUtils::categoryTypeE>(KMyMoneyUtils::asset|KMyMoneyUtils::liability);
-  QPointer<KAccountSelectDlg> accountSelect = new KAccountSelectDlg(type, "StatementImport", kmymoney2);
+  QPointer<KAccountSelectDlg> accountSelect = new KAccountSelectDlg(type, "StatementImport", kmymoney);
   accountSelect->setHeader(i18n("Import transactions"));
   accountSelect->setDescription(msg);
   accountSelect->setAccount(account, accountId);

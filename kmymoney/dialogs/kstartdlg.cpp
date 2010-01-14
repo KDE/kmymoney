@@ -113,7 +113,7 @@ void KStartDlg::setPage_Documents()
   //allow user to select either a .kmy file, or any generic file.
   kurlrequest->fileDialog()->setFilter( i18n("*.kmy|KMyMoney files (*.kmy)\n*.*|All files (*.*)") );
   kurlrequest->fileDialog()->setMode(KFile::File | KFile::ExistingOnly);
-  kurlrequest->fileDialog()->setUrl(KUrl(kmymoney2->readLastUsedDir()));//kurlrequest->fileDialog()->setURL(KUrl(KGlobalSettings::documentPath()));
+  kurlrequest->fileDialog()->setUrl(KUrl(kmymoney->readLastUsedDir()));//kurlrequest->fileDialog()->setURL(KUrl(KGlobalSettings::documentPath()));
   mainLayout->addWidget( kurlrequest );
 
   QLabel *label1 = new QLabel( recentMainFrame );

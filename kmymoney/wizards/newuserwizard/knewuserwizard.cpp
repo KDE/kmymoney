@@ -316,7 +316,7 @@ PreferencePage::PreferencePage(Wizard* wizard) :
   KPreferencePageDecl(wizard),
   WizardPage<Wizard>(stepCount++, this, wizard)
 {
-  connect(m_openConfigButton, SIGNAL(clicked()), kmymoney2, SLOT(slotSettings()));
+  connect(m_openConfigButton, SIGNAL(clicked()), kmymoney, SLOT(slotSettings()));
 }
 
 KMyMoneyWizardPage* PreferencePage::nextPage(void) const

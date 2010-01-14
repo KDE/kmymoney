@@ -654,7 +654,7 @@ void KHomeView::showAccounts(KHomeView::paymentTypeE type, const QString& header
   QList<MyMoneyAccount>::Iterator it;
   QMap<QString, MyMoneyAccount> nameIdx;
 
-  bool showClosedAccounts = kmymoney2->toggleAction("view_show_all_accounts")->isChecked();
+  bool showClosedAccounts = kmymoney->toggleAction("view_show_all_accounts")->isChecked();
 
   // get list of all accounts
   file->accountList(accounts);

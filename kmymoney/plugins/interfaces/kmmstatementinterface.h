@@ -31,7 +31,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-class KMyMoney2App;
+class KMyMoneyApp;
 class MyMoneyAccount;
 class MyMoneyKeyValueContainer;
 
@@ -48,7 +48,7 @@ class KMMStatementInterface : public StatementInterface
   Q_OBJECT
 
 public:
-  KMMStatementInterface(KMyMoney2App* app, QObject* parent, const char* name = 0);
+  KMMStatementInterface(KMyMoneyApp* app, QObject* parent, const char* name = 0);
   ~KMMStatementInterface() {}
 
   /**
@@ -70,7 +70,7 @@ public:
   void setAccountOnlineParameters(const MyMoneyAccount&acc, const MyMoneyKeyValueContainer& kvps) const;
 
 private:
-  KMyMoney2App*    m_app;
+  KMyMoneyApp*    m_app;
 };
 
 } // namespace

@@ -218,13 +218,13 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name )
   m_buttonbar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
   buttonLayout->addWidget(m_buttonbar);
 
-  m_buttonbar->addAction(kmymoney2->action("transaction_new"));
-  m_buttonbar->addAction(kmymoney2->action("transaction_delete"));
-  m_buttonbar->addAction(kmymoney2->action("transaction_edit"));
-  m_buttonbar->addAction(kmymoney2->action("transaction_enter"));
-  m_buttonbar->addAction(kmymoney2->action("transaction_cancel"));
-  m_buttonbar->addAction(kmymoney2->action("transaction_accept"));
-  m_buttonbar->addAction(kmymoney2->action("transaction_match"));
+  m_buttonbar->addAction(kmymoney->action("transaction_new"));
+  m_buttonbar->addAction(kmymoney->action("transaction_delete"));
+  m_buttonbar->addAction(kmymoney->action("transaction_edit"));
+  m_buttonbar->addAction(kmymoney->action("transaction_enter"));
+  m_buttonbar->addAction(kmymoney->action("transaction_cancel"));
+  m_buttonbar->addAction(kmymoney->action("transaction_accept"));
+  m_buttonbar->addAction(kmymoney->action("transaction_match"));
 
   // create the transaction form frame
   m_formFrame = new QFrame(this);
@@ -240,7 +240,7 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name )
 
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadView()));
   connect(m_register, SIGNAL(focusChanged(KMyMoneyRegister::Transaction*)), m_form, SLOT(slotSetTransaction(KMyMoneyRegister::Transaction*)));
-  connect(m_register, SIGNAL(focusChanged()), kmymoney2, SLOT(slotUpdateActions()));
+  connect(m_register, SIGNAL(focusChanged()), kmymoney, SLOT(slotUpdateActions()));
   connect(m_accountComboBox, SIGNAL(accountSelected(const QString&)), this, SLOT(slotSelectAccount(const QString&)));
   connect(m_register, SIGNAL(selectionChanged(const KMyMoneyRegister::SelectedTransactions&)), this, SIGNAL(transactionsSelected(const KMyMoneyRegister::SelectedTransactions&)));
   connect(m_register, SIGNAL(editTransaction()), this, SIGNAL(startEdit()));
@@ -422,7 +422,7 @@ void KGlobalLedgerView::loadView(void)
     // retrieve the list from the engine
     MyMoneyFile::instance()->transactionList(m_transactionList, filter);
 
-    kmymoney2->slotStatusProgressBar(0, m_transactionList.count());
+    kmymoney->slotStatusProgressBar(0, m_transactionList.count());
 
     // create the elements for the register
     QList<QPair<MyMoneyTransaction, MyMoneySplit> >::const_iterator it;
@@ -432,7 +432,7 @@ void KGlobalLedgerView::loadView(void)
       uniqueMap[(*it).first.id()]++;
       KMyMoneyRegister::Transaction* t = KMyMoneyRegister::Register::transactionFactory(m_register, (*it).first, (*it).second, uniqueMap[(*it).first.id()]);
       actBalance[t->split().accountId()] = MyMoneyMoney(0,1);
-      kmymoney2->slotStatusProgressBar(++i, 0);
+      kmymoney->slotStatusProgressBar(++i, 0);
       // if we're in reconciliation and the state is cleared, we
       // force the item to show in dimmed intensity to get a visual focus
       // on those items, that we need to work on
@@ -690,7 +690,7 @@ void KGlobalLedgerView::loadView(void)
     }
 
     updateSummaryLine(actBalance, clearedBalance);
-    kmymoney2->slotStatusProgressBar(-1, -1);
+    kmymoney->slotStatusProgressBar(-1, -1);
 
   } catch(MyMoneyException *e) {
     delete e;
@@ -907,11 +907,11 @@ void KGlobalLedgerView::slotSetReconcileAccount(const MyMoneyAccount& acc, const
     m_newAccountLoaded = true;
 
     if(acc.id().isEmpty()) {
-      m_buttonbar->removeAction(kmymoney2->action("account_reconcile_postpone"));
-      m_buttonbar->removeAction(kmymoney2->action("account_reconcile_finish"));
+      m_buttonbar->removeAction(kmymoney->action("account_reconcile_postpone"));
+      m_buttonbar->removeAction(kmymoney->action("account_reconcile_finish"));
     } else {
-      m_buttonbar->addAction(kmymoney2->action("account_reconcile_postpone"));
-      m_buttonbar->addAction(kmymoney2->action("account_reconcile_finish"));
+      m_buttonbar->addAction(kmymoney->action("account_reconcile_postpone"));
+      m_buttonbar->addAction(kmymoney->action("account_reconcile_finish"));
       // when we start reconciliation, we need to reload the view
       // because no data has been changed. When postponing or finishing
       // reconciliation, the data change in the engine takes care of updateing
@@ -1123,18 +1123,18 @@ TransactionEditor* KGlobalLedgerView::startEdit(const KMyMoneyRegister::Selected
       }
 
       m_inEditMode = true;
-      connect(editor, SIGNAL(transactionDataSufficient(bool)), kmymoney2->action("transaction_enter"), SLOT(setEnabled(bool)));
-      connect(editor, SIGNAL(returnPressed()), kmymoney2->action("transaction_enter"), SLOT(trigger()));
-      connect(editor, SIGNAL(escapePressed()), kmymoney2->action("transaction_cancel"), SLOT(trigger()));
+      connect(editor, SIGNAL(transactionDataSufficient(bool)), kmymoney->action("transaction_enter"), SLOT(setEnabled(bool)));
+      connect(editor, SIGNAL(returnPressed()), kmymoney->action("transaction_enter"), SLOT(trigger()));
+      connect(editor, SIGNAL(escapePressed()), kmymoney->action("transaction_cancel"), SLOT(trigger()));
 
       connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), editor, SLOT(slotReloadEditWidgets()));
       connect(editor, SIGNAL(finishEdit(const KMyMoneyRegister::SelectedTransactions&)), this, SLOT(slotLeaveEditMode(const KMyMoneyRegister::SelectedTransactions&)));
 
       connect(editor, SIGNAL(objectCreation(bool)), d->m_mousePressFilter, SLOT(setFilterDeactive(bool)));
-      connect(editor, SIGNAL(createPayee(const QString&, QString&)), kmymoney2, SLOT(slotPayeeNew(const QString&, QString&)));
-      connect(editor, SIGNAL(createCategory(MyMoneyAccount&, const MyMoneyAccount&)), kmymoney2, SLOT(slotCategoryNew(MyMoneyAccount&, const MyMoneyAccount&)));
-      connect(editor, SIGNAL(createSecurity(MyMoneyAccount&, const MyMoneyAccount&)), kmymoney2, SLOT(slotInvestmentNew(MyMoneyAccount&, const MyMoneyAccount&)));
-      connect(editor, SIGNAL(assignNumber(void)), kmymoney2, SLOT(slotTransactionAssignNumber()));
+      connect(editor, SIGNAL(createPayee(const QString&, QString&)), kmymoney, SLOT(slotPayeeNew(const QString&, QString&)));
+      connect(editor, SIGNAL(createCategory(MyMoneyAccount&, const MyMoneyAccount&)), kmymoney, SLOT(slotCategoryNew(MyMoneyAccount&, const MyMoneyAccount&)));
+      connect(editor, SIGNAL(createSecurity(MyMoneyAccount&, const MyMoneyAccount&)), kmymoney, SLOT(slotInvestmentNew(MyMoneyAccount&, const MyMoneyAccount&)));
+      connect(editor, SIGNAL(assignNumber(void)), kmymoney, SLOT(slotTransactionAssignNumber()));
       connect(editor, SIGNAL(lastPostDateUsed(const QDate&)), this, SLOT(slotKeepPostDate(const QDate&)));
 
       // create the widgets, place them in the parent and load them with data
@@ -1279,7 +1279,7 @@ bool KGlobalLedgerView::eventFilter(QObject* o, QEvent* e)
           switch(k->key()) {
             case Qt::Key_Return:
             case Qt::Key_Enter:
-      		    kmymoney2->action("transaction_edit")->trigger();
+      		    kmymoney->action("transaction_edit")->trigger();
               rc = true;
               break;
           }

@@ -159,7 +159,7 @@ KNewLoanWizard::KNewLoanWizard(QWidget *parent) :
                       i18n("Create a new asset account"),
                       i18n("Use this to create a new account to which the initial payment should be made"));
   m_createNewAssetButton->setGuiItem(createAssetButtenItem);
-  connect(m_createNewAssetButton, SIGNAL(clicked()), kmymoney2, SLOT(slotAccountNew()));
+  connect(m_createNewAssetButton, SIGNAL(clicked()), kmymoney, SLOT(slotAccountNew()));
 
   // enable the finish button on the last page
   setFinishEnabled(m_summaryPage, true);

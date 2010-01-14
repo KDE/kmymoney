@@ -150,8 +150,8 @@ KBudgetView::KBudgetView(QWidget *parent) :
 
   // connect the buttons to the actions. Make sure the enabled state
   // of the actions is reflected by the buttons
-  connect(m_renameButton, SIGNAL(clicked()), kmymoney2->action("budget_rename"), SLOT(trigger()));
-  connect(m_deleteButton, SIGNAL(clicked()), kmymoney2->action("budget_delete"), SLOT(trigger()));
+  connect(m_renameButton, SIGNAL(clicked()), kmymoney->action("budget_rename"), SLOT(trigger()));
+  connect(m_deleteButton, SIGNAL(clicked()), kmymoney->action("budget_delete"), SLOT(trigger()));
 
   connect(m_budgetValue, SIGNAL(valuesChanged()), this, SLOT(slotBudgetedAmountChanged()));
 
@@ -162,9 +162,9 @@ KBudgetView::KBudgetView(QWidget *parent) :
   connect(m_hideUnusedButton, SIGNAL(toggled(bool)), this, SLOT(slotHideUnused(bool)));
 
   // setup initial state
-  m_newButton->setEnabled(kmymoney2->action("budget_new")->isEnabled());
-  m_renameButton->setEnabled(kmymoney2->action("budget_rename")->isEnabled());
-  m_deleteButton->setEnabled(kmymoney2->action("budget_delete")->isEnabled());
+  m_newButton->setEnabled(kmymoney->action("budget_new")->isEnabled());
+  m_renameButton->setEnabled(kmymoney->action("budget_rename")->isEnabled());
+  m_deleteButton->setEnabled(kmymoney->action("budget_delete")->isEnabled());
 
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotRefreshView()));
 
@@ -721,7 +721,7 @@ void KBudgetView::cb_includesSubaccounts_clicked()
 void KBudgetView::slotNewBudget(void)
 {
   askSave();
-  kmymoney2->action("budget_new")->trigger();
+  kmymoney->action("budget_new")->trigger();
 }
 
 void KBudgetView::slotResetBudget(void)
