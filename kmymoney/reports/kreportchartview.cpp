@@ -28,6 +28,7 @@
 // KDE Includes
 #include <kcolorscheme.h>
 #include <klocale.h>
+#include <kglobalsettings.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -177,7 +178,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     xAxis->setPosition ( CartesianAxis::Bottom );
     xAxis->setTitleText(i18n("Time"));
     TextAttributes xAxisTextAttr(xAxis->titleTextAttributes());
-    xAxisTextAttr.setMinimalFontSize(12);
+    xAxisTextAttr.setMinimalFontSize(KGlobalSettings::generalFont().pointSize());
     xAxis->setTitleTextAttributes(xAxisTextAttr);
 
     // Set up X axis labels (ie "abscissa" to use the technical term)
@@ -196,7 +197,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     yAxis->setPosition ( CartesianAxis::Left );
     yAxis->setTitleText(i18n("Balance"));
     TextAttributes yAxisTextAttr(yAxis->titleTextAttributes());
-    yAxisTextAttr.setMinimalFontSize(12);
+    yAxisTextAttr.setMinimalFontSize(KGlobalSettings::generalFont().pointSize());
     yAxis->setTitleTextAttributes(yAxisTextAttr);
 
     //add the axes to the corresponding diagram
@@ -431,12 +432,12 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   if(legend->texts().count() <= KMyMoneyGlobalSettings::maximumLegendItems()) {
     legend->setPosition(Position::East);
     TextAttributes legendTextAttr(legend->textAttributes());
-    legendTextAttr.setFontSize(14);
+    legendTextAttr.setFontSize(KGlobalSettings::generalFont().pointSize()+2);
     legendTextAttr.setAutoShrink(true);
     legend->setTextAttributes(legendTextAttr);
 
     TextAttributes legendTitleTextAttr(legend->titleTextAttributes());
-    legendTitleTextAttr.setFontSize(20);
+    legendTitleTextAttr.setFontSize(KGlobalSettings::generalFont().pointSize()+4);
     legendTitleTextAttr.setAutoShrink(true);
     legend->setTitleTextAttributes(legendTitleTextAttr);
     legend->setTitleText(i18nc("Chart lines legend","Legend"));
