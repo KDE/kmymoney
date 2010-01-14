@@ -13,8 +13,8 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-#ifndef KMYMONEY2_H
-#define KMYMONEY2_H
+#ifndef KMYMONEY_H
+#define KMYMONEY_H
 
 #ifdef HAVE_CONFIG_H
 #include <config-kmymoney.h>
@@ -1182,4 +1182,4 @@ private:
 
 #define KMSTATUS(msg) KMStatus _thisStatus(msg)
 
-#endif // KMYMONEY2_H
+#endif // KMYMONEY_H
