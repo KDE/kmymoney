@@ -50,7 +50,6 @@
 
 KForecastView::KForecastView(QWidget *parent) :
   KForecastViewDecl(parent),
-  m_chartLayout(new QVBoxLayout(m_tabChart)),
   m_forecastChart(new KReportChartView(m_tabChart))
 {
   for(int i=0; i < MaxViewTabs; ++i)
@@ -71,6 +70,7 @@ KForecastView::KForecastView(QWidget *parent) :
   m_advancedList->setAllColumnsShowFocus(true);
 
   m_forecastChart->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );
+  m_chartLayout = m_tabChart->layout();
   m_chartLayout->setSpacing(6);
   m_chartLayout->addWidget( m_forecastChart );
 

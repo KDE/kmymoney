@@ -141,7 +141,7 @@ private:
   KMyMoneyAccountTreeForecastItem*    m_incomeItem;
   KMyMoneyAccountTreeForecastItem*    m_expenseItem;
 
-  QVBoxLayout* m_chartLayout;
+  QLayout* m_chartLayout;
   KReportChartView* m_forecastChart;
 
 };
