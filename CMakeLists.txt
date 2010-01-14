@@ -100,6 +100,18 @@ IF (ZLIB_FOUND)
   SET(HAVE_LIBZ 1)
 ENDIF (ZLIB_FOUND)
 
+# check for Doxygen
+FIND_PACKAGE(Doxygen)
+IF(DOXYGEN_FOUND)
+  SET(APIDOC_DIR ${CMAKE_CURRENT_BINARY_DIR}/apidocs)
+
+  MAKE_DIRECTORY(${APIDOC_DIR})
+
+  CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/kmymoney.doxygen.in ${CMAKE_CURRENT_BINARY_DIR}/kmymoney.doxygen IMMEDIATE)
+
+  ADD_CUSTOM_TARGET(apidoc ${DOXYGEN} ${CMAKE_CURRENT_BINARY_DIR}/kmymoney.doxygen)
+ENDIF(DOXYGEN_FOUND)
+
 # check for PkgConfig
 FIND_PACKAGE(PkgConfig)
 # check for some modules we require
@@ -424,6 +436,7 @@ nice_yesno("USE_QT_DESIGNER")
 nice_yesno("USE_DEVELOPER_DOC")
 nice_yesno("HAVE_LIBCPPUNIT")
 nice_yesno("KDE4_BUILD_TESTS")
+nice_yesno("DOXYGEN_FOUND")
 message("
 -------- KMyMoney ${CPACK_PACKAGE_VERSION}${VERSION_SUFFIX} --------
 
@@ -445,6 +458,8 @@ Developer documentation generation:      ${nice_USE_DEVELOPER_DOC}
 
 CPPUNIT support:                         ${nice_HAVE_LIBCPPUNIT}
         build tests:                     ${nice_KDE4_BUILD_TESTS}
+
+Doxygen support:                         ${nice_DOXYGEN_FOUND}
 
 Build type: ${CMAKE_BUILD_TYPE}")
 
