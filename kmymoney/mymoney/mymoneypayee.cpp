@@ -38,9 +38,9 @@ MyMoneyPayee::MyMoneyPayee() :
 }
 
 MyMoneyPayee::MyMoneyPayee(const QString& id, const MyMoneyPayee& payee) :
-  m_matchingEnabled(false),
-  m_usingMatchKey(false),
-  m_matchKeyIgnoreCase(true)
+  m_matchingEnabled(payee.m_matchingEnabled/*false*/),
+  m_usingMatchKey(payee.m_usingMatchKey/*false*/),
+  m_matchKeyIgnoreCase(payee.m_matchKeyIgnoreCase/*true*/)
 {
   *this = payee;
   m_id = id;
@@ -182,12 +182,11 @@ MyMoneyPayee::payeeMatchType MyMoneyPayee::matchData(bool& ignorecase, QStringLi
 {
   payeeMatchType type = matchDisabled;
   keys.clear();
-  ignorecase = false;
+  ignorecase = m_matchKeyIgnoreCase;
 
   if ( m_matchingEnabled )
   {
     type = m_usingMatchKey ? matchKey : matchName;
-    ignorecase = m_matchKeyIgnoreCase;
     if(type == matchKey)
       keys = m_matchKey.split(';');
   }
@@ -206,7 +205,7 @@ MyMoneyPayee::payeeMatchType MyMoneyPayee::matchData(bool& ignorecase, QString& 
 void MyMoneyPayee::setMatchData(payeeMatchType type, bool ignorecase, const QStringList& keys)
 {
   m_matchingEnabled = (type != matchDisabled);
-  m_matchKeyIgnoreCase = false;
+  m_matchKeyIgnoreCase = ignorecase;
   m_matchKey.clear();
 
   if ( m_matchingEnabled )
@@ -215,7 +214,6 @@ void MyMoneyPayee::setMatchData(payeeMatchType type, bool ignorecase, const QStr
     if ( m_usingMatchKey ) {
       m_matchKey = keys.join(";");
     }
-    m_matchKeyIgnoreCase = ignorecase;
   }
 }
 

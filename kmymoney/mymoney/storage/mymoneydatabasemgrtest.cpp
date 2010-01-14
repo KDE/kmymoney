@@ -1134,6 +1134,28 @@ void MyMoneyDatabaseMgrTest::testAddPayee() {
     CPPUNIT_ASSERT(m->payeeId() == 0);
     m->addPayee(p);
     CPPUNIT_ASSERT(m->payeeId() == 1);
+    MyMoneyPayee p1 = m->payeeByName("THB");
+    CPPUNIT_ASSERT(p.id() == p1.id());
+    CPPUNIT_ASSERT(p.name() == p1.name());
+    CPPUNIT_ASSERT(p.address() == p1.address());
+    CPPUNIT_ASSERT(p.city() == p1.city());
+    CPPUNIT_ASSERT(p.state() == p1.state());
+    CPPUNIT_ASSERT(p.postcode() == p1.postcode());
+    CPPUNIT_ASSERT(p.telephone() == p1.telephone());
+    CPPUNIT_ASSERT(p.email() == p1.email());
+    MyMoneyPayee::payeeMatchType m, m1;
+    bool ignore, ignore1;
+    QStringList keys, keys1;
+    m = p.matchData(ignore, keys);
+    m1 = p1.matchData(ignore1, keys1);
+    CPPUNIT_ASSERT(m == m1);
+    CPPUNIT_ASSERT(ignore == ignore1);
+    CPPUNIT_ASSERT(keys == keys1);
+    CPPUNIT_ASSERT(p.reference() == p1.reference());
+    CPPUNIT_ASSERT(p.defaultAccountEnabled() == p1.defaultAccountEnabled());
+    CPPUNIT_ASSERT(p.defaultAccountId() == p1.defaultAccountId());
+
+    CPPUNIT_ASSERT(p == p1);
   } catch (MyMoneyException *e) {
     unexpectedException(e);
   }
