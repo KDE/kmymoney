@@ -200,7 +200,7 @@ void WebPriceQuote::slotParseQuote(const QString& _quotedata)
       quotedata = quotedata.simplified();
     }
 
-#if KMM_DEBUG
+#ifdef KMM_DEBUG
     // Enable to get a look at the data coming back from the source after it's stripped
     QFile file("stripped.txt");
     if ( file.open( QIODevice::WriteOnly ) ) {
