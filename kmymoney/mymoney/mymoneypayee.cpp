@@ -38,9 +38,9 @@ MyMoneyPayee::MyMoneyPayee() :
 }
 
 MyMoneyPayee::MyMoneyPayee(const QString& id, const MyMoneyPayee& payee) :
-  m_matchingEnabled(payee.m_matchingEnabled/*false*/),
-  m_usingMatchKey(payee.m_usingMatchKey/*false*/),
-  m_matchKeyIgnoreCase(payee.m_matchKeyIgnoreCase/*true*/)
+  m_matchingEnabled(false),
+  m_usingMatchKey(false),
+  m_matchKeyIgnoreCase(true)
 {
   *this = payee;
   m_id = id;
