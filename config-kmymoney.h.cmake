@@ -1,4 +1,4 @@
-/* config.h.  Generated from config.h.cmake by cmake  */
+/* config-kmymoney.h.  Generated from config-kmymoney.h.cmake by cmake  */
 
 /* Name of package */
 #define PACKAGE "kmymoney"
