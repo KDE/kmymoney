@@ -89,14 +89,19 @@ bool RegisterItem::markVisible(bool visible)
 void RegisterItem::setVisible(bool visible)
 {
   if(markVisible(visible) && m_parent) {
+    int numRows = m_parent->numRows();
     if(visible) {
       for(int i = startRow(); i < startRow() + numRowsRegister(); ++i) {
-        m_parent->showRow(i);
-        m_parent->setRowHeight(i, rowHeightHint());
+        if(numRows > i) {
+          m_parent->showRow(i);
+          m_parent->setRowHeight(i, rowHeightHint());
+        }
       }
     } else {
       for(int i = startRow(); i < startRow() + numRowsRegister(); ++i) {
-        m_parent->hideRow(i);
+        if(numRows > i) { 
+          m_parent->hideRow(i);
+        }
       }
     }
   }
