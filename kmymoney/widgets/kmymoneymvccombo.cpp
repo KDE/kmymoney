@@ -22,27 +22,12 @@
 
 #include <QStandardItemModel>
 #include <QStandardItem>
-/*#include <QRect>
-#include <QStyle>
-#include <QPainter>
-#include <QApplication>
-#include <QKeyEvent>
-#include <QList>
-#include <QFocusEvent>
-#include <QMouseEvent>
-#include <QPaintEvent>
-#include <QSortFilterProxyModel>
-#include <QCompleter>*/
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <klocale.h>
 #include <kdebug.h>
-/*
-#include <k3listview.h>
-
-#include <kconfig.h>*/
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -64,6 +49,7 @@ KMyMoneyMVCCombo::KMyMoneyMVCCombo(QWidget* parent) :
 {
   QCompleter *completer = new QCompleter(this);
   setCompleter(completer);
+  connect(this, SIGNAL(activated(int)), SLOT(activated(int)));
 }
 
 KMyMoneyMVCCombo::KMyMoneyMVCCombo(bool editable, QWidget* parent) :
@@ -73,10 +59,10 @@ KMyMoneyMVCCombo::KMyMoneyMVCCombo(bool editable, QWidget* parent) :
 {
   QCompleter *completer = new QCompleter(this);
   completer->setCaseSensitivity(Qt::CaseInsensitive);
-  completer->setCompletionMode(QCompleter::PopupCompletion);
+  completer->setCompletionMode(QCompleter::UnfilteredPopupCompletion);
   completer->setModel(model());
   setCompleter(completer);
-  setInsertPolicy(QComboBox::NoInsert); // don't instert new objects due to object creation
+  setInsertPolicy(QComboBox::NoInsert); // don't insert new objects due to object creation
   connect(this, SIGNAL(activated(int)), SLOT(activated(int)));
 }
 
@@ -158,6 +144,11 @@ void KMyMoneyMVCCombo::focusOutEvent(QFocusEvent* e)
     } else if(!contains(currentText())) {
       clearEditText();
     }
+    //this is to cover the case when you highlight an item but don't activate it with Enter
+    if(currentText() != itemText(currentIndex())) {
+      setCurrentIndex(findText(currentText(), Qt::MatchExactly));
+      emit activated(currentIndex());
+    }
   }
 
   KComboBox::focusOutEvent(e);
@@ -186,7 +177,6 @@ void KMyMoneyMVCCombo::setCurrentTextById(const QString& id)
       }
     }
 }
-
 
 void KMyMoneyMVCCombo::protectItem(int id, bool protect)
 {
