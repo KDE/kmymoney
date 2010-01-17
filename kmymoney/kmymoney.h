@@ -35,6 +35,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include <imymoneyprocessingcalendar.h>
 #include <mymoneyaccount.h>
 #include <mymoneyscheduled.h>
 #include <mymoneyinstitution.h>
@@ -74,7 +75,7 @@ class KPluginInfo;
   *
   * @short Main application class.
   */
-class KMyMoneyApp : public KXmlGuiWindow
+class KMyMoneyApp : public KXmlGuiWindow, public IMyMoneyProcessingCalendar
 {
   Q_OBJECT
 
@@ -84,7 +85,7 @@ protected slots:
   /**
     * This slot is intended to be used as part of auto saving. This is used when the
     * QTimer emits the timeout signal and simply checks that the file is dirty (has
-    * received modifications to it's contents), and call the appropriate method to
+    * received modifications to its contents), and call the appropriate method to
     * save the file. Furthermore, re-starts the timer (possibly not needed).
     * @author mvillarino 2005
     * @see KMyMoneyApp::slotDataChanged()
@@ -402,7 +403,7 @@ protected slots:
 
   /**
     * This slot will be called when the engine data changed
-    * and the application object needs to update it's state.
+    * and the application object needs to update its state.
     */
   void slotDataChanged(void);
 
@@ -475,7 +476,7 @@ public:
 
   /**
     * This method is used to update the caption of the application window.
-    * It set's the caption to "filename [modified] - KMyMoney".
+    * It sets the caption to "filename [modified] - KMyMoney".
     *
     * @param skipActions if true, the actions will not be updated. This
     *                    is usually onyl required by some early calls when
@@ -1018,6 +1019,10 @@ public slots:
 
 private:
   // bool verifyImportedData(const MyMoneyAccount& account);
+  /**
+    * This method sets the holidayRegion for use by the processing calendar.
+    */
+  void setHolidayRegion(const QString& holidayRegion);
 
   /**
     * Load the status bar with the 'ready' message. This is hold in a single
@@ -1051,6 +1056,11 @@ private:
     * one split has been changed, @a false otherwise.
     */
   bool exchangeAccountInTransaction(MyMoneyTransaction& _t, const QString& fromId, const QString& toId);
+
+  /**
+    * Re-implemented from IMyMoneyProcessingCalendar
+    */
+  bool isProcessingDate(const QDate& date) const;
 
 signals:
   /**

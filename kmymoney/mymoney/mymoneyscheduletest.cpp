@@ -18,6 +18,7 @@
 
 // Include internationalization
 #include <klocale.h>
+#include <KHolidays/Holidays>
 
 #include "mymoneysplit.h"
 #include "mymoneymoney.h"
@@ -1255,37 +1256,37 @@ void MyMoneyScheduleTest::testHasReferenceTo()
 
 void MyMoneyScheduleTest::testAdjustedNextDueDate()
 {
-	MyMoneySchedule s;
+  MyMoneySchedule s;
 
-	QDate dueDate(2007,9,3); // start on a monday
-	for(int i = 0; i < 7; ++i) {
-		s.setNextDueDate(dueDate);
-		s.setWeekendOption(MyMoneySchedule::MoveNothing);
-		CPPUNIT_ASSERT(s.adjustedNextDueDate() == dueDate);
+  QDate dueDate(2007,9,3); // start on a Monday
+  for(int i = 0; i < 7; ++i) {
+    s.setNextDueDate(dueDate);
+    s.setWeekendOption(MyMoneySchedule::MoveNothing);
+    CPPUNIT_ASSERT(s.adjustedNextDueDate() == dueDate);
 
-		s.setWeekendOption(MyMoneySchedule::MoveFriday);
-		switch(i) {
-		    case 5: // saturday
-		    case 6: // sunday
-			break;
-			CPPUNIT_ASSERT(s.adjustedNextDueDate() == QDate(2007,9,7));
-		    default:
-			CPPUNIT_ASSERT(s.adjustedNextDueDate() == dueDate);
-			break;
-		}
+    s.setWeekendOption(MyMoneySchedule::MoveBefore);
+    switch(i) {
+      case 5: // Saturday
+      case 6: // Sunday
+        CPPUNIT_ASSERT(s.adjustedNextDueDate() == QDate(2007,9,7));
+        break;
+      default:
+        CPPUNIT_ASSERT(s.adjustedNextDueDate() == dueDate);
+        break;
+    }
 
-		s.setWeekendOption(MyMoneySchedule::MoveMonday);
-		switch(i) {
-		    case 5: // saturday
-		    case 6: // sunday
-			CPPUNIT_ASSERT(s.adjustedNextDueDate() == QDate(2007,9,10));
-			break;
-		    default:
-			CPPUNIT_ASSERT(s.adjustedNextDueDate() == dueDate);
-			break;
-		}
-		dueDate = dueDate.addDays(1);
-	}
+    s.setWeekendOption(MyMoneySchedule::MoveAfter);
+    switch(i) {
+      case 5: // Saturday
+      case 6: // Sunday
+        CPPUNIT_ASSERT(s.adjustedNextDueDate() == QDate(2007,9,10));
+        break;
+      default:
+        CPPUNIT_ASSERT(s.adjustedNextDueDate() == dueDate);
+        break;
+    }
+    dueDate = dueDate.addDays(1);
+  }
 }
 
 void MyMoneyScheduleTest::testModifyNextDueDate(void)
@@ -1856,4 +1857,20 @@ void MyMoneyScheduleTest::testSimpleToFromCompoundOccurrence()
   occ = MyMoneySchedule::OCCUR_YEARLY; mult = 2;
   MyMoneySchedule::compoundToSimpleOccurrence(mult, occ);
   CPPUNIT_ASSERT( occ == MyMoneySchedule::OCCUR_EVERYOTHERYEAR && mult == 1 );
+}
+
+void MyMoneyScheduleTest::testProcessingDates()
+{
+  // There should be no processing calendar defined so
+  // make sure fall back works
+
+  MyMoneySchedule s;
+  // Check there is no processing caledar defined.
+  CPPUNIT_ASSERT( s.processingCalendar() == 0 );
+  // This should be a processing day.
+  CPPUNIT_ASSERT( s.isProcessingDate(QDate(2009,12,31)) );
+  // This should be a processing day when there is no calendar.
+  CPPUNIT_ASSERT( s.isProcessingDate(QDate(2010,1,1)) );
+  // This should be a non-processing day as it is on a weekend.
+  CPPUNIT_ASSERT( !s.isProcessingDate(QDate(2010,1,2)) );
 }

@@ -50,7 +50,7 @@ find_package(QGpgme REQUIRED)
 find_package(KdepimLibs REQUIRED)
 find_package(SharedMimeInfo REQUIRED)
 
-add_definitions( ${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
+add_definitions( ${QT_DEFINITIONS} ${KDE4_DEFINITIONS} ${KDEPIM_DEFINITIONS})
 string(TOLOWER ${CMAKE_BUILD_TYPE} CMAKE_BUILD_TYPE_TOLOWER)
 if(CMAKE_BUILD_TYPE_TOLOWER MATCHES debugfull)
   add_definitions (-DQT_STRICT_ITERATORS)
@@ -58,7 +58,9 @@ if(CMAKE_BUILD_TYPE_TOLOWER MATCHES debugfull)
 endif()
 add_definitions (-DQT3_SUPPORT -DQT3_SUPPORT_WARNINGS)
 
-include_directories( ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES} 
+include_directories( ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR}
+	${KDE4_INCLUDES}
+	${KDEPIMLIBS_INCLUDE_DIRS}
 	${CMAKE_CURRENT_BINARY_DIR}/kmymoney/dialogs/
 	${CMAKE_CURRENT_SOURCE_DIR}/kmymoney/widgets/
 	${CMAKE_CURRENT_BINARY_DIR}/kmymoney/widgets/

@@ -26,19 +26,19 @@
 // QT Includes
 
 #include <QStringList>
-#include <qmap.h>
+#include <QMap>
 #include <QDateTime>
-//Added by qt3to4:
 #include <QList>
-
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "mymoneytransaction.h"
 #include "mymoneyaccount.h"
-#include <kmm_mymoney_export.h>
-#include <mymoneyobject.h>
+#include "kmm_mymoney_export.h"
+#include "mymoneyobject.h"
+
+class IMyMoneyProcessingCalendar;
 
 /**
   * @author Michael Edwardes
@@ -87,15 +87,15 @@ public:
   /**
     * This enum is used by the auto-commit functionality.
     *
-    * Depending upon the value of m_weekdayOption the schedule can
+    * Depending upon the value of m_weekendOption the schedule can
     * be entered on a different date
   **/
-  enum weekendOptionE { MoveFriday=0, MoveMonday=1, MoveNothing=2 };
+  enum weekendOptionE { MoveBefore=0, MoveAfter=1, MoveNothing=2 };
 
   /**
     * Standard constructor
     */
-  MyMoneySchedule();
+  explicit MyMoneySchedule();
 
   /**
     * Constructor for initialising the object.
@@ -108,7 +108,7 @@ public:
   MyMoneySchedule(const QString& name, typeE type, occurrenceE occurrence, int occurrenceMultiplier,
           paymentTypeE paymentType, const QDate& startDate, const QDate& endDate, bool fixed, bool autoEnter);
 
-  MyMoneySchedule(const QDomElement& node);
+  explicit MyMoneySchedule(const QDomElement& node);
 
   MyMoneySchedule(const QString& id, const MyMoneySchedule& right);
 
@@ -236,12 +236,23 @@ public:
     *         returns an invalid QDate.
     *
     * @sa weekendOption()
+    * @sa adjustedDate()
     */
   QDate adjustedNextDueDate(void) const;
 
   /**
+    * This method adjusts returns the date adjusted according to the
+    * rules specified by the schedule's weekend option.
+    *
+    * @return QDate containing the adjusted date.
+    */
+  QDate adjustedDate(QDate date, weekendOptionE option) const;
+
+  /**
+
     * Get the weekendOption that determines how the schedule check code
-    * will enter transactions that occur on a weekend.
+    * will enter transactions that occur on a non-processing day (usually
+    * a weekend).
     *
     * This not used by MyMoneySchedule but by the support code.
   **/
@@ -353,12 +364,13 @@ public:
 
   /**
     * Set the weekendOption that determines how the schedule check code
-    * will enter transactions that occur on a weekend. The following values
+    * will enter transactions that occur on a non-processing day (usually
+    * a weekend). The following values
     * are valid:
     *
     * - MoveNothing: don't modify date
-    * - MoveFriday: modify the date to the previous friday
-    * - MoveMonday: modify the date to the following monday
+    * - MoveBefore: modify the date to the previous processing day
+    * - MoveAfter: modify the date to the next processing day
     *
     * If an invalid option is given, the option is set to MoveNothing.
     *
@@ -389,12 +401,12 @@ public:
   /**
     * Calculates the date of the next payment.
     *
-    * @param refDate the reference date from which the next payment
+    * @param refDate The reference date from which the next payment
     *                date will be calculated (defaults to current date)
     *
     * @return QDate The date the next payment is due. This date is
     *         always past @a refDate.  In case of an error or
-    *         if there is no more payment then an empty/invalid QDate()
+    *         if there are no more payments then an empty/invalid QDate()
     *         will be returned.
     */
   QDate nextPayment(const QDate& refDate = QDate::currentDate()) const;
@@ -461,7 +473,7 @@ public:
   QString occurrenceToString() const;
 
   /**
-   * This method is used to convert the occurrence type from it's
+   * This method is used to convert the occurrence type from its
    * internal representation into a human readable format.
    *
    * @param type numerical representation of the MyMoneySchedule
@@ -473,7 +485,7 @@ public:
 
   /**
    * This method is used to convert a multiplier and base occurrence type
-   * from it's internal representation into a human readable format.
+   * from its internal representation into a human readable format.
    * When multiplier * occurrence is equivalent to a simple occurrence
    * the method returns the same as occurrenceToString of the simple occurrence
    *
@@ -486,7 +498,7 @@ public:
 
   /**
    * This method is used to convert an occurrence period from
-   * it's internal representation into a human-readable format.
+   * its internal representation into a human-readable format.
    *
    * @param type numerical representation of the MyMoneySchedule
    *                  occurrence type
@@ -496,7 +508,7 @@ public:
   static QString occurrencePeriodToString(occurrenceE type);
 
   /**
-   * This method is used to convert the payment type from it's
+   * This method is used to convert the payment type from its
    * internal representation into a human readable format.
    *
    * @param paymentType numerical representation of the MyMoneySchedule
@@ -507,7 +519,7 @@ public:
   static QString paymentMethodToString(MyMoneySchedule::paymentTypeE paymentType);
 
   /**
-   * This method is used to convert the schedule weekend option from it's
+   * This method is used to convert the schedule weekend option from its
    * internal representation into a human readable format.
    *
    * @param weekendOption numerical representation of the MyMoneySchedule
@@ -518,7 +530,7 @@ public:
   static QString weekendOptionToString(MyMoneySchedule::weekendOptionE weekendOption);
 
   /**
-   * This method is used to convert the schedule type from it's
+   * This method is used to convert the schedule type from its
    * internal representation into a human readable format.
    *
    * @param type numerical representation of the MyMoneySchedule
@@ -573,14 +585,28 @@ public:
 
   /**
     * This method is used to convert the occurrence type from the
-    * human readable form into it's internal representation.
+    * human readable form into its internal representation.
     *
     * @param text reference to QString representing the human readable format
     * @return numerical representation of the occurrence
     */
   static MyMoneySchedule::occurrenceE stringToOccurrence(const QString& text);
 
+  /**
+    * This method is used to set the static point to relevant
+    * IMyMoneyProcessingCalendar.
+    */
+  static void setProcessingCalendar(IMyMoneyProcessingCalendar* pc);
+
 private:
+  /**
+    * This method returns a pointer to the processing calendar object.
+    *
+    * @return const pointer to the current attached processing calendar object.
+    *         If no object is attached, returns 0.
+    */
+  IMyMoneyProcessingCalendar* processingCalendar(void) const;
+
   /**
     * This method forces the day of the passed @p date to
     * be the day of the start date of this schedule kept
@@ -627,6 +653,15 @@ private:
     */
   QDate addHalfMonths( QDate date, int mult = 1 ) const;
 
+  /**
+    * Checks if a given date should be considered a processing day
+    * based on a calendar. See @a IMyMoneyProcessingCalendar and
+    * setProcessingCalendar(). If no processingCalendar has been
+    * setup using setProcessingCalendar it returns @c true on Mon..Fri
+    * and @c false on Sat..Sun.
+    */
+  bool isProcessingDate(const QDate& date) const;
+
 private:
   /// Its occurrence
   occurrenceE m_occurrence;
@@ -664,7 +699,7 @@ private:
   /// The recorded payments
   QList<QDate> m_recordedPayments;
 
-  /// The weekday option
+  /// The weekend option
   weekendOptionE m_weekendOption;
 };
 #endif

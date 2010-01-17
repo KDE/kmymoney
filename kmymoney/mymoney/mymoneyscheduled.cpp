@@ -32,8 +32,9 @@
 
 #include "mymoneyexception.h"
 #include "mymoneyfile.h"
+#include "imymoneyprocessingcalendar.h"
 
-
+static IMyMoneyProcessingCalendar* processingCalendarPtr = 0;
 
 MyMoneySchedule::MyMoneySchedule() :
   MyMoneyObject()
@@ -258,27 +259,27 @@ const QDate& MyMoneySchedule::nextDueDate(void) const
 
 QDate MyMoneySchedule::adjustedNextDueDate(void) const
 {
-  QDate date(nextDueDate());
-
   if(isFinished())
     return QDate();
 
-  if(weekendOption() != MyMoneySchedule::MoveNothing) {
-    int dayOfWeek = date.dayOfWeek();
-    if (dayOfWeek >= 6) {
-      if (weekendOption() == MyMoneySchedule::MoveFriday) {
-        if (dayOfWeek == 7)
-          date = date.addDays(-2);
-        else
-          date = date.addDays(-1);
-      } else {
-        if (dayOfWeek == 6)
-          date = date.addDays(2);
-        else
-          date = date.addDays(1);
-      }
-    }
-  }
+  QDate date(nextDueDate());
+  weekendOptionE option(weekendOption());
+
+  return adjustedDate(date, option);
+}
+
+QDate MyMoneySchedule::adjustedDate(QDate date, weekendOptionE option) const
+{
+  if (option == MyMoneySchedule::MoveNothing || isProcessingDate(date))
+    return date;
+
+  int step = 1;
+  if (option == MyMoneySchedule::MoveBefore)
+    step = -1;
+
+  while (!isProcessingDate(date))
+    date = date.addDays(step);
+
   return date;
 }
 
@@ -758,8 +759,8 @@ void MyMoneySchedule::setWeekendOption(const weekendOptionE option)
 {
   // make sure only valid values are used. Invalid defaults to MoveNothing.
   switch(option) {
-    case MoveFriday:
-    case MoveMonday:
+    case MoveBefore:
+    case MoveAfter:
       m_weekendOption = option;
       break;
 
@@ -1002,11 +1003,11 @@ QString MyMoneySchedule::weekendOptionToString(MyMoneySchedule::weekendOptionE w
   QString text;
 
   switch (weekendOption) {
-    case MyMoneySchedule::MoveFriday:
-      text = I18N_NOOP("Change the date to the previous Friday");
+    case MyMoneySchedule::MoveBefore:
+      text = I18N_NOOP("Change the date to the previous processing day");
       break;
-    case MyMoneySchedule::MoveMonday:
-      text = I18N_NOOP("Change the date to the next Monday");
+    case MyMoneySchedule::MoveAfter:
+      text = I18N_NOOP("Change the date to the next processing day");
       break;
     case MyMoneySchedule::MoveNothing:
       text = I18N_NOOP("Do Nothing");
@@ -1402,4 +1403,22 @@ void MyMoneySchedule::compoundToSimpleOccurrence(int& multiplier,occurrenceE& oc
     occurrence = newOcc;
     multiplier = 1;
   }
+}
+
+void MyMoneySchedule::setProcessingCalendar(IMyMoneyProcessingCalendar* pc)
+{
+  processingCalendarPtr = pc;
+}
+
+bool MyMoneySchedule::isProcessingDate(const QDate& date) const
+{
+  if (processingCalendarPtr)
+    return processingCalendarPtr->isProcessingDate(date);
+
+  return date.dayOfWeek() < Qt::Saturday;
+}
+
+IMyMoneyProcessingCalendar* MyMoneySchedule::processingCalendar(void) const
+{
+  return processingCalendarPtr;
 }

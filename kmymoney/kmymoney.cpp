@@ -53,6 +53,7 @@
 #include <q3vbox.h>
 #include <QEventLoop>
 #include <QByteArray>
+#include <QBitArray>
 #include <QBoxLayout>
 #include <Q3Frame>
 #include <QResizeEvent>
@@ -91,6 +92,7 @@
 #include <kinputdialog.h>
 #include <kxmlguifactory.h>
 #include <krecentfilesaction.h>
+#include <KHolidays/Holidays>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -205,8 +207,11 @@ public:
     m_saveEncrypted(0),
     m_additionalKeyLabel(0),
     m_additionalKeyButton(0),
-    m_recentFiles(0)
-  {}
+    m_recentFiles(0),
+    m_holidayRegion(0)
+  {
+    m_processingDays.resize(7);
+  }
 
   void unlinkStatementXML(void);
   void moveInvestmentTransaction(const QString& fromId,
@@ -311,6 +316,10 @@ public:
   KPushButton*          m_additionalKeyButton;
 
   KRecentFilesAction*   m_recentFiles;
+
+  // used by the calendar interface for schedules
+  KHolidays::HolidayRegion* m_holidayRegion;
+  QBitArray             m_processingDays;
 };
 
 KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
@@ -375,6 +384,19 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
 
   d->m_backupState = BACKUP_IDLE;
 
+  setHolidayRegion(KMyMoneyGlobalSettings::holidayRegion());
+
+  int weekStart = KGlobal::locale()->workingWeekStartDay();
+  int weekEnd = KGlobal::locale()->workingWeekEndDay();
+  bool startFirst = (weekStart < weekEnd);
+  for (int i = 1; i < 8; i++)
+  {
+    if (startFirst)
+      d->m_processingDays.setBit(i, (i >= weekStart && i <= weekEnd));
+    else
+      d->m_processingDays.setBit(i, (i >= weekStart || i <= weekEnd));
+  }
+
   d->m_autoSaveEnabled = KMyMoneyGlobalSettings::autoSaveFile();
   d->m_autoSavePeriod = KMyMoneyGlobalSettings::autoSavePeriod();
 
@@ -399,6 +421,7 @@ KMyMoneyApp::~KMyMoneyApp()
   delete d->m_endingBalanceDlg;
   delete d->m_moveToAccountSelector;
   delete d->m_myMoneyView;
+  delete d->m_holidayRegion;
   delete d;
 }
 
@@ -2327,6 +2350,7 @@ void KMyMoneyApp::slotSettings(void)
   dlg->addPage(pluginsPage, i18n("Plugins"), "network-disconnect");
 
   connect(dlg, SIGNAL(settingsChanged(const QString&)), this, SLOT(slotUpdateConfiguration()));
+  connect(dlg, SIGNAL(cancelClicked()), schedulesPage, SLOT(slotResetRegion()));
   connect(dlg, SIGNAL(okClicked()), pluginsPage, SLOT(slotSavePlugins()));
   connect(dlg, SIGNAL(defaultClicked()), pluginsPage, SLOT(slotDefaultsPlugins()));
 
@@ -2338,6 +2362,9 @@ void KMyMoneyApp::slotUpdateConfiguration(void)
   MyMoneyTransactionFilter::setFiscalYearStart(KMyMoneyGlobalSettings::firstFiscalMonth(), KMyMoneyGlobalSettings::firstFiscalDay());
 
   d->m_myMoneyView->updateViewType();
+
+  // update the holiday region configuration
+  setHolidayRegion(KMyMoneyGlobalSettings::holidayRegion());
 
   d->m_myMoneyView->slotRefreshViews();
 
@@ -6355,6 +6382,9 @@ void KMyMoneyApp::createInterfaces(void)
   new KMyMoneyPlugin::KMMViewInterface(this, d->m_myMoneyView, d->m_pluginInterface);
   new KMyMoneyPlugin::KMMStatementInterface(this, d->m_pluginInterface);
   new KMyMoneyPlugin::KMMImportInterface(this, d->m_pluginInterface);
+
+  // setup the calendar interface for schedules
+  MyMoneySchedule::setProcessingCalendar(this);
 }
 
 void KMyMoneyApp::loadPlugins(void)
@@ -6633,6 +6663,22 @@ void KMyMoneyApp::slotAccountUpdateOnline(void)
     d->m_collectingStatements = false;
     KMessageBox::informationList(this, i18n("The statements have been processed with the following results:"), d->m_statementResults, i18n("Statement stats"));
   }
+}
+
+void KMyMoneyApp::setHolidayRegion(const QString& holidayRegion)
+{
+  // Delete the previous holidayRegion before creating a new one.
+  delete d->m_holidayRegion;
+  // Create a new holidayRegion.
+  d->m_holidayRegion = new KHolidays::HolidayRegion(holidayRegion);
+}
+
+bool KMyMoneyApp::isProcessingDate(const QDate& date) const
+{
+  if (!d->m_processingDays.testBit(date.dayOfWeek()))
+    return false;
+  return (!d->m_holidayRegion || !d->m_holidayRegion->isValid()) ? true :
+    !d->m_holidayRegion->isHoliday(date);
 }
 
 KMStatus::KMStatus (const QString &text)

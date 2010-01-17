@@ -132,10 +132,10 @@ KEditScheduleDlg::KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget *par
     case MyMoneySchedule::MoveNothing:
       m_weekendOptionEdit->setCurrentIndex(0);
       break;
-    case MyMoneySchedule::MoveFriday:
+    case MyMoneySchedule::MoveBefore:
       m_weekendOptionEdit->setCurrentIndex(1);
       break;
-    case MyMoneySchedule::MoveMonday:
+    case MyMoneySchedule::MoveAfter:
       m_weekendOptionEdit->setCurrentIndex(2);
       break;
   }
@@ -344,10 +344,10 @@ const MyMoneySchedule& KEditScheduleDlg::schedule(void) const
         d->m_schedule.setWeekendOption(MyMoneySchedule::MoveNothing);
         break;
       case 1:
-        d->m_schedule.setWeekendOption(MyMoneySchedule::MoveFriday);
+        d->m_schedule.setWeekendOption(MyMoneySchedule::MoveBefore);
         break;
       case 2:
-        d->m_schedule.setWeekendOption(MyMoneySchedule::MoveMonday);
+        d->m_schedule.setWeekendOption(MyMoneySchedule::MoveAfter);
         break;
     }
 

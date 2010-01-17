@@ -221,12 +221,12 @@
                     </item>
                     <item>
                       <property name="text">
-                        <string>Change the date to the previous Friday</string>
+                        <string>Change the date to the previous processing day</string>
                       </property>
                     </item>
                     <item>
                       <property name="text">
-                        <string>Change the date to the next Monday</string>
+                        <string>Change the date to the next processing day</string>
                       </property>
                     </item>
                   </widget>
@@ -234,7 +234,7 @@
                 <item row="1" column="0">
                   <widget class="QLabel" name="textLabel1_2">
                     <property name="text">
-                      <string>If this schedule occurs on the weekend:</string>
+                      <string>If this schedule occurs on a non-processing day:</string>
                     </property>
                     <property name="wordWrap">
                       <bool>false</bool>

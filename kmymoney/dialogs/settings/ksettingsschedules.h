@@ -45,6 +45,19 @@ class KSettingsSchedules : public KSettingsSchedulesDecl
 public:
   KSettingsSchedules(QWidget* parent = 0);
   ~KSettingsSchedules();
-};
-#endif
 
+public slots:
+  void slotResetRegion();
+
+protected slots:
+  void slotLoadRegion(const QString &region);
+  void slotSetRegion(const QString &region);
+
+protected:
+  void loadList(void);
+
+private:
+  QMap<QString,QString> m_regionMap;
+};
+
+#endif

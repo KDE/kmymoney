@@ -166,23 +166,7 @@ MyMoneyTransaction KEnterScheduleDlg::transaction(void)
 QDate KEnterScheduleDlg::date(const QDate& _date) const
 {
   QDate date(_date);
-  if (d->m_schedule.weekendOption() != MyMoneySchedule::MoveNothing) {
-    int dayOfWeek = date.dayOfWeek();
-    if (dayOfWeek >= 6) {
-      if (d->m_schedule.weekendOption() == MyMoneySchedule::MoveFriday) {
-        if (dayOfWeek == 7)
-          date = date.addDays(-2);
-        else
-          date = date.addDays(-1);
-      } else {
-        if (dayOfWeek == 6)
-          date = date.addDays(2);
-        else
-          date = date.addDays(1);
-      }
-    }
-  }
-  return date;
+  return d->m_schedule.adjustedDate(date, d->m_schedule.weekendOption());
 }
 
 void KEnterScheduleDlg::resizeEvent(QResizeEvent* ev)

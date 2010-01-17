@@ -27,6 +27,7 @@ SET(mymoney_HEADERS kmm_mymoney_export.h
   mymoneyscheduled.h mymoneysecurity.h mymoneysplit.h mymoneystatement.h
   mymoneytransactionfilter.h mymoneytransaction.h
   mymoneyutils.h mymoneybudget.h mymoneyobjectcontainer.h mymoneyforecast.h
+  imymoneyprocessingcalendar.h
   )
 
 KMM_CREATE_LINKS( ${mymoney_HEADERS} )
