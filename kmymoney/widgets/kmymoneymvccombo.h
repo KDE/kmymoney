@@ -2,8 +2,10 @@
                           kmymoneymvccombo.h  -  description
                              -------------------
     begin                : Mon Jan 09 2010
-    copyright            : (C) 2010 by Thomas Baumgart
-    email                : ipwizard@users.sourceforge.net
+    copyright            : (C) 2010 by Thomas Baumgart <ipwizard@users.sourceforge.net>
+                           Cristian Onet <cristian.onet@gmail.com>
+                           Alvaro Soliverez <asoliverez@gmail.com>
+
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,14 +24,6 @@
 // QT Includes
 
 #include <QCompleter>
-/*#include <QTimer>
-#include <QMutex>
-#include <QPaintEvent>
-#include <QFocusEvent>
-#include <QList>
-#include <QMouseEvent>
-#include <QKeyEvent>
-#include <QStandardItemModel>*/
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -44,18 +38,6 @@
 #include <mymoneysplit.h>
 #include <mymoneytransactionfilter.h>
 #include <register.h>
-
-/*#include <mymoneyutils.h>
-
-
-#include <mymoneyaccount.h>
-#include <transaction.h>
-
-
-
-class kMyMoneyCompletion;
-class KMyMoneySelector;
-class kMyMoneyLineEdit;*/
 
 /**
   * @author Cristian Onet
