@@ -20,28 +20,94 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <config-kmymoney.h>
+
 #include "kmymoneyaccountcombo.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qdrawutil.h>
 #include <QPainter>
 #include <QStyle>
 #include <QApplication>
-//Added by qt3to4:
 #include <QMouseEvent>
 #include <QList>
 #include <QKeyEvent>
+#include <QTreeView>
+
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include "klocalizedstring.h"
+
 // ----------------------------------------------------------------------------
 // Project Includes
-#include <config-kmymoney.h>
+
 #include <mymoneyfile.h>
 #include "kmymoneyaccountcompletion.h"
+#include "models/accountsmodel.h"
+
+class KMyMoneyMVCAccountCombo::Private
+{
+public:
+  Private() : m_popupView(0) {}
+  QTreeView *m_popupView;
+};
+
+KMyMoneyMVCAccountCombo::KMyMoneyMVCAccountCombo(QWidget* parent/* = 0*/)
+  : KComboBox(parent), d(new Private)
+{
+}
+
+KMyMoneyMVCAccountCombo::~KMyMoneyMVCAccountCombo()
+{
+}
+
+void KMyMoneyMVCAccountCombo::wheelEvent(QWheelEvent *ev)
+{
+  Q_UNUSED(ev)
+  // don't change anything with the help of the wheel, yet (due to the tree model)
+}
+
+void KMyMoneyMVCAccountCombo::modelWasSet()
+{
+  // OK, now that the model was set we are ready to set-up the completer view
+  d->m_popupView = new QTreeView(this);
+  setView(d->m_popupView);
+  d->m_popupView->setHeaderHidden(true);
+  d->m_popupView->setRootIsDecorated(false);
+  d->m_popupView->expandAll();
+  connect(this, SIGNAL(activated(int)), SLOT(activated()));
+
+  // set the widget's size, just like the old widget
+  QFontMetrics fm(font());
+  setMinimumWidth(fm.maxWidth()*15);
+}
+
+void KMyMoneyMVCAccountCombo::activated()
+{
+  // emit the account selected signal, just like the old widget
+  QVariant data = model()->data(view()->currentIndex(), AccountIdRole);
+  if (data.isValid()) {
+    emit accountSelected(data.toString());
+  }
+}
+
+void KMyMoneyMVCAccountCombo::setSelected(const QString& id)
+{
+  // find which item has this id and set is as the current item
+  QModelIndexList list = model()->match(model()->index(0, 0), AccountIdRole, QVariant(id), 1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
+  if (list.count() > 0) {
+    QModelIndex index = list.front();
+    // set the current index, for this we must set the parent item as the root item
+    QModelIndex oldRootModelIndex = rootModelIndex();
+    setRootModelIndex(index.parent());
+    setCurrentIndex(index.row());
+    // restore the old root item
+    setRootModelIndex(oldRootModelIndex);
+  }
+}
 
 KMyMoneyAccountCombo::KMyMoneyAccountCombo(QWidget* parent) :
   KComboBox(parent),

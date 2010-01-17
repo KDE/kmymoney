@@ -25,6 +25,10 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
+#include <QMouseEvent>
+#include <QKeyEvent>
+#include <QList>
+#include <QItemSelection>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -35,11 +39,40 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoneyutils.h>
-#include <QMouseEvent>
-#include <QKeyEvent>
-#include <QList>
+#include "kmymoneyutils.h"
+
 class kMyMoneyAccountCompletion;
+
+/**
+  * @author Cristian Onet
+  */
+class KMyMoneyMVCAccountCombo : public KComboBox
+{
+  Q_OBJECT
+public:
+  KMyMoneyMVCAccountCombo(QWidget* parent = 0);
+  ~KMyMoneyMVCAccountCombo();
+
+  void setSelected(const QString& id);
+
+  /**
+    * Notify the widget that it's model has been set (QComboBox::setModel is not virtual)
+    */
+  void modelWasSet();
+
+protected:
+  virtual void wheelEvent(QWheelEvent *ev);
+
+protected slots:
+  void activated();
+
+signals:
+  void accountSelected(const QString&);
+
+private:
+  class Private;
+  Private* const d;
+};
 
 /**
   * @author Thomas Baumgart

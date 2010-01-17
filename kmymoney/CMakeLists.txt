@@ -2,6 +2,7 @@ INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}
   ${KMyMoney_SOURCE_DIR}/libkdchart/include )
 
 ADD_SUBDIRECTORY( mymoney )
+ADD_SUBDIRECTORY( models  )
 ADD_SUBDIRECTORY( plugins )
 ADD_SUBDIRECTORY( reports )
 ADD_SUBDIRECTORY( widgets )
@@ -37,7 +38,7 @@ ADD_DEPENDENCIES(kmymoney_common generate_base_ui_srcs)
 
 SET( kmymoney_common_LIBS
   views reports kmymoney_common newuserwizard
-  newaccountwizard wizardpages dialogs widgets settings converter
+  newaccountwizard wizardpages dialogs widgets settings converter models
   kmm_storage kmm_mymoney kgpgfile interfaces kmm_plugin dialogs kmm_kdchart
   ${QT_AND_KDECORE_LIBS} ${QT_QT3SUPPORT_LIBRARY} ${QT_QTSQL_LIBRARY}
   ${KDE4_KHTML_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KABC_LIBS} ${KDE4_KFILE_LIBS} ${KDE4_KDE3SUPPORT_LIBS} ${KDE4_KUTILS_LIBRARY})
