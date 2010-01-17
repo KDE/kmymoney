@@ -388,7 +388,7 @@ void KMyMoneyGeneralCombo::insertItem(const QString& txt, int id, int idx)
 
 void KMyMoneyGeneralCombo::removeItem(int id)
 {
-  removeItem(findData(QVariant(id), Qt::UserRole, Qt::MatchExactly));
+  KComboBox::removeItem(findData(QVariant(id), Qt::UserRole, Qt::MatchExactly));
 }
 
 void KMyMoneyGeneralCombo::slotChangeItem(int idx)
