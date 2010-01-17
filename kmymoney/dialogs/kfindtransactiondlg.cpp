@@ -57,7 +57,6 @@
 #include <kmymoneyglobalsettings.h>
 #include <register.h>
 #include <transaction.h>
-#include <kmymoneycombo.h>
 #include <ktoolinvocation.h>
 
 

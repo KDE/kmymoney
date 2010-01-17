@@ -45,7 +45,6 @@
 #include <knewloanwizard.h>
 #include "kmymoneylineedit.h"
 #include "kmymoneyedit.h"
-#include "kmymoneycombo.h"
 #include "kmymoneyaccountselector.h"
 #include "kmymoneydateinput.h"
 #include "mymoneyfile.h"

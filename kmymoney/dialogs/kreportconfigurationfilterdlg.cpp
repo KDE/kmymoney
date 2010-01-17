@@ -68,7 +68,6 @@
 #include <kmymoneyaccountselector.h>
 #include <mymoneyfile.h>
 #include <mymoneyreport.h>
-#include <kmymoneycombo.h>
 #include <ktoolinvocation.h>
 
 KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(

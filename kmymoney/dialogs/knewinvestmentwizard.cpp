@@ -41,7 +41,6 @@
 #include <kmymoneyedit.h>
 #include <mymoneysecurity.h>
 #include <mymoneyfile.h>
-#include <kmymoneycombo.h>
 #include <ktoolinvocation.h>
 #include "kmymoneycurrencyselector.h"
 #include "webpricequote.h"

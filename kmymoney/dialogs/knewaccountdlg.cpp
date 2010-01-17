@@ -63,7 +63,6 @@
 #include <kmymoneyglobalsettings.h>
 #include <mymoneyreport.h>
 #include <kguiutils.h>
-#include <kmymoneycombo.h>
 #include "kmymoneycurrencyselector.h"
 #include "kmymoneyaccountselector.h"
 #include "mymoneykeyvaluecontainer.h"

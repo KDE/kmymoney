@@ -5223,7 +5223,7 @@ This page summarizes the data you entered. If you need to modify anything, pleas
   <customwidget>
    <class>KMyMoneyGeneralCombo</class>
    <extends>QWidget</extends>
-   <header>kmymoneycombo.h</header>
+   <header>kmymoneymvccombo.h</header>
    <container>1</container>
   </customwidget>
 

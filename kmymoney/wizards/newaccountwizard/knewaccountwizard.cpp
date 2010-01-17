@@ -38,7 +38,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoneycombo.h>
 #include <kmymoneyedit.h>
 #include <kmymoneycategory.h>
 #include <kmymoneycurrencyselector.h>
