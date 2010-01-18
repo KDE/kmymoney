@@ -73,6 +73,7 @@ void KMyMoneyMVCAccountCombo::wheelEvent(QWheelEvent *ev)
 void KMyMoneyMVCAccountCombo::modelWasSet()
 {
   // OK, now that the model was set we are ready to set-up the completer view
+  delete d->m_popupView;
   d->m_popupView = new QTreeView(this);
   setView(d->m_popupView);
   d->m_popupView->setHeaderHidden(true);
@@ -83,6 +84,12 @@ void KMyMoneyMVCAccountCombo::modelWasSet()
   // set the widget's size, just like the old widget
   QFontMetrics fm(font());
   setMinimumWidth(fm.maxWidth()*15);
+}
+
+void KMyMoneyMVCAccountCombo::expandAll()
+{
+  if (d->m_popupView)
+    d->m_popupView->expandAll();
 }
 
 void KMyMoneyMVCAccountCombo::activated()

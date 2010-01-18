@@ -61,6 +61,7 @@
 #include "kfindtransactiondlg.h"
 #include "kmymoney.h"
 #include "scheduledtransaction.h"
+#include "models/accountsmodel.h"
 
 class KGlobalLedgerView::Private
 {
@@ -70,7 +71,7 @@ public:
   MousePressFilter*    m_mousePressFilter;
   KMyMoneyRegister::RegisterSearchLineWidget* m_registerSearchLine;
   QPoint               m_startPoint;
-  QString             m_reconciliationAccount;
+  QString              m_reconciliationAccount;
   QDate                m_reconciliationDate;
   MyMoneyMoney         m_endingBalance;
   int                  m_precision;
@@ -79,6 +80,13 @@ public:
   bool                 m_showDetails;
   KMyMoneyRegister::Action m_action;
   QTimer               m_viewPosTimer;
+
+  // models
+  AccountsModel*            m_accountsModel;
+  AccountsFilterProxyModel* m_filterProxyModel;
+
+  // widgets
+  KMyMoneyMVCAccountCombo* m_accountComboBox;
 };
 
 MousePressFilter::MousePressFilter(QWidget* parent) :
@@ -145,7 +153,10 @@ KGlobalLedgerView::Private::Private() :
   m_registerSearchLine(0),
   m_inLoading(false),
   m_recursion(false),
-  m_showDetails(false)
+  m_showDetails(false),
+  m_accountsModel(0),
+  m_filterProxyModel(0),
+  m_accountComboBox(0)
 {
 }
 
@@ -161,13 +172,27 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name )
   d->m_mousePressFilter = new MousePressFilter((QWidget*)this);
   d->m_action = KMyMoneyRegister::ActionNone;
 
+  // account model
+  d->m_accountsModel = new AccountsModel(this);
+
+  // the proxy filter model
+  d->m_filterProxyModel = new AccountsFilterProxyModel(this);
+  d->m_filterProxyModel->addAccountGroup(MyMoneyAccount::Asset);
+  d->m_filterProxyModel->addAccountGroup(MyMoneyAccount::Liability);
+  d->m_filterProxyModel->setSourceModel(d->m_accountsModel);
+  d->m_filterProxyModel->sort(0);
+
   // create the toolbar frame at the top of the view
   m_toolbarFrame = new QFrame(this);
   QHBoxLayout* toolbarLayout = new QHBoxLayout(m_toolbarFrame);
   toolbarLayout->setContentsMargins(0,0,0,0);
   toolbarLayout->setSpacing(0);
-  m_accountComboBox = new KMyMoneyAccountCombo(m_toolbarFrame);
-  toolbarLayout->addWidget(m_accountComboBox);
+
+  // the account selector widget
+  d->m_accountComboBox = new KMyMoneyMVCAccountCombo(m_toolbarFrame);
+  toolbarLayout->addWidget(d->m_accountComboBox);
+  d->m_accountComboBox->setModel(d->m_filterProxyModel);
+  d->m_accountComboBox->modelWasSet();
 
   layout()->addWidget(m_toolbarFrame);
 
@@ -241,7 +266,7 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name )
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadView()));
   connect(m_register, SIGNAL(focusChanged(KMyMoneyRegister::Transaction*)), m_form, SLOT(slotSetTransaction(KMyMoneyRegister::Transaction*)));
   connect(m_register, SIGNAL(focusChanged()), kmymoney, SLOT(slotUpdateActions()));
-  connect(m_accountComboBox, SIGNAL(accountSelected(const QString&)), this, SLOT(slotSelectAccount(const QString&)));
+  connect(d->m_accountComboBox, SIGNAL(accountSelected(const QString&)), this, SLOT(slotSelectAccount(const QString&)));
   connect(m_register, SIGNAL(selectionChanged(const KMyMoneyRegister::SelectedTransactions&)), this, SIGNAL(transactionsSelected(const KMyMoneyRegister::SelectedTransactions&)));
   connect(m_register, SIGNAL(editTransaction()), this, SIGNAL(startEdit()));
   connect(m_register, SIGNAL(emptyItemSelected()), this, SLOT(slotNewTransaction()));
@@ -305,7 +330,7 @@ void KGlobalLedgerView::clear(void)
   m_transactionList.clear();
 
   // and the selected account in the combo box
-  m_accountComboBox->setSelected(QString());
+  d->m_accountComboBox->setSelected(QString());
 
   // fraction defaults to two digits
   d->m_precision = 2;
@@ -822,28 +847,37 @@ void KGlobalLedgerView::loadAccounts(void)
     }
   }
 
-  m_accountComboBox->loadList((KMyMoneyUtils::categoryTypeE)(KMyMoneyUtils::asset | KMyMoneyUtils::liability));
+  if (d->m_accountsModel) {
+    d->m_accountsModel->load();
+    d->m_filterProxyModel->setSourceModel(d->m_accountsModel);
+    d->m_filterProxyModel->sort(0);
+    d->m_accountComboBox->expandAll();
+  }
 
   if(m_account.id().isEmpty()) {
-    QStringList list = m_accountComboBox->accountList();
-    if(list.count()) {
-      QStringList::Iterator it;
-      for(it = list.begin(); it != list.end(); ++it) {
-        MyMoneyAccount a = file->account(*it);
-        if(!a.isInvest()) {
-          if(a.value("PreferredAccount") == "Yes") {
-            m_account = a;
-            break;
-          } else if(m_account.id().isEmpty()) {
-            m_account = a;
-          }
-        }
+    // find the first favorite account
+    QModelIndexList list = d->m_accountsModel->match(d->m_accountsModel->index(0, 0), AccountFavoriteRole, QVariant(true), 1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
+    if (list.count() > 0) {
+      QVariant accountId = d->m_accountsModel->data(list.front(), AccountIdRole);
+      if (accountId.isValid()) {
+        m_account = file->account(accountId.toString());
+      }
+    }
+
+    if(m_account.id().isEmpty()) {
+      // there are no favorite accounts find any account
+      QModelIndexList list = d->m_accountsModel->match(d->m_accountsModel->index(0, 0), Qt::DisplayRole, QVariant(QString()), -1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive));
+      for (QModelIndexList::ConstIterator it = list.constBegin(); it != list.constEnd(); ++it) {
+        QVariant accountId = d->m_accountsModel->data(*it, AccountIdRole);
+        MyMoneyAccount a = file->account(accountId.toString());
+        if(!a.isInvest())
+          m_account = a;
       }
     }
   }
 
   if(!m_account.id().isEmpty()) {
-    m_accountComboBox->setSelected(m_account);
+    d->m_accountComboBox->setSelected(m_account.id());
     try {
       d->m_precision = MyMoneyMoney::denomToPrec(m_account.fraction());
     } catch(MyMoneyException *e) {

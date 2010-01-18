@@ -48,7 +48,6 @@ class KToolBarButton;
 #include <register.h>
 #include <transactionform.h>
 
-class KMyMoneyAccountCombo;
 class MyMoneyReport;
 class TransactionEditor;
 
@@ -298,6 +297,7 @@ protected slots:
     * the focus item visible if d->m_startPoint equals QPoint(-1, -1).
     */
   void slotUpdateViewPos(void);
+
   void slotSortOptions(void);
   void slotToggleTransactionMark(KMyMoneyRegister::Transaction* t);
 
@@ -328,7 +328,6 @@ private:
   QFrame*                       m_summaryFrame;
 
   // widgets
-  KMyMoneyAccountCombo*         m_accountComboBox;
   KMyMoneyRegister::Register*   m_register;
   KToolBar*                     m_buttonbar;
 

@@ -34,6 +34,7 @@
 
 #include "mymoneyfile.h"
 #include "kmymoneyutils.h"
+#include "kmymoneyglobalsettings.h"
 
 class AccountsModel::Private
 {
@@ -50,6 +51,12 @@ public:
   {
     for(QStringList::ConstIterator it_l = list.constBegin(); it_l != list.constEnd(); ++it_l) {
       const MyMoneyAccount& acc = m_file->account(*it_l);
+
+      // don't include stock accounts if not in expert mode
+      // TODO: check if it would be better to include this in a Filter proxy model
+      if(acc.isInvest() && !KMyMoneyGlobalSettings::expertMode())
+        continue;
+
       if (acc.value("PreferredAccount") == "Yes") {
         QStandardItem *item = new QStandardItem(acc.name());
         favoriteAccountsItem->appendRow(item);
@@ -73,6 +80,8 @@ public:
     model->setData(index, QVariant(account.id()), AccountIdRole);
     model->setData(index, QVariant(account.accountType()), AccountTypeRole);
     model->setData(index, QVariant(account.isClosed()), AccountClosedRole);
+    model->setData(index, QVariant(account.value("PreferredAccount") == "Yes"), AccountFavoriteRole);
+    model->setData(index, QVariant(QIcon(account.accountPixmap())), Qt::DecorationRole);
     model->setData(index, model->data(index.parent(), DisplayOrderRole), DisplayOrderRole);
   }
 
@@ -82,6 +91,12 @@ public:
 AccountsModel::AccountsModel(QObject *parent /*= 0*/)
   : QStandardItemModel(parent), d(new Private)
 {
+}
+
+void AccountsModel::load()
+{
+  clear();
+
   QStandardItem *rootItem = invisibleRootItem();
 
   // Favorite accounts
@@ -121,7 +136,7 @@ AccountsModel::AccountsModel(QObject *parent /*= 0*/)
       accountsItem->setFont(font);
       rootItem->appendRow(accountsItem);
       setData(accountsItem->index(), QVariant(MyMoneyAccount::Liability), AccountTypeRole);
-      setData(accountsItem->index(), QVariant(2), DisplayOrderRole);
+      setData(accountsItem->index(), QVariant(20), DisplayOrderRole);
     }
 
     if((mask & KMyMoneyUtils::income) != 0) {

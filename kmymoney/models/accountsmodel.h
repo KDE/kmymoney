@@ -39,7 +39,8 @@ enum AccountsItemDataRole {
   AccountIdRole = Qt::UserRole,
   AccountTypeRole = Qt::UserRole + 1,
   AccountClosedRole = Qt::UserRole + 2,
-  DisplayOrderRole = Qt::UserRole + 3
+  AccountFavoriteRole = Qt::UserRole + 3,
+  DisplayOrderRole = Qt::UserRole + 4
 };
 
 /**
@@ -59,6 +60,8 @@ class AccountsModel : public QStandardItemModel
 
   public:
     AccountsModel(QObject *parent = 0);
+
+    void load();
 
   private:
     class Private;

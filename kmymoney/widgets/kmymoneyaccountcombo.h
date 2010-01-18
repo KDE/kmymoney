@@ -60,6 +60,8 @@ public:
     */
   void modelWasSet();
 
+  void expandAll();
+
 protected:
   virtual void wheelEvent(QWheelEvent *ev);
 
