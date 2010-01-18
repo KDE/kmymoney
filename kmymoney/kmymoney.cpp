@@ -210,7 +210,10 @@ public:
     m_recentFiles(0),
     m_holidayRegion(0)
   {
-    m_processingDays.resize(7);
+    // since the days of the week are from 1 to 7,
+    // and a day of the week is used to index this bit array,
+    // resize the array to 8 elements (element 0 is left unused)
+    m_processingDays.resize(8);
   }
 
   void unlinkStatementXML(void);
@@ -389,7 +392,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   int weekStart = KGlobal::locale()->workingWeekStartDay();
   int weekEnd = KGlobal::locale()->workingWeekEndDay();
   bool startFirst = (weekStart < weekEnd);
-  for (int i = 1; i < 8; i++)
+  for (int i = 0; i < 8; i++)
   {
     if (startFirst)
       d->m_processingDays.setBit(i, (i >= weekStart && i <= weekEnd));
