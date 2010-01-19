@@ -262,10 +262,7 @@ QDate MyMoneySchedule::adjustedNextDueDate(void) const
   if(isFinished())
     return QDate();
 
-  QDate date(nextDueDate());
-  weekendOptionE option(weekendOption());
-
-  return adjustedDate(date, option);
+  return adjustedDate(nextDueDate(), weekendOption());
 }
 
 QDate MyMoneySchedule::adjustedDate(QDate date, weekendOptionE option) const
@@ -399,6 +396,12 @@ void MyMoneySchedule::validate(bool id_check) const
   }
 }
 
+QDate MyMoneySchedule::adjustedNextPayment(const QDate& refDate) const
+{
+  QDate date(nextPayment(refDate));
+  return date.isValid() ? adjustedDate(date, weekendOption()) : date;
+}
+
 QDate MyMoneySchedule::nextPayment(const QDate& refDate) const
 {
 #if 0
@@ -513,80 +516,75 @@ QList<QDate> MyMoneySchedule::paymentDates(const QDate& _startDate, const QDate&
   if ( willEnd() && m_endDate < endDate )
     endDate = m_endDate;
 
+  weekendOptionE option(weekendOption());
+  QDate start_date(adjustedDate(startDate(), option));
   // if the period specified by the parameters and the period
   // defined for this schedule don't overlap, then the list remains empty
   if ((willEnd() && m_endDate < _startDate)
-  || startDate() > endDate)
+  || start_date > endDate)
     return theDates;
+
+  QDate date(adjustedDate(paymentDate, option));
 
   switch (m_occurrence)
   {
     case OCCUR_ONCE:
-      if (startDate() >= _startDate && startDate() <= endDate)
-        theDates.append(startDate());
+      if (start_date >= _startDate && start_date <= endDate)
+        theDates.append(start_date);
       break;
 
     case OCCUR_DAILY:
-      if (paymentDate < _startDate)
+      while (date <= endDate)
       {
-        int daysMod = paymentDate.daysTo(_startDate) % m_occurrenceMultiplier;
-        paymentDate = (daysMod==0) ? _startDate : _startDate.addDays( m_occurrenceMultiplier -daysMod );
-      }
-      while (paymentDate <= endDate)
-      {
-        theDates.append(paymentDate);
+        if (date >= _startDate)
+          theDates.append(date);
         paymentDate = paymentDate.addDays(m_occurrenceMultiplier);
+        date = adjustedDate(paymentDate, option);
       }
       break;
 
     case OCCUR_WEEKLY:
       {
         int step = 7*m_occurrenceMultiplier;
-        while (paymentDate < _startDate)
-          paymentDate = paymentDate.addDays(step);
-        while (paymentDate <= endDate)
+        while (adjustedDate(paymentDate, option) <= endDate)
         {
-          theDates.append(paymentDate);
+          if (date >= _startDate)
+            theDates.append(date);
           paymentDate = paymentDate.addDays(step);
+          date = adjustedDate(paymentDate, option);
         }
       }
       break;
 
     case OCCUR_EVERYHALFMONTH:
-      while (paymentDate < _startDate)
+      while (date <= endDate)
       {
+        if (date >= _startDate)
+          theDates.append(date);
         paymentDate = addHalfMonths(paymentDate,m_occurrenceMultiplier);
-      }
-      while (paymentDate <= endDate)
-      {
-        theDates.append(paymentDate);
-        paymentDate = addHalfMonths(paymentDate,m_occurrenceMultiplier);
+        date = adjustedDate(paymentDate, option);
       }
       break;
 
     case OCCUR_MONTHLY:
-      while (paymentDate < _startDate) {
-        paymentDate = paymentDate.addMonths(m_occurrenceMultiplier);
-        fixDate(paymentDate);
-      }
-      while (paymentDate <= endDate)
+      while (date <= endDate)
       {
-        theDates.append(paymentDate);
+        if (date >= _startDate)
+          theDates.append(date);
         paymentDate = paymentDate.addMonths(m_occurrenceMultiplier);
         fixDate(paymentDate);
+        date = adjustedDate(paymentDate, option);
       }
       break;
 
     case OCCUR_YEARLY:
-      while (paymentDate < _startDate) {
-        paymentDate = paymentDate.addYears(m_occurrenceMultiplier);
-        fixDate(paymentDate);
-      }
-      while (paymentDate <= endDate)
+      while (date <= endDate)
       {
-        theDates.append(paymentDate);
+        if (date >= _startDate)
+          theDates.append(date);
         paymentDate = paymentDate.addYears(m_occurrenceMultiplier);
         fixDate(paymentDate);
+        date = adjustedDate(paymentDate, option);
       }
       break;
 

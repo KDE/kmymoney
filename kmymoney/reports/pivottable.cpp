@@ -214,7 +214,7 @@ void PivotTable::init(void)
         tx.setValue("kmm-schedule-id", (*it_schedule).id());
 
         // Get the dates when a payment will be made within the report window
-        QDate nextpayment = (*it_schedule).nextPayment(configbegin);
+        QDate nextpayment = (*it_schedule).adjustedNextPayment(configbegin);
         if ( nextpayment.isValid() )
         {
           // Add one transaction for each date

@@ -399,6 +399,20 @@ public:
   void validate(bool id_check=true) const;
 
   /**
+    * Calculates the date of the next payment adjusted according to the
+    * rules specified by the schedule's weekend option.
+    *
+    * @param refDate The reference date from which the next payment
+    *                date will be calculated (defaults to current date)
+    *
+    * @return QDate The adjusted date the next payment is due. This date is
+    *               always past @a refDate.  In case of an error or if there
+    *               are no more payments then an empty/invalid QDate() will
+    *               be returned.
+    */
+  QDate adjustedNextPayment(const QDate& refDate = QDate::currentDate()) const;
+
+  /**
     * Calculates the date of the next payment.
     *
     * @param refDate The reference date from which the next payment
