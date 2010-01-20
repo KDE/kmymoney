@@ -23,6 +23,7 @@
 
 #include <QStandardItemModel>
 #include <QStandardItem>
+#include <QAbstractItemView>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -40,6 +41,7 @@ KMyMoneyMVCCombo::KMyMoneyMVCCombo(QWidget* parent) :
 {
   QCompleter *completer = new QCompleter(this);
   setCompleter(completer);
+  view()->setAlternatingRowColors(true);
   connect(this, SIGNAL(activated(int)), SLOT(activated(int)));
 }
 
@@ -52,6 +54,7 @@ KMyMoneyMVCCombo::KMyMoneyMVCCombo(bool editable, QWidget* parent) :
   completer->setCaseSensitivity(Qt::CaseInsensitive);
   completer->setCompletionMode(QCompleter::PopupCompletion);
   completer->setModel(model());
+  view()->setAlternatingRowColors(true);
   setCompleter(completer);
   setInsertPolicy(QComboBox::NoInsert); // don't insert new objects due to object creation
   connect(this, SIGNAL(activated(int)), SLOT(activated(int)));

@@ -76,9 +76,14 @@ void KMyMoneyMVCAccountCombo::modelWasSet()
   delete d->m_popupView;
   d->m_popupView = new QTreeView(this);
   setView(d->m_popupView);
+
   d->m_popupView->setHeaderHidden(true);
   d->m_popupView->setRootIsDecorated(false);
+  d->m_popupView->setAlternatingRowColors(true);
+  d->m_popupView->setAnimated(true);
+
   d->m_popupView->expandAll();
+
   connect(this, SIGNAL(activated(int)), SLOT(activated()));
 
   // set the widget's size, just like the old widget
