@@ -50,7 +50,7 @@ KMyMoneyMVCCombo::KMyMoneyMVCCombo(bool editable, QWidget* parent) :
 {
   QCompleter *completer = new QCompleter(this);
   completer->setCaseSensitivity(Qt::CaseInsensitive);
-  completer->setCompletionMode(QCompleter::UnfilteredPopupCompletion);
+  completer->setCompletionMode(QCompleter::PopupCompletion);
   completer->setModel(model());
   setCompleter(completer);
   setInsertPolicy(QComboBox::NoInsert); // don't insert new objects due to object creation
