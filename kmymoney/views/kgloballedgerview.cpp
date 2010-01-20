@@ -111,11 +111,12 @@ bool MousePressFilter::isChildOf( QWidget* child, QWidget *parent )
   while(child) {
     if(child == parent)
       return true;
-    // If one of the ancestors is a KPassivePopup or a KDialog then
+    // If one of the ancestors is a KPassivePopup or a KDialog or a popup widget then
     // it's as if it is a child of our own because these widgets could
     // appear during transaction entry (message boxes, completer widgets)
     if(dynamic_cast<KPassivePopup*>(child) ||
-       dynamic_cast<KDialog*>(child))
+       dynamic_cast<KDialog*>(child) ||
+       child->windowFlags() & Qt::Popup)
       return true;
     child = child->parentWidget();
   }
