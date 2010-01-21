@@ -268,10 +268,9 @@ MyMoneyKeyValueContainer KBankingPlugin::onlineBankingSettings(const MyMoneyKeyV
 void KBankingPlugin::createJobView(void)
 {
   KMyMoneyViewBase* view = viewInterface()->addPage(i18nc("Label for icon in KMyMoney's view pane", "Outbox"), "online-banking");
-  QWidget* frm = dynamic_cast<QWidget*>(view->parent());
   QWidget* w = new KBJobView(m_kbanking, view, "JobView");
   viewInterface()->addWidget(view, w);
-  connect(viewInterface(), SIGNAL(viewStateChanged(bool)), frm, SLOT(setEnabled(bool)));
+  connect(viewInterface(), SIGNAL(viewStateChanged(bool)), view, SLOT(setEnabled(bool)));
 }
 
 void KBankingPlugin::createActions(void)
