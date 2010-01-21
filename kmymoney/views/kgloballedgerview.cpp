@@ -45,6 +45,7 @@
 #include <ktoolbar.h>
 #include <kdialog.h>
 #include <kpassivepopup.h>
+#include <ktoggleaction.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -850,6 +851,7 @@ void KGlobalLedgerView::loadAccounts(void)
 
   if (d->m_accountsModel) {
     d->m_accountsModel->load();
+    d->m_filterProxyModel->setHideClosedAccounts(KMyMoneyGlobalSettings::hideClosedAccounts() && !kmymoney->toggleAction("view_show_all_accounts")->isChecked());
     d->m_filterProxyModel->setSourceModel(d->m_accountsModel);
     d->m_filterProxyModel->sort(0);
     d->m_accountComboBox->expandAll();
