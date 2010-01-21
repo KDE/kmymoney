@@ -157,7 +157,7 @@
        <item>
         <widget class="QGroupBox" name="m_assignmentBox">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
            <horstretch>5</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>

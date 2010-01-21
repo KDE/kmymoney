@@ -262,7 +262,7 @@ void KBudgetValues::fillMonthLabels(void)
 {
   QDate date(m_budgetDate);
   for(int i = 0; i < 12; ++i) {
-    m_label[i]->setText(KGlobal::locale()->calendar()->monthName(date));
+    m_label[i]->setText(KGlobal::locale()->calendar()->monthName(date, KCalendarSystem::ShortName));
     date = date.addMonths(1);
   }
 }
