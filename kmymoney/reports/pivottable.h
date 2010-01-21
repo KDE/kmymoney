@@ -348,6 +348,12 @@ protected:
      * investment account
      */
     void includeInvestmentSubAccounts(void);
+
+   /**
+     * Returns the column which holds the current date
+     * Returns -1 if the current date is not within range
+     */
+    int currentDateColumn(void);
 };
 
 

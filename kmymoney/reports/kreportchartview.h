@@ -36,9 +36,6 @@
 #include <KDChartChart>
 #include <KDChartAbstractDiagram>
 #include <KDChartAbstractCoordinatePlane>
-// #include <KDChartTable>
-// #include <KDChartParams>
-// #include <KDChartAxisParams>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -97,7 +94,7 @@ private:
 /**
   * Draw a PivotGridRowSet in a chart
   */
-  unsigned drawPivotRowSet(int rowNum, const PivotGridRowSet& rowSet, const ERowType rowType, const QString& legendText);
+  unsigned drawPivotRowSet(int rowNum, const PivotGridRowSet& rowSet, const ERowType rowType, const QString& legendText, int startColumn = 1, int endColumn = 0);
 
 /**
   * Set the data value

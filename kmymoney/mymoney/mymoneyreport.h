@@ -126,6 +126,8 @@ public:
   bool isIncludingPrice(void) const { return m_includePrice; }
   bool isIncludingAveragePrice(void) const { return m_includeAveragePrice; }
   bool isUserDefined(void) const { return m_dateLock == userDefined; }
+  bool isMixedTime(void) const { return m_mixedTime; }
+  int currentDateColumn(void) const { return m_currentDateColumn; }
 
   // Simple set operations
   void setName(const QString& _s) { m_name = _s; }
@@ -156,6 +158,8 @@ public:
   void setMovingAverageDays( int _days ) { m_movingAverageDays = _days; }
   void setIncludingPrice( bool _f ) { m_includePrice = _f; }
   void setIncludingAveragePrice( bool _f ) { m_includeAveragePrice = _f; }
+  void setMixedTime( bool _f ) { m_mixedTime = _f; }
+  void setCurrentDateColumn( int _f ) { m_currentDateColumn = _f; }
 
   /**
     * Sets the budget used for this report
@@ -489,8 +493,15 @@ private:
    * Whether this report should include moving average prices
    */
   bool m_includeAveragePrice;
-
-
+  /**
+   * Make the actual and forecast lines display as one
+   */
+  bool m_mixedTime;
+  /**
+   * This stores the column for the current date
+   * This value is calculated dinamically and thus it is not saved in the file
+   */
+  int m_currentDateColumn;
 
 };
 

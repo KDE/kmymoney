@@ -418,6 +418,11 @@ void PivotTable::init(void)
   //
 
   calculateTotals();
+
+  //
+  // If using mixed time, calculate column for current date
+  //
+  m_config_f.setCurrentDateColumn(currentDateColumn());
 }
 
 void PivotTable::collapseColumns(void)
@@ -2268,6 +2273,32 @@ void PivotTable::includeInvestmentSubAccounts()
       }
     }
   }
+}
+
+int PivotTable::currentDateColumn(void)
+{
+
+  //return -1 if the columns do not include the current date
+  if(m_beginDate > QDate::currentDate() || m_endDate < QDate::currentDate()) {
+    return -1;
+  }
+
+  //check the date of each column and return if it is the one for the current date
+  //if columns are not days, return the one for the current month or year
+  int column = 1;
+
+  while(column < m_numColumns) {
+    if(columnDate(column) >= QDate::currentDate()) {
+      break;
+    }
+    column++;
+  }
+
+  //if there is no column matching the current date, return -1
+  if(column == m_numColumns) {
+    column = -1;
+  }
+  return column;
 }
 
 } // namespace

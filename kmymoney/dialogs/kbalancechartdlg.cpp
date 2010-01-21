@@ -63,7 +63,7 @@ KReportChartView* KBalanceChartDlg::drawChart(const MyMoneyAccount& account)
   MyMoneyReport reportCfg = MyMoneyReport(
                                           MyMoneyReport::eAssetLiability,
                                           MyMoneyReport::eMonths,
-                                          MyMoneyTransactionFilter::last3Months,
+                                          MyMoneyTransactionFilter::last3ToNext3Months,
                                           MyMoneyReport::eDetailTotal,
                                           i18n("%1 Balance History",account.name()),
                                                i18n("Generated Report")
@@ -72,7 +72,8 @@ KReportChartView* KBalanceChartDlg::drawChart(const MyMoneyAccount& account)
   reportCfg.setChartGridLines(false);
   reportCfg.setChartDataLabels(false);
   reportCfg.setChartType(MyMoneyReport::eChartLine);
-  reportCfg.setIncludingSchedules( true );
+  reportCfg.setIncludingForecast( true );
+  reportCfg.setIncludingBudgetActuals(true);
   if(account.accountType() == MyMoneyAccount::Investment) {
     QStringList::const_iterator it_a;
     for(it_a = account.accountList().begin(); it_a != account.accountList().end(); ++it_a)
@@ -81,6 +82,7 @@ KReportChartView* KBalanceChartDlg::drawChart(const MyMoneyAccount& account)
     reportCfg.addAccount(account.id());
   reportCfg.setColumnsAreDays( true );
   reportCfg.setConvertCurrency( false );
+  reportCfg.setMixedTime(true);
   reports::PivotTable table(reportCfg);
 
   reports::KReportChartView* chartWidget = new reports::KReportChartView(this);

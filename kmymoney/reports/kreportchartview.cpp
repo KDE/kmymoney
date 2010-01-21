@@ -279,7 +279,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
                   }
 
                   //set the cell value and tooltip
-                  rowNum = drawPivotRowSet(rowNum, it_row.value(), rowTypeList[i], legendText);
+                  rowNum = drawPivotRowSet(rowNum, it_row.value(), rowTypeList[i], legendText, 1, numColumns());
 
                   //set the legend text
                   legend->setText(rowNum-1, legendText);
@@ -323,7 +323,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
               }
 
               //set the cell value and tooltip
-              rowNum = drawPivotRowSet(rowNum, (*it_innergroup).m_total, rowTypeList[i], legendText);
+              rowNum = drawPivotRowSet(rowNum, (*it_innergroup).m_total, rowTypeList[i], legendText, 1, numColumns());
 
               //set the legend text
               legend->setText(rowNum - 1, legendText);
@@ -358,7 +358,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
             }
 
             //set the cell value and tooltip
-            rowNum = drawPivotRowSet(rowNum, (*it_outergroup).m_total, rowTypeList[i], legendText);
+            rowNum = drawPivotRowSet(rowNum, (*it_outergroup).m_total, rowTypeList[i], legendText, 1, numColumns());
 
             //set the legend
             legend->setText(rowNum - 1, legendText);
@@ -384,7 +384,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
             }
 
             //set the cell value
-            rowNum = drawPivotRowSet(rowNum, grid.m_total, rowTypeList[i], legendText);
+            rowNum = drawPivotRowSet(rowNum, grid.m_total, rowTypeList[i], legendText, 1, numColumns());
 
             //set the legend
             legend->setText(rowNum - 1, legendText);
@@ -407,13 +407,23 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
           //only show the column type in the header if there is more than one type
           if(rowTypeList.size() > 1) {
-              legendText = QString(columnTypeHeaderList[i] + " - " + i18nc("Total balance", "Total"));
-            } else {
-              legendText = QString(i18nc("Total balance", "Total"));
+            legendText = QString(columnTypeHeaderList[i] + " - " + i18nc("Total balance", "Total"));
+          } else {
+            legendText = QString(i18nc("Total balance", "Total"));
           }
 
-          //set cell value
-          rowNum = drawPivotRowSet(rowNum, grid.m_total, rowTypeList[i], legendText);
+          if(config.isMixedTime() && (rowTypeList[i] == eActual || rowTypeList[i] == eForecast)) {
+            if(rowTypeList[i] == eActual) {
+              rowNum = drawPivotRowSet(rowNum, grid.m_total, rowTypeList[i], legendText, 1, config.currentDateColumn()+1);
+            } else if (rowTypeList[i] == eForecast) {
+              rowNum = drawPivotRowSet(rowNum, grid.m_total, rowTypeList[i], legendText, config.currentDateColumn(), numColumns());
+            } else {
+              rowNum = drawPivotRowSet(rowNum, grid.m_total, rowTypeList[i], legendText, 1, numColumns());
+            }
+          } else {
+            //set cell value
+            rowNum = drawPivotRowSet(rowNum, grid.m_total, rowTypeList[i], legendText, 1, numColumns());
+          }
 
           //set legend text
           legend->setText(rowNum - 1, legendText);
@@ -459,8 +469,13 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   //chartView.params()->setDataValuesCalc(0, MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
 }
 
-unsigned KReportChartView::drawPivotRowSet(int rowNum, const PivotGridRowSet& rowSet, const ERowType rowType, const QString& legendText )
+unsigned KReportChartView::drawPivotRowSet(int rowNum, const PivotGridRowSet& rowSet, const ERowType rowType, const QString& legendText, int startColumn, int endColumn )
 {
+  //if endColumn is invalid, make it the same as numColumns
+  if(endColumn == 0) {
+    endColumn = numColumns();
+  }
+
   // Columns
   if ( seriesTotals() )
   {
@@ -480,8 +495,8 @@ unsigned KReportChartView::drawPivotRowSet(int rowNum, const PivotGridRowSet& ro
       this->setCellTip(0, rowNum, toolTip);
     }
   } else {
-    int column = 1;
-    while ( column < numColumns() )
+    int column = startColumn;
+    while ( column < endColumn )
     {
       double value = rowSet[rowType][column].toDouble();
       QString toolTip = QString("<h2>%1</h2><strong>%2</strong><br>")

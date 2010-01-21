@@ -80,12 +80,15 @@ MyMoneyReport::MyMoneyReport() :
     m_includeForecast ( false ),
     m_includeMovingAverage ( false ),
     m_includePrice ( false ),
-    m_includeAveragePrice ( false )
+    m_includeAveragePrice ( false ),
+    m_mixedTime ( false ),
+    m_currentDateColumn ( 0 )
 {
 }
 
 MyMoneyReport::MyMoneyReport ( const QString& id, const MyMoneyReport& right ) :
-    MyMoneyObject ( id )
+    MyMoneyObject ( id ),
+    m_currentDateColumn ( 0 )
 {
   *this = right;
   setId ( id );
@@ -118,7 +121,9 @@ MyMoneyReport::MyMoneyReport ( ERowType _rt, unsigned _ct, dateOptionE _dl, EDet
     m_includeForecast ( false ),
     m_includeMovingAverage ( false ),
     m_includePrice ( false ),
-    m_includeAveragePrice ( false )
+    m_includeAveragePrice ( false ),
+    m_mixedTime ( false ),
+    m_currentDateColumn ( 0 )
 {
   if ( m_reportType == ePivotTable )
     m_columnType = static_cast<EColumnType> ( _ct );
@@ -164,7 +169,8 @@ MyMoneyReport::MyMoneyReport ( ERowType _rt, unsigned _ct, dateOptionE _dl, EDet
 }
 
 MyMoneyReport::MyMoneyReport ( const QDomElement& node ) :
-    MyMoneyObject ( node )
+    MyMoneyObject ( node ),
+    m_currentDateColumn ( 0 )
 {
   if ( !read ( node ) )
     clearId();
@@ -343,6 +349,7 @@ void MyMoneyReport::write ( QDomElement& e, QDomDocument *doc, bool anonymous ) 
   e.setAttribute ( "includesforecast", m_includeForecast );
   e.setAttribute ( "includesprice", m_includePrice );
   e.setAttribute ( "includesaverageprice", m_includeAveragePrice );
+  e.setAttribute ( "mixedtime", m_mixedTime );
   e.setAttribute ( "includesmovingaverage", m_includeMovingAverage );
   if( m_includeMovingAverage )
     e.setAttribute ( "movingaveragedays", m_movingAverageDays );
@@ -634,6 +641,7 @@ bool MyMoneyReport::read ( const QDomElement& e )
     m_includeForecast = e.attribute ( "includesforecast", "0" ).toUInt();
     m_includePrice = e.attribute ( "includesprice", "0" ).toUInt();
     m_includeAveragePrice = e.attribute ( "includesaverageprice", "0" ).toUInt();
+    m_mixedTime = e.attribute( "mixedtime", "0" ).toUInt();
     m_includeMovingAverage = e.attribute ( "includesmovingaverage", "0" ).toUInt();
     if( m_includeMovingAverage )
       m_movingAverageDays = e.attribute ( "movingaveragedays", "1" ).toUInt();
