@@ -227,7 +227,7 @@ int main(int argc, char *argv[])
         qDebug("D-Bus registration failed. Some functions are not available.");
       }
       kmymoney->show();
-      kmymoney->setEnabled(false);
+      kmymoney->centralWidget()->setEnabled(false);
 
       delete splash;
 
@@ -271,7 +271,7 @@ int main(int argc, char *argv[])
       if(kmymoney != 0) {
         kmymoney->updateCaption();
         args->clear();
-        kmymoney->setEnabled(true);
+        kmymoney->centralWidget()->setEnabled(true);
         rc = a->exec();
       }
     } while(0);
