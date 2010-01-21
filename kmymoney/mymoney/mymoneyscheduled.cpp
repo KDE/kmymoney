@@ -282,9 +282,10 @@ QDate MyMoneySchedule::adjustedDate(QDate date, weekendOptionE option) const
 
 void MyMoneySchedule::setNextDueDate(const QDate& date)
 {
-  m_transaction.setPostDate(date);
-  if(date.isValid())
+  if(date.isValid()) {
+    m_transaction.setPostDate(date);
     m_startDate = date;
+  }
 }
 
 void MyMoneySchedule::setLastPayment(const QDate& date)
