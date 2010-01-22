@@ -127,12 +127,12 @@
        <item>
          <layout class="QHBoxLayout">
           <item>
-           <widget class="KPushButton" name="m_resetButton">
+           <widget class="KPushButton" name="m_updateButton">
              <property name="enabled">
               <bool>false</bool>
              </property>
              <property name="text">
-              <string>Res</string>
+              <string>Upd</string>
              </property>
              <property name="shortcut">
               <string/>
@@ -140,12 +140,12 @@
             </widget>
            </item>
            <item>
-            <widget class="KPushButton" name="m_updateButton">
+            <widget class="KPushButton" name="m_resetButton">
              <property name="enabled">
               <bool>false</bool>
              </property>
              <property name="text">
-              <string>Upd</string>
+              <string>Res</string>
              </property>
              <property name="shortcut">
               <string/>
@@ -189,8 +189,8 @@
               <property name="focusPolicy">
                <enum>Qt::NoFocus</enum>
               </property>
-              <property name="readOnly">
-               <bool>true</bool>
+              <property name="enabled">
+               <bool>false</bool>
               </property>
              </widget>
             </item>

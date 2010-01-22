@@ -104,7 +104,7 @@ KBudgetView::KBudgetView(QWidget *parent) :
   m_budgetList->setSorting(0);
 
   KGuiItem newButtonItem( QString(""),
-                             KIcon("document-new"),
+                             KIcon("budget-add"),
                              i18n("Creates a new budget"),
                              i18n("Use this to create a new empty budget."));
   m_newButton->setGuiItem(newButtonItem);
@@ -118,14 +118,14 @@ KBudgetView::KBudgetView(QWidget *parent) :
   m_renameButton->setToolTip( renameButtonItem.toolTip());
 
   KGuiItem deleteButtonItem( QString(""),
-                             KIcon("edit-delete"),
+                             KIcon("budget-delete"),
                              i18n("Delete the current selected budget"),
                              i18n("Use this to delete the selected budget."));
   m_deleteButton->setGuiItem(deleteButtonItem);
   m_deleteButton->setToolTip( deleteButtonItem.toolTip());
 
   KGuiItem updateButtonItem( QString(""),
-                             KIcon("dialog-ok"),
+                             KIcon("document-save"),
                              i18n("Accepts the entered values and stores the budget"),
                              i18n("Use this to store the modified data."));
   m_updateButton->setGuiItem(updateButtonItem);
