@@ -252,12 +252,12 @@ QString MyMoneyMoney::formatMoney(const QString& currency, const int prec, bool 
 
   if(showThousandSeparator) {
     int pos = res.length();
-    while ((0 < (pos -= 3)) && (thousandSeparator() != ' '))
+    while ((0 < (pos -= 3)) && thousandSeparator() != 0)
       res.insert(pos, thousandSeparator());
   }
 
   if(prec > 0 || (prec == -1 && right != 0)) {
-    if(decimalSeparator() != ' ')
+    if(decimalSeparator() != 0)
       res += decimalSeparator();
 
     // using
