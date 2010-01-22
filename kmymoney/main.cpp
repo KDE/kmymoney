@@ -142,8 +142,8 @@ int main(int argc, char *argv[])
   args = KCmdLineArgs::parsedArgs();
 
   // setup the MyMoneyMoney locale settings according to the KDE settings
-  MyMoneyMoney::setThousandSeparator(*(KGlobal::locale()->monetaryThousandsSeparator().toLatin1()));
-  MyMoneyMoney::setDecimalSeparator(*(KGlobal::locale()->monetaryDecimalSymbol().toLatin1()));
+  MyMoneyMoney::setThousandSeparator(KGlobal::locale()->monetaryThousandsSeparator()[0]);
+  MyMoneyMoney::setDecimalSeparator(KGlobal::locale()->monetaryDecimalSymbol()[0]);
   MyMoneyMoney::setNegativeMonetarySignPosition(static_cast<MyMoneyMoney::signPosition>(KGlobal::locale()->negativeMonetarySignPosition()));
   MyMoneyMoney::setPositiveMonetarySignPosition(static_cast<MyMoneyMoney::signPosition>(KGlobal::locale()->positiveMonetarySignPosition()));
   MyMoneyMoney::setNegativePrefixCurrencySymbol(KGlobal::locale()->negativePrefixCurrencySymbol());

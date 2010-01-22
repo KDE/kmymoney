@@ -685,8 +685,8 @@ const QString MyMoneyQifProfile::twoDigitYear(const QChar& delim, int yr) const
 
 const QString MyMoneyQifProfile::value(const QChar& def, const MyMoneyMoney& valuein) const
 {
-  unsigned char _decimalSeparator;
-  unsigned char _thousandsSeparator;
+  QChar _decimalSeparator;
+  QChar _thousandsSeparator;
   QString res;
 
   _decimalSeparator = MyMoneyMoney::decimalSeparator();
@@ -707,8 +707,8 @@ const QString MyMoneyQifProfile::value(const QChar& def, const MyMoneyMoney& val
 
 const MyMoneyMoney MyMoneyQifProfile::value(const QChar& def, const QString& valuein) const
 {
-  unsigned char _decimalSeparator;
-  unsigned char _thousandsSeparator;
+  QChar _decimalSeparator;
+  QChar _thousandsSeparator;
   MyMoneyMoney res;
 
   _decimalSeparator = MyMoneyMoney::decimalSeparator();

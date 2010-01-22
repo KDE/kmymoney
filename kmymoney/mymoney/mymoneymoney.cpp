@@ -38,8 +38,8 @@
 #include "mymoneyaccount.h"
 #include "mymoneysecurity.h"
 
-unsigned char MyMoneyMoney::_thousandSeparator = ',';
-unsigned char MyMoneyMoney::_decimalSeparator = '.';
+QChar MyMoneyMoney::_thousandSeparator = ',';
+QChar MyMoneyMoney::_decimalSeparator = '.';
 MyMoneyMoney::signPosition MyMoneyMoney::_negativeMonetarySignPosition = BeforeQuantityMoney;
 MyMoneyMoney::signPosition MyMoneyMoney::_positiveMonetarySignPosition = BeforeQuantityMoney;
 bool MyMoneyMoney::_negativePrefixCurrencySymbol = false;
@@ -81,7 +81,7 @@ MyMoneyMoney::signPosition MyMoneyMoney::positiveMonetarySignPosition(void)
   return _positiveMonetarySignPosition;
 }
 
-void MyMoneyMoney::setThousandSeparator(const unsigned char separator)
+void MyMoneyMoney::setThousandSeparator(const QChar &separator)
 {
   if(separator != ' ')
     _thousandSeparator = separator;
@@ -89,12 +89,12 @@ void MyMoneyMoney::setThousandSeparator(const unsigned char separator)
     _thousandSeparator = 0;
 }
 
-unsigned char MyMoneyMoney::thousandSeparator(void)
+QChar MyMoneyMoney::thousandSeparator(void)
 {
   return _thousandSeparator;
 }
 
-void MyMoneyMoney::setDecimalSeparator(const unsigned char separator)
+void MyMoneyMoney::setDecimalSeparator(const QChar &separator)
 {
   if(separator != ' ')
     _decimalSeparator = separator;
@@ -102,7 +102,7 @@ void MyMoneyMoney::setDecimalSeparator(const unsigned char separator)
     _decimalSeparator = 0;
 }
 
-unsigned char MyMoneyMoney::decimalSeparator(void)
+QChar MyMoneyMoney::decimalSeparator(void)
 {
   return _decimalSeparator;
 }
@@ -252,12 +252,12 @@ QString MyMoneyMoney::formatMoney(const QString& currency, const int prec, bool 
 
   if(showThousandSeparator) {
     int pos = res.length();
-    while((0 < (pos -= 3)) && thousandSeparator())
+    while ((0 < (pos -= 3)) && (thousandSeparator() != ' '))
       res.insert(pos, thousandSeparator());
   }
 
   if(prec > 0 || (prec == -1 && right != 0)) {
-    if(decimalSeparator())
+    if(decimalSeparator() != ' ')
       res += decimalSeparator();
 
     // using

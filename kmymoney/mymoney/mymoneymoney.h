@@ -39,6 +39,7 @@
 #endif
 
 // So we can save this object
+#include <QChar>
 #include <QString>
 #include <qdatastream.h>
 #include <kmm_mymoney_export.h>
@@ -163,15 +164,15 @@ public:
   static signed64 precToDenom(int prec);
   double toDouble(void) const;
 
-  static void setThousandSeparator(const unsigned char);
-  static void setDecimalSeparator(const unsigned char);
+  static void setThousandSeparator(const QChar &);
+  static void setDecimalSeparator(const QChar &);
   static void setNegativeMonetarySignPosition(const signPosition pos);
   static void setPositiveMonetarySignPosition(const signPosition pos);
   static void setNegativePrefixCurrencySymbol(const bool flags);
   static void setPositivePrefixCurrencySymbol(const bool flags);
 
-  static unsigned char thousandSeparator(void);
-  static unsigned char decimalSeparator(void);
+  static QChar thousandSeparator(void);
+  static QChar decimalSeparator(void);
   static signPosition negativeMonetarySignPosition(void);
   static signPosition positiveMonetarySignPosition(void);
   static void setFileVersion(const fileVersionE version);
@@ -235,8 +236,8 @@ private:
   KMM_MYMONEY_EXPORT friend QDataStream &operator<<(QDataStream &, const MyMoneyMoney &);
   KMM_MYMONEY_EXPORT friend QDataStream &operator>>(QDataStream &, MyMoneyMoney &);
 
-  static unsigned char _thousandSeparator;
-  static unsigned char _decimalSeparator;
+  static QChar _thousandSeparator;
+  static QChar _decimalSeparator;
   static signPosition _negativeMonetarySignPosition;
   static signPosition _positiveMonetarySignPosition;
   static bool _negativePrefixCurrencySymbol;
