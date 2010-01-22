@@ -464,7 +464,7 @@ void KHomeView::showPayments(void)
     if (todays.count() > 0) {
       d->m_html += "<div class=\"gap\">&nbsp;</div>\n";
       d->m_html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
-      d->m_html += QString("<tr class=\"itemtitle\"><td class=\"left\" colspan=\"5\">%1</td></tr>\n").arg(i18n("Today's payments"));
+      d->m_html += QString("<tr class=\"itemtitle\"><td class=\"left\" colspan=\"5\">%1</td></tr>\n").arg(i18n("Today's due payments"));
       d->m_html += "<tr class=\"item\">";
       d->m_html += "<td class=\"left\" width=\"10%\">";
       d->m_html += i18n("Date");
