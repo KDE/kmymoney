@@ -713,12 +713,12 @@ private:
   void writeReports(void);
   void writeBudgets(void);
 
-  void writeInstitution(const MyMoneyInstitution& i, MyMoneySqlQuery& q);
+  void writeInstitutionList(const QList<MyMoneyInstitution>& iList, MyMoneySqlQuery& q);
   void writePayee(const MyMoneyPayee& p, MyMoneySqlQuery& q, bool isUserInfo = false);
-  void writeAccount(const MyMoneyAccount& a, MyMoneySqlQuery& q);
+  void writeAccountList(const QList<MyMoneyAccount>& accList, MyMoneySqlQuery& q);
   void writeTransaction(const QString& txId, const MyMoneyTransaction& tx, MyMoneySqlQuery& q, const QString& type);
   void writeSplits(const QString& txId, const QString& type, const QList<MyMoneySplit>& splitList);
-  void writeSplit(const QString& txId, const MyMoneySplit& split, const QString& type, const int splitId, MyMoneySqlQuery& q);
+  void writeSplitList(const QString& txId, const QList<MyMoneySplit>& splitList, const QString& type, const QList<int>& splitIdList, MyMoneySqlQuery& q);
   void writeSchedule(const MyMoneySchedule& sch, MyMoneySqlQuery& q, bool insert);
   void writeSecurity(const MyMoneySecurity& security, MyMoneySqlQuery& q);
   void writePricePair(const MyMoneyPriceEntries& p);
@@ -726,7 +726,7 @@ private:
   void writeCurrency(const MyMoneySecurity& currency, MyMoneySqlQuery& q);
   void writeReport(const MyMoneyReport& rep, MyMoneySqlQuery& q);
   void writeBudget(const MyMoneyBudget& bud, MyMoneySqlQuery& q);
-  void writeKeyValuePairs(const QString& kvpType, const QString& kvpId, const QMap<QString, QString>& pairs);
+  void writeKeyValuePairs(const QString& kvpType, const QVariantList& kvpId, const QList<QMap<QString, QString> >& pairs);
 
   // read routines
   void readFileInfo(void);
@@ -749,7 +749,7 @@ private:
 
   void deleteTransaction(const QString& id);
   void deleteSchedule(const QString& id);
-  void deleteKeyValuePairs(const QString& kvpType, const QString& kvpId);
+  void deleteKeyValuePairs(const QString& kvpType, const QVariantList& kvpId);
   long unsigned calcHighId(const long unsigned&, const QString&);
 
   void setVersion(const QString& version);

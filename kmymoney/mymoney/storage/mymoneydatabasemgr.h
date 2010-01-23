@@ -42,7 +42,7 @@
   *
   */
 class MyMoneyDatabaseMgr : public IMyMoneyStorage, public IMyMoneySerialize,
-      public MyMoneyKeyValueContainer
+    public MyMoneyKeyValueContainer
 {
 public:
   MyMoneyDatabaseMgr();

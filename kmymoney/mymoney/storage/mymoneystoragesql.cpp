@@ -1066,6 +1066,8 @@ void MyMoneyStorageSql::writeInstitutions()
 
   const QList<MyMoneyInstitution> list = m_storage->institutionList();
   QList<MyMoneyInstitution>::ConstIterator it;
+  QList<MyMoneyInstitution> insertList;
+  QList<MyMoneyInstitution> updateList;
   MyMoneySqlQuery q2(this);
   q.prepare(m_db.m_tables["kmmInstitutions"].updateString());
   q2.prepare(m_db.m_tables["kmmInstitutions"].insertString());
@@ -1073,12 +1075,17 @@ void MyMoneyStorageSql::writeInstitutions()
   for (it = list.begin(); it != list.end(); ++it) {
     if (dbList.contains((*it).id())) {
       dbList.removeAll((*it).id());
-      writeInstitution(*it, q);
+      updateList << *it;
     } else {
-      writeInstitution(*it, q2);
+      insertList << *it;
     }
     signalProgress(++m_institutions, 0);
   }
+  if (!insertList.isEmpty())
+    writeInstitutionList(insertList, q2);
+
+  if (!updateList.isEmpty())
+    writeInstitutionList(updateList, q);
 
   if (!dbList.isEmpty()) {
     QList<QString>::const_iterator it = dbList.constBegin();
@@ -1086,9 +1093,11 @@ void MyMoneyStorageSql::writeInstitutions()
     while (it != dbList.constEnd()) {
       q.bindValue(":id", (*it));
       if (!q.exec()) throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, "deleting Institution"));
-      deleteKeyValuePairs("OFXSETTINGS", (*it));
       ++it;
     }
+    QVariantList kvpList;
+    qCopy(dbList.constBegin(), dbList.constEnd(), kvpList.begin());
+    deleteKeyValuePairs("OFXSETTINGS", kvpList);
   }
 }
 
@@ -1098,7 +1107,9 @@ void MyMoneyStorageSql::addInstitution(const MyMoneyInstitution& inst)
   MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
   MyMoneySqlQuery q(this);
   q.prepare(m_db.m_tables["kmmInstitutions"].insertString());
-  writeInstitution(inst , q);
+  QList<MyMoneyInstitution> iList;
+  iList << inst;
+  writeInstitutionList(iList , q);
   ++m_institutions;
   writeFileInfo();
 }
@@ -1109,8 +1120,12 @@ void MyMoneyStorageSql::modifyInstitution(const MyMoneyInstitution& inst)
   MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
   MyMoneySqlQuery q(this);
   q.prepare(m_db.m_tables["kmmInstitutions"].updateString());
-  deleteKeyValuePairs("OFXSETTINGS", inst.id());
-  writeInstitution(inst , q);
+  QVariantList kvpList;
+  kvpList << inst.id();
+  deleteKeyValuePairs("OFXSETTINGS", kvpList);
+  QList<MyMoneyInstitution> iList;
+  iList << inst;
+  writeInstitutionList(iList , q);
   writeFileInfo();
 }
 
@@ -1118,7 +1133,9 @@ void MyMoneyStorageSql::removeInstitution(const MyMoneyInstitution& inst)
 {
   DBG("*** Entering MyMoneyStorageSql::removeInstitution");
   MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
-  deleteKeyValuePairs("OFXSETTINGS", inst.id());
+  QVariantList kvpList;
+  kvpList << inst.id();
+  deleteKeyValuePairs("OFXSETTINGS", kvpList);
   MyMoneySqlQuery q(this);
   q.prepare(m_db.m_tables["kmmInstitutions"].deleteString());
   q.bindValue(":id", inst.id());
@@ -1127,20 +1144,46 @@ void MyMoneyStorageSql::removeInstitution(const MyMoneyInstitution& inst)
   writeFileInfo();
 }
 
-void MyMoneyStorageSql::writeInstitution(const MyMoneyInstitution& i, MyMoneySqlQuery& q)
+void MyMoneyStorageSql::writeInstitutionList(const QList<MyMoneyInstitution>& iList, MyMoneySqlQuery& q)
 {
-  DBG("*** Entering MyMoneyStorageSql::writeInstitution");
-  q.bindValue(":id", i.id());
-  q.bindValue(":name", i.name());
-  q.bindValue(":manager", i.manager());
-  q.bindValue(":routingCode", i.sortcode());
-  q.bindValue(":addressStreet", i.street());
-  q.bindValue(":addressCity", i.city());
-  q.bindValue(":addressZipcode", i.postcode());
-  q.bindValue(":telephone", i.telephone());
-  if (!q.exec()) throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("writing Institution")));
-  writeKeyValuePairs("OFXSETTINGS", i.id(), i.pairs());
-  m_hiIdInstitutions = calcHighId(m_hiIdInstitutions, i.id());
+  DBG("*** Entering MyMoneyStorageSql::writeInstitutionList");
+  QVariantList idList;
+  QVariantList nameList;
+  QVariantList managerList;
+  QVariantList routingCodeList;
+  QVariantList addressStreetList;
+  QVariantList addressCityList;
+  QVariantList addressZipcodeList;
+  QVariantList telephoneList;
+  QList<QMap<QString, QString> > kvpPairsList;
+
+  unsigned long hiId = m_hiIdInstitutions;
+
+  foreach(const MyMoneyInstitution& i, iList) {
+    idList << i.id();
+    nameList << i.name();
+    managerList << i.manager();
+    routingCodeList << i.sortcode();
+    addressStreetList << i.street();
+    addressCityList << i.city();
+    addressZipcodeList << i.postcode();
+    telephoneList << i.telephone();
+    kvpPairsList << i.pairs();
+    hiId = calcHighId(hiId, i.id());
+  }
+
+  q.bindValue(":id", idList);
+  q.bindValue(":name", nameList);
+  q.bindValue(":manager", managerList);
+  q.bindValue(":routingCode", routingCodeList);
+  q.bindValue(":addressStreet", addressStreetList);
+  q.bindValue(":addressCity", addressCityList);
+  q.bindValue(":addressZipcode", addressZipcodeList);
+  q.bindValue(":telephone", telephoneList);
+
+  if (!q.execBatch()) throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("writing Institution")));
+  writeKeyValuePairs("OFXSETTINGS", idList, kvpPairsList);
+  m_hiIdInstitutions = std::max(m_hiIdInstitutions, hiId);
 }
 
 // **** Payees ****
@@ -1278,11 +1321,14 @@ void MyMoneyStorageSql::writeAccounts()
   }
   // Attempt to write the standard accounts. For an empty db, this will fail.
   TRY
-  writeAccount(m_storage->asset(), q); ++m_accounts;
-  writeAccount(m_storage->liability(), q); ++m_accounts;
-  writeAccount(m_storage->expense(), q); ++m_accounts;
-  writeAccount(m_storage->income(), q); ++m_accounts;
-  writeAccount(m_storage->equity(), q); ++m_accounts;
+  QList<MyMoneyAccount> stdList;
+  stdList << m_storage->asset();
+  stdList << m_storage->liability();
+  stdList << m_storage->expense();
+  stdList << m_storage->income();
+  stdList << m_storage->equity();
+  writeAccountList(stdList, q);
+  m_accounts += stdList.size();
   CATCH
   delete e;
 
@@ -1313,42 +1359,54 @@ void MyMoneyStorageSql::writeAccounts()
   acc_q.setName("Equity");
   MyMoneyAccount equity(STD_ACC_EQUITY, acc_q);
 
-  writeAccount(asset, q); ++m_accounts;
-  writeAccount(expense, q); ++m_accounts;
-  writeAccount(income, q); ++m_accounts;
-  writeAccount(liability, q); ++m_accounts;
-  writeAccount(equity, q); ++m_accounts;
+  QList<MyMoneyAccount> stdList;
+  stdList << asset;
+  stdList << liability;
+  stdList << expense;
+  stdList << income;
+  stdList << equity;
+  writeAccountList(stdList, q);
+  m_accounts += stdList.size();
   ECATCH
 
   int i = 0;
   MyMoneySqlQuery q2(this);
   q.prepare(m_db.m_tables["kmmAccounts"].updateString());
   q2.prepare(m_db.m_tables["kmmAccounts"].insertString());
+  QList<MyMoneyAccount> updateList;
+  QList<MyMoneyAccount> insertList;
   // Update the accounts that exist; insert the ones that do not.
   for (it = list.constBegin(); it != list.constEnd(); ++it, ++i) {
     m_transactionCountMap[(*it).id()] = m_storagePtr->transactionCount((*it).id());
     if (dbList.contains((*it).id())) {
       dbList.removeAll((*it).id());
-      writeAccount(*it, q);
+      updateList << *it;
     } else {
-      writeAccount(*it, q2);
+      insertList << *it;
     }
     signalProgress(++m_accounts, 0);
   }
 
+  writeAccountList(updateList, q);
+  writeAccountList(insertList, q2);
+
   // Delete the accounts that are in the db but no longer in memory.
   if (!dbList.isEmpty()) {
+    QVariantList kvpList;
+
     QList<QString>::const_iterator it = dbList.constBegin();
     q.prepare("DELETE FROM kmmAccounts WHERE id = :id");
     while (it != dbList.constEnd()) {
       if (!m_storagePtr->isStandardAccount(*it)) {
-        q.bindValue(":id", (*it));
-        if (!q.exec()) throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, "deleting Account"));
-        deleteKeyValuePairs("ACCOUNT", (*it));
-        deleteKeyValuePairs("ONLINEBANKING", (*it));
+        kvpList << *it;
       }
       ++it;
     }
+    q.bindValue(":id", kvpList);
+    if (!q.execBatch()) throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, "deleting Account"));
+
+    deleteKeyValuePairs("ACCOUNT", kvpList);
+    deleteKeyValuePairs("ONLINEBANKING", kvpList);
   }
 }
 
@@ -1358,7 +1416,9 @@ void MyMoneyStorageSql::addAccount(const MyMoneyAccount& acc)
   MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
   MyMoneySqlQuery q(this);
   q.prepare(m_db.m_tables["kmmAccounts"].insertString());
-  writeAccount(acc, q);
+  QList<MyMoneyAccount> aList;
+  aList << acc;
+  writeAccountList(aList, q);
   ++m_accounts;
   writeFileInfo();
 }
@@ -1369,9 +1429,13 @@ void MyMoneyStorageSql::modifyAccount(const MyMoneyAccount& acc)
   MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
   MyMoneySqlQuery q(this);
   q.prepare(m_db.m_tables["kmmAccounts"].updateString());
-  deleteKeyValuePairs("ACCOUNT", acc.id());
-  deleteKeyValuePairs("ONLINEBANKING", acc.id());
-  writeAccount(acc, q);
+  QVariantList kvpList;
+  kvpList << acc.id();
+  deleteKeyValuePairs("ACCOUNT", kvpList);
+  deleteKeyValuePairs("ONLINEBANKING", kvpList);
+  QList<MyMoneyAccount> aList;
+  aList << acc;
+  writeAccountList(aList, q);
   writeFileInfo();
 }
 
@@ -1379,8 +1443,10 @@ void MyMoneyStorageSql::removeAccount(const MyMoneyAccount& acc)
 {
   DBG("*** Entering MyMoneyStorageSql::removeAccount");
   MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
-  deleteKeyValuePairs("ACCOUNT", acc.id());
-  deleteKeyValuePairs("ONLINEBANKING", acc.id());
+  QVariantList kvpList;
+  kvpList << acc.id();
+  deleteKeyValuePairs("ACCOUNT", kvpList);
+  deleteKeyValuePairs("ONLINEBANKING", kvpList);
   MyMoneySqlQuery q(this);
   q.prepare(m_db.m_tables["kmmAccounts"].deleteString());
   q.bindValue(":id", acc.id());
@@ -1389,63 +1455,104 @@ void MyMoneyStorageSql::removeAccount(const MyMoneyAccount& acc)
   writeFileInfo();
 }
 
-void MyMoneyStorageSql::writeAccount(const MyMoneyAccount& acc, MyMoneySqlQuery& q)
+void MyMoneyStorageSql::writeAccountList(const QList<MyMoneyAccount>& accList, MyMoneySqlQuery& q)
 {
-  DBG("*** Entering MyMoneyStorageSql::writeAccount");
+  DBG("*** Entering MyMoneyStorageSql::writeAccountList");
   //MyMoneyMoney balance = m_storagePtr->balance(acc.id(), QDate());
-  q.bindValue(":id", acc.id());
-  q.bindValue(":institutionId", acc.institutionId());
-  q.bindValue(":parentId", acc.parentAccountId());
-  if (acc.lastReconciliationDate() == QDate())
-    q.bindValue(":lastReconciled", acc.lastReconciliationDate());
-  else
-    q.bindValue(":lastReconciled", acc.lastReconciliationDate().toString(Qt::ISODate));
 
-  q.bindValue(":lastModified", acc.lastModified());
-  if (acc.openingDate() == QDate())
-    q.bindValue(":openingDate", acc.openingDate());
-  else
-    q.bindValue(":openingDate", acc.openingDate().toString(Qt::ISODate));
+  QVariantList idList;
+  QVariantList institutionIdList;
+  QVariantList parentIdList;
+  QVariantList lastReconciledList;
+  QVariantList lastModifiedList;
+  QVariantList openingDateList;
+  QVariantList accountNumberList;
+  QVariantList accountTypeList;
+  QVariantList accountTypeStringList;
+  QVariantList isStockAccountList;
+  QVariantList accountNameList;
+  QVariantList descriptionList;
+  QVariantList currencyIdList;
+  QVariantList balanceList;
+  QVariantList balanceFormattedList;
+  QVariantList transactionCountList;
 
-  q.bindValue(":accountNumber", acc.number());
-  q.bindValue(":accountType", acc.accountType());
-  q.bindValue(":accountTypeString", MyMoneyAccount::accountTypeToString(acc.accountType()));
-  if (acc.accountType() == MyMoneyAccount::Stock) {
-    q.bindValue(":isStockAccount", "Y");
-  } else {
-    q.bindValue(":isStockAccount", "N");
+  QList<QMap<QString, QString> > pairs;
+  QList<QMap<QString, QString> > onlineBankingPairs;
+
+  unsigned long hiId = m_hiIdAccounts;
+
+  foreach(const MyMoneyAccount& a, accList) {
+    idList << a.id();
+    institutionIdList << a.institutionId();
+    parentIdList << a.parentAccountId();
+    if (a.lastReconciliationDate() == QDate())
+      lastReconciledList << a.lastReconciliationDate();
+    else
+      lastReconciledList << a.lastReconciliationDate().toString(Qt::ISODate);
+    lastModifiedList << a.lastModified();
+    if (a.openingDate() == QDate())
+      openingDateList << a.openingDate();
+    else
+      openingDateList << a.openingDate().toString(Qt::ISODate);
+    accountNumberList << a.number();
+    accountTypeList << a.accountType();
+    accountTypeStringList << MyMoneyAccount::accountTypeToString(a.accountType());
+    if (a.accountType() == MyMoneyAccount::Stock)
+      isStockAccountList << "Y";
+    else
+      isStockAccountList << "N";
+    accountNameList << a.name();
+    descriptionList << a.description();
+    currencyIdList << a.currencyId();
+    // This section attempts to get the balance from the database, if possible
+    // That way, the balance fields are kept in sync. If that fails, then
+    // It is assumed that the account actually knows its correct balance.
+
+    //FIXME: Using exceptions for branching always feels like a kludge.
+    //       Look for a better way.
+    TRY
+    MyMoneyMoney bal = m_storagePtr->balance(a.id(), QDate());
+    balanceList << bal.toString();
+    balanceFormattedList << bal.formatMoney("", -1, false);
+    CATCH
+    delete e;
+    balanceList << a.balance().toString();
+    balanceFormattedList << a.balance().formatMoney("", -1, false);
+    ECATCH
+    transactionCountList << quint64(m_transactionCountMap[a.id()]);
+
+    hiId = calcHighId(hiId, a.id());
+
+    //MMAccount inherits from KVPContainer AND has a KVPContainer member
+    //so handle both
+    pairs << a.pairs();
+    onlineBankingPairs << a.onlineBankingSettings().pairs();
   }
-  q.bindValue(":accountName", acc.name());
-  q.bindValue(":description", acc.description());
-  q.bindValue(":currencyId", acc.currencyId());
 
-  // This section attempts to get the balance from the database, if possible
-  // That way, the balance fields are kept in sync. If that fails, then
-  // It is assumed that the account actually knows its correct balance.
+  q.bindValue(":id", idList);
+  q.bindValue(":institutionId", institutionIdList);
+  q.bindValue(":parentId", parentIdList);
+  q.bindValue(":lastReconciled", lastReconciledList);
+  q.bindValue(":lastModified", lastModifiedList);
+  q.bindValue(":openingDate", openingDateList);
+  q.bindValue(":accountNumber", accountNumberList);
+  q.bindValue(":accountType", accountTypeList);
+  q.bindValue(":accountTypeString", accountTypeStringList);
+  q.bindValue(":isStockAccount", isStockAccountList);
+  q.bindValue(":accountName", accountNameList);
+  q.bindValue(":description", descriptionList);
+  q.bindValue(":currencyId", currencyIdList);
+  q.bindValue(":balance", balanceList);
+  q.bindValue(":balanceFormatted", balanceFormattedList);
+  q.bindValue(":transactionCount", transactionCountList);
 
-  //FIXME: Using exceptions for branching always feels like a kludge.
-  //       Look for a better way.
-  TRY
-  MyMoneyMoney bal = m_storagePtr->balance(acc.id(), QDate());
-  q.bindValue(":balance", bal.toString());
-  q.bindValue(":balanceFormatted",
-              bal.formatMoney("", -1, false));
-  CATCH
-  delete e;
-  q.bindValue(":balance", acc.balance().toString());
-  q.bindValue(":balanceFormatted",
-              acc.balance().formatMoney("", -1, false));
-  ECATCH
-
-  q.bindValue(":transactionCount", quint64(m_transactionCountMap[acc.id()]));
-  if (!q.exec()) throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("writing Account")));
+  if (!q.execBatch()) throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("writing Account")));
 
   //Add in Key-Value Pairs for accounts.
-  //MMAccount inherits from KVPContainer AND has a KVPContainer member
-  //so handle both
-  writeKeyValuePairs("ACCOUNT", acc.id(), acc.pairs());
-  writeKeyValuePairs("ONLINEBANKING", acc.id(), acc.onlineBankingSettings().pairs());
-  m_hiIdAccounts = calcHighId(m_hiIdAccounts, acc.id());
+  writeKeyValuePairs("ACCOUNT", idList, pairs);
+  writeKeyValuePairs("ONLINEBANKING", idList, onlineBankingPairs);
+  m_hiIdAccounts = std::max(m_hiIdAccounts, hiId);
 }
 
 // **** Transactions and Splits ****
@@ -1560,19 +1667,22 @@ void MyMoneyStorageSql::deleteTransaction(const QString& id)
   DBG("*** Entering MyMoneyStorageSql::deleteTransaction");
   MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
   MyMoneySqlQuery q(this);
+  QVariantList idList;
+  idList << id;
   q.prepare("DELETE FROM kmmSplits WHERE transactionId = :transactionId;");
-  q.bindValue(":transactionId", id);
-  if (!q.exec()) throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, "deleting Splits"));
+  q.bindValue(":transactionId", idList);
+  if (!q.execBatch()) throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, "deleting Splits"));
 
   q.prepare("DELETE FROM kmmKeyValuePairs WHERE kvpType = 'SPLIT' "
-            "AND kvpId LIKE '" + id + "%'");
-  if (!q.exec()) throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, "deleting Splits KVP"));
+            "AND kvpId LIKE '?%'");
+  q.bindValue(1, idList);
+  if (!q.execBatch()) throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, "deleting Splits KVP"));
 
   m_splits -= q.numRowsAffected();
-  deleteKeyValuePairs("TRANSACTION", id);
+  deleteKeyValuePairs("TRANSACTION", idList);
   q.prepare(m_db.m_tables["kmmTransactions"].deleteString());
-  q.bindValue(":id", id);
-  if (!q.exec()) throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, "deleting Transaction"));
+  q.bindValue(":id", idList);
+  if (!q.execBatch()) throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, "deleting Transaction"));
 }
 
 void MyMoneyStorageSql::writeTransaction(const QString& txId, const MyMoneyTransaction& tx, MyMoneySqlQuery& q, const QString& type)
@@ -1592,8 +1702,12 @@ void MyMoneyStorageSql::writeTransaction(const QString& txId, const MyMoneyTrans
   writeSplits(txId, type, splitList);
 
   //Add in Key-Value Pairs for transactions.
-  deleteKeyValuePairs("TRANSACTION", txId);
-  writeKeyValuePairs("TRANSACTION", txId, tx.pairs());
+  QVariantList idList;
+  idList << txId;
+  deleteKeyValuePairs("TRANSACTION", idList);
+  QList<QMap<QString, QString> > pairs;
+  pairs << tx.pairs();
+  writeKeyValuePairs("TRANSACTION", idList, pairs);
   m_hiIdTransactions = calcHighId(m_hiIdTransactions, tx.id());
 }
 
@@ -1602,6 +1716,10 @@ void MyMoneyStorageSql::writeSplits(const QString& txId, const QString& type, co
   DBG("*** Entering MyMoneyStorageSql::writeSplits");
   // first, get a list of what's on the database (see writeInstitutions)
   QList<unsigned int> dbList;
+  QList<MyMoneySplit> insertList;
+  QList<MyMoneySplit> updateList;
+  QList<int> insertIdList;
+  QList<int> updateIdList;
   MyMoneySqlQuery q(this);
   q.prepare("SELECT splitId FROM kmmSplits where transactionId = :id;");
   q.bindValue(":id", txId);
@@ -1616,11 +1734,21 @@ void MyMoneyStorageSql::writeSplits(const QString& txId, const QString& type, co
   for (it = splitList.constBegin(), i = 0; it != splitList.constEnd(); ++it, ++i) {
     if (dbList.contains(i)) {
       dbList.removeAll(i);
-      writeSplit(txId, (*it), type, i, q);
+      updateList << *it;
+      updateIdList << i;
     } else {
       ++m_splits;
-      writeSplit(txId, (*it), type, i, q2);
+      insertList << *it;
+      insertIdList << i;
     }
+  }
+
+  if (!insertList.isEmpty()) {
+    writeSplitList(txId, insertList, type, insertIdList, q2);
+  }
+
+  if (!updateList.isEmpty()) {
+    writeSplitList(txId, updateList, type, updateIdList, q);
   }
 
   if (!dbList.isEmpty()) {
@@ -1635,49 +1763,100 @@ void MyMoneyStorageSql::writeSplits(const QString& txId, const QString& type, co
   }
 }
 
-void MyMoneyStorageSql::writeSplit(const QString& txId, const MyMoneySplit& split,
-                                   const QString& type, const int splitId, MyMoneySqlQuery& q)
+void MyMoneyStorageSql::writeSplitList
+(const QString& txId,
+ const QList<MyMoneySplit>& splitList,
+ const QString& type,
+ const QList<int>& splitIdList,
+ MyMoneySqlQuery& q)
 {
-  DBG("*** Entering MyMoneyStorageSql::writeSplit");
-  q.bindValue(":transactionId", txId);
-  q.bindValue(":txType", type);
-  q.bindValue(":splitId", splitId);
-  q.bindValue(":payeeId", split.payeeId());
-  if (split.reconcileDate() == QDate())
-    q.bindValue(":reconcileDate", split.reconcileDate());
-  else
-    q.bindValue(":reconcileDate", split.reconcileDate().toString(Qt::ISODate));
-  q.bindValue(":action", split.action());
-  q.bindValue(":reconcileFlag", split.reconcileFlag());
-  q.bindValue(":value", split.value().toString());
-  q.bindValue(":valueFormatted", split.value()
-              .formatMoney("", -1, false)
-              .replace(QChar(','), QChar('.')));
-  q.bindValue(":shares", split.shares().toString());
-  MyMoneyAccount acc = m_storagePtr->account(split.accountId());
-  MyMoneySecurity sec = m_storagePtr->security(acc.currencyId());
-  q.bindValue(":sharesFormatted",
-              split.shares().
-              formatMoney("", MyMoneyMoney::denomToPrec(sec.smallestAccountFraction()), false).
-              replace(QChar(','), QChar('.')));
-  MyMoneyMoney price = split.actualPrice();
-  if (!price.isZero()) {
-    q.bindValue(":price", price.toString());
-    q.bindValue(":priceFormatted", price.formatMoney
-                ("", KMyMoneySettings::pricePrecision(), false)
-                .replace(QChar(','), QChar('.')));
-  } else {
-    q.bindValue(":price", QString());
-    q.bindValue(":priceFormatted", QString());
+
+  DBG("*** Entering MyMoneyStorageSql::writeSplitList");
+
+  QVariantList txIdList;
+  QVariantList typeList;
+  QVariantList payeeIdList;
+  QVariantList reconcileDateList;
+  QVariantList actionList;
+  QVariantList reconcileFlagList;
+  QVariantList valueList;
+  QVariantList valueFormattedList;
+  QVariantList sharesList;
+  QVariantList sharesFormattedList;
+  QVariantList priceList;
+  QVariantList priceFormattedList;
+  QVariantList memoList;
+  QVariantList accountIdList;
+  QVariantList checkNumberList;
+  QVariantList postDateList;
+  QVariantList bankIdList;
+  QVariantList kvpIdList;
+  QList<QMap<QString, QString> > kvpPairsList;
+
+  for (int i = 0; i < splitList.size(); ++i) {
+    const MyMoneySplit& s = splitList[i];
+    txIdList << txId;
+    typeList << type;
+    payeeIdList << s.payeeId();
+    if (s.reconcileDate() == QDate())
+      reconcileDateList << s.reconcileDate();
+    else
+      reconcileDateList << s.reconcileDate().toString(Qt::ISODate);
+    actionList << s.action();
+    reconcileFlagList << s.reconcileFlag();
+    valueList << s.value().toString();
+    valueFormattedList << s.value().formatMoney("", -1, false).replace(QChar(','), QChar('.'));
+    sharesList << s.shares().toString();
+    MyMoneyAccount acc = m_storagePtr->account(s.accountId());
+    MyMoneySecurity sec = m_storagePtr->security(acc.currencyId());
+    sharesFormattedList << s.shares().
+    formatMoney("", MyMoneyMoney::denomToPrec(sec.smallestAccountFraction()), false).
+    replace(QChar(','), QChar('.'));
+    MyMoneyMoney price = s.actualPrice();
+    if (!price.isZero()) {
+      priceList << price.toString();
+      priceFormattedList << price.formatMoney
+      ("", KMyMoneySettings::pricePrecision(), false)
+      .replace(QChar(','), QChar('.'));
+    } else {
+      priceList << QString();
+      priceFormattedList << QString();
+    }
+    memoList << s.memo();
+    accountIdList << s.accountId();
+    checkNumberList << s.number();
+    postDateList << m_txPostDate.toString(Qt::ISODate); // FIXME: when Tom puts date into split object
+    bankIdList << s.bankID();
+
+    kvpIdList << txId + QString::number(splitIdList[i]);
+    kvpPairsList << s.pairs();
   }
-  q.bindValue(":memo", split.memo());
-  q.bindValue(":accountId", split.accountId());
-  q.bindValue(":checkNumber", split.number());
-  q.bindValue(":postDate", m_txPostDate.toString(Qt::ISODate)); // FIXME: when Tom puts date into split object
-  q.bindValue(":bankId", split.bankID());
-  if (!q.exec()) throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("writing Split")));
-  deleteKeyValuePairs("SPLIT", txId + QString::number(splitId));
-  writeKeyValuePairs("SPLIT", txId + QString::number(splitId), split.pairs());
+
+  q.bindValue(":transactionId", txIdList);
+  q.bindValue(":txType", typeList);
+  QVariantList iList;
+  foreach(int i, splitIdList) {
+    iList << i;
+  }
+  q.bindValue(":splitId", iList);
+  q.bindValue(":payeeId", payeeIdList);
+  q.bindValue(":reconcileDate", reconcileDateList);
+  q.bindValue(":action", actionList);
+  q.bindValue(":reconcileFlag", reconcileFlagList);
+  q.bindValue(":value", valueList);
+  q.bindValue(":valueFormatted", valueFormattedList);
+  q.bindValue(":shares", sharesList);
+  q.bindValue(":sharesFormatted", sharesFormattedList);
+  q.bindValue(":price", priceList);
+  q.bindValue(":priceFormatted", priceFormattedList);
+  q.bindValue(":memo", memoList);
+  q.bindValue(":accountId", accountIdList);
+  q.bindValue(":checkNumber", checkNumberList);
+  q.bindValue(":postDate", postDateList);
+  q.bindValue(":bankId", bankIdList);
+  if (!q.execBatch()) throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("writing Split")));
+  deleteKeyValuePairs("SPLIT", kvpIdList);
+  writeKeyValuePairs("SPLIT", kvpIdList, kvpPairsList);
 }
 
 // **** Schedules ****
@@ -1853,18 +2032,20 @@ void MyMoneyStorageSql::writeSecurities()
   }
 
   if (!dbList.isEmpty()) {
+    QVariantList idList;
+    foreach(const QString& s, dbList) {
+      idList << s;
+    }
     q.prepare("DELETE FROM kmmSecurities WHERE id = :id");
     q2.prepare("DELETE FROM kmmPrices WHERE fromId = :id OR toId = :id");
-    QList<QString>::const_iterator it = dbList.constBegin();
-    while (it != dbList.constEnd()) {
-      q.bindValue(":id", (*it));
-      if (!q.exec()) throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, "deleting Security"));
-      q2.bindValue(":fromId", (*it));
-      q2.bindValue(":toId", (*it));
-      if (!q2.exec()) throw new MYMONEYEXCEPTION(buildError(q2, Q_FUNC_INFO, "deleting Security"));
-      deleteKeyValuePairs("SECURITY", (*it));
-      ++it;
-    }
+    q.bindValue(":id", idList);
+    if (!q.execBatch()) throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, "deleting Security"));
+
+    q2.bindValue(":fromId", idList);
+    q2.bindValue(":toId", idList);
+    if (!q2.execBatch()) throw new MYMONEYEXCEPTION(buildError(q2, Q_FUNC_INFO, "deleting Security"));
+
+    deleteKeyValuePairs("SECURITY", idList);
   }
 }
 
@@ -1883,7 +2064,9 @@ void MyMoneyStorageSql::modifySecurity(const MyMoneySecurity& sec)
 {
   DBG("*** Entering MyMoneyStorageSql::modifySecurity");
   MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
-  deleteKeyValuePairs("SECURITY", sec.id());
+  QVariantList kvpList;
+  kvpList << sec.id();
+  deleteKeyValuePairs("SECURITY", kvpList);
   MyMoneySqlQuery q(this);
   q.prepare(m_db.m_tables["kmmSecurities"].updateString());
   writeSecurity(sec, q);
@@ -1894,11 +2077,13 @@ void MyMoneyStorageSql::removeSecurity(const MyMoneySecurity& sec)
 {
   DBG("*** Entering MyMoneyStorageSql::removeSecurity");
   MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
-  deleteKeyValuePairs("SECURITY", sec.id());
+  QVariantList kvpList;
+  kvpList << sec.id();
+  deleteKeyValuePairs("SECURITY", kvpList);
   MyMoneySqlQuery q(this);
   q.prepare(m_db.m_tables["kmmSecurities"].deleteString());
-  q.bindValue(":id", sec.id());
-  if (!q.exec()) throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("deleting Security")));
+  q.bindValue(":id", kvpList);
+  if (!q.execBatch()) throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("deleting Security")));
   --m_securities;
   writeFileInfo();
 }
@@ -1917,7 +2102,11 @@ void MyMoneyStorageSql::writeSecurity(const MyMoneySecurity& security, MyMoneySq
   if (!q.exec()) throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("writing Securities")));
 
   //Add in Key-Value Pairs for security
-  writeKeyValuePairs("SECURITY", security.id(), security.pairs());
+  QVariantList idList;
+  idList << security.id();
+  QList<QMap<QString, QString> > pairs;
+  pairs << security.pairs();
+  writeKeyValuePairs("SECURITY", idList, pairs);
   m_hiIdSecurities = calcHighId(m_hiIdSecurities, security.id());
 }
 
@@ -2280,8 +2469,12 @@ void MyMoneyStorageSql::writeFileInfo()
 {
   DBG("*** Entering MyMoneyStorageSql::writeFileInfo");
   // we have no real way of knowing when these change, so re-write them every time
-  deleteKeyValuePairs("STORAGE", "");
-  writeKeyValuePairs("STORAGE", "", m_storage->pairs());
+  QVariantList kvpList;
+  kvpList << "";
+  QList<QMap<QString, QString> > pairs;
+  pairs << m_storage->pairs();
+  deleteKeyValuePairs("STORAGE", kvpList);
+  writeKeyValuePairs("STORAGE", kvpList, pairs);
   //
   MyMoneySqlQuery q(this);
   q.prepare("SELECT * FROM kmmFileInfo;");
@@ -2342,7 +2535,10 @@ void MyMoneyStorageSql::writeFileInfo()
 }
 
 // **** Key/value pairs ****
-void MyMoneyStorageSql::writeKeyValuePairs(const QString& kvpType, const QString& kvpId, const QMap<QString,  QString>& pairs)
+void MyMoneyStorageSql::writeKeyValuePairs
+(const QString& kvpType,
+ const QVariantList& kvpId,
+ const QList<QMap<QString, QString> >& pairs)
 {
   DBG("*** Entering MyMoneyStorageSql::writeKeyValuePairs");
 
@@ -2353,14 +2549,19 @@ void MyMoneyStorageSql::writeKeyValuePairs(const QString& kvpType, const QString
   QVariantList id;
   QVariantList key;
   QVariantList value;
+  int pairCount = 0;
 
-  QMap<QString, QString>::ConstIterator it;
-  for (it = pairs.constBegin(); it != pairs.constEnd(); ++it) {
-    type << kvpType;
-    id << kvpId;
-    key << it.key();
-    value << it.value();
+  for (int i = 0; i < kvpId.size(); ++i) {
+    QMap<QString, QString>::ConstIterator it;
+    for (it = pairs[i].constBegin(); it != pairs[i].constEnd(); ++it) {
+      type << kvpType;
+      id << kvpId[i];
+      key << it.key();
+      value << it.value();
+    }
+    pairCount += pairs[i].size();
   }
+
   MyMoneySqlQuery q(this);
   q.prepare(m_db.m_tables["kmmKeyValuePairs"].insertString());
   q.bindValue(":kvpType", type);
@@ -2368,17 +2569,27 @@ void MyMoneyStorageSql::writeKeyValuePairs(const QString& kvpType, const QString
   q.bindValue(":kvpKey", key);
   q.bindValue(":kvpData", value);
   if (!q.execBatch()) throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("writing KVP")));
-  m_kvps += pairs.size();
+  m_kvps += pairCount;
 }
 
-void MyMoneyStorageSql::deleteKeyValuePairs(const QString& kvpType, const QString& kvpId)
+void MyMoneyStorageSql::deleteKeyValuePairs(const QString& kvpType, const QVariantList& idList)
 {
   DBG("*** Entering MyMoneyStorageSql::deleteKeyValuePairs");
   MyMoneySqlQuery q(this);
   q.prepare("DELETE FROM kmmKeyValuePairs WHERE kvpType = :kvpType AND kvpId = :kvpId;");
-  q.bindValue(":kvpType", kvpType);
-  q.bindValue(":kvpId", kvpId);
-  if (!q.exec()) throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("deleting kvp for %1 %2").arg(kvpType).arg(kvpId)));
+  QVariantList typeList;
+  for (int i = 0; i < idList.size(); ++i) {
+    typeList << kvpType;
+  }
+  q.bindValue(":kvpType", typeList);
+  q.bindValue(":kvpId", idList);
+  if (!q.execBatch()) {
+    QString idString;
+    for (int i = 0; i < idList.size(); ++i) {
+      idString.append(idList[i].toString() + ' ');
+    }
+    throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("deleting kvp for %1 %2").arg(kvpType).arg(idString)));
+  }
   m_kvps -= q.numRowsAffected();
 }
 
@@ -2534,9 +2745,6 @@ void MyMoneyStorageSql::readPayees(const QList<QString>& pid)
 {
   DBG("*** Entering MyMoneyStorageSql::readPayees(list)");
   TRY
-  //QStringList pidList(pid);
-  //qCopy(pid.begin(), pid.end(), pidList.begin()); // aborted here with qt4
-
   m_storage->loadPayees(fetchPayees(pid));
   readFileInfo();
   m_storage->loadPayeeId(m_hiIdPayees);
@@ -3166,8 +3374,10 @@ unsigned long MyMoneyStorageSql::transactionCount(const QString& aid) const
 void MyMoneyStorageSql::readSplit(MyMoneySplit& s, const MyMoneySqlQuery& q) const
 {
   DBG("*** Entering MyMoneyStorageSql::readSplit");
-  const MyMoneyDbTable& t = m_db.m_tables["kmmSplits"];
 
+  // Set these up as statics, since the field numbers should not change
+  // during execution.
+  static const MyMoneyDbTable& t = m_db.m_tables["kmmSplits"];
   static const int payeeIdCol = t.fieldNumber("payeeId");
   static const int reconcileDateCol = t.fieldNumber("reconcileDate");
   static const int actionCol = t.fieldNumber("action");
@@ -3178,7 +3388,7 @@ void MyMoneyStorageSql::readSplit(MyMoneySplit& s, const MyMoneySqlQuery& q) con
   static const int memoCol = t.fieldNumber("memo");
   static const int accountIdCol = t.fieldNumber("accountId");
   static const int checkNumberCol = t.fieldNumber("checkNumber");
-  //static const int postDateCol = t.fieldNumber("postDate"); // FIXME - when Tom puts date into split object
+//  static const int postDateCol = t.fieldNumber("postDate"); // FIXME - when Tom puts date into split object
   static const int bankIdCol = t.fieldNumber("bankId");
 
   s.clearId();
@@ -3738,12 +3948,25 @@ const QHash<QString, MyMoneyKeyValueContainer> MyMoneyStorageSql::readKeyValuePa
   q.prepare(query);
   q.bindValue(":type", kvpType);
   if (!q.exec()) throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("reading Kvp List for %1").arg(kvpType)));
-  // Reserve enough space for all values. Approximate it with the size of the
-  // kvpIdList in case the db doesn't support reporting the size of the
-  // resultset to the caller.
-  retval.reserve(q.size() > 0 ? q.size() : kvpIdList.size());
-  while (q.next()) {
-    retval [q.value(0).toString()].setValue(q.value(1).toString(), q.value(2).toString());
+  // Reserve enough space for all values.
+  retval.reserve(kvpIdList.size());
+
+  // The loop below is designed to limit the number of calls to
+  // QHash::operator[] in order to speed up calls to this function. This
+  // assumes that QString::operator== is faster.
+  if (q.next()) {
+    QString oldkey = q.value(0).toString();
+    MyMoneyKeyValueContainer& kvpc = retval[oldkey];
+
+    kvpc.setValue(q.value(1).toString(), q.value(2).toString());
+
+    while (q.next()) {
+      if (q.value(0).toString() != oldkey) {
+        oldkey = q.value(0).toString();
+        kvpc = retval[oldkey];
+      }
+      kvpc.setValue(q.value(1).toString(), q.value(2).toString());
+    }
   }
 
   return (retval);
