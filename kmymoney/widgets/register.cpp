@@ -940,14 +940,9 @@ void Register::removeItem(RegisterItem* p)
   p->setPrevItem(0);
 
   // remove it from the m_items array
-  for (Q3ValueVector<RegisterItem*>::size_type i = 0; i < m_items.size(); ++i) {
-    RegisterItem* item = m_items[i];
-    if (!item)
-      continue;
-    if (item == p) {
-      m_items[i] = 0;
-      break;
-    }
+  int i = m_items.indexOf(p);
+  if (-1 != i) {
+    m_items[i] = 0;
   }
   m_listsDirty = true;
 }
