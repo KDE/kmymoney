@@ -24,7 +24,6 @@
 
 #include <QPixmap>
 #include <QLabel>
-#include <QLineEdit>
 #include <QCheckBox>
 
 // ----------------------------------------------------------------------------

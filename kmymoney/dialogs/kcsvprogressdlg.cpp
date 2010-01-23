@@ -27,7 +27,6 @@
 #include <QLabel>
 #include <QPushButton>
 #include <q3progressbar.h>
-#include <QLineEdit>
 #include <q3groupbox.h>
 #include <QPixmap>
 

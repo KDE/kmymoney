@@ -22,7 +22,6 @@
 // ----------------------------------------------------------------------------
 // QT Headers
 
-#include <QLineEdit>
 #include <QLabel>
 #include <QPixmap>
 #include <QList>

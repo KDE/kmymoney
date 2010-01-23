@@ -29,7 +29,6 @@
 
 #include <QString>
 #include <QRadioButton>
-#include <QLineEdit>
 #include <QCheckBox>
 #include <QPushButton>
 

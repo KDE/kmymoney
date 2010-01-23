@@ -19,7 +19,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 #include <QCheckBox>
-#include <QLineEdit>
 #include <QLayout>
 #include <QApplication>
 #include <QComboBox>

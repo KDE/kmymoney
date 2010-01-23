@@ -33,7 +33,6 @@
 #include <QCheckBox>
 #include <q3frame.h>
 #include <QLabel>
-#include <QLineEdit>
 #include <QPushButton>
 #include <QRadioButton>
 #include <QLayout>

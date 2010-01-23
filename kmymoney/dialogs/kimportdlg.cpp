@@ -23,7 +23,6 @@
 // ----------------------------------------------------------------------------
 // QT Headers
 
-#include <QLineEdit>
 #include <q3textstream.h>
 #include <q3progressbar.h>
 #include <QLabel>

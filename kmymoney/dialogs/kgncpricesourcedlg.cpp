@@ -19,7 +19,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 #include <QLabel>
-#include <QLineEdit>
 #include <QLayout>
 #include <QApplication>
 #include <QButtonGroup>

@@ -23,13 +23,11 @@
 // QT Includes
 
 #include <q3textbrowser.h>
-#include <QLineEdit>
 #include <QLabel>
 #include <QLayout>
 #include <QRegExp>
 #include <QCheckBox>
 #include <QTabWidget>
-//Added by qt3to4:
 #include <Q3TextStream>
 
 // ----------------------------------------------------------------------------

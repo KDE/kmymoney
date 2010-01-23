@@ -31,6 +31,7 @@
 #include <QEvent>
 #include <QDesktopWidget>
 #include <QLineEdit>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 

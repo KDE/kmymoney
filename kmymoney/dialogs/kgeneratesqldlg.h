@@ -19,15 +19,18 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
-#include <QLineEdit>
+
 #include <QLabel>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
+
 #include <kurl.h>
 #include <kdialog.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
+
 #include "ui_kgeneratesqldlgdecl.h"
 #include "storage/mymoneystoragesql.h"
 #include "storage/mymoneyseqaccessmgr.h"

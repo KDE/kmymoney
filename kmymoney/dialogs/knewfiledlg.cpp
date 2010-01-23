@@ -20,7 +20,6 @@
 // QT Includes
 
 #include <QPixmap>
-#include <QLineEdit>
 #include <QLabel>
 
 // ----------------------------------------------------------------------------

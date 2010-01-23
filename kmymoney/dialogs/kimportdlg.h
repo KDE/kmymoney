@@ -23,7 +23,6 @@
 // QT Headers
 
 #include <QString>
-#include <QLineEdit>
 #include <QCheckBox>
 
 // ----------------------------------------------------------------------------

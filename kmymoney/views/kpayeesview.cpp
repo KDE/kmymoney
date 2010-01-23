@@ -27,7 +27,6 @@
 
 #include <QPushButton>
 #include <QComboBox>
-#include <QLineEdit>
 #include <QLabel>
 #include <QLayout>
 #include <q3multilineedit.h>

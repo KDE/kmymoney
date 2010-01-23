@@ -26,7 +26,6 @@
 // QT Includes
 
 #include <QLabel>
-#include <QLineEdit>
 #include <q3textedit.h>
 #include <QToolButton>
 #include <QList>

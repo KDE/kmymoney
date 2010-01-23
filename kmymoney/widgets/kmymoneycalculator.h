@@ -31,9 +31,7 @@
 #include <QLayout>
 #include <q3grid.h>
 #include <qlcdnumber.h>
-#include <QLineEdit>
 #include <QLabel>
-//Added by qt3to4:
 #include <QKeyEvent>
 
 // ----------------------------------------------------------------------------

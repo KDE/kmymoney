@@ -78,7 +78,7 @@
               </widget>
             </item>
             <item>
-              <widget class="QLineEdit" name="kcfg_HolidayRegion"/>
+              <widget class="KLineEdit" name="kcfg_HolidayRegion"/>
             </item>
             <item>
               <widget class="KComboBox" name="m_holidayRegion">
@@ -170,6 +170,11 @@
       <class>KComboBox</class>
       <extends>QComboBox</extends>
       <header>kcombobox.h</header>
+    </customwidget>
+    <customwidget>
+      <class>KLineEdit</class>
+      <extends>QLineEdit</extends>
+      <header>klineedit.h</header>
     </customwidget>
   </customwidgets>
   <connections>
