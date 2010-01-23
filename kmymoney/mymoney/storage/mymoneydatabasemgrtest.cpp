@@ -418,6 +418,8 @@ void MyMoneyDatabaseMgrTest::testModifyAccount()
   testAccount2Institution();
 
   // test the OK case
+  //
+  //FIXME: modify 2 accounts simultaneously to trip a write error
   MyMoneyAccount a = m->account("A000001");
   a.setName("New account name");
   m->setDirty();

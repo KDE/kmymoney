@@ -154,14 +154,14 @@ private:
   CheckMemoryTable table;
   _CheckMemoryOutFunc *outfunc;
 
-  friend void * operator new(size_t s,const char *file, int line) throw();
-  friend void * operator new [](size_t,const char *file, int line) throw();
+  friend void * operator new(size_t s, const char *file, int line) throw();
+  friend void * operator new [](size_t, const char *file, int line) throw();
   friend void operator delete(void *p) throw();
   friend void operator delete [](void *p) throw();
 };
 
-KMM_MYMONEY_EXPORT void * operator new(size_t s,const char *file, int line) throw(); // Normal new operator
-KMM_MYMONEY_EXPORT void * operator new [](size_t s,const char *file, int line) throw(); // Array new operator
+KMM_MYMONEY_EXPORT void * operator new(size_t s, const char *file, int line) throw(); // Normal new operator
+KMM_MYMONEY_EXPORT void * operator new [](size_t s, const char *file, int line) throw(); // Array new operator
 KMM_MYMONEY_EXPORT void operator delete(void *p) throw();
 KMM_MYMONEY_EXPORT void operator delete [](void *p) throw();
 

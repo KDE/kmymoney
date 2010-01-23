@@ -186,7 +186,7 @@ void ObjectInfoTable::constructScheduleTable(void)
         //get the information for all splits
         QList<MyMoneySplit> splits = transaction.splits();
         QList<MyMoneySplit>::const_iterator split_it = splits.constBegin();
-        for (;split_it != splits.constEnd(); split_it++) {
+        for (; split_it != splits.constEnd(); split_it++) {
           TableRow splitRow;
           ReportAccount splitAcc = (*split_it).accountId();
 

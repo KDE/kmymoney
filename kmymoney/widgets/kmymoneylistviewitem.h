@@ -81,9 +81,9 @@ private:
   QString              m_key;
   QString             m_id;
   // copied from K3ListViewItem()
-unsigned int         m_isOdd : 1;
-unsigned int         m_isKnown : 1;
-unsigned int         m_unused : 30;
+  unsigned int         m_isOdd : 1;
+  unsigned int         m_isKnown : 1;
+  unsigned int         m_unused : 30;
 
 };
 

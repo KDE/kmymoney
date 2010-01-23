@@ -220,8 +220,7 @@ void timetrace(const char *txt)
 
 // these symbols are needed when linking with libofx because it requires
 // these global symbols as part of its callback interface
-extern "C"
-{
+extern "C" {
   void ofx_proc_security_cb() {}
   void ofx_proc_transaction_cb() {}
   void ofx_proc_statement_cb() {}

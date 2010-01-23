@@ -251,7 +251,7 @@ std::list<AB_JOB*> KBJobListView::getSelectedJobs()
   // Create an iterator and give the listview as argument
   Q3ListViewItemIterator it(this);
   // iterate through all items of the listview
-  for (;it.current();++it) {
+  for (; it.current(); ++it) {
     if (it.current()->isSelected()) {
       entry = dynamic_cast<KBJobListViewItem*>(it.current());
       if (entry)

@@ -163,7 +163,7 @@ private:
     MaxNativeFileType,
     /* and non-native types below */
     GncXML         // Gnucash XML
-  }fileTypeE;
+  } fileTypeE;
   fileTypeE m_fileType;
 
 private:

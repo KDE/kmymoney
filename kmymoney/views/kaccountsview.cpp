@@ -272,7 +272,7 @@ void KAccountsView::loadIconView(void)
   // remember the positions of the icons
   QMap<QString, QPoint> posMap;
   KMyMoneyAccountIconItem* p = dynamic_cast<KMyMoneyAccountIconItem*>(m_accountIcons->firstItem());
-  for (;p; p = dynamic_cast<KMyMoneyAccountIconItem*>(p->nextItem()))
+  for (; p; p = dynamic_cast<KMyMoneyAccountIconItem*>(p->nextItem()))
     posMap[p->itemObject().id()] = p->pos();
 
   // turn off updates to avoid flickering during reload
@@ -542,7 +542,7 @@ void KAccountsView::slotReconcileAccount(const MyMoneyAccount& acc, const QDate&
 
   // scan trough the icon list and do the same thing
   KMyMoneyAccountIconItem* icon = dynamic_cast<KMyMoneyAccountIconItem*>(m_accountIcons->firstItem());
-  for (;icon; icon = dynamic_cast<KMyMoneyAccountIconItem*>(icon->nextItem())) {
+  for (; icon; icon = dynamic_cast<KMyMoneyAccountIconItem*>(icon->nextItem())) {
     icon->setReconciliation(false);
   }
 
@@ -563,7 +563,7 @@ void KAccountsView::slotReconcileAccount(const MyMoneyAccount& acc, const QDate&
 
     // scan trough the icon list and do the same thing
     icon = dynamic_cast<KMyMoneyAccountIconItem*>(m_accountIcons->firstItem());
-    for (;icon; icon = dynamic_cast<KMyMoneyAccountIconItem*>(icon->nextItem())) {
+    for (; icon; icon = dynamic_cast<KMyMoneyAccountIconItem*>(icon->nextItem())) {
       if (icon->itemObject().id() == acc.id()) {
         icon->setReconciliation(true);
         break;
@@ -650,7 +650,7 @@ void KAccountsView::slotUpdateIconPos(unsigned int action)
 
   MyMoneyFileTransaction ft;
   KMyMoneyAccountIconItem* p = dynamic_cast<KMyMoneyAccountIconItem*>(m_accountIcons->firstItem());
-  for (;p; p = dynamic_cast<KMyMoneyAccountIconItem*>(p->nextItem())) {
+  for (; p; p = dynamic_cast<KMyMoneyAccountIconItem*>(p->nextItem())) {
     const MyMoneyAccount& acc = dynamic_cast<const MyMoneyAccount&>(p->itemObject());
     if (acc.value("kmm-iconpos") != point(p->pos())) {
       MyMoneyAccount a(acc);

@@ -126,16 +126,16 @@ public:
   typedef union {
     unsigned  allFilter;
     struct {
-    unsigned textFilter       : 1;
-    unsigned accountFilter    : 1;
-    unsigned payeeFilter      : 1;
-    unsigned categoryFilter   : 1;
-    unsigned nrFilter         : 1;
-    unsigned dateFilter       : 1;
-    unsigned amountFilter     : 1;
-    unsigned typeFilter       : 1;
-    unsigned stateFilter      : 1;
-    unsigned validityFilter   : 1;
+      unsigned textFilter       : 1;
+      unsigned accountFilter    : 1;
+      unsigned payeeFilter      : 1;
+      unsigned categoryFilter   : 1;
+      unsigned nrFilter         : 1;
+      unsigned dateFilter       : 1;
+      unsigned amountFilter     : 1;
+      unsigned typeFilter       : 1;
+      unsigned stateFilter      : 1;
+      unsigned validityFilter   : 1;
     } singleFilter;
   } FilterSet;
 

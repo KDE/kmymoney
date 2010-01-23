@@ -1183,7 +1183,7 @@ TransactionEditor* KGlobalLedgerView::startEdit(const KMyMoneyRegister::Selected
 
       // install event filter in all taborder widgets
       QWidgetList::const_iterator it_w = m_tabOrderWidgets.constBegin();
-      for (;it_w != m_tabOrderWidgets.constEnd(); ++it_w) {
+      for (; it_w != m_tabOrderWidgets.constEnd(); ++it_w) {
         (*it_w)->installEventFilter(this);
       }
       // Install a filter that checks if a mouse press happened outside

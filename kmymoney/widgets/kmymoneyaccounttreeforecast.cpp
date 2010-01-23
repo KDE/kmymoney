@@ -237,7 +237,7 @@ void KMyMoneyAccountTreeForecastItem::updateSummary()
   it_c++;
 
   //iterate through all other columns
-  for (QDate summaryDate = QDate::currentDate().addDays(daysToBeginDay); summaryDate <= m_forecast.forecastEndDate();summaryDate = summaryDate.addDays(m_forecast.accountsCycle()), ++it_c) {
+  for (QDate summaryDate = QDate::currentDate().addDays(daysToBeginDay); summaryDate <= m_forecast.forecastEndDate(); summaryDate = summaryDate.addDays(m_forecast.accountsCycle()), ++it_c) {
     amountMM = m_forecast.forecastBalance(m_account, summaryDate);
 
     //calculate the balance in base currency for the total row

@@ -379,7 +379,7 @@ kMyMoneyDateTbl::contentsMouseReleaseEvent(QMouseEvent *e)
     // "dayoff % 7" sections below.
 
     if (pos + dayoff % 7 <= firstday) { // this day is in the previous month
-      setDate(date.addDays(-1 * (date.day() + firstday - pos - dayoff % 7)));
+      setDate(date.addDays(-1 *(date.day() + firstday - pos - dayoff % 7)));
       return;
     }
 

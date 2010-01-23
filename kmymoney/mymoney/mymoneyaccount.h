@@ -106,7 +106,7 @@ public:
 
     /* insert new account types above this line */
     MaxAccountTypes       /**< Denotes the number of different account types */
-  }accountTypeE;
+  } accountTypeE;
 
   /**
     * This is the constructor for a new empty account

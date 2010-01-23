@@ -299,7 +299,7 @@ void MyMoneyMoneyTest::testMultiplication()
 
   CPPUNIT_ASSERT((m1 * MyMoneyMoney(50, 1)) == MyMoneyMoney(5000, 1));
   CPPUNIT_ASSERT((m1 * MyMoneyMoney(10000000, 1)) == MyMoneyMoney(1000000000, 1));
-  CPPUNIT_ASSERT((m1 * (*m_0)) == MyMoneyMoney(1200));
+  CPPUNIT_ASSERT((m1 *(*m_0)) == MyMoneyMoney(1200));
 
   MyMoneyMoney m2 = QString("-73010.28");
   m1 = QString("1.95583");

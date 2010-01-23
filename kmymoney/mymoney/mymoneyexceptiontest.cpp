@@ -34,7 +34,7 @@ void MyMoneyExceptionTest::testDefaultConstructor()
 {
   MyMoneyException *e = new MYMONEYEXCEPTION("Message");
   CPPUNIT_ASSERT(e->what() == "Message");
-  CPPUNIT_ASSERT(e->line() == __LINE__ -2);
+  CPPUNIT_ASSERT(e->line() == __LINE__ - 2);
   CPPUNIT_ASSERT(e->file() == __FILE__);
   delete e;
 }

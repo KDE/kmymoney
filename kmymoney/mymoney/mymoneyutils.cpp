@@ -161,7 +161,7 @@ void _CheckMemory_End()
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
-void *operator new(size_t s,const char *file, int line) throw()
+void *operator new(size_t s, const char *file, int line) throw()
 {
   void *p = malloc(s);
 
@@ -173,7 +173,7 @@ void *operator new(size_t s,const char *file, int line) throw()
   return p;
 }
 
-void * operator new [](size_t s,const char *file, int line) throw()
+void * operator new [](size_t s, const char *file, int line) throw()
 {
   void *p = malloc(s);
 

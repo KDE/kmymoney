@@ -412,11 +412,10 @@ void ListTable::render(QString& result, QString& csv) const
 
     if ((* it_row)["rank"] == "-2")
       result += QString("<tr class=\"item%1\">").arg((* it_row)["id"]);
+    else if ((* it_row)["rank"] == "1")
+      result += QString("<tr class=\"%1\">").arg(row_odd ? "item1" : "item0");
     else
-      if ((* it_row)["rank"] == "1")
-        result += QString("<tr class=\"%1\">").arg(row_odd ? "item1" : "item0");
-      else
-        result += QString("<tr class=\"%1\">").arg(row_odd ? "row-odd " : "row-even");
+      result += QString("<tr class=\"%1\">").arg(row_odd ? "row-odd " : "row-even");
 
     QStringList::const_iterator it_column = columns.constBegin();
     while (it_column != columns.constEnd()) {

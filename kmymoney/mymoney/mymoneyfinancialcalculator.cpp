@@ -254,7 +254,7 @@ FCALC_DOUBLE MyMoneyFinancialCalculator::interestRate(void)
         delete e;
         eint = 0;
       }
-      (void) modfl(ratio * (dik / eint), &a);
+      (void) modfl(ratio *(dik / eint), &a);
       ri = static_cast<unsigned>(a);
     } while (ri);
   }
@@ -265,7 +265,7 @@ FCALC_DOUBLE MyMoneyFinancialCalculator::interestRate(void)
 
 FCALC_DOUBLE MyMoneyFinancialCalculator::_fi(const FCALC_DOUBLE eint) const
 {
-  return _Ax(eint) * (m_pv + _Cx(eint)) + m_pv + m_fv;
+  return _Ax(eint) *(m_pv + _Cx(eint)) + m_pv + m_fv;
 }
 
 FCALC_DOUBLE MyMoneyFinancialCalculator::_fip(const FCALC_DOUBLE eint) const

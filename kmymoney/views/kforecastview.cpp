@@ -397,7 +397,7 @@ void KForecastView::loadAdvancedView(void)
   }
   //clear the list, including columns
   m_advancedList->clear();
-  for (;m_advancedList->columns() > 0;) {
+  for (; m_advancedList->columns() > 0;) {
     m_advancedList->removeColumn(0);
   }
 
