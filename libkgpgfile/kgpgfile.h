@@ -121,6 +121,11 @@ public:
     */
   void setFileName(const QString& fn);
 
+  /** This function returns the error from the GPG system as a user
+    * readable string. The strinf is empty if there were no errors.
+    */
+  QString errorToString() const;
+
   /**
     * Checks whether GPG is available or not
     *

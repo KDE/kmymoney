@@ -750,7 +750,12 @@ bool KMyMoneyView::readFile(const KUrl& url)
         }
         qfile->close();
       } else {
-        KMessageBox::sorry(this, QString("<qt>%1</qt>"). arg(i18n("File <b>%1</b> not found.",filename)));
+        KGPGFile *gpgFile = qobject_cast<KGPGFile *>(qfile);
+        if (gpgFile && !gpgFile->errorToString().isEmpty()) {
+          KMessageBox::sorry(this, QString("<qt>%1</qt>"). arg(i18n("The following error was encountered while decrypting file <b>%1</b>: %2", filename, gpgFile->errorToString())));
+        } else {
+          KMessageBox::sorry(this, QString("<qt>%1</qt>"). arg(i18n("File <b>%1</b> not found.",filename)));
+        }
         rc = false;
       }
       delete qfile;

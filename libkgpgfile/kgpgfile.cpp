@@ -65,6 +65,8 @@ class KGPGFile::Private {
     QString m_fn;
     QFile* m_file;
 
+    GpgME::Error m_lastError;
+
     GpgME::Context* ctx;
     GpgME::Data m_data;
 
@@ -170,9 +172,8 @@ bool KGPGFile::open(OpenMode mode)
 
   if(isReadable()) {
     GpgME::Data dcipher(d->m_file->handle());
-    GpgME::Error error;
-    error = d->ctx->decrypt(dcipher, d->m_data).error();
-    if(error.encodedError()) {
+    d->m_lastError = d->ctx->decrypt(dcipher, d->m_data).error();
+    if(d->m_lastError.encodedError()) {
       return false;
     }
     d->m_data.seek(0, SEEK_SET);
@@ -193,10 +194,9 @@ void KGPGFile::close(void)
   if(isWritable()) {
     d->m_data.seek(0, SEEK_SET);
     GpgME::Data dcipher(d->m_file->handle());
-    GpgME::Error error;
-    error = d->ctx->encrypt(d->m_recipients, d->m_data, dcipher, GpgME::Context::AlwaysTrust).error();
-    if(error.encodedError()) {
-      qDebug("Failure while writing file: '%s'", error.asString());
+    d->m_lastError = d->ctx->encrypt(d->m_recipients, d->m_data, dcipher, GpgME::Context::AlwaysTrust).error();
+    if(d->m_lastError.encodedError()) {
+      qDebug("Failure while writing file: '%s'", d->m_lastError.asString());
     }
   }
 
@@ -255,6 +255,11 @@ qint64 KGPGFile::readData(char *data, qint64 maxlen)
     maxlen -= len;
   }
   return bytesRead;
+}
+
+QString KGPGFile::errorToString() const
+{
+  return QString::fromUtf8(d->m_lastError.asString());
 }
 
 bool KGPGFile::GPGAvailable(void)
