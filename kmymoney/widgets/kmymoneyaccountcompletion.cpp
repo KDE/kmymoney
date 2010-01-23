@@ -39,7 +39,7 @@
 #include <mymoneyfile.h>
 
 kMyMoneyAccountCompletion::kMyMoneyAccountCompletion(QWidget *parent) :
-  kMyMoneyCompletion(parent)
+    kMyMoneyCompletion(parent)
 {
   delete m_selector;
   m_selector = new kMyMoneyAccountSelector(this, 0, false);
@@ -69,15 +69,15 @@ void kMyMoneyAccountCompletion::slotMakeCompletion(const QString& txt)
   //  return;
 
   int cnt = 0;
-  if(txt.contains(MyMoneyFile::AccountSeperator) == 0) {
+  if (txt.contains(MyMoneyFile::AccountSeperator) == 0) {
     m_lastCompletion = QRegExp(QRegExp::escape(txt), Qt::CaseInsensitive);
     cnt = selector()->slotMakeCompletion(txt);
   } else {
     QStringList parts = txt.split(MyMoneyFile::AccountSeperator, QString::SkipEmptyParts);
     QString pattern("^");
     QStringList::iterator it;
-    for(it = parts.begin(); it != parts.end(); ++it) {
-      if(pattern.length() > 1)
+    for (it = parts.begin(); it != parts.end(); ++it) {
+      if (pattern.length() > 1)
         pattern += MyMoneyFile::AccountSeperator;
       pattern += QRegExp::escape(QString(*it).trimmed()) + ".*";
     }
@@ -86,17 +86,17 @@ void kMyMoneyAccountCompletion::slotMakeCompletion(const QString& txt)
     cnt = selector()->slotMakeCompletion(m_lastCompletion);
     // if we don't have a match, we try it again, but this time
     // we add a wildcard for the top level
-    if(cnt == 0) {
-      pattern = pattern.insert(1, QString(".*")+MyMoneyFile::AccountSeperator);
+    if (cnt == 0) {
+      pattern = pattern.insert(1, QString(".*") + MyMoneyFile::AccountSeperator);
       m_lastCompletion = QRegExp(pattern, Qt::CaseInsensitive);
       cnt = selector()->slotMakeCompletion(m_lastCompletion);
     }
   }
 
-  if(m_parent && m_parent->isVisible() && !isVisible() && cnt)
+  if (m_parent && m_parent->isVisible() && !isVisible() && cnt)
     show(false);
   else {
-    if(cnt != 0) {
+    if (cnt != 0) {
       adjustSize();
     } else {
       hide();

@@ -85,36 +85,35 @@ using namespace reports;
   * KReportsView::KReportTab Implementation
   */
 
-KReportsView::KReportTab::KReportTab(KTabWidget* parent, const MyMoneyReport& report ):
-  QWidget( parent ),
-  m_part( new KHTMLPart( this) ),
-  m_chartView( new KReportChartView( this ) ),
-  m_control( new kMyMoneyReportControl( this ) ),
-  m_layout( new QVBoxLayout( this) ),
-  m_report( report ),
-  m_deleteMe( false ),
-  m_showingChart( false ),
-  m_needReload( true ),
-  m_table(0)
+KReportsView::KReportTab::KReportTab(KTabWidget* parent, const MyMoneyReport& report):
+    QWidget(parent),
+    m_part(new KHTMLPart(this)),
+    m_chartView(new KReportChartView(this)),
+    m_control(new kMyMoneyReportControl(this)),
+    m_layout(new QVBoxLayout(this)),
+    m_report(report),
+    m_deleteMe(false),
+    m_showingChart(false),
+    m_needReload(true),
+    m_table(0)
 {
   m_layout->setSpacing(6);
-  m_part->setFontScaleFactor( KMyMoneyGlobalSettings::fontSizePercentage() );
+  m_part->setFontScaleFactor(KMyMoneyGlobalSettings::fontSizePercentage());
 
 
   if (!KReportChartView::implemented() ||
-      m_report.reportType() != MyMoneyReport::ePivotTable )
-  {
+      m_report.reportType() != MyMoneyReport::ePivotTable) {
     m_control->buttonChart->hide();
   }
 
-  m_chartView->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );
+  m_chartView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   m_chartView->hide();
-  m_layout->addWidget( m_control );
-  m_layout->addWidget( m_part->view() );
-  m_layout->addWidget( m_chartView );
+  m_layout->addWidget(m_control);
+  m_layout->addWidget(m_part->view());
+  m_layout->addWidget(m_chartView);
 
-  parent->addTab( this, KIcon("application-vnd.oasis.opendocument.spreadsheet"), report.name() );
-  parent->setTabEnabled( parent->indexOf(this), true );
+  parent->addTab(this, KIcon("application-vnd.oasis.opendocument.spreadsheet"), report.name());
+  parent->setTabEnabled(parent->indexOf(this), true);
 }
 
 KReportsView::KReportTab::~KReportTab()
@@ -126,7 +125,7 @@ KReportsView::KReportTab::~KReportTab()
 
 void KReportsView::KReportTab::print(void)
 {
-  if(m_part && m_part->view())
+  if (m_part && m_part->view())
     m_part->view()->print();
 }
 
@@ -137,22 +136,19 @@ void KReportsView::KReportTab::copyToClipboard(void)
   QApplication::clipboard()->setMimeData(pMimeData);
 }
 
-void KReportsView::KReportTab::saveAs( const QString& filename, bool includeCSS )
+void KReportsView::KReportTab::saveAs(const QString& filename, bool includeCSS)
 {
-  QFile file( filename );
-  if ( file.open( QIODevice::WriteOnly ) )
-  {
-    if ( QFileInfo(filename).suffix().toLower() == "csv")
-    {
+  QFile file(filename);
+  if (file.open(QIODevice::WriteOnly)) {
+    if (QFileInfo(filename).suffix().toLower() == "csv") {
       QTextStream(&file) << m_table->renderCSV();
-    }
-    else {
+    } else {
       QTextStream stream(&file);
       QRegExp exp("(.*)(<link.*css\" href=)\"(.*)\">(<meta.*utf-8\" />)(.*)");
       QString table = createTable();
-      if(exp.indexIn(table) != -1 && includeCSS) {
+      if (exp.indexIn(table) != -1 && includeCSS) {
         QFile cssFile(exp.cap(3));
-        if(cssFile.open(QIODevice::ReadOnly)) {
+        if (cssFile.open(QIODevice::ReadOnly)) {
           QTextStream cssStream(&cssFile);
           stream << exp.cap(1);
           stream << exp.cap(4);
@@ -175,7 +171,7 @@ void KReportsView::KReportTab::saveAs( const QString& filename, bool includeCSS 
 void KReportsView::KReportTab::loadTab(void)
 {
   m_needReload = true;
-  if(isVisible()) {
+  if (isVisible()) {
     m_needReload = false;
     updateReport();
   }
@@ -183,7 +179,7 @@ void KReportsView::KReportTab::loadTab(void)
 
 void KReportsView::KReportTab::showEvent(QShowEvent * event)
 {
-  if(m_needReload) {
+  if (m_needReload) {
     m_needReload = false;
     updateReport();
   }
@@ -197,20 +193,20 @@ void KReportsView::KReportTab::updateReport(void)
 
   try {
     // Don't try to reload default reports from the engine
-    if(!m_report.id().isEmpty())
+    if (!m_report.id().isEmpty())
       m_report = MyMoneyFile::instance()->report(m_report.id());
-  } catch(MyMoneyException* e) {
+  } catch (MyMoneyException* e) {
     delete e;
   }
 
   delete m_table;
   m_table = 0;
 
-  if ( m_report.reportType() == MyMoneyReport::ePivotTable ) {
+  if (m_report.reportType() == MyMoneyReport::ePivotTable) {
     m_table = new PivotTable(m_report);
-  } else if ( m_report.reportType() == MyMoneyReport::eQueryTable ) {
+  } else if (m_report.reportType() == MyMoneyReport::eQueryTable) {
     m_table = new QueryTable(m_report);
-  } else if ( m_report.reportType() == MyMoneyReport::eInfoTable ) {
+  } else if (m_report.reportType() == MyMoneyReport::eInfoTable) {
     m_table = new ObjectInfoTable(m_report);
   }
 
@@ -218,22 +214,22 @@ void KReportsView::KReportTab::updateReport(void)
   m_part->write(createTable());
   m_part->end();
 
-  m_table->drawChart( *m_chartView );
+  m_table->drawChart(*m_chartView);
   m_chartView->update();
 
-  if ( m_report.isChartByDefault() && !m_showingChart)
-      toggleChart();
+  if (m_report.isChartByDefault() && !m_showingChart)
+    toggleChart();
 }
 
 QString KReportsView::KReportTab::createTable(const QString& links)
 {
   QString filename;
-  if(!MyMoneyFile::instance()->value("reportstylesheet").isEmpty())
+  if (!MyMoneyFile::instance()->value("reportstylesheet").isEmpty())
     filename = KGlobal::dirs()->findResource("appdata", QString("html/%1").arg(MyMoneyFile::instance()->value("reportstylesheet")));
-  if(filename.isEmpty())
+  if (filename.isEmpty())
     filename = KGlobal::dirs()->findResource("appdata", "html/kmymoney.css");
   QString header = QString("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\">\n") +
-    QString("<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"%1\">").arg(filename);
+                   QString("<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"%1\">").arg(filename);
 
   header += "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />";
   header += KMyMoneyUtils::variableCSS();
@@ -250,18 +246,16 @@ QString KReportsView::KReportTab::createTable(const QString& links)
     html += m_table->renderHTML();
 
     html += footer;
-  }
-  catch(MyMoneyException *e)
-  {
+  } catch (MyMoneyException *e) {
     kDebug(2) << "KReportsView::KReportTab::createTable(): ERROR " << e->what();
 
-    QString error = i18n("There was an error creating your report: \"%1\".\nPlease report this error to the developer's list: kmymoney-devel@kde.org",e->what());
+    QString error = i18n("There was an error creating your report: \"%1\".\nPlease report this error to the developer's list: kmymoney-devel@kde.org", e->what());
 
     KMessageBox::error(this, error, i18n("Critical Error"));
 
     html += header;
     html += links;
-    html += "<h1>"+i18n("Unable to generate report")+"</h1><p>"+error+"</p>";
+    html += "<h1>" + i18n("Unable to generate report") + "</h1><p>" + error + "</p>";
     html += footer;
 
     delete e;
@@ -274,22 +268,19 @@ void KReportsView::KReportTab::toggleChart(void)
 {
   // for now it will just SHOW the chart.  In the future it actually has to toggle it.
 
-  if ( m_showingChart )
-  {
+  if (m_showingChart) {
     m_part->view()->show();
     m_chartView->hide();
 
-    m_control->buttonChart->setText( i18n( "Chart" ) );
-    m_control->buttonChart->setToolTip( i18n( "Show the chart version of this report" ) );
-  }
-  else
-  {
+    m_control->buttonChart->setText(i18n("Chart"));
+    m_control->buttonChart->setToolTip(i18n("Show the chart version of this report"));
+  } else {
     m_part->view()->hide();
 
     m_chartView->show();
 
-    m_control->buttonChart->setText( i18n( "Report" ) );
-    m_control->buttonChart->setToolTip( i18n( "Show the report version of this chart" ) );
+    m_control->buttonChart->setText(i18n("Report"));
+    m_control->buttonChart->setToolTip(i18n("Show the report version of this chart"));
   }
   m_showingChart = ! m_showingChart;
 }
@@ -302,26 +293,26 @@ class KReportsView::Private
 {
 public:
   Private() :
-    includeCSS(0) {}
+      includeCSS(0) {}
 
   QCheckBox* includeCSS;
 };
 
-KReportsView::KReportsView(QWidget *parent, const char *name ) :
-  KMyMoneyViewBase(parent, name, i18n("Reports")),
-  d(new Private),
-  m_needReload(false)
+KReportsView::KReportsView(QWidget *parent, const char *name) :
+    KMyMoneyViewBase(parent, name, i18n("Reports")),
+    d(new Private),
+    m_needReload(false)
 {
-  m_reportTabWidget = new KTabWidget( this);
-  addWidget( m_reportTabWidget );
-  m_reportTabWidget->setTabsClosable( true );
+  m_reportTabWidget = new KTabWidget(this);
+  addWidget(m_reportTabWidget);
+  m_reportTabWidget->setTabsClosable(true);
 
-  m_listTab = (new QWidget( m_reportTabWidget));
-  m_listTabLayout = ( new QVBoxLayout( m_listTab) );
+  m_listTab = (new QWidget(m_reportTabWidget));
+  m_listTabLayout = (new QVBoxLayout(m_listTab));
   m_listTabLayout->setSpacing(6);
-  m_reportListView = new K3ListView( m_listTab);
-  m_listTabLayout->addWidget( m_reportListView );
-  m_reportTabWidget->addTab( m_listTab, i18n("Reports") );
+  m_reportListView = new K3ListView(m_listTab);
+  m_listTabLayout->addWidget(m_reportListView);
+  m_reportTabWidget->addTab(m_listTab, i18n("Reports"));
 
   m_reportListView->addColumn(i18n("Report"));
   m_reportListView->addColumn(i18n("Comment"));
@@ -330,14 +321,14 @@ KReportsView::KReportsView(QWidget *parent, const char *name ) :
   m_reportListView->setRootIsDecorated(true);
   m_reportListView->setShadeSortColumn(false);
 
-  connect( m_reportTabWidget, SIGNAL(closeRequest(QWidget*)),
-    this, SLOT(slotClose(QWidget*)) );
+  connect(m_reportTabWidget, SIGNAL(closeRequest(QWidget*)),
+          this, SLOT(slotClose(QWidget*)));
   connect(m_reportListView, SIGNAL(doubleClicked(Q3ListViewItem*)),
-    this, SLOT(slotOpenReport(Q3ListViewItem*)));
+          this, SLOT(slotOpenReport(Q3ListViewItem*)));
   connect(m_reportListView, SIGNAL(returnPressed(Q3ListViewItem*)),
-    this, SLOT(slotOpenReport(Q3ListViewItem*)));
-  connect( m_reportListView, SIGNAL(contextMenu(K3ListView*,Q3ListViewItem*,const QPoint &)),
-    this, SLOT(slotListContextMenu(K3ListView*,Q3ListViewItem*,const QPoint &)));
+          this, SLOT(slotOpenReport(Q3ListViewItem*)));
+  connect(m_reportListView, SIGNAL(contextMenu(K3ListView*, Q3ListViewItem*, const QPoint &)),
+          this, SLOT(slotListContextMenu(K3ListView*, Q3ListViewItem*, const QPoint &)));
 
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadView()));
 }
@@ -349,13 +340,13 @@ KReportsView::~KReportsView()
 
 void KReportsView::showEvent(QShowEvent * event)
 {
-  if(m_needReload) {
+  if (m_needReload) {
     loadView();
     m_needReload = false;
   }
 
   KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->currentWidget());
-  if(tab)
+  if (tab)
     emit reportSelected(tab->report());
   else
     emit reportSelected(MyMoneyReport());
@@ -367,23 +358,23 @@ void KReportsView::showEvent(QShowEvent * event)
 void KReportsView::slotLoadView(void)
 {
   m_needReload = true;
-  if(isVisible()) {
+  if (isVisible()) {
     loadView();
     m_needReload = false;
   }
 }
 
-QString KReportsView::KReportGroupListItem::key ( int column, bool ascending ) const
+QString KReportsView::KReportGroupListItem::key(int column, bool ascending) const
 {
   if (column == 0)
-    return QString::number(m_nr).rightJustified(3,'0');
+    return QString::number(m_nr).rightJustified(3, '0');
   else
-    return K3ListViewItem::key(column,ascending);
+    return K3ListViewItem::key(column, ascending);
 }
 
 KReportsView::KReportGroupListItem::KReportGroupListItem(K3ListView* parent, const int nr, QString name) :
-  K3ListViewItem(parent),
-  m_name(name)
+    K3ListViewItem(parent),
+    m_name(name)
 {
   setNr(nr);
 }
@@ -406,9 +397,9 @@ void KReportsView::loadView(void)
 
   // keep a map of all 'expanded' accounts
   Q3ListViewItemIterator it_lvi(m_reportListView);
-  while(it_lvi.current()) {
+  while (it_lvi.current()) {
     item = it_lvi.current();
-    if(item && item->isOpen()) {
+    if (item && item->isOpen()) {
       isOpen[item->text(0)] = true;
     }
     ++it_lvi;
@@ -429,29 +420,27 @@ void KReportsView::loadView(void)
   // Default Reports
   KReportGroupListItem* chartnode = new KReportGroupListItem(m_reportListView, 10, i18n("Charts"));
 
-  QMap<QString,KReportGroupListItem*> groupitems;
+  QMap<QString, KReportGroupListItem*> groupitems;
   QList<ReportGroup> defaultreports;
   defaultReports(defaultreports);
   QList<ReportGroup>::const_iterator it_group = defaultreports.constBegin();
-  while ( it_group != defaultreports.constEnd() )
-  {
+  while (it_group != defaultreports.constEnd()) {
     QString groupname = (*it_group).name();
     KReportGroupListItem* curnode = new KReportGroupListItem(m_reportListView, pagenumber++, (*it_group).title());
     curnode->setOpen(isOpen.find(curnode->text(0)) != isOpen.end());
     groupitems[groupname] = curnode;
 
     QList<MyMoneyReport>::const_iterator it_report = (*it_group).begin();
-    while( it_report != (*it_group).end() )
-    {
+    while (it_report != (*it_group).end()) {
       MyMoneyReport report = *it_report;
       report.setGroup(groupname);
-      KReportListItem* r = new KReportListItem( curnode, report );
-      if(report.name() == selectedPage)
+      KReportListItem* r = new KReportListItem(curnode, report);
+      if (report.name() == selectedPage)
         m_reportListView->setSelected(r, true);
 
       // ALSO place it into the Charts list if it's displayed as a chart by default
-      if ( (*it_report).isChartByDefault() )
-        new KReportListItem( chartnode, *it_report );
+      if ((*it_report).isChartByDefault())
+        new KReportListItem(chartnode, *it_report);
 
       ++it_report;
     }
@@ -465,33 +454,32 @@ void KReportsView::loadView(void)
 
   // Custom reports
 
-  KReportGroupListItem* favoritenode = new KReportGroupListItem(m_reportListView,pagenumber++, i18n("Favorite Reports"));
+  KReportGroupListItem* favoritenode = new KReportGroupListItem(m_reportListView, pagenumber++, i18n("Favorite Reports"));
   favoritenode->setOpen(isOpen.find(favoritenode->text(0)) != isOpen.end());
   KReportGroupListItem* orphannode = NULL;
 
   QList<MyMoneyReport> customreports = MyMoneyFile::instance()->reportList();
   QList<MyMoneyReport>::const_iterator it_report = customreports.constBegin();
-  while( it_report != customreports.constEnd() )
-  {
+  while (it_report != customreports.constEnd()) {
     // If this report is in a known group, place it there
     KReportGroupListItem* groupnode = groupitems[(*it_report).group()];
-    if ( groupnode )
-      new KReportListItem( groupnode, *it_report );
+    if (groupnode)
+      new KReportListItem(groupnode, *it_report);
     else
-    // otherwise, place it in the orphanage
+      // otherwise, place it in the orphanage
     {
-      if ( ! orphannode )
+      if (! orphannode)
         orphannode = new KReportGroupListItem(m_reportListView, pagenumber++, i18n("Old Customized Reports"));
-      new KReportListItem( orphannode, *it_report );
+      new KReportListItem(orphannode, *it_report);
     }
 
     // ALSO place it into the Favorites list if it's a favorite
-    if ( (*it_report).isFavorite() )
-      new KReportListItem( favoritenode, *it_report );
+    if ((*it_report).isFavorite())
+      new KReportListItem(favoritenode, *it_report);
 
     // ALSO place it into the Charts list if it's displayed as a chart by default
-    if ( (*it_report).isChartByDefault() )
-      new KReportListItem( chartnode, *it_report );
+    if ((*it_report).isChartByDefault())
+      new KReportListItem(chartnode, *it_report);
 
     ++it_report;
   }
@@ -507,16 +495,13 @@ void KReportsView::loadView(void)
   //
 
   int index = 1;
-  while ( index < m_reportTabWidget->count() )
-  {
+  while (index < m_reportTabWidget->count()) {
     // TODO: Find some way of detecting the file is closed and kill these tabs!!
     KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->widget(index));
-    if ( tab->isReadyToDelete() /* || ! reports.count() */ )
-    {
+    if (tab->isReadyToDelete() /* || ! reports.count() */) {
       delete tab;
       --index;
-    }
-    else
+    } else
       tab->loadTab();
     ++index;
   }
@@ -528,23 +513,23 @@ void KReportsView::slotOpenUrl(const KUrl &url, const KParts::OpenUrlArguments&,
   QString view = url.fileName();
   QString command = url.queryItem("command");
 
-  if(view == VIEW_REPORTS) {
+  if (view == VIEW_REPORTS) {
 
-    if ( command.isEmpty() ) {
+    if (command.isEmpty()) {
       // slotRefreshView();
-    } else if ( command == "print" )
+    } else if (command == "print")
       slotPrintView();
-    else if ( command == "copy" )
+    else if (command == "copy")
       slotCopyView();
-    else if ( command == "save" )
+    else if (command == "save")
       slotSaveView();
-    else if ( command == "configure" )
+    else if (command == "configure")
       slotConfigure();
-    else if ( command == "duplicate" )
+    else if (command == "duplicate")
       slotDuplicate();
-    else if ( command == "close" )
+    else if (command == "close")
       slotCloseCurrent();
-    else if ( command == "delete" )
+    else if (command == "delete")
       slotDelete();
     else
       qDebug("Unknown command '%s' in KReportsView::slotOpenUrl()", qPrintable(command));
@@ -557,21 +542,21 @@ void KReportsView::slotOpenUrl(const KUrl &url, const KParts::OpenUrlArguments&,
 void KReportsView::slotPrintView(void)
 {
   KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->currentWidget());
-  if(tab)
+  if (tab)
     tab->print();
 }
 
 void KReportsView::slotCopyView(void)
 {
   KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->currentWidget());
-  if(tab)
+  if (tab)
     tab->copyToClipboard();
 }
 
 void KReportsView::slotSaveView(void)
 {
   KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->currentWidget());
-  if(tab) {
+  if (tab) {
     QWidget* vbox = new QWidget;
     QVBoxLayout* layout = new QVBoxLayout;
     d->includeCSS = new QCheckBox(i18n("Include Stylesheet"), vbox);
@@ -580,27 +565,27 @@ void KReportsView::slotSaveView(void)
     // the following code is copied from KFileDialog::getSaveFileName,
     // adjust to our local needs (filetypes etc.) and
     // enhanced to show the m_saveEncrypted combo box
-    QPointer<KFileDialog> dlg = new KFileDialog( KUrl(":kmymoney-export"),
-                   QString("%1|%2\n").arg("*.csv").arg(i18nc("CSV (Filefilter)", "CSV files")) +
-                   QString("%1|%2\n").arg("*.html").arg(i18nc("HTML (Filefilter)", "HTML files")),
-                   this);
+    QPointer<KFileDialog> dlg = new KFileDialog(KUrl(":kmymoney-export"),
+        QString("%1|%2\n").arg("*.csv").arg(i18nc("CSV (Filefilter)", "CSV files")) +
+        QString("%1|%2\n").arg("*.html").arg(i18nc("HTML (Filefilter)", "HTML files")),
+        this);
     connect(dlg, SIGNAL(filterChanged(const QString&)), this, SLOT(slotSaveFilterChanged(const QString&)));
 
-    dlg->setOperationMode( KFileDialog::Saving );
+    dlg->setOperationMode(KFileDialog::Saving);
     dlg->setCaption(i18n("Export as"));
 
     slotSaveFilterChanged("*.csv");    // init gui
 
-    if(dlg->exec() == QDialog::Accepted) {
+    if (dlg->exec() == QDialog::Accepted) {
       KUrl newURL = dlg->selectedUrl();
       if (!newURL.isEmpty()) {
         QString newName = newURL.pathOrUrl();
 
-        if(newName.indexOf('.') == -1)
+        if (newName.indexOf('.') == -1)
           newName.append(".html");
 
         try {
-          tab->saveAs( newName, d->includeCSS->isEnabled() && d->includeCSS->isChecked() );
+          tab->saveAs(newName, d->includeCSS->isEnabled() && d->includeCSS->isChecked());
         } catch (MyMoneyException* e) {
           KMessageBox::error(this, i18n("Failed to save: %1", e->what()));
           delete e;
@@ -620,37 +605,32 @@ void KReportsView::slotConfigure(void)
 {
   KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->currentWidget());
 
-  if(tab) {
+  if (tab) {
     MyMoneyReport report = tab->report();
-    if ( report.comment() == i18n("Default Report") || report.comment() == i18n("Generated Report") )
-    {
-      report.setComment( i18n("Custom Report") );
-      report.setName( report.name() + i18n(" (Customized)") );
+    if (report.comment() == i18n("Default Report") || report.comment() == i18n("Generated Report")) {
+      report.setComment(i18n("Custom Report"));
+      report.setName(report.name() + i18n(" (Customized)"));
     }
 
     QPointer<KReportConfigurationFilterDlg> dlg = new KReportConfigurationFilterDlg(report);
 
-    if (dlg->exec())
-    {
+    if (dlg->exec()) {
       MyMoneyReport newreport = dlg->getConfig();
 
       // If this report has an ID, then MODIFY it, otherwise ADD it
       MyMoneyFileTransaction ft;
       try {
-        if ( ! newreport.id().isEmpty() )
-        {
+        if (! newreport.id().isEmpty()) {
           MyMoneyFile::instance()->modifyReport(newreport);
           ft.commit();
           tab->modifyReport(newreport);
 
-          m_reportTabWidget->setTabText( m_reportTabWidget->indexOf(tab), newreport.name() );
+          m_reportTabWidget->setTabText(m_reportTabWidget->indexOf(tab), newreport.name());
           m_reportTabWidget->setCurrentIndex(m_reportTabWidget->indexOf(tab)) ;
-        }
-        else
-        {
+        } else {
           MyMoneyFile::instance()->addReport(newreport);
           ft.commit();
-          new KReportListItem( m_reportListView, newreport );
+          new KReportListItem(m_reportListView, newreport);
           addReportTab(newreport);
         }
       } catch (MyMoneyException* e) {
@@ -666,24 +646,23 @@ void KReportsView::slotDuplicate(void)
 {
   KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->currentWidget());
 
-  if(tab) {
+  if (tab) {
     MyMoneyReport dupe = tab->report();
-    dupe.setName( i18n("Copy of %1",dupe.name()) );
-    if ( dupe.comment() == i18n("Default Report") )
-      dupe.setComment( i18n("Custom Report") );
+    dupe.setName(i18n("Copy of %1", dupe.name()));
+    if (dupe.comment() == i18n("Default Report"))
+      dupe.setComment(i18n("Custom Report"));
     dupe.clearId();
 
     QPointer<KReportConfigurationFilterDlg> dlg = new KReportConfigurationFilterDlg(dupe);
-    if (dlg->exec())
-    {
+    if (dlg->exec()) {
       dupe = dlg->getConfig();
       MyMoneyFileTransaction ft;
       try {
         MyMoneyFile::instance()->addReport(dupe);
         ft.commit();
-        new KReportListItem( m_reportListView, dupe );
+        new KReportListItem(m_reportListView, dupe);
         addReportTab(dupe);
-      } catch(MyMoneyException* e) {
+      } catch (MyMoneyException* e) {
         qDebug("Cannot add report");
         delete e;
       }
@@ -696,12 +675,10 @@ void KReportsView::slotDelete(void)
 {
   KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->currentWidget());
 
-  if(tab) {
+  if (tab) {
     MyMoneyReport report = tab->report();
-    if ( ! report.id().isEmpty() )
-    {
-      if ( KMessageBox::Continue == KMessageBox::warningContinueCancel(this, QString("<qt>")+i18n("Are you sure you want to delete report <b>%1</b>?  There is no way to recover it.",report.name())+QString("</qt>"), i18n("Delete Report?")))
-      {
+    if (! report.id().isEmpty()) {
+      if (KMessageBox::Continue == KMessageBox::warningContinueCancel(this, QString("<qt>") + i18n("Are you sure you want to delete report <b>%1</b>?  There is no way to recover it.", report.name()) + QString("</qt>"), i18n("Delete Report?"))) {
         // close the tab and then remove the report so that it is not
         // generated again during the following loadView() call
         slotClose(tab);
@@ -710,24 +687,20 @@ void KReportsView::slotDelete(void)
         MyMoneyFile::instance()->removeReport(report);
         ft.commit();
       }
-    }
-    else
-      KMessageBox::information(this, QString("<qt>")+i18n("<b>%1</b> is a default report, so it cannot be deleted.",report.name())+QString("</qt>"), i18n("Delete Report?"));
+    } else
+      KMessageBox::information(this, QString("<qt>") + i18n("<b>%1</b> is a default report, so it cannot be deleted.", report.name()) + QString("</qt>"), i18n("Delete Report?"));
   }
 }
 
 void KReportsView::slotOpenReport(const QString& id)
 {
-  if ( ! id.isEmpty() )
-  {
+  if (! id.isEmpty()) {
     KReportTab* page = NULL;
     int index = 1;
-    while ( index < m_reportTabWidget->count() )
-    {
+    while (index < m_reportTabWidget->count()) {
       KReportTab* current = dynamic_cast<KReportTab*>(m_reportTabWidget->widget(index));
 
-      if ( current->report().id() == id )
-      {
+      if (current->report().id() == id) {
         page = current;
         break;
       }
@@ -736,7 +709,7 @@ void KReportsView::slotOpenReport(const QString& id)
     }
 
     // Show the tab, or create a new one, as needed
-    if ( page )
+    if (page)
       m_reportTabWidget->setCurrentIndex(m_reportTabWidget->indexOf(page));
     else
       addReportTab(MyMoneyFile::instance()->report(id));
@@ -745,33 +718,27 @@ void KReportsView::slotOpenReport(const QString& id)
 
 void KReportsView::slotOpenReport(Q3ListViewItem* item)
 {
-  KReportListItem *reportItem = dynamic_cast<KReportListItem*> (item);
+  KReportListItem *reportItem = dynamic_cast<KReportListItem*>(item);
 
-  if ( reportItem )
-  {
+  if (reportItem) {
     KReportTab* page = NULL;
 
     // Find the tab which contains the report indicated by this list item
     int index = 1;
-    while ( index < m_reportTabWidget->count() )
-    {
+    while (index < m_reportTabWidget->count()) {
       KReportTab* current = dynamic_cast<KReportTab*>(m_reportTabWidget->widget(index));
 
       // If this report has an ID, we'll use the ID to match
-      if ( ! reportItem->report().id().isEmpty() )
-      {
-        if ( current->report().id() == reportItem->report().id() )
-        {
+      if (! reportItem->report().id().isEmpty()) {
+        if (current->report().id() == reportItem->report().id()) {
           page = current;
           break;
         }
       }
       // Otherwise, use the name to match.  THIS ASSUMES that no 2 default reports
       // have the same name...but that would be pretty a boneheaded thing to do.
-      else
-      {
-        if ( current->report().name() == reportItem->report().name() )
-        {
+      else {
+        if (current->report().name() == reportItem->report().name()) {
           page = current;
           break;
         }
@@ -781,66 +748,62 @@ void KReportsView::slotOpenReport(Q3ListViewItem* item)
     }
 
     // Show the tab, or create a new one, as needed
-    if ( page )
+    if (page)
       m_reportTabWidget->setCurrentIndex(m_reportTabWidget->indexOf(page)) ;
     else
       addReportTab(reportItem->report());
-  }
-  else if (item)
-  {
+  } else if (item) {
     // this is not a KReportListItem, so it's a regular QListViewItem, which
     // means its a header.
     //
     // double-click on a header means toggle the expand/collapse state
 
-    item->setOpen( ! item->isOpen() );
+    item->setOpen(! item->isOpen());
   }
 }
 
 void KReportsView::slotOpenReport(const MyMoneyReport& report)
 {
   kDebug(2) << Q_FUNC_INFO << " " << report.name();
-    KReportTab* page = NULL;
+  KReportTab* page = NULL;
 
-    // Find the tab which contains the report indicated by this list item
-    int index = 1;
-    while ( index < m_reportTabWidget->count() )
-    {
-      KReportTab* current = dynamic_cast<KReportTab*>(m_reportTabWidget->widget(index));
+  // Find the tab which contains the report indicated by this list item
+  int index = 1;
+  while (index < m_reportTabWidget->count()) {
+    KReportTab* current = dynamic_cast<KReportTab*>(m_reportTabWidget->widget(index));
 
-        if ( current->report().name() == report.name() )
-        {
-          page = current;
-          break;
-        }
-
-      ++index;
+    if (current->report().name() == report.name()) {
+      page = current;
+      break;
     }
 
-    // Show the tab, or create a new one, as needed
-    if ( page )
-      m_reportTabWidget->setCurrentIndex(m_reportTabWidget->indexOf(page));
-    else
-      addReportTab(report);
+    ++index;
+  }
+
+  // Show the tab, or create a new one, as needed
+  if (page)
+    m_reportTabWidget->setCurrentIndex(m_reportTabWidget->indexOf(page));
+  else
+    addReportTab(report);
 }
 
 void KReportsView::slotToggleChart(void)
 {
   KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->currentWidget());
-  if(tab)
+  if (tab)
     tab->toggleChart();
 }
 
 void KReportsView::slotCloseCurrent(void)
 {
-  if(m_reportTabWidget->currentWidget())
+  if (m_reportTabWidget->currentWidget())
     slotClose(m_reportTabWidget->currentWidget());
 }
 
 void KReportsView::slotClose(QWidget* w)
 {
   KReportTab* tab = dynamic_cast<KReportTab*>(w);
-  if(tab) {
+  if (tab) {
     m_reportTabWidget->removeTab(m_reportTabWidget->indexOf(tab));
     tab->setReadyToDelete(true);
   }
@@ -849,8 +812,7 @@ void KReportsView::slotClose(QWidget* w)
 void KReportsView::slotCloseAll(void)
 {
   KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->widget(1));
-  while (tab)
-  {
+  while (tab) {
     m_reportTabWidget->removeTab(m_reportTabWidget->indexOf(tab));
     tab->setReadyToDelete(true);
 
@@ -863,38 +825,37 @@ void KReportsView::addReportTab(const MyMoneyReport& report)
   KReportTab* tab = new KReportTab(m_reportTabWidget, report);
 
 
-  connect( tab->control()->buttonChart, SIGNAL(clicked()),
-    this, SLOT(slotToggleChart(void )));
-  connect( tab->control()->buttonConfigure, SIGNAL(clicked()),
-    this, SLOT(slotConfigure(void )));
-  connect( tab->control()->buttonNew, SIGNAL(clicked()),
-    this, SLOT(slotDuplicate(void )));
-  connect( tab->control()->buttonCopy, SIGNAL(clicked()),
-    this, SLOT(slotCopyView(void )));
-  connect( tab->control()->buttonExport, SIGNAL(clicked()),
-    this, SLOT(slotSaveView(void )));
-  connect( tab->control()->buttonDelete, SIGNAL(clicked()),
-    this, SLOT(slotDelete(void )));
-  connect( tab->control()->buttonClose, SIGNAL(clicked()),
-    this, SLOT(slotCloseCurrent(void )));
+  connect(tab->control()->buttonChart, SIGNAL(clicked()),
+          this, SLOT(slotToggleChart(void)));
+  connect(tab->control()->buttonConfigure, SIGNAL(clicked()),
+          this, SLOT(slotConfigure(void)));
+  connect(tab->control()->buttonNew, SIGNAL(clicked()),
+          this, SLOT(slotDuplicate(void)));
+  connect(tab->control()->buttonCopy, SIGNAL(clicked()),
+          this, SLOT(slotCopyView(void)));
+  connect(tab->control()->buttonExport, SIGNAL(clicked()),
+          this, SLOT(slotSaveView(void)));
+  connect(tab->control()->buttonDelete, SIGNAL(clicked()),
+          this, SLOT(slotDelete(void)));
+  connect(tab->control()->buttonClose, SIGNAL(clicked()),
+          this, SLOT(slotCloseCurrent(void)));
 
   // if this is a default report, then you can't delete it!
-  if ( report.id().isEmpty() )
+  if (report.id().isEmpty())
     tab->control()->buttonDelete->setEnabled(false);
 
   m_reportTabWidget->setCurrentIndex(m_reportTabWidget->indexOf(tab));
 
 }
 
-void KReportsView::slotListContextMenu(K3ListView* lv,Q3ListViewItem* item,const QPoint & p)
+void KReportsView::slotListContextMenu(K3ListView* lv, Q3ListViewItem* item, const QPoint & p)
 {
-  if ( lv == m_reportListView && item )
-  {
+  if (lv == m_reportListView && item) {
     KMenu* contextmenu = new KMenu(this);
-    contextmenu->addAction( i18nc("To open a new report", "&Open"), this, SLOT(slotOpenFromList()) );
-    contextmenu->addAction( i18nc("Configure a report", "&Configure"), this, SLOT(slotConfigureFromList()) );
-    contextmenu->addAction( i18n("&New report"), this, SLOT(slotNewFromList()) );
-    contextmenu->addAction( i18n("&Delete"), this, SLOT(slotDeleteFromList()) );
+    contextmenu->addAction(i18nc("To open a new report", "&Open"), this, SLOT(slotOpenFromList()));
+    contextmenu->addAction(i18nc("Configure a report", "&Configure"), this, SLOT(slotConfigureFromList()));
+    contextmenu->addAction(i18n("&New report"), this, SLOT(slotNewFromList()));
+    contextmenu->addAction(i18n("&Delete"), this, SLOT(slotDeleteFromList()));
 
     contextmenu->popup(p);
   }
@@ -902,28 +863,26 @@ void KReportsView::slotListContextMenu(K3ListView* lv,Q3ListViewItem* item,const
 
 void KReportsView::slotOpenFromList(void)
 {
-  KReportListItem *reportItem = dynamic_cast<KReportListItem*> (m_reportListView->selectedItem());
+  KReportListItem *reportItem = dynamic_cast<KReportListItem*>(m_reportListView->selectedItem());
 
-  if ( reportItem )
+  if (reportItem)
     slotOpenReport(reportItem);
 }
 
 void KReportsView::slotConfigureFromList(void)
 {
-  KReportListItem *reportItem = dynamic_cast<KReportListItem*> (m_reportListView->selectedItem());
+  KReportListItem *reportItem = dynamic_cast<KReportListItem*>(m_reportListView->selectedItem());
 
-  if ( reportItem )
-  {
+  if (reportItem) {
     slotOpenReport(reportItem);
     slotConfigure();
   }
 }
 void KReportsView::slotNewFromList(void)
 {
-  KReportListItem *reportItem = dynamic_cast<KReportListItem*> (m_reportListView->selectedItem());
+  KReportListItem *reportItem = dynamic_cast<KReportListItem*>(m_reportListView->selectedItem());
 
-  if ( reportItem )
-  {
+  if (reportItem) {
     slotOpenReport(reportItem);
     slotDuplicate();
   }
@@ -931,10 +890,9 @@ void KReportsView::slotNewFromList(void)
 
 void KReportsView::slotDeleteFromList(void)
 {
-  KReportListItem *reportItem = dynamic_cast<KReportListItem*> (m_reportListView->selectedItem());
+  KReportListItem *reportItem = dynamic_cast<KReportListItem*>(m_reportListView->selectedItem());
 
-  if ( reportItem )
-  {
+  if (reportItem) {
     slotOpenReport(reportItem);
     slotDelete();
   }
@@ -946,50 +904,50 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
     ReportGroup list("Income and Expenses", i18n("Income and Expenses"));
 
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eExpenseIncome,
-      MyMoneyReport::eMonths,
-      MyMoneyTransactionFilter::currentMonth,
-      MyMoneyReport::eDetailAll,
-      i18n("Income and Expenses This Month"),
-      i18n("Default Report")
-    ));
+                     MyMoneyReport::eExpenseIncome,
+                     MyMoneyReport::eMonths,
+                     MyMoneyTransactionFilter::currentMonth,
+                     MyMoneyReport::eDetailAll,
+                     i18n("Income and Expenses This Month"),
+                     i18n("Default Report")
+                   ));
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eExpenseIncome,
-      MyMoneyReport::eMonths,
-      MyMoneyTransactionFilter::yearToDate,
-      MyMoneyReport::eDetailAll,
-      i18n("Income and Expenses This Year"),
-      i18n("Default Report")
-    ));
+                     MyMoneyReport::eExpenseIncome,
+                     MyMoneyReport::eMonths,
+                     MyMoneyTransactionFilter::yearToDate,
+                     MyMoneyReport::eDetailAll,
+                     i18n("Income and Expenses This Year"),
+                     i18n("Default Report")
+                   ));
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eExpenseIncome,
-      MyMoneyReport::eYears,
-      MyMoneyTransactionFilter::allDates,
-      MyMoneyReport::eDetailAll,
-      i18n("Income and Expenses By Year"),
-      i18n("Default Report")
-    ));
+                     MyMoneyReport::eExpenseIncome,
+                     MyMoneyReport::eYears,
+                     MyMoneyTransactionFilter::allDates,
+                     MyMoneyReport::eDetailAll,
+                     i18n("Income and Expenses By Year"),
+                     i18n("Default Report")
+                   ));
 
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eExpenseIncome,
-      MyMoneyReport::eMonths,
-      MyMoneyTransactionFilter::yearToDate,
-      MyMoneyReport::eDetailTop,
-      i18n("Income and Expenses Graph"),
-      i18n("Default Report")
-    ));
+                     MyMoneyReport::eExpenseIncome,
+                     MyMoneyReport::eMonths,
+                     MyMoneyTransactionFilter::yearToDate,
+                     MyMoneyReport::eDetailTop,
+                     i18n("Income and Expenses Graph"),
+                     i18n("Default Report")
+                   ));
     list.back().setChartByDefault(true);
     list.back().setChartType(MyMoneyReport::eChartLine);
     list.back().setChartDataLabels(false);
 
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eExpenseIncome,
-      MyMoneyReport::eMonths,
-      MyMoneyTransactionFilter::yearToDate,
-      MyMoneyReport::eDetailGroup,
-      i18n("Income and Expenses Pie Chart"),
-      i18n("Default Report")
-    ));
+                     MyMoneyReport::eExpenseIncome,
+                     MyMoneyReport::eMonths,
+                     MyMoneyTransactionFilter::yearToDate,
+                     MyMoneyReport::eDetailGroup,
+                     i18n("Income and Expenses Pie Chart"),
+                     i18n("Default Report")
+                   ));
     list.back().setChartByDefault(true);
     list.back().setChartType(MyMoneyReport::eChartPie);
     list.back().setShowingRowTotals(false);
@@ -1000,69 +958,69 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
     ReportGroup list("Net Worth", i18n("Net Worth"));
 
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eAssetLiability,
-      MyMoneyReport::eMonths,
-      MyMoneyTransactionFilter::yearToDate,
-      MyMoneyReport::eDetailTop,
-      i18n("Net Worth By Month"),
-      i18n("Default Report")
-    ));
+                     MyMoneyReport::eAssetLiability,
+                     MyMoneyReport::eMonths,
+                     MyMoneyTransactionFilter::yearToDate,
+                     MyMoneyReport::eDetailTop,
+                     i18n("Net Worth By Month"),
+                     i18n("Default Report")
+                   ));
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eAssetLiability,
-      MyMoneyReport::eMonths,
-      MyMoneyTransactionFilter::today,
-      MyMoneyReport::eDetailTop,
-      i18n("Net Worth Today"),
-      i18n("Default Report")
-    ));
+                     MyMoneyReport::eAssetLiability,
+                     MyMoneyReport::eMonths,
+                     MyMoneyTransactionFilter::today,
+                     MyMoneyReport::eDetailTop,
+                     i18n("Net Worth Today"),
+                     i18n("Default Report")
+                   ));
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eAssetLiability,
-      MyMoneyReport::eYears,
-      MyMoneyTransactionFilter::allDates,
-      MyMoneyReport::eDetailTop,
-      i18n("Net Worth By Year"),
-      i18n("Default Report")
-    ));
+                     MyMoneyReport::eAssetLiability,
+                     MyMoneyReport::eYears,
+                     MyMoneyTransactionFilter::allDates,
+                     MyMoneyReport::eDetailTop,
+                     i18n("Net Worth By Year"),
+                     i18n("Default Report")
+                   ));
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eAssetLiability,
-      MyMoneyReport::eMonths,
-      MyMoneyTransactionFilter::next7Days,
-      MyMoneyReport::eDetailTop,
-      i18n("7-day Cash Flow Forecast"),
-      i18n("Default Report")
-    ));
-    list.back().setIncludingSchedules( true );
-    list.back().setColumnsAreDays( true );
+                     MyMoneyReport::eAssetLiability,
+                     MyMoneyReport::eMonths,
+                     MyMoneyTransactionFilter::next7Days,
+                     MyMoneyReport::eDetailTop,
+                     i18n("7-day Cash Flow Forecast"),
+                     i18n("Default Report")
+                   ));
+    list.back().setIncludingSchedules(true);
+    list.back().setColumnsAreDays(true);
 
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eAssetLiability,
-      MyMoneyReport::eMonths,
-      MyMoneyTransactionFilter::last12Months,
-      MyMoneyReport::eDetailTotal,
-      i18n("Net Worth Graph"),
-      i18n("Default Report")
-    ));
+                     MyMoneyReport::eAssetLiability,
+                     MyMoneyReport::eMonths,
+                     MyMoneyTransactionFilter::last12Months,
+                     MyMoneyReport::eDetailTotal,
+                     i18n("Net Worth Graph"),
+                     i18n("Default Report")
+                   ));
     list.back().setChartByDefault(true);
     list.back().setChartGridLines(false);
     list.back().setChartType(MyMoneyReport::eChartLine);
 
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eInstitution,
-      MyMoneyReport::eQCnone,
-      MyMoneyTransactionFilter::yearToDate,
-      MyMoneyReport::eDetailTop,
-      i18n("Account Balances by Institution"),
-      i18n("Default Report")
-    ));
+                     MyMoneyReport::eInstitution,
+                     MyMoneyReport::eQCnone,
+                     MyMoneyTransactionFilter::yearToDate,
+                     MyMoneyReport::eDetailTop,
+                     i18n("Account Balances by Institution"),
+                     i18n("Default Report")
+                   ));
 
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eAccountType,
-      MyMoneyReport::eQCnone,
-      MyMoneyTransactionFilter::yearToDate,
-      MyMoneyReport::eDetailTop,
-      i18n("Account Balances by Type"),
-      i18n("Default Report")
-    ));
+                     MyMoneyReport::eAccountType,
+                     MyMoneyReport::eQCnone,
+                     MyMoneyTransactionFilter::yearToDate,
+                     MyMoneyReport::eDetailTop,
+                     i18n("Account Balances by Type"),
+                     i18n("Default Report")
+                   ));
 
     groups.push_back(list);
   }
@@ -1070,168 +1028,168 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
     ReportGroup list("Transactions", i18n("Transactions"));
 
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eAccount,
-      MyMoneyReport::eQCnumber|MyMoneyReport::eQCpayee|MyMoneyReport::eQCcategory|MyMoneyReport::eQCbalance,
-      MyMoneyTransactionFilter::yearToDate,
-      MyMoneyReport::eDetailAll,
-      i18n("Transactions by Account"),
-      i18n("Default Report")
-    ));
+                     MyMoneyReport::eAccount,
+                     MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCcategory | MyMoneyReport::eQCbalance,
+                     MyMoneyTransactionFilter::yearToDate,
+                     MyMoneyReport::eDetailAll,
+                     i18n("Transactions by Account"),
+                     i18n("Default Report")
+                   ));
     //list.back().setConvertCurrency(false);
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eCategory,
-      MyMoneyReport::eQCnumber|MyMoneyReport::eQCpayee|MyMoneyReport::eQCaccount,
-      MyMoneyTransactionFilter::yearToDate,
-      MyMoneyReport::eDetailAll,
-      i18n("Transactions by Category"),
-      i18n("Default Report")
-    ));
+                     MyMoneyReport::eCategory,
+                     MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCaccount,
+                     MyMoneyTransactionFilter::yearToDate,
+                     MyMoneyReport::eDetailAll,
+                     i18n("Transactions by Category"),
+                     i18n("Default Report")
+                   ));
     list.push_back(MyMoneyReport(
-      MyMoneyReport::ePayee,
-      MyMoneyReport::eQCnumber|MyMoneyReport::eQCcategory,
-      MyMoneyTransactionFilter::yearToDate,
-      MyMoneyReport::eDetailAll,
-      i18n("Transactions by Payee"),
-      i18n("Default Report")
-    ));
+                     MyMoneyReport::ePayee,
+                     MyMoneyReport::eQCnumber | MyMoneyReport::eQCcategory,
+                     MyMoneyTransactionFilter::yearToDate,
+                     MyMoneyReport::eDetailAll,
+                     i18n("Transactions by Payee"),
+                     i18n("Default Report")
+                   ));
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eMonth,
-      MyMoneyReport::eQCnumber|MyMoneyReport::eQCpayee|MyMoneyReport::eQCcategory,
-      MyMoneyTransactionFilter::yearToDate,
-      MyMoneyReport::eDetailAll,
-      i18n("Transactions by Month"),
-      i18n("Default Report")
-    ));
+                     MyMoneyReport::eMonth,
+                     MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCcategory,
+                     MyMoneyTransactionFilter::yearToDate,
+                     MyMoneyReport::eDetailAll,
+                     i18n("Transactions by Month"),
+                     i18n("Default Report")
+                   ));
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eWeek,
-      MyMoneyReport::eQCnumber|MyMoneyReport::eQCpayee|MyMoneyReport::eQCcategory,
-      MyMoneyTransactionFilter::yearToDate,
-      MyMoneyReport::eDetailAll,
-      i18n("Transactions by Week"),
-      i18n("Default Report")
-    ));
+                     MyMoneyReport::eWeek,
+                     MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCcategory,
+                     MyMoneyTransactionFilter::yearToDate,
+                     MyMoneyReport::eDetailAll,
+                     i18n("Transactions by Week"),
+                     i18n("Default Report")
+                   ));
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eAccount,
-      MyMoneyReport::eQCloan,
-      MyMoneyTransactionFilter::allDates,
-      MyMoneyReport::eDetailAll,
-      i18n("Loan Transactions"),
-      i18n("Default Report")
-    ));
+                     MyMoneyReport::eAccount,
+                     MyMoneyReport::eQCloan,
+                     MyMoneyTransactionFilter::allDates,
+                     MyMoneyReport::eDetailAll,
+                     i18n("Loan Transactions"),
+                     i18n("Default Report")
+                   ));
     list.back().setLoansOnly(true);
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eAccountReconcile,
-      MyMoneyReport::eQCnumber|MyMoneyReport::eQCpayee|MyMoneyReport::eQCcategory|MyMoneyReport::eQCbalance,
-      MyMoneyTransactionFilter::last3Months,
-      MyMoneyReport::eDetailAll,
-      i18n("Transactions by Reconciliation Status"),
-      i18n("Default Report")
-    ));
+                     MyMoneyReport::eAccountReconcile,
+                     MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCcategory | MyMoneyReport::eQCbalance,
+                     MyMoneyTransactionFilter::last3Months,
+                     MyMoneyReport::eDetailAll,
+                     i18n("Transactions by Reconciliation Status"),
+                     i18n("Default Report")
+                   ));
     groups.push_back(list);
   }
   {
     ReportGroup list("CashFlow", i18n("Cash Flow"));
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eCashFlow,
-      MyMoneyReport::eQCnumber|MyMoneyReport::eQCpayee|MyMoneyReport::eQCaccount,
-      MyMoneyTransactionFilter::yearToDate,
-      MyMoneyReport::eDetailAll,
-      i18n("Cash Flow Transactions This Month"),
-      i18n("Default Report")
-    ));
+                     MyMoneyReport::eCashFlow,
+                     MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCaccount,
+                     MyMoneyTransactionFilter::yearToDate,
+                     MyMoneyReport::eDetailAll,
+                     i18n("Cash Flow Transactions This Month"),
+                     i18n("Default Report")
+                   ));
     groups.push_back(list);
   }
   {
     ReportGroup list("Investments", i18n("Investments"));
 
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eTopAccount,
-      MyMoneyReport::eQCaction|MyMoneyReport::eQCshares|MyMoneyReport::eQCprice,
-      MyMoneyTransactionFilter::yearToDate,
-      MyMoneyReport::eDetailAll,
-      i18n("Investment Transactions"),
-      i18n("Default Report")
-    ));
+                     MyMoneyReport::eTopAccount,
+                     MyMoneyReport::eQCaction | MyMoneyReport::eQCshares | MyMoneyReport::eQCprice,
+                     MyMoneyTransactionFilter::yearToDate,
+                     MyMoneyReport::eDetailAll,
+                     i18n("Investment Transactions"),
+                     i18n("Default Report")
+                   ));
     list.back().setInvestmentsOnly(true);
 
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eAccountByTopAccount,
-      MyMoneyReport::eQCshares|MyMoneyReport::eQCprice,
-      MyMoneyTransactionFilter::yearToDate,
-      MyMoneyReport::eDetailAll,
-      i18n("Investment Holdings by Account"),
-      i18n("Default Report")
-    ));
+                     MyMoneyReport::eAccountByTopAccount,
+                     MyMoneyReport::eQCshares | MyMoneyReport::eQCprice,
+                     MyMoneyTransactionFilter::yearToDate,
+                     MyMoneyReport::eDetailAll,
+                     i18n("Investment Holdings by Account"),
+                     i18n("Default Report")
+                   ));
     list.back().setInvestmentsOnly(true);
 
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eEquityType,
-      MyMoneyReport::eQCshares|MyMoneyReport::eQCprice,
-      MyMoneyTransactionFilter::yearToDate,
-      MyMoneyReport::eDetailAll,
-      i18n("Investment Holdings by Type"),
-      i18n("Default Report")
-    ));
+                     MyMoneyReport::eEquityType,
+                     MyMoneyReport::eQCshares | MyMoneyReport::eQCprice,
+                     MyMoneyTransactionFilter::yearToDate,
+                     MyMoneyReport::eDetailAll,
+                     i18n("Investment Holdings by Type"),
+                     i18n("Default Report")
+                   ));
     list.back().setInvestmentsOnly(true);
 
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eAccountByTopAccount,
-      MyMoneyReport::eQCperformance,
-      MyMoneyTransactionFilter::yearToDate,
-      MyMoneyReport::eDetailAll,
-      i18n("Investment Performance by Account"),
-      i18n("Default Report")
-    ));
+                     MyMoneyReport::eAccountByTopAccount,
+                     MyMoneyReport::eQCperformance,
+                     MyMoneyTransactionFilter::yearToDate,
+                     MyMoneyReport::eDetailAll,
+                     i18n("Investment Performance by Account"),
+                     i18n("Default Report")
+                   ));
     list.back().setInvestmentsOnly(true);
 
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eEquityType,
-      MyMoneyReport::eQCperformance,
-      MyMoneyTransactionFilter::yearToDate,
-      MyMoneyReport::eDetailAll,
-      i18n("Investment Performance by Type"),
-      i18n("Default Report")
-    ));
+                     MyMoneyReport::eEquityType,
+                     MyMoneyReport::eQCperformance,
+                     MyMoneyTransactionFilter::yearToDate,
+                     MyMoneyReport::eDetailAll,
+                     i18n("Investment Performance by Type"),
+                     i18n("Default Report")
+                   ));
     list.back().setInvestmentsOnly(true);
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eAssetLiability,
-      MyMoneyReport::eMonths,
-      MyMoneyTransactionFilter::today,
-      MyMoneyReport::eDetailAll,
-      i18n("Investment Holdings Pie"),
-      i18n("Default Report")
-    ));
+                     MyMoneyReport::eAssetLiability,
+                     MyMoneyReport::eMonths,
+                     MyMoneyTransactionFilter::today,
+                     MyMoneyReport::eDetailAll,
+                     i18n("Investment Holdings Pie"),
+                     i18n("Default Report")
+                   ));
     list.back().setChartByDefault(true);
     list.back().setChartGridLines(false);
     list.back().setChartType(MyMoneyReport::eChartPie);
     list.back().setInvestmentsOnly(true);
 
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eAssetLiability,
-      MyMoneyReport::eMonths,
-      MyMoneyTransactionFilter::last12Months,
-      MyMoneyReport::eDetailAll,
-      i18n("Investment Worth Graph"),
-      i18n("Default Report")
-    ));
+                     MyMoneyReport::eAssetLiability,
+                     MyMoneyReport::eMonths,
+                     MyMoneyTransactionFilter::last12Months,
+                     MyMoneyReport::eDetailAll,
+                     i18n("Investment Worth Graph"),
+                     i18n("Default Report")
+                   ));
     list.back().setChartByDefault(true);
     list.back().setChartGridLines(false);
     list.back().setChartType(MyMoneyReport::eChartLine);
-    list.back().setColumnsAreDays( true );
+    list.back().setColumnsAreDays(true);
     list.back().setInvestmentsOnly(true);
 
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eAssetLiability,
-      MyMoneyReport::eMonths,
-      MyMoneyTransactionFilter::last12Months,
-      MyMoneyReport::eDetailAll,
-      i18n("Investment Price Graph"),
-      i18n("Default Report")
-    ));
+                     MyMoneyReport::eAssetLiability,
+                     MyMoneyReport::eMonths,
+                     MyMoneyTransactionFilter::last12Months,
+                     MyMoneyReport::eDetailAll,
+                     i18n("Investment Price Graph"),
+                     i18n("Default Report")
+                   ));
     list.back().setChartByDefault(true);
     list.back().setChartGridLines(false);
     list.back().setChartType(MyMoneyReport::eChartLine);
-    list.back().setColumnsAreDays( true );
+    list.back().setColumnsAreDays(true);
     list.back().setInvestmentsOnly(true);
     list.back().setIncludingBudgetActuals(false);
     list.back().setIncludingPrice(true);
@@ -1239,17 +1197,17 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
     list.back().setChartDataLabels(false);
 
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eAssetLiability,
-      MyMoneyReport::eMonths,
-      MyMoneyTransactionFilter::last12Months,
-      MyMoneyReport::eDetailAll,
-      i18n("Investment Moving Average Price Graph"),
-      i18n("Default Report")
-    ));
+                     MyMoneyReport::eAssetLiability,
+                     MyMoneyReport::eMonths,
+                     MyMoneyTransactionFilter::last12Months,
+                     MyMoneyReport::eDetailAll,
+                     i18n("Investment Moving Average Price Graph"),
+                     i18n("Default Report")
+                   ));
     list.back().setChartByDefault(true);
     list.back().setChartGridLines(false);
     list.back().setChartType(MyMoneyReport::eChartLine);
-    list.back().setColumnsAreDays( true );
+    list.back().setColumnsAreDays(true);
     list.back().setInvestmentsOnly(true);
     list.back().setIncludingBudgetActuals(false);
     list.back().setIncludingAveragePrice(true);
@@ -1258,33 +1216,33 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
     list.back().setChartDataLabels(false);
 
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eAssetLiability,
-      MyMoneyReport::eMonths,
-      MyMoneyTransactionFilter::last30Days,
-      MyMoneyReport::eDetailAll,
-      i18n("Investment Moving Average"),
-      i18n("Default Report")
-    ));
+                     MyMoneyReport::eAssetLiability,
+                     MyMoneyReport::eMonths,
+                     MyMoneyTransactionFilter::last30Days,
+                     MyMoneyReport::eDetailAll,
+                     i18n("Investment Moving Average"),
+                     i18n("Default Report")
+                   ));
     list.back().setChartGridLines(false);
     list.back().setChartType(MyMoneyReport::eChartLine);
-    list.back().setColumnsAreDays( true );
+    list.back().setColumnsAreDays(true);
     list.back().setInvestmentsOnly(true);
     list.back().setIncludingBudgetActuals(false);
     list.back().setIncludingMovingAverage(true);
     list.back().setMovingAverageDays(10);
 
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eAssetLiability,
-      MyMoneyReport::eMonths,
-      MyMoneyTransactionFilter::last30Days,
-      MyMoneyReport::eDetailAll,
-      i18n("Investment Moving Average vs Actual"),
-      i18n("Default Report")
-    ));
+                     MyMoneyReport::eAssetLiability,
+                     MyMoneyReport::eMonths,
+                     MyMoneyTransactionFilter::last30Days,
+                     MyMoneyReport::eDetailAll,
+                     i18n("Investment Moving Average vs Actual"),
+                     i18n("Default Report")
+                   ));
     list.back().setChartByDefault(true);
     list.back().setChartGridLines(false);
     list.back().setChartType(MyMoneyReport::eChartLine);
-    list.back().setColumnsAreDays( true );
+    list.back().setColumnsAreDays(true);
     list.back().setInvestmentsOnly(true);
     list.back().setIncludingBudgetActuals(true);
     list.back().setIncludingMovingAverage(true);
@@ -1295,40 +1253,40 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
     ReportGroup list("Taxes", i18n("Taxes"));
 
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eCategory,
-      MyMoneyReport::eQCnumber|MyMoneyReport::eQCpayee|MyMoneyReport::eQCaccount,
-      MyMoneyTransactionFilter::yearToDate,
-      MyMoneyReport::eDetailAll,
-      i18n("Tax Transactions by Category"),
-      i18n("Default Report")
-    ));
+                     MyMoneyReport::eCategory,
+                     MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCaccount,
+                     MyMoneyTransactionFilter::yearToDate,
+                     MyMoneyReport::eDetailAll,
+                     i18n("Tax Transactions by Category"),
+                     i18n("Default Report")
+                   ));
     list.back().setTax(true);
     list.push_back(MyMoneyReport(
-      MyMoneyReport::ePayee,
-      MyMoneyReport::eQCnumber|MyMoneyReport::eQCcategory|MyMoneyReport::eQCaccount,
-      MyMoneyTransactionFilter::yearToDate,
-      MyMoneyReport::eDetailAll,
-      i18n("Tax Transactions by Payee"),
-      i18n("Default Report")
-    ));
+                     MyMoneyReport::ePayee,
+                     MyMoneyReport::eQCnumber | MyMoneyReport::eQCcategory | MyMoneyReport::eQCaccount,
+                     MyMoneyTransactionFilter::yearToDate,
+                     MyMoneyReport::eDetailAll,
+                     i18n("Tax Transactions by Payee"),
+                     i18n("Default Report")
+                   ));
     list.back().setTax(true);
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eCategory,
-      MyMoneyReport::eQCnumber|MyMoneyReport::eQCpayee|MyMoneyReport::eQCaccount,
-      MyMoneyTransactionFilter::lastFiscalYear,
-      MyMoneyReport::eDetailAll,
-      i18n("Tax Transactions by Category Last Fiscal Year"),
-      i18n("Default Report")
-    ));
+                     MyMoneyReport::eCategory,
+                     MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCaccount,
+                     MyMoneyTransactionFilter::lastFiscalYear,
+                     MyMoneyReport::eDetailAll,
+                     i18n("Tax Transactions by Category Last Fiscal Year"),
+                     i18n("Default Report")
+                   ));
     list.back().setTax(true);
     list.push_back(MyMoneyReport(
-      MyMoneyReport::ePayee,
-      MyMoneyReport::eQCnumber|MyMoneyReport::eQCcategory|MyMoneyReport::eQCaccount,
-      MyMoneyTransactionFilter::lastFiscalYear,
-      MyMoneyReport::eDetailAll,
-      i18n("Tax Transactions by Payee Last Fiscal Year"),
-      i18n("Default Report")
-    ));
+                     MyMoneyReport::ePayee,
+                     MyMoneyReport::eQCnumber | MyMoneyReport::eQCcategory | MyMoneyReport::eQCaccount,
+                     MyMoneyTransactionFilter::lastFiscalYear,
+                     MyMoneyReport::eDetailAll,
+                     i18n("Tax Transactions by Payee Last Fiscal Year"),
+                     i18n("Default Report")
+                   ));
     list.back().setTax(true);
     groups.push_back(list);
   }
@@ -1336,83 +1294,83 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
     ReportGroup list("Budgeting", i18n("Budgeting"));
 
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eBudgetActual,
-      MyMoneyReport::eMonths,
-      MyMoneyTransactionFilter::yearToDate,
-      MyMoneyReport::eDetailAll,
-      i18n("Budgeted vs. Actual This Year"),
-      i18n("Default Report")
-    ));
+                     MyMoneyReport::eBudgetActual,
+                     MyMoneyReport::eMonths,
+                     MyMoneyTransactionFilter::yearToDate,
+                     MyMoneyReport::eDetailAll,
+                     i18n("Budgeted vs. Actual This Year"),
+                     i18n("Default Report")
+                   ));
     list.back().setShowingRowTotals(true);
-    list.back().setBudget("Any",true);
+    list.back().setBudget("Any", true);
 
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eBudgetActual,
-      MyMoneyReport::eMonths,
-      MyMoneyTransactionFilter::yearToMonth,
-      MyMoneyReport::eDetailAll,
-      i18n("Budgeted vs. Actual This Year (YTM)"),
-      i18n("Default Report")
-    ));
+                     MyMoneyReport::eBudgetActual,
+                     MyMoneyReport::eMonths,
+                     MyMoneyTransactionFilter::yearToMonth,
+                     MyMoneyReport::eDetailAll,
+                     i18n("Budgeted vs. Actual This Year (YTM)"),
+                     i18n("Default Report")
+                   ));
     list.back().setShowingRowTotals(true);
-    list.back().setBudget("Any",true);
+    list.back().setBudget("Any", true);
     // in case we're in January, we show the last year
-    if(QDate::currentDate().month() == 1) {
+    if (QDate::currentDate().month() == 1) {
       list.back().setDateFilter(MyMoneyTransactionFilter::lastYear);
     }
 
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eBudgetActual,
-      MyMoneyReport::eMonths,
-      MyMoneyTransactionFilter::currentMonth,
-      MyMoneyReport::eDetailAll,
-      i18n("Monthly Budgeted vs. Actual"),
-      i18n("Default Report")
-    ));
-    list.back().setBudget("Any",true);
+                     MyMoneyReport::eBudgetActual,
+                     MyMoneyReport::eMonths,
+                     MyMoneyTransactionFilter::currentMonth,
+                     MyMoneyReport::eDetailAll,
+                     i18n("Monthly Budgeted vs. Actual"),
+                     i18n("Default Report")
+                   ));
+    list.back().setBudget("Any", true);
 
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eBudgetActual,
-      MyMoneyReport::eMonths,
-      MyMoneyTransactionFilter::currentYear,
-      MyMoneyReport::eDetailAll,
-      i18n("Yearly Budgeted vs. Actual"),
-      i18n("Default Report")
-    ));
-    list.back().setBudget("Any",true);
+                     MyMoneyReport::eBudgetActual,
+                     MyMoneyReport::eMonths,
+                     MyMoneyTransactionFilter::currentYear,
+                     MyMoneyReport::eDetailAll,
+                     i18n("Yearly Budgeted vs. Actual"),
+                     i18n("Default Report")
+                   ));
+    list.back().setBudget("Any", true);
     list.back().setShowingRowTotals(true);
 
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eBudget,
-      MyMoneyReport::eMonths,
-      MyMoneyTransactionFilter::currentMonth,
-      MyMoneyReport::eDetailAll,
-      i18n("Monthly Budget"),
-      i18n("Default Report")
-    ));
-    list.back().setBudget("Any",false);
+                     MyMoneyReport::eBudget,
+                     MyMoneyReport::eMonths,
+                     MyMoneyTransactionFilter::currentMonth,
+                     MyMoneyReport::eDetailAll,
+                     i18n("Monthly Budget"),
+                     i18n("Default Report")
+                   ));
+    list.back().setBudget("Any", false);
 
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eBudget,
-      MyMoneyReport::eMonths,
-      MyMoneyTransactionFilter::currentYear,
-      MyMoneyReport::eDetailAll,
-      i18n("Yearly Budget"),
-      i18n("Default Report")
-    ));
-    list.back().setBudget("Any",false);
+                     MyMoneyReport::eBudget,
+                     MyMoneyReport::eMonths,
+                     MyMoneyTransactionFilter::currentYear,
+                     MyMoneyReport::eDetailAll,
+                     i18n("Yearly Budget"),
+                     i18n("Default Report")
+                   ));
+    list.back().setBudget("Any", false);
     list.back().setShowingRowTotals(true);
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eBudgetActual,
-      MyMoneyReport::eMonths,
-      MyMoneyTransactionFilter::currentYear,
-      MyMoneyReport::eDetailGroup,
-      i18n("Yearly Budgeted vs Actual Graph"),
-      i18n("Default Report")
-    ));
+                     MyMoneyReport::eBudgetActual,
+                     MyMoneyReport::eMonths,
+                     MyMoneyTransactionFilter::currentYear,
+                     MyMoneyReport::eDetailGroup,
+                     i18n("Yearly Budgeted vs Actual Graph"),
+                     i18n("Default Report")
+                   ));
     list.back().setChartByDefault(true);
     list.back().setChartGridLines(false);
-    list.back().setBudget("Any",true);
+    list.back().setBudget("Any", true);
     list.back().setChartType(MyMoneyReport::eChartLine);
 
     groups.push_back(list);
@@ -1421,36 +1379,36 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
     ReportGroup list("Forecast", i18n("Forecast"));
 
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eAssetLiability,
-      MyMoneyReport::eMonths,
-      MyMoneyTransactionFilter::next12Months,
-      MyMoneyReport::eDetailTop,
-      i18n("Forecast By Month"),
-      i18n("Default Report")
-    ));
-    list.back().setIncludingForecast( true );
+                     MyMoneyReport::eAssetLiability,
+                     MyMoneyReport::eMonths,
+                     MyMoneyTransactionFilter::next12Months,
+                     MyMoneyReport::eDetailTop,
+                     i18n("Forecast By Month"),
+                     i18n("Default Report")
+                   ));
+    list.back().setIncludingForecast(true);
 
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eAssetLiability,
-      MyMoneyReport::eMonths,
-      MyMoneyTransactionFilter::nextQuarter,
-      MyMoneyReport::eDetailTop,
-      i18n("Forecast Next Quarter"),
-      i18n("Default Report")
-    ));
-    list.back().setColumnsAreDays( true );
-    list.back().setIncludingForecast( true );
+                     MyMoneyReport::eAssetLiability,
+                     MyMoneyReport::eMonths,
+                     MyMoneyTransactionFilter::nextQuarter,
+                     MyMoneyReport::eDetailTop,
+                     i18n("Forecast Next Quarter"),
+                     i18n("Default Report")
+                   ));
+    list.back().setColumnsAreDays(true);
+    list.back().setIncludingForecast(true);
 
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eAssetLiability,
-      MyMoneyReport::eMonths,
-      MyMoneyTransactionFilter::next3Months,
-      MyMoneyReport::eDetailTotal,
-      i18n("Net Worth Forecast Graph"),
-      i18n("Default Report")
-    ));
-    list.back().setColumnsAreDays( true );
-    list.back().setIncludingForecast( true );
+                     MyMoneyReport::eAssetLiability,
+                     MyMoneyReport::eMonths,
+                     MyMoneyTransactionFilter::next3Months,
+                     MyMoneyReport::eDetailTotal,
+                     i18n("Net Worth Forecast Graph"),
+                     i18n("Default Report")
+                   ));
+    list.back().setColumnsAreDays(true);
+    list.back().setIncludingForecast(true);
     list.back().setChartByDefault(true);
     list.back().setChartGridLines(false);
     list.back().setChartType(MyMoneyReport::eChartLine);
@@ -1460,40 +1418,40 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
     ReportGroup list("Information", i18n("General Information"));
 
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eSchedule,
-      MyMoneyReport::eMonths,
-      MyMoneyTransactionFilter::next12Months,
-      MyMoneyReport::eDetailAll,
-      i18n("Schedule Information"),
-      i18n("Default Report")
-    ));
+                     MyMoneyReport::eSchedule,
+                     MyMoneyReport::eMonths,
+                     MyMoneyTransactionFilter::next12Months,
+                     MyMoneyReport::eDetailAll,
+                     i18n("Schedule Information"),
+                     i18n("Default Report")
+                   ));
     list.back().setDetailLevel(MyMoneyReport::eDetailAll);
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eSchedule,
-      MyMoneyReport::eMonths,
-      MyMoneyTransactionFilter::next12Months,
-      MyMoneyReport::eDetailAll,
-      i18n("Schedule Summary Information"),
-      i18n("Default Report")
-    ));
+                     MyMoneyReport::eSchedule,
+                     MyMoneyReport::eMonths,
+                     MyMoneyTransactionFilter::next12Months,
+                     MyMoneyReport::eDetailAll,
+                     i18n("Schedule Summary Information"),
+                     i18n("Default Report")
+                   ));
     list.back().setDetailLevel(MyMoneyReport::eDetailTop);
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eAccountInfo,
-      MyMoneyReport::eMonths,
-      MyMoneyTransactionFilter::today,
-      MyMoneyReport::eDetailAll,
-      i18n("Account Information"),
-      i18n("Default Report")
-    ));
+                     MyMoneyReport::eAccountInfo,
+                     MyMoneyReport::eMonths,
+                     MyMoneyTransactionFilter::today,
+                     MyMoneyReport::eDetailAll,
+                     i18n("Account Information"),
+                     i18n("Default Report")
+                   ));
     list.back().setConvertCurrency(false);
     list.push_back(MyMoneyReport(
-      MyMoneyReport::eAccountLoanInfo,
-      MyMoneyReport::eMonths,
-      MyMoneyTransactionFilter::today,
-      MyMoneyReport::eDetailAll,
-      i18n("Loan Information"),
-      i18n("Default Report")
-    ));
+                     MyMoneyReport::eAccountLoanInfo,
+                     MyMoneyReport::eMonths,
+                     MyMoneyTransactionFilter::today,
+                     MyMoneyReport::eDetailAll,
+                     i18n("Loan Information"),
+                     i18n("Default Report")
+                   ));
     list.back().setConvertCurrency(false);
     groups.push_back(list);
   }

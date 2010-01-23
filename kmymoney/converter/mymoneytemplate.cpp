@@ -40,12 +40,12 @@
 #include "kmymoneyutils.h"
 
 MyMoneyTemplate::MyMoneyTemplate() :
-  m_progressCallback(0)
+    m_progressCallback(0)
 {
 }
 
 MyMoneyTemplate::MyMoneyTemplate(const KUrl& url) :
-  m_progressCallback(0)
+    m_progressCallback(0)
 {
   loadTemplate(url);
 }
@@ -58,23 +58,23 @@ bool MyMoneyTemplate::loadTemplate(const KUrl& url)
 {
   QString filename;
 
-  if(!url.isValid()) {
+  if (!url.isValid()) {
     qDebug("Invalid template URL '%s'", qPrintable(url.url()));
     return false;
   }
 
   m_source = url;
-  if(url.isLocalFile()) {
+  if (url.isLocalFile()) {
     filename = url.toLocalFile();
 
   } else {
     bool rc;
     rc = KIO::NetAccess::download(url, filename, KMyMoneyUtils::mainWindow());
-    if(!rc) {
+    if (!rc) {
       KMessageBox::detailedError(KMyMoneyUtils::mainWindow(),
-             i18n("Error while loading file '%1'.",url.url()),
-             KIO::NetAccess::lastErrorString(),
-             i18n("File access error"));
+                                 i18n("Error while loading file '%1'.", url.url()),
+                                 KIO::NetAccess::lastErrorString(),
+                                 i18n("File access error"));
       return false;
     }
   }
@@ -82,17 +82,17 @@ bool MyMoneyTemplate::loadTemplate(const KUrl& url)
   bool rc = true;
   QFile file(filename);
   QFileInfo info(file);
-  if(!info.isFile()) {
-    QString msg=i18n("<p><b>%1</b> is not a template file.</p>",filename);
+  if (!info.isFile()) {
+    QString msg = i18n("<p><b>%1</b> is not a template file.</p>", filename);
     KMessageBox::error(KMyMoneyUtils::mainWindow(), msg, i18n("Filetype Error"));
     return false;
   }
 
-  if(file.open(QIODevice::ReadOnly)) {
+  if (file.open(QIODevice::ReadOnly)) {
     QString errMsg;
     int errLine, errColumn;
-    if(!m_doc.setContent(&file, &errMsg, &errLine, &errColumn)) {
-      QString msg=i18n("<p>Error while reading template file <b>%1</b> in line %2, column %3</p>",filename,errLine,errColumn);
+    if (!m_doc.setContent(&file, &errMsg, &errLine, &errColumn)) {
+      QString msg = i18n("<p>Error while reading template file <b>%1</b> in line %2, column %3</p>", filename, errLine, errColumn);
       KMessageBox::detailedError(KMyMoneyUtils::mainWindow(), msg, errMsg, i18n("Template Error"));
       rc = false;
     } else {
@@ -100,7 +100,7 @@ bool MyMoneyTemplate::loadTemplate(const KUrl& url)
     }
     file.close();
   } else {
-    KMessageBox::sorry(KMyMoneyUtils::mainWindow(), i18n("File '%1' not found!",filename));
+    KMessageBox::sorry(KMyMoneyUtils::mainWindow(), i18n("File '%1' not found!", filename));
     rc = false;
   }
 
@@ -122,26 +122,26 @@ bool MyMoneyTemplate::loadDescription(void)
   const int validHeader = 0x0F;
 
   QDomElement rootElement = m_doc.documentElement();
-  if(!rootElement.isNull()
-  && rootElement.tagName() == "kmymoney-account-template") {
+  if (!rootElement.isNull()
+      && rootElement.tagName() == "kmymoney-account-template") {
     QDomNode child = rootElement.firstChild();
-    while(!child.isNull() && child.isElement()) {
+    while (!child.isNull() && child.isElement()) {
       QDomElement childElement = child.toElement();
       // qDebug("MyMoneyTemplate::import: Processing child node %s", childElement.tagName().data());
-      if(childElement.tagName() == "accounts") {
+      if (childElement.tagName() == "accounts") {
         m_accounts = childElement.firstChild();
         validMask |= validAccount;
-      } else if(childElement.tagName() == "title") {
+      } else if (childElement.tagName() == "title") {
         m_title = childElement.text();
         validMask |= validTitle;
-      } else if(childElement.tagName() == "shortdesc") {
+      } else if (childElement.tagName() == "shortdesc") {
         m_shortDesc = childElement.text();
         validMask |= validShort;
-      } else if(childElement.tagName() == "longdesc") {
+      } else if (childElement.tagName() == "longdesc") {
         m_longDesc = childElement.text();
         validMask |= validLong;
       } else {
-        KMessageBox::error(KMyMoneyUtils::mainWindow(), i18n("<p>Invalid tag <b>%1</b> in template file <b>%2</b></p>",childElement.tagName(),m_source.prettyUrl()));
+        KMessageBox::error(KMyMoneyUtils::mainWindow(), i18n("<p>Invalid tag <b>%1</b> in template file <b>%2</b></p>", childElement.tagName(), m_source.prettyUrl()));
         validMask |= invalid;
       }
       child = child.nextSibling();
@@ -153,10 +153,10 @@ bool MyMoneyTemplate::loadDescription(void)
 bool MyMoneyTemplate::hierarchy(QMap<QString, Q3ListViewItem*>& list, const QString& parent, QDomNode account)
 {
   bool rc = true;
-  while(rc == true && !account.isNull()) {
-    if(account.isElement()) {
+  while (rc == true && !account.isNull()) {
+    if (account.isElement()) {
       QDomElement accountElement = account.toElement();
-      if(accountElement.tagName() == "account") {
+      if (accountElement.tagName() == "account") {
         QString name = QString("%1:%2").arg(parent).arg(accountElement.attribute("name"));
         list[name] = 0;
         hierarchy(list, name, account.firstChild());
@@ -171,35 +171,35 @@ void MyMoneyTemplate::hierarchy(QMap<QString, Q3ListViewItem*>& list)
 {
   bool rc = !m_accounts.isNull();
   QDomNode accounts = m_accounts;
-  while(rc == true && !accounts.isNull() && accounts.isElement()) {
+  while (rc == true && !accounts.isNull() && accounts.isElement()) {
     QDomElement childElement = accounts.toElement();
-    if(childElement.tagName() == "account"
-    && childElement.attribute("name").isEmpty()) {
-      switch(childElement.attribute("type").toUInt()) {
-        case MyMoneyAccount::Asset:
-          list[i18n("Asset")] = 0;
-          rc = hierarchy(list, i18n("Asset"), childElement.firstChild());
-          break;
-        case MyMoneyAccount::Liability:
-          list[i18n("Liability")] = 0;
-          rc = hierarchy(list, i18n("Liability"), childElement.firstChild());
-          break;
-        case MyMoneyAccount::Income:
-          list[i18n("Income")] = 0;
-          rc = hierarchy(list, i18n("Income"), childElement.firstChild());
-          break;
-        case MyMoneyAccount::Expense:
-          list[i18n("Expense")] = 0;
-          rc = hierarchy(list, i18n("Expense"), childElement.firstChild());
-          break;
-        case MyMoneyAccount::Equity:
-          list[i18n("Equity")] = 0;
-          rc = hierarchy(list, i18n("Equity"), childElement.firstChild());
-          break;
+    if (childElement.tagName() == "account"
+        && childElement.attribute("name").isEmpty()) {
+      switch (childElement.attribute("type").toUInt()) {
+      case MyMoneyAccount::Asset:
+        list[i18n("Asset")] = 0;
+        rc = hierarchy(list, i18n("Asset"), childElement.firstChild());
+        break;
+      case MyMoneyAccount::Liability:
+        list[i18n("Liability")] = 0;
+        rc = hierarchy(list, i18n("Liability"), childElement.firstChild());
+        break;
+      case MyMoneyAccount::Income:
+        list[i18n("Income")] = 0;
+        rc = hierarchy(list, i18n("Income"), childElement.firstChild());
+        break;
+      case MyMoneyAccount::Expense:
+        list[i18n("Expense")] = 0;
+        rc = hierarchy(list, i18n("Expense"), childElement.firstChild());
+        break;
+      case MyMoneyAccount::Equity:
+        list[i18n("Equity")] = 0;
+        rc = hierarchy(list, i18n("Equity"), childElement.firstChild());
+        break;
 
-        default:
-          rc = false;
-          break;
+      default:
+        rc = false;
+        break;
       }
     } else {
       rc = false;
@@ -213,38 +213,38 @@ bool MyMoneyTemplate::importTemplate(void(*callback)(int, int, const QString&))
   m_progressCallback = callback;
   bool rc = !m_accounts.isNull();
   MyMoneyFile* file = MyMoneyFile::instance();
-  signalProgress(0, m_doc.elementsByTagName("account").count(), i18n("Loading template %1",m_source.url()));
+  signalProgress(0, m_doc.elementsByTagName("account").count(), i18n("Loading template %1", m_source.url()));
   m_accountsRead = 0;
 
-  while(rc == true && !m_accounts.isNull() && m_accounts.isElement()) {
+  while (rc == true && !m_accounts.isNull() && m_accounts.isElement()) {
     QDomElement childElement = m_accounts.toElement();
-    if(childElement.tagName() == "account"
-    && childElement.attribute("name").isEmpty()) {
+    if (childElement.tagName() == "account"
+        && childElement.attribute("name").isEmpty()) {
       ++m_accountsRead;
       MyMoneyAccount parent;
-      switch(childElement.attribute("type").toUInt()) {
-        case MyMoneyAccount::Asset:
-          parent = file->asset();
-          break;
-        case MyMoneyAccount::Liability:
-          parent = file->liability();
-          break;
-        case MyMoneyAccount::Income:
-          parent = file->income();
-          break;
-        case MyMoneyAccount::Expense:
-          parent = file->expense();
-          break;
-        case MyMoneyAccount::Equity:
-          parent = file->equity();
-          break;
+      switch (childElement.attribute("type").toUInt()) {
+      case MyMoneyAccount::Asset:
+        parent = file->asset();
+        break;
+      case MyMoneyAccount::Liability:
+        parent = file->liability();
+        break;
+      case MyMoneyAccount::Income:
+        parent = file->income();
+        break;
+      case MyMoneyAccount::Expense:
+        parent = file->expense();
+        break;
+      case MyMoneyAccount::Equity:
+        parent = file->equity();
+        break;
 
-        default:
-          KMessageBox::error(KMyMoneyUtils::mainWindow(), i18n("<p>Invalid top-level account type <b>%1</b> in template file <b>%2</b></p>",childElement.attribute("type"),m_source.prettyUrl()));
-          rc = false;
+      default:
+        KMessageBox::error(KMyMoneyUtils::mainWindow(), i18n("<p>Invalid top-level account type <b>%1</b> in template file <b>%2</b></p>", childElement.attribute("type"), m_source.prettyUrl()));
+        rc = false;
       }
 
-      if(rc == true) {
+      if (rc == true) {
         rc = createAccounts(parent, childElement.firstChild());
       }
     } else {
@@ -259,32 +259,32 @@ bool MyMoneyTemplate::importTemplate(void(*callback)(int, int, const QString&))
 bool MyMoneyTemplate::createAccounts(MyMoneyAccount& parent, QDomNode account)
 {
   bool rc = true;
-  while(rc == true && !account.isNull()) {
+  while (rc == true && !account.isNull()) {
     MyMoneyAccount acc;
-    if(account.isElement()) {
+    if (account.isElement()) {
       QDomElement accountElement = account.toElement();
-      if(accountElement.tagName() == "account") {
+      if (accountElement.tagName() == "account") {
         signalProgress(++m_accountsRead, 0);
         QList<MyMoneyAccount> subAccountList;
         QList<MyMoneyAccount>::ConstIterator it;
         it = subAccountList.constEnd();
-        if(!parent.accountList().isEmpty()) {
+        if (!parent.accountList().isEmpty()) {
           MyMoneyFile::instance()->accountList(subAccountList, parent.accountList());
-          for(it = subAccountList.constBegin(); it != subAccountList.constEnd(); ++it) {
-            if((*it).name() == accountElement.attribute("name")) {
+          for (it = subAccountList.constBegin(); it != subAccountList.constEnd(); ++it) {
+            if ((*it).name() == accountElement.attribute("name")) {
               acc = *it;
               break;
             }
           }
         }
-        if(it == subAccountList.constEnd()) {
+        if (it == subAccountList.constEnd()) {
           // not found, we need to create it
           acc.setName(accountElement.attribute("name"));
           acc.setAccountType(static_cast<MyMoneyAccount::_accountTypeE>(accountElement.attribute("type").toUInt()));
           setFlags(acc, account.firstChild());
           try {
             MyMoneyFile::instance()->addAccount(acc, parent);
-          } catch(MyMoneyException *e) {
+          } catch (MyMoneyException *e) {
             delete e;
           }
         }
@@ -299,18 +299,18 @@ bool MyMoneyTemplate::createAccounts(MyMoneyAccount& parent, QDomNode account)
 bool MyMoneyTemplate::setFlags(MyMoneyAccount& acc, QDomNode flags)
 {
   bool rc = true;
-  while(rc == true && !flags.isNull()) {
-    if(flags.isElement()) {
+  while (rc == true && !flags.isNull()) {
+    if (flags.isElement()) {
       QDomElement flagElement = flags.toElement();
-      if(flagElement.tagName() == "flag") {
+      if (flagElement.tagName() == "flag") {
         // make sure, we only store flags we know!
         QString value = flagElement.attribute("name");
-        if(value == "Tax") {
+        if (value == "Tax") {
           acc.setValue(value.toLatin1(), "Yes");
         } else {
-           KMessageBox::error(KMyMoneyUtils::mainWindow(), i18n("<p>Invalid flag type <b>%1</b> for account <b>%3</b> in template file <b>%2</b></p>",flagElement.attribute("name"),m_source.prettyUrl(),acc.name()));
+          KMessageBox::error(KMyMoneyUtils::mainWindow(), i18n("<p>Invalid flag type <b>%1</b> for account <b>%3</b> in template file <b>%2</b></p>", flagElement.attribute("name"), m_source.prettyUrl(), acc.name()));
           rc = false;
-       }
+        }
       }
     }
     flags = flags.nextSibling();
@@ -320,7 +320,7 @@ bool MyMoneyTemplate::setFlags(MyMoneyAccount& acc, QDomNode flags)
 
 void MyMoneyTemplate::signalProgress(int current, int total, const QString& msg)
 {
-  if(m_progressCallback != 0)
+  if (m_progressCallback != 0)
     (*m_progressCallback)(current, total, msg);
 }
 
@@ -377,7 +377,7 @@ bool MyMoneyTemplate::addAccountStructure(QDomElement& parent, const MyMoneyAcco
   QDomElement account = m_doc.createElement("account");
   parent.appendChild(account);
 
-  if(MyMoneyFile::instance()->isStandardAccount(acc.id()))
+  if (MyMoneyFile::instance()->isStandardAccount(acc.id()))
     account.setAttribute(QString("name"), QString());
   else
     account.setAttribute(QString("name"), acc.name());
@@ -386,11 +386,11 @@ bool MyMoneyTemplate::addAccountStructure(QDomElement& parent, const MyMoneyAcco
   // FIXME: add tax flag stuff
 
   // any child accounts?
-  if(acc.accountList().count() > 0) {
+  if (acc.accountList().count() > 0) {
     QList<MyMoneyAccount> list;
     MyMoneyFile::instance()->accountList(list, acc.accountList(), false);
     QList<MyMoneyAccount>::Iterator it;
-    for(it = list.begin(); it != list.end(); ++it) {
+    for (it = list.begin(); it != list.end(); ++it) {
       addAccountStructure(account, *it);
     }
   }
@@ -401,35 +401,35 @@ bool MyMoneyTemplate::saveTemplate(const KUrl& url)
 {
   QString filename;
 
-  if(!url.isValid()) {
+  if (!url.isValid()) {
     qDebug("Invalid template URL '%s'", qPrintable(url.url()));
     return false;
   }
 
-  if(url.isLocalFile()) {
+  if (url.isLocalFile()) {
     filename = url.toLocalFile();
     KSaveFile qfile(filename/*, 0600*/);
-    if(qfile.open()) {
+    if (qfile.open()) {
       saveToLocalFile(&qfile);
-      if(!qfile.finalize()) {
-        throw new MYMONEYEXCEPTION(i18n("Unable to write changes to '%1'",filename));
+      if (!qfile.finalize()) {
+        throw new MYMONEYEXCEPTION(i18n("Unable to write changes to '%1'", filename));
       }
     } else {
-      throw new MYMONEYEXCEPTION(i18n("Unable to write changes to '%1'",filename));
+      throw new MYMONEYEXCEPTION(i18n("Unable to write changes to '%1'", filename));
     }
   } else {
     KTemporaryFile tmpfile;
-    KSaveFile qfile( tmpfile.fileName() );
-    if(qfile.open()) {
+    KSaveFile qfile(tmpfile.fileName());
+    if (qfile.open()) {
       saveToLocalFile(&qfile);
-      if(!qfile.finalize()) {
-        throw new MYMONEYEXCEPTION(i18n("Unable to upload to '%1'",url.url()));
+      if (!qfile.finalize()) {
+        throw new MYMONEYEXCEPTION(i18n("Unable to upload to '%1'", url.url()));
       }
     } else {
-      throw new MYMONEYEXCEPTION(i18n("Unable to upload to '%1'",url.url()));
+      throw new MYMONEYEXCEPTION(i18n("Unable to upload to '%1'", url.url()));
     }
-    if(!KIO::NetAccess::upload(tmpfile.fileName(), url, NULL))
-      throw new MYMONEYEXCEPTION(i18n("Unable to upload to '%1'",url.url()));
+    if (!KIO::NetAccess::upload(tmpfile.fileName(), url, NULL))
+      throw new MYMONEYEXCEPTION(i18n("Unable to upload to '%1'", url.url()));
   }
   return true;
 }

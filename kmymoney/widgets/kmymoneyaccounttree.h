@@ -30,8 +30,12 @@ class KMyMoneyAccountTree : public KMyMoneyAccountTreeBase
   Q_OBJECT
 public:
   KMyMoneyAccountTree(QWidget* parent = 0);
-  int taxReportColumn(void) const { return m_taxReportColumn; }
-  int vatCategoryColumn(void) const { return m_vatCategoryColumn; }
+  int taxReportColumn(void) const {
+    return m_taxReportColumn;
+  }
+  int vatCategoryColumn(void) const {
+    return m_vatCategoryColumn;
+  }
 private:
   int m_taxReportColumn;
   int m_vatCategoryColumn;
@@ -41,13 +45,13 @@ class KMyMoneyAccountTreeItem : public KMyMoneyAccountTreeBaseItem
 {
 public:
   /**
- * Constructor to be used to construct an institution entry
- * object.
- *
- * @param parent pointer to the K3ListView object this entry should be
- *               added to.
- * @param institution const reference to MyMoneyInstitution for which
- *               the K3ListView entry is constructed
+  * Constructor to be used to construct an institution entry
+  * object.
+  *
+  * @param parent pointer to the K3ListView object this entry should be
+  *               added to.
+  * @param institution const reference to MyMoneyInstitution for which
+  *               the K3ListView entry is constructed
    */
   KMyMoneyAccountTreeItem(K3ListView *parent, const MyMoneyInstitution& institution);
 
@@ -96,15 +100,15 @@ protected:
     * @param account Account to get the balance for
     * @return Balance of this account
     */
-    MyMoneyMoney balance() const;
+  MyMoneyMoney balance() const;
 
-    bool m_reconcileFlag;
+  bool m_reconcileFlag;
 
-    /**
-     * populates the columns. Derived classes should override this. The
-     * name column is already filled and should not be changed.
-     */
-    void fillColumns();
+  /**
+   * populates the columns. Derived classes should override this. The
+   * name column is already filled and should not be changed.
+   */
+  void fillColumns();
 };
 
 #endif

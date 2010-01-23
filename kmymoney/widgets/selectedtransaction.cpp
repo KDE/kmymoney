@@ -32,20 +32,21 @@
 #include "mymoneysplit.h"
 #include "mymoneyfile.h"
 
-namespace KMyMoneyRegister {
+namespace KMyMoneyRegister
+{
 
 int SelectedTransaction::warnLevel() const
 {
   int warnLevel = 0;
   QList<MyMoneySplit>::const_iterator it_s;
-  for(it_s = transaction().splits().begin(); warnLevel < 2 && it_s != transaction().splits().end(); ++it_s) {
+  for (it_s = transaction().splits().begin(); warnLevel < 2 && it_s != transaction().splits().end(); ++it_s) {
     try {
       const MyMoneyAccount& acc = MyMoneyFile::instance()->account((*it_s).accountId());
-      if(acc.isClosed())
+      if (acc.isClosed())
         warnLevel = 3;
-      else if((*it_s).reconcileFlag() == MyMoneySplit::Frozen)
+      else if ((*it_s).reconcileFlag() == MyMoneySplit::Frozen)
         warnLevel = 2;
-      else if((*it_s).reconcileFlag() == MyMoneySplit::Reconciled && warnLevel < 1)
+      else if ((*it_s).reconcileFlag() == MyMoneySplit::Reconciled && warnLevel < 1)
         warnLevel = 1;
     } catch (MyMoneyException* e) {
       //qDebug("Exception in SelectedTransaction::warnLevel(): %s", qPrintable(e->what()));
@@ -55,7 +56,7 @@ int SelectedTransaction::warnLevel() const
   }
   return warnLevel;
 }
-  
+
 SelectedTransactions::SelectedTransactions(const Register* r)
 {
   r->selectedTransactions(*this);
@@ -65,7 +66,7 @@ int SelectedTransactions::warnLevel() const
 {
   int warnLevel = 0;
   SelectedTransactions::const_iterator it_t;
-  for(it_t = begin(); warnLevel < 3 && it_t != end(); ++it_t) {
+  for (it_t = begin(); warnLevel < 3 && it_t != end(); ++it_t) {
     int thisLevel = (*it_t).warnLevel();
     if (thisLevel > warnLevel)
       warnLevel = thisLevel;

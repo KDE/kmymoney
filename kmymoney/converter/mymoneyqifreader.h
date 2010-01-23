@@ -72,8 +72,7 @@ private:
     EntrySkip
   } QifEntryTypeE;
 
-  struct qSplit
-  {
+  struct qSplit {
     QString      m_strCategoryName;
     QString      m_strMemo;
     QString      m_amount;
@@ -139,7 +138,9 @@ public:
 
   void setCategoryMapping(bool map);
 
-  inline const MyMoneyAccount& account() const { return m_account; };
+  inline const MyMoneyAccount& account() const {
+    return m_account;
+  };
 
   void setProgressCallback(void(*callback)(int, int, const QString&));
 

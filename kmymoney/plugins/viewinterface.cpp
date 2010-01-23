@@ -27,7 +27,7 @@
 #include "viewinterface.h"
 
 KMyMoneyPlugin::ViewInterface::ViewInterface(QObject* parent, const char* name) :
-  QObject(parent)
+    QObject(parent)
 {
   setObjectName(name);
 }

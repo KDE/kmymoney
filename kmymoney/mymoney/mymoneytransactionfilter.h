@@ -126,16 +126,16 @@ public:
   typedef union {
     unsigned  allFilter;
     struct {
-      unsigned textFilter       : 1;
-      unsigned accountFilter    : 1;
-      unsigned payeeFilter      : 1;
-      unsigned categoryFilter   : 1;
-      unsigned nrFilter         : 1;
-      unsigned dateFilter       : 1;
-      unsigned amountFilter     : 1;
-      unsigned typeFilter       : 1;
-      unsigned stateFilter      : 1;
-      unsigned validityFilter   : 1;
+    unsigned textFilter       : 1;
+    unsigned accountFilter    : 1;
+    unsigned payeeFilter      : 1;
+    unsigned categoryFilter   : 1;
+    unsigned nrFilter         : 1;
+    unsigned dateFilter       : 1;
+    unsigned amountFilter     : 1;
+    unsigned typeFilter       : 1;
+    unsigned stateFilter      : 1;
+    unsigned validityFilter   : 1;
     } singleFilter;
   } FilterSet;
 
@@ -368,7 +368,9 @@ public:
     *
     * @return returns m_fromDate
     */
-  const QDate fromDate(void) const { return m_fromDate; };
+  const QDate fromDate(void) const {
+    return m_fromDate;
+  };
 
   /**
     * This method returns the to date set in the filter. If
@@ -377,7 +379,9 @@ public:
     *
     * @return returns m_toDate
     */
-  const QDate toDate(void) const { return m_toDate; };
+  const QDate toDate(void) const {
+    return m_toDate;
+  };
 
   /**
     * This method is used to return information about the
@@ -388,7 +392,7 @@ public:
     * @param cat id of category in question
     * @return true if category is in filter set, false otherwise
     */
-  bool includesCategory( const QString& cat ) const;
+  bool includesCategory(const QString& cat) const;
 
   /**
     * This method is used to return information about the
@@ -399,7 +403,7 @@ public:
     * @param acc id of account in question
     * @return true if account is in filter set, false otherwise
     */
-  bool includesAccount( const QString& acc ) const;
+  bool includesAccount(const QString& acc) const;
 
   /**
     * This method is used to return information about the
@@ -410,7 +414,7 @@ public:
     * @param pye id of payee in question
     * @return true if payee is in filter set, false otherwise
     */
-  bool includesPayee( const QString& pye ) const;
+  bool includesPayee(const QString& pye) const;
 
   /**
     * This method is used to return information about the
@@ -420,7 +424,7 @@ public:
     * @param to result value for the end of the date range
     * @return true if a date filter is set
     */
-  bool dateFilter( QDate& from, QDate& to ) const;
+  bool dateFilter(QDate& from, QDate& to) const;
 
   /**
     * This method is used to return information about the
@@ -430,7 +434,7 @@ public:
     * @param to result value for the high end of the amount range
     * @return true if an amount filter is set
     */
-  bool amountFilter( MyMoneyMoney& from, MyMoneyMoney& to ) const;
+  bool amountFilter(MyMoneyMoney& from, MyMoneyMoney& to) const;
 
   /**
     * This method is used to return information about the
@@ -440,7 +444,7 @@ public:
     * @param to result value for the high end of the number range
     * @return true if a number filter is set
     */
-  bool numberFilter( QString& from, QString& to ) const;
+  bool numberFilter(QString& from, QString& to) const;
 
   /**
     * This method returns whether a payee filter has been set,
@@ -503,7 +507,9 @@ public:
    * This method returns whether the text filter should return
    * that DO NOT contain the text
    */
-  bool isInvertingText(void) const {return m_invertText;};
+  bool isInvertingText(void) const {
+    return m_invertText;
+  };
 
   /**
     * This method translates a plain-language date range into QDate
@@ -518,7 +524,9 @@ public:
 
   static void setFiscalYearStart(int firstMonth, int firstDay);
 
-  FilterSet filterSet(void) const { return m_filterSet; };
+  FilterSet filterSet(void) const {
+    return m_filterSet;
+  };
 
   /**
     * This member removes all references to object identified by @p id. Used

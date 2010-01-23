@@ -33,7 +33,7 @@
 
 
 UserInfo::UserInfo(QWidget* parent) :
-  UserInfoDecl(parent)
+    UserInfoDecl(parent)
 {
   m_userNameEdit->setFocus();
 }

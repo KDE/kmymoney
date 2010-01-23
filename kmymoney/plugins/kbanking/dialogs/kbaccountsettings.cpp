@@ -28,7 +28,7 @@
 
 KBAccountSettings::KBAccountSettings(const MyMoneyAccount& /*acc*/,
                                      QWidget* parent) :
-  QWidget(parent)
+    QWidget(parent)
 {
   setupUi(this);
 }

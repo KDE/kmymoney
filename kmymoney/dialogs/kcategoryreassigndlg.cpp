@@ -36,8 +36,8 @@
 #include <kmymoneyaccountselector.h>
 #include <kguiutils.h>
 
-KCategoryReassignDlg::KCategoryReassignDlg( QWidget* parent) :
-  KCategoryReassignDlgDecl( parent)
+KCategoryReassignDlg::KCategoryReassignDlg(QWidget* parent) :
+    KCategoryReassignDlgDecl(parent)
 {
   buttonOk->setGuiItem(KStandardGuiItem::ok());
   buttonCancel->setGuiItem(KStandardGuiItem::cancel());
@@ -53,7 +53,7 @@ KCategoryReassignDlg::~KCategoryReassignDlg()
 QString KCategoryReassignDlg::show(const MyMoneyAccount& category)
 {
   if (category.id().isEmpty())
-   return QString(); // no payee available? nothing can be selected...
+    return QString(); // no payee available? nothing can be selected...
 
   AccountSet set;
   set.addAccountGroup(MyMoneyAccount::Income);
@@ -67,9 +67,9 @@ QString KCategoryReassignDlg::show(const MyMoneyAccount& category)
   QStringList list;
   QStringList::const_iterator it_a;
   m_category->selector()->itemList(list);
-  for(it_a = list.constBegin(); it_a != list.constEnd(); ++it_a) {
+  for (it_a = list.constBegin(); it_a != list.constEnd(); ++it_a) {
     MyMoneyAccount acc = MyMoneyFile::instance()->account(*it_a);
-    if(acc.currencyId() != category.currencyId())
+    if (acc.currencyId() != category.currencyId())
       m_category->selector()->removeItem(*it_a);
   }
 
@@ -77,8 +77,8 @@ QString KCategoryReassignDlg::show(const MyMoneyAccount& category)
   m_category->selector()->itemList(list);
 
   // if there is no category for reassignment left, we bail out
-  if(list.isEmpty()) {
-    KMessageBox::sorry(this, QString("<qt>")+i18n("At least one transaction/schedule still references the category <b>%1</b>.  However, at least one category with the same currency must exist so that the transactions/schedules can be reassigned.", category.name()) + QString("</qt>"));
+  if (list.isEmpty()) {
+    KMessageBox::sorry(this, QString("<qt>") + i18n("At least one transaction/schedule still references the category <b>%1</b>.  However, at least one category with the same currency must exist so that the transactions/schedules can be reassigned.", category.name()) + QString("</qt>"));
     return QString();
   }
 
@@ -96,7 +96,7 @@ void KCategoryReassignDlg::accept(void)
   // force update of payeeCombo
   buttonOk->setFocus();
 
-  if(m_category->selectedItem().isEmpty()) {
+  if (m_category->selectedItem().isEmpty()) {
     KMessageBox::information(this, i18n("This dialog does not allow new categories to be created. Please pick a category from the list."), i18n("Category creation"));
   } else {
     KCategoryReassignDlgDecl::accept();

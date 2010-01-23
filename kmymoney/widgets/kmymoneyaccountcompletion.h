@@ -47,15 +47,19 @@ class kMyMoneyAccountCompletion : public kMyMoneyCompletion
   Q_OBJECT
 public:
 
-  kMyMoneyAccountCompletion(QWidget *parent=0);
+  kMyMoneyAccountCompletion(QWidget *parent = 0);
   virtual ~kMyMoneyAccountCompletion();
 
-  QStringList accountList(const QList<MyMoneyAccount::accountTypeE>& list = QList<MyMoneyAccount::accountTypeE>()) const { return selector()->accountList(list); }
+  QStringList accountList(const QList<MyMoneyAccount::accountTypeE>& list = QList<MyMoneyAccount::accountTypeE>()) const {
+    return selector()->accountList(list);
+  }
 
   /**
     * reimplemented from kMyMoneyCompletion
     */
-  kMyMoneyAccountSelector* selector(void) const { return dynamic_cast<kMyMoneyAccountSelector*>(m_selector); }
+  kMyMoneyAccountSelector* selector(void) const {
+    return dynamic_cast<kMyMoneyAccountSelector*>(m_selector);
+  }
 
 public slots:
   void slotMakeCompletion(const QString& txt);

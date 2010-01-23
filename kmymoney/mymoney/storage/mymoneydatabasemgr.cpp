@@ -28,31 +28,41 @@
 #define PASS } catch (MyMoneyException *e) { throw; }
 
 MyMoneyDatabaseMgr::MyMoneyDatabaseMgr() :
-m_creationDate (QDate::currentDate ()),
-m_lastModificationDate (QDate::currentDate ()),
-m_sql (0)
+    m_creationDate(QDate::currentDate()),
+    m_lastModificationDate(QDate::currentDate()),
+    m_sql(0)
 { }
 
 MyMoneyDatabaseMgr::~MyMoneyDatabaseMgr()
 { }
 
-  // general get functions
+// general get functions
 const MyMoneyPayee MyMoneyDatabaseMgr::user(void) const
-{ return m_user; }
+{
+  return m_user;
+}
 
 const QDate MyMoneyDatabaseMgr::creationDate(void) const
-{ return m_creationDate; }
+{
+  return m_creationDate;
+}
 
 const QDate MyMoneyDatabaseMgr::lastModificationDate(void) const
-{ return m_lastModificationDate; }
+{
+  return m_lastModificationDate;
+}
 
 unsigned int MyMoneyDatabaseMgr::currentFixVersion(void) const
-{ return CURRENT_FIX_VERSION; }
+{
+  return CURRENT_FIX_VERSION;
+}
 
 unsigned int MyMoneyDatabaseMgr::fileFixVersion(void) const
-{ return m_fileFixVersion; }
+{
+  return m_fileFixVersion;
+}
 
-  // general set functions
+// general set functions
 void MyMoneyDatabaseMgr::setUser(const MyMoneyPayee& user)
 {
   m_user = user;
@@ -60,9 +70,11 @@ void MyMoneyDatabaseMgr::setUser(const MyMoneyPayee& user)
 }
 
 void MyMoneyDatabaseMgr::setFileFixVersion(const unsigned int v)
-{ m_fileFixVersion = v; }
+{
+  m_fileFixVersion = v;
+}
 
-  // methods provided by MyMoneyKeyValueContainer
+// methods provided by MyMoneyKeyValueContainer
 const QString MyMoneyDatabaseMgr::value(const QString& key) const
 {
   return MyMoneyKeyValueContainer::value(key);
@@ -118,14 +130,14 @@ void MyMoneyDatabaseMgr::addAccount(MyMoneyAccount& parent, MyMoneyAccount& acco
   accountList = m_sql->fetchAccounts(accountIdList, true);
 
   theParent = accountList.constFind(parent.id());
-  if(theParent == accountList.constEnd()) {
+  if (theParent == accountList.constEnd()) {
     QString msg = "Unknown parent account '";
     msg += parent.id() + '\'';
     throw new MYMONEYEXCEPTION(msg);
   }
 
   theChild = accountList.constFind(account.id());
-  if(theChild == accountList.constEnd()) {
+  if (theChild == accountList.constEnd()) {
     QString msg = "Unknown child account '";
     msg += account.id() + '\'';
     throw new MYMONEYEXCEPTION(msg);
@@ -163,7 +175,7 @@ const MyMoneyPayee MyMoneyDatabaseMgr::payee(const QString& id) const
   QMap<QString, MyMoneyPayee>::ConstIterator it;
   QMap<QString, MyMoneyPayee> payeeList = m_sql->fetchPayees(QStringList(id));
   it = payeeList.constFind(id);
-  if(it == payeeList.constEnd())
+  if (it == payeeList.constEnd())
     throw new MYMONEYEXCEPTION("Unknown payee '" + id + '\'');
 
   return *it;
@@ -171,7 +183,7 @@ const MyMoneyPayee MyMoneyDatabaseMgr::payee(const QString& id) const
 
 const MyMoneyPayee MyMoneyDatabaseMgr::payeeByName(const QString& payee) const
 {
-  if(payee.isEmpty())
+  if (payee.isEmpty())
     return MyMoneyPayee::null;
 
   QMap<QString, MyMoneyPayee> payeeList;
@@ -182,8 +194,8 @@ const MyMoneyPayee MyMoneyDatabaseMgr::payeeByName(const QString& payee) const
 
   QMap<QString, MyMoneyPayee>::ConstIterator it_p;
 
-  for(it_p = payeeList.constBegin(); it_p != payeeList.constEnd(); ++it_p) {
-    if((*it_p).name() == payee) {
+  for (it_p = payeeList.constBegin(); it_p != payeeList.constEnd(); ++it_p) {
+    if ((*it_p).name() == payee) {
       return *it_p;
     }
   }
@@ -197,7 +209,7 @@ void MyMoneyDatabaseMgr::modifyPayee(const MyMoneyPayee& payee)
   QMap<QString, MyMoneyPayee>::ConstIterator it;
 
   it = payeeList.constFind(payee.id());
-  if(it == payeeList.constEnd()) {
+  if (it == payeeList.constEnd()) {
     QString msg = "Unknown payee '" + payee.id() + '\'';
     throw new MYMONEYEXCEPTION(msg);
   }
@@ -213,7 +225,7 @@ void MyMoneyDatabaseMgr::removePayee(const MyMoneyPayee& payee)
   QMap<QString, MyMoneyPayee>::ConstIterator it_p;
 
   it_p = payeeList.constFind(payee.id());
-  if(it_p == payeeList.constEnd()) {
+  if (it_p == payeeList.constEnd()) {
     QString msg = "Unknown payee '" + payee.id() + '\'';
     throw new MYMONEYEXCEPTION(msg);
   }
@@ -221,16 +233,16 @@ void MyMoneyDatabaseMgr::removePayee(const MyMoneyPayee& payee)
   // scan all transactions to check if the payee is still referenced
 
   QMap<QString, MyMoneyTransaction> transactionList = m_sql->fetchTransactions(); // make sure they're all here
-  for(it_t = transactionList.constBegin(); it_t != transactionList.constEnd(); ++it_t) {
-    if((*it_t).hasReferenceTo(payee.id())) {
+  for (it_t = transactionList.constBegin(); it_t != transactionList.constEnd(); ++it_t) {
+    if ((*it_t).hasReferenceTo(payee.id())) {
       throw new MYMONEYEXCEPTION(QString("Cannot remove payee that is still referenced to a %1").arg("transaction"));
     }
   }
 
   // check referential integrity in schedules
   QMap<QString, MyMoneySchedule> scheduleList = m_sql->fetchSchedules(); // make sure they're all here
-  for(it_s = scheduleList.constBegin(); it_s != scheduleList.constEnd(); ++it_s) {
-    if((*it_s).hasReferenceTo(payee.id())) {
+  for (it_s = scheduleList.constBegin(); it_s != scheduleList.constEnd(); ++it_s) {
+    if ((*it_s).hasReferenceTo(payee.id())) {
       throw new MYMONEYEXCEPTION(QString("Cannot remove payee that is still referenced to a %1").arg("schedule"));
     }
   }
@@ -254,13 +266,12 @@ const MyMoneyAccount MyMoneyDatabaseMgr::account(const QString& id) const
     throw new MYMONEYEXCEPTION("empty account id");
   }
 
-  if (m_sql)
-  {
+  if (m_sql) {
     QMap <QString, MyMoneyAccount> accountList = m_sql->fetchAccounts(QStringList(id));
     QMap <QString, MyMoneyAccount>::ConstIterator pos = accountList.constFind(id);
 
     // locate the account and if present, return it's data
-    if(pos != accountList.constEnd())
+    if (pos != accountList.constEnd())
       return *pos;
   } else {
     throw new MYMONEYEXCEPTION("No database connected");
@@ -274,20 +285,20 @@ const MyMoneyAccount MyMoneyDatabaseMgr::account(const QString& id) const
 bool MyMoneyDatabaseMgr::isStandardAccount(const QString& id) const
 {
   return id == STD_ACC_LIABILITY
-      || id == STD_ACC_ASSET
-      || id == STD_ACC_EXPENSE
-      || id == STD_ACC_INCOME
-      || id == STD_ACC_EQUITY;
+         || id == STD_ACC_ASSET
+         || id == STD_ACC_EXPENSE
+         || id == STD_ACC_INCOME
+         || id == STD_ACC_EQUITY;
 }
 
 void MyMoneyDatabaseMgr::setAccountName(const QString& id, const QString& name)
 {
-  if(!isStandardAccount(id))
+  if (!isStandardAccount(id))
     throw new MYMONEYEXCEPTION("Only standard accounts can be modified using setAccountName()");
 
   if (m_sql) {
     startTransaction();
-    MyMoneyAccount acc = m_sql->fetchAccounts(QStringList(id), true) [id];
+    MyMoneyAccount acc = m_sql->fetchAccounts(QStringList(id), true)[id];
     acc.setName(name);
     m_sql->modifyAccount(acc);
     commitTransaction();
@@ -300,7 +311,7 @@ void MyMoneyDatabaseMgr::addInstitution(MyMoneyInstitution& institution)
     MyMoneyInstitution newInstitution(nextInstitutionID(), institution);
 
     // mark file as changed
-    m_sql->addInstitution (newInstitution);
+    m_sql->addInstitution(newInstitution);
 
     // return new data
     institution = newInstitution;
@@ -396,18 +407,18 @@ void MyMoneyDatabaseMgr::addTransaction(MyMoneyTransaction& transaction, const b
   // * the referenced accounts in the splits exist
 
   // first perform all the checks
-  if(!transaction.id().isEmpty())
+  if (!transaction.id().isEmpty())
     throw new MYMONEYEXCEPTION("transaction already contains an id");
-  if(!transaction.postDate().isValid())
+  if (!transaction.postDate().isValid())
     throw new MYMONEYEXCEPTION("invalid post date");
 
   // now check the splits
   QList<MyMoneySplit>::ConstIterator it_s;
-  for(it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s) {
+  for (it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s) {
     // the following lines will throw an exception if the
     // account or payee do not exist
     account((*it_s).accountId());
-    if(!(*it_s).payeeId().isEmpty())
+    if (!(*it_s).payeeId().isEmpty())
       payee((*it_s).payeeId());
   }
 
@@ -419,10 +430,10 @@ void MyMoneyDatabaseMgr::addTransaction(MyMoneyTransaction& transaction, const b
   transaction = newTransaction;
 
   // adjust the balance of all affected accounts
-  for(it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s) {
+  for (it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s) {
     MyMoneyAccount acc = MyMoneyFile::instance()->account((*it_s).accountId());
     acc.adjustBalance((*it_s));
-    if(!skipAccountUpdate) {
+    if (!skipAccountUpdate) {
       acc.touch();
 //FIXME:      invalidateBalanceCache(acc.id());
     }
@@ -437,25 +448,25 @@ bool MyMoneyDatabaseMgr::hasActiveSplits(const QString& id) const
   MyMoneyTransactionFilter f(id);
   QMap<QString, MyMoneyTransaction> transactionList = m_sql->fetchTransactions(f);
 
-  for(it = transactionList.constBegin(); it != transactionList.constEnd(); ++it) {
-    if((*it).accountReferenced(id)) {
+  for (it = transactionList.constBegin(); it != transactionList.constEnd(); ++it) {
+    if ((*it).accountReferenced(id)) {
       return true;
     }
   }
   return false;
 }
 
-  /**
-    * This method is used to return the actual balance of an account
-    * without it's sub-ordinate accounts. If a @p date is presented,
-    * the balance at the beginning of this date (not including any
-    * transaction on this date) is returned. Otherwise all recorded
-    * transactions are included in the balance.
-    *
-    * @param id id of the account in question
-    * @param date return balance for specific date
-    * @return balance of the account as MyMoneyMoney object
-    */
+/**
+  * This method is used to return the actual balance of an account
+  * without it's sub-ordinate accounts. If a @p date is presented,
+  * the balance at the beginning of this date (not including any
+  * transaction on this date) is returned. Otherwise all recorded
+  * transactions are included in the balance.
+  *
+  * @param id id of the account in question
+  * @param date return balance for specific date
+  * @return balance of the account as MyMoneyMoney object
+  */
 //const MyMoneyMoney MyMoneyDatabaseMgr::balance(const QString& id, const QDate& date);
 
 const MyMoneyMoney MyMoneyDatabaseMgr::totalBalance(const QString& id, const QDate& date) const
@@ -493,13 +504,15 @@ const MyMoneyInstitution MyMoneyDatabaseMgr::institution(const QString& id) cons
   QMap<QString, MyMoneyInstitution> institutionList = m_sql->fetchInstitutions(QStringList(id));
 
   pos = institutionList.constFind(id);
-  if(pos != institutionList.constEnd())
+  if (pos != institutionList.constEnd())
     return *pos;
   throw new MYMONEYEXCEPTION("unknown institution");
 }
 
 bool MyMoneyDatabaseMgr::dirty(void) const
-{ return false; }
+{
+  return false;
+}
 
 void MyMoneyDatabaseMgr::setDirty(void)
 {}
@@ -524,21 +537,21 @@ void MyMoneyDatabaseMgr::modifyAccount(const MyMoneyAccount& account, const bool
 
   // locate the account in the file global pool
   startTransaction();
-  QMap<QString, MyMoneyAccount> accountList = m_sql->fetchAccounts (QStringList(account.id()), true);
+  QMap<QString, MyMoneyAccount> accountList = m_sql->fetchAccounts(QStringList(account.id()), true);
   pos = accountList.constFind(account.id());
-  if(pos != accountList.constEnd()) {
+  if (pos != accountList.constEnd()) {
     // check if the new info is based on the old one.
     // this is the case, when the file and the id
     // as well as the type are equal.
-    if(((*pos).parentAccountId() == account.parentAccountId()
-    && (*pos).accountType() == account.accountType())
-    || skipCheck == true) {
+    if (((*pos).parentAccountId() == account.parentAccountId()
+         && (*pos).accountType() == account.accountType())
+        || skipCheck == true) {
       // make sure that all the referenced objects exist
-      if(!account.institutionId().isEmpty())
+      if (!account.institutionId().isEmpty())
         institution(account.institutionId());
 
       QList<QString>::ConstIterator it_a;
-      for(it_a = account.accountList().begin(); it_a != account.accountList().end(); ++it_a) {
+      for (it_a = account.accountList().begin(); it_a != account.accountList().end(); ++it_a) {
         this->account(*it_a);
       }
 
@@ -569,20 +582,20 @@ void MyMoneyDatabaseMgr::modifyInstitution(const MyMoneyInstitution& institution
 
   // locate the institution in the file global pool
   pos = institutionList.constFind(institution.id());
-  if(pos != institutionList.constEnd()) {
+  if (pos != institutionList.constEnd()) {
     m_sql->modifyInstitution(institution);
   } else
     throw new MYMONEYEXCEPTION("unknown institution");
 }
 
-  /**
-    * This method is used to update a specific transaction in the
-    * transaction pool of the MyMoneyFile object
-    *
-    * An exception will be thrown upon error conditions.
-    *
-    * @param transaction reference to transaction to be changed
-    */
+/**
+  * This method is used to update a specific transaction in the
+  * transaction pool of the MyMoneyFile object
+  *
+  * An exception will be thrown upon error conditions.
+  *
+  * @param transaction reference to transaction to be changed
+  */
 void MyMoneyDatabaseMgr::modifyTransaction(const MyMoneyTransaction& transaction)
 {
   QMap<QString, bool> modifiedAccounts;
@@ -595,18 +608,18 @@ void MyMoneyDatabaseMgr::modifyTransaction(const MyMoneyTransaction& transaction
   // * the splits must have valid account ids
 
   // first perform all the checks
-  if(transaction.id().isEmpty()
+  if (transaction.id().isEmpty()
 //  || transaction.file() != this
-  || !transaction.postDate().isValid())
+      || !transaction.postDate().isValid())
     throw new MYMONEYEXCEPTION("invalid transaction to be modified");
 
   // now check the splits
   QList<MyMoneySplit>::ConstIterator it_s;
-  for(it_s = transaction.splits().begin(); it_s != transaction.splits().end(); ++it_s) {
+  for (it_s = transaction.splits().begin(); it_s != transaction.splits().end(); ++it_s) {
     // the following lines will throw an exception if the
     // account or payee do not exist
     MyMoneyFile::instance()->account((*it_s).accountId());
-    if(!(*it_s).payeeId().isEmpty())
+    if (!(*it_s).payeeId().isEmpty())
       MyMoneyFile::instance()->payee((*it_s).payeeId());
   }
 
@@ -624,13 +637,13 @@ void MyMoneyDatabaseMgr::modifyTransaction(const MyMoneyTransaction& transaction
 
 //  it_t = transactionList.find(oldKey);
   it_t = transactionList.constBegin();
-  if(it_t == transactionList.constEnd())
+  if (it_t == transactionList.constEnd())
     throw new MYMONEYEXCEPTION("invalid transaction key");
 
   // mark all accounts referenced in old and new transaction data
   // as modified
   QMap<QString, MyMoneyAccount> accountList = m_sql->fetchAccounts();
-  for(it_s = (*it_t).splits().begin(); it_s != (*it_t).splits().end(); ++it_s) {
+  for (it_s = (*it_t).splits().begin(); it_s != (*it_t).splits().end(); ++it_s) {
     MyMoneyAccount acc = accountList[(*it_s).accountId()];
     acc.adjustBalance((*it_s), true);
     acc.touch();
@@ -639,7 +652,7 @@ void MyMoneyDatabaseMgr::modifyTransaction(const MyMoneyTransaction& transaction
     m_sql->modifyAccount(acc);
     //modifiedAccounts[(*it_s).accountId()] = true;
   }
-  for(it_s = transaction.splits().begin(); it_s != transaction.splits().end(); ++it_s) {
+  for (it_s = transaction.splits().begin(); it_s != transaction.splits().end(); ++it_s) {
     MyMoneyAccount acc = accountList[(*it_s).accountId()];
     acc.adjustBalance((*it_s));
     acc.touch();
@@ -653,7 +666,7 @@ void MyMoneyDatabaseMgr::modifyTransaction(const MyMoneyTransaction& transaction
 //  m_sql->removeTransaction(oldKey);
 
   // add new transaction to lists
- // QString newKey = transaction.uniqueSortKey();
+// QString newKey = transaction.uniqueSortKey();
 //  m_sql->insertTransaction(newKey, transaction);
   //m_transactionKeys.modify(transaction.id(), newKey);
 
@@ -663,7 +676,7 @@ void MyMoneyDatabaseMgr::modifyTransaction(const MyMoneyTransaction& transaction
 
 void MyMoneyDatabaseMgr::reparentAccount(MyMoneyAccount &account, MyMoneyAccount& parent)
 {
-  if(account.accountType() == MyMoneyAccount::Stock && parent.accountType() != MyMoneyAccount::Investment)
+  if (account.accountType() == MyMoneyAccount::Stock && parent.accountType() != MyMoneyAccount::Investment)
     throw new MYMONEYEXCEPTION("Cannot move a stock acocunt into a non-investment account");
 
   QStringList accountIdList;
@@ -677,14 +690,14 @@ void MyMoneyDatabaseMgr::reparentAccount(MyMoneyAccount &account, MyMoneyAccount
   MyMoneyDatabaseMgr::account(account.id());
   MyMoneyDatabaseMgr::account(parent.id());
 
-  if(!account.parentAccountId().isEmpty()) {
+  if (!account.parentAccountId().isEmpty()) {
     accountIdList << account.parentAccountId();
   }
 
   startTransaction();
   QMap<QString, MyMoneyAccount> accountList = m_sql->fetchAccounts(accountIdList, true);
 
-  if(!account.parentAccountId().isEmpty()) {
+  if (!account.parentAccountId().isEmpty()) {
     MyMoneyDatabaseMgr::account(account.parentAccountId());
     oldParent = accountList.constFind(account.parentAccountId());
   }
@@ -693,7 +706,7 @@ void MyMoneyDatabaseMgr::reparentAccount(MyMoneyAccount &account, MyMoneyAccount
   childAccount = accountList.constFind(account.id());
 
   MyMoneyAccount acc;
-  if(!account.parentAccountId().isEmpty()) {
+  if (!account.parentAccountId().isEmpty()) {
     acc = (*oldParent);
     acc.removeAccountId(account.id());
     m_sql->modifyAccount(acc);
@@ -715,7 +728,7 @@ void MyMoneyDatabaseMgr::removeTransaction(const MyMoneyTransaction& transaction
   QMap<QString, bool> modifiedAccounts;
 
   // first perform all the checks
-  if(transaction.id().isEmpty())
+  if (transaction.id().isEmpty())
     throw new MYMONEYEXCEPTION("invalid transaction to be deleted");
 
   QMap<QString, QString>::ConstIterator it_k;
@@ -728,7 +741,7 @@ void MyMoneyDatabaseMgr::removeTransaction(const MyMoneyTransaction& transaction
   QMap <QString, MyMoneyTransaction> transactionList = m_sql->fetchTransactions("('" + QString(transaction.id()) + "')");
 //  it_t = transactionList.find(*it_k);
   it_t = transactionList.constBegin();
-  if(it_t == transactionList.constEnd())
+  if (it_t == transactionList.constEnd())
     throw new MYMONEYEXCEPTION("invalid transaction key");
 
   QList<MyMoneySplit>::ConstIterator it_s;
@@ -736,7 +749,7 @@ void MyMoneyDatabaseMgr::removeTransaction(const MyMoneyTransaction& transaction
   // scan the splits and collect all accounts that need
   // to be updated after the removal of this transaction
   QMap<QString, MyMoneyAccount> accountList = m_sql->fetchAccounts();
-  for(it_s = (*it_t).splits().begin(); it_s != (*it_t).splits().end(); ++it_s) {
+  for (it_s = (*it_t).splits().begin(); it_s != (*it_t).splits().end(); ++it_s) {
     MyMoneyAccount acc = accountList[(*it_s).accountId()];
 //    modifiedAccounts[(*it_s).accountId()] = true;
     acc.adjustBalance((*it_s), true);
@@ -756,9 +769,12 @@ void MyMoneyDatabaseMgr::removeTransaction(const MyMoneyTransaction& transaction
 }
 
 unsigned int MyMoneyDatabaseMgr::transactionCount(const QString& account) const
-{ return (m_sql->transactionCount(account)); }
+{
+  return (m_sql->transactionCount(account));
+}
 
-const QMap<QString, unsigned long> MyMoneyDatabaseMgr::transactionCountMap(void) const {
+const QMap<QString, unsigned long> MyMoneyDatabaseMgr::transactionCountMap(void) const
+{
 
   QMap<QString, unsigned long> retval;
   QHash<QString, unsigned long> hash = m_sql->transactionCountMap();
@@ -797,10 +813,10 @@ void MyMoneyDatabaseMgr::transactionList(QList<QPair<MyMoneyTransaction, MyMoney
   QMap<QString, MyMoneyTransaction>::ConstIterator it_t;
   QMap<QString, MyMoneyTransaction>::ConstIterator txEnd = transactionList.end();
 
-  for(it_t = transactionList.begin(); it_t != txEnd; ++it_t) {
-    if(filter.match(*it_t)) {
+  for (it_t = transactionList.begin(); it_t != txEnd; ++it_t) {
+    if (filter.match(*it_t)) {
       QList<MyMoneySplit>::const_iterator it_s;
-      for(it_s = filter.matchingSplits().begin(); it_s != filter.matchingSplits().end(); ++it_s) {
+      for (it_s = filter.matchingSplits().begin(); it_s != filter.matchingSplits().end(); ++it_s) {
         list.append(qMakePair(*it_t, *it_s));
       }
     }
@@ -817,10 +833,10 @@ void MyMoneyDatabaseMgr::removeAccount(const MyMoneyAccount& account)
   parent = MyMoneyDatabaseMgr::account(account.parentAccountId());
 
   // check that it's not one of the standard account groups
-  if(isStandardAccount(account.id()))
+  if (isStandardAccount(account.id()))
     throw new MYMONEYEXCEPTION("Unable to remove the standard account groups");
 
-  if(hasActiveSplits(account.id())) {
+  if (hasActiveSplits(account.id())) {
     throw new MYMONEYEXCEPTION("Unable to remove account with active splits");
   }
 
@@ -828,7 +844,7 @@ void MyMoneyDatabaseMgr::removeAccount(const MyMoneyAccount& account)
   // to be deleted. First round check that all accounts exist, second
   // round do the re-parenting.
   QStringList::ConstIterator it;
-  for(it = account.accountList().begin(); it != account.accountList().end(); ++it) {
+  for (it = account.accountList().begin(); it != account.accountList().end(); ++it) {
     MyMoneyDatabaseMgr::account(*it);
   }
 
@@ -846,14 +862,14 @@ void MyMoneyDatabaseMgr::removeAccount(const MyMoneyAccount& account)
   // locate the account in the file global pool
 
   it_a = accountList.constFind(account.id());
-  if(it_a == accountList.constEnd())
+  if (it_a == accountList.constEnd())
     throw new MYMONEYEXCEPTION("Internal error: account not found in list");
 
   it_p = accountList.constFind(parent.id());
-  if(it_p == accountList.constEnd())
+  if (it_p == accountList.constEnd())
     throw new MYMONEYEXCEPTION("Internal error: parent account not found in list");
 
-  if(!account.institutionId().isEmpty())
+  if (!account.institutionId().isEmpty())
     throw new MYMONEYEXCEPTION("Cannot remove account still attached to an institution");
 
   // FIXME: check referential integrity for the account to be removed
@@ -861,14 +877,14 @@ void MyMoneyDatabaseMgr::removeAccount(const MyMoneyAccount& account)
   // check if the new info is based on the old one.
   // this is the case, when the file and the id
   // as well as the type are equal.
-  if((*it_a).id() == account.id()
-  && (*it_a).accountType() == account.accountType()) {
+  if ((*it_a).id() == account.id()
+      && (*it_a).accountType() == account.accountType()) {
 
     // second round over sub-ordinate accounts: do re-parenting
     // but only if the list contains at least one entry
     // FIXME: move this logic to MyMoneyFile
-    if((*it_a).accountList().count() > 0) {
-      for(it = (*it_a).accountList().begin(); it != (*it_a).accountList().end(); ++it) {
+    if ((*it_a).accountList().count() > 0) {
+      for (it = (*it_a).accountList().begin(); it != (*it_a).accountList().end(); ++it) {
         MyMoneyAccount acc(MyMoneyDatabaseMgr::account(*it));
         reparentAccount(acc, parent);//, false);
       }
@@ -895,7 +911,7 @@ void MyMoneyDatabaseMgr::removeInstitution(const MyMoneyInstitution& institution
   QMap<QString, MyMoneyInstitution>::ConstIterator it_i;
 
   it_i = institutionList.constFind(institution.id());
-  if(it_i != institutionList.constEnd()) {
+  if (it_i != institutionList.constEnd()) {
     // mark file as changed
     m_sql->removeInstitution(institution);
   } else
@@ -916,7 +932,7 @@ const MyMoneyTransaction MyMoneyDatabaseMgr::transaction(const QString& id) cons
   //there should only be one transaction in the map, if it was found, so check the size of the map
   //return the first element.
   //if(!transactionList.contains(key))
-  if(!transactionList.size())
+  if (!transactionList.size())
     throw new MYMONEYEXCEPTION("invalid transaction key");
 
   return transactionList.begin().value();
@@ -926,15 +942,15 @@ const MyMoneyMoney MyMoneyDatabaseMgr::balance(const QString& id, const QDate& d
 {
   QStringList idList;
   idList.append(id);
-  QMap<QString,MyMoneyMoney> tempMap = m_sql->fetchBalance(idList, date);
+  QMap<QString, MyMoneyMoney> tempMap = m_sql->fetchBalance(idList, date);
 
-  QMap<QString,MyMoneyMoney>::ConstIterator returnValue = tempMap.constFind(id);
+  QMap<QString, MyMoneyMoney>::ConstIterator returnValue = tempMap.constFind(id);
   if (returnValue != tempMap.constEnd()) {
     return returnValue.value();
   }
 
 //DEBUG
-  QDate date_ (date);
+  QDate date_(date);
   //if (date_ == QDate()) date_ = QDate::currentDate();
 // END DEBUG
 
@@ -942,13 +958,13 @@ const MyMoneyMoney MyMoneyDatabaseMgr::balance(const QString& id, const QDate& d
   MyMoneyAccount acc;
   QMap<QString, MyMoneyAccount> accountList = m_sql->fetchAccounts(/*QString(id)*/);
   //QMap<QString, MyMoneyAccount>::const_iterator accpos = accountList.find(id);
-  if (date_ != QDate()) qDebug ("request balance for %s at %s", qPrintable(id), qPrintable(date_.toString(Qt::ISODate)));
+  if (date_ != QDate()) qDebug("request balance for %s at %s", qPrintable(id), qPrintable(date_.toString(Qt::ISODate)));
 //  if(!date_.isValid() && MyMoneyFile::instance()->account(id).accountType() != MyMoneyAccount::Stock) {
 //    if(accountList.find(id) != accountList.end())
 //      return accountList[id].balance();
 //    return MyMoneyMoney(0);
 //  }
-  if(/*m_balanceCache[id].valid == false || date != m_balanceCacheDate) || */ m_sql) {
+  if (/*m_balanceCache[id].valid == false || date != m_balanceCacheDate) || */ m_sql) {
     QMap<QString, MyMoneyMoney> balances;
     QMap<QString, MyMoneyMoney>::ConstIterator it_b;
 //FIXME:    if (date != m_balanceCacheDate) {
@@ -967,10 +983,10 @@ const MyMoneyMoney MyMoneyDatabaseMgr::balance(const QString& id, const QDate& d
     QList<MyMoneyTransaction> list = transactionList(filter);
 
     txEnd = list.constEnd();
-    for(it_t = list.constBegin(); it_t != txEnd; ++it_t) {
-      for(it_s = (*it_t).splits().begin(); it_s != (*it_t).splits().end(); ++it_s){
+    for (it_t = list.constBegin(); it_t != txEnd; ++it_t) {
+      for (it_s = (*it_t).splits().begin(); it_s != (*it_t).splits().end(); ++it_s) {
         const QString aid = (*it_s).accountId();
-        if((*it_s).action() == MyMoneySplit::ActionSplitShares) {
+        if ((*it_s).action() == MyMoneySplit::ActionSplitShares) {
           balances[aid] = balances[aid] * (*it_s).shares();
         } else {
           balances[aid] += (*it_s).value((*it_t).commodity(), accountList[aid].currencyId());
@@ -995,7 +1011,7 @@ const MyMoneyMoney MyMoneyDatabaseMgr::balance(const QString& id, const QDate& d
 //      }
 //    }
 
-  result = balances[id];
+    result = balances[id];
 
   }
 
@@ -1009,35 +1025,35 @@ const MyMoneyMoney MyMoneyDatabaseMgr::balance(const QString& id, const QDate& d
 
 const MyMoneyTransaction MyMoneyDatabaseMgr::transaction(const QString& account, const int idx) const
 {
-/* removed with MyMoneyAccount::Transaction
-  QMap<QString, MyMoneyAccount>::ConstIterator acc;
+  /* removed with MyMoneyAccount::Transaction
+    QMap<QString, MyMoneyAccount>::ConstIterator acc;
 
-  // find account object in list, throw exception if unknown
-  acc = m_accountList.find(account);
-  if(acc == m_accountList.end())
-    throw new MYMONEYEXCEPTION("unknown account id");
+    // find account object in list, throw exception if unknown
+    acc = m_accountList.find(account);
+    if(acc == m_accountList.end())
+      throw new MYMONEYEXCEPTION("unknown account id");
 
-  // get the transaction info from the account
-  MyMoneyAccount::Transaction t = (*acc).transaction(idx);
+    // get the transaction info from the account
+    MyMoneyAccount::Transaction t = (*acc).transaction(idx);
 
-  // return the transaction, throw exception if not found
-  return transaction(t.transactionID());
-*/
+    // return the transaction, throw exception if not found
+    return transaction(t.transactionID());
+  */
 
   // new implementation if the above code does not work anymore
   QList<MyMoneyTransaction> list;
   //MyMoneyAccount acc = m_accountList[account];
-  MyMoneyAccount acc = m_sql->fetchAccounts(QStringList(account)) [account];
+  MyMoneyAccount acc = m_sql->fetchAccounts(QStringList(account))[account];
   MyMoneyTransactionFilter filter;
 
-  if(acc.accountGroup() == MyMoneyAccount::Income
-  || acc.accountGroup() == MyMoneyAccount::Expense)
+  if (acc.accountGroup() == MyMoneyAccount::Income
+      || acc.accountGroup() == MyMoneyAccount::Expense)
     filter.addCategory(account);
   else
     filter.addAccount(account);
 
   transactionList(list, filter);
-  if(idx < 0 || idx >= static_cast<int> (list.count()))
+  if (idx < 0 || idx >= static_cast<int>(list.count()))
     throw new MYMONEYEXCEPTION("Unknown idx for transaction");
 
   return transaction(list[idx].id());
@@ -1054,27 +1070,37 @@ void MyMoneyDatabaseMgr::accountList(QList<MyMoneyAccount>& list) const
   if (m_sql) accountList  = m_sql->fetchAccounts();
   QMap<QString, MyMoneyAccount>::ConstIterator it;
   QMap<QString, MyMoneyAccount>::ConstIterator accEnd = accountList.constEnd();
-  for(it = accountList.constBegin(); it != accEnd; ++it) {
-    if(!isStandardAccount((*it).id())) {
+  for (it = accountList.constBegin(); it != accEnd; ++it) {
+    if (!isStandardAccount((*it).id())) {
       list.append(*it);
     }
   }
 }
 
 const MyMoneyAccount MyMoneyDatabaseMgr::liability(void) const
-{ return MyMoneyFile::instance()->account(STD_ACC_LIABILITY); }
+{
+  return MyMoneyFile::instance()->account(STD_ACC_LIABILITY);
+}
 
 const MyMoneyAccount MyMoneyDatabaseMgr::asset(void) const
-{ return MyMoneyFile::instance()->account(STD_ACC_ASSET); }
+{
+  return MyMoneyFile::instance()->account(STD_ACC_ASSET);
+}
 
 const MyMoneyAccount MyMoneyDatabaseMgr::expense(void) const
-{ return MyMoneyFile::instance()->account(STD_ACC_EXPENSE); }
+{
+  return MyMoneyFile::instance()->account(STD_ACC_EXPENSE);
+}
 
 const MyMoneyAccount MyMoneyDatabaseMgr::income(void) const
-{ return MyMoneyFile::instance()->account(STD_ACC_INCOME); }
+{
+  return MyMoneyFile::instance()->account(STD_ACC_INCOME);
+}
 
 const MyMoneyAccount MyMoneyDatabaseMgr::equity(void) const
-{ return MyMoneyFile::instance()->account(STD_ACC_EQUITY); }
+{
+  return MyMoneyFile::instance()->account(STD_ACC_EQUITY);
+}
 
 void MyMoneyDatabaseMgr::addSecurity(MyMoneySecurity& security)
 {
@@ -1098,8 +1124,7 @@ void MyMoneyDatabaseMgr::modifySecurity(const MyMoneySecurity& security)
   QMap<QString, MyMoneySecurity>::ConstIterator it;
 
   it = securitiesList.constFind(security.id());
-  if(it == securitiesList.constEnd())
-  {
+  if (it == securitiesList.constEnd()) {
     QString msg = "Unknown security  '";
     msg += security.id() + "' during modifySecurity()";
     throw new MYMONEYEXCEPTION(msg);
@@ -1116,8 +1141,7 @@ void MyMoneyDatabaseMgr::removeSecurity(const MyMoneySecurity& security)
   // FIXME: check referential integrity
 
   it = securitiesList.constFind(security.id());
-  if(it == securitiesList.constEnd())
-  {
+  if (it == securitiesList.constEnd()) {
     QString msg = "Unknown security  '";
     msg += security.id() + "' during removeSecurity()";
     throw new MYMONEYEXCEPTION(msg);
@@ -1130,8 +1154,7 @@ const MyMoneySecurity MyMoneyDatabaseMgr::security(const QString& id) const
 {
   QMap<QString, MyMoneySecurity> securitiesList = m_sql->fetchSecurities(QStringList(id));
   QMap<QString, MyMoneySecurity>::ConstIterator it = securitiesList.constFind(id);
-  if(it != securitiesList.constEnd())
-  {
+  if (it != securitiesList.constEnd()) {
     return it.value();
   }
 
@@ -1139,7 +1162,9 @@ const MyMoneySecurity MyMoneyDatabaseMgr::security(const QString& id) const
 }
 
 const QList<MyMoneySecurity> MyMoneyDatabaseMgr::securityList(void) const
-{ return m_sql->fetchSecurities().values(); }
+{
+  return m_sql->fetchSecurities().values();
+}
 
 void MyMoneyDatabaseMgr::addPrice(const MyMoneyPrice& price)
 {
@@ -1147,9 +1172,9 @@ void MyMoneyDatabaseMgr::addPrice(const MyMoneyPrice& price)
   MyMoneyPriceList priceList = m_sql->fetchPrices();
   it = priceList[MyMoneySecurityPair(price.from(), price.to())].constFind(price.date());
   // do not replace, if the information did not change.
-  if(it != priceList[MyMoneySecurityPair(price.from(), price.to())].constEnd()) {
-    if((*it).rate((*it).to()) == price.rate(price.to())
-    && (*it).source() == price.source())
+  if (it != priceList[MyMoneySecurityPair(price.from(), price.to())].constEnd()) {
+    if ((*it).rate((*it).to()) == price.rate(price.to())
+        && (*it).source() == price.source())
       return;
   }
 
@@ -1167,12 +1192,14 @@ const MyMoneyPrice MyMoneyDatabaseMgr::price(const QString& fromId, const QStrin
 }
 
 const MyMoneyPriceList MyMoneyDatabaseMgr::priceList(void) const
-{ return m_sql->fetchPrices(); }
+{
+  return m_sql->fetchPrices();
+}
 
 void MyMoneyDatabaseMgr::addSchedule(MyMoneySchedule& sched)
 {
   // first perform all the checks
-  if(!sched.id().isEmpty())
+  if (!sched.id().isEmpty())
     throw new MYMONEYEXCEPTION("schedule already contains an id");
 
   // The following will throw an exception when it fails
@@ -1181,7 +1208,7 @@ void MyMoneyDatabaseMgr::addSchedule(MyMoneySchedule& sched)
   if (m_sql) {
     try {
       startTransaction();
-      sched = MyMoneySchedule (nextScheduleID(), sched);
+      sched = MyMoneySchedule(nextScheduleID(), sched);
 
       m_sql->addSchedule(sched);
       commitTransaction();
@@ -1198,7 +1225,7 @@ void MyMoneyDatabaseMgr::modifySchedule(const MyMoneySchedule& sched)
   QMap<QString, MyMoneySchedule>::ConstIterator it;
 
   it = scheduleList.constFind(sched.id());
-  if(it == scheduleList.constEnd()) {
+  if (it == scheduleList.constEnd()) {
     QString msg = "Unknown schedule '" + sched.id() + '\'';
     throw new MYMONEYEXCEPTION(msg);
   }
@@ -1212,7 +1239,7 @@ void MyMoneyDatabaseMgr::removeSchedule(const MyMoneySchedule& sched)
   QMap<QString, MyMoneySchedule>::ConstIterator it;
 
   it = scheduleList.constFind(sched.id());
-  if(it == scheduleList.constEnd()) {
+  if (it == scheduleList.constEnd()) {
     QString msg = "Unknown schedule '" + sched.id() + '\'';
     throw new MYMONEYEXCEPTION(msg);
   }
@@ -1229,7 +1256,7 @@ const MyMoneySchedule MyMoneyDatabaseMgr::schedule(const QString& id) const
 
   // locate the schedule and if present, return it's data
   pos = scheduleList.constFind(id);
-  if(pos != scheduleList.constEnd())
+  if (pos != scheduleList.constEnd())
     return (*pos);
 
   // throw an exception, if it does not exist
@@ -1238,12 +1265,12 @@ const MyMoneySchedule MyMoneyDatabaseMgr::schedule(const QString& id) const
 }
 
 const QList<MyMoneySchedule> MyMoneyDatabaseMgr::scheduleList(const QString& accountId,
-                                     const MyMoneySchedule::typeE type,
-                                     const MyMoneySchedule::occurrenceE occurrence,
-                                     const MyMoneySchedule::paymentTypeE paymentType,
-                                     const QDate& startDate,
-                                     const QDate& endDate,
-                                     const bool overdue) const
+    const MyMoneySchedule::typeE type,
+    const MyMoneySchedule::occurrenceE occurrence,
+    const MyMoneySchedule::paymentTypeE paymentType,
+    const QDate& startDate,
+    const QDate& endDate,
+    const bool overdue) const
 {
   QMap<QString, MyMoneySchedule> scheduleList;
   if (m_sql) scheduleList = m_sql->fetchSchedules();
@@ -1252,69 +1279,69 @@ const QList<MyMoneySchedule> MyMoneyDatabaseMgr::scheduleList(const QString& acc
 
   // qDebug("scheduleList()");
 
-  for(pos = scheduleList.constBegin(); pos != scheduleList.constEnd(); ++pos) {
+  for (pos = scheduleList.constBegin(); pos != scheduleList.constEnd(); ++pos) {
     // qDebug("  '%s'", (*pos).id().data());
 
-    if(type != MyMoneySchedule::TYPE_ANY) {
-      if(type != (*pos).type()) {
+    if (type != MyMoneySchedule::TYPE_ANY) {
+      if (type != (*pos).type()) {
         continue;
       }
     }
 
-    if(occurrence != MyMoneySchedule::OCCUR_ANY) {
-      if(occurrence != (*pos).occurrence()) {
+    if (occurrence != MyMoneySchedule::OCCUR_ANY) {
+      if (occurrence != (*pos).occurrence()) {
         continue;
       }
     }
 
-    if(paymentType != MyMoneySchedule::STYPE_ANY) {
-      if(paymentType != (*pos).paymentType()) {
+    if (paymentType != MyMoneySchedule::STYPE_ANY) {
+      if (paymentType != (*pos).paymentType()) {
         continue;
       }
     }
 
-    if(!accountId.isEmpty()) {
+    if (!accountId.isEmpty()) {
       MyMoneyTransaction t = (*pos).transaction();
       QList<MyMoneySplit>::ConstIterator it;
       QList<MyMoneySplit> splits;
       splits = t.splits();
-      for(it = splits.constBegin(); it != splits.constEnd(); ++it) {
-        if((*it).accountId() == accountId)
+      for (it = splits.constBegin(); it != splits.constEnd(); ++it) {
+        if ((*it).accountId() == accountId)
           break;
       }
-      if(it == splits.constEnd()) {
+      if (it == splits.constEnd()) {
         continue;
       }
     }
 
-    if(startDate.isValid() && endDate.isValid()) {
-      if((*pos).paymentDates(startDate, endDate).count() == 0) {
+    if (startDate.isValid() && endDate.isValid()) {
+      if ((*pos).paymentDates(startDate, endDate).count() == 0) {
         continue;
       }
     }
 
-    if(startDate.isValid() && !endDate.isValid()) {
-      if(!(*pos).nextPayment(startDate.addDays(-1)).isValid()) {
+    if (startDate.isValid() && !endDate.isValid()) {
+      if (!(*pos).nextPayment(startDate.addDays(-1)).isValid()) {
         continue;
       }
     }
 
-    if(!startDate.isValid() && endDate.isValid()) {
-      if((*pos).startDate() > endDate) {
+    if (!startDate.isValid() && endDate.isValid()) {
+      if ((*pos).startDate() > endDate) {
         continue;
       }
     }
 
-    if(overdue) {
+    if (overdue) {
       if (!(*pos).isOverdue())
         continue;
-/*
-      QDate nextPayment = (*pos).nextPayment((*pos).lastPayment());
-      if(!nextPayment.isValid())
-        continue;
-      if(nextPayment >= QDate::currentDate())
-        continue;
-*/
+      /*
+            QDate nextPayment = (*pos).nextPayment((*pos).lastPayment());
+            if(!nextPayment.isValid())
+              continue;
+            if(nextPayment >= QDate::currentDate())
+              continue;
+      */
     }
 
     // qDebug("Adding '%s'", (*pos).name().latin1());
@@ -1323,11 +1350,11 @@ const QList<MyMoneySchedule> MyMoneyDatabaseMgr::scheduleList(const QString& acc
   return list;
 }
 
-const QList<MyMoneySchedule> MyMoneyDatabaseMgr::scheduleListEx( int scheduleTypes,
-                                              int scheduleOcurrences,
-                                              int schedulePaymentTypes,
-                                              QDate startDate,
-                                              const QStringList& accounts) const
+const QList<MyMoneySchedule> MyMoneyDatabaseMgr::scheduleListEx(int scheduleTypes,
+    int scheduleOcurrences,
+    int schedulePaymentTypes,
+    QDate startDate,
+    const QStringList& accounts) const
 {
 //  qDebug("scheduleListEx");
   QMap<QString, MyMoneySchedule> scheduleList = m_sql->fetchSchedules();
@@ -1337,8 +1364,7 @@ const QList<MyMoneySchedule> MyMoneyDatabaseMgr::scheduleListEx( int scheduleTyp
   if (!startDate.isValid())
     return list;
 
-  for(pos = scheduleList.constBegin(); pos != scheduleList.constEnd(); ++pos)
-  {
+  for (pos = scheduleList.constBegin(); pos != scheduleList.constEnd(); ++pos) {
     if (scheduleTypes && !(scheduleTypes & (*pos).type()))
       continue;
 
@@ -1348,7 +1374,7 @@ const QList<MyMoneySchedule> MyMoneyDatabaseMgr::scheduleListEx( int scheduleTyp
     if (schedulePaymentTypes && !(schedulePaymentTypes & (*pos).paymentType()))
       continue;
 
-    if((*pos).paymentDates(startDate, startDate).count() == 0)
+    if ((*pos).paymentDates(startDate, startDate).count() == 0)
       continue;
 
     if ((*pos).isFinished())
@@ -1357,8 +1383,7 @@ const QList<MyMoneySchedule> MyMoneyDatabaseMgr::scheduleListEx( int scheduleTyp
     if ((*pos).hasRecordedPayment(startDate))
       continue;
 
-    if (accounts.count() > 0)
-    {
+    if (accounts.count() > 0) {
       if (accounts.contains((*pos).account().id()))
         continue;
     }
@@ -1377,7 +1402,7 @@ void MyMoneyDatabaseMgr::addCurrency(const MyMoneySecurity& currency)
     QMap<QString, MyMoneySecurity>::ConstIterator it;
 
     it = currencyList.constFind(currency.id());
-    if(it != currencyList.constEnd()) {
+    if (it != currencyList.constEnd()) {
       throw new MYMONEYEXCEPTION(QString("Cannot add currency with existing id %1").arg(currency.id()));
     }
 
@@ -1391,7 +1416,7 @@ void MyMoneyDatabaseMgr::modifyCurrency(const MyMoneySecurity& currency)
   QMap<QString, MyMoneySecurity>::ConstIterator it;
 
   it = currencyList.constFind(currency.id());
-  if(it == currencyList.constEnd()) {
+  if (it == currencyList.constEnd()) {
     throw new MYMONEYEXCEPTION(QString("Cannot modify currency with unknown id %1").arg(currency.id()));
   }
 
@@ -1406,7 +1431,7 @@ void MyMoneyDatabaseMgr::removeCurrency(const MyMoneySecurity& currency)
   // FIXME: check referential integrity
 
   it = currencyList.constFind(currency.id());
-  if(it == currencyList.constEnd()) {
+  if (it == currencyList.constEnd()) {
     throw new MYMONEYEXCEPTION(QString("Cannot remove currency with unknown id %1").arg(currency.id()));
   }
 
@@ -1415,14 +1440,14 @@ void MyMoneyDatabaseMgr::removeCurrency(const MyMoneySecurity& currency)
 
 const MyMoneySecurity MyMoneyDatabaseMgr::currency(const QString& id) const
 {
-  if(id.isEmpty()) {
+  if (id.isEmpty()) {
 
   }
   QMap<QString, MyMoneySecurity> currencyList = m_sql->fetchCurrencies(QStringList(id));
   QMap<QString, MyMoneySecurity>::ConstIterator it;
 
   it = currencyList.constFind(id);
-  if(it == currencyList.constEnd()) {
+  if (it == currencyList.constEnd()) {
     throw new MYMONEYEXCEPTION(QString("Cannot retrieve currency with unknown id '%1'").arg(id));
   }
 
@@ -1438,7 +1463,7 @@ const QList<MyMoneySecurity> MyMoneyDatabaseMgr::currencyList(void) const
   }
 }
 
-const QList<MyMoneyReport> MyMoneyDatabaseMgr::reportList( void ) const
+const QList<MyMoneyReport> MyMoneyDatabaseMgr::reportList(void) const
 {
   if (m_sql) {
     return m_sql->fetchReports().values();
@@ -1447,21 +1472,21 @@ const QList<MyMoneyReport> MyMoneyDatabaseMgr::reportList( void ) const
   }
 }
 
-void MyMoneyDatabaseMgr::addReport( MyMoneyReport& report )
+void MyMoneyDatabaseMgr::addReport(MyMoneyReport& report)
 {
-  if(!report.id().isEmpty())
+  if (!report.id().isEmpty())
     throw new MYMONEYEXCEPTION("transaction already contains an id");
 
-  m_sql->addReport(MyMoneyReport (nextReportID(), report));
+  m_sql->addReport(MyMoneyReport(nextReportID(), report));
 }
 
-void MyMoneyDatabaseMgr::modifyReport( const MyMoneyReport& report )
+void MyMoneyDatabaseMgr::modifyReport(const MyMoneyReport& report)
 {
   QMap<QString, MyMoneyReport> reportList = m_sql->fetchReports(QStringList(report.id()));
   QMap<QString, MyMoneyReport>::ConstIterator it;
 
   it = reportList.constFind(report.id());
-  if(it == reportList.constEnd()) {
+  if (it == reportList.constEnd()) {
     QString msg = "Unknown report '" + report.id() + '\'';
     throw new MYMONEYEXCEPTION(msg);
   }
@@ -1469,12 +1494,12 @@ void MyMoneyDatabaseMgr::modifyReport( const MyMoneyReport& report )
   m_sql->modifyReport(report);
 }
 
-unsigned MyMoneyDatabaseMgr::countReports( void ) const
+unsigned MyMoneyDatabaseMgr::countReports(void) const
 {
   return m_sql->getRecCount("kmmReports");
 }
 
-const MyMoneyReport MyMoneyDatabaseMgr::report( const QString& id ) const
+const MyMoneyReport MyMoneyDatabaseMgr::report(const QString& id) const
 {
   return m_sql->fetchReports(QStringList(id))[id];
 }
@@ -1485,7 +1510,7 @@ void MyMoneyDatabaseMgr::removeReport(const MyMoneyReport& report)
   QMap<QString, MyMoneyReport>::ConstIterator it;
 
   it = reportList.constFind(report.id());
-  if(it == reportList.constEnd()) {
+  if (it == reportList.constEnd()) {
     QString msg = "Unknown report '" + report.id() + '\'';
     throw new MYMONEYEXCEPTION(msg);
   }
@@ -1493,12 +1518,12 @@ void MyMoneyDatabaseMgr::removeReport(const MyMoneyReport& report)
   m_sql->removeReport(report);
 }
 
-const QList<MyMoneyBudget> MyMoneyDatabaseMgr::budgetList( void ) const
+const QList<MyMoneyBudget> MyMoneyDatabaseMgr::budgetList(void) const
 {
   return m_sql->fetchBudgets().values();
 }
 
-void MyMoneyDatabaseMgr::addBudget( MyMoneyBudget& budget )
+void MyMoneyDatabaseMgr::addBudget(MyMoneyBudget& budget)
 {
   MyMoneyBudget newBudget(nextBudgetID(), budget);
   m_sql->addBudget(newBudget);
@@ -1509,8 +1534,8 @@ const MyMoneyBudget MyMoneyDatabaseMgr::budgetByName(const QString& budget) cons
   QMap<QString, MyMoneyBudget> budgets = m_sql->fetchBudgets();
   QMap<QString, MyMoneyBudget>::ConstIterator it_p;
 
-  for(it_p = budgets.constBegin(); it_p != budgets.constEnd(); ++it_p) {
-    if((*it_p).name() == budget) {
+  for (it_p = budgets.constBegin(); it_p != budgets.constEnd(); ++it_p) {
+    if ((*it_p).name() == budget) {
       return *it_p;
     }
   }
@@ -1518,7 +1543,7 @@ const MyMoneyBudget MyMoneyDatabaseMgr::budgetByName(const QString& budget) cons
   throw new MYMONEYEXCEPTION("Unknown budget '" + budget + '\'');
 }
 
-void MyMoneyDatabaseMgr::modifyBudget( const MyMoneyBudget& budget )
+void MyMoneyDatabaseMgr::modifyBudget(const MyMoneyBudget& budget)
 {
   //QMap<QString, MyMoneyBudget>::ConstIterator it;
 
@@ -1538,14 +1563,14 @@ void MyMoneyDatabaseMgr::modifyBudget( const MyMoneyBudget& budget )
   commitTransaction();
 }
 
-unsigned MyMoneyDatabaseMgr::countBudgets( void ) const
+unsigned MyMoneyDatabaseMgr::countBudgets(void) const
 {
   return m_sql->getRecCount("kmmBudgetConfig");
 }
 
-MyMoneyBudget MyMoneyDatabaseMgr::budget( const QString& id ) const
+MyMoneyBudget MyMoneyDatabaseMgr::budget(const QString& id) const
 {
-  return m_sql->fetchBudgets(QStringList(id)) [id];
+  return m_sql->fetchBudgets(QStringList(id))[id];
 }
 
 void MyMoneyDatabaseMgr::removeBudget(const MyMoneyBudget& budget)
@@ -1566,17 +1591,18 @@ void MyMoneyDatabaseMgr::clearCache(void)
   //m_balanceCache.clear();
 }
 
-class isReferencedHelper {
-  public:
-    isReferencedHelper(const QString& id)
-      : m_id (id)
-    {}
+class isReferencedHelper
+{
+public:
+  isReferencedHelper(const QString& id)
+      : m_id(id) {}
 
-    inline bool operator() (const MyMoneyObject& obj) const
-    { return obj.hasReferenceTo(m_id); }
+  inline bool operator()(const MyMoneyObject& obj) const {
+    return obj.hasReferenceTo(m_id);
+  }
 
-  private:
-    QString m_id;
+private:
+  QString m_id;
 };
 
 bool MyMoneyDatabaseMgr::isReferenced(const MyMoneyObject& obj, const MyMoneyFileBitArray& skipCheck) const
@@ -1593,7 +1619,7 @@ bool MyMoneyDatabaseMgr::isReferenced(const MyMoneyObject& obj, const MyMoneyFil
   //       could optimize the number of objects we check for references
 
   // Scan all engine objects for a reference
-  if(!skipCheck[RefCheckTransaction]) {
+  if (!skipCheck[RefCheckTransaction]) {
     bool skipTransactions = false;
     MyMoneyTransactionFilter f;
     if (typeid(obj) == typeid(MyMoneyAccount)) {
@@ -1617,54 +1643,55 @@ bool MyMoneyDatabaseMgr::isReferenced(const MyMoneyObject& obj, const MyMoneyFil
     }
   }
 
-  if(!skipCheck[RefCheckAccount] && !rc) {
+  if (!skipCheck[RefCheckAccount] && !rc) {
     QList<MyMoneyAccount> accountList;
     MyMoneyFile::instance()->accountList(accountList);
     rc = (accountList.end() != std::find_if(accountList.begin(), accountList.end(),  isReferencedHelper(id)));
   }
-  if(!skipCheck[RefCheckInstitution] && !rc) {
+  if (!skipCheck[RefCheckInstitution] && !rc) {
     QList<MyMoneyInstitution> institutionList;
     MyMoneyFile::instance()->institutionList(institutionList);
     rc = (institutionList.end() != std::find_if(institutionList.begin(), institutionList.end(),  isReferencedHelper(id)));
   }
-  if(!skipCheck[RefCheckPayee] && !rc) {
+  if (!skipCheck[RefCheckPayee] && !rc) {
     QList<MyMoneyPayee> payeeList = MyMoneyFile::instance()->payeeList();
     rc = (payeeList.end() != std::find_if(payeeList.begin(), payeeList.end(),  isReferencedHelper(id)));
   }
-  if(!skipCheck[RefCheckReport] && !rc) {
+  if (!skipCheck[RefCheckReport] && !rc) {
     QMap<QString, MyMoneyReport> reportList = m_sql->fetchReports();
     rc = (reportList.end() != std::find_if(reportList.begin(), reportList.end(),  isReferencedHelper(id)));
   }
-  if(!skipCheck[RefCheckBudget] && !rc) {
+  if (!skipCheck[RefCheckBudget] && !rc) {
     QMap<QString, MyMoneyBudget> budgets = m_sql->fetchBudgets();
     rc = (budgets.end() != std::find_if(budgets.begin(), budgets.end(),  isReferencedHelper(id)));
   }
-  if(!skipCheck[RefCheckSchedule] && !rc) {
+  if (!skipCheck[RefCheckSchedule] && !rc) {
     QMap<QString, MyMoneySchedule> scheduleList = m_sql->fetchSchedules();
     rc = (scheduleList.end() != std::find_if(scheduleList.begin(), scheduleList.end(),  isReferencedHelper(id)));
   }
-  if(!skipCheck[RefCheckSecurity] && !rc) {
+  if (!skipCheck[RefCheckSecurity] && !rc) {
     QList<MyMoneySecurity> securitiesList = MyMoneyFile::instance()->securityList();
     rc = (securitiesList.end() != std::find_if(securitiesList.begin(), securitiesList.end(),  isReferencedHelper(id)));
   }
-  if(!skipCheck[RefCheckCurrency] && !rc) {
+  if (!skipCheck[RefCheckCurrency] && !rc) {
     QList<MyMoneySecurity> currencyList = m_sql->fetchCurrencies().values();
     rc = (currencyList.end() != std::find_if(currencyList.begin(), currencyList.end(),  isReferencedHelper(id)));
   }
   // within the pricelist we don't have to scan each entry. Checking the QPair
   // members of the MyMoneySecurityPair is enough as they are identical to the
   // two security ids
-  if(!skipCheck[RefCheckPrice] && !rc) {
+  if (!skipCheck[RefCheckPrice] && !rc) {
     MyMoneyPriceList priceList = m_sql->fetchPrices();
     priceEnd = priceList.constEnd();
-    for(it_pr = priceList.constBegin(); !rc && it_pr != priceEnd; ++it_pr) {
+    for (it_pr = priceList.constBegin(); !rc && it_pr != priceEnd; ++it_pr) {
       rc = (it_pr.key().first == id) || (it_pr.key().second == id);
     }
   }
   return rc;
 }
 
-void MyMoneyDatabaseMgr::close(void) {
+void MyMoneyDatabaseMgr::close(void)
+{
   if (m_sql) {
     m_sql->close(true);
     m_sql = 0;
@@ -1672,31 +1699,42 @@ void MyMoneyDatabaseMgr::close(void) {
 }
 
 void MyMoneyDatabaseMgr::startTransaction(void)
-{ if (m_sql) m_sql->startCommitUnit ("databasetransaction"); }
+{
+  if (m_sql) m_sql->startCommitUnit("databasetransaction");
+}
 
 bool MyMoneyDatabaseMgr::commitTransaction(void)
 {
   if (m_sql)
-    return m_sql->endCommitUnit ("databasetransaction");
+    return m_sql->endCommitUnit("databasetransaction");
   return false;
 }
 
 void MyMoneyDatabaseMgr::rollbackTransaction(void)
-{ if (m_sql) m_sql->cancelCommitUnit ("databasetransaction"); }
+{
+  if (m_sql) m_sql->cancelCommitUnit("databasetransaction");
+}
 
 void MyMoneyDatabaseMgr::setCreationDate(const QDate& val)
-{ m_creationDate = val; }
+{
+  m_creationDate = val;
+}
 
-KSharedPtr <MyMoneyStorageSql> MyMoneyDatabaseMgr::connectToDatabase(const KUrl& url) {
-  m_sql = new MyMoneyStorageSql (this, url);
+KSharedPtr <MyMoneyStorageSql> MyMoneyDatabaseMgr::connectToDatabase(const KUrl& url)
+{
+  m_sql = new MyMoneyStorageSql(this, url);
   return m_sql;
 }
 
- void MyMoneyDatabaseMgr::fillStorage()
-{ m_sql->fillStorage(); }
+void MyMoneyDatabaseMgr::fillStorage()
+{
+  m_sql->fillStorage();
+}
 
 void MyMoneyDatabaseMgr::setLastModificationDate(const QDate& val)
-{ m_lastModificationDate = val; }
+{
+  m_lastModificationDate = val;
+}
 
 bool MyMoneyDatabaseMgr::isDuplicateTransaction(const QString& /*id*/) const
 {
@@ -1772,7 +1810,7 @@ void MyMoneyDatabaseMgr::loadCurrencies(const QMap<QString, MyMoneySecurity>& /*
 // on error, rollbackTransaction
 }
 
-void MyMoneyDatabaseMgr::loadReports( const QMap<QString, MyMoneyReport>& /*reports*/ )
+void MyMoneyDatabaseMgr::loadReports(const QMap<QString, MyMoneyReport>& /*reports*/)
 {
 //  m_reportList = reports;
 //FIXME: update the database.
@@ -1784,7 +1822,7 @@ void MyMoneyDatabaseMgr::loadReports( const QMap<QString, MyMoneyReport>& /*repo
 // on error, rollbackTransaction
 }
 
-void MyMoneyDatabaseMgr::loadBudgets( const QMap<QString, MyMoneyBudget>& /*budgets*/ )
+void MyMoneyDatabaseMgr::loadBudgets(const QMap<QString, MyMoneyBudget>& /*budgets*/)
 {
 //  m_budgetList = budgets;
 //FIXME: update the database.
@@ -1802,28 +1840,44 @@ void MyMoneyDatabaseMgr::loadPrices(const MyMoneyPriceList& list)
 }
 
 unsigned long MyMoneyDatabaseMgr::accountId(void) const
-{ return m_sql->getNextAccountId(); }
+{
+  return m_sql->getNextAccountId();
+}
 
 unsigned long MyMoneyDatabaseMgr::transactionId(void) const
-{ return m_sql->getNextTransactionId(); }
+{
+  return m_sql->getNextTransactionId();
+}
 
 unsigned long MyMoneyDatabaseMgr::payeeId(void) const
-{ return m_sql->getNextPayeeId(); }
+{
+  return m_sql->getNextPayeeId();
+}
 
 unsigned long MyMoneyDatabaseMgr::institutionId(void) const
-{ return m_sql->getNextInstitutionId(); }
+{
+  return m_sql->getNextInstitutionId();
+}
 
 unsigned long MyMoneyDatabaseMgr::scheduleId(void) const
-{ return m_sql->getNextScheduleId(); }
+{
+  return m_sql->getNextScheduleId();
+}
 
 unsigned long MyMoneyDatabaseMgr::securityId(void) const
-{ return m_sql->getNextSecurityId(); }
+{
+  return m_sql->getNextSecurityId();
+}
 
 unsigned long MyMoneyDatabaseMgr::reportId(void) const
-{ return m_sql->getNextReportId(); }
+{
+  return m_sql->getNextReportId();
+}
 
 unsigned long MyMoneyDatabaseMgr::budgetId(void) const
-{ return m_sql->getNextBudgetId(); }
+{
+  return m_sql->getNextBudgetId();
+}
 
 void MyMoneyDatabaseMgr::loadAccountId(const unsigned long id)
 {
@@ -1873,12 +1927,12 @@ void MyMoneyDatabaseMgr::rebuildAccountBalances(void)
   QMap<QString, MyMoneyMoney> balanceMap = m_sql->fetchBalance(accountMap.keys(), QDate());
 
   for (QMap<QString, MyMoneyMoney>::const_iterator it_b = balanceMap.constBegin();
-         it_b != balanceMap.constEnd(); ++it_b) {
+       it_b != balanceMap.constEnd(); ++it_b) {
     accountMap[it_b.key()].setBalance(it_b.value());
   }
 
   for (QMap<QString, MyMoneyAccount>::const_iterator it_a = accountMap.constBegin();
-         it_a != accountMap.constEnd(); ++it_a) {
+       it_a != accountMap.constEnd(); ++it_a) {
     m_sql->modifyAccount(it_a.value());
   }
   commitTransaction();
@@ -1891,7 +1945,7 @@ void MyMoneyDatabaseMgr::removeReferences(const QString& id)
 
   // remove from reports
   QMap<QString, MyMoneyReport> reportList = m_sql->fetchReports();
-  for(it_r = reportList.constBegin(); it_r != reportList.constEnd(); ++it_r) {
+  for (it_r = reportList.constBegin(); it_r != reportList.constEnd(); ++it_r) {
     MyMoneyReport r = *it_r;
     r.removeReference(id);
 //    reportList.modify(r.id(), r);
@@ -1899,7 +1953,7 @@ void MyMoneyDatabaseMgr::removeReferences(const QString& id)
 
   // remove from budgets
   QMap<QString, MyMoneyBudget> budgetList = m_sql->fetchBudgets();
-  for(it_b = budgetList.constBegin(); it_b != budgetList.constEnd(); ++it_b) {
+  for (it_b = budgetList.constBegin(); it_b != budgetList.constEnd(); ++it_b) {
     MyMoneyBudget b = *it_b;
     b.removeReference(id);
 //    budgetList.modify(b.id(), b);

@@ -25,14 +25,14 @@ class QString;
 
 class KMMSchedulesToiCalendar
 {
-  public:
-    KMMSchedulesToiCalendar();
-    ~KMMSchedulesToiCalendar();
-    void exportToFile(const QString& file, bool settingsChaged = false);
+public:
+  KMMSchedulesToiCalendar();
+  ~KMMSchedulesToiCalendar();
+  void exportToFile(const QString& file, bool settingsChaged = false);
 
-  private:
-    struct Private;
-    Private *d;
+private:
+  struct Private;
+  Private *d;
 };
 
 #endif // __SCHEDULESTOICALENDAR_H__

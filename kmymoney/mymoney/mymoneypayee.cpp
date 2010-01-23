@@ -31,27 +31,27 @@
 MyMoneyPayee MyMoneyPayee::null;
 
 MyMoneyPayee::MyMoneyPayee() :
-  m_matchingEnabled(false),
-  m_usingMatchKey(false),
-  m_matchKeyIgnoreCase(true)
+    m_matchingEnabled(false),
+    m_usingMatchKey(false),
+    m_matchKeyIgnoreCase(true)
 {
 }
 
 MyMoneyPayee::MyMoneyPayee(const QString& id, const MyMoneyPayee& payee) :
-  m_matchingEnabled(false),
-  m_usingMatchKey(false),
-  m_matchKeyIgnoreCase(true)
+    m_matchingEnabled(false),
+    m_usingMatchKey(false),
+    m_matchKeyIgnoreCase(true)
 {
   *this = payee;
   m_id = id;
 }
 
 MyMoneyPayee::MyMoneyPayee(const QString& name, const QString& address,
-        const QString& city, const QString& state, const QString& postcode,
-        const QString& telephone, const QString& email) :
-  m_matchingEnabled(false),
-  m_usingMatchKey(false),
-  m_matchKeyIgnoreCase(true)
+                           const QString& city, const QString& state, const QString& postcode,
+                           const QString& telephone, const QString& email) :
+    m_matchingEnabled(false),
+    m_usingMatchKey(false),
+    m_matchKeyIgnoreCase(true)
 {
   m_name      = name;
   m_address   = address;
@@ -63,7 +63,7 @@ MyMoneyPayee::MyMoneyPayee(const QString& name, const QString& address,
 }
 
 MyMoneyPayee::MyMoneyPayee(const QDomElement& node) :
-  MyMoneyObject(node)
+    MyMoneyObject(node)
 {
   if ("PAYEE" != node.tagName()) {
     throw new MYMONEYEXCEPTION("Node was not PAYEE");
@@ -73,15 +73,14 @@ MyMoneyPayee::MyMoneyPayee(const QDomElement& node) :
   m_reference = node.attribute("reference");
   m_email = node.attribute("email");
 
-  m_matchingEnabled = node.attribute("matchingenabled","0").toUInt();
-  if ( m_matchingEnabled )
-  {
-    m_usingMatchKey = node.attribute("usingmatchkey","0").toUInt();
-    m_matchKeyIgnoreCase = node.attribute("matchignorecase","0").toUInt();
+  m_matchingEnabled = node.attribute("matchingenabled", "0").toUInt();
+  if (m_matchingEnabled) {
+    m_usingMatchKey = node.attribute("usingmatchkey", "0").toUInt();
+    m_matchKeyIgnoreCase = node.attribute("matchignorecase", "0").toUInt();
     m_matchKey = node.attribute("matchkey");
   }
 
-  if(node.hasAttribute("notes")) {
+  if (node.hasAttribute("notes")) {
     m_notes = node.attribute("notes");
   }
 
@@ -90,7 +89,7 @@ MyMoneyPayee::MyMoneyPayee(const QDomElement& node) :
   }
 
   QDomNodeList nodeList = node.elementsByTagName("ADDRESS");
-  if(nodeList.count() == 0) {
+  if (nodeList.count() == 0) {
     QString msg = QString("No ADDRESS in payee %1").arg(m_name);
     throw new MYMONEYEXCEPTION(msg);
   }
@@ -108,7 +107,7 @@ MyMoneyPayee::~MyMoneyPayee()
 }
 
 MyMoneyPayee::MyMoneyPayee(const MyMoneyPayee& right) :
-  MyMoneyObject(right)
+    MyMoneyObject(right)
 {
   *this = right;
 }
@@ -116,19 +115,19 @@ MyMoneyPayee::MyMoneyPayee(const MyMoneyPayee& right) :
 bool MyMoneyPayee::operator == (const MyMoneyPayee& right) const
 {
   return (MyMoneyObject::operator==(right) &&
-      ((m_name.length() == 0 && right.m_name.length() == 0) || (m_name == right.m_name)) &&
-      ((m_address.length() == 0 && right.m_address.length() == 0) || (m_address == right.m_address)) &&
-      ((m_city.length() == 0 && right.m_city.length() == 0) || (m_city == right.m_city)) &&
-      ((m_state.length() == 0 && right.m_state.length() == 0) || (m_state == right.m_state)) &&
-      ((m_postcode.length() == 0 && right.m_postcode.length() == 0) || (m_postcode == right.m_postcode)) &&
-      ((m_telephone.length() == 0 && right.m_telephone.length() == 0) || (m_telephone == right.m_telephone)) &&
-      ((m_email.length() == 0 && right.m_email.length() == 0) || (m_email == right.m_email)) &&
-      (m_matchingEnabled == right.m_matchingEnabled) &&
-      (m_usingMatchKey == right.m_usingMatchKey) &&
-      (m_matchKeyIgnoreCase == right.m_matchKeyIgnoreCase) &&
-      ((m_matchKey.length() == 0 && right.m_matchKey.length() == 0) || m_matchKey == right.m_matchKey) &&
-      ((m_reference.length() == 0 && right.m_reference.length() == 0) || (m_reference == right.m_reference)) &&
-      ((m_defaultAccountId.length() == 0 && right.m_defaultAccountId.length() == 0) || m_defaultAccountId == right.m_defaultAccountId) );
+          ((m_name.length() == 0 && right.m_name.length() == 0) || (m_name == right.m_name)) &&
+          ((m_address.length() == 0 && right.m_address.length() == 0) || (m_address == right.m_address)) &&
+          ((m_city.length() == 0 && right.m_city.length() == 0) || (m_city == right.m_city)) &&
+          ((m_state.length() == 0 && right.m_state.length() == 0) || (m_state == right.m_state)) &&
+          ((m_postcode.length() == 0 && right.m_postcode.length() == 0) || (m_postcode == right.m_postcode)) &&
+          ((m_telephone.length() == 0 && right.m_telephone.length() == 0) || (m_telephone == right.m_telephone)) &&
+          ((m_email.length() == 0 && right.m_email.length() == 0) || (m_email == right.m_email)) &&
+          (m_matchingEnabled == right.m_matchingEnabled) &&
+          (m_usingMatchKey == right.m_usingMatchKey) &&
+          (m_matchKeyIgnoreCase == right.m_matchKeyIgnoreCase) &&
+          ((m_matchKey.length() == 0 && right.m_matchKey.length() == 0) || m_matchKey == right.m_matchKey) &&
+          ((m_reference.length() == 0 && right.m_reference.length() == 0) || (m_reference == right.m_reference)) &&
+          ((m_defaultAccountId.length() == 0 && right.m_defaultAccountId.length() == 0) || m_defaultAccountId == right.m_defaultAccountId));
 }
 
 bool MyMoneyPayee::operator < (const MyMoneyPayee& right) const
@@ -145,12 +144,11 @@ void MyMoneyPayee::writeXML(QDomDocument& document, QDomElement& parent) const
   el.setAttribute("name", m_name);
   el.setAttribute("reference", m_reference);
   el.setAttribute("email", m_email);
-  if(!m_notes.isEmpty())
+  if (!m_notes.isEmpty())
     el.setAttribute("notes", m_notes);
 
   el.setAttribute("matchingenabled", m_matchingEnabled);
-  if ( m_matchingEnabled )
-  {
+  if (m_matchingEnabled) {
     el.setAttribute("usingmatchkey", m_usingMatchKey);
     el.setAttribute("matchignorecase", m_matchKeyIgnoreCase);
     el.setAttribute("matchkey", m_matchKey);
@@ -184,10 +182,9 @@ MyMoneyPayee::payeeMatchType MyMoneyPayee::matchData(bool& ignorecase, QStringLi
   keys.clear();
   ignorecase = m_matchKeyIgnoreCase;
 
-  if ( m_matchingEnabled )
-  {
+  if (m_matchingEnabled) {
     type = m_usingMatchKey ? matchKey : matchName;
-    if(type == matchKey)
+    if (type == matchKey)
       keys = m_matchKey.split(';');
   }
 
@@ -208,10 +205,9 @@ void MyMoneyPayee::setMatchData(payeeMatchType type, bool ignorecase, const QStr
   m_matchKeyIgnoreCase = ignorecase;
   m_matchKey.clear();
 
-  if ( m_matchingEnabled )
-  {
+  if (m_matchingEnabled) {
     m_usingMatchKey = (type == matchKey);
-    if ( m_usingMatchKey ) {
+    if (m_usingMatchKey) {
       m_matchKey = keys.join(";");
     }
   }

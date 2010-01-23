@@ -38,12 +38,12 @@
 const QStringList kAccountTypeTxt = QString("none,checkings,savings,investment,creditcard,invalid").split(',');
 const QStringList kActionText = QString("none,buy,sell,reinvestdividend,cashdividend,add,remove,stocksplit,fees,interest,invalid").split(',');
 
-void MyMoneyStatement::write(QDomElement& _root,QDomDocument* _doc) const
+void MyMoneyStatement::write(QDomElement& _root, QDomDocument* _doc) const
 {
   QDomElement e = _doc->createElement("STATEMENT");
   _root.appendChild(e);
 
-  e.setAttribute("version","1.1");
+  e.setAttribute("version", "1.1");
   e.setAttribute("accountname", m_strAccountName);
   e.setAttribute("accountnumber", m_strAccountNumber);
   e.setAttribute("routingnumber", m_strRoutingNumber);
@@ -57,8 +57,7 @@ void MyMoneyStatement::write(QDomElement& _root,QDomDocument* _doc) const
 
   // iterate over transactions, and add each one
   QList<Transaction>::const_iterator it_t = m_listTransactions.begin();
-  while ( it_t != m_listTransactions.end() )
-  {
+  while (it_t != m_listTransactions.end()) {
     QDomElement p = _doc->createElement("TRANSACTION");
     p.setAttribute("dateposted", (*it_t).m_datePosted.toString(Qt::ISODate));
     p.setAttribute("payee", (*it_t).m_strPayee);
@@ -69,8 +68,7 @@ void MyMoneyStatement::write(QDomElement& _root,QDomDocument* _doc) const
     p.setAttribute("reconcile", (*it_t).m_reconcile);
     p.setAttribute("action", kActionText[(*it_t).m_eAction]);
 
-    if (m_eType == etInvestment)
-    {
+    if (m_eType == etInvestment) {
       p.setAttribute("shares", (*it_t).m_shares.toString());
       p.setAttribute("security", (*it_t).m_strSecurity);
       p.setAttribute("brokerageaccount", (*it_t).m_strBrokerageAccount);
@@ -78,7 +76,7 @@ void MyMoneyStatement::write(QDomElement& _root,QDomDocument* _doc) const
 
     // add all the splits we know of (might be empty)
     QList<Split>::const_iterator it_s;
-    for(it_s = (*it_t).m_listSplits.begin(); it_s != (*it_t).m_listSplits.end(); ++it_s) {
+    for (it_s = (*it_t).m_listSplits.begin(); it_s != (*it_t).m_listSplits.end(); ++it_s) {
       QDomElement split = _doc->createElement("SPLIT");
       split.setAttribute("accountid", (*it_s).m_accountId);
       split.setAttribute("amount", (*it_s).m_amount.toString());
@@ -96,8 +94,7 @@ void MyMoneyStatement::write(QDomElement& _root,QDomDocument* _doc) const
 
   // iterate over prices, and add each one
   QList<Price>::const_iterator it_p = m_listPrices.begin();
-  while ( it_p != m_listPrices.end() )
-  {
+  while (it_p != m_listPrices.end()) {
     QDomElement p = _doc->createElement("PRICE");
     p.setAttribute("dateposted", (*it_p).m_date.toString(Qt::ISODate));
     p.setAttribute("security", (*it_p).m_strSecurity);
@@ -110,8 +107,7 @@ void MyMoneyStatement::write(QDomElement& _root,QDomDocument* _doc) const
 
   // iterate over securities, and add each one
   QList<Security>::const_iterator it_s = m_listSecurities.begin();
-  while ( it_s != m_listSecurities.end() )
-  {
+  while (it_s != m_listSecurities.end()) {
     QDomElement p = _doc->createElement("SECURITY");
     p.setAttribute("name", (*it_s).m_strName);
     p.setAttribute("symbol", (*it_s).m_strSymbol);
@@ -128,46 +124,42 @@ bool MyMoneyStatement::read(const QDomElement& _e)
 {
   bool result = false;
 
-  if ( _e.tagName() == "STATEMENT" )
-  {
+  if (_e.tagName() == "STATEMENT") {
     result = true;
 
     m_strAccountName = _e.attribute("accountname");
     m_strAccountNumber = _e.attribute("accountnumber");
     m_strRoutingNumber = _e.attribute("routingnumber");
     m_strCurrency = _e.attribute("currency");
-    m_dateBegin = QDate::fromString(_e.attribute("begindate"),Qt::ISODate);
-    m_dateEnd = QDate::fromString(_e.attribute("enddate"),Qt::ISODate);
+    m_dateBegin = QDate::fromString(_e.attribute("begindate"), Qt::ISODate);
+    m_dateEnd = QDate::fromString(_e.attribute("enddate"), Qt::ISODate);
     m_closingBalance = MyMoneyMoney(_e.attribute("closingbalance"));
     m_accountId = _e.attribute("accountid");
     m_skipCategoryMatching = _e.attribute("skipCategoryMatching").isEmpty();
 
-    int i = kAccountTypeTxt.indexOf(_e.attribute("type",kAccountTypeTxt[1]));
-    if ( i != -1 )
+    int i = kAccountTypeTxt.indexOf(_e.attribute("type", kAccountTypeTxt[1]));
+    if (i != -1)
       m_eType = static_cast<EType>(i);
 
     QDomNode child = _e.firstChild();
-    while(!child.isNull() && child.isElement())
-    {
+    while (!child.isNull() && child.isElement()) {
       QDomElement c = child.toElement();
 
-      if ( c.tagName() == "TRANSACTION" )
-      {
+      if (c.tagName() == "TRANSACTION") {
         MyMoneyStatement::Transaction t;
 
-        t.m_datePosted = QDate::fromString(c.attribute("dateposted"),Qt::ISODate);
+        t.m_datePosted = QDate::fromString(c.attribute("dateposted"), Qt::ISODate);
         t.m_amount = MyMoneyMoney(c.attribute("amount"));
         t.m_strMemo = c.attribute("memo");
         t.m_strNumber = c.attribute("number");
         t.m_strPayee = c.attribute("payee");
         t.m_strBankID = c.attribute("bankid");
         t.m_reconcile = static_cast<MyMoneySplit::reconcileFlagE>(c.attribute("reconcile").toInt());
-        int i = kActionText.indexOf(c.attribute("action",kActionText[1]));
-        if ( i != -1 )
+        int i = kActionText.indexOf(c.attribute("action", kActionText[1]));
+        if (i != -1)
           t.m_eAction = static_cast<Transaction::EAction>(i);
 
-        if (m_eType == etInvestment)
-        {
+        if (m_eType == etInvestment) {
           t.m_shares = MyMoneyMoney(c.attribute("shares"));
           t.m_strSecurity = c.attribute("security");
           t.m_strBrokerageAccount = c.attribute("brokerageaccount");
@@ -175,9 +167,9 @@ bool MyMoneyStatement::read(const QDomElement& _e)
 
         // process splits (if any)
         QDomNode child = c.firstChild();
-        while(!child.isNull() && child.isElement()) {
+        while (!child.isNull() && child.isElement()) {
           QDomElement c = child.toElement();
-          if(c.tagName() == "SPLIT") {
+          if (c.tagName() == "SPLIT") {
             MyMoneyStatement::Split s;
             s.m_accountId = c.attribute("accountid");
             s.m_amount = MyMoneyMoney(c.attribute("amount"));
@@ -189,9 +181,7 @@ bool MyMoneyStatement::read(const QDomElement& _e)
           child = child.nextSibling();
         }
         m_listTransactions += t;
-      }
-      else if ( c.tagName() == "PRICE" )
-      {
+      } else if (c.tagName() == "PRICE") {
         MyMoneyStatement::Price p;
 
         p.m_date = QDate::fromString(c.attribute("dateposted"), Qt::ISODate);
@@ -199,9 +189,7 @@ bool MyMoneyStatement::read(const QDomElement& _e)
         p.m_amount = MyMoneyMoney(c.attribute("amount"));
 
         m_listPrices += p;
-      }
-      else if ( c.tagName() == "SECURITY" )
-      {
+      } else if (c.tagName() == "SECURITY") {
         MyMoneyStatement::Security s;
 
         s.m_strName = c.attribute("name");
@@ -223,14 +211,13 @@ bool MyMoneyStatement::isStatementFile(const QString& _filename)
   // the tag "<KMYMONEY2-STATEMENT>" in the first 20 lines.
   bool result = false;
 
-  QFile f( _filename );
-  if ( f.open( QIODevice::ReadOnly ) )
-  {
-    QTextStream ts( &f );
+  QFile f(_filename);
+  if (f.open(QIODevice::ReadOnly)) {
+    QTextStream ts(&f);
 
     int lineCount = 20;
-    while ( !ts.atEnd() && !result && lineCount != 0) {
-      if ( ts.readLine().contains("<KMYMONEY-STATEMENT>", Qt::CaseInsensitive) )
+    while (!ts.atEnd() && !result && lineCount != 0) {
+      if (ts.readLine().contains("<KMYMONEY-STATEMENT>", Qt::CaseInsensitive))
         result = true;
       --lineCount;
     }
@@ -240,12 +227,12 @@ bool MyMoneyStatement::isStatementFile(const QString& _filename)
   return result;
 }
 
-void MyMoneyStatement::writeXMLFile( const MyMoneyStatement& _s, const QString& _filename )
+void MyMoneyStatement::writeXMLFile(const MyMoneyStatement& _s, const QString& _filename)
 {
   static unsigned filenum = 1;
   QString filename = _filename;
-  if ( filename.isEmpty() ) {
-    filename = QString("statement-%1%2.xml").arg((filenum<10)?"0":"").arg(filenum);
+  if (filename.isEmpty()) {
+    filename = QString("statement-%1%2.xml").arg((filenum < 10) ? "0" : "").arg(filenum);
     filenum++;
   }
 
@@ -257,10 +244,10 @@ void MyMoneyStatement::writeXMLFile( const MyMoneyStatement& _s, const QString& 
   doc->appendChild(instruct);
   QDomElement eroot = doc->createElement("KMYMONEY-STATEMENT");
   doc->appendChild(eroot);
-  _s.write(eroot,doc);
+  _s.write(eroot, doc);
 
-  QFile g( filename );
-  if(g.open( QIODevice::WriteOnly )) {
+  QFile g(filename);
+  if (g.open(QIODevice::WriteOnly)) {
     QTextStream stream(&g);
     stream.setCodec("UTF-8");
     stream << doc->toString();
@@ -270,20 +257,17 @@ void MyMoneyStatement::writeXMLFile( const MyMoneyStatement& _s, const QString& 
   delete doc;
 }
 
-bool MyMoneyStatement::readXMLFile( MyMoneyStatement& _s, const QString& _filename )
+bool MyMoneyStatement::readXMLFile(MyMoneyStatement& _s, const QString& _filename)
 {
   bool result = false;
-  QFile f( _filename );
-  f.open( QIODevice::ReadOnly );
+  QFile f(_filename);
+  f.open(QIODevice::ReadOnly);
   QDomDocument* doc = new QDomDocument;
-  if(doc->setContent(&f, false))
-  {
+  if (doc->setContent(&f, false)) {
     QDomElement rootElement = doc->documentElement();
-    if(!rootElement.isNull())
-    {
+    if (!rootElement.isNull()) {
       QDomNode child = rootElement.firstChild();
-      while(!child.isNull() && child.isElement())
-      {
+      while (!child.isNull() && child.isElement()) {
         result = true;
         QDomElement childElement = child.toElement();
         _s.read(childElement);

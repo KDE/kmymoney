@@ -38,7 +38,7 @@
 #include "kmymoney/plugins/pluginloader.h"
 
 KSettingsPlugins::KSettingsPlugins(QWidget* parent)
-  : QWidget(parent)
+    : QWidget(parent)
 {
   QVBoxLayout *layout = new QVBoxLayout(this);
   KMyMoneyPlugin::PluginLoader::instance()->pluginSelectorWidget()->setParent(this);

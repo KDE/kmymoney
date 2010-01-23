@@ -45,7 +45,7 @@
 // Project Includes
 
 MyMoneyQifProfileNameValidator::MyMoneyQifProfileNameValidator(QObject *o)
-  : QValidator(o)
+    : QValidator(o)
 {
 }
 
@@ -60,11 +60,11 @@ QValidator::State MyMoneyQifProfileNameValidator::validate(QString& name, int&) 
   QStringList list = grp.readEntry("profiles", QStringList());
 
   // invalid character?
-  if(name.contains(",") != 0)
+  if (name.contains(",") != 0)
     return QValidator::Invalid;
 
   // would not work in this form (empty or existing name)
-  if(name.isEmpty() || list.contains(name))
+  if (name.isEmpty() || list.contains(name))
     return QValidator::Intermediate;
 
   // is OK
@@ -72,15 +72,15 @@ QValidator::State MyMoneyQifProfileNameValidator::validate(QString& name, int&) 
 }
 
 MyMoneyQifProfileEditor::MyMoneyQifProfileEditor(const bool edit, QWidget *parent)
-  : MyMoneyQifProfileEditorDecl(parent),
-  m_inEdit(edit),
-  m_isDirty(false),
-  m_isAccepted(false),
-  m_selectedAmountType(0)
+    : MyMoneyQifProfileEditorDecl(parent),
+    m_inEdit(edit),
+    m_isDirty(false),
+    m_isAccepted(false),
+    m_selectedAmountType(0)
 {
   // we don't need the date and amounts tab anymore, so we just hide them for now
-  profileTabs->removeTab( profileTabs->indexOf(tabMoney) );
-  profileTabs->removeTab( profileTabs->indexOf(tabDate) );
+  profileTabs->removeTab(profileTabs->indexOf(tabMoney));
+  profileTabs->removeTab(profileTabs->indexOf(tabDate));
 
   loadWidgets();
   loadProfileListFromConfig();
@@ -93,10 +93,10 @@ MyMoneyQifProfileEditor::MyMoneyQifProfileEditor(const bool edit, QWidget *paren
   m_helpButton->setGuiItem(KStandardGuiItem::help());
 
   KIconLoader* il = KIconLoader::global();
-  KGuiItem newButtenItem( i18nc("New profile", "&New" ),
-                      KIcon(il->loadIcon("document-new", KIconLoader::Small, KIconLoader::SizeSmall)),
-                      i18n("Create a new profile"),
-                      i18n("Use this to create a new QIF import/export profile"));
+  KGuiItem newButtenItem(i18nc("New profile", "&New"),
+                         KIcon(il->loadIcon("document-new", KIconLoader::Small, KIconLoader::SizeSmall)),
+                         i18n("Create a new profile"),
+                         i18n("Use this to create a new QIF import/export profile"));
   m_newButton->setGuiItem(newButtenItem);
 
   connect(m_profileListBox, SIGNAL(highlighted(const QString&)), this, SLOT(slotLoadProfileFromConfig(const QString&)));
@@ -134,7 +134,7 @@ MyMoneyQifProfileEditor::MyMoneyQifProfileEditor(const bool edit, QWidget *paren
 
 MyMoneyQifProfileEditor::~MyMoneyQifProfileEditor()
 {
-  if(m_inEdit && m_isDirty && m_isAccepted) {
+  if (m_inEdit && m_isDirty && m_isAccepted) {
     KSharedConfigPtr config = KGlobal::config();
     config->sync();
   } else {
@@ -146,36 +146,36 @@ MyMoneyQifProfileEditor::~MyMoneyQifProfileEditor()
 
 void MyMoneyQifProfileEditor::loadWidgets(void)
 {
-  if(m_inEdit)
+  if (m_inEdit)
     setWindowTitle(i18n("QIF Profile Editor"));
   else
     setWindowTitle(i18n("QIF Profile Selector"));
 
   m_editDateFormat->clear();
-  m_editDateFormat->addItem( "%d/%m/%yy" );
-  m_editDateFormat->addItem( "%d/%mmm/%yy" );
-  m_editDateFormat->addItem( "%d/%m/%yyyy" );
-  m_editDateFormat->addItem( "%d/%mmm/%yyyy" );
-  m_editDateFormat->addItem( "%d/%m%yy" );
-  m_editDateFormat->addItem( "%d/%mmm%yy" );
-  m_editDateFormat->addItem( "%d.%m.%yy" );
-  m_editDateFormat->addItem( "%d.%m.%yyyy" );
-  m_editDateFormat->addItem( "%m.%d.%yy" );
-  m_editDateFormat->addItem( "%m.%d.%yyyy" );
-  m_editDateFormat->addItem( "%m/%d/%yy" );
-  m_editDateFormat->addItem( "%mmm/%d/%yy" );
-  m_editDateFormat->addItem( "%m/%d/%yyyy" );
-  m_editDateFormat->addItem( "%m-%d-%yyyy" );
-  m_editDateFormat->addItem( "%mmm/%d/%yyyy" );
-  m_editDateFormat->addItem( "%m%d%yy" );
-  m_editDateFormat->addItem( "%mmm/%d%yy" );
-  m_editDateFormat->addItem( "%yyyy-%mm-%dd" );
-  m_editDateFormat->addItem( "%m/%d'%yyyy" );
+  m_editDateFormat->addItem("%d/%m/%yy");
+  m_editDateFormat->addItem("%d/%mmm/%yy");
+  m_editDateFormat->addItem("%d/%m/%yyyy");
+  m_editDateFormat->addItem("%d/%mmm/%yyyy");
+  m_editDateFormat->addItem("%d/%m%yy");
+  m_editDateFormat->addItem("%d/%mmm%yy");
+  m_editDateFormat->addItem("%d.%m.%yy");
+  m_editDateFormat->addItem("%d.%m.%yyyy");
+  m_editDateFormat->addItem("%m.%d.%yy");
+  m_editDateFormat->addItem("%m.%d.%yyyy");
+  m_editDateFormat->addItem("%m/%d/%yy");
+  m_editDateFormat->addItem("%mmm/%d/%yy");
+  m_editDateFormat->addItem("%m/%d/%yyyy");
+  m_editDateFormat->addItem("%m-%d-%yyyy");
+  m_editDateFormat->addItem("%mmm/%d/%yyyy");
+  m_editDateFormat->addItem("%m%d%yy");
+  m_editDateFormat->addItem("%mmm/%d%yy");
+  m_editDateFormat->addItem("%yyyy-%mm-%dd");
+  m_editDateFormat->addItem("%m/%d'%yyyy");
 
   m_editApostrophe->clear();
-  m_editApostrophe->addItem( "1900-1949" );
-  m_editApostrophe->addItem( "1900-1999" );
-  m_editApostrophe->addItem( "2000-2099" );
+  m_editApostrophe->addItem("1900-1949");
+  m_editApostrophe->addItem("1900-1999");
+  m_editApostrophe->addItem("2000-2099");
 
   m_editAmounts->setColumnAlignment(1, Qt::AlignCenter);
   m_editAmounts->setColumnAlignment(2, Qt::AlignCenter);
@@ -186,13 +186,13 @@ void MyMoneyQifProfileEditor::loadWidgets(void)
   m_editAmounts->setSorting(4);
   m_editAmounts->sort();
 
-  m_decimalBox->addItem( " " );
-  m_decimalBox->addItem( "," );
-  m_decimalBox->addItem( "." );
+  m_decimalBox->addItem(" ");
+  m_decimalBox->addItem(",");
+  m_decimalBox->addItem(".");
 
-  m_thousandsBox->addItem( " " );
-  m_thousandsBox->addItem( "," );
-  m_thousandsBox->addItem( "." );
+  m_thousandsBox->addItem(" ");
+  m_thousandsBox->addItem(",");
+  m_thousandsBox->addItem(".");
 
   m_editDescription->setEnabled(m_inEdit);
   m_editType->setEnabled(m_inEdit);
@@ -208,7 +208,7 @@ void MyMoneyQifProfileEditor::loadWidgets(void)
   m_editOutputFilterLocation->setEnabled(m_inEdit);
   m_editInputFilterFileType->setEnabled(m_inEdit);
 
-  if(!m_inEdit) {
+  if (!m_inEdit) {
     m_renameButton->hide();
     m_deleteButton->hide();
     m_resetButton->hide();
@@ -221,7 +221,7 @@ void MyMoneyQifProfileEditor::loadProfileListFromConfig(void)
   QFontMetrics fontMetrics(m_profileListBox->font());
   int w = 100;      // minimum is 100 pixels width for the list box
 
-  if(m_profile.isDirty()) {
+  if (m_profile.isDirty()) {
     m_profile.saveProfile();
     m_isDirty = true;
   }
@@ -233,7 +233,7 @@ void MyMoneyQifProfileEditor::loadProfileListFromConfig(void)
   KConfigGroup grp = config->group("Profiles");
   list = grp.readEntry("profiles", QStringList());
 
-  if(list.count() == 0) {
+  if (list.count() == 0) {
     m_profile.clear();
     m_profile.setProfileDescription(i18n("The default QIF profile"));
     addProfile("Default");
@@ -245,13 +245,13 @@ void MyMoneyQifProfileEditor::loadProfileListFromConfig(void)
   list.sort();
 
   m_profileListBox->insertStringList(list);
-  if(!list.isEmpty()) {
+  if (!list.isEmpty()) {
     m_profileListBox->setSelected(0, true);
     slotLoadProfileFromConfig(list[0]);
   }
-  for(int i = 0; i < list.count(); ++i) {
+  for (int i = 0; i < list.count(); ++i) {
     int nw = fontMetrics.width(list[i]) + 10;
-    w = qMax( w, nw );
+    w = qMax(w, nw);
   }
   w = qMin(w, 200);
   m_profileListBox->setMinimumWidth(w);
@@ -261,12 +261,12 @@ void MyMoneyQifProfileEditor::slotLoadProfileFromConfig(const QString& profile)
 {
   QString profileName = profile;
 
-  if(m_profile.isDirty()) {
+  if (m_profile.isDirty()) {
     m_profile.saveProfile();
     m_isDirty = true;
   }
 
-  if(m_profileListBox->findItem(profileName, Q3ListView::ExactMatch | Qt::CaseSensitive) == NULL) {
+  if (m_profileListBox->findItem(profileName, Q3ListView::ExactMatch | Qt::CaseSensitive) == NULL) {
     profileName = m_profileListBox->text(0);
   }
 
@@ -275,7 +275,7 @@ void MyMoneyQifProfileEditor::slotLoadProfileFromConfig(const QString& profile)
   Q3ListBoxItem *lbi = m_profileListBox->findItem(profileName, Q3ListView::ExactMatch | Qt::CaseSensitive);
   int idx = m_profileListBox->index(lbi);
   showProfile();
-  if(idx >= 0) {
+  if (idx >= 0) {
     m_profileListBox->setSelected(idx, true);
   }
 }
@@ -299,14 +299,14 @@ void MyMoneyQifProfileEditor::showProfile(void)
   Q3ListViewItem* item;
   Q3ListViewItemIterator it(m_editAmounts);
 
-  while((item = it.current()) != 0) {
+  while ((item = it.current()) != 0) {
     QChar key = item->text(1)[0];
     item->setText(2, m_profile.amountDecimal(key));
     item->setText(3, m_profile.amountThousands(key));
-    if(m_selectedAmountType == 0 && key == 'T' && m_inEdit) {
+    if (m_selectedAmountType == 0 && key == 'T' && m_inEdit) {
       m_editAmounts->setSelected(item, true);
       slotAmountTypeSelected(item);
-    } else if(item == m_selectedAmountType) {
+    } else if (item == m_selectedAmountType) {
       slotAmountTypeSelected(item);
     }
     ++it;
@@ -345,7 +345,7 @@ void MyMoneyQifProfileEditor::addProfile(const QString& name)
 
 void MyMoneyQifProfileEditor::slotOk(void)
 {
-  if(m_profile.isDirty())
+  if (m_profile.isDirty())
     m_isDirty = true;
 
   m_profile.saveProfile();
@@ -376,7 +376,7 @@ void MyMoneyQifProfileEditor::slotRename(void)
   bool ok;
   QString newName = enterName(ok);
 
-  if(ok == true) {
+  if (ok == true) {
     deleteProfile(m_profile.profileName().mid(8));
     addProfile(newName);
     loadProfileListFromConfig();
@@ -389,7 +389,7 @@ void MyMoneyQifProfileEditor::slotNew(void)
   bool ok;
   QString newName = enterName(ok);
 
-  if(ok == true) {
+  if (ok == true) {
     m_profile.clear();
     addProfile(newName);
     loadProfileListFromConfig();
@@ -420,7 +420,7 @@ const QString MyMoneyQifProfileEditor::enterName(bool& ok)
   dlg->lineEdit()->validateAndSet("", 0, 0, 0);
 
   ok = false;
-  if(dlg->exec()) {
+  if (dlg->exec()) {
     ok = true;
   }
   rc = dlg->lineEdit()->text();
@@ -434,12 +434,12 @@ void MyMoneyQifProfileEditor::slotDelete(void)
 {
   QString profile = m_profile.profileName().mid(8);
 
-  if(KMessageBox::questionYesNo(this, i18n("Do you really want to delete profile '%1'?", profile)) == KMessageBox::Yes) {
+  if (KMessageBox::questionYesNo(this, i18n("Do you really want to delete profile '%1'?", profile)) == KMessageBox::Yes) {
     int idx = m_profileListBox->currentItem();
     m_profile.saveProfile();
     deleteProfile(profile);
     loadProfileListFromConfig();
-    if(idx >= static_cast<int> (m_profileListBox->count()))
+    if (idx >= static_cast<int>(m_profileListBox->count()))
       idx = m_profileListBox->count() - 1;
 
     slotLoadProfileFromConfig(m_profileListBox->text(idx));
@@ -460,7 +460,7 @@ void MyMoneyQifProfileEditor::slotAmountTypeSelected(Q3ListViewItem* item)
 
 void MyMoneyQifProfileEditor::slotDecimalChanged(const QString& val)
 {
-  if(m_selectedAmountType != 0) {
+  if (m_selectedAmountType != 0) {
     QChar key = m_selectedAmountType->text(1)[0];
     m_profile.setAmountDecimal(key, val[0]);
     m_selectedAmountType->setText(2, val);
@@ -469,7 +469,7 @@ void MyMoneyQifProfileEditor::slotDecimalChanged(const QString& val)
 
 void MyMoneyQifProfileEditor::slotThousandsChanged(const QString& val)
 {
-  if(m_selectedAmountType != 0) {
+  if (m_selectedAmountType != 0) {
     QChar key = m_selectedAmountType->text(1)[0];
     m_profile.setAmountThousands(key, val[0]);
     m_selectedAmountType->setText(3, val);

@@ -32,17 +32,18 @@
 class KReconcileDlgDecl : public QDialog, public Ui::KReconcileDlgDecl
 {
 public:
-  KReconcileDlgDecl( QWidget *parent ) : QDialog( parent ) {
-    setupUi( this );
+  KReconcileDlgDecl(QWidget *parent) : QDialog(parent) {
+    setupUi(this);
   }
 };
 
 // This dialog is used for reconciliation.
-class KReconcileDlg : public KReconcileDlgDecl  {
-   Q_OBJECT
+class KReconcileDlg : public KReconcileDlgDecl
+{
+  Q_OBJECT
 public:
-	KReconcileDlg(const MyMoneyMoney previousBal, const MyMoneyMoney endingBal, const QDate endingDate, MyMoneyAccount *accountIndex, const MyMoneyFile* file, QWidget *parent=0);
-	~KReconcileDlg();
+  KReconcileDlg(const MyMoneyMoney previousBal, const MyMoneyMoney endingBal, const QDate endingDate, MyMoneyAccount *accountIndex, const MyMoneyFile* file, QWidget *parent = 0);
+  ~KReconcileDlg();
 //  void updateData(void);
   void resetData(const MyMoneyMoney previousBal, const MyMoneyMoney endingBal, const QDate endingDate, MyMoneyAccount *accountIndex, const MyMoneyFile* file);
   /** No descriptions */
@@ -62,15 +63,15 @@ signals:
   void reconcileFinished(bool);
 
 private:
-	MyMoneyMoney m_endingBalance;
-	MyMoneyMoney m_previousBalance;
-	MyMoneyMoney m_clearedBalance;
+  MyMoneyMoney m_endingBalance;
+  MyMoneyMoney m_previousBalance;
+  MyMoneyMoney m_clearedBalance;
   MyMoneyMoney m_debitBalance;
   MyMoneyMoney m_creditBalance;
 
-	MyMoneyFile* m_file;
-	//MyMoneyBank m_bankIndex;
-	MyMoneyAccount *m_accountIndex;
+  MyMoneyFile* m_file;
+  //MyMoneyBank m_bankIndex;
+  MyMoneyAccount *m_accountIndex;
 
   QList<MyMoneyTransaction> m_debitsQList;
   QList<MyMoneyTransaction> m_creditsQList;

@@ -35,8 +35,8 @@
 class kMyMoneyOnlineQuoteConfigDecl : public QWidget, public Ui::kMyMoneyOnlineQuoteConfigDecl
 {
 public:
-  kMyMoneyOnlineQuoteConfigDecl( QWidget *parent ) : QWidget( parent ) {
-    setupUi( this );
+  kMyMoneyOnlineQuoteConfigDecl(QWidget *parent) : QWidget(parent) {
+    setupUi(this);
   }
 };
 class kMyMoneyOnlineQuoteConfig : public kMyMoneyOnlineQuoteConfigDecl

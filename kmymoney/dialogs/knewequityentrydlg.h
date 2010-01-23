@@ -39,8 +39,8 @@
 class kNewEquityEntryDecl : public QDialog, public Ui::kNewEquityEntryDecl
 {
 public:
-  kNewEquityEntryDecl( QWidget *parent ) : QDialog( parent ) {
-    setupUi( this );
+  kNewEquityEntryDecl(QWidget *parent) : QDialog(parent) {
+    setupUi(this);
   }
 };
 
@@ -52,12 +52,18 @@ public:
   virtual ~KNewEquityEntryDlg();
 
   void setSymbolName(const QString& str);
-  QString symbolName(void) const  { return m_strSymbolName; }
+  QString symbolName(void) const  {
+    return m_strSymbolName;
+  }
 
   void setName(const QString& str);
-  QString name(void) const  { return m_strName; }
+  QString name(void) const  {
+    return m_strName;
+  }
 
-  int fraction(void) const { return m_fraction; }
+  int fraction(void) const {
+    return m_fraction;
+  }
 
 protected slots:
   void onOKClicked(void);

@@ -33,7 +33,8 @@
 #include "mymoneyreport.h"
 #include "listtable.h"
 
-namespace reports {
+namespace reports
+{
 
 class ReportAccount;
 
@@ -53,13 +54,13 @@ class ReportAccount;
 class ObjectInfoTable : public ListTable
 {
 public:
-  ObjectInfoTable ( const MyMoneyReport& );
-  void init ( void );
+  ObjectInfoTable(const MyMoneyReport&);
+  void init(void);
 
 protected:
-  void constructScheduleTable ( void );
-  void constructAccountTable ( void );
-  void constructAccountLoanTable ( void );
+  void constructScheduleTable(void);
+  void constructAccountTable(void);
+  void constructAccountLoanTable(void);
 
 private:
   /**

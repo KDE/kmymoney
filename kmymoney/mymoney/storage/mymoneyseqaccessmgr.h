@@ -53,10 +53,15 @@
   * @see MyMoneySeqAccessMgr::balance() and
   *      MyMoneySeqAccessMgr::invalidateBalanceCache() for a usage example
   */
-class MyMoneyBalanceCacheItem {
+class MyMoneyBalanceCacheItem
+{
 public:
-  MyMoneyBalanceCacheItem() { valid = false; };
-  MyMoneyBalanceCacheItem(const MyMoneyMoney& val) { balance = val; valid = true; };
+  MyMoneyBalanceCacheItem() {
+    valid = false;
+  };
+  MyMoneyBalanceCacheItem(const MyMoneyMoney& val) {
+    balance = val; valid = true;
+  };
 
   bool operator == (const MyMoneyBalanceCacheItem& right) const;
   bool          valid;
@@ -77,7 +82,7 @@ public:
   * of the method dirty() can be used.
   */
 class MyMoneySeqAccessMgr : public IMyMoneyStorage, public IMyMoneySerialize,
-                            public MyMoneyKeyValueContainer
+      public MyMoneyKeyValueContainer
 {
 public:
 
@@ -85,28 +90,46 @@ public:
   ~MyMoneySeqAccessMgr();
 
   // general get functions
-  const MyMoneyPayee user(void) const { return m_user; };
-  const QDate creationDate(void) const { return m_creationDate; };
-  const QDate lastModificationDate(void) const { return m_lastModificationDate; };
-  unsigned int currentFixVersion(void) const { return m_currentFixVersion; };
-  unsigned int fileFixVersion(void) const { return m_fileFixVersion; };
+  const MyMoneyPayee user(void) const {
+    return m_user;
+  };
+  const QDate creationDate(void) const {
+    return m_creationDate;
+  };
+  const QDate lastModificationDate(void) const {
+    return m_lastModificationDate;
+  };
+  unsigned int currentFixVersion(void) const {
+    return m_currentFixVersion;
+  };
+  unsigned int fileFixVersion(void) const {
+    return m_fileFixVersion;
+  };
 
 
   // general set functions
-  void setUser(const MyMoneyPayee& user) { m_user = user;
-        touch(); };
-  void setCreationDate(const QDate& val) { m_creationDate = val; touch(); };
-  void setLastModificationDate(const QDate& val) { m_lastModificationDate = val; m_dirty = false; };
-  void setFileFixVersion(const unsigned int v) { m_fileFixVersion = v; };
+  void setUser(const MyMoneyPayee& user) {
+    m_user = user;
+    touch();
+  };
+  void setCreationDate(const QDate& val) {
+    m_creationDate = val; touch();
+  };
+  void setLastModificationDate(const QDate& val) {
+    m_lastModificationDate = val; m_dirty = false;
+  };
+  void setFileFixVersion(const unsigned int v) {
+    m_fileFixVersion = v;
+  };
   /**
     * This method is used to get a SQL reader for subsequent database access
     */
-  KSharedPtr <MyMoneyStorageSql> connectToDatabase (const KUrl& url);
-   /**
-   * This method is used when a database file is open, and the data is to
-   * be saved in a different file or format. It will ensure that all data
-   * from the database is available in memory to enable it to be written.
-   */
+  KSharedPtr <MyMoneyStorageSql> connectToDatabase(const KUrl& url);
+  /**
+  * This method is used when a database file is open, and the data is to
+  * be saved in a different file or format. It will ensure that all data
+  * from the database is available in memory to enable it to be written.
+  */
   virtual void fillStorage() {  };
 
   /**
@@ -394,7 +417,9 @@ public:
     *
     * @return true if changed, false if not
     */
-  bool dirty(void) const { return m_dirty; }
+  bool dirty(void) const {
+    return m_dirty;
+  }
 
   /**
     * This method can be used by an external object to force the
@@ -402,7 +427,9 @@ public:
     * to an external destination failed but the previous storage
     * to a local disk was ok.
     */
-  void setDirty(void) { m_dirty = true; };
+  void setDirty(void) {
+    m_dirty = true;
+  };
 
   /**
     * This method returns a list of the institutions
@@ -466,7 +493,9 @@ public:
     * This method returns whether a given transaction is already in memory, to avoid
     * reloading it from the database
     */
-  bool isDuplicateTransaction(const QString& id) const { return m_transactionKeys.contains(id); }
+  bool isDuplicateTransaction(const QString& id) const {
+    return m_transactionKeys.contains(id);
+  }
 
   /**
     * This method returns the number of transactions currently known to file
@@ -503,31 +532,41 @@ public:
     * This method is used to return the standard liability account
     * @return MyMoneyAccount liability account(group)
     */
-  const MyMoneyAccount liability(void) const { return account(STD_ACC_LIABILITY); };
+  const MyMoneyAccount liability(void) const {
+    return account(STD_ACC_LIABILITY);
+  };
 
   /**
     * This method is used to return the standard asset account
     * @return MyMoneyAccount asset account(group)
     */
-  const MyMoneyAccount asset(void) const { return account(STD_ACC_ASSET); };
+  const MyMoneyAccount asset(void) const {
+    return account(STD_ACC_ASSET);
+  };
 
   /**
     * This method is used to return the standard expense account
     * @return MyMoneyAccount expense account(group)
     */
-  const MyMoneyAccount expense(void) const { return account(STD_ACC_EXPENSE); };
+  const MyMoneyAccount expense(void) const {
+    return account(STD_ACC_EXPENSE);
+  };
 
   /**
     * This method is used to return the standard income account
     * @return MyMoneyAccount income account(group)
     */
-  const MyMoneyAccount income(void) const { return account(STD_ACC_INCOME); };
+  const MyMoneyAccount income(void) const {
+    return account(STD_ACC_INCOME);
+  };
 
   /**
     * This method is used to return the standard equity account
     * @return MyMoneyAccount equity account(group)
     */
-  const MyMoneyAccount equity(void) const { return account(STD_ACC_EQUITY); };
+  const MyMoneyAccount equity(void) const {
+    return account(STD_ACC_EQUITY);
+  };
 
   virtual void loadAccounts(const QMap<QString, MyMoneyAccount>& acc);
   virtual void loadTransactions(const QMap<QString, MyMoneyTransaction>& map);
@@ -547,14 +586,30 @@ public:
   virtual void loadReportId(const unsigned long id);
   virtual void loadBudgetId(const unsigned long id);
 
-  virtual unsigned long accountId(void) const { return m_nextAccountID; };
-  virtual unsigned long transactionId(void) const { return m_nextTransactionID; };
-  virtual unsigned long payeeId(void) const { return m_nextPayeeID; };
-  virtual unsigned long institutionId(void) const { return m_nextInstitutionID; };
-  virtual unsigned long scheduleId(void) const { return m_nextScheduleID; };
-  virtual unsigned long securityId(void) const { return m_nextSecurityID; };
-  virtual unsigned long reportId(void) const { return m_nextReportID; };
-  virtual unsigned long budgetId(void) const { return m_nextBudgetID; };
+  virtual unsigned long accountId(void) const {
+    return m_nextAccountID;
+  };
+  virtual unsigned long transactionId(void) const {
+    return m_nextTransactionID;
+  };
+  virtual unsigned long payeeId(void) const {
+    return m_nextPayeeID;
+  };
+  virtual unsigned long institutionId(void) const {
+    return m_nextInstitutionID;
+  };
+  virtual unsigned long scheduleId(void) const {
+    return m_nextScheduleID;
+  };
+  virtual unsigned long securityId(void) const {
+    return m_nextSecurityID;
+  };
+  virtual unsigned long reportId(void) const {
+    return m_nextReportID;
+  };
+  virtual unsigned long budgetId(void) const {
+    return m_nextBudgetID;
+  };
 
 
   /**
@@ -761,18 +816,18 @@ public:
     * @return const QValueList<MyMoneySchedule> list of schedule objects.
     */
   const QList<MyMoneySchedule> scheduleList(const QString& accountId = QString(),
-                                     const MyMoneySchedule::typeE type = MyMoneySchedule::TYPE_ANY,
-                                     const MyMoneySchedule::occurrenceE occurrence = MyMoneySchedule::OCCUR_ANY,
-                                     const MyMoneySchedule::paymentTypeE paymentType = MyMoneySchedule::STYPE_ANY,
-                                     const QDate& startDate = QDate(),
-                                     const QDate& endDate = QDate(),
-                                     const bool overdue = false) const;
+      const MyMoneySchedule::typeE type = MyMoneySchedule::TYPE_ANY,
+      const MyMoneySchedule::occurrenceE occurrence = MyMoneySchedule::OCCUR_ANY,
+      const MyMoneySchedule::paymentTypeE paymentType = MyMoneySchedule::STYPE_ANY,
+      const QDate& startDate = QDate(),
+      const QDate& endDate = QDate(),
+      const bool overdue = false) const;
 
-  const QList<MyMoneySchedule> scheduleListEx( int scheduleTypes,
-                                              int scheduleOcurrences,
-                                              int schedulePaymentTypes,
-                                              QDate startDate,
-                                              const QStringList& accounts=QStringList()) const;
+  const QList<MyMoneySchedule> scheduleListEx(int scheduleTypes,
+      int scheduleOcurrences,
+      int schedulePaymentTypes,
+      QDate startDate,
+      const QStringList& accounts = QStringList()) const;
 
   /**
     * This method is used to retrieve the list of all reports
@@ -782,7 +837,7 @@ public:
     *
     * @return QValueList of all MyMoneyReport objects.
     */
-  const QList<MyMoneyReport> reportList( void ) const;
+  const QList<MyMoneyReport> reportList(void) const;
 
   /**
     * This method is used to add a new report to the engine.
@@ -794,7 +849,7 @@ public:
     *
     * @param report reference to the MyMoneyReport object
     */
-  void addReport( MyMoneyReport& report );
+  void addReport(MyMoneyReport& report);
 
   /**
     * This method is used to load a set of reports into the engine.  This is
@@ -804,7 +859,7 @@ public:
     *
     * @param reports reference to the map of MyMoneyReport objects
     */
-  void loadReports( const QMap<QString, MyMoneyReport>& reports );
+  void loadReports(const QMap<QString, MyMoneyReport>& reports);
 
   /**
     * This method is used to modify an existing MyMoneyReport
@@ -814,7 +869,7 @@ public:
     *
     * @param report const reference to the MyMoneyReport object to be updated
     */
-  void modifyReport( const MyMoneyReport& report );
+  void modifyReport(const MyMoneyReport& report);
 
   /**
     * This method returns the number of reports currently known to file
@@ -833,7 +888,7 @@ public:
     * @param id QString containing the id of the MyMoneyReport object
     * @return MyMoneyReport object
     */
-  const MyMoneyReport report( const QString& id ) const;
+  const MyMoneyReport report(const QString& id) const;
 
   /**
     * This method is used to remove an existing MyMoneyReport object
@@ -853,7 +908,7 @@ public:
     *
     * @return QValueList of all MyMoneyBudget objects.
     */
-  const QList<MyMoneyBudget> budgetList( void ) const;
+  const QList<MyMoneyBudget> budgetList(void) const;
 
   /**
     * This method is used to add a new budget to the engine.
@@ -865,7 +920,7 @@ public:
     *
     * @param budget reference to the MyMoneyBudget object
     */
-  void addBudget( MyMoneyBudget& budget );
+  void addBudget(MyMoneyBudget& budget);
 
   /**
     * This method is used to load a set of budgets into the engine.  This is
@@ -896,7 +951,7 @@ public:
     *
     * @param budget const reference to the MyMoneyBudget object to be updated
     */
-  void modifyBudget( const MyMoneyBudget& budget );
+  void modifyBudget(const MyMoneyBudget& budget);
 
   /**
     * This method returns the number of budgets currently known to file
@@ -915,7 +970,7 @@ public:
     * @param id QString containing the id of the MyMoneyBudget object
     * @return MyMoneyBudget object
     */
-  MyMoneyBudget budget( const QString& id ) const;
+  MyMoneyBudget budget(const QString& id) const;
 
   /**
     * This method is used to remove an existing MyMoneyBudget object

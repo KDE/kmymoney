@@ -37,9 +37,9 @@
 #include "mymoneymoney.h"
 
 KNewEquityEntryDlg::KNewEquityEntryDlg(QWidget *parent)
-  : kNewEquityEntryDecl(parent)
+    : kNewEquityEntryDecl(parent)
 {
-    setModal( true );
+  setModal(true);
   edtFraction->setCalculatorButtonVisible(false);
   edtFraction->setPrecision(0);
   edtFraction->loadText("100");
@@ -89,9 +89,9 @@ void KNewEquityEntryDlg::slotDataChanged(void)
 {
   bool okEnabled = true;
 
-  if(!edtFraction->value().isPositive()
-  || edtMarketSymbol->text().isEmpty()
-  || edtEquityName->text().isEmpty())
+  if (!edtFraction->value().isPositive()
+      || edtMarketSymbol->text().isEmpty()
+      || edtEquityName->text().isEmpty())
     okEnabled = false;
 
   btnOK->setEnabled(okEnabled);

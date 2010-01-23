@@ -28,7 +28,7 @@
 // Project Includes
 
 KSettingsRegister::KSettingsRegister(QWidget* parent) :
-  KSettingsRegisterDecl(parent)
+    KSettingsRegisterDecl(parent)
 {
 
   // hide the internally used text fields

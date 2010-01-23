@@ -39,7 +39,7 @@
 #include "mymoneyfile.h"
 
 kMyMoneyScheduledCalendar::kMyMoneyScheduledCalendar(QWidget *parent)
-  : kMyMoneyCalendar(parent)
+    : kMyMoneyCalendar(parent)
 {
   QPushButton *pb1 = new QPushButton(i18n("Select Schedules"), this);
 
@@ -60,12 +60,12 @@ kMyMoneyScheduledCalendar::kMyMoneyScheduledCalendar(QWidget *parent)
 
   setUserButton1(true, pb1);
 
-  init( QDate::currentDate() );
+  init(QDate::currentDate());
 
   connect(m_scheduledDateTable, SIGNAL(enterClicked(const MyMoneySchedule&, const QDate&)),
-    this, SIGNAL(enterClicked(const MyMoneySchedule&, const QDate&)));
+          this, SIGNAL(enterClicked(const MyMoneySchedule&, const QDate&)));
   connect(m_scheduledDateTable, SIGNAL(skipClicked(const MyMoneySchedule&, const QDate&)),
-    this, SIGNAL(skipClicked(const MyMoneySchedule&, const QDate&)));
+          this, SIGNAL(skipClicked(const MyMoneySchedule&, const QDate&)));
 }
 
 kMyMoneyScheduledCalendar::~kMyMoneyScheduledCalendar()

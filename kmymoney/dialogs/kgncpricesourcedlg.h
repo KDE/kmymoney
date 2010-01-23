@@ -35,8 +35,8 @@
 class KGncPriceSourceDlgDecl : public QWidget, public Ui::KGncPriceSourceDlgDecl
 {
 public:
-  KGncPriceSourceDlgDecl(){
-    setupUi( this );
+  KGncPriceSourceDlgDecl() {
+    setupUi(this);
   }
 };
 
@@ -45,11 +45,13 @@ class KGncPriceSourceDlg : public KDialog
   Q_OBJECT
 public:
   KGncPriceSourceDlg(QWidget *parent = 0);
-  KGncPriceSourceDlg(const QString &stockName, const QString &gncSource ,QWidget * parent = 0);
+  KGncPriceSourceDlg(const QString &stockName, const QString &gncSource , QWidget * parent = 0);
   ~KGncPriceSourceDlg();
 
-  QString selectedSource () const;
-  bool alwaysUse() const { return (m_widget->checkAlwaysUse->isChecked()); }
+  QString selectedSource() const;
+  bool alwaysUse() const {
+    return (m_widget->checkAlwaysUse->isChecked());
+  }
 
 public slots:
   void buttonPressed(int);

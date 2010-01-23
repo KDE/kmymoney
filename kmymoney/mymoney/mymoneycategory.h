@@ -27,7 +27,8 @@
   * @deprecated This class represents an Income or Expense category. Please don't
   *             use it anymore, as it will be removed sooner or later.
   */
-class MyMoneyCategory {
+class MyMoneyCategory
+{
   bool m_income; // if false, m_income == expense
   QString m_name;
   QStringList m_minorCategories;
@@ -37,29 +38,39 @@ class MyMoneyCategory {
 
 public:
   MyMoneyCategory();
-	MyMoneyCategory(const bool income, const QString name);
-	MyMoneyCategory(const bool income, const QString name, QStringList minors);
-	~MyMoneyCategory();
-	
-	// Simple get operations
-	QString name(void) { return m_name; }
-	QStringList& minorCategories(void) { return m_minorCategories; }
-	
-	// Simple set operations
-	bool isIncome(void) { return m_income; }
-	void setIncome(const bool val) { m_income = val; }
-	void setName(const QString val) { m_name = val; }
-	
-  bool setMinorCategories(QStringList values);
-	bool addMinorCategory(const QString val);
-	bool removeMinorCategory(const QString val);
-	bool renameMinorCategory(const QString oldVal, const QString newVal);
-	bool addMinorCategory(QStringList values);
-	bool removeAllMinors(void);
-	QString firstMinor(void);
+  MyMoneyCategory(const bool income, const QString name);
+  MyMoneyCategory(const bool income, const QString name, QStringList minors);
+  ~MyMoneyCategory();
 
-	void clear(void);
-	
+  // Simple get operations
+  QString name(void) {
+    return m_name;
+  }
+  QStringList& minorCategories(void) {
+    return m_minorCategories;
+  }
+
+  // Simple set operations
+  bool isIncome(void) {
+    return m_income;
+  }
+  void setIncome(const bool val) {
+    m_income = val;
+  }
+  void setName(const QString val) {
+    m_name = val;
+  }
+
+  bool setMinorCategories(QStringList values);
+  bool addMinorCategory(const QString val);
+  bool removeMinorCategory(const QString val);
+  bool renameMinorCategory(const QString oldVal, const QString newVal);
+  bool addMinorCategory(QStringList values);
+  bool removeAllMinors(void);
+  QString firstMinor(void);
+
+  void clear(void);
+
   // Copy constructors
   MyMoneyCategory(const MyMoneyCategory&);
   MyMoneyCategory& operator = (const MyMoneyCategory&);

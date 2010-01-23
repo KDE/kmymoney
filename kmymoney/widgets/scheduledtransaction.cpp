@@ -35,8 +35,8 @@ using namespace KMyMoneyRegister;
 using namespace KMyMoneyTransactionForm;
 
 StdTransactionScheduled::StdTransactionScheduled(Register *parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId) :
-  StdTransaction(parent, transaction, split, uniqueId),
-  m_drawCounter(parent->drawCounter()-1)
+    StdTransaction(parent, transaction, split, uniqueId),
+    m_drawCounter(parent->drawCounter() - 1)
 {
   // setup initial size
   setNumRowsRegister(numRowsRegister(KMyMoneyGlobalSettings::showRegisterDetailed()));

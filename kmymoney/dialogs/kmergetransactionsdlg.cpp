@@ -33,7 +33,7 @@
 // Project Includes
 
 KMergeTransactionsDlg::KMergeTransactionsDlg(const MyMoneyAccount& account, QWidget* parent) :
-  KSelectTransactionsDlg(account, parent)
+    KSelectTransactionsDlg(account, parent)
 {
 
   // setup descriptive texts

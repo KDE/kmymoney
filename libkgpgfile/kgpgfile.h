@@ -32,12 +32,13 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-namespace GpgME {
-  class Key;
-  class KeyListResult;
-  class Error;
-  class DecryptionResult;
-  class EncryptionResult;
+namespace GpgME
+{
+class Key;
+class KeyListResult;
+class Error;
+class DecryptionResult;
+class EncryptionResult;
 };
 
 // ----------------------------------------------------------------------------
@@ -48,9 +49,10 @@ namespace GpgME {
 #include <config-kmymoney.h>
 #endif
 
-namespace GpgME {
-  class Error;
-  class KeyListResult;
+namespace GpgME
+{
+class Error;
+class KeyListResult;
 }
 
 /**
@@ -71,7 +73,7 @@ namespace GpgME {
   *  | Application code |   read   | QFile     |      | gpgme++ |
   *  |                  |<---------|/          |<-----|         |
   *  +------------------+          |  KGPGFile |      +---------+
-  *                |               |           |               
+  *                |               |           |
   *                |        control|           |      +-------+
   *                +-------------->|           |----->|       |
   *                                |           |      | File  |

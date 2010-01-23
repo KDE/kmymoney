@@ -22,7 +22,8 @@
 #include "mymoneyfile.h"
 #include "mymoneyseqaccessmgr.h"
 
-class PivotGridTest : public CppUnit::TestFixture  {
+class PivotGridTest : public CppUnit::TestFixture
+{
   CPPUNIT_TEST_SUITE(PivotGridTest);
   CPPUNIT_TEST(testCellAddValue);
   CPPUNIT_TEST(testCellAddCell);
@@ -37,8 +38,8 @@ private:
 
 public:
   PivotGridTest();
-  void setUp ();
-  void tearDown ();
+  void setUp();
+  void tearDown();
   void testCellAddValue();
   void testCellAddCell();
   void testCellRunningSum();

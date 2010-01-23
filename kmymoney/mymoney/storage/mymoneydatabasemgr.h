@@ -42,7 +42,7 @@
   *
   */
 class MyMoneyDatabaseMgr : public IMyMoneyStorage, public IMyMoneySerialize,
-                            public MyMoneyKeyValueContainer
+      public MyMoneyKeyValueContainer
 {
 public:
   MyMoneyDatabaseMgr();
@@ -618,18 +618,18 @@ public:
     * @return const QList<MyMoneySchedule> list of schedule objects.
     */
   virtual const QList<MyMoneySchedule> scheduleList(const QString& accountId = QString(),
-                                     const MyMoneySchedule::typeE type = MyMoneySchedule::TYPE_ANY,
-                                     const MyMoneySchedule::occurrenceE occurrence = MyMoneySchedule::OCCUR_ANY,
-                                     const MyMoneySchedule::paymentTypeE paymentType = MyMoneySchedule::STYPE_ANY,
-                                     const QDate& startDate = QDate(),
-                                     const QDate& endDate = QDate(),
-                                     const bool overdue = false) const;
+      const MyMoneySchedule::typeE type = MyMoneySchedule::TYPE_ANY,
+      const MyMoneySchedule::occurrenceE occurrence = MyMoneySchedule::OCCUR_ANY,
+      const MyMoneySchedule::paymentTypeE paymentType = MyMoneySchedule::STYPE_ANY,
+      const QDate& startDate = QDate(),
+      const QDate& endDate = QDate(),
+      const bool overdue = false) const;
 
-  virtual const QList<MyMoneySchedule> scheduleListEx( int scheduleTypes,
-                                              int scheduleOcurrences,
-                                              int schedulePaymentTypes,
-                                              QDate startDate,
-                                              const QStringList& accounts=QStringList()) const;
+  virtual const QList<MyMoneySchedule> scheduleListEx(int scheduleTypes,
+      int scheduleOcurrences,
+      int schedulePaymentTypes,
+      QDate startDate,
+      const QStringList& accounts = QStringList()) const;
 
   /**
     * This method is used to add a new currency object to the engine.
@@ -691,7 +691,7 @@ public:
     *
     * @return QList of all MyMoneyReport objects.
     */
-  virtual const QList<MyMoneyReport> reportList( void ) const;
+  virtual const QList<MyMoneyReport> reportList(void) const;
 
   /**
     * This method is used to add a new report to the engine.
@@ -703,7 +703,7 @@ public:
     *
     * @param report reference to the MyMoneyReport object
     */
-  virtual void addReport( MyMoneyReport& report );
+  virtual void addReport(MyMoneyReport& report);
 
   /**
     * This method is used to modify an existing MyMoneyReport
@@ -713,7 +713,7 @@ public:
     *
     * @param report const reference to the MyMoneyReport object to be updated
     */
-  virtual void modifyReport( const MyMoneyReport& report );
+  virtual void modifyReport(const MyMoneyReport& report);
 
   /**
     * This method returns the number of reports currently known to file
@@ -721,7 +721,7 @@ public:
     *
     * @return number of reports known to file
     */
-  virtual unsigned countReports( void ) const;
+  virtual unsigned countReports(void) const;
 
   /**
     * This method is used to retrieve a single MyMoneyReport object.
@@ -732,7 +732,7 @@ public:
     * @param id QString containing the id of the MyMoneyReport object
     * @return MyMoneyReport object
     */
-  virtual const MyMoneyReport report( const QString& id ) const;
+  virtual const MyMoneyReport report(const QString& id) const;
 
   /**
     * This method is used to remove an existing MyMoneyReport object
@@ -752,7 +752,7 @@ public:
     *
     * @return QList of all MyMoneyBudget objects.
     */
-  virtual const QList<MyMoneyBudget> budgetList( void ) const;
+  virtual const QList<MyMoneyBudget> budgetList(void) const;
 
   /**
     * This method is used to add a new budget to the engine.
@@ -764,7 +764,7 @@ public:
     *
     * @param budget reference to the MyMoneyBudget object
     */
-  virtual void addBudget( MyMoneyBudget& budget );
+  virtual void addBudget(MyMoneyBudget& budget);
 
   /**
     * This method is used to retrieve the id to a corresponding
@@ -785,7 +785,7 @@ public:
     *
     * @param budget const reference to the MyMoneyBudget object to be updated
     */
-  virtual void modifyBudget( const MyMoneyBudget& budget );
+  virtual void modifyBudget(const MyMoneyBudget& budget);
 
   /**
     * This method returns the number of budgets currently known to file
@@ -793,7 +793,7 @@ public:
     *
     * @return number of budgets known to file
     */
-  virtual unsigned countBudgets( void ) const;
+  virtual unsigned countBudgets(void) const;
 
   /**
     * This method is used to retrieve a single MyMoneyBudget object.
@@ -804,7 +804,7 @@ public:
     * @param id QString containing the id of the MyMoneyBudget object
     * @return MyMoneyBudget object
     */
-  virtual MyMoneyBudget budget( const QString& id ) const;
+  virtual MyMoneyBudget budget(const QString& id) const;
 
   /**
     * This method is used to remove an existing MyMoneyBudget object
@@ -855,7 +855,7 @@ public:
    * This method is used to get a SQL reader for subsequent database access
    */
   virtual KSharedPtr <MyMoneyStorageSql> connectToDatabase
-      (const KUrl& url);
+  (const KUrl& url);
   /**
     * This method is used when a database file is open, and the data is to
     * be saved in a different file or format. It will ensure that all data
@@ -886,8 +886,8 @@ public:
   virtual void loadSchedules(const QMap<QString, MyMoneySchedule>& map);
   virtual void loadSecurities(const QMap<QString, MyMoneySecurity>& map);
   virtual void loadCurrencies(const QMap<QString, MyMoneySecurity>& map);
-  virtual void loadReports( const QMap<QString, MyMoneyReport>& reports );
-  virtual void loadBudgets( const QMap<QString, MyMoneyBudget>& budgets );
+  virtual void loadReports(const QMap<QString, MyMoneyReport>& reports);
+  virtual void loadBudgets(const QMap<QString, MyMoneyBudget>& budgets);
   virtual void loadPrices(const MyMoneyPriceList& list);
 
   virtual unsigned long accountId(void) const;

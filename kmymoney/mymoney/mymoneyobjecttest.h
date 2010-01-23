@@ -23,28 +23,29 @@
 #include "mymoneyobject.h"
 #undef private
 
-class MyMoneyObjectTest : public CppUnit::TestFixture  {
-        CPPUNIT_TEST_SUITE(MyMoneyObjectTest);
-	CPPUNIT_TEST(testEmptyConstructor);
-	CPPUNIT_TEST(testConstructor);
-	CPPUNIT_TEST(testClearId);
-	CPPUNIT_TEST(testCopyConstructor);
-	CPPUNIT_TEST(testAssignmentConstructor);
-	CPPUNIT_TEST(testEquality);
-	CPPUNIT_TEST_SUITE_END();
+class MyMoneyObjectTest : public CppUnit::TestFixture
+{
+  CPPUNIT_TEST_SUITE(MyMoneyObjectTest);
+  CPPUNIT_TEST(testEmptyConstructor);
+  CPPUNIT_TEST(testConstructor);
+  CPPUNIT_TEST(testClearId);
+  CPPUNIT_TEST(testCopyConstructor);
+  CPPUNIT_TEST(testAssignmentConstructor);
+  CPPUNIT_TEST(testEquality);
+  CPPUNIT_TEST_SUITE_END();
 
 protected:
 
 public:
-	MyMoneyObjectTest();
-	void setUp ();
-	void tearDown ();
-	void testEmptyConstructor();
-	void testConstructor();
-	void testClearId();
-	void testCopyConstructor();
-	void testAssignmentConstructor();
-	void testEquality();
+  MyMoneyObjectTest();
+  void setUp();
+  void tearDown();
+  void testEmptyConstructor();
+  void testConstructor();
+  void testClearId();
+  void testCopyConstructor();
+  void testAssignmentConstructor();
+  void testEquality();
 };
 
 #endif

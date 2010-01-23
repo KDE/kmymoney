@@ -35,8 +35,8 @@
 #include <QList>
 
 TransactionMatcher::TransactionMatcher(const MyMoneyAccount& acc) :
-  m_account(acc),
-  m_days(3)
+    m_account(acc),
+    m_days(3)
 {
 }
 
@@ -76,14 +76,14 @@ void TransactionMatcher::match(MyMoneyTransaction tm, MyMoneySplit sm, MyMoneyTr
   // selected) account.
 
   // verify, that tm is a manually (non-matched) transaction and ti an imported one
-  if(sm.isMatched() || (!allowImportedTransactions && tm.isImported()))
+  if (sm.isMatched() || (!allowImportedTransactions && tm.isImported()))
     throw new MYMONEYEXCEPTION(i18n("First transaction does not match requirement for matching"));
-  if(!ti.isImported())
+  if (!ti.isImported())
     throw new MYMONEYEXCEPTION(i18n("Second transaction does not match requirement for matching"));
 
   // verify that the amounts are the same, otherwise we should not be matching!
-  if(sm.shares() != si.shares()) {
-    throw new MYMONEYEXCEPTION(i18n("Splits for %1 have conflicting values (%2,%3)",m_account.name(),sm.shares().formatMoney(m_account, sec), si.shares().formatMoney(m_account, sec)));
+  if (sm.shares() != si.shares()) {
+    throw new MYMONEYEXCEPTION(i18n("Splits for %1 have conflicting values (%2,%3)", m_account.name(), sm.shares().formatMoney(m_account, sec), si.shares().formatMoney(m_account, sec)));
   }
 
   // ipwizard: I took over the code to keep the bank id found in the endMatchTransaction
@@ -92,42 +92,42 @@ void TransactionMatcher::match(MyMoneyTransaction tm, MyMoneySplit sm, MyMoneyTr
   const QString& bankID = si.bankID();
   if (!bankID.isEmpty()) {
     try {
-      if (sm.bankID().isEmpty() ) {
-        sm.setBankID( bankID );
+      if (sm.bankID().isEmpty()) {
+        sm.setBankID(bankID);
         tm.modifySplit(sm);
-      } else if(sm.bankID() != bankID) {
-        throw new MYMONEYEXCEPTION(i18n("Both of these transactions have been imported into %1.  Therefore they cannot be matched.  Matching works with one imported transaction and one non-imported transaction.",m_account.name()));
+      } else if (sm.bankID() != bankID) {
+        throw new MYMONEYEXCEPTION(i18n("Both of these transactions have been imported into %1.  Therefore they cannot be matched.  Matching works with one imported transaction and one non-imported transaction.", m_account.name()));
       }
-    } catch(MyMoneyException *e) {
+    } catch (MyMoneyException *e) {
       QString estr = e->what();
       delete e;
-      throw new MYMONEYEXCEPTION(i18n("Unable to match all splits (%1)",estr));
+      throw new MYMONEYEXCEPTION(i18n("Unable to match all splits (%1)", estr));
     }
   }
 
   // mark the split as cleared if it does not have a reconciliation information yet
-  if(sm.reconcileFlag() == MyMoneySplit::NotReconciled) {
+  if (sm.reconcileFlag() == MyMoneySplit::NotReconciled) {
     sm.setReconcileFlag(MyMoneySplit::Cleared);
   }
 
   // if we don't have a payee assigned to the manually entered transaction
   // we use the one we found in the imported transaction
-  if(sm.payeeId().isEmpty() && !si.payeeId().isEmpty()) {
+  if (sm.payeeId().isEmpty() && !si.payeeId().isEmpty()) {
     sm.setValue("kmm-orig-payee", sm.payeeId());
     sm.setPayeeId(si.payeeId());
   }
 
   // We use the imported postdate and keep the previous one for unmatch
-  if(tm.postDate() != ti.postDate()) {
+  if (tm.postDate() != ti.postDate()) {
     sm.setValue("kmm-orig-postdate", tm.postDate().toString(Qt::ISODate));
     tm.setPostDate(ti.postDate());
   }
 
   // combine the two memos into one
   QString memo = sm.memo();
-  if(!si.memo().isEmpty() && si.memo() != memo) {
+  if (!si.memo().isEmpty() && si.memo() != memo) {
     sm.setValue("kmm-orig-memo", memo);
-    if(!memo.isEmpty())
+    if (!memo.isEmpty())
       memo += '\n';
     memo += si.memo();
   }
@@ -141,13 +141,13 @@ void TransactionMatcher::match(MyMoneyTransaction tm, MyMoneySplit sm, MyMoneyTr
 
   MyMoneyFile::instance()->modifyTransaction(tm);
   // Delete the end transaction if it was stored in the engine
-  if(!ti.id().isEmpty())
+  if (!ti.id().isEmpty())
     MyMoneyFile::instance()->removeTransaction(ti);
 }
 
 void TransactionMatcher::unmatch(const MyMoneyTransaction& _t, const MyMoneySplit& _s)
 {
-  if(_s.isMatched()) {
+  if (_s.isMatched()) {
     MyMoneyTransaction tm(_t);
     MyMoneySplit sm(_s);
     MyMoneyTransaction ti(sm.matchedTransaction());
@@ -155,23 +155,23 @@ void TransactionMatcher::unmatch(const MyMoneyTransaction& _t, const MyMoneySpli
     // if we don't have a split, then we don't have a memo
     try {
       si = ti.splitById(sm.value("kmm-match-split"));
-    } catch(MyMoneyException* e) {
+    } catch (MyMoneyException* e) {
       delete e;
     }
     sm.removeMatch();
 
     // restore the postdate if modified
-    if(!sm.value("kmm-orig-postdate").isEmpty()) {
+    if (!sm.value("kmm-orig-postdate").isEmpty()) {
       tm.setPostDate(QDate::fromString(sm.value("kmm-orig-postdate"), Qt::ISODate));
     }
 
     // restore payee if modified
-    if(!sm.value("kmm-orig-payee").isEmpty()) {
+    if (!sm.value("kmm-orig-payee").isEmpty()) {
       sm.setPayeeId(sm.value("kmm-orig-payee"));
     }
 
     // restore memo if modified
-    if(!sm.value("kmm-orig-memo").isEmpty()) {
+    if (!sm.value("kmm-orig-memo").isEmpty()) {
       sm.setMemo(sm.value("kmm-orig-memo"));
     }
 
@@ -188,7 +188,7 @@ void TransactionMatcher::unmatch(const MyMoneyTransaction& _t, const MyMoneySpli
 
 void TransactionMatcher::accept(const MyMoneyTransaction& _t, const MyMoneySplit& _s)
 {
-  if(_s.isMatched()) {
+  if (_s.isMatched()) {
     MyMoneyTransaction tm(_t);
     MyMoneySplit sm(_s);
     sm.removeMatch();
@@ -209,19 +209,19 @@ void TransactionMatcher::checkTransaction(const MyMoneyTransaction& tm, const My
 
   const QList<MyMoneySplit>& splits = tm.splits();
   QList<MyMoneySplit>::const_iterator it_s;
-  for(it_s = splits.begin(); it_s != splits.end(); ++it_s) {
+  for (it_s = splits.begin(); it_s != splits.end(); ++it_s) {
     MyMoneyMoney upper((*it_s).shares());
     MyMoneyMoney lower(upper);
-    if((variation > 0) && (variation < 100)) {
+    if ((variation > 0) && (variation < 100)) {
       lower = lower - (lower.abs() * MyMoneyMoney(variation, 100));
       upper = upper + (upper.abs() * MyMoneyMoney(variation, 100));
     }
     // we only check for duplicates / matches if the sign
     // of the amount for this split is identical
-    if((si.shares() >= lower) && (si.shares() <= upper)) {
+    if ((si.shares() >= lower) && (si.shares() <= upper)) {
       // check for duplicate (we can only do that, if we have a bankID)
-      if(!si.bankID().isEmpty()) {
-        if((*it_s).bankID() == si.bankID()) {
+      if (!si.bankID().isEmpty()) {
+        if ((*it_s).bankID() == si.bankID()) {
           lastMatch = QPair<MyMoneyTransaction, MyMoneySplit>(tm, *it_s);
           result = matchedDuplicate;
           break;
@@ -229,17 +229,17 @@ void TransactionMatcher::checkTransaction(const MyMoneyTransaction& tm, const My
         // in case the stored split already has a bankid
         // assigned, it must be a different one and therefore
         // will certainly not match
-        if(!(*it_s).bankID().isEmpty())
+        if (!(*it_s).bankID().isEmpty())
           continue;
       }
       // check if this is the one that matches
-      if((*it_s).accountId() == si.accountId()
-      && (si.shares() >= lower) && (si.shares() <= upper)
-      && !(*it_s).isMatched()) {
-        if(tm.postDate() == ti.postDate()) {
+      if ((*it_s).accountId() == si.accountId()
+          && (si.shares() >= lower) && (si.shares() <= upper)
+          && !(*it_s).isMatched()) {
+        if (tm.postDate() == ti.postDate()) {
           lastMatch = QPair<MyMoneyTransaction, MyMoneySplit>(tm, *it_s);
           result = matchedExact;
-        } else if(result != matchedExact) {
+        } else if (result != matchedExact) {
           lastMatch = QPair<MyMoneyTransaction, MyMoneySplit>(tm, *it_s);
           result = matched;
         }
@@ -265,9 +265,9 @@ MyMoneyObject const * TransactionMatcher::findMatch(const MyMoneyTransaction& ti
   QList<QPair<MyMoneyTransaction, MyMoneySplit> >::iterator it_l;
   QPair<MyMoneyTransaction, MyMoneySplit> lastMatch;
 
-  for(it_l = list.begin(); (result != matchedDuplicate) && (it_l != list.end()); ++it_l) {
+  for (it_l = list.begin(); (result != matchedDuplicate) && (it_l != list.end()); ++it_l) {
     // just skip myself
-    if((*it_l).first.id() == ti.id()) {
+    if ((*it_l).first.id() == ti.id()) {
       continue;
     }
 
@@ -275,7 +275,7 @@ MyMoneyObject const * TransactionMatcher::findMatch(const MyMoneyTransaction& ti
   }
 
   MyMoneyObject* rc = 0;
-  if(result != notMatched) {
+  if (result != notMatched) {
     sm = lastMatch.second;
     rc = new MyMoneyTransaction(lastMatch.first);
 
@@ -285,15 +285,15 @@ MyMoneyObject const * TransactionMatcher::findMatch(const MyMoneyTransaction& ti
     QList<MyMoneySchedule>::iterator it_sch;
     // find all schedules that have a reference to the current account
     list = MyMoneyFile::instance()->scheduleList(m_account.id());
-    for(it_sch = list.begin(); (result != matched && result != matchedExact) && (it_sch != list.end()); ++it_sch) {
+    for (it_sch = list.begin(); (result != matched && result != matchedExact) && (it_sch != list.end()); ++it_sch) {
       // get the next due date adjusted by the weekend switch
       QDate nextDueDate = (*it_sch).nextDueDate();
-      if((*it_sch).isOverdue() ||
-         (nextDueDate >= ti.postDate().addDays(-m_days)
-         && nextDueDate <= ti.postDate().addDays(m_days))) {
+      if ((*it_sch).isOverdue() ||
+          (nextDueDate >= ti.postDate().addDays(-m_days)
+           && nextDueDate <= ti.postDate().addDays(m_days))) {
         MyMoneyTransaction st = KMyMoneyUtils::scheduledTransaction(*it_sch);
         checkTransaction(st, ti, si, lastMatch, result, (*it_sch).variation());
-        if(result == matched || result == matchedExact) {
+        if (result == matched || result == matchedExact) {
           sm = lastMatch.second;
           rc = new MyMoneySchedule(*it_sch);
         }

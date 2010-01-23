@@ -235,7 +235,7 @@ public:
     * The constructor for KMyMoneyView. Just creates all the tabs for the
     * different aspects of the MyMoneyFile.
     */
-  explicit KMyMoneyView(QWidget *parent=0);
+  explicit KMyMoneyView(QWidget *parent = 0);
 
   /**
     * Destructor
@@ -305,7 +305,9 @@ public:
     * @retval true file is native
     * @retval false file is foreign
     */
-  bool isNativeFile() { return (m_fileOpen && (m_fileType < MaxNativeFileType)); }
+  bool isNativeFile() {
+    return (m_fileOpen && (m_fileType < MaxNativeFileType));
+  }
 
   /**
    * Call this to find out if the currently open file is a sql database
@@ -313,8 +315,9 @@ public:
    * @retval true file is database
    * @retval false file is serial
    */
-  bool isDatabase()
-    { return (m_fileOpen && ((m_fileType == KmmDb))); }
+  bool isDatabase() {
+    return (m_fileOpen && ((m_fileType == KmmDb)));
+  }
 
   /**
     * Call this to see if the MyMoneyFile contains any unsaved data.
@@ -380,17 +383,17 @@ public:
 
   bool canDuplicateTransactions(const KMyMoneyRegister::SelectedTransactions& list, QString& tooltip) const;
 
-      /**
-    * check if the current view allows to edit the selected transactions
-    *
-    * @param list list of selected transactions
-    * @param tooltip reference to string receiving the tooltip text
-    *        which explains why the edit function is not available (in case
-    *        of returning @c false)
-    *
-    * @retval true Yes, view allows to enter/edit transactions
-    * @retval false No, view cannot enter/edit transactions
-    */
+  /**
+  * check if the current view allows to edit the selected transactions
+  *
+  * @param list list of selected transactions
+  * @param tooltip reference to string receiving the tooltip text
+  *        which explains why the edit function is not available (in case
+  *        of returning @c false)
+  *
+  * @retval true Yes, view allows to enter/edit transactions
+  * @retval false No, view cannot enter/edit transactions
+  */
   bool canEditTransactions(const KMyMoneyRegister::SelectedTransactions& list, QString& tooltip) const;
 
   /**
@@ -512,7 +515,9 @@ public slots:
   /**
     * This slot switches the view to present the home page
     */
-  void slotShowHomePage(void) { setCurrentPage(m_homeViewFrame); }
+  void slotShowHomePage(void) {
+    setCurrentPage(m_homeViewFrame);
+  }
 
 protected slots:
   /**
@@ -541,7 +546,7 @@ private:
    * @retval true Database opened successfully
    * @retval false Could not open or read database
    */
-  bool openDatabase (const KUrl& dbaseURL);
+  bool openDatabase(const KUrl& dbaseURL);
   /**
    * This method is used after a file or database has been
    * read into storage, and performs various initialization tasks
@@ -565,7 +570,7 @@ private:
     *
     * @note This method will close the file when it is written.
     */
-  void saveToLocalFile(const QString& localFile, IMyMoneyStorageFormat* writer, bool plaintext=false, const QString& keyList = QString());
+  void saveToLocalFile(const QString& localFile, IMyMoneyStorageFormat* writer, bool plaintext = false, const QString& keyList = QString());
 
   /**
     * Internal method used by slotAccountNew() and slotAccountCategory().
@@ -582,11 +587,11 @@ signals:
   void accountSelectedForContextMenu(const MyMoneyAccount& acc);
 
   void viewStateChanged(bool enabled);
-   /**
-     * This signal is emitted to inform the kmmFile plugin when various file actions
-     * occur. The Action parameter distinguishes between them.
-     */
-  void kmmFilePlugin (unsigned int action);
+  /**
+    * This signal is emitted to inform the kmmFile plugin when various file actions
+    * occur. The Action parameter distinguishes between them.
+    */
+  void kmmFilePlugin(unsigned int action);
 
   /**
     * Signal is emitted when reconciliation starts or ends. In case of end,
@@ -625,7 +630,9 @@ public:
     * @retval false view was not capable to edit transactions
     * @retval true view was capable to edit the transactions and did so
     */
-  bool editTransactions(const QList<MyMoneyTransaction>& transactions) const { Q_UNUSED(transactions)  return false; }
+  bool editTransactions(const QList<MyMoneyTransaction>& transactions) const {
+    Q_UNUSED(transactions)  return false;
+  }
 private:
   /// \internal d-pointer class.
   class Private;

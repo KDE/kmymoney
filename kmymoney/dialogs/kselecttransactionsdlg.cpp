@@ -44,8 +44,8 @@
 #include <ktoolinvocation.h>
 
 KSelectTransactionsDlg::KSelectTransactionsDlg(const MyMoneyAccount& _account, QWidget* parent) :
-  KSelectTransactionsDlgDecl(parent),
-  m_account(_account)
+    KSelectTransactionsDlgDecl(parent),
+    m_account(_account)
 {
   // setup descriptive texts
   setWindowTitle(i18n("Select Transaction"));
@@ -59,8 +59,8 @@ KSelectTransactionsDlg::KSelectTransactionsDlg(const MyMoneyAccount& _account, Q
 
   // setup header font
   QFont font = KMyMoneyGlobalSettings::listHeaderFont();
-  QFontMetrics fm( font );
-  int height = fm.lineSpacing()+6;
+  QFontMetrics fm(font);
+  int height = fm.lineSpacing() + 6;
   m_register->horizontalHeader()->setMinimumHeight(height);
   m_register->horizontalHeader()->setMaximumHeight(height);
   m_register->horizontalHeader()->setFont(font);
@@ -97,8 +97,8 @@ void KSelectTransactionsDlg::slotEnableOk(const KMyMoneyRegister::SelectedTransa
 void KSelectTransactionsDlg::addTransaction(const MyMoneyTransaction& t)
 {
   QList<MyMoneySplit>::const_iterator it_s;
-  for(it_s = t.splits().begin(); it_s != t.splits().end(); ++it_s) {
-    if((*it_s).accountId() == m_account.id()) {
+  for (it_s = t.splits().begin(); it_s != t.splits().end(); ++it_s) {
+    if ((*it_s).accountId() == m_account.id()) {
       KMyMoneyRegister::Transaction* tr = KMyMoneyRegister::Register::transactionFactory(m_register, t, (*it_s), 0);
       // force full detail display
       tr->setNumRowsRegister(tr->numRowsRegister(true));
@@ -143,9 +143,9 @@ MyMoneyTransaction KSelectTransactionsDlg::transaction(void) const
 
   QList<KMyMoneyRegister::RegisterItem*> list;
   list = m_register->selectedItems();
-  if(list.count()) {
+  if (list.count()) {
     KMyMoneyRegister::Transaction* _t = dynamic_cast<KMyMoneyRegister::Transaction*>(list[0]);
-    if(_t)
+    if (_t)
       t = _t->transaction();
   }
   return t;
@@ -156,27 +156,27 @@ bool KSelectTransactionsDlg::eventFilter(QObject* o, QEvent* e)
   bool rc = false;
   QKeyEvent* k;
 
-  if(o == m_register) {
-    switch(e->type()) {
-      case QEvent::KeyPress:
-        k = dynamic_cast<QKeyEvent*>(e);
-        if((k->modifiers() & Qt::KeyboardModifierMask) == 0
-           || (k->modifiers() & Qt::KeypadModifier) != 0) {
-          switch(k->key()) {
-            case Qt::Key_Return:
-            case Qt::Key_Enter:
-              if(buttonOk->isEnabled()) {
-                accept();
-                rc = true;
-              }
-              // tricky fall through here
-            default:
-              break;
+  if (o == m_register) {
+    switch (e->type()) {
+    case QEvent::KeyPress:
+      k = dynamic_cast<QKeyEvent*>(e);
+      if ((k->modifiers() & Qt::KeyboardModifierMask) == 0
+          || (k->modifiers() & Qt::KeypadModifier) != 0) {
+        switch (k->key()) {
+        case Qt::Key_Return:
+        case Qt::Key_Enter:
+          if (buttonOk->isEnabled()) {
+            accept();
+            rc = true;
           }
+          // tricky fall through here
+        default:
+          break;
         }
-        // tricky fall through here
-      default:
-        break;
+      }
+      // tricky fall through here
+    default:
+      break;
     }
   }
   return rc;

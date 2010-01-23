@@ -66,7 +66,9 @@ public:
 
   virtual QWidget* firstWidget(void) const;
 
-  virtual bool fixTransactionCommodity(const MyMoneyAccount& /* account */) { return true; }
+  virtual bool fixTransactionCommodity(const MyMoneyAccount& /* account */) {
+    return true;
+  }
 
   void totalAmount(MyMoneyMoney& amount) const;
 
@@ -97,7 +99,9 @@ public:
 
   priceModeE priceMode(void) const;
 
-  const MyMoneySecurity& security(void) const { return m_security; }
+  const MyMoneySecurity& security(void) const {
+    return m_security;
+  }
 
 protected slots:
   void slotCreateSecurity(const QString& name, QString& id);

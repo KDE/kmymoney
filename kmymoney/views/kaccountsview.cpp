@@ -50,49 +50,49 @@ QPixmap accountPixmap(const MyMoneyAccount& account, bool reconcileFlag)
 {
   QString pixmap;
 
-  switch(account.accountType()) {
-    default:
-      if(account.accountGroup() == MyMoneyAccount::Asset)
-        pixmap = "account-types-asset";
-      else
-        pixmap = "account-types-liability";
-      break;
-
-    case MyMoneyAccount::Investment:
-      pixmap = "account-types-investments";
-      break;
-
-    case MyMoneyAccount::Checkings:
-      pixmap = "account-types-checking";
-      break;
-    case MyMoneyAccount::Savings:
-      pixmap = "account-types-savings";
-      break;
-
-    case MyMoneyAccount::AssetLoan:
-    case MyMoneyAccount::Loan:
-      pixmap = "account-types-loan";
-      break;
-
-    case MyMoneyAccount::CreditCard:
-      pixmap = "account-types-credit-card";
-      break;
-
-    case MyMoneyAccount::Asset:
+  switch (account.accountType()) {
+  default:
+    if (account.accountGroup() == MyMoneyAccount::Asset)
       pixmap = "account-types-asset";
-      break;
+    else
+      pixmap = "account-types-liability";
+    break;
 
-    case MyMoneyAccount::Cash:
-      pixmap = "account-types-cash";
-      break;
+  case MyMoneyAccount::Investment:
+    pixmap = "account-types-investments";
+    break;
+
+  case MyMoneyAccount::Checkings:
+    pixmap = "account-types-checking";
+    break;
+  case MyMoneyAccount::Savings:
+    pixmap = "account-types-savings";
+    break;
+
+  case MyMoneyAccount::AssetLoan:
+  case MyMoneyAccount::Loan:
+    pixmap = "account-types-loan";
+    break;
+
+  case MyMoneyAccount::CreditCard:
+    pixmap = "account-types-credit-card";
+    break;
+
+  case MyMoneyAccount::Asset:
+    pixmap = "account-types-asset";
+    break;
+
+  case MyMoneyAccount::Cash:
+    pixmap = "account-types-cash";
+    break;
   }
   QPixmap result = DesktopIcon(pixmap);
 
-  if(account.isClosed()) {
+  if (account.isClosed()) {
     QPixmap overlay = DesktopIcon("account-types-closed");
     QPainter pixmapPainter(&result);
     pixmapPainter.drawPixmap(0, 0, overlay, 0, 0, overlay.width(), overlay.height());
-  } else if(reconcileFlag) {
+  } else if (reconcileFlag) {
     QPixmap overlay = DesktopIcon("account-types-reconciled");
     QPainter pixmapPainter(&result);
     pixmapPainter.drawPixmap(0, 0, overlay, 0, 0, overlay.width(), overlay.height());
@@ -102,9 +102,9 @@ QPixmap accountPixmap(const MyMoneyAccount& account, bool reconcileFlag)
 }
 
 KMyMoneyAccountIconItem::KMyMoneyAccountIconItem(Q3IconView *parent, const MyMoneyAccount& account) :
-  K3IconViewItem(parent, account.name()),
-  m_account(account),
-  m_reconcileFlag(false)
+    K3IconViewItem(parent, account.name()),
+    m_account(account),
+    m_reconcileFlag(false)
 {
   updateAccount(account);
 }
@@ -115,7 +115,7 @@ KMyMoneyAccountIconItem::~KMyMoneyAccountIconItem()
 
 void KMyMoneyAccountIconItem::setReconciliation(bool on)
 {
-  if(m_reconcileFlag == on)
+  if (m_reconcileFlag == on)
     return;
   m_reconcileFlag = on;
   updateAccount(m_account);
@@ -127,9 +127,9 @@ void KMyMoneyAccountIconItem::updateAccount(const MyMoneyAccount& account)
 }
 
 KAccountsView::KAccountsView(QWidget *parent) :
-  KAccountsViewDecl(parent),
-  m_assetItem(0),
-  m_liabilityItem(0)
+    KAccountsViewDecl(parent),
+    m_assetItem(0),
+    m_liabilityItem(0)
 {
   // create the searchline widget
   // and insert it into the existing layout
@@ -138,21 +138,21 @@ KAccountsView::KAccountsView(QWidget *parent) :
 
   // setup icons for collapse and expand button
   KGuiItem collapseGuiItem("",
-                          KIcon("zoom-out"),
-                          QString(),
-                          QString());
+                           KIcon("zoom-out"),
+                           QString(),
+                           QString());
   KGuiItem expandGuiItem("",
-                          KIcon("zoom-in"),
-                          QString(),
-                          QString());
+                         KIcon("zoom-in"),
+                         QString(),
+                         QString());
   m_collapseButton->setGuiItem(collapseGuiItem);
   m_expandButton->setGuiItem(expandGuiItem);
 
-  for(int i=0; i < MaxViewTabs; ++i)
+  for (int i = 0; i < MaxViewTabs; ++i)
     m_needReload[i] = false;
 
   KSharedConfigPtr config = KGlobal::config();
-  KConfigGroup grp= config->group("Last Use Settings");
+  KConfigGroup grp = config->group("Last Use Settings");
   m_tab->setCurrentIndex(grp.readEntry("KAccountsView_LastType", 0));
 
   connect(m_tab, SIGNAL(currentChanged(QWidget*)), this, SLOT(slotTabCurrentChanged(QWidget*)));
@@ -178,7 +178,7 @@ KAccountsView::~KAccountsView()
 
 void KAccountsView::slotExpandCollapse(void)
 {
-  if(sender()) {
+  if (sender()) {
     KMyMoneyGlobalSettings::setShowAccountsExpanded(sender() == m_expandButton);
   }
 }
@@ -187,7 +187,7 @@ void KAccountsView::slotLoadAccounts(void)
 {
   m_needReload[ListView] = true;
   m_needReload[IconView] = true;
-  if(isVisible())
+  if (isVisible())
     slotTabCurrentChanged(m_tab->currentWidget());
 }
 
@@ -202,40 +202,40 @@ void KAccountsView::slotTabCurrentChanged(QWidget* _tab)
 
   loadAccounts(tab);
 
-  switch(tab) {
-    case ListView:
-      // update the hint if categories are hidden
-      m_hiddenCategories->setVisible(m_haveUnusedCategories);
-      break;
+  switch (tab) {
+  case ListView:
+    // update the hint if categories are hidden
+    m_hiddenCategories->setVisible(m_haveUnusedCategories);
+    break;
 
-    case IconView:
-      m_hiddenCategories->hide();
-      break;
+  case IconView:
+    m_hiddenCategories->hide();
+    break;
 
-    default:
-      break;
+  default:
+    break;
   }
 
   KMyMoneyAccountTreeBaseItem* treeItem = m_accountTree->selectedItem();
   KMyMoneyAccountIconItem* iconItem = selectedIcon();
 
   emit selectObject(MyMoneyAccount());
-  switch(static_cast<AccountsViewTab>(m_tab->currentIndex())) {
-    case ListView:
-      // if we have a selected account, let the application know about it
-      if(treeItem) {
-        emit selectObject(treeItem->itemObject());
-      }
-      break;
+  switch (static_cast<AccountsViewTab>(m_tab->currentIndex())) {
+  case ListView:
+    // if we have a selected account, let the application know about it
+    if (treeItem) {
+      emit selectObject(treeItem->itemObject());
+    }
+    break;
 
-    case IconView:
-      if(iconItem) {
-        emit selectObject(iconItem->itemObject());
-      }
-      break;
+  case IconView:
+    if (iconItem) {
+      emit selectObject(iconItem->itemObject());
+    }
+    break;
 
-    default:
-      break;
+  default:
+    break;
   }
 }
 
@@ -250,16 +250,16 @@ void KAccountsView::showEvent(QShowEvent * event)
 
 void KAccountsView::loadAccounts(AccountsViewTab tab)
 {
-  if(m_needReload[tab]) {
-    switch(tab) {
-      case ListView:
-        loadListView();
-        break;
-      case IconView:
-        loadIconView();
-        break;
-      default:
-        break;
+  if (m_needReload[tab]) {
+    switch (tab) {
+    case ListView:
+      loadListView();
+      break;
+    case IconView:
+      loadIconView();
+      break;
+    default:
+      break;
     }
     m_needReload[tab] = false;
   }
@@ -272,7 +272,7 @@ void KAccountsView::loadIconView(void)
   // remember the positions of the icons
   QMap<QString, QPoint> posMap;
   KMyMoneyAccountIconItem* p = dynamic_cast<KMyMoneyAccountIconItem*>(m_accountIcons->firstItem());
-  for(;p; p = dynamic_cast<KMyMoneyAccountIconItem*>(p->nextItem()))
+  for (;p; p = dynamic_cast<KMyMoneyAccountIconItem*>(p->nextItem()))
     posMap[p->itemObject().id()] = p->pos();
 
   // turn off updates to avoid flickering during reload
@@ -288,59 +288,59 @@ void KAccountsView::loadIconView(void)
   QList<MyMoneyAccount> alist;
   file->accountList(alist);
   QList<MyMoneyAccount>::const_iterator it_a;
-  for(it_a = alist.constBegin(); it_a != alist.constEnd(); ++it_a) {
+  for (it_a = alist.constBegin(); it_a != alist.constEnd(); ++it_a) {
     accountMap[QString("%1-%2").arg((*it_a).name()).arg((*it_a).id())] = *it_a;
   }
 
   bool showClosedAccounts = kmymoney->toggleAction("view_show_all_accounts")->isChecked()
-      || !KMyMoneyGlobalSettings::hideClosedAccounts();
+                            || !KMyMoneyGlobalSettings::hideClosedAccounts();
   bool existNewIcons = false;
 
   // parse list and add all asset and liability accounts
   QMap<QString, MyMoneyAccount>::const_iterator it;
   QPoint loc;
-  for(it = accountMap.constBegin(); it != accountMap.constEnd(); ++it) {
-    if((*it).isClosed() && !showClosedAccounts)
+  for (it = accountMap.constBegin(); it != accountMap.constEnd(); ++it) {
+    if ((*it).isClosed() && !showClosedAccounts)
       continue;
     const QString& pos = (*it).value("kmm-iconpos");
     KMyMoneyAccountIconItem* item;
-    switch((*it).accountGroup()) {
-      case MyMoneyAccount::Equity:
-        if(!KMyMoneyGlobalSettings::expertMode())
-          continue;
-        // tricky fall through here
+    switch ((*it).accountGroup()) {
+    case MyMoneyAccount::Equity:
+      if (!KMyMoneyGlobalSettings::expertMode())
+        continue;
+      // tricky fall through here
 
-      case MyMoneyAccount::Asset:
-      case MyMoneyAccount::Liability:
-        // don't show stock accounts
-        if((*it).isInvest())
-          continue;
+    case MyMoneyAccount::Asset:
+    case MyMoneyAccount::Liability:
+      // don't show stock accounts
+      if ((*it).isInvest())
+        continue;
 
-        // if we have a position stored with the object and no other
-        // idea of it's current position, then take the one
-        // stored inside the object. Also, turn off auto arrangement
-        if(!pos.isEmpty() && posMap[(*it).id()] == QPoint()) {
-          posMap[(*it).id()] = point(pos);
-        }
+      // if we have a position stored with the object and no other
+      // idea of it's current position, then take the one
+      // stored inside the object. Also, turn off auto arrangement
+      if (!pos.isEmpty() && posMap[(*it).id()] == QPoint()) {
+        posMap[(*it).id()] = point(pos);
+      }
 
-        loc = posMap[(*it).id()];
-        if(loc == QPoint()) {
-          existNewIcons = true;
-        } else {
-          m_accountIcons->setAutoArrange(false);
-        }
+      loc = posMap[(*it).id()];
+      if (loc == QPoint()) {
+        existNewIcons = true;
+      } else {
+        m_accountIcons->setAutoArrange(false);
+      }
 
-        item = new KMyMoneyAccountIconItem(m_accountIcons, *it);
-        if((*it).id() == m_reconciliationAccount.id())
-          item->setReconciliation(true);
+      item = new KMyMoneyAccountIconItem(m_accountIcons, *it);
+      if ((*it).id() == m_reconciliationAccount.id())
+        item->setReconciliation(true);
 
-        if(loc != QPoint()) {
-          item->move(loc);
-        }
-        break;
+      if (loc != QPoint()) {
+        item->move(loc);
+      }
+      break;
 
-      default:
-        break;
+    default:
+      break;
     }
   }
 
@@ -348,7 +348,7 @@ void KAccountsView::loadIconView(void)
   m_securityMap.clear();
   m_transactionCountMap.clear();
 
-  if(existNewIcons) {
+  if (existNewIcons) {
     m_accountIcons->arrangeItemsInGrid(true);
   }
 
@@ -367,9 +367,9 @@ void KAccountsView::loadListView(void)
 
   // keep a map of all 'expanded' accounts
   Q3ListViewItemIterator it_lvi(m_accountTree);
-  while(it_lvi.current()) {
+  while (it_lvi.current()) {
     item = dynamic_cast<KMyMoneyAccountTreeItem*>(it_lvi.current());
-    if(item && item->isOpen()) {
+    if (item && item->isOpen()) {
       isOpen[item->id()] = true;
     }
     ++it_lvi;
@@ -394,7 +394,7 @@ void KAccountsView::loadListView(void)
   QList<MyMoneySecurity> slist = file->currencyList();
   slist += file->securityList();
   QList<MyMoneySecurity>::const_iterator it_s;
-  for(it_s = slist.constBegin(); it_s != slist.constEnd(); ++it_s) {
+  for (it_s = slist.constBegin(); it_s != slist.constEnd(); ++it_s) {
     m_securityMap[(*it_s).id()] = *it_s;
   }
   m_transactionCountMap = file->transactionCountMap();
@@ -422,13 +422,13 @@ void KAccountsView::loadListView(void)
     KMyMoneyAccountTreeItem *expenseItem = new KMyMoneyAccountTreeItem(m_accountTree, expense, security, i18n("Expense"));
     m_haveUnusedCategories |= loadSubAccounts(expenseItem, expense.accountList());
 
-    if(KMyMoneyGlobalSettings::expertMode()) {
+    if (KMyMoneyGlobalSettings::expertMode()) {
       const MyMoneyAccount equity = file->equity();
       KMyMoneyAccountTreeItem *equityItem = new KMyMoneyAccountTreeItem(m_accountTree, equity, security, i18n("Equity"));
       loadSubAccounts(equityItem, equity.accountList());
     }
 
-  } catch(MyMoneyException *e) {
+  } catch (MyMoneyException *e) {
     kDebug(2) << "Problem in accounts list view: " << e->what();
     delete e;
   }
@@ -436,12 +436,12 @@ void KAccountsView::loadListView(void)
   // scan through the list of accounts and re-expand those that were
   // expanded and re-select the one that was probably selected before
   it_lvi = Q3ListViewItemIterator(m_accountTree);
-  while(it_lvi.current()) {
+  while (it_lvi.current()) {
     item = dynamic_cast<KMyMoneyAccountTreeItem*>(it_lvi.current());
-    if(item) {
-      if(item->id() == selectedItemId)
+    if (item) {
+      if (item->id() == selectedItemId)
         m_accountTree->setSelected(item, true);
-      if(isOpen.find(item->id()) != isOpen.end())
+      if (isOpen.find(item->id()) != isOpen.end())
         item->setOpen(true);
     }
     ++it_lvi;
@@ -456,7 +456,7 @@ void KAccountsView::loadListView(void)
   //m_accountTree->setUpdatesEnabled(true);
 
   // and in case we need to show things expanded, we'll do so
-  if(KMyMoneyGlobalSettings::showAccountsExpanded())
+  if (KMyMoneyGlobalSettings::showAccountsExpanded())
     m_accountTree->slotExpandAll();
 
   // clear the current contents
@@ -470,35 +470,35 @@ bool KAccountsView::loadSubAccounts(KMyMoneyAccountTreeItem* parent, const QStri
   MyMoneyFile* file = MyMoneyFile::instance();
   bool unused = false;
   bool showClosedAccounts = kmymoney->toggleAction("view_show_all_accounts")->isChecked()
-                         || !KMyMoneyGlobalSettings::hideClosedAccounts();
+                            || !KMyMoneyGlobalSettings::hideClosedAccounts();
 
   QStringList::const_iterator it_a;
-  for(it_a = accountList.begin(); it_a != accountList.end(); ++it_a) {
+  for (it_a = accountList.begin(); it_a != accountList.end(); ++it_a) {
     const MyMoneyAccount& acc = file->account(*it_a);
     QList<MyMoneyPrice> prices;
     MyMoneySecurity security = file->baseCurrency();
     try {
-      if(acc.isInvest()) {
+      if (acc.isInvest()) {
         security = m_securityMap[acc.currencyId()];
         prices += file->price(acc.currencyId(), security.tradingCurrency());
-        if(security.tradingCurrency() != file->baseCurrency().id()) {
+        if (security.tradingCurrency() != file->baseCurrency().id()) {
           MyMoneySecurity sec = m_securityMap[security.tradingCurrency()];
           prices += file->price(sec.id(), file->baseCurrency().id());
         }
-      } else if(acc.currencyId() != file->baseCurrency().id()) {
-        if(acc.currencyId() != file->baseCurrency().id()) {
+      } else if (acc.currencyId() != file->baseCurrency().id()) {
+        if (acc.currencyId() != file->baseCurrency().id()) {
           security = m_securityMap[acc.currencyId()];
           prices += file->price(acc.currencyId(), file->baseCurrency().id());
         }
       }
 
-    } catch(MyMoneyException *e) {
+    } catch (MyMoneyException *e) {
       kDebug(2) << Q_FUNC_INFO << " caught exception while adding " << acc.name() << "[" << acc.id() << "]: " << e->what();
       delete e;
     }
 
     KMyMoneyAccountTreeItem* item = new KMyMoneyAccountTreeItem(parent, acc, prices, security);
-    if(acc.id() == m_reconciliationAccount.id())
+    if (acc.id() == m_reconciliationAccount.id())
       item->setReconciliation(true);
 
     unused |= loadSubAccounts(item, acc.accountList());
@@ -508,15 +508,15 @@ bool KAccountsView::loadSubAccounts(KMyMoneyAccountTreeItem* parent, const QStri
 
     // In case of a category which is unused and we are requested to suppress
     // the display of those,
-    if(acc.isIncomeExpense()) {
-      if(KMyMoneyGlobalSettings::hideUnusedCategory() && thisUnused) {
+    if (acc.isIncomeExpense()) {
+      if (KMyMoneyGlobalSettings::hideUnusedCategory() && thisUnused) {
         unused = true;
         delete item;
       }
     }
 
     // if the account is closed and we should not show it, we delete the item
-    if(acc.isClosed() && !showClosedAccounts) {
+    if (acc.isClosed() && !showClosedAccounts) {
       delete item;
     }
   }
@@ -532,9 +532,9 @@ void KAccountsView::slotReconcileAccount(const MyMoneyAccount& acc, const QDate&
   // expanded and re-select the one that was probably selected before
   Q3ListViewItemIterator it_lvi(m_accountTree);
   KMyMoneyAccountTreeItem* item;
-  while(it_lvi.current()) {
+  while (it_lvi.current()) {
     item = dynamic_cast<KMyMoneyAccountTreeItem*>(it_lvi.current());
-    if(item) {
+    if (item) {
       item->setReconciliation(false);
     }
     ++it_lvi;
@@ -542,19 +542,19 @@ void KAccountsView::slotReconcileAccount(const MyMoneyAccount& acc, const QDate&
 
   // scan trough the icon list and do the same thing
   KMyMoneyAccountIconItem* icon = dynamic_cast<KMyMoneyAccountIconItem*>(m_accountIcons->firstItem());
-  for(;icon; icon = dynamic_cast<KMyMoneyAccountIconItem*>(icon->nextItem())) {
+  for (;icon; icon = dynamic_cast<KMyMoneyAccountIconItem*>(icon->nextItem())) {
     icon->setReconciliation(false);
   }
 
   m_reconciliationAccount = acc;
 
-  if(!acc.id().isEmpty()) {
+  if (!acc.id().isEmpty()) {
     // scan through the list of accounts and mark
     // the one that is currently reconciled
     it_lvi = Q3ListViewItemIterator(m_accountTree);
-    while(it_lvi.current()) {
+    while (it_lvi.current()) {
       item = dynamic_cast<KMyMoneyAccountTreeItem*>(it_lvi.current());
-      if(item && item->itemObject().id() == acc.id()) {
+      if (item && item->itemObject().id() == acc.id()) {
         item->setReconciliation(true);
         break;
       }
@@ -563,8 +563,8 @@ void KAccountsView::slotReconcileAccount(const MyMoneyAccount& acc, const QDate&
 
     // scan trough the icon list and do the same thing
     icon = dynamic_cast<KMyMoneyAccountIconItem*>(m_accountIcons->firstItem());
-    for(;icon; icon = dynamic_cast<KMyMoneyAccountIconItem*>(icon->nextItem())) {
-      if(icon->itemObject().id() == acc.id()) {
+    for (;icon; icon = dynamic_cast<KMyMoneyAccountIconItem*>(icon->nextItem())) {
+      if (icon->itemObject().id() == acc.id()) {
         icon->setReconciliation(true);
         break;
       }
@@ -574,7 +574,7 @@ void KAccountsView::slotReconcileAccount(const MyMoneyAccount& acc, const QDate&
 
 void KAccountsView::slotUpdateNetWorth(void)
 {
-  if(!m_assetItem || !m_liabilityItem)
+  if (!m_assetItem || !m_liabilityItem)
     return;
 
   MyMoneyMoney netWorth = m_assetItem->totalValue() - m_liabilityItem->totalValue();
@@ -586,13 +586,13 @@ void KAccountsView::slotUpdateNetWorth(void)
   //  s += "~ ";
 
   s.replace(QString(" "), QString("&nbsp;"));
-  if(netWorth.isNegative()) {
+  if (netWorth.isNegative()) {
     s += "<b><font color=\"red\">";
   }
   const MyMoneySecurity& sec = MyMoneyFile::instance()->baseCurrency();
   QString v(netWorth.formatMoney(sec));
   s += v.replace(QString(" "), QString("&nbsp;"));
-  if(netWorth.isNegative()) {
+  if (netWorth.isNegative()) {
     s += "</font></b>";
   }
 
@@ -608,21 +608,21 @@ KMyMoneyAccountIconItem* KAccountsView::selectedIcon(void) const
 void KAccountsView::slotSelectIcon(Q3IconViewItem* item)
 {
   KMyMoneyAccountIconItem* p = dynamic_cast<KMyMoneyAccountIconItem*>(item);
-  if(p)
+  if (p)
     emit selectObject(p->itemObject());
 }
 
 void KAccountsView::slotOpenContext(Q3IconViewItem* item)
 {
   KMyMoneyAccountIconItem* p = dynamic_cast<KMyMoneyAccountIconItem*>(item);
-  if(p)
+  if (p)
     emit openContextMenu(p->itemObject());
 }
 
 void KAccountsView::slotOpenObject(Q3IconViewItem* item)
 {
   KMyMoneyAccountIconItem* p = dynamic_cast<KMyMoneyAccountIconItem*>(item);
-  if(p)
+  if (p)
     emit openObject(p->itemObject());
 }
 
@@ -636,7 +636,7 @@ QPoint KAccountsView::point(const QString& val) const
   QRegExp exp("(\\d+);(\\d+)");
   int x = 0;
   int y = 0;
-  if(exp.indexIn(val) != -1) {
+  if (exp.indexIn(val) != -1) {
     x = exp.cap(1).toInt();
     y = exp.cap(2).toInt();
   }
@@ -645,19 +645,19 @@ QPoint KAccountsView::point(const QString& val) const
 
 void KAccountsView::slotUpdateIconPos(unsigned int action)
 {
-  if(action != KMyMoneyView::preSave)
+  if (action != KMyMoneyView::preSave)
     return;
 
   MyMoneyFileTransaction ft;
   KMyMoneyAccountIconItem* p = dynamic_cast<KMyMoneyAccountIconItem*>(m_accountIcons->firstItem());
-  for(;p; p = dynamic_cast<KMyMoneyAccountIconItem*>(p->nextItem())) {
+  for (;p; p = dynamic_cast<KMyMoneyAccountIconItem*>(p->nextItem())) {
     const MyMoneyAccount& acc = dynamic_cast<const MyMoneyAccount&>(p->itemObject());
-    if(acc.value("kmm-iconpos") != point(p->pos())) {
+    if (acc.value("kmm-iconpos") != point(p->pos())) {
       MyMoneyAccount a(acc);
       a.setValue("kmm-iconpos", point(p->pos()));
       try {
         MyMoneyFile::instance()->modifyAccount(a);
-      } catch(MyMoneyException* e) {
+      } catch (MyMoneyException* e) {
         kDebug(2) << "Unable to update icon pos: " << e->what();
         delete e;
       }

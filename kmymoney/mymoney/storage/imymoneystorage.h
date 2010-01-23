@@ -58,8 +58,12 @@ public:
   MyMoneyFileBitArray() : QBitArray() {}
   MyMoneyFileBitArray(int size) : QBitArray(size) {}
   bool testBit(int index) const;
-  bool operator[](int index) const { return testBit(index); }
-  bool at(int index) const { return testBit(index); }
+  bool operator[](int index) const {
+    return testBit(index);
+  }
+  bool at(int index) const {
+    return testBit(index);
+  }
 };
 
 
@@ -73,7 +77,8 @@ public:
   *
   * @see MyMoneySeqAccessMgr
   */
-class IMyMoneyStorage {
+class IMyMoneyStorage
+{
 public:
 
   typedef enum {
@@ -282,7 +287,7 @@ public:
     * @param date return balance for specific date
     * @return balance of the account as MyMoneyMoney object
     */
-  virtual const MyMoneyMoney balance(const QString& id, const QDate& date) const= 0;
+  virtual const MyMoneyMoney balance(const QString& id, const QDate& date) const = 0;
 
   /**
     * This method is used to return the actual balance of an account
@@ -652,18 +657,18 @@ public:
     * @return const QValueList<MyMoneySchedule> list of schedule objects.
     */
   virtual const QList<MyMoneySchedule> scheduleList(const QString& accountId = QString(),
-                                     const MyMoneySchedule::typeE type = MyMoneySchedule::TYPE_ANY,
-                                     const MyMoneySchedule::occurrenceE occurrence = MyMoneySchedule::OCCUR_ANY,
-                                     const MyMoneySchedule::paymentTypeE paymentType = MyMoneySchedule::STYPE_ANY,
-                                     const QDate& startDate = QDate(),
-                                     const QDate& endDate = QDate(),
-                                     const bool overdue = false) const = 0;
+      const MyMoneySchedule::typeE type = MyMoneySchedule::TYPE_ANY,
+      const MyMoneySchedule::occurrenceE occurrence = MyMoneySchedule::OCCUR_ANY,
+      const MyMoneySchedule::paymentTypeE paymentType = MyMoneySchedule::STYPE_ANY,
+      const QDate& startDate = QDate(),
+      const QDate& endDate = QDate(),
+      const bool overdue = false) const = 0;
 
-  virtual const QList<MyMoneySchedule> scheduleListEx( int scheduleTypes,
-                                              int scheduleOcurrences,
-                                              int schedulePaymentTypes,
-                                              QDate startDate,
-                                              const QStringList& accounts=QStringList()) const = 0;
+  virtual const QList<MyMoneySchedule> scheduleListEx(int scheduleTypes,
+      int scheduleOcurrences,
+      int schedulePaymentTypes,
+      QDate startDate,
+      const QStringList& accounts = QStringList()) const = 0;
 
   /**
     * This method is used to add a new currency object to the engine.
@@ -725,7 +730,7 @@ public:
     *
     * @return QValueList of all MyMoneyReport objects.
     */
-  virtual const QList<MyMoneyReport> reportList( void ) const = 0;
+  virtual const QList<MyMoneyReport> reportList(void) const = 0;
 
   /**
     * This method is used to add a new report to the engine.
@@ -737,7 +742,7 @@ public:
     *
     * @param report reference to the MyMoneyReport object
     */
-  virtual void addReport( MyMoneyReport& report ) = 0;
+  virtual void addReport(MyMoneyReport& report) = 0;
 
   /**
     * This method is used to modify an existing MyMoneyReport
@@ -747,7 +752,7 @@ public:
     *
     * @param report const reference to the MyMoneyReport object to be updated
     */
-  virtual void modifyReport( const MyMoneyReport& report ) = 0;
+  virtual void modifyReport(const MyMoneyReport& report) = 0;
 
   /**
     * This method returns the number of reports currently known to file
@@ -755,7 +760,7 @@ public:
     *
     * @return number of reports known to file
     */
-  virtual unsigned countReports( void ) const = 0;
+  virtual unsigned countReports(void) const = 0;
 
   /**
     * This method is used to retrieve a single MyMoneyReport object.
@@ -766,7 +771,7 @@ public:
     * @param id QString containing the id of the MyMoneyReport object
     * @return MyMoneyReport object
     */
-  virtual const MyMoneyReport report( const QString& id ) const = 0;
+  virtual const MyMoneyReport report(const QString& id) const = 0;
 
   /**
     * This method is used to remove an existing MyMoneyReport object
@@ -786,7 +791,7 @@ public:
     *
     * @return QValueList of all MyMoneyBudget objects.
     */
-  virtual const QList<MyMoneyBudget> budgetList( void ) const = 0;
+  virtual const QList<MyMoneyBudget> budgetList(void) const = 0;
 
   /**
     * This method is used to add a new budget to the engine.
@@ -798,7 +803,7 @@ public:
     *
     * @param budget reference to the MyMoneyBudget object
     */
-  virtual void addBudget( MyMoneyBudget& budget ) = 0;
+  virtual void addBudget(MyMoneyBudget& budget) = 0;
 
   /**
     * This method is used to retrieve the id to a corresponding
@@ -819,7 +824,7 @@ public:
     *
     * @param budget const reference to the MyMoneyBudget object to be updated
     */
-  virtual void modifyBudget( const MyMoneyBudget& budget ) = 0;
+  virtual void modifyBudget(const MyMoneyBudget& budget) = 0;
 
   /**
     * This method returns the number of budgets currently known to file
@@ -827,7 +832,7 @@ public:
     *
     * @return number of budgets known to file
     */
-  virtual unsigned countBudgets( void ) const = 0;
+  virtual unsigned countBudgets(void) const = 0;
 
   /**
     * This method is used to retrieve a single MyMoneyBudget object.
@@ -838,7 +843,7 @@ public:
     * @param id QString containing the id of the MyMoneyBudget object
     * @return MyMoneyBudget object
     */
-  virtual MyMoneyBudget budget( const QString& id ) const = 0;
+  virtual MyMoneyBudget budget(const QString& id) const = 0;
 
   /**
     * This method is used to remove an existing MyMoneyBudget object

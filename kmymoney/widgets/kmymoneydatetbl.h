@@ -68,120 +68,124 @@
 /**
   * @author Michael Edwardes
   */
-class kMyMoneyDateTbl : public Q3GridView  {
-   Q_OBJECT
+class kMyMoneyDateTbl : public Q3GridView
+{
+  Q_OBJECT
 public:
   enum calendarType { WEEKLY,
                       MONTHLY,
-                      QUARTERLY };
+                      QUARTERLY
+                    };
 
 public:
-    /**
-     * The constructor.
-     */
-    explicit kMyMoneyDateTbl(QWidget *parent=0,
-         QDate date=QDate::currentDate(),
-         const char* name=0, Qt::WFlags f=0);
-    /**
-     * Returns a recommended size for the widget.
-     * To save some time, the size of the largest used cell content is
-     * calculated in each paintCell() call, since all calculations have
-     * to be done there anyway. The size is stored in maxCell. The
-     * sizeHint() simply returns a multiple of maxCell.
-     */
-    virtual QSize sizeHint() const;
-    /**
-     * Set the font size of the date table.
-     */
-    virtual void setFontSize(int size);
-    /**
-     * Select and display this date.
-     */
-    virtual bool setDate(const QDate&);
-    virtual const QDate& getDate() const;
+  /**
+   * The constructor.
+   */
+  explicit kMyMoneyDateTbl(QWidget *parent = 0,
+                           QDate date = QDate::currentDate(),
+                           const char* name = 0, Qt::WFlags f = 0);
+  /**
+   * Returns a recommended size for the widget.
+   * To save some time, the size of the largest used cell content is
+   * calculated in each paintCell() call, since all calculations have
+   * to be done there anyway. The size is stored in maxCell. The
+   * sizeHint() simply returns a multiple of maxCell.
+   */
+  virtual QSize sizeHint() const;
+  /**
+   * Set the font size of the date table.
+   */
+  virtual void setFontSize(int size);
+  /**
+   * Select and display this date.
+   */
+  virtual bool setDate(const QDate&);
+  virtual const QDate& getDate() const;
 
-    virtual void setType(calendarType type);
-    virtual calendarType type(void) const { return m_type; }
+  virtual void setType(calendarType type);
+  virtual calendarType type(void) const {
+    return m_type;
+  }
 
 signals:
-    /**
-     * The selected date changed.
-     */
-    void dateChanged(QDate);
-    /**
-     * A date has been selected by clicking on the table.
-     */
-    void tableClicked();
+  /**
+   * The selected date changed.
+   */
+  void dateChanged(QDate);
+  /**
+   * A date has been selected by clicking on the table.
+   */
+  void tableClicked();
 
-    /**
-      *
-    **/
-    void hoverDate(QDate);
+  /**
+    *
+  **/
+  void hoverDate(QDate);
 
 protected:
-    /**
-     * Paint a cell.
-     */
-    virtual void paintCell(QPainter*, int, int);
-    /**
-     * Handle the resize events.
-     */
-    virtual void viewportResizeEvent(QResizeEvent *);
-    /**
-     * React on mouse clicks that select a date.
-     */
-    virtual void contentsMouseReleaseEvent(QMouseEvent *);
-    virtual void wheelEvent( QWheelEvent * e );
-    virtual void keyPressEvent( QKeyEvent *e );
-    virtual void focusInEvent( QFocusEvent *e );
-    virtual void focusOutEvent( QFocusEvent *e );
+  /**
+   * Paint a cell.
+   */
+  virtual void paintCell(QPainter*, int, int);
+  /**
+   * Handle the resize events.
+   */
+  virtual void viewportResizeEvent(QResizeEvent *);
+  /**
+   * React on mouse clicks that select a date.
+   */
+  virtual void contentsMouseReleaseEvent(QMouseEvent *);
+  virtual void wheelEvent(QWheelEvent * e);
+  virtual void keyPressEvent(QKeyEvent *e);
+  virtual void focusInEvent(QFocusEvent *e);
+  virtual void focusOutEvent(QFocusEvent *e);
 
-    virtual void drawCellContents(QPainter *painter, int row, int col, const QDate& theDate) = 0;
+  virtual void drawCellContents(QPainter *painter, int row, int col, const QDate& theDate) = 0;
 
-    virtual void contentsMouseMoveEvent(QMouseEvent* e);
+  virtual void contentsMouseMoveEvent(QMouseEvent* e);
 
-    /**
-     * The font size of the displayed text.
-     */
-    int fontsize;
-    /**
-     * The currently selected date.
-     */
-    QDate date;
-    /**
-     * The day of the first day in the month [1..7].
-     */
-    int firstday;
-    /**
-     * The number of days in the current month.
-     */
-    int numdays;
-    /**
-     * The number of days in the previous month.
-     */
-    int numDaysPrevMonth;
-    /**
-     * unused
-     * ### remove in KDE 4.0
-     */
-    bool unused_hasSelection;
-    /**
-     * Save the size of the largest used cell content.
-     */
-    QRect maxCell;
+  /**
+   * The font size of the displayed text.
+   */
+  int fontsize;
+  /**
+   * The currently selected date.
+   */
+  QDate date;
+  /**
+   * The day of the first day in the month [1..7].
+   */
+  int firstday;
+  /**
+   * The number of days in the current month.
+   */
+  int numdays;
+  /**
+   * The number of days in the previous month.
+   */
+  int numDaysPrevMonth;
+  /**
+   * unused
+   * ### remove in KDE 4.0
+   */
+  bool unused_hasSelection;
+  /**
+   * Save the size of the largest used cell content.
+   */
+  QRect maxCell;
 
-    /**
-      * Type related variables
-    **/
-    calendarType m_type;
-    int m_colCount;
-    int m_rowCount;
+  /**
+    * Type related variables
+  **/
+  calendarType m_type;
+  int m_colCount;
+  int m_rowCount;
 
-    ///
-    QDate m_drawDateOrig;
+  ///
+  QDate m_drawDateOrig;
 
 private:
-  #define WEEK_DAY_NAME(a,b)  KGlobal::locale()->calendar()->weekDayName(a,b)
+#define WEEK_DAY_NAME(a,b)  KGlobal::locale()->calendar()->weekDayName(a,b)
 };
 
 #endif

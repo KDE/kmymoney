@@ -60,11 +60,11 @@
 #include <ktoolinvocation.h>
 
 
-KSortOptionDlg::KSortOptionDlg( QWidget *parent )
-    :QDialog( parent )
+KSortOptionDlg::KSortOptionDlg(QWidget *parent)
+    : QDialog(parent)
 {
-    setupUi( this );
-    init();
+  setupUi(this);
+  init();
 }
 
 void KSortOptionDlg::init()
@@ -76,7 +76,7 @@ void KSortOptionDlg::init()
 
 void KSortOptionDlg::setSortOption(const QString& option, const QString& def)
 {
-  if(option.isEmpty()) {
+  if (option.isEmpty()) {
     m_sortOption->setSettings(def);
     m_useDefault->setChecked(true);
   } else {
@@ -88,7 +88,7 @@ void KSortOptionDlg::setSortOption(const QString& option, const QString& def)
 QString KSortOptionDlg::sortOption(void) const
 {
   QString rc;
-  if(!m_useDefault->isChecked()) {
+  if (!m_useDefault->isChecked()) {
     rc = m_sortOption->settings();
   }
   return rc;
@@ -101,8 +101,8 @@ void KSortOptionDlg::hideDefaultButton(void)
 
 
 KFindTransactionDlg::KFindTransactionDlg(QWidget *parent) :
-  KFindTransactionDlgDecl(parent),
-  m_needReload(false)
+    KFindTransactionDlgDecl(parent),
+    m_needReload(false)
 {
   ButtonGroup1->setId(m_amountButton, 0);
   ButtonGroup1->setId(m_amountRangeButton, 1);
@@ -210,8 +210,8 @@ void KFindTransactionDlg::slotUpdateSelections(void)
   QString txt;
 
   // Text tab
-  if(!m_textEdit->text().isEmpty()) {
-    if(!txt.isEmpty())
+  if (!m_textEdit->text().isEmpty()) {
+    if (!txt.isEmpty())
       txt += ", ";
     txt += i18n("Text");
     m_regExp->setEnabled(QRegExp(m_textEdit->text()).isValid());
@@ -222,59 +222,59 @@ void KFindTransactionDlg::slotUpdateSelections(void)
   m_textNegate->setEnabled(!m_textEdit->text().isEmpty());
 
   // Account tab
-  if(!m_accountsView->allItemsSelected()) {
-    if(!txt.isEmpty())
+  if (!m_accountsView->allItemsSelected()) {
+    if (!txt.isEmpty())
       txt += ", ";
     txt += i18n("Account");
   }
 
   // Date tab
-  if(m_dateRange->currentItem() != 0) {
-    if(!txt.isEmpty())
+  if (m_dateRange->currentItem() != 0) {
+    if (!txt.isEmpty())
       txt += ", ";
     txt += i18n("Date");
   }
 
   // Amount tab
-  if((m_amountButton->isChecked() && m_amountEdit->isValid())
-  || (m_amountRangeButton->isChecked()
-      && (m_amountFromEdit->isValid() || m_amountToEdit->isValid()))) {
-    if(!txt.isEmpty())
+  if ((m_amountButton->isChecked() && m_amountEdit->isValid())
+      || (m_amountRangeButton->isChecked()
+          && (m_amountFromEdit->isValid() || m_amountToEdit->isValid()))) {
+    if (!txt.isEmpty())
       txt += ", ";
     txt += i18n("Amount");
   }
 
   // Categories tab
-  if(!m_categoriesView->allItemsSelected()) {
-    if(!txt.isEmpty())
+  if (!m_categoriesView->allItemsSelected()) {
+    if (!txt.isEmpty())
       txt += ", ";
     txt += i18n("Category");
   }
 
   // Payees tab
-  if(!allItemsSelected(m_payeesView)
-  || m_emptyPayeesButton->isChecked()) {
-    if(!txt.isEmpty())
+  if (!allItemsSelected(m_payeesView)
+      || m_emptyPayeesButton->isChecked()) {
+    if (!txt.isEmpty())
       txt += ", ";
     txt += i18n("Payees");
   }
   m_payeesView->setEnabled(!m_emptyPayeesButton->isChecked());
 
   // Details tab
-  if(m_typeBox->currentIndex() != 0
-  || m_stateBox->currentIndex() != 0
-  || m_validityBox->currentIndex() != 0
-  || (m_nrButton->isChecked() && m_nrEdit->text().length() != 0)
-  || (m_nrRangeButton->isChecked()
-     && (m_nrFromEdit->text().length() != 0 || m_nrToEdit->text().length() != 0))) {
-    if(!txt.isEmpty())
+  if (m_typeBox->currentIndex() != 0
+      || m_stateBox->currentIndex() != 0
+      || m_validityBox->currentIndex() != 0
+      || (m_nrButton->isChecked() && m_nrEdit->text().length() != 0)
+      || (m_nrRangeButton->isChecked()
+          && (m_nrFromEdit->text().length() != 0 || m_nrToEdit->text().length() != 0))) {
+    if (!txt.isEmpty())
       txt += ", ";
     txt += i18n("Details");
   }
 
   //Show a warning about transfers if Categories are filtered - bug #1523508
-  if(!m_categoriesView->allItemsSelected()) {
-    m_transferWarning->setText( i18n("Warning: Filtering by Category will exclude all transfers from the results.") );
+  if (!m_categoriesView->allItemsSelected()) {
+    m_transferWarning->setText(i18n("Warning: Filtering by Category will exclude all transfers from the results."));
   } else {
     m_transferWarning->setText("");
   }
@@ -282,7 +282,7 @@ void KFindTransactionDlg::slotUpdateSelections(void)
   // disable the search button if no selection is made
   emit selectionEmpty(txt.isEmpty());
 
-  if(txt.isEmpty()) {
+  if (txt.isEmpty()) {
     txt = i18nc("No selection", "(None)");
   }
   m_selectedCriteria->setText(i18n("Current selections: ") + txt);
@@ -292,10 +292,10 @@ bool KFindTransactionDlg::allItemsSelected(const Q3ListViewItem *item) const
 {
   Q3ListViewItem* it_v;
 
-  for(it_v = item->firstChild(); it_v != 0; it_v = it_v->nextSibling()) {
-    if(it_v->rtti() == 1) {
+  for (it_v = item->firstChild(); it_v != 0; it_v = it_v->nextSibling()) {
+    if (it_v->rtti() == 1) {
       Q3CheckListItem* it_c = static_cast<Q3CheckListItem*>(it_v);
-      if(!(it_c->isOn() && allItemsSelected(it_v)))
+      if (!(it_c->isOn() && allItemsSelected(it_v)))
         return false;
     }
   }
@@ -306,14 +306,14 @@ bool KFindTransactionDlg::allItemsSelected(const Q3ListView* view) const
 {
   Q3ListViewItem* it_v;
 
-  for(it_v = view->firstChild(); it_v != 0; it_v = it_v->nextSibling()) {
-    if(it_v->rtti() == 1) {
+  for (it_v = view->firstChild(); it_v != 0; it_v = it_v->nextSibling()) {
+    if (it_v->rtti() == 1) {
       Q3CheckListItem* it_c = static_cast<Q3CheckListItem*>(it_v);
-      if(it_c->type() == Q3CheckListItem::CheckBox) {
-        if(!(it_c->isOn() && allItemsSelected(it_v)))
+      if (it_c->type() == Q3CheckListItem::CheckBox) {
+        if (!(it_c->isOn() && allItemsSelected(it_v)))
           return false;
       } else {
-        if(!allItemsSelected(it_v))
+        if (!allItemsSelected(it_v))
           return false;
       }
     }
@@ -337,9 +337,9 @@ void KFindTransactionDlg::selectAllItems(Q3ListView* view, const bool state)
 {
   Q3ListViewItem* it_v;
 
-  for(it_v = view->firstChild(); it_v != 0; it_v = it_v->nextSibling()) {
+  for (it_v = view->firstChild(); it_v != 0; it_v = it_v->nextSibling()) {
     Q3CheckListItem* it_c = static_cast<Q3CheckListItem*>(it_v);
-    if(it_c->type() == Q3CheckListItem::CheckBox) {
+    if (it_c->type() == Q3CheckListItem::CheckBox) {
       it_c->setOn(state);
     }
     selectAllSubItems(it_v, state);
@@ -352,9 +352,9 @@ void KFindTransactionDlg::selectItems(Q3ListView* view, const QStringList& list,
 {
   Q3ListViewItem* it_v;
 
-  for(it_v = view->firstChild(); it_v != 0; it_v = it_v->nextSibling()) {
+  for (it_v = view->firstChild(); it_v != 0; it_v = it_v->nextSibling()) {
     KMyMoneyCheckListItem* it_c = static_cast<KMyMoneyCheckListItem*>(it_v);
-    if(it_c->type() == Q3CheckListItem::CheckBox && list.contains(it_c->id())) {
+    if (it_c->type() == Q3CheckListItem::CheckBox && list.contains(it_c->id())) {
       it_c->setOn(state);
     }
     selectSubItems(it_v, list, state);
@@ -377,7 +377,7 @@ void KFindTransactionDlg::selectAllSubItems(Q3ListViewItem* item, const bool sta
 {
   Q3ListViewItem* it_v;
 
-  for(it_v = item->firstChild(); it_v != 0; it_v = it_v->nextSibling()) {
+  for (it_v = item->firstChild(); it_v != 0; it_v = it_v->nextSibling()) {
     static_cast<Q3CheckListItem*>(it_v)->setOn(state);
     selectAllSubItems(it_v, state);
   }
@@ -387,9 +387,9 @@ void KFindTransactionDlg::selectSubItems(Q3ListViewItem* item, const QStringList
 {
   Q3ListViewItem* it_v;
 
-  for(it_v = item->firstChild(); it_v != 0; it_v = it_v->nextSibling()) {
+  for (it_v = item->firstChild(); it_v != 0; it_v = it_v->nextSibling()) {
     KMyMoneyCheckListItem* it_c = static_cast<KMyMoneyCheckListItem*>(it_v);
-    if(list.contains(it_c->id()))
+    if (list.contains(it_c->id()))
       it_c->setOn(state);
     selectSubItems(it_v, list, state);
   }
@@ -398,7 +398,7 @@ void KFindTransactionDlg::selectSubItems(Q3ListViewItem* item, const QStringList
 void KFindTransactionDlg::setupDatePage(void)
 {
   int i;
-  for(i = MyMoneyTransactionFilter::allDates; i < MyMoneyTransactionFilter::dateOptionCount; ++i) {
+  for (i = MyMoneyTransactionFilter::allDates; i < MyMoneyTransactionFilter::dateOptionCount; ++i) {
     MyMoneyTransactionFilter::translateDateRange(static_cast<MyMoneyTransactionFilter::dateOptionE>(i), m_startDates[i], m_endDates[i]);
   }
 
@@ -411,16 +411,16 @@ void KFindTransactionDlg::setupDatePage(void)
 
 void KFindTransactionDlg::slotDateRangeChanged(int idx)
 {
-  switch(idx) {
-    case MyMoneyTransactionFilter::allDates:
-    case MyMoneyTransactionFilter::userDefined:
-      m_fromDate->loadDate(QDate());
-      m_toDate->loadDate(QDate());
-      break;
-    default:
-      m_fromDate->loadDate(m_startDates[idx]);
-      m_toDate->loadDate(m_endDates[idx]);
-      break;
+  switch (idx) {
+  case MyMoneyTransactionFilter::allDates:
+  case MyMoneyTransactionFilter::userDefined:
+    m_fromDate->loadDate(QDate());
+    m_toDate->loadDate(QDate());
+    break;
+  default:
+    m_fromDate->loadDate(m_startDates[idx]);
+    m_toDate->loadDate(m_endDates[idx]);
+    break;
   }
   slotUpdateSelections();
 }
@@ -428,14 +428,14 @@ void KFindTransactionDlg::slotDateRangeChanged(int idx)
 void KFindTransactionDlg::slotDateChanged(void)
 {
   int idx;
-  for(idx = MyMoneyTransactionFilter::asOfToday; idx < MyMoneyTransactionFilter::dateOptionCount; ++idx) {
-    if(m_fromDate->date() == m_startDates[idx]
-    && m_toDate->date() == m_endDates[idx]) {
+  for (idx = MyMoneyTransactionFilter::asOfToday; idx < MyMoneyTransactionFilter::dateOptionCount; ++idx) {
+    if (m_fromDate->date() == m_startDates[idx]
+        && m_toDate->date() == m_endDates[idx]) {
       break;
     }
   }
   //if no filter matched, set to user defined
-  if(idx == MyMoneyTransactionFilter::dateOptionCount)
+  if (idx == MyMoneyTransactionFilter::dateOptionCount)
     idx = MyMoneyTransactionFilter::userDefined;
 
   m_dateRange->blockSignals(true);
@@ -494,7 +494,7 @@ void KFindTransactionDlg::loadPayees(void)
 
   list = file->payeeList();
   // load view
-  for(it_l = list.begin(); it_l != list.end(); ++it_l) {
+  for (it_l = list.begin(); it_l != list.end(); ++it_l) {
     KMyMoneyCheckListItem* item = new KMyMoneyCheckListItem(m_payeesView, (*it_l).name(), QString(), (*it_l).id());
     connect(item, SIGNAL(stateChanged(bool)), this, SLOT(slotUpdateSelections()));
     item->setOn(true);
@@ -544,16 +544,16 @@ void KFindTransactionDlg::slotNrRangeSelected(void)
 
 void KFindTransactionDlg::addItemToFilter(const opTypeE op, const QString& id)
 {
-  switch(op) {
-    case addAccountToFilter:
-      m_filter.addAccount(id);
-      break;
-    case addCategoryToFilter:
-      m_filter.addCategory(id);
-      break;
-    case addPayeeToFilter:
-      m_filter.addPayee(id);
-      break;
+  switch (op) {
+  case addAccountToFilter:
+    m_filter.addAccount(id);
+    break;
+  case addCategoryToFilter:
+    m_filter.addCategory(id);
+    break;
+  case addPayeeToFilter:
+    m_filter.addPayee(id);
+    break;
   }
 }
 
@@ -561,11 +561,11 @@ void KFindTransactionDlg::scanCheckListItems(const Q3ListViewItem* item, const o
 {
   Q3ListViewItem* it_v;
 
-  for(it_v = item->firstChild(); it_v != 0; it_v = it_v->nextSibling()) {
-    if(it_v->rtti() == 1) {
+  for (it_v = item->firstChild(); it_v != 0; it_v = it_v->nextSibling()) {
+    if (it_v->rtti() == 1) {
       KMyMoneyCheckListItem* it_c = static_cast<KMyMoneyCheckListItem*>(it_v);
-      if(it_c->type() == Q3CheckListItem::CheckBox) {
-        if(it_c->isOn())
+      if (it_c->type() == Q3CheckListItem::CheckBox) {
+        if (it_c->isOn())
           addItemToFilter(op, (*it_c).id());
       }
       scanCheckListItems(it_v, op);
@@ -577,11 +577,11 @@ void KFindTransactionDlg::scanCheckListItems(const Q3ListView* view, const opTyp
 {
   Q3ListViewItem* it_v;
 
-  for(it_v = view->firstChild(); it_v != 0; it_v = it_v->nextSibling()) {
-    if(it_v->rtti() == 1) {
+  for (it_v = view->firstChild(); it_v != 0; it_v = it_v->nextSibling()) {
+    if (it_v->rtti() == 1) {
       KMyMoneyCheckListItem* it_c = static_cast<KMyMoneyCheckListItem*>(it_v);
-      if(it_c->type() == Q3CheckListItem::CheckBox) {
-        if(it_c->isOn())
+      if (it_c->type() == Q3CheckListItem::CheckBox) {
+        if (it_c->isOn())
           addItemToFilter(op, (*it_c).id());
       }
       scanCheckListItems(it_v, op);
@@ -594,13 +594,13 @@ void KFindTransactionDlg::setupFilter(void)
   m_filter.clear();
 
   // Text tab
-  if(!m_textEdit->text().isEmpty()) {
+  if (!m_textEdit->text().isEmpty()) {
     QRegExp exp(m_textEdit->text(), m_caseSensitive->isChecked() ? Qt::CaseSensitive : Qt::CaseInsensitive, !m_regExp->isChecked() ? QRegExp::Wildcard : QRegExp::RegExp);
     m_filter.setTextFilter(exp, m_textNegate->currentIndex() != 0);
   }
 
   // Account tab
-  if(!m_accountsView->allItemsSelected()) {
+  if (!m_accountsView->allItemsSelected()) {
     // retrieve a list of selected accounts
     QStringList list;
     m_accountsView->selectedItems(list);
@@ -608,14 +608,14 @@ void KFindTransactionDlg::setupFilter(void)
     // if we're not in expert mode, we need to make sure
     // that all stock accounts for the selected investment
     // account are also selected
-    if(!KMyMoneyGlobalSettings::expertMode()) {
+    if (!KMyMoneyGlobalSettings::expertMode()) {
       QStringList missing;
       QStringList::const_iterator it_a, it_b;
-      for(it_a = list.constBegin(); it_a != list.constEnd(); ++it_a) {
+      for (it_a = list.constBegin(); it_a != list.constEnd(); ++it_a) {
         MyMoneyAccount acc = MyMoneyFile::instance()->account(*it_a);
-        if(acc.accountType() == MyMoneyAccount::Investment) {
-          for(it_b = acc.accountList().constBegin(); it_b != acc.accountList().constEnd(); ++it_b) {
-            if(!list.contains(*it_b)) {
+        if (acc.accountType() == MyMoneyAccount::Investment) {
+          for (it_b = acc.accountList().constBegin(); it_b != acc.accountList().constEnd(); ++it_b) {
+            if (!list.contains(*it_b)) {
               missing.append(*it_b);
             }
           }
@@ -628,54 +628,54 @@ void KFindTransactionDlg::setupFilter(void)
   }
 
   // Date tab
-  if(m_dateRange->currentItem() != 0) {
+  if (m_dateRange->currentItem() != 0) {
     m_filter.setDateFilter(m_fromDate->date(), m_toDate->date());
   }
 
   // Amount tab
-  if((m_amountButton->isChecked() && m_amountEdit->isValid())) {
+  if ((m_amountButton->isChecked() && m_amountEdit->isValid())) {
     m_filter.setAmountFilter(m_amountEdit->value(), m_amountEdit->value());
 
-  } else if((m_amountRangeButton->isChecked()
-      && (m_amountFromEdit->isValid() || m_amountToEdit->isValid()))) {
+  } else if ((m_amountRangeButton->isChecked()
+              && (m_amountFromEdit->isValid() || m_amountToEdit->isValid()))) {
 
     MyMoneyMoney from(MyMoneyMoney::minValue), to(MyMoneyMoney::maxValue);
-    if(m_amountFromEdit->isValid())
+    if (m_amountFromEdit->isValid())
       from = m_amountFromEdit->value();
-    if(m_amountToEdit->isValid())
+    if (m_amountToEdit->isValid())
       to = m_amountToEdit->value();
 
     m_filter.setAmountFilter(from, to);
   }
 
   // Categories tab
-  if(!m_categoriesView->allItemsSelected()) {
+  if (!m_categoriesView->allItemsSelected()) {
     m_filter.addCategory(m_categoriesView->selectedItems());
   }
 
   // Payees tab
-  if(m_emptyPayeesButton->isChecked()) {
+  if (m_emptyPayeesButton->isChecked()) {
     m_filter.addPayee(QString());
 
-  } else if(!allItemsSelected(m_payeesView)) {
+  } else if (!allItemsSelected(m_payeesView)) {
     scanCheckListItems(m_payeesView, addPayeeToFilter);
   }
 
   // Details tab
-  if(m_typeBox->currentIndex() != 0)
+  if (m_typeBox->currentIndex() != 0)
     m_filter.addType(m_typeBox->currentIndex());
 
-  if(m_stateBox->currentIndex() != 0)
+  if (m_stateBox->currentIndex() != 0)
     m_filter.addState(m_stateBox->currentIndex());
 
-  if(m_validityBox->currentIndex() != 0)
+  if (m_validityBox->currentIndex() != 0)
     m_filter.addValidity(m_validityBox->currentIndex());
 
-  if(m_nrButton->isChecked() && !m_nrEdit->text().isEmpty())
+  if (m_nrButton->isChecked() && !m_nrEdit->text().isEmpty())
     m_filter.setNumberFilter(m_nrEdit->text(), m_nrEdit->text());
 
-  if(m_nrRangeButton->isChecked()
-     && (!m_nrFromEdit->text().isEmpty() || !m_nrToEdit->text().isEmpty())) {
+  if (m_nrRangeButton->isChecked()
+      && (!m_nrFromEdit->text().isEmpty() || !m_nrToEdit->text().isEmpty())) {
     m_filter.setNumberFilter(m_nrFromEdit->text(), m_nrToEdit->text());
   }
 }
@@ -694,7 +694,7 @@ void KFindTransactionDlg::slotSearch(void)
 void KFindTransactionDlg::slotRefreshView(void)
 {
   m_needReload = true;
-  if(isVisible()) {
+  if (isVisible()) {
     loadView();
     m_needReload = false;
   }
@@ -702,7 +702,7 @@ void KFindTransactionDlg::slotRefreshView(void)
 
 void KFindTransactionDlg::show(void)
 {
-  if(m_needReload) {
+  if (m_needReload) {
     loadView();
     m_needReload = false;
   }
@@ -720,13 +720,13 @@ void KFindTransactionDlg::loadView(void)
   // retrieve the list from the engine
   MyMoneyFile::instance()->transactionList(m_transactionList, m_filter);
 
-    // create the elements for the register
+  // create the elements for the register
   QList<QPair<MyMoneyTransaction, MyMoneySplit> >::const_iterator it;
   QMap<QString, int>uniqueMap;
   MyMoneyMoney deposit, payment;
 
   int splitCount = 0;
-  for(it = m_transactionList.constBegin(); it != m_transactionList.constEnd(); ++it) {
+  for (it = m_transactionList.constBegin(); it != m_transactionList.constEnd(); ++it) {
     const MyMoneySplit& split = (*it).second;
     MyMoneyAccount acc = MyMoneyFile::instance()->account(split.accountId());
     ++splitCount;
@@ -734,7 +734,7 @@ void KFindTransactionDlg::loadView(void)
 
     KMyMoneyRegister::Register::transactionFactory(m_register, (*it).first, (*it).second, uniqueMap[(*it).first.id()]);
     { // debug stuff
-      if(split.shares().isNegative()) {
+      if (split.shares().isNegative()) {
         payment += split.shares().abs();
       } else {
         deposit += split.shares().abs();
@@ -742,13 +742,13 @@ void KFindTransactionDlg::loadView(void)
     }
   }
 
-    // add the group markers
+  // add the group markers
   m_register->addGroupMarkers();
 
-    // sort the transactions according to the sort setting
+  // sort the transactions according to the sort setting
   m_register->sortItems();
 
-    // remove trailing and adjacent markers
+  // remove trailing and adjacent markers
   m_register->removeUnwantedGroupMarkers();
 
   // turn on the ledger lens for the register
@@ -761,7 +761,7 @@ void KFindTransactionDlg::loadView(void)
 
 #ifdef KMM_DEBUG
   m_foundText->setText(i18np("Found %1 matching transaction (D %2 / P %3 = %4)",
-                             "Found %1 matching transactions (D %2 / P %3 = %4)", splitCount, deposit.formatMoney("", 2), payment.formatMoney("", 2), (deposit-payment).formatMoney("", 2)));
+                             "Found %1 matching transactions (D %2 / P %3 = %4)", splitCount, deposit.formatMoney("", 2), payment.formatMoney("", 2), (deposit - payment).formatMoney("", 2)));
 #else
   m_foundText->setText(i18np("Found %1 matching transaction", "Found %1 matching transactions", splitCount));
 #endif
@@ -790,7 +790,7 @@ void KFindTransactionDlg::resizeEvent(QResizeEvent* ev)
   // don't forget the resizer
   KFindTransactionDlgDecl::resizeEvent(ev);
 
-  if(!m_register->isVisible())
+  if (!m_register->isVisible())
     return;
 
   // resize the register
@@ -806,13 +806,13 @@ void KFindTransactionDlg::resizeEvent(QResizeEvent* ev)
   m_register->setColumnWidth(6, m_debitWidth);
   m_register->setColumnWidth(7, m_creditWidth);
 
-  for(int i = 0; i < m_register->numCols(); ++i) {
-    switch(i) {
-      case 4:     // skip the one, we want to set
-        break;
-      default:
-        w -= m_register->columnWidth(i);
-        break;
+  for (int i = 0; i < m_register->numCols(); ++i) {
+    switch (i) {
+    case 4:     // skip the one, we want to set
+      break;
+    default:
+      w -= m_register->columnWidth(i);
+      break;
     }
   }
 
@@ -823,9 +823,9 @@ void KFindTransactionDlg::resizeEvent(QResizeEvent* ev)
 void KFindTransactionDlg::slotSelectTransaction(void)
 {
   QList<KMyMoneyRegister::RegisterItem*> list = m_register->selectedItems();
-  if(!list.isEmpty()) {
+  if (!list.isEmpty()) {
     KMyMoneyRegister::Transaction* t = dynamic_cast<KMyMoneyRegister::Transaction*>(list[0]);
-    if(t) {
+    if (t) {
       emit transactionSelected(t->split().accountId(), t->transaction().id());
       hide();
     }
@@ -836,20 +836,20 @@ bool KFindTransactionDlg::eventFilter(QObject* o, QEvent* e)
 {
   bool rc = false;
 
-  if(o->isWidgetType()) {
-    if(e->type() == QEvent::KeyPress) {
+  if (o->isWidgetType()) {
+    if (e->type() == QEvent::KeyPress) {
       const QWidget* w = dynamic_cast<const QWidget*>(o);
-      QKeyEvent *k = static_cast<QKeyEvent *> (e);
-      if(w == m_register) {
-        switch(k->key()) {
-          default:
-            break;
+      QKeyEvent *k = static_cast<QKeyEvent *>(e);
+      if (w == m_register) {
+        switch (k->key()) {
+        default:
+          break;
 
-          case Qt::Key_Return:
-          case Qt::Key_Enter:
-            rc = true;
-            slotSelectTransaction();
-            break;
+        case Qt::Key_Return:
+        case Qt::Key_Enter:
+          rc = true;
+          slotSelectTransaction();
+          break;
         }
       }
     }
@@ -860,7 +860,7 @@ bool KFindTransactionDlg::eventFilter(QObject* o, QEvent* e)
 void KFindTransactionDlg::slotShowHelp(void)
 {
   QString anchor = m_helpAnchor[m_criteriaTab->currentWidget()];
-  if(anchor.isEmpty())
+  if (anchor.isEmpty())
     anchor = QString("details.search");
 
   KToolInvocation::invokeHelp(anchor);
@@ -873,9 +873,9 @@ void KFindTransactionDlg::slotSortOptions(void)
   dlg->setSortOption(KMyMoneyGlobalSettings::sortSearchView(), QString());
   dlg->hideDefaultButton();
 
-  if(dlg->exec() == QDialog::Accepted) {
+  if (dlg->exec() == QDialog::Accepted) {
     QString sortOrder = dlg->sortOption();
-    if(sortOrder != KMyMoneyGlobalSettings::sortSearchView()) {
+    if (sortOrder != KMyMoneyGlobalSettings::sortSearchView()) {
       KMyMoneyGlobalSettings::setSortSearchView(sortOrder);
       slotRefreshView();
     }

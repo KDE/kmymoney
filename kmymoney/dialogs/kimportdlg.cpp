@@ -54,9 +54,9 @@
 #include "mymoneyqifprofile.h"
 
 KImportDlg::KImportDlg(QWidget *parent)
-  : KImportDlgDecl(parent)
+    : KImportDlgDecl(parent)
 {
-    setModal( true );
+  setModal(true);
   // Set all the last used options
   readConfig();
 
@@ -65,33 +65,33 @@ KImportDlg::KImportDlg(QWidget *parent)
   // load button icons
   m_qbuttonCancel->setGuiItem(KStandardGuiItem::cancel());
 
-  KGuiItem okButtenItem( i18n( "&Import" ),
-                      KIcon("document-import"),
-                      i18n("Start operation"),
-                      i18n("Use this to start the import operation"));
+  KGuiItem okButtenItem(i18n("&Import"),
+                        KIcon("document-import"),
+                        i18n("Start operation"),
+                        i18n("Use this to start the import operation"));
   m_qbuttonOk->setGuiItem(okButtenItem);
 
-  KGuiItem browseButtenItem( i18n( "&Browse..." ),
-                      KIcon("document-open"),
-                      i18n("Select filename"),
-                      i18n("Use this to select a filename to export to"));
+  KGuiItem browseButtenItem(i18n("&Browse..."),
+                            KIcon("document-open"),
+                            i18n("Select filename"),
+                            i18n("Use this to select a filename to export to"));
   m_qbuttonBrowse->setGuiItem(browseButtenItem);
 
-  KGuiItem newButtenItem( i18nc("New profile", "&New..." ),
-                      KIcon("document-new"),
-                      i18n("Create a new profile"),
-                      i18n("Use this to open the profile editor"));
+  KGuiItem newButtenItem(i18nc("New profile", "&New..."),
+                         KIcon("document-new"),
+                         i18n("Create a new profile"),
+                         i18n("Use this to open the profile editor"));
   m_profileEditorButton->setGuiItem(newButtenItem);
 
   // connect the buttons to their functionality
-  connect(m_qbuttonBrowse, SIGNAL( clicked() ), this, SLOT( slotBrowse() ) );
+  connect(m_qbuttonBrowse, SIGNAL(clicked()), this, SLOT(slotBrowse()));
   connect(m_qbuttonOk, SIGNAL(clicked()), this, SLOT(slotOkClicked()));
   connect(m_qbuttonCancel, SIGNAL(clicked()), this, SLOT(reject()));
   connect(m_profileEditorButton, SIGNAL(clicked()), this, SLOT(slotNewProfile()));
 
   // connect the change signals to the check slot and perform initial check
   connect(m_qlineeditFile, SIGNAL(textChanged(const QString&)), this,
-    SLOT(slotFileTextChanged(const QString&)));
+          SLOT(slotFileTextChanged(const QString&)));
 
   // setup button enable status
   slotFileTextChanged(m_qlineeditFile->text());
@@ -109,12 +109,12 @@ void KImportDlg::slotBrowse()
   tmpprofile.loadProfile("Profile-" + profile());
 
   QPointer<KFileDialog> dialog = new KFileDialog(KUrl(KGlobalSettings::documentPath()),
-                     i18n("%1|Import files\n%2|All files (*.*)",tmpprofile.filterFileType(),"*"),
-                     this);
+      i18n("%1|Import files\n%2|All files (*.*)", tmpprofile.filterFileType(), "*"),
+      this);
   dialog->setCaption(i18n("Import File..."));
   dialog->setMode(KFile::File | KFile::ExistingOnly);
 
-  if(dialog->exec() == QDialog::Accepted) {
+  if (dialog->exec() == QDialog::Accepted) {
     m_qlineeditFile->setText(dialog->selectedUrl().pathOrUrl());
   }
   delete dialog;
@@ -163,7 +163,7 @@ void KImportDlg::slotNewProfile(void)
   QPointer<MyMoneyQifProfileEditor> editor = new MyMoneyQifProfileEditor(true, this);
   editor->setObjectName("QIF Profile Editor");
 
-  if(editor->exec()) {
+  if (editor->exec()) {
     m_profileComboBox->setItemText(m_profileComboBox->currentIndex(), editor->selectedProfile());
     loadProfiles();
   }
@@ -193,17 +193,17 @@ void KImportDlg::loadProfiles(const bool selectLast)
   KSharedConfigPtr config = KGlobal::config();
   KConfigGroup grp = config->group("Profiles");
 
-  list = grp.readEntry("profiles",QStringList());
+  list = grp.readEntry("profiles", QStringList());
   list.sort();
   m_profileComboBox->addItems(list);
 
-  if(selectLast == true) {
+  if (selectLast == true) {
     config->group("Last Use Settings");
     current = grp.readEntry("KImportDlg_LastProfile");
   }
 
   m_profileComboBox->setCurrentItem(0);
-  if(list.contains(current) > 0) {
+  if (list.contains(current) > 0) {
     m_profileComboBox->setItemText(m_profileComboBox->currentIndex(), current);
   }
 }
@@ -218,7 +218,7 @@ void KImportDlg::addCategories(QStringList& strList, const QString& id, const QS
   QStringList accList = account.accountList();
   QStringList::ConstIterator it_a;
 
-  for(it_a = accList.constBegin(); it_a != accList.constEnd(); ++it_a) {
+  for (it_a = accList.constBegin(); it_a != accList.constEnd(); ++it_a) {
     account = file->account(*it_a);
     strList << leadIn + account.name();
     addCategories(strList, *it_a, leadIn + account.name() + MyMoneyFile::AccountSeperator);

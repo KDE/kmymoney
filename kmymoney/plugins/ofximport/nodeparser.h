@@ -34,7 +34,7 @@ public:
   std::vector<std::string> Text(void) const;
 
 protected:
-  static NodeParser Path(const xmlpp::Node* node,const std::string& path);
+  static NodeParser Path(const xmlpp::Node* node, const std::string& path);
 };
 
 

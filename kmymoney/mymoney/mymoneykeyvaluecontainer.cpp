@@ -32,14 +32,14 @@ MyMoneyKeyValueContainer::MyMoneyKeyValueContainer()
 
 MyMoneyKeyValueContainer::MyMoneyKeyValueContainer(const QDomElement& node)
 {
-  if(!node.isNull()) {
-    if("KEYVALUEPAIRS" != node.tagName())
+  if (!node.isNull()) {
+    if ("KEYVALUEPAIRS" != node.tagName())
       throw new MYMONEYEXCEPTION("Node was not KEYVALUEPAIRS");
 
     m_kvp.clear();
 
     QDomNodeList nodeList = node.elementsByTagName("PAIR");
-    for(int i = 0; i < nodeList.count(); ++i) {
+    for (int i = 0; i < nodeList.count(); ++i) {
       const QDomElement& el(nodeList.item(i).toElement());
       m_kvp[el.attribute("key")] = el.attribute("value");
     }
@@ -55,7 +55,7 @@ const QString& MyMoneyKeyValueContainer::value(const QString& key) const
   QMap<QString, QString>::ConstIterator it;
 
   it = m_kvp.find(key);
-  if(it != m_kvp.end())
+  if (it != m_kvp.end())
     return (*it);
   return nullString;
 }
@@ -76,7 +76,7 @@ void MyMoneyKeyValueContainer::deletePair(const QString& key)
   QMap<QString, QString>::Iterator it;
 
   it = m_kvp.find(key);
-  if(it != m_kvp.end())
+  if (it != m_kvp.end())
     m_kvp.erase(it);
 }
 
@@ -92,9 +92,9 @@ bool MyMoneyKeyValueContainer::operator == (const MyMoneyKeyValueContainer& righ
   it_a = m_kvp.begin();
   it_b = right.m_kvp.begin();
 
-  while(it_a != m_kvp.end() && it_b != right.m_kvp.end()) {
-    if(it_a.key() != it_b.key()
-    || (((*it_a).length() != 0 || (*it_b).length() != 0) && *it_a != *it_b))
+  while (it_a != m_kvp.end() && it_b != right.m_kvp.end()) {
+    if (it_a.key() != it_b.key()
+        || (((*it_a).length() != 0 || (*it_b).length() != 0) && *it_a != *it_b))
       return false;
     ++it_a;
     ++it_b;
@@ -105,12 +105,11 @@ bool MyMoneyKeyValueContainer::operator == (const MyMoneyKeyValueContainer& righ
 
 void MyMoneyKeyValueContainer::writeXML(QDomDocument& document, QDomElement& parent) const
 {
-  if(m_kvp.count() != 0) {
+  if (m_kvp.count() != 0) {
     QDomElement el = document.createElement("KEYVALUEPAIRS");
 
     QMap<QString, QString>::ConstIterator it;
-    for(it = m_kvp.begin(); it != m_kvp.end(); ++it)
-    {
+    for (it = m_kvp.begin(); it != m_kvp.end(); ++it) {
       QDomElement pair = document.createElement("PAIR");
       pair.setAttribute("key", it.key());
       pair.setAttribute("value", it.value());

@@ -32,7 +32,7 @@
 
 QFont KMyMoneyGlobalSettings::listCellFont(void)
 {
-  if(useSystemFont()) {
+  if (useSystemFont()) {
     return KGlobalSettings::generalFont();
   } else {
     return KMyMoneySettings::listCellFont();
@@ -41,7 +41,7 @@ QFont KMyMoneyGlobalSettings::listCellFont(void)
 
 QFont KMyMoneyGlobalSettings::listHeaderFont(void)
 {
-  if(useSystemFont()) {
+  if (useSystemFont()) {
     QFont font = KGlobalSettings::generalFont();
     font.setBold(true);
     return font;
@@ -52,7 +52,7 @@ QFont KMyMoneyGlobalSettings::listHeaderFont(void)
 
 QColor KMyMoneyGlobalSettings::listColor(void)
 {
-  if(useSystemColors()) {
+  if (useSystemColors()) {
     KColorScheme scheme(QPalette::Normal);
     return scheme.background(KColorScheme::NormalBackground).color();
   } else {
@@ -62,7 +62,7 @@ QColor KMyMoneyGlobalSettings::listColor(void)
 
 QColor KMyMoneyGlobalSettings::listBGColor(void)
 {
-  if(useSystemColors()) {
+  if (useSystemColors()) {
     KColorScheme scheme(QPalette::Normal);
     return scheme.background(KColorScheme::AlternateBackground).color();
   } else {
@@ -80,9 +80,9 @@ QStringList KMyMoneyGlobalSettings::itemList(void)
   // now add all from 'all' that are missing in 'list'
   QRegExp exp("-?(\\d+)");
   QStringList::iterator it_s;
-  for(it_s = all.begin(); it_s != all.end(); ++it_s) {
+  for (it_s = all.begin(); it_s != all.end(); ++it_s) {
     exp.indexIn(*it_s);
-    if(!list.contains(exp.cap(1)) && !list.contains(QString("-%1").arg(exp.cap(1)))) {
+    if (!list.contains(exp.cap(1)) && !list.contains(QString("-%1").arg(exp.cap(1)))) {
       list << *it_s;
     }
   }
@@ -91,7 +91,7 @@ QStringList KMyMoneyGlobalSettings::itemList(void)
 
 int KMyMoneyGlobalSettings::firstFiscalMonth(void)
 {
-  return KMyMoneySettings::fiscalYearBegin()+1;
+  return KMyMoneySettings::fiscalYearBegin() + 1;
 }
 
 int KMyMoneyGlobalSettings::firstFiscalDay(void)

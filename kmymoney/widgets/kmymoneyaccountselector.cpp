@@ -53,40 +53,40 @@
 #include "kmymoneyglobalsettings.h"
 
 kMyMoneyAccountSelector::kMyMoneyAccountSelector(QWidget *parent, Qt::WFlags flags, const bool createButtons) :
-  KMyMoneySelector(parent, flags),
-  m_allAccountsButton(0),
-  m_noAccountButton(0),
-  m_incomeCategoriesButton(0),
-  m_expenseCategoriesButton(0)
+    KMyMoneySelector(parent, flags),
+    m_allAccountsButton(0),
+    m_noAccountButton(0),
+    m_incomeCategoriesButton(0),
+    m_expenseCategoriesButton(0)
 {
 
-  if(createButtons) {
+  if (createButtons) {
     QVBoxLayout* buttonLayout = new QVBoxLayout();
     buttonLayout->setSpacing(6);
 
-    m_allAccountsButton = new KPushButton( this );
-    m_allAccountsButton->setObjectName( "m_allAccountsButton" );
-    m_allAccountsButton->setText( i18nc("Select all accounts", "All" ) );
-    buttonLayout->addWidget( m_allAccountsButton );
+    m_allAccountsButton = new KPushButton(this);
+    m_allAccountsButton->setObjectName("m_allAccountsButton");
+    m_allAccountsButton->setText(i18nc("Select all accounts", "All"));
+    buttonLayout->addWidget(m_allAccountsButton);
 
-    m_incomeCategoriesButton = new KPushButton( this);
-    m_incomeCategoriesButton->setObjectName( "m_incomeCategoriesButton" );
-    m_incomeCategoriesButton->setText( i18n( "Income" ) );
-    buttonLayout->addWidget( m_incomeCategoriesButton );
+    m_incomeCategoriesButton = new KPushButton(this);
+    m_incomeCategoriesButton->setObjectName("m_incomeCategoriesButton");
+    m_incomeCategoriesButton->setText(i18n("Income"));
+    buttonLayout->addWidget(m_incomeCategoriesButton);
 
-    m_expenseCategoriesButton = new KPushButton( this );
-    m_expenseCategoriesButton->setObjectName("m_expenseCategoriesButton" );
-    m_expenseCategoriesButton->setText( i18n( "Expense" ) );
-    buttonLayout->addWidget( m_expenseCategoriesButton );
+    m_expenseCategoriesButton = new KPushButton(this);
+    m_expenseCategoriesButton->setObjectName("m_expenseCategoriesButton");
+    m_expenseCategoriesButton->setText(i18n("Expense"));
+    buttonLayout->addWidget(m_expenseCategoriesButton);
 
-    m_noAccountButton = new KPushButton( this);
-    m_noAccountButton->setObjectName( "m_noAccountButton" );
-    m_noAccountButton->setText( i18nc("No account", "None" ) );
-    buttonLayout->addWidget( m_noAccountButton );
+    m_noAccountButton = new KPushButton(this);
+    m_noAccountButton->setObjectName("m_noAccountButton");
+    m_noAccountButton->setText(i18nc("No account", "None"));
+    buttonLayout->addWidget(m_noAccountButton);
 
-    QSpacerItem* spacer = new QSpacerItem( 0, 67, QSizePolicy::Minimum, QSizePolicy::Expanding );
-    buttonLayout->addItem( spacer );
-    m_layout->addLayout( buttonLayout );
+    QSpacerItem* spacer = new QSpacerItem(0, 67, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    buttonLayout->addItem(spacer);
+    m_layout->addLayout(buttonLayout);
 
     connect(m_allAccountsButton, SIGNAL(clicked()), this, SLOT(slotSelectAllAccounts()));
     connect(m_noAccountButton, SIGNAL(clicked()), this, SLOT(slotDeselectAllAccounts()));
@@ -114,8 +114,8 @@ void kMyMoneyAccountSelector::selectCategories(const bool income, const bool exp
 {
   Q3ListViewItem* it_v;
 
-  for(it_v = m_listView->firstChild(); it_v != 0; it_v = it_v->nextSibling()) {
-    if(static_cast<Q3CheckListItem*>(it_v)->text() == i18n("Income categories"))
+  for (it_v = m_listView->firstChild(); it_v != 0; it_v = it_v->nextSibling()) {
+    if (static_cast<Q3CheckListItem*>(it_v)->text() == i18n("Income categories"))
       selectAllSubItems(it_v, income);
     else
       selectAllSubItems(it_v, expense);
@@ -137,19 +137,19 @@ QStringList kMyMoneyAccountSelector::accountList(const  QList<MyMoneyAccount::ac
   Q3ListViewItem* it_v;
 
   it = Q3ListViewItemIterator(m_listView, Q3ListViewItemIterator::Selectable);
-  while((it_v = it.current()) != 0) {
+  while ((it_v = it.current()) != 0) {
     {
-      if(it_v->rtti() == 1) {
+      if (it_v->rtti() == 1) {
         KMyMoneyCheckListItem* it_c = dynamic_cast<KMyMoneyCheckListItem*>(it_v);
-        if(it_c->type() == Q3CheckListItem::CheckBox) {
+        if (it_c->type() == Q3CheckListItem::CheckBox) {
           MyMoneyAccount acc = MyMoneyFile::instance()->account(it_c->id());
-          if(filterList.count() == 0 || filterList.contains(acc.accountType()))
+          if (filterList.count() == 0 || filterList.contains(acc.accountType()))
             list << it_c->id();
         }
-      } else if(it_v->rtti() == 0) {
+      } else if (it_v->rtti() == 0) {
         KMyMoneyListViewItem* it_c = dynamic_cast<KMyMoneyListViewItem*>(it_v);
         MyMoneyAccount acc = MyMoneyFile::instance()->account(it_c->id());
-        if(filterList.count() == 0 || filterList.contains(acc.accountType()))
+        if (filterList.count() == 0 || filterList.contains(acc.accountType()))
           list << it_c->id();
       }
     }
@@ -160,13 +160,13 @@ QStringList kMyMoneyAccountSelector::accountList(const  QList<MyMoneyAccount::ac
 
 bool kMyMoneyAccountSelector::match(const QRegExp& exp, Q3ListViewItem* item) const
 {
-  if(!item->isSelectable())
+  if (!item->isSelectable())
     return false;
 
   KMyMoneyListViewItem* it_l = dynamic_cast<KMyMoneyListViewItem*>(item);
-  if(!it_l) {
+  if (!it_l) {
     KMyMoneyCheckListItem* it_c = dynamic_cast<KMyMoneyCheckListItem*>(item);
-    if(!it_c) {
+    if (!it_c) {
       return KMyMoneySelector::match(exp, item);
     }
     return exp.indexIn(it_c->key(1, true)) != -1;
@@ -181,21 +181,21 @@ bool kMyMoneyAccountSelector::contains(const QString& txt) const
 
   QString baseName = i18n("Asset") + '|' +
                      i18n("Liability") + '|' +
-                     i18n("Income")+ '|' +
-                     i18n("Expense")+ '|' +
+                     i18n("Income") + '|' +
+                     i18n("Expense") + '|' +
                      i18n("Equity") + '|' +
                      i18n("Security");
 
-  while((it_v = it.current()) != 0) {
+  while ((it_v = it.current()) != 0) {
     QRegExp exp(QString("^(?:%1):%2$").arg(baseName).arg(QRegExp::escape(txt)));
-    if(it_v->rtti() == 1) {
+    if (it_v->rtti() == 1) {
       KMyMoneyCheckListItem* it_c = dynamic_cast<KMyMoneyCheckListItem*>(it_v);
-      if(exp.indexIn(it_c->key(1, true)) != -1) {
+      if (exp.indexIn(it_c->key(1, true)) != -1) {
         return true;
       }
-    } else if(it_v->rtti() == 0) {
+    } else if (it_v->rtti() == 0) {
       KMyMoneyListViewItem* it_c = dynamic_cast<KMyMoneyListViewItem*>(it_v);
-      if(exp.indexIn(it_c->key(1, true)) != -1) {
+      if (exp.indexIn(it_c->key(1, true)) != -1) {
         return true;
       }
     }
@@ -205,16 +205,16 @@ bool kMyMoneyAccountSelector::contains(const QString& txt) const
 }
 
 AccountSet::AccountSet() :
-  m_count(0),
-  m_file(MyMoneyFile::instance()),
-  m_favorites(0),
-  m_hideClosedAccounts(true)
+    m_count(0),
+    m_file(MyMoneyFile::instance()),
+    m_favorites(0),
+    m_hideClosedAccounts(true)
 {
 }
 
 void AccountSet::addAccountGroup(MyMoneyAccount::accountTypeE group)
 {
-  if(group == MyMoneyAccount::Asset) {
+  if (group == MyMoneyAccount::Asset) {
     m_typeList << MyMoneyAccount::Checkings;
     m_typeList << MyMoneyAccount::Savings;
     m_typeList << MyMoneyAccount::Cash;
@@ -226,31 +226,31 @@ void AccountSet::addAccountGroup(MyMoneyAccount::accountTypeE group)
     m_typeList << MyMoneyAccount::Asset;
     m_typeList << MyMoneyAccount::Currency;
 
-  } else if(group == MyMoneyAccount::Liability) {
+  } else if (group == MyMoneyAccount::Liability) {
     m_typeList << MyMoneyAccount::CreditCard;
     m_typeList << MyMoneyAccount::Loan;
     m_typeList << MyMoneyAccount::Liability;
 
-  } else if(group == MyMoneyAccount::Income) {
+  } else if (group == MyMoneyAccount::Income) {
     m_typeList << MyMoneyAccount::Income;
 
-  } else if(group == MyMoneyAccount::Expense) {
+  } else if (group == MyMoneyAccount::Expense) {
     m_typeList << MyMoneyAccount::Expense;
 
-  } else if(group == MyMoneyAccount::Equity) {
+  } else if (group == MyMoneyAccount::Equity) {
     m_typeList << MyMoneyAccount::Equity;
   }
 }
 
 void AccountSet::addAccountType(MyMoneyAccount::accountTypeE type)
 {
-    m_typeList << type;
+  m_typeList << type;
 }
 
 void AccountSet::removeAccountType(MyMoneyAccount::accountTypeE type)
 {
   int index = m_typeList.indexOf(type);
-  if(index != -1) {
+  if (index != -1) {
     m_typeList.removeAt(index);
   }
 }
@@ -268,36 +268,36 @@ int AccountSet::load(kMyMoneyAccountSelector* selector)
   int typeMask = 0;
   QString currentId;
 
-  if(selector->selectionMode() == Q3ListView::Single) {
+  if (selector->selectionMode() == Q3ListView::Single) {
     QStringList list;
     selector->selectedItems(list);
-    if(!list.isEmpty())
+    if (!list.isEmpty())
       currentId = list.first();
   }
-  if(m_typeList.contains(MyMoneyAccount::Checkings)
-    || m_typeList.contains(MyMoneyAccount::Savings)
-    || m_typeList.contains(MyMoneyAccount::Cash)
-    || m_typeList.contains(MyMoneyAccount::AssetLoan)
-    || m_typeList.contains(MyMoneyAccount::CertificateDep)
-    || m_typeList.contains(MyMoneyAccount::Investment)
-    || m_typeList.contains(MyMoneyAccount::Stock)
-    || m_typeList.contains(MyMoneyAccount::MoneyMarket)
-    || m_typeList.contains(MyMoneyAccount::Asset)
-    || m_typeList.contains(MyMoneyAccount::Currency))
+  if (m_typeList.contains(MyMoneyAccount::Checkings)
+      || m_typeList.contains(MyMoneyAccount::Savings)
+      || m_typeList.contains(MyMoneyAccount::Cash)
+      || m_typeList.contains(MyMoneyAccount::AssetLoan)
+      || m_typeList.contains(MyMoneyAccount::CertificateDep)
+      || m_typeList.contains(MyMoneyAccount::Investment)
+      || m_typeList.contains(MyMoneyAccount::Stock)
+      || m_typeList.contains(MyMoneyAccount::MoneyMarket)
+      || m_typeList.contains(MyMoneyAccount::Asset)
+      || m_typeList.contains(MyMoneyAccount::Currency))
     typeMask |= KMyMoneyUtils::asset;
 
-  if(m_typeList.contains(MyMoneyAccount::CreditCard)
-    || m_typeList.contains(MyMoneyAccount::Loan)
-    || m_typeList.contains(MyMoneyAccount::Liability))
+  if (m_typeList.contains(MyMoneyAccount::CreditCard)
+      || m_typeList.contains(MyMoneyAccount::Loan)
+      || m_typeList.contains(MyMoneyAccount::Liability))
     typeMask |= KMyMoneyUtils::liability;
 
-  if(m_typeList.contains(MyMoneyAccount::Income))
+  if (m_typeList.contains(MyMoneyAccount::Income))
     typeMask |= KMyMoneyUtils::income;
 
-  if(m_typeList.contains(MyMoneyAccount::Expense))
+  if (m_typeList.contains(MyMoneyAccount::Expense))
     typeMask |= KMyMoneyUtils::expense;
 
-  if(m_typeList.contains(MyMoneyAccount::Equity))
+  if (m_typeList.contains(MyMoneyAccount::Equity))
     typeMask |= KMyMoneyUtils::equity;
 
   selector->clear();
@@ -310,76 +310,76 @@ int AccountSet::load(kMyMoneyAccountSelector* selector)
   key = QString("A%1").arg(i18n("Favorites"));
   m_favorites = selector->newItem(i18n("Favorites"), key);
 
-  for(int mask = 0x01; mask != KMyMoneyUtils::last; mask <<= 1) {
+  for (int mask = 0x01; mask != KMyMoneyUtils::last; mask <<= 1) {
     Q3ListViewItem* item = 0;
-    if((typeMask & mask & KMyMoneyUtils::asset) != 0) {
+    if ((typeMask & mask & KMyMoneyUtils::asset) != 0) {
       ++m_count;
       key = QString("B%1").arg(i18n("Asset"));
       item = selector->newItem(i18n("Asset accounts"), key);
       list = m_file->asset().accountList();
     }
 
-    if((typeMask & mask & KMyMoneyUtils::liability) != 0) {
+    if ((typeMask & mask & KMyMoneyUtils::liability) != 0) {
       ++m_count;
       key = QString("C%1").arg(i18n("Liability"));
       item = selector->newItem(i18n("Liability accounts"), key);
       list = m_file->liability().accountList();
     }
 
-    if((typeMask & mask & KMyMoneyUtils::income) != 0) {
+    if ((typeMask & mask & KMyMoneyUtils::income) != 0) {
       ++m_count;
       key = QString("D%1").arg(i18n("Income"));
       item = selector->newItem(i18n("Income categories"), key);
       list = m_file->income().accountList();
-      if(selector->selectionMode() == Q3ListView::Multi) {
+      if (selector->selectionMode() == Q3ListView::Multi) {
         selector->m_incomeCategoriesButton->show();
       }
     }
 
-    if((typeMask & mask & KMyMoneyUtils::expense) != 0) {
+    if ((typeMask & mask & KMyMoneyUtils::expense) != 0) {
       ++m_count;
       key = QString("E%1").arg(i18n("Expense"));
       item = selector->newItem(i18n("Expense categories"), key);
       list = m_file->expense().accountList();
-      if(selector->selectionMode() == Q3ListView::Multi) {
+      if (selector->selectionMode() == Q3ListView::Multi) {
         selector->m_expenseCategoriesButton->show();
       }
     }
 
-    if((typeMask & mask & KMyMoneyUtils::equity) != 0) {
+    if ((typeMask & mask & KMyMoneyUtils::equity) != 0) {
       ++m_count;
       key = QString("F%1").arg(i18n("Equity"));
       item = selector->newItem(i18n("Equity accounts"), key);
       list = m_file->equity().accountList();
     }
 
-    if(!after)
+    if (!after)
       after = item;
 
-    if(item != 0) {
+    if (item != 0) {
       // scan all matching accounts found in the engine
-      for(it_l = list.constBegin(); it_l != list.constEnd(); ++it_l) {
+      for (it_l = list.constBegin(); it_l != list.constEnd(); ++it_l) {
         const MyMoneyAccount& acc = m_file->account(*it_l);
         ++m_count;
         ++count;
         //this will include an account if it matches the account type and
         //if it is still open or it has been set to show closed accounts
-        if(includeAccount(acc)
-        && (!isHidingClosedAccounts() || !acc.isClosed()) ) {
+        if (includeAccount(acc)
+            && (!isHidingClosedAccounts() || !acc.isClosed())) {
           QString tmpKey;
           tmpKey = key + MyMoneyFile::AccountSeperator + acc.name();
           Q3ListViewItem* subItem = selector->newItem(item, acc.name(), tmpKey, acc.id());
-          if(acc.value("PreferredAccount") == "Yes"
-             && m_typeList.contains(acc.accountType())) {
+          if (acc.value("PreferredAccount") == "Yes"
+              && m_typeList.contains(acc.accountType())) {
             selector->newItem(m_favorites, acc.name(), tmpKey, acc.id());
           }
-          if(acc.accountList().count() > 0) {
+          if (acc.accountList().count() > 0) {
             subItem->setOpen(true);
             count += loadSubAccounts(selector, subItem, tmpKey, acc.accountList());
           }
 
           //disable the item if it has been added only because a subaccount matches the type
-          if( !m_typeList.contains(acc.accountType()) ) {
+          if (!m_typeList.contains(acc.accountType())) {
             subItem->setEnabled(false);
           }
         }
@@ -390,7 +390,7 @@ int AccountSet::load(kMyMoneyAccountSelector* selector)
 
   // if we don't have a favorite account or the selector is for multi-mode
   // we get rid of the favorite entry and subentries.
-  if(m_favorites->childCount() == 0 || selector->selectionMode() == Q3ListView::Multi) {
+  if (m_favorites->childCount() == 0 || selector->selectionMode() == Q3ListView::Multi) {
     delete m_favorites;
     m_favorites = 0;
   }
@@ -398,8 +398,8 @@ int AccountSet::load(kMyMoneyAccountSelector* selector)
   // sort the list
   selector->listView()->sort();
 
-  if(lv->firstChild()) {
-    if(currentId.isEmpty()) {
+  if (lv->firstChild()) {
+    if (currentId.isEmpty()) {
       lv->setCurrentItem(lv->firstChild());
       lv->clearSelection();
     } else {
@@ -416,7 +416,7 @@ int AccountSet::load(kMyMoneyAccountSelector* selector, const QString& baseName,
   Q3ListViewItem* item = 0;
 
   m_typeList.clear();
-  if(clear) {
+  if (clear) {
     m_count = 0;
     selector->clear();
   }
@@ -425,9 +425,9 @@ int AccountSet::load(kMyMoneyAccountSelector* selector, const QString& baseName,
   ++m_count;
 
   QList<QString>::ConstIterator it;
-  for(it = accountIdList.constBegin(); it != accountIdList.constEnd(); ++it)   {
+  for (it = accountIdList.constBegin(); it != accountIdList.constEnd(); ++it)   {
     const MyMoneyAccount& acc = m_file->account(*it);
-    if(acc.isClosed())
+    if (acc.isClosed())
       continue;
     QString tmpKey;
     // the first character must be preset. Since we don't know any sort order here, we just use A
@@ -438,7 +438,7 @@ int AccountSet::load(kMyMoneyAccountSelector* selector, const QString& baseName,
   }
 
   K3ListView* lv = selector->listView();
-  if(lv->firstChild()) {
+  if (lv->firstChild()) {
     lv->setCurrentItem(lv->firstChild());
     lv->clearSelection();
   }
@@ -452,30 +452,30 @@ int AccountSet::loadSubAccounts(kMyMoneyAccountSelector* selector, Q3ListViewIte
   QStringList::ConstIterator it_l;
   int count = 0;
 
-  for(it_l = list.constBegin(); it_l != list.constEnd(); ++it_l) {
+  for (it_l = list.constBegin(); it_l != list.constEnd(); ++it_l) {
     const MyMoneyAccount& acc = m_file->account(*it_l);
     // don't include stock accounts if not in expert mode
-    if(acc.isInvest() && !KMyMoneyGlobalSettings::expertMode())
+    if (acc.isInvest() && !KMyMoneyGlobalSettings::expertMode())
       continue;
 
-    if(includeAccount(acc)
-    && !acc.isClosed()) {
+    if (includeAccount(acc)
+        && !acc.isClosed()) {
       QString tmpKey;
       tmpKey = key + MyMoneyFile::AccountSeperator + acc.name();
       ++count;
       ++m_count;
       Q3ListViewItem* item = selector->newItem(parent, acc.name(), tmpKey, acc.id());
-      if(acc.value("PreferredAccount") == "Yes"
-         && m_typeList.contains(acc.accountType())) {
+      if (acc.value("PreferredAccount") == "Yes"
+          && m_typeList.contains(acc.accountType())) {
         selector->newItem(m_favorites, acc.name(), tmpKey, acc.id());
       }
-      if(acc.accountList().count() > 0) {
+      if (acc.accountList().count() > 0) {
         item->setOpen(true);
         count += loadSubAccounts(selector, item, tmpKey, acc.accountList());
       }
 
       //disable the item if it has been added only because a subaccount matches the type
-      if( !m_typeList.contains(acc.accountType()) ) {
+      if (!m_typeList.contains(acc.accountType())) {
         item->setEnabled(false);
       }
     }
@@ -485,16 +485,16 @@ int AccountSet::loadSubAccounts(kMyMoneyAccountSelector* selector, Q3ListViewIte
 
 bool AccountSet::includeAccount(const MyMoneyAccount& acc)
 {
-  if( m_typeList.contains(acc.accountType()) )
+  if (m_typeList.contains(acc.accountType()))
     return true;
 
   QStringList accounts = acc.accountList();
 
-  if(accounts.size() > 0) {
+  if (accounts.size() > 0) {
     QStringList::ConstIterator it_acc;
-    for(it_acc = accounts.constBegin(); it_acc != accounts.constEnd(); ++it_acc) {
+    for (it_acc = accounts.constBegin(); it_acc != accounts.constEnd(); ++it_acc) {
       MyMoneyAccount account = m_file->account(*it_acc);
-      if( includeAccount(account) )
+      if (includeAccount(account))
         return true;
     }
   }

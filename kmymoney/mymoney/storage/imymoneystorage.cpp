@@ -24,7 +24,7 @@
 
 bool MyMoneyFileBitArray::testBit(int index) const
 {
-  if(index < size())
+  if (index < size())
     return QBitArray::testBit(index);
   return false;
 }

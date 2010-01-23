@@ -63,8 +63,7 @@ QString MyMoneyMoneyToWordsConverter::convertTreeDigitGroup(int threeDigitNumber
     groupText += m_tens[tens];
     if (units != 0)
       groupText += i18nc("This comes after the tens text if the unit is not 0", " ") + m_smallNumbers[units];
-  }
-  else if (tensUnits != 0)
+  } else if (tensUnits != 0)
     groupText += m_smallNumbers[tensUnits];
 
   return groupText;
@@ -79,9 +78,9 @@ QString MyMoneyMoneyToWordsConverter::convert(const MyMoneyMoney & money)
   // hold three-digit groups
   QList<int> digitGroups;
 
-  int precision = KGlobal::locale()->fracDigits(); 
+  int precision = KGlobal::locale()->fracDigits();
   int integer = static_cast<int>(money.toDouble()); // retain the integer part
-  int fraction = static_cast<int>((money.toDouble() - integer)*MyMoneyMoney::precToDenom(precision));
+  int fraction = static_cast<int>((money.toDouble() - integer) * MyMoneyMoney::precToDenom(precision));
 
   // Extract the three-digit groups
   for (int i = 0; i < 4; i++) {
@@ -119,8 +118,8 @@ QString MyMoneyMoneyToWordsConverter::convert(const MyMoneyMoney & money)
   }
 
   if (fraction != 0)
-    return i18nc("The first argument is the amount in words, the second is the fractional part and the third is the denominator of the fractional part", 
-    "%1 and %2/%3").arg(combined).arg(fraction).arg(MyMoneyMoney::precToDenom(precision));
+    return i18nc("The first argument is the amount in words, the second is the fractional part and the third is the denominator of the fractional part",
+                 "%1 and %2/%3").arg(combined).arg(fraction).arg(MyMoneyMoney::precToDenom(precision));
   else
     return combined;
 }

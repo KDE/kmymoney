@@ -23,26 +23,27 @@
 #include "mymoneyprice.h"
 #undef private
 
-class MyMoneyPriceTest : public CppUnit::TestFixture  {
-	CPPUNIT_TEST_SUITE(MyMoneyPriceTest);
-	CPPUNIT_TEST(testDefaultConstructor);
-	CPPUNIT_TEST(testConstructor);
-	CPPUNIT_TEST(testValidity);
-	CPPUNIT_TEST_SUITE_END();
+class MyMoneyPriceTest : public CppUnit::TestFixture
+{
+  CPPUNIT_TEST_SUITE(MyMoneyPriceTest);
+  CPPUNIT_TEST(testDefaultConstructor);
+  CPPUNIT_TEST(testConstructor);
+  CPPUNIT_TEST(testValidity);
+  CPPUNIT_TEST_SUITE_END();
 
 protected:
-	MyMoneyPrice*	m;
+  MyMoneyPrice* m;
 
 public:
-	MyMoneyPriceTest();
+  MyMoneyPriceTest();
 
-	void setUp();
-	void tearDown();
+  void setUp();
+  void tearDown();
 
-	void testDefaultConstructor();
-	void testConstructor();
-	void testValidity();
-	void testRate();
+  void testDefaultConstructor();
+  void testConstructor();
+  void testValidity();
+  void testRate();
 
 };
 #endif

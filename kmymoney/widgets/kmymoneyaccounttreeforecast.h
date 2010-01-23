@@ -39,20 +39,20 @@ class KMyMoneyAccountTreeForecastItem;
 
 class KMyMoneyAccountTreeForecast : public KMyMoneyAccountTreeBase
 {
-    Q_OBJECT
-  public:
-    KMyMoneyAccountTreeForecast(QWidget* parent = 0);
-    virtual ~KMyMoneyAccountTreeForecast() {}
+  Q_OBJECT
+public:
+  KMyMoneyAccountTreeForecast(QWidget* parent = 0);
+  virtual ~KMyMoneyAccountTreeForecast() {}
 
-    void showSummary(MyMoneyForecast& forecast);
-    void showDetailed(MyMoneyForecast& forecast);
-    void showAdvanced(MyMoneyForecast& forecast);
-    void showBudget(MyMoneyForecast& forecast);
-    void showAccount(void);
-    void clearColumns(void);
+  void showSummary(MyMoneyForecast& forecast);
+  void showDetailed(MyMoneyForecast& forecast);
+  void showAdvanced(MyMoneyForecast& forecast);
+  void showBudget(MyMoneyForecast& forecast);
+  void showAccount(void);
+  void clearColumns(void);
 
-  public slots:
-    void slotSelectObject(const Q3ListViewItem* i);
+public slots:
+  void slotSelectObject(const Q3ListViewItem* i);
 
 };
 
@@ -122,17 +122,23 @@ public:
    * sets when to begin a forecast cycle. This is used when showing forecast information per cycle, eg.
    * on the summary tab of forecast view.
    */
-  void setDaysToBeginDay(int _days) {m_daysToBeginDay = _days;}
+  void setDaysToBeginDay(int _days) {
+    m_daysToBeginDay = _days;
+  }
 
   /**
    * sets the type of forecast that the time will show, eg. summary, detailed, budget
    */
-  void setForecastViewType(EForecastViewType forecastType) { m_forecastType = forecastType; }
+  void setForecastViewType(EForecastViewType forecastType) {
+    m_forecastType = forecastType;
+  }
 
   /**
    * returns the forecast type of the item
    */
-  EForecastViewType forecastViewType(void) { return m_forecastType; }
+  EForecastViewType forecastViewType(void) {
+    return m_forecastType;
+  }
 
   /**
    * it executes some logic specific to this class before calling the same method on the base class
@@ -140,17 +146,17 @@ public:
   virtual void setOpen(bool o);
 
 protected:
-   /**
-    * Returns the current balance of this account.
-    *
-    * This is a pure virtual function, to allow subclasses to calculate
-    * the balance in different ways.
-    *
-    * Parent items in the tree will only be recomputed if the balance() for
-    * a son changes.
-    * @param account Account to get the balance for
-    * @return Balance of this account
-    */
+  /**
+   * Returns the current balance of this account.
+   *
+   * This is a pure virtual function, to allow subclasses to calculate
+   * the balance in different ways.
+   *
+   * Parent items in the tree will only be recomputed if the balance() for
+   * a son changes.
+   * @param account Account to get the balance for
+   * @return Balance of this account
+   */
   MyMoneyMoney balance() const;
   void showAmount(int column, const MyMoneyMoney amount, const MyMoneySecurity security);
   void adjustParentValue(int column, const MyMoneyMoney& value);

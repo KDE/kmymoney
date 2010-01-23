@@ -27,18 +27,19 @@
   *@author Michael Edwardes
   */
 
-class KReconcileListItem : public Q3ListViewItem  {
+class KReconcileListItem : public Q3ListViewItem
+{
 //   Q_OBJECT
   MyMoneyTransaction *m_transaction;
 public:
-  KReconcileListItem(Q3ListView *parent, MyMoneyTransaction *transaction );
+  KReconcileListItem(Q3ListView *parent, MyMoneyTransaction *transaction);
   ~KReconcileListItem();
   MyMoneyTransaction* transaction(void);
   void setReconciled(bool rec);
 
-/**
-  * Overrides QListViewItem::key(int, bool)
-  */
+  /**
+    * Overrides QListViewItem::key(int, bool)
+    */
   QString key(int column, bool ascending) const;
 
 };

@@ -64,8 +64,8 @@ class OfxHeaderVersion;
 class KOnlineBankingSetupDecl : public K3Wizard, public Ui::KOnlineBankingSetupDecl
 {
 public:
-  KOnlineBankingSetupDecl( QWidget *parent ) : K3Wizard( parent ) {
-    setupUi( this );
+  KOnlineBankingSetupDecl(QWidget *parent) : K3Wizard(parent) {
+    setupUi(this);
   }
 };
 
@@ -76,16 +76,18 @@ public:
   class ListViewItem: public MyMoneyKeyValueContainer, public Q3ListViewItem
   {
   public:
-    ListViewItem( Q3ListView* parent, const MyMoneyKeyValueContainer& kvps );
+    ListViewItem(Q3ListView* parent, const MyMoneyKeyValueContainer& kvps);
     virtual void x(void);
   };
 
-  KOnlineBankingSetupWizard(QWidget *parent=0);
+  KOnlineBankingSetupWizard(QWidget *parent = 0);
   ~KOnlineBankingSetupWizard();
 
-  bool chosenSettings( MyMoneyKeyValueContainer& settings );
+  bool chosenSettings(MyMoneyKeyValueContainer& settings);
 
-  bool isInit(void) const { return m_fInit; }
+  bool isInit(void) const {
+    return m_fInit;
+  }
 
 public slots:
   void next();
@@ -94,7 +96,7 @@ protected:
   bool finishAccountPage(void);
   bool finishLoginPage(void);
   bool finishFiPage(void);
-  bool post(const char* request, const char* url,const char* filename);
+  bool post(const char* request, const char* url, const char* filename);
 
   static int ofxAccountCallback(struct OfxAccountData data, void * pv);
   static int ofxStatusCallback(struct OfxStatusData data, void * pv);

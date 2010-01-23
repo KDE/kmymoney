@@ -40,8 +40,8 @@ class Q3ListViewItem;
 class KSecurityListEditorDecl : public QDialog, public Ui::KSecurityListEditorDecl
 {
 public:
-  KSecurityListEditorDecl( QWidget *parent ) : QDialog( parent ) {
-    setupUi( this );
+  KSecurityListEditorDecl(QWidget *parent) : QDialog(parent) {
+    setupUi(this);
   }
 };
 

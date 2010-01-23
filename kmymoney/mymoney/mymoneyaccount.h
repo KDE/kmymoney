@@ -85,7 +85,7 @@ public:
     * Account types currently supported.
     */
   typedef enum _accountTypeE {
-    UnknownAccountType=0, /**< For error handling */
+    UnknownAccountType = 0, /**< For error handling */
     Checkings,            /**< Standard checking account */
     Savings,              /**< Typical savings account */
     Cash,                 /**< Denotes a shoe-box or pillowcase stuffed
@@ -185,68 +185,88 @@ public:
     *         an internal account
     * @see setInstitution
     */
-  const QString& institutionId(void) const { return m_institution; }
+  const QString& institutionId(void) const {
+    return m_institution;
+  }
 
   /**
     * This method returns the name of the account
     * @return name of account
     * @see setName()
     */
-  const QString& name(void) const { return m_name; }
+  const QString& name(void) const {
+    return m_name;
+  }
 
   /**
     * This method returns the number of the account at the institution
     * @return number of account at the institution
     * @see setNumber
     */
-  const QString& number(void) const { return m_number; }
+  const QString& number(void) const {
+    return m_number;
+  }
 
   /**
     * This method returns the descriptive text of the account.
     * @return description of account
     * @see setDescription
     */
-  const QString& description(void) const { return m_description; }
+  const QString& description(void) const {
+    return m_description;
+  }
 
   /**
     * This method returns the opening date of this account
     * @return date of opening of this account as const QDate value
     * @see setOpeningDate()
     */
-  const QDate& openingDate(void) const { return m_openingDate; }
+  const QDate& openingDate(void) const {
+    return m_openingDate;
+  }
 
   /**
     * This method returns the date of the last reconciliation of this account
     * @return date of last reconciliation as const QDate value
     * @see setLastReconciliationDate
     */
-  const QDate& lastReconciliationDate(void) const { return m_lastReconciliationDate; }
+  const QDate& lastReconciliationDate(void) const {
+    return m_lastReconciliationDate;
+  }
 
   /**
     * This method returns the date the account was last modified
     * @return date of last modification as const QDate value
     * @see setLastModified
     */
-  const QDate& lastModified(void) const { return m_lastModified; }
+  const QDate& lastModified(void) const {
+    return m_lastModified;
+  }
 
   /**
     * This method is used to return the ID of the parent account
     * @return QString with the ID of the parent of this account
     */
-  const QString& parentAccountId(void) const { return m_parentAccount; };
+  const QString& parentAccountId(void) const {
+    return m_parentAccount;
+  };
 
   /**
     * This method returns the list of the account id's of
     * subordinate accounts
     * @return QStringList account ids
     */
-  const QStringList& accountList(void) const { return m_accountList; };
+  const QStringList& accountList(void) const {
+    return m_accountList;
+  };
 
   /**
     * This method returns the number of entries in the m_accountList
     * @return number of entries in the accountList
     */
-  int accountCount(void) const { return m_accountList.count(); };
+  int accountCount(void) const {
+    return m_accountList.count();
+  };
 
   /**
     * This method is used to add an account id as sub-ordinate account
@@ -339,12 +359,16 @@ public:
   /**
     * This method is used to update m_lastModified to the current date
     */
-  void touch(void) { setLastModified(QDate::currentDate()); }
+  void touch(void) {
+    setLastModified(QDate::currentDate());
+  }
 
   /**
     * This method returns the type of the account.
     */
-  accountTypeE accountType(void) const { return m_accountType; }
+  accountTypeE accountType(void) const {
+    return m_accountType;
+  }
 
   /**
     * This method retrieves the id of the currency used with this account.
@@ -352,7 +376,9 @@ public:
     *
     * @return id of currency
     */
-  const QString& currencyId(void) const { return m_currencyId; };
+  const QString& currencyId(void) const {
+    return m_currencyId;
+  };
 
   /**
     * This method sets the id of the currency used with this account.
@@ -378,7 +404,9 @@ public:
     * This member returns the balance of this account based on
     * all transactions stored in the journal.
     */
-  const MyMoneyMoney& balance(void) const { return m_balance; }
+  const MyMoneyMoney& balance(void) const {
+    return m_balance;
+  }
 
   /**
     * This method adjusts the balance of this account
@@ -400,7 +428,9 @@ public:
     * @param val const reference to MyMoneyMoney object containing the
     *             value to be assigned to the balance
     */
-  void setBalance(const MyMoneyMoney& val) { m_balance = val; }
+  void setBalance(const MyMoneyMoney& val) {
+    m_balance = val;
+  }
 
   /**
     * This method sets the kvp's for online banking with this account
@@ -470,7 +500,7 @@ public:
     *
     * @deprecated use isIncomeExpense() instead
     */
-  bool isCategory(void) const __attribute__ ((deprecated));
+  bool isCategory(void) const __attribute__((deprecated));
 
   /**
     * This method returns @a true if the account type is
@@ -531,8 +561,8 @@ public:
    */
   static QString accountTypeToString(const MyMoneyAccount::accountTypeE accountType);
 
-  QDataStream &operator<<( const MyMoneyAccount & );
-  QDataStream &operator>>( MyMoneyAccount & );
+  QDataStream &operator<<(const MyMoneyAccount &);
+  QDataStream &operator>>(MyMoneyAccount &);
 
 private:
   /**

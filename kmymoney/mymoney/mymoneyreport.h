@@ -80,7 +80,7 @@ public:
 
 public:
   MyMoneyReport(void);
-  MyMoneyReport(ERowType _rt, unsigned _ct, dateOptionE _dl, EDetailLevel _ss, const QString& _name, const QString& _comment );
+  MyMoneyReport(ERowType _rt, unsigned _ct, dateOptionE _dl, EDetailLevel _ss, const QString& _name, const QString& _comment);
   MyMoneyReport(const QString& id, const MyMoneyReport& right);
 
   /**
@@ -91,75 +91,207 @@ public:
   MyMoneyReport(const QDomElement& node);
 
   // Simple get operations
-  const QString& name(void) const { return m_name; }
-  bool isShowingRowTotals(void) const { return (m_showRowTotals); }
-  EReportType reportType(void) const { return m_reportType; }
-  ERowType rowType(void) const { return m_rowType; }
-  EColumnType columnType(void) const { return m_columnType; }
-  bool isRunningSum(void) const { return (m_rowType==eAssetLiability); }
-  bool isConvertCurrency(void) const { return m_convertCurrency; }
-  unsigned columnPitch(void) const { return static_cast<unsigned>(m_columnType); }
-  bool isShowingColumnTotals(void) const { return m_convertCurrency; }
-  const QString& comment( void ) const { return m_comment; }
-  EQueryColumns queryColumns(void) const { return m_queryColumns; }
-  const QString& group( void ) const { return m_group; }
-  bool isFavorite(void) const { return m_favorite; }
-  bool isTax(void) const { return m_tax; }
-  bool isInvestmentsOnly(void) const { return m_investments; }
-  bool isLoansOnly(void) const { return m_loans; }
-  EDetailLevel detailLevel(void) const { return m_detailLevel; }
-  EChartType chartType(void) const { return m_chartType; }
-  bool isChartDataLabels(void) const { return m_chartDataLabels; }
-  bool isChartGridLines(void) const { return m_chartGridLines; }
-  bool isChartByDefault(void) const { return m_chartByDefault; }
-  uint chartLineWidth(void) const { return m_chartLineWidth; }
-  bool isIncludingSchedules(void) const { return m_includeSchedules; }
-  bool isColumnsAreDays(void) const { return m_columnsAreDays; }
-  bool isIncludingTransfers(void) const { return m_includeTransfers; }
-  bool isIncludingUnusedAccounts(void) const { return m_includeUnusedAccounts; }
-  bool hasBudget(void) const { return !m_budgetId.isEmpty(); }
-  const QString& budget(void) const { return m_budgetId; }
-  bool isIncludingBudgetActuals(void) const { return m_includeBudgetActuals; }
-  bool isIncludingForecast(void) const { return m_includeForecast; }
-  bool isIncludingMovingAverage(void) const { return m_includeMovingAverage; }
-  int movingAverageDays(void) const { return m_movingAverageDays; }
-  bool isIncludingPrice(void) const { return m_includePrice; }
-  bool isIncludingAveragePrice(void) const { return m_includeAveragePrice; }
-  bool isUserDefined(void) const { return m_dateLock == userDefined; }
-  bool isMixedTime(void) const { return m_mixedTime; }
-  int currentDateColumn(void) const { return m_currentDateColumn; }
+  const QString& name(void) const {
+    return m_name;
+  }
+  bool isShowingRowTotals(void) const {
+    return (m_showRowTotals);
+  }
+  EReportType reportType(void) const {
+    return m_reportType;
+  }
+  ERowType rowType(void) const {
+    return m_rowType;
+  }
+  EColumnType columnType(void) const {
+    return m_columnType;
+  }
+  bool isRunningSum(void) const {
+    return (m_rowType == eAssetLiability);
+  }
+  bool isConvertCurrency(void) const {
+    return m_convertCurrency;
+  }
+  unsigned columnPitch(void) const {
+    return static_cast<unsigned>(m_columnType);
+  }
+  bool isShowingColumnTotals(void) const {
+    return m_convertCurrency;
+  }
+  const QString& comment(void) const {
+    return m_comment;
+  }
+  EQueryColumns queryColumns(void) const {
+    return m_queryColumns;
+  }
+  const QString& group(void) const {
+    return m_group;
+  }
+  bool isFavorite(void) const {
+    return m_favorite;
+  }
+  bool isTax(void) const {
+    return m_tax;
+  }
+  bool isInvestmentsOnly(void) const {
+    return m_investments;
+  }
+  bool isLoansOnly(void) const {
+    return m_loans;
+  }
+  EDetailLevel detailLevel(void) const {
+    return m_detailLevel;
+  }
+  EChartType chartType(void) const {
+    return m_chartType;
+  }
+  bool isChartDataLabels(void) const {
+    return m_chartDataLabels;
+  }
+  bool isChartGridLines(void) const {
+    return m_chartGridLines;
+  }
+  bool isChartByDefault(void) const {
+    return m_chartByDefault;
+  }
+  uint chartLineWidth(void) const {
+    return m_chartLineWidth;
+  }
+  bool isIncludingSchedules(void) const {
+    return m_includeSchedules;
+  }
+  bool isColumnsAreDays(void) const {
+    return m_columnsAreDays;
+  }
+  bool isIncludingTransfers(void) const {
+    return m_includeTransfers;
+  }
+  bool isIncludingUnusedAccounts(void) const {
+    return m_includeUnusedAccounts;
+  }
+  bool hasBudget(void) const {
+    return !m_budgetId.isEmpty();
+  }
+  const QString& budget(void) const {
+    return m_budgetId;
+  }
+  bool isIncludingBudgetActuals(void) const {
+    return m_includeBudgetActuals;
+  }
+  bool isIncludingForecast(void) const {
+    return m_includeForecast;
+  }
+  bool isIncludingMovingAverage(void) const {
+    return m_includeMovingAverage;
+  }
+  int movingAverageDays(void) const {
+    return m_movingAverageDays;
+  }
+  bool isIncludingPrice(void) const {
+    return m_includePrice;
+  }
+  bool isIncludingAveragePrice(void) const {
+    return m_includeAveragePrice;
+  }
+  bool isUserDefined(void) const {
+    return m_dateLock == userDefined;
+  }
+  bool isMixedTime(void) const {
+    return m_mixedTime;
+  }
+  int currentDateColumn(void) const {
+    return m_currentDateColumn;
+  }
 
   // Simple set operations
-  void setName(const QString& _s) { m_name = _s; }
-  void setConvertCurrency(bool _f) { m_convertCurrency = _f; }
+  void setName(const QString& _s) {
+    m_name = _s;
+  }
+  void setConvertCurrency(bool _f) {
+    m_convertCurrency = _f;
+  }
   void setRowType(ERowType _rt);
-  void setColumnType(EColumnType _ct) { m_columnType = _ct; }
-  void setComment( const QString& _comment ) { m_comment = _comment; }
-  void setGroup( const QString& _group ) { m_group = _group; }
-  void setFavorite(bool _f) { m_favorite = _f; }
-  void setQueryColumns( EQueryColumns _qc ) { m_queryColumns = _qc; }
-  void setTax(bool _f) { m_tax = _f; }
-  void setInvestmentsOnly(bool _f) { m_investments = _f; if (_f) m_loans = false; }
-  void setLoansOnly(bool _f) { m_loans = _f; if (_f) m_investments = false; }
-  void setDetailLevel( EDetailLevel _detail ) { m_detailLevel = _detail; }
-  void setChartType ( EChartType _type ) { m_chartType = _type; }
-  void setChartDataLabels ( bool _f ) { m_chartDataLabels = _f; }
-  void setChartGridLines ( bool _f ) { m_chartGridLines = _f; }
-  void setChartByDefault ( bool _f ) { m_chartByDefault = _f; }
-  void setChartLineWidth ( uint _f ) { m_chartLineWidth = _f; }
-  void setIncludingSchedules( bool _f ) { m_includeSchedules = _f; }
-  void setColumnsAreDays( bool _f ) { m_columnsAreDays = _f; }
-  void setIncludingTransfers( bool _f ) { m_includeTransfers = _f; }
-  void setIncludingUnusedAccounts( bool _f ) { m_includeUnusedAccounts = _f; }
-  void setShowingRowTotals( bool _f ) { m_showRowTotals = _f; }
-  void setIncludingBudgetActuals( bool _f ) { m_includeBudgetActuals = _f; }
-  void setIncludingForecast( bool _f ) { m_includeForecast = _f; }
-  void setIncludingMovingAverage( bool _f ) { m_includeMovingAverage = _f; }
-  void setMovingAverageDays( int _days ) { m_movingAverageDays = _days; }
-  void setIncludingPrice( bool _f ) { m_includePrice = _f; }
-  void setIncludingAveragePrice( bool _f ) { m_includeAveragePrice = _f; }
-  void setMixedTime( bool _f ) { m_mixedTime = _f; }
-  void setCurrentDateColumn( int _f ) { m_currentDateColumn = _f; }
+  void setColumnType(EColumnType _ct) {
+    m_columnType = _ct;
+  }
+  void setComment(const QString& _comment) {
+    m_comment = _comment;
+  }
+  void setGroup(const QString& _group) {
+    m_group = _group;
+  }
+  void setFavorite(bool _f) {
+    m_favorite = _f;
+  }
+  void setQueryColumns(EQueryColumns _qc) {
+    m_queryColumns = _qc;
+  }
+  void setTax(bool _f) {
+    m_tax = _f;
+  }
+  void setInvestmentsOnly(bool _f) {
+    m_investments = _f; if (_f) m_loans = false;
+  }
+  void setLoansOnly(bool _f) {
+    m_loans = _f; if (_f) m_investments = false;
+  }
+  void setDetailLevel(EDetailLevel _detail) {
+    m_detailLevel = _detail;
+  }
+  void setChartType(EChartType _type) {
+    m_chartType = _type;
+  }
+  void setChartDataLabels(bool _f) {
+    m_chartDataLabels = _f;
+  }
+  void setChartGridLines(bool _f) {
+    m_chartGridLines = _f;
+  }
+  void setChartByDefault(bool _f) {
+    m_chartByDefault = _f;
+  }
+  void setChartLineWidth(uint _f) {
+    m_chartLineWidth = _f;
+  }
+  void setIncludingSchedules(bool _f) {
+    m_includeSchedules = _f;
+  }
+  void setColumnsAreDays(bool _f) {
+    m_columnsAreDays = _f;
+  }
+  void setIncludingTransfers(bool _f) {
+    m_includeTransfers = _f;
+  }
+  void setIncludingUnusedAccounts(bool _f) {
+    m_includeUnusedAccounts = _f;
+  }
+  void setShowingRowTotals(bool _f) {
+    m_showRowTotals = _f;
+  }
+  void setIncludingBudgetActuals(bool _f) {
+    m_includeBudgetActuals = _f;
+  }
+  void setIncludingForecast(bool _f) {
+    m_includeForecast = _f;
+  }
+  void setIncludingMovingAverage(bool _f) {
+    m_includeMovingAverage = _f;
+  }
+  void setMovingAverageDays(int _days) {
+    m_movingAverageDays = _days;
+  }
+  void setIncludingPrice(bool _f) {
+    m_includePrice = _f;
+  }
+  void setIncludingAveragePrice(bool _f) {
+    m_includeAveragePrice = _f;
+  }
+  void setMixedTime(bool _f) {
+    m_mixedTime = _f;
+  }
+  void setCurrentDateColumn(int _f) {
+    m_currentDateColumn = _f;
+  }
 
   /**
     * Sets the budget used for this report
@@ -172,7 +304,9 @@ public:
     * simply checked for any non-empty string, and if so, hasBudget()
     * will return true.
     */
-  void setBudget( const QString& _budget, bool _fa = true ) { m_budgetId = _budget; m_includeBudgetActuals=_fa; }
+  void setBudget(const QString& _budget, bool _fa = true) {
+    m_budgetId = _budget; m_includeBudgetActuals = _fa;
+  }
 
   /**
     * This method allows you to clear the underlying transaction filter
@@ -185,7 +319,9 @@ public:
     * @param _filter The filter which should replace the existing transaction
     * filter.
     */
-  void assignFilter(const MyMoneyTransactionFilter& _filter) { MyMoneyTransactionFilter::operator=(_filter); }
+  void assignFilter(const MyMoneyTransactionFilter& _filter) {
+    MyMoneyTransactionFilter::operator=(_filter);
+  }
 
   /**
     * Set the underlying date filter and LOCK that filter to the specified
@@ -199,12 +335,11 @@ public:
     *          which this report should be locked to.
     */
 
-  void setDateFilter(dateOptionE _u)
-    {
-      m_dateLock = _u;
-      if (_u != userDefined)
-        MyMoneyTransactionFilter::setDateFilter( _u );
-    }
+  void setDateFilter(dateOptionE _u) {
+    m_dateLock = _u;
+    if (_u != userDefined)
+      MyMoneyTransactionFilter::setDateFilter(_u);
+  }
 
   /**
     * Set the underlying date filter using the start and end dates provided.
@@ -216,7 +351,9 @@ public:
     * @param _de The inclusive end date of the date range
     */
 
-  void setDateFilter(const QDate& _db,const QDate& _de) { MyMoneyTransactionFilter::setDateFilter( _db,_de ); }
+  void setDateFilter(const QDate& _db, const QDate& _de) {
+    MyMoneyTransactionFilter::setDateFilter(_db, _de);
+  }
 
   /**
     * Set the underlying date filter using the 'date lock' property.
@@ -229,7 +366,9 @@ public:
     * September, this function will update the date range to be September,
     * as is proper.
     */
-  void updateDateFilter(void) { if (m_dateLock != userDefined) MyMoneyTransactionFilter::setDateFilter(m_dateLock); }
+  void updateDateFilter(void) {
+    if (m_dateLock != userDefined) MyMoneyTransactionFilter::setDateFilter(m_dateLock);
+  }
 
   /**
     * Retrieves a VALID beginning & ending date for this report.
@@ -278,7 +417,7 @@ public:
     * @param type group to append account groups into
     * @return return true if an account group filter has been set
     */
-  bool includesAccountGroup( MyMoneyAccount::accountTypeE type ) const;
+  bool includesAccountGroup(MyMoneyAccount::accountTypeE type) const;
 
   /**
     * This method is used to test whether a specific account
@@ -290,7 +429,7 @@ public:
     * @param acc the account in question
     * @return true if account is in filter set, false otherwise
     */
-  bool includes( const MyMoneyAccount& acc ) const;
+  bool includes(const MyMoneyAccount& acc) const;
 
   /**
     * This method writes this report to the DOM element @p e,
@@ -302,7 +441,7 @@ public:
     * @param anonymous Whether the sensitive parts of the report should be
     *              masked
     */
-  void write(QDomElement& e, QDomDocument *doc, bool anonymous=false) const;
+  void write(QDomElement& e, QDomDocument *doc, bool anonymous = false) const;
 
   /**
     * This method reads a report from the DOM element @p e, and
@@ -395,15 +534,15 @@ private:
     * by m_columnsAreDays.
     */
   enum EColumnType m_columnType;
-   /**
-    * Whether the base unit of columns of this report is days.  Only applies to
-    * 'PivotTable' reports.  If false, then columns are months or multiples thereof.
-    */
+  /**
+   * Whether the base unit of columns of this report is days.  Only applies to
+   * 'PivotTable' reports.  If false, then columns are months or multiples thereof.
+   */
   bool m_columnsAreDays;
- /**
-    * What sort of values should show up on the COLUMNS of this report,
-    * in the case of a 'QueryTable' report
-    */
+  /**
+     * What sort of values should show up on the COLUMNS of this report,
+     * in the case of a 'QueryTable' report
+     */
   enum EQueryColumns m_queryColumns;
 
   /**

@@ -52,11 +52,11 @@ class Q3ListViewItem;
 class KSortOptionDlg : public QDialog, public Ui::KSortOptionDlg
 {
 public:
-    KSortOptionDlg( QWidget *parent );
-    void init();
-    void setSortOption(const QString& option, const QString& def);
-    QString sortOption() const;
-    void hideDefaultButton();
+  KSortOptionDlg(QWidget *parent);
+  void init();
+  void setSortOption(const QString& option, const QString& def);
+  QString sortOption() const;
+  void hideDefaultButton();
 };
 
 
@@ -64,8 +64,8 @@ public:
 class KFindTransactionDlgDecl : public QDialog, public Ui::KFindTransactionDlgDecl
 {
 public:
-  KFindTransactionDlgDecl( QWidget *parent ) : QDialog( parent ) {
-    setupUi( this );
+  KFindTransactionDlgDecl(QWidget *parent) : QDialog(parent) {
+    setupUi(this);
   }
 };
 
@@ -103,11 +103,11 @@ public:
     // insert new constants above of this line
     dateOptionCount
   };
-*/
-  KFindTransactionDlg(QWidget *parent=0);
+  */
+  KFindTransactionDlg(QWidget *parent = 0);
   ~KFindTransactionDlg() {}
 
-  virtual bool eventFilter( QObject *o, QEvent *e );
+  virtual bool eventFilter(QObject *o, QEvent *e);
 
 public slots:
   void show(void);

@@ -44,14 +44,17 @@
   * It is derived from MyMoneyTransaction but contains additional
   * information.
   */
-class KMyMoneyTransaction : public MyMoneyTransaction {
+class KMyMoneyTransaction : public MyMoneyTransaction
+{
 public:
   KMyMoneyTransaction();
   KMyMoneyTransaction(const MyMoneyTransaction& t);
   ~KMyMoneyTransaction();
 
   void setSplitId(const QString& id);
-  const QString& splitId(void) const { return m_splitId; };
+  const QString& splitId(void) const {
+    return m_splitId;
+  };
 
 private:
   QString    m_splitId;

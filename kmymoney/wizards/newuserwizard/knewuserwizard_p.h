@@ -40,13 +40,14 @@
 
 class Wizard;
 
-namespace NewUserWizard {
+namespace NewUserWizard
+{
 
 class KIntroPageDecl : public QWidget, public Ui::KIntroPageDecl
 {
 public:
-  KIntroPageDecl( QWidget *parent ) : QWidget( parent ) {
-    setupUi( this );
+  KIntroPageDecl(QWidget *parent) : QWidget(parent) {
+    setupUi(this);
   }
 };
 
@@ -54,7 +55,7 @@ class IntroPage : public KIntroPageDecl, public WizardPage<Wizard>
 {
   Q_OBJECT
 public:
-  IntroPage(Wizard* parent );
+  IntroPage(Wizard* parent);
   KMyMoneyWizardPage* nextPage(void) const;
 };
 
@@ -67,7 +68,7 @@ class GeneralPage : public UserInfo, public WizardPage<Wizard>
 {
   Q_OBJECT
 public:
-  GeneralPage(Wizard* parent );
+  GeneralPage(Wizard* parent);
   KMyMoneyWizardPage* nextPage(void) const;
 
 protected slots:
@@ -85,7 +86,7 @@ class CurrencyPage : public Currency, public WizardPage<Wizard>
 {
   Q_OBJECT
 public:
-  CurrencyPage(Wizard* parent );
+  CurrencyPage(Wizard* parent);
   void enterPage(void);
   KMyMoneyWizardPage* nextPage(void) const;
 };
@@ -97,15 +98,15 @@ public:
 class KAccountPageDecl : public QWidget, public Ui::KAccountPageDecl
 {
 public:
-  KAccountPageDecl( QWidget *parent ) : QWidget( parent ) {
-    setupUi( this );
+  KAccountPageDecl(QWidget *parent) : QWidget(parent) {
+    setupUi(this);
   }
 };
 class AccountPage : public KAccountPageDecl, public WizardPage<Wizard>
 {
   Q_OBJECT
 public:
-  AccountPage(Wizard* parent );
+  AccountPage(Wizard* parent);
   KMyMoneyWizardPage* nextPage(void) const;
 
   virtual bool isComplete(void) const;
@@ -120,7 +121,7 @@ class CategoriesPage : public Accounts, public WizardPage<Wizard>
 {
   Q_OBJECT
 public:
-  CategoriesPage(Wizard* parent );
+  CategoriesPage(Wizard* parent);
   KMyMoneyWizardPage* nextPage(void) const;
   QList<MyMoneyTemplate> selectedTemplates(void) const;
 };
@@ -134,15 +135,15 @@ public:
 class KPreferencePageDecl : public QWidget, public Ui::KPreferencePageDecl
 {
 public:
-  KPreferencePageDecl( QWidget *parent ) : QWidget( parent ) {
-    setupUi( this );
+  KPreferencePageDecl(QWidget *parent) : QWidget(parent) {
+    setupUi(this);
   }
 };
 class PreferencePage : public KPreferencePageDecl, public WizardPage<Wizard>
 {
   Q_OBJECT
 public:
-  PreferencePage(Wizard* parent );
+  PreferencePage(Wizard* parent);
   KMyMoneyWizardPage* nextPage(void) const;
 };
 
@@ -155,8 +156,8 @@ public:
 class KFilePageDecl : public QWidget, public Ui::KFilePageDecl
 {
 public:
-  KFilePageDecl( QWidget *parent ) : QWidget( parent ) {
-    setupUi( this );
+  KFilePageDecl(QWidget *parent) : QWidget(parent) {
+    setupUi(this);
   }
 };
 class FilePage : public KFilePageDecl, public WizardPage<Wizard>

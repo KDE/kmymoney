@@ -26,7 +26,7 @@
 // Project Includes
 
 KMyMoneyAccountTreeBudget::KMyMoneyAccountTreeBudget(QWidget* parent) :
-  KMyMoneyAccountTreeBase(parent)
+    KMyMoneyAccountTreeBase(parent)
 {
   showType();
   showValue();
@@ -38,21 +38,21 @@ void KMyMoneyAccountTreeBudget::slotSelectObject(const Q3ListViewItem* i)
   emit selectObject(MyMoneyAccount());
 
   const KMyMoneyAccountTreeBaseItem* item = dynamic_cast<const KMyMoneyAccountTreeBaseItem*>(i);
-  if(item) {
+  if (item) {
     emit openObject(item->itemObject());
   }
 }
 
 KMyMoneyAccountTreeBudgetItem::KMyMoneyAccountTreeBudgetItem(K3ListView *parent, const MyMoneyAccount& account, const MyMoneyBudget  &budget, const MyMoneySecurity& security, const QString& name) :
-  KMyMoneyAccountTreeBaseItem(parent, account, security, name),
-  m_budget(budget)
+    KMyMoneyAccountTreeBaseItem(parent, account, security, name),
+    m_budget(budget)
 {
   updateAccount(true);
 }
 
 KMyMoneyAccountTreeBudgetItem::KMyMoneyAccountTreeBudgetItem(KMyMoneyAccountTreeBudgetItem *parent, const MyMoneyAccount& account, const MyMoneyBudget& budget, const QList<MyMoneyPrice>& price, const MyMoneySecurity& security) :
-  KMyMoneyAccountTreeBaseItem(parent, account, price, security),
-  m_budget(budget)
+    KMyMoneyAccountTreeBaseItem(parent, account, price, security),
+    m_budget(budget)
 {
   updateAccount(true);
 }
@@ -72,16 +72,16 @@ MyMoneyMoney KMyMoneyAccountTreeBudgetItem::balance() const
 {
   MyMoneyMoney result = MyMoneyMoney();
   // find out if the account is budgeted
-  MyMoneyBudget::AccountGroup budgetAccount = m_budget.account( m_account.id() );
-  if ( budgetAccount.id() == m_account.id() ) {
+  MyMoneyBudget::AccountGroup budgetAccount = m_budget.account(m_account.id());
+  if (budgetAccount.id() == m_account.id()) {
     result = budgetAccount.balance();
-    switch(budgetAccount.budgetLevel()) {
-      case MyMoneyBudget::AccountGroup::eMonthly:
-        result = result * 12;
-        break;
+    switch (budgetAccount.budgetLevel()) {
+    case MyMoneyBudget::AccountGroup::eMonthly:
+      result = result * 12;
+      break;
 
-      default:
-        break;
+    default:
+      break;
     }
   }
   return result;

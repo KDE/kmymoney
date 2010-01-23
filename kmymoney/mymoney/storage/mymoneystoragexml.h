@@ -55,8 +55,8 @@ public:
   };
 
 protected:
-   void          setProgressCallback(void(*callback)(int, int, const QString&));
-   void          signalProgress(int current, int total, const QString& = "");
+  void          setProgressCallback(void(*callback)(int, int, const QString&));
+  void          signalProgress(int current, int total, const QString& = "");
 
   /**
     * This method returns the version of the underlying file. It

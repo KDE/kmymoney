@@ -29,8 +29,8 @@
 #include "kmymoney.h"
 
 KMyMoneyPlugin::KMMImportInterface::KMMImportInterface(KMyMoneyApp* app, QObject* parent, const char* name) :
-  ImportInterface(parent, name),
-  m_app(app)
+    ImportInterface(parent, name),
+    m_app(app)
 {
 }
 

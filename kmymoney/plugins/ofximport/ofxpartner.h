@@ -31,8 +31,8 @@
 #include <kurl.h>
 namespace KIO
 {
-  class Job;
-  class TransferJob;
+class Job;
+class TransferJob;
 }
 
 // ----------------------------------------------------------------------------
@@ -42,19 +42,19 @@ namespace KIO
 
 namespace OfxPartner
 {
-  /**
-    * setup the directory where the files will be stored.
-    * @a dir must end with a '/' and must exist. Call this
-    * before any other of the functions of OfxPartner. The
-    * default will be to store the files in the current
-    * directory.
-    */
-  void setDirectory(const QString& dir);
+/**
+  * setup the directory where the files will be stored.
+  * @a dir must end with a '/' and must exist. Call this
+  * before any other of the functions of OfxPartner. The
+  * default will be to store the files in the current
+  * directory.
+  */
+void setDirectory(const QString& dir);
 
-  void ValidateIndexCache(void);
-  OfxFiServiceInfo ServiceInfo(const QString& fipid);
-  QStringList BankNames(void);
-  QStringList FipidForBank(const QString& bank);
+void ValidateIndexCache(void);
+OfxFiServiceInfo ServiceInfo(const QString& fipid);
+QStringList BankNames(void);
+QStringList FipidForBank(const QString& bank);
 
 }
 
@@ -62,16 +62,18 @@ class OfxHttpRequest : public QObject
 {
   Q_OBJECT
 public:
-  OfxHttpRequest(const QString& method, const KUrl &url, const QByteArray &postData, const QMap<QString, QString>& metaData, const KUrl& dst, bool showProgressInfo=true);
+  OfxHttpRequest(const QString& method, const KUrl &url, const QByteArray &postData, const QMap<QString, QString>& metaData, const KUrl& dst, bool showProgressInfo = true);
   virtual ~OfxHttpRequest() {}
 
-  Q3Http::Error error(void) const { return m_error; }
+  Q3Http::Error error(void) const {
+    return m_error;
+  }
 
 protected slots:
   void slotOfxFinished(int, bool);
 
 private:
-  Q3Http*	      m_job;
+  Q3Http*       m_job;
   KUrl          m_dst;
   Q3Http::Error  m_error;
 
@@ -79,16 +81,18 @@ private:
 
 class OfxHttpsRequest : public QObject
 {
-Q_OBJECT
+  Q_OBJECT
 public:
-  OfxHttpsRequest(const QString& method, const KUrl &url, const QByteArray &postData, const QMap<QString, QString>& metaData, const KUrl& dst, bool showProgressInfo=true);
+  OfxHttpsRequest(const QString& method, const KUrl &url, const QByteArray &postData, const QMap<QString, QString>& metaData, const KUrl& dst, bool showProgressInfo = true);
   virtual ~OfxHttpsRequest();
 
-  Q3Http::Error error(void) const { return m_error; }
+  Q3Http::Error error(void) const {
+    return m_error;
+  }
 
 protected slots:
   void slotOfxFinished(KIO::Job*);
-  void slotOfxData(KIO::Job*,const QByteArray&);
+  void slotOfxData(KIO::Job*, const QByteArray&);
   void slotOfxConnected(KIO::Job*);
 
 private:

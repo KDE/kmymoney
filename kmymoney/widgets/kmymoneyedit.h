@@ -63,21 +63,21 @@ public:
     * (whatever QDoubleValidator uses for that) and parent @p
     * parent
     */
-  kMyMoneyMoneyValidator( QObject * parent );
+  kMyMoneyMoneyValidator(QObject * parent);
   /**
     * Constuct a locale-aware KDoubleValidator for range [@p bottom,@p
     * top] and a precision of @p decimals decimals after the decimal
     * point.
     */
-  kMyMoneyMoneyValidator( double bottom, double top, int decimals,
-                    QObject * parent );
+  kMyMoneyMoneyValidator(double bottom, double top, int decimals,
+                         QObject * parent);
   /**
     * Destructs the validator.
     */
   virtual ~kMyMoneyMoneyValidator() {}
 
   /** Overloaded for internal reasons. The API is not affected. */
-  virtual QValidator::State validate( QString & input, int & pos ) const;
+  virtual QValidator::State validate(QString & input, int & pos) const;
 };
 
 /**
@@ -94,7 +94,7 @@ class kMyMoneyEdit : public KHBox
   Q_PROPERTY(bool calculatorButtonVisibility READ isCalculatorButtonVisible WRITE setCalculatorButtonVisible)
   Q_PROPERTY(bool resetButtonVisibility READ isResetButtonVisible WRITE setResetButtonVisible)
   Q_PROPERTY(bool allowEmpty READ isEmptyAllowed WRITE setAllowEmpty)
-  Q_PROPERTY(bool readOnly READ isReadOnly WRITE setReadOnly )
+  Q_PROPERTY(bool readOnly READ isReadOnly WRITE setReadOnly)
 
 private:
   QString previousText; // keep track of what has been typed
@@ -141,8 +141,8 @@ protected slots:
   void slotCalculatorOpen(void);
 
 public:
-  explicit kMyMoneyEdit(QWidget *parent=0, const int prec = -2);
-  explicit kMyMoneyEdit(const MyMoneySecurity& eq, QWidget *parent=0);
+  explicit kMyMoneyEdit(QWidget *parent = 0, const int prec = -2);
+  explicit kMyMoneyEdit(const MyMoneySecurity& eq, QWidget *parent = 0);
   ~kMyMoneyEdit();
 
   /**
@@ -156,15 +156,19 @@ public:
 
   bool isValid(void) const;
 
-  virtual bool eventFilter(QObject * , QEvent * );
+  virtual bool eventFilter(QObject * , QEvent *);
 
   /**
     * This method returns the value of the edit field in "numerator/denominator" format.
     * If you want to get the text of the edit field, use lineedit()->text() instead.
     */
-  QString text(void) const { return value().toString(); };
+  QString text(void) const {
+    return value().toString();
+  };
 
-  void setMinimumWidth(int w) { m_edit->setMinimumWidth(w); };
+  void setMinimumWidth(int w) {
+    m_edit->setMinimumWidth(w);
+  };
 
   /**
     * Set the number of fractional digits that should be shown
@@ -180,7 +184,9 @@ public:
     * return the number of fractional digits
     * @sa setPrecision
     */
-  int precision(void) { return m_prec; };
+  int precision(void) {
+    return m_prec;
+  };
 
   QWidget* focusWidget(void) const;
 
@@ -215,7 +221,9 @@ public slots:
   void resetText(void);
   void clearText(void);
 
-  void setText(const QString& txt) { setValue(MyMoneyMoney(txt)); };
+  void setText(const QString& txt) {
+    setValue(MyMoneyMoney(txt));
+  };
 
   /**
     * This method allows to show/hide the calculator button of the widget.

@@ -46,7 +46,9 @@ class KMergeTransactionsDlg: public KSelectTransactionsDlg
 public:
   explicit KMergeTransactionsDlg(const MyMoneyAccount& account, QWidget* parent = 0);
 
-  bool eventFilter(QObject* , QEvent* ) { return false; }
+  bool eventFilter(QObject* , QEvent*) {
+    return false;
+  }
 
 public slots:
   void slotHelp();

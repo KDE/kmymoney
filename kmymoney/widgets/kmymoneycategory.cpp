@@ -49,10 +49,10 @@ class KMyMoneyCategory::Private
 {
 public:
   Private() :
-    splitButton(0),
-    frame(0),
-    recursive(false),
-    isSplit(false) {}
+      splitButton(0),
+      frame(0),
+      recursive(false),
+      isSplit(false) {}
 
   KPushButton*      splitButton;
   QFrame*           frame;
@@ -61,28 +61,28 @@ public:
 };
 
 KMyMoneyCategory::KMyMoneyCategory(QWidget* parent, bool splitButton) :
-  KMyMoneyCombo(true, parent),
-  d(new Private)
+    KMyMoneyCombo(true, parent),
+    d(new Private)
 {
-  if(splitButton) {
+  if (splitButton) {
     d->frame = new QFrame(0);
     d->frame->setFocusProxy(this);
     QHBoxLayout* layout = new QHBoxLayout(d->frame);
     layout->setContentsMargins(0, 0, 0, 0);
 
     // make sure not to use our own overridden version of reparent() here
-    KMyMoneyCombo::setParent(d->frame, windowFlags ()  & ~Qt::WType_Mask);
+    KMyMoneyCombo::setParent(d->frame, windowFlags()  & ~Qt::WType_Mask);
     KMyMoneyCombo::show();
-    if(parent) {
+    if (parent) {
       d->frame->setParent(parent);
       d->frame->show();
     }
 
     // create button
     KGuiItem splitButtonItem("",
-        KIcon("transaction-split"), "", "");
-    d->splitButton = new KPushButton( splitButtonItem, d->frame );
-    d->splitButton->setObjectName( "splitButton" );
+                             KIcon("transaction-split"), "", "");
+    d->splitButton = new KPushButton(splitButtonItem, d->frame);
+    d->splitButton->setObjectName("splitButton");
 
     layout->addWidget(this, 5);
     layout->addWidget(d->splitButton);
@@ -96,7 +96,7 @@ KMyMoneyCategory::KMyMoneyCategory(QWidget* parent, bool splitButton) :
 KMyMoneyCategory::~KMyMoneyCategory()
 {
   // make sure to wipe out the frame, button and layout
-  if(d->frame && !d->frame->parentWidget())
+  if (d->frame && !d->frame->parentWidget())
     d->frame->deleteLater();
 
   delete d;
@@ -109,14 +109,14 @@ KPushButton* KMyMoneyCategory::splitButton(void) const
 
 void KMyMoneyCategory::setPalette(const QPalette& palette)
 {
-  if(d->frame)
+  if (d->frame)
     d->frame->setPalette(palette);
   KMyMoneyCombo::setPalette(palette);
 }
 
 void KMyMoneyCategory::reparent(QWidget *parent, Qt::WFlags w, const QPoint&, bool showIt)
 {
-  if(d->frame) {
+  if (d->frame) {
     d->frame->setParent(parent, w);
     if (showIt)
       d->frame->show();
@@ -134,7 +134,7 @@ kMyMoneyAccountSelector* KMyMoneyCategory::selector(void) const
 
 void KMyMoneyCategory::setCurrentTextById(const QString& id)
 {
-  if(!id.isEmpty()) {
+  if (!id.isEmpty()) {
     QString category = MyMoneyFile::instance()->accountToCategory(id);
     setCompletedText(category);
     setEditText(category);
@@ -151,7 +151,7 @@ void KMyMoneyCategory::slotItemSelected(const QString& id)
 
   m_completion->hide();
 
-  if(m_id != id) {
+  if (m_id != id) {
     m_id = id;
     emit itemSelected(id);
   }
@@ -159,7 +159,7 @@ void KMyMoneyCategory::slotItemSelected(const QString& id)
 
 void KMyMoneyCategory::focusOutEvent(QFocusEvent *ev)
 {
-  if(isSplitTransaction()) {
+  if (isSplitTransaction()) {
     KComboBox::focusOutEvent(ev);
   } else {
     KMyMoneyCombo::focusOutEvent(ev);
@@ -190,10 +190,10 @@ bool KMyMoneyCategory::isSplitTransaction(void) const
 
 void KMyMoneyCategory::setEnabled(bool enable)
 {
-  if(d->recursive || !d->frame) {
+  if (d->recursive || !d->frame) {
     KMyMoneyCombo::setEnabled(enable);
 
-  } else if(d->frame) {
+  } else if (d->frame) {
     d->recursive = true;
     d->frame->setEnabled(enable);
     d->recursive = false;
@@ -206,7 +206,7 @@ void KMyMoneyCategory::setDisabled(bool disable)
 }
 
 KMyMoneySecurity::KMyMoneySecurity(QWidget* parent) :
-  KMyMoneyCategory(parent, false)
+    KMyMoneyCategory(parent, false)
 {
 }
 
@@ -216,7 +216,7 @@ KMyMoneySecurity::~KMyMoneySecurity()
 
 void KMyMoneySecurity::setCurrentTextById(const QString& id)
 {
-  if(!id.isEmpty()) {
+  if (!id.isEmpty()) {
     QString security = MyMoneyFile::instance()->account(id).name();
     setCompletedText(security);
     setEditText(security);

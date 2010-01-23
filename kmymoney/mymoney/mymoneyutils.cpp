@@ -39,15 +39,15 @@
 #undef _CheckMemory_FreeAll
 
 _CheckMemory chkmem;
-bool enable=false;
+bool enable = false;
 
 _CheckMemoryEntry::_CheckMemoryEntry(void *p, int line, size_t size, const char *file)
-  : m_p(p), m_line(line), m_size(size), m_file(file)
+    : m_p(p), m_line(line), m_size(size), m_file(file)
 {
 }
 
 _CheckMemoryEntry::_CheckMemoryEntry()
-  : m_p(0), m_line(0), m_size(0)
+    : m_p(0), m_line(0), m_size(0)
 {
 }
 
@@ -75,17 +75,16 @@ _CheckMemoryOutFunc *_CheckMemory::SetOutFunc(_CheckMemoryOutFunc *out)
   return old;
 }
 
-void _CheckMemory::Output(const char *fmt,...)
+void _CheckMemory::Output(const char *fmt, ...)
 {
   va_list args;
   char buf[128];
-  va_start(args,fmt);
-  if(outfunc) {
-    vsprintf(buf,fmt,args);
+  va_start(args, fmt);
+  if (outfunc) {
+    vsprintf(buf, fmt, args);
     outfunc(buf);
-  }
-  else {
-    vfprintf(stderr,fmt,args);
+  } else {
+    vfprintf(stderr, fmt, args);
     putc('\n', stderr);
   }
   va_end(args);
@@ -103,83 +102,83 @@ bool _CheckMemory::CheckMemoryLeak(bool freeall)
   int freec = 0;
   CheckMemoryTable::ConstIterator it;
 
-  for(it = table.begin(); it != table.end(); ++it) {
-    if((*it).pointer() != 0) {
+  for (it = table.begin(); it != table.end(); ++it) {
+    if ((*it).pointer() != 0) {
       total += (*it).size();
       freec++;
-      if(d == false) {
+      if (d == false) {
         Output("CheckMemory++: CheckMemoryLeak: Memory leak detected!");
         Output("Position  |Size(bytes)  |Allocated at");
-        d=true;
+        d = true;
       }
-      if(d==true)
-        Output("%p |%-13d|%s:%d",(*it).pointer(),(int)(*it).size(),(*it).file(),(*it).line());
+      if (d == true)
+        Output("%p |%-13d|%s:%d", (*it).pointer(), (int)(*it).size(), (*it).file(), (*it).line());
     }
   }
-  if(d == true)
-    Output("You have forgotten to free %d object(s), %d bytes of memory.",freec, (int)total);
+  if (d == true)
+    Output("You have forgotten to free %d object(s), %d bytes of memory.", freec, (int)total);
   else
     Output("CheckMemory++: CheckMemoryLeak: No memory leak detected.");
-  if(freeall == true)
+  if (freeall == true)
     FreeAll();
   return true;
 }
 
 void _CheckMemory::FreeAll()
 {
-  size_t total=0;
-  int freec=0;
+  size_t total = 0;
+  int freec = 0;
   CheckMemoryTable::Iterator it;
 
-  for(it = table.begin(); it != table.end(); it = table.begin()) {
-    if((*it).pointer() != 0) {
+  for (it = table.begin(); it != table.end(); it = table.begin()) {
+    if ((*it).pointer() != 0) {
       total += (*it).size();
       freec++;
-      Output("CheckMemory++: FreeAll: freed %d bytes of memory at %p.",(int)(*it).size(),(*it).pointer());
+      Output("CheckMemory++: FreeAll: freed %d bytes of memory at %p.", (int)(*it).size(), (*it).pointer());
       free((*it).pointer());
     }
     table.remove(it);
   }
-  Output("CheckMemory++: FreeAll: Totally freed %d objects, %d bytes of memory.",freec,(int)total);
+  Output("CheckMemory++: FreeAll: Totally freed %d objects, %d bytes of memory.", freec, (int)total);
 }
 
 void _CheckMemory_Init(_CheckMemoryOutFunc *out)
 {
-  if(enable!=true) {
+  if (enable != true) {
     chkmem.Restart();
     chkmem.SetOutFunc(out);
-    enable=true;
+    enable = true;
   }
 }
 
 void _CheckMemory_End()
 {
-  if(enable!=false) {
+  if (enable != false) {
     chkmem.Restart();
     chkmem.SetOutFunc(NULL);
-    enable=false;
+    enable = false;
   }
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
-void *operator new(size_t s,const char *file,int line) throw()
+void *operator new(size_t s,const char *file, int line) throw()
 {
   void *p = malloc(s);
 
-  if(p == NULL) throw;
-  if(enable==true) {
+  if (p == NULL) throw;
+  if (enable == true) {
     _CheckMemoryEntry entry(p, line, s, file);
     chkmem.table[p] = entry;
   }
   return p;
 }
 
-void * operator new [] (size_t s,const char *file,int line) throw()
+void * operator new [](size_t s,const char *file, int line) throw()
 {
   void *p = malloc(s);
 
-  if(p == NULL) throw;
-  if(enable==true) {
+  if (p == NULL) throw;
+  if (enable == true) {
     _CheckMemoryEntry entry(p, line, s, file);
     chkmem.table[p] = entry;
   }
@@ -188,22 +187,22 @@ void * operator new [] (size_t s,const char *file,int line) throw()
 
 void operator delete(void *p) throw()
 {
-  if(enable==true) {
+  if (enable == true) {
     CheckMemoryTable::Iterator it;
     it = chkmem.table.find(p);
-    if(it != chkmem.table.end()) {
+    if (it != chkmem.table.end()) {
       chkmem.table.remove(it);
     }
   }
   free(p);
 }
 
-void operator delete [] (void *p) throw()
+void operator delete [](void *p) throw()
 {
-  if(enable==true) {
+  if (enable == true) {
     CheckMemoryTable::Iterator it;
     it = chkmem.table.find(p);
-    if(it != chkmem.table.end()) {
+    if (it != chkmem.table.end()) {
       chkmem.table.remove(it);
     }
   }
@@ -215,12 +214,10 @@ void operator delete [] (void *p) throw()
 QString MyMoneyUtils::getFileExtension(QString strFileName)
 {
   QString strTemp;
-  if(!strFileName.isEmpty())
-  {
+  if (!strFileName.isEmpty()) {
     //find last . delminator
     int nLoc = strFileName.lastIndexOf('.');
-    if(nLoc != -1)
-    {
+    if (nLoc != -1) {
       strTemp = strFileName.right(strFileName.length() - (nLoc + 1));
       return strTemp.toUpper();
     }
@@ -233,9 +230,9 @@ int MyMoneyTracer::m_onoff = 0;
 
 MyMoneyTracer::MyMoneyTracer(const char* name)
 {
-  if(m_onoff) {
+  if (m_onoff) {
     QRegExp exp("(.*)::(.*)");
-    if(exp.indexIn(name) != -1) {
+    if (exp.indexIn(name) != -1) {
       m_className = exp.cap(1);
       m_memberName = exp.cap(2);
     } else {
@@ -250,10 +247,10 @@ MyMoneyTracer::MyMoneyTracer(const char* name)
 }
 
 MyMoneyTracer::MyMoneyTracer(const QString& className, const QString& memberName) :
-  m_className(className),
-  m_memberName(memberName)
+    m_className(className),
+    m_memberName(memberName)
 {
-  if(m_onoff) {
+  if (m_onoff) {
     QString indent;
     indent.fill(' ', m_indentLevel);
     std::cerr << qPrintable(indent) << "ENTER: " << qPrintable(m_className) << "::" << qPrintable(m_memberName) << std::endl;
@@ -264,7 +261,7 @@ MyMoneyTracer::MyMoneyTracer(const QString& className, const QString& memberName
 MyMoneyTracer::~MyMoneyTracer()
 {
   m_indentLevel -= 2;
-  if(m_onoff) {
+  if (m_onoff) {
     QString indent;
     indent.fill(' ', m_indentLevel);
     std::cerr << qPrintable(indent) << "LEAVE: " << qPrintable(m_className) << "::" << qPrintable(m_memberName) << std::endl;
@@ -273,14 +270,14 @@ MyMoneyTracer::~MyMoneyTracer()
 
 void MyMoneyTracer::printf(const char *format, ...) const
 {
-  if(m_onoff) {
+  if (m_onoff) {
     va_list args;
     va_start(args, format);
     QString indent;
     indent.fill(' ', m_indentLevel);
     std::cerr << qPrintable(indent);
 
-    vfprintf(stderr,format,args);
+    vfprintf(stderr, format, args);
     putc('\n', stderr);
     va_end(args);
   }
@@ -303,7 +300,7 @@ void MyMoneyTracer::off(void)
 
 QString dateToString(const QDate& date)
 {
-  if(!date.isNull() && date.isValid())
+  if (!date.isNull() && date.isValid())
     return date.toString(Qt::ISODate);
 
   return QString();
@@ -311,9 +308,9 @@ QString dateToString(const QDate& date)
 
 QDate stringToDate(const QString& str)
 {
-  if(str.length()) {
+  if (str.length()) {
     QDate date = QDate::fromString(str, Qt::ISODate);
-    if(!date.isNull() && date.isValid())
+    if (!date.isNull() && date.isValid())
       return date;
   }
   return QDate();
@@ -321,7 +318,7 @@ QDate stringToDate(const QString& str)
 
 QString QStringEmpty(const QString& val)
 {
-  if(!val.isEmpty())
+  if (!val.isEmpty())
     return QString(val);
 
   return QString();
@@ -333,7 +330,7 @@ unsigned long extractId(const QString& txt)
   unsigned long rc = 0;
 
   pos = txt.indexOf(QRegExp("\\d+"), 0);
-  if(pos != -1) {
+  if (pos != -1) {
     rc = txt.mid(pos).toInt();
   }
   return rc;

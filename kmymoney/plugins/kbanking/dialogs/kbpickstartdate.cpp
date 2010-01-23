@@ -52,10 +52,10 @@ KBPickStartDate::KBPickStartDate(QBanking *qb,
                                  const QString& accountName,
                                  int defaultChoice,
                                  QWidget* parent, bool modal) :
-  QDialog(parent),
-  _banking(qb),
-  _firstPossible(firstPossible),
-  _lastUpdate(lastUpdate)
+    QDialog(parent),
+    _banking(qb),
+    _firstPossible(firstPossible),
+    _lastUpdate(lastUpdate)
 {
   setupUi(this);
   setModal(modal);
@@ -67,12 +67,11 @@ KBPickStartDate::KBPickStartDate(QBanking *qb,
     lastUpdateLabel->setText(_lastUpdate.toString());
     lastUpdateButton->setEnabled(true);
     lastUpdateLabel->setEnabled(true);
-  }
-  else {
+  } else {
     lastUpdateButton->setEnabled(false);
     lastUpdateLabel->setEnabled(false);
-    if (defaultChoice==2)
-      defaultChoice=1;
+    if (defaultChoice == 2)
+      defaultChoice = 1;
   }
 
   if (_firstPossible.isValid()) {
@@ -84,15 +83,14 @@ KBPickStartDate::KBPickStartDate(QBanking *qb,
     // to use a KMyMoneyDateInput widget, we can make use
     // of the setRange() method again.
     // pickDateEdit->setRange(_firstPossible, QDate());
-  }
-  else {
+  } else {
     firstDateButton->setEnabled(false);
     firstDateLabel->setEnabled(false);
-    if (defaultChoice==3)
-      defaultChoice=1;
+    if (defaultChoice == 3)
+      defaultChoice = 1;
   }
 
-  switch(defaultChoice) {
+  switch (defaultChoice) {
   case 2:  lastUpdateButton->setChecked(true); break;
   case 3:  firstDateButton->setChecked(true); break;
   default: noDateButton->setChecked(true); break;
@@ -105,11 +103,13 @@ KBPickStartDate::KBPickStartDate(QBanking *qb,
 
 
 
-KBPickStartDate::~KBPickStartDate(){
+KBPickStartDate::~KBPickStartDate()
+{
 }
 
 
-QDate KBPickStartDate::date() {
+QDate KBPickStartDate::date()
+{
   if (noDateButton->isChecked())
     return QDate();
   else if (firstDateButton->isChecked())
@@ -126,7 +126,8 @@ QDate KBPickStartDate::date() {
 
 
 
-void KBPickStartDate::slotHelpClicked() {
+void KBPickStartDate::slotHelpClicked()
+{
   _banking->invokeHelp("KBPickStartDate", "none");
 }
 

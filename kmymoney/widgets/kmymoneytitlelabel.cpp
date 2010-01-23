@@ -41,7 +41,7 @@
 // Project Includes
 
 KMyMoneyTitleLabel::KMyMoneyTitleLabel(QWidget *parent) :
-  QLabel(parent)
+    QLabel(parent)
 {
   m_bgColor = KColorScheme(isEnabled() ? QPalette::Active : QPalette::Inactive, KColorScheme::Selection).background(KColorScheme::NormalBackground).color();
 
@@ -64,11 +64,11 @@ void KMyMoneyTitleLabel::setRightImageFile(const QString& _file)
   m_rightImageFile = _file;
   QString rfullpath = KGlobal::dirs()->findResource("appdata", m_rightImageFile);
   m_rightImage.load(rfullpath);
-  if(m_rightImage.height() < 30)
+  if (m_rightImage.height() < 30)
     setMinimumHeight(30);
   else {
-    setMinimumHeight( m_rightImage.height() );
-    setMaximumHeight( m_rightImage.height() );
+    setMinimumHeight(m_rightImage.height());
+    setMaximumHeight(m_rightImage.height());
   }
 }
 
@@ -80,8 +80,8 @@ void KMyMoneyTitleLabel::paintEvent(QPaintEvent *e)
   QRect cr = contentsRect();
 
   // prepare the pixmap
-  QImage output( cr.width(), cr.height(), QImage::Format_RGB32 );
-  output.fill( m_bgColor.rgb() );
+  QImage output(cr.width(), cr.height(), QImage::Format_RGB32);
+  output.fill(m_bgColor.rgb());
 
   QPixmap result = QPixmap::fromImage(output);
   QPixmap overlay = QPixmap::fromImage(m_rightImage);
@@ -93,7 +93,7 @@ void KMyMoneyTitleLabel::paintEvent(QPaintEvent *e)
   // first draw pixmap
   style()->drawItemPixmap(&painter, contentsRect(), alignment(), result);
   // then draw text on top
-  style()->drawItemText(&painter, contentsRect(), alignment(), QColorGroup(palette()), isEnabled(), QString("   ")+m_text);
+  style()->drawItemText(&painter, contentsRect(), alignment(), QColorGroup(palette()), isEnabled(), QString("   ") + m_text);
 }
 
 void KMyMoneyTitleLabel::setText(const QString& txt)

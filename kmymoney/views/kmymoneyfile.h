@@ -34,7 +34,8 @@ class MyMoneySeqAccessMgr;
   *@author Michael Edwardes
   */
 
-class KMyMoneyFile {
+class KMyMoneyFile
+{
 private:
   // static KMyMoneyFile *_instance;
   // MyMoneyFile *m_file;

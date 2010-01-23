@@ -21,7 +21,7 @@
  ***************************************************************************/
 
 #include "imymoneystorageformat.h"
- 
+
 IMyMoneyStorageFormat::IMyMoneyStorageFormat()
 {
 }

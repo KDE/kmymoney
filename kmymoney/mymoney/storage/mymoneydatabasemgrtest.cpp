@@ -19,8 +19,8 @@
 #include <iostream>
 
 MyMoneyDatabaseMgrTest::MyMoneyDatabaseMgrTest()
-  : m_dbAttached (false),
-    m_canOpen (true)
+    : m_dbAttached(false),
+    m_canOpen(true)
 {}
 
 void MyMoneyDatabaseMgrTest::setUp()
@@ -35,7 +35,7 @@ void MyMoneyDatabaseMgrTest::tearDown()
     //m->commitTransaction();
   }
   if (MyMoneyFile::instance()->storageAttached()) {
-     MyMoneyFile::instance()->detachStorage(m);
+    MyMoneyFile::instance()->detachStorage(m);
   }
   delete m;
 }
@@ -72,7 +72,8 @@ void MyMoneyDatabaseMgrTest::testEmptyConstructor()
   CPPUNIT_ASSERT(m->m_creationDate == QDate::currentDate());
 }
 
-void MyMoneyDatabaseMgrTest::testCreateDb() {
+void MyMoneyDatabaseMgrTest::testCreateDb()
+{
 
   // Fetch the list of available drivers
   QStringList list = QSqlDatabase::drivers();
@@ -88,10 +89,10 @@ void MyMoneyDatabaseMgrTest::testCreateDb() {
     }
 
     m_url = "sql://" + userName + "@localhost/kmm_test_driver?driver="
-                     //"QPSQL&mode=single";
-                     "QSQLITE&mode=single";
-                     //"QMYSQL&mode=single";
-                     //+ *it + "&mode=single";
+            //"QPSQL&mode=single";
+            "QSQLITE&mode=single";
+    //"QMYSQL&mode=single";
+    //+ *it + "&mode=single";
     KSharedPtr <MyMoneyStorageSql> sql = m->connectToDatabase(m_url);
     CPPUNIT_ASSERT(0 != sql);
     //qDebug("Database driver is %s", qPrintable(sql->driverName()));
@@ -106,7 +107,8 @@ void MyMoneyDatabaseMgrTest::testCreateDb() {
   }
 }
 
-void MyMoneyDatabaseMgrTest::testAttachDb() {
+void MyMoneyDatabaseMgrTest::testAttachDb()
+{
   if (!m_dbAttached) {
     testCreateDb();
     if (m_canOpen) {
@@ -121,7 +123,8 @@ void MyMoneyDatabaseMgrTest::testAttachDb() {
   }
 }
 
-void MyMoneyDatabaseMgrTest::testSetFunctions() {
+void MyMoneyDatabaseMgrTest::testSetFunctions()
+{
   testAttachDb();
   if (!m_canOpen) {
     std::cout << "Database test skipped because no database could be opened." << std::endl;
@@ -204,7 +207,8 @@ void MyMoneyDatabaseMgrTest::testIsStandardAccount()
   CPPUNIT_ASSERT(m->isStandardAccount("A0002") == false);
 }
 
-void MyMoneyDatabaseMgrTest::testNewAccount() {
+void MyMoneyDatabaseMgrTest::testNewAccount()
+{
   testAttachDb();
   if (!m_canOpen) {
     std::cout << "Database test skipped because no database could be opened." << std::endl;
@@ -226,7 +230,8 @@ void MyMoneyDatabaseMgrTest::testNewAccount() {
   CPPUNIT_ASSERT((*(accList.begin())).id() == "A000001");
 }
 
-void MyMoneyDatabaseMgrTest::testAccount() {
+void MyMoneyDatabaseMgrTest::testAccount()
+{
   testNewAccount();
   if (!m_canOpen) {
     std::cout << "Database test skipped because no database could be opened." << std::endl;
@@ -256,14 +261,15 @@ void MyMoneyDatabaseMgrTest::testAccount() {
   }
 }
 
-void MyMoneyDatabaseMgrTest::testAddNewAccount() {
+void MyMoneyDatabaseMgrTest::testAddNewAccount()
+{
   testNewAccount();
   if (!m_canOpen) {
     std::cout << "Database test skipped because no database could be opened." << std::endl;
     return;
   }
 
-  MyMoneyAccount a,b;
+  MyMoneyAccount a, b;
   b.setName("Account2");
   b.setNumber("Acc2");
   m->addAccount(b);
@@ -290,7 +296,7 @@ void MyMoneyDatabaseMgrTest::testAddNewAccount() {
     a = m->account("A000001");
     CPPUNIT_ASSERT(m->asset().accountList().count() == 0);
     m->addAccount(b, a);
-    MyMoneyAccount acc (m->account("A000002"));
+    MyMoneyAccount acc(m->account("A000002"));
     CPPUNIT_ASSERT(acc.accountList()[0] == "A000001");
     CPPUNIT_ASSERT(acc.accountList().count() == 1);
     CPPUNIT_ASSERT(m->asset().accountList().count() == 0);
@@ -299,7 +305,8 @@ void MyMoneyDatabaseMgrTest::testAddNewAccount() {
   }
 }
 
-void MyMoneyDatabaseMgrTest::testAddInstitution() {
+void MyMoneyDatabaseMgrTest::testAddInstitution()
+{
   testAttachDb();
 
   if (!m_canOpen) {
@@ -318,7 +325,8 @@ void MyMoneyDatabaseMgrTest::testAddInstitution() {
   CPPUNIT_ASSERT((*(m->institutionList().begin())).id() == "I000001");
 }
 
-void MyMoneyDatabaseMgrTest::testInstitution() {
+void MyMoneyDatabaseMgrTest::testInstitution()
+{
   testAddInstitution();
   if (!m_canOpen) {
     std::cout << "Database test skipped because no database could be opened." << std::endl;
@@ -349,7 +357,8 @@ void MyMoneyDatabaseMgrTest::testInstitution() {
   }
 }
 
-void MyMoneyDatabaseMgrTest::testAccount2Institution() {
+void MyMoneyDatabaseMgrTest::testAccount2Institution()
+{
   testAttachDb();
 
   if (!m_canOpen) {
@@ -397,7 +406,8 @@ void MyMoneyDatabaseMgrTest::testAccount2Institution() {
   }
 }
 
-void MyMoneyDatabaseMgrTest::testModifyAccount() {
+void MyMoneyDatabaseMgrTest::testModifyAccount()
+{
   testAttachDb();
 
   if (!m_canOpen) {
@@ -451,7 +461,8 @@ void MyMoneyDatabaseMgrTest::testModifyAccount() {
   }
 }
 
-void MyMoneyDatabaseMgrTest::testModifyInstitution() {
+void MyMoneyDatabaseMgrTest::testModifyInstitution()
+{
   testAddInstitution();
   if (!m_canOpen) {
     std::cout << "Database test skipped because no database could be opened." << std::endl;
@@ -480,7 +491,8 @@ void MyMoneyDatabaseMgrTest::testModifyInstitution() {
   }
 }
 
-void MyMoneyDatabaseMgrTest::testReparentAccount() {
+void MyMoneyDatabaseMgrTest::testReparentAccount()
+{
   testAttachDb();
 
   if (!m_canOpen) {
@@ -544,7 +556,7 @@ void MyMoneyDatabaseMgrTest::testReparentAccount() {
     CPPUNIT_ASSERT(ex3.parentAccountId() == STD_ACC_EXPENSE);
 
     //for (int i = 0; i < 100; ++i) {
-      m->reparentAccount(ex3, ex1);
+    m->reparentAccount(ex3, ex1);
     //}
     MyMoneyFile::instance()->preloadCache();
     CPPUNIT_ASSERT(m->expense().accountCount() == 2);
@@ -555,7 +567,8 @@ void MyMoneyDatabaseMgrTest::testReparentAccount() {
   }
 }
 
-void MyMoneyDatabaseMgrTest::testAddTransactions() {
+void MyMoneyDatabaseMgrTest::testAddTransactions()
+{
   testAttachDb();
 
   if (!m_canOpen) {
@@ -584,7 +597,7 @@ void MyMoneyDatabaseMgrTest::testAddTransactions() {
     CPPUNIT_ASSERT(s.id().isEmpty());
     t1.addSplit(s);
 
-    t1.setPostDate(QDate(2002,5,10));
+    t1.setPostDate(QDate(2002, 5, 10));
   } catch (MyMoneyException *e) {
     unexpectedException(e);
   }
@@ -629,7 +642,7 @@ void MyMoneyDatabaseMgrTest::testAddTransactions() {
     CPPUNIT_ASSERT(s.id().isEmpty());
     t2.addSplit(s);
 
-    t2.setPostDate(QDate(2002,5,9));
+    t2.setPostDate(QDate(2002, 5, 9));
   } catch (MyMoneyException *e) {
     unexpectedException(e);
   }
@@ -642,8 +655,8 @@ void MyMoneyDatabaseMgrTest::testAddTransactions() {
 
     //QMap<QString, QString>::ConstIterator it_k;
     MyMoneyTransactionFilter f;
-    QList<MyMoneyTransaction> transactionList (m->transactionList(f));
-    QList<MyMoneyTransaction>::ConstIterator it_t (transactionList.constBegin());
+    QList<MyMoneyTransaction> transactionList(m->transactionList(f));
+    QList<MyMoneyTransaction>::ConstIterator it_t(transactionList.constBegin());
 
     //CPPUNIT_ASSERT((*it_k) == "2002-05-10-T000000000000000001");
     CPPUNIT_ASSERT((*it_t).id() == "T000000000000000002");
@@ -680,7 +693,8 @@ void MyMoneyDatabaseMgrTest::testAddTransactions() {
   }
 }
 
-void MyMoneyDatabaseMgrTest::testTransactionCount() {
+void MyMoneyDatabaseMgrTest::testTransactionCount()
+{
   testAttachDb();
 
   if (!m_canOpen) {
@@ -697,7 +711,8 @@ void MyMoneyDatabaseMgrTest::testTransactionCount() {
   CPPUNIT_ASSERT(m->transactionCount("A000006") == 2);
 }
 
-void MyMoneyDatabaseMgrTest::testAddBudget() {
+void MyMoneyDatabaseMgrTest::testAddBudget()
+{
   testAttachDb();
 
   if (!m_canOpen) {
@@ -720,7 +735,8 @@ void MyMoneyDatabaseMgrTest::testAddBudget() {
   CPPUNIT_ASSERT(budget.name() == newBudget.name());
 }
 
-void MyMoneyDatabaseMgrTest::testCopyBudget() {
+void MyMoneyDatabaseMgrTest::testCopyBudget()
+{
   testAddBudget();
 
   if (!m_canOpen) {
@@ -754,7 +770,8 @@ void MyMoneyDatabaseMgrTest::testCopyBudget() {
   }
 }
 
-void MyMoneyDatabaseMgrTest::testModifyBudget() {
+void MyMoneyDatabaseMgrTest::testModifyBudget()
+{
   testAddBudget();
 
   if (!m_canOpen) {
@@ -775,7 +792,8 @@ void MyMoneyDatabaseMgrTest::testModifyBudget() {
   CPPUNIT_ASSERT(budget.name() == newBudget.name());
 }
 
-void MyMoneyDatabaseMgrTest::testRemoveBudget() {
+void MyMoneyDatabaseMgrTest::testRemoveBudget()
+{
   testAddBudget();
 
   if (!m_canOpen) {
@@ -796,7 +814,8 @@ void MyMoneyDatabaseMgrTest::testRemoveBudget() {
   }
 }
 
-void MyMoneyDatabaseMgrTest::testBalance() {
+void MyMoneyDatabaseMgrTest::testBalance()
+{
   testAttachDb();
 
   if (!m_canOpen) {
@@ -827,7 +846,7 @@ void MyMoneyDatabaseMgrTest::testBalance() {
     CPPUNIT_ASSERT(s.id().isEmpty());
     t1.addSplit(s);
 
-    t1.setPostDate(QDate(2007,5,10));
+    t1.setPostDate(QDate(2007, 5, 10));
 
     m->addTransaction(t1);
 
@@ -838,19 +857,20 @@ void MyMoneyDatabaseMgrTest::testBalance() {
     CPPUNIT_ASSERT(m->totalBalance("A000001", QDate()) == MyMoneyMoney(1600));
 
     //qDebug ("Balance of A000006 is -11600 = %s", m->balance("A000006", QDate(2002,5,9)).toString().ascii());
-    CPPUNIT_ASSERT(m->balance("A000006", QDate(2002,5,9)) == MyMoneyMoney(-11600));
+    CPPUNIT_ASSERT(m->balance("A000006", QDate(2002, 5, 9)) == MyMoneyMoney(-11600));
 
     //qDebug ("Balance of A000005 is -100000 = %s", m->balance("A000005", QDate(2002,5,10)).toString().ascii());
-    CPPUNIT_ASSERT(m->balance("A000005", QDate(2002,5,10)) == MyMoneyMoney(-100000));
+    CPPUNIT_ASSERT(m->balance("A000005", QDate(2002, 5, 10)) == MyMoneyMoney(-100000));
 
     //qDebug ("Balance of A000006 is 88400 = %s", m->balance("A000006", QDate(2002,5,10)).toString().ascii());
-    CPPUNIT_ASSERT(m->balance("A000006", QDate(2002,5,10)) == MyMoneyMoney(88400));
+    CPPUNIT_ASSERT(m->balance("A000006", QDate(2002, 5, 10)) == MyMoneyMoney(88400));
   } catch (MyMoneyException* e) {
     unexpectedException(e);
   }
 }
 
-void MyMoneyDatabaseMgrTest::testModifyTransaction() {
+void MyMoneyDatabaseMgrTest::testModifyTransaction()
+{
   testAttachDb();
 
   if (!m_canOpen) {
@@ -880,28 +900,28 @@ void MyMoneyDatabaseMgrTest::testModifyTransaction() {
 
   try {
     CPPUNIT_ASSERT(m->balance("A000004", QDate()) == MyMoneyMoney(10000));
-    CPPUNIT_ASSERT(m->balance("A000006", QDate()) == MyMoneyMoney(100000-11600));
+    CPPUNIT_ASSERT(m->balance("A000006", QDate()) == MyMoneyMoney(100000 - 11600));
     CPPUNIT_ASSERT(m->totalBalance("A000001", QDate()) == MyMoneyMoney(1600));
     m->modifyTransaction(t);
     CPPUNIT_ASSERT(m->balance("A000004", QDate()) == MyMoneyMoney(11000));
-    CPPUNIT_ASSERT(m->balance("A000006", QDate()) == MyMoneyMoney(100000-12600));
+    CPPUNIT_ASSERT(m->balance("A000006", QDate()) == MyMoneyMoney(100000 - 12600));
     CPPUNIT_ASSERT(m->totalBalance("A000001", QDate()) == MyMoneyMoney(1600));
   } catch (MyMoneyException *e) {
     unexpectedException(e);
   }
 
   // now modify the date
-  t.setPostDate(QDate(2002,5,11));
+  t.setPostDate(QDate(2002, 5, 11));
   try {
     m->modifyTransaction(t);
     CPPUNIT_ASSERT(m->balance("A000004", QDate()) == MyMoneyMoney(11000));
-    CPPUNIT_ASSERT(m->balance("A000006", QDate()) == MyMoneyMoney(100000-12600));
+    CPPUNIT_ASSERT(m->balance("A000006", QDate()) == MyMoneyMoney(100000 - 12600));
     CPPUNIT_ASSERT(m->totalBalance("A000001", QDate()) == MyMoneyMoney(1600));
 
     //QMap<QString, QString>::ConstIterator it_k;
     MyMoneyTransactionFilter f;
-    QList<MyMoneyTransaction> transactionList (m->transactionList(f));
-    QList<MyMoneyTransaction>::ConstIterator it_t (transactionList.constBegin());
+    QList<MyMoneyTransaction> transactionList(m->transactionList(f));
+    QList<MyMoneyTransaction>::ConstIterator it_t(transactionList.constBegin());
     //it_k = m->m_transactionKeys.begin();
     //CPPUNIT_ASSERT((*it_k) == "2002-05-10-T000000000000000001");
     CPPUNIT_ASSERT((*it_t).id() == "T000000000000000001");
@@ -936,7 +956,8 @@ void MyMoneyDatabaseMgrTest::testModifyTransaction() {
 }
 
 
-void MyMoneyDatabaseMgrTest::testRemoveUnusedAccount() {
+void MyMoneyDatabaseMgrTest::testRemoveUnusedAccount()
+{
   testAttachDb();
 
   if (!m_canOpen) {
@@ -1008,7 +1029,8 @@ void MyMoneyDatabaseMgrTest::testRemoveUnusedAccount() {
   }
 }
 
-void MyMoneyDatabaseMgrTest::testRemoveUsedAccount() {
+void MyMoneyDatabaseMgrTest::testRemoveUsedAccount()
+{
   testAttachDb();
 
   if (!m_canOpen) {
@@ -1028,7 +1050,8 @@ void MyMoneyDatabaseMgrTest::testRemoveUsedAccount() {
   }
 }
 
-void MyMoneyDatabaseMgrTest::testRemoveInstitution() {
+void MyMoneyDatabaseMgrTest::testRemoveInstitution()
+{
   testAttachDb();
 
   if (!m_canOpen) {
@@ -1067,7 +1090,8 @@ void MyMoneyDatabaseMgrTest::testRemoveInstitution() {
   }
 }
 
-void MyMoneyDatabaseMgrTest::testRemoveTransaction() {
+void MyMoneyDatabaseMgrTest::testRemoveTransaction()
+{
   testAttachDb();
 
   if (!m_canOpen) {
@@ -1088,7 +1112,8 @@ void MyMoneyDatabaseMgrTest::testRemoveTransaction() {
   }
 }
 
-void MyMoneyDatabaseMgrTest::testTransactionList() {
+void MyMoneyDatabaseMgrTest::testTransactionList()
+{
   testAttachDb();
 
   if (!m_canOpen) {
@@ -1118,7 +1143,8 @@ void MyMoneyDatabaseMgrTest::testTransactionList() {
   CPPUNIT_ASSERT(list.at(1).id() == "T000000000000000001");
 }
 
-void MyMoneyDatabaseMgrTest::testAddPayee() {
+void MyMoneyDatabaseMgrTest::testAddPayee()
+{
   testAttachDb();
 
   if (!m_canOpen) {
@@ -1162,7 +1188,8 @@ void MyMoneyDatabaseMgrTest::testAddPayee() {
 
 }
 
-void MyMoneyDatabaseMgrTest::testSetAccountName() {
+void MyMoneyDatabaseMgrTest::testSetAccountName()
+{
   testAttachDb();
 
   if (!m_canOpen) {
@@ -1210,7 +1237,8 @@ void MyMoneyDatabaseMgrTest::testSetAccountName() {
   }
 }
 
-void MyMoneyDatabaseMgrTest::testModifyPayee() {
+void MyMoneyDatabaseMgrTest::testModifyPayee()
+{
   testAttachDb();
 
   if (!m_canOpen) {
@@ -1234,7 +1262,8 @@ void MyMoneyDatabaseMgrTest::testModifyPayee() {
   }
 }
 
-void MyMoneyDatabaseMgrTest::testRemovePayee() {
+void MyMoneyDatabaseMgrTest::testRemovePayee()
+{
   testAttachDb();
 
   if (!m_canOpen) {
@@ -1298,7 +1327,8 @@ void MyMoneyDatabaseMgrTest::testRemovePayee() {
 }
 
 
-void MyMoneyDatabaseMgrTest::testRemoveAccountFromTree() {
+void MyMoneyDatabaseMgrTest::testRemoveAccountFromTree()
+{
   testAttachDb();
 
   if (!m_canOpen) {
@@ -1351,7 +1381,8 @@ void MyMoneyDatabaseMgrTest::testRemoveAccountFromTree() {
   }
 }
 
-void MyMoneyDatabaseMgrTest::testPayeeName() {
+void MyMoneyDatabaseMgrTest::testPayeeName()
+{
   testAttachDb();
 
   if (!m_canOpen) {
@@ -1383,7 +1414,8 @@ void MyMoneyDatabaseMgrTest::testPayeeName() {
   }
 }
 
-void MyMoneyDatabaseMgrTest::testAssignment() {
+void MyMoneyDatabaseMgrTest::testAssignment()
+{
   testAttachDb();
 
   if (!m_canOpen) {
@@ -1448,7 +1480,8 @@ void MyMoneyDatabaseMgrTest::testEquality(const MyMoneyDatabaseMgr *t)
 //  CPPUNIT_ASSERT(m->scheduleList().values() == t->scheduleList().values());
 }
 
-void MyMoneyDatabaseMgrTest::testDuplicate() {
+void MyMoneyDatabaseMgrTest::testDuplicate()
+{
   testAttachDb();
 
   if (!m_canOpen) {
@@ -1465,7 +1498,8 @@ void MyMoneyDatabaseMgrTest::testDuplicate() {
   delete t;
 }
 
-void MyMoneyDatabaseMgrTest::testAddSchedule() {
+void MyMoneyDatabaseMgrTest::testAddSchedule()
+{
   /* Note addSchedule() now calls validate as it should
    * so we need an account id.  Later this will
    * be checked to make sure its a valid account id.  The
@@ -1492,14 +1526,14 @@ void MyMoneyDatabaseMgrTest::testAddSchedule() {
     s2.setAccountId("A000002");
     t1.addSplit(s2);
     MyMoneySchedule schedule("Sched-Name",
-           MyMoneySchedule::TYPE_DEPOSIT,
-           MyMoneySchedule::OCCUR_DAILY, 1,
-           MyMoneySchedule::STYPE_MANUALDEPOSIT,
-           QDate(),
-           QDate(),
-           true,
-           false);
-    t1.setPostDate(QDate(2003,7,10));
+                             MyMoneySchedule::TYPE_DEPOSIT,
+                             MyMoneySchedule::OCCUR_DAILY, 1,
+                             MyMoneySchedule::STYPE_MANUALDEPOSIT,
+                             QDate(),
+                             QDate(),
+                             true,
+                             false);
+    t1.setPostDate(QDate(2003, 7, 10));
     schedule.setTransaction(t1);
 
     m->addSchedule(schedule);
@@ -1508,22 +1542,22 @@ void MyMoneyDatabaseMgrTest::testAddSchedule() {
     CPPUNIT_ASSERT(schedule.id() == "SCH000001");
     MyMoneyFile::instance()->clearCache();
     CPPUNIT_ASSERT(m->schedule("SCH000001").id() == "SCH000001");
-  } catch(MyMoneyException *e) {
+  } catch (MyMoneyException *e) {
     unexpectedException(e);
   }
 
   try {
     MyMoneySchedule schedule("Sched-Name",
-           MyMoneySchedule::TYPE_DEPOSIT,
-           MyMoneySchedule::OCCUR_DAILY, 1,
-           MyMoneySchedule::STYPE_MANUALDEPOSIT,
-           QDate(),
-           QDate(),
-           true,
-           false);
+                             MyMoneySchedule::TYPE_DEPOSIT,
+                             MyMoneySchedule::OCCUR_DAILY, 1,
+                             MyMoneySchedule::STYPE_MANUALDEPOSIT,
+                             QDate(),
+                             QDate(),
+                             true,
+                             false);
     m->addSchedule(schedule);
     CPPUNIT_FAIL("Exception expected");
-  } catch(MyMoneyException *e) {
+  } catch (MyMoneyException *e) {
     delete e;
   }
 
@@ -1538,19 +1572,19 @@ void MyMoneyDatabaseMgrTest::testAddSchedule() {
     s2.setAccountId("Abadaccount2");
     //t1.addSplit(s2);
     MyMoneySchedule schedule("Sched-Name",
-           MyMoneySchedule::TYPE_DEPOSIT,
-           MyMoneySchedule::OCCUR_DAILY, 1,
-           MyMoneySchedule::STYPE_MANUALDEPOSIT,
-           QDate(),
-           QDate(),
-           true,
-           false);
-    t1.setPostDate(QDate(2003,7,10));
+                             MyMoneySchedule::TYPE_DEPOSIT,
+                             MyMoneySchedule::OCCUR_DAILY, 1,
+                             MyMoneySchedule::STYPE_MANUALDEPOSIT,
+                             QDate(),
+                             QDate(),
+                             true,
+                             false);
+    t1.setPostDate(QDate(2003, 7, 10));
     schedule.setTransaction(t1);
 
     m->addSchedule(schedule);
     CPPUNIT_FAIL("Exception expected, but not thrown");
-  } catch(MyMoneyException *e) {
+  } catch (MyMoneyException *e) {
     delete e;
     // Exception caught as expected.
   }
@@ -1558,7 +1592,8 @@ void MyMoneyDatabaseMgrTest::testAddSchedule() {
   CPPUNIT_ASSERT(m->scheduleList().count() == 1);
 }
 
-void MyMoneyDatabaseMgrTest::testSchedule() {
+void MyMoneyDatabaseMgrTest::testSchedule()
+{
   testAttachDb();
 
   if (!m_canOpen) {
@@ -1576,12 +1611,13 @@ void MyMoneyDatabaseMgrTest::testSchedule() {
   try {
     m->schedule("SCH000002");
     CPPUNIT_FAIL("Exception expected");
-  } catch(MyMoneyException *e) {
+  } catch (MyMoneyException *e) {
     delete e;
   }
 }
 
-void MyMoneyDatabaseMgrTest::testModifySchedule() {
+void MyMoneyDatabaseMgrTest::testModifySchedule()
+{
   testAttachDb();
 
   if (!m_canOpen) {
@@ -1597,7 +1633,7 @@ void MyMoneyDatabaseMgrTest::testModifySchedule() {
   try {
     m->modifySchedule(sched);
     CPPUNIT_FAIL("Exception expected");
-  } catch(MyMoneyException *e) {
+  } catch (MyMoneyException *e) {
     delete e;
   }
 
@@ -1609,13 +1645,14 @@ void MyMoneyDatabaseMgrTest::testModifySchedule() {
     CPPUNIT_ASSERT((*(m->scheduleList().begin())).name() == "New Sched-Name");
     CPPUNIT_ASSERT((*(m->scheduleList().begin())).id() == "SCH000001");
 
-  } catch(MyMoneyException *e) {
+  } catch (MyMoneyException *e) {
     unexpectedException(e);
   }
 
 }
 
-void MyMoneyDatabaseMgrTest::testRemoveSchedule() {
+void MyMoneyDatabaseMgrTest::testRemoveSchedule()
+{
   testAttachDb();
 
   if (!m_canOpen) {
@@ -1631,7 +1668,7 @@ void MyMoneyDatabaseMgrTest::testRemoveSchedule() {
   try {
     m->removeSchedule(sched);
     CPPUNIT_FAIL("Exception expected");
-  } catch(MyMoneyException *e) {
+  } catch (MyMoneyException *e) {
     delete e;
   }
 
@@ -1640,12 +1677,13 @@ void MyMoneyDatabaseMgrTest::testRemoveSchedule() {
     m->removeSchedule(sched);
     CPPUNIT_ASSERT(m->scheduleList().count() == 0);
 
-  } catch(MyMoneyException *e) {
+  } catch (MyMoneyException *e) {
     unexpectedException(e);
   }
 }
 
-void MyMoneyDatabaseMgrTest::testScheduleList() {
+void MyMoneyDatabaseMgrTest::testScheduleList()
+{
   testAttachDb();
 
   if (!m_canOpen) {
@@ -1667,13 +1705,13 @@ void MyMoneyDatabaseMgrTest::testScheduleList() {
   s2.setAccountId("A000002");
   t1.addSplit(s2);
   MyMoneySchedule schedule1("Schedule 1",
-         MyMoneySchedule::TYPE_BILL,
-         MyMoneySchedule::OCCUR_ONCE, 1,
-         MyMoneySchedule::STYPE_DIRECTDEBIT,
-         QDate(),
-         QDate(),
-         false,
-         false);
+                            MyMoneySchedule::TYPE_BILL,
+                            MyMoneySchedule::OCCUR_ONCE, 1,
+                            MyMoneySchedule::STYPE_DIRECTDEBIT,
+                            QDate(),
+                            QDate(),
+                            false,
+                            false);
   t1.setPostDate(notOverdue);
   schedule1.setTransaction(t1);
   schedule1.setLastPayment(notOverdue);
@@ -1685,13 +1723,13 @@ void MyMoneyDatabaseMgrTest::testScheduleList() {
   s4.setAccountId("A000003");
   t2.addSplit(s4);
   MyMoneySchedule schedule2("Schedule 2",
-         MyMoneySchedule::TYPE_DEPOSIT,
-         MyMoneySchedule::OCCUR_DAILY, 1,
-         MyMoneySchedule::STYPE_DIRECTDEPOSIT,
-         QDate(),
-         QDate(),
-         false,
-         false);
+                            MyMoneySchedule::TYPE_DEPOSIT,
+                            MyMoneySchedule::OCCUR_DAILY, 1,
+                            MyMoneySchedule::STYPE_DIRECTDEPOSIT,
+                            QDate(),
+                            QDate(),
+                            false,
+                            false);
   t2.setPostDate(notOverdue.addDays(1));
   schedule2.setTransaction(t2);
   schedule2.setLastPayment(notOverdue.addDays(1));
@@ -1703,13 +1741,13 @@ void MyMoneyDatabaseMgrTest::testScheduleList() {
   s6.setAccountId("A000006");
   t3.addSplit(s6);
   MyMoneySchedule schedule3("Schedule 3",
-         MyMoneySchedule::TYPE_TRANSFER,
-         MyMoneySchedule::OCCUR_WEEKLY, 1,
-         MyMoneySchedule::STYPE_OTHER,
-         QDate(),
-         QDate(),
-         false,
-         false);
+                            MyMoneySchedule::TYPE_TRANSFER,
+                            MyMoneySchedule::OCCUR_WEEKLY, 1,
+                            MyMoneySchedule::STYPE_OTHER,
+                            QDate(),
+                            QDate(),
+                            false,
+                            false);
   t3.setPostDate(notOverdue.addDays(2));
   schedule3.setTransaction(t3);
   schedule3.setLastPayment(notOverdue.addDays(2));
@@ -1721,13 +1759,13 @@ void MyMoneyDatabaseMgrTest::testScheduleList() {
   s8.setAccountId("A000006");
   t4.addSplit(s8);
   MyMoneySchedule schedule4("Schedule 4",
-         MyMoneySchedule::TYPE_BILL,
-         MyMoneySchedule::OCCUR_WEEKLY, 1,
-         MyMoneySchedule::STYPE_WRITECHEQUE,
-         QDate(),
-         notOverdue.addDays(31),
-         false,
-         false);
+                            MyMoneySchedule::TYPE_BILL,
+                            MyMoneySchedule::OCCUR_WEEKLY, 1,
+                            MyMoneySchedule::STYPE_WRITECHEQUE,
+                            QDate(),
+                            notOverdue.addDays(31),
+                            false,
+                            false);
   t4.setPostDate(overdue.addDays(-7));
   schedule4.setTransaction(t4);
 
@@ -1736,7 +1774,7 @@ void MyMoneyDatabaseMgrTest::testScheduleList() {
     m->addSchedule(schedule2);
     m->addSchedule(schedule3);
     m->addSchedule(schedule4);
-  } catch(MyMoneyException *e) {
+  } catch (MyMoneyException *e) {
     unexpectedException(e);
   }
 
@@ -1754,14 +1792,14 @@ void MyMoneyDatabaseMgrTest::testScheduleList() {
 
   // filter by occurrence
   list = m->scheduleList("", MyMoneySchedule::TYPE_ANY,
-        MyMoneySchedule::OCCUR_DAILY);
+                         MyMoneySchedule::OCCUR_DAILY);
   CPPUNIT_ASSERT(list.count() == 1);
   CPPUNIT_ASSERT(list[0].name() == "Schedule 2");
 
   // filter by payment type
   list = m->scheduleList("", MyMoneySchedule::TYPE_ANY,
-        MyMoneySchedule::OCCUR_ANY,
-        MyMoneySchedule::STYPE_DIRECTDEPOSIT);
+                         MyMoneySchedule::OCCUR_ANY,
+                         MyMoneySchedule::STYPE_DIRECTDEPOSIT);
   CPPUNIT_ASSERT(list.count() == 1);
   CPPUNIT_ASSERT(list[0].name() == "Schedule 2");
 
@@ -1775,9 +1813,9 @@ void MyMoneyDatabaseMgrTest::testScheduleList() {
 
   // filter by start date
   list = m->scheduleList("", MyMoneySchedule::TYPE_ANY,
-        MyMoneySchedule::OCCUR_ANY,
-        MyMoneySchedule::STYPE_ANY,
-        notOverdue.addDays(31));
+                         MyMoneySchedule::OCCUR_ANY,
+                         MyMoneySchedule::STYPE_ANY,
+                         notOverdue.addDays(31));
   CPPUNIT_ASSERT(list.count() == 3);
   CPPUNIT_ASSERT(list[0].name() == "Schedule 2");
   CPPUNIT_ASSERT(list[1].name() == "Schedule 3");
@@ -1785,10 +1823,10 @@ void MyMoneyDatabaseMgrTest::testScheduleList() {
 
   // filter by end date
   list = m->scheduleList("", MyMoneySchedule::TYPE_ANY,
-        MyMoneySchedule::OCCUR_ANY,
-        MyMoneySchedule::STYPE_ANY,
-        QDate(),
-        notOverdue.addDays(1));
+                         MyMoneySchedule::OCCUR_ANY,
+                         MyMoneySchedule::STYPE_ANY,
+                         QDate(),
+                         notOverdue.addDays(1));
   CPPUNIT_ASSERT(list.count() == 3);
   CPPUNIT_ASSERT(list[0].name() == "Schedule 1");
   CPPUNIT_ASSERT(list[1].name() == "Schedule 2");
@@ -1796,21 +1834,21 @@ void MyMoneyDatabaseMgrTest::testScheduleList() {
 
   // filter by start and end date
   list = m->scheduleList("", MyMoneySchedule::TYPE_ANY,
-        MyMoneySchedule::OCCUR_ANY,
-        MyMoneySchedule::STYPE_ANY,
-        notOverdue.addDays(-1),
-        notOverdue.addDays(1));
+                         MyMoneySchedule::OCCUR_ANY,
+                         MyMoneySchedule::STYPE_ANY,
+                         notOverdue.addDays(-1),
+                         notOverdue.addDays(1));
   CPPUNIT_ASSERT(list.count() == 2);
   CPPUNIT_ASSERT(list[0].name() == "Schedule 1");
   CPPUNIT_ASSERT(list[1].name() == "Schedule 2");
 
   // filter by overdue status
   list = m->scheduleList("", MyMoneySchedule::TYPE_ANY,
-        MyMoneySchedule::OCCUR_ANY,
-        MyMoneySchedule::STYPE_ANY,
-        QDate(),
-        QDate(),
-        true);
+                         MyMoneySchedule::OCCUR_ANY,
+                         MyMoneySchedule::STYPE_ANY,
+                         QDate(),
+                         QDate(),
+                         true);
   CPPUNIT_ASSERT(list.count() == 1);
   CPPUNIT_ASSERT(list[0].name() == "Schedule 4");
 }
@@ -1832,7 +1870,7 @@ void MyMoneyDatabaseMgrTest::testAddCurrency()
     CPPUNIT_ASSERT(m->currencyList().count() == 1);
     CPPUNIT_ASSERT((*(m->currencyList().begin())).name() == "Euro");
     CPPUNIT_ASSERT((*(m->currencyList().begin())).id() == "EUR");
-  } catch(MyMoneyException *e) {
+  } catch (MyMoneyException *e) {
     unexpectedException(e);
   }
 
@@ -1840,7 +1878,7 @@ void MyMoneyDatabaseMgrTest::testAddCurrency()
   try {
     m->addCurrency(curr);
     CPPUNIT_FAIL("Expected exception missing");
-  } catch(MyMoneyException *e) {
+  } catch (MyMoneyException *e) {
     CPPUNIT_ASSERT(m->dirty() == false);
     delete e;
   }
@@ -1864,7 +1902,7 @@ void MyMoneyDatabaseMgrTest::testModifyCurrency()
     CPPUNIT_ASSERT(m->currencyList().count() == 1);
     CPPUNIT_ASSERT((*(m->currencyList().begin())).name() == "EURO");
     CPPUNIT_ASSERT((*(m->currencyList().begin())).id() == "EUR");
-  } catch(MyMoneyException *e) {
+  } catch (MyMoneyException *e) {
     unexpectedException(e);
   }
 
@@ -1874,7 +1912,7 @@ void MyMoneyDatabaseMgrTest::testModifyCurrency()
   try {
     m->modifyCurrency(unknownCurr);
     CPPUNIT_FAIL("Expected exception missing");
-  } catch(MyMoneyException *e) {
+  } catch (MyMoneyException *e) {
     CPPUNIT_ASSERT(m->dirty() == false);
     delete e;
   }
@@ -1895,7 +1933,7 @@ void MyMoneyDatabaseMgrTest::testRemoveCurrency()
   try {
     m->removeCurrency(curr);
     CPPUNIT_ASSERT(m->currencyList().count() == 0);
-  } catch(MyMoneyException *e) {
+  } catch (MyMoneyException *e) {
     unexpectedException(e);
   }
 
@@ -1905,7 +1943,7 @@ void MyMoneyDatabaseMgrTest::testRemoveCurrency()
   try {
     m->removeCurrency(unknownCurr);
     CPPUNIT_FAIL("Expected exception missing");
-  } catch(MyMoneyException *e) {
+  } catch (MyMoneyException *e) {
     CPPUNIT_ASSERT(m->dirty() == false);
     delete e;
   }
@@ -1929,14 +1967,14 @@ void MyMoneyDatabaseMgrTest::testCurrency()
     CPPUNIT_ASSERT(m->dirty() == false);
     CPPUNIT_ASSERT(newCurr.id() == curr.id());
     CPPUNIT_ASSERT(newCurr.name() == curr.name());
-  } catch(MyMoneyException *e) {
+  } catch (MyMoneyException *e) {
     unexpectedException(e);
   }
 
   try {
     m->currency("DEM");
     CPPUNIT_FAIL("Expected exception missing");
-  } catch(MyMoneyException *e) {
+  } catch (MyMoneyException *e) {
     CPPUNIT_ASSERT(m->dirty() == false);
     delete e;
   }
@@ -1963,7 +2001,7 @@ void MyMoneyDatabaseMgrTest::testCurrencyList()
     CPPUNIT_ASSERT(m->currencyList().count() == 2);
     CPPUNIT_ASSERT(m->currencyList().count() == 2);
     CPPUNIT_ASSERT(m->dirty() == false);
-  } catch(MyMoneyException *e) {
+  } catch (MyMoneyException *e) {
     unexpectedException(e);
   }
 }

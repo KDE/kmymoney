@@ -39,7 +39,7 @@
 
 typedef KGenericFactory<KMMiCalendarExportPlugin> icalendarexportFactory;
 
-K_EXPORT_COMPONENT_FACTORY(kmm_icalendarexport, icalendarexportFactory( "kmm_icalendarexport" ))
+K_EXPORT_COMPONENT_FACTORY(kmm_icalendarexport, icalendarexportFactory("kmm_icalendarexport"))
 
 struct KMMiCalendarExportPlugin::Private {
   KAction* m_action;
@@ -50,7 +50,7 @@ struct KMMiCalendarExportPlugin::Private {
 
 KMMiCalendarExportPlugin::KMMiCalendarExportPlugin(QObject *parent, const QStringList&)
     : KMyMoneyPlugin::Plugin(parent, "iCalendar"/*must be the same as X-KDE-PluginInfo-Name*/),
-      d(new Private)
+    d(new Private)
 {
   d->m_profileName = "iCalendarPlugin";
   d->m_iCalendarFileEntryName = "iCalendarFile";
@@ -102,10 +102,10 @@ void KMMiCalendarExportPlugin::slotFirstExport(void)
 {
   QPointer<KFileDialog> fileDialog = new KFileDialog(KUrl(), QString("%1|%2\n").arg("*.ics").arg(i18nc("ICS (Filefilter)", "iCalendar files")), d->m_action->parentWidget());
 
-  fileDialog->setOperationMode( KFileDialog::Saving );
+  fileDialog->setOperationMode(KFileDialog::Saving);
   fileDialog->setCaption(i18n("Export as"));
 
-  if(fileDialog->exec() == QDialog::Accepted) {
+  if (fileDialog->exec() == QDialog::Accepted) {
     KUrl newURL = fileDialog->selectedUrl();
     if (newURL.isLocalFile()) {
       PluginSettings::setIcalendarFile(newURL.toLocalFile());
@@ -136,7 +136,8 @@ void KMMiCalendarExportPlugin::slotUnplug(KPluginInfo* info)
   }
 }
 
-void KMMiCalendarExportPlugin::slotUpdateConfig(void) {
+void KMMiCalendarExportPlugin::slotUpdateConfig(void)
+{
   PluginSettings::self()->readConfig();
   // export the schedules because the configuration has changed
   QString icalFilePath = PluginSettings::icalendarFile();

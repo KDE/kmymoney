@@ -58,8 +58,9 @@
   * without having the user to re-type the data. See setInitialValues()
   * for details.
   */
-class kMyMoneyCalculator : public QFrame  {
-   Q_OBJECT
+class kMyMoneyCalculator : public QFrame
+{
+  Q_OBJECT
 public:
   kMyMoneyCalculator(QWidget* parent = 0);
   ~kMyMoneyCalculator();
@@ -82,7 +83,9 @@ public:
     *
     * @param ch QChar representing the character to be used
     */
-  void setComma(const QChar ch) { m_comma = ch; };
+  void setComma(const QChar ch) {
+    m_comma = ch;
+  };
 
   /**
     * This method is used to preset the first operand and start

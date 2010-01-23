@@ -57,7 +57,8 @@ class K3ListViewSearchLineWidget;
   * vector is created, the sort method is set to SortPostDate.
   * The sort type can be changed using the method setSortType().
   */
-class KTransactionPtrVector : public Q3PtrVector<KMyMoneyTransaction> {
+class KTransactionPtrVector : public Q3PtrVector<KMyMoneyTransaction>
+{
 public:
   /**
     * This enumerator defines the possible sort methods.
@@ -88,7 +89,9 @@ public:
                               */
   };
 
-  KTransactionPtrVector() { m_sortType = SortPostDate; };
+  KTransactionPtrVector() {
+    m_sortType = SortPostDate;
+  };
   ~KTransactionPtrVector() {}
 
   /**
@@ -104,7 +107,9 @@ public:
     * @return transactionSortE value of sort order. See
     *         KTransactionPtrVector::TransactionSortE for possible values.
     */
-  TransactionSortE sortType(void) const { return m_sortType; };
+  TransactionSortE sortType(void) const {
+    return m_sortType;
+  };
 
   /**
     * This method is used to set the account id to have a chance to
@@ -162,7 +167,9 @@ public:
     */
   void paintCell(QPainter *p, const QColorGroup & cg, int column, int width, int align);
 
-  const MyMoneyPayee& payee(void) const { return m_payee; };
+  const MyMoneyPayee& payee(void) const {
+    return m_payee;
+  };
 
 private:
   MyMoneyPayee  m_payee;
@@ -178,9 +185,13 @@ public:
   KTransactionListItem(K3ListView* view, KTransactionListItem* parent, const QString& accountId, const QString& transaction);
   ~KTransactionListItem();
 
-  const QString& transactionId(void) const { return m_transactionId; };
+  const QString& transactionId(void) const {
+    return m_transactionId;
+  };
 
-  const QString& accountId(void) const { return m_accountId; };
+  const QString& accountId(void) const {
+    return m_accountId;
+  };
 
   /**
     * use my own paint method
@@ -201,8 +212,8 @@ private:
 class KPayeesViewDecl : public QWidget, public Ui::KPayeesViewDecl
 {
 public:
-  KPayeesViewDecl( QWidget *parent ) : QWidget( parent ) {
-    setupUi( this );
+  KPayeesViewDecl(QWidget *parent) : QWidget(parent) {
+    setupUi(this);
   }
 };
 
@@ -211,7 +222,7 @@ class KPayeesView : public KPayeesViewDecl
   Q_OBJECT
 
 public:
-  KPayeesView(QWidget *parent=0);
+  KPayeesView(QWidget *parent = 0);
   ~KPayeesView();
   void show(void);
 

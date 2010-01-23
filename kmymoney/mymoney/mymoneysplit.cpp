@@ -45,10 +45,10 @@ MyMoneySplit::MyMoneySplit()
 }
 
 MyMoneySplit::MyMoneySplit(const QDomElement& node) :
-  MyMoneyObject(node, false),
-  MyMoneyKeyValueContainer(node.elementsByTagName("KEYVALUEPAIRS").item(0).toElement())
+    MyMoneyObject(node, false),
+    MyMoneyKeyValueContainer(node.elementsByTagName("KEYVALUEPAIRS").item(0).toElement())
 {
-  if("SPLIT" != node.tagName())
+  if ("SPLIT" != node.tagName())
     throw new MYMONEYEXCEPTION("Node was not SPLIT");
 
   clearId();
@@ -67,7 +67,7 @@ MyMoneySplit::MyMoneySplit(const QDomElement& node) :
 }
 
 MyMoneySplit::MyMoneySplit(const QString& id, const MyMoneySplit& right) :
-  MyMoneyObject(id)
+    MyMoneyObject(id)
 {
   *this = right;
   setId(id);
@@ -80,18 +80,18 @@ MyMoneySplit::~MyMoneySplit()
 bool MyMoneySplit::operator == (const MyMoneySplit& right) const
 {
   return MyMoneyObject::operator==(right) &&
-    MyMoneyKeyValueContainer::operator==(right) &&
-    m_account == right.m_account &&
-    m_payee == right.m_payee &&
-    m_memo == right.m_memo &&
-    m_action == right.m_action &&
-    m_reconcileDate == right.m_reconcileDate &&
-    m_reconcileFlag == right.m_reconcileFlag &&
-    ((m_number.length() == 0 && right.m_number.length() == 0) || m_number == right.m_number) &&
-    m_shares == right.m_shares &&
-    m_value == right.m_value &&
-    m_price == right.m_price &&
-    m_transactionId == right.m_transactionId;
+         MyMoneyKeyValueContainer::operator==(right) &&
+         m_account == right.m_account &&
+         m_payee == right.m_payee &&
+         m_memo == right.m_memo &&
+         m_action == right.m_action &&
+         m_reconcileDate == right.m_reconcileDate &&
+         m_reconcileFlag == right.m_reconcileFlag &&
+         ((m_number.length() == 0 && right.m_number.length() == 0) || m_number == right.m_number) &&
+         m_shares == right.m_shares &&
+         m_value == right.m_value &&
+         m_price == right.m_price &&
+         m_transactionId == right.m_transactionId;
 }
 
 void MyMoneySplit::setAccountId(const QString& account)
@@ -126,7 +126,7 @@ void MyMoneySplit::setValue(const MyMoneyMoney& value)
 
 void MyMoneySplit::setValue(const MyMoneyMoney& value, const QString& transactionCurrencyId, const QString& splitCurrencyId)
 {
-  if(transactionCurrencyId == splitCurrencyId)
+  if (transactionCurrencyId == splitCurrencyId)
     setValue(value);
   else
     setShares(value);
@@ -139,29 +139,29 @@ void MyMoneySplit::setPayeeId(const QString& payee)
 
 void MyMoneySplit::setAction(investTransactionTypeE type)
 {
-  switch(type) {
-    case BuyShares:
-    case SellShares:
-      setAction(ActionBuyShares);
-      break;
-    case Dividend:
-      setAction(ActionDividend);
-      break;
-    case Yield:
-      setAction(ActionYield);
-      break;
-    case ReinvestDividend:
-      setAction(ActionReinvestDividend);
-      break;
-    case AddShares:
-    case RemoveShares:
-      setAction(ActionAddShares);
-      break;
-    case MyMoneySplit::SplitShares:
-      setAction(ActionSplitShares);
-      break;
-    case MyMoneySplit::UnknownTransactionType:
-      break;
+  switch (type) {
+  case BuyShares:
+  case SellShares:
+    setAction(ActionBuyShares);
+    break;
+  case Dividend:
+    setAction(ActionDividend);
+    break;
+  case Yield:
+    setAction(ActionYield);
+    break;
+  case ReinvestDividend:
+    setAction(ActionReinvestDividend);
+    break;
+  case AddShares:
+  case RemoveShares:
+    setAction(ActionAddShares);
+    break;
+  case MyMoneySplit::SplitShares:
+    setAction(ActionSplitShares);
+    break;
+  case MyMoneySplit::UnknownTransactionType:
+    break;
   }
 }
 
@@ -187,11 +187,11 @@ void MyMoneySplit::setPrice(const MyMoneyMoney& price)
 
 MyMoneyMoney MyMoneySplit::price(void) const
 {
-  if(!m_price.isZero())
+  if (!m_price.isZero())
     return m_price;
-  if(!m_value.isZero() && !m_shares.isZero())
+  if (!m_value.isZero() && !m_shares.isZero())
     return m_value / m_shares;
-  return MyMoneyMoney(1,1);
+  return MyMoneyMoney(1, 1);
 }
 
 void MyMoneySplit::writeXML(QDomDocument& document, QDomElement& parent) const
@@ -206,7 +206,7 @@ void MyMoneySplit::writeXML(QDomDocument& document, QDomElement& parent) const
   el.setAttribute("reconcileflag", m_reconcileFlag);
   el.setAttribute("value", m_value.toString());
   el.setAttribute("shares", m_shares.toString());
-  if(!m_price.isZero())
+  if (!m_price.isZero())
     el.setAttribute("price", m_price.toString());
   el.setAttribute("memo", m_memo);
   // No need to write the split id as it will be re-assigned when the file is read
@@ -223,7 +223,7 @@ void MyMoneySplit::writeXML(QDomDocument& document, QDomElement& parent) const
 bool MyMoneySplit::hasReferenceTo(const QString& id) const
 {
   bool rc = false;
-  if(isMatched()) {
+  if (isMatched()) {
     rc = matchedTransaction().hasReferenceTo(id);
   }
   return rc || (id == m_account) || (id == m_payee);
@@ -236,7 +236,7 @@ bool MyMoneySplit::isMatched(void) const
 
 void MyMoneySplit::addMatch(const MyMoneyTransaction& _t)
 {
-  if(_t.isImported() && !isMatched()) {
+  if (_t.isImported() && !isMatched()) {
     MyMoneyTransaction t(_t);
     t.clearId();
     QDomDocument doc("MATCH");
@@ -257,7 +257,7 @@ void MyMoneySplit::removeMatch(void)
 MyMoneyTransaction MyMoneySplit::matchedTransaction(void) const
 {
   QString xml = value("kmm-matched-tx");
-  if(!xml.isEmpty()) {
+  if (!xml.isEmpty()) {
     xml.replace("&lt;", "<");
     QDomDocument doc;
     QDomElement node;

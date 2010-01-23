@@ -90,7 +90,7 @@ private:
   QString         m_shortDesc;
   QString         m_longDesc;
   KUrl            m_source;
-  void            (*m_progressCallback)(int, int, const QString&);
+  void (*m_progressCallback)(int, int, const QString&);
   int             m_accountsRead;
 };
 

@@ -68,14 +68,14 @@ class MyProgressListener : public CppUnit::TextTestProgressListener
 {
   void startTest(CppUnit::Test *test) {
     QString name = test->getName().c_str();
-    if(name.indexOf('.') != -1) {    // in CPPUNIT 1.8.0
+    if (name.indexOf('.') != -1) {   // in CPPUNIT 1.8.0
       name = name.mid(2);   // cut off first 2 chars
       name = name.left(name.indexOf('.'));
-    } else if(name.indexOf("::") != -1) {  // in CPPUNIT 1.9.14
+    } else if (name.indexOf("::") != -1) { // in CPPUNIT 1.9.14
       name = name.left(name.indexOf("::"));
     }
-    if(m_name != name) {
-      if(!m_name.isEmpty())
+    if (m_name != name) {
+      if (!m_name.isEmpty())
         std::cout << std::endl;
       std::cout << "Running: " << qPrintable(name) << std::endl;
       m_name = name;
@@ -88,9 +88,9 @@ private:
 void unexpectedException(MyMoneyException *e)
 {
   QString msg = QString("Unexpected exception: %1 thrown in %2:%3")
-                  .arg(e->what())
-                  .arg(e->file())
-                  .arg(e->line());
+                .arg(e->what())
+                .arg(e->file())
+                .arg(e->line());
   delete e;
   CPPUNIT_FAIL(qPrintable(msg));
 }
@@ -109,24 +109,24 @@ int main(int testargc, char** testargv)
   // we are testing against the actual configuration
   // This is needed for the online tests, but if someone has a better
   // solution, it should be implemented.
-  KAboutData aboutData( "kmymoney",0, ki18n("KMyMoney Unittest"),
-    "0.1", ki18n( "\nKMyMoney, the Personal Finance Manager for KDE.\n\nPlease consider contributing to this project with code and/or suggestions." ), KAboutData::License_GPL,
-                        ki18n( "(c) 2000-2009 The KMyMoney development team" ), /*feature*/KLocalizedString(),
-    I18N_NOOP( "http://kmymoney2.sourceforge.net/" )/*,
-                                                      "kmymoney-devel@kde.org")*/ );
+  KAboutData aboutData("kmymoney", 0, ki18n("KMyMoney Unittest"),
+                       "0.1", ki18n("\nKMyMoney, the Personal Finance Manager for KDE.\n\nPlease consider contributing to this project with code and/or suggestions."), KAboutData::License_GPL,
+                       ki18n("(c) 2000-2009 The KMyMoney development team"), /*feature*/KLocalizedString(),
+                       I18N_NOOP("http://kmymoney2.sourceforge.net/")/*,
+                                                      "kmymoney-devel@kde.org")*/);
 #else
-  KAboutData aboutData( "kmymoneytest",0, ki18n("KMyMoney Unittest"),
-    "0.1", ki18n( "\nKMyMoney, the Personal Finance Manager for KDE.\n\nPlease consider contributing to this project with code and/or suggestions." ), KAboutData::License_GPL,
-                        ki18n( "(c) 2000-2009 The KMyMoney development team" ), /*feature*/KLocalizedString(),
-    I18N_NOOP( "http://kmymoney2.sourceforge.net/" )/*,
-                                                      "kmymoney-devel@kde.org")*/ );
+  KAboutData aboutData("kmymoneytest", 0, ki18n("KMyMoney Unittest"),
+                       "0.1", ki18n("\nKMyMoney, the Personal Finance Manager for KDE.\n\nPlease consider contributing to this project with code and/or suggestions."), KAboutData::License_GPL,
+                       ki18n("(c) 2000-2009 The KMyMoney development team"), /*feature*/KLocalizedString(),
+                       I18N_NOOP("http://kmymoney2.sourceforge.net/")/*,
+                                                      "kmymoney-devel@kde.org")*/);
 #endif
   KCmdLineOptions options;
-  options.add("+[test_suite]", ki18n("Optionally specify a test suite") );
-  options.add("", ki18n("Optional arguments are for ctest") );
+  options.add("+[test_suite]", ki18n("Optionally specify a test suite"));
+  options.add("", ki18n("Optional arguments are for ctest"));
 
   KCmdLineArgs::init(testargc, testargv, &aboutData);
-  KCmdLineArgs::addCmdLineOptions( options );
+  KCmdLineArgs::addCmdLineOptions(options);
   // KApplication::disableAutoDcopRegistration();
   KApplication app;
 
@@ -166,14 +166,10 @@ int main(int testargc, char** testargv)
   // run all tests if no test is specified on the command line
   // this way, CTest can perform each test individually
   CppUnit::Test *suite = registry.makeTest();
-  if (testargc>1)
-  {
-    try
-    {
+  if (testargc > 1) {
+    try {
       suite = suite->findTest(testargv[1]);
-    }
-    catch(const std::invalid_argument &ex)
-    {
+    } catch (const std::invalid_argument &ex) {
       // oh, cmake perfomed bad at guessing the correct test names.
       std::cout << ex.what() << std::endl;
       // we output that the test passed since the test is deactivated
@@ -202,13 +198,13 @@ int main(int testargc, char** testargv)
   // delete MyMoneyFile::instance();
 
 #ifdef _CHECK_MEMORY
-  chkmem.CheckMemoryLeak( true );
+  chkmem.CheckMemoryLeak(true);
   _CheckMemory_End();
 #endif // _CHECK_MEMORY
 
 #else
   std::cout << "libcppunit not installed. no automatic tests available."
-     << std::endl;
+            << std::endl;
 #endif // HAVE_LIBCPPUNIT
   return rc;
 }
@@ -224,7 +220,8 @@ void timetrace(const char *txt)
 
 // these symbols are needed when linking with libofx because it requires
 // these global symbols as part of its callback interface
-extern "C" {
+extern "C"
+{
   void ofx_proc_security_cb() {}
   void ofx_proc_transaction_cb() {}
   void ofx_proc_statement_cb() {}

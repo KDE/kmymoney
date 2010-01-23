@@ -32,7 +32,7 @@
 // Project Includes
 
 Accounts::Accounts(QWidget* parent) :
-  AccountsDecl(parent)
+    AccountsDecl(parent)
 {
 }
 

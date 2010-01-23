@@ -31,10 +31,10 @@ class Q3ListViewItem;
 #include "ui_ksettingshomedecl.h"
 
 class KSettingsHomeDecl : public QWidget, public Ui::KSettingsHomeDecl
-{                                                                                    
+{
 public:
-  KSettingsHomeDecl( QWidget *parent ) : QWidget( parent ) {
-    setupUi( this );
+  KSettingsHomeDecl(QWidget *parent) : QWidget(parent) {
+    setupUi(this);
   }
 };
 

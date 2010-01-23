@@ -54,17 +54,17 @@ public:
 };
 
 KOfxDirectConnectDlg::KOfxDirectConnectDlg(const MyMoneyAccount& account, QWidget *parent) :
-  KOfxDirectConnectDlgDecl(parent),
-  d(new Private),
-  m_tmpfile(NULL),
-  m_connector(account),
-  m_job(NULL)
+    KOfxDirectConnectDlgDecl(parent),
+    d(new Private),
+    m_tmpfile(NULL),
+    m_connector(account),
+    m_job(NULL)
 {
 }
 
 KOfxDirectConnectDlg::~KOfxDirectConnectDlg()
 {
-  if(d->m_fpTrace.isOpen()) {
+  if (d->m_fpTrace.isOpen()) {
     d->m_fpTrace.close();
   }
   delete m_tmpfile;
@@ -79,8 +79,8 @@ void KOfxDirectConnectDlg::init(void)
 
   // For debugging, dump out the request
 #if 0
-  QFile g( "request.ofx" );
-  g.open( QIODevice::WriteOnly );
+  QFile g("request.ofx");
+  g.open(QIODevice::WriteOnly);
   Q3TextStream(&g) << m_connector.url() << "\n" << QString(request);
   g.close();
 #endif
@@ -89,17 +89,17 @@ void KOfxDirectConnectDlg::init(void)
 #if 0
 
   QDir homeDir(QDir::home());
-  if(homeDir.exists("ofxlog.txt")) {
+  if (homeDir.exists("ofxlog.txt")) {
     d->m_fpTrace.setName(QString("%1/ofxlog.txt").arg(QDir::homePath()));
     d->m_fpTrace.open(QIODevice::WriteOnly | QIODevice::Append);
   }
 
   m_job = KIO::http_post(
-    m_connector.url(),
-    request,
-    true
-  );
-  if(d->m_fpTrace.isOpen()) {
+            m_connector.url(),
+            request,
+            true
+          );
+  if (d->m_fpTrace.isOpen()) {
     QByteArray data = m_connector.url().utf8();
     d->m_fpTrace.write("url: ", 5);
     d->m_fpTrace.write(data, strlen(data));
@@ -110,10 +110,10 @@ void KOfxDirectConnectDlg::init(void)
     d->m_fpTrace.write("response:\n", 10);
   }
 
-  m_job->addMetaData("content-type", "Content-type: application/x-ofx" );
-  connect(m_job,SIGNAL(result(KIO::Job*)),this,SLOT(slotOfxFinished(KIO::Job*)));
-  connect(m_job,SIGNAL(data(KIO::Job*, const QByteArray&)),this,SLOT(slotOfxData(KIO::Job*,const QByteArray&)));
-  connect(m_job,SIGNAL(connected(KIO::Job*)),this,SLOT(slotOfxConnected(KIO::Job*)));
+  m_job->addMetaData("content-type", "Content-type: application/x-ofx");
+  connect(m_job, SIGNAL(result(KIO::Job*)), this, SLOT(slotOfxFinished(KIO::Job*)));
+  connect(m_job, SIGNAL(data(KIO::Job*, const QByteArray&)), this, SLOT(slotOfxData(KIO::Job*, const QByteArray&)));
+  connect(m_job, SIGNAL(connected(KIO::Job*)), this, SLOT(slotOfxConnected(KIO::Job*)));
 
   setStatus(QString("Contacting %1...").arg(m_connector.url()));
   kProgress1->setMaximum(3);
@@ -134,8 +134,7 @@ void KOfxDirectConnectDlg::setDetails(const QString& _details)
 
 void KOfxDirectConnectDlg::slotOfxConnected(KIO::Job*)
 {
-  if ( m_tmpfile )
-  {
+  if (m_tmpfile) {
 //     throw new MYMONEYEXCEPTION(QString("Already connected, using %1.").arg(m_tmpfile->name()));
     kDebug(2) << "Already connected, using " << m_tmpfile->name();
     delete m_tmpfile; //delete otherwise we mem leak
@@ -143,18 +142,18 @@ void KOfxDirectConnectDlg::slotOfxConnected(KIO::Job*)
   m_tmpfile = new KTemporaryFile();
   setStatus("Connection established, retrieving data...");
   setDetails(QString("Downloading data to %1...").arg(m_tmpfile->name()));
-  kProgress1->setValue(kProgress1->value()+1);
+  kProgress1->setValue(kProgress1->value() + 1);
 }
 
-void KOfxDirectConnectDlg::slotOfxData(KIO::Job*,const QByteArray& _ba)
+void KOfxDirectConnectDlg::slotOfxData(KIO::Job*, const QByteArray& _ba)
 {
-  if ( !m_tmpfile )
+  if (!m_tmpfile)
 //     throw new MYMONEYEXCEPTION("Not currently connected!!");
     kDebug(2) << "void ofxdcon::slotOfxData():: Not currently connected!";
   QTextStream out(m_tmpfile);
   out << QString(_ba);
 
-  if(d->m_fpTrace.isOpen()) {
+  if (d->m_fpTrace.isOpen()) {
     d->m_fpTrace.write(_ba, _ba.size());
   }
 
@@ -163,44 +162,37 @@ void KOfxDirectConnectDlg::slotOfxData(KIO::Job*,const QByteArray& _ba)
 
 void KOfxDirectConnectDlg::slotOfxFinished(KIO::Job* /* e */)
 {
-  kProgress1->setValue(kProgress1->value()+1);
+  kProgress1->setValue(kProgress1->value() + 1);
   setStatus("Completed.");
 
-  if(d->m_fpTrace.isOpen()) {
+  if (d->m_fpTrace.isOpen()) {
     d->m_fpTrace.write("\nCompleted\n\n\n\n", 14);
   }
 
   int error = m_job->error();
 
-  if ( m_tmpfile )
-  {
+  if (m_tmpfile) {
     m_tmpfile->close();
   }
 
-  if ( error )
-  {
+  if (error) {
     m_job->ui()->setWindow(0);
     m_job->ui()->showErrorMessage();
-  }
-  else if ( m_job->isErrorPage() )
-  {
+  } else if (m_job->isErrorPage()) {
     QString details;
-    QFile f( m_tmpfile->name() );
-    if ( f.open( QIODevice::ReadOnly ) )
-    {
-      Q3TextStream stream( &f );
+    QFile f(m_tmpfile->name());
+    if (f.open(QIODevice::ReadOnly)) {
+      Q3TextStream stream(&f);
       QString line;
-      while ( !stream.atEnd() ) {
-          details += stream.readLine(); // line of text excluding '\n'
+      while (!stream.atEnd()) {
+        details += stream.readLine(); // line of text excluding '\n'
       }
       f.close();
 
       kDebug(2) << "The HTTP request failed: " << details;
     }
-    KMessageBox::detailedSorry( this, i18n("The HTTP request failed."), details, i18nc("The HTTP request failed", "Failed") );
-  }
-  else if ( m_tmpfile )
-  {
+    KMessageBox::detailedSorry(this, i18n("The HTTP request failed."), details, i18nc("The HTTP request failed", "Failed"));
+  } else if (m_tmpfile) {
 
     emit statementReady(m_tmpfile->name());
 
@@ -216,8 +208,7 @@ void KOfxDirectConnectDlg::slotOfxFinished(KIO::Job* /* e */)
 void KOfxDirectConnectDlg::reject(void)
 {
   m_job->kill();
-  if ( m_tmpfile )
-  {
+  if (m_tmpfile) {
     m_tmpfile->close();
     delete m_tmpfile;
     m_tmpfile = NULL;

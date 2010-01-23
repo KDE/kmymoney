@@ -22,8 +22,8 @@
 #include "register.h"
 #include "sortoptionlistitem.h"
 
-TransactionSortOption::TransactionSortOption( QWidget *parent )
-    : QWidget( parent )
+TransactionSortOption::TransactionSortOption(QWidget *parent)
+    : QWidget(parent)
 {
   setupUi(this);
   init();
@@ -45,7 +45,7 @@ void TransactionSortOption::init()
   setSettings(QString());
 
   Q3ListViewItem* p;
-  if((p = m_availableList->firstChild()) != 0) {
+  if ((p = m_availableList->firstChild()) != 0) {
     m_availableList->setSelected(p, true);
   }
 }
@@ -75,11 +75,11 @@ void TransactionSortOption::setSettings(const QString& settings)
   QStringList::const_iterator it_s;
   Q3ListViewItem* last = 0;
   int dateSign = 1;
-  for(it_s = list.constBegin(); it_s != list.constEnd(); ++it_s) {
+  for (it_s = list.constBegin(); it_s != list.constEnd(); ++it_s) {
     int val = (*it_s).toInt();
     selectedMap[abs(val)] = true;
     // skip EntryDateSort but keep sign
-    if(abs(val) == static_cast<int>(KMyMoneyRegister::EntryDateSort)) {
+    if (abs(val) == static_cast<int>(KMyMoneyRegister::EntryDateSort)) {
       dateSign = (val < 0) ? -1 : 1;
       continue;
     }
@@ -87,8 +87,8 @@ void TransactionSortOption::setSettings(const QString& settings)
   }
 
   // make sure to create EntryOrderSort if missing but required
-  if(selectedMap.find(static_cast<int>(KMyMoneyRegister::EntryDateSort)) != selectedMap.end()
-  && selectedMap.find(static_cast<int>(KMyMoneyRegister::EntryOrderSort)) == selectedMap.end()) {
+  if (selectedMap.find(static_cast<int>(KMyMoneyRegister::EntryDateSort)) != selectedMap.end()
+      && selectedMap.find(static_cast<int>(KMyMoneyRegister::EntryOrderSort)) == selectedMap.end()) {
     int val = dateSign * static_cast<int>(KMyMoneyRegister::EntryOrderSort);
     selectedMap[static_cast<int>(KMyMoneyRegister::EntryOrderSort)] = true;
     last = addEntry(m_selectedList, last, val);
@@ -96,25 +96,25 @@ void TransactionSortOption::setSettings(const QString& settings)
 
   // fill available list
   QMap<int, bool>::const_iterator it_m;
-  for(int i = static_cast<int>(KMyMoneyRegister::PostDateSort);
-      i < static_cast<int>(KMyMoneyRegister::MaxSortFields); ++i) {
+  for (int i = static_cast<int>(KMyMoneyRegister::PostDateSort);
+       i < static_cast<int>(KMyMoneyRegister::MaxSortFields); ++i) {
     // Never add EntryDateSort
-    if(i == static_cast<int>(KMyMoneyRegister::EntryDateSort))
+    if (i == static_cast<int>(KMyMoneyRegister::EntryDateSort))
       continue;
     // Only add those, that are not present in the list of selected items
-    if(selectedMap.find(i) == selectedMap.end()) {
+    if (selectedMap.find(i) == selectedMap.end()) {
       int val = i;
-      if(i == static_cast<int>(KMyMoneyRegister::ValueSort))
+      if (i == static_cast<int>(KMyMoneyRegister::ValueSort))
         val = -val;
       addEntry(m_availableList, 0, val);
     }
   }
 }
 
-Q3ListViewItem* TransactionSortOption::addEntry( K3ListView * p, Q3ListViewItem* after, int idx )
+Q3ListViewItem* TransactionSortOption::addEntry(K3ListView * p, Q3ListViewItem* after, int idx)
 {
   QString txt = KMyMoneyRegister::sortOrderToText(static_cast<KMyMoneyRegister::TransactionSortField>(abs(idx)));
-  if(txt.isEmpty())
+  if (txt.isEmpty())
     txt = "Unknown";    // i18n should be handled in sortOptionToText()
 
   return new SortOptionListItem(p, after, txt, idx);
@@ -123,32 +123,32 @@ Q3ListViewItem* TransactionSortOption::addEntry( K3ListView * p, Q3ListViewItem*
 void TransactionSortOption::toggleDirection(Q3ListViewItem* item)
 {
   SortOptionListItem* p = dynamic_cast<SortOptionListItem*>(item);
-  if(p) {
+  if (p) {
     p->toggleDirection();
     emit settingsChanged(settings());
   }
 }
 
-QString TransactionSortOption::settings( void ) const
+QString TransactionSortOption::settings(void) const
 {
   QString rc;
   SortOptionListItem* item = dynamic_cast<SortOptionListItem*>(m_selectedList->firstChild());
-  while(item) {
+  while (item) {
     int option = KMyMoneyRegister::textToSortOrder(item->text(0));
     // if we look at the EntryOrderSort option, we have to make
     // sure, that the EntryDateSort is prepended
-    if(option == KMyMoneyRegister::EntryOrderSort) {
-      rc  += QString::number(static_cast<int>(KMyMoneyRegister::EntryDateSort)*item->direction())+',';
+    if (option == KMyMoneyRegister::EntryOrderSort) {
+      rc  += QString::number(static_cast<int>(KMyMoneyRegister::EntryDateSort) * item->direction()) + ',';
     }
-    rc += QString::number(KMyMoneyRegister::textToSortOrder(item->text(0))*item->direction());
+    rc += QString::number(KMyMoneyRegister::textToSortOrder(item->text(0)) * item->direction());
     item = dynamic_cast<SortOptionListItem*>(item->itemBelow());
-    if(item != 0)
+    if (item != 0)
       rc += ',';
   }
   return rc;
 }
 
-void TransactionSortOption::slotAvailableSelected( Q3ListViewItem * item )
+void TransactionSortOption::slotAvailableSelected(Q3ListViewItem * item)
 {
   m_addButton->setEnabled(item != 0);
   m_removeButton->setDisabled(true);
@@ -156,16 +156,16 @@ void TransactionSortOption::slotAvailableSelected( Q3ListViewItem * item )
   m_downButton->setDisabled(true);
 
   Q3ListViewItem* p = m_selectedList->currentItem();
-  if(p) {
+  if (p) {
     m_selectedList->setSelected(p, false);
   }
 }
 
-void TransactionSortOption::slotSelectedSelected( Q3ListViewItem * item )
+void TransactionSortOption::slotSelectedSelected(Q3ListViewItem * item)
 {
   m_addButton->setDisabled(true);
   m_removeButton->setEnabled(item != 0);
-  if(item) {
+  if (item) {
     m_upButton->setEnabled(item->itemAbove() != 0);
     m_downButton->setEnabled(item->itemBelow() != 0);
   } else {
@@ -174,22 +174,22 @@ void TransactionSortOption::slotSelectedSelected( Q3ListViewItem * item )
   }
 
   Q3ListViewItem* p = m_availableList->currentItem();
-  if(p) {
+  if (p) {
     m_availableList->setSelected(p, false);
   }
 }
 
-void TransactionSortOption::slotAddItem( void )
+void TransactionSortOption::slotAddItem(void)
 {
   Q3ListViewItem* item;
-  if((item = m_availableList->currentItem()) != 0) {
+  if ((item = m_availableList->currentItem()) != 0) {
     Q3ListViewItem* next = item->itemBelow();
-    if(!next)
+    if (!next)
       next = item->itemAbove();
     m_availableList->takeItem(item);
     m_selectedList->insertItem(item);
     m_addButton->setEnabled(m_availableList->firstChild() != 0);
-    if(next) {
+    if (next) {
       m_availableList->setCurrentItem(next);
       m_availableList->setSelected(next, true);
     }
@@ -197,17 +197,17 @@ void TransactionSortOption::slotAddItem( void )
   }
 }
 
-void TransactionSortOption::slotRemoveItem( void )
+void TransactionSortOption::slotRemoveItem(void)
 {
   Q3ListViewItem* item;
-  if((item = m_selectedList->currentItem()) != 0) {
+  if ((item = m_selectedList->currentItem()) != 0) {
     Q3ListViewItem* next = item->itemBelow();
-    if(!next)
+    if (!next)
       next = item->itemAbove();
     m_selectedList->takeItem(item);
     m_availableList->insertItem(item);
     m_removeButton->setEnabled(m_selectedList->firstChild() != 0);
-    if(next) {
+    if (next) {
       m_selectedList->setCurrentItem(next);
       m_selectedList->setSelected(next, true);
     }
@@ -215,12 +215,12 @@ void TransactionSortOption::slotRemoveItem( void )
   }
 }
 
-void TransactionSortOption::slotUpItem( void )
+void TransactionSortOption::slotUpItem(void)
 {
   Q3ListViewItem* item;
-  if((item = m_selectedList->currentItem()) != 0) {
+  if ((item = m_selectedList->currentItem()) != 0) {
     Q3ListViewItem* prev = item->itemAbove();
-    if(prev) {
+    if (prev) {
       prev->moveItem(item);
       m_selectedList->setCurrentItem(item);
       m_selectedList->setSelected(item, true);
@@ -231,12 +231,12 @@ void TransactionSortOption::slotUpItem( void )
   }
 }
 
-void TransactionSortOption::slotDownItem( void )
+void TransactionSortOption::slotDownItem(void)
 {
   Q3ListViewItem* item;
-  if((item = m_selectedList->currentItem()) != 0) {
+  if ((item = m_selectedList->currentItem()) != 0) {
     Q3ListViewItem* next = item->itemBelow();
-    if(next) {
+    if (next) {
       item->moveItem(next);
       m_selectedList->setCurrentItem(item);
       m_selectedList->setSelected(item, true);

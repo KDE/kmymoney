@@ -39,8 +39,8 @@
 class KNewBankDlgDecl : public QDialog, public Ui::KNewBankDlgDecl
 {
 public:
-  explicit KNewBankDlgDecl( QWidget *parent ) : QDialog( parent ) {
-    setupUi( this );
+  explicit KNewBankDlgDecl(QWidget *parent) : QDialog(parent) {
+    setupUi(this);
   }
 };
 
@@ -56,7 +56,7 @@ public:
 
 protected slots:
   void okClicked();
-  void institutionNameChanged( const QString &);
+  void institutionNameChanged(const QString &);
 
 private:
   MyMoneyInstitution m_institution;

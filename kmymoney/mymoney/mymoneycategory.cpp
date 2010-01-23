@@ -71,7 +71,7 @@ bool MyMoneyCategory::renameMinorCategory(const QString oldVal, const QString ne
     return false;
 
   if ((m_minorCategories.indexOf(oldVal) != -1) &&
-    (m_minorCategories.indexOf(newVal) == -1) ) {
+      (m_minorCategories.indexOf(newVal) == -1)) {
 
     m_minorCategories.removeOne(oldVal);
     return addMinorCategory(newVal);
@@ -82,7 +82,7 @@ bool MyMoneyCategory::renameMinorCategory(const QString oldVal, const QString ne
 
 bool MyMoneyCategory::addMinorCategory(QStringList values)
 {
-  for (QStringList::Iterator it = values.begin(); it!=values.end(); ++it) {
+  for (QStringList::Iterator it = values.begin(); it != values.end(); ++it) {
     addMinorCategory(*it);
   }
 
@@ -114,7 +114,7 @@ MyMoneyCategory::MyMoneyCategory(const MyMoneyCategory& right)
   m_minorCategories = right.m_minorCategories;
 }
 
-MyMoneyCategory& MyMoneyCategory::operator = (const MyMoneyCategory& right)
+MyMoneyCategory& MyMoneyCategory::operator = (const MyMoneyCategory & right)
 {
   m_income = right.m_income;
   m_name = right.m_name;
@@ -133,7 +133,7 @@ QDataStream &operator<<(QDataStream &s, MyMoneyCategory &category)
   s << category.m_name;
 
   s << (quint32)category.m_minorCategories.count();
-  for (QStringList::Iterator it = category.m_minorCategories.begin(); it!=category.m_minorCategories.end(); ++it) {
+  for (QStringList::Iterator it = category.m_minorCategories.begin(); it != category.m_minorCategories.end(); ++it) {
     s << (*it);
   }
 
@@ -144,7 +144,7 @@ QDataStream &operator>>(QDataStream &s, MyMoneyCategory &category)
 {
   qint32 inc;
   s >> inc;
-  if (inc==0)
+  if (inc == 0)
     category.m_income = false;
   else
     category.m_income = true;
@@ -156,7 +156,7 @@ QDataStream &operator>>(QDataStream &s, MyMoneyCategory &category)
 
   s >> minorCount;
   category.m_minorCategories.clear();
-  for (unsigned int i=0; i<minorCount; i++) {
+  for (unsigned int i = 0; i < minorCount; i++) {
     s >> buffer;
     category.m_minorCategories.append(buffer);
   }

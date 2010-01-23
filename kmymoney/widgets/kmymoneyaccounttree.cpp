@@ -65,21 +65,21 @@ KMyMoneyAccountTree::KMyMoneyAccountTree(QWidget* parent) :
 }
 
 KMyMoneyAccountTreeItem::KMyMoneyAccountTreeItem(K3ListView *parent, const MyMoneyAccount& account, const MyMoneySecurity& security , const QString& name) :
-    KMyMoneyAccountTreeBaseItem(parent,account,security,name),
+    KMyMoneyAccountTreeBaseItem(parent, account, security, name),
     m_reconcileFlag(false)
 {
   updateAccount();
 }
 
 KMyMoneyAccountTreeItem::KMyMoneyAccountTreeItem(KMyMoneyAccountTreeBaseItem *parent, const MyMoneyAccount& account, const QList<MyMoneyPrice>& price, const MyMoneySecurity& security) :
-    KMyMoneyAccountTreeBaseItem(parent,account,price,security),
+    KMyMoneyAccountTreeBaseItem(parent, account, price, security),
     m_reconcileFlag(false)
 {
   updateAccount();
 }
 
 KMyMoneyAccountTreeItem::KMyMoneyAccountTreeItem(K3ListView *parent, const MyMoneyInstitution& institution) :
-    KMyMoneyAccountTreeBaseItem(parent,institution),
+    KMyMoneyAccountTreeBaseItem(parent, institution),
     m_reconcileFlag(false)
 {
 }
@@ -94,29 +94,29 @@ void KMyMoneyAccountTreeItem::fillColumns()
   MyMoneyMoney vatRate;
   if (!isInstitution())
     setPixmap(lv->nameColumn(), m_account.accountPixmap(m_reconcileFlag, 22));
-  switch(m_account.accountType()) {
-    case MyMoneyAccount::Income:
-    case MyMoneyAccount::Expense:
-    case MyMoneyAccount::Asset:
-    case MyMoneyAccount::Liability:
-      if(m_account.value("Tax").toLower() == "yes")
-        setPixmap(lv->taxReportColumn(), checkMark);
-      if(!m_account.value("VatAccount").isEmpty()) {
-        setPixmap(lv->vatCategoryColumn(), checkMark);
-      }
-      if(!m_account.value("VatRate").isEmpty()) {
-        vatRate = MyMoneyMoney(m_account.value("VatRate")) * MyMoneyMoney(100,1);
-        setText(lv->vatCategoryColumn(), QString("%1 %").arg(vatRate.formatMoney("", 1)));
-      }
-      break;
-    default:
-      break;
+  switch (m_account.accountType()) {
+  case MyMoneyAccount::Income:
+  case MyMoneyAccount::Expense:
+  case MyMoneyAccount::Asset:
+  case MyMoneyAccount::Liability:
+    if (m_account.value("Tax").toLower() == "yes")
+      setPixmap(lv->taxReportColumn(), checkMark);
+    if (!m_account.value("VatAccount").isEmpty()) {
+      setPixmap(lv->vatCategoryColumn(), checkMark);
+    }
+    if (!m_account.value("VatRate").isEmpty()) {
+      vatRate = MyMoneyMoney(m_account.value("VatRate")) * MyMoneyMoney(100, 1);
+      setText(lv->vatCategoryColumn(), QString("%1 %").arg(vatRate.formatMoney("", 1)));
+    }
+    break;
+  default:
+    break;
   }
 }
 
 void KMyMoneyAccountTreeItem::setReconciliation(bool on)
 {
-  if(m_reconcileFlag == on)
+  if (m_reconcileFlag == on)
     return;
   m_reconcileFlag = on;
   updateAccount();
@@ -126,20 +126,20 @@ MyMoneyMoney KMyMoneyAccountTreeItem::balance() const
 {
   MyMoneyMoney result;
   // account.balance() is not compatable with stock accounts
-  if ( m_account.isInvest() )
+  if (m_account.isInvest())
     result = MyMoneyFile::instance()->balance(m_account.id());
   else
     result = m_account.balance();
   // for income and liability accounts, we reverse the sign
-  switch(m_account.accountGroup()) {
-    case MyMoneyAccount::Income:
-    case MyMoneyAccount::Liability:
-    case MyMoneyAccount::Equity:
-        result = -result;
-      break;
+  switch (m_account.accountGroup()) {
+  case MyMoneyAccount::Income:
+  case MyMoneyAccount::Liability:
+  case MyMoneyAccount::Equity:
+    result = -result;
+    break;
 
-    default:
-      break;
+  default:
+    break;
   }
   return result;
 }

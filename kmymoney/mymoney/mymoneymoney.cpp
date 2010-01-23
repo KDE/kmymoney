@@ -22,7 +22,7 @@
 
 // make sure, that this is defined before we even include any other header file
 #ifndef __STDC_LIMIT_MACROS
-  #define __STDC_LIMIT_MACROS         // force definition of min and max values
+#define __STDC_LIMIT_MACROS         // force definition of min and max values
 #endif
 
 #include "mymoneymoney.h"
@@ -47,9 +47,9 @@ bool MyMoneyMoney::_positivePrefixCurrencySymbol = false;
 
 MyMoneyMoney::fileVersionE MyMoneyMoney::_fileVersion = MyMoneyMoney::FILE_4_BYTE_VALUE;
 
-MyMoneyMoney MyMoneyMoney::maxValue = MyMoneyMoney(INT64_MAX,100);
-MyMoneyMoney MyMoneyMoney::minValue = MyMoneyMoney(INT64_MIN,100);
-MyMoneyMoney MyMoneyMoney::autoCalc = MyMoneyMoney(INT64_MIN+1,100);
+MyMoneyMoney MyMoneyMoney::maxValue = MyMoneyMoney(INT64_MAX, 100);
+MyMoneyMoney MyMoneyMoney::minValue = MyMoneyMoney(INT64_MIN, 100);
+MyMoneyMoney MyMoneyMoney::autoCalc = MyMoneyMoney(INT64_MIN + 1, 100);
 
 void MyMoneyMoney::setNegativePrefixCurrencySymbol(const bool flag)
 {
@@ -83,7 +83,7 @@ MyMoneyMoney::signPosition MyMoneyMoney::positiveMonetarySignPosition(void)
 
 void MyMoneyMoney::setThousandSeparator(const QChar &separator)
 {
-  if(separator != ' ')
+  if (separator != ' ')
     _thousandSeparator = separator;
   else
     _thousandSeparator = 0;
@@ -96,7 +96,7 @@ QChar MyMoneyMoney::thousandSeparator(void)
 
 void MyMoneyMoney::setDecimalSeparator(const QChar &separator)
 {
-  if(separator != ' ')
+  if (separator != ' ')
     _decimalSeparator = separator;
   else
     _decimalSeparator = 0;
@@ -121,21 +121,21 @@ MyMoneyMoney::MyMoneyMoney(const QString& pszAmount)
 
   // take care of prices given in the form "8 5/16"
   regExp.setPattern("(\\d+)\\s+(\\d+/\\d+)");
-  if(regExp.indexIn(pszAmount) > -1) {
+  if (regExp.indexIn(pszAmount) > -1) {
     *this = MyMoneyMoney(regExp.cap(1)) + MyMoneyMoney(regExp.cap(2));
     return;
   }
 
   // take care of our internal representation
   regExp.setPattern("(\\-?\\d+)/(\\d+)");
-  if(regExp.indexIn(pszAmount) > -1) {
+  if (regExp.indexIn(pszAmount) > -1) {
     // string matches the internal representation
     fromString(pszAmount);
     return;
   }
 
   // an empty string is zero
-  if(pszAmount.length() == 0)
+  if (pszAmount.length() == 0)
     return;
 
   QString res = pszAmount;
@@ -145,7 +145,7 @@ MyMoneyMoney::MyMoneyMoney(const QString& pszAmount)
   // c) negative indicator
   QString validChars = QString("\\d%1").arg(QChar(decimalSeparator()));
   QString negChars("-");
-  if(_negativeMonetarySignPosition == ParensAround) {
+  if (_negativeMonetarySignPosition == ParensAround) {
     // FIXME: If we want to allow '-' as well as '()' for negative entry
     //        we would have to replase '=' with '+=' in the next line
     //        Also, the logic in kMyMoneyEdit::theTextChanged has to be
@@ -161,7 +161,7 @@ MyMoneyMoney::MyMoneyMoney(const QString& pszAmount)
 
   QRegExp negCharSet(QString("[%1]").arg(negChars));
   bool isNegative = false;
-  if(res.indexOf(negCharSet) != -1) {
+  if (res.indexOf(negCharSet) != -1) {
     isNegative = true;
     res.remove(negCharSet);
   }
@@ -169,7 +169,7 @@ MyMoneyMoney::MyMoneyMoney(const QString& pszAmount)
   int pos;
 
   // qDebug("3: '%s'", qPrintable(res));
-  if((pos = res.indexOf(_decimalSeparator)) != -1) {
+  if ((pos = res.indexOf(_decimalSeparator)) != -1) {
     // make sure, we get the denominator right
     m_denom = precToDenom(res.length() - pos - 1);
 
@@ -177,10 +177,10 @@ MyMoneyMoney::MyMoneyMoney(const QString& pszAmount)
     res.remove(pos, 1);
   }
   // qDebug("4: '%s'", qPrintable(res));
-  if(res.length() > 0)
+  if (res.length() > 0)
     m_num =  res.toLongLong();
 
-  if(isNegative)
+  if (isNegative)
     m_num = -m_num;
 
   // qDebug("5: %Ld", m_num);
@@ -211,8 +211,8 @@ QString MyMoneyMoney::formatMoney(const QString& currency, const int prec, bool 
   signed64 m_64Value;
 
   // if prec == -1 we want the maximum possible but w/o trailing zeroes
-  if(tmpPrec > -1) {
-    while(tmpPrec--) {
+  if (tmpPrec > -1) {
+    while (tmpPrec--) {
       denom *= 10;
     }
   } else {
@@ -228,7 +228,7 @@ QString MyMoneyMoney::formatMoney(const QString& currency, const int prec, bool 
   signed64 left = m_64Value / denom;
   signed64 right = m_64Value % denom;
 
-  if (right < 0){
+  if (right < 0) {
     right = -right;
     bNegative = true;
   }
@@ -237,12 +237,12 @@ QString MyMoneyMoney::formatMoney(const QString& currency, const int prec, bool 
     bNegative = true;
   }
 
-  if(left & 0xFFFFFFFF00000000LL) {
+  if (left & 0xFFFFFFFF00000000LL) {
     signed64 tmp = left;
 
     // QString.sprintf("%Ld") did not work :-(,  so I had to
     // do it the old ugly way.
-    while(tmp) {
+    while (tmp) {
       res.insert(0, QString("%1").arg(static_cast<int>(tmp % 10)));
       tmp /= 10;
     }
@@ -250,14 +250,14 @@ QString MyMoneyMoney::formatMoney(const QString& currency, const int prec, bool 
   } else
     res = QString("%1").arg((long)left);
 
-  if(showThousandSeparator) {
+  if (showThousandSeparator) {
     int pos = res.length();
     while ((0 < (pos -= 3)) && thousandSeparator() != 0)
       res.insert(pos, thousandSeparator());
   }
 
-  if(prec > 0 || (prec == -1 && right != 0)) {
-    if(decimalSeparator() != 0)
+  if (prec > 0 || (prec == -1 && right != 0)) {
+    if (decimalSeparator() != 0)
       res += decimalSeparator();
 
     // using
@@ -269,15 +269,15 @@ QString MyMoneyMoney::formatMoney(const QString& currency, const int prec, bool 
     // res being "2," the result wasn't "2,6666000000" as expected, but rather
     // "2,0666600000" which was not usable. The code below works for me.
     QString rs  = QString("%1").arg(right);
-    if(prec != -1)
+    if (prec != -1)
       rs = rs.rightJustified(prec, '0', true);
     else {
       rs = rs.rightJustified(8, '0', true);
       // no trailing zeroes or decimal separators
-      while(rs.endsWith('0'))
-        rs.truncate(rs.length()-1);
-      while(rs.endsWith(QChar(decimalSeparator())))
-        rs.truncate(rs.length()-1);
+      while (rs.endsWith('0'))
+        rs.truncate(rs.length() - 1);
+      while (rs.endsWith(QChar(decimalSeparator())))
+        rs.truncate(rs.length() - 1);
     }
     res += rs;
   }
@@ -285,26 +285,26 @@ QString MyMoneyMoney::formatMoney(const QString& currency, const int prec, bool 
   signPosition signpos = bNegative ? _negativeMonetarySignPosition : _positiveMonetarySignPosition;
   QString sign = bNegative ? "-" : "";
 
-  switch(signpos) {
-    case ParensAround:
-      res.prepend('(');
-      res.append(')');
-      break;
-    case BeforeQuantityMoney:
-      res.prepend(sign);
-      break;
-    case AfterQuantityMoney:
-      res.append(sign);
-      break;
-    case BeforeMoney:
-      tmpCurrency.prepend(sign);
-      break;
-    case AfterMoney:
-      tmpCurrency.append(sign);
-      break;
+  switch (signpos) {
+  case ParensAround:
+    res.prepend('(');
+    res.append(')');
+    break;
+  case BeforeQuantityMoney:
+    res.prepend(sign);
+    break;
+  case AfterQuantityMoney:
+    res.append(sign);
+    break;
+  case BeforeMoney:
+    tmpCurrency.prepend(sign);
+    break;
+  case AfterMoney:
+    tmpCurrency.append(sign);
+    break;
   }
-  if(!tmpCurrency.isEmpty()) {
-    if(bNegative ? _negativePrefixCurrencySymbol : _positivePrefixCurrencySymbol){
+  if (!tmpCurrency.isEmpty()) {
+    if (bNegative ? _negativePrefixCurrencySymbol : _positivePrefixCurrencySymbol) {
       res.prepend(' ');
       res.prepend(tmpCurrency);
     } else {
@@ -324,18 +324,18 @@ const QString MyMoneyMoney::toString(void) const
 
   // QString.sprintf("%Ld") did not work :-(,  so I had to
   // do it the old ugly way.
-  while(tmp) {
+  while (tmp) {
     res.prepend(QString("%1").arg(static_cast<int>(tmp % 10)));
     tmp /= 10;
   }
-  if(res.isEmpty())
+  if (res.isEmpty())
     res = QString("0");
 
-  if(m_num < 0)
+  if (m_num < 0)
     res.prepend('-');
 
   tmp = m_denom;
-  while(tmp) {
+  while (tmp) {
     resf.prepend(QString("%1").arg(static_cast<int>(tmp % 10)));
     tmp /= 10;
   }
@@ -349,7 +349,7 @@ void MyMoneyMoney::fromString(const QString& str)
 
   QRegExp regExp("(\\-?\\d+)/(\\d+)");
   int pos = regExp.indexIn(str);
-  if(pos > -1) {
+  if (pos > -1) {
     m_num = regExp.cap(1).toLongLong();
     m_denom = regExp.cap(2).toLongLong();
   }
@@ -363,22 +363,22 @@ QDataStream &operator<<(QDataStream &s, const MyMoneyMoney &_money)
 
   MyMoneyMoney money = _money.convert(100);
 
-  switch(MyMoneyMoney::_fileVersion) {
-    case MyMoneyMoney::FILE_4_BYTE_VALUE:
-      if(money.m_num & 0xffffffff00000000LL)
-        qWarning("Lost data while writing out MyMoneyMoney object using deprecated 4 byte writer");
+  switch (MyMoneyMoney::_fileVersion) {
+  case MyMoneyMoney::FILE_4_BYTE_VALUE:
+    if (money.m_num & 0xffffffff00000000LL)
+      qWarning("Lost data while writing out MyMoneyMoney object using deprecated 4 byte writer");
 
-      s << static_cast<qint32> (money.m_num & 0xffffffff);
-      break;
+    s << static_cast<qint32>(money.m_num & 0xffffffff);
+    break;
 
-    default:
-      qDebug("Unknown file version while writing MyMoneyMoney object! Use FILE_8_BYTE_VALUE");
-      // tricky fall through here
+  default:
+    qDebug("Unknown file version while writing MyMoneyMoney object! Use FILE_8_BYTE_VALUE");
+    // tricky fall through here
 
-    case MyMoneyMoney::FILE_8_BYTE_VALUE:
-      s << static_cast<qint32> (money.m_num >> 32);
-      s << static_cast<qint32> (money.m_num & 0xffffffff);
-      break;
+  case MyMoneyMoney::FILE_8_BYTE_VALUE:
+    s << static_cast<qint32>(money.m_num >> 32);
+    s << static_cast<qint32>(money.m_num & 0xffffffff);
+    break;
   }
   return s;
 }
@@ -386,25 +386,25 @@ QDataStream &operator<<(QDataStream &s, const MyMoneyMoney &_money)
 QDataStream &operator>>(QDataStream &s, MyMoneyMoney &money)
 {
   qint32 tmp;
-  switch(MyMoneyMoney::_fileVersion) {
-    case MyMoneyMoney::FILE_4_BYTE_VALUE:
-      s >> tmp;
-      money.m_num = static_cast<signed64> (tmp);
-      money.m_denom = 100;
-      break;
+  switch (MyMoneyMoney::_fileVersion) {
+  case MyMoneyMoney::FILE_4_BYTE_VALUE:
+    s >> tmp;
+    money.m_num = static_cast<signed64>(tmp);
+    money.m_denom = 100;
+    break;
 
-    default:
-      qDebug("Unknown file version while writing MyMoneyMoney object! FILE_8_BYTE_VALUE assumed");
-      // tricky fall through here
+  default:
+    qDebug("Unknown file version while writing MyMoneyMoney object! FILE_8_BYTE_VALUE assumed");
+    // tricky fall through here
 
-    case MyMoneyMoney::FILE_8_BYTE_VALUE:
-      s >> tmp;
-      money.m_num = static_cast<signed64> (tmp);
-      money.m_num <<= 32;
-      s >> tmp;
-      money.m_num |= static_cast<signed64> (tmp);
-      money.m_denom = 100;
-      break;
+  case MyMoneyMoney::FILE_8_BYTE_VALUE:
+    s >> tmp;
+    money.m_num = static_cast<signed64>(tmp);
+    money.m_num <<= 32;
+    s >> tmp;
+    money.m_num |= static_cast<signed64>(tmp);
+    money.m_denom = 100;
+    break;
   }
   return s;
 }
@@ -417,28 +417,28 @@ QDataStream &operator>>(QDataStream &s, MyMoneyMoney &money)
 // Arguments: b - MyMoneyMoney object to be added
 //
 ////////////////////////////////////////////////////////////////////////////////
-MyMoneyMoney MyMoneyMoney::operator+( const MyMoneyMoney& _b) const
+MyMoneyMoney MyMoneyMoney::operator+(const MyMoneyMoney& _b) const
 {
   MyMoneyMoney a(*this);
   MyMoneyMoney b(_b);
   MyMoneyMoney sum;
   signed64 lcd;
 
-  if(a.m_denom < 0) {
+  if (a.m_denom < 0) {
     a.m_num *= a.m_denom;
     a.m_denom = 1;
   }
-  if(b.m_denom < 0) {
+  if (b.m_denom < 0) {
     b.m_num *= b.m_denom;
     b.m_denom = 1;
   }
 
-  if(a.m_denom == b.m_denom) {
+  if (a.m_denom == b.m_denom) {
     sum.m_num = a.m_num + b.m_num;
     sum.m_denom = a.m_denom;
   } else {
     lcd = a.getLcd(b);
-    sum.m_num   = a.m_num*(lcd/a.m_denom) + b.m_num*(lcd/b.m_denom);
+    sum.m_num   = a.m_num * (lcd / a.m_denom) + b.m_num * (lcd / b.m_denom);
     sum.m_denom = lcd;
   }
   return sum;
@@ -452,28 +452,28 @@ MyMoneyMoney MyMoneyMoney::operator+( const MyMoneyMoney& _b) const
 // Arguments: AmountInPence - MyMoneyMoney object to be subtracted
 //
 ////////////////////////////////////////////////////////////////////////////////
-MyMoneyMoney MyMoneyMoney::operator-( const MyMoneyMoney& _b) const
+MyMoneyMoney MyMoneyMoney::operator-(const MyMoneyMoney& _b) const
 {
   MyMoneyMoney a(*this);
   MyMoneyMoney b(_b);
   MyMoneyMoney diff;
   signed64 lcd;
 
-  if(a.m_denom < 0) {
+  if (a.m_denom < 0) {
     a.m_num *= a.m_denom;
     a.m_denom = 1;
   }
-  if(b.m_denom < 0) {
+  if (b.m_denom < 0) {
     b.m_num *= b.m_denom;
     b.m_denom = 1;
   }
 
-  if(a.m_denom == b.m_denom) {
+  if (a.m_denom == b.m_denom) {
     diff.m_num = a.m_num - b.m_num;
     diff.m_denom = a.m_denom;
   } else {
     lcd = a.getLcd(b);
-    diff.m_num   = a.m_num*(lcd/a.m_denom) - b.m_num*(lcd/b.m_denom);
+    diff.m_num   = a.m_num * (lcd / a.m_denom) - b.m_num * (lcd / b.m_denom);
     diff.m_denom = lcd;
   }
   return diff;
@@ -487,17 +487,17 @@ MyMoneyMoney MyMoneyMoney::operator-( const MyMoneyMoney& _b) const
 // Arguments: b - MyMoneyMoney object to be multiplied
 //
 ////////////////////////////////////////////////////////////////////////////////
-MyMoneyMoney MyMoneyMoney::operator*( const MyMoneyMoney& _b ) const
+MyMoneyMoney MyMoneyMoney::operator*(const MyMoneyMoney& _b) const
 {
   MyMoneyMoney a(*this);
   MyMoneyMoney b(_b);
   MyMoneyMoney product;
 
-  if(a.m_denom < 0) {
+  if (a.m_denom < 0) {
     a.m_num *= a.m_denom;
     a.m_denom = 1;
   }
-  if(b.m_denom < 0) {
+  if (b.m_denom < 0) {
     b.m_num *= b.m_denom;
     b.m_denom = 1;
   }
@@ -505,7 +505,7 @@ MyMoneyMoney MyMoneyMoney::operator*( const MyMoneyMoney& _b ) const
   product.m_num = a.m_num * b.m_num;
   product.m_denom = a.m_denom * b.m_denom;
 
-  if(product.m_denom < 0) {
+  if (product.m_denom < 0) {
     product.m_num = -product.m_num;
     product.m_denom = -product.m_denom;
   }
@@ -520,34 +520,33 @@ MyMoneyMoney MyMoneyMoney::operator*( const MyMoneyMoney& _b ) const
 // Arguments: b - MyMoneyMoney object to be used as dividend
 //
 ////////////////////////////////////////////////////////////////////////////////
-MyMoneyMoney MyMoneyMoney::operator / ( const MyMoneyMoney& _b ) const
+MyMoneyMoney MyMoneyMoney::operator / (const MyMoneyMoney& _b) const
 {
   MyMoneyMoney a(*this);
   MyMoneyMoney b(_b);
   MyMoneyMoney quotient;
   signed64 lcd;
 
-  if(a.m_denom < 0) {
+  if (a.m_denom < 0) {
     a.m_num *= a.m_denom;
     a.m_denom = 1;
   }
-  if(b.m_denom < 0) {
+  if (b.m_denom < 0) {
     b.m_num *= b.m_denom;
     b.m_denom = 1;
   }
 
-  if(a.m_denom == b.m_denom) {
+  if (a.m_denom == b.m_denom) {
     quotient.m_num = a.m_num;
     quotient.m_denom = b.m_num;
-  }
-  else {
+  } else {
     /* ok, convert to the lcd and compute from there... */
     lcd = a.getLcd(b);
-    quotient.m_num   = a.m_num*(lcd/a.m_denom);
-    quotient.m_denom = b.m_num*(lcd/b.m_denom);
+    quotient.m_num   = a.m_num * (lcd / a.m_denom);
+    quotient.m_denom = b.m_num * (lcd / b.m_denom);
   }
 
-  if(quotient.m_denom < 0) {
+  if (quotient.m_denom < 0) {
     quotient.m_num   = -quotient.m_num;
     quotient.m_denom = -quotient.m_denom;
   }
@@ -565,17 +564,16 @@ signed64 MyMoneyMoney::getLcd(const MyMoneyMoney& b) const
   signed64 small_denom;
   signed64 big_denom;
 
-  if(b.m_denom < m_denom) {
+  if (b.m_denom < m_denom) {
     small_denom = b.m_denom;
     big_denom = m_denom;
-  }
-  else {
+  } else {
     small_denom = m_denom;
     big_denom = b.m_denom;
   }
 
   /* special case: smaller divides smoothly into larger */
-  if((big_denom % small_denom) == 0) {
+  if ((big_denom % small_denom) == 0) {
     return big_denom;
   }
 
@@ -592,28 +590,25 @@ signed64 MyMoneyMoney::getLcd(const MyMoneyMoney& b) const
    * I.e. LCM 100,96875 == 2*2*5*5,31*5*5*5*5 = 2*2,31*5*5
    *      answer: multiply 100 by 31*5*5 == 387500
    */
-  while((current_divisor * current_divisor) <= max_square) {
-    if(((small_denom % current_divisor) == 0) &&
-       ((big_denom % current_divisor) == 0)) {
+  while ((current_divisor * current_divisor) <= max_square) {
+    if (((small_denom % current_divisor) == 0) &&
+        ((big_denom % current_divisor) == 0)) {
       big_denom = big_denom / current_divisor;
       small_denom = small_denom / current_divisor;
-    }
-    else {
-      if(current_divisor == 2) {
+    } else {
+      if (current_divisor == 2) {
         current_divisor++;
-      }
-      else if(three_count == 3) {
+      } else if (three_count == 3) {
         current_divisor += 4;
         three_count = 1;
-      }
-      else {
+      } else {
         current_divisor += 2;
         three_count++;
       }
     }
 
-    if((current_divisor > small_denom) ||
-       (current_divisor > big_denom)) {
+    if ((current_divisor > small_denom) ||
+        (current_divisor > big_denom)) {
       break;
     }
   }
@@ -625,7 +620,7 @@ signed64 MyMoneyMoney::getLcd(const MyMoneyMoney& b) const
 const MyMoneyMoney MyMoneyMoney::convert(const signed64 _denom, const roundingMethod how) const
 {
   MyMoneyMoney out(*this);
-  MyMoneyMoney in (*this);
+  MyMoneyMoney in(*this);
   MyMoneyMoney temp;
 
   signed64 denom = _denom;
@@ -633,11 +628,11 @@ const MyMoneyMoney MyMoneyMoney::convert(const signed64 _denom, const roundingMe
   signed64 temp_a;
   signed64 remainder;
   signed64 sign;
-  int denom_neg=0;
+  int denom_neg = 0;
 
-  if(m_denom != denom) {
+  if (m_denom != denom) {
     /* if the denominator of the input value is negative, get rid of that. */
-    if(m_denom < 0) {
+    if (m_denom < 0) {
       in.m_num = in.m_num * (- in.m_denom);
       in.m_denom = 1;
     }
@@ -646,7 +641,7 @@ const MyMoneyMoney MyMoneyMoney::convert(const signed64 _denom, const roundingMe
 
     /* if the denominator is less than zero, we are to interpret it as
      * the reciprocal of its magnitude. */
-    if(denom < 0) {
+    if (denom < 0) {
       denom       = - denom;
       denom_neg   = 1;
       temp_a      = (in.m_num < 0) ? -in.m_num : in.m_num;
@@ -654,8 +649,7 @@ const MyMoneyMoney MyMoneyMoney::convert(const signed64 _denom, const roundingMe
       remainder   = in.m_num % temp_bc;
       out.m_num   = in.m_num / temp_bc;
       out.m_denom = -denom;
-    }
-    else {
+    } else {
       /* do all the modulo and int division on positive values to make
        * things a little clearer. Reduce the fraction denom/in.denom to
        * help with range errors (FIXME : need bigger intermediate rep) */
@@ -670,81 +664,76 @@ const MyMoneyMoney MyMoneyMoney::convert(const signed64 _denom, const roundingMe
       out.m_denom  = denom;
     }
 
-    if(remainder > 0) {
-      switch(how) {
-        case RndFloor:
-          if(sign < 0) {
-            out.m_num = out.m_num + 1;
-          }
-          break;
-
-        case RndCeil:
-          if(sign > 0) {
-            out.m_num = out.m_num + 1;
-          }
-          break;
-
-        case RndTrunc:
-          break;
-
-        case RndPromote:
+    if (remainder > 0) {
+      switch (how) {
+      case RndFloor:
+        if (sign < 0) {
           out.m_num = out.m_num + 1;
-          break;
+        }
+        break;
 
-        case RndHalfDown:
-          if(denom_neg) {
-            if((2 * remainder) > in.m_denom*denom) {
-              out.m_num = out.m_num + 1;
-            }
-          }
-          else if((2 * remainder) > temp.m_denom) {
+      case RndCeil:
+        if (sign > 0) {
+          out.m_num = out.m_num + 1;
+        }
+        break;
+
+      case RndTrunc:
+        break;
+
+      case RndPromote:
+        out.m_num = out.m_num + 1;
+        break;
+
+      case RndHalfDown:
+        if (denom_neg) {
+          if ((2 * remainder) > in.m_denom*denom) {
             out.m_num = out.m_num + 1;
           }
-          break;
+        } else if ((2 * remainder) > temp.m_denom) {
+          out.m_num = out.m_num + 1;
+        }
+        break;
 
-        case RndHalfUp:
-          if(denom_neg) {
-            if((2 * remainder) >= in.m_denom*denom) {
-              out.m_num = out.m_num + 1;
-            }
-          }
-          else if((2 * remainder ) >= temp.m_denom) {
+      case RndHalfUp:
+        if (denom_neg) {
+          if ((2 * remainder) >= in.m_denom*denom) {
             out.m_num = out.m_num + 1;
           }
-          break;
+        } else if ((2 * remainder) >= temp.m_denom) {
+          out.m_num = out.m_num + 1;
+        }
+        break;
 
-        case RndRound:
-          if(denom_neg) {
-            if((2 * remainder) > in.m_denom*denom) {
+      case RndRound:
+        if (denom_neg) {
+          if ((2 * remainder) > in.m_denom*denom) {
+            out.m_num = out.m_num + 1;
+          } else if ((2 * remainder) == in.m_denom*denom) {
+            if (out.m_num % 2) {
               out.m_num = out.m_num + 1;
             }
-            else if((2 * remainder) == in.m_denom*denom) {
-              if(out.m_num % 2) {
-                out.m_num = out.m_num + 1;
-              }
-            }
           }
-          else {
-            if((2 * remainder ) > temp.m_denom) {
+        } else {
+          if ((2 * remainder) > temp.m_denom) {
+            out.m_num = out.m_num + 1;
+          } else if ((2 * remainder) == temp.m_denom) {
+            if (out.m_num % 2) {
               out.m_num = out.m_num + 1;
             }
-            else if((2 * remainder) == temp.m_denom) {
-              if(out.m_num % 2) {
-                out.m_num = out.m_num + 1;
-              }
-            }
           }
-          break;
+        }
+        break;
 
-        case RndNever:
+      case RndNever:
 #if HAVE_LONG_DOUBLE
-          qWarning("MyMoneyMoney: have remainder \"%Ld/%Ld\"->convert(%Ld, %d)",
-                    m_num, m_denom, _denom, how);
+        qWarning("MyMoneyMoney: have remainder \"%Ld/%Ld\"->convert(%Ld, %d)",
+                 m_num, m_denom, _denom, how);
 #else
-          qWarning("MyMoneyMoney: have remainder \"%ld/%ld\"->convert(%ld, %d)",
-                    m_num, m_denom, _denom, how);
+        qWarning("MyMoneyMoney: have remainder \"%ld/%ld\"->convert(%ld, %d)",
+                 m_num, m_denom, _denom, how);
 #endif
-          break;
+        break;
       }
     }
     out.m_num = (sign > 0) ? out.m_num : (-out.m_num);
@@ -785,7 +774,7 @@ signed64 MyMoneyMoney::precToDenom(int prec)
 {
   signed64 denom = 1;
 
-  while(prec--)
+  while (prec--)
     denom *= 10;
 
   return denom;
@@ -799,7 +788,7 @@ double MyMoneyMoney::toDouble(void) const
 int MyMoneyMoney::denomToPrec(signed64 fract)
 {
   int rc = 0;
-  while(fract > 1) {
+  while (fract > 1) {
     rc++;
     fract /= 10;
   }
@@ -808,5 +797,5 @@ int MyMoneyMoney::denomToPrec(signed64 fract)
 
 MyMoneyMoney::operator int() const
 {
-  return static_cast<int> (m_num / m_denom);
+  return static_cast<int>(m_num / m_denom);
 }

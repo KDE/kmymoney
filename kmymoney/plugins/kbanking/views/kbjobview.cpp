@@ -53,18 +53,19 @@ KBJobView::KBJobView(KBanking *kb,
                      QWidget* parent,
                      const char* name,
                      Qt::WFlags fl)
-  : QWidget(parent, fl), _app(kb) {
+    : QWidget(parent, fl), _app(kb)
+{
   assert(kb);
   setObjectName(name);
   setupUi(this);
 
   // Manually create and add layout here because the .ui-generated
   // QGroupBox doesn't have one.
-  jobBox->setColumnLayout(0, Qt::Vertical );
-  Q3BoxLayout *jobBoxLayout = new Q3HBoxLayout( jobBox->layout() );
-  jobBoxLayout->setAlignment( Qt::AlignTop );
+  jobBox->setColumnLayout(0, Qt::Vertical);
+  Q3BoxLayout *jobBoxLayout = new Q3HBoxLayout(jobBox->layout());
+  jobBoxLayout->setAlignment(Qt::AlignTop);
 
-  _jobList=new KBJobListView(jobBox);
+  _jobList = new KBJobListView(jobBox);
   jobBoxLayout->addWidget(_jobList);
 
   QObject::connect(_app->flagStaff(), SIGNAL(signalQueueUpdated()),
@@ -74,7 +75,7 @@ KBJobView::KBJobView(KBanking *kb,
   QObject::connect(dequeueButton, SIGNAL(clicked()),
                    this, SLOT(slotDequeue()));
   connect(_jobList, SIGNAL(selectionChanged()),
-                   this, SLOT(slotSelectionChanged()));
+          this, SLOT(slotSelectionChanged()));
 
   // add some icons to the buttons
   KIconLoader* il = KIconLoader::global();
@@ -95,7 +96,8 @@ KBJobView::KBJobView(KBanking *kb,
 
 
 
-KBJobView::~KBJobView(){
+KBJobView::~KBJobView()
+{
 }
 
 void KBJobView::slotSelectionChanged(void)
@@ -103,21 +105,22 @@ void KBJobView::slotSelectionChanged(void)
   dequeueButton->setEnabled(_jobList->selectedItem() != 0);
 }
 
-bool KBJobView::init(){
+bool KBJobView::init()
+{
 #if !AQB_IS_VERSION(3,9,0,0)
   GWEN_DB_NODE *db;
-  db=_app->getAppData();
+  db = _app->getAppData();
   assert(db);
-  db=GWEN_DB_GetGroup(db, GWEN_PATH_FLAGS_NAMEMUSTEXIST,
-                      "gui/views/jobview");
+  db = GWEN_DB_GetGroup(db, GWEN_PATH_FLAGS_NAMEMUSTEXIST,
+                        "gui/views/jobview");
   if (db) {
     int i, j;
 
     /* found settings */
-    for (i=0; i<_jobList->columns(); i++) {
+    for (i = 0; i < _jobList->columns(); i++) {
       _jobList->setColumnWidthMode(i, Q3ListView::Manual);
-      j=GWEN_DB_GetIntValue(db, "columns", i, -1);
-      if (j!=-1)
+      j = GWEN_DB_GetIntValue(db, "columns", i, -1);
+      if (j != -1)
         _jobList->setColumnWidth(i, j);
     } /* for */
   } /* if settings */
@@ -129,17 +132,18 @@ bool KBJobView::init(){
 
 
 
-bool KBJobView::fini(){
+bool KBJobView::fini()
+{
 #if !AQB_IS_VERSION(3,9,0,0)
   GWEN_DB_NODE *db;
   int i, j;
 
-  db=_app->getAppData();
+  db = _app->getAppData();
   assert(db);
   assert(db);
   GWEN_DB_ClearGroup(db, "gui/views/jobview");
-  for (i=0; i<_jobList->columns(); ++i) {
-    j=_jobList->columnWidth(i);
+  for (i = 0; i < _jobList->columns(); ++i) {
+    j = _jobList->columnWidth(i);
     GWEN_DB_SetIntValue(db, GWEN_DB_FLAGS_DEFAULT,
                         "gui/views/jobview/columns", j);
   } /* for */
@@ -148,28 +152,30 @@ bool KBJobView::fini(){
 }
 
 
-void KBJobView::slotQueueUpdated(){
+void KBJobView::slotQueueUpdated()
+{
   DBG_NOTICE(0, "Job queue updated");
   _jobList->clear();
   std::list<AB_JOB*> jl;
   jl = _app->getEnqueuedJobs();
   _jobList->addJobs(jl);
   executeButton->setEnabled(jl.size() > 0);
-  if(jl.size() == 0)
+  if (jl.size() == 0)
     dequeueButton->setDisabled(true);
 }
 
 
 
-void KBJobView::slotExecute(){
+void KBJobView::slotExecute()
+{
   std::list<AB_JOB*> jl;
   int rv;
   bool updated;
   AB_IMEXPORTER_CONTEXT *ctx;
 
-  updated=false;
-  jl=_app->getEnqueuedJobs();
-  if (jl.size()==0) {
+  updated = false;
+  jl = _app->getEnqueuedJobs();
+  if (jl.size() == 0) {
     KMessageBox::warningContinueCancel(this,
                                        tr("No Jobs"),
                                        tr("There are no jobs in the queue."));
@@ -177,8 +183,8 @@ void KBJobView::slotExecute(){
   }
 
   DBG_NOTICE(0, "Executing queue");
-  ctx=AB_ImExporterContext_new();
-  rv=_app->executeQueue(ctx);
+  ctx = AB_ImExporterContext_new();
+  rv = _app->executeQueue(ctx);
   if (!rv)
     _app->importContext(ctx, 0);
   else {
@@ -192,11 +198,12 @@ void KBJobView::slotExecute(){
 
 
 
-void KBJobView::slotDequeue(){
+void KBJobView::slotDequeue()
+{
   KBJobListViewItem* p = dynamic_cast<KBJobListViewItem*>(_jobList->selectedItem());
-  if(p) {
+  if (p) {
     AB_JOB* job = p->getJob();
-    if(job) {
+    if (job) {
       _app->dequeueJob(job);
     }
   }

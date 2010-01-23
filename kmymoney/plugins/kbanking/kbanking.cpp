@@ -39,54 +39,56 @@
 
 KBanking::KBanking(const char *appname,
                    const char *cfgDir)
-:QBanking(appname, cfgDir)
-,_jobQueue(NULL)
+    : QBanking(appname, cfgDir)
+    , _jobQueue(NULL)
 {
 }
 
 
 
-KBanking::~KBanking(){
+KBanking::~KBanking()
+{
 }
 
 
 
-int KBanking::init() {
+int KBanking::init()
+{
   int rv;
 
-  rv=QBanking::init();
-  if (rv<0)
+  rv = QBanking::init();
+  if (rv < 0)
     return rv;
 
-  rv=onlineInit();
+  rv = onlineInit();
   if (rv) {
     fprintf(stderr, "Error on online init (%d).\n", rv);
     QBanking::fini();
     return rv;
   }
 
-  _jobQueue=AB_Job_List2_new();
+  _jobQueue = AB_Job_List2_new();
 
 #if AQB_IS_VERSION(4,0,0,2)
-/* since 4.0.0.2 the class QBGui does certificate handling itself */
+  /* since 4.0.0.2 the class QBGui does certificate handling itself */
 #else
   GWEN_DB_NODE *dbCerts = 0;
 # if AQB_IS_VERSION(3,9,0,0)
   rv = lockSharedConfig("certs", 0);
-  if(rv < 0) {
+  if (rv < 0) {
     fprintf(stderr, "Could not lock certificate db (%d).\n", rv);
   } else {
     rv = loadSharedConfig("certs", &dbCerts, 0);
-    if(rv < 0) {
+    if (rv < 0) {
       fprintf(stderr, "Could not load certificates (%d).\n", rv);
     }
     rv = unlockSharedConfig("certs", 0);
-    if(rv < 0) {
+    if (rv < 0) {
       fprintf(stderr, "Could not unlock certificate db (%d).\n", rv);
     }
   }
 # else
-  dbCerts=AB_Banking_GetSharedData(getCInterface(), "certs");
+  dbCerts = AB_Banking_GetSharedData(getCInterface(), "certs");
 # endif
 
   if (dbCerts)
@@ -98,31 +100,32 @@ int KBanking::init() {
 
 
 
-int KBanking::fini() {
+int KBanking::fini()
+{
   int rv;
 
   if (_jobQueue) {
     AB_Job_List2_FreeAll(_jobQueue);
-    _jobQueue=NULL;
+    _jobQueue = NULL;
   }
 
 #if AQB_IS_VERSION(4,0,0,2)
-/* since 4.0.0.2 the class QBGui does certificate handling itself */
+  /* since 4.0.0.2 the class QBGui does certificate handling itself */
 #else
   GWEN_DB_NODE *dbCerts = 0;
   dbCerts = getGui()->getDbCerts();
 # if AQB_IS_VERSION(3,9,0,0)
-  if(dbCerts) {
+  if (dbCerts) {
     rv = lockSharedConfig("certs", 0);
-    if(rv < 0) {
+    if (rv < 0) {
       fprintf(stderr, "Could not lock certificate db (%d).\n", rv);
     } else {
       rv = saveSharedConfig("certs", dbCerts, 0);
-      if(rv < 0) {
+      if (rv < 0) {
         fprintf(stderr, "Could not load certificates (%d).\n", rv);
       }
       rv = unlockSharedConfig("certs", 0);
-      if(rv < 0) {
+      if (rv < 0) {
         fprintf(stderr, "Could not unlock certificate db (%d).\n", rv);
       }
     }
@@ -141,7 +144,7 @@ int KBanking::fini() {
 # endif
 #endif
 
-  rv=onlineFini();
+  rv = onlineFini();
   if (rv) {
     QBanking::fini();
     return rv;
@@ -151,13 +154,14 @@ int KBanking::fini() {
 
 
 
-int KBanking::executeQueue(AB_IMEXPORTER_CONTEXT *ctx){
+int KBanking::executeQueue(AB_IMEXPORTER_CONTEXT *ctx)
+{
   int rv;
   AB_JOB_LIST2 *oldQ;
 
-  rv=QBanking::executeJobs(_jobQueue, ctx, 0);
-  oldQ=_jobQueue;
-  _jobQueue=AB_Job_List2_new();
+  rv = QBanking::executeJobs(_jobQueue, ctx, 0);
+  oldQ = _jobQueue;
+  _jobQueue = AB_Job_List2_new();
   flagStaff()->queueUpdated();
   AB_Job_List2_FreeAll(oldQ);
   return rv;
@@ -165,22 +169,23 @@ int KBanking::executeQueue(AB_IMEXPORTER_CONTEXT *ctx){
 
 
 
-std::list<AB_JOB*> KBanking::getEnqueuedJobs(){
+std::list<AB_JOB*> KBanking::getEnqueuedJobs()
+{
   AB_JOB_LIST2 *ll;
   std::list<AB_JOB*> rl;
 
-  ll=_jobQueue;
+  ll = _jobQueue;
   if (ll && AB_Job_List2_GetSize(ll)) {
     AB_JOB *j;
     AB_JOB_LIST2_ITERATOR *it;
 
-    it=AB_Job_List2_First(ll);
+    it = AB_Job_List2_First(ll);
     assert(it);
-    j=AB_Job_List2Iterator_Data(it);
+    j = AB_Job_List2Iterator_Data(it);
     assert(j);
-    while(j) {
+    while (j) {
       rl.push_back(j);
-      j=AB_Job_List2Iterator_Next(it);
+      j = AB_Job_List2Iterator_Next(it);
     }
     AB_Job_List2Iterator_free(it);
   }
@@ -189,7 +194,8 @@ std::list<AB_JOB*> KBanking::getEnqueuedJobs(){
 
 
 
-int KBanking::enqueueJob(AB_JOB *j) {
+int KBanking::enqueueJob(AB_JOB *j)
+{
   assert(_jobQueue);
   assert(j);
   AB_Job_Attach(j);
@@ -200,7 +206,8 @@ int KBanking::enqueueJob(AB_JOB *j) {
 
 
 
-int KBanking::dequeueJob(AB_JOB *j) {
+int KBanking::dequeueJob(AB_JOB *j)
+{
   assert(_jobQueue);
   AB_Job_List2_Remove(_jobQueue, j);
   AB_Job_free(j);

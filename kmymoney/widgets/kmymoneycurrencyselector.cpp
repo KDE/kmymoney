@@ -37,19 +37,19 @@
 // Project Includes
 
 KMyMoneySecuritySelector::KMyMoneySecuritySelector(QWidget *parent) :
-  KComboBox(parent),
-  m_displayItem(FullName),
-  m_displayOnly(false),
-  m_displayType(TypeAll)
+    KComboBox(parent),
+    m_displayItem(FullName),
+    m_displayOnly(false),
+    m_displayType(TypeAll)
 {
   // update(QString());
 }
 
 KMyMoneySecuritySelector::KMyMoneySecuritySelector(displayTypeE type, QWidget *parent) :
-  KComboBox(parent),
-  m_displayItem(FullName),
-  m_displayOnly(false),
-  m_displayType(type)
+    KComboBox(parent),
+    m_displayItem(FullName),
+    m_displayOnly(false),
+    m_displayType(type)
 {
   // update(QString());
 }
@@ -69,14 +69,14 @@ void KMyMoneySecuritySelector::update(const QString& id)
   MyMoneySecurity curr = MyMoneyFile::instance()->baseCurrency();
   QString baseCurrency = curr.id();
 
-  if(!id.isEmpty())
+  if (!id.isEmpty())
     curr = m_currency;
 
   this->clear();
   m_list.clear();
-  if(m_displayType & TypeCurrencies)
+  if (m_displayType & TypeCurrencies)
     m_list += MyMoneyFile::instance()->currencyList();
-  if(m_displayType & TypeSecurities)
+  if (m_displayType & TypeSecurities)
     m_list += MyMoneyFile::instance()->securityList();
 
   // sort
@@ -92,32 +92,32 @@ void KMyMoneySecuritySelector::update(const QString& id)
 
   int itemId = 0;
   int m_selectedItemId = 0;
-  for(it = m_list.constBegin(); it != m_list.constEnd(); ++it) {
+  for (it = m_list.constBegin(); it != m_list.constEnd(); ++it) {
     QString display;
-    switch(m_displayItem) {
-      default:
-      case FullName:
-        if((*it).isCurrency()) {
-          display = QString("%2 (%1)").arg((*it).id()).arg((*it).name());
-        } else
-          display = QString("%2 (%1)").arg((*it).tradingSymbol()).arg((*it).name());
-        break;
-        break;
+    switch (m_displayItem) {
+    default:
+    case FullName:
+      if ((*it).isCurrency()) {
+        display = QString("%2 (%1)").arg((*it).id()).arg((*it).name());
+      } else
+        display = QString("%2 (%1)").arg((*it).tradingSymbol()).arg((*it).name());
+      break;
+      break;
 
-      case Symbol:
-        if((*it).isCurrency())
-          display = (*it).id();
-        else
-          display = (*it).tradingSymbol();
-        break;
+    case Symbol:
+      if ((*it).isCurrency())
+        display = (*it).id();
+      else
+        display = (*it).tradingSymbol();
+      break;
     }
-    if((*it).id() == baseCurrency) {
-      insertItem(itemId, QIcon(KStandardDirs::locate("icon","hicolor/16x16/apps/kmymoney.png")), display);
+    if ((*it).id() == baseCurrency) {
+      insertItem(itemId, QIcon(KStandardDirs::locate("icon", "hicolor/16x16/apps/kmymoney.png")), display);
     } else {
       insertItem(itemId, QIcon(empty), display);
     }
 
-    if(curr.id() == (*it).id()) {
+    if (curr.id() == (*it).id()) {
       m_selectedItemId = itemId;
       m_currency = (*it);
     }
@@ -129,16 +129,16 @@ void KMyMoneySecuritySelector::update(const QString& id)
 
 void KMyMoneySecuritySelector::setDisplayOnly(const bool disp)
 {
-  if(disp == m_displayOnly)
+  if (disp == m_displayOnly)
     return;
 
-  switch(disp) {
-    case true:
-      connect(this, SIGNAL(activated(int)), this, SLOT(slotSetInitialCurrency()));
-      break;
-    case false:
-      disconnect(this, SIGNAL(activated(int)), this, SLOT(slotSetInitialCurrency()));
-      break;
+  switch (disp) {
+  case true:
+    connect(this, SIGNAL(activated(int)), this, SLOT(slotSetInitialCurrency()));
+    break;
+  case false:
+    disconnect(this, SIGNAL(activated(int)), this, SLOT(slotSetInitialCurrency()));
+    break;
   }
   m_displayOnly = disp;
 }
@@ -164,7 +164,7 @@ void KMyMoneySecuritySelector::setSecurity(const MyMoneySecurity& currency)
 }
 
 KMyMoneyCurrencySelector::KMyMoneyCurrencySelector(QWidget *parent) :
-  KMyMoneySecuritySelector(TypeCurrencies, parent)
+    KMyMoneySecuritySelector(TypeCurrencies, parent)
 {
 }
 

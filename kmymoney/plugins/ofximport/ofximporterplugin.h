@@ -43,11 +43,11 @@ class KOnlineBankingStatus;
 */
 class OfxImporterPlugin : public KMyMoneyPlugin::Plugin, public KMyMoneyPlugin::ImporterPlugin, public KMyMoneyPlugin::OnlinePlugin
 {
-Q_OBJECT
+  Q_OBJECT
 public:
-    explicit OfxImporterPlugin(QObject *parent = 0, const QStringList& = QStringList());
+  explicit OfxImporterPlugin(QObject *parent = 0, const QStringList& = QStringList());
 
-    ~OfxImporterPlugin();
+  ~OfxImporterPlugin();
 
   /**
     * This method returns the english-language name of the format
@@ -74,7 +74,7 @@ public:
     *
     * @return bool Whether the indicated file is importable by this plugin
     */
-  virtual bool isMyFormat( const QString& filename ) const;
+  virtual bool isMyFormat(const QString& filename) const;
 
   /**
     * Import a file
@@ -83,7 +83,7 @@ public:
     *
     * @return bool Whether the import was successful.
     */
-  virtual bool import( const QString& filename );
+  virtual bool import(const QString& filename);
 
   /**
     * Returns the error result of the last import
@@ -110,26 +110,46 @@ protected slots:
   void slotImportFile(const QString& url);
 
 protected:
-    void createActions(void);
-    void addnew(void) { m_statementlist.push_back(MyMoneyStatement()); }
-    MyMoneyStatement& back(void) { return m_statementlist.back(); }
-    bool isValid(void) const { return m_valid; }
-    void setValid(void) { m_valid = true; }
-    void addInfo(const QString& _msg ) { m_infos+=_msg; }
-    void addWarning(const QString& _msg )  { m_warnings+=_msg; }
-    void addError(const QString& _msg )  { m_errors+=_msg; }
-    const QStringList& infos(void) const { return m_infos; }
-    const QStringList& warnings(void) const { return m_warnings; }
-    const QStringList& errors(void) const { return m_errors; }
-    bool storeStatements(QList<MyMoneyStatement>& statements);
-    bool importStatement(const MyMoneyStatement& s);
+  void createActions(void);
+  void addnew(void) {
+    m_statementlist.push_back(MyMoneyStatement());
+  }
+  MyMoneyStatement& back(void) {
+    return m_statementlist.back();
+  }
+  bool isValid(void) const {
+    return m_valid;
+  }
+  void setValid(void) {
+    m_valid = true;
+  }
+  void addInfo(const QString& _msg) {
+    m_infos += _msg;
+  }
+  void addWarning(const QString& _msg)  {
+    m_warnings += _msg;
+  }
+  void addError(const QString& _msg)  {
+    m_errors += _msg;
+  }
+  const QStringList& infos(void) const {
+    return m_infos;
+  }
+  const QStringList& warnings(void) const {
+    return m_warnings;
+  }
+  const QStringList& errors(void) const {
+    return m_errors;
+  }
+  bool storeStatements(QList<MyMoneyStatement>& statements);
+  bool importStatement(const MyMoneyStatement& s);
 
 
-    static int ofxTransactionCallback( struct OfxTransactionData, void* );
-    static int ofxStatementCallback( struct OfxStatementData, void* );
-    static int ofxAccountCallback( struct OfxAccountData, void* );
-    static int ofxStatusCallback( struct OfxStatusData, void* );
-    static int ofxSecurityCallback( struct OfxSecurityData, void* );
+  static int ofxTransactionCallback(struct OfxTransactionData, void*);
+  static int ofxStatementCallback(struct OfxStatementData, void*);
+  static int ofxAccountCallback(struct OfxAccountData, void*);
+  static int ofxStatusCallback(struct OfxStatusData, void*);
+  static int ofxSecurityCallback(struct OfxSecurityData, void*);
 
 private:
   bool m_valid;

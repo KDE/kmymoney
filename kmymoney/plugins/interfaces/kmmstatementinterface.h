@@ -37,7 +37,8 @@ class MyMoneyKeyValueContainer;
 
 #include "statementinterface.h"
 
-namespace KMyMoneyPlugin {
+namespace KMyMoneyPlugin
+{
 
 /**
   * This class represents the implementation of the

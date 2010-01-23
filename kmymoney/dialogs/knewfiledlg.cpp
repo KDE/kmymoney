@@ -40,18 +40,18 @@
 // Project Includes
 
 KNewFileDlg::KNewFileDlg(QWidget *parent, const QString& title)
-  : KNewFileDlgDecl(parent)
+    : KNewFileDlgDecl(parent)
 {
-    setModal( true );
+  setModal(true);
   init(title);
 }
 
 KNewFileDlg::KNewFileDlg(QString userName, QString userStreet,
-  QString userTown, QString userCounty, QString userPostcode, QString userTelephone,
-  QString userEmail, QWidget *parent, const QString& title)
-  : KNewFileDlgDecl(parent)
+                         QString userTown, QString userCounty, QString userPostcode, QString userTelephone,
+                         QString userEmail, QWidget *parent, const QString& title)
+    : KNewFileDlgDecl(parent)
 {
-    setModal( true );
+  setModal(true);
   userNameEdit->setText(userName);
   streetEdit->setText(userStreet);
   townEdit->setText(userTown);
@@ -73,11 +73,11 @@ void KNewFileDlg::init(const QString& title)
     setWindowTitle(title);
 
   KABC::StdAddressBook *ab = static_cast<KABC::StdAddressBook*>
-    ( KABC::StdAddressBook::self() );
-  if ( ab && !ab->whoAmI().isEmpty() )
-      showLoadButton = true;
+                             (KABC::StdAddressBook::self());
+  if (ab && !ab->whoAmI().isEmpty())
+    showLoadButton = true;
 
-  if(!showLoadButton)
+  if (!showLoadButton)
     kabcBtn->hide();
 
   userNameEdit->setFocus();
@@ -87,7 +87,8 @@ void KNewFileDlg::init(const QString& title)
   connect(kabcBtn, SIGNAL(clicked()), this, SLOT(loadFromKABC()));
 }
 
-KNewFileDlg::~KNewFileDlg(){
+KNewFileDlg::~KNewFileDlg()
+{
 }
 
 void KNewFileDlg::okClicked()
@@ -106,27 +107,27 @@ void KNewFileDlg::okClicked()
 void KNewFileDlg::loadFromKABC(void)
 {
   KABC::StdAddressBook *ab = static_cast<KABC::StdAddressBook*>
-    ( KABC::StdAddressBook::self() );
-  if ( !ab )
+                             (KABC::StdAddressBook::self());
+  if (!ab)
     return;
 
   KABC::Addressee addr = ab->whoAmI();
-  if ( addr.isEmpty() ) {
+  if (addr.isEmpty()) {
     KMessageBox::sorry(this, i18n("Unable to load data, because no contact has been associated with the owner of the standard address book."), i18n("Address book import"));
     return;
   }
 
-  userNameEdit->setText( addr.formattedName() );
-  emailEdit->setText( addr.preferredEmail() );
+  userNameEdit->setText(addr.formattedName());
+  emailEdit->setText(addr.preferredEmail());
 
-  KABC::PhoneNumber phone = addr.phoneNumber( KABC::PhoneNumber::Home );
-  telephoneEdit->setText( phone.number() );
+  KABC::PhoneNumber phone = addr.phoneNumber(KABC::PhoneNumber::Home);
+  telephoneEdit->setText(phone.number());
 
-  KABC::Address a = addr.address( KABC::Address::Home );
-  countyEdit->setText( a.country() + " / " + a.region() );
-  postcodeEdit->setText( a.postalCode() );
-  townEdit->setText( a.locality() );
-  streetEdit->setText( a.street() );
+  KABC::Address a = addr.address(KABC::Address::Home);
+  countyEdit->setText(a.country() + " / " + a.region());
+  postcodeEdit->setText(a.postalCode());
+  townEdit->setText(a.locality());
+  streetEdit->setText(a.street());
 }
 
 #include "knewfiledlg.moc"

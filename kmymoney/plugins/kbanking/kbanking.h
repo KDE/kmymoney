@@ -26,38 +26,39 @@
 #include <qbanking/qbanking.h>
 
 #ifndef AQB_MAKE_VERSION
-  #define AQB_MAKE_VERSION(a,b,c,d) (((a)<<24) | ((b)<<16) | (c<<8) | (d))
+#define AQB_MAKE_VERSION(a,b,c,d) (((a)<<24) | ((b)<<16) | (c<<8) | (d))
 #endif
 
 #ifndef AQBANKING_VERSION
-  #define AQBANKING_VERSION AQB_MAKE_VERSION(AQBANKING_VERSION_MAJOR,AQBANKING_VERSION_MINOR,AQBANKING_VERSION_PATCHLEVEL,AQBANKING_VERSION_BUILD)
+#define AQBANKING_VERSION AQB_MAKE_VERSION(AQBANKING_VERSION_MAJOR,AQBANKING_VERSION_MINOR,AQBANKING_VERSION_PATCHLEVEL,AQBANKING_VERSION_BUILD)
 #endif
 
 #ifndef AQB_IS_VERSION
-  #define AQB_IS_VERSION(a,b,c,d) (AQBANKING_VERSION >= AQB_MAKE_VERSION(a,b,c,d))
+#define AQB_IS_VERSION(a,b,c,d) (AQBANKING_VERSION >= AQB_MAKE_VERSION(a,b,c,d))
 #endif
 
 #ifndef KBANKING_GUIID
-  #if AQB_IS_VERSION(3,9,0,0)
-    #define onlineInit() onlineInit(0)
-    #define onlineFini() onlineFini(0)
-    #define AB_BANKING_GETACCOUNTBYALIAS(a, b) AB_Banking_GetAccountByAlias(a, b, 0)
-  #else
-    #define AB_BANKING_GETACCOUNTBYALIAS(a, b) AB_Banking_GetAccountByAlias(a, b)
-  #endif
+#if AQB_IS_VERSION(3,9,0,0)
+#define onlineInit() onlineInit(0)
+#define onlineFini() onlineFini(0)
+#define AB_BANKING_GETACCOUNTBYALIAS(a, b) AB_Banking_GetAccountByAlias(a, b, 0)
+#else
+#define AB_BANKING_GETACCOUNTBYALIAS(a, b) AB_Banking_GetAccountByAlias(a, b)
+#endif
 #endif
 
 
 #include <list>
 
 
-class KBanking: public QBanking {
+class KBanking: public QBanking
+{
 private:
   AB_JOB_LIST2 *_jobQueue;
 
 public:
   explicit KBanking(const char *appname,
-                    const char *cfgDir=0);
+                    const char *cfgDir = 0);
   virtual ~KBanking();
 
   int init();

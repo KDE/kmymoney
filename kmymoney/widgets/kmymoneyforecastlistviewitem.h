@@ -48,7 +48,7 @@ public:
 
   void setNegative(bool isNegative);
 
-  void setText( int column, const QString &text, const bool &negative = false );
+  void setText(int column, const QString &text, const bool &negative = false);
 
   /**
     * use my own paint method

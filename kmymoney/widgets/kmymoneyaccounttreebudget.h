@@ -92,17 +92,17 @@ public:
   void setBudget(const MyMoneyBudget& budget);
 
 protected:
-   /**
-    * Returns the current balance of this account.
-    *
-    * This is a pure virtual function, to allow subclasses to calculate
-    * the balance in different ways.
-    *
-    * Parent items in the tree will only be recomputed if the balance() for
-    * a son changes.
-    * @param account Account to get the balance for
-    * @return Balance of this account
-    */
+  /**
+   * Returns the current balance of this account.
+   *
+   * This is a pure virtual function, to allow subclasses to calculate
+   * the balance in different ways.
+   *
+   * Parent items in the tree will only be recomputed if the balance() for
+   * a son changes.
+   * @param account Account to get the balance for
+   * @return Balance of this account
+   */
   MyMoneyMoney balance() const;
 
 private:

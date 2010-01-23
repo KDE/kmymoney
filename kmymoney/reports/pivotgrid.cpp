@@ -55,16 +55,17 @@
 
 #include <kmymoneyutils.h>
 
-namespace reports {
+namespace reports
+{
 
-  const unsigned PivotOuterGroup::m_kDefaultSortOrder = 100;
+const unsigned PivotOuterGroup::m_kDefaultSortOrder = 100;
 
-  PivotCell::PivotCell(const MyMoneyMoney& value) :
+PivotCell::PivotCell(const MyMoneyMoney& value) :
     MyMoneyMoney(value),
-    m_stockSplit(MyMoneyMoney(1,1))
-  {
-    m_cellUsed |= !value.isZero();
-  }
+    m_stockSplit(MyMoneyMoney(1, 1))
+{
+  m_cellUsed |= !value.isZero();
+}
 
 PivotCell PivotCell::operator += (const PivotCell& right)
 {
@@ -80,7 +81,7 @@ PivotCell PivotCell::operator += (const PivotCell& right)
 PivotCell PivotCell::operator += (const MyMoneyMoney& value)
 {
   m_cellUsed |= !value.isZero();
-  if(m_stockSplit != MyMoneyMoney(1,1))
+  if (m_stockSplit != MyMoneyMoney(1, 1))
     m_postSplit += value;
   else
     MyMoneyMoney::operator += (value);
@@ -110,8 +111,8 @@ MyMoneyMoney PivotCell::calculateRunningSum(const MyMoneyMoney& runningSum)
 {
   MyMoneyMoney::operator += (runningSum);
   MyMoneyMoney::operator = ((*this * m_stockSplit) + m_postSplit);
-  m_postSplit = MyMoneyMoney(0,1);
-  m_stockSplit = MyMoneyMoney(1,1);
+  m_postSplit = MyMoneyMoney(0, 1);
+  m_stockSplit = MyMoneyMoney(1, 1);
   return *this;
 }
 
@@ -123,7 +124,7 @@ MyMoneyMoney PivotCell::cellBalance(const MyMoneyMoney& _balance)
   return balance;
 }
 
-PivotGridRowSet::PivotGridRowSet( unsigned _numcolumns )
+PivotGridRowSet::PivotGridRowSet(unsigned _numcolumns)
 {
   insert(eActual, PivotGridRow(_numcolumns));
   insert(eBudget, PivotGridRow(_numcolumns));
@@ -138,15 +139,12 @@ PivotGridRowSet PivotGrid::rowSet(QString id)
 
   //go through the data and get the row that matches the id
   PivotGrid::iterator it_outergroup = begin();
-  while ( it_outergroup != end() )
-  {
+  while (it_outergroup != end()) {
     PivotOuterGroup::iterator it_innergroup = (*it_outergroup).begin();
-    while ( it_innergroup != (*it_outergroup).end() )
-    {
+    while (it_innergroup != (*it_outergroup).end()) {
       PivotInnerGroup::iterator it_row = (*it_innergroup).begin();
-      while ( it_row != (*it_innergroup).end() )
-      {
-        if(it_row.key().id() == id)
+      while (it_row != (*it_innergroup).end()) {
+        if (it_row.key().id() == id)
           return it_row.value();
 
         ++it_row;

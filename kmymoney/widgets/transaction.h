@@ -42,11 +42,13 @@ class Q3Table;
 class TransactionEditor;
 class TransactionEditorContainer;
 
-namespace KMyMoneyTransactionForm {
-  class TransactionForm;
+namespace KMyMoneyTransactionForm
+{
+class TransactionForm;
 } // namespace
 
-namespace KMyMoneyRegister {
+namespace KMyMoneyRegister
+{
 
 // keep the following list in sync with code in the constructor
 // of KMyMoneyRegister::Register in register.cpp
@@ -73,39 +75,85 @@ public:
   Transaction(Register* parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
   virtual ~Transaction() {}
 
-  virtual const char* className(void) { return "Transaction"; }
+  virtual const char* className(void) {
+    return "Transaction";
+  }
 
-  bool isSelectable(void) const { return true; }
-  bool isSelected(void) const { return m_selected; }
+  bool isSelectable(void) const {
+    return true;
+  }
+  bool isSelected(void) const {
+    return m_selected;
+  }
   void setSelected(bool selected);
 
-  bool canHaveFocus(void) const { return true; }
-  bool hasFocus(void) const { return m_focus; }
-  bool hasEditorOpen(void) const { return m_inEdit; }
+  bool canHaveFocus(void) const {
+    return true;
+  }
+  bool hasFocus(void) const {
+    return m_focus;
+  }
+  bool hasEditorOpen(void) const {
+    return m_inEdit;
+  }
 
-  virtual bool isScheduled(void) const { return false; }
+  virtual bool isScheduled(void) const {
+    return false;
+  }
 
   void setFocus(bool focus, bool updateLens = true);
 
-  bool isErronous(void) const { return m_erronous; }
+  bool isErronous(void) const {
+    return m_erronous;
+  }
 
-  virtual const QDate sortPostDate(void) const { return m_transaction.postDate(); }
-  virtual int sortSamePostDate(void) const { return 2; }
-  virtual const QDate sortEntryDate(void) const { return m_transaction.entryDate(); }
-  virtual const QString sortPayee(void) const { return m_payee; }
-  virtual const MyMoneyMoney sortValue(void) const { return m_split.shares(); }
-  virtual const QString sortNumber(void) const { return m_split.number(); }
-  virtual const QString sortEntryOrder(void) const { return m_uniqueId; }
-  virtual CashFlowDirection sortType(void) const { return m_split.shares().isNegative() ? Payment : Deposit; }
-  virtual const QString sortCategory(void) const { return m_category; }
-  virtual MyMoneySplit::reconcileFlagE sortReconcileState(void) const { return m_split.reconcileFlag(); }
+  virtual const QDate sortPostDate(void) const {
+    return m_transaction.postDate();
+  }
+  virtual int sortSamePostDate(void) const {
+    return 2;
+  }
+  virtual const QDate sortEntryDate(void) const {
+    return m_transaction.entryDate();
+  }
+  virtual const QString sortPayee(void) const {
+    return m_payee;
+  }
+  virtual const MyMoneyMoney sortValue(void) const {
+    return m_split.shares();
+  }
+  virtual const QString sortNumber(void) const {
+    return m_split.number();
+  }
+  virtual const QString sortEntryOrder(void) const {
+    return m_uniqueId;
+  }
+  virtual CashFlowDirection sortType(void) const {
+    return m_split.shares().isNegative() ? Payment : Deposit;
+  }
+  virtual const QString sortCategory(void) const {
+    return m_category;
+  }
+  virtual MyMoneySplit::reconcileFlagE sortReconcileState(void) const {
+    return m_split.reconcileFlag();
+  }
 
-  virtual const QString& id(void) const { return m_uniqueId; }
-  const MyMoneyTransaction& transaction(void) const { return m_transaction; }
-  const MyMoneySplit& split(void) const { return m_split; }
+  virtual const QString& id(void) const {
+    return m_uniqueId;
+  }
+  const MyMoneyTransaction& transaction(void) const {
+    return m_transaction;
+  }
+  const MyMoneySplit& split(void) const {
+    return m_split;
+  }
 
-  void setBalance(const MyMoneyMoney& balance) { m_balance = balance; }
-  const MyMoneyMoney& balance(void) const { return m_balance; }
+  void setBalance(const MyMoneyMoney& balance) {
+    m_balance = balance;
+  }
+  const MyMoneyMoney& balance(void) const {
+    return m_balance;
+  }
 
   virtual int rowHeightHint(void) const;
 
@@ -161,9 +209,13 @@ public:
 
   virtual void paintFormCell(QPainter* /* painter */, int /* row */, int /* col */, const QRect& /* r */, bool /* selected */, const QColorGroup& /* cg */);
 
-  virtual bool formCellText(QString& /* txt */, int& /* align */, int /* row */, int /* col */, QPainter* /* painter */) { return false; }
+  virtual bool formCellText(QString& /* txt */, int& /* align */, int /* row */, int /* col */, QPainter* /* painter */) {
+    return false;
+  }
   virtual void registerCellText(QString& /* txt */, int& /* align */, int /* row */, int /* col */, QPainter* /* painter */) {}
-  virtual int registerColWidth(int /* col */, const QFontMetrics& /* cellFontMetrics */) { return 0; }
+  virtual int registerColWidth(int /* col */, const QFontMetrics& /* cellFontMetrics */) {
+    return 0;
+  }
 
   /**
     * Helper method for the above method.
@@ -235,15 +287,21 @@ public:
     * Return information if @a row should be shown (@a true )
     * or hidden (@a false ) in the form. Default is true.
     */
-  virtual bool showRowInForm(int row) const { Q_UNUSED(row) return true; }
+  virtual bool showRowInForm(int row) const {
+    Q_UNUSED(row) return true;
+  }
 
   /**
     * Control visibility of @a row in the transaction form.
     * Only row 0 has an effect, others return @a true.
     */
-  virtual void setShowRowInForm(int row, bool show) { Q_UNUSED(row); Q_UNUSED(show) }
+  virtual void setShowRowInForm(int row, bool show) {
+    Q_UNUSED(row); Q_UNUSED(show)
+  }
 
-  virtual void setReducedIntensity(bool reduced) { m_reducedIntensity = reduced; }
+  virtual void setReducedIntensity(bool reduced) {
+    m_reducedIntensity = reduced;
+  }
 
 protected:
   virtual void markAsErronous(QPainter* p, int row, int col, const QRect& r);
@@ -297,7 +355,9 @@ public:
   StdTransaction(Register* parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
   virtual ~StdTransaction() {}
 
-  virtual const char* className(void) { return "StdTransaction"; }
+  virtual const char* className(void) {
+    return "StdTransaction";
+  }
 
   bool formCellText(QString& txt, int& align, int row, int col, QPainter* painter = 0);
   void registerCellText(QString& txt, int& align, int row, int col, QPainter* painter = 0);
@@ -306,7 +366,9 @@ public:
   void setupForm(KMyMoneyTransactionForm::TransactionForm* form);
   void loadTab(KMyMoneyTransactionForm::TransactionForm* form);
 
-  int numColsForm(void) const { return 4; }
+  int numColsForm(void) const {
+    return 4;
+  }
 
   void arrangeWidgetsInForm(QMap<QString, QWidget*>& editWidgets);
   void arrangeWidgetsInRegister(QMap<QString, QWidget*>& editWidgets);
@@ -319,7 +381,9 @@ public:
   /**
     * Provided for internal reasons. No API change. See RegisterItem::numRowsRegister()
     */
-  int numRowsRegister(void) const { return RegisterItem::numRowsRegister(); }
+  int numRowsRegister(void) const {
+    return RegisterItem::numRowsRegister();
+  }
 
   TransactionEditor* createEditor(TransactionEditorContainer* regForm, const KMyMoneyRegister::SelectedTransactions& list, const QDate& lastPostDate);
 
@@ -348,8 +412,12 @@ public:
   InvestTransaction(Register* parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
   virtual ~InvestTransaction() {}
 
-  virtual const QString sortSecurity(void) const { return m_security.name(); }
-  virtual const char* className(void) { return "InvestTransaction"; }
+  virtual const QString sortSecurity(void) const {
+    return m_security.name();
+  }
+  virtual const char* className(void) {
+    return "InvestTransaction";
+  }
 
   // virtual void paintRegisterCell(QPainter* painter, int row, int col, const QRect& r, bool selected, const QColorGroup& cg);
 
@@ -364,20 +432,26 @@ public:
     */
   void loadTab(KMyMoneyTransactionForm::TransactionForm* /* form */) {}
 
-  int numColsForm(void) const { return 4; }
+  int numColsForm(void) const {
+    return 4;
+  }
 
   void arrangeWidgetsInForm(QMap<QString, QWidget*>& editWidgets);
   void arrangeWidgetsInRegister(QMap<QString, QWidget*>& editWidgets);
   void tabOrderInForm(QWidgetList& tabOrderWidgets) const;
   void tabOrderInRegister(QWidgetList& tabOrderWidgets) const;
-  KMyMoneyRegister::Action actionType(void) const { return KMyMoneyRegister::ActionNone; }
+  KMyMoneyRegister::Action actionType(void) const {
+    return KMyMoneyRegister::ActionNone;
+  }
 
   int numRowsRegister(bool expanded) const;
 
   /**
     * Provided for internal reasons. No API change. See RegisterItem::numRowsRegister()
     */
-  int numRowsRegister(void) const { return RegisterItem::numRowsRegister(); }
+  int numRowsRegister(void) const {
+    return RegisterItem::numRowsRegister();
+  }
 
   TransactionEditor* createEditor(TransactionEditorContainer* regForm, const KMyMoneyRegister::SelectedTransactions& list, const QDate& lastPostDate);
 

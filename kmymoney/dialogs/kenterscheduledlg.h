@@ -41,8 +41,8 @@ class TransactionEditor;
 class KEnterScheduleDlgDecl : public QDialog, public Ui::KEnterScheduleDlgDecl
 {
 public:
-  KEnterScheduleDlgDecl( QWidget *parent ) : QDialog( parent ) {
-    setupUi( this );
+  KEnterScheduleDlgDecl(QWidget *parent) : QDialog(parent) {
+    setupUi(this);
   }
 };
 class KEnterScheduleDlg : public KEnterScheduleDlgDecl

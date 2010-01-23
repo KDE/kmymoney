@@ -35,21 +35,24 @@
 class KNewFileDlgDecl : public QDialog, public Ui::KNewFileDlgDecl
 {
 public:
-  KNewFileDlgDecl( QWidget *parent ) : QDialog( parent ) {
-    setupUi( this );
+  KNewFileDlgDecl(QWidget *parent) : QDialog(parent) {
+    setupUi(this);
   }
 };
 
-class KNewFileDlg : public KNewFileDlgDecl  {
-   Q_OBJECT
+class KNewFileDlg : public KNewFileDlgDecl
+{
+  Q_OBJECT
 public:
-  explicit KNewFileDlg(QWidget *parent=0, const QString& title=QString());
+  explicit KNewFileDlg(QWidget *parent = 0, const QString& title = QString());
   explicit KNewFileDlg(QString userName, QString userStreet,
                        QString userTown, QString userCounty, QString userPostcode, QString userTelephone,
-                       QString userEmail, QWidget *parent=0, const QString& title=QString());
+                       QString userEmail, QWidget *parent = 0, const QString& title = QString());
   ~KNewFileDlg();
 
-  KPushButton* cancelButton(void) { return cancelBtn; };
+  KPushButton* cancelButton(void) {
+    return cancelBtn;
+  };
 
 public:
   QString userNameText;

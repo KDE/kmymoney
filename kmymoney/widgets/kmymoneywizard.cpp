@@ -49,7 +49,7 @@
 #include "ktoolinvocation.h"
 
 KMyMoneyWizardPagePrivate::KMyMoneyWizardPagePrivate(QObject* parent) :
-  QObject(parent)
+    QObject(parent)
 {
 }
 
@@ -60,9 +60,9 @@ void KMyMoneyWizardPagePrivate::emitCompleteStateChanged(void)
 
 
 KMyMoneyWizardPage::KMyMoneyWizardPage(unsigned int step, QWidget* widget) :
-  m_step(step),
-  m_widget(widget),
-  d(new KMyMoneyWizardPagePrivate(widget))
+    m_step(step),
+    m_widget(widget),
+    d(new KMyMoneyWizardPagePrivate(widget))
 {
   m_mandatoryGroup = new kMandatoryFieldGroup(widget);
   QObject::connect(m_mandatoryGroup, SIGNAL(stateChanged()), object(), SIGNAL(completeStateChanged()));
@@ -103,10 +103,10 @@ bool KMyMoneyWizardPage::isLastPage(void) const
 
 bool KMyMoneyWizardPage::isComplete(void) const
 {
-  if(!isLastPage())
-    wizard()->m_nextButton->setToolTip( i18n("Continue with next page"));
+  if (!isLastPage())
+    wizard()->m_nextButton->setToolTip(i18n("Continue with next page"));
   else
-    wizard()->m_finishButton->setToolTip( i18n("Finish wizard"));
+    wizard()->m_finishButton->setToolTip(i18n("Finish wizard"));
   return m_mandatoryGroup->isEnabled();
 }
 
@@ -116,8 +116,8 @@ QString KMyMoneyWizardPage::helpContext(void) const
 }
 
 KMyMoneyWizard::KMyMoneyWizard(QWidget *parent, bool modal, Qt::WFlags f) :
-  QDialog(parent, f),
-  m_step(0)
+    QDialog(parent, f),
+    m_step(0)
 {
   setModal(modal);
 
@@ -131,13 +131,12 @@ KMyMoneyWizard::KMyMoneyWizard(QWidget *parent, bool modal, Qt::WFlags f) :
   m_finishButton = new KPushButton(i18nc("Finish the wizard", "&Finish"), this);
   m_helpButton = new KPushButton(i18n("&Help"), this);
 
-  if ( KGlobalSettings::showIconsOnPushButtons() )
-  {
-    m_backButton->setIcon( KStandardGuiItem::back( KStandardGuiItem::UseRTL ).icon() );
-    m_nextButton->setIcon( KStandardGuiItem::forward( KStandardGuiItem::UseRTL ).icon() );
-    m_finishButton->setIcon( KIcon( "dialog-ok-apply" ) );
-    m_cancelButton->setIcon( KIcon( "dialog-cancel" ) );
-    m_helpButton->setIcon( KIcon( "help-contents" ) );
+  if (KGlobalSettings::showIconsOnPushButtons()) {
+    m_backButton->setIcon(KStandardGuiItem::back(KStandardGuiItem::UseRTL).icon());
+    m_nextButton->setIcon(KStandardGuiItem::forward(KStandardGuiItem::UseRTL).icon());
+    m_finishButton->setIcon(KIcon("dialog-ok-apply"));
+    m_cancelButton->setIcon(KIcon("dialog-cancel"));
+    m_helpButton->setIcon(KIcon("help-contents"));
   }
 
   // create button layout
@@ -151,7 +150,7 @@ KMyMoneyWizard::KMyMoneyWizard(QWidget *parent, bool modal, Qt::WFlags f) :
 
   // create wizard layout
   m_wizardLayout = new QVBoxLayout(this);
-  m_wizardLayout->setContentsMargins(6,6,6,6);
+  m_wizardLayout->setContentsMargins(6, 6, 6, 6);
   m_wizardLayout->setSpacing(0);
   m_wizardLayout->setObjectName("wizardLayout");
   m_titleLabel = new KMyMoneyTitleLabel(this);
@@ -159,7 +158,7 @@ KMyMoneyWizard::KMyMoneyWizard(QWidget *parent, bool modal, Qt::WFlags f) :
   m_wizardLayout->addWidget(m_titleLabel);
 
   QHBoxLayout* hboxLayout = new QHBoxLayout;
-  hboxLayout->setContentsMargins(0,0,0,0);
+  hboxLayout->setContentsMargins(0, 0, 0, 0);
   hboxLayout->setSpacing(6);
   hboxLayout->setObjectName("hboxLayout");
 
@@ -169,7 +168,7 @@ KMyMoneyWizard::KMyMoneyWizard(QWidget *parent, bool modal, Qt::WFlags f) :
   palette.setColor(m_stepFrame->backgroundRole(), KColorScheme::NormalText);
   m_stepFrame->setPalette(palette);
   m_stepLayout = new QVBoxLayout(m_stepFrame);
-  m_stepLayout->setContentsMargins(11,11,11,11);
+  m_stepLayout->setContentsMargins(11, 11, 11, 11);
   m_stepLayout->setSpacing(6);
   m_stepLayout->setObjectName("stepLayout");
   m_stepLayout->addWidget(new QLabel("", m_stepFrame));
@@ -183,23 +182,23 @@ KMyMoneyWizard::KMyMoneyWizard(QWidget *parent, bool modal, Qt::WFlags f) :
   // information when the user selected a different color set using the KConfigCenter
   m_stepPalette = m_stepLabel->palette();
   QColorGroup::ColorRole role = QColorGroup::Foreground;
-  QColor color= KColorScheme::NormalText; 
-  m_stepPalette.setColor( QPalette::Active, role, color );
-  m_stepPalette.setColor( QPalette::Inactive, role, color );
-  m_stepPalette.setColor( QPalette::Disabled, role, color );
+  QColor color = KColorScheme::NormalText;
+  m_stepPalette.setColor(QPalette::Active, role, color);
+  m_stepPalette.setColor(QPalette::Inactive, role, color);
+  m_stepPalette.setColor(QPalette::Disabled, role, color);
   m_stepLabel->setPalette(m_stepPalette);
 
   // create page layout
   m_pageLayout = new QVBoxLayout;
-  m_pageLayout->setContentsMargins(0,0,0,0);
+  m_pageLayout->setContentsMargins(0, 0, 0, 0);
   m_pageLayout->setSpacing(6);
   m_pageLayout->setObjectName("pageLayout");
 
   // the page will be inserted later dynamically above this line
-  Q3Frame* line = new Q3Frame( this, "line" );
-  line->setFrameShadow( Q3Frame::Sunken );
-  line->setFrameShape( Q3Frame::HLine );
-  m_pageLayout->addWidget( line );
+  Q3Frame* line = new Q3Frame(this, "line");
+  line->setFrameShadow(Q3Frame::Sunken);
+  line->setFrameShape(Q3Frame::HLine);
+  m_pageLayout->addWidget(line);
   m_pageLayout->addLayout(m_buttonLayout);
 
   // now glue everything together
@@ -232,7 +231,7 @@ void KMyMoneyWizard::addStep(const QString& text)
   step->setAlignment(Qt::AlignHCenter);
   step->setFrameStyle(QFrame::Box | QFrame::Sunken);
   step->setMargin(2);
-  step->setPalette( m_stepPalette );
+  step->setPalette(m_stepPalette);
 
   m_steps.append(step);
   m_stepLayout->insertWidget(m_steps.count(), step);
@@ -240,15 +239,15 @@ void KMyMoneyWizard::addStep(const QString& text)
   QFont font(step->font());
   font.setBold(true);
   QFontMetrics fm(font);
-  int w = fm.width(text)+30;
-  if(m_stepFrame->minimumWidth() < w) {
+  int w = fm.width(text) + 30;
+  if (m_stepFrame->minimumWidth() < w) {
     m_stepFrame->setMinimumWidth(w);
   }
 }
 
 void KMyMoneyWizard::setStepHidden(int step, bool hidden)
 {
-  if((step < 1) || (step > m_steps.count()))
+  if ((step < 1) || (step > m_steps.count()))
     return;
 
   m_steps[--step]->setHidden(hidden);
@@ -257,16 +256,16 @@ void KMyMoneyWizard::setStepHidden(int step, bool hidden)
 
 void KMyMoneyWizard::selectStep(int step)
 {
-  if((step < 1) || (step > m_steps.count()))
+  if ((step < 1) || (step > m_steps.count()))
     return;
 
   m_step = step;
   QList<QLabel*>::iterator it_l;
   QFont f = m_steps[0]->font();
-  for(it_l = m_steps.begin(); it_l != m_steps.end(); ++it_l) {
+  for (it_l = m_steps.begin(); it_l != m_steps.end(); ++it_l) {
     f.setBold(false);
     (*it_l)->setFrameStyle(QFrame::NoFrame);
-    if(--step == 0) {
+    if (--step == 0) {
       f.setBold(true);
       (*it_l)->setFrameStyle(QFrame::Box | QFrame::Sunken);
     }
@@ -286,10 +285,10 @@ void KMyMoneyWizard::updateStepCount(void)
   int stepCount = 0;
   int hiddenAdjust = 0;
   int step = 0;
-  for(it_l = m_steps.begin(); it_l != m_steps.end(); ++it_l) {
-    if(!(*it_l)->isHidden())
+  for (it_l = m_steps.begin(); it_l != m_steps.end(); ++it_l) {
+    if (!(*it_l)->isHidden())
       ++stepCount;
-    else if(step < m_step)
+    else if (step < m_step)
       hiddenAdjust++;
     ++step;
   }
@@ -306,18 +305,18 @@ void KMyMoneyWizard::setFirstPage(KMyMoneyWizardPage* page)
 
 void KMyMoneyWizard::switchPage(KMyMoneyWizardPage* oldPage)
 {
-  if(oldPage) {
+  if (oldPage) {
     oldPage->widget()->hide();
     m_pageLayout->removeWidget(oldPage->widget());
     disconnect(oldPage->object(), SIGNAL(completeStateChanged()), this, SLOT(completeStateChanged()));
   }
   KMyMoneyWizardPage* newPage = m_history.back();
-  if(newPage) {
+  if (newPage) {
     m_pageLayout->insertWidget(0, newPage->widget());
     connect(newPage->object(), SIGNAL(completeStateChanged()), this, SLOT(completeStateChanged()));
     newPage->widget()->show();
     selectStep(newPage->step());
-    if(newPage->isLastPage()) {
+    if (newPage->isLastPage()) {
       m_nextButton->setDefault(false);
       m_finishButton->setDefault(true);
     } else {
@@ -325,7 +324,7 @@ void KMyMoneyWizard::switchPage(KMyMoneyWizardPage* oldPage)
       m_nextButton->setDefault(true);
     }
     QWidget* w = newPage->initialFocusWidget();
-    if(w)
+    if (w)
       w->setFocus();
   }
   completeStateChanged();
@@ -347,7 +346,7 @@ void KMyMoneyWizard::nextButtonClicked(void)
   // check again for copmpleness
   m_nextButton->setFocus();
   KMyMoneyWizardPage* oldPage = m_history.back();
-  if(oldPage->isComplete()) {
+  if (oldPage->isComplete()) {
     KMyMoneyWizardPage* newPage = oldPage->nextPage();
     m_history.append(newPage);
     newPage->enterPage();
@@ -360,7 +359,7 @@ void KMyMoneyWizard::helpButtonClicked(void)
 {
   KMyMoneyWizardPage* currentPage = m_history.back();
   QString ctx = currentPage->helpContext();
-  if(ctx.isEmpty())
+  if (ctx.isEmpty())
     ctx = m_helpContext;
   KToolInvocation::invokeHelp(ctx);
 }
@@ -390,7 +389,7 @@ void KMyMoneyWizard::accept(void)
   // check again for completeness.
   m_finishButton->setFocus();
   KMyMoneyWizardPage* page = m_history.back();
-  if(page->isComplete())
+  if (page->isComplete())
     QDialog::accept();
 }
 

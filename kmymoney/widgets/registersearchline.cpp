@@ -42,10 +42,10 @@ class RegisterSearchLine::RegisterSearchLinePrivate
 {
 public:
   RegisterSearchLinePrivate() :
-    reg(0),
-    combo(0),
-    queuedSearches(0),
-    status(0) {}
+      reg(0),
+      combo(0),
+      queuedSearches(0),
+      status(0) {}
 
   Register* reg;
   KComboBox* combo;
@@ -55,16 +55,16 @@ public:
 };
 
 RegisterSearchLine::RegisterSearchLine(QWidget* parent, Register* reg) :
-  KLineEdit(parent),
-  d(new RegisterSearchLinePrivate)
+    KLineEdit(parent),
+    d(new RegisterSearchLinePrivate)
 {
   setClearButtonShown(true);
   init(reg);
 }
 
 RegisterSearchLine::RegisterSearchLine(QWidget* parent) :
-  KLineEdit(parent),
-  d(new RegisterSearchLinePrivate)
+    KLineEdit(parent),
+    d(new RegisterSearchLinePrivate)
 {
   setClearButtonShown(true);
   init(0);
@@ -92,11 +92,11 @@ void RegisterSearchLine::init(Register *reg)
 
   label->setBuddy(d->combo);
 
-  if(reg) {
+  if (reg) {
     connect(reg, SIGNAL(destroyed()), this, SLOT(registerDestroyed()));
     connect(reg, SIGNAL(itemAdded(RegisterItem*)), this, SLOT(itemAdded(RegisterItem*)));
   } else {
-     setEnabled(false);
+    setEnabled(false);
   }
 }
 
@@ -107,14 +107,14 @@ RegisterSearchLine::~RegisterSearchLine()
 
 void RegisterSearchLine::setRegister(Register* reg)
 {
-  if(d->reg) {
+  if (d->reg) {
     disconnect(d->reg, SIGNAL(destroyed()), this, SLOT(registerDestroyed()));
     disconnect(d->reg, SIGNAL(itemAdded(RegisterItem*)), this, SLOT(itemAdded(RegisterItem*)));
   }
 
   d->reg = reg;
 
-  if(reg) {
+  if (reg) {
     connect(reg, SIGNAL(destroyed()), this, SLOT(registerDestroyed()));
     connect(reg, SIGNAL(itemAdded(RegisterItem*)), this, SLOT(itemAdded(RegisterItem*)));
   }
@@ -138,13 +138,13 @@ void RegisterSearchLine::queueSearch(const QString& search)
 void RegisterSearchLine::activateSearch(void)
 {
   --(d->queuedSearches);
-  if(d->queuedSearches == 0)
+  if (d->queuedSearches == 0)
     updateSearch(d->search);
 }
 
 void RegisterSearchLine::updateSearch(const QString& s)
 {
-  if(!d->reg)
+  if (!d->reg)
     return;
 
   d->search = s.isNull() ? text() : s;
@@ -158,7 +158,7 @@ void RegisterSearchLine::updateSearch(const QString& s)
   bool scrollBarVisible = d->reg->verticalScrollBar()->isVisible();
 
   RegisterItem* p = d->reg->firstItem();
-  for(; p; p = p->nextItem()) {
+  for (; p; p = p->nextItem()) {
     p->setVisible(itemMatches(p, d->search));
   }
   d->reg->suppressAdjacentMarkers();
@@ -167,7 +167,7 @@ void RegisterSearchLine::updateSearch(const QString& s)
 
   // if focus item is still visible, then make sure we have
   // it on screen
-  if(focusItem && focusItem->isVisible()) {
+  if (focusItem && focusItem->isVisible()) {
     d->reg->updateContents();
     d->reg->ensureItemVisible(focusItem);
   } else
@@ -176,7 +176,7 @@ void RegisterSearchLine::updateSearch(const QString& s)
   d->reg->updateScrollBars();
 
   // if the scrollbar's visibility changed, we need to resize the contents
-  if(scrollBarVisible != d->reg->verticalScrollBar()->isVisible()) {
+  if (scrollBarVisible != d->reg->verticalScrollBar()->isVisible()) {
     d->reg->resize(DetailColumn);
   }
 }
@@ -184,38 +184,38 @@ void RegisterSearchLine::updateSearch(const QString& s)
 bool RegisterSearchLine::itemMatches(const RegisterItem* item, const QString& s) const
 {
   const Transaction* t = dynamic_cast<const Transaction*>(item);
-  if(t && !t->transaction().id().isEmpty()) {
+  if (t && !t->transaction().id().isEmpty()) {
     // Keep the case list of the following switch statement
     // in sync with the logic to fill the combo box in
     // RegisterSearchLine::init()
-    switch(d->status) {
-      default:
-        break;
-      case 1:    // Imported
-        if(!t->transaction().isImported())
-          return false;
-        break;
-      case 2:    // Matched
-        if(!t->split().isMatched())
-          return false;
-        break;
-      case 3:    // Erroneous
-        if(t->transaction().splitSum().isZero())
-          return false;
-        break;
-      case 4:    // Not marked
-        if(t->split().reconcileFlag() != MyMoneySplit::NotReconciled)
-          return false;
-        break;
-      case 5:    // Not reconciled
-        if(t->split().reconcileFlag() != MyMoneySplit::NotReconciled
-        && t->split().reconcileFlag() != MyMoneySplit::Cleared)
-          return false;
-        break;
-      case 6:    // Cleared
-        if(t->split().reconcileFlag() != MyMoneySplit::Cleared)
-          return false;
-        break;
+    switch (d->status) {
+    default:
+      break;
+    case 1:    // Imported
+      if (!t->transaction().isImported())
+        return false;
+      break;
+    case 2:    // Matched
+      if (!t->split().isMatched())
+        return false;
+      break;
+    case 3:    // Erroneous
+      if (t->transaction().splitSum().isZero())
+        return false;
+      break;
+    case 4:    // Not marked
+      if (t->split().reconcileFlag() != MyMoneySplit::NotReconciled)
+        return false;
+      break;
+    case 5:    // Not reconciled
+      if (t->split().reconcileFlag() != MyMoneySplit::NotReconciled
+          && t->split().reconcileFlag() != MyMoneySplit::Cleared)
+        return false;
+      break;
+    case 6:    // Cleared
+      if (t->split().reconcileFlag() != MyMoneySplit::Cleared)
+        return false;
+      break;
     }
   }
 
@@ -243,10 +243,10 @@ void RegisterSearchLine::registerDestroyed(void)
 
 class RegisterSearchLineWidget::RegisterSearchLineWidgetPrivate
 {
-  public:
+public:
   RegisterSearchLineWidgetPrivate() :
-    reg(0),
-    searchLine(0) {}
+      reg(0),
+      searchLine(0) {}
 
   Register* reg;
   RegisterSearchLine* searchLine;
@@ -254,8 +254,8 @@ class RegisterSearchLineWidget::RegisterSearchLineWidgetPrivate
 
 
 RegisterSearchLineWidget::RegisterSearchLineWidget(Register* reg, QWidget* parent) :
-  KHBox(parent),
-  d(new RegisterSearchLineWidgetPrivate)
+    KHBox(parent),
+    d(new RegisterSearchLineWidgetPrivate)
 {
   d->reg = reg;
   setSpacing(5);
@@ -269,7 +269,7 @@ RegisterSearchLineWidget::~RegisterSearchLineWidget()
 
 RegisterSearchLine* RegisterSearchLineWidget::createSearchLine(Register* reg)
 {
-  if(!d->searchLine)
+  if (!d->searchLine)
     d->searchLine = new RegisterSearchLine(this, reg);
   return d->searchLine;
 }

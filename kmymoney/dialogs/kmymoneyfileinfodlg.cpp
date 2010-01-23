@@ -36,7 +36,7 @@
 #include <kmymoneyutils.h>
 
 KMyMoneyFileInfoDlg::KMyMoneyFileInfoDlg(QWidget *parent)
- : KMyMoneyFileInfoDlgDecl(parent)
+    : KMyMoneyFileInfoDlgDecl(parent)
 {
   // Now fill the fields with data
   IMyMoneyStorage* storage = MyMoneyFile::instance()->storage();
@@ -55,15 +55,15 @@ KMyMoneyFileInfoDlg::KMyMoneyFileInfoDlg(QWidget *parent)
   QMap<MyMoneyAccount::accountTypeE, int> accountMap;
   QMap<MyMoneyAccount::accountTypeE, int> accountMapClosed;
   QList<MyMoneyAccount>::const_iterator it_a;
-  for(it_a = a_list.constBegin(); it_a != a_list.constEnd(); ++it_a) {
+  for (it_a = a_list.constBegin(); it_a != a_list.constEnd(); ++it_a) {
     accountMap[(*it_a).accountType()] = accountMap[(*it_a).accountType()] + 1;
     accountMapClosed[(*it_a).accountType()] = accountMapClosed[(*it_a).accountType()] + 0;
-    if((*it_a).isClosed())
+    if ((*it_a).isClosed())
       accountMapClosed[(*it_a).accountType()] = accountMapClosed[(*it_a).accountType()] + 1;
   }
 
   QMap<MyMoneyAccount::accountTypeE, int>::const_iterator it_m;
-  for(it_m = accountMap.constBegin(); it_m != accountMap.constEnd(); ++it_m) {
+  for (it_m = accountMap.constBegin(); it_m != accountMap.constEnd(); ++it_m) {
     new K3ListViewItem(m_accountView, KMyMoneyUtils::accountTypeToString(it_m.key()), QString("%1").arg(*it_m), QString("%1").arg(accountMapClosed[it_m.key()]));
   }
 
@@ -77,7 +77,7 @@ KMyMoneyFileInfoDlg::KMyMoneyFileInfoDlg(QWidget *parent)
   MyMoneyPriceList list = storage->priceList();
   MyMoneyPriceList::const_iterator it_p;
   int pCount = 0;
-  for(it_p = list.constBegin(); it_p != list.constEnd(); ++it_p)
+  for (it_p = list.constBegin(); it_p != list.constEnd(); ++it_p)
     pCount += (*it_p).count();
   m_priceCount->setText(QString("%1").arg(pCount));
 }

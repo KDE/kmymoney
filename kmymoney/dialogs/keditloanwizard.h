@@ -45,7 +45,7 @@ class KEditLoanWizard : public KNewLoanWizard
 {
   Q_OBJECT
 public:
-  explicit KEditLoanWizard(const MyMoneyAccount& account, QWidget *parent=0);
+  explicit KEditLoanWizard(const MyMoneyAccount& account, QWidget *parent = 0);
   ~KEditLoanWizard();
 
   /**

@@ -59,14 +59,15 @@ class Wizard;
 class MyMoneyInstitution;
 class KMyMoneyAccountTreeItem;
 
-namespace NewAccountWizard {
+namespace NewAccountWizard
+{
 
 
 class KInstitutionPageDecl : public QWidget, public Ui::KInstitutionPageDecl
 {
 public:
-  KInstitutionPageDecl( QWidget *parent ) : QWidget( parent ) {
-    setupUi( this );
+  KInstitutionPageDecl(QWidget *parent) : QWidget(parent) {
+    setupUi(this);
   }
 };
 
@@ -78,7 +79,9 @@ public:
   ~InstitutionPage();
   KMyMoneyWizardPage* nextPage(void) const;
 
-  QWidget* initialFocusWidget(void) const { return m_institutionComboBox; }
+  QWidget* initialFocusWidget(void) const {
+    return m_institutionComboBox;
+  }
 
   /**
     * Returns the information about an institution if entered by
@@ -103,8 +106,8 @@ private:
 class KAccountTypePageDecl : public QWidget, public Ui::KAccountTypePageDecl
 {
 public:
-  KAccountTypePageDecl( QWidget *parent ) : QWidget( parent ) {
-    setupUi( this );
+  KAccountTypePageDecl(QWidget *parent) : QWidget(parent) {
+    setupUi(this);
   }
 };
 
@@ -116,7 +119,9 @@ public:
   virtual bool isComplete(void) const;
   KMyMoneyWizardPage* nextPage(void) const;
 
-  QWidget* initialFocusWidget(void) const { return m_accountName; }
+  QWidget* initialFocusWidget(void) const {
+    return m_accountName;
+  }
 
   MyMoneyAccount::accountTypeE accountType(void) const;
   const MyMoneyAccount& parentAccount(void);
@@ -145,8 +150,8 @@ private:
 class KBrokeragePageDecl : public QWidget, public Ui::KBrokeragePageDecl
 {
 public:
-  KBrokeragePageDecl( QWidget *parent ) : QWidget( parent ) {
-    setupUi( this );
+  KBrokeragePageDecl(QWidget *parent) : QWidget(parent) {
+    setupUi(this);
   }
 };
 
@@ -158,7 +163,9 @@ public:
   KMyMoneyWizardPage* nextPage(void) const;
   void enterPage(void);
 
-  QWidget* initialFocusWidget(void) const { return m_createBrokerageButton; }
+  QWidget* initialFocusWidget(void) const {
+    return m_createBrokerageButton;
+  }
 
 private slots:
   void slotLoadWidgets(void);
@@ -168,8 +175,8 @@ private slots:
 class KSchedulePageDecl : public QWidget, public Ui::KSchedulePageDecl
 {
 public:
-  KSchedulePageDecl( QWidget *parent ) : QWidget( parent ) {
-    setupUi( this );
+  KSchedulePageDecl(QWidget *parent) : QWidget(parent) {
+    setupUi(this);
   }
 };
 
@@ -182,7 +189,9 @@ public:
   virtual bool isComplete(void) const;
   void enterPage(void);
 
-  QWidget* initialFocusWidget(void) const { return m_reminderCheckBox; }
+  QWidget* initialFocusWidget(void) const {
+    return m_reminderCheckBox;
+  }
 
 private slots:
   void slotLoadWidgets(void);
@@ -192,8 +201,8 @@ private slots:
 class KGeneralLoanInfoPageDecl : public QWidget, public Ui::KGeneralLoanInfoPageDecl
 {
 public:
-  KGeneralLoanInfoPageDecl( QWidget *parent ) : QWidget( parent ) {
-    setupUi( this );
+  KGeneralLoanInfoPageDecl(QWidget *parent) : QWidget(parent) {
+    setupUi(this);
   }
 };
 
@@ -207,7 +216,9 @@ public:
   void enterPage(void);
   const MyMoneyAccount& parentAccount(void);
 
-  QWidget* initialFocusWidget(void) const { return m_loanDirection; }
+  QWidget* initialFocusWidget(void) const {
+    return m_loanDirection;
+  }
 
   /**
    * Returns @p true if the user decided to record all payments, @p false otherwise.
@@ -225,8 +236,8 @@ private:
 class KLoanDetailsPageDecl : public QWidget, public Ui::KLoanDetailsPageDecl
 {
 public:
-  KLoanDetailsPageDecl( QWidget *parent ) : QWidget( parent ) {
-    setupUi( this );
+  KLoanDetailsPageDecl(QWidget *parent) : QWidget(parent) {
+    setupUi(this);
   }
 };
 
@@ -239,7 +250,9 @@ public:
   KMyMoneyWizardPage* nextPage(void) const;
   virtual bool isComplete(void) const;
 
-  QWidget* initialFocusWidget(void) const { return m_paymentDue; }
+  QWidget* initialFocusWidget(void) const {
+    return m_paymentDue;
+  }
 
   /**
    * This method returns the number of payments depending on
@@ -267,8 +280,8 @@ private slots:
 class KLoanPaymentPageDecl : public QWidget, public Ui::KLoanPaymentPageDecl
 {
 public:
-  KLoanPaymentPageDecl( QWidget *parent ) : QWidget( parent ) {
-    setupUi( this );
+  KLoanPaymentPageDecl(QWidget *parent) : QWidget(parent) {
+    setupUi(this);
   }
 };
 
@@ -317,8 +330,8 @@ private:
 class KLoanSchedulePageDecl  : public QWidget, public Ui::KLoanSchedulePageDecl
 {
 public:
-  KLoanSchedulePageDecl( QWidget *parent ) : QWidget( parent ) {
-    setupUi( this );
+  KLoanSchedulePageDecl(QWidget *parent) : QWidget(parent) {
+    setupUi(this);
   }
 };
 
@@ -336,7 +349,9 @@ public:
    */
   QDate firstPaymentDueDate(void) const;
 
-  QWidget* initialFocusWidget(void) const { return m_interestCategory; }
+  QWidget* initialFocusWidget(void) const {
+    return m_interestCategory;
+  }
 
 private slots:
   void slotLoadWidgets(void);
@@ -347,8 +362,8 @@ private slots:
 class KLoanPayoutPageDecl : public QWidget, public Ui::KLoanPayoutPageDecl
 {
 public:
-  KLoanPayoutPageDecl( QWidget *parent ) : QWidget( parent ) {
-    setupUi( this );
+  KLoanPayoutPageDecl(QWidget *parent) : QWidget(parent) {
+    setupUi(this);
   }
 };
 
@@ -362,7 +377,9 @@ public:
 
   KMyMoneyWizardPage* nextPage(void) const;
 
-  QWidget* initialFocusWidget(void) const { return m_noPayoutTransaction; }
+  QWidget* initialFocusWidget(void) const {
+    return m_noPayoutTransaction;
+  }
 
   const QString& payoutAccountId(void) const;
 
@@ -376,8 +393,8 @@ private slots:
 class KHierarchyPageDecl : public QWidget, public Ui::KHierarchyPageDecl
 {
 public:
-  KHierarchyPageDecl( QWidget *parent ) : QWidget( parent ) {
-    setupUi( this );
+  KHierarchyPageDecl(QWidget *parent) : QWidget(parent) {
+    setupUi(this);
   }
 };
 
@@ -388,18 +405,20 @@ public:
   HierarchyPage(Wizard* parent);
   void enterPage(void);
   KMyMoneyWizardPage* nextPage(void) const;
-  QWidget* initialFocusWidget(void) const { return m_qlistviewParentAccounts; }
+  QWidget* initialFocusWidget(void) const {
+    return m_qlistviewParentAccounts;
+  }
   const MyMoneyAccount& parentAccount(void);
 
 private:
   KMyMoneyAccountTreeItem* buildAccountTree
-      ( KMyMoneyAccountTreeBase* parent
-      , const MyMoneyAccount& account
-      , bool open = false ) const;
+  (KMyMoneyAccountTreeBase* parent
+   , const MyMoneyAccount& account
+   , bool open = false) const;
   KMyMoneyAccountTreeItem* buildAccountTree
-      ( KMyMoneyAccountTreeItem* parent
-      , const MyMoneyAccount& account
-      , bool open = false ) const;
+  (KMyMoneyAccountTreeItem* parent
+   , const MyMoneyAccount& account
+   , bool open = false) const;
   MyMoneyAccount m_topAccount;    // Last populated top account
   bool bFirstTime;
 };
@@ -408,8 +427,8 @@ private:
 class KAccountSummaryPageDecl : public QWidget, public Ui::KAccountSummaryPageDecl
 {
 public:
-  KAccountSummaryPageDecl( QWidget *parent ) : QWidget( parent ) {
-    setupUi( this );
+  KAccountSummaryPageDecl(QWidget *parent) : QWidget(parent) {
+    setupUi(this);
   }
 };
 
@@ -419,7 +438,9 @@ class AccountSummaryPage : public KAccountSummaryPageDecl, public WizardPage<Wiz
 public:
   AccountSummaryPage(Wizard* parent);
   void enterPage(void);
-  QWidget* initialFocusWidget(void) const { return m_dataList; }
+  QWidget* initialFocusWidget(void) const {
+    return m_dataList;
+  }
 };
 
 } // namespace

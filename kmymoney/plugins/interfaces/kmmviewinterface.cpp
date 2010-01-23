@@ -33,9 +33,9 @@
 #include "selectedtransaction.h"
 
 KMyMoneyPlugin::KMMViewInterface::KMMViewInterface(KMyMoneyApp* app, KMyMoneyView* view, QObject* parent, const char* name) :
-  ViewInterface(parent, name),
-  m_app(app),
-  m_view(view)
+    ViewInterface(parent, name),
+    m_app(app),
+    m_view(view)
 {
   connect(app, SIGNAL(accountSelected(const MyMoneyAccount&)), this, SIGNAL(accountSelected(const MyMoneyAccount&)));
   connect(app, SIGNAL(transactionsSelected(const KMyMoneyRegister::SelectedTransactions&)), this, SIGNAL(transactionsSelected(const KMyMoneyRegister::SelectedTransactions&)));
@@ -56,7 +56,7 @@ KMyMoneyViewBase* KMyMoneyPlugin::KMMViewInterface::addPage(const QString& item,
 
 void KMyMoneyPlugin::KMMViewInterface::addWidget(KMyMoneyViewBase* view, QWidget* w)
 {
-  if(view && w)
+  if (view && w)
     view->addWidget(w);
 }
 

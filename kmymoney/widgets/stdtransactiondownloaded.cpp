@@ -36,7 +36,7 @@ using namespace KMyMoneyRegister;
 using namespace KMyMoneyTransactionForm;
 
 StdTransactionDownloaded::StdTransactionDownloaded(Register *parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId) :
-  StdTransaction(parent, transaction, split, uniqueId)
+    StdTransaction(parent, transaction, split, uniqueId)
 {
 }
 
@@ -45,7 +45,7 @@ bool StdTransactionDownloaded::paintRegisterCellSetup(QPainter* painter, int& ro
 {
   bool rc = Transaction::paintRegisterCellSetup(painter, row, col, cellRect, textRect, cg, brush);
   // if not selected paint in selected background color
-  if(!isSelected()) {
+  if (!isSelected()) {
     brush = KMyMoneyGlobalSettings::importedTransactionColor();
   }
   return rc;
@@ -61,7 +61,7 @@ bool InvestTransactionDownloaded::paintRegisterCellSetup(QPainter* painter, int&
 {
   bool rc = Transaction::paintRegisterCellSetup(painter, row, col, cellRect, textRect, cg, brush);
   // if not selected paint in selected background color
-  if(!isSelected()) {
+  if (!isSelected()) {
     brush = KMyMoneyGlobalSettings::importedTransactionColor();
   }
   return rc;

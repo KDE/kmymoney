@@ -133,7 +133,9 @@ public:
   /**
    * Sets the number of @a days to look for matching transactions. The default after object creation is 3 days.
    */
-  void setMatchWindow(int days) { m_days = days; }
+  void setMatchWindow(int days) {
+    m_days = days;
+  }
 
 private:
   void checkTransaction(const MyMoneyTransaction& tm, const MyMoneyTransaction& ti, const MyMoneySplit& si, QPair<MyMoneyTransaction, MyMoneySplit>& lastMatch, autoMatchResultE& result, int variation = 0) const;

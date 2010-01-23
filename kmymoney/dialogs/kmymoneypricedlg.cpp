@@ -54,30 +54,30 @@
 #define SOURCE_COL        4
 
 KMyMoneyPriceDlg::KMyMoneyPriceDlg(QWidget* parent) :
-  KMyMoneyPriceDlgDecl(parent)
+    KMyMoneyPriceDlgDecl(parent)
 {
-  KGuiItem removeButtenItem( i18n( "&Delete" ),
-                    KIcon("edit-delete"),
-                    i18n("Delete this entry"),
-                    i18n("Remove this price item from the file"));
+  KGuiItem removeButtenItem(i18n("&Delete"),
+                            KIcon("edit-delete"),
+                            i18n("Delete this entry"),
+                            i18n("Remove this price item from the file"));
   m_deleteButton->setGuiItem(removeButtenItem);
 
-  KGuiItem newButtenItem( i18nc("New price entry", "&New" ),
-                    KIcon("document-new"),
-                    i18n("Add a new entry"),
-                    i18n("Create a new price entry."));
+  KGuiItem newButtenItem(i18nc("New price entry", "&New"),
+                         KIcon("document-new"),
+                         i18n("Add a new entry"),
+                         i18n("Create a new price entry."));
   m_newButton->setGuiItem(newButtenItem);
 
-  KGuiItem editButtenItem( i18n( "&Edit" ),
-                    KIcon("document-edit"),
-                    i18n("Modify the selected entry"),
-                    i18n("Change the details of selected price information."));
+  KGuiItem editButtenItem(i18n("&Edit"),
+                          KIcon("document-edit"),
+                          i18n("Modify the selected entry"),
+                          i18n("Change the details of selected price information."));
   m_editButton->setGuiItem(editButtenItem);
 
-  KGuiItem okButtenItem( i18n("&Close" ),
-                    KIcon("dialog-ok"),
-                    i18n("Close the dialog"),
-                    i18n("Use this to close the dialog and return to the application."));
+  KGuiItem okButtenItem(i18n("&Close"),
+                        KIcon("dialog-ok"),
+                        i18n("Close the dialog"),
+                        i18n("Use this to close the dialog and return to the application."));
   m_closeButton->setGuiItem(okButtenItem);
 
   connect(m_closeButton, SIGNAL(clicked()), this, SLOT(accept()));
@@ -111,14 +111,14 @@ void KMyMoneyPriceDlg::slotLoadWidgets(void)
 
   MyMoneyPriceList list = MyMoneyFile::instance()->priceList();
   MyMoneyPriceList::ConstIterator it_l;
-  for(it_l = list.constBegin(); it_l != list.constEnd(); ++it_l) {
+  for (it_l = list.constBegin(); it_l != list.constEnd(); ++it_l) {
     MyMoneyPriceEntries::ConstIterator it_e;
-    if(m_showAllPrices->isChecked()) {
-      for(it_e = (*it_l).constBegin(); it_e != (*it_l).constEnd(); ++it_e) {
+    if (m_showAllPrices->isChecked()) {
+      for (it_e = (*it_l).constBegin(); it_e != (*it_l).constEnd(); ++it_e) {
         new KMyMoneyPriceItem(m_priceList, *it_e);
       }
     } else {
-      if((*it_l).count() > 0) {
+      if ((*it_l).count() > 0) {
         it_e = (*it_l).end();
         --it_e;
         new KMyMoneyPriceItem(m_priceList, *it_e);
@@ -134,9 +134,9 @@ void KMyMoneyPriceDlg::slotSelectPrice(Q3ListViewItem * item)
   m_deleteButton->setEnabled(item != 0);
 
   // Modification of automatically added entries is not allowed
-  if(item) {
+  if (item) {
     KMyMoneyPriceItem* priceitem = dynamic_cast<KMyMoneyPriceItem*>(item);
-    if(priceitem && (priceitem->price().source() == "KMyMoney")) {
+    if (priceitem && (priceitem->price().source() == "KMyMoney")) {
       m_editButton->setEnabled(false);
       m_deleteButton->setEnabled(false);
     }
@@ -148,7 +148,7 @@ void KMyMoneyPriceDlg::slotNewPrice(void)
   QPointer<KUpdateStockPriceDlg> dlg = new KUpdateStockPriceDlg(this);
   try {
     KMyMoneyPriceItem* item = dynamic_cast<KMyMoneyPriceItem*>(m_priceList->selectedItem());
-    if(item) {
+    if (item) {
       MyMoneySecurity security;
       security = MyMoneyFile::instance()->security(item->price().from());
       dlg->m_security->setSecurity(security);
@@ -156,15 +156,15 @@ void KMyMoneyPriceDlg::slotNewPrice(void)
       dlg->m_currency->setSecurity(security);
     }
 
-    if(dlg->exec()) {
-      MyMoneyPrice price(dlg->m_security->security().id(), dlg->m_currency->security().id(), dlg->date(), MyMoneyMoney(1,1));
+    if (dlg->exec()) {
+      MyMoneyPrice price(dlg->m_security->security().id(), dlg->m_currency->security().id(), dlg->date(), MyMoneyMoney(1, 1));
       KMyMoneyPriceItem* p = new KMyMoneyPriceItem(m_priceList, price);
       m_priceList->setSelected(p, true);
       // If the user cancels the following operation, we delete the new item
       // and re-select any previously selected one
-      if(slotEditPrice() == QDialog::Rejected) {
+      if (slotEditPrice() == QDialog::Rejected) {
         delete p;
-        if(item)
+        if (item)
           m_priceList->setSelected(item, true);
       }
     }
@@ -179,19 +179,19 @@ int KMyMoneyPriceDlg::slotEditPrice(void)
 {
   int rc = QDialog::Rejected;
   KMyMoneyPriceItem* item = dynamic_cast<KMyMoneyPriceItem*>(m_priceList->selectedItem());
-  if(item) {
+  if (item) {
     MyMoneySecurity from(MyMoneyFile::instance()->security(item->price().from()));
     MyMoneySecurity to(MyMoneyFile::instance()->security(item->price().to()));
     signed64 fract = MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision());
 
     QPointer<KCurrencyCalculator> calc =
       new KCurrencyCalculator(from,
-                             to,
-                             MyMoneyMoney(1,1),
-                             item->price().rate(to.id()),
-                             item->price().date(),
-                             fract,
-                             this);
+                              to,
+                              MyMoneyMoney(1, 1),
+                              item->price().rate(to.id()),
+                              item->price().date(),
+                              fract,
+                              this);
     calc->setupPriceEditor();
 
     rc = calc->exec();
@@ -204,13 +204,13 @@ int KMyMoneyPriceDlg::slotEditPrice(void)
 void KMyMoneyPriceDlg::slotDeletePrice(void)
 {
   KMyMoneyPriceItem* item = dynamic_cast<KMyMoneyPriceItem*>(m_priceList->selectedItem());
-  if(item) {
-    if(KMessageBox::questionYesNo(this, i18n("Do you really want to delete the selected price entry?"), i18n("Delete price information"), KStandardGuiItem::yes(), KStandardGuiItem::no(), "DeletePrice") == KMessageBox::Yes) {
+  if (item) {
+    if (KMessageBox::questionYesNo(this, i18n("Do you really want to delete the selected price entry?"), i18n("Delete price information"), KStandardGuiItem::yes(), KStandardGuiItem::no(), "DeletePrice") == KMessageBox::Yes) {
       MyMoneyFileTransaction ft;
       try {
         MyMoneyFile::instance()->removePrice(item->price());
         ft.commit();
-      } catch(MyMoneyException *e) {
+      } catch (MyMoneyException *e) {
         qDebug("Cannot delete price");
         delete e;
       }
@@ -221,15 +221,14 @@ void KMyMoneyPriceDlg::slotDeletePrice(void)
 void KMyMoneyPriceDlg::slotOnlinePriceUpdate(void)
 {
   KMyMoneyPriceItem* item = dynamic_cast<KMyMoneyPriceItem*>(m_priceList->selectedItem());
-  if(item)
-  {
-    QPointer<KEquityPriceUpdateDlg> dlg = new KEquityPriceUpdateDlg(this, (item->text(COMMODITY_COL)+' '+item->text(CURRENCY_COL)).toUtf8());
-    if(dlg->exec() == QDialog::Accepted)
+  if (item) {
+    QPointer<KEquityPriceUpdateDlg> dlg = new KEquityPriceUpdateDlg(this, (item->text(COMMODITY_COL) + ' ' + item->text(CURRENCY_COL)).toUtf8());
+    if (dlg->exec() == QDialog::Accepted)
       dlg->storePrices();
     delete dlg;
   } else {
     QPointer<KEquityPriceUpdateDlg> dlg = new KEquityPriceUpdateDlg(this);
-    if(dlg->exec() == QDialog::Accepted)
+    if (dlg->exec() == QDialog::Accepted)
       dlg->storePrices();
     delete dlg;
   }

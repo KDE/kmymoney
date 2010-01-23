@@ -20,8 +20,8 @@
 #include "kmymoneyreportcontrolimpl.h"
 
 
-kMyMoneyReportControl::kMyMoneyReportControl( QWidget *parent )
-    :kMyMoneyReportControlDecl( parent )
+kMyMoneyReportControl::kMyMoneyReportControl(QWidget *parent)
+    : kMyMoneyReportControlDecl(parent)
 {
 
 }

@@ -50,8 +50,8 @@
 using namespace KMyMoneyTransactionForm;
 
 TabBar::TabBar(QWidget* parent) :
-  KTabWidget(parent),
-  m_signalType(SignalNormal)
+    KTabWidget(parent),
+    m_signalType(SignalNormal)
 {
   connect(this, SIGNAL(currentChanged(int)), this, SLOT(slotTabCurrentChanged(int)));
 }
@@ -67,7 +67,7 @@ int TabBar::currentIndex(void) const
 {
   QMap<int, int>::const_iterator it;
   it = m_idMap.find(KTabWidget::currentIndex());
-  if(it != m_idMap.end())
+  if (it != m_idMap.end())
     return *it;
   return -1;
 }
@@ -91,24 +91,24 @@ QWidget* TabBar::widget(int id) const
   */
   QWidget* result = KTabWidget::widget(id);
   QMap<int, int>::const_iterator it;
-  for(it = m_idMap.begin(); it != m_idMap.end(); ++it)
-    if(*it == id)
-      result=KTabWidget::widget(it.key());
+  for (it = m_idMap.begin(); it != m_idMap.end(); ++it)
+    if (*it == id)
+      result = KTabWidget::widget(it.key());
   return result;
 }
 
 
 void TabBar::setCurrentWidget(QWidget* tab)
 {
-  if(m_signalType != SignalNormal)
+  if (m_signalType != SignalNormal)
     blockSignals(true);
 
   KTabWidget::setCurrentWidget(tab);
 
-  if(m_signalType != SignalNormal)
+  if (m_signalType != SignalNormal)
     blockSignals(false);
 
-  if(m_signalType == SignalAlways)
+  if (m_signalType == SignalAlways)
     emit currentChanged(indexOf(tab));
 }
 
@@ -132,7 +132,7 @@ void TabBar::slotTabCurrentChanged(int id)
 {
   QMap<int, int>::const_iterator it;
   it = m_idMap.constFind(id);
-  if(it != m_idMap.constEnd())
+  if (it != m_idMap.constEnd())
     emit tabCurrentChanged(*it);
   else
     emit tabCurrentChanged(id);
@@ -141,41 +141,41 @@ void TabBar::slotTabCurrentChanged(int id)
 void TabBar::show(void)
 {
   // make sure we don't emit a signal when simply showing the widget
-  if(m_signalType != SignalNormal)
+  if (m_signalType != SignalNormal)
     blockSignals(true);
 
   KTabWidget::show();
 
-  if(m_signalType != SignalNormal)
+  if (m_signalType != SignalNormal)
     blockSignals(false);
 }
 
 void TabBar::copyTabs(const TabBar* otabbar)
 {
   // remove all existing tabs
-  while(count()) {
+  while (count()) {
     removeTab(0);
   }
   // now create new ones. copy text, icon and identifier
-  for(int i=0; i < otabbar->count(); ++i) {
+  for (int i = 0; i < otabbar->count(); ++i) {
     QWidget* otab = otabbar->widget(i);
     QWidget* ntab = new QWidget();
     int nid = KTabWidget::addTab(ntab, otabbar->tabText(i));
     m_idMap[nid] = otabbar->m_idMap[i];
     ntab->setEnabled(otab->isEnabled());
-    if(i == otabbar->currentIndex())
+    if (i == otabbar->currentIndex())
       setCurrentWidget(ntab);
   }
 }
 
 TransactionForm::TransactionForm(QWidget *parent) :
-  TransactionEditorContainer(parent),
-  m_transaction(0),
-  m_tabBar(0)
+    TransactionEditorContainer(parent),
+    m_transaction(0),
+    m_tabBar(0)
 {
-  setFrameShape( Q3Table::NoFrame);
-  setShowGrid( false );
-  setSelectionMode( Q3Table::NoSelection );
+  setFrameShape(Q3Table::NoFrame);
+  setShowGrid(false);
+  setSelectionMode(Q3Table::NoSelection);
   verticalHeader()->hide();
   horizontalHeader()->hide();
   setLeftMargin(0);
@@ -197,7 +197,7 @@ TransactionForm::TransactionForm(QWidget *parent) :
   slotSetTransaction(0);
 }
 
-void TransactionForm::drawContents( QPainter *p, int cx, int cy, int cw, int ch )
+void TransactionForm::drawContents(QPainter *p, int cx, int cy, int cw, int ch)
 {
   // the QTable::drawContents() method does not honor the block update flag
   // so we take care of it here
@@ -225,7 +225,7 @@ void TransactionForm::slotSetTransaction(KMyMoneyRegister::Transaction* transact
   if (updatesNeedToBeDisabled)
     setUpdatesEnabled(false);
 
-  if(m_transaction) {
+  if (m_transaction) {
     // the next call sets up a back pointer to the form and also sets up the col and row span
     // as well as the tab of the form
     m_transaction->setupForm(this);
@@ -241,8 +241,8 @@ void TransactionForm::slotSetTransaction(KMyMoneyRegister::Transaction* transact
   // extract the maximal sizeHint height
   int height = qMax(dateInput.sizeHint().height(), category.sizeHint().height());
 
-  for(int row = 0; row < numRows(); ++row) {
-    if(!transaction || transaction->showRowInForm(row)) {
+  for (int row = 0; row < numRows(); ++row) {
+    if (!transaction || transaction->showRowInForm(row)) {
       showRow(row);
       Q3Table::setRowHeight(row, height);
     } else
@@ -263,17 +263,17 @@ void TransactionForm::slotSetTransaction(KMyMoneyRegister::Transaction* transact
 
 void TransactionForm::paintCell(QPainter* painter, int row, int col, const QRect& r, bool selected, const QColorGroup& /* cg */)
 {
-  if(m_transaction) {
+  if (m_transaction) {
     m_transaction->paintFormCell(painter, row, col, r, selected, m_cellColorGroup);
   }
 }
 
 TabBar* TransactionForm::tabBar(QWidget* parent)
 {
-  if(!m_tabBar && parent) {
+  if (!m_tabBar && parent) {
     // determine the height of the objects in the table
     // create the tab bar
-    m_tabBar = new TabBar( parent );
+    m_tabBar = new TabBar(parent);
     m_tabBar->setSignalEmission(TabBar::SignalAlways);
     QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     sizePolicy.setHeightForWidth(m_tabBar->sizePolicy().hasHeightForWidth());
@@ -292,7 +292,7 @@ void TransactionForm::setupForm(const MyMoneyAccount& acc)
 {
   // remove all tabs from the tabbar
   QWidget* tab;
-  for(tab = m_tabBar->widget(0); tab; tab = m_tabBar->widget(0)) {
+  for (tab = m_tabBar->widget(0); tab; tab = m_tabBar->widget(0)) {
     m_tabBar->removeTab(0);
   }
 
@@ -301,51 +301,51 @@ void TransactionForm::setupForm(const MyMoneyAccount& acc)
   // important: one needs to add the new tabs first and then
   // change the identifier. Otherwise, addTab() will assign
   // a different value
-  switch(acc.accountType()) {
-    default:
-      tab = new QWidget();
-      m_tabBar->insertTab(KMyMoneyRegister::ActionDeposit, tab,i18n("&Deposit"));
-      tab = new QWidget();
-      m_tabBar->insertTab(KMyMoneyRegister::ActionTransfer, tab, i18n("&Transfer"));
-      tab = new QWidget();
-      m_tabBar->insertTab(KMyMoneyRegister::ActionWithdrawal, tab, i18n("&Withdrawal"));
-      break;
+  switch (acc.accountType()) {
+  default:
+    tab = new QWidget();
+    m_tabBar->insertTab(KMyMoneyRegister::ActionDeposit, tab, i18n("&Deposit"));
+    tab = new QWidget();
+    m_tabBar->insertTab(KMyMoneyRegister::ActionTransfer, tab, i18n("&Transfer"));
+    tab = new QWidget();
+    m_tabBar->insertTab(KMyMoneyRegister::ActionWithdrawal, tab, i18n("&Withdrawal"));
+    break;
 
-    case MyMoneyAccount::CreditCard:
-      tab = new QWidget();
-      m_tabBar->insertTab(KMyMoneyRegister::ActionDeposit, tab, i18n("&Payment"));
-      tab = new QWidget();
-      m_tabBar->insertTab(KMyMoneyRegister::ActionTransfer, tab, i18n("&Transfer"));
-      tab = new QWidget();
-      m_tabBar->insertTab(KMyMoneyRegister::ActionWithdrawal, tab, i18n("&Charge"));
-      break;
+  case MyMoneyAccount::CreditCard:
+    tab = new QWidget();
+    m_tabBar->insertTab(KMyMoneyRegister::ActionDeposit, tab, i18n("&Payment"));
+    tab = new QWidget();
+    m_tabBar->insertTab(KMyMoneyRegister::ActionTransfer, tab, i18n("&Transfer"));
+    tab = new QWidget();
+    m_tabBar->insertTab(KMyMoneyRegister::ActionWithdrawal, tab, i18n("&Charge"));
+    break;
 
-    case MyMoneyAccount::Liability:
-    case MyMoneyAccount::Loan:
-      tab = new QWidget();
-      m_tabBar->insertTab(KMyMoneyRegister::ActionDeposit, tab, i18n("&Decrease"));
-      tab = new QWidget();
-      m_tabBar->insertTab(KMyMoneyRegister::ActionTransfer, tab, i18n("&Transfer"));
-      tab = new QWidget();
-      m_tabBar->insertTab(KMyMoneyRegister::ActionWithdrawal, tab, i18n("&Increase"));
-      break;
+  case MyMoneyAccount::Liability:
+  case MyMoneyAccount::Loan:
+    tab = new QWidget();
+    m_tabBar->insertTab(KMyMoneyRegister::ActionDeposit, tab, i18n("&Decrease"));
+    tab = new QWidget();
+    m_tabBar->insertTab(KMyMoneyRegister::ActionTransfer, tab, i18n("&Transfer"));
+    tab = new QWidget();
+    m_tabBar->insertTab(KMyMoneyRegister::ActionWithdrawal, tab, i18n("&Increase"));
+    break;
 
-    case MyMoneyAccount::Asset:
-    case MyMoneyAccount::AssetLoan:
-      tab = new QWidget();
-      m_tabBar->insertTab(KMyMoneyRegister::ActionDeposit, tab, i18n("&Increase"));
-      tab = new QWidget();
-      m_tabBar->insertTab(KMyMoneyRegister::ActionTransfer, tab, i18n("&Transfer"));
-      tab = new QWidget();
-      m_tabBar->insertTab(KMyMoneyRegister::ActionWithdrawal, tab, i18n("&Decrease"));
-      break;
+  case MyMoneyAccount::Asset:
+  case MyMoneyAccount::AssetLoan:
+    tab = new QWidget();
+    m_tabBar->insertTab(KMyMoneyRegister::ActionDeposit, tab, i18n("&Increase"));
+    tab = new QWidget();
+    m_tabBar->insertTab(KMyMoneyRegister::ActionTransfer, tab, i18n("&Transfer"));
+    tab = new QWidget();
+    m_tabBar->insertTab(KMyMoneyRegister::ActionWithdrawal, tab, i18n("&Decrease"));
+    break;
 
-    case MyMoneyAccount::Income:
-    case MyMoneyAccount::Expense:
-    case MyMoneyAccount::Investment:
-    case MyMoneyAccount::Stock:
-      m_tabBar->hide();
-      break;
+  case MyMoneyAccount::Income:
+  case MyMoneyAccount::Expense:
+  case MyMoneyAccount::Investment:
+  case MyMoneyAccount::Stock:
+    m_tabBar->hide();
+    break;
   }
 }
 
@@ -365,20 +365,20 @@ void TransactionForm::resize(int col)
   int nc = numCols();
 
   // check which space we need
-  if(nc >= LabelColumn1 && columnWidth(LabelColumn1))
+  if (nc >= LabelColumn1 && columnWidth(LabelColumn1))
     adjustColumn(LabelColumn1);
-  if(nc >= LabelColumn2 && columnWidth(LabelColumn2))
+  if (nc >= LabelColumn2 && columnWidth(LabelColumn2))
     adjustColumn(LabelColumn2);
-  if(nc >= ValueColumn2 && columnWidth(ValueColumn2))
+  if (nc >= ValueColumn2 && columnWidth(ValueColumn2))
     adjustColumn(ValueColumn2);
 
-  for(int i = 0; i < nc; ++i) {
-    if(i == col)
+  for (int i = 0; i < nc; ++i) {
+    if (i == col)
       continue;
 
     w -= columnWidth(i);
   }
-  if(col < nc && w >= 0)
+  if (col < nc && w >= 0)
     setColumnWidth(col, w);
 
   if (updatesNeedToBeDisabled)
@@ -389,8 +389,8 @@ void TransactionForm::resize(int col)
 // needed to duplicate this here, as the QTable::tableSize method is private :-(
 QSize TransactionForm::tableSize(void) const
 {
-  return QSize(columnPos(numCols()-1) + columnWidth(numCols()-1) + 10,
-               rowPos(numRows()-1) + rowHeight(numRows()-1) + 10);
+  return QSize(columnPos(numCols() - 1) + columnWidth(numCols() - 1) + 10,
+               rowPos(numRows() - 1) + rowHeight(numRows() - 1) + 10);
 }
 
 QSize TransactionForm::sizeHint(void) const
@@ -406,30 +406,30 @@ void TransactionForm::adjustColumn(Column col)
 
   // preset the width of the right value column with the width of
   // the possible edit widgets so that they fit if they pop up
-  if(col == ValueColumn2) {
+  if (col == ValueColumn2) {
     kMyMoneyDateInput dateInput;
     kMyMoneyEdit valInput;
     w = qMax(dateInput.sizeHint().width(), valInput.sizeHint().width());
   }
 
-  if(m_transaction) {
+  if (m_transaction) {
     QString txt;
     QFontMetrics fontMetrics(KMyMoneyGlobalSettings::listCellFont());
 
     // scan through the rows
-    for ( int i = numRows()-1; i >= 0; --i ) {
+    for (int i = numRows() - 1; i >= 0; --i) {
       int align;
       m_transaction->formCellText(txt, align, i, static_cast<int>(col), 0);
       QWidget* cw = cellWidget(i, col);
-      if(cw) {
-        w = qMax(w, cw->sizeHint().width()+10);
+      if (cw) {
+        w = qMax(w, cw->sizeHint().width() + 10);
       }
-      w = qMax(w, fontMetrics.width(txt)+10);
+      w = qMax(w, fontMetrics.width(txt) + 10);
     }
   }
 
-  if(col < numCols())
-    setColumnWidth( col, w );
+  if (col < numCols())
+    setColumnWidth(col, w);
 }
 
 void TransactionForm::arrangeEditWidgets(QMap<QString, QWidget*>& editWidgets, KMyMoneyRegister::Transaction* t)
@@ -446,25 +446,25 @@ void TransactionForm::tabOrder(QWidgetList& tabOrderWidgets, KMyMoneyRegister::T
 void TransactionForm::removeEditWidgets(QMap<QString, QWidget*>& editWidgets)
 {
   QMap<QString, QWidget*>::iterator it;
-  for(it = editWidgets.begin(); it != editWidgets.end(); ) {
-    if((*it)->parentWidget() == this) {
+  for (it = editWidgets.begin(); it != editWidgets.end();) {
+    if ((*it)->parentWidget() == this) {
       editWidgets.erase(it);
       it = editWidgets.begin();
     } else
       ++it;
   }
 
-  for(int row = 0; row < numRows(); ++row) {
-    for(int col = 0; col < numCols(); ++col) {
-      if(cellWidget(row, col))
+  for (int row = 0; row < numRows(); ++row) {
+    for (int col = 0; col < numCols(); ++col) {
+      if (cellWidget(row, col))
         clearCellWidget(row, col);
     }
   }
   resize(ValueColumn1);
 
   // delete all remaining edit widgets   (e.g. tabbar)
-  for(it = editWidgets.begin(); it != editWidgets.end(); ) {
-    delete (*it); // ->deleteLater();
+  for (it = editWidgets.begin(); it != editWidgets.end();) {
+    delete(*it);  // ->deleteLater();
     editWidgets.erase(it);
     it = editWidgets.begin();
   }

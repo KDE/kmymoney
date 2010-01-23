@@ -39,11 +39,11 @@
 #include "kmymoneyglobalsettings.h"
 
 KStartupLogo::KStartupLogo() :
-  QObject(0),
-  m_splash(0)
+    QObject(0),
+    m_splash(0)
 {
   // splash screen setting
-  if(!KMyMoneyGlobalSettings::showSplash())
+  if (!KMyMoneyGlobalSettings::showSplash())
     return;
 
   QString filename = KGlobal::dirs()->findResource("appdata", "pics/startlogo.png");
@@ -55,7 +55,7 @@ KStartupLogo::KStartupLogo() :
   QPainter pixmapPainter(&logoPixmap);
   pixmapPainter.drawPixmap(0, 0, logoOverlay, 0, 0, logoOverlay.width(), logoOverlay.height());
 
-  if(!logoOverlay.isNull()) {
+  if (!logoOverlay.isNull()) {
     KSplashScreen* splash = new KSplashScreen(logoPixmap);
     splash->setFixedSize(logoPixmap.size());
 
@@ -66,6 +66,6 @@ KStartupLogo::KStartupLogo() :
 
 KStartupLogo::~KStartupLogo()
 {
-    delete m_splash;
+  delete m_splash;
 }
 

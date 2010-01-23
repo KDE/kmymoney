@@ -40,8 +40,8 @@
 class KNewInvestmentWizardDecl : public Q3Wizard, public Ui::KNewInvestmentWizardDecl
 {
 public:
-  KNewInvestmentWizardDecl( QWidget *parent ) : Q3Wizard( parent ) {
-    setupUi( this );
+  KNewInvestmentWizardDecl(QWidget *parent) : Q3Wizard(parent) {
+    setupUi(this);
   }
 };
 class KNewInvestmentWizard : public KNewInvestmentWizardDecl
@@ -51,17 +51,17 @@ public:
   /**
     * Use this constructor for the creation of a new investment
     */
-  explicit KNewInvestmentWizard( QWidget *parent = 0 );
+  explicit KNewInvestmentWizard(QWidget *parent = 0);
 
   /**
     * Use this constructor for the modification of an existing investment
     */
-  explicit KNewInvestmentWizard( const MyMoneyAccount& acc, QWidget *parent = 0 );
+  explicit KNewInvestmentWizard(const MyMoneyAccount& acc, QWidget *parent = 0);
 
   /**
     * Use this constructor for the modification of an existing security
     */
-  explicit KNewInvestmentWizard( const MyMoneySecurity& sec, QWidget *parent = 0 );
+  explicit KNewInvestmentWizard(const MyMoneySecurity& sec, QWidget *parent = 0);
 
   ~KNewInvestmentWizard();
 
@@ -79,7 +79,9 @@ public:
     */
   void createObjects(const QString& parentId);
 
-  const MyMoneyAccount& account(void) const { return m_account; }
+  const MyMoneyAccount& account(void) const {
+    return m_account;
+  }
 
 protected slots:
   void next(void);

@@ -31,13 +31,14 @@
 class kbackupdlgdecl : public QDialog, public Ui::kbackupdlgdecl
 {
 public:
-  kbackupdlgdecl( QWidget *parent ) : QDialog( parent ) {
-    setupUi( this );
+  kbackupdlgdecl(QWidget *parent) : QDialog(parent) {
+    setupUi(this);
   }
 };
 
-class KBackupDlg : public kbackupdlgdecl  {
-	Q_OBJECT
+class KBackupDlg : public kbackupdlgdecl
+{
+  Q_OBJECT
 private:
   void readConfig(void);
   void writeConfig(void);
@@ -46,8 +47,8 @@ protected slots:
   void chooseButtonClicked();
 
 public:
-	KBackupDlg( QWidget* parent);
-	~KBackupDlg();
+  KBackupDlg(QWidget* parent);
+  ~KBackupDlg();
 };
 
 #endif // KBACKUPDLG_H

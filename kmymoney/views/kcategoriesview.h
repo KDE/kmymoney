@@ -64,8 +64,8 @@ class K3ListViewSearchLineWidget;
 class KCategoriesViewDecl : public QDialog, public Ui::KCategoriesViewDecl
 {
 public:
-  KCategoriesViewDecl( QWidget *parent ) : QDialog( parent ) {
-    setupUi( this );
+  KCategoriesViewDecl(QWidget *parent) : QDialog(parent) {
+    setupUi(this);
   }
 };
 
@@ -73,7 +73,7 @@ class KCategoriesView : public KCategoriesViewDecl
 {
   Q_OBJECT
 public:
-  KCategoriesView(QWidget *parent=0);
+  KCategoriesView(QWidget *parent = 0);
   virtual ~KCategoriesView();
 
 

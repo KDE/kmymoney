@@ -66,8 +66,8 @@ public:
 };
 
 KEnterScheduleDlg::KEnterScheduleDlg(QWidget *parent, const MyMoneySchedule& schedule) :
-  KEnterScheduleDlgDecl(parent),
-  d(new Private)
+    KEnterScheduleDlgDecl(parent),
+    d(new Private)
 {
   d->m_schedule = schedule;
   d->m_extendedReturnCode = KMyMoneyUtils::Enter;
@@ -93,7 +93,7 @@ KEnterScheduleDlg::KEnterScheduleDlg(QWidget *parent, const MyMoneySchedule& sch
   // ... now add the transaction to register and form ...
   MyMoneyTransaction t = transaction();
   d->m_item = KMyMoneyRegister::Register::transactionFactory(m_register, t,
-                d->m_schedule.transaction().splits().isEmpty() ? MyMoneySplit() : d->m_schedule.transaction().splits().front(), 0);
+              d->m_schedule.transaction().splits().isEmpty() ? MyMoneySplit() : d->m_schedule.transaction().splits().front(), 0);
   m_register->selectItem(d->m_item);
   // show the account row
   d->m_item->setShowRowInForm(0, true);
@@ -122,7 +122,7 @@ KEnterScheduleDlg::~KEnterScheduleDlg()
 
 KMyMoneyUtils::EnterScheduleResultCodeE KEnterScheduleDlg::resultCode(void) const
 {
-  if(result() == QDialog::Accepted)
+  if (result() == QDialog::Accepted)
     return d->m_extendedReturnCode;
   return KMyMoneyUtils::Cancel;
 }
@@ -184,9 +184,9 @@ void KEnterScheduleDlg::slotSetupSize(void)
 
 int KEnterScheduleDlg::exec(void)
 {
-  if(d->m_showWarningOnce) {
+  if (d->m_showWarningOnce) {
     d->m_showWarningOnce = false;
-    KMessageBox::information(this, QString("<qt>")+i18n("<p>Please check that all the details in the following dialog are correct and press OK.</p><p>Editable data can be changed and can either be applied to just this occurrence or for all subsequent occurrences for this schedule.  (You will be asked what you intend after pressing OK in the following dialog)</p>")+QString("</qt>"), i18n("Enter scheduled transaction"), "EnterScheduleDlgInfo");
+    KMessageBox::information(this, QString("<qt>") + i18n("<p>Please check that all the details in the following dialog are correct and press OK.</p><p>Editable data can be changed and can either be applied to just this occurrence or for all subsequent occurrences for this schedule.  (You will be asked what you intend after pressing OK in the following dialog)</p>") + QString("</qt>"), i18n("Enter scheduled transaction"), "EnterScheduleDlgInfo");
   }
 
   return KEnterScheduleDlgDecl::exec();
@@ -200,8 +200,8 @@ TransactionEditor* KEnterScheduleDlg::startEdit(void)
   // check that we use the same transaction commodity in all selected transactions
   // if not, we need to update this in the editor's list. The user can also bail out
   // of this operation which means that we have to stop editing here.
-  if(editor) {
-    if(!editor->fixTransactionCommodity(d->m_schedule.account())) {
+  if (editor) {
+    if (!editor->fixTransactionCommodity(d->m_schedule.account())) {
       // if the user wants to quit, we need to destroy the editor
       // and bail out
       delete editor;
@@ -209,7 +209,7 @@ TransactionEditor* KEnterScheduleDlg::startEdit(void)
     }
   }
 
-  if(editor) {
+  if (editor) {
     connect(editor, SIGNAL(transactionDataSufficient(bool)), buttonOk, SLOT(setEnabled(bool)));
     connect(editor, SIGNAL(escapePressed()), buttonCancel, SLOT(animateClick()));
     connect(editor, SIGNAL(returnPressed()), buttonOk, SLOT(animateClick()));
@@ -225,30 +225,30 @@ TransactionEditor* KEnterScheduleDlg::startEdit(void)
     // setup tab order
     d->m_tabOrderWidgets.clear();
     KMyMoneyRegister::Action action = KMyMoneyRegister::ActionWithdrawal;
-    switch(d->m_schedule.type()) {
-      case MyMoneySchedule::TYPE_DEPOSIT:
+    switch (d->m_schedule.type()) {
+    case MyMoneySchedule::TYPE_DEPOSIT:
+      action = KMyMoneyRegister::ActionDeposit;
+      break;
+    case MyMoneySchedule::TYPE_LOANPAYMENT:
+      switch (d->m_schedule.paymentType()) {
+      case MyMoneySchedule::STYPE_DIRECTDEPOSIT:
+      case MyMoneySchedule::STYPE_MANUALDEPOSIT:
         action = KMyMoneyRegister::ActionDeposit;
-        break;
-      case MyMoneySchedule::TYPE_LOANPAYMENT:
-        switch(d->m_schedule.paymentType()) {
-          case MyMoneySchedule::STYPE_DIRECTDEPOSIT:
-          case MyMoneySchedule::STYPE_MANUALDEPOSIT:
-            action = KMyMoneyRegister::ActionDeposit;
-            break;
-          default:
-            break;
-        }
         break;
       default:
         break;
+      }
+      break;
+    default:
+      break;
     }
     editor->setup(d->m_tabOrderWidgets, d->m_schedule.account(), action);
 
     // if it's not a check, then we need to clear
     // a possibly assigned check number
-    if(d->m_schedule.paymentType() != MyMoneySchedule::STYPE_WRITECHEQUE) {
+    if (d->m_schedule.paymentType() != MyMoneySchedule::STYPE_WRITECHEQUE) {
       QWidget* w = editor->haveWidget("number");
-      if(w)
+      if (w)
         dynamic_cast<kMyMoneyLineEdit*>(w)->loadText(QString());
     }
 
@@ -260,22 +260,22 @@ TransactionEditor* KEnterScheduleDlg::startEdit(void)
     d->m_tabOrderWidgets.append(buttonHelp);
 
     for (int i = 0; i < d->m_tabOrderWidgets.size(); ++i) {
-        QWidget* w = d->m_tabOrderWidgets.at(i);
-       if(w) {
-           w->installEventFilter(this);
-           w->installEventFilter(editor);
-        }
-     }
+      QWidget* w = d->m_tabOrderWidgets.at(i);
+      if (w) {
+        w->installEventFilter(this);
+        w->installEventFilter(editor);
+      }
+    }
     // Check if the editor has some preference on where to set the focus
     // If not, set the focus to the first widget in the tab order
     QWidget* focusWidget = editor->firstWidget();
-    if(!focusWidget)
+    if (!focusWidget)
       focusWidget = d->m_tabOrderWidgets.first();
     focusWidget->setFocus();
 
     // Make sure, we use the adjusted date
     kMyMoneyDateInput* dateEdit = dynamic_cast<kMyMoneyDateInput*>(editor->haveWidget("postdate"));
-    if(dateEdit) {
+    if (dateEdit) {
       dateEdit->setDate(d->m_schedule.adjustedNextDueDate());
     }
   }
@@ -290,7 +290,7 @@ bool KEnterScheduleDlg::focusNextPrevChild(bool next)
 
   w = qApp->focusWidget();
   int currentWidgetIndex = d->m_tabOrderWidgets.indexOf(w);
-  while(w && currentWidgetIndex == -1) {
+  while (w && currentWidgetIndex == -1) {
     // qDebug("'%s' not in list, use parent", w->className());
     w = w->parentWidget();
     currentWidgetIndex = d->m_tabOrderWidgets.indexOf(w);
@@ -304,7 +304,7 @@ bool KEnterScheduleDlg::focusNextPrevChild(bool next)
     else
       w = ((it - 1) != d->m_tabOrderWidgets.constBegin()) ? *(it - 1) : d->m_tabOrderWidgets.last();
 
-    if(((w->focusPolicy() & Qt::TabFocus) == Qt::TabFocus) && w->isVisible() && w->isEnabled()) {
+    if (((w->focusPolicy() & Qt::TabFocus) == Qt::TabFocus) && w->isVisible() && w->isEnabled()) {
       // qDebug("Selecting '%s' as focus", w->className());
       w->setFocus();
       rc = true;

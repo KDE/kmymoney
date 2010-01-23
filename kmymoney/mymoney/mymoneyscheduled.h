@@ -58,31 +58,32 @@ public:
     * This enum is used to describe all the possible schedule frequencies.
     * The special entry, OCCUR_ANY, is used to combine all the other types.
     */
-  enum occurrenceE { OCCUR_ANY=0, OCCUR_ONCE=1, OCCUR_DAILY=2, OCCUR_WEEKLY=4, OCCUR_FORTNIGHTLY=8,
-                    OCCUR_EVERYOTHERWEEK=16,
-                    OCCUR_EVERYHALFMONTH=18,
-                    OCCUR_EVERYTHREEWEEKS=20,
-                    OCCUR_EVERYTHIRTYDAYS=30,
-                    OCCUR_MONTHLY=32, OCCUR_EVERYFOURWEEKS=64,
-                    OCCUR_EVERYEIGHTWEEKS=126,
-                    OCCUR_EVERYOTHERMONTH=128, OCCUR_EVERYTHREEMONTHS=256,
-                    OCCUR_TWICEYEARLY=1024, OCCUR_EVERYOTHERYEAR=2048, OCCUR_QUARTERLY=4096,
-                    OCCUR_EVERYFOURMONTHS=8192, OCCUR_YEARLY=16384
-                     };
+  enum occurrenceE { OCCUR_ANY = 0, OCCUR_ONCE = 1, OCCUR_DAILY = 2, OCCUR_WEEKLY = 4, OCCUR_FORTNIGHTLY = 8,
+                     OCCUR_EVERYOTHERWEEK = 16,
+                     OCCUR_EVERYHALFMONTH = 18,
+                     OCCUR_EVERYTHREEWEEKS = 20,
+                     OCCUR_EVERYTHIRTYDAYS = 30,
+                     OCCUR_MONTHLY = 32, OCCUR_EVERYFOURWEEKS = 64,
+                     OCCUR_EVERYEIGHTWEEKS = 126,
+                     OCCUR_EVERYOTHERMONTH = 128, OCCUR_EVERYTHREEMONTHS = 256,
+                     OCCUR_TWICEYEARLY = 1024, OCCUR_EVERYOTHERYEAR = 2048, OCCUR_QUARTERLY = 4096,
+                     OCCUR_EVERYFOURMONTHS = 8192, OCCUR_YEARLY = 16384
+                   };
 
   /**
     * This enum is used to describe the schedule type.
     */
-  enum typeE {  TYPE_ANY=0, TYPE_BILL=1, TYPE_DEPOSIT=2, TYPE_TRANSFER=4, TYPE_LOANPAYMENT=5 };
+  enum typeE {  TYPE_ANY = 0, TYPE_BILL = 1, TYPE_DEPOSIT = 2, TYPE_TRANSFER = 4, TYPE_LOANPAYMENT = 5 };
 
   /**
     * This enum is used to describe the schedule's payment type.
     */
-  enum paymentTypeE { STYPE_ANY=0, STYPE_DIRECTDEBIT=1, STYPE_DIRECTDEPOSIT=2,
-                      STYPE_MANUALDEPOSIT=4, STYPE_OTHER=8,
-                      STYPE_WRITECHEQUE=16,
-                      STYPE_STANDINGORDER=32,
-                      STYPE_BANKTRANSFER=64 };
+  enum paymentTypeE { STYPE_ANY = 0, STYPE_DIRECTDEBIT = 1, STYPE_DIRECTDEPOSIT = 2,
+                      STYPE_MANUALDEPOSIT = 4, STYPE_OTHER = 8,
+                      STYPE_WRITECHEQUE = 16,
+                      STYPE_STANDINGORDER = 32,
+                      STYPE_BANKTRANSFER = 64
+                    };
 
   /**
     * This enum is used by the auto-commit functionality.
@@ -90,7 +91,7 @@ public:
     * Depending upon the value of m_weekendOption the schedule can
     * be entered on a different date
   **/
-  enum weekendOptionE { MoveBefore=0, MoveAfter=1, MoveNothing=2 };
+  enum weekendOptionE { MoveBefore = 0, MoveAfter = 1, MoveNothing = 2 };
 
   /**
     * Standard constructor
@@ -106,7 +107,7 @@ public:
     * @a startDate is not used anymore and internally set to QDate()
     */
   MyMoneySchedule(const QString& name, typeE type, occurrenceE occurrence, int occurrenceMultiplier,
-          paymentTypeE paymentType, const QDate& startDate, const QDate& endDate, bool fixed, bool autoEnter);
+                  paymentTypeE paymentType, const QDate& startDate, const QDate& endDate, bool fixed, bool autoEnter);
 
   explicit MyMoneySchedule(const QDomElement& node);
 
@@ -128,24 +129,30 @@ public:
     * Simple get method that returns the occurrence period
     * multiplier and occurrence
     *
-    * @return occurrenceE The instance period 
+    * @return occurrenceE The instance period
     *
     */
-  occurrenceE occurrencePeriod(void) const { return m_occurrence; }
+  occurrenceE occurrencePeriod(void) const {
+    return m_occurrence;
+  }
 
   /**
     * Simple get method that returns the occurrence period multiplier.
     *
     * @return int The frequency multiplier
     */
-  int occurrenceMultiplier(void) const { return m_occurrenceMultiplier; }
+  int occurrenceMultiplier(void) const {
+    return m_occurrenceMultiplier;
+  }
 
   /**
     * Simple get method that returns the schedule type.
     *
     * @return typeE The instance type.
     */
-  typeE type(void) const { return m_type; }
+  typeE type(void) const {
+    return m_type;
+  }
 
   /**
     * Simple get method that returns the schedule startDate. If
@@ -162,14 +169,18 @@ public:
     *
     * @return paymentTypeE The instance paymentType.
     */
-  paymentTypeE paymentType(void) const { return m_paymentType; }
+  paymentTypeE paymentType(void) const {
+    return m_paymentType;
+  }
 
   /**
     * Simple get method that returns true if the schedule is fixed.
     *
     * @return bool To indicate whether the instance is fixed.
     */
-  bool isFixed(void) const { return m_fixed; }
+  bool isFixed(void) const {
+    return m_fixed;
+  }
 
   /**
     * Simple get method that returns true if the schedule will end
@@ -177,7 +188,9 @@ public:
     *
     * @return bool Indicates whether the instance will end.
     */
-  bool willEnd(void) const { return m_endDate.isValid(); }
+  bool willEnd(void) const {
+    return m_endDate.isValid();
+  }
 
   /**
     * Simple get method that returns the number of transactions remaining.
@@ -191,7 +204,9 @@ public:
     *
     * @return QDate The end date for the instance.
     */
-  const QDate& endDate(void) const { return m_endDate; }
+  const QDate& endDate(void) const {
+    return m_endDate;
+  }
 
   /**
     * Simple get method that returns true if the transaction should be
@@ -199,14 +214,18 @@ public:
     *
     * @return bool Indicates whether the instance will be automatically entered.
     */
-  bool autoEnter(void) const { return m_autoEnter; }
+  bool autoEnter(void) const {
+    return m_autoEnter;
+  }
 
   /**
     * Simple get method that returns the transaction data for the schedule.
     *
     * @return MyMoneyTransaction The transaction data for the instance.
     */
-  const MyMoneyTransaction& transaction(void) const { return m_transaction; }
+  const MyMoneyTransaction& transaction(void) const {
+    return m_transaction;
+  }
 
   /**
     * Simple method that returns the schedules last payment. If the
@@ -214,7 +233,9 @@ public:
     *
     * @return QDate The last payment for the schedule.
     */
-  const QDate& lastPayment(void) const { return m_lastPayment; }
+  const QDate& lastPayment(void) const {
+    return m_lastPayment;
+  }
 
   /**
     * Simple method that returns the next due date for the schedule.
@@ -256,7 +277,9 @@ public:
     *
     * This not used by MyMoneySchedule but by the support code.
   **/
-  weekendOptionE weekendOption(void) const { return m_weekendOption; }
+  weekendOptionE weekendOption(void) const {
+    return m_weekendOption;
+  }
 
   /**
     * Simple method that sets the frequency for the schedule.
@@ -267,7 +290,7 @@ public:
   void setOccurrence(occurrenceE occ);
 
   /**
-    * Simple method that sets the schedule period 
+    * Simple method that sets the schedule period
     *
     * @param occ The new occurrence period (frequency)
     * @return none
@@ -396,7 +419,7 @@ public:
     * @exception MyMoneyException with detailed error information is thrown
     *            in case of failure of any check.
     */
-  void validate(bool id_check=true) const;
+  void validate(bool id_check = true) const;
 
   /**
     * Calculates the date of the next payment adjusted according to the
@@ -441,7 +464,9 @@ public:
     *
     * @return The name
     */
-  const QString& name(void) const { return m_name; }
+  const QString& name(void) const {
+    return m_name;
+  }
 
   /**
     * Changes the instance name
@@ -452,19 +477,25 @@ public:
   void setName(const QString& nm);
 
   bool operator ==(const MyMoneySchedule& right) const;
-  bool operator !=(const MyMoneySchedule& right) const { return ! operator==(right); }
+  bool operator !=(const MyMoneySchedule& right) const {
+    return ! operator==(right);
+  }
 
   bool operator <(const MyMoneySchedule& right) const;
 
   MyMoneyAccount account(int cnt = 1) const;
-  MyMoneyAccount transferAccount(void) const { return account(2); };
+  MyMoneyAccount transferAccount(void) const {
+    return account(2);
+  };
   QDate dateAfter(int transactions) const;
 
   bool isOverdue() const;
   bool isFinished() const;
   bool hasRecordedPayment(const QDate&) const;
   void recordPayment(const QDate&);
-  QList<QDate> recordedPayments(void) const { return m_recordedPayments; }
+  QList<QDate> recordedPayments(void) const {
+    return m_recordedPayments;
+  }
 
   void writeXML(QDomDocument& document, QDomElement& parent) const;
 
@@ -504,7 +535,7 @@ public:
    * the method returns the same as occurrenceToString of the simple occurrence
    *
    * @param mult occurrence multiplier
-   * @param type occurrence period 
+   * @param type occurrence period
    *
    * @return QString representing the human readable format
    */
@@ -557,28 +588,28 @@ public:
   int variation(void) const;
   void setVariation(int var);
 
- /**
-  *
-  * Convert an occurrence to the maximum number of events possible during a single
-  * calendar year.
-  * A fortnight is treated as 15 days.
-  *
-  * @param occurrence  The occurrence
-  *
-  * @return int  Number of days between events
-  */
+  /**
+   *
+   * Convert an occurrence to the maximum number of events possible during a single
+   * calendar year.
+   * A fortnight is treated as 15 days.
+   *
+   * @param occurrence  The occurrence
+   *
+   * @return int  Number of days between events
+   */
   static int eventsPerYear(MyMoneySchedule::occurrenceE occurrence);
 
- /**
-  *
-  * Convert an occurrence to the number of days between events
-  * Treats a month as 30 days.
-  * Treats a fortnight as 15 days.
-  *
-  * @param occurrence  The occurrence
-  *
-  * @return int  Number of days between events
-  */
+  /**
+   *
+   * Convert an occurrence to the number of days between events
+   * Treats a month as 30 days.
+   * Treats a fortnight as 15 days.
+   *
+   * @param occurrence  The occurrence
+   *
+   * @return int  Number of days between events
+   */
   static int daysBetweenEvents(MyMoneySchedule::occurrenceE occurrence);
 
   /**
@@ -587,7 +618,7 @@ public:
     * @param multiplier Returned by reference.  Adjusted multiplier
     * @param occurrence Returned by reference.  Occurrence type
     */
-  static void simpleToCompoundOccurrence(int& multiplier,occurrenceE& occurrence);
+  static void simpleToCompoundOccurrence(int& multiplier, occurrenceE& occurrence);
 
   /**
     * Helper method to convert compound occurrence + multiplier to simple occurrence
@@ -595,7 +626,7 @@ public:
     * @param multiplier Returned by reference.  Adjusted multiplier
     * @param occurrence Returned by reference.  Occurrence type
     */
-  static void compoundToSimpleOccurrence(int& multiplier,occurrenceE& occurrence);
+  static void compoundToSimpleOccurrence(int& multiplier, occurrenceE& occurrence);
 
   /**
     * This method is used to convert the occurrence type from the
@@ -665,7 +696,7 @@ private:
     *
     * @return QDate date with mult half months added
     */
-  QDate addHalfMonths( QDate date, int mult = 1 ) const;
+  QDate addHalfMonths(QDate date, int mult = 1) const;
 
   /**
     * Checks if a given date should be considered a processing day

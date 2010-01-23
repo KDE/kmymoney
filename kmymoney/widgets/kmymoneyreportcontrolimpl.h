@@ -25,16 +25,16 @@
 class kMyMoneyReportControlDecl : public QWidget, public Ui::kMyMoneyReportControlDecl
 {
 public:
-  kMyMoneyReportControlDecl( QWidget *parent ) : QWidget( parent ) {
-    setupUi( this );
+  kMyMoneyReportControlDecl(QWidget *parent) : QWidget(parent) {
+    setupUi(this);
   }
 };
- 
+
 class kMyMoneyReportControl : public kMyMoneyReportControlDecl
 {
-    Q_OBJECT
+  Q_OBJECT
 public:
-    kMyMoneyReportControl( QWidget *parent );
+  kMyMoneyReportControl(QWidget *parent);
 
 };
 #endif /* KMYMONEYREPORTCONTROLIMPL_H */

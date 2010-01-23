@@ -34,8 +34,8 @@ class QShowEvent;
 class KSettingsGpgDecl : public QWidget, public Ui::KSettingsGpgDecl
 {
 public:
-  KSettingsGpgDecl( QWidget *parent ) : QWidget( parent ) {
-    setupUi( this );
+  KSettingsGpgDecl(QWidget *parent) : QWidget(parent) {
+    setupUi(this);
   }
 };
 

@@ -29,12 +29,12 @@
 #include "ui_ksettingsfontsdecl.h"
 
 class KSettingsFontsDecl : public QWidget, public Ui::KSettingsFontsDecl
-{                                                                                                                                          
-public:                                                                                                                                    
-  KSettingsFontsDecl( QWidget *parent ) : QWidget( parent ) {                                                                             
-    setupUi( this );                                                                                                                       
-  }                                                                                                                                        
-};     
+{
+public:
+  KSettingsFontsDecl(QWidget *parent) : QWidget(parent) {
+    setupUi(this);
+  }
+};
 
 class KSettingsFonts : public KSettingsFontsDecl
 {

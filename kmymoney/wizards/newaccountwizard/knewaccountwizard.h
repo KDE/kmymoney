@@ -34,7 +34,8 @@ class MyMoneyPrice;
 /**
   * @author Thomas Baumgart
   */
-namespace NewAccountWizard {
+namespace NewAccountWizard
+{
 
 class AccountTypePage;
 class InstitutionPage;

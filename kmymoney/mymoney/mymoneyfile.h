@@ -142,8 +142,12 @@ public:
   class MyMoneyNotifier
   {
   public:
-    MyMoneyNotifier(MyMoneyFile* file) { m_file = file; m_file->clearNotification(); };
-    ~MyMoneyNotifier() { m_file->notify(); };
+    MyMoneyNotifier(MyMoneyFile* file) {
+      m_file = file; m_file->clearNotification();
+    };
+    ~MyMoneyNotifier() {
+      m_file->notify();
+    };
   private:
     MyMoneyFile* m_file;
   };
@@ -154,7 +158,9 @@ public:
     * This is the function to access the MyMoneyFile object.
     * It returns a pointer to the single instance of the object.
     */
-  static inline MyMoneyFile* instance() { return &file; }
+  static inline MyMoneyFile* instance() {
+    return &file;
+  }
 
   /**
     * This is the destructor for any MyMoneyFile object
@@ -215,7 +221,9 @@ public:
     *
     * @return true if storage object is attached, false otherwise
     */
-  bool storageAttached(void) const { return m_storage != 0; };
+  bool storageAttached(void) const {
+    return m_storage != 0;
+  };
 
   /**
     * This method returns a pointer to the storage object
@@ -223,7 +231,9 @@ public:
     * @return const pointer to the current attached storage object.
     *         If no object is attached, returns 0.
     */
-  IMyMoneyStorage* storage(void) const { return m_storage; };
+  IMyMoneyStorage* storage(void) const {
+    return m_storage;
+  };
 
   /**
     * This method must be called before any single change or a series of changes
@@ -937,12 +947,12 @@ public:
     * @return const QValueList<MyMoneySchedule> list of schedule objects.
     */
   const QList<MyMoneySchedule> scheduleList(const QString& accountId = QString(),
-                                     const MyMoneySchedule::typeE type = MyMoneySchedule::TYPE_ANY,
-                                     const MyMoneySchedule::occurrenceE occurrence = MyMoneySchedule::OCCUR_ANY,
-                                     const MyMoneySchedule::paymentTypeE paymentType = MyMoneySchedule::STYPE_ANY,
-                                     const QDate& startDate = QDate(),
-                                     const QDate& endDate = QDate(),
-                                     const bool overdue = false) const;
+      const MyMoneySchedule::typeE type = MyMoneySchedule::TYPE_ANY,
+      const MyMoneySchedule::occurrenceE occurrence = MyMoneySchedule::OCCUR_ANY,
+      const MyMoneySchedule::paymentTypeE paymentType = MyMoneySchedule::STYPE_ANY,
+      const QDate& startDate = QDate(),
+      const QDate& endDate = QDate(),
+      const bool overdue = false) const;
 
   const QStringList consistencyCheck(void);
 
@@ -979,11 +989,11 @@ public:
     **/
   QString createCategory(const MyMoneyAccount& base, const QString& name);
 
-  const QList<MyMoneySchedule> scheduleListEx( int scheduleTypes,
-                                              int scheduleOcurrences,
-                                              int schedulePaymentTypes,
-                                              QDate startDate,
-                                              const QStringList& accounts=QStringList()) const;
+  const QList<MyMoneySchedule> scheduleListEx(int scheduleTypes,
+      int scheduleOcurrences,
+      int schedulePaymentTypes,
+      QDate startDate,
+      const QStringList& accounts = QStringList()) const;
 
   /**
     * This method is used to add a new security object to the engine.
@@ -1172,7 +1182,7 @@ public:
     *
     * @return QValueList of all MyMoneyReport objects.
     */
-  const QList<MyMoneyReport> reportList( void ) const;
+  const QList<MyMoneyReport> reportList(void) const;
 
   /**
     * Adds a report to the file-global institution pool. A
@@ -1184,7 +1194,7 @@ public:
     * @param report The complete report information in a
     *        MyMoneyReport object
     */
-  void addReport( MyMoneyReport& report );
+  void addReport(MyMoneyReport& report);
 
   /**
     * Modifies an already existing report in the file global
@@ -1194,7 +1204,7 @@ public:
     *
     * @param report The complete new report information
     */
-  void modifyReport( const MyMoneyReport& report );
+  void modifyReport(const MyMoneyReport& report);
 
   /**
     * This method returns the number of reports currently known to file
@@ -1202,7 +1212,7 @@ public:
     *
     * @return number of reports known to file
     */
-  unsigned countReports( void ) const;
+  unsigned countReports(void) const;
 
   /**
     * This method is used to retrieve a single MyMoneyReport object.
@@ -1213,7 +1223,7 @@ public:
     * @param id QString containing the id of the MyMoneyReport object
     * @return MyMoneyReport object
     */
-  const MyMoneyReport report( const QString& id ) const;
+  const MyMoneyReport report(const QString& id) const;
 
   /**
     * This method is used to remove an existing MyMoneyReport object
@@ -1233,7 +1243,7 @@ public:
     *
     * @return QValueList of all MyMoneyBudget objects.
     */
-  const QList<MyMoneyBudget> budgetList( void ) const;
+  const QList<MyMoneyBudget> budgetList(void) const;
 
   /**
     * Adds a budget to the file-global institution pool. A
@@ -1245,7 +1255,7 @@ public:
     * @param budget The complete budget information in a
     *        MyMoneyBudget object
     */
-  void addBudget( MyMoneyBudget& budget );
+  void addBudget(MyMoneyBudget& budget);
 
 
   /**
@@ -1268,7 +1278,7 @@ public:
     *
     * @param budget The complete new budget information
     */
-  void modifyBudget( const MyMoneyBudget& budget );
+  void modifyBudget(const MyMoneyBudget& budget);
 
   /**
     * This method returns the number of budgets currently known to file
@@ -1276,7 +1286,7 @@ public:
     *
     * @return number of budgets known to file
     */
-  unsigned countBudgets( void ) const;
+  unsigned countBudgets(void) const;
 
   /**
     * This method is used to retrieve a single MyMoneyBudget object.
@@ -1287,7 +1297,7 @@ public:
     * @param id QString containing the id of the MyMoneyBudget object
     * @return MyMoneyBudget object
     */
-  const MyMoneyBudget budget( const QString& id ) const;
+  const MyMoneyBudget budget(const QString& id) const;
 
   /**
     * This method is used to remove an existing MyMoneyBudget object
@@ -1350,7 +1360,9 @@ public:
     */
   void clearCache(void);
 
-  void forceDataChanged(void) { emit dataChanged(); }
+  void forceDataChanged(void) {
+    emit dataChanged();
+  }
 
   void preloadCache(void);
 
@@ -1418,7 +1430,7 @@ private:
     * throws and exception if not.
     */
   inline void checkStorage(void) const {
-    if(m_storage == 0)
+    if (m_storage == 0)
       throw new MYMONEYEXCEPTION("No storage object attached to MyMoneyFile");
   }
 

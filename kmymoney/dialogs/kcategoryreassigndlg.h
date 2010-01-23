@@ -37,8 +37,8 @@
 class KCategoryReassignDlgDecl : public QDialog, public Ui::KCategoryReassignDlgDecl
 {
 public:
-  KCategoryReassignDlgDecl( QWidget *parent ) : QDialog( parent ) {
-    setupUi( this );
+  KCategoryReassignDlgDecl(QWidget *parent) : QDialog(parent) {
+    setupUi(this);
   }
 };
 
@@ -47,7 +47,7 @@ class KCategoryReassignDlg : public KCategoryReassignDlgDecl
   Q_OBJECT
 public:
   /** Default constructor */
-  KCategoryReassignDlg( QWidget* parent = 0);
+  KCategoryReassignDlg(QWidget* parent = 0);
 
   /** Destructor */
   ~KCategoryReassignDlg();

@@ -56,8 +56,8 @@
 class KExportDlgDecl : public QDialog, public Ui::KExportDlgDecl
 {
 public:
-  KExportDlgDecl( QWidget *parent ) : QDialog( parent ) {
-    setupUi( this );
+  KExportDlgDecl(QWidget *parent) : QDialog(parent) {
+    setupUi(this);
   }
 };
 
@@ -74,7 +74,9 @@ public:
     *
     * @return QString with filename
     */
-  const QString filename(void) const { return m_qlineeditFile->text(); };
+  const QString filename(void) const {
+    return m_qlineeditFile->text();
+  };
 
   /**
     * This method returns the account id that has been selected for export
@@ -89,27 +91,37 @@ public:
     *
     * @return QString with profile name
     */
-  const QString profile(void) const { return m_profileComboBox->currentText(); };
+  const QString profile(void) const {
+    return m_profileComboBox->currentText();
+  };
 
   /**
     * This method returns the start date of the export dialog
     */
-  const QDate startDate(void) const { return m_kmymoneydateStart->date(); };
+  const QDate startDate(void) const {
+    return m_kmymoneydateStart->date();
+  };
 
   /**
     * This method returns the end date of the export dialog
     */
-  const QDate endDate(void) const { return m_kmymoneydateEnd->date(); };
+  const QDate endDate(void) const {
+    return m_kmymoneydateEnd->date();
+  };
 
   /**
     * This method returns the state of the account checkbox
     */
-  bool accountSelected(void) const { return m_qcheckboxAccount->isChecked(); };
+  bool accountSelected(void) const {
+    return m_qcheckboxAccount->isChecked();
+  };
 
   /**
     * This method returns the state of the account checkbox
     */
-  bool categorySelected(void) const { return m_qcheckboxCategories->isChecked(); };
+  bool categorySelected(void) const {
+    return m_qcheckboxCategories->isChecked();
+  };
 
 protected slots:
   /**

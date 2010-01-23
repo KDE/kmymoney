@@ -51,7 +51,8 @@ ConverterTest::ConverterTest()
 
 using namespace convertertest;
 
-void ConverterTest::setUp () {
+void ConverterTest::setUp()
+{
 
   storage = new MyMoneySeqAccessMgr;
   file = MyMoneyFile::instance();
@@ -74,28 +75,29 @@ void ConverterTest::setUp () {
   acLiability = (MyMoneyFile::instance()->liability().id());
   acExpense = (MyMoneyFile::instance()->expense().id());
   acIncome = (MyMoneyFile::instance()->income().id());
-  acChecking = makeAccount("Checking Account",MyMoneyAccount::Checkings,moConverterCheckingOpen,QDate(2004,5,15),acAsset);
-  acCredit = makeAccount("Credit Card",MyMoneyAccount::CreditCard,moConverterCreditOpen,QDate(2004,7,15),acLiability);
-  acSolo = makeAccount("Solo",MyMoneyAccount::Expense,MyMoneyMoney(0),QDate(2004,1,11),acExpense);
-  acParent = makeAccount("Parent",MyMoneyAccount::Expense,MyMoneyMoney(0),QDate(2004,1,11),acExpense);
-  acChild = makeAccount("Child",MyMoneyAccount::Expense,MyMoneyMoney(0),QDate(2004,2,11),acParent);
-  acForeign = makeAccount("Foreign",MyMoneyAccount::Expense,MyMoneyMoney(0),QDate(2004,1,11),acExpense);
+  acChecking = makeAccount("Checking Account", MyMoneyAccount::Checkings, moConverterCheckingOpen, QDate(2004, 5, 15), acAsset);
+  acCredit = makeAccount("Credit Card", MyMoneyAccount::CreditCard, moConverterCreditOpen, QDate(2004, 7, 15), acLiability);
+  acSolo = makeAccount("Solo", MyMoneyAccount::Expense, MyMoneyMoney(0), QDate(2004, 1, 11), acExpense);
+  acParent = makeAccount("Parent", MyMoneyAccount::Expense, MyMoneyMoney(0), QDate(2004, 1, 11), acExpense);
+  acChild = makeAccount("Child", MyMoneyAccount::Expense, MyMoneyMoney(0), QDate(2004, 2, 11), acParent);
+  acForeign = makeAccount("Foreign", MyMoneyAccount::Expense, MyMoneyMoney(0), QDate(2004, 1, 11), acExpense);
 
-  MyMoneyInstitution i("Bank of the World","","","","","","");
+  MyMoneyInstitution i("Bank of the World", "", "", "", "", "", "");
   file->addInstitution(i);
   inBank = i.id();
   ft.commit();
 }
 
-void ConverterTest::tearDown () {
+void ConverterTest::tearDown()
+{
   file->detachStorage(storage);
   delete storage;
 }
 
-void ConverterTest::testWebQuotes() {
+void ConverterTest::testWebQuotes()
+{
 #ifdef PERFORM_ONLINE_TESTS
-  try
-  {
+  try {
     WebPriceQuote q;
     QuoteReceiver qr(&q);
 
@@ -211,44 +213,44 @@ void ConverterTest::testWebQuotes() {
 #endif
 }
 
-void ConverterTest::testDateFormat() {
-  try
-  {
+void ConverterTest::testDateFormat()
+{
+  try {
     MyMoneyDateFormat format("%mm-%dd-%yyyy");
 
-    CPPUNIT_ASSERT(format.convertString("1-5-2005") == QDate(2005,1,5));
-    CPPUNIT_ASSERT(format.convertString("jan-15-2005") == QDate(2005,1,15));
-    CPPUNIT_ASSERT(format.convertString("august-25-2005") == QDate(2005,8,25));
+    CPPUNIT_ASSERT(format.convertString("1-5-2005") == QDate(2005, 1, 5));
+    CPPUNIT_ASSERT(format.convertString("jan-15-2005") == QDate(2005, 1, 15));
+    CPPUNIT_ASSERT(format.convertString("august-25-2005") == QDate(2005, 8, 25));
 
     format = MyMoneyDateFormat("%mm/%dd/%yy");
 
-    CPPUNIT_ASSERT(format.convertString("1/5/05") == QDate(2005,1,5));
-    CPPUNIT_ASSERT(format.convertString("jan/15/05") == QDate(2005,1,15));
-    CPPUNIT_ASSERT(format.convertString("august/25/05") == QDate(2005,8,25));
+    CPPUNIT_ASSERT(format.convertString("1/5/05") == QDate(2005, 1, 5));
+    CPPUNIT_ASSERT(format.convertString("jan/15/05") == QDate(2005, 1, 15));
+    CPPUNIT_ASSERT(format.convertString("august/25/05") == QDate(2005, 8, 25));
 
     format = MyMoneyDateFormat("%d\\.%m\\.%yy");
 
-    CPPUNIT_ASSERT(format.convertString("1.5.05") == QDate(2005,5,1));
-    CPPUNIT_ASSERT(format.convertString("15.jan.05") == QDate(2005,1,15));
-    CPPUNIT_ASSERT(format.convertString("25.august.05") == QDate(2005,8,25));
+    CPPUNIT_ASSERT(format.convertString("1.5.05") == QDate(2005, 5, 1));
+    CPPUNIT_ASSERT(format.convertString("15.jan.05") == QDate(2005, 1, 15));
+    CPPUNIT_ASSERT(format.convertString("25.august.05") == QDate(2005, 8, 25));
 
     format = MyMoneyDateFormat("%yyyy\\\\%dddd\\\\%mmmmmmmmmmm");
 
-    CPPUNIT_ASSERT(format.convertString("2005\\31\\12") == QDate(2005,12,31));
-    CPPUNIT_ASSERT(format.convertString("2005\\15\\jan") == QDate(2005,1,15));
-    CPPUNIT_ASSERT(format.convertString("2005\\25\\august") == QDate(2005,8,25));
+    CPPUNIT_ASSERT(format.convertString("2005\\31\\12") == QDate(2005, 12, 31));
+    CPPUNIT_ASSERT(format.convertString("2005\\15\\jan") == QDate(2005, 1, 15));
+    CPPUNIT_ASSERT(format.convertString("2005\\25\\august") == QDate(2005, 8, 25));
 
     format = MyMoneyDateFormat("%m %dd, %yyyy");
 
-    CPPUNIT_ASSERT(format.convertString("jan 15, 2005") == QDate(2005,1,15));
-    CPPUNIT_ASSERT(format.convertString("august 25, 2005") == QDate(2005,8,25));
-    CPPUNIT_ASSERT(format.convertString("january 1st, 2005") == QDate(2005,1,1));
+    CPPUNIT_ASSERT(format.convertString("jan 15, 2005") == QDate(2005, 1, 15));
+    CPPUNIT_ASSERT(format.convertString("august 25, 2005") == QDate(2005, 8, 25));
+    CPPUNIT_ASSERT(format.convertString("january 1st, 2005") == QDate(2005, 1, 1));
 
     format = MyMoneyDateFormat("%m %d %y");
 
-    CPPUNIT_ASSERT(format.convertString("12/31/50",false,2000) == QDate(1950,12,31));
-    CPPUNIT_ASSERT(format.convertString("1/1/90",false,2000) == QDate(1990,1,1));
-    CPPUNIT_ASSERT(format.convertString("december 31st, 5",false) == QDate(2005,12,31));
+    CPPUNIT_ASSERT(format.convertString("12/31/50", false, 2000) == QDate(1950, 12, 31));
+    CPPUNIT_ASSERT(format.convertString("1/1/90", false, 2000) == QDate(1990, 1, 1));
+    CPPUNIT_ASSERT(format.convertString("december 31st, 5", false) == QDate(2005, 12, 31));
   } catch (MyMoneyException* e) {
     CPPUNIT_FAIL(qPrintable(e->what()));
   }

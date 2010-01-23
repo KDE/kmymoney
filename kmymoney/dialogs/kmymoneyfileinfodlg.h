@@ -36,15 +36,15 @@
 class KMyMoneyFileInfoDlgDecl : public QDialog, public Ui::KMyMoneyFileInfoDlgDecl
 {
 public:
-  KMyMoneyFileInfoDlgDecl( QWidget *parent ) : QDialog( parent ) {
-    setupUi( this );
+  KMyMoneyFileInfoDlgDecl(QWidget *parent) : QDialog(parent) {
+    setupUi(this);
   }
 };
 class KMyMoneyFileInfoDlg : public KMyMoneyFileInfoDlgDecl
 {
-   Q_OBJECT
+  Q_OBJECT
 public:
-  KMyMoneyFileInfoDlg(QWidget *parent=0);
+  KMyMoneyFileInfoDlg(QWidget *parent = 0);
   virtual ~KMyMoneyFileInfoDlg();
 };
 

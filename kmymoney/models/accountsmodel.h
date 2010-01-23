@@ -58,14 +58,14 @@ class AccountsModel : public QStandardItemModel
 {
   Q_OBJECT
 
-  public:
-    AccountsModel(QObject *parent = 0);
+public:
+  AccountsModel(QObject *parent = 0);
 
-    void load();
+  void load();
 
-  private:
-    class Private;
-    Private* const d;
+private:
+  class Private;
+  Private* const d;
 };
 
 /**

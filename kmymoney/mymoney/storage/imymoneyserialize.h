@@ -52,7 +52,8 @@
 /**
   * This class represents the interface to serialize a MyMoneyStorage object
   */
-class IMyMoneySerialize {
+class IMyMoneySerialize
+{
 public:
   IMyMoneySerialize();
   virtual ~IMyMoneySerialize();
@@ -72,7 +73,7 @@ public:
    * This method is used to get a SQL reader for subsequent database access
    */
   virtual KSharedPtr <MyMoneyStorageSql> connectToDatabase
-      (const KUrl& url) = 0;
+  (const KUrl& url) = 0;
   /**
     * This method is used when a database file is open, and the data is to
     * be saved in a different file or format. It will ensure that all data
@@ -140,17 +141,17 @@ public:
     * default arguments.
     */
   virtual const QList<MyMoneySchedule> scheduleList(const QString& = QString(),
-                                     const MyMoneySchedule::typeE = MyMoneySchedule::TYPE_ANY,
-                                     const MyMoneySchedule::occurrenceE = MyMoneySchedule::OCCUR_ANY,
-                                     const MyMoneySchedule::paymentTypeE = MyMoneySchedule::STYPE_ANY,
-                                     const QDate& = QDate(),
-                                     const QDate& = QDate(),
-                                     const bool = false) const = 0;
+      const MyMoneySchedule::typeE = MyMoneySchedule::TYPE_ANY,
+      const MyMoneySchedule::occurrenceE = MyMoneySchedule::OCCUR_ANY,
+      const MyMoneySchedule::paymentTypeE = MyMoneySchedule::STYPE_ANY,
+      const QDate& = QDate(),
+      const QDate& = QDate(),
+      const bool = false) const = 0;
 
-   /**
-    * This method returns a list of security objects that the engine has
-    * knowledge of.
-    */
+  /**
+   * This method returns a list of security objects that the engine has
+   * knowledge of.
+   */
   virtual const QList<MyMoneySecurity> securityList(void) const = 0;
 
   /**
@@ -269,8 +270,8 @@ public:
   virtual void loadSchedules(const QMap<QString, MyMoneySchedule>& map) = 0;
   virtual void loadSecurities(const QMap<QString, MyMoneySecurity>& map) = 0;
   virtual void loadCurrencies(const QMap<QString, MyMoneySecurity>& map) = 0;
-  virtual void loadReports( const QMap<QString, MyMoneyReport>& reports ) = 0;
-  virtual void loadBudgets( const QMap<QString, MyMoneyBudget>& budgets ) = 0;
+  virtual void loadReports(const QMap<QString, MyMoneyReport>& reports) = 0;
+  virtual void loadBudgets(const QMap<QString, MyMoneyBudget>& budgets) = 0;
   virtual void loadPrices(const MyMoneyPriceList& list) = 0;
 
   virtual unsigned long accountId(void) const = 0;
@@ -314,11 +315,11 @@ public:
     */
   virtual void setPairs(const QMap<QString, QString>& list) = 0;
 
-  virtual const QList<MyMoneySchedule> scheduleListEx( int scheduleTypes,
-                                              int scheduleOcurrences,
-                                              int schedulePaymentTypes,
-                                              QDate startDate,
-                                              const QStringList& accounts=QStringList()) const = 0;
+  virtual const QList<MyMoneySchedule> scheduleListEx(int scheduleTypes,
+      int scheduleOcurrences,
+      int schedulePaymentTypes,
+      QDate startDate,
+      const QStringList& accounts = QStringList()) const = 0;
 
   /**
     * This method is used to retrieve the list of all currencies
@@ -338,7 +339,7 @@ public:
     *
     * @return QValueList of all MyMoneyReport objects.
     */
-  virtual const QList<MyMoneyReport> reportList( void ) const = 0;
+  virtual const QList<MyMoneyReport> reportList(void) const = 0;
 
   /**
     * This method is used to retrieve the list of all budgets
@@ -348,7 +349,7 @@ public:
     *
     * @return QValueList of all MyMoneyBudget objects.
     */
-  virtual const QList<MyMoneyBudget> budgetList( void ) const = 0;
+  virtual const QList<MyMoneyBudget> budgetList(void) const = 0;
 
 
   /**

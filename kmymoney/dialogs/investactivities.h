@@ -34,7 +34,8 @@
 
 class kMyMoneyEdit;
 
-namespace Invest {
+namespace Invest
+{
 
 class Activity
 {
@@ -57,20 +58,32 @@ public:
   virtual ~Activity() {}
 
 protected:
-  Activity(InvestTransactionEditor* editor) { m_parent = editor; }
-  QWidget* haveWidget(const QString& name) const { return m_parent->haveWidget(name); }
+  Activity(InvestTransactionEditor* editor) {
+    m_parent = editor;
+  }
+  QWidget* haveWidget(const QString& name) const {
+    return m_parent->haveWidget(name);
+  }
   bool haveAssetAccount(void) const;
-  bool haveFees(bool optional = false) const { return haveCategoryAndAmount("fee-account", "fee-amount", optional); }
-  bool haveInterest(bool optional = false) const { return haveCategoryAndAmount("interest-account", "interest-amount", optional); }
+  bool haveFees(bool optional = false) const {
+    return haveCategoryAndAmount("fee-account", "fee-amount", optional);
+  }
+  bool haveInterest(bool optional = false) const {
+    return haveCategoryAndAmount("interest-account", "interest-amount", optional);
+  }
   bool haveShares(void) const;
   bool havePrice(void) const;
-  bool isMultiSelection(void) const { return m_parent->isMultiSelection(); }
-  bool createCategorySplits(const MyMoneyTransaction& t, KMyMoneyCategory* cat, kMyMoneyEdit* amount, MyMoneyMoney factor, QList<MyMoneySplit>&splits, const QList<MyMoneySplit>& osplits ) const;
+  bool isMultiSelection(void) const {
+    return m_parent->isMultiSelection();
+  }
+  bool createCategorySplits(const MyMoneyTransaction& t, KMyMoneyCategory* cat, kMyMoneyEdit* amount, MyMoneyMoney factor, QList<MyMoneySplit>&splits, const QList<MyMoneySplit>& osplits) const;
   void createAssetAccountSplit(MyMoneySplit& split, const MyMoneySplit& stockSplit) const;
   MyMoneyMoney sumSplits(const MyMoneySplit& s0, const QList<MyMoneySplit>& feeSplits, const QList<MyMoneySplit>& interestSplits) const;
   bool haveCategoryAndAmount(const QString& category, const QString& amount, bool optional) const;
   void setLabelText(const QString& idx, const QString& txt) const;
-  InvestTransactionEditor::priceModeE priceMode(void) const { return m_parent->priceMode(); }
+  InvestTransactionEditor::priceModeE priceMode(void) const {
+    return m_parent->priceMode();
+  }
 
 protected:
   InvestTransactionEditor*      m_parent;
@@ -82,7 +95,9 @@ class Buy : public Activity
 public:
   Buy(InvestTransactionEditor* editor) : Activity(editor) {}
   virtual ~Buy() {}
-  virtual MyMoneySplit::investTransactionTypeE type(void) const { return MyMoneySplit::BuyShares; }
+  virtual MyMoneySplit::investTransactionTypeE type(void) const {
+    return MyMoneySplit::BuyShares;
+  }
   virtual void showWidgets(void) const;
   virtual bool isComplete(QString& reason) const;
   virtual bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency);
@@ -93,7 +108,9 @@ class Sell : public Activity
 public:
   Sell(InvestTransactionEditor* editor) : Activity(editor) {}
   virtual ~Sell() {}
-  virtual MyMoneySplit::investTransactionTypeE type(void) const { return MyMoneySplit::SellShares; }
+  virtual MyMoneySplit::investTransactionTypeE type(void) const {
+    return MyMoneySplit::SellShares;
+  }
   virtual void showWidgets(void) const;
   virtual bool isComplete(QString& reason) const;
   virtual bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency);
@@ -104,7 +121,9 @@ class Div : public Activity
 public:
   Div(InvestTransactionEditor* editor) : Activity(editor) {}
   virtual ~Div() {}
-  virtual MyMoneySplit::investTransactionTypeE type(void) const { return MyMoneySplit::Dividend; }
+  virtual MyMoneySplit::investTransactionTypeE type(void) const {
+    return MyMoneySplit::Dividend;
+  }
   virtual void showWidgets(void) const;
   virtual bool isComplete(QString& reason) const;
   virtual bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency);
@@ -115,7 +134,9 @@ class Reinvest : public Activity
 public:
   Reinvest(InvestTransactionEditor* editor) : Activity(editor) {}
   virtual ~Reinvest() {}
-  virtual MyMoneySplit::investTransactionTypeE type(void) const { return MyMoneySplit::ReinvestDividend; }
+  virtual MyMoneySplit::investTransactionTypeE type(void) const {
+    return MyMoneySplit::ReinvestDividend;
+  }
   virtual void showWidgets(void) const;
   virtual bool isComplete(QString& reason) const;
   virtual bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency);
@@ -126,7 +147,9 @@ class Add : public Activity
 public:
   Add(InvestTransactionEditor* editor) : Activity(editor) {}
   virtual ~Add() {}
-  virtual MyMoneySplit::investTransactionTypeE type(void) const { return MyMoneySplit::AddShares; }
+  virtual MyMoneySplit::investTransactionTypeE type(void) const {
+    return MyMoneySplit::AddShares;
+  }
   virtual void showWidgets(void) const;
   virtual bool isComplete(QString& reason) const;
   virtual bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency);
@@ -137,7 +160,9 @@ class Remove : public Activity
 public:
   Remove(InvestTransactionEditor* editor) : Activity(editor) {}
   virtual ~Remove() {}
-  virtual MyMoneySplit::investTransactionTypeE type(void) const { return MyMoneySplit::RemoveShares; }
+  virtual MyMoneySplit::investTransactionTypeE type(void) const {
+    return MyMoneySplit::RemoveShares;
+  }
   virtual void showWidgets(void) const;
   virtual bool isComplete(QString& reason) const;
   virtual bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency);
@@ -148,7 +173,9 @@ class Split : public Activity
 public:
   Split(InvestTransactionEditor* editor) : Activity(editor) {}
   virtual ~Split() {}
-  virtual MyMoneySplit::investTransactionTypeE type(void) const { return MyMoneySplit::SplitShares; }
+  virtual MyMoneySplit::investTransactionTypeE type(void) const {
+    return MyMoneySplit::SplitShares;
+  }
   virtual void showWidgets(void) const;
   virtual bool isComplete(QString& reason) const;
   virtual bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency);

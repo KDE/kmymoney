@@ -30,16 +30,19 @@ KBankingSettings::KBankingSettings(KBanking *ab,
                                    QWidget* parent,
                                    const char* name,
                                    Qt::WFlags fl)
-:QBCfgTabSettings(ab, parent, name, fl) {
+    : QBCfgTabSettings(ab, parent, name, fl)
+{
   addUsersPage();
   addAccountsPage();
   addBackendsPage();
 }
 
-KBankingSettings::~KBankingSettings() {
+KBankingSettings::~KBankingSettings()
+{
 }
 
-int KBankingSettings::init() {
+int KBankingSettings::init()
+{
   if (!toGui()) {
     DBG_ERROR(0, "Could not init dialog");
     return -1;
@@ -47,7 +50,8 @@ int KBankingSettings::init() {
   return 0;
 }
 
-int KBankingSettings::fini() {
+int KBankingSettings::fini()
+{
   if (!fromGui())
     return -1;
   return 0;

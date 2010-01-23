@@ -67,7 +67,9 @@ public:
   /**
    * This method is used to turn on/off the hint display
    */
-  void setHint(const QString& hint) { m_hint = hint; };
+  void setHint(const QString& hint) {
+    m_hint = hint;
+  };
 
 
 public slots:

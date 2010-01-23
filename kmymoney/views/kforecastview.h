@@ -49,8 +49,8 @@ using namespace reports;
 class KForecastViewDecl : public QWidget, public Ui::KForecastViewDecl
 {
 public:
-  KForecastViewDecl( QWidget *parent ) : QWidget( parent ) {
-    setupUi( this );
+  KForecastViewDecl(QWidget *parent) : QWidget(parent) {
+    setupUi(this);
   }
 };
 class KForecastView : public KForecastViewDecl
@@ -59,7 +59,7 @@ class KForecastView : public KForecastViewDecl
 private:
 
 public:
-  KForecastView(QWidget *parent=0);
+  KForecastView(QWidget *parent = 0);
   virtual ~KForecastView();
 
   void show(void);

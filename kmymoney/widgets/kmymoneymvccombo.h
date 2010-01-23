@@ -86,7 +86,7 @@ protected:
   /**
     * reimplemented to support detection of new items
     */
-  void focusOutEvent(QFocusEvent* );
+  void focusOutEvent(QFocusEvent*);
 
   /**
     * set the widgets text area based on the item with the given @a id.
@@ -106,7 +106,9 @@ protected:
   /**
     * overridden for internal reasons, no API change
     */
-  void setCurrentText(const QString& txt = QString()) { KComboBox::setItemText(KComboBox::currentIndex(), txt); }
+  void setCurrentText(const QString& txt = QString()) {
+    KComboBox::setItemText(KComboBox::currentIndex(), txt);
+  }
 
 signals:
   void itemSelected(const QString& id);
@@ -151,7 +153,7 @@ private:
 class KMyMoneyPayeeCombo : public KMyMoneyMVCCombo
 
 {
-   Q_OBJECT
+  Q_OBJECT
 public:
   KMyMoneyPayeeCombo(QWidget* parent = 0);
 
@@ -193,7 +195,9 @@ public:
   explicit KMyMoneyCashFlowCombo(QWidget *w = 0, MyMoneyAccount::accountTypeE type = MyMoneyAccount::Asset);
 
   void setDirection(KMyMoneyRegister::CashFlowDirection dir);
-  KMyMoneyRegister::CashFlowDirection direction(void) const { return m_dir; }
+  KMyMoneyRegister::CashFlowDirection direction(void) const {
+    return m_dir;
+  }
   void removeDontCare(void);
 
 protected slots:
@@ -221,7 +225,9 @@ public:
   KMyMoneyActivityCombo(QWidget *w = 0);
 
   void setActivity(MyMoneySplit::investTransactionTypeE activity);
-  MyMoneySplit::investTransactionTypeE activity(void) const { return m_activity; }
+  MyMoneySplit::investTransactionTypeE activity(void) const {
+    return m_activity;
+  }
 
 protected slots:
   void slotSetActivity(const QString& id);

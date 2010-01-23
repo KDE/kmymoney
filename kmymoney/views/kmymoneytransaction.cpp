@@ -37,7 +37,7 @@ KMyMoneyTransaction::KMyMoneyTransaction()
 }
 
 KMyMoneyTransaction::KMyMoneyTransaction(const MyMoneyTransaction& t) :
-  MyMoneyTransaction(t)
+    MyMoneyTransaction(t)
 {
 }
 

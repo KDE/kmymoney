@@ -48,7 +48,7 @@
 
 using namespace reports;
 
-KReportChartView::KReportChartView( QWidget* parent): KDChart::Chart(parent)
+KReportChartView::KReportChartView(QWidget* parent): KDChart::Chart(parent)
 {
   // ********************************************************************
   // Set KMyMoney's Chart Parameter Defaults
@@ -74,7 +74,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   setNumColumns(numberColumns);
 
   //remove existing headers
-  while(headerFooters().count() > 0) {
+  while (headerFooters().count() > 0) {
     HeaderFooter* delHeader = headerFooters().at(0);
     takeHeaderFooter(delHeader);
     delete delHeader;
@@ -109,52 +109,46 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   bool showBudget = config.hasBudget();
   bool showForecast = config.isIncludingForecast();
   bool showActual = false;
-  if( (config.isIncludingBudgetActuals()) || ( !showBudget && !showForecast) )
+  if ((config.isIncludingBudgetActuals()) || (!showBudget && !showForecast))
     showActual = true;
 
-  switch( config.chartType() )
-  {
-    case MyMoneyReport::eChartNone:
-    case MyMoneyReport::eChartEnd:
-    case MyMoneyReport::eChartLine:
-    {
-      KDChart::LineDiagram* diagram = new KDChart::LineDiagram;
-      coordinatePlane()->replaceDiagram(diagram);
-      break;
-    }
-    case MyMoneyReport::eChartBar:
-    {
-      KDChart::BarDiagram* diagram = new KDChart::BarDiagram;
-      coordinatePlane()->replaceDiagram(diagram);
-      break;
-    }
-    case MyMoneyReport::eChartStackedBar:
-    {
-      KDChart::BarDiagram* diagram = new KDChart::BarDiagram;
-      diagram->setType(BarDiagram::Stacked);
-      coordinatePlane()->replaceDiagram(diagram);
-      break;
-    }
-    case MyMoneyReport::eChartPie:
-    {
-      KDChart::PieDiagram* diagram = new KDChart::PieDiagram;
-      PolarCoordinatePlane* polarPlane = new PolarCoordinatePlane;
-      replaceCoordinatePlane(polarPlane);
-      coordinatePlane()->replaceDiagram(diagram);
-      setAccountSeries(false);
-      setSeriesTotals(true);
-      break;
-    }
-    case MyMoneyReport::eChartRing:
-    {
-      KDChart::RingDiagram* diagram = new KDChart::RingDiagram;
-      PolarCoordinatePlane* polarPlane = new PolarCoordinatePlane;
-      replaceCoordinatePlane(polarPlane);
-      coordinatePlane()->replaceDiagram(diagram);
-      //chartView.params()->setRelativeRingThickness( true );
-      setAccountSeries(false);
-      break;
-    }
+  switch (config.chartType()) {
+  case MyMoneyReport::eChartNone:
+  case MyMoneyReport::eChartEnd:
+  case MyMoneyReport::eChartLine: {
+    KDChart::LineDiagram* diagram = new KDChart::LineDiagram;
+    coordinatePlane()->replaceDiagram(diagram);
+    break;
+  }
+  case MyMoneyReport::eChartBar: {
+    KDChart::BarDiagram* diagram = new KDChart::BarDiagram;
+    coordinatePlane()->replaceDiagram(diagram);
+    break;
+  }
+  case MyMoneyReport::eChartStackedBar: {
+    KDChart::BarDiagram* diagram = new KDChart::BarDiagram;
+    diagram->setType(BarDiagram::Stacked);
+    coordinatePlane()->replaceDiagram(diagram);
+    break;
+  }
+  case MyMoneyReport::eChartPie: {
+    KDChart::PieDiagram* diagram = new KDChart::PieDiagram;
+    PolarCoordinatePlane* polarPlane = new PolarCoordinatePlane;
+    replaceCoordinatePlane(polarPlane);
+    coordinatePlane()->replaceDiagram(diagram);
+    setAccountSeries(false);
+    setSeriesTotals(true);
+    break;
+  }
+  case MyMoneyReport::eChartRing: {
+    KDChart::RingDiagram* diagram = new KDChart::RingDiagram;
+    PolarCoordinatePlane* polarPlane = new PolarCoordinatePlane;
+    replaceCoordinatePlane(polarPlane);
+    coordinatePlane()->replaceDiagram(diagram);
+    //chartView.params()->setRelativeRingThickness( true );
+    setAccountSeries(false);
+    break;
+  }
   }
 
   //set data value attributes
@@ -171,11 +165,11 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   legend->setTitleText(i18nc("Chart legend title", "Legend"));
 
   //set up the axes for cartesian diagrams
-  if(qobject_cast<LineDiagram*>(coordinatePlane()->diagram()) ||
+  if (qobject_cast<LineDiagram*>(coordinatePlane()->diagram()) ||
       qobject_cast<BarDiagram*>(coordinatePlane()->diagram())) {
     //set x axis
     CartesianAxis *xAxis = new CartesianAxis();
-    xAxis->setPosition ( CartesianAxis::Bottom );
+    xAxis->setPosition(CartesianAxis::Bottom);
     xAxis->setTitleText(i18n("Time"));
     TextAttributes xAxisTextAttr(xAxis->titleTextAttributes());
     xAxisTextAttr.setMinimalFontSize(KGlobalSettings::generalFont().pointSize());
@@ -183,25 +177,24 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
     // Set up X axis labels (ie "abscissa" to use the technical term)
     QStringList abscissaNames;
-    if ( accountSeries() ) // if not, we will set these up while putting in the chart values.
-    {
+    if (accountSeries()) { // if not, we will set these up while putting in the chart values.
       int column = 1;
-      while ( column < numColumns() ) {
+      while (column < numColumns()) {
         abscissaNames += QString(columnHeadings[column++]).replace("&nbsp;", " ");
       }
       xAxis->setLabels(abscissaNames);
     }
 
     //set y axis
-    CartesianAxis *yAxis = new CartesianAxis ();
-    yAxis->setPosition ( CartesianAxis::Left );
+    CartesianAxis *yAxis = new CartesianAxis();
+    yAxis->setPosition(CartesianAxis::Left);
     yAxis->setTitleText(i18n("Balance"));
     TextAttributes yAxisTextAttr(yAxis->titleTextAttributes());
     yAxisTextAttr.setMinimalFontSize(KGlobalSettings::generalFont().pointSize());
     yAxis->setTitleTextAttributes(yAxisTextAttr);
 
     //add the axes to the corresponding diagram
-    if(qobject_cast<LineDiagram*>(coordinatePlane()->diagram())) {
+    if (qobject_cast<LineDiagram*>(coordinatePlane()->diagram())) {
       KDChart::LineDiagram* lineDiagram = qobject_cast<LineDiagram*>(coordinatePlane()->diagram());
 
       //set line width
@@ -210,20 +203,20 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
       lineDiagram->setPen(linePen);*/
 
       //remove all existing axes before inserting new ones
-      while(lineDiagram->axes().count() > 0) {
+      while (lineDiagram->axes().count() > 0) {
         CartesianAxis *delAxis  = lineDiagram->axes().at(0);
         lineDiagram->takeAxis(delAxis);
         delete delAxis;
       }
 
       //add the new axes
-      lineDiagram->addAxis( xAxis );
-      lineDiagram->addAxis( yAxis );
+      lineDiagram->addAxis(xAxis);
+      lineDiagram->addAxis(yAxis);
 
-    } else if(qobject_cast<BarDiagram*>(coordinatePlane()->diagram())) {
+    } else if (qobject_cast<BarDiagram*>(coordinatePlane()->diagram())) {
       KDChart::BarDiagram* barDiagram = qobject_cast<BarDiagram*>(coordinatePlane()->diagram());
-      barDiagram->addAxis( xAxis );
-      barDiagram->addAxis( yAxis );
+      barDiagram->addAxis(xAxis);
+      barDiagram->addAxis(yAxis);
     }
   }
 
@@ -232,205 +225,193 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   MarkerAttributes markerAttr(dataValueAttr.markerAttributes());
   markerAttr.setVisible(true);
   markerAttr.setMarkerStyle(MarkerAttributes::MarkerCircle);
-  markerAttr.setMarkerSize(QSize(8,8));
+  markerAttr.setMarkerSize(QSize(8, 8));
   dataValueAttr.setMarkerAttributes(markerAttr);
   coordinatePlane()->diagram()->setDataValueAttributes(dataValueAttr);
 
   // For onMouseOver events, we want to activate mouse tracking
-  setMouseTracking( true );
+  setMouseTracking(true);
 
   ::timetrace("loading rows");
-  switch ( config.detailLevel() )
-  {
-    case MyMoneyReport::eDetailNone:
-    case MyMoneyReport::eDetailEnd:
-    case MyMoneyReport::eDetailAll:
-    {
-      int rowNum = 0;
+  switch (config.detailLevel()) {
+  case MyMoneyReport::eDetailNone:
+  case MyMoneyReport::eDetailEnd:
+  case MyMoneyReport::eDetailAll: {
+    int rowNum = 0;
 
-      // iterate over outer groups
-      PivotGrid::const_iterator it_outergroup = grid.begin();
-      while ( it_outergroup != grid.end() )
-      {
-        // iterate over inner groups
-        PivotOuterGroup::const_iterator it_innergroup = (*it_outergroup).begin();
-        while ( it_innergroup != (*it_outergroup).end() )
-        {
-          //
-          // Rows
-          //
-          QString innergroupdata;
-          PivotInnerGroup::const_iterator it_row = (*it_innergroup).begin();
-          while ( it_row != (*it_innergroup).end() )
-          {
-            //Do not include investments accounts in the chart because they are merely container of stock and other accounts
-            if( it_row.key().accountType() != MyMoneyAccount::Investment) {
-              //iterate row types
-              for(int i = 0; i < rowTypeList.size(); ++i) {
-                //skip the budget difference rowset
-                if(rowTypeList[i] != eBudgetDiff ) {
-                  QString legendText;
+    // iterate over outer groups
+    PivotGrid::const_iterator it_outergroup = grid.begin();
+    while (it_outergroup != grid.end()) {
+      // iterate over inner groups
+      PivotOuterGroup::const_iterator it_innergroup = (*it_outergroup).begin();
+      while (it_innergroup != (*it_outergroup).end()) {
+        //
+        // Rows
+        //
+        QString innergroupdata;
+        PivotInnerGroup::const_iterator it_row = (*it_innergroup).begin();
+        while (it_row != (*it_innergroup).end()) {
+          //Do not include investments accounts in the chart because they are merely container of stock and other accounts
+          if (it_row.key().accountType() != MyMoneyAccount::Investment) {
+            //iterate row types
+            for (int i = 0; i < rowTypeList.size(); ++i) {
+              //skip the budget difference rowset
+              if (rowTypeList[i] != eBudgetDiff) {
+                QString legendText;
 
-                  //only show the column type in the header if there is more than one type
-                  if(rowTypeList.size() > 1) {
-                    legendText = QString(columnTypeHeaderList[i] + " - " + it_row.key().name());
-                  } else {
-                    legendText = QString(it_row.key().name());
-                  }
-
-                  //set the cell value and tooltip
-                  rowNum = drawPivotRowSet(rowNum, it_row.value(), rowTypeList[i], legendText, 1, numColumns());
-
-                  //set the legend text
-                  legend->setText(rowNum-1, legendText);
+                //only show the column type in the header if there is more than one type
+                if (rowTypeList.size() > 1) {
+                  legendText = QString(columnTypeHeaderList[i] + " - " + it_row.key().name());
+                } else {
+                  legendText = QString(it_row.key().name());
                 }
+
+                //set the cell value and tooltip
+                rowNum = drawPivotRowSet(rowNum, it_row.value(), rowTypeList[i], legendText, 1, numColumns());
+
+                //set the legend text
+                legend->setText(rowNum - 1, legendText);
               }
             }
-            ++it_row;
           }
-          ++it_innergroup;
+          ++it_row;
         }
-        ++it_outergroup;
+        ++it_innergroup;
       }
+      ++it_outergroup;
     }
-    break;
+  }
+  break;
 
-    case MyMoneyReport::eDetailTop:
-    {
-      int rowNum = 0;
+  case MyMoneyReport::eDetailTop: {
+    int rowNum = 0;
 
-      // iterate over outer groups
-      PivotGrid::const_iterator it_outergroup = grid.begin();
-      while ( it_outergroup != grid.end() )
-      {
+    // iterate over outer groups
+    PivotGrid::const_iterator it_outergroup = grid.begin();
+    while (it_outergroup != grid.end()) {
 
-        // iterate over inner groups
-        PivotOuterGroup::const_iterator it_innergroup = (*it_outergroup).begin();
-        while ( it_innergroup != (*it_outergroup).end() )
-        {
-          //iterate row types
-          for(int i = 0; i < rowTypeList.size(); ++i) {
-            //skip the budget difference rowset
-            if(rowTypeList[i] != eBudgetDiff ) {
-              QString legendText;
-
-
-              //only show the column type in the header if there is more than one type
-              if(rowTypeList.size() > 1) {
-                legendText = QString(columnTypeHeaderList[i] + " - " + it_innergroup.key());
-              } else {
-                legendText = QString(it_innergroup.key());
-              }
-
-              //set the cell value and tooltip
-              rowNum = drawPivotRowSet(rowNum, (*it_innergroup).m_total, rowTypeList[i], legendText, 1, numColumns());
-
-              //set the legend text
-              legend->setText(rowNum - 1, legendText);
-            }
-          }
-          ++it_innergroup;
-        }
-        ++it_outergroup;
-      }
-    }
-    break;
-
-    case MyMoneyReport::eDetailGroup:
-    {
-      int rowNum = 0;
-
-      // iterate over outer groups
-      PivotGrid::const_iterator it_outergroup = grid.begin();
-      while ( it_outergroup != grid.end() )
-      {
+      // iterate over inner groups
+      PivotOuterGroup::const_iterator it_innergroup = (*it_outergroup).begin();
+      while (it_innergroup != (*it_outergroup).end()) {
         //iterate row types
-        for(int i = 0; i < rowTypeList.size(); ++i) {
+        for (int i = 0; i < rowTypeList.size(); ++i) {
           //skip the budget difference rowset
-          if(rowTypeList[i] != eBudgetDiff ) {
+          if (rowTypeList[i] != eBudgetDiff) {
             QString legendText;
 
+
             //only show the column type in the header if there is more than one type
-            if(rowTypeList.size() > 1) {
-              legendText = QString(columnTypeHeaderList[i] + " - " + it_outergroup.key());
+            if (rowTypeList.size() > 1) {
+              legendText = QString(columnTypeHeaderList[i] + " - " + it_innergroup.key());
             } else {
-              legendText = QString(it_outergroup.key());
+              legendText = QString(it_innergroup.key());
             }
 
             //set the cell value and tooltip
-            rowNum = drawPivotRowSet(rowNum, (*it_outergroup).m_total, rowTypeList[i], legendText, 1, numColumns());
+            rowNum = drawPivotRowSet(rowNum, (*it_innergroup).m_total, rowTypeList[i], legendText, 1, numColumns());
 
-            //set the legend
+            //set the legend text
             legend->setText(rowNum - 1, legendText);
           }
         }
-        ++it_outergroup;
+        ++it_innergroup;
       }
-
-      //if selected, show totals too
-      if (config.isShowingRowTotals())
-      {
-        //iterate row types
-        for(int i = 0; i < rowTypeList.size(); ++i) {
-          //skip the budget difference rowset
-          if(rowTypeList[i] != eBudgetDiff ) {
-            QString legendText;
-
-            //only show the column type in the header if there is more than one type
-            if(rowTypeList.size() > 1) {
-              legendText = QString(columnTypeHeaderList[i] + " - " + i18nc("Total balance", "Total"));
-            } else {
-              legendText = QString(i18nc("Total balance", "Total"));
-            }
-
-            //set the cell value
-            rowNum = drawPivotRowSet(rowNum, grid.m_total, rowTypeList[i], legendText, 1, numColumns());
-
-            //set the legend
-            legend->setText(rowNum - 1, legendText);
-
-          }
-        }
-      }
+      ++it_outergroup;
     }
-    break;
+  }
+  break;
 
-    case MyMoneyReport::eDetailTotal:
-    {
-      int rowNum = 0;
+  case MyMoneyReport::eDetailGroup: {
+    int rowNum = 0;
 
+    // iterate over outer groups
+    PivotGrid::const_iterator it_outergroup = grid.begin();
+    while (it_outergroup != grid.end()) {
       //iterate row types
-      for(int i = 0; i < rowTypeList.size(); ++i) {
+      for (int i = 0; i < rowTypeList.size(); ++i) {
         //skip the budget difference rowset
-        if(rowTypeList[i] != eBudgetDiff ) {
+        if (rowTypeList[i] != eBudgetDiff) {
           QString legendText;
 
           //only show the column type in the header if there is more than one type
-          if(rowTypeList.size() > 1) {
+          if (rowTypeList.size() > 1) {
+            legendText = QString(columnTypeHeaderList[i] + " - " + it_outergroup.key());
+          } else {
+            legendText = QString(it_outergroup.key());
+          }
+
+          //set the cell value and tooltip
+          rowNum = drawPivotRowSet(rowNum, (*it_outergroup).m_total, rowTypeList[i], legendText, 1, numColumns());
+
+          //set the legend
+          legend->setText(rowNum - 1, legendText);
+        }
+      }
+      ++it_outergroup;
+    }
+
+    //if selected, show totals too
+    if (config.isShowingRowTotals()) {
+      //iterate row types
+      for (int i = 0; i < rowTypeList.size(); ++i) {
+        //skip the budget difference rowset
+        if (rowTypeList[i] != eBudgetDiff) {
+          QString legendText;
+
+          //only show the column type in the header if there is more than one type
+          if (rowTypeList.size() > 1) {
             legendText = QString(columnTypeHeaderList[i] + " - " + i18nc("Total balance", "Total"));
           } else {
             legendText = QString(i18nc("Total balance", "Total"));
           }
 
-          if(config.isMixedTime() && (rowTypeList[i] == eActual || rowTypeList[i] == eForecast)) {
-            if(rowTypeList[i] == eActual) {
-              rowNum = drawPivotRowSet(rowNum, grid.m_total, rowTypeList[i], legendText, 1, config.currentDateColumn()+1);
-            } else if (rowTypeList[i] == eForecast) {
-              rowNum = drawPivotRowSet(rowNum, grid.m_total, rowTypeList[i], legendText, config.currentDateColumn(), numColumns());
-            } else {
-              rowNum = drawPivotRowSet(rowNum, grid.m_total, rowTypeList[i], legendText, 1, numColumns());
-            }
-          } else {
-            //set cell value
-            rowNum = drawPivotRowSet(rowNum, grid.m_total, rowTypeList[i], legendText, 1, numColumns());
-          }
+          //set the cell value
+          rowNum = drawPivotRowSet(rowNum, grid.m_total, rowTypeList[i], legendText, 1, numColumns());
 
-          //set legend text
+          //set the legend
           legend->setText(rowNum - 1, legendText);
+
         }
       }
     }
-    break;
+  }
+  break;
+
+  case MyMoneyReport::eDetailTotal: {
+    int rowNum = 0;
+
+    //iterate row types
+    for (int i = 0; i < rowTypeList.size(); ++i) {
+      //skip the budget difference rowset
+      if (rowTypeList[i] != eBudgetDiff) {
+        QString legendText;
+
+        //only show the column type in the header if there is more than one type
+        if (rowTypeList.size() > 1) {
+          legendText = QString(columnTypeHeaderList[i] + " - " + i18nc("Total balance", "Total"));
+        } else {
+          legendText = QString(i18nc("Total balance", "Total"));
+        }
+
+        if (config.isMixedTime() && (rowTypeList[i] == eActual || rowTypeList[i] == eForecast)) {
+          if (rowTypeList[i] == eActual) {
+            rowNum = drawPivotRowSet(rowNum, grid.m_total, rowTypeList[i], legendText, 1, config.currentDateColumn() + 1);
+          } else if (rowTypeList[i] == eForecast) {
+            rowNum = drawPivotRowSet(rowNum, grid.m_total, rowTypeList[i], legendText, config.currentDateColumn(), numColumns());
+          } else {
+            rowNum = drawPivotRowSet(rowNum, grid.m_total, rowTypeList[i], legendText, 1, numColumns());
+          }
+        } else {
+          //set cell value
+          rowNum = drawPivotRowSet(rowNum, grid.m_total, rowTypeList[i], legendText, 1, numColumns());
+        }
+
+        //set legend text
+        legend->setText(rowNum - 1, legendText);
+      }
+    }
+  }
+  break;
   }
   ::timetrace("rows loaded");
 
@@ -439,19 +420,19 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
   //set the legend basic attributes
   //this is done after adding the legend because the values are overridden when adding the legend to the chart
-  if(legend->texts().count() <= KMyMoneyGlobalSettings::maximumLegendItems()) {
+  if (legend->texts().count() <= KMyMoneyGlobalSettings::maximumLegendItems()) {
     legend->setPosition(Position::East);
     TextAttributes legendTextAttr(legend->textAttributes());
-    legendTextAttr.setFontSize(KGlobalSettings::generalFont().pointSize()+2);
+    legendTextAttr.setFontSize(KGlobalSettings::generalFont().pointSize() + 2);
     legendTextAttr.setAutoShrink(true);
     legend->setTextAttributes(legendTextAttr);
 
     TextAttributes legendTitleTextAttr(legend->titleTextAttributes());
-    legendTitleTextAttr.setFontSize(KGlobalSettings::generalFont().pointSize()+4);
+    legendTitleTextAttr.setFontSize(KGlobalSettings::generalFont().pointSize() + 4);
     legendTitleTextAttr.setAutoShrink(true);
     legend->setTitleTextAttributes(legendTitleTextAttr);
-    legend->setTitleText(i18nc("Chart lines legend","Legend"));
-    legend->setUseAutomaticMarkerSize( false );
+    legend->setTitleText(i18nc("Chart lines legend", "Legend"));
+    legend->setUseAutomaticMarkerSize(false);
 
     replaceLegend(legend);
   } else {
@@ -469,46 +450,44 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   //chartView.params()->setDataValuesCalc(0, MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
 }
 
-unsigned KReportChartView::drawPivotRowSet(int rowNum, const PivotGridRowSet& rowSet, const ERowType rowType, const QString& legendText, int startColumn, int endColumn )
+unsigned KReportChartView::drawPivotRowSet(int rowNum, const PivotGridRowSet& rowSet, const ERowType rowType, const QString& legendText, int startColumn, int endColumn)
 {
   //if endColumn is invalid, make it the same as numColumns
-  if(endColumn == 0) {
+  if (endColumn == 0) {
     endColumn = numColumns();
   }
 
   // Columns
-  if ( seriesTotals() )
-  {
+  if (seriesTotals()) {
     double value = rowSet[rowType].m_total.toDouble();
 
     //set the tooltip
     QString toolTip = QString("<h2>%1</h2><strong>%2</strong><br>")
-        .arg(legendText)
-        .arg(value, 0, 'f', 2);
+                      .arg(legendText)
+                      .arg(value, 0, 'f', 2);
 
-    if ( accountSeries() ) {
+    if (accountSeries()) {
       //set the cell value
       this->setDataCell(rowNum, 0, value);
       this->setCellTip(rowNum, 0, toolTip);
-   } else {
+    } else {
       this->setDataCell(0, rowNum, value);
       this->setCellTip(0, rowNum, toolTip);
     }
   } else {
     int column = startColumn;
-    while ( column < endColumn )
-    {
+    while (column < endColumn) {
       double value = rowSet[rowType][column].toDouble();
       QString toolTip = QString("<h2>%1</h2><strong>%2</strong><br>")
-        .arg(legendText)
-        .arg(value, 0, 'f', 2);
+                        .arg(legendText)
+                        .arg(value, 0, 'f', 2);
 
-      if ( accountSeries() ) {
-        this->setDataCell(column-1, rowNum, value);
-        this->setCellTip(column-1, rowNum, toolTip);
+      if (accountSeries()) {
+        this->setDataCell(column - 1, rowNum, value);
+        this->setCellTip(column - 1, rowNum, toolTip);
       } else {
-        this->setDataCell(rowNum, column-1, value );
-        this->setCellTip(rowNum, column-1, toolTip);
+        this->setDataCell(rowNum, column - 1, value);
+        this->setCellTip(rowNum, column - 1, toolTip);
       }
       ++column;
     }
@@ -516,58 +495,58 @@ unsigned KReportChartView::drawPivotRowSet(int rowNum, const PivotGridRowSet& ro
   return ++rowNum;
 }
 
-void KReportChartView::setDataCell( int row, int column, const double data)
+void KReportChartView::setDataCell(int row, int column, const double data)
 {
-    if ( ! coordinatePlane()->diagram()->datasetDimension() == 1 )
-        return;
+  if (! coordinatePlane()->diagram()->datasetDimension() == 1)
+    return;
 
-    justifyModelSize( row + 1, column + 1 );
+  justifyModelSize(row + 1, column + 1);
 
-    const QModelIndex index = m_model.index( row, column );
-    m_model.setData( index, QVariant( data ), Qt::DisplayRole );
+  const QModelIndex index = m_model.index(row, column);
+  m_model.setData(index, QVariant(data), Qt::DisplayRole);
 }
 
-void KReportChartView::setCellTip( int row, int column, QString tip )
+void KReportChartView::setCellTip(int row, int column, QString tip)
 {
-    if ( ! coordinatePlane()->diagram()->datasetDimension() == 1 )
-        return;
+  if (! coordinatePlane()->diagram()->datasetDimension() == 1)
+    return;
 
-    justifyModelSize( row + 1, column + 1 );
+  justifyModelSize(row + 1, column + 1);
 
-    const QModelIndex index = m_model.index( row, column );
-    m_model.setData( index, QVariant( tip ), Qt::ToolTipRole );
+  const QModelIndex index = m_model.index(row, column);
+  m_model.setData(index, QVariant(tip), Qt::ToolTipRole);
 }
 
 /**
  * Justifies the model, so that the given rows and columns fit into it.
  */
-void KReportChartView::justifyModelSize( int rows, int columns )
+void KReportChartView::justifyModelSize(int rows, int columns)
 {
-    const int currentRows = m_model.rowCount();
-    const int currentCols = m_model.columnCount();
+  const int currentRows = m_model.rowCount();
+  const int currentCols = m_model.columnCount();
 
-    if ( currentCols < columns )
-        if ( ! m_model.insertColumns( currentCols, columns - currentCols ))
-            qDebug() << "justifyModelSize: could not increase model size.";
-    if ( currentRows < rows )
-        if ( ! m_model.insertRows( currentRows, rows - currentRows ))
-            qDebug() << "justifyModelSize: could not increase model size.";
+  if (currentCols < columns)
+    if (! m_model.insertColumns(currentCols, columns - currentCols))
+      qDebug() << "justifyModelSize: could not increase model size.";
+  if (currentRows < rows)
+    if (! m_model.insertRows(currentRows, rows - currentRows))
+      qDebug() << "justifyModelSize: could not increase model size.";
 
-    Q_ASSERT( m_model.rowCount() >= rows );
-    Q_ASSERT( m_model.columnCount() >= columns );
+  Q_ASSERT(m_model.rowCount() >= rows);
+  Q_ASSERT(m_model.columnCount() >= columns);
 }
 
-bool KReportChartView::event( QEvent* event )
+bool KReportChartView::event(QEvent* event)
 {
   return Chart::event(event);
 }
 
 void KReportChartView::setLineWidth(const int lineWidth)
 {
-  if(qobject_cast<LineDiagram*>(coordinatePlane()->diagram())) {
+  if (qobject_cast<LineDiagram*>(coordinatePlane()->diagram())) {
     LineDiagram* lineDiagram = qobject_cast<LineDiagram*>(coordinatePlane()->diagram());
     const int currentCols = m_model.columnCount();
-    for(int col = 0; col < currentCols; ++col) {
+    for (int col = 0; col < currentCols; ++col) {
       QPen pen = lineDiagram->pen(col);
       pen.setWidth(lineWidth);
       lineDiagram->setPen(col, pen);
@@ -580,13 +559,13 @@ void KReportChartView::drawLimitLine(const double limit)
   //we get the current number of rows and we add one after that
   int row = m_model.rowCount();
 
-  for(int col = 0; col < m_numColumns; ++col) {
+  for (int col = 0; col < m_numColumns; ++col) {
     setDataCell(col, row, limit);
   }
 //TODO: add format to the line
 }
 
-void KReportChartView::removeLegend( void )
+void KReportChartView::removeLegend(void)
 {
   Legend* chartLegend = legend();
   delete chartLegend;

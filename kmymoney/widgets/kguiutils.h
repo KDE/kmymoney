@@ -43,7 +43,7 @@ class kMandatoryFieldGroup : public QObject
 
 public:
   kMandatoryFieldGroup(QObject *parent) :
-    QObject(parent), m_okButton(0), m_enabled(true) {}
+      QObject(parent), m_okButton(0), m_enabled(true) {}
 
   /**
     * This method adds a widget to the list of mandatory fields for the current dialog
@@ -71,7 +71,9 @@ public:
     * This method returns if all requirements for the mandatory group
     * have been fulfilled (@p true) or not (@p false).
     */
-  bool isEnabled(void) const { return m_enabled; }
+  bool isEnabled(void) const {
+    return m_enabled;
+  }
 
 public slots:
   void clear(void);

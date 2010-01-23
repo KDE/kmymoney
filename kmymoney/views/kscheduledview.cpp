@@ -57,11 +57,11 @@
 #include "kmymoney.h"
 
 KScheduledView::KScheduledView(QWidget *parent) :
-  KScheduledViewDecl(parent),
-  m_openBills(true),
-  m_openDeposits(true),
-  m_openTransfers(true),
-  m_openLoans(true)
+    KScheduledViewDecl(parent),
+    m_openBills(true),
+    m_openDeposits(true),
+    m_openTransfers(true),
+    m_openLoans(true)
 {
   // create the searchline widget
   // and insert it into the existing layout
@@ -81,7 +81,7 @@ KScheduledView::KScheduledView(QWidget *parent) :
 
   m_qlistviewScheduled->setMultiSelection(false);
   m_qlistviewScheduled->header()->setResizeEnabled(true);
-  if(m_qlistviewScheduled->sortColumn() == -1)
+  if (m_qlistviewScheduled->sortColumn() == -1)
     m_qlistviewScheduled->setSorting(0);
 
   connect(m_qbuttonNew, SIGNAL(clicked()), kmymoney->action("schedule_new"), SLOT(trigger()));
@@ -98,16 +98,16 @@ KScheduledView::KScheduledView(QWidget *parent) :
   m_tabWidget->setTabIcon(m_tabWidget->indexOf(m_calendarTab), KIcon("view-calendar-list"));
 
   connect(m_qlistviewScheduled, SIGNAL(contextMenu(K3ListView*, Q3ListViewItem*, const QPoint&)),
-    this, SLOT(slotListViewContextMenu(K3ListView*, Q3ListViewItem*, const QPoint&)));
+          this, SLOT(slotListViewContextMenu(K3ListView*, Q3ListViewItem*, const QPoint&)));
   connect(m_qlistviewScheduled, SIGNAL(selectionChanged(Q3ListViewItem*)),
-    this, SLOT(slotSetSelectedItem(Q3ListViewItem*)));
+          this, SLOT(slotSetSelectedItem(Q3ListViewItem*)));
 
   connect(m_qlistviewScheduled, SIGNAL(doubleClicked(Q3ListViewItem*, const QPoint&, int)),
-    this, SLOT(slotListItemExecuted(Q3ListViewItem*, const QPoint&, int)));
+          this, SLOT(slotListItemExecuted(Q3ListViewItem*, const QPoint&, int)));
   connect(m_qlistviewScheduled, SIGNAL(expanded(Q3ListViewItem*)),
-    this, SLOT(slotListViewExpanded(Q3ListViewItem*)));
+          this, SLOT(slotListViewExpanded(Q3ListViewItem*)));
   connect(m_qlistviewScheduled, SIGNAL(collapsed(Q3ListViewItem*)),
-    this, SLOT(slotListViewCollapsed(Q3ListViewItem*)));
+          this, SLOT(slotListViewCollapsed(Q3ListViewItem*)));
 
   connect(m_calendar, SIGNAL(enterClicked(const MyMoneySchedule&, const QDate&)), this, SLOT(slotBriefEnterClicked(const MyMoneySchedule&, const QDate&)));
   connect(m_calendar, SIGNAL(skipClicked(const MyMoneySchedule&, const QDate&)), this, SLOT(slotBriefSkipClicked(const MyMoneySchedule&, const QDate&)));
@@ -128,13 +128,10 @@ void KScheduledView::refresh(bool full, const QString& schedId)
 
   m_qlistviewScheduled->clear();
 
-  try
-  {
-    if (full)
-    {
-      try
-      {
-        int accountCount=0;
+  try {
+    if (full) {
+      try {
+        int accountCount = 0;
 
         m_kaccPopup->clear();
 
@@ -143,8 +140,7 @@ void KScheduledView::refresh(bool full, const QString& schedId)
         QStringList::ConstIterator it_s;
 
         acc = file->asset();
-        for(it_s = acc.accountList().begin(); it_s != acc.accountList().end(); ++it_s)
-        {
+        for (it_s = acc.accountList().begin(); it_s != acc.accountList().end(); ++it_s) {
           QAction* act;
           MyMoneyAccount a = file->account(*it_s);
           act = m_kaccPopup->addAction(a.name());
@@ -152,9 +148,7 @@ void KScheduledView::refresh(bool full, const QString& schedId)
           act->setChecked(true);
           ++accountCount;
         }
-      }
-      catch (MyMoneyException *e)
-      {
+      } catch (MyMoneyException *e) {
         KMessageBox::detailedError(this, i18n("Unable to load accounts: "), e->what());
         delete e;
       }
@@ -176,20 +170,17 @@ void KScheduledView::refresh(bool full, const QString& schedId)
 
     QList<MyMoneySchedule>::Iterator it;
 
-    KScheduledListItem *openItem=0;
+    KScheduledListItem *openItem = 0;
 
-    for (it = scheduledItems.begin(); it != scheduledItems.end(); ++it)
-    {
+    for (it = scheduledItems.begin(); it != scheduledItems.end(); ++it) {
       MyMoneySchedule schedData = (*it);
-      KScheduledListItem* item=0;
+      KScheduledListItem* item = 0;
 
-      bool bContinue=true;
+      bool bContinue = true;
       QStringList::iterator accIt;
-      for (accIt=m_filterAccounts.begin(); accIt!=m_filterAccounts.end(); ++accIt)
-      {
-        if (*accIt == schedData.account().id())
-        {
-          bContinue=false; // Filter it out
+      for (accIt = m_filterAccounts.begin(); accIt != m_filterAccounts.end(); ++accIt) {
+        if (*accIt == schedData.account().id()) {
+          bContinue = false; // Filter it out
           break;
         }
       }
@@ -198,31 +189,30 @@ void KScheduledView::refresh(bool full, const QString& schedId)
         continue;
 
       KScheduledListItem* parent = 0;
-      switch (schedData.type())
-      {
-        case MyMoneySchedule::TYPE_ANY:
-          // Should we display an error ?
-          // We just sort it as bill and fall through here
+      switch (schedData.type()) {
+      case MyMoneySchedule::TYPE_ANY:
+        // Should we display an error ?
+        // We just sort it as bill and fall through here
 
-        case MyMoneySchedule::TYPE_BILL:
-          parent = itemBills;
-          break;
+      case MyMoneySchedule::TYPE_BILL:
+        parent = itemBills;
+        break;
 
-        case MyMoneySchedule::TYPE_DEPOSIT:
-          parent = itemDeposits;
-          break;
+      case MyMoneySchedule::TYPE_DEPOSIT:
+        parent = itemDeposits;
+        break;
 
-        case MyMoneySchedule::TYPE_TRANSFER:
-          parent = itemTransfers;
-          break;
+      case MyMoneySchedule::TYPE_TRANSFER:
+        parent = itemTransfers;
+        break;
 
-        case MyMoneySchedule::TYPE_LOANPAYMENT:
-          parent = itemLoans;
-          break;
+      case MyMoneySchedule::TYPE_LOANPAYMENT:
+        parent = itemLoans;
+        break;
 
       }
-      if(parent) {
-        if(!KMyMoneyGlobalSettings::hideFinishedSchedules() || !schedData.isFinished()) {
+      if (parent) {
+        if (!KMyMoneyGlobalSettings::hideFinishedSchedules() || !schedData.isFinished()) {
           item = new KScheduledListItem(parent, schedData);
           if (schedData.id() == schedId)
             openItem = item;
@@ -230,14 +220,13 @@ void KScheduledView::refresh(bool full, const QString& schedId)
       }
     }
 
-    if (openItem)
-    {
+    if (openItem) {
       m_qlistviewScheduled->setSelected(openItem, true);
     }
     // using a timeout is the only way, I got the 'ensureTransactionVisible'
     // working when coming from hidden form to visible form. I assume, this
     // has something to do with the delayed update of the display somehow.
-    resize(width(), height()-1);
+    resize(width(), height() - 1);
     QTimer::singleShot(10, this, SLOT(slotTimerDone()));
     m_qlistviewScheduled->update();
 
@@ -258,8 +247,7 @@ void KScheduledView::refresh(bool full, const QString& schedId)
 
     m_qlistviewScheduled->setContentsPos(startPoint.x(), startPoint.y());
 
-  } catch (MyMoneyException *e)
-  {
+  } catch (MyMoneyException *e) {
     KMessageBox::error(this, e->what());
     delete e;
   }
@@ -270,21 +258,21 @@ void KScheduledView::slotTimerDone(void)
   Q3ListViewItem* item;
 
   item = m_qlistviewScheduled->selectedItem();
-  if(item) {
+  if (item) {
     m_qlistviewScheduled->ensureItemVisible(item);
   }
 
   // force a repaint of all items to update the branches
-  for(item = m_qlistviewScheduled->firstChild(); item != 0; item = item->itemBelow()) {
+  for (item = m_qlistviewScheduled->firstChild(); item != 0; item = item->itemBelow()) {
     m_qlistviewScheduled->repaintItem(item);
   }
-  resize(width(), height()+1);
+  resize(width(), height() + 1);
 }
 
 void KScheduledView::slotReloadView(void)
 {
   m_needReload = true;
-  if(isVisible()) {
+  if (isVisible()) {
     m_qbuttonNew->setEnabled(true);
     m_tabWidget->setEnabled(true);
 
@@ -299,7 +287,7 @@ void KScheduledView::show()
 {
   KScheduledViewDecl::show();
 
-  if(m_needReload)
+  if (m_needReload)
     slotReloadView();
 }
 
@@ -342,27 +330,21 @@ void KScheduledView::writeConfig(void)
 void KScheduledView::slotListViewContextMenu(K3ListView* /* view */, Q3ListViewItem *item, const QPoint& /* pos */)
 {
   KScheduledListItem *scheduleItem = dynamic_cast<KScheduledListItem *>(item);
-  if (scheduleItem)
-  {
-    try
-    {
+  if (scheduleItem) {
+    try {
       QString scheduleId = scheduleItem->scheduleId();
 
-      if (!scheduleId.isEmpty()) // Top level item
-      {
+      if (!scheduleId.isEmpty()) { // Top level item
         MyMoneySchedule schedule = MyMoneyFile::instance()->schedule(scheduleId);
         emit scheduleSelected(schedule);
         m_selectedSchedule = schedule.id();
       }
       emit openContextMenu();
-    } catch (MyMoneyException *e)
-    {
+    } catch (MyMoneyException *e) {
       KMessageBox::detailedSorry(this, i18n("Error activating context menu"), e->what());
       delete e;
     }
-  }
-  else
-  {
+  } else {
     emit openContextMenu();
   }
 }
@@ -373,18 +355,15 @@ void KScheduledView::slotListItemExecuted(Q3ListViewItem* item, const QPoint&, i
   if (!scheduleItem)
     return;
 
-  try
-  {
+  try {
     QString scheduleId = scheduleItem->scheduleId();
 
-    if (!scheduleId.isEmpty()) // Top level item
-    {
+    if (!scheduleId.isEmpty()) { // Top level item
       MyMoneySchedule schedule = MyMoneyFile::instance()->schedule(scheduleId);
       m_selectedSchedule = schedule.id();
       emit editSchedule();
     }
-  } catch (MyMoneyException *e)
-  {
+  } catch (MyMoneyException *e) {
     KMessageBox::detailedSorry(this, i18n("Error executing item"), e->what());
     delete e;
   }
@@ -394,18 +373,15 @@ void KScheduledView::slotAccountActivated(int /*id*/)
 {
   m_filterAccounts.clear();
 
-  try
-  {
-    int accountCount=0;
+  try {
+    int accountCount = 0;
     MyMoneyFile* file = MyMoneyFile::instance();
     MyMoneyAccount acc;
     QStringList::ConstIterator it_s;
 
     acc = file->asset();
-    for(it_s = acc.accountList().begin(); it_s != acc.accountList().end(); ++it_s)
-    {
-      if (!m_kaccPopup->actions().value(accountCount)->isChecked())
-      {
+    for (it_s = acc.accountList().begin(); it_s != acc.accountList().end(); ++it_s) {
+      if (!m_kaccPopup->actions().value(accountCount)->isChecked()) {
         m_filterAccounts.append(*it_s);
       }
       ++accountCount;
@@ -414,9 +390,7 @@ void KScheduledView::slotAccountActivated(int /*id*/)
     m_calendar->setFilterAccounts(m_filterAccounts);
 
     refresh(false, m_selectedSchedule);
-  }
-  catch (MyMoneyException *e)
-  {
+  } catch (MyMoneyException *e) {
     KMessageBox::detailedError(this, i18n("Unable to filter account"), e->what());
     delete e;
   }
@@ -425,8 +399,7 @@ void KScheduledView::slotAccountActivated(int /*id*/)
 void KScheduledView::slotListViewExpanded(Q3ListViewItem* item)
 {
   KScheduledListItem *scheduleItem = (KScheduledListItem*)item;
-  if (scheduleItem)
-  {
+  if (scheduleItem) {
     if (scheduleItem->text(0) == i18n("Bills"))
       m_openBills = true;
     else if (scheduleItem->text(0) == i18n("Deposits"))
@@ -441,8 +414,7 @@ void KScheduledView::slotListViewExpanded(Q3ListViewItem* item)
 void KScheduledView::slotListViewCollapsed(Q3ListViewItem* item)
 {
   KScheduledListItem *scheduleItem = (KScheduledListItem*)item;
-  if (scheduleItem)
-  {
+  if (scheduleItem) {
     if (scheduleItem->text(0) == i18n("Bills"))
       m_openBills = false;
     else if (scheduleItem->text(0) == i18n("Deposits"))
@@ -479,12 +451,12 @@ void KScheduledView::slotSetSelectedItem(Q3ListViewItem* item)
 {
   emit scheduleSelected(MyMoneySchedule());
   KScheduledListItem* schedItem = static_cast<KScheduledListItem*>(item);
-  if(item) {
+  if (item) {
     try {
       MyMoneySchedule schedule = MyMoneyFile::instance()->schedule(schedItem->scheduleId());
       emit scheduleSelected(schedule);
       m_selectedSchedule = schedItem->scheduleId();
-    } catch(MyMoneyException* e) {
+    } catch (MyMoneyException* e) {
       qDebug("KScheduledView::slotSetSelectedItem: %s", qPrintable(e->what()));
       delete e;
     }

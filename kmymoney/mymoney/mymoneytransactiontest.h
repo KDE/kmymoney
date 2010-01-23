@@ -30,65 +30,66 @@
 #include "mymoneytransaction.h"
 #undef private
 
-class MyMoneyTransactionTest : public CppUnit::TestFixture  {
-        CPPUNIT_TEST_SUITE(MyMoneyTransactionTest);
-	CPPUNIT_TEST(testEmptyConstructor);
-	CPPUNIT_TEST(testSetFunctions);
-	CPPUNIT_TEST(testConstructor);
-	CPPUNIT_TEST(testCopyConstructor);
-	CPPUNIT_TEST(testAssignmentConstructor);
-	CPPUNIT_TEST(testAddSplits);
-	CPPUNIT_TEST(testModifySplits);
-	CPPUNIT_TEST(testDeleteSplits);
-	CPPUNIT_TEST(testDeleteAllSplits);
-	CPPUNIT_TEST(testEquality);
-	CPPUNIT_TEST(testInequality);
-	CPPUNIT_TEST(testExtractSplit);
-	CPPUNIT_TEST(testSplitSum);
-	CPPUNIT_TEST(testIsLoanPayment);
-	CPPUNIT_TEST(testWriteXML);
-	CPPUNIT_TEST(testReadXML);
-	CPPUNIT_TEST(testAutoCalc);
-	CPPUNIT_TEST(testHasReferenceTo);
-	CPPUNIT_TEST(testIsStockSplit);
-	CPPUNIT_TEST(testAddMissingAccountId);
-	CPPUNIT_TEST(testModifyMissingAccountId);
+class MyMoneyTransactionTest : public CppUnit::TestFixture
+{
+  CPPUNIT_TEST_SUITE(MyMoneyTransactionTest);
+  CPPUNIT_TEST(testEmptyConstructor);
+  CPPUNIT_TEST(testSetFunctions);
+  CPPUNIT_TEST(testConstructor);
+  CPPUNIT_TEST(testCopyConstructor);
+  CPPUNIT_TEST(testAssignmentConstructor);
+  CPPUNIT_TEST(testAddSplits);
+  CPPUNIT_TEST(testModifySplits);
+  CPPUNIT_TEST(testDeleteSplits);
+  CPPUNIT_TEST(testDeleteAllSplits);
+  CPPUNIT_TEST(testEquality);
+  CPPUNIT_TEST(testInequality);
+  CPPUNIT_TEST(testExtractSplit);
+  CPPUNIT_TEST(testSplitSum);
+  CPPUNIT_TEST(testIsLoanPayment);
+  CPPUNIT_TEST(testWriteXML);
+  CPPUNIT_TEST(testReadXML);
+  CPPUNIT_TEST(testAutoCalc);
+  CPPUNIT_TEST(testHasReferenceTo);
+  CPPUNIT_TEST(testIsStockSplit);
+  CPPUNIT_TEST(testAddMissingAccountId);
+  CPPUNIT_TEST(testModifyMissingAccountId);
 #if 0
-	CPPUNIT_TEST(testAddDuplicateAccount);
-	CPPUNIT_TEST(testModifyDuplicateAccount);
+  CPPUNIT_TEST(testAddDuplicateAccount);
+  CPPUNIT_TEST(testModifyDuplicateAccount);
 #endif
-        CPPUNIT_TEST_SUITE_END();
+  CPPUNIT_TEST_SUITE_END();
 
 protected:
-	MyMoneyTransaction *m;
+  MyMoneyTransaction *m;
 
 public:
-	MyMoneyTransactionTest ();
+  MyMoneyTransactionTest();
 
-	void setUp ();
-	void tearDown ();
-	void testEmptyConstructor();
-	void testSetFunctions();
-	void testConstructor();
-	void testCopyConstructor();
-	void testAssignmentConstructor();
-	void testEquality();
-	void testInequality();
-	void testAddSplits();
-	void testModifySplits();
-	void testDeleteSplits();
-	void testExtractSplit();
-	void testDeleteAllSplits();
-	void testSplitSum();
-	void testIsLoanPayment();
-	void testAddDuplicateAccount();
-	void testModifyDuplicateAccount();
-	void testWriteXML();
-	void testReadXML();
-	void testAutoCalc();
-	void testHasReferenceTo();
-	void testIsStockSplit();
-	void testAddMissingAccountId();
-	void testModifyMissingAccountId();
+  void setUp();
+  void tearDown();
+  void testEmptyConstructor();
+  void testSetFunctions();
+  void testConstructor();
+  void testCopyConstructor();
+  void testAssignmentConstructor();
+  void testEquality();
+  void testInequality();
+  void testAddSplits();
+  void testModifySplits();
+  void testDeleteSplits();
+  void testExtractSplit();
+  void testDeleteAllSplits();
+  void testSplitSum();
+  void testIsLoanPayment();
+  void testAddDuplicateAccount();
+  void testModifyDuplicateAccount();
+  void testWriteXML();
+  void testReadXML();
+  void testAutoCalc();
+  void testHasReferenceTo();
+  void testIsStockSplit();
+  void testAddMissingAccountId();
+  void testModifyMissingAccountId();
 };
 #endif

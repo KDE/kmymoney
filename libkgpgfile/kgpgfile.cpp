@@ -47,39 +47,38 @@
 #include <gpgme++/data.h>
 #include <qgpgme/dataprovider.h>
 
-class KGPGFile::Private {
-  public:
-    Private()
-    {
-      GpgME::initializeLibrary();
-      ctx = GpgME::Context::createForProtocol(GpgME::OpenPGP);
-      if (!ctx)
-        qDebug("Failed to create the GpgME context for the OpenPGP protocol");
-    }
+class KGPGFile::Private
+{
+public:
+  Private() {
+    GpgME::initializeLibrary();
+    ctx = GpgME::Context::createForProtocol(GpgME::OpenPGP);
+    if (!ctx)
+      qDebug("Failed to create the GpgME context for the OpenPGP protocol");
+  }
 
-    ~Private()
-    {
-      delete ctx;
-    }
+  ~Private() {
+    delete ctx;
+  }
 
-    QString m_fn;
-    QFile* m_file;
+  QString m_fn;
+  QFile* m_file;
 
-    GpgME::Error m_lastError;
+  GpgME::Error m_lastError;
 
-    GpgME::Context* ctx;
-    GpgME::Data m_data;
+  GpgME::Context* ctx;
+  GpgME::Data m_data;
 
-    std::vector< GpgME::Key > m_recipients;
+  std::vector< GpgME::Key > m_recipients;
 
-    // the result set of the last key list job
-    std::vector< GpgME::Key > m_keys;
+  // the result set of the last key list job
+  std::vector< GpgME::Key > m_keys;
 };
 
 
 
 KGPGFile::KGPGFile(const QString& fn, const QString& homedir, const QString& options) :
-  d(new Private)
+    d(new Private)
 {
   // only kept for interface compatibility
   Q_UNUSED(homedir);
@@ -97,10 +96,10 @@ KGPGFile::~KGPGFile()
 void KGPGFile::setFileName(const QString& fn)
 {
   d->m_fn = fn;
-  if(!fn.isEmpty() && fn[0] == '~') {
-    d->m_fn = QDir::homePath()+fn.mid(1);
+  if (!fn.isEmpty() && fn[0] == '~') {
+    d->m_fn = QDir::homePath() + fn.mid(1);
 
-  } else if(QDir::isRelativePath(d->m_fn)) {
+  } else if (QDir::isRelativePath(d->m_fn)) {
     QDir dir(fn);
     d->m_fn = dir.absolutePath();
   }
@@ -116,24 +115,24 @@ void KGPGFile::addRecipient(const QString& recipient)
 {
   // skip a possible leading 0x in the id
   QString cmp = recipient;
-  if(cmp.startsWith(QLatin1String("0x")))
+  if (cmp.startsWith(QLatin1String("0x")))
     cmp = cmp.mid(2);
 
   QStringList keylist;
   keyList(keylist, false, cmp);
 
-  if(d->m_keys.size() > 0)
+  if (d->m_keys.size() > 0)
     d->m_recipients.push_back(d->m_keys.front());
 }
 
 bool KGPGFile::open(OpenMode mode)
 {
   // qDebug("KGPGFile::open(%d)", (int)mode);
-  if(isOpen()) {
+  if (isOpen()) {
     return false;
   }
 
-  if(d->m_fn.isEmpty())
+  if (d->m_fn.isEmpty())
     return false;
 
   if (!d->ctx)
@@ -142,19 +141,19 @@ bool KGPGFile::open(OpenMode mode)
   setOpenMode(mode);
 
   // qDebug("check valid access mode");
-  if(!(isReadable() || isWritable()))
+  if (!(isReadable() || isWritable()))
     return false;
 
-  if(isWritable()) {
+  if (isWritable()) {
 
     // qDebug("check recipient count");
-    if(d->m_recipients.size() == 0) {
+    if (d->m_recipients.size() == 0) {
       setOpenMode(NotOpen);
       return false;
     }
 
     // qDebug("check access rights");
-    if(!KStandardDirs::checkAccess(d->m_fn, W_OK))
+    if (!KStandardDirs::checkAccess(d->m_fn, W_OK))
       return false;
 
     // write out in ASCII armor mode
@@ -165,15 +164,15 @@ bool KGPGFile::open(OpenMode mode)
   // qDebug("open physical file");
   d->m_file = new QFile;
   d->m_file->setFileName(d->m_fn);
-  if(!d->m_file->open(mode)) {
+  if (!d->m_file->open(mode)) {
     setOpenMode(NotOpen);
     return false;
   }
 
-  if(isReadable()) {
+  if (isReadable()) {
     GpgME::Data dcipher(d->m_file->handle());
     d->m_lastError = d->ctx->decrypt(dcipher, d->m_data).error();
-    if(d->m_lastError.encodedError()) {
+    if (d->m_lastError.encodedError()) {
       return false;
     }
     d->m_data.seek(0, SEEK_SET);
@@ -184,18 +183,18 @@ bool KGPGFile::open(OpenMode mode)
 
 void KGPGFile::close(void)
 {
-  if(!isOpen()) {
+  if (!isOpen()) {
     return;
   }
 
   if (!d->ctx)
     return;
 
-  if(isWritable()) {
+  if (isWritable()) {
     d->m_data.seek(0, SEEK_SET);
     GpgME::Data dcipher(d->m_file->handle());
     d->m_lastError = d->ctx->encrypt(d->m_recipients, d->m_data, dcipher, GpgME::Context::AlwaysTrust).error();
-    if(d->m_lastError.encodedError()) {
+    if (d->m_lastError.encodedError()) {
       qDebug("Failure while writing file: '%s'", d->m_lastError.asString());
     }
   }
@@ -210,10 +209,10 @@ void KGPGFile::close(void)
 
 qint64 KGPGFile::writeData(const char *data, qint64 maxlen)
 {
-  if(!isOpen())
+  if (!isOpen())
     return EOF;
 
-  if(!isWritable())
+  if (!isWritable())
     return EOF;
 
   // qDebug("write %d bytes", qint32(maxlen & 0xFFFFFFFF));
@@ -221,9 +220,9 @@ qint64 KGPGFile::writeData(const char *data, qint64 maxlen)
   // write out the data and make sure that we do not cross
   // size_t boundaries.
   qint64 bytesWritten = 0;
-  while(maxlen) {
-    size_t len = 2^31;
-    if(len > maxlen)
+  while (maxlen) {
+    size_t len = 2 ^ 31;
+    if (len > maxlen)
       len = maxlen;
     bytesWritten += d->m_data.write(data, len);
     data = &data[len];
@@ -235,20 +234,20 @@ qint64 KGPGFile::writeData(const char *data, qint64 maxlen)
 
 qint64 KGPGFile::readData(char *data, qint64 maxlen)
 {
-  if(maxlen == 0)
+  if (maxlen == 0)
     return 0;
 
-  if(!isOpen())
+  if (!isOpen())
     return EOF;
-  if(!isReadable())
+  if (!isReadable())
     return EOF;
 
   // read requested block of data and make sure that we do not cross
   // size_t boundaries.
   qint64 bytesRead = 0;
-  while(maxlen) {
-    size_t len = 2^31;
-    if(len > maxlen)
+  while (maxlen) {
+    size_t len = 2 ^ 31;
+    if (len > maxlen)
       len = maxlen;
     bytesRead += d->m_data.read(data, len);
     data = &data[len];
@@ -296,25 +295,25 @@ void KGPGFile::keyList(QStringList& list, bool secretKeys, const QString& patter
 {
   d->m_keys.clear();
   list.clear();
-  if(d->ctx && !d->ctx->startKeyListing(pattern.toUtf8().constData(), secretKeys)) {
+  if (d->ctx && !d->ctx->startKeyListing(pattern.toUtf8().constData(), secretKeys)) {
     GpgME::Error error;
-    for(;;) {
+    for (;;) {
       GpgME::Key key;
       key = d->ctx->nextKey(error);
-      if(error.encodedError() != GPG_ERR_NO_ERROR)
+      if (error.encodedError() != GPG_ERR_NO_ERROR)
         break;
 
       bool needPushBack = true;
 
       std::vector<GpgME::UserID> userIDs = key.userIDs();
       std::vector<GpgME::Subkey> subkeys = key.subkeys();
-      for(unsigned int i = 0; i < userIDs.size(); ++i) {
+      for (unsigned int i = 0; i < userIDs.size(); ++i) {
         const GpgME::Subkey& skey = subkeys[i];
 
-        if(!(skey.isRevoked() || skey.isExpired() || skey.isInvalid()  || skey.isDisabled())) {
+        if (!(skey.isRevoked() || skey.isExpired() || skey.isInvalid()  || skey.isDisabled())) {
           QString entry = QString("%1:%2").arg(key.shortKeyID()).arg(userIDs[i].id());
           list += entry;
-          if(needPushBack) {
+          if (needPushBack) {
             d->m_keys.push_back(key);
             needPushBack = false;
           }

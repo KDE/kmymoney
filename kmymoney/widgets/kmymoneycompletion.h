@@ -52,7 +52,7 @@ class kMyMoneyCompletion : public KVBox
   Q_OBJECT
 public:
 
-  kMyMoneyCompletion(QWidget *parent=0);
+  kMyMoneyCompletion(QWidget *parent = 0);
   virtual ~kMyMoneyCompletion();
 
   /**
@@ -68,7 +68,9 @@ public:
     */
   void setSelected(const QString& id);
 
-  virtual KMyMoneySelector* selector(void) const { return m_selector; }
+  virtual KMyMoneySelector* selector(void) const {
+    return m_selector;
+  }
 
 public slots:
   void slotMakeCompletion(const QString& txt);
@@ -80,7 +82,7 @@ protected:
     * Reimplemented from kMyMoneyAccountSelector to get events from the viewport (to hide
     * this widget on mouse-click, Escape-presses, etc.
     */
-  virtual bool eventFilter( QObject *, QEvent * );
+  virtual bool eventFilter(QObject *, QEvent *);
 
   /**
     * Re-implemented for internal reasons.  API is unaffected.

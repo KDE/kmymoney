@@ -30,7 +30,7 @@
 // Project Includes
 
 Currency::Currency(QWidget* parent) :
-  CurrencyDecl(parent)
+    CurrencyDecl(parent)
 {
   m_currencyList->setAllColumnsShowFocus(true);
   m_currencyList->setMultiSelection(false);
@@ -45,8 +45,8 @@ void Currency::selectCurrency(const MyMoneySecurity& sec)
 {
   Q3ListViewItem* it_v;
   Q3ListViewItemIterator it(m_currencyList);
-  while((it_v = it.current()) != 0) {
-    if(it_v->text(1) == QString(sec.id())) {
+  while ((it_v = it.current()) != 0) {
+    if (it_v->text(1) == QString(sec.id())) {
       m_currencyList->setSelected(it_v, true);
       m_currencyList->ensureItemVisible(it_v);
       break;
@@ -57,7 +57,7 @@ void Currency::selectCurrency(const MyMoneySecurity& sec)
 QString Currency::selectedCurrency(void) const
 {
   QString id;
-  if(m_currencyList->selectedItem()) {
+  if (m_currencyList->selectedItem()) {
     id = m_currencyList->selectedItem()->text(1);
   }
   return id;

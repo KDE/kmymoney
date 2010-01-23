@@ -42,7 +42,8 @@
 #include "kmymoneysettings.h"
 
 
-namespace KMyMoneyTransactionForm {
+namespace KMyMoneyTransactionForm
+{
 
 /**
   * @author Thomas Baumgart
@@ -78,12 +79,12 @@ public slots:
   /**
     * overridden for internal reasons, API not changed
     */
-  virtual void setCurrentIndex( int );
+  virtual void setCurrentIndex(int);
 
   /**
     * overridden for internal reasons, API not changed
     */
-  virtual void setCurrentWidget( QWidget * );
+  virtual void setCurrentWidget(QWidget *);
 
   /**
     * overridden for internal reasons, API not changed
@@ -98,7 +99,7 @@ signals:
 
 private:
   SignalEmissionE    m_signalType;
-  
+
   /**
     * maps our internal action ids to those used by
     * qt3. Since it does not seem possible to tell
@@ -130,7 +131,7 @@ public:
   /**
     * Override the QTable member function to avoid display of focus
     */
-  void paintFocus(QPainter* /*p*/, const QRect& /*cr*/ ) {}
+  void paintFocus(QPainter* /*p*/, const QRect& /*cr*/) {}
 
   QSize tableSize(void) const;
   QSize sizeHint(void) const;
@@ -156,7 +157,7 @@ public:
 
   void enableTabBar(bool b);
 
-  protected:
+protected:
   /**
     * reimplemented to support QWidget::WState_BlockUpdates
     */
@@ -165,27 +166,37 @@ public:
   /**
     * reimplemented to prevent normal mouse press behavior
     */
-  void contentsMousePressEvent(QMouseEvent* ev) { ev->ignore(); }
+  void contentsMousePressEvent(QMouseEvent* ev) {
+    ev->ignore();
+  }
 
   /**
     * reimplemented to prevent normal mouse move behavior
     */
-  void contentsMouseMoveEvent(QMouseEvent* ev) { ev->ignore(); }
+  void contentsMouseMoveEvent(QMouseEvent* ev) {
+    ev->ignore();
+  }
 
   /**
     * reimplemented to prevent normal mouse release behavior
     */
-  void contentsMouseReleaseEvent(QMouseEvent* ev) { ev->ignore(); }
+  void contentsMouseReleaseEvent(QMouseEvent* ev) {
+    ev->ignore();
+  }
 
   /**
     * reimplemented to prevent normal mouse double click behavior
     */
-  void contentsMouseDoubleClickEvent(QMouseEvent* ev) { ev->ignore(); }
+  void contentsMouseDoubleClickEvent(QMouseEvent* ev) {
+    ev->ignore();
+  }
 
   /**
     * reimplemented to prevent normal keyboard behavior
     */
-  void keyPressEvent(QKeyEvent* ev) { ev->ignore(); }
+  void keyPressEvent(QKeyEvent* ev) {
+    ev->ignore();
+  }
 
   /**
     * Override logic and use standard QFrame behaviour

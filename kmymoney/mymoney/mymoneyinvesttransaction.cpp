@@ -24,9 +24,9 @@
 
 #if 0
 MyMoneyInvestTransaction::MyMoneyInvestTransaction(MyMoneyAccount *parent, const long id, transactionMethod method, const QString& number, const QString& memo,
-                     const MyMoneyMoney& amount, const QDate& date, const QString& categoryMajor, const QString& categoryMinor, const QString& atmName,
-                     const QString& fromTo, const QString& bankFrom, const QString& bankTo, stateE state)
- : MyMoneyTransaction(parent, id, method, number, memo, amount, date, categoryMajor, categoryMinor, atmName, fromTo, bankFrom, bankTo, state)
+    const MyMoneyMoney& amount, const QDate& date, const QString& categoryMajor, const QString& categoryMinor, const QString& atmName,
+    const QString& fromTo, const QString& bankFrom, const QString& bankTo, stateE state)
+    : MyMoneyTransaction(parent, id, method, number, memo, amount, date, categoryMajor, categoryMinor, atmName, fromTo, bankFrom, bankTo, state)
 {
 
 }

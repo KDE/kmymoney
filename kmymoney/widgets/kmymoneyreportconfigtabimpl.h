@@ -30,25 +30,25 @@
 class kMyMoneyReportConfigTab1Decl : public QWidget, public Ui::kMyMoneyReportConfigTab1Decl
 {
 public:
-    kMyMoneyReportConfigTab1Decl( QWidget *parent );
+  kMyMoneyReportConfigTab1Decl(QWidget *parent);
 };
 
 class kMyMoneyReportConfigTab2Decl : public QWidget, public Ui::kMyMoneyReportConfigTab2Decl
 {
 public:
-    kMyMoneyReportConfigTab2Decl( QWidget *parent );
+  kMyMoneyReportConfigTab2Decl(QWidget *parent);
 };
 
 class kMyMoneyReportConfigTab3Decl : public QWidget, public Ui::kMyMoneyReportConfigTab3Decl
 {
 public:
-    kMyMoneyReportConfigTab3Decl( QWidget *parent );
+  kMyMoneyReportConfigTab3Decl(QWidget *parent);
 };
 
 class kMyMoneyReportConfigTabChartDecl : public QWidget, public Ui::kMyMoneyReportConfigTabChartDecl
 {
 public:
-    kMyMoneyReportConfigTabChartDecl( QWidget *parent );
+  kMyMoneyReportConfigTabChartDecl(QWidget *parent);
 };
 #endif /* KMYMONEYREPORTCONFIGTABIMPL_H */
 

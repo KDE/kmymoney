@@ -46,7 +46,7 @@ KMyMoneyFile::KMyMoneyFile(const QString&)
 
 KMyMoneyFile::~KMyMoneyFile()
 {
-  if(m_storage) {
+  if (m_storage) {
     MyMoneyFile::instance()->detachStorage(m_storage);
     delete m_storage;
   }
@@ -78,17 +78,17 @@ MyMoneySeqAccessMgr* KMyMoneyFile::storage()
 
 void KMyMoneyFile::reset()
 {
-/*
-  delete m_storage;
-  delete m_file;
-  m_storage = new MyMoneySeqAccessMgr;
-  m_file = new MyMoneyFile(m_storage);
-*/
+  /*
+    delete m_storage;
+    delete m_file;
+    m_storage = new MyMoneySeqAccessMgr;
+    m_file = new MyMoneyFile(m_storage);
+  */
 }
 
 void KMyMoneyFile::open()
 {
-  if(m_storage != 0)
+  if (m_storage != 0)
     close();
 
   m_storage = new MyMoneySeqAccessMgr;
@@ -98,7 +98,7 @@ void KMyMoneyFile::open()
 
 void KMyMoneyFile::close()
 {
-  if(m_storage != 0) {
+  if (m_storage != 0) {
     MyMoneyFile::instance()->detachStorage(m_storage);
     delete m_storage;
     m_storage = 0;

@@ -33,9 +33,9 @@
 
 #include <kmymoneyglobalsettings.h>
 
-KMyMoneyForecastListViewItem::KMyMoneyForecastListViewItem (Q3ListView* parent, Q3ListViewItem* after, bool isNegative) :
-  K3ListViewItem(parent, after),
-  m_negative(isNegative)
+KMyMoneyForecastListViewItem::KMyMoneyForecastListViewItem(Q3ListView* parent, Q3ListViewItem* after, bool isNegative) :
+    K3ListViewItem(parent, after),
+    m_negative(isNegative)
 {
 }
 
@@ -47,13 +47,13 @@ void KMyMoneyForecastListViewItem::paintCell(QPainter *p, const QColorGroup &cg,
 {
   QColorGroup _cg = cg;
   QColor textColour;
-  if(m_negative == true) {
+  if (m_negative == true) {
     textColour = KMyMoneyGlobalSettings::listNegativeValueColor(); //if the item is marked is marked as negative, all columns will be painted negative
   } else {
     textColour = m_columnsColor[column]; //otherwise, respect the color for each column
   }
-  _cg.setColor(QColorGroup::Text, textColour); 
-  
+  _cg.setColor(QColorGroup::Text, textColour);
+
   K3ListViewItem::paintCell(p, _cg, column, width, alignment);
 }
 
@@ -62,14 +62,14 @@ void KMyMoneyForecastListViewItem::setNegative(bool isNegative)
   m_negative = isNegative;
 }
 
-void KMyMoneyForecastListViewItem::setText( int column, const QString &text, const bool &negative)
+void KMyMoneyForecastListViewItem::setText(int column, const QString &text, const bool &negative)
 {
   //if negative set the map to negative color according to KMyMoneySettings
-  if(negative) {
+  if (negative) {
     m_columnsColor[column] = KMyMoneyGlobalSettings::listNegativeValueColor();
   } else {
     m_columnsColor[column] = QColorGroup::Text;
   }
-  
+
   K3ListViewItem::setText(column, text);
 }

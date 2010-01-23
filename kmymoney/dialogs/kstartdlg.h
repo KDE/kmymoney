@@ -47,19 +47,28 @@
 /**KMyMoney 2 start dialog
   */
 
-class KStartDlg : public KPageDialog  {
-   Q_OBJECT
+class KStartDlg : public KPageDialog
+{
+  Q_OBJECT
 public:
-	explicit KStartDlg( QWidget* parent = 0, bool modal = true );
-	virtual ~KStartDlg();
-  bool isNewFile(void)  const        { return isnewfile;           }
-  bool isOpenFile(void) const        { return !kurlrequest->url().isEmpty();          }
-  const QString getURL(void) const { return kurlrequest->url().path(); }
-  QString getTemplateName(void) const { return templatename;    }
+  explicit KStartDlg(QWidget* parent = 0, bool modal = true);
+  virtual ~KStartDlg();
+  bool isNewFile(void)  const        {
+    return isnewfile;
+  }
+  bool isOpenFile(void) const        {
+    return !kurlrequest->url().isEmpty();
+  }
+  const QString getURL(void) const {
+    return kurlrequest->url().path();
+  }
+  QString getTemplateName(void) const {
+    return templatename;
+  }
 
 private: // Private methods
   QString m_filename;
-	bool fileExists(KUrl url);
+  bool fileExists(KUrl url);
 
   void setPage_Template();
   void setPage_Documents();

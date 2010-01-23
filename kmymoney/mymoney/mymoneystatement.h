@@ -57,7 +57,8 @@ public:
 
   enum EType { etNone = 0, etCheckings, etSavings, etInvestment, etCreditCard, etEnd };
 
-  class Split {
+  class Split
+  {
   public:
     Split() : m_reconcile(MyMoneySplit::NotReconciled) {}
     QString      m_strCategoryName;
@@ -68,7 +69,8 @@ public:
 
   };
 
-  class Transaction {
+  class Transaction
+  {
   public:
     Transaction() : m_reconcile(MyMoneySplit::NotReconciled), m_eAction(eaNone) {}
     QDate m_datePosted;
@@ -93,15 +95,13 @@ public:
     QList<Split> m_listSplits;
   };
 
-  struct Price
-  {
+  struct Price {
     QDate m_date;
     QString m_strSecurity;
     MyMoneyMoney m_amount;
   };
 
-  struct Security
-  {
+  struct Security {
     QString m_strName;
     QString m_strSymbol;
     QString m_strId;
@@ -133,12 +133,12 @@ public:
 
   bool m_skipCategoryMatching;
 
-  void write(QDomElement&,QDomDocument*) const;
+  void write(QDomElement&, QDomDocument*) const;
   bool read(const QDomElement&);
 
   KMM_MYMONEY_EXPORT static bool isStatementFile(const QString&);
-  KMM_MYMONEY_EXPORT static bool readXMLFile( MyMoneyStatement&, const QString& );
-  KMM_MYMONEY_EXPORT static void writeXMLFile( const MyMoneyStatement&, const QString& );
+  KMM_MYMONEY_EXPORT static bool readXMLFile(MyMoneyStatement&, const QString&);
+  KMM_MYMONEY_EXPORT static void writeXMLFile(const MyMoneyStatement&, const QString&);
 };
 
 #endif

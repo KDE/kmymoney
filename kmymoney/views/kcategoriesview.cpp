@@ -48,29 +48,29 @@
 #include <K3ListViewSearchLineWidget>
 
 KCategoriesView::KCategoriesView(QWidget *parent) :
-  KCategoriesViewDecl(parent),
-  m_incomeItem(0),
-  m_expenseItem(0),
-  m_needReload(false)
+    KCategoriesViewDecl(parent),
+    m_incomeItem(0),
+    m_expenseItem(0),
+    m_needReload(false)
 {
   // create the searchline widget
   // and insert it into the existing layout
   m_searchWidget = new K3ListViewSearchLineWidget(m_accountTree, m_accountTree->parentWidget());
-/*  QVBoxLayout* layout = dynamic_cast<QVBoxLayout*>(m_accountTree->parentWidget()->layout());
-  if(layout) {
-    layout->insertWidget(2, m_searchWidget);
-  }*/
+  /*  QVBoxLayout* layout = dynamic_cast<QVBoxLayout*>(m_accountTree->parentWidget()->layout());
+    if(layout) {
+      layout->insertWidget(2, m_searchWidget);
+    }*/
   hboxLayout->insertWidget(0, m_searchWidget);
 
   // setup icons for collapse and expand button
   KGuiItem collapseGuiItem("",
-                          KIcon("zoom-out"),
-                          QString(),
-                          QString());
+                           KIcon("zoom-out"),
+                           QString(),
+                           QString());
   KGuiItem expandGuiItem("",
-                          KIcon("zoom-in"),
-                          QString(),
-                          QString());
+                         KIcon("zoom-in"),
+                         QString(),
+                         QString());
   m_collapseButton->setGuiItem(collapseGuiItem);
   m_expandButton->setGuiItem(expandGuiItem);
 
@@ -93,14 +93,14 @@ KCategoriesView::~KCategoriesView()
 
 void KCategoriesView::slotExpandCollapse(void)
 {
-  if(sender()) {
+  if (sender()) {
     KMyMoneyGlobalSettings::setShowAccountsExpanded(sender() == m_expandButton);
   }
 }
 
 void KCategoriesView::showEvent(QShowEvent * event)
 {
-  if(m_needReload) {
+  if (m_needReload) {
     loadAccounts();
     m_needReload = false;
   }
@@ -114,14 +114,14 @@ void KCategoriesView::showEvent(QShowEvent * event)
 
   // if we have a selected account, let the application know about it
   KMyMoneyAccountTreeBaseItem *item = m_accountTree->selectedItem();
-  if(item) {
+  if (item) {
     emit selectObject(item->itemObject());
   }
 }
 
 void KCategoriesView::slotLoadAccounts(void)
 {
-  if(isVisible()) {
+  if (isVisible()) {
     loadAccounts();
   } else {
     m_needReload = true;
@@ -139,9 +139,9 @@ void KCategoriesView::loadAccounts(void)
 
   // keep a map of all 'expanded' accounts
   Q3ListViewItemIterator it_lvi(m_accountTree);
-  while(it_lvi.current()) {
+  while (it_lvi.current()) {
     item = dynamic_cast<KMyMoneyAccountTreeItem*>(it_lvi.current());
-    if(item && item->isOpen()) {
+    if (item && item->isOpen()) {
       isOpen[item->id()] = true;
     }
     ++it_lvi;
@@ -166,7 +166,7 @@ void KCategoriesView::loadAccounts(void)
   QList<MyMoneySecurity> slist = file->currencyList();
   slist += file->securityList();
   QList<MyMoneySecurity>::const_iterator it_s;
-  for(it_s = slist.constBegin(); it_s != slist.constEnd(); ++it_s) {
+  for (it_s = slist.constBegin(); it_s != slist.constEnd(); ++it_s) {
     m_securityMap[(*it_s).id()] = *it_s;
   }
 
@@ -187,7 +187,7 @@ void KCategoriesView::loadAccounts(void)
     m_expenseItem = new KMyMoneyAccountTreeItem(m_accountTree, expense, security, i18n("Expense"));
     haveUnusedCategories |= loadSubAccounts(m_expenseItem, expense.accountList());
 
-  } catch(MyMoneyException *e) {
+  } catch (MyMoneyException *e) {
     kDebug(2) << "Problem in categoriesview: " << e->what();
     delete e;
   }
@@ -195,12 +195,12 @@ void KCategoriesView::loadAccounts(void)
   // scan through the list of accounts and re-expand those that were
   // expanded and re-select the one that was probably selected before
   it_lvi = Q3ListViewItemIterator(m_accountTree);
-  while(it_lvi.current()) {
+  while (it_lvi.current()) {
     item = dynamic_cast<KMyMoneyAccountTreeItem*>(it_lvi.current());
-    if(item) {
-      if(item->id() == selectedItemId)
+    if (item) {
+      if (item->id() == selectedItemId)
         m_accountTree->setSelected(item, true);
-      if(isOpen.find(item->id()) != isOpen.end())
+      if (isOpen.find(item->id()) != isOpen.end())
         item->setOpen(true);
     }
     ++it_lvi;
@@ -215,7 +215,7 @@ void KCategoriesView::loadAccounts(void)
   //m_accountTree->setUpdatesEnabled(true);
 
   // and in case we need to show things expanded, we'll do so
-  if(KMyMoneyGlobalSettings::showAccountsExpanded())
+  if (KMyMoneyGlobalSettings::showAccountsExpanded())
     m_accountTree->slotExpandAll();
 
 
@@ -232,26 +232,26 @@ bool KCategoriesView::loadSubAccounts(KMyMoneyAccountTreeItem* parent, const QSt
   bool unused = false;
 
   QStringList::const_iterator it_a;
-  for(it_a = accountList.begin(); it_a != accountList.end(); ++it_a) {
+  for (it_a = accountList.begin(); it_a != accountList.end(); ++it_a) {
     const MyMoneyAccount& acc = file->account(*it_a);
     QList<MyMoneyPrice> prices;
     MyMoneySecurity security = file->baseCurrency();
     try {
-      if(acc.isInvest()) {
+      if (acc.isInvest()) {
         security = m_securityMap[acc.currencyId()];
         prices += file->price(acc.currencyId(), security.tradingCurrency());
-        if(security.tradingCurrency() != file->baseCurrency().id()) {
+        if (security.tradingCurrency() != file->baseCurrency().id()) {
           MyMoneySecurity sec = m_securityMap[security.tradingCurrency()];
           prices += file->price(sec.id(), file->baseCurrency().id());
         }
-      } else if(acc.currencyId() != file->baseCurrency().id()) {
-        if(acc.currencyId() != file->baseCurrency().id()) {
+      } else if (acc.currencyId() != file->baseCurrency().id()) {
+        if (acc.currencyId() != file->baseCurrency().id()) {
           security = m_securityMap[acc.currencyId()];
           prices += file->price(acc.currencyId(), file->baseCurrency().id());
         }
       }
 
-    } catch(MyMoneyException *e) {
+    } catch (MyMoneyException *e) {
       kDebug(2) << Q_FUNC_INFO << " caught exception while adding " << acc.name() << "[" << acc.id() << "]: " << e->what();
       delete e;
     }
@@ -264,9 +264,9 @@ bool KCategoriesView::loadSubAccounts(KMyMoneyAccountTreeItem* parent, const QSt
 
     // In case of a category which is unused and we are requested to suppress
     // the display of those,
-    if(acc.accountGroup() == MyMoneyAccount::Income
-    || acc.accountGroup() == MyMoneyAccount::Expense) {
-      if(KMyMoneyGlobalSettings::hideUnusedCategory() && thisUnused) {
+    if (acc.accountGroup() == MyMoneyAccount::Income
+        || acc.accountGroup() == MyMoneyAccount::Expense) {
+      if (KMyMoneyGlobalSettings::hideUnusedCategory() && thisUnused) {
         unused = true;
         delete item;
       }
@@ -277,13 +277,13 @@ bool KCategoriesView::loadSubAccounts(KMyMoneyAccountTreeItem* parent, const QSt
 
 void KCategoriesView::slotUpdateProfit(void)
 {
-  if(!m_incomeItem || !m_expenseItem)
+  if (!m_incomeItem || !m_expenseItem)
     return;
 
   MyMoneyMoney profit = m_incomeItem->totalValue() - m_expenseItem->totalValue();
 
   QString s(i18n("Profit: "));
-  if(profit.isNegative())
+  if (profit.isNegative())
     s = i18n("Loss: ");
 
   // FIXME figure out how to deal with the approximate
@@ -291,13 +291,13 @@ void KCategoriesView::slotUpdateProfit(void)
   //  s += "~ ";
 
   s.replace(QString(" "), QString("&nbsp;"));
-  if(profit.isNegative()) {
+  if (profit.isNegative()) {
     s += "<b><font color=\"red\">";
   }
   const MyMoneySecurity& sec = MyMoneyFile::instance()->baseCurrency();
   QString v(profit.abs().formatMoney(sec));
   s += v.replace(QString(" "), QString("&nbsp;"));
-  if(profit.isNegative()) {
+  if (profit.isNegative()) {
     s += "</font></b>";
   }
 

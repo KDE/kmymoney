@@ -59,12 +59,12 @@ public:
     * passed to @see MyMoneyFile::addInstitution
     */
   MyMoneyInstitution(const QString& name,
-              const QString& city,
-              const QString& street,
-              const QString& postcode,
-              const QString& telephone,
-              const QString& manager,
-              const QString& sortCode);
+                     const QString& city,
+                     const QString& street,
+                     const QString& postcode,
+                     const QString& telephone,
+                     const QString& manager,
+                     const QString& sortCode);
 
   /**
     * This is the destructor for any MyMoneyInstitution object
@@ -88,23 +88,55 @@ public:
     */
   MyMoneyInstitution(const QDomElement& el);
 
-  const QString& manager(void) const { return m_manager; }
-  const QString& name(void) const { return m_name; }
-  const QString& postcode(void) const { return m_postcode; }
-  const QString& street(void) const { return m_street; }
-  const QString& telephone(void) const { return m_telephone; }
-  const QString& town(void) const { return m_town; }
-  const QString& city(void) const { return town(); }
-  const QString& sortcode(void) const { return m_sortcode; }
+  const QString& manager(void) const {
+    return m_manager;
+  }
+  const QString& name(void) const {
+    return m_name;
+  }
+  const QString& postcode(void) const {
+    return m_postcode;
+  }
+  const QString& street(void) const {
+    return m_street;
+  }
+  const QString& telephone(void) const {
+    return m_telephone;
+  }
+  const QString& town(void) const {
+    return m_town;
+  }
+  const QString& city(void) const {
+    return town();
+  }
+  const QString& sortcode(void) const {
+    return m_sortcode;
+  }
 
-  void setManager(QString manager) { m_manager = manager; }
-  void setName(QString name) { m_name = name; }
-  void setPostcode(QString code) { m_postcode = code; }
-  void setStreet(QString street) { m_street = street; }
-  void setTelephone(QString tel) { m_telephone = tel; }
-  void setTown(QString town) { m_town = town; }
-  void setCity(QString town) { setTown(town); }
-  void setSortcode(QString code) { m_sortcode = code; }
+  void setManager(QString manager) {
+    m_manager = manager;
+  }
+  void setName(QString name) {
+    m_name = name;
+  }
+  void setPostcode(QString code) {
+    m_postcode = code;
+  }
+  void setStreet(QString street) {
+    m_street = street;
+  }
+  void setTelephone(QString tel) {
+    m_telephone = tel;
+  }
+  void setTown(QString town) {
+    m_town = town;
+  }
+  void setCity(QString town) {
+    setTown(town);
+  }
+  void setSortcode(QString code) {
+    m_sortcode = code;
+  }
 
   /**
     * This method adds the id of an account to the account list of
@@ -129,14 +161,18 @@ public:
     * this institution
     * return QStringList of account ids
     */
-  const QStringList& accountList(void) const { return m_accountList; }
+  const QStringList& accountList(void) const {
+    return m_accountList;
+  }
 
   /**
     * This method returns the number of accounts known to
     * this institution
     * @return number of accounts
     */
-  unsigned int accountCount(void) const { return m_accountList.count(); }
+  unsigned int accountCount(void) const {
+    return m_accountList.count();
+  }
 
   bool operator == (const MyMoneyInstitution&) const;
   bool operator < (const MyMoneyInstitution& right) const;

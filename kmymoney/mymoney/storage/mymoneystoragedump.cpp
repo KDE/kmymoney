@@ -59,7 +59,7 @@ void MyMoneyStorageDump::readStream(QDataStream& /* s */, IMyMoneySerialize* /* 
 void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storage)
 {
   QTextStream s(_s.device());
-  IMyMoneyStorage* storage = dynamic_cast<IMyMoneyStorage *> (_storage);
+  IMyMoneyStorage* storage = dynamic_cast<IMyMoneyStorage *>(_storage);
   MyMoneyPayee user = storage->user();
 
   s << "File-Info\n";
@@ -80,28 +80,28 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storag
   s << "-------------\n";
   QList<MyMoneyAccount> list_a;
   storage->accountList(list_a);
-  s << "accounts = " << list_a.count() <<", next id = " << _storage->accountId() << "\n";
+  s << "accounts = " << list_a.count() << ", next id = " << _storage->accountId() << "\n";
   MyMoneyTransactionFilter filter;
   filter.setReportAllSplits(false);
   QList<MyMoneyTransaction> list_t;
   storage->transactionList(list_t, filter);
   QList<MyMoneyTransaction>::ConstIterator it_t;
   s << "transactions = " << list_t.count() << ", next id = " << _storage->transactionId() << "\n";
-  QMap<int,int> xferCount;
-  for(it_t = list_t.constBegin(); it_t != list_t.constEnd(); ++it_t) {
+  QMap<int, int> xferCount;
+  for (it_t = list_t.constBegin(); it_t != list_t.constEnd(); ++it_t) {
     QList<MyMoneySplit>::ConstIterator it_s;
     int accountCount = 0;
-    for(it_s = (*it_t).splits().constBegin(); it_s != (*it_t).splits().constEnd(); ++it_s) {
+    for (it_s = (*it_t).splits().constBegin(); it_s != (*it_t).splits().constEnd(); ++it_s) {
       MyMoneyAccount acc = storage->account((*it_s).accountId());
-      if(acc.accountGroup() != MyMoneyAccount::Expense
-      && acc.accountGroup() != MyMoneyAccount::Income)
+      if (acc.accountGroup() != MyMoneyAccount::Expense
+          && acc.accountGroup() != MyMoneyAccount::Income)
         accountCount++;
     }
-    if(accountCount > 1)
+    if (accountCount > 1)
       xferCount[accountCount] = xferCount[accountCount] + 1;
   }
-  QMap<int,int>::ConstIterator it_cnt;
-  for(it_cnt = xferCount.constBegin(); it_cnt != xferCount.constEnd(); ++it_cnt) {
+  QMap<int, int>::ConstIterator it_cnt;
+  for (it_cnt = xferCount.constBegin(); it_cnt != xferCount.constEnd(); ++it_cnt) {
     s << "               " << *it_cnt << " of them references " << it_cnt.key() << " accounts\n";
   }
 
@@ -115,7 +115,7 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storag
 
   QList<MyMoneyInstitution> list_i = storage->institutionList();
   QList<MyMoneyInstitution>::ConstIterator it_i;
-  for(it_i = list_i.constBegin(); it_i != list_i.constEnd(); ++it_i) {
+  for (it_i = list_i.constBegin(); it_i != list_i.constEnd(); ++it_i) {
     s << "  ID = " << (*it_i).id() << "\n";
     s << "  Name = " << (*it_i).name() << "\n";
     s << "\n";
@@ -127,7 +127,7 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storag
 
   QList<MyMoneyPayee> list_p = storage->payeeList();
   QList<MyMoneyPayee>::ConstIterator it_p;
-  for(it_p = list_p.constBegin(); it_p != list_p.constEnd(); ++it_p) {
+  for (it_p = list_p.constBegin(); it_p != list_p.constEnd(); ++it_p) {
     s << "  ID = " << (*it_p).id() << "\n";
     s << "  Name = " << (*it_p).name() << "\n";
     s << "  Address = " << (*it_p).address() << "\n";
@@ -151,23 +151,23 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storag
   list_a.push_front(storage->liability());
   list_a.push_front(storage->asset());
   QList<MyMoneyAccount>::ConstIterator it_a;
-  for(it_a = list_a.constBegin(); it_a != list_a.constEnd(); ++it_a) {
+  for (it_a = list_a.constBegin(); it_a != list_a.constEnd(); ++it_a) {
     s << "  ID = " << (*it_a).id() << "\n";
     s << "  Name = " << (*it_a).name() << "\n";
     s << "  Number = " << (*it_a).number() << "\n";
     s << "  Description = " << (*it_a).description() << "\n";
     s << "  Type = " << (*it_a).accountType() << "\n";
-    if((*it_a).currencyId().isEmpty()) {
+    if ((*it_a).currencyId().isEmpty()) {
       s << "  Currency = unknown\n";
     } else {
-      if((*it_a).isInvest()) {
+      if ((*it_a).isInvest()) {
         s << "  Equity = " << storage->security((*it_a).currencyId()).name() << "\n";
       } else {
         s << "  Currency = " << storage->currency((*it_a).currencyId()).name() << "\n";
       }
     }
     s << "  Parent = " << (*it_a).parentAccountId();
-    if(!(*it_a).parentAccountId().isEmpty()) {
+    if (!(*it_a).parentAccountId().isEmpty()) {
       MyMoneyAccount parent = storage->account((*it_a).parentAccountId());
       s << " (" << parent.name() << ")";
     } else {
@@ -176,7 +176,7 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storag
     s << "\n";
 
     s << "  Institution = " << (*it_a).institutionId();
-    if(!(*it_a).institutionId().isEmpty()) {
+    if (!(*it_a).institutionId().isEmpty()) {
       MyMoneyInstitution inst = storage->institution((*it_a).institutionId());
       s << " (" << inst.name() << ")";
     } else {
@@ -194,10 +194,10 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storag
 
     QStringList list_s = (*it_a).accountList();
     QStringList::ConstIterator it_s;
-    if(list_s.count() > 0) {
+    if (list_s.count() > 0) {
       s << "  Children =" << "\n";
     }
-    for(it_s = list_s.constBegin(); it_s != list_s.constEnd(); ++it_s) {
+    for (it_s = list_s.constBegin(); it_s != list_s.constEnd(); ++it_s) {
       MyMoneyAccount child = storage->account(*it_s);
       s << "    " << *it_s << " (" << child.name() << ")\n";
     }
@@ -211,7 +211,7 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storag
 
   QList<MyMoneyCurrency> list_c = storage->currencyList();
   QList<MyMoneyCurrency>::ConstIterator it_c;
-  for(it_c = list_c.begin(); it_c != list_c.end(); ++it_c) {
+  for (it_c = list_c.begin(); it_c != list_c.end(); ++it_c) {
     s << "  Name = " << (*it_c).name() << "\n";
     s << "    ID = " << (*it_c).id() << "\n";
     s << "    Symbol = " << (*it_c).tradingSymbol() << "\n";
@@ -229,17 +229,17 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storag
 
   QList<MyMoneySecurity> list_e = storage->securityList();
   QList<MyMoneySecurity>::ConstIterator it_e;
-  for(it_e = list_e.constBegin(); it_e != list_e.constEnd(); ++it_e) {
+  for (it_e = list_e.constBegin(); it_e != list_e.constEnd(); ++it_e) {
     s << "  Name = " << (*it_e).name() << "\n";
     s << "    ID = " << (*it_e).id() << "\n";
     s << "    Market   = " << (*it_e).tradingMarket() << "\n";
     s << "    Symbol   = " << (*it_e).tradingSymbol() << "\n";
     s << "    Currency = " << (*it_e).tradingCurrency() << " (";
-    if((*it_e).tradingCurrency().isEmpty()) {
+    if ((*it_e).tradingCurrency().isEmpty()) {
       s << "unknown";
     } else {
       MyMoneySecurity tradingCurrency = storage->currency((*it_e).tradingCurrency());
-      if(!tradingCurrency.isCurrency()) {
+      if (!tradingCurrency.isCurrency()) {
         s << "invalid currency: ";
       }
       s << tradingCurrency.name();
@@ -252,7 +252,7 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storag
     s << "    KVP: " << "\n";
     QMap<QString, QString>kvp = (*it_e).pairs();
     QMap<QString, QString>::Iterator it;
-    for(it = kvp.begin(); it != kvp.end(); ++it) {
+    for (it = kvp.begin(); it != kvp.end(); ++it) {
       s << "      '" << it.key() << "' = '" << it.value() << "'\n";
     }
     s << "\n";
@@ -264,11 +264,11 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storag
 
   MyMoneyPriceList list_pr = _storage->priceList();
   MyMoneyPriceList::ConstIterator it_pr;
-  for(it_pr = list_pr.constBegin(); it_pr != list_pr.constEnd(); ++it_pr) {
+  for (it_pr = list_pr.constBegin(); it_pr != list_pr.constEnd(); ++it_pr) {
     s << "  From = " << it_pr.key().first << "\n";
     s << "    To = " << it_pr.key().second << "\n";
     MyMoneyPriceEntries::ConstIterator it_pre;
-    for(it_pre = (*it_pr).constBegin(); it_pre != (*it_pr).constEnd(); ++it_pre) {
+    for (it_pre = (*it_pr).constBegin(); it_pre != (*it_pr).constEnd(); ++it_pre) {
       s << "      Date = " << (*it_pre).date().toString() << "\n";
       s << "        Price = " << (*it_pre).rate(QString()).formatMoney("", 8) << "\n";
       s << "        Source = " << (*it_pre).source() << "\n";
@@ -282,7 +282,7 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storag
   s << "Transactions" << "\n";
   s << "------------" << "\n";
 
-  for(it_t = list_t.constBegin(); it_t != list_t.constEnd(); ++it_t) {
+  for (it_t = list_t.constBegin(); it_t != list_t.constEnd(); ++it_t) {
     dumpTransaction(s, storage, *it_t);
   }
   s << "\n";
@@ -293,11 +293,11 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storag
 
   QList<MyMoneySchedule> list_s = storage->scheduleList();
   QList<MyMoneySchedule>::ConstIterator it_s;
-  for(it_s = list_s.constBegin(); it_s != list_s.constEnd(); ++it_s) {
+  for (it_s = list_s.constBegin(); it_s != list_s.constEnd(); ++it_s) {
     s << "  ID = " << (*it_s).id() << "\n";
     s << "  Name = " << (*it_s).name() << "\n";
     s << "  Startdate = " << (*it_s).startDate().toString(Qt::ISODate) << "\n";
-    if((*it_s).willEnd())
+    if ((*it_s).willEnd())
       s << "  Enddate   = " << (*it_s).endDate().toString(Qt::ISODate) << "\n";
     else
       s << "  Enddate   = not specified\n";
@@ -308,25 +308,25 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storag
     s << "  Fixed = " << (*it_s).isFixed() << "\n";
     s << "  AutoEnter = " << (*it_s).autoEnter() << "\n";
 
-    if((*it_s).lastPayment().isValid())
+    if ((*it_s).lastPayment().isValid())
       s << "  Last payment = " << (*it_s).lastPayment().toString(Qt::ISODate) << "\n";
     else
       s << "  Last payment = not defined" << "\n";
-    if((*it_s).isFinished())
+    if ((*it_s).isFinished())
       s << "  Next payment = payment finished" << "\n";
     else {
       s << "  Next payment = " << (*it_s).nextDueDate().toString(Qt::ISODate) << "\n";
-      if((*it_s).isOverdue())
-      s << "               = overdue!" << "\n";
+      if ((*it_s).isOverdue())
+        s << "               = overdue!" << "\n";
     }
 
     QList<QDate> list_d;
     QList<QDate>::ConstIterator it_d;
 
     list_d = (*it_s).recordedPayments();
-    if(list_d.count() > 0) {
+    if (list_d.count() > 0) {
       s << "  Recorded payments" << "\n";
-      for(it_d = list_d.constBegin(); it_d != list_d.constEnd(); ++it_d) {
+      for (it_d = list_d.constBegin(); it_d != list_d.constEnd(); ++it_d) {
         s << "    " << (*it_d).toString(Qt::ISODate) << "\n";
       }
     }
@@ -340,7 +340,7 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storag
 
   QList<MyMoneyReport> list_r = storage->reportList();
   QList<MyMoneyReport>::ConstIterator it_r;
-  for(it_r = list_r.constBegin(); it_r != list_r.constEnd(); ++it_r) {
+  for (it_r = list_r.constBegin(); it_r != list_r.constEnd(); ++it_r) {
     s << "  ID = " << (*it_r).id() << "\n";
     s << "  Name = " << (*it_r).name() << "\n";
   }
@@ -352,7 +352,7 @@ void MyMoneyStorageDump::dumpKVP(const QString& headline, QTextStream& s, const 
   ind.fill(' ', indent);
   s << ind << headline << "\n";
   QMap<QString, QString>::const_iterator it;
-  for(it = kvp.pairs().constBegin(); it != kvp.pairs().constEnd(); ++it) {
+  for (it = kvp.pairs().constBegin(); it != kvp.pairs().constEnd(); ++it) {
     s << ind << "  '" << it.key() << "' = '" << it.value() << "'\n";
   }
 }
@@ -370,11 +370,11 @@ void MyMoneyStorageDump::dumpTransaction(QTextStream& s, IMyMoneyStorage* storag
   s << "  Splits\n";
   s << "  ------\n";
   QList<MyMoneySplit>::ConstIterator it_s;
-  for(it_s = it_t.splits().constBegin(); it_s != it_t.splits().constEnd(); ++it_s) {
+  for (it_s = it_t.splits().constBegin(); it_s != it_t.splits().constEnd(); ++it_s) {
     s << "   ID = " << (*it_s).id() << "\n";
     s << "    Transaction = " << (*it_s).transactionId() << "\n";
     s << "    Payee = " << (*it_s).payeeId();
-    if(!(*it_s).payeeId().isEmpty()) {
+    if (!(*it_s).payeeId().isEmpty()) {
       MyMoneyPayee p = storage->payee((*it_s).payeeId());
       s << " (" << p.name() << ")" << "\n";
     } else
@@ -389,17 +389,17 @@ void MyMoneyStorageDump::dumpTransaction(QTextStream& s, IMyMoneyStorage* storag
       delete e;
     }
     s << "    Memo = " << (*it_s).memo() << "\n";
-    if((*it_s).value() == MyMoneyMoney::autoCalc)
+    if ((*it_s).value() == MyMoneyMoney::autoCalc)
       s << "    Value = will be calculated" << "\n";
     else
       s << "    Value = " << (*it_s).value().formatMoney("", 2)
-                          << " (" << (*it_s).value().toString() << ")\n";
-    s << "    Shares = " <<  (*it_s).shares().formatMoney("", 2)
-                         << " (" << (*it_s).shares().toString() << ")\n";
+      << " (" << (*it_s).value().toString() << ")\n";
+    s << "    Shares = " << (*it_s).shares().formatMoney("", 2)
+    << " (" << (*it_s).shares().toString() << ")\n";
     s << "    Action = '" << (*it_s).action() << "'\n";
     s << "    Nr = '" << (*it_s).number() << "'\n";
     s << "    ReconcileFlag = '" << reconcileToString((*it_s).reconcileFlag()) << "'\n";
-    if((*it_s).reconcileFlag() != MyMoneySplit::NotReconciled) {
+    if ((*it_s).reconcileFlag() != MyMoneySplit::NotReconciled) {
       s << "    ReconcileDate = " << (*it_s).reconcileDate().toString(Qt::ISODate) << "\n";
     }
     s << "    BankID = " << (*it_s).bankID() << "\n";
@@ -415,22 +415,22 @@ const QString MyMoneyStorageDump::reconcileToString(MyMoneySplit::reconcileFlagE
 {
   QString rc;
 
-  switch(flag) {
-    case MyMoneySplit::NotReconciled:
-      rc = i18nc("Reconciliation status 'Not Reconciled'", "not reconciled");
-      break;
-    case MyMoneySplit::Cleared:
-      rc = i18nc("Reconciliation status 'Cleared'", "cleared");
-      break;
-    case MyMoneySplit::Reconciled:
-      rc = i18nc("Reconciliation status 'Reconciled'", "reconciled");
-      break;
-    case MyMoneySplit::Frozen:
-      rc = i18nc("Reconciliation status 'Frozen'", "frozen");
-      break;
-    default:
-      rc = i18nc("Reconciliation status unknown", "unknown");
-      break;
+  switch (flag) {
+  case MyMoneySplit::NotReconciled:
+    rc = i18nc("Reconciliation status 'Not Reconciled'", "not reconciled");
+    break;
+  case MyMoneySplit::Cleared:
+    rc = i18nc("Reconciliation status 'Cleared'", "cleared");
+    break;
+  case MyMoneySplit::Reconciled:
+    rc = i18nc("Reconciliation status 'Reconciled'", "reconciled");
+    break;
+  case MyMoneySplit::Frozen:
+    rc = i18nc("Reconciliation status 'Frozen'", "frozen");
+    break;
+  default:
+    rc = i18nc("Reconciliation status unknown", "unknown");
+    break;
   }
   return rc;
 }
@@ -438,12 +438,11 @@ const QString MyMoneyStorageDump::reconcileToString(MyMoneySplit::reconcileFlagE
 #if 0
 void MyMoneyStorageDump::dumpPriceHistory(QTextStream& s, const equity_price_history history)
 {
-  if(history.count() != 0) {
+  if (history.count() != 0) {
     s << "    Price History:\n";
 
     equity_price_history::const_iterator it_price = history.begin();
-    while ( it_price != history.end() )
-    {
+    while (it_price != history.end()) {
       s << "      " << it_price.key().toString() << ": " << it_price.data().toDouble() << "\n";
       it_price++;
     }

@@ -47,14 +47,15 @@ class kMyMoneyDateTbl;
   * @author Michael Edwardes 2003
   *
 **/
-class kMyMoneyScheduledCalendar : public kMyMoneyCalendar  {
-   Q_OBJECT
+class kMyMoneyScheduledCalendar : public kMyMoneyCalendar
+{
+  Q_OBJECT
 
 public:
   /**
     * Standard constructor.
   **/
-  kMyMoneyScheduledCalendar(QWidget *parent=0);
+  kMyMoneyScheduledCalendar(QWidget *parent = 0);
 
   /**
     * Standard destructor.
@@ -64,11 +65,17 @@ public:
   /**
     * Dynamically set the Date Table
   **/
-  void setDateTable(kMyMoneyDateTbl* tbl) { table = tbl; }
+  void setDateTable(kMyMoneyDateTbl* tbl) {
+    table = tbl;
+  }
 
-  void refresh() { m_scheduledDateTable->refresh(); }
+  void refresh() {
+    m_scheduledDateTable->refresh();
+  }
 
-  void setFilterAccounts(const QStringList& list) { m_scheduledDateTable->setFilterAccounts(list); }
+  void setFilterAccounts(const QStringList& list) {
+    m_scheduledDateTable->setFilterAccounts(list);
+  }
 
 signals:
   void enterClicked(const MyMoneySchedule&, const QDate&);

@@ -49,11 +49,11 @@
 
 #include <../kmymoney.h>
 
-KAccountSelectDlg::KAccountSelectDlg(const KMyMoneyUtils::categoryTypeE accountType, const QString& purpose, QWidget *parent )
- : KAccountSelectDlgDecl(parent),
-   m_purpose(purpose),
-   m_accountType(accountType),
-   m_aborted(false)
+KAccountSelectDlg::KAccountSelectDlg(const KMyMoneyUtils::categoryTypeE accountType, const QString& purpose, QWidget *parent)
+    : KAccountSelectDlgDecl(parent),
+    m_purpose(purpose),
+    m_accountType(accountType),
+    m_aborted(false)
 {
   // Hide the abort button. It needs to be shown on request by the caller
   // using showAbortButton()
@@ -61,23 +61,23 @@ KAccountSelectDlg::KAccountSelectDlg(const KMyMoneyUtils::categoryTypeE accountT
 
   slotReloadWidget();
 
-  KGuiItem skipButtonItem( i18n( "&Skip" ),
-                    KIcon("media-skip-forward"),
-                    i18n("Skip this transaction"),
-                    i18n("Use this to skip importing this transaction and proceed with the next one."));
+  KGuiItem skipButtonItem(i18n("&Skip"),
+                          KIcon("media-skip-forward"),
+                          i18n("Skip this transaction"),
+                          i18n("Use this to skip importing this transaction and proceed with the next one."));
   m_qbuttonCancel->setGuiItem(skipButtonItem);
 
-  KGuiItem createButtenItem( i18n( "&Create..." ),
-                      KIcon("document-new"),
-                      i18n("Create a new account/category"),
-                      i18n("Use this to add a new account/category to the file"));
+  KGuiItem createButtenItem(i18n("&Create..."),
+                            KIcon("document-new"),
+                            i18n("Create a new account/category"),
+                            i18n("Use this to add a new account/category to the file"));
   m_createButton->setGuiItem(createButtenItem);
   m_qbuttonOk->setGuiItem(KStandardGuiItem::ok());
 
-  KGuiItem abortButtenItem( i18n("&Abort" ),
-                    KIcon("dialog-cancel"),
-                    i18n("Abort the import operation and dismiss all changes"),
-                    i18n("Use this to abort the import. Your financial data will be in the state before you started the QIF import."));
+  KGuiItem abortButtenItem(i18n("&Abort"),
+                           KIcon("dialog-cancel"),
+                           i18n("Abort the import operation and dismiss all changes"),
+                           i18n("Use this to abort the import. Your financial data will be in the state before you started the QIF import."));
   m_kButtonAbort->setGuiItem(abortButtenItem);
 
 
@@ -96,15 +96,15 @@ KAccountSelectDlg::~KAccountSelectDlg()
 void KAccountSelectDlg::slotReloadWidget(void)
 {
   AccountSet set;
-  if(m_accountType & KMyMoneyUtils::asset)
+  if (m_accountType & KMyMoneyUtils::asset)
     set.addAccountGroup(MyMoneyAccount::Asset);
-  if(m_accountType & KMyMoneyUtils::liability)
+  if (m_accountType & KMyMoneyUtils::liability)
     set.addAccountGroup(MyMoneyAccount::Liability);
-  if(m_accountType & KMyMoneyUtils::income)
+  if (m_accountType & KMyMoneyUtils::income)
     set.addAccountGroup(MyMoneyAccount::Income);
-  if(m_accountType & KMyMoneyUtils::expense)
+  if (m_accountType & KMyMoneyUtils::expense)
     set.addAccountGroup(MyMoneyAccount::Expense);
-  if(m_accountType & KMyMoneyUtils::equity)
+  if (m_accountType & KMyMoneyUtils::equity)
     set.addAccountGroup(MyMoneyAccount::Equity);
 
   set.load(m_accountSelector->selector());
@@ -133,19 +133,19 @@ void KAccountSelectDlg::slotCreateInstitution(void)
 
 void KAccountSelectDlg::slotCreateAccount(void)
 {
-  if(!(m_accountType & (KMyMoneyUtils::expense | KMyMoneyUtils::income))) {
+  if (!(m_accountType & (KMyMoneyUtils::expense | KMyMoneyUtils::income))) {
     kmymoney->slotAccountNew(m_account);
-    if(!m_account.id().isEmpty()) {
+    if (!m_account.id().isEmpty()) {
       slotReloadWidget();
       m_accountSelector->setSelectedItem(m_account.id());
       accept();
     }
   } else {
-    if(m_account.accountType() == MyMoneyAccount::Expense)
+    if (m_account.accountType() == MyMoneyAccount::Expense)
       kmymoney->createCategory(m_account, MyMoneyFile::instance()->expense());
     else
       kmymoney->createCategory(m_account, MyMoneyFile::instance()->income());
-    if(!m_account.id().isEmpty()) {
+    if (!m_account.id().isEmpty()) {
       slotReloadWidget();
       m_accountSelector->setSelectedItem(m_account.id());
       accept();
@@ -173,11 +173,11 @@ int KAccountSelectDlg::exec(void)
 {
   int rc = Rejected;
 
-  if(m_mode == 1) {
+  if (m_mode == 1) {
     slotCreateAccount();
     rc = result();
   }
-  if(rc != Accepted) {
+  if (rc != Accepted) {
     m_createButton->setFocus();
     rc = KAccountSelectDlgDecl::exec();
   }

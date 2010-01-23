@@ -42,7 +42,7 @@
 // Project Includes
 
 kMyMoneyCalculator::kMyMoneyCalculator(QWidget* parent)
-  : QFrame(parent)
+    : QFrame(parent)
 {
   m_comma = KGlobal::locale()->monetaryDecimalSymbol()[0];
   m_clearOperandOnDigit = false;
@@ -54,7 +54,7 @@ kMyMoneyCalculator::kMyMoneyCalculator(QWidget* parent)
   palette.setColor(display->backgroundRole(), QColor("#BDFFB4"));
   display->setPalette(palette);
 
-  display->setFrameStyle( QFrame::Panel | QFrame::Sunken );
+  display->setFrameStyle(QFrame::Panel | QFrame::Sunken);
   display->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
   grid->addWidget(display, 0, 0, 1, 5);
 
@@ -110,7 +110,7 @@ kMyMoneyCalculator::kMyMoneyCalculator(QWidget* parent)
 
   // connect the digit signals through a signal mapper
   QSignalMapper* mapper = new QSignalMapper(this);
-  for(int i = 0; i < 10; ++i) {
+  for (int i = 0; i < 10; ++i) {
     mapper->setMapping(buttons[i], i);
     connect(buttons[i], SIGNAL(clicked()), mapper, SLOT(map()));
   }
@@ -118,7 +118,7 @@ kMyMoneyCalculator::kMyMoneyCalculator(QWidget* parent)
 
   // connect the calculation operations through another mapper
   mapper = new QSignalMapper(this);
-  for(int i = PLUS; i <= EQUAL; ++i) {
+  for (int i = PLUS; i <= EQUAL; ++i) {
     mapper->setMapping(buttons[i], i);
     connect(buttons[i], SIGNAL(clicked()), mapper, SLOT(map()));
   }
@@ -131,12 +131,12 @@ kMyMoneyCalculator::kMyMoneyCalculator(QWidget* parent)
   connect(buttons[CLEAR], SIGNAL(clicked()), SLOT(clearClicked()));
   connect(buttons[CLEARALL], SIGNAL(clicked()), SLOT(clearAllClicked()));
 
-  for(int i = 0; i < MAX_BUTTONS; ++i) {
+  for (int i = 0; i < MAX_BUTTONS; ++i) {
     buttons[i]->setMinimumSize(40, 30);
     buttons[i]->setMaximumSize(40, 30);
   }
-  int height = 4 * (buttons[0]->minimumHeight()+6) + 15;
-  int width = 5 * (buttons[0]->minimumWidth()+6);
+  int height = 4 * (buttons[0]->minimumHeight() + 6) + 15;
+  int width = 5 * (buttons[0]->minimumWidth() + 6);
 
   setMinimumSize(width, height);
   setMaximumSize(width, height);
@@ -148,36 +148,36 @@ kMyMoneyCalculator::~kMyMoneyCalculator()
 
 void kMyMoneyCalculator::digitClicked(int button)
 {
-  if(m_clearOperandOnDigit) {
+  if (m_clearOperandOnDigit) {
     operand.clear();
     m_clearOperandOnDigit = false;
   }
 
   operand += QChar(button + 0x30);
-  if(operand.length() > 16)
+  if (operand.length() > 16)
     operand = operand.left(16);
   changeDisplay(operand);
 }
 
 void kMyMoneyCalculator::commaClicked(void)
 {
-  if(operand.length() == 0)
+  if (operand.length() == 0)
     operand = '0';
-  if(operand.contains('.', Qt::CaseInsensitive) == 0)
+  if (operand.contains('.', Qt::CaseInsensitive) == 0)
     operand.append('.');
 
-  if(operand.length() > 16)
+  if (operand.length() > 16)
     operand = operand.left(16);
   changeDisplay(operand);
 }
 
 void kMyMoneyCalculator::plusminusClicked(void)
 {
-  if(operand.length() == 0 && m_result.length() > 0)
+  if (operand.length() == 0 && m_result.length() > 0)
     operand = m_result;
 
-  if(operand.length() > 0) {
-    if(operand.indexOf('-') != -1)
+  if (operand.length() > 0) {
+    if (operand.indexOf('-') != -1)
       operand.replace('-', QChar());
     else
       operand.prepend('-');
@@ -187,57 +187,57 @@ void kMyMoneyCalculator::plusminusClicked(void)
 
 void kMyMoneyCalculator::calculationClicked(int button)
 {
-  if(operand.length() == 0 && op != 0 && button == EQUAL) {
+  if (operand.length() == 0 && op != 0 && button == EQUAL) {
     op = 0;
     m_result = normalizeString(op1);
     changeDisplay(m_result);
 
-  } else if(operand.length() > 0 && op != 0) {
+  } else if (operand.length() > 0 && op != 0) {
     // perform operation
     double op2 = operand.toDouble();
     bool error = false;
 
     // if the pending operation is addition and we now do multiplication
     // we just stack op1 and remember the operation in
-    if((op == PLUS || op == MINUS) && (button == STAR || button == SLASH)) {
+    if ((op == PLUS || op == MINUS) && (button == STAR || button == SLASH)) {
       op0 = op1;
       stackedOp = op;
       op = 0;
     }
 
-    switch(op) {
-      case PLUS:
-        op2 = op1 + op2;
-        break;
-      case MINUS:
-        op2 = op1 - op2;
-        break;
-      case STAR:
-        op2 = op1 * op2;
-        break;
-      case SLASH:
-        if(op2 == 0.0)
-          error = true;
-        else
-          op2 = op1 / op2;
-        break;
+    switch (op) {
+    case PLUS:
+      op2 = op1 + op2;
+      break;
+    case MINUS:
+      op2 = op1 - op2;
+      break;
+    case STAR:
+      op2 = op1 * op2;
+      break;
+    case SLASH:
+      if (op2 == 0.0)
+        error = true;
+      else
+        op2 = op1 / op2;
+      break;
     }
 
     // if we have a pending addition operation, and the next operation is
     // not multiplication, we calculate the stacked operation
-    if(stackedOp && button != STAR && button != SLASH) {
-      switch(stackedOp) {
-        case PLUS:
-          op2 = op0 + op2;
-          break;
-        case MINUS:
-          op2 = op0 - op2;
-          break;
+    if (stackedOp && button != STAR && button != SLASH) {
+      switch (stackedOp) {
+      case PLUS:
+        op2 = op0 + op2;
+        break;
+      case MINUS:
+        op2 = op0 - op2;
+        break;
       }
       stackedOp = 0;
     }
 
-    if(error) {
+    if (error) {
       op = 0;
       changeDisplay("Error");
       operand.clear();
@@ -246,13 +246,13 @@ void kMyMoneyCalculator::calculationClicked(int button)
       m_result = normalizeString(op1);
       changeDisplay(m_result);
     }
-  } else if(operand.length() > 0 && op == 0) {
+  } else if (operand.length() > 0 && op == 0) {
     op1 = operand.toDouble();
     m_result = normalizeString(op1);
     changeDisplay(m_result);
   }
 
-  if(button != EQUAL) {
+  if (button != EQUAL) {
     op = button;
   } else {
     op = 0;
@@ -266,15 +266,15 @@ QString kMyMoneyCalculator::normalizeString(const double& val)
   QString str;
   str.setNum(val, 'f');
   int i = str.length();
-  while(i > 1 && str[i-1] == '0') {
+  while (i > 1 && str[i-1] == '0') {
     --i;
   }
   // cut off trailing 0's
   str.remove(i, str.length());
-  if(str.length() > 0) {
+  if (str.length() > 0) {
     // possibly remove trailing period
-    if(str[str.length()-1] == '.') {
-      str.remove(str.length()-1, 1);
+    if (str[str.length()-1] == '.') {
+      str.remove(str.length() - 1, 1);
     }
   }
   return str;
@@ -282,10 +282,10 @@ QString kMyMoneyCalculator::normalizeString(const double& val)
 
 void kMyMoneyCalculator::clearClicked(void)
 {
-  if(operand.length() > 0) {
+  if (operand.length() > 0) {
     operand = operand.left(operand.length() - 1);
   }
-  if(operand.length() == 0)
+  if (operand.length() == 0)
     changeDisplay("0");
   else
     changeDisplay(operand);
@@ -300,18 +300,18 @@ void kMyMoneyCalculator::clearAllClicked(void)
 
 void kMyMoneyCalculator::percentClicked(void)
 {
-  if(op != 0) {
+  if (op != 0) {
     double op2 = operand.toDouble();
-    switch(op) {
-      case PLUS:
-      case MINUS:
-        op2 = (op1 * op2) / 100;
-        break;
+    switch (op) {
+    case PLUS:
+    case MINUS:
+      op2 = (op1 * op2) / 100;
+      break;
 
-      case STAR:
-      case SLASH:
-        op2 /= 100;
-        break;
+    case STAR:
+    case SLASH:
+      op2 /= 100;
+      break;
     }
     operand = normalizeString(op2);
     changeDisplay(operand);
@@ -322,23 +322,23 @@ const QString kMyMoneyCalculator::result(void) const
 {
   QString txt = m_result;
   txt.replace(QRegExp("\\."), m_comma);
-  if(txt[0] == '-') {
+  if (txt[0] == '-') {
     txt = txt.mid(1); // get rid of the minus sign
     QString mask;
-    switch(KGlobal::locale()->negativeMonetarySignPosition()) {
-      case KLocale::ParensAround:
-        mask = "(%1)";
-        break;
-      case KLocale::AfterQuantityMoney:
-        mask = "%1-";
-        break;
-      case KLocale::AfterMoney:
-      case KLocale::BeforeMoney:
-        mask = "%1 -";
-        break;
-      case KLocale::BeforeQuantityMoney:
-        mask = "-%1";
-        break;
+    switch (KGlobal::locale()->negativeMonetarySignPosition()) {
+    case KLocale::ParensAround:
+      mask = "(%1)";
+      break;
+    case KLocale::AfterQuantityMoney:
+      mask = "%1-";
+      break;
+    case KLocale::AfterMoney:
+    case KLocale::BeforeMoney:
+      mask = "%1 -";
+      break;
+    case KLocale::BeforeQuantityMoney:
+      mask = "-%1";
+      break;
     }
     txt = QString(mask).arg(txt);
   }
@@ -356,62 +356,62 @@ void kMyMoneyCalculator::keyPressEvent(QKeyEvent* ev)
 {
   int button = -1;
 
-  switch(ev->key()) {
-    case Qt::Key_0:
-    case Qt::Key_1:
-    case Qt::Key_2:
-    case Qt::Key_3:
-    case Qt::Key_4:
-    case Qt::Key_5:
-    case Qt::Key_6:
-    case Qt::Key_7:
-    case Qt::Key_8:
-    case Qt::Key_9:
-      if(m_clearOperandOnDigit) {
-        operand.clear();
-        m_clearOperandOnDigit = false;
-      }
-      button = ev->key() - Qt::Key_0;
-      break;
-    case Qt::Key_Plus:
-      button = PLUS;
-      break;
-    case Qt::Key_Minus:
-      button = MINUS;
-      break;
-    case Qt::Key_Comma:
-    case Qt::Key_Period:
-      if(m_clearOperandOnDigit) {
-        operand.clear();
-        m_clearOperandOnDigit = false;
-      }
-      button = COMMA;
-      break;
-    case Qt::Key_Slash:
-      button = SLASH;
-      break;
-    case Qt::Key_Backspace:
-      button = CLEAR;
-      break;
-    case Qt::Key_Asterisk:
-      button = STAR;
-      break;
-    case Qt::Key_Return:
-    case Qt::Key_Enter:
-    case Qt::Key_Equal:
-      button = EQUAL;
-      break;
-    case Qt::Key_Escape:
-      button = CLEARALL;
-      break;
-    case Qt::Key_Percent:
-      button = PERCENT;
-      break;
-    default:
-      ev->ignore();
-      break;
+  switch (ev->key()) {
+  case Qt::Key_0:
+  case Qt::Key_1:
+  case Qt::Key_2:
+  case Qt::Key_3:
+  case Qt::Key_4:
+  case Qt::Key_5:
+  case Qt::Key_6:
+  case Qt::Key_7:
+  case Qt::Key_8:
+  case Qt::Key_9:
+    if (m_clearOperandOnDigit) {
+      operand.clear();
+      m_clearOperandOnDigit = false;
+    }
+    button = ev->key() - Qt::Key_0;
+    break;
+  case Qt::Key_Plus:
+    button = PLUS;
+    break;
+  case Qt::Key_Minus:
+    button = MINUS;
+    break;
+  case Qt::Key_Comma:
+  case Qt::Key_Period:
+    if (m_clearOperandOnDigit) {
+      operand.clear();
+      m_clearOperandOnDigit = false;
+    }
+    button = COMMA;
+    break;
+  case Qt::Key_Slash:
+    button = SLASH;
+    break;
+  case Qt::Key_Backspace:
+    button = CLEAR;
+    break;
+  case Qt::Key_Asterisk:
+    button = STAR;
+    break;
+  case Qt::Key_Return:
+  case Qt::Key_Enter:
+  case Qt::Key_Equal:
+    button = EQUAL;
+    break;
+  case Qt::Key_Escape:
+    button = CLEARALL;
+    break;
+  case Qt::Key_Percent:
+    button = PERCENT;
+    break;
+  default:
+    ev->ignore();
+    break;
   }
-  if(button != -1)
+  if (button != -1)
     buttons[button]->animateClick();
 
   m_clearOperandOnDigit = false;
@@ -422,27 +422,27 @@ void kMyMoneyCalculator::setInitialValues(const QString& value, QKeyEvent* ev)
   bool negative = false;
   // setup operand
   operand = value;
-  operand.replace(QRegExp(QString('\\')+KGlobal::locale()->thousandsSeparator()), QChar());
-  operand.replace(QRegExp(QString('\\')+m_comma), ".");
-  if(operand.contains('(')) {
+  operand.replace(QRegExp(QString('\\') + KGlobal::locale()->thousandsSeparator()), QChar());
+  operand.replace(QRegExp(QString('\\') + m_comma), ".");
+  if (operand.contains('(')) {
     negative = true;
     operand.replace('(', QChar());
     operand.replace(')', QChar());
   }
-  if(operand.contains('-')) {
+  if (operand.contains('-')) {
     negative = true;
     operand.replace('-', QChar());
   }
-  if(operand.isEmpty())
+  if (operand.isEmpty())
     operand = '0';
-  else if(negative)
+  else if (negative)
     operand = QString("-%1").arg(operand);
 
   changeDisplay(operand);
 
   // and operation
   op = 0;
-  if(ev)
+  if (ev)
     keyPressEvent(ev);
   else
     m_clearOperandOnDigit = true;

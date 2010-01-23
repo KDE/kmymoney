@@ -44,8 +44,8 @@ class OfxHeaderVersion;
 class KOnlineBankingStatusDecl : public QWidget, public Ui::KOnlineBankingStatusDecl
 {
 public:
-  KOnlineBankingStatusDecl( QWidget *parent ) : QWidget( parent ) {
-    setupUi( this );
+  KOnlineBankingStatusDecl(QWidget *parent) : QWidget(parent) {
+    setupUi(this);
   }
 };
 
@@ -53,7 +53,7 @@ class KOnlineBankingStatus : public KOnlineBankingStatusDecl
 {
   Q_OBJECT
 public:
-  explicit KOnlineBankingStatus(const MyMoneyAccount& acc, QWidget *parent=0);
+  explicit KOnlineBankingStatus(const MyMoneyAccount& acc, QWidget *parent = 0);
   ~KOnlineBankingStatus();
   const QString appId(void) const;
   QString headerVersion(void) const;

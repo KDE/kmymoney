@@ -33,22 +33,35 @@
 //Added by qt3to4:
 #include <QList>
 
-namespace KMyMoneyRegister {
+namespace KMyMoneyRegister
+{
 
 class SelectedTransaction
 {
 public:
   SelectedTransaction() {}
   SelectedTransaction(const MyMoneyTransaction& t, const MyMoneySplit& s, const QString& scheduleId = QString()) :
-    m_transaction(t), m_split(s), m_scheduleId(scheduleId) {}
+      m_transaction(t), m_split(s), m_scheduleId(scheduleId) {}
 
-  MyMoneyTransaction& transaction(void) { return m_transaction; }
-  const MyMoneyTransaction& transaction(void) const { return m_transaction; }
-  MyMoneySplit& split(void) { return m_split; }
-  const MyMoneySplit& split(void) const { return m_split; }
+  MyMoneyTransaction& transaction(void) {
+    return m_transaction;
+  }
+  const MyMoneyTransaction& transaction(void) const {
+    return m_transaction;
+  }
+  MyMoneySplit& split(void) {
+    return m_split;
+  }
+  const MyMoneySplit& split(void) const {
+    return m_split;
+  }
 
-  bool isScheduled(void) const { return !m_scheduleId.isEmpty(); }
-  const QString& scheduleId(void) const { return m_scheduleId; }
+  bool isScheduled(void) const {
+    return !m_scheduleId.isEmpty();
+  }
+  const QString& scheduleId(void) const {
+    return m_scheduleId;
+  }
 
   /**
    * checks the transaction for specific reasons which would
@@ -68,7 +81,7 @@ private:
 
 class Register;
 
-class SelectedTransactions:public QList<SelectedTransaction>
+class SelectedTransactions: public QList<SelectedTransaction>
 {
 public:
   SelectedTransactions() {}

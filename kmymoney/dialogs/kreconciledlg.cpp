@@ -33,11 +33,11 @@
 // Project Includes
 
 KReconcileDlg::KReconcileDlg(const MyMoneyMoney /* previousBal */, const MyMoneyMoney /* endingBal */,
-  const QDate /* endingDate */, MyMoneyAccount* /*accountIndex */,
-  const MyMoneyFile* /* file */, QWidget *parent)
- : KReconcileDlgDecl(parent)
+                             const QDate /* endingDate */, MyMoneyAccount* /*accountIndex */,
+                             const MyMoneyFile* /* file */, QWidget *parent)
+    : KReconcileDlgDecl(parent)
 {
-  setModal( true );
+  setModal(true);
 }
 
 KReconcileDlg::~KReconcileDlg()

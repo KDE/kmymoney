@@ -30,11 +30,13 @@
 
 #include <transaction.h>
 
-namespace KMyMoneyTransactionForm {
-  class TransactionForm;
+namespace KMyMoneyTransactionForm
+{
+class TransactionForm;
 } // namespace
 
-namespace KMyMoneyRegister {
+namespace KMyMoneyRegister
+{
 
 class StdTransactionMatched : public StdTransaction
 {
@@ -44,7 +46,9 @@ public:
   StdTransactionMatched(Register* parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
   virtual ~StdTransactionMatched() {}
 
-  virtual const char* className(void) { return "StdTransactionMatched"; }
+  virtual const char* className(void) {
+    return "StdTransactionMatched";
+  }
 
   /**
    * This method sets the general parameters required for the painting of a cell
@@ -75,7 +79,9 @@ public:
 
   bool formCellText(QString& txt, int& align, int row, int col, QPainter* painter = 0);
 
-  int numColsForm(void) const { return 4; }
+  int numColsForm(void) const {
+    return 4;
+  }
 
   void arrangeWidgetsInForm(QMap<QString, QWidget*>& editWidgets);
   void arrangeWidgetsInRegister(QMap<QString, QWidget*>& editWidgets);
@@ -90,7 +96,9 @@ public:
   /**
     * Provided for internal reasons. No API change. See RegisterItem::numRowsRegister(bool)
     */
-  int numRowsRegister(bool expanded) const { return StdTransaction::numRowsRegister(expanded) + m_additionalRows; }
+  int numRowsRegister(bool expanded) const {
+    return StdTransaction::numRowsRegister(expanded) + m_additionalRows;
+  }
 
 private:
   unsigned int         m_drawCounter;

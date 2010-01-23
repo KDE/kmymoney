@@ -83,7 +83,9 @@ public slots:
     *
     * @param state Allows to deactivate (@a true) or activate (@a false) the filter
     */
-  void setFilterDeactive(bool state = false) { setFilterActive(!state); }
+  void setFilterDeactive(bool state = false) {
+    setFilterActive(!state);
+  }
 
 protected:
   /**
@@ -124,14 +126,16 @@ class KGlobalLedgerView : public KMyMoneyViewBase
 {
   Q_OBJECT
 public:
-  explicit KGlobalLedgerView(QWidget *parent=0, const char *name=0);
+  explicit KGlobalLedgerView(QWidget *parent = 0, const char *name = 0);
   ~KGlobalLedgerView();
 
   /**
     * This method returns the id of the currently selected account
     * or QString() if none is selected.
     */
-  const QString accountId(void) const { return m_account.id(); }
+  const QString accountId(void) const {
+    return m_account.id();
+  }
 
   /**
     * Checks if new transactions can be created in the current context

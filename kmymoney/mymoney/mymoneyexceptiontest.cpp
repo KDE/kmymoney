@@ -32,20 +32,20 @@ void MyMoneyExceptionTest::tearDown()
 
 void MyMoneyExceptionTest::testDefaultConstructor()
 {
-	MyMoneyException *e = new MYMONEYEXCEPTION("Message");
-	CPPUNIT_ASSERT(e->what() == "Message");
-	CPPUNIT_ASSERT(e->line() == __LINE__-2);
-	CPPUNIT_ASSERT(e->file() == __FILE__);
-	delete e;
+  MyMoneyException *e = new MYMONEYEXCEPTION("Message");
+  CPPUNIT_ASSERT(e->what() == "Message");
+  CPPUNIT_ASSERT(e->line() == __LINE__ -2);
+  CPPUNIT_ASSERT(e->file() == __FILE__);
+  delete e;
 }
 
 void MyMoneyExceptionTest::testConstructor()
 {
-	MyMoneyException *e = new MyMoneyException("New message",
-						 "Joe's file", 1234);
-	CPPUNIT_ASSERT(e->what() == "New message");
-	CPPUNIT_ASSERT(e->line() == 1234);
-	CPPUNIT_ASSERT(e->file() == "Joe's file");
-	delete e;
+  MyMoneyException *e = new MyMoneyException("New message",
+      "Joe's file", 1234);
+  CPPUNIT_ASSERT(e->what() == "New message");
+  CPPUNIT_ASSERT(e->line() == 1234);
+  CPPUNIT_ASSERT(e->file() == "Joe's file");
+  delete e;
 }
 

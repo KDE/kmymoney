@@ -109,10 +109,18 @@ public:
     */
   const MyMoneyMoney rate(const QString& id) const;
 
-  const QDate& date(void) const { return m_date; };
-  const QString& source(void) const { return m_source; };
-  const QString& from(void) const { return m_fromSecurity; };
-  const QString& to(void) const { return m_toSecurity; };
+  const QDate& date(void) const {
+    return m_date;
+  };
+  const QString& source(void) const {
+    return m_source;
+  };
+  const QString& from(void) const {
+    return m_fromSecurity;
+  };
+  const QString& to(void) const {
+    return m_toSecurity;
+  };
 
   /**
     * Check whether the object is valid or not. A MyMoneyPrice object
@@ -128,7 +136,9 @@ public:
   bool operator == (const MyMoneyPrice &) const;
 
   // Inequality operator
-  bool operator != (const MyMoneyPrice &right) const { return !(operator == (right)); };
+  bool operator != (const MyMoneyPrice &right) const {
+    return !(operator == (right));
+  };
 
   /**
     * This method checks if a reference to the given object exists. It returns,

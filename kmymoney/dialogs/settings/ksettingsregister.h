@@ -31,8 +31,8 @@
 class KSettingsRegisterDecl : public QWidget, public Ui::KSettingsRegisterDecl
 {
 public:
-  KSettingsRegisterDecl( QWidget *parent ) : QWidget( parent ) {
-    setupUi( this );
+  KSettingsRegisterDecl(QWidget *parent) : QWidget(parent) {
+    setupUi(this);
   }
 };
 

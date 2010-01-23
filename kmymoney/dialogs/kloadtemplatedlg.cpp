@@ -34,7 +34,7 @@
 #include <QList>
 
 KLoadTemplateDlg::KLoadTemplateDlg(QWidget* parent) :
-  KLoadTemplateDlgDecl(parent)
+    KLoadTemplateDlgDecl(parent)
 {
   buttonOk->setGuiItem(KStandardGuiItem::ok());
   buttonCancel->setGuiItem(KStandardGuiItem::cancel());

@@ -26,81 +26,82 @@
 #include "storage/mymoneyseqaccessmgr.h"
 #undef private
 
-class MyMoneyScheduleTest : public CppUnit::TestFixture  {
-        CPPUNIT_TEST_SUITE(MyMoneyScheduleTest);
-	CPPUNIT_TEST(testEmptyConstructor);
-	CPPUNIT_TEST(testConstructor);
-	CPPUNIT_TEST(testSetFunctions);
-	CPPUNIT_TEST(testCopyConstructor);
-	CPPUNIT_TEST(testAssignmentConstructor);
-	// The following tests must be done in this order.
-	CPPUNIT_TEST(testSingleton);
-	CPPUNIT_TEST(testAddSchedule);
-	CPPUNIT_TEST(testAnyScheduled);
-	CPPUNIT_TEST(testOverdue);
-	CPPUNIT_TEST(testGetSchedule);
-	CPPUNIT_TEST(testGetScheduled);
-	CPPUNIT_TEST(testGetOverdue);
-	CPPUNIT_TEST(testNextPayment);
-	CPPUNIT_TEST(testPaymentDates);
-	CPPUNIT_TEST(testReplaceSchedule);
-	CPPUNIT_TEST(testRemoveSchedule);
-	CPPUNIT_TEST(testWriteXML);
-	CPPUNIT_TEST(testReadXML);
-	CPPUNIT_TEST(testHasReferenceTo);
-	CPPUNIT_TEST(testAdjustedNextDueDate);
-	CPPUNIT_TEST(testModifyNextDueDate);
-        CPPUNIT_TEST(testDaysBetweenEvents);
-        CPPUNIT_TEST(testEventsPerYear);
-        CPPUNIT_TEST(testAddHalfMonths);
-        CPPUNIT_TEST(testOccurrenceToString);
-	CPPUNIT_TEST(testOccurrencePeriodToString);
-	CPPUNIT_TEST(testStringToOccurrence);
-	CPPUNIT_TEST(testOccurrencePeriod);
-        CPPUNIT_TEST(testSimpleToFromCompoundOccurrence);
-        CPPUNIT_TEST(testProcessingDates);
-	CPPUNIT_TEST_SUITE_END();
+class MyMoneyScheduleTest : public CppUnit::TestFixture
+{
+  CPPUNIT_TEST_SUITE(MyMoneyScheduleTest);
+  CPPUNIT_TEST(testEmptyConstructor);
+  CPPUNIT_TEST(testConstructor);
+  CPPUNIT_TEST(testSetFunctions);
+  CPPUNIT_TEST(testCopyConstructor);
+  CPPUNIT_TEST(testAssignmentConstructor);
+  // The following tests must be done in this order.
+  CPPUNIT_TEST(testSingleton);
+  CPPUNIT_TEST(testAddSchedule);
+  CPPUNIT_TEST(testAnyScheduled);
+  CPPUNIT_TEST(testOverdue);
+  CPPUNIT_TEST(testGetSchedule);
+  CPPUNIT_TEST(testGetScheduled);
+  CPPUNIT_TEST(testGetOverdue);
+  CPPUNIT_TEST(testNextPayment);
+  CPPUNIT_TEST(testPaymentDates);
+  CPPUNIT_TEST(testReplaceSchedule);
+  CPPUNIT_TEST(testRemoveSchedule);
+  CPPUNIT_TEST(testWriteXML);
+  CPPUNIT_TEST(testReadXML);
+  CPPUNIT_TEST(testHasReferenceTo);
+  CPPUNIT_TEST(testAdjustedNextDueDate);
+  CPPUNIT_TEST(testModifyNextDueDate);
+  CPPUNIT_TEST(testDaysBetweenEvents);
+  CPPUNIT_TEST(testEventsPerYear);
+  CPPUNIT_TEST(testAddHalfMonths);
+  CPPUNIT_TEST(testOccurrenceToString);
+  CPPUNIT_TEST(testOccurrencePeriodToString);
+  CPPUNIT_TEST(testStringToOccurrence);
+  CPPUNIT_TEST(testOccurrencePeriod);
+  CPPUNIT_TEST(testSimpleToFromCompoundOccurrence);
+  CPPUNIT_TEST(testProcessingDates);
+  CPPUNIT_TEST_SUITE_END();
 
 protected:
-//	MyMoneyFile	*m_file;
-//	MyMoneySeqAccessMgr*	storage;
-	//TestObserverSet *observer;
-	//TestObserverSet *hierarchyObserver;
+// MyMoneyFile *m_file;
+// MyMoneySeqAccessMgr* storage;
+  //TestObserverSet *observer;
+  //TestObserverSet *hierarchyObserver;
 
 public:
-	MyMoneyScheduleTest();
-	void setUp ();
-	void tearDown ();
-	void testEmptyConstructor();
-	void testConstructor();
-	void testSetFunctions();
-	void testCopyConstructor();
-	void testAssignmentConstructor();
-	void testSingleton();
-	void testAddSchedule();
-	void testAnyScheduled();
-	void testOverdue();
-	void testGetSchedule();
-	void testGetScheduled();
-	void testGetOverdue();
-	void testNextPayment();
-        void testAddHalfMonths();
-	void testPaymentDates();
-	void testReplaceSchedule();
-	void testRemoveSchedule();
-	void testWriteXML();
-	void testReadXML();
-	void testHasReferenceTo();
-	void testAdjustedNextDueDate();
-	void testModifyNextDueDate();
-        void testDaysBetweenEvents();
-        void testEventsPerYear();
-	void testOccurrenceToString();
-	void testOccurrencePeriodToString();
-	void testStringToOccurrence();
-	void testOccurrencePeriod();
-        void testSimpleToFromCompoundOccurrence();
-        void testProcessingDates();
+  MyMoneyScheduleTest();
+  void setUp();
+  void tearDown();
+  void testEmptyConstructor();
+  void testConstructor();
+  void testSetFunctions();
+  void testCopyConstructor();
+  void testAssignmentConstructor();
+  void testSingleton();
+  void testAddSchedule();
+  void testAnyScheduled();
+  void testOverdue();
+  void testGetSchedule();
+  void testGetScheduled();
+  void testGetOverdue();
+  void testNextPayment();
+  void testAddHalfMonths();
+  void testPaymentDates();
+  void testReplaceSchedule();
+  void testRemoveSchedule();
+  void testWriteXML();
+  void testReadXML();
+  void testHasReferenceTo();
+  void testAdjustedNextDueDate();
+  void testModifyNextDueDate();
+  void testDaysBetweenEvents();
+  void testEventsPerYear();
+  void testOccurrenceToString();
+  void testOccurrencePeriodToString();
+  void testStringToOccurrence();
+  void testOccurrencePeriod();
+  void testSimpleToFromCompoundOccurrence();
+  void testProcessingDates();
 };
 
 #endif

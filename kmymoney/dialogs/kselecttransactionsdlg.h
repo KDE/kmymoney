@@ -43,8 +43,8 @@ class QResizeEvent;
 class KSelectTransactionsDlgDecl : public QDialog, public Ui::KSelectTransactionsDlgDecl
 {
 public:
-  KSelectTransactionsDlgDecl( QWidget *parent ) : QDialog( parent ) {
-    setupUi( this );
+  KSelectTransactionsDlgDecl(QWidget *parent) : QDialog(parent) {
+    setupUi(this);
   }
 };
 class KSelectTransactionsDlg: public KSelectTransactionsDlgDecl

@@ -83,12 +83,11 @@ using namespace reports;
 
 class KHomeView::Private
 {
-  public:
-    Private() :
+public:
+  Private() :
       m_showAllSchedules(false),
-      m_needReload(true)
-    {}
-    void addNameIndex(QMap<QString, MyMoneyAccount> &idx, const MyMoneyAccount& account);
+      m_needReload(true) {}
+  void addNameIndex(QMap<QString, MyMoneyAccount> &idx, const MyMoneyAccount& account);
 
   /**
    * daily balances of an account
@@ -111,22 +110,22 @@ void KHomeView::Private::addNameIndex(QMap<QString, MyMoneyAccount> &idx, const 
 {
   QString key = account.name();
 
-  if(idx[key].id().isEmpty()) {
+  if (idx[key].id().isEmpty()) {
     idx[key] = account;
     //take care of accounts with duplicate names
-  } else if(idx[key].id() != account.id()) {
+  } else if (idx[key].id() != account.id()) {
     key = account.name() + "[%1]";
     int dup = 2;
-    while(!idx[key.arg(dup)].id().isEmpty()
-            && idx[key.arg(dup)].id() != account.id())
+    while (!idx[key.arg(dup)].id().isEmpty()
+           && idx[key.arg(dup)].id() != account.id())
       ++dup;
     idx[key.arg(dup)] = account;
   }
 }
 
-KHomeView::KHomeView(QWidget *parent, const char *name ) :
-  KMyMoneyViewBase(parent, name, i18n("Home")),
-  d(new Private)
+KHomeView::KHomeView(QWidget *parent, const char *name) :
+    KMyMoneyViewBase(parent, name, i18n("Home")),
+    d(new Private)
 {
   d->m_part = new KHTMLPart(this);
   addWidget(d->m_part->view());
@@ -140,8 +139,8 @@ KHomeView::KHomeView(QWidget *parent, const char *name ) :
   disconnect(d->m_part->view(), SIGNAL(zoomView(int)), d->m_part, SLOT(slotZoomView(int)));
 
   connect(d->m_part->browserExtension(), SIGNAL(openUrlRequest(const KUrl &,
-          const KParts::OpenUrlArguments &,const KParts::BrowserArguments & )),
-          this, SLOT(slotOpenUrl(const KUrl&, const KParts::OpenUrlArguments &,const KParts::BrowserArguments & )));
+          const KParts::OpenUrlArguments &, const KParts::BrowserArguments &)),
+          this, SLOT(slotOpenUrl(const KUrl&, const KParts::OpenUrlArguments &, const KParts::BrowserArguments &)));
 
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadView()));
 }
@@ -149,8 +148,7 @@ KHomeView::KHomeView(QWidget *parent, const char *name ) :
 KHomeView::~KHomeView()
 {
   // if user wants to remember the font size, store it here
-  if (KMyMoneyGlobalSettings::rememberFontSize())
-  {
+  if (KMyMoneyGlobalSettings::rememberFontSize()) {
     KMyMoneyGlobalSettings::setFontSizePercentage(d->m_part->fontScaleFactor());
     KMyMoneyGlobalSettings::self()->writeConfig();
   }
@@ -163,7 +161,7 @@ KHomeView::~KHomeView()
 void KHomeView::slotLoadView(void)
 {
   d->m_needReload = true;
-  if(isVisible()) {
+  if (isVisible()) {
     loadView();
     d->m_needReload = false;
   }
@@ -171,7 +169,7 @@ void KHomeView::slotLoadView(void)
 
 void KHomeView::showEvent(QShowEvent* event)
 {
-  if(d->m_needReload) {
+  if (d->m_needReload) {
     loadView();
     d->m_needReload = false;
   }
@@ -181,7 +179,7 @@ void KHomeView::showEvent(QShowEvent* event)
 
 void KHomeView::slotPrintView(void)
 {
-  if(d->m_part && d->m_part->view())
+  if (d->m_part && d->m_part->view())
     d->m_part->view()->print();
 }
 
@@ -200,8 +198,7 @@ void KHomeView::loadView(void)
 
   QList<MyMoneyAccount> list;
   MyMoneyFile::instance()->accountList(list);
-  if(list.count() == 0)
-  {
+  if (list.count() == 0) {
     d->m_part->begin();
     d->m_part->write(KWelcomePage::welcomePage());
     d->m_part->end();
@@ -227,45 +224,45 @@ void KHomeView::loadView(void)
 
     QStringList::ConstIterator it;
 
-    for(it = settings.constBegin(); it != settings.constEnd(); ++it) {
+    for (it = settings.constBegin(); it != settings.constEnd(); ++it) {
       int option = (*it).toInt();
-      if(option > 0) {
-        switch(option) {
-          case 1:         // payments
-            showPayments();
-            break;
+      if (option > 0) {
+        switch (option) {
+        case 1:         // payments
+          showPayments();
+          break;
 
-          case 2:         // preferred accounts
-            showAccounts(Preferred, i18n("Preferred Accounts"));
-            break;
+        case 2:         // preferred accounts
+          showAccounts(Preferred, i18n("Preferred Accounts"));
+          break;
 
-          case 3:         // payment accounts
-            // Check if preferred accounts are shown separately
-            if(settings.contains("2")) {
-              showAccounts(static_cast<paymentTypeE> (Payment | Preferred),
-                           i18n("Payment Accounts"));
-            } else {
-              showAccounts(Payment, i18n("Payment Accounts"));
-            }
-            break;
-          case 4:         // favorite reports
-            showFavoriteReports();
-            break;
-          case 5:         // forecast
-            showForecast();
-            break;
-          case 6:         // net worth graph over all accounts
-            showNetWorthGraph();
-            break;
-          case 8:         // assets and liabilities
-            showAssetsLiabilities();
-              break;
-          case 9:         // budget
-              showBudget();
-              break;
-          case 10:         // cash flow summary
-              showCashFlowSummary();
-              break;
+        case 3:         // payment accounts
+          // Check if preferred accounts are shown separately
+          if (settings.contains("2")) {
+            showAccounts(static_cast<paymentTypeE>(Payment | Preferred),
+                         i18n("Payment Accounts"));
+          } else {
+            showAccounts(Payment, i18n("Payment Accounts"));
+          }
+          break;
+        case 4:         // favorite reports
+          showFavoriteReports();
+          break;
+        case 5:         // forecast
+          showForecast();
+          break;
+        case 6:         // net worth graph over all accounts
+          showNetWorthGraph();
+          break;
+        case 8:         // assets and liabilities
+          showAssetsLiabilities();
+          break;
+        case 9:         // budget
+          showBudget();
+          break;
+        case 10:         // cash flow summary
+          showCashFlowSummary();
+          break;
 
 
         }
@@ -290,24 +287,24 @@ void KHomeView::showNetWorthGraph(void)
   d->m_html += QString("<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">%1</div>\n<div class=\"gap\">&nbsp;</div>\n").arg(i18n("Net Worth Forecast"));
 
   MyMoneyReport reportCfg = MyMoneyReport(
-      MyMoneyReport::eAssetLiability,
-      MyMoneyReport::eMonths,
-      MyMoneyTransactionFilter::userDefined, // overridden by the setDateFilter() call below
-      MyMoneyReport::eDetailTotal,
-      i18n("Net Worth Forecast"),
-      i18n("Generated Report"));
+                              MyMoneyReport::eAssetLiability,
+                              MyMoneyReport::eMonths,
+                              MyMoneyTransactionFilter::userDefined, // overridden by the setDateFilter() call below
+                              MyMoneyReport::eDetailTotal,
+                              i18n("Net Worth Forecast"),
+                              i18n("Generated Report"));
 
   reportCfg.setChartByDefault(true);
   reportCfg.setChartGridLines(false);
   reportCfg.setChartDataLabels(false);
   reportCfg.setChartType(MyMoneyReport::eChartLine);
-  reportCfg.setIncludingSchedules( false );
+  reportCfg.setIncludingSchedules(false);
   reportCfg.addAccountGroup(MyMoneyAccount::Asset);
   reportCfg.addAccountGroup(MyMoneyAccount::Liability);
-  reportCfg.setColumnsAreDays( true );
-  reportCfg.setConvertCurrency( true );
-  reportCfg.setIncludingForecast( true );
-  reportCfg.setDateFilter(QDate::currentDate(),QDate::currentDate().addDays(+90));
+  reportCfg.setColumnsAreDays(true);
+  reportCfg.setConvertCurrency(true);
+  reportCfg.setIncludingForecast(true);
+  reportCfg.setDateFilter(QDate::currentDate(), QDate::currentDate().addDays( + 90));
   reports::PivotTable table(reportCfg);
 
   reports::KReportChartView* chartWidget = new reports::KReportChartView(0);
@@ -315,10 +312,10 @@ void KHomeView::showNetWorthGraph(void)
   table.drawChart(*chartWidget);
 
   // Adjust the size
-  chartWidget->resize(width()-80, height()-30);
+  chartWidget->resize(width() - 80, height() - 30);
 
   //save the chart to an image
-  QPixmap pixmap= QPixmap::grabWidget(chartWidget->coordinatePlane()->parent());
+  QPixmap pixmap = QPixmap::grabWidget(chartWidget->coordinatePlane()->parent());
   QByteArray bytes;
   QBuffer buffer(&bytes);
   buffer.open(QIODevice::WriteOnly);
@@ -342,28 +339,28 @@ void KHomeView::showPayments(void)
   int i = 0;
 
   //if forecast has not been executed yet, do it.
-  if(!d->m_forecast.isForecastDone())
+  if (!d->m_forecast.isForecastDone())
     doForecast();
 
   schedule = file->scheduleList("", MyMoneySchedule::TYPE_ANY,
-                                 MyMoneySchedule::OCCUR_ANY,
-                                 MyMoneySchedule::STYPE_ANY,
-                                 QDate::currentDate(),
-                                 QDate::currentDate().addMonths(1));
+                                MyMoneySchedule::OCCUR_ANY,
+                                MyMoneySchedule::STYPE_ANY,
+                                QDate::currentDate(),
+                                QDate::currentDate().addMonths(1));
   overdues = file->scheduleList("", MyMoneySchedule::TYPE_ANY,
-                                 MyMoneySchedule::OCCUR_ANY,
-                                 MyMoneySchedule::STYPE_ANY,
-                                 QDate(), QDate(), true);
+                                MyMoneySchedule::OCCUR_ANY,
+                                MyMoneySchedule::STYPE_ANY,
+                                QDate(), QDate(), true);
 
-  if(schedule.empty() && overdues.empty())
+  if (schedule.empty() && overdues.empty())
     return;
 
   // HACK
   // Remove the finished schedules
   QList<MyMoneySchedule>::Iterator d_it;
   //regular schedules
-  d_it=schedule.begin();
-  while(d_it != schedule.end()) {
+  d_it = schedule.begin();
+  while (d_it != schedule.end()) {
     if ((*d_it).isFinished()) {
       d_it = schedule.erase(d_it);
       continue;
@@ -372,7 +369,7 @@ void KHomeView::showPayments(void)
   }
   //overdue schedules
   d_it = overdues.begin();
-  while(d_it != overdues.end()) {
+  while (d_it != overdues.end()) {
     if ((*d_it).isFinished()) {
       d_it = overdues.erase(d_it);
       continue;
@@ -383,7 +380,7 @@ void KHomeView::showPayments(void)
   d->m_html += "<div class=\"shadow\"><div class=\"displayblock\">";
   d->m_html += QString("<div class=\"summaryheader\">%1</div>\n").arg(i18n("Payments"));
 
-  if(!overdues.isEmpty()) {
+  if (!overdues.isEmpty()) {
     d->m_html += "<div class=\"gap\">&nbsp;</div>\n";
 
     qBubbleSort(overdues);
@@ -410,16 +407,16 @@ void KHomeView::showPayments(void)
     d->m_html += "</td>";
     d->m_html += "</tr>";
 
-    for(it = overdues.begin(); it != overdues.end(); ++it) {
+    for (it = overdues.begin(); it != overdues.end(); ++it) {
       // determine number of overdue payments
       QDate nextDate = (*it).adjustedNextDueDate();
       int cnt = 0;
-      while(nextDate.isValid() && nextDate < QDate::currentDate()) {
+      while (nextDate.isValid() && nextDate < QDate::currentDate()) {
         ++cnt;
         nextDate = (*it).nextPayment(nextDate);
         // for single occurrence nextDate will not change, so we
         // better get out of here.
-        if((*it).occurrence() == MyMoneySchedule::OCCUR_ONCE)
+        if ((*it).occurrence() == MyMoneySchedule::OCCUR_ONCE)
           break;
       }
 
@@ -427,8 +424,8 @@ void KHomeView::showPayments(void)
       showPaymentEntry(*it, cnt);
       d->m_html += "</tr>";
       // make sure to not repeat overdues later again
-      for(it_f = schedule.begin(); it_f != schedule.end();) {
-        if((*it).id() == (*it_f).id()) {
+      for (it_f = schedule.begin(); it_f != schedule.end();) {
+        if ((*it).id() == (*it_f).id()) {
           it_f = schedule.erase(it_f);
           continue;
         }
@@ -438,13 +435,13 @@ void KHomeView::showPayments(void)
     d->m_html += "</table>";
   }
 
-  if(!schedule.isEmpty()) {
+  if (!schedule.isEmpty()) {
     qBubbleSort(schedule);
 
     // Extract todays payments if any
     QList<MyMoneySchedule> todays;
     QList<MyMoneySchedule>::Iterator t_it;
-    for (t_it=schedule.begin(); t_it!=schedule.end();) {
+    for (t_it = schedule.begin(); t_it != schedule.end();) {
       if ((*t_it).nextDueDate() == QDate::currentDate()) {
         todays.append(*t_it);
         (*t_it).setNextDueDate((*t_it).nextPayment((*t_it).nextDueDate()));
@@ -483,7 +480,7 @@ void KHomeView::showPayments(void)
       d->m_html += "</td>";
       d->m_html += "</tr>";
 
-      for(t_it = todays.begin(); t_it != todays.end(); ++t_it) {
+      for (t_it = todays.begin(); t_it != todays.end(); ++t_it) {
         d->m_html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");
         showPaymentEntry(*t_it);
         d->m_html += "</tr>";
@@ -491,8 +488,7 @@ void KHomeView::showPayments(void)
       d->m_html += "</table>";
     }
 
-    if (!schedule.isEmpty())
-    {
+    if (!schedule.isEmpty()) {
       d->m_html += "<div class=\"gap\">&nbsp;</div>\n";
 
       QList<MyMoneySchedule>::Iterator it;
@@ -526,13 +522,13 @@ void KHomeView::showPayments(void)
       qBubbleSort(schedule);
       do {
         it = schedule.begin();
-        if(it == schedule.end())
+        if (it == schedule.end())
           break;
 
         // if the next due date is invalid (schedule is finished)
         // we remove it from the list
         QDate nextDate = (*it).nextDueDate();
-        if(!nextDate.isValid()) {
+        if (!nextDate.isValid()) {
           schedule.erase(it);
           continue;
         }
@@ -540,11 +536,11 @@ void KHomeView::showPayments(void)
         if (nextDate > lastDate)
           break;
 
-        if(cnt == 0) {
+        if (cnt == 0) {
           needMoreLess = true;
           break;
         }
-        if(cnt > 0)
+        if (cnt > 0)
           --cnt;
 
         d->m_html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");
@@ -553,20 +549,19 @@ void KHomeView::showPayments(void)
 
         // for single occurrence we have reported everything so we
         // better get out of here.
-        if((*it).occurrence() == MyMoneySchedule::OCCUR_ONCE) {
+        if ((*it).occurrence() == MyMoneySchedule::OCCUR_ONCE) {
           schedule.erase(it);
           continue;
         }
 
         (*it).setNextDueDate((*it).nextPayment((*it).nextDueDate()));
         qBubbleSort(schedule);
-      }
-      while(1);
+      } while (1);
 
       if (needMoreLess) {
         d->m_html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");
         d->m_html += "<td colspan=\"5\">";
-        if(d->m_showAllSchedules) {
+        if (d->m_showAllSchedules) {
           d->m_html += link(VIEW_SCHEDULE,  QString("?mode=%1").arg("reduced")) + i18nc("Less...", "Show fewer schedules on the list") + linkend();
         } else {
           d->m_html += link(VIEW_SCHEDULE,  QString("?mode=%1").arg("full")) + i18nc("More...", "Show more schedules on the list") + linkend();
@@ -587,12 +582,12 @@ void KHomeView::showPaymentEntry(const MyMoneySchedule& sched, int cnt)
 
   try {
     MyMoneyAccount acc = sched.account();
-    if(!acc.id().isEmpty()) {
+    if (!acc.id().isEmpty()) {
       MyMoneyTransaction t = sched.transaction();
       // only show the entry, if it is still active
       // FIXME clean old code
       // if(!sched.isFinished() && sched.nextPayment(sched.lastPayment()) != QDate()) {
-      if(!sched.isFinished()) {
+      if (!sched.isFinished()) {
         MyMoneySplit sp = t.splitByAccount(acc.id(), true);
 
         QString pathEnter, pathSkip;
@@ -601,18 +596,18 @@ void KHomeView::showPaymentEntry(const MyMoneySchedule& sched, int cnt)
 
         //show payment date
         tmp = QString("<td>") +
-          KGlobal::locale()->formatDate(sched.adjustedNextDueDate(), KLocale::ShortDate) +
-          "</td><td>";
-        if(pathEnter.length() > 0)
+              KGlobal::locale()->formatDate(sched.adjustedNextDueDate(), KLocale::ShortDate) +
+              "</td><td>";
+        if (pathEnter.length() > 0)
           tmp += link(VIEW_SCHEDULE, QString("?id=%1&mode=enter").arg(sched.id()), i18n("Enter schedule")) + QString("<img src=\"file://%1\" border=\"0\"></a>").arg(pathEnter) + linkend();
-        if(pathSkip.length() > 0)
+        if (pathSkip.length() > 0)
           tmp += "&nbsp;" + link(VIEW_SCHEDULE, QString("?id=%1&mode=skip").arg(sched.id()), i18n("Skip schedule")) + QString("<img src=\"file://%1\" border=\"0\"></a>").arg(pathSkip) + linkend();
 
         tmp += QString("&nbsp;");
         tmp += link(VIEW_SCHEDULE, QString("?id=%1&mode=edit").arg(sched.id()), i18n("Edit schedule")) + sched.name() + linkend();
 
         //show quantity of payments overdue if any
-        if(cnt > 1)
+        if (cnt > 1)
           tmp += i18np(" (%1 payment)", " (%1 payments)", cnt);
 
         //show account of the main split
@@ -623,17 +618,17 @@ void KHomeView::showPaymentEntry(const MyMoneySchedule& sched, int cnt)
         tmp += "</td><td align=\"right\">";
 
         const MyMoneySecurity& currency = MyMoneyFile::instance()->currency(acc.currencyId());
-        QString amount = (sp.value()*cnt).formatMoney(acc, currency);
-        amount.replace(QChar(' '),"&nbsp;");
-        tmp += showColoredAmount(amount, (sp.value()*cnt).isNegative()) ;
+        QString amount = (sp.value() * cnt).formatMoney(acc, currency);
+        amount.replace(QChar(' '), "&nbsp;");
+        tmp += showColoredAmount(amount, (sp.value() * cnt).isNegative()) ;
         tmp += "</td>";
         //show balance after payments
         tmp += "<td align=\"right\">";
-        MyMoneyMoney payment = MyMoneyMoney((sp.value()*cnt));
+        MyMoneyMoney payment = MyMoneyMoney((sp.value() * cnt));
         QDate paymentDate = QDate(sched.nextDueDate());
         MyMoneyMoney balanceAfter = forecastPaymentBalance(acc, payment, paymentDate);
         QString balance = balanceAfter.formatMoney(acc, currency);
-        balance.replace(QChar(' '),"&nbsp;");
+        balance.replace(QChar(' '), "&nbsp;");
         tmp += showColoredAmount(balance, balanceAfter.isNegative());
         tmp += "</td>";
 
@@ -641,7 +636,7 @@ void KHomeView::showPaymentEntry(const MyMoneySchedule& sched, int cnt)
         d->m_html += tmp;
       }
     }
-  } catch(MyMoneyException* e) {
+  } catch (MyMoneyException* e) {
     qDebug("Unable to display schedule entry: %s", qPrintable(e->what()));
     delete e;
   }
@@ -658,64 +653,64 @@ void KHomeView::showAccounts(KHomeView::paymentTypeE type, const QString& header
 
   // get list of all accounts
   file->accountList(accounts);
-  for(it = accounts.begin(); it != accounts.end();) {
+  for (it = accounts.begin(); it != accounts.end();) {
     bool removeAccount = false;
-    if(!(*it).isClosed() || showClosedAccounts) {
-      switch((*it).accountType()) {
-        case MyMoneyAccount::Expense:
-        case MyMoneyAccount::Income:
-          // never show a category account
-          // Note: This might be different in a future version when
-          //       the homepage also shows category based information
-          removeAccount = true;
-          break;
+    if (!(*it).isClosed() || showClosedAccounts) {
+      switch ((*it).accountType()) {
+      case MyMoneyAccount::Expense:
+      case MyMoneyAccount::Income:
+        // never show a category account
+        // Note: This might be different in a future version when
+        //       the homepage also shows category based information
+        removeAccount = true;
+        break;
 
         // Asset and Liability accounts are only shown if they
         // have the preferred flag set
-        case MyMoneyAccount::Asset:
-        case MyMoneyAccount::Liability:
-        case MyMoneyAccount::Investment:
-          // if preferred accounts are requested, then keep in list
-          if((*it).value("PreferredAccount") != "Yes"
-          || (type & Preferred) == 0) {
-            removeAccount = true;
-          }
-          break;
+      case MyMoneyAccount::Asset:
+      case MyMoneyAccount::Liability:
+      case MyMoneyAccount::Investment:
+        // if preferred accounts are requested, then keep in list
+        if ((*it).value("PreferredAccount") != "Yes"
+            || (type & Preferred) == 0) {
+          removeAccount = true;
+        }
+        break;
 
         // Check payment accounts. If payment and preferred is selected,
         // then always show them. If only payment is selected, then
         // show only if preferred flag is not set.
-        case MyMoneyAccount::Checkings:
-        case MyMoneyAccount::Savings:
-        case MyMoneyAccount::Cash:
-        case MyMoneyAccount::CreditCard:
-          switch(type & (Payment | Preferred)) {
-            case Payment:
-              if((*it).value("PreferredAccount") == "Yes")
-                removeAccount = true;
-              break;
-
-            case Preferred:
-              if((*it).value("PreferredAccount") != "Yes")
-                removeAccount = true;
-              break;
-
-            case Payment | Preferred:
-              break;
-
-            default:
-              removeAccount = true;
-              break;
-          }
+      case MyMoneyAccount::Checkings:
+      case MyMoneyAccount::Savings:
+      case MyMoneyAccount::Cash:
+      case MyMoneyAccount::CreditCard:
+        switch (type & (Payment | Preferred)) {
+        case Payment:
+          if ((*it).value("PreferredAccount") == "Yes")
+            removeAccount = true;
           break;
 
-        // filter all accounts that are not used on homepage views
+        case Preferred:
+          if ((*it).value("PreferredAccount") != "Yes")
+            removeAccount = true;
+          break;
+
+        case Payment | Preferred:
+          break;
+
         default:
           removeAccount = true;
           break;
+        }
+        break;
+
+        // filter all accounts that are not used on homepage views
+      default:
+        removeAccount = true;
+        break;
       }
 
-    } else if((*it).isClosed() || (*it).isInvest()) {
+    } else if ((*it).isClosed() || (*it).isInvest()) {
       // don't show if closed or a stock account
       removeAccount = true;
     }
@@ -728,7 +723,7 @@ void KHomeView::showAccounts(KHomeView::paymentTypeE type, const QString& header
     }
   }
 
-  if(!accounts.isEmpty()) {
+  if (!accounts.isEmpty()) {
     QString tmp;
     int i = 0;
     tmp = "<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">" + header + "</div>\n<div class=\"gap\">&nbsp;</div>\n";
@@ -740,7 +735,7 @@ void KHomeView::showAccounts(KHomeView::paymentTypeE type, const QString& header
     d->m_html += i18n("Current Balance");
     d->m_html += "</td>";
     //only show limit info if user chose to do so
-    if(KMyMoneyGlobalSettings::showLimitInfo()) {
+    if (KMyMoneyGlobalSettings::showLimitInfo()) {
       d->m_html += "<td width=\"40%\" class=\"right\">";
       d->m_html += i18n("To Minimum Balance / Maximum Credit");
       d->m_html += "</td>";
@@ -749,7 +744,7 @@ void KHomeView::showAccounts(KHomeView::paymentTypeE type, const QString& header
 
 
     QMap<QString, MyMoneyAccount>::const_iterator it_m;
-    for(it_m = nameIdx.constBegin(); it_m != nameIdx.constEnd(); ++it_m) {
+    for (it_m = nameIdx.constBegin(); it_m != nameIdx.constEnd(); ++it_m) {
       d->m_html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");
       showAccountEntry(*it_m);
       d->m_html += "</tr>";
@@ -766,7 +761,7 @@ void KHomeView::showAccountEntry(const MyMoneyAccount& acc)
 
   bool showLimit = KMyMoneyGlobalSettings::showLimitInfo();
 
-  if(acc.accountType() == MyMoneyAccount::Investment) {
+  if (acc.accountType() == MyMoneyAccount::Investment) {
     //investment accounts show the balances of all its subaccounts
     value = investmentBalance(acc);
 
@@ -777,8 +772,8 @@ void KHomeView::showAccountEntry(const MyMoneyAccount& acc)
     value = file->balance(acc.id(), QDate::currentDate());
 
     //if credit card or checkings account, show maximum credit
-    if( acc.accountType() == MyMoneyAccount::CreditCard ||
-        acc.accountType() == MyMoneyAccount::Checkings ) {
+    if (acc.accountType() == MyMoneyAccount::CreditCard ||
+        acc.accountType() == MyMoneyAccount::Checkings) {
       QString maximumCredit = acc.value("maxCreditAbsolute");
       MyMoneyMoney maxCredit = MyMoneyMoney(maximumCredit);
       showAccountEntry(acc, value, value - maxCredit, showLimit);
@@ -801,22 +796,22 @@ void KHomeView::showAccountEntry(const MyMoneyAccount& acc, const MyMoneyMoney& 
 
   //format amounts
   amount = value.formatMoney(acc, currency);
-  amount.replace(QChar(' '),"&nbsp;");
-  if(showMinBal) {
+  amount.replace(QChar(' '), "&nbsp;");
+  if (showMinBal) {
     amountToMinBal = valueToMinBal.formatMoney(acc, currency);
-    amountToMinBal.replace(QChar(' '),"&nbsp;");
+    amountToMinBal.replace(QChar(' '), "&nbsp;");
   }
 
   tmp = QString("<td>") +
-      link(VIEW_LEDGER, QString("?id=%1").arg(acc.id())) + acc.name() + linkend() + "</td>";
+        link(VIEW_LEDGER, QString("?id=%1").arg(acc.id())) + acc.name() + linkend() + "</td>";
 
   //show account balance
   tmp += QString("<td class=\"right\">%1</td>").arg(showColoredAmount(amount, value.isNegative()));
 
   //show minimum balance column if requested
-  if(showMinBal) {
+  if (showMinBal) {
     //if it is an investment, show minimum balance empty
-    if(acc.accountType() == MyMoneyAccount::Investment) {
+    if (acc.accountType() == MyMoneyAccount::Investment) {
       tmp += QString("<td class=\"right\">&nbsp;</td>");
     } else {
       //show minimum balance entry
@@ -833,7 +828,7 @@ MyMoneyMoney KHomeView::investmentBalance(const MyMoneyAccount& acc)
   MyMoneyMoney value;
   value = file->balance(acc.id());
   QList<QString>::const_iterator it_a;
-  for(it_a = acc.accountList().begin(); it_a != acc.accountList().end(); ++it_a) {
+  for (it_a = acc.accountList().begin(); it_a != acc.accountList().end(); ++it_a) {
     MyMoneyAccount stock = file->account(*it_a);
     try {
       MyMoneyMoney val;
@@ -846,7 +841,7 @@ MyMoneyMoney KHomeView::investmentBalance(const MyMoneyAccount& acc)
       val = val * file->price(security.tradingCurrency(), accountCurrency.id()).rate(accountCurrency.id());
       val = val.convert(acc.fraction());
       value += val;
-    } catch(MyMoneyException* e) {
+    } catch (MyMoneyException* e) {
       qWarning("%s", qPrintable(QString("cannot convert stock balance of %1 to base currency: %2").arg(stock.name(), e->what())));
       delete e;
     }
@@ -858,15 +853,13 @@ void KHomeView::showFavoriteReports(void)
 {
   QList<MyMoneyReport> reports = MyMoneyFile::instance()->reportList();
 
-  if ( !reports.isEmpty() )
-  {
+  if (!reports.isEmpty()) {
     bool firstTime = 1;
     int row = 0;
     QList<MyMoneyReport>::const_iterator it_report = reports.constBegin();
-    while( it_report != reports.constEnd() )
-    {
-      if ( (*it_report).isFavorite() ) {
-        if(firstTime) {
+    while (it_report != reports.constEnd()) {
+      if ((*it_report).isFavorite()) {
+        if (firstTime) {
           d->m_html += QString("<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">%1</div>\n<div class=\"gap\">&nbsp;</div>\n").arg(i18n("Favorite Reports"));
           d->m_html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
           d->m_html += "<tr class=\"item\"><td class=\"left\" width=\"40%\">";
@@ -878,16 +871,16 @@ void KHomeView::showFavoriteReports(void)
         }
 
         d->m_html += QString("<tr class=\"row-%1\"><td>%2%3%4</td><td align=\"left\">%5</td></tr>")
-          .arg(row++ & 0x01 ? "even" : "odd")
-          .arg(link(VIEW_REPORTS, QString("?id=%1").arg((*it_report).id())))
-          .arg((*it_report).name())
-          .arg(linkend())
-          .arg((*it_report).comment());
+                     .arg(row++ & 0x01 ? "even" : "odd")
+                     .arg(link(VIEW_REPORTS, QString("?id=%1").arg((*it_report).id())))
+                     .arg((*it_report).name())
+                     .arg(linkend())
+                     .arg((*it_report).comment());
       }
 
       ++it_report;
     }
-    if(!firstTime)
+    if (!firstTime)
       d->m_html += "</table></div></div>";
   }
 }
@@ -899,38 +892,38 @@ void KHomeView::showForecast(void)
   QList<MyMoneyAccount> accList;
 
   //if forecast has not been executed yet, do it.
-  if(!d->m_forecast.isForecastDone())
+  if (!d->m_forecast.isForecastDone())
     doForecast();
 
   accList = d->m_forecast.accountList();
 
   //add it to a map to have it ordered by name
   QList<MyMoneyAccount>::const_iterator accList_t = accList.constBegin();
-  for ( ; accList_t != accList.constEnd(); ++accList_t ) {
+  for (; accList_t != accList.constEnd(); ++accList_t) {
     d->addNameIndex(nameIdx, *accList_t);
   }
 
-  if(nameIdx.count() > 0) {
+  if (nameIdx.count() > 0) {
     int i = 0;
 
     int colspan = 1;
     //get begin day
     int beginDay = QDate::currentDate().daysTo(d->m_forecast.beginForecastDate());
     //if begin day is today skip to next cycle
-    if(beginDay == 0)
+    if (beginDay == 0)
       beginDay = d->m_forecast.accountsCycle();
 
     // Now output header
-    d->m_html += QString("<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">%1</div>\n<div class=\"gap\">&nbsp;</div>\n").arg(i18n("%1 Day Forecast",d->m_forecast.forecastDays()));
+    d->m_html += QString("<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">%1</div>\n<div class=\"gap\">&nbsp;</div>\n").arg(i18n("%1 Day Forecast", d->m_forecast.forecastDays()));
     d->m_html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
     d->m_html += "<tr class=\"item\"><td class=\"left\" width=\"40%\">";
     d->m_html += i18n("Account");
     d->m_html += "</td>";
-    int colWidth = 55/ (d->m_forecast.forecastDays() / d->m_forecast.accountsCycle());
-    for(i = 0; (i*d->m_forecast.accountsCycle() + beginDay) <= d->m_forecast.forecastDays(); ++i) {
+    int colWidth = 55 / (d->m_forecast.forecastDays() / d->m_forecast.accountsCycle());
+    for (i = 0; (i*d->m_forecast.accountsCycle() + beginDay) <= d->m_forecast.forecastDays(); ++i) {
       d->m_html += QString("<td width=\"%1%\" class=\"right\">").arg(colWidth);
 
-      d->m_html += i18ncp("Forecast days", "%1 day", "%1 days", i*d->m_forecast.accountsCycle() + beginDay);
+      d->m_html += i18ncp("Forecast days", "%1 day", "%1 days", i * d->m_forecast.accountsCycle() + beginDay);
       d->m_html += "</td>";
       colspan++;
     }
@@ -940,12 +933,12 @@ void KHomeView::showForecast(void)
     i = 0;
 
     QMap<QString, MyMoneyAccount>::ConstIterator it_account;
-    for(it_account = nameIdx.constBegin(); it_account != nameIdx.constEnd(); ++it_account) {
+    for (it_account = nameIdx.constBegin(); it_account != nameIdx.constEnd(); ++it_account) {
       //MyMoneyAccount acc = (*it_n);
 
       d->m_html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");
       d->m_html += QString("<td width=\"40%\">") +
-          link(VIEW_LEDGER, QString("?id=%1").arg((*it_account).id())) + (*it_account).name() + linkend() + "</td>";
+                   link(VIEW_LEDGER, QString("?id=%1").arg((*it_account).id())) + (*it_account).name() + linkend() + "</td>";
 
       int dropZero = -1; //account dropped below zero
       int dropMinimum = -1; //account dropped below minimum balance
@@ -955,7 +948,7 @@ void KHomeView::showForecast(void)
       MyMoneyMoney forecastBalance;
 
       //change account to deep currency if account is an investment
-      if((*it_account).isInvest()) {
+      if ((*it_account).isInvest()) {
         MyMoneySecurity underSecurity = file->security((*it_account).currencyId());
         currency = file->security(underSecurity.tradingCurrency());
       } else {
@@ -965,8 +958,8 @@ void KHomeView::showForecast(void)
       for (int f = beginDay; f <= d->m_forecast.forecastDays(); f += d->m_forecast.accountsCycle()) {
         forecastBalance = d->m_forecast.forecastBalance(*it_account, QDate::currentDate().addDays(f));
         QString amount;
-        amount = forecastBalance.formatMoney( *it_account, currency);
-        amount.replace(QChar(' '),"&nbsp;");
+        amount = forecastBalance.formatMoney(*it_account, currency);
+        amount.replace(QChar(' '), "&nbsp;");
         d->m_html += QString("<td width=\"%1%\" align=\"right\">").arg(colWidth);
         d->m_html += QString("%1</td>").arg(showColoredAmount(amount, forecastBalance.isNegative()));
       }
@@ -988,63 +981,63 @@ void KHomeView::showForecast(void)
       // if a minimum balance has been specified, an appropriate warning will
       // only be shown, if the drop below 0 is on a different day or not present
 
-      if(dropMinimum != -1
-         && !minBalance.isZero()
-         && (dropMinimum < dropZero
-         || dropZero == -1)) {
-        switch(dropMinimum) {
-          case -1:
-            break;
-          case 0:
-            msg = i18n("The balance of %1 is below the minimum balance %2 today.",(*it_account).name(),minBalance.formatMoney(*it_account, currency));
-            msg = showColoredAmount(msg, true);
-            break;
-          default:
-            msg = i18np("The balance of %2 will drop below the minimum balance %3 in %1 day.",
-                        "The balance of %2 will drop below the minimum balance %3 in %1 days.",
-                        dropMinimum-1,(*it_account).name(),minBalance.formatMoney(*it_account, currency));
-            msg = showColoredAmount(msg, true);
-            break;
+      if (dropMinimum != -1
+          && !minBalance.isZero()
+          && (dropMinimum < dropZero
+              || dropZero == -1)) {
+        switch (dropMinimum) {
+        case -1:
+          break;
+        case 0:
+          msg = i18n("The balance of %1 is below the minimum balance %2 today.", (*it_account).name(), minBalance.formatMoney(*it_account, currency));
+          msg = showColoredAmount(msg, true);
+          break;
+        default:
+          msg = i18np("The balance of %2 will drop below the minimum balance %3 in %1 day.",
+                      "The balance of %2 will drop below the minimum balance %3 in %1 days.",
+                      dropMinimum - 1, (*it_account).name(), minBalance.formatMoney(*it_account, currency));
+          msg = showColoredAmount(msg, true);
+          break;
         }
 
-        if(!msg.isEmpty()) {
+        if (!msg.isEmpty()) {
           d->m_html += QString("<tr class=\"warning\" style=\"font-weight: normal;\" ><td colspan=%2 align=\"center\" >%1</td></tr>").arg(msg).arg(colspan);
         }
-         }
+      }
       // a drop below zero is always shown
-         msg.clear();
-         switch(dropZero) {
-           case -1:
-             break;
-           case 0:
-             if((*it_account).accountGroup() == MyMoneyAccount::Asset) {
-               msg = i18n("The balance of %1 is below %2 today.",(*it_account).name(),MyMoneyMoney().formatMoney(*it_account, currency));
-               msg = showColoredAmount(msg, true);
-               break;
-             }
-             if((*it_account).accountGroup() == MyMoneyAccount::Liability) {
-               msg = i18n("The balance of %1 is above %2 today.",(*it_account).name(),MyMoneyMoney().formatMoney(*it_account, currency));
-               break;
-             }
-             break;
-           default:
-             if((*it_account).accountGroup() == MyMoneyAccount::Asset) {
-               msg = i18np("The balance of %2 will drop below %3 in %1 day.",
-                           "The balance of %2 will drop below %3 in %1 days.",
-                           dropZero,(*it_account).name(),MyMoneyMoney().formatMoney(*it_account, currency));
-               msg = showColoredAmount(msg, true);
-               break;
-             }
-             if((*it_account).accountGroup() == MyMoneyAccount::Liability) {
-               msg = i18np("The balance of %2 will raise above %3 in %1 day.",
-                           "The balance of %2 will raise above %3 in %1 days.",
-                           dropZero,(*it_account).name(),MyMoneyMoney().formatMoney(*it_account, currency));
-               break;
-             }
-         }
-         if(!msg.isEmpty()) {
-           d->m_html += QString("<tr class=\"warning\"><td colspan=%2 align=\"center\" ><b>%1</b></td></tr>").arg(msg).arg(colspan);
-         }
+      msg.clear();
+      switch (dropZero) {
+      case -1:
+        break;
+      case 0:
+        if ((*it_account).accountGroup() == MyMoneyAccount::Asset) {
+          msg = i18n("The balance of %1 is below %2 today.", (*it_account).name(), MyMoneyMoney().formatMoney(*it_account, currency));
+          msg = showColoredAmount(msg, true);
+          break;
+        }
+        if ((*it_account).accountGroup() == MyMoneyAccount::Liability) {
+          msg = i18n("The balance of %1 is above %2 today.", (*it_account).name(), MyMoneyMoney().formatMoney(*it_account, currency));
+          break;
+        }
+        break;
+      default:
+        if ((*it_account).accountGroup() == MyMoneyAccount::Asset) {
+          msg = i18np("The balance of %2 will drop below %3 in %1 day.",
+                      "The balance of %2 will drop below %3 in %1 days.",
+                      dropZero, (*it_account).name(), MyMoneyMoney().formatMoney(*it_account, currency));
+          msg = showColoredAmount(msg, true);
+          break;
+        }
+        if ((*it_account).accountGroup() == MyMoneyAccount::Liability) {
+          msg = i18np("The balance of %2 will raise above %3 in %1 day.",
+                      "The balance of %2 will raise above %3 in %1 days.",
+                      dropZero, (*it_account).name(), MyMoneyMoney().formatMoney(*it_account, currency));
+          break;
+        }
+      }
+      if (!msg.isEmpty()) {
+        d->m_html += QString("<tr class=\"warning\"><td colspan=%2 align=\"center\" ><b>%1</b></td></tr>").arg(msg).arg(colspan);
+      }
     }
     d->m_html += "</table></div></div>";
 
@@ -1055,7 +1048,7 @@ const QString KHomeView::link(const QString& view, const QString& query, const Q
 {
   QString titlePart;
   QString title(_title);
-  if(!title.isEmpty())
+  if (!title.isEmpty())
     titlePart = QString(" title=\"%1\"").arg(title.replace(QChar(' '), "&nbsp;"));
 
   return QString("<a href=\"/%1%2\"%3>").arg(view, query, titlePart);
@@ -1066,58 +1059,53 @@ const QString KHomeView::linkend(void) const
   return "</a>";
 }
 
-void KHomeView::slotOpenUrl(const KUrl &url, const KParts::OpenUrlArguments&,const KParts::BrowserArguments& )
+void KHomeView::slotOpenUrl(const KUrl &url, const KParts::OpenUrlArguments&, const KParts::BrowserArguments&)
 {
   QString protocol = url.protocol();
   QString view = url.fileName();
   QString id = url.queryItem("id");
   QString mode = url.queryItem("mode");
 
-  if ( protocol == "http" )
-  {
+  if (protocol == "http") {
     KToolInvocation::invokeBrowser(url.prettyUrl());
-  }
-  else if ( protocol == "mailto" )
-  {
+  } else if (protocol == "mailto") {
     KToolInvocation::invokeMailer(url);
-  }
-  else
-  {
-    if(view == VIEW_LEDGER) {
+  } else {
+    if (view == VIEW_LEDGER) {
       emit ledgerSelected(id, QString());
 
-    } else if(view == VIEW_SCHEDULE) {
-      if(mode == "enter") {
+    } else if (view == VIEW_SCHEDULE) {
+      if (mode == "enter") {
         emit scheduleSelected(id);
         KXmlGuiWindow* mw = KMyMoneyUtils::mainWindow();
         Q_CHECK_PTR(mw);
         QTimer::singleShot(0, mw->actionCollection()->action("schedule_enter"), SLOT(trigger()));
-      } else if(mode == "edit") {
+      } else if (mode == "edit") {
         emit scheduleSelected(id);
         KXmlGuiWindow* mw = KMyMoneyUtils::mainWindow();
         Q_CHECK_PTR(mw);
         QTimer::singleShot(0, mw->actionCollection()->action("schedule_edit"), SLOT(trigger()));
-      } else if(mode == "skip") {
+      } else if (mode == "skip") {
         emit scheduleSelected(id);
         KXmlGuiWindow* mw = KMyMoneyUtils::mainWindow();
         Q_CHECK_PTR(mw);
         QTimer::singleShot(0, mw->actionCollection()->action("schedule_skip"), SLOT(trigger()));
-      } else if(mode == "full") {
+      } else if (mode == "full") {
         d->m_showAllSchedules = true;
         loadView();
 
-      } else if(mode == "reduced") {
+      } else if (mode == "reduced") {
         d->m_showAllSchedules = false;
         loadView();
       }
 
-    } else if(view == VIEW_REPORTS) {
+    } else if (view == VIEW_REPORTS) {
       emit reportSelected(id);
 
-    } else if(view == VIEW_WELCOME) {
+    } else if (view == VIEW_WELCOME) {
       KXmlGuiWindow* mw = KMyMoneyUtils::mainWindow();
       Q_CHECK_PTR(mw);
-      if ( mode == "whatsnew" ) {
+      if (mode == "whatsnew") {
         d->m_part->begin();
         d->m_part->write(KWelcomePage::whatsNewPage());
         d->m_part->end();
@@ -1127,14 +1115,14 @@ void KHomeView::slotOpenUrl(const KUrl &url, const KParts::OpenUrlArguments&,con
         d->m_part->end();
       }
 
-    } else if(view == "action") {
+    } else if (view == "action") {
       KXmlGuiWindow* mw = KMyMoneyUtils::mainWindow();
       Q_CHECK_PTR(mw);
-      QTimer::singleShot(0, mw->actionCollection()->action( id ), SLOT(trigger ()));
-    } else if(view == VIEW_HOME) {
+      QTimer::singleShot(0, mw->actionCollection()->action(id), SLOT(trigger()));
+    } else if (view == VIEW_HOME) {
       QList<MyMoneyAccount> list;
       MyMoneyFile::instance()->accountList(list);
-      if(list.count() == 0) {
+      if (list.count() == 0) {
         KMessageBox::information(this, i18n("Before KMyMoney can give you detailed information about your financial status, you need to create at least one account. Until then, KMyMoney shows the welcome page instead."));
       }
       loadView();
@@ -1162,44 +1150,44 @@ void KHomeView::showAssetsLiabilities(void)
 
   // get list of all accounts
   file->accountList(accounts);
-  for(it = accounts.begin(); it != accounts.end();) {
-    if(!(*it).isClosed()) {
-      switch((*it).accountType()) {
+  for (it = accounts.begin(); it != accounts.end();) {
+    if (!(*it).isClosed()) {
+      switch ((*it).accountType()) {
         // group all assets into one list but make sure that investment accounts always show up
-        case MyMoneyAccount::Investment:
-          d->addNameIndex(nameAssetsIdx, *it);
-          break;
+      case MyMoneyAccount::Investment:
+        d->addNameIndex(nameAssetsIdx, *it);
+        break;
 
-        case MyMoneyAccount::Checkings:
-        case MyMoneyAccount::Savings:
-        case MyMoneyAccount::Cash:
-        case MyMoneyAccount::Asset:
-        case MyMoneyAccount::AssetLoan:
-          // list account if it's the last in the hierarchy or has transactions in it
-          if((*it).accountList().isEmpty() || (file->transactionCount((*it).id()) > 0)) {
-            d->addNameIndex(nameAssetsIdx, *it);
-          }
-          break;
+      case MyMoneyAccount::Checkings:
+      case MyMoneyAccount::Savings:
+      case MyMoneyAccount::Cash:
+      case MyMoneyAccount::Asset:
+      case MyMoneyAccount::AssetLoan:
+        // list account if it's the last in the hierarchy or has transactions in it
+        if ((*it).accountList().isEmpty() || (file->transactionCount((*it).id()) > 0)) {
+          d->addNameIndex(nameAssetsIdx, *it);
+        }
+        break;
 
         // group the liabilities into the other
-        case MyMoneyAccount::CreditCard:
-        case MyMoneyAccount::Liability:
-        case MyMoneyAccount::Loan:
-          // list account if it's the last in the hierarchy or has transactions in it
-          if((*it).accountList().isEmpty() || (file->transactionCount((*it).id()) > 0)) {
-            d->addNameIndex(nameLiabilitiesIdx, *it);
-          }
-          break;
+      case MyMoneyAccount::CreditCard:
+      case MyMoneyAccount::Liability:
+      case MyMoneyAccount::Loan:
+        // list account if it's the last in the hierarchy or has transactions in it
+        if ((*it).accountList().isEmpty() || (file->transactionCount((*it).id()) > 0)) {
+          d->addNameIndex(nameLiabilitiesIdx, *it);
+        }
+        break;
 
-        default:
-          break;
+      default:
+        break;
       }
     }
     ++it;
   }
 
   //only do it if we have assets or liabilities account
-  if(nameAssetsIdx.count() > 0 || nameLiabilitiesIdx.count() > 0) {
+  if (nameAssetsIdx.count() > 0 || nameLiabilitiesIdx.count() > 0) {
     //print header
     d->m_html += "<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">" + i18n("Assets and Liabilities Summary") + "</div>\n<div class=\"gap\">&nbsp;</div>\n";
     d->m_html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
@@ -1221,20 +1209,20 @@ void KHomeView::showAssetsLiabilities(void)
 
     //get asset and liability accounts
     QMap<QString, MyMoneyAccount>::const_iterator asset_it = nameAssetsIdx.constBegin();
-    QMap<QString,MyMoneyAccount>::const_iterator liabilities_it = nameLiabilitiesIdx.constBegin();
-    for(; asset_it != nameAssetsIdx.constEnd() || liabilities_it != nameLiabilitiesIdx.constEnd();) {
+    QMap<QString, MyMoneyAccount>::const_iterator liabilities_it = nameLiabilitiesIdx.constBegin();
+    for (; asset_it != nameAssetsIdx.constEnd() || liabilities_it != nameLiabilitiesIdx.constEnd();) {
       d->m_html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");
       //write an asset account if we still have any
-      if(asset_it != nameAssetsIdx.constEnd()) {
+      if (asset_it != nameAssetsIdx.constEnd()) {
         MyMoneyMoney value;
         //investment accounts consolidate the balance of its subaccounts
-        if( (*asset_it).accountType() == MyMoneyAccount::Investment) {
+        if ((*asset_it).accountType() == MyMoneyAccount::Investment) {
           value = investmentBalance(*asset_it);
         } else {
           value = MyMoneyFile::instance()->balance((*asset_it).id(), QDate::currentDate());
         }
         //calculate balance for foreign currency accounts
-        if((*asset_it).currencyId() != file->baseCurrency().id()) {
+        if ((*asset_it).currencyId() != file->baseCurrency().id()) {
           ReportAccount repAcc = ReportAccount((*asset_it).id());
           MyMoneyMoney curPrice = repAcc.baseCurrencyPrice(QDate::currentDate());
           MyMoneyMoney baseValue = value * curPrice;
@@ -1255,11 +1243,11 @@ void KHomeView::showAssetsLiabilities(void)
       d->m_html += "<td class=\"setcolor\"></td>";
 
       //write a liability account
-      if(liabilities_it != nameLiabilitiesIdx.constEnd()) {
+      if (liabilities_it != nameLiabilitiesIdx.constEnd()) {
         MyMoneyMoney value;
         value = MyMoneyFile::instance()->balance((*liabilities_it).id(), QDate::currentDate());
         //calculate balance if foreign currency
-        if((*liabilities_it).currencyId() != file->baseCurrency().id()) {
+        if ((*liabilities_it).currencyId() != file->baseCurrency().id()) {
           ReportAccount repAcc = ReportAccount((*liabilities_it).id());
           MyMoneyMoney curPrice = repAcc.baseCurrencyPrice(QDate::currentDate());
           MyMoneyMoney baseValue = value * curPrice;
@@ -1278,15 +1266,15 @@ void KHomeView::showAssetsLiabilities(void)
       d->m_html += "</tr>";
     }
     //calculate net worth
-    MyMoneyMoney netWorth = netAssets+netLiabilities;
+    MyMoneyMoney netWorth = netAssets + netLiabilities;
 
     //format assets, liabilities and net worth
     QString amountAssets = netAssets.formatMoney(file->baseCurrency().tradingSymbol(), prec);
     QString amountLiabilities = netLiabilities.formatMoney(file->baseCurrency().tradingSymbol(), prec);
     QString amountNetWorth = netWorth.formatMoney(file->baseCurrency().tradingSymbol(), prec);
-    amountAssets.replace(QChar(' '),"&nbsp;");
-    amountLiabilities.replace(QChar(' '),"&nbsp;");
-    amountNetWorth.replace(QChar(' '),"&nbsp;");
+    amountAssets.replace(QChar(' '), "&nbsp;");
+    amountLiabilities.replace(QChar(' '), "&nbsp;");
+    amountNetWorth.replace(QChar(' '), "&nbsp;");
 
     d->m_html += QString("<tr class=\"row-%1\" style=\"font-weight:bold;\">").arg(i++ & 0x01 ? "even" : "odd");
 
@@ -1304,7 +1292,7 @@ void KHomeView::showAssetsLiabilities(void)
     d->m_html += QString("<tr class=\"row-%1\" style=\"font-weight:bold;\">").arg(i++ & 0x01 ? "even" : "odd");
 
     d->m_html += "<td></td><td></td><td class=\"setcolor\"></td>";
-    d->m_html += QString("<td class=\"left\">%1</td><td align=\"right\">%2</td>").arg(i18n("Net Worth")).arg(showColoredAmount(amountNetWorth, netWorth.isNegative() ));
+    d->m_html += QString("<td class=\"left\">%1</td><td align=\"right\">%2</td>").arg(i18n("Net Worth")).arg(showColoredAmount(amountNetWorth, netWorth.isNegative()));
 
     d->m_html += "</tr>";
     d->m_html += "</table>";
@@ -1314,22 +1302,22 @@ void KHomeView::showAssetsLiabilities(void)
 
 void KHomeView::showBudget(void)
 {
-    MyMoneyFile* file = MyMoneyFile::instance();
+  MyMoneyFile* file = MyMoneyFile::instance();
 
-  if ( file->countBudgets() ) {
+  if (file->countBudgets()) {
     int prec = MyMoneyMoney::denomToPrec(file->baseCurrency().smallestAccountFraction());
     int i = 0;
 
     //config report just like "Monthly Budgeted vs Actual
     MyMoneyReport reportCfg = MyMoneyReport(
-      MyMoneyReport::eBudgetActual,
-      MyMoneyReport::eMonths,
-      MyMoneyTransactionFilter::currentMonth,
-      MyMoneyReport::eDetailAll,
-      i18n("Monthly Budgeted vs. Actual"),
-      i18n("Generated Report"));
+                                MyMoneyReport::eBudgetActual,
+                                MyMoneyReport::eMonths,
+                                MyMoneyTransactionFilter::currentMonth,
+                                MyMoneyReport::eDetailAll,
+                                i18n("Monthly Budgeted vs. Actual"),
+                                i18n("Generated Report"));
 
-    reportCfg.setBudget("Any",true);
+    reportCfg.setBudget("Any", true);
 
     reports::PivotTable table(reportCfg);
 
@@ -1394,24 +1382,21 @@ void KHomeView::showBudget(void)
 
 
     PivotGrid::iterator it_outergroup = grid.begin();
-    while ( it_outergroup != grid.end() )
-    {
+    while (it_outergroup != grid.end()) {
       i = 0;
       PivotOuterGroup::iterator it_innergroup = (*it_outergroup).begin();
-      while ( it_innergroup != (*it_outergroup).end() )
-      {
+      while (it_innergroup != (*it_outergroup).end()) {
         PivotInnerGroup::iterator it_row = (*it_innergroup).begin();
-        while ( it_row != (*it_innergroup).end() )
-        {
+        while (it_row != (*it_innergroup).end()) {
           //column number is 1 because the report includes only current month
-          if(it_row.value()[eBudgetDiff][1].isNegative()) {
+          if (it_row.value()[eBudgetDiff][1].isNegative()) {
             //get report account to get the name later
             ReportAccount rowname = it_row.key();
 
             //write the outergroup if it is the first row of outergroup being shown
-            if(i == 0) {
+            if (i == 0) {
               d->m_html += "<tr style=\"font-weight:bold;\">";
-              d->m_html += QString("<td class=\"left\" colspan=\"4\">%1</td>").arg(KMyMoneyUtils::accountTypeToString( rowname.accountType()));
+              d->m_html += QString("<td class=\"left\" colspan=\"4\">%1</td>").arg(KMyMoneyUtils::accountTypeToString(rowname.accountType()));
               d->m_html += "</tr>";
             }
             d->m_html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");
@@ -1443,7 +1428,7 @@ void KHomeView::showBudget(void)
     }
 
     //if no negative differences are found, then inform that
-    if(i == 0) {
+    if (i == 0) {
       d->m_html += QString("<tr class=\"row-%1\" style=\"font-weight:bold;\">").arg(i++ & 0x01 ? "even" : "odd");
       d->m_html += QString("<td class=\"center\" colspan=\"4\">%1</td>").arg(i18n("No Budget Categories have been overrun"));
       d->m_html += "</tr>";
@@ -1454,7 +1439,7 @@ void KHomeView::showBudget(void)
 
 QString KHomeView::showColoredAmount(const QString& amount, bool isNegative)
 {
-  if(isNegative) {
+  if (isNegative) {
     //if negative, get the settings for negative numbers
     return QString("<font color=\"%1\">%2</font>").arg(KMyMoneyGlobalSettings::listNegativeValueColor().name(), amount);
   }
@@ -1472,7 +1457,7 @@ void KHomeView::doForecast(void)
   d->m_forecast = MyMoneyForecast();
 
   //If forecastDays lower than accountsCycle, adjust to the first cycle
-  if(d->m_forecast.accountsCycle() > d->m_forecast.forecastDays())
+  if (d->m_forecast.accountsCycle() > d->m_forecast.forecastDays())
     d->m_forecast.setForecastDays(d->m_forecast.accountsCycle());
 
   //Get all accounts of the right type to calculate forecast
@@ -1483,14 +1468,13 @@ MyMoneyMoney KHomeView::forecastPaymentBalance(const MyMoneyAccount& acc, const 
 {
   //if paymentDate before or equal to currentDate set it to current date plus 1
   //so we get to accumulate forecast balance correctly
-  if(paymentDate <= QDate::currentDate())
+  if (paymentDate <= QDate::currentDate())
     paymentDate = QDate::currentDate().addDays(1);
 
   //check if the account is already there
-  if(d->m_accountList.find(acc.id()) == d->m_accountList.end()
-     || d->m_accountList[acc.id()].find(paymentDate) == d->m_accountList[acc.id()].end())
-  {
-    if(paymentDate == QDate::currentDate()) {
+  if (d->m_accountList.find(acc.id()) == d->m_accountList.end()
+      || d->m_accountList[acc.id()].find(paymentDate) == d->m_accountList[acc.id()].end()) {
+    if (paymentDate == QDate::currentDate()) {
       d->m_accountList[acc.id()][paymentDate] = d->m_forecast.forecastBalance(acc, paymentDate);
     } else {
       d->m_accountList[acc.id()][paymentDate] = d->m_forecast.forecastBalance(acc, paymentDate.addDays(-1));
@@ -1520,25 +1504,25 @@ void KHomeView::showCashFlowSummary()
 
   QList<MyMoneyTransaction> transactions = file->transactionList(filter);
   //if no transaction then skip and print total in zero
-  if(transactions.size() > 0) {
+  if (transactions.size() > 0) {
     QList<MyMoneyTransaction>::const_iterator it_transaction;
 
     //get all transactions for this month
-    for(it_transaction = transactions.constBegin(); it_transaction != transactions.constEnd(); ++it_transaction ) {
+    for (it_transaction = transactions.constBegin(); it_transaction != transactions.constEnd(); ++it_transaction) {
 
       //get the splits for each transaction
       const QList<MyMoneySplit>& splits = (*it_transaction).splits();
       QList<MyMoneySplit>::const_iterator it_split;
-      for(it_split = splits.begin(); it_split != splits.end(); ++it_split) {
-        if(!(*it_split).shares().isZero()) {
+      for (it_split = splits.begin(); it_split != splits.end(); ++it_split) {
+        if (!(*it_split).shares().isZero()) {
           ReportAccount repSplitAcc = ReportAccount((*it_split).accountId());
 
           //only add if it is an income or expense
-          if(repSplitAcc.isIncomeExpense()) {
+          if (repSplitAcc.isIncomeExpense()) {
             MyMoneyMoney value;
 
             //convert to base currency if necessary
-            if(repSplitAcc.currencyId() != file->baseCurrency().id()) {
+            if (repSplitAcc.currencyId() != file->baseCurrency().id()) {
               MyMoneyMoney curPrice = repSplitAcc.baseCurrencyPrice((*it_transaction).postDate());
               value = ((*it_split).shares() * MyMoneyMoney(-1, 1)) * curPrice;
               value = value.convert(10000);
@@ -1547,7 +1531,7 @@ void KHomeView::showCashFlowSummary()
             }
 
             //store depending on account type
-            if(repSplitAcc.accountType() == MyMoneyAccount::Income) {
+            if (repSplitAcc.accountType() == MyMoneyAccount::Income) {
               incomeValue += value;
             } else {
               expenseValue += value;
@@ -1561,8 +1545,8 @@ void KHomeView::showCashFlowSummary()
   //format income and expenses
   QString amountIncome = incomeValue.formatMoney(file->baseCurrency().tradingSymbol(), prec);
   QString amountExpense = expenseValue.formatMoney(file->baseCurrency().tradingSymbol(), prec);
-  amountIncome.replace(QChar(' '),"&nbsp;");
-  amountExpense.replace(QChar(' '),"&nbsp;");
+  amountIncome.replace(QChar(' '), "&nbsp;");
+  amountExpense.replace(QChar(' '), "&nbsp;");
 
   //calculate schedules
 
@@ -1574,14 +1558,14 @@ void KHomeView::showCashFlowSummary()
 
   //get overdues and schedules until the end of this month
   QList<MyMoneySchedule> schedule = file->scheduleList("", MyMoneySchedule::TYPE_ANY,
-      MyMoneySchedule::OCCUR_ANY,
-      MyMoneySchedule::STYPE_ANY,
-      QDate(),
-            endOfMonth);
+                                    MyMoneySchedule::OCCUR_ANY,
+                                    MyMoneySchedule::STYPE_ANY,
+                                    QDate(),
+                                    endOfMonth);
 
   //Remove the finished schedules
   QList<MyMoneySchedule>::Iterator finished_it;
-  for (finished_it=schedule.begin(); finished_it!=schedule.end();) {
+  for (finished_it = schedule.begin(); finished_it != schedule.end();) {
     if ((*finished_it).isFinished()) {
       finished_it = schedule.erase(finished_it);
       continue;
@@ -1591,42 +1575,42 @@ void KHomeView::showCashFlowSummary()
 
   //add income and expenses
   QList<MyMoneySchedule>::Iterator sched_it;
-  for (sched_it=schedule.begin(); sched_it!=schedule.end();) {
+  for (sched_it = schedule.begin(); sched_it != schedule.end();) {
     QDate nextDate = (*sched_it).nextDueDate();
     int cnt = 0;
 
-    while(nextDate.isValid() && nextDate <= endOfMonth) {
+    while (nextDate.isValid() && nextDate <= endOfMonth) {
       ++cnt;
       nextDate = (*sched_it).nextPayment(nextDate);
-        // for single occurrence nextDate will not change, so we
-        // better get out of here.
-      if((*sched_it).occurrence() == MyMoneySchedule::OCCUR_ONCE)
+      // for single occurrence nextDate will not change, so we
+      // better get out of here.
+      if ((*sched_it).occurrence() == MyMoneySchedule::OCCUR_ONCE)
         break;
     }
 
     MyMoneyAccount acc = (*sched_it).account();
-    if(!acc.id().isEmpty()) {
+    if (!acc.id().isEmpty()) {
       MyMoneyTransaction transaction = (*sched_it).transaction();
       // only show the entry, if it is still active
 
       MyMoneySplit sp = transaction.splitByAccount(acc.id(), true);
 
       // take care of the autoCalc stuff
-      if((*sched_it).type() == MyMoneySchedule::TYPE_LOANPAYMENT) {
+      if ((*sched_it).type() == MyMoneySchedule::TYPE_LOANPAYMENT) {
         QDate nextDate = (*sched_it).nextPayment((*sched_it).lastPayment());
 
         //make sure we have all 'starting balances' so that the autocalc works
         QList<MyMoneySplit>::const_iterator it_s;
         QMap<QString, MyMoneyMoney> balanceMap;
 
-        for(it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s ) {
+        for (it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s) {
           MyMoneyAccount acc = file->account((*it_s).accountId());
-            // collect all overdues on the first day
-            QDate schedDate = nextDate;
-            if(QDate::currentDate() >= nextDate)
-              schedDate = QDate::currentDate().addDays(1);
+          // collect all overdues on the first day
+          QDate schedDate = nextDate;
+          if (QDate::currentDate() >= nextDate)
+            schedDate = QDate::currentDate().addDays(1);
 
-            balanceMap[acc.id()] += file->balance(acc.id());
+          balanceMap[acc.id()] += file->balance(acc.id());
         }
         KMyMoneyUtils::calculateAutoLoan(*sched_it, transaction, balanceMap);
       }
@@ -1635,32 +1619,32 @@ void KHomeView::showCashFlowSummary()
       const QList<MyMoneySplit> splits = transaction.splits();
       QList<MyMoneySplit>::const_iterator split_it;
       for (split_it = splits.constBegin(); split_it != splits.constEnd(); ++split_it) {
-        if( (*split_it).accountId() != acc.id() ) {
+        if ((*split_it).accountId() != acc.id()) {
           ReportAccount repSplitAcc = ReportAccount((*split_it).accountId());
 
           //get the shares and multiply by the quantity of occurrences in the period
           MyMoneyMoney value = (*split_it).shares() * cnt;
 
           //convert to foreign currency if needed
-          if(repSplitAcc.currencyId() != file->baseCurrency().id()) {
+          if (repSplitAcc.currencyId() != file->baseCurrency().id()) {
             MyMoneyMoney curPrice = repSplitAcc.baseCurrencyPrice(QDate::currentDate());
             value = value * curPrice;
             value = value.convert(10000);
           }
 
-          if(( repSplitAcc.isLiquidLiability()
-             || repSplitAcc.isLiquidAsset() )
-             && acc.accountGroup() != repSplitAcc.accountGroup()) {
+          if ((repSplitAcc.isLiquidLiability()
+               || repSplitAcc.isLiquidAsset())
+              && acc.accountGroup() != repSplitAcc.accountGroup()) {
             scheduledLiquidTransfer += value;
-          } else if(repSplitAcc.isAssetLiability()
-             && !repSplitAcc.isLiquidLiability()
-             && !repSplitAcc.isLiquidAsset() ) {
+          } else if (repSplitAcc.isAssetLiability()
+                     && !repSplitAcc.isLiquidLiability()
+                     && !repSplitAcc.isLiquidAsset()) {
             scheduledOtherTransfer += value;
-          } else if(repSplitAcc.isIncomeExpense()) {
+          } else if (repSplitAcc.isIncomeExpense()) {
             //income and expenses are stored as negative values
-            if(repSplitAcc.accountType() == MyMoneyAccount::Income)
+            if (repSplitAcc.accountType() == MyMoneyAccount::Income)
               scheduledIncome -= value;
-            if(repSplitAcc.accountType() == MyMoneyAccount::Expense)
+            if (repSplitAcc.accountType() == MyMoneyAccount::Expense)
               scheduledExpense -= value;
           }
         }
@@ -1675,10 +1659,10 @@ void KHomeView::showCashFlowSummary()
   QString amountScheduledLiquidTransfer = scheduledLiquidTransfer.formatMoney(file->baseCurrency().tradingSymbol(), prec);
   QString amountScheduledOtherTransfer = scheduledOtherTransfer.formatMoney(file->baseCurrency().tradingSymbol(), prec);
 
-  amountScheduledIncome.replace(QChar(' '),"&nbsp;");
-  amountScheduledExpense.replace(QChar(' '),"&nbsp;");
-  amountScheduledLiquidTransfer.replace(QChar(' '),"&nbsp;");
-  amountScheduledOtherTransfer.replace(QChar(' '),"&nbsp;");
+  amountScheduledIncome.replace(QChar(' '), "&nbsp;");
+  amountScheduledExpense.replace(QChar(' '), "&nbsp;");
+  amountScheduledLiquidTransfer.replace(QChar(' '), "&nbsp;");
+  amountScheduledOtherTransfer.replace(QChar(' '), "&nbsp;");
 
   //get liquid assets and liabilities
   QList<MyMoneyAccount> accounts;
@@ -1688,60 +1672,58 @@ void KHomeView::showCashFlowSummary()
 
   // get list of all accounts
   file->accountList(accounts);
-  for(account_it = accounts.constBegin(); account_it != accounts.constEnd();) {
-    if(!(*account_it).isClosed()) {
-      switch((*account_it).accountType()) {
+  for (account_it = accounts.constBegin(); account_it != accounts.constEnd();) {
+    if (!(*account_it).isClosed()) {
+      switch ((*account_it).accountType()) {
         //group all assets into one list
-        case MyMoneyAccount::Checkings:
-        case MyMoneyAccount::Savings:
-        case MyMoneyAccount::Cash:
-        {
-          MyMoneyMoney value = MyMoneyFile::instance()->balance((*account_it).id(), QDate::currentDate());
-          //calculate balance for foreign currency accounts
-          if((*account_it).currencyId() != file->baseCurrency().id()) {
-            ReportAccount repAcc = ReportAccount((*account_it).id());
-            MyMoneyMoney curPrice = repAcc.baseCurrencyPrice(QDate::currentDate());
-            MyMoneyMoney baseValue = value * curPrice;
-            liquidAssets += baseValue;
-            liquidAssets = liquidAssets.convert(10000);
-          } else {
-            liquidAssets += value;
-          }
-          break;
+      case MyMoneyAccount::Checkings:
+      case MyMoneyAccount::Savings:
+      case MyMoneyAccount::Cash: {
+        MyMoneyMoney value = MyMoneyFile::instance()->balance((*account_it).id(), QDate::currentDate());
+        //calculate balance for foreign currency accounts
+        if ((*account_it).currencyId() != file->baseCurrency().id()) {
+          ReportAccount repAcc = ReportAccount((*account_it).id());
+          MyMoneyMoney curPrice = repAcc.baseCurrencyPrice(QDate::currentDate());
+          MyMoneyMoney baseValue = value * curPrice;
+          liquidAssets += baseValue;
+          liquidAssets = liquidAssets.convert(10000);
+        } else {
+          liquidAssets += value;
         }
-        //group the liabilities into the other
-        case MyMoneyAccount::CreditCard:
-        {
-          MyMoneyMoney value;
-          value = MyMoneyFile::instance()->balance((*account_it).id(), QDate::currentDate());
-          //calculate balance if foreign currency
-          if((*account_it).currencyId() != file->baseCurrency().id()) {
-            ReportAccount repAcc = ReportAccount((*account_it).id());
-            MyMoneyMoney curPrice = repAcc.baseCurrencyPrice(QDate::currentDate());
-            MyMoneyMoney baseValue = value * curPrice;
-            liquidLiabilities += baseValue;
-            liquidLiabilities = liquidLiabilities.convert(10000);
-          } else {
-            liquidLiabilities += value;
-          }
-          break;
+        break;
+      }
+      //group the liabilities into the other
+      case MyMoneyAccount::CreditCard: {
+        MyMoneyMoney value;
+        value = MyMoneyFile::instance()->balance((*account_it).id(), QDate::currentDate());
+        //calculate balance if foreign currency
+        if ((*account_it).currencyId() != file->baseCurrency().id()) {
+          ReportAccount repAcc = ReportAccount((*account_it).id());
+          MyMoneyMoney curPrice = repAcc.baseCurrencyPrice(QDate::currentDate());
+          MyMoneyMoney baseValue = value * curPrice;
+          liquidLiabilities += baseValue;
+          liquidLiabilities = liquidLiabilities.convert(10000);
+        } else {
+          liquidLiabilities += value;
         }
-        default:
-          break;
+        break;
+      }
+      default:
+        break;
       }
     }
     ++account_it;
   }
   //calculate net worth
-  MyMoneyMoney liquidWorth = liquidAssets+liquidLiabilities;
+  MyMoneyMoney liquidWorth = liquidAssets + liquidLiabilities;
 
-    //format assets, liabilities and net worth
+  //format assets, liabilities and net worth
   QString amountLiquidAssets = liquidAssets.formatMoney(file->baseCurrency().tradingSymbol(), prec);
   QString amountLiquidLiabilities = liquidLiabilities.formatMoney(file->baseCurrency().tradingSymbol(), prec);
   QString amountLiquidWorth = liquidWorth.formatMoney(file->baseCurrency().tradingSymbol(), prec);
-  amountLiquidAssets.replace(QChar(' '),"&nbsp;");
-  amountLiquidLiabilities.replace(QChar(' '),"&nbsp;");
-  amountLiquidWorth.replace(QChar(' '),"&nbsp;");
+  amountLiquidAssets.replace(QChar(' '), "&nbsp;");
+  amountLiquidLiabilities.replace(QChar(' '), "&nbsp;");
+  amountLiquidWorth.replace(QChar(' '), "&nbsp;");
 
   //show the summary
   d->m_html += "<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">" + i18n("Cash Flow Summary") + "</div>\n<div class=\"gap\">&nbsp;</div>\n";
@@ -1839,9 +1821,9 @@ void KHomeView::showCashFlowSummary()
   QString amountExpectedAsset = expectedAsset.formatMoney(file->baseCurrency().tradingSymbol(), prec);
   QString amountExpectedLiabilities = expectedLiabilities.formatMoney(file->baseCurrency().tradingSymbol(), prec);
   QString amountProfit = profitValue.formatMoney(file->baseCurrency().tradingSymbol(), prec);
-  amountProfit.replace(QChar(' '),"&nbsp;");
-  amountExpectedAsset.replace(QChar(' '),"&nbsp;");
-  amountExpectedLiabilities.replace(QChar(' '),"&nbsp;");
+  amountProfit.replace(QChar(' '), "&nbsp;");
+  amountExpectedAsset.replace(QChar(' '), "&nbsp;");
+  amountExpectedLiabilities.replace(QChar(' '), "&nbsp;");
 
 
 

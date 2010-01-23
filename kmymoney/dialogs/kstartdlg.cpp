@@ -56,11 +56,11 @@
 KStartDlg::KStartDlg(QWidget *parent, bool modal)
     : KPageDialog(parent)
 {
-  setCaption( i18n("Start Dialog") );
-  setModal( modal );
-  setFaceType( List );
-  setButtons( Ok | Cancel|Help );
-  setDefaultButton( Ok );
+  setCaption(i18n("Start Dialog"));
+  setModal(modal);
+  setFaceType(List);
+  setButtons(Ok | Cancel | Help);
+  setDefaultButton(Ok);
   setPage_Template();
   setPage_Documents();
 
@@ -80,17 +80,17 @@ void KStartDlg::setPage_Template()
   KIconLoader *ic = KIconLoader::global();
   templateMainFrame = new KVBox;
 
-  KPageWidgetItem *page = new KPageWidgetItem( templateMainFrame , i18n("Select templates") );
-  page->setHeader( i18n("Templates") );
-  page->setIcon( KIcon("tools-wizard"));
+  KPageWidgetItem *page = new KPageWidgetItem(templateMainFrame , i18n("Select templates"));
+  page->setHeader(i18n("Templates"));
+  page->setIcon(KIcon("tools-wizard"));
   addPage(page);
 
 
-  view_wizard = new K3IconView( templateMainFrame, "view_options" );
-  (void)new Q3IconViewItem( view_wizard, i18n("New KMyMoney document"), ic->loadIcon("mime_empty.png", KIconLoader::Desktop, KIconLoader::SizeLarge)/*QPixmap( locate("icon","hicolor/48x48/mimetypes/mime_empty.png") )*/ );
-  connect(view_wizard, SIGNAL(executed(Q3IconViewItem *) ), this, SLOT(slotTemplateClicked(Q3IconViewItem *) ) );
+  view_wizard = new K3IconView(templateMainFrame, "view_options");
+  (void)new Q3IconViewItem(view_wizard, i18n("New KMyMoney document"), ic->loadIcon("mime_empty.png", KIconLoader::Desktop, KIconLoader::SizeLarge)/*QPixmap( locate("icon","hicolor/48x48/mimetypes/mime_empty.png") )*/);
+  connect(view_wizard, SIGNAL(executed(Q3IconViewItem *)), this, SLOT(slotTemplateClicked(Q3IconViewItem *)));
   connect(view_wizard, SIGNAL(selectionChanged(Q3IconViewItem*)),
-    this, SLOT(slotTemplateSelectionChanged(Q3IconViewItem*)));
+          this, SLOT(slotTemplateSelectionChanged(Q3IconViewItem*)));
   connect(this, SIGNAL(aboutToShowPage(QWidget*)), this, SLOT(slotAboutToShowPage(QWidget*)));
 }
 
@@ -101,43 +101,43 @@ void KStartDlg::setPage_Documents()
 
   recentMainFrame = new KVBox;
 
-  KPageWidgetItem *page = new KPageWidgetItem( recentMainFrame , i18n("Open a KMyMoney document") );
-  page->setHeader( i18nc("To open KMyMoney document", "Open") );
-  page->setIcon( KIcon("fileopen"));
+  KPageWidgetItem *page = new KPageWidgetItem(recentMainFrame , i18n("Open a KMyMoney document"));
+  page->setHeader(i18nc("To open KMyMoney document", "Open"));
+  page->setIcon(KIcon("fileopen"));
   addPage(page);
 
-  QVBoxLayout *mainLayout = new QVBoxLayout( recentMainFrame );
+  QVBoxLayout *mainLayout = new QVBoxLayout(recentMainFrame);
 
-  kurlrequest = new KUrlRequester( recentMainFrame );
+  kurlrequest = new KUrlRequester(recentMainFrame);
 
   //allow user to select either a .kmy file, or any generic file.
-  kurlrequest->fileDialog()->setFilter( i18n("*.kmy|KMyMoney files (*.kmy)\n*.*|All files (*.*)") );
+  kurlrequest->fileDialog()->setFilter(i18n("*.kmy|KMyMoney files (*.kmy)\n*.*|All files (*.*)"));
   kurlrequest->fileDialog()->setMode(KFile::File | KFile::ExistingOnly);
   kurlrequest->fileDialog()->setUrl(KUrl(kmymoney->readLastUsedDir()));//kurlrequest->fileDialog()->setURL(KUrl(KGlobalSettings::documentPath()));
-  mainLayout->addWidget( kurlrequest );
+  mainLayout->addWidget(kurlrequest);
 
-  QLabel *label1 = new QLabel( recentMainFrame );
-  label1->setText( i18n("Recent Files") );
-  mainLayout->addWidget( label1 );
-  view_recent = new K3IconView( recentMainFrame, "view_recent" );
-  connect( view_recent, SIGNAL( executed(Q3IconViewItem *) ), this, SLOT( slotRecentClicked(Q3IconViewItem *) ) );
-  mainLayout->addWidget( view_recent );
+  QLabel *label1 = new QLabel(recentMainFrame);
+  label1->setText(i18n("Recent Files"));
+  mainLayout->addWidget(label1);
+  view_recent = new K3IconView(recentMainFrame, "view_recent");
+  connect(view_recent, SIGNAL(executed(Q3IconViewItem *)), this, SLOT(slotRecentClicked(Q3IconViewItem *)));
+  mainLayout->addWidget(view_recent);
   view_recent->setArrangement(K3IconView::LeftToRight/*TopToBottom*/);
   view_recent->setItemTextPos(K3IconView::Bottom);
 
   connect(view_recent, SIGNAL(selectionChanged(Q3IconViewItem*)),
-    this, SLOT(slotRecentSelectionChanged(Q3IconViewItem*)));
+          this, SLOT(slotRecentSelectionChanged(Q3IconViewItem*)));
 }
 
 void KStartDlg::slotTemplateClicked(Q3IconViewItem *item)
 {
-  if(!item) return;
+  if (!item) return;
 
   // If the item is the blank document turn isnewfile variable true, else is template or wizard
-  if( item->text() == i18n("New KMyMoney document") )
-     isnewfile = true;
-   else
-     templatename = item->text();
+  if (item->text() == i18n("New KMyMoney document"))
+    isnewfile = true;
+  else
+    templatename = item->text();
 
   isopenfile = false;
   // Close the window if the user pressed an icon
@@ -159,26 +159,25 @@ void KStartDlg::readConfig()
     // after program startup. If the wizard was opened the second time,
     // it does not make a difference, if you call setGroup() outside of
     // this loop. The first time it does make a difference!
-    KConfigGroup grp= config->group("Recent Files");
-    value = grp.readEntry( QString( "File%1" ).arg( i ));
-    if( !value.isNull() && fileExists(value) )
-    {
-      QString file_name = value.mid(value.lastIndexOf('/')+1);
-      (void)new KRecentFileItem( value, view_recent, file_name, il->loadIcon("kmy", KIconLoader::Desktop, KIconLoader::SizeLarge));
+    KConfigGroup grp = config->group("Recent Files");
+    value = grp.readEntry(QString("File%1").arg(i));
+    if (!value.isNull() && fileExists(value)) {
+      QString file_name = value.mid(value.lastIndexOf('/') + 1);
+      (void)new KRecentFileItem(value, view_recent, file_name, il->loadIcon("kmy", KIconLoader::Desktop, KIconLoader::SizeLarge));
     }
     i++;
-  } while( !value.isNull() );
+  } while (!value.isNull());
 
   KConfigGroup grp = config->group("Start Dialog");
-  QSize defaultSize(400,300);
-  this->resize( grp.readEntry("Geometry", defaultSize ) );
+  QSize defaultSize(400, 300);
+  this->resize(grp.readEntry("Geometry", defaultSize));
 
   // Restore the last page viewed
   // default to the recent files page if no entry exists but files have been found
   // otherwise, default to template page
 //FIXME: Port to KDE4
 #if 0
-  if(view_recent->count() > 0)
+  if (view_recent->count() > 0)
     setCurrentPage(grp.readEntry("LastPage", this->pageIndex(recentMainFrame)));
   else {
     setCurrentPage(grp.readEntry("LastPage", this->pageIndex(templateMainFrame)));
@@ -193,7 +192,7 @@ void KStartDlg::writeConfig()
   KSharedConfigPtr config = KGlobal::config();
 
   KConfigGroup grp = config->group("Start Dialog");
-  grp.writeEntry("Geometry", this->size() );
+  grp.writeEntry("Geometry", this->size());
 //FIXME: Port to KDE4
   //grp.writeEntry("LastPage", this->activePageIndex());
   config->sync();
@@ -203,10 +202,10 @@ void KStartDlg::writeConfig()
 void KStartDlg::slotRecentClicked(Q3IconViewItem *item)
 {
   KRecentFileItem *kitem = (KRecentFileItem*)item;
-  if(!kitem) return;
+  if (!kitem) return;
 
   isopenfile = true;
-  kurlrequest->setUrl( kitem->fileURL() );
+  kurlrequest->setUrl(kitem->fileURL());
   // Close the window if the user press an icon
   slotOk();
 }
@@ -225,14 +224,14 @@ bool KStartDlg::fileExists(KUrl url)
 
 void KStartDlg::slotTemplateSelectionChanged(Q3IconViewItem* item)
 {
-  if(!item) return;
+  if (!item) return;
 
   // Clear the other selection
   view_recent->clearSelection();
 
   // If the item is the blank document turn isnewfile
   // variable true, else is template or wizard
-  if( item->text() == i18n("Blank Document") )
+  if (item->text() == i18n("Blank Document"))
     isnewfile = true;
   else
     templatename = item->text();
@@ -243,14 +242,14 @@ void KStartDlg::slotTemplateSelectionChanged(Q3IconViewItem* item)
 void KStartDlg::slotRecentSelectionChanged(Q3IconViewItem* item)
 {
   KRecentFileItem *kitem = (KRecentFileItem*)item;
-  if(!kitem) return;
+  if (!kitem) return;
 
   // Clear the other selection
   view_wizard->clearSelection();
 
   isnewfile = false;
   isopenfile = true;
-  kurlrequest->setUrl( kitem->fileURL() );
+  kurlrequest->setUrl(kitem->fileURL());
 }
 
 void KStartDlg::slotAboutToShowPage(QWidget* page)

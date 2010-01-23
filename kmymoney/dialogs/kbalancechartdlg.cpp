@@ -39,14 +39,14 @@
 #include <kmymoneyglobalsettings.h>
 
 KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* parent) :
-  KDialog(parent)
+    KDialog(parent)
 {
-  setCaption(i18n("Balance of %1",account.name()));
-  setSizeGripEnabled( true );
-  setModal( true );
-  setButtons( KDialog::Close);
+  setCaption(i18n("Balance of %1", account.name()));
+  setSizeGripEnabled(true);
+  setModal(true);
+  setButtons(KDialog::Close);
   setButtonsOrientation(Qt::Horizontal);
-  resize( QSize(700, 500).expandedTo(minimumSizeHint()) );
+  resize(QSize(700, 500).expandedTo(minimumSizeHint()));
 
   //draw the chart and add it to the main layout
   KReportChartView* chartWidget = drawChart(account);
@@ -61,27 +61,27 @@ KBalanceChartDlg::~KBalanceChartDlg()
 KReportChartView* KBalanceChartDlg::drawChart(const MyMoneyAccount& account)
 {
   MyMoneyReport reportCfg = MyMoneyReport(
-                                          MyMoneyReport::eAssetLiability,
-                                          MyMoneyReport::eMonths,
-                                          MyMoneyTransactionFilter::last3ToNext3Months,
-                                          MyMoneyReport::eDetailTotal,
-                                          i18n("%1 Balance History",account.name()),
-                                               i18n("Generated Report")
-                                         );
+                              MyMoneyReport::eAssetLiability,
+                              MyMoneyReport::eMonths,
+                              MyMoneyTransactionFilter::last3ToNext3Months,
+                              MyMoneyReport::eDetailTotal,
+                              i18n("%1 Balance History", account.name()),
+                              i18n("Generated Report")
+                            );
   reportCfg.setChartByDefault(true);
   reportCfg.setChartGridLines(false);
   reportCfg.setChartDataLabels(false);
   reportCfg.setChartType(MyMoneyReport::eChartLine);
-  reportCfg.setIncludingForecast( true );
+  reportCfg.setIncludingForecast(true);
   reportCfg.setIncludingBudgetActuals(true);
-  if(account.accountType() == MyMoneyAccount::Investment) {
+  if (account.accountType() == MyMoneyAccount::Investment) {
     QStringList::const_iterator it_a;
-    for(it_a = account.accountList().begin(); it_a != account.accountList().end(); ++it_a)
+    for (it_a = account.accountList().begin(); it_a != account.accountList().end(); ++it_a)
       reportCfg.addAccount(*it_a);
   } else
     reportCfg.addAccount(account.id());
-  reportCfg.setColumnsAreDays( true );
-  reportCfg.setConvertCurrency( false );
+  reportCfg.setColumnsAreDays(true);
+  reportCfg.setConvertCurrency(false);
   reportCfg.setMixedTime(true);
   reports::PivotTable table(reportCfg);
 
@@ -94,37 +94,37 @@ KReportChartView* KBalanceChartDlg::drawChart(const MyMoneyAccount& account)
   bool haveMinBalance = false;
   bool haveMaxCredit = false;
   MyMoneyMoney minBalance, maxCredit;
-  MyMoneyMoney factor(1,1);
-  if(account.accountGroup() == MyMoneyAccount::Asset)
+  MyMoneyMoney factor(1, 1);
+  if (account.accountGroup() == MyMoneyAccount::Asset)
     factor = -factor;
 
-  if(account.value("maxCreditEarly").length() > 0) {
+  if (account.value("maxCreditEarly").length() > 0) {
     needRow = true;
     haveMaxCredit = true;
     maxCredit = MyMoneyMoney(account.value("maxCreditEarly")) * factor;
   }
-  if(account.value("maxCreditAbsolute").length() > 0) {
+  if (account.value("maxCreditAbsolute").length() > 0) {
     needRow = true;
     haveMaxCredit = true;
     maxCredit = MyMoneyMoney(account.value("maxCreditAbsolute")) * factor;
   }
 
-  if(account.value("minBalanceEarly").length() > 0) {
+  if (account.value("minBalanceEarly").length() > 0) {
     needRow = true;
     haveMinBalance = true;
     minBalance = MyMoneyMoney(account.value("minBalanceEarly"));
   }
-  if(account.value("minBalanceAbsolute").length() > 0) {
+  if (account.value("minBalanceAbsolute").length() > 0) {
     needRow = true;
     haveMinBalance = true;
     minBalance = MyMoneyMoney(account.value("minBalanceAbsolute"));
   }
 
-  if(needRow) {
-    if(haveMinBalance) {
+  if (needRow) {
+    if (haveMinBalance) {
       chartWidget->drawLimitLine(minBalance.toDouble());
     }
-    if(haveMaxCredit) {
+    if (haveMaxCredit) {
       chartWidget->drawLimitLine(maxCredit.toDouble());
     }
   }

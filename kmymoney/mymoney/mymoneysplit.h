@@ -111,8 +111,12 @@ public:
     */
   virtual bool hasReferenceTo(const QString& id) const;
 
-  const MyMoneyMoney& shares(void) const { return m_shares; }
-  const MyMoneyMoney& value(void) const { return m_value; }
+  const MyMoneyMoney& shares(void) const {
+    return m_shares;
+  }
+  const MyMoneyMoney& value(void) const {
+    return m_value;
+  }
 
   /**
    * This method returns the price. If the member m_price is not zero
@@ -124,32 +128,62 @@ public:
   /** This method just returns what is in m_price, so when we write to the
    *  database, we don't just generate prices
   */
-  MyMoneyMoney actualPrice(void) const { return m_price; }
+  MyMoneyMoney actualPrice(void) const {
+    return m_price;
+  }
 
   const MyMoneyMoney value(const QString& transactionCurrencyId, const QString& splitCurrencyId) const;
 
   /**
    * Required to have (direct) access to the MyMoneyKeyValueContainer::value() method.
    */
-  const QString& value(const QString& key) const { return MyMoneyKeyValueContainer::value(key); }
+  const QString& value(const QString& key) const {
+    return MyMoneyKeyValueContainer::value(key);
+  }
 
   /**
    * Required to have (direct) access to the MyMoneyKeyValueContainer::setValue() method.
    */
-  void setValue(const QString& key, const QString& value) { MyMoneyKeyValueContainer::setValue(key, value); }
+  void setValue(const QString& key, const QString& value) {
+    MyMoneyKeyValueContainer::setValue(key, value);
+  }
 
-  const QString& accountId(void) const { return m_account; }
-  const QString& memo(void) const { return m_memo; }
-  reconcileFlagE reconcileFlag(void) const { return m_reconcileFlag; }
-  const QDate& reconcileDate(void) const { return m_reconcileDate; }
-  const QString& payeeId(void) const { return m_payee; }
-  const QString& action(void) const { return m_action; }
-  const QString& number(void) const { return m_number; }
-  bool isAmortizationSplit(void) const { return m_action == ActionAmortization; }
-  bool isInterestSplit(void) const { return m_action == ActionInterest; }
-  bool isAutoCalc(void) const { return (m_shares == MyMoneyMoney::autoCalc) || (m_value == MyMoneyMoney::autoCalc); }
-  const QString& bankID(void) const { return m_bankID; }
-  const QString& transactionId(void) const { return m_transactionId; }
+  const QString& accountId(void) const {
+    return m_account;
+  }
+  const QString& memo(void) const {
+    return m_memo;
+  }
+  reconcileFlagE reconcileFlag(void) const {
+    return m_reconcileFlag;
+  }
+  const QDate& reconcileDate(void) const {
+    return m_reconcileDate;
+  }
+  const QString& payeeId(void) const {
+    return m_payee;
+  }
+  const QString& action(void) const {
+    return m_action;
+  }
+  const QString& number(void) const {
+    return m_number;
+  }
+  bool isAmortizationSplit(void) const {
+    return m_action == ActionAmortization;
+  }
+  bool isInterestSplit(void) const {
+    return m_action == ActionInterest;
+  }
+  bool isAutoCalc(void) const {
+    return (m_shares == MyMoneyMoney::autoCalc) || (m_value == MyMoneyMoney::autoCalc);
+  }
+  const QString& bankID(void) const {
+    return m_bankID;
+  }
+  const QString& transactionId(void) const {
+    return m_transactionId;
+  }
 
   void setShares(const MyMoneyMoney& shares);
   void setValue(const MyMoneyMoney& value);
@@ -178,14 +212,18 @@ public:
   void setAction(const QString& action);
   void setAction(investTransactionTypeE type);
   void setNumber(const QString& number);
-  void setBankID(const QString& bankID) { m_bankID = bankID; };
-  void setTransactionId(const QString& id) { m_transactionId = id; }
+  void setBankID(const QString& bankID) {
+    m_bankID = bankID;
+  };
+  void setTransactionId(const QString& id) {
+    m_transactionId = id;
+  }
 
-    /**
-   * returns @a true if this its a transaction matched against an imported
-   * transaction. The imported and matched transaction can be extracted
-   * using matchedTransaction() and can be removed using removeMatch().
-     */
+  /**
+  * returns @a true if this its a transaction matched against an imported
+  * transaction. The imported and matched transaction can be extracted
+  * using matchedTransaction() and can be removed using removeMatch().
+   */
   bool isMatched(void) const;
 
   /**

@@ -30,47 +30,48 @@
 // libical includes
 #include <libical/ical.h>
 
-// KMyMoney includes 
+// KMyMoney includes
 #include "mymoneyfile.h"
 
 // plugin includes
 #include "pluginsettings.h"
 
-int timeUnitsInSeconds(int optionValue) {
+int timeUnitsInSeconds(int optionValue)
+{
   // see how the items are added in the combobox of the settings editor widget
   static const int minute = 0;
   static const int hour = 1;
   static const int day = 2;
 
   switch (optionValue) {
-    case minute:
-      return 60;
-    case hour:
-      return 60*60;
-    case day:
-      return 24*60*60;
-    default:
-      return 1;
+  case minute:
+    return 60;
+  case hour:
+    return 60*60;
+  case day:
+    return 24*60*60;
+  default:
+    return 1;
   }
 }
 
-int beforeAfterToInt(int optionValue) {
+int beforeAfterToInt(int optionValue)
+{
   // see how the items are added in the combobox of the settings editor widget
   static const int before = 0;
   static const int after = 1;
 
   switch (optionValue) {
-    case before:
-      return -1;
-    case after:
-      return 1;
-    default:
-      return -1;
+  case before:
+    return -1;
+  case after:
+    return 1;
+  default:
+    return -1;
   }
 }
 
-struct icaltimetype qdateToIcalTimeType(const QDate& date)
-{
+struct icaltimetype qdateToIcalTimeType(const QDate& date) {
   struct icaltimetype icalDate = icaltime_null_date();
   icalDate.year = date.year();
   icalDate.month = date.month();
@@ -79,8 +80,7 @@ struct icaltimetype qdateToIcalTimeType(const QDate& date)
   return icalDate;
 }
 
-struct icaltimetype qdateTimeToIcalTimeType(const QDateTime& dateTime)
-{
+struct icaltimetype qdateTimeToIcalTimeType(const QDateTime& dateTime) {
   struct icaltimetype icalDateTime = icaltime_null_date();
   icalDateTime.year = dateTime.date().year();
   icalDateTime.month = dateTime.date().month();
@@ -92,8 +92,7 @@ struct icaltimetype qdateTimeToIcalTimeType(const QDateTime& dateTime)
   return icalDateTime;
 }
 
-struct icalrecurrencetype scheduleToRecurenceRule(const MyMoneySchedule& schedule)
-{
+struct icalrecurrencetype scheduleToRecurenceRule(const MyMoneySchedule& schedule) {
   struct icalrecurrencetype recurrence;
   icalrecurrencetype_clear(&recurrence);
   if (schedule.willEnd())
@@ -101,77 +100,76 @@ struct icalrecurrencetype scheduleToRecurenceRule(const MyMoneySchedule& schedul
   recurrence.week_start = icalrecurrencetype_day_day_of_week(KGlobal::locale()->weekStartDay());
   int frequencyFactor = 1; // used to translate kmymoney frequency to icalendar frequency
 
-  switch (schedule.occurrence())
-  {
-    case MyMoneySchedule::OCCUR_DAILY:
-      recurrence.freq = ICAL_DAILY_RECURRENCE;
+  switch (schedule.occurrence()) {
+  case MyMoneySchedule::OCCUR_DAILY:
+    recurrence.freq = ICAL_DAILY_RECURRENCE;
     break;
-    case MyMoneySchedule::OCCUR_WEEKLY:
-      recurrence.freq = ICAL_WEEKLY_RECURRENCE;
+  case MyMoneySchedule::OCCUR_WEEKLY:
+    recurrence.freq = ICAL_WEEKLY_RECURRENCE;
     break;
-    case MyMoneySchedule::OCCUR_FORTNIGHTLY:
-      recurrence.freq = ICAL_WEEKLY_RECURRENCE;
-      frequencyFactor = 2;
+  case MyMoneySchedule::OCCUR_FORTNIGHTLY:
+    recurrence.freq = ICAL_WEEKLY_RECURRENCE;
+    frequencyFactor = 2;
     break;
-    case MyMoneySchedule::OCCUR_EVERYOTHERWEEK:
-      recurrence.freq = ICAL_WEEKLY_RECURRENCE;
-      frequencyFactor = 2;
+  case MyMoneySchedule::OCCUR_EVERYOTHERWEEK:
+    recurrence.freq = ICAL_WEEKLY_RECURRENCE;
+    frequencyFactor = 2;
     break;
-    case MyMoneySchedule::OCCUR_EVERYHALFMONTH:
-      recurrence.freq = ICAL_WEEKLY_RECURRENCE;
-      frequencyFactor = 2;
+  case MyMoneySchedule::OCCUR_EVERYHALFMONTH:
+    recurrence.freq = ICAL_WEEKLY_RECURRENCE;
+    frequencyFactor = 2;
     break;
-    case MyMoneySchedule::OCCUR_EVERYTHREEWEEKS:
-      recurrence.freq = ICAL_WEEKLY_RECURRENCE;
-      frequencyFactor = 3;
+  case MyMoneySchedule::OCCUR_EVERYTHREEWEEKS:
+    recurrence.freq = ICAL_WEEKLY_RECURRENCE;
+    frequencyFactor = 3;
     break;
-    case MyMoneySchedule::OCCUR_EVERYTHIRTYDAYS:
-      recurrence.freq = ICAL_DAILY_RECURRENCE;
-      frequencyFactor = 30;
+  case MyMoneySchedule::OCCUR_EVERYTHIRTYDAYS:
+    recurrence.freq = ICAL_DAILY_RECURRENCE;
+    frequencyFactor = 30;
     break;
-    case MyMoneySchedule::OCCUR_MONTHLY:
-      recurrence.freq = ICAL_MONTHLY_RECURRENCE;
+  case MyMoneySchedule::OCCUR_MONTHLY:
+    recurrence.freq = ICAL_MONTHLY_RECURRENCE;
     break;
-    case MyMoneySchedule::OCCUR_EVERYFOURWEEKS:
-      recurrence.freq = ICAL_WEEKLY_RECURRENCE;
-      frequencyFactor = 4;
+  case MyMoneySchedule::OCCUR_EVERYFOURWEEKS:
+    recurrence.freq = ICAL_WEEKLY_RECURRENCE;
+    frequencyFactor = 4;
     break;
-    case MyMoneySchedule::OCCUR_EVERYEIGHTWEEKS:
-      recurrence.freq = ICAL_WEEKLY_RECURRENCE;
-      frequencyFactor = 8;
+  case MyMoneySchedule::OCCUR_EVERYEIGHTWEEKS:
+    recurrence.freq = ICAL_WEEKLY_RECURRENCE;
+    frequencyFactor = 8;
     break;
-    case MyMoneySchedule::OCCUR_EVERYOTHERMONTH:
-      recurrence.freq = ICAL_MONTHLY_RECURRENCE;
-      frequencyFactor = 2;
+  case MyMoneySchedule::OCCUR_EVERYOTHERMONTH:
+    recurrence.freq = ICAL_MONTHLY_RECURRENCE;
+    frequencyFactor = 2;
     break;
-    case MyMoneySchedule::OCCUR_EVERYTHREEMONTHS:
-      recurrence.freq = ICAL_MONTHLY_RECURRENCE;
-      frequencyFactor = 3;
+  case MyMoneySchedule::OCCUR_EVERYTHREEMONTHS:
+    recurrence.freq = ICAL_MONTHLY_RECURRENCE;
+    frequencyFactor = 3;
     break;
-    case MyMoneySchedule::OCCUR_TWICEYEARLY:
-      recurrence.freq = ICAL_MONTHLY_RECURRENCE;
-      frequencyFactor = 6;
+  case MyMoneySchedule::OCCUR_TWICEYEARLY:
+    recurrence.freq = ICAL_MONTHLY_RECURRENCE;
+    frequencyFactor = 6;
     break;
-    case MyMoneySchedule::OCCUR_EVERYOTHERYEAR:
-      recurrence.freq = ICAL_YEARLY_RECURRENCE;
-      frequencyFactor = 2;
+  case MyMoneySchedule::OCCUR_EVERYOTHERYEAR:
+    recurrence.freq = ICAL_YEARLY_RECURRENCE;
+    frequencyFactor = 2;
     break;
-    case MyMoneySchedule::OCCUR_QUARTERLY:
-      recurrence.freq = ICAL_MONTHLY_RECURRENCE;
-      frequencyFactor = 3;
+  case MyMoneySchedule::OCCUR_QUARTERLY:
+    recurrence.freq = ICAL_MONTHLY_RECURRENCE;
+    frequencyFactor = 3;
     break;
-    case MyMoneySchedule::OCCUR_EVERYFOURMONTHS:
-      recurrence.freq = ICAL_MONTHLY_RECURRENCE;
-      frequencyFactor = 4;
+  case MyMoneySchedule::OCCUR_EVERYFOURMONTHS:
+    recurrence.freq = ICAL_MONTHLY_RECURRENCE;
+    frequencyFactor = 4;
     break;
-    case MyMoneySchedule::OCCUR_YEARLY:
-      recurrence.freq = ICAL_YEARLY_RECURRENCE;
+  case MyMoneySchedule::OCCUR_YEARLY:
+    recurrence.freq = ICAL_YEARLY_RECURRENCE;
     break;
-    case MyMoneySchedule::OCCUR_ONCE:
-    case MyMoneySchedule::OCCUR_ANY:
-    default:
-      kWarning() << "Once, any or unknown recurrence returned recurrence is invalid" << endl;
-      recurrence.freq = ICAL_NO_RECURRENCE;
+  case MyMoneySchedule::OCCUR_ONCE:
+  case MyMoneySchedule::OCCUR_ANY:
+  default:
+    kWarning() << "Once, any or unknown recurrence returned recurrence is invalid" << endl;
+    recurrence.freq = ICAL_NO_RECURRENCE;
     break;
   }
   recurrence.interval = frequencyFactor*schedule.occurrenceMultiplier();
@@ -191,7 +189,7 @@ QString scheduleToDescription(const MyMoneySchedule& schedule)
   QString category;
   bool isTransfer = false;
   bool isIncome = false;
-  for(it_s = transaction.splits().begin(); it_s != transaction.splits().end(); ++it_s) {
+  for (it_s = transaction.splits().begin(); it_s != transaction.splits().end(); ++it_s) {
     if ((*it_s).accountId() != account.id()) {
       if (!category.isEmpty())
         category += ", "; // this is a split transaction
@@ -209,11 +207,11 @@ QString scheduleToDescription(const MyMoneySchedule& schedule)
   }
 
   QString description =
-     isTransfer ? i18n("Transfer from %1 to %2, Payee %3, amount %4", account.name(), category, payeeName, amount.formatMoney(file->currency(account.currencyId())))
-                : (
-                    isIncome ? i18n("From %1 into %2, Category %3, sum of %4", payeeName, account.name(), category, amount.formatMoney(file->currency(account.currencyId())))
-                             : i18n("From account %1, Pay to %2, Category %3, sum of %4", account.name(), payeeName, category, amount.formatMoney(file->currency(account.currencyId())))
-                  );
+    isTransfer ? i18n("Transfer from %1 to %2, Payee %3, amount %4", account.name(), category, payeeName, amount.formatMoney(file->currency(account.currencyId())))
+    : (
+      isIncome ? i18n("From %1 into %2, Category %3, sum of %4", payeeName, account.name(), category, amount.formatMoney(file->currency(account.currencyId())))
+      : i18n("From account %1, Pay to %2, Category %3, sum of %4", account.name(), payeeName, category, amount.formatMoney(file->currency(account.currencyId())))
+    );
   if (!transaction.memo().isEmpty())
     description = i18nc<QString, QString>("The first string is the schedules details", "%1, memo %2", description, transaction.memo());
   return description;
@@ -249,8 +247,7 @@ void KMMSchedulesToiCalendar::exportToFile(const QString& filePath, bool setting
     vCalendar = icalcomponent_new_vcalendar();
   } else {
     vCalendar = icalcomponent_new_from_string(d->m_icalendarAsString.toUtf8());
-    if (vCalendar == NULL)
-    {
+    if (vCalendar == NULL) {
       kDebug() << "Error parsing the following string into an icalendar:" << endl;
       kDebug() << d->m_icalendarAsString << endl;
       kDebug() << "so we will overwrite this with a new calendar" << endl;

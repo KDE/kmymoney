@@ -31,13 +31,14 @@
 class KChooseImportExportDlgDecl : public QDialog, public Ui::KChooseImportExportDlgDecl
 {
 public:
-  explicit KChooseImportExportDlgDecl( QWidget *parent ) : QDialog( parent ) {
-    setupUi( this );
+  explicit KChooseImportExportDlgDecl(QWidget *parent) : QDialog(parent) {
+    setupUi(this);
   }
 };
 
-class KChooseImportExportDlg : public KChooseImportExportDlgDecl  {
-   Q_OBJECT
+class KChooseImportExportDlg : public KChooseImportExportDlgDecl
+{
+  Q_OBJECT
 private:
   void readConfig(void);
   void writeConfig(void);
@@ -47,9 +48,9 @@ protected slots:
   void slotTypeActivated(const QString& text);
 
 public:
-	explicit KChooseImportExportDlg(int type, QWidget *parent=0);
-	~KChooseImportExportDlg();
-	QString importExportType(void);
+  explicit KChooseImportExportDlg(int type, QWidget *parent = 0);
+  ~KChooseImportExportDlg();
+  QString importExportType(void);
 };
 
 #endif

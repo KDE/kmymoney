@@ -33,8 +33,8 @@
 #include <mymoneykeyvaluecontainer.h>
 
 KMyMoneyPlugin::KMMStatementInterface::KMMStatementInterface(KMyMoneyApp* app, QObject* parent, const char* name) :
-  StatementInterface(parent, name),
-  m_app(app)
+    StatementInterface(parent, name),
+    m_app(app)
 {
 }
 

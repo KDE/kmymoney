@@ -39,18 +39,18 @@ const int KNewBudgetDlg::m_icFutureYears = 5;
 const int KNewBudgetDlg::m_icPastYears = 2;
 
 KNewBudgetDlg::KNewBudgetDlg(QWidget* parent) :
-  KNewBudgetDlgDecl(parent)
+    KNewBudgetDlgDecl(parent)
 {
   QStringList slYear;
   QDate dToday = QDate::currentDate();
   int iYear = dToday.year();
 
-  for (int i=0; i<=m_icFutureYears; i++)
-    m_cbYear->addItem( QString::number(iYear++) );
+  for (int i = 0; i <= m_icFutureYears; i++)
+    m_cbYear->addItem(QString::number(iYear++));
 
   iYear = dToday.year();
-  for (int i=0; i<=m_icFutureYears; i++)
-    m_cbYear->addItem( QString::number(--iYear) );
+  for (int i = 0; i <= m_icFutureYears; i++)
+    m_cbYear->addItem(QString::number(--iYear));
 }
 
 KNewBudgetDlg::~KNewBudgetDlg()
@@ -67,8 +67,7 @@ void KNewBudgetDlg::m_pbOk_clicked()
   // force focus change to update all data
   m_pbOk->setFocus();
 
-  if (m_leBudgetName->displayText().isEmpty())
-  {
+  if (m_leBudgetName->displayText().isEmpty()) {
     KMessageBox::information(this, i18n("Please specify a budget name"));
     m_leBudgetName->setFocus();
     return;

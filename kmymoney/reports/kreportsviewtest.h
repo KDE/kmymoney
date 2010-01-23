@@ -22,7 +22,8 @@
 #include "mymoneyfile.h"
 #include "mymoneyseqaccessmgr.h"
 
-class KReportsViewTest : public CppUnit::TestFixture  {
+class KReportsViewTest : public CppUnit::TestFixture
+{
   CPPUNIT_TEST_SUITE(KReportsViewTest);
   CPPUNIT_TEST(testNetWorthSingle);
   CPPUNIT_TEST(testNetWorthOfsetting);
@@ -57,8 +58,8 @@ private:
 
 public:
   KReportsViewTest();
-  void setUp ();
-  void tearDown ();
+  void setUp();
+  void tearDown();
   void testNetWorthSingle();
   void testNetWorthOfsetting();
   void testNetWorthOpeningPrior();

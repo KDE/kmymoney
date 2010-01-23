@@ -24,44 +24,45 @@
 #include "mymoneysplit.h"
 #undef private
 
-class MyMoneySplitTest : public CppUnit::TestFixture  {
-        CPPUNIT_TEST_SUITE(MyMoneySplitTest);
-	CPPUNIT_TEST(testEmptyConstructor);
-	CPPUNIT_TEST(testSetFunctions);
-	CPPUNIT_TEST(testCopyConstructor);
-	CPPUNIT_TEST(testAssignmentConstructor);
-	CPPUNIT_TEST(testEquality);
-	CPPUNIT_TEST(testInequality);
-	CPPUNIT_TEST(testAmortization);
-	CPPUNIT_TEST(testValue);
-	CPPUNIT_TEST(testSetValue);
-	CPPUNIT_TEST(testSetAction);
-	CPPUNIT_TEST(testIsAutoCalc);
-	CPPUNIT_TEST(testWriteXML);
-	CPPUNIT_TEST(testReadXML);
-        CPPUNIT_TEST_SUITE_END();
+class MyMoneySplitTest : public CppUnit::TestFixture
+{
+  CPPUNIT_TEST_SUITE(MyMoneySplitTest);
+  CPPUNIT_TEST(testEmptyConstructor);
+  CPPUNIT_TEST(testSetFunctions);
+  CPPUNIT_TEST(testCopyConstructor);
+  CPPUNIT_TEST(testAssignmentConstructor);
+  CPPUNIT_TEST(testEquality);
+  CPPUNIT_TEST(testInequality);
+  CPPUNIT_TEST(testAmortization);
+  CPPUNIT_TEST(testValue);
+  CPPUNIT_TEST(testSetValue);
+  CPPUNIT_TEST(testSetAction);
+  CPPUNIT_TEST(testIsAutoCalc);
+  CPPUNIT_TEST(testWriteXML);
+  CPPUNIT_TEST(testReadXML);
+  CPPUNIT_TEST_SUITE_END();
 
 protected:
-	MyMoneySplit *m;
+  MyMoneySplit *m;
 
 public:
-	MyMoneySplitTest ();
+  MyMoneySplitTest();
 
-	void setUp ();
-	void tearDown ();
-	void testEmptyConstructor();
-	void testSetFunctions();
-	void testCopyConstructor();
-	void testAssignmentConstructor();
-	void testEquality();
-	void testInequality();
-	void testAmortization();
-	void testValue();
-	void testSetValue();
-	void testSetAction();
-	void testIsAutoCalc();
-	void testWriteXML();
-	void testReadXML();
+  void setUp();
+  void tearDown();
+  void testEmptyConstructor();
+  void testSetFunctions();
+  void testCopyConstructor();
+  void testAssignmentConstructor();
+  void testEquality();
+  void testInequality();
+  void testAmortization();
+  void testValue();
+  void testSetValue();
+  void testSetAction();
+  void testIsAutoCalc();
+  void testWriteXML();
+  void testReadXML();
 };
 
 #endif

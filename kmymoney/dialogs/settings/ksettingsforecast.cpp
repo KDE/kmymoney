@@ -26,7 +26,7 @@
 // Project Includes
 
 KSettingsForecast::KSettingsForecast(QWidget* parent) :
-  KSettingsForecastDecl(parent)
+    KSettingsForecastDecl(parent)
 {
 }
 

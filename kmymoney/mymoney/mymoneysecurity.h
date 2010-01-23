@@ -75,7 +75,9 @@ public:
     *
     * @param r the right side of the comparison
     */
-  bool operator != (const MyMoneySecurity& r) const { return !(*this == r); }
+  bool operator != (const MyMoneySecurity& r) const {
+    return !(*this == r);
+  }
 
 public:
   typedef enum {
@@ -86,30 +88,64 @@ public:
     SECURITY_NONE
   } eSECURITYTYPE;
 
-  const QString& name() const                 { return m_name; }
-  void           setName(const String& str)   { m_name = str; }
+  const QString& name() const                 {
+    return m_name;
+  }
+  void           setName(const String& str)   {
+    m_name = str;
+  }
 
-  const QString&  tradingSymbol() const               { return m_tradingSymbol; }
-  void            setTradingSymbol(const String& str) { m_tradingSymbol = str; }
+  const QString&  tradingSymbol() const               {
+    return m_tradingSymbol;
+  }
+  void            setTradingSymbol(const String& str) {
+    m_tradingSymbol = str;
+  }
 
-        eSECURITYTYPE securityType() const                { return m_securityType; }
-  void          setSecurityType(const eSECURITYTYPE& s)   { m_securityType = s; }
-        bool    isCurrency(void) const { return m_securityType == SECURITY_CURRENCY; };
+  eSECURITYTYPE securityType() const                {
+    return m_securityType;
+  }
+  void          setSecurityType(const eSECURITYTYPE& s)   {
+    m_securityType = s;
+  }
+  bool    isCurrency(void) const {
+    return m_securityType == SECURITY_CURRENCY;
+  };
 
-  const QString& tradingMarket() const  { return m_tradingMarket; }
-  void           setTradingMarket(const QString& str) { m_tradingMarket = str; }
+  const QString& tradingMarket() const  {
+    return m_tradingMarket;
+  }
+  void           setTradingMarket(const QString& str) {
+    m_tradingMarket = str;
+  }
 
-  const QString& tradingCurrency(void) const { return m_tradingCurrency; };
-  void           setTradingCurrency(const QString& str) { m_tradingCurrency = str; };
+  const QString& tradingCurrency(void) const {
+    return m_tradingCurrency;
+  };
+  void           setTradingCurrency(const QString& str) {
+    m_tradingCurrency = str;
+  };
 
-  int smallestAccountFraction(void) const { return m_smallestAccountFraction; };
-  void setSmallestAccountFraction(const int sf) { m_smallestAccountFraction = sf; };
+  int smallestAccountFraction(void) const {
+    return m_smallestAccountFraction;
+  };
+  void setSmallestAccountFraction(const int sf) {
+    m_smallestAccountFraction = sf;
+  };
 
-  int partsPerUnit(void) const { return m_partsPerUnit; };
-  int smallestCashFraction(void) const { return m_smallestCashFraction; };
+  int partsPerUnit(void) const {
+    return m_partsPerUnit;
+  };
+  int smallestCashFraction(void) const {
+    return m_smallestCashFraction;
+  };
 
-  void setPartsPerUnit(const int ppu) { m_partsPerUnit = ppu; };
-  void setSmallestCashFraction(const int sf) { m_smallestCashFraction = sf; };
+  void setPartsPerUnit(const int ppu) {
+    m_partsPerUnit = ppu;
+  };
+  void setSmallestCashFraction(const int sf) {
+    m_smallestCashFraction = sf;
+  };
 
   void writeXML(QDomDocument& document, QDomElement& parent) const;
 

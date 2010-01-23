@@ -52,38 +52,40 @@ KGncImportOptionsDlg::KGncImportOptionsDlg(QWidget *)
   m_widget->checkFinanceQuote->setChecked(true);
 
   m_widget->buttonGroup2->setExclusive(false);
-  m_widget->checkSchedules->setChecked (false);
+  m_widget->checkSchedules->setChecked(false);
 
-  buildCodecList (); // build list of codecs and insert into combo box
+  buildCodecList();  // build list of codecs and insert into combo box
 
   m_widget->buttonGroup4->setExclusive(false);
-  m_widget->checkDecode->setChecked (false);
-  m_widget->comboDecode->setEnabled (false);
+  m_widget->checkDecode->setChecked(false);
+  m_widget->comboDecode->setEnabled(false);
 
   m_widget->buttonGroup18->setExclusive(false);
-  m_widget->checkTxNotes->setChecked (false);
+  m_widget->checkTxNotes->setChecked(false);
 
   m_widget->buttonGroup3->setExclusive(false);
-  m_widget->checkDebugGeneral->setChecked (false);
-  m_widget->checkDebugXML->setChecked (false);
-  m_widget->checkAnonymize->setChecked (false);
+  m_widget->checkDebugGeneral->setChecked(false);
+  m_widget->checkDebugXML->setChecked(false);
+  m_widget->checkAnonymize->setChecked(false);
 
-  connect (m_widget->checkDecode, SIGNAL(toggled(bool)), this, SLOT(slotDecodeOptionChanged(bool)));
-  connect (this, SIGNAL(helpClicked()), this, SLOT(slotHelp()));
+  connect(m_widget->checkDecode, SIGNAL(toggled(bool)), this, SLOT(slotDecodeOptionChanged(bool)));
+  connect(this, SIGNAL(helpClicked()), this, SLOT(slotHelp()));
 }
 
-KGncImportOptionsDlg::~KGncImportOptionsDlg(){}
+KGncImportOptionsDlg::~KGncImportOptionsDlg() {}
 
 // enable the combo box for selection if required
-void KGncImportOptionsDlg::slotDecodeOptionChanged(bool isOn) {
+void KGncImportOptionsDlg::slotDecodeOptionChanged(bool isOn)
+{
   if (isOn) {
-    m_widget->comboDecode->setEnabled (true);
-    m_widget->comboDecode->setCurrentItem (0);
+    m_widget->comboDecode->setEnabled(true);
+    m_widget->comboDecode->setCurrentItem(0);
   } else {
-    m_widget->comboDecode->setEnabled (false);
+    m_widget->comboDecode->setEnabled(false);
   }
 }
-void KGncImportOptionsDlg::buildCodecList () {
+void KGncImportOptionsDlg::buildCodecList()
+{
   m_localeCodec = QTextCodec::codecForLocale();
   QList<QByteArray> codecList = QTextCodec::availableCodecs();
   QList<QByteArray>::ConstIterator itc;
@@ -96,7 +98,8 @@ void KGncImportOptionsDlg::buildCodecList () {
 }
 
 // return selected codec or 0
-QTextCodec* KGncImportOptionsDlg::decodeOption(void) {
+QTextCodec* KGncImportOptionsDlg::decodeOption(void)
+{
   if (!m_widget->checkDecode->isChecked()) {
     return (0);
   } else {
@@ -106,5 +109,5 @@ QTextCodec* KGncImportOptionsDlg::decodeOption(void) {
 
 void KGncImportOptionsDlg::slotHelp(void)
 {
-  KToolInvocation::invokeHelp ("details.impexp.gncoptions");
+  KToolInvocation::invokeHelp("details.impexp.gncoptions");
 }

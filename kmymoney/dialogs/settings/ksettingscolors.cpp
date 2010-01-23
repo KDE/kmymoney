@@ -26,7 +26,7 @@
 // Project Includes
 
 KSettingsColors::KSettingsColors(QWidget* parent) :
-  KSettingsColorsDecl(parent)
+    KSettingsColorsDecl(parent)
 {
 }
 

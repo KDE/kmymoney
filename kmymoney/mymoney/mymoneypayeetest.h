@@ -23,19 +23,20 @@
 #undef private
 #undef protected
 
-class MyMoneyPayeeTest : public CppUnit::TestFixture  {
-        CPPUNIT_TEST_SUITE(MyMoneyPayeeTest);
-	CPPUNIT_TEST(testXml);
-	CPPUNIT_TEST(testDefaultAccount);
-	CPPUNIT_TEST_SUITE_END();
+class MyMoneyPayeeTest : public CppUnit::TestFixture
+{
+  CPPUNIT_TEST_SUITE(MyMoneyPayeeTest);
+  CPPUNIT_TEST(testXml);
+  CPPUNIT_TEST(testDefaultAccount);
+  CPPUNIT_TEST_SUITE_END();
 
 public:
-	MyMoneyPayeeTest ();
+  MyMoneyPayeeTest();
 
-	void setUp ();
-	void tearDown ();
-	void testXml();
-	void testDefaultAccount();
+  void setUp();
+  void tearDown();
+  void testXml();
+  void testDefaultAccount();
 };
 
 #endif

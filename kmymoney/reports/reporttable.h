@@ -28,7 +28,8 @@
 // Project Includes
 
 
-namespace reports {
+namespace reports
+{
 
 class KReportChartView;
 
@@ -39,13 +40,13 @@ class KReportChartView;
 class ReportTable
 {
 protected:
-    ReportTable() {}
+  ReportTable() {}
 public:
-    virtual ~ReportTable() {}
-    virtual QString renderHTML(void) const = 0;
-    virtual QString renderCSV(void) const = 0;
-    virtual void drawChart(KReportChartView& view) const = 0;
-    virtual void dump(const QString& file, const QString& context=QString()) const = 0;
+  virtual ~ReportTable() {}
+  virtual QString renderHTML(void) const = 0;
+  virtual QString renderCSV(void) const = 0;
+  virtual void drawChart(KReportChartView& view) const = 0;
+  virtual void dump(const QString& file, const QString& context = QString()) const = 0;
 };
 
 }

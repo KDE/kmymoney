@@ -34,8 +34,8 @@ class MyMoneyPayee;
 class UserInfoDecl : public QWidget, public Ui::UserInfoDecl
 {
 public:
-  UserInfoDecl( QWidget *parent ) : QWidget( parent ) {
-    setupUi( this );
+  UserInfoDecl(QWidget *parent) : QWidget(parent) {
+    setupUi(this);
   }
 };
 class UserInfo : public UserInfoDecl

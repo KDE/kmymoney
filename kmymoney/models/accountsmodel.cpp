@@ -39,22 +39,19 @@
 class AccountsModel::Private
 {
 public:
-  Private() : m_file(MyMoneyFile::instance())
-  {
+  Private() : m_file(MyMoneyFile::instance()) {
   }
 
-  ~Private()
-  {
+  ~Private() {
   }
 
-  void loadSubAccounts(QStandardItemModel *model, QStandardItem *accountsItem, QStandardItem *favoriteAccountsItem, const QStringList& list)
-  {
-    for(QStringList::ConstIterator it_l = list.constBegin(); it_l != list.constEnd(); ++it_l) {
+  void loadSubAccounts(QStandardItemModel *model, QStandardItem *accountsItem, QStandardItem *favoriteAccountsItem, const QStringList& list) {
+    for (QStringList::ConstIterator it_l = list.constBegin(); it_l != list.constEnd(); ++it_l) {
       const MyMoneyAccount& acc = m_file->account(*it_l);
 
       // don't include stock accounts if not in expert mode
       // TODO: check if it would be better to include this in a Filter proxy model
-      if(acc.isInvest() && !KMyMoneyGlobalSettings::expertMode())
+      if (acc.isInvest() && !KMyMoneyGlobalSettings::expertMode())
         continue;
 
       if (acc.value("PreferredAccount") == "Yes") {
@@ -68,15 +65,14 @@ public:
         accountsItem->appendRow(item);
         setAccountData(model, item->index(), acc);
 
-        if(acc.accountList().count() > 0) {
+        if (acc.accountList().count() > 0) {
           loadSubAccounts(model, item, favoriteAccountsItem, acc.accountList());
         }
       }
     }
   }
 
-  void setAccountData(QStandardItemModel *model, const QModelIndex &index, const MyMoneyAccount &account)
-  {
+  void setAccountData(QStandardItemModel *model, const QModelIndex &index, const MyMoneyAccount &account) {
     model->setData(index, QVariant(account.id()), AccountIdRole);
     model->setData(index, QVariant(account.accountType()), AccountTypeRole);
     model->setData(index, QVariant(account.isClosed()), AccountClosedRole);
@@ -89,7 +85,7 @@ public:
 };
 
 AccountsModel::AccountsModel(QObject *parent /*= 0*/)
-  : QStandardItemModel(parent), d(new Private)
+    : QStandardItemModel(parent), d(new Private)
 {
 }
 
@@ -109,11 +105,11 @@ void AccountsModel::load()
   rootItem->appendRow(favoriteAccountsItem);
   setData(favoriteAccountsItem->index(), QVariant(0), DisplayOrderRole);
 
-  for(int mask = 0x01; mask != KMyMoneyUtils::last; mask <<= 1) {
+  for (int mask = 0x01; mask != KMyMoneyUtils::last; mask <<= 1) {
     QStringList list;
 
     QStandardItem *accountsItem = 0;
-    if((mask & KMyMoneyUtils::asset) != 0) {
+    if ((mask & KMyMoneyUtils::asset) != 0) {
       // Asset accounts
       list = d->m_file->asset().accountList();
 
@@ -126,7 +122,7 @@ void AccountsModel::load()
       setData(accountsItem->index(), QVariant(1), DisplayOrderRole);
     }
 
-    if((mask & KMyMoneyUtils::liability) != 0) {
+    if ((mask & KMyMoneyUtils::liability) != 0) {
       // Liability accounts
       list = d->m_file->liability().accountList();
 
@@ -139,7 +135,7 @@ void AccountsModel::load()
       setData(accountsItem->index(), QVariant(20), DisplayOrderRole);
     }
 
-    if((mask & KMyMoneyUtils::income) != 0) {
+    if ((mask & KMyMoneyUtils::income) != 0) {
       // Income categories
       list = d->m_file->income().accountList();
 
@@ -152,7 +148,7 @@ void AccountsModel::load()
       setData(accountsItem->index(), QVariant(3), DisplayOrderRole);
     }
 
-    if((mask & KMyMoneyUtils::expense) != 0) {
+    if ((mask & KMyMoneyUtils::expense) != 0) {
       // Expense categories
       list = d->m_file->expense().accountList();
 
@@ -165,7 +161,7 @@ void AccountsModel::load()
       setData(accountsItem->index(), QVariant(4), DisplayOrderRole);
     }
 
-    if((mask & KMyMoneyUtils::equity) != 0) {
+    if ((mask & KMyMoneyUtils::equity) != 0) {
       // Equity accounts
       list = d->m_file->equity().accountList();
 
@@ -178,7 +174,7 @@ void AccountsModel::load()
       setData(accountsItem->index(), QVariant(5), DisplayOrderRole);
     }
 
-    for(QStringList::ConstIterator it_l = list.constBegin(); it_l != list.constEnd(); ++it_l) {
+    for (QStringList::ConstIterator it_l = list.constBegin(); it_l != list.constEnd(); ++it_l) {
       const MyMoneyAccount& acc = d->m_file->account(*it_l);
       if (acc.value("PreferredAccount") == "Yes") {
         QStandardItem *item = new QStandardItem(acc.name());
@@ -189,7 +185,7 @@ void AccountsModel::load()
       if (accountsItem) {
         accountsItem->appendRow(item);
         d->setAccountData(this, item->index(), acc);
-        if(acc.accountList().count() > 0) {
+        if (acc.accountList().count() > 0) {
           d->loadSubAccounts(this, item, favoriteAccountsItem, acc.accountList());
         }
       }
@@ -200,12 +196,10 @@ void AccountsModel::load()
 class AccountsFilterProxyModel::Private
 {
 public:
-  Private() : m_hideClosedAccounts(true)
-  {
+  Private() : m_hideClosedAccounts(true) {
   }
 
-  ~Private()
-  {
+  ~Private() {
   }
 
   QList<MyMoneyAccount::accountTypeE> m_typeList;
@@ -213,7 +207,7 @@ public:
 };
 
 AccountsFilterProxyModel::AccountsFilterProxyModel(QObject *parent /*= 0*/)
-  : QSortFilterProxyModel(parent), d(new Private)
+    : QSortFilterProxyModel(parent), d(new Private)
 {
 }
 
@@ -237,7 +231,7 @@ bool AccountsFilterProxyModel::filterAcceptsRow(int source_row, const QModelInde
 
 void AccountsFilterProxyModel::addAccountGroup(MyMoneyAccount::accountTypeE group)
 {
-  if(group == MyMoneyAccount::Asset) {
+  if (group == MyMoneyAccount::Asset) {
     d->m_typeList << MyMoneyAccount::Checkings;
     d->m_typeList << MyMoneyAccount::Savings;
     d->m_typeList << MyMoneyAccount::Cash;
@@ -249,31 +243,31 @@ void AccountsFilterProxyModel::addAccountGroup(MyMoneyAccount::accountTypeE grou
     d->m_typeList << MyMoneyAccount::Asset;
     d->m_typeList << MyMoneyAccount::Currency;
 
-  } else if(group == MyMoneyAccount::Liability) {
+  } else if (group == MyMoneyAccount::Liability) {
     d->m_typeList << MyMoneyAccount::CreditCard;
     d->m_typeList << MyMoneyAccount::Loan;
     d->m_typeList << MyMoneyAccount::Liability;
 
-  } else if(group == MyMoneyAccount::Income) {
+  } else if (group == MyMoneyAccount::Income) {
     d->m_typeList << MyMoneyAccount::Income;
 
-  } else if(group == MyMoneyAccount::Expense) {
+  } else if (group == MyMoneyAccount::Expense) {
     d->m_typeList << MyMoneyAccount::Expense;
 
-  } else if(group == MyMoneyAccount::Equity) {
+  } else if (group == MyMoneyAccount::Equity) {
     d->m_typeList << MyMoneyAccount::Equity;
   }
 }
 
 void AccountsFilterProxyModel::addAccountType(MyMoneyAccount::accountTypeE type)
 {
-    d->m_typeList << type;
+  d->m_typeList << type;
 }
 
 void AccountsFilterProxyModel::removeAccountType(MyMoneyAccount::accountTypeE type)
 {
   int index = d->m_typeList.indexOf(type);
-  if(index != -1) {
+  if (index != -1) {
     d->m_typeList.removeAt(index);
   }
 }

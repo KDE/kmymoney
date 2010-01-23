@@ -38,7 +38,8 @@ class MyMoneyTemplate;
 /**
   * @author Thomas Baumgart
   */
-namespace NewUserWizard {
+namespace NewUserWizard
+{
 
 class IntroPage;
 class GeneralPage;

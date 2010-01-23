@@ -41,36 +41,36 @@ class KPluginInfo;
 
 namespace KMyMoneyPlugin
 {
-  class Plugin;
+class Plugin;
 
-  class KMM_PLUGINS_EXPORT PluginLoader : public QObject
-  {
-    Q_OBJECT
-  public:
-    PluginLoader(QObject* parent);
-    virtual ~PluginLoader();
-    static PluginLoader* instance();
+class KMM_PLUGINS_EXPORT PluginLoader : public QObject
+{
+  Q_OBJECT
+public:
+  PluginLoader(QObject* parent);
+  virtual ~PluginLoader();
+  static PluginLoader* instance();
 
-    void loadPlugins();
-    Plugin* getPluginFromInfo(KPluginInfo*);
-    KPluginSelector* pluginSelectorWidget();
+  void loadPlugins();
+  Plugin* getPluginFromInfo(KPluginInfo*);
+  KPluginSelector* pluginSelectorWidget();
 
-  private:
-    void loadPlugin(KPluginInfo*);
+private:
+  void loadPlugin(KPluginInfo*);
 
-  signals:
-    void plug(KPluginInfo*);
-    void unplug(KPluginInfo*);
-    void configChanged(Plugin*);  // consfiguration of the plugin has changed not the enabled/disabled state
+signals:
+  void plug(KPluginInfo*);
+  void unplug(KPluginInfo*);
+  void configChanged(Plugin*);  // consfiguration of the plugin has changed not the enabled/disabled state
 
-  private slots:
-    void changed();
-    void changedConfigOfPlugin( const QByteArray & );
+private slots:
+  void changed();
+  void changedConfigOfPlugin(const QByteArray &);
 
-  private:
-    struct Private;
-    Private* d;
-  };
+private:
+  struct Private;
+  Private* d;
+};
 }
 
 #endif /* PLUGINLOADER_H */

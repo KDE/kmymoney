@@ -23,36 +23,37 @@
 #include "mymoneysecurity.h"
 #undef private
 
-class MyMoneySecurityTest : public CppUnit::TestFixture  {
-	CPPUNIT_TEST_SUITE(MyMoneySecurityTest);
-	CPPUNIT_TEST(testEmptyConstructor);
-	CPPUNIT_TEST(testNonemptyConstructor);
-	CPPUNIT_TEST(testCopyConstructor);
-	CPPUNIT_TEST(testSetFunctions);
-	CPPUNIT_TEST(testEquality);
-	CPPUNIT_TEST(testInequality);
-/*
-	CPPUNIT_TEST(testMyMoneyFileConstructor);
-	CPPUNIT_TEST(testAccountIDList);
-*/
-	CPPUNIT_TEST_SUITE_END();
+class MyMoneySecurityTest : public CppUnit::TestFixture
+{
+  CPPUNIT_TEST_SUITE(MyMoneySecurityTest);
+  CPPUNIT_TEST(testEmptyConstructor);
+  CPPUNIT_TEST(testNonemptyConstructor);
+  CPPUNIT_TEST(testCopyConstructor);
+  CPPUNIT_TEST(testSetFunctions);
+  CPPUNIT_TEST(testEquality);
+  CPPUNIT_TEST(testInequality);
+  /*
+   CPPUNIT_TEST(testMyMoneyFileConstructor);
+   CPPUNIT_TEST(testAccountIDList);
+  */
+  CPPUNIT_TEST_SUITE_END();
 
 protected:
-	MyMoneySecurity	*m;
+  MyMoneySecurity *m;
 
 public:
-	MyMoneySecurityTest();
+  MyMoneySecurityTest();
 
-	void setUp ();
-	void tearDown ();
-	void testEmptyConstructor();
-	void testNonemptyConstructor();
-	void testCopyConstructor();
-	void testSetFunctions();
-	void testEquality ();
-	void testInequality ();
-	// void testMyMoneyFileConstructor();
-	// void testAccountIDList ();
+  void setUp();
+  void tearDown();
+  void testEmptyConstructor();
+  void testNonemptyConstructor();
+  void testCopyConstructor();
+  void testSetFunctions();
+  void testEquality();
+  void testInequality();
+  // void testMyMoneyFileConstructor();
+  // void testAccountIDList ();
 };
 
 #endif

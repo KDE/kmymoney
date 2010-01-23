@@ -24,27 +24,27 @@
 
 class TransactionSortOption : public QWidget, public Ui::TransactionSortOptionDecl
 {
-    Q_OBJECT
+  Q_OBJECT
 public:
-    TransactionSortOption( QWidget *parent );
-    QString settings( void ) const;
+  TransactionSortOption(QWidget *parent);
+  QString settings(void) const;
 public slots:
-    void setSettings(const QString& settings);
-    void toggleDirection( Q3ListViewItem * item );
+  void setSettings(const QString& settings);
+  void toggleDirection(Q3ListViewItem * item);
 
 protected:
-    Q3ListViewItem * addEntry( K3ListView * p, Q3ListViewItem * after, int idx );
+  Q3ListViewItem * addEntry(K3ListView * p, Q3ListViewItem * after, int idx);
 protected slots:
-    void slotAvailableSelected( Q3ListViewItem * item );
-    void slotSelectedSelected( Q3ListViewItem * item );
-    void slotAddItem( void );
-    void slotRemoveItem( void );
-    void slotUpItem( void );
-    void slotDownItem( void );
+  void slotAvailableSelected(Q3ListViewItem * item);
+  void slotSelectedSelected(Q3ListViewItem * item);
+  void slotAddItem(void);
+  void slotRemoveItem(void);
+  void slotUpItem(void);
+  void slotDownItem(void);
 private:
-    void init();
+  void init();
 signals:
-    void settingsChanged(const QString&);
+  void settingsChanged(const QString&);
 };
 
 

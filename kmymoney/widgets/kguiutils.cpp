@@ -19,7 +19,7 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
- // No need for QDateEdit, QSpinBox, etc., since these always return values
+// No need for QDateEdit, QSpinBox, etc., since these always return values
 
 #include <QCheckBox>
 //#include <q3listbox.h>
@@ -39,28 +39,29 @@
 
 #include "kmymoneyglobalsettings.h"
 
- /**************************************************************************
-  *                                                                        *
-  * The MandatoryFieldGroup code is courtesy of                            *
-  * Mark Summerfield in Qt Quarterly                                       *
-  * http://doc.trolltech.com/qq/qq11-mandatoryfields.html                  *
-  *                                                                        *
-  * Enhanced by Thomas Baumgart to support the lineedit field of a         *
-  * a KComboBox.                                                           *
-  *                                                                        *
-  **************************************************************************/
+/**************************************************************************
+ *                                                                        *
+ * The MandatoryFieldGroup code is courtesy of                            *
+ * Mark Summerfield in Qt Quarterly                                       *
+ * http://doc.trolltech.com/qq/qq11-mandatoryfields.html                  *
+ *                                                                        *
+ * Enhanced by Thomas Baumgart to support the lineedit field of a         *
+ * a KComboBox.                                                           *
+ *                                                                        *
+ **************************************************************************/
 
-void kMandatoryFieldGroup::add(QWidget *widget) {
+void kMandatoryFieldGroup::add(QWidget *widget)
+{
   if (!m_widgets.contains(widget)) {
-    if (qobject_cast<QCheckBox*>( widget))
+    if (qobject_cast<QCheckBox*>(widget))
       connect(qobject_cast<QCheckBox*>(widget),
-               SIGNAL(clicked()),
-               this, SLOT(changed()));
+              SIGNAL(clicked()),
+              this, SLOT(changed()));
 
     else if (qobject_cast<KComboBox*>(widget)) {
       KComboBox* combo = qobject_cast<KComboBox*>(widget);
       KLineEdit* lineedit = qobject_cast<KLineEdit*>(combo->lineEdit());
-      if(lineedit) {
+      if (lineedit) {
         connect(lineedit, SIGNAL(textChanged(const QString&)), this, SLOT(changed()));
       } else {
         connect(combo, SIGNAL(highlighted(int)), this, SLOT(changed()));
@@ -69,31 +70,31 @@ void kMandatoryFieldGroup::add(QWidget *widget) {
 
     else if (qobject_cast<QLineEdit*>(widget))
       connect(qobject_cast<QLineEdit*>(widget),
-               SIGNAL(textChanged(const QString&)),
-               this, SLOT(changed()));
+              SIGNAL(textChanged(const QString&)),
+              this, SLOT(changed()));
 
     else if (qobject_cast<QSpinBox*>(widget))
       connect(qobject_cast<QSpinBox*>(widget),
-               SIGNAL(valueChanged(const QString&)),
-                      this, SLOT(changed()));
+              SIGNAL(valueChanged(const QString&)),
+              this, SLOT(changed()));
 
-   /* else if (qobject_cast<Q3ListBox*>(widget))
-      connect(qobject_cast<Q3ListBox*>(widget),
-               SIGNAL(selectionChanged()),
-                      this, SLOT(changed()));*/
+    /* else if (qobject_cast<Q3ListBox*>(widget))
+       connect(qobject_cast<Q3ListBox*>(widget),
+                SIGNAL(selectionChanged()),
+                       this, SLOT(changed()));*/
 
     else if (qobject_cast<KListWidget*>(widget))
       connect(qobject_cast<KListWidget*>(widget),
-               SIGNAL(itemSelectionChanged()),
-                      this, SLOT(changed()));
+              SIGNAL(itemSelectionChanged()),
+              this, SLOT(changed()));
 
     else if (qobject_cast<KUrlRequester*>(widget))
       connect(qobject_cast<KUrlRequester*>(widget),
-               SIGNAL(textChanged(const QString&)),
-                      this, SLOT(changed()));
+              SIGNAL(textChanged(const QString&)),
+              this, SLOT(changed()));
 
     else {
-      qWarning("MandatoryFieldGroup: unsupported class %s", ( widget->metaObject()->className() ));
+      qWarning("MandatoryFieldGroup: unsupported class %s", (widget->metaObject()->className()));
       return;
     }
 
@@ -130,7 +131,7 @@ void kMandatoryFieldGroup::changed(void)
   for (i = m_widgets.constBegin(); i != m_widgets.constEnd(); ++i) {
     QWidget *widget = *i;
     // disabled widgets don't count
-    if(!(widget->isEnabled())) {
+    if (!(widget->isEnabled())) {
       continue;
     }
     if (qobject_cast<QCheckBox*>(widget)) {
@@ -154,13 +155,13 @@ void kMandatoryFieldGroup::changed(void)
       } else
         continue;
     }
- /*   if ((qobject_cast<Q3ListBox*>(widget))) {
-      if ((qobject_cast<Q3ListBox*>(widget))->selectedItem() == 0) {
-        enable = false;
-        break;
-      } else
-        continue;
-    }*/
+    /*   if ((qobject_cast<Q3ListBox*>(widget))) {
+         if ((qobject_cast<Q3ListBox*>(widget))->selectedItem() == 0) {
+           enable = false;
+           break;
+         } else
+           continue;
+       }*/
     if ((qobject_cast<KListWidget*>(widget))) {
       if ((qobject_cast<KListWidget*>(widget))->selectedItems().count() == 0) {
         enable = false;
@@ -169,7 +170,7 @@ void kMandatoryFieldGroup::changed(void)
         continue;
     }
     if ((qobject_cast<KUrlRequester*>(widget))) {
-      if ((qobject_cast<KUrlRequester*>(widget))->text().isEmpty()){
+      if ((qobject_cast<KUrlRequester*>(widget))->text().isEmpty()) {
         enable = false;
         break;
       } else

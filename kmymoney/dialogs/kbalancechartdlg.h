@@ -34,22 +34,22 @@ class MyMoneyAccount;
 using namespace reports;
 
 /**
- *	@author Thomas Baumgart <ipwizard@users.sourceforge.net>
+ * @author Thomas Baumgart <ipwizard@users.sourceforge.net>
  *  This dialog displays a chart with the account balance for the last 90 days.
  *  It also draws the account limit if the account has any.
  */
 class KBalanceChartDlg : public KDialog
 {
   Q_OBJECT
-  public:
-    explicit KBalanceChartDlg(const MyMoneyAccount& account, QWidget* parent = 0);
-    ~KBalanceChartDlg();
+public:
+  explicit KBalanceChartDlg(const MyMoneyAccount& account, QWidget* parent = 0);
+  ~KBalanceChartDlg();
 
-  protected:
+protected:
   /**
     * Draw the chart and calculate and draw the account limits if any
     */
-    KReportChartView* drawChart(const MyMoneyAccount& account);
+  KReportChartView* drawChart(const MyMoneyAccount& account);
 
 };
 

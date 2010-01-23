@@ -35,7 +35,8 @@
 #include <mymoneysplit.h>
 #include <mymoneyobject.h>
 
-namespace KMyMoneyRegister {
+namespace KMyMoneyRegister
+{
 
 typedef enum {
   Deposit = 0,          //< transaction is deposit
@@ -73,29 +74,57 @@ public:
   virtual const char* className(void) = 0;
 
   virtual bool isSelectable(void) const = 0;
-  virtual bool isSelected(void) const { return false; }
+  virtual bool isSelected(void) const {
+    return false;
+  }
   virtual void setSelected(bool /* selected*/) {}
 
   virtual bool canHaveFocus(void) const = 0;
-  virtual bool hasFocus(void) const { return false; }
-  virtual bool hasEditorOpen(void) const { return false; }
+  virtual bool hasFocus(void) const {
+    return false;
+  }
+  virtual bool hasEditorOpen(void) const {
+    return false;
+  }
 
-  virtual void setFocus(bool /*focus*/, bool updateLens = true) { updateLens = false; }
+  virtual void setFocus(bool /*focus*/, bool updateLens = true) {
+    updateLens = false;
+  }
 
   virtual bool isErronous(void) const = 0;
 
   // helper functions used for sorting
-  virtual const QDate sortPostDate(void) const { return nullDate; }
+  virtual const QDate sortPostDate(void) const {
+    return nullDate;
+  }
   virtual int sortSamePostDate(void) const = 0;
-  virtual const QDate sortEntryDate(void) const { return nullDate; }
-  virtual const QString sortPayee(void) const { return QString(); }
-  virtual const MyMoneyMoney sortValue(void) const { return nullValue; }
-  virtual const QString sortNumber(void) const { return QString(); }
-  virtual const QString sortEntryOrder(void) const { return QString(); }
-  virtual CashFlowDirection sortType(void) const { return Deposit; }
-  virtual const QString sortCategory(void) const { return QString(); }
-  virtual MyMoneySplit::reconcileFlagE sortReconcileState(void) const { return MyMoneySplit::MaxReconcileState; }
-  virtual const QString sortSecurity(void) const { return QString(); }
+  virtual const QDate sortEntryDate(void) const {
+    return nullDate;
+  }
+  virtual const QString sortPayee(void) const {
+    return QString();
+  }
+  virtual const MyMoneyMoney sortValue(void) const {
+    return nullValue;
+  }
+  virtual const QString sortNumber(void) const {
+    return QString();
+  }
+  virtual const QString sortEntryOrder(void) const {
+    return QString();
+  }
+  virtual CashFlowDirection sortType(void) const {
+    return Deposit;
+  }
+  virtual const QString sortCategory(void) const {
+    return QString();
+  }
+  virtual MyMoneySplit::reconcileFlagE sortReconcileState(void) const {
+    return MyMoneySplit::MaxReconcileState;
+  }
+  virtual const QString sortSecurity(void) const {
+    return QString();
+  }
 
   /**
     * This method sets the row offset of the item in the register
@@ -106,8 +135,12 @@ public:
     * @note The row offset is based on QTable rows, not register
     * items.
     */
-  virtual void setStartRow(int row) { m_startRow = row; }
-  int startRow(void) const { return m_startRow; }
+  virtual void setStartRow(int row) {
+    m_startRow = row;
+  }
+  int startRow(void) const {
+    return m_startRow;
+  }
   virtual int rowHeightHint(void) const;
 
   /**
@@ -121,20 +154,28 @@ public:
     * This method modifies the number of rows required to display this item
     * in a Form.
     */
-  virtual void setNumRowsForm(int rows) { m_rowsForm = rows; }
+  virtual void setNumRowsForm(int rows) {
+    m_rowsForm = rows;
+  }
 
   /**
     * This method returns the number of rows required to display this item
     * in a Register
     */
-  virtual int numRowsRegister(void) const { return m_rowsRegister; }
+  virtual int numRowsRegister(void) const {
+    return m_rowsRegister;
+  }
 
   /**
     * This method returns the number of rows required to display this item
     * in a Form
     */
-  virtual int numRowsForm(void) const { return m_rowsForm; }
-  virtual int numColsForm(void) const { return 1; }
+  virtual int numRowsForm(void) const {
+    return m_rowsForm;
+  }
+  virtual int numColsForm(void) const {
+    return 1;
+  }
 
   /**
     * This method sets up the register item to be shown in normal (@p alternate = @p false)
@@ -142,12 +183,16 @@ public:
     *
     * @param alternate selects normal or alternate background
     */
-  virtual void setAlternate(bool alternate) { m_alternate = alternate; }
+  virtual void setAlternate(bool alternate) {
+    m_alternate = alternate;
+  }
 
   virtual void paintRegisterCell(QPainter* painter, int row, int col, const QRect& r, bool selected, const QColorGroup& cg) = 0;
   virtual void paintFormCell(QPainter* painter, int row, int col, const QRect& r, bool selected, const QColorGroup& cg) = 0;
 
-  virtual const QString& id(void) const { return MyMoneyObject::emptyId(); }
+  virtual const QString& id(void) const {
+    return MyMoneyObject::emptyId();
+  }
 
   /**
     * Sets the parent of this item to be the register @p parent
@@ -161,11 +206,17 @@ public:
     *
     * @retval pointer to Register
     */
-  Register* parent(void) const { return m_parent; }
+  Register* parent(void) const {
+    return m_parent;
+  }
 
-  void setNeedResize(void) { m_needResize = true; }
+  void setNeedResize(void) {
+    m_needResize = true;
+  }
 
-  bool isVisible(void) const { return m_visible; }
+  bool isVisible(void) const {
+    return m_visible;
+  }
 
   /**
     * Marks the item visible depending on @a visible and
@@ -180,10 +231,18 @@ public:
     */
   virtual bool markVisible(bool visible);
 
-  void setNextItem(RegisterItem* p) { m_next = p; }
-  void setPrevItem(RegisterItem* p) { m_prev = p; }
-  RegisterItem* nextItem(void) const { return m_next; }
-  RegisterItem* prevItem(void) const { return m_prev; }
+  void setNextItem(RegisterItem* p) {
+    m_next = p;
+  }
+  void setPrevItem(RegisterItem* p) {
+    m_prev = p;
+  }
+  RegisterItem* nextItem(void) const {
+    return m_next;
+  }
+  RegisterItem* prevItem(void) const {
+    return m_prev;
+  }
 
   virtual bool matches(const QString&) const = 0;
 
@@ -198,7 +257,9 @@ public:
     *
     * If no tooltip is available, @a false will be returned.
     */
-  virtual bool maybeTip(const QPoint& /* relpos */, int /* row */, int /* col */, QRect& /* r */, QString& /* msg */) { return false; }
+  virtual bool maybeTip(const QPoint& /* relpos */, int /* row */, int /* col */, QRect& /* r */, QString& /* msg */) {
+    return false;
+  }
 
 protected:
   /// This method serves as helper for all constructors

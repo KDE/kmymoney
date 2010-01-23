@@ -22,7 +22,8 @@
 #include "mymoneyfile.h"
 #include "mymoneyseqaccessmgr.h"
 
-class QueryTableTest : public CppUnit::TestFixture  {
+class QueryTableTest : public CppUnit::TestFixture
+{
   CPPUNIT_TEST_SUITE(QueryTableTest);
   CPPUNIT_TEST(testQueryBasics);
   CPPUNIT_TEST(testCashFlowAnalysis);
@@ -40,8 +41,8 @@ private:
 
 public:
   QueryTableTest();
-  void setUp ();
-  void tearDown ();
+  void setUp();
+  void tearDown();
   void testQueryBasics();
   void testCashFlowAnalysis();
   void testAccountQuery();

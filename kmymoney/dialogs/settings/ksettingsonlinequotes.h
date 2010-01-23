@@ -36,8 +36,8 @@
 class KSettingsOnlineQuotesDecl : public QWidget, public Ui::KSettingsOnlineQuotesDecl
 {
 public:
-  KSettingsOnlineQuotesDecl( QWidget *parent ) : QWidget( parent ) {
-    setupUi( this );
+  KSettingsOnlineQuotesDecl(QWidget *parent) : QWidget(parent) {
+    setupUi(this);
   }
 };
 

@@ -39,7 +39,8 @@
 
 #include <kmm_plugin_export.h>
 
-namespace KMyMoneyPlugin {
+namespace KMyMoneyPlugin
+{
 
 /**
   * This abstract class represents the ImportInterface to

@@ -81,16 +81,26 @@ public:
   {
   public:
     // get functions
-    const QDate&    startDate ( void ) const { return m_start; }
-    const MyMoneyMoney& amount( void ) const { return m_amount; }
+    const QDate&    startDate(void) const {
+      return m_start;
+    }
+    const MyMoneyMoney& amount(void) const {
+      return m_amount;
+    }
 
     // set functions
-    void setStartDate  ( const QDate& _start )    { m_start  = _start; }
-    void setAmount( const MyMoneyMoney& _amount ) { m_amount = _amount;}
+    void setStartDate(const QDate& _start)    {
+      m_start  = _start;
+    }
+    void setAmount(const MyMoneyMoney& _amount) {
+      m_amount = _amount;
+    }
 
-    bool operator == (const PeriodGroup &r) const { return (m_start == r.m_start && m_amount == r.m_amount); }
+    bool operator == (const PeriodGroup &r) const {
+      return (m_start == r.m_start && m_amount == r.m_amount);
+    }
 
- private:
+  private:
     QDate         m_start;
     MyMoneyMoney  m_amount;
   };
@@ -105,8 +115,7 @@ public:
   class KMM_MYMONEY_EXPORT AccountGroup
   {
   public:
-    typedef enum
-    {
+    typedef enum {
       eNone = 0,
       eMonthly,
       eMonthByMonth,
@@ -120,42 +129,59 @@ public:
     AccountGroup() : m_budgetlevel(eNone), m_budgetsubaccounts(false) {}
 
     // get functions
-    const QString& id( void ) const { return m_id; }
-    bool budgetSubaccounts( void ) const { return m_budgetsubaccounts; }
-    eBudgetLevel budgetLevel( void ) const { return m_budgetlevel; }
-    PeriodGroup period( const QDate &_date ) const { return m_periods[_date]; }
-    const QMap<QDate, PeriodGroup>& getPeriods( void ) const { return m_periods; }
-    void clearPeriods(void) { m_periods.clear(); }
-    const MyMoneyMoney balance( void ) const
-    {
+    const QString& id(void) const {
+      return m_id;
+    }
+    bool budgetSubaccounts(void) const {
+      return m_budgetsubaccounts;
+    }
+    eBudgetLevel budgetLevel(void) const {
+      return m_budgetlevel;
+    }
+    PeriodGroup period(const QDate &_date) const {
+      return m_periods[_date];
+    }
+    const QMap<QDate, PeriodGroup>& getPeriods(void) const {
+      return m_periods;
+    }
+    void clearPeriods(void) {
+      m_periods.clear();
+    }
+    const MyMoneyMoney balance(void) const {
       MyMoneyMoney balance;
 
       QMap<QDate, PeriodGroup>::const_iterator it;
-      for(it = m_periods.begin(); it != m_periods.end(); ++it)
-      {
+      for (it = m_periods.begin(); it != m_periods.end(); ++it) {
         balance += (*it).amount();
       }
       return balance;
     };
 
-    const MyMoneyMoney totalBalance(void) const
-    {
+    const MyMoneyMoney totalBalance(void) const {
       MyMoneyMoney bal = balance();
-      switch(m_budgetlevel) {
-        default:
-          break;
-        case eMonthly:
-          bal = bal * 12;
-          break;
+      switch (m_budgetlevel) {
+      default:
+        break;
+      case eMonthly:
+        bal = bal * 12;
+        break;
       }
       return bal;
     }
 
     // set functions
-    void setId( QString _id ) { m_id = _id; }
-    void setBudgetLevel( eBudgetLevel _level ) { m_budgetlevel = _level; }
-    void setBudgetSubaccounts( bool _b ) { m_budgetsubaccounts = _b; }
-    void addPeriod( const QDate& _date, PeriodGroup &period ) { m_periods[_date] = period; }
+    void setId(QString _id) {
+      m_id = _id;
+    }
+    void setBudgetLevel(eBudgetLevel _level) {
+      m_budgetlevel = _level;
+    }
+    void setBudgetSubaccounts(bool _b) {
+      m_budgetsubaccounts = _b;
+    }
+    void addPeriod(const QDate& _date, PeriodGroup &period) {
+      m_periods[_date] = period;
+    }
 
     // This member adds the value of another account group
     // m_budgetlevel is adjusted to the larger one of both
@@ -185,15 +211,27 @@ public:
   bool operator == (const MyMoneyBudget &) const;
 
   // Simple get operations
-  const QString& name(void) const { return m_name; }
-  const QDate& budgetStart(void) const { return m_start; }
-  QString id(void) const { return m_id; }
+  const QString& name(void) const {
+    return m_name;
+  }
+  const QDate& budgetStart(void) const {
+    return m_start;
+  }
+  QString id(void) const {
+    return m_id;
+  }
   const AccountGroup & account(const QString _id) const;
-  bool contains(const QString _id) const { return m_accounts.contains(_id); }
-  QList<AccountGroup> getaccounts(void) const { return m_accounts.values(); }
+  bool contains(const QString _id) const {
+    return m_accounts.contains(_id);
+  }
+  QList<AccountGroup> getaccounts(void) const {
+    return m_accounts.values();
+  }
 
   // Simple set operations
-  void setName(const QString& _name) { m_name = _name; }
+  void setName(const QString& _name) {
+    m_name = _name;
+  }
   void setBudgetStart(const QDate& _start);
   void setAccount(const AccountGroup &_account, const QString _id);
 

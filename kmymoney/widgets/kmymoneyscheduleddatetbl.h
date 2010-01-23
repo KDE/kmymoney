@@ -46,16 +46,18 @@ class kMyMoneyScheduledDateTbl : public kMyMoneyDateTbl
 {
   Q_OBJECT
 public:
-  explicit kMyMoneyScheduledDateTbl(QWidget *parent=0,
-                                    QDate date=QDate::currentDate(),
-                                    const char* name=0, Qt::WFlags f=0);
+  explicit kMyMoneyScheduledDateTbl(QWidget *parent = 0,
+                                    QDate date = QDate::currentDate(),
+                                    const char* name = 0, Qt::WFlags f = 0);
 
   ~kMyMoneyScheduledDateTbl();
   void refresh();
   void filterBills(bool enable);
   void filterDeposits(bool enable);
   void filterTransfers(bool enable);
-  void setFilterAccounts(const QStringList& list) { m_filterAccounts = list; repaintContents(false); }
+  void setFilterAccounts(const QStringList& list) {
+    m_filterAccounts = list; repaintContents(false);
+  }
 
 signals:
   void enterClicked(const MyMoneySchedule&, const QDate&);

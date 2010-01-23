@@ -57,16 +57,16 @@ KMyMoneyBriefSchedule::KMyMoneyBriefSchedule(QWidget *parent)
   connect(m_skipButton, SIGNAL(clicked()), this, SLOT(slotSkipClicked()));
   connect(m_buttonEnter, SIGNAL(clicked()), this, SLOT(slotEnterClicked()));
 
-  KGuiItem skipGuiItem(  i18n("&Skip"),
-                          KIcon("media-seek-forward"),
-                          i18n("Skip this transaction"),
-                          i18n("Use this button to skip this transaction"));
+  KGuiItem skipGuiItem(i18n("&Skip"),
+                       KIcon("media-seek-forward"),
+                       i18n("Skip this transaction"),
+                       i18n("Use this button to skip this transaction"));
   m_skipButton->setGuiItem(skipGuiItem);
 
-  KGuiItem enterGuiItem(  i18n("&Enter"),
-                          KIcon("go-jump-locationbar"),
-                          i18n("Record this transaction into the register"),
-                          i18n("Use this button to record this transaction"));
+  KGuiItem enterGuiItem(i18n("&Enter"),
+                        KIcon("go-jump-locationbar"),
+                        i18n("Record this transaction into the register"),
+                        i18n("Use this button to record this transaction"));
   m_buttonEnter->setGuiItem(enterGuiItem);
 }
 
@@ -80,21 +80,18 @@ void KMyMoneyBriefSchedule::setSchedules(QList<MyMoneySchedule> list, const QDat
   m_date = date;
 
   m_index = 0;
-  if (list.count() >= 1)
-  {
+  if (list.count() >= 1) {
     loadSchedule();
   }
 }
 
 void KMyMoneyBriefSchedule::loadSchedule()
 {
-  try
-  {
-    if (m_index < m_scheduleList.count())
-    {
+  try {
+    if (m_index < m_scheduleList.count()) {
       MyMoneySchedule sched = m_scheduleList[m_index];
 
-      m_indexLabel->setText(i18n("%1 of %2", m_index+1, m_scheduleList.count()));
+      m_indexLabel->setText(i18n("%1 of %2", m_index + 1, m_scheduleList.count()));
       m_name->setText(sched.name());
       m_type->setText(KMyMoneyUtils::scheduleTypeToString(sched.type()));
       m_account->setText(sched.account().name());
@@ -102,9 +99,8 @@ void KMyMoneyBriefSchedule::loadSchedule()
       MyMoneyMoney amount = sched.transaction().splitByAccount(sched.account().id()).value();
       amount = amount.abs();
 
-      if (sched.willEnd())
-      {
-        int transactions = sched.paymentDates(m_date, sched.endDate()).count()-1;
+      if (sched.willEnd()) {
+        int transactions = sched.paymentDates(m_date, sched.endDate()).count() - 1;
         text = i18np("Payment on %2 for %3 with %1 transaction remaining occurring %4.",
                      "Payment on %2 for %3 with %1 transactions remaining occurring %4.",
                      transactions,
@@ -113,18 +109,16 @@ void KMyMoneyBriefSchedule::loadSchedule()
                      i18n(sched.occurrenceToString().toLatin1()));
       } else {
         text = i18n("Payment on %1 for %2 occurring %3.",
-                KGlobal::locale()->formatDate(m_date),
-                amount.formatMoney(sched.account().fraction()),
-                i18n(sched.occurrenceToString().toLatin1()));
+                    KGlobal::locale()->formatDate(m_date),
+                    amount.formatMoney(sched.account().fraction()),
+                    i18n(sched.occurrenceToString().toLatin1()));
       }
 
-      if (m_date < QDate::currentDate())
-      {
-        if (sched.isOverdue())
-        {
+      if (m_date < QDate::currentDate()) {
+        if (sched.isOverdue()) {
           QDate startD = (sched.lastPayment().isValid()) ?
-            sched.lastPayment() :
-            sched.startDate();
+                         sched.lastPayment() :
+                         sched.startDate();
 
           if (m_date.isValid())
             startD = m_date;
@@ -148,20 +142,17 @@ void KMyMoneyBriefSchedule::loadSchedule()
 
       if (m_index == 0)
         m_prevButton->setEnabled(false);
-      if (m_index == (m_scheduleList.count()-1))
+      if (m_index == (m_scheduleList.count() - 1))
         m_nextButton->setEnabled(false);
     }
-  }
-  catch (MyMoneyException *e)
-  {
+  } catch (MyMoneyException *e) {
     delete e;
   }
 }
 
 void KMyMoneyBriefSchedule::slotPrevClicked()
 {
-  if (m_index >= 1)
-  {
+  if (m_index >= 1) {
     --m_index;
     loadSchedule();
   }
@@ -169,8 +160,7 @@ void KMyMoneyBriefSchedule::slotPrevClicked()
 
 void KMyMoneyBriefSchedule::slotNextClicked()
 {
-  if (m_index < (m_scheduleList.count()-1))
-  {
+  if (m_index < (m_scheduleList.count() - 1)) {
     m_index++;
     loadSchedule();
   }

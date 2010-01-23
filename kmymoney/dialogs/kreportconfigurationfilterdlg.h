@@ -43,21 +43,23 @@ class MyMoneyBudget;
   */
 class KReportConfigurationFilterDlg : public KFindTransactionDlg
 {
-Q_OBJECT
+  Q_OBJECT
 public:
-    explicit KReportConfigurationFilterDlg(MyMoneyReport report, QWidget *parent = 0);
-    ~KReportConfigurationFilterDlg();
+  explicit KReportConfigurationFilterDlg(MyMoneyReport report, QWidget *parent = 0);
+  ~KReportConfigurationFilterDlg();
 
-    const MyMoneyReport& getConfig(void) const { return m_currentState; }
+  const MyMoneyReport& getConfig(void) const {
+    return m_currentState;
+  }
 
 protected:
-    kMyMoneyReportConfigTab1Decl* m_tab1;
-    kMyMoneyReportConfigTab2Decl* m_tab2;
-    kMyMoneyReportConfigTab3Decl* m_tab3;
-    kMyMoneyReportConfigTabChartDecl* m_tabChart;
+  kMyMoneyReportConfigTab1Decl* m_tab1;
+  kMyMoneyReportConfigTab2Decl* m_tab2;
+  kMyMoneyReportConfigTab3Decl* m_tab3;
+  kMyMoneyReportConfigTabChartDecl* m_tabChart;
 
-    MyMoneyReport m_initialState;
-    MyMoneyReport m_currentState;
+  MyMoneyReport m_initialState;
+  MyMoneyReport m_currentState;
 
 protected slots:
   void slotRowTypeChanged(int);

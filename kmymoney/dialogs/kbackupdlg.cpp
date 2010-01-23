@@ -43,8 +43,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-KBackupDlg::KBackupDlg( QWidget* parent)
-  : kbackupdlgdecl( parent)
+KBackupDlg::KBackupDlg(QWidget* parent)
+    : kbackupdlgdecl(parent)
 {
   readConfig();
 
@@ -52,15 +52,15 @@ KBackupDlg::KBackupDlg( QWidget* parent)
   btnOK->setGuiItem(KStandardGuiItem::ok());
   btnCancel->setGuiItem(KStandardGuiItem::cancel());
 
-  KGuiItem chooseButtenItem( i18n("C&hoose..."),
-                    KIcon("folder"),
-                    i18n("Select mount point"),
-                    i18n("Use this to browse to the mount point."));
+  KGuiItem chooseButtenItem(i18n("C&hoose..."),
+                            KIcon("folder"),
+                            i18n("Select mount point"),
+                            i18n("Use this to browse to the mount point."));
   chooseButton->setGuiItem(chooseButtenItem);
 
   connect(chooseButton, SIGNAL(clicked()), this, SLOT(chooseButtonClicked()));
-  connect(btnOK,SIGNAL(clicked()),this,SLOT(accept()));
-  connect(btnCancel,SIGNAL(clicked()),this,SLOT(reject()));
+  connect(btnOK, SIGNAL(clicked()), this, SLOT(accept()));
+  connect(btnCancel, SIGNAL(clicked()), this, SLOT(reject()));
 }
 
 KBackupDlg::~KBackupDlg()

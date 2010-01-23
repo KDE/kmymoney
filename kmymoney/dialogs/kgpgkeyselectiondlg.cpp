@@ -38,15 +38,15 @@
 #include <ktoolinvocation.h>
 
 KGpgKeySelectionDlg::KGpgKeySelectionDlg(QWidget *parent) :
-  KDialog(parent),
-  m_needCheckList(true),
-  m_listOk(false),
-  m_checkCount(0)
+    KDialog(parent),
+    m_needCheckList(true),
+    m_listOk(false),
+    m_checkCount(0)
 {
-    setCaption( i18n("Select additional keys") );
-    setButtons( KDialog::Ok|KDialog::Cancel );
-    setDefaultButton( KDialog::Ok );
-    setModal( true );
+  setCaption(i18n("Select additional keys"));
+  setButtons(KDialog::Ok | KDialog::Cancel);
+  setDefaultButton(KDialog::Ok);
+  setModal(true);
   QWidget* page = new QWidget(this);
   setMainWidget(page);
   QVBoxLayout* topLayout = new QVBoxLayout(page);
@@ -54,24 +54,24 @@ KGpgKeySelectionDlg::KGpgKeySelectionDlg(QWidget *parent) :
 
   m_listBox = new KEditListBox(page);
   m_listBox->setTitle(i18n("User identification"));
-  m_listBox->setButtons( ( KEditListBox::Remove | KEditListBox::Add ) );
-  m_listBox->setWhatsThis( i18n( "Enter the id of the key you want to use for data encryption. This can either be an e-mail address or the hexadecimal key id. In case of the key id, do not forget the leading 0x." ) );
+  m_listBox->setButtons((KEditListBox::Remove | KEditListBox::Add));
+  m_listBox->setWhatsThis(i18n("Enter the id of the key you want to use for data encryption. This can either be an e-mail address or the hexadecimal key id. In case of the key id, do not forget the leading 0x."));
 
   topLayout->addWidget(m_listBox);
 
   // add a LED for the availability of all keys
   QHBoxLayout* ledBox = new QHBoxLayout();
-  ledBox->setContentsMargins(0,0,0,0);
+  ledBox->setContentsMargins(0, 0, 0, 0);
   ledBox->setSpacing(6);
   ledBox->setObjectName("ledBoxLayout");
 
   m_keyLed = new KLed(page);
-  m_keyLed->setShape( KLed::Circular );
-  m_keyLed->setLook( KLed::Sunken );
+  m_keyLed->setShape(KLed::Circular);
+  m_keyLed->setLook(KLed::Sunken);
 
   ledBox->addWidget(m_keyLed);
   ledBox->addWidget(new QLabel(i18n("Keys for all of the above user ids found"), page));
-  ledBox->addItem(new QSpacerItem( 50, 20, QSizePolicy::Expanding, QSizePolicy::Minimum ));
+  ledBox->addItem(new QSpacerItem(50, 20, QSizePolicy::Expanding, QSizePolicy::Minimum));
 
   topLayout->addLayout(ledBox);
 
@@ -91,7 +91,7 @@ void KGpgKeySelectionDlg::setKeys(const QStringList& list)
 void KGpgKeySelectionDlg::slotShowHelp(void)
 {
   QString anchor = m_helpAnchor[m_criteriaTab->currentPage()];
-  if(anchor.isEmpty())
+  if (anchor.isEmpty())
     anchor = QString("details.search");
 
   KToolInvocation::invokeHelp(anchor);
@@ -115,21 +115,21 @@ void KGpgKeySelectionDlg::slotIdChanged(void)
   // The second invocation is counted, but the check is not started until the
   // first one finishes. Once the external process finishes, we check if we
   // were called in the meantime and restart the check.
-  if(++m_checkCount == 1) {
-    while(1) {
+  if (++m_checkCount == 1) {
+    while (1) {
       // first we check the current edit field if filled
       bool keysOk = true;
-      if(!m_listBox->currentText().isEmpty()) {
+      if (!m_listBox->currentText().isEmpty()) {
         keysOk = KGPGFile::keyAvailable(m_listBox->currentText());
       }
 
       // if it is available, then scan the current list if we need to
-      if(keysOk) {
-        if(m_needCheckList) {
+      if (keysOk) {
+        if (m_needCheckList) {
           QStringList keys = m_listBox->items();
           QStringList::const_iterator it_s;
-          for(it_s = keys.constBegin(); keysOk && it_s != keys.constEnd(); ++it_s) {
-            if(!KGPGFile::keyAvailable(*it_s))
+          for (it_s = keys.constBegin(); keysOk && it_s != keys.constEnd(); ++it_s) {
+            if (!KGPGFile::keyAvailable(*it_s))
               keysOk = false;
           }
           m_listOk = keysOk;
@@ -141,7 +141,7 @@ void KGpgKeySelectionDlg::slotIdChanged(void)
       }
 
       // did we receive some more requests to check?
-      if(m_checkCount > 1) {
+      if (m_checkCount > 1) {
         m_checkCount = 1;
         continue;
       }

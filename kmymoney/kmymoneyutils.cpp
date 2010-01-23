@@ -65,37 +65,37 @@ MyMoneyAccount::accountTypeE KMyMoneyUtils::stringToAccountType(const QString& t
   MyMoneyAccount::accountTypeE rc = MyMoneyAccount::UnknownAccountType;
   QString tmp = type.toLower();
 
-  if(tmp == i18n("Checking").toLower())
+  if (tmp == i18n("Checking").toLower())
     rc = MyMoneyAccount::Checkings;
-  else if(tmp == i18n("Savings").toLower())
+  else if (tmp == i18n("Savings").toLower())
     rc = MyMoneyAccount::Savings;
-  else if(tmp == i18n("Credit Card").toLower())
+  else if (tmp == i18n("Credit Card").toLower())
     rc = MyMoneyAccount::CreditCard;
-  else if(tmp == i18n("Cash").toLower())
+  else if (tmp == i18n("Cash").toLower())
     rc = MyMoneyAccount::Cash;
-  else if(tmp == i18n("Loan").toLower())
+  else if (tmp == i18n("Loan").toLower())
     rc = MyMoneyAccount::Loan;
-  else if(tmp == i18n("Certificate of Deposit").toLower())
+  else if (tmp == i18n("Certificate of Deposit").toLower())
     rc = MyMoneyAccount::CertificateDep;
-  else if(tmp == i18n("Investment").toLower())
+  else if (tmp == i18n("Investment").toLower())
     rc = MyMoneyAccount::Investment;
-  else if(tmp == i18n("Money Market").toLower())
+  else if (tmp == i18n("Money Market").toLower())
     rc = MyMoneyAccount::MoneyMarket;
-  else if(tmp == i18n("Asset").toLower())
+  else if (tmp == i18n("Asset").toLower())
     rc = MyMoneyAccount::Asset;
-  else if(tmp == i18n("Liability").toLower())
+  else if (tmp == i18n("Liability").toLower())
     rc = MyMoneyAccount::Liability;
-  else if(tmp == i18n("Currency").toLower())
+  else if (tmp == i18n("Currency").toLower())
     rc = MyMoneyAccount::Currency;
-  else if(tmp == i18n("Income").toLower())
+  else if (tmp == i18n("Income").toLower())
     rc = MyMoneyAccount::Income;
-  else if(tmp == i18n("Expense").toLower())
+  else if (tmp == i18n("Expense").toLower())
     rc = MyMoneyAccount::Expense;
-  else if(tmp == i18n("Investment Loan").toLower())
+  else if (tmp == i18n("Investment Loan").toLower())
     rc = MyMoneyAccount::AssetLoan;
-  else if(tmp == i18n("Stock").toLower())
+  else if (tmp == i18n("Stock").toLower())
     rc = MyMoneyAccount::Stock;
-  else if(tmp == i18n("Equity").toLower())
+  else if (tmp == i18n("Equity").toLower())
     rc = MyMoneyAccount::Equity;
 
   return rc;
@@ -106,13 +106,13 @@ MyMoneySecurity::eSECURITYTYPE KMyMoneyUtils::stringToSecurity(const QString& tx
   MyMoneySecurity::eSECURITYTYPE rc = MyMoneySecurity::SECURITY_NONE;
   QString tmp = txt.toLower();
 
-  if(tmp == i18n("Stock").toLower())
+  if (tmp == i18n("Stock").toLower())
     rc = MyMoneySecurity::SECURITY_STOCK;
-  else if(tmp == i18n("Mutual Fund").toLower())
+  else if (tmp == i18n("Mutual Fund").toLower())
     rc = MyMoneySecurity::SECURITY_MUTUALFUND;
-  else if(tmp == i18n("Bond").toLower())
+  else if (tmp == i18n("Bond").toLower())
     rc = MyMoneySecurity::SECURITY_BOND;
-  else if(tmp == i18n("Currency").toLower())
+  else if (tmp == i18n("Currency").toLower())
     rc = MyMoneySecurity::SECURITY_CURRENCY;
 
   return rc;
@@ -145,20 +145,20 @@ const QString KMyMoneyUtils::scheduleTypeToString(MyMoneySchedule::typeE type)
 
 KGuiItem KMyMoneyUtils::scheduleNewGuiItem(void)
 {
-  KGuiItem splitGuiItem(  i18n("&New Schedule..."),
-                          KIcon("document-new"),
-                          i18n("Create a new schedule."),
-                          i18n("Use this to create a new schedule."));
+  KGuiItem splitGuiItem(i18n("&New Schedule..."),
+                        KIcon("document-new"),
+                        i18n("Create a new schedule."),
+                        i18n("Use this to create a new schedule."));
 
   return splitGuiItem;
 }
 
 KGuiItem KMyMoneyUtils::accountsFilterGuiItem(void)
 {
-  KGuiItem splitGuiItem(  i18n("&Filter"),
-                          KIcon("view-filter"),
-                          i18n("Filter out accounts"),
-                          i18n("Use this to filter out accounts"));
+  KGuiItem splitGuiItem(i18n("&Filter"),
+                        KIcon("view-filter"),
+                        i18n("Filter out accounts"),
+                        i18n("Use this to filter out accounts"));
 
   return splitGuiItem;
 }
@@ -205,7 +205,7 @@ const char* homePageItems[] = {
 const QString KMyMoneyUtils::homePageItemToString(const int idx)
 {
   QString rc;
-  if(abs(idx) > 0 && abs(idx) < static_cast<int>(sizeof(homePageItems)/sizeof(homePageItems[0]))) {
+  if (abs(idx) > 0 && abs(idx) < static_cast<int>(sizeof(homePageItems) / sizeof(homePageItems[0]))) {
     rc = i18n(homePageItems[abs(idx-1)]);
   }
   return rc;
@@ -214,9 +214,9 @@ const QString KMyMoneyUtils::homePageItemToString(const int idx)
 int KMyMoneyUtils::stringToHomePageItem(const QString& txt)
 {
   int idx = 0;
-  for(idx = 0; homePageItems[idx] != 0; ++idx) {
-    if(txt == i18n(homePageItems[idx]))
-      return idx+1;
+  for (idx = 0; homePageItems[idx] != 0; ++idx) {
+    if (txt == i18n(homePageItems[idx]))
+      return idx + 1;
   }
   return 0;
 }
@@ -225,17 +225,17 @@ bool KMyMoneyUtils::appendCorrectFileExt(QString& str, const QString& strExtToUs
 {
   bool rc = false;
 
-  if(!str.isEmpty()) {
+  if (!str.isEmpty()) {
     //find last . delminator
     int nLoc = str.lastIndexOf('.');
-    if(nLoc != -1) {
+    if (nLoc != -1) {
       QString strExt, strTemp;
       strTemp = str.left(nLoc + 1);
       strExt = str.right(str.length() - (nLoc + 1));
-      if(strExt.indexOf(strExtToUse, 0, Qt::CaseInsensitive) == -1) {
+      if (strExt.indexOf(strExtToUse, 0, Qt::CaseInsensitive) == -1) {
         // if the extension given contains a period, we remove our's
-        if(strExtToUse.indexOf('.') != -1)
-          strTemp = strTemp.left(strTemp.length()-1);
+        if (strExtToUse.indexOf('.') != -1)
+          strTemp = strTemp.left(strTemp.length() - 1);
         //append extension to make complete file name
         strTemp.append(strExtToUse);
         str = strTemp;
@@ -266,9 +266,9 @@ QString KMyMoneyUtils::variableCSS(void)
   QString css;
   css += "<style type=\"text/css\">\n<!--\n";
   css += QString(".row-even, .item0 { background-color: %1; color: %2 }\n")
-    .arg((KMyMoneyGlobalSettings::listBGColor()).name()).arg(tcolor.name());
+         .arg((KMyMoneyGlobalSettings::listBGColor()).name()).arg(tcolor.name());
   css += QString(".row-odd, .item1  { background-color: %1; color: %2 }\n")
-    .arg((KMyMoneyGlobalSettings::listColor()).name()).arg(tcolor.name());
+         .arg((KMyMoneyGlobalSettings::listColor()).name()).arg(tcolor.name());
   css += "-->\n</style>\n";
   return css;
 }
@@ -280,7 +280,7 @@ QString KMyMoneyUtils::findResource(const char* type, const QString& filename)
   QString rc, mask;
 
   // check that the placeholder is present
-  if(!filename.indexOf("%1")) {
+  if (!filename.indexOf("%1")) {
     qWarning("%%1 not found in '%s'", qPrintable(filename));
     return filename;
   }
@@ -288,19 +288,19 @@ QString KMyMoneyUtils::findResource(const char* type, const QString& filename)
   // search the given resource
   mask = filename.arg("_%1.%2");
   rc = KGlobal::dirs()->findResource(type, mask.arg(country).arg(language));
-  if(rc.isEmpty()) {
+  if (rc.isEmpty()) {
     mask = filename.arg("_%1");
     rc = KGlobal::dirs()->findResource(type, mask.arg(language));
   }
-  if(rc.isEmpty()) {
+  if (rc.isEmpty()) {
     // qDebug(QString("html/home_%1.html not found").arg(country).toLatin1());
     rc = KGlobal::dirs()->findResource(type, mask.arg(country));
   }
-  if(rc.isEmpty()) {
+  if (rc.isEmpty()) {
     rc = KGlobal::dirs()->findResource(type, filename.arg(""));
   }
 
-  if(rc.isEmpty()) {
+  if (rc.isEmpty()) {
     qWarning("No resource found for (%s,%s)", type, qPrintable(filename));
   }
   return rc;
@@ -310,20 +310,20 @@ const MyMoneySplit KMyMoneyUtils::stockSplit(const MyMoneyTransaction& t)
 {
   QList<MyMoneySplit>::ConstIterator it_s;
   MyMoneySplit investmentAccountSplit;
-  for(it_s = t.splits().begin(); it_s != t.splits().end(); ++it_s) {
-    if(!(*it_s).accountId().isEmpty()) {
+  for (it_s = t.splits().begin(); it_s != t.splits().end(); ++it_s) {
+    if (!(*it_s).accountId().isEmpty()) {
       MyMoneyAccount acc = MyMoneyFile::instance()->account((*it_s).accountId());
-      if(acc.isInvest()) {
+      if (acc.isInvest()) {
         return *it_s;
       }
       // if we have a reference to an investment account, we remember it here
-      if(acc.accountType() == MyMoneyAccount::Investment)
+      if (acc.accountType() == MyMoneyAccount::Investment)
         investmentAccountSplit = *it_s;
     }
   }
   // if we haven't found a stock split, we see if we've seen
   // an investment account on the way. If so, we return it.
-  if(!investmentAccountSplit.id().isEmpty())
+  if (!investmentAccountSplit.id().isEmpty())
     return investmentAccountSplit;
 
   // if none was found, we return an empty split.
@@ -332,12 +332,12 @@ const MyMoneySplit KMyMoneyUtils::stockSplit(const MyMoneyTransaction& t)
 
 KMyMoneyUtils::transactionTypeE KMyMoneyUtils::transactionType(const MyMoneyTransaction& t)
 {
-  if(!stockSplit(t).id().isEmpty())
+  if (!stockSplit(t).id().isEmpty())
     return InvestmentTransaction;
 
-  if(t.splitCount() < 2) {
+  if (t.splitCount() < 2) {
     return Unknown;
-  } else if(t.splitCount() > 2) {
+  } else if (t.splitCount() > 2) {
     // FIXME check for loan transaction here
     return SplitTransaction;
   }
@@ -346,16 +346,16 @@ KMyMoneyUtils::transactionTypeE KMyMoneyUtils::transactionType(const MyMoneyTran
     ida = t.splits()[0].accountId();
   if (t.splits().size() > 1)
     idb = t.splits()[1].accountId();
-  if(ida.isEmpty() || idb.isEmpty())
+  if (ida.isEmpty() || idb.isEmpty())
     return Unknown;
 
   MyMoneyAccount a, b;
   a = MyMoneyFile::instance()->account(ida);
   b = MyMoneyFile::instance()->account(idb);
-  if((a.accountGroup() == MyMoneyAccount::Asset
-   || a.accountGroup() == MyMoneyAccount::Liability)
-  && (b.accountGroup() == MyMoneyAccount::Asset
-   || b.accountGroup() == MyMoneyAccount::Liability))
+  if ((a.accountGroup() == MyMoneyAccount::Asset
+       || a.accountGroup() == MyMoneyAccount::Liability)
+      && (b.accountGroup() == MyMoneyAccount::Asset
+          || b.accountGroup() == MyMoneyAccount::Liability))
     return Transfer;
   return Normal;
 }
@@ -375,7 +375,7 @@ QString KMyMoneyUtils::nextCheckNumber(const MyMoneyAccount& acc)
   // determine next check number
   QString number;
   QRegExp exp(QString("(.*\\D)?(\\d+)(\\D.*)?"));
-  if(exp.indexIn(acc.value("lastNumberUsed")) != -1) {
+  if (exp.indexIn(acc.value("lastNumberUsed")) != -1) {
     number = QString("%1%2%3").arg(exp.cap(1)).arg(exp.cap(2).toULongLong() + 1).arg(exp.cap(3));
   } else {
     number = '1';
@@ -386,40 +386,40 @@ QString KMyMoneyUtils::nextCheckNumber(const MyMoneyAccount& acc)
 QString KMyMoneyUtils::reconcileStateToString(MyMoneySplit::reconcileFlagE flag, bool text)
 {
   QString txt;
-  if(text) {
-    switch(flag) {
-      case MyMoneySplit::NotReconciled:
-        txt = i18nc("Reconcile state 'Not reconciled'", "Not reconciled");
-        break;
-      case MyMoneySplit::Cleared:
-        txt = i18nc("Reconcile state 'Cleared'", "Cleared");
-        break;
-      case MyMoneySplit::Reconciled:
-        txt = i18nc("Reconcile state 'Reconciled'", "Reconciled");
-        break;
-      case MyMoneySplit::Frozen:
-        txt = i18nc("Reconcile state 'Frozen'", "Frozen");
-        break;
-      default:
-        txt = i18nc("Unknown reconciliation state", "Unknown");
-        break;
+  if (text) {
+    switch (flag) {
+    case MyMoneySplit::NotReconciled:
+      txt = i18nc("Reconcile state 'Not reconciled'", "Not reconciled");
+      break;
+    case MyMoneySplit::Cleared:
+      txt = i18nc("Reconcile state 'Cleared'", "Cleared");
+      break;
+    case MyMoneySplit::Reconciled:
+      txt = i18nc("Reconcile state 'Reconciled'", "Reconciled");
+      break;
+    case MyMoneySplit::Frozen:
+      txt = i18nc("Reconcile state 'Frozen'", "Frozen");
+      break;
+    default:
+      txt = i18nc("Unknown reconciliation state", "Unknown");
+      break;
     }
   } else {
-    switch(flag) {
-      case MyMoneySplit::NotReconciled:
-        break;
-      case MyMoneySplit::Cleared:
-        txt = i18nc("Reconcile flag C", "C");
-        break;
-      case MyMoneySplit::Reconciled:
-        txt = i18nc("Reconcile flag R", "R");
-        break;
-      case MyMoneySplit::Frozen:
-        txt = i18nc("Reconcile flag F", "F");
-        break;
-      default:
-        txt = i18nc("Flag for unknown reconciliation state", "?");
-        break;
+    switch (flag) {
+    case MyMoneySplit::NotReconciled:
+      break;
+    case MyMoneySplit::Cleared:
+      txt = i18nc("Reconcile flag C", "C");
+      break;
+    case MyMoneySplit::Reconciled:
+      txt = i18nc("Reconcile flag R", "R");
+      break;
+    case MyMoneySplit::Frozen:
+      txt = i18nc("Reconcile flag F", "F");
+      break;
+    default:
+      txt = i18nc("Flag for unknown reconciliation state", "?");
+      break;
     }
   }
   return txt;
@@ -457,7 +457,7 @@ void KMyMoneyUtils::previouslyUsedCategories(const QString& investmentAccount, Q
     QList< QPair<MyMoneyTransaction, MyMoneySplit> > list;
     file->transactionList(list, filter);
     QList< QPair<MyMoneyTransaction, MyMoneySplit> >::const_iterator it_t;
-    for(it_t = list.constBegin(); it_t != list.constEnd(); ++it_t) {
+    for (it_t = list.constBegin(); it_t != list.constEnd(); ++it_t) {
       const MyMoneyTransaction& t = (*it_t).first;
       const MyMoneySplit&s = (*it_t).second;
       MyMoneySplit assetAccountSplit;
@@ -467,21 +467,22 @@ void KMyMoneyUtils::previouslyUsedCategories(const QString& investmentAccount, Q
       MyMoneySecurity currency;
       MyMoneySplit::investTransactionTypeE transactionType;
       InvestTransactionEditor::dissectTransaction(t, s, assetAccountSplit, feeSplits, interestSplits, security, currency, transactionType);
-      if(feeSplits.count() == 1) {
+      if (feeSplits.count() == 1) {
         feesId = feeSplits.first().accountId();
       }
-      if(interestSplits.count() == 1) {
+      if (interestSplits.count() == 1) {
         interestId = interestSplits.first().accountId();
       }
     }
-  } catch(MyMoneyException *e) {
+  } catch (MyMoneyException *e) {
     delete e;
   }
 
 }
 
-KXmlGuiWindow* KMyMoneyUtils::mainWindow() {
-  foreach (QWidget *widget, QApplication::topLevelWidgets()) {
+KXmlGuiWindow* KMyMoneyUtils::mainWindow()
+{
+  foreach(QWidget *widget, QApplication::topLevelWidgets()) {
     KXmlGuiWindow* result = dynamic_cast<KXmlGuiWindow*>(widget);
     if (result)
       return result;

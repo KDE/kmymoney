@@ -38,23 +38,33 @@ class QPixmap;
 class KMyMoneyTitleLabel : public QLabel
 {
   Q_OBJECT
-  Q_PROPERTY( QString leftImageFile READ leftImageFile WRITE setLeftImageFile DESIGNABLE true )
-  Q_PROPERTY( QString rightImageFile READ rightImageFile WRITE setRightImageFile DESIGNABLE true )
-  Q_PROPERTY( QColor bgColor READ bgColor WRITE setBgColor DESIGNABLE true )
-  Q_PROPERTY( QString text READ text WRITE setText DESIGNABLE true )
+  Q_PROPERTY(QString leftImageFile READ leftImageFile WRITE setLeftImageFile DESIGNABLE true)
+  Q_PROPERTY(QString rightImageFile READ rightImageFile WRITE setRightImageFile DESIGNABLE true)
+  Q_PROPERTY(QColor bgColor READ bgColor WRITE setBgColor DESIGNABLE true)
+  Q_PROPERTY(QString text READ text WRITE setText DESIGNABLE true)
 
 public:
   KMyMoneyTitleLabel(QWidget *parent = 0);
   ~KMyMoneyTitleLabel();
 
-  void setBgColor(const QColor& _color) { m_bgColor = _color; }
+  void setBgColor(const QColor& _color) {
+    m_bgColor = _color;
+  }
   void setLeftImageFile(const QString& _file);
   void setRightImageFile(const QString& _file);
 
-  const QString& leftImageFile(void) const { return m_leftImageFile; }
-  const QString& rightImageFile(void) const { return m_rightImageFile; }
-  QColor bgColor(void) const { return m_bgColor; }
-  QString text(void) const { return m_text; }
+  const QString& leftImageFile(void) const {
+    return m_leftImageFile;
+  }
+  const QString& rightImageFile(void) const {
+    return m_rightImageFile;
+  }
+  QColor bgColor(void) const {
+    return m_bgColor;
+  }
+  QString text(void) const {
+    return m_text;
+  }
 
 public slots:
   virtual void setText(const QString& txt);

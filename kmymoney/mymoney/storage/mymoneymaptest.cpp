@@ -24,12 +24,12 @@ MyMoneyMapTest::MyMoneyMapTest()
 
 void MyMoneyMapTest::setUp()
 {
-	m = new MyMoneyMap<QString, QString>;
+  m = new MyMoneyMap<QString, QString>;
 }
 
 void MyMoneyMapTest::tearDown()
 {
-	delete m;
+  delete m;
 }
 
 void MyMoneyMapTest::testArrayOperator()

@@ -51,20 +51,22 @@ class kMyMoneyEdit;
 class KEndingBalanceDlgDecl : public Q3Wizard, public Ui::KEndingBalanceDlgDecl
 {
 public:
-  KEndingBalanceDlgDecl( QWidget *parent ) : Q3Wizard( parent ) {
-    setupUi( this );
+  KEndingBalanceDlgDecl(QWidget *parent) : Q3Wizard(parent) {
+    setupUi(this);
   }
 };
 class KEndingBalanceDlg : public KEndingBalanceDlgDecl
 {
   Q_OBJECT
 public:
-  explicit KEndingBalanceDlg(const MyMoneyAccount& account, QWidget *parent=0);
+  explicit KEndingBalanceDlg(const MyMoneyAccount& account, QWidget *parent = 0);
   ~KEndingBalanceDlg();
 
   const MyMoneyMoney endingBalance(void) const;
   const MyMoneyMoney previousBalance(void) const;
-  const QDate statementDate(void) const { return m_statementDate->date(); };
+  const QDate statementDate(void) const {
+    return m_statementDate->date();
+  };
 
   const MyMoneyTransaction interestTransaction(void);
   const MyMoneyTransaction chargeTransaction(void);
@@ -124,14 +126,18 @@ public:
     * by the user. The value returned is only valid if the dialog returned
     * with QDialog::accept.
     */
-  const QDate startDate(void) const { return m_startDateEdit->date(); };
+  const QDate startDate(void) const {
+    return m_startDateEdit->date();
+  };
 
   /**
     * This method returns the ending date of the statement as provided
     * by the user. The value returned is only valid if the dialog returned
     * with QDialog::accept.
     */
-  const QDate endDate(void) const { return m_endDateEdit->date(); };
+  const QDate endDate(void) const {
+    return m_endDateEdit->date();
+  };
 
 protected:
   const MyMoneyMoney totalInterest(const QDate& start, const QDate& end) const;

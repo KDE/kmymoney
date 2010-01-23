@@ -198,7 +198,9 @@ public:
     *
     * @return step of wizard this page belongs to
     */
-  unsigned int step(void) const { return m_step; }
+  unsigned int step(void) const {
+    return m_step;
+  }
 
   /**
     * This method returns a pointer to the widget of the page.
@@ -207,7 +209,9 @@ public:
     *
     * @return pointer to widget of page
     */
-  QWidget* widget(void) const { return m_widget; }
+  QWidget* widget(void) const {
+    return m_widget;
+  }
 
   /**
     * This method returns a pointer to the QObject used for
@@ -225,7 +229,9 @@ public:
     * @return pointer to widget or 0 if none is to be selected
     *         The default implementation returns 0
     */
-  virtual QWidget* initialFocusWidget(void) const { return 0; }
+  virtual QWidget* initialFocusWidget(void) const {
+    return 0;
+  }
 
   virtual KMyMoneyWizard* wizard(void) const = 0;
 
@@ -268,17 +274,18 @@ private:
  * @author Thomas Baumgart
  */
 template <class T>
-    class WizardPage : public KMyMoneyWizardPage
+class WizardPage : public KMyMoneyWizardPage
 {
 public:
   WizardPage(unsigned int step, QWidget* widget, T* parent) :
-    KMyMoneyWizardPage(step, widget),
-    m_wizard(parent),
-    m_wizardBase(parent)
-    {
-    }
-    virtual ~WizardPage() {}
-    virtual KMyMoneyWizard* wizard(void) const { return m_wizardBase; }
+      KMyMoneyWizardPage(step, widget),
+      m_wizard(parent),
+      m_wizardBase(parent) {
+  }
+  virtual ~WizardPage() {}
+  virtual KMyMoneyWizard* wizard(void) const {
+    return m_wizardBase;
+  }
 
 protected:
   T*                m_wizard;
@@ -406,7 +413,9 @@ public:
     */
   void addStep(const QString& text);
 
-  QList<KMyMoneyWizardPage*> historyPages(void) const { return m_history; }
+  QList<KMyMoneyWizardPage*> historyPages(void) const {
+    return m_history;
+  }
 
   /**
     * This method repeats selection of the current step in the
@@ -422,9 +431,11 @@ public:
    *
    * @sa KMyMoneyWizardPage::helpContext()
    */
-  void setHelpContext(const QString& ctx) { m_helpContext = ctx; }
+  void setHelpContext(const QString& ctx) {
+    m_helpContext = ctx;
+  }
 
-  virtual ~KMyMoneyWizard(){}
+  virtual ~KMyMoneyWizard() {}
 
 signals:
   /**

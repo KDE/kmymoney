@@ -24,7 +24,8 @@
 #include "kbanking.h"
 #include <qbanking/qbcfgtabsettings.h>
 
-class KBankingSettings: public QBCfgTabSettings {
+class KBankingSettings: public QBCfgTabSettings
+{
 private:
 public:
   explicit KBankingSettings(KBanking *ab,

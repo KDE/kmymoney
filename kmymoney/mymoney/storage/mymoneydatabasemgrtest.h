@@ -30,7 +30,8 @@
 #include "mymoneydatabasemgr.h"
 #undef private
 
-class MyMoneyDatabaseMgrTest : public CppUnit::TestFixture  {
+class MyMoneyDatabaseMgrTest : public CppUnit::TestFixture
+{
   CPPUNIT_TEST_SUITE(MyMoneyDatabaseMgrTest);
   CPPUNIT_TEST(testEmptyConstructor);
   CPPUNIT_TEST(testCreateDb);

@@ -58,8 +58,8 @@ public:
     TypeAll        = 0x03
   };
 
-  KMyMoneySecuritySelector(QWidget *parent=0);
-  explicit KMyMoneySecuritySelector(displayTypeE type = TypeAll, QWidget *parent=0);
+  KMyMoneySecuritySelector(QWidget *parent = 0);
+  explicit KMyMoneySecuritySelector(displayTypeE type = TypeAll, QWidget *parent = 0);
   virtual ~KMyMoneySecuritySelector();
 
   const MyMoneySecurity& security(void) const;
@@ -84,7 +84,7 @@ private:
 class KMyMoneyCurrencySelector : public KMyMoneySecuritySelector
 {
 public:
-  KMyMoneyCurrencySelector(QWidget *parent=0);
+  KMyMoneyCurrencySelector(QWidget *parent = 0);
   virtual ~KMyMoneyCurrencySelector() {}
 };
 

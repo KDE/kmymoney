@@ -179,7 +179,9 @@ public:
     */
   void setNpp(const FCALC_DOUBLE npp);
 
-  FCALC_DOUBLE npp(void) const { return m_npp; };
+  FCALC_DOUBLE npp(void) const {
+    return m_npp;
+  };
 
   /**
     * This method sets the payment frequency. The parameter @p PF
@@ -247,7 +249,9 @@ public:
     */
   void setIr(const FCALC_DOUBLE ir);
 
-  FCALC_DOUBLE ir(void) const { return m_ir; };
+  FCALC_DOUBLE ir(void) const {
+    return m_ir;
+  };
 
   /**
     * This method sets the present value to the value passed
@@ -257,7 +261,9 @@ public:
     */
   void setPv(const FCALC_DOUBLE pv);
 
-  FCALC_DOUBLE pv(void) const { return m_pv; };
+  FCALC_DOUBLE pv(void) const {
+    return m_pv;
+  };
 
   /**
     * This method sets the payment amount to the value passed
@@ -267,7 +273,9 @@ public:
     */
   void setPmt(const FCALC_DOUBLE pmt);
 
-  FCALC_DOUBLE pmt(void) const { return m_pmt; };
+  FCALC_DOUBLE pmt(void) const {
+    return m_pmt;
+  };
 
   /**
     * This method sets the future value to the value passed
@@ -277,7 +285,9 @@ public:
     */
   void setFv(const FCALC_DOUBLE fv);
 
-  FCALC_DOUBLE fv(void) const { return m_fv; };
+  FCALC_DOUBLE fv(void) const {
+    return m_fv;
+  };
 
 private:
   FCALC_DOUBLE eff_int(void) const;
@@ -301,17 +311,17 @@ private:
   unsigned short        m_PF;   // payment frequency
 
   unsigned short        m_prec; // precision for roundoff for pv, pmt and fv
-                                // i is not rounded, n is integer
+  // i is not rounded, n is integer
 
   bool                  m_bep;  // beginning/end of period payment flag
   bool                  m_disc; // discrete/continuous compounding flag
 
   unsigned short        m_mask; // available value mask
-  #define PV_SET        0x0001
-  #define IR_SET        0x0002
-  #define PMT_SET       0x0004
-  #define NPP_SET       0x0008
-  #define FV_SET        0x0010
+#define PV_SET        0x0001
+#define IR_SET        0x0002
+#define PMT_SET       0x0004
+#define NPP_SET       0x0008
+#define FV_SET        0x0010
 };
 
 #endif

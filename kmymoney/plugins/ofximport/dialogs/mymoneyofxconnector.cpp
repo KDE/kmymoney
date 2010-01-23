@@ -50,13 +50,13 @@
 #include <kdeversion.h>
 
 OfxHeaderVersion::OfxHeaderVersion(KComboBox* combo, const QString& headerVersion) :
-  m_combo(combo)
+    m_combo(combo)
 {
   combo->clear();
   combo->addItem("102");
   combo->addItem("103");
 
-  if(!headerVersion.isEmpty()) {
+  if (!headerVersion.isEmpty()) {
     combo->setCurrentItem(headerVersion);
   } else {
     combo->setCurrentItem("102");
@@ -75,7 +75,7 @@ QString OfxHeaderVersion::headerVersion(void) const
 }
 
 OfxAppVersion::OfxAppVersion(KComboBox* combo, const QString& appId) :
-  m_combo(combo)
+    m_combo(combo)
 {
 // http://ofxblog.wordpress.com/2007/06/06/ofx-appid-and-appver-for-intuit-products/
 // http://ofxblog.wordpress.com/2007/06/06/ofx-appid-and-appver-for-microsoft-money/
@@ -103,12 +103,12 @@ OfxAppVersion::OfxAppVersion(KComboBox* combo, const QString& appId) :
   combo->addItems(m_appMap.keys());
 
   QMap<QString, QString>::const_iterator it_a;
-  for(it_a = m_appMap.constBegin(); it_a != m_appMap.constEnd(); ++it_a) {
-    if(*it_a == appId)
+  for (it_a = m_appMap.constBegin(); it_a != m_appMap.constEnd(); ++it_a) {
+    if (*it_a == appId)
       break;
   }
 
-  if(it_a != m_appMap.constEnd()) {
+  if (it_a != m_appMap.constEnd()) {
     combo->setCurrentItem(it_a.key());
   } else {
     combo->setCurrentItem(i18n("Quicken Windows 2008"));
@@ -126,36 +126,53 @@ const QString OfxAppVersion::appId(void) const
   static QString defaultAppId("QWIN:1700");
 
   QString app = m_combo->currentText();
-  if(m_appMap[app] != defaultAppId)
+  if (m_appMap[app] != defaultAppId)
     return m_appMap[app];
   return QString();
 }
 
 MyMoneyOfxConnector::MyMoneyOfxConnector(const MyMoneyAccount& _account):
-  m_account(_account)
+    m_account(_account)
 {
   m_fiSettings = m_account.onlineBankingSettings();
 }
 
-QString MyMoneyOfxConnector::iban(void) const { return m_fiSettings.value("bankid"); }
-QString MyMoneyOfxConnector::fiorg(void) const { return m_fiSettings.value("org"); }
-QString MyMoneyOfxConnector::fiid(void) const { return m_fiSettings.value("fid"); }
-QString MyMoneyOfxConnector::username(void) const { return m_fiSettings.value("username"); }
-QString MyMoneyOfxConnector::password(void) const { return m_fiSettings.value("password"); }
-QString MyMoneyOfxConnector::accountnum(void) const { return m_fiSettings.value("accountid"); }
-QString MyMoneyOfxConnector::url(void) const { return m_fiSettings.value("url"); }
+QString MyMoneyOfxConnector::iban(void) const
+{
+  return m_fiSettings.value("bankid");
+}
+QString MyMoneyOfxConnector::fiorg(void) const
+{
+  return m_fiSettings.value("org");
+}
+QString MyMoneyOfxConnector::fiid(void) const
+{
+  return m_fiSettings.value("fid");
+}
+QString MyMoneyOfxConnector::username(void) const
+{
+  return m_fiSettings.value("username");
+}
+QString MyMoneyOfxConnector::password(void) const
+{
+  return m_fiSettings.value("password");
+}
+QString MyMoneyOfxConnector::accountnum(void) const
+{
+  return m_fiSettings.value("accountid");
+}
+QString MyMoneyOfxConnector::url(void) const
+{
+  return m_fiSettings.value("url");
+}
 
-QDate MyMoneyOfxConnector::statementStartDate(void) const {
-  if ((m_fiSettings.value("kmmofx-todayMinus").toInt() != 0) && !m_fiSettings.value("kmmofx-numRequestDays").isEmpty())
-  {
+QDate MyMoneyOfxConnector::statementStartDate(void) const
+{
+  if ((m_fiSettings.value("kmmofx-todayMinus").toInt() != 0) && !m_fiSettings.value("kmmofx-numRequestDays").isEmpty()) {
     return QDate::currentDate().addDays(-m_fiSettings.value("kmmofx-numRequestDays").toInt());
-  }
-  else if ((m_fiSettings.value("kmmofx-lastUpdate").toInt() != 0) && !m_account.value("lastImportedTransactionDate").isEmpty())
-  {
+  } else if ((m_fiSettings.value("kmmofx-lastUpdate").toInt() != 0) && !m_account.value("lastImportedTransactionDate").isEmpty()) {
     return QDate::fromString(m_account.value("lastImportedTransactionDate"), Qt::ISODate);
-  }
-  else if ((m_fiSettings.value("kmmofx-pickDate").toInt() != 0) && !m_fiSettings.value("kmmofx-specificDate").isEmpty())
-  {
+  } else if ((m_fiSettings.value("kmmofx-pickDate").toInt() != 0) && !m_fiSettings.value("kmmofx-specificDate").isEmpty()) {
     return QDate::fromString(m_fiSettings.value("kmmofx-specificDate"));
   }
   return QDate::currentDate().addMonths(-2);
@@ -167,22 +184,22 @@ OfxAccountData::AccountType MyMoneyOfxConnector::accounttype(void) const
   OfxAccountData::AccountType result = OfxAccountData::OFX_CHECKING;
 
   QString type = m_account.onlineBankingSettings()["type"];
-  if(type == "CHECKING")
+  if (type == "CHECKING")
     result = OfxAccountData::OFX_CHECKING;
-  else if(type == "SAVINGS")
+  else if (type == "SAVINGS")
     result = OfxAccountData::OFX_SAVINGS;
-  else if(type == "MONEY MARKET")
+  else if (type == "MONEY MARKET")
     result = OfxAccountData::OFX_MONEYMRKT;
-  else if(type == "CREDIT LINE")
+  else if (type == "CREDIT LINE")
     result = OfxAccountData::OFX_CREDITLINE;
-  else if(type == "CMA")
+  else if (type == "CMA")
     result = OfxAccountData::OFX_CMA;
-  else if(type == "CREDIT CARD")
+  else if (type == "CREDIT CARD")
     result = OfxAccountData::OFX_CREDITCARD;
-  else if(type == "INVESTMENT")
+  else if (type == "INVESTMENT")
     result = OfxAccountData::OFX_INVESTMENT;
   else {
-    switch( m_account.accountType()) {
+    switch (m_account.accountType()) {
     case MyMoneyAccount::Investment:
       result = OfxAccountData::OFX_INVESTMENT;
       break;
@@ -201,18 +218,17 @@ OfxAccountData::AccountType MyMoneyOfxConnector::accounttype(void) const
   // ofx type for an account.  For now, I will stash it in the notes!
 
   QRegExp rexp("OFXTYPE:([A-Z]*)");
-  if ( rexp.indexIn(m_account.description()) != -1 )
-  {
+  if (rexp.indexIn(m_account.description()) != -1) {
     QString override = rexp.cap(1);
     kDebug(2) << "MyMoneyOfxConnector::accounttype() overriding to " << result;
 
-    if ( override == "BANK" )
-    result = OfxAccountData::OFX_CHECKING;
-    else if ( override == "CC" )
+    if (override == "BANK")
+      result = OfxAccountData::OFX_CHECKING;
+    else if (override == "CC")
       result = OfxAccountData::OFX_CREDITCARD;
-    else if ( override == "INV" )
+    else if (override == "INV")
       result = OfxAccountData::OFX_INVESTMENT;
-    else if ( override == "MONEYMARKET")
+    else if (override == "MONEYMARKET")
       result = OfxAccountData::OFX_MONEYMRKT;
   }
 
@@ -223,8 +239,7 @@ AccountType MyMoneyOfxConnector::accounttype(void) const
 {
   AccountType result = OFX_BANK_ACCOUNT;
 
-  switch( m_account.accountType() )
-  {
+  switch (m_account.accountType()) {
   case MyMoneyAccount::Investment:
     result = OFX_INVEST_ACCOUNT;
     break;
@@ -239,19 +254,18 @@ AccountType MyMoneyOfxConnector::accounttype(void) const
   // ofx type for an account.  For now, I will stash it in the notes!
 
   QRegExp rexp("OFXTYPE:([A-Z]*)");
-  if ( rexp.search(m_account.description()) != -1 )
-  {
+  if (rexp.search(m_account.description()) != -1) {
     QString override = rexp.cap(1);
     kDebug(2) << "MyMoneyOfxConnector::accounttype() overriding to " << result;
 
-    if ( override == "BANK" )
-    result = OFX_BANK_ACCOUNT;
-    else if ( override == "CC" )
+    if (override == "BANK")
+      result = OFX_BANK_ACCOUNT;
+    else if (override == "CC")
       result = OFX_CREDITCARD_ACCOUNT;
-    else if ( override == "INV" )
+    else if (override == "INV")
       result = OFX_INVEST_ACCOUNT;
 #if 0  // money market is not supported by 0.8.x
-    else if ( override == "MONEYMARKET")
+    else if (override == "MONEYMARKET")
       result = OFX_MONEYMRKT;
 #endif
   }
@@ -262,11 +276,11 @@ AccountType MyMoneyOfxConnector::accounttype(void) const
 
 void MyMoneyOfxConnector::initRequest(OfxFiLogin* fi) const
 {
-  memset(fi,0,sizeof(OfxFiLogin));
-  strncpy(fi->fid, fiid().toLatin1(), OFX_FID_LENGTH-1);
-  strncpy(fi->org, fiorg().toLatin1(), OFX_ORG_LENGTH-1);
-  strncpy(fi->userid, username().toLatin1(), OFX_USERID_LENGTH-1);
-  strncpy(fi->userpass, password().toLatin1(), OFX_USERPASS_LENGTH-1);
+  memset(fi, 0, sizeof(OfxFiLogin));
+  strncpy(fi->fid, fiid().toLatin1(), OFX_FID_LENGTH - 1);
+  strncpy(fi->org, fiorg().toLatin1(), OFX_ORG_LENGTH - 1);
+  strncpy(fi->userid, username().toLatin1(), OFX_USERID_LENGTH - 1);
+  strncpy(fi->userpass, password().toLatin1(), OFX_USERPASS_LENGTH - 1);
 
 #if LIBOFX_IS_VERSION(0,9,0)
   // If we don't know better, we pretend to be Quicken 2008
@@ -274,17 +288,17 @@ void MyMoneyOfxConnector::initRequest(OfxFiLogin* fi) const
   // http://ofxblog.wordpress.com/2007/06/06/ofx-appid-and-appver-for-microsoft-money/
   QString appId = m_account.onlineBankingSettings().value("appId");
   QRegExp exp("(.*):(.*)");
-  if(exp.indexIn(appId) != -1) {
-    strncpy(fi->appid, exp.cap(1).toLatin1(), OFX_APPID_LENGTH-1);
-    strncpy(fi->appver, exp.cap(2).toLatin1(), OFX_APPVER_LENGTH-1);
+  if (exp.indexIn(appId) != -1) {
+    strncpy(fi->appid, exp.cap(1).toLatin1(), OFX_APPID_LENGTH - 1);
+    strncpy(fi->appver, exp.cap(2).toLatin1(), OFX_APPVER_LENGTH - 1);
   } else {
-    strncpy(fi->appid, "QWIN", OFX_APPID_LENGTH-1);
-    strncpy(fi->appver, "1700", OFX_APPVER_LENGTH-1);
+    strncpy(fi->appid, "QWIN", OFX_APPID_LENGTH - 1);
+    strncpy(fi->appver, "1700", OFX_APPVER_LENGTH - 1);
   }
 
   QString headerVersion = m_account.onlineBankingSettings().value("kmmofx-headerVersion");
-  if(!headerVersion.isEmpty()) {
-    strncpy(fi->header_version, headerVersion.toLatin1(), OFX_HEADERVERSION_LENGTH-1);
+  if (!headerVersion.isEmpty()) {
+    strncpy(fi->header_version, headerVersion.toLatin1(), OFX_HEADERVERSION_LENGTH - 1);
   }
 #endif
 }
@@ -296,31 +310,31 @@ const QByteArray MyMoneyOfxConnector::statementRequest(void) const
 
 #if LIBOFX_IS_VERSION(0,9,0)
   OfxAccountData account;
-  memset(&account,0,sizeof(OfxAccountData));
+  memset(&account, 0, sizeof(OfxAccountData));
 
-  if(!iban().toLatin1().isEmpty()) {
-    strncpy(account.bank_id,iban().toLatin1(),OFX_BANKID_LENGTH-1);
-    strncpy(account.broker_id,iban().toLatin1(),OFX_BROKERID_LENGTH-1);
+  if (!iban().toLatin1().isEmpty()) {
+    strncpy(account.bank_id, iban().toLatin1(), OFX_BANKID_LENGTH - 1);
+    strncpy(account.broker_id, iban().toLatin1(), OFX_BROKERID_LENGTH - 1);
   }
-  strncpy(account.account_number,accountnum().toLatin1(),OFX_ACCTID_LENGTH-1);
+  strncpy(account.account_number, accountnum().toLatin1(), OFX_ACCTID_LENGTH - 1);
   account.account_type = accounttype();
 #else
   OfxAccountInfo account;
-  memset(&account,0,sizeof(OfxAccountInfo));
+  memset(&account, 0, sizeof(OfxAccountInfo));
 
-  if(iban().toLatin1() != 0) {
-    strncpy(account.bankid,iban().toLatin1(),OFX_BANKID_LENGTH-1);
-    strncpy(account.brokerid,iban().toLatin1(),OFX_BROKERID_LENGTH-1);
+  if (iban().toLatin1() != 0) {
+    strncpy(account.bankid, iban().toLatin1(), OFX_BANKID_LENGTH - 1);
+    strncpy(account.brokerid, iban().toLatin1(), OFX_BROKERID_LENGTH - 1);
   }
-  strncpy(account.accountid,accountnum().toLatin1(),OFX_ACCOUNT_ID_LENGTH-1);
+  strncpy(account.accountid, accountnum().toLatin1(), OFX_ACCOUNT_ID_LENGTH - 1);
   account.type = accounttype();
 #endif
 
-  char* szrequest = libofx_request_statement( &fi, &account, QDateTime(statementStartDate()).toTime_t() );
+  char* szrequest = libofx_request_statement(&fi, &account, QDateTime(statementStartDate()).toTime_t());
   QString request = szrequest;
   // remove the trailing zero
   QByteArray result = request.toUtf8();
-  result.truncate(result.size()-1);
+  result.truncate(result.size() - 1);
   free(szrequest);
 
   QString msg(result);
@@ -335,11 +349,11 @@ const QByteArray MyMoneyOfxConnector::accountInfoRequest(void) const
   OfxFiLogin fi;
   initRequest(&fi);
 
-  char* szrequest = libofx_request_accountinfo( &fi );
+  char* szrequest = libofx_request_accountinfo(&fi);
   QString request = szrequest;
   // remove the trailing zero
   QByteArray result = request.utf8();
-  result.truncate(result.size()-1);
+  result.truncate(result.size() - 1);
   free(szrequest);
 
   return result;
@@ -350,11 +364,11 @@ const QByteArray MyMoneyOfxConnector::accountInfoRequest(void) const
 
 MyMoneyOfxConnector::Tag MyMoneyOfxConnector::message(const QString& _msgType, const QString& _trnType, const Tag& _request)
 {
-  return Tag(_msgType+"MSGSRQV1")
-    .subtag(Tag(_trnType+"TRNRQ")
-      .element("TRNUID",uuid())
-      .element("CLTCOOKIE","1")
-      .subtag(_request));
+  return Tag(_msgType + "MSGSRQV1")
+         .subtag(Tag(_trnType + "TRNRQ")
+                 .element("TRNUID", uuid())
+                 .element("CLTCOOKIE", "1")
+                 .subtag(_request));
 }
 
 MyMoneyOfxConnector::Tag MyMoneyOfxConnector::investmentRequest(void) const
@@ -362,30 +376,30 @@ MyMoneyOfxConnector::Tag MyMoneyOfxConnector::investmentRequest(void) const
   QString dtnow_string = QDateTime::currentDateTime().toString(Qt::ISODate).remove(QRegExp("[^0-9]"));
   QString dtstart_string = _dtstart.toString(Qt::ISODate).remove(QRegExp("[^0-9]"));
 
-  return message("INVSTMT","INVSTMT",Tag("INVSTMTRQ")
-    .subtag(Tag("INVACCTFROM").element("BROKERID", fiorg()).element("ACCTID", accountnum()))
-    .subtag(Tag("INCTRAN").element("DTSTART",dtstart_string).element("INCLUDE","Y"))
-    .element("INCOO","Y")
-    .subtag(Tag("INCPOS").element("DTASOF", dtnow_string).element("INCLUDE","Y"))
-    .element("INCBAL","Y"));
+  return message("INVSTMT", "INVSTMT", Tag("INVSTMTRQ")
+                 .subtag(Tag("INVACCTFROM").element("BROKERID", fiorg()).element("ACCTID", accountnum()))
+                 .subtag(Tag("INCTRAN").element("DTSTART", dtstart_string).element("INCLUDE", "Y"))
+                 .element("INCOO", "Y")
+                 .subtag(Tag("INCPOS").element("DTASOF", dtnow_string).element("INCLUDE", "Y"))
+                 .element("INCBAL", "Y"));
 }
 
 MyMoneyOfxConnector::Tag MyMoneyOfxConnector::bankStatementRequest(const QDate& _dtstart) const
 {
   QString dtstart_string = _dtstart.toString(Qt::ISODate).remove(QRegExp("[^0-9]"));
 
-  return message("BANK","STMT",Tag("STMTRQ")
-    .subtag(Tag("BANKACCTFROM").element("BANKID", iban()).element("ACCTID", accountnum()).element("ACCTTYPE", "CHECKING"))
-    .subtag(Tag("INCTRAN").element("DTSTART",dtstart_string).element("INCLUDE","Y")));
+  return message("BANK", "STMT", Tag("STMTRQ")
+                 .subtag(Tag("BANKACCTFROM").element("BANKID", iban()).element("ACCTID", accountnum()).element("ACCTTYPE", "CHECKING"))
+                 .subtag(Tag("INCTRAN").element("DTSTART", dtstart_string).element("INCLUDE", "Y")));
 }
 
 MyMoneyOfxConnector::Tag MyMoneyOfxConnector::creditCardRequest(const QDate& _dtstart) const
 {
   QString dtstart_string = _dtstart.toString(Qt::ISODate).remove(QRegExp("[^0-9]"));
 
-  return message("CREDITCARD","CCSTMT",Tag("CCSTMTRQ")
-    .subtag(Tag("CCACCTFROM").element("ACCTID",accountnum()))
-    .subtag(Tag("INCTRAN").element("DTSTART",dtstart_string).element("INCLUDE","Y")));
+  return message("CREDITCARD", "CCSTMT", Tag("CCSTMTRQ")
+                 .subtag(Tag("CCACCTFROM").element("ACCTID", accountnum()))
+                 .subtag(Tag("INCTRAN").element("DTSTART", dtstart_string).element("INCLUDE", "Y")));
 }
 
 MyMoneyOfxConnector::Tag MyMoneyOfxConnector::signOn(void) const
@@ -393,19 +407,19 @@ MyMoneyOfxConnector::Tag MyMoneyOfxConnector::signOn(void) const
   QString dtnow_string = QDateTime::currentDateTime().toString(Qt::ISODate).remove(QRegExp("[^0-9]"));
 
   Tag fi("FI");
-  fi.element("ORG",fiorg());
-  if ( !fiid().isEmpty() )
-    fi.element("FID",fiid());
+  fi.element("ORG", fiorg());
+  if (!fiid().isEmpty())
+    fi.element("FID", fiid());
 
   return Tag("SIGNONMSGSRQV1")
-    .subtag(Tag("SONRQ")
-      .element("DTCLIENT",dtnow_string)
-      .element("USERID",username())
-      .element("USERPASS",password())
-      .element("LANGUAGE","ENG")
-      .subtag(fi)
-      .element("APPID","QWIN")
-      .element("APPVER","1100"));
+         .subtag(Tag("SONRQ")
+                 .element("DTCLIENT", dtnow_string)
+                 .element("USERID", username())
+                 .element("USERPASS", password())
+                 .element("LANGUAGE", "ENG")
+                 .subtag(fi)
+                 .element("APPID", "QWIN")
+                 .element("APPVER", "1100"));
 }
 
 QString MyMoneyOfxConnector::header(void)
@@ -443,16 +457,16 @@ const QByteArray MyMoneyOfxConnector::statementResponse(const QDate& _dtstart) c
 {
   QString request;
 
-  if ( accounttype()=="CC" )
+  if (accounttype() == "CC")
     request = header() + Tag("OFX").subtag(signOnResponse()).subtag(creditCardStatementResponse(_dtstart));
-  else if ( accounttype()=="INV" )
+  else if (accounttype() == "INV")
     request = header() + Tag("OFX").subtag(signOnResponse()).data(investmentStatementResponse(_dtstart));
   else
     request = header() + Tag("OFX").subtag(signOnResponse()).subtag(bankStatementResponse(_dtstart));
 
   // remove the trailing zero
   QByteArray result = request.utf8();
-  result.truncate(result.size()-1);
+  result.truncate(result.size() - 1);
 
   return result;
 }
@@ -463,21 +477,21 @@ MyMoneyOfxConnector::Tag MyMoneyOfxConnector::signOnResponse(void) const
 
   Tag sonrs("SONRS");
   sonrs
-    .subtag(Tag("STATUS")
-      .element("CODE","0")
-      .element("SEVERITY","INFO")
-      .element("MESSAGE","The operation succeeded.")
-    )
-    .element("DTSERVER",dtnow_string)
-    .element("LANGUAGE","ENG");
+  .subtag(Tag("STATUS")
+          .element("CODE", "0")
+          .element("SEVERITY", "INFO")
+          .element("MESSAGE", "The operation succeeded.")
+         )
+  .element("DTSERVER", dtnow_string)
+  .element("LANGUAGE", "ENG");
 
   Tag fi("FI");
-  if ( !fiorg().isEmpty() )
-    fi.element("ORG",fiorg());
-  if ( !fiid().isEmpty() )
-    fi.element("FID",fiid());
+  if (!fiorg().isEmpty())
+    fi.element("ORG", fiorg());
+  if (!fiid().isEmpty())
+    fi.element("FID", fiid());
 
-  if ( !fi.isEmpty() )
+  if (!fi.isEmpty())
     sonrs.subtag(fi);
 
   return Tag("SIGNONMSGSRSV1").subtag(sonrs);
@@ -485,12 +499,12 @@ MyMoneyOfxConnector::Tag MyMoneyOfxConnector::signOnResponse(void) const
 
 MyMoneyOfxConnector::Tag MyMoneyOfxConnector::messageResponse(const QString& _msgType, const QString& _trnType, const Tag& _response)
 {
-  return Tag(_msgType+"MSGSRSV1")
-    .subtag(Tag(_trnType+"TRNRS")
-      .element("TRNUID",uuid())
-      .subtag(Tag("STATUS").element("CODE","0").element("SEVERITY","INFO"))
-      .element("CLTCOOKIE","1")
-      .subtag(_response));
+  return Tag(_msgType + "MSGSRSV1")
+         .subtag(Tag(_trnType + "TRNRS")
+                 .element("TRNUID", uuid())
+                 .subtag(Tag("STATUS").element("CODE", "0").element("SEVERITY", "INFO"))
+                 .element("CLTCOOKIE", "1")
+                 .subtag(_response));
 }
 
 MyMoneyOfxConnector::Tag MyMoneyOfxConnector::bankStatementResponse(const QDate& _dtstart) const
@@ -503,21 +517,20 @@ MyMoneyOfxConnector::Tag MyMoneyOfxConnector::bankStatementResponse(const QDate&
   QString transactionlist;
 
   MyMoneyTransactionFilter filter;
-  filter.setDateFilter(_dtstart,QDate::currentDate());
+  filter.setDateFilter(_dtstart, QDate::currentDate());
   filter.addAccount(m_account.id());
   Q3ValueList<MyMoneyTransaction> transactions = file->transactionList(filter);
   Q3ValueList<MyMoneyTransaction>::const_iterator it_transaction = transactions.begin();
-  while ( it_transaction != transactions.end() )
-  {
-    transactionlist += transaction( *it_transaction );
+  while (it_transaction != transactions.end()) {
+    transactionlist += transaction(*it_transaction);
     ++it_transaction;
   }
 
-  return messageResponse("BANK","STMT",Tag("STMTRS")
-    .element("CURDEF","USD")
-    .subtag(Tag("BANKACCTFROM").element("BANKID", iban()).element("ACCTID", accountnum()).element("ACCTTYPE", "CHECKING"))
-    .subtag(Tag("BANKTRANLIST").element("DTSTART",dtstart_string).element("DTEND",dtnow_string).data(transactionlist))
-    .subtag(Tag("LEDGERBAL").element("BALAMT",file->balance(m_account.id()).formatMoney(QString(),2)).element("DTASOF",dtnow_string )));
+  return messageResponse("BANK", "STMT", Tag("STMTRS")
+                         .element("CURDEF", "USD")
+                         .subtag(Tag("BANKACCTFROM").element("BANKID", iban()).element("ACCTID", accountnum()).element("ACCTTYPE", "CHECKING"))
+                         .subtag(Tag("BANKTRANLIST").element("DTSTART", dtstart_string).element("DTEND", dtnow_string).data(transactionlist))
+                         .subtag(Tag("LEDGERBAL").element("BALAMT", file->balance(m_account.id()).formatMoney(QString(), 2)).element("DTASOF", dtnow_string)));
 }
 
 MyMoneyOfxConnector::Tag MyMoneyOfxConnector::creditCardStatementResponse(const QDate& _dtstart) const
@@ -530,21 +543,20 @@ MyMoneyOfxConnector::Tag MyMoneyOfxConnector::creditCardStatementResponse(const 
   QString transactionlist;
 
   MyMoneyTransactionFilter filter;
-  filter.setDateFilter(_dtstart,QDate::currentDate());
+  filter.setDateFilter(_dtstart, QDate::currentDate());
   filter.addAccount(m_account.id());
   Q3ValueList<MyMoneyTransaction> transactions = file->transactionList(filter);
   Q3ValueList<MyMoneyTransaction>::const_iterator it_transaction = transactions.begin();
-  while ( it_transaction != transactions.end() )
-  {
-    transactionlist += transaction( *it_transaction );
+  while (it_transaction != transactions.end()) {
+    transactionlist += transaction(*it_transaction);
     ++it_transaction;
   }
 
-  return messageResponse("CREDITCARD","CCSTMT",Tag("CCSTMTRS")
-    .element("CURDEF","USD")
-    .subtag(Tag("CCACCTFROM").element("ACCTID", accountnum()))
-    .subtag(Tag("BANKTRANLIST").element("DTSTART",dtstart_string).element("DTEND",dtnow_string).data(transactionlist))
-    .subtag(Tag("LEDGERBAL").element("BALAMT",file->balance(m_account.id()).formatMoney(QString(),2)).element("DTASOF",dtnow_string )));
+  return messageResponse("CREDITCARD", "CCSTMT", Tag("CCSTMTRS")
+                         .element("CURDEF", "USD")
+                         .subtag(Tag("CCACCTFROM").element("ACCTID", accountnum()))
+                         .subtag(Tag("BANKTRANLIST").element("DTSTART", dtstart_string).element("DTEND", dtnow_string).data(transactionlist))
+                         .subtag(Tag("LEDGERBAL").element("BALAMT", file->balance(m_account.id()).formatMoney(QString(), 2)).element("DTASOF", dtnow_string)));
 }
 
 QString MyMoneyOfxConnector::investmentStatementResponse(const QDate& _dtstart) const
@@ -557,43 +569,41 @@ QString MyMoneyOfxConnector::investmentStatementResponse(const QDate& _dtstart) 
   QString transactionlist;
 
   MyMoneyTransactionFilter filter;
-  filter.setDateFilter(_dtstart,QDate::currentDate());
+  filter.setDateFilter(_dtstart, QDate::currentDate());
   filter.addAccount(m_account.id());
   filter.addAccount(m_account.accountList());
   Q3ValueList<MyMoneyTransaction> transactions = file->transactionList(filter);
   Q3ValueList<MyMoneyTransaction>::const_iterator it_transaction = transactions.begin();
-  while ( it_transaction != transactions.end() )
-  {
-    transactionlist += investmentTransaction( *it_transaction );
+  while (it_transaction != transactions.end()) {
+    transactionlist += investmentTransaction(*it_transaction);
     ++it_transaction;
   }
 
   Tag securitylist("SECLIST");
   QCStringList accountids = m_account.accountList();
   QCStringList::const_iterator it_accountid = accountids.begin();
-  while ( it_accountid != accountids.end() )
-  {
+  while (it_accountid != accountids.end()) {
     MyMoneySecurity equity = file->security(file->account(*it_accountid).currencyId());
 
     securitylist.subtag(Tag("STOCKINFO")
-      .subtag(Tag("SECINFO")
-        .subtag(Tag("SECID")
-          .element("UNIQUEID",equity.id())
-          .element("UNIQUEIDTYPE","KMYMONEY"))
-        .element("SECNAME",equity.name())
-        .element("TICKER",equity.tradingSymbol())
-        .element("FIID",equity.id())));
+                        .subtag(Tag("SECINFO")
+                                .subtag(Tag("SECID")
+                                        .element("UNIQUEID", equity.id())
+                                        .element("UNIQUEIDTYPE", "KMYMONEY"))
+                                .element("SECNAME", equity.name())
+                                .element("TICKER", equity.tradingSymbol())
+                                .element("FIID", equity.id())));
 
     ++it_accountid;
   }
 
-  return messageResponse("INVSTMT","INVSTMT",Tag("INVSTMTRS")
-    .element("DTASOF", dtstart_string)
-    .element("CURDEF","USD")
-    .subtag(Tag("INVACCTFROM").element("BROKERID", fiorg()).element("ACCTID", accountnum()))
-    .subtag(Tag("INVTRANLIST").element("DTSTART",dtstart_string).element("DTEND",dtnow_string).data(transactionlist))
-    )
-    + Tag("SECLISTMSGSRSV1").subtag(securitylist);
+  return messageResponse("INVSTMT", "INVSTMT", Tag("INVSTMTRS")
+                         .element("DTASOF", dtstart_string)
+                         .element("CURDEF", "USD")
+                         .subtag(Tag("INVACCTFROM").element("BROKERID", fiorg()).element("ACCTID", accountnum()))
+                         .subtag(Tag("INVTRANLIST").element("DTSTART", dtstart_string).element("DTEND", dtnow_string).data(transactionlist))
+                        )
+         + Tag("SECLISTMSGSRSV1").subtag(securitylist);
 }
 
 MyMoneyOfxConnector::Tag MyMoneyOfxConnector::transaction(const MyMoneyTransaction& _t) const
@@ -603,126 +613,116 @@ MyMoneyOfxConnector::Tag MyMoneyOfxConnector::transaction(const MyMoneyTransacti
   MyMoneyFile* file = MyMoneyFile::instance();
 
   //Use this version for bank/cc transactions
-  MyMoneySplit s = _t.splitByAccount( m_account.id(), true );
+  MyMoneySplit s = _t.splitByAccount(m_account.id(), true);
 
   //TODO (Ace) Write "investmentTransaction()"...
   //Use this version for inv transactions
   //MyMoneySplit s = _t.splitByAccount( m_account.accountList(), true );
 
-  Tag result ("STMTTRN");
+  Tag result("STMTTRN");
 
   result
-    // This is a temporary hack.  I don't use the trntype field in importing at all,
-    // but libofx requires it to be there in order to import the file.
-    .element("TRNTYPE","DEBIT")
-    .element("DTPOSTED",_t.postDate().toString(Qt::ISODate).remove(QRegExp("[^0-9]")))
-    .element("TRNAMT",s.value().formatMoney(QString(),2));
+  // This is a temporary hack.  I don't use the trntype field in importing at all,
+  // but libofx requires it to be there in order to import the file.
+  .element("TRNTYPE", "DEBIT")
+  .element("DTPOSTED", _t.postDate().toString(Qt::ISODate).remove(QRegExp("[^0-9]")))
+  .element("TRNAMT", s.value().formatMoney(QString(), 2));
 
-  if ( ! _t.bankID().isEmpty() )
-    result.element("FITID",_t.bankID());
+  if (! _t.bankID().isEmpty())
+    result.element("FITID", _t.bankID());
   else
-    result.element("FITID",_t.id());
+    result.element("FITID", _t.id());
 
-  if ( ! s.number().isEmpty() )
-    result.element("CHECKNUM",s.number());
+  if (! s.number().isEmpty())
+    result.element("CHECKNUM", s.number());
 
-  if ( ! s.payeeId().isEmpty() )
-    result.element("NAME",file->payee(s.payeeId()).name());
+  if (! s.payeeId().isEmpty())
+    result.element("NAME", file->payee(s.payeeId()).name());
 
-  if ( ! _t.memo().isEmpty() )
-    result.element("MEMO",_t.memo());
+  if (! _t.memo().isEmpty())
+    result.element("MEMO", _t.memo());
 
   return result;
 }
 
 MyMoneyOfxConnector::Tag MyMoneyOfxConnector::investmentTransaction(const MyMoneyTransaction& _t) const
 {
- MyMoneyFile* file = MyMoneyFile::instance();
+  MyMoneyFile* file = MyMoneyFile::instance();
 
   //Use this version for inv transactions
-  MyMoneySplit s = _t.splitByAccount( m_account.accountList(), true );
+  MyMoneySplit s = _t.splitByAccount(m_account.accountList(), true);
 
   QByteArray stockid = file->account(s.accountId()).currencyId();
 
   Tag invtran("INVTRAN");
-  invtran.element("FITID",_t.id()).element("DTTRADE",_t.postDate().toString(Qt::ISODate).remove(QRegExp("[^0-9]")));
-  if ( !_t.memo().isEmpty() )
-    invtran.element("MEMO",_t.memo());
+  invtran.element("FITID", _t.id()).element("DTTRADE", _t.postDate().toString(Qt::ISODate).remove(QRegExp("[^0-9]")));
+  if (!_t.memo().isEmpty())
+    invtran.element("MEMO", _t.memo());
 
-  if ( s.action() == MyMoneySplit::ActionBuyShares )
-  {
-    if ( s.shares().isNegative() )
-    {
+  if (s.action() == MyMoneySplit::ActionBuyShares) {
+    if (s.shares().isNegative()) {
       return Tag("SELLSTOCK")
-        .subtag(Tag("INVSELL")
-          .subtag(invtran)
-          .subtag(Tag("SECID").element("UNIQUEID",stockid).element("UNIQUEIDTYPE","KMYMONEY"))
-          .element("UNITS",QString(((s.shares())).formatMoney(QString(),2)).remove(QRegExp("[^0-9.\\-]")))
-          .element("UNITPRICE",QString((s.value()/s.shares()).formatMoney(QString(),2)).remove(QRegExp("[^0-9.]")))
-          .element("TOTAL",QString((-s.value()).formatMoney(QString(),2)).remove(QRegExp("[^0-9.\\-]")))
-          .element("SUBACCTSEC","CASH")
-          .element("SUBACCTFUND","CASH"))
-        .element("SELLTYPE","SELL");
-    }
-    else
-    {
+             .subtag(Tag("INVSELL")
+                     .subtag(invtran)
+                     .subtag(Tag("SECID").element("UNIQUEID", stockid).element("UNIQUEIDTYPE", "KMYMONEY"))
+                     .element("UNITS", QString(((s.shares())).formatMoney(QString(), 2)).remove(QRegExp("[^0-9.\\-]")))
+                     .element("UNITPRICE", QString((s.value() / s.shares()).formatMoney(QString(), 2)).remove(QRegExp("[^0-9.]")))
+                     .element("TOTAL", QString((-s.value()).formatMoney(QString(), 2)).remove(QRegExp("[^0-9.\\-]")))
+                     .element("SUBACCTSEC", "CASH")
+                     .element("SUBACCTFUND", "CASH"))
+             .element("SELLTYPE", "SELL");
+    } else {
       return Tag("BUYSTOCK")
-        .subtag(Tag("INVBUY")
-          .subtag(invtran)
-          .subtag(Tag("SECID").element("UNIQUEID",stockid).element("UNIQUEIDTYPE","KMYMONEY"))
-          .element("UNITS",QString((s.shares()).formatMoney(QString(),2)).remove(QRegExp("[^0-9.\\-]")))
-          .element("UNITPRICE",QString((s.value()/s.shares()).formatMoney(QString(),2)).remove(QRegExp("[^0-9.]")))
-          .element("TOTAL",QString((-(s.value())).formatMoney(QString(),2)).remove(QRegExp("[^0-9.\\-]")))
-          .element("SUBACCTSEC","CASH")
-          .element("SUBACCTFUND","CASH"))
-        .element("BUYTYPE","BUY");
+             .subtag(Tag("INVBUY")
+                     .subtag(invtran)
+                     .subtag(Tag("SECID").element("UNIQUEID", stockid).element("UNIQUEIDTYPE", "KMYMONEY"))
+                     .element("UNITS", QString((s.shares()).formatMoney(QString(), 2)).remove(QRegExp("[^0-9.\\-]")))
+                     .element("UNITPRICE", QString((s.value() / s.shares()).formatMoney(QString(), 2)).remove(QRegExp("[^0-9.]")))
+                     .element("TOTAL", QString((-(s.value())).formatMoney(QString(), 2)).remove(QRegExp("[^0-9.\\-]")))
+                     .element("SUBACCTSEC", "CASH")
+                     .element("SUBACCTFUND", "CASH"))
+             .element("BUYTYPE", "BUY");
     }
-  }
-  else if ( s.action() == MyMoneySplit::ActionReinvestDividend )
-  {
+  } else if (s.action() == MyMoneySplit::ActionReinvestDividend) {
     // Should the TOTAL tag really be negative for a REINVEST?  That's very strange, but
     // it's what they look like coming from my bank, and I can't find any information to refute it.
 
     return Tag("REINVEST")
-      .subtag(invtran)
-      .subtag(Tag("SECID").element("UNIQUEID",stockid).element("UNIQUEIDTYPE","KMYMONEY"))
-      .element("INCOMETYPE","DIV")
-      .element("TOTAL",QString((-s.value()).formatMoney(QString(),2)).remove(QRegExp("[^0-9.\\-]")))
-      .element("SUBACCTSEC","CASH")
-      .element("UNITS",QString((s.shares()).formatMoney(QString(),2)).remove(QRegExp("[^0-9.\\-]")))
-      .element("UNITPRICE",QString((s.value()/s.shares()).formatMoney(QString(),2)).remove(QRegExp("[^0-9.]")));
-  }
-  else if ( s.action() == MyMoneySplit::ActionDividend )
-  {
+           .subtag(invtran)
+           .subtag(Tag("SECID").element("UNIQUEID", stockid).element("UNIQUEIDTYPE", "KMYMONEY"))
+           .element("INCOMETYPE", "DIV")
+           .element("TOTAL", QString((-s.value()).formatMoney(QString(), 2)).remove(QRegExp("[^0-9.\\-]")))
+           .element("SUBACCTSEC", "CASH")
+           .element("UNITS", QString((s.shares()).formatMoney(QString(), 2)).remove(QRegExp("[^0-9.\\-]")))
+           .element("UNITPRICE", QString((s.value() / s.shares()).formatMoney(QString(), 2)).remove(QRegExp("[^0-9.]")));
+  } else if (s.action() == MyMoneySplit::ActionDividend) {
     // find the split with the category, which has the actual amount of the dividend
     Q3ValueList<MyMoneySplit> splits = _t.splits();
     Q3ValueList<MyMoneySplit>::const_iterator it_split = splits.begin();
     bool found = false;
-    while( it_split != splits.end() )
-    {
+    while (it_split != splits.end()) {
       QByteArray accid = (*it_split).accountId();
       MyMoneyAccount acc = file->account(accid);
-      if ( acc.accountType() == MyMoneyAccount::Income || acc.accountType() == MyMoneyAccount::Expense )
-      {
+      if (acc.accountType() == MyMoneyAccount::Income || acc.accountType() == MyMoneyAccount::Expense) {
         found = true;
         break;
       }
       ++it_split;
     }
 
-    if ( found )
+    if (found)
       return Tag("INCOME")
-        .subtag(invtran)
-        .subtag(Tag("SECID").element("UNIQUEID",stockid).element("UNIQUEIDTYPE","KMYMONEY"))
-        .element("INCOMETYPE","DIV")
-        .element("TOTAL",QString((-(*it_split).value()).formatMoney(QString(),2)).remove(QRegExp("[^0-9\\.\\-]")))
-        .element("SUBACCTSEC","CASH")
-        .element("SUBACCTFUND","CASH");
+             .subtag(invtran)
+             .subtag(Tag("SECID").element("UNIQUEID", stockid).element("UNIQUEIDTYPE", "KMYMONEY"))
+             .element("INCOMETYPE", "DIV")
+             .element("TOTAL", QString((-(*it_split).value()).formatMoney(QString(), 2)).remove(QRegExp("[^0-9\\.\\-]")))
+             .element("SUBACCTSEC", "CASH")
+             .element("SUBACCTFUND", "CASH");
     else
-      return Tag("ERROR").element("DETAILS","Unable to determine the amount of this income transaction.");
+      return Tag("ERROR").element("DETAILS", "Unable to determine the amount of this income transaction.");
   }
 
   //FIXME: Do something useful with these errors
-  return Tag("ERROR").element("DETAILS","This transaction contains an unsupported action type");
+  return Tag("ERROR").element("DETAILS", "This transaction contains an unsupported action type");
 }
 #endif

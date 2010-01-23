@@ -47,16 +47,14 @@
 
 /** Simple constructor */
 KCsvProgressDlg::KCsvProgressDlg(int type, MyMoneyAccount *account, QWidget *parent)
- : KCsvProgressDlgDecl(parent)
+    : KCsvProgressDlgDecl(parent)
 {
   m_nType = type;
-  if (m_nType==0)
-  {
+  if (m_nType == 0) {
     m_kmymoneydateEnd->setEnabled(false);
     m_kmymoneydateStart->setEnabled(false);
     m_qbuttonRun->setText(i18n("&Import"));
-  }
-  else
+  } else
     m_qbuttonRun->setText(i18n("&Export"));
 
   m_mymoneyaccount = account;
@@ -68,7 +66,7 @@ KCsvProgressDlg::KCsvProgressDlg(int type, MyMoneyAccount *account, QWidget *par
   connect(m_qbuttonBrowse, SIGNAL(clicked()), this, SLOT(slotBrowseClicked()));
   connect(m_qbuttonRun, SIGNAL(clicked()), this, SLOT(slotRunClicked()));
   connect(m_qlineeditFile, SIGNAL(textChanged(const QString&)), this,
-    SLOT(slotFileTextChanged(const QString&)));
+          SLOT(slotFileTextChanged(const QString&)));
   connect(m_qbuttonOk, SIGNAL(clicked()), this, SLOT(accept()));
 }
 
@@ -81,113 +79,111 @@ KCsvProgressDlg::~KCsvProgressDlg()
 /** Perform the export process */
 void KCsvProgressDlg::performExport(void)
 {
-/*
-  // Do some validation on the inputs.
-  if (m_qlineeditFile->text().isEmpty()) {
-    KMessageBox::information(this, i18n("Please enter the path to the CSV file"), i18n("Export CSV"));
-    m_qlineeditFile->setFocus();
-    return;
-  }
-
-  QString strFile = m_qlineeditFile->text();
-  if(KMyMoneyUtils::appendCorrectFileExt(strFile, QString("csv")))
-    m_qlineeditFile->setText(strFile);
-
-  if (m_kmymoneydateEnd->getQDate() < m_kmymoneydateStart->getQDate()) {
-    KMessageBox::information(this, i18n("Please enter a start date lower than the end date."));
-    return;
-  }
-
-  QFile qfile(m_qlineeditFile->text());
-  if (!qfile.open(QIODevice::WriteOnly)) {
-    KMessageBox::error(this, i18n("Unable to open export file for writing."));
-    return;
-  }
-  qfile.close();
-
-  m_qlabelAccount->setText(m_mymoneyaccount->name());
-  m_qlabelTransaction->setText(QString("0") + i18n(" of ") + QString::number(m_mymoneyaccount->transactionCount()));
-  m_qprogressbar->setTotalSteps(m_mymoneyaccount->transactionCount());
-
-  // Make sure we have an account to operate on
-  if (m_mymoneyaccount) {
-    // Connect to the provided signals in MyMoneyAccount
-    // These signals will be emitted at appropriate times.
-    connect(m_mymoneyaccount, SIGNAL(signalProgressCount(int)), m_qprogressbar, SLOT(setTotalSteps(int)));
-    connect(m_mymoneyaccount, SIGNAL(signalProgress(int)), this, SLOT(slotSetProgress(int)));
-
-    int nTransCount = 0;
-
-    // Do the actual write
-    if (!m_mymoneyaccount->writeCSVFile(m_qlineeditFile->text(), m_kmymoneydateStart->getQDate(),
-          m_kmymoneydateEnd->getQDate(), nTransCount)) {
-      KMessageBox::error(this, i18n("Error occurred whilst exporting to csv file."), i18n("Export CSV"));
+  /*
+    // Do some validation on the inputs.
+    if (m_qlineeditFile->text().isEmpty()) {
+      KMessageBox::information(this, i18n("Please enter the path to the CSV file"), i18n("Export CSV"));
+      m_qlineeditFile->setFocus();
+      return;
     }
-    else {
-      QString qstringPrompt = i18n("Export finished successfully.\n\n");
-      qstringPrompt += i18n("Number of transactions exported ");
-      qstringPrompt += QString::number(nTransCount);
-      qstringPrompt += ".";
-      KMessageBox::information(this, qstringPrompt, i18n("Export CSV"));
+
+    QString strFile = m_qlineeditFile->text();
+    if(KMyMoneyUtils::appendCorrectFileExt(strFile, QString("csv")))
+      m_qlineeditFile->setText(strFile);
+
+    if (m_kmymoneydateEnd->getQDate() < m_kmymoneydateStart->getQDate()) {
+      KMessageBox::information(this, i18n("Please enter a start date lower than the end date."));
+      return;
     }
-  }
-*/
+
+    QFile qfile(m_qlineeditFile->text());
+    if (!qfile.open(QIODevice::WriteOnly)) {
+      KMessageBox::error(this, i18n("Unable to open export file for writing."));
+      return;
+    }
+    qfile.close();
+
+    m_qlabelAccount->setText(m_mymoneyaccount->name());
+    m_qlabelTransaction->setText(QString("0") + i18n(" of ") + QString::number(m_mymoneyaccount->transactionCount()));
+    m_qprogressbar->setTotalSteps(m_mymoneyaccount->transactionCount());
+
+    // Make sure we have an account to operate on
+    if (m_mymoneyaccount) {
+      // Connect to the provided signals in MyMoneyAccount
+      // These signals will be emitted at appropriate times.
+      connect(m_mymoneyaccount, SIGNAL(signalProgressCount(int)), m_qprogressbar, SLOT(setTotalSteps(int)));
+      connect(m_mymoneyaccount, SIGNAL(signalProgress(int)), this, SLOT(slotSetProgress(int)));
+
+      int nTransCount = 0;
+
+      // Do the actual write
+      if (!m_mymoneyaccount->writeCSVFile(m_qlineeditFile->text(), m_kmymoneydateStart->getQDate(),
+            m_kmymoneydateEnd->getQDate(), nTransCount)) {
+        KMessageBox::error(this, i18n("Error occurred whilst exporting to csv file."), i18n("Export CSV"));
+      }
+      else {
+        QString qstringPrompt = i18n("Export finished successfully.\n\n");
+        qstringPrompt += i18n("Number of transactions exported ");
+        qstringPrompt += QString::number(nTransCount);
+        qstringPrompt += ".";
+        KMessageBox::information(this, qstringPrompt, i18n("Export CSV"));
+      }
+    }
+  */
 }
 
 /** perform the import process */
 void KCsvProgressDlg::performImport(void)
 {
-/*
-  // Do some validation on the inputs.
-  if (m_qlineeditFile->text().isEmpty()) {
-    KMessageBox::information(this, i18n("Please enter the path to the CSV file"), i18n("Import CSV"));
-    m_qlineeditFile->setFocus();
-    return;
-  }
-
-  QFile qfile(m_qlineeditFile->text());
-  if (!qfile.open(QIODevice::ReadOnly)) {
-    KMessageBox::error(this, i18n("Unable to open import file for reading."));
-    return;
-  }
-  qfile.close();
-
-  m_qlabelAccount->setText(m_mymoneyaccount->name());
-
-  // Make sure we have an account to operate on
-  if (m_mymoneyaccount) {
-    // Connect to the provided signals in MyMoneyAccount
-    // These signals will be emitted at appropriate times.
-    connect(m_mymoneyaccount, SIGNAL(signalProgressCount(int)), m_qprogressbar, SLOT(setTotalSteps(int)));
-    connect(m_mymoneyaccount, SIGNAL(signalProgress(int)), this, SLOT(slotSetProgress(int)));
-
-    int nTransCount = 0;
-
-    // Do the actual write
-    if (!m_mymoneyaccount->readCSVFile(m_qlineeditFile->text(), nTransCount)) {
-      KMessageBox::error(this, i18n("Error occurred whilst importing csv file."), i18n("Import CSV"));
+  /*
+    // Do some validation on the inputs.
+    if (m_qlineeditFile->text().isEmpty()) {
+      KMessageBox::information(this, i18n("Please enter the path to the CSV file"), i18n("Import CSV"));
+      m_qlineeditFile->setFocus();
+      return;
     }
-    else {
-      QString qstringPrompt = i18n("Import finished successfully.\n\n");
-      qstringPrompt += i18n("Number of transactions imported ");
-      qstringPrompt += QString::number(nTransCount);
-      qstringPrompt += ".";
-      KMessageBox::information(this, qstringPrompt, i18n("Import CSV"));
+
+    QFile qfile(m_qlineeditFile->text());
+    if (!qfile.open(QIODevice::ReadOnly)) {
+      KMessageBox::error(this, i18n("Unable to open import file for reading."));
+      return;
     }
-  }
-*/
+    qfile.close();
+
+    m_qlabelAccount->setText(m_mymoneyaccount->name());
+
+    // Make sure we have an account to operate on
+    if (m_mymoneyaccount) {
+      // Connect to the provided signals in MyMoneyAccount
+      // These signals will be emitted at appropriate times.
+      connect(m_mymoneyaccount, SIGNAL(signalProgressCount(int)), m_qprogressbar, SLOT(setTotalSteps(int)));
+      connect(m_mymoneyaccount, SIGNAL(signalProgress(int)), this, SLOT(slotSetProgress(int)));
+
+      int nTransCount = 0;
+
+      // Do the actual write
+      if (!m_mymoneyaccount->readCSVFile(m_qlineeditFile->text(), nTransCount)) {
+        KMessageBox::error(this, i18n("Error occurred whilst importing csv file."), i18n("Import CSV"));
+      }
+      else {
+        QString qstringPrompt = i18n("Import finished successfully.\n\n");
+        qstringPrompt += i18n("Number of transactions imported ");
+        qstringPrompt += QString::number(nTransCount);
+        qstringPrompt += ".";
+        KMessageBox::information(this, qstringPrompt, i18n("Import CSV"));
+      }
+    }
+  */
 }
 
 /** Called when the user clicks on the Browser button */
 void KCsvProgressDlg::slotBrowseClicked()
 {
-  QString newName = KFileDialog::getSaveFileName(KUrl(),"*.CSV",this);
-  if (!newName.isEmpty())
-  {
+  QString newName = KFileDialog::getSaveFileName(KUrl(), "*.CSV", this);
+  if (!newName.isEmpty()) {
     m_qlineeditFile->setText(newName);
     m_qbuttonRun->setEnabled(true);
-  }
-  else
+  } else
     m_qbuttonRun->setEnabled(false);
 }
 
@@ -195,7 +191,7 @@ void KCsvProgressDlg::slotBrowseClicked()
 void KCsvProgressDlg::slotRunClicked()
 {
   m_qgroupbox->setEnabled(true);
-  if (m_nType==0)
+  if (m_nType == 0)
     performImport();
   else
     performExport();
@@ -215,10 +211,10 @@ void KCsvProgressDlg::readConfig(void)
 {
   KSharedConfigPtr kconfig = KGlobal::config();
   KConfigGroup grp = kconfig->group("Last Use Settings");
-  m_kmymoneydateStart->setDate(grp.readEntry("KCsvProgressDlg_StartDate",QDate()));
-  m_kmymoneydateEnd->setDate(grp.readEntry("KCsvProgressDlg_EndDate",QDate()));
+  m_kmymoneydateStart->setDate(grp.readEntry("KCsvProgressDlg_StartDate", QDate()));
+  m_kmymoneydateEnd->setDate(grp.readEntry("KCsvProgressDlg_EndDate", QDate()));
   m_qlineeditFile->setText(grp.readEntry("KCsvProgressDlg_LastFile", ""));
-  if (m_qlineeditFile->text().length()>=1)
+  if (m_qlineeditFile->text().length() >= 1)
     m_qbuttonRun->setEnabled(true);
   else
     m_qbuttonRun->setEnabled(false);

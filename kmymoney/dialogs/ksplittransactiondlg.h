@@ -48,8 +48,8 @@
 class KSplitCorrectionDlgDecl : public QDialog, public Ui::KSplitCorrectionDlgDecl
 {
 public:
-  KSplitCorrectionDlgDecl( QWidget *parent ) : QDialog( parent ) {
-    setupUi( this );
+  KSplitCorrectionDlgDecl(QWidget *parent) : QDialog(parent) {
+    setupUi(this);
   }
 };
 
@@ -60,8 +60,8 @@ public:
 class KSplitTransactionDlgDecl : public QDialog, public Ui::KSplitTransactionDlgDecl
 {
 public:
-  KSplitTransactionDlgDecl( QWidget *parent ) : QDialog( parent ) {
-    setupUi( this );
+  KSplitTransactionDlgDecl(QWidget *parent) : QDialog(parent) {
+    setupUi(this);
   }
 };
 class KSplitTransactionDlg : public KSplitTransactionDlgDecl
@@ -88,7 +88,9 @@ public:
     *         the construction of this object and modified using the
     *         dialog.
     */
-  const MyMoneyTransaction& transaction(void) const { return m_transaction; };
+  const MyMoneyTransaction& transaction(void) const {
+    return m_transaction;
+  };
 
   /**
     * This method calculates the difference between the split that references

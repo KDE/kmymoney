@@ -34,8 +34,8 @@
 class KLoadTemplateDlgDecl : public QDialog, public Ui::KLoadTemplateDlgDecl
 {
 public:
-  KLoadTemplateDlgDecl( QWidget *parent ) : QDialog( parent ) {
-    setupUi( this );
+  KLoadTemplateDlgDecl(QWidget *parent) : QDialog(parent) {
+    setupUi(this);
   }
 };
 
@@ -44,13 +44,13 @@ class KLoadTemplateDlg : public KLoadTemplateDlgDecl
 {
   Q_OBJECT
 
-  public:
-    KLoadTemplateDlg(QWidget *parent = 0);
+public:
+  KLoadTemplateDlg(QWidget *parent = 0);
 
-    QList<MyMoneyTemplate> templates(void) const;
+  QList<MyMoneyTemplate> templates(void) const;
 
-  private slots:
-    void slotHelp(void);
+private slots:
+  void slotHelp(void);
 };
 
 #endif

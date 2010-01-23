@@ -42,14 +42,17 @@
   * @author Michael Edwardes
   */
 
-class KRecentFileItem : public Q3IconViewItem  {
-public: 
+class KRecentFileItem : public Q3IconViewItem
+{
+public:
   KRecentFileItem(const QString& url, Q3IconView* parent, const QString& text, const QPixmap& icon);
   ~KRecentFileItem();
-  QString fileURL(void) const { return m_url; }
+  QString fileURL(void) const {
+    return m_url;
+  }
 
-  bool move( int x, int y );
-  
+  bool move(int x, int y);
+
 private:
   QString m_url;
   QWidget* m_parent;

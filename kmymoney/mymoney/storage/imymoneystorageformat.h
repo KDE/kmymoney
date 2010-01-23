@@ -39,15 +39,15 @@ class Q3ProgressDialog;
 // Project Includes
 
 class IMyMoneySerialize;
-  
+
 
 class IMyMoneyStorageFormat
 {
-public: 
-	IMyMoneyStorageFormat();
-	virtual ~IMyMoneyStorageFormat();
+public:
+  IMyMoneyStorageFormat();
+  virtual ~IMyMoneyStorageFormat();
 
-    enum fileVersionDirectionType {
+  enum fileVersionDirectionType {
     Reading = 0,          /**< version of file to be read */
     Writing = 1           /**< version to be used when writing a file */
   };

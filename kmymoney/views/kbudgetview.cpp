@@ -63,8 +63,8 @@
 
 // *** KBudgetListItem Implementation ***
 KBudgetListItem::KBudgetListItem(K3ListView *parent, const MyMoneyBudget& budget) :
-  K3ListViewItem(parent),
-  m_budget(budget)
+    K3ListViewItem(parent),
+    m_budget(budget)
 {
   setText(0, budget.name());
   setText(1, QString("%1").arg(budget.budgetStart().year()));
@@ -96,51 +96,51 @@ const int KBudgetView::m_iBudgetYearsAhead = 5;
 const int KBudgetView::m_iBudgetYearsBack = 3;
 
 KBudgetView::KBudgetView(QWidget *parent) :
-  KBudgetViewDecl(parent),
-  m_needReload(false),
-  m_inSelection(false)
+    KBudgetViewDecl(parent),
+    m_needReload(false),
+    m_inSelection(false)
 {
   m_accountTree->setSorting(-1);
   m_budgetList->setSorting(0);
 
-  KGuiItem newButtonItem( QString(""),
-                             KIcon("budget-add"),
-                             i18n("Creates a new budget"),
-                             i18n("Use this to create a new empty budget."));
+  KGuiItem newButtonItem(QString(""),
+                         KIcon("budget-add"),
+                         i18n("Creates a new budget"),
+                         i18n("Use this to create a new empty budget."));
   m_newButton->setGuiItem(newButtonItem);
-  m_newButton->setToolTip( newButtonItem.toolTip());
+  m_newButton->setToolTip(newButtonItem.toolTip());
 
-  KGuiItem renameButtonItem( QString(""),
-                          KIcon("edit-rename"),
-                          i18n("Rename the current selected budget"),
-                          i18n("Use this to start renaming the selected budget."));
+  KGuiItem renameButtonItem(QString(""),
+                            KIcon("edit-rename"),
+                            i18n("Rename the current selected budget"),
+                            i18n("Use this to start renaming the selected budget."));
   m_renameButton->setGuiItem(renameButtonItem);
-  m_renameButton->setToolTip( renameButtonItem.toolTip());
+  m_renameButton->setToolTip(renameButtonItem.toolTip());
 
-  KGuiItem deleteButtonItem( QString(""),
-                             KIcon("budget-delete"),
-                             i18n("Delete the current selected budget"),
-                             i18n("Use this to delete the selected budget."));
+  KGuiItem deleteButtonItem(QString(""),
+                            KIcon("budget-delete"),
+                            i18n("Delete the current selected budget"),
+                            i18n("Use this to delete the selected budget."));
   m_deleteButton->setGuiItem(deleteButtonItem);
-  m_deleteButton->setToolTip( deleteButtonItem.toolTip());
+  m_deleteButton->setToolTip(deleteButtonItem.toolTip());
 
-  KGuiItem updateButtonItem( QString(""),
-                             KIcon("document-save"),
-                             i18n("Accepts the entered values and stores the budget"),
-                             i18n("Use this to store the modified data."));
+  KGuiItem updateButtonItem(QString(""),
+                            KIcon("document-save"),
+                            i18n("Accepts the entered values and stores the budget"),
+                            i18n("Use this to store the modified data."));
   m_updateButton->setGuiItem(updateButtonItem);
-  m_updateButton->setToolTip( updateButtonItem.toolTip());
+  m_updateButton->setToolTip(updateButtonItem.toolTip());
 
-  KGuiItem resetButtonItem( QString(""),
-                             KIcon("edit-undo"),
-                             i18n("Revert budget to last saved state"),
-                             i18n("Use this to discard the modified data."));
+  KGuiItem resetButtonItem(QString(""),
+                           KIcon("edit-undo"),
+                           i18n("Revert budget to last saved state"),
+                           i18n("Use this to discard the modified data."));
   m_resetButton->setGuiItem(resetButtonItem);
-  m_resetButton->setToolTip( resetButtonItem.toolTip());
+  m_resetButton->setToolTip(resetButtonItem.toolTip());
 
   connect(m_budgetList, SIGNAL(contextMenu(K3ListView*, Q3ListViewItem* , const QPoint&)),
-    this, SLOT(slotOpenContextMenu(K3ListView*, Q3ListViewItem*, const QPoint&)));
-  connect(m_budgetList, SIGNAL(itemRenamed(Q3ListViewItem*,int,const QString&)), this, SLOT(slotRenameBudget(Q3ListViewItem*,int,const QString&)));
+          this, SLOT(slotOpenContextMenu(K3ListView*, Q3ListViewItem*, const QPoint&)));
+  connect(m_budgetList, SIGNAL(itemRenamed(Q3ListViewItem*, int, const QString&)), this, SLOT(slotRenameBudget(Q3ListViewItem*, int, const QString&)));
   connect(m_budgetList, SIGNAL(selectionChanged()), this, SLOT(slotSelectBudget()));
 
   connect(m_cbBudgetSubaccounts, SIGNAL(clicked()), this, SLOT(cb_includesSubaccounts_clicked()));
@@ -170,7 +170,7 @@ KBudgetView::KBudgetView(QWidget *parent) :
 
   KConfigGroup grp = KGlobal::config()->group("Last Use Settings");
   QList<int> sizes = grp.readEntry("KBudgetViewSplitterSize", QList<int>());
-  if(sizes.size() == 2)
+  if (sizes.size() == 2)
     m_splitter->setSizes(sizes);
 }
 
@@ -185,7 +185,7 @@ void KBudgetView::showEvent(QShowEvent * event)
 {
   QTimer::singleShot(50, this, SLOT(slotRearrange()));
   m_accountTree->restoreLayout("Budget Account View Settings");
-  if(m_needReload) {
+  if (m_needReload) {
     slotRefreshView();
   }
   KBudgetViewDecl::showEvent(event);
@@ -233,22 +233,21 @@ void KBudgetView::loadBudgets(void)
   int iStartYear = date.year() - m_iBudgetYearsBack;
 
   m_yearList.clear();
-  for (int i=0; i<m_iBudgetYearsAhead + m_iBudgetYearsBack; i++)
-    m_yearList += QString::number(iStartYear+i);
+  for (int i = 0; i < m_iBudgetYearsAhead + m_iBudgetYearsBack; i++)
+    m_yearList += QString::number(iStartYear + i);
 
   KBudgetListItem* currentItem = 0;
 
   QList<MyMoneyBudget> list = MyMoneyFile::instance()->budgetList();
   QList<MyMoneyBudget>::ConstIterator it;
-  for (it = list.constBegin(); it != list.constEnd(); ++it)
-  {
+  for (it = list.constBegin(); it != list.constEnd(); ++it) {
     KBudgetListItem* item = new KBudgetListItem(m_budgetList, *it);
 
     // create a list of unique years
     if (m_yearList.indexOf(QString::number((*it).budgetStart().year())) == -1)
       m_yearList += QString::number((*it).budgetStart().year());
 
-    if(item->budget().id() == id) {
+    if (item->budget().id() == id) {
       m_budget = (*it);
       currentItem = item;
       item->setSelected(true);
@@ -280,10 +279,10 @@ void KBudgetView::ensureBudgetVisible(const QString& id)
 {
   for (Q3ListViewItem * item = m_budgetList->firstChild(); item; item = item->itemBelow()) {
     KBudgetListItem* p = dynamic_cast<KBudgetListItem*>(item);
-    if(p && p->budget().id() == id) {
-      if(p->itemAbove())
+    if (p && p->budget().id() == id) {
+      if (p->itemAbove())
         m_budgetList->ensureItemVisible(p->itemAbove());
-      if(p->itemBelow())
+      if (p->itemBelow())
         m_budgetList->ensureItemVisible(p->itemBelow());
 
       m_budgetList->setCurrentItem(p);      // active item and deselect all others
@@ -296,8 +295,8 @@ void KBudgetView::ensureBudgetVisible(const QString& id)
 
 void KBudgetView::slotRefreshView(void)
 {
-  if(isVisible()) {
-    if(m_inSelection)
+  if (isVisible()) {
+    if (m_inSelection)
       QTimer::singleShot(0, this, SLOT(slotRefreshView()));
     else {
       loadBudgets();
@@ -331,9 +330,9 @@ void KBudgetView::loadAccounts(void)
 
   // keep a map of all 'expanded' accounts
   Q3ListViewItemIterator it_lvi(m_accountTree);
-  while(it_lvi.current()) {
+  while (it_lvi.current()) {
     item = dynamic_cast<KMyMoneyAccountTreeBaseItem*>(it_lvi.current());
-    if(item && item->isOpen()) {
+    if (item && item->isOpen()) {
       isOpen[item->id()] = true;
     }
     ++it_lvi;
@@ -377,7 +376,7 @@ void KBudgetView::loadAccounts(void)
     haveUnusedBudgets |= loadSubAccounts(m_expenseItem, expSubAcctList, m_budget);
     m_expenseItem->setSelectable(false);
 
-  } catch(MyMoneyException *e) {
+  } catch (MyMoneyException *e) {
     kDebug(2) << "Problem in budgetview: " << e->what();
     delete e;
   }
@@ -385,12 +384,12 @@ void KBudgetView::loadAccounts(void)
   // scan through the list of accounts and re-expand those that were
   // expanded and re-select the one that was probably selected before
   it_lvi = Q3ListViewItemIterator(m_accountTree);
-  while(it_lvi.current()) {
+  while (it_lvi.current()) {
     item = dynamic_cast<KMyMoneyAccountTreeBaseItem*>(it_lvi.current());
-    if(item) {
-      if(item->id() == selectedItemId)
+    if (item) {
+      if (item->id() == selectedItemId)
         m_accountTree->setSelected(item, true);
-      if(isOpen.find(item->id()) != isOpen.end())
+      if (isOpen.find(item->id()) != isOpen.end())
         item->setOpen(true);
     }
     ++it_lvi;
@@ -417,42 +416,42 @@ bool KBudgetView::loadSubAccounts(KMyMoneyAccountTreeBudgetItem* parent, QString
 
   //sort the subaccount list
   //FIXME this is just a hack to order the accounts
-  if ( !accountList.isEmpty() ) {
+  if (!accountList.isEmpty()) {
     QMap<QString, MyMoneyAccount> accountMap;
     QList<MyMoneyAccount> alist;
-    file->accountList ( alist, accountList );
+    file->accountList(alist, accountList);
     accountList.clear();
     QList<MyMoneyAccount>::const_iterator it_ac;
-    for ( it_ac = alist.constBegin(); it_ac != alist.constEnd(); ++it_ac ) {
+    for (it_ac = alist.constBegin(); it_ac != alist.constEnd(); ++it_ac) {
       accountMap[(*it_ac).name()] = *it_ac;
     }
     QMap<QString, MyMoneyAccount>::const_iterator it_am;
-    for ( it_am = accountMap.constBegin(); it_am != accountMap.constEnd(); ++it_am ) {
+    for (it_am = accountMap.constBegin(); it_am != accountMap.constEnd(); ++it_am) {
       accountList.prepend((*it_am).id()); //use prepend instead of append otherwise account show up in ascending order
     }
   }
 
   QStringList::const_iterator it_a;
-  for(it_a = accountList.constBegin(); it_a != accountList.constEnd(); ++it_a) {
+  for (it_a = accountList.constBegin(); it_a != accountList.constEnd(); ++it_a) {
     const MyMoneyAccount& acc = file->account(*it_a);
     QList<MyMoneyPrice> prices;
     MyMoneySecurity security = file->baseCurrency();
     try {
-      if(acc.isInvest()) {
+      if (acc.isInvest()) {
         security = file->security(acc.currencyId());
         prices += file->price(acc.currencyId(), security.tradingCurrency());
-        if(security.tradingCurrency() != file->baseCurrency().id()) {
+        if (security.tradingCurrency() != file->baseCurrency().id()) {
           MyMoneySecurity sec = file->security(security.tradingCurrency());
           prices += file->price(sec.id(), file->baseCurrency().id());
         }
-      } else if(acc.currencyId() != file->baseCurrency().id()) {
-        if(acc.currencyId() != file->baseCurrency().id()) {
+      } else if (acc.currencyId() != file->baseCurrency().id()) {
+        if (acc.currencyId() != file->baseCurrency().id()) {
           security = file->security(acc.currencyId());
           prices += file->price(acc.currencyId(), file->baseCurrency().id());
         }
       }
 
-    } catch(MyMoneyException *e) {
+    } catch (MyMoneyException *e) {
       kDebug(2) << Q_FUNC_INFO << " caught exception while adding " << acc.name() << "[" << acc.id() << "]: " << e->what();
       delete e;
     }
@@ -466,9 +465,9 @@ bool KBudgetView::loadSubAccounts(KMyMoneyAccountTreeBudgetItem* parent, QString
 
     // In case of a budget which is unused and we are requested to suppress
     // the display of those,
-    if(acc.accountGroup() == MyMoneyAccount::Income
-    || acc.accountGroup() == MyMoneyAccount::Expense) {
-      if(m_hideUnusedButton->isEnabled() && m_hideUnusedButton->isChecked() && thisUnused) {
+    if (acc.accountGroup() == MyMoneyAccount::Income
+        || acc.accountGroup() == MyMoneyAccount::Expense) {
+      if (m_hideUnusedButton->isEnabled() && m_hideUnusedButton->isChecked() && thisUnused) {
         unused = true;
         delete item;
       }
@@ -483,12 +482,12 @@ void KBudgetView::askSave(void)
   // and ask to store the data
   if (m_updateButton->isEnabled()) {
     if (KMessageBox::questionYesNo(this, QString("<qt>%1</qt>").arg(
-        i18n("Do you want to save the changes for <b>%1</b>",m_budget.name())),
-             i18n("Save changes")) == KMessageBox::Yes) {
-               m_inSelection = true;
-               slotUpdateBudget();
-               m_inSelection = false;
-             }
+                                     i18n("Do you want to save the changes for <b>%1</b>", m_budget.name())),
+                                   i18n("Save changes")) == KMessageBox::Yes) {
+      m_inSelection = true;
+      slotUpdateBudget();
+      m_inSelection = false;
+    }
   }
 }
 
@@ -503,7 +502,7 @@ void KBudgetView::slotSelectBudget(void)
   KBudgetListItem* item;
   if (m_budget.id().isEmpty()) {
     item = dynamic_cast<KBudgetListItem*>(m_budgetList->firstChild());
-    if(item) {
+    if (item) {
       m_budgetList->blockSignals(true);
       m_budgetList->setSelected(item, true); // WRTODO das auch beim NewBudget machen
       m_budgetList->blockSignals(false);
@@ -516,7 +515,7 @@ void KBudgetView::slotSelectBudget(void)
 
   Q3ListViewItemIterator it_l(m_budgetList, Q3ListViewItemIterator::Selected);
   item = dynamic_cast<KBudgetListItem*>(it_l.current());
-  if(item) {
+  if (item) {
     m_budget = item->budget();
     m_accountTree->setEnabled(true);
   }
@@ -525,7 +524,7 @@ void KBudgetView::slotSelectBudget(void)
   loadAccounts();
 
   QList<MyMoneyBudget> budgetList;
-  if(!m_budget.id().isEmpty())
+  if (!m_budget.id().isEmpty())
     budgetList << m_budget;
   emit selectObjects(budgetList);
 }
@@ -533,9 +532,9 @@ void KBudgetView::slotSelectBudget(void)
 void KBudgetView::slotHideUnused(bool toggled)
 {
   // make sure we show all items for an empty budget
-  bool prevState=!toggled;
+  bool prevState = !toggled;
   slotRefreshHideUnusedButton();
-  if (prevState!=m_hideUnusedButton->isChecked())
+  if (prevState != m_hideUnusedButton->isChecked())
     loadAccounts();
 }
 
@@ -545,7 +544,7 @@ const MyMoneyBudget& KBudgetView::selectedBudget(void) const
 
   Q3ListViewItemIterator it_l(m_budgetList, Q3ListViewItemIterator::Selected);
   KBudgetListItem* item = dynamic_cast<KBudgetListItem*>(it_l.current());
-  if(item) {
+  if (item) {
     return item->budget();
   }
 
@@ -579,7 +578,7 @@ void KBudgetView::slotStartRename(void)
 {
   Q3ListViewItemIterator it_l(m_budgetList, Q3ListViewItemIterator::Selected);
   Q3ListViewItem* it_v;
-  if((it_v = it_l.current()) != 0) {
+  if ((it_v = it_l.current()) != 0) {
     it_v->startRename(0);
   }
 }
@@ -587,7 +586,7 @@ void KBudgetView::slotStartRename(void)
 // This variant is only called when a single budget is selected and renamed.
 void KBudgetView::slotRenameBudget(Q3ListViewItem* p , int /*col*/, const QString& txt)
 {
-  KBudgetListItem *pBudget = dynamic_cast<KBudgetListItem*> (p);
+  KBudgetListItem *pBudget = dynamic_cast<KBudgetListItem*>(p);
   if (!pBudget)
     return;
 
@@ -604,14 +603,13 @@ void KBudgetView::slotRenameBudget(Q3ListViewItem* p , int /*col*/, const QStrin
         MyMoneyFile::instance()->budgetByName(new_name);
         // the name already exists, ask the user whether he's sure to keep the name
         if (KMessageBox::questionYesNo(this,
-          i18n("A budget with the name '%1' already exists. It is not advisable to have "
-            "multiple budgets with the same identification name. Are you sure you would like "
-            "to rename the budget?",new_name)) != KMessageBox::Yes)
-        {
-          p->setText(0,pBudget->budget().name());
+                                       i18n("A budget with the name '%1' already exists. It is not advisable to have "
+                                            "multiple budgets with the same identification name. Are you sure you would like "
+                                            "to rename the budget?", new_name)) != KMessageBox::Yes) {
+          p->setText(0, pBudget->budget().name());
           return;
         }
-      } catch(MyMoneyException *e) {
+      } catch (MyMoneyException *e) {
         // all ok, the name is unique
         delete e;
       }
@@ -628,26 +626,25 @@ void KBudgetView::slotRenameBudget(Q3ListViewItem* p , int /*col*/, const QStrin
       // re-established. You cannot use pBudget beyond this point!!!
       ft.commit();
 
-    } catch(MyMoneyException *e) {
+    } catch (MyMoneyException *e) {
       KMessageBox::detailedSorry(0, i18n("Unable to modify budget"),
-        (e->what() + ' ' + i18n("thrown in") + ' ' + e->file()+ ":%1").arg(e->line()));
+                                 (e->what() + ' ' + i18n("thrown in") + ' ' + e->file() + ":%1").arg(e->line()));
       delete e;
     }
-  }
-  else {
+  } else {
     pBudget->setText(0, new_name);
   }
 }
 
 void KBudgetView::slotSelectAccount(Q3ListViewItem* item)
 {
-  if(item->listView() == m_accountTree) {
+  if (item->listView() == m_accountTree) {
     m_assignmentBox->setEnabled(false);
     KMyMoneyAccountTreeBudgetItem *account = selectedAccount();
     m_assignmentBox->setEnabled(account != 0);
 
-    if(account) {
-      if (m_budget.id().isEmpty() )
+    if (account) {
+      if (m_budget.id().isEmpty())
         return;
 
       QString id = account->id();
@@ -655,8 +652,8 @@ void KBudgetView::slotSelectAccount(Q3ListViewItem* item)
       m_cbBudgetSubaccounts->setChecked(m_budget.account(id).budgetSubaccounts());
       m_accountTotal->setValue(m_budget.account(id).totalBalance());
 
-      MyMoneyBudget::AccountGroup budgetAccount = m_budget.account( id );
-      if ( id != budgetAccount.id() ) {
+      MyMoneyBudget::AccountGroup budgetAccount = m_budget.account(id);
+      if (id != budgetAccount.id()) {
         budgetAccount.setBudgetLevel(MyMoneyBudget::AccountGroup::eMonthly);
       }
       m_budgetValue->setBudgetValues(m_budget, budgetAccount);
@@ -670,11 +667,11 @@ void KBudgetView::slotBudgetedAmountChanged(void)
     return;
 
   KMyMoneyAccountTreeBudgetItem *account;
-  if ((account=selectedAccount()) == NULL)
+  if ((account = selectedAccount()) == NULL)
     return;
 
   MyMoneyBudget::AccountGroup accountGroup = m_budget.account(account->id());
-  accountGroup.setId( account->id() );
+  accountGroup.setId(account->id());
   m_budgetValue->budgetValues(m_budget, accountGroup);
   m_budget.setAccount(accountGroup, account->id());
 
@@ -692,8 +689,7 @@ void KBudgetView::AccountEnter()
 
   //(ace) kCategoryWidget not currently defined
   KMyMoneyAccountTreeBudgetItem *item = NULL; //dynamic_cast<KMyMoneyAccountTreeBudgetItem*> (m_accountTree->findItem(m_leAccounts->selectedAccountId()));
-  if (item)
-  {
+  if (item) {
     m_accountTree->setCurrentItem(item);
     m_accountTree->setOpen(item, true);
   }
@@ -705,14 +701,14 @@ void KBudgetView::cb_includesSubaccounts_clicked()
   if (m_budget.id().isEmpty())
     return;
 
-  if(selectedAccount() != 0) {
+  if (selectedAccount() != 0) {
     QString accountID = selectedAccount()->id();
     // now, we get a reference to the accountgroup, to mofify its atribute,
     // and then put the resulting account group instead of the original
 
     MyMoneyBudget::AccountGroup auxAccount = m_budget.account(accountID);
-    auxAccount.setBudgetSubaccounts( m_cbBudgetSubaccounts->isChecked());
-    m_budget.setAccount( auxAccount, accountID);
+    auxAccount.setBudgetSubaccounts(m_cbBudgetSubaccounts->isChecked());
+    m_budget.setAccount(auxAccount, accountID);
 
     loadAccounts();
   }
@@ -729,9 +725,9 @@ void KBudgetView::slotResetBudget(void)
   try {
     m_budget = MyMoneyFile::instance()->budget(m_budget.id());
     loadAccounts();
-  } catch(MyMoneyException *e) {
+  } catch (MyMoneyException *e) {
     KMessageBox::detailedSorry(0, i18n("Unable to reset budget"),
-                               (e->what() + ' ' + i18n("thrown in") + ' ' + e->file()+ ":%1").arg(e->line()));
+                               (e->what() + ' ' + i18n("thrown in") + ' ' + e->file() + ":%1").arg(e->line()));
     delete e;
   }
 }
@@ -743,9 +739,9 @@ void KBudgetView::slotUpdateBudget(void)
     MyMoneyFile::instance()->modifyBudget(m_budget);
     ft.commit();
     slotRefreshHideUnusedButton();
-  } catch(MyMoneyException *e) {
+  } catch (MyMoneyException *e) {
     KMessageBox::detailedSorry(0, i18n("Unable to modify budget"),
-                               (e->what() + ' ' + i18n("thrown in") + ' ' + e->file()+ ":%1").arg(e->line()));
+                               (e->what() + ' ' + i18n("thrown in") + ' ' + e->file() + ":%1").arg(e->line()));
     delete e;
   }
 }

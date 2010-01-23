@@ -84,7 +84,9 @@ public:
   void setAutoCreatePayee(bool create);
   void setAskPayeeCategory(bool ask);
 
-  const MyMoneyAccount& account() const { return m_account; };
+  const MyMoneyAccount& account() const {
+    return m_account;
+  };
 
   void setProgressCallback(void(*callback)(int, int, const QString&));
 

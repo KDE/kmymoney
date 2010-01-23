@@ -55,8 +55,8 @@
 class KImportDlgDecl : public QDialog, public Ui::KImportDlgDecl
 {
 public:
-  KImportDlgDecl( QWidget *parent ) : QDialog( parent ) {
-    setupUi( this );
+  KImportDlgDecl(QWidget *parent) : QDialog(parent) {
+    setupUi(this);
   }
 };
 
@@ -75,11 +75,15 @@ public:
 
   /**
     */
-  const QString filename(void) const { return m_qlineeditFile->text(); };
+  const QString filename(void) const {
+    return m_qlineeditFile->text();
+  };
 
   /**
     */
-  const QString profile(void) const { return m_profileComboBox->currentText(); };
+  const QString profile(void) const {
+    return m_profileComboBox->currentText();
+  };
 
 protected slots:
   /** Called to let the user browse for a QIF file to import from. */

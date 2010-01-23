@@ -40,8 +40,8 @@
 
 #include "webpricequote.h"
 
-kMyMoneyOnlineQuoteConfig::kMyMoneyOnlineQuoteConfig(QWidget *parent )
-  : kMyMoneyOnlineQuoteConfigDecl(parent)
+kMyMoneyOnlineQuoteConfig::kMyMoneyOnlineQuoteConfig(QWidget *parent)
+    : kMyMoneyOnlineQuoteConfigDecl(parent)
 {
   QStringList groups = WebPriceQuote::quoteSources();
 
@@ -49,22 +49,22 @@ kMyMoneyOnlineQuoteConfig::kMyMoneyOnlineQuoteConfig(QWidget *parent )
 
   m_updateButton->setEnabled(false);
 
-  KGuiItem updateButtenItem( i18nc("To update online sources", "&Update" ),
-                    KIcon("dialog-ok"),
-                    i18n("Accepts the entered data and stores it"),
-                    i18n("Use this to accept the modified data."));
+  KGuiItem updateButtenItem(i18nc("To update online sources", "&Update"),
+                            KIcon("dialog-ok"),
+                            i18n("Accepts the entered data and stores it"),
+                            i18n("Use this to accept the modified data."));
   m_updateButton->setGuiItem(updateButtenItem);
 
-  KGuiItem deleteButtenItem( i18n( "&Delete" ),
-                      KIcon("edit-delete"),
-                      i18n("Delete the selected source entry"),
-                      i18n("Use this to delete the selected online source entry"));
+  KGuiItem deleteButtenItem(i18n("&Delete"),
+                            KIcon("edit-delete"),
+                            i18n("Delete the selected source entry"),
+                            i18n("Use this to delete the selected online source entry"));
   m_deleteButton->setGuiItem(deleteButtenItem);
 
-  KGuiItem newButtenItem( i18nc("New online source", "&New..." ),
-                      KIcon("document-new"),
-                      i18n("Create a new source entry for online quotes"),
-                      i18n("Use this to create a new entry for online quotes"));
+  KGuiItem newButtenItem(i18nc("New online source", "&New..."),
+                         KIcon("document-new"),
+                         i18n("Create a new source entry for online quotes"),
+                         i18n("Use this to create a new entry for online quotes"));
   m_newButton->setGuiItem(newButtenItem);
 
   connect(m_updateButton, SIGNAL(clicked()), this, SLOT(slotUpdateEntry()));
@@ -72,7 +72,7 @@ kMyMoneyOnlineQuoteConfig::kMyMoneyOnlineQuoteConfig(QWidget *parent )
 
   connect(m_quoteSourceList, SIGNAL(selectionChanged(Q3ListViewItem*)), this, SLOT(slotLoadWidgets(Q3ListViewItem*)));
   connect(m_quoteSourceList, SIGNAL(clicked(Q3ListViewItem*)), this, SLOT(slotLoadWidgets(Q3ListViewItem*)));
-  connect(m_quoteSourceList, SIGNAL(itemRenamed(Q3ListViewItem*,const QString&,int)), this, SLOT(slotEntryRenamed(Q3ListViewItem*,const QString&,int)));
+  connect(m_quoteSourceList, SIGNAL(itemRenamed(Q3ListViewItem*, const QString&, int)), this, SLOT(slotEntryRenamed(Q3ListViewItem*, const QString&, int)));
 
   connect(m_editURL, SIGNAL(textChanged(const QString&)), this, SLOT(slotEntryChanged()));
   connect(m_editSymbol, SIGNAL(textChanged(const QString&)), this, SLOT(slotEntryChanged()));
@@ -88,18 +88,18 @@ void kMyMoneyOnlineQuoteConfig::loadList(const bool updateResetList)
 {
   QStringList groups = WebPriceQuote::quoteSources();
 
-  if(updateResetList)
+  if (updateResetList)
     m_resetList.clear();
   m_quoteSourceList->clear();
   QStringList::Iterator it;
-  for(it = groups.begin(); it != groups.end(); ++it) {
+  for (it = groups.begin(); it != groups.end(); ++it) {
     new Q3ListViewItem(m_quoteSourceList, *it);
-    if(updateResetList)
+    if (updateResetList)
       m_resetList += WebPriceQuoteSource(*it);
   }
 
   Q3ListViewItem* first = m_quoteSourceList->firstChild();
-  if(first)
+  if (first)
     m_quoteSourceList->setSelected(first, true);
   slotLoadWidgets(first);
 
@@ -112,13 +112,13 @@ void kMyMoneyOnlineQuoteConfig::resetConfig(void)
   const QStringList groups = WebPriceQuote::quoteSources();
 
   // delete all currently defined entries
-  for(it = groups.constBegin(); it != groups.constEnd(); ++it) {
+  for (it = groups.constBegin(); it != groups.constEnd(); ++it) {
     WebPriceQuoteSource(*it).remove();
   }
 
   // and write back the one's from the reset list
   QList<WebPriceQuoteSource>::ConstIterator itr;
-  for(itr = m_resetList.constBegin(); itr != m_resetList.constEnd(); ++itr) {
+  for (itr = m_resetList.constBegin(); itr != m_resetList.constEnd(); ++itr) {
     (*itr).write();
   }
 
@@ -137,7 +137,7 @@ void kMyMoneyOnlineQuoteConfig::slotLoadWidgets(Q3ListViewItem* item)
   m_editDate->setText(QString());
   m_editDateFormat->setText(QString());
 
-  if(item) {
+  if (item) {
     m_currentItem = WebPriceQuoteSource(item->text(0));
     m_editURL->setText(m_currentItem.m_url);
     m_editSymbol->setText(m_currentItem.m_sym);
@@ -160,10 +160,10 @@ void kMyMoneyOnlineQuoteConfig::slotLoadWidgets(Q3ListViewItem* item)
 void kMyMoneyOnlineQuoteConfig::slotEntryChanged(void)
 {
   bool modified = m_editURL->text() != m_currentItem.m_url
-               || m_editSymbol->text() != m_currentItem.m_sym
-               || m_editDate->text() != m_currentItem.m_date
-               || m_editDateFormat->text() != m_currentItem.m_dateformat
-               || m_editPrice->text() != m_currentItem.m_price;
+                  || m_editSymbol->text() != m_currentItem.m_sym
+                  || m_editDate->text() != m_currentItem.m_date
+                  || m_editDateFormat->text() != m_currentItem.m_dateformat
+                  || m_editPrice->text() != m_currentItem.m_price;
 
   m_updateButton->setEnabled(modified);
 }
@@ -185,7 +185,7 @@ void kMyMoneyOnlineQuoteConfig::slotNewEntry(void)
   newSource.write();
   loadList();
   Q3ListViewItem* item = m_quoteSourceList->findItem(i18n("New Quote Source"), 0);
-  if(item) {
+  if (item) {
     m_quoteSourceList->setSelected(item, true);
     slotLoadWidgets(item);
   }
@@ -195,14 +195,14 @@ void kMyMoneyOnlineQuoteConfig::slotEntryRenamed(Q3ListViewItem* item, const QSt
 {
   int nameCount = 0;
   Q3ListViewItemIterator it(m_quoteSourceList);
-  while(it.current()) {
-    if(it.current()->text(0) == text)
+  while (it.current()) {
+    if (it.current()->text(0) == text)
       ++nameCount;
     ++it;
   }
 
   // Make sure we get a non-empty and unique name
-  if(text.length() > 0 && nameCount == 1) {
+  if (text.length() > 0 && nameCount == 1) {
     m_currentItem.rename(text);
   } else {
     item->setText(0, m_currentItem.m_name);

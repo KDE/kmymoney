@@ -20,7 +20,7 @@
 
 // Some STL headers in GCC4.3 contain operator new. Memory checker mangles these
 #ifdef _CHECK_MEMORY
-  #undef new
+#undef new
 #endif
 
 #include <algorithm>
@@ -48,7 +48,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 #ifdef _CHECK_MEMORY
-  #include <mymoneyutils.h>
+#include <mymoneyutils.h>
 #endif
 
 #include <mymoneyaccount.h>
@@ -57,7 +57,8 @@
 #include <transactioneditorcontainer.h>
 #include <selectedtransaction.h>
 
-namespace KMyMoneyRegister {
+namespace KMyMoneyRegister
+{
 
 typedef enum {
   UnknownSort = 0,      //< unknown sort criteria
@@ -96,18 +97,18 @@ public:
   QWidget* haveWidget(const QString& name) const {
     QWidgetContainer::const_iterator it_w;
     it_w = find(name);
-    if(it_w != end())
+    if (it_w != end())
       return *it_w;
     return 0;
   }
 
   void removeOrphans(void) {
     QWidgetContainer::iterator it_w;
-    for(it_w = begin(); it_w != end(); ) {
-      if((*it_w) && (*it_w)->parent())
+    for (it_w = begin(); it_w != end();) {
+      if ((*it_w) && (*it_w)->parent())
         ++it_w;
       else {
-        delete (*it_w);
+        delete(*it_w);
         remove(it_w.key());
         it_w = begin();
       }
@@ -121,23 +122,41 @@ class GroupMarker : public RegisterItem
 public:
   explicit GroupMarker(Register* parent, const QString& txt = QString());
   ~GroupMarker();
-  void setText(const QString& txt) { m_txt = txt; }
-  const QString& text(void) const { return m_txt; }
-  bool isSelectable(void) const { return false; }
-  bool canHaveFocus(void) const { return false; }
-  int numRows(void) const { return 1; }
+  void setText(const QString& txt) {
+    m_txt = txt;
+  }
+  const QString& text(void) const {
+    return m_txt;
+  }
+  bool isSelectable(void) const {
+    return false;
+  }
+  bool canHaveFocus(void) const {
+    return false;
+  }
+  int numRows(void) const {
+    return 1;
+  }
 
-  virtual const char* className(void) { return "GroupMarker"; }
+  virtual const char* className(void) {
+    return "GroupMarker";
+  }
 
-  bool isErronous(void) const { return false; }
+  bool isErronous(void) const {
+    return false;
+  }
 
   void paintRegisterCell(QPainter* painter, int row, int col, const QRect& r, bool selected, const QColorGroup& cg);
   void paintFormCell(QPainter* /* painter */, int /* row */, int /* col */, const QRect& /* r */, bool /* selected */, const QColorGroup& /* cg */) {}
 
   int rowHeightHint(void) const;
 
-  bool matches(const QString&) const { return true; }
-  virtual int sortSamePostDate(void) const { return 0; }
+  bool matches(const QString&) const {
+    return true;
+  }
+  virtual int sortSamePostDate(void) const {
+    return 0;
+  }
 
 protected:
   void setupColors(QColorGroup& cg);
@@ -157,9 +176,15 @@ class FancyDateGroupMarker : public GroupMarker
 public:
   FancyDateGroupMarker(Register* parent, const QDate& date, const QString& txt);
 
-  virtual const QDate sortPostDate(void) const { return m_date; }
-  virtual const QDate sortEntryDate(void) const { return m_date; }
-  virtual const char* className(void) { return "FancyDateGroupMarker"; }
+  virtual const QDate sortPostDate(void) const {
+    return m_date;
+  }
+  virtual const QDate sortEntryDate(void) const {
+    return m_date;
+  }
+  virtual const char* className(void) {
+    return "FancyDateGroupMarker";
+  }
 private:
   QDate                    m_date;
 };
@@ -167,9 +192,13 @@ private:
 class StatementGroupMarker : public FancyDateGroupMarker
 {
 public:
-  StatementGroupMarker(Register* parent, CashFlowDirection dir, const QDate& date, const QString& txt );
-  CashFlowDirection sortType(void) const { return m_dir; }
-  virtual int sortSamePostDate(void) const { return 3; }
+  StatementGroupMarker(Register* parent, CashFlowDirection dir, const QDate& date, const QString& txt);
+  CashFlowDirection sortType(void) const {
+    return m_dir;
+  }
+  virtual int sortSamePostDate(void) const {
+    return 3;
+  }
 private:
   CashFlowDirection        m_dir;
 };
@@ -180,14 +209,18 @@ public:
   SimpleDateGroupMarker(Register* parent, const QDate& date, const QString& txt);
   void paintRegisterCell(QPainter* painter, int row, int col, const QRect& r, bool selected, const QColorGroup& cg);
   int rowHeightHint(void) const;
-  virtual const char* className(void) { return "SimpleDateGroupMarker"; }
+  virtual const char* className(void) {
+    return "SimpleDateGroupMarker";
+  }
 };
 
 class TypeGroupMarker : public GroupMarker
 {
 public:
   TypeGroupMarker(Register* parent, CashFlowDirection dir, MyMoneyAccount::accountTypeE accType);
-  CashFlowDirection sortType(void) const { return m_dir; }
+  CashFlowDirection sortType(void) const {
+    return m_dir;
+  }
 private:
   CashFlowDirection        m_dir;
 };
@@ -196,8 +229,12 @@ class FiscalYearGroupMarker : public FancyDateGroupMarker
 {
 public:
   FiscalYearGroupMarker(Register* parent, const QDate& date, const QString& txt);
-  virtual const char* className(void) { return "FiscalYearGroupMarker"; }
-  virtual int sortSamePostDate(void) const { return 1; }
+  virtual const char* className(void) {
+    return "FiscalYearGroupMarker";
+  }
+  virtual int sortSamePostDate(void) const {
+    return 1;
+  }
 
 protected:
   void setupColors(QColorGroup& cg);
@@ -207,24 +244,34 @@ class PayeeGroupMarker : public GroupMarker
 {
 public:
   PayeeGroupMarker(Register* parent, const QString& name);
-  const QString sortPayee(void) const { return m_txt; }
+  const QString sortPayee(void) const {
+    return m_txt;
+  }
 };
 
 class CategoryGroupMarker : public GroupMarker
 {
 public:
   CategoryGroupMarker(Register* parent, const QString& category);
-  const QString sortCategory(void) const { return m_txt; }
-  const QString sortSecurity(void) const { return m_txt; }
+  const QString sortCategory(void) const {
+    return m_txt;
+  }
+  const QString sortSecurity(void) const {
+    return m_txt;
+  }
 
-  virtual const char* className(void) { return "CategoryGroupMarker"; }
+  virtual const char* className(void) {
+    return "CategoryGroupMarker";
+  }
 };
 
 class ReconcileGroupMarker : public GroupMarker
 {
 public:
   ReconcileGroupMarker(Register* parent, MyMoneySplit::reconcileFlagE state);
-  virtual MyMoneySplit::reconcileFlagE sortReconcileState(void) const { return m_state; }
+  virtual MyMoneySplit::reconcileFlagE sortReconcileState(void) const {
+    return m_state;
+  }
 private:
   MyMoneySplit::reconcileFlagE  m_state;
 };
@@ -297,7 +344,9 @@ public:
   void paintCell(QPainter* painter, int row, int col, const QRect& r, bool selected, const QColorGroup& cg);
 
   void resizeData(int) {}
-  Q3TableItem* item(int, int) const { return 0; }
+  Q3TableItem* item(int, int) const {
+    return 0;
+  }
   void setItem(int, int, Q3TableItem*) {}
   void clearCell(int, int) {}
   void clearCellWidget(int, int);
@@ -305,15 +354,19 @@ public:
   /**
     * Override the QTable member function to avoid display of focus
     */
-  void paintFocus(QPainter*, const QRect& ) {}
+  void paintFocus(QPainter*, const QRect&) {}
 
   /**
     * Override the QTable member function to avoid functionality
     */
   void updateCell(int /* row */, int /* col */) {}
 
-  RegisterItem* focusItem(void) const { return m_focusItem; }
-  RegisterItem* anchorItem(void) const { return m_selectAnchor; }
+  RegisterItem* focusItem(void) const {
+    return m_focusItem;
+  }
+  RegisterItem* anchorItem(void) const {
+    return m_selectAnchor;
+  }
 
   /**
     * set focus to specific item.
@@ -377,7 +430,9 @@ public:
   void setupRegister(const MyMoneyAccount& account, const QList<Column>& cols);
 
   void setSortOrder(const QString& order);
-  const QList<TransactionSortField>& sortOrder(void) const { return m_sortOrder; }
+  const QList<TransactionSortField>& sortOrder(void) const {
+    return m_sortOrder;
+  }
   TransactionSortField primarySortKey(void) const;
   void sortItems(void);
 
@@ -387,7 +442,9 @@ public:
     *
     * @return last actively used column (base 0)
     */
-  Column lastCol(void) const { return m_lastCol; }
+  Column lastCol(void) const {
+    return m_lastCol;
+  }
 
   RegisterItem* firstItem(void) const;
   RegisterItem* firstVisibleItem(void) const;
@@ -399,7 +456,9 @@ public:
 
   void resize(int col);
 
-  void forceUpdateLists(void) { m_listsDirty = true; }
+  void forceUpdateLists(void) {
+    m_listsDirty = true;
+  }
 
   void ensureItemVisible(RegisterItem* item);
 
@@ -411,7 +470,9 @@ public:
 
   void clearSelection(void);
 
-  bool markErronousTransactions(void) const { return (m_markErronousTransactions & 0x01) != 0; }
+  bool markErronousTransactions(void) const {
+    return (m_markErronousTransactions & 0x01) != 0;
+  }
 
   /**
     * This method creates a specific transaction according to the
@@ -426,11 +487,15 @@ public:
     */
   static Transaction* transactionFactory(Register *parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
 
-  const MyMoneyAccount& account(void) const { return m_account; }
+  const MyMoneyAccount& account(void) const {
+    return m_account;
+  }
 
   void repaintItems(RegisterItem* first = 0, RegisterItem* last = 0);
 
-  unsigned int drawCounter(void) const { return m_drawCounter; }
+  unsigned int drawCounter(void) const {
+    return m_drawCounter;
+  }
 
   /**
     * This method creates group marker items and adds them to the register
@@ -444,22 +509,30 @@ public:
     */
   void removeUnwantedGroupMarkers(void);
 
-  void setLedgerLensForced(bool forced=true) { m_ledgerLensForced = forced; }
+  void setLedgerLensForced(bool forced = true) {
+    m_ledgerLensForced = forced;
+  }
 
   /**
     * Sets the selection mode to @a mode. Supported modes are QTable::Single and
     * QTable::Multi. QTable::Multi is the default when the object is created.
     */
-  void setSelectionMode(SelectionMode mode) { m_selectionMode = mode; }
+  void setSelectionMode(SelectionMode mode) {
+    m_selectionMode = mode;
+  }
 
 protected:
 
   void drawContents(QPainter *p, int cx, int cy, int cw, int ch);
 
-  void contentsMouseReleaseEvent( QMouseEvent *e );
+  void contentsMouseReleaseEvent(QMouseEvent *e);
 
-  void unselectItems(int from = -1, int to = -1) { doSelectItems(from, to, false); }
-  void selectItems(int from, int to) { doSelectItems(from, to, true); }
+  void unselectItems(int from = -1, int to = -1) {
+    doSelectItems(from, to, false);
+  }
+  void selectItems(int from, int to) {
+    doSelectItems(from, to, true);
+  }
   void doSelectItems(int from, int to, bool selected);
   int selectedItemsCount(void) const;
 
@@ -513,7 +586,7 @@ protected:
 protected slots:
   void resize(void);
 
-  void selectItem(int row, int col, int button, const QPoint & mousePos );
+  void selectItem(int row, int col, int button, const QPoint & mousePos);
   void slotEnsureItemVisible(void);
   void slotDoubleClicked(int, int, int, const QPoint&);
 

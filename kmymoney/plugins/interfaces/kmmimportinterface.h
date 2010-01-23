@@ -37,13 +37,15 @@ class KMyMoneyApp;
 
 #include "importinterface.h"
 
-namespace KMyMoneyPlugin {
+namespace KMyMoneyPlugin
+{
 
 /**
   * This class represents the implementation of the
   * ViewInterface.
   */
-class KMMImportInterface : public ImportInterface {
+class KMMImportInterface : public ImportInterface
+{
   Q_OBJECT
 
 public:

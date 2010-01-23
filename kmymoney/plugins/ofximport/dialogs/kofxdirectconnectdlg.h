@@ -49,14 +49,14 @@ class TransferJob;
 class KOfxDirectConnectDlgDecl : public QDialog, public Ui::KOfxDirectConnectDlgDecl
 {
 public:
-  KOfxDirectConnectDlgDecl( QWidget *parent ) : QDialog( parent ) {
-    setupUi( this );
+  KOfxDirectConnectDlgDecl(QWidget *parent) : QDialog(parent) {
+    setupUi(this);
   }
 };
 
 class KOfxDirectConnectDlg : public KOfxDirectConnectDlgDecl
 {
-Q_OBJECT
+  Q_OBJECT
 public:
   explicit KOfxDirectConnectDlg(const MyMoneyAccount&, QWidget *parent = 0);
   ~KOfxDirectConnectDlg();
@@ -72,7 +72,7 @@ signals:
 
 protected slots:
   void slotOfxFinished(KIO::Job*);
-  void slotOfxData(KIO::Job*,const QByteArray&);
+  void slotOfxData(KIO::Job*, const QByteArray&);
   void slotOfxConnected(KIO::Job*);
   virtual void reject(void);
 

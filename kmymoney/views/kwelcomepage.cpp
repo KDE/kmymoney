@@ -60,7 +60,7 @@ const QString KWelcomePage::welcomePage(void)
   //body of the page
   body = QString("<body>");
   //"background_image", if enabled, displays an image in the background of this page.
-  //If you wish to use a background, un-comment the following line 
+  //If you wish to use a background, un-comment the following line
   const QString backgroundFilename = KGlobal::dirs()->findResource("appdata", "html/images/background.png");
   body += QString("<img id=\"background_image\" src=\"%1\" height=\"100%\">").arg(backgroundFilename);
   const QString logoFilename = KGlobal::dirs()->findResource("appdata", "html/images/trans_logo.png");
@@ -128,7 +128,7 @@ const QString KWelcomePage::welcomePage(void)
   footer = "</html>";
 
   return header + body + footer;
-  }
+}
 
 const QString KWelcomePage::whatsNewPage(void)
 {
@@ -139,7 +139,7 @@ const QString KWelcomePage::whatsNewPage(void)
   header = QString("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">");
   header += QString("<html>");
   header += QString("<head>");
-  header += QString("<title>" + i18n("What's new in this version") +"</title>");
+  header += QString("<title>" + i18n("What's new in this version") + "</title>");
 
   const QString welcomeFilename = KGlobal::dirs()->findResource("appdata", "html/welcome.css");
   header += QString("<link href=\"%1\" rel=\"stylesheet\" type=\"text/css\">").arg(welcomeFilename);
@@ -148,12 +148,12 @@ const QString KWelcomePage::whatsNewPage(void)
   //body of the page
   body = QString("<body>");
   //"background_image", if enabled, displays an image in the background of this page.
-  //If you wish to use a background, un-comment the following line 
+  //If you wish to use a background, un-comment the following line
   const QString backgroundFilename = KGlobal::dirs()->findResource("appdata", "html/images/background.png");
   body += QString("<img id=\"background_image\" src=\"%1\" height=\"100%\">").arg(backgroundFilename);
   const QString logoFilename = KGlobal::dirs()->findResource("appdata", "html/images/trans_logo.png");
   body += QString("<img id=\"KMyMoneyLogo\" src=\"%1\">").arg(logoFilename);
-  body += QString("<h3 id=\"title\">" + i18n("What's new in KMyMoney %1").arg(VERSION) +"</h3>");
+  body += QString("<h3 id=\"title\">" + i18n("What's new in KMyMoney %1").arg(VERSION) + "</h3>");
   const QString backArrowFilename = KGlobal::dirs()->findResource("appdata", "html/images/backarrow.png");
   body += QString("<div id=\"returnLink\"><img src=\"%1\">").arg(backArrowFilename);
   body += QString("<a href=\"/welcome\">" + i18n("Return to the Welcome page") + "</a></div>");
@@ -173,7 +173,7 @@ const QString KWelcomePage::whatsNewPage(void)
   QStringList featuresList = KWelcomePage::featuresList();
 
   QStringList::ConstIterator feature_it;
-  for(feature_it = featuresList.constBegin(); feature_it != featuresList.constEnd(); ++feature_it) {
+  for (feature_it = featuresList.constBegin(); feature_it != featuresList.constEnd(); ++feature_it) {
     body += QString("<li>");
     body += *feature_it;
     body += QString("</li>");

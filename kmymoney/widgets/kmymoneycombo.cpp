@@ -53,22 +53,22 @@
 #include "kmymoneyutils.h"
 
 KMyMoneyCombo::KMyMoneyCombo(QWidget *w) :
-  KComboBox(w),
-  m_completion(0),
-  m_edit(0),
-  m_canCreateObjects(false),
-  m_inFocusOutEvent(false)
+    KComboBox(w),
+    m_completion(0),
+    m_edit(0),
+    m_canCreateObjects(false),
+    m_inFocusOutEvent(false)
 {
 }
 
 KMyMoneyCombo::KMyMoneyCombo(bool rw, QWidget *w) :
-  KComboBox(rw, w),
-  m_completion(0),
-  m_edit(0),
-  m_canCreateObjects(false),
-  m_inFocusOutEvent(false)
+    KComboBox(rw, w),
+    m_completion(0),
+    m_edit(0),
+    m_canCreateObjects(false),
+    m_inFocusOutEvent(false)
 {
-  if(rw) {
+  if (rw) {
     m_edit = new kMyMoneyLineEdit(this, "combo edit");
     setLineEdit(m_edit);
   }
@@ -76,19 +76,19 @@ KMyMoneyCombo::KMyMoneyCombo(bool rw, QWidget *w) :
 
 void KMyMoneyCombo::setCurrentTextById(const QString& id)
 {
-    clearEditText();
-    if(!id.isEmpty()) {
-      Q3ListViewItem* item = selector()->item(id);
-      if(item) {
-        setCompletedText(item->text(0));
-        setEditText(item->text(0));
-      }
+  clearEditText();
+  if (!id.isEmpty()) {
+    Q3ListViewItem* item = selector()->item(id);
+    if (item) {
+      setCompletedText(item->text(0));
+      setEditText(item->text(0));
     }
+  }
 }
 
 void KMyMoneyCombo::slotItemSelected(const QString& id)
 {
-  if(isEditable()) {
+  if (isEditable()) {
     bool blocked = signalsBlocked();
     blockSignals(true);
     setCurrentTextById(id);
@@ -97,7 +97,7 @@ void KMyMoneyCombo::slotItemSelected(const QString& id)
 
   m_completion->hide();
 
-  if(m_id != id) {
+  if (m_id != id) {
     m_id = id;
     emit itemSelected(id);
   }
@@ -105,13 +105,13 @@ void KMyMoneyCombo::slotItemSelected(const QString& id)
 
 void KMyMoneyCombo::setEditable(bool y)
 {
-  if(y == isEditable())
+  if (y == isEditable())
     return;
 
   KComboBox::setEditable(y);
 
   // make sure we use our own line edit style
-  if(y) {
+  if (y) {
     m_edit = new kMyMoneyLineEdit(this, "combo edit");
     setLineEdit(m_edit);
     m_edit->setPalette(palette());
@@ -122,7 +122,7 @@ void KMyMoneyCombo::setEditable(bool y)
 
 void KMyMoneyCombo::setHint(const QString& hint) const
 {
-  if(m_edit)
+  if (m_edit)
     m_edit->setHint(hint);
 }
 
@@ -130,26 +130,26 @@ void KMyMoneyCombo::paintEvent(QPaintEvent* ev)
 {
   KComboBox::paintEvent(ev);
   // if we don't have an edit field, we need to paint the text onto the button
-  if(!m_edit) {
-    if(m_completion) {
+  if (!m_edit) {
+    if (m_completion) {
       QStringList list;
       selector()->selectedItems(list);
-      if(!list.isEmpty()) {
+      if (!list.isEmpty()) {
         QString str = selector()->item(list[0])->text(0);
         // we only paint, if the text is longer than 1 char. Assumption
         // is that length 1 is the blank case so no need to do painting
-        if(str.length() > 1) {
-          QPainter p( this );
+        if (str.length() > 1) {
+          QPainter p(this);
           p.setPen(palette().text().color());
           QStyleOptionComboBox opt;
           initStyleOption(&opt);
           QRect re = style()->subControlRect(QStyle::CC_ComboBox, &opt, QStyle::SC_ComboBoxEditField, this);
-          p.setClipRect( re );
+          p.setClipRect(re);
           p.save();
           p.setFont(font());
           QFontMetrics fm(font());
           int x = re.x(), y = re.y() + fm.ascent();
-          p.drawText( x, y, str );
+          p.drawText(x, y, str);
           p.restore();
         }
       }
@@ -160,18 +160,18 @@ void KMyMoneyCombo::paintEvent(QPaintEvent* ev)
 void KMyMoneyCombo::mousePressEvent(QMouseEvent *e)
 {
   // mostly copied from QCombo::mousePressEvent() and adjusted for our needs
-  if(e->button() != Qt::LeftButton)
+  if (e->button() != Qt::LeftButton)
     return;
 
-  if(((!isEditable() || isInArrowArea(e->globalPos())) && selector()->itemList().count()) && !m_completion->isVisible()) {
+  if (((!isEditable() || isInArrowArea(e->globalPos())) && selector()->itemList().count()) && !m_completion->isVisible()) {
     m_completion->setVisible(true);
   }
 
-  if(m_timer.isActive()) {
+  if (m_timer.isActive()) {
     m_timer.stop();
     m_completion->slotMakeCompletion("");
   } else {
-    KConfig config( "kcminputrc" );
+    KConfig config("kcminputrc");
     KConfigGroup grp = config.group("KDE");
     m_timer.setSingleShot(true);
     m_timer.start(grp.readEntry("DoubleClickInterval", 400));
@@ -186,10 +186,10 @@ bool KMyMoneyCombo::isInArrowArea(const QPoint& pos) const
 
   // Correction for motif style, where arrow is smaller
   // and thus has a rect that doesn't fit the button.
-  arrowRect.setHeight( qMax(  height() - (2 * arrowRect.y()), arrowRect.height() ) );
+  arrowRect.setHeight(qMax(height() - (2 * arrowRect.y()), arrowRect.height()));
 
   // if the button is not isEditable, it covers the whole widget
-  if(!isEditable())
+  if (!isEditable())
     arrowRect = rect();
 
   return arrowRect.contains(mapFromGlobal(pos));
@@ -197,11 +197,11 @@ bool KMyMoneyCombo::isInArrowArea(const QPoint& pos) const
 
 void KMyMoneyCombo::keyPressEvent(QKeyEvent* e)
 {
-  if((e->key() == Qt::Key_F4 && e->modifiers() == 0 ) ||
-     (e->key() == Qt::Key_Down && (e->modifiers() & Qt::AltModifier)) ||
-     (!isEditable() && e->key() == Qt::Key_Space)) {
+  if ((e->key() == Qt::Key_F4 && e->modifiers() == 0) ||
+      (e->key() == Qt::Key_Down && (e->modifiers() & Qt::AltModifier)) ||
+      (!isEditable() && e->key() == Qt::Key_Space)) {
     // if we have at least one item in the list, we open the dropdown
-    if(selector()->listView()->firstChild())
+    if (selector()->listView()->firstChild())
       m_completion->setVisible(true);
     e->ignore();
     return;
@@ -211,14 +211,14 @@ void KMyMoneyCombo::keyPressEvent(QKeyEvent* e)
 
 void KMyMoneyCombo::connectNotify(const char* signal)
 {
-  if(signal && QLatin1String(signal) != QLatin1String(QMetaObject::normalizedSignature(SIGNAL(createItem(const QString&,QString&))))) {
+  if (signal && QLatin1String(signal) != QLatin1String(QMetaObject::normalizedSignature(SIGNAL(createItem(const QString&, QString&))))) {
     m_canCreateObjects = true;
   }
 }
 
 void KMyMoneyCombo::disconnectNotify(const char* signal)
 {
-  if(signal && QLatin1String(signal) != QLatin1String(QMetaObject::normalizedSignature(SIGNAL(createItem(const QString&,QString&))))) {
+  if (signal && QLatin1String(signal) != QLatin1String(QMetaObject::normalizedSignature(SIGNAL(createItem(const QString&, QString&))))) {
     m_canCreateObjects = false;
   }
 }
@@ -228,18 +228,18 @@ void KMyMoneyCombo::focusOutEvent(QFocusEvent* e)
   // when showing m_completion we'll receive a focus out event even if the focus
   // will still remain at this widget since this widget is the completion's focus proxy
   // so ignore the focus out event caused by showin a widget of type Qt::Popup
-  if(e->reason() == Qt::PopupFocusReason)
+  if (e->reason() == Qt::PopupFocusReason)
     return;
 
-  if(m_inFocusOutEvent) {
+  if (m_inFocusOutEvent) {
     KComboBox::focusOutEvent(e);
     return;
   }
 
   m_inFocusOutEvent = true;
-  if(isEditable() && !currentText().isEmpty()) {
-    if(m_canCreateObjects) {
-      if(!m_completion->selector()->contains(currentText())) {
+  if (isEditable() && !currentText().isEmpty()) {
+    if (m_canCreateObjects) {
+      if (!m_completion->selector()->contains(currentText())) {
         QString id;
         // annouce that we go into a possible dialog to create an object
         // This can be used by upstream widgets to disable filters etc.
@@ -258,9 +258,9 @@ void KMyMoneyCombo::focusOutEvent(QFocusEvent* e)
         m_completion->hide();
       }
 
-    // else if we cannot create objects, and the current text is not
-    // in the list, then we clear the text and the selection.
-    } else if(!m_completion->selector()->contains(currentText())) {
+      // else if we cannot create objects, and the current text is not
+      // in the list, then we clear the text and the selection.
+    } else if (!m_completion->selector()->contains(currentText())) {
       clearEditText();
     }
   }
@@ -268,10 +268,10 @@ void KMyMoneyCombo::focusOutEvent(QFocusEvent* e)
   KComboBox::focusOutEvent(e);
 
   // force update of hint and id if there is no text in the widget
-  if(isEditable() && currentText().isEmpty()) {
+  if (isEditable() && currentText().isEmpty()) {
     QString id = m_id;
     m_id.clear();
-    if(!id.isEmpty())
+    if (!id.isEmpty())
       emit itemSelected(m_id);
     update();
   }
@@ -295,7 +295,7 @@ void KMyMoneyCombo::selectedItem(QString& id) const
 
 void KMyMoneyCombo::selectedItems(QStringList& list) const
 {
-  if(lineEdit() && lineEdit()->text().length() == 0) {
+  if (lineEdit() && lineEdit()->text().length() == 0) {
     list.clear();
   } else {
     m_completion->selector()->selectedItems(list);
@@ -325,15 +325,15 @@ QSize KMyMoneyCombo::sizeHint() const
   QFontMetrics fm = fontMetrics();
 
   int maxW = count() ? 18 : 7 * fm.width(QChar('x')) + 18;
-  int maxH = qMax( fm.lineSpacing(), 14 ) + 2;
+  int maxH = qMax(fm.lineSpacing(), 14) + 2;
 
   w = selector()->optimizedWidth();
-  if ( w > maxW )
+  if (w > maxW)
     maxW = w;
 
   QSize sizeHint = (style().sizeFromContents(QStyle::CT_ComboBox, this,
-                 QSize(maxW, maxH)).
-      expandedTo(QApplication::globalStrut()));
+                    QSize(maxW, maxH)).
+                    expandedTo(QApplication::globalStrut()));
 
   return sizeHint;
 #endif

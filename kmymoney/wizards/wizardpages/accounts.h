@@ -33,8 +33,8 @@
 class AccountsDecl : public QWidget, public Ui::AccountsDecl
 {
 public:
-  AccountsDecl( QWidget *parent ) : QWidget( parent ) {
-    setupUi( this );
+  AccountsDecl(QWidget *parent) : QWidget(parent) {
+    setupUi(this);
   }
 };
 

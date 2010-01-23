@@ -37,8 +37,7 @@
 #include "numbertowords.h"
 #include "pluginsettings.h"
 
-struct KMMPrintCheckPlugin::Private 
-{
+struct KMMPrintCheckPlugin::Private {
   KAction* m_action;
   QString  m_checkTemplateHTML;
   QStringList m_printedTransactionIdList;
@@ -47,7 +46,7 @@ struct KMMPrintCheckPlugin::Private
 
 typedef KGenericFactory<KMMPrintCheckPlugin> printcheckFactory;
 
-K_EXPORT_COMPONENT_FACTORY(kmm_printcheck, printcheckFactory( "kmm_printcheck" ))
+K_EXPORT_COMPONENT_FACTORY(kmm_printcheck, printcheckFactory("kmm_printcheck"))
 
 KMMPrintCheckPlugin::KMMPrintCheckPlugin(QObject *parent, const QStringList&)
     : KMyMoneyPlugin::Plugin(parent, "iCalendar"/*must be the same as X-KDE-PluginInfo-Name*/)
@@ -121,7 +120,7 @@ void KMMPrintCheckPlugin::slotPrintCheck(void)
   MyMoneyMoneyToWordsConverter converter;
   KHTMLPart *htmlPart = new KHTMLPart((QWidget*)NULL);
   KMyMoneyRegister::SelectedTransactions::const_iterator it;
-  for(it = d->m_transactions.constBegin(); it != d->m_transactions.constEnd(); ++it) {
+  for (it = d->m_transactions.constBegin(); it != d->m_transactions.constEnd(); ++it) {
     if (!canBePrinted(*it))
       continue; // skip this check since it was already printed
 
@@ -174,7 +173,7 @@ void KMMPrintCheckPlugin::slotTransactionsSelected(const KMyMoneyRegister::Selec
   // enable/disable the action depending if there are transactions selected or not
   // and whether they can be printed or not
   KMyMoneyRegister::SelectedTransactions::const_iterator it;
-  for(it = d->m_transactions.constBegin(); it != d->m_transactions.constEnd(); ++it) {
+  for (it = d->m_transactions.constBegin(); it != d->m_transactions.constEnd(); ++it) {
     if (canBePrinted(*it)) {
       actionEnabled = true;
       break;
@@ -187,8 +186,8 @@ void KMMPrintCheckPlugin::slotTransactionsSelected(const KMyMoneyRegister::Selec
 void KMMPrintCheckPlugin::slotPlug(KPluginInfo *info)
 {
   if (info->name() == objectName()) {
-    connect(viewInterface(), SIGNAL(transactionsSelected(const KMyMoneyRegister::SelectedTransactions&)), 
-    this, SLOT(slotTransactionsSelected(const KMyMoneyRegister::SelectedTransactions& )));
+    connect(viewInterface(), SIGNAL(transactionsSelected(const KMyMoneyRegister::SelectedTransactions&)),
+            this, SLOT(slotTransactionsSelected(const KMyMoneyRegister::SelectedTransactions&)));
   }
 }
 
@@ -196,8 +195,8 @@ void KMMPrintCheckPlugin::slotPlug(KPluginInfo *info)
 void KMMPrintCheckPlugin::slotUnplug(KPluginInfo *info)
 {
   if (info->name() == objectName()) {
-    disconnect(viewInterface(), SIGNAL(transactionsSelected(const KMyMoneyRegister::SelectedTransactions&)), 
-    this, SLOT(slotTransactionsSelected(const KMyMoneyRegister::SelectedTransactions& )));
+    disconnect(viewInterface(), SIGNAL(transactionsSelected(const KMyMoneyRegister::SelectedTransactions&)),
+               this, SLOT(slotTransactionsSelected(const KMyMoneyRegister::SelectedTransactions&)));
   }
 }
 

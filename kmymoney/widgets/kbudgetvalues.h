@@ -44,53 +44,53 @@ class kMyMoneyEdit;
 class KBudgetValuesDecl : public QWidget, public Ui::KBudgetValuesDecl
 {
 public:
-  KBudgetValuesDecl( QWidget *parent ) : QWidget( parent ) {
-    setupUi( this );
+  KBudgetValuesDecl(QWidget *parent) : QWidget(parent) {
+    setupUi(this);
   }
 };
 
 class KBudgetValues : public KBudgetValuesDecl
 {
   Q_OBJECT
-  public:
-    KBudgetValues(QWidget* parent = 0);
-    ~KBudgetValues();
+public:
+  KBudgetValues(QWidget* parent = 0);
+  ~KBudgetValues();
 
-    void setBudgetValues(const MyMoneyBudget& budget, const MyMoneyBudget::AccountGroup& budgetAccount);
-    void budgetValues(const MyMoneyBudget& budget, MyMoneyBudget::AccountGroup& budgetAccount);
-    void clear(void);
+  void setBudgetValues(const MyMoneyBudget& budget, const MyMoneyBudget::AccountGroup& budgetAccount);
+  void budgetValues(const MyMoneyBudget& budget, MyMoneyBudget::AccountGroup& budgetAccount);
+  void clear(void);
 
-  private:
-    void enableMonths(bool enabled);
-    void fillMonthLabels(void);
+private:
+  void enableMonths(bool enabled);
+  void fillMonthLabels(void);
 
-  protected slots:
-    void slotChangePeriod(int id);
+protected slots:
+  void slotChangePeriod(int id);
 
-    /**
-     * This slot clears the value in the value widgets of the selected budget type.
-     * Values of the other types are unaffected.
-     */
-    void slotClearAllValues(void);
+  /**
+   * This slot clears the value in the value widgets of the selected budget type.
+   * Values of the other types are unaffected.
+   */
+  void slotClearAllValues(void);
 
-    /**
-     * Helper slot used to postpone sending the valuesChanged() signal.
-     */
-    void slotNeedUpdate(void);
+  /**
+   * Helper slot used to postpone sending the valuesChanged() signal.
+   */
+  void slotNeedUpdate(void);
 
-    void slotUpdateClearButton(void);
+  void slotUpdateClearButton(void);
 
-  protected:
-    bool eventFilter(QObject* o, QEvent* e);
+protected:
+  bool eventFilter(QObject* o, QEvent* e);
 
-  private:
-    kMyMoneyEdit*   m_field[12];
-    QLabel*         m_label[12];
-    QWidget*        m_currentTab;
-    QDate           m_budgetDate;
+private:
+  kMyMoneyEdit*   m_field[12];
+  QLabel*         m_label[12];
+  QWidget*        m_currentTab;
+  QDate           m_budgetDate;
 
-  signals:
-    void valuesChanged(void);
+signals:
+  void valuesChanged(void);
 };
 
 #endif

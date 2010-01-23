@@ -91,9 +91,9 @@ public:
 };
 
 MousePressFilter::MousePressFilter(QWidget* parent) :
-  QObject(parent),
-  m_lastMousePressEvent(0),
-  m_filterActive(true)
+    QObject(parent),
+    m_lastMousePressEvent(0),
+    m_filterActive(true)
 {
 }
 
@@ -107,17 +107,17 @@ void MousePressFilter::setFilterActive(bool state)
   m_filterActive = state;
 }
 
-bool MousePressFilter::isChildOf( QWidget* child, QWidget *parent )
+bool MousePressFilter::isChildOf(QWidget* child, QWidget *parent)
 {
-  while(child) {
-    if(child == parent)
+  while (child) {
+    if (child == parent)
       return true;
     // If one of the ancestors is a KPassivePopup or a KDialog or a popup widget then
     // it's as if it is a child of our own because these widgets could
     // appear during transaction entry (message boxes, completer widgets)
-    if(dynamic_cast<KPassivePopup*>(child) ||
-       dynamic_cast<KDialog*>(child) ||
-       child->windowFlags() & Qt::Popup)
+    if (dynamic_cast<KPassivePopup*>(child) ||
+        dynamic_cast<KDialog*>(child) ||
+        child->windowFlags() & Qt::Popup)
       return true;
     child = child->parentWidget();
   }
@@ -126,23 +126,23 @@ bool MousePressFilter::isChildOf( QWidget* child, QWidget *parent )
 
 bool MousePressFilter::eventFilter(QObject* o, QEvent* e)
 {
-  if(m_filterActive) {
-    if(e->type() == QEvent::MouseButtonPress && !m_lastMousePressEvent) {
+  if (m_filterActive) {
+    if (e->type() == QEvent::MouseButtonPress && !m_lastMousePressEvent) {
       QList<QWidget*>::const_iterator it_w;
-      for(it_w = m_parents.constBegin(); it_w != m_parents.constEnd(); ++it_w) {
-        if(isChildOf((QWidget*)o, (*it_w))) {
+      for (it_w = m_parents.constBegin(); it_w != m_parents.constEnd(); ++it_w) {
+        if (isChildOf((QWidget*)o, (*it_w))) {
           m_lastMousePressEvent = e;
           break;
         }
       }
-      if(it_w == m_parents.constEnd()) {
+      if (it_w == m_parents.constEnd()) {
         m_lastMousePressEvent = e;
         bool rc = false;
         emit mousePressedOnExternalWidget(rc);
       }
     }
 
-    if(e->type() != QEvent::MouseButtonPress) {
+    if (e->type() != QEvent::MouseButtonPress) {
       m_lastMousePressEvent = 0;
     }
   }
@@ -151,25 +151,25 @@ bool MousePressFilter::eventFilter(QObject* o, QEvent* e)
 
 
 KGlobalLedgerView::Private::Private() :
-  m_mousePressFilter(0),
-  m_registerSearchLine(0),
-  m_inLoading(false),
-  m_recursion(false),
-  m_showDetails(false),
-  m_accountsModel(0),
-  m_filterProxyModel(0),
-  m_accountComboBox(0)
+    m_mousePressFilter(0),
+    m_registerSearchLine(0),
+    m_inLoading(false),
+    m_recursion(false),
+    m_showDetails(false),
+    m_accountsModel(0),
+    m_filterProxyModel(0),
+    m_accountComboBox(0)
 {
 }
 
 QDate KGlobalLedgerView::m_lastPostDate;
 
-KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name )
-  : KMyMoneyViewBase(parent, name, i18n("Ledgers")),
-  d(new Private),
-  m_needReload(false),
-  m_newAccountLoaded(true),
-  m_inEditMode(false)
+KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name)
+    : KMyMoneyViewBase(parent, name, i18n("Ledgers")),
+    d(new Private),
+    m_needReload(false),
+    m_newAccountLoaded(true),
+    m_inEditMode(false)
 {
   d->m_mousePressFilter = new MousePressFilter((QWidget*)this);
   d->m_action = KMyMoneyRegister::ActionNone;
@@ -187,7 +187,7 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name )
   // create the toolbar frame at the top of the view
   m_toolbarFrame = new QFrame(this);
   QHBoxLayout* toolbarLayout = new QHBoxLayout(m_toolbarFrame);
-  toolbarLayout->setContentsMargins(0,0,0,0);
+  toolbarLayout->setContentsMargins(0, 0, 0, 0);
   toolbarLayout->setSpacing(0);
 
   // the account selector widget
@@ -201,7 +201,7 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name )
   // create the register frame
   m_registerFrame = new QFrame(this);
   QVBoxLayout* registerFrameLayout = new QVBoxLayout(m_registerFrame);
-  registerFrameLayout->setContentsMargins(0,0,0,0);
+  registerFrameLayout->setContentsMargins(0, 0, 0, 0);
   registerFrameLayout->setSpacing(0);
   layout()->addWidget(m_registerFrame);
   layout()->setStretchFactor(m_registerFrame, 2);
@@ -221,16 +221,16 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name )
   // create the summary frame
   m_summaryFrame = new QFrame(this);
   QHBoxLayout* summaryFrameLayout = new QHBoxLayout(m_summaryFrame);
-  summaryFrameLayout->setContentsMargins(0,0,0,0);
+  summaryFrameLayout->setContentsMargins(0, 0, 0, 0);
   summaryFrameLayout->setSpacing(0);
   m_leftSummaryLabel = new QLabel(m_summaryFrame);
   m_centerSummaryLabel = new QLabel(m_summaryFrame);
   m_rightSummaryLabel = new QLabel(m_summaryFrame);
   summaryFrameLayout->addWidget(m_leftSummaryLabel);
-  QSpacerItem* spacer = new QSpacerItem( 20, 1, QSizePolicy::Expanding, QSizePolicy::Minimum );
+  QSpacerItem* spacer = new QSpacerItem(20, 1, QSizePolicy::Expanding, QSizePolicy::Minimum);
   summaryFrameLayout->addItem(spacer);
   summaryFrameLayout->addWidget(m_centerSummaryLabel);
-  spacer = new QSpacerItem( 20, 1, QSizePolicy::Expanding, QSizePolicy::Minimum );
+  spacer = new QSpacerItem(20, 1, QSizePolicy::Expanding, QSizePolicy::Minimum);
   summaryFrameLayout->addItem(spacer);
   summaryFrameLayout->addWidget(m_rightSummaryLabel);
   layout()->addWidget(m_summaryFrame);
@@ -238,7 +238,7 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name )
   // create the button frame
   m_buttonFrame = new QFrame(this);
   QVBoxLayout* buttonLayout = new QVBoxLayout(m_buttonFrame);
-  buttonLayout->setContentsMargins(0,0,0,0);
+  buttonLayout->setContentsMargins(0, 0, 0, 0);
   buttonLayout->setSpacing(0);
   layout()->addWidget(m_buttonFrame);
   m_buttonbar = new KToolBar(m_buttonFrame, 0, true);
@@ -256,13 +256,13 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name )
   // create the transaction form frame
   m_formFrame = new QFrame(this);
   QVBoxLayout* frameLayout = new QVBoxLayout(m_formFrame);
-  frameLayout->setContentsMargins(5,5,5,5);
+  frameLayout->setContentsMargins(5, 5, 5, 5);
   frameLayout->setSpacing(0);
   m_form = new KMyMoneyTransactionForm::TransactionForm(m_formFrame);
   frameLayout->addWidget(m_form->tabBar(m_formFrame));
   frameLayout->addWidget(m_form);
-  m_formFrame->setFrameShape( QFrame::Panel );
-  m_formFrame->setFrameShadow( QFrame::Raised );
+  m_formFrame->setFrameShape(QFrame::Panel);
+  m_formFrame->setFrameShadow(QFrame::Raised);
   layout()->addWidget(m_formFrame);
 
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadView()));
@@ -298,8 +298,8 @@ void KGlobalLedgerView::slotAboutToSelectItem(KMyMoneyRegister::RegisterItem* it
 void KGlobalLedgerView::slotLoadView(void)
 {
   m_needReload = true;
-  if(isVisible()) {
-    if(!m_inEditMode) {
+  if (isVisible()) {
+    if (!m_inEditMode) {
       loadView();
       m_needReload = false;
       // force a new account if the current one is empty
@@ -315,8 +315,8 @@ void KGlobalLedgerView::clear(void)
 
   // setup header font
   QFont font = KMyMoneyGlobalSettings::listHeaderFont();
-  QFontMetrics fm( font );
-  int height = fm.lineSpacing()+6;
+  QFontMetrics fm(font);
+  int height = fm.lineSpacing() + 6;
   m_register->horizontalHeader()->setMinimumHeight(height);
   m_register->horizontalHeader()->setMaximumHeight(height);
   m_register->horizontalHeader()->setFont(font);
@@ -355,29 +355,29 @@ void KGlobalLedgerView::loadView(void)
   QString focusItemId;
   QString anchorItemId;
 
-  if(!d->m_inLoading)
+  if (!d->m_inLoading)
     d->m_startPoint = QPoint(-1, -1);
 
-  if(!m_newAccountLoaded) {
+  if (!m_newAccountLoaded) {
     // remember the current selected transactions
     KMyMoneyRegister::RegisterItem* item = m_register->firstItem();
-    for(; item; item = item->nextItem()) {
-      if(item->isSelected()) {
+    for (; item; item = item->nextItem()) {
+      if (item->isSelected()) {
         isSelected[item->id()] = true;
       }
     }
     // remember the item that has the focus
-    if(m_register->focusItem())
+    if (m_register->focusItem())
       focusItemId = m_register->focusItem()->id();
     // and the one that has the selection anchor
-    if(m_register->anchorItem())
+    if (m_register->anchorItem())
       anchorItemId = m_register->anchorItem()->id();
 
     // remember the upper left corner of the viewport
-    if(!d->m_inLoading && d->m_showDetails == KMyMoneyGlobalSettings::showRegisterDetailed())
+    if (!d->m_inLoading && d->m_showDetails == KMyMoneyGlobalSettings::showRegisterDetailed())
       d->m_startPoint = QPoint(m_register->contentsX(), m_register->contentsY());
   } else {
-    if(d->m_viewPosTimer.isActive())
+    if (d->m_viewPosTimer.isActive())
       d->m_viewPosTimer.stop();
     d->m_startPoint = QPoint(-1, -1);
     d->m_inLoading = false;
@@ -396,7 +396,7 @@ void KGlobalLedgerView::loadView(void)
   // ... setup the form ...
   m_form->setupForm(m_account);
 
-  if(m_account.id().isEmpty()) {
+  if (m_account.id().isEmpty()) {
     // if we don't have an account we bail out
     setEnabled(false);
     return;
@@ -420,10 +420,10 @@ void KGlobalLedgerView::loadView(void)
     MyMoneyTransactionFilter filter(m_account.id());
     // if it's an investment account, we also take care of
     // the sub-accounts (stock accounts)
-    if(m_account.accountType() == MyMoneyAccount::Investment)
+    if (m_account.accountType() == MyMoneyAccount::Investment)
       filter.addAccount(m_account.accountList());
 
-    if(isReconciliationAccount()) {
+    if (isReconciliationAccount()) {
       key = "kmm-sort-reconcile";
       sortOrder = KMyMoneyGlobalSettings::sortReconcileView();
       filter.addState(MyMoneyTransactionFilter::notReconciled);
@@ -440,7 +440,7 @@ void KGlobalLedgerView::loadView(void)
     filter.setReportAllSplits(true);
 
     // check if we have an account override of the sort order
-    if(!m_account.value(key).isEmpty())
+    if (!m_account.value(key).isEmpty())
       sortOrder = m_account.value(key);
 
     // setup sort order
@@ -455,33 +455,33 @@ void KGlobalLedgerView::loadView(void)
     QList<QPair<MyMoneyTransaction, MyMoneySplit> >::const_iterator it;
     QMap<QString, int>uniqueMap;
     int i = 0;
-    for(it = m_transactionList.constBegin(); it != m_transactionList.constEnd(); ++it) {
+    for (it = m_transactionList.constBegin(); it != m_transactionList.constEnd(); ++it) {
       uniqueMap[(*it).first.id()]++;
       KMyMoneyRegister::Transaction* t = KMyMoneyRegister::Register::transactionFactory(m_register, (*it).first, (*it).second, uniqueMap[(*it).first.id()]);
-      actBalance[t->split().accountId()] = MyMoneyMoney(0,1);
+      actBalance[t->split().accountId()] = MyMoneyMoney(0, 1);
       kmymoney->slotStatusProgressBar(++i, 0);
       // if we're in reconciliation and the state is cleared, we
       // force the item to show in dimmed intensity to get a visual focus
       // on those items, that we need to work on
-      if(isReconciliationAccount() && (*it).second.reconcileFlag() == MyMoneySplit::Cleared) {
+      if (isReconciliationAccount() && (*it).second.reconcileFlag() == MyMoneySplit::Cleared) {
         t->setReducedIntensity(true);
       }
     }
 
     // create dummy entries for the scheduled transactions if sorted by postdate
     int period = KMyMoneyGlobalSettings::schedulePreview();
-    if(m_register->primarySortKey() == KMyMoneyRegister::PostDateSort) {
+    if (m_register->primarySortKey() == KMyMoneyRegister::PostDateSort) {
       // show scheduled transactions which have a scheduled postdate
       // within the next 'period' days. In reconciliation mode, the
       // period starts on the statement date.
       QDate endDate = QDate::currentDate().addDays(period);
-      if(isReconciliationAccount())
+      if (isReconciliationAccount())
         endDate = reconciliationDate.addDays(period);
       QList<MyMoneySchedule> scheduleList = MyMoneyFile::instance()->scheduleList(m_account.id());
-      while(scheduleList.count() > 0){
+      while (scheduleList.count() > 0) {
         MyMoneySchedule& s = scheduleList.first();
-        for(;;) {
-          if(s.isFinished() || s.adjustedNextDueDate() > endDate) {
+        for (;;) {
+          if (s.isFinished() || s.adjustedNextDueDate() > endDate) {
             break;
           }
 
@@ -489,27 +489,27 @@ void KGlobalLedgerView::loadView(void)
           // if the transaction is scheduled and overdue, it can't
           // certainly be posted in the past. So we take today's date
           // as the alternative
-        if(s.isOverdue()) {
-             t.setPostDate(QDate::currentDate());
+          if (s.isOverdue()) {
+            t.setPostDate(QDate::currentDate());
           } else {
             t.setPostDate(s.adjustedNextDueDate());
           }
           const QList<MyMoneySplit>& splits = t.splits();
           QList<MyMoneySplit>::const_iterator it_s;
-          for(it_s = splits.begin(); it_s != splits.end(); ++it_s) {
-            if((*it_s).accountId() == m_account.id()) {
+          for (it_s = splits.begin(); it_s != splits.end(); ++it_s) {
+            if ((*it_s).accountId() == m_account.id()) {
               new KMyMoneyRegister::StdTransactionScheduled(m_register, t, *it_s, uniqueMap[t.id()]);
             }
           }
           // keep track of this payment locally (not in the engine)
-          if(s.isOverdue()) {
+          if (s.isOverdue()) {
             s.setLastPayment(QDate::currentDate());
           } else {
             s.setLastPayment(s.nextDueDate());
           }
 
           // if this is a one time schedule, we can bail out here as we're done
-          if(s.occurrence() == MyMoneySchedule::OCCUR_ONCE)
+          if (s.occurrence() == MyMoneySchedule::OCCUR_ONCE)
             break;
 
           // for all others, we check if the next payment date is still 'in range'
@@ -536,28 +536,28 @@ void KGlobalLedgerView::loadView(void)
     KMyMoneyRegister::StatementGroupMarker* dStatement = 0;
     KMyMoneyRegister::StatementGroupMarker* pStatement = 0;
 
-    if(isReconciliationAccount()) {
-      switch(m_register->primarySortKey()) {
-        case KMyMoneyRegister::PostDateSort:
-          statement = new KMyMoneyRegister::StatementGroupMarker(m_register, KMyMoneyRegister::Deposit, reconciliationDate, i18n("Statement Details"));
-          m_register->sortItems();
-          break;
-        case KMyMoneyRegister::TypeSort:
-          dStatement = new KMyMoneyRegister::StatementGroupMarker(m_register, KMyMoneyRegister::Deposit, reconciliationDate, i18n("Statement Deposit Details"));
-          pStatement = new KMyMoneyRegister::StatementGroupMarker(m_register, KMyMoneyRegister::Payment, reconciliationDate, i18n("Statement Payment Details"));
-          m_register->sortItems();
-          break;
-        default:
-          break;
+    if (isReconciliationAccount()) {
+      switch (m_register->primarySortKey()) {
+      case KMyMoneyRegister::PostDateSort:
+        statement = new KMyMoneyRegister::StatementGroupMarker(m_register, KMyMoneyRegister::Deposit, reconciliationDate, i18n("Statement Details"));
+        m_register->sortItems();
+        break;
+      case KMyMoneyRegister::TypeSort:
+        dStatement = new KMyMoneyRegister::StatementGroupMarker(m_register, KMyMoneyRegister::Deposit, reconciliationDate, i18n("Statement Deposit Details"));
+        pStatement = new KMyMoneyRegister::StatementGroupMarker(m_register, KMyMoneyRegister::Payment, reconciliationDate, i18n("Statement Payment Details"));
+        m_register->sortItems();
+        break;
+      default:
+        break;
       }
     }
 
     // we need at least the balance for the account we currently show
     actBalance[m_account.id()] = MyMoneyMoney();
 
-    if(m_account.accountType() == MyMoneyAccount::Investment) {
+    if (m_account.accountType() == MyMoneyAccount::Investment) {
       QList<QString>::const_iterator it_a;
-      for(it_a = m_account.accountList().begin(); it_a != m_account.accountList().end(); ++it_a) {
+      for (it_a = m_account.accountList().begin(); it_a != m_account.accountList().end(); ++it_a) {
         actBalance[*it_a] = MyMoneyMoney();
       }
     }
@@ -567,21 +567,21 @@ void KGlobalLedgerView::loadView(void)
     // of transactions backward. Also re-select a transaction if it was
     // selected before and setup the focus item.
 
-    MyMoneyMoney factor(1,1);
-    if(m_account.accountGroup() == MyMoneyAccount::Liability
-    || m_account.accountGroup() == MyMoneyAccount::Equity)
+    MyMoneyMoney factor(1, 1);
+    if (m_account.accountGroup() == MyMoneyAccount::Liability
+        || m_account.accountGroup() == MyMoneyAccount::Equity)
       factor = -factor;
 
     QMap<QString, int> deposits;
     QMap<QString, int> payments;
     QMap<QString, MyMoneyMoney> depositAmount;
     QMap<QString, MyMoneyMoney> paymentAmount;
-    for(it_b = actBalance.begin(); it_b != actBalance.end(); ++it_b) {
+    for (it_b = actBalance.begin(); it_b != actBalance.end(); ++it_b) {
       MyMoneyMoney balance = MyMoneyFile::instance()->balance(it_b.key());
       balance = balance * factor;
       clearedBalance[it_b.key()] =
-      futureBalance[it_b.key()] =
-      (*it_b) = balance;
+        futureBalance[it_b.key()] =
+          (*it_b) = balance;
       deposits[it_b.key()] = payments[it_b.key()] = 0;
       depositAmount[it_b.key()] = MyMoneyMoney();
       paymentAmount[it_b.key()] = MyMoneyMoney();
@@ -595,35 +595,35 @@ void KGlobalLedgerView::loadView(void)
     focusItem = 0;
 
     // take care of possibly trailing scheduled transactions (bump up the future balance)
-    while(p) {
-      if(p->isSelectable()) {
+    while (p) {
+      if (p->isSelectable()) {
         KMyMoneyRegister::Transaction* t = dynamic_cast<KMyMoneyRegister::Transaction*>(p);
-        if(t && t->isScheduled()) {
+        if (t && t->isScheduled()) {
           MyMoneyMoney balance = futureBalance[t->split().accountId()];
           const MyMoneySplit& split = t->split();
           // if this split is a stock split, we can't just add the amount of shares
-          if(t->transaction().isStockSplit()) {
+          if (t->transaction().isStockSplit()) {
             balance = balance * split.shares();
           } else {
             balance += split.shares() * factor;
           }
           futureBalance[split.accountId()] = balance;
-        } else if(t && !focusItem)
+        } else if (t && !focusItem)
           focusItem = p;
       }
       p = p->prevItem();
     }
 
     p = m_register->lastItem();
-    while(p) {
+    while (p) {
       KMyMoneyRegister::Transaction* t = dynamic_cast<KMyMoneyRegister::Transaction*>(p);
-      if(t) {
-        if(isSelected.contains(t->id()))
+      if (t) {
+        if (isSelected.contains(t->id()))
           t->setSelected(true);
 
-        if(t->id() == focusItemId)
+        if (t->id() == focusItemId)
           focusItem = t;
-        if(t->id() == anchorItemId)
+        if (t->id() == anchorItemId)
           anchorItem = t;
 
         const MyMoneySplit& split = t->split();
@@ -631,24 +631,24 @@ void KGlobalLedgerView::loadView(void)
         t->setBalance(balance);
 
         // if this split is a stock split, we can't just add the amount of shares
-        if(t->transaction().isStockSplit()) {
+        if (t->transaction().isStockSplit()) {
           balance /= split.shares();
         } else {
           balance -= split.shares() * factor;
         }
 
-        if(!t->isScheduled()) {
-          if(split.reconcileFlag() == MyMoneySplit::NotReconciled) {
+        if (!t->isScheduled()) {
+          if (split.reconcileFlag() == MyMoneySplit::NotReconciled) {
             tracer.printf("Reducing cleared balance by %s because %s/%s(%s) is not reconciled", qPrintable((split.shares() * factor).formatMoney("", 2)), qPrintable(t->transaction().id()), qPrintable(split.id()), qPrintable(t->transaction().postDate().toString(Qt::ISODate)));
             clearedBalance[split.accountId()] -= split.shares() * factor;
           }
-          if(isReconciliationAccount() && t->transaction().postDate() > reconciliationDate && split.reconcileFlag() == MyMoneySplit::Cleared) {
+          if (isReconciliationAccount() && t->transaction().postDate() > reconciliationDate && split.reconcileFlag() == MyMoneySplit::Cleared) {
             tracer.printf("Reducing cleared balance by %s because we are in reconciliation, %s/%s(%s)'s date is after or on reconciliation date (%s) and is cleared", qPrintable((split.shares() * factor).formatMoney("", 2)), qPrintable(t->transaction().id()), qPrintable(split.id()), qPrintable(t->transaction().postDate().toString(Qt::ISODate)), qPrintable(reconciliationDate.toString(Qt::ISODate)));
 
             clearedBalance[split.accountId()] -= split.shares() * factor;
           }
-          if(isReconciliationAccount() && t->transaction().postDate() <= reconciliationDate && split.reconcileFlag() == MyMoneySplit::Cleared) {
-            if(split.shares().isNegative()) {
+          if (isReconciliationAccount() && t->transaction().postDate() <= reconciliationDate && split.reconcileFlag() == MyMoneySplit::Cleared) {
+            if (split.shares().isNegative()) {
               payments[split.accountId()]++;
               paymentAmount[split.accountId()] += split.shares();
             } else {
@@ -657,7 +657,7 @@ void KGlobalLedgerView::loadView(void)
             }
           }
 
-          if(t->transaction().postDate() > QDate::currentDate()) {
+          if (t->transaction().postDate() > QDate::currentDate()) {
             tracer.printf("Reducing actual balance by %s because %s/%s(%s) is in the future", qPrintable((split.shares() * factor).formatMoney("", 2)), qPrintable(t->transaction().id()), qPrintable(split.id()), qPrintable(t->transaction().postDate().toString(Qt::ISODate)));
             actBalance[split.accountId()] -= split.shares() * factor;
           }
@@ -672,21 +672,21 @@ void KGlobalLedgerView::loadView(void)
     tracer.printf("cleared balance of %s = %s", qPrintable(m_account.name()), qPrintable(clearedBalance[m_account.id()].formatMoney("", 2)));
 
     // update statement information
-    if(statement) {
+    if (statement) {
       const QString aboutDeposits = i18np("%1 deposit (%2)", "%1 deposits (%2)",
-                                          deposits[m_account.id()], depositAmount[m_account.id()].abs().formatMoney(m_account.fraction()) );
+                                          deposits[m_account.id()], depositAmount[m_account.id()].abs().formatMoney(m_account.fraction()));
       const QString aboutPayments = i18np("%1 payment (%2)", "%1 payments (%2)",
-                                          payments[m_account.id()], paymentAmount[m_account.id()].abs().formatMoney(m_account.fraction()) );
+                                          payments[m_account.id()], paymentAmount[m_account.id()].abs().formatMoney(m_account.fraction()));
 
-      statement->setText(i18nc("%1 is a string, e.g. 7 deposits; %2 is a string, e.g. 4 payments", "%1, %2", aboutDeposits, aboutPayments) );
+      statement->setText(i18nc("%1 is a string, e.g. 7 deposits; %2 is a string, e.g. 4 payments", "%1, %2", aboutDeposits, aboutPayments));
     }
-    if(pStatement) {
+    if (pStatement) {
       pStatement->setText(i18np("%1 payment (%2)", "%1 payments (%2)", payments[m_account.id()]
-        , paymentAmount[m_account.id()].abs().formatMoney(m_account.fraction())) );
+                                , paymentAmount[m_account.id()].abs().formatMoney(m_account.fraction())));
     }
-    if(dStatement) {
+    if (dStatement) {
       dStatement->setText(i18np("%1 deposit (%2)", "%1 deposits (%2)", deposits[m_account.id()]
-        , depositAmount[m_account.id()].abs().formatMoney(m_account.fraction())) );
+                                , depositAmount[m_account.id()].abs().formatMoney(m_account.fraction())));
     }
 
     // add a last empty entry for new transactions
@@ -694,16 +694,16 @@ void KGlobalLedgerView::loadView(void)
     MyMoneySplit split;
     split.setReconcileFlag(MyMoneySplit::NotReconciled);
     // make sure to use the value specified in the option during reconciliation
-    if(isReconciliationAccount())
+    if (isReconciliationAccount())
       split.setReconcileFlag(static_cast<MyMoneySplit::reconcileFlagE>(KMyMoneyGlobalSettings::defaultReconciliationState()));
     KMyMoneyRegister::Register::transactionFactory(m_register, MyMoneyTransaction(), split, 0);
 
     m_register->updateRegister(true);
 
-    if(focusItem) {
+    if (focusItem) {
       // in case we have some selected items we just set the focus item
       // in other cases, we make the focusitem also the selected item
-      if(isSelected.count() > 1) {
+      if (isSelected.count() > 1) {
         m_register->setFocusItem(focusItem);
         m_register->setAnchorItem(anchorItem);
       } else
@@ -719,21 +719,21 @@ void KGlobalLedgerView::loadView(void)
     updateSummaryLine(actBalance, clearedBalance);
     kmymoney->slotStatusProgressBar(-1, -1);
 
-  } catch(MyMoneyException *e) {
+  } catch (MyMoneyException *e) {
     delete e;
     m_account = MyMoneyAccount();
     clear();
   }
 
   // (re-)position viewport
-  if(m_newAccountLoaded) {
-    if(focusItem) {
+  if (m_newAccountLoaded) {
+    if (focusItem) {
       d->m_startPoint = QPoint(-1, -1);
     } else {
       d->m_startPoint = QPoint(0, 0);
     }
   }
-  if(!d->m_inLoading) {
+  if (!d->m_inLoading) {
     d->m_viewPosTimer.setSingleShot(true);
     d->m_viewPosTimer.start(30);
     d->m_inLoading = true;
@@ -752,8 +752,8 @@ void KGlobalLedgerView::updateSummaryLine(const QMap<QString, MyMoneyMoney>& act
   m_centerSummaryLabel->show();
   m_rightSummaryLabel->show();
 
-  if(isReconciliationAccount()) {
-    if(m_account.accountType() != MyMoneyAccount::Investment) {
+  if (isReconciliationAccount()) {
+    if (m_account.accountType() != MyMoneyAccount::Investment) {
       m_leftSummaryLabel->setText(i18n("Statement: %1", d->m_endingBalance.formatMoney("", d->m_precision)));
       m_centerSummaryLabel->setText(i18nc("Cleared balance", "Cleared: %1", clearedBalance[m_account.id()].formatMoney("", d->m_precision)));
       m_rightSummaryLabel->setText(i18n("Difference: %1", (clearedBalance[m_account.id()] - d->m_endingBalance).formatMoney("", d->m_precision)));
@@ -762,21 +762,21 @@ void KGlobalLedgerView::updateSummaryLine(const QMap<QString, MyMoneyMoney>& act
     // update summary line in normal mode
     QDate reconcileDate = m_account.lastReconciliationDate();
 
-    if(reconcileDate.isValid()) {
-      m_leftSummaryLabel->setText(i18n("Last reconciled: %1",KGlobal::locale()->formatDate(reconcileDate, KLocale::ShortDate)));
+    if (reconcileDate.isValid()) {
+      m_leftSummaryLabel->setText(i18n("Last reconciled: %1", KGlobal::locale()->formatDate(reconcileDate, KLocale::ShortDate)));
     } else {
       m_leftSummaryLabel->setText(i18n("Never reconciled"));
     }
 
     QPalette palette = m_rightSummaryLabel->palette();
     palette.setColor(m_rightSummaryLabel->foregroundRole(), m_leftSummaryLabel->palette().color(foregroundRole()));
-    if(m_account.accountType() != MyMoneyAccount::Investment) {
+    if (m_account.accountType() != MyMoneyAccount::Investment) {
       m_centerSummaryLabel->setText(i18nc("Cleared balance", "Cleared: %1", clearedBalance[m_account.id()].formatMoney("", d->m_precision)));
       m_rightSummaryLabel->setText(i18n("Balance: %1", actBalance[m_account.id()].formatMoney("", d->m_precision)));
       bool showNegative = actBalance[m_account.id()].isNegative();
-      if(m_account.accountGroup() == MyMoneyAccount::Liability && !actBalance[m_account.id()].isZero())
+      if (m_account.accountGroup() == MyMoneyAccount::Liability && !actBalance[m_account.id()].isZero())
         showNegative = !showNegative;
-      if(showNegative) {
+      if (showNegative) {
         palette.setColor(m_rightSummaryLabel->foregroundRole(), KMyMoneyGlobalSettings::listNegativeValueColor());
       }
     } else {
@@ -785,21 +785,21 @@ void KGlobalLedgerView::updateSummaryLine(const QMap<QString, MyMoneyMoney>& act
       MyMoneySecurity base = file->baseCurrency();
       QMap<QString, MyMoneyMoney>::const_iterator it_b;
       bool approx = false;
-      for(it_b = actBalance.begin(); it_b != actBalance.end(); ++it_b) {
+      for (it_b = actBalance.begin(); it_b != actBalance.end(); ++it_b) {
         MyMoneyAccount stock = file->account(it_b.key());
         QString currencyId = stock.currencyId();
         MyMoneySecurity sec = file->security(currencyId);
         MyMoneyPrice priceInfo;
-        MyMoneyMoney rate(1,1);
+        MyMoneyMoney rate(1, 1);
 
-        if(stock.isInvest()) {
+        if (stock.isInvest()) {
           currencyId = sec.tradingCurrency();
           priceInfo = file->price(sec.id(), currencyId);
           approx |= !priceInfo.isValid();
           rate = priceInfo.rate(sec.tradingCurrency());
         }
 
-        if(currencyId != base.id()) {
+        if (currencyId != base.id()) {
           priceInfo = file->price(sec.tradingCurrency(), base.id());
           approx |= !priceInfo.isValid();
           rate = (rate * priceInfo.rate(base.id())).convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision()));
@@ -816,7 +816,7 @@ void KGlobalLedgerView::slotUpdateViewPos(void)
 {
   m_register->setUpdatesEnabled(true);
 
-  if(d->m_startPoint == QPoint(-1, -1)) {
+  if (d->m_startPoint == QPoint(-1, -1)) {
     m_register->ensureItemVisible(m_register->focusItem());
     m_register->updateContents();
   } else {
@@ -840,10 +840,10 @@ void KGlobalLedgerView::loadAccounts(void)
 
   // check if the current account still exists and make it the
   // current account
-  if(!m_account.id().isEmpty()) {
+  if (!m_account.id().isEmpty()) {
     try {
       m_account = file->account(m_account.id());
-    } catch(MyMoneyException *e) {
+    } catch (MyMoneyException *e) {
       delete e;
       m_account = MyMoneyAccount();
     }
@@ -857,7 +857,7 @@ void KGlobalLedgerView::loadAccounts(void)
     d->m_accountComboBox->expandAll();
   }
 
-  if(m_account.id().isEmpty()) {
+  if (m_account.id().isEmpty()) {
     // find the first favorite account
     QModelIndexList list = d->m_accountsModel->match(d->m_accountsModel->index(0, 0), AccountFavoriteRole, QVariant(true), 1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
     if (list.count() > 0) {
@@ -867,23 +867,23 @@ void KGlobalLedgerView::loadAccounts(void)
       }
     }
 
-    if(m_account.id().isEmpty()) {
+    if (m_account.id().isEmpty()) {
       // there are no favorite accounts find any account
       QModelIndexList list = d->m_accountsModel->match(d->m_accountsModel->index(0, 0), Qt::DisplayRole, QVariant(QString()), -1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive));
       for (QModelIndexList::ConstIterator it = list.constBegin(); it != list.constEnd(); ++it) {
         QVariant accountId = d->m_accountsModel->data(*it, AccountIdRole);
         MyMoneyAccount a = file->account(accountId.toString());
-        if(!a.isInvest())
+        if (!a.isInvest())
           m_account = a;
       }
     }
   }
 
-  if(!m_account.id().isEmpty()) {
+  if (!m_account.id().isEmpty()) {
     d->m_accountComboBox->setSelected(m_account.id());
     try {
       d->m_precision = MyMoneyMoney::denomToPrec(m_account.fraction());
-    } catch(MyMoneyException *e) {
+    } catch (MyMoneyException *e) {
       qDebug("Security %s for account %s not found", qPrintable(m_account.currencyId()), qPrintable(m_account.name()));
       delete e;
       d->m_precision = 2;
@@ -893,12 +893,12 @@ void KGlobalLedgerView::loadAccounts(void)
 
 void KGlobalLedgerView::selectTransaction(const QString& id)
 {
-  if(!id.isEmpty()) {
+  if (!id.isEmpty()) {
     KMyMoneyRegister::RegisterItem* p = m_register->lastItem();
-    while(p) {
+    while (p) {
       KMyMoneyRegister::Transaction* t = dynamic_cast<KMyMoneyRegister::Transaction*>(p);
-      if(t) {
-        if(t->transaction().id() == id) {
+      if (t) {
+        if (t->transaction().id() == id) {
           m_register->selectItem(t);
           m_register->ensureItemVisible(t);
           break;
@@ -912,10 +912,10 @@ void KGlobalLedgerView::selectTransaction(const QString& id)
 void KGlobalLedgerView::slotSelectAllTransactions(void)
 {
   KMyMoneyRegister::RegisterItem* p = m_register->firstItem();
-  while(p) {
+  while (p) {
     KMyMoneyRegister::Transaction* t = dynamic_cast<KMyMoneyRegister::Transaction*>(p);
-    if(t) {
-      if(t->isVisible() && t->isSelectable() && !t->isScheduled() && !t->id().isEmpty()) {
+    if (t) {
+      if (t->isVisible() && t->isSelectable() && !t->isScheduled() && !t->id().isEmpty()) {
         t->setSelected(true);
       }
     }
@@ -930,20 +930,20 @@ void KGlobalLedgerView::slotSelectAllTransactions(void)
 
 void KGlobalLedgerView::slotSetReconcileAccount(const MyMoneyAccount& acc, const QDate& reconciliationDate, const MyMoneyMoney& endingBalance)
 {
-  if(d->m_reconciliationAccount != acc.id()) {
+  if (d->m_reconciliationAccount != acc.id()) {
     // make sure the account is selected
-    if(!acc.id().isEmpty())
+    if (!acc.id().isEmpty())
       slotSelectAccount(acc.id());
 
     d->m_reconciliationAccount = acc.id();
     d->m_reconciliationDate = reconciliationDate;
     d->m_endingBalance = endingBalance;
-    if(acc.accountGroup() == MyMoneyAccount::Liability)
+    if (acc.accountGroup() == MyMoneyAccount::Liability)
       d->m_endingBalance = -endingBalance;
 
     m_newAccountLoaded = true;
 
-    if(acc.id().isEmpty()) {
+    if (acc.id().isEmpty()) {
       m_buttonbar->removeAction(kmymoney->action("account_reconcile_postpone"));
       m_buttonbar->removeAction(kmymoney->action("account_reconcile_finish"));
     } else {
@@ -965,10 +965,10 @@ bool KGlobalLedgerView::isReconciliationAccount(void) const
 
 bool KGlobalLedgerView::slotSelectAccount(const MyMoneyObject& obj)
 {
-  if(typeid(obj) != typeid(MyMoneyAccount))
+  if (typeid(obj) != typeid(MyMoneyAccount))
     return false;
 
-  if(d->m_recursion)
+  if (d->m_recursion)
     return false;
 
   d->m_recursion = true;
@@ -982,18 +982,18 @@ bool KGlobalLedgerView::slotSelectAccount(const QString& id, const QString& tran
 {
   bool    rc = true;
 
-  if(!id.isEmpty()) {
-    if(m_account.id() != id) {
+  if (!id.isEmpty()) {
+    if (m_account.id() != id) {
       try {
         m_account = MyMoneyFile::instance()->account(id);
         // if a stock account is selected, we show the
         // the corresponding parent (investment) account
-        if(m_account.isInvest()) {
+        if (m_account.isInvest()) {
           m_account = MyMoneyFile::instance()->account(m_account.parentAccountId());
         }
         m_newAccountLoaded = true;
         slotLoadView();
-      } catch(MyMoneyException* e) {
+      } catch (MyMoneyException* e) {
         qDebug("Unable to retrieve account %s", qPrintable(id));
         delete e;
         rc = false;
@@ -1010,7 +1010,7 @@ bool KGlobalLedgerView::slotSelectAccount(const QString& id, const QString& tran
 
 void KGlobalLedgerView::slotNewTransaction(KMyMoneyRegister::Action id)
 {
-  if(!m_inEditMode) {
+  if (!m_inEditMode) {
     d->m_action = id;
     emit newTransaction();
   }
@@ -1023,12 +1023,12 @@ void KGlobalLedgerView::slotNewTransaction(void)
 
 void KGlobalLedgerView::setupDefaultAction(void)
 {
-  switch(m_account.accountType()) {
+  switch (m_account.accountType()) {
     // TODO if we want a different action for different account types
     //      we can add cases here
-    default:
-      d->m_action = KMyMoneyRegister::ActionWithdrawal;
-      break;
+  default:
+    d->m_action = KMyMoneyRegister::ActionWithdrawal;
+    break;
   }
 }
 
@@ -1036,24 +1036,24 @@ bool KGlobalLedgerView::selectEmptyTransaction(void)
 {
   bool rc = false;
 
-  if(!m_inEditMode) {
+  if (!m_inEditMode) {
     // in case we don't know the type of transaction to be created,
     // have at least one selected transaction and the id of
     // this transaction is not empty, we take it as template for the
     // transaction to be created
     KMyMoneyRegister::SelectedTransactions list(m_register);
-    if((d->m_action == KMyMoneyRegister::ActionNone) && (!list.isEmpty()) && (!list[0].transaction().id().isEmpty())) {
+    if ((d->m_action == KMyMoneyRegister::ActionNone) && (!list.isEmpty()) && (!list[0].transaction().id().isEmpty())) {
       // the new transaction to be created will have the same type
       // as the one that currently has the focus
       KMyMoneyRegister::Transaction* t = dynamic_cast<KMyMoneyRegister::Transaction*>(m_register->focusItem());
-      if(t)
+      if (t)
         d->m_action = t->actionType();
       m_register->clearSelection();
     }
 
     // if we still don't have an idea which type of transaction
     // to create, we use the default.
-    if(d->m_action == KMyMoneyRegister::ActionNone) {
+    if (d->m_action == KMyMoneyRegister::ActionNone) {
       setupDefaultAction();
     }
 
@@ -1077,53 +1077,53 @@ TransactionEditor* KGlobalLedgerView::startEdit(const KMyMoneyRegister::Selected
   // 2 - user will be informed, that this transaction cannot be changed anymore
 
   int warnLevel = list.warnLevel();
-  Q_ASSERT(warnLevel<2);  // otherwise the edit action should not be enabled
+  Q_ASSERT(warnLevel < 2);  // otherwise the edit action should not be enabled
 
-  switch(warnLevel) {
-    case 0:
-      break;
+  switch (warnLevel) {
+  case 0:
+    break;
 
-    case 1:
-      if(KMessageBox::warningContinueCancel(0,
-        i18n(
-          "At least one split of the selected transactions has been reconciled. "
-          "Do you wish to continue to edit the transactions anyway?"
-        ),
-        i18n("Transaction already reconciled"), KStandardGuiItem::cont(), KStandardGuiItem::cancel(),
-        "EditReconciledTransaction") == KMessageBox::Cancel) {
-        warnLevel = 2;
-      }
-      break;
+  case 1:
+    if (KMessageBox::warningContinueCancel(0,
+                                           i18n(
+                                             "At least one split of the selected transactions has been reconciled. "
+                                             "Do you wish to continue to edit the transactions anyway?"
+                                           ),
+                                           i18n("Transaction already reconciled"), KStandardGuiItem::cont(), KStandardGuiItem::cancel(),
+                                           "EditReconciledTransaction") == KMessageBox::Cancel) {
+      warnLevel = 2;
+    }
+    break;
 
-    case 2:
-      KMessageBox::sorry(0,
-            i18n("At least one split of the selected transactions has been frozen. "
-                 "Editing the transactions is therefore prohibited."),
-            i18n("Transaction already frozen"));
-      break;
+  case 2:
+    KMessageBox::sorry(0,
+                       i18n("At least one split of the selected transactions has been frozen. "
+                            "Editing the transactions is therefore prohibited."),
+                       i18n("Transaction already frozen"));
+    break;
 
-    case 3:
-      KMessageBox::sorry(0,
-            i18n("At least one split of the selected transaction references an account that has been closed. "
-                 "Editing the transactions is therefore prohibited."),
-            i18n("Account closed"));
-      break;
+  case 3:
+    KMessageBox::sorry(0,
+                       i18n("At least one split of the selected transaction references an account that has been closed. "
+                            "Editing the transactions is therefore prohibited."),
+                       i18n("Account closed"));
+    break;
   }
 
-  if(warnLevel > 1)
+  if (warnLevel > 1)
     return 0;
 
 
   TransactionEditor* editor = 0;
   KMyMoneyRegister::Transaction* item = dynamic_cast<KMyMoneyRegister::Transaction*>(m_register->focusItem());
 
-  if(item) {
+  if (item) {
     // in case the current focus item is not selected, we move the focus to the first selected transaction
-    if(!item->isSelected()) {
+    if (!item->isSelected()) {
       KMyMoneyRegister::RegisterItem* p;
-      for(p = m_register->firstItem(); p; p = p->nextItem()) {
+      for (p = m_register->firstItem(); p; p = p->nextItem()) {
         KMyMoneyRegister::Transaction* t = dynamic_cast<KMyMoneyRegister::Transaction*>(p);
-        if(t && t->isSelected()) {
+        if (t && t->isSelected()) {
           m_register->setFocusItem(t);
           item = t;
           break;
@@ -1133,7 +1133,7 @@ TransactionEditor* KGlobalLedgerView::startEdit(const KMyMoneyRegister::Selected
 
     // decide, if we edit in the register or in the form
     TransactionEditorContainer* parent;
-    if(m_formFrame->isVisible())
+    if (m_formFrame->isVisible())
       parent = m_form;
     else {
       parent = m_register;
@@ -1144,8 +1144,8 @@ TransactionEditor* KGlobalLedgerView::startEdit(const KMyMoneyRegister::Selected
     // check that we use the same transaction commodity in all selected transactions
     // if not, we need to update this in the editor's list. The user can also bail out
     // of this operation which means that we have to stop editing here.
-    if(editor) {
-      if(!editor->fixTransactionCommodity(m_account)) {
+    if (editor) {
+      if (!editor->fixTransactionCommodity(m_account)) {
         // if the user wants to quit, we need to destroy the editor
         // and bail out
         delete editor;
@@ -1153,8 +1153,8 @@ TransactionEditor* KGlobalLedgerView::startEdit(const KMyMoneyRegister::Selected
       }
     }
 
-    if(editor) {
-      if(parent == m_register) {
+    if (editor) {
+      if (parent == m_register) {
         // make sure, the height of the table is correct
         m_register->updateRegister(KMyMoneyGlobalSettings::ledgerLens() | !KMyMoneyGlobalSettings::transactionForm());
       }
@@ -1183,7 +1183,7 @@ TransactionEditor* KGlobalLedgerView::startEdit(const KMyMoneyRegister::Selected
 
       // install event filter in all taborder widgets
       QWidgetList::const_iterator it_w = m_tabOrderWidgets.constBegin();
-      for(;it_w != m_tabOrderWidgets.constEnd(); ++it_w) {
+      for (;it_w != m_tabOrderWidgets.constEnd(); ++it_w) {
         (*it_w)->installEventFilter(this);
       }
       // Install a filter that checks if a mouse press happened outside
@@ -1193,7 +1193,7 @@ TransactionEditor* KGlobalLedgerView::startEdit(const KMyMoneyRegister::Selected
       // Check if the editor has some preference on where to set the focus
       // If not, set the focus to the first widget in the tab order
       QWidget* focusWidget = editor->firstWidget();
-      if(!focusWidget)
+      if (!focusWidget)
         focusWidget = m_tabOrderWidgets.first();
 
       // for some reason, this only works reliably if delayed a bit
@@ -1219,23 +1219,23 @@ void KGlobalLedgerView::slotLeaveEditMode(const KMyMoneyRegister::SelectedTransa
   // we always select the very last known transaction entry no
   // matter if the transaction has been created or not.
 
-  if(list.count() && list[0].transaction().id().isEmpty()) {
+  if (list.count() && list[0].transaction().id().isEmpty()) {
     // block signals to prevent some infinite loops that might occur here.
     m_register->blockSignals(true);
     m_register->clearSelection();
     KMyMoneyRegister::RegisterItem* p = m_register->lastItem();
-    if(p && p->prevItem())
+    if (p && p->prevItem())
       p = p->prevItem();
     m_register->selectItem(p);
     m_register->updateRegister(true);
     m_register->blockSignals(false);
     // we need to update the form manually as sending signals was blocked
     KMyMoneyRegister::Transaction* t = dynamic_cast<KMyMoneyRegister::Transaction*>(p);
-    if(t)
+    if (t)
       m_form->slotSetTransaction(t);
   }
 
-  if(m_needReload)
+  if (m_needReload)
     slotLoadView();
 
   m_register->setFocus();
@@ -1245,12 +1245,12 @@ bool KGlobalLedgerView::focusNextPrevChild(bool next)
 {
   bool  rc = false;
   // qDebug("KGlobalLedgerView::focusNextPrevChild(editmode=%s)", m_inEditMode ? "true" : "false");
-  if(m_inEditMode) {
+  if (m_inEditMode) {
     QWidget *w = 0;
 
     w = qApp->focusWidget();
     int currentWidgetIndex = m_tabOrderWidgets.indexOf(w);
-    while(w && currentWidgetIndex == -1) {
+    while (w && currentWidgetIndex == -1) {
       // qDebug("'%s' not in list, use parent", w->className());
       w = w->parentWidget();
       currentWidgetIndex = m_tabOrderWidgets.indexOf(w);
@@ -1264,7 +1264,7 @@ bool KGlobalLedgerView::focusNextPrevChild(bool next)
       else
         w = ((it - 1) != m_tabOrderWidgets.constBegin()) ? *(it - 1) : m_tabOrderWidgets.last();
 
-      if(((w->focusPolicy() & Qt::TabFocus) == Qt::TabFocus) && w->isVisible() && w->isEnabled()) {
+      if (((w->focusPolicy() & Qt::TabFocus) == Qt::TabFocus) && w->isVisible() && w->isEnabled()) {
         // qDebug("Selecting '%s' as focus", w->className());
         w->setFocus();
         rc = true;
@@ -1278,8 +1278,8 @@ bool KGlobalLedgerView::focusNextPrevChild(bool next)
 
 void KGlobalLedgerView::show(void)
 {
-  if(m_needReload) {
-    if(!m_inEditMode) {
+  if (m_needReload) {
+    if (!m_inEditMode) {
       loadView();
       m_needReload = false;
       m_newAccountLoaded = false;
@@ -1299,33 +1299,33 @@ bool KGlobalLedgerView::eventFilter(QObject* o, QEvent* e)
 {
   bool rc = false;
 
-  if(e->type() == QEvent::KeyPress) {
+  if (e->type() == QEvent::KeyPress) {
     QKeyEvent *k = static_cast<QKeyEvent*>(e);
-    if(m_inEditMode) {
+    if (m_inEditMode) {
       // qDebug("object = %s, key = %d", o->className(), k->key());
-      if(o == m_register) {
+      if (o == m_register) {
         // we hide all key press events from the register
         // while editing a transaction
         rc = true;
       }
     } else {
       // qDebug("object = %s, key = %d", o->className(), k->key());
-      if(o == m_register) {
-        if((k->modifiers() & Qt::KeyboardModifierMask) == 0
-           || (k->modifiers() & Qt::KeypadModifier) != 0) {
-          switch(k->key()) {
-            case Qt::Key_Return:
-            case Qt::Key_Enter:
-      		    kmymoney->action("transaction_edit")->trigger();
-              rc = true;
-              break;
+      if (o == m_register) {
+        if ((k->modifiers() & Qt::KeyboardModifierMask) == 0
+            || (k->modifiers() & Qt::KeypadModifier) != 0) {
+          switch (k->key()) {
+          case Qt::Key_Return:
+          case Qt::Key_Enter:
+            kmymoney->action("transaction_edit")->trigger();
+            rc = true;
+            break;
           }
         }
       }
     }
   }
 
-  if(!rc)
+  if (!rc)
     rc = KMyMoneyViewBase::eventFilter(o, e);
 
   return rc;
@@ -1337,7 +1337,7 @@ void KGlobalLedgerView::slotSortOptions(void)
 
   QString key;
   QString sortOrder, def;
-  if(isReconciliationAccount()) {
+  if (isReconciliationAccount()) {
     key = "kmm-sort-reconcile";
     def = KMyMoneyGlobalSettings::sortReconcileView();
   } else {
@@ -1346,17 +1346,17 @@ void KGlobalLedgerView::slotSortOptions(void)
   }
 
   // check if we have an account override of the sort order
-  if(!m_account.value(key).isEmpty())
+  if (!m_account.value(key).isEmpty())
     sortOrder = m_account.value(key);
 
   QString oldOrder = sortOrder;
 
   dlg->setSortOption(sortOrder, def);
 
-  if(dlg->exec() == QDialog::Accepted) {
+  if (dlg->exec() == QDialog::Accepted) {
     sortOrder = dlg->sortOption();
-    if(sortOrder != oldOrder) {
-      if(sortOrder.isEmpty()) {
+    if (sortOrder != oldOrder) {
+      if (sortOrder.isEmpty()) {
         m_account.deletePair(key);
       } else {
         m_account.setValue(key, sortOrder);
@@ -1365,7 +1365,7 @@ void KGlobalLedgerView::slotSortOptions(void)
       try {
         MyMoneyFile::instance()->modifyAccount(m_account);
         ft.commit();
-      } catch(MyMoneyException* e) {
+      } catch (MyMoneyException* e) {
         qDebug("Unable to update sort order for account '%s': %s", qPrintable(m_account.name()), qPrintable(e->what()));
         delete e;
       }
@@ -1376,7 +1376,7 @@ void KGlobalLedgerView::slotSortOptions(void)
 
 void KGlobalLedgerView::slotToggleTransactionMark(KMyMoneyRegister::Transaction* /* t */)
 {
-  if(!m_inEditMode) {
+  if (!m_inEditMode) {
     emit toggleReconciliationFlag();
   }
 }
@@ -1389,16 +1389,16 @@ void KGlobalLedgerView::slotKeepPostDate(const QDate& date)
 bool KGlobalLedgerView::canCreateTransactions(QString& tooltip) const
 {
   bool rc = true;
-  if(m_account.id().isEmpty()) {
+  if (m_account.id().isEmpty()) {
     tooltip = i18n("Cannot create transactions when no account is selected.");
     rc = false;
   }
-  if(m_account.accountGroup() == MyMoneyAccount::Income
-  || m_account.accountGroup() == MyMoneyAccount::Expense) {
+  if (m_account.accountGroup() == MyMoneyAccount::Income
+      || m_account.accountGroup() == MyMoneyAccount::Expense) {
     tooltip = i18n("Cannot create transactions in the context of a category.");
     rc = false;
   }
-  if(m_account.isClosed()) {
+  if (m_account.isClosed()) {
     tooltip = i18n("Cannot create transactions in a closed account.");
     rc = false;
   }
@@ -1407,10 +1407,10 @@ bool KGlobalLedgerView::canCreateTransactions(QString& tooltip) const
 
 bool KGlobalLedgerView::canProcessTransactions(const KMyMoneyRegister::SelectedTransactions& list, QString& tooltip) const
 {
-  if(m_register->focusItem() == 0)
+  if (m_register->focusItem() == 0)
     return false;
 
-  if(!m_register->focusItem()->isSelected()) {
+  if (!m_register->focusItem()->isSelected()) {
     tooltip = i18n("Cannot process transaction with focus if it is not selected.");
     return false;
   }
@@ -1419,12 +1419,12 @@ bool KGlobalLedgerView::canProcessTransactions(const KMyMoneyRegister::SelectedT
 
 bool KGlobalLedgerView::canModifyTransactions(const KMyMoneyRegister::SelectedTransactions& list, QString& tooltip) const
 {
-  return canProcessTransactions(list,tooltip) && list.canModify();
+  return canProcessTransactions(list, tooltip) && list.canModify();
 }
 
 bool KGlobalLedgerView::canDuplicateTransactions(const KMyMoneyRegister::SelectedTransactions& list, QString& tooltip) const
 {
-  return canProcessTransactions(list,tooltip) && list.canDuplicate();
+  return canProcessTransactions(list, tooltip) && list.canDuplicate();
 }
 
 bool KGlobalLedgerView::canEditTransactions(const KMyMoneyRegister::SelectedTransactions& list, QString& tooltip) const
@@ -1437,7 +1437,7 @@ bool KGlobalLedgerView::canEditTransactions(const KMyMoneyRegister::SelectedTran
   //   d) the transaction having the current focus is selected
 
   // check for d)
-  if(!canProcessTransactions(list, tooltip))
+  if (!canProcessTransactions(list, tooltip))
     return false;
   // check for c)
   if (list.warnLevel() == 2) {
@@ -1450,35 +1450,35 @@ bool KGlobalLedgerView::canEditTransactions(const KMyMoneyRegister::SelectedTran
   int investmentTransactions = 0;
   int normalTransactions = 0;
 
-  if(m_account.accountGroup() == MyMoneyAccount::Income
-  || m_account.accountGroup() == MyMoneyAccount::Expense) {
+  if (m_account.accountGroup() == MyMoneyAccount::Income
+      || m_account.accountGroup() == MyMoneyAccount::Expense) {
     tooltip = i18n("Cannot edit transactions in the context of a category.");
     rc = false;
   }
 
   KMyMoneyRegister::SelectedTransactions::const_iterator it_t;
-  for(it_t = list.begin(); rc && it_t != list.end(); ++it_t) {
-    if((*it_t).transaction().id().isEmpty()) {
+  for (it_t = list.begin(); rc && it_t != list.end(); ++it_t) {
+    if ((*it_t).transaction().id().isEmpty()) {
       tooltip.clear();
       rc = false;
       continue;
     }
 
-    if(KMyMoneyUtils::transactionType((*it_t).transaction()) == KMyMoneyUtils::InvestmentTransaction)
+    if (KMyMoneyUtils::transactionType((*it_t).transaction()) == KMyMoneyUtils::InvestmentTransaction)
       ++investmentTransactions;
     else
       ++normalTransactions;
 
     // check for a)
-    if(investmentTransactions != 0 && normalTransactions != 0) {
+    if (investmentTransactions != 0 && normalTransactions != 0) {
       tooltip = i18n("Cannot edit investment transactions and non-investment transactions together.");
       rc = false;
       break;
     }
 
     // check for b) but only for normalTransactions
-    if((*it_t).transaction().splitCount() > 2 && normalTransactions != 0) {
-      if(list.count() > 1) {
+    if ((*it_t).transaction().splitCount() > 2 && normalTransactions != 0) {
+      if (list.count() > 1) {
         tooltip = i18n("Cannot edit multiple split transactions at once.");
         rc = false;
         break;
@@ -1487,8 +1487,8 @@ bool KGlobalLedgerView::canEditTransactions(const KMyMoneyRegister::SelectedTran
   }
 
   // now check that we have the correct account type for investment transactions
-  if(rc == true && investmentTransactions != 0) {
-    if(m_account.accountType() != MyMoneyAccount::Investment) {
+  if (rc == true && investmentTransactions != 0) {
+    if (m_account.accountType() != MyMoneyAccount::Investment) {
       tooltip = i18n("Cannot edit investment transactions in the context of this account.");
       rc = false;
     }

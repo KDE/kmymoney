@@ -118,7 +118,9 @@ public:
     * @return reference to QString containing the id. If no item
     *         is selected the QString will be empty.
     */
-  const QString& selectedItem(void) const { return m_id; }
+  const QString& selectedItem(void) const {
+    return m_id;
+  }
 
   /**
     * This method selects the item with the respective @a id.
@@ -133,12 +135,16 @@ public:
     */
   bool isInArrowArea(const QPoint& pos) const;
 
-  void setSuppressObjectCreation(bool suppress) { m_canCreateObjects = !suppress; }
+  void setSuppressObjectCreation(bool suppress) {
+    m_canCreateObjects = !suppress;
+  }
 
   /**
     * overridden for internal reasons, no API change
     */
-  void setCurrentText(const QString& txt = QString()) { KComboBox::setItemText(KComboBox::currentIndex(), txt); }
+  void setCurrentText(const QString& txt = QString()) {
+    KComboBox::setItemText(KComboBox::currentIndex(), txt);
+  }
 
   /**
    * Overridden to support our own completion box
@@ -167,7 +173,7 @@ protected:
   /**
     * reimplemented to support detection of new items
     */
-  void focusOutEvent(QFocusEvent* );
+  void focusOutEvent(QFocusEvent*);
 
   /**
     * set the widgets text area based on the item with the given @a id.

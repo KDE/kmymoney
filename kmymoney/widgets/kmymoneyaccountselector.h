@@ -61,7 +61,7 @@ class kMyMoneyAccountSelector : public KMyMoneySelector
 public:
   friend class AccountSet;
 
-  explicit kMyMoneyAccountSelector(QWidget *parent=0, Qt::WFlags flags = 0, const bool createButtons = true);
+  explicit kMyMoneyAccountSelector(QWidget *parent = 0, Qt::WFlags flags = 0, const bool createButtons = true);
   virtual ~kMyMoneyAccountSelector();
 
   /**
@@ -110,13 +110,17 @@ public slots:
     * This slot selects all items that are currently in
     * the account list of the widget.
     */
-  void slotSelectAllAccounts(void) { selectAllItems(true); };
+  void slotSelectAllAccounts(void) {
+    selectAllItems(true);
+  };
 
   /**
     * This slot deselects all items that are currently in
     * the account list of the widget.
     */
-  void slotDeselectAllAccounts(void) { selectAllItems(false); };
+  void slotDeselectAllAccounts(void) {
+    selectAllItems(false);
+  };
 
 protected:
   /**
@@ -139,12 +143,16 @@ protected slots:
   /**
     * This slot selects all income categories
     */
-  void slotSelectIncomeCategories(void) { selectCategories(true, false); };
+  void slotSelectIncomeCategories(void) {
+    selectCategories(true, false);
+  };
 
   /**
     * This slot selects all expense categories
     */
-  void slotSelectExpenseCategories(void) { selectCategories(false, true); };
+  void slotSelectExpenseCategories(void) {
+    selectCategories(false, true);
+  };
 
 protected:
   KPushButton*              m_allAccountsButton;
@@ -170,10 +178,16 @@ public:
   int load(kMyMoneyAccountSelector* selector);
   int load(kMyMoneyAccountSelector* selector, const QString& baseName, const QList<QString>& accountIdList, const bool clear = false);
 
-  int count(void) const { return m_count; }
+  int count(void) const {
+    return m_count;
+  }
 
-  void setHideClosedAccounts (bool _bool) { m_hideClosedAccounts = _bool; }
-  bool isHidingClosedAccounts (void) { return m_hideClosedAccounts; }
+  void setHideClosedAccounts(bool _bool) {
+    m_hideClosedAccounts = _bool;
+  }
+  bool isHidingClosedAccounts(void) {
+    return m_hideClosedAccounts;
+  }
 
 protected:
   int loadSubAccounts(kMyMoneyAccountSelector* selector, Q3ListViewItem* parent, const QString& key, const QStringList& list);

@@ -54,7 +54,7 @@ class KMyMoneySelector : public QWidget
 {
   Q_OBJECT
 public:
-  explicit KMyMoneySelector(QWidget *parent=0, Qt::WFlags flags = 0);
+  explicit KMyMoneySelector(QWidget *parent = 0, Qt::WFlags flags = 0);
   virtual ~KMyMoneySelector();
 
   /**
@@ -77,7 +77,9 @@ public:
     *
     * @sa setSelectionMode()
     */
-  Q3ListView::SelectionMode selectionMode(void) const { return m_selMode; }
+  Q3ListView::SelectionMode selectionMode(void) const {
+    return m_selMode;
+  }
 
   /**
     * This method returns the list of selected item ids. If
@@ -138,7 +140,9 @@ public:
   /**
     * Return a pointer to the K3ListView object
     */
-  K3ListView* listView(void) const { return m_listView; };
+  K3ListView* listView(void) const {
+    return m_listView;
+  };
 
   /**
     * This method selects/deselects all items that
@@ -285,13 +289,17 @@ public slots:
     * This slot selects all items that are currently in
     * the item list of the widget.
     */
-  void slotSelectAllItems(void) { selectAllItems(true); };
+  void slotSelectAllItems(void) {
+    selectAllItems(true);
+  };
 
   /**
     * This slot deselects all items that are currently in
     * the item list of the widget.
     */
-  void slotDeselectAllItems(void) { selectAllItems(false); };
+  void slotDeselectAllItems(void) {
+    selectAllItems(false);
+  };
 
 signals:
   void stateChanged(void);

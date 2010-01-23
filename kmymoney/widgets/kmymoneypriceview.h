@@ -51,7 +51,9 @@ public:
 
   int compare(Q3ListViewItem *p, int col, bool ascending) const;
 
-  const MyMoneyPrice& price(void) const { return m_pr; };
+  const MyMoneyPrice& price(void) const {
+    return m_pr;
+  };
 
 private:
   MyMoneyPrice  m_pr;
@@ -60,9 +62,9 @@ private:
 
 class KMyMoneyPriceView : public K3ListView
 {
-   Q_OBJECT
+  Q_OBJECT
 public:
-  KMyMoneyPriceView(QWidget *parent=0);
+  KMyMoneyPriceView(QWidget *parent = 0);
   ~KMyMoneyPriceView();
 
 protected:

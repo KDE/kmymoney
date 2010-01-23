@@ -78,15 +78,16 @@ class KCalendarSystem;
   * @author Michael Edwardes 2003
   *
 **/
-class kMyMoneyCalendar : public Q3Frame  {
-   Q_OBJECT
+class kMyMoneyCalendar : public Q3Frame
+{
+  Q_OBJECT
 public:
 
 public:
   /**
     * Standard constructor.
   **/
-  explicit kMyMoneyCalendar(QWidget *parent=0);
+  explicit kMyMoneyCalendar(QWidget *parent = 0);
 
   /**
     * Standard destructor.
@@ -96,12 +97,16 @@ public:
   /**
     * Sets the calendar type.
   **/
-  void setType(kMyMoneyDateTbl::calendarType type) { table->setType(type); }
+  void setType(kMyMoneyDateTbl::calendarType type) {
+    table->setType(type);
+  }
 
   /**
     * Get the calendar type.
   **/
-  kMyMoneyDateTbl::calendarType type(void) const { return table->type(); }
+  kMyMoneyDateTbl::calendarType type(void) const {
+    return table->type();
+  }
 
   /** The size hint for date pickers. The size hint recommends the
    *   minimum size of the widget so that all elements may be placed
@@ -142,8 +147,9 @@ public:
   /**
    * Returns the font size of the widget elements.
    */
-  int fontSize() const
-    { return fontsize; }
+  int fontSize() const {
+    return fontsize;
+  }
 
   /**
    * By calling this method with @p enable = true, KDatePicker will show
@@ -154,7 +160,7 @@ public:
    * @see #hasCloseButton
    * @since 3.1
    */
-  void setCloseButton( bool enable );
+  void setCloseButton(bool enable);
 
   /**
    * @returns true if a KDatePicker shows a close-button.
@@ -173,7 +179,7 @@ public:
 
 protected:
   /// to catch move keyEvents when QLineEdit has keyFocus
-  virtual bool eventFilter(QObject *o, QEvent *e );
+  virtual bool eventFilter(QObject *o, QEvent *e);
   /// the resize event
   virtual void resizeEvent(QResizeEvent*);
   /// the style control button
@@ -197,7 +203,7 @@ protected:
   /// the date table
   kMyMoneyDateTbl *table;
   /// the size calculated during resize events
-    //  QSize sizehint;
+  //  QSize sizehint;
   /// the widest month string in pixels:
   QSize maxMonthRect;
 
@@ -248,8 +254,8 @@ private:
   int fontsize;
 
 protected:
-  virtual void virtual_hook( int id, void* data );
-  void init( const QDate &dt );
+  virtual void virtual_hook(int id, void* data);
+  void init(const QDate &dt);
 
 private:
   class kMyMoneyCalendarPrivate;

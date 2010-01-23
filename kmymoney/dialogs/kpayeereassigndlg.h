@@ -41,8 +41,8 @@
 class KPayeeReassignDlgDecl : public QDialog, public Ui::KPayeeReassignDlgDecl
 {
 public:
-  KPayeeReassignDlgDecl( QWidget *parent ) : QDialog( parent ) {
-    setupUi( this );
+  KPayeeReassignDlgDecl(QWidget *parent) : QDialog(parent) {
+    setupUi(this);
   }
 };
 
@@ -51,7 +51,7 @@ class KPayeeReassignDlg : public KPayeeReassignDlgDecl
   Q_OBJECT
 public:
   /** Default constructor */
-  KPayeeReassignDlg( QWidget* parent = 0);
+  KPayeeReassignDlg(QWidget* parent = 0);
 
   /** Destructor */
   ~KPayeeReassignDlg();
@@ -71,7 +71,9 @@ public:
    * Returns true, if the names of the payees to be deleted should be copied
    * to the selected payee's match list.
    */
-  bool addToMatchList(void) const { return m_copyToMatchList->isChecked(); }
+  bool addToMatchList(void) const {
+    return m_copyToMatchList->isChecked();
+  }
 
 protected:
   void accept(void);

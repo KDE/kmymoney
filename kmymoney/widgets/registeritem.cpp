@@ -35,17 +35,17 @@ QDate RegisterItem::nullDate;
 MyMoneyMoney RegisterItem::nullValue;
 
 RegisterItem::RegisterItem() :
-  m_parent(0),
-  m_prev(0),
-  m_next(0)
+    m_parent(0),
+    m_prev(0),
+    m_next(0)
 {
   init();
 }
 
 RegisterItem::RegisterItem(Register* parent) :
-  m_parent(parent),
-  m_prev(0),
-  m_next(0)
+    m_parent(parent),
+    m_prev(0),
+    m_next(0)
 {
   init();
   parent->addItem(this);
@@ -71,16 +71,16 @@ void RegisterItem::setParent(Register* parent)
 
 void RegisterItem::setNumRowsRegister(int rows)
 {
-  if(rows != m_rowsRegister) {
+  if (rows != m_rowsRegister) {
     m_rowsRegister = rows;
-    if(m_parent)
+    if (m_parent)
       m_parent->forceUpdateLists();
   }
 }
 
 bool RegisterItem::markVisible(bool visible)
 {
-  if(m_visible == visible)
+  if (m_visible == visible)
     return false;
   m_visible = visible;
   return true;
@@ -88,18 +88,18 @@ bool RegisterItem::markVisible(bool visible)
 
 void RegisterItem::setVisible(bool visible)
 {
-  if(markVisible(visible) && m_parent) {
+  if (markVisible(visible) && m_parent) {
     int numRows = m_parent->numRows();
-    if(visible) {
-      for(int i = startRow(); i < startRow() + numRowsRegister(); ++i) {
-        if(numRows > i) {
+    if (visible) {
+      for (int i = startRow(); i < startRow() + numRowsRegister(); ++i) {
+        if (numRows > i) {
           m_parent->showRow(i);
           m_parent->setRowHeight(i, rowHeightHint());
         }
       }
     } else {
-      for(int i = startRow(); i < startRow() + numRowsRegister(); ++i) {
-        if(numRows > i) { 
+      for (int i = startRow(); i < startRow() + numRowsRegister(); ++i) {
+        if (numRows > i) {
           m_parent->hideRow(i);
         }
       }
@@ -109,13 +109,13 @@ void RegisterItem::setVisible(bool visible)
 
 int RegisterItem::rowHeightHint(void) const
 {
-  if(!m_visible)
+  if (!m_visible)
     return 0;
 
-  if(m_parent) {
+  if (m_parent) {
     return m_parent->rowHeightHint();
   }
 
-  QFontMetrics fm( KMyMoneyGlobalSettings::listCellFont() );
-  return fm.lineSpacing()+6;
+  QFontMetrics fm(KMyMoneyGlobalSettings::listCellFont());
+  return fm.lineSpacing() + 6;
 }

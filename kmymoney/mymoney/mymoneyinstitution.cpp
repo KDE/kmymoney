@@ -37,19 +37,19 @@ MyMoneyInstitution::MyMoneyInstitution()
 }
 
 MyMoneyInstitution::MyMoneyInstitution(const QString& id, const MyMoneyInstitution& right) :
-  MyMoneyObject(id)
+    MyMoneyObject(id)
 {
   *this = right;
   m_id = id;
 }
 
 MyMoneyInstitution::MyMoneyInstitution(const QString& name,
-                         const QString& town,
-                         const QString& street,
-                         const QString& postcode,
-                         const QString& telephone,
-                         const QString& manager,
-                         const QString& sortcode)
+                                       const QString& town,
+                                       const QString& street,
+                                       const QString& postcode,
+                                       const QString& telephone,
+                                       const QString& manager,
+                                       const QString& sortcode)
 {
   clearId();
   m_name = name;
@@ -62,10 +62,10 @@ MyMoneyInstitution::MyMoneyInstitution(const QString& name,
 }
 
 MyMoneyInstitution::MyMoneyInstitution(const QDomElement& node) :
-  MyMoneyObject(node),
-  MyMoneyKeyValueContainer(node.elementsByTagName("KEYVALUEPAIRS").item(0).toElement())
+    MyMoneyObject(node),
+    MyMoneyKeyValueContainer(node.elementsByTagName("KEYVALUEPAIRS").item(0).toElement())
 {
-  if("INSTITUTION" != node.tagName())
+  if ("INSTITUTION" != node.tagName())
     throw new MYMONEYEXCEPTION("Node was not INSTITUTION");
 
   m_sortcode = node.attribute("sortcode");
@@ -73,7 +73,7 @@ MyMoneyInstitution::MyMoneyInstitution(const QDomElement& node) :
   m_manager = node.attribute("manager");
 
   QDomNodeList nodeList = node.elementsByTagName("ADDRESS");
-  if(nodeList.count() == 0) {
+  if (nodeList.count() == 0) {
     QString msg = QString("No ADDRESS in institution %1").arg(m_name);
     throw new MYMONEYEXCEPTION(msg);
   }
@@ -87,9 +87,9 @@ MyMoneyInstitution::MyMoneyInstitution(const QDomElement& node) :
   m_accountList.clear();
 
   nodeList = node.elementsByTagName("ACCOUNTIDS");
-  if(nodeList.count() > 0) {
+  if (nodeList.count() > 0) {
     nodeList = nodeList.item(0).toElement().elementsByTagName("ACCOUNTID");
-    for(int i = 0; i < nodeList.count(); ++i) {
+    for (int i = 0; i < nodeList.count(); ++i) {
       m_accountList << nodeList.item(i).toElement().attribute("id");
     }
   }
@@ -102,7 +102,7 @@ MyMoneyInstitution::~MyMoneyInstitution()
 void MyMoneyInstitution::addAccountId(const QString& account)
 {
   // only add this account if it is not yet presently in the list
-  if(m_accountList.contains(account) == 0)
+  if (m_accountList.contains(account) == 0)
     m_accountList.append(account);
 }
 
@@ -112,7 +112,7 @@ QString MyMoneyInstitution::removeAccountId(const QString& account)
   QString rc;
 
   pos = m_accountList.indexOf(account);
-  if(pos != -1) {
+  if (pos != -1) {
     m_accountList.removeAt(pos);
     rc = account;
   }
@@ -134,7 +134,7 @@ bool MyMoneyInstitution::operator == (const MyMoneyInstitution& right) const
       ((m_telephone.length() == 0 && right.m_telephone.length() == 0) || (m_telephone == right.m_telephone)) &&
       ((m_sortcode.length() == 0 && right.m_sortcode.length() == 0) || (m_sortcode == right.m_sortcode)) &&
       ((m_manager.length() == 0 && right.m_manager.length() == 0) || (m_manager == right.m_manager)) &&
-      (m_accountList == right.m_accountList) ) {
+      (m_accountList == right.m_accountList)) {
     return true;
   } else
     return false;
@@ -159,7 +159,7 @@ void MyMoneyInstitution::writeXML(QDomDocument& document, QDomElement& parent) c
 
 
   QDomElement accounts = document.createElement("ACCOUNTIDS");
-  for(QStringList::ConstIterator it = accountList().begin(); it != accountList().end(); ++it){
+  for (QStringList::ConstIterator it = accountList().begin(); it != accountList().end(); ++it) {
     QDomElement temp = document.createElement("ACCOUNTID");
     temp.setAttribute("id", (*it));
     accounts.appendChild(temp);
@@ -178,7 +178,8 @@ bool MyMoneyInstitution::hasReferenceTo(const QString& /* id */) const
   return rc;
 }
 
-QPixmap MyMoneyInstitution::pixmap() const {
-  return QPixmap(KGlobal::dirs()->findResource("appdata",QString( "icons/hicolor/22x22/actions/%1.png").arg("bank")));
+QPixmap MyMoneyInstitution::pixmap() const
+{
+  return QPixmap(KGlobal::dirs()->findResource("appdata", QString("icons/hicolor/22x22/actions/%1.png").arg("bank")));
 }
 

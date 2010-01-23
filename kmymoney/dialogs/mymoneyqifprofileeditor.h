@@ -53,8 +53,8 @@ public:
 class MyMoneyQifProfileEditorDecl : public QDialog, public Ui::MyMoneyQifProfileEditorDecl
 {
 public:
-  MyMoneyQifProfileEditorDecl( QWidget *parent ) : QDialog( parent ) {
-    setupUi( this );
+  MyMoneyQifProfileEditorDecl(QWidget *parent) : QDialog(parent) {
+    setupUi(this);
   }
 };
 
@@ -63,7 +63,7 @@ class MyMoneyQifProfileEditor : public MyMoneyQifProfileEditorDecl
   Q_OBJECT
 
 public:
-  explicit MyMoneyQifProfileEditor(const bool edit = false, QWidget *parent=0);
+  explicit MyMoneyQifProfileEditor(const bool edit = false, QWidget *parent = 0);
   virtual ~MyMoneyQifProfileEditor();
 
   /**

@@ -38,13 +38,13 @@ class KSelectDatabaseDlgDecl : public QWidget, public Ui::KSelectDatabaseDlgDecl
 {
 public:
   KSelectDatabaseDlgDecl() {
-    setupUi( this );
+    setupUi(this);
   }
 };
 
 class KSelectDatabaseDlg : public KDialog
 {
-Q_OBJECT
+  Q_OBJECT
 public:
   explicit KSelectDatabaseDlg(int openMode, KUrl openURL = KUrl(), QWidget *parent = 0);
   ~KSelectDatabaseDlg();

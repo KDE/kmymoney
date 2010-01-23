@@ -47,7 +47,8 @@
 #define createTables User1
 #define saveSQL User2
 
-KGenerateSqlDlg::KGenerateSqlDlg(QWidget *) {
+KGenerateSqlDlg::KGenerateSqlDlg(QWidget *)
+{
   m_widget = new KGenerateSqlDlgDecl();
   setMainWidget(m_widget);
   setButtons(createTables | saveSQL | Ok | Cancel | Help);
@@ -57,11 +58,13 @@ KGenerateSqlDlg::KGenerateSqlDlg(QWidget *) {
   initializeForm();
 }
 
-KGenerateSqlDlg::~KGenerateSqlDlg() {
+KGenerateSqlDlg::~KGenerateSqlDlg()
+{
   if (m_requiredFields != 0) delete m_requiredFields;
 }
 
-void KGenerateSqlDlg::initializeForm() {
+void KGenerateSqlDlg::initializeForm()
+{
   if (m_requiredFields != 0) {
     delete m_requiredFields;
     m_requiredFields = 0;
@@ -85,14 +88,15 @@ void KGenerateSqlDlg::initializeForm() {
   connect(button(Help), SIGNAL(clicked()), this, SLOT(slotHelp()));
 }
 
-int  KGenerateSqlDlg::exec() {
+int  KGenerateSqlDlg::exec()
+{
   // list drivers supported by KMM
   QMap<QString, QString> map = m_map.driverMap();
   // list drivers installed on system
   QStringList list = QSqlDatabase::drivers();
   // join the two
   QStringList::Iterator it = list.begin();
-  while(it != list.end()) {
+  while (it != list.end()) {
     QString dname = *it;
     if (map.keys().contains(dname)) { // only keep if driver is supported
       dname = dname + " - " + map[dname];
@@ -101,11 +105,11 @@ int  KGenerateSqlDlg::exec() {
     it  ++;
   }
   if (m_supportedDrivers.count() == 0) {
-      // why does KMessageBox not have a standard dialog with Help button?
+    // why does KMessageBox not have a standard dialog with Help button?
     if ((KMessageBox::questionYesNo(this,
-         i18n("In order to use a database, you need to install some additional software. Click Help for more information"),
-         i18n("No Qt SQL Drivers"),
-         KStandardGuiItem::help(), KStandardGuiItem::cancel()))
+                                    i18n("In order to use a database, you need to install some additional software. Click Help for more information"),
+                                    i18n("No Qt SQL Drivers"),
+                                    KStandardGuiItem::help(), KStandardGuiItem::cancel()))
         == KMessageBox::Yes) { // Yes stands in for help here
       KToolInvocation::invokeHelp("details.database.usage");
     }
@@ -118,7 +122,8 @@ int  KGenerateSqlDlg::exec() {
   return (QDialog::exec());
 }
 
-void KGenerateSqlDlg::slotcreateTables(){
+void KGenerateSqlDlg::slotcreateTables()
+{
   if (m_sqliteSelected) {
     m_dbName = m_widget->urlSqlite->text();
   } else {
@@ -126,49 +131,50 @@ void KGenerateSqlDlg::slotcreateTables(){
   }
   // check that the database has been pre-created
   { // all queries etc. must be in a block - see 'remove database' API doc
-  QSqlDatabase dbase = QSqlDatabase::addDatabase(m_dbDriver, "creation");
-  dbase.setHostName(m_widget->textHostName->text());
-  dbase.setDatabaseName(m_dbName);
-  dbase.setUserName(m_widget->textUserName->text());
-  dbase.setPassword(m_widget->textPassword->text());
-  if (!dbase.open()) {
-    KMessageBox::error(this,
-          i18n("Unable to open database.\n"
-               "You must use an SQL CREATE DATABASE statement before creating the tables.\n"
-               "Click Help for more information."));
-    return;
-  }
-  QSqlQuery q(dbase);
-  bool created = true;
-  QString message(i18n("Tables successfully created"));
-  QStringList commands = m_widget->textSQL->toPlainText().split('\n');
-  QStringList::ConstIterator cit;
-  for (cit = commands.constBegin(); cit != commands.constEnd(); ++cit) {
-    if (!(*cit).isEmpty()) {
-      //qDebug() << "exec" << *cit;
-      q.prepare(*cit);
-      if (!q.exec()) {
-        created = false;
-        QSqlError e = q.lastError();
-        message = i18n("Creation failed executing statement");
-        message += QString ("\nExecuted: %1").arg(q.executedQuery());
-        message += QString ("\nError No %1: %2").arg(e.number()).arg(e.text());
-        break;
+    QSqlDatabase dbase = QSqlDatabase::addDatabase(m_dbDriver, "creation");
+    dbase.setHostName(m_widget->textHostName->text());
+    dbase.setDatabaseName(m_dbName);
+    dbase.setUserName(m_widget->textUserName->text());
+    dbase.setPassword(m_widget->textPassword->text());
+    if (!dbase.open()) {
+      KMessageBox::error(this,
+                         i18n("Unable to open database.\n"
+                              "You must use an SQL CREATE DATABASE statement before creating the tables.\n"
+                              "Click Help for more information."));
+      return;
+    }
+    QSqlQuery q(dbase);
+    bool created = true;
+    QString message(i18n("Tables successfully created"));
+    QStringList commands = m_widget->textSQL->toPlainText().split('\n');
+    QStringList::ConstIterator cit;
+    for (cit = commands.constBegin(); cit != commands.constEnd(); ++cit) {
+      if (!(*cit).isEmpty()) {
+        //qDebug() << "exec" << *cit;
+        q.prepare(*cit);
+        if (!q.exec()) {
+          created = false;
+          QSqlError e = q.lastError();
+          message = i18n("Creation failed executing statement");
+          message += QString("\nExecuted: %1").arg(q.executedQuery());
+          message += QString("\nError No %1: %2").arg(e.number()).arg(e.text());
+          break;
+        }
       }
     }
-  }
-  KMessageBox::information(this, message);
+    KMessageBox::information(this, message);
   }
   QSqlDatabase::removeDatabase("creation");
   enableButtonOk(true);
 }
 
-void KGenerateSqlDlg::slotsaveSQL(){
+void KGenerateSqlDlg::slotsaveSQL()
+{
   QString fileName = KFileDialog::getSaveFileName(
-      KUrl(),
-      QString(),
-      this,
-      i18n("Select output file"));
+                       KUrl(),
+                       QString(),
+                       this,
+                       i18n("Select output file"));
   if (fileName.isEmpty()) return;
   QFile out(fileName);
   if (!out.open(QIODevice::WriteOnly)) return;
@@ -179,7 +185,8 @@ void KGenerateSqlDlg::slotsaveSQL(){
   enableButtonOk(true);
 }
 
-void KGenerateSqlDlg::slotdriverSelected() {
+void KGenerateSqlDlg::slotdriverSelected()
+{
   QList<QListWidgetItem *> drivers = m_widget->listDrivers->selectedItems();
   if (drivers.count() != 1) {
     initializeForm();
@@ -189,12 +196,12 @@ void KGenerateSqlDlg::slotdriverSelected() {
   m_dbDriver = drivers[0]->text().section(' ', 0, 0);
   m_dbType = m_map.driverToType(m_dbDriver);
   if (!m_map.isTested(m_dbType)) {
-    int rc = KMessageBox::warningContinueCancel (0,
-       i18n("Database type %1 has not been fully tested in a KMyMoney environment.\n"
-            "Please make sure you have adequate backups of your data.\n"
-            "Please report any problems to the developer mailing list at "
-            "kmymoney-devel@kde.org", m_dbDriver),
-        "");
+    int rc = KMessageBox::warningContinueCancel(0,
+             i18n("Database type %1 has not been fully tested in a KMyMoney environment.\n"
+                  "Please make sure you have adequate backups of your data.\n"
+                  "Please report any problems to the developer mailing list at "
+                  "kmymoney-devel@kde.org", m_dbDriver),
+             "");
     if (rc == KMessageBox::Cancel) {
       m_widget->listDrivers->clearSelection();
       initializeForm();
@@ -203,7 +210,7 @@ void KGenerateSqlDlg::slotdriverSelected() {
   }
 
   m_requiredFields = new kMandatoryFieldGroup(this);
-  if (m_dbType == Sqlite3){
+  if (m_dbType == Sqlite3) {
     m_sqliteSelected = true;
     m_widget->urlSqlite->setMode(KFile::Modes(KFile::File));
     m_widget->urlSqlite->setEnabled(true);
@@ -218,13 +225,13 @@ void KGenerateSqlDlg::slotdriverSelected() {
     m_requiredFields->add(m_widget->textDbName);
     m_requiredFields->add(m_widget->textHostName);
     m_requiredFields->add(m_widget->textUserName);
-    m_widget->textDbName->setText ("KMyMoney");
-    m_widget->textHostName->setText ("localhost");
+    m_widget->textDbName->setText("KMyMoney");
+    m_widget->textHostName->setText("localhost");
     m_widget->textUserName->setText("");
     struct passwd * pwd = getpwuid(geteuid());
     if (pwd != 0)
-      m_widget->textUserName->setText (QString(pwd->pw_name));
-    m_widget->textPassword->setText ("");
+      m_widget->textUserName->setText(QString(pwd->pw_name));
+    m_widget->textPassword->setText("");
   }
   m_requiredFields->setOkButton(button(createTables));
   m_widget->textSQL->setEnabled(true);
@@ -239,7 +246,7 @@ void KGenerateSqlDlg::slotdriverSelected() {
   }
   MyMoneyDbDef db;
   m_widget->textSQL->setText
-      (db.generateSQL(m_dbDriver));
+  (db.generateSQL(m_dbDriver));
   if (m_mustDetachStorage) {
     MyMoneyFile::instance()->detachStorage();
   }
@@ -249,6 +256,7 @@ void KGenerateSqlDlg::slotdriverSelected() {
   connect(button(createTables), SIGNAL(clicked()), this, SLOT(slotcreateTables()));
 }
 
-void KGenerateSqlDlg::slotHelp(void) {
+void KGenerateSqlDlg::slotHelp(void)
+{
   KToolInvocation::invokeHelp("details.database.generatesql");
 }

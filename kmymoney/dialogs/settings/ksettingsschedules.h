@@ -32,8 +32,8 @@
 class KSettingsSchedulesDecl : public QWidget, public Ui::KSettingsSchedulesDecl
 {
 public:
-  KSettingsSchedulesDecl( QWidget *parent ) : QWidget( parent ) {
-    setupUi( this );
+  KSettingsSchedulesDecl(QWidget *parent) : QWidget(parent) {
+    setupUi(this);
   }
 };
 
@@ -57,7 +57,7 @@ protected:
   void loadList(void);
 
 private:
-  QMap<QString,QString> m_regionMap;
+  QMap<QString, QString> m_regionMap;
 };
 
 #endif

@@ -31,7 +31,8 @@
 // Project Includes
 #include "mymoneyaccount.h"
 
-namespace reports {
+namespace reports
+{
 
 /**
   * This is a MyMoneyAccount as viewed from the reporting engine.
@@ -62,35 +63,35 @@ public:
     *
     * Needed to allow this object to be stored in a QMap.
     */
-  ReportAccount( void );
+  ReportAccount(void);
 
   /**
     * Copy constructor
     *
     * Needed to allow this object to be stored in a QMap.
     */
-  ReportAccount( const ReportAccount& );
+  ReportAccount(const ReportAccount&);
 
   /**
     * Regular constructor
     *
     * @param accountid Account which this account descriptor should be based off of
     */
-  ReportAccount( const QString& accountid );
+  ReportAccount(const QString& accountid);
 
   /**
     * Regular constructor
     *
     * @param accountid Account which this account descriptor should be based off of
     */
-  ReportAccount( const MyMoneyAccount& accountid );
+  ReportAccount(const MyMoneyAccount& accountid);
 
   /**
     * @param right The object to compare against
     * @return bool True if this account's fully-qualified hierarchy name
     * is less than that of the given qccount
     */
-  bool operator<( const ReportAccount& right ) const;
+  bool operator<(const ReportAccount& right) const;
 
   /**
     * Returns the price of this account's underlying currency on the indicated date,
@@ -110,7 +111,7 @@ public:
     * @param date The date in question
     * @return MyMoneyMoney The value of the account's currency on that date
     */
-  MyMoneyMoney deepCurrencyPrice( const QDate& date ) const;
+  MyMoneyMoney deepCurrencyPrice(const QDate& date) const;
 
   /**
     * Returns the price of this account's deep currency on the indicated date,
@@ -119,7 +120,7 @@ public:
     * @param date The date in question
     * @return MyMoneyMoney The value of the account's currency on that date
     */
-  MyMoneyMoney baseCurrencyPrice( const QDate& date ) const;
+  MyMoneyMoney baseCurrencyPrice(const QDate& date) const;
 
   /**
    * Returns the price of this account's deep currency on the indicated date,
@@ -129,13 +130,13 @@ public:
    * @param date The date in question
    * @return MyMoneyMoney The value of the account's currency on that date
    */
-  MyMoneyMoney foreignCurrencyPrice( const QString foreignCurrency, const QDate& date ) const;
+  MyMoneyMoney foreignCurrencyPrice(const QString foreignCurrency, const QDate& date) const;
   /**
     * Fetch the trading symbol of this account's deep currency
     *
     * @return  The account's currency trading currency object
     */
-  MyMoneySecurity currency( void ) const;
+  MyMoneySecurity currency(void) const;
 
   /**
     * Determine if this account's deep currency is different from the file's
@@ -143,7 +144,7 @@ public:
     *
     * @return bool True if this account is in a foreign currency
     */
-  bool isForeignCurrency( void ) const;
+  bool isForeignCurrency(void) const;
 
   /**
     * The name of only this account.  No matter how deep the hierarchy, this
@@ -152,7 +153,7 @@ public:
     *
     * @return QString The account's name
     */
-  QString name( void ) const;
+  QString name(void) const;
 
   /**
     * The entire hierarchy of this account descriptor
@@ -162,7 +163,7 @@ public:
     *
     * @return QString The account's full hierarchy
     */
-  QString fullName( void ) const;
+  QString fullName(void) const;
 
   /**
     * The entire hierarchy of this account descriptor, suitable for displaying
@@ -170,7 +171,7 @@ public:
     *
     * @return QString The account's full hierarchy (suitable for debugging)
     */
-  QString debugName( void ) const;
+  QString debugName(void) const;
 
   /**
     * Whether this account is a 'top level' parent account.  This means that
@@ -178,7 +179,7 @@ public:
     *
     * @return bool True if this account is a top level parent account
     */
-  /*inline*/ bool isTopLevel( void ) const;
+  /*inline*/ bool isTopLevel(void) const;
 
   /**
     * Returns the name of the top level parent account
@@ -187,21 +188,21 @@ public:
     *
     * @return QString The name of the top level parent account
     */
-  /*inline*/ QString topParentName( void ) const;
+  /*inline*/ QString topParentName(void) const;
 
   /**
     * Returns a report account containing the top parent account
     *
     * @return ReportAccount The account of the top parent
     */
-  ReportAccount topParent( void ) const;
+  ReportAccount topParent(void) const;
 
   /**
     * Returns a report account containing the immediate parent account
     *
     * @return ReportAccount The account of the immediate parent
     */
-  ReportAccount parent( void ) const;
+  ReportAccount parent(void) const;
 
   /**
     * Returns the number of accounts in this account's hierarchy.  If this is a
@@ -210,25 +211,25 @@ public:
     *
     * @return unsigned Hierarchy depth
     */
-  unsigned hierarchyDepth( void ) const;
+  unsigned hierarchyDepth(void) const;
 
   /**
     * Returns whether this account is a liquid asset
     *
     */
-  bool isLiquidAsset( void ) const;
+  bool isLiquidAsset(void) const;
 
   /**
    * Returns whether this account is a liquid liability
    *
    */
-  bool isLiquidLiability( void ) const;
+  bool isLiquidLiability(void) const;
 
 protected:
   /**
     * Calculates the full account hierarchy of this account
     */
-  void calculateAccountHierarchy( void );
+  void calculateAccountHierarchy(void);
 
 };
 

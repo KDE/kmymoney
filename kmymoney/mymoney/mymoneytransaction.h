@@ -54,7 +54,7 @@ class KMM_MYMONEY_EXPORT MyMoneyTransaction : public MyMoneyObject, public MyMon
 public:
   MyMoneyTransaction();
   MyMoneyTransaction(const QString id,
-                             const MyMoneyTransaction& transaction);
+                     const MyMoneyTransaction& transaction);
   /**
     * @param node reference to QDomNode
     * @param forceId see MyMoneyObject(const QDomElement&, const bool)
@@ -67,27 +67,55 @@ public:
   friend QDataStream &operator>>(QDataStream &, MyMoneyTransaction &);
 
   // Simple get operations
-  const QDate& entryDate(void) const { return m_entryDate; };
-  const QDate& postDate(void) const { return m_postDate; };
-  const QString& memo(void) const { return m_memo; };
-  const QList<MyMoneySplit>& splits(void) const { return m_splits; };
-  QList<MyMoneySplit>& splits(void) { return m_splits; };
-  unsigned int splitCount(void) const { return m_splits.count(); };
-  const QString& commodity(void) const { return m_commodity; };
-  const QString& bankID(void) const /*__attribute__ ((deprecated))*/ { return m_bankID; };
+  const QDate& entryDate(void) const {
+    return m_entryDate;
+  };
+  const QDate& postDate(void) const {
+    return m_postDate;
+  };
+  const QString& memo(void) const {
+    return m_memo;
+  };
+  const QList<MyMoneySplit>& splits(void) const {
+    return m_splits;
+  };
+  QList<MyMoneySplit>& splits(void) {
+    return m_splits;
+  };
+  unsigned int splitCount(void) const {
+    return m_splits.count();
+  };
+  const QString& commodity(void) const {
+    return m_commodity;
+  };
+  const QString& bankID(void) const { /*__attribute__ ((deprecated))*/
+    return m_bankID;
+  };
 
   // Simple set operations
   void setPostDate(const QDate& date);
   void setEntryDate(const QDate& date);
   void setMemo(const QString& memo);
-  void setCommodity(const QString& commodityId) { m_commodity = commodityId; };
-  void setBankID(const QString& bankID) /*__attribute__ ((deprecated))*/ { m_bankID = bankID; };
+  void setCommodity(const QString& commodityId) {
+    m_commodity = commodityId;
+  };
+  void setBankID(const QString& bankID) { /*__attribute__ ((deprecated))*/
+    m_bankID = bankID;
+  };
 
   bool operator == (const MyMoneyTransaction&) const;
-  inline bool operator != (const MyMoneyTransaction& r) const { return !(*this == r); };
-  bool operator< (const MyMoneyTransaction& r) const { return postDate() < r.postDate(); };
-  bool operator<= (const MyMoneyTransaction& r) const { return postDate() <= r.postDate(); };
-  bool operator> (const MyMoneyTransaction& r) const { return postDate() > r.postDate(); };
+  inline bool operator != (const MyMoneyTransaction& r) const {
+    return !(*this == r);
+  };
+  bool operator< (const MyMoneyTransaction& r) const {
+    return postDate() < r.postDate();
+  };
+  bool operator<= (const MyMoneyTransaction& r) const {
+    return postDate() <= r.postDate();
+  };
+  bool operator> (const MyMoneyTransaction& r) const {
+    return postDate() > r.postDate();
+  };
 
   /**
     * This method is used to extract a split for a given accountId

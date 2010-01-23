@@ -139,7 +139,7 @@ private:
   bool updateAccount(const MyMoneyAccount& acc, bool moreAccounts);
 
   /**
-    * Kept for backward compatibility. Use 
+    * Kept for backward compatibility. Use
     * updateAccount(const MyMoneyAccount& acc, bool moreAccounts) instead.
     *
     * @deprecated
@@ -157,8 +157,8 @@ private:
   KAction*              m_configAction;
   KAction*              m_importAction;
   KMyMoneyBanking*      m_kbanking;
-  QMap<QString,QString> m_protocolConversionMap;
-  KBAccountSettings*	m_accountSettings;
+  QMap<QString, QString> m_protocolConversionMap;
+  KBAccountSettings* m_accountSettings;
 };
 
 /**

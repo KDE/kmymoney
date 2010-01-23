@@ -67,20 +67,21 @@
 #include "kmymoney.h"
 #include "kmymoneyglobalsettings.h"
 
-namespace NewUserWizard {
+namespace NewUserWizard
+{
 
 static int stepCount;
 
 Wizard::Wizard(QWidget *parent, bool modal, Qt::WFlags flags) :
-  KMyMoneyWizard(parent, modal, flags),
-  m_introPage(0)
+    KMyMoneyWizard(parent, modal, flags),
+    m_introPage(0)
 {
   bool isFirstTime = KMyMoneyGlobalSettings::firstTimeRun();
 
   stepCount = 1;
 
   setTitle(i18n("KMyMoney New File Setup"));
-  if(isFirstTime)
+  if (isFirstTime)
     addStep(i18nc("New file wizard introduction", "Introduction"));
   addStep(i18n("Personal Data"));
   addStep(i18n("Select Currency"));
@@ -88,7 +89,7 @@ Wizard::Wizard(QWidget *parent, bool modal, Qt::WFlags flags) :
   addStep(i18n("Set preferences"));
   addStep(i18nc("Finish the wizard", "Finish"));
 
-  if(isFirstTime)
+  if (isFirstTime)
     m_introPage = new IntroPage(this);
   m_generalPage = new GeneralPage(this);
   m_currencyPage = new CurrencyPage(this);
@@ -98,7 +99,7 @@ Wizard::Wizard(QWidget *parent, bool modal, Qt::WFlags flags) :
   m_filePage = new FilePage(this);
 
   m_accountPage->m_haveCheckingAccountButton->setChecked(true);
-  if(isFirstTime)
+  if (isFirstTime)
     setFirstPage(m_introPage);
   else
     setFirstPage(m_generalPage);
@@ -119,10 +120,10 @@ QString Wizard::url(void) const
 MyMoneyInstitution Wizard::institution(void) const
 {
   MyMoneyInstitution inst;
-  if(m_accountPage->m_haveCheckingAccountButton->isChecked()) {
-    if(m_accountPage->m_institutionNameEdit->text().length()) {
+  if (m_accountPage->m_haveCheckingAccountButton->isChecked()) {
+    if (m_accountPage->m_institutionNameEdit->text().length()) {
       inst.setName(m_accountPage->m_institutionNameEdit->text());
-      if(m_accountPage->m_institutionNumberEdit->text().length())
+      if (m_accountPage->m_institutionNumberEdit->text().length())
         inst.setSortcode(m_accountPage->m_institutionNumberEdit->text());
     }
   }
@@ -132,9 +133,9 @@ MyMoneyInstitution Wizard::institution(void) const
 MyMoneyAccount Wizard::account(void) const
 {
   MyMoneyAccount acc;
-  if(m_accountPage->m_haveCheckingAccountButton->isChecked()) {
+  if (m_accountPage->m_haveCheckingAccountButton->isChecked()) {
     acc.setName(m_accountPage->m_accountNameEdit->text());
-    if(m_accountPage->m_accountNumberEdit->text().length())
+    if (m_accountPage->m_accountNumberEdit->text().length())
       acc.setNumber(m_accountPage->m_accountNumberEdit->text());
     acc.setOpeningDate(m_accountPage->m_openingDateEdit->date());
     acc.setCurrencyId(m_baseCurrency.id());
@@ -159,8 +160,8 @@ QList<MyMoneyTemplate> Wizard::templates(void) const
 }
 
 IntroPage::IntroPage(Wizard* wizard) :
-  KIntroPageDecl(wizard),
-  WizardPage<Wizard>(stepCount++, this, wizard)
+    KIntroPageDecl(wizard),
+    WizardPage<Wizard>(stepCount++, this, wizard)
 {
 }
 
@@ -170,8 +171,8 @@ KMyMoneyWizardPage* IntroPage::nextPage(void) const
 }
 
 GeneralPage::GeneralPage(Wizard* wizard) :
-  UserInfo(wizard),
-  WizardPage<Wizard>(stepCount++, this, wizard)
+    UserInfo(wizard),
+    WizardPage<Wizard>(stepCount++, this, wizard)
 {
   m_userNameEdit->setFocus();
   KABC::StdAddressBook *ab = KABC::StdAddressBook::self(true);
@@ -196,25 +197,25 @@ void GeneralPage::slotLoadFromKABC(void)
     return;
 
   KABC::Addressee addr = ab->whoAmI();
-  if ( addr.isEmpty() ) {
+  if (addr.isEmpty()) {
     KMessageBox::sorry(this, i18n("Unable to load data, because no contact has been associated with the owner of the standard address book."), i18n("Address book import"));
     return;
   }
 
-  m_userNameEdit->setText( addr.formattedName() );
-  m_emailEdit->setText( addr.preferredEmail() );
+  m_userNameEdit->setText(addr.formattedName());
+  m_emailEdit->setText(addr.preferredEmail());
 
-  KABC::PhoneNumber phone = addr.phoneNumber( KABC::PhoneNumber::Home );
-  m_telephoneEdit->setText( phone.number() );
+  KABC::PhoneNumber phone = addr.phoneNumber(KABC::PhoneNumber::Home);
+  m_telephoneEdit->setText(phone.number());
 
-  KABC::Address a = addr.address( KABC::Address::Home );
+  KABC::Address a = addr.address(KABC::Address::Home);
   QString sep;
-  if(!a.country().isEmpty() && !a.region().isEmpty())
+  if (!a.country().isEmpty() && !a.region().isEmpty())
     sep = " / ";
   m_countyEdit->setText(QString("%1%2%3").arg(a.country(), sep, a.region()));
-  m_postcodeEdit->setText( a.postalCode() );
-  m_townEdit->setText( a.locality() );
-  m_streetEdit->setText( a.street() );
+  m_postcodeEdit->setText(a.postalCode());
+  m_townEdit->setText(a.locality());
+  m_streetEdit->setText(a.street());
 }
 
 KMyMoneyWizardPage* GeneralPage::nextPage(void) const
@@ -223,8 +224,8 @@ KMyMoneyWizardPage* GeneralPage::nextPage(void) const
 }
 
 CurrencyPage::CurrencyPage(Wizard* wizard) :
-  Currency(wizard),
-  WizardPage<Wizard>(stepCount++, this, wizard)
+    Currency(wizard),
+    WizardPage<Wizard>(stepCount++, this, wizard)
 {
   Q3ListViewItem *first = 0;
   QList<MyMoneySecurity> list = MyMoneyFile::instance()->currencyList();
@@ -242,21 +243,21 @@ CurrencyPage::CurrencyPage(Wizard* wizard) :
   empty.setMask(mask);
 
   m_currencyList->clear();
-  for(it = list.constBegin(); it != list.constEnd(); ++it) {
+  for (it = list.constBegin(); it != list.constEnd(); ++it) {
     Q3ListViewItem* p = insertCurrency(*it);
-    if((*it).id() == baseCurrency) {
+    if ((*it).id() == baseCurrency) {
       first = p;
-      p->setPixmap(0, QPixmap( KStandardDirs::locate("icon","hicolor/16x16/apps/kmymoney.png")));
+      p->setPixmap(0, QPixmap(KStandardDirs::locate("icon", "hicolor/16x16/apps/kmymoney.png")));
     } else {
       p->setPixmap(0, empty);
     }
-    if(!first && (*it).id() == localCurrency)
+    if (!first && (*it).id() == localCurrency)
       first = p;
   }
 
-  if(first == 0)
+  if (first == 0)
     first = m_currencyList->firstChild();
-  if(first != 0) {
+  if (first != 0) {
     m_currencyList->setCurrentItem(first);
     m_currencyList->setSelected(first, true);
     m_currencyList->ensureItemVisible(first);
@@ -277,14 +278,14 @@ KMyMoneyWizardPage* CurrencyPage::nextPage(void) const
 }
 
 AccountPage::AccountPage(Wizard* wizard) :
-  KAccountPageDecl(wizard),
-  WizardPage<Wizard>(stepCount, this, wizard)       // don't inc. the step count here
+    KAccountPageDecl(wizard),
+    WizardPage<Wizard>(stepCount, this, wizard)       // don't inc. the step count here
 {
   m_mandatoryGroup->add(m_accountNameEdit);
   connect(m_mandatoryGroup, SIGNAL(stateChanged()), object(), SIGNAL(completeStateChanged()));
   connect(m_haveCheckingAccountButton, SIGNAL(toggled(bool)), object(), SIGNAL(completeStateChanged()));
   m_accountNameEdit->setFocus();
-  m_openingDateEdit->setDate(QDate(QDate::currentDate().year(),1,1));
+  m_openingDateEdit->setDate(QDate(QDate::currentDate().year(), 1, 1));
 }
 
 KMyMoneyWizardPage* AccountPage::nextPage(void) const
@@ -298,8 +299,8 @@ bool AccountPage::isComplete(void) const
 }
 
 CategoriesPage::CategoriesPage(Wizard* wizard) :
-  Accounts(wizard),
-  WizardPage<Wizard>(stepCount++, this, wizard)
+    Accounts(wizard),
+    WizardPage<Wizard>(stepCount++, this, wizard)
 {
 }
 
@@ -314,8 +315,8 @@ QList<MyMoneyTemplate> CategoriesPage::selectedTemplates(void) const
 }
 
 PreferencePage::PreferencePage(Wizard* wizard) :
-  KPreferencePageDecl(wizard),
-  WizardPage<Wizard>(stepCount++, this, wizard)
+    KPreferencePageDecl(wizard),
+    WizardPage<Wizard>(stepCount++, this, wizard)
 {
   connect(m_openConfigButton, SIGNAL(clicked()), kmymoney, SLOT(slotSettings()));
 }
@@ -326,8 +327,8 @@ KMyMoneyWizardPage* PreferencePage::nextPage(void) const
 }
 
 FilePage::FilePage(Wizard* wizard) :
-  KFilePageDecl(wizard),
-  WizardPage<Wizard>(stepCount++, this, wizard)
+    KFilePageDecl(wizard),
+    WizardPage<Wizard>(stepCount++, this, wizard)
 {
   m_mandatoryGroup->add(m_dataFileEdit->lineEdit());
   connect(m_mandatoryGroup, SIGNAL(stateChanged()), object(), SIGNAL(completeStateChanged()));
@@ -344,16 +345,16 @@ bool FilePage::isComplete(void) const
   bool rc = m_mandatoryGroup->isEnabled();
   m_existingFileLabel->hide();
   m_finishLabel->show();
-  if(rc) {
+  if (rc) {
     // if a filename is present, check that
     // a) the file does not exist
     // b) the directory does exist
     rc = !KIO::NetAccess::exists(m_dataFileEdit->url(), KIO::NetAccess::DestinationSide, m_wizard);
-    if(rc) {
+    if (rc) {
       QRegExp exp("(.*)/(.*)");
       rc = false;
-      if(exp.indexIn(m_dataFileEdit->url().path()) != -1) {
-        if(exp.cap(2).length() > 0) {
+      if (exp.indexIn(m_dataFileEdit->url().path()) != -1) {
+        if (exp.cap(2).length() > 0) {
           rc = KIO::NetAccess::exists(exp.cap(1), KIO::NetAccess::SourceSide, m_wizard);
         }
       }

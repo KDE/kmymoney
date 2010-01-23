@@ -37,13 +37,15 @@
 class KBalanceWarning::Private
 {
 public:
-  QString dontShowAgain() const { return "BalanceWarning"; }
+  QString dontShowAgain() const {
+    return "BalanceWarning";
+  }
   QMap<QString, bool> m_deselectedAccounts;
 };
 
 KBalanceWarning::KBalanceWarning(QObject* parent) :
-  QObject(parent),
-  d(new Private)
+    QObject(parent),
+    d(new Private)
 {
   KMessageBox::enableMessage(d->dontShowAgain());
 }
@@ -55,9 +57,9 @@ KBalanceWarning::~KBalanceWarning()
 
 void KBalanceWarning::slotShowMessage(QWidget* parent, const MyMoneyAccount& account, const QString& msg)
 {
-  if(d->m_deselectedAccounts.find(account.id()) == d->m_deselectedAccounts.end()) {
+  if (d->m_deselectedAccounts.find(account.id()) == d->m_deselectedAccounts.end()) {
     KMessageBox::information(parent, msg, QString(), d->dontShowAgain());
-    if(!KMessageBox::shouldBeShownContinue(d->dontShowAgain())) {
+    if (!KMessageBox::shouldBeShownContinue(d->dontShowAgain())) {
       d->m_deselectedAccounts[account.id()] = true;
       KMessageBox::enableMessage(d->dontShowAgain());
     }

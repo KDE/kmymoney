@@ -51,8 +51,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace {
-  const int DATE_POPUP_TIMEOUT = 1500;
+namespace
+{
+const int DATE_POPUP_TIMEOUT = 1500;
 }
 
 bool KMyMoneyDateEdit::event(QEvent* e)
@@ -62,10 +63,10 @@ bool KMyMoneyDateEdit::event(QEvent* e)
   bool rc;
 
   kMyMoneyDateInput* p = dynamic_cast<kMyMoneyDateInput*>(parentWidget());
-  if(e->type() == QEvent::FocusOut && p) {
+  if (e->type() == QEvent::FocusOut && p) {
     QDate d = p->date();
     rc = QDateEdit::event(e);
-    if(d.isValid())
+    if (d.isValid())
       d = p->date();
     p->loadDate(d);
   } else {
@@ -74,8 +75,7 @@ bool KMyMoneyDateEdit::event(QEvent* e)
   return rc;
 }
 
-struct kMyMoneyDateInput::Private
-{
+struct kMyMoneyDateInput::Private {
   QDateEdit *m_dateEdit;
   KDatePicker *m_datePicker;
   QDate m_date;
@@ -87,7 +87,7 @@ struct kMyMoneyDateInput::Private
 };
 
 kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, Qt::AlignmentFlag flags)
- : KHBox(parent), d(new Private)
+    : KHBox(parent), d(new Private)
 {
   d->m_qtalignment = flags;
   d->m_date = QDate::currentDate();
@@ -110,28 +110,28 @@ kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, Qt::AlignmentFlag flags)
 
   QString dateFormat = KGlobal::locale()->dateFormatShort().toLower();
   QString order, separator;
-  for(int i = 0; i < dateFormat.length(); ++i) {
+  for (int i = 0; i < dateFormat.length(); ++i) {
     // DD.MM.YYYY is %d.%m.%y
     // dD.mM.YYYY is %e.%n.%y
     // SHORTWEEKDAY, dD SHORTMONTH YYYY is %a, %e %b %Y
-    if(dateFormat[i] == 'y' || dateFormat[i] == 'm' || dateFormat[i] == 'n' || dateFormat[i] == 'd' || dateFormat[i] == 'e') {
-      if(dateFormat[i] == 'n')
+    if (dateFormat[i] == 'y' || dateFormat[i] == 'm' || dateFormat[i] == 'n' || dateFormat[i] == 'd' || dateFormat[i] == 'e') {
+      if (dateFormat[i] == 'n')
         dateFormat[i] = 'm';
-      if(dateFormat[i] == 'e')
+      if (dateFormat[i] == 'e')
         dateFormat[i] = 'd';
       order += dateFormat[i];
     } else if (dateFormat[i] != '%' && separator.isEmpty())
       separator = dateFormat[i];
-    if(order.length() == 3)
+    if (order.length() == 3)
       break;
   }
 
   // see if we find a known format. If it's unknown, then we use YMD (international)
-  if(order == "mdy") {
+  if (order == "mdy") {
     d->m_dateEdit->setDisplayFormat(QString("MM%1dd%2yyyy").arg(separator, separator));
-  } else if(order == "dmy") {
+  } else if (order == "dmy") {
     d->m_dateEdit->setDisplayFormat(QString("dd%1MM%2yyyy").arg(separator, separator));
-  } else if(order == "ydm") {
+  } else if (order == "ydm") {
     d->m_dateEdit->setDisplayFormat(QString("yyyy%1dd%2MM").arg(separator, separator));
   } else {
     d->m_dateEdit->setDisplayFormat(QString("yyyy%1MM%2dd").arg(separator, separator));
@@ -145,7 +145,7 @@ kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, Qt::AlignmentFlag flags)
   d->m_dateButton = new KPushButton(KIcon("view-calendar-day"), QString(""), this);
   d->m_dateButton->setMinimumWidth(30);
 
-  connect(d->m_dateButton,SIGNAL(clicked()),SLOT(toggleDatePicker()));
+  connect(d->m_dateButton, SIGNAL(clicked()), SLOT(toggleDatePicker()));
   connect(d->m_dateEdit, SIGNAL(dateChanged(const QDate&)), this, SLOT(slotDateChosenRef(const QDate&)));
   connect(d->m_datePicker, SIGNAL(dateSelected(QDate)), this, SLOT(slotDateChosen(QDate)));
   connect(d->m_datePicker, SIGNAL(dateEntered(QDate)), this, SLOT(slotDateChosen(QDate)));
@@ -157,10 +157,10 @@ void kMyMoneyDateInput::markAsBadDate(bool bad, const QColor& color)
   // the next line knows a bit about the internals of QAbstractSpinBox
   QLineEdit* le = d->m_dateEdit->findChild<QLineEdit *>();
 
-  if(le) {
+  if (le) {
     QPalette palette = this->palette();
     le->setPalette(palette);
-    if(bad) {
+    if (bad) {
       palette.setColor(foregroundRole(), color);
       le->setPalette(palette);
     }
@@ -202,38 +202,29 @@ void kMyMoneyDateInput::toggleDatePicker()
   int w = d->m_dateFrame->width();
   int h = d->m_dateFrame->height();
 
-  if(d->m_dateFrame->isVisible())
-  {
+  if (d->m_dateFrame->isVisible()) {
     d->m_dateFrame->hide();
-  }
-  else
-  {
+  } else {
     QPoint tmpPoint = mapToGlobal(d->m_dateButton->geometry().bottomRight());
 
     // usually, the datepicker widget is shown underneath the d->m_dateEdit widget
     // if it does not fit on the screen, we show it above this widget
 
-    if(tmpPoint.y() + h > QApplication::desktop()->height()) {
+    if (tmpPoint.y() + h > QApplication::desktop()->height()) {
       tmpPoint.setY(tmpPoint.y() - h - d->m_dateButton->height());
     }
 
-    if((d->m_qtalignment == Qt::AlignRight && tmpPoint.x()+w <= QApplication::desktop()->width())
-    || (tmpPoint.x()-w < 0)  )
-    {
-      d->m_dateFrame->setGeometry(tmpPoint.x()-width(), tmpPoint.y(), w, h);
-    }
-    else
-    {
+    if ((d->m_qtalignment == Qt::AlignRight && tmpPoint.x() + w <= QApplication::desktop()->width())
+        || (tmpPoint.x() - w < 0)) {
+      d->m_dateFrame->setGeometry(tmpPoint.x() - width(), tmpPoint.y(), w, h);
+    } else {
       tmpPoint.setX(tmpPoint.x() - w);
       d->m_dateFrame->setGeometry(tmpPoint.x(), tmpPoint.y(), w, h);
     }
 
-    if(d->m_date.isValid())
-    {
+    if (d->m_date.isValid()) {
       d->m_datePicker->setDate(d->m_date);
-    }
-    else
-    {
+    } else {
       d->m_datePicker->setDate(QDate::currentDate());
     }
     d->m_dateFrame->show();
@@ -260,21 +251,21 @@ void kMyMoneyDateInput::keyPressEvent(QKeyEvent * k)
 {
   KShortcut today(i18nc("Enter todays date into date input widget", "T"));
 
-  switch(k->key()) {
-    case Qt::Key_Equal:
-    case Qt::Key_Plus:
-      slotDateChosen(d->m_date.addDays(1));
-      break;
+  switch (k->key()) {
+  case Qt::Key_Equal:
+  case Qt::Key_Plus:
+    slotDateChosen(d->m_date.addDays(1));
+    break;
 
-    case Qt::Key_Minus:
-      slotDateChosen(d->m_date.addDays(-1));
-      break;
+  case Qt::Key_Minus:
+    slotDateChosen(d->m_date.addDays(-1));
+    break;
 
-    default:
-      if(today.contains(QKeySequence(k->key())) || k->key() == Qt::Key_T) {
-        slotDateChosen(QDate::currentDate());
-      }
-      break;
+  default:
+    if (today.contains(QKeySequence(k->key())) || k->key() == Qt::Key_T) {
+      slotDateChosen(QDate::currentDate());
+    }
+    break;
   }
 }
 
@@ -289,8 +280,7 @@ bool kMyMoneyDateInput::eventFilter(QObject *, QEvent *e)
     d->m_datePopup->show(mapToGlobal(QPoint(0, height())));
     // select the date section
     d->m_dateEdit->setSelectedSection(QDateTimeEdit::DaySection);
-  }
-  else if (e->type() == QEvent::FocusOut)
+  } else if (e->type() == QEvent::FocusOut)
     d->m_datePopup->hide();
   else if (e->type() == QEvent::KeyPress) {
     if (QKeyEvent *k = dynamic_cast<QKeyEvent*>(e)) {
@@ -306,21 +296,21 @@ bool kMyMoneyDateInput::eventFilter(QObject *, QEvent *e)
 
 void kMyMoneyDateInput::slotDateChosenRef(const QDate& date)
 {
-  if(date.isValid()) {
+  if (date.isValid()) {
     emit dateChanged(date);
     d->m_date = date;
 
     QLabel *lbl = static_cast<QLabel*>(d->m_datePopup->view());
     lbl->setText(KGlobal::locale()->formatDate(date));
     lbl->adjustSize();
-    if(d->m_datePopup->isVisible() || hasFocus())
+    if (d->m_datePopup->isVisible() || hasFocus())
       d->m_datePopup->show(mapToGlobal(QPoint(0, height()))); // Repaint
   }
 }
 
 void kMyMoneyDateInput::slotDateChosen(QDate date)
 {
-  if(date.isValid()) {
+  if (date.isValid()) {
     // the next line implies a call to slotDateChosenRef() above
     d->m_dateEdit->setDate(date);
   }
@@ -354,14 +344,14 @@ void kMyMoneyDateInput::resetDate(void)
 QWidget* kMyMoneyDateInput::focusWidget(void) const
 {
   QWidget* w = d->m_dateEdit;
-  while(w->focusProxy())
+  while (w->focusProxy())
     w = w->focusProxy();
   return w;
 }
 
-void kMyMoneyDateInput::setRange(const QDate & min, const QDate & max) 
+void kMyMoneyDateInput::setRange(const QDate & min, const QDate & max)
 {
-  d->m_dateEdit->setDateRange(min, max); 
+  d->m_dateEdit->setDateRange(min, max);
 }
 
 #include "kmymoneydateinput.moc"

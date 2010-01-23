@@ -71,13 +71,13 @@
 #include "kmymoneyutils.h"
 
 KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bool categoryEditor, QWidget *parent, const QString& title)
-  : KNewAccountDlgDecl(parent),
+    : KNewAccountDlgDecl(parent),
     m_account(account),
     m_bSelectedParentAccount(false),
     m_categoryEditor(categoryEditor),
     m_isEditing(isEditing)
 {
-  QString columnName = ( (categoryEditor) ? i18n("Categories") : i18n("Accounts") );
+  QString columnName = ((categoryEditor) ? i18n("Categories") : i18n("Accounts"));
 
   m_amountGroup->setId(m_grossAmount, 0);
   m_amountGroup->setId(m_netAmount, 1);
@@ -107,23 +107,22 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
   m_priceMode->insertItem(i18n("Total for all shares"), 2);
 
   int priceMode = 0;
-  if(m_account.accountType() == MyMoneyAccount::Investment) {
+  if (m_account.accountType() == MyMoneyAccount::Investment) {
     m_priceMode->setEnabled(true);
-    if(!m_account.value("priceMode").isEmpty())
+    if (!m_account.value("priceMode").isEmpty())
       priceMode = m_account.value("priceMode").toInt();
   }
   m_priceMode->setCurrentItem(priceMode);
 
   bool haveMinBalance = false;
   bool haveMaxCredit = false;
-  if (categoryEditor)
-  {
+  if (categoryEditor) {
     // get rid of the tabs that are not used for categories
     int tab = m_tab->indexOf(m_institutionTab);
-    if(tab != -1)
+    if (tab != -1)
       m_tab->removeTab(tab);
     tab = m_tab->indexOf(m_limitsTab);
-    if(tab != -1)
+    if (tab != -1)
       m_tab->removeTab(tab);
 
     //m_qlistviewParentAccounts->setEnabled(true);
@@ -137,20 +136,18 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
     typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Expense));
 
     // Hardcoded but acceptable
-    switch (account.accountType())
-    {
-      case MyMoneyAccount::Income:
-        typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Income), false);
-        break;
+    switch (account.accountType()) {
+    case MyMoneyAccount::Income:
+      typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Income), false);
+      break;
 
-      case MyMoneyAccount::Expense:
-      default:
-        typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Expense), false);
-        break;
+    case MyMoneyAccount::Expense:
+    default:
+      typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Expense), false);
+      break;
     }
     m_currency->setEnabled(true);
-    if (m_isEditing)
-    {
+    if (m_isEditing) {
       typeCombo->setEnabled(false);
       m_currency->setDisabled(MyMoneyFile::instance()->isReferenced(m_account));
     }
@@ -158,14 +155,12 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
 
     m_qcheckboxTax->setChecked(account.value("Tax") == "Yes");
     loadVatAccounts();
-  }
-  else
-  {
+  } else {
     // get rid of the tabs that are not used for accounts
     int taxtab = m_tab->indexOf(m_taxTab);
     if (taxtab != -1) {
-      if(m_account.isAssetLiability()) {
-        m_vatCategory->setText(i18n( "VAT account"));
+      if (m_account.isAssetLiability()) {
+        m_vatCategory->setText(i18n("VAT account"));
         m_vatAssignmentFrame->hide();
         m_qcheckboxTax->setChecked(account.value("Tax") == "Yes");
       } else {
@@ -173,39 +168,39 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
       }
     }
 
-    switch(m_account.accountType()) {
-      case MyMoneyAccount::Savings:
-      case MyMoneyAccount::Cash:
-        haveMinBalance = true;
-        break;
+    switch (m_account.accountType()) {
+    case MyMoneyAccount::Savings:
+    case MyMoneyAccount::Cash:
+      haveMinBalance = true;
+      break;
 
-      case MyMoneyAccount::Checkings:
-        haveMinBalance = true;
-        haveMaxCredit = true;
-        break;
+    case MyMoneyAccount::Checkings:
+      haveMinBalance = true;
+      haveMaxCredit = true;
+      break;
 
-      case MyMoneyAccount::CreditCard:
-        haveMaxCredit = true;
-        break;
+    case MyMoneyAccount::CreditCard:
+      haveMaxCredit = true;
+      break;
 
-      default:
-        // no limit available, so we might get rid of the tab
-        int tab = m_tab->indexOf(m_limitsTab);
-        if(tab != -1)
-          m_tab->removeTab(tab);
-        // don't try to hide the widgets we just wiped
-        // in the next step
-        haveMaxCredit = haveMinBalance = true;
-        break;
+    default:
+      // no limit available, so we might get rid of the tab
+      int tab = m_tab->indexOf(m_limitsTab);
+      if (tab != -1)
+        m_tab->removeTab(tab);
+      // don't try to hide the widgets we just wiped
+      // in the next step
+      haveMaxCredit = haveMinBalance = true;
+      break;
     }
 
-    if(!haveMaxCredit) {
+    if (!haveMaxCredit) {
       m_maxCreditLabel->setEnabled(false);
       m_maxCreditLabel->hide();
       m_maxCreditEarlyEdit->hide();
       m_maxCreditAbsoluteEdit->hide();
     }
-    if(!haveMinBalance) {
+    if (!haveMinBalance) {
       m_minBalanceLabel->setEnabled(false);
       m_minBalanceLabel->hide();
       m_minBalanceEarlyEdit->hide();
@@ -221,58 +216,57 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
     typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Asset));
     typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Liability));
     typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Stock));
-/*
-    typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::CertificateDep));
-    typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::MoneyMarket));
-    typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Currency));
-*/
+    /*
+        typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::CertificateDep));
+        typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::MoneyMarket));
+        typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Currency));
+    */
 
     // Hardcoded but acceptable
-    switch (account.accountType())
-    {
-      default:
-      case MyMoneyAccount::Checkings:
-        typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Checkings), false);
-        break;
-      case MyMoneyAccount::Savings:
-        typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Savings), false);
-        break;
-      case MyMoneyAccount::Cash:
-        typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Cash), false);
-        break;
-      case MyMoneyAccount::CreditCard:
-        typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::CreditCard), false);
-        break;
-      case MyMoneyAccount::Loan:
-        typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Loan), false);
-        break;
-      case MyMoneyAccount::Investment:
-        typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Investment), false);
-        break;
-      case MyMoneyAccount::Asset:
-        typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Asset), false);
-        break;
-      case MyMoneyAccount::Liability:
-        typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Liability), false);
-        break;
-      case MyMoneyAccount::Stock:
-        m_institutionBox->hide();
-        typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Stock), false);
-        break;
-/*
-      case MyMoneyAccount::CertificateDep:
-        typeCombo->setCurrentItem(5);
-        break;
-      case MyMoneyAccount::MoneyMarket:
-        typeCombo->setCurrentItem(7);
-        break;
-      case MyMoneyAccount::Currency:
-        typeCombo->setCurrentItem(8);
-        break;
-*/
+    switch (account.accountType()) {
+    default:
+    case MyMoneyAccount::Checkings:
+      typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Checkings), false);
+      break;
+    case MyMoneyAccount::Savings:
+      typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Savings), false);
+      break;
+    case MyMoneyAccount::Cash:
+      typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Cash), false);
+      break;
+    case MyMoneyAccount::CreditCard:
+      typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::CreditCard), false);
+      break;
+    case MyMoneyAccount::Loan:
+      typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Loan), false);
+      break;
+    case MyMoneyAccount::Investment:
+      typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Investment), false);
+      break;
+    case MyMoneyAccount::Asset:
+      typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Asset), false);
+      break;
+    case MyMoneyAccount::Liability:
+      typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Liability), false);
+      break;
+    case MyMoneyAccount::Stock:
+      m_institutionBox->hide();
+      typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Stock), false);
+      break;
+      /*
+            case MyMoneyAccount::CertificateDep:
+              typeCombo->setCurrentItem(5);
+              break;
+            case MyMoneyAccount::MoneyMarket:
+              typeCombo->setCurrentItem(7);
+              break;
+            case MyMoneyAccount::Currency:
+              typeCombo->setCurrentItem(8);
+              break;
+      */
     }
 
-    if(!m_account.openingDate().isValid())
+    if (!m_account.openingDate().isValid())
       m_account.setOpeningDate(QDate::currentDate());
 
     startDateEdit->setDate(m_account.openingDate());
@@ -285,28 +279,27 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
     loadKVP("maxCreditAbsolute", m_maxCreditAbsoluteEdit);
     loadKVP("maxCreditEarly", m_maxCreditEarlyEdit);
     // reverse the sign for display purposes
-    if(!m_maxCreditAbsoluteEdit->lineedit()->text().isEmpty())
-      m_maxCreditAbsoluteEdit->setValue(m_maxCreditAbsoluteEdit->value()*MyMoneyMoney(-1,1));
-    if(!m_maxCreditEarlyEdit->lineedit()->text().isEmpty())
-      m_maxCreditEarlyEdit->setValue(m_maxCreditEarlyEdit->value()*MyMoneyMoney(-1,1));
+    if (!m_maxCreditAbsoluteEdit->lineedit()->text().isEmpty())
+      m_maxCreditAbsoluteEdit->setValue(m_maxCreditAbsoluteEdit->value()*MyMoneyMoney(-1, 1));
+    if (!m_maxCreditEarlyEdit->lineedit()->text().isEmpty())
+      m_maxCreditEarlyEdit->setValue(m_maxCreditEarlyEdit->value()*MyMoneyMoney(-1, 1));
     loadKVP("lastNumberUsed", m_lastCheckNumberUsed);
 
 
     // we do not allow to change the account type once an account
     // was created. Same applies to currency if it is referenced.
-    if (m_isEditing)
-    {
+    if (m_isEditing) {
       typeCombo->setEnabled(false);
       m_currency->setDisabled(MyMoneyFile::instance()->isReferenced(m_account));
     }
-    if(m_account.isInvest()) {
+    if (m_account.isInvest()) {
       typeCombo->setEnabled(false);
       m_qcheckboxPreferred->hide();
       m_currencyText->hide();
       m_currency->hide();
     } else {
       // use the old field and override a possible new value
-      if(!MyMoneyMoney(account.value("minimumBalance")).isZero()) {
+      if (!MyMoneyMoney(account.value("minimumBalance")).isZero()) {
         m_minBalanceAbsoluteEdit->setValue(MyMoneyMoney(account.value("minimumBalance")));
       }
     }
@@ -320,21 +313,18 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
   // then the accounts
   QString institutionName;
 
-  try
-  {
+  try {
     if (m_isEditing && !account.institutionId().isEmpty())
       institutionName = file->institution(account.institutionId()).name();
     else
       institutionName.clear();
-  }
-  catch (MyMoneyException *e)
-  {
+  } catch (MyMoneyException *e) {
     qDebug("exception in init for account dialog: %s", qPrintable(e->what()));
     delete e;
   }
 
   initParentWidget(account.parentAccountId(), account.id());
-  if(m_account.isInvest())
+  if (m_account.isInvest())
     m_qlistviewParentAccounts->setEnabled(false);
 
   if (!categoryEditor)
@@ -352,10 +342,10 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
   connect(cancelButton, SIGNAL(clicked()), SLOT(reject()));
   connect(createButton, SIGNAL(clicked()), this, SLOT(okClicked()));
   connect(m_qlistviewParentAccounts, SIGNAL(selectionChanged(Q3ListViewItem*)),
-    this, SLOT(slotSelectionChanged(Q3ListViewItem*)));
+          this, SLOT(slotSelectionChanged(Q3ListViewItem*)));
   connect(m_qbuttonNew, SIGNAL(clicked()), this, SLOT(slotNewClicked()));
   connect(typeCombo, SIGNAL(activated(const QString&)),
-    this, SLOT(slotAccountTypeChanged(const QString&)));
+          this, SLOT(slotAccountTypeChanged(const QString&)));
 
   connect(accountNameEdit, SIGNAL(textChanged(const QString&)), this, SLOT(slotCheckFinished()));
 
@@ -378,27 +368,27 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
 
   // make sure our account does not have an id and no parent assigned
   // and certainly no children in case we create a new account
-  if(!m_isEditing) {
+  if (!m_isEditing) {
     m_account.clearId();
     m_account.setParentAccountId(QString());
     QStringList::ConstIterator it;
-    while((it = m_account.accountList().begin()) != m_account.accountList().end())
+    while ((it = m_account.accountList().begin()) != m_account.accountList().end())
       m_account.removeAccountId(*it);
 
-    if(m_parentItem == 0) {
+    if (m_parentItem == 0) {
       // force loading of initial parent
       m_account.setAccountType(MyMoneyAccount::UnknownAccountType);
       MyMoneyAccount::_accountTypeE type = account.accountType();
-      if(type == MyMoneyAccount::UnknownAccountType)
+      if (type == MyMoneyAccount::UnknownAccountType)
         type = MyMoneyAccount::Checkings;
       slotAccountTypeChanged(KMyMoneyUtils::accountTypeToString(type));
     }
   } else {
-    if(!m_account.value("VatRate").isEmpty()) {
+    if (!m_account.value("VatRate").isEmpty()) {
       m_vatCategory->setChecked(true);
-      m_vatRate->setValue(MyMoneyMoney(m_account.value("VatRate"))*MyMoneyMoney(100,1));
+      m_vatRate->setValue(MyMoneyMoney(m_account.value("VatRate"))*MyMoneyMoney(100, 1));
     } else {
-      if(!m_account.value("VatAccount").isEmpty()) {
+      if (!m_account.value("VatAccount").isEmpty()) {
         QString accId = m_account.value("VatAccount").toLatin1();
         try {
           // make sure account exists
@@ -406,9 +396,9 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
           m_vatAssignment->setChecked(true);
           m_vatAccount->setSelected(accId);
           m_grossAmount->setChecked(true);
-          if(m_account.value("VatAmount") == "Net")
+          if (m_account.value("VatAmount") == "Net")
             m_netAmount->setChecked(true);
-        } catch(MyMoneyException *e) {
+        } catch (MyMoneyException *e) {
           delete e;
         }
       }
@@ -418,7 +408,7 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
   slotVatAssignmentChanged(m_vatAssignment->isChecked());
   slotCheckFinished();
 
-  kMandatoryFieldGroup* requiredFields = new kMandatoryFieldGroup (this);
+  kMandatoryFieldGroup* requiredFields = new kMandatoryFieldGroup(this);
   requiredFields->setOkButton(createButton); // button to be enabled when all fields present
   requiredFields->add(accountNameEdit);
 
@@ -430,8 +420,8 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
 
 void KNewAccountDlg::timerDone(void)
 {
-  if(m_accountItem) m_qlistviewParentAccounts->ensureItemVisible(m_accountItem);
-  if(m_parentItem) m_qlistviewParentAccounts->ensureItemVisible(m_parentItem);
+  if (m_accountItem) m_qlistviewParentAccounts->ensureItemVisible(m_accountItem);
+  if (m_parentItem) m_qlistviewParentAccounts->ensureItemVisible(m_parentItem);
   // KNewAccountDlgDecl::resizeEvent(0);
   m_qlistviewParentAccounts->setColumnWidth(m_qlistviewParentAccounts->nameColumn(), m_qlistviewParentAccounts->visibleWidth());
   m_qlistviewParentAccounts->repaintContents(false);
@@ -452,45 +442,35 @@ void KNewAccountDlg::okClicked()
   MyMoneyFile* file = MyMoneyFile::instance();
 
   QString accountNameText = accountNameEdit->text();
-  if (accountNameText.isEmpty())
-  {
+  if (accountNameText.isEmpty()) {
     KMessageBox::error(this, i18n("You have not specified a name.\nPlease fill in this field."));
     accountNameEdit->setFocus();
     return;
   }
 
   MyMoneyAccount parent = parentAccount();
-  if (parent.name().length() == 0)
-  {
+  if (parent.name().length() == 0) {
     KMessageBox::error(this, i18n("Please select a parent account."));
     return;
   }
 
-  if (!m_categoryEditor)
-  {
+  if (!m_categoryEditor) {
     QString institutionNameText = m_qcomboboxInstitutions->currentText();
-    if (institutionNameText != i18n("<No Institution>"))
-    {
-      try
-      {
+    if (institutionNameText != i18n("<No Institution>")) {
+      try {
         MyMoneyFile *file = MyMoneyFile::instance();
 
         QList<MyMoneyInstitution> list = file->institutionList();
         QList<MyMoneyInstitution>::ConstIterator institutionIterator;
-        for (institutionIterator = list.constBegin(); institutionIterator != list.constEnd(); ++institutionIterator)
-        {
+        for (institutionIterator = list.constBegin(); institutionIterator != list.constEnd(); ++institutionIterator) {
           if ((*institutionIterator).name() == institutionNameText)
             m_account.setInstitutionId((*institutionIterator).id());
         }
-      }
-      catch (MyMoneyException *e)
-      {
+      } catch (MyMoneyException *e) {
         qDebug("Exception in account institution set: %s", qPrintable(e->what()));
         delete e;
       }
-    }
-    else
-    {
+    } else {
       m_account.setInstitutionId(QString());
     }
   }
@@ -502,42 +482,39 @@ void KNewAccountDlg::okClicked()
   storeKVP("minBalanceEarly", m_minBalanceEarlyEdit);
 
   // the figures for credit line with reversed sign
-  if(!m_maxCreditAbsoluteEdit->lineedit()->text().isEmpty())
-    m_maxCreditAbsoluteEdit->setValue(m_maxCreditAbsoluteEdit->value()*MyMoneyMoney(-1,1));
-  if(!m_maxCreditEarlyEdit->lineedit()->text().isEmpty())
-    m_maxCreditEarlyEdit->setValue(m_maxCreditEarlyEdit->value()*MyMoneyMoney(-1,1));
+  if (!m_maxCreditAbsoluteEdit->lineedit()->text().isEmpty())
+    m_maxCreditAbsoluteEdit->setValue(m_maxCreditAbsoluteEdit->value()*MyMoneyMoney(-1, 1));
+  if (!m_maxCreditEarlyEdit->lineedit()->text().isEmpty())
+    m_maxCreditEarlyEdit->setValue(m_maxCreditEarlyEdit->value()*MyMoneyMoney(-1, 1));
   storeKVP("maxCreditAbsolute", m_maxCreditAbsoluteEdit);
   storeKVP("maxCreditEarly", m_maxCreditEarlyEdit);
-  if(!m_maxCreditAbsoluteEdit->lineedit()->text().isEmpty())
-    m_maxCreditAbsoluteEdit->setValue(m_maxCreditAbsoluteEdit->value()*MyMoneyMoney(-1,1));
-  if(!m_maxCreditEarlyEdit->lineedit()->text().isEmpty())
-    m_maxCreditEarlyEdit->setValue(m_maxCreditEarlyEdit->value()*MyMoneyMoney(-1,1));
+  if (!m_maxCreditAbsoluteEdit->lineedit()->text().isEmpty())
+    m_maxCreditAbsoluteEdit->setValue(m_maxCreditAbsoluteEdit->value()*MyMoneyMoney(-1, 1));
+  if (!m_maxCreditEarlyEdit->lineedit()->text().isEmpty())
+    m_maxCreditEarlyEdit->setValue(m_maxCreditEarlyEdit->value()*MyMoneyMoney(-1, 1));
 
   storeKVP("lastNumberUsed", m_lastCheckNumberUsed);
   // delete a previous version of the minimumbalance information
   storeKVP("minimumBalance", QString(), QString());
 
   MyMoneyAccount::accountTypeE acctype;
-  if (!m_categoryEditor)
-  {
+  if (!m_categoryEditor) {
     acctype = KMyMoneyUtils::stringToAccountType(typeCombo->currentText());
     // If it's a loan, check if the parent is asset or liability. In
     // case of asset, we change the account type to be AssetLoan
-    if(acctype == MyMoneyAccount::Loan
-    && parent.accountGroup() == MyMoneyAccount::Asset)
+    if (acctype == MyMoneyAccount::Loan
+        && parent.accountGroup() == MyMoneyAccount::Asset)
       acctype = MyMoneyAccount::AssetLoan;
-  }
-  else
-  {
+  } else {
     acctype = parent.accountGroup();
     QString newName;
-    if(!MyMoneyFile::instance()->isStandardAccount(parent.id())) {
+    if (!MyMoneyFile::instance()->isStandardAccount(parent.id())) {
       newName = MyMoneyFile::instance()->accountToCategory(parent.id()) + MyMoneyFile::AccountSeperator;
     }
     newName += accountNameText;
-    if(!file->categoryToAccount(newName, acctype).isEmpty()
-    && (file->categoryToAccount(newName, acctype) != m_account.id())) {
-      KMessageBox::error(this, QString("<qt>")+i18n("A category named <b>%1</b> already exists. You cannot create a second category with the same name.",newName)+QString("</qt>"));
+    if (!file->categoryToAccount(newName, acctype).isEmpty()
+        && (file->categoryToAccount(newName, acctype) != m_account.id())) {
+      KMessageBox::error(this, QString("<qt>") + i18n("A category named <b>%1</b> already exists. You cannot create a second category with the same name.", newName) + QString("</qt>"));
       return;
     }
   }
@@ -545,32 +522,29 @@ void KNewAccountDlg::okClicked()
 
   m_account.setDescription(descriptionEdit->text());
 
-  if (!m_categoryEditor)
-  {
+  if (!m_categoryEditor) {
     m_account.setOpeningDate(startDateEdit->date());
     m_account.setCurrencyId(m_currency->security().id());
 
-    if(m_qcheckboxPreferred->isChecked())
+    if (m_qcheckboxPreferred->isChecked())
       m_account.setValue("PreferredAccount", "Yes");
     else
       m_account.deletePair("PreferredAccount");
-    if(m_qcheckboxNoVat->isChecked())
+    if (m_qcheckboxNoVat->isChecked())
       m_account.setValue("NoVat", "Yes");
     else
       m_account.deletePair("NoVat");
 
-    if(m_minBalanceAbsoluteEdit->isVisible()) {
+    if (m_minBalanceAbsoluteEdit->isVisible()) {
       m_account.setValue("minimumBalance", m_minBalanceAbsoluteEdit->value().toString());
     }
-  }
-  else
-  {
-    if(KMyMoneyGlobalSettings::hideUnusedCategory() && !m_isEditing) {
+  } else {
+    if (KMyMoneyGlobalSettings::hideUnusedCategory() && !m_isEditing) {
       KMessageBox::information(this, i18n("You have selected to suppress the display of unused categories in the KMyMoney configuration dialog. The category you just created will therefore only be shown if it is used. Otherwise, it will be hidden in the accounts/categories view."), i18n("Hidden categories"), "NewHiddenCategory");
     }
   }
 
-  if ( m_qcheckboxTax->isChecked())
+  if (m_qcheckboxTax->isChecked())
     m_account.setValue("Tax", "Yes");
   else
     m_account.deletePair("Tax");
@@ -579,12 +553,12 @@ void KNewAccountDlg::okClicked()
   m_account.deletePair("VatAmount");
   m_account.deletePair("VatRate");
 
-  if(m_vatCategory->isChecked()) {
-    m_account.setValue("VatRate", (m_vatRate->value().abs() / MyMoneyMoney(100,1)).toString());
+  if (m_vatCategory->isChecked()) {
+    m_account.setValue("VatRate", (m_vatRate->value().abs() / MyMoneyMoney(100, 1)).toString());
   } else {
-    if(m_vatAssignment->isChecked() && !m_vatAccount->selectedItems().isEmpty()) {
+    if (m_vatAssignment->isChecked() && !m_vatAccount->selectedItems().isEmpty()) {
       m_account.setValue("VatAccount", m_vatAccount->selectedItems().first());
-      if(m_netAmount->isChecked())
+      if (m_netAmount->isChecked())
         m_account.setValue("VatAmount", "Net");
     }
   }
@@ -594,10 +568,10 @@ void KNewAccountDlg::okClicked()
 
 void KNewAccountDlg::loadKVP(const QString& key, kMyMoneyEdit* widget)
 {
-  if(!widget)
+  if (!widget)
     return;
 
-  if(m_account.value(key).isEmpty()) {
+  if (m_account.value(key).isEmpty()) {
     widget->clearText();
   } else {
     widget->setValue(MyMoneyMoney(m_account.value(key)));
@@ -606,7 +580,7 @@ void KNewAccountDlg::loadKVP(const QString& key, kMyMoneyEdit* widget)
 
 void KNewAccountDlg::loadKVP(const QString& key, KLineEdit* widget)
 {
-  if(!widget)
+  if (!widget)
     return;
 
   widget->setText(m_account.value(key));
@@ -614,7 +588,7 @@ void KNewAccountDlg::loadKVP(const QString& key, KLineEdit* widget)
 
 void KNewAccountDlg::storeKVP(const QString& key, const QString& text, const QString& value)
 {
-  if(text.isEmpty())
+  if (text.isEmpty())
     m_account.deletePair(key);
   else
     m_account.setValue(key, value);
@@ -636,14 +610,14 @@ const MyMoneyAccount& KNewAccountDlg::account(void)
   m_account.setCurrencyId(m_currency->security().id());
 
   // and the price mode
-  switch(m_priceMode->currentItem()) {
-    case 0:
-      m_account.deletePair("priceMode");
-      break;
-    case 1:
-    case 2:
-      m_account.setValue("priceMode", QString("%1").arg(m_priceMode->currentItem()));
-      break;
+  switch (m_priceMode->currentItem()) {
+  case 0:
+    m_account.deletePair("priceMode");
+    break;
+  case 1:
+  case 2:
+    m_account.setValue("priceMode", QString("%1").arg(m_priceMode->currentItem()));
+    break;
   }
 
   return m_account;
@@ -651,33 +625,31 @@ const MyMoneyAccount& KNewAccountDlg::account(void)
 
 const MyMoneyAccount& KNewAccountDlg::parentAccount(void)
 {
-  if (!m_bSelectedParentAccount)
-  {
+  if (!m_bSelectedParentAccount) {
     MyMoneyFile *file = MyMoneyFile::instance();
 
-    switch (m_account.accountGroup())
-    {
-      case MyMoneyAccount::Asset:
-        m_parentAccount = file->asset();
-        break;
-      case MyMoneyAccount::Liability:
-        m_parentAccount = file->liability();
-        break;
-      case MyMoneyAccount::Income:
+    switch (m_account.accountGroup()) {
+    case MyMoneyAccount::Asset:
+      m_parentAccount = file->asset();
+      break;
+    case MyMoneyAccount::Liability:
+      m_parentAccount = file->liability();
+      break;
+    case MyMoneyAccount::Income:
+      m_parentAccount = file->income();
+      break;
+    case MyMoneyAccount::Expense:
+      m_parentAccount = file->expense();
+      break;
+    case MyMoneyAccount::Equity:
+      m_parentAccount = file->equity();
+      break;
+    default:
+      qDebug("Seems we have an account that hasn't been mapped to the top five");
+      if (m_categoryEditor)
         m_parentAccount = file->income();
-        break;
-      case MyMoneyAccount::Expense:
-        m_parentAccount = file->expense();
-        break;
-      case MyMoneyAccount::Equity:
-        m_parentAccount = file->equity();
-        break;
-      default:
-        qDebug("Seems we have an account that hasn't been mapped to the top five");
-        if(m_categoryEditor)
-          m_parentAccount = file->income();
-        else
-          m_parentAccount = file->asset();
+      else
+        m_parentAccount = file->asset();
     }
   }
   return m_parentAccount;
@@ -697,15 +669,12 @@ void KNewAccountDlg::initParentWidget(QString parentId, const QString& accountId
   m_accountItem = 0;
 
   // Determine the parent account
-  try
-  {
+  try {
     m_parentAccount = file->account(parentId);
-  }
-  catch (MyMoneyException *e)
-  {
+  } catch (MyMoneyException *e) {
     m_bSelectedParentAccount = false;
     m_parentAccount = MyMoneyAccount();
-    if(m_account.accountType() != MyMoneyAccount::UnknownAccountType) {
+    if (m_account.accountType() != MyMoneyAccount::UnknownAccountType) {
       parentAccount();
       parentId = m_parentAccount.id();
     }
@@ -722,15 +691,13 @@ void KNewAccountDlg::initParentWidget(QString parentId, const QString& accountId
   m_qlistviewParentAccounts->clear();
 
   // Now scan all 4 account roots to load the list and mark the parent
-  try
-  {
-    if (!m_categoryEditor)
-    {
-      if(groupType == MyMoneyAccount::Asset || type == MyMoneyAccount::Loan) {
+  try {
+    if (!m_categoryEditor) {
+      if (groupType == MyMoneyAccount::Asset || type == MyMoneyAccount::Loan) {
         // Asset
         KMyMoneyAccountTreeBaseItem *assetTopLevelAccount = new KMyMoneyAccountTreeItem(m_qlistviewParentAccounts, assetAccount);
 
-        if(m_parentAccount.id().isEmpty()) {
+        if (m_parentAccount.id().isEmpty()) {
           m_parentAccount = assetAccount;
           parentId = m_parentAccount.id();
         }
@@ -740,37 +707,35 @@ void KNewAccountDlg::initParentWidget(QString parentId, const QString& accountId
 
         assetTopLevelAccount->setOpen(true);
 
-        for ( QStringList::ConstIterator it = assetAccount.accountList().begin();
-              it != assetAccount.accountList().end();
-              ++it )
-        {
+        for (QStringList::ConstIterator it = assetAccount.accountList().begin();
+             it != assetAccount.accountList().end();
+             ++it) {
           MyMoneyAccount acc = file->account(*it);
-          if(acc.isClosed())
+          if (acc.isClosed())
             continue;
 
           KMyMoneyAccountTreeBaseItem *accountItem = new KMyMoneyAccountTreeItem(assetTopLevelAccount, acc);
 
-          if(parentId == acc.id()) {
+          if (parentId == acc.id()) {
             m_parentItem = accountItem;
-          } else if(accountId == acc.id()) {
-            if(m_isEditing)
+          } else if (accountId == acc.id()) {
+            if (m_isEditing)
               accountItem->setSelectable(false);
             m_accountItem = accountItem;
           }
 
           QStringList subAccounts = acc.accountList();
-          if (subAccounts.count() >= 1)
-          {
+          if (subAccounts.count() >= 1) {
             showSubAccounts(subAccounts, accountItem, parentId, acc.id());
           }
         }
       }
 
-      if(groupType == MyMoneyAccount::Liability) {
+      if (groupType == MyMoneyAccount::Liability) {
         // Liability
         KMyMoneyAccountTreeBaseItem *liabilityTopLevelAccount = new KMyMoneyAccountTreeItem(m_qlistviewParentAccounts, liabilityAccount);
 
-        if(m_parentAccount.id().isEmpty()) {
+        if (m_parentAccount.id().isEmpty()) {
           m_parentAccount = liabilityAccount;
           parentId = m_parentAccount.id();
         }
@@ -780,40 +745,36 @@ void KNewAccountDlg::initParentWidget(QString parentId, const QString& accountId
 
         liabilityTopLevelAccount->setOpen(true);
 
-        for ( QStringList::ConstIterator it = liabilityAccount.accountList().begin();
-              it != liabilityAccount.accountList().end();
-              ++it )
-        {
+        for (QStringList::ConstIterator it = liabilityAccount.accountList().begin();
+             it != liabilityAccount.accountList().end();
+             ++it) {
           MyMoneyAccount acc = file->account(*it);
-          if(acc.isClosed())
+          if (acc.isClosed())
             continue;
 
           KMyMoneyAccountTreeBaseItem *accountItem = new KMyMoneyAccountTreeItem(liabilityTopLevelAccount, acc);
 
-          if(parentId == acc.id()) {
+          if (parentId == acc.id()) {
             m_parentItem = accountItem;
-          } else if(accountId == acc.id()) {
-            if(m_isEditing)
+          } else if (accountId == acc.id()) {
+            if (m_isEditing)
               accountItem->setSelectable(false);
             m_accountItem = accountItem;
           }
 
           QStringList subAccounts = acc.accountList();
-          if (subAccounts.count() >= 1)
-          {
+          if (subAccounts.count() >= 1) {
             showSubAccounts(subAccounts, accountItem, parentId, acc.id());
           }
         }
       }
-    }
-    else
-    {
-      if(groupType == MyMoneyAccount::Income) {
+    } else {
+      if (groupType == MyMoneyAccount::Income) {
         // Income
         KMyMoneyAccountTreeBaseItem *incomeTopLevelAccount = new KMyMoneyAccountTreeItem(m_qlistviewParentAccounts,
-                          incomeAccount);
+            incomeAccount);
 
-        if(m_parentAccount.id().isEmpty()) {
+        if (m_parentAccount.id().isEmpty()) {
           m_parentAccount = incomeAccount;
           parentId = m_parentAccount.id();
         }
@@ -823,36 +784,34 @@ void KNewAccountDlg::initParentWidget(QString parentId, const QString& accountId
 
         incomeTopLevelAccount->setOpen(true);
 
-        for ( QStringList::ConstIterator it = incomeAccount.accountList().begin();
-              it != incomeAccount.accountList().end();
-              ++it )
-        {
+        for (QStringList::ConstIterator it = incomeAccount.accountList().begin();
+             it != incomeAccount.accountList().end();
+             ++it) {
           KMyMoneyAccountTreeBaseItem *accountItem = new KMyMoneyAccountTreeItem(incomeTopLevelAccount,
               file->account(*it));
 
           QString id = file->account(*it).id();
-          if(parentId == id) {
+          if (parentId == id) {
             m_parentItem = accountItem;
-          } else if(accountId == id) {
-            if(m_isEditing)
+          } else if (accountId == id) {
+            if (m_isEditing)
               accountItem->setSelectable(false);
             m_accountItem = accountItem;
           }
 
           QStringList subAccounts = file->account(*it).accountList();
-          if (subAccounts.count() >= 1)
-          {
+          if (subAccounts.count() >= 1) {
             showSubAccounts(subAccounts, accountItem, parentId, accountId);
           }
         }
       }
 
-      if(groupType == MyMoneyAccount::Expense) {
+      if (groupType == MyMoneyAccount::Expense) {
         // Expense
         KMyMoneyAccountTreeBaseItem *expenseTopLevelAccount = new KMyMoneyAccountTreeItem(m_qlistviewParentAccounts,
-                          expenseAccount);
+            expenseAccount);
 
-        if(m_parentAccount.id().isEmpty()) {
+        if (m_parentAccount.id().isEmpty()) {
           m_parentAccount = expenseAccount;
           parentId = m_parentAccount.id();
         }
@@ -862,42 +821,37 @@ void KNewAccountDlg::initParentWidget(QString parentId, const QString& accountId
 
         expenseTopLevelAccount->setOpen(true);
 
-        for ( QStringList::ConstIterator it = expenseAccount.accountList().begin();
-              it != expenseAccount.accountList().end();
-              ++it )
-        {
+        for (QStringList::ConstIterator it = expenseAccount.accountList().begin();
+             it != expenseAccount.accountList().end();
+             ++it) {
           KMyMoneyAccountTreeBaseItem *accountItem = new KMyMoneyAccountTreeItem(expenseTopLevelAccount,
               file->account(*it));
 
           QString id = file->account(*it).id();
-          if(parentId == id) {
+          if (parentId == id) {
             m_parentItem = accountItem;
-          } else if(accountId == id) {
-            if(m_isEditing)
+          } else if (accountId == id) {
+            if (m_isEditing)
               accountItem->setSelectable(false);
             m_accountItem = accountItem;
           }
 
           QStringList subAccounts = file->account(*it).accountList();
-          if (subAccounts.count() >= 1)
-          {
+          if (subAccounts.count() >= 1) {
             showSubAccounts(subAccounts, accountItem, parentId, accountId);
           }
         }
       }
     }
-  }
-  catch (MyMoneyException *e)
-  {
+  } catch (MyMoneyException *e) {
     qDebug("Exception in assets account refresh: %s", qPrintable(e->what()));
     delete e;
   }
 
   m_qlistviewParentAccounts->setColumnWidth(0, m_qlistviewParentAccounts->width());
 
-  if (m_parentItem)
-  {
-    m_subAccountLabel->setText(i18n("Is a sub account of %1",m_parentAccount.name()));
+  if (m_parentItem) {
+    m_subAccountLabel->setText(i18n("Is a sub account of %1", m_parentAccount.name()));
     m_parentItem->setOpen(true);
     m_qlistviewParentAccounts->setSelected(m_parentItem, true);
   }
@@ -910,23 +864,21 @@ void KNewAccountDlg::showSubAccounts(QStringList accounts, KMyMoneyAccountTreeBa
 {
   MyMoneyFile *file = MyMoneyFile::instance();
 
-  for ( QStringList::ConstIterator it = accounts.constBegin(); it != accounts.constEnd(); ++it )
-  {
+  for (QStringList::ConstIterator it = accounts.constBegin(); it != accounts.constEnd(); ++it) {
     KMyMoneyAccountTreeBaseItem *accountItem  = new KMyMoneyAccountTreeItem(parentItem,
-          file->account(*it));
+        file->account(*it));
 
     QString id = file->account(*it).id();
-    if(parentId == id) {
+    if (parentId == id) {
       m_parentItem = accountItem;
-    } else if(accountId == id) {
-      if(m_isEditing)
+    } else if (accountId == id) {
+      if (m_isEditing)
         accountItem->setSelectable(false);
       m_accountItem = accountItem;
     }
 
     QStringList subAccounts = file->account(*it).accountList();
-    if (subAccounts.count() >= 1)
-    {
+    if (subAccounts.count() >= 1) {
       showSubAccounts(subAccounts, accountItem, parentId, accountId);
     }
   }
@@ -943,19 +895,16 @@ void KNewAccountDlg::resizeEvent(QResizeEvent* e)
 void KNewAccountDlg::slotSelectionChanged(Q3ListViewItem *item)
 {
   KMyMoneyAccountTreeBaseItem *accountItem = dynamic_cast<KMyMoneyAccountTreeBaseItem*>(item);
-  try
-  {
+  try {
     MyMoneyFile *file = MyMoneyFile::instance();
 
     //qDebug("Selected account id: %s", accountItem->accountID().data());
     m_parentAccount = file->account(accountItem->id());
-    m_subAccountLabel->setText(i18n("Is a sub account of %1",m_parentAccount.name()));
-    if(m_qlistviewParentAccounts->isEnabled()) {
+    m_subAccountLabel->setText(i18n("Is a sub account of %1", m_parentAccount.name()));
+    if (m_qlistviewParentAccounts->isEnabled()) {
       m_bSelectedParentAccount = true;
     }
-  }
-  catch (MyMoneyException *e)
-  {
+  } catch (MyMoneyException *e) {
     qDebug("This shouldn't happen! : %s", qPrintable(e->what()));
     delete e;
   }
@@ -970,26 +919,26 @@ void KNewAccountDlg::loadVatAccounts(void)
   QStringList loadListIncome;
   QStringList loadListAsset;
   QStringList loadListLiability;
-  for(it = list.begin(); it != list.end(); ++it) {
-    if(!(*it).value("VatRate").isEmpty()) {
-      if((*it).accountType() == MyMoneyAccount::Expense)
+  for (it = list.begin(); it != list.end(); ++it) {
+    if (!(*it).value("VatRate").isEmpty()) {
+      if ((*it).accountType() == MyMoneyAccount::Expense)
         loadListExpense += (*it).id();
-      else if((*it).accountType() == MyMoneyAccount::Income)
+      else if ((*it).accountType() == MyMoneyAccount::Income)
         loadListIncome += (*it).id();
-      else if((*it).accountType() == MyMoneyAccount::Asset)
+      else if ((*it).accountType() == MyMoneyAccount::Asset)
         loadListAsset += (*it).id();
-      else if((*it).accountType() == MyMoneyAccount::Liability)
+      else if ((*it).accountType() == MyMoneyAccount::Liability)
         loadListLiability += (*it).id();
     }
   }
   AccountSet vatSet;
-  if(!loadListAsset.isEmpty())
+  if (!loadListAsset.isEmpty())
     vatSet.load(m_vatAccount, i18n("Asset"), loadListAsset, true);
-  if(!loadListLiability.isEmpty())
+  if (!loadListLiability.isEmpty())
     vatSet.load(m_vatAccount, i18n("Liability"), loadListLiability, false);
-  if(!loadListIncome.isEmpty())
+  if (!loadListIncome.isEmpty())
     vatSet.load(m_vatAccount, i18n("Income"), loadListIncome, false);
-  if(!loadListExpense.isEmpty())
+  if (!loadListExpense.isEmpty())
     vatSet.load(m_vatAccount, i18n("Expense"), loadListExpense, false);
 }
 
@@ -1002,14 +951,12 @@ void KNewAccountDlg::slotLoadInstitutions(const QString& name)
   m_bicValue->setText(" ");
   ibanEdit->setEnabled(false);
   accountNoEdit->setEnabled(false);
-  try
-  {
+  try {
     MyMoneyFile *file = MyMoneyFile::instance();
 
     QList<MyMoneyInstitution> list = file->institutionList();
     QList<MyMoneyInstitution>::ConstIterator institutionIterator;
-    for (institutionIterator = list.constBegin(); institutionIterator != list.constEnd(); ++institutionIterator)
-    {
+    for (institutionIterator = list.constBegin(); institutionIterator != list.constEnd(); ++institutionIterator) {
       if ((*institutionIterator).name() == name) {
         ibanEdit->setEnabled(true);
         accountNoEdit->setEnabled(true);
@@ -1019,9 +966,7 @@ void KNewAccountDlg::slotLoadInstitutions(const QString& name)
     }
 
     m_qcomboboxInstitutions->setCurrentItem(name, false);
-  }
-  catch (MyMoneyException *e)
-  {
+  } catch (MyMoneyException *e) {
     qDebug("Exception in institution load: %s", qPrintable(e->what()));
     delete e;
   }
@@ -1032,20 +977,16 @@ void KNewAccountDlg::slotNewClicked()
   MyMoneyInstitution institution;
 
   QPointer<KNewBankDlg> dlg = new KNewBankDlg(institution, this);
-  if (dlg->exec())
-  {
+  if (dlg->exec()) {
     MyMoneyFileTransaction ft;
-    try
-    {
+    try {
       MyMoneyFile *file = MyMoneyFile::instance();
 
       institution = dlg->institution();
       file->addInstitution(institution);
       ft.commit();
       slotLoadInstitutions(institution.name());
-    }
-    catch (MyMoneyException *e)
-    {
+    } catch (MyMoneyException *e) {
       delete e;
       KMessageBox::information(this, i18n("Cannot add institution"));
     }
@@ -1062,29 +1003,29 @@ void KNewAccountDlg::slotAccountTypeChanged(const QString& typeStr)
   type = KMyMoneyUtils::stringToAccountType(typeStr);
   try {
     oldType = m_account.accountType();
-    if(oldType != type) {
+    if (oldType != type) {
       QString parentId;
-      switch(MyMoneyAccount::accountGroup(type)) {
-        case MyMoneyAccount::Asset:
-          parentId = file->asset().id();
-          break;
-        case MyMoneyAccount::Liability:
-          parentId = file->liability().id();
-          break;
-        case MyMoneyAccount::Expense:
-          parentId = file->expense().id();
-          break;
-        case MyMoneyAccount::Income:
-          parentId = file->income().id();
-          break;
-        default:
-          qWarning("Unknown account group in KNewAccountDlg::slotAccountTypeChanged()");
-          break;
+      switch (MyMoneyAccount::accountGroup(type)) {
+      case MyMoneyAccount::Asset:
+        parentId = file->asset().id();
+        break;
+      case MyMoneyAccount::Liability:
+        parentId = file->liability().id();
+        break;
+      case MyMoneyAccount::Expense:
+        parentId = file->expense().id();
+        break;
+      case MyMoneyAccount::Income:
+        parentId = file->income().id();
+        break;
+      default:
+        qWarning("Unknown account group in KNewAccountDlg::slotAccountTypeChanged()");
+        break;
       }
       initParentWidget(parentId, QString());
       m_account.setAccountType(type);
     }
-  } catch(MyMoneyException *e) {
+  } catch (MyMoneyException *e) {
     delete e;
     qWarning("Unexpected exception in KNewAccountDlg::slotAccountTypeChanged()");
   }
@@ -1094,14 +1035,14 @@ void KNewAccountDlg::slotCheckFinished(void)
 {
   bool showButton = true;
 
-  if(accountNameEdit->text().length() == 0) {
+  if (accountNameEdit->text().length() == 0) {
     showButton = false;
   }
 
-  if(m_vatCategory->isChecked() && m_vatRate->value() <= MyMoneyMoney(0)) {
+  if (m_vatCategory->isChecked() && m_vatRate->value() <= MyMoneyMoney(0)) {
     showButton = false;
   } else {
-    if(m_vatAssignment->isChecked() && m_vatAccount->selectedItems().isEmpty())
+    if (m_vatAssignment->isChecked() && m_vatAccount->selectedItems().isEmpty())
       showButton = false;
   }
   createButton->setEnabled(showButton);
@@ -1109,13 +1050,13 @@ void KNewAccountDlg::slotCheckFinished(void)
 
 void KNewAccountDlg::slotVatChanged(bool state)
 {
-  if(state) {
+  if (state) {
     m_vatCategoryFrame->show();
     m_vatAssignmentFrame->hide();
   } else {
     m_vatCategoryFrame->hide();
-    if(!m_account.isAssetLiability()) {
-        m_vatAssignmentFrame->show();
+    if (!m_account.isAssetLiability()) {
+      m_vatAssignmentFrame->show();
     }
   }
 }
@@ -1129,19 +1070,19 @@ void KNewAccountDlg::slotVatAssignmentChanged(bool state)
 void KNewAccountDlg::adjustEditWidgets(kMyMoneyEdit* dst, kMyMoneyEdit* src, char mode, int corr)
 {
   MyMoneyMoney factor(corr, 1);
-  if(m_account.accountGroup() == MyMoneyAccount::Asset)
+  if (m_account.accountGroup() == MyMoneyAccount::Asset)
     factor = -factor;
 
-  switch(mode) {
-    case '<':
-      if(src->value()*factor < dst->value()*factor)
-        dst->setValue(src->value());
-      break;
+  switch (mode) {
+  case '<':
+    if (src->value()*factor < dst->value()*factor)
+      dst->setValue(src->value());
+    break;
 
-    case '>':
-      if(src->value()*factor > dst->value()*factor)
-        dst->setValue(src->value());
-      break;
+  case '>':
+    if (src->value()*factor > dst->value()*factor)
+      dst->setValue(src->value());
+    break;
   }
 }
 
@@ -1167,7 +1108,7 @@ void KNewAccountDlg::slotAdjustMaxCreditEarlyEdit(const QString&)
 
 void KNewAccountDlg::addTab(QWidget* w, const QString& name)
 {
-  if(w) {
+  if (w) {
     w->setParent(m_tab);
     m_tab->addTab(w, name);
   }

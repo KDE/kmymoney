@@ -8,7 +8,7 @@
 ***************************************************************************/
 
 /****************************************************************************
-  Contains code from the func_xirr and related methods of financial.cpp 
+  Contains code from the func_xirr and related methods of financial.cpp
   - KOffice 1.6 by Sascha Pfau.  Sascha agreed to relicense those methods under
   GPLv2 or later.
 *****************************************************************************/
@@ -41,7 +41,8 @@
 #include "mymoneyreport.h"
 #include "listtable.h"
 
-namespace reports {
+namespace reports
+{
 
 class ReportAccount;
 
@@ -60,15 +61,15 @@ class ReportAccount;
 
 class QueryTable : public ListTable
 {
-  public:
-    QueryTable(const MyMoneyReport&);
-    void init(void);
+public:
+  QueryTable(const MyMoneyReport&);
+  void init(void);
 
-  protected:
-    void constructAccountTable(void);
-    void constructTransactionTable(void);
-    void constructPerformanceRow( const ReportAccount& account, TableRow& result ) const;
-    void constructSplitsTable(void);
+protected:
+  void constructAccountTable(void);
+  void constructTransactionTable(void);
+  void constructPerformanceRow(const ReportAccount& account, TableRow& result) const;
+  void constructSplitsTable(void);
 
 };
 
@@ -80,16 +81,30 @@ class CashFlowListItem
 {
 public:
   CashFlowListItem(void) {}
-  CashFlowListItem( const QDate& _date, const MyMoneyMoney& _value ): m_date(_date), m_value(_value) {}
-  bool operator<( const CashFlowListItem _second ) const { return m_date < _second.m_date; }
-  bool operator<=( const CashFlowListItem _second ) const { return m_date <= _second.m_date; }
-  bool operator>( const CashFlowListItem _second ) const { return m_date > _second.m_date; }
-  const QDate& date( void ) const { return m_date; }
-  const MyMoneyMoney& value( void ) const { return m_value; }
-  MyMoneyMoney NPV( double _rate ) const;
+  CashFlowListItem(const QDate& _date, const MyMoneyMoney& _value): m_date(_date), m_value(_value) {}
+  bool operator<(const CashFlowListItem _second) const {
+    return m_date < _second.m_date;
+  }
+  bool operator<=(const CashFlowListItem _second) const {
+    return m_date <= _second.m_date;
+  }
+  bool operator>(const CashFlowListItem _second) const {
+    return m_date > _second.m_date;
+  }
+  const QDate& date(void) const {
+    return m_date;
+  }
+  const MyMoneyMoney& value(void) const {
+    return m_value;
+  }
+  MyMoneyMoney NPV(double _rate) const;
 
-  static void setToday( const QDate& _today ) { m_sToday = _today; }
-  const QDate& today( void ) const { return m_sToday; }
+  static void setToday(const QDate& _today) {
+    m_sToday = _today;
+  }
+  const QDate& today(void) const {
+    return m_sToday;
+  }
 
 private:
   QDate m_date;
@@ -100,42 +115,42 @@ private:
 
 class CashFlowList: public QList<CashFlowListItem>
 {
-  public:
-    CashFlowList(void) {}
-    MyMoneyMoney NPV(double rate) const;
-    double IRR(void) const;
-    MyMoneyMoney total(void) const;
-    void dumpDebug(void) const;
+public:
+  CashFlowList(void) {}
+  MyMoneyMoney NPV(double rate) const;
+  double IRR(void) const;
+  MyMoneyMoney total(void) const;
+  void dumpDebug(void) const;
 
-    /**
-     * Function: XIRR
-     *
-     * Compute the internal rate of return for a non-periodic series of cash flows.
-     *
-     * XIRR ( Values; Dates; [ Guess = 0.1 ] )
-     **/
-    double calculateXIRR ( void ) const;
-
-  protected:
-    CashFlowListItem mostRecent(void) const;
-
-  private:
-        /**
-   * helper: xirrResult
+  /**
+   * Function: XIRR
    *
-   * args[0] = values
-   * args[1] = dates
-         **/
-    double xirrResult ( double& rate ) const;
+   * Compute the internal rate of return for a non-periodic series of cash flows.
+   *
+   * XIRR ( Values; Dates; [ Guess = 0.1 ] )
+   **/
+  double calculateXIRR(void) const;
 
-        /**
-     *
-     * helper: xirrResultDerive
-     *
-     * args[0] = values
-     * args[1] = dates
-         **/
-    double xirrResultDerive ( double& rate ) const;
+protected:
+  CashFlowListItem mostRecent(void) const;
+
+private:
+  /**
+  * helper: xirrResult
+  *
+  * args[0] = values
+  * args[1] = dates
+   **/
+  double xirrResult(double& rate) const;
+
+  /**
+  *
+  * helper: xirrResultDerive
+  *
+  * args[0] = values
+  * args[1] = dates
+   **/
+  double xirrResultDerive(double& rate) const;
 };
 
 }

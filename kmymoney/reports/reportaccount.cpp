@@ -39,37 +39,38 @@
 #include "mymoneysecurity.h"
 #include "reportdebug.h"
 
-namespace reports {
+namespace reports
+{
 
-ReportAccount::ReportAccount( void )
+ReportAccount::ReportAccount(void)
 {
 }
 
-ReportAccount::ReportAccount( const ReportAccount& copy ):
-  MyMoneyAccount( copy ), m_nameHierarchy( copy.m_nameHierarchy )
+ReportAccount::ReportAccount(const ReportAccount& copy):
+    MyMoneyAccount(copy), m_nameHierarchy(copy.m_nameHierarchy)
 {
   // NOTE: I implemented the copy constructor solely for debugging reasons
 
   DEBUG_ENTER(Q_FUNC_INFO);
 }
 
-ReportAccount::ReportAccount( const QString& accountid ):
-  MyMoneyAccount( MyMoneyFile::instance()->account(accountid) )
+ReportAccount::ReportAccount(const QString& accountid):
+    MyMoneyAccount(MyMoneyFile::instance()->account(accountid))
 {
   DEBUG_ENTER(Q_FUNC_INFO);
   DEBUG_OUTPUT(QString("Account %1").arg(accountid));
   calculateAccountHierarchy();
 }
 
-ReportAccount::ReportAccount( const MyMoneyAccount& account ):
-  MyMoneyAccount( account )
+ReportAccount::ReportAccount(const MyMoneyAccount& account):
+    MyMoneyAccount(account)
 {
   DEBUG_ENTER(Q_FUNC_INFO);
   DEBUG_OUTPUT(QString("Account %1").arg(account.id()));
   calculateAccountHierarchy();
 }
 
-void ReportAccount::calculateAccountHierarchy( void )
+void ReportAccount::calculateAccountHierarchy(void)
 {
   DEBUG_ENTER(Q_FUNC_INFO);
 
@@ -82,8 +83,7 @@ void ReportAccount::calculateAccountHierarchy( void )
 #else
   m_nameHierarchy.prepend(file->account(resultid).name());
 #endif
-  while (!file->isStandardAccount(parentid))
-  {
+  while (!file->isStandardAccount(parentid)) {
     // take on the identity of our parent
     resultid = parentid;
 
@@ -97,40 +97,36 @@ void ReportAccount::calculateAccountHierarchy( void )
   }
 }
 
-MyMoneyMoney ReportAccount::deepCurrencyPrice( const QDate& date ) const
+MyMoneyMoney ReportAccount::deepCurrencyPrice(const QDate& date) const
 {
   DEBUG_ENTER(Q_FUNC_INFO);
 
   MyMoneyMoney result(1, 1);
   MyMoneyFile* file = MyMoneyFile::instance();
 
-  MyMoneySecurity undersecurity = file->security( currencyId() );
-  if ( ! undersecurity.isCurrency() )
-  {
-    MyMoneyPrice price = file->price(undersecurity.id(),undersecurity.tradingCurrency(),date);
-    if ( price.isValid() )
-    {
+  MyMoneySecurity undersecurity = file->security(currencyId());
+  if (! undersecurity.isCurrency()) {
+    MyMoneyPrice price = file->price(undersecurity.id(), undersecurity.tradingCurrency(), date);
+    if (price.isValid()) {
       result = price.rate(undersecurity.tradingCurrency());
 
       DEBUG_OUTPUT(QString("Converting under %1 to deep %2, price on %3 is %4")
-        .arg(undersecurity.name())
-        .arg(file->security(undersecurity.tradingCurrency()).name())
-        .arg(date.toString())
-        .arg(result.toDouble()));
-    }
-    else
-    {
+                   .arg(undersecurity.name())
+                   .arg(file->security(undersecurity.tradingCurrency()).name())
+                   .arg(date.toString())
+                   .arg(result.toDouble()));
+    } else {
       DEBUG_OUTPUT(QString("No price to convert under %1 to deep %2 on %3")
-        .arg(undersecurity.name())
-        .arg(file->security(undersecurity.tradingCurrency()).name())
-        .arg(date.toString()));
+                   .arg(undersecurity.name())
+                   .arg(file->security(undersecurity.tradingCurrency()).name())
+                   .arg(date.toString()));
     }
   }
 
   return result;
 }
 
-MyMoneyMoney ReportAccount::baseCurrencyPrice( const QDate& date ) const
+MyMoneyMoney ReportAccount::baseCurrencyPrice(const QDate& date) const
 {
   // Note that whether or not the user chooses to convert to base currency, all the values
   // for a given account/category are converted to the currency for THAT account/category
@@ -149,15 +145,14 @@ MyMoneyMoney ReportAccount::baseCurrencyPrice( const QDate& date ) const
   MyMoneyMoney result(1, 1);
   MyMoneyFile* file = MyMoneyFile::instance();
 
-  if(isForeignCurrency())
-  {
+  if (isForeignCurrency()) {
     result = foreignCurrencyPrice(file->baseCurrency().id(), date);
   }
 
   return result;
 }
 
-MyMoneyMoney ReportAccount::foreignCurrencyPrice( const QString foreignCurrency, const QDate& date ) const
+MyMoneyMoney ReportAccount::foreignCurrencyPrice(const QString foreignCurrency, const QDate& date) const
 {
   DEBUG_ENTER(Q_FUNC_INFO);
 
@@ -168,31 +163,28 @@ MyMoneyMoney ReportAccount::foreignCurrencyPrice( const QString foreignCurrency,
 
   //check whether it is a currency or a commodity. In the latter case case, get the trading currency
   QString tradingCurrency;
-  if(security.isCurrency()) {
+  if (security.isCurrency()) {
     tradingCurrency = foreignCurrency;
   } else {
     tradingCurrency = security.tradingCurrency();
   }
 
   //It makes no sense to get the price if both currencies are the same
-  if(currency().id() != tradingCurrency) {
+  if (currency().id() != tradingCurrency) {
     price = file->price(currency().id(), tradingCurrency, date);
 
-    if(price.isValid())
-    {
+    if (price.isValid()) {
       result = price.rate(tradingCurrency);
       DEBUG_OUTPUT(QString("Converting deep %1 to currency %2, price on %3 is %4")
-          .arg(file->currency(currency().id()).name())
-          .arg(file->currency(foreignCurrency).name())
-          .arg(date.toString())
-          .arg(result.toDouble()));
-    }
-    else
-    {
+                   .arg(file->currency(currency().id()).name())
+                   .arg(file->currency(foreignCurrency).name())
+                   .arg(date.toString())
+                   .arg(result.toDouble()));
+    } else {
       DEBUG_OUTPUT(QString("No price to convert deep %1 to currency %2 on %3")
-          .arg(file->currency(currency().id()).name())
-          .arg(file->currency(foreignCurrency).name())
-          .arg(date.toString()));
+                   .arg(file->currency(currency().id()).name())
+                   .arg(file->currency(foreignCurrency).name())
+                   .arg(date.toString()));
     }
   }
   return result;
@@ -203,14 +195,14 @@ MyMoneyMoney ReportAccount::foreignCurrencyPrice( const QString foreignCurrency,
   *
   * @return The account's currency trading currency
   */
-MyMoneySecurity ReportAccount::currency( void ) const
+MyMoneySecurity ReportAccount::currency(void) const
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
   // First, get the deep currency
-  MyMoneySecurity deepcurrency = file->security( currencyId() );
-  if ( ! deepcurrency.isCurrency() )
-    deepcurrency = file->security( deepcurrency.tradingCurrency() );
+  MyMoneySecurity deepcurrency = file->security(currencyId());
+  if (! deepcurrency.isCurrency())
+    deepcurrency = file->security(deepcurrency.tradingCurrency());
 
   // Return the deep currency's ID
   return deepcurrency;
@@ -222,9 +214,9 @@ MyMoneySecurity ReportAccount::currency( void ) const
   *
   * @return bool True if this account is in a foreign currency
   */
-bool ReportAccount::isForeignCurrency( void ) const
+bool ReportAccount::isForeignCurrency(void) const
 {
-  return ( currency().id() != MyMoneyFile::instance()->baseCurrency().id() );
+  return (currency().id() != MyMoneyFile::instance()->baseCurrency().id());
 }
 
 bool ReportAccount::operator<(const ReportAccount& second) const
@@ -235,24 +227,19 @@ bool ReportAccount::operator<(const ReportAccount& second) const
   bool haveresult = false;
   QStringList::const_iterator it_first = m_nameHierarchy.begin();
   QStringList::const_iterator it_second = second.m_nameHierarchy.begin();
-  while ( it_first != m_nameHierarchy.end() )
-  {
+  while (it_first != m_nameHierarchy.end()) {
     // The first string is longer than the second, but otherwise identical
-    if ( it_second == second.m_nameHierarchy.end() )
-    {
+    if (it_second == second.m_nameHierarchy.end()) {
       result = false;
       haveresult = true;
       break;
     }
 
-    if ( (*it_first) < (*it_second) )
-    {
+    if ((*it_first) < (*it_second)) {
       result = true;
       haveresult = true;
       break;
-    }
-    else if ( (*it_first) > (*it_second) )
-    {
+    } else if ((*it_first) > (*it_second)) {
       result = false;
       haveresult = true;
       break;
@@ -263,7 +250,7 @@ bool ReportAccount::operator<(const ReportAccount& second) const
   }
 
   // The second string is longer than the first, but otherwise identical
-  if ( !haveresult && ( it_second != second.m_nameHierarchy.end() ) )
+  if (!haveresult && (it_second != second.m_nameHierarchy.end()))
     result = true;
 
 //   DEBUG_OUTPUT(QString("%1 < %2 is %3").arg(debugName(),second.debugName()).arg(result));
@@ -277,41 +264,41 @@ bool ReportAccount::operator<(const ReportAccount& second) const
   *
   * @return QString The account's name
   */
-QString ReportAccount::name( void ) const
+QString ReportAccount::name(void) const
 {
   return m_nameHierarchy.back();
 }
 
 // MyMoneyAccount:fullHierarchyDebug()
-QString ReportAccount::debugName( void ) const
+QString ReportAccount::debugName(void) const
 {
   return m_nameHierarchy.join("|");
 }
 
 // MyMoneyAccount:fullHierarchy()
-QString ReportAccount::fullName( void ) const
+QString ReportAccount::fullName(void) const
 {
   return m_nameHierarchy.join(": ");
 }
 
 // MyMoneyAccount:isTopCategory()
-bool ReportAccount::isTopLevel( void ) const
+bool ReportAccount::isTopLevel(void) const
 {
-  return ( m_nameHierarchy.size() == 1 );
+  return (m_nameHierarchy.size() == 1);
 }
 
 // MyMoneyAccount:hierarchyDepth()
-unsigned ReportAccount::hierarchyDepth( void ) const
+unsigned ReportAccount::hierarchyDepth(void) const
 {
-  return ( m_nameHierarchy.size() );
+  return (m_nameHierarchy.size());
 }
 
-ReportAccount ReportAccount::parent( void ) const
+ReportAccount ReportAccount::parent(void) const
 {
-  return ReportAccount( parentAccountId() );
+  return ReportAccount(parentAccountId());
 }
 
-ReportAccount ReportAccount::topParent( void ) const
+ReportAccount ReportAccount::topParent(void) const
 {
   DEBUG_ENTER(Q_FUNC_INFO);
 
@@ -319,8 +306,7 @@ ReportAccount ReportAccount::topParent( void ) const
   QString resultid = id();
   QString parentid = parentAccountId();
 
-  while (!file->isStandardAccount(parentid))
-  {
+  while (!file->isStandardAccount(parentid)) {
     // take on the identity of our parent
     resultid = parentid;
 
@@ -328,23 +314,23 @@ ReportAccount ReportAccount::topParent( void ) const
     parentid = file->account(resultid).parentAccountId();
   }
 
-  return ReportAccount( resultid );
+  return ReportAccount(resultid);
 }
 
-QString ReportAccount::topParentName( void ) const
+QString ReportAccount::topParentName(void) const
 {
   return m_nameHierarchy.first();
 }
 
-bool ReportAccount::isLiquidAsset( void ) const
+bool ReportAccount::isLiquidAsset(void) const
 {
   return accountType() == MyMoneyAccount::Cash ||
-      accountType() == MyMoneyAccount::Checkings ||
-      accountType() == MyMoneyAccount::Savings;
+         accountType() == MyMoneyAccount::Checkings ||
+         accountType() == MyMoneyAccount::Savings;
 }
 
 
-bool ReportAccount::isLiquidLiability( void ) const
+bool ReportAccount::isLiquidLiability(void) const
 {
   return accountType() == MyMoneyAccount::CreditCard;
 

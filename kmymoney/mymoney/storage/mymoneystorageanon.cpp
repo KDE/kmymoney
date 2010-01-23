@@ -49,7 +49,7 @@ QStringList MyMoneyStorageANON::zKvpXNumber = QString("final-payment,loan-amount
 
 
 MyMoneyStorageANON::MyMoneyStorageANON() :
-  MyMoneyStorageXML()
+    MyMoneyStorageXML()
 {
   // Choose a quasi-random 0.0-100.0 factor which will be applied to all splits this time
   // around.
@@ -57,7 +57,7 @@ MyMoneyStorageANON::MyMoneyStorageANON() :
   int msec;
   do {
     msec = QTime::currentTime().msec();
-  } while(msec == 0);
+  } while (msec == 0);
   m_factor = MyMoneyMoney(msec, 10).reduce();
 }
 
@@ -65,7 +65,7 @@ MyMoneyStorageANON::~MyMoneyStorageANON()
 {
 }
 
-void MyMoneyStorageANON::readFile(QIODevice* , IMyMoneySerialize* )
+void MyMoneyStorageANON::readFile(QIODevice* , IMyMoneySerialize*)
 {
   throw new MYMONEYEXCEPTION("Cannot read a file through MyMoneyStorageANON!!");
 }
@@ -151,11 +151,11 @@ void MyMoneyStorageANON::fakeTransaction(MyMoneyTransaction& tx)
 
   // hide split data
   QList<MyMoneySplit>::ConstIterator it_s;
-  for(it_s = tx.splits().constBegin(); it_s != tx.splits().constEnd(); ++it_s) {
+  for (it_s = tx.splits().constBegin(); it_s != tx.splits().constEnd(); ++it_s) {
     MyMoneySplit s = (*it_s);
     s.setMemo(QString("%1/%2").arg(tn.id()).arg(s.id()));
 
-    if(s.value() != MyMoneyMoney::autoCalc) {
+    if (s.value() != MyMoneyMoney::autoCalc) {
       s.setValue((s.value() * m_factor));
       s.setShares((s.shares() * m_factor));
     }
@@ -171,11 +171,10 @@ void MyMoneyStorageANON::fakeKeyValuePair(MyMoneyKeyValueContainer& kvp)
   QMap<QString, QString> pairs;
   QMap<QString, QString>::const_iterator it;
 
-  for(it = kvp.pairs().begin(); it != kvp.pairs().end(); ++it)
-  {
-    if ( zKvpXNumber.contains( it.key() ) || it.key().left(3)=="ir-" )
+  for (it = kvp.pairs().begin(); it != kvp.pairs().end(); ++it) {
+    if (zKvpXNumber.contains(it.key()) || it.key().left(3) == "ir-")
       pairs[it.key()] = hideNumber(MyMoneyMoney(it.value())).toString();
-    else if ( zKvpNoModify.contains( it.key() ) )
+    else if (zKvpNoModify.contains(it.key()))
       pairs[it.key()] = it.value();
     else
       pairs[it.key()] = hideString(it.value());
@@ -222,10 +221,10 @@ QString MyMoneyStorageANON::hideString(const QString& _in) const
 MyMoneyMoney MyMoneyStorageANON::hideNumber(const MyMoneyMoney& _in) const
 {
   MyMoneyMoney result;
-  static MyMoneyMoney counter = MyMoneyMoney(100,100);
+  static MyMoneyMoney counter = MyMoneyMoney(100, 100);
 
   // preserve sign
-  if ( _in.isNegative() )
+  if (_in.isNegative())
     result = MyMoneyMoney(-1);
   else
     result = MyMoneyMoney(1);
@@ -234,9 +233,9 @@ MyMoneyMoney MyMoneyStorageANON::hideNumber(const MyMoneyMoney& _in) const
   counter += MyMoneyMoney("10/100");
 
   // preserve > 1000
-  if ( _in >= MyMoneyMoney(1000) )
+  if (_in >= MyMoneyMoney(1000))
     result = result * MyMoneyMoney(1000);
-  if ( _in <= MyMoneyMoney(-1000) )
+  if (_in <= MyMoneyMoney(-1000))
     result = result * MyMoneyMoney(1000);
 
   return result.convert();
@@ -252,19 +251,19 @@ void MyMoneyStorageANON::fakeBudget(MyMoneyBudget& bx)
 
   QList<MyMoneyBudget::AccountGroup> list = bx.getaccounts();
   QList<MyMoneyBudget::AccountGroup>::iterator it;
-  for(it = list.begin(); it != list.end(); ++it) {
+  for (it = list.begin(); it != list.end(); ++it) {
     // only add the account if there is a budget entered
-    if(!(*it).balance().isZero()) {
+    if (!(*it).balance().isZero()) {
       MyMoneyBudget::AccountGroup account;
       account.setId((*it).id());
       account.setBudgetLevel((*it).budgetLevel());
       account.setBudgetSubaccounts((*it).budgetSubaccounts());
       QMap<QDate, MyMoneyBudget::PeriodGroup> plist = (*it).getPeriods();
       QMap<QDate, MyMoneyBudget::PeriodGroup>::const_iterator it_p;
-      for(it_p = plist.constBegin(); it_p != plist.constEnd(); ++it_p) {
+      for (it_p = plist.constBegin(); it_p != plist.constEnd(); ++it_p) {
         MyMoneyBudget::PeriodGroup pGroup;
-        pGroup.setAmount((*it_p).amount() * m_factor );
-        pGroup.setStartDate( (*it_p).startDate());
+        pGroup.setAmount((*it_p).amount() * m_factor);
+        pGroup.setStartDate((*it_p).startDate());
         account.addPeriod(pGroup.startDate(), pGroup);
       }
       bn.setAccount(account, account.id());

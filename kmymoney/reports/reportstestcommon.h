@@ -26,12 +26,14 @@ class QDomDocument;
 #include "mymoneymoney.h"
 class MyMoneyReport;
 
-namespace reports {
+namespace reports
+{
 class PivotTable;
 class QueryTable;
 }
 
-namespace test {
+namespace test
+{
 
 extern const MyMoneyMoney moCheckingOpen;
 extern const MyMoneyMoney moCreditOpen;
@@ -79,7 +81,7 @@ class TransactionHelper: public MyMoneyTransaction
 private:
   QString m_id;
 public:
-  TransactionHelper( const QDate& _date, const QString& _action, MyMoneyMoney _value, const QString& _accountid, const QString& _categoryid, const QString& _currencyid = QString(), const QString& _payee="Test Payee" );
+  TransactionHelper(const QDate& _date, const QString& _action, MyMoneyMoney _value, const QString& _accountid, const QString& _categoryid, const QString& _currencyid = QString(), const QString& _payee = "Test Payee");
   ~TransactionHelper();
   void update(void);
 protected:
@@ -89,8 +91,8 @@ protected:
 class InvTransactionHelper: public TransactionHelper
 {
 public:
-  InvTransactionHelper( const QDate& _date, const QString& _action, MyMoneyMoney _shares, MyMoneyMoney _value, const QString& _stockaccountid, const QString& _transferid, const QString& _categoryid );
-  void init( const QDate& _date, const QString& _action, MyMoneyMoney _shares, MyMoneyMoney _value, const QString& _stockaccountid, const QString& _transferid, const QString& _categoryid );
+  InvTransactionHelper(const QDate& _date, const QString& _action, MyMoneyMoney _shares, MyMoneyMoney _value, const QString& _stockaccountid, const QString& _transferid, const QString& _categoryid);
+  void init(const QDate& _date, const QString& _action, MyMoneyMoney _shares, MyMoneyMoney _value, const QString& _stockaccountid, const QString& _transferid, const QString& _categoryid);
 };
 
 class BudgetEntryHelper
@@ -102,28 +104,28 @@ private:
   MyMoneyMoney m_amount;
 
 public:
-  BudgetEntryHelper( void ): m_applytosub(false) {}
-  BudgetEntryHelper( const QDate& _date, const QString& _categoryid, bool _applytosub, const MyMoneyMoney& _amount ): m_date(_date), m_categoryid(_categoryid), m_applytosub(_applytosub), m_amount(_amount) {}
+  BudgetEntryHelper(void): m_applytosub(false) {}
+  BudgetEntryHelper(const QDate& _date, const QString& _categoryid, bool _applytosub, const MyMoneyMoney& _amount): m_date(_date), m_categoryid(_categoryid), m_applytosub(_applytosub), m_amount(_amount) {}
 };
 
 class BudgetHelper: public Q3ValueList<BudgetEntryHelper>
 {
-  MyMoneyMoney budgetAmount( const QDate& _date, const QString& _categoryid, bool& _applytosub );
+  MyMoneyMoney budgetAmount(const QDate& _date, const QString& _categoryid, bool& _applytosub);
 };
 
-extern QString makeAccount( const QString& _name, MyMoneyAccount::accountTypeE _type, MyMoneyMoney _balance, const QDate& _open, const QString& _parent, QString _currency="", bool _taxReport = false );
-extern void makePrice(const QString& _currencyid, const QDate& _date, const MyMoneyMoney& _price );
-QString makeEquity(const QString& _name, const QString& _symbol );
-extern void makeEquityPrice(const QString& _id, const QDate& _date, const MyMoneyMoney& _price );
-extern void writeRCFtoXMLDoc( const MyMoneyReport& filter, QDomDocument* doc );
-extern void writeTabletoHTML( const reports::PivotTable& table, const QString& _filename = QString() );
-extern void writeTabletoHTML( const reports::QueryTable& table, const QString& _filename = QString() );
-extern void writeTabletoCSV( const reports::PivotTable& table, const QString& _filename = QString() );
-extern void writeTabletoCSV( const reports::QueryTable& table, const QString& _filename = QString() );
-extern void writeRCFtoXML( const MyMoneyReport& filter, const QString& _filename = QString() );
-extern bool readRCFfromXMLDoc( Q3ValueList<MyMoneyReport>& list, QDomDocument* doc );
-extern bool readRCFfromXML( Q3ValueList<MyMoneyReport>& list, const QString& filename );
-extern void XMLandback( MyMoneyReport& filter );
+extern QString makeAccount(const QString& _name, MyMoneyAccount::accountTypeE _type, MyMoneyMoney _balance, const QDate& _open, const QString& _parent, QString _currency = "", bool _taxReport = false);
+extern void makePrice(const QString& _currencyid, const QDate& _date, const MyMoneyMoney& _price);
+QString makeEquity(const QString& _name, const QString& _symbol);
+extern void makeEquityPrice(const QString& _id, const QDate& _date, const MyMoneyMoney& _price);
+extern void writeRCFtoXMLDoc(const MyMoneyReport& filter, QDomDocument* doc);
+extern void writeTabletoHTML(const reports::PivotTable& table, const QString& _filename = QString());
+extern void writeTabletoHTML(const reports::QueryTable& table, const QString& _filename = QString());
+extern void writeTabletoCSV(const reports::PivotTable& table, const QString& _filename = QString());
+extern void writeTabletoCSV(const reports::QueryTable& table, const QString& _filename = QString());
+extern void writeRCFtoXML(const MyMoneyReport& filter, const QString& _filename = QString());
+extern bool readRCFfromXMLDoc(Q3ValueList<MyMoneyReport>& list, QDomDocument* doc);
+extern bool readRCFfromXML(Q3ValueList<MyMoneyReport>& list, const QString& filename);
+extern void XMLandback(MyMoneyReport& filter);
 extern MyMoneyMoney searchHTML(const QString& _html, const QString& _search);
 
 } // end namespace test

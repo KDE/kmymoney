@@ -32,9 +32,9 @@
 // Project Includes
 
 KMyMoneyPlugin::Plugin::Plugin(QObject* o, const char* name) :
-  QObject(o)
+    QObject(o)
 {
-	setObjectName(name);
+  setObjectName(name);
 }
 
 KMyMoneyPlugin::Plugin::~Plugin()
@@ -46,7 +46,7 @@ KToggleAction* KMyMoneyPlugin::Plugin::toggleAction(const QString& actionName) c
   static KToggleAction dummyAction(QString("Dummy"), 0);
 
   KToggleAction* p = dynamic_cast<KToggleAction*>(actionCollection()->action(QString(actionName.toLatin1())));
-  if(!p) {
+  if (!p) {
     qWarning("Action '%s' is not of type KToggleAction", qPrintable(actionName));
     p = &dummyAction;
   }

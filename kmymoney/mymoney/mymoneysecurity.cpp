@@ -36,43 +36,43 @@
 #include "mymoneyexception.h"
 
 MyMoneySecurity::MyMoneySecurity() :
-  m_securityType(SECURITY_NONE),
-  m_smallestAccountFraction(100),
-  m_smallestCashFraction(100),
-  m_partsPerUnit(100)
+    m_securityType(SECURITY_NONE),
+    m_smallestAccountFraction(100),
+    m_smallestCashFraction(100),
+    m_partsPerUnit(100)
 {
 }
 
 MyMoneySecurity::MyMoneySecurity(const QString& id, const QString& name, const QString& symbol, const int partsPerUnit, const int smallestCashFraction, const int smallestAccountFraction) :
-  MyMoneyObject(id),
-  m_name(name),
-  m_securityType(SECURITY_CURRENCY)
+    MyMoneyObject(id),
+    m_name(name),
+    m_securityType(SECURITY_CURRENCY)
 {
-  if(symbol.isEmpty())
+  if (symbol.isEmpty())
     m_tradingSymbol = id;
   else
     m_tradingSymbol = symbol;
 
   m_partsPerUnit = partsPerUnit;
   m_smallestCashFraction = smallestCashFraction;
-  if(smallestAccountFraction)
+  if (smallestAccountFraction)
     m_smallestAccountFraction = smallestAccountFraction;
   else
     m_smallestAccountFraction = smallestCashFraction;
 }
 
 MyMoneySecurity::MyMoneySecurity(const QString& id, const MyMoneySecurity& equity) :
-  MyMoneyObject(id)
+    MyMoneyObject(id)
 {
   *this = equity;
   m_id = id;
 }
 
 MyMoneySecurity::MyMoneySecurity(const QDomElement& node) :
-  MyMoneyObject(node),
-  MyMoneyKeyValueContainer(node.elementsByTagName("KEYVALUEPAIRS").item(0).toElement())
+    MyMoneyObject(node),
+    MyMoneyKeyValueContainer(node.elementsByTagName("KEYVALUEPAIRS").item(0).toElement())
 {
-  if(("SECURITY" != node.tagName())
+  if (("SECURITY" != node.tagName())
       && ("EQUITY" != node.tagName())
       && ("CURRENCY" != node.tagName()))
     throw new MYMONEYEXCEPTION("Node was not SECURITY or CURRENCY");
@@ -82,7 +82,7 @@ MyMoneySecurity::MyMoneySecurity(const QDomElement& node) :
   setSecurityType(static_cast<eSECURITYTYPE>(node.attribute("type").toInt()));
   setSmallestAccountFraction(node.attribute("saf").toInt());
 
-  if(isCurrency()) {
+  if (isCurrency()) {
     setPartsPerUnit(node.attribute("ppu").toInt());
     setSmallestCashFraction(node.attribute("scf").toInt());
   } else {
@@ -98,22 +98,22 @@ MyMoneySecurity::~MyMoneySecurity()
 bool MyMoneySecurity::operator == (const MyMoneySecurity& r) const
 {
   return (m_id == r.m_id)
-      && (m_name == r.m_name)
-      && (m_tradingSymbol == r.m_tradingSymbol)
-      && (m_tradingMarket == r.m_tradingMarket)
-      && (m_tradingSymbol == r.m_tradingSymbol)
-      && (m_tradingCurrency == r.m_tradingCurrency)
-      && (m_securityType == r.m_securityType)
-      && (m_smallestAccountFraction == r.m_smallestAccountFraction)
-      && (m_smallestCashFraction == r.m_smallestCashFraction)
-      && (m_partsPerUnit == r.m_partsPerUnit)
-      && this->MyMoneyKeyValueContainer::operator == (r);
+         && (m_name == r.m_name)
+         && (m_tradingSymbol == r.m_tradingSymbol)
+         && (m_tradingMarket == r.m_tradingMarket)
+         && (m_tradingSymbol == r.m_tradingSymbol)
+         && (m_tradingCurrency == r.m_tradingCurrency)
+         && (m_securityType == r.m_securityType)
+         && (m_smallestAccountFraction == r.m_smallestAccountFraction)
+         && (m_smallestCashFraction == r.m_smallestCashFraction)
+         && (m_partsPerUnit == r.m_partsPerUnit)
+         && this->MyMoneyKeyValueContainer::operator == (r);
 
 }
 
 bool MyMoneySecurity::operator < (const MyMoneySecurity& right) const
 {
-  if(m_securityType == right.m_securityType)
+  if (m_securityType == right.m_securityType)
     return m_name < right.m_name;
   return m_securityType < right.m_securityType;
 }
@@ -127,7 +127,7 @@ bool MyMoneySecurity::hasReferenceTo(const QString& id) const
 void MyMoneySecurity::writeXML(QDomDocument& document, QDomElement& parent) const
 {
   QDomElement el;
-  if(isCurrency())
+  if (isCurrency())
     el = document.createElement("CURRENCY");
   else
     el = document.createElement("SECURITY");
@@ -138,7 +138,7 @@ void MyMoneySecurity::writeXML(QDomDocument& document, QDomElement& parent) cons
   el.setAttribute("symbol", m_tradingSymbol);
   el.setAttribute("type", static_cast<int>(m_securityType));
   el.setAttribute("saf", m_smallestAccountFraction);
-  if(isCurrency()) {
+  if (isCurrency()) {
     el.setAttribute("ppu", m_partsPerUnit);
     el.setAttribute("scf", m_smallestCashFraction);
   } else {
@@ -157,23 +157,23 @@ QString MyMoneySecurity::securityTypeToString(const eSECURITYTYPE securityType)
   QString returnString;
 
   switch (securityType) {
-    case MyMoneySecurity::SECURITY_STOCK:
-      returnString = I18N_NOOP("Stock");
-      break;
-    case MyMoneySecurity::SECURITY_MUTUALFUND:
-      returnString = I18N_NOOP("Mutual Fund");
-      break;
-    case MyMoneySecurity::SECURITY_BOND:
-      returnString = I18N_NOOP("Bond");
-      break;
-    case MyMoneySecurity::SECURITY_CURRENCY:
-      returnString = I18N_NOOP("Currency");
-      break;
-    case MyMoneySecurity::SECURITY_NONE:
-      returnString = I18N_NOOP("None");
-      break;
-    default:
-      returnString = I18N_NOOP("Unknown");
+  case MyMoneySecurity::SECURITY_STOCK:
+    returnString = I18N_NOOP("Stock");
+    break;
+  case MyMoneySecurity::SECURITY_MUTUALFUND:
+    returnString = I18N_NOOP("Mutual Fund");
+    break;
+  case MyMoneySecurity::SECURITY_BOND:
+    returnString = I18N_NOOP("Bond");
+    break;
+  case MyMoneySecurity::SECURITY_CURRENCY:
+    returnString = I18N_NOOP("Currency");
+    break;
+  case MyMoneySecurity::SECURITY_NONE:
+    returnString = I18N_NOOP("None");
+    break;
+  default:
+    returnString = I18N_NOOP("Unknown");
   }
 
   return returnString;

@@ -28,7 +28,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace reports {
+namespace reports
+{
 
 // define to enable massive debug logging to stderr
 #undef DEBUG_REPORTS
@@ -71,11 +72,15 @@ class Debug
   bool m_enabled;
   static QString m_sEnableKey;
 public:
-  Debug( const QString& _name );
+  Debug(const QString& _name);
   ~Debug();
-  void output( const QString& _text );
-  static void enable( bool _e ) { m_sEnabled = _e; }
-  static void setEnableKey( const QString& _s ) { m_sEnableKey = _s; }
+  void output(const QString& _text);
+  static void enable(bool _e) {
+    m_sEnabled = _e;
+  }
+  static void setEnableKey(const QString& _s) {
+    m_sEnableKey = _s;
+  }
 };
 
 } // end namespace reports

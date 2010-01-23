@@ -27,7 +27,7 @@
 
 // Some STL headers in GCC4.3 contain operator new. Memory checker mangles these
 #ifdef _CHECK_MEMORY
-  #undef new
+#undef new
 #endif
 
 // ----------------------------------------------------------------------------
@@ -50,7 +50,7 @@ class Q3ListViewItem;
 // ----------------------------------------------------------------------------
 // Project Includes
 #ifdef _CHECK_MEMORY
-  #include <mymoneyutils.h>
+#include <mymoneyutils.h>
 #endif
 
 #include <mymoneyscheduled.h>
@@ -98,19 +98,29 @@ public:
     reports::ReportTable* m_table;
 
   public:
-    KReportTab(KTabWidget* parent, const MyMoneyReport& report );
+    KReportTab(KTabWidget* parent, const MyMoneyReport& report);
     ~KReportTab();
-    const MyMoneyReport& report(void) const { return m_report; }
+    const MyMoneyReport& report(void) const {
+      return m_report;
+    }
     void print(void);
     void toggleChart(void);
     void copyToClipboard(void);
-    void saveAs( const QString& filename, bool includeCSS = false );
+    void saveAs(const QString& filename, bool includeCSS = false);
     void updateReport(void);
-    QString createTable(const QString& links=QString());
-    const kMyMoneyReportControlDecl* control(void) const { return m_control; }
-    bool isReadyToDelete(void) const { return m_deleteMe; }
-    void setReadyToDelete(bool f) { m_deleteMe = f; }
-    void modifyReport( const MyMoneyReport& report ) { m_report = report; }
+    QString createTable(const QString& links = QString());
+    const kMyMoneyReportControlDecl* control(void) const {
+      return m_control;
+    }
+    bool isReadyToDelete(void) const {
+      return m_deleteMe;
+    }
+    void setReadyToDelete(bool f) {
+      m_deleteMe = f;
+    }
+    void modifyReport(const MyMoneyReport& report) {
+      m_report = report;
+    }
     void showEvent(QShowEvent * event);
     void loadTab(void);
   };
@@ -130,17 +140,17 @@ public:
     MyMoneyReport m_report;
 
   public:
-    KReportListItem( K3ListView* parent, const MyMoneyReport& report ):
-      K3ListViewItem( parent, report.name(), report.comment() ),
-      m_id( report.id() ),
-      m_report( report )
-    {}
-    KReportListItem( K3ListViewItem* parent, const MyMoneyReport& report ):
-      K3ListViewItem( parent, report.name(), report.comment() ),
-      m_id( report.id() ),
-      m_report( report )
-    {}
-    const MyMoneyReport& report(void) const { return m_report; }
+    KReportListItem(K3ListView* parent, const MyMoneyReport& report):
+        K3ListViewItem(parent, report.name(), report.comment()),
+        m_id(report.id()),
+        m_report(report) {}
+    KReportListItem(K3ListViewItem* parent, const MyMoneyReport& report):
+        K3ListViewItem(parent, report.name(), report.comment()),
+        m_id(report.id()),
+        m_report(report) {}
+    const MyMoneyReport& report(void) const {
+      return m_report;
+    }
   };
 
   class KReportGroupListItem: public K3ListViewItem
@@ -150,8 +160,8 @@ public:
     QString m_name;
 
   public:
-    KReportGroupListItem( K3ListView* parent,const int nr,const QString name);
-    virtual QString key ( int column, bool ascending ) const;
+    KReportGroupListItem(K3ListView* parent, const int nr, const QString name);
+    virtual QString key(int column, bool ascending) const;
     void setNr(const int nr);
   };
 
@@ -169,10 +179,14 @@ public:
     QString m_name;     ///< the title of the group in non-translated form
     QString m_title;    ///< the title of the group in i18n-ed form
   public:
-    ReportGroup( void ) {}
-    ReportGroup( const QString& name, const QString& title ): m_name( name ), m_title(title) {}
-    const QString& name( void ) const { return m_name; }
-    const QString& title(void) const { return m_title; }
+    ReportGroup(void) {}
+    ReportGroup(const QString& name, const QString& title): m_name(name), m_title(title) {}
+    const QString& name(void) const {
+      return m_name;
+    }
+    const QString& title(void) const {
+      return m_title;
+    }
   };
 
 private:
@@ -197,7 +211,7 @@ public:
     *
     * @see ~KReportsView
     */
-  explicit KReportsView(QWidget *parent=0, const char *name=0);
+  explicit KReportsView(QWidget *parent = 0, const char *name = 0);
 
   /**
     * Standard destructor.
@@ -237,7 +251,7 @@ public slots:
   void slotClose(QWidget*);
   void slotCloseAll(void);
   void slotDelete(void);
-  void slotListContextMenu(K3ListView*,Q3ListViewItem*,const QPoint &);
+  void slotListContextMenu(K3ListView*, Q3ListViewItem*, const QPoint &);
   void slotOpenFromList(void);
   void slotConfigureFromList(void);
   void slotNewFromList(void);

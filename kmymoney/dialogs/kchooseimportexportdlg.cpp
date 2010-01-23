@@ -41,30 +41,30 @@
 
 
 KChooseImportExportDlg::KChooseImportExportDlg(int type, QWidget *parent)
- : KChooseImportExportDlgDecl(parent)
+    : KChooseImportExportDlgDecl(parent)
 {
   QString filename;
-  setModal( true );
+  setModal(true);
 
-  if (type==0) { // import
+  if (type == 0) { // import
     topLabel->setText(i18n("Please choose the type of import you wish to perform.  A simple explanation\n"
-        "of the import type is available at the bottom of the screen and is updated when\n"
-        "you select an item from the choice box."
-        "\n\nOnce you have chosen an import type please press the OK button." ));
+                           "of the import type is available at the bottom of the screen and is updated when\n"
+                           "you select an item from the choice box."
+                           "\n\nOnce you have chosen an import type please press the OK button."));
     promptLabel->setText(i18n("Choose import type:"));
     setWindowTitle(i18n("Choose Import Type Dialog"));
   } else { // export
     topLabel->setText(i18n("Please choose the type of export you wish to perform.  A simple explanation\n"
-        "of the export type is available at the bottom of the screen and is updated when\n"
-        "you select an item from the choice box."
-        "\n\nOnce you have chosen an export type please press the OK button." ));
+                           "of the export type is available at the bottom of the screen and is updated when\n"
+                           "you select an item from the choice box."
+                           "\n\nOnce you have chosen an export type please press the OK button."));
     promptLabel->setText(i18n("Choose export type:"));
     setWindowTitle(i18n("Choose Export Type Dialog"));
   }
 
   readConfig();
   slotTypeActivated(m_lastType);
-  typeCombo->setCurrentItem(((m_lastType=="QIF") ? i18n("QIF") : i18n("CSV")), false);
+  typeCombo->setCurrentItem(((m_lastType == "QIF") ? i18n("QIF") : i18n("CSV")), false);
 
   connect(typeCombo, SIGNAL(activated(const QString&)), this, SLOT(slotTypeActivated(const QString&)));
   connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
@@ -78,14 +78,14 @@ KChooseImportExportDlg::~KChooseImportExportDlg()
 
 void KChooseImportExportDlg::slotTypeActivated(const QString& text)
 {
-  if (text=="QIF") {
+  if (text == "QIF") {
     descriptionLabel->setText(i18n("QIF files are created by the popular accounting program Quicken.\n"
-      "Another dialog will appear, if you choose this type, asking for further\n"
-      "information relevant to the Quicken format."));
+                                   "Another dialog will appear, if you choose this type, asking for further\n"
+                                   "information relevant to the Quicken format."));
   } else {
     descriptionLabel->setText(i18n("The CSV type uses a comma delimited text file that can be used by\n"
-      "most popular spreadsheet programs available for Linux and other operating\n"
-      "systems."));
+                                   "most popular spreadsheet programs available for Linux and other operating\n"
+                                   "systems."));
   }
 }
 

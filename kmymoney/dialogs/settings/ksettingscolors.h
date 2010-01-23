@@ -31,8 +31,8 @@
 class KSettingsColorsDecl : public QWidget, public Ui::KSettingsColorsDecl
 {
 public:
-  KSettingsColorsDecl( QWidget *parent ) : QWidget( parent ) {
-    setupUi( this );
+  KSettingsColorsDecl(QWidget *parent) : QWidget(parent) {
+    setupUi(this);
   }
 };
 

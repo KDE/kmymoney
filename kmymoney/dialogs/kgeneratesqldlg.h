@@ -37,13 +37,13 @@ class KGenerateSqlDlgDecl : public QWidget, public Ui::KGenerateSqlDlgDecl
 {
 public:
   KGenerateSqlDlgDecl() {
-    setupUi( this );
+    setupUi(this);
   }
 };
 
 class KGenerateSqlDlg : public KDialog
 {
-Q_OBJECT
+  Q_OBJECT
 public:
   explicit KGenerateSqlDlg(QWidget *parent = 0);
   ~KGenerateSqlDlg();

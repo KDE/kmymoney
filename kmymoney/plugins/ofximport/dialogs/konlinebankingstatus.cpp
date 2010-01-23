@@ -47,15 +47,15 @@
 #include "mymoneyofxconnector.h"
 
 KOnlineBankingStatus::KOnlineBankingStatus(const MyMoneyAccount& acc, QWidget *parent) :
-  KOnlineBankingStatusDecl(parent),
-  m_appId(0)
+    KOnlineBankingStatusDecl(parent),
+    m_appId(0)
 {
   m_ledOnlineStatus->off();
 
   buttonGroup1->setId(m_payeeidRB, 0);
   buttonGroup1->setId(m_nameRB, 1);
 
-  buttonGroupBox2->setContentsMargins(0,0,0,0);
+  buttonGroupBox2->setContentsMargins(0, 0, 0, 0);
 
   buttonGroup2->setId(m_todayRB, 0);
   buttonGroup2->setId(m_lastUpdateRB, 1);
@@ -69,7 +69,7 @@ KOnlineBankingStatus::KOnlineBankingStatus(const MyMoneyAccount& acc, QWidget *p
   QString account = settings.value("accountid");
   QString bank = settings.value("bankname");
   QString bankid = QString("%1 %2").arg(settings.value("bankid")).arg(settings.value("branchid"));
-  if ( bankid.length() > 1 )
+  if (bankid.length() > 1)
     bank += QString(" (%1)").arg(bankid);
   m_textBank->setText(bank);
   m_textOnlineAccount->setText(account);
@@ -103,14 +103,14 @@ KOnlineBankingStatus::~KOnlineBankingStatus()
 
 const QString KOnlineBankingStatus::appId(void) const
 {
-  if(m_appId)
+  if (m_appId)
     return m_appId->appId();
   return QString();
 }
 
 QString KOnlineBankingStatus::headerVersion(void) const
 {
-  if(m_headerVersion)
+  if (m_headerVersion)
     return m_headerVersion->headerVersion();
   return QString();
 }

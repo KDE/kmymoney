@@ -54,8 +54,8 @@
 class kUpdateStockPriceDecl : public QDialog, public Ui::kUpdateStockPriceDecl
 {
 public:
-  kUpdateStockPriceDecl( QWidget *parent ) : QDialog( parent ) {
-    setupUi( this );
+  kUpdateStockPriceDecl(QWidget *parent) : QDialog(parent) {
+    setupUi(this);
   }
 };
 
@@ -67,7 +67,9 @@ public:
   KUpdateStockPriceDlg(QWidget* parent = NULL);
   ~KUpdateStockPriceDlg();
 
-  const QDate date() const { return m_date->date(); };
+  const QDate date() const {
+    return m_date->date();
+  };
   const MyMoneyMoney price(void) const;
 
 public slots:

@@ -70,11 +70,17 @@ public:
 
   /**
     */
-  void setBaseCurrency(const MyMoneySecurity& currency) { m_baseCurrency = currency; };
+  void setBaseCurrency(const MyMoneySecurity& currency) {
+    m_baseCurrency = currency;
+  };
 
-  const MyMoneySecurity& baseCurrency(void) const { return m_baseCurrency; };
+  const MyMoneySecurity& baseCurrency(void) const {
+    return m_baseCurrency;
+  };
 
-  void emitValueChanged(void) { emit valueChanged(); };
+  void emitValueChanged(void) {
+    emit valueChanged();
+  };
 
   /**
     * restores the layout from the config file
@@ -92,7 +98,7 @@ public slots:
   void slotCollapseAll(void);
 
 protected:
-  virtual bool acceptDrag (QDropEvent* event) const;
+  virtual bool acceptDrag(QDropEvent* event) const;
   virtual void startDrag(void);
   const KMyMoneyAccountTreeBaseItem* findItem(const QString& id) const;
 
@@ -124,7 +130,7 @@ protected:
     */
   void disconnectNotify(const char *);
 
-  void contentsDragMoveEvent( QDragMoveEvent *e );
+  void contentsDragMoveEvent(QDragMoveEvent *e);
 
   /**
    * Reimplemented for internal reasons.
@@ -200,10 +206,18 @@ private:
   QString             m_configGroup;
 
 public:
-  int typeColumn(void) const { return m_typeColumn; }
-  int nameColumn(void) const { return m_nameColumn; }
-  int balanceColumn(void) const { return m_balanceColumn; }
-  int valueColumn(void) const { return m_valueColumn; }
+  int typeColumn(void) const {
+    return m_typeColumn;
+  }
+  int nameColumn(void) const {
+    return m_nameColumn;
+  }
+  int balanceColumn(void) const {
+    return m_balanceColumn;
+  }
+  int valueColumn(void) const {
+    return m_valueColumn;
+  }
 
   void showType(void);
   void showValue(void);
@@ -275,7 +289,7 @@ public:
     * @param institution const reference to MyMoneyInstitution for which
     *               the K3ListView entry is constructed
     */
-   KMyMoneyAccountTreeBaseItem(K3ListView *parent, const MyMoneyInstitution& institution);
+  KMyMoneyAccountTreeBaseItem(K3ListView *parent, const MyMoneyInstitution& institution);
 
   /**
     * Constructor to be used to construct a standard account entry object (e.g. Asset,
@@ -290,7 +304,7 @@ public:
     * @param name name of the account to be used instead of the one stored with @p account
     *               If empty, the one stored with @p account will be used. Default: empty
     */
-   KMyMoneyAccountTreeBaseItem(K3ListView *parent, const MyMoneyAccount& account, const MyMoneySecurity& security = MyMoneySecurity(), const QString& name = QString());
+  KMyMoneyAccountTreeBaseItem(K3ListView *parent, const MyMoneyAccount& account, const MyMoneySecurity& security = MyMoneySecurity(), const QString& name = QString());
 
   /**
     * Constructor to be used to construct an account entry
@@ -331,7 +345,9 @@ public:
     * @retval true item holds an account
     * @retval false item does not hold an account
     */
-  bool isAccount(void) const { return m_type == Account; };
+  bool isAccount(void) const {
+    return m_type == Account;
+  };
 
   /**
     * This method checks, if the item contains an institution or not.
@@ -339,7 +355,9 @@ public:
     * @retval true item holds an institution
     * @retval false item does not hold an institution
     */
-  bool isInstitution(void) const { return m_type == Institution; };
+  bool isInstitution(void) const {
+    return m_type == Institution;
+  };
 
   /**
     * This method returns the id of the object held by this item
@@ -377,14 +395,18 @@ public:
   /**
     * Convenience method to return casted pointer
     */
-  KMyMoneyAccountTreeBase* listView(void) const { return dynamic_cast<KMyMoneyAccountTreeBase*>(K3ListViewItem::listView()); };
+  KMyMoneyAccountTreeBase* listView(void) const {
+    return dynamic_cast<KMyMoneyAccountTreeBase*>(K3ListViewItem::listView());
+  };
 
   /**
     * Return the type of entry
     *
     * @return type of this entry.
     */
-  KMyMoneyAccountTreeItemType entryType(void) const { return m_type; };
+  KMyMoneyAccountTreeItemType entryType(void) const {
+    return m_type;
+  };
 
   /**
     * This method returns a const reference to this item (either the m_account or m_institution)
@@ -399,7 +421,9 @@ public:
     *
     * @return value of this account including all subordinate accounts
     */
-  const MyMoneyMoney& totalValue(void) const { return m_totalValue; };
+  const MyMoneyMoney& totalValue(void) const {
+    return m_totalValue;
+  };
 
   /**
     * This method adjusts the current total value by @p diff.
@@ -430,20 +454,20 @@ public:
    * Sets the text of a given column. @param negative indicates whether it should
    * be shown as negative number or not
    */
-  void setText( int column, const QString &text, const bool &negative = false );
+  void setText(int column, const QString &text, const bool &negative = false);
 
 protected:
-   /**
-    * Returns the current balance of this account.
-    *
-    * This is a pure virtual function, to allow subclasses to calculate
-    * the balance in different ways.
-    *
-    * Parent items in the tree will only be recomputed if the balance() for
-    * a child changes.
-    * @param account Account to get the balance for
-    * @return Balance of this account
-   */
+  /**
+   * Returns the current balance of this account.
+   *
+   * This is a pure virtual function, to allow subclasses to calculate
+   * the balance in different ways.
+   *
+   * Parent items in the tree will only be recomputed if the balance() for
+   * a child changes.
+   * @param account Account to get the balance for
+   * @return Balance of this account
+  */
   virtual MyMoneyMoney balance() const = 0;
 
   /**

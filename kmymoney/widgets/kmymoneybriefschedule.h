@@ -44,15 +44,16 @@
 class kScheduleBriefWidget : public QWidget, public Ui::kScheduleBriefWidget
 {
 public:
-  kScheduleBriefWidget( QWidget *parent ) : QWidget( parent ) {
-    setupUi( this );
+  kScheduleBriefWidget(QWidget *parent) : QWidget(parent) {
+    setupUi(this);
   }
 };
 
-class KMyMoneyBriefSchedule : public kScheduleBriefWidget  {
-   Q_OBJECT
+class KMyMoneyBriefSchedule : public kScheduleBriefWidget
+{
+  Q_OBJECT
 public:
-  KMyMoneyBriefSchedule(QWidget *parent=0);
+  KMyMoneyBriefSchedule(QWidget *parent = 0);
   ~KMyMoneyBriefSchedule();
   void setSchedules(QList<MyMoneySchedule> list, const QDate& date);
 

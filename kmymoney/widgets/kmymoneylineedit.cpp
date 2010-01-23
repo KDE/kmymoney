@@ -38,8 +38,8 @@
 // Project Includes
 
 kMyMoneyLineEdit::kMyMoneyLineEdit(QWidget *w, bool forceMonetaryDecimalSymbol, Qt::Alignment alignment) :
-  KLineEdit(w),
-  m_forceMonetaryDecimalSymbol(forceMonetaryDecimalSymbol)
+    KLineEdit(w),
+    m_forceMonetaryDecimalSymbol(forceMonetaryDecimalSymbol)
 {
   setAlignment(alignment);
 }
@@ -64,13 +64,13 @@ void kMyMoneyLineEdit::focusOutEvent(QFocusEvent *ev)
   // if the current text is not in the list of
   // possible completions, we have a new payee
   // and signal that to the outside world.
-  if(text() != m_text) {
+  if (text() != m_text) {
     emit lineChanged(text());
   }
   KLineEdit::focusOutEvent(ev);
 
   // force update of hint
-  if(text().isEmpty())
+  if (text().isEmpty())
     repaint();
 }
 
@@ -85,18 +85,18 @@ void kMyMoneyLineEdit::focusInEvent(QFocusEvent *ev)
 
 void kMyMoneyLineEdit::keyReleaseEvent(QKeyEvent* k)
 {
-  if(m_forceMonetaryDecimalSymbol) {
-    if(k->modifiers() & Qt::KeypadModifier) {
-      if(k->key() == Qt::Key_Comma
-      || k->key() == Qt::Key_Period) {
-        if(KGlobal::locale()->monetaryDecimalSymbol() == ",") {
+  if (m_forceMonetaryDecimalSymbol) {
+    if (k->modifiers() & Qt::KeypadModifier) {
+      if (k->key() == Qt::Key_Comma
+          || k->key() == Qt::Key_Period) {
+        if (KGlobal::locale()->monetaryDecimalSymbol() == ",") {
           QKeyEvent newk(k->type(), Qt::Key_Comma, k->modifiers(), ",", k->isAutoRepeat(), k->count());
           KLineEdit::keyReleaseEvent(&newk);
           k->ignore();
           return;
         }
 
-        if(KGlobal::locale()->monetaryDecimalSymbol() == ".") {
+        if (KGlobal::locale()->monetaryDecimalSymbol() == ".") {
           QKeyEvent newk(k->type(), Qt::Key_Comma, k->modifiers(), ".", k->isAutoRepeat(), k->count());
           KLineEdit::keyReleaseEvent(&newk);
           k->ignore();
@@ -110,18 +110,18 @@ void kMyMoneyLineEdit::keyReleaseEvent(QKeyEvent* k)
 
 void kMyMoneyLineEdit::keyPressEvent(QKeyEvent* k)
 {
-  if(m_forceMonetaryDecimalSymbol) {
-    if(k->modifiers() & Qt::KeypadModifier) {
-      if(k->key() == Qt::Key_Comma
-      || k->key() == Qt::Key_Period) {
-        if(KGlobal::locale()->monetaryDecimalSymbol() == ",") {
+  if (m_forceMonetaryDecimalSymbol) {
+    if (k->modifiers() & Qt::KeypadModifier) {
+      if (k->key() == Qt::Key_Comma
+          || k->key() == Qt::Key_Period) {
+        if (KGlobal::locale()->monetaryDecimalSymbol() == ",") {
           QKeyEvent newk(k->type(), Qt::Key_Comma, k->modifiers(), ",", k->isAutoRepeat(), k->count());
           KLineEdit::keyPressEvent(&newk);
           k->ignore();
           return;
         }
 
-        if(KGlobal::locale()->monetaryDecimalSymbol() == ".") {
+        if (KGlobal::locale()->monetaryDecimalSymbol() == ".") {
           QKeyEvent newk(k->type(), Qt::Key_Period, k->modifiers(), ".", k->isAutoRepeat(), k->count());
           KLineEdit::keyPressEvent(&newk);
           k->ignore();
@@ -137,14 +137,14 @@ void kMyMoneyLineEdit::paintEvent(QPaintEvent* ev)
 {
   KLineEdit::paintEvent(ev);
 
-  if(text().isEmpty() && !m_hint.isEmpty() && !hasFocus()) {
+  if (text().isEmpty() && !m_hint.isEmpty() && !hasFocus()) {
     const int innerMargin = 1;
 
     // the following 5 lines are taken from QLineEdit::drawContents()
     QRect cr = contentsRect();
     QFontMetrics fm = fontMetrics();
-    QRect lineRect( cr.x() + innerMargin, cr.y() + (cr.height() - fm.height() + 1) / 2,
-                    cr.width() - 2*innerMargin, fm.height() );
+    QRect lineRect(cr.x() + innerMargin, cr.y() + (cr.height() - fm.height() + 1) / 2,
+                   cr.width() - 2*innerMargin, fm.height());
     QPoint topLeft = lineRect.topLeft() - QPoint(0, -fm.ascent());
 
 

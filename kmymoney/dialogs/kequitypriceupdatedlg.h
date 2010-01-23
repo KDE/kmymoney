@@ -47,8 +47,8 @@
 class KEquityPriceUpdateDlgDecl  : public QDialog, public Ui::KEquityPriceUpdateDlgDecl
 {
 public:
-  KEquityPriceUpdateDlgDecl( QWidget *parent ) : QDialog( parent ) {
-    setupUi( this );
+  KEquityPriceUpdateDlgDecl(QWidget *parent) : QDialog(parent) {
+    setupUi(this);
   }
 };
 
@@ -68,7 +68,7 @@ protected slots:
 
   void logStatusMessage(const QString&);
   void logErrorMessage(const QString&);
-  void slotReceivedQuote(const QString&, const QString&,const QDate&, const double&);
+  void slotReceivedQuote(const QString&, const QString&, const QDate&, const double&);
   void slotQuoteFailed(const QString& _id, const QString& _symbol);
 
 protected:

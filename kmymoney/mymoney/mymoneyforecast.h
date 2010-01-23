@@ -131,43 +131,113 @@ public:
   /**
    * number of days to go back in history to calculate forecast
    */
-  int historyDays(void) const { return (m_historyStartDate.daysTo(m_historyEndDate) + 1); }
+  int historyDays(void) const {
+    return (m_historyStartDate.daysTo(m_historyEndDate) + 1);
+  }
 
-  void setAccountsCycle(int accountsCycle)   { m_accountsCycle = accountsCycle; }
-  void setForecastCycles(int forecastCycles)   { m_forecastCycles = forecastCycles; }
-  void setForecastDays(int forecastDays)   { m_forecastDays = forecastDays; }
-  void setBeginForecastDate(QDate beginForecastDate) { m_beginForecastDate = beginForecastDate; }
-  void setBeginForecastDay(int beginDay)   { m_beginForecastDay = beginDay; }
-  void setForecastMethod(int forecastMethod) { m_forecastMethod = forecastMethod; }
-  void setHistoryStartDate(QDate historyStartDate) { m_historyStartDate = historyStartDate; }
-  void setHistoryEndDate(QDate historyEndDate) { m_historyEndDate = historyEndDate; }
-  void setHistoryStartDate(int daysToStartDate) { setHistoryStartDate(QDate::currentDate().addDays(-daysToStartDate)); }
-  void setHistoryEndDate(int daysToEndDate) { setHistoryEndDate(QDate::currentDate().addDays(-daysToEndDate)); }
-  void setForecastStartDate(QDate _startDate) { m_forecastStartDate = _startDate; }
-  void setForecastEndDate(QDate _endDate) { m_forecastEndDate = _endDate; }
-  void setSkipOpeningDate(bool _skip) { m_skipOpeningDate = _skip; }
-  void setHistoryMethod(int historyMethod) { m_historyMethod = historyMethod; }
-  void setIncludeUnusedAccounts(bool _bool) { m_includeUnusedAccounts = _bool; }
-  void setForecastDone(bool _bool) { m_forecastDone = _bool; }
-  void setIncludeFutureTransactions(bool _bool) { m_includeFutureTransactions = _bool; }
-  void setIncludeScheduledTransactions(bool _bool) { m_includeScheduledTransactions = _bool; }
+  void setAccountsCycle(int accountsCycle)   {
+    m_accountsCycle = accountsCycle;
+  }
+  void setForecastCycles(int forecastCycles)   {
+    m_forecastCycles = forecastCycles;
+  }
+  void setForecastDays(int forecastDays)   {
+    m_forecastDays = forecastDays;
+  }
+  void setBeginForecastDate(QDate beginForecastDate) {
+    m_beginForecastDate = beginForecastDate;
+  }
+  void setBeginForecastDay(int beginDay)   {
+    m_beginForecastDay = beginDay;
+  }
+  void setForecastMethod(int forecastMethod) {
+    m_forecastMethod = forecastMethod;
+  }
+  void setHistoryStartDate(QDate historyStartDate) {
+    m_historyStartDate = historyStartDate;
+  }
+  void setHistoryEndDate(QDate historyEndDate) {
+    m_historyEndDate = historyEndDate;
+  }
+  void setHistoryStartDate(int daysToStartDate) {
+    setHistoryStartDate(QDate::currentDate().addDays(-daysToStartDate));
+  }
+  void setHistoryEndDate(int daysToEndDate) {
+    setHistoryEndDate(QDate::currentDate().addDays(-daysToEndDate));
+  }
+  void setForecastStartDate(QDate _startDate) {
+    m_forecastStartDate = _startDate;
+  }
+  void setForecastEndDate(QDate _endDate) {
+    m_forecastEndDate = _endDate;
+  }
+  void setSkipOpeningDate(bool _skip) {
+    m_skipOpeningDate = _skip;
+  }
+  void setHistoryMethod(int historyMethod) {
+    m_historyMethod = historyMethod;
+  }
+  void setIncludeUnusedAccounts(bool _bool) {
+    m_includeUnusedAccounts = _bool;
+  }
+  void setForecastDone(bool _bool) {
+    m_forecastDone = _bool;
+  }
+  void setIncludeFutureTransactions(bool _bool) {
+    m_includeFutureTransactions = _bool;
+  }
+  void setIncludeScheduledTransactions(bool _bool) {
+    m_includeScheduledTransactions = _bool;
+  }
 
-  int accountsCycle(void) const   { return m_accountsCycle; }
-  int forecastCycles(void) const   { return m_forecastCycles; }
-  int forecastDays(void) const { return m_forecastDays; }
-  QDate beginForecastDate(void) const   { return m_beginForecastDate; }
-  int beginForecastDay(void) const   { return m_beginForecastDay; }
-  int forecastMethod(void) const   { return m_forecastMethod; }
-  QDate historyStartDate(void) const { return m_historyStartDate; }
-  QDate historyEndDate(void) const { return m_historyEndDate; }
-  QDate forecastStartDate(void) const { return m_forecastStartDate; }
-  QDate forecastEndDate(void) const { return m_forecastEndDate; }
-  bool skipOpeningDate(void) const { return m_skipOpeningDate; }
-  int historyMethod(void) const   { return m_historyMethod; }
-  bool isIncludingUnusedAccounts(void) const { return m_includeUnusedAccounts; }
-  bool isForecastDone(void) const { return m_forecastDone; }
-  bool isIncludingFutureTransactions(void) const { return m_includeFutureTransactions; }
-  bool isIncludingScheduledTransactions(void) const { return m_includeScheduledTransactions; }
+  int accountsCycle(void) const   {
+    return m_accountsCycle;
+  }
+  int forecastCycles(void) const   {
+    return m_forecastCycles;
+  }
+  int forecastDays(void) const {
+    return m_forecastDays;
+  }
+  QDate beginForecastDate(void) const   {
+    return m_beginForecastDate;
+  }
+  int beginForecastDay(void) const   {
+    return m_beginForecastDay;
+  }
+  int forecastMethod(void) const   {
+    return m_forecastMethod;
+  }
+  QDate historyStartDate(void) const {
+    return m_historyStartDate;
+  }
+  QDate historyEndDate(void) const {
+    return m_historyEndDate;
+  }
+  QDate forecastStartDate(void) const {
+    return m_forecastStartDate;
+  }
+  QDate forecastEndDate(void) const {
+    return m_forecastEndDate;
+  }
+  bool skipOpeningDate(void) const {
+    return m_skipOpeningDate;
+  }
+  int historyMethod(void) const   {
+    return m_historyMethod;
+  }
+  bool isIncludingUnusedAccounts(void) const {
+    return m_includeUnusedAccounts;
+  }
+  bool isForecastDone(void) const {
+    return m_forecastDone;
+  }
+  bool isIncludingFutureTransactions(void) const {
+    return m_includeFutureTransactions;
+  }
+  bool isIncludingScheduledTransactions(void) const {
+    return m_includeScheduledTransactions;
+  }
 
   /**
     * This method modifies a scheduled loan transaction such that all
@@ -233,7 +303,7 @@ private:
   /**
    * add scheduled transactions to forecast
    */
-  void addScheduledTransactions (void);
+  void addScheduledTransactions(void);
 
   /**
    * calculate daily forecast balance based on future and scheduled transactions

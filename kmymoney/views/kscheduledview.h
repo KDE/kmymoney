@@ -57,8 +57,8 @@ class KMenu;
 class KScheduledViewDecl : public QDialog, public Ui::KScheduledViewDecl
 {
 public:
-  KScheduledViewDecl( QWidget *parent ) : QDialog( parent ) {
-    setupUi( this );
+  KScheduledViewDecl(QWidget *parent) : QDialog(parent) {
+    setupUi(this);
   }
 };
 
@@ -70,7 +70,7 @@ public:
   /**
     * Standard constructor for QWidgets.
     */
-  KScheduledView(QWidget *parent=0);
+  KScheduledView(QWidget *parent = 0);
 
   /**
     * Standard destructor.
@@ -134,7 +134,7 @@ private:
   /**
     * Refresh the view.
     */
-  void refresh(bool full=true, const QString& schedId = QString());
+  void refresh(bool full = true, const QString& schedId = QString());
 
   /**
     * Loads the accounts into the combo box.

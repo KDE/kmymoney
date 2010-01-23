@@ -67,8 +67,12 @@ public:
     */
   void paintCell(QPainter *p, const QColorGroup & cg, int column, int width, int align);
 
-  const MyMoneyBudget& budget(void) { return m_budget; };
-  void setBudget(const MyMoneyBudget& budget) { m_budget = budget; }
+  const MyMoneyBudget& budget(void) {
+    return m_budget;
+  };
+  void setBudget(const MyMoneyBudget& budget) {
+    m_budget = budget;
+  }
 
 private:
   MyMoneyBudget  m_budget;
@@ -82,16 +86,16 @@ private:
 class KBudgetViewDecl : public QDialog, public Ui::KBudgetViewDecl
 {
 public:
-  KBudgetViewDecl( QWidget *parent ) : QDialog( parent ) {
-    setupUi( this );
+  KBudgetViewDecl(QWidget *parent) : QDialog(parent) {
+    setupUi(this);
   }
 };
 
 class KBudgetView : public KBudgetViewDecl
 {
-   Q_OBJECT
+  Q_OBJECT
 public:
-  KBudgetView(QWidget *parent=0);
+  KBudgetView(QWidget *parent = 0);
   ~KBudgetView();
 
   /**
@@ -201,10 +205,10 @@ signals:
 
 private:
   typedef enum {
-    eNone=-1,
-    eYearly=0,
-    eMonthly=1,
-    eMonthByMonth=2
+    eNone = -1,
+    eYearly = 0,
+    eMonthly = 1,
+    eMonthByMonth = 2
   } eTimePeriodColumn;
 
   MyMoneyBudget                       m_budget;

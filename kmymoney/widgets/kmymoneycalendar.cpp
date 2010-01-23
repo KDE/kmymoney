@@ -84,8 +84,8 @@
 #include "kmymoneydatetbl.h"
 
 KDatePickerPrivateYearSelector::KDatePickerPrivateYearSelector(
-                                const KCalendarSystem *cal, const QDate &currentDate, QWidget* parent)
-                              : QLineEdit(parent), val(new QIntValidator(this)), result(0)
+  const KCalendarSystem *cal, const QDate &currentDate, QWidget* parent)
+    : QLineEdit(parent), val(new QIntValidator(this)), result(0)
 {
   calendar = cal;
   oldDate = currentDate;
@@ -111,7 +111,7 @@ void KDatePickerPrivateYearSelector::yearEnteredSlot()
 
   // check if entered value is a number
   newYear = text().toInt(&ok);
-  if(!ok) {
+  if (!ok) {
     KNotification::beep();
     return;
   }
@@ -136,8 +136,8 @@ void KDatePickerPrivateYearSelector::setYear(int year)
 }
 
 KDatePickerPrivateWeekSelector::KDatePickerPrivateWeekSelector(
-                                const KCalendarSystem *cal, const QDate &currentDate, QWidget* parent)
-                              : QLineEdit(parent), val(new QIntValidator(this)), result(0)
+  const KCalendarSystem *cal, const QDate &currentDate, QWidget* parent)
+    : QLineEdit(parent), val(new QIntValidator(this)), result(0)
 {
   calendar = cal;
   oldDate = currentDate;
@@ -161,7 +161,7 @@ void KDatePickerPrivateWeekSelector::weekEnteredSlot()
 
   // check if entered value is a number
   newWeek = text().toInt(&ok);
-  if(!ok) {
+  if (!ok) {
     KNotification::beep();
     return;
   }
@@ -184,22 +184,21 @@ class kMyMoneyCalendar::kMyMoneyCalendarPrivate
 {
 public:
   kMyMoneyCalendarPrivate()
-    : closeButton(0L), selectWeek(0L), userButton1(0), userButton2(0) {}
+      : closeButton(0L), selectWeek(0L), userButton1(0), userButton2(0) {}
 
-  QDate validDateInYearMonth( int year, int month )
-  {
+  QDate validDateInYearMonth(int year, int month) {
     QDate newDate;
     const KCalendarSystem* calendar = KGlobal::locale()->calendar();
 
     // Try to create a valid date in this year and month
     // First try the first of the month, then try last of month
-    if ( calendar->isValid( year, month, 1 ) ) {
-      calendar->setDate( newDate, year, month, 1 );
-    } else if ( calendar->isValid( year, month + 1, 1 ) ) {
-      calendar->setDate( newDate, year, month, 1 );
-      calendar->addDays( newDate, -1 );
+    if (calendar->isValid(year, month, 1)) {
+      calendar->setDate(newDate, year, month, 1);
+    } else if (calendar->isValid(year, month + 1, 1)) {
+      calendar->setDate(newDate, year, month, 1);
+      calendar->addDays(newDate, -1);
     } else {
-      newDate = QDate::fromJulianDay( 0 );
+      newDate = QDate::fromJulianDay(0);
     }
 
     return newDate;
@@ -211,9 +210,9 @@ public:
 };
 
 kMyMoneyCalendar::kMyMoneyCalendar(QWidget *parent) :
-  Q3Frame(parent),
-  table(0),
-  d(new kMyMoneyCalendarPrivate)
+    Q3Frame(parent),
+    table(0),
+    d(new kMyMoneyCalendarPrivate)
 {
 }
 
@@ -222,7 +221,7 @@ kMyMoneyCalendar::~kMyMoneyCalendar()
   delete d;
 }
 
-void kMyMoneyCalendar::init( const QDate &dt )
+void kMyMoneyCalendar::init(const QDate &dt)
 {
   styleControl = new QPushButton(i18n("Select Style"), this);
   yearForward = new QToolButton(this);
@@ -235,27 +234,27 @@ void kMyMoneyCalendar::init( const QDate &dt )
   val = new KDateValidator(this);
   fontsize = 10;
 
-  d->selectWeek = new QToolButton( this );
+  d->selectWeek = new QToolButton(this);
 
   KMenu* kpopupmenuNew = new KMenu(this);
   kpopupmenuNew->addAction(i18n("Week"), this, SLOT(slotSetStyleWeekly()));
   kpopupmenuNew->addAction(i18n("Month"), this, SLOT(slotSetStyleMonthly()));
-/*  kpopupmenuNew->addAction(i18n("3 Months"), this, SLOT(slotSetStyleQuarterly())); */
+  /*  kpopupmenuNew->addAction(i18n("3 Months"), this, SLOT(slotSetStyleQuarterly())); */
   styleControl->setMenu(kpopupmenuNew);
 
-  styleControl->setToolTip( i18n("Choose Style"));
-  yearForward->setToolTip( i18n("Next year"));
-  yearBackward->setToolTip( i18n("Previous year"));
-  monthForward->setToolTip( i18n("Next month"));
-  monthBackward->setToolTip( i18n("Previous month"));
-  d->selectWeek->setToolTip( i18n("Select a week"));
-  selectMonth->setToolTip( i18n("Select a month"));
-  selectYear->setToolTip( i18n("Select a year"));
+  styleControl->setToolTip(i18n("Choose Style"));
+  yearForward->setToolTip(i18n("Next year"));
+  yearBackward->setToolTip(i18n("Previous year"));
+  monthForward->setToolTip(i18n("Next month"));
+  monthBackward->setToolTip(i18n("Previous month"));
+  d->selectWeek->setToolTip(i18n("Select a week"));
+  selectMonth->setToolTip(i18n("Select a month"));
+  selectYear->setToolTip(i18n("Select a year"));
 
   // -----
   setFontSize(10);
   line->setValidator(val);
-  line->installEventFilter( this );
+  line->installEventFilter(this);
   yearForward->setIcon(QIcon(BarIcon("arrow-right-double")));
   yearBackward->setIcon(QIcon(BarIcon("arrow-left-double")));
   monthForward->setIcon(QIcon(BarIcon("arrow-right")));
@@ -276,115 +275,109 @@ void kMyMoneyCalendar::init( const QDate &dt )
 }
 
 bool
-kMyMoneyCalendar::eventFilter(QObject *o, QEvent *e )
+kMyMoneyCalendar::eventFilter(QObject *o, QEvent *e)
 {
-   if ( e->type() == QEvent::KeyPress ) {
-      QKeyEvent *k = (QKeyEvent *)e;
+  if (e->type() == QEvent::KeyPress) {
+    QKeyEvent *k = (QKeyEvent *)e;
 
-      if ( (k->key() == Qt::Key_PageUp) ||
-           (k->key() == Qt::Key_PageDown)  ||
-           (k->key() == Qt::Key_Up)    ||
-           (k->key() == Qt::Key_Down) )
-       {
-          QApplication::sendEvent( table, e );
-          table->setFocus();
-          return true; // eat event
-       }
-   }
-   return Q3Frame::eventFilter( o, e );
+    if ((k->key() == Qt::Key_PageUp) ||
+        (k->key() == Qt::Key_PageDown)  ||
+        (k->key() == Qt::Key_Up)    ||
+        (k->key() == Qt::Key_Down)) {
+      QApplication::sendEvent(table, e);
+      table->setFocus();
+      return true; // eat event
+    }
+  }
+  return Q3Frame::eventFilter(o, e);
 }
 
 void
 kMyMoneyCalendar::resizeEvent(QResizeEvent*)
 {
-    QWidget *buttons[] = {
-      styleControl,
-      d->userButton1,
-      d->userButton2,
-      yearBackward,
-      monthBackward,
-      selectMonth,
-      selectYear,
-      monthForward,
-      yearForward,
-      d->closeButton
-    };
-    const int NoOfButtons=sizeof(buttons)/sizeof(buttons[0]);
-    QSize sizes[NoOfButtons];
-    int buttonHeight=0;
-    int count;
-    int w;
-    int x=0;
-    // ----- calculate button row height:
-    for(count=0; count<NoOfButtons; ++count) {
-        if ( buttons[count] ) { // closeButton may be 0L
-            sizes[count]=buttons[count]->sizeHint();
-            buttonHeight=qMax(buttonHeight, sizes[count].height());
-        }
-        else
-            sizes[count] = QSize(0,0); // closeButton
-    }
-
-    // ----- calculate size of the month button:
-    for(count=0; count<NoOfButtons; ++count) {
-  if(buttons[count]==selectMonth) {
-    QStyleOptionToolButton opt;
-    opt.initFrom(selectMonth);
-    QSize metricBound = style()->sizeFromContents(QStyle::CT_ToolButton, &opt, maxMonthRect);
-    sizes[count].setWidth(qMax(metricBound.width(), maxMonthRect.width()+2*QApplication::style()->pixelMetric(QStyle::PM_ButtonMargin)));
+  QWidget *buttons[] = {
+    styleControl,
+    d->userButton1,
+    d->userButton2,
+    yearBackward,
+    monthBackward,
+    selectMonth,
+    selectYear,
+    monthForward,
+    yearForward,
+    d->closeButton
+  };
+  const int NoOfButtons = sizeof(buttons) / sizeof(buttons[0]);
+  QSize sizes[NoOfButtons];
+  int buttonHeight = 0;
+  int count;
+  int w;
+  int x = 0;
+  // ----- calculate button row height:
+  for (count = 0; count < NoOfButtons; ++count) {
+    if (buttons[count]) {   // closeButton may be 0L
+      sizes[count] = buttons[count]->sizeHint();
+      buttonHeight = qMax(buttonHeight, sizes[count].height());
+    } else
+      sizes[count] = QSize(0, 0); // closeButton
   }
-    }
-    // ----- place the buttons:
-    // Put the style button and user buttons to the left and the rest to the right
-    x = 0;
-    int noUserButtons=2;
-    buttons[0]->setGeometry(x, 0, sizes[0].width(), buttonHeight);
-    x += sizes[0].width();
-    for (count=1; count<=noUserButtons; ++count)
-    {
-      if (buttons[count])
-      {
-        buttons[count]->setGeometry(x, 0, sizes[count].width(), buttonHeight);
-        x += sizes[count].width();
-      }
-    }
 
-    x = width();
-    for(count=(1+noUserButtons); count<NoOfButtons; ++count)
-    {
-      w=sizes[count].width();
-      x -= w;
+  // ----- calculate size of the month button:
+  for (count = 0; count < NoOfButtons; ++count) {
+    if (buttons[count] == selectMonth) {
+      QStyleOptionToolButton opt;
+      opt.initFrom(selectMonth);
+      QSize metricBound = style()->sizeFromContents(QStyle::CT_ToolButton, &opt, maxMonthRect);
+      sizes[count].setWidth(qMax(metricBound.width(), maxMonthRect.width() + 2*QApplication::style()->pixelMetric(QStyle::PM_ButtonMargin)));
     }
-
-    for(count=(1+noUserButtons); count<NoOfButtons; ++count)
-    {
-      w=sizes[count].width();
-      if ( buttons[count] )
-        buttons[count]->setGeometry(x, 0, w, buttonHeight);
-      x+=w;
+  }
+  // ----- place the buttons:
+  // Put the style button and user buttons to the left and the rest to the right
+  x = 0;
+  int noUserButtons = 2;
+  buttons[0]->setGeometry(x, 0, sizes[0].width(), buttonHeight);
+  x += sizes[0].width();
+  for (count = 1; count <= noUserButtons; ++count) {
+    if (buttons[count]) {
+      buttons[count]->setGeometry(x, 0, sizes[count].width(), buttonHeight);
+      x += sizes[count].width();
     }
+  }
 
-    // ----- place the line edit for direct input:
-    sizes[0]=line->sizeHint();
-    int week_width=d->selectWeek->fontMetrics().width(i18n("Week XX"))+((d->closeButton != 0L) ? 50 : 20);
-    line->setGeometry(0, height()-sizes[0].height(), width()-week_width, sizes[0].height());
-    d->selectWeek->setGeometry(width()-week_width, height()-sizes[0].height(), week_width, sizes[0].height());
-    // ----- adjust the table:
-    table->setGeometry(0, buttonHeight, width(),
-    height()-buttonHeight-sizes[0].height());
+  x = width();
+  for (count = (1 + noUserButtons); count < NoOfButtons; ++count) {
+    w = sizes[count].width();
+    x -= w;
+  }
 
-    table->setFocus();
+  for (count = (1 + noUserButtons); count < NoOfButtons; ++count) {
+    w = sizes[count].width();
+    if (buttons[count])
+      buttons[count]->setGeometry(x, 0, w, buttonHeight);
+    x += w;
+  }
+
+  // ----- place the line edit for direct input:
+  sizes[0] = line->sizeHint();
+  int week_width = d->selectWeek->fontMetrics().width(i18n("Week XX")) + ((d->closeButton != 0L) ? 50 : 20);
+  line->setGeometry(0, height() - sizes[0].height(), width() - week_width, sizes[0].height());
+  d->selectWeek->setGeometry(width() - week_width, height() - sizes[0].height(), week_width, sizes[0].height());
+  // ----- adjust the table:
+  table->setGeometry(0, buttonHeight, width(),
+                     height() - buttonHeight - sizes[0].height());
+
+  table->setFocus();
 }
 
 void
 kMyMoneyCalendar::dateChangedSlot(QDate date)
 {
-    kDebug() << "kMyMoneyCalendar::dateChangedSlot: date changed (" << date.year() << "/" << date.month() << "/" << date.day() << ").";
-    line->setText(KGlobal::locale()->formatDate(date, KLocale::ShortDate));
-    d->selectWeek->setText(i18n("Week %1",weekOfYear(date)));
-    selectMonth->setText(MONTH_NAME(date.month(), date.year(), KCalendarSystem::ShortName));
-    selectYear->setText(date.toString("yyyy"));
-    emit(dateChanged(date));
+  kDebug() << "kMyMoneyCalendar::dateChangedSlot: date changed (" << date.year() << "/" << date.month() << "/" << date.day() << ").";
+  line->setText(KGlobal::locale()->formatDate(date, KLocale::ShortDate));
+  d->selectWeek->setText(i18n("Week %1", weekOfYear(date)));
+  selectMonth->setText(MONTH_NAME(date.month(), date.year(), KCalendarSystem::ShortName));
+  selectYear->setText(date.toString("yyyy"));
+  emit(dateChanged(date));
 }
 
 void
@@ -404,7 +397,7 @@ kMyMoneyCalendar::getDate() const
 const QDate &
 kMyMoneyCalendar::date() const
 {
-    return table->getDate();
+  return table->getDate();
 }
 
 bool
@@ -413,44 +406,44 @@ kMyMoneyCalendar::setDate(const QDate& date)
   if (!table)
     return true;  // hack
 
-    if(date.isValid()) {
-  QString temp;
-  // -----
-  table->setDate(date);
-  d->selectWeek->setText(i18n("Week %1",weekOfYear(date)));
-  selectMonth->setText(MONTH_NAME(date.month(), date.year(), KCalendarSystem::LongName));
-  temp.setNum(date.year());
-  selectYear->setText(temp);
-  line->setText(KGlobal::locale()->formatDate(date, KLocale::ShortDate));
-  return true;
-    } else {
-  kDebug() << "kMyMoneyCalendar::setDate: refusing to set invalid date.";
-  return false;
-    }
+  if (date.isValid()) {
+    QString temp;
+    // -----
+    table->setDate(date);
+    d->selectWeek->setText(i18n("Week %1", weekOfYear(date)));
+    selectMonth->setText(MONTH_NAME(date.month(), date.year(), KCalendarSystem::LongName));
+    temp.setNum(date.year());
+    selectYear->setText(temp);
+    line->setText(KGlobal::locale()->formatDate(date, KLocale::ShortDate));
+    return true;
+  } else {
+    kDebug() << "kMyMoneyCalendar::setDate: refusing to set invalid date.";
+    return false;
+  }
 }
 
 void
 kMyMoneyCalendar::monthForwardClicked()
 {
-    setDate( table->getDate().addMonths(1) );
+  setDate(table->getDate().addMonths(1));
 }
 
 void
 kMyMoneyCalendar::monthBackwardClicked()
 {
-    setDate( table->getDate().addMonths(-1) );
+  setDate(table->getDate().addMonths(-1));
 }
 
 void
 kMyMoneyCalendar::yearForwardClicked()
 {
-    setDate( table->getDate().addYears(1) );
+  setDate(table->getDate().addYears(1));
 }
 
 void
 kMyMoneyCalendar::yearBackwardClicked()
 {
-    setDate( table->getDate().addYears(-1) );
+  setDate(table->getDate().addYears(-1));
 }
 
 void
@@ -467,18 +460,18 @@ kMyMoneyCalendar::selectWeekClicked()
   connect(picker, SIGNAL(closeMe(int)), popup, SLOT(close(int)));
   picker->setFocus();
 
-  if( popup->exec(d->selectWeek->mapToGlobal(QPoint(0, d->selectWeek->height())))) {
+  if (popup->exec(d->selectWeek->mapToGlobal(QPoint(0, d->selectWeek->height())))) {
     QDate newDate;
     int week = picker->week();
     // check if new week will lead to a valid date
     calendar->setDate(newDate, calendar->year(date()), 1, 1);
     while (weekOfYear(newDate) > 50)
       newDate = newDate.addDays(1);
-    while (weekOfYear(newDate) < week && (week !=53 || (week == 53 &&
-          (weekOfYear(newDate) != 52 || weekOfYear(newDate.addDays(1)) !=1 ))))
+    while (weekOfYear(newDate) < week && (week != 53 || (week == 53 &&
+                                          (weekOfYear(newDate) != 52 || weekOfYear(newDate.addDays(1)) != 1))))
       newDate = newDate.addDays(1);
-    if (week==53 && weekOfYear(newDate)==52)
-      while (weekOfYear(newDate.addDays(-1))==52)
+    if (week == 53 && weekOfYear(newDate) == 52)
+      while (weekOfYear(newDate.addDays(-1)) == 52)
         newDate = newDate.addDays(-1);
 
     // Set the date, if it's invalid in any way then alert user and don't update
@@ -520,9 +513,9 @@ kMyMoneyCalendar::selectMonthClicked()
   // checking we don't set a day after the last day of the month
   if (calendar->isValid(newDate)) {
     calendar->setDate(newDate,
-      calendar->year(date()), item->data().toInt(),
-      qMin(calendar->day(date()), calendar->daysInMonth(newDate))
-    );
+                      calendar->year(date()), item->data().toInt(),
+                      qMin(calendar->day(date()), calendar->daysInMonth(newDate))
+                     );
   }
 
   // Set the date, if it's invalid in any way then alert user and don't update
@@ -546,7 +539,7 @@ kMyMoneyCalendar::selectYearClicked()
   connect(picker, SIGNAL(closeMe(int)), popup, SLOT(close(int)));
   picker->setFocus();
 
-  if( popup->exec(selectYear->mapToGlobal(QPoint(0, selectMonth->height())))) {
+  if (popup->exec(selectYear->mapToGlobal(QPoint(0, selectMonth->height())))) {
     // We need to create a valid date in the year/month selected so we can find out how many
     // days are in the month.
     newDate = d->validDateInYearMonth(picker->year(), calendar->month(date()));
@@ -555,9 +548,9 @@ kMyMoneyCalendar::selectYearClicked()
     // date, checking we don't set a day after the last day of the month
     if (calendar->isValid(newDate)) {
       calendar->setDate(newDate,
-        picker->year(), calendar->month(date()),
-        qMin(calendar->day(date()), calendar->daysInMonth(newDate))
-      );
+                        picker->year(), calendar->month(date()),
+                        qMin(calendar->day(date()), calendar->daysInMonth(newDate))
+                       );
     }
 
     // Set the date, if it's invalid in any way then alert user and don't update
@@ -571,18 +564,18 @@ kMyMoneyCalendar::selectYearClicked()
 void
 kMyMoneyCalendar::setEnabled(bool enable)
 {
-  QWidget *widgets[]= {
+  QWidget *widgets[] = {
     styleControl, yearForward, yearBackward, monthForward, monthBackward,
     selectMonth, selectYear,
-    line, table, d->selectWeek, d->userButton1, d->userButton2 };
-  const int Size=sizeof(widgets)/sizeof(widgets[0]);
+    line, table, d->selectWeek, d->userButton1, d->userButton2
+  };
+  const int Size = sizeof(widgets) / sizeof(widgets[0]);
   int count;
   // -----
-  for(count=0; count<Size; ++count)
-    {
-      if (widgets[count])
-        widgets[count]->setEnabled(enable);
-    }
+  for (count = 0; count < Size; ++count) {
+    if (widgets[count])
+      widgets[count]->setEnabled(enable);
+  }
 }
 
 void
@@ -590,22 +583,21 @@ kMyMoneyCalendar::lineEnterPressed()
 {
   QDate temp;
   // -----
-  if(val->date(line->text(), temp)==QValidator::Acceptable)
-    {
-  kDebug() << "kMyMoneyCalendar::lineEnterPressed: valid date entered.";
-  emit(dateEntered(temp));
-  setDate(temp);
-    } else {
-      KNotification::beep();
-      kDebug() << "kMyMoneyCalendar::lineEnterPressed: invalid date entered.";
-    }
+  if (val->date(line->text(), temp) == QValidator::Acceptable) {
+    kDebug() << "kMyMoneyCalendar::lineEnterPressed: valid date entered.";
+    emit(dateEntered(temp));
+    setDate(temp);
+  } else {
+    KNotification::beep();
+    kDebug() << "kMyMoneyCalendar::lineEnterPressed: invalid date entered.";
+  }
 }
 
 QSize
 kMyMoneyCalendar::sizeHint() const
 {
-  QSize tableSize=table->sizeHint();
-  QWidget *buttons[]={
+  QSize tableSize = table->sizeHint();
+  QWidget *buttons[] = {
     styleControl,
     yearBackward,
     monthBackward,
@@ -617,41 +609,38 @@ kMyMoneyCalendar::sizeHint() const
     d->userButton1,
     d->userButton2
   };
-  const int NoOfButtons=sizeof(buttons)/sizeof(buttons[0]);
+  const int NoOfButtons = sizeof(buttons) / sizeof(buttons[0]);
   QSize sizes[NoOfButtons];
-  int cx=0, cy=0, count;
+  int cx = 0, cy = 0, count;
   // ----- store the size hints:
-  for(count=0; count<NoOfButtons; ++count)
-    {
-      if ( buttons[count] )
-          sizes[count]=buttons[count]->sizeHint();
-      else
-          sizes[count] = QSize(0,0);
+  for (count = 0; count < NoOfButtons; ++count) {
+    if (buttons[count])
+      sizes[count] = buttons[count]->sizeHint();
+    else
+      sizes[count] = QSize(0, 0);
 
-      if(buttons[count]==selectMonth)
-  {
-    QStyleOptionToolButton opt;
-    opt.initFrom(selectMonth);
-    QSize metricBound = style()->sizeFromContents(QStyle::CT_ToolButton, &opt, maxMonthRect);
-    cx+=qMax(metricBound.width(), maxMonthRect.width()+2*QApplication::style()->pixelMetric(QStyle::PM_ButtonMargin));
-  } else {
-    cx+=sizes[count].width();
-  }
-      cy=qMax(sizes[count].height(), cy);
+    if (buttons[count] == selectMonth) {
+      QStyleOptionToolButton opt;
+      opt.initFrom(selectMonth);
+      QSize metricBound = style()->sizeFromContents(QStyle::CT_ToolButton, &opt, maxMonthRect);
+      cx += qMax(metricBound.width(), maxMonthRect.width() + 2 * QApplication::style()->pixelMetric(QStyle::PM_ButtonMargin));
+    } else {
+      cx += sizes[count].width();
     }
+    cy = qMax(sizes[count].height(), cy);
+  }
   // ----- calculate width hint:
-  cx=qMax(cx, tableSize.width()); // line edit ignored
+  cx = qMax(cx, tableSize.width()); // line edit ignored
   // ----- calculate height hint:
-  cy+=tableSize.height()+line->sizeHint().height();
+  cy += tableSize.height() + line->sizeHint().height();
   return QSize(cx, cy);
 }
 
 void
 kMyMoneyCalendar::setFontSize(int s)
 {
-  if (table)
-  {
-    QWidget *buttons[]= {
+  if (table) {
+    QWidget *buttons[] = {
       // styleControl
       // yearBackward,
       // monthBackward,
@@ -660,89 +649,86 @@ kMyMoneyCalendar::setFontSize(int s)
       // monthForward,
       // yearForward
     };
-    const int NoOfButtons=sizeof(buttons)/sizeof(buttons[0]);
+    const int NoOfButtons = sizeof(buttons) / sizeof(buttons[0]);
     int count;
     QFont font;
     QRect r;
     // -----
-    fontsize=s;
-    for(count=0; count<NoOfButtons; ++count)
-      {
-        font=buttons[count]->font();
-        font.setPointSize(s);
-        buttons[count]->setFont(font);
-      }
+    fontsize = s;
+    for (count = 0; count < NoOfButtons; ++count) {
+      font = buttons[count]->font();
+      font.setPointSize(s);
+      buttons[count]->setFont(font);
+    }
     QFontMetrics metrics(selectMonth->fontMetrics());
-    for(int i=1; i <= 12; ++i)
-      { // maxMonthRect is used by sizeHint()
-        r = metrics.boundingRect(MONTH_NAME(i, 2000, KCalendarSystem::LongName));
-        maxMonthRect.setWidth(qMax(r.width(), maxMonthRect.width()));
-        maxMonthRect.setHeight(qMax(r.height(),  maxMonthRect.height()));
-      }
+    for (int i = 1; i <= 12; ++i) { // maxMonthRect is used by sizeHint()
+      r = metrics.boundingRect(MONTH_NAME(i, 2000, KCalendarSystem::LongName));
+      maxMonthRect.setWidth(qMax(r.width(), maxMonthRect.width()));
+      maxMonthRect.setHeight(qMax(r.height(),  maxMonthRect.height()));
+    }
     table->setFontSize(s);
   }
 }
 
 void
-kMyMoneyCalendar::setCloseButton( bool enable )
+kMyMoneyCalendar::setCloseButton(bool enable)
 {
-    if ( enable == (d->closeButton != 0L) )
-        return;
+  if (enable == (d->closeButton != 0L))
+    return;
 
-    if ( enable ) {
-        d->closeButton = new QToolButton( this );
-        d->closeButton->setToolTip( i18n("Close") );
-        d->closeButton->setIcon( QIcon( SmallIcon( "dialog-close" ) ) );
-        connect( d->closeButton, SIGNAL( clicked() ),
-                 topLevelWidget(), SLOT( close() ) );
-    }
-    else {
-        delete d->closeButton;
-        d->closeButton = 0L;
-    }
+  if (enable) {
+    d->closeButton = new QToolButton(this);
+    d->closeButton->setToolTip(i18n("Close"));
+    d->closeButton->setIcon(QIcon(SmallIcon("dialog-close")));
+    connect(d->closeButton, SIGNAL(clicked()),
+            topLevelWidget(), SLOT(close()));
+  } else {
+    delete d->closeButton;
+    d->closeButton = 0L;
+  }
 
-    updateGeometry();
+  updateGeometry();
 }
 
 bool kMyMoneyCalendar::hasCloseButton() const
 {
-    return (d->closeButton != 0L);
+  return (d->closeButton != 0L);
 }
 
 int kMyMoneyCalendar::weekOfYear(QDate date)
 {
-    // Calculate ISO 8601 week number (taken from glibc/Gnumeric)
-    int year, week, wday, jan1wday, nextjan1wday;
-    QDate jan1date, nextjan1date;
+  // Calculate ISO 8601 week number (taken from glibc/Gnumeric)
+  int year, week, wday, jan1wday, nextjan1wday;
+  QDate jan1date, nextjan1date;
 
-    year=date.year();
-    wday=date.dayOfWeek();
+  year = date.year();
+  wday = date.dayOfWeek();
 
-    jan1date=QDate(year,1,1);
-    jan1wday=jan1date.dayOfWeek();
+  jan1date = QDate(year, 1, 1);
+  jan1wday = jan1date.dayOfWeek();
 
-    week = (date.dayOfYear()-1 + jan1wday-1)/7 + ((jan1wday-1) == 0 ? 1 : 0);
+  week = (date.dayOfYear() - 1 + jan1wday - 1) / 7 + ((jan1wday - 1) == 0 ? 1 : 0);
 
-    /* Does date belong to last week of previous year? */
-    if ((week == 0) && (jan1wday > 4 /*THURSDAY*/)) {
-        QDate tmpdate=QDate(year-1,12,31);
-        return weekOfYear(tmpdate);
-    }
+  /* Does date belong to last week of previous year? */
+  if ((week == 0) && (jan1wday > 4 /*THURSDAY*/)) {
+    QDate tmpdate = QDate(year - 1, 12, 31);
+    return weekOfYear(tmpdate);
+  }
 
-    if ((jan1wday <= 4 /*THURSDAY*/) && (jan1wday > 1 /*MONDAY*/))
-        week++;
+  if ((jan1wday <= 4 /*THURSDAY*/) && (jan1wday > 1 /*MONDAY*/))
+    week++;
 
-    if (week == 53) {
-        nextjan1date=QDate(year+1, 1, 1);
-        nextjan1wday = nextjan1date.dayOfWeek();
-        if (nextjan1wday <= 4 /*THURSDAY*/)
-            week = 1;
-    }
+  if (week == 53) {
+    nextjan1date = QDate(year + 1, 1, 1);
+    nextjan1wday = nextjan1date.dayOfWeek();
+    if (nextjan1wday <= 4 /*THURSDAY*/)
+      week = 1;
+  }
 
-    return week;
+  return week;
 }
 
-void kMyMoneyCalendar::virtual_hook( int /*id*/, void* /*data*/ )
+void kMyMoneyCalendar::virtual_hook(int /*id*/, void* /*data*/)
 { /*BASE::virtual_hook( id, data );*/ }
 
 void kMyMoneyCalendar::slotSetStyleWeekly()
@@ -762,33 +748,31 @@ void kMyMoneyCalendar::slotSetStyleQuarterly()
 
 void kMyMoneyCalendar::setUserButton1(bool enable, QPushButton* pb)
 {
-    if ( enable == (d->userButton1 != 0L) )
-        return;
+  if (enable == (d->userButton1 != 0L))
+    return;
 
-    if ( enable ) {
-        d->userButton1 = pb;
-    }
-    else {
-        delete d->userButton1;
-        d->userButton1 = 0L;
-    }
+  if (enable) {
+    d->userButton1 = pb;
+  } else {
+    delete d->userButton1;
+    d->userButton1 = 0L;
+  }
 
-    updateGeometry();
+  updateGeometry();
 }
 
 void kMyMoneyCalendar::setUserButton2(bool enable, QPushButton* pb)
 {
-    if ( enable == (d->userButton2 != 0L) )
-        return;
+  if (enable == (d->userButton2 != 0L))
+    return;
 
-    if ( enable ) {
-        d->userButton2 = pb;
-    }
-    else {
-        delete d->userButton2;
-        d->userButton2 = 0L;
-    }
+  if (enable) {
+    d->userButton2 = pb;
+  } else {
+    delete d->userButton2;
+    d->userButton2 = 0L;
+  }
 
-    updateGeometry();
+  updateGeometry();
 }
 

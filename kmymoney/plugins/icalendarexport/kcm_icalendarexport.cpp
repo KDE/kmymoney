@@ -30,9 +30,10 @@
 #include "pluginsettings.h"
 #include "ui_pluginsettingsdecl.h"
 
-class PluginSettingsWidget : public QWidget, public Ui::PluginSettingsDecl {
+class PluginSettingsWidget : public QWidget, public Ui::PluginSettingsDecl
+{
 public:
-  PluginSettingsWidget( QWidget* parent = 0 ) : QWidget(parent) {
+  PluginSettingsWidget(QWidget* parent = 0) : QWidget(parent) {
     setupUi(this);
 
     kcfg_timeUnitInSeconds->addItem(i18n("Minutes"));

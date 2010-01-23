@@ -31,8 +31,8 @@
 class KSettingsGeneralDecl : public QWidget, public Ui::KSettingsGeneralDecl
 {
 public:
-  KSettingsGeneralDecl( QWidget *parent ) : QWidget( parent ) {
-    setupUi( this );
+  KSettingsGeneralDecl(QWidget *parent) : QWidget(parent) {
+    setupUi(this);
   }
 };
 

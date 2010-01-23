@@ -47,7 +47,9 @@ public:
   explicit MyMoneyQifProfile(const QString& name);
   ~MyMoneyQifProfile();
 
-  inline const QString& profileName(void) const { return m_profileName; }
+  inline const QString& profileName(void) const {
+    return m_profileName;
+  }
   void setProfileName(const QString& name);
 
   void loadProfile(const QString& name);
@@ -59,20 +61,40 @@ public:
   const MyMoneyMoney value(const QChar& def, const QString& valuein) const;
   const QString value(const QChar& def, const MyMoneyMoney& valuein) const;
 
-  inline const QString& outputDateFormat(void) const { return m_dateFormat; }
+  inline const QString& outputDateFormat(void) const {
+    return m_dateFormat;
+  }
   const QString inputDateFormat(void) const;
-  inline const QString& apostropheFormat(void) const { return m_apostropheFormat; }
+  inline const QString& apostropheFormat(void) const {
+    return m_apostropheFormat;
+  }
   const QChar amountDecimal(const QChar& def) const;
   const QChar amountThousands(const QChar& def) const;
-  inline const QString& profileDescription(void) const { return m_profileDescription; }
-  inline const QString& profileType(void) const { return m_profileType; }
-  inline const QString& openingBalanceText(void) const { return m_openingBalanceText; }
+  inline const QString& profileDescription(void) const {
+    return m_profileDescription;
+  }
+  inline const QString& profileType(void) const {
+    return m_profileType;
+  }
+  inline const QString& openingBalanceText(void) const {
+    return m_openingBalanceText;
+  }
   const QString accountDelimiter(void) const;
-  inline const QString& voidMark(void) const { return m_voidMark; }
-  inline const QString& filterScriptImport(void) const { return m_filterScriptImport; }
-  inline const QString& filterScriptExport(void) const { return m_filterScriptExport; }
-  inline const QString& filterFileType(void) const { return m_filterFileType; }
-  inline bool attemptMatchDuplicates(void) const { return m_attemptMatchDuplicates; }
+  inline const QString& voidMark(void) const {
+    return m_voidMark;
+  }
+  inline const QString& filterScriptImport(void) const {
+    return m_filterScriptImport;
+  }
+  inline const QString& filterScriptExport(void) const {
+    return m_filterScriptExport;
+  }
+  inline const QString& filterFileType(void) const {
+    return m_filterFileType;
+  }
+  inline bool attemptMatchDuplicates(void) const {
+    return m_attemptMatchDuplicates;
+  }
 
   /**
    * This method scans all strings contained in @a lines and tries to figure
@@ -96,7 +118,9 @@ public:
   /**
     * This method is used to determine, if a profile has been changed or not
     */
-  inline bool isDirty(void) const { return m_isDirty; };
+  inline bool isDirty(void) const {
+    return m_isDirty;
+  };
 
 public slots:
   void setProfileDescription(const QString& desc);

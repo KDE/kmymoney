@@ -41,17 +41,18 @@
   * This class describes an exception that is thrown by the engine
   * in case of a failure.
   */
-class KMM_MYMONEY_EXPORT MyMoneyException {
+class KMM_MYMONEY_EXPORT MyMoneyException
+{
 public:
 
-/**
-  * @def MYMONEYEXCEPTION(text)
-  * This is the preferred constructor to create a new exception
-  * object. It automatically inserts the filename and the source
-  * code line into the object upon creation.
-  *
-  * It is equivilant to MyMoneyException(text, __FILE__, __LINE__)
-  */
+  /**
+    * @def MYMONEYEXCEPTION(text)
+    * This is the preferred constructor to create a new exception
+    * object. It automatically inserts the filename and the source
+    * code line into the object upon creation.
+    *
+    * It is equivilant to MyMoneyException(text, __FILE__, __LINE__)
+    */
 #define MYMONEYEXCEPTION(a) MyMoneyException(a, __FILE__, __LINE__)
 
   /**
@@ -67,9 +68,9 @@ public:
     * MYMONEYEXCEPTION(text) instead. It automatically assigns the file
     * and line parameter to the correct values.
     */
-	MyMoneyException(const QString& msg, const QString& file, const unsigned long line);
+  MyMoneyException(const QString& msg, const QString& file, const unsigned long line);
 
-	~MyMoneyException();
+  ~MyMoneyException();
 
   /**
     * This method is used to return the message that was passed
@@ -77,7 +78,9 @@ public:
     *
     * @return reference to QString containing the message
     */
-  const QString& what(void) const { return m_msg; };
+  const QString& what(void) const {
+    return m_msg;
+  };
 
   /**
     * This method is used to return the filename that was passed
@@ -85,7 +88,9 @@ public:
     *
     * @return reference to QString containing the filename
     */
-  const QString& file(void) const { return m_file; };
+  const QString& file(void) const {
+    return m_file;
+  };
 
   /**
     * This method is used to return the linenumber that was passed
@@ -93,7 +98,9 @@ public:
     *
     * @return long integer containing the line number
     */
-  unsigned long line(void) const { return m_line; };
+  unsigned long line(void) const {
+    return m_line;
+  };
 
 private:
   /**

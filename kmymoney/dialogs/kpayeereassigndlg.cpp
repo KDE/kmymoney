@@ -37,8 +37,8 @@
 #include <kmymoneymvccombo.h>
 #include <kguiutils.h>
 
-KPayeeReassignDlg::KPayeeReassignDlg( QWidget* parent) :
-  KPayeeReassignDlgDecl( parent)
+KPayeeReassignDlg::KPayeeReassignDlg(QWidget* parent) :
+    KPayeeReassignDlgDecl(parent)
 {
   buttonOk->setGuiItem(KStandardGuiItem::ok());
   buttonCancel->setGuiItem(KStandardGuiItem::cancel());
@@ -54,7 +54,7 @@ KPayeeReassignDlg::~KPayeeReassignDlg()
 QString KPayeeReassignDlg::show(const QList<MyMoneyPayee>& payeeslist)
 {
   if (payeeslist.isEmpty())
-   return QString(); // no payee available? nothing can be selected...
+    return QString(); // no payee available? nothing can be selected...
 
   payeeCombo->loadPayees(payeeslist);
 
@@ -72,7 +72,7 @@ void KPayeeReassignDlg::accept(void)
   // force update of payeeCombo
   buttonOk->setFocus();
 
-  if(payeeCombo->selectedItem().isEmpty()) {
+  if (payeeCombo->selectedItem().isEmpty()) {
     KMessageBox::information(this, i18n("This dialog does not allow new payees to be created. Please pick a payee from the list."), i18n("Payee creation"));
   } else {
     KPayeeReassignDlgDecl::accept();

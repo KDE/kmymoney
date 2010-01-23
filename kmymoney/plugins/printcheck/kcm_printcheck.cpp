@@ -38,8 +38,7 @@
 class PluginSettingsWidget : public QWidget, public Ui::PluginSettingsDecl
 {
 public:
-  PluginSettingsWidget( QWidget* parent = 0 ) : QWidget(parent)
-  {
+  PluginSettingsWidget(QWidget* parent = 0) : QWidget(parent) {
     setupUi(this);
     m_checkTemplatePreviewHTMLPart = new KHTMLPart(m_previewFrame);
     QVBoxLayout *layout = new QVBoxLayout;
@@ -51,13 +50,11 @@ public:
   }
 
 public slots:
-  virtual void urlSelected(const KUrl& url)
-  {
+  virtual void urlSelected(const KUrl& url) {
     m_checkTemplatePreviewHTMLPart->openUrl(url);
   }
 
-  virtual void returnPressed(const QString& url)
-  {
+  virtual void returnPressed(const QString& url) {
     m_checkTemplatePreviewHTMLPart->openUrl(url);
   }
 
@@ -68,7 +65,7 @@ private:
 K_PLUGIN_FACTORY(KCMPrintCheckFactory,
                  registerPlugin<KCMPrintCheck>();
                 )
-K_EXPORT_PLUGIN(KCMPrintCheckFactory( "kmm_printcheck", "kmymoney" ) )
+K_EXPORT_PLUGIN(KCMPrintCheckFactory("kmm_printcheck", "kmymoney"))
 
 KCMPrintCheck::KCMPrintCheck(QWidget *parent, const QVariantList& args) : KCModule(KCMPrintCheckFactory::componentData(), parent, args)
 {

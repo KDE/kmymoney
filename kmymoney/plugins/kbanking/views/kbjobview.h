@@ -33,11 +33,12 @@ class KBJobView;
 #include "kbanking.h"
 
 
-class KBJobView: public QWidget, public Ui::KBJobViewUi {
+class KBJobView: public QWidget, public Ui::KBJobViewUi
+{
   Q_OBJECT
 public:
   explicit KBJobView(KBanking *kb,
-                     QWidget* parent=0, const char* name=0, Qt::WFlags fl=0);
+                     QWidget* parent = 0, const char* name = 0, Qt::WFlags fl = 0);
   ~KBJobView();
 
   bool init();

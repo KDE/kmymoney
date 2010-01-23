@@ -19,37 +19,37 @@
 
 #include "kmymoneyreportconfigtabimpl.h"
 
-kMyMoneyReportConfigTab1Decl::kMyMoneyReportConfigTab1Decl( QWidget *parent )
-    : QWidget( parent )
+kMyMoneyReportConfigTab1Decl::kMyMoneyReportConfigTab1Decl(QWidget *parent)
+    : QWidget(parent)
 {
-    setupUi( this );
+  setupUi(this);
 }
 
-kMyMoneyReportConfigTab2Decl::kMyMoneyReportConfigTab2Decl( QWidget *parent )
-    : QWidget( parent )
+kMyMoneyReportConfigTab2Decl::kMyMoneyReportConfigTab2Decl(QWidget *parent)
+    : QWidget(parent)
 {
-    setupUi( this );
+  setupUi(this);
 }
 
-kMyMoneyReportConfigTab3Decl::kMyMoneyReportConfigTab3Decl( QWidget *parent )
-    : QWidget( parent )
+kMyMoneyReportConfigTab3Decl::kMyMoneyReportConfigTab3Decl(QWidget *parent)
+    : QWidget(parent)
 {
-    setupUi( this );
-    buttonGroup1->setExclusive(false);
-    buttonGroup1->setId(m_checkMemo, 0);
-    buttonGroup1->setId(m_checkShares, 1);
-    buttonGroup1->setId(m_checkPrice, 2);
-    buttonGroup1->setId(m_checkReconciled, 3);
-    buttonGroup1->setId(m_checkAccount, 4);
-    buttonGroup1->setId(m_checkNumber, 5);
-    buttonGroup1->setId(m_checkPayee, 6);
-    buttonGroup1->setId(m_checkCategory, 7);
-    buttonGroup1->setId(m_checkAction, 8);
-    buttonGroup1->setId(m_checkBalance, 9);
+  setupUi(this);
+  buttonGroup1->setExclusive(false);
+  buttonGroup1->setId(m_checkMemo, 0);
+  buttonGroup1->setId(m_checkShares, 1);
+  buttonGroup1->setId(m_checkPrice, 2);
+  buttonGroup1->setId(m_checkReconciled, 3);
+  buttonGroup1->setId(m_checkAccount, 4);
+  buttonGroup1->setId(m_checkNumber, 5);
+  buttonGroup1->setId(m_checkPayee, 6);
+  buttonGroup1->setId(m_checkCategory, 7);
+  buttonGroup1->setId(m_checkAction, 8);
+  buttonGroup1->setId(m_checkBalance, 9);
 }
 
-kMyMoneyReportConfigTabChartDecl::kMyMoneyReportConfigTabChartDecl( QWidget *parent )
-    : QWidget( parent )
+kMyMoneyReportConfigTabChartDecl::kMyMoneyReportConfigTabChartDecl(QWidget *parent)
+    : QWidget(parent)
 {
-    setupUi( this );
+  setupUi(this);
 }

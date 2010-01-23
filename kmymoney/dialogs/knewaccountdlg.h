@@ -41,8 +41,9 @@
 //Added by qt3to4:
 #include <QResizeEvent>
 class KMyMoneyAccountTreeBaseItem;
-namespace reports {
-  }
+namespace reports
+{
+}
 
 /**
   * This dialog lets you create/edit an account.
@@ -51,8 +52,8 @@ namespace reports {
 class KNewAccountDlgDecl : public QDialog, public Ui::KNewAccountDlgDecl
 {
 public:
-  KNewAccountDlgDecl( QWidget *parent ) : QDialog( parent ) {
-    setupUi( this );
+  KNewAccountDlgDecl(QWidget *parent) : QDialog(parent) {
+    setupUi(this);
   }
 };
 class KNewAccountDlg : public KNewAccountDlgDecl
@@ -100,7 +101,7 @@ public:
     * @param name Name of the object (passed to QDialog). Default is 0.
     * @param title Caption of the object (passed to QDialog). Default is empty string.
     */
-  KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bool categoryEditor, QWidget *parent=0, const QString& title=QString());
+  KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bool categoryEditor, QWidget *parent = 0, const QString& title = QString());
 
   /**
     * This method returns the edited account object.
@@ -114,7 +115,9 @@ public:
 
   void setOpeningBalance(const MyMoneyMoney& balance);
 
-  const MyMoneyMoney openingBalance(void) const { return m_openingBalanceEdit->value(); };
+  const MyMoneyMoney openingBalance(void) const {
+    return m_openingBalanceEdit->value();
+  };
 
   void setOpeningBalanceShown(bool shown);
 

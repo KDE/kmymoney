@@ -58,7 +58,7 @@ class kMyMoneySplitTable : public QTableWidget
 {
   Q_OBJECT
 public:
-  explicit kMyMoneySplitTable(QWidget *parent=0);
+  explicit kMyMoneySplitTable(QWidget *parent = 0);
   virtual ~kMyMoneySplitTable();
 
   /**
@@ -75,7 +75,9 @@ public:
   /**
     * This method is used to retrieve the transaction from the widget.
     */
-  const MyMoneyTransaction& transaction(void) const { return m_transaction; }
+  const MyMoneyTransaction& transaction(void) const {
+    return m_transaction;
+  }
 
   /**
     * Returns a list of MyMoneySplit objects. It contains all but the one
@@ -91,9 +93,9 @@ public:
   int currentRow() const;
 
 protected:
-  void mousePressEvent( QMouseEvent* e );
-  void mouseReleaseEvent( QMouseEvent* e );
-  void mouseDoubleClickEvent( QMouseEvent* e );
+  void mousePressEvent(QMouseEvent* e);
+  void mouseReleaseEvent(QMouseEvent* e);
+  void mouseDoubleClickEvent(QMouseEvent* e);
   bool eventFilter(QObject *o, QEvent *e);
 
   void resizeEvent(QResizeEvent*);

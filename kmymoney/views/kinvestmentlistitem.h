@@ -61,13 +61,19 @@ public:
   KInvestmentListItem(K3ListView* parent, const MyMoneyAccount& security);
   ~KInvestmentListItem();
 
-  QString securityId() const { return m_account.currencyId(); };
-  const MyMoneyAccount& account(void) const { return m_account; };
-  const MyMoneySecurity tradingCurrency(void) const { return m_tradingCurrency; };
+  QString securityId() const {
+    return m_account.currencyId();
+  };
+  const MyMoneyAccount& account(void) const {
+    return m_account;
+  };
+  const MyMoneySecurity tradingCurrency(void) const {
+    return m_tradingCurrency;
+  };
 
- /**
-   * Helper method to show the right order
-   */
+  /**
+    * Helper method to show the right order
+    */
   int compare(Q3ListViewItem* i, int col, bool ascending) const;
 
 

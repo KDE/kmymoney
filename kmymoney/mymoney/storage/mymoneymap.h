@@ -49,80 +49,73 @@ public:
   MyMoneyMap() : QMap<Key, T>() {}
   virtual ~MyMoneyMap() {}
 
-  void startTransaction(unsigned long* id = 0)
-  {
+  void startTransaction(unsigned long* id = 0) {
     m_stack.push(new MyMoneyMapStart(this, id));
   }
 
-  void rollbackTransaction(void)
-  {
-    if(m_stack.count() == 0)
+  void rollbackTransaction(void) {
+    if (m_stack.count() == 0)
       throw new MYMONEYEXCEPTION("No transaction started to rollback changes");
 
     // undo all actions
     MyMoneyMapAction* action;
-    while(m_stack.count()) {
+    while (m_stack.count()) {
       action = m_stack.pop();
       action->undo();
       delete action;
     }
   }
 
-  bool commitTransaction(void)
-  {
-    if(m_stack.count() == 0)
+  bool commitTransaction(void) {
+    if (m_stack.count() == 0)
       throw new MYMONEYEXCEPTION("No transaction started to commit changes");
 
     bool rc = m_stack.count() > 1;
     // remove all actions from the stack
     MyMoneyMapAction* action;
-    while(m_stack.count()) {
+    while (m_stack.count()) {
       action = m_stack.pop();
       delete action;
     }
     return rc;
   }
 
-  void insert(const Key& key, const T& obj)
-  {
-    if(m_stack.count() == 0)
+  void insert(const Key& key, const T& obj) {
+    if (m_stack.count() == 0)
       throw new MYMONEYEXCEPTION("No transaction started to insert new element into container");
 
     // store object in
     m_stack.push(new MyMoneyMapInsert(this, key, obj));
   }
 
-  void modify(const Key& key, const T& obj)
-  {
-    if(m_stack.count() == 0)
+  void modify(const Key& key, const T& obj) {
+    if (m_stack.count() == 0)
       throw new MYMONEYEXCEPTION("No transaction started to modify element in container");
 
 #if 0
     // had to take this out, because we use QPair in one instance as key
-    if(key.isEmpty())
+    if (key.isEmpty())
       throw new MYMONEYEXCEPTION("No key to update object");
 #endif
 
     m_stack.push(new MyMoneyMapModify(this, key, obj));
   }
 
-  void remove(const Key& key)
-  {
-    if(m_stack.count() == 0)
+  void remove(const Key& key) {
+    if (m_stack.count() == 0)
       throw new MYMONEYEXCEPTION("No transaction started to remove element from container");
 
 #if 0
     // had to take this out, because we use QPair in one instance as key
-    if(key.isEmpty())
+    if (key.isEmpty())
       throw new MYMONEYEXCEPTION("No key to remove object");
 #endif
 
     m_stack.push(new MyMoneyMapRemove(this, key));
   }
 
-  MyMoneyMap<Key, T>& operator= (const QMap<Key, T>& m)
-  {
-    if(m_stack.count() != 0) {
+  MyMoneyMap<Key, T>& operator= (const QMap<Key, T>& m) {
+    if (m_stack.count() != 0) {
       throw new MYMONEYEXCEPTION("Cannot assign whole container during transaction");
     }
     QMap<Key, T>::operator=(m);
@@ -130,65 +123,55 @@ public:
   }
 
 
-  inline QList<T> values(void) const
-  {
-    return QMap<Key,T>::values();
+  inline QList<T> values(void) const {
+    return QMap<Key, T>::values();
   }
 
-  inline QList<Key> keys(void) const
-  {
-    return QMap<Key,T>::keys();
+  inline QList<Key> keys(void) const {
+    return QMap<Key, T>::keys();
   }
 
-  const T& operator[] ( const Key& k ) const
-  {
+  const T& operator[](const Key& k) const {
     return find(k).value();
 #if 0
-/*QT_CHECK_INVALID_MAP_ELEMENT;*/ /*PORT ME KDE4*/ return QMap<Key,T>::operator[](k);
+    /*QT_CHECK_INVALID_MAP_ELEMENT;*/ /*PORT ME KDE4*/ return QMap<Key, T>::operator[](k);
 #endif
   }
 
-  inline Q_TYPENAME QMap<Key, T>::const_iterator find(const Key& k) const
-  {
-    return QMap<Key,T>::find(k);
+  inline Q_TYPENAME QMap<Key, T>::const_iterator find(const Key& k) const {
+    return QMap<Key, T>::find(k);
   }
 
-  inline Q_TYPENAME QMap<Key, T>::const_iterator begin(void) const
-  {
-    return QMap<Key,T>::constBegin();
+  inline Q_TYPENAME QMap<Key, T>::const_iterator begin(void) const {
+    return QMap<Key, T>::constBegin();
   }
 
-  inline Q_TYPENAME QMap<Key, T>::const_iterator end(void) const
-  {
-    return QMap<Key,T>::constEnd();
+  inline Q_TYPENAME QMap<Key, T>::const_iterator end(void) const {
+    return QMap<Key, T>::constEnd();
   }
 
-  inline bool contains(const Key& k) const
-  {
+  inline bool contains(const Key& k) const {
     return find(k) != end();
   }
 
-  inline void map(QMap<Key, T>& that) const
-  {
+  inline void map(QMap<Key, T>& that) const {
     //QMap<Key, T>* ptr = dynamic_cast<QMap<Key, T>* >(this);
     //that = *ptr;
     that = *(dynamic_cast<QMap<Key, T>* >(const_cast<MyMoneyMap<Key, T>* >(this)));
   }
 
-  inline size_t count(void) const
-  {
+  inline size_t count(void) const {
     return QMap<Key, T>::count();
   }
 
 #if MY_OWN_DEBUG
-  void dump(void) const
-  {
+  void dump(void) const {
     printf("Container dump\n");
     printf(" items in container = %d\n", count());
     printf(" items on stack     = %d\n", m_stack.count());
 
     const_iterator it;
-    for(it = begin(); it != end(); ++it) {
+    for (it = begin(); it != end(); ++it) {
       printf("  %s \n", it.key().data());
     }
   }
@@ -197,94 +180,86 @@ public:
 private:
   class MyMoneyMapAction
   {
-    public:
-      MyMoneyMapAction(QMap<Key, T>* container) :
+  public:
+    MyMoneyMapAction(QMap<Key, T>* container) :
         m_container(container) {}
 
-      MyMoneyMapAction(QMap<Key, T>* container, const Key& key, const T& obj) :
+    MyMoneyMapAction(QMap<Key, T>* container, const Key& key, const T& obj) :
         m_container(container),
         m_obj(obj),
         m_key(key) {}
 
-      virtual ~MyMoneyMapAction() {}
-      virtual void undo(void) = 0;
+    virtual ~MyMoneyMapAction() {}
+    virtual void undo(void) = 0;
 
-    protected:
-      QMap<Key, T>* m_container;
-      T m_obj;
-      Key m_key;
+  protected:
+    QMap<Key, T>* m_container;
+    T m_obj;
+    Key m_key;
   };
 
   class MyMoneyMapStart : public MyMoneyMapAction
   {
-    public:
-      MyMoneyMapStart(QMap<Key, T>* container, unsigned long* id) :
+  public:
+    MyMoneyMapStart(QMap<Key, T>* container, unsigned long* id) :
         MyMoneyMapAction(container),
-        m_idPtr(id)
-      {
-        if(id != 0)
-          m_id = *id;
-      }
-      virtual ~MyMoneyMapStart() {}
-      void undo(void)
-      {
-        if(m_idPtr != 0)
-          *m_idPtr = m_id;
-      }
+        m_idPtr(id) {
+      if (id != 0)
+        m_id = *id;
+    }
+    virtual ~MyMoneyMapStart() {}
+    void undo(void) {
+      if (m_idPtr != 0)
+        *m_idPtr = m_id;
+    }
 
-    private:
-      unsigned long* m_idPtr;
-      unsigned long  m_id;
+  private:
+    unsigned long* m_idPtr;
+    unsigned long  m_id;
   };
 
   class MyMoneyMapInsert : public MyMoneyMapAction
   {
-    public:
-      MyMoneyMapInsert(QMap<Key, T>* container, const Key& key, const T& obj) :
-        MyMoneyMapAction(container, key, obj)
-      {
-        (*container)[key] = obj;
-      }
+  public:
+    MyMoneyMapInsert(QMap<Key, T>* container, const Key& key, const T& obj) :
+        MyMoneyMapAction(container, key, obj) {
+      (*container)[key] = obj;
+    }
 
-      virtual ~MyMoneyMapInsert() {}
-      void undo(void)
-      {
-        // m_container->remove(m_key) does not work on GCC 4.0.2
-        // using this-> to access those member does the trick
-        this->m_container->remove(this->m_key);
-      }
+    virtual ~MyMoneyMapInsert() {}
+    void undo(void) {
+      // m_container->remove(m_key) does not work on GCC 4.0.2
+      // using this-> to access those member does the trick
+      this->m_container->remove(this->m_key);
+    }
   };
 
   class MyMoneyMapRemove : public MyMoneyMapAction
   {
-    public:
-      MyMoneyMapRemove(QMap<Key, T>* container, const Key& key) :
-        MyMoneyMapAction(container, key, (*container)[key])
-      {
-        container->remove(key);
-      }
+  public:
+    MyMoneyMapRemove(QMap<Key, T>* container, const Key& key) :
+        MyMoneyMapAction(container, key, (*container)[key]) {
+      container->remove(key);
+    }
 
-      virtual ~MyMoneyMapRemove() {}
-      void undo(void)
-      {
-        (*(this->m_container))[this->m_key] = this->m_obj;
-      }
+    virtual ~MyMoneyMapRemove() {}
+    void undo(void) {
+      (*(this->m_container))[this->m_key] = this->m_obj;
+    }
   };
 
   class MyMoneyMapModify : public MyMoneyMapAction
   {
-    public:
-      MyMoneyMapModify(QMap<Key, T>* container, const Key& key, const T& obj) :
-        MyMoneyMapAction(container, key, (*container)[key])
-      {
-        (*container)[key] = obj;
-      }
+  public:
+    MyMoneyMapModify(QMap<Key, T>* container, const Key& key, const T& obj) :
+        MyMoneyMapAction(container, key, (*container)[key]) {
+      (*container)[key] = obj;
+    }
 
-      virtual ~MyMoneyMapModify() {}
-      void undo(void)
-      {
-        (*(this->m_container))[this->m_key] = this->m_obj;
-      }
+    virtual ~MyMoneyMapModify() {}
+    void undo(void) {
+      (*(this->m_container))[this->m_key] = this->m_obj;
+    }
   };
 
 protected:
@@ -335,7 +310,7 @@ main()
     it = container.find("001");
     it = container.begin();
 
-  } catch(MyMoneyException *e) {
+  } catch (MyMoneyException *e) {
     printf("Caught exception: %s\n", e->what().data());
     delete e;
   }

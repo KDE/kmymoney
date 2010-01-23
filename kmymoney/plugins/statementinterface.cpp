@@ -27,7 +27,7 @@
 #include "statementinterface.h"
 
 KMyMoneyPlugin::StatementInterface::StatementInterface(QObject* parent, const char* name) :
-  QObject(parent)
+    QObject(parent)
 {
   setObjectName(name);
 }

@@ -43,7 +43,7 @@
 #include "kmymoneypriceview.h"
 
 KEditEquityEntryDlg::KEditEquityEntryDlg(const MyMoneySecurity& selectedSecurity, QWidget *parent)
-  : KEditEquityEntryDecl(parent)
+    : KEditEquityEntryDecl(parent)
 {
   m_selectedSecurity = selectedSecurity;
 
@@ -74,10 +74,10 @@ KEditEquityEntryDlg::KEditEquityEntryDlg(const MyMoneySecurity& selectedSecurity
   btnRemoveEntry->setGuiItem(KStandardGuiItem::remove());
   btnAddEntry->setGuiItem(KStandardGuiItem::add());
 
-  KGuiItem editButtenItem( i18n( "&Edit" ),
-                    KIcon(il->loadIcon("edit", KIconLoader::Small, KIconLoader::SizeSmall)),
-                    i18n("Modify the selected entry"),
-                    i18n("Change the price information of the selected entry."));
+  KGuiItem editButtenItem(i18n("&Edit"),
+                          KIcon(il->loadIcon("edit", KIconLoader::Small, KIconLoader::SizeSmall)),
+                          i18n("Modify the selected entry"),
+                          i18n("Change the price information of the selected entry."));
   btnEditEntry->setGuiItem(editButtenItem);
 
   slotSelectionChanged(0);      // make sure buttons are disabled in the beginning
@@ -85,7 +85,7 @@ KEditEquityEntryDlg::KEditEquityEntryDlg(const MyMoneySecurity& selectedSecurity
   m_changes = false;
 
   // force a resize to optimize the layout of all widgets
-  resize(width()-1, height()-1);
+  resize(width() - 1, height() - 1);
   QTimer::singleShot(10, this, SLOT(slotTimerDone()));
 }
 
@@ -99,14 +99,13 @@ void KEditEquityEntryDlg::slotTimerDone(void)
   // all widgets in the view to the size they should
   // have and show up correctly. Don't ask me, why
   // this is, but it cured the problem (ipwizard).
-  resize(width()+1, height()+1);
+  resize(width() + 1, height() + 1);
 }
 
 /** No descriptions */
 void KEditEquityEntryDlg::slotOKClicked()
 {
-  if(m_changes /* || kpvPriceHistory->dirty() */)
-  {
+  if (m_changes /* || kpvPriceHistory->dirty() */) {
     m_selectedSecurity.setName(edtEquityName->text());
     m_selectedSecurity.setTradingSymbol(edtMarketSymbol->text());
     m_selectedSecurity.setSmallestAccountFraction(edtFraction->value().abs());
@@ -127,9 +126,9 @@ void KEditEquityEntryDlg::slotDataChanged(void)
 {
   bool okEnabled = true;
 
-  if(!edtFraction->value().isPositive()
-  || edtMarketSymbol->text().isEmpty()
-  || edtEquityName->text().isEmpty())
+  if (!edtFraction->value().isPositive()
+      || edtMarketSymbol->text().isEmpty()
+      || edtEquityName->text().isEmpty())
     okEnabled = false;
 
   btnOK->setEnabled(okEnabled);

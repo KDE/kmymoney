@@ -33,88 +33,93 @@
 #include "mymoneyreport.h"
 #include "reporttable.h"
 
-namespace reports {
+namespace reports
+{
 
-  class ReportAccount;
+class ReportAccount;
+
+/**
+  * Calculates a query of information about the transaction database.
+  *
+  * This is a middle-layer class, between the implementing classes and the engine. The
+  * MyMoneyReport class holds only the CONFIGURATION parameters.  This
+  * class has some common methods used by querytable and objectinfo classes
+  *
+  * @author Alvaro Soliverez
+  *
+  * @short
+  **/
+
+class ListTable : public ReportTable
+{
+public:
+  ListTable(const MyMoneyReport&);
+  QString renderHTML(void) const;
+  QString renderCSV(void) const;
+  void drawChart(KReportChartView&) const {}
+  void dump(const QString& file, const QString& context = QString()) const;
+  void init(void);
+
+public:
+  /**
+    * Contains a single row in the table.
+    *
+    * Each column is a key/value pair, both strings.  This class is just
+    * a QMap with the added ability to specify which columns you'd like to
+    * use as a sort key when you qHeapSort a list of these TableRows
+    */
+  class TableRow: public QMap<QString, QString>
+  {
+  public:
+    bool operator< (const TableRow&) const;
+    bool operator<= (const TableRow&) const;
+    bool operator> (const TableRow&) const;
+    bool operator== (const TableRow&) const;
+
+    static void setSortCriteria(const QString& _criteria) {
+      m_sortCriteria = _criteria.split(",");
+    }
+  private:
+    static QStringList m_sortCriteria;
+  };
+
+  const QList<TableRow>& rows() {
+    return m_rows;
+  };
+
+protected:
+  void render(QString&, QString&) const;
 
   /**
-    * Calculates a query of information about the transaction database.
-    *
-    * This is a middle-layer class, between the implementing classes and the engine. The
-    * MyMoneyReport class holds only the CONFIGURATION parameters.  This
-    * class has some common methods used by querytable and objectinfo classes
-    *
-    * @author Alvaro Soliverez
-    *
-    * @short
-    **/
+   * If not in expert mode, include all subaccounts for each selected
+   * investment account
+   */
+  void includeInvestmentSubAccounts(void);
 
-  class ListTable : public ReportTable
-  {
-    public:
-      ListTable ( const MyMoneyReport& );
-      QString renderHTML ( void ) const;
-      QString renderCSV ( void ) const;
-      void drawChart ( KReportChartView& ) const {}
-      void dump ( const QString& file, const QString& context = QString() ) const;
-      void init ( void );
+  QList<TableRow> m_rows;
 
-    public:
-    /**
-      * Contains a single row in the table.
-      *
-      * Each column is a key/value pair, both strings.  This class is just
-      * a QMap with the added ability to specify which columns you'd like to
-      * use as a sort key when you qHeapSort a list of these TableRows
-      */
-    class TableRow: public QMap<QString, QString>
-      {
-        public:
-          bool operator< ( const TableRow& ) const;
-          bool operator<= ( const TableRow& ) const;
-          bool operator> ( const TableRow& ) const;
-          bool operator== ( const TableRow& ) const;
+  QString m_group;
+  /**
+   * Comma-separated list of columns to place BEFORE the subtotal column
+   */
+  QString m_columns;
+  /**
+   * Name of the subtotal column
+   */
+  QString m_subtotal;
+  /**
+   * Comma-separated list of columns to place AFTER the subtotal column
+   */
+  QString m_postcolumns;
+  QString m_summarize;
+  QString m_propagate;
 
-          static void setSortCriteria ( const QString& _criteria ) { m_sortCriteria = _criteria.split ( "," ); }
-        private:
-          static QStringList m_sortCriteria;
-      };
-
-      const QList<TableRow>& rows() {return m_rows;};
-
-    protected:
-      void render ( QString&, QString& ) const;
-
-     /**
-      * If not in expert mode, include all subaccounts for each selected
-      * investment account
-      */
-      void includeInvestmentSubAccounts(void);
-
-      QList<TableRow> m_rows;
-
-      QString m_group;
-      /**
-       * Comma-separated list of columns to place BEFORE the subtotal column
-       */
-      QString m_columns;
-      /**
-       * Name of the subtotal column
-       */
-      QString m_subtotal;
-      /**
-       * Comma-separated list of columns to place AFTER the subtotal column
-       */
-      QString m_postcolumns;
-      QString m_summarize;
-      QString m_propagate;
-
-      MyMoneyReport m_config;
+  MyMoneyReport m_config;
 
 
-  };
+};
 
 }
 
-#endif 
+#endif
 

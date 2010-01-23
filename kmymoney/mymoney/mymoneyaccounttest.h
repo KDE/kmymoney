@@ -24,47 +24,48 @@
 #include "mymoneyaccount.h"
 #undef private
 
-class MyMoneyAccountTest : public CppUnit::TestFixture  {
-        CPPUNIT_TEST_SUITE(MyMoneyAccountTest);
-	CPPUNIT_TEST(testEmptyConstructor);
-	CPPUNIT_TEST(testConstructor);
-	CPPUNIT_TEST(testSetFunctions);
-	CPPUNIT_TEST(testCopyConstructor);
-	CPPUNIT_TEST(testAssignmentConstructor);
-	CPPUNIT_TEST(testSubAccounts);
-	CPPUNIT_TEST(testEquality);
-	CPPUNIT_TEST(testWriteXML);
-	CPPUNIT_TEST(testReadXML);
-	CPPUNIT_TEST(testHasReferenceTo);
-	CPPUNIT_TEST(testAdjustBalance);
-	CPPUNIT_TEST(testSetClosed);
-	CPPUNIT_TEST(testIsIncomeExpense);
-	CPPUNIT_TEST(testIsAssetLiability);
-	CPPUNIT_TEST(testIsLoan);
-	CPPUNIT_TEST_SUITE_END();
+class MyMoneyAccountTest : public CppUnit::TestFixture
+{
+  CPPUNIT_TEST_SUITE(MyMoneyAccountTest);
+  CPPUNIT_TEST(testEmptyConstructor);
+  CPPUNIT_TEST(testConstructor);
+  CPPUNIT_TEST(testSetFunctions);
+  CPPUNIT_TEST(testCopyConstructor);
+  CPPUNIT_TEST(testAssignmentConstructor);
+  CPPUNIT_TEST(testSubAccounts);
+  CPPUNIT_TEST(testEquality);
+  CPPUNIT_TEST(testWriteXML);
+  CPPUNIT_TEST(testReadXML);
+  CPPUNIT_TEST(testHasReferenceTo);
+  CPPUNIT_TEST(testAdjustBalance);
+  CPPUNIT_TEST(testSetClosed);
+  CPPUNIT_TEST(testIsIncomeExpense);
+  CPPUNIT_TEST(testIsAssetLiability);
+  CPPUNIT_TEST(testIsLoan);
+  CPPUNIT_TEST_SUITE_END();
 
 protected:
-	MyMoneyAccount	*m;
+  MyMoneyAccount *m;
 
 public:
-	MyMoneyAccountTest();
-	void setUp ();
-	void tearDown ();
-	void testEmptyConstructor();
-	void testConstructor();
-	void testSetFunctions();
-	void testCopyConstructor();
-	void testAssignmentConstructor();
-	void testSubAccounts();
-	void testEquality();
-	void testWriteXML();
-	void testReadXML();
-	void testHasReferenceTo();
-	void testAdjustBalance();
-	void testSetClosed();
-	void testIsIncomeExpense();
-	void testIsAssetLiability();
-	void testIsLoan();
+  MyMoneyAccountTest();
+  void setUp();
+  void tearDown();
+  void testEmptyConstructor();
+  void testConstructor();
+  void testSetFunctions();
+  void testCopyConstructor();
+  void testAssignmentConstructor();
+  void testSubAccounts();
+  void testEquality();
+  void testWriteXML();
+  void testReadXML();
+  void testHasReferenceTo();
+  void testAdjustBalance();
+  void testSetClosed();
+  void testIsIncomeExpense();
+  void testIsAssetLiability();
+  void testIsLoan();
 };
 
 #endif

@@ -60,25 +60,25 @@ class QIODevice;
 // This is a convenience functor to make it easier to use STL algorithms
 // It will return false if the MyMoneyTransaction DOES match the filter.
 // This functor may disappear when all filtering can be handled in SQL.
-class FilterFail {
-  public:
-    FilterFail (const MyMoneyTransactionFilter& filter,
-                   IMyMoneyStorage* storage)
-      : m_filter (filter),
-        m_storage (storage)
-    {}
+class FilterFail
+{
+public:
+  FilterFail(const MyMoneyTransactionFilter& filter,
+             IMyMoneyStorage* storage)
+      : m_filter(filter),
+      m_storage(storage) {}
 
-    inline bool operator() (const QPair<QString, MyMoneyTransaction>& transactionPair)
-    { return (*this) (transactionPair.second); }
+  inline bool operator()(const QPair<QString, MyMoneyTransaction>& transactionPair) {
+    return (*this)(transactionPair.second);
+  }
 
-    inline bool operator() (const MyMoneyTransaction& transaction)
-    {
-      return (! m_filter.match(transaction)) && (m_filter.matchingSplits().count() == 0);
-    }
+  inline bool operator()(const MyMoneyTransaction& transaction) {
+    return (! m_filter.match(transaction)) && (m_filter.matchingSplits().count() == 0);
+  }
 
-  private:
-    MyMoneyTransactionFilter m_filter;
-    IMyMoneyStorage *m_storage;
+private:
+  MyMoneyTransactionFilter m_filter;
+  IMyMoneyStorage *m_storage;
 };
 
 /**
@@ -103,118 +103,132 @@ class MyMoneyStorageSql;
   * a way to adjust some queries based on databaseTypeE and make
   * debugging easier by providing a place to put debug statements.
   */
-class MyMoneySqlQuery : public QSqlQuery {
-  public:
-    MyMoneySqlQuery (MyMoneyStorageSql* db = 0);
-    virtual ~MyMoneySqlQuery();
-    bool exec ();
-    bool exec ( const QString & query );
-    bool prepare ( const QString & query );
-  private:
-    const MyMoneyStorageSql* m_db;
+class MyMoneySqlQuery : public QSqlQuery
+{
+public:
+  MyMoneySqlQuery(MyMoneyStorageSql* db = 0);
+  virtual ~MyMoneySqlQuery();
+  bool exec();
+  bool exec(const QString & query);
+  bool prepare(const QString & query);
+private:
+  const MyMoneyStorageSql* m_db;
 };
 
 /**
   * The MyMoneyDbDrivers class is a map from string to enum of db types.
   */
-class MyMoneyDbDrivers {
-  public:
-    MyMoneyDbDrivers ();
-    /**
-      *  @return a list ofsupported Qt database driver types, their qt names and useful names
-      **/
-    const QMap<QString, QString> driverMap() const {return (m_driverMap);};
-    databaseTypeE driverToType (const QString& driver) const;
-    bool isTested (databaseTypeE dbType) const;
- private:
-    QMap<QString, QString> m_driverMap;
+class MyMoneyDbDrivers
+{
+public:
+  MyMoneyDbDrivers();
+  /**
+    *  @return a list ofsupported Qt database driver types, their qt names and useful names
+    **/
+  const QMap<QString, QString> driverMap() const {
+    return (m_driverMap);
+  };
+  databaseTypeE driverToType(const QString& driver) const;
+  bool isTested(databaseTypeE dbType) const;
+private:
+  QMap<QString, QString> m_driverMap;
 };
 
 /**
   * The MyMoneyDbColumn class is a base type for generic db columns.
   * Derived types exist for several common column types.
   */
-class MyMoneyDbColumn : public KShared {
-  public:
-    explicit MyMoneyDbColumn (const QString& iname,
-             const QString& itype = QString(),
-             const bool iprimary = false,
-             const bool inotnull = false,
-             const QString &initVersion = "0.1"):
-    m_name(iname),
-    m_type(itype),
-    m_isPrimary(iprimary),
-    m_isNotNull(inotnull),
-    m_initVersion(initVersion) {}
-    MyMoneyDbColumn (void) {}
-    virtual ~MyMoneyDbColumn () {}
+class MyMoneyDbColumn : public KShared
+{
+public:
+  explicit MyMoneyDbColumn(const QString& iname,
+                           const QString& itype = QString(),
+                           const bool iprimary = false,
+                           const bool inotnull = false,
+                           const QString &initVersion = "0.1"):
+      m_name(iname),
+      m_type(itype),
+      m_isPrimary(iprimary),
+      m_isNotNull(inotnull),
+      m_initVersion(initVersion) {}
+  MyMoneyDbColumn(void) {}
+  virtual ~MyMoneyDbColumn() {}
 
-    /**
-      * This method is used to copy column objects. Because there are several derived types,
-      * clone() is more appropriate than a copy ctor in most cases.
-      */
-    virtual MyMoneyDbColumn* clone () const;
+  /**
+    * This method is used to copy column objects. Because there are several derived types,
+    * clone() is more appropriate than a copy ctor in most cases.
+    */
+  virtual MyMoneyDbColumn* clone() const;
 
-    /**
-      * This method generates the DDL (Database Design Language) string for the column.
-      *
-      * @param dbType Database driver type
-      *
-      * @return QString of the DDL for the column, tailored for what the driver supports.
-      */
-    virtual const QString generateDDL (databaseTypeE dbType) const;
+  /**
+    * This method generates the DDL (Database Design Language) string for the column.
+    *
+    * @param dbType Database driver type
+    *
+    * @return QString of the DDL for the column, tailored for what the driver supports.
+    */
+  virtual const QString generateDDL(databaseTypeE dbType) const;
 
-    const QString& name(void) const {return (m_name);}
-    const QString& type(void) const {return (m_type);}
-    bool isPrimaryKey(void) const {return (m_isPrimary);}
-    bool isNotNull(void) const {return (m_isNotNull);}
-  private:
-    QString m_name;
-    QString m_type;
-    bool m_isPrimary;
-    bool m_isNotNull;
-    QString m_initVersion;
+  const QString& name(void) const {
+    return (m_name);
+  }
+  const QString& type(void) const {
+    return (m_type);
+  }
+  bool isPrimaryKey(void) const {
+    return (m_isPrimary);
+  }
+  bool isNotNull(void) const {
+    return (m_isNotNull);
+  }
+private:
+  QString m_name;
+  QString m_type;
+  bool m_isPrimary;
+  bool m_isNotNull;
+  QString m_initVersion;
 };
 
 /**
   * The MyMoneyDbDatetimeColumn class is a representation of datetime columns.
   */
-class MyMoneyDbDatetimeColumn : public MyMoneyDbColumn {
-  public:
-    explicit MyMoneyDbDatetimeColumn (const QString& iname,
-                             const bool iprimary = false,
-                             const bool inotnull = false,
-                             const QString &initVersion = "0.1"):
-            MyMoneyDbColumn (iname, "", iprimary, inotnull, initVersion)
-            {}
-    virtual ~MyMoneyDbDatetimeColumn() {}
-    virtual const QString generateDDL (databaseTypeE dbType) const;
-    virtual MyMoneyDbDatetimeColumn* clone () const;
-  private:
-    static const QString calcType(void);
+class MyMoneyDbDatetimeColumn : public MyMoneyDbColumn
+{
+public:
+  explicit MyMoneyDbDatetimeColumn(const QString& iname,
+                                   const bool iprimary = false,
+                                   const bool inotnull = false,
+                                   const QString &initVersion = "0.1"):
+      MyMoneyDbColumn(iname, "", iprimary, inotnull, initVersion) {}
+  virtual ~MyMoneyDbDatetimeColumn() {}
+  virtual const QString generateDDL(databaseTypeE dbType) const;
+  virtual MyMoneyDbDatetimeColumn* clone() const;
+private:
+  static const QString calcType(void);
 };
 
 /**
   * The MyMoneyDbColumn class is a representation of integer db columns.
   */
-class MyMoneyDbIntColumn : public MyMoneyDbColumn {
-  public:
-    enum size {TINY, SMALL, MEDIUM, BIG};
-    explicit MyMoneyDbIntColumn (const QString& iname,
-                        const size type = MEDIUM,
-                        const bool isigned = true,
-                        const bool iprimary = false,
-                        const bool inotnull = false,
-             const QString &initVersion = "0.1"):
-        MyMoneyDbColumn (iname, "", iprimary, inotnull, initVersion),
-    m_type  (type),
-    m_isSigned (isigned) {}
-    virtual ~MyMoneyDbIntColumn() {}
-    virtual const QString generateDDL (databaseTypeE dbType) const;
-    virtual MyMoneyDbIntColumn* clone () const;
-  private:
-    size m_type;
-    bool m_isSigned;
+class MyMoneyDbIntColumn : public MyMoneyDbColumn
+{
+public:
+  enum size {TINY, SMALL, MEDIUM, BIG};
+  explicit MyMoneyDbIntColumn(const QString& iname,
+                              const size type = MEDIUM,
+                              const bool isigned = true,
+                              const bool iprimary = false,
+                              const bool inotnull = false,
+                              const QString &initVersion = "0.1"):
+      MyMoneyDbColumn(iname, "", iprimary, inotnull, initVersion),
+      m_type(type),
+      m_isSigned(isigned) {}
+  virtual ~MyMoneyDbIntColumn() {}
+  virtual const QString generateDDL(databaseTypeE dbType) const;
+  virtual MyMoneyDbIntColumn* clone() const;
+private:
+  size m_type;
+  bool m_isSigned;
 };
 
 /**
@@ -222,21 +236,22 @@ class MyMoneyDbIntColumn : public MyMoneyDbColumn {
   * for drivers that support it.  If the driver does not support it, it is
   * usually some sort of really large varchar or varchar2.
   */
-class MyMoneyDbTextColumn : public MyMoneyDbColumn {
-  public:
-    enum size {TINY, NORMAL, MEDIUM, LONG};
-    explicit MyMoneyDbTextColumn (const QString& iname,
-                         const size type = MEDIUM,
-                         const bool iprimary = false,
-                         const bool inotnull = false,
-             const QString &initVersion = "0.1"):
-        MyMoneyDbColumn (iname, "", iprimary, inotnull, initVersion),
-    m_type  (type) {}
-    virtual ~MyMoneyDbTextColumn() {}
-    virtual const QString generateDDL (databaseTypeE dbType) const;
-    virtual MyMoneyDbTextColumn* clone () const;
-  private:
-    size m_type;
+class MyMoneyDbTextColumn : public MyMoneyDbColumn
+{
+public:
+  enum size {TINY, NORMAL, MEDIUM, LONG};
+  explicit MyMoneyDbTextColumn(const QString& iname,
+                               const size type = MEDIUM,
+                               const bool iprimary = false,
+                               const bool inotnull = false,
+                               const QString &initVersion = "0.1"):
+      MyMoneyDbColumn(iname, "", iprimary, inotnull, initVersion),
+      m_type(type) {}
+  virtual ~MyMoneyDbTextColumn() {}
+  virtual const QString generateDDL(databaseTypeE dbType) const;
+  virtual MyMoneyDbTextColumn* clone() const;
+private:
+  size m_type;
 };
 
 /**
@@ -248,28 +263,36 @@ class MyMoneyDbTextColumn : public MyMoneyDbColumn {
   * At this time, different types of index are not supported, since the portability
   * is fairly limited.
   */
-class MyMoneyDbIndex {
-  public:
-    MyMoneyDbIndex (const QString& table,
-                    const QString& name,
-                    const QStringList& columns,
-                    bool unique = false):
+class MyMoneyDbIndex
+{
+public:
+  MyMoneyDbIndex(const QString& table,
+                 const QString& name,
+                 const QStringList& columns,
+                 bool unique = false):
       m_table(table),
       m_unique(unique),
       m_name(name),
-      m_columns(columns)
-      {}
-    MyMoneyDbIndex () {}
-    inline const QString table () const {return m_table;}
-    inline bool isUnique () const {return m_unique;}
-    inline const QString name () const {return m_name;}
-    inline const QStringList columns () const {return m_columns;}
-    const QString generateDDL (databaseTypeE dbType) const;
-  private:
-    QString m_table;
-    bool m_unique;
-    QString m_name;
-    QStringList m_columns;
+      m_columns(columns) {}
+  MyMoneyDbIndex() {}
+  inline const QString table() const {
+    return m_table;
+  }
+  inline bool isUnique() const {
+    return m_unique;
+  }
+  inline const QString name() const {
+    return m_name;
+  }
+  inline const QStringList columns() const {
+    return m_columns;
+  }
+  const QString generateDDL(databaseTypeE dbType) const;
+private:
+  QString m_table;
+  bool m_unique;
+  QString m_name;
+  QStringList m_columns;
 };
 
 /**
@@ -281,90 +304,104 @@ class MyMoneyDbIndex {
   *
   * Const iterators over the list of columns are provided as a convenience.
   */
-class MyMoneyDbTable {
-  public:
-    MyMoneyDbTable (const QString& iname,
-             const QList<KSharedPtr <MyMoneyDbColumn> >& ifields,
-             const QString& initVersion = "1.0"):
-    m_name(iname),
-    m_fields(ifields),
-    m_initVersion(initVersion) {}
-    MyMoneyDbTable (void) {}
+class MyMoneyDbTable
+{
+public:
+  MyMoneyDbTable(const QString& iname,
+                 const QList<KSharedPtr <MyMoneyDbColumn> >& ifields,
+                 const QString& initVersion = "1.0"):
+      m_name(iname),
+      m_fields(ifields),
+      m_initVersion(initVersion) {}
+  MyMoneyDbTable(void) {}
 
-    inline const QString& name(void) const {return (m_name);}
-    inline const QString& insertString(void) const {return (m_insertString);};
-    inline const QString selectAllString(bool terminate = true) const
-      {return (terminate ? QString(m_selectAllString + ";") : m_selectAllString);};
-    inline const QString& updateString(void) const {return (m_updateString);};
-    inline const QString& deleteString(void) const {return (m_deleteString);};
+  inline const QString& name(void) const {
+    return (m_name);
+  }
+  inline const QString& insertString(void) const {
+    return (m_insertString);
+  };
+  inline const QString selectAllString(bool terminate = true) const {
+    return (terminate ? QString(m_selectAllString + ";") : m_selectAllString);
+  };
+  inline const QString& updateString(void) const {
+    return (m_updateString);
+  };
+  inline const QString& deleteString(void) const {
+    return (m_deleteString);
+  };
 
-    /**
-      * This method determines the string required to drop the primary key for the table
-      * based on the db specific syntax.
-      *
-      * @param dbType The driver type of the database.
-      *
-      * @return QString for the syntax to drop the primary key.
-      */
-    const QString dropPrimaryKeyString(databaseTypeE dbType) const;
-    /**
-      * This method returns a comma-separated list of all column names in the table
-      *
-      * @return QString column list.
-      */
-    const QString columnList() const;
-    /**
-      * This method returns the string for changing a column's definition.  It covers statements
-      * like ALTER TABLE..CHANGE COLUMN, MODIFY COLUMN, etc.
-      *
-      * @param dbType The driver type of the database.
-      * @param columnName The name of the column to be modified.
-      * @param newDef The MyMoneyColumn object of the new column definition.
-      *
-      * @return QString containing DDL to change the column.
-      */
-    const QString modifyColumnString(databaseTypeE dbType, const QString& columnName, const MyMoneyDbColumn& newDef) const;
+  /**
+    * This method determines the string required to drop the primary key for the table
+    * based on the db specific syntax.
+    *
+    * @param dbType The driver type of the database.
+    *
+    * @return QString for the syntax to drop the primary key.
+    */
+  const QString dropPrimaryKeyString(databaseTypeE dbType) const;
+  /**
+    * This method returns a comma-separated list of all column names in the table
+    *
+    * @return QString column list.
+    */
+  const QString columnList() const;
+  /**
+    * This method returns the string for changing a column's definition.  It covers statements
+    * like ALTER TABLE..CHANGE COLUMN, MODIFY COLUMN, etc.
+    *
+    * @param dbType The driver type of the database.
+    * @param columnName The name of the column to be modified.
+    * @param newDef The MyMoneyColumn object of the new column definition.
+    *
+    * @return QString containing DDL to change the column.
+    */
+  const QString modifyColumnString(databaseTypeE dbType, const QString& columnName, const MyMoneyDbColumn& newDef) const;
 
-    /**
-      * This method builds all of the SQL strings for common operations.
-      */
-    void buildSQLStrings(void);
+  /**
+    * This method builds all of the SQL strings for common operations.
+    */
+  void buildSQLStrings(void);
 
-    /**
-      * This method generates the DDL required to create the table.
-      *
-      * @param dbType The driver type of the database.
-      *
-      * @return QString of the DDL.
-      */
-    const QString generateCreateSQL (databaseTypeE dbType) const;
+  /**
+    * This method generates the DDL required to create the table.
+    *
+    * @param dbType The driver type of the database.
+    *
+    * @return QString of the DDL.
+    */
+  const QString generateCreateSQL(databaseTypeE dbType) const;
 
-    /**
-      * This method creates a MyMoneyDbIndex object and adds it to the list of indices for the table.
-      *
-      * @param name The name of the index.
-      * @param columns The list of the columns affected.
-      * @param unique Whether or not this should be a unique index.
-      */
-    void addIndex(const QString& name, const QStringList& columns, bool unique = false);
+  /**
+    * This method creates a MyMoneyDbIndex object and adds it to the list of indices for the table.
+    *
+    * @param name The name of the index.
+    * @param columns The list of the columns affected.
+    * @param unique Whether or not this should be a unique index.
+    */
+  void addIndex(const QString& name, const QStringList& columns, bool unique = false);
 
-    typedef QList<KSharedPtr <MyMoneyDbColumn> >::const_iterator field_iterator;
-    inline field_iterator begin(void) const {return m_fields.constBegin();}
-    inline field_iterator end(void) const {return m_fields.constEnd(); }
+  typedef QList<KSharedPtr <MyMoneyDbColumn> >::const_iterator field_iterator;
+  inline field_iterator begin(void) const {
+    return m_fields.constBegin();
+  }
+  inline field_iterator end(void) const {
+    return m_fields.constEnd();
+  }
 
-    int fieldNumber (const QString& name) const;
-  private:
-    QString m_name;
-    QList<KSharedPtr <MyMoneyDbColumn> > m_fields;
-    QHash<QString, int> m_fieldOrder;
+  int fieldNumber(const QString& name) const;
+private:
+  QString m_name;
+  QList<KSharedPtr <MyMoneyDbColumn> > m_fields;
+  QHash<QString, int> m_fieldOrder;
 
-    typedef QList<MyMoneyDbIndex>::const_iterator index_iterator;
-    QList<MyMoneyDbIndex> m_indices;
-    QString m_initVersion;
-    QString m_insertString; // string to insert a record
-    QString m_selectAllString; // to select all fields
-    QString m_updateString;  // normal string for record update
-    QString m_deleteString; // string to delete 1 record
+  typedef QList<MyMoneyDbIndex>::const_iterator index_iterator;
+  QList<MyMoneyDbIndex> m_indices;
+  QString m_initVersion;
+  QString m_insertString; // string to insert a record
+  QString m_selectAllString; // to select all fields
+  QString m_updateString;  // normal string for record update
+  QString m_deleteString; // string to delete 1 record
 };
 
 /**
@@ -374,50 +411,66 @@ class MyMoneyDbTable {
   * to do anything more complex than storing the name of the view and
   * the CREATE VIEW string.
   */
-class MyMoneyDbView {
-  public:
-    MyMoneyDbView (const QString& name,
-                   const QString& createString,
-                   const QString& initVersion = "0.1")
-    : m_name (name), m_createString (createString), m_initVersion (initVersion)
-    {}
+class MyMoneyDbView
+{
+public:
+  MyMoneyDbView(const QString& name,
+                const QString& createString,
+                const QString& initVersion = "0.1")
+      : m_name(name), m_createString(createString), m_initVersion(initVersion) {}
 
-    MyMoneyDbView (void) {}
+  MyMoneyDbView(void) {}
 
-    inline const QString& name(void) const {return (m_name);}
-    inline const QString createString(void) const {return (m_createString);};
+  inline const QString& name(void) const {
+    return (m_name);
+  }
+  inline const QString createString(void) const {
+    return (m_createString);
+  };
 
-  private:
-    QString m_name;
-    QString m_createString;
-    QString m_initVersion;
+private:
+  QString m_name;
+  QString m_createString;
+  QString m_initVersion;
 };
 
 /**
   * The MyMoneyDbDef class is
   */
-class MyMoneyDbDef  {
+class MyMoneyDbDef
+{
   friend class MyMoneyStorageSql;
   friend class MyMoneyDatabaseMgr;
 public:
-    MyMoneyDbDef();
-    ~MyMoneyDbDef() {}
+  MyMoneyDbDef();
+  ~MyMoneyDbDef() {}
 
-    const QString generateSQL (const QString& driver) const;
+  const QString generateSQL(const QString& driver) const;
 
-    typedef QMap<QString, MyMoneyDbTable>::const_iterator table_iterator;
-    inline table_iterator tableBegin(void) const {return m_tables.constBegin();}
-    inline table_iterator tableEnd(void) const {return m_tables.constEnd();}
+  typedef QMap<QString, MyMoneyDbTable>::const_iterator table_iterator;
+  inline table_iterator tableBegin(void) const {
+    return m_tables.constBegin();
+  }
+  inline table_iterator tableEnd(void) const {
+    return m_tables.constEnd();
+  }
 
-    typedef QMap<QString, MyMoneyDbView>::const_iterator view_iterator;
-    inline view_iterator viewBegin(void) const {return m_views.constBegin();}
-    inline view_iterator viewEnd(void) const {return m_views.constEnd();}
+  typedef QMap<QString, MyMoneyDbView>::const_iterator view_iterator;
+  inline view_iterator viewBegin(void) const {
+    return m_views.constBegin();
+  }
+  inline view_iterator viewEnd(void) const {
+    return m_views.constEnd();
+  }
 
-    inline unsigned int currentVersion() const {return (m_currentVersion);};
+  inline unsigned int currentVersion() const {
+    return (m_currentVersion);
+  };
 
 private:
-  const QString enclose(const QString& text) const
-  {return (QString("'" + text + "'"));}
+  const QString enclose(const QString& text) const {
+    return (QString("'" + text + "'"));
+  }
 
   static unsigned int m_currentVersion; // The current version of the database layout
   MyMoneyDbDrivers m_drivers;
@@ -449,26 +502,31 @@ class IMyMoneySerialize;
   * The MyMoneyDbColumn class is a base type for generic db columns.
   * Derived types exist for several common column types.
   */
-class MyMoneyStorageSql : public IMyMoneyStorageFormat, public QSqlDatabase, public KShared {
+class MyMoneyStorageSql : public IMyMoneyStorageFormat, public QSqlDatabase, public KShared
+{
 public:
 
-  explicit MyMoneyStorageSql (IMyMoneySerialize *storage, const KUrl& = KUrl());
-  virtual ~MyMoneyStorageSql() {close(true);}
+  explicit MyMoneyStorageSql(IMyMoneySerialize *storage, const KUrl& = KUrl());
+  virtual ~MyMoneyStorageSql() {
+    close(true);
+  }
 
-  unsigned int currentVersion() const {return (m_db.currentVersion());};
+  unsigned int currentVersion() const {
+    return (m_db.currentVersion());
+  };
 
-    /**
-   * MyMoneyStorageSql - open database file
-   *
-   * @param url pseudo-URL of database to be opened
-   * @param openMode open mode, same as for QFile::open
-   * @param clear whether existing data can be deleted
+  /**
+  * MyMoneyStorageSql - open database file
+  *
+  * @param url pseudo-URL of database to be opened
+  * @param openMode open mode, same as for QFile::open
+  * @param clear whether existing data can be deleted
 
-   * @return 0 - database successfully opened
-   * @return 1 - database not opened, use lastError function for reason
-   * @return -1 - output database not opened, contains data, clean not specified
-   *
-     */
+  * @return 0 - database successfully opened
+  * @return 1 - database not opened, use lastError function for reason
+  * @return -1 - output database not opened, contains data, clean not specified
+  *
+   */
   int open(const KUrl& url, int openMode, bool clear = false);
   /**
    * MyMoneyStorageSql close the database
@@ -493,22 +551,40 @@ public:
   bool writeFile(void);
 
   // check database type
-  inline bool isDb2() const { return (m_dbType == Db2);};
-  inline bool isInterbase() const { return (m_dbType == Interbase);};
-  inline bool isMysql() const { return (m_dbType == Mysql);};
-  inline bool isOracle() const { return (m_dbType == Oracle);};
-  inline bool isODBC() const { return (m_dbType == ODBC);};
-  inline bool isPostgresql() const { return (m_dbType == Postgresql);};
-  inline bool isSybase() const { return (m_dbType == Sybase);};
-  inline bool isSqlite3() const { return (m_dbType == Sqlite3);};
+  inline bool isDb2() const {
+    return (m_dbType == Db2);
+  };
+  inline bool isInterbase() const {
+    return (m_dbType == Interbase);
+  };
+  inline bool isMysql() const {
+    return (m_dbType == Mysql);
+  };
+  inline bool isOracle() const {
+    return (m_dbType == Oracle);
+  };
+  inline bool isODBC() const {
+    return (m_dbType == ODBC);
+  };
+  inline bool isPostgresql() const {
+    return (m_dbType == Postgresql);
+  };
+  inline bool isSybase() const {
+    return (m_dbType == Sybase);
+  };
+  inline bool isSqlite3() const {
+    return (m_dbType == Sqlite3);
+  };
 
-    /**
-   * MyMoneyStorageSql generalized error routine
-   *
-   * @return : error message to be displayed
-   *
-     */
-  const QString& lastError() const {return (m_error);};
+  /**
+  * MyMoneyStorageSql generalized error routine
+  *
+  * @return : error message to be displayed
+  *
+   */
+  const QString& lastError() const {
+    return (m_error);
+  };
   /**
    * This method is used when a database file is open, and the data is to
    * be saved in a different file or format. It will ensure that all data
@@ -550,25 +626,26 @@ public:
   void modifyBudget(const MyMoneyBudget& bud);
   void removeBudget(const MyMoneyBudget& bud);
 
-  unsigned long transactionCount  (const QString& aid = QString()) const;
-  inline const QHash<QString, unsigned long> transactionCountMap () const
-      {return (m_transactionCountMap);};
+  unsigned long transactionCount(const QString& aid = QString()) const;
+  inline const QHash<QString, unsigned long> transactionCountMap() const {
+    return (m_transactionCountMap);
+  };
   /**
     * the storage manager also needs the following read entry points
     */
-  const QMap<QString, MyMoneyAccount> fetchAccounts (const QStringList& idList = QStringList (), bool forUpdate = false) const;
+  const QMap<QString, MyMoneyAccount> fetchAccounts(const QStringList& idList = QStringList(), bool forUpdate = false) const;
   const QMap<QString, MyMoneyMoney> fetchBalance(const QStringList& id, const QDate& date) const;
-  const QMap<QString, MyMoneyBudget> fetchBudgets (const QStringList& idList = QStringList (), bool forUpdate = false) const;
-  const QMap<QString, MyMoneySecurity> fetchCurrencies (const QStringList& idList = QStringList (), bool forUpdate = false) const;
-  const QMap<QString, MyMoneyInstitution> fetchInstitutions (const QStringList& idList = QStringList (), bool forUpdate = false) const;
-  const QMap<QString, MyMoneyPayee> fetchPayees (const QStringList& idList = QStringList (), bool forUpdate = false) const;
-  const MyMoneyPriceList fetchPrices (const QStringList& fromIdList = QStringList (), const QStringList& toIdList = QStringList(), bool forUpdate = false) const;
-  const MyMoneyPrice fetchSinglePrice (const QString& fromIdList, const QString& toIdList, const QDate& date, bool exactDate, bool forUpdate = false) const;
-  const QMap<QString, MyMoneyReport> fetchReports (const QStringList& idList = QStringList (), bool forUpdate = false) const;
-  const QMap<QString, MyMoneySchedule> fetchSchedules (const QStringList& idList = QStringList (), bool forUpdate = false) const;
-  const QMap<QString, MyMoneySecurity> fetchSecurities (const QStringList& idList = QStringList (), bool forUpdate = false) const;
-  const QMap<QString, MyMoneyTransaction> fetchTransactions (const QString& tidList = QString (), const QString& dateClause = QString(), bool forUpdate = false) const;
-  const QMap<QString, MyMoneyTransaction> fetchTransactions (const MyMoneyTransactionFilter& filter) const;
+  const QMap<QString, MyMoneyBudget> fetchBudgets(const QStringList& idList = QStringList(), bool forUpdate = false) const;
+  const QMap<QString, MyMoneySecurity> fetchCurrencies(const QStringList& idList = QStringList(), bool forUpdate = false) const;
+  const QMap<QString, MyMoneyInstitution> fetchInstitutions(const QStringList& idList = QStringList(), bool forUpdate = false) const;
+  const QMap<QString, MyMoneyPayee> fetchPayees(const QStringList& idList = QStringList(), bool forUpdate = false) const;
+  const MyMoneyPriceList fetchPrices(const QStringList& fromIdList = QStringList(), const QStringList& toIdList = QStringList(), bool forUpdate = false) const;
+  const MyMoneyPrice fetchSinglePrice(const QString& fromIdList, const QString& toIdList, const QDate& date, bool exactDate, bool forUpdate = false) const;
+  const QMap<QString, MyMoneyReport> fetchReports(const QStringList& idList = QStringList(), bool forUpdate = false) const;
+  const QMap<QString, MyMoneySchedule> fetchSchedules(const QStringList& idList = QStringList(), bool forUpdate = false) const;
+  const QMap<QString, MyMoneySecurity> fetchSecurities(const QStringList& idList = QStringList(), bool forUpdate = false) const;
+  const QMap<QString, MyMoneyTransaction> fetchTransactions(const QString& tidList = QString(), const QString& dateClause = QString(), bool forUpdate = false) const;
+  const QMap<QString, MyMoneyTransaction> fetchTransactions(const MyMoneyTransactionFilter& filter) const;
   bool isReferencedByTransaction(const QString& id) const;
 
   void readPayees(const QString&);
@@ -576,12 +653,16 @@ public:
   void readTransactions(const MyMoneyTransactionFilter& filter);
   void setProgressCallback(void(*callback)(int, int, const QString&));
 
-  virtual void readFile(QIODevice* s, IMyMoneySerialize* storage) { Q_UNUSED(s); Q_UNUSED(storage) };
-  virtual void writeFile(QIODevice* s, IMyMoneySerialize* storage){ Q_UNUSED(s); Q_UNUSED(storage) };
+  virtual void readFile(QIODevice* s, IMyMoneySerialize* storage) {
+    Q_UNUSED(s); Q_UNUSED(storage)
+  };
+  virtual void writeFile(QIODevice* s, IMyMoneySerialize* storage) {
+    Q_UNUSED(s); Q_UNUSED(storage)
+  };
 
-  void startCommitUnit (const QString& callingFunction);
-  bool endCommitUnit (const QString& callingFunction);
-  void cancelCommitUnit (const QString& callingFunction);
+  void startCommitUnit(const QString& callingFunction);
+  bool endCommitUnit(const QString& callingFunction);
+  void cancelCommitUnit(const QString& callingFunction);
 
   long unsigned getRecCount(const QString& table) const;
   long unsigned getNextBudgetId() const;
@@ -613,11 +694,11 @@ public:
 
 private:
   //void init(void);
-  bool sqliteExists (const QString& dbName);
+  bool sqliteExists(const QString& dbName);
   // a function to build a comprehensive error message
-  QString& buildError (const QSqlQuery& q, const QString& function, const QString& message) const;
-  QString& buildError (const QSqlQuery& q, const QString& function, const QString& message,
-                       const QSqlDatabase*) const;
+  QString& buildError(const QSqlQuery& q, const QString& function, const QString& message) const;
+  QString& buildError(const QSqlQuery& q, const QString& function, const QString& message,
+                      const QSqlDatabase*) const;
   // write routines
   void writeUserInformation(void);
   void writeInstitutions(void);
@@ -634,17 +715,17 @@ private:
 
   void writeInstitution(const MyMoneyInstitution& i, MyMoneySqlQuery& q);
   void writePayee(const MyMoneyPayee& p, MyMoneySqlQuery& q, bool isUserInfo = false);
-  void writeAccount (const MyMoneyAccount& a, MyMoneySqlQuery& q);
+  void writeAccount(const MyMoneyAccount& a, MyMoneySqlQuery& q);
   void writeTransaction(const QString& txId, const MyMoneyTransaction& tx, MyMoneySqlQuery& q, const QString& type);
   void writeSplits(const QString& txId, const QString& type, const QList<MyMoneySplit>& splitList);
   void writeSplit(const QString& txId, const MyMoneySplit& split, const QString& type, const int splitId, MyMoneySqlQuery& q);
   void writeSchedule(const MyMoneySchedule& sch, MyMoneySqlQuery& q, bool insert);
   void writeSecurity(const MyMoneySecurity& security, MyMoneySqlQuery& q);
-  void writePricePair ( const MyMoneyPriceEntries& p);
-  void writePrice (const MyMoneyPrice& p);
+  void writePricePair(const MyMoneyPriceEntries& p);
+  void writePrice(const MyMoneyPrice& p);
   void writeCurrency(const MyMoneySecurity& currency, MyMoneySqlQuery& q);
-  void writeReport (const MyMoneyReport& rep, MyMoneySqlQuery& q);
-  void writeBudget (const MyMoneyBudget& bud, MyMoneySqlQuery& q);
+  void writeReport(const MyMoneyReport& rep, MyMoneySqlQuery& q);
+  void writeBudget(const MyMoneyBudget& bud, MyMoneySqlQuery& q);
   void writeKeyValuePairs(const QString& kvpType, const QString& kvpId, const QMap<QString, QString>& pairs);
 
   // read routines
@@ -656,9 +737,9 @@ private:
   void readTransaction(const QString id);
   void readTransactions(const QString& tidList = QString(), const QString& dateClause = QString());
   void readTransaction(MyMoneyTransaction &tx, const QString& tid);
-  void readSplit (MyMoneySplit& s, const MyMoneySqlQuery& q) const;
-  const MyMoneyKeyValueContainer readKeyValuePairs (const QString& kvpType, const QString& kvpId) const;
-  const QHash<QString, MyMoneyKeyValueContainer> readKeyValuePairs (const QString& kvpType, const QStringList& kvpIdList) const;
+  void readSplit(MyMoneySplit& s, const MyMoneySqlQuery& q) const;
+  const MyMoneyKeyValueContainer readKeyValuePairs(const QString& kvpType, const QString& kvpId) const;
+  const QHash<QString, MyMoneyKeyValueContainer> readKeyValuePairs(const QString& kvpType, const QStringList& kvpIdList) const;
   void readSchedules(void);
   void readSecurities(void);
   void readPrices(void);
@@ -669,9 +750,9 @@ private:
   void deleteTransaction(const QString& id);
   void deleteSchedule(const QString& id);
   void deleteKeyValuePairs(const QString& kvpType, const QString& kvpId);
-  long unsigned calcHighId (const long unsigned&, const QString&);
+  long unsigned calcHighId(const long unsigned&, const QString&);
 
-  void setVersion (const QString& version);
+  void setVersion(const QString& version);
 
   void signalProgress(int current, int total, const QString& = "") const;
   void (*m_progressCallback)(int, int, const QString&);
@@ -681,11 +762,11 @@ private:
   //void cancelCommitUnit (const QString& callingFunction);
   int splitState(const MyMoneyTransactionFilter::stateOptionE& state) const;
 
-  inline const QDate getDate (const QString& date) const {
+  inline const QDate getDate(const QString& date) const {
     return (date.isNull() ? QDate() : QDate::fromString(date, Qt::ISODate));
   }
 
-  inline const QDateTime getDateTime (const QString& date) const {
+  inline const QDateTime getDateTime(const QString& date) const {
     return (date.isNull() ? QDateTime() : QDateTime::fromString(date, Qt::ISODate));
   }
 
@@ -721,7 +802,7 @@ private:
 //  long long unsigned getRecCount(const QString& table);
   int createTables();
   void createTable(const MyMoneyDbTable& t);
-  void clean ();
+  void clean();
   int isEmpty();
   // data
   MyMoneyDbDrivers m_drivers;
@@ -786,7 +867,9 @@ private:
     */
 //  QList<QString> m_payeeList;
 
-  void alert(QString s) const {qDebug() << s;}; // FIXME: remove...
+  void alert(QString s) const {
+    qDebug() << s;
+  }; // FIXME: remove...
   /** The following keeps track of commitment units (known as transactions in SQL
     * though it would be confusing to use that term within KMM). It is implemented
     * as a stack for debug purposes. Long term, probably a count would suffice
@@ -818,7 +901,7 @@ private:
   QDate m_txPostDate; // FIXME: remove when Tom puts date into split object
 
   //Disable copying
-  MyMoneyStorageSql (const MyMoneyStorageSql& rhs);
+  MyMoneyStorageSql(const MyMoneyStorageSql& rhs);
   MyMoneyStorageSql& operator= (const MyMoneyStorageSql& rhs);
   bool m_newDatabase;
 };

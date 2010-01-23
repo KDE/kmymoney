@@ -34,7 +34,7 @@ using namespace KHolidays;
 #include "kmymoney/kmymoneyglobalsettings.h"
 
 KSettingsSchedules::KSettingsSchedules(QWidget* parent) :
-  KSettingsSchedulesDecl(parent)
+    KSettingsSchedulesDecl(parent)
 {
   // hide the internally used holidayRegion field
   kcfg_HolidayRegion->hide();
@@ -53,13 +53,11 @@ void KSettingsSchedules::loadList(void)
   QStringList countries = HolidayRegion::locations();
   QStringList regions;
 
-  foreach (const QString &country, countries)
-  {
+  foreach(const QString &country, countries) {
     QString file = KStandardDirs::locate("locale",
                                          "l10n/" + country + "/entry.desktop");
     QString region;
-    if (!file.isEmpty())
-    {
+    if (!file.isEmpty()) {
       KConfig entry(file, KConfig::SimpleConfig);
       KConfigGroup grp = entry.group("KCM Locale");
       region = grp.readEntry("Name");
@@ -88,8 +86,7 @@ void KSettingsSchedules::slotLoadRegion(const QString &region)
   int i = 0;
   if (!region.isEmpty())
     i = m_holidayRegion->findText(m_regionMap.key(region));
-  if ((i > -1) && (i != m_holidayRegion->currentIndex()))
-  {
+  if ((i > -1) && (i != m_holidayRegion->currentIndex())) {
     m_holidayRegion->blockSignals(true);
     m_holidayRegion->setCurrentIndex(i);
     m_holidayRegion->blockSignals(false);

@@ -47,8 +47,8 @@
 class KCurrencyEditDlgDecl : public QDialog, public Ui::KCurrencyEditDlgDecl
 {
 public:
-  KCurrencyEditDlgDecl( QWidget *parent ) : QDialog( parent ) {
-    setupUi( this );
+  KCurrencyEditDlgDecl(QWidget *parent) : QDialog(parent) {
+    setupUi(this);
   }
 };
 
@@ -56,7 +56,7 @@ class KCurrencyEditDlg : public KCurrencyEditDlgDecl
 {
   Q_OBJECT
 public:
-  KCurrencyEditDlg(QWidget *parent=0);
+  KCurrencyEditDlg(QWidget *parent = 0);
   ~KCurrencyEditDlg();
 
 public slots:

@@ -24,24 +24,25 @@
 #include "mymoneyexception.h"
 #undef private
 
-class MyMoneyExceptionTest : public CppUnit::TestFixture  {
-	CPPUNIT_TEST_SUITE(MyMoneyExceptionTest);
-	CPPUNIT_TEST(testDefaultConstructor);
-	CPPUNIT_TEST(testConstructor);
-	CPPUNIT_TEST_SUITE_END();
+class MyMoneyExceptionTest : public CppUnit::TestFixture
+{
+  CPPUNIT_TEST_SUITE(MyMoneyExceptionTest);
+  CPPUNIT_TEST(testDefaultConstructor);
+  CPPUNIT_TEST(testConstructor);
+  CPPUNIT_TEST_SUITE_END();
 
 protected:
 public:
-	MyMoneyExceptionTest();
+  MyMoneyExceptionTest();
 
 
-	void setUp();
+  void setUp();
 
-	void tearDown();
+  void tearDown();
 
-	void testDefaultConstructor();
+  void testDefaultConstructor();
 
-	void testConstructor();
+  void testConstructor();
 
 };
 #endif

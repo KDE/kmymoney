@@ -28,20 +28,21 @@
 #include "mymoneyseqaccessmgr.h"
 #undef private
 
-class MyMoneyMapTest : public CppUnit::TestFixture  {
-	CPPUNIT_TEST_SUITE(MyMoneyMapTest);
-	CPPUNIT_TEST(testArrayOperator);
-	CPPUNIT_TEST_SUITE_END();
+class MyMoneyMapTest : public CppUnit::TestFixture
+{
+  CPPUNIT_TEST_SUITE(MyMoneyMapTest);
+  CPPUNIT_TEST(testArrayOperator);
+  CPPUNIT_TEST_SUITE_END();
 
 protected:
-	MyMoneyMap<QString, QString> *m;
+  MyMoneyMap<QString, QString> *m;
 public:
-	MyMoneyMapTest();
+  MyMoneyMapTest();
 
 
-	void setUp();
-	void tearDown();
-	void testArrayOperator(void);
+  void setUp();
+  void tearDown();
+  void testArrayOperator(void);
 };
 
 #endif

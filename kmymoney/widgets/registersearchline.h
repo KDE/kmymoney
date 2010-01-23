@@ -33,7 +33,8 @@
 
 #include <register.h>
 
-namespace KMyMoneyRegister {
+namespace KMyMoneyRegister
+{
 
 /**
   * This class makes it easy to add a search line for filtering the items

@@ -452,7 +452,7 @@ public:
   /**
     * construtor of KMyMoneyApp, calls all init functions to create the application.
     */
-  explicit KMyMoneyApp(QWidget* parent=0);
+  explicit KMyMoneyApp(QWidget* parent = 0);
 
   /**
     * Destructor
@@ -472,7 +472,7 @@ public:
   /**
     * Returns whether there is an importer available that can handle this file
     */
-  bool isImportableFile( const KUrl& url );
+  bool isImportableFile(const KUrl& url);
 
   /**
     * This method is used to update the caption of the application window.
@@ -1184,7 +1184,7 @@ extern  KMyMoneyApp *kmymoney;
 class KMStatus
 {
 public:
-  KMStatus (const QString &text);
+  KMStatus(const QString &text);
   ~KMStatus();
 private:
   QString m_prevText;

@@ -38,8 +38,8 @@ class MyMoneySchedule;
 class KConfirmManualEnterDlgDecl : public QDialog, public Ui::KConfirmManualEnterDlgDecl
 {
 public:
-  KConfirmManualEnterDlgDecl( QWidget *parent ) : QDialog( parent ) {
-    setupUi( this );
+  KConfirmManualEnterDlgDecl(QWidget *parent) : QDialog(parent) {
+    setupUi(this);
   }
 };
 

@@ -42,9 +42,9 @@
 #include <kguiutils.h>
 
 KNewBankDlg::KNewBankDlg(MyMoneyInstitution& institution, QWidget *parent)
-  : KNewBankDlgDecl(parent), m_institution(institution)
+    : KNewBankDlgDecl(parent), m_institution(institution)
 {
-    setModal( true );
+  setModal(true);
   okBtn->setGuiItem(KStandardGuiItem::ok());
   cancelBtn->setGuiItem(KStandardGuiItem::cancel());
 
@@ -59,17 +59,17 @@ KNewBankDlg::KNewBankDlg(MyMoneyInstitution& institution, QWidget *parent)
 
   connect(okBtn, SIGNAL(clicked()), SLOT(okClicked()));
   connect(cancelBtn, SIGNAL(clicked()), SLOT(reject()));
-  connect(nameEdit, SIGNAL(textChanged ( const QString & )), SLOT(institutionNameChanged( const QString &)));
-  institutionNameChanged( nameEdit->text());
+  connect(nameEdit, SIGNAL(textChanged(const QString &)), SLOT(institutionNameChanged(const QString &)));
+  institutionNameChanged(nameEdit->text());
 
-  kMandatoryFieldGroup* requiredFields = new kMandatoryFieldGroup (this);
+  kMandatoryFieldGroup* requiredFields = new kMandatoryFieldGroup(this);
   requiredFields->setOkButton(okBtn); // button to be enabled when all fields present
   requiredFields->add(nameEdit);
 }
 
-void KNewBankDlg::institutionNameChanged( const QString &_text)
+void KNewBankDlg::institutionNameChanged(const QString &_text)
 {
-  okBtn->setEnabled( !_text.isEmpty() );
+  okBtn->setEnabled(!_text.isEmpty());
 }
 
 KNewBankDlg::~KNewBankDlg()

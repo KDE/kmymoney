@@ -55,15 +55,15 @@
 class KNewLoanWizardDecl : public Q3Wizard, public Ui::KNewLoanWizardDecl
 {
 public:
-  KNewLoanWizardDecl( QWidget *parent ) : Q3Wizard( parent ) {
-    setupUi( this );
+  KNewLoanWizardDecl(QWidget *parent) : Q3Wizard(parent) {
+    setupUi(this);
   }
 };
 class KNewLoanWizard : public KNewLoanWizardDecl
 {
   Q_OBJECT
 public:
-  KNewLoanWizard(QWidget *parent=0);
+  KNewLoanWizard(QWidget *parent = 0);
   ~KNewLoanWizard();
 
   /**

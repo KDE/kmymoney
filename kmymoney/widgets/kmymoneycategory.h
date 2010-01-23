@@ -114,7 +114,7 @@ public:
   /**
     * Reimplemented for internal reasons. No API change
     */
-  virtual void reparent( QWidget *parent, Qt::WFlags, const QPoint &, bool showIt = false );
+  virtual void reparent(QWidget *parent, Qt::WFlags, const QPoint &, bool showIt = false);
 
   /**
     * Reimplemented for internal reasons. No API change.
@@ -134,7 +134,9 @@ public:
   /**
     * overridden for internal reasons, no API change
     */
-  void setCurrentText(const QString& txt = QString()) { KMyMoneyCombo::setCurrentText(txt); }
+  void setCurrentText(const QString& txt = QString()) {
+    KMyMoneyCombo::setCurrentText(txt);
+  }
 
 protected:
   /**
@@ -187,7 +189,9 @@ public:
   /**
     * overridden for internal reasons, no API change
     */
-  void setCurrentText(const QString& txt = QString()) { KMyMoneyCategory::setCurrentText(txt); }
+  void setCurrentText(const QString& txt = QString()) {
+    KMyMoneyCategory::setCurrentText(txt);
+  }
 
 protected:
   /**

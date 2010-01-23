@@ -121,7 +121,9 @@ public:
     * @retval false only a single transaction was selected when the editor was started
     * @retval true multiple transactions were selected when the editor was started
     */
-  virtual bool isMultiSelection(void) const { return m_transactions.count() > 1; }
+  virtual bool isMultiSelection(void) const {
+    return m_transactions.count() > 1;
+  }
 
   virtual bool fixTransactionCommodity(const MyMoneyAccount& account);
 
@@ -143,7 +145,9 @@ public:
 
   bool eventFilter(QObject* o, QEvent* e);
 
-  const MyMoneyAccount& account(void) const { return m_account; }
+  const MyMoneyAccount& account(void) const {
+    return m_account;
+  }
 
   void clearFinalWidgets(void);
 

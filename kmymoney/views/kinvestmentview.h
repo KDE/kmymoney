@@ -48,8 +48,8 @@ class MyMoneyInvestTransaction;
 class KInvestmentViewDecl : public QDialog, public Ui::KInvestmentViewDecl
 {
 public:
-  KInvestmentViewDecl( QWidget *parent ) : QDialog( parent ) {
-    setupUi( this );
+  KInvestmentViewDecl(QWidget *parent) : QDialog(parent) {
+    setupUi(this);
   }
 };
 
@@ -58,7 +58,7 @@ class KInvestmentView : public KInvestmentViewDecl
   Q_OBJECT
 
 public:
-  KInvestmentView(QWidget *parent=0);
+  KInvestmentView(QWidget *parent = 0);
   ~KInvestmentView();
 
   /**

@@ -23,39 +23,40 @@
 #include "mymoneykeyvaluecontainer.h"
 #undef private
 
-class MyMoneyKeyValueContainerTest : public CppUnit::TestFixture  {
-        CPPUNIT_TEST_SUITE(MyMoneyKeyValueContainerTest);
-	CPPUNIT_TEST(testEmptyConstructor);
-	CPPUNIT_TEST(testRetrieveValue);
-	CPPUNIT_TEST(testSetValue);
-	CPPUNIT_TEST(testDeletePair);
-	CPPUNIT_TEST(testClear);
-	CPPUNIT_TEST(testRetrieveList);
-	CPPUNIT_TEST(testLoadList);
-	CPPUNIT_TEST(testWriteXML);
-	CPPUNIT_TEST(testReadXML);
-	CPPUNIT_TEST(testArrayRead);
-	CPPUNIT_TEST(testArrayWrite);
-	CPPUNIT_TEST_SUITE_END();
+class MyMoneyKeyValueContainerTest : public CppUnit::TestFixture
+{
+  CPPUNIT_TEST_SUITE(MyMoneyKeyValueContainerTest);
+  CPPUNIT_TEST(testEmptyConstructor);
+  CPPUNIT_TEST(testRetrieveValue);
+  CPPUNIT_TEST(testSetValue);
+  CPPUNIT_TEST(testDeletePair);
+  CPPUNIT_TEST(testClear);
+  CPPUNIT_TEST(testRetrieveList);
+  CPPUNIT_TEST(testLoadList);
+  CPPUNIT_TEST(testWriteXML);
+  CPPUNIT_TEST(testReadXML);
+  CPPUNIT_TEST(testArrayRead);
+  CPPUNIT_TEST(testArrayWrite);
+  CPPUNIT_TEST_SUITE_END();
 
 protected:
-	MyMoneyKeyValueContainer	*m;
+  MyMoneyKeyValueContainer *m;
 
 public:
-	MyMoneyKeyValueContainerTest();
-	void setUp ();
-	void tearDown ();
-	void testEmptyConstructor();
-	void testRetrieveValue();
-	void testSetValue();
-	void testDeletePair();
-	void testClear();
-	void testRetrieveList();
-	void testLoadList();
-	void testArrayRead();
-	void testArrayWrite();
-	void testWriteXML();
-	void testReadXML();
+  MyMoneyKeyValueContainerTest();
+  void setUp();
+  void tearDown();
+  void testEmptyConstructor();
+  void testRetrieveValue();
+  void testSetValue();
+  void testDeletePair();
+  void testClear();
+  void testRetrieveList();
+  void testLoadList();
+  void testArrayRead();
+  void testArrayWrite();
+  void testWriteXML();
+  void testReadXML();
 };
 
 #endif

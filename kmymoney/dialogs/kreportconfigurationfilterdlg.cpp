@@ -72,80 +72,76 @@
 
 KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
   MyMoneyReport report, QWidget *parent)
- : KFindTransactionDlg(parent),
- m_tab2(0),
- m_tab3(0),
- m_tabChart(0),
- m_initialState(report),
- m_currentState(report)
+    : KFindTransactionDlg(parent),
+    m_tab2(0),
+    m_tab3(0),
+    m_tabChart(0),
+    m_initialState(report),
+    m_currentState(report)
 {
-    //
-    // Rework labeling
-    //
+  //
+  // Rework labeling
+  //
 
-    setWindowTitle( i18n( "Report Configuration" ) );
-    delete TextLabel1;
+  setWindowTitle(i18n("Report Configuration"));
+  delete TextLabel1;
 
-    //
-    // Rework the buttons
-    //
+  //
+  // Rework the buttons
+  //
 
-    // the Ok button is always enabled
-    disconnect(SIGNAL(selectionEmpty(bool)));
-    m_searchButton->setGuiItem( KStandardGuiItem::ok() );
-    m_searchButton->setEnabled(true);
+  // the Ok button is always enabled
+  disconnect(SIGNAL(selectionEmpty(bool)));
+  m_searchButton->setGuiItem(KStandardGuiItem::ok());
+  m_searchButton->setEnabled(true);
 
-    // reconnect the close button
-    m_closeButton->disconnect();
-    connect(m_closeButton, SIGNAL(clicked()), this, SLOT(reject()));
+  // reconnect the close button
+  m_closeButton->disconnect();
+  connect(m_closeButton, SIGNAL(clicked()), this, SLOT(reject()));
 
-    //
-    // Add new tabs
-    //
+  //
+  // Add new tabs
+  //
 
-    m_tab1 = new kMyMoneyReportConfigTab1Decl( m_criteriaTab);
-    m_tab1->setObjectName("kMyMoneyReportConfigTab1" );
-    m_criteriaTab->insertTab( 0, m_tab1, i18n("Report") );
+  m_tab1 = new kMyMoneyReportConfigTab1Decl(m_criteriaTab);
+  m_tab1->setObjectName("kMyMoneyReportConfigTab1");
+  m_criteriaTab->insertTab(0, m_tab1, i18n("Report"));
 
-    if ( m_initialState.reportType() == MyMoneyReport::ePivotTable )
-    {
-      m_tab2 = new kMyMoneyReportConfigTab2Decl( m_criteriaTab );
-      m_tab2->setObjectName( "kMyMoneyReportConfigTab2" );
-      m_criteriaTab->insertTab( 1, m_tab2, i18n( "Rows/Columns") );
-      connect(m_tab2->m_comboRows, SIGNAL(highlighted(int)), this, SLOT(slotRowTypeChanged(int)));
-      connect(m_tab2->m_comboColumns, SIGNAL(activated(int)), this, SLOT(slotColumnTypeChanged(int)));
-      //control the state of the includeTransfer check
-      connect(m_categoriesView, SIGNAL(stateChanged()), this, SLOT(slotUpdateCheckTransfers()));
+  if (m_initialState.reportType() == MyMoneyReport::ePivotTable) {
+    m_tab2 = new kMyMoneyReportConfigTab2Decl(m_criteriaTab);
+    m_tab2->setObjectName("kMyMoneyReportConfigTab2");
+    m_criteriaTab->insertTab(1, m_tab2, i18n("Rows/Columns"));
+    connect(m_tab2->m_comboRows, SIGNAL(highlighted(int)), this, SLOT(slotRowTypeChanged(int)));
+    connect(m_tab2->m_comboColumns, SIGNAL(activated(int)), this, SLOT(slotColumnTypeChanged(int)));
+    //control the state of the includeTransfer check
+    connect(m_categoriesView, SIGNAL(stateChanged()), this, SLOT(slotUpdateCheckTransfers()));
 
-      m_tabChart = new kMyMoneyReportConfigTabChartDecl( m_criteriaTab);
-      m_tabChart->setObjectName("kMyMoneyReportConfigTabChart" );
-      m_criteriaTab->insertTab( 2, m_tabChart, i18n( "Chart") );
+    m_tabChart = new kMyMoneyReportConfigTabChartDecl(m_criteriaTab);
+    m_tabChart->setObjectName("kMyMoneyReportConfigTabChart");
+    m_criteriaTab->insertTab(2, m_tabChart, i18n("Chart"));
+  } else if (m_initialState.reportType() == MyMoneyReport::eQueryTable) {
+    // eInvestmentHoldings is a special-case report, and you cannot configure the
+    // rows & columns of that report.
+    if (m_initialState.rowType() < MyMoneyReport::eAccountByTopAccount) {
+      m_tab3 = new kMyMoneyReportConfigTab3Decl(m_criteriaTab);
+      m_tab3->setObjectName("kMyMoneyReportConfigTab3");
+      m_criteriaTab->insertTab(1, m_tab3, i18n("Rows/Columns"));
     }
-    else if ( m_initialState.reportType() == MyMoneyReport::eQueryTable )
-    {
-      // eInvestmentHoldings is a special-case report, and you cannot configure the
-      // rows & columns of that report.
-      if ( m_initialState.rowType() < MyMoneyReport::eAccountByTopAccount )
-      {
-        m_tab3 = new kMyMoneyReportConfigTab3Decl( m_criteriaTab);
-        m_tab3->setObjectName("kMyMoneyReportConfigTab3" );
-        m_criteriaTab->insertTab( 1, m_tab3, i18n("Rows/Columns") );
-      }
-    }
+  }
 
-    m_criteriaTab->setCurrentIndex( m_criteriaTab->indexOf(m_tab1) );
-    m_criteriaTab->setMinimumSize( 500,200 );
+  m_criteriaTab->setCurrentIndex(m_criteriaTab->indexOf(m_tab1));
+  m_criteriaTab->setMinimumSize(500, 200);
 
-    QList<MyMoneyBudget> list = MyMoneyFile::instance()->budgetList();
-    QList<MyMoneyBudget>::const_iterator it_b;
-    for(it_b = list.constBegin(); it_b != list.constEnd(); ++it_b) {
-      m_budgets.push_back(*it_b);
-    }
+  QList<MyMoneyBudget> list = MyMoneyFile::instance()->budgetList();
+  QList<MyMoneyBudget>::const_iterator it_b;
+  for (it_b = list.constBegin(); it_b != list.constEnd(); ++it_b) {
+    m_budgets.push_back(*it_b);
+  }
 
-    //
-    // Now set up the widgets with proper values
-    //
-    slotReset();
+  //
+  // Now set up the widgets with proper values
+  //
+  slotReset();
 }
 
 KReportConfigurationFilterDlg::~KReportConfigurationFilterDlg()
@@ -161,55 +157,52 @@ void KReportConfigurationFilterDlg::slotSearch(void)
   m_currentState.assignFilter(m_filter);
 
   // Then extract the report properties
-  m_currentState.setName( m_tab1->m_editName->text() );
-  m_currentState.setComment( m_tab1->m_editComment->text() );
-  m_currentState.setConvertCurrency( m_tab1->m_checkCurrency->isChecked() );
-  m_currentState.setFavorite( m_tab1->m_checkFavorite->isChecked() );
+  m_currentState.setName(m_tab1->m_editName->text());
+  m_currentState.setComment(m_tab1->m_editComment->text());
+  m_currentState.setConvertCurrency(m_tab1->m_checkCurrency->isChecked());
+  m_currentState.setFavorite(m_tab1->m_checkFavorite->isChecked());
 
-  if ( m_tab2 )
-  {
+  if (m_tab2) {
     MyMoneyReport::EDetailLevel dl[4] = { MyMoneyReport::eDetailAll, MyMoneyReport::eDetailTop, MyMoneyReport::eDetailGroup, MyMoneyReport::eDetailTotal };
 
-    m_currentState.setDetailLevel( dl[m_tab2->m_comboDetail->currentIndex()] );
+    m_currentState.setDetailLevel(dl[m_tab2->m_comboDetail->currentIndex()]);
 
     // modify the rowtype only if the widget is enabled
-    if(m_tab2->m_comboRows->isEnabled()) {
+    if (m_tab2->m_comboRows->isEnabled()) {
       MyMoneyReport::ERowType rt[2] = { MyMoneyReport::eExpenseIncome, MyMoneyReport::eAssetLiability };
-      m_currentState.setRowType( rt[m_tab2->m_comboRows->currentIndex()] );
+      m_currentState.setRowType(rt[m_tab2->m_comboRows->currentIndex()]);
     }
 
     m_currentState.setShowingRowTotals(false);
-    if(m_tab2->m_comboRows->currentIndex() == 0)
+    if (m_tab2->m_comboRows->currentIndex() == 0)
       m_currentState.setShowingRowTotals(m_tab2->m_checkTotalColumn->isChecked());
 
     MyMoneyReport::EColumnType ct[6] = { MyMoneyReport::eDays, MyMoneyReport::eWeeks, MyMoneyReport::eMonths, MyMoneyReport::eBiMonths, MyMoneyReport::eQuarters, MyMoneyReport::eYears };
     bool dy[6] = { true, true, false, false, false, false };
-    m_currentState.setColumnType( ct[m_tab2->m_comboColumns->currentIndex()] );
+    m_currentState.setColumnType(ct[m_tab2->m_comboColumns->currentIndex()]);
 
     //TODO (Ace) This should be implicit in the call above.  MMReport needs fixin'
-    m_currentState.setColumnsAreDays( dy[m_tab2->m_comboColumns->currentIndex()] );
+    m_currentState.setColumnsAreDays(dy[m_tab2->m_comboColumns->currentIndex()]);
 
-    m_currentState.setIncludingSchedules( m_tab2->m_checkScheduled->isChecked() );
+    m_currentState.setIncludingSchedules(m_tab2->m_checkScheduled->isChecked());
 
-    m_currentState.setIncludingTransfers( m_tab2->m_checkTransfers->isChecked() );
+    m_currentState.setIncludingTransfers(m_tab2->m_checkTransfers->isChecked());
 
-    m_currentState.setIncludingUnusedAccounts( m_tab2->m_checkUnused->isChecked() );
+    m_currentState.setIncludingUnusedAccounts(m_tab2->m_checkUnused->isChecked());
 
-    if(m_tab2->m_comboBudget->isEnabled()) {
+    if (m_tab2->m_comboBudget->isEnabled()) {
       m_currentState.setBudget(m_budgets[m_tab2->m_comboBudget->currentItem()].id(), m_initialState.rowType() == MyMoneyReport::eBudgetActual);
     } else {
       m_currentState.setBudget(QString(), false);
     }
 
     //set moving average days
-    if(m_tab2->m_movingAverageDays->isEnabled()) {
-      m_currentState.setMovingAverageDays( m_tab2->m_movingAverageDays->value() );
+    if (m_tab2->m_movingAverageDays->isEnabled()) {
+      m_currentState.setMovingAverageDays(m_tab2->m_movingAverageDays->value());
     }
-  }
-  else if ( m_tab3 )
-  {
+  } else if (m_tab3) {
     MyMoneyReport::ERowType rtq[7] = { MyMoneyReport::eCategory, MyMoneyReport::eTopCategory, MyMoneyReport::ePayee, MyMoneyReport::eAccount, MyMoneyReport::eTopAccount, MyMoneyReport::eMonth, MyMoneyReport::eWeek };
-    m_currentState.setRowType( rtq[m_tab3->m_comboOrganizeBy->currentIndex()] );
+    m_currentState.setRowType(rtq[m_tab3->m_comboOrganizeBy->currentIndex()]);
 
     unsigned qc = MyMoneyReport::eQCnone;
 
@@ -217,46 +210,45 @@ void KReportConfigurationFilterDlg::slotSearch(void)
       // once a loan report, always a loan report
       qc = MyMoneyReport::eQCloan;
 
-    if ( m_tab3->m_checkNumber->isChecked() )
+    if (m_tab3->m_checkNumber->isChecked())
       qc |= MyMoneyReport::eQCnumber;
-    if ( m_tab3->m_checkPayee->isChecked() )
+    if (m_tab3->m_checkPayee->isChecked())
       qc |= MyMoneyReport::eQCpayee;
-    if ( m_tab3->m_checkCategory->isChecked() )
+    if (m_tab3->m_checkCategory->isChecked())
       qc |= MyMoneyReport::eQCcategory;
-    if ( m_tab3->m_checkMemo->isChecked() )
+    if (m_tab3->m_checkMemo->isChecked())
       qc |= MyMoneyReport::eQCmemo;
-    if ( m_tab3->m_checkAccount->isChecked() )
+    if (m_tab3->m_checkAccount->isChecked())
       qc |= MyMoneyReport::eQCaccount;
-    if ( m_tab3->m_checkReconciled->isChecked() )
+    if (m_tab3->m_checkReconciled->isChecked())
       qc |= MyMoneyReport::eQCreconciled;
-    if ( m_tab3->m_checkAction->isChecked() )
+    if (m_tab3->m_checkAction->isChecked())
       qc |= MyMoneyReport::eQCaction;
-    if ( m_tab3->m_checkShares->isChecked() )
+    if (m_tab3->m_checkShares->isChecked())
       qc |= MyMoneyReport::eQCshares;
-    if ( m_tab3->m_checkPrice->isChecked() )
+    if (m_tab3->m_checkPrice->isChecked())
       qc |= MyMoneyReport::eQCprice;
-    if( m_tab3->m_checkBalance->isChecked() )
+    if (m_tab3->m_checkBalance->isChecked())
       qc |= MyMoneyReport::eQCbalance;
 
     m_currentState.setQueryColumns(static_cast<MyMoneyReport::EQueryColumns>(qc));
 
-    m_currentState.setTax( m_tab3->m_checkTax->isChecked() );
-    m_currentState.setInvestmentsOnly( m_tab3->m_checkInvestments->isChecked() );
-    m_currentState.setLoansOnly( m_tab3->m_checkLoans->isChecked() );
+    m_currentState.setTax(m_tab3->m_checkTax->isChecked());
+    m_currentState.setInvestmentsOnly(m_tab3->m_checkInvestments->isChecked());
+    m_currentState.setLoansOnly(m_tab3->m_checkLoans->isChecked());
 
     m_currentState.setDetailLevel(m_tab3->m_checkHideSplitDetails->isChecked() ?
-        MyMoneyReport::eDetailNone : MyMoneyReport::eDetailAll);
+                                  MyMoneyReport::eDetailNone : MyMoneyReport::eDetailAll);
   }
 
-  if ( m_tabChart )
-  {
+  if (m_tabChart) {
     MyMoneyReport::EChartType ct[5] = { MyMoneyReport::eChartLine, MyMoneyReport::eChartBar, MyMoneyReport::eChartStackedBar, MyMoneyReport::eChartPie, MyMoneyReport::eChartRing };
-    m_currentState.setChartType( ct[m_tabChart->m_comboType->currentIndex()] );
+    m_currentState.setChartType(ct[m_tabChart->m_comboType->currentIndex()]);
 
-    m_currentState.setChartGridLines( m_tabChart->m_checkGridLines->isChecked() );
-    m_currentState.setChartDataLabels( m_tabChart->m_checkValues->isChecked() );
-    m_currentState.setChartByDefault( m_tabChart->m_checkShowChart->isChecked() );
-    m_currentState.setChartLineWidth( m_tabChart->m_lineWidth->value() );
+    m_currentState.setChartGridLines(m_tabChart->m_checkGridLines->isChecked());
+    m_currentState.setChartDataLabels(m_tabChart->m_checkValues->isChecked());
+    m_currentState.setChartByDefault(m_tabChart->m_checkShowChart->isChecked());
+    m_currentState.setChartLineWidth(m_tabChart->m_lineWidth->value());
   }
 
   // setup the date lock
@@ -273,7 +265,7 @@ void KReportConfigurationFilterDlg::slotRowTypeChanged(int row)
 
 void KReportConfigurationFilterDlg::slotColumnTypeChanged(int row)
 {
-  if(m_tab2->m_comboBudget->isEnabled() && row < 2) {
+  if (m_tab2->m_comboBudget->isEnabled() && row < 2) {
     m_tab2->m_comboColumns->setCurrentItem(i18n("Monthly"), false);
   }
 }
@@ -289,15 +281,13 @@ void KReportConfigurationFilterDlg::slotReset(void)
   // Report Properties
   //
 
-  m_tab1->m_editName->setText( m_initialState.name() );
-  m_tab1->m_editComment->setText( m_initialState.comment() );
-  m_tab1->m_checkCurrency->setChecked( m_initialState.isConvertCurrency() );
-  m_tab1->m_checkFavorite->setChecked( m_initialState.isFavorite() );
+  m_tab1->m_editName->setText(m_initialState.name());
+  m_tab1->m_editComment->setText(m_initialState.comment());
+  m_tab1->m_checkCurrency->setChecked(m_initialState.isConvertCurrency());
+  m_tab1->m_checkFavorite->setChecked(m_initialState.isFavorite());
 
-  if ( m_tab2 )
-  {
-    switch ( m_initialState.detailLevel() )
-    {
+  if (m_tab2) {
+    switch (m_initialState.detailLevel()) {
     case MyMoneyReport::eDetailNone:
     case MyMoneyReport::eDetailEnd:
     case MyMoneyReport::eDetailAll:
@@ -314,24 +304,22 @@ void KReportConfigurationFilterDlg::slotReset(void)
       break;
     }
 
-    switch(m_initialState.rowType()) {
-      case MyMoneyReport::eExpenseIncome:
-      case MyMoneyReport::eBudget:
-      case MyMoneyReport::eBudgetActual:
-        m_tab2->m_comboRows->setCurrentItem(i18n("Income & Expenses"), false); // income / expense
-        break;
-      default:
-        m_tab2->m_comboRows->setCurrentItem(i18n("Assets & Liabilities"), false); // asset / liability
-        break;
+    switch (m_initialState.rowType()) {
+    case MyMoneyReport::eExpenseIncome:
+    case MyMoneyReport::eBudget:
+    case MyMoneyReport::eBudgetActual:
+      m_tab2->m_comboRows->setCurrentItem(i18n("Income & Expenses"), false); // income / expense
+      break;
+    default:
+      m_tab2->m_comboRows->setCurrentItem(i18n("Assets & Liabilities"), false); // asset / liability
+      break;
     }
     m_tab2->m_checkTotalColumn->setChecked(m_initialState.isShowingRowTotals());
 
     slotRowTypeChanged(m_tab2->m_comboRows->currentIndex());
 
-    if ( m_initialState.isColumnsAreDays() )
-    {
-      switch ( m_initialState.columnType() )
-      {
+    if (m_initialState.isColumnsAreDays()) {
+      switch (m_initialState.columnType()) {
       case MyMoneyReport::eNoColumns:
       case MyMoneyReport::eDays:
         m_tab2->m_comboColumns->setCurrentItem(i18n("Daily"), false);
@@ -342,11 +330,8 @@ void KReportConfigurationFilterDlg::slotReset(void)
       default:
         break;
       }
-    }
-    else
-    {
-      switch ( m_initialState.columnType() )
-      {
+    } else {
+      switch (m_initialState.columnType()) {
       case MyMoneyReport::eNoColumns:
       case MyMoneyReport::eMonths:
         m_tab2->m_comboColumns->setCurrentItem(i18n("Monthly"), false);
@@ -366,36 +351,33 @@ void KReportConfigurationFilterDlg::slotReset(void)
     }
 
     //load budgets combo
-    if(m_initialState.rowType() == MyMoneyReport::eBudget
-    || m_initialState.rowType() == MyMoneyReport::eBudgetActual) {
+    if (m_initialState.rowType() == MyMoneyReport::eBudget
+        || m_initialState.rowType() == MyMoneyReport::eBudgetActual) {
       m_tab2->m_comboRows->setEnabled(false);
       m_tab2->m_budgetFrame->setEnabled(!m_budgets.empty());
       Q3ValueVector<MyMoneyBudget>::const_iterator it_b;
       int i = 0;
-      for(it_b = m_budgets.constBegin(); it_b != m_budgets.constEnd(); ++it_b) {
+      for (it_b = m_budgets.constBegin(); it_b != m_budgets.constEnd(); ++it_b) {
         m_tab2->m_comboBudget->insertItem((*it_b).name(), i);
         //set the current selected item
-        if( (m_initialState.budget() == "Any" && (*it_b).budgetStart().year() == QDate::currentDate().year())
-             || m_initialState.budget() == (*it_b).id())
+        if ((m_initialState.budget() == "Any" && (*it_b).budgetStart().year() == QDate::currentDate().year())
+            || m_initialState.budget() == (*it_b).id())
           m_tab2->m_comboBudget->setCurrentItem(i);
         i++;
       }
     }
 
     //set moving average days spinbox
-    m_tab2->m_movingAverageDays->setEnabled( m_initialState.isIncludingMovingAverage() );
-    if(m_initialState.isIncludingMovingAverage() ) {
-      m_tab2->m_movingAverageDays->setValue( m_initialState.movingAverageDays() );
+    m_tab2->m_movingAverageDays->setEnabled(m_initialState.isIncludingMovingAverage());
+    if (m_initialState.isIncludingMovingAverage()) {
+      m_tab2->m_movingAverageDays->setValue(m_initialState.movingAverageDays());
     }
 
-    m_tab2->m_checkScheduled->setChecked( m_initialState.isIncludingSchedules() );
-    m_tab2->m_checkTransfers->setChecked( m_initialState.isIncludingTransfers() );
-    m_tab2->m_checkUnused->setChecked( m_initialState.isIncludingUnusedAccounts() );
-  }
-  else if ( m_tab3 )
-  {
-    switch ( m_initialState.rowType() )
-    {
+    m_tab2->m_checkScheduled->setChecked(m_initialState.isIncludingSchedules());
+    m_tab2->m_checkTransfers->setChecked(m_initialState.isIncludingTransfers());
+    m_tab2->m_checkUnused->setChecked(m_initialState.isIncludingUnusedAccounts());
+  } else if (m_tab3) {
+    switch (m_initialState.rowType()) {
     case MyMoneyReport::eNoColumns:
     case MyMoneyReport::eCategory:
       m_tab3->m_comboOrganizeBy->setCurrentItem(i18n("Categories"), false);
@@ -434,36 +416,34 @@ void KReportConfigurationFilterDlg::slotReset(void)
     m_tab3->m_checkPrice->setChecked(qc & MyMoneyReport::eQCprice);
     m_tab3->m_checkBalance->setChecked(qc & MyMoneyReport::eQCbalance);
 
-    m_tab3->m_checkTax->setChecked( m_initialState.isTax() );
-    m_tab3->m_checkInvestments->setChecked( m_initialState.isInvestmentsOnly() );
-    m_tab3->m_checkLoans->setChecked( m_initialState.isLoansOnly() );
+    m_tab3->m_checkTax->setChecked(m_initialState.isTax());
+    m_tab3->m_checkInvestments->setChecked(m_initialState.isInvestmentsOnly());
+    m_tab3->m_checkLoans->setChecked(m_initialState.isLoansOnly());
 
     m_tab3->m_checkHideSplitDetails->setChecked
-      (m_initialState.detailLevel() == MyMoneyReport::eDetailNone);
+    (m_initialState.detailLevel() == MyMoneyReport::eDetailNone);
   }
 
-  if ( m_tabChart )
-  {
-    switch( m_initialState.chartType() )
-    {
-      case MyMoneyReport::eChartNone:
-      case MyMoneyReport::eChartLine:
-        m_tabChart->m_comboType->setCurrentItem(i18n("Line"), false);
-        break;
-      case MyMoneyReport::eChartBar:
-        m_tabChart->m_comboType->setCurrentItem(i18n("Bar"), false);
-        break;
-      case MyMoneyReport::eChartStackedBar:
-        m_tabChart->m_comboType->setCurrentItem(i18n("Stacked Bar"), false);
-        break;
-      case MyMoneyReport::eChartPie:
-        m_tabChart->m_comboType->setCurrentItem(i18n("Pie"), false);
-        break;
-      case MyMoneyReport::eChartRing:
-        m_tabChart->m_comboType->setCurrentItem(i18n("Ring"), false);
-        break;
-      case MyMoneyReport::eChartEnd:
-        throw new MYMONEYEXCEPTION("KReportConfigurationFilterDlg::slotReset(): Report has invalid charttype");
+  if (m_tabChart) {
+    switch (m_initialState.chartType()) {
+    case MyMoneyReport::eChartNone:
+    case MyMoneyReport::eChartLine:
+      m_tabChart->m_comboType->setCurrentItem(i18n("Line"), false);
+      break;
+    case MyMoneyReport::eChartBar:
+      m_tabChart->m_comboType->setCurrentItem(i18n("Bar"), false);
+      break;
+    case MyMoneyReport::eChartStackedBar:
+      m_tabChart->m_comboType->setCurrentItem(i18n("Stacked Bar"), false);
+      break;
+    case MyMoneyReport::eChartPie:
+      m_tabChart->m_comboType->setCurrentItem(i18n("Pie"), false);
+      break;
+    case MyMoneyReport::eChartRing:
+      m_tabChart->m_comboType->setCurrentItem(i18n("Ring"), false);
+      break;
+    case MyMoneyReport::eChartEnd:
+      throw new MYMONEYEXCEPTION("KReportConfigurationFilterDlg::slotReset(): Report has invalid charttype");
     }
     m_tabChart->m_checkGridLines->setChecked(m_initialState.isChartGridLines());
     m_tabChart->m_checkValues->setChecked(m_initialState.isChartDataLabels());
@@ -476,8 +456,7 @@ void KReportConfigurationFilterDlg::slotReset(void)
   //
 
   QRegExp textfilter;
-  if ( m_initialState.textFilter(textfilter))
-  {
+  if (m_initialState.textFilter(textfilter)) {
     m_textEdit->setText(textfilter.pattern());
     m_caseSensitive->setChecked(Qt::CaseSensitive == textfilter.caseSensitivity());
     m_regExp->setChecked(!(QRegExp::RegExp == textfilter.patternSyntax()));
@@ -489,11 +468,11 @@ void KReportConfigurationFilterDlg::slotReset(void)
   //
 
   int type;
-  if ( m_initialState.firstType(type) )
+  if (m_initialState.firstType(type))
     m_typeBox->setCurrentIndex(type);
 
   int state;
-  if ( m_initialState.firstState(state) )
+  if (m_initialState.firstState(state))
     m_stateBox->setCurrentIndex(state);
 
   //
@@ -501,10 +480,8 @@ void KReportConfigurationFilterDlg::slotReset(void)
   //
 
   QString nrFrom, nrTo;
-  if ( m_initialState.numberFilter(nrFrom, nrTo) )
-  {
-    if ( nrFrom == nrTo )
-    {
+  if (m_initialState.numberFilter(nrFrom, nrTo)) {
+    if (nrFrom == nrTo) {
       m_nrEdit->setEnabled(true);
       m_nrFromEdit->setEnabled(false);
       m_nrToEdit->setEnabled(false);
@@ -513,9 +490,7 @@ void KReportConfigurationFilterDlg::slotReset(void)
       m_nrToEdit->setText(QString());
       m_nrButton->setChecked(true);
       m_nrRangeButton->setChecked(false);
-    }
-    else
-    {
+    } else {
       m_nrEdit->setEnabled(false);
       m_nrFromEdit->setEnabled(true);
       m_nrToEdit->setEnabled(false);
@@ -525,9 +500,7 @@ void KReportConfigurationFilterDlg::slotReset(void)
       m_nrButton->setChecked(false);
       m_nrRangeButton->setChecked(true);
     }
-  }
-  else
-  {
+  } else {
     m_nrEdit->setEnabled(true);
     m_nrFromEdit->setEnabled(false);
     m_nrToEdit->setEnabled(false);
@@ -543,10 +516,8 @@ void KReportConfigurationFilterDlg::slotReset(void)
   //
 
   MyMoneyMoney from, to;
-  if ( m_initialState.amountFilter(from,to) ) // bool getAmountFilter(MyMoneyMoney&,MyMoneyMoney&);
-  {
-    if ( from == to )
-    {
+  if (m_initialState.amountFilter(from, to)) { // bool getAmountFilter(MyMoneyMoney&,MyMoneyMoney&);
+    if (from == to) {
       m_amountEdit->setEnabled(true);
       m_amountFromEdit->setEnabled(false);
       m_amountToEdit->setEnabled(false);
@@ -555,9 +526,7 @@ void KReportConfigurationFilterDlg::slotReset(void)
       m_amountToEdit->loadText(QString());
       m_amountButton->setChecked(true);
       m_amountRangeButton->setChecked(false);
-    }
-    else
-    {
+    } else {
       m_amountEdit->setEnabled(false);
       m_amountFromEdit->setEnabled(true);
       m_amountToEdit->setEnabled(true);
@@ -567,9 +536,7 @@ void KReportConfigurationFilterDlg::slotReset(void)
       m_amountButton->setChecked(false);
       m_amountRangeButton->setChecked(true);
     }
-  }
-  else
-  {
+  } else {
     m_amountEdit->setEnabled(true);
     m_amountFromEdit->setEnabled(false);
     m_amountToEdit->setEnabled(false);
@@ -585,20 +552,14 @@ void KReportConfigurationFilterDlg::slotReset(void)
   //
 
   QStringList payees;
-  if ( m_initialState.payees(payees) )
-  {
-    if ( payees.empty() )
-    {
+  if (m_initialState.payees(payees)) {
+    if (payees.empty()) {
       m_emptyPayeesButton->setChecked(true);
-    }
-    else
-    {
+    } else {
       selectAllItems(m_payeesView, false);
-      selectItems(m_payeesView,payees,true);
+      selectItems(m_payeesView, payees, true);
     }
-  }
-  else
-  {
+  } else {
     selectAllItems(m_payeesView, true);
   }
 
@@ -607,24 +568,20 @@ void KReportConfigurationFilterDlg::slotReset(void)
   //
 
   QStringList accounts;
-  if ( m_initialState.accounts(accounts) )
-  {
+  if (m_initialState.accounts(accounts)) {
     m_accountsView->selectAllItems(false);
-    m_accountsView->selectItems(accounts,true);
-  }
-  else
+    m_accountsView->selectItems(accounts, true);
+  } else
     m_accountsView->selectAllItems(true);
 
   //
   // Categories Filter
   //
 
-  if ( m_initialState.categories(accounts) )
-  {
+  if (m_initialState.categories(accounts)) {
     m_categoriesView->selectAllItems(false);
-    m_categoriesView->selectItems(accounts,true);
-  }
-  else
+    m_categoriesView->selectItems(accounts, true);
+  } else
     m_categoriesView->selectAllItems(true);
 
   //
@@ -636,9 +593,8 @@ void KReportConfigurationFilterDlg::slotReset(void)
 
   m_initialState.updateDateFilter();
   QDate dateFrom, dateTo;
-  if ( m_initialState.dateFilter( dateFrom, dateTo ) )
-  {
-    if(m_initialState.isUserDefined()) {
+  if (m_initialState.dateFilter(dateFrom, dateTo)) {
+    if (m_initialState.isUserDefined()) {
       m_dateRange->setCurrentItem(MyMoneyTransactionFilter::userDefined);
       m_fromDate->setDate(dateFrom);
       m_toDate->setDate(dateTo);
@@ -647,9 +603,7 @@ void KReportConfigurationFilterDlg::slotReset(void)
       m_toDate->setDate(dateTo);
       KFindTransactionDlg::slotDateChanged();
     }
-  }
-  else
-  {
+  } else {
     m_dateRange->setCurrentItem(MyMoneyTransactionFilter::allDates);
     slotDateRangeChanged(MyMoneyTransactionFilter::allDates);
   }
@@ -659,7 +613,7 @@ void KReportConfigurationFilterDlg::slotReset(void)
 
 void KReportConfigurationFilterDlg::slotDateChanged(void)
 {
-  if(m_dateRange->currentItem() != MyMoneyTransactionFilter::userDefined) {
+  if (m_dateRange->currentItem() != MyMoneyTransactionFilter::userDefined) {
     KFindTransactionDlg::slotDateChanged();
   }
   slotUpdateSelections();
@@ -673,7 +627,7 @@ void KReportConfigurationFilterDlg::slotShowHelp(void)
 //TODO Fix the reports and engine to include transfers even if categories are filtered - bug #1523508
 void KReportConfigurationFilterDlg::slotUpdateCheckTransfers(void)
 {
-  if(!m_categoriesView->allItemsSelected()) {
+  if (!m_categoriesView->allItemsSelected()) {
     m_tab2->m_checkTransfers->setChecked(false);
     m_tab2->m_checkTransfers->setDisabled(true);
   } else {

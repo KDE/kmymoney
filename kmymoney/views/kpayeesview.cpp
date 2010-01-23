@@ -72,9 +72,9 @@
 
 int KTransactionPtrVector::compareItems(const QString& s1, const QString& s2) const
 {
-  if(s1 == s2)
+  if (s1 == s2)
     return 0;
-  if(s1 < s2)
+  if (s1 < s2)
     return -1;
   return 1;
 }
@@ -89,149 +89,149 @@ int KTransactionPtrVector::compareItems(KTransactionPtrVector::Item d1, KTransac
   try {
     MyMoneySplit s1;
     MyMoneySplit s2;
-    switch(m_idMode) {
-      case AccountMode:
-        s1 = t1->splitByAccount(m_id);
-        s2 = t2->splitByAccount(m_id);
-        break;
-      case PayeeMode:
-        s1 = t1->splitByPayee(m_id);
-        s2 = t2->splitByPayee(m_id);
-        break;
+    switch (m_idMode) {
+    case AccountMode:
+      s1 = t1->splitByAccount(m_id);
+      s2 = t2->splitByAccount(m_id);
+      break;
+    case PayeeMode:
+      s1 = t1->splitByPayee(m_id);
+      s2 = t2->splitByPayee(m_id);
+      break;
     }
     QString p1, p2;
 
-    switch(m_sortType) {
-      case SortValue:
-        rc = 1;
-        tmp = s2.value() - s1.value();
-        if(tmp.isZero()) {
-          // same value? Sort by date
-          rc = t2->postDate().daysTo(t1->postDate());
-          if(rc == 0) {
-            // same date? Sort by id
-            rc = compareItems(t1->id(), t2->id());
-          }
-        } else if(tmp.isNegative()) {
-          rc = -1;
+    switch (m_sortType) {
+    case SortValue:
+      rc = 1;
+      tmp = s2.value() - s1.value();
+      if (tmp.isZero()) {
+        // same value? Sort by date
+        rc = t2->postDate().daysTo(t1->postDate());
+        if (rc == 0) {
+          // same date? Sort by id
+          rc = compareItems(t1->id(), t2->id());
         }
-        break;
+      } else if (tmp.isNegative()) {
+        rc = -1;
+      }
+      break;
 
-      case SortEntryDate:
-        rc = t2->entryDate().daysTo(t1->entryDate());
-        if(rc == 0) {
-          // on same day, lower check numbers show up first
-          rc = compareItems(s1.number(), s2.number());
-          if(rc == 0) {
-            // same number (e.g. empty)? larger amounts show up first
-            rc = 1;
-            tmp = s2.value() - s1.value();
-            if(tmp.isZero()) {
-              // same value? Sort by id
-              rc = compareItems(t1->id(), t2->id());
-            } else if(tmp.isNegative()) {
-              rc = -1;
-            }
-          }
-        }
-        break;
-
-      case SortEntryOrder:
-        // sort by id
-        rc = compareItems(t1->id(), t2->id());
-        break;
-
-      case SortTypeNr:
-        rc = compareItems(s1.action(), s2.action());
-
-        if(rc == 0) {
-          // same action? Sort by nr
-          rc = compareItems(s1.number(), s2.number());
-          if(rc == 0) {
-            // same number? Sort by date
-            rc = t2->postDate().daysTo(t1->postDate());
-            if(rc == 0) {
-              // same date? Sort by value
-              rc = 1;
-              tmp = s2.value() - s1.value();
-              if(tmp.isZero()) {
-                // same value? sort by id
-                rc = compareItems(t1->id(), t2->id());
-              } else if(tmp.isNegative()) {
-                rc = -1;
-              }
-            }
-          }
-        }
-        break;
-
-      case SortReceiver:
-        if(!s2.payeeId().isEmpty()) {
-          p2 = MyMoneyFile::instance()->payee(s2.payeeId()).name();
-        }
-        if(!s1.payeeId().isEmpty()) {
-          p1 = MyMoneyFile::instance()->payee(s1.payeeId()).name();
-        }
-
-        rc = compareItems(p1, p2);
-
-        if(rc == 0) {
-          // same payee? Sort by date
-          rc = t2->postDate().daysTo(t1->postDate());
-          if(rc == 0) {
-            // same date? Sort by value
-            rc = 1;
-            tmp = s2.value() - s1.value();
-            if(tmp.isZero()) {
-              // same value? sort by id
-              rc = compareItems(t1->id(), t2->id());
-            } else if(tmp.isNegative()) {
-              rc = -1;
-            }
-          }
-        }
-        break;
-
-      case SortNr:
+    case SortEntryDate:
+      rc = t2->entryDate().daysTo(t1->entryDate());
+      if (rc == 0) {
+        // on same day, lower check numbers show up first
         rc = compareItems(s1.number(), s2.number());
-        if(rc == 0) {
+        if (rc == 0) {
+          // same number (e.g. empty)? larger amounts show up first
+          rc = 1;
+          tmp = s2.value() - s1.value();
+          if (tmp.isZero()) {
+            // same value? Sort by id
+            rc = compareItems(t1->id(), t2->id());
+          } else if (tmp.isNegative()) {
+            rc = -1;
+          }
+        }
+      }
+      break;
+
+    case SortEntryOrder:
+      // sort by id
+      rc = compareItems(t1->id(), t2->id());
+      break;
+
+    case SortTypeNr:
+      rc = compareItems(s1.action(), s2.action());
+
+      if (rc == 0) {
+        // same action? Sort by nr
+        rc = compareItems(s1.number(), s2.number());
+        if (rc == 0) {
           // same number? Sort by date
           rc = t2->postDate().daysTo(t1->postDate());
-          if(rc == 0) {
+          if (rc == 0) {
             // same date? Sort by value
             rc = 1;
             tmp = s2.value() - s1.value();
-            if(tmp.isZero()) {
+            if (tmp.isZero()) {
               // same value? sort by id
               rc = compareItems(t1->id(), t2->id());
-            } else if(tmp.isNegative()) {
+            } else if (tmp.isNegative()) {
               rc = -1;
             }
           }
         }
-        break;
+      }
+      break;
 
-      case SortPostDate:
-      // tricky fall through here!
-      default:
-        // sort by post date
+    case SortReceiver:
+      if (!s2.payeeId().isEmpty()) {
+        p2 = MyMoneyFile::instance()->payee(s2.payeeId()).name();
+      }
+      if (!s1.payeeId().isEmpty()) {
+        p1 = MyMoneyFile::instance()->payee(s1.payeeId()).name();
+      }
+
+      rc = compareItems(p1, p2);
+
+      if (rc == 0) {
+        // same payee? Sort by date
         rc = t2->postDate().daysTo(t1->postDate());
-        if(rc == 0) {
-          // on same day, lower check numbers show up first
-          rc = compareItems(s1.number(), s2.number());
-          if(rc == 0) {
-            // same number (e.g. empty)? larger amounts show up first
-            rc = 1;
-            tmp = s2.value() - s1.value();
-            if(tmp.isZero()) {
-              // same value? Sort by id
-              rc = compareItems(t1->id(), t2->id());
-            } else if(tmp.isNegative()) {
-              rc = -1;
-            }
+        if (rc == 0) {
+          // same date? Sort by value
+          rc = 1;
+          tmp = s2.value() - s1.value();
+          if (tmp.isZero()) {
+            // same value? sort by id
+            rc = compareItems(t1->id(), t2->id());
+          } else if (tmp.isNegative()) {
+            rc = -1;
           }
         }
-        break;
+      }
+      break;
+
+    case SortNr:
+      rc = compareItems(s1.number(), s2.number());
+      if (rc == 0) {
+        // same number? Sort by date
+        rc = t2->postDate().daysTo(t1->postDate());
+        if (rc == 0) {
+          // same date? Sort by value
+          rc = 1;
+          tmp = s2.value() - s1.value();
+          if (tmp.isZero()) {
+            // same value? sort by id
+            rc = compareItems(t1->id(), t2->id());
+          } else if (tmp.isNegative()) {
+            rc = -1;
+          }
+        }
+      }
+      break;
+
+    case SortPostDate:
+      // tricky fall through here!
+    default:
+      // sort by post date
+      rc = t2->postDate().daysTo(t1->postDate());
+      if (rc == 0) {
+        // on same day, lower check numbers show up first
+        rc = compareItems(s1.number(), s2.number());
+        if (rc == 0) {
+          // same number (e.g. empty)? larger amounts show up first
+          rc = 1;
+          tmp = s2.value() - s1.value();
+          if (tmp.isZero()) {
+            // same value? Sort by id
+            rc = compareItems(t1->id(), t2->id());
+          } else if (tmp.isNegative()) {
+            rc = -1;
+          }
+        }
+      }
+      break;
     }
   } catch (MyMoneyException *e) {
     delete e;
@@ -261,8 +261,8 @@ void KTransactionPtrVector::setPayeeId(const QString& id)
 // *** KPayeeListItem Implementation ***
 
 KPayeeListItem::KPayeeListItem(K3ListView *parent, const MyMoneyPayee& payee) :
-  K3ListViewItem(parent),
-  m_payee(payee)
+    K3ListViewItem(parent),
+    m_payee(payee)
 {
   setText(0, payee.name());
   // allow in column rename
@@ -277,7 +277,7 @@ void KPayeeListItem::paintCell(QPainter *p, const QColorGroup & cg, int column, 
 {
   QColorGroup cg2(cg);
 
-  if(isAlternate())
+  if (isAlternate())
     cg2.setColor(QColorGroup::Base, KMyMoneyGlobalSettings::listColor());
   else
     cg2.setColor(QColorGroup::Base, KMyMoneyGlobalSettings::listBGColor());
@@ -288,7 +288,7 @@ void KPayeeListItem::paintCell(QPainter *p, const QColorGroup & cg, int column, 
 }
 
 KTransactionListItem::KTransactionListItem(K3ListView* view, KTransactionListItem* parent, const QString& accountId, const QString& transactionId) :
-  K3ListViewItem(view, parent)
+    K3ListViewItem(view, parent)
 {
   m_accountId = accountId;
   m_transactionId = transactionId;
@@ -316,11 +316,11 @@ const QColor KTransactionListItem::backgroundColor(void)
 // *** KPayeesView Implementation ***
 
 KPayeesView::KPayeesView(QWidget *parent) :
-  KPayeesViewDecl(parent),
-  m_needReload(false),
-  m_needConnection(true),
-  m_updatesQueued(0),
-  m_inSelection(false)
+    KPayeesViewDecl(parent),
+    m_needReload(false),
+    m_needConnection(true),
+    m_updatesQueued(0),
+    m_inSelection(false)
 {
 
   m_matchType->setId(radioNoMatch, 0);
@@ -342,10 +342,10 @@ KPayeesView::KPayeesView(QWidget *parent) :
 
   m_payeesList->addColumn(i18nc("Payee name", "Name"));
 
-  KGuiItem updateButtonItem( i18nc("Update payee", "Update"),
-                    KIcon("dialog-ok"),
-                    i18n("Accepts the entered data and stores it"),
-                    i18n("Use this to accept the modified data."));
+  KGuiItem updateButtonItem(i18nc("Update payee", "Update"),
+                            KIcon("dialog-ok"),
+                            i18n("Accepts the entered data and stores it"),
+                            i18n("Use this to accept the modified data."));
   m_updateButton->setGuiItem(updateButtonItem);
 
   m_updateButton->setEnabled(false);
@@ -358,7 +358,7 @@ KPayeesView::KPayeesView(QWidget *parent) :
   comboDefaultAccount->setEnabled(false);
 
   connect(m_payeesList, SIGNAL(selectionChanged()), this, SLOT(slotSelectPayee()));
-  connect(m_payeesList, SIGNAL(itemRenamed(Q3ListViewItem*,int,const QString&)), this, SLOT(slotRenamePayee(Q3ListViewItem*,int,const QString&)));
+  connect(m_payeesList, SIGNAL(itemRenamed(Q3ListViewItem*, int, const QString&)), this, SLOT(slotRenamePayee(Q3ListViewItem*, int, const QString&)));
 
   connect(addressEdit, SIGNAL(textChanged()), this, SLOT(slotPayeeDataChanged()));
   connect(postcodeEdit, SIGNAL(textChanged(const QString&)), this, SLOT(slotPayeeDataChanged()));
@@ -391,7 +391,7 @@ KPayeesView::KPayeesView(QWidget *parent) :
   // use the size settings of the last run (if any)
   KConfigGroup grp = KGlobal::config()->group("Last Use Settings");
   QList<int> sizes = grp.readEntry("KPayeesViewSplitterSize", QList<int>());
-  if(sizes.size() == 2)
+  if (sizes.size() == 2)
     m_splitter->setSizes(sizes);
 }
 
@@ -414,14 +414,14 @@ void KPayeesView::slotQueueUpdate(void)
 void KPayeesView::slotActivateUpdate(void)
 {
   --m_updatesQueued;
-  if(m_updatesQueued == 0)
+  if (m_updatesQueued == 0)
     slotSelectPayee();
 }
 
 void KPayeesView::slotChooseDefaultAccount(void)
 {
-    MyMoneyFile* file = MyMoneyFile::instance();
-    QMap<QString,int> account_count;
+  MyMoneyFile* file = MyMoneyFile::instance();
+  QMap<QString, int> account_count;
 
   for (uint i = 0; i < m_transactionPtrVector.size(); ++i) {
     KMyMoneyTransaction* t = m_transactionPtrVector[i];
@@ -436,13 +436,12 @@ void KPayeesView::slotChooseDefaultAccount(void)
       MyMoneySplit s0 = t->splitByAccount(s.accountId(), false);
       if (account_count.contains(s0.accountId())) {
         account_count[s0.accountId()]++;
-      }
-      else {
+      } else {
         account_count[s0.accountId()] = 1;
       }
     }
   }
-  QMap<QString,int>::Iterator most_frequent, iter;
+  QMap<QString, int>::Iterator most_frequent, iter;
   most_frequent = account_count.end();
   for (iter = account_count.begin(); iter != account_count.end(); ++iter) {
     if (iter.value() > most_frequent.value()) {
@@ -460,7 +459,7 @@ void KPayeesView::slotStartRename(void)
 {
   Q3ListViewItemIterator it_l(m_payeesList, Q3ListViewItemIterator::Selected);
   Q3ListViewItem* it_v;
-  if((it_v = it_l.current()) != 0) {
+  if ((it_v = it_l.current()) != 0) {
     it_v->startRename(0);
   }
 }
@@ -481,14 +480,13 @@ void KPayeesView::slotRenamePayee(Q3ListViewItem* p , int /* col */, const QStri
         MyMoneyFile::instance()->payeeByName(new_name);
         // the name already exists, ask the user whether he's sure to keep the name
         if (KMessageBox::questionYesNo(this,
-          i18n("A payee with the name '%1' already exists. It is not advisable to have "
-            "multiple payees with the same identification name. Are you sure you would like "
-            "to rename the payee?",new_name)) != KMessageBox::Yes)
-        {
-          p->setText(0,m_payee.name());
+                                       i18n("A payee with the name '%1' already exists. It is not advisable to have "
+                                            "multiple payees with the same identification name. Are you sure you would like "
+                                            "to rename the payee?", new_name)) != KMessageBox::Yes) {
+          p->setText(0, m_payee.name());
           return;
         }
-      } catch(MyMoneyException *e) {
+      } catch (MyMoneyException *e) {
         // all ok, the name is unique
         delete e;
       }
@@ -507,13 +505,12 @@ void KPayeesView::slotRenamePayee(Q3ListViewItem* p , int /* col */, const QStri
 
       ft.commit();
 
-    } catch(MyMoneyException *e) {
+    } catch (MyMoneyException *e) {
       KMessageBox::detailedSorry(0, i18n("Unable to modify payee"),
-        (e->what() + ' ' + i18n("thrown in") + ' ' + e->file()+ ":%1").arg(e->line()));
+                                 (e->what() + ' ' + i18n("thrown in") + ' ' + e->file() + ":%1").arg(e->line()));
       delete e;
     }
-  }
-  else {
+  } else {
     p->setText(0, new_name);
   }
 }
@@ -522,10 +519,10 @@ void KPayeesView::ensurePayeeVisible(const QString& id)
 {
   for (Q3ListViewItem * item = m_payeesList->firstChild(); item; item = item->itemBelow()) {
     KPayeeListItem* p = dynamic_cast<KPayeeListItem*>(item);
-    if(p && p->payee().id() == id) {
-      if(p->itemAbove())
+    if (p && p->payee().id() == id) {
+      if (p->itemAbove())
         m_payeesList->ensureItemVisible(p->itemAbove());
-      if(p->itemBelow())
+      if (p->itemBelow())
         m_payeesList->ensureItemVisible(p->itemBelow());
 
       m_payeesList->setCurrentItem(p);      // active item and deselect all others
@@ -540,9 +537,9 @@ void KPayeesView::selectedPayees(QList<MyMoneyPayee>& payeesList) const
 {
   Q3ListViewItemIterator it_l(m_payeesList, Q3ListViewItemIterator::Selected | Q3ListViewItemIterator::Visible);
   Q3ListViewItem* it_v;
-  while((it_v = it_l.current()) != 0) {
+  while ((it_v = it_l.current()) != 0) {
     KPayeeListItem* item = dynamic_cast<KPayeeListItem*>(it_v);
-    if(item)
+    if (item)
       payeesList << item->payee();
     ++it_l;
   }
@@ -554,8 +551,8 @@ void KPayeesView::slotSelectPayee(void)
   // and ask to store the data
   if (m_updateButton->isEnabled()) {
     if (KMessageBox::questionYesNo(this, QString("<qt>%1</qt>").arg(
-          i18n("Do you want to save the changes for <b>%1</b>?",m_newName)),
-          i18n("Save changes")) == KMessageBox::Yes) {
+                                     i18n("Do you want to save the changes for <b>%1</b>?", m_newName)),
+                                   i18n("Save changes")) == KMessageBox::Yes) {
       m_inSelection = true;
       slotUpdatePayee();
       m_inSelection = false;
@@ -624,7 +621,7 @@ void KPayeesView::slotSelectPayee(void)
 
     showTransactions();
 
-  } catch(MyMoneyException *e) {
+  } catch (MyMoneyException *e) {
     qDebug("exception during display of payee: %s at %s:%ld", qPrintable(e->what()), qPrintable(e->file()), e->line());
     m_transactionView->clear();
     m_payee = MyMoneyPayee();
@@ -651,8 +648,8 @@ void KPayeesView::showTransactions(void)
   // clear the current transaction listview
   m_transactionView->clear();
 
-  if(m_payee.id().isEmpty() || !m_tabWidget->isEnabled()) {
-    m_balanceLabel->setText(i18n("Balance: %1",balance.formatMoney(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction())));
+  if (m_payee.id().isEmpty() || !m_tabWidget->isEnabled()) {
+    m_balanceLabel->setText(i18n("Balance: %1", balance.formatMoney(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction())));
     return;
   }
 
@@ -673,11 +670,11 @@ void KPayeesView::showTransactions(void)
   QString lastId;
   int ofs = 0;
 
-  for(i = 0, it_t = list.constBegin(); it_t != list.constEnd(); ++it_t) {
+  for (i = 0, it_t = list.constBegin(); it_t != list.constEnd(); ++it_t) {
     KMyMoneyTransaction k(*it_t);
 
     filter.match(*it_t);
-    if(lastId != (*it_t).id()) {
+    if (lastId != (*it_t).id()) {
       ofs = 0;
       lastId = (*it_t).id();
     } else
@@ -685,8 +682,8 @@ void KPayeesView::showTransactions(void)
 
     k.setSplitId(filter.matchingSplits()[ofs].id());
     MyMoneyAccount acc = MyMoneyFile::instance()->account(filter.matchingSplits()[ofs].accountId());
-    if(acc.accountGroup() == MyMoneyAccount::Asset
-    || acc.accountGroup() == MyMoneyAccount::Liability) {
+    if (acc.accountGroup() == MyMoneyAccount::Asset
+        || acc.accountGroup() == MyMoneyAccount::Liability) {
       QList<KMyMoneyTransaction>::const_iterator it_k;
       m_transactionList.append(k);
       balance += k.splitById(k.splitId()).value();
@@ -702,7 +699,7 @@ void KPayeesView::showTransactions(void)
   // and fill the m_transactionView
   KTransactionListItem *item = 0;
 
-  for(i = 0; i < m_transactionPtrVector.size(); ++i) {
+  for (i = 0; i < m_transactionPtrVector.size(); ++i) {
     KMyMoneyTransaction* t = m_transactionPtrVector[i];
     MyMoneySplit s = t->splitById(t->splitId());
     const MyMoneyAccount& acc = file->account(s.accountId());
@@ -712,38 +709,38 @@ void KPayeesView::showTransactions(void)
     item->setText(1, KGlobal::locale()->formatDate(t->postDate(), KLocale::ShortDate));
 
     QString txt;
-    if(s.action() == MyMoneySplit::ActionAmortization) {
-      if(acc.accountType() == MyMoneyAccount::Loan) {
-        if(s.value().isPositive()) {
-          txt = i18n("Amortization of %1",acc.name());
+    if (s.action() == MyMoneySplit::ActionAmortization) {
+      if (acc.accountType() == MyMoneyAccount::Loan) {
+        if (s.value().isPositive()) {
+          txt = i18n("Amortization of %1", acc.name());
         } else {
-          txt = i18n("Payment to %1",acc.name());
+          txt = i18n("Payment to %1", acc.name());
         }
-      } else if(acc.accountType() == MyMoneyAccount::AssetLoan) {
-        if(s.value().isNegative()) {
-          txt = i18n("Amortization of %1",acc.name());
+      } else if (acc.accountType() == MyMoneyAccount::AssetLoan) {
+        if (s.value().isNegative()) {
+          txt = i18n("Amortization of %1", acc.name());
         } else {
-          txt = i18n("Payment to %1",acc.name());
+          txt = i18n("Payment to %1", acc.name());
         }
       } else {
-        txt = i18n("Loan payment from %1",acc.name());
+        txt = i18n("Loan payment from %1", acc.name());
       }
     } else if (file->isTransfer(*t)) {
-      if(!s.value().isNegative()) {
-        txt = i18n("Transfer to %1",acc.name());
+      if (!s.value().isNegative()) {
+        txt = i18n("Transfer to %1", acc.name());
       } else {
-        txt = i18n("Transfer from %1",acc.name());
+        txt = i18n("Transfer from %1", acc.name());
       }
-    } else if(t->splitCount() > 2) {
+    } else if (t->splitCount() > 2) {
       txt = i18nc("Split transaction (category replacement)", "Split transaction");
-    } else if(t->splitCount() == 2) {
+    } else if (t->splitCount() == 2) {
       MyMoneySplit s0 = t->splitByAccount(s.accountId(), false);
       txt = MyMoneyFile::instance()->accountToCategory(s0.accountId());
     }
     item->setText(2, txt);
     item->setText(3, s.value().formatMoney(acc.fraction()));
   }
-  m_balanceLabel->setText(i18n("Balance: %1",balance.formatMoney(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction())));
+  m_balanceLabel->setText(i18n("Balance: %1", balance.formatMoney(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction())));
 
   // Trick: it seems, that the initial sizing of the view does
   // not work correctly. At least, the columns do not get displayed
@@ -762,7 +759,7 @@ void KPayeesView::slotKeyListChanged(void)
   // J.Rodehueser: delete unused variable 'type'
   // orig:  MyMoneyPayee::payeeMatchType type = m_payee.matchData(ignorecase, keys);
   m_payee.matchData(ignorecase, keys);
-  if(m_matchType->checkedId() == MyMoneyPayee::matchKey) {
+  if (m_matchType->checkedId() == MyMoneyPayee::matchKey) {
     rc |= (keys != matchKeyEditList->items());
   }
   m_updateButton->setEnabled(rc);
@@ -772,19 +769,19 @@ void KPayeesView::slotPayeeDataChanged(void)
 {
   bool rc = false;
 
-  if(m_tabWidget->isEnabled()) {
+  if (m_tabWidget->isEnabled()) {
     rc |= ((m_payee.email().isEmpty() != emailEdit->text().isEmpty())
-        || (!emailEdit->text().isEmpty() && m_payee.email() != emailEdit->text()));
+           || (!emailEdit->text().isEmpty() && m_payee.email() != emailEdit->text()));
     rc |= ((m_payee.address().isEmpty() != addressEdit->text().isEmpty())
-        || (!addressEdit->text().isEmpty() && m_payee.address() != addressEdit->text()));
+           || (!addressEdit->text().isEmpty() && m_payee.address() != addressEdit->text()));
     rc |= ((m_payee.postcode().isEmpty() != postcodeEdit->text().isEmpty())
-        || (!postcodeEdit->text().isEmpty() && m_payee.postcode() != postcodeEdit->text()));
+           || (!postcodeEdit->text().isEmpty() && m_payee.postcode() != postcodeEdit->text()));
     rc |= ((m_payee.telephone().isEmpty() != telephoneEdit->text().isEmpty())
-        || (!telephoneEdit->text().isEmpty() && m_payee.telephone() != telephoneEdit->text()));
+           || (!telephoneEdit->text().isEmpty() && m_payee.telephone() != telephoneEdit->text()));
     rc |= ((m_payee.name().isEmpty() != m_newName.isEmpty())
-        || (!m_newName.isEmpty() && m_payee.name() != m_newName));
+           || (!m_newName.isEmpty() && m_payee.name() != m_newName));
     rc |= ((m_payee.notes().isEmpty() != notesEdit->text().isEmpty())
-        || (!notesEdit->text().isEmpty() && m_payee.notes() != notesEdit->text()));
+           || (!notesEdit->text().isEmpty() && m_payee.notes() != notesEdit->text()));
 
     bool ignorecase = false;
     QStringList keys;
@@ -795,14 +792,14 @@ void KPayeesView::slotPayeeDataChanged(void)
     checkMatchIgnoreCase->setEnabled(false);
     matchKeyEditList->setEnabled(false);
 
-    if(m_matchType->checkedId() != MyMoneyPayee::matchDisabled) {
+    if (m_matchType->checkedId() != MyMoneyPayee::matchDisabled) {
       checkMatchIgnoreCase->setEnabled(true);
       // if we turn matching on, we default to 'ignore case'
       // TODO maybe make the default a user option
-      if(type == MyMoneyPayee::matchDisabled && m_matchType->checkedId() != MyMoneyPayee::matchDisabled)
+      if (type == MyMoneyPayee::matchDisabled && m_matchType->checkedId() != MyMoneyPayee::matchDisabled)
         checkMatchIgnoreCase->setChecked(true);
       rc |= (ignorecase != checkMatchIgnoreCase->isChecked());
-      if(m_matchType->checkedId() == MyMoneyPayee::matchKey) {
+      if (m_matchType->checkedId() == MyMoneyPayee::matchKey) {
         matchKeyEditList->setEnabled(true);
         rc |= (keys != matchKeyEditList->items());
       }
@@ -815,14 +812,12 @@ void KPayeesView::slotPayeeDataChanged(void)
       // this is only going to understand the first in the list of selected accounts
       if (comboDefaultAccount->selectedAccounts().empty()) {
         rc |= !m_payee.defaultAccountId().isEmpty();
-      }
-      else {
+      } else {
         QString temp = comboDefaultAccount->selectedAccounts().front();
-        rc |= ( temp.isEmpty() != m_payee.defaultAccountId().isEmpty())
+        rc |= (temp.isEmpty() != m_payee.defaultAccountId().isEmpty())
               || (!m_payee.defaultAccountId().isEmpty() && temp != m_payee.defaultAccountId());
       }
-    }
-    else {
+    } else {
       comboDefaultAccount->setEnabled(false);
       labelDefaultAccount->setEnabled(false);
     }
@@ -832,7 +827,7 @@ void KPayeesView::slotPayeeDataChanged(void)
 
 void KPayeesView::slotUpdatePayee(void)
 {
-  if(m_updateButton->isEnabled()) {
+  if (m_updateButton->isEnabled()) {
     MyMoneyFileTransaction ft;
     m_updateButton->setEnabled(false);
     try {
@@ -856,9 +851,9 @@ void KPayeesView::slotUpdatePayee(void)
       MyMoneyFile::instance()->modifyPayee(m_payee);
       ft.commit();
 
-    } catch(MyMoneyException *e) {
+    } catch (MyMoneyException *e) {
       KMessageBox::detailedSorry(0, i18n("Unable to modify payee"),
-        (e->what() + ' ' + i18n("thrown in") + ' ' + e->file()+ ":%1").arg(e->line()));
+                                 (e->what() + ' ' + i18n("thrown in") + ' ' + e->file() + ":%1").arg(e->line()));
       delete e;
     }
   }
@@ -868,15 +863,15 @@ void KPayeesView::readConfig(void)
 {
   m_transactionView->setFont(KMyMoneyGlobalSettings::listCellFont());
 
-  QFontMetrics fm( KMyMoneyGlobalSettings::listHeaderFont() );
-  int height = fm.lineSpacing()+6;
+  QFontMetrics fm(KMyMoneyGlobalSettings::listHeaderFont());
+  int height = fm.lineSpacing() + 6;
 
   m_transactionView->header()->setMinimumHeight(height);
   m_transactionView->header()->setMaximumHeight(height);
   m_transactionView->header()->setFont(KMyMoneyGlobalSettings::listHeaderFont());
 
   m_payeesList->setDefaultRenameAction(
-           KMyMoneyGlobalSettings::focusChangeIsEnter() ? Q3ListView::Accept : Q3ListView::Reject);
+    KMyMoneyGlobalSettings::focusChangeIsEnter() ? Q3ListView::Accept : Q3ListView::Reject);
 
   //initialize the account list?
   comboDefaultAccount->loadList((KMyMoneyUtils::categoryTypeE)(KMyMoneyUtils::asset | KMyMoneyUtils::liability | MyMoneyAccount::Income | MyMoneyAccount::Expense));
@@ -889,12 +884,12 @@ void KPayeesView::show(void)
   // we set it up now. The widgets of the K3ListViewSearchLineWidget must exist by now.
   // If you want to learn about the details, see the source of K3ListViewSearchLineWidget's
   // constructor
-  if(m_needConnection) {
+  if (m_needConnection) {
     connect(m_searchWidget->searchLine(), SIGNAL(textChanged(const QString&)), this, SLOT(slotQueueUpdate(void)));
     m_needConnection = false;
   }
 
-  if(m_needReload) {
+  if (m_needReload) {
     loadPayees();
     m_needReload = false;
   }
@@ -912,8 +907,8 @@ void KPayeesView::show(void)
 
 void KPayeesView::slotLoadPayees(void)
 {
-  if(isVisible()) {
-    if(m_inSelection)
+  if (isVisible()) {
+    if (m_inSelection)
       QTimer::singleShot(0, this, SLOT(slotLoadPayees()));
     else
       loadPayees();
@@ -924,7 +919,7 @@ void KPayeesView::slotLoadPayees(void)
 
 void KPayeesView::loadPayees(void)
 {
-  if(m_inSelection)
+  if (m_inSelection)
     return;
 
   QMap<QString, bool> isSelected;
@@ -936,16 +931,16 @@ void KPayeesView::loadPayees(void)
   // remember which items are selected in the list
   Q3ListViewItemIterator it_l(m_payeesList, Q3ListViewItemIterator::Selected);
   Q3ListViewItem* it_v;
-  while((it_v = it_l.current()) != 0) {
+  while ((it_v = it_l.current()) != 0) {
     KPayeeListItem* item = dynamic_cast<KPayeeListItem*>(it_v);
-    if(item)
+    if (item)
       isSelected[item->payee().id()] = true;
     ++it_l;
   }
 
   // keep current selected item
   KPayeeListItem *currentItem = static_cast<KPayeeListItem *>(m_payeesList->currentItem());
-  if(currentItem)
+  if (currentItem)
     id = currentItem->payee().id();
 
   // remember the upper left corner of the viewport
@@ -964,9 +959,9 @@ void KPayeesView::loadPayees(void)
 
   for (it = list.constBegin(); it != list.constEnd(); ++it) {
     KPayeeListItem* item = new KPayeeListItem(m_payeesList, *it);
-    if(item->payee().id() == id)
+    if (item->payee().id() == id)
       currentItem = item;
-    if(isSelected[item->payee().id()])
+    if (isSelected[item->payee().id()])
       item->setSelected(true);
   }
 
@@ -1017,7 +1012,7 @@ void KPayeesView::slotTransactionDoubleClicked(Q3ListViewItem* i)
 
 void KPayeesView::slotSelectPayeeAndTransaction(const QString& payeeId, const QString& accountId, const QString& transactionId)
 {
-  if(!isVisible())
+  if (!isVisible())
     return;
 
   try {
@@ -1028,37 +1023,37 @@ void KPayeesView::slotSelectPayeeAndTransaction(const QString& payeeId, const QS
     // deselect all other selected items
     Q3ListViewItemIterator it_l(m_payeesList, Q3ListViewItemIterator::Selected);
     Q3ListViewItem* it_v;
-    while((it_v = it_l.current()) != 0) {
+    while ((it_v = it_l.current()) != 0) {
       KPayeeListItem* item = dynamic_cast<KPayeeListItem*>(it_v);
-      if(item)
+      if (item)
         item->setSelected(false);
       ++it_l;
     }
 
     // find the payee in the list
     Q3ListViewItem* it;
-    for(it = m_payeesList->firstChild(); it; it = it->itemBelow()) {
+    for (it = m_payeesList->firstChild(); it; it = it->itemBelow()) {
       KPayeeListItem* item = dynamic_cast<KPayeeListItem *>(it);
-      if(item && item->payee().id() == payeeId) {
-        if(it->itemAbove())
+      if (item && item->payee().id() == payeeId) {
+        if (it->itemAbove())
           m_payeesList->ensureItemVisible(it->itemAbove());
-        if(it->itemBelow())
+        if (it->itemBelow())
           m_payeesList->ensureItemVisible(it->itemBelow());
 
         m_payeesList->setCurrentItem(it);     // active item and deselect all others
-        m_payeesList->setSelected(it,true);   // and select it
+        m_payeesList->setSelected(it, true);  // and select it
         m_payeesList->ensureItemVisible(it);
 
-        KTransactionListItem* item = dynamic_cast<KTransactionListItem*> (m_transactionView->firstChild());
-        while(item != 0) {
-          if(item->accountId() == accountId && item->transactionId() == transactionId)
+        KTransactionListItem* item = dynamic_cast<KTransactionListItem*>(m_transactionView->firstChild());
+        while (item != 0) {
+          if (item->accountId() == accountId && item->transactionId() == transactionId)
             break;
-          item = dynamic_cast<KTransactionListItem*> (item->nextSibling());
+          item = dynamic_cast<KTransactionListItem*>(item->nextSibling());
         }
-        if(!item) {
-          item = dynamic_cast<KTransactionListItem*> (m_transactionView->firstChild());
+        if (!item) {
+          item = dynamic_cast<KTransactionListItem*>(m_transactionView->firstChild());
         }
-        if(item) {
+        if (item) {
           m_transactionView->setSelected(item, true);
           m_transactionView->ensureItemVisible(item);
         }
@@ -1067,7 +1062,7 @@ void KPayeesView::slotSelectPayeeAndTransaction(const QString& payeeId, const QS
       }
     }
 
-  } catch(MyMoneyException *e) {
+  } catch (MyMoneyException *e) {
     qWarning("Unexpected exception in KPayeesView::slotSelectPayeeAndTransaction");
     delete e;
   }
@@ -1076,9 +1071,9 @@ void KPayeesView::slotSelectPayeeAndTransaction(const QString& payeeId, const QS
 void KPayeesView::slotOpenContextMenu(K3ListView* lv, Q3ListViewItem* i, const QPoint& p)
 {
   Q_UNUSED(p);
-  if(lv == m_payeesList) {
+  if (lv == m_payeesList) {
     KPayeeListItem* item = dynamic_cast<KPayeeListItem*>(i);
-    if(item) {
+    if (item) {
       emit openContextMenu(item->payee());
     }
   }

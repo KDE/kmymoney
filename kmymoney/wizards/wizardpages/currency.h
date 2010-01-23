@@ -36,8 +36,8 @@ class K3ListViewItem;
 class CurrencyDecl : public QWidget, public Ui::CurrencyDecl
 {
 public:
-  CurrencyDecl( QWidget *parent ) : QWidget( parent ) {
-    setupUi( this );
+  CurrencyDecl(QWidget *parent) : QWidget(parent) {
+    setupUi(this);
   }
 };
 class Currency : public CurrencyDecl

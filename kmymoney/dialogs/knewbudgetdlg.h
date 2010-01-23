@@ -36,8 +36,8 @@
 class KNewBudgetDlgDecl : public QDialog, public Ui::KNewBudgetDlgDecl
 {
 public:
-  KNewBudgetDlgDecl( QWidget *parent ) : QDialog( parent ) {
-    setupUi( this );
+  KNewBudgetDlgDecl(QWidget *parent) : QDialog(parent) {
+    setupUi(this);
   }
 };
 
@@ -48,12 +48,16 @@ public:
   KNewBudgetDlg(QWidget* parent);
   ~KNewBudgetDlg();
 
-  QString& getYear() {return m_year;};
-  QString& getName() {return m_name;};
+  QString& getYear() {
+    return m_year;
+  };
+  QString& getName() {
+    return m_name;
+  };
 
 public slots:
-    virtual void m_pbCancel_clicked();
-    virtual void m_pbOk_clicked();
+  virtual void m_pbCancel_clicked();
+  virtual void m_pbOk_clicked();
 
 private:
   // the combobox should look m_icNextYears into the future

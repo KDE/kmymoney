@@ -42,10 +42,10 @@
 #define RECOVER_KEY_ID_FULL "59B0F826D2B08440"
 
 KSettingsGpg::KSettingsGpg(QWidget* parent) :
-  KSettingsGpgDecl(parent),
-  m_checkCount(0),
-  m_needCheckList(true),
-  m_listOk(false)
+    KSettingsGpgDecl(parent),
+    m_checkCount(0),
+    m_needCheckList(true),
+    m_listOk(false)
 {
   setEnabled(KGPGFile::GPGAvailable());
 
@@ -83,21 +83,21 @@ void KSettingsGpg::slotIdChanged(void)
   // The second invocation is counted, but the check is not started until the
   // first one finishes. Once the external process finishes, we check if we
   // were called in the meantime and restart the check.
-  if(++m_checkCount == 1) {
-    while(1) {
+  if (++m_checkCount == 1) {
+    while (1) {
       // first we check the current edit field if filled
       bool keysOk = true;
-      if(!kcfg_GpgRecipientList->currentText().isEmpty()) {
+      if (!kcfg_GpgRecipientList->currentText().isEmpty()) {
         keysOk = KGPGFile::keyAvailable(kcfg_GpgRecipientList->currentText());
       }
 
       // if it is available, then scan the current list if we need to
-      if(keysOk) {
-        if(m_needCheckList) {
+      if (keysOk) {
+        if (m_needCheckList) {
           QStringList keys = kcfg_GpgRecipientList->items();
           QStringList::const_iterator it_s;
-          for(it_s = keys.constBegin(); keysOk && it_s != keys.constEnd(); ++it_s) {
-            if(!KGPGFile::keyAvailable(*it_s))
+          for (it_s = keys.constBegin(); keysOk && it_s != keys.constEnd(); ++it_s) {
+            if (!KGPGFile::keyAvailable(*it_s))
               keysOk = false;
           }
           m_listOk = keysOk;
@@ -109,15 +109,15 @@ void KSettingsGpg::slotIdChanged(void)
       }
 
       // did we receive some more requests to check?
-      if(m_checkCount > 1) {
+      if (m_checkCount > 1) {
         m_checkCount = 1;
         continue;
       }
 
       // if we have a master key, we store it in the hidden widget
-      if(m_masterKeyCombo->currentIndex() != 0) {
+      if (m_masterKeyCombo->currentIndex() != 0) {
         QRegExp keyExp(".* \\((.*)\\)");
-        if(keyExp.indexIn(m_masterKeyCombo->currentText()) != -1) {
+        if (keyExp.indexIn(m_masterKeyCombo->currentText()) != -1) {
           kcfg_GpgRecipient->setText(keyExp.cap(1));
         }
       }
@@ -134,9 +134,9 @@ void KSettingsGpg::showEvent(QShowEvent * event)
 {
   QString masterKey;
 
-  if(m_masterKeyCombo->currentIndex() != 0) {
+  if (m_masterKeyCombo->currentIndex() != 0) {
     QRegExp keyExp(".* \\((.*)\\)");
-    if(keyExp.indexIn(m_masterKeyCombo->currentText()) != -1) {
+    if (keyExp.indexIn(m_masterKeyCombo->currentText()) != -1) {
       masterKey = keyExp.cap(1);
     }
   } else
@@ -147,22 +147,22 @@ void KSettingsGpg::showEvent(QShowEvent * event)
   QStringList keyList;
   KGPGFile::secretKeyList(keyList);
 
-  for(QStringList::iterator it = keyList.begin(); it != keyList.end(); ++it) {
+  for (QStringList::iterator it = keyList.begin(); it != keyList.end(); ++it) {
     QStringList fields = (*it).split(':', QString::SkipEmptyParts);
-    if(fields[0] != RECOVER_KEY_ID_FULL) {
+    if (fields[0] != RECOVER_KEY_ID_FULL) {
       // replace parenthesis in name field with brackets
       QString name = fields[1];
       name.replace('(', "[");
       name.replace(')', "]");
       name = QString("%1 (0x%2)").arg(name).arg(fields[0]);
       m_masterKeyCombo->addItem(name);
-      if(name.contains(masterKey))
+      if (name.contains(masterKey))
         m_masterKeyCombo->setCurrentItem(name);
     }
   }
 
   // if we don't have at least one secret key, we turn off encryption
-  if(keyList.isEmpty()) {
+  if (keyList.isEmpty()) {
     setEnabled(false);
     kcfg_WriteDataEncrypted->setChecked(false);
   }
@@ -174,10 +174,10 @@ void KSettingsGpg::showEvent(QShowEvent * event)
 void KSettingsGpg::slotStatusChanged(bool state)
 {
   static bool oncePerSession = true;
-  if(state && !KGPGFile::GPGAvailable())
+  if (state && !KGPGFile::GPGAvailable())
     state = false;
 
-  if((state == true) && (oncePerSession == true) && isVisible()) {
+  if ((state == true) && (oncePerSession == true) && isVisible()) {
     KMessageBox::information(this, QString("<qt>%1</qt>").arg(i18n("<p>You have turned on the GPG encryption support. This means, that new files will be stored encrypted.</p><p>Existing files will not be encrypted automatically.  To achieve encryption of existing files, please use the <b>File/Save as...</b> feature and store the file under a different name.<br/>Once confident with the result, feel free to delete the old file and rename the encrypted one to the old name.</p>")), i18n("GPG encryption activated"), "GpgEncryptionActivated");
     oncePerSession = false;
   }
@@ -187,8 +187,8 @@ void KSettingsGpg::slotStatusChanged(bool state)
   m_masterKeyCombo->setEnabled(state);
   kcfg_GpgRecipientList->setEnabled(state);
 
-  if(state) {
-    m_recoverKeyFound->setState((KLed::State) (KGPGFile::keyAvailable(RECOVER_KEY_ID) ? KLed::On : KLed::Off));
+  if (state) {
+    m_recoverKeyFound->setState((KLed::State)(KGPGFile::keyAvailable(RECOVER_KEY_ID) ? KLed::On : KLed::Off));
     kcfg_EncryptRecover->setEnabled(m_recoverKeyFound->state() == KLed::On);
     slotIdChanged();
 

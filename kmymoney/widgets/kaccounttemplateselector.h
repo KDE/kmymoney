@@ -40,29 +40,29 @@ class MyMoneyTemplate;
 class KAccountTemplateSelectorDecl : public QWidget, public Ui::KAccountTemplateSelectorDecl
 {
 public:
-  KAccountTemplateSelectorDecl( QWidget *parent ) : QWidget( parent ) {
-    setupUi( this );
+  KAccountTemplateSelectorDecl(QWidget *parent) : QWidget(parent) {
+    setupUi(this);
   }
 };
 class KAccountTemplateSelector : public KAccountTemplateSelectorDecl
 {
   Q_OBJECT
-  public:
-    KAccountTemplateSelector(QWidget* parent = 0);
-    ~KAccountTemplateSelector();
+public:
+  KAccountTemplateSelector(QWidget* parent = 0);
+  ~KAccountTemplateSelector();
 
-    QList<MyMoneyTemplate> selectedTemplates(void) const;
+  QList<MyMoneyTemplate> selectedTemplates(void) const;
 
-  private slots:
-    void slotLoadHierarchy(void);
-    void slotLoadCountry(void);
-    void slotLoadTemplateList(void);
+private slots:
+  void slotLoadHierarchy(void);
+  void slotLoadCountry(void);
+  void slotLoadTemplateList(void);
 
-  private:
-    /// \internal d-pointer class.
-    class Private;
-    /// \internal d-pointer instance.
-    Private* const d;
+private:
+  /// \internal d-pointer class.
+  class Private;
+  /// \internal d-pointer instance.
+  Private* const d;
 };
 
 #endif

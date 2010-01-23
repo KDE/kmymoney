@@ -37,13 +37,13 @@
 #include "mymoneyexception.h"
 
 MyMoneyPrice::MyMoneyPrice() :
-  m_date(QDate())
+    m_date(QDate())
 {
 }
 
 MyMoneyPrice::MyMoneyPrice(const QString& from, const QString& to, const QDomElement& node)
 {
-  if("PRICE" != node.tagName())
+  if ("PRICE" != node.tagName())
     throw new MYMONEYEXCEPTION("Node was not PRICE");
 
   m_fromSecurity = from;
@@ -53,21 +53,21 @@ MyMoneyPrice::MyMoneyPrice(const QString& from, const QString& to, const QDomEle
   m_rate = MyMoneyMoney(node.attribute("price"));
   m_source = node.attribute("source");
 
-  if(!m_rate.isZero())
-    m_invRate = MyMoneyMoney(1,1) / m_rate;
+  if (!m_rate.isZero())
+    m_invRate = MyMoneyMoney(1, 1) / m_rate;
   else
     qDebug("Price with zero value loaded");
 }
 
 MyMoneyPrice::MyMoneyPrice(const QString& from, const QString& to, const QDate& date, const MyMoneyMoney& rate, const QString& source) :
-  m_fromSecurity(from),
-  m_toSecurity(to),
-  m_date(date),
-  m_rate(rate),
-  m_source(source)
+    m_fromSecurity(from),
+    m_toSecurity(to),
+    m_date(date),
+    m_rate(rate),
+    m_source(source)
 {
-  if(!m_rate.isZero())
-    m_invRate = MyMoneyMoney(1,1) / m_rate;
+  if (!m_rate.isZero())
+    m_invRate = MyMoneyMoney(1, 1) / m_rate;
   else
     qDebug("Price with zero value created");
 }
@@ -78,14 +78,14 @@ MyMoneyPrice::~MyMoneyPrice()
 
 const MyMoneyMoney MyMoneyPrice::rate(const QString& id) const
 {
-  static MyMoneyMoney dummyPrice(1,1);
+  static MyMoneyMoney dummyPrice(1, 1);
 
-  if(!isValid())
+  if (!isValid())
     return dummyPrice;
 
-  if(id.isEmpty() || id == m_toSecurity)
+  if (id.isEmpty() || id == m_toSecurity)
     return m_rate;
-  if(id == m_fromSecurity)
+  if (id == m_fromSecurity)
     return m_invRate;
 
   QString msg = QString("Unknown security id %1 for price info %2/%3.").arg(id).arg(m_fromSecurity).arg(m_toSecurity);
@@ -101,10 +101,10 @@ bool MyMoneyPrice::isValid(void) const
 bool MyMoneyPrice::operator == (const MyMoneyPrice &right) const
 {
   return ((m_date == right.m_date) &&
-      (m_rate == right.m_rate) &&
-      ((m_fromSecurity.length() == 0 && right.m_fromSecurity.length() == 0) || (m_fromSecurity == right.m_fromSecurity)) &&
-      ((m_toSecurity.length() == 0 && right.m_toSecurity.length() == 0) || (m_toSecurity == right.m_toSecurity)) &&
-      ((m_source.length() == 0 && right.m_source.length() == 0) || (m_source == right.m_source)));
+          (m_rate == right.m_rate) &&
+          ((m_fromSecurity.length() == 0 && right.m_fromSecurity.length() == 0) || (m_fromSecurity == right.m_fromSecurity)) &&
+          ((m_toSecurity.length() == 0 && right.m_toSecurity.length() == 0) || (m_toSecurity == right.m_toSecurity)) &&
+          ((m_source.length() == 0 && right.m_source.length() == 0) || (m_source == right.m_source)));
 }
 
 bool MyMoneyPrice::hasReferenceTo(const QString& id) const

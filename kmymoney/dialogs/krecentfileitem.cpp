@@ -39,7 +39,7 @@
 
 
 KRecentFileItem::KRecentFileItem(const QString& url, Q3IconView* parent, const QString& text, const QPixmap& icon)
-  : Q3IconViewItem(parent, text, icon),
+    : Q3IconViewItem(parent, text, icon),
     m_url(url),
     m_parent(parent)
 {
@@ -52,9 +52,9 @@ KRecentFileItem::~KRecentFileItem()
 {
 }
 
-bool KRecentFileItem::move( int x, int y )
+bool KRecentFileItem::move(int x, int y)
 {
   m_parent->setToolTip(m_url);
-  return Q3IconViewItem::move(x,y);
+  return Q3IconViewItem::move(x, y);
 }
 

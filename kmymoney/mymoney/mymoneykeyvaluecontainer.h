@@ -97,7 +97,9 @@ public:
     * @return QMap<QString, QString> containing all key/value pairs of
     *         this container.
     */
-  const QMap<QString, QString>& pairs(void) const { return m_kvp; };
+  const QMap<QString, QString>& pairs(void) const {
+    return m_kvp;
+  };
 
   /**
     * This method is used to initially store a set of key/value pairs
@@ -116,9 +118,13 @@ public:
     */
   bool operator == (const MyMoneyKeyValueContainer &) const;
 
-  const QString& operator[] ( const QString& k ) const { return value(k); }
+  const QString& operator[](const QString& k) const {
+    return value(k);
+  }
 
-  QString& operator[] ( const QString& k) { return m_kvp[k]; }
+  QString& operator[](const QString& k) {
+    return m_kvp[k];
+  }
 
   /**
     * This method creates a QDomElement for the @p document

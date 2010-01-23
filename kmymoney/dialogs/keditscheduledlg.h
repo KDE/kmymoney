@@ -41,8 +41,8 @@ class TransactionEditor;
 class KEditScheduleDlgDecl : public QDialog, public Ui::KEditScheduleDlgDecl
 {
 public:
-  explicit KEditScheduleDlgDecl( QWidget *parent ) : QDialog( parent ) {
-    setupUi( this );
+  explicit KEditScheduleDlgDecl(QWidget *parent) : QDialog(parent) {
+    setupUi(this);
   }
 };
 class KEditScheduleDlg : public KEditScheduleDlgDecl
@@ -52,7 +52,7 @@ public:
   /**
     * Standard QWidget constructor.
     **/
-  explicit KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget *parent=0);
+  explicit KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget *parent = 0);
 
   /**
     * Standard destructor.

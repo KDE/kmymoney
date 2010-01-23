@@ -32,7 +32,8 @@ class KBJobListView;
 class KBJobListViewItem;
 
 
-class KBJobListViewItem: public K3ListViewItem {
+class KBJobListViewItem: public K3ListViewItem
+{
 private:
   AB_JOB *_job;
 
@@ -41,8 +42,8 @@ private:
 public:
   KBJobListViewItem(KBJobListView *parent, AB_JOB *j);
   KBJobListViewItem(KBJobListView *parent,
-		    K3ListViewItem *after,
-		    AB_JOB *j);
+                    K3ListViewItem *after,
+                    AB_JOB *j);
   KBJobListViewItem(const KBJobListViewItem &item);
 
   virtual ~KBJobListViewItem();
@@ -52,10 +53,11 @@ public:
 
 
 
-class KBJobListView: public K3ListView {
+class KBJobListView: public K3ListView
+{
 private:
 public:
-  KBJobListView(QWidget *parent=0);
+  KBJobListView(QWidget *parent = 0);
   virtual ~KBJobListView();
 
   void addJob(AB_JOB *j);

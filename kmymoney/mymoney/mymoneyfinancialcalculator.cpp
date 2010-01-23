@@ -44,20 +44,20 @@
 
 FCALC_DOUBLE MyMoneyFinancialCalculator::rnd(const FCALC_DOUBLE x) const
 {
-  FCALC_DOUBLE r,f;
+  FCALC_DOUBLE r, f;
 
-  if(m_prec > 0) {
+  if (m_prec > 0) {
 #ifdef HAVE_ROUND
     f = powl(10.0, m_prec);
-    r = roundl(x * f)/f;
+    r = roundl(x * f) / f;
 #else
     char  buf[50];
 #if HAVE_LONG_DOUBLE
-    sprintf (buf, "%.*Lf", m_prec, x);
-    sscanf (buf, "%Lf", &r);
+    sprintf(buf, "%.*Lf", m_prec, x);
+    sscanf(buf, "%Lf", &r);
 #else
-    sprintf (buf, "%.*f", m_prec, x);
-    sscanf (buf, "%lf", &r);
+    sprintf(buf, "%.*f", m_prec, x);
+    sscanf(buf, "%lf", &r);
 #endif
 #endif
   } else
@@ -152,14 +152,14 @@ FCALC_DOUBLE MyMoneyFinancialCalculator::numPayments(void)
 {
   const unsigned short mask = PV_SET | IR_SET | PMT_SET | FV_SET;
 
-  if((m_mask & mask) != mask)
+  if ((m_mask & mask) != mask)
     throw new MYMONEYEXCEPTION("Not all parameters set for calculation of numPayments");
 
   FCALC_DOUBLE eint = eff_int();
   FCALC_DOUBLE CC = _Cx(eint);
 
   CC = (CC - m_fv) / (CC + m_pv);
-  m_npp = (CC > 0.0) ? logl (CC) / logl (eint +1.0) : 0.0;
+  m_npp = (CC > 0.0) ? logl(CC) / logl(eint + 1.0) : 0.0;
 
   m_mask |= NPP_SET;
   return m_npp;
@@ -169,7 +169,7 @@ FCALC_DOUBLE MyMoneyFinancialCalculator::payment(void)
 {
   const unsigned short mask = PV_SET | IR_SET | NPP_SET | FV_SET;
 
-  if((m_mask & mask) != mask)
+  if ((m_mask & mask) != mask)
     throw new MYMONEYEXCEPTION("Not all parameters set for calculation of payment");
 
   FCALC_DOUBLE eint = eff_int();
@@ -187,7 +187,7 @@ FCALC_DOUBLE MyMoneyFinancialCalculator::presentValue(void)
 {
   const unsigned short mask = PMT_SET | IR_SET | NPP_SET | FV_SET;
 
-  if((m_mask & mask) != mask)
+  if ((m_mask & mask) != mask)
     throw new MYMONEYEXCEPTION("Not all parameters set for calculation of payment");
 
   FCALC_DOUBLE eint = eff_int();
@@ -204,7 +204,7 @@ FCALC_DOUBLE MyMoneyFinancialCalculator::futureValue(void)
 {
   const unsigned short mask = PMT_SET | IR_SET | NPP_SET | PV_SET;
 
-  if((m_mask & mask) != mask)
+  if ((m_mask & mask) != mask)
     throw new MYMONEYEXCEPTION("Not all parameters set for calculation of payment");
 
   FCALC_DOUBLE eint = eff_int();
@@ -226,23 +226,23 @@ FCALC_DOUBLE MyMoneyFinancialCalculator::interestRate(void)
   int ri;
 
   if (m_pmt == 0.0) {
-    eint = powl ((dabs (m_fv) / dabs (m_pv)), (1.0 / m_npp)) - 1.0;
+    eint = powl((dabs(m_fv) / dabs(m_pv)), (1.0 / m_npp)) - 1.0;
   } else {
     if ((m_pmt * m_fv) < 0.0) {
-      if(m_pv)
+      if (m_pv)
         a = -1.0;
       else
         a = 1.0;
       eint =
-        dabs ((m_fv + a * m_npp * m_pmt) /
-              (3.0 *
-               ((m_npp - 1.0) * (m_npp - 1.0) * m_pmt + m_pv -
-                m_fv)));
+        dabs((m_fv + a * m_npp * m_pmt) /
+             (3.0 *
+              ((m_npp - 1.0) * (m_npp - 1.0) * m_pmt + m_pv -
+               m_fv)));
     } else {
       if ((m_pv * m_pmt) < 0.0) {
-        eint = dabs ((m_npp * m_pmt + m_pv + m_fv) / (m_npp * m_pv));
+        eint = dabs((m_npp * m_pmt + m_pv + m_fv) / (m_npp * m_pv));
       } else {
-        a = dabs (m_pmt / (dabs(m_pv) + dabs(m_fv)));
+        a = dabs(m_pmt / (dabs(m_pv) + dabs(m_fv)));
         eint = a + 1.0 / (a * m_npp * m_npp * m_npp);
       }
     }
@@ -250,14 +250,13 @@ FCALC_DOUBLE MyMoneyFinancialCalculator::interestRate(void)
       try {
         dik = _fi(eint) / _fip(eint);
         eint -= dik;
-      } catch(MyMoneyException *e) {
+      } catch (MyMoneyException *e) {
         delete e;
         eint = 0;
       }
       (void) modfl(ratio * (dik / eint), &a);
-      ri = static_cast<unsigned> (a);
-    }
-    while (ri);
+      ri = static_cast<unsigned>(a);
+    } while (ri);
   }
   m_mask |= IR_SET;
   m_ir = rnd(nom_int(eint) * 100.0);
@@ -280,15 +279,15 @@ FCALC_DOUBLE MyMoneyFinancialCalculator::_fip(const FCALC_DOUBLE eint) const
 
 FCALC_DOUBLE MyMoneyFinancialCalculator::_Ax(const FCALC_DOUBLE eint) const
 {
-  return powl ((eint + 1.0), m_npp) - 1.0;
+  return powl((eint + 1.0), m_npp) - 1.0;
 }
 
 FCALC_DOUBLE MyMoneyFinancialCalculator::_Bx(const FCALC_DOUBLE eint) const
 {
-  if(eint == 0.0)
+  if (eint == 0.0)
     throw new MYMONEYEXCEPTION("Zero interest");
 
-  if(m_bep == false)
+  if (m_bep == false)
     return static_cast<FCALC_DOUBLE>(1.0) / eint;
 
   return (eint + 1.0) / eint;
@@ -304,8 +303,8 @@ FCALC_DOUBLE MyMoneyFinancialCalculator::eff_int(void) const
   FCALC_DOUBLE nint = m_ir / 100.0;
   FCALC_DOUBLE eint;
 
-  if(m_disc) {              // periodically compound?
-    if(m_CF == m_PF) {      // same frequency?
+  if (m_disc) {             // periodically compound?
+    if (m_CF == m_PF) {     // same frequency?
       eint = nint / static_cast<FCALC_DOUBLE>(m_CF);
 
     } else {
@@ -325,15 +324,15 @@ FCALC_DOUBLE MyMoneyFinancialCalculator::nom_int(const FCALC_DOUBLE eint) const
 {
   FCALC_DOUBLE nint;
 
-  if(m_disc) {
-    if(m_CF == m_PF) {
+  if (m_disc) {
+    if (m_CF == m_PF) {
       nint = m_CF * eint;
 
     } else {
-      nint = m_CF * (powl ((eint + 1.0), (static_cast<FCALC_DOUBLE>(m_PF) / static_cast<FCALC_DOUBLE>(m_CF))) - 1.0);
+      nint = m_CF * (powl((eint + 1.0), (static_cast<FCALC_DOUBLE>(m_PF) / static_cast<FCALC_DOUBLE>(m_CF))) - 1.0);
     }
   } else
-    nint = logl (powl (eint + 1.0, m_PF));
+    nint = logl(powl(eint + 1.0, m_PF));
 
   return nint;
 }

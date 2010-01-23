@@ -47,16 +47,16 @@
 class KAccountSelectDlgDecl : public QDialog, public Ui::KAccountSelectDlgDecl
 {
 public:
-  KAccountSelectDlgDecl( QWidget *parent ) : QDialog( parent ) {
-    setupUi( this );
+  KAccountSelectDlgDecl(QWidget *parent) : QDialog(parent) {
+    setupUi(this);
   }
 };
 
 class KAccountSelectDlg : public KAccountSelectDlgDecl
 {
-   Q_OBJECT
+  Q_OBJECT
 public:
-  explicit KAccountSelectDlg(const KMyMoneyUtils::categoryTypeE type, const QString& purpose = "General", QWidget *parent=0);
+  explicit KAccountSelectDlg(const KMyMoneyUtils::categoryTypeE type, const QString& purpose = "General", QWidget *parent = 0);
   ~KAccountSelectDlg();
 
   /**
@@ -121,7 +121,9 @@ public:
     * @retval false Dialog was left using the 'Skip' button
     * @retval true Dialog was left using the 'Abort' button
     */
-  bool aborted(void) const { return m_aborted; };
+  bool aborted(void) const {
+    return m_aborted;
+  };
 
 public slots:
   /**

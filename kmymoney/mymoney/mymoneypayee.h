@@ -89,12 +89,12 @@ public:
   MyMoneyPayee();
   MyMoneyPayee(const QString& id, const MyMoneyPayee& payee);
   explicit MyMoneyPayee(const QString& name,
-                        const QString& address=QString(),
-                        const QString& city=QString(),
-                        const QString& state=QString(),
-                        const QString& postcode=QString(),
-                        const QString& telephone=QString(),
-                        const QString& email=QString());
+                        const QString& address = QString(),
+                        const QString& city = QString(),
+                        const QString& state = QString(),
+                        const QString& postcode = QString(),
+                        const QString& telephone = QString(),
+                        const QString& email = QString());
   /**
     * This is the constructor for a payee that is described by a
     * QDomElement (e.g. from a file).
@@ -107,28 +107,66 @@ public:
   ~MyMoneyPayee();
 
   // Simple get operations
-  QString name(void) const            { return m_name; }
-  QString address(void) const         { return m_address; }
-  QString city(void) const            { return m_city; }
-  QString state(void) const           { return m_state; }
-  QString postcode(void) const        { return m_postcode; }
-  QString telephone(void) const       { return m_telephone; }
-  QString email(void) const           { return m_email; }
-  QString notes(void) const           { return m_notes; }
+  QString name(void) const            {
+    return m_name;
+  }
+  QString address(void) const         {
+    return m_address;
+  }
+  QString city(void) const            {
+    return m_city;
+  }
+  QString state(void) const           {
+    return m_state;
+  }
+  QString postcode(void) const        {
+    return m_postcode;
+  }
+  QString telephone(void) const       {
+    return m_telephone;
+  }
+  QString email(void) const           {
+    return m_email;
+  }
+  QString notes(void) const           {
+    return m_notes;
+  }
 
-  const QString id(void) const        { return m_id; };
-  const QString reference(void) const { return m_reference; };
+  const QString id(void) const        {
+    return m_id;
+  };
+  const QString reference(void) const {
+    return m_reference;
+  };
 
   // Simple set operations
-  void setName(const QString& val)      { m_name = val; }
-  void setAddress(const QString& val)   { m_address = val; }
-  void setCity(const QString& val)      { m_city = val; }
-  void setState(const QString& val)     { m_state = val; }
-  void setPostcode(const QString& val)  { m_postcode = val; }
-  void setTelephone(const QString& val) { m_telephone = val; }
-  void setEmail(const QString& val)     { m_email = val; }
-  void setNotes(const QString& val)     { m_notes = val; }
-  void setReference(const QString& ref) { m_reference = ref; }
+  void setName(const QString& val)      {
+    m_name = val;
+  }
+  void setAddress(const QString& val)   {
+    m_address = val;
+  }
+  void setCity(const QString& val)      {
+    m_city = val;
+  }
+  void setState(const QString& val)     {
+    m_state = val;
+  }
+  void setPostcode(const QString& val)  {
+    m_postcode = val;
+  }
+  void setTelephone(const QString& val) {
+    m_telephone = val;
+  }
+  void setEmail(const QString& val)     {
+    m_email = val;
+  }
+  void setNotes(const QString& val)     {
+    m_notes = val;
+  }
+  void setReference(const QString& ref) {
+    m_reference = ref;
+  }
 
   /**
    * Get all match data in one call
@@ -171,8 +209,12 @@ public:
   void setMatchData(payeeMatchType type, bool ignorecase, const QString& keys);
 
 
-  bool defaultAccountEnabled() const { return !m_defaultAccountId.isEmpty(); }
-  const QString& defaultAccountId() const { return m_defaultAccountId; }
+  bool defaultAccountEnabled() const {
+    return !m_defaultAccountId.isEmpty();
+  }
+  const QString& defaultAccountId() const {
+    return m_defaultAccountId;
+  }
   void setDefaultAccountId(const QString& id = QString()) {
     m_defaultAccountId = id;
   }
@@ -200,7 +242,10 @@ public:
   static MyMoneyPayee null;
 };
 
-inline bool operator==(const MyMoneyPayee& lhs, const QString& rhs) { return lhs.id() == rhs; }
+inline bool operator==(const MyMoneyPayee& lhs, const QString& rhs)
+{
+  return lhs.id() == rhs;
+}
 
 #endif
 // vim:cin:si:ai:et:ts=2:sw=2:

@@ -50,7 +50,7 @@ KReportDlg::KReportDlg(QWidget* parent, const QString& summaryReportHTML, const 
   m_detailsHTMLPart->end();
 
   // signals and slots connections
-  connect( m_printButton, SIGNAL( clicked() ), this, SLOT( print() ) );
+  connect(m_printButton, SIGNAL(clicked()), this, SLOT(print()));
 }
 
 KReportDlg::~KReportDlg()
@@ -65,22 +65,20 @@ void KReportDlg::print()
   // start the print dialog to initialize the QPrinter object
   QPointer<QPrintDialog> dlg = new QPrintDialog(&printer, this);
 
-  if (dlg->exec())
-  {
+  if (dlg->exec()) {
     // create the painter object
     QPainter painter(&printer);
 
     // do the actual painting job
-    switch (m_tabWidget->currentIndex())
-    {
-      case 0:
-        m_summaryHTMLPart->paint(&painter, QRect(0, 0, 800, 600));
+    switch (m_tabWidget->currentIndex()) {
+    case 0:
+      m_summaryHTMLPart->paint(&painter, QRect(0, 0, 800, 600));
       break;
-      case 1:
-        m_detailsHTMLPart->paint(&painter, QRect(0, 0, 800, 600));
+    case 1:
+      m_detailsHTMLPart->paint(&painter, QRect(0, 0, 800, 600));
       break;
-      default:
-        qDebug("KReportDlg::print() current page index not handled correctly");
+    default:
+      qDebug("KReportDlg::print() current page index not handled correctly");
     }
   }
   delete dlg;

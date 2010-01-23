@@ -33,7 +33,10 @@ class QWidget;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace KMyMoneyRegister { class Transaction; }
+namespace KMyMoneyRegister
+{
+class Transaction;
+}
 
 typedef enum {
   ProtectNone = 0,

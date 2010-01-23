@@ -46,14 +46,15 @@
 class KCsvProgressDlgDecl : public QDialog, public Ui::KCsvProgressDlgDecl
 {
 public:
-  KCsvProgressDlgDecl( QWidget *parent ) : QDialog( parent ) {
-    setupUi( this );
+  KCsvProgressDlgDecl(QWidget *parent) : QDialog(parent) {
+    setupUi(this);
   }
 };
 
 
-class KCsvProgressDlg : public KCsvProgressDlgDecl  {
-   Q_OBJECT
+class KCsvProgressDlg : public KCsvProgressDlgDecl
+{
+  Q_OBJECT
 private:
   MyMoneyAccount *m_mymoneyaccount;
   int m_nType;

@@ -44,7 +44,8 @@
 
 #include "kmymoneyplugin.h"
 
-namespace KMyMoneyPlugin {
+namespace KMyMoneyPlugin
+{
 
 //---------------------------------------------------------------------
 //
@@ -55,8 +56,7 @@ static PluginLoader* s_instance = 0;
 
 typedef QMap<QString, Plugin*> PluginsMap;
 
-struct PluginLoader::Private
-{
+struct PluginLoader::Private {
   QObject*          m_parent;
   KPluginInfo::List m_pluginList;
   KPluginSelector*  m_pluginSelector;
@@ -65,7 +65,7 @@ struct PluginLoader::Private
 
 PluginLoader::PluginLoader(QObject* parent)
 {
-  Q_ASSERT( s_instance == 0 );
+  Q_ASSERT(s_instance == 0);
   s_instance = this;
 
   d = new Private;
@@ -90,8 +90,8 @@ PluginLoader::~PluginLoader()
 
 void PluginLoader::loadPlugins()
 {
-  for( KPluginInfo::List::Iterator it = d->m_pluginList.begin(); it != d->m_pluginList.end(); ++it )
-    loadPlugin( &(*it) );
+  for (KPluginInfo::List::Iterator it = d->m_pluginList.begin(); it != d->m_pluginList.end(); ++it)
+    loadPlugin(&(*it));
 }
 
 void PluginLoader::loadPlugin(KPluginInfo* info)
@@ -107,13 +107,11 @@ void PluginLoader::loadPlugin(KPluginInfo* info)
       if (plugin) {
         d->m_loadedPlugins.insert(info->name(), plugin);
         emit PluginLoader::instance()->plug(info);
-      }
-      else {
+      } else {
         qDebug("KMyMoneyPlugin::PluginLoader:: createInstanceFromService returned 0 for %s with error %s", qPrintable(info->name()), qPrintable(error));
       }
     }
-  }
-  else {
+  } else {
     if (getPluginFromInfo(info) != NULL) {
       // everybody interested should say goodbye to the plugin
       emit PluginLoader::instance()->unplug(info);
@@ -145,7 +143,7 @@ Plugin* PluginLoader::getPluginFromInfo(KPluginInfo* info)
 
 PluginLoader* PluginLoader::instance()
 {
-  Q_ASSERT( s_instance != 0);
+  Q_ASSERT(s_instance != 0);
   return s_instance;
 }
 

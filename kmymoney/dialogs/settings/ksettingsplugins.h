@@ -31,17 +31,17 @@
 
 class KSettingsPlugins : public QWidget
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
 
-    KSettingsPlugins(QWidget* parent = 0);
-    ~KSettingsPlugins();
+  KSettingsPlugins(QWidget* parent = 0);
+  ~KSettingsPlugins();
 
 public slots:
-    void slotLoadPlugins();
-    void slotSavePlugins();
-    void slotDefaultsPlugins();
+  void slotLoadPlugins();
+  void slotSavePlugins();
+  void slotDefaultsPlugins();
 };
 
 #endif // KSETTINGSPLUGINS_H

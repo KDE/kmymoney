@@ -38,8 +38,8 @@
 class kOnlineQuoteConfigurationDecl : public QDialog, public Ui::kOnlineQuoteConfigurationDecl
 {
 public:
-  kOnlineQuoteConfigurationDecl( QWidget *parent ) : QDialog( parent ) {
-    setupUi( this );
+  kOnlineQuoteConfigurationDecl(QWidget *parent) : QDialog(parent) {
+    setupUi(this);
   }
 };
 class KOnlineQuoteConfigurationDlg : public kOnlineQuoteConfigurationDecl

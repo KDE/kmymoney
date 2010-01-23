@@ -41,8 +41,8 @@ class Q3ListViewItem;
 class KMyMoneyPriceDlgDecl : public QDialog, public Ui::KMyMoneyPriceDlgDecl
 {
 public:
-  KMyMoneyPriceDlgDecl( QWidget *parent ) : QDialog( parent ) {
-    setupUi( this );
+  KMyMoneyPriceDlgDecl(QWidget *parent) : QDialog(parent) {
+    setupUi(this);
   }
 };
 

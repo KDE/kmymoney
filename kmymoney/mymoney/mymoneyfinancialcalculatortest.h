@@ -26,47 +26,48 @@
 #undef private
 #undef protected
 
-class MyMoneyFinancialCalculatorTest : public CppUnit::TestFixture  {
-        CPPUNIT_TEST_SUITE(MyMoneyFinancialCalculatorTest);
-	CPPUNIT_TEST(testEmptyConstructor);
-        CPPUNIT_TEST(testSetPrec);
-        CPPUNIT_TEST(testSetNpp);
-        CPPUNIT_TEST(testSetPF);
-        CPPUNIT_TEST(testSetCF);
-        CPPUNIT_TEST(testSetBep);
-        CPPUNIT_TEST(testSetDisc);
-        CPPUNIT_TEST(testSetIr);
-        CPPUNIT_TEST(testSetPv);
-        CPPUNIT_TEST(testSetPmt);
-        CPPUNIT_TEST(testSetFv);
-        CPPUNIT_TEST(testCombinedSet);
-	CPPUNIT_TEST(testNumPayments);
-	CPPUNIT_TEST(testUseCase1);
-	CPPUNIT_TEST(testUseCase2);
-	CPPUNIT_TEST_SUITE_END();
+class MyMoneyFinancialCalculatorTest : public CppUnit::TestFixture
+{
+  CPPUNIT_TEST_SUITE(MyMoneyFinancialCalculatorTest);
+  CPPUNIT_TEST(testEmptyConstructor);
+  CPPUNIT_TEST(testSetPrec);
+  CPPUNIT_TEST(testSetNpp);
+  CPPUNIT_TEST(testSetPF);
+  CPPUNIT_TEST(testSetCF);
+  CPPUNIT_TEST(testSetBep);
+  CPPUNIT_TEST(testSetDisc);
+  CPPUNIT_TEST(testSetIr);
+  CPPUNIT_TEST(testSetPv);
+  CPPUNIT_TEST(testSetPmt);
+  CPPUNIT_TEST(testSetFv);
+  CPPUNIT_TEST(testCombinedSet);
+  CPPUNIT_TEST(testNumPayments);
+  CPPUNIT_TEST(testUseCase1);
+  CPPUNIT_TEST(testUseCase2);
+  CPPUNIT_TEST_SUITE_END();
 protected:
-	MyMoneyFinancialCalculator	*m;
+  MyMoneyFinancialCalculator *m;
 
 public:
-	MyMoneyFinancialCalculatorTest ();
+  MyMoneyFinancialCalculatorTest();
 
-	void setUp ();
-	void tearDown ();
-	void testEmptyConstructor();
-	void testSetPrec();
-	void testSetNpp();
-	void testSetPF();
-	void testSetCF();
-	void testSetBep();
-	void testSetDisc();
-	void testSetIr();
-	void testSetPv();
-	void testSetPmt();
-	void testSetFv();
-	void testCombinedSet();
-	void testNumPayments();
-	void testUseCase1();
-	void testUseCase2();
+  void setUp();
+  void tearDown();
+  void testEmptyConstructor();
+  void testSetPrec();
+  void testSetNpp();
+  void testSetPF();
+  void testSetCF();
+  void testSetBep();
+  void testSetDisc();
+  void testSetIr();
+  void testSetPv();
+  void testSetPmt();
+  void testSetFv();
+  void testCombinedSet();
+  void testNumPayments();
+  void testUseCase1();
+  void testUseCase2();
 };
 
 #endif

@@ -46,8 +46,8 @@
 class KEditEquityEntryDecl : public QDialog, public Ui::KEditEquityEntryDecl
 {
 public:
-  KEditEquityEntryDecl( QWidget *parent ) : QDialog( parent ) {
-    setupUi( this );
+  KEditEquityEntryDecl(QWidget *parent) : QDialog(parent) {
+    setupUi(this);
   }
 };
 
@@ -58,7 +58,9 @@ public:
   explicit KEditEquityEntryDlg(const MyMoneySecurity& selectedSecurity, QWidget *parent = NULL);
   ~KEditEquityEntryDlg();
 
-  void updatedEquity(MyMoneySecurity& security) { security = m_selectedSecurity; }
+  void updatedEquity(MyMoneySecurity& security) {
+    security = m_selectedSecurity;
+  }
 
 protected slots:
   void slotOKClicked();

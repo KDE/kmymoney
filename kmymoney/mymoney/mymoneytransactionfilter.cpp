@@ -92,21 +92,21 @@ void MyMoneyTransactionFilter::addAccount(const QStringList& ids)
   QStringList::ConstIterator it;
 
   m_filterSet.singleFilter.accountFilter = 1;
-  for(it = ids.begin(); it != ids.end(); ++it)
+  for (it = ids.begin(); it != ids.end(); ++it)
     addAccount(*it);
 }
 
 void MyMoneyTransactionFilter::addAccount(const QString& id)
 {
-  if(!m_accounts.isEmpty() && !id.isEmpty()) {
-    if(m_accounts.find(id) != 0)
+  if (!m_accounts.isEmpty() && !id.isEmpty()) {
+    if (m_accounts.find(id) != 0)
       return;
   }
-  if(m_accounts.count() >= m_accounts.size()*2) {
+  if (m_accounts.count() >= m_accounts.size()*2) {
     m_accounts.resize(457);
   }
   m_filterSet.singleFilter.accountFilter = 1;
-  if(!id.isEmpty())
+  if (!id.isEmpty())
     m_accounts.insert(id, "");
 }
 
@@ -115,21 +115,21 @@ void MyMoneyTransactionFilter::addCategory(const QStringList& ids)
   QStringList::ConstIterator it;
 
   m_filterSet.singleFilter.categoryFilter = 1;
-  for(it = ids.begin(); it != ids.end(); ++it)
+  for (it = ids.begin(); it != ids.end(); ++it)
     addCategory(*it);
 }
 
 void MyMoneyTransactionFilter::addCategory(const QString& id)
 {
-  if(!m_categories.isEmpty() && !id.isEmpty()) {
-    if(m_categories.find(id) != 0)
+  if (!m_categories.isEmpty() && !id.isEmpty()) {
+    if (m_categories.find(id) != 0)
       return;
   }
-  if(m_categories.count() >= m_categories.size()*2) {
+  if (m_categories.count() >= m_categories.size()*2) {
     m_categories.resize(457);
   }
   m_filterSet.singleFilter.categoryFilter = 1;
-  if(!id.isEmpty())
+  if (!id.isEmpty())
     m_categories.insert(id, "");
 }
 
@@ -147,7 +147,7 @@ void MyMoneyTransactionFilter::setAmountFilter(const MyMoneyMoney& from, const M
   m_toAmount = to.abs();
 
   // make sure that the user does not try to fool us  ;-)
-  if(from > to) {
+  if (from > to) {
     MyMoneyMoney tmp = m_fromAmount;
     m_fromAmount = m_toAmount;
     m_toAmount = tmp;
@@ -156,22 +156,22 @@ void MyMoneyTransactionFilter::setAmountFilter(const MyMoneyMoney& from, const M
 
 void MyMoneyTransactionFilter::addPayee(const QString& id)
 {
-  if(!m_payees.isEmpty() && !id.isEmpty()) {
-    if(m_payees.find(id) != 0)
+  if (!m_payees.isEmpty() && !id.isEmpty()) {
+    if (m_payees.find(id) != 0)
       return;
   }
-  if(m_payees.count() >= m_payees.size()*2) {
+  if (m_payees.count() >= m_payees.size()*2) {
     m_payees.resize(457);
   }
   m_filterSet.singleFilter.payeeFilter = 1;
-  if(!id.isEmpty())
+  if (!id.isEmpty())
     m_payees.insert(id, "");
 }
 
 void MyMoneyTransactionFilter::addType(const int type)
 {
-  if(!m_types.isEmpty()) {
-    if(m_types.find(type) != 0)
+  if (!m_types.isEmpty()) {
+    if (m_types.find(type) != 0)
       return;
   }
   // we don't have more than 4 or 5 types, so we don't worry about
@@ -182,8 +182,8 @@ void MyMoneyTransactionFilter::addType(const int type)
 
 void MyMoneyTransactionFilter::addState(const int state)
 {
-  if(!m_states.isEmpty()) {
-    if(m_states.find(state) != 0)
+  if (!m_states.isEmpty()) {
+    if (m_states.find(state) != 0)
       return;
   }
   // we don't have more than 4 or 5 states, so we don't worry about
@@ -194,8 +194,8 @@ void MyMoneyTransactionFilter::addState(const int state)
 
 void MyMoneyTransactionFilter::addValidity(const int type)
 {
-  if(!m_validity.isEmpty()) {
-    if(m_validity.find(type) != 0)
+  if (!m_validity.isEmpty()) {
+    if (m_validity.find(type) != 0)
       return;
   }
   // we don't have more than 4 or 5 states, so we don't worry about
@@ -230,22 +230,22 @@ bool MyMoneyTransactionFilter::matchText(const MyMoneySplit * const sp) const
 {
   // check if the text is contained in one of the fields
   // memo, value, number, payee, account, date
-  if(m_filterSet.singleFilter.textFilter) {
+  if (m_filterSet.singleFilter.textFilter) {
     MyMoneyFile* file = MyMoneyFile::instance();
     const MyMoneyAccount& acc = file->account(sp->accountId());
     const MyMoneySecurity& sec = file->security(acc.currencyId());
-    if(sp->memo().contains(m_text)
-    || sp->shares().formatMoney(acc.fraction(sec)).contains(m_text)
-    || sp->value().formatMoney(acc.fraction(sec)).contains(m_text)
-    || sp->number().contains(m_text))
+    if (sp->memo().contains(m_text)
+        || sp->shares().formatMoney(acc.fraction(sec)).contains(m_text)
+        || sp->value().formatMoney(acc.fraction(sec)).contains(m_text)
+        || sp->number().contains(m_text))
       return !m_invertText;
 
-    if(acc.name().contains(m_text))
+    if (acc.name().contains(m_text))
       return !m_invertText;
 
-    if(!sp->payeeId().isEmpty()) {
+    if (!sp->payeeId().isEmpty()) {
       const MyMoneyPayee& payee = file->payee(sp->payeeId());
-      if(payee.name().contains(m_text))
+      if (payee.name().contains(m_text))
         return !m_invertText;
     }
     return m_invertText;
@@ -255,9 +255,9 @@ bool MyMoneyTransactionFilter::matchText(const MyMoneySplit * const sp) const
 
 bool MyMoneyTransactionFilter::matchAmount(const MyMoneySplit * const sp) const
 {
-  if(m_filterSet.singleFilter.amountFilter) {
-    if(((sp->value().abs() < m_fromAmount) || sp->value().abs() > m_toAmount)
-    && ((sp->shares().abs() < m_fromAmount) || sp->shares().abs() > m_toAmount))
+  if (m_filterSet.singleFilter.amountFilter) {
+    if (((sp->value().abs() < m_fromAmount) || sp->value().abs() > m_toAmount)
+        && ((sp->shares().abs() < m_fromAmount) || sp->shares().abs() > m_toAmount))
       return false;
   }
 
@@ -279,8 +279,8 @@ bool MyMoneyTransactionFilter::match(const MyMoneyTransaction& transaction)
   // qDebug("T: %s", transaction.id().data());
   // if no filter is set, we can safely return a match
   // if we should report all splits, then we collect them
-  if(!m_filterSet.allFilter) {
-    if(m_reportAllSplits) {
+  if (!m_filterSet.allFilter) {
+    if (m_reportAllSplits) {
       m_matchingSplits = transaction.splits();
     }
     return true;
@@ -289,14 +289,14 @@ bool MyMoneyTransactionFilter::match(const MyMoneyTransaction& transaction)
   // perform checks on the MyMoneyTransaction object first
 
   // check the date range
-  if(m_filterSet.singleFilter.dateFilter) {
-    if(m_fromDate != QDate()) {
-      if(transaction.postDate() < m_fromDate)
+  if (m_filterSet.singleFilter.dateFilter) {
+    if (m_fromDate != QDate()) {
+      if (transaction.postDate() < m_fromDate)
         return false;
     }
 
-    if(m_toDate != QDate()) {
-      if(transaction.postDate() > m_toDate)
+    if (m_toDate != QDate()) {
+      if (transaction.postDate() > m_toDate)
         return false;
     }
   }
@@ -305,7 +305,7 @@ bool MyMoneyTransactionFilter::match(const MyMoneyTransaction& transaction)
   // remove the ones that do not match account and/or categories.
 
   Q3PtrList<MyMoneySplit> matchingSplits;
-  for(it = transaction.splits().begin(); it != transaction.splits().end(); ++it) {
+  for (it = transaction.splits().begin(); it != transaction.splits().end(); ++it) {
     matchingSplits.append(&(*it));
   }
 
@@ -314,58 +314,58 @@ bool MyMoneyTransactionFilter::match(const MyMoneyTransaction& transaction)
   bool isTransfer = true;
 
   // check the transaction's validity
-  if(m_filterSet.singleFilter.validityFilter) {
-    if(m_validity.count() > 0) {
-      if(!m_validity.find(validTransaction(transaction)))
+  if (m_filterSet.singleFilter.validityFilter) {
+    if (m_validity.count() > 0) {
+      if (!m_validity.find(validTransaction(transaction)))
         return false;
     }
   }
 
   MyMoneySplit* sp;
 
-  if(m_filterSet.singleFilter.accountFilter == 1
-  || m_filterSet.singleFilter.categoryFilter == 1) {
-    for(sp = matchingSplits.first(); sp != 0; ) {
+  if (m_filterSet.singleFilter.accountFilter == 1
+      || m_filterSet.singleFilter.categoryFilter == 1) {
+    for (sp = matchingSplits.first(); sp != 0;) {
       MyMoneySplit* removeSplit = sp;
       const MyMoneyAccount& acc = file->account(sp->accountId());
-      if(m_considerCategory) {
-        switch(acc.accountGroup()) {
-          case MyMoneyAccount::Income:
-          case MyMoneyAccount::Expense:
-            isTransfer = false;
-            // check if the split references one of the categories in the list
-            if(m_filterSet.singleFilter.categoryFilter) {
-              if(m_categories.count() > 0) {
-                if(m_categories.find(sp->accountId())) {
-                  categoryMatched = true;
-                  removeSplit = 0;
-                }
-              } else {
-                // we're looking for transactions with 'no' categories
-                return false;
+      if (m_considerCategory) {
+        switch (acc.accountGroup()) {
+        case MyMoneyAccount::Income:
+        case MyMoneyAccount::Expense:
+          isTransfer = false;
+          // check if the split references one of the categories in the list
+          if (m_filterSet.singleFilter.categoryFilter) {
+            if (m_categories.count() > 0) {
+              if (m_categories.find(sp->accountId())) {
+                categoryMatched = true;
+                removeSplit = 0;
+              }
+            } else {
+              // we're looking for transactions with 'no' categories
+              return false;
+            }
+          }
+          break;
+
+        default:
+          // check if the split references one of the accounts in the list
+          if (m_filterSet.singleFilter.accountFilter) {
+            if (m_accounts.count() > 0) {
+              if (m_accounts.find(sp->accountId())) {
+                accountMatched = true;
+                removeSplit = 0;
               }
             }
-            break;
+          } else
+            removeSplit = 0;
 
-          default:
-            // check if the split references one of the accounts in the list
-            if(m_filterSet.singleFilter.accountFilter) {
-              if(m_accounts.count() > 0) {
-                if(m_accounts.find(sp->accountId())) {
-                  accountMatched = true;
-                  removeSplit = 0;
-                }
-              }
-            } else
-              removeSplit = 0;
-
-            break;
+          break;
         }
 
       } else {
-        if(m_filterSet.singleFilter.accountFilter) {
-          if(m_accounts.count() > 0) {
-            if(m_accounts.find(sp->accountId())) {
+        if (m_filterSet.singleFilter.accountFilter) {
+          if (m_accounts.count() > 0) {
+            if (m_accounts.find(sp->accountId())) {
               accountMatched = true;
               removeSplit = 0;
             }
@@ -375,7 +375,7 @@ bool MyMoneyTransactionFilter::match(const MyMoneyTransaction& transaction)
       }
 
       sp = matchingSplits.next();
-      if(removeSplit) {
+      if (removeSplit) {
         // qDebug(" S: %s", (*it).id().data());
         matchingSplits.remove(removeSplit);
       }
@@ -383,28 +383,28 @@ bool MyMoneyTransactionFilter::match(const MyMoneyTransaction& transaction)
   }
 
   // check if we're looking for transactions without assigned category
-  if(!categoryMatched && transaction.splitCount() == 1 && m_categories.count() == 0) {
+  if (!categoryMatched && transaction.splitCount() == 1 && m_categories.count() == 0) {
     categoryMatched = true;
   }
 
   // if there's no category filter and the category did not
   // match, then we still want to see this transaction if it's
   // a transfer
-  if(!categoryMatched && !m_filterSet.singleFilter.categoryFilter)
+  if (!categoryMatched && !m_filterSet.singleFilter.categoryFilter)
     categoryMatched = isTransfer;
 
-  if(matchingSplits.count() == 0
-  || !(accountMatched && categoryMatched))
+  if (matchingSplits.count() == 0
+      || !(accountMatched && categoryMatched))
     return false;
 
   FilterSet filterSet = m_filterSet;
   filterSet.singleFilter.dateFilter =
-  filterSet.singleFilter.accountFilter =
-  filterSet.singleFilter.categoryFilter = 0;
+    filterSet.singleFilter.accountFilter =
+      filterSet.singleFilter.categoryFilter = 0;
 
   // check if we still have something to do
-  if(filterSet.allFilter != 0) {
-    for(sp = matchingSplits.first(); sp != 0;) {
+  if (filterSet.allFilter != 0) {
+    for (sp = matchingSplits.first(); sp != 0;) {
       MyMoneySplit* removeSplit = 0;
       removeSplit = (matchAmount(sp) && matchText(sp)) ? 0 : sp;
 
@@ -412,68 +412,68 @@ bool MyMoneyTransactionFilter::match(const MyMoneyTransaction& transaction)
 
       // Determine if this account is a category or an account
       bool isCategory = false;
-      switch(acc.accountGroup()) {
-        case MyMoneyAccount::Income:
-        case MyMoneyAccount::Expense:
-          isCategory = true;
-        default:
-          break;
+      switch (acc.accountGroup()) {
+      case MyMoneyAccount::Income:
+      case MyMoneyAccount::Expense:
+        isCategory = true;
+      default:
+        break;
       }
 
-      if(!isCategory && !removeSplit) {
+      if (!isCategory && !removeSplit) {
         // check the payee list
-        if(!removeSplit && m_filterSet.singleFilter.payeeFilter) {
-          if(m_payees.count() > 0) {
-            if(sp->payeeId().isEmpty() || !m_payees.find(sp->payeeId()))
+        if (!removeSplit && m_filterSet.singleFilter.payeeFilter) {
+          if (m_payees.count() > 0) {
+            if (sp->payeeId().isEmpty() || !m_payees.find(sp->payeeId()))
               removeSplit = sp;
-          } else if(!sp->payeeId().isEmpty())
-              removeSplit = sp;
+          } else if (!sp->payeeId().isEmpty())
+            removeSplit = sp;
         }
 
         // check the type list
-        if(!removeSplit && m_filterSet.singleFilter.typeFilter) {
-          if(m_types.count() > 0) {
-            if(!m_types.find(splitType(transaction, *sp)))
+        if (!removeSplit && m_filterSet.singleFilter.typeFilter) {
+          if (m_types.count() > 0) {
+            if (!m_types.find(splitType(transaction, *sp)))
               removeSplit = sp;
           }
         }
 
         // check the state list
-        if(!removeSplit && m_filterSet.singleFilter.stateFilter) {
-          if(m_states.count() > 0) {
-            if(!m_states.find(splitState(*sp)))
+        if (!removeSplit && m_filterSet.singleFilter.stateFilter) {
+          if (m_states.count() > 0) {
+            if (!m_states.find(splitState(*sp)))
               removeSplit = sp;
           }
         }
 
-        if(!removeSplit && m_filterSet.singleFilter.nrFilter) {
-          if(!m_fromNr.isEmpty()) {
-            if(sp->number() < m_fromNr)
+        if (!removeSplit && m_filterSet.singleFilter.nrFilter) {
+          if (!m_fromNr.isEmpty()) {
+            if (sp->number() < m_fromNr)
               removeSplit = sp;
           }
-          if(!m_toNr.isEmpty()) {
-            if(sp->number() > m_toNr)
+          if (!m_toNr.isEmpty()) {
+            if (sp->number() > m_toNr)
               removeSplit = sp;
           }
         }
-      } else if(m_filterSet.singleFilter.payeeFilter
-      || m_filterSet.singleFilter.typeFilter
-      || m_filterSet.singleFilter.stateFilter
-      || m_filterSet.singleFilter.nrFilter)
+      } else if (m_filterSet.singleFilter.payeeFilter
+                 || m_filterSet.singleFilter.typeFilter
+                 || m_filterSet.singleFilter.stateFilter
+                 || m_filterSet.singleFilter.nrFilter)
         removeSplit = sp;
 
       sp = matchingSplits.next();
-      if(removeSplit) {
+      if (removeSplit) {
         // qDebug(" S: %s", (*it).id().data());
         matchingSplits.remove(removeSplit);
       }
     }
   }
 
-  if(m_reportAllSplits == false && matchingSplits.count() != 0) {
+  if (m_reportAllSplits == false && matchingSplits.count() != 0) {
     m_matchingSplits.append(transaction.splits()[0]);
   } else {
-    for(sp = matchingSplits.first(); sp != 0; sp = matchingSplits.next()) {
+    for (sp = matchingSplits.first(); sp != 0; sp = matchingSplits.next()) {
       m_matchingSplits.append(*sp);
     }
   }
@@ -486,22 +486,22 @@ int MyMoneyTransactionFilter::splitState(const MyMoneySplit& split) const
 {
   int rc = notReconciled;
 
-  switch(split.reconcileFlag()) {
-    default:
-    case MyMoneySplit::NotReconciled:
-      break;;
+  switch (split.reconcileFlag()) {
+  default:
+  case MyMoneySplit::NotReconciled:
+    break;;
 
-    case MyMoneySplit::Cleared:
-      rc = cleared;
-      break;
+  case MyMoneySplit::Cleared:
+    rc = cleared;
+    break;
 
-    case MyMoneySplit::Reconciled:
-      rc = reconciled;
-      break;
+  case MyMoneySplit::Reconciled:
+    rc = reconciled;
+    break;
 
-    case MyMoneySplit::Frozen:
-      rc = frozen;
-      break;
+  case MyMoneySplit::Frozen:
+    rc = frozen;
+    break;
   }
   return rc;
 }
@@ -511,11 +511,11 @@ int MyMoneyTransactionFilter::splitType(const MyMoneyTransaction& t, const MyMon
   MyMoneyFile* file = MyMoneyFile::instance();
   MyMoneyAccount a, b;
   a = file->account(split.accountId());
-  if((a.accountGroup() == MyMoneyAccount::Income
-  || a.accountGroup() == MyMoneyAccount::Expense))
+  if ((a.accountGroup() == MyMoneyAccount::Income
+       || a.accountGroup() == MyMoneyAccount::Expense))
     return allTypes;
 
-  if(t.splitCount() == 2) {
+  if (t.splitCount() == 2) {
     QString ida, idb;
     if (t.splits().size() > 0)
       ida = t.splits()[0].accountId();
@@ -524,14 +524,14 @@ int MyMoneyTransactionFilter::splitType(const MyMoneyTransaction& t, const MyMon
 
     a = file->account(ida);
     b = file->account(idb);
-    if((a.accountGroup() != MyMoneyAccount::Expense
-    && a.accountGroup() != MyMoneyAccount::Income)
-    && (b.accountGroup() != MyMoneyAccount::Expense
-    && b.accountGroup() != MyMoneyAccount::Income))
+    if ((a.accountGroup() != MyMoneyAccount::Expense
+         && a.accountGroup() != MyMoneyAccount::Income)
+        && (b.accountGroup() != MyMoneyAccount::Expense
+            && b.accountGroup() != MyMoneyAccount::Income))
       return transfers;
   }
 
-  if(split.value().isPositive())
+  if (split.value().isPositive())
     return deposits;
 
   return payments;
@@ -542,57 +542,55 @@ MyMoneyTransactionFilter::validityOptionE MyMoneyTransactionFilter::validTransac
   QList<MyMoneySplit>::ConstIterator it_s;
   MyMoneyMoney val;
 
-  for(it_s = t.splits().begin(); it_s != t.splits().end(); ++it_s) {
+  for (it_s = t.splits().begin(); it_s != t.splits().end(); ++it_s) {
     val += (*it_s).value();
   }
-  return (val == MyMoneyMoney(0,1)) ? valid : invalid;
+  return (val == MyMoneyMoney(0, 1)) ? valid : invalid;
 }
 
-bool MyMoneyTransactionFilter::includesCategory( const QString& cat ) const
+bool MyMoneyTransactionFilter::includesCategory(const QString& cat) const
 {
-  return (! m_filterSet.singleFilter.categoryFilter) || m_categories.find( cat );
+  return (! m_filterSet.singleFilter.categoryFilter) || m_categories.find(cat);
 }
 
-bool MyMoneyTransactionFilter::includesAccount( const QString& acc ) const
+bool MyMoneyTransactionFilter::includesAccount(const QString& acc) const
 {
-  return (! m_filterSet.singleFilter.accountFilter) || m_accounts.find( acc );
+  return (! m_filterSet.singleFilter.accountFilter) || m_accounts.find(acc);
 }
 
-bool MyMoneyTransactionFilter::includesPayee( const QString& pye ) const
+bool MyMoneyTransactionFilter::includesPayee(const QString& pye) const
 {
-  return (! m_filterSet.singleFilter.payeeFilter) || m_payees.find( pye );
+  return (! m_filterSet.singleFilter.payeeFilter) || m_payees.find(pye);
 }
 
-bool MyMoneyTransactionFilter::dateFilter( QDate& from, QDate& to ) const
+bool MyMoneyTransactionFilter::dateFilter(QDate& from, QDate& to) const
 {
   from = m_fromDate;
   to = m_toDate;
-  return m_filterSet.singleFilter.dateFilter==1;
+  return m_filterSet.singleFilter.dateFilter == 1;
 }
 
-bool MyMoneyTransactionFilter::amountFilter( MyMoneyMoney& from, MyMoneyMoney& to ) const
+bool MyMoneyTransactionFilter::amountFilter(MyMoneyMoney& from, MyMoneyMoney& to) const
 {
   from = m_fromAmount;
   to = m_toAmount;
-  return m_filterSet.singleFilter.amountFilter==1;
+  return m_filterSet.singleFilter.amountFilter == 1;
 }
 
-bool MyMoneyTransactionFilter::numberFilter( QString& from, QString& to ) const
+bool MyMoneyTransactionFilter::numberFilter(QString& from, QString& to) const
 {
   from = m_fromNr;
   to = m_toNr;
-  return m_filterSet.singleFilter.nrFilter==1;
+  return m_filterSet.singleFilter.nrFilter == 1;
 }
 
 bool MyMoneyTransactionFilter::payees(QStringList& list) const
 {
   bool result = m_filterSet.singleFilter.payeeFilter;
 
-  if ( result )
-  {
-    Q3DictIterator<char> it_payee( m_payees );
-    while ( it_payee.current() )
-    {
+  if (result) {
+    Q3DictIterator<char> it_payee(m_payees);
+    while (it_payee.current()) {
       list += it_payee.currentKey();
       ++it_payee;
     }
@@ -604,11 +602,9 @@ bool MyMoneyTransactionFilter::accounts(QStringList& list) const
 {
   bool result = m_filterSet.singleFilter.accountFilter;
 
-  if ( result )
-  {
-    Q3DictIterator<char> it_account( m_accounts );
-    while ( it_account.current() )
-    {
+  if (result) {
+    Q3DictIterator<char> it_account(m_accounts);
+    while (it_account.current()) {
       QString account = it_account.currentKey();
       list += account;
       ++it_account;
@@ -621,11 +617,9 @@ bool MyMoneyTransactionFilter::categories(QStringList& list) const
 {
   bool result = m_filterSet.singleFilter.categoryFilter;
 
-  if ( result )
-  {
-    Q3DictIterator<char> it_category( m_categories );
-    while ( it_category.current() )
-    {
+  if (result) {
+    Q3DictIterator<char> it_category(m_categories);
+    while (it_category.current()) {
       list += it_category.currentKey();
       ++it_category;
     }
@@ -637,11 +631,9 @@ bool MyMoneyTransactionFilter::types(QList<int>& list) const
 {
   bool result = m_filterSet.singleFilter.typeFilter;
 
-  if ( result )
-  {
-    Q3IntDictIterator<char> it_type( m_types );
-    while ( it_type.current() )
-    {
+  if (result) {
+    Q3IntDictIterator<char> it_type(m_types);
+    while (it_type.current()) {
       list += it_type.currentKey();
       ++it_type;
     }
@@ -653,11 +645,9 @@ bool MyMoneyTransactionFilter::states(QList<int>& list) const
 {
   bool result = m_filterSet.singleFilter.stateFilter;
 
-  if ( result )
-  {
-    Q3IntDictIterator<char> it_state( m_states );
-    while ( it_state.current() )
-    {
+  if (result) {
+    Q3IntDictIterator<char> it_state(m_states);
+    while (it_state.current()) {
       list += it_state.currentKey();
       ++it_state;
     }
@@ -669,10 +659,9 @@ bool MyMoneyTransactionFilter::firstType(int&i) const
 {
   bool result = m_filterSet.singleFilter.typeFilter;
 
-  if ( result )
-  {
-    Q3IntDictIterator<char> it_type( m_types );
-    if ( it_type.current() )
+  if (result) {
+    Q3IntDictIterator<char> it_type(m_types);
+    if (it_type.current())
       i = it_type.currentKey();
   }
   return result;
@@ -682,10 +671,9 @@ bool MyMoneyTransactionFilter::firstState(int&i) const
 {
   bool result = m_filterSet.singleFilter.stateFilter;
 
-  if ( result )
-  {
-    Q3IntDictIterator<char> it_state( m_states );
-    if ( it_state.current() )
+  if (result) {
+    Q3IntDictIterator<char> it_state(m_states);
+    if (it_state.current())
       i = it_state.currentKey();
   }
   return result;
@@ -700,8 +688,8 @@ bool MyMoneyTransactionFilter::textFilter(QRegExp& exp) const
 void MyMoneyTransactionFilter::setDateFilter(dateOptionE range)
 {
   QDate from, to;
-  if ( translateDateRange(range,from,to) )
-    setDateFilter(from,to);
+  if (translateDateRange(range, from, to))
+    setDateFilter(from, to);
 }
 
 static int fiscalYearStartMonth = 1;
@@ -722,141 +710,141 @@ bool MyMoneyTransactionFilter::translateDateRange(dateOptionE id, QDate& start, 
   day = QDate::currentDate().day();
   QDate tmp;
 
-  switch(id) {
-    case MyMoneyTransactionFilter::allDates:
-      start = QDate();
-      end = QDate();
-      break;
-    case MyMoneyTransactionFilter::asOfToday:
-      start = QDate();
-      end =  QDate::currentDate();
-      break;
-    case MyMoneyTransactionFilter::currentMonth:
-      start = QDate(yr,mon,1);
-      end = QDate(yr,mon,1).addMonths(1).addDays(-1);
-      break;
-    case MyMoneyTransactionFilter::currentYear:
-      start = QDate(yr,1,1);
-      end = QDate(yr,12,31);
-      break;
-    case MyMoneyTransactionFilter::monthToDate:
-      start = QDate(yr,mon,1);
-      end = QDate::currentDate();
-      break;
-    case MyMoneyTransactionFilter::yearToDate:
-      start = QDate(yr,1,1);
-      end = QDate::currentDate();
-      break;
-    case MyMoneyTransactionFilter::yearToMonth:
-      start = QDate(yr,1,1);
-      end = QDate(yr,mon,1).addDays(-1);
-      break;
-    case MyMoneyTransactionFilter::lastMonth:
-      start = QDate(yr,mon,1).addMonths(-1);
-      end = QDate(yr,mon,1).addDays(-1);
-      break;
-    case MyMoneyTransactionFilter::lastYear:
-      start = QDate(yr,1,1).addYears(-1);
-      end = QDate(yr,12,31).addYears(-1);
-      break;
-    case MyMoneyTransactionFilter::last7Days:
-      start = QDate::currentDate().addDays(-7);
-      end = QDate::currentDate();
-      break;
-    case MyMoneyTransactionFilter::last30Days:
-      start = QDate::currentDate().addDays(-30);
-      end = QDate::currentDate();
-      break;
-    case MyMoneyTransactionFilter::last3Months:
-      start = QDate::currentDate().addMonths(-3);
-      end = QDate::currentDate();
-      break;
-    case MyMoneyTransactionFilter::last6Months:
-      start = QDate::currentDate().addMonths(-6);
-      end = QDate::currentDate();
-      break;
-    case MyMoneyTransactionFilter::last11Months:
-      start = QDate(yr,mon,1).addMonths(-12);
-      end = QDate(yr,mon,1).addDays(-1);
-      break;
-    case MyMoneyTransactionFilter::last12Months:
-      start = QDate::currentDate().addMonths(-12);
-      end = QDate::currentDate();
-      break;
-    case MyMoneyTransactionFilter::next7Days:
-      start = QDate::currentDate();
-      end = QDate::currentDate().addDays(7);
-      break;
-    case MyMoneyTransactionFilter::next30Days:
-      start = QDate::currentDate();
-      end = QDate::currentDate().addDays(30);
-      break;
-    case MyMoneyTransactionFilter::next3Months:
-      start = QDate::currentDate();
-      end = QDate::currentDate().addMonths(3);
-      break;
-    case MyMoneyTransactionFilter::next6Months:
-      start = QDate::currentDate();
-      end = QDate::currentDate().addMonths(6);
-      break;
-    case MyMoneyTransactionFilter::next12Months:
-      start = QDate::currentDate();
-      end = QDate::currentDate().addMonths(12);
-      break;
-    case MyMoneyTransactionFilter::userDefined:
-      start = QDate();
-      end = QDate();
-      break;
-    case MyMoneyTransactionFilter::last3ToNext3Months:
-      start = QDate::currentDate().addMonths(-3);
-      end = QDate::currentDate().addMonths(3);
-      break;
-    case MyMoneyTransactionFilter::currentQuarter:
-      start = QDate(yr, mon - ((mon-1) % 3), 1);
-      end = start.addMonths(3).addDays(-1);
-      break;
-    case MyMoneyTransactionFilter::lastQuarter:
-      start = QDate(yr, mon - ((mon-1) % 3), 1).addMonths(-3);
-      end = start.addMonths(3).addDays(-1);
-      break;
-    case MyMoneyTransactionFilter::nextQuarter:
-      start = QDate(yr, mon - ((mon-1) % 3), 1).addMonths(3);
-      end = start.addMonths(3).addDays(-1);
-      break;
-    case MyMoneyTransactionFilter::currentFiscalYear:
-      start = QDate(QDate::currentDate().year(), fiscalYearStartMonth, fiscalYearStartDay);
-      if(QDate::currentDate() < start)
-        start = start.addYears(-1);
-      end = start.addYears(1).addDays(-1);
-      break;
-    case MyMoneyTransactionFilter::lastFiscalYear:
-      start = QDate(QDate::currentDate().year(), fiscalYearStartMonth, fiscalYearStartDay);
-      if(QDate::currentDate() < start)
-       start = start.addYears(-1);
+  switch (id) {
+  case MyMoneyTransactionFilter::allDates:
+    start = QDate();
+    end = QDate();
+    break;
+  case MyMoneyTransactionFilter::asOfToday:
+    start = QDate();
+    end =  QDate::currentDate();
+    break;
+  case MyMoneyTransactionFilter::currentMonth:
+    start = QDate(yr, mon, 1);
+    end = QDate(yr, mon, 1).addMonths(1).addDays(-1);
+    break;
+  case MyMoneyTransactionFilter::currentYear:
+    start = QDate(yr, 1, 1);
+    end = QDate(yr, 12, 31);
+    break;
+  case MyMoneyTransactionFilter::monthToDate:
+    start = QDate(yr, mon, 1);
+    end = QDate::currentDate();
+    break;
+  case MyMoneyTransactionFilter::yearToDate:
+    start = QDate(yr, 1, 1);
+    end = QDate::currentDate();
+    break;
+  case MyMoneyTransactionFilter::yearToMonth:
+    start = QDate(yr, 1, 1);
+    end = QDate(yr, mon, 1).addDays(-1);
+    break;
+  case MyMoneyTransactionFilter::lastMonth:
+    start = QDate(yr, mon, 1).addMonths(-1);
+    end = QDate(yr, mon, 1).addDays(-1);
+    break;
+  case MyMoneyTransactionFilter::lastYear:
+    start = QDate(yr, 1, 1).addYears(-1);
+    end = QDate(yr, 12, 31).addYears(-1);
+    break;
+  case MyMoneyTransactionFilter::last7Days:
+    start = QDate::currentDate().addDays(-7);
+    end = QDate::currentDate();
+    break;
+  case MyMoneyTransactionFilter::last30Days:
+    start = QDate::currentDate().addDays(-30);
+    end = QDate::currentDate();
+    break;
+  case MyMoneyTransactionFilter::last3Months:
+    start = QDate::currentDate().addMonths(-3);
+    end = QDate::currentDate();
+    break;
+  case MyMoneyTransactionFilter::last6Months:
+    start = QDate::currentDate().addMonths(-6);
+    end = QDate::currentDate();
+    break;
+  case MyMoneyTransactionFilter::last11Months:
+    start = QDate(yr, mon, 1).addMonths(-12);
+    end = QDate(yr, mon, 1).addDays(-1);
+    break;
+  case MyMoneyTransactionFilter::last12Months:
+    start = QDate::currentDate().addMonths(-12);
+    end = QDate::currentDate();
+    break;
+  case MyMoneyTransactionFilter::next7Days:
+    start = QDate::currentDate();
+    end = QDate::currentDate().addDays(7);
+    break;
+  case MyMoneyTransactionFilter::next30Days:
+    start = QDate::currentDate();
+    end = QDate::currentDate().addDays(30);
+    break;
+  case MyMoneyTransactionFilter::next3Months:
+    start = QDate::currentDate();
+    end = QDate::currentDate().addMonths(3);
+    break;
+  case MyMoneyTransactionFilter::next6Months:
+    start = QDate::currentDate();
+    end = QDate::currentDate().addMonths(6);
+    break;
+  case MyMoneyTransactionFilter::next12Months:
+    start = QDate::currentDate();
+    end = QDate::currentDate().addMonths(12);
+    break;
+  case MyMoneyTransactionFilter::userDefined:
+    start = QDate();
+    end = QDate();
+    break;
+  case MyMoneyTransactionFilter::last3ToNext3Months:
+    start = QDate::currentDate().addMonths(-3);
+    end = QDate::currentDate().addMonths(3);
+    break;
+  case MyMoneyTransactionFilter::currentQuarter:
+    start = QDate(yr, mon - ((mon - 1) % 3), 1);
+    end = start.addMonths(3).addDays(-1);
+    break;
+  case MyMoneyTransactionFilter::lastQuarter:
+    start = QDate(yr, mon - ((mon - 1) % 3), 1).addMonths(-3);
+    end = start.addMonths(3).addDays(-1);
+    break;
+  case MyMoneyTransactionFilter::nextQuarter:
+    start = QDate(yr, mon - ((mon - 1) % 3), 1).addMonths(3);
+    end = start.addMonths(3).addDays(-1);
+    break;
+  case MyMoneyTransactionFilter::currentFiscalYear:
+    start = QDate(QDate::currentDate().year(), fiscalYearStartMonth, fiscalYearStartDay);
+    if (QDate::currentDate() < start)
       start = start.addYears(-1);
-      end = start.addYears(1).addDays(-1);
-      break;
-    case MyMoneyTransactionFilter::today:
-      start = QDate::currentDate();
-      end =  QDate::currentDate();
-      break;
-    default:
-      qFatal("Unknown date identifier %d in MyMoneyTransactionFilter::translateDateRange()", id);
-      rc = false;
-      break;
+    end = start.addYears(1).addDays(-1);
+    break;
+  case MyMoneyTransactionFilter::lastFiscalYear:
+    start = QDate(QDate::currentDate().year(), fiscalYearStartMonth, fiscalYearStartDay);
+    if (QDate::currentDate() < start)
+      start = start.addYears(-1);
+    start = start.addYears(-1);
+    end = start.addYears(1).addDays(-1);
+    break;
+  case MyMoneyTransactionFilter::today:
+    start = QDate::currentDate();
+    end =  QDate::currentDate();
+    break;
+  default:
+    qFatal("Unknown date identifier %d in MyMoneyTransactionFilter::translateDateRange()", id);
+    rc = false;
+    break;
   }
   return rc;
 }
 
 void MyMoneyTransactionFilter::removeReference(const QString& id)
 {
-  if(m_accounts.find(id)) {
+  if (m_accounts.find(id)) {
     qDebug("%s", qPrintable(QString("Remove account '%1' from report").arg(id)));
     m_accounts.remove(id);
-  } else if(m_categories.find(id)) {
+  } else if (m_categories.find(id)) {
     qDebug("%s", qPrintable(QString("Remove category '%1' from report").arg(id)));
     m_categories.remove(id);
-  } else if(m_payees.find(id)) {
+  } else if (m_payees.find(id)) {
     qDebug("%s", qPrintable(QString("Remove payee '%1' from report").arg(id)));
     m_payees.remove(id);
   }

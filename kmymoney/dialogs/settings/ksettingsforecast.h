@@ -32,8 +32,8 @@
 class KSettingsForecastDecl : public QWidget, public Ui::KSettingsForecastDecl
 {
 public:
-  KSettingsForecastDecl( QWidget *parent ) : QWidget( parent ) {
-    setupUi( this );
+  KSettingsForecastDecl(QWidget *parent) : QWidget(parent) {
+    setupUi(this);
   }
 };
 

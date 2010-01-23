@@ -59,7 +59,7 @@ static KCmdLineArgs* args = 0;
 static void _cleanup(void)
 {
 #ifdef _CHECK_MEMORY
-  chkmem.CheckMemoryLeak( false );
+  chkmem.CheckMemoryLeak(false);
   _CheckMemory_End();
 #endif
 }
@@ -74,14 +74,14 @@ int main(int argc, char *argv[])
   feature += "\t- " I18N_NOOP("Memory leakage detection") "\n";
 #endif
 
-  if(!feature.isEmpty())
+  if (!feature.isEmpty())
     feature = I18N_NOOP("Compiled with the following settings:\n") + feature;
 
-  KAboutData aboutData( "kmymoney",0, ki18n("KMyMoney"),
-    VERSION, ki18n( "\nKMyMoney, the Personal Finance Manager for KDE.\n\nPlease consider contributing to this project with code and/or suggestions." ), KAboutData::License_GPL,
-                        ki18n( "(c) 2000-2010 The KMyMoney development team" ), /*feature*/KLocalizedString(),
-    I18N_NOOP( "http://kmymoney2.sourceforge.net/" )/*,
-                                                      "kmymoney-devel@kde.org")*/ );
+  KAboutData aboutData("kmymoney", 0, ki18n("KMyMoney"),
+                       VERSION, ki18n("\nKMyMoney, the Personal Finance Manager for KDE.\n\nPlease consider contributing to this project with code and/or suggestions."), KAboutData::License_GPL,
+                       ki18n("(c) 2000-2010 The KMyMoney development team"), /*feature*/KLocalizedString(),
+                       I18N_NOOP("http://kmymoney2.sourceforge.net/")/*,
+                                                      "kmymoney-devel@kde.org")*/);
 
   aboutData.addAuthor(ki18n("Michael Edwardes."), ki18n("Initial idea, much initial source code, Project admin"), "mte@users.sourceforge.net");
   aboutData.addAuthor(ki18n("Thomas Baumgart"), ki18n("Core engine, Release Manager, Project admin"), "ipwizard@users.sourceforge.net");
@@ -93,28 +93,28 @@ int main(int argc, char *argv[])
   aboutData.addAuthor(ki18n("Fernando Vilas"), ki18n("Database backend"), "fvilas@iname.com");
   aboutData.addAuthor(ki18n("Cristian Oneț"), ki18n("Plugins, maintainer"), "onet.cristian@gmail.com");
 
-  aboutData.addCredit(ki18n("Kevin Tambascio" ), ki18n("Initial investment support"), "ktambascio@users.sourceforge.net");
-  aboutData.addCredit(ki18n("Javier Campos Morales" ), ki18n("Developer & Artist"), "javi_c@users.sourceforge.net");
-  aboutData.addCredit(ki18n("Robert Wadley" ), ki18n("Icons & splash screen"), "rob@robntina.fastmail.us");
-  aboutData.addCredit(ki18n("Laurent Montel" ),ki18n("Patches and port to kde4"), "montel@kde.org");
-  aboutData.addCredit(ki18n("Wolfgang Rohdewald" ), ki18n("Patches"), "woro@users.sourceforge.net");
+  aboutData.addCredit(ki18n("Kevin Tambascio"), ki18n("Initial investment support"), "ktambascio@users.sourceforge.net");
+  aboutData.addCredit(ki18n("Javier Campos Morales"), ki18n("Developer & Artist"), "javi_c@users.sourceforge.net");
+  aboutData.addCredit(ki18n("Robert Wadley"), ki18n("Icons & splash screen"), "rob@robntina.fastmail.us");
+  aboutData.addCredit(ki18n("Laurent Montel"), ki18n("Patches and port to kde4"), "montel@kde.org");
+  aboutData.addCredit(ki18n("Wolfgang Rohdewald"), ki18n("Patches"), "woro@users.sourceforge.net");
   aboutData.setOrganizationDomain("kde.org");
   KCmdLineOptions options;
-  options.add( "lang <lang-code>", ki18n("language to be used") );
-  options.add( "n", ki18n("do not open last used file") );
-  options.add( "timers", ki18n("enable performance timers") );
+  options.add("lang <lang-code>", ki18n("language to be used"));
+  options.add("n", ki18n("do not open last used file"));
+  options.add("timers", ki18n("enable performance timers"));
 
 #ifdef KMM_DEBUG
   // The following options are only available when compiled in debug mode
-  options.add( "trace", ki18n("turn on program traces") );
-  options.add( "dump-actions", ki18n("dump the names of all defined KAction objects to stdout and quit") );
+  options.add("trace", ki18n("turn on program traces"));
+  options.add("dump-actions", ki18n("dump the names of all defined KAction objects to stdout and quit"));
 #endif
 
   // INSERT YOUR COMMANDLINE OPTIONS HERE
-  options.add("+[File]", ki18n("file to open") );
+  options.add("+[File]", ki18n("file to open"));
 
-  KCmdLineArgs::init( argc, argv, &aboutData );
-  KCmdLineArgs::addCmdLineOptions( options ); // Add our own options.
+  KCmdLineArgs::init(argc, argv, &aboutData);
+  KCmdLineArgs::addCmdLineOptions(options);   // Add our own options.
 
   // create the singletons before we start memory checking
   // to avoid false error reports
@@ -129,7 +129,7 @@ int main(int argc, char *argv[])
 
   KApplication* a = new KApplication();
 
-  if(KGlobal::locale()->monetaryDecimalSymbol().isEmpty()) {
+  if (KGlobal::locale()->monetaryDecimalSymbol().isEmpty()) {
     KMessageBox::error(0, i18n("The monetary decimal symbol is not correctly set in the KDE Control Center's Country/Region & Language settings. Please set it to a reasonable value and start KMyMoney again."), i18n("Invalid settings"));
     delete a;
     exit(1);
@@ -150,14 +150,14 @@ int main(int argc, char *argv[])
   MyMoneyMoney::setPositivePrefixCurrencySymbol(KGlobal::locale()->positivePrefixCurrencySymbol());
 
   QString language = args->getOption("lang");
-  if(!language.isEmpty()) {
-      if(!KGlobal::locale()->setLanguage(QStringList()<<language)) {
+  if (!language.isEmpty()) {
+    if (!KGlobal::locale()->setLanguage(QStringList() << language)) {
       qWarning("Unable to select language '%s'. This has one of two reasons:\n\ta) the standard KDE message catalog is not installed\n\tb) the KMyMoney message catalog is not installed", qPrintable(language));
     }
   }
 
 #ifdef KMM_DEBUG
-  if(args->isSet("trace"))
+  if (args->isSet("trace"))
     MyMoneyTracer::on();
   timersOn = args->isSet("timers");
 #endif
@@ -166,7 +166,7 @@ int main(int argc, char *argv[])
   kmymoney = new KMyMoneyApp();
 
 #ifdef KMM_DEBUG
-  if(args->isSet("dump-actions")) {
+  if (args->isSet("dump-actions")) {
     kmymoney->dumpActions();
 
     // Before we delete the application, we make sure that we destroy all
@@ -184,21 +184,20 @@ int main(int argc, char *argv[])
 
   int rc = 0;
   try {
-      do {
-          if ( QDBusConnection::sessionBus().interface()->isServiceRegistered("org.kde.kmymoney") ) {
+    do {
+      if (QDBusConnection::sessionBus().interface()->isServiceRegistered("org.kde.kmymoney")) {
         const QList<QString> instances = kmymoney->instanceList();
-        if(instances.count() > 0) {
+        if (instances.count() > 0) {
 
           // If the user launches a second copy of the app and includes a file to
           // open, they are probably attempting a "WebConnect" session.  In this case,
           // we'll check to make sure it's an importable file that's passed in, and if so, we'll
           // notify the primary instance of the file and kill ourselves.
 
-          if(args->count() > 0) {
+          if (args->count() > 0) {
             KUrl url = args->url(0);
-            if ( kmymoney->isImportableFile( url.path() ) )
-            {
-                // if there are multiple instances, we'll send this to the first one
+            if (kmymoney->isImportableFile(url.path())) {
+              // if there are multiple instances, we'll send this to the first one
               QString primary = instances[0];
 
               // send a message to the primary client to import this file
@@ -216,7 +215,7 @@ int main(int argc, char *argv[])
             }
           }
 
-          if(KMessageBox::questionYesNo(0, i18n("Another instance of KMyMoney is already running. Do you want to quit?")) == KMessageBox::Yes) {
+          if (KMessageBox::questionYesNo(0, i18n("Another instance of KMyMoney is already running. Do you want to quit?")) == KMessageBox::Yes) {
             rc = 1;
             delete kmymoney;
             delete splash;
@@ -238,7 +237,7 @@ int main(int argc, char *argv[])
       KUrl url;
       // make sure, we take the file provided on the command
       // line before we go and open the last one used
-      if(args->count() > 0) {
+      if (args->count() > 0) {
         url = args->url(0);
 
         // Check to see if this is an importable file, as opposed to a loadable
@@ -247,8 +246,7 @@ int main(int argc, char *argv[])
         // implements a "web connect" session where there is not already an
         // instance of the program running.
 
-        if ( kmymoney->isImportableFile( url.path() ) )
-        {
+        if (kmymoney->isImportableFile(url.path())) {
           importfile = url.path();
           url = kmymoney->readLastUsedFile();
         }
@@ -258,26 +256,26 @@ int main(int argc, char *argv[])
       }
 
       KTipDialog::showTip(kmymoney, "", false);
-      if(url.isValid() && !args->isSet("n")) {
+      if (url.isValid() && !args->isSet("n")) {
         kmymoney->slotFileOpenRecent(url);
-      } else if(KMyMoneyGlobalSettings::firstTimeRun()) {
+      } else if (KMyMoneyGlobalSettings::firstTimeRun()) {
         kmymoney->slotFileNew();
       }
       KMyMoneyGlobalSettings::setFirstTimeRun(false);
 
-      if ( ! importfile.isEmpty() )
-        kmymoney->webConnect( importfile, kapp->startupId() );
+      if (! importfile.isEmpty())
+        kmymoney->webConnect(importfile, kapp->startupId());
 
-      if(kmymoney != 0) {
+      if (kmymoney != 0) {
         kmymoney->updateCaption();
         args->clear();
         kmymoney->centralWidget()->setEnabled(true);
         rc = a->exec();
       }
-    } while(0);
-  } catch(MyMoneyException *e) {
+    } while (0);
+  } catch (MyMoneyException *e) {
     KMessageBox::detailedError(0, i18n("Uncaught error. Please report the details to the developers"),
-                               i18n("%1 in file %2 line %3",e->what(),e->file(),e->line()));
+                               i18n("%1 in file %2 line %3", e->what(), e->file(), e->line()));
     throw e;
   }
   delete a;
@@ -287,16 +285,14 @@ int main(int argc, char *argv[])
 
 void timestamp(char *txt)
 {
-  if(timersOn)
-  {
+  if (timersOn) {
     qDebug("Time(%s): %d", txt, timer.elapsed());
   }
 }
 
 void timetrace(const char *txt)
 {
-  if(timersOn)
-  {
+  if (timersOn) {
     qDebug("Timer(%s): %d elapsed", txt, timer.elapsed());
     timer.restart();
   }

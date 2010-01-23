@@ -20,33 +20,33 @@
 #include <klocale.h>
 #include "kreconcilelistitem.h"
 
-KReconcileListItem::KReconcileListItem(Q3ListView *parent, MyMoneyTransaction *transaction )
- : Q3ListViewItem(parent)
+KReconcileListItem::KReconcileListItem(Q3ListView *parent, MyMoneyTransaction *transaction)
+    : Q3ListViewItem(parent)
 {
-/*
-  QString colText;
+  /*
+    QString colText;
 
-  m_transaction = transaction;
+    m_transaction = transaction;
 
-  setText(0, KGlobal::locale()->formatDate(m_transaction->date(), true));
-  setText(1, m_transaction->number());
-  setText(2, m_transaction->payee());
-  setText(3, KGlobal::locale()->formatMoney(m_transaction->amount().amount(),""));
+    setText(0, KGlobal::locale()->formatDate(m_transaction->date(), true));
+    setText(1, m_transaction->number());
+    setText(2, m_transaction->payee());
+    setText(3, KGlobal::locale()->formatMoney(m_transaction->amount().amount(),""));
 
-  QString tmp = " ";
-  switch (m_transaction->state()) {
-    case MyMoneyTransaction::Reconciled:
-      tmp = i18n("R");
-      setSelected(true);
-      break;
-    case MyMoneyTransaction::Cleared:
-      tmp = i18n("C");
-      break;
-    default:
-      break;
-  }
-  setText(4, tmp);
-*/
+    QString tmp = " ";
+    switch (m_transaction->state()) {
+      case MyMoneyTransaction::Reconciled:
+        tmp = i18n("R");
+        setSelected(true);
+        break;
+      case MyMoneyTransaction::Cleared:
+        tmp = i18n("C");
+        break;
+      default:
+        break;
+    }
+    setText(4, tmp);
+  */
 }
 
 KReconcileListItem::~KReconcileListItem()
@@ -55,16 +55,16 @@ KReconcileListItem::~KReconcileListItem()
 
 void KReconcileListItem::setReconciled(bool rec)
 {
-/*
-  QString temp = " ";
-  if(rec == true) {
-    m_transaction->setState(MyMoneyTransaction::Reconciled);
-    temp = i18n("R");
-  } else {
-    m_transaction->setState(MyMoneyTransaction::Unreconciled);
-  }
-  setText(4,temp);
-*/
+  /*
+    QString temp = " ";
+    if(rec == true) {
+      m_transaction->setState(MyMoneyTransaction::Reconciled);
+      temp = i18n("R");
+    } else {
+      m_transaction->setState(MyMoneyTransaction::Unreconciled);
+    }
+    setText(4,temp);
+  */
 }
 
 MyMoneyTransaction* KReconcileListItem::transaction(void)
@@ -74,20 +74,20 @@ MyMoneyTransaction* KReconcileListItem::transaction(void)
 
 QString KReconcileListItem::key(int column, bool ascending) const
 {
-/*
-  QString tmp = "";
-  switch (column ) {
-    case 0:
-      tmp.sprintf("%08d", m_transaction->date().daysTo( QDate(1900, 1, 1) ));
-      break;
-    case 3:
-      tmp.sprintf("%020.2f", m_transaction->amount().amount());
-      break;
-    default: tmp = text(column);
-      break;
-  }
-  return tmp;
-*/
+  /*
+    QString tmp = "";
+    switch (column ) {
+      case 0:
+        tmp.sprintf("%08d", m_transaction->date().daysTo( QDate(1900, 1, 1) ));
+        break;
+      case 3:
+        tmp.sprintf("%020.2f", m_transaction->amount().amount());
+        break;
+      default: tmp = text(column);
+        break;
+    }
+    return tmp;
+  */
 }
 
 #endif

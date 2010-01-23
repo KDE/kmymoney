@@ -22,7 +22,8 @@
 #include "mymoneyfile.h"
 #include "mymoneyseqaccessmgr.h"
 
-class PivotTableTest : public CppUnit::TestFixture  {
+class PivotTableTest : public CppUnit::TestFixture
+{
   CPPUNIT_TEST_SUITE(PivotTableTest);
   CPPUNIT_TEST(testNetWorthSingle);
   CPPUNIT_TEST(testNetWorthOfsetting);
@@ -51,8 +52,8 @@ private:
 
 public:
   PivotTableTest();
-  void setUp ();
-  void tearDown ();
+  void setUp();
+  void tearDown();
   void testNetWorthSingle();
   void testNetWorthOfsetting();
   void testNetWorthOpeningPrior();

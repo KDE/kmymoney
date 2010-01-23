@@ -45,8 +45,8 @@
 class KInstitutionsViewDecl : public QWidget, public Ui::KInstitutionsViewDecl
 {
 public:
-  KInstitutionsViewDecl( QWidget *parent ) : QWidget( parent ) {
-    setupUi( this );
+  KInstitutionsViewDecl(QWidget *parent) : QWidget(parent) {
+    setupUi(this);
   }
 };
 class KInstitutionsView : public KInstitutionsViewDecl
@@ -55,7 +55,7 @@ class KInstitutionsView : public KInstitutionsViewDecl
 private:
 
 public:
-  KInstitutionsView(QWidget *parent=0);
+  KInstitutionsView(QWidget *parent = 0);
   virtual ~KInstitutionsView();
 
 public slots:

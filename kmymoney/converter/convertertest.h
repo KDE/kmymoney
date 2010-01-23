@@ -22,7 +22,8 @@
 #include "mymoneyfile.h"
 #include "storage/mymoneyseqaccessmgr.h"
 
-class ConverterTest : public CppUnit::TestFixture  {
+class ConverterTest : public CppUnit::TestFixture
+{
   CPPUNIT_TEST_SUITE(ConverterTest);
   CPPUNIT_TEST(testWebQuotes);
   CPPUNIT_TEST(testDateFormat);
@@ -36,8 +37,8 @@ private:
 
 public:
   ConverterTest();
-  void setUp ();
-  void tearDown ();
+  void setUp();
+  void tearDown();
   void testWebQuotes();
   void testDateFormat();
 };

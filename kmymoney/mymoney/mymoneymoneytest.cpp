@@ -16,7 +16,7 @@
 
 // make sure, that this is defined before we even include any other header file
 #ifndef __STDC_LIMIT_MACROS
-  #define __STDC_LIMIT_MACROS         // force definition of min and max values
+#define __STDC_LIMIT_MACROS         // force definition of min and max values
 #endif
 
 #include "mymoneymoneytest.h"
@@ -41,9 +41,9 @@ void MyMoneyMoneyTest::setUp()
   m_0 = new MyMoneyMoney(12);
   m_1 = new MyMoneyMoney(-10);
   m_2 = new MyMoneyMoney(2);
-  m_3 = new MyMoneyMoney(123,1);
-  m_4 = new MyMoneyMoney(1234,1000);
-  m_5 = new MyMoneyMoney(195883,100000);
+  m_3 = new MyMoneyMoney(123, 1);
+  m_4 = new MyMoneyMoney(1234, 1000);
+  m_5 = new MyMoneyMoney(195883, 100000);
 
   MyMoneyMoney::setDecimalSeparator('.');
   MyMoneyMoney::setThousandSeparator(',');
@@ -93,7 +93,7 @@ void MyMoneyMoneyTest::testAssignment()
   CPPUNIT_ASSERT(m->m_num == 777888999);
   CPPUNIT_ASSERT(m->m_denom == 100);
 
-  *m = (int)-5678;
+  *m = (int) - 5678;
   CPPUNIT_ASSERT(m->m_num == -5678);
   CPPUNIT_ASSERT(m->m_denom == 100);
 
@@ -199,8 +199,8 @@ void MyMoneyMoneyTest::testConvert()
 
 void MyMoneyMoneyTest::testEquality()
 {
-  CPPUNIT_ASSERT (*m_1 == *m_1);
-  CPPUNIT_ASSERT (!(*m_1 == *m_0));
+  CPPUNIT_ASSERT(*m_1 == *m_1);
+  CPPUNIT_ASSERT(!(*m_1 == *m_0));
 
   MyMoneyMoney m1(LLCONST(999666555444));
   MyMoneyMoney m2(LLCONST(999666555444));
@@ -210,9 +210,9 @@ void MyMoneyMoneyTest::testEquality()
   MyMoneyMoney m4(LLCONST(-999666555444));
   CPPUNIT_ASSERT(m3 == m4);
 
-  MyMoneyMoney m5(1230,100);
-  MyMoneyMoney m6(123,10);
-  MyMoneyMoney m7(246,20);
+  MyMoneyMoney m5(1230, 100);
+  MyMoneyMoney m6(123, 10);
+  MyMoneyMoney m7(246, 20);
   CPPUNIT_ASSERT(m5 == m6);
   CPPUNIT_ASSERT(m5 == m7);
 
@@ -223,8 +223,8 @@ void MyMoneyMoneyTest::testEquality()
 
 void MyMoneyMoneyTest::testInequality()
 {
-  CPPUNIT_ASSERT (*m_1 != *m_0);
-  CPPUNIT_ASSERT (!(*m_1 != *m_1));
+  CPPUNIT_ASSERT(*m_1 != *m_0);
+  CPPUNIT_ASSERT(!(*m_1 != *m_1));
 
   MyMoneyMoney m1(LLCONST(999666555444));
   MyMoneyMoney m2(LLCONST(-999666555444));
@@ -236,14 +236,14 @@ void MyMoneyMoneyTest::testInequality()
 
   CPPUNIT_ASSERT(m4 != QString("999666555444"));
 
-  CPPUNIT_ASSERT(MyMoneyMoney::autoCalc != MyMoneyMoney(1,100));
-  CPPUNIT_ASSERT(MyMoneyMoney(1,100) != MyMoneyMoney::autoCalc);
+  CPPUNIT_ASSERT(MyMoneyMoney::autoCalc != MyMoneyMoney(1, 100));
+  CPPUNIT_ASSERT(MyMoneyMoney(1, 100) != MyMoneyMoney::autoCalc);
 }
 
 
 void MyMoneyMoneyTest::testAddition()
 {
-  CPPUNIT_ASSERT (*m_0 + *m_1 == *m_2);
+  CPPUNIT_ASSERT(*m_0 + *m_1 == *m_2);
 
   MyMoneyMoney m1(100);
 
@@ -269,7 +269,7 @@ void MyMoneyMoneyTest::testAddition()
 
 void MyMoneyMoneyTest::testSubtraction()
 {
-  CPPUNIT_ASSERT (*m_2 - *m_1 == *m_0);
+  CPPUNIT_ASSERT(*m_2 - *m_1 == *m_0);
 
   MyMoneyMoney m1(100);
 
@@ -286,7 +286,7 @@ void MyMoneyMoneyTest::testSubtraction()
 
   m1 = QString("123.20");
   MyMoneyMoney m2(1, 5);
-  CPPUNIT_ASSERT((m1 - m2) == MyMoneyMoney(123,1));
+  CPPUNIT_ASSERT((m1 - m2) == MyMoneyMoney(123, 1));
 
   m1 -= m2;
   CPPUNIT_ASSERT(m1.m_num == 12300);
@@ -295,10 +295,10 @@ void MyMoneyMoneyTest::testSubtraction()
 
 void MyMoneyMoneyTest::testMultiplication()
 {
-  MyMoneyMoney m1(100,1);
+  MyMoneyMoney m1(100, 1);
 
-  CPPUNIT_ASSERT((m1 * MyMoneyMoney(50,1)) == MyMoneyMoney(5000,1));
-  CPPUNIT_ASSERT((m1 * MyMoneyMoney(10000000,1)) == MyMoneyMoney(1000000000,1));
+  CPPUNIT_ASSERT((m1 * MyMoneyMoney(50, 1)) == MyMoneyMoney(5000, 1));
+  CPPUNIT_ASSERT((m1 * MyMoneyMoney(10000000, 1)) == MyMoneyMoney(1000000000, 1));
   CPPUNIT_ASSERT((m1 * (*m_0)) == MyMoneyMoney(1200));
 
   MyMoneyMoney m2 = QString("-73010.28");
@@ -309,7 +309,7 @@ void MyMoneyMoneyTest::testMultiplication()
 void MyMoneyMoneyTest::testDivision()
 {
   MyMoneyMoney m1(100);
-  CPPUNIT_ASSERT((m1 / MyMoneyMoney(50)) == MyMoneyMoney(2,1));
+  CPPUNIT_ASSERT((m1 / MyMoneyMoney(50)) == MyMoneyMoney(2, 1));
 
   MyMoneyMoney m2 = QString("-142795.69");
   m1 = QString("1.95583");
@@ -358,7 +358,7 @@ void MyMoneyMoneyTest::testFormatMoney()
   MyMoneyMoney m1(10099);
   CPPUNIT_ASSERT(m1.formatMoney("", 2) == QString("100.99"));
 
-  m1 = MyMoneyMoney(100,1);
+  m1 = MyMoneyMoney(100, 1);
   CPPUNIT_ASSERT(m1.formatMoney("", 2) == QString("100.00"));
   CPPUNIT_ASSERT(m1.formatMoney("", -1) == QString("100"));
 
@@ -380,17 +380,17 @@ void MyMoneyMoneyTest::testFormatMoney()
   CPPUNIT_ASSERT(m1.formatMoney("", 2, false) == QString("-92233720368547758.08"));
   CPPUNIT_ASSERT(m1.formatMoney(100, false) == QString("-92233720368547758.08"));
 
-  m1 = MyMoneyMoney(1,5);
+  m1 = MyMoneyMoney(1, 5);
   CPPUNIT_ASSERT(m1.formatMoney("", 2) == QString("0.20"));
   CPPUNIT_ASSERT(m1.formatMoney(1000) == QString("0.200"));
   CPPUNIT_ASSERT(m1.formatMoney(100) == QString("0.20"));
   CPPUNIT_ASSERT(m1.formatMoney(10) == QString("0.2"));
 
-  m1 = MyMoneyMoney(13333,5000);
+  m1 = MyMoneyMoney(13333, 5000);
   CPPUNIT_ASSERT(m1.formatMoney("", 10) == QString("2.6666000000"));
 
-  m1 = MyMoneyMoney(-1404,100);
-  CPPUNIT_ASSERT(m1.formatMoney("",-1) == QString("-14.04"));
+  m1 = MyMoneyMoney(-1404, 100);
+  CPPUNIT_ASSERT(m1.formatMoney("", -1) == QString("-14.04"));
 }
 
 void MyMoneyMoneyTest::testRelation()
@@ -438,7 +438,7 @@ void MyMoneyMoneyTest::testUnaryMinus()
 
 void MyMoneyMoneyTest::testDoubleConstructor()
 {
-  for(int i = -123456; i < 123456; ++i) {
+  for (int i = -123456; i < 123456; ++i) {
     double d = i;
     MyMoneyMoney r(i);
     d /= 100;
@@ -585,7 +585,7 @@ void MyMoneyMoneyTest::testReduce(void)
   CPPUNIT_ASSERT(a.m_num == 364881);
   CPPUNIT_ASSERT(a.m_denom == 12673900);
 
-  b = b.reduce();  
+  b = b.reduce();
   CPPUNIT_ASSERT(b.m_num == -364881);
   CPPUNIT_ASSERT(b.m_denom == 12673900);
 }
@@ -595,14 +595,14 @@ void MyMoneyMoneyTest::testZeroDenominator()
   try {
     MyMoneyMoney m((int)1, 0);
     CPPUNIT_FAIL("Missing expected exception");
-  } catch(MyMoneyException *e) {
+  } catch (MyMoneyException *e) {
     delete e;
   }
 
   try {
     MyMoneyMoney m((signed64)1, 0);
     CPPUNIT_FAIL("Missing expected exception");
-  } catch(MyMoneyException *e) {
+  } catch (MyMoneyException *e) {
     delete e;
   }
 }

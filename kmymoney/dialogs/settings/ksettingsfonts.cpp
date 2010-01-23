@@ -26,7 +26,7 @@
 // Project Includes
 
 KSettingsFonts::KSettingsFonts(QWidget* parent) :
-  KSettingsFontsDecl(parent)
+    KSettingsFontsDecl(parent)
 {
 }
 

@@ -67,7 +67,9 @@ public:
     */
   void updateAccount(const MyMoneyAccount& account);
 
-  const MyMoneyObject& itemObject(void) const { return m_account; };
+  const MyMoneyObject& itemObject(void) const {
+    return m_account;
+  };
 
   void setReconciliation(bool);
 
@@ -88,8 +90,8 @@ private:
 class KAccountsViewDecl : public QWidget, public Ui::KAccountsViewDecl
 {
 public:
-  KAccountsViewDecl( QWidget *parent ) : QWidget( parent ) {
-    setupUi( this );
+  KAccountsViewDecl(QWidget *parent) : QWidget(parent) {
+    setupUi(this);
   }
 
 };
@@ -99,7 +101,7 @@ class KAccountsView : public KAccountsViewDecl
 private:
 
 public:
-  KAccountsView(QWidget *parent=0);
+  KAccountsView(QWidget *parent = 0);
   virtual ~KAccountsView();
 
 public slots:

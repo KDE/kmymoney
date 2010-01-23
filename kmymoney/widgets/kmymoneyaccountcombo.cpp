@@ -56,7 +56,7 @@ public:
 };
 
 KMyMoneyMVCAccountCombo::KMyMoneyMVCAccountCombo(QWidget* parent/* = 0*/)
-  : KComboBox(parent), d(new Private)
+    : KComboBox(parent), d(new Private)
 {
 }
 
@@ -122,9 +122,9 @@ void KMyMoneyMVCAccountCombo::setSelected(const QString& id)
 }
 
 KMyMoneyAccountCombo::KMyMoneyAccountCombo(QWidget* parent) :
-  KComboBox(parent),
-  m_completion(0),
-  m_mlbDown(false)
+    KComboBox(parent),
+    m_completion(0),
+    m_mlbDown(false)
 {
   m_completion = new kMyMoneyAccountCompletion(this);
 
@@ -155,18 +155,18 @@ void KMyMoneyAccountCombo::slotSelected(const QString& id)
     MyMoneyAccount acc = MyMoneyFile::instance()->account(id);
     setText(acc.name());
     emit accountSelected(id);
-  } catch(MyMoneyException *e) {
+  } catch (MyMoneyException *e) {
     delete e;
   }
 }
 
 void KMyMoneyAccountCombo::setSelected(const QString& id)
 {
-  if(!id.isEmpty()) {
+  if (!id.isEmpty()) {
     try {
       MyMoneyAccount acc = MyMoneyFile::instance()->account(id);
       setSelected(acc);
-    } catch(MyMoneyException *e) {
+    } catch (MyMoneyException *e) {
       qDebug("Account '%s' not found in %s(%d)", qPrintable(id), __FILE__, __LINE__);
       delete e;
     }
@@ -199,16 +199,16 @@ int KMyMoneyAccountCombo::loadList(KMyMoneyUtils::categoryTypeE typeMask)
   AccountSet set;
   QList<int> typeList;
 
-  if(typeMask & KMyMoneyUtils::asset) {
+  if (typeMask & KMyMoneyUtils::asset) {
     set.addAccountGroup(MyMoneyAccount::Asset);
   }
-  if(typeMask & KMyMoneyUtils::liability) {
+  if (typeMask & KMyMoneyUtils::liability) {
     set.addAccountGroup(MyMoneyAccount::Liability);
   }
-  if(typeMask & KMyMoneyUtils::income) {
+  if (typeMask & KMyMoneyUtils::income) {
     set.addAccountGroup(MyMoneyAccount::Income);
   }
-  if(typeMask & KMyMoneyUtils::expense) {
+  if (typeMask & KMyMoneyUtils::expense) {
     set.addAccountGroup(MyMoneyAccount::Expense);
   }
 
@@ -226,28 +226,28 @@ int KMyMoneyAccountCombo::loadList(MyMoneyAccount::accountTypeE type)
 
 void KMyMoneyAccountCombo::keyPressEvent(QKeyEvent* k)
 {
-  switch(k->key()) {
-    case Qt::Key_Tab:
-      break;
+  switch (k->key()) {
+  case Qt::Key_Tab:
+    break;
 
-    case Qt::Key_Space:
-      emit clicked();
-      break;
+  case Qt::Key_Space:
+    emit clicked();
+    break;
 
-    default:
-      break;
+  default:
+    break;
   }
   return;
 }
 
 void KMyMoneyAccountCombo::mousePressEvent(QMouseEvent *e)
 {
-  if ( e->button() != Qt::LeftButton ) {
+  if (e->button() != Qt::LeftButton) {
     e->ignore();
     return;
   }
-  bool hit = rect().contains( e->pos() );
-  if ( hit ) {                                // mouse press on button
+  bool hit = rect().contains(e->pos());
+  if (hit) {                                  // mouse press on button
     m_mlbDown = true;                         // left mouse button down
     emit pressed();
   }
@@ -255,15 +255,15 @@ void KMyMoneyAccountCombo::mousePressEvent(QMouseEvent *e)
 
 void KMyMoneyAccountCombo::mouseReleaseEvent(QMouseEvent *e)
 {
-  if ( e->button() != Qt::LeftButton ) {
-      e->ignore();
-      return;
+  if (e->button() != Qt::LeftButton) {
+    e->ignore();
+    return;
   }
-  if ( !m_mlbDown )
-      return;
+  if (!m_mlbDown)
+    return;
   m_mlbDown = false;                            // left mouse button up
   emit released();
-  if ( rect().contains( e->pos() ) ) {              // mouse release on button
+  if (rect().contains(e->pos())) {                  // mouse release on button
     emit clicked();
   }
 }
@@ -283,7 +283,7 @@ int KMyMoneyAccountCombo::loadList(const QList<int>& list)
   // FIXME make the caller construct the AccountSet directly
   AccountSet set;
   QList<int>::const_iterator it;
-  for(it = list.begin(); it != list.end(); ++it) {
+  for (it = list.begin(); it != list.end(); ++it) {
     set.addAccountType(static_cast<MyMoneyAccount::accountTypeE>(*it));
   }
   return set.load(m_completion->selector());
@@ -292,8 +292,8 @@ int KMyMoneyAccountCombo::loadList(const QList<int>& list)
 QStringList KMyMoneyAccountCombo::selectedAccounts(void) const
 {
   QStringList list;
-  if(m_completion)
-	  m_completion->selector()->selectedItems(list);
+  if (m_completion)
+    m_completion->selector()->selectedItems(list);
   return list;
 }
 

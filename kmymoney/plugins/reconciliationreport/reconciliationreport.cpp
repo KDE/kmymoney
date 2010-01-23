@@ -38,7 +38,7 @@
 
 typedef KGenericFactory<KMMReconciliationReportPlugin> reconciliationreportFactory;
 
-K_EXPORT_COMPONENT_FACTORY(kmm_reconciliationreport, reconciliationreportFactory( "kmm_reconciliationreport", "kmymoney" ))
+K_EXPORT_COMPONENT_FACTORY(kmm_reconciliationreport, reconciliationreportFactory("kmm_reconciliationreport", "kmymoney"))
 
 KMMReconciliationReportPlugin::KMMReconciliationReportPlugin(QObject *parent, const QStringList&)
     : KMyMoneyPlugin::Plugin(parent, "Reconciliation report"/*must be the same as X-KDE-PluginInfo-Name*/)
@@ -58,12 +58,12 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
   MyMoneySecurity currency = file->currency(account.currencyId());
 
   QString filename;
-  if(!MyMoneyFile::instance()->value("reportstylesheet").isEmpty())
+  if (!MyMoneyFile::instance()->value("reportstylesheet").isEmpty())
     filename = KGlobal::dirs()->findResource("apps/kmymoney", QString("html/%1").arg(MyMoneyFile::instance()->value("reportstylesheet")));
-  if(filename.isEmpty())
+  if (filename.isEmpty())
     filename = KGlobal::dirs()->findResource("apps/kmymoney", "html/kmymoney.css");
   QString header = QString("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\">\n") +
-    QString("<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"%1\">").arg(filename);
+                   QString("<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"%1\">").arg(filename);
 
   header += "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />";
 
@@ -71,9 +71,9 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
   QString css;
   css += "<style type=\"text/css\">\n<!--\n";
   css += QString(".row-even, .item0 { background-color: %1; color: %2 }\n")
-    .arg((KColorScheme(QPalette::Normal).background(KColorScheme::AlternateBackground).color()).name()).arg(tcolor.name());
+         .arg((KColorScheme(QPalette::Normal).background(KColorScheme::AlternateBackground).color()).name()).arg(tcolor.name());
   css += QString(".row-odd, .item1  { background-color: %1; color: %2 }\n")
-    .arg((KColorScheme(QPalette::Normal).background(KColorScheme::NormalBackground).color()).name()).arg(tcolor.name());
+         .arg((KColorScheme(QPalette::Normal).background(KColorScheme::NormalBackground).color()).name()).arg(tcolor.name());
   css += "-->\n</style>\n";
   header += css;
 
@@ -89,10 +89,10 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
   int outstandingDeposits = 0;
   int outstandingPayments = 0;
   QList<QPair<MyMoneyTransaction, MyMoneySplit> >::const_iterator it;
-  for(it = transactionList.begin(); it != transactionList.end(); ++it) {
+  for (it = transactionList.begin(); it != transactionList.end(); ++it) {
     // if this split is a stock split, we can't just add the amount of shares
     if ((*it).second.reconcileFlag() == MyMoneySplit::NotReconciled) {
-      if((*it).second.shares().isNegative()) {
+      if ((*it).second.shares().isNegative()) {
         outstandingPayments++;
         outstandingPaymentAmount += (*it).second.shares();
       } else {
@@ -100,7 +100,7 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
         outstandingDepositAmount += (*it).second.shares();
       }
     } else {
-      if((*it).second.shares().isNegative()) {
+      if ((*it).second.shares().isNegative()) {
         clearedPayments++;
         clearedPaymentAmount += (*it).second.shares();
       } else {
@@ -112,7 +112,7 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
   }
 
   QString reportName = i18n("Reconcliation report of account %1", account.name());
-  QString report = QString ("<h2 class=\"report\">%1</h2>\n").arg(reportName);
+  QString report = QString("<h2 class=\"report\">%1</h2>\n").arg(reportName);
   report += QString("<div class=\"subtitle\">");
   report += QString("%1").arg(KGlobal::locale()->formatDate(date, KLocale::ShortDate));
   report += QString("</div>\n");
@@ -192,10 +192,10 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
   MyMoneyMoney afterDepositAmount, afterPaymentAmount;
   int afterDeposits = 0;
   int afterPayments = 0;
-  for(it = afterTransactionList.constBegin(); it != afterTransactionList.constEnd(); ++it) {
+  for (it = afterTransactionList.constBegin(); it != afterTransactionList.constEnd(); ++it) {
     // if this split is a stock split, we can't just add the amount of shares
     if ((*it).second.reconcileFlag() == MyMoneySplit::NotReconciled) {
-      if((*it).second.shares().isNegative()) {
+      if ((*it).second.shares().isNegative()) {
         afterPayments++;
         afterPaymentAmount += (*it).second.shares();
       } else {
@@ -238,16 +238,15 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
   detailsTableHeader += "</tr></thead>\n";
 
 
-  QString detailsReport = QString( "<h2 class=\"report\">%1</h2>\n" ).arg(i18n("Outstanding payments"));
+  QString detailsReport = QString("<h2 class=\"report\">%1</h2>\n").arg(i18n("Outstanding payments"));
   detailsReport += detailsTableHeader;
 
   int index = 0;
-  for(it = transactionList.begin(); it != transactionList.end(); ++it) {
-    if ((*it).second.reconcileFlag() == MyMoneySplit::NotReconciled && (*it).second.shares().isNegative())
-    {
+  for (it = transactionList.begin(); it != transactionList.end(); ++it) {
+    if ((*it).second.reconcileFlag() == MyMoneySplit::NotReconciled && (*it).second.shares().isNegative()) {
       QList<MyMoneySplit>::const_iterator it_s;
       QString category;
-      for(it_s = (*it).first.splits().begin(); it_s != (*it).first.splits().end(); ++it_s) {
+      for (it_s = (*it).first.splits().begin(); it_s != (*it).first.splits().end(); ++it_s) {
         if ((*it_s).accountId() != account.id()) {
           if (!category.isEmpty())
             category += ", "; // this is a split transaction
@@ -275,16 +274,15 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
   detailsReport += QString("<td class=\"left1\" colspan=\"5\">%1</td><td>%2</td></tr>").arg(i18np("One outstanding payment of", "Total of %1 outstanding payments amounting to", outstandingPayments)).arg(outstandingPaymentAmount.formatMoney(currency));
 
   detailsReport += "</table>\n";
-  detailsReport += QString( "<h2 class=\"report\">%1</h2>\n" ).arg(i18n("Outstanding deposits"));
+  detailsReport += QString("<h2 class=\"report\">%1</h2>\n").arg(i18n("Outstanding deposits"));
   detailsReport += detailsTableHeader;
 
   index = 0;
-  for(it = transactionList.begin(); it != transactionList.end(); ++it) {
-    if ((*it).second.reconcileFlag() == MyMoneySplit::NotReconciled && !(*it).second.shares().isNegative())
-    {
+  for (it = transactionList.begin(); it != transactionList.end(); ++it) {
+    if ((*it).second.reconcileFlag() == MyMoneySplit::NotReconciled && !(*it).second.shares().isNegative()) {
       QList<MyMoneySplit>::const_iterator it_s;
       QString category;
-      for(it_s = (*it).first.splits().begin(); it_s != (*it).first.splits().end(); ++it_s) {
+      for (it_s = (*it).first.splits().begin(); it_s != (*it).first.splits().end(); ++it_s) {
         if ((*it_s).accountId() != account.id()) {
           if (!category.isEmpty())
             category += ", "; // this is a split transaction
