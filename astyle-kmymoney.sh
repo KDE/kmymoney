@@ -7,8 +7,14 @@
 # 
 # requirements: installed astyle 
 
-astyle --indent=spaces=2 --brackets=linux \
+IFS=:
+for path in $PATH; do
+  if test -x $path/astyle; then
+    $path/astyle --indent=spaces=2 --brackets=linux \
       --indent-labels --pad=oper --unpad=paren \
       --one-line=keep-statements --convert-tabs \
       --indent-preprocessor \
-      `find kmymoney libkgpgfile -type f -name '*.c'` `find kmymoney libkgpgfile -type f -name '*.cpp'` `find kmymoney libkgpgfile -type f -name '*.h'`
+      `find kmymoney libkgpgfile -type f  \( -name \*.c -or -name \*.cpp -or -name \*.h \)  `
+    exit $?
+  fi
+done
