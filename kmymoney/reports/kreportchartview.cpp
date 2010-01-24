@@ -141,16 +141,15 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     break;
   }
   case MyMoneyReport::eChartRing: {
-    KDChart::RingDiagram* diagram = new KDChart::RingDiagram;
     PolarCoordinatePlane* polarPlane = new PolarCoordinatePlane;
     replaceCoordinatePlane(polarPlane);
-    coordinatePlane()->replaceDiagram(diagram);
+      KDChart::RingDiagram* diagram = new KDChart::RingDiagram(this, polarPlane);
+      polarPlane->replaceDiagram(diagram);
     //chartView.params()->setRelativeRingThickness( true );
     setAccountSeries(false);
     break;
   }
   }
-
   //set data value attributes
   DataValueAttributes valueAttr(coordinatePlane()->diagram()->dataValueAttributes());
   valueAttr.setVisible(config.isChartDataLabels());
@@ -395,7 +394,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
         if (config.isMixedTime() && (rowTypeList[i] == eActual || rowTypeList[i] == eForecast)) {
           if (rowTypeList[i] == eActual) {
-            rowNum = drawPivotRowSet(rowNum, grid.m_total, rowTypeList[i], legendText, 1, config.currentDateColumn() + 1);
+            rowNum = drawPivotRowSet(rowNum, grid.m_total, rowTypeList[i], legendText, 1, config.currentDateColumn());
           } else if (rowTypeList[i] == eForecast) {
             rowNum = drawPivotRowSet(rowNum, grid.m_total, rowTypeList[i], legendText, config.currentDateColumn(), numColumns());
           } else {
@@ -476,7 +475,7 @@ unsigned KReportChartView::drawPivotRowSet(int rowNum, const PivotGridRowSet& ro
     }
   } else {
     int column = startColumn;
-    while (column < endColumn) {
+    while (column < endColumn && column < numColumns()) {
       double value = rowSet[rowType][column].toDouble();
       QString toolTip = QString("<h2>%1</h2><strong>%2</strong><br>")
                         .arg(legendText)
