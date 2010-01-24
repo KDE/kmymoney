@@ -22,7 +22,7 @@
 #define KBANKING_KBSETTINGS_H
 
 #include "kbanking.h"
-#include <qbanking/qbcfgtabsettings.h>
+#include <q4banking/qbcfgtabsettings.h>
 
 class KBankingSettings: public QBCfgTabSettings
 {

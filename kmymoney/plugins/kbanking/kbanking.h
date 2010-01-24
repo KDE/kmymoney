@@ -23,7 +23,7 @@
 
 #include <aqbanking/version.h>
 #include <aqbanking/banking.h>
-#include <qbanking/qbanking.h>
+#include <q4banking/qbanking.h>
 
 #ifndef AQB_MAKE_VERSION
 #define AQB_MAKE_VERSION(a,b,c,d) (((a)<<24) | ((b)<<16) | (c<<8) | (d))

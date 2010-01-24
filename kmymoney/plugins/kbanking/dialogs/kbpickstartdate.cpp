@@ -24,7 +24,7 @@
 
 // QBanking includes
 #include "kbpickstartdate.h"
-#include <qbanking/qbanking.h>
+#include <q4banking/qbanking.h>
 
 // Gwenhywfar includes
 #include <gwenhywfar/debug.h>

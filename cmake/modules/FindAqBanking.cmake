@@ -42,7 +42,7 @@ find_library(AQBANKING_LIBRARY NAMES aqbanking libaqbanking
   HINTS ${AQBASEDIR}/lib
 )
 
-find_library(QBANKING_LIBRARY NAMES qbanking libqbanking
+find_library(QBANKING_LIBRARY NAMES q4banking libq4banking
   HINTS ${AQBASEDIR}/lib
 )
 
@@ -63,12 +63,7 @@ if(AQBANKING_INCLUDE_DIRS AND AQBANKING_LIBRARIES)
       set(AQBANKING_INCLUDE_DIRS "")
       set(AQBANKING_LIBRARIES "")
     else(NOT AQBANKING_VERSION_OK)
-      execute_process(COMMAND grep qt3to4 ${AQBANKING_INCLUDE_DIRS}/qbanking/qbanking.h RESULT_VARIABLE RUN_RESULT OUTPUT_QUIET)
-      if(RUN_RESULT EQUAL 0)
-        set(AQBANKING_FOUND TRUE)
-      else(RUN_RESULT EQUAL 0)
-        message(STATUS "The AqBanking version found is for usage with Qt3 - we don't use it")
-      endif(RUN_RESULT EQUAL 0)
+      set(AQBANKING_FOUND TRUE)
     endif(NOT AQBANKING_VERSION_OK)
   endif(RUN_RESULT EQUAL 0)
 else(AQBANKING_INCLUDE_DIRS AND AQBANKING_LIBRARIES)

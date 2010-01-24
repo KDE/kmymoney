@@ -60,11 +60,9 @@
 #include <aqbanking/jobgettransactions.h>
 #include <aqbanking/jobgetbalance.h>
 #include <aqbanking/job.h>
-// #include <qbanking/qbpickstartdate.h>
-#include <qbanking/qbgui.h>
+#include <q4banking/qbgui.h>
 #include <gwenhywfar/logger.h>
 #include <gwenhywfar/debug.h>
-//#include <kbanking/settings.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
