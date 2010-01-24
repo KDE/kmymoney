@@ -640,7 +640,7 @@ void kMyMoneySplitTable::endEdit(bool keyBoardDriven)
   MyMoneySplit s1 = m_split;
 
   if (m_editCategory->selectedItem().isEmpty()) {
-    KMessageBox::information(this, i18n("You need assign a category for this split before it can be entered."), i18n("Enter split"), "EnterSplitWithEmptyCategory");
+    KMessageBox::information(this, i18n("You need to assign a category to this split before it can be entered."), i18n("Enter split"), "EnterSplitWithEmptyCategory");
     m_editCategory->setFocus();
     return;
   }
