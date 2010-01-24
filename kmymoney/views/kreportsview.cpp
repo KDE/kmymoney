@@ -931,7 +931,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
     list.push_back(MyMoneyReport(
                      MyMoneyReport::eExpenseIncome,
                      MyMoneyReport::eMonths,
-                     MyMoneyTransactionFilter::yearToDate,
+                     MyMoneyTransactionFilter::last12Months,
                      MyMoneyReport::eDetailTop,
                      i18n("Income and Expenses Graph"),
                      i18n("Default Report")
