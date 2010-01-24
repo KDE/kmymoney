@@ -639,6 +639,12 @@ void kMyMoneySplitTable::endEdit(bool keyBoardDriven)
   MYMONEYTRACER(tracer);
   MyMoneySplit s1 = m_split;
 
+  if (m_editCategory->selectedItem().isEmpty()) {
+    KMessageBox::information(this, i18n("You need assign a category for this split before it can be entered."), i18n("Enter split"), "EnterSplitWithEmptyCategory");
+    m_editCategory->setFocus();
+    return;
+  }
+
   bool needUpdate = false;
   if (m_editCategory->selectedItem() != m_split.accountId()) {
     s1.setAccountId(m_editCategory->selectedItem());
