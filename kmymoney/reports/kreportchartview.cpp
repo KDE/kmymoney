@@ -442,10 +442,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     replaceLegend(legend);
   } else {
     //if it is over the limit delete the legend
-    legend->resetTexts();
-    FrameAttributes frameAttr = legend->frameAttributes();
-    frameAttr.setVisible(false);
-    legend->setFrameAttributes(frameAttr);
+    delete legend;
   }
 
   //this sets the line width only for line diagrams
@@ -572,6 +569,6 @@ void KReportChartView::drawLimitLine(const double limit)
 
 void KReportChartView::removeLegend(void)
 {
-  Legend* chartLegend = legend();
+  Legend* chartLegend = Chart::legend();
   delete chartLegend;
 }
