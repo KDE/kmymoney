@@ -36,8 +36,8 @@ class Q3ListViewItem;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneyaccount.h>
-#include <mymoneyfile.h>
+#include "mymoneyaccount.h"
+#include "mymoneyfile.h"
 
 /**
   * @author Thomas Baumgart
