@@ -91,11 +91,6 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   header->setPosition(Position::North);
   addHeaderFooter(header);
 
-  //set grid attributes
-  GridAttributes gridAttr(coordinatePlane()->globalGridAttributes());
-  gridAttr.setGridVisible(config.isChartGridLines());
-  coordinatePlane()->setGlobalGridAttributes(gridAttr);
-
   // whether to limit the chart to use series totals only.  Used for reports which only
   // show one dimension (pie).
   setSeriesTotals(false);
@@ -117,16 +112,22 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   case MyMoneyReport::eChartEnd:
   case MyMoneyReport::eChartLine: {
     KDChart::LineDiagram* diagram = new KDChart::LineDiagram;
+    CartesianCoordinatePlane* cartesianPlane = new CartesianCoordinatePlane;
+    replaceCoordinatePlane(cartesianPlane);
     coordinatePlane()->replaceDiagram(diagram);
     break;
   }
   case MyMoneyReport::eChartBar: {
     KDChart::BarDiagram* diagram = new KDChart::BarDiagram;
+    CartesianCoordinatePlane* cartesianPlane = new CartesianCoordinatePlane;
+    replaceCoordinatePlane(cartesianPlane);
     coordinatePlane()->replaceDiagram(diagram);
     break;
   }
   case MyMoneyReport::eChartStackedBar: {
     KDChart::BarDiagram* diagram = new KDChart::BarDiagram;
+    CartesianCoordinatePlane* cartesianPlane = new CartesianCoordinatePlane;
+    replaceCoordinatePlane(cartesianPlane);
     diagram->setType(BarDiagram::Stacked);
     coordinatePlane()->replaceDiagram(diagram);
     break;
@@ -141,15 +142,20 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     break;
   }
   case MyMoneyReport::eChartRing: {
+    KDChart::RingDiagram* diagram = new KDChart::RingDiagram;
     PolarCoordinatePlane* polarPlane = new PolarCoordinatePlane;
     replaceCoordinatePlane(polarPlane);
-      KDChart::RingDiagram* diagram = new KDChart::RingDiagram(this, polarPlane);
-      polarPlane->replaceDiagram(diagram);
+    polarPlane->replaceDiagram(diagram);
     //chartView.params()->setRelativeRingThickness( true );
     setAccountSeries(false);
     break;
   }
   }
+  //set grid attributes
+  GridAttributes gridAttr(coordinatePlane()->globalGridAttributes());
+  gridAttr.setGridVisible(config.isChartGridLines());
+  coordinatePlane()->setGlobalGridAttributes(gridAttr);
+
   //set data value attributes
   DataValueAttributes valueAttr(coordinatePlane()->diagram()->dataValueAttributes());
   valueAttr.setVisible(config.isChartDataLabels());
@@ -475,7 +481,7 @@ unsigned KReportChartView::drawPivotRowSet(int rowNum, const PivotGridRowSet& ro
     }
   } else {
     int column = startColumn;
-    while (column < endColumn && column < numColumns()) {
+    while (column <= endColumn && column < numColumns()) {
       double value = rowSet[rowType][column].toDouble();
       QString toolTip = QString("<h2>%1</h2><strong>%2</strong><br>")
                         .arg(legendText)
