@@ -71,7 +71,6 @@ kMyMoneySplitTable::kMyMoneySplitTable(QWidget *parent) :
     QTableWidget(parent),
     m_currentRow(0),
     m_maxRows(0),
-    m_amountWidth(80),
     m_editCategory(0),
     m_editMemo(0),
     m_editAmount(0)
@@ -93,13 +92,14 @@ kMyMoneySplitTable::kMyMoneySplitTable(QWidget *parent) :
   setAlternatingRowColors(true);
 
   verticalHeader()->hide();
-  horizontalHeader()->setResizeMode(QHeaderView::Fixed);
   horizontalHeader()->setMovable(false);
   horizontalHeader()->setFont(KMyMoneyGlobalSettings::listHeaderFont());
 
-  setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
-  // never show a horizontal scroll bar
-  setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  KConfigGroup grp = KGlobal::config()->group("SplitTable");
+  QByteArray columns;
+  columns = grp.readEntry("HeaderState", columns);
+  horizontalHeader()->restoreState(columns);
+  horizontalHeader()->setStretchLastSection(true);
 
   setStyleSheet("QTableWidget { gridline-color: " + KMyMoneyGlobalSettings::listGridColor().name() + "; background-color: " + KMyMoneyGlobalSettings::listColor().name() + "; alternate-background-color: " + KMyMoneyGlobalSettings::listBGColor().name() + "; }");
 
@@ -126,6 +126,10 @@ kMyMoneySplitTable::kMyMoneySplitTable(QWidget *parent) :
 
 kMyMoneySplitTable::~kMyMoneySplitTable()
 {
+  KConfigGroup grp = KGlobal::config()->group("SplitTable");
+  QByteArray columns = horizontalHeader()->saveState();
+  grp.writeEntry("HeaderState", columns);
+  grp.sync();
 }
 
 int kMyMoneySplitTable::currentRow() const
@@ -502,9 +506,6 @@ void kMyMoneySplitTable::slotUpdateData(const MyMoneyTransaction& t)
     width = valfield->minimumSizeHint().width();
     delete valfield;
 
-    if (width > m_amountWidth)
-      m_amountWidth = width;
-
     textItem = item(numRows, 0);
     if (textItem)
       textItem->setText(colText);
@@ -562,13 +563,6 @@ void kMyMoneySplitTable::updateTransactionTableSize(void)
 
 void kMyMoneySplitTable::resizeEvent(QResizeEvent* /* ev */)
 {
-  int w = viewport()->width() - m_amountWidth;
-
-  // resize the columns
-  setColumnWidth(0, w / 2);
-  setColumnWidth(1, w / 2);
-  setColumnWidth(2, m_amountWidth);
-
   updateTransactionTableSize();
 }
 

@@ -201,8 +201,6 @@ private:
   MyMoneySplit        m_split;
   MyMoneySplit        m_hiddenSplit;
 
-  unsigned            m_amountWidth;
-
   /**
     * This member keeps a pointer to the context menu
     */
