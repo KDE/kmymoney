@@ -151,27 +151,30 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     break;
   }
   }
+    //get the diagram for later use
+  AbstractDiagram* planeDiagram = coordinatePlane()->diagram();
+
   //set grid attributes
   GridAttributes gridAttr(coordinatePlane()->globalGridAttributes());
   gridAttr.setGridVisible(config.isChartGridLines());
   coordinatePlane()->setGlobalGridAttributes(gridAttr);
 
   //set data value attributes
-  DataValueAttributes valueAttr(coordinatePlane()->diagram()->dataValueAttributes());
+  DataValueAttributes valueAttr(planeDiagram->dataValueAttributes());
   valueAttr.setVisible(config.isChartDataLabels());
-  coordinatePlane()->diagram()->setDataValueAttributes(valueAttr);
-  coordinatePlane()->diagram()->setAllowOverlappingDataValueTexts(false);
+  planeDiagram->setDataValueAttributes(valueAttr);
+  planeDiagram->setAllowOverlappingDataValueTexts(false);
 
   //Subdued colors - we set it here again because it is a property of the diagram
-  coordinatePlane()->diagram()->useSubduedColors();
+  planeDiagram->useSubduedColors();
 
   //the legend will be used later
-  Legend* legend = new Legend(coordinatePlane()->diagram(), this);
+  Legend* legend = new Legend(planeDiagram, this);
   legend->setTitleText(i18nc("Chart legend title", "Legend"));
 
   //set up the axes for cartesian diagrams
-  if (qobject_cast<LineDiagram*>(coordinatePlane()->diagram()) ||
-      qobject_cast<BarDiagram*>(coordinatePlane()->diagram())) {
+  if (config.chartType() == MyMoneyReport::eChartLine ||
+      config.chartType() == MyMoneyReport::eChartBar) {
     //set x axis
     CartesianAxis *xAxis = new CartesianAxis();
     xAxis->setPosition(CartesianAxis::Bottom);
@@ -199,8 +202,8 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     yAxis->setTitleTextAttributes(yAxisTextAttr);
 
     //add the axes to the corresponding diagram
-    if (qobject_cast<LineDiagram*>(coordinatePlane()->diagram())) {
-      KDChart::LineDiagram* lineDiagram = qobject_cast<LineDiagram*>(coordinatePlane()->diagram());
+    if (config.chartType() == MyMoneyReport::eChartLine) {
+      KDChart::LineDiagram* lineDiagram = qobject_cast<LineDiagram*>(planeDiagram);
 
       //set line width
       /*QPen linePen(lineDiagram->pen());
@@ -218,21 +221,21 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
       lineDiagram->addAxis(xAxis);
       lineDiagram->addAxis(yAxis);
 
-    } else if (qobject_cast<BarDiagram*>(coordinatePlane()->diagram())) {
-      KDChart::BarDiagram* barDiagram = qobject_cast<BarDiagram*>(coordinatePlane()->diagram());
+    } else if (config.chartType() == MyMoneyReport::eChartBar) {
+      KDChart::BarDiagram* barDiagram = qobject_cast<BarDiagram*>(planeDiagram);
       barDiagram->addAxis(xAxis);
       barDiagram->addAxis(yAxis);
     }
   }
 
   //line markers
-  DataValueAttributes dataValueAttr(coordinatePlane()->diagram()->dataValueAttributes());
+  DataValueAttributes dataValueAttr(planeDiagram->dataValueAttributes());
   MarkerAttributes markerAttr(dataValueAttr.markerAttributes());
   markerAttr.setVisible(true);
   markerAttr.setMarkerStyle(MarkerAttributes::MarkerCircle);
   markerAttr.setMarkerSize(QSize(8, 8));
   dataValueAttr.setMarkerAttributes(markerAttr);
-  coordinatePlane()->diagram()->setDataValueAttributes(dataValueAttr);
+  planeDiagram->setDataValueAttributes(dataValueAttr);
 
   // For onMouseOver events, we want to activate mouse tracking
   setMouseTracking(true);
@@ -421,7 +424,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   ::timetrace("rows loaded");
 
   //assign model to the diagram
-  coordinatePlane()->diagram()->setModel(&m_model);
+  planeDiagram->setModel(&m_model);
 
   //set the legend basic attributes
   //this is done after adding the legend because the values are overridden when adding the legend to the chart
