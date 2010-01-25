@@ -4763,8 +4763,7 @@ void KMyMoneyApp::slotTransactionsDelete(void)
     if (KMessageBox::warningContinueCancel(0,
                                            i18n("At least one split of the selected transactions has been reconciled. "
                                                 "Do you wish to delete the transactions anyway?"),
-                                           i18n("Transaction already reconciled"), KStandardGuiItem::cont(),
-                                           KGuiItem("DeleteReconciledTransaction")) == KMessageBox::Cancel)
+                                           i18n("Transaction already reconciled")) == KMessageBox::Cancel)
       return;
   }
   QString msg =
