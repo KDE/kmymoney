@@ -6418,7 +6418,9 @@ void KMyMoneyApp::slotDateChanged(void)
   QDateTime dt = QDateTime::currentDateTime();
   QDateTime nextDay(QDate(dt.date().addDays(1)), QTime(0, 0, 0));
 
-  QTimer::singleShot(dt.secsTo(nextDay)*1000, this, SLOT(slotDateChanged()));
+  // +1 is to make sure that we're already in the next day when the
+  // signal is sent (this way we also avoid setting the timer to 0)
+  QTimer::singleShot((dt.secsTo(nextDay) + 1)*1000, this, SLOT(slotDateChanged()));
   d->m_myMoneyView->slotRefreshViews();
 }
 
