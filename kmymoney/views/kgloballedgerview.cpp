@@ -117,7 +117,7 @@ bool MousePressFilter::isChildOf(QWidget* child, QWidget *parent)
     // appear during transaction entry (message boxes, completer widgets)
     if (dynamic_cast<KPassivePopup*>(child) ||
         dynamic_cast<KDialog*>(child) ||
-        child->windowFlags() & Qt::Popup)
+        ((child->windowFlags() & Qt::Popup) && child != kmymoney))
       return true;
     child = child->parentWidget();
   }
