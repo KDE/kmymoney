@@ -869,12 +869,16 @@ void KGlobalLedgerView::loadAccounts(void)
 
     if (m_account.id().isEmpty()) {
       // there are no favorite accounts find any account
-      QModelIndexList list = d->m_accountsModel->match(d->m_accountsModel->index(0, 0), Qt::DisplayRole, QVariant(QString()), -1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive));
+      QModelIndexList list = d->m_accountsModel->match(d->m_accountsModel->index(0, 0), Qt::DisplayRole, QVariant(QString("*")), -1, Qt::MatchFlags(Qt::MatchWildcard | Qt::MatchRecursive));
       for (QModelIndexList::ConstIterator it = list.constBegin(); it != list.constEnd(); ++it) {
         QVariant accountId = d->m_accountsModel->data(*it, AccountIdRole);
-        MyMoneyAccount a = file->account(accountId.toString());
-        if (!a.isInvest())
-          m_account = a;
+        if (accountId.isValid()) {
+          MyMoneyAccount a = file->account(accountId.toString());
+          if (!a.isInvest()) {
+            m_account = a;
+            break;
+          }
+        }
       }
     }
   }
