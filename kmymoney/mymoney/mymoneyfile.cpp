@@ -1396,6 +1396,43 @@ const QStringList MyMoneyFile::consistencyCheck(void)
       break;
     }
 
+    // check for loops in the hierarchy
+    parentId = (*it_a).parentAccountId();
+    try {
+      bool dropOut = false;
+      while(!isStandardAccount(parentId) && !dropOut) {
+        parent = account(parentId);
+        if(parent.id() == (*it_a).id()) {
+          // parent loops, so we need to re-parent to toplevel account
+          // find parent account in our list
+          problemCount++;
+          QList<MyMoneyAccount>::Iterator it_b;
+          for(it_b = list.begin(); it_b != list.end(); ++it_b) {
+            if((*it_b).id() == parent.id()) {
+              if(problemAccount != (*it_a).name()) {
+                problemAccount = (*it_a).name();
+                rc << i18n("* Problem with account '%1'").arg(problemAccount);
+                rc << i18n("  * Loop detected between this account and account '%2'.").arg((*it_b).name());
+                rc << i18n("    Reparenting account '%2' to top level account '%1'.").arg(toplevel.name(), (*it_a).name());
+                (*it_a).setParentAccountId(toplevel.id());
+                if(accountRebuild.contains(toplevel.id()) == 0)
+                  accountRebuild << toplevel.id();
+                if(accountRebuild.contains((*it_a).id()) == 0)
+                  accountRebuild << (*it_a).id();
+                dropOut = true;
+                break;
+              }
+            }
+          }
+        }
+        parentId = parent.parentAccountId();
+      }
+
+    } catch(MyMoneyException *e) {
+      // if we don't know about a parent, we catch it later
+      delete e;
+    }
+
     // check that the parent exists
     parentId = (*it_a).parentAccountId();
     try {
@@ -1427,7 +1464,8 @@ const QStringList MyMoneyFile::consistencyCheck(void)
         }
         // parent exists, but does not have a reference to the account
         rc << i18n("  * Parent account '%1' does not contain '%2' as sub-account.", parent.name(), problemAccount);
-        accountRebuild << parent.id();
+        if(accountRebuild.contains(parent.id()) == 0)
+          accountRebuild << parent.id();
       }
     } catch (MyMoneyException *e) {
       delete e;
