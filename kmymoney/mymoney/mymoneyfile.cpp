@@ -212,7 +212,7 @@ void MyMoneyFile::modifyTransaction(const MyMoneyTransaction& transaction)
   // now check the splits
   bool loanAccountAffected = false;
   QList<MyMoneySplit>::ConstIterator it_s;
-  for (it_s = transaction.splits().begin(); it_s != transaction.splits().end(); ++it_s) {
+  for (it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s) {
     // the following line will throw an exception if the
     // account does not exist
     MyMoneyAccount acc = MyMoneyFile::account((*it_s).accountId());
@@ -260,7 +260,7 @@ void MyMoneyFile::modifyTransaction(const MyMoneyTransaction& transaction)
   m_storage->modifyTransaction(*t);
 
   // and mark all accounts that are referenced
-  for (it_s = t->splits().begin(); it_s != t->splits().end(); ++it_s) {
+  for (it_s = t->splits().constBegin(); it_s != t->splits().constEnd(); ++it_s) {
     addNotification((*it_s).accountId());
     addNotification((*it_s).payeeId());
   }
@@ -452,7 +452,7 @@ void MyMoneyFile::removeAccount(const MyMoneyAccount& account)
 
   // collect all sub-ordinate accounts for notification
   QStringList::ConstIterator it;
-  for (it = acc.accountList().begin(); it != acc.accountList().end(); ++it)
+  for (it = acc.accountList().constBegin(); it != acc.accountList().constEnd(); ++it)
     addNotification(*it);
   // don't forget the parent and a possible institution
   addNotification(parent.id());
@@ -486,7 +486,7 @@ void MyMoneyFile::removeAccountList(const QStringList& account_list, unsigned in
   }
 
   // process all accounts in the list and test if they have transactions assigned
-  for (QStringList::const_iterator it = account_list.begin(); it != account_list.end(); ++it) {
+  for (QStringList::ConstIterator it = account_list.constBegin(); it != account_list.constEnd(); ++it) {
     MyMoneyAccount a = m_storage->account(*it);
     //kDebug() << "Deleting account '"<< a.name() << "'";
 
@@ -508,7 +508,7 @@ bool MyMoneyFile::hasOnlyUnusedAccounts(const QStringList& account_list, unsigne
   if (level > 100)
     throw new MYMONEYEXCEPTION("Too deep recursion in [MyMoneyFile::hasOnlyUnusedAccounts]!");
   // process all accounts in the list and test if they have transactions assigned
-  for (QStringList::const_iterator it = account_list.begin(); it != account_list.end(); ++it) {
+  for (QStringList::ConstIterator it = account_list.constBegin(); it != account_list.constEnd(); ++it) {
     if (transactionCount(*it) != 0)
       return false; // the current account has a transaction assigned
     if (!hasOnlyUnusedAccounts(account(*it).accountList(), level + 1))
@@ -750,11 +750,11 @@ const MyMoneyAccount MyMoneyFile::openingBalanceAccount_internal(const MyMoneySe
   QRegExp match(QString("^%1").arg((MyMoneyFile::OpeningBalancesPrefix)));
 
   QList<MyMoneyAccount> accounts;
-  QList<MyMoneyAccount>::Iterator it;
+  QList<MyMoneyAccount>::ConstIterator it;
 
   accountList(accounts, equity().accountList(), true);
 
-  for (it = accounts.begin(); it != accounts.end(); ++it) {
+  for (it = accounts.constBegin(); it != accounts.constEnd(); ++it) {
     if (match.indexIn((*it).name()) != -1) {
       if ((*it).currencyId() == security.id()) {
         acc = *it;
@@ -931,7 +931,6 @@ void MyMoneyFile::accountList(QList<MyMoneyAccount>& list, const QStringList& id
 #endif
 
     QList<MyMoneyAccount>::Iterator it;
-    QList<MyMoneyAccount>::Iterator next;
     for (it = list.begin(); it != list.end();) {
       if (isStandardAccount((*it).id())) {
         it = list.erase(it);
@@ -1258,7 +1257,7 @@ void MyMoneyFile::addSchedule(MyMoneySchedule& sched)
   checkTransaction(Q_FUNC_INFO);
 
   MyMoneyTransaction transaction = sched.transaction();
-  QList<MyMoneySplit>::const_iterator it_s;
+  QList<MyMoneySplit>::ConstIterator it_s;
   for (it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s) {
     // the following line will throw an exception if the
     // account does not exist or is one of the standard accounts
@@ -1280,7 +1279,7 @@ void MyMoneyFile::modifySchedule(const MyMoneySchedule& sched)
   checkTransaction(Q_FUNC_INFO);
 
   MyMoneyTransaction transaction = sched.transaction();
-  QList<MyMoneySplit>::const_iterator it_s;
+  QList<MyMoneySplit>::ConstIterator it_s;
   for (it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s) {
     // the following line will throw an exception if the
     // account does not exist or is one of the standard accounts
@@ -2177,7 +2176,7 @@ bool MyMoneyFile::checkNoUsed(const QString& accId, const QString& no) const
   MyMoneyTransactionFilter filter;
   filter.addAccount(accId);
   QList<MyMoneyTransaction> transactions = transactionList(filter);
-  QList<MyMoneyTransaction>::const_iterator it_t = transactions.constBegin();
+  QList<MyMoneyTransaction>::ConstIterator it_t = transactions.constBegin();
   while (it_t != transactions.constEnd()) {
     try {
       MyMoneySplit split;
@@ -2201,7 +2200,7 @@ QString MyMoneyFile::highestCheckNo(const QString& accId) const
   MyMoneyTransactionFilter filter;
   filter.addAccount(accId);
   QList<MyMoneyTransaction> transactions = transactionList(filter);
-  QList<MyMoneyTransaction>::const_iterator it_t = transactions.constBegin();
+  QList<MyMoneyTransaction>::ConstIterator it_t = transactions.constBegin();
   while (it_t != transactions.constEnd()) {
     try {
       // Test whether the transaction also includes a split into
