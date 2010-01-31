@@ -413,13 +413,12 @@ void MyMoneyDatabaseMgr::addTransaction(MyMoneyTransaction& transaction, const b
     throw new MYMONEYEXCEPTION("invalid post date");
 
   // now check the splits
-  QList<MyMoneySplit>::ConstIterator it_s;
-  for (it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s) {
+  foreach (const MyMoneySplit& it_s, transaction.splits()) {
     // the following lines will throw an exception if the
     // account or payee do not exist
-    account((*it_s).accountId());
-    if (!(*it_s).payeeId().isEmpty())
-      payee((*it_s).payeeId());
+    account(it_s.accountId());
+    if (!it_s.payeeId().isEmpty())
+      payee(it_s.payeeId());
   }
 
   MyMoneyTransaction newTransaction(nextTransactionID(), transaction);
@@ -430,9 +429,9 @@ void MyMoneyDatabaseMgr::addTransaction(MyMoneyTransaction& transaction, const b
   transaction = newTransaction;
 
   // adjust the balance of all affected accounts
-  for (it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s) {
-    MyMoneyAccount acc = MyMoneyFile::instance()->account((*it_s).accountId());
-    acc.adjustBalance((*it_s));
+  foreach (const MyMoneySplit& it_s, transaction.splits()) {
+    MyMoneyAccount acc = MyMoneyFile::instance()->account(it_s.accountId());
+    acc.adjustBalance(it_s);
     if (!skipAccountUpdate) {
       acc.touch();
 //FIXME:      invalidateBalanceCache(acc.id());
@@ -472,21 +471,20 @@ bool MyMoneyDatabaseMgr::hasActiveSplits(const QString& id) const
 const MyMoneyMoney MyMoneyDatabaseMgr::totalBalance(const QString& id, const QDate& date) const
 {
   QStringList accounts;
-  QStringList::Iterator it_a;
 
   MyMoneyMoney result; //(balance(id, date));
 
   accounts = MyMoneyFile::instance()->account(id).accountList();
-  for (it_a = accounts.begin(); it_a != accounts.end(); ++it_a) {
-    if (!(*it_a).isEmpty()) {
-      accounts << MyMoneyFile::instance()->account(*it_a).accountList();
+  foreach (const QString& it_a, accounts) {
+    if (!it_a.isEmpty()) {
+      accounts << MyMoneyFile::instance()->account(it_a).accountList();
     }
   }
 
   // convert into a sorted list with each account only once
   QMap<QString, bool> tempList;
-  for (it_a = accounts.begin(); it_a != accounts.end(); ++it_a) {
-    tempList[*it_a] = true;
+  foreach (const QString& it_a, accounts) {
+    tempList[it_a] = true;
   }
   accounts = tempList.uniqueKeys();
 
@@ -550,9 +548,8 @@ void MyMoneyDatabaseMgr::modifyAccount(const MyMoneyAccount& account, const bool
       if (!account.institutionId().isEmpty())
         institution(account.institutionId());
 
-      QList<QString>::ConstIterator it_a;
-      for (it_a = account.accountList().begin(); it_a != account.accountList().end(); ++it_a) {
-        this->account(*it_a);
+      foreach (const QString& it_a, account.accountList()) {
+        this->account(it_a);
       }
 
       // update information in account list
@@ -614,13 +611,12 @@ void MyMoneyDatabaseMgr::modifyTransaction(const MyMoneyTransaction& transaction
     throw new MYMONEYEXCEPTION("invalid transaction to be modified");
 
   // now check the splits
-  QList<MyMoneySplit>::ConstIterator it_s;
-  for (it_s = transaction.splits().begin(); it_s != transaction.splits().end(); ++it_s) {
+  foreach (const MyMoneySplit& it_s, transaction.splits()) {
     // the following lines will throw an exception if the
     // account or payee do not exist
-    MyMoneyFile::instance()->account((*it_s).accountId());
-    if (!(*it_s).payeeId().isEmpty())
-      MyMoneyFile::instance()->payee((*it_s).payeeId());
+    MyMoneyFile::instance()->account(it_s.accountId());
+    if (!it_s.payeeId().isEmpty())
+      MyMoneyFile::instance()->payee(it_s.payeeId());
   }
 
   // new data seems to be ok. find old version of transaction
@@ -643,18 +639,18 @@ void MyMoneyDatabaseMgr::modifyTransaction(const MyMoneyTransaction& transaction
   // mark all accounts referenced in old and new transaction data
   // as modified
   QMap<QString, MyMoneyAccount> accountList = m_sql->fetchAccounts();
-  for (it_s = (*it_t).splits().begin(); it_s != (*it_t).splits().end(); ++it_s) {
-    MyMoneyAccount acc = accountList[(*it_s).accountId()];
-    acc.adjustBalance((*it_s), true);
+  foreach (const MyMoneySplit& it_s, (*it_t).splits()) {
+    MyMoneyAccount acc = accountList[it_s.accountId()];
+    acc.adjustBalance(it_s, true);
     acc.touch();
 //FIXME:    invalidateBalanceCache(acc.id());
     //m_accountList.modify(acc.id(), acc);
     m_sql->modifyAccount(acc);
     //modifiedAccounts[(*it_s).accountId()] = true;
   }
-  for (it_s = transaction.splits().begin(); it_s != transaction.splits().end(); ++it_s) {
-    MyMoneyAccount acc = accountList[(*it_s).accountId()];
-    acc.adjustBalance((*it_s));
+  foreach (const MyMoneySplit& it_s, transaction.splits()) {
+    MyMoneyAccount acc = accountList[it_s.accountId()];
+    acc.adjustBalance(it_s);
     acc.touch();
 //FIXME:    invalidateBalanceCache(acc.id());
     //m_accountList.modify(acc.id(), acc);
@@ -744,15 +740,13 @@ void MyMoneyDatabaseMgr::removeTransaction(const MyMoneyTransaction& transaction
   if (it_t == transactionList.constEnd())
     throw new MYMONEYEXCEPTION("invalid transaction key");
 
-  QList<MyMoneySplit>::ConstIterator it_s;
-
   // scan the splits and collect all accounts that need
   // to be updated after the removal of this transaction
   QMap<QString, MyMoneyAccount> accountList = m_sql->fetchAccounts();
-  for (it_s = (*it_t).splits().begin(); it_s != (*it_t).splits().end(); ++it_s) {
-    MyMoneyAccount acc = accountList[(*it_s).accountId()];
+  foreach (const MyMoneySplit& it_s, (*it_t).splits()) {
+    MyMoneyAccount acc = accountList[it_s.accountId()];
 //    modifiedAccounts[(*it_s).accountId()] = true;
-    acc.adjustBalance((*it_s), true);
+    acc.adjustBalance(it_s, true);
     acc.touch();
     m_sql->modifyAccount(acc);
 //FIXME:    invalidateBalanceCache(acc.id());
@@ -815,9 +809,8 @@ void MyMoneyDatabaseMgr::transactionList(QList<QPair<MyMoneyTransaction, MyMoney
 
   for (it_t = transactionList.begin(); it_t != txEnd; ++it_t) {
     if (filter.match(*it_t)) {
-      QList<MyMoneySplit>::const_iterator it_s;
-      for (it_s = filter.matchingSplits().begin(); it_s != filter.matchingSplits().end(); ++it_s) {
-        list.append(qMakePair(*it_t, *it_s));
+      foreach (const MyMoneySplit& it_s, filter.matchingSplits()) {
+        list.append(qMakePair(*it_t, it_s));
       }
     }
   }
@@ -843,9 +836,8 @@ void MyMoneyDatabaseMgr::removeAccount(const MyMoneyAccount& account)
   // re-parent all sub-ordinate accounts to the parent of the account
   // to be deleted. First round check that all accounts exist, second
   // round do the re-parenting.
-  QStringList::ConstIterator it;
-  for (it = account.accountList().begin(); it != account.accountList().end(); ++it) {
-    MyMoneyDatabaseMgr::account(*it);
+  foreach (const QString& it, account.accountList()) {
+    MyMoneyDatabaseMgr::account(it);
   }
 
   // if one of the accounts did not exist, an exception had been
@@ -884,8 +876,8 @@ void MyMoneyDatabaseMgr::removeAccount(const MyMoneyAccount& account)
     // but only if the list contains at least one entry
     // FIXME: move this logic to MyMoneyFile
     if ((*it_a).accountList().count() > 0) {
-      for (it = (*it_a).accountList().begin(); it != (*it_a).accountList().end(); ++it) {
-        MyMoneyAccount acc(MyMoneyDatabaseMgr::account(*it));
+      foreach (const QString& it, (*it_a).accountList()) {
+        MyMoneyAccount acc(MyMoneyDatabaseMgr::account(it));
         reparentAccount(acc, parent);//, false);
       }
     }
@@ -972,24 +964,19 @@ const MyMoneyMoney MyMoneyDatabaseMgr::balance(const QString& id, const QDate& d
 //FIXME:      m_balanceCacheDate = date;
 //FIXME:    }
 
-    QList<MyMoneyTransaction>::ConstIterator it_t;
-    QList<MyMoneyTransaction>::ConstIterator txEnd;
-    QList<MyMoneySplit>::ConstIterator it_s;
-
     MyMoneyTransactionFilter filter;
     filter.addAccount(id);
     filter.setDateFilter(QDate(), date_);
     filter.setReportAllSplits(false);
     QList<MyMoneyTransaction> list = transactionList(filter);
 
-    txEnd = list.constEnd();
-    for (it_t = list.constBegin(); it_t != txEnd; ++it_t) {
-      for (it_s = (*it_t).splits().begin(); it_s != (*it_t).splits().end(); ++it_s) {
-        const QString aid = (*it_s).accountId();
-        if ((*it_s).action() == MyMoneySplit::ActionSplitShares) {
-          balances[aid] = balances[aid] * (*it_s).shares();
+    foreach (const MyMoneyTransaction& it_t, list) {
+      foreach (const MyMoneySplit& it_s, it_t.splits()) {
+        const QString aid = it_s.accountId();
+        if (it_s.action() == MyMoneySplit::ActionSplitShares) {
+          balances[aid] *= it_s.shares();
         } else {
-          balances[aid] += (*it_s).value((*it_t).commodity(), accountList[aid].currencyId());
+          balances[aid] += it_s.value(it_t.commodity(), accountList[aid].currencyId());
         }
       }
     }
