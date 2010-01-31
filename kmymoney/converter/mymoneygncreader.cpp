@@ -2424,7 +2424,7 @@ void MyMoneyGncReader::getPriceSource(MyMoneySecurity stock, QString gncSource)
     }
   }
   // not found in map, so ask the user
-  KGncPriceSourceDlg *dlg = new KGncPriceSourceDlg(stock.name(), gncSource);
+  QPointer<KGncPriceSourceDlg> dlg = new KGncPriceSourceDlg(stock.name(), gncSource);
   dlg->exec();
   QString s = dlg->selectedSource();
   if (!s.isEmpty()) {
