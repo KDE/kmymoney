@@ -64,10 +64,36 @@ public:
   explicit kMyMoneyDateInput(QWidget *parent = 0, Qt::AlignmentFlag flags = Qt::AlignLeft);
   ~kMyMoneyDateInput();
 
+  /**
+    * Returns the selected date in the widget. If the widget is not
+    * showing a date, a QDate() object is returned which has an invalid date.
+    */
   QDate date(void) const;
+
+  /**
+    * Set the date shown in the widget to @a date. If @a date is invalid,
+    * no text will be shown. The internal widget will use 1.1.1800 for this
+    * special case, as the standard QDateEdit widget does not support an
+    * invalid date as of Qt4 anymore, but we need it anyway for multi transaction
+    * edit.
+    */
   void setDate(QDate date);
+
+  /**
+    * Setup the widget with @a date. This date is stored internally and
+    * can be reloaded using resetDate().
+    *
+    * @sa setDate, resetDate
+    */
   void loadDate(const QDate& date);
+
+  /**
+    * Setup the widget with the date loaded using loadDate().
+    *
+    *  @sa loadDate
+    */
   void resetDate(void);
+
   QWidget* focusWidget(void) const;
   void setRange(const QDate & min, const QDate & max);
   void markAsBadDate(bool bad = false, const QColor& = QColor());

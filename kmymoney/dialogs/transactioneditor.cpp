@@ -731,8 +731,10 @@ void StdTransactionEditor::createEditWidgets(void)
     // number->installEventFilter(this);
   }
 
-  m_editWidgets["postdate"] = new kMyMoneyDateInput;
-  connect(m_editWidgets["postdate"], SIGNAL(dateChanged(const QDate&)), this, SLOT(slotUpdateButtonState()));
+  kMyMoneyDateInput* postDate = new kMyMoneyDateInput;
+  m_editWidgets["postdate"] = postDate;
+  postDate->setDate(QDate());
+  connect(postDate, SIGNAL(dateChanged(const QDate&)), this, SLOT(slotUpdateButtonState()));
 
   kMyMoneyEdit* value = new kMyMoneyEdit;
   m_editWidgets["amount"] = value;

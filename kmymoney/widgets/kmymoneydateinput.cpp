@@ -54,6 +54,7 @@
 namespace
 {
 const int DATE_POPUP_TIMEOUT = 1500;
+const QDate INVALID_DATE = QDate(1800, 1, 1);
 }
 
 bool KMyMoneyDateEdit::event(QEvent* e)
@@ -96,6 +97,10 @@ kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, Qt::AlignmentFlag flags)
   setFocusProxy(d->m_dateEdit);
   focusWidget()->installEventFilter(this); // To get d->m_dateEdit's FocusIn/Out and some KeyPress events
   d->m_dateEdit->installEventFilter(this); // To get d->m_dateEdit's FocusIn/Out and some KeyPress events
+
+  // we use INVALID_DATE as a special value for multi transaction editing
+  d->m_dateEdit->setMinimumDate(INVALID_DATE);
+  d->m_dateEdit->setSpecialValueText(QLatin1String(" "));
 
   d->m_datePopup = new KPassivePopup(d->m_dateEdit);
   d->m_datePopup->setObjectName("datePopup");
@@ -313,12 +318,17 @@ void kMyMoneyDateInput::slotDateChosen(QDate date)
   if (date.isValid()) {
     // the next line implies a call to slotDateChosenRef() above
     d->m_dateEdit->setDate(date);
+  } else {
+    d->m_dateEdit->setDate(INVALID_DATE);
   }
 }
 
 QDate kMyMoneyDateInput::date(void) const
 {
-  return d->m_dateEdit->date();
+  QDate rc = d->m_dateEdit->date();
+  if(rc == INVALID_DATE)
+    rc = QDate();
+  return rc;
 }
 
 void kMyMoneyDateInput::setDate(QDate date)
@@ -331,8 +341,7 @@ void kMyMoneyDateInput::loadDate(const QDate& date)
   d->m_date = d->m_prevDate = date;
 
   blockSignals(true);
-  d->m_dateEdit->setDate(date);
-  d->m_date = date;
+  slotDateChosen(date);
   blockSignals(false);
 }
 
@@ -348,10 +357,10 @@ QWidget* kMyMoneyDateInput::focusWidget(void) const
     w = w->focusProxy();
   return w;
 }
-
+/*
 void kMyMoneyDateInput::setRange(const QDate & min, const QDate & max)
 {
   d->m_dateEdit->setDateRange(min, max);
 }
-
+*/
 #include "kmymoneydateinput.moc"
