@@ -871,16 +871,17 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           dialog->setButtonGuiItem(KDialog::No, KGuiItem(i18n("No Category")));
           dialog->setButtonGuiItem(KDialog::Cancel, KGuiItem(i18n("Abort")));
 
-          QVBoxLayout *topcontents = new QVBoxLayout(dialog);
-          topcontents->setSpacing(KDialog::spacingHint()*2);
-          topcontents->setMargin(KDialog::marginHint());
+          QWidget *mainWidget = new QWidget;
+          QVBoxLayout *topcontents = new QVBoxLayout(mainWidget);
 
           //add in caption? and account combo here
-          QLabel *label1 = new QLabel(i18n("Please select a default category for payee '%1':", payee.name()));
+          QLabel *label1 = new QLabel(i18n("Please select a default category for payee"));
           topcontents->addWidget(label1);
 
           QPointer<KMyMoneyAccountCombo> accountCombo = new KMyMoneyAccountCombo(dialog);
-          dialog->setLayout(topcontents);
+          topcontents->addWidget(accountCombo);
+          mainWidget->setLayout(topcontents);
+          dialog->setMainWidget(mainWidget);
 
           int result = dialog->exec();
 
