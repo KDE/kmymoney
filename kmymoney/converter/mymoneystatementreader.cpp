@@ -875,7 +875,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           QVBoxLayout *topcontents = new QVBoxLayout(mainWidget);
 
           //add in caption? and account combo here
-          QLabel *label1 = new QLabel(i18n("Please select a default category for payee"));
+          QLabel *label1 = new QLabel(i18n("Please select a default category for payee '%1':", payee.name()));
           topcontents->addWidget(label1);
 
           QPointer<KMyMoneyAccountCombo> accountCombo = new KMyMoneyAccountCombo(dialog);
