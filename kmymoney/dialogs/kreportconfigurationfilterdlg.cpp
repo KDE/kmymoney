@@ -40,7 +40,6 @@
 #include <QToolTip>
 #include <q3whatsthis.h>
 #include <QTabWidget>
-#include <q3textedit.h>
 #include <QApplication>
 #include <QList>
 

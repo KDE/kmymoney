@@ -59,7 +59,7 @@ email                : mte@users.sourceforge.net
 #define PASS } catch (MyMoneyException *e) { throw e; }
 #else
 #include "mymoneymoney.h"
-#include <QTextEdit>
+#include <KTextEdit>
 //  #define i18n QObject::tr
 #define TRY
 #define CATCH

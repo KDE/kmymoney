@@ -424,7 +424,7 @@
                     </widget>
                   </item>
                   <item>
-                    <widget class="Q3TextEdit" name="m_adviceText">
+                    <widget class="KTextEdit" name="m_adviceText">
                       <property name="sizePolicy">
                         <sizepolicy>
                           <hsizetype>7</hsizetype>
@@ -432,9 +432,6 @@
                           <horstretch>1</horstretch>
                           <verstretch>1</verstretch>
                         </sizepolicy>
-                      </property>
-                      <property name="resizePolicy">
-                        <enum>Q3ScrollView::AutoOneFit</enum>
                       </property>
                       <item>
                         <property name="text">
@@ -548,6 +545,11 @@
       <class>KComboBox</class>
       <extends>QComboBox</extends>
       <header location="global">kcombobox.h</header>
+    </customwidget>
+    <customwidget>
+      <class>KTextEdit</class>
+      <extends>QTextEdit</extends>
+      <header location="global">ktextedit.h</header>
     </customwidget>
   </customwidgets>
   <buttongroups>

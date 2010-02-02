@@ -32,7 +32,6 @@
 #include <QTimer>
 #include <QTabWidget>
 #include <QRadioButton>
-#include <q3textedit.h>
 #include <QLayout>
 #include <QList>
 #include <QResizeEvent>

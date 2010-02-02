@@ -29,15 +29,12 @@
       <item>
         <layout class="QHBoxLayout">
           <item>
-            <widget class="Q3TextEdit" name="m_qifEntry">
+            <widget class="KTextEdit" name="m_qifEntry">
               <property name="textFormat">
                 <enum>Qt::PlainText</enum>
               </property>
-              <property name="wordWrap">
-                <enum>Q3TextEdit::NoWrap</enum>
-              </property>
-              <property name="undoDepth">
-                <number>0</number>
+              <property name="wordWrapMode">
+                <enum>QTextOption::NoWrap</enum>
               </property>
               <property name="readOnly">
                 <bool>true</bool>
@@ -172,4 +169,11 @@
     </layout>
   </widget>
   <layoutdefault spacing="6" margin="11"/>
+  <customwidgets>
+    <customwidget>
+      <class>KTextEdit</class>
+      <extends>QTextEdit</extends>
+      <header location="global">ktextedit.h</header>
+    </customwidget>
+  </customwidgets>
   </ui>

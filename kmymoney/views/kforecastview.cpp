@@ -22,7 +22,6 @@
 #include <QTabWidget>
 #include <qspinbox.h>
 #include <QLabel>
-#include <q3textedit.h>
 #include <QLayout>
 #include <QList>
 
@@ -34,6 +33,7 @@
 #include <klocale.h>
 #include <k3listview.h>
 #include <kpushbutton.h>
+#include <KTextEdit>
 
 // ----------------------------------------------------------------------------
 // Project Includes
