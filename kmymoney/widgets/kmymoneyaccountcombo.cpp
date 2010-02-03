@@ -62,6 +62,7 @@ KMyMoneyMVCAccountCombo::KMyMoneyMVCAccountCombo(QWidget* parent/* = 0*/)
 
 KMyMoneyMVCAccountCombo::~KMyMoneyMVCAccountCombo()
 {
+   delete d;
 }
 
 void KMyMoneyMVCAccountCombo::wheelEvent(QWheelEvent *ev)

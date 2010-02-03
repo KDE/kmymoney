@@ -60,7 +60,7 @@ class AccountsModel : public QStandardItemModel
 
 public:
   AccountsModel(QObject *parent = 0);
-
+  ~AccountsModel();
   void load();
 
 private:

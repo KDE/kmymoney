@@ -89,6 +89,11 @@ AccountsModel::AccountsModel(QObject *parent /*= 0*/)
 {
 }
 
+AccountsModel::~AccountsModel()
+{
+    delete d;
+}
+
 void AccountsModel::load()
 {
   clear();
