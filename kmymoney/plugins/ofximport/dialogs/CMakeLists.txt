@@ -1,3 +1,4 @@
+INCLUDE_DIRECTORIES(${LIBOFX_INCLUDE_DIR})
 
 ########### next target ###############
 

@@ -63,7 +63,7 @@ IF (WIN32)
     )
 
     FIND_LIBRARY(OPENSP_LIBRARIES
-        NAMES sp133
+        NAMES sp133 libosp
         PATHS
             $ENV{KDEROOT}/lib
     )
