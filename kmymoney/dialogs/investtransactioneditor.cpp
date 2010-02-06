@@ -644,11 +644,11 @@ void InvestTransactionEditor::loadEditWidgets(KMyMoneyRegister::Action /* action
 
     // fee amount
     value = dynamic_cast<kMyMoneyEdit*>(haveWidget("fee-amount"));
-    value->setValue(subtotal(m_feeSplits).abs());
+    value->setValue(subtotal(m_feeSplits));
 
     // interest amount
     value = dynamic_cast<kMyMoneyEdit*>(haveWidget("interest-amount"));
-    value->setValue(subtotal(m_interestSplits).abs());
+    value->setValue(-subtotal(m_interestSplits));
 
     // total
     slotUpdateTotalAmount();
@@ -764,7 +764,7 @@ void InvestTransactionEditor::totalAmount(MyMoneyMoney& amount) const
     amount = sharesEdit->value().abs() * priceEdit->value().abs();
 
   if (feesEdit->isVisible()) {
-    MyMoneyMoney fee = feesEdit->value().abs();
+    MyMoneyMoney fee = feesEdit->value();
     MyMoneyMoney factor(-1, 1);
     switch (activityCombo->activity()) {
     case MyMoneySplit::BuyShares:
@@ -778,7 +778,7 @@ void InvestTransactionEditor::totalAmount(MyMoneyMoney& amount) const
   }
 
   if (interestEdit->isVisible()) {
-    MyMoneyMoney interest = interestEdit->value().abs();
+    MyMoneyMoney interest = interestEdit->value();
     MyMoneyMoney factor(1, 1);
     switch (activityCombo->activity()) {
     case MyMoneySplit::BuyShares:
