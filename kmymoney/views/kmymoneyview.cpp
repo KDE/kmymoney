@@ -121,7 +121,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   QObject* kmymoney = parent->parent();
   newStorage();
 
-  m_model = new KPageWidgetModel();
+  m_model = new KPageWidgetModel(parent);
 
   connect(this, SIGNAL(currentPageChanged(const QModelIndex, const QModelIndex)), this, SLOT(slotRefreshViews()));
   connect(this, SIGNAL(pageToggled(KPageWidgetItem*, bool)), this, SLOT(slotRefreshViews()));
