@@ -432,7 +432,8 @@ void KGlobalLedgerView::loadView(void)
       filter.setDateFilter(KMyMoneyGlobalSettings::startDate().date(), QDate());
       key = "kmm-sort-std";
       sortOrder = KMyMoneyGlobalSettings::sortNormalView();
-      if (KMyMoneyGlobalSettings::hideReconciledTransactions()) {
+      if (KMyMoneyGlobalSettings::hideReconciledTransactions()
+      && !m_account.isIncomeExpense()) {
         filter.addState(MyMoneyTransactionFilter::notReconciled);
         filter.addState(MyMoneyTransactionFilter::cleared);
       }
