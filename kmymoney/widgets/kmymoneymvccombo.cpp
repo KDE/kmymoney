@@ -24,6 +24,7 @@
 #include <QStandardItemModel>
 #include <QStandardItem>
 #include <QAbstractItemView>
+#include <QSortFilterProxyModel>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -33,6 +34,8 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
+
+#include "kmymoneysettings.h"
 
 KMyMoneyMVCCombo::KMyMoneyMVCCombo(QWidget* parent) :
     KComboBox(parent),
@@ -50,12 +53,27 @@ KMyMoneyMVCCombo::KMyMoneyMVCCombo(bool editable, QWidget* parent) :
     m_canCreateObjects(false),
     m_inFocusOutEvent(false)
 {
+  QAbstractItemModel *completerModel = model();
   QCompleter *completer = new QCompleter(this);
   completer->setCaseSensitivity(Qt::CaseInsensitive);
-  completer->setCompletionMode(QCompleter::PopupCompletion);
-  completer->setModel(model());
-  view()->setAlternatingRowColors(true);
+  if (KMyMoneySettings::stringMatchFromStart()) {
+    // if the names should be matched from start use PopupCompletion mode of QCompleter with the combo's model
+    completer->setCompletionMode(QCompleter::PopupCompletion);
+  } else {
+    // if any substring should be matched use the following setup since QCompleter does not have such an option
+    // setup the QCompleter to always show all completions and use instead of the combo's model a filtered proxy model
+    completer->setCompletionMode(QCompleter::UnfilteredPopupCompletion);
+    QSortFilterProxyModel *pFilterModel = new QSortFilterProxyModel(this);
+    pFilterModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
+    pFilterModel->setSourceModel(model());
+    connect(this, SIGNAL(editTextChanged(const QString &)), pFilterModel, SLOT(setFilterFixedString(const QString &)));
+    completerModel = pFilterModel;
+  }
+
+  completer->setModel(completerModel);
   setCompleter(completer);
+
+  view()->setAlternatingRowColors(true);
   setInsertPolicy(QComboBox::NoInsert); // don't insert new objects due to object creation
   connect(this, SIGNAL(activated(int)), SLOT(activated(int)));
 }
