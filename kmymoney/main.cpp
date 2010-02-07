@@ -130,7 +130,7 @@ int main(int argc, char *argv[])
   KApplication* a = new KApplication();
 
   if (KGlobal::locale()->monetaryDecimalSymbol().isEmpty()) {
-    KMessageBox::error(0, i18n("The monetary decimal symbol is not correctly set in the KDE Control Center's Country/Region & Language settings. Please set it to a reasonable value and start KMyMoney again."), i18n("Invalid settings"));
+    KMessageBox::error(0, i18n("The monetary decimal symbol is not correctly set in the KDE System Settings module Country/Region & Language. Please set it to a reasonable value and start KMyMoney again."), i18n("Invalid settings"));
     delete a;
     exit(1);
   }

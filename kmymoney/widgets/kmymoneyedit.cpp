@@ -61,7 +61,7 @@ kMyMoneyMoneyValidator::kMyMoneyMoneyValidator(double bottom, double top, int de
 
 /*
  * The code of the following function is taken from kdeui/knumvalidator.cpp
- * and adjusted to always use the monetary symbols defined in the KDE control center
+ * and adjusted to always use the monetary symbols defined in the KDE System Settings
  */
 QValidator::State kMyMoneyMoneyValidator::validate(QString & input, int & _p) const
 {
