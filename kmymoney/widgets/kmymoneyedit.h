@@ -212,7 +212,7 @@ public:
 
   KLineEdit* lineedit(void) const;
 
-  void setHint(const QString& hint) const;
+  void setClickMessage(const QString& hint) const;
 
   bool isReadOnly(void) const;
 

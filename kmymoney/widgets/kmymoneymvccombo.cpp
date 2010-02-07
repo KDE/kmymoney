@@ -31,6 +31,7 @@
 
 #include <klocale.h>
 #include <kdebug.h>
+#include <klineedit.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -78,9 +79,12 @@ KMyMoneyMVCCombo::KMyMoneyMVCCombo(bool editable, QWidget* parent) :
   connect(this, SIGNAL(activated(int)), SLOT(activated(int)));
 }
 
-void KMyMoneyMVCCombo::setHint(const QString& hint) const
+void KMyMoneyMVCCombo::setClickMessage(const QString& hint) const
 {
-  Q_UNUSED(hint);
+  KLineEdit* le = qobject_cast<KLineEdit*>(lineEdit());
+  if(le) {
+    le->setClickMessage(hint);
+  }
 }
 
 const QString& KMyMoneyMVCCombo::selectedItem(void) const

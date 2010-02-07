@@ -28,7 +28,6 @@
 // KDE Includes
 
 #include <klineedit.h>
-//Added by qt3to4:
 #include <QFocusEvent>
 #include <QKeyEvent>
 
@@ -64,13 +63,6 @@ public:
     */
   void resetText(void);
 
-  /**
-   * This method is used to turn on/off the hint display
-   */
-  void setHint(const QString& hint) {
-    m_hint = hint;
-  };
-
 
 public slots:
   void loadText(const QString& text);
@@ -85,9 +77,6 @@ signals:
 protected:
   void focusOutEvent(QFocusEvent *ev);
   void focusInEvent(QFocusEvent *ev);
-
-  /** reimplemented to support the hint display */
-  void paintEvent(QPaintEvent* ev);
 
   /**
     * Overridden so that the period key on the numeric keypad always sends
@@ -123,11 +112,6 @@ private:
     * signal if the current text is different.
     */
   QString m_text;
-
-  /**
-    * This member tells what to display as hint as long as the field is empty
-    */
-  QString m_hint;
 
   /**
     * This member keeps the status if overriding the numeric keypad comma key

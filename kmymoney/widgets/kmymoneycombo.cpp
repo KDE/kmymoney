@@ -120,10 +120,10 @@ void KMyMoneyCombo::setEditable(bool y)
   }
 }
 
-void KMyMoneyCombo::setHint(const QString& hint) const
+void KMyMoneyCombo::setClickMessage(const QString& hint) const
 {
   if (m_edit)
-    m_edit->setHint(hint);
+    m_edit->setClickMessage(hint);
 }
 
 void KMyMoneyCombo::paintEvent(QPaintEvent* ev)

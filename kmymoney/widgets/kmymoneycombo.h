@@ -68,7 +68,7 @@ public:
     *
     * @param hint reference to text. If @a hint is empty, no hint will be shown.
     */
-  void setHint(const QString& hint) const;
+  void setClickMessage(const QString& hint) const;
 
   /**
     * overridden for internal reasons.

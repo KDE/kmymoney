@@ -675,13 +675,13 @@ StdTransactionEditor::~StdTransactionEditor()
 void StdTransactionEditor::createEditWidgets(void)
 {
   KMyMoneyCategory* account = new KMyMoneyCategory;
-  account->setHint(i18n("Account"));
+  account->setClickMessage(i18n("Account"));
   m_editWidgets["account"] = account;
   connect(account, SIGNAL(textChanged(const QString&)), this, SLOT(slotUpdateButtonState()));
   connect(account, SIGNAL(itemSelected(const QString&)), this, SLOT(slotUpdateAccount(const QString&)));
 
   KMyMoneyPayeeCombo* payee = new KMyMoneyPayeeCombo;
-  payee->setHint(i18n("Payer/Receiver"));
+  payee->setClickMessage(i18n("Payer/Receiver"));
   m_editWidgets["payee"] = payee;
   connect(payee, SIGNAL(textChanged(const QString&)), this, SLOT(slotUpdateButtonState()));
   connect(payee, SIGNAL(createItem(const QString&, QString&)), this, SIGNAL(createPayee(const QString&, QString&)));
@@ -689,7 +689,7 @@ void StdTransactionEditor::createEditWidgets(void)
   connect(payee, SIGNAL(itemSelected(const QString&)), this, SLOT(slotUpdatePayee(const QString&)));
 
   KMyMoneyCategory* category = new KMyMoneyCategory(0, true);
-  category->setHint(i18n("Category/Account"));
+  category->setClickMessage(i18n("Category/Account"));
   m_editWidgets["category"] = category;
   connect(category, SIGNAL(itemSelected(const QString&)), this, SLOT(slotUpdateCategory(const QString&)));
   connect(category, SIGNAL(textChanged(const QString&)), this, SLOT(slotUpdateButtonState()));
@@ -725,7 +725,7 @@ void StdTransactionEditor::createEditWidgets(void)
 
   if (showNumberField) {
     kMyMoneyLineEdit* number = new kMyMoneyLineEdit;
-    number->setHint(i18n("Number"));
+    number->setClickMessage(i18n("Number"));
     m_editWidgets["number"] = number;
     connect(number, SIGNAL(lineChanged(const QString&)), this, SLOT(slotNumberChanged(const QString&)));
     // number->installEventFilter(this);

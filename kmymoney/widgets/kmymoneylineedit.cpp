@@ -24,7 +24,6 @@
 #include <QRect>
 #include <QPainter>
 #include <QPalette>
-//Added by qt3to4:
 #include <QKeyEvent>
 #include <QFocusEvent>
 
@@ -131,32 +130,6 @@ void kMyMoneyLineEdit::keyPressEvent(QKeyEvent* k)
     }
   }
   KLineEdit::keyPressEvent(k);
-}
-
-void kMyMoneyLineEdit::paintEvent(QPaintEvent* ev)
-{
-  KLineEdit::paintEvent(ev);
-
-  if (text().isEmpty() && !m_hint.isEmpty() && !hasFocus()) {
-    const int innerMargin = 1;
-
-    // the following 5 lines are taken from QLineEdit::drawContents()
-    QRect cr = contentsRect();
-    QFontMetrics fm = fontMetrics();
-    QRect lineRect(cr.x() + innerMargin, cr.y() + (cr.height() - fm.height() + 1) / 2,
-                   cr.width() - 2*innerMargin, fm.height());
-    QPoint topLeft = lineRect.topLeft() - QPoint(0, -fm.ascent());
-
-
-    QPainter p(this);
-    QFont f = p.font();
-    f.setItalic(true);
-    f.setWeight(QFont::Light);
-    p.setFont(f);
-    p.setPen(palette().brush(QPalette::Disabled, QPalette::Text).color());
-
-    p.drawText(topLeft, m_hint);
-  }
 }
 
 #include "kmymoneylineedit.moc"

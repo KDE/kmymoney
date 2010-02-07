@@ -1251,11 +1251,11 @@ void StdTransaction::arrangeWidgetsInForm(QMap<QString, QWidget*>& editWidgets)
     kMyMoneyLineEdit* edit = dynamic_cast<kMyMoneyLineEdit*>(*it);
     KMyMoneyPayeeCombo* payee = dynamic_cast<KMyMoneyPayeeCombo*>(*it);
     if (combo)
-      combo->setHint(QString());
+      combo->setClickMessage(QString());
     if (edit)
-      edit->setHint(QString());
+      edit->setClickMessage(QString());
     if (payee)
-      payee->setHint(QString());
+      payee->setClickMessage(QString());
   }
 
   KMyMoneyTransactionForm::TransactionForm* form = dynamic_cast<KMyMoneyTransactionForm::TransactionForm*>(m_form);
@@ -1942,13 +1942,13 @@ void InvestTransaction::arrangeWidgetsInForm(QMap<QString, QWidget*>& editWidget
     kMyMoneyEdit* edit = dynamic_cast<kMyMoneyEdit*>(*it);
     KMyMoneyPayeeCombo* payee = dynamic_cast<KMyMoneyPayeeCombo*>(*it);
     if (combo)
-      combo->setHint(QString());
+      combo->setClickMessage(QString());
     if (edit)
-      edit->setHint(QString());
+      edit->setClickMessage(QString());
     if (lineedit)
-      lineedit->setHint(QString());
+      lineedit->setClickMessage(QString());
     if (payee)
-      payee->setHint(QString());
+      payee->setClickMessage(QString());
   }
 }
 

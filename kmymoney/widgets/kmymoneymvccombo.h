@@ -51,7 +51,10 @@ public:
   KMyMoneyMVCCombo(QWidget* parent = 0);
   explicit KMyMoneyMVCCombo(bool editable, QWidget* parent = 0);
 
-  void setHint(const QString& hint) const;
+  /**
+    * @sa KLineEdit::setClickMessage()
+    */ 
+  void setClickMessage(const QString& hint) const;
 
   /**
     * This method returns the id of the first selected item.
