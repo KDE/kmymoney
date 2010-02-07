@@ -24,7 +24,7 @@
 
 
 #include "kbaccountsettings.h"
-#include <kmymoney/mymoneyaccount.h>
+#include "mymoneyaccount.h"
 
 KBAccountSettings::KBAccountSettings(const MyMoneyAccount& /*acc*/,
                                      QWidget* parent) :

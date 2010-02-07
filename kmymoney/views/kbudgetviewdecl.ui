@@ -271,7 +271,7 @@
   <customwidget>
    <class>KBudgetValues</class>
    <extends>QWidget</extends>
-   <header>kmymoney/kbudgetvalues.h</header>
+   <header>kbudgetvalues.h</header>
   </customwidget>
   <customwidget>
    <class>Q3Frame</class>

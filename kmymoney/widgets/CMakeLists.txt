@@ -20,8 +20,6 @@ SET(kmymoney_STAT_HEADERS
   kmymoney_export.h
   )
 
-KMM_CREATE_LINKS( ${kmymoney_STAT_HEADERS} )
-
 ########### Basic Widget Library (kmymoney_base) STATIC #################
 
 # Common sources for libkmymoney.so and libwidgets.a that do not
@@ -105,6 +103,8 @@ IF( USE_QT_DESIGNER )
   # Some undefined references remain.
   SET_TARGET_PROPERTIES(kmymoneywidgets PROPERTIES
     LINK_FLAGS "-Wl,--undefined")
+
+  INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} )
 
   ##### Is the option -DKMM_DESIGNER needed??
   # The option -DKMM_DESIGNER will leave away any code that breaks uic.

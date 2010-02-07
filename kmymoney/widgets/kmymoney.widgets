@@ -6,72 +6,63 @@ Group=KMyMoney widgets
 
 [KMyMoneyTitleLabel]
 ToolTip=The KMyMoney title label widget
-Includes=kmymoney/kmymoneytitlelabel.h
 
 [kMyMoneyEdit]
 ToolTip=The KMyMoney edit widget
-Includes=kmymoney/kmymoneyedit.h
 
 [kMyMoneyDateInput]
 ToolTip=The KMyMoney date input widget
-Include=kmymoney/kmymoneydateinput.h
 
 [KMyMoneyAccountTree]
 ToolTip=The KMyMoney widget that displays an account tree
-Include=kmymoney/kmymoneyaccounttree.h
 
 [KMyMoneySecuritySelector]
 ToolTip=The KMyMoney widget for selecting a security
-IncludeFile=kmymoney/kmymoneycurrencyselector.h
+IncludeFile=kmymoneycurrencyselector.h
 
 [KMyMoneyCurrencySelector]
 ToolTip=The KMyMoney widget for selecting a currency
-Include=kmymoney/kmymoneycurrencyselector.h
 
 [KMyMoneyRegister::Register]
 IconSet=register.png
 ToolTip=The KMyMoney register widget
-IncludeFile=kmymoney/register.h
+IncludeFile=register.h
 
 [KMyMoneyTransactionForm::TransactionForm]
 IconSet=transactionform.png
 ToolTip=The KMyMoney transaction form widget
-IncludeFile=kmymoney/transactionform.h
+IncludeFile=transactionform.h
 
 [KMyMoneyCategory]
 ToolTip=The KMyMoney widget that displays categories
-IncludeFile=kmymoney/kmymoneycategory.h
 
 [KMyMoneyPayeeCombo]
 ToolTip=The KMyMoney widget that displays payyes
-IncludeFile=kmymoney/kmymoneycombo.h
+IncludeFile=kmymoneymvccombo.h
 
 [KMyMoneyPeriodCombo]
 ToolTip=The KMyMoney widget that displays time periods
-IncludeFile=kmymoney/kmymoneycombo.h
+IncludeFile=kmymoneycombo.h
 
 [KMyMoneyFrequencyCombo]
 ToolTip=The KMyMoney widget that displays frequecies
-IncludeFile=kmymoney/kmymoneycombo.h
+IncludeFile=kmymoneycombo.h
 
 [KMyMoneyOccurrencePeriodCombo]
 ToolTip=The KMyMoney widget that displays schedule occurrences
-IncludeFile=kmymoney/kmymoneycombo.h
+IncludeFile=kmymoneycombo.h
 
 [TransactionSortOption]
-IncludeFile=kmymoney/transactionsortoptionimpl.h
+IncludeFile=transactionsortoptionimpl.h
 
 [KMyMoneyGeneralCombo]
-IncludeFile=kmymoney/kmymoneycombo.h
+IncludeFile=kmymoneycombo.h
 
 [KBudgetValues]
-IncludeFile=kmymoney/kbudgetvalues.h
 
 [KAccountTemplateSelector]
-IncludeFile=kmymoney/kaccounttemplateselector.h
 
 # deprecated will be removed at some point in time
 
 [KMyMoneyAccountCombo]
 ToolTip=The KMyMoney widget that displays accounts
-IncludeFile=kmymoney/kmymoneyaccountcombo.h

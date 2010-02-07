@@ -20,10 +20,10 @@
 #ifndef __PRINTCHECK_H__
 #define __PRINTCHECK_H__
 
-#include <kmymoney/kmymoneyplugin.h>
-#include <kmymoney/mymoneyaccount.h>
-#include <kmymoney/mymoneykeyvaluecontainer.h>
-#include <kmymoney/selectedtransaction.h>
+#include "kmymoneyplugin.h"
+#include "mymoneyaccount.h"
+#include "mymoneykeyvaluecontainer.h"
+#include "selectedtransaction.h"
 
 class QStringList;
 class KPluginInfo;

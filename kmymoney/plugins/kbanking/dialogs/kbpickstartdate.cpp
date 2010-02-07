@@ -42,7 +42,7 @@
 #include <klocale.h>
 
 // KMyMoney includes
-#include <kmymoney/kmymoneydateinput.h>
+#include "kmymoneydateinput.h"
 
 
 

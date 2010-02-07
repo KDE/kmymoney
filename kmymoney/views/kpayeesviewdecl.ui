@@ -532,7 +532,7 @@ new transactions with this payee</string>
   <customwidget>
    <class>KMyMoneyAccountCombo</class>
    <extends>KComboBox</extends>
-   <header>kmymoney/kmymoneyaccountcombo.h</header>
+   <header>kmymoneyaccountcombo.h</header>
   </customwidget>
   <customwidget>
    <class>Q3GroupBox</class>
