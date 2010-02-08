@@ -39,6 +39,8 @@
 #include <mymoneytransactionfilter.h>
 #include <register.h>
 
+class QSortFilterProxyModel;
+
 /**
   * @author Cristian Onet
   * This class will replace the KMyMoneyCombo class when all widgets will use the MVC
@@ -84,6 +86,7 @@ public:
 
 protected slots:
   void activated(int index);
+  void editTextChanged(const QString &);
 
 protected:
   /**
@@ -134,6 +137,11 @@ private:
     * Flag to check whether a focusOutEvent processing is underway or not
     */
   bool            m_inFocusOutEvent;
+
+  /**
+    * Filter model used to make the completion.
+    */
+  QSortFilterProxyModel *m_filterProxyModel;
 };
 
 /**

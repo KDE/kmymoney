@@ -41,10 +41,9 @@
 KMyMoneyMVCCombo::KMyMoneyMVCCombo(QWidget* parent) :
     KComboBox(parent),
     m_canCreateObjects(false),
-    m_inFocusOutEvent(false)
+    m_inFocusOutEvent(false),
+    m_filterProxyModel(0)
 {
-  QCompleter *completer = new QCompleter(this);
-  setCompleter(completer);
   view()->setAlternatingRowColors(true);
   connect(this, SIGNAL(activated(int)), SLOT(activated(int)));
 }
@@ -52,7 +51,8 @@ KMyMoneyMVCCombo::KMyMoneyMVCCombo(QWidget* parent) :
 KMyMoneyMVCCombo::KMyMoneyMVCCombo(bool editable, QWidget* parent) :
     KComboBox(editable, parent),
     m_canCreateObjects(false),
-    m_inFocusOutEvent(false)
+    m_inFocusOutEvent(false),
+    m_filterProxyModel(0)
 {
   QAbstractItemModel *completerModel = model();
   QCompleter *completer = new QCompleter(this);
@@ -64,11 +64,11 @@ KMyMoneyMVCCombo::KMyMoneyMVCCombo(bool editable, QWidget* parent) :
     // if any substring should be matched use the following setup since QCompleter does not have such an option
     // setup the QCompleter to always show all completions and use instead of the combo's model a filtered proxy model
     completer->setCompletionMode(QCompleter::UnfilteredPopupCompletion);
-    QSortFilterProxyModel *pFilterModel = new QSortFilterProxyModel(this);
-    pFilterModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
-    pFilterModel->setSourceModel(model());
-    connect(this, SIGNAL(editTextChanged(const QString &)), pFilterModel, SLOT(setFilterFixedString(const QString &)));
-    completerModel = pFilterModel;
+    m_filterProxyModel = new QSortFilterProxyModel(this);
+    m_filterProxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
+    m_filterProxyModel->setSourceModel(model());
+    connect(this, SIGNAL(editTextChanged(const QString &)), this, SLOT(editTextChanged(const QString &)));
+    completerModel = m_filterProxyModel;
   }
 
   completer->setModel(completerModel);
@@ -110,6 +110,17 @@ void KMyMoneyMVCCombo::activated(int index)
     m_id = data.toString();
     emit itemSelected(m_id);
   }
+}
+
+/**
+  * Use the completion prefix of the completer for filtering instead of the
+  * edit text since when navigating between the completions the edit text 
+  * changes to the current completion making all other completions disappear.
+  */
+void KMyMoneyMVCCombo::editTextChanged(const QString &)
+{
+  if (m_filterProxyModel && completer())
+    m_filterProxyModel->setFilterFixedString(completer()->completionPrefix());
 }
 
 void KMyMoneyMVCCombo::connectNotify(const char* signal)
