@@ -69,10 +69,12 @@ private:
 };
 
 /**
-  * A proxy mode to provide various sorting and filtering operations for the above model.
+  * A proxy mode to provide various sorting and filtering operations for the AccountsModel.
   *
-  * Here's an example of how to use this clas in combination with the accounts model
-  * (in the example widget is a pointer to a model/view widget):
+  * Here is an example of how to use this class in combination with the AccountsModel
+  * (in the example @a widget is a pointer to a model/view widget):
+  *
+  * @code
   *
   *   AccountsFilterProxyModel *filterModel = new AccountsFilterProxyModel(widget);
   *   filterModel->addAccountGroup(MyMoneyAccount::Asset);
@@ -81,6 +83,8 @@ private:
   *   filterModel->sort(0);
   *
   *   widget->setModel(filterModel);
+  *
+  * @endcode
   *
   * @see AccountsModel
   *
