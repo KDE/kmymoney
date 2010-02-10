@@ -390,8 +390,13 @@ KPayeesView::KPayeesView(QWidget *parent) :
   // use the size settings of the last run (if any)
   KConfigGroup grp = KGlobal::config()->group("Last Use Settings");
   QList<int> sizes = grp.readEntry("KPayeesViewSplitterSize", QList<int>());
-  if (sizes.size() == 2)
+  if (sizes.size() == 2) {
+    if(!sizes[0] || !sizes[1]) {
+      sizes[0] = 1;
+      sizes[1] = 2;
+    }
     m_splitter->setSizes(sizes);
+  }
 }
 
 KPayeesView::~KPayeesView()
