@@ -32,6 +32,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "kmm_widgets_export.h"
+
 // Ideas neatly taken from korganizer
 // Respective authors are credited.
 // Some ideas/code have been borrowed from Calendar-0.13 (phoenix.bmedesign.com/~qt)
@@ -56,7 +58,7 @@ protected:
   * which is based on an edit field with spin boxes and adds a QPushButton
   * to open a KDatePicker.
   */
-class kMyMoneyDateInput : public KHBox
+class KMM_WIDGETS_EXPORT kMyMoneyDateInput : public KHBox
 {
   Q_OBJECT
 
