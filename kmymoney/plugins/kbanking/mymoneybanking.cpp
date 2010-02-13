@@ -85,7 +85,7 @@ public:
     QString gwenProxy = QString::fromLocal8Bit(qgetenv("GWEN_PROXY"));
     if (gwenProxy.isEmpty()) {
       KConfig *cfg = new KConfig("kioslaverc");
-      QRegExp exp("(\\w+://)?(.*)");
+      QRegExp exp("(\\w+://)?([^/]{2}.+:\\d+)");
       QString proxy;
 
       KConfigGroup grp = cfg->group("Proxy Settings");
