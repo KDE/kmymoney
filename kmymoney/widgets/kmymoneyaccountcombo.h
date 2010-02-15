@@ -40,26 +40,47 @@
 // Project Includes
 
 #include "kmymoneyutils.h"
+#include "accountsmodel.h"
 
 class kMyMoneyAccountCompletion;
 
 /**
+  * A proxy model used to filter all the data from the core accounts model leaving
+  * only the name of the accounts so this model can be used in the account
+  * completion combo.
+  *
+  * @see AccountsModel
+  * @see AccountsFilterProxyModel
+  *
+  * @author Cristian Onet 2010
+  *
+  */
+class AccountNamesFilterProxyModel : public AccountsFilterProxyModel
+{
+  Q_OBJECT
+
+public:
+  AccountNamesFilterProxyModel(QObject *parent = 0);
+
+protected:
+  bool filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const;
+};
+
+/**
+  *
+  *
   * @author Cristian Onet
   */
 class KMyMoneyMVCAccountCombo : public KComboBox
 {
   Q_OBJECT
 public:
-  KMyMoneyMVCAccountCombo(QWidget* parent = 0);
+  KMyMoneyMVCAccountCombo(AccountNamesFilterProxyModel *model, QWidget *parent = 0);
   ~KMyMoneyMVCAccountCombo();
 
   void setSelected(const QString& id);
 
-  /**
-    * Notify the widget that it's model has been set (QComboBox::setModel is not virtual)
-    */
-  void modelWasSet();
-
+public slots:
   void expandAll();
 
 protected:

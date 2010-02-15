@@ -31,6 +31,7 @@ SET(_uncritial_common_sources
   kmymoneyaccounttreebudget.cpp
   kmymoneyaccounttree.cpp
   kmymoneyaccounttreeforecast.cpp
+  kmymoneyaccounttreeview.cpp
   kmymoneycalculator.cpp
   kmymoneychecklistitem.cpp
   kmymoneycombo.cpp

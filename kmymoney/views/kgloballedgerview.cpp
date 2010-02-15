@@ -36,7 +36,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-
 #include <klocale.h>
 #include <kcombobox.h>
 #include <kpushbutton.h>
@@ -62,7 +61,7 @@
 #include "kfindtransactiondlg.h"
 #include "kmymoney.h"
 #include "scheduledtransaction.h"
-#include "models/accountsmodel.h"
+#include "models.h"
 
 class KGlobalLedgerView::Private
 {
@@ -83,8 +82,7 @@ public:
   QTimer               m_viewPosTimer;
 
   // models
-  AccountsModel*            m_accountsModel;
-  AccountsFilterProxyModel* m_filterProxyModel;
+  AccountNamesFilterProxyModel *m_filterProxyModel;
 
   // widgets
   KMyMoneyMVCAccountCombo* m_accountComboBox;
@@ -156,7 +154,6 @@ KGlobalLedgerView::Private::Private() :
     m_inLoading(false),
     m_recursion(false),
     m_showDetails(false),
-    m_accountsModel(0),
     m_filterProxyModel(0),
     m_accountComboBox(0)
 {
@@ -174,14 +171,11 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name)
   d->m_mousePressFilter = new MousePressFilter((QWidget*)this);
   d->m_action = KMyMoneyRegister::ActionNone;
 
-  // account model
-  d->m_accountsModel = new AccountsModel(this);
-
   // the proxy filter model
-  d->m_filterProxyModel = new AccountsFilterProxyModel(this);
+  d->m_filterProxyModel = new AccountNamesFilterProxyModel(this);
   d->m_filterProxyModel->addAccountGroup(MyMoneyAccount::Asset);
   d->m_filterProxyModel->addAccountGroup(MyMoneyAccount::Liability);
-  d->m_filterProxyModel->setSourceModel(d->m_accountsModel);
+  d->m_filterProxyModel->setSourceModel(Models::instance()->accountsModel());
   d->m_filterProxyModel->sort(0);
 
   // create the toolbar frame at the top of the view
@@ -191,10 +185,8 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name)
   toolbarLayout->setSpacing(0);
 
   // the account selector widget
-  d->m_accountComboBox = new KMyMoneyMVCAccountCombo(m_toolbarFrame);
+  d->m_accountComboBox = new KMyMoneyMVCAccountCombo(d->m_filterProxyModel, m_toolbarFrame);
   toolbarLayout->addWidget(d->m_accountComboBox);
-  d->m_accountComboBox->setModel(d->m_filterProxyModel);
-  d->m_accountComboBox->modelWasSet();
 
   layout()->addWidget(m_toolbarFrame);
 
@@ -850,19 +842,20 @@ void KGlobalLedgerView::loadAccounts(void)
     }
   }
 
-  if (d->m_accountsModel) {
-    d->m_accountsModel->load();
-    d->m_filterProxyModel->setHideClosedAccounts(KMyMoneyGlobalSettings::hideClosedAccounts() && !kmymoney->toggleAction("view_show_all_accounts")->isChecked());
-    d->m_filterProxyModel->setSourceModel(d->m_accountsModel);
-    d->m_filterProxyModel->sort(0);
-    d->m_accountComboBox->expandAll();
-  }
+  // TODO: check why the invalidate is needed here
+  d->m_filterProxyModel->invalidate();
+  d->m_filterProxyModel->setHideClosedAccounts(KMyMoneyGlobalSettings::hideClosedAccounts() && !kmymoney->toggleAction("view_show_all_accounts")->isChecked());
+  d->m_accountComboBox->expandAll();
 
   if (m_account.id().isEmpty()) {
     // find the first favorite account
-    QModelIndexList list = d->m_accountsModel->match(d->m_accountsModel->index(0, 0), AccountFavoriteRole, QVariant(true), 1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
+    QModelIndexList list = Models::instance()->accountsModel()->match(Models::instance()->accountsModel()->index(0, 0),
+                                                                      AccountsModel::AccountFavoriteRole, 
+                                                                      QVariant(true),
+                                                                      1,
+                                                                      Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
     if (list.count() > 0) {
-      QVariant accountId = d->m_accountsModel->data(list.front(), AccountIdRole);
+      QVariant accountId = Models::instance()->accountsModel()->data(list.front(), AccountsModel::AccountIdRole);
       if (accountId.isValid()) {
         m_account = file->account(accountId.toString());
       }
@@ -870,9 +863,15 @@ void KGlobalLedgerView::loadAccounts(void)
 
     if (m_account.id().isEmpty()) {
       // there are no favorite accounts find any account
-      QModelIndexList list = d->m_accountsModel->match(d->m_accountsModel->index(0, 0), Qt::DisplayRole, QVariant(QString("*")), -1, Qt::MatchFlags(Qt::MatchWildcard | Qt::MatchRecursive));
+      QModelIndexList list = Models::instance()->accountsModel()->match(Models::instance()->accountsModel()->index(0, 0),
+                                                                        Qt::DisplayRole,
+                                                                        QVariant(QString("*")),
+                                                                        -1,
+                                                                        Qt::MatchFlags(Qt::MatchWildcard | Qt::MatchRecursive));
       for (QModelIndexList::ConstIterator it = list.constBegin(); it != list.constEnd(); ++it) {
-        QVariant accountId = d->m_accountsModel->data(*it, AccountIdRole);
+        if (!it->parent().isValid())
+          continue; // skip the top level accounts
+        QVariant accountId = Models::instance()->accountsModel()->data(*it, AccountsModel::AccountIdRole);
         if (accountId.isValid()) {
           MyMoneyAccount a = file->account(accountId.toString());
           if (!a.isInvest()) {

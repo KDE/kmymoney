@@ -1,5 +1,8 @@
-INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}
-  ${KMyMoney_SOURCE_DIR}/libkdchart/include )
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}
+                    ${CMAKE_CURRENT_BINARY_DIR}
+                    ${CMAKE_CURRENT_SOURCE_DIR}/models/
+                    ${CMAKE_CURRENT_BINARY_DIR}/models/
+                    ${KMyMoney_SOURCE_DIR}/libkdchart/include )
 
 ADD_SUBDIRECTORY( mymoney )
 ADD_SUBDIRECTORY( models  )

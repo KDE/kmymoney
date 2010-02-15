@@ -119,8 +119,9 @@ void KMyMoneyMVCCombo::activated(int index)
   */
 void KMyMoneyMVCCombo::editTextChanged(const QString &)
 {
-  if (m_filterProxyModel && completer())
+  if (m_filterProxyModel && completer()) {
     m_filterProxyModel->setFilterFixedString(completer()->completionPrefix());
+  }
 }
 
 void KMyMoneyMVCCombo::connectNotify(const char* signal)

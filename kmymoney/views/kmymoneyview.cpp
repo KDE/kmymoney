@@ -105,6 +105,7 @@
 #include "kforecastview.h"
 #include "kmymoney.h"
 #include "kmymoneyutils.h"
+#include "models.h"
 
 #define COMPRESSION_MIME_TYPE "application/x-gzip"
 #define RECOVER_KEY_ID        "0xD2B08440"
@@ -551,6 +552,8 @@ void KMyMoneyView::closeFile(void)
 
   emit kmmFilePlugin(postClose);
   m_fileOpen = false;
+
+  disconnect(MyMoneyFile::instance(), SIGNAL(dataChanged()), Models::instance(), SLOT(dataChanged()));
 }
 
 void KMyMoneyView::ungetString(QIODevice *qfile, char *buf, int len)
@@ -977,6 +980,8 @@ bool KMyMoneyView::initializeStorage()
   m_fileOpen = true;
   emit kmmFilePlugin(postOpen);
 
+  connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), Models::instance(), SLOT(dataChanged()));
+
   // inform everyone about new data
   MyMoneyFile::instance()->preloadCache();
   MyMoneyFile::instance()->forceDataChanged();
@@ -985,6 +990,7 @@ bool KMyMoneyView::initializeStorage()
   if (pageIndex != KPageView::currentPage().row()) {
     showPage(page);
   }
+
   return true;
 }
 
