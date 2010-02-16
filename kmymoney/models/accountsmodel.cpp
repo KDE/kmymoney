@@ -45,7 +45,10 @@ public:
   /**
     * The pimpl.
     */
-  Private() : m_file(MyMoneyFile::instance()) {
+  Private() :
+    m_file(MyMoneyFile::instance()),
+    m_lastNetWorth(0)
+  {
   }
 
   ~Private() {
@@ -298,7 +301,14 @@ public:
     return 0;
   }
 
-  MyMoneyFile* m_file;
+  /**
+    * Used to laod the accounts data.
+    */
+  MyMoneyFile *m_file;
+  /**
+    * Used to emit the @ref netWorthChanged signal.
+    */
+  MyMoneyMoney m_lastNetWorth;
 };
 
 const QString AccountsModel::favoritesAccountId("Favorites");
@@ -355,6 +365,9 @@ void AccountsModel::load()
   }
 
   QStandardItem *rootItem = invisibleRootItem();
+
+  QStandardItem *assetAccountsItem = 0;
+  QStandardItem *liabilityAccountsItem = 0;
 
   // Favorite accounts
   QStandardItem *favoriteAccountsItem = d->itemFromAccountId(rootItem, favoritesAccountId);
@@ -422,6 +435,16 @@ void AccountsModel::load()
       accountsItem->setEditable(false);
     }
 
+    if ((mask & KMyMoneyUtils::asset) != 0) {
+      // Asset accounts
+      assetAccountsItem = accountsItem;
+    }
+
+    if ((mask & KMyMoneyUtils::liability) != 0) {
+      // Liability accounts
+      liabilityAccountsItem = accountsItem;
+    }
+
     QStringList list = account.accountList();
 
     for (QStringList::ConstIterator it_l = list.constBegin(); it_l != list.constEnd(); ++it_l) {
@@ -457,6 +480,19 @@ void AccountsModel::load()
   list = match(index(0, 0), AccountsModel::CleanupRole, true, -1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchRecursive));
   foreach(QModelIndex index, list) {
     removeRow(index.row(), index.parent());
+  }
+
+  if (assetAccountsItem && liabilityAccountsItem) {
+    QVariant assetValue = assetAccountsItem->data(AccountsModel::AccountTotalValueRole);
+    QVariant liabilityValue = liabilityAccountsItem->data(AccountsModel::AccountTotalValueRole);
+
+    if (assetValue.isValid() && liabilityValue.isValid()) {
+      MyMoneyMoney netWorth = assetValue.value<MyMoneyMoney>() - liabilityValue.value<MyMoneyMoney>();
+      if (d->m_lastNetWorth != netWorth) {
+        d->m_lastNetWorth = netWorth;
+        emit netWorthChanged(d->m_lastNetWorth);
+      }
+    }
   }
 }
 

@@ -23,7 +23,6 @@
 #include <QTabWidget>
 #include <QPixmap>
 #include <QLayout>
-//Added by qt3to4:
 #include <QList>
 
 // ----------------------------------------------------------------------------
@@ -36,6 +35,7 @@
 #include <kguiitem.h>
 #include <kpushbutton.h>
 #include <KToggleAction>
+#include <K3ListViewSearchLineWidget>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -44,7 +44,11 @@
 #include "kmymoneyview.h"
 #include "kmymoneyglobalsettings.h"
 #include "kmymoney.h"
-#include <K3ListViewSearchLineWidget>
+#include "kmymoneyaccounttreeview.h"
+#include "models.h"
+
+Q_DECLARE_METATYPE(MyMoneyAccount)
+Q_DECLARE_METATYPE(MyMoneyMoney)
 
 QPixmap accountPixmap(const MyMoneyAccount& account, bool reconcileFlag)
 {
@@ -131,11 +135,6 @@ KAccountsView::KAccountsView(QWidget *parent) :
     m_assetItem(0),
     m_liabilityItem(0)
 {
-  // create the searchline widget
-  // and insert it into the existing layout
-  m_searchWidget = new K3ListViewSearchLineWidget(m_accountTree, m_accountTree->parentWidget());
-  hboxLayout->insertWidget(0, m_searchWidget);
-
   // setup icons for collapse and expand button
   KGuiItem collapseGuiItem("",
                            KIcon("zoom-out"),
@@ -157,11 +156,32 @@ KAccountsView::KAccountsView(QWidget *parent) :
 
   connect(m_tab, SIGNAL(currentChanged(QWidget*)), this, SLOT(slotTabCurrentChanged(QWidget*)));
 
+  connect(Models::instance()->accountsModel(), SIGNAL(netWorthChanged(const MyMoneyMoney&)), this, SLOT(slotNetWorthChanged(const MyMoneyMoney&)));
+
+  // the proxy filter model
+  m_filterProxyModel = new AccountsViewFilterProxyModel(this);
+  m_filterProxyModel->addAccountGroup(MyMoneyAccount::Asset);
+  m_filterProxyModel->addAccountGroup(MyMoneyAccount::Liability);
+  m_filterProxyModel->addAccountGroup(MyMoneyAccount::Income);
+  m_filterProxyModel->addAccountGroup(MyMoneyAccount::Expense);
+  m_filterProxyModel->setSourceModel(Models::instance()->accountsModel());
+  m_filterProxyModel->setFilterKeyColumn(-1);
+
+  m_accountTree->setAlternatingRowColors(true);
+  m_accountTree->setIconSize(QSize(22, 22));
+  m_accountTree->setSortingEnabled(true);
+  m_accountTree->setModel(m_filterProxyModel);
+
+  connect(m_searchWidget, SIGNAL(textChanged(const QString &)), m_filterProxyModel, SLOT(setFilterFixedString(const QString &)));
+
+  // let the model know if the item is expanded or collapsed
+  connect(m_accountTree, SIGNAL(collapsed(const QModelIndex &)), m_filterProxyModel, SLOT(collapsed(const QModelIndex &)));
+  connect(m_accountTree, SIGNAL(expanded(const QModelIndex &)), m_filterProxyModel, SLOT(expanded(const QModelIndex &)));
   connect(m_accountTree, SIGNAL(selectObject(const MyMoneyObject&)), this, SIGNAL(selectObject(const MyMoneyObject&)));
   connect(m_accountTree, SIGNAL(openContextMenu(const MyMoneyObject&)), this, SIGNAL(openContextMenu(const MyMoneyObject&)));
-  connect(m_accountTree, SIGNAL(valueChanged(void)), this, SLOT(slotUpdateNetWorth(void)));
   connect(m_accountTree, SIGNAL(openObject(const MyMoneyObject&)), this, SIGNAL(openObject(const MyMoneyObject&)));
-  connect(m_accountTree, SIGNAL(reparent(const MyMoneyAccount&, const MyMoneyAccount&)), this, SIGNAL(reparent(const MyMoneyAccount&, const MyMoneyAccount&)));
+  connect(m_collapseButton, SIGNAL(clicked()), m_accountTree, SLOT(collapseAll()));
+  connect(m_expandButton, SIGNAL(clicked()), m_accountTree, SLOT(expandAll()));
 
   connect(m_accountIcons, SIGNAL(selectionChanged(Q3IconViewItem*)), this, SLOT(slotSelectIcon(Q3IconViewItem*)));
   connect(m_accountIcons, SIGNAL(rightButtonClicked(Q3IconViewItem*, const QPoint&)), this, SLOT(slotOpenContext(Q3IconViewItem*)));
@@ -216,15 +236,19 @@ void KAccountsView::slotTabCurrentChanged(QWidget* _tab)
     break;
   }
 
-  KMyMoneyAccountTreeBaseItem* treeItem = m_accountTree->selectedItem();
   KMyMoneyAccountIconItem* iconItem = selectedIcon();
 
   emit selectObject(MyMoneyAccount());
   switch (static_cast<AccountsViewTab>(m_tab->currentIndex())) {
   case ListView:
-    // if we have a selected account, let the application know about it
-    if (treeItem) {
-      emit selectObject(treeItem->itemObject());
+    {
+      QModelIndexList selectedIndexes = m_accountTree->selectionModel()->selectedIndexes();
+      if (!selectedIndexes.empty()) {
+        QVariant data = m_accountTree->model()->data(selectedIndexes.front(), AccountsModel::AccountRole);
+        if (data.isValid()) {
+          emit selectObject(data.value<MyMoneyAccount>());
+        }
+      }
     }
     break;
 
@@ -241,9 +265,6 @@ void KAccountsView::slotTabCurrentChanged(QWidget* _tab)
 
 void KAccountsView::showEvent(QShowEvent * event)
 {
-  // don't forget base class implementation
-  m_accountTree->setResizeMode(Q3ListView::LastColumn);
-  m_accountTree->restoreLayout("Account View Settings");
   KAccountsViewDecl::showEvent(event);
   slotTabCurrentChanged(m_tab->currentWidget());
 }
@@ -358,111 +379,12 @@ void KAccountsView::loadIconView(void)
 
 void KAccountsView::loadListView(void)
 {
-  QMap<QString, bool> isOpen;
-
-  ::timetrace("start load accounts list view");
-  // remember the id of the current selected item
-  KMyMoneyAccountTreeBaseItem *item = m_accountTree->selectedItem();
-  QString selectedItemId = (item) ? item->id() : QString();
-
-  // keep a map of all 'expanded' accounts
-  Q3ListViewItemIterator it_lvi(m_accountTree);
-  while (it_lvi.current()) {
-    item = dynamic_cast<KMyMoneyAccountTreeItem*>(it_lvi.current());
-    if (item && item->isOpen()) {
-      isOpen[item->id()] = true;
-    }
-    ++it_lvi;
-  }
-
-  // remember the upper left corner of the viewport
-  QPoint startPoint = m_accountTree->viewportToContents(QPoint(0, 0));
-
-  // turn off updates to avoid flickering during reload
-  //m_accountTree->setUpdatesEnabled(false);
-
-  // clear the current contents and recreate it
-  m_accountTree->clear();
-  m_securityMap.clear();
-  m_transactionCountMap.clear();
-
-  // make sure, the pointers are not pointing to some deleted object
-  m_assetItem = m_liabilityItem = 0;
-
-  MyMoneyFile* file = MyMoneyFile::instance();
-
-  QList<MyMoneySecurity> slist = file->currencyList();
-  slist += file->securityList();
-  QList<MyMoneySecurity>::const_iterator it_s;
-  for (it_s = slist.constBegin(); it_s != slist.constEnd(); ++it_s) {
-    m_securityMap[(*it_s).id()] = *it_s;
-  }
-  m_transactionCountMap = file->transactionCountMap();
-
-  m_haveUnusedCategories = false;
-
-  // create the items
-  try {
-    const MyMoneySecurity security = file->baseCurrency();
-    m_accountTree->setBaseCurrency(security);
-
-    const MyMoneyAccount& asset = file->asset();
-    m_assetItem = new KMyMoneyAccountTreeItem(m_accountTree, asset, security, i18n("Asset"));
-    loadSubAccounts(m_assetItem, asset.accountList());
-
-    const MyMoneyAccount& liability = file->liability();
-    m_liabilityItem = new KMyMoneyAccountTreeItem(m_accountTree, liability, security, i18n("Liability"));
-    loadSubAccounts(m_liabilityItem, liability.accountList());
-
-    const MyMoneyAccount& income = file->income();
-    KMyMoneyAccountTreeItem *incomeItem = new KMyMoneyAccountTreeItem(m_accountTree, income, security, i18n("Income"));
-    m_haveUnusedCategories |= loadSubAccounts(incomeItem, income.accountList());
-
-    const MyMoneyAccount& expense = file->expense();
-    KMyMoneyAccountTreeItem *expenseItem = new KMyMoneyAccountTreeItem(m_accountTree, expense, security, i18n("Expense"));
-    m_haveUnusedCategories |= loadSubAccounts(expenseItem, expense.accountList());
-
-    if (KMyMoneyGlobalSettings::expertMode()) {
-      const MyMoneyAccount equity = file->equity();
-      KMyMoneyAccountTreeItem *equityItem = new KMyMoneyAccountTreeItem(m_accountTree, equity, security, i18n("Equity"));
-      loadSubAccounts(equityItem, equity.accountList());
-    }
-
-  } catch (MyMoneyException *e) {
-    kDebug(2) << "Problem in accounts list view: " << e->what();
-    delete e;
-  }
-
-  // scan through the list of accounts and re-expand those that were
-  // expanded and re-select the one that was probably selected before
-  it_lvi = Q3ListViewItemIterator(m_accountTree);
-  while (it_lvi.current()) {
-    item = dynamic_cast<KMyMoneyAccountTreeItem*>(it_lvi.current());
-    if (item) {
-      if (item->id() == selectedItemId)
-        m_accountTree->setSelected(item, true);
-      if (isOpen.find(item->id()) != isOpen.end())
-        item->setOpen(true);
-    }
-    ++it_lvi;
-  }
-
-  // reposition viewport
-  m_accountTree->setContentsPos(startPoint.x(), startPoint.y());
-
-  m_searchWidget->searchLine()->updateSearch(QString());
-
-  // turn updates back on
-  //m_accountTree->setUpdatesEnabled(true);
-
+  // TODO: check why is this needed here
+  m_filterProxyModel->invalidate();
   // and in case we need to show things expanded, we'll do so
-  if (KMyMoneyGlobalSettings::showAccountsExpanded())
-    m_accountTree->slotExpandAll();
-
-  // clear the current contents
-  m_securityMap.clear();
-  m_transactionCountMap.clear();
-  ::timetrace("done load accounts list view");
+  if (KMyMoneyGlobalSettings::showAccountsExpanded()) {
+    m_accountTree->expandAll();
+  }
 }
 
 bool KAccountsView::loadSubAccounts(KMyMoneyAccountTreeItem* parent, const QStringList& accountList)
@@ -528,17 +450,8 @@ void KAccountsView::slotReconcileAccount(const MyMoneyAccount& acc, const QDate&
   Q_UNUSED(reconciliationDate);
   Q_UNUSED(endingBalance);
 
-  // scan through the list of accounts and mark all non
+  // TODO: scan through the list of accounts and mark all non
   // expanded and re-select the one that was probably selected before
-  Q3ListViewItemIterator it_lvi(m_accountTree);
-  KMyMoneyAccountTreeItem* item;
-  while (it_lvi.current()) {
-    item = dynamic_cast<KMyMoneyAccountTreeItem*>(it_lvi.current());
-    if (item) {
-      item->setReconciliation(false);
-    }
-    ++it_lvi;
-  }
 
   // scan trough the icon list and do the same thing
   KMyMoneyAccountIconItem* icon = dynamic_cast<KMyMoneyAccountIconItem*>(m_accountIcons->firstItem());
@@ -549,17 +462,8 @@ void KAccountsView::slotReconcileAccount(const MyMoneyAccount& acc, const QDate&
   m_reconciliationAccount = acc;
 
   if (!acc.id().isEmpty()) {
-    // scan through the list of accounts and mark
+    // TODO: scan through the list of accounts and mark
     // the one that is currently reconciled
-    it_lvi = Q3ListViewItemIterator(m_accountTree);
-    while (it_lvi.current()) {
-      item = dynamic_cast<KMyMoneyAccountTreeItem*>(it_lvi.current());
-      if (item && item->itemObject().id() == acc.id()) {
-        item->setReconciliation(true);
-        break;
-      }
-      ++it_lvi;
-    }
 
     // scan trough the icon list and do the same thing
     icon = dynamic_cast<KMyMoneyAccountIconItem*>(m_accountIcons->firstItem());
@@ -572,13 +476,8 @@ void KAccountsView::slotReconcileAccount(const MyMoneyAccount& acc, const QDate&
   }
 }
 
-void KAccountsView::slotUpdateNetWorth(void)
+void KAccountsView::slotNetWorthChanged(const MyMoneyMoney &netWorth)
 {
-  if (!m_assetItem || !m_liabilityItem)
-    return;
-
-  MyMoneyMoney netWorth = m_assetItem->totalValue() - m_liabilityItem->totalValue();
-
   QString s(i18n("Net Worth: "));
 
   // FIXME figure out how to deal with the approximate

@@ -95,6 +95,12 @@ public:
 
   void load();
 
+signals:
+  /**
+    * Emit this signal when the net worth based on the value of the loaded accounts is changed.
+    */
+  void netWorthChanged(const MyMoneyMoney &);
+
 private:
   AccountsModel(QObject *parent = 0);
 

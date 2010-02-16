@@ -83,6 +83,16 @@ void KMyMoneyAccountTreeView::customContextMenuRequested(const QPoint &pos)
   }
 }
 
+void KMyMoneyAccountTreeView::currentChanged(const QModelIndex &current, const QModelIndex &previous)
+{
+  QTreeView::currentChanged(current, previous);
+
+  QVariant data = model()->data(current, AccountsModel::AccountRole);
+  if (data.isValid()) {
+    emit selectObject(data.value<MyMoneyAccount>());
+  }
+}
+
 class AccountsViewFilterProxyModel::Private
 {
 public:

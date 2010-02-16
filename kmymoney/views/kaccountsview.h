@@ -31,6 +31,8 @@
 #include <mymoneyaccount.h>
 #include <kmymoneyaccounttree.h>
 #include <mymoneyutils.h>
+#include "accountsmodel.h"
+
 class K3ListViewSearchLineWidget;
 
 #include "ui_kaccountsviewdecl.h"
@@ -81,7 +83,7 @@ private:
 };
 
 
-
+class KMyMoneyAccountTreeView;
 
 /**
   * This class implements the accounts hierarchical and iconic 'view'.
@@ -152,7 +154,7 @@ protected:
   QString point(const QPoint& val) const;
 
 protected slots:
-  void slotUpdateNetWorth(void);
+  void slotNetWorthChanged(const MyMoneyMoney &);
   void slotTabCurrentChanged(QWidget*);
   void slotSelectIcon(Q3IconViewItem* item);
   void slotOpenContext(Q3IconViewItem* item);
@@ -200,14 +202,11 @@ private:
   KMyMoneyAccountTreeItem*            m_assetItem;
   KMyMoneyAccountTreeItem*            m_liabilityItem;
 
-  /**
-   * Search widget for the list
-   */
-  K3ListViewSearchLineWidget*  m_searchWidget;
-
   /// set if a view needs to be reloaded during show()
   bool                                m_needReload[MaxViewTabs];
   bool                                m_haveUnusedCategories;
+
+  AccountsFilterProxyModel            *m_filterProxyModel;
 };
 
 #endif
