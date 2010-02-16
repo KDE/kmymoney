@@ -62,6 +62,9 @@ IncludeFile=kmymoneycombo.h
 
 [KAccountTemplateSelector]
 
+[KMyMoneyAccountTreeView]
+ToolTip=The KMyMoney model/view based widget that displays accounts
+
 # deprecated will be removed at some point in time
 
 [KMyMoneyAccountCombo]
