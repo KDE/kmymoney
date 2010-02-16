@@ -176,3 +176,5 @@ void AccountsViewFilterProxyModel::expanded(const QModelIndex &index)
     d->markAccountExpanded(accountId.toString());
   }
 }
+
+#include "kmymoneyaccounttreeview.moc"
