@@ -33,6 +33,7 @@
 
 struct Models::Private
 {
+  Private() : m_accountsModel(0) {}
   AccountsModel *m_accountsModel;
 };
 
