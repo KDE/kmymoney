@@ -3932,22 +3932,25 @@ const QHash<QString, MyMoneyKeyValueContainer> MyMoneyStorageSql::readKeyValuePa
   QHash<QString, MyMoneyKeyValueContainer> retval;
 
   MyMoneySqlQuery q(const_cast <MyMoneyStorageSql*>(this));
-  QString query("SELECT kvpId, kvpKey, kvpData from kmmKeyValuePairs where kvpType = :type");
 
+  QString idList;
   if (!kvpIdList.empty()) {
-    query += QString(" and kvpId IN ('%1')").arg(kvpIdList.join("', '"));
+    idList = QString(" and kvpId IN ('%1')").arg(kvpIdList.join("', '"));
   }
 
-  query += " order by kvpId;";
+  QString query = QString("SELECT kvpId, kvpKey, kvpData from kmmKeyValuePairs where kvpType = :type %1 order by kvpId;").arg(idList);
+
   q.prepare(query);
   q.bindValue(":type", kvpType);
   if (!q.exec()) throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("reading Kvp List for %1").arg(kvpType)));
+
   // Reserve enough space for all values.
   retval.reserve(kvpIdList.size());
 
   // The loop below is designed to limit the number of calls to
   // QHash::operator[] in order to speed up calls to this function. This
   // assumes that QString::operator== is faster.
+/*
   if (q.next()) {
     QString oldkey = q.value(0).toString();
     MyMoneyKeyValueContainer& kvpc = retval[oldkey];
@@ -3962,7 +3965,10 @@ const QHash<QString, MyMoneyKeyValueContainer> MyMoneyStorageSql::readKeyValuePa
       kvpc.setValue(q.value(1).toString(), q.value(2).toString());
     }
   }
-
+*/
+  while (q.next()) {
+    retval[q.value(0).toString()].setValue(q.value(1).toString(), q.value(2).toString());
+  }
   return (retval);
 }
 

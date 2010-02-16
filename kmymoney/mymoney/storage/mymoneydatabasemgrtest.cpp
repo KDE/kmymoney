@@ -219,6 +219,7 @@ void MyMoneyDatabaseMgrTest::testNewAccount()
 
   a.setName("AccountName");
   a.setNumber("AccountNumber");
+  a.setValue("Key", "Value");
 
   m->addAccount(a);
 
@@ -228,6 +229,7 @@ void MyMoneyDatabaseMgrTest::testNewAccount()
   CPPUNIT_ASSERT(accList.count() == 1);
   CPPUNIT_ASSERT((*(accList.begin())).name() == "AccountName");
   CPPUNIT_ASSERT((*(accList.begin())).id() == "A000001");
+  CPPUNIT_ASSERT((*(accList.begin())).value("Key") == "Value");
 }
 
 void MyMoneyDatabaseMgrTest::testAccount()
@@ -428,6 +430,7 @@ void MyMoneyDatabaseMgrTest::testModifyAccount()
     MyMoneyAccount b = m->account("A000001");
     CPPUNIT_ASSERT(b.parentAccountId() == a.parentAccountId());
     CPPUNIT_ASSERT(b.name() == "New account name");
+    CPPUNIT_ASSERT(b.value("Key") == "Value");
   } catch (MyMoneyException *e) {
     unexpectedException(e);
   }
@@ -523,6 +526,7 @@ void MyMoneyDatabaseMgrTest::testReparentAccount()
 
   in.setName("Salary");
   ch.setName("My checkings account");
+  ch.setValue("Key", "Value");
 
   try {
     m->addAccount(ex1);
@@ -538,6 +542,7 @@ void MyMoneyDatabaseMgrTest::testReparentAccount()
     CPPUNIT_ASSERT(ex4.id() == "A000004");
     CPPUNIT_ASSERT(in.id() == "A000005");
     CPPUNIT_ASSERT(ch.id() == "A000006");
+    CPPUNIT_ASSERT(ch.value("Key") == "Value");
 
     MyMoneyAccount parent = m->expense();
 
@@ -551,6 +556,7 @@ void MyMoneyDatabaseMgrTest::testReparentAccount()
 
     parent = m->asset();
     m->addAccount(parent, ch);
+    CPPUNIT_ASSERT(ch.value("Key") == "Value");
 
     MyMoneyFile::instance()->preloadCache();
     CPPUNIT_ASSERT(m->expense().accountCount() == 3);
@@ -606,10 +612,14 @@ void MyMoneyDatabaseMgrTest::testAddTransactions()
 
   m->setDirty();
   try {
+    ch = m->account("A000006");
+    CPPUNIT_ASSERT(ch.value("Key") == "Value");
     m->addTransaction(t1);
     CPPUNIT_ASSERT(t1.id() == "T000000000000000001");
     CPPUNIT_ASSERT(t1.splitCount() == 2);
     CPPUNIT_ASSERT(m->transactionCount() == 1);
+    ch = m->account("A000006");
+    CPPUNIT_ASSERT(ch.value("Key") == "Value");
   } catch (MyMoneyException *e) {
     unexpectedException(e);
   }
@@ -673,6 +683,7 @@ void MyMoneyDatabaseMgrTest::testAddTransactions()
     CPPUNIT_ASSERT(it_t == transactionList.constEnd());
 
     ch = m->account("A000006");
+    CPPUNIT_ASSERT(ch.value("Key") == "Value");
 
     // check that the account's transaction list is updated
     QList<MyMoneyTransaction> list;
@@ -889,6 +900,9 @@ void MyMoneyDatabaseMgrTest::testModifyTransaction()
   // just modify simple stuff (splits)
   CPPUNIT_ASSERT(t.splitCount() == 4);
 
+  ch = m->account("A000006");
+  CPPUNIT_ASSERT(ch.value("Key") == "Value");
+
   s = t.splits()[0];
   s.setShares(MyMoneyMoney(11000));
   s.setValue(MyMoneyMoney(11000));
@@ -899,12 +913,16 @@ void MyMoneyDatabaseMgrTest::testModifyTransaction()
   s.setShares(MyMoneyMoney(-12600));
   s.setValue(MyMoneyMoney(-12600));
   t.modifySplit(s);
+  ch = m->account("A000006");
+  CPPUNIT_ASSERT(ch.value("Key") == "Value");
 
   try {
     CPPUNIT_ASSERT(m->balance("A000004", QDate()) == MyMoneyMoney(10000));
     CPPUNIT_ASSERT(m->balance("A000006", QDate()) == MyMoneyMoney(100000 - 11600));
     CPPUNIT_ASSERT(m->totalBalance("A000001", QDate()) == MyMoneyMoney(1600));
     m->modifyTransaction(t);
+    ch = m->account("A000006");
+    CPPUNIT_ASSERT(ch.value("Key") == "Value");
     CPPUNIT_ASSERT(m->balance("A000004", QDate()) == MyMoneyMoney(11000));
     CPPUNIT_ASSERT(m->balance("A000006", QDate()) == MyMoneyMoney(100000 - 12600));
     CPPUNIT_ASSERT(m->totalBalance("A000001", QDate()) == MyMoneyMoney(1600));
@@ -915,6 +933,8 @@ void MyMoneyDatabaseMgrTest::testModifyTransaction()
   // now modify the date
   t.setPostDate(QDate(2002, 5, 11));
   try {
+    ch = m->account("A000006");
+    CPPUNIT_ASSERT(ch.value("Key") == "Value");
     m->modifyTransaction(t);
     CPPUNIT_ASSERT(m->balance("A000004", QDate()) == MyMoneyMoney(11000));
     CPPUNIT_ASSERT(m->balance("A000006", QDate()) == MyMoneyMoney(100000 - 12600));
@@ -937,6 +957,7 @@ void MyMoneyDatabaseMgrTest::testModifyTransaction()
     CPPUNIT_ASSERT(it_t == transactionList.constEnd());
 
     ch = m->account("A000006");
+    CPPUNIT_ASSERT(ch.value("Key") == "Value");
 
     // check that the account's transaction list is updated
     QList<MyMoneyTransaction> list;
