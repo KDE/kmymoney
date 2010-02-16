@@ -147,7 +147,7 @@ bool AccountsViewFilterProxyModel::filterAcceptsRow(int source_row, const QModel
 {
   if (!source_parent.isValid() && source_row == 0) {
     QVariant data = sourceModel()->data(sourceModel()->index(source_row, 0, source_parent), AccountsModel::AccountIdRole);
-    if (data.isValid() && data.toString() == "Favorites")
+    if (data.isValid() && data.toString() == AccountsModel::favoritesAccountId)
       return false;
   }
   return AccountsFilterProxyModel::filterAcceptsRow(source_row, source_parent);

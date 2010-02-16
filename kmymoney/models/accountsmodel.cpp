@@ -301,6 +301,8 @@ public:
   MyMoneyFile* m_file;
 };
 
+const QString AccountsModel::favoritesAccountId("Favorites");
+
 /**
   * The constructor is private so that only the @ref Models object can create such an object.
   */
@@ -355,11 +357,11 @@ void AccountsModel::load()
   QStandardItem *rootItem = invisibleRootItem();
 
   // Favorite accounts
-  QStandardItem *favoriteAccountsItem = d->itemFromAccountId(rootItem, "Favorites");
+  QStandardItem *favoriteAccountsItem = d->itemFromAccountId(rootItem, favoritesAccountId);
   if (!favoriteAccountsItem) {
     favoriteAccountsItem = new QStandardItem(i18n("Favorites"));
     rootItem->appendRow(favoriteAccountsItem);
-    setData(favoriteAccountsItem->index(), QVariant("Favorites"), AccountIdRole);
+    setData(favoriteAccountsItem->index(), favoritesAccountId, AccountIdRole);
     setData(favoriteAccountsItem->index(), 0, DisplayOrderRole);
     favoriteAccountsItem->setColumnCount(columnCount());
     favoriteAccountsItem->setIcon(QIcon(DesktopIcon("account")));
@@ -541,26 +543,18 @@ void AccountsFilterProxyModel::addAccountGroup(MyMoneyAccount::accountTypeE grou
     d->m_typeList << MyMoneyAccount::MoneyMarket;
     d->m_typeList << MyMoneyAccount::Asset;
     d->m_typeList << MyMoneyAccount::Currency;
-    invalidateFilter();
-
   } else if (group == MyMoneyAccount::Liability) {
     d->m_typeList << MyMoneyAccount::CreditCard;
     d->m_typeList << MyMoneyAccount::Loan;
     d->m_typeList << MyMoneyAccount::Liability;
-    invalidateFilter();
-
   } else if (group == MyMoneyAccount::Income) {
     d->m_typeList << MyMoneyAccount::Income;
-    invalidateFilter();
-
   } else if (group == MyMoneyAccount::Expense) {
     d->m_typeList << MyMoneyAccount::Expense;
-    invalidateFilter();
-
   } else if (group == MyMoneyAccount::Equity) {
     d->m_typeList << MyMoneyAccount::Equity;
-    invalidateFilter();
   }
+  invalidateFilter();
 }
 
 /**

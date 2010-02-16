@@ -86,6 +86,11 @@ public:
     LastColumnMarker
   };
 
+  /**
+    * The account id used by this model for the 'Favorites' top level item. This can be used to identify that item on the @ref AccountIdRole.
+    */
+  static const QString favoritesAccountId;
+
   ~AccountsModel();
 
   void load();
