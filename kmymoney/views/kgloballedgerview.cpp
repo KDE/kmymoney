@@ -839,6 +839,7 @@ void KGlobalLedgerView::loadAccounts(void)
     } catch (MyMoneyException *e) {
       delete e;
       m_account = MyMoneyAccount();
+      return;
     }
   }
 
@@ -850,7 +851,7 @@ void KGlobalLedgerView::loadAccounts(void)
   if (m_account.id().isEmpty()) {
     // find the first favorite account
     QModelIndexList list = Models::instance()->accountsModel()->match(Models::instance()->accountsModel()->index(0, 0),
-                                                                      AccountsModel::AccountFavoriteRole, 
+                                                                      AccountsModel::AccountFavoriteRole,
                                                                       QVariant(true),
                                                                       1,
                                                                       Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));

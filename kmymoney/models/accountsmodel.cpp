@@ -366,9 +366,6 @@ void AccountsModel::load()
 
   QStandardItem *rootItem = invisibleRootItem();
 
-  QStandardItem *assetAccountsItem = 0;
-  QStandardItem *liabilityAccountsItem = 0;
-
   // Favorite accounts
   QStandardItem *favoriteAccountsItem = d->itemFromAccountId(rootItem, favoritesAccountId);
   if (!favoriteAccountsItem) {
@@ -435,16 +432,6 @@ void AccountsModel::load()
       accountsItem->setEditable(false);
     }
 
-    if ((mask & KMyMoneyUtils::asset) != 0) {
-      // Asset accounts
-      assetAccountsItem = accountsItem;
-    }
-
-    if ((mask & KMyMoneyUtils::liability) != 0) {
-      // Liability accounts
-      liabilityAccountsItem = accountsItem;
-    }
-
     QStringList list = account.accountList();
 
     for (QStringList::ConstIterator it_l = list.constBegin(); it_l != list.constEnd(); ++it_l) {
@@ -478,21 +465,49 @@ void AccountsModel::load()
 
   // run cleanup procedure
   list = match(index(0, 0), AccountsModel::CleanupRole, true, -1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchRecursive));
+  QModelIndexList parentsOnlyList;
   foreach(QModelIndex index, list) {
+    bool hasParentInTheList = false;
+    QModelIndex parent = index.parent();
+    while (parent.isValid()) {
+      if (list.contains(parent)) {
+        hasParentInTheList = true;
+        break;
+      }
+      parent = parent.parent();
+    }
+    if (!hasParentInTheList) {
+      parentsOnlyList.append(index);
+    }
+  }
+  foreach(QModelIndex index, parentsOnlyList) {
     removeRow(index.row(), index.parent());
   }
 
-  if (assetAccountsItem && liabilityAccountsItem) {
-    QVariant assetValue = assetAccountsItem->data(AccountsModel::AccountTotalValueRole);
-    QVariant liabilityValue = liabilityAccountsItem->data(AccountsModel::AccountTotalValueRole);
+  QModelIndexList assetList = match(index(0, 0),
+                                    AccountsModel::AccountIdRole,
+                                    MyMoneyFile::instance()->asset().id(),
+                                    1,
+                                    Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive));
+
+  QModelIndexList liabilityList = match(index(0, 0),
+                                        AccountsModel::AccountIdRole,
+                                        MyMoneyFile::instance()->liability().id(),
+                                        1,
+                                        Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive));
+
+  MyMoneyMoney netWorth(0);
+  if (!assetList.isEmpty() && !liabilityList.isEmpty()) {
+    QVariant assetValue = data(assetList.front(), AccountsModel::AccountTotalValueRole);
+    QVariant liabilityValue = data(liabilityList.front(), AccountsModel::AccountTotalValueRole);
 
     if (assetValue.isValid() && liabilityValue.isValid()) {
-      MyMoneyMoney netWorth = assetValue.value<MyMoneyMoney>() - liabilityValue.value<MyMoneyMoney>();
-      if (d->m_lastNetWorth != netWorth) {
-        d->m_lastNetWorth = netWorth;
-        emit netWorthChanged(d->m_lastNetWorth);
-      }
+      netWorth = assetValue.value<MyMoneyMoney>() - liabilityValue.value<MyMoneyMoney>();
     }
+  }
+  if (d->m_lastNetWorth != netWorth) {
+    d->m_lastNetWorth = netWorth;
+    emit netWorthChanged(d->m_lastNetWorth);
   }
 }
 
