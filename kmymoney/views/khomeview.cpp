@@ -449,10 +449,7 @@ void KHomeView::showPayments(void)
         //if nextDueDate is still currentDate then remove it from scheduled payments
         if ((*t_it).nextDueDate() == QDate::currentDate()) {
           t_it = schedule.erase(t_it);
-
-          //break it that was the last schedule
-          if (t_it == schedule.end())
-            break;
+          continue;
         }
       }
       ++t_it;
