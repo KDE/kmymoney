@@ -20,8 +20,8 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
-
-class K3ListViewItem;
+#include <QTreeWidget>
+#include <QTreeWidgetItem>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -45,7 +45,7 @@ class Currency : public CurrencyDecl
   Q_OBJECT
 public:
   Currency(QWidget* parent = 0);
-  Q3ListViewItem* insertCurrency(const MyMoneySecurity& sec);
+  QTreeWidgetItem* insertCurrency(const MyMoneySecurity& sec);
   void selectCurrency(const MyMoneySecurity& sec);
   QString selectedCurrency(void) const;
 };

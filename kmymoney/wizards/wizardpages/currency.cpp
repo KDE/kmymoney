@@ -20,6 +20,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -33,32 +34,36 @@ Currency::Currency(QWidget* parent) :
     CurrencyDecl(parent)
 {
   m_currencyList->setAllColumnsShowFocus(true);
-  m_currencyList->setMultiSelection(false);
+  //m_currencyList->setMultiSelection(false);
 }
 
-Q3ListViewItem* Currency::insertCurrency(const MyMoneySecurity& sec)
+QTreeWidgetItem* Currency::insertCurrency(const MyMoneySecurity& sec)
 {
-  return new K3ListViewItem(m_currencyList, sec.name(), QString(sec.id()), sec.tradingSymbol());
+  QStringList item = QStringList();
+  item.append(sec.name());
+  item.append(QString(sec.id()));
+  item.append(sec.tradingSymbol());
+
+  return new QTreeWidgetItem(m_currencyList, item);
 }
 
 void Currency::selectCurrency(const MyMoneySecurity& sec)
 {
-  Q3ListViewItem* it_v;
-  Q3ListViewItemIterator it(m_currencyList);
-  while ((it_v = it.current()) != 0) {
-    if (it_v->text(1) == QString(sec.id())) {
-      m_currencyList->setSelected(it_v, true);
-      m_currencyList->ensureItemVisible(it_v);
-      break;
-    }
+  QList<QTreeWidgetItem*> selectedItems = m_currencyList->findItems(sec.id(),Qt::MatchExactly, 1);
+  QList<QTreeWidgetItem*>::iterator itemIt = selectedItems.begin();
+  while(itemIt != selectedItems.end()) {
+    (*itemIt)->setSelected(true);
+    m_currencyList->scrollToItem(*itemIt);
   }
 }
+
 
 QString Currency::selectedCurrency(void) const
 {
   QString id;
-  if (m_currencyList->selectedItem()) {
-    id = m_currencyList->selectedItem()->text(1);
+
+  if (m_currencyList->selectedItems().size() > 0) {
+    id = m_currencyList->selectedItems().at(0)->text(1);
   }
   return id;
 }

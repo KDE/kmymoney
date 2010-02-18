@@ -23,7 +23,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QPixmap>
+#include <QIcon>
 #include <QBitmap>
 #include <QCheckBox>
 #include <QPushButton>
@@ -34,6 +34,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KIcon>
 #include <klocale.h>
 #include <k3listview.h>
 #include <kstandarddirs.h>
@@ -227,7 +228,7 @@ CurrencyPage::CurrencyPage(Wizard* wizard) :
     Currency(wizard),
     WizardPage<Wizard>(stepCount++, this, wizard)
 {
-  Q3ListViewItem *first = 0;
+  QTreeWidgetItem *first = 0;
   QList<MyMoneySecurity> list = MyMoneyFile::instance()->currencyList();
   QList<MyMoneySecurity>::const_iterator it;
 
@@ -236,31 +237,29 @@ CurrencyPage::CurrencyPage(Wizard* wizard) :
 
   QString baseCurrency = MyMoneyFile::instance()->baseCurrency().id();
 
-  // construct a transparent 16x16 pixmap
-  QPixmap empty(16, 16);
-  QBitmap mask(16, 16);
-  mask.clear();
-  empty.setMask(mask);
 
   m_currencyList->clear();
   for (it = list.constBegin(); it != list.constEnd(); ++it) {
-    Q3ListViewItem* p = insertCurrency(*it);
+    QTreeWidgetItem* p = insertCurrency(*it);
     if ((*it).id() == baseCurrency) {
       first = p;
-      p->setPixmap(0, QPixmap(KStandardDirs::locate("icon", "hicolor/16x16/apps/kmymoney.png")));
+      QIcon icon = static_cast<QIcon>(KIcon("account"));
+      p->setIcon(0, icon);
     } else {
-      p->setPixmap(0, empty);
+      p->setIcon(0, QIcon());
     }
     if (!first && (*it).id() == localCurrency)
       first = p;
   }
 
+  QTreeWidgetItemIterator itemsIt = QTreeWidgetItemIterator(m_currencyList, QTreeWidgetItemIterator::All);
+
   if (first == 0)
-    first = m_currencyList->firstChild();
+    first = *itemsIt;
   if (first != 0) {
     m_currencyList->setCurrentItem(first);
-    m_currencyList->setSelected(first, true);
-    m_currencyList->ensureItemVisible(first);
+    //m_currencyList->setSelected(first, true);
+    //m_currencyList->ensureItemVisible(first);
   }
 }
 

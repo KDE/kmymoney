@@ -22,52 +22,23 @@
         </widget>
       </item>
       <item>
-        <widget class="K3ListView" name="m_currencyList">
-          <property name="sizePolicy">
-            <sizepolicy>
-              <hsizetype>7</hsizetype>
-              <vsizetype>7</vsizetype>
-              <horstretch>0</horstretch>
-              <verstretch>1</verstretch>
-            </sizepolicy>
-          </property>
-          <property name="fullWidth">
-            <bool>true</bool>
-          </property>
-          <column>
-            <property name="text">
-              <string>Name</string>
-            </property>
-            <property name="clickable">
-              <bool>true</bool>
-            </property>
-            <property name="resizable">
-              <bool>true</bool>
-            </property>
-          </column>
-          <column>
-            <property name="text">
-              <string>ISO Code</string>
-            </property>
-            <property name="clickable">
-              <bool>true</bool>
-            </property>
-            <property name="resizable">
-              <bool>true</bool>
-            </property>
-          </column>
-          <column>
-            <property name="text">
-              <string>Symbol</string>
-            </property>
-            <property name="clickable">
-              <bool>true</bool>
-            </property>
-            <property name="resizable">
-              <bool>true</bool>
-            </property>
-          </column>
-        </widget>
+      <widget class="QTreeWidget" name="m_currencyList">
+       <column>
+        <property name="text">
+         <string>Name</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>ISO Code</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Symbol</string>
+        </property>
+       </column>
+      </widget>
       </item>
       <item>
         <spacer name="spacer1">
@@ -88,11 +59,4 @@
     </layout>
   </widget>
   <layoutdefault spacing="6" margin="11"/>
-    <customwidgets>
-    <customwidget>
-      <class>K3ListView</class>
-      <extends>Q3ListView</extends>
-      <header location="global">k3listview.h</header>
-    </customwidget>
-  </customwidgets>
 </ui>
