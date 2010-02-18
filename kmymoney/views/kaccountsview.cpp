@@ -164,6 +164,7 @@ KAccountsView::KAccountsView(QWidget *parent) :
   m_filterProxyModel->addAccountGroup(MyMoneyAccount::Liability);
   m_filterProxyModel->addAccountGroup(MyMoneyAccount::Income);
   m_filterProxyModel->addAccountGroup(MyMoneyAccount::Expense);
+  m_filterProxyModel->addAccountGroup(MyMoneyAccount::Equity);
   m_filterProxyModel->setSourceModel(Models::instance()->accountsModel());
   m_filterProxyModel->setFilterKeyColumn(-1);
 

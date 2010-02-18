@@ -654,7 +654,12 @@ bool AccountsFilterProxyModel::acceptSourceItem(const QModelIndex &source) const
       if ((hideClosedAccounts() && account.isClosed()))
         return false;
 
+      // we hide stock accounts if not in expert mode
       if (account.isInvest() && !KMyMoneyGlobalSettings::expertMode())
+        return false;
+
+      // we hide equity accounts if not in expert mode
+      if (account.accountType() == MyMoneyAccount::Equity && !KMyMoneyGlobalSettings::expertMode())
         return false;
 
       if (d->m_typeList.contains(account.accountType()))
