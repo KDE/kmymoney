@@ -86,7 +86,7 @@ public:
 
 protected slots:
   void activated(int index);
-  void editTextChanged(const QString &);
+  void editTextChanged(const QString &text);
 
 protected:
   /**

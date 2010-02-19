@@ -117,9 +117,12 @@ void KMyMoneyMVCCombo::activated(int index)
   * edit text since when navigating between the completions the edit text 
   * changes to the current completion making all other completions disappear.
   */
-void KMyMoneyMVCCombo::editTextChanged(const QString &)
+void KMyMoneyMVCCombo::editTextChanged(const QString &text)
 {
-  if (m_filterProxyModel && completer()) {
+  if(text.isEmpty()) {
+    setCurrentIndex(0);
+    clearEditText();
+  } else if (m_filterProxyModel && completer()) {
     m_filterProxyModel->setFilterFixedString(completer()->completionPrefix());
   }
 }
