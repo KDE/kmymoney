@@ -249,7 +249,7 @@ public:
   const QDate& nextDueDate(void) const;
 
   /**
-    * This method adjusts returns the next due date adjusted
+    * This method returns the next due date adjusted
     * according to the rules specified by the schedule's weekend option.
     *
     * @return QDate containing the adjusted next due date. If the
