@@ -622,7 +622,7 @@ void KHomeView::showPaymentEntry(const MyMoneySchedule& sched, int cnt)
         //show balance after payments
         tmp += "<td align=\"right\">";
         MyMoneyMoney payment = MyMoneyMoney((sp.value() * cnt));
-        QDate paymentDate = QDate(sched.nextDueDate());
+        QDate paymentDate = QDate(sched.adjustedNextDueDate());
         MyMoneyMoney balanceAfter = forecastPaymentBalance(acc, payment, paymentDate);
         QString balance = balanceAfter.formatMoney(acc, currency);
         balance.replace(QChar(' '), "&nbsp;");
