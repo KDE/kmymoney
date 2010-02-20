@@ -20,6 +20,18 @@ SET(kmymoney_STAT_HEADERS
   kmymoney_export.h
   )
 
+########### Shared widget library ###########
+SET(kmm_widgets_sources
+  kmymoneydateinput.cpp
+  )
+
+KDE4_ADD_LIBRARY(kmm_widgets SHARED ${kmm_widgets_sources})
+TARGET_LINK_LIBRARIES(kmm_widgets ${KDE4_KDEUI_LIBS} ${QT_QTGUI_LIBRARY} ${QT_QTCORE_LIBRARY} ${KDE4_KDECORE_LIBS})
+SET_TARGET_PROPERTIES(kmm_widgets PROPERTIES
+   COMPILE_FLAGS "-DKMM_BUILD_WIDGETS_LIB"
+   VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
+INSTALL(TARGETS kmm_widgets ${INSTALL_TARGETS_DEFAULT_ARGS} )
+
 ########### Basic Widget Library (kmymoney_base) STATIC #################
 
 # Common sources for libkmymoney.so and libwidgets.a that do not
@@ -38,7 +50,6 @@ SET(_uncritial_common_sources
   kmymoneymvccombo.cpp
   kmymoneycompletion.cpp
   kmymoneycurrencyselector.cpp
-  kmymoneydateinput.cpp
   kmymoneydatetbl.cpp
   kmymoneyedit.cpp
   kmymoneylineedit.cpp

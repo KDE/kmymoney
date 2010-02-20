@@ -26,6 +26,7 @@ TARGET_LINK_LIBRARIES(kmm_kbanking
                       kmm_kbanking_dialogs
                       kmm_kbanking_views
                       kmm_kbanking_widgets
+                      kmm_widgets
                       kmm_plugin
                       ${KDE4_KDEUI_LIBS}
                       ${KDE4_KDE3SUPPORT_LIBS}

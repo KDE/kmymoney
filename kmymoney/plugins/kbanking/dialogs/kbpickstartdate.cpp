@@ -1,4 +1,5 @@
 /***************************************************************************
+ *   Copyright 2009  Thomas Baumgart ipwizard@users.sourceforge.net        *
  *   Copyright 2009  Cristian Onet onet.cristian@gmail.com                 *
  *   Copyright 2004  Martin Preuss aquamaniac@users.sourceforge.net        *
  *                                                                         *
@@ -32,7 +33,6 @@
 // QT includes
 #include <qradiobutton.h>
 #include <qlabel.h>
-#include <q3buttongroup.h>
 #include <qdatetime.h>
 
 // KDE includes
@@ -59,6 +59,11 @@ KBPickStartDate::KBPickStartDate(QBanking *qb,
 {
   setupUi(this);
   setModal(modal);
+
+  buttonOk->setGuiItem(KStandardGuiItem::ok());
+  buttonCancel->setGuiItem(KStandardGuiItem::cancel());
+  buttonHelp->setGuiItem(KStandardGuiItem::help());
+
   QObject::connect(buttonHelp, SIGNAL(clicked()),
                    this, SLOT(slotHelpClicked()));
   label->setText(i18n("<qt><p>Please select the first date for which transactions are to be retrieved from <b>%1</b>.</p><p>If you specify no date then the bank will choose one.</p></qt>", accountName));
