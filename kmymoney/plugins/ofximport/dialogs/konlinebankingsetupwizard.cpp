@@ -28,7 +28,7 @@
 #include <QRegExp>
 #include <QCheckBox>
 #include <QTabWidget>
-#include <Q3TextStream>
+#include <QTextStream>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -54,7 +54,7 @@ class KOnlineBankingSetupWizard::Private
 {
 public:
   QFile       m_fpTrace;
-  Q3TextStream m_trace;
+  QTextStream m_trace;
 };
 
 KOnlineBankingSetupWizard::KOnlineBankingSetupWizard(QWidget *parent):
@@ -198,6 +198,9 @@ bool KOnlineBankingSetupWizard::finishFiPage(void)
     m_textDetails->append(message);
     result = true;
   }
+  // make sure to display the beginning of the collected information
+  m_textDetails->moveCursor(QTextCursor::Start);
+
   return result;
 }
 
@@ -238,14 +241,9 @@ bool KOnlineBankingSetupWizard::finishLoginPage(void)
     strncpy(fi.header_version, hver.toLatin1(), OFX_HEADERVERSION_LENGTH - 1);
 #endif
 
-    // who owns this memory?!?!
-    char* request = libofx_request_accountinfo(&fi);
-
     KUrl filename(QString("%1response.ofx").arg(KStandardDirs::locateLocal("appdata", "")));
-    QByteArray req;
-    req.fromRawData(request, strlen(request));
+    QByteArray req(libofx_request_accountinfo(&fi));
     OfxHttpsRequest(QString("POST"), KUrl((*m_it_info).url), req, QMap<QString, QString>(), filename, true);
-    req.clear();
 
     LibofxContextPtr ctx = libofx_get_new_context();
     Q_CHECK_PTR(ctx);

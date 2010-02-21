@@ -29,6 +29,7 @@
 // KDE Includes
 
 class KTemporaryFile;
+class KJob;
 
 namespace KIO
 {
@@ -71,7 +72,7 @@ signals:
   void statementReady(const QString& fname);
 
 protected slots:
-  void slotOfxFinished(KIO::Job*);
+  void slotOfxFinished(KJob*);
   void slotOfxData(KIO::Job*, const QByteArray&);
   void slotOfxConnected(KIO::Job*);
   virtual void reject(void);
@@ -80,15 +81,15 @@ protected:
   void setStatus(const QString& _status);
   void setDetails(const QString& _details);
 
-  KTemporaryFile* m_tmpfile;
-  MyMoneyOfxConnector m_connector;
-  KIO::TransferJob* m_job;
-
 private:
   /// \internal d-pointer class.
   class Private;
   /// \internal d-pointer instance.
   Private* const d;
+
+  KTemporaryFile* m_tmpfile;
+  MyMoneyOfxConnector m_connector;
+  KIO::TransferJob* m_job;
 };
 
 #endif // KOFXDIRECTCONNECTDLG_H

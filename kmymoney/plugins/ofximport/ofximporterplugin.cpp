@@ -612,7 +612,7 @@ void OfxImporterPlugin::slotImportFile(const QString& url)
 {
 
   if (!import(url)) {
-    KMessageBox::error(0, QString("<qt>%1</qt>").arg(i18n("<p>Unable to import %1 using the OFX importer plugin.  The plugin returned the following error:</p><p>%2</p>", url, lastError())), i18n("Importing error"));
+    KMessageBox::error(0, QString("<qt>%1</qt>").arg(i18n("<p>Unable to import <b>'%1'</b> using the OFX importer plugin.  The plugin returned the following error:</p><p>%2</p>", url, lastError())), i18n("Importing error"));
   }
 }
 

@@ -29,6 +29,7 @@
 // KDE Includes
 
 #include <kurl.h>
+class KJob;
 namespace KIO
 {
 class Job;
@@ -91,7 +92,7 @@ public:
   }
 
 protected slots:
-  void slotOfxFinished(KIO::Job*);
+  void slotOfxFinished(KJob*);
   void slotOfxData(KIO::Job*, const QByteArray&);
   void slotOfxConnected(KIO::Job*);
 

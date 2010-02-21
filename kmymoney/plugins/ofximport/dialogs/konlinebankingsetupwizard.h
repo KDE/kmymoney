@@ -27,7 +27,7 @@
 // QT Includes
 
 #include <qwidget.h>
-#include <q3valuelist.h>
+#include <qlist.h>
 #include <q3listview.h>
 
 // ----------------------------------------------------------------------------
@@ -107,8 +107,8 @@ private:
   /// \internal d-pointer instance.
   Private* const d;
 
-  Q3ValueList<OfxFiServiceInfo> m_bankInfo;
-  Q3ValueList<OfxFiServiceInfo>::const_iterator m_it_info;
+  QList<OfxFiServiceInfo> m_bankInfo;
+  QList<OfxFiServiceInfo>::const_iterator m_it_info;
   bool m_fDone;
   bool m_fInit;
   OfxAppVersion* m_appId;

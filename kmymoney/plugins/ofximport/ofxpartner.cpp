@@ -30,17 +30,16 @@
 #include <QDateTime>
 #include <QEventLoop>
 #include <QFileInfo>
-#include <q3valuelist.h>
 #include <QApplication>
 #include <qdom.h>
 #include <QRegExp>
 #include <QDir>
-#include <q3textstream.h>
+#include <QTextStream>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-
+#include <kjob.h>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
 #include <klocale.h>
@@ -111,12 +110,12 @@ static void ParseFile(QMap<QString, QString>& result, const QString& fileName, c
 {
   QFile f(fileName);
   if (f.open(QIODevice::ReadOnly)) {
-    Q3TextStream stream(&f);
-    stream.setEncoding(Q3TextStream::Unicode);
+    QTextStream stream(&f);
+    stream.setCodec("UTF-16");
     QString msg;
     int errl, errc;
     QDomDocument doc;
-    if (doc.setContent(stream.read(), &msg, &errl, &errc)) {
+    if (doc.setContent(stream.readAll(), &msg, &errl, &errc)) {
       QDomNodeList olist = doc.elementsByTagName("prov");
       for (int i = 0; i < olist.count(); ++i) {
         QDomNode onode = olist.item(i);
@@ -253,12 +252,12 @@ OfxFiServiceInfo ServiceInfo(const QString& fipid)
 
   QFile f(guidFile.path());
   if (f.open(QIODevice::ReadOnly)) {
-    Q3TextStream stream(&f);
-    stream.setEncoding(Q3TextStream::Unicode);
+    QTextStream stream(&f);
+    stream.setCodec("UTF-16");
     QString msg;
     int errl, errc;
     QDomDocument doc;
-    if (doc.setContent(stream.read(), &msg, &errl, &errc)) {
+    if (doc.setContent(stream.readAll(), &msg, &errl, &errc)) {
       QString fid = extractNodeText(doc, "ProviderSettings/FID");
       QString org = extractNodeText(doc, "ProviderSettings/Org");
       QString url = extractNodeText(doc, "ProviderSettings/ProviderURL");
@@ -277,7 +276,9 @@ OfxFiServiceInfo ServiceInfo(const QString& fipid)
 
 bool get(const QString& request, const QMap<QString, QString>& attr, const KUrl& url, const KUrl& filename)
 {
-  QByteArray req(0);
+  Q_UNUSED(request);
+
+  QByteArray req;
   OfxHttpRequest job("GET", url, req, attr, filename, true);
 
   return job.error() == Q3Http::NoError;
@@ -285,9 +286,7 @@ bool get(const QString& request, const QMap<QString, QString>& attr, const KUrl&
 
 bool post(const QString& request, const QMap<QString, QString>& attr, const KUrl& url, const KUrl& filename)
 {
-  QByteArray req;
-  req.fill(0, request.length() + 1);
-  req.duplicate(request.toAscii(), request.length());
+  QByteArray req(request.toAscii());
 
   OfxHttpRequest job("POST", url, req, attr, filename, true);
   return job.error() == Q3Http::NoError;
@@ -305,9 +304,12 @@ OfxHttpsRequest::OfxHttpsRequest(const QString& type, const KUrl &url, const QBy
     d(new Private),
     m_dst(dst)
 {
+  Q_UNUSED(type);
+  Q_UNUSED(metaData);
+
   QDir homeDir(QDir::home());
   if (homeDir.exists("ofxlog.txt")) {
-    d->m_fpTrace.setName(QString("%1/ofxlog.txt").arg(QDir::homePath()));
+    d->m_fpTrace.setFileName(QString("%1/ofxlog.txt").arg(QDir::homePath()));
     d->m_fpTrace.open(QIODevice::WriteOnly | QIODevice::Append);
   }
 
@@ -319,12 +321,12 @@ OfxHttpsRequest::OfxHttpsRequest(const QString& type, const KUrl &url, const QBy
   m_job->addMetaData("content-type", "Content-type: application/x-ofx");
 
   if (d->m_fpTrace.isOpen()) {
-    Q3TextStream ts(&d->m_fpTrace);
+    QTextStream ts(&d->m_fpTrace);
     ts << "url: " << url.prettyUrl() << "\n";
     ts << "request:\n" << QString(postData) << "\n" << "response:\n";
   }
 
-  connect(m_job, SIGNAL(result(KIO::Job*)), this, SLOT(slotOfxFinished(KIO::Job*)));
+  connect(m_job, SIGNAL(result(KJob*)), this, SLOT(slotOfxFinished(KJob*)));
   connect(m_job, SIGNAL(data(KIO::Job*, const QByteArray&)), this, SLOT(slotOfxData(KIO::Job*, const QByteArray&)));
   connect(m_job, SIGNAL(connected(KIO::Job*)), this, SLOT(slotOfxConnected(KIO::Job*)));
 
@@ -341,14 +343,14 @@ OfxHttpsRequest::~OfxHttpsRequest()
 
 void OfxHttpsRequest::slotOfxConnected(KIO::Job*)
 {
-  m_file.setName(m_dst.path());
+  m_file.setFileName(m_dst.path());
   m_file.open(QIODevice::WriteOnly);
 }
 
 void OfxHttpsRequest::slotOfxData(KIO::Job*, const QByteArray& _ba)
 {
   if (m_file.isOpen()) {
-    Q3TextStream ts(&m_file);
+    QTextStream ts(&m_file);
     ts << QString(_ba);
 
     if (d->m_fpTrace.isOpen()) {
@@ -359,7 +361,7 @@ void OfxHttpsRequest::slotOfxData(KIO::Job*, const QByteArray& _ba)
   }
 }
 
-void OfxHttpsRequest::slotOfxFinished(KIO::Job* /* e */)
+void OfxHttpsRequest::slotOfxFinished(KJob* /* e */)
 {
   if (m_file.isOpen()) {
     m_file.close();
@@ -379,7 +381,7 @@ void OfxHttpsRequest::slotOfxFinished(KIO::Job* /* e */)
     QString details;
     QFile f(m_dst.path());
     if (f.open(QIODevice::ReadOnly)) {
-      Q3TextStream stream(&f);
+      QTextStream stream(&f);
       QString line;
       while (!stream.atEnd()) {
         details += stream.readLine(); // line of text excluding '\n'
@@ -398,6 +400,8 @@ void OfxHttpsRequest::slotOfxFinished(KIO::Job* /* e */)
 
 OfxHttpRequest::OfxHttpRequest(const QString& type, const KUrl &url, const QByteArray &postData, const QMap<QString, QString>& metaData, const KUrl& dst, bool showProgressInfo)
 {
+  Q_UNUSED(showProgressInfo);
+
   QFile f(dst.path());
   m_error = Q3Http::NoError;
   QString errorMsg;

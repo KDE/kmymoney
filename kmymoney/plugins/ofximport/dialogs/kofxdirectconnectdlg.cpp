@@ -25,12 +25,13 @@
 #include <QLabel>
 #include <QDir>
 #include <QFile>
-#include <q3textstream.h>
+#include <QTextStream>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <kurl.h>
+#include <kjob.h>
 #include <kio/job.h>
 #include <kio/jobclasses.h>
 #include <kio/jobuidelegate.h>
@@ -81,26 +82,20 @@ void KOfxDirectConnectDlg::init(void)
 #if 0
   QFile g("request.ofx");
   g.open(QIODevice::WriteOnly);
-  Q3TextStream(&g) << m_connector.url() << "\n" << QString(request);
+  QTextStream(&g) << m_connector.url() << "\n" << QString(request);
   g.close();
 #endif
 
-//FIXME: Port to KDE4
-#if 0
-
   QDir homeDir(QDir::home());
   if (homeDir.exists("ofxlog.txt")) {
-    d->m_fpTrace.setName(QString("%1/ofxlog.txt").arg(QDir::homePath()));
+    d->m_fpTrace.setFileName(QString("%1/ofxlog.txt").arg(QDir::homePath()));
     d->m_fpTrace.open(QIODevice::WriteOnly | QIODevice::Append);
   }
 
-  m_job = KIO::http_post(
-            m_connector.url(),
-            request,
-            true
-          );
+  m_job = KIO::http_post(m_connector.url(), request, KIO::HideProgressInfo);
+
   if (d->m_fpTrace.isOpen()) {
-    QByteArray data = m_connector.url().utf8();
+    QByteArray data = m_connector.url().toUtf8();
     d->m_fpTrace.write("url: ", 5);
     d->m_fpTrace.write(data, strlen(data));
     d->m_fpTrace.write("\n", 1);
@@ -111,14 +106,13 @@ void KOfxDirectConnectDlg::init(void)
   }
 
   m_job->addMetaData("content-type", "Content-type: application/x-ofx");
-  connect(m_job, SIGNAL(result(KIO::Job*)), this, SLOT(slotOfxFinished(KIO::Job*)));
+  connect(m_job, SIGNAL(result(KJob*)), this, SLOT(slotOfxFinished(KJob*)));
   connect(m_job, SIGNAL(data(KIO::Job*, const QByteArray&)), this, SLOT(slotOfxData(KIO::Job*, const QByteArray&)));
   connect(m_job, SIGNAL(connected(KIO::Job*)), this, SLOT(slotOfxConnected(KIO::Job*)));
 
   setStatus(QString("Contacting %1...").arg(m_connector.url()));
   kProgress1->setMaximum(3);
   kProgress1->setValue(1);
-#endif
 }
 
 void KOfxDirectConnectDlg::setStatus(const QString& _status)
@@ -136,12 +130,23 @@ void KOfxDirectConnectDlg::slotOfxConnected(KIO::Job*)
 {
   if (m_tmpfile) {
 //     throw new MYMONEYEXCEPTION(QString("Already connected, using %1.").arg(m_tmpfile->name()));
-    kDebug(2) << "Already connected, using " << m_tmpfile->name();
+    kDebug(2) << "Already connected, using " << m_tmpfile->fileName();
     delete m_tmpfile; //delete otherwise we mem leak
   }
   m_tmpfile = new KTemporaryFile();
+  // for debugging purposes one might want to leave the temp file around
+  // in order to achieve this, please uncomment the next line
+  // m_tmpfile->setAutoRemove(false);
+
+  // we don't check the return code here. If opening fails, we will not be
+  // able to read/parse the file and signal that to the user later on.
+  // we currently don't have a choice to interrupt the download anyway,
+  // other than dropping a line on the console
+  if(!m_tmpfile->open())
+    qWarning("Unable to open tempfile '%s' for download.", qPrintable(m_tmpfile->fileName()));
+
   setStatus("Connection established, retrieving data...");
-  setDetails(QString("Downloading data to %1...").arg(m_tmpfile->name()));
+  setDetails(QString("Downloading data to %1...").arg(m_tmpfile->fileName()));
   kProgress1->setValue(kProgress1->value() + 1);
 }
 
@@ -160,7 +165,7 @@ void KOfxDirectConnectDlg::slotOfxData(KIO::Job*, const QByteArray& _ba)
   setDetails(QString("Got %1 bytes").arg(_ba.size()));
 }
 
-void KOfxDirectConnectDlg::slotOfxFinished(KIO::Job* /* e */)
+void KOfxDirectConnectDlg::slotOfxFinished(KJob* /* e */)
 {
   kProgress1->setValue(kProgress1->value() + 1);
   setStatus("Completed.");
@@ -180,9 +185,9 @@ void KOfxDirectConnectDlg::slotOfxFinished(KIO::Job* /* e */)
     m_job->ui()->showErrorMessage();
   } else if (m_job->isErrorPage()) {
     QString details;
-    QFile f(m_tmpfile->name());
+    QFile f(m_tmpfile->fileName());
     if (f.open(QIODevice::ReadOnly)) {
-      Q3TextStream stream(&f);
+      QTextStream stream(&f);
       QString line;
       while (!stream.atEnd()) {
         details += stream.readLine(); // line of text excluding '\n'
@@ -194,11 +199,8 @@ void KOfxDirectConnectDlg::slotOfxFinished(KIO::Job* /* e */)
     KMessageBox::detailedSorry(this, i18n("The HTTP request failed."), details, i18nc("The HTTP request failed", "Failed"));
   } else if (m_tmpfile) {
 
-    emit statementReady(m_tmpfile->name());
+    emit statementReady(m_tmpfile->fileName());
 
-// TODO (Ace) unlink this file, when I'm sure this is all really working.
-// in the meantime, I'll leave the file around to assist people in debugging.
-//     m_tmpfile->unlink();
   }
   delete m_tmpfile;
   m_tmpfile = 0;
