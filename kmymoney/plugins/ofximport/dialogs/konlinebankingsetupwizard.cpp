@@ -214,8 +214,8 @@ bool KOnlineBankingSetupWizard::finishLoginPage(void)
   m_listAccount->clear();
 
   // Process an account request for each fipid
-  m_it_info = m_bankInfo.begin();
-  while (m_it_info != m_bankInfo.end()) {
+  m_it_info = m_bankInfo.constBegin();
+  while (m_it_info != m_bankInfo.constEnd()) {
     OfxFiLogin fi;
     memset(&fi, 0, sizeof(OfxFiLogin));
     strncpy(fi.fid, (*m_it_info).fid, OFX_FID_LENGTH - 1);
