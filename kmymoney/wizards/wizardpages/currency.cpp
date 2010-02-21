@@ -25,7 +25,6 @@
 // KDE Includes
 
 #include <klocale.h>
-#include <k3listview.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
