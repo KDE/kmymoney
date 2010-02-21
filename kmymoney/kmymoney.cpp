@@ -6557,8 +6557,6 @@ void KMyMoneyApp::slotAccountMapOnline(void)
       return;
     }
 
-    // We need to create a valid date in the month selected so we can find out how many days are
-    // in the month.
     provider = item->data().toString();
   }
   break;
