@@ -308,17 +308,19 @@ void KGPGFile::keyList(QStringList& list, bool secretKeys, const QString& patter
       std::vector<GpgME::UserID> userIDs = key.userIDs();
       std::vector<GpgME::Subkey> subkeys = key.subkeys();
       for (unsigned int i = 0; i < userIDs.size(); ++i) {
-        const GpgME::Subkey& skey = subkeys[i];
+        for(unsigned int j = 0; j < subkeys.size(); ++j) {
+          const GpgME::Subkey& skey = subkeys[j];
 
-        if (!(skey.isRevoked() || skey.isExpired() || skey.isInvalid()  || skey.isDisabled())) {
-          QString entry = QString("%1:%2").arg(key.shortKeyID()).arg(userIDs[i].id());
-          list += entry;
-          if (needPushBack) {
-            d->m_keys.push_back(key);
-            needPushBack = false;
+          if (skey.canEncrypt() && !(skey.isRevoked() || skey.isExpired() || skey.isInvalid()  || skey.isDisabled())) {
+            QString entry = QString("%1:%2").arg(key.shortKeyID()).arg(userIDs[i].id());
+            list += entry;
+            if (needPushBack) {
+              d->m_keys.push_back(key);
+              needPushBack = false;
+            }
+          } else {
+            // qDebug("Skip key '%s'", key.shortKeyID());
           }
-        } else {
-          // qDebug("Skip key '%s'", key.shortKeyID());
         }
       }
     }
