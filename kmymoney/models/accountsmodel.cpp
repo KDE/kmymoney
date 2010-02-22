@@ -80,7 +80,7 @@ public:
       if (acc.accountList().count() > 0) {
         loadSubAccounts(model, item, favoriteAccountsItem, acc.accountList());
       }
-      // set the account data after the childs have been loaded
+      // set the account data after the children have been loaded
       setAccountData(model, item->index(), acc);
 
       if (acc.value("PreferredAccount") == "Yes") {
@@ -91,7 +91,7 @@ public:
           item->setColumnCount(model->columnCount());
           item->setEditable(false);
         }
-        // set the account data after the childs have been loaded
+        // set the account data after the children have been loaded
         setAccountData(model, item->index(), acc);
       }
 
@@ -115,7 +115,7 @@ public:
     MyMoneyMoney accountValue = value(account, accountBalance);
     model->setData(index, QVariant::fromValue(accountValue), AccountValueRole);
     // set the total value of the account
-    MyMoneyMoney accountTotalValue = childsTotalValue(index) + accountValue;
+    MyMoneyMoney accountTotalValue = childrenTotalValue(index) + accountValue;
     model->setData(index, QVariant::fromValue(accountTotalValue), AccountTotalValueRole);
     // this account still exists so it should not be cleaned up
     model->setData(index, false, CleanupRole);
@@ -259,7 +259,7 @@ public:
     * @param index The index of the account in the model.
     * @see value
     */
-  MyMoneyMoney childsTotalValue(const QModelIndex &index)
+  MyMoneyMoney childrenTotalValue(const QModelIndex &index)
   {
     if (!index.isValid())
       return MyMoneyMoney(0);
@@ -270,7 +270,7 @@ public:
     {
       QModelIndex childIndex = model->index(i, index.column(), index);
       if (model->hasChildren(childIndex)) {
-        totalValue += childsTotalValue(childIndex);
+        totalValue += childrenTotalValue(childIndex);
       }
       QVariant data = model->data(childIndex, AccountValueRole);
       QVariant cleanup = model->data(childIndex, CleanupRole);
@@ -360,7 +360,7 @@ void AccountsModel::load()
 {
   // mark all rows as candidates fro cleaning up
   QModelIndexList list = match(index(0, 0), Qt::DisplayRole, "*", -1, Qt::MatchFlags(Qt::MatchWildcard | Qt::MatchRecursive));
-  foreach(QModelIndex index, list) {
+  foreach(const QModelIndex &index, list) {
     setData(AccountsModel::index(index.row(), 0, index.parent()), true, CleanupRole);
   }
 
@@ -447,7 +447,7 @@ void AccountsModel::load()
         d->loadSubAccounts(this, item, favoriteAccountsItem, acc.accountList());
       }
       d->setAccountData(this, item->index(), acc);
-      // set the account data after the childs have been loaded
+      // set the account data after the children have been loaded
       if (acc.value("PreferredAccount") == "Yes") {
         QStandardItem *item = d->itemFromAccountId(favoriteAccountsItem, acc.id());
         if (!item) {
@@ -466,7 +466,7 @@ void AccountsModel::load()
   // run cleanup procedure
   list = match(index(0, 0), AccountsModel::CleanupRole, true, -1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchRecursive));
   QModelIndexList parentsOnlyList;
-  foreach(QModelIndex index, list) {
+  foreach(const QModelIndex &index, list) {
     bool hasParentInTheList = false;
     QModelIndex parent = index.parent();
     while (parent.isValid()) {
@@ -480,7 +480,7 @@ void AccountsModel::load()
       parentsOnlyList.append(index);
     }
   }
-  foreach(QModelIndex index, parentsOnlyList) {
+  foreach(const QModelIndex &index, parentsOnlyList) {
     removeRow(index.row(), index.parent());
   }
 
