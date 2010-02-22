@@ -84,6 +84,20 @@ public:
     */
   void protectItem(int id, bool protect);
 
+  /**
+    * Make the completion match on any substring or only
+    * from the start of an entry.
+    *
+    * @param enabled @a true turns on substring match, @a false turns it off.
+    *                The default is @a false.
+    */
+  void setSubstringSearch(bool enabled);
+
+  /**
+    * Reimplemented for internal reasons, no API change
+    */
+  void setModel(QAbstractItemModel *model);
+
 protected slots:
   void activated(int index);
   void editTextChanged(const QString &text);
@@ -122,26 +136,15 @@ signals:
   void createItem(const QString&, QString&);
 
 private:
+  /// \internal d-pointer class.
+  class Private;
+  /// \internal d-pointer instance.
+  Private* const d;
+
   /**
     * This is just a cache to be able to implement the old interface.
     */
   mutable QString m_id;
-
-  /**
-    * Flag to control object creation. Use setSuppressObjectCreation()
-    * to modify it's setting. Defaults to @a false.
-    */
-  bool            m_canCreateObjects;
-
-  /**
-    * Flag to check whether a focusOutEvent processing is underway or not
-    */
-  bool            m_inFocusOutEvent;
-
-  /**
-    * Filter model used to make the completion.
-    */
-  QSortFilterProxyModel *m_filterProxyModel;
 };
 
 /**

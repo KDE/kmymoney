@@ -3958,6 +3958,7 @@ void KMyMoneyApp::slotScheduleNew(const MyMoneyTransaction& _t, MyMoneySchedule:
   QPointer<KEditScheduleDlg> dlg = new KEditScheduleDlg(schedule, this);
   TransactionEditor* transactionEditor = dlg->startEdit();
   if (transactionEditor) {
+    KMyMoneyGlobalSettings::setSubstringSearch(dlg);
     if (dlg->exec() == QDialog::Accepted) {
       MyMoneyFileTransaction ft;
       try {
@@ -3992,6 +3993,7 @@ void KMyMoneyApp::slotScheduleEdit(void)
         sched_dlg = new KEditScheduleDlg(schedule, this);
         d->m_transactionEditor = sched_dlg->startEdit();
         if (d->m_transactionEditor) {
+          KMyMoneyGlobalSettings::setSubstringSearch(sched_dlg);
           if (sched_dlg->exec() == QDialog::Accepted) {
             MyMoneyFileTransaction ft;
             try {
@@ -4163,6 +4165,7 @@ KMyMoneyUtils::EnterScheduleResultCodeE KMyMoneyApp::enterSchedule(MyMoneySchedu
 
       d->m_transactionEditor = dlg->startEdit();
       if (d->m_transactionEditor) {
+        KMyMoneyGlobalSettings::setSubstringSearch(dlg);
         MyMoneyTransaction torig, taccepted;
         d->m_transactionEditor->createTransaction(torig, dlg->transaction(),
             schedule.transaction().splits().isEmpty() ? MyMoneySplit() : schedule.transaction().splits().front(), true);
@@ -4415,6 +4418,7 @@ void KMyMoneyApp::slotPayeeDelete(void)
 
       // show transaction reassignment dialog
       KPayeeReassignDlg * dlg = new KPayeeReassignDlg(this);
+      KMyMoneyGlobalSettings::setSubstringSearch(dlg);
       QString payee_id = dlg->show(remainingPayees);
       addToMatchList = dlg->addToMatchList();
       delete dlg; // and kill the dialog
@@ -4879,6 +4883,7 @@ void KMyMoneyApp::slotTransactionsNew(void)
     if (d->m_myMoneyView->createNewTransaction()) {
       d->m_transactionEditor = d->m_myMoneyView->startEdit(d->m_selectedTransactions);
       if (d->m_transactionEditor) {
+        KMyMoneyGlobalSettings::setSubstringSearch(d->m_myMoneyView);
         KMyMoneyPayeeCombo* payeeEdit = dynamic_cast<KMyMoneyPayeeCombo*>(d->m_transactionEditor->haveWidget("payee"));
         if (payeeEdit && !d->m_lastPayeeEnteredId.isEmpty()) {
           // in case we entered a new transaction before and used a payee,
@@ -4907,6 +4912,7 @@ void KMyMoneyApp::slotTransactionsEdit(void)
     // as soon as we edit a transaction, we don't remember the last payee entered
     d->m_lastPayeeEnteredId.clear();
     d->m_transactionEditor = d->m_myMoneyView->startEdit(d->m_selectedTransactions);
+    KMyMoneyGlobalSettings::setSubstringSearch(d->m_myMoneyView);
     slotUpdateActions();
   }
 }
@@ -4931,6 +4937,7 @@ void KMyMoneyApp::slotTransactionsEditSplits(void)
     slotUpdateActions();
 
     if (d->m_transactionEditor) {
+      KMyMoneyGlobalSettings::setSubstringSearch(d->m_myMoneyView);
       if (d->m_transactionEditor->slotEditSplits() == QDialog::Accepted) {
         MyMoneyFileTransaction ft;
         try {

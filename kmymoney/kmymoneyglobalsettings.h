@@ -42,5 +42,12 @@ public:
   static QStringList itemList(void);
   static int firstFiscalMonth(void);
   static int firstFiscalDay(void);
+  /**
+    * Call the setSubstringSearch() method of all children of
+    * @p w that are of type KMyMoneyMVCCombo and pass the inverse return
+    * value of KMyMoneyGlobalSettings::stringMatchFromStart() to
+    * their KMyMoneyMVCCombo::setSubstringSearch() method
+    */
+  static void setSubstringSearch(QWidget* w);
 };
 #endif

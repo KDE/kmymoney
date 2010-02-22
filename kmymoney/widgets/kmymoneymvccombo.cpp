@@ -38,45 +38,103 @@
 
 #include "kmymoneysettings.h"
 
-KMyMoneyMVCCombo::KMyMoneyMVCCombo(QWidget* parent) :
-    KComboBox(parent),
+class KMyMoneyMVCCombo::Private
+{
+public:
+  Private() :
     m_canCreateObjects(false),
     m_inFocusOutEvent(false),
+    m_completer(0),
     m_filterProxyModel(0)
+  {}
+
+  /**
+    * Flag to control object creation. Use
+    * KMyMoneyMVCCombo::setSuppressObjectCreation()
+    * to modify it's setting. Defaults to @a false.
+    */
+  bool                  m_canCreateObjects;
+
+  /**
+    * Flag to check whether a focusOutEvent processing is underway or not
+    */
+  bool                  m_inFocusOutEvent;
+
+  QCompleter            *m_completer;
+
+  /**
+    * Filter model used to make the completion.
+    */
+  QSortFilterProxyModel *m_filterProxyModel;
+};
+
+
+KMyMoneyMVCCombo::KMyMoneyMVCCombo(QWidget* parent) :
+  KComboBox(parent),
+  d(new Private)
 {
   view()->setAlternatingRowColors(true);
   connect(this, SIGNAL(activated(int)), SLOT(activated(int)));
 }
 
 KMyMoneyMVCCombo::KMyMoneyMVCCombo(bool editable, QWidget* parent) :
-    KComboBox(editable, parent),
-    m_canCreateObjects(false),
-    m_inFocusOutEvent(false),
-    m_filterProxyModel(0)
+  KComboBox(editable, parent),
+  d(new Private)
 {
-  QAbstractItemModel *completerModel = model();
-  QCompleter *completer = new QCompleter(this);
-  completer->setCaseSensitivity(Qt::CaseInsensitive);
-  if (KMyMoneySettings::stringMatchFromStart()) {
-    // if the names should be matched from start use PopupCompletion mode of QCompleter with the combo's model
-    completer->setCompletionMode(QCompleter::PopupCompletion);
-  } else {
-    // if any substring should be matched use the following setup since QCompleter does not have such an option
-    // setup the QCompleter to always show all completions and use instead of the combo's model a filtered proxy model
-    completer->setCompletionMode(QCompleter::UnfilteredPopupCompletion);
-    m_filterProxyModel = new QSortFilterProxyModel(this);
-    m_filterProxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
-    m_filterProxyModel->setSourceModel(model());
-    connect(this, SIGNAL(editTextChanged(const QString &)), this, SLOT(editTextChanged(const QString &)));
-    completerModel = m_filterProxyModel;
-  }
+  d->m_completer = new QCompleter(this);
+  d->m_completer->setCaseSensitivity(Qt::CaseInsensitive);
+  d->m_completer->setModel(model());
+  setCompleter(d->m_completer);
 
-  completer->setModel(completerModel);
-  setCompleter(completer);
+  // setSubstringSearch(!KMyMoneySettings::stringMatchFromStart());
 
   view()->setAlternatingRowColors(true);
   setInsertPolicy(QComboBox::NoInsert); // don't insert new objects due to object creation
   connect(this, SIGNAL(activated(int)), SLOT(activated(int)));
+}
+
+void KMyMoneyMVCCombo::setSubstringSearch(bool enabled)
+{
+  if(enabled) {
+    // if substring search should be turned on and
+    // is already on, we can quit right away
+    if(d->m_completer->model() == d->m_filterProxyModel)
+      return;
+
+    // make sure we have a proxy model
+    if(!d->m_filterProxyModel) {
+      d->m_filterProxyModel = new QSortFilterProxyModel(this);
+      d->m_filterProxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
+      d->m_filterProxyModel->setSourceModel(model());
+    }
+    connect(this, SIGNAL(editTextChanged(const QString &)), this, SLOT(editTextChanged(const QString &)));
+    d->m_completer->setCompletionMode(QCompleter::UnfilteredPopupCompletion);
+    d->m_completer->setModel(d->m_filterProxyModel);
+
+  } else {
+    // if substring search should be turned off, we check
+    // for it being turned on. In case the current completer
+    // model is different from m_filterProxyModel it is not
+    // active and we can quit right away
+    if(d->m_completer->model() != d->m_filterProxyModel)
+      return;
+
+    disconnect(this, SIGNAL(editTextChanged(const QString &)), this, SLOT(editTextChanged(const QString &)));
+    d->m_completer->setCompletionMode(QCompleter::PopupCompletion);
+    d->m_completer->setModel(model());
+  }
+}
+
+void KMyMoneyMVCCombo::setModel(QAbstractItemModel *model)
+{
+  if(!model)
+    return;
+
+  KComboBox::setModel(model);
+  d->m_filterProxyModel->setSourceModel(model);
+  if(d->m_completer->model() != d->m_filterProxyModel) {
+    d->m_completer->setModel(model);
+  }
 }
 
 void KMyMoneyMVCCombo::setClickMessage(const QString& hint) const
@@ -114,7 +172,7 @@ void KMyMoneyMVCCombo::activated(int index)
 
 /**
   * Use the completion prefix of the completer for filtering instead of the
-  * edit text since when navigating between the completions the edit text 
+  * edit text since when navigating between the completions the edit text
   * changes to the current completion making all other completions disappear.
   */
 void KMyMoneyMVCCombo::editTextChanged(const QString &text)
@@ -122,35 +180,35 @@ void KMyMoneyMVCCombo::editTextChanged(const QString &text)
   if(text.isEmpty()) {
     setCurrentIndex(0);
     clearEditText();
-  } else if (m_filterProxyModel && completer()) {
-    m_filterProxyModel->setFilterFixedString(completer()->completionPrefix());
+  } else if (d->m_filterProxyModel && completer()) {
+    d->m_filterProxyModel->setFilterFixedString(completer()->completionPrefix());
   }
 }
 
 void KMyMoneyMVCCombo::connectNotify(const char* signal)
 {
   if (signal && QLatin1String(signal) != QLatin1String(QMetaObject::normalizedSignature(SIGNAL(createItem(const QString&, QString&))))) {
-    m_canCreateObjects = true;
+    d->m_canCreateObjects = true;
   }
 }
 
 void KMyMoneyMVCCombo::disconnectNotify(const char* signal)
 {
   if (signal && QLatin1String(signal) != QLatin1String(QMetaObject::normalizedSignature(SIGNAL(createItem(const QString&, QString&))))) {
-    m_canCreateObjects = false;
+    d->m_canCreateObjects = false;
   }
 }
 
 void KMyMoneyMVCCombo::focusOutEvent(QFocusEvent* e)
 {
-  if (m_inFocusOutEvent) {
+  if (d->m_inFocusOutEvent) {
     KComboBox::focusOutEvent(e);
     return;
   }
 
-  m_inFocusOutEvent = true;
+  d->m_inFocusOutEvent = true;
   if (isEditable() && !currentText().isEmpty()) {
-    if (m_canCreateObjects) {
+    if (d->m_canCreateObjects) {
       if (!contains(currentText())) {
         QString id;
         // annouce that we go into a possible dialog to create an object
@@ -193,7 +251,7 @@ void KMyMoneyMVCCombo::focusOutEvent(QFocusEvent* e)
     update();
   }
 
-  m_inFocusOutEvent = false;
+  d->m_inFocusOutEvent = false;
 }
 
 void KMyMoneyMVCCombo::setCurrentTextById(const QString& id)
@@ -217,7 +275,7 @@ void KMyMoneyMVCCombo::protectItem(int id, bool protect)
 }
 
 KMyMoneyPayeeCombo::KMyMoneyPayeeCombo(QWidget* parent) :
-    KMyMoneyMVCCombo(true, parent)
+  KMyMoneyMVCCombo(true, parent)
 {
 }
 

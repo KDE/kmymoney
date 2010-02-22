@@ -30,6 +30,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "kmymoneymvccombo.h"
+
 QFont KMyMoneyGlobalSettings::listCellFont(void)
 {
   if (useSystemFont()) {
@@ -99,3 +101,13 @@ int KMyMoneyGlobalSettings::firstFiscalDay(void)
   return KMyMoneySettings::fiscalYearBeginDay();
 }
 
+void KMyMoneyGlobalSettings::setSubstringSearch(QWidget* w)
+{
+  if(w) {
+    QList<KMyMoneyMVCCombo *> comboList;
+    comboList = w->findChildren<KMyMoneyMVCCombo *>();
+    foreach(KMyMoneyMVCCombo *combo, comboList) {
+      combo->setSubstringSearch(!stringMatchFromStart());
+    }
+  }
+}
