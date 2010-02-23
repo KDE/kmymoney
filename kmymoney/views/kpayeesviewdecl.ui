@@ -154,7 +154,7 @@
          </attribute>
          <layout class="QVBoxLayout">
           <item>
-           <widget class="Q3GroupBox" name="detailsGroup">
+           <widget class="QGroupBox" name="detailsGroup">
             <property name="title">
              <string>Payee Information</string>
             </property>
@@ -266,7 +266,7 @@
               <widget class="KLineEdit" name="emailEdit"/>
              </item>
              <item row="0" column="1">
-              <widget class="Q3MultiLineEdit" name="addressEdit" native="true">
+              <widget class="KTextEdit" name="addressEdit" native="true">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                  <horstretch>0</horstretch>
@@ -276,7 +276,7 @@
               </widget>
              </item>
              <item row="4" column="1">
-              <widget class="Q3MultiLineEdit" name="notesEdit" native="true">
+              <widget class="KTextEdit" name="notesEdit" native="true">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                  <horstretch>0</horstretch>
@@ -583,9 +583,9 @@ new transactions with this payee</string>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>Q3MultiLineEdit</class>
-   <extends>QWidget</extends>
-   <header>q3multilineedit.h</header>
+   <class>KTextEdit</class>
+   <extends>QTextEdit</extends>
+   <header>ktextedit.h</header>
   </customwidget>
  </customwidgets>
  <includes>
