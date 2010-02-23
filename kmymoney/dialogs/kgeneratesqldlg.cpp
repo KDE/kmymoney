@@ -91,7 +91,7 @@ void KGenerateSqlDlg::initializeForm()
 int  KGenerateSqlDlg::exec()
 {
   // list drivers supported by KMM
-  QMap<QString, QString> map = m_map.driverMap();
+  QMap<QString, QString> map = MyMoneyDbDriver::driverMap();
   // list drivers installed on system
   QStringList list = QSqlDatabase::drivers();
   // join the two
@@ -102,7 +102,7 @@ int  KGenerateSqlDlg::exec()
       dname = dname + " - " + map[dname];
       m_supportedDrivers.append(dname);
     }
-    it  ++;
+    ++it;
   }
   if (m_supportedDrivers.count() == 0) {
     // why does KMessageBox not have a standard dialog with Help button?
@@ -131,7 +131,8 @@ void KGenerateSqlDlg::slotcreateTables()
   }
   // check that the database has been pre-created
   { // all queries etc. must be in a block - see 'remove database' API doc
-    QSqlDatabase dbase = QSqlDatabase::addDatabase(m_dbDriver, "creation");
+    //FIXME: test the dbName
+    QSqlDatabase dbase = QSqlDatabase::addDatabase(m_dbName, "creation");
     dbase.setHostName(m_widget->textHostName->text());
     dbase.setDatabaseName(m_dbName);
     dbase.setUserName(m_widget->textUserName->text());
@@ -193,9 +194,8 @@ void KGenerateSqlDlg::slotdriverSelected()
     return;
   }
 
-  m_dbDriver = drivers[0]->text().section(' ', 0, 0);
-  m_dbType = m_map.driverToType(m_dbDriver);
-  if (!m_map.isTested(m_dbType)) {
+  m_dbDriver = MyMoneyDbDriver::create(drivers[0]->text().section(' ', 0, 0));
+  if (!m_dbDriver->isTested()) {
     int rc = KMessageBox::warningContinueCancel(0,
              i18n("Database type %1 has not been fully tested in a KMyMoney environment.\n"
                   "Please make sure you have adequate backups of your data.\n"
@@ -210,7 +210,7 @@ void KGenerateSqlDlg::slotdriverSelected()
   }
 
   m_requiredFields = new kMandatoryFieldGroup(this);
-  if (m_dbType == Sqlite3) {
+  if (m_dbDriver->isSqlite3()) {
     m_sqliteSelected = true;
     m_widget->urlSqlite->setMode(KFile::Modes(KFile::File));
     m_widget->urlSqlite->setEnabled(true);

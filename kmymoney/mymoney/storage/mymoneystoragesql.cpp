@@ -56,9 +56,6 @@
 //#define TRACE(a) qDebug(a)
 #define TRACE(a) ::timetrace(a)
 
-//***************** THE CURRENT VERSION OF THE DATABASE LAYOUT ****************
-unsigned int MyMoneyDbDef::m_currentVersion = 6;
-
 // subclass QSqlQuery for performance tracing
 MyMoneySqlQuery::MyMoneySqlQuery(MyMoneyStorageSql*  db)
     : QSqlQuery(*db), m_db(db)
@@ -92,75 +89,22 @@ bool MyMoneySqlQuery::exec(const QString & query)
 
 bool MyMoneySqlQuery::prepare(const QString & query)
 {
-  if (m_db->isSqlite3()) {
-    QString newQuery = query;
-    return (QSqlQuery::prepare(newQuery.replace("FOR UPDATE", "")));
-  }
   return (QSqlQuery::prepare(query));
 }
 
 //*****************************************************************************
-// Create a class to handle db transactions using scope
-//
-// Don't let the database object get destroyed while this object exists,
-// that would result in undefined behavior.
-class MyMoneyDbTransaction
+MyMoneyDbTransaction::MyMoneyDbTransaction(MyMoneyStorageSql& db, const QString& name)
+      : m_db(db), m_name(name)
 {
-public:
-  MyMoneyDbTransaction(MyMoneyStorageSql& db, const QString& name)
-      : m_db(db), m_name(name) {
-    db.startCommitUnit(name);
-  }
-
-  ~MyMoneyDbTransaction() {
-    if (std::uncaught_exception()) {
-      m_db.cancelCommitUnit(m_name);
-    } else {
-      m_db.endCommitUnit(m_name);
-    }
-  }
-private:
-  MyMoneyStorageSql& m_db;
-  QString m_name;
-};
-
-//*****************************************************************************
-MyMoneyDbDrivers::MyMoneyDbDrivers()
-{
-  m_driverMap["QDB2"] = QString("IBM DB2");
-  m_driverMap["QIBASE"] = QString("Borland Interbase");
-  m_driverMap["QMYSQL"] = QString("MySQL");
-  m_driverMap["QOCI"] = QString("Oracle Call Interface");
-  m_driverMap["QODBC"] = QString("Open Database Connectivity");
-  m_driverMap["QPSQL"] = QString("PostgreSQL v7.3 and up");
-  m_driverMap["QTDS"] = QString("Sybase Adaptive Server and Microsoft SQL Server");
-  m_driverMap["QSQLITE"] = QString("SQLite Version 3");
+  db.startCommitUnit(name);
 }
 
-databaseTypeE MyMoneyDbDrivers::driverToType(const QString& driver) const
-{
-  if (driver == "QDB2") return(Db2);
-  else if (driver == "QIBASE") return(Interbase);
-  else if (driver == "QMYSQL") return(Mysql);
-  else if (driver == "QOCI") return(Oracle);
-  else if (driver == "QODBC") return(ODBC);
-  else if (driver == "QPSQL") return(Postgresql);
-  else if (driver == "QTDS") return(Sybase);
-  else if (driver == "QSQLITE") return(Sqlite3);
-  else throw new MYMONEYEXCEPTION(QString("Unknown database driver type").arg(driver));
-}
-
-bool MyMoneyDbDrivers::isTested(databaseTypeE dbType) const
-{
-  switch (dbType) {
-  case Mysql:
-  case Sqlite3:
-  case Postgresql:
-    return (true);
-  default:
-    return(false);
+MyMoneyDbTransaction::~MyMoneyDbTransaction() {
+  if (std::uncaught_exception()) {
+    m_db.cancelCommitUnit(m_name);
+  } else {
+    m_db.endCommitUnit(m_name);
   }
-  return(false);
 }
 
 //************************ Constructor/Destructor *****************************
@@ -186,7 +130,7 @@ int MyMoneyStorageSql::open(const KUrl& url, int openMode, bool clear)
   DBG("*** Entering MyMoneyStorageSql::open");
   try {
     int rc = 0;
-    m_dbType = m_drivers.driverToType(url.queryItem("driver"));
+    m_driver = MyMoneyDbDriver::create(url.queryItem("driver"));
     //get the input options
     QStringList options = url.queryItem("options").split(',');
     m_loadAll = options.contains("loadAll")/*|| m_mode == 0*/;
@@ -204,14 +148,14 @@ int MyMoneyStorageSql::open(const KUrl& url, int openMode, bool clear)
       // this may be a sqlite file opened from the recently used list
       // but which no longer exists. In that case, open will work but create an empty file.
       // This is not what the user's after; he may accuse KMM of deleting all his data!
-      if (m_dbType == Sqlite3) {
+      if (m_driver->isSqlite3()) {
         if (!sqliteExists(dbName)) {
           rc = 1;
           break;
         }
       }
       if (!QSqlDatabase::open()) {
-        buildError(MyMoneySqlQuery(this), Q_FUNC_INFO,  "opening database");
+        buildError(MyMoneySqlQuery(this), Q_FUNC_INFO, "opening database");
         rc = 1;
       } else {
         rc = createTables(); // check all tables are present, create if not (we may add tables at some time)
@@ -299,9 +243,9 @@ bool MyMoneyStorageSql::createDatabase(const KUrl& url)
 {
   DBG("*** Entering MyMoneyStorageSql::createDatabase");
   int rc = true;
-  if (isSqlite3()) return(true); // not needed for sqlite
+  if (m_driver->isSqlite3()) return(true); // not needed for sqlite
   QString dbName = url.path().right(url.path().length() - 1); // remove separator slash
-  if (!(isMysql() || isPostgresql())) {
+  if (!m_driver->canAutocreate()) {
     m_error = i18n("Automatic database creation for type %1 is not currently implemented.\n"
                    "Please create database %2 manually", driverName(), dbName);
     return (false);
@@ -309,11 +253,7 @@ bool MyMoneyStorageSql::createDatabase(const KUrl& url)
   // create the database (only works for mysql and postgre at present)
   { // for this code block, see QSqlDatabase API re removeDatabase
     QSqlDatabase maindb = QSqlDatabase::addDatabase(driverName(), "main");
-    if (isMysql()) {
-      maindb.setDatabaseName("mysql");
-    } else if (isPostgresql()) {
-      maindb.setDatabaseName("template1");
-    }
+    maindb.setDatabaseName(m_driver->defaultDbName());
     maindb.setHostName(url.host());
     maindb.setUserName(url.user());
     maindb.setPassword(url.pass());
@@ -322,14 +262,7 @@ bool MyMoneyStorageSql::createDatabase(const KUrl& url)
                                  .arg(maindb.databaseName()).arg(Q_FUNC_INFO));
     } else {
       QSqlQuery qm(maindb);
-      QString qs = QString("CREATE DATABASE %1").arg(dbName);
-      if (isPostgresql()) {
-        qs += " WITH ENCODING='UTF8'";
-      }
-      if (isMysql()) {
-        qs += " CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci'";
-      }
-      qs += ';';
+      QString qs = m_driver->createDbString(dbName) + ';';
       if (!qm.exec(qs)) {
         buildError(qm, Q_FUNC_INFO,
                    i18n("Error in create database %1; do you have create permissions?", dbName), &maindb);
@@ -448,7 +381,7 @@ bool MyMoneyStorageSql::addColumn
 (const MyMoneyDbTable& t, const MyMoneyDbColumn& c,
  const QString& after)
 {
-  if ((m_dbType == Sqlite3) && (!after.isEmpty()))
+  if (m_driver->isSqlite3() && (!after.isEmpty()))
     qFatal("sqlite doesn't support 'AFTER'; use sqliteAlterTable");
 
   if (record(t.name()).contains(c.name()))
@@ -459,7 +392,7 @@ bool MyMoneyStorageSql::addColumn
   if (!after.isEmpty())
     afterString = QString("AFTER %1;").arg(after);
   if (!q.exec("ALTER TABLE " + t.name() + " ADD COLUMN " +
-              c.generateDDL(m_dbType) + afterString)) {
+              c.generateDDL(m_driver) + afterString)) {
     buildError(q, Q_FUNC_INFO,
                QString("Error adding column %1 to table %2").arg(c.name()).arg(t.name()));
     return (false);
@@ -479,7 +412,7 @@ bool MyMoneyStorageSql::dropColumn
 bool MyMoneyStorageSql::dropColumn
 (const MyMoneyDbTable& t, const QString& col)
 {
-  if (m_dbType == Sqlite3)
+  if (m_driver->isSqlite3())
     qFatal("sqlite doesn't support 'DROP COLUMN'; use sqliteAlterTable");
   if (!record(t.name()).contains(col))
     return (true);
@@ -496,7 +429,7 @@ bool MyMoneyStorageSql::dropColumn
 int MyMoneyStorageSql::upgradeToV1()
 {
   DBG("*** Entering MyMoneyStorageSql::upgradeToV1");
-  if ((m_dbType == Sqlite) || (m_dbType == Sqlite3)) qFatal("SQLite upgrade NYI");
+  if (m_driver->isSqlite3()) qFatal("SQLite upgrade NYI");
   MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
   MyMoneySqlQuery q(this);
   // change kmmSplits pkey to (transactionId, splitId)
@@ -505,7 +438,7 @@ int MyMoneyStorageSql::upgradeToV1()
     return (1);
   }
   // change kmmSplits alter checkNumber varchar(32)
-  if (!q.exec(m_db.m_tables["kmmSplits"].modifyColumnString(m_dbType, "checkNumber",
+  if (!q.exec(m_db.m_tables["kmmSplits"].modifyColumnString(m_driver, "checkNumber",
               MyMoneyDbColumn("checkNumber", "varchar(32)")))) {
     buildError(q, Q_FUNC_INFO, "Error expanding kmmSplits.checkNumber");
     return (1);
@@ -535,14 +468,14 @@ int MyMoneyStorageSql::upgradeToV1()
   // add index to kmmKeyValuePairs to (kvpType,kvpId)
   QStringList list;
   list << "kvpType" << "kvpId";
-  if (!q.exec(MyMoneyDbIndex("kmmKeyValuePairs", "kmmKVPtype_id", list, false).generateDDL(m_dbType) + ';')) {
+  if (!q.exec(MyMoneyDbIndex("kmmKeyValuePairs", "kmmKVPtype_id", list, false).generateDDL(m_driver) + ';')) {
     buildError(q, Q_FUNC_INFO, "Error adding kmmKeyValuePairs index");
     return (1);
   }
   // add index to kmmSplits to (accountId, txType)
   list.clear();
   list << "accountId" << "txType";
-  if (!q.exec(MyMoneyDbIndex("kmmSplits", "kmmSplitsaccount_type", list, false).generateDDL(m_dbType) + ';')) {
+  if (!q.exec(MyMoneyDbIndex("kmmSplits", "kmmSplitsaccount_type", list, false).generateDDL(m_driver) + ';')) {
     buildError(q, Q_FUNC_INFO, "Error adding kmmSplits index");
     return (1);
   }
@@ -672,7 +605,7 @@ int MyMoneyStorageSql::upgradeToV3()
   if (!q.exec("ALTER TABLE kmmSchedules ADD COLUMN " +
               MyMoneyDbIntColumn("occurenceMultiplier",
                                  MyMoneyDbIntColumn::SMALL, false, false, true)
-              .generateDDL(m_dbType) + " DEFAULT 0;")) {
+              .generateDDL(m_driver) + " DEFAULT 0;")) {
     buildError(q, Q_FUNC_INFO, "Error adding kmmSchedules.occurenceMultiplier");
     return (1);
   }
@@ -688,7 +621,7 @@ int MyMoneyStorageSql::upgradeToV4()
   MyMoneySqlQuery q(this);
   QStringList list;
   list << "transactionId" << "splitId";
-  if (!q.exec(MyMoneyDbIndex("kmmSplits", "kmmTx_Split", list, false).generateDDL(m_dbType) + ';')) {
+  if (!q.exec(MyMoneyDbIndex("kmmSplits", "kmmTx_Split", list, false).generateDDL(m_driver) + ';')) {
     buildError(q, Q_FUNC_INFO, "Error adding kmmSplits index on (transactionId, splitId)");
     return (1);
   }
@@ -720,8 +653,8 @@ int MyMoneyStorageSql::upgradeToV5()
                  MyMoneyDbTextColumn("matchKeys")))
     return (1);
   const MyMoneyDbTable& t = m_db.m_tables["kmmReportConfig"];
-  if (m_dbType != Sqlite3) {
-    if (!q.exec(t.dropPrimaryKeyString(m_dbType))) {
+  if (m_driver->isSqlite3()) {
+    if (!q.exec(t.dropPrimaryKeyString(m_driver))) {
       buildError(q, Q_FUNC_INFO, "Error dropping Report table keys");
       return (1);
     }
@@ -741,7 +674,7 @@ int MyMoneyStorageSql::upgradeToV6()
   if (!addColumn("kmmFileInfo", "fixLevel"))
     return (1);
   // upgrade Mysql to InnoDB transaction-safe engine
-  if (m_dbType == Mysql) {
+  if (m_driver->isMysql()) {
     for (QMap<QString, MyMoneyDbTable>::ConstIterator tt = m_db.tableBegin(); tt != m_db.tableEnd(); ++tt) {
       if (!q.exec(QString("ALTER TABLE %1 ENGINE = InnoDB;").arg(tt.value().name()))) {
         buildError(q, Q_FUNC_INFO, "Error updating to InnoDB");
@@ -755,8 +688,7 @@ int MyMoneyStorageSql::upgradeToV6()
     return(1);
   // read and write reports to get ids inserted
   readFileInfo();
-  QMap<QString, MyMoneyReport> reportList =
-    fetchReports();
+  QMap<QString, MyMoneyReport> reportList = fetchReports();
   // the V5 database allowed lots of duplicate reports with no
   // way to distinguish between them. The fetchReports call
   // will have effectively removed all duplicates
@@ -777,7 +709,7 @@ int MyMoneyStorageSql::upgradeToV6()
   m_hiIdReports = hiReportId;
   m_storage->loadReportId(m_hiIdReports);
   // sqlite3 doesn't support ADD PRIMARY KEY
-  if (m_dbType == Sqlite3) {
+  if (m_driver->isSqlite3()) {
     if (!sqliteAlterTable(m_db.m_tables["kmmReportConfig"])) {
       return (1);
     }
@@ -863,7 +795,7 @@ void MyMoneyStorageSql::createTable(const MyMoneyDbTable& t)
 {
   DBG("*** Entering MyMoneyStorageSql::createTable");
 // create the tables
-  QStringList ql = t.generateCreateSQL(m_dbType).split('\n', QString::SkipEmptyParts);
+  QStringList ql = t.generateCreateSQL(m_driver).split('\n', QString::SkipEmptyParts);
   MyMoneySqlQuery q(this);
   foreach (const QString& i, ql) {
     if (!q.exec(i)) throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("creating table/index %1").arg(t.name())));
@@ -2679,7 +2611,7 @@ const QMap<QString, MyMoneyInstitution> MyMoneyStorageSql::fetchInstitutions(con
     queryString = queryString.left(queryString.length() - 2);
   }
   if (forUpdate)
-    queryString += " FOR UPDATE";
+    queryString += m_driver->forUpdateString();
 
   queryString += ';';
 
@@ -2867,8 +2799,8 @@ const QMap<QString, MyMoneyAccount> MyMoneyStorageSql::fetchAccounts(const QStri
   childQueryString += " ORDER BY parentid, id";
 
   if (forUpdate) {
-    queryString += " FOR UPDATE";
-    childQueryString += " FOR UPDATE";
+    queryString += m_driver->forUpdateString();
+    childQueryString += m_driver->forUpdateString();
   }
 
   q.prepare(queryString);
@@ -3457,7 +3389,7 @@ const QMap<QString, MyMoneySchedule> MyMoneyStorageSql::fetchSchedules(const QSt
   queryString += " ORDER BY id;";
 
   if (forUpdate)
-    queryString += " FOR UPDATE";
+    queryString += m_driver->forUpdateString();
 
   queryString += ';';
 
@@ -3637,11 +3569,9 @@ const QMap<QString, MyMoneySecurity> MyMoneyStorageSql::fetchSecurities(const QS
 
 void MyMoneyStorageSql::readPrices(void)
 {
-
-  TRY
+//  TRY
 //    m_storage->addPrice(MyMoneyPrice(from, to,  date, rate, source));
-  PASS
-
+//  PASS
 }
 
 const  MyMoneyPrice MyMoneyStorageSql::fetchSinglePrice(const QString& fromId, const QString& toId, const QDate& date_, bool exactDate, bool /*forUpdate*/) const
@@ -3723,7 +3653,7 @@ const MyMoneyPriceList MyMoneyStorageSql::fetchPrices(const QStringList& fromIdL
   }
 
   if (forUpdate)
-    queryString += " FOR UPDATE";
+    queryString += m_driver->forUpdateString();
 
   queryString += ';';
 
@@ -3792,7 +3722,7 @@ const QMap<QString, MyMoneySecurity> MyMoneyStorageSql::fetchCurrencies(const QS
   queryString += " ORDER BY ISOcode";
 
   if (forUpdate)
-    queryString += " FOR UPDATE";
+    queryString += m_driver->forUpdateString();
 
   queryString += ';';
 
@@ -3886,7 +3816,7 @@ const QMap<QString, MyMoneyBudget> MyMoneyStorageSql::fetchBudgets(const QString
     queryString += " WHERE id = '" + idList.join("' OR id = '") + '\'';
   }
   if (forUpdate)
-    queryString += " FOR UPDATE";
+    queryString += m_driver->forUpdateString();
 
   queryString += ';';
 
@@ -4025,7 +3955,7 @@ long unsigned MyMoneyStorageSql::incrementBudgetId()
   MyMoneySqlQuery q(this);
 
   MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
-  q.prepare("SELECT hiBudgetId FROM kmmFileInfo FOR UPDATE");
+  q.prepare("SELECT hiBudgetId FROM kmmFileInfo " + m_driver->forUpdateString());
   q.exec();
   q.next();
   long unsigned returnValue = (unsigned long) q.value(0).toULongLong();
@@ -4041,7 +3971,7 @@ long unsigned MyMoneyStorageSql::incrementAccountId()
   MyMoneySqlQuery q(this);
 
   MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
-  q.prepare("SELECT hiAccountId FROM kmmFileInfo FOR UPDATE");
+  q.prepare("SELECT hiAccountId FROM kmmFileInfo " + m_driver->forUpdateString());
   q.exec();
   q.next();
   long unsigned returnValue = (unsigned long) q.value(0).toULongLong();
@@ -4057,7 +3987,7 @@ long unsigned MyMoneyStorageSql::incrementInstitutionId()
   MyMoneySqlQuery q(this);
 
   MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
-  q.prepare("SELECT hiInstitutionId FROM kmmFileInfo FOR UPDATE");
+  q.prepare("SELECT hiInstitutionId FROM kmmFileInfo " + m_driver->forUpdateString());
   q.exec();
   q.next();
   long unsigned returnValue = (unsigned long) q.value(0).toULongLong();
@@ -4073,7 +4003,7 @@ long unsigned MyMoneyStorageSql::incrementPayeeId()
   MyMoneySqlQuery q(this);
 
   MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
-  q.prepare("SELECT hiPayeeId FROM kmmFileInfo FOR UPDATE");
+  q.prepare("SELECT hiPayeeId FROM kmmFileInfo " + m_driver->forUpdateString());
   q.exec();
   q.next();
   long unsigned returnValue = (unsigned long) q.value(0).toULongLong();
@@ -4089,7 +4019,7 @@ long unsigned MyMoneyStorageSql::incrementReportId()
   MyMoneySqlQuery q(this);
 
   MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
-  q.prepare("SELECT hiReportId FROM kmmFileInfo FOR UPDATE");
+  q.prepare("SELECT hiReportId FROM kmmFileInfo " + m_driver->forUpdateString());
   q.exec();
   q.next();
   long unsigned returnValue = (unsigned long) q.value(0).toULongLong();
@@ -4105,7 +4035,7 @@ long unsigned MyMoneyStorageSql::incrementScheduleId()
   MyMoneySqlQuery q(this);
 
   MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
-  q.prepare("SELECT hiScheduleId FROM kmmFileInfo FOR UPDATE");
+  q.prepare("SELECT hiScheduleId FROM kmmFileInfo " + m_driver->forUpdateString());
   q.exec();
   q.next();
   long unsigned returnValue = (unsigned long) q.value(0).toULongLong();
@@ -4121,7 +4051,7 @@ long unsigned MyMoneyStorageSql::incrementSecurityId()
   MyMoneySqlQuery q(this);
 
   MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
-  q.prepare("SELECT hiSecurityId FROM kmmFileInfo FOR UPDATE");
+  q.prepare("SELECT hiSecurityId FROM kmmFileInfo " + m_driver->forUpdateString());
   q.exec();
   q.next();
   long unsigned returnValue = (unsigned long) q.value(0).toULongLong();
@@ -4137,7 +4067,7 @@ long unsigned MyMoneyStorageSql::incrementTransactionId()
   MyMoneySqlQuery q(this);
 
   MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
-  q.prepare("SELECT hiTransactionId FROM kmmFileInfo FOR UPDATE");
+  q.prepare("SELECT hiTransactionId FROM kmmFileInfo " + m_driver->forUpdateString());
   q.exec();
   q.next();
   long unsigned returnValue = (unsigned long) q.value(0).toULongLong();
@@ -4246,757 +4176,4 @@ QString& MyMoneyStorageSql::buildError(const QSqlQuery& q, const QString& functi
   return (const_cast <MyMoneyStorageSql*>(this)->m_error);
 }
 
-// ************************* Build table descriptions ****************************
-MyMoneyDbDef::MyMoneyDbDef()
-{
-  FileInfo();
-  Institutions();
-  Payees();
-  Accounts();
-  Transactions();
-  Splits();
-  KeyValuePairs();
-  Schedules();
-  SchedulePaymentHistory();
-  Securities();
-  Prices();
-  Currencies();
-  Reports();
-  Budgets();
-  Balances();
-}
 
-/* PRIMARYKEY - these fields combine to form a unique key field on which the db will create an index
-   NOTNULL - this field should never be null
-   UNSIGNED - for numeric types, indicates the field is UNSIGNED
-   ?ISKEY - where there is no primary key, these fields can be used to uniquely identify a record
-  Default is that a field is not a part of a primary key, nullable, and if numeric, signed */
-
-#define PRIMARYKEY true
-#define NOTNULL true
-#define UNSIGNED false
-//#define ISKEY true
-
-#define appendField(a) fields.append(KSharedPtr<MyMoneyDbColumn>(new a))
-void MyMoneyDbDef::FileInfo(void)
-{
-  QList< KSharedPtr<MyMoneyDbColumn> > fields;
-  appendField(MyMoneyDbColumn("version", "varchar(16)"));
-  appendField(MyMoneyDbColumn("created", "date"));
-  appendField(MyMoneyDbColumn("lastModified", "date"));
-  appendField(MyMoneyDbColumn("baseCurrency", "char(3)"));
-  appendField(MyMoneyDbIntColumn("institutions", MyMoneyDbIntColumn::BIG, UNSIGNED));
-  appendField(MyMoneyDbIntColumn("accounts", MyMoneyDbIntColumn::BIG, UNSIGNED));
-  appendField(MyMoneyDbIntColumn("payees", MyMoneyDbIntColumn::BIG, UNSIGNED));
-  appendField(MyMoneyDbIntColumn("transactions", MyMoneyDbIntColumn::BIG, UNSIGNED));
-  appendField(MyMoneyDbIntColumn("splits", MyMoneyDbIntColumn::BIG, UNSIGNED));
-  appendField(MyMoneyDbIntColumn("securities", MyMoneyDbIntColumn::BIG, UNSIGNED));
-  appendField(MyMoneyDbIntColumn("prices", MyMoneyDbIntColumn::BIG, UNSIGNED));
-  appendField(MyMoneyDbIntColumn("currencies", MyMoneyDbIntColumn::BIG, UNSIGNED));
-  appendField(MyMoneyDbIntColumn("schedules", MyMoneyDbIntColumn::BIG, UNSIGNED));
-  appendField(MyMoneyDbIntColumn("reports", MyMoneyDbIntColumn::BIG, UNSIGNED));
-  appendField(MyMoneyDbIntColumn("kvps", MyMoneyDbIntColumn::BIG, UNSIGNED));
-  appendField(MyMoneyDbColumn("dateRangeStart", "date"));
-  appendField(MyMoneyDbColumn("dateRangeEnd", "date"));
-  appendField(MyMoneyDbIntColumn("hiInstitutionId", MyMoneyDbIntColumn::BIG, UNSIGNED));
-  appendField(MyMoneyDbIntColumn("hiPayeeId", MyMoneyDbIntColumn::BIG, UNSIGNED));
-  appendField(MyMoneyDbIntColumn("hiAccountId", MyMoneyDbIntColumn::BIG, UNSIGNED));
-  appendField(MyMoneyDbIntColumn("hiTransactionId", MyMoneyDbIntColumn::BIG, UNSIGNED));
-  appendField(MyMoneyDbIntColumn("hiScheduleId", MyMoneyDbIntColumn::BIG, UNSIGNED));
-  appendField(MyMoneyDbIntColumn("hiSecurityId", MyMoneyDbIntColumn::BIG, UNSIGNED));
-  appendField(MyMoneyDbIntColumn("hiReportId", MyMoneyDbIntColumn::BIG, UNSIGNED));
-  appendField(MyMoneyDbColumn("encryptData", "varchar(255)"));
-  appendField(MyMoneyDbColumn("updateInProgress", "char(1)"));
-  appendField(MyMoneyDbIntColumn("budgets", MyMoneyDbIntColumn::BIG, UNSIGNED));
-  appendField(MyMoneyDbIntColumn("hiBudgetId", MyMoneyDbIntColumn::BIG, UNSIGNED));
-  appendField(MyMoneyDbColumn("logonUser", "varchar(255)"));
-  appendField(MyMoneyDbDatetimeColumn("logonAt"));
-  appendField(MyMoneyDbIntColumn("fixLevel",
-                                 MyMoneyDbIntColumn::MEDIUM, UNSIGNED));
-  MyMoneyDbTable t("kmmFileInfo", fields);
-  t.buildSQLStrings();
-  m_tables[t.name()] = t;
-}
-
-void MyMoneyDbDef::Institutions(void)
-{
-  QList<KSharedPtr <MyMoneyDbColumn> > fields;
-  appendField(MyMoneyDbColumn("id", "varchar(32)", PRIMARYKEY, NOTNULL));
-  appendField(MyMoneyDbTextColumn("name", MyMoneyDbTextColumn::NORMAL, false, NOTNULL));
-  appendField(MyMoneyDbTextColumn("manager"));
-  appendField(MyMoneyDbTextColumn("routingCode"));
-  appendField(MyMoneyDbTextColumn("addressStreet"));
-  appendField(MyMoneyDbTextColumn("addressCity"));
-  appendField(MyMoneyDbTextColumn("addressZipcode"));
-  appendField(MyMoneyDbTextColumn("telephone"));
-  MyMoneyDbTable t("kmmInstitutions", fields);
-  t.buildSQLStrings();
-  m_tables[t.name()] = t;
-}
-
-void MyMoneyDbDef::Payees(void)
-{
-  QList<KSharedPtr <MyMoneyDbColumn> > fields;
-  appendField(MyMoneyDbColumn("id", "varchar(32)",  PRIMARYKEY, NOTNULL));
-  appendField(MyMoneyDbTextColumn("name"));
-  appendField(MyMoneyDbTextColumn("reference"));
-  appendField(MyMoneyDbTextColumn("email"));
-  appendField(MyMoneyDbTextColumn("addressStreet"));
-  appendField(MyMoneyDbTextColumn("addressCity"));
-  appendField(MyMoneyDbTextColumn("addressZipcode"));
-  appendField(MyMoneyDbTextColumn("addressState"));
-  appendField(MyMoneyDbTextColumn("telephone"));
-  appendField(MyMoneyDbTextColumn("notes", MyMoneyDbTextColumn::LONG));
-  appendField(MyMoneyDbColumn("defaultAccountId", "varchar(32)"));
-  appendField(MyMoneyDbIntColumn("matchData", MyMoneyDbIntColumn::TINY, UNSIGNED));
-  appendField(MyMoneyDbColumn("matchIgnoreCase", "char(1)"));
-  appendField(MyMoneyDbTextColumn("matchKeys"));
-  MyMoneyDbTable t("kmmPayees", fields);
-  t.buildSQLStrings();
-  m_tables[t.name()] = t;
-}
-
-void MyMoneyDbDef::Accounts(void)
-{
-  QList<KSharedPtr <MyMoneyDbColumn> > fields;
-  appendField(MyMoneyDbColumn("id", "varchar(32)",  PRIMARYKEY, NOTNULL));
-  appendField(MyMoneyDbColumn("institutionId", "varchar(32)"));
-  appendField(MyMoneyDbColumn("parentId", "varchar(32)"));
-  appendField(MyMoneyDbDatetimeColumn("lastReconciled"));
-  appendField(MyMoneyDbDatetimeColumn("lastModified"));
-  appendField(MyMoneyDbColumn("openingDate", "date"));
-  appendField(MyMoneyDbTextColumn("accountNumber"));
-  appendField(MyMoneyDbColumn("accountType", "varchar(16)", false, NOTNULL));
-  appendField(MyMoneyDbTextColumn("accountTypeString"));
-  appendField(MyMoneyDbColumn("isStockAccount", "char(1)"));
-  appendField(MyMoneyDbTextColumn("accountName"));
-  appendField(MyMoneyDbTextColumn("description"));
-  appendField(MyMoneyDbColumn("currencyId", "varchar(32)"));
-  appendField(MyMoneyDbTextColumn("balance"));
-  appendField(MyMoneyDbTextColumn("balanceFormatted"));
-  appendField(MyMoneyDbIntColumn("transactionCount", MyMoneyDbIntColumn::BIG, UNSIGNED));
-  MyMoneyDbTable t("kmmAccounts", fields);
-  t.buildSQLStrings();
-  m_tables[t.name()] = t;
-}
-
-void MyMoneyDbDef::Transactions(void)
-{
-  QList<KSharedPtr <MyMoneyDbColumn> > fields;
-  appendField(MyMoneyDbColumn("id", "varchar(32)", PRIMARYKEY, NOTNULL));
-  appendField(MyMoneyDbColumn("txType", "char(1)"));
-  appendField(MyMoneyDbDatetimeColumn("postDate"));
-  appendField(MyMoneyDbTextColumn("memo"));
-  appendField(MyMoneyDbDatetimeColumn("entryDate"));
-  appendField(MyMoneyDbColumn("currencyId", "char(3)"));
-  appendField(MyMoneyDbTextColumn("bankId"));
-  MyMoneyDbTable t("kmmTransactions", fields);
-  t.buildSQLStrings();
-  m_tables[t.name()] = t;
-}
-
-void MyMoneyDbDef::Splits(void)
-{
-  QList<KSharedPtr <MyMoneyDbColumn> > fields;
-  appendField(MyMoneyDbColumn("transactionId", "varchar(32)",  PRIMARYKEY, NOTNULL));
-  appendField(MyMoneyDbColumn("txType", "char(1)"));
-  appendField(MyMoneyDbIntColumn("splitId", MyMoneyDbIntColumn::SMALL, UNSIGNED,  PRIMARYKEY, NOTNULL));
-  appendField(MyMoneyDbColumn("payeeId", "varchar(32)"));
-  appendField(MyMoneyDbDatetimeColumn("reconcileDate"));
-  appendField(MyMoneyDbColumn("action", "varchar(16)"));
-  appendField(MyMoneyDbColumn("reconcileFlag", "char(1)"));
-  appendField(MyMoneyDbTextColumn("value", MyMoneyDbTextColumn::NORMAL, false, NOTNULL));
-  appendField(MyMoneyDbColumn("valueFormatted", "text"));
-  appendField(MyMoneyDbTextColumn("shares", MyMoneyDbTextColumn::NORMAL, false, NOTNULL));
-  appendField(MyMoneyDbTextColumn("sharesFormatted"));
-  appendField(MyMoneyDbTextColumn("price", MyMoneyDbTextColumn::NORMAL, false));
-  appendField(MyMoneyDbTextColumn("priceFormatted"));
-  appendField(MyMoneyDbTextColumn("memo"));
-  appendField(MyMoneyDbColumn("accountId", "varchar(32)", false, NOTNULL));
-  appendField(MyMoneyDbColumn("checkNumber", "varchar(32)"));
-  appendField(MyMoneyDbDatetimeColumn("postDate"));
-  appendField(MyMoneyDbTextColumn("bankId"));
-  MyMoneyDbTable t("kmmSplits", fields);
-  QStringList list;
-  list << "accountId" << "txType";
-  t.addIndex("kmmSplitsaccount_type", list, false);
-  t.buildSQLStrings();
-  m_tables[t.name()] = t;
-}
-
-void MyMoneyDbDef::KeyValuePairs(void)
-{
-  QList<KSharedPtr <MyMoneyDbColumn> > fields;
-  appendField(MyMoneyDbColumn("kvpType", "varchar(16)", false, NOTNULL));
-  appendField(MyMoneyDbColumn("kvpId", "varchar(32)"));
-  appendField(MyMoneyDbColumn("kvpKey", "varchar(255)", false, NOTNULL));
-  appendField(MyMoneyDbTextColumn("kvpData"));
-  MyMoneyDbTable t("kmmKeyValuePairs", fields);
-  QStringList list;
-  list << "kvpType" << "kvpId";
-  t.addIndex("type_id", list, false);
-  t.buildSQLStrings();
-  m_tables[t.name()] = t;
-}
-
-void MyMoneyDbDef::Schedules(void)
-{
-  QList<KSharedPtr <MyMoneyDbColumn> > fields;
-  appendField(MyMoneyDbColumn("id", "varchar(32)", PRIMARYKEY, NOTNULL));
-  appendField(MyMoneyDbTextColumn("name", MyMoneyDbTextColumn::NORMAL, false, NOTNULL));
-  appendField(MyMoneyDbIntColumn("type", MyMoneyDbIntColumn::TINY, UNSIGNED, false, NOTNULL));
-  appendField(MyMoneyDbTextColumn("typeString"));
-  appendField(MyMoneyDbIntColumn("occurence", MyMoneyDbIntColumn::SMALL, UNSIGNED, false,
-                                 NOTNULL));
-  appendField(MyMoneyDbIntColumn("occurenceMultiplier", MyMoneyDbIntColumn::SMALL, UNSIGNED,
-                                 false, NOTNULL));
-  appendField(MyMoneyDbTextColumn("occurenceString"));
-  appendField(MyMoneyDbIntColumn("paymentType", MyMoneyDbIntColumn::TINY, UNSIGNED));
-  appendField(MyMoneyDbTextColumn("paymentTypeString", MyMoneyDbTextColumn::LONG));
-  appendField(MyMoneyDbColumn("startDate", "date", false, NOTNULL));
-  appendField(MyMoneyDbColumn("endDate", "date"));
-  appendField(MyMoneyDbColumn("fixed", "char(1)", false, NOTNULL));
-  appendField(MyMoneyDbColumn("autoEnter", "char(1)", false, NOTNULL));
-  appendField(MyMoneyDbColumn("lastPayment", "date"));
-  appendField(MyMoneyDbColumn("nextPaymentDue", "date"));
-  appendField(MyMoneyDbIntColumn("weekendOption", MyMoneyDbIntColumn::TINY, UNSIGNED, false,
-                                 NOTNULL));
-  appendField(MyMoneyDbTextColumn("weekendOptionString"));
-  MyMoneyDbTable t("kmmSchedules", fields);
-  t.buildSQLStrings();
-  m_tables[t.name()] = t;
-}
-
-void MyMoneyDbDef::SchedulePaymentHistory(void)
-{
-  QList<KSharedPtr <MyMoneyDbColumn> > fields;
-  appendField(MyMoneyDbColumn("schedId", "varchar(32)", PRIMARYKEY, NOTNULL));
-  appendField(MyMoneyDbColumn("payDate", "date", PRIMARYKEY,  NOTNULL));
-  MyMoneyDbTable t("kmmSchedulePaymentHistory", fields);
-  t.buildSQLStrings();
-  m_tables[t.name()] = t;
-}
-
-void MyMoneyDbDef::Securities(void)
-{
-  QList<KSharedPtr <MyMoneyDbColumn> > fields;
-  appendField(MyMoneyDbColumn("id", "varchar(32)", PRIMARYKEY, NOTNULL));
-  appendField(MyMoneyDbColumn("name", "text", false, NOTNULL));
-  appendField(MyMoneyDbTextColumn("symbol"));
-  appendField(MyMoneyDbIntColumn("type", MyMoneyDbIntColumn::SMALL, UNSIGNED, false, NOTNULL));
-  appendField(MyMoneyDbTextColumn("typeString"));
-  appendField(MyMoneyDbColumn("smallestAccountFraction", "varchar(24)"));
-  appendField(MyMoneyDbTextColumn("tradingMarket"));
-  appendField(MyMoneyDbColumn("tradingCurrency", "char(3)"));
-  MyMoneyDbTable t("kmmSecurities", fields);
-  t.buildSQLStrings();
-  m_tables[t.name()] = t;
-}
-
-void MyMoneyDbDef::Prices(void)
-{
-  QList<KSharedPtr <MyMoneyDbColumn> > fields;
-  appendField(MyMoneyDbColumn("fromId", "varchar(32)", PRIMARYKEY, NOTNULL));
-  appendField(MyMoneyDbColumn("toId", "varchar(32)",  PRIMARYKEY, NOTNULL));
-  appendField(MyMoneyDbColumn("priceDate", "date", PRIMARYKEY, NOTNULL));
-  appendField(MyMoneyDbTextColumn("price", MyMoneyDbTextColumn::NORMAL, false, NOTNULL));
-  appendField(MyMoneyDbTextColumn("priceFormatted"));
-  appendField(MyMoneyDbTextColumn("priceSource"));
-  MyMoneyDbTable t("kmmPrices", fields);
-  t.buildSQLStrings();
-  m_tables[t.name()] = t;
-}
-
-void MyMoneyDbDef::Currencies(void)
-{
-  QList<KSharedPtr <MyMoneyDbColumn> > fields;
-  appendField(MyMoneyDbColumn("ISOcode", "char(3)", PRIMARYKEY, NOTNULL));
-  appendField(MyMoneyDbTextColumn("name", MyMoneyDbTextColumn::NORMAL, false, NOTNULL));
-  appendField(MyMoneyDbIntColumn("type", MyMoneyDbIntColumn::SMALL, UNSIGNED));
-  appendField(MyMoneyDbTextColumn("typeString"));
-  appendField(MyMoneyDbIntColumn("symbol1", MyMoneyDbIntColumn::SMALL, UNSIGNED));
-  appendField(MyMoneyDbIntColumn("symbol2", MyMoneyDbIntColumn::SMALL, UNSIGNED));
-  appendField(MyMoneyDbIntColumn("symbol3", MyMoneyDbIntColumn::SMALL, UNSIGNED));
-  appendField(MyMoneyDbColumn("symbolString", "varchar(255)"));
-  appendField(MyMoneyDbColumn("partsPerUnit", "varchar(24)"));
-  appendField(MyMoneyDbColumn("smallestCashFraction", "varchar(24)"));
-  appendField(MyMoneyDbColumn("smallestAccountFraction", "varchar(24)"));
-  MyMoneyDbTable t("kmmCurrencies", fields);
-  t.buildSQLStrings();
-  m_tables[t.name()] = t;
-}
-
-void MyMoneyDbDef::Reports(void)
-{
-  QList<KSharedPtr <MyMoneyDbColumn> > fields;
-  appendField(MyMoneyDbColumn("name", "varchar(255)", false, NOTNULL));
-  appendField(MyMoneyDbTextColumn("XML", MyMoneyDbTextColumn::LONG));
-  appendField(MyMoneyDbColumn("id", "varchar(32)", PRIMARYKEY, NOTNULL));
-  MyMoneyDbTable t("kmmReportConfig", fields);
-  t.buildSQLStrings();
-  m_tables[t.name()] = t;
-}
-
-void MyMoneyDbDef::Budgets(void)
-{
-  QList<KSharedPtr <MyMoneyDbColumn> > fields;
-  appendField(MyMoneyDbColumn("id", "varchar(32)", PRIMARYKEY, NOTNULL));
-  appendField(MyMoneyDbColumn("name", "text", false, NOTNULL));
-  appendField(MyMoneyDbColumn("start", "date", false, NOTNULL));
-  appendField(MyMoneyDbTextColumn("XML", MyMoneyDbTextColumn::LONG));
-  MyMoneyDbTable t("kmmBudgetConfig", fields);
-  t.buildSQLStrings();
-  m_tables[t.name()] = t;
-}
-
-void MyMoneyDbDef::Balances(void)
-{
-  MyMoneyDbView v("kmmBalances", "CREATE VIEW kmmBalances AS "
-                  "SELECT kmmAccounts.id AS id, kmmAccounts.currencyId, "
-                  "kmmSplits.txType, kmmSplits.value, kmmSplits.shares, "
-                  "kmmSplits.postDate AS balDate, "
-                  "kmmTransactions.currencyId AS txCurrencyId "
-                  "FROM kmmAccounts, kmmSplits, kmmTransactions "
-                  "WHERE kmmSplits.txType = 'N' "
-                  "AND kmmSplits.accountId = kmmAccounts.id "
-                  "AND kmmSplits.transactionId = kmmTransactions.id;");
-  m_views[v.name()] = v;
-}
-
-// function to write create SQL to a stream
-const QString MyMoneyDbDef::generateSQL(const QString& driver) const
-{
-  QString retval;
-  databaseTypeE dbType = m_drivers.driverToType(driver);
-
-  // Add the CREATE TABLE strings
-  table_iterator tt = tableBegin();
-  while (tt != tableEnd()) {
-    retval += (*tt).generateCreateSQL(dbType) + '\n';
-    ++tt;
-  }
-
-  // Add the CREATE OR REPLACE VIEW strings
-  view_iterator vt = viewBegin();
-  while (vt != viewEnd()) {
-    retval += (*vt).createString() + '\n';
-    ++vt;
-  }
-  retval += '\n';
-
-  // Add the strings to populate kmmFileInfo with initial values
-  MyMoneyDbTable fi = m_tables["kmmFileInfo"];
-  QString qs = fi.insertString();
-  MyMoneyDbTable::field_iterator fit;
-  for (fit = fi.begin(); fit != fi.end(); ++fit) {
-    QString toReplace = (*fit)->name();
-    toReplace.prepend(':');
-    QString replace = "NULL";
-    if ((*fit)->name() == "version")
-      replace = QString::number(m_currentVersion);
-    if ((*fit)->name() == "fixLevel")
-      replace =  QString::number
-                 (MyMoneyFile::instance()->storage()->currentFixVersion());
-    if ((*fit)->name() == "created")
-      replace = QDate::currentDate().toString(Qt::ISODate);
-    if ((*fit)->name() == "lastModified")
-      replace = QDate::currentDate().toString(Qt::ISODate);
-    if ((*fit)->name() == "updateInProgress")
-      replace = enclose("N");
-    qs.replace(toReplace, replace);
-  }
-  qs += "\n\n";
-  retval += qs;
-
-  // Add the strings to create the initial accounts
-  qs.clear();
-  QList<MyMoneyAccount> stdList;
-  stdList.append(MyMoneyFile::instance()->asset());
-  stdList.append(MyMoneyFile::instance()->equity());
-  stdList.append(MyMoneyFile::instance()->expense());
-  stdList.append(MyMoneyFile::instance()->income());
-  stdList.append(MyMoneyFile::instance()->liability());
-  for (int i = 0; i < stdList.count(); ++i) {
-    MyMoneyAccount* pac = &stdList[i];
-    MyMoneyDbTable ac = m_tables["kmmAccounts"];
-    qs = ac.insertString();
-    MyMoneyDbTable::field_iterator act;
-    // do the following in reverse so the 'formatted' fields are
-    // correctly handled.
-    // Hmm, how does one use a QValueListIterator in reverse
-    // It'll be okay in Qt4 with QListIterator
-    for (act = ac.end(), --act; act != ac.begin(); --act) {
-      QString toReplace = (*act)->name();
-      toReplace.prepend(':');
-      QString replace = "NULL";
-      if ((*act)->name() == "accountType")
-        replace = QString::number(pac->accountType());
-      if ((*act)->name() == "accountTypeString")
-        replace = enclose(pac->name());
-      if ((*act)->name() == "isStockAccount")
-        replace = enclose("N");
-      if ((*act)->name() == "accountName")
-        replace = enclose(pac->name());
-      qs.replace(toReplace, replace);
-    }
-    qs.replace(":id", enclose(pac->id()));  // a real kludge
-    qs += "\n\n";
-    retval += qs;
-  }
-
-  return retval;
-}
-
-//*****************************************************************************
-
-void MyMoneyDbTable::addIndex(const QString& name, const QStringList& columns, bool unique)
-{
-  m_indices.push_back(MyMoneyDbIndex(m_name, name, columns, unique));
-}
-
-void MyMoneyDbTable::buildSQLStrings(void)
-{
-  // build fixed SQL strings for this table
-  // build the insert string with placeholders for each field
-  QString qs = QString("INSERT INTO %1 (").arg(name());
-  QString ws = ") VALUES (";
-  field_iterator ft = m_fields.constBegin();
-  while (ft != m_fields.constEnd()) {
-    qs += QString("%1, ").arg((*ft)->name());
-    ws += QString(":%1, ").arg((*ft)->name());
-    ++ft;
-  }
-  qs = qs.left(qs.length() - 2);
-  ws = ws.left(ws.length() - 2);
-  m_insertString = qs + ws + ");";
-  // build a 'select all' string (select * is deprecated)
-  // don't terminate with semicolon coz we may want a where or order clause
-  m_selectAllString = "SELECT " + columnList() + " FROM " + name();
-
-  // build an update string; key fields go in the where clause
-  qs = "UPDATE " + name() + " SET ";
-  ws.clear();
-  ft = m_fields.constBegin();
-  while (ft != m_fields.constEnd()) {
-    if ((*ft)->isPrimaryKey()) {
-      if (!ws.isEmpty()) ws += " AND ";
-      ws += QString("%1 = :%2").arg((*ft)->name()).arg((*ft)->name());
-    } else {
-      qs += QString("%1 = :%2, ").arg((*ft)->name()).arg((*ft)->name());
-    }
-    ++ft;
-  }
-  qs = qs.left(qs.length() - 2);
-  if (!ws.isEmpty()) qs += " WHERE " + ws;
-  m_updateString = qs + ';';
-  // build a delete string; where clause as for update
-  qs = "DELETE FROM " + name();
-  if (!ws.isEmpty()) qs += " WHERE " + ws;
-  m_deleteString = qs + ';';
-
-  // Setup the column name hash
-  ft = m_fields.constBegin();
-  m_fieldOrder.reserve(m_fields.size());
-  int i = 0;
-  while (ft != m_fields.constEnd()) {
-    m_fieldOrder[(*ft)->name()] = i;
-    ++i; ++ft;
-  }
-}
-
-const QString MyMoneyDbTable::columnList() const
-{
-  field_iterator ft = m_fields.begin();
-  QString qs;
-  ft = m_fields.begin();
-  while (ft != m_fields.end()) {
-    qs += QString("%1, ").arg((*ft)->name());
-    ++ft;
-  }
-  return (qs.left(qs.length() - 2));
-}
-
-const QString MyMoneyDbTable::generateCreateSQL(databaseTypeE dbType) const
-{
-  QString qs = QString("CREATE TABLE %1 (").arg(name());
-  QString pkey;
-  for (field_iterator it = m_fields.begin(); it != m_fields.end(); ++it) {
-    qs += (*it)->generateDDL(dbType) + ", ";
-    if ((*it)->isPrimaryKey())
-      pkey += (*it)->name() + ", ";
-  }
-
-  if (!pkey.isEmpty()) {
-    qs += "PRIMARY KEY (" + pkey;
-    qs = qs.left(qs.length() - 2) + "))";
-  } else {
-    qs = qs.left(qs.length() - 2) + ')';
-  }
-
-  if (dbType == Mysql)
-    qs += " ENGINE = InnoDB;\n";
-  else
-    qs += ";\n";
-
-  for (index_iterator ii = m_indices.begin(); ii != m_indices.end(); ++ii) {
-    qs += (*ii).generateDDL(dbType);
-  }
-  return qs;
-}
-
-const QString MyMoneyDbTable::dropPrimaryKeyString(databaseTypeE dbType) const
-{
-  if (dbType == Mysql || dbType == Oracle)
-    return "ALTER TABLE " + m_name + " DROP PRIMARY KEY;";
-  else if (dbType == Postgresql)
-    return "ALTER TABLE " + m_name + " DROP CONSTRAINT " + m_name + "_pkey;";
-  else if (dbType == Sqlite3)
-    return "";
-
-  return "";
-}
-
-const QString MyMoneyDbTable::modifyColumnString(databaseTypeE dbType, const QString& columnName, const MyMoneyDbColumn& newDef) const
-{
-  QString qs = "ALTER TABLE " + m_name + ' ';
-  if (dbType == Mysql)
-    qs += "CHANGE " + columnName + ' ' + newDef.generateDDL(dbType);
-  else if (dbType == Postgresql)
-    qs += "ALTER COLUMN " + columnName + " TYPE " + newDef.generateDDL(dbType).section(' ', 1);
-  else if (dbType == Sqlite3)
-    qs = "";
-  else if (dbType == Oracle)
-    qs = "MODIFY " + columnName + ' ' + newDef.generateDDL(dbType);
-
-  return qs;
-}
-
-int MyMoneyDbTable::fieldNumber(const QString& name) const
-{
-  QHash<QString, int>::ConstIterator i = m_fieldOrder.find(name);
-  if (m_fieldOrder.constEnd() == i) {
-    throw new MYMONEYEXCEPTION(QString("Unknown field %1 in table %2").arg(name).arg(m_name));
-  }
-  return i.value();
-}
-
-//*****************************************************************************
-const QString MyMoneyDbIndex::generateDDL(databaseTypeE dbType) const
-{
-  Q_UNUSED(dbType);
-
-  QString qs = "CREATE ";
-
-  if (m_unique)
-    qs += "UNIQUE ";
-
-  qs += "INDEX " + m_table + '_' + m_name + "_idx ON "
-        + m_table + " (";
-
-  // The following should probably be revised.  MySQL supports an index on
-  // partial columns, but not on a function.  Postgres supports an index on
-  // the result of an SQL function, but not a partial column.  There should be
-  // a way to merge these, and support other DBMSs like SQLite at the same time.
-  // For now, if we just use plain columns, this will work fine.
-  for (QStringList::ConstIterator it = m_columns.constBegin(); it != m_columns.constEnd(); ++it) {
-    qs += *it + ',';
-  }
-
-  qs = qs.left(qs.length() - 1) + ");\n";
-
-  return qs;
-}
-
-//*****************************************************************************
-// These are the actual column types.
-// TODO: consider changing all the else-if statements to driver classes.
-//
-
-MyMoneyDbColumn*         MyMoneyDbColumn::clone() const
-{
-  return (new MyMoneyDbColumn(*this));
-}
-
-MyMoneyDbIntColumn*      MyMoneyDbIntColumn::clone() const
-{
-  return (new MyMoneyDbIntColumn(*this));
-}
-
-MyMoneyDbDatetimeColumn* MyMoneyDbDatetimeColumn::clone() const
-{
-  return (new MyMoneyDbDatetimeColumn(*this));
-}
-
-MyMoneyDbTextColumn* MyMoneyDbTextColumn::clone() const
-{
-  return (new MyMoneyDbTextColumn(*this));
-}
-
-const QString MyMoneyDbColumn::generateDDL(databaseTypeE dbType) const
-{
-  Q_UNUSED(dbType);
-
-  QString qs = name() + ' ' + type();
-  if (isNotNull()) qs += " NOT NULL";
-  return qs;
-}
-
-const QString MyMoneyDbIntColumn::generateDDL(databaseTypeE dbType) const
-{
-  QString qs = name() + ' ';
-
-  switch (m_type) {
-  case MyMoneyDbIntColumn::TINY:
-    if (dbType == Mysql || dbType == Sqlite3) {
-      qs += "tinyint ";
-    } else if (dbType == Postgresql) {
-      qs += "int2 ";
-    } else if (dbType == Db2) {
-      qs += "smallint ";
-    } else if (dbType == Oracle) {
-      qs += "number(3) ";
-    } else {
-      // cross your fingers...
-      qs += "smallint ";
-    }
-    break;
-  case MyMoneyDbIntColumn::SMALL:
-    if (dbType == Mysql || dbType == Db2 || dbType == Sqlite3) {
-      qs += "smallint ";
-    } else if (dbType == Postgresql) {
-      qs += "int2 ";
-    } else if (dbType == Oracle) {
-      qs += "number(5) ";
-    } else {
-      // cross your fingers...
-      qs += "smallint ";
-    }
-    break;
-  case MyMoneyDbIntColumn::MEDIUM:
-    if (dbType == Mysql || dbType == Db2) {
-      qs += "int ";
-    } else if (dbType == Postgresql) {
-      qs += "int4 ";
-    } else if (dbType == Sqlite3) {
-      qs += "integer ";
-    } else if (dbType == Oracle) {
-      qs += "number(10) ";
-    } else {
-      // cross your fingers...
-      qs += "int ";
-    }
-    break;
-  case MyMoneyDbIntColumn::BIG:
-    if (dbType == Mysql || dbType == Db2 || dbType == Sqlite3) {
-      qs += "bigint ";
-    } else if (dbType == Postgresql) {
-      qs += "int8 ";
-    } else if (dbType == Oracle) {
-      qs += "number(20) ";
-    } else {
-      // cross your fingers...
-      qs += "bigint ";
-    }
-    break;
-  default:
-    qs += "int ";
-    break;
-  }
-
-  if ((! m_isSigned) && (dbType == Mysql || dbType == Sqlite3)) {
-    qs += "unsigned ";
-  }
-
-  if (isNotNull()) qs += " NOT NULL";
-  if ((! m_isSigned) && (dbType == Postgresql)) {
-    qs += " check(" + name() + " >= 0)";
-  }
-  return qs;
-}
-
-const QString MyMoneyDbTextColumn::generateDDL(databaseTypeE dbType) const
-{
-  QString qs = name() + ' ';
-
-  switch (m_type) {
-  case MyMoneyDbTextColumn::TINY:
-    if (dbType == Mysql || dbType == Sqlite3) {
-      qs += "tinytext ";
-    } else if (dbType == Postgresql) {
-      qs += "text ";
-    } else if (dbType == Db2) {
-      qs += "varchar(255) ";
-    } else if (dbType == Oracle) {
-      qs += "varchar2(255) ";
-    } else {
-      // cross your fingers...
-      qs += "tinytext ";
-    }
-    break;
-  case MyMoneyDbTextColumn::NORMAL:
-    if (dbType == Mysql || dbType == Sqlite3  || dbType == Postgresql) {
-      qs += "text ";
-    } else if (dbType == Db2) {
-      qs += "clob(64K) ";
-    } else if (dbType == Oracle) {
-      qs += "clob ";
-    } else {
-      // cross your fingers...
-      qs += "text ";
-    }
-    break;
-  case MyMoneyDbTextColumn::MEDIUM:
-    if (dbType == Mysql || dbType == Sqlite3) {
-      qs += "mediumtext ";
-    } else if (dbType == Postgresql) {
-      qs += "text ";
-    } else if (dbType == Db2) {
-      qs += "clob(16M) ";
-    } else if (dbType == Oracle) {
-      qs += "clob ";
-    } else {
-      // cross your fingers...
-      qs += "mediumtext ";
-    }
-    break;
-  case MyMoneyDbTextColumn::LONG:
-    if (dbType == Mysql || dbType == Sqlite3) {
-      qs += "longtext ";
-    } else if (dbType == Postgresql) {
-      qs += "text ";
-    } else if (dbType == Db2) {
-      qs += "clob(2G) ";
-    } else if (dbType == Oracle) {
-      qs += "clob ";
-    } else {
-      // cross your fingers...
-      qs += "longtext ";
-    }
-    break;
-  default:
-    if (dbType == Oracle) {
-      qs += "clob ";
-    } else {
-      qs += "text ";
-    }
-    break;
-  }
-
-  if (isNotNull()) qs += " NOT NULL";
-
-  return qs;
-}
-
-const QString MyMoneyDbDatetimeColumn::generateDDL(databaseTypeE dbType) const
-{
-  QString qs = name() + ' ';
-  if (dbType == Mysql  || dbType == ODBC) {
-    qs += "datetime ";
-  } else if (dbType == Postgresql || dbType == Db2 || dbType == Oracle || dbType == Sqlite3) {
-    qs += "timestamp ";
-  } else {
-    qs += "";
-  }
-  if (isNotNull()) qs += " NOT NULL";
-  return qs;
-}

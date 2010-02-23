@@ -66,7 +66,7 @@ KSelectDatabaseDlg::~KSelectDatabaseDlg()
 bool KSelectDatabaseDlg::checkDrivers()
 {
   // list drivers supported by KMM
-  QMap<QString, QString> map = m_map.driverMap();
+  QMap<QString, QString> map = MyMoneyDbDriver::driverMap();
   // list drivers installed on system
   QStringList list = QSqlDatabase::drivers();
   // join the two
@@ -130,7 +130,7 @@ int KSelectDatabaseDlg::exec()
   } else {
     // fill in the fixed data from the URL
     QString driverName = m_url.queryItem("driver");
-    m_widget->listDrivers->addItem(QString(driverName + " - " + m_map.driverMap()[driverName]));
+    m_widget->listDrivers->addItem(QString(driverName + " - " + MyMoneyDbDriver::driverMap()[driverName]));
     m_widget->listDrivers->setCurrentItem(m_widget->listDrivers->item(0));
     QString dbName = m_url.path().right(m_url.path().length() - 1); // remove separator slash
     m_widget->textDbName->setText(dbName);
@@ -176,8 +176,8 @@ const KUrl KSelectDatabaseDlg::selectedURL()
 
 void KSelectDatabaseDlg::slotDriverSelected(QListWidgetItem *driver)
 {
-  databaseTypeE dbType = m_map.driverToType(driver->text().section(' ', 0, 0));
-  if (!m_map.isTested(dbType)) {
+  KSharedPtr<MyMoneyDbDriver> dbDriver = MyMoneyDbDriver::create(driver->text().section(' ', 0, 0));
+  if (!dbDriver->isTested()) {
     int rc = KMessageBox::warningContinueCancel(0,
              i18n("Database type %1 has not been fully tested in a KMyMoney environment.\n"
                   "Please make sure you have adequate backups of your data.\n"
@@ -190,7 +190,7 @@ void KSelectDatabaseDlg::slotDriverSelected(QListWidgetItem *driver)
     }
   }
 
-  if (m_map.driverToType(driver->text().section(' ', 0, 0)) == Sqlite3) {
+  if (dbDriver->isSqlite3()) {
     m_sqliteSelected = true;
     if (m_mode == QIODevice::WriteOnly)
       m_widget->urlSqlite->setMode(KFile::Modes(KFile::Files));

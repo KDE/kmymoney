@@ -69,7 +69,7 @@ private:
   int m_mode;
   KUrl m_url;
   QStringList m_supportedDrivers;
-  MyMoneyDbDrivers m_map;
+  //MyMoneyDbDrivers m_map;
   kMandatoryFieldGroup* m_requiredFields;
   bool m_sqliteSelected;
 };

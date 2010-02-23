@@ -56,6 +56,10 @@ class QIODevice;
 #include "mymoneymap.h"
 #include "../mymoneymoney.h"
 #include "../mymoneytransactionfilter.h"
+#include "mymoneydbdef.h"
+#include "mymoneydbdriver.h"
+
+class MyMoneyDbDriver;
 
 // This is a convenience functor to make it easier to use STL algorithms
 // It will return false if the MyMoneyTransaction DOES match the filter.
@@ -81,22 +85,23 @@ private:
   IMyMoneyStorage *m_storage;
 };
 
-/**
-@author Tony Bloomfield
- */
-typedef enum databaseTypeE { // database (driver) type
-  Db2 = 0, //
-  Interbase, //
-  Mysql, //
-  Oracle, //
-  ODBC, //
-  Postgresql, //
-  Sqlite, //
-  Sybase, //
-  Sqlite3 //
-} _databaseType;
-
 class MyMoneyStorageSql;
+
+//*****************************************************************************
+// Create a class to handle db transactions using scope
+//
+// Don't let the database object get destroyed while this object exists,
+// that would result in undefined behavior.
+class MyMoneyDbTransaction
+{
+public:
+  MyMoneyDbTransaction(MyMoneyStorageSql& db, const QString& name);
+
+  ~MyMoneyDbTransaction();
+private:
+  MyMoneyStorageSql& m_db;
+  QString m_name;
+};
 
 /**
   * The MyMoneySqlQuery class is derived from QSqlQuery to provide
@@ -115,387 +120,6 @@ private:
   const MyMoneyStorageSql* m_db;
 };
 
-/**
-  * The MyMoneyDbDrivers class is a map from string to enum of db types.
-  */
-class MyMoneyDbDrivers
-{
-public:
-  MyMoneyDbDrivers();
-  /**
-    *  @return a list ofsupported Qt database driver types, their qt names and useful names
-    **/
-  const QMap<QString, QString> driverMap() const {
-    return (m_driverMap);
-  };
-  databaseTypeE driverToType(const QString& driver) const;
-  bool isTested(databaseTypeE dbType) const;
-private:
-  QMap<QString, QString> m_driverMap;
-};
-
-/**
-  * The MyMoneyDbColumn class is a base type for generic db columns.
-  * Derived types exist for several common column types.
-  */
-class MyMoneyDbColumn : public KShared
-{
-public:
-  explicit MyMoneyDbColumn(const QString& iname,
-                           const QString& itype = QString(),
-                           const bool iprimary = false,
-                           const bool inotnull = false,
-                           const QString &initVersion = "0.1"):
-      m_name(iname),
-      m_type(itype),
-      m_isPrimary(iprimary),
-      m_isNotNull(inotnull),
-      m_initVersion(initVersion) {}
-  MyMoneyDbColumn(void) {}
-  virtual ~MyMoneyDbColumn() {}
-
-  /**
-    * This method is used to copy column objects. Because there are several derived types,
-    * clone() is more appropriate than a copy ctor in most cases.
-    */
-  virtual MyMoneyDbColumn* clone() const;
-
-  /**
-    * This method generates the DDL (Database Design Language) string for the column.
-    *
-    * @param dbType Database driver type
-    *
-    * @return QString of the DDL for the column, tailored for what the driver supports.
-    */
-  virtual const QString generateDDL(databaseTypeE dbType) const;
-
-  const QString& name(void) const {
-    return (m_name);
-  }
-  const QString& type(void) const {
-    return (m_type);
-  }
-  bool isPrimaryKey(void) const {
-    return (m_isPrimary);
-  }
-  bool isNotNull(void) const {
-    return (m_isNotNull);
-  }
-private:
-  QString m_name;
-  QString m_type;
-  bool m_isPrimary;
-  bool m_isNotNull;
-  QString m_initVersion;
-};
-
-/**
-  * The MyMoneyDbDatetimeColumn class is a representation of datetime columns.
-  */
-class MyMoneyDbDatetimeColumn : public MyMoneyDbColumn
-{
-public:
-  explicit MyMoneyDbDatetimeColumn(const QString& iname,
-                                   const bool iprimary = false,
-                                   const bool inotnull = false,
-                                   const QString &initVersion = "0.1"):
-      MyMoneyDbColumn(iname, "", iprimary, inotnull, initVersion) {}
-  virtual ~MyMoneyDbDatetimeColumn() {}
-  virtual const QString generateDDL(databaseTypeE dbType) const;
-  virtual MyMoneyDbDatetimeColumn* clone() const;
-private:
-  static const QString calcType(void);
-};
-
-/**
-  * The MyMoneyDbColumn class is a representation of integer db columns.
-  */
-class MyMoneyDbIntColumn : public MyMoneyDbColumn
-{
-public:
-  enum size {TINY, SMALL, MEDIUM, BIG};
-  explicit MyMoneyDbIntColumn(const QString& iname,
-                              const size type = MEDIUM,
-                              const bool isigned = true,
-                              const bool iprimary = false,
-                              const bool inotnull = false,
-                              const QString &initVersion = "0.1"):
-      MyMoneyDbColumn(iname, "", iprimary, inotnull, initVersion),
-      m_type(type),
-      m_isSigned(isigned) {}
-  virtual ~MyMoneyDbIntColumn() {}
-  virtual const QString generateDDL(databaseTypeE dbType) const;
-  virtual MyMoneyDbIntColumn* clone() const;
-private:
-  size m_type;
-  bool m_isSigned;
-};
-
-/**
-  * The MyMoneyDbTextColumn class is a representation of text db columns,
-  * for drivers that support it.  If the driver does not support it, it is
-  * usually some sort of really large varchar or varchar2.
-  */
-class MyMoneyDbTextColumn : public MyMoneyDbColumn
-{
-public:
-  enum size {TINY, NORMAL, MEDIUM, LONG};
-  explicit MyMoneyDbTextColumn(const QString& iname,
-                               const size type = MEDIUM,
-                               const bool iprimary = false,
-                               const bool inotnull = false,
-                               const QString &initVersion = "0.1"):
-      MyMoneyDbColumn(iname, "", iprimary, inotnull, initVersion),
-      m_type(type) {}
-  virtual ~MyMoneyDbTextColumn() {}
-  virtual const QString generateDDL(databaseTypeE dbType) const;
-  virtual MyMoneyDbTextColumn* clone() const;
-private:
-  size m_type;
-};
-
-/**
-  * The MyMoneyDbIndex class is a representation of a db index.
-  * To provide generic support for most databases, the table name,
-  * name of the index, and list of columns for the index are required.
-  * Additionally, the user can specify whether the index is unique or not.
-  *
-  * At this time, different types of index are not supported, since the portability
-  * is fairly limited.
-  */
-class MyMoneyDbIndex
-{
-public:
-  MyMoneyDbIndex(const QString& table,
-                 const QString& name,
-                 const QStringList& columns,
-                 bool unique = false):
-      m_table(table),
-      m_unique(unique),
-      m_name(name),
-      m_columns(columns) {}
-  MyMoneyDbIndex() {}
-  inline const QString table() const {
-    return m_table;
-  }
-  inline bool isUnique() const {
-    return m_unique;
-  }
-  inline const QString name() const {
-    return m_name;
-  }
-  inline const QStringList columns() const {
-    return m_columns;
-  }
-  const QString generateDDL(databaseTypeE dbType) const;
-private:
-  QString m_table;
-  bool m_unique;
-  QString m_name;
-  QStringList m_columns;
-};
-
-/**
-  * The MyMoneyDbTable class is a representation of a db table.
-  * It has a list of the columns (pointers to MyMoneyDbColumn types) and a
-  * list of any indices that may be on the table.
-  * Additionally, a string for a parameterized query for each of some common
-  * tasks on a table is created by the ctor.
-  *
-  * Const iterators over the list of columns are provided as a convenience.
-  */
-class MyMoneyDbTable
-{
-public:
-  MyMoneyDbTable(const QString& iname,
-                 const QList<KSharedPtr <MyMoneyDbColumn> >& ifields,
-                 const QString& initVersion = "1.0"):
-      m_name(iname),
-      m_fields(ifields),
-      m_initVersion(initVersion) {}
-  MyMoneyDbTable(void) {}
-
-  inline const QString& name(void) const {
-    return (m_name);
-  }
-  inline const QString& insertString(void) const {
-    return (m_insertString);
-  };
-  inline const QString selectAllString(bool terminate = true) const {
-    return (terminate ? QString(m_selectAllString + ";") : m_selectAllString);
-  };
-  inline const QString& updateString(void) const {
-    return (m_updateString);
-  };
-  inline const QString& deleteString(void) const {
-    return (m_deleteString);
-  };
-
-  /**
-    * This method determines the string required to drop the primary key for the table
-    * based on the db specific syntax.
-    *
-    * @param dbType The driver type of the database.
-    *
-    * @return QString for the syntax to drop the primary key.
-    */
-  const QString dropPrimaryKeyString(databaseTypeE dbType) const;
-  /**
-    * This method returns a comma-separated list of all column names in the table
-    *
-    * @return QString column list.
-    */
-  const QString columnList() const;
-  /**
-    * This method returns the string for changing a column's definition.  It covers statements
-    * like ALTER TABLE..CHANGE COLUMN, MODIFY COLUMN, etc.
-    *
-    * @param dbType The driver type of the database.
-    * @param columnName The name of the column to be modified.
-    * @param newDef The MyMoneyColumn object of the new column definition.
-    *
-    * @return QString containing DDL to change the column.
-    */
-  const QString modifyColumnString(databaseTypeE dbType, const QString& columnName, const MyMoneyDbColumn& newDef) const;
-
-  /**
-    * This method builds all of the SQL strings for common operations.
-    */
-  void buildSQLStrings(void);
-
-  /**
-    * This method generates the DDL required to create the table.
-    *
-    * @param dbType The driver type of the database.
-    *
-    * @return QString of the DDL.
-    */
-  const QString generateCreateSQL(databaseTypeE dbType) const;
-
-  /**
-    * This method creates a MyMoneyDbIndex object and adds it to the list of indices for the table.
-    *
-    * @param name The name of the index.
-    * @param columns The list of the columns affected.
-    * @param unique Whether or not this should be a unique index.
-    */
-  void addIndex(const QString& name, const QStringList& columns, bool unique = false);
-
-  typedef QList<KSharedPtr <MyMoneyDbColumn> >::const_iterator field_iterator;
-  inline field_iterator begin(void) const {
-    return m_fields.constBegin();
-  }
-  inline field_iterator end(void) const {
-    return m_fields.constEnd();
-  }
-
-  int fieldNumber(const QString& name) const;
-private:
-  QString m_name;
-  QList<KSharedPtr <MyMoneyDbColumn> > m_fields;
-  QHash<QString, int> m_fieldOrder;
-
-  typedef QList<MyMoneyDbIndex>::const_iterator index_iterator;
-  QList<MyMoneyDbIndex> m_indices;
-  QString m_initVersion;
-  QString m_insertString; // string to insert a record
-  QString m_selectAllString; // to select all fields
-  QString m_updateString;  // normal string for record update
-  QString m_deleteString; // string to delete 1 record
-};
-
-/**
-  * The MyMoneyDbView class is a representation of a db view.
-  *
-  * Views will be dropped and recreated on upgrade, so there is no need
-  * to do anything more complex than storing the name of the view and
-  * the CREATE VIEW string.
-  */
-class MyMoneyDbView
-{
-public:
-  MyMoneyDbView(const QString& name,
-                const QString& createString,
-                const QString& initVersion = "0.1")
-      : m_name(name), m_createString(createString), m_initVersion(initVersion) {}
-
-  MyMoneyDbView(void) {}
-
-  inline const QString& name(void) const {
-    return (m_name);
-  }
-  inline const QString createString(void) const {
-    return (m_createString);
-  };
-
-private:
-  QString m_name;
-  QString m_createString;
-  QString m_initVersion;
-};
-
-/**
-  * The MyMoneyDbDef class is
-  */
-class MyMoneyDbDef
-{
-  friend class MyMoneyStorageSql;
-  friend class MyMoneyDatabaseMgr;
-public:
-  MyMoneyDbDef();
-  ~MyMoneyDbDef() {}
-
-  const QString generateSQL(const QString& driver) const;
-
-  typedef QMap<QString, MyMoneyDbTable>::const_iterator table_iterator;
-  inline table_iterator tableBegin(void) const {
-    return m_tables.constBegin();
-  }
-  inline table_iterator tableEnd(void) const {
-    return m_tables.constEnd();
-  }
-
-  typedef QMap<QString, MyMoneyDbView>::const_iterator view_iterator;
-  inline view_iterator viewBegin(void) const {
-    return m_views.constBegin();
-  }
-  inline view_iterator viewEnd(void) const {
-    return m_views.constEnd();
-  }
-
-  inline unsigned int currentVersion() const {
-    return (m_currentVersion);
-  };
-
-private:
-  const QString enclose(const QString& text) const {
-    return (QString("'" + text + "'"));
-  }
-
-  static unsigned int m_currentVersion; // The current version of the database layout
-  MyMoneyDbDrivers m_drivers;
-#define TABLE(name) void name();
-#define VIEW(name) void name();
-  TABLE(FileInfo)
-  TABLE(Institutions)
-  TABLE(Payees)
-  TABLE(Accounts)
-  TABLE(Transactions)
-  TABLE(Splits)
-  TABLE(KeyValuePairs)
-  TABLE(Schedules)
-  TABLE(SchedulePaymentHistory)
-  TABLE(Securities)
-  TABLE(Prices)
-  TABLE(Currencies)
-  TABLE(Reports)
-  TABLE(Budgets)
-  VIEW(Balances)
-protected:
-  QMap<QString, MyMoneyDbTable> m_tables;
-  QMap<QString, MyMoneyDbView> m_views;
-};
-
 class IMyMoneySerialize;
 
 /**
@@ -504,8 +128,8 @@ class IMyMoneySerialize;
   */
 class MyMoneyStorageSql : public IMyMoneyStorageFormat, public QSqlDatabase, public KShared
 {
+  friend class MyMoneyDbDef;
 public:
-
   explicit MyMoneyStorageSql(IMyMoneySerialize *storage, const KUrl& = KUrl());
   virtual ~MyMoneyStorageSql() {
     close(true);
@@ -549,32 +173,6 @@ public:
    *
    */
   bool writeFile(void);
-
-  // check database type
-  inline bool isDb2() const {
-    return (m_dbType == Db2);
-  };
-  inline bool isInterbase() const {
-    return (m_dbType == Interbase);
-  };
-  inline bool isMysql() const {
-    return (m_dbType == Mysql);
-  };
-  inline bool isOracle() const {
-    return (m_dbType == Oracle);
-  };
-  inline bool isODBC() const {
-    return (m_dbType == ODBC);
-  };
-  inline bool isPostgresql() const {
-    return (m_dbType == Postgresql);
-  };
-  inline bool isSybase() const {
-    return (m_dbType == Sybase);
-  };
-  inline bool isSqlite3() const {
-    return (m_dbType == Sqlite3);
-  };
 
   /**
   * MyMoneyStorageSql generalized error routine
@@ -788,6 +386,7 @@ private:
   int upgradeToV4();
   int upgradeToV5();
   int upgradeToV6();
+
   bool sqliteAlterTable(const MyMoneyDbTable& t);
   bool addColumn(const MyMoneyDbTable& t, const MyMoneyDbColumn& c,
                  const QString& after = QString());
@@ -805,8 +404,7 @@ private:
   void clean();
   int isEmpty();
   // data
-  MyMoneyDbDrivers m_drivers;
-  databaseTypeE m_dbType;
+  KSharedPtr<MyMoneyDbDriver> m_driver;
 
   MyMoneyDbDef m_db;
   unsigned int m_dbVersion;

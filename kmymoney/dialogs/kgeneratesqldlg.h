@@ -64,12 +64,11 @@ private:
 
   KGenerateSqlDlgDecl* m_widget;
   QList<QString> m_supportedDrivers;
-  MyMoneyDbDrivers m_map;
+  //MyMoneyDbDrivers m_map;
   kMandatoryFieldGroup* m_requiredFields;
   bool m_sqliteSelected;
-  QString m_dbDriver;
+  KSharedPtr<MyMoneyDbDriver> m_dbDriver;
   QString m_dbName;
-  databaseTypeE m_dbType;
   MyMoneySeqAccessMgr* m_storage;
   bool m_mustDetachStorage;
 };

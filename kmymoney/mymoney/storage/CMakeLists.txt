@@ -8,6 +8,8 @@ SET(storage_a_SOURCES
   mymoneystorageanon.cpp 
   mymoneystoragesql.cpp 
   mymoneydatabasemgr.cpp
+  mymoneydbdef.cpp
+  mymoneydbdriver.cpp
   )
 
 KMM_CREATE_LINKS(${storage_HEADERS})
