@@ -52,6 +52,7 @@ class KMyMoneyMVCCombo : public KComboBox
 public:
   KMyMoneyMVCCombo(QWidget* parent = 0);
   explicit KMyMoneyMVCCombo(bool editable, QWidget* parent = 0);
+  ~KMyMoneyMVCCombo();
 
   /**
     * @sa KLineEdit::setClickMessage()

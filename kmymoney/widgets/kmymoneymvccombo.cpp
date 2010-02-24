@@ -93,6 +93,11 @@ KMyMoneyMVCCombo::KMyMoneyMVCCombo(bool editable, QWidget* parent) :
   connect(this, SIGNAL(activated(int)), SLOT(activated(int)));
 }
 
+KMyMoneyMVCCombo::~KMyMoneyMVCCombo()
+{
+  delete d;
+}
+
 void KMyMoneyMVCCombo::setSubstringSearch(bool enabled)
 {
   if(enabled) {
