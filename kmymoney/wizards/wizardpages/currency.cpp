@@ -33,7 +33,7 @@ Currency::Currency(QWidget* parent) :
     CurrencyDecl(parent)
 {
   m_currencyList->setAllColumnsShowFocus(true);
-  //m_currencyList->setMultiSelection(false);
+  m_currencyList->setColumnWidth(0, size().width()*7/10);
 }
 
 QTreeWidgetItem* Currency::insertCurrency(const MyMoneySecurity& sec)

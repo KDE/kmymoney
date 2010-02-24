@@ -15,7 +15,7 @@
     </property>
     <layout class="QGridLayout">
       <item row="0" column="0" rowspan="1" colspan="4">
-        <widget class="K3ActiveLabel" name="kActiveLabel1">
+        <widget class="QLabel" name="qLabel1">
           <property name="focusPolicy">
             <enum>Qt::NoFocus</enum>
           </property>
@@ -23,6 +23,9 @@
             <string>&lt;p&gt;Use the fields below to enter some information about yourself.&lt;/p&gt;
 
 &lt;p&gt;All information is optional and only used to personalize your KMyMoney file.&lt;/p&gt;</string>
+          </property>
+          <property name="wordWrap">
+            <bool>true</bool>
           </property>
         </widget>
       </item>

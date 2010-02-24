@@ -167,12 +167,15 @@
        </spacer>
       </item>
       <item row="0" column="0" colspan="3">
-       <widget class="K3ActiveLabel" name="kActiveLabel1" native="true">
+       <widget class="QLabel" name="qLabel1" native="true">
         <property name="focusPolicy">
          <enum>Qt::NoFocus</enum>
         </property>
         <property name="text" stdset="0">
          <string>Please enter the username and password you use to log into this bank for online banking.  Please note that many banks require a separate signup, and assign a separate PIN or password just for online banking from home.</string>
+        </property>
+        <property name="wordWrap">
+          <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -411,11 +414,6 @@
    <class>KTextBrowser</class>
    <extends>QTextBrowser</extends>
    <header>ktextbrowser.h</header>
-  </customwidget>
-  <customwidget>
-   <class>K3ActiveLabel</class>
-   <extends>QWidget</extends>
-   <header>k3activelabel.h</header>
   </customwidget>
   <customwidget>
    <class>K3Wizard</class>

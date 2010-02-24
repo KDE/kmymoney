@@ -422,9 +422,12 @@
             </attribute>
             <layout class="QVBoxLayout">
               <item>
-                <widget class="K3ActiveLabel" name="kActiveLabel1">
+                <widget class="QLabel" name="qLabel1">
                   <property name="text">
                     <string>This page allows to setup certain limits. KMyMoney will warn you when the account balance reaches a limit.</string>
+                  </property>
+                  <property name="wordWrap">
+                    <bool>true</bool>
                   </property>
                 </widget>
               </item>

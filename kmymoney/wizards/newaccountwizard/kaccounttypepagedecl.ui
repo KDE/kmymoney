@@ -15,12 +15,15 @@
     </property>
     <layout class="QVBoxLayout">
       <item>
-        <widget class="K3ActiveLabel" name="kActiveLabel4">
+        <widget class="QLabel" name="qLabel4">
           <property name="focusPolicy">
             <enum>Qt::NoFocus</enum>
           </property>
           <property name="text">
             <string>Enter the name of the account under which it is known within KMyMoney. Select the type for the new account. Use the &lt;b&gt;What's this?&lt;/b&gt; feature to see more details about the various account types. Enter the date the account was opened and its currency.</string>
+          </property>
+          <property name="wordWrap">
+            <bool>true</bool>
           </property>
         </widget>
       </item>

@@ -502,9 +502,12 @@ All information you have entered into this wizard will be shown and all transact
    </attribute>
    <layout class="QVBoxLayout">
     <item>
-     <widget class="K3ActiveLabel" name="m_enterInformationLabel" native="true">
+     <widget class="QLabel" name="m_enterInformationLabel" native="true">
       <property name="text" stdset="0">
        <string>x</string>
+      </property>
+      <property name="wordWrap">
+        <bool>true</bool>
       </property>
      </widget>
     </item>
@@ -649,9 +652,12 @@ All information you have entered into this wizard will be shown and all transact
    </attribute>
    <layout class="QVBoxLayout">
     <item>
-     <widget class="K3ActiveLabel" name="kActiveLabel1" native="true">
+     <widget class="QLabel" name="qLabel1" native="true">
       <property name="text" stdset="0">
        <string>If necessary, enter information about interest or charges here. KMyMoney will create transactions and cleares them directly for you.</string>
+      </property>
+      <property name="wordWrap">
+        <bool>true</bool>
       </property>
      </widget>
     </item>
@@ -886,11 +892,6 @@ All information you have entered into this wizard will be shown and all transact
    <class>kMyMoneyAccountSelector</class>
    <extends>QWidget</extends>
    <header>kmymoneyaccountselector.h</header>
-  </customwidget>
-  <customwidget>
-   <class>K3ActiveLabel</class>
-   <extends>QWidget</extends>
-   <header>k3activelabel.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

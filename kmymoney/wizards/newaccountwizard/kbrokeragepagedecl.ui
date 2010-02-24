@@ -15,7 +15,7 @@
     </property>
     <layout class="QVBoxLayout">
       <item>
-        <widget class="K3ActiveLabel" name="kActiveLabel14">
+        <widget class="QLabel" name="qLabel14">
           <property name="focusPolicy">
             <enum>Qt::NoFocus</enum>
           </property>
@@ -25,6 +25,9 @@
 &lt;b&gt;Check&lt;/b&gt; the mark if this investment account has an associated account for money that is not invested.&lt;br&gt;
 
 &lt;b&gt;Uncheck&lt;/b&gt; it if you do not use this account for active stock brokerage. You should also uncheck it if the account is not maintained by a bank or broker.</string>
+          </property>
+          <property name="wordWrap">
+            <bool>true</bool>
           </property>
         </widget>
       </item>

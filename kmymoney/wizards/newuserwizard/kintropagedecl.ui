@@ -34,11 +34,14 @@
         </widget>
       </item>
       <item>
-        <widget class="K3ActiveLabel" name="kActiveLabel1">
+        <widget class="QLabel" name="qLabel1">
           <property name="text">
             <string>You have started KMyMoney for the first time on this computer. Before this program can help you to manage your finances, it needs to collect some data from you.&lt;p&gt;
 
 On the next few pages you will be guided through the steps necessary to setup the program. This will happen only once.</string>
+          </property>
+          <property name="wordWrap">
+            <bool>true</bool>
           </property>
         </widget>
       </item>

@@ -75,7 +75,11 @@
                     </spacer>
                   </item>
                   <item row="0" column="0" rowspan="1" colspan="2">
-                    <widget class="K3ActiveLabel" name="m_descLabel"/>
+                    <widget class="QLabel" name="m_descLabel">
+                      <property name="wordWrap">
+                        <bool>true</bool>
+                      </property>
+                    </widget>
                   </item>
                   <item row="1" column="0" rowspan="1" colspan="2">
                     <widget class="QLabel" name="m_headerLabel">

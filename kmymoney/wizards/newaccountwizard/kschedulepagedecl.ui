@@ -15,9 +15,12 @@
     </property>
     <layout class="QVBoxLayout">
       <item>
-        <widget class="K3ActiveLabel" name="kActiveLabel16">
+        <widget class="QLabel" name="qLabel16">
           <property name="text">
             <string>For credit card accounts you can create a monthly schedule which will automatically remind you about the payment. Please fill in the details about this payment here.</string>
+          </property>
+          <property name="wordWrap">
+            <bool>true</bool>
           </property>
         </widget>
       </item>

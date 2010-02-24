@@ -15,12 +15,15 @@
     </property>
     <layout class="QVBoxLayout">
       <item>
-        <widget class="K3ActiveLabel" name="kActiveLabel1">
+        <widget class="QLabel" name="qLabel1">
           <property name="focusPolicy">
             <enum>Qt::NoFocus</enum>
           </property>
           <property name="text">
             <string>If you would like to review or change any preference settings for KMyMoney at this time, you can do so here. If not just click &lt;b&gt;Next&lt;/b&gt;.</string>
+          </property>
+          <property name="wordWrap">
+            <bool>true</bool>
           </property>
         </widget>
       </item>
@@ -68,12 +71,15 @@
         </spacer>
       </item>
       <item>
-        <widget class="K3ActiveLabel" name="kActiveLabel2">
+        <widget class="QLabel" name="qLabel2">
           <property name="focusPolicy">
             <enum>Qt::NoFocus</enum>
           </property>
           <property name="text">
             <string>You can change the configuration options at any time using the configuration dialog. Just select the &lt;b&gt;Configure KMyMoney...&lt;/b&gt; option in the &lt;b&gt;Settings&lt;/b&gt; menu.</string>
+          </property>
+          <property name="wordWrap">
+            <bool>true</bool>
           </property>
         </widget>
       </item>

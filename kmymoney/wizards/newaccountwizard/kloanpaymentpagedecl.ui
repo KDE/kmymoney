@@ -15,12 +15,15 @@
     </property>
     <layout class="QVBoxLayout">
       <item>
-        <widget class="K3ActiveLabel" name="kActiveLabel1">
+        <widget class="QLabel" name="qLabel1">
           <property name="focusPolicy">
             <enum>Qt::NoFocus</enum>
           </property>
           <property name="text">
             <string>Now enter the information required for the periodic loan payments. If your regular payments contains any additional fees, click on the &lt;b&gt;Additional fees&lt;/b&gt; button to enter them.</string>
+          </property>
+          <property name="wordWrap">
+            <bool>true</bool>
           </property>
         </widget>
       </item>

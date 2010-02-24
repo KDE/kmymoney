@@ -15,9 +15,12 @@
     </property>
     <layout class="QVBoxLayout">
       <item>
-        <widget class="K3ActiveLabel" name="kActiveLabel2">
+        <widget class="QLabel" name="qLabel2">
           <property name="text">
             <string>Select groups of accounts that correspond to the ways that you will use KMyMoney. Each group you select will cause several accounts and categories to be created. Select the groups that are relevant to you. You can always create additional accounts manually later.</string>
+          </property>
+          <property name="wordWrap">
+            <bool>true</bool>
           </property>
         </widget>
       </item>

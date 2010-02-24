@@ -21,12 +21,15 @@
     </property>
     <layout class="QVBoxLayout">
       <item>
-        <widget class="K3ActiveLabel" name="m_description">
+        <widget class="QLabel" name="m_description">
           <property name="focusPolicy">
             <enum>Qt::NoFocus</enum>
           </property>
           <property name="text">
             <string>xxx</string>
+          </property>
+          <property name="wordWrap">
+            <bool>true</bool>
           </property>
         </widget>
       </item>

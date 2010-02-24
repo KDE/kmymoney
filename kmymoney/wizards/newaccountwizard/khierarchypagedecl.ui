@@ -15,7 +15,7 @@
     </property>
     <layout class="QVBoxLayout">
       <item>
-        <widget class="K3ActiveLabel" name="kActiveLabel1">
+        <widget class="QLabel" name="qLabel1">
           <property name="sizePolicy">
             <sizepolicy>
               <hsizetype>5</hsizetype>
@@ -29,6 +29,9 @@
           </property>
           <property name="text">
             <string>This page allows you to select the parent account.</string>
+          </property>
+          <property name="wordWrap">
+            <bool>true</bool>
           </property>
         </widget>
       </item>

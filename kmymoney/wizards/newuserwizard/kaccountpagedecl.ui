@@ -15,12 +15,15 @@
     </property>
     <layout class="QVBoxLayout">
       <item>
-        <widget class="K3ActiveLabel" name="kActiveLabel2">
+        <widget class="QLabel" name="qLabel2">
           <property name="focusPolicy">
             <enum>Qt::NoFocus</enum>
           </property>
           <property name="text">
             <string>A typical KMyMoney user maintains a checking account with some institution and uses it to receive money or pay bills. If this is not the case, please deselect the checkbox below and continue on the next page.</string>
+          </property>
+          <property name="wordWrap">
+            <bool>true</bool>
           </property>
         </widget>
       </item>
@@ -199,12 +202,15 @@
               </layout>
             </item>
             <item row="0" column="0" rowspan="1" colspan="2">
-              <widget class="K3ActiveLabel" name="kActiveLabel1">
+              <widget class="QLabel" name="qLabel1">
                 <property name="focusPolicy">
                   <enum>Qt::NoFocus</enum>
                 </property>
                 <property name="text">
                   <string>The fields below allow you to enter some information about your checking account. Once this wizard finishes, the account will be created for you within KMyMoney.</string>
+                </property>
+                <property name="wordWrap">
+                  <bool>true</bool>
                 </property>
               </widget>
             </item>

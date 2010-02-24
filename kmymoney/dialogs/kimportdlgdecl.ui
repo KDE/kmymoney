@@ -27,7 +27,7 @@
         <number>6</number>
       </property>
       <item>
-        <widget class="K3ActiveLabel" name="kActiveLabel1">
+        <widget class="QLabel" name="qLabel1">
           <property name="focusPolicy">
             <enum>Qt::NoFocus</enum>
           </property>
@@ -35,6 +35,9 @@
             <string>From this dialog you are able to import transactions from a Quicken&lt;b&gt;&amp;trade;&lt;/b&gt; compatible file, (known as a QIF file, because of the extension).&lt;p&gt;
 
 Please enter the path to the QIF file or select it by clicking on the Browse button. Once you have the file's path press the Import button and KMyMoney will import all the transactions, categories and payees it finds.</string>
+          </property>
+          <property name="wordWrap">
+            <bool>true</bool>
           </property>
         </widget>
       </item>
@@ -211,11 +214,6 @@ Please enter the path to the QIF file or select it by clicking on the Browse but
       <class>KComboBox</class>
       <extends>QComboBox</extends>
       <header location="global">kcombobox.h</header>
-    </customwidget>
-    <customwidget>
-      <class>K3ActiveLabel</class>
-      <extends>QWidget</extends>
-      <header location="global">k3activelabel.h</header>
     </customwidget>
     <customwidget>
       <class>KLineEdit</class>
