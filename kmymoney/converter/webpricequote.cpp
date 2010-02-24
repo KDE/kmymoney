@@ -85,7 +85,7 @@ bool WebPriceQuote::launchNative(const QString& _symbol, const QString& _id, con
   if (quoteSources().contains(sourcename))
     m_source = WebPriceQuoteSource(sourcename);
   else
-    emit error(QString("Source <%1> does not exist.").arg(sourcename));
+    emit error(i18n("Source <%1> does not exist.",sourcename));
 
   KUrl url;
 
@@ -133,7 +133,7 @@ bool WebPriceQuote::launchNative(const QString& _symbol, const QString& _id, con
         f.close();
         slotParseQuote(quote);
       } else {
-        emit error("Failed to open downloaded file");
+        emit error(i18n("Failed to open downloaded file"));
         slotParseQuote(QString());
       }
       KIO::NetAccess::removeTempFile(tmpFile);
@@ -172,7 +172,7 @@ bool WebPriceQuote::launchFinanceQuote(const QString& _symbol, const QString& _i
   if (m_filter.waitForFinished()) {
     result = true;
   } else {
-    emit error(QString("Unable to launch: %1").arg(m_financeQuoteScriptPath));
+    emit error(i18n("Unable to launch: %1",m_financeQuoteScriptPath));
     slotParseQuote(QString());
   }
 
