@@ -77,7 +77,7 @@ public:
     */
   QStringList accountList(const QList<MyMoneyAccount::accountTypeE>& list = QList<MyMoneyAccount::accountTypeE>()) const;
 
-  void setSelectionMode(Q3ListView::SelectionMode mode);
+  void setSelectionMode(QTreeWidget::SelectionMode mode);
 
   /**
     * This method checks if a given @a item matches the given regular expression @a exp.
@@ -88,7 +88,7 @@ public:
     * @retval true item matches
     * @retval false item does not match
     */
-  virtual bool match(const QRegExp& exp, Q3ListViewItem* item) const;
+  virtual bool match(const QRegExp& exp, QTreeWidgetItem* item) const;
 
   /**
     * This method returns, if any of the items in the selector contains
@@ -131,7 +131,7 @@ protected:
     * @param list QStringList containing the ids of all subaccounts to load
     * @return This method returns the number of accounts loaded into the list
     */
-  int loadSubAccounts(Q3ListViewItem* parent, const QStringList& list);
+  int loadSubAccounts(QTreeWidgetItem* parent, const QStringList& list);
 
   /**
     * This is a helper method for selectAllIncomeCategories()
@@ -190,14 +190,14 @@ public:
   }
 
 protected:
-  int loadSubAccounts(kMyMoneyAccountSelector* selector, Q3ListViewItem* parent, const QString& key, const QStringList& list);
+  int loadSubAccounts(kMyMoneyAccountSelector* selector, QTreeWidgetItem* parent, const QString& key, const QStringList& list);
   bool includeAccount(const MyMoneyAccount& acc);
 
 private:
   int                                      m_count;
   MyMoneyFile*                             m_file;
   QList<MyMoneyAccount::accountTypeE>      m_typeList;
-  Q3ListViewItem*                          m_favorites;
+  QTreeWidgetItem*                         m_favorites;
   bool                                     m_hideClosedAccounts;
 };
 #endif

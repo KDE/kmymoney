@@ -23,6 +23,7 @@
 
 #include <QObject>
 #include <q3listview.h>
+#include <QTreeWidgetItem>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -90,6 +91,44 @@ private:
   unsigned int         m_isOdd : 1;
   unsigned int         m_isKnown : 1;
   unsigned int         m_unused : 30;
+};
+
+class KMyMoneyTreeWidgetItem : public QObject, public QTreeWidgetItem
+{
+  friend class KMyMoneyListViewItem;
+
+  Q_OBJECT
+public:
+  KMyMoneyTreeWidgetItem(QTreeWidget *parent, const QString& txt, const QString& key, const QString& id);
+  KMyMoneyTreeWidgetItem(QTreeWidget *parent, QTreeWidgetItem* after, const QString& txt, const QString& key, const QString& id);
+  KMyMoneyTreeWidgetItem(QTreeWidgetItem *parent, const QString& txt, const QString& key, const QString& id);
+  ~KMyMoneyTreeWidgetItem();
+
+  const QString& id(void) const {
+    return m_id;
+  };
+
+  bool isSelectable();
+  void setSelectable(bool selectable);
+  void setCheckable(bool checkable);
+
+  /**
+    * This method returns a const reference to the key passed to the constructor. The column
+    * defines what is returned: For @a column equals 0, the first character passed as @a key to
+    * the constructor concatenated with the value returned by text(0) is returned. For @a column
+    * equals to 1, the @a key as passed to the constructor except the first character is returned.
+    */
+  QString key(int column, bool ascending) const;
+
+signals:
+  void stateChanged(bool);
+
+protected:
+  virtual void stateChange(bool);
+
+private:
+  QString              m_key;
+  QString              m_id;
 };
 
 #endif

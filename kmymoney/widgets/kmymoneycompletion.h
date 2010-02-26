@@ -31,12 +31,12 @@
 #include <QRegExp>
 //Added by qt3to4:
 #include <QEvent>
-class Q3ListViewItem;
+class QTreeWidgetItem;
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-class K3ListView;
+class QTreeWidget;
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -75,7 +75,7 @@ public:
 public slots:
   void slotMakeCompletion(const QString& txt);
 
-  void slotItemSelected(Q3ListViewItem *item, const QPoint& pos, int col);
+  void slotItemSelected(QTreeWidgetItem *item, int col);
 
 protected:
   /**
@@ -103,7 +103,7 @@ protected:
     */
   void adjustSize(void);
 
-  void connectSignals(QWidget *widget, K3ListView* lv);
+  void connectSignals(QWidget *widget, QTreeWidget* lv);
 
   void show(bool presetSelected);
 
@@ -114,7 +114,7 @@ protected:
   QWidget*                    m_parent;
   QWidget*                    m_widget;
   QString                     m_id;
-  K3ListView*                 m_lv;
+  QTreeWidget*                m_lv;
   KMyMoneySelector*           m_selector;
   QRegExp                     m_lastCompletion;
 

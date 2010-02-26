@@ -5378,8 +5378,6 @@ void KMyMoneyApp::slotUpdateMoveToAccountMenu(void)
       if (acc.currencyId() != d->m_selectedAccount.currencyId())
         d->m_moveToAccountSelector->removeItem((*it_a));
     }
-    // Now update the width of the list
-    d->m_moveToAccountSelector->setOptimizedWidth();
   }
 }
 

@@ -323,7 +323,7 @@ bool KFindTransactionDlg::allItemsSelected(const Q3ListView* view) const
 
 void KFindTransactionDlg::setupAccountsPage(void)
 {
-  m_accountsView->setSelectionMode(Q3ListView::Multi);
+  m_accountsView->setSelectionMode(QTreeWidget::MultiSelection);
   AccountSet accountSet;
   accountSet.addAccountGroup(MyMoneyAccount::Asset);
   accountSet.addAccountGroup(MyMoneyAccount::Liability);
@@ -365,7 +365,7 @@ void KFindTransactionDlg::selectItems(Q3ListView* view, const QStringList& list,
 
 void KFindTransactionDlg::setupCategoriesPage(void)
 {
-  m_categoriesView->setSelectionMode(Q3ListView::Multi);
+  m_categoriesView->setSelectionMode(QTreeWidget::MultiSelection);
   AccountSet categorySet;
   categorySet.addAccountGroup(MyMoneyAccount::Income);
   categorySet.addAccountGroup(MyMoneyAccount::Expense);

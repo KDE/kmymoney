@@ -149,4 +149,79 @@ bool KMyMoneyCheckListItem::isAlternate(void)
   return m_isOdd;
 }
 
+KMyMoneyTreeWidgetItem::KMyMoneyTreeWidgetItem(QTreeWidget* parent, const QString& txt, const QString& key, const QString& id) :
+    QTreeWidgetItem(parent),
+    m_key(key),
+    m_id(id)
+{
+  setText(0, txt);
+  if (key.isEmpty())
+    m_key = txt;
+  setCheckable(false);
+}
+
+KMyMoneyTreeWidgetItem::KMyMoneyTreeWidgetItem(QTreeWidgetItem* parent, const QString& txt, const QString& key, const QString& id) :
+    QTreeWidgetItem(parent),
+    m_key(key),
+    m_id(id)
+{
+  setText(0, txt);
+  if (key.isEmpty())
+    m_key = txt;
+  setCheckable(false);
+}
+
+KMyMoneyTreeWidgetItem::KMyMoneyTreeWidgetItem(QTreeWidget* parent, QTreeWidgetItem* after, const QString& txt, const QString& key, const QString& id) :
+    QTreeWidgetItem(parent, after),
+    m_key(key),
+    m_id(id)
+{
+  setText(0, txt);
+  if (key.isEmpty())
+    m_key = txt;
+  setCheckable(false);
+}
+
+KMyMoneyTreeWidgetItem::~KMyMoneyTreeWidgetItem()
+{
+}
+
+bool KMyMoneyTreeWidgetItem::isSelectable()
+{
+  return flags().testFlag(Qt::ItemIsSelectable);
+}
+
+void KMyMoneyTreeWidgetItem::setSelectable(bool selectable)
+{
+  if (selectable) {
+    setFlags(flags() | Qt::ItemIsSelectable);
+  } else {
+    setFlags(flags() & ~Qt::ItemIsSelectable);
+  }
+}
+
+void KMyMoneyTreeWidgetItem::setCheckable(bool checkable)
+{
+  if (checkable) {
+    setFlags(flags() | Qt::ItemIsUserCheckable);
+    setCheckState(0, Qt::Checked);
+  } else {
+    setFlags(flags() & ~Qt::ItemIsUserCheckable);
+  }
+}
+
+QString KMyMoneyTreeWidgetItem::key(int column, bool ascending) const
+{
+  Q_UNUSED(ascending);
+
+  if (column == 0)
+    return m_key[0] + text(0);
+  return m_key.mid(1);
+}
+
+void KMyMoneyTreeWidgetItem::stateChange(bool state)
+{
+  emit stateChanged(state);
+}
+
 #include "kmymoneychecklistitem.moc"

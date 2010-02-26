@@ -41,7 +41,7 @@
 // Project Includes
 
 #include <kmymoneyselector.h>
-#include <kmymoneylistviewitem.h>
+#include <kmymoneychecklistitem.h>
 #include "./kmymoneycombo.h"
 
 const int kMyMoneyCompletion::MAX_ITEMS = 16;
@@ -50,7 +50,7 @@ kMyMoneyCompletion::kMyMoneyCompletion(QWidget *parent) :
     KVBox(parent)
 {
   setWindowFlags(Qt::Popup);
-  setFrameStyle(QFrame::PopupPanel | QFrame::Raised);
+  setFrameStyle(QFrame::StyledPanel | QFrame::Raised);
 
   m_parent = parent;
   setFocusProxy(parent);
@@ -60,11 +60,11 @@ kMyMoneyCompletion::kMyMoneyCompletion(QWidget *parent) :
   connectSignals(m_selector, m_selector->listView());
 }
 
-void kMyMoneyCompletion::connectSignals(QWidget* widget, K3ListView* lv)
+void kMyMoneyCompletion::connectSignals(QWidget* widget, QTreeWidget* lv)
 {
   m_widget = widget;
   m_lv = lv;
-  connect(lv, SIGNAL(executed(Q3ListViewItem*, const QPoint&, int)), this, SLOT(slotItemSelected(Q3ListViewItem*, const QPoint&, int)));
+  connect(lv, SIGNAL(itemActivated(QTreeWidgetItem*,int)), this, SLOT(slotItemSelected(QTreeWidgetItem*, int)));
 }
 
 kMyMoneyCompletion::~kMyMoneyCompletion()
@@ -73,9 +73,9 @@ kMyMoneyCompletion::~kMyMoneyCompletion()
 
 void kMyMoneyCompletion::adjustSize(void)
 {
-  Q3ListViewItemIterator it(m_lv, Q3ListViewItemIterator::Visible);
+  QTreeWidgetItemIterator it(m_lv, QTreeWidgetItemIterator::NotHidden);
   int count = 0;
-  while (it.current()) {
+  while (*it) {
     ++count;
     ++it;
   }
@@ -93,23 +93,19 @@ void kMyMoneyCompletion::adjustSize(const int count)
     w = fm.maxWidth() * 15;
 
   int h = 0;
-  Q3ListViewItemIterator it(m_lv, Q3ListViewItemIterator::Visible);
-  Q3ListViewItem* item = it.current();
+  QTreeWidgetItemIterator it(m_lv, QTreeWidgetItemIterator::NotHidden);
+  QTreeWidgetItem* item = *it;
   if (item)
-    h = item->height() * (count > MAX_ITEMS ? MAX_ITEMS : count);
+    // the +1 in the next statement avoids the display of a scroll bar if count < MAX_ITEMS.
+    h = item->treeWidget()->visualItemRect(item).height() * (count > MAX_ITEMS - 1 ? MAX_ITEMS : count + 1);
 
-  // the offset of 4 in the next statement avoids the
-  // display of a scroll bar if count < MAX_ITEMS.
-  resize(w, h + 4);
+  resize(w, h);
 
   if (m_parent) {
     // the code of this basic block is taken from K3CompletionBox::show()
     // and modified to our local needs
 
-    // this is probably better, once kde switches to requiring qt3.1
-    // QRect screenSize = QApplication::desktop()->availableGeometry(d->m_parent);
-    // for now use this since it's qt3.0.x-safe
-    QRect screenSize = QApplication::desktop()->screenGeometry(QApplication::desktop()->screenNumber(m_parent));
+    QRect screenSize = QApplication::desktop()->availableGeometry(parentWidget());
 
     QPoint orig = m_parent->mapToGlobal(QPoint(0, m_parent->height()));
     int x = orig.x();
@@ -123,7 +119,7 @@ void kMyMoneyCompletion::adjustSize(const int count)
     // edit widget. The offset (y) is certainly based
     // on the actual height.
     if (item) {
-      if ((y + item->height()*MAX_ITEMS) > screenSize.bottom())
+      if ((y + item->treeWidget()->visualItemRect(item).height() * MAX_ITEMS) > screenSize.bottom())
         y = y - height() - m_parent->height();
     }
 
@@ -177,7 +173,7 @@ void kMyMoneyCompletion::hide(void)
 bool kMyMoneyCompletion::eventFilter(QObject* o, QEvent* e)
 {
   KMyMoneyCombo *c = dynamic_cast<KMyMoneyCombo*>(m_parent);
-  Q3ListViewItem* item;
+  QTreeWidgetItem* item;
   if (o == m_parent || (c && o == c->lineEdit())) {
     if (isVisible()) {
       if (e->type() == QEvent::KeyPress) {
@@ -192,14 +188,14 @@ bool kMyMoneyCompletion::eventFilter(QObject* o, QEvent* e)
         switch (ev->key()) {
         case Qt::Key_Tab:
         case Qt::Key_Backtab:
-          slotItemSelected(m_lv->currentItem(), QPoint(0, 0), 0);
+          slotItemSelected(m_lv->currentItem(), 0);
           break;
 
         case Qt::Key_Down:
         case Qt::Key_PageDown:
           item = m_lv->currentItem();
           while (item) {
-            item = item->itemBelow();
+            item = m_lv->itemBelow(item);
             if (item && selector()->match(m_lastCompletion, item))
               break;
           }
@@ -214,15 +210,15 @@ bool kMyMoneyCompletion::eventFilter(QObject* o, QEvent* e)
         case Qt::Key_PageUp:
           item = m_lv->currentItem();
           while (item) {
-            item = item->itemAbove();
+            item = m_lv->itemAbove(item);
             if (item && selector()->match(m_lastCompletion, item))
               break;
           }
           if (item) {
             m_lv->setCurrentItem(item);
             // make sure, we always see a possible (non-selectable) group item
-            if (item->itemAbove())
-              item = item->itemAbove();
+            if (m_lv->itemAbove(item))
+              item = m_lv->itemAbove(item);
             selector()->ensureItemVisible(item);
           }
           ev->accept();
@@ -235,7 +231,7 @@ bool kMyMoneyCompletion::eventFilter(QObject* o, QEvent* e)
 
         case Qt::Key_Enter:
         case Qt::Key_Return:
-          slotItemSelected(m_lv->currentItem(), QPoint(0, 0), 0);
+          slotItemSelected(m_lv->currentItem(), 0);
           ev->accept();
           return true;
 
@@ -244,25 +240,25 @@ bool kMyMoneyCompletion::eventFilter(QObject* o, QEvent* e)
           if (ev->modifiers() & Qt::ControlModifier) {
             item = m_lv->currentItem();
             if (ev->key() == Qt::Key_Home) {
-              while (item && item->itemAbove()) {
-                item = item->itemAbove();
+              while (item && m_lv->itemAbove(item)) {
+                item = m_lv->itemAbove(item);
               }
               while (item && !selector()->match(m_lastCompletion, item)) {
-                item = item->itemBelow();
+                item = m_lv->itemBelow(item);
               }
             } else {
-              while (item && item->itemBelow()) {
-                item = item->itemBelow();
+              while (item && m_lv->itemBelow(item)) {
+                item = m_lv->itemBelow(item);
               }
               while (item && !selector()->match(m_lastCompletion, item)) {
-                item = item->itemAbove();
+                item = m_lv->itemAbove(item);
               }
             }
             if (item) {
               m_lv->setCurrentItem(item);
               // make sure, we always see a possible (non-selectable) group item
-              if (item->itemAbove())
-                item = item->itemAbove();
+              if (m_lv->itemAbove(item))
+                item = m_lv->itemAbove(item);
               selector()->ensureItemVisible(item);
             }
             ev->accept();
@@ -295,9 +291,9 @@ void kMyMoneyCompletion::slotMakeCompletion(const QString& txt)
   }
 }
 
-void kMyMoneyCompletion::slotItemSelected(Q3ListViewItem *item, const QPoint&, int)
+void kMyMoneyCompletion::slotItemSelected(QTreeWidgetItem *item, int)
 {
-  KMyMoneyListViewItem* it_v = static_cast<KMyMoneyListViewItem*>(item);
+  KMyMoneyTreeWidgetItem* it_v = dynamic_cast<KMyMoneyTreeWidgetItem*>(item);
   if (it_v && it_v->isSelectable()) {
     QString id = it_v->id();
     // hide the widget, so we can debug the slots that are connect

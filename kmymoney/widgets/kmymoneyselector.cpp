@@ -23,11 +23,13 @@
 // QT Includes
 
 #include <QLayout>
-#include <q3header.h>
+#include <QTreeWidget>
+#include <QHeaderView>
 #include <QTimer>
 #include <QStyle>
 #include <QRegExp>
 #include <QHBoxLayout>
+#include <QApplication>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -35,43 +37,41 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneylistviewitem.h"
 #include "kmymoneychecklistitem.h"
 #include "kmymoneyglobalsettings.h"
 
 KMyMoneySelector::KMyMoneySelector(QWidget *parent, Qt::WFlags flags) :
     QWidget(parent, flags)
 {
-  m_selMode = Q3ListView::Single;
+  m_selMode = QTreeWidget::SingleSelection;
 
-  m_listView = new K3ListView(this);
+  m_treeWidget = new QTreeWidget(this);
   // don't show horizontal scroll bar
-  m_listView->setHScrollBarMode(Q3ScrollView::AlwaysOff);
+  m_treeWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-  m_listView->setSorting(-1);
+  m_treeWidget->setSortingEnabled(false);
+  m_treeWidget->setAlternatingRowColors(true);
 
   if (parent) {
     setFocusProxy(parent->focusProxy());
-    m_listView->setFocusProxy(parent->focusProxy());
+    m_treeWidget->setFocusProxy(parent->focusProxy());
   }
 
-  m_listView->setAllColumnsShowFocus(true);
+  m_treeWidget->setAllColumnsShowFocus(true);
 
   m_layout = new QHBoxLayout(this);
   m_layout->setSpacing(6);
+  m_layout->setMargin(0);
 
-  m_listView->addColumn("Hidden");
-  m_listView->header()->hide();
-  m_listView->header()->setStretchEnabled(true, -1);
-  m_listView->header()->adjustHeaderSize();
+  m_treeWidget->header()->hide();
 
-  m_layout->addWidget(m_listView);
+  m_layout->addWidget(m_treeWidget);
 
   // force init
-  m_selMode = Q3ListView::Multi;
-  setSelectionMode(Q3ListView::Single);
+  m_selMode = QTreeWidget::MultiSelection;
+  setSelectionMode(QTreeWidget::SingleSelection);
 
-  connect(m_listView, SIGNAL(rightButtonPressed(Q3ListViewItem* , const QPoint&, int)), this, SLOT(slotListRightMouse(Q3ListViewItem*, const QPoint&, int)));
+  connect(m_treeWidget, SIGNAL(itemPressed(QTreeWidgetItem*, int)), this, SLOT(slotItemPressed(QTreeWidgetItem*, int)));
 }
 
 KMyMoneySelector::~KMyMoneySelector()
@@ -80,212 +80,154 @@ KMyMoneySelector::~KMyMoneySelector()
 
 void KMyMoneySelector::clear(void)
 {
-  m_listView->clear();
+  m_treeWidget->clear();
   m_visibleItem = 0;
 }
 
-void KMyMoneySelector::setSelectionMode(const Q3ListView::SelectionMode mode)
+void KMyMoneySelector::setSelectionMode(const QTreeWidget::SelectionMode mode)
 {
   if (m_selMode != mode) {
     m_selMode = mode;
     clear();
 
     // make sure, it's either Multi or Single
-    if (mode != Q3ListView::Multi) {
-      m_selMode = Q3ListView::Single;
-      connect(m_listView, SIGNAL(selectionChanged(void)), this, SIGNAL(stateChanged(void)));
-      connect(m_listView, SIGNAL(executed(Q3ListViewItem*)), this, SLOT(slotItemSelected(Q3ListViewItem*)));
+    if (mode != QTreeWidget::MultiSelection) {
+      m_selMode = QTreeWidget::SingleSelection;
+      connect(m_treeWidget, SIGNAL(itemSelectionChanged(void)), this, SIGNAL(stateChanged(void)));
+      connect(m_treeWidget, SIGNAL(itemActivated(QTreeWidgetItem*,int)), this, SLOT(slotItemSelected(QTreeWidgetItem*)));
     } else {
-      disconnect(m_listView, SIGNAL(selectionChanged(void)), this, SIGNAL(stateChanged(void)));
-      disconnect(m_listView, SIGNAL(executed(Q3ListViewItem*)), this, SLOT(slotItemSelected(Q3ListViewItem*)));
+      disconnect(m_treeWidget, SIGNAL(itemSelectionChanged(void)), this, SIGNAL(stateChanged(void)));
+      disconnect(m_treeWidget, SIGNAL(itemActivated(QTreeWidgetItem*,int)), this, SLOT(slotItemSelected(QTreeWidgetItem*)));
     }
   }
   QWidget::update();
 }
 
-void KMyMoneySelector::slotItemSelected(Q3ListViewItem *item)
+void KMyMoneySelector::slotItemSelected(QTreeWidgetItem *item)
 {
-  if (m_selMode == Q3ListView::Single) {
-    KMyMoneyListViewItem* l_item = dynamic_cast<KMyMoneyListViewItem*>(item);
+  if (m_selMode == QTreeWidget::SingleSelection) {
+    KMyMoneyTreeWidgetItem* l_item = dynamic_cast<KMyMoneyTreeWidgetItem*>(item);
     if (l_item && l_item->isSelectable()) {
       emit itemSelected(l_item->id());
     }
   }
 }
 
-Q3ListViewItem* KMyMoneySelector::newItem(const QString& name, Q3ListViewItem* after, const QString& key, const QString& id, Q3CheckListItem::Type type)
+QTreeWidgetItem* KMyMoneySelector::newItem(const QString& name, QTreeWidgetItem* after, const QString& key, const QString& id)
 {
-  Q3ListViewItem* item;
+  KMyMoneyTreeWidgetItem* item;
   if (after)
-    item = new KMyMoneyCheckListItem(m_listView, after, name, key, id, type);
+    item = new KMyMoneyTreeWidgetItem(m_treeWidget, after, name, key, id);
   else
-    item = new KMyMoneyCheckListItem(m_listView, name, key, id, type);
+    item = new KMyMoneyTreeWidgetItem(m_treeWidget, name, key, id);
 
-  item->setSelectable(!id.isEmpty());
-  item->setOpen(true);
+  if (id.isEmpty()) {
+    QFont font = item->font(0);
+    font.setBold(true);
+    item->setFont(0, font);
+    item->setSelectable(false);
+  }
+  item->setExpanded(true);
   return item;
 }
 
-Q3ListViewItem* KMyMoneySelector::newItem(const QString& name, const QString& key, const QString& id, Q3CheckListItem::Type type)
+QTreeWidgetItem* KMyMoneySelector::newItem(const QString& name, const QString& key, const QString& id)
 {
-  return newItem(name, 0, key, id, type);
+  return newItem(name, 0, key, id);
 }
 
-Q3ListViewItem* KMyMoneySelector::newTopItem(const QString& name, const QString& key, const QString& id)
+QTreeWidgetItem* KMyMoneySelector::newTopItem(const QString& name, const QString& key, const QString& id)
 {
-  Q3ListViewItem* p;
+  QTreeWidgetItem* p;
 
-  if (m_selMode == Q3ListView::Multi) {
-    KMyMoneyCheckListItem* q = new KMyMoneyCheckListItem(m_listView, name, key, id);
+  KMyMoneyTreeWidgetItem* q = new KMyMoneyTreeWidgetItem(m_treeWidget, name, key, id);
+  if (m_selMode == QTreeWidget::MultiSelection) {
+    q->setCheckable(true);
     connect(q, SIGNAL(stateChanged(bool)), this, SIGNAL(stateChanged(void)));
-    p = static_cast<Q3ListViewItem*>(q);
-
   } else {
-    KMyMoneyListViewItem* q = new KMyMoneyListViewItem(m_listView, name, key, id);
-    p = static_cast<Q3ListViewItem*>(q);
+    q->setCheckable(false);
   }
+  p = static_cast<QTreeWidgetItem*>(q);
 
   return p;
 }
 
-Q3ListViewItem* KMyMoneySelector::newItem(Q3ListViewItem* parent, const QString& name, const QString& key, const QString& id)
+QTreeWidgetItem* KMyMoneySelector::newItem(QTreeWidgetItem* parent, const QString& name, const QString& key, const QString& id)
 {
-  Q3ListViewItem* p;
+  QTreeWidgetItem* p;
 
-  if (m_selMode == Q3ListView::Multi) {
-    KMyMoneyCheckListItem* q = new KMyMoneyCheckListItem(parent, name, key, id);
+  KMyMoneyTreeWidgetItem* q = new KMyMoneyTreeWidgetItem(parent, name, key, id);
+  if (m_selMode == QTreeWidget::MultiSelection) {
+    q->setCheckable(true);
     connect(q, SIGNAL(stateChanged(bool)), this, SIGNAL(stateChanged(void)));
-    p = static_cast<Q3ListViewItem*>(q);
-
   } else {
-    KMyMoneyListViewItem* q = new KMyMoneyListViewItem(parent, name, key, id);
-    p = static_cast<Q3ListViewItem*>(q);
+    q->setCheckable(false);
   }
+  p = static_cast<QTreeWidgetItem*>(q);
 
   return p;
 }
 
 void KMyMoneySelector::protectItem(const QString& itemId, const bool protect)
 {
-  Q3ListViewItemIterator it(m_listView, Q3ListViewItemIterator::Selectable);
-  Q3ListViewItem* it_v;
-  KMyMoneyListViewItem* it_l;
-  KMyMoneyCheckListItem* it_c;
+  QTreeWidgetItemIterator it(m_treeWidget, QTreeWidgetItemIterator::Selectable);
+  QTreeWidgetItem* it_v;
+  KMyMoneyTreeWidgetItem* it_c;
 
   // scan items
-  while ((it_v = it.current()) != 0) {
-    it_l = dynamic_cast<KMyMoneyListViewItem*>(it_v);
-    if (it_l) {
-      if (it_l->id() == itemId) {
-        it_l->setSelectable(!protect);
+  while ((it_v = *it) != 0) {
+    it_c = dynamic_cast<KMyMoneyTreeWidgetItem*>(it_v);
+    if (it_c) {
+      if (it_c->id() == itemId) {
+        it_c->setSelectable(!protect);
         break;
-      }
-    } else {
-      it_c = dynamic_cast<KMyMoneyCheckListItem*>(it_v);
-      if (it_c) {
-        if (it_c->id() == itemId) {
-          it_c->setSelectable(!protect);
-          break;
-        }
       }
     }
     ++it;
   }
 }
 
-Q3ListViewItem* KMyMoneySelector::item(const QString& id) const
+QTreeWidgetItem* KMyMoneySelector::item(const QString& id) const
 {
-  Q3ListViewItemIterator it(m_listView, Q3ListViewItemIterator::Selectable);
-  Q3ListViewItem* it_v;
-  KMyMoneyListViewItem* it_l;
-  KMyMoneyCheckListItem* it_c;
+  QTreeWidgetItemIterator it(m_treeWidget, QTreeWidgetItemIterator::Selectable);
+  QTreeWidgetItem* it_v;
+  KMyMoneyTreeWidgetItem* it_c;
 
-  while ((it_v = it.current()) != 0) {
-    it_l = dynamic_cast<KMyMoneyListViewItem*>(it_v);
-    if (it_l) {
-      if (it_l->id() == id)
-        break;
-    } else {
-      it_c = dynamic_cast<KMyMoneyCheckListItem*>(it_v);
-      if (it_c->id() == id)
-        break;
-    }
+  while ((it_v = *it) != 0) {
+    it_c = dynamic_cast<KMyMoneyTreeWidgetItem*>(it_v);
+    if (it_c->id() == id)
+      break;
     ++it;
   }
   return it_v;
 }
 
-int KMyMoneySelector::optimizedWidth(void) const
-{
-  Q3ListViewItemIterator it(m_listView, Q3ListViewItemIterator::Selectable);
-  Q3ListViewItem* it_v;
-  KMyMoneyListViewItem* it_l;
-  KMyMoneyCheckListItem* it_c;
-
-  // scan items
-  int w = 0;
-#ifndef KMM_DESIGNER
-  QFontMetrics fm(KMyMoneyGlobalSettings::listCellFont());
-#else
-  QFontMetrics fm(font());
-#endif
-  while ((it_v = it.current()) != 0) {
-    it_l = dynamic_cast<KMyMoneyListViewItem*>(it_v);
-    int nw = 0;
-    if (it_l) {
-      nw = it_l->width(fm, m_listView, 0);
-    } else {
-      it_c = dynamic_cast<KMyMoneyCheckListItem*>(it_v);
-      if (it_c) {
-        nw = it_c->width(fm, m_listView, 0);
-      }
-    }
-    if (nw > w)
-      w = nw;
-    ++it;
-  }
-  return w;
-}
-
-void KMyMoneySelector::setOptimizedWidth(void)
-{
-  int w = optimizedWidth();
-
-  m_listView->setMinimumWidth(w + 30);
-  m_listView->setMaximumWidth(w + 30);
-  m_listView->setColumnWidth(0, w + 28);
-}
-
 bool KMyMoneySelector::allItemsSelected(void) const
 {
-  Q3ListViewItem* it_v;
+  QTreeWidgetItem* rootItem = m_treeWidget->invisibleRootItem();
 
-  if (m_selMode == Q3ListView::Single)
+  if (m_selMode == QTreeWidget::SingleSelection)
     return false;
 
-  for (it_v = m_listView->firstChild(); it_v != 0; it_v = it_v->nextSibling()) {
-    if (it_v->rtti() == 1) {
-      Q3CheckListItem* it_c = dynamic_cast<Q3CheckListItem*>(it_v);
-      if (it_c->type() == Q3CheckListItem::CheckBox) {
-        if (!(it_c->isOn() && allItemsSelected(it_v)))
-          return false;
-      } else {
-        if (!allItemsSelected(it_v))
-          return false;
-      }
+  for (int i = 0; i < rootItem->childCount(); ++i) {
+    QTreeWidgetItem* item = rootItem->child(i);
+    if (item->flags().testFlag(Qt::ItemIsUserCheckable)) {
+      if (!(item->checkState(0) == Qt::Checked && allItemsSelected(item)))
+        return false;
+    } else {
+      if (!allItemsSelected(item))
+        return false;
     }
   }
   return true;
 }
 
-bool KMyMoneySelector::allItemsSelected(const Q3ListViewItem *item) const
+bool KMyMoneySelector::allItemsSelected(const QTreeWidgetItem *item) const
 {
-  Q3ListViewItem* it_v;
-
-  for (it_v = item->firstChild(); it_v != 0; it_v = it_v->nextSibling()) {
-    if (it_v->rtti() == 1) {
-      Q3CheckListItem* it_c = static_cast<Q3CheckListItem*>(it_v);
-      if (!(it_c->isOn() && allItemsSelected(it_v)))
+  for (int i = 0; i < item->childCount(); ++i) {
+    QTreeWidgetItem* child = item->child(i);
+    if (child->flags().testFlag(Qt::ItemIsUserCheckable)) {
+      if (!(child->checkState(0) == Qt::Checked && allItemsSelected(child)))
         return false;
     }
   }
@@ -294,43 +236,27 @@ bool KMyMoneySelector::allItemsSelected(const Q3ListViewItem *item) const
 
 void KMyMoneySelector::removeItem(const QString& id)
 {
-  Q3ListViewItem* it_v;
-  Q3ListViewItemIterator it;
+  QTreeWidgetItem* it_v;
+  QTreeWidgetItemIterator it(m_treeWidget);
 
-  it = Q3ListViewItemIterator(m_listView);
-  while ((it_v = it.current()) != 0) {
-    if (it_v->rtti() == 1) {
-      KMyMoneyCheckListItem* it_c = dynamic_cast<KMyMoneyCheckListItem*>(it_v);
-      if (it_c->type() == Q3CheckListItem::CheckBox) {
-        if (id == it_c->id()) {
-          if (it_c->firstChild()) {
-            it_c->setSelectable(false);
-          } else {
-            delete it_c;
-          }
-        }
-      }
-    } else if (it_v->rtti() == 0) {
-      KMyMoneyListViewItem* it_c = dynamic_cast<KMyMoneyListViewItem*>(it_v);
-      if (id == it_c->id()) {
-        if (it_c->firstChild()) {
-          it_c->setSelectable(false);
-        } else {
-          delete it_c;
-        }
+  while ((it_v = *it) != 0) {
+    KMyMoneyTreeWidgetItem* it_c = dynamic_cast<KMyMoneyTreeWidgetItem*>(it_v);
+    if (id == it_c->id()) {
+      if (it_c->childCount() > 0) {
+        it_c->setSelectable(false);
+      } else {
+        delete it_c;
       }
     }
     it++;
   }
 
   // get rid of top items that just lost the last children (e.g. Favorites)
-  it = Q3ListViewItemIterator(m_listView, Q3ListViewItemIterator::NotSelectable);
-  while ((it_v = it.current()) != 0) {
-    if (it_v->rtti() == 1) {
-      KMyMoneyCheckListItem* it_c = dynamic_cast<KMyMoneyCheckListItem*>(it_v);
-      if (it_c->childCount() == 0)
-        delete it_c;
-    }
+  it = QTreeWidgetItemIterator(m_treeWidget, QTreeWidgetItemIterator::NotSelectable);
+  while ((it_v = *it) != 0) {
+    KMyMoneyTreeWidgetItem* it_c = dynamic_cast<KMyMoneyTreeWidgetItem*>(it_v);
+    if (it_c->childCount() == 0)
+      delete it_c;
     it++;
   }
 
@@ -340,123 +266,97 @@ void KMyMoneySelector::removeItem(const QString& id)
 
 void KMyMoneySelector::selectAllItems(const bool state)
 {
-  Q3ListViewItem* it_v;
+  QTreeWidgetItem* rootItem = m_treeWidget->invisibleRootItem();
 
-  for (it_v = m_listView->firstChild(); it_v != 0; it_v = it_v->nextSibling()) {
-    if (it_v->rtti() == 1) {
-      Q3CheckListItem* it_c = dynamic_cast<Q3CheckListItem*>(it_v);
-      if (it_c->type() == Q3CheckListItem::CheckBox) {
-        it_c->setOn(state);
-      }
-      selectAllSubItems(it_v, state);
+  for (int i = 0; i < rootItem->childCount(); ++i) {
+    QTreeWidgetItem* child = rootItem->child(i);
+    if (child->flags().testFlag(Qt::ItemIsUserCheckable)) {
+      child->setCheckState(0, state ? Qt::Checked : Qt::Unchecked);
     }
+    selectAllSubItems(child, state);
   }
   emit stateChanged();
 }
 
 void KMyMoneySelector::selectItems(const QStringList& itemList, const bool state)
 {
-  Q3ListViewItem* it_v;
+  QTreeWidgetItem* rootItem = m_treeWidget->invisibleRootItem();
 
-  for (it_v = m_listView->firstChild(); it_v != 0; it_v = it_v->nextSibling()) {
-    if (it_v->rtti() == 1) {
-      KMyMoneyCheckListItem* it_c = dynamic_cast<KMyMoneyCheckListItem*>(it_v);
-      if (it_c->type() == Q3CheckListItem::CheckBox && itemList.contains(it_c->id())) {
-        it_c->setOn(state);
-      }
-      selectSubItems(it_v, itemList, state);
+  for (int i = 0; i < rootItem->childCount(); ++i) {
+    KMyMoneyTreeWidgetItem* child = dynamic_cast<KMyMoneyTreeWidgetItem *>(rootItem->child(i));
+    if (child->flags().testFlag(Qt::ItemIsUserCheckable) && itemList.contains(child->id())) {
+      child->setCheckState(0, state ? Qt::Checked : Qt::Unchecked);
     }
+    selectAllSubItems(child, state);
   }
   emit stateChanged();
 }
 
-void KMyMoneySelector::selectSubItems(Q3ListViewItem* item, const QStringList& itemList, const bool state)
+void KMyMoneySelector::selectSubItems(QTreeWidgetItem* item, const QStringList& itemList, const bool state)
 {
-  Q3ListViewItem* it_v;
-
-  for (it_v = item->firstChild(); it_v != 0; it_v = it_v->nextSibling()) {
-    if (it_v->rtti() == 1) {
-      KMyMoneyCheckListItem* it_c = dynamic_cast<KMyMoneyCheckListItem*>(it_v);
-      if (it_c->type() == Q3CheckListItem::CheckBox && itemList.contains(it_c->id())) {
-        it_c->setOn(state);
-      }
-      selectSubItems(it_v, itemList, state);
+  for (int i = 0; i < item->childCount(); ++i) {
+    KMyMoneyTreeWidgetItem* child = dynamic_cast<KMyMoneyTreeWidgetItem *>(item->child(i));
+    if (child->flags().testFlag(Qt::ItemIsUserCheckable) && itemList.contains(child->id())) {
+      child->setCheckState(0, state ? Qt::Checked : Qt::Unchecked);
     }
+    selectAllSubItems(child, state);
   }
+  emit stateChanged();
 }
 
-void KMyMoneySelector::selectAllSubItems(Q3ListViewItem* item, const bool state)
+void KMyMoneySelector::selectAllSubItems(QTreeWidgetItem* item, const bool state)
 {
-  Q3ListViewItem* it_v;
-
-  for (it_v = item->firstChild(); it_v != 0; it_v = it_v->nextSibling()) {
-    if (it_v->rtti() == 1) {
-      Q3CheckListItem* it_c = dynamic_cast<Q3CheckListItem*>(it_v);
-      if (it_c->type() == Q3CheckListItem::CheckBox) {
-        it_c->setOn(state);
-      }
-      selectAllSubItems(it_v, state);
+  for (int i = 0; i < item->childCount(); ++i) {
+    QTreeWidgetItem* child = item->child(i);
+    if (child->flags().testFlag(Qt::ItemIsUserCheckable)) {
+      child->setCheckState(0, state ? Qt::Checked : Qt::Unchecked);
     }
+    selectAllSubItems(child, state);
   }
+  emit stateChanged();
 }
 
 void KMyMoneySelector::selectedItems(QStringList& list) const
 {
-  Q3ListViewItem*  it_v;
-
   list.clear();
-  if (m_selMode == Q3ListView::Single) {
-    KMyMoneyListViewItem* it_c = dynamic_cast<KMyMoneyListViewItem*>(m_listView->selectedItem());
+  if (m_selMode == QTreeWidget::SingleSelection) {
+    KMyMoneyTreeWidgetItem* it_c = dynamic_cast<KMyMoneyTreeWidgetItem*>(m_treeWidget->currentItem());
     if (it_c != 0)
       list << it_c->id();
-
   } else {
-    for (it_v = m_listView->firstChild(); it_v != 0; it_v = it_v->nextSibling()) {
-      if (it_v->rtti() == 1) {
-        KMyMoneyCheckListItem* it_c = dynamic_cast<KMyMoneyCheckListItem*>(it_v);
-        if (it_c->type() == Q3CheckListItem::CheckBox) {
-          if (it_c->isOn())
-            list << (*it_c).id();
-        }
-        selectedItems(list, it_v);
+    QTreeWidgetItem* rootItem = m_treeWidget->invisibleRootItem();
+    for (int i = 0; i < rootItem->childCount(); ++i) {
+      KMyMoneyTreeWidgetItem* child = dynamic_cast<KMyMoneyTreeWidgetItem*>(rootItem->child(i));
+      if (child->flags().testFlag(Qt::ItemIsUserCheckable)) {
+        if (child->checkState(0) == Qt::Checked)
+          list << child->id();
       }
+      selectedItems(list, child);
     }
   }
 }
 
-void KMyMoneySelector::selectedItems(QStringList& list, Q3ListViewItem* item) const
+void KMyMoneySelector::selectedItems(QStringList& list, QTreeWidgetItem* item) const
 {
-  Q3ListViewItem* it_v;
-
-  for (it_v = item->firstChild(); it_v != 0; it_v = it_v->nextSibling()) {
-    if (it_v->rtti() == 1) {
-      KMyMoneyCheckListItem* it_c = dynamic_cast<KMyMoneyCheckListItem*>(it_v);
-      if (it_c->type() == Q3CheckListItem::CheckBox) {
-        if (it_c->isOn())
-          list << (*it_c).id();
-        selectedItems(list, it_v);
-      }
+  for (int i = 0; i < item->childCount(); ++i) {
+    KMyMoneyTreeWidgetItem* child = dynamic_cast<KMyMoneyTreeWidgetItem*>(item->child(i));
+    if (child->flags().testFlag(Qt::ItemIsUserCheckable)) {
+      if (child->checkState(0) == Qt::Checked)
+        list << child->id();
     }
+    selectedItems(list, child);
   }
 }
 
 void KMyMoneySelector::itemList(QStringList& list) const
 {
-  Q3ListViewItemIterator it;
-  Q3ListViewItem* it_v;
+  QTreeWidgetItemIterator it(m_treeWidget, QTreeWidgetItemIterator::Selectable);
+  QTreeWidgetItem* it_v;
 
-  it = Q3ListViewItemIterator(m_listView, Q3ListViewItemIterator::Selectable);
-  while ((it_v = it.current()) != 0) {
-    {
-      if (it_v->rtti() == 1) {
-        KMyMoneyCheckListItem* it_c = dynamic_cast<KMyMoneyCheckListItem*>(it_v);
-        if (it_c->type() == Q3CheckListItem::CheckBox) {
-          list << it_c->id();
-        }
-      } else if (it_v->rtti() == 0) {
-        KMyMoneyListViewItem* it_c = dynamic_cast<KMyMoneyListViewItem*>(it_v);
-        list << it_c->id();
-      }
+  while ((it_v = *it) != 0) {
+    KMyMoneyTreeWidgetItem* it_c = dynamic_cast<KMyMoneyTreeWidgetItem*>(it_v);
+    if (it_c) {
+      list << it_c->id();
     }
     it++;
   }
@@ -464,32 +364,19 @@ void KMyMoneySelector::itemList(QStringList& list) const
 
 void KMyMoneySelector::setSelected(const QString& id, const bool state)
 {
-  Q3ListViewItemIterator it;
-  Q3ListViewItem* it_v;
-  Q3ListViewItem* it_visible = 0;
+  QTreeWidgetItemIterator it(m_treeWidget, QTreeWidgetItemIterator::Selectable);
+  QTreeWidgetItem* it_v;
+  QTreeWidgetItem* it_visible = 0;
 
-  it = Q3ListViewItemIterator(m_listView, Q3ListViewItemIterator::Selectable);
-  while ((it_v = it.current()) != 0) {
-    if (it_v->rtti() == 1) {
-      KMyMoneyCheckListItem* it_c = dynamic_cast<KMyMoneyCheckListItem*>(it_v);
-      Q_CHECK_PTR(it_c);
-      if (it_c->type() == Q3CheckListItem::CheckBox) {
-        if (it_c->id() == id) {
-          it_c->setOn(state);
-          m_listView->setSelected(it_v, true);
-          if (!it_visible)
-            it_visible = it_v;
-        }
-      }
-    } else if (it_v->rtti() == 0) {
-      KMyMoneyListViewItem* it_c = dynamic_cast<KMyMoneyListViewItem*>(it_v);
-      Q_CHECK_PTR(it_c);
-      if (it_c->id() == id) {
-        m_listView->setSelected(it_v, true);
+  while ((it_v = *it) != 0) {
+    KMyMoneyTreeWidgetItem* item = dynamic_cast<KMyMoneyTreeWidgetItem*>(it_v);
+    Q_CHECK_PTR(item);
+    if (item->flags().testFlag(Qt::ItemIsUserCheckable)) {
+      if (item->id() == id) {
+        item->setCheckState(0, state ? Qt::Checked : Qt::Unchecked);
+        m_treeWidget->setCurrentItem(it_v);
         if (!it_visible)
           it_visible = it_v;
-        ensureItemVisible(it_v);
-        return;
       }
     }
     it++;
@@ -500,7 +387,7 @@ void KMyMoneySelector::setSelected(const QString& id, const bool state)
     ensureItemVisible(it_visible);
 }
 
-void KMyMoneySelector::ensureItemVisible(const Q3ListViewItem *it_v)
+void KMyMoneySelector::ensureItemVisible(const QTreeWidgetItem *it_v)
 {
   // for some reason, I could only use the ensureItemVisible() method
   // of QListView successfully, after the widget was drawn on the screen.
@@ -516,8 +403,8 @@ void KMyMoneySelector::ensureItemVisible(const Q3ListViewItem *it_v)
 
 void KMyMoneySelector::slotShowSelected(void)
 {
-  if (m_listView && m_visibleItem)
-    m_listView->ensureItemVisible(m_visibleItem);
+  if (m_treeWidget && m_visibleItem)
+    m_treeWidget->scrollToItem(m_visibleItem);
 }
 
 int KMyMoneySelector::slotMakeCompletion(const QString& _txt)
@@ -528,16 +415,16 @@ int KMyMoneySelector::slotMakeCompletion(const QString& _txt)
   return slotMakeCompletion(QRegExp(txt, Qt::CaseInsensitive));
 }
 
-bool KMyMoneySelector::match(const QRegExp& exp, Q3ListViewItem* item) const
+bool KMyMoneySelector::match(const QRegExp& exp, QTreeWidgetItem* item) const
 {
   return exp.indexIn(item->text(0)) != -1;
 }
 
 int KMyMoneySelector::slotMakeCompletion(const QRegExp& exp)
 {
-  Q3ListViewItemIterator it(m_listView, Q3ListViewItemIterator::Selectable);
+  QTreeWidgetItemIterator it(m_treeWidget, QTreeWidgetItemIterator::Selectable);
 
-  Q3ListViewItem* it_v;
+  QTreeWidgetItem* it_v;
 
   // The logic used here seems to be awkward. The problem is, that
   // QListViewItem::setVisible works recursively on all it's children
@@ -549,17 +436,17 @@ int KMyMoneySelector::slotMakeCompletion(const QRegExp& exp)
   // perform the check. Then check recursively on the parent of this
   // leaf that it has no visible children. If that is the case, make the
   // parent invisible and continue this check with it's parent.
-  while ((it_v = it.current()) != 0) {
-    it_v->setVisible(true);
+  while ((it_v = *it) != 0) {
+    it_v->setHidden(false);
     ++it;
   }
 
-  Q3ListViewItem* firstMatch = 0;
+  QTreeWidgetItem* firstMatch = 0;
 
   if (!exp.pattern().isEmpty()) {
-    it = Q3ListViewItemIterator(m_listView, Q3ListViewItemIterator::Selectable);
-    while ((it_v = it.current()) != 0) {
-      if (it_v->firstChild() == 0) {
+    it = QTreeWidgetItemIterator(m_treeWidget, QTreeWidgetItemIterator::Selectable);
+    while ((it_v = *it) != 0) {
+      if (it_v->childCount() == 0) {
         if (!match(exp, it_v)) {
           // this is a node which does not contain the
           // text and does not have children. So we can
@@ -570,13 +457,12 @@ int KMyMoneySelector::slotMakeCompletion(const QRegExp& exp)
           // find a node that still has visible children.
           bool hide = true;
           while (hide) {
-            it_v->setVisible(false);
+            it_v->setHidden(true);
             it_v = it_v->parent();
-            if (it_v && it_v->isSelectable()) {
+            if (it_v && (it_v->flags() & Qt::ItemIsSelectable)) {
               hide = !match(exp, it_v);
-              Q3ListViewItem* child = it_v->firstChild();
-              for (; child && hide; child = child->nextSibling()) {
-                if (child->isVisible())
+              for (int i = 0; i < it_v->childCount(); ++i) {
+                if (!it_v->child(i)->isHidden())
                   hide = false;
               }
             } else
@@ -596,9 +482,9 @@ int KMyMoneySelector::slotMakeCompletion(const QRegExp& exp)
         // to advance the iterator to the next sibling of the
         // current node. This could well be the sibling of a
         // parent or grandparent node.
-        Q3ListViewItem* curr = it_v;
-        Q3ListViewItem* item;
-        while ((item = curr->nextSibling()) == 0) {
+        QTreeWidgetItem* curr = it_v;
+        QTreeWidgetItem* item;
+        while ((item = curr->treeWidget()->itemBelow(curr)) == 0) {
           curr = curr->parent();
           if (curr == 0)
             break;
@@ -607,8 +493,7 @@ int KMyMoneySelector::slotMakeCompletion(const QRegExp& exp)
         }
         do {
           ++it;
-        } while (it.current() && it.current() != item);
-
+        } while (*it && *it != item);
       } else {
         // It's a node with children that does not match. We don't
         // change it's status here.
@@ -619,19 +504,19 @@ int KMyMoneySelector::slotMakeCompletion(const QRegExp& exp)
 
   // make the first match the one that is selected
   // if we have no match, make sure none is selected
-  if (m_selMode == Q3ListView::Single) {
+  if (m_selMode == QTreeWidget::SingleSelection) {
     if (firstMatch) {
-      m_listView->setSelected(firstMatch, true);
+      m_treeWidget->setCurrentItem(firstMatch);
       ensureItemVisible(firstMatch);
     } else
-      m_listView->selectAll(false);
+      m_treeWidget->clearSelection();
   }
 
   // Get the number of visible nodes for the return code
   int cnt = 0;
 
-  it = Q3ListViewItemIterator(m_listView, Q3ListViewItemIterator::Selectable | Q3ListViewItemIterator::Visible);
-  while ((it_v = it.current()) != 0) {
+  it = QTreeWidgetItemIterator(m_treeWidget, QTreeWidgetItemIterator::Selectable /*| QTreeWidgetItemIterator::Visible*/);
+  while ((it_v = *it) != 0) {
     cnt++;
     it++;
   }
@@ -640,58 +525,32 @@ int KMyMoneySelector::slotMakeCompletion(const QRegExp& exp)
 
 bool KMyMoneySelector::contains(const QString& txt) const
 {
-  Q3ListViewItemIterator it(m_listView, Q3ListViewItemIterator::Selectable);
-  Q3ListViewItem* it_v;
-  while ((it_v = it.current()) != 0) {
-    if (it_v->rtti() == 1) {
-      KMyMoneyCheckListItem* it_c = dynamic_cast<KMyMoneyCheckListItem*>(it_v);
-      if (it_c->text() == txt) {
-        return true;
-      }
-    } else if (it_v->rtti() == 0) {
-      KMyMoneyListViewItem* it_c = dynamic_cast<KMyMoneyListViewItem*>(it_v);
-      if (it_c->text(0) == txt) {
-        return true;
-      }
+  QTreeWidgetItemIterator it(m_treeWidget, QTreeWidgetItemIterator::Selectable);
+  QTreeWidgetItem* it_v;
+  while ((it_v = *it) != 0) {
+    KMyMoneyTreeWidgetItem* it_c = dynamic_cast<KMyMoneyTreeWidgetItem*>(it_v);
+    if (it_c && it_c->text(0) == txt) {
+      return true;
     }
     it++;
   }
   return false;
 }
 
-void KMyMoneySelector::slotListRightMouse(Q3ListViewItem* it_v, const QPoint& pos, int /* col */)
+void KMyMoneySelector::slotItemPressed(QTreeWidgetItem* it_v, int /* col */)
 {
-  if (it_v && (it_v->rtti() == 1)) {
-    KMyMoneyCheckListItem* it_c = static_cast<KMyMoneyCheckListItem*>(it_v);
-    if (it_c->type() == Q3CheckListItem::CheckBox) {
-      // the following is copied from QCheckListItem::activate() et al
-      int boxsize = m_listView->style()->pixelMetric(QStyle::PM_CheckListButtonSize, 0, m_listView);
-      int align = m_listView->columnAlignment(0);
-      int marg = m_listView->itemMargin();
-      int y = 0;
+  if (QApplication::mouseButtons() != Qt::RightButton)
+    return;
 
-      if (align & Qt::AlignVCenter)
-        y = ((height() - boxsize) / 2) + marg;
-      else
-        y = (m_listView->fontMetrics().height() + 2 + marg - boxsize) / 2;
-
-      QRect r(0, y, boxsize - 3, boxsize - 3);
-      // columns might have been swapped
-      r.translate(m_listView->header()->sectionPos(0), 0);
-
-      QPoint topLeft = m_listView->itemRect(it_v).topLeft(); //### inefficient?
-      QPoint p = m_listView->mapFromGlobal(pos) - topLeft;
-
-      int xdepth = m_listView->treeStepSize() * (it_v->depth() + (m_listView->rootIsDecorated() ? 1 : 0))
-                   + m_listView->itemMargin();
-      xdepth += m_listView->header()->sectionPos(m_listView->header()->mapToSection(0));
-      p.rx() -= xdepth;
-      // copy ends around here
-
-      if (r.contains(p)) {
-        // we get down here, if we have a right click onto the checkbox
-        selectAllSubItems(it_c, it_c->isOn());
-      }
+  KMyMoneyTreeWidgetItem* item = static_cast<KMyMoneyTreeWidgetItem*>(it_v);
+  if (item->flags().testFlag(Qt::ItemIsUserCheckable)) {
+    QStyleOptionButton opt;
+    opt.rect = m_treeWidget->visualItemRect(item);
+    QRect rect = m_treeWidget->style()->subElementRect(QStyle::SE_ViewItemCheckIndicator, &opt, m_treeWidget);
+    if (rect.contains(m_treeWidget->mapFromGlobal(QCursor::pos()))) {
+      // we get down here, if we have a right click onto the checkbox
+      item->setCheckState(0, item->checkState(0) == Qt::Checked ? Qt::Unchecked : Qt::Checked);
+      selectAllSubItems(item, item->checkState(0) == Qt::Checked);
     }
   }
 }

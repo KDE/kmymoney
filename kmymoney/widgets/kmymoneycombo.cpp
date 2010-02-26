@@ -78,7 +78,7 @@ void KMyMoneyCombo::setCurrentTextById(const QString& id)
 {
   clearEditText();
   if (!id.isEmpty()) {
-    Q3ListViewItem* item = selector()->item(id);
+    QTreeWidgetItem* item = selector()->item(id);
     if (item) {
       setCompletedText(item->text(0));
       setEditText(item->text(0));
@@ -201,7 +201,7 @@ void KMyMoneyCombo::keyPressEvent(QKeyEvent* e)
       (e->key() == Qt::Key_Down && (e->modifiers() & Qt::AltModifier)) ||
       (!isEditable() && e->key() == Qt::Key_Space)) {
     // if we have at least one item in the list, we open the dropdown
-    if (selector()->listView()->firstChild())
+    if (selector()->listView()->itemAt(0, 0))
       m_completion->setVisible(true);
     e->ignore();
     return;

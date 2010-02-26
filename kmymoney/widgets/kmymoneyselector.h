@@ -21,8 +21,10 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qwidget.h>
-#include <q3listview.h>
+#include <QWidget>
+#include <QTreeWidget>
+#include <QTreeWidget>
+#include <Q3CheckListItem>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -33,7 +35,6 @@
 #include <mymoneyutils.h>
 
 class QHBoxLayout;
-class K3ListView;
 
 /**
   * This class implements a general selector for id based objects. It is based
@@ -70,14 +71,14 @@ public:
     *       created through newItem(). You should therefor set the selection mode
     *       before you create items.
     */
-  void setSelectionMode(const Q3ListView::SelectionMode mode);
+  void setSelectionMode(const QTreeWidget::SelectionMode mode);
 
   /**
     * returns the selection mode of the widget.
     *
     * @sa setSelectionMode()
     */
-  Q3ListView::SelectionMode selectionMode(void) const {
+  QTreeWidget::SelectionMode selectionMode(void) const {
     return m_selMode;
   }
 
@@ -138,10 +139,10 @@ public:
   void setSelected(const QString& id, const bool state = false);
 
   /**
-    * Return a pointer to the K3ListView object
+    * Return a pointer to the QTreeWidget object
     */
-  K3ListView* listView(void) const {
-    return m_listView;
+  QTreeWidget* listView(void) const {
+    return m_treeWidget;
   };
 
   /**
@@ -174,12 +175,6 @@ public:
   void protectItem(const QString& itemId, const bool protect = true);
 
   /**
-    * This method modifies the width of the widget to match its optimal size
-    * so that all entries fit completely.
-    */
-  void setOptimizedWidth(void);
-
-  /**
     * This method removes an item with a given id from the list.
     *
     * @param id QString containing id of item to be removed
@@ -187,25 +182,25 @@ public:
   void removeItem(const QString& id);
 
   /**
-    * This method creates a new top level KMyMoneyCheckListItem object in the list view.
+    * This method creates a new top level KMyMoneyTreeWidgetItem object in the list view.
     * The type can be influenced with the @a type argument. It defaults
     * to QCheckListItem::RadioButtonController. If @a id is empty, the item is not
     * selectable. It will be shown 'opened' (see QListViewItem::setOpen())
     *
     * @return pointer to newly created object
     */
-  Q3ListViewItem* newItem(const QString& name, const QString& key = QString(), const QString& id = QString(), Q3CheckListItem::Type type = Q3CheckListItem::RadioButtonController);
+  QTreeWidgetItem* newItem(const QString& name, const QString& key = QString(), const QString& id = QString());
 
   /**
     * Same as above, but create the item following the item pointed to by @c after.
     * If @c after is 0, then behave as previous method
     */
-  Q3ListViewItem* newItem(const QString& name, Q3ListViewItem* after, const QString& key = QString(), const QString& id = QString(), Q3CheckListItem::Type type = Q3CheckListItem::RadioButtonController);
+  QTreeWidgetItem* newItem(const QString& name, QTreeWidgetItem* after, const QString& key = QString(), const QString& id = QString());
 
   /**
     * This method creates a new selectable object depending on the
-    * selection mode. This is either a K3ListViewItem for single
-    * selection mode or a KMyMoneyCheckListItem for multi selection mode
+    * selection mode. This is either a QTreeWidgetItem for single
+    * selection mode or a KMyMoneyTreeWidgetItem for multi selection mode
     *
     * @note The new item will be the first one in the selection
     *
@@ -216,12 +211,12 @@ public:
     *
     * @return pointer to newly created object
     */
-  Q3ListViewItem* newItem(Q3ListViewItem* parent, const QString& name, const QString& key, const QString& id);
+  QTreeWidgetItem* newItem(QTreeWidgetItem* parent, const QString& name, const QString& key, const QString& id);
 
   /**
     * This method creates a new selectable object depending on the
-    * selection mode. This is either a K3ListViewItem for single
-    * selection mode or a KMyMoneyCheckListItem for multi selection mode.
+    * selection mode. This is either a QTreeWidgetItem for single
+    * selection mode or a KMyMoneyTreeWidgetItem for multi selection mode.
     * In contrast to the above method, the parent is always the view.
     *
     * @note The new item will be the first one in the selection
@@ -232,7 +227,7 @@ public:
     *
     * @return pointer to newly created object
     */
-  Q3ListViewItem* newTopItem(const QString& name, const QString& key, const QString& id);
+  QTreeWidgetItem* newTopItem(const QString& name, const QString& key, const QString& id);
 
   /**
     * This method checks if a given @a item matches the given regular expression @a exp.
@@ -243,7 +238,7 @@ public:
     * @retval true item matches
     * @retval false item does not match
     */
-  virtual bool match(const QRegExp& exp, Q3ListViewItem* item) const;
+  virtual bool match(const QRegExp& exp, QTreeWidgetItem* item) const;
 
   /**
     * This method delays the call for m_listView->ensureItemVisible(item)
@@ -254,7 +249,7 @@ public:
     *
     * @sa slotShowSelected()
     */
-  void ensureItemVisible(const Q3ListViewItem *item);
+  void ensureItemVisible(const QTreeWidgetItem *item);
 
   /**
     * This method returns a pointer to the QListViewItem with the id @a id.
@@ -262,7 +257,7 @@ public:
     *
     * @param id id to be used to find a QListViewItem pointer for
     */
-  Q3ListViewItem* item(const QString& id) const;
+  QTreeWidgetItem* item(const QString& id) const;
 
   /**
     * This method returns, if any of the items in the selector contains
@@ -278,11 +273,6 @@ public:
     * Clears all items of the selector and the associated listview.
     */
   virtual void clear(void);
-
-  /**
-   * This method returns the optimal width for the widget
-   */
-  int optimizedWidth(void) const;
 
 public slots:
   /**
@@ -313,14 +303,14 @@ protected:
     * @param list list of selected ids
     * @param item pointer to item to start with
     */
-  void selectedItems(QStringList& list, Q3ListViewItem* item) const;
+  void selectedItems(QStringList& list, QTreeWidgetItem* item) const;
 
   /**
     * Helper method for allItemsSelected() to traverse the tree.
     *
     * @param item pointer to item to start with
     */
-  bool allItemsSelected(const Q3ListViewItem *item) const;
+  bool allItemsSelected(const QTreeWidgetItem *item) const;
 
   /**
     * This is a helper method for selectAllItems().
@@ -328,7 +318,7 @@ protected:
     * @param item pointer to item to start with
     * @param state selection state (@a true = selected, @a false = not selected)
     */
-  void selectAllSubItems(Q3ListViewItem* item, const bool state);
+  void selectAllSubItems(QTreeWidgetItem* item, const bool state);
 
   /**
     * This is a helper method for selectItems().
@@ -337,7 +327,7 @@ protected:
     * @param itemList list of ids to be selected
     * @param state selection state (@a true = selected, @a false = not selected)
     */
-  void selectSubItems(Q3ListViewItem* item, const QStringList& itemList, const bool state);
+  void selectSubItems(QTreeWidgetItem* item, const QStringList& itemList, const bool state);
 
 public slots:
   /**
@@ -369,9 +359,9 @@ protected slots:
   void slotShowSelected(void);
 
   /**
-    * This slot is connected to the K3ListView executed signal
+    * This slot is connected to the QTreeWidget executed signal
     */
-  void slotItemSelected(Q3ListViewItem *it_v);
+  void slotItemSelected(QTreeWidgetItem *it_v);
 
   /**
     * This slot processes the right mouse button press on a list view item.
@@ -379,17 +369,17 @@ protected slots:
     * @param it_v pointer to list view item that was pressed
     * @param p    the position where the mouse was pressed
     */
-  void slotListRightMouse(Q3ListViewItem* it_v, const QPoint& p, int /* col */);
+  void slotItemPressed(QTreeWidgetItem*, int);
 
 protected:
-  K3ListView*               m_listView;
-  QStringList               m_itemList;
-  QString                   m_baseName;
-  Q3ListView::SelectionMode m_selMode;
-  QHBoxLayout*              m_layout;
+  QTreeWidget*               m_treeWidget;
+  QStringList                m_itemList;
+  QString                    m_baseName;
+  QTreeWidget::SelectionMode m_selMode;
+  QHBoxLayout*               m_layout;
 
 private:
-  const Q3ListViewItem*     m_visibleItem;
+  const QTreeWidgetItem*     m_visibleItem;
 };
 
 #endif
