@@ -594,7 +594,8 @@ const MyMoneySecurity& AccountTypePage::currency(void) const
 
 void AccountTypePage::setAccount(const MyMoneyAccount& acc)
 {
-  m_typeSelection->setCurrentItem(acc.accountType());
+  if(acc.accountType() != MyMoneyAccount::UnknownAccountType)
+    m_typeSelection->setCurrentItem(acc.accountType());
   m_openingDate->setDate(acc.openingDate());
   m_accountName->setText(acc.name());
 }
