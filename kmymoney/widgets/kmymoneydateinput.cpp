@@ -148,7 +148,8 @@ kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, Qt::AlignmentFlag flags)
 
   // the next line is a try to add an icon to the button
   d->m_dateButton = new KPushButton(KIcon("view-calendar-day"), QString(""), this);
-  d->m_dateButton->setMinimumWidth(30);
+  // use the most space for the edit widget
+  setStretchFactor(d->m_dateEdit, 3);
 
   connect(d->m_dateButton, SIGNAL(clicked()), SLOT(toggleDatePicker()));
   connect(d->m_dateEdit, SIGNAL(dateChanged(const QDate&)), this, SLOT(slotDateChosenRef(const QDate&)));
@@ -234,16 +235,6 @@ void kMyMoneyDateInput::toggleDatePicker()
     }
     d->m_dateFrame->show();
   }
-}
-
-
-void kMyMoneyDateInput::resizeEvent(QResizeEvent* ev)
-{
-  d->m_dateButton->setMaximumHeight(ev->size().height());
-  d->m_dateButton->setMaximumWidth(ev->size().height());
-  d->m_dateEdit->setMaximumHeight(ev->size().height());
-
-  // qDebug("Received resize-event %d,%d", ev->size().width(), ev->size().height());
 }
 
 

@@ -112,7 +112,6 @@ protected:
     *   an i18n package. The 'T'-key is always possible.
     */
   void keyPressEvent(QKeyEvent* k);
-  void resizeEvent(QResizeEvent*);
   void showEvent(QShowEvent* event);
 
   /** To intercept events sent to focusWidget() */
