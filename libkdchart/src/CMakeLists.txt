@@ -38,6 +38,7 @@ set(kdchart_LIB_SRCS
     KDChartDatasetSelector.cpp
     KDChartDataValueAttributes.cpp
     KDChartDiagramObserver.cpp
+    KDChartEnums.cpp
     KDChartFrameAttributes.cpp
     KDChartGridAttributes.cpp
     KDChartHeaderFooter.cpp
