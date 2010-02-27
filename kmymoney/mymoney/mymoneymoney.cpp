@@ -66,7 +66,7 @@ void MyMoneyMoney::setNegativeMonetarySignPosition(const signPosition pos)
   _negativeMonetarySignPosition = pos;
 }
 
-MyMoneyMoney::signPosition MyMoneyMoney::negativeMonetarySignPosition(void)
+const MyMoneyMoney::signPosition MyMoneyMoney::negativeMonetarySignPosition(void)
 {
   return _negativeMonetarySignPosition;
 }
@@ -76,7 +76,7 @@ void MyMoneyMoney::setPositiveMonetarySignPosition(const signPosition pos)
   _positiveMonetarySignPosition = pos;
 }
 
-MyMoneyMoney::signPosition MyMoneyMoney::positiveMonetarySignPosition(void)
+const MyMoneyMoney::signPosition MyMoneyMoney::positiveMonetarySignPosition(void)
 {
   return _positiveMonetarySignPosition;
 }
@@ -89,7 +89,7 @@ void MyMoneyMoney::setThousandSeparator(const QChar &separator)
     _thousandSeparator = 0;
 }
 
-QChar MyMoneyMoney::thousandSeparator(void)
+const QChar MyMoneyMoney::thousandSeparator(void)
 {
   return _thousandSeparator;
 }
@@ -102,7 +102,7 @@ void MyMoneyMoney::setDecimalSeparator(const QChar &separator)
     _decimalSeparator = 0;
 }
 
-QChar MyMoneyMoney::decimalSeparator(void)
+const QChar MyMoneyMoney::decimalSeparator(void)
 {
   return _decimalSeparator;
 }
@@ -117,25 +117,20 @@ MyMoneyMoney::MyMoneyMoney(const QString& pszAmount)
   m_num = 0;
   m_denom = 1;
 
-  QRegExp regExp;
+
+  // an empty string is zero
+  if (pszAmount.isEmpty())
+    return;
 
   // take care of prices given in the form "8 5/16"
-  regExp.setPattern("(\\d+)\\s+(\\d+/\\d+)");
+  QRegExp regExp("(\\d+)\\s+(\\d+/\\d+)");
   if (regExp.indexIn(pszAmount) > -1) {
     *this = MyMoneyMoney(regExp.cap(1)) + MyMoneyMoney(regExp.cap(2));
     return;
   }
 
   // take care of our internal representation
-  regExp.setPattern("(\\-?\\d+)/(\\d+)");
-  if (regExp.indexIn(pszAmount) > -1) {
-    // string matches the internal representation
-    fromString(pszAmount);
-    return;
-  }
-
-  // an empty string is zero
-  if (pszAmount.length() == 0)
+  if (privateFromString(pszAmount))
     return;
 
   QString res = pszAmount;
@@ -347,12 +342,26 @@ void MyMoneyMoney::fromString(const QString& str)
   m_num = 0;
   m_denom = 1;
 
+  privateFromString(str);
+}
+
+/**
+ * This is just like the old fromString(), but returns
+ * whether or not the string was matched.
+ * This removes one regex search from the string ctor.
+ */
+bool MyMoneyMoney::privateFromString(const QString& str)
+{
+  bool found = false;
+
   QRegExp regExp("(\\-?\\d+)/(\\d+)");
   int pos = regExp.indexIn(str);
   if (pos > -1) {
+    found = true;
     m_num = regExp.cap(1).toLongLong();
     m_denom = regExp.cap(2).toLongLong();
   }
+  return found;
 }
 
 QDataStream &operator<<(QDataStream &s, const MyMoneyMoney &_money)
@@ -417,7 +426,7 @@ QDataStream &operator>>(QDataStream &s, MyMoneyMoney &money)
 // Arguments: b - MyMoneyMoney object to be added
 //
 ////////////////////////////////////////////////////////////////////////////////
-MyMoneyMoney MyMoneyMoney::operator+(const MyMoneyMoney& _b) const
+const MyMoneyMoney MyMoneyMoney::operator+(const MyMoneyMoney& _b) const
 {
   MyMoneyMoney a(*this);
   MyMoneyMoney b(_b);
@@ -452,7 +461,7 @@ MyMoneyMoney MyMoneyMoney::operator+(const MyMoneyMoney& _b) const
 // Arguments: AmountInPence - MyMoneyMoney object to be subtracted
 //
 ////////////////////////////////////////////////////////////////////////////////
-MyMoneyMoney MyMoneyMoney::operator-(const MyMoneyMoney& _b) const
+const MyMoneyMoney MyMoneyMoney::operator-(const MyMoneyMoney& _b) const
 {
   MyMoneyMoney a(*this);
   MyMoneyMoney b(_b);
@@ -487,7 +496,7 @@ MyMoneyMoney MyMoneyMoney::operator-(const MyMoneyMoney& _b) const
 // Arguments: b - MyMoneyMoney object to be multiplied
 //
 ////////////////////////////////////////////////////////////////////////////////
-MyMoneyMoney MyMoneyMoney::operator*(const MyMoneyMoney& _b) const
+const MyMoneyMoney MyMoneyMoney::operator*(const MyMoneyMoney& _b) const
 {
   MyMoneyMoney a(*this);
   MyMoneyMoney b(_b);
@@ -520,7 +529,7 @@ MyMoneyMoney MyMoneyMoney::operator*(const MyMoneyMoney& _b) const
 // Arguments: b - MyMoneyMoney object to be used as dividend
 //
 ////////////////////////////////////////////////////////////////////////////////
-MyMoneyMoney MyMoneyMoney::operator / (const MyMoneyMoney& _b) const
+const MyMoneyMoney MyMoneyMoney::operator / (const MyMoneyMoney& _b) const
 {
   MyMoneyMoney a(*this);
   MyMoneyMoney b(_b);

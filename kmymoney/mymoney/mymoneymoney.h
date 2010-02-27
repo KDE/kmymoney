@@ -99,7 +99,7 @@ public:
   // construction
   MyMoneyMoney();
   explicit MyMoneyMoney(const int iAmount, const signed64 denom = 100);
-  MyMoneyMoney(const QString& pszAmount);
+  explicit MyMoneyMoney(const QString& pszAmount);
   explicit MyMoneyMoney(const signed64 Amount, const signed64 denom = 100);
   explicit MyMoneyMoney(const double dAmount, const signed64 denom = 100);
 #if HAVE_LONG_DOUBLE
@@ -173,10 +173,10 @@ public:
   static void setNegativePrefixCurrencySymbol(const bool flags);
   static void setPositivePrefixCurrencySymbol(const bool flags);
 
-  static QChar thousandSeparator(void);
-  static QChar decimalSeparator(void);
-  static signPosition negativeMonetarySignPosition(void);
-  static signPosition positiveMonetarySignPosition(void);
+  static const QChar thousandSeparator(void);
+  static const QChar decimalSeparator(void);
+  static const signPosition negativeMonetarySignPosition(void);
+  static const signPosition positiveMonetarySignPosition(void);
   static void setFileVersion(const fileVersionE version);
 
   // assignment
@@ -199,15 +199,15 @@ public:
   bool operator>=(const QString& pszAmount) const;
 
   // calculation
-  MyMoneyMoney operator+(const MyMoneyMoney& Amount) const;
+  const MyMoneyMoney operator+(const MyMoneyMoney& Amount) const;
 
-  MyMoneyMoney operator-(const MyMoneyMoney& Amount) const;
-  MyMoneyMoney operator-() const;
+  const MyMoneyMoney operator-(const MyMoneyMoney& Amount) const;
+  const MyMoneyMoney operator-() const;
 
-  MyMoneyMoney operator*(const MyMoneyMoney& factor) const;
-  MyMoneyMoney operator*(int factor) const;
-  MyMoneyMoney operator*(signed64 factor) const;
-  MyMoneyMoney operator/(const MyMoneyMoney& Amount) const;
+  const MyMoneyMoney operator*(const MyMoneyMoney& factor) const;
+  const MyMoneyMoney operator*(int factor) const;
+  const MyMoneyMoney operator*(signed64 factor) const;
+  const MyMoneyMoney operator/(const MyMoneyMoney& Amount) const;
 
   // unary operators
   MyMoneyMoney& operator+= (const MyMoneyMoney&  Amount);
@@ -242,6 +242,8 @@ private:
   signed64 m_denom;
 
   signed64 getLcd(const MyMoneyMoney& b) const;
+
+  bool privateFromString(const QString& str);
 
   KMM_MYMONEY_EXPORT friend QDataStream &operator<<(QDataStream &, const MyMoneyMoney &);
   KMM_MYMONEY_EXPORT friend QDataStream &operator>>(QDataStream &, MyMoneyMoney &);
@@ -548,7 +550,7 @@ inline bool MyMoneyMoney::operator!=(const QString& pszAmount) const
 // Arguments: None
 //
 ////////////////////////////////////////////////////////////////////////////////
-inline MyMoneyMoney MyMoneyMoney::operator-() const
+inline const MyMoneyMoney MyMoneyMoney::operator-() const
 {
   MyMoneyMoney result(*this);
   result.m_num = -result.m_num;
@@ -563,7 +565,7 @@ inline MyMoneyMoney MyMoneyMoney::operator-() const
 // Arguments: AmountInPence - signed64 object to be multiplied
 //
 ////////////////////////////////////////////////////////////////////////////////
-inline MyMoneyMoney MyMoneyMoney::operator*(signed64 factor) const
+inline const MyMoneyMoney MyMoneyMoney::operator*(signed64 factor) const
 {
   MyMoneyMoney result(*this);
   result.m_num *= factor;
@@ -578,7 +580,7 @@ inline MyMoneyMoney MyMoneyMoney::operator*(signed64 factor) const
 // Arguments: AmountInPence - long object to be multiplied
 //
 ////////////////////////////////////////////////////////////////////////////////
-inline MyMoneyMoney MyMoneyMoney::operator*(int factor) const
+inline const MyMoneyMoney MyMoneyMoney::operator*(int factor) const
 {
   MyMoneyMoney result(*this);
   result.m_num *= factor;

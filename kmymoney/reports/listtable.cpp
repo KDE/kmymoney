@@ -65,7 +65,7 @@ public:
       m_previousSubtotal = m_currentSubtotal;
       m_currentSubtotal = MyMoneyMoney();
     }
-    m_currentSubtotal += _row[m_subtotalField];
+    m_currentSubtotal += MyMoneyMoney(_row[m_subtotalField]);
   }
 
   bool isNewHeader(void) const {

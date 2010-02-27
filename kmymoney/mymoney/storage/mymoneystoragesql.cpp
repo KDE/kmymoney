@@ -2853,7 +2853,7 @@ const QMap<QString, MyMoneyAccount> MyMoneyStorageSql::fetchAccounts(const QStri
     acc.setName(GETSTRING(accountNameCol));
     acc.setDescription(GETSTRING(descriptionCol));
     acc.setCurrencyId(GETSTRING(currencyIdCol));
-    acc.setBalance(GETSTRING(balanceCol));
+    acc.setBalance(MyMoneyMoney(GETSTRING(balanceCol)));
     const_cast <MyMoneyStorageSql*>(this)->m_transactionCountMap[aid] = (unsigned long) GETULL(transactionCountCol);
 
     // Process any key value pair
