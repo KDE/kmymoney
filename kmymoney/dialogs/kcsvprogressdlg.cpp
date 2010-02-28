@@ -23,11 +23,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 #include <QFile>
-#include <q3textstream.h>
 #include <QLabel>
 #include <QPushButton>
-#include <q3progressbar.h>
-#include <q3groupbox.h>
 #include <QPixmap>
 
 // ----------------------------------------------------------------------------

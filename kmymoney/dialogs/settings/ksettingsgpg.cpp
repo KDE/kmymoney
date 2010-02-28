@@ -19,7 +19,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <q3groupbox.h>
 #include <QCheckBox>
 #include <QRegExp>
 

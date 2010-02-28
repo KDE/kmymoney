@@ -25,7 +25,6 @@
 #include <QPixmap>
 #include <QPushButton>
 #include <QLabel>
-#include <q3header.h>
 #include <QToolTip>
 #include <QButtonGroup>
 #include <QCheckBox>

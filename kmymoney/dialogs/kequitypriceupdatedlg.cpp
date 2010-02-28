@@ -30,10 +30,8 @@
 #include <QPushButton>
 #include <QRadioButton>
 #include <QFile>
-#include <q3textstream.h>
 #include <QTimer>
 #include <QLayout>
-//Added by qt3to4:
 #include <QList>
 
 // ----------------------------------------------------------------------------

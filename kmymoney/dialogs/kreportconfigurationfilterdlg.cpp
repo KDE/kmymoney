@@ -31,14 +31,12 @@
 #include <QVariant>
 #include <QButtonGroup>
 #include <QCheckBox>
-#include <q3frame.h>
 #include <QLabel>
 #include <QPushButton>
 #include <QRadioButton>
 #include <QLayout>
 #include <qspinbox.h>
 #include <QToolTip>
-#include <q3whatsthis.h>
 #include <QTabWidget>
 #include <QApplication>
 #include <QList>

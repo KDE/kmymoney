@@ -27,10 +27,7 @@
 
 #include <QPushButton>
 #include <QLabel>
-#include <q3table.h>
 #include <QTimer>
-#include <q3ptrlist.h>
-#include <q3buttongroup.h>
 #include <QRadioButton>
 #include <QCursor>
 #include <QList>

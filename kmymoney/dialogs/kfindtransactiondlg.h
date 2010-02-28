@@ -20,10 +20,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <q3listview.h>
 #include <QDateTime>
-#include <qmap.h>
-//Added by qt3to4:
+#include <QMap>
 #include <QResizeEvent>
 #include <QEvent>
 #include <QList>
@@ -34,7 +32,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-// #include "kledgerview.h"
 #include <mymoneyutils.h>
 #include <mymoneytransactionfilter.h>
 

@@ -21,11 +21,9 @@
 // QT Includes
 
 #include <QTimer>
-#include <qwidget.h>
 #include <QCheckBox>
 #include <QLabel>
 #include <QLayout>
-#include <q3valuevector.h>
 #include <QList>
 #include <QResizeEvent>
 

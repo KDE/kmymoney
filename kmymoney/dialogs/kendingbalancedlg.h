@@ -20,8 +20,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qwidget.h>
-#include <q3groupbox.h>
+#include <QWidget>
 #include <QLabel>
 #include <QPushButton>
 #include <QDialog>

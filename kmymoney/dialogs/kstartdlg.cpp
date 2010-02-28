@@ -23,11 +23,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <q3vbox.h>
 #include <QLayout>
-#include <q3buttongroup.h>
 #include <QPixmap>
-#include <q3textview.h>
 #include <QLabel>
 #include <QVBoxLayout>
 

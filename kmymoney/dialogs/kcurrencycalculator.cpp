@@ -29,16 +29,11 @@
 #include <QLabel>
 #include <QRadioButton>
 #include <QCheckBox>
-#include <q3widgetstack.h>
-#include <q3groupbox.h>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
-#include <kpushbutton.h>
-#include <kcombobox.h>
-#include <kstdguiitem.h>
+#include <KLocale>
 
 // ----------------------------------------------------------------------------
 // Project Includes
