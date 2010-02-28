@@ -4132,7 +4132,7 @@ long unsigned MyMoneyStorageSql::calcHighId
 {
   DBG("*** Entering MyMoneyStorageSql::calcHighId");
   QString nid = id;
-  long unsigned high = (unsigned long) nid.replace(QRegExp("[A-Z]*"), "").toULongLong();
+  long unsigned high = (unsigned long) nid.remove(QRegExp("[A-Z]*")).toULongLong();
   return std::max(high, i);
 }
 
