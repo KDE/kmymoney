@@ -22,9 +22,8 @@
 
 #include <QLayout>
 #include <QLabel>
-#include <qpoint.h>
-#include <qfont.h>
-#include <q3frame.h>
+// #include <qpoint.h>
+#include <QFont>
 #include <QToolTip>
 #include <QHBoxLayout>
 #include <QList>
@@ -163,7 +162,8 @@ KMyMoneyWizard::KMyMoneyWizard(QWidget *parent, bool modal, Qt::WFlags f) :
   hboxLayout->setObjectName("hboxLayout");
 
   // create stage layout and frame
-  m_stepFrame = new Q3Frame(this, "stepFrame");
+  m_stepFrame = new QFrame(this);
+  m_stepFrame->setObjectName("stepFrame");
   QPalette palette = m_stepFrame->palette();
   palette.setColor(m_stepFrame->backgroundRole(), KColorScheme::NormalText);
   m_stepFrame->setPalette(palette);
@@ -178,15 +178,14 @@ KMyMoneyWizard::KMyMoneyWizard(QWidget *parent, bool modal, Qt::WFlags f) :
   m_stepLayout->addWidget(m_stepLabel);
   hboxLayout->addWidget(m_stepFrame);
 
-  // FIXME use the protected virtual method QWidget::paletteChange() to update the palette
-  // information when the user selected a different color set using the KConfigCenter
   m_stepPalette = m_stepLabel->palette();
-  QColorGroup::ColorRole role = QColorGroup::Foreground;
-  QColor color = KColorScheme::NormalText;
-  m_stepPalette.setColor(QPalette::Active, role, color);
-  m_stepPalette.setColor(QPalette::Inactive, role, color);
-  m_stepPalette.setColor(QPalette::Disabled, role, color);
-  m_stepLabel->setPalette(m_stepPalette);
+
+  // add a vertical line between the stepFrame and the pages
+  QFrame* line = new QFrame(this);
+  line->setObjectName("line");
+  line->setFrameShadow(QFrame::Sunken);
+  line->setFrameShape(QFrame::VLine);
+  hboxLayout->addWidget(line);
 
   // create page layout
   m_pageLayout = new QVBoxLayout;
@@ -195,9 +194,10 @@ KMyMoneyWizard::KMyMoneyWizard(QWidget *parent, bool modal, Qt::WFlags f) :
   m_pageLayout->setObjectName("pageLayout");
 
   // the page will be inserted later dynamically above this line
-  Q3Frame* line = new Q3Frame(this, "line");
-  line->setFrameShadow(Q3Frame::Sunken);
-  line->setFrameShape(Q3Frame::HLine);
+  line = new QFrame(this);
+  line->setObjectName("line");
+  line->setFrameShadow(QFrame::Sunken);
+  line->setFrameShape(QFrame::HLine);
   m_pageLayout->addWidget(line);
   m_pageLayout->addLayout(m_buttonLayout);
 
@@ -205,7 +205,7 @@ KMyMoneyWizard::KMyMoneyWizard(QWidget *parent, bool modal, Qt::WFlags f) :
   hboxLayout->addLayout(m_pageLayout);
   m_wizardLayout->addLayout(hboxLayout);
 
-  resize(QSize(770, 520).expandedTo(minimumSizeHint()));
+  resize(QSize(670, 550).expandedTo(minimumSizeHint()));
 
   m_titleLabel->setText(i18n("No Title specified"));
   m_titleLabel->setRightImageFile("pics/titlelabel_background.png");

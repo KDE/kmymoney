@@ -56,7 +56,7 @@ IncludeFile=kmymoneycombo.h
 IncludeFile=transactionsortoptionimpl.h
 
 [KMyMoneyGeneralCombo]
-IncludeFile=kmymoneycombo.h
+IncludeFile=kmymoneymvccombo.h
 
 [KBudgetValues]
 

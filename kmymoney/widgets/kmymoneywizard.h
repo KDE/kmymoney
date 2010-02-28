@@ -23,12 +23,10 @@
 #include <QDialog>
 #include <QList>
 #include <QPalette>
-#include <QLabel>
-#include <Q3Frame>
 class QVBoxLayout;
 class QHBoxLayout;
 class QLabel;
-class Q3Frame;
+class QFrame;
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -527,11 +525,11 @@ private:
   /*
    * Some misc. widgets required
    */
-  Q3Frame*               m_stepFrame;
+  QFrame*               m_stepFrame;
   QLabel*               m_stepLabel;
   QPalette              m_stepPalette;
 
-  QList<QLabel*>   m_steps;      // the list of step labels
+  QList<QLabel*>        m_steps;      // the list of step labels
   int                   m_step;       // the currently selected step
 
   /*
