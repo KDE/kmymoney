@@ -266,29 +266,13 @@ void KMyMoneySelector::removeItem(const QString& id)
 
 void KMyMoneySelector::selectAllItems(const bool state)
 {
-  QTreeWidgetItem* rootItem = m_treeWidget->invisibleRootItem();
-
-  for (int i = 0; i < rootItem->childCount(); ++i) {
-    QTreeWidgetItem* child = rootItem->child(i);
-    if (child->flags().testFlag(Qt::ItemIsUserCheckable)) {
-      child->setCheckState(0, state ? Qt::Checked : Qt::Unchecked);
-    }
-    selectAllSubItems(child, state);
-  }
+  selectAllSubItems(m_treeWidget->invisibleRootItem(), state);
   emit stateChanged();
 }
 
 void KMyMoneySelector::selectItems(const QStringList& itemList, const bool state)
 {
-  QTreeWidgetItem* rootItem = m_treeWidget->invisibleRootItem();
-
-  for (int i = 0; i < rootItem->childCount(); ++i) {
-    KMyMoneyTreeWidgetItem* child = dynamic_cast<KMyMoneyTreeWidgetItem *>(rootItem->child(i));
-    if (child->flags().testFlag(Qt::ItemIsUserCheckable) && itemList.contains(child->id())) {
-      child->setCheckState(0, state ? Qt::Checked : Qt::Unchecked);
-    }
-    selectAllSubItems(child, state);
-  }
+  selectSubItems(m_treeWidget->invisibleRootItem(), itemList, state);
   emit stateChanged();
 }
 
