@@ -154,6 +154,11 @@ void MyMoneyMoneyTest::testStringConstructor()
   CPPUNIT_ASSERT(m1->m_denom == 100);
   delete m1;
 
+  m1 = new MyMoneyMoney("-54321/100");
+  CPPUNIT_ASSERT(m1->m_num == LLCONST(-54321));
+  CPPUNIT_ASSERT(m1->m_denom == 100);
+  delete m1;
+
   MyMoneyMoney::setDecimalSeparator(',');
   MyMoneyMoney::setThousandSeparator('.');
   MyMoneyMoney::setNegativeMonetarySignPosition(MyMoneyMoney::ParensAround);
@@ -465,24 +470,6 @@ void MyMoneyMoneyTest::testToString()
   CPPUNIT_ASSERT(m1.toString() == QString("-100/100"));
   CPPUNIT_ASSERT(m2.toString() == QString("1234/100"));
   CPPUNIT_ASSERT(m3.toString() == QString("0/1"));
-}
-
-void MyMoneyMoneyTest::testFromString()
-{
-  MyMoneyMoney m;
-
-  m.fromString("-100/100");
-  CPPUNIT_ASSERT(m.m_num == LLCONST(-100));
-  CPPUNIT_ASSERT(m.m_denom == LLCONST(100));
-  m.fromString("1234/100");
-  CPPUNIT_ASSERT(m.m_num == LLCONST(1234));
-  CPPUNIT_ASSERT(m.m_denom == LLCONST(100));
-  m.fromString("1234/10");
-  CPPUNIT_ASSERT(m.m_num == LLCONST(1234));
-  CPPUNIT_ASSERT(m.m_denom == LLCONST(10));
-  m.fromString("1234/2");
-  CPPUNIT_ASSERT(m.m_num == LLCONST(1234));
-  CPPUNIT_ASSERT(m.m_denom == LLCONST(2));
 }
 
 void MyMoneyMoneyTest::testNegativeSignPos(void)

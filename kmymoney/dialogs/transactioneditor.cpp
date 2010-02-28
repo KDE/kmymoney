@@ -1572,11 +1572,10 @@ bool StdTransactionEditor::addVatSplit(MyMoneyTransaction& tr, const MyMoneyMone
       return false;
     }
 
-    MyMoneyMoney vatRate;
+    MyMoneyMoney vatRate(vatAcc.value("VatRate"));
     MyMoneyMoney gv, nv;    // gross value, net value
     int fract = m_account.fraction();
 
-    vatRate.fromString(vatAcc.value("VatRate"));
     if (!vatRate.isZero()) {
 
       tax.setAccountId(vatAcc.id());

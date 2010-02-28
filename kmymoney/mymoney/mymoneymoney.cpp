@@ -123,15 +123,24 @@ MyMoneyMoney::MyMoneyMoney(const QString& pszAmount)
     return;
 
   // take care of prices given in the form "8 5/16"
-  QRegExp regExp("(\\d+)\\s+(\\d+/\\d+)");
+  // and our own internal represenation
+  QRegExp regExp("^((\\d+)\\s+|-)?(\\d+)/(\\d+)");
+  //                +-#2-+        +-#3-+ +-#4-+
+  //               +-----#1-----+
   if (regExp.indexIn(pszAmount) > -1) {
-    *this = MyMoneyMoney(regExp.cap(1)) + MyMoneyMoney(regExp.cap(2));
+    m_num = regExp.cap(3).toLongLong();
+    m_denom = regExp.cap(4).toLongLong();
+    const QString& part1 = regExp.cap(1);
+    if(!part1.isEmpty()) {
+      if(part1 == QLatin1String("-")) {
+        m_num = -m_num;
+
+      } else {
+        *this += MyMoneyMoney(regExp.cap(2));
+      }
+    }
     return;
   }
-
-  // take care of our internal representation
-  if (privateFromString(pszAmount))
-    return;
 
   QString res = pszAmount;
   // get rid of anything that is not
@@ -335,33 +344,6 @@ const QString MyMoneyMoney::toString(void) const
     tmp /= 10;
   }
   return res + '/' + resf;
-}
-
-void MyMoneyMoney::fromString(const QString& str)
-{
-  m_num = 0;
-  m_denom = 1;
-
-  privateFromString(str);
-}
-
-/**
- * This is just like the old fromString(), but returns
- * whether or not the string was matched.
- * This removes one regex search from the string ctor.
- */
-bool MyMoneyMoney::privateFromString(const QString& str)
-{
-  bool found = false;
-
-  QRegExp regExp("(\\-?\\d+)/(\\d+)");
-  int pos = regExp.indexIn(str);
-  if (pos > -1) {
-    found = true;
-    m_num = regExp.cap(1).toLongLong();
-    m_denom = regExp.cap(2).toLongLong();
-  }
-  return found;
 }
 
 QDataStream &operator<<(QDataStream &s, const MyMoneyMoney &_money)
