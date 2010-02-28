@@ -461,7 +461,7 @@ int KMyMoneySelector::slotMakeCompletion(const QRegExp& exp)
             it_v = it_v->parent();
             if (it_v && (it_v->flags() & Qt::ItemIsSelectable)) {
               hide = !match(exp, it_v);
-              for (int i = 0; i < it_v->childCount(); ++i) {
+              for (int i = 0; hide && i < it_v->childCount(); ++i) {
                 if (!it_v->child(i)->isHidden())
                   hide = false;
               }
@@ -515,7 +515,7 @@ int KMyMoneySelector::slotMakeCompletion(const QRegExp& exp)
   // Get the number of visible nodes for the return code
   int cnt = 0;
 
-  it = QTreeWidgetItemIterator(m_treeWidget, QTreeWidgetItemIterator::Selectable /*| QTreeWidgetItemIterator::Visible*/);
+  it = QTreeWidgetItemIterator(m_treeWidget, QTreeWidgetItemIterator::Selectable | QTreeWidgetItemIterator::NotHidden);
   while ((it_v = *it) != 0) {
     cnt++;
     it++;
