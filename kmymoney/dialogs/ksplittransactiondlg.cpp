@@ -43,7 +43,6 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kpushbutton.h>
-#include <k3activelabel.h>
 #include <kstdguiitem.h>
 #include <kapplication.h>
 

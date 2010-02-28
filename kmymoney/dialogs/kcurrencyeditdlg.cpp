@@ -27,12 +27,10 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <q3header.h>
 #include <QTimer>
 #include <QPixmap>
 #include <QBitmap>
 #include <QLabel>
-#include <q3groupbox.h>
 #include <QResizeEvent>
 #include <QList>
 
@@ -41,7 +39,6 @@
 
 #include <klocale.h>
 #include <kpushbutton.h>
-#include <k3listview.h>
 #include <kstandarddirs.h>
 #include <kmessagebox.h>
 #include <kinputdialog.h>

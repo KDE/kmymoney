@@ -25,7 +25,6 @@
 
 #include <kpushbutton.h>
 #include <kapplication.h>
-#include <k3activelabel.h>
 #include <klocale.h>
 #include <ktoolinvocation.h>
 

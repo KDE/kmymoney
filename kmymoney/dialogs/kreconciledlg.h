@@ -18,9 +18,7 @@
 #define KRECONCILEDLG_H
 
 #include <QLabel>
-//Added by qt3to4:
 #include <QResizeEvent>
-#include <k3listview.h>
 #include <QPushButton>
 
 #include "mymoneyfile.h"

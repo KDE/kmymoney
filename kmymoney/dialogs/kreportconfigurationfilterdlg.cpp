@@ -49,7 +49,6 @@
 #include <kapplication.h>
 #include <kpushbutton.h>
 #include <klineedit.h>
-#include <k3listview.h>
 #include <kcombobox.h>
 #include <kguiitem.h>
 #include <kiconloader.h>

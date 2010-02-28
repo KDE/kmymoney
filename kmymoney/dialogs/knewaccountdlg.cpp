@@ -43,7 +43,6 @@
 #include <kglobal.h>
 #include <kmessagebox.h>
 #include <kcombobox.h>
-#include <k3listview.h>
 #include <kstandarddirs.h>
 #include <kiconloader.h>
 #include <kpushbutton.h>

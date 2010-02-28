@@ -20,7 +20,6 @@
 // QT Includes
 
 #include <QTabWidget>
-#include <qspinbox.h>
 #include <QLabel>
 #include <QLayout>
 #include <QList>
@@ -28,11 +27,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kbuttongroup.h>
-#include <kdebug.h>
-#include <klocale.h>
-#include <k3listview.h>
-#include <kpushbutton.h>
+#include <KDebug>
+#include <KLocale>
 #include <KTextEdit>
 
 // ----------------------------------------------------------------------------

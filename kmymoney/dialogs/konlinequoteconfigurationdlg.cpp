@@ -20,18 +20,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QLabel>
-#include <QPushButton>
-#include <QRadioButton>
-
 // ----------------------------------------------------------------------------
 // KDE Includes
-
-#include <klocale.h>
-#include <kmessagebox.h>
-#include <kpushbutton.h>
-#include <k3listbox.h>
-#include <k3listview.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes

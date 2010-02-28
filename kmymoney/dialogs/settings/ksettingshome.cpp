@@ -20,12 +20,10 @@
 // QT Includes
 
 #include <QStringList>
-#include <q3header.h>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <k3listview.h>
 #include <kpushbutton.h>
 #include <kglobalsettings.h>
 #include <kglobal.h>

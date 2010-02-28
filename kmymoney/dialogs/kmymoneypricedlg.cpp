@@ -31,7 +31,6 @@
 // KDE Includes
 
 #include <kpushbutton.h>
-#include <k3listview.h>
 #include <kiconloader.h>
 #include <kguiitem.h>
 #include <kmessagebox.h>

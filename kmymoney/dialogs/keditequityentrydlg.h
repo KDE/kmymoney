@@ -30,7 +30,6 @@
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-#include <k3listview.h>
 #include <klocale.h>
 #include <klineedit.h>
 

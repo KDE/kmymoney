@@ -40,7 +40,6 @@
 #include <kstandarddirs.h>
 #include <kpushbutton.h>
 #include <klineedit.h>
-#include <k3listview.h>
 #include <kcombobox.h>
 #include <kstdguiitem.h>
 #include <kiconloader.h>

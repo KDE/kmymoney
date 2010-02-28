@@ -29,11 +29,8 @@
 #include <kconfig.h>
 #include <kglobal.h>
 #include <klocale.h>
-#include <k3listview.h>
 #include <kiconloader.h>
 #include <kguiitem.h>
-#include <kpushbutton.h>
-#include <klineedit.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes

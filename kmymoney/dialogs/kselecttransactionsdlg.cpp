@@ -31,7 +31,6 @@
 #include <kpushbutton.h>
 #include <kstdguiitem.h>
 #include <kapplication.h>
-#include <k3activelabel.h>
 #include <klocale.h>
 
 // ----------------------------------------------------------------------------

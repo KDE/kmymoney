@@ -36,7 +36,6 @@
 
 #include <KIcon>
 #include <klocale.h>
-#include <k3listview.h>
 #include <kstandarddirs.h>
 #include <klineedit.h>
 #include <ktextedit.h>
@@ -47,7 +46,6 @@
 #include <kabc/addressee.h>
 #include <kabc/stdaddressbook.h>
 #include <kmessagebox.h>
-#include <k3activelabel.h>
 #include <kfiledialog.h>
 
 // ----------------------------------------------------------------------------

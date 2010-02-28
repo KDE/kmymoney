@@ -37,7 +37,6 @@
 #include <kmessagebox.h>
 #include <kiconloader.h>
 #include <kguiitem.h>
-#include <k3activelabel.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
