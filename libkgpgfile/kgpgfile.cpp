@@ -312,7 +312,9 @@ void KGPGFile::keyList(QStringList& list, bool secretKeys, const QString& patter
           for(unsigned int j = 0; j < subkeys.size(); ++j) {
             const GpgME::Subkey& skey = subkeys[j];
 
-            if (skey.canEncrypt() && !(skey.isRevoked() || skey.isExpired() || skey.isInvalid()  || skey.isDisabled())) {
+            if ( ((skey.canEncrypt() && !secretKeys) || (skey.isSecret() && secretKeys))
+
+            &&  !(skey.isRevoked() || skey.isExpired() || skey.isInvalid()  || skey.isDisabled())) {
               QString entry = QString("%1:%2").arg(key.shortKeyID()).arg(userIDs[i].id());
               list += entry;
               if (needPushBack) {
@@ -325,7 +327,8 @@ void KGPGFile::keyList(QStringList& list, bool secretKeys, const QString& patter
           }
         } else {
           // we have no subkey, so we operate on the main key
-          if (key.canEncrypt() && !(key.isRevoked() || key.isExpired() || key.isInvalid()  || key.isDisabled())) {
+          if ( ((key.canEncrypt() && !secretKeys) || (key.hasSecret() && secretKeys))
+          && !(key.isRevoked() || key.isExpired() || key.isInvalid()  || key.isDisabled())) {
             QString entry = QString("%1:%2").arg(key.shortKeyID()).arg(userIDs[i].id());
             list += entry;
             if (needPushBack) {
