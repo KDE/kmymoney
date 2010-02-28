@@ -22,7 +22,6 @@
 
 #include <QLayout>
 #include <QLabel>
-// #include <qpoint.h>
 #include <QFont>
 #include <QToolTip>
 #include <QHBoxLayout>
