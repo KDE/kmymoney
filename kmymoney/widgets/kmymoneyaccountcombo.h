@@ -62,6 +62,8 @@ class AccountNamesFilterProxyModel : public AccountsFilterProxyModel
 public:
   AccountNamesFilterProxyModel(QObject *parent = 0);
 
+  virtual Qt::ItemFlags flags(const QModelIndex &index) const;
+
 protected:
   bool filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const;
 };

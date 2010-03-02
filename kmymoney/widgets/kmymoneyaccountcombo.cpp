@@ -52,6 +52,19 @@ AccountNamesFilterProxyModel::AccountNamesFilterProxyModel(QObject *parent)
 {
 }
 
+/**
+  * Top items are not selectable because they are not real accounts but are only used for grouping.
+  */
+Qt::ItemFlags AccountNamesFilterProxyModel::flags(const QModelIndex &index) const
+{
+  if (!index.parent().isValid())
+    return AccountsFilterProxyModel::flags(index) & ~Qt::ItemIsSelectable;
+  return AccountsFilterProxyModel::flags(index);
+}
+
+/**
+  * Filter all but the first column.
+  */
 bool AccountNamesFilterProxyModel::filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const
 {
   Q_UNUSED(source_parent)
