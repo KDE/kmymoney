@@ -37,15 +37,14 @@
 
 #include <k3listview.h>
 #include <kmenu.h>
+#include <klistwidgetsearchline.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "ui_kpayeesviewdecl.h"
 #include "kmymoneytransaction.h"
-#include <mymoneypayee.h>
-
-class K3ListViewSearchLineWidget;
+#include "mymoneypayee.h"
 
 /**
   * @author Michael Edwardes, Thomas Baumgart
@@ -146,7 +145,7 @@ private:
 /**
   * This class represents an item in the payees list view.
   */
-class KPayeeListItem : public K3ListViewItem
+class KPayeeListItem : public QListWidgetItem
 {
 public:
   /**
@@ -157,15 +156,8 @@ public:
     * @param payee const reference to MyMoneyPayee for which
     *               the K3ListView entry is constructed
     */
-  KPayeeListItem(K3ListView *parent, const MyMoneyPayee& payee);
+  KPayeeListItem(QListWidget *parent, const MyMoneyPayee& payee);
   ~KPayeeListItem();
-
-  /**
-    * This method is re-implemented from QListViewItem::paintCell().
-    * Besides the standard implementation, the QPainter is set
-    * according to the applications settings.
-    */
-  void paintCell(QPainter *p, const QColorGroup & cg, int column, int width, int align);
 
   const MyMoneyPayee& payee(void) const {
     return m_payee;
@@ -229,7 +221,7 @@ public:
 public slots:
   void slotSelectPayeeAndTransaction(const QString& payeeId, const QString& accountId = QString(), const QString& transactionId = QString());
   void slotLoadPayees(void);
-  void slotStartRename(void);
+  void slotStartRename(QListWidgetItem*);
   void slotHelp(void);
 
 protected:
@@ -264,7 +256,7 @@ protected slots:
     * This slot is called when the name of a payee is changed inside
     * the payee list view and only a single payee is selected.
     */
-  void slotRenamePayee(Q3ListViewItem *p, int col, const QString& txt);
+  void slotRenamePayee(QListWidgetItem *p);
 
   /**
     * Updates the payee data in m_payee from the information in the
@@ -285,7 +277,7 @@ private slots:
     * @param item the item on which the cursor resides
     * @param p position of the pointer device
     */
-  void slotOpenContextMenu(K3ListView* lv, Q3ListViewItem* item, const QPoint& p);
+  void slotOpenContextMenu(const QPoint& p);
 
   void slotQueueUpdate(void);
 
@@ -326,7 +318,7 @@ private:
   /**
     * Search widget for the list
     */
-  K3ListViewSearchLineWidget*  m_searchWidget;
+  KListWidgetSearchLine*  m_searchWidget;
   bool m_needConnection;
 
   /**
@@ -338,6 +330,11 @@ private:
    * Semaphore to suppress loading during selection
    */
   bool m_inSelection;
+
+  /**
+   * This signals whether a payee is being edited
+   **/
+  bool m_payeeInEditing;
 };
 
 #endif

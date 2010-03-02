@@ -29,15 +29,12 @@
 #include <QComboBox>
 #include <QLabel>
 #include <QLayout>
-#include <q3multilineedit.h>
 #include <QPixmap>
 #include <QTabWidget>
 #include <QCursor>
 #include <QCheckBox>
 #include <QRadioButton>
 #include <QPainter>
-#include <q3header.h>
-#include <q3buttongroup.h>
 #include <QSplitter>
 #include <qmap.h>
 #include <QList>
@@ -56,7 +53,7 @@
 #include <kdebug.h>
 #include <kapplication.h>
 #include <keditlistbox.h>
-#include <K3ListViewSearchLineWidget>
+
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -259,31 +256,17 @@ void KTransactionPtrVector::setPayeeId(const QString& id)
 
 // *** KPayeeListItem Implementation ***
 
-KPayeeListItem::KPayeeListItem(K3ListView *parent, const MyMoneyPayee& payee) :
-    K3ListViewItem(parent),
+KPayeeListItem::KPayeeListItem(QListWidget *parent, const MyMoneyPayee& payee) :
+    QListWidgetItem(parent, QListWidgetItem::UserType),
     m_payee(payee)
 {
-  setText(0, payee.name());
+  setText(payee.name());
   // allow in column rename
-  setRenameEnabled(0, true);
+  setFlags(Qt::ItemIsEditable|Qt::ItemIsSelectable|Qt::ItemIsEnabled);
 }
 
 KPayeeListItem::~KPayeeListItem()
 {
-}
-
-void KPayeeListItem::paintCell(QPainter *p, const QColorGroup & cg, int column, int width, int align)
-{
-  QColorGroup cg2(cg);
-
-  if (isAlternate())
-    cg2.setColor(QColorGroup::Base, KMyMoneyGlobalSettings::listColor());
-  else
-    cg2.setColor(QColorGroup::Base, KMyMoneyGlobalSettings::listBGColor());
-
-  p->setFont(KMyMoneyGlobalSettings::listCellFont());
-
-  Q3ListViewItem::paintCell(p, cg2, column, width, align);
 }
 
 KTransactionListItem::KTransactionListItem(K3ListView* view, KTransactionListItem* parent, const QString& accountId, const QString& transactionId) :
@@ -328,8 +311,9 @@ KPayeesView::KPayeesView(QWidget *parent) :
 
   // create the searchline widget
   // and insert it into the existing layout
-  m_searchWidget = new K3ListViewSearchLineWidget(m_payeesList, this);
+  m_searchWidget = new KListWidgetSearchLine(this, m_payeesList);
   m_searchWidget->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed));
+  m_payeesList->setContextMenuPolicy(Qt::CustomContextMenu);
 
   verticalLayout->insertWidget(0, m_searchWidget);
 
@@ -339,7 +323,6 @@ KPayeesView::KPayeesView(QWidget *parent) :
   // never show horizontal scroll bars
   m_transactionView->setHScrollBarMode(Q3ScrollView::AlwaysOff);
 
-  m_payeesList->addColumn(i18nc("Payee name", "Name"));
 
   KGuiItem updateButtonItem(i18nc("Update payee", "Update"),
                             KIcon("dialog-ok"),
@@ -356,8 +339,10 @@ KPayeesView::KPayeesView(QWidget *parent) :
   labelDefaultAccount->setEnabled(false);
   comboDefaultAccount->setEnabled(false);
 
-  connect(m_payeesList, SIGNAL(selectionChanged()), this, SLOT(slotSelectPayee()));
-  connect(m_payeesList, SIGNAL(itemRenamed(Q3ListViewItem*, int, const QString&)), this, SLOT(slotRenamePayee(Q3ListViewItem*, int, const QString&)));
+  //connect(m_payeesList, SIGNAL(itemSelectionChanged()), this, SLOT(slotSelectPayee()));
+  connect(m_payeesList, SIGNAL(itemActivated(QListWidgetItem*)), this, SLOT(slotSelectPayee()));
+  connect(m_payeesList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(slotStartRename(QListWidgetItem*)));
+  connect(m_payeesList, SIGNAL(itemChanged(QListWidgetItem*)), this, SLOT(slotRenamePayee(QListWidgetItem*)));
 
   connect(addressEdit, SIGNAL(textChanged()), this, SLOT(slotPayeeDataChanged()));
   connect(postcodeEdit, SIGNAL(textChanged(const QString&)), this, SLOT(slotPayeeDataChanged()));
@@ -378,7 +363,7 @@ KPayeesView::KPayeesView(QWidget *parent) :
   connect(m_updateButton, SIGNAL(clicked()), this, SLOT(slotUpdatePayee()));
   connect(m_helpButton, SIGNAL(clicked()), this, SLOT(slotHelp()));
 
-  connect(m_payeesList, SIGNAL(contextMenu(K3ListView*, Q3ListViewItem*, const QPoint&)), this, SLOT(slotOpenContextMenu(K3ListView*, Q3ListViewItem*, const QPoint&)));
+  connect(m_payeesList, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(slotOpenContextMenu(const QPoint&)));
 
   connect(m_transactionView, SIGNAL(doubleClicked(Q3ListViewItem*)),
           this, SLOT(slotTransactionDoubleClicked(Q3ListViewItem*)));
@@ -459,21 +444,23 @@ void KPayeesView::slotChooseDefaultAccount(void)
   }
 }
 
-void KPayeesView::slotStartRename(void)
+void KPayeesView::slotStartRename(QListWidgetItem* item)
 {
-  Q3ListViewItemIterator it_l(m_payeesList, Q3ListViewItemIterator::Selected);
-  Q3ListViewItem* it_v;
-  if ((it_v = it_l.current()) != 0) {
-    it_v->startRename(0);
-  }
+  m_payeeInEditing = true;
+  m_payeesList->editItem(item);
 }
 
 // This variant is only called when a single payee is selected and renamed.
-void KPayeesView::slotRenamePayee(Q3ListViewItem* p , int /* col */, const QString& txt)
+void KPayeesView::slotRenamePayee(QListWidgetItem* p)
 {
+  //if there is no current item selected, exit
+  if(m_payeeInEditing == false || !m_payeesList->currentItem() || p != m_payeesList->currentItem())
+    return;
+
+  m_payeeInEditing = false;
   //kDebug() << "[KPayeesView::slotRenamePayee]";
   // create a copy of the new name without appended whitespaces
-  QString new_name = txt.trimmed();
+  QString new_name = p->text();
   if (m_payee.name() != new_name) {
     MyMoneyFileTransaction ft;
     try {
@@ -487,7 +474,7 @@ void KPayeesView::slotRenamePayee(Q3ListViewItem* p , int /* col */, const QStri
                                        i18n("A payee with the name '%1' already exists. It is not advisable to have "
                                             "multiple payees with the same identification name. Are you sure you would like "
                                             "to rename the payee?", new_name)) != KMessageBox::Yes) {
-          p->setText(0, m_payee.name());
+          p->setText(m_payee.name());
           return;
         }
       } catch (MyMoneyException *e) {
@@ -515,23 +502,19 @@ void KPayeesView::slotRenamePayee(Q3ListViewItem* p , int /* col */, const QStri
       delete e;
     }
   } else {
-    p->setText(0, new_name);
+    p->setText(new_name);
   }
 }
 
 void KPayeesView::ensurePayeeVisible(const QString& id)
 {
-  for (Q3ListViewItem * item = m_payeesList->firstChild(); item; item = item->itemBelow()) {
-    KPayeeListItem* p = dynamic_cast<KPayeeListItem*>(item);
+  for (int i = 0; i < m_payeesList->count(); ++i) {
+    KPayeeListItem* p = dynamic_cast<KPayeeListItem*>(m_payeesList->item(0));
     if (p && p->payee().id() == id) {
-      if (p->itemAbove())
-        m_payeesList->ensureItemVisible(p->itemAbove());
-      if (p->itemBelow())
-        m_payeesList->ensureItemVisible(p->itemBelow());
+      m_payeesList->scrollToItem(p, QAbstractItemView::PositionAtCenter);
 
       m_payeesList->setCurrentItem(p);      // active item and deselect all others
-      m_payeesList->setSelected(p, true);   // and select it
-      m_payeesList->ensureItemVisible(p);
+      m_payeesList->setCurrentRow(i, QItemSelectionModel::ClearAndSelect);   // and select it
       break;
     }
   }
@@ -539,13 +522,13 @@ void KPayeesView::ensurePayeeVisible(const QString& id)
 
 void KPayeesView::selectedPayees(QList<MyMoneyPayee>& payeesList) const
 {
-  Q3ListViewItemIterator it_l(m_payeesList, Q3ListViewItemIterator::Selected | Q3ListViewItemIterator::Visible);
-  Q3ListViewItem* it_v;
-  while ((it_v = it_l.current()) != 0) {
-    KPayeeListItem* item = dynamic_cast<KPayeeListItem*>(it_v);
+  QList<QListWidgetItem *> selectedItems = m_payeesList->selectedItems();
+  QList<QListWidgetItem *>::ConstIterator itemsIt = selectedItems.constBegin();
+  while(itemsIt != selectedItems.constEnd()) {
+    KPayeeListItem* item = dynamic_cast<KPayeeListItem*>(*itemsIt);
     if (item)
       payeesList << item->payee();
-    ++it_l;
+    ++itemsIt;
   }
 }
 
@@ -582,15 +565,15 @@ void KPayeesView::slotSelectPayee(void)
     m_tabWidget->setEnabled(false); // disable tab widget
     clearItemData();
     // disable renaming in all listviewitem
-    for (Q3ListViewItem * i = m_payeesList->firstChild(); i; i = i->itemBelow())
-      i->setRenameEnabled(0, false);
+    for (int i = 0; i < m_payeesList->count(); ++i)
+      m_payeesList->item(i)->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
     return;
   }
   // otherwise we have just one selected, enable payee information widget
   m_tabWidget->setEnabled(true);
   // enable renaming in all listviewitem
-  for (Q3ListViewItem * i = m_payeesList->firstChild(); i; i = i->itemBelow())
-    i->setRenameEnabled(0, true);
+  for (int i = 0; i < m_payeesList->count(); ++i)
+    m_payeesList->item(i)->setFlags(Qt::ItemIsEditable|Qt::ItemIsSelectable|Qt::ItemIsEnabled);
 
   // as of now we are updating only the last selected payee, and until
   // selection mode of the QListView has been changed to Extended, this
@@ -776,16 +759,16 @@ void KPayeesView::slotPayeeDataChanged(void)
   if (m_tabWidget->isEnabled()) {
     rc |= ((m_payee.email().isEmpty() != emailEdit->text().isEmpty())
            || (!emailEdit->text().isEmpty() && m_payee.email() != emailEdit->text()));
-    rc |= ((m_payee.address().isEmpty() != addressEdit->text().isEmpty())
-           || (!addressEdit->text().isEmpty() && m_payee.address() != addressEdit->text()));
+    rc |= ((m_payee.address().isEmpty() != addressEdit->toPlainText().isEmpty())
+           || (!addressEdit->toPlainText().isEmpty() && m_payee.address() != addressEdit->toPlainText()));
     rc |= ((m_payee.postcode().isEmpty() != postcodeEdit->text().isEmpty())
            || (!postcodeEdit->text().isEmpty() && m_payee.postcode() != postcodeEdit->text()));
     rc |= ((m_payee.telephone().isEmpty() != telephoneEdit->text().isEmpty())
            || (!telephoneEdit->text().isEmpty() && m_payee.telephone() != telephoneEdit->text()));
     rc |= ((m_payee.name().isEmpty() != m_newName.isEmpty())
            || (!m_newName.isEmpty() && m_payee.name() != m_newName));
-    rc |= ((m_payee.notes().isEmpty() != notesEdit->text().isEmpty())
-           || (!notesEdit->text().isEmpty() && m_payee.notes() != notesEdit->text()));
+    rc |= ((m_payee.notes().isEmpty() != notesEdit->toPlainText().isEmpty())
+           || (!notesEdit->toPlainText().isEmpty() && m_payee.notes() != notesEdit->toPlainText()));
 
     bool ignorecase = false;
     QStringList keys;
@@ -836,11 +819,11 @@ void KPayeesView::slotUpdatePayee(void)
     m_updateButton->setEnabled(false);
     try {
       m_payee.setName(m_newName);
-      m_payee.setAddress(addressEdit->text());
+      m_payee.setAddress(addressEdit->toPlainText());
       m_payee.setPostcode(postcodeEdit->text());
       m_payee.setTelephone(telephoneEdit->text());
       m_payee.setEmail(emailEdit->text());
-      m_payee.setNotes(notesEdit->text());
+      m_payee.setNotes(notesEdit->toPlainText());
       m_payee.setMatchData(static_cast<MyMoneyPayee::payeeMatchType>(m_matchType->checkedId()), checkMatchIgnoreCase->isChecked(), matchKeyEditList->items());
       m_payee.setDefaultAccountId();
 
@@ -874,8 +857,8 @@ void KPayeesView::readConfig(void)
   m_transactionView->header()->setMaximumHeight(height);
   m_transactionView->header()->setFont(KMyMoneyGlobalSettings::listHeaderFont());
 
-  m_payeesList->setDefaultRenameAction(
-    KMyMoneyGlobalSettings::focusChangeIsEnter() ? Q3ListView::Accept : Q3ListView::Reject);
+  //m_payeesList->setDefaultRenameAction(
+    //KMyMoneyGlobalSettings::focusChangeIsEnter() ? Q3ListView::Accept : Q3ListView::Reject);
 
   //initialize the account list?
   comboDefaultAccount->loadList((KMyMoneyUtils::categoryTypeE)(KMyMoneyUtils::asset | KMyMoneyUtils::liability | MyMoneyAccount::Income | MyMoneyAccount::Expense));
@@ -888,10 +871,10 @@ void KPayeesView::show(void)
   // we set it up now. The widgets of the K3ListViewSearchLineWidget must exist by now.
   // If you want to learn about the details, see the source of K3ListViewSearchLineWidget's
   // constructor
-  if (m_needConnection) {
+ /*if (m_needConnection) {
     connect(m_searchWidget->searchLine(), SIGNAL(textChanged(const QString&)), this, SLOT(slotQueueUpdate(void)));
     m_needConnection = false;
-  }
+  }*/
 
   if (m_needReload) {
     loadPayees();
@@ -933,13 +916,14 @@ void KPayeesView::loadPayees(void)
   readConfig();
 
   // remember which items are selected in the list
-  Q3ListViewItemIterator it_l(m_payeesList, Q3ListViewItemIterator::Selected);
-  Q3ListViewItem* it_v;
-  while ((it_v = it_l.current()) != 0) {
-    KPayeeListItem* item = dynamic_cast<KPayeeListItem*>(it_v);
+  QList<QListWidgetItem *> selectedItems = m_payeesList->selectedItems();
+  QList<QListWidgetItem *>::const_iterator payeesIt = selectedItems.constBegin();
+
+  while(payeesIt != selectedItems.constEnd()) {
+    KPayeeListItem* item = dynamic_cast<KPayeeListItem*>(*payeesIt);
     if (item)
       isSelected[item->payee().id()] = true;
-    ++it_l;
+    ++payeesIt;
   }
 
   // keep current selected item
@@ -948,7 +932,7 @@ void KPayeesView::loadPayees(void)
     id = currentItem->payee().id();
 
   // remember the upper left corner of the viewport
-  QPoint startPoint = m_payeesList->viewportToContents(QPoint(0, 0));
+  //QPoint startPoint = m_payeesList->viewportToContents(QPoint(0, 0));
 
   // turn off updates to avoid flickering during reload
   //m_payeesList->setUpdatesEnabled(false);
@@ -968,18 +952,17 @@ void KPayeesView::loadPayees(void)
     if (isSelected[item->payee().id()])
       item->setSelected(true);
   }
+  m_payeesList->sortItems();
 
   if (currentItem) {
     m_payeesList->setCurrentItem(currentItem);
+    m_payeesList->scrollToItem(currentItem);
   }
 
   // reposition viewport
-  m_payeesList->setContentsPos(startPoint.x(), startPoint.y());
+  //m_payeesList->setContentsPos(startPoint.x(), startPoint.y());
 
-  m_searchWidget->searchLine()->updateSearch(QString());
-
-  // turn updates back on
-  //m_payeesList->setUpdatesEnabled(true);
+  m_searchWidget->updateSearch(QString());
 
   slotSelectPayee();
 
@@ -1003,7 +986,6 @@ void KPayeesView::resizeEvent(QResizeEvent* ev)
     m_transactionView->visibleWidth(),
     m_transactionView->contentsHeight());
 
-  m_payeesList->setColumnWidth(0, m_payeesList->visibleWidth());
   KPayeesViewDecl::resizeEvent(ev);
 }
 
@@ -1021,32 +1003,30 @@ void KPayeesView::slotSelectPayeeAndTransaction(const QString& payeeId, const QS
 
   try {
     // clear filter
-    m_searchWidget->searchLine()->clear();
-    m_searchWidget->searchLine()->updateSearch();
+    m_searchWidget->clear();
+    m_searchWidget->updateSearch();
 
     // deselect all other selected items
-    Q3ListViewItemIterator it_l(m_payeesList, Q3ListViewItemIterator::Selected);
-    Q3ListViewItem* it_v;
-    while ((it_v = it_l.current()) != 0) {
-      KPayeeListItem* item = dynamic_cast<KPayeeListItem*>(it_v);
+    QList<QListWidgetItem *> selectedItems = m_payeesList->selectedItems();
+    QList<QListWidgetItem *>::const_iterator payeesIt = selectedItems.constBegin();
+    while(payeesIt != selectedItems.constEnd()) {
+      KPayeeListItem* item = dynamic_cast<KPayeeListItem*>(*payeesIt);
       if (item)
         item->setSelected(false);
-      ++it_l;
+      ++payeesIt;
     }
 
     // find the payee in the list
-    Q3ListViewItem* it;
-    for (it = m_payeesList->firstChild(); it; it = it->itemBelow()) {
+    QListWidgetItem* it;
+    for (int i = 0; i < m_payeesList->count(); ++i) {
+      it = m_payeesList->item(i);
       KPayeeListItem* item = dynamic_cast<KPayeeListItem *>(it);
       if (item && item->payee().id() == payeeId) {
-        if (it->itemAbove())
-          m_payeesList->ensureItemVisible(it->itemAbove());
-        if (it->itemBelow())
-          m_payeesList->ensureItemVisible(it->itemBelow());
+        m_payeesList->scrollToItem(it, QAbstractItemView::PositionAtCenter);
 
         m_payeesList->setCurrentItem(it);     // active item and deselect all others
-        m_payeesList->setSelected(it, true);  // and select it
-        m_payeesList->ensureItemVisible(it);
+        m_payeesList->setCurrentRow(i, QItemSelectionModel::ClearAndSelect); // and select it
+
 
         KTransactionListItem* item = dynamic_cast<KTransactionListItem*>(m_transactionView->firstChild());
         while (item != 0) {
@@ -1072,14 +1052,11 @@ void KPayeesView::slotSelectPayeeAndTransaction(const QString& payeeId, const QS
   }
 }
 
-void KPayeesView::slotOpenContextMenu(K3ListView* lv, Q3ListViewItem* i, const QPoint& p)
+void KPayeesView::slotOpenContextMenu(const QPoint& p)
 {
-  Q_UNUSED(p);
-  if (lv == m_payeesList) {
-    KPayeeListItem* item = dynamic_cast<KPayeeListItem*>(i);
-    if (item) {
-      emit openContextMenu(item->payee());
-    }
+  KPayeeListItem* item = dynamic_cast<KPayeeListItem*>(m_payeesList->currentItem());
+  if (item) {
+    emit openContextMenu(item->payee());
   }
 }
 

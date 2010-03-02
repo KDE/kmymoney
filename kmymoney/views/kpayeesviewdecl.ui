@@ -19,7 +19,7 @@
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
-       <widget class="K3ListView" name="m_payeesList">
+       <widget class="KListWidget" name="m_payeesList">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>1</horstretch>
@@ -27,16 +27,7 @@
          </sizepolicy>
         </property>
         <property name="selectionMode">
-         <enum>Q3ListView::Extended</enum>
-        </property>
-        <property name="allColumnsShowFocus">
-         <bool>true</bool>
-        </property>
-        <property name="showSortIndicator">
-         <bool>true</bool>
-        </property>
-        <property name="shadeSortColumn">
-         <bool>false</bool>
+         <enum>QAbstractItemView::ExtendedSelection</enum>
         </property>
        </widget>
        <widget class="KTabWidget" name="m_tabWidget">
@@ -550,6 +541,11 @@ new transactions with this payee</string>
    <class>Q3ListView</class>
    <extends>Q3Frame</extends>
    <header>q3listview.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KListWidget</class>
+   <extends>QListWidget</extends>
+   <header>klistwidget.h</header>
   </customwidget>
   <customwidget>
    <class>K3ListView</class>
