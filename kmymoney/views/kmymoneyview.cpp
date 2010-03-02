@@ -128,6 +128,9 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   connect(this, SIGNAL(currentPageChanged(const QModelIndex, const QModelIndex)), this, SLOT(slotRefreshViews()));
   connect(this, SIGNAL(pageToggled(KPageWidgetItem*, bool)), this, SLOT(slotRefreshViews()));
 
+  // let the accounts model know which account is being currently reconciled
+  connect(this, SIGNAL(reconciliationStarts(const MyMoneyAccount&, const QDate&, const MyMoneyMoney&)), Models::instance()->accountsModel(), SLOT(slotReconcileAccount(const MyMoneyAccount&, const QDate&, const MyMoneyMoney&)));
+
   // Page 0
   m_homeView = new KHomeView();
   m_homeViewFrame = m_model->addPage(m_homeView, i18n("Home"));

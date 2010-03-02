@@ -106,7 +106,7 @@ public:
     model->setData(index, QVariant::fromValue(account), AccountRole);
     model->setData(index, QVariant(account.id()), AccountIdRole);
     model->setData(index, QVariant(account.value("PreferredAccount") == "Yes"), AccountFavoriteRole);
-    model->setData(index, QVariant(QIcon(account.accountPixmap())), Qt::DecorationRole);
+    model->setData(index, QVariant(QIcon(account.accountPixmap(account.id() == m_reconciledAccount.id()))), Qt::DecorationRole);
 
     // set the balance of the account
     MyMoneyMoney accountBalance = balance(account);
@@ -309,6 +309,10 @@ public:
     * Used to emit the @ref netWorthChanged signal.
     */
   MyMoneyMoney m_lastNetWorth;
+  /**
+    * Used to set the reconciliation flag.
+    */
+  MyMoneyAccount m_reconciledAccount;
 };
 
 const QString AccountsModel::favoritesAccountId("Favorites");
@@ -508,6 +512,31 @@ void AccountsModel::load()
   if (d->m_lastNetWorth != netWorth) {
     d->m_lastNetWorth = netWorth;
     emit netWorthChanged(d->m_lastNetWorth);
+  }
+}
+
+/**
+  * This slot should be connected so that the model will be notified which account is being reconciled.
+  */
+void AccountsModel::slotReconcileAccount(const MyMoneyAccount &account, const QDate &reconciliationDate, const MyMoneyMoney &endingBalance)
+{
+  Q_UNUSED(reconciliationDate)
+  Q_UNUSED(endingBalance)
+  if (d->m_reconciledAccount.id() != account.id()) {
+    // first clear the flag of the old reconciliation account
+    if (!d->m_reconciledAccount.id().isEmpty()) {
+      QModelIndexList list = match(index(0, 0), AccountsModel::AccountIdRole, QVariant(d->m_reconciledAccount.id()), -1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
+      foreach(const QModelIndex &index, list) {
+        setData(index, QVariant(QIcon(account.accountPixmap(false))), Qt::DecorationRole);
+      }
+    }
+
+    // then set the reconciliation flag of the new reconciliation account
+    QModelIndexList list = match(index(0, 0), AccountsModel::AccountIdRole, QVariant(account.id()), -1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
+    foreach(const QModelIndex &index, list) {
+      setData(index, QVariant(QIcon(account.accountPixmap(true))), Qt::DecorationRole);
+    }
+    d->m_reconciledAccount = account;
   }
 }
 
