@@ -168,6 +168,8 @@ KAccountsView::KAccountsView(QWidget *parent) :
   m_filterProxyModel->setSourceModel(Models::instance()->accountsModel());
   m_filterProxyModel->setFilterKeyColumn(-1);
 
+  connect(m_filterProxyModel, SIGNAL(unusedIncomeExpenseAccountHidden()), this, SLOT(slotUnusedIncomeExpenseAccountHidden()));
+
   m_accountTree->setAlternatingRowColors(true);
   m_accountTree->setIconSize(QSize(22, 22));
   m_accountTree->setSortingEnabled(true);
@@ -202,6 +204,15 @@ void KAccountsView::slotExpandCollapse(void)
   if (sender()) {
     KMyMoneyGlobalSettings::setShowAccountsExpanded(sender() == m_expandButton);
   }
+}
+
+/**
+  * The view is notified that an unused income expense account has been hidden.
+  */
+void KAccountsView::slotUnusedIncomeExpenseAccountHidden(void)
+{
+  m_haveUnusedCategories = true;
+  m_hiddenCategories->setVisible(m_haveUnusedCategories);
 }
 
 void KAccountsView::slotLoadAccounts(void)
@@ -380,8 +391,16 @@ void KAccountsView::loadIconView(void)
 
 void KAccountsView::loadListView(void)
 {
-  // TODO: check why is this needed here
+  // TODO: check why the invalidate is needed here
   m_filterProxyModel->invalidate();
+  m_filterProxyModel->setHideClosedAccounts(KMyMoneyGlobalSettings::hideClosedAccounts() && !kmymoney->toggleAction("view_show_all_accounts")->isChecked());
+  m_filterProxyModel->setHideEquityAccounts(!KMyMoneyGlobalSettings::expertMode());
+
+  // reinitialize the default state of the hidden categories label
+  m_haveUnusedCategories = false;
+  m_hiddenCategories->hide();
+  m_filterProxyModel->setHideUnusedIncomeExpenseAccounts(kmymoney->toggleAction("view_hide_unused_categories")->isChecked());
+
   // and in case we need to show things expanded, we'll do so
   if (KMyMoneyGlobalSettings::showAccountsExpanded()) {
     m_accountTree->expandAll();

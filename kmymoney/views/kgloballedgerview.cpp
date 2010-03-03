@@ -846,6 +846,7 @@ void KGlobalLedgerView::loadAccounts(void)
   // TODO: check why the invalidate is needed here
   d->m_filterProxyModel->invalidate();
   d->m_filterProxyModel->setHideClosedAccounts(KMyMoneyGlobalSettings::hideClosedAccounts() && !kmymoney->toggleAction("view_show_all_accounts")->isChecked());
+  d->m_filterProxyModel->setHideEquityAccounts(!KMyMoneyGlobalSettings::expertMode());
   d->m_accountComboBox->expandAll();
 
   if (m_account.id().isEmpty()) {

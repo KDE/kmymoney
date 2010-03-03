@@ -163,12 +163,21 @@ public:
   void setHideClosedAccounts(bool hideClosedAccounts);
   bool hideClosedAccounts(void) const;
 
+  void setHideEquityAccounts(bool hideEquityAccounts);
+  bool hideEquityAccounts(void) const;
+
+  void setHideUnusedIncomeExpenseAccounts(bool hideUnusedIncomeExpenseAccounts);
+  bool hideUnusedIncomeExpenseAccounts(void) const;
+
 protected:
   virtual bool lessThan(const QModelIndex &left, const QModelIndex &right) const;
   virtual bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
   virtual bool acceptSourceItem(const QModelIndex &source) const;
 
   bool filterAcceptsRowOrChildRows(int source_row, const QModelIndex &source_parent) const;
+
+signals:
+  void unusedIncomeExpenseAccountHidden(void) const;
 
 private:
   class Private;

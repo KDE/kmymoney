@@ -26,8 +26,9 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocalizedstring.h>
-#include <kiconloader.h>
+#include <KLocalizedString>
+#include <KIconLoader>
+#include <KDebug>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -121,6 +122,12 @@ public:
     model->setData(index, false, CleanupRole);
 
     QFont font = model->data(index, Qt::FontRole).value<QFont>();
+
+    if (account.isClosed()) {
+      // display the names of closed accounts with strikeout font
+      font.setStrikeOut(true);
+      model->setData(index, font, Qt::FontRole);
+    }
 
     // Type
     QModelIndex newIndex = model->index(index.row(), index.column() + Type, index.parent());
@@ -546,14 +553,22 @@ void AccountsModel::slotReconcileAccount(const MyMoneyAccount &account, const QD
 class AccountsFilterProxyModel::Private
 {
 public:
-  Private() : m_hideClosedAccounts(true) {
+  Private() :
+    m_hideClosedAccounts(true),
+    m_hideEquityAccounts(true),
+    m_hideUnusedIncomeExpenseAccounts(false)
+  {
   }
 
-  ~Private() {
+  ~Private()
+  {
   }
 
   QList<MyMoneyAccount::accountTypeE> m_typeList;
   bool m_hideClosedAccounts;
+  bool m_hideEquityAccounts;
+  bool m_hideUnusedIncomeExpenseAccounts;
+  bool m_haveHiddenUnusedIncomeExpenseAccounts;
 };
 
 AccountsFilterProxyModel::AccountsFilterProxyModel(QObject *parent /*= 0*/)
@@ -561,6 +576,7 @@ AccountsFilterProxyModel::AccountsFilterProxyModel(QObject *parent /*= 0*/)
 {
   setDynamicSortFilter(true);
   setFilterKeyColumn(-1);
+  setSortLocaleAware(true);
   setFilterCaseSensitivity(Qt::CaseInsensitive);
 }
 
@@ -684,12 +700,21 @@ bool AccountsFilterProxyModel::acceptSourceItem(const QModelIndex &source) const
         return false;
 
       // we hide stock accounts if not in expert mode
-      if (account.isInvest() && !KMyMoneyGlobalSettings::expertMode())
+      if (account.isInvest() && hideEquityAccounts())
         return false;
 
       // we hide equity accounts if not in expert mode
-      if (account.accountType() == MyMoneyAccount::Equity && !KMyMoneyGlobalSettings::expertMode())
+      if (account.accountType() == MyMoneyAccount::Equity && hideEquityAccounts())
         return false;
+
+      // we hide unused income and expense accounts if the specific flag is set
+      if ((account.accountType() == MyMoneyAccount::Income || account.accountType() == MyMoneyAccount::Expense) && hideUnusedIncomeExpenseAccounts()) {
+        QVariant totalValue = sourceModel()->data(source, AccountsModel::AccountTotalValueRole);
+        if (totalValue.isValid() && totalValue.value<MyMoneyMoney>().isZero()) {
+          emit unusedIncomeExpenseAccountHidden();
+          return false;
+        }
+      }
 
       if (d->m_typeList.contains(account.accountType()))
         return true;
@@ -723,6 +748,46 @@ void AccountsFilterProxyModel::setHideClosedAccounts(bool hideClosedAccounts)
 bool AccountsFilterProxyModel::hideClosedAccounts(void) const
 {
   return d->m_hideClosedAccounts;
+}
+
+/**
+  * Set if equity and investment accounts should be hidden or not.
+  * @param hideEquityAccounts
+  */
+void AccountsFilterProxyModel::setHideEquityAccounts(bool hideEquityAccounts)
+{
+  if (d->m_hideEquityAccounts != hideEquityAccounts) {
+    d->m_hideEquityAccounts = hideEquityAccounts;
+    invalidateFilter();
+  }
+}
+
+/**
+  * Check if equity and investment accounts are hidden or not.
+  */
+bool AccountsFilterProxyModel::hideEquityAccounts(void) const
+{
+  return d->m_hideEquityAccounts;
+}
+
+/**
+  * Set if empty categories should be hidden or not.
+  * @param hideUnusedIncomeExpenseAccounts
+  */
+void AccountsFilterProxyModel::setHideUnusedIncomeExpenseAccounts(bool hideUnusedIncomeExpenseAccounts)
+{
+  if (d->m_hideUnusedIncomeExpenseAccounts != hideUnusedIncomeExpenseAccounts) {
+    d->m_hideUnusedIncomeExpenseAccounts = hideUnusedIncomeExpenseAccounts;
+    invalidateFilter();
+  }
+}
+
+/**
+  * Check if empty categories are hidden or not.
+  */
+bool AccountsFilterProxyModel::hideUnusedIncomeExpenseAccounts(void) const
+{
+  return d->m_hideUnusedIncomeExpenseAccounts;
 }
 
 #include "accountsmodel.moc"
