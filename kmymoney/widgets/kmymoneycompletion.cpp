@@ -291,9 +291,8 @@ void kMyMoneyCompletion::slotMakeCompletion(const QString& txt)
 
 void kMyMoneyCompletion::slotItemSelected(QTreeWidgetItem *item, int)
 {
-  KMyMoneyTreeWidgetItem* it_v = dynamic_cast<KMyMoneyTreeWidgetItem*>(item);
-  if (it_v && it_v->isSelectable()) {
-    QString id = it_v->id();
+  if (item && item->flags().testFlag(Qt::ItemIsSelectable)) {
+    QString id = item->data(0, KMyMoneySelector::IdRole).toString();
     // hide the widget, so we can debug the slots that are connect
     // to the signal we emit very soon
     hide();

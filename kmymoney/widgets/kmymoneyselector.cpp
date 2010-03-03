@@ -84,6 +84,15 @@ void KMyMoneySelector::clear(void)
   m_visibleItem = 0;
 }
 
+void KMyMoneySelector::setSelectable(QTreeWidgetItem *item, bool selectable)
+{
+  if (selectable) {
+    item->setFlags(item->flags() | Qt::ItemIsSelectable);
+  } else {
+    item->setFlags(item->flags() & ~Qt::ItemIsSelectable);
+  }
+}
+
 void KMyMoneySelector::setSelectionMode(const QTreeWidget::SelectionMode mode)
 {
   if (m_selMode != mode) {
@@ -94,9 +103,11 @@ void KMyMoneySelector::setSelectionMode(const QTreeWidget::SelectionMode mode)
     if (mode != QTreeWidget::MultiSelection) {
       m_selMode = QTreeWidget::SingleSelection;
       connect(m_treeWidget, SIGNAL(itemSelectionChanged(void)), this, SIGNAL(stateChanged(void)));
+      connect(m_treeWidget, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SIGNAL(stateChanged(void)));
       connect(m_treeWidget, SIGNAL(itemActivated(QTreeWidgetItem*,int)), this, SLOT(slotItemSelected(QTreeWidgetItem*)));
     } else {
       disconnect(m_treeWidget, SIGNAL(itemSelectionChanged(void)), this, SIGNAL(stateChanged(void)));
+      disconnect(m_treeWidget, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SIGNAL(stateChanged(void)));
       disconnect(m_treeWidget, SIGNAL(itemActivated(QTreeWidgetItem*,int)), this, SLOT(slotItemSelected(QTreeWidgetItem*)));
     }
   }
@@ -106,26 +117,27 @@ void KMyMoneySelector::setSelectionMode(const QTreeWidget::SelectionMode mode)
 void KMyMoneySelector::slotItemSelected(QTreeWidgetItem *item)
 {
   if (m_selMode == QTreeWidget::SingleSelection) {
-    KMyMoneyTreeWidgetItem* l_item = dynamic_cast<KMyMoneyTreeWidgetItem*>(item);
-    if (l_item && l_item->isSelectable()) {
-      emit itemSelected(l_item->id());
+    if (item && item->flags().testFlag(Qt::ItemIsSelectable)) {
+      emit itemSelected(item->data(0, IdRole).toString());
     }
   }
 }
 
 QTreeWidgetItem* KMyMoneySelector::newItem(const QString& name, QTreeWidgetItem* after, const QString& key, const QString& id)
 {
-  KMyMoneyTreeWidgetItem* item;
-  if (after)
-    item = new KMyMoneyTreeWidgetItem(m_treeWidget, after, name, key, id);
-  else
-    item = new KMyMoneyTreeWidgetItem(m_treeWidget, name, key, id);
+  QTreeWidgetItem* item = new QTreeWidgetItem(m_treeWidget, after);
+
+  item->setText(0, name);
+  item->setData(0, KeyRole, key);
+  item->setData(0, IdRole, id);
+  item->setText(1, key); // hidden, but used for sorting
+  item->setFlags(item->flags() & ~Qt::ItemIsUserCheckable);
 
   if (id.isEmpty()) {
     QFont font = item->font(0);
     font.setBold(true);
     item->setFont(0, font);
-    item->setSelectable(false);
+    setSelectable(item, false);
   }
   item->setExpanded(true);
   return item;
@@ -138,50 +150,48 @@ QTreeWidgetItem* KMyMoneySelector::newItem(const QString& name, const QString& k
 
 QTreeWidgetItem* KMyMoneySelector::newTopItem(const QString& name, const QString& key, const QString& id)
 {
-  QTreeWidgetItem* p;
+  QTreeWidgetItem* item = new QTreeWidgetItem(m_treeWidget);
 
-  KMyMoneyTreeWidgetItem* q = new KMyMoneyTreeWidgetItem(m_treeWidget, name, key, id);
+  item->setText(0, name);
+  item->setData(0, KeyRole, key);
+  item->setData(0, IdRole, id);
+  item->setText(1, key); // hidden, but used for sorting
+  item->setFlags(item->flags() & ~Qt::ItemIsUserCheckable);
+
   if (m_selMode == QTreeWidget::MultiSelection) {
-    q->setCheckable(true);
-    connect(q, SIGNAL(stateChanged(bool)), this, SIGNAL(stateChanged(void)));
-  } else {
-    q->setCheckable(false);
+    item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
+    item->setCheckState(0, Qt::Checked);
   }
-  p = static_cast<QTreeWidgetItem*>(q);
-
-  return p;
+  return item;
 }
 
 QTreeWidgetItem* KMyMoneySelector::newItem(QTreeWidgetItem* parent, const QString& name, const QString& key, const QString& id)
 {
-  QTreeWidgetItem* p;
+  QTreeWidgetItem* item = new QTreeWidgetItem(parent);
 
-  KMyMoneyTreeWidgetItem* q = new KMyMoneyTreeWidgetItem(parent, name, key, id);
+  item->setText(0, name);
+  item->setData(0, KeyRole, key);
+  item->setData(0, IdRole, id);
+  item->setText(1, key); // hidden, but used for sorting
+  item->setFlags(item->flags() & ~Qt::ItemIsUserCheckable);
+
   if (m_selMode == QTreeWidget::MultiSelection) {
-    q->setCheckable(true);
-    connect(q, SIGNAL(stateChanged(bool)), this, SIGNAL(stateChanged(void)));
-  } else {
-    q->setCheckable(false);
+    item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
+    item->setCheckState(0, Qt::Checked);
   }
-  p = static_cast<QTreeWidgetItem*>(q);
-
-  return p;
+  return item;
 }
 
 void KMyMoneySelector::protectItem(const QString& itemId, const bool protect)
 {
   QTreeWidgetItemIterator it(m_treeWidget, QTreeWidgetItemIterator::Selectable);
   QTreeWidgetItem* it_v;
-  KMyMoneyTreeWidgetItem* it_c;
 
   // scan items
   while ((it_v = *it) != 0) {
-    it_c = dynamic_cast<KMyMoneyTreeWidgetItem*>(it_v);
-    if (it_c) {
-      if (it_c->id() == itemId) {
-        it_c->setSelectable(!protect);
-        break;
-      }
+    if (it_v->data(0, IdRole).toString() == itemId) {
+      setSelectable(it_v, !protect);
+      break;
     }
     ++it;
   }
@@ -191,11 +201,9 @@ QTreeWidgetItem* KMyMoneySelector::item(const QString& id) const
 {
   QTreeWidgetItemIterator it(m_treeWidget, QTreeWidgetItemIterator::Selectable);
   QTreeWidgetItem* it_v;
-  KMyMoneyTreeWidgetItem* it_c;
 
   while ((it_v = *it) != 0) {
-    it_c = dynamic_cast<KMyMoneyTreeWidgetItem*>(it_v);
-    if (it_c->id() == id)
+    if (it_v->data(0, IdRole).toString() == id)
       break;
     ++it;
   }
@@ -240,12 +248,11 @@ void KMyMoneySelector::removeItem(const QString& id)
   QTreeWidgetItemIterator it(m_treeWidget);
 
   while ((it_v = *it) != 0) {
-    KMyMoneyTreeWidgetItem* it_c = dynamic_cast<KMyMoneyTreeWidgetItem*>(it_v);
-    if (id == it_c->id()) {
-      if (it_c->childCount() > 0) {
-        it_c->setSelectable(false);
+    if (id == it_v->data(0, IdRole).toString()) {
+      if (it_v->childCount() > 0) {
+        setSelectable(it_v, false);
       } else {
-        delete it_c;
+        delete it_v;
       }
     }
     it++;
@@ -254,13 +261,10 @@ void KMyMoneySelector::removeItem(const QString& id)
   // get rid of top items that just lost the last children (e.g. Favorites)
   it = QTreeWidgetItemIterator(m_treeWidget, QTreeWidgetItemIterator::NotSelectable);
   while ((it_v = *it) != 0) {
-    KMyMoneyTreeWidgetItem* it_c = dynamic_cast<KMyMoneyTreeWidgetItem*>(it_v);
-    if (it_c->childCount() == 0)
-      delete it_c;
+    if (it_v->childCount() == 0)
+      delete it_v;
     it++;
   }
-
-  return;
 }
 
 
@@ -279,8 +283,8 @@ void KMyMoneySelector::selectItems(const QStringList& itemList, const bool state
 void KMyMoneySelector::selectSubItems(QTreeWidgetItem* item, const QStringList& itemList, const bool state)
 {
   for (int i = 0; i < item->childCount(); ++i) {
-    KMyMoneyTreeWidgetItem* child = dynamic_cast<KMyMoneyTreeWidgetItem *>(item->child(i));
-    if (child->flags().testFlag(Qt::ItemIsUserCheckable) && itemList.contains(child->id())) {
+    QTreeWidgetItem* child = item->child(i);
+    if (child->flags().testFlag(Qt::ItemIsUserCheckable) && itemList.contains(child->data(0, IdRole).toString())) {
       child->setCheckState(0, state ? Qt::Checked : Qt::Unchecked);
     }
     selectAllSubItems(child, state);
@@ -304,16 +308,16 @@ void KMyMoneySelector::selectedItems(QStringList& list) const
 {
   list.clear();
   if (m_selMode == QTreeWidget::SingleSelection) {
-    KMyMoneyTreeWidgetItem* it_c = dynamic_cast<KMyMoneyTreeWidgetItem*>(m_treeWidget->currentItem());
+    QTreeWidgetItem* it_c = m_treeWidget->currentItem();
     if (it_c != 0)
-      list << it_c->id();
+      list << it_c->data(0, IdRole).toString();
   } else {
     QTreeWidgetItem* rootItem = m_treeWidget->invisibleRootItem();
     for (int i = 0; i < rootItem->childCount(); ++i) {
-      KMyMoneyTreeWidgetItem* child = dynamic_cast<KMyMoneyTreeWidgetItem*>(rootItem->child(i));
+      QTreeWidgetItem* child = rootItem->child(i);
       if (child->flags().testFlag(Qt::ItemIsUserCheckable)) {
         if (child->checkState(0) == Qt::Checked)
-          list << child->id();
+          list << child->data(0, IdRole).toString();
       }
       selectedItems(list, child);
     }
@@ -323,10 +327,10 @@ void KMyMoneySelector::selectedItems(QStringList& list) const
 void KMyMoneySelector::selectedItems(QStringList& list, QTreeWidgetItem* item) const
 {
   for (int i = 0; i < item->childCount(); ++i) {
-    KMyMoneyTreeWidgetItem* child = dynamic_cast<KMyMoneyTreeWidgetItem*>(item->child(i));
+    QTreeWidgetItem* child = item->child(i);
     if (child->flags().testFlag(Qt::ItemIsUserCheckable)) {
       if (child->checkState(0) == Qt::Checked)
-        list << child->id();
+        list << child->data(0, IdRole).toString();
     }
     selectedItems(list, child);
   }
@@ -338,10 +342,7 @@ void KMyMoneySelector::itemList(QStringList& list) const
   QTreeWidgetItem* it_v;
 
   while ((it_v = *it) != 0) {
-    KMyMoneyTreeWidgetItem* it_c = dynamic_cast<KMyMoneyTreeWidgetItem*>(it_v);
-    if (it_c) {
-      list << it_c->id();
-    }
+    list << it_v->data(0, IdRole).toString();
     it++;
   }
 }
@@ -349,18 +350,16 @@ void KMyMoneySelector::itemList(QStringList& list) const
 void KMyMoneySelector::setSelected(const QString& id, const bool state)
 {
   QTreeWidgetItemIterator it(m_treeWidget, QTreeWidgetItemIterator::Selectable);
-  QTreeWidgetItem* it_v;
+  QTreeWidgetItem* item;
   QTreeWidgetItem* it_visible = 0;
 
-  while ((it_v = *it) != 0) {
-    KMyMoneyTreeWidgetItem* item = dynamic_cast<KMyMoneyTreeWidgetItem*>(it_v);
-    Q_CHECK_PTR(item);
+  while ((item = *it) != 0) {
     if (item->flags().testFlag(Qt::ItemIsUserCheckable)) {
-      if (item->id() == id) {
+      if (item->data(0, IdRole).toString() == id) {
         item->setCheckState(0, state ? Qt::Checked : Qt::Unchecked);
-        m_treeWidget->setCurrentItem(it_v);
+        m_treeWidget->setCurrentItem(item);
         if (!it_visible)
-          it_visible = it_v;
+          it_visible = item;
       }
     }
     it++;
@@ -512,8 +511,7 @@ bool KMyMoneySelector::contains(const QString& txt) const
   QTreeWidgetItemIterator it(m_treeWidget, QTreeWidgetItemIterator::Selectable);
   QTreeWidgetItem* it_v;
   while ((it_v = *it) != 0) {
-    KMyMoneyTreeWidgetItem* it_c = dynamic_cast<KMyMoneyTreeWidgetItem*>(it_v);
-    if (it_c && it_c->text(0) == txt) {
+    if (it_v->text(0) == txt) {
       return true;
     }
     it++;
@@ -521,12 +519,11 @@ bool KMyMoneySelector::contains(const QString& txt) const
   return false;
 }
 
-void KMyMoneySelector::slotItemPressed(QTreeWidgetItem* it_v, int /* col */)
+void KMyMoneySelector::slotItemPressed(QTreeWidgetItem* item, int /* col */)
 {
   if (QApplication::mouseButtons() != Qt::RightButton)
     return;
 
-  KMyMoneyTreeWidgetItem* item = static_cast<KMyMoneyTreeWidgetItem*>(it_v);
   if (item->flags().testFlag(Qt::ItemIsUserCheckable)) {
     QStyleOptionButton opt;
     opt.rect = m_treeWidget->visualItemRect(item);

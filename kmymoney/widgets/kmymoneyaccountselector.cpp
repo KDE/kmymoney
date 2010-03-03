@@ -130,10 +130,10 @@ QStringList kMyMoneyAccountSelector::accountList(const  QList<MyMoneyAccount::ac
   QTreeWidgetItemIterator it(m_treeWidget, QTreeWidgetItemIterator::Selectable);
 
   while (*it) {
-    KMyMoneyTreeWidgetItem* it_c = dynamic_cast<KMyMoneyTreeWidgetItem*>(*it);
-    MyMoneyAccount acc = MyMoneyFile::instance()->account(it_c->id());
+    QVariant id = (*it)->data(0, KMyMoneySelector::IdRole);
+    MyMoneyAccount acc = MyMoneyFile::instance()->account(id.toString());
     if (filterList.count() == 0 || filterList.contains(acc.accountType()))
-      list << it_c->id();
+      list << id.toString();
     it++;
   }
   return list;
@@ -143,11 +143,7 @@ bool kMyMoneyAccountSelector::match(const QRegExp& exp, QTreeWidgetItem* item) c
 {
   if (!item->flags().testFlag(Qt::ItemIsSelectable))
     return false;
-  KMyMoneyTreeWidgetItem* it_c = dynamic_cast<KMyMoneyTreeWidgetItem*>(item);
-  if (!it_c) {
-    return KMyMoneySelector::match(exp, item);
-  }
-  return exp.indexIn(it_c->key(1, true)) != -1;
+  return exp.indexIn(item->data(0, KMyMoneySelector::KeyRole).toString().mid(1)) != -1;
 }
 
 bool kMyMoneyAccountSelector::contains(const QString& txt) const
@@ -164,8 +160,7 @@ bool kMyMoneyAccountSelector::contains(const QString& txt) const
 
   while ((it_v = *it) != 0) {
     QRegExp exp(QString("^(?:%1):%2$").arg(baseName).arg(QRegExp::escape(txt)));
-    KMyMoneyTreeWidgetItem* it_c = dynamic_cast<KMyMoneyTreeWidgetItem*>(it_v);
-    if (exp.indexIn(it_c->key(1, true)) != -1) {
+    if (exp.indexIn(it_v->data(0, KMyMoneySelector::KeyRole).toString().mid(1)) != -1) {
       return true;
     }
     it++;
@@ -358,12 +353,14 @@ int AccountSet::load(kMyMoneyAccountSelector* selector)
           if (!m_typeList.contains(acc.accountType())) {
             subItem->setDisabled(true);
           }
+          subItem->sortChildren(1, Qt::AscendingOrder);
         }
       }
-      item->sortChildren(0, Qt::AscendingOrder);
+      item->sortChildren(1, Qt::AscendingOrder);
     }
   }
-  m_favorites->sortChildren(0, Qt::AscendingOrder);
+  m_favorites->sortChildren(1, Qt::AscendingOrder);
+  lv->invisibleRootItem()->sortChildren(1, Qt::AscendingOrder);
 
   // if we don't have a favorite account or the selector is for multi-mode
   // we get rid of the favorite entry and subentries.
@@ -453,6 +450,7 @@ int AccountSet::loadSubAccounts(kMyMoneyAccountSelector* selector, QTreeWidgetIt
       if (!m_typeList.contains(acc.accountType())) {
         item->setDisabled(true);
       }
+      item->sortChildren(1, Qt::AscendingOrder);
     }
   }
   return count;

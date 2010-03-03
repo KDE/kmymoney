@@ -58,6 +58,12 @@ public:
   explicit KMyMoneySelector(QWidget *parent = 0, Qt::WFlags flags = 0);
   virtual ~KMyMoneySelector();
 
+  enum KMyMoneySelectorItemRoles
+  {
+    IdRole = Qt::UserRole,      /**< The id is stored in this role in column 0 as a string.*/
+    KeyRole = Qt::UserRole + 1, /**< The key is stored in this role in column 0 as a string.*/
+  };
+
   /**
     * This method sets the mode of operation of this widget.
     * Supported values are @p QListView::Single and @p QListView::Multi.
@@ -273,6 +279,11 @@ public:
     * Clears all items of the selector and the associated listview.
     */
   virtual void clear(void);
+
+  /**
+    * Sets the give item's selectable state.
+    */
+  void setSelectable(QTreeWidgetItem *item, bool selectable);
 
 public slots:
   /**
