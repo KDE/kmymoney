@@ -161,7 +161,7 @@ public:
       model->setData(newIndex, accountBalance.formatMoney(m_file->security(account.currencyId())), Qt::DisplayRole);
     model->setData(newIndex, accountBalance.formatMoney(m_file->security(account.currencyId())), AccountBalanceDispalyRole);
     model->setData(newIndex, font, Qt::FontRole);
-    model->setData(newIndex, Qt::AlignRight, Qt::TextAlignmentRole);
+    model->setData(newIndex, QVariant(Qt::AlignRight | Qt::AlignVCenter), Qt::TextAlignmentRole);
 
     // Total Value
     newIndex = model->index(index.row(), index.column() + TotalValue, index.parent());
@@ -169,7 +169,7 @@ public:
     model->setData(newIndex, accountValue.formatMoney(m_file->baseCurrency()), AccountValueDisplayRole);
     model->setData(newIndex, accountTotalValue.formatMoney(m_file->baseCurrency()), AccountTotalValueDisplayRole);
     model->setData(newIndex, font, Qt::FontRole);
-    model->setData(newIndex, Qt::AlignRight, Qt::TextAlignmentRole);
+    model->setData(newIndex, QVariant(Qt::AlignRight | Qt::AlignVCenter), Qt::TextAlignmentRole);
   }
 
   /**
