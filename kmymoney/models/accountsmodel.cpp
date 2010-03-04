@@ -104,6 +104,7 @@ public:
     */
   void setAccountData(QStandardItemModel *model, const QModelIndex &index, const MyMoneyAccount &account) {
     // Account
+    model->setData(index, account.name(), Qt::DisplayRole);
     model->setData(index, QVariant::fromValue(account), AccountRole);
     model->setData(index, QVariant(account.id()), AccountIdRole);
     model->setData(index, QVariant(account.value("PreferredAccount") == "Yes"), AccountFavoriteRole);
