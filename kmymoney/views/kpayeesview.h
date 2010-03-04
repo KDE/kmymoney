@@ -266,7 +266,9 @@ protected slots:
 
   void slotTransactionDoubleClicked(Q3ListViewItem *);
 
-  void slotNewPayee(void);
+  void slotPayeeNew(void);
+
+  void slotRenameButtonCliked(void);
 
 private slots:
   void rearrange(void);

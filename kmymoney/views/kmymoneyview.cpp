@@ -212,7 +212,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   m_payeesViewFrame->setHeader(QString(""));
   addTitleBar(m_payeesView, i18n("Payees"));
   connect(kmymoney, SIGNAL(payeeCreated(const QString&)), m_payeesView, SLOT(slotSelectPayeeAndTransaction(const QString&)));
-  connect(kmymoney, SIGNAL(payeeRename()), m_payeesView, SLOT(slotStartRename()));
+  connect(kmymoney, SIGNAL(payeeRename()), m_payeesView, SLOT(slotRenameButtonCliked()));
   connect(m_payeesView, SIGNAL(openContextMenu(const MyMoneyObject&)), kmymoney, SLOT(slotShowPayeeContextMenu()));
   connect(m_payeesView, SIGNAL(selectObjects(const QList<MyMoneyPayee>&)), kmymoney, SLOT(slotSelectPayees(const QList<MyMoneyPayee>&)));
   connect(m_payeesView, SIGNAL(transactionSelected(const QString&, const QString&)),

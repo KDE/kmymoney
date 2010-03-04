@@ -367,7 +367,7 @@ KPayeesView::KPayeesView(QWidget *parent) :
   connect(m_payeesList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(slotStartRename(QListWidgetItem*)));
   connect(m_payeesList, SIGNAL(itemChanged(QListWidgetItem*)), this, SLOT(slotRenamePayee(QListWidgetItem*)));
 
-  connect(m_renameButton, SIGNAL(clicked()), kmymoney->action("payee_rename"), SLOT(trigger()));
+  connect(m_renameButton, SIGNAL(clicked()), this, SLOT(slotRenameButtonCliked()));
   connect(m_deleteButton, SIGNAL(clicked()), kmymoney->action("payee_delete"), SLOT(trigger()));
   connect(m_newButton, SIGNAL(clicked()), this, SLOT(slotPayeeNew()));
 
@@ -475,6 +475,14 @@ void KPayeesView::slotStartRename(QListWidgetItem* item)
 {
   m_payeeInEditing = true;
   m_payeesList->editItem(item);
+}
+
+void KPayeesView::slotRenameButtonCliked()
+{
+  if(m_payeesList->currentItem() && m_payeesList->selectedItems().count() == 1) {
+    slotStartRename(m_payeesList->currentItem());
+  }
+
 }
 
 // This variant is only called when a single payee is selected and renamed.
@@ -1091,7 +1099,7 @@ void KPayeesView::slotOpenContextMenu(const QPoint& p)
   }
 }
 
-void KPayeesView::slotNewPayee(void)
+void KPayeesView::slotPayeeNew(void)
 {
   kmymoney->action("payee_new")->trigger();
 }
