@@ -534,6 +534,8 @@ void KPayeesView::selectedPayees(QList<MyMoneyPayee>& payeesList) const
 
 void KPayeesView::slotSelectPayee(void)
 {
+  m_payeeInEditing = false;
+
   // check if the content of a currently selected payee was modified
   // and ask to store the data
   if (m_updateButton->isEnabled()) {
