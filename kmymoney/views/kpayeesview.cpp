@@ -53,6 +53,7 @@
 #include <kdebug.h>
 #include <kapplication.h>
 #include <keditlistbox.h>
+#include <ktoolinvocation.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -60,7 +61,7 @@
 #include <mymoneyfile.h>
 #include <kmymoneyaccounttree.h>
 #include <kmymoneyglobalsettings.h>
-#include <ktoolinvocation.h>
+#include "kmymoney.h"
 
 /* -------------------------------------------------------------------------------*/
 /*                               KTransactionPtrVector                            */
@@ -316,7 +317,28 @@ KPayeesView::KPayeesView(QWidget *parent) :
   m_searchWidget->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed));
   m_payeesList->setContextMenuPolicy(Qt::CustomContextMenu);
 
-  verticalLayout->insertWidget(0, m_searchWidget);
+  listLayout->insertWidget(0, m_searchWidget);
+
+  KGuiItem newButtonItem(QString(""),
+                         KIcon("list-add-user"),
+                         i18n("Creates a new payee"),
+                         i18n("Use this to create a new payee."));
+  m_newButton->setGuiItem(newButtonItem);
+  m_newButton->setToolTip(newButtonItem.toolTip());
+
+  KGuiItem renameButtonItem(QString(""),
+                            KIcon("payee-rename"),
+                            i18n("Rename the current selected payee"),
+                            i18n("Use this to start renaming the selected payee."));
+  m_renameButton->setGuiItem(renameButtonItem);
+  m_renameButton->setToolTip(renameButtonItem.toolTip());
+
+  KGuiItem deleteButtonItem(QString(""),
+                            KIcon("list-remove-user"),
+                            i18n("Delete the current selected payee"),
+                            i18n("Use this to delete the selected payee."));
+  m_deleteButton->setGuiItem(deleteButtonItem);
+  m_deleteButton->setToolTip(deleteButtonItem.toolTip());
 
   m_transactionView->setSorting(-1);
   m_transactionView->setColumnWidthMode(2, Q3ListView::Manual);
@@ -344,6 +366,10 @@ KPayeesView::KPayeesView(QWidget *parent) :
   connect(m_payeesList, SIGNAL(itemActivated(QListWidgetItem*)), this, SLOT(slotSelectPayee()));
   connect(m_payeesList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(slotStartRename(QListWidgetItem*)));
   connect(m_payeesList, SIGNAL(itemChanged(QListWidgetItem*)), this, SLOT(slotRenamePayee(QListWidgetItem*)));
+
+  connect(m_renameButton, SIGNAL(clicked()), kmymoney->action("payee_rename"), SLOT(trigger()));
+  connect(m_deleteButton, SIGNAL(clicked()), kmymoney->action("payee_delete"), SLOT(trigger()));
+  connect(m_newButton, SIGNAL(clicked()), this, SLOT(slotPayeeNew()));
 
   connect(addressEdit, SIGNAL(textChanged()), this, SLOT(slotPayeeDataChanged()));
   connect(postcodeEdit, SIGNAL(textChanged(const QString&)), this, SLOT(slotPayeeDataChanged()));
@@ -1063,6 +1089,11 @@ void KPayeesView::slotOpenContextMenu(const QPoint& p)
   if (item) {
     emit openContextMenu(item->payee());
   }
+}
+
+void KPayeesView::slotNewPayee(void)
+{
+  kmymoney->action("payee_new")->trigger();
 }
 
 void KPayeesView::slotHelp(void)

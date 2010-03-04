@@ -19,16 +19,59 @@
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
-       <widget class="KListWidget" name="m_payeesList">
+       <widget class="QGroupBox" name="groupBox1">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>1</horstretch>
           <verstretch>1</verstretch>
          </sizepolicy>
         </property>
-        <property name="selectionMode">
-         <enum>QAbstractItemView::ExtendedSelection</enum>
+        <property name="title">
+         <string>Your payees</string>
         </property>
+        <layout class="QVBoxLayout" name="listLayout">
+         <item>
+          <layout class="QHBoxLayout">
+           <item>
+            <widget class="KPushButton" name="m_newButton">
+             <property name="text">
+              <string comment="New payee">New</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="KPushButton" name="m_renameButton">
+             <property name="text">
+              <string>Ren</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="KPushButton" name="m_deleteButton">
+             <property name="text">
+              <string>Del</string>
+             </property>
+             <property name="shortcut">
+              <string/>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+           <widget class="KListWidget" name="m_payeesList">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>1</horstretch>
+              <verstretch>1</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="selectionMode">
+             <enum>QAbstractItemView::ExtendedSelection</enum>
+            </property>
+           </widget>
+         </item>
+         </layout>
        </widget>
        <widget class="KTabWidget" name="m_tabWidget">
         <property name="sizePolicy">
