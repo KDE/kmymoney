@@ -68,3 +68,10 @@ void Models::dataChanged(void)
 {
   accountsModel()->load();
 }
+
+void Models::fileClosed(void)
+{
+  // TODO: make this cleaner in the future, for now just clear the accounts model before the file is closed
+  // to avoid any uncaught KMyMoneyExceptions while using the account objects from this model after the file has been closed
+  accountsModel()->removeRows(0, accountsModel()->rowCount());
+}

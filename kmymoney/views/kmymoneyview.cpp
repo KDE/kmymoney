@@ -552,6 +552,9 @@ void KMyMoneyView::closeFile(void)
   if (m_reportsView)
     m_reportsView->slotCloseAll();
 
+  // notify the models that the file is going to be closed (we should have something like dataChanged that reaches the models first)
+  Models::instance()->fileClosed();
+
   emit kmmFilePlugin(preClose);
   if (isDatabase())
     MyMoneyFile::instance()->storage()->close(); // to log off a database user

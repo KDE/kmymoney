@@ -77,6 +77,12 @@ public slots:
     */
   void dataChanged(void);
 
+  /**
+    * This slot is used to keep the managed models in sync with the data from the
+    * @ref MyMoneyFile.
+    */
+  void fileClosed(void);
+
 private:
   static Models models;
 
