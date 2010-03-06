@@ -124,12 +124,9 @@ public:
 
     QFont font = model->data(index, Qt::FontRole).value<QFont>();
 
-    if (account.isClosed() && !font.strikeOut()) {
-      // display the names of closed accounts with strikeout font
-      font.setStrikeOut(true);
-      model->setData(index, font, Qt::FontRole);
-    } else if(!account.isClosed() && font.strikeOut()) {
-      font.setStrikeOut(false);
+    // display the names of closed accounts with strikeout font
+    if (account.isClosed() != font.strikeOut()) {
+      font.setStrikeOut(account.isClosed());
       model->setData(index, font, Qt::FontRole);
     }
 
