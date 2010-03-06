@@ -46,6 +46,7 @@ email                : mte@users.sourceforge.net
 // Project Includes
 #ifndef _GNCFILEANON
 #include <config-kmymoney.h>
+#include <config-kmymoney-version.h>
 #include "storage/imymoneystorage.h"
 #include "kmymoneyutils.h"
 #include "mymoneyfile.h"

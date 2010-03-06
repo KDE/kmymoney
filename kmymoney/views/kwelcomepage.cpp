@@ -19,6 +19,7 @@
 // Project Includes
 #include "kwelcomepage.h"
 #include <config-kmymoney.h>
+#include <config-kmymoney-version.h>
 #include "kmymoneyutils.h"
 
 // ----------------------------------------------------------------------------

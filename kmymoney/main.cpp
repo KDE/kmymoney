@@ -16,6 +16,7 @@
 
 
 #include <config-kmymoney.h>
+#include <config-kmymoney-version.h>
 
 // ----------------------------------------------------------------------------
 // QT Includes

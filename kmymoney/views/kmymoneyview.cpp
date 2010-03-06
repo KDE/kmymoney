@@ -70,6 +70,7 @@
 #endif
 
 #include <config-kmymoney.h>
+#include <config-kmymoney-version.h>
 #include <kmymoneyglobalsettings.h>
 #include <kmymoneytitlelabel.h>
 #include <libkgpgfile/kgpgfile.h>
