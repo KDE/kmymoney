@@ -162,9 +162,11 @@ KAccountsView::KAccountsView(QWidget *parent) :
   m_filterProxyModel = new AccountsViewFilterProxyModel(this);
   m_filterProxyModel->addAccountGroup(MyMoneyAccount::Asset);
   m_filterProxyModel->addAccountGroup(MyMoneyAccount::Liability);
-  m_filterProxyModel->addAccountGroup(MyMoneyAccount::Income);
-  m_filterProxyModel->addAccountGroup(MyMoneyAccount::Expense);
   m_filterProxyModel->addAccountGroup(MyMoneyAccount::Equity);
+  if (KMyMoneyGlobalSettings::showCategoriesInAccountsView()) {
+    m_filterProxyModel->addAccountGroup(MyMoneyAccount::Income);
+    m_filterProxyModel->addAccountGroup(MyMoneyAccount::Expense);
+  }
   m_filterProxyModel->setSourceModel(Models::instance()->accountsModel());
   m_filterProxyModel->setFilterKeyColumn(-1);
 
@@ -395,6 +397,13 @@ void KAccountsView::loadListView(void)
   m_filterProxyModel->invalidate();
   m_filterProxyModel->setHideClosedAccounts(KMyMoneyGlobalSettings::hideClosedAccounts() && !kmymoney->toggleAction("view_show_all_accounts")->isChecked());
   m_filterProxyModel->setHideEquityAccounts(!KMyMoneyGlobalSettings::expertMode());
+  if (KMyMoneyGlobalSettings::showCategoriesInAccountsView()) {
+    m_filterProxyModel->addAccountGroup(MyMoneyAccount::Income);
+    m_filterProxyModel->addAccountGroup(MyMoneyAccount::Expense);
+  } else {
+    m_filterProxyModel->removeAccountType(MyMoneyAccount::Income);
+    m_filterProxyModel->removeAccountType(MyMoneyAccount::Expense);
+  }
 
   // reinitialize the default state of the hidden categories label
   m_haveUnusedCategories = false;

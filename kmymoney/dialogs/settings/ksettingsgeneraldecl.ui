@@ -442,6 +442,16 @@ You can use &lt;b&gt;View/Show all accounts&lt;/b&gt; to temporarily show hidden
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QCheckBox" name="kcfg_ShowCategoriesInAccountsView">
+            <property name="whatsThis">
+             <string>This option will display the categories in the accounts view also.</string>
+            </property>
+            <property name="text">
+             <string>Show categories in the accounts list view</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>
@@ -483,7 +493,7 @@ You can use &lt;b&gt;View/Show all accounts&lt;/b&gt; to temporarily show hidden
              </widget>
             </item>
             <item>
-             <widget class="kMyMoneyDateInput" name="m_startDateEdit" native="true"/>
+             <widget class="kMyMoneyDateInput" name="m_startDateEdit"/>
             </item>
             <item>
              <widget class="QDateEdit" name="kcfg_StartDate"/>
@@ -544,6 +554,11 @@ You can use &lt;b&gt;View/Show all accounts&lt;/b&gt; to temporarily show hidden
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
+   <class>kMyMoneyDateInput</class>
+   <extends>QFrame</extends>
+   <header>kmymoneydateinput.h</header>
+  </customwidget>
+  <customwidget>
    <class>Q3Frame</class>
    <extends>QFrame</extends>
    <header>Qt3Support/Q3Frame</header>
@@ -585,11 +600,6 @@ You can use &lt;b&gt;View/Show all accounts&lt;/b&gt; to temporarily show hidden
    <extends>QTabWidget</extends>
    <header>ktabwidget.h</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>kMyMoneyDateInput</class>
-   <extends>QWidget</extends>
-   <header>kmymoneydateinput.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
