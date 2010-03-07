@@ -122,6 +122,8 @@ kMyMoneySplitTable::kMyMoneySplitTable(QWidget *parent) :
 
   connect(this, SIGNAL(transactionChanged(const MyMoneyTransaction&)),
           this, SLOT(slotUpdateData(const MyMoneyTransaction&)));
+
+  installEventFilter(this);
 }
 
 kMyMoneySplitTable::~kMyMoneySplitTable()
