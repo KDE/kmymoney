@@ -228,6 +228,15 @@ public:
   inline const QHash<QString, unsigned long> transactionCountMap() const {
     return (m_transactionCountMap);
   };
+
+  /**
+   * The following functions are perform the same operations as the
+   * above functions, but on a QList of the items.
+   * This reduces db round-trips, so should be the preferred method when
+   * such a function exists.
+   */
+  void modifyAccountList(const QList<MyMoneyAccount>& acc);
+
   /**
     * the storage manager also needs the following read entry points
     */

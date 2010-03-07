@@ -998,7 +998,6 @@ void MyMoneyStorageSql::writeInstitutions()
   while (q.next()) dbList.append(q.value(0).toString());
 
   const QList<MyMoneyInstitution> list = m_storage->institutionList();
-  QList<MyMoneyInstitution>::ConstIterator it;
   QList<MyMoneyInstitution> insertList;
   QList<MyMoneyInstitution> updateList;
   MyMoneySqlQuery q2(this);
@@ -1355,16 +1354,24 @@ void MyMoneyStorageSql::addAccount(const MyMoneyAccount& acc)
 void MyMoneyStorageSql::modifyAccount(const MyMoneyAccount& acc)
 {
   DBG("*** Entering MyMoneyStorageSql::modifyAccount");
+  QList<MyMoneyAccount> aList;
+  aList << acc;
+  modifyAccountList(aList);
+}
+
+void MyMoneyStorageSql::modifyAccountList(const QList<MyMoneyAccount>& acc)
+{
+  DBG("*** Entering MyMoneyStorageSql::modifyAccountList");
   MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
   MyMoneySqlQuery q(this);
   q.prepare(m_db.m_tables["kmmAccounts"].updateString());
   QVariantList kvpList;
-  kvpList << acc.id();
+  foreach (const MyMoneyAccount& a, acc) {
+    kvpList << a.id();
+  }
   deleteKeyValuePairs("ACCOUNT", kvpList);
   deleteKeyValuePairs("ONLINEBANKING", kvpList);
-  QList<MyMoneyAccount> aList;
-  aList << acc;
-  writeAccountList(aList, q);
+  writeAccountList(acc, q);
   writeFileInfo();
 }
 
@@ -1530,12 +1537,14 @@ void MyMoneyStorageSql::addTransaction(const MyMoneyTransaction& tx)
   q.prepare(m_db.m_tables["kmmTransactions"].insertString());
   writeTransaction(tx.id(), tx, q, "N");
   ++m_transactions;
+  QList<MyMoneyAccount> aList;
   // for each split account, update lastMod date, balance, txCount
   foreach (const MyMoneySplit& it_s, tx.splits()) {
-    MyMoneyAccount acc = MyMoneyFile::instance()->account(it_s.accountId());
+    MyMoneyAccount acc = m_storagePtr->account(it_s.accountId());
     ++m_transactionCountMap[acc.id()];
-    modifyAccount(acc);
+    aList << acc;
   }
+  modifyAccountList(aList);
   // in the fileinfo record, update lastMod, txCount, next TxId
   writeFileInfo();
 }
@@ -1556,13 +1565,15 @@ void MyMoneyStorageSql::modifyTransaction(const MyMoneyTransaction& tx)
   // add the transaction and splits
   q.prepare(m_db.m_tables["kmmTransactions"].updateString());
   writeTransaction(tx.id(), tx, q, "N");
+  QList<MyMoneyAccount> aList;
   // for each split account, update lastMod date, balance, txCount
   foreach (const MyMoneySplit& it_s, tx.splits()) {
-    MyMoneyAccount acc = MyMoneyFile::instance()->account(it_s.accountId());
+    MyMoneyAccount acc = m_storagePtr->account(it_s.accountId());
     ++m_transactionCountMap[acc.id()];
-    modifyAccount(acc);
+    aList << acc;
   }
-  writeSplits(tx.id(), "N", tx.splits());
+  modifyAccountList(aList);
+  //writeSplits(tx.id(), "N", tx.splits());
   // in the fileinfo record, update lastMod
   writeFileInfo();
 }
@@ -1574,12 +1585,14 @@ void MyMoneyStorageSql::removeTransaction(const MyMoneyTransaction& tx)
   deleteTransaction(tx.id());
   --m_transactions;
 
+  QList<MyMoneyAccount> aList;
   // for each split account, update lastMod date, balance, txCount
   foreach (const MyMoneySplit& it_s, tx.splits()) {
     MyMoneyAccount acc = m_storagePtr->account(it_s.accountId());
     --m_transactionCountMap[acc.id()];
-    modifyAccount(acc);
+    aList << acc;
   }
+  modifyAccountList(aList);
   // in the fileinfo record, update lastModDate, txCount
   writeFileInfo();
 }
@@ -2321,7 +2334,6 @@ void MyMoneyStorageSql::writeBudgets()
 
   QList<MyMoneyBudget> list = m_storage->budgetList();
   signalProgress(0, list.count(), "Writing Budgets...");
-  QList<MyMoneyBudget>::ConstIterator it;
   q.prepare(m_db.m_tables["kmmBudgetConfig"].updateString());
   q2.prepare(m_db.m_tables["kmmBudgetConfig"].insertString());
   foreach (const MyMoneyBudget& it, list) {
@@ -2860,8 +2872,6 @@ const QMap<QString, MyMoneyAccount> MyMoneyStorageSql::fetchAccounts(const QStri
     if (idList.empty())
       kvpAccountList.append(aid);
 
-    // in database mode, load the balance from the account record
-    // else we would need to read all the transactions
     accList.insert(aid, MyMoneyAccount(aid, acc));
     if (acc.value("PreferredAccount") == "Yes") {
       const_cast <MyMoneyStorageSql*>(this)->m_preferred.addAccount(aid);
