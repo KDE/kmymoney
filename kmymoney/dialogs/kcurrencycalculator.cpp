@@ -184,7 +184,6 @@ KCurrencyCalculator::~KCurrencyCalculator()
 void KCurrencyCalculator::setupPriceEditor(void)
 {
   m_dateFrame->show();
-  m_dateEdit->setDate(QDate::currentDate());
   m_amountDateFrame->hide();
   m_updateButton->setChecked(true);
   m_updateButton->hide();
