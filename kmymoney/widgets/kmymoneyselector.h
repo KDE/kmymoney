@@ -23,7 +23,6 @@
 
 #include <QWidget>
 #include <QTreeWidget>
-#include <QTreeWidget>
 #include <Q3CheckListItem>
 
 // ----------------------------------------------------------------------------
