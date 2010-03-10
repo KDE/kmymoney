@@ -10,11 +10,8 @@
     <height>460</height>
    </rect>
   </property>
-  <layout class="QVBoxLayout">
-   <property name="margin">
-    <number>0</number>
-   </property>
-   <item>
+  <layout class="QGridLayout" name="gridLayout_3">
+   <item row="0" column="0">
     <widget class="QTreeWidget" name="m_groupList">
      <column>
       <property name="text">
@@ -28,20 +25,14 @@
      </column>
     </widget>
    </item>
-   <item>
-    <layout class="QHBoxLayout">
+   <item row="1" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="Q3GroupBox" name="groupBox1">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-         <horstretch>0</horstretch>
-         <verstretch>2</verstretch>
-        </sizepolicy>
-       </property>
+      <widget class="QGroupBox" name="groupBox">
        <property name="title">
         <string>Detailed description</string>
        </property>
-       <layout class="QVBoxLayout">
+       <layout class="QVBoxLayout" name="verticalLayout">
         <item>
          <widget class="KTextEdit" name="m_description">
           <property name="sizePolicy">
@@ -59,17 +50,11 @@
       </widget>
      </item>
      <item>
-      <widget class="Q3GroupBox" name="groupBox2">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-         <horstretch>1</horstretch>
-         <verstretch>2</verstretch>
-        </sizepolicy>
-       </property>
+      <widget class="QGroupBox" name="groupBox_2">
        <property name="title">
         <string>Accounts</string>
        </property>
-       <layout class="QVBoxLayout">
+       <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
          <widget class="QTreeWidget" name="m_accountList">
           <column>
@@ -85,17 +70,9 @@
     </layout>
    </item>
   </layout>
-  <zorder>m_groupList</zorder>
-  <zorder>m_accountList</zorder>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
-  <customwidget>
-   <class>Q3GroupBox</class>
-   <extends>QGroupBox</extends>
-   <header>Qt3Support/Q3GroupBox</header>
-   <container>1</container>
-  </customwidget>
   <customwidget>
    <class>KTextEdit</class>
    <extends>QTextEdit</extends>

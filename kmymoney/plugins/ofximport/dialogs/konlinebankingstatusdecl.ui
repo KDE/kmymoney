@@ -15,7 +15,7 @@
     </property>
     <layout class="QVBoxLayout">
       <item>
-        <widget class="Q3GroupBox" name="groupBox1">
+        <widget class="QGroupBox" name="groupBox1">
           <property name="title">
             <string>Account Details</string>
           </property>
@@ -139,7 +139,7 @@
         </widget>
       </item>
       <item>
-        <widget class="Q3GroupBox" name="groupBox2">
+        <widget class="QGroupBox" name="groupBox2">
           <property name="title">
             <string>OFX Details</string>
           </property>
@@ -408,12 +408,6 @@
   </widget>
   <layoutdefault spacing="6" margin="11"/>
     <customwidgets>
-    <customwidget>
-      <class>Q3GroupBox</class>
-      <extends>QGroupBox</extends>
-      <header>Qt3Support/Q3GroupBox</header>
-      <container>1</container>
-    </customwidget>
     <customwidget>
       <class>Q3DateEdit</class>
       <extends>QWidget</extends>

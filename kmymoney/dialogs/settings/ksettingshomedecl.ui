@@ -124,7 +124,7 @@ Use the buttons and checkboxes to customize the layout of the home page.</string
         </layout>
       </item>
       <item>
-        <widget class="Q3GroupBox" name="groupbox">
+        <widget class="QGroupBox" name="groupbox">
           <property name="title">
             <string>Homepage/Summary page font scaling</string>
           </property>
@@ -179,7 +179,7 @@ Use the buttons and checkboxes to customize the layout of the home page.</string
         </widget>
       </item>
       <item>
-        <widget class="Q3GroupBox" name="groupbox2">
+        <widget class="QGroupBox" name="groupbox2">
           <property name="title">
             <string>Information display</string>
           </property>

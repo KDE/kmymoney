@@ -15,7 +15,7 @@
   </property>
   <layout class="QHBoxLayout">
    <item>
-    <widget class="Q3GroupBox" name="jobBox">
+    <widget class="QGroupBox" name="jobBox">
      <property name="title">
       <string>Jobs</string>
      </property>
@@ -66,12 +66,6 @@
  <layoutdefault spacing="6" margin="11"/>
  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
  <customwidgets>
-  <customwidget>
-   <class>Q3GroupBox</class>
-   <extends>QGroupBox</extends>
-   <header>Qt3Support/Q3GroupBox</header>
-   <container>1</container>
-  </customwidget>
   <customwidget>
    <class>KPushButton</class>
    <extends>QPushButton</extends>

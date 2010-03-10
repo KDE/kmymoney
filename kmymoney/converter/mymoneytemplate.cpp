@@ -29,11 +29,12 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
-#include <kmessagebox.h>
-#include <kio/netaccess.h>
-#include <ksavefile.h>
+#include <KLocale>
+#include <KMessageBox>
+#include <KSaveFile>
 #include <KTemporaryFile>
+#include <kio/netaccess.h>
+
 // ----------------------------------------------------------------------------
 // Project Includes
 

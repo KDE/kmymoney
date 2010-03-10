@@ -117,7 +117,7 @@
       <item>
         <layout class="QHBoxLayout">
           <item>
-            <widget class="Q3GroupBox" name="groupBox2_2">
+            <widget class="QGroupBox" name="groupBox2_2">
               <property name="title">
                 <string>Convert from</string>
               </property>
@@ -152,7 +152,7 @@
             </widget>
           </item>
           <item>
-            <widget class="Q3GroupBox" name="groupBox3">
+            <widget class="QGroupBox" name="groupBox3">
               <property name="title">
                 <string>Convert to</string>
               </property>

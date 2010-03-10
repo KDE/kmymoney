@@ -277,7 +277,7 @@ Your account is balanced when the Difference is Zero.  Click on the Finish butto
             </spacer>
           </item>
           <item>
-            <widget class="Q3GroupBox" name="infoGroup">
+            <widget class="QGroupBox" name="infoGroup">
               <property name="sizePolicy">
                 <sizepolicy>
                   <hsizetype>0</hsizetype>

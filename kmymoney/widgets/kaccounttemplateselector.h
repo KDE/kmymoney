@@ -21,6 +21,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QList>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -28,7 +30,7 @@
 // Project Includes
 
 #include "ui_kaccounttemplateselectordecl.h"
-#include <QList>
+
 class MyMoneyTemplate;
 
 class KAccountTemplateSelectorDecl : public QWidget, public Ui::KAccountTemplateSelectorDecl

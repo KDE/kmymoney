@@ -79,7 +79,7 @@
         </layout>
       </item>
       <item>
-        <widget class="Q3GroupBox" name="m_paymentInformation">
+        <widget class="QGroupBox" name="m_paymentInformation">
           <property name="title">
             <string>Payment information</string>
           </property>
@@ -205,7 +205,7 @@
         </widget>
       </item>
       <item>
-        <widget class="Q3GroupBox" name="groupBox2">
+        <widget class="QGroupBox" name="groupBox2">
           <property name="title">
             <string>Options</string>
           </property>

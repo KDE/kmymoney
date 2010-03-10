@@ -23,9 +23,9 @@
 // QT Includes
 
 #include <QDir>
-#include <q3header.h>
 #include <QTimer>
 #include <QList>
+#include <QTreeWidget>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -33,7 +33,6 @@
 #include <kglobal.h>
 #include <klocale.h>
 #include <kstandarddirs.h>
-#include <k3listview.h>
 #include <ktextedit.h>
 
 // ----------------------------------------------------------------------------

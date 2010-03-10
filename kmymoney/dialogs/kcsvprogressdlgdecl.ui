@@ -90,7 +90,7 @@ You can cancel the process at any time by clicking on the Cancel button.</string
             </layout>
           </item>
           <item>
-            <widget class="Q3GroupBox" name="m_qgroupboxDates">
+            <widget class="QGroupBox" name="m_qgroupboxDates">
               <property name="title">
                 <string>Between These Dates</string>
               </property>
@@ -227,7 +227,7 @@ You can cancel the process at any time by clicking on the Cancel button.</string
         </layout>
       </item>
       <item>
-        <widget class="Q3GroupBox" name="m_qgroupbox">
+        <widget class="QGroupBox" name="m_qgroupbox">
           <property name="enabled">
             <bool>false</bool>
           </property>

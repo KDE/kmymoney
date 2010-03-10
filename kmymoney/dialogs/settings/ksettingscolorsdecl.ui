@@ -25,7 +25,7 @@
             </attribute>
             <layout class="QVBoxLayout">
               <item>
-                <widget class="Q3GroupBox" name="groupBox3">
+                <widget class="QGroupBox" name="groupBox3">
                   <property name="title">
                     <string>Text colors</string>
                   </property>
@@ -168,7 +168,7 @@
                 </widget>
               </item>
               <item>
-                <widget class="Q3GroupBox" name="m_individualColorFrame">
+                <widget class="QGroupBox" name="m_individualColorFrame">
                   <property name="title">
                     <string>List background colors</string>
                   </property>
@@ -233,7 +233,7 @@
                 </widget>
               </item>
               <item>
-                <widget class="Q3GroupBox" name="groupBox5">
+                <widget class="QGroupBox" name="groupBox5">
                   <property name="title">
                     <string>Special background colors</string>
                   </property>

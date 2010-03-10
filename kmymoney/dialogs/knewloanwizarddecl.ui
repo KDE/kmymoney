@@ -4608,7 +4608,7 @@ This page summarizes the data you entered. If you need to modify anything, pleas
                   <number>6</number>
                 </property>
                 <item>
-                  <widget class="Q3GroupBox" name="GroupBox3">
+                  <widget class="QGroupBox" name="GroupBox3">
                     <property name="title">
                       <string>General</string>
                     </property>
@@ -4726,7 +4726,7 @@ This page summarizes the data you entered. If you need to modify anything, pleas
                   </widget>
                 </item>
                 <item>
-                  <widget class="Q3GroupBox" name="GroupBox2">
+                  <widget class="QGroupBox" name="GroupBox2">
                     <property name="title">
                       <string>Loan calculation</string>
                     </property>
@@ -4908,7 +4908,7 @@ This page summarizes the data you entered. If you need to modify anything, pleas
               </layout>
             </item>
             <item>
-              <widget class="Q3GroupBox" name="GroupBox1">
+              <widget class="QGroupBox" name="GroupBox1">
                 <property name="title">
                   <string>Payment</string>
                 </property>

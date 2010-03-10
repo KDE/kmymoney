@@ -57,7 +57,7 @@
                 </layout>
               </item>
               <item>
-                <widget class="Q3GroupBox" name="groupBox4">
+                <widget class="QGroupBox" name="groupBox4">
                   <property name="title">
                     <string>Opening information</string>
                   </property>
@@ -140,7 +140,7 @@
                 </widget>
               </item>
               <item>
-                <widget class="Q3GroupBox" name="groupBox6">
+                <widget class="QGroupBox" name="groupBox6">
                   <property name="title">
                     <string>Options</string>
                   </property>
@@ -282,7 +282,7 @@
             </attribute>
             <layout class="QVBoxLayout">
               <item>
-                <widget class="Q3GroupBox" name="m_institutionBox">
+                <widget class="QGroupBox" name="m_institutionBox">
                   <property name="title">
                     <string>Institution</string>
                   </property>
@@ -547,7 +547,7 @@
             </attribute>
             <layout class="QVBoxLayout">
               <item>
-                <widget class="Q3GroupBox" name="groupBox3">
+                <widget class="QGroupBox" name="groupBox3">
                   <property name="title">
                     <string>VAT details</string>
                   </property>

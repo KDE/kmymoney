@@ -18,7 +18,7 @@
     </property>
     <layout class="QGridLayout">
       <item row="0" column="0">
-        <widget class="Q3GroupBox" name="groupBox6">
+        <widget class="QGroupBox" name="groupBox6">
           <property name="sizePolicy">
             <sizepolicy>
               <hsizetype>5</hsizetype>
@@ -118,7 +118,7 @@
               </widget>
             </item>
             <item row="2" column="0">
-              <widget class="Q3GroupBox" name="groupBox3">
+              <widget class="QGroupBox" name="groupBox3">
                 <property name="title">
                   <string>History-based settings</string>
                 </property>

@@ -181,7 +181,7 @@ You can choose the file's path, the account and the format of the QIF file (prof
       <item>
         <layout class="QHBoxLayout">
           <item>
-            <widget class="Q3GroupBox" name="m_qgroupboxContents">
+            <widget class="QGroupBox" name="m_qgroupboxContents">
               <property name="title">
                 <string>Contents to Export</string>
               </property>
@@ -210,7 +210,7 @@ You can choose the file's path, the account and the format of the QIF file (prof
             </widget>
           </item>
           <item>
-            <widget class="Q3GroupBox" name="m_qgroupboxDates">
+            <widget class="QGroupBox" name="m_qgroupboxDates">
               <property name="title">
                 <string>Date Range</string>
               </property>

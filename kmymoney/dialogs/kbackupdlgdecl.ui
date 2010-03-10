@@ -53,7 +53,7 @@ Click OK to perform the backup. If your system does not use an automounter, make
         </widget>
       </item>
       <item>
-        <widget class="Q3GroupBox" name="GroupBox1">
+        <widget class="QGroupBox" name="GroupBox1">
           <property name="title">
             <string>Device options</string>
           </property>

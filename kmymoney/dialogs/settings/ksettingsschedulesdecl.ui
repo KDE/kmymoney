@@ -18,7 +18,7 @@
     </property>
     <layout class="QVBoxLayout">
       <item>
-        <widget class="Q3GroupBox" name="groupBox6">
+        <widget class="QGroupBox" name="groupBox6">
           <property name="title">
             <string>Startup options</string>
           </property>

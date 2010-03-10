@@ -738,7 +738,7 @@ All information you have entered into this wizard will be shown and all transact
          </layout>
         </item>
         <item>
-         <widget class="Q3GroupBox" name="groupBox1">
+         <widget class="QGroupBox" name="groupBox1">
           <property name="title">
            <string>Interest</string>
           </property>
@@ -774,7 +774,7 @@ All information you have entered into this wizard will be shown and all transact
          </widget>
         </item>
         <item>
-         <widget class="Q3GroupBox" name="groupBox2">
+         <widget class="QGroupBox" name="groupBox2">
           <property name="title">
            <string>Charges</string>
           </property>
@@ -850,12 +850,6 @@ All information you have entered into this wizard will be shown and all transact
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
-  <customwidget>
-   <class>Q3GroupBox</class>
-   <extends>QGroupBox</extends>
-   <header>Qt3Support/Q3GroupBox</header>
-   <container>1</container>
-  </customwidget>
   <customwidget>
    <class>Q3Wizard</class>
    <extends>QDialog</extends>

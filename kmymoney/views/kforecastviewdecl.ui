@@ -16,7 +16,7 @@
         <number>0</number>
       </property>
       <item>
-        <widget class="Q3GroupBox" name="groupBox3">
+        <widget class="QGroupBox" name="groupBox3">
           <property name="title">
             <string>Forecast Settings</string>
           </property>

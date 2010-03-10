@@ -21,7 +21,7 @@
     </property>
     <layout class="QVBoxLayout">
       <item>
-        <widget class="Q3GroupBox" name="groupBox1">
+        <widget class="QGroupBox" name="groupBox1">
           <property name="title">
             <string>Schedule Details</string>
           </property>

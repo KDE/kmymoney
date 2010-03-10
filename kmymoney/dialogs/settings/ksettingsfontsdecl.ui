@@ -25,7 +25,7 @@
         </widget>
       </item>
       <item>
-        <widget class="Q3GroupBox" name="m_individualFontsFrame">
+        <widget class="QGroupBox" name="m_individualFontsFrame">
           <property name="title">
             <string>Individual font settings</string>
           </property>

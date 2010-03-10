@@ -62,7 +62,7 @@ Please enter the path to the QIF file or select it by clicking on the Browse but
             </widget>
           </item>
           <item row="1" column="0" rowspan="1" colspan="3">
-            <widget class="Q3GroupBox" name="m_optionGroupBox">
+            <widget class="QGroupBox" name="m_optionGroupBox">
               <property name="title">
                 <string>Import options</string>
               </property>

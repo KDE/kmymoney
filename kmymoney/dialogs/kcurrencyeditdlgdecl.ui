@@ -88,7 +88,7 @@
             </layout>
           </item>
           <item>
-            <widget class="Q3GroupBox" name="m_detailGroup">
+            <widget class="QGroupBox" name="m_detailGroup">
               <property name="title">
                 <string>Details</string>
               </property>
