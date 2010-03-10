@@ -26,11 +26,9 @@
 #include "kbjobview.h"
 
 #include <qevent.h>
-#include <q3groupbox.h>
 #include <qlayout.h>
 #include <qtooltip.h>
-#include <Q3BoxLayout>
-#include <Q3HBoxLayout>
+#include <QHBoxLayout>
 
 #include <kpushbutton.h>
 #include <kguiitem.h>
@@ -61,8 +59,7 @@ KBJobView::KBJobView(KBanking *kb,
 
   // Manually create and add layout here because the .ui-generated
   // QGroupBox doesn't have one.
-  jobBox->setColumnLayout(0, Qt::Vertical);
-  Q3BoxLayout *jobBoxLayout = new Q3HBoxLayout(jobBox->layout());
+  QBoxLayout *jobBoxLayout = new QHBoxLayout(jobBox);
   jobBoxLayout->setAlignment(Qt::AlignTop);
 
   _jobList = new KBJobListView(jobBox);
