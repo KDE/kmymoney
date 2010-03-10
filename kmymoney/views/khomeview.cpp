@@ -85,8 +85,11 @@ class KHomeView::Private
 {
 public:
   Private() :
-      m_showAllSchedules(false),
-      m_needReload(true) {}
+    m_showAllSchedules(false),
+    m_needReload(true)
+  {
+  }
+
   void addNameIndex(QMap<QString, MyMoneyAccount> &idx, const MyMoneyAccount& account);
 
   /**
@@ -312,7 +315,16 @@ void KHomeView::showNetWorthGraph(void)
   table.drawChart(*chartWidget);
 
   // Adjust the size
-  chartWidget->resize(width() - 80, height() - 30);
+  int width = KHomeView::width() - 80;
+  int height = KHomeView::height() - 30;
+  if (width > kmymoney->width() || height > kmymoney->height()) {
+    // something must be wrong if the views size is greater than the
+    // application's size (this can happen during the change of the view type)
+    // use the application window size in this situation
+    width = kmymoney->width();
+    height = kmymoney->height();
+  }
+  chartWidget->resize(width, height);
 
   //save the chart to an image
   QPixmap pixmap = QPixmap::grabWidget(chartWidget->coordinatePlane()->parent());
@@ -323,7 +335,7 @@ void KHomeView::showNetWorthGraph(void)
 
   d->m_html += QString("<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >");
   d->m_html += QString("<tr>");
-  d->m_html += QString("<td><center><IMG SRC=\"data:image/png;base64,%1\" ALT=\"Networth\"></center></td>").arg(buffer.data().toBase64().data());
+  d->m_html += QString("<td><center><IMG SRC=\"data:image/png;base64,%1\" ALT=\"Networth\" width=\"100%\" ></center></td>").arg(buffer.data().toBase64().data());
   d->m_html += QString("</tr>");
   d->m_html += QString("</table></div></div>");
 
