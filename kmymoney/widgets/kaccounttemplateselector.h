@@ -31,12 +31,6 @@
 #include <QList>
 class MyMoneyTemplate;
 
-/**
- * @author Thomas Baumgart <ipwizard@users.sourceforge.net>
- */
-
-
-
 class KAccountTemplateSelectorDecl : public QWidget, public Ui::KAccountTemplateSelectorDecl
 {
 public:
@@ -44,10 +38,21 @@ public:
     setupUi(this);
   }
 };
+
+/**
+ * @author Thomas Baumgart <ipwizard@users.sourceforge.net>
+ */
+
 class KAccountTemplateSelector : public KAccountTemplateSelectorDecl
 {
   Q_OBJECT
+
 public:
+  enum KAccountTemplateSelectorItemRoles
+  {
+    IdRole = Qt::UserRole,      /**< The id is stored in this role in column 0 as a string.*/
+  };
+
   KAccountTemplateSelector(QWidget* parent = 0);
   ~KAccountTemplateSelector();
 

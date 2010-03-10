@@ -40,26 +40,6 @@
 // Project Includes
 #include <mymoneytemplate.h>
 
-class KTemplateListItem : public K3ListViewItem
-{
-public:
-  KTemplateListItem(Q3ListViewItem* parent, const QString& text);
-  void setAvailable(void);
-public:
-  bool m_isAvailable;
-};
-
-KTemplateListItem::KTemplateListItem(Q3ListViewItem* parent, const QString& text) :
-    K3ListViewItem(parent, text),
-    m_isAvailable(false)
-{
-}
-
-void KTemplateListItem::setAvailable(void)
-{
-  m_isAvailable = true;
-}
-
 class KAccountTemplateSelector::Private
 {
 public:
@@ -68,16 +48,16 @@ public:
   }
 #ifndef KMM_DESIGNER
   QList<MyMoneyTemplate> selectedTemplates(void) const;
-  Q3ListViewItem* hierarchyItem(const QString& parent, const QString& name);
+  QTreeWidgetItem* hierarchyItem(const QString& parent, const QString& name);
   void loadHierarchy(void);
 #endif
 
 public:
-  KAccountTemplateSelector*         m_parent;
-  QMap<QString, Q3ListViewItem*>     m_templateHierarchy;
+  KAccountTemplateSelector*        m_parent;
+  QMap<QString, QTreeWidgetItem*>  m_templateHierarchy;
 #ifndef KMM_DESIGNER
-  QMap<QString, MyMoneyTemplate>    m_templates;
-  QMap<QString, QString> countries;
+  QMap<QString, MyMoneyTemplate>   m_templates;
+  QMap<QString, QString>           countries;
   QMap<QString, QString>::iterator it_m;
   QStringList                      dirlist;
   int                              id;
@@ -86,7 +66,7 @@ public:
 
 
 #ifndef KMM_DESIGNER
-Q3ListViewItem* KAccountTemplateSelector::Private::hierarchyItem(const QString& parent, const QString& name)
+QTreeWidgetItem* KAccountTemplateSelector::Private::hierarchyItem(const QString& parent, const QString& name)
 {
   if (!m_templateHierarchy.contains(parent)
       || m_templateHierarchy[parent] == 0) {
@@ -94,16 +74,18 @@ Q3ListViewItem* KAccountTemplateSelector::Private::hierarchyItem(const QString& 
     if (exp.indexIn(parent) != -1)
       m_templateHierarchy[parent] = hierarchyItem(exp.cap(1), exp.cap(2));
   }
-  return new KTemplateListItem(m_templateHierarchy[parent], name);
+  QTreeWidgetItem *item = new QTreeWidgetItem(m_templateHierarchy[parent]);
+  item->setText(0, name);
+  return item;
 }
 
 void KAccountTemplateSelector::Private::loadHierarchy(void)
 {
   m_templateHierarchy.clear();
-  Q3ListViewItemIterator it(m_parent->m_groupList, Q3ListViewItemIterator::Selected);
-  Q3ListViewItem* it_v;
-  while ((it_v = it.current()) != 0) {
-    m_templates[it_v->text(2)].hierarchy(m_templateHierarchy);
+  QTreeWidgetItemIterator it(m_parent->m_groupList, QTreeWidgetItemIterator::Selected);
+  QTreeWidgetItem* it_v;
+  while ((it_v = *it) != 0) {
+    m_templates[it_v->data(0, IdRole).toString()].hierarchy(m_templateHierarchy);
     ++it;
   }
 
@@ -131,31 +113,32 @@ void KAccountTemplateSelector::Private::loadHierarchy(void)
 #endif
 
   m_parent->m_accountList->clear();
-  QMap<QString, Q3ListViewItem*>::iterator it_m;
+  QMap<QString, QTreeWidgetItem*>::iterator it_m;
 
   QRegExp exp("(.*):(.*)");
   for (it_m = m_templateHierarchy.begin(); it_m != m_templateHierarchy.end(); ++it_m) {
     if (exp.indexIn(it_m.key()) == -1) {
-      (*it_m) = new K3ListViewItem(m_parent->m_accountList, it_m.key());
+      (*it_m) = new QTreeWidgetItem(m_parent->m_accountList);
+      (*it_m)->setText(0, it_m.key());
     } else {
       (*it_m) = hierarchyItem(exp.cap(1), exp.cap(2));
     }
-    (*it_m)->setOpen(true);
+    (*it_m)->setExpanded(true);
   }
 
   m_parent->m_description->clear();
   if (m_parent->m_groupList->currentItem()) {
-    m_parent->m_description->setText(m_templates[m_parent->m_groupList->currentItem()->text(2)].longDescription());
+    m_parent->m_description->setText(m_templates[m_parent->m_groupList->currentItem()->data(0, IdRole).toString()].longDescription());
   }
 }
 
 QList<MyMoneyTemplate> KAccountTemplateSelector::Private::selectedTemplates(void) const
 {
   QList<MyMoneyTemplate> list;
-  Q3ListViewItemIterator it(m_parent->m_groupList, Q3ListViewItemIterator::Selected);
-  Q3ListViewItem* it_v;
-  while ((it_v = it.current()) != 0) {
-    list << m_templates[it_v->text(2)];
+  QTreeWidgetItemIterator it(m_parent->m_groupList, QTreeWidgetItemIterator::Selected);
+  QTreeWidgetItem* it_v;
+  while ((it_v = *it) != 0) {
+    list << m_templates[it_v->data(0, IdRole).toString()];
     ++it;
   }
   return list;
@@ -168,7 +151,7 @@ KAccountTemplateSelector::KAccountTemplateSelector(QWidget* parent) :
     d(new Private(this))
 {
   m_accountList->header()->hide();
-  connect(m_groupList, SIGNAL(selectionChanged()), this, SLOT(slotLoadHierarchy()));
+  connect(m_groupList, SIGNAL(itemSelectionChanged()), this, SLOT(slotLoadHierarchy()));
 
   // kick off loading of account template data
   QTimer::singleShot(0, this, SLOT(slotLoadTemplateList()));
@@ -238,8 +221,9 @@ void KAccountTemplateSelector::slotLoadCountry(void)
 {
 #ifndef KMM_DESIGNER
 
-  K3ListViewItem* parent = new K3ListViewItem(m_groupList, d->it_m.key());
-  parent->setSelectable(false);
+  QTreeWidgetItem *parent = new QTreeWidgetItem(m_groupList);
+  parent->setText(0, d->it_m.key());
+  parent->setFlags(parent->flags() & ~Qt::ItemIsSelectable);
   QStringList::iterator it;
   for (it = d->dirlist.begin(); it != d->dirlist.end(); ++it) {
     QStringList::iterator it_f;
@@ -249,7 +233,10 @@ void KAccountTemplateSelector::slotLoadCountry(void)
       for (it_f = files.begin(); it_f != files.end(); ++it_f) {
         MyMoneyTemplate templ(QString("%1/%2").arg(dir.canonicalPath()).arg(*it_f));
         d->m_templates[QString("%1").arg(d->id)] = templ;
-        new K3ListViewItem(parent, templ.title(), templ.shortDescription(), QString("%1").arg(d->id));
+        QTreeWidgetItem *item = new QTreeWidgetItem(parent);
+        item->setText(0, templ.title());
+        item->setText(1, templ.shortDescription());
+        item->setData(0, IdRole, QString("%1").arg(d->id));
         ++d->id;
       }
     }

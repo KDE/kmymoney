@@ -150,7 +150,7 @@ bool MyMoneyTemplate::loadDescription(void)
   return validMask == validHeader;
 }
 
-bool MyMoneyTemplate::hierarchy(QMap<QString, Q3ListViewItem*>& list, const QString& parent, QDomNode account)
+bool MyMoneyTemplate::hierarchy(QMap<QString, QTreeWidgetItem*>& list, const QString& parent, QDomNode account)
 {
   bool rc = true;
   while (rc == true && !account.isNull()) {
@@ -167,7 +167,7 @@ bool MyMoneyTemplate::hierarchy(QMap<QString, Q3ListViewItem*>& list, const QStr
   return rc;
 }
 
-void MyMoneyTemplate::hierarchy(QMap<QString, Q3ListViewItem*>& list)
+void MyMoneyTemplate::hierarchy(QMap<QString, QTreeWidgetItem*>& list)
 {
   bool rc = !m_accounts.isNull();
   QDomNode accounts = m_accounts;

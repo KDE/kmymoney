@@ -25,7 +25,7 @@
 #include <QDomNode>
 
 class QFile;
-class Q3ListViewItem;
+class QTreeWidgetItem;
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -65,7 +65,7 @@ public:
   const QString& shortDescription(void) const;
   const QString& longDescription(void) const;
 
-  void hierarchy(QMap<QString, Q3ListViewItem*>& list);
+  void hierarchy(QMap<QString, QTreeWidgetItem*>& list);
 
 protected:
   bool loadDescription(void);
@@ -73,7 +73,7 @@ protected:
   bool setFlags(MyMoneyAccount& acc, QDomNode flags);
   bool saveToLocalFile(KSaveFile* qfile);
   bool addAccountStructure(QDomElement& parent, const MyMoneyAccount& acc);
-  bool hierarchy(QMap<QString, Q3ListViewItem*>& list, const QString& parent, QDomNode account);
+  bool hierarchy(QMap<QString, QTreeWidgetItem*>& list, const QString& parent, QDomNode account);
 
   /**
     * This method is used to update the progress information. It
