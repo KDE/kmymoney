@@ -183,6 +183,13 @@ bool MyMoneyXmlContentHandler::startElement(const QString& /* namespaceURI */, c
         m_reader->signalProgress(0, count, i18n("Loading securities..."));
         m_elementCount = 0;
       }
+    } else if (s == "currencies") {
+      qDebug("reading currencies");
+      if (atts.count()) {
+        int count = atts.value(QString("count")).toUInt();
+        m_reader->signalProgress(0, count, i18n("Loading currencies..."));
+        m_elementCount = 0;
+      }
     } else if (s == "reports") {
       qDebug("reading reports");
       if (atts.count()) {
