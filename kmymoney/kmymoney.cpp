@@ -2325,7 +2325,12 @@ void KMyMoneyApp::slotSettings(void)
   dlg->addPage(generalPage, i18nc("General settings", "General"), "system-run");
   dlg->addPage(registerPage, i18nc("Register view settings", "Register"), "ledger");
   dlg->addPage(homePage, i18n("Home"), "go-home");
+//this is to solve the way long strings are handled differently among versions of KPageWidget
+#if KDE_IS_VERSION(4,4,0)
+  dlg->addPage(schedulesPage, i18n("Scheduled transactions"), "view-pim-calendar");
+#else
   dlg->addPage(schedulesPage, i18n("Scheduled\ntransactions"), "view-pim-calendar");
+#endif
   dlg->addPage(encryptionPage, i18n("Encryption"), "kgpg");
   dlg->addPage(colorsPage, i18n("Colors"), "preferences-desktop-color");
   dlg->addPage(fontsPage, i18n("Fonts"), "preferences-desktop-font");
