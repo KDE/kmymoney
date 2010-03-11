@@ -506,7 +506,12 @@ void KGlobalLedgerView::loadView(void)
             break;
 
           // for all others, we check if the next payment date is still 'in range'
-          s.setNextDueDate(s.nextPayment(s.nextDueDate()));
+          QDate nextDueDate = s.nextPayment(s.nextDueDate());
+          if (nextDueDate.isValid()) {
+            s.setNextDueDate(nextDueDate);
+          } else {
+            break;
+          }
         }
         scheduleList.pop_front();
       }
