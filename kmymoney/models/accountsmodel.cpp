@@ -370,7 +370,7 @@ AccountsModel::~AccountsModel()
   */
 void AccountsModel::load()
 {
-  // mark all rows as candidates fro cleaning up
+  // mark all rows as candidates for cleaning up
   QModelIndexList list = match(index(0, 0), Qt::DisplayRole, "*", -1, Qt::MatchFlags(Qt::MatchWildcard | Qt::MatchRecursive));
   foreach(const QModelIndex &index, list) {
     setData(AccountsModel::index(index.row(), 0, index.parent()), true, CleanupRole);
