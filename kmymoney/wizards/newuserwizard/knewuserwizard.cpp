@@ -158,6 +158,11 @@ QList<MyMoneyTemplate> Wizard::templates(void) const
   return m_categoriesPage->selectedTemplates();
 }
 
+bool Wizard::startSettingsAfterFinished(void) const
+{
+  return m_preferencePage->m_openConfigAfterFinished->checkState() == Qt::Checked;
+}
+
 IntroPage::IntroPage(Wizard* wizard) :
     KIntroPageDecl(wizard),
     WizardPage<Wizard>(stepCount++, this, wizard)
@@ -315,7 +320,6 @@ PreferencePage::PreferencePage(Wizard* wizard) :
     KPreferencePageDecl(wizard),
     WizardPage<Wizard>(stepCount++, this, wizard)
 {
-  connect(m_openConfigButton, SIGNAL(clicked()), kmymoney, SLOT(slotSettings()));
 }
 
 KMyMoneyWizardPage* PreferencePage::nextPage(void) const

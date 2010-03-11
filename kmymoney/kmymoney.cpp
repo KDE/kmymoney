@@ -1319,7 +1319,8 @@ void KMyMoneyApp::slotFileNew(void)
         // next line required until we move all file handling out of KMyMoneyView
         d->m_myMoneyView->closeFile();
       }
-
+      if (wizard->startSettingsAfterFinished())
+        slotSettings();
     } else {
       // next line required until we move all file handling out of KMyMoneyView
       d->m_myMoneyView->closeFile();

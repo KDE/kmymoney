@@ -108,6 +108,11 @@ public:
     */
   QList<MyMoneyTemplate> templates(void) const;
 
+  /**
+    * True if the settings dialog should be launched after the wizard is finished.
+    */
+  bool startSettingsAfterFinished(void) const;
+
 private:
   MyMoneySecurity   m_baseCurrency;
   IntroPage*        m_introPage;
