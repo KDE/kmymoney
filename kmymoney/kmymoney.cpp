@@ -5298,20 +5298,21 @@ void KMyMoneyApp::Private::moveInvestmentTransaction(const QString& /*fromId*/,
   // fortunately, investment transactions have only one stock involved
   QString stockAccountId;
   QString stockSecurityId;
-  QList<MyMoneySplit>::const_iterator it_s;
-  for (it_s = t.splits().constBegin(); it_s != t.splits().constEnd(); ++it_s) {
+  MyMoneySplit s;
+  for (QList<MyMoneySplit>::const_iterator it_s = t.splits().constBegin(); it_s != t.splits().constEnd(); ++it_s) {
     stockAccountId = (*it_s).accountId();
     stockSecurityId =
       MyMoneyFile::instance()->account(stockAccountId).currencyId();
-    if (!MyMoneyFile::instance()->security(stockSecurityId).isCurrency())
+    if (!MyMoneyFile::instance()->security(stockSecurityId).isCurrency()) {
+      s = *it_s;
       break;
+    }
   }
   // Now check the target investment account to see if it
   // contains a stock with this id
   QString newStockAccountId;
   QStringList accountList = toInvAcc.accountList();
-  QStringList::const_iterator it_a;
-  for (it_a = accountList.constBegin(); it_a != accountList.constEnd(); ++it_a) {
+  for (QStringList::const_iterator it_a = accountList.constBegin(); it_a != accountList.constEnd(); ++it_a) {
     if (MyMoneyFile::instance()->account((*it_a)).currencyId() ==
         stockSecurityId) {
       newStockAccountId = (*it_a);
@@ -5336,7 +5337,6 @@ void KMyMoneyApp::Private::moveInvestmentTransaction(const QString& /*fromId*/,
     newStockAccountId = newStock.id();
   }
   // now update the split and the transaction
-  MyMoneySplit s = (*it_s);
   s.setAccountId(newStockAccountId);
   t.modifySplit(s);
   MyMoneyFile::instance()->modifyTransaction(t);
