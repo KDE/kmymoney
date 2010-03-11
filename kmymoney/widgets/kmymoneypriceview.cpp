@@ -130,6 +130,7 @@ KMyMoneyPriceView::KMyMoneyPriceView(QWidget *parent) :
   setSorting(COMMODITY_COL);
 
   header()->setFont(KMyMoneyGlobalSettings::listHeaderFont());
+  header()->setResizeEnabled(false);
 
   KIconLoader *kiconloader = KIconLoader::global();
 
