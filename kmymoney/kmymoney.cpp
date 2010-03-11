@@ -5250,11 +5250,9 @@ void KMyMoneyApp::slotTransactionCombine(void)
 void KMyMoneyApp::slotMoveToAccount(const QString& id)
 {
   // close the menu, if it is still open
-  QWidget* w = factory()->container("transaction_move_menu", this);
-  if (w) {
-    if (w->isVisible()) {
-      w->close();
-    }
+  QWidget* w = factory()->container("transaction_context_menu", this);
+  if (w && w->isVisible()) {
+    w->close();
   }
 
   if (d->m_selectedTransactions.count() > 0) {
