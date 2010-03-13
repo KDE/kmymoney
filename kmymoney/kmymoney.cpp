@@ -17,7 +17,6 @@
 
 
 #include <config-kmymoney.h>
-#include <config-kmymoney-version.h>
 
 #include "kmymoney.h"
 

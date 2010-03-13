@@ -1,5 +1,18 @@
 /* config-kmymoney.h.  Generated from config-kmymoney.h.cmake by cmake  */
 
+/* Name of package */
+#define PACKAGE "kmymoney"
+
+/* Define to the address where bug reports for this package should be sent. */
+#define PACKAGE_BUGREPORT "kmymoney-devel@kde.org"
+
+/* Define to the full name of this package. */
+#define PACKAGE_NAME "KMyMoney"
+
+/* Define to the one symbol short name of this package. */
+#define PACKAGE_TARNAME ""
+
+
 /* define if you have atoll */
 #cmakedefine HAVE_ATOLL 1
 
