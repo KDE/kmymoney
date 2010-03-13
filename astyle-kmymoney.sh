@@ -17,15 +17,17 @@ for path in $PATH; do
     # we default to the newer version here as this is the future
     case $VER in
       1.2[1-2])
-        OPT="--pad=oper --unpad=paren"
+        PAD="pad=oper"
+        UNPAD="unpad=paren"
         ;;
       *)
-        OPT="--pad-oper --unpad-paren"
+        PAD="pad-oper"
+        UNPAD="unpad-paren"
         ;;
     esac
 
     $path/astyle --indent=spaces=2 --brackets=linux \
-      --indent-labels ${OPT} \
+      --indent-labels --${PAD} --${UNPAD} \
       --one-line=keep-statements --convert-tabs \
       --indent-preprocessor \
       `find kmymoney libkgpgfile -type f  \( -name \*.c -or -name \*.cpp -or -name \*.h \)  `
