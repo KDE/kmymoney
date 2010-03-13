@@ -26,11 +26,10 @@ for path in $PATH; do
         ;;
     esac
 
-    $path/astyle --indent=spaces=2 --brackets=linux \
+    find kmymoney libkgpgfile -type f  \( -name \*.c -or -name \*.cpp -or -name \*.h \) -exec $path/astyle --indent=spaces=2 --brackets=linux \
       --indent-labels --${PAD} --${UNPAD} \
       --one-line=keep-statements --convert-tabs \
-      --indent-preprocessor \
-      `find kmymoney libkgpgfile -type f  \( -name \*.c -or -name \*.cpp -or -name \*.h \)  `
+      --indent-preprocessor {} \;
     exit $?
   fi
 done
