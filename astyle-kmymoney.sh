@@ -13,10 +13,10 @@ for path in $PATH; do
     # determine version of AStyle
     VER=`$path/astyle --version 2>&1 | cut -d' ' -f4`
 
-    # there was an option change between 1.23 and 1.24
+    # there was an option change between 1.22 and 1.23
     # we default to the newer version here as this is the future
     case $VER in
-      1.2[1-3])
+      1.2[1-2])
         OPT="--pad=oper --unpad=paren"
         ;;
       *)
