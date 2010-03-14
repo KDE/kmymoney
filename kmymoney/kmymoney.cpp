@@ -46,16 +46,12 @@
 #include <QPrinter>
 #include <QLayout>
 #include <QSignalMapper>
-#include <QClipboard>        // temp for problem 1105503
 #include <QDateTime>         // only for performance tests
 #include <QTimer>
-#include <q3sqlpropertymap.h>
-#include <q3vbox.h>
 #include <QEventLoop>
 #include <QByteArray>
 #include <QBitArray>
 #include <QBoxLayout>
-#include <Q3Frame>
 #include <QResizeEvent>
 #include <QLabel>
 #include <KMenu>
@@ -1560,13 +1556,13 @@ bool KMyMoneyApp::slotFileSaveAs(void)
   // fill the additional key list with the default
   d->m_additionalGpgKeys = KMyMoneyGlobalSettings::gpgRecipientList();
 
-  Q3VBox* vbox = new Q3VBox();
+  KVBox* vbox = new KVBox();
   if (KGPGFile::GPGAvailable()) {
-    Q3HBox* keyBox = new Q3HBox(vbox);
+    KHBox* keyBox = new KHBox(vbox);
     new QLabel(i18n("Encryption key to be used"), keyBox);
     d->m_saveEncrypted = new KComboBox(keyBox);
 
-    Q3HBox* labelBox = new Q3HBox(vbox);
+    KHBox* labelBox = new KHBox(vbox);
     d->m_additionalKeyLabel = new QLabel(i18n("Additional encryption keys to be used: %1", d->m_additionalGpgKeys.count()), labelBox);
     d->m_additionalKeyButton = new KPushButton(i18n("Manage additional keys"), labelBox);
     connect(d->m_additionalKeyButton, SIGNAL(clicked()), this, SLOT(slotManageGpgKeys()));
@@ -4552,15 +4548,13 @@ void KMyMoneyApp::slotCurrencyNew(void)
   }
 }
 
-void KMyMoneyApp::slotCurrencyRename(Q3ListViewItem* item, int, const QString& txt)
+void KMyMoneyApp::slotCurrencyRename(const QString &currencyId, const QString& currencyName)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
-  KMyMoneyListViewItem* p = static_cast<KMyMoneyListViewItem *>(item);
-
   try {
-    if (txt != d->m_selectedCurrency.name()) {
-      MyMoneySecurity currency = file->currency(p->id());
-      currency.setName(txt);
+    if (currencyName != d->m_selectedCurrency.name()) {
+      MyMoneySecurity currency = file->currency(currencyId);
+      currency.setName(currencyName);
       MyMoneyFileTransaction ft;
       try {
         file->modifyCurrency(currency);
@@ -6129,7 +6123,7 @@ void KMyMoneyApp::slotCurrencyDialog(void)
   connect(dlg, SIGNAL(selectObject(const MyMoneySecurity&)), this, SLOT(slotSelectCurrency(const MyMoneySecurity&)));
   connect(dlg, SIGNAL(openContextMenu(const MyMoneySecurity&)), this, SLOT(slotShowCurrencyContextMenu()));
   connect(this, SIGNAL(currencyRename()), dlg, SLOT(slotStartRename()));
-  connect(dlg, SIGNAL(renameCurrency(Q3ListViewItem*, int, const QString&)), this, SLOT(slotCurrencyRename(Q3ListViewItem*, int, const QString&)));
+  connect(dlg, SIGNAL(renameCurrency(const QString&, const QString&)), this, SLOT(slotCurrencyRename(const QString&, const QString&)));
   connect(this, SIGNAL(currencyCreated(const QString&)), dlg, SLOT(slotSelectCurrency(const QString&)));
   connect(dlg, SIGNAL(selectBaseCurrency(const MyMoneySecurity&)), this, SLOT(slotCurrencySetBase()));
 

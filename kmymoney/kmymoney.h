@@ -46,7 +46,7 @@
 #include <kmymoneyutils.h>
 
 class QResizeEvent;
-class Q3ListViewItem;
+class QTreeWidgetItem;
 class KPluginInfo;
 
 /*! \mainpage KMyMoney Main Page for API documentation.
@@ -306,7 +306,7 @@ protected slots:
 
   /**
     */
-  void slotCurrencyRename(Q3ListViewItem* item, int, const QString& txt);
+  void slotCurrencyRename(const QString &currencyId, const QString& currencyName);
 
   /**
     */

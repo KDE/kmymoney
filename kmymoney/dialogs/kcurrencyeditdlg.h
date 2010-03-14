@@ -26,9 +26,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qwidget.h>
-//Added by qt3to4:
-#include <QResizeEvent>
+#include <QDialog>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -40,9 +38,7 @@
 #include "ui_kcurrencyeditdlgdecl.h"
 #include "mymoneysecurity.h"
 
-/**
-  * @author Thomas Baumgart
-  */
+class QTreeWidgetItem;
 
 class KCurrencyEditDlgDecl : public QDialog, public Ui::KCurrencyEditDlgDecl
 {
@@ -52,6 +48,9 @@ public:
   }
 };
 
+/**
+  * @author Thomas Baumgart
+  */
 class KCurrencyEditDlg : public KCurrencyEditDlgDecl
 {
   Q_OBJECT
@@ -63,17 +62,15 @@ public slots:
   void slotSelectCurrency(const QString& id);
 
 protected:
-  /// the resize event
-  virtual void resizeEvent(QResizeEvent*);
   void updateCurrency(void);
 
 protected slots:
-  void slotSelectCurrency(Q3ListViewItem *);
+  void slotSelectCurrency(QTreeWidgetItem *);
 
   void slotClose(void);
   void slotStartRename(void);
-  void slotListClicked(Q3ListViewItem* item, const QPoint&, int);
-  void slotRenameCurrency(Q3ListViewItem* item, int col, const QString& txt);
+  void slotItemPressed(QTreeWidgetItem* item, int);
+  void slotRenameCurrency(QTreeWidgetItem* item);
   void slotLoadCurrencies(void);
 
 private slots:
@@ -83,7 +80,7 @@ private slots:
 signals:
   void selectObject(const MyMoneySecurity& currency);
   void openContextMenu(const MyMoneySecurity& currency);
-  void renameCurrency(Q3ListViewItem* item, int, const QString& txt);
+  void renameCurrency(const QString &currencyId, const QString& currencyName);
   void selectBaseCurrency(const MyMoneySecurity& currency);
 
 private:
