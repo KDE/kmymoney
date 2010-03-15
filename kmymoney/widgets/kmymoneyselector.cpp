@@ -105,9 +105,11 @@ void KMyMoneySelector::setSelectionMode(const QTreeWidget::SelectionMode mode)
       m_selMode = QTreeWidget::SingleSelection;
       connect(m_treeWidget, SIGNAL(itemSelectionChanged(void)), this, SIGNAL(stateChanged(void)));
       connect(m_treeWidget, SIGNAL(itemActivated(QTreeWidgetItem*,int)), this, SLOT(slotItemSelected(QTreeWidgetItem*)));
+      connect(m_treeWidget, SIGNAL(itemClicked(QTreeWidgetItem*,int)), this, SLOT(slotItemSelected(QTreeWidgetItem*)));
     } else {
       disconnect(m_treeWidget, SIGNAL(itemSelectionChanged(void)), this, SIGNAL(stateChanged(void)));
       disconnect(m_treeWidget, SIGNAL(itemActivated(QTreeWidgetItem*,int)), this, SLOT(slotItemSelected(QTreeWidgetItem*)));
+      disconnect(m_treeWidget, SIGNAL(itemClicked(QTreeWidgetItem*,int)), this, SLOT(slotItemSelected(QTreeWidgetItem*)));
     }
   }
   QWidget::update();
