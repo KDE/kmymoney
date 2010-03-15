@@ -72,6 +72,7 @@ KMyMoneySelector::KMyMoneySelector(QWidget *parent, Qt::WFlags flags) :
   setSelectionMode(QTreeWidget::SingleSelection);
 
   connect(m_treeWidget, SIGNAL(itemPressed(QTreeWidgetItem*, int)), this, SLOT(slotItemPressed(QTreeWidgetItem*, int)));
+  connect(m_treeWidget, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SIGNAL(stateChanged(void)));
 }
 
 KMyMoneySelector::~KMyMoneySelector()
@@ -103,11 +104,9 @@ void KMyMoneySelector::setSelectionMode(const QTreeWidget::SelectionMode mode)
     if (mode != QTreeWidget::MultiSelection) {
       m_selMode = QTreeWidget::SingleSelection;
       connect(m_treeWidget, SIGNAL(itemSelectionChanged(void)), this, SIGNAL(stateChanged(void)));
-      connect(m_treeWidget, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SIGNAL(stateChanged(void)));
       connect(m_treeWidget, SIGNAL(itemActivated(QTreeWidgetItem*,int)), this, SLOT(slotItemSelected(QTreeWidgetItem*)));
     } else {
       disconnect(m_treeWidget, SIGNAL(itemSelectionChanged(void)), this, SIGNAL(stateChanged(void)));
-      disconnect(m_treeWidget, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SIGNAL(stateChanged(void)));
       disconnect(m_treeWidget, SIGNAL(itemActivated(QTreeWidgetItem*,int)), this, SLOT(slotItemSelected(QTreeWidgetItem*)));
     }
   }
@@ -287,7 +286,7 @@ void KMyMoneySelector::selectSubItems(QTreeWidgetItem* item, const QStringList& 
     if (child->flags().testFlag(Qt::ItemIsUserCheckable) && itemList.contains(child->data(0, IdRole).toString())) {
       child->setCheckState(0, state ? Qt::Checked : Qt::Unchecked);
     }
-    selectAllSubItems(child, state);
+    selectSubItems(child, itemList, state);
   }
   emit stateChanged();
 }
