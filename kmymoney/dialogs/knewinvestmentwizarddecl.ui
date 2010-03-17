@@ -314,7 +314,11 @@
               </widget>
             </item>
             <item row="5" column="1">
-              <widget class="KMyMoneySecuritySelector" name="m_tradingCurrencyEdit"/>
+              <widget class="KMyMoneySecuritySelector" name="m_tradingCurrencyEdit">
+                <property name="displayType">
+                  <enum>KMyMoneySecuritySelector::TypeCurrencies</enum>
+                </property>
+              </widget>
             </item>
             <item row="0" column="1">
               <widget class="kMyMoneyLineEdit" name="m_investmentSymbol">

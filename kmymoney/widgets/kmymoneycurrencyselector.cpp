@@ -65,6 +65,11 @@ void KMyMoneySecuritySelector::selectDisplayItem(KMyMoneySecuritySelector::displ
   update(QString());
 }
 
+void KMyMoneySecuritySelector::setDisplayType(displayTypeE type)
+{
+  m_displayType = type;
+}
+
 void KMyMoneySecuritySelector::update(const QString& id)
 {
   MyMoneySecurity curr = MyMoneyFile::instance()->baseCurrency();
