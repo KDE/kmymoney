@@ -49,8 +49,7 @@ MyMoneyTransaction::MyMoneyTransaction(const QString id, const MyMoneyTransactio
 }
 
 MyMoneyTransaction::MyMoneyTransaction(const QDomElement& node, const bool forceId) :
-    MyMoneyObject(node, forceId),
-    MyMoneyKeyValueContainer(node.elementsByTagName("KEYVALUEPAIRS").item(0).toElement())
+    MyMoneyObject(node, forceId)
 {
   if ("TRANSACTION" != node.tagName())
     throw new MYMONEYEXCEPTION("Node was not TRANSACTION");
@@ -63,21 +62,30 @@ MyMoneyTransaction::MyMoneyTransaction(const QDomElement& node, const bool force
   m_memo = QStringEmpty(node.attribute("memo"));
   m_commodity = QStringEmpty(node.attribute("commodity"));
 
-  //  Process any split information found inside the transaction entry.
-  QDomNodeList nodeList = node.elementsByTagName("SPLITS");
-  if (nodeList.count() > 0) {
-    nodeList = nodeList.item(0).toElement().elementsByTagName("SPLIT");
-    for (int i = 0; i < nodeList.count(); ++i) {
-      MyMoneySplit s(nodeList.item(i).toElement());
-      if (!m_bankID.isEmpty())
-        s.setBankID(m_bankID);
-      if (!s.accountId().isEmpty())
-        addSplit(s);
-      else
-        qDebug("Dropped split because it did not have an account id");
-    }
-  }
+  QDomNode child = node.firstChild();
+  while ( !child.isNull() && child.isElement() ) {
+    QDomElement c = child.toElement();
+    if(c.tagName() == QLatin1String("SPLITS")) {
 
+      // Process any split information found inside the transaction entry.
+      QDomNodeList nodeList = c.elementsByTagName("SPLIT");
+      for (int i = 0; i < nodeList.count(); ++i) {
+        MyMoneySplit s(nodeList.item(i).toElement());
+        if (!m_bankID.isEmpty())
+          s.setBankID(m_bankID);
+        if (!s.accountId().isEmpty())
+          addSplit(s);
+        else
+          qDebug("Dropped split because it did not have an account id");
+      }
+
+    } else if(c.tagName() == QLatin1String("KEYVALUEPAIRS")) {
+      MyMoneyKeyValueContainer kvp(c);
+      setPairs(kvp.pairs());
+    }
+
+    child = child.nextSibling();
+  }
   m_bankID.clear();
 }
 
