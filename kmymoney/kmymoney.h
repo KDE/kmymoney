@@ -459,9 +459,6 @@ public:
     */
   ~KMyMoneyApp();
 
-  /** Init wizard dialog */
-  bool initWizard(void);
-
   static void progressCallback(int current, int total, const QString&);
 
   void writeLastUsedDir(const QString& directory);

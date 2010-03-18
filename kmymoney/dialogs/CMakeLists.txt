@@ -42,7 +42,6 @@ SET(libdialogs_a_SOURCES
   knewloanwizard.cpp 
   konlinequoteconfigurationdlg.cpp
   kpayeereassigndlg.cpp 
-  krecentfileitem.cpp 
   kreconciledlg.cpp
   kreconcilelistitem.cpp 
   kreportconfigurationfilterdlg.cpp
@@ -50,7 +49,6 @@ SET(libdialogs_a_SOURCES
   kselectdatabasedlg.cpp
   kselecttransactionsdlg.cpp 
   ksplittransactiondlg.cpp 
-  kstartdlg.cpp
   kupdatestockpricedlg.cpp 
   mymoneyqifprofileeditor.cpp
   transactioneditor.cpp 

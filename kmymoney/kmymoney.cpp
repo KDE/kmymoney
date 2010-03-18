@@ -96,7 +96,6 @@
 #include "kmymoneyglobalsettings.h"
 #include "kmymoneyadaptor.h"
 
-#include "dialogs/kstartdlg.h"
 #include "dialogs/settings/ksettingsgeneral.h"
 #include "dialogs/settings/ksettingsregister.h"
 #include "dialogs/settings/ksettingsgpg.h"
@@ -2365,38 +2364,6 @@ void KMyMoneyApp::slotUpdateConfiguration(void)
   if (!d->m_autoSaveTimer->isActive() && d->m_autoSaveEnabled && d->m_myMoneyView->dirty()) {
     d->m_autoSaveTimer->setSingleShot(true);
     d->m_autoSaveTimer->start(d->m_autoSavePeriod * 60 * 1000);
-  }
-}
-
-/** Init wizard dialog */
-bool KMyMoneyApp::initWizard(void)
-{
-  KStartDlg start;
-  if (start.exec()) {
-    slotFileClose();
-    if (start.isNewFile()) {
-      slotFileNew();
-    } else if (start.isOpenFile()) {
-      KUrl url;
-      url = start.getURL();
-
-      d->m_fileName = url.url();
-      slotFileOpenRecent(url);
-    } else { // Wizard / Template
-      d->m_fileName = start.getURL();
-    }
-
-    //save off directory as the last one used.
-    if (d->m_fileName.isLocalFile() && d->m_fileName.hasPath()) {
-      writeLastUsedDir(d->m_fileName.toLocalFile(KUrl::LeaveTrailingSlash));
-      writeLastUsedFile(d->m_fileName.toLocalFile(KUrl::LeaveTrailingSlash));
-    }
-
-    return true;
-
-  } else {
-    // cancel clicked so post an exit call
-    return false;
   }
 }
 
