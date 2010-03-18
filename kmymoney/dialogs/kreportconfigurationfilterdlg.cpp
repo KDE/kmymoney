@@ -350,9 +350,8 @@ void KReportConfigurationFilterDlg::slotReset(void)
         || m_initialState.rowType() == MyMoneyReport::eBudgetActual) {
       m_tab2->m_comboRows->setEnabled(false);
       m_tab2->m_budgetFrame->setEnabled(!m_budgets.empty());
-      Q3ValueVector<MyMoneyBudget>::const_iterator it_b;
       int i = 0;
-      for (it_b = m_budgets.constBegin(); it_b != m_budgets.constEnd(); ++it_b) {
+      for (QVector<MyMoneyBudget>::const_iterator it_b = m_budgets.constBegin(); it_b != m_budgets.constEnd(); ++it_b) {
         m_tab2->m_comboBudget->insertItem((*it_b).name(), i);
         //set the current selected item
         if ((m_initialState.budget() == "Any" && (*it_b).budgetStart().year() == QDate::currentDate().year())

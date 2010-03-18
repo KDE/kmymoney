@@ -24,7 +24,16 @@
 #ifndef KREPORTCONFIGURATIONFILTERDLG_H
 #define KREPORTCONFIGURATIONFILTERDLG_H
 
-#include <q3valuevector.h>
+// ----------------------------------------------------------------------------
+// QT Includes
+
+#include <QVector>
+
+// ----------------------------------------------------------------------------
+// KDE Includes
+
+// ----------------------------------------------------------------------------
+// Project Includes
 
 #include "kfindtransactiondlg.h"
 #include "mymoneyreport.h"
@@ -76,7 +85,7 @@ protected slots:
   void slotUpdateCheckTransfers(void);
 
 private:
-  Q3ValueVector<MyMoneyBudget>  m_budgets;
+  QVector<MyMoneyBudget> m_budgets;
 };
 
 #endif
