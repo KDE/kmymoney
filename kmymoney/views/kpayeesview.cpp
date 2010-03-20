@@ -31,12 +31,11 @@
 #include <QLayout>
 #include <QPixmap>
 #include <QTabWidget>
-#include <QCursor>
 #include <QCheckBox>
 #include <QRadioButton>
 #include <QPainter>
 #include <QSplitter>
-#include <qmap.h>
+#include <QMap>
 #include <QList>
 #include <QResizeEvent>
 
@@ -58,9 +57,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneyfile.h>
-#include <kmymoneyaccounttree.h>
-#include <kmymoneyglobalsettings.h>
+#include "mymoneyfile.h"
+#include "kmymoneyaccounttree.h"
+#include "kmymoneyglobalsettings.h"
 #include "kmymoney.h"
 
 /* -------------------------------------------------------------------------------*/
@@ -1095,6 +1094,7 @@ void KPayeesView::slotOpenContextMenu(const QPoint& p)
 
   KPayeeListItem* item = dynamic_cast<KPayeeListItem*>(m_payeesList->currentItem());
   if (item) {
+    slotSelectPayee();
     emit openContextMenu(item->payee());
   }
 }

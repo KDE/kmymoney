@@ -24,8 +24,6 @@
 
 #include <QLabel>
 #include <QFile>
-#include <q3textstream.h>
-#include <q3progressdialog.h>
 #include <QTextCodec>
 #include <QStatusBar>
 #include <QCursor>
@@ -34,7 +32,6 @@
 #include <QObject>
 #include <QList>
 #include <QVBoxLayout>
-#include <Q3Frame>
 #include <QByteArray>
 
 // ----------------------------------------------------------------------------
