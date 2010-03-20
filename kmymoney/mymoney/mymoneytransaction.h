@@ -27,10 +27,8 @@
 
 #include <QString>
 #include <QDateTime>
-#include <q3ptrlist.h>
-#include <QStringList>
-//Added by qt3to4:
 #include <QList>
+#include <QStringList>
 
 // ----------------------------------------------------------------------------
 // Project Includes
