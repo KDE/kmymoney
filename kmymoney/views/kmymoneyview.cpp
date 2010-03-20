@@ -1656,10 +1656,13 @@ void KMyMoneyView::progressCallback(int current, int total, const QString& msg)
 
 void KMyMoneyView::slotRememberPage(const QModelIndex current, const QModelIndex)
 {
-  KSharedConfigPtr config = KGlobal::config();
-  KConfigGroup grp = config->group("Last Use Settings");
-  grp.writeEntry("LastViewSelected", current.row());
-  config->sync();
+  // only remember a changed setting if we're not called during construction
+  if(!m_inConstructor) {
+    KSharedConfigPtr config = KGlobal::config();
+    KConfigGroup grp = config->group("Last Use Settings");
+    grp.writeEntry("LastViewSelected", current.row());
+    config->sync();
+  }
 }
 
 /* DO NOT ADD code to this function or any of it's called ones.
