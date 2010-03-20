@@ -1901,3 +1901,46 @@ void MyMoneyScheduleTest::testProcessingDates()
   // This should be a non-processing day as it is on a weekend.
   CPPUNIT_ASSERT(!s.isProcessingDate(QDate(2010, 1, 2)));
 }
+
+void MyMoneyScheduleTest::testPaidEarlyOneTime()
+{
+// this tries to figure out what's wrong with
+// https://bugs.kde.org/show_bug.cgi?id=231029
+
+  MyMoneySchedule sch;
+  QDate paymentInFuture = QDate::currentDate().addDays(7);
+
+  QString ref_ok = QString(
+                     "<!DOCTYPE TEST>\n"
+                     "<SCHEDULE-CONTAINER>\n"
+                     " <SCHEDULED_TX startDate=\"%1\" autoEnter=\"0\" weekendOption=\"1\" lastPayment=\"%2\" paymentType=\"2\" endDate=\"%3\" type=\"4\" id=\"SCH0042\" name=\"A Name\" fixed=\"1\" occurenceMultiplier=\"1\" occurence=\"32\" >\n"
+                     "  <PAYMENTS/>\n"
+                     "  <TRANSACTION postdate=\"\" memo=\"\" id=\"\" commodity=\"GBP\" entrydate=\"\" >\n"
+                     "   <SPLITS>\n"
+                     "    <SPLIT payee=\"P000001\" reconciledate=\"\" shares=\"96379/100\" action=\"Transfer\" number=\"\" reconcileflag=\"2\" memo=\"\" value=\"96379/100\" id=\"S0001\" account=\"A000076\" />\n"
+                     "    <SPLIT payee=\"P000001\" reconciledate=\"\" shares=\"-96379/100\" action=\"Transfer\" number=\"\" reconcileflag=\"2\" memo=\"\" value=\"-96379/100\" id=\"S0002\" account=\"A000276\" />\n"
+                     "   </SPLITS>\n"
+                     "  </TRANSACTION>\n"
+                     " </SCHEDULED_TX>\n"
+                     "</SCHEDULE-CONTAINER>\n"
+                   ).arg(paymentInFuture.toString(Qt::ISODate))
+                   .arg(paymentInFuture.toString(Qt::ISODate))
+                   .arg(paymentInFuture.toString(Qt::ISODate));
+
+  QDomDocument doc;
+  QDomElement node;
+  doc.setContent(ref_ok);
+  node = doc.documentElement().firstChild().toElement();
+
+  try {
+    sch = MyMoneySchedule(node);
+    CPPUNIT_ASSERT(sch.isFinished() == true);
+    CPPUNIT_ASSERT(sch.occurrencePeriod() == MyMoneySchedule::OCCUR_MONTHLY);
+    CPPUNIT_ASSERT(sch.paymentDates(QDate::currentDate(), QDate::currentDate().addDays(21)).count() == 0);
+  } catch (MyMoneyException *e) {
+    delete e;
+    CPPUNIT_FAIL("Unexpected exception");
+  }
+
+}
+

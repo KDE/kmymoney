@@ -638,6 +638,11 @@ void MyMoneyForecast::addScheduledTransactions(void)
       if (it == schedule.end())
         break;
 
+      if((*it).isFinished()) {
+        schedule.erase(it);
+        continue;
+      }
+
       QDate date = (*it).nextPayment((*it).lastPayment());
       if (!date.isValid()) {
         schedule.erase(it);

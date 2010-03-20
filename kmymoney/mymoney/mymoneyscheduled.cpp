@@ -523,7 +523,7 @@ QList<QDate> MyMoneySchedule::paymentDates(const QDate& _startDate, const QDate&
     break;
 
   case OCCUR_DAILY:
-    while (date <= endDate) {
+    while (date.isValid() && (date <= endDate)) {
       if (date >= _startDate)
         theDates.append(date);
       paymentDate = paymentDate.addDays(m_occurrenceMultiplier);
@@ -533,7 +533,7 @@ QList<QDate> MyMoneySchedule::paymentDates(const QDate& _startDate, const QDate&
 
   case OCCUR_WEEKLY: {
     int step = 7 * m_occurrenceMultiplier;
-    while (adjustedDate(paymentDate, option) <= endDate) {
+    while (date.isValid() && (date <= endDate)) {
       if (date >= _startDate)
         theDates.append(date);
       paymentDate = paymentDate.addDays(step);
@@ -543,7 +543,7 @@ QList<QDate> MyMoneySchedule::paymentDates(const QDate& _startDate, const QDate&
   break;
 
   case OCCUR_EVERYHALFMONTH:
-    while (date <= endDate) {
+    while (date.isValid() && (date <= endDate)) {
       if (date >= _startDate)
         theDates.append(date);
       paymentDate = addHalfMonths(paymentDate, m_occurrenceMultiplier);
@@ -552,7 +552,7 @@ QList<QDate> MyMoneySchedule::paymentDates(const QDate& _startDate, const QDate&
     break;
 
   case OCCUR_MONTHLY:
-    while (date <= endDate) {
+    while (date.isValid() && (date <= endDate)) {
       if (date >= _startDate)
         theDates.append(date);
       paymentDate = paymentDate.addMonths(m_occurrenceMultiplier);
@@ -562,7 +562,7 @@ QList<QDate> MyMoneySchedule::paymentDates(const QDate& _startDate, const QDate&
     break;
 
   case OCCUR_YEARLY:
-    while (date <= endDate) {
+    while (date.isValid() && (date <= endDate)) {
       if (date >= _startDate)
         theDates.append(date);
       paymentDate = paymentDate.addYears(m_occurrenceMultiplier);

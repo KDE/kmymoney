@@ -1253,7 +1253,7 @@ const QList<MyMoneySchedule> MyMoneySeqAccessMgr::scheduleList(
   // qDebug("scheduleList()");
 
   for (pos = m_scheduleList.begin(); pos != m_scheduleList.end(); ++pos) {
-    // qDebug("  '%s'", (*pos).id().data());
+    // qDebug("  '%s'", qPrintable((*pos).id()));
 
     if (type != MyMoneySchedule::TYPE_ANY) {
       if (type != (*pos).type()) {
