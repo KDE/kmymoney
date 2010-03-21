@@ -38,6 +38,7 @@
 #include <QMap>
 #include <QList>
 #include <QResizeEvent>
+#include <QtAlgorithms>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -65,181 +66,6 @@
 /* -------------------------------------------------------------------------------*/
 /*                               KTransactionPtrVector                            */
 /* -------------------------------------------------------------------------------*/
-
-int KTransactionPtrVector::compareItems(const QString& s1, const QString& s2) const
-{
-  if (s1 == s2)
-    return 0;
-  if (s1 < s2)
-    return -1;
-  return 1;
-}
-
-int KTransactionPtrVector::compareItems(KTransactionPtrVector::Item d1, KTransactionPtrVector::Item d2)
-{
-  int   rc = 0;
-  MyMoneyTransaction* t1 = static_cast<MyMoneyTransaction*>(d1);
-  MyMoneyTransaction* t2 = static_cast<MyMoneyTransaction*>(d2);
-  MyMoneyMoney tmp;
-
-  try {
-    MyMoneySplit s1;
-    MyMoneySplit s2;
-    switch (m_idMode) {
-    case AccountMode:
-      s1 = t1->splitByAccount(m_id);
-      s2 = t2->splitByAccount(m_id);
-      break;
-    case PayeeMode:
-      s1 = t1->splitByPayee(m_id);
-      s2 = t2->splitByPayee(m_id);
-      break;
-    }
-    QString p1, p2;
-
-    switch (m_sortType) {
-    case SortValue:
-      rc = 1;
-      tmp = s2.value() - s1.value();
-      if (tmp.isZero()) {
-        // same value? Sort by date
-        rc = t2->postDate().daysTo(t1->postDate());
-        if (rc == 0) {
-          // same date? Sort by id
-          rc = compareItems(t1->id(), t2->id());
-        }
-      } else if (tmp.isNegative()) {
-        rc = -1;
-      }
-      break;
-
-    case SortEntryDate:
-      rc = t2->entryDate().daysTo(t1->entryDate());
-      if (rc == 0) {
-        // on same day, lower check numbers show up first
-        rc = compareItems(s1.number(), s2.number());
-        if (rc == 0) {
-          // same number (e.g. empty)? larger amounts show up first
-          rc = 1;
-          tmp = s2.value() - s1.value();
-          if (tmp.isZero()) {
-            // same value? Sort by id
-            rc = compareItems(t1->id(), t2->id());
-          } else if (tmp.isNegative()) {
-            rc = -1;
-          }
-        }
-      }
-      break;
-
-    case SortEntryOrder:
-      // sort by id
-      rc = compareItems(t1->id(), t2->id());
-      break;
-
-    case SortTypeNr:
-      rc = compareItems(s1.action(), s2.action());
-
-      if (rc == 0) {
-        // same action? Sort by nr
-        rc = compareItems(s1.number(), s2.number());
-        if (rc == 0) {
-          // same number? Sort by date
-          rc = t2->postDate().daysTo(t1->postDate());
-          if (rc == 0) {
-            // same date? Sort by value
-            rc = 1;
-            tmp = s2.value() - s1.value();
-            if (tmp.isZero()) {
-              // same value? sort by id
-              rc = compareItems(t1->id(), t2->id());
-            } else if (tmp.isNegative()) {
-              rc = -1;
-            }
-          }
-        }
-      }
-      break;
-
-    case SortReceiver:
-      if (!s2.payeeId().isEmpty()) {
-        p2 = MyMoneyFile::instance()->payee(s2.payeeId()).name();
-      }
-      if (!s1.payeeId().isEmpty()) {
-        p1 = MyMoneyFile::instance()->payee(s1.payeeId()).name();
-      }
-
-      rc = compareItems(p1, p2);
-
-      if (rc == 0) {
-        // same payee? Sort by date
-        rc = t2->postDate().daysTo(t1->postDate());
-        if (rc == 0) {
-          // same date? Sort by value
-          rc = 1;
-          tmp = s2.value() - s1.value();
-          if (tmp.isZero()) {
-            // same value? sort by id
-            rc = compareItems(t1->id(), t2->id());
-          } else if (tmp.isNegative()) {
-            rc = -1;
-          }
-        }
-      }
-      break;
-
-    case SortNr:
-      rc = compareItems(s1.number(), s2.number());
-      if (rc == 0) {
-        // same number? Sort by date
-        rc = t2->postDate().daysTo(t1->postDate());
-        if (rc == 0) {
-          // same date? Sort by value
-          rc = 1;
-          tmp = s2.value() - s1.value();
-          if (tmp.isZero()) {
-            // same value? sort by id
-            rc = compareItems(t1->id(), t2->id());
-          } else if (tmp.isNegative()) {
-            rc = -1;
-          }
-        }
-      }
-      break;
-
-    case SortPostDate:
-      // tricky fall through here!
-    default:
-      // sort by post date
-      rc = t2->postDate().daysTo(t1->postDate());
-      if (rc == 0) {
-        // on same day, lower check numbers show up first
-        rc = compareItems(s1.number(), s2.number());
-        if (rc == 0) {
-          // same number (e.g. empty)? larger amounts show up first
-          rc = 1;
-          tmp = s2.value() - s1.value();
-          if (tmp.isZero()) {
-            // same value? Sort by id
-            rc = compareItems(t1->id(), t2->id());
-          } else if (tmp.isNegative()) {
-            rc = -1;
-          }
-        }
-      }
-      break;
-    }
-  } catch (MyMoneyException *e) {
-    delete e;
-  }
-  return rc;
-}
-
-void KTransactionPtrVector::setSortType(const TransactionSortE type)
-{
-  m_sortType = type;
-  sort();
-}
 
 void KTransactionPtrVector::setAccountId(const QString& id)
 {
@@ -291,9 +117,6 @@ const QColor KTransactionListItem::backgroundColor(void)
 {
   return isAlternate() ? KMyMoneyGlobalSettings::listBGColor() : KMyMoneyGlobalSettings::listColor();
 }
-
-
-
 
 // *** KPayeesView Implementation ***
 
@@ -687,7 +510,6 @@ void KPayeesView::showTransactions(void)
   m_transactionPtrVector.clear();
   m_transactionPtrVector.resize(list.size());
   m_transactionPtrVector.setPayeeId(m_payee.id());
-  m_transactionPtrVector.setSortType(KTransactionPtrVector::SortPostDate);
 
   QList<MyMoneyTransaction>::ConstIterator it_t;
   QString lastId;
@@ -716,8 +538,6 @@ void KPayeesView::showTransactions(void)
   }
   m_transactionPtrVector.resize(i);
 
-  // sort the transactions
-  m_transactionPtrVector.sort();
 
   // and fill the m_transactionView
   KTransactionListItem *item = 0;
@@ -763,6 +583,9 @@ void KPayeesView::showTransactions(void)
     item->setText(2, txt);
     item->setText(3, s.value().formatMoney(acc.fraction()));
   }
+  // sort the transactions
+  qSort(m_transactionPtrVector.begin(), m_transactionPtrVector.end());
+
   m_balanceLabel->setText(i18n("Balance: %1", balance.formatMoney(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction())));
 
   // Trick: it seems, that the initial sizing of the view does

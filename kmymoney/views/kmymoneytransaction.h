@@ -56,6 +56,8 @@ public:
     return m_splitId;
   };
 
+  bool operator<(const KMyMoneyTransaction& right);
+
 private:
   QString    m_splitId;
 };

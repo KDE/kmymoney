@@ -27,8 +27,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <Q3PtrVector>
-#include <qwidget.h>
+#include <QVector>
+#include <QWidget>
 #include <QResizeEvent>
 #include <QList>
 
@@ -56,59 +56,14 @@
   * vector is created, the sort method is set to SortPostDate.
   * The sort type can be changed using the method setSortType().
   */
-class KTransactionPtrVector : public Q3PtrVector<KMyMoneyTransaction>
+class KTransactionPtrVector : public QVector<KMyMoneyTransaction*>
 {
 public:
-  /**
-    * This enumerator defines the possible sort methods.
-    * Possible values are:
-    *
-    */
-  enum TransactionSortE {
-    SortEntryDate = 0,      /**< Sort the vector so that the transactions appear sorted
-                              *  according to their entry date
-                              */
-    SortPostDate,           /**< Sort the vector so that the transactions appear sorted
-                              *     according to their post date
-                              */
-    SortTypeNr,             /**< Sort the vector so that the transactions appear sorted
-                              *     according to their action and nr
-                              */
-    SortReceiver,           /**< Sort the vector so that the transactions appear sorted
-                              *     according to their receiver
-                              */
-    SortValue,              /**< Sort the vector so that the transactions appear sorted
-                              *     according to their value
-                              */
-    SortNr,                 /**< Sort the vector so that the transactions appear sorted
-                              *     according to nr field contents
-                              */
-    SortEntryOrder          /**< Sort the vector so that the transactions appear sorted
-                              *     according to order of entry
-                              */
-  };
+
 
   KTransactionPtrVector() {
-    m_sortType = SortPostDate;
   };
   ~KTransactionPtrVector() {}
-
-  /**
-    * This method is used to set a different sort type.
-    * The vector is resorted. See KTransactionPtrVector::TransactionSortE
-    * for possible values.
-    */
-  void setSortType(const TransactionSortE type);
-
-  /**
-    * This method returns the current sort type.
-    *
-    * @return transactionSortE value of sort order. See
-    *         KTransactionPtrVector::TransactionSortE for possible values.
-    */
-  TransactionSortE sortType(void) const {
-    return m_sortType;
-  };
 
   /**
     * This method is used to set the account id to have a chance to
@@ -124,11 +79,6 @@ public:
     */
   void setPayeeId(const QString& id);
 
-protected:
-  int compareItems(KTransactionPtrVector::Item d1, KTransactionPtrVector::Item d2);
-
-private:
-  int compareItems(const QString& s1, const QString& s2) const;
 
 private:
   enum {
@@ -137,7 +87,6 @@ private:
   };
   short             m_idMode;
   QString           m_id;
-  TransactionSortE  m_sortType;
 };
 
 

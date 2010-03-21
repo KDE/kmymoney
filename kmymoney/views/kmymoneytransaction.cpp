@@ -50,4 +50,11 @@ void KMyMoneyTransaction::setSplitId(const QString& id)
   m_splitId = id;
 }
 
+bool KMyMoneyTransaction::operator<(const KMyMoneyTransaction& right)
+{
+  bool result = false;
 
+  if(postDate() < right.postDate())
+    result = true;
+  return result;
+}
