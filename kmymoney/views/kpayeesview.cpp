@@ -261,7 +261,7 @@ void KPayeesView::slotChooseDefaultAccount(void)
   MyMoneyFile* file = MyMoneyFile::instance();
   QMap<QString, int> account_count;
 
-  for (uint i = 0; i < m_transactionPtrVector.size(); ++i) {
+  for (int i = 0; i < m_transactionPtrVector.size(); ++i) {
     KMyMoneyTransaction* t = m_transactionPtrVector[i];
     MyMoneySplit s = t->splitById(t->splitId());
     const MyMoneyAccount& acc = file->account(s.accountId());
@@ -489,7 +489,7 @@ void KPayeesView::showTransactions(void)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
   MyMoneyMoney balance(0);
-  unsigned int   i;
+  int   i;
 
   // clear the current transaction listview
   m_transactionView->clear();
