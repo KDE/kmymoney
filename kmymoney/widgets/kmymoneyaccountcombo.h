@@ -77,7 +77,7 @@ class KMyMoneyMVCAccountCombo : public KComboBox
 {
   Q_OBJECT
 public:
-  KMyMoneyMVCAccountCombo(AccountNamesFilterProxyModel *model, QWidget *parent = 0);
+  explicit KMyMoneyMVCAccountCombo(AccountNamesFilterProxyModel *model, QWidget *parent = 0);
   ~KMyMoneyMVCAccountCombo();
 
   void setSelected(const QString& id);

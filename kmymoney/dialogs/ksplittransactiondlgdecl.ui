@@ -4,7 +4,7 @@
   <comment></comment>
   <exportmacro></exportmacro>
   <class>KSplitTransactionDlgDecl</class>
-  <widget class="QDialog" name="KSplitTransactionDlgDecl">
+  <widget class="KDialog" name="KSplitTransactionDlgDecl">
     <property name="geometry">
       <rect>
         <x>0</x>
@@ -354,6 +354,11 @@
   </widget>
   <layoutdefault spacing="6" margin="11"/>
   <customwidgets>
+    <customwidget>
+      <class>KDialog</class>
+      <extends>QDialog</extends>
+      <header>kdialog.h</header>
+    </customwidget>
     <customwidget>
       <class>kMyMoneySplitTable</class>
       <extends>QWidget</extends>

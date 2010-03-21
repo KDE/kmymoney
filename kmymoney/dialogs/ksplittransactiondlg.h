@@ -45,10 +45,10 @@
 
 
 
-class KSplitCorrectionDlgDecl : public QDialog, public Ui::KSplitCorrectionDlgDecl
+class KSplitCorrectionDlgDecl : public KDialog, public Ui::KSplitCorrectionDlgDecl
 {
 public:
-  KSplitCorrectionDlgDecl(QWidget *parent) : QDialog(parent) {
+  KSplitCorrectionDlgDecl(QWidget *parent) : KDialog(parent) {
     setupUi(this);
   }
 };
@@ -57,10 +57,10 @@ public:
   * @author Thomas Baumgart
   */
 
-class KSplitTransactionDlgDecl : public QDialog, public Ui::KSplitTransactionDlgDecl
+class KSplitTransactionDlgDecl : public KDialog, public Ui::KSplitTransactionDlgDecl
 {
 public:
-  KSplitTransactionDlgDecl(QWidget *parent) : QDialog(parent) {
+  KSplitTransactionDlgDecl(QWidget *parent) : KDialog(parent) {
     setupUi(this);
   }
 };
