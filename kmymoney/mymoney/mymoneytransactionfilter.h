@@ -32,21 +32,18 @@
 
 #include <QString>
 #include <QDateTime>
-#include <qmap.h>
-#include <q3asciidict.h>
-#include <q3intdict.h>
-#include <QRegExp>
-//Added by qt3to4:
+#include <QHash>
 #include <QList>
-#include <Q3Dict>
+#include <QMap>
+#include <QRegExp>
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneytransaction.h>
-#include <kmm_mymoney_export.h>
+#include "mymoneytransaction.h"
+#include "kmm_mymoney_export.h"
 
 /**
   * @author Thomas Baumgart
@@ -573,12 +570,12 @@ protected:
 
   QRegExp             m_text;
   bool                m_invertText;
-  Q3Dict<char>    m_accounts;
-  Q3Dict<char>    m_payees;
-  Q3Dict<char>    m_categories;
-  Q3IntDict<char>      m_states;
-  Q3IntDict<char>      m_types;
-  Q3IntDict<char>      m_validity;
+  QHash<QString,QString>    m_accounts;
+  QHash<QString,QString>    m_payees;
+  QHash<QString,QString>    m_categories;
+  QHash<int,QString>      m_states;
+  QHash<int,QString>      m_types;
+  QHash<int,QString>      m_validity;
   QString             m_fromNr, m_toNr;
   QDate               m_fromDate, m_toDate;
   MyMoneyMoney        m_fromAmount, m_toAmount;
