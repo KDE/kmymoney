@@ -1,3 +1,4 @@
+#!/usr/bin/perl
 ######################################################################
 ### financequote.pl - KMyMoney interface to Finance::Quote
 ###
