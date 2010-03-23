@@ -52,9 +52,7 @@
 
 /**
   * This class is used to store a sorted vector of pointers to
-  * the transactions that are visible in a ledger view. When the
-  * vector is created, the sort method is set to SortPostDate.
-  * The sort type can be changed using the method setSortType().
+  * the transactions that are visible in a ledger view.
   */
 class KTransactionPtrVector : public QVector<KMyMoneyTransaction*>
 {
@@ -65,27 +63,7 @@ public:
   };
   ~KTransactionPtrVector() {}
 
-  /**
-    * This method is used to set the account id to have a chance to
-    * get information about the split referencing the current account
-    * during the sort phase.
-    */
-  void setAccountId(const QString& id);
-
-  /**
-    * This method is used to set the payee id to have a chance to
-    * get information about the split referencing the current payee
-    * during the sort phase.
-    */
-  void setPayeeId(const QString& id);
-
-
 private:
-  enum {
-    AccountMode = 0,
-    PayeeMode
-  };
-  short             m_idMode;
   QString           m_id;
 };
 

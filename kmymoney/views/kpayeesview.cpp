@@ -67,19 +67,6 @@
 /*                               KTransactionPtrVector                            */
 /* -------------------------------------------------------------------------------*/
 
-void KTransactionPtrVector::setAccountId(const QString& id)
-{
-  m_id = id;
-  m_idMode = AccountMode;
-}
-
-void KTransactionPtrVector::setPayeeId(const QString& id)
-{
-  m_id = id;
-  m_idMode = PayeeMode;
-}
-
-
 // *** KPayeeListItem Implementation ***
 
 KPayeeListItem::KPayeeListItem(QListWidget *parent, const MyMoneyPayee& payee) :
@@ -509,7 +496,6 @@ void KPayeesView::showTransactions(void)
 
   m_transactionPtrVector.clear();
   m_transactionPtrVector.resize(list.size());
-  m_transactionPtrVector.setPayeeId(m_payee.id());
 
   QList<MyMoneyTransaction>::ConstIterator it_t;
   QString lastId;
