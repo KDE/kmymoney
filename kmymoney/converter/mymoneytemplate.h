@@ -21,8 +21,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QDomDocument>
-#include <QDomNode>
+#include <QtXml/QDomDocument>
+#include <QtXml/QDomNode>
 
 class QFile;
 class QTreeWidgetItem;
@@ -30,8 +30,8 @@ class QTreeWidgetItem;
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KSaveFile>
-#include <KUrl>
+#include <KDE/KSaveFile>
+#include <KDE/KUrl>
 
 // ----------------------------------------------------------------------------
 // Project Includes

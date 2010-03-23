@@ -230,7 +230,7 @@ private:
     *
     * @param name name of account as found in the QIF file
     * @param value value found in the T record
-    * @param value2 value found in the $ record for splitted transactions
+    * @param value2 value found in the $ record for split transactions
     *
     * @return id of the account for the split. If no name is specified
     *            or the account was not found and not created the

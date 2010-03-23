@@ -132,7 +132,7 @@ protected:
   void addError(const QString& _msg)  {
     m_errors += _msg;
   }
-  const QStringList& infos(void) const {
+  const QStringList& infos(void) const {        // krazy:exclude=spelling
     return m_infos;
   }
   const QStringList& warnings(void) const {
