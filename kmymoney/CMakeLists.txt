@@ -131,8 +131,6 @@ IF( KDE4_BUILD_TESTS )
     # third argument: command line argument for the executable
   ENDFOREACH( test )
 
-  ADD_CUSTOM_TARGET( test
-    COMMAND "ctest" "${CMAKE_CURRENT_SOURCE_DIR}")
 ENDIF( KDE4_BUILD_TESTS )
 
 
