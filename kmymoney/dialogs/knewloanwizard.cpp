@@ -487,11 +487,11 @@ void KNewLoanWizard::updateSummary(void)
 void KNewLoanWizard::next()
 {
   bool dontLeavePage = false;
-  QString errMsg = i18n(
-                     "The loan wizard is unable to calculate two different values for your loan "
-                     "at the same time. "
-                     "Please enter a value for the %1 on this page or backup to the page where the "
-                     "current value to be calculated is defined and fill in a value.");
+  KLocalizedString ks = ki18n(
+                          "The loan wizard is unable to calculate two different values for your loan "
+                          "at the same time. "
+                          "Please enter a value for the %1 on this page or backup to the page where the "
+                          "current value to be calculated is defined and fill in a value.");
 
   if (currentPage() == m_lendBorrowPage) {
     // load the appropriate categories into the list
@@ -517,11 +517,10 @@ void KNewLoanWizard::next()
     m_interestRateEdit->setFocus();
     if (m_thisYearPaymentButton->isChecked()
         && m_loanAmountEdit->lineedit()->text().isEmpty()) {
-      errMsg = i18n("You selected, that payments have already been made towards this loan. "
-                    "This requires you to enter the loan amount exactly as found on your "
-                    "last statement.");
       dontLeavePage = true;
-      KMessageBox::error(0, errMsg, i18n("Calculation error"));
+      KMessageBox::error(0, i18n("You selected, that payments have already been made towards this loan. "
+                                 "This requires you to enter the loan amount exactly as found on your "
+                                 "last statement."), i18n("Calculation error"));
     } else
       updateLoanAmount();
 
@@ -530,7 +529,7 @@ void KNewLoanWizard::next()
     if (m_loanAmountEdit->lineedit()->text().isEmpty()
         && m_interestRateEdit->lineedit()->text().isEmpty()) {
       dontLeavePage = true;
-      KMessageBox::error(0, errMsg.arg(i18n("interest rate")), i18n("Calculation error"));
+      KMessageBox::error(0, ks.subs(i18n("interest rate")).toString(), i18n("Calculation error"));
     } else
       updateInterestRate();
 
@@ -539,7 +538,7 @@ void KNewLoanWizard::next()
          || m_interestRateEdit->lineedit()->text().isEmpty())
         && m_durationValueEdit->value() == 0) {
       dontLeavePage = true;
-      KMessageBox::error(0, errMsg.arg(i18n("term")), i18n("Calculation error"));
+      KMessageBox::error(0, ks.subs(i18n("term")).toString(), i18n("Calculation error"));
     } else
       updateDuration();
 
@@ -549,7 +548,7 @@ void KNewLoanWizard::next()
          || m_durationValueEdit->value() == 0)
         && m_paymentEdit->lineedit()->text().isEmpty()) {
       dontLeavePage = true;
-      KMessageBox::error(0, errMsg.arg(i18n("principal and interest")), i18n("Calculation error"));
+      KMessageBox::error(0, ks.subs(i18n("principal and interest")).toString(), i18n("Calculation error"));
     } else
       updatePayment();
 
