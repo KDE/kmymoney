@@ -317,7 +317,7 @@ void kMyMoneyDateInput::slotDateChosen(QDate date)
 QDate kMyMoneyDateInput::date(void) const
 {
   QDate rc = d->m_dateEdit->date();
-  if(rc == INVALID_DATE)
+  if (rc == INVALID_DATE)
     rc = QDate();
   return rc;
 }

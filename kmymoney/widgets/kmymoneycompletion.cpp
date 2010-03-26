@@ -62,8 +62,8 @@ void kMyMoneyCompletion::connectSignals(QWidget* widget, QTreeWidget* lv)
 {
   m_widget = widget;
   m_lv = lv;
-  connect(lv, SIGNAL(itemActivated(QTreeWidgetItem*,int)), this, SLOT(slotItemSelected(QTreeWidgetItem*, int)));
-  connect(lv, SIGNAL(itemClicked(QTreeWidgetItem*,int)), this, SLOT(slotItemSelected(QTreeWidgetItem*, int)));
+  connect(lv, SIGNAL(itemActivated(QTreeWidgetItem*, int)), this, SLOT(slotItemSelected(QTreeWidgetItem*, int)));
+  connect(lv, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(slotItemSelected(QTreeWidgetItem*, int)));
 }
 
 kMyMoneyCompletion::~kMyMoneyCompletion()

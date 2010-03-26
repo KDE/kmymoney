@@ -131,8 +131,8 @@ MyMoneyMoney::MyMoneyMoney(const QString& pszAmount)
     m_num = regExp.cap(3).toLongLong();
     m_denom = regExp.cap(4).toLongLong();
     const QString& part1 = regExp.cap(1);
-    if(!part1.isEmpty()) {
-      if(part1 == QLatin1String("-")) {
+    if (!part1.isEmpty()) {
+      if (part1 == QLatin1String("-")) {
         m_num = -m_num;
 
       } else {

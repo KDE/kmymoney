@@ -50,11 +50,11 @@ K_EXPORT_COMPONENT_FACTORY(kmm_ofximport,
 
 OfxImporterPlugin::OfxImporterPlugin(QObject *parent, const QStringList&) :
     KMyMoneyPlugin::Plugin(parent, "KMyMoney OFX"),
-        /*
-         * the string in the line above must be the same as
-         * X-KDE-PluginInfo-Name and the provider name assigned in
-         * OfxImporterPlugin::onlineBankingSettings()
-         */
+    /*
+     * the string in the line above must be the same as
+     * X-KDE-PluginInfo-Name and the provider name assigned in
+     * OfxImporterPlugin::onlineBankingSettings()
+     */
     KMyMoneyPlugin::ImporterPlugin(),
     m_valid(false)
 {

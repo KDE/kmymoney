@@ -54,7 +54,7 @@ bool KMyMoneyTransaction::operator<(const KMyMoneyTransaction& right)
 {
   bool result = false;
 
-  if(postDate() < right.postDate())
+  if (postDate() < right.postDate())
     result = true;
   return result;
 }

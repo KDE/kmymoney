@@ -48,7 +48,7 @@
 #include "kmymoneyaccountcompletion.h"
 
 AccountNamesFilterProxyModel::AccountNamesFilterProxyModel(QObject *parent)
-  : AccountsFilterProxyModel(parent)
+    : AccountsFilterProxyModel(parent)
 {
 }
 
@@ -81,7 +81,7 @@ public:
 };
 
 KMyMoneyMVCAccountCombo::KMyMoneyMVCAccountCombo(AccountNamesFilterProxyModel *model, QWidget *parent/* = 0*/)
-  : KComboBox(parent), d(new Private)
+    : KComboBox(parent), d(new Private)
 {
   setModel(model);
   d->m_popupView = new QTreeView(this);
@@ -103,7 +103,7 @@ KMyMoneyMVCAccountCombo::KMyMoneyMVCAccountCombo(AccountNamesFilterProxyModel *m
 
 KMyMoneyMVCAccountCombo::~KMyMoneyMVCAccountCombo()
 {
-   delete d;
+  delete d;
 }
 
 void KMyMoneyMVCAccountCombo::wheelEvent(QWheelEvent *ev)

@@ -31,8 +31,7 @@
 
 #include "accountsmodel.h"
 
-struct Models::Private
-{
+struct Models::Private {
   Private() : m_accountsModel(0) {}
   AccountsModel *m_accountsModel;
 };

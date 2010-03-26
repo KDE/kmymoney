@@ -128,8 +128,12 @@ public:
   virtual ~MyMoneyDbIntColumn() {}
   virtual const QString generateDDL(const KSharedPtr<MyMoneyDbDriver>& driver) const;
   virtual MyMoneyDbIntColumn* clone() const;
-  size type() const { return m_type; }
-  bool isSigned() const { return m_isSigned; }
+  size type() const {
+    return m_type;
+  }
+  bool isSigned() const {
+    return m_isSigned;
+  }
 private:
   size m_type;
   bool m_isSigned;
@@ -154,7 +158,9 @@ public:
   virtual ~MyMoneyDbTextColumn() {}
   virtual const QString generateDDL(const KSharedPtr<MyMoneyDbDriver>& driver) const;
   virtual MyMoneyDbTextColumn* clone() const;
-  size type() const { return m_type; }
+  size type() const {
+    return m_type;
+  }
 private:
   size m_type;
 };

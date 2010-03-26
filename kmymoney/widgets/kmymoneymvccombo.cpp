@@ -42,11 +42,10 @@ class KMyMoneyMVCCombo::Private
 {
 public:
   Private() :
-    m_canCreateObjects(false),
-    m_inFocusOutEvent(false),
-    m_completer(0),
-    m_filterProxyModel(0)
-  {}
+      m_canCreateObjects(false),
+      m_inFocusOutEvent(false),
+      m_completer(0),
+      m_filterProxyModel(0) {}
 
   /**
     * Flag to control object creation. Use
@@ -70,16 +69,16 @@ public:
 
 
 KMyMoneyMVCCombo::KMyMoneyMVCCombo(QWidget* parent) :
-  KComboBox(parent),
-  d(new Private)
+    KComboBox(parent),
+    d(new Private)
 {
   view()->setAlternatingRowColors(true);
   connect(this, SIGNAL(activated(int)), SLOT(activated(int)));
 }
 
 KMyMoneyMVCCombo::KMyMoneyMVCCombo(bool editable, QWidget* parent) :
-  KComboBox(editable, parent),
-  d(new Private)
+    KComboBox(editable, parent),
+    d(new Private)
 {
   d->m_completer = new QCompleter(this);
   d->m_completer->setCaseSensitivity(Qt::CaseInsensitive);
@@ -100,14 +99,14 @@ KMyMoneyMVCCombo::~KMyMoneyMVCCombo()
 
 void KMyMoneyMVCCombo::setSubstringSearch(bool enabled)
 {
-  if(enabled) {
+  if (enabled) {
     // if substring search should be turned on and
     // is already on, we can quit right away
-    if(d->m_completer->model() == d->m_filterProxyModel)
+    if (d->m_completer->model() == d->m_filterProxyModel)
       return;
 
     // make sure we have a proxy model
-    if(!d->m_filterProxyModel) {
+    if (!d->m_filterProxyModel) {
       d->m_filterProxyModel = new QSortFilterProxyModel(this);
       d->m_filterProxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
       d->m_filterProxyModel->setSourceModel(model());
@@ -121,7 +120,7 @@ void KMyMoneyMVCCombo::setSubstringSearch(bool enabled)
     // for it being turned on. In case the current completer
     // model is different from m_filterProxyModel it is not
     // active and we can quit right away
-    if(d->m_completer->model() != d->m_filterProxyModel)
+    if (d->m_completer->model() != d->m_filterProxyModel)
       return;
 
     disconnect(this, SIGNAL(editTextChanged(const QString &)), this, SLOT(editTextChanged(const QString &)));
@@ -132,12 +131,12 @@ void KMyMoneyMVCCombo::setSubstringSearch(bool enabled)
 
 void KMyMoneyMVCCombo::setModel(QAbstractItemModel *model)
 {
-  if(!model)
+  if (!model)
     return;
 
   KComboBox::setModel(model);
   d->m_filterProxyModel->setSourceModel(model);
-  if(d->m_completer->model() != d->m_filterProxyModel) {
+  if (d->m_completer->model() != d->m_filterProxyModel) {
     d->m_completer->setModel(model);
   }
 }
@@ -145,7 +144,7 @@ void KMyMoneyMVCCombo::setModel(QAbstractItemModel *model)
 void KMyMoneyMVCCombo::setClickMessage(const QString& hint) const
 {
   KLineEdit* le = qobject_cast<KLineEdit*>(lineEdit());
-  if(le) {
+  if (le) {
     le->setClickMessage(hint);
   }
 }
@@ -182,7 +181,7 @@ void KMyMoneyMVCCombo::activated(int index)
   */
 void KMyMoneyMVCCombo::editTextChanged(const QString &text)
 {
-  if(text.isEmpty()) {
+  if (text.isEmpty()) {
     setCurrentIndex(0);
     clearEditText();
   } else if (d->m_filterProxyModel && completer()) {
@@ -280,7 +279,7 @@ void KMyMoneyMVCCombo::protectItem(int id, bool protect)
 }
 
 KMyMoneyPayeeCombo::KMyMoneyPayeeCombo(QWidget* parent) :
-  KMyMoneyMVCCombo(true, parent)
+    KMyMoneyMVCCombo(true, parent)
 {
 }
 

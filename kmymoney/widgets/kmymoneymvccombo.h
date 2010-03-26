@@ -56,7 +56,7 @@ public:
 
   /**
     * @sa KLineEdit::setClickMessage()
-    */ 
+    */
   void setClickMessage(const QString& hint) const;
 
   /**

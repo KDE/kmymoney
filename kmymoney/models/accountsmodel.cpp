@@ -47,9 +47,8 @@ public:
     * The pimpl.
     */
   Private() :
-    m_file(MyMoneyFile::instance()),
-    m_lastNetWorth(0)
-  {
+      m_file(MyMoneyFile::instance()),
+      m_lastNetWorth(0) {
   }
 
   ~Private() {
@@ -185,8 +184,7 @@ public:
     *
     * @param account The account for which the balance is being computed.
     */
-  MyMoneyMoney balance(const MyMoneyAccount &account)
-  {
+  MyMoneyMoney balance(const MyMoneyAccount &account) {
     MyMoneyMoney balance;
     // account.balance() is not compatable with stock accounts
     if (account.isInvest())
@@ -217,8 +215,7 @@ public:
     *
     * @see balance
     */
-  MyMoneyMoney value(const MyMoneyAccount &account, const MyMoneyMoney &balance)
-  {
+  MyMoneyMoney value(const MyMoneyAccount &account, const MyMoneyMoney &balance) {
     QList<MyMoneyPrice> prices;
     MyMoneySecurity security = m_file->baseCurrency();
     try {
@@ -267,15 +264,13 @@ public:
     * @param index The index of the account in the model.
     * @see value
     */
-  MyMoneyMoney childrenTotalValue(const QModelIndex &index)
-  {
+  MyMoneyMoney childrenTotalValue(const QModelIndex &index) {
     if (!index.isValid())
       return MyMoneyMoney(0);
 
     MyMoneyMoney totalValue(0);
     const QAbstractItemModel *model = index.model();
-    for (int i = 0; i < model->rowCount(index); ++i)
-    {
+    for (int i = 0; i < model->rowCount(index); ++i) {
       QModelIndex childIndex = model->index(i, index.column(), index);
       if (model->hasChildren(childIndex)) {
         totalValue += childrenTotalValue(childIndex);
@@ -298,8 +293,7 @@ public:
     *
     * @return The item corresponding to the given account id, NULL if the account was not found.
     */
-  QStandardItem *itemFromAccountId(QStandardItem *parent, const QString &accountId)
-  {
+  QStandardItem *itemFromAccountId(QStandardItem *parent, const QString &accountId) {
     QStandardItemModel *model = parent->model();
     QModelIndexList list = model->match(model->index(0, 0, parent->index()), AccountsModel::AccountIdRole, QVariant(accountId), 1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive));
     if (list.count() > 0) {
@@ -365,7 +359,7 @@ AccountsModel::~AccountsModel()
 }
 
 /**
-  * This function synchronizes the data of the model with the data 
+  * This function synchronizes the data of the model with the data
   * from the @ref MyMoneyFile.
   */
 void AccountsModel::load()
@@ -555,14 +549,12 @@ class AccountsFilterProxyModel::Private
 {
 public:
   Private() :
-    m_hideClosedAccounts(true),
-    m_hideEquityAccounts(true),
-    m_hideUnusedIncomeExpenseAccounts(false)
-  {
+      m_hideClosedAccounts(true),
+      m_hideEquityAccounts(true),
+      m_hideUnusedIncomeExpenseAccounts(false) {
   }
 
-  ~Private()
-  {
+  ~Private() {
   }
 
   QList<MyMoneyAccount::accountTypeE> m_typeList;

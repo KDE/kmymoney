@@ -638,7 +638,7 @@ void MyMoneyForecast::addScheduledTransactions(void)
       if (it == schedule.end())
         break;
 
-      if((*it).isFinished()) {
+      if ((*it).isFinished()) {
         schedule.erase(it);
         continue;
       }

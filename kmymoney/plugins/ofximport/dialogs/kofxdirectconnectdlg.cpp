@@ -142,7 +142,7 @@ void KOfxDirectConnectDlg::slotOfxConnected(KIO::Job*)
   // able to read/parse the file and signal that to the user later on.
   // we currently don't have a choice to interrupt the download anyway,
   // other than dropping a line on the console
-  if(!m_tmpfile->open())
+  if (!m_tmpfile->open())
     qWarning("Unable to open tempfile '%s' for download.", qPrintable(m_tmpfile->fileName()));
 
   setStatus("Connection established, retrieving data...");

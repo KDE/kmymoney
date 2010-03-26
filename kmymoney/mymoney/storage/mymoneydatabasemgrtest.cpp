@@ -91,7 +91,7 @@ void MyMoneyDatabaseMgrTest::testCreateDb()
     m_url = "sql://" + userName + "@localhost/kmm_test_driver?driver="
             //"QPSQL&mode=single";
             "QSQLITE&mode=single";
-            //"QMYSQL&mode=single";
+    //"QMYSQL&mode=single";
     KSharedPtr <MyMoneyStorageSql> sql = m->connectToDatabase(m_url);
     CPPUNIT_ASSERT(0 != sql);
     //qDebug("Database driver is %s", qPrintable(sql->driverName()));

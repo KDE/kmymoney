@@ -19,6 +19,7 @@ email                : mte@users.sourceforge.net
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
+
 #include "mymoneygncreader.h"
 
 // ----------------------------------------------------------------------------
@@ -1253,7 +1254,7 @@ void MyMoneyGncReader::convertPrice(const GncPrice *gpr)
   Q_CHECK_PTR(gpr);
   // add this to our price history
   if (m_priceCount == 0) signalProgress(0, 1, i18n("Loading prices..."));
-  MyMoneyMoney rate (convBadValue(gpr->value()));
+  MyMoneyMoney rate(convBadValue(gpr->value()));
   if (gpr->commodity()->isCurrency()) {
     MyMoneyPrice exchangeRate(gpr->commodity()->id().toUtf8(), gpr->currency()->id().toUtf8(),
                               gpr->priceDate(), rate, i18n("Imported History"));

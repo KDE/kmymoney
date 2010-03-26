@@ -254,17 +254,16 @@ void KAccountsView::slotTabCurrentChanged(QWidget* _tab)
 
   emit selectObject(MyMoneyAccount());
   switch (static_cast<AccountsViewTab>(m_tab->currentIndex())) {
-  case ListView:
-    {
-      QModelIndexList selectedIndexes = m_accountTree->selectionModel()->selectedIndexes();
-      if (!selectedIndexes.empty()) {
-        QVariant data = m_accountTree->model()->data(selectedIndexes.front(), AccountsModel::AccountRole);
-        if (data.isValid()) {
-          emit selectObject(data.value<MyMoneyAccount>());
-        }
+  case ListView: {
+    QModelIndexList selectedIndexes = m_accountTree->selectionModel()->selectedIndexes();
+    if (!selectedIndexes.empty()) {
+      QVariant data = m_accountTree->model()->data(selectedIndexes.front(), AccountsModel::AccountRole);
+      if (data.isValid()) {
+        emit selectObject(data.value<MyMoneyAccount>());
       }
     }
-    break;
+  }
+  break;
 
   case IconView:
     if (iconItem) {

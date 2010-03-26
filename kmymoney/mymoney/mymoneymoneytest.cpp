@@ -306,7 +306,7 @@ void MyMoneyMoneyTest::testMultiplication()
   CPPUNIT_ASSERT((m1 * MyMoneyMoney(10000000, 1)) == MyMoneyMoney(1000000000, 1));
   CPPUNIT_ASSERT((m1 *(*m_0)) == MyMoneyMoney(1200));
 
-  MyMoneyMoney m2 (QString("-73010.28"));
+  MyMoneyMoney m2(QString("-73010.28"));
   m1 = QString("1.95583");
   CPPUNIT_ASSERT((m1 * m2) == QString("-142795.6959324"));
 }
@@ -316,7 +316,7 @@ void MyMoneyMoneyTest::testDivision()
   MyMoneyMoney m1(100);
   CPPUNIT_ASSERT((m1 / MyMoneyMoney(50)) == MyMoneyMoney(2, 1));
 
-  MyMoneyMoney m2 (QString("-142795.69"));
+  MyMoneyMoney m2(QString("-142795.69"));
   m1 = QString("1.95583");
   CPPUNIT_ASSERT((m2 / m1).convert(100000000) == QString("-73010.27696681"));
 

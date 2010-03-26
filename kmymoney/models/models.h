@@ -46,7 +46,7 @@ class AccountsModel;
   * @endcode
   *
   * In order for the data synchronization between the @ref MyMoneyFile dand the
-  * models managed by this object to work the @ref MyMoneyFile::dataChanged signal 
+  * models managed by this object to work the @ref MyMoneyFile::dataChanged signal
   * must be connected to this object's @ref dataChanged slot.
   *
   * @author Cristian Onet 2010

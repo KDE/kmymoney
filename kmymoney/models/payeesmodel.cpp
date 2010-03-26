@@ -38,8 +38,7 @@ public:
     * The pimpl.
     */
   Private() :
-    m_file(MyMoneyFile::instance())
-  {
+      m_file(MyMoneyFile::instance()) {
   }
 
   ~Private() {
@@ -84,8 +83,7 @@ public:
     *
     * @return The item corresponding to the given account id, NULL if the account was not found.
     */
-  QStandardItem *itemFromObjectId(QStandardItem *parent, const QString &objectId)
-  {
+  QStandardItem *itemFromObjectId(QStandardItem *parent, const QString &objectId) {
     QStandardItemModel *model = parent->model();
     QModelIndexList list = model->match(model->index(0, 0, parent->index()), PayeeIdRole, QVariant(objectId), 1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive));
     if (list.count() > 0) {
@@ -162,13 +160,11 @@ class PayeesComboProxyModel::Private
 {
 public:
   Private() :
-      m_allowEmptyPayee(false)
-  {
+      m_allowEmptyPayee(false) {
     m_payeeList = QStringList();
   }
 
-  ~Private()
-  {
+  ~Private() {
   }
 
   QStringList m_payeeList;
@@ -226,21 +222,21 @@ bool PayeesComboProxyModel::acceptSourceItem(const QModelIndex &source) const
     if (data.isValid()) {
 
       //if the payee list is empty, all items are allowed
-      if(d->m_payeeList.isEmpty())
+      if (d->m_payeeList.isEmpty())
         return true;
 
       QString id = data.toString();
 
       //check whether empty payees should be allowed
-      if(id.isEmpty()) {
-        if(d->m_allowEmptyPayee) {
+      if (id.isEmpty()) {
+        if (d->m_allowEmptyPayee) {
           return true;
         } else  {
           return false;
         }
       }
 
-      if(d->m_payeeList.contains(id, Qt::CaseSensitive))
+      if (d->m_payeeList.contains(id, Qt::CaseSensitive))
         return true;
     }
 
@@ -259,7 +255,7 @@ void PayeesComboProxyModel::setFilterList(const bool &allowEmpty, const QList<My
   QStringList idList;
 
   QList<MyMoneyPayee>::const_iterator payeeIt = payeeList.constBegin();
-  while(payeeIt != payeeList.constEnd()) {
+  while (payeeIt != payeeList.constEnd()) {
     idList.append((*payeeIt).id());
     ++payeeIt;
   }

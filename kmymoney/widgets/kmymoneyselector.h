@@ -56,8 +56,7 @@ public:
   explicit KMyMoneySelector(QWidget *parent = 0, Qt::WFlags flags = 0);
   virtual ~KMyMoneySelector();
 
-  enum KMyMoneySelectorItemRoles
-  {
+  enum KMyMoneySelectorItemRoles {
     IdRole = Qt::UserRole,      /**< The id is stored in this role in column 0 as a string.*/
     KeyRole = Qt::UserRole + 1, /**< The key is stored in this role in column 0 as a string.*/
   };

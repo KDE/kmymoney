@@ -85,7 +85,7 @@ bool WebPriceQuote::launchNative(const QString& _symbol, const QString& _id, con
   if (quoteSources().contains(sourcename))
     m_source = WebPriceQuoteSource(sourcename);
   else
-    emit error(i18n("Source <%1> does not exist.",sourcename));
+    emit error(i18n("Source <%1> does not exist.", sourcename));
 
   KUrl url;
 
@@ -172,7 +172,7 @@ bool WebPriceQuote::launchFinanceQuote(const QString& _symbol, const QString& _i
   if (m_filter.waitForFinished()) {
     result = true;
   } else {
-    emit error(i18n("Unable to launch: %1",m_financeQuoteScriptPath));
+    emit error(i18n("Unable to launch: %1", m_financeQuoteScriptPath));
     slotParseQuote(QString());
   }
 

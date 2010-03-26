@@ -287,7 +287,7 @@ bool MyMoneyTransactionFilter::match(const MyMoneyTransaction& transaction)
 
   QList<const MyMoneySplit*> matchingSplits;
   //QList<MyMoneySplit> matchingSplits;
-  foreach (const MyMoneySplit& s, transaction.splits()) {
+  foreach(const MyMoneySplit& s, transaction.splits()) {
     matchingSplits.append(&s);
   }
 
@@ -389,7 +389,7 @@ bool MyMoneyTransactionFilter::match(const MyMoneyTransaction& transaction)
     for (sp.toFront(); sp.hasNext();) {
       bool removeSplit = true;
       const MyMoneySplit* & s = sp.next();
-      removeSplit = ! (matchAmount(s) && matchText(s));
+      removeSplit = !(matchAmount(s) && matchText(s));
 
       const MyMoneyAccount& acc = file->account(s->accountId());
 
@@ -455,7 +455,7 @@ bool MyMoneyTransactionFilter::match(const MyMoneyTransaction& transaction)
   if (m_reportAllSplits == false && matchingSplits.count() != 0) {
     m_matchingSplits.append(transaction.splits()[0]);
   } else {
-    foreach (const MyMoneySplit* s, matchingSplits) {
+    foreach(const MyMoneySplit* s, matchingSplits) {
       m_matchingSplits.append(*s);
     }
   }
@@ -571,7 +571,7 @@ bool MyMoneyTransactionFilter::payees(QStringList& list) const
   bool result = m_filterSet.singleFilter.payeeFilter;
 
   if (result) {
-    QHashIterator<QString,QString> it_payee(m_payees);
+    QHashIterator<QString, QString> it_payee(m_payees);
     while (it_payee.hasNext()) {
       it_payee.next();
       list += it_payee.key();
@@ -585,7 +585,7 @@ bool MyMoneyTransactionFilter::accounts(QStringList& list) const
   bool result = m_filterSet.singleFilter.accountFilter;
 
   if (result) {
-    QHashIterator<QString,QString> it_account(m_accounts);
+    QHashIterator<QString, QString> it_account(m_accounts);
     while (it_account.hasNext()) {
       it_account.next();
       QString account = it_account.key();
@@ -600,7 +600,7 @@ bool MyMoneyTransactionFilter::categories(QStringList& list) const
   bool result = m_filterSet.singleFilter.categoryFilter;
 
   if (result) {
-    QHashIterator<QString,QString> it_category(m_categories);
+    QHashIterator<QString, QString> it_category(m_categories);
     while (it_category.hasNext()) {
       it_category.next();
       list += it_category.key();
@@ -614,7 +614,7 @@ bool MyMoneyTransactionFilter::types(QList<int>& list) const
   bool result = m_filterSet.singleFilter.typeFilter;
 
   if (result) {
-    QHashIterator<int,QString> it_type(m_types);
+    QHashIterator<int, QString> it_type(m_types);
     while (it_type.hasNext()) {
       it_type.next();
       list += it_type.key();
@@ -628,7 +628,7 @@ bool MyMoneyTransactionFilter::states(QList<int>& list) const
   bool result = m_filterSet.singleFilter.stateFilter;
 
   if (result) {
-    QHashIterator<int,QString> it_state(m_states);
+    QHashIterator<int, QString> it_state(m_states);
     while (it_state.hasNext()) {
       it_state.next();
       list += it_state.key();
@@ -642,7 +642,7 @@ bool MyMoneyTransactionFilter::firstType(int&i) const
   bool result = m_filterSet.singleFilter.typeFilter;
 
   if (result) {
-    QHashIterator<int,QString> it_type(m_types);
+    QHashIterator<int, QString> it_type(m_types);
     if (it_type.hasNext()) {
       it_type.next();
       i = it_type.key();
@@ -656,7 +656,7 @@ bool MyMoneyTransactionFilter::firstState(int&i) const
   bool result = m_filterSet.singleFilter.stateFilter;
 
   if (result) {
-    QHashIterator<int,QString> it_state(m_states);
+    QHashIterator<int, QString> it_state(m_states);
     if (it_state.hasNext()) {
       it_state.next();
       i = it_state.key();

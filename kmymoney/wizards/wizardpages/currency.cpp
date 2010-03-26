@@ -33,7 +33,7 @@ Currency::Currency(QWidget* parent) :
     CurrencyDecl(parent)
 {
   m_currencyList->setAllColumnsShowFocus(true);
-  m_currencyList->setColumnWidth(0, size().width()*6/10);
+  m_currencyList->setColumnWidth(0, size().width()*6 / 10);
 }
 
 QTreeWidgetItem* Currency::insertCurrency(const MyMoneySecurity& sec)
@@ -48,9 +48,9 @@ QTreeWidgetItem* Currency::insertCurrency(const MyMoneySecurity& sec)
 
 void Currency::selectCurrency(const MyMoneySecurity& sec)
 {
-  QList<QTreeWidgetItem*> selectedItems = m_currencyList->findItems(sec.id(),Qt::MatchExactly, 1);
+  QList<QTreeWidgetItem*> selectedItems = m_currencyList->findItems(sec.id(), Qt::MatchExactly, 1);
   QList<QTreeWidgetItem*>::iterator itemIt = selectedItems.begin();
-  while(itemIt != selectedItems.end()) {
+  while (itemIt != selectedItems.end()) {
     (*itemIt)->setSelected(true);
     m_currencyList->scrollToItem(*itemIt);
   }

@@ -63,7 +63,7 @@ KStartupLogo::KStartupLogo() :
     splash->showMessage(i18n("Loading ..."),
                         Qt::AlignLeft | Qt::AlignBottom,
                         KColorScheme(QPalette::Active, KColorScheme::Selection)
-                          .foreground(KColorScheme::NormalText).color());
+                        .foreground(KColorScheme::NormalText).color());
     m_splash = splash;
   }
 }

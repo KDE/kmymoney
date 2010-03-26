@@ -39,7 +39,7 @@
 Q_DECLARE_METATYPE(MyMoneyAccount)
 
 KMyMoneyAccountTreeView::KMyMoneyAccountTreeView(QWidget *parent)
-  : QTreeView(parent)
+    : QTreeView(parent)
 {
   // restore the headers
   KConfigGroup grp = KGlobal::config()->group("KAccountsView");
@@ -102,18 +102,15 @@ public:
   ~Private() {
   }
 
-  void markAccountExpanded(const QString &accountId)
-  {
+  void markAccountExpanded(const QString &accountId) {
     m_expandedAccountIds.insert(accountId);
   }
 
-  void markAccountCollapsed(const QString &accountId)
-  {
+  void markAccountCollapsed(const QString &accountId) {
     m_expandedAccountIds.remove(accountId);
   }
 
-  bool isAccountExpanded(const QString &accountId)
-  {
+  bool isAccountExpanded(const QString &accountId) {
     return m_expandedAccountIds.contains(accountId);
   }
 
@@ -121,7 +118,7 @@ public:
 };
 
 AccountsViewFilterProxyModel::AccountsViewFilterProxyModel(QObject *parent)
-  : AccountsFilterProxyModel(parent), d(new Private)
+    : AccountsFilterProxyModel(parent), d(new Private)
 {
 }
 

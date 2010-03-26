@@ -45,8 +45,7 @@
 #include <mymoneysecurity.h>
 #include <mymoneyfile.h>
 
-enum KCurrencyEditItemRoles
-{
+enum KCurrencyEditItemRoles {
   IdRole = Qt::UserRole,      /**< The id is stored in this role in column 0 as a string.*/
 };
 
@@ -97,8 +96,8 @@ KCurrencyEditDlg::~KCurrencyEditDlg()
 
 void KCurrencyEditDlg::slotLoadCurrencies(void)
 {
-  disconnect(m_currencyList, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)), this, SLOT(slotSelectCurrency(QTreeWidgetItem*)));
-  disconnect(m_currencyList, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SLOT(slotRenameCurrency(QTreeWidgetItem*)));
+  disconnect(m_currencyList, SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)), this, SLOT(slotSelectCurrency(QTreeWidgetItem*)));
+  disconnect(m_currencyList, SIGNAL(itemChanged(QTreeWidgetItem*, int)), this, SLOT(slotRenameCurrency(QTreeWidgetItem*)));
   QList<MyMoneySecurity> list = MyMoneyFile::instance()->currencyList();
   QList<MyMoneySecurity>::ConstIterator it;
   QTreeWidgetItem *first = 0;
@@ -138,8 +137,8 @@ void KCurrencyEditDlg::slotLoadCurrencies(void)
 
   m_currencyList->sortItems(0, Qt::AscendingOrder);
 
-  connect(m_currencyList, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)), this, SLOT(slotSelectCurrency(QTreeWidgetItem*)));
-  connect(m_currencyList, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SLOT(slotRenameCurrency(QTreeWidgetItem*)));
+  connect(m_currencyList, SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)), this, SLOT(slotSelectCurrency(QTreeWidgetItem*)));
+  connect(m_currencyList, SIGNAL(itemChanged(QTreeWidgetItem*, int)), this, SLOT(slotRenameCurrency(QTreeWidgetItem*)));
 
   if (first == 0)
     first = m_currencyList->invisibleRootItem()->child(0);

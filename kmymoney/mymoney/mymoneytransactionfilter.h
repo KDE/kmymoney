@@ -570,12 +570,12 @@ protected:
 
   QRegExp             m_text;
   bool                m_invertText;
-  QHash<QString,QString>    m_accounts;
-  QHash<QString,QString>    m_payees;
-  QHash<QString,QString>    m_categories;
-  QHash<int,QString>      m_states;
-  QHash<int,QString>      m_types;
-  QHash<int,QString>      m_validity;
+  QHash<QString, QString>    m_accounts;
+  QHash<QString, QString>    m_payees;
+  QHash<QString, QString>    m_categories;
+  QHash<int, QString>      m_states;
+  QHash<int, QString>      m_types;
+  QHash<int, QString>      m_validity;
   QString             m_fromNr, m_toNr;
   QDate               m_fromDate, m_toDate;
   MyMoneyMoney        m_fromAmount, m_toAmount;

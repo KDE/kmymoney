@@ -425,7 +425,7 @@ void KGlobalLedgerView::loadView(void)
       key = "kmm-sort-std";
       sortOrder = KMyMoneyGlobalSettings::sortNormalView();
       if (KMyMoneyGlobalSettings::hideReconciledTransactions()
-      && !m_account.isIncomeExpense()) {
+          && !m_account.isIncomeExpense()) {
         filter.addState(MyMoneyTransactionFilter::notReconciled);
         filter.addState(MyMoneyTransactionFilter::cleared);
       }
@@ -857,10 +857,10 @@ void KGlobalLedgerView::loadAccounts(void)
   if (m_account.id().isEmpty()) {
     // find the first favorite account
     QModelIndexList list = Models::instance()->accountsModel()->match(Models::instance()->accountsModel()->index(0, 0),
-                                                                      AccountsModel::AccountFavoriteRole,
-                                                                      QVariant(true),
-                                                                      1,
-                                                                      Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
+                           AccountsModel::AccountFavoriteRole,
+                           QVariant(true),
+                           1,
+                           Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
     if (list.count() > 0) {
       QVariant accountId = Models::instance()->accountsModel()->data(list.front(), AccountsModel::AccountIdRole);
       if (accountId.isValid()) {
@@ -871,10 +871,10 @@ void KGlobalLedgerView::loadAccounts(void)
     if (m_account.id().isEmpty()) {
       // there are no favorite accounts find any account
       QModelIndexList list = Models::instance()->accountsModel()->match(Models::instance()->accountsModel()->index(0, 0),
-                                                                        Qt::DisplayRole,
-                                                                        QVariant(QString("*")),
-                                                                        -1,
-                                                                        Qt::MatchFlags(Qt::MatchWildcard | Qt::MatchRecursive));
+                             Qt::DisplayRole,
+                             QVariant(QString("*")),
+                             -1,
+                             Qt::MatchFlags(Qt::MatchWildcard | Qt::MatchRecursive));
       for (QModelIndexList::ConstIterator it = list.constBegin(); it != list.constEnd(); ++it) {
         if (!it->parent().isValid())
           continue; // skip the top level accounts

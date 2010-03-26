@@ -151,7 +151,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     break;
   }
   }
-    //get the diagram for later use
+  //get the diagram for later use
   AbstractDiagram* planeDiagram = coordinatePlane()->diagram();
 
   //set grid attributes

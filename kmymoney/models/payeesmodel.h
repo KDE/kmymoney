@@ -74,7 +74,7 @@ public:
   enum PayeeMatch {
     NoMatch = 0,
     NameMatch = 1,
-    KeyMatch= 2
+    KeyMatch = 2
   };
 
   /**

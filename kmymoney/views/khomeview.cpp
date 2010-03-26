@@ -85,9 +85,8 @@ class KHomeView::Private
 {
 public:
   Private() :
-    m_showAllSchedules(false),
-    m_needReload(true)
-  {
+      m_showAllSchedules(false),
+      m_needReload(true) {
   }
 
   void addNameIndex(QMap<QString, MyMoneyAccount> &idx, const MyMoneyAccount& account);

@@ -50,8 +50,7 @@ class KAccountTemplateSelector : public KAccountTemplateSelectorDecl
   Q_OBJECT
 
 public:
-  enum KAccountTemplateSelectorItemRoles
-  {
+  enum KAccountTemplateSelectorItemRoles {
     IdRole = Qt::UserRole,      /**< The id is stored in this role in column 0 as a string.*/
   };
 

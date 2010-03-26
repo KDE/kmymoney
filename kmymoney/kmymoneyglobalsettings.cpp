@@ -103,7 +103,7 @@ int KMyMoneyGlobalSettings::firstFiscalDay(void)
 
 void KMyMoneyGlobalSettings::setSubstringSearch(QWidget* w)
 {
-  if(w) {
+  if (w) {
     QList<KMyMoneyMVCCombo *> comboList;
     comboList = w->findChildren<KMyMoneyMVCCombo *>();
     foreach(KMyMoneyMVCCombo *combo, comboList) {

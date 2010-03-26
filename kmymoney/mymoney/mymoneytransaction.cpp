@@ -61,9 +61,9 @@ MyMoneyTransaction::MyMoneyTransaction(const QDomElement& node, const bool force
   m_commodity = QStringEmpty(node.attribute("commodity"));
 
   QDomNode child = node.firstChild();
-  while ( !child.isNull() && child.isElement() ) {
+  while (!child.isNull() && child.isElement()) {
     QDomElement c = child.toElement();
-    if(c.tagName() == QLatin1String("SPLITS")) {
+    if (c.tagName() == QLatin1String("SPLITS")) {
 
       // Process any split information found inside the transaction entry.
       QDomNodeList nodeList = c.elementsByTagName("SPLIT");
@@ -77,7 +77,7 @@ MyMoneyTransaction::MyMoneyTransaction(const QDomElement& node, const bool force
           qDebug("Dropped split because it did not have an account id");
       }
 
-    } else if(c.tagName() == QLatin1String("KEYVALUEPAIRS")) {
+    } else if (c.tagName() == QLatin1String("KEYVALUEPAIRS")) {
       MyMoneyKeyValueContainer kvp(c);
       setPairs(kvp.pairs());
     }

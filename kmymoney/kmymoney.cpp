@@ -2889,7 +2889,7 @@ void KMyMoneyApp::slotCategoryNew(MyMoneyAccount& account, const MyMoneyAccount&
     // we should not keep the 'no' setting because that can confuse people like
     // I have seen in some usability tests. So we just delete it right away.
     KSharedConfigPtr kconfig = KGlobal::config();
-    if(kconfig) {
+    if (kconfig) {
       kconfig->group(QLatin1String("Notification Messages")).deleteEntry(QLatin1String("CreateNewCategories"));
     }
   }
@@ -3064,7 +3064,7 @@ void KMyMoneyApp::slotInvestmentDelete(void)
     // we should not keep the 'no' setting because that can confuse people like
     // I have seen in some usability tests. So we just delete it right away.
     KSharedConfigPtr kconfig = KGlobal::config();
-    if(kconfig) {
+    if (kconfig) {
       kconfig->group(QLatin1String("Notification Messages")).deleteEntry(QLatin1String("DeleteInvestment"));
     }
   }
@@ -4256,7 +4256,7 @@ void KMyMoneyApp::slotPayeeNew(const QString& newnameBase, QString& id)
       // we should not keep the 'no' setting because that can confuse people like
       // I have seen in some usability tests. So we just delete it right away.
       KSharedConfigPtr kconfig = KGlobal::config();
-      if(kconfig) {
+      if (kconfig) {
         kconfig->group(QLatin1String("Notification Messages")).deleteEntry(QLatin1String("NewPayee"));
       }
     }

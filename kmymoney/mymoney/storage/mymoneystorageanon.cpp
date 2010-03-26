@@ -163,7 +163,7 @@ void MyMoneyStorageANON::fakeTransaction(MyMoneyTransaction& tx)
     s.setNumber(hideString(s.number()));
 
     // obfuscate a possibly matched transaction as well
-    if(s.isMatched()) {
+    if (s.isMatched()) {
       MyMoneyTransaction t = s.matchedTransaction();
       fakeTransaction(t);
       s.removeMatch();

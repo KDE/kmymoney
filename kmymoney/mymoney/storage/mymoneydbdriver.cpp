@@ -31,88 +31,105 @@
 // It is only necessary to implement the functions that deviate from the
 // default of the base type
 
-class MyMoneyDb2Driver : public MyMoneyDbDriver {
-  public:
-    MyMoneyDb2Driver()
-    { m_dbType = Db2; }
+class MyMoneyDb2Driver : public MyMoneyDbDriver
+{
+public:
+  MyMoneyDb2Driver() {
+    m_dbType = Db2;
+  }
 
-    virtual const QString textString(const MyMoneyDbTextColumn& c) const;
+  virtual const QString textString(const MyMoneyDbTextColumn& c) const;
 };
 
-class MyMoneyInterbaseDriver : public MyMoneyDbDriver {
-  public:
-    MyMoneyInterbaseDriver()
-    { m_dbType = Interbase; }
+class MyMoneyInterbaseDriver : public MyMoneyDbDriver
+{
+public:
+  MyMoneyInterbaseDriver() {
+    m_dbType = Interbase;
+  }
 };
 
-class MyMoneyMysqlDriver : public MyMoneyDbDriver {
-  public:
-    MyMoneyMysqlDriver()
-    { m_dbType = Mysql; }
+class MyMoneyMysqlDriver : public MyMoneyDbDriver
+{
+public:
+  MyMoneyMysqlDriver() {
+    m_dbType = Mysql;
+  }
 
-    virtual bool isTested() const;
-    virtual bool canAutocreate() const;
-    virtual const QString defaultDbName() const;
-    virtual const QString createDbString(const QString& name) const;
-    virtual const QString dropPrimaryKeyString(const QString& name) const;
-    virtual const QString modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const;
-    virtual const QString intString(const MyMoneyDbIntColumn& c) const;
-    virtual const QString timestampString(const MyMoneyDbDatetimeColumn& c) const;
+  virtual bool isTested() const;
+  virtual bool canAutocreate() const;
+  virtual const QString defaultDbName() const;
+  virtual const QString createDbString(const QString& name) const;
+  virtual const QString dropPrimaryKeyString(const QString& name) const;
+  virtual const QString modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const;
+  virtual const QString intString(const MyMoneyDbIntColumn& c) const;
+  virtual const QString timestampString(const MyMoneyDbDatetimeColumn& c) const;
 };
 
-class MyMoneyOracleDriver : public MyMoneyDbDriver {
-  public:
-    MyMoneyOracleDriver()
-    { m_dbType = Oracle; }
+class MyMoneyOracleDriver : public MyMoneyDbDriver
+{
+public:
+  MyMoneyOracleDriver() {
+    m_dbType = Oracle;
+  }
 
-    virtual const QString dropPrimaryKeyString(const QString& name) const;
-    virtual const QString modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const;
-    virtual const QString intString(const MyMoneyDbIntColumn& c) const;
-    virtual const QString textString(const MyMoneyDbTextColumn& c) const;
+  virtual const QString dropPrimaryKeyString(const QString& name) const;
+  virtual const QString modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const;
+  virtual const QString intString(const MyMoneyDbIntColumn& c) const;
+  virtual const QString textString(const MyMoneyDbTextColumn& c) const;
 };
 
-class MyMoneyODBCDriver : public MyMoneyDbDriver {
-  public:
-    MyMoneyODBCDriver()
-    { m_dbType = ODBC; }
+class MyMoneyODBCDriver : public MyMoneyDbDriver
+{
+public:
+  MyMoneyODBCDriver() {
+    m_dbType = ODBC;
+  }
 
-    virtual const QString timestampString(const MyMoneyDbDatetimeColumn& c) const;
+  virtual const QString timestampString(const MyMoneyDbDatetimeColumn& c) const;
 };
 
-class MyMoneyPostgresqlDriver : public MyMoneyDbDriver {
-  public:
-    MyMoneyPostgresqlDriver()
-    { m_dbType = Postgresql; }
+class MyMoneyPostgresqlDriver : public MyMoneyDbDriver
+{
+public:
+  MyMoneyPostgresqlDriver() {
+    m_dbType = Postgresql;
+  }
 
-    virtual bool isTested() const;
-    virtual bool canAutocreate() const;
-    virtual const QString defaultDbName() const;
-    virtual const QString createDbString(const QString& name) const;
-    virtual const QString dropPrimaryKeyString(const QString& name) const;
-    virtual const QString modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const;
-    virtual const QString intString(const MyMoneyDbIntColumn& c) const;
-    virtual const QString textString(const MyMoneyDbTextColumn& c) const;
+  virtual bool isTested() const;
+  virtual bool canAutocreate() const;
+  virtual const QString defaultDbName() const;
+  virtual const QString createDbString(const QString& name) const;
+  virtual const QString dropPrimaryKeyString(const QString& name) const;
+  virtual const QString modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const;
+  virtual const QString intString(const MyMoneyDbIntColumn& c) const;
+  virtual const QString textString(const MyMoneyDbTextColumn& c) const;
 };
 
-class MyMoneySybaseDriver : public MyMoneyDbDriver {
-  public:
-    MyMoneySybaseDriver()
-    { m_dbType = Sybase; }
+class MyMoneySybaseDriver : public MyMoneyDbDriver
+{
+public:
+  MyMoneySybaseDriver() {
+    m_dbType = Sybase;
+  }
 };
 
-class MyMoneySqlite3Driver : public MyMoneyDbDriver {
-  public:
-    MyMoneySqlite3Driver()
-    { m_dbType = Sqlite3; }
+class MyMoneySqlite3Driver : public MyMoneyDbDriver
+{
+public:
+  MyMoneySqlite3Driver() {
+    m_dbType = Sqlite3;
+  }
 
-    virtual bool isTested() const;
-    virtual const QString forUpdateString() const;
-    virtual const QString intString(const MyMoneyDbIntColumn& c) const;
+  virtual bool isTested() const;
+  virtual const QString forUpdateString() const;
+  virtual const QString intString(const MyMoneyDbIntColumn& c) const;
 };
 
 //********************* The driver map *********************
 // This function is only used by the GUI types at the moment
-const QMap<QString, QString> MyMoneyDbDriver::driverMap() {
+const QMap<QString, QString> MyMoneyDbDriver::driverMap()
+{
   QMap<QString, QString> map;
 
   map["QDB2"] = QString("IBM DB2");
@@ -128,7 +145,8 @@ const QMap<QString, QString> MyMoneyDbDriver::driverMap() {
 }
 
 //********************* The factory *********************
-KSharedPtr<MyMoneyDbDriver> MyMoneyDbDriver::create(const QString& type) {
+KSharedPtr<MyMoneyDbDriver> MyMoneyDbDriver::create(const QString& type)
+{
   if (type == "QDB2")
     return KSharedPtr<MyMoneyDbDriver> (new MyMoneyDb2Driver());
   else if (type == "QIBASE")
@@ -159,65 +177,78 @@ MyMoneyDbDriver::~MyMoneyDbDriver()
 //*******************************************************
 // By default, claim that the driver is not tested
 // For Mysql, Pgsql, and SQLite, return true.
-bool MyMoneyDbDriver::isTested() const {
+bool MyMoneyDbDriver::isTested() const
+{
   return false;
 }
 
-bool MyMoneyMysqlDriver::isTested() const {
+bool MyMoneyMysqlDriver::isTested() const
+{
   return true;
 }
 
-bool MyMoneyPostgresqlDriver::isTested() const {
+bool MyMoneyPostgresqlDriver::isTested() const
+{
   return true;
 }
 
-bool MyMoneySqlite3Driver::isTested() const {
+bool MyMoneySqlite3Driver::isTested() const
+{
   return true;
 }
 
 //*******************************************************
 // By default, claim that the database cannot be created
 // For Mysql and Pgsql, return true.
-bool MyMoneyDbDriver::canAutocreate() const {
+bool MyMoneyDbDriver::canAutocreate() const
+{
   return false;
 }
 
-bool MyMoneyMysqlDriver::canAutocreate() const {
+bool MyMoneyMysqlDriver::canAutocreate() const
+{
   return true;
 }
 
-bool MyMoneyPostgresqlDriver::canAutocreate() const {
+bool MyMoneyPostgresqlDriver::canAutocreate() const
+{
   return true;
 }
 
 //*******************************************************
 // By default, there is no default name
-const QString MyMoneyDbDriver::defaultDbName() const {
+const QString MyMoneyDbDriver::defaultDbName() const
+{
   return "";
 }
 
 // The default db for Mysql is "mysql"
-const QString MyMoneyMysqlDriver::defaultDbName() const {
+const QString MyMoneyMysqlDriver::defaultDbName() const
+{
   return "mysql";
 }
 
 // The default db for Postgres is "template1"
-const QString MyMoneyPostgresqlDriver::defaultDbName() const {
+const QString MyMoneyPostgresqlDriver::defaultDbName() const
+{
   return "template1";
 }
 
 //*******************************************************
 // By default, just attempt to create the database
 // Mysql and Postgres need the character set specified.
-const QString MyMoneyDbDriver::createDbString(const QString& name) const {
+const QString MyMoneyDbDriver::createDbString(const QString& name) const
+{
   return QString("CREATE DATABASE %1").arg(name);
 }
 
-const QString MyMoneyMysqlDriver::createDbString(const QString& name) const {
+const QString MyMoneyMysqlDriver::createDbString(const QString& name) const
+{
   return MyMoneyDbDriver::createDbString(name) + " CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci'";
 }
 
-const QString MyMoneyPostgresqlDriver:: createDbString(const QString& name) const {
+const QString MyMoneyPostgresqlDriver:: createDbString(const QString& name) const
+{
   return MyMoneyDbDriver::createDbString(name) + " WITH ENCODING='UTF8'";
 }
 
@@ -248,7 +279,8 @@ const QString MyMoneyPostgresqlDriver::dropPrimaryKeyString(const QString& name)
 //*******************************************************
 // There is no standard for modifying a column
 // If it is supported, it will have to be implemented for each DBMS
-const QString MyMoneyDbDriver::modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const {
+const QString MyMoneyDbDriver::modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const
+{
 
   Q_UNUSED(tableName);
   Q_UNUSED(columnName);
@@ -257,93 +289,73 @@ const QString MyMoneyDbDriver::modifyColumnString(const QString& tableName, cons
   return "";
 }
 
-const QString MyMoneyMysqlDriver::modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const {
+const QString MyMoneyMysqlDriver::modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const
+{
   return QString("ALTER TABLE %1 CHANGE %2 %3")
-    .arg(tableName)
-    .arg(columnName)
-    .arg(newDef.generateDDL(KSharedPtr<MyMoneyDbDriver>(const_cast<MyMoneyMysqlDriver*>(this))));
+         .arg(tableName)
+         .arg(columnName)
+         .arg(newDef.generateDDL(KSharedPtr<MyMoneyDbDriver>(const_cast<MyMoneyMysqlDriver*>(this))));
 }
 
-const QString MyMoneyPostgresqlDriver::modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const {
+const QString MyMoneyPostgresqlDriver::modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const
+{
   return QString("ALTER TABLE %1 ALTER COLUMN %2 TYPE %3")
-    .arg(tableName)
-    .arg(columnName)
-    .arg(newDef.generateDDL(KSharedPtr<MyMoneyDbDriver>(const_cast<MyMoneyPostgresqlDriver*>(this))));
+         .arg(tableName)
+         .arg(columnName)
+         .arg(newDef.generateDDL(KSharedPtr<MyMoneyDbDriver>(const_cast<MyMoneyPostgresqlDriver*>(this))));
 }
 
-const QString MyMoneyOracleDriver::modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const {
+const QString MyMoneyOracleDriver::modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const
+{
   return QString("ALTER TABLE %1 MODIFY %2 %3")
-    .arg(tableName)
-    .arg(columnName)
-    .arg(newDef.generateDDL(KSharedPtr<MyMoneyDbDriver>(const_cast<MyMoneyOracleDriver*>(this))));
+         .arg(tableName)
+         .arg(columnName)
+         .arg(newDef.generateDDL(KSharedPtr<MyMoneyDbDriver>(const_cast<MyMoneyOracleDriver*>(this))));
 }
 
 //*******************************************************
 // Define the integer column types in terms of the standard
 // Each DBMS typically has its own variation of this
-const QString MyMoneyDbDriver::intString(const MyMoneyDbIntColumn& c) const {
+const QString MyMoneyDbDriver::intString(const MyMoneyDbIntColumn& c) const
+{
   QString qs = c.name();
 
   switch (c.type()) {
-    case MyMoneyDbIntColumn::TINY:
-    case MyMoneyDbIntColumn::SMALL:
-      qs += " smallint";
-      break;
-    case MyMoneyDbIntColumn::BIG:
-      qs += " bigint";
-      break;
-    case MyMoneyDbIntColumn::MEDIUM:
-    default:
-      qs += " int";
-      break;
+  case MyMoneyDbIntColumn::TINY:
+  case MyMoneyDbIntColumn::SMALL:
+    qs += " smallint";
+    break;
+  case MyMoneyDbIntColumn::BIG:
+    qs += " bigint";
+    break;
+  case MyMoneyDbIntColumn::MEDIUM:
+  default:
+    qs += " int";
+    break;
   }
 
   if (c.isNotNull()) qs += " NOT NULL";
   return qs;
 }
 
-const QString MyMoneyMysqlDriver::intString(const MyMoneyDbIntColumn& c) const {
+const QString MyMoneyMysqlDriver::intString(const MyMoneyDbIntColumn& c) const
+{
   QString qs = c.name();
 
   switch (c.type()) {
-    case MyMoneyDbIntColumn::TINY:
-      qs += " tinyint";
-      break;
-    case MyMoneyDbIntColumn::SMALL:
-      qs += " smallint";
-      break;
-    case MyMoneyDbIntColumn::BIG:
-      qs += " bigint";
-      break;
-    case MyMoneyDbIntColumn::MEDIUM:
-    default:
-      qs += " int";
-      break;
-  }
-
-  if (! c.isSigned()) qs += " unsigned";
-
-  if (c.isNotNull()) qs += " NOT NULL";
-  return qs;
-}
-
-const QString MyMoneySqlite3Driver::intString(const MyMoneyDbIntColumn& c) const {
-  QString qs = c.name();
-
-  switch (c.type()) {
-    case MyMoneyDbIntColumn::TINY:
-      qs += " tinyint";
-      break;
-    case MyMoneyDbIntColumn::SMALL:
-      qs += " smallint";
-      break;
-    case MyMoneyDbIntColumn::BIG:
-      qs += " bigint";
-      break;
-    case MyMoneyDbIntColumn::MEDIUM:
-    default:
-      qs += " int";
-      break;
+  case MyMoneyDbIntColumn::TINY:
+    qs += " tinyint";
+    break;
+  case MyMoneyDbIntColumn::SMALL:
+    qs += " smallint";
+    break;
+  case MyMoneyDbIntColumn::BIG:
+    qs += " bigint";
+    break;
+  case MyMoneyDbIntColumn::MEDIUM:
+  default:
+    qs += " int";
+    break;
   }
 
   if (! c.isSigned()) qs += " unsigned";
@@ -352,21 +364,48 @@ const QString MyMoneySqlite3Driver::intString(const MyMoneyDbIntColumn& c) const
   return qs;
 }
 
-const QString MyMoneyPostgresqlDriver::intString(const MyMoneyDbIntColumn& c) const {
+const QString MyMoneySqlite3Driver::intString(const MyMoneyDbIntColumn& c) const
+{
   QString qs = c.name();
 
   switch (c.type()) {
-    case MyMoneyDbIntColumn::TINY:
-    case MyMoneyDbIntColumn::SMALL:
-      qs += " int2";
-      break;
-    case MyMoneyDbIntColumn::BIG:
-      qs += " int8";
-      break;
-    case MyMoneyDbIntColumn::MEDIUM:
-    default:
-      qs += " int4";
-      break;
+  case MyMoneyDbIntColumn::TINY:
+    qs += " tinyint";
+    break;
+  case MyMoneyDbIntColumn::SMALL:
+    qs += " smallint";
+    break;
+  case MyMoneyDbIntColumn::BIG:
+    qs += " bigint";
+    break;
+  case MyMoneyDbIntColumn::MEDIUM:
+  default:
+    qs += " int";
+    break;
+  }
+
+  if (! c.isSigned()) qs += " unsigned";
+
+  if (c.isNotNull()) qs += " NOT NULL";
+  return qs;
+}
+
+const QString MyMoneyPostgresqlDriver::intString(const MyMoneyDbIntColumn& c) const
+{
+  QString qs = c.name();
+
+  switch (c.type()) {
+  case MyMoneyDbIntColumn::TINY:
+  case MyMoneyDbIntColumn::SMALL:
+    qs += " int2";
+    break;
+  case MyMoneyDbIntColumn::BIG:
+    qs += " int8";
+    break;
+  case MyMoneyDbIntColumn::MEDIUM:
+  default:
+    qs += " int4";
+    break;
   }
 
   if (c.isNotNull()) qs += " NOT NULL";
@@ -376,23 +415,24 @@ const QString MyMoneyPostgresqlDriver::intString(const MyMoneyDbIntColumn& c) co
   return qs;
 }
 
-const QString MyMoneyOracleDriver::intString(const MyMoneyDbIntColumn& c) const {
+const QString MyMoneyOracleDriver::intString(const MyMoneyDbIntColumn& c) const
+{
   QString qs = c.name();
 
   switch (c.type()) {
-    case MyMoneyDbIntColumn::TINY:
-      qs += " number(3)";
-      break;
-    case MyMoneyDbIntColumn::SMALL:
-      qs += " number(5)";
-      break;
-    case MyMoneyDbIntColumn::BIG:
-      qs += " number(20)";
-      break;
-    case MyMoneyDbIntColumn::MEDIUM:
-    default:
-      qs += " number(10)";
-      break;
+  case MyMoneyDbIntColumn::TINY:
+    qs += " number(3)";
+    break;
+  case MyMoneyDbIntColumn::SMALL:
+    qs += " number(5)";
+    break;
+  case MyMoneyDbIntColumn::BIG:
+    qs += " number(20)";
+    break;
+  case MyMoneyDbIntColumn::MEDIUM:
+  default:
+    qs += " number(10)";
+    break;
   }
 
   if (c.isNotNull()) qs += " NOT NULL";
@@ -410,19 +450,19 @@ const QString MyMoneyDbDriver::textString(const MyMoneyDbTextColumn& c) const
   QString qs = c.name();
 
   switch (c.type()) {
-    case MyMoneyDbTextColumn::TINY:
-      qs+=" tinytext";
-      break;
-    case MyMoneyDbTextColumn::MEDIUM:
-      qs+=" mediumtext";
-      break;
-    case MyMoneyDbTextColumn::LONG:
-      qs+=" longtext";
-      break;
-    case MyMoneyDbTextColumn::NORMAL:
-    default:
-      qs+=" text";
-      break;
+  case MyMoneyDbTextColumn::TINY:
+    qs += " tinytext";
+    break;
+  case MyMoneyDbTextColumn::MEDIUM:
+    qs += " mediumtext";
+    break;
+  case MyMoneyDbTextColumn::LONG:
+    qs += " longtext";
+    break;
+  case MyMoneyDbTextColumn::NORMAL:
+  default:
+    qs += " text";
+    break;
   }
 
   if (c.isNotNull()) qs += " NOT NULL";
@@ -435,19 +475,19 @@ const QString MyMoneyDb2Driver::textString(const MyMoneyDbTextColumn& c) const
   QString qs = c.name();
 
   switch (c.type()) {
-    case MyMoneyDbTextColumn::TINY:
-      qs += " varchar(255)";
-      break;
-    case MyMoneyDbTextColumn::MEDIUM:
-      qs += " clob(16M)";
-      break;
-    case MyMoneyDbTextColumn::LONG:
-      qs += " clob(2G)";
-      break;
-    case MyMoneyDbTextColumn::NORMAL:
-    default:
-      qs += " clob(64K)";
-      break;
+  case MyMoneyDbTextColumn::TINY:
+    qs += " varchar(255)";
+    break;
+  case MyMoneyDbTextColumn::MEDIUM:
+    qs += " clob(16M)";
+    break;
+  case MyMoneyDbTextColumn::LONG:
+    qs += " clob(2G)";
+    break;
+  case MyMoneyDbTextColumn::NORMAL:
+  default:
+    qs += " clob(64K)";
+    break;
   }
 
   if (c.isNotNull()) qs += " NOT NULL";
@@ -459,15 +499,15 @@ const QString MyMoneyOracleDriver::textString(const MyMoneyDbTextColumn& c) cons
 {
   QString qs = c.name();
   switch (c.type()) {
-    case MyMoneyDbTextColumn::TINY:
-      qs += " varchar2(255)";
-      break;
-    case MyMoneyDbTextColumn::MEDIUM:
-    case MyMoneyDbTextColumn::LONG:
-    case MyMoneyDbTextColumn::NORMAL:
-    default:
-      qs += " clob";
-      break;
+  case MyMoneyDbTextColumn::TINY:
+    qs += " varchar2(255)";
+    break;
+  case MyMoneyDbTextColumn::MEDIUM:
+  case MyMoneyDbTextColumn::LONG:
+  case MyMoneyDbTextColumn::NORMAL:
+  default:
+    qs += " clob";
+    break;
   }
 
   if (c.isNotNull()) qs += " NOT NULL";
@@ -487,27 +527,30 @@ const QString MyMoneyPostgresqlDriver::textString(const MyMoneyDbTextColumn& c) 
 //*******************************************************
 // Define the timestamp column types in terms of the standard
 // Each DBMS typically has its own variation of this
-const QString MyMoneyDbDriver::timestampString(const MyMoneyDbDatetimeColumn& c) const {
+const QString MyMoneyDbDriver::timestampString(const MyMoneyDbDatetimeColumn& c) const
+{
   QString qs = QString("%1 timestamp").arg(c.name());
 
-  if (c.isNotNull()) qs+= " NOT NULL";
+  if (c.isNotNull()) qs += " NOT NULL";
 
   return qs;
 }
 
 // Mysql has a timestamp type, but datetime is closer to the standard
-const QString MyMoneyMysqlDriver::timestampString(const MyMoneyDbDatetimeColumn& c) const {
+const QString MyMoneyMysqlDriver::timestampString(const MyMoneyDbDatetimeColumn& c) const
+{
   QString qs = QString("%1 datetime").arg(c.name());
 
-  if (c.isNotNull()) qs+= " NOT NULL";
+  if (c.isNotNull()) qs += " NOT NULL";
 
   return qs;
 }
 
-const QString MyMoneyODBCDriver::timestampString(const MyMoneyDbDatetimeColumn& c) const {
+const QString MyMoneyODBCDriver::timestampString(const MyMoneyDbDatetimeColumn& c) const
+{
   QString qs = QString("%1 datetime").arg(c.name());
 
-  if (c.isNotNull()) qs+= " NOT NULL";
+  if (c.isNotNull()) qs += " NOT NULL";
 
   return qs;
 }
@@ -515,11 +558,13 @@ const QString MyMoneyODBCDriver::timestampString(const MyMoneyDbDatetimeColumn& 
 //***********************************************
 // Define the FOR UPDATE string
 // So far, only SQLite requires special handling.
-const QString MyMoneyDbDriver::forUpdateString() const {
+const QString MyMoneyDbDriver::forUpdateString() const
+{
   return " FOR UPDATE";
 }
 
-const QString MyMoneySqlite3Driver::forUpdateString() const {
+const QString MyMoneySqlite3Driver::forUpdateString() const
+{
   return "";
 }
 
