@@ -721,7 +721,7 @@ const MyMoneyMoney MyMoneyMoney::convert(const signed64 _denom, const roundingMe
         qWarning("MyMoneyMoney: have remainder \"%Ld/%Ld\"->convert(%Ld, %d)",
                  m_num, m_denom, _denom, how);
 #else
-        qWarning("MyMoneyMoney: have remainder \"%ld/%ld\"->convert(%ld, %d)",
+        qWarning("MyMoneyMoney: have remainder \"%Ld/%Ld\"->convert(%Ld, %d)",
                  m_num, m_denom, _denom, how);
 #endif
         break;
