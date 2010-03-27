@@ -84,6 +84,9 @@ int main(int argc, char *argv[])
                        I18N_NOOP("http://kmymoney2.sourceforge.net/")/*,
                                                       "kmymoney-devel@kde.org")*/);
 
+  //Temporarily, the product name to report bugs in BKO is different than the application name
+  aboutData.setProductName("kmymoney4");
+
   aboutData.addAuthor(ki18n("Michael Edwardes."), ki18n("Initial idea, much initial source code, Project admin"), "mte@users.sourceforge.net");
   aboutData.addAuthor(ki18n("Thomas Baumgart"), ki18n("Core engine, Release Manager, Project admin"), "ipwizard@users.sourceforge.net");
   aboutData.addAuthor(ki18n("Ace Jones"), ki18n("Reporting logic, OFX Import"), "acejones@users.sourceforge.net");
