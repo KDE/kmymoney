@@ -1410,9 +1410,9 @@ const QStringList MyMoneyFile::consistencyCheck(void)
             if ((*it_b).id() == parent.id()) {
               if (problemAccount != (*it_a).name()) {
                 problemAccount = (*it_a).name();
-                rc << i18n("* Problem with account '%1'").arg(problemAccount);
-                rc << i18n("  * Loop detected between this account and account '%1'.").arg((*it_b).name());
-                rc << i18n("    Reparenting account '%2' to top level account '%1'.").arg(toplevel.name()).arg((*it_a).name());
+                rc << i18n("* Problem with account '%1'", problemAccount);
+                rc << i18n("  * Loop detected between this account and account '%1'.", (*it_b).name());
+                rc << i18n("    Reparenting account '%2' to top level account '%1'.", toplevel.name(), (*it_a).name());
                 (*it_a).setParentAccountId(toplevel.id());
                 if (accountRebuild.contains(toplevel.id()) == 0)
                   accountRebuild << toplevel.id();

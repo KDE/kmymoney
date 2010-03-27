@@ -57,8 +57,8 @@
 #define INT64_MIN LLONG_MIN
 #endif
 
-typedef int64_t signed64;
-typedef uint64_t unsigned64;
+typedef qint64 signed64;
+typedef quint64 unsigned64;
 
 class MyMoneyAccount;
 class MyMoneySecurity;
