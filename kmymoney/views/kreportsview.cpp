@@ -231,7 +231,10 @@ QString KReportsView::KReportTab::createTable(const QString& links)
   QString header = QString("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\">\n") +
                    QString("<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"%1\">").arg(filename);
 
-  header += "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />";
+  // get users character set encoding
+  const QByteArray encoding = KGlobal::locale()->encoding();
+
+  header += "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=" + encoding + "\" />";
   header += KMyMoneyUtils::variableCSS();
 
   header += "</head><body>\n";
