@@ -99,6 +99,7 @@ public:
   // construction
   MyMoneyMoney();
   explicit MyMoneyMoney(const int iAmount, const signed64 denom = 100);
+  explicit MyMoneyMoney(const long int iAmount, const signed64 denom = 100);
   explicit MyMoneyMoney(const QString& pszAmount);
   explicit MyMoneyMoney(const signed64 Amount, const signed64 denom = 100);
   explicit MyMoneyMoney(const double dAmount, const signed64 denom = 100);
@@ -337,6 +338,24 @@ inline MyMoneyMoney::MyMoneyMoney(const long double dAmount, const signed64 deno
 //
 ////////////////////////////////////////////////////////////////////////////////
 inline MyMoneyMoney::MyMoneyMoney(const int iAmount, const signed64 denom)
+{
+  if (!denom)
+    throw new MYMONEYEXCEPTION("Denominator 0 not allowed!");
+
+  m_num = static_cast<signed64>(iAmount);
+  m_denom = denom;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+//      Name: MyMoneyMoney
+//   Purpose: Constructor - constructs object from an amount in a long integer value
+//   Returns: None
+//    Throws: Nothing.
+// Arguments: iAmount - integer object containing amount
+//            denom   - denominator of the object
+//
+////////////////////////////////////////////////////////////////////////////////
+inline MyMoneyMoney::MyMoneyMoney(const long int iAmount, const signed64 denom)
 {
   if (!denom)
     throw new MYMONEYEXCEPTION("Denominator 0 not allowed!");
