@@ -482,7 +482,7 @@ void KMyMoneyUtils::previouslyUsedCategories(const QString& investmentAccount, Q
 
 KXmlGuiWindow* KMyMoneyUtils::mainWindow()
 {
-  foreach(QWidget *widget, QApplication::topLevelWidgets()) {
+  foreach (QWidget *widget, QApplication::topLevelWidgets()) {
     KXmlGuiWindow* result = dynamic_cast<KXmlGuiWindow*>(widget);
     if (result)
       return result;

@@ -51,7 +51,7 @@ void KSettingsSchedules::loadList(void)
   QStringList countries = HolidayRegion::locations();
   QStringList regions;
 
-  foreach(const QString &country, countries) {
+  foreach (const QString &country, countries) {
     QString file = KStandardDirs::locate("locale",
                                          "l10n/" + country + "/entry.desktop");
     QString region;

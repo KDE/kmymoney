@@ -26,10 +26,25 @@ for path in $PATH; do
         ;;
     esac
 
+    # run astyle with options on the set of files
     find kmymoney libkgpgfile -type f  \( -name \*.c -or -name \*.cpp -or -name \*.h \) -exec $path/astyle --indent=spaces=2 --brackets=linux \
       --indent-labels --${PAD} --${UNPAD} \
       --one-line=keep-statements --convert-tabs \
       --indent-preprocessor {} \;
+
+    # process the same set of files to replace "foreach(" with "foreach ("
+    find kmymoney libkgpgfile -type f  \( -name \*.c -or -name \*.cpp -or -name \*.h \) | while read a; do
+      sed -e "s/foreach(/foreach (/" $a > $a.tmp
+      diff $a $a.tmp > /dev/null
+      if test $? -ne 0; then
+        echo "formatted  "$a
+        mv $a.tmp $a
+      else
+        echo "unchanged* "$a
+        rm $a.tmp
+      fi
+    done
+
     exit $?
   fi
 done

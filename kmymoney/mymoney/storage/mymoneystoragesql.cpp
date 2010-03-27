@@ -798,7 +798,7 @@ void MyMoneyStorageSql::createTable(const MyMoneyDbTable& t)
 // create the tables
   QStringList ql = t.generateCreateSQL(m_driver).split('\n', QString::SkipEmptyParts);
   MyMoneySqlQuery q(this);
-  foreach(const QString& i, ql) {
+  foreach (const QString& i, ql) {
     if (!q.exec(i)) throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("creating table/index %1").arg(t.name())));
   }
 }
@@ -1005,7 +1005,7 @@ void MyMoneyStorageSql::writeInstitutions()
   q.prepare(m_db.m_tables["kmmInstitutions"].updateString());
   q2.prepare(m_db.m_tables["kmmInstitutions"].insertString());
   signalProgress(0, list.count(), "Writing Institutions...");
-  foreach(const MyMoneyInstitution& i, list) {
+  foreach (const MyMoneyInstitution& i, list) {
     if (dbList.contains(i.id())) {
       dbList.removeAll(i.id());
       updateList << i;
@@ -1023,7 +1023,7 @@ void MyMoneyStorageSql::writeInstitutions()
   if (!dbList.isEmpty()) {
     QVariantList deleteList;
     // qCopy segfaults here, so do it with a hand-rolled loop
-    foreach(const QString& it, dbList) {
+    foreach (const QString& it, dbList) {
       deleteList << it;
     }
     q.prepare("DELETE FROM kmmInstitutions WHERE id = :id");
@@ -1092,7 +1092,7 @@ void MyMoneyStorageSql::writeInstitutionList(const QList<MyMoneyInstitution>& iL
 
   unsigned long hiId = m_hiIdInstitutions;
 
-  foreach(const MyMoneyInstitution& i, iList) {
+  foreach (const MyMoneyInstitution& i, iList) {
     idList << i.id();
     nameList << i.name();
     managerList << i.manager();
@@ -1137,7 +1137,7 @@ void MyMoneyStorageSql::writePayees()
   MyMoneySqlQuery q2(this);
   q.prepare(m_db.m_tables["kmmPayees"].updateString());
   q2.prepare(m_db.m_tables["kmmPayees"].insertString());
-  foreach(const MyMoneyPayee& it, list) {
+  foreach (const MyMoneyPayee& it, list) {
     if (dbList.contains(it.id())) {
       dbList.removeAll(it.id());
       writePayee(it, q);
@@ -1150,7 +1150,7 @@ void MyMoneyStorageSql::writePayees()
   if (!dbList.isEmpty()) {
     QVariantList deleteList;
     // qCopy segfaults here, so do it with a hand-rolled loop
-    foreach(const QString& it, dbList) {
+    foreach (const QString& it, dbList) {
       deleteList << it;
     }
     q.prepare(m_db.m_tables["kmmPayees"].deleteString());
@@ -1307,7 +1307,7 @@ void MyMoneyStorageSql::writeAccounts()
   QList<MyMoneyAccount> updateList;
   QList<MyMoneyAccount> insertList;
   // Update the accounts that exist; insert the ones that do not.
-  foreach(const MyMoneyAccount& it, list) {
+  foreach (const MyMoneyAccount& it, list) {
     m_transactionCountMap[it.id()] = m_storagePtr->transactionCount(it.id());
     if (dbList.contains(it.id())) {
       dbList.removeAll(it.id());
@@ -1326,7 +1326,7 @@ void MyMoneyStorageSql::writeAccounts()
     QVariantList kvpList;
 
     q.prepare("DELETE FROM kmmAccounts WHERE id = :id");
-    foreach(const QString& it, dbList) {
+    foreach (const QString& it, dbList) {
       if (!m_storagePtr->isStandardAccount(it)) {
         kvpList << it;
       }
@@ -1367,7 +1367,7 @@ void MyMoneyStorageSql::modifyAccountList(const QList<MyMoneyAccount>& acc)
   MyMoneySqlQuery q(this);
   q.prepare(m_db.m_tables["kmmAccounts"].updateString());
   QVariantList kvpList;
-  foreach(const MyMoneyAccount& a, acc) {
+  foreach (const MyMoneyAccount& a, acc) {
     kvpList << a.id();
   }
   deleteKeyValuePairs("ACCOUNT", kvpList);
@@ -1419,7 +1419,7 @@ void MyMoneyStorageSql::writeAccountList(const QList<MyMoneyAccount>& accList, M
 
   unsigned long hiId = m_hiIdAccounts;
 
-  foreach(const MyMoneyAccount& a, accList) {
+  foreach (const MyMoneyAccount& a, accList) {
     idList << a.id();
     institutionIdList << a.institutionId();
     parentIdList << a.parentAccountId();
@@ -1512,7 +1512,7 @@ void MyMoneyStorageSql::writeTransactions()
   MyMoneySqlQuery q2(this);
   q.prepare(m_db.m_tables["kmmTransactions"].updateString());
   q2.prepare(m_db.m_tables["kmmTransactions"].insertString());
-  foreach(const MyMoneyTransaction& it, list) {
+  foreach (const MyMoneyTransaction& it, list) {
     if (dbList.contains(it.id())) {
       dbList.removeAll(it.id());
       writeTransaction(it.id(), it, q, "N");
@@ -1523,7 +1523,7 @@ void MyMoneyStorageSql::writeTransactions()
   }
 
   if (!dbList.isEmpty()) {
-    foreach(const QString& it, dbList) {
+    foreach (const QString& it, dbList) {
       deleteTransaction(it);
     }
   }
@@ -1540,7 +1540,7 @@ void MyMoneyStorageSql::addTransaction(const MyMoneyTransaction& tx)
   ++m_transactions;
   QList<MyMoneyAccount> aList;
   // for each split account, update lastMod date, balance, txCount
-  foreach(const MyMoneySplit& it_s, tx.splits()) {
+  foreach (const MyMoneySplit& it_s, tx.splits()) {
     MyMoneyAccount acc = m_storagePtr->account(it_s.accountId());
     ++m_transactionCountMap[acc.id()];
     aList << acc;
@@ -1568,7 +1568,7 @@ void MyMoneyStorageSql::modifyTransaction(const MyMoneyTransaction& tx)
   writeTransaction(tx.id(), tx, q, "N");
   QList<MyMoneyAccount> aList;
   // for each split account, update lastMod date, balance, txCount
-  foreach(const MyMoneySplit& it_s, tx.splits()) {
+  foreach (const MyMoneySplit& it_s, tx.splits()) {
     MyMoneyAccount acc = m_storagePtr->account(it_s.accountId());
     ++m_transactionCountMap[acc.id()];
     aList << acc;
@@ -1588,7 +1588,7 @@ void MyMoneyStorageSql::removeTransaction(const MyMoneyTransaction& tx)
 
   QList<MyMoneyAccount> aList;
   // for each split account, update lastMod date, balance, txCount
-  foreach(const MyMoneySplit& it_s, tx.splits()) {
+  foreach (const MyMoneySplit& it_s, tx.splits()) {
     MyMoneyAccount acc = m_storagePtr->account(it_s.accountId());
     --m_transactionCountMap[acc.id()];
     aList << acc;
@@ -1692,7 +1692,7 @@ void MyMoneyStorageSql::writeSplits(const QString& txId, const QString& type, co
     QVariantList splitIdList;
     q.prepare("DELETE FROM kmmSplits WHERE transactionId = :txId AND splitId = :splitId");
     // qCopy segfaults here, so do it with a hand-rolled loop
-    foreach(int it, dbList) {
+    foreach (int it, dbList) {
       splitIdList << it;
     }
     q.bindValue(":txId", txIdList.toList());
@@ -1732,7 +1732,7 @@ void MyMoneyStorageSql::writeSplitList
   QList<QMap<QString, QString> > kvpPairsList;
 
   int i = 0;
-  foreach(const MyMoneySplit& s, splitList) {
+  foreach (const MyMoneySplit& s, splitList) {
     txIdList << txId;
     typeList << type;
     payeeIdList << s.payeeId();
@@ -1775,7 +1775,7 @@ void MyMoneyStorageSql::writeSplitList
   q.bindValue(":txType", typeList);
   QVariantList iList;
   // qCopy segfaults here, so do it with a hand-rolled loop
-  foreach(int it_s, splitIdList) {
+  foreach (int it_s, splitIdList) {
     iList << it_s;
   }
 
@@ -1816,7 +1816,7 @@ void MyMoneyStorageSql::writeSchedules()
   //TODO: find a way to prepare the queries outside of the loop.  writeSchedule()
   // modifies the query passed to it, so they have to be re-prepared every pass.
   signalProgress(0, list.count(), "Writing Schedules...");
-  foreach(const MyMoneySchedule& it, list) {
+  foreach (const MyMoneySchedule& it, list) {
     q.prepare(m_db.m_tables["kmmSchedules"].updateString());
     q2.prepare(m_db.m_tables["kmmSchedules"].insertString());
     bool insert = true;
@@ -1831,7 +1831,7 @@ void MyMoneyStorageSql::writeSchedules()
   }
 
   if (!dbList.isEmpty()) {
-    foreach(const QString& it, dbList) {
+    foreach (const QString& it, dbList) {
       deleteSchedule(it);
     }
   }
@@ -1919,7 +1919,7 @@ void MyMoneyStorageSql::writeSchedule(const MyMoneySchedule& sch, MyMoneySqlQuer
   if (!q.exec()) throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("deleting  Schedule Payment History")));
 
   q.prepare(m_db.m_tables["kmmSchedulePaymentHistory"].insertString());
-  foreach(const QDate& it, sch.recordedPayments()) {
+  foreach (const QDate& it, sch.recordedPayments()) {
     q.bindValue(":schedId", sch.id());
     q.bindValue(":payDate", it.toString(Qt::ISODate));
     if (!q.exec()) throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("writing Schedule Payment History")));
@@ -1957,7 +1957,7 @@ void MyMoneyStorageSql::writeSecurities()
   signalProgress(0, securityList.count(), "Writing Securities...");
   q.prepare(m_db.m_tables["kmmSecurities"].updateString());
   q2.prepare(m_db.m_tables["kmmSecurities"].insertString());
-  foreach(const MyMoneySecurity& it, securityList) {
+  foreach (const MyMoneySecurity& it, securityList) {
     if (dbList.contains(it.id())) {
       dbList.removeAll(it.id());
       writeSecurity(it, q);
@@ -1970,7 +1970,7 @@ void MyMoneyStorageSql::writeSecurities()
   if (!dbList.isEmpty()) {
     QVariantList idList;
     // qCopy segfaults here, so do it with a hand-rolled loop
-    foreach(const QString& it, dbList) {
+    foreach (const QString& it, dbList) {
       idList << it;
     }
 
@@ -2155,7 +2155,7 @@ void MyMoneyStorageSql::writeCurrencies()
   signalProgress(0, currencyList.count(), "Writing Currencies...");
   q.prepare(m_db.m_tables["kmmCurrencies"].updateString());
   q2.prepare(m_db.m_tables["kmmCurrencies"].insertString());
-  foreach(const MyMoneySecurity& it, currencyList) {
+  foreach (const MyMoneySecurity& it, currencyList) {
     if (dbList.contains(it.id())) {
       dbList.removeAll(it.id());
       writeCurrency(it, q);
@@ -2169,7 +2169,7 @@ void MyMoneyStorageSql::writeCurrencies()
     QVariantList isoCodeList;
     q.prepare("DELETE FROM kmmCurrencies WHERE ISOCode = :ISOCode");
     // qCopy segfaults here, so do it with a hand-rolled loop
-    foreach(const QString& it, dbList) {
+    foreach (const QString& it, dbList) {
       isoCodeList << it;
     }
 
@@ -2253,7 +2253,7 @@ void MyMoneyStorageSql::writeReports()
   signalProgress(0, list.count(), "Writing Reports...");
   q.prepare(m_db.m_tables["kmmReportConfig"].updateString());
   q2.prepare(m_db.m_tables["kmmReportConfig"].insertString());
-  foreach(const MyMoneyReport& it, list) {
+  foreach (const MyMoneyReport& it, list) {
     if (dbList.contains(it.id())) {
       dbList.removeAll(it.id());
       writeReport(it, q);
@@ -2267,7 +2267,7 @@ void MyMoneyStorageSql::writeReports()
     QVariantList idList;
     q.prepare("DELETE FROM kmmReportConfig WHERE id = :id");
     // qCopy segfaults here, so do it with a hand-rolled loop
-    foreach(const QString& it, dbList) {
+    foreach (const QString& it, dbList) {
       idList << it;
     }
 
@@ -2337,7 +2337,7 @@ void MyMoneyStorageSql::writeBudgets()
   signalProgress(0, list.count(), "Writing Budgets...");
   q.prepare(m_db.m_tables["kmmBudgetConfig"].updateString());
   q2.prepare(m_db.m_tables["kmmBudgetConfig"].insertString());
-  foreach(const MyMoneyBudget& it, list) {
+  foreach (const MyMoneyBudget& it, list) {
     if (dbList.contains(it.name())) {
       dbList.removeAll(it.name());
       writeBudget(it, q);
@@ -2351,7 +2351,7 @@ void MyMoneyStorageSql::writeBudgets()
     QVariantList idList;
     q.prepare("DELETE FROM kmmBudgetConfig WHERE id = :id");
     // qCopy segfaults here, so do it with a hand-rolled loop
-    foreach(const QString& it, dbList) {
+    foreach (const QString& it, dbList) {
       idList << it;
     }
 
@@ -2662,7 +2662,7 @@ const QMap<QString, MyMoneyInstitution> MyMoneyStorageSql::fetchInstitutions(con
     if (!sq.exec()) throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("reading Institution AccountList")));
     QStringList aList;
     while (sq.next()) aList.append(sq.value(0).toString());
-    foreach(const QString& it, aList)
+    foreach (const QString& it, aList)
     inst.addAccountId(it);
 
     iList[iid] = MyMoneyInstitution(iid, inst);
@@ -2715,7 +2715,7 @@ const QMap<QString, MyMoneyPayee> MyMoneyStorageSql::fetchPayees(const QStringLi
   } else {
     QString whereClause = " where (";
     QString itemConnector = "";
-    foreach(const QString& it, idList) {
+    foreach (const QString& it, idList) {
       whereClause.append(QString("%1id = '%2'").arg(itemConnector).arg(it));
       itemConnector = " or ";
     }
@@ -2945,7 +2945,7 @@ const QMap<QString, MyMoneyMoney> MyMoneyStorageSql::fetchBalance(const QStringL
   q.prepare(queryString);
 
   int i = 0;
-  foreach(const QString& bindVal, idList) {
+  foreach (const QString& bindVal, idList) {
     q.bindValue(QString(":id%1").arg(i), bindVal);
     ++i;
   }
@@ -3203,7 +3203,7 @@ const QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(con
     accountsOnlyFilter = false;
     QString itemConnector = "payeeId in (";
     QString payeesClause = "";
-    foreach(const QString& it, payees) {
+    foreach (const QString& it, payees) {
       payeesClause.append(QString("%1'%2'")
                           .arg(itemConnector).arg(it));
       itemConnector = ", ";
@@ -3220,7 +3220,7 @@ const QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(con
     splitFilterActive = true;
     QString itemConnector = "accountId in (";
     QString accountsClause = "";
-    foreach(const QString& it, accounts) {
+    foreach (const QString& it, accounts) {
 //      if (m_accountsLoaded.find(*it) == m_accountsLoaded.end()) {
       accountsClause.append(QString("%1 '%2'")
                             .arg(itemConnector).arg(it));
@@ -3240,7 +3240,7 @@ const QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(con
     splitFilterActive = true;
     QString itemConnector = " reconcileFlag IN (";
     QString statesClause = "";
-    foreach(int it, splitStates) {
+    foreach (int it, splitStates) {
       statesClause.append(QString(" %1 '%2'").arg(itemConnector)
                           .arg(splitState(MyMoneyTransactionFilter::stateOptionE(it))));
       itemConnector = ',';

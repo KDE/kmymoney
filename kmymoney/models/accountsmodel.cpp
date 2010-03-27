@@ -366,7 +366,7 @@ void AccountsModel::load()
 {
   // mark all rows as candidates for cleaning up
   QModelIndexList list = match(index(0, 0), Qt::DisplayRole, "*", -1, Qt::MatchFlags(Qt::MatchWildcard | Qt::MatchRecursive));
-  foreach(const QModelIndex &index, list) {
+  foreach (const QModelIndex &index, list) {
     setData(AccountsModel::index(index.row(), 0, index.parent()), true, CleanupRole);
   }
 
@@ -472,7 +472,7 @@ void AccountsModel::load()
   // run cleanup procedure
   list = match(index(0, 0), AccountsModel::CleanupRole, true, -1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchRecursive));
   QModelIndexList parentsOnlyList;
-  foreach(const QModelIndex &index, list) {
+  foreach (const QModelIndex &index, list) {
     bool hasParentInTheList = false;
     QModelIndex parent = index.parent();
     while (parent.isValid()) {
@@ -486,7 +486,7 @@ void AccountsModel::load()
       parentsOnlyList.append(index);
     }
   }
-  foreach(const QModelIndex &index, parentsOnlyList) {
+  foreach (const QModelIndex &index, parentsOnlyList) {
     removeRow(index.row(), index.parent());
   }
 
@@ -528,14 +528,14 @@ void AccountsModel::slotReconcileAccount(const MyMoneyAccount &account, const QD
     // first clear the flag of the old reconciliation account
     if (!d->m_reconciledAccount.id().isEmpty()) {
       QModelIndexList list = match(index(0, 0), AccountsModel::AccountIdRole, QVariant(d->m_reconciledAccount.id()), -1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
-      foreach(const QModelIndex &index, list) {
+      foreach (const QModelIndex &index, list) {
         setData(index, QVariant(QIcon(account.accountPixmap(false))), Qt::DecorationRole);
       }
     }
 
     // then set the reconciliation flag of the new reconciliation account
     QModelIndexList list = match(index(0, 0), AccountsModel::AccountIdRole, QVariant(account.id()), -1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
-    foreach(const QModelIndex &index, list) {
+    foreach (const QModelIndex &index, list) {
       setData(index, QVariant(QIcon(account.accountPixmap(true))), Qt::DecorationRole);
     }
     d->m_reconciledAccount = account;

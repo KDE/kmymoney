@@ -134,7 +134,7 @@ void PayeesModel::load()
 {
   // mark all rows as candidates for cleaning up
   QModelIndexList list = match(index(0, 0), Qt::DisplayRole, "*", -1, Qt::MatchFlags(Qt::MatchWildcard | Qt::MatchRecursive));
-  foreach(const QModelIndex &index, list) {
+  foreach (const QModelIndex &index, list) {
     setData(PayeesModel::index(index.row(), 0, index.parent()), true, CleanupRole);
   }
 

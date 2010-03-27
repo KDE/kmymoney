@@ -48,7 +48,7 @@ kMyMoneyScheduledCalendar::kMyMoneyScheduledCalendar(QWidget *parent)
   kpopupmenu->addAction(i18n("Deposits"), this, SLOT(slotSetViewDeposits()));
   kpopupmenu->addAction(i18n("Transfers"), this, SLOT(slotSetViewTransfers()));
 
-  foreach(QAction *a, kpopupmenu->actions()) {
+  foreach (QAction *a, kpopupmenu->actions()) {
     a->setCheckable(true);
     a->setChecked(true);
   }

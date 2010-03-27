@@ -287,7 +287,7 @@ bool MyMoneyTransactionFilter::match(const MyMoneyTransaction& transaction)
 
   QList<const MyMoneySplit*> matchingSplits;
   //QList<MyMoneySplit> matchingSplits;
-  foreach(const MyMoneySplit& s, transaction.splits()) {
+  foreach (const MyMoneySplit& s, transaction.splits()) {
     matchingSplits.append(&s);
   }
 
@@ -455,7 +455,7 @@ bool MyMoneyTransactionFilter::match(const MyMoneyTransaction& transaction)
   if (m_reportAllSplits == false && matchingSplits.count() != 0) {
     m_matchingSplits.append(transaction.splits()[0]);
   } else {
-    foreach(const MyMoneySplit* s, matchingSplits) {
+    foreach (const MyMoneySplit* s, matchingSplits) {
       m_matchingSplits.append(*s);
     }
   }

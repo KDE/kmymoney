@@ -848,7 +848,7 @@ QWidget* kMyMoneySplitTable::createEditWidgets(void)
   slotLoadEditWidgets();
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadEditWidgets()));
 
-  foreach(QWidget* w, m_tabOrderWidgets) {
+  foreach (QWidget* w, m_tabOrderWidgets) {
     if (w) {
       w->installEventFilter(this);
     }

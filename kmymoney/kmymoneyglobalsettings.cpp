@@ -106,7 +106,7 @@ void KMyMoneyGlobalSettings::setSubstringSearch(QWidget* w)
   if (w) {
     QList<KMyMoneyMVCCombo *> comboList;
     comboList = w->findChildren<KMyMoneyMVCCombo *>();
-    foreach(KMyMoneyMVCCombo *combo, comboList) {
+    foreach (KMyMoneyMVCCombo *combo, comboList) {
       combo->setSubstringSearch(!stringMatchFromStart());
     }
   }
