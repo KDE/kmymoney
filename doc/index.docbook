@@ -14,7 +14,7 @@
                                      the language here -->
   <!-- Do not define any other entities; instead, use the entities
        from entities/general.entities and $LANG/user.entities. -->
-  <!ENTITY devlist "<email>kmymoney2-developer@lists.sourceforge.net</email>">
+  <!ENTITY devlist "<email>kmymoney-devel@kde.org</email>">
   <!ENTITY userlist "<email>kmymoney2-user@lists.sourceforge.net</email>">
   <!ENTITY Insert "<keycap>Ins</keycap>">
 <!-- the chapters -->
