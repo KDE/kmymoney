@@ -246,7 +246,7 @@ QWidget* TransactionEditor::haveWidget(const QString& name) const
 
 int TransactionEditor::slotEditSplits(void)
 {
-  return QDialog::Rejected;
+  return KDialog::Rejected;
 }
 
 void TransactionEditor::setTransaction(const MyMoneyTransaction& t, const MyMoneySplit& s)
@@ -1228,7 +1228,7 @@ void StdTransactionEditor::autoFill(const QString& payeeId)
         if (dlg->m_register->lastItem())
           dlg->m_register->selectItem(dlg->m_register->lastItem());
 
-        if (dlg->exec() == QDialog::Accepted) {
+        if (dlg->exec() == KDialog::Accepted) {
           t = dlg->transaction();
         }
 #if 0
@@ -1741,7 +1741,7 @@ void StdTransactionEditor::slotCreateCategory(const QString& name, QString& id)
 
 int StdTransactionEditor::slotEditSplits(void)
 {
-  int rc = QDialog::Rejected;
+  int rc = KDialog::Rejected;
 
   if (!m_openEditSplits) {
     // only get in here in a single instance
@@ -1803,7 +1803,7 @@ int StdTransactionEditor::slotEditSplits(void)
       connect(dlg, SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
       connect(dlg, SIGNAL(createCategory(MyMoneyAccount&, const MyMoneyAccount&)), this, SIGNAL(createCategory(MyMoneyAccount&, const MyMoneyAccount&)));
 
-      if ((rc = dlg->exec()) == QDialog::Accepted) {
+      if ((rc = dlg->exec()) == KDialog::Accepted) {
         m_transaction = dlg->transaction();
         if (!m_transaction.splits().isEmpty())
           m_split = m_transaction.splits().front();

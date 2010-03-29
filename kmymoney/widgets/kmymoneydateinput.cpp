@@ -161,7 +161,7 @@ kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, Qt::AlignmentFlag flags)
 void kMyMoneyDateInput::markAsBadDate(bool bad, const QColor& color)
 {
   // the next line knows a bit about the internals of QAbstractSpinBox
-  QLineEdit* le = d->m_dateEdit->findChild<QLineEdit *>();
+  QLineEdit* le = d->m_dateEdit->findChild<QLineEdit *>(); //krazy:exclude=qclasses
 
   if (le) {
     QPalette palette = this->palette();

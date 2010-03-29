@@ -161,7 +161,7 @@ void KMyMoneyPriceDlg::slotNewPrice(void)
       m_priceList->setSelected(p, true);
       // If the user cancels the following operation, we delete the new item
       // and re-select any previously selected one
-      if (slotEditPrice() == QDialog::Rejected) {
+      if (slotEditPrice() == Rejected) {
         delete p;
         if (item)
           m_priceList->setSelected(item, true);
@@ -176,7 +176,7 @@ void KMyMoneyPriceDlg::slotNewPrice(void)
 
 int KMyMoneyPriceDlg::slotEditPrice(void)
 {
-  int rc = QDialog::Rejected;
+  int rc = Rejected;
   KMyMoneyPriceItem* item = dynamic_cast<KMyMoneyPriceItem*>(m_priceList->selectedItem());
   if (item) {
     MyMoneySecurity from(MyMoneyFile::instance()->security(item->price().from()));
@@ -222,12 +222,12 @@ void KMyMoneyPriceDlg::slotOnlinePriceUpdate(void)
   KMyMoneyPriceItem* item = dynamic_cast<KMyMoneyPriceItem*>(m_priceList->selectedItem());
   if (item) {
     QPointer<KEquityPriceUpdateDlg> dlg = new KEquityPriceUpdateDlg(this, (item->text(COMMODITY_COL) + ' ' + item->text(CURRENCY_COL)).toUtf8());
-    if (dlg->exec() == QDialog::Accepted)
+    if (dlg->exec() == Accepted)
       dlg->storePrices();
     delete dlg;
   } else {
     QPointer<KEquityPriceUpdateDlg> dlg = new KEquityPriceUpdateDlg(this);
-    if (dlg->exec() == QDialog::Accepted)
+    if (dlg->exec() == Accepted)
       dlg->storePrices();
     delete dlg;
   }

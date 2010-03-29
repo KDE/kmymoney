@@ -559,7 +559,7 @@ void kMyMoneyEdit::setReadOnly(bool readOnly)
   // changing the background between readonly and read/write mode
   // as it is done by the KLineEdit code.
   if (m_edit)
-    m_edit->QLineEdit::setReadOnly(readOnly);
+    m_edit->QLineEdit::setReadOnly(readOnly); //krazy:exclude=qclasses
 }
 
 #include "kmymoneyedit.moc"

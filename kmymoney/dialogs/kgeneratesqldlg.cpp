@@ -119,7 +119,7 @@ int  KGenerateSqlDlg::exec()
   m_widget->listDrivers->addItems(m_supportedDrivers);
   connect(m_widget->listDrivers, SIGNAL(itemSelectionChanged()),
           this, SLOT(slotdriverSelected()));
-  return (QDialog::exec());
+  return (KDialog::exec());
 }
 
 void KGenerateSqlDlg::slotcreateTables()

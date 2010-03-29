@@ -152,7 +152,7 @@ int KSelectDatabaseDlg::exec()
     m_widget->checkPreLoad->setChecked(false);
   }
 
-  return (QDialog::exec());
+  return (KDialog::exec());
 }
 
 const KUrl KSelectDatabaseDlg::selectedURL()

@@ -122,7 +122,7 @@ KSplitTransactionDlg::KSplitTransactionDlg(const MyMoneyTransaction& t,
   KConfigGroup grp = KGlobal::config()->group("SplitTransactionEditor");
   size = grp.readEntry("Geometry", size);
   size.setHeight(size.height() - 1);
-  QDialog::resize(size.expandedTo(minimumSizeHint()));
+  KDialog::resize(size.expandedTo(minimumSizeHint()));
 
   // Trick: it seems, that the initial sizing of the dialog does
   // not work correctly. At least, the columns do not get displayed
@@ -162,7 +162,7 @@ int KSplitTransactionDlg::exec(void)
 
     rc = KSplitTransactionDlgDecl::exec();
 
-    if (rc == QDialog::Accepted) {
+    if (rc == Accepted) {
       if (!diffAmount().isZero()) {
         KSplitCorrectionDlgDecl* corrDlg = new KSplitCorrectionDlgDecl(this);
         corrDlg->buttonGroup->setId(corrDlg->continueBtn, 0);
@@ -204,10 +204,10 @@ int KSplitTransactionDlg::exec(void)
         }
         corrDlg->leaveBtn->setText(q);
 
-        if ((rc = corrDlg->exec()) == QDialog::Accepted) {
+        if ((rc = corrDlg->exec()) == Accepted) {
           switch (corrDlg->buttonGroup->checkedId()) {
           case 0:       // continue to edit
-            rc = QDialog::Rejected;
+            rc = Rejected;
             break;
 
           case 1:       // modify total
@@ -229,7 +229,7 @@ int KSplitTransactionDlg::exec(void)
     } else
       break;
 
-  } while (rc != QDialog::Accepted);
+  } while (rc != Accepted);
 
   // for deposits, we inverted the sign of all splits.
   // now we revert it back, so that things are left correct
@@ -247,7 +247,7 @@ int KSplitTransactionDlg::exec(void)
 
 void KSplitTransactionDlg::initSize(void)
 {
-  QDialog::resize(width(), height() + 1);
+  KDialog::resize(width(), height() + 1);
 }
 
 void KSplitTransactionDlg::accept()
