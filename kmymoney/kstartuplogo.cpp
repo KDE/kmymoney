@@ -60,10 +60,10 @@ KStartupLogo::KStartupLogo() :
     splash->setFixedSize(logoPixmap.size());
 
     splash->show();
-    splash->showMessage(i18n("Loading ..."),       //krazy:exclude=qmethods
+    splash->showMessage(i18n("Loading ..."),
                         Qt::AlignLeft | Qt::AlignBottom,
                         KColorScheme(QPalette::Active, KColorScheme::Selection)
-                        .foreground(KColorScheme::NormalText).color());
+                        .foreground(KColorScheme::NormalText).color()); //krazy:exclude=qmethods
     m_splash = splash;
   }
 }
