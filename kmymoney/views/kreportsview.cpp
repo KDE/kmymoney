@@ -139,12 +139,15 @@ void KReportsView::KReportTab::copyToClipboard(void)
 void KReportsView::KReportTab::saveAs(const QString& filename, bool includeCSS)
 {
   QFile file(filename);
+  // get users character set encoding
+  const QByteArray encoding = KGlobal::locale()->encoding();
+
   if (file.open(QIODevice::WriteOnly)) {
     if (QFileInfo(filename).suffix().toLower() == "csv") {
       QTextStream(&file) << m_table->renderCSV();
     } else {
       QTextStream stream(&file);
-      QRegExp exp("(.*)(<link.*css\" href=)\"(.*)\">(<meta.*utf-8\" />)(.*)");
+      QRegExp exp("(.*)(<link.*css\" href=)\"(.*)\">(<meta.*" + encoding + "\" />)(.*)");
       QString table = createTable();
       if (exp.indexIn(table) != -1 && includeCSS) {
         QFile cssFile(exp.cap(3));
