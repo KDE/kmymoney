@@ -29,7 +29,6 @@
 // Project Includes
 
 #include <mymoneyaccount.h>
-#include <kmymoneyaccounttree.h>
 #include <mymoneyutils.h>
 #include "accountsmodel.h"
 
@@ -142,8 +141,6 @@ protected:
   void loadListView(void);
   void loadIconView(void);
 
-  bool loadSubAccounts(KMyMoneyAccountTreeItem* parent, const QStringList& accountList);
-
   /**
     * This method returns a pointer to the currently selected
     * account icon or 0 if no icon is selected.
@@ -199,9 +196,6 @@ private:
   MyMoneyAccount                      m_reconciliationAccount;
   QMap<QString, MyMoneySecurity>      m_securityMap;
   QMap<QString, unsigned long>        m_transactionCountMap;
-
-  KMyMoneyAccountTreeItem*            m_assetItem;
-  KMyMoneyAccountTreeItem*            m_liabilityItem;
 
   /// set if a view needs to be reloaded during show()
   bool                                m_needReload[MaxViewTabs];

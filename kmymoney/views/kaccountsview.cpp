@@ -131,9 +131,7 @@ void KMyMoneyAccountIconItem::updateAccount(const MyMoneyAccount& account)
 }
 
 KAccountsView::KAccountsView(QWidget *parent) :
-    KAccountsViewDecl(parent),
-    m_assetItem(0),
-    m_liabilityItem(0)
+    KAccountsViewDecl(parent)
 {
   // setup icons for collapse and expand button
   KGuiItem collapseGuiItem("",
@@ -413,64 +411,6 @@ void KAccountsView::loadListView(void)
   if (KMyMoneyGlobalSettings::showAccountsExpanded()) {
     m_accountTree->expandAll();
   }
-}
-
-bool KAccountsView::loadSubAccounts(KMyMoneyAccountTreeItem* parent, const QStringList& accountList)
-{
-  MyMoneyFile* file = MyMoneyFile::instance();
-  bool unused = false;
-  bool showClosedAccounts = kmymoney->toggleAction("view_show_all_accounts")->isChecked()
-                            || !KMyMoneyGlobalSettings::hideClosedAccounts();
-
-  QStringList::const_iterator it_a;
-  for (it_a = accountList.begin(); it_a != accountList.end(); ++it_a) {
-    const MyMoneyAccount& acc = file->account(*it_a);
-    QList<MyMoneyPrice> prices;
-    MyMoneySecurity security = file->baseCurrency();
-    try {
-      if (acc.isInvest()) {
-        security = m_securityMap[acc.currencyId()];
-        prices += file->price(acc.currencyId(), security.tradingCurrency());
-        if (security.tradingCurrency() != file->baseCurrency().id()) {
-          MyMoneySecurity sec = m_securityMap[security.tradingCurrency()];
-          prices += file->price(sec.id(), file->baseCurrency().id());
-        }
-      } else if (acc.currencyId() != file->baseCurrency().id()) {
-        if (acc.currencyId() != file->baseCurrency().id()) {
-          security = m_securityMap[acc.currencyId()];
-          prices += file->price(acc.currencyId(), file->baseCurrency().id());
-        }
-      }
-
-    } catch (MyMoneyException *e) {
-      kDebug(2) << Q_FUNC_INFO << " caught exception while adding " << acc.name() << "[" << acc.id() << "]: " << e->what();
-      delete e;
-    }
-
-    KMyMoneyAccountTreeItem* item = new KMyMoneyAccountTreeItem(parent, acc, prices, security);
-    if (acc.id() == m_reconciliationAccount.id())
-      item->setReconciliation(true);
-
-    unused |= loadSubAccounts(item, acc.accountList());
-
-    // no child accounts and no transactions in this account means 'unused'
-    bool thisUnused = (!item->firstChild()) && (m_transactionCountMap[acc.id()] == 0);
-
-    // In case of a category which is unused and we are requested to suppress
-    // the display of those,
-    if (acc.isIncomeExpense()) {
-      if (KMyMoneyGlobalSettings::hideUnusedCategory() && thisUnused) {
-        unused = true;
-        delete item;
-      }
-    }
-
-    // if the account is closed and we should not show it, we delete the item
-    if (acc.isClosed() && !showClosedAccounts) {
-      delete item;
-    }
-  }
-  return unused;
 }
 
 void KAccountsView::slotReconcileAccount(const MyMoneyAccount& acc, const QDate& reconciliationDate, const MyMoneyMoney& endingBalance)
