@@ -402,31 +402,6 @@ QDate MyMoneySchedule::adjustedNextPayment(const QDate& refDate) const
 
 QDate MyMoneySchedule::nextPayment(const QDate& refDate) const
 {
-#if 0
-  QDate paymentDate(m_lastPayment);
-
-  // if there never was a payment, then the next payment date must
-  // be identical to the start date of the payments.
-
-  if (!paymentDate.isValid()) {
-    paymentDate = m_startDate;
-
-    // if the reference date is invalid, then that's what we're looking for
-    if (!refDate.isValid()) {
-      if (m_recordedPayments.contains(paymentDate))
-        return QDate();
-
-      return paymentDate;
-
-    } else {
-      // if the first payment date is past the given ref date,
-      // then that's what we're looking for
-      if (paymentDate > refDate)
-        return paymentDate;
-    }
-  }
-#endif
-
   // if the enddate is valid and it is before the reference date,
   // then there will be no more payments.
   if (m_endDate.isValid() && m_endDate < refDate) {
