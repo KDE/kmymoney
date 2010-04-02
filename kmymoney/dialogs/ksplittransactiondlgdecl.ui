@@ -19,9 +19,16 @@
     <property name="sizeGripEnabled">
       <bool>true</bool>
     </property>
-    <layout class="QHBoxLayout">
+    <widget class="QWidget" name="horizontalLayoutWidget">
+    <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+      </sizepolicy>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
       <property name="margin">
-        <number>11</number>
+        <number>0</number>
       </property>
       <property name="spacing">
         <number>6</number>
@@ -351,6 +358,7 @@
         </layout>
       </item>
     </layout>
+    </widget>
   </widget>
   <layoutdefault spacing="6" margin="11"/>
   <customwidgets>

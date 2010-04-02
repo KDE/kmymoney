@@ -70,8 +70,11 @@ KSplitTransactionDlg::KSplitTransactionDlg(const MyMoneyTransaction& t,
     m_calculatedValue(calculatedValue)
 {
   setModal(true);
-  // add icons to buttons
 
+  setMainWidget(horizontalLayoutWidget);
+  setButtons(0);
+
+  // add icons to buttons
   KGuiItem clearButtenItem(i18n("Clear &All"),
                            KIcon("edit-delete"),
                            i18n("Clear all splits"),
