@@ -49,9 +49,7 @@
 #include <kmymoneyedit.h>
 #include <kmymoneylineedit.h>
 #include <mymoneyfile.h>
-
 #include "kmymoneysplittable.h"
-
 
 KSplitTransactionDlg::KSplitTransactionDlg(const MyMoneyTransaction& t,
     const MyMoneySplit& s,
@@ -76,17 +74,19 @@ KSplitTransactionDlg::KSplitTransactionDlg(const MyMoneyTransaction& t,
   setButtons(KDialog::Ok | KDialog::Cancel | KDialog::User1 | KDialog::User2 | KDialog::User3);
   setButtonsOrientation(Qt::Vertical);
 
-  // add icons to buttons
+  //set custom buttons
+  //clearAll button
   setButtonText(User1, i18n("Clear &All"));
   setButtonToolTip(User1, i18n("Clear all splits"));
   setButtonWhatsThis(User1, i18n("Use this to clear all splits of this transaction"));
   setButtonIcon(User1, KIcon("edit-clear"));
 
+  //clearZero button
   setButtonText(User2, i18n("Clear &Zero"));
   setButtonToolTip(User2, i18n("Removes all splits that have a value of zero"));
   setButtonIcon(User2, KIcon("edit-clear"));
 
-
+  //merge button
   setButtonText(User3, i18n("&Merge"));
   setButtonToolTip(User3, i18n("Merges splits with the same category to one split"));
   setButtonWhatsThis(User3, i18n("In case you have multiple split entries to the same category and you like to keep them as a single split, press this button. The amount for identical categories will be added and stored in a single split for that category."));
@@ -372,9 +372,7 @@ void KSplitTransactionDlg::slotSetTransaction(const MyMoneyTransaction& t)
     if ((*it_s) > 1)
       break;
   }
-  //mergeBtn->setDisabled(it_s == splits.constEnd());
   enableButton(KDialog::User3, it_s != splits.constEnd());
-  //clearZeroBtn->setEnabled(haveZeroSplit);
   enableButton(KDialog::User2, haveZeroSplit);
 
   updateSums();
