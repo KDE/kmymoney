@@ -72,26 +72,32 @@ KSplitTransactionDlg::KSplitTransactionDlg(const MyMoneyTransaction& t,
   setModal(true);
 
   setMainWidget(horizontalLayoutWidget);
-  setButtons(0);
+
+  setButtons(KDialog::Ok | KDialog::Cancel | KDialog::User1 | KDialog::User2 | KDialog::User3);
+  setButtonsOrientation(Qt::Vertical);
 
   // add icons to buttons
-  KGuiItem clearButtenItem(i18n("Clear &All"),
-                           KIcon("edit-delete"),
-                           i18n("Clear all splits"),
-                           i18n("Use this to clear all splits of this transaction"));
-  clearAllBtn->setGuiItem(clearButtenItem);
+  setButtonText(User1, i18n("Clear &Zero"));
+  setButtonToolTip(User1, i18n("Clear all splits"));
+  setButtonWhatsThis(User1, i18n("Use this to clear all splits of this transaction"));
+  setButtonIcon(User1, KIcon("edit-clear"));
+
+  setButtonText(User2, i18n("Clear &Zero"));
+  setButtonToolTip(User2, i18n("Removes all splits that have a value of zero"));
+  setButtonIcon(User2, KIcon("edit-clear"));
 
 
-  KGuiItem mergeButtenItem(i18n("&Merge"));
-  mergeBtn->setGuiItem(mergeButtenItem);
+  setButtonText(User3, i18n("&Merge"));
+  setButtonToolTip(User3, i18n("Merges splits with the same category to one split"));
+  setButtonWhatsThis(User3, i18n("In case you have multiple split entries to the same category and you like to keep them as a single split, press this button. The amount for identical categories will be added and stored in a single split for that category."));
 
   // make finish the default
-  finishBtn->setDefault(true);
+  button(KDialog::Cancel)->setDefault(true);
 
   // setup the focus
-  cancelBtn->setFocusPolicy(Qt::NoFocus);
-  finishBtn->setFocusPolicy(Qt::NoFocus);
-  clearAllBtn->setFocusPolicy(Qt::NoFocus);
+  button(KDialog::Cancel)->setFocusPolicy(Qt::NoFocus);
+  button(KDialog::Ok)->setFocusPolicy(Qt::NoFocus);
+  button(KDialog::User1)->setFocusPolicy(Qt::NoFocus);
 
   // connect signals with slots
   connect(transactionsTable, SIGNAL(transactionChanged(const MyMoneyTransaction&)),
@@ -102,11 +108,11 @@ KSplitTransactionDlg::KSplitTransactionDlg(const MyMoneyTransaction& t,
   connect(transactionsTable, SIGNAL(returnPressed()), this, SLOT(accept()));
   connect(transactionsTable, SIGNAL(escapePressed()), this, SLOT(reject()));
 
-  connect(cancelBtn, SIGNAL(clicked()), this, SLOT(reject()));
-  connect(finishBtn, SIGNAL(clicked()), this, SLOT(accept()));
-  connect(clearAllBtn, SIGNAL(clicked()), this, SLOT(slotClearAllSplits()));
-  connect(mergeBtn, SIGNAL(clicked()), this, SLOT(slotMergeSplits()));
-  connect(clearZeroBtn, SIGNAL(clicked()), this, SLOT(slotClearUnusedSplits()));
+  connect(button(KDialog::Cancel), SIGNAL(clicked()), this, SLOT(reject()));
+  connect(button(KDialog::Ok), SIGNAL(clicked()), this, SLOT(accept()));
+  connect(button(KDialog::User1), SIGNAL(clicked()), this, SLOT(slotClearAllSplits()));
+  connect(button(KDialog::User3), SIGNAL(clicked()), this, SLOT(slotMergeSplits()));
+  connect(button(KDialog::User2), SIGNAL(clicked()), this, SLOT(slotClearUnusedSplits()));
 
   // setup the precision
   try {
@@ -168,15 +174,13 @@ int KSplitTransactionDlg::exec(void)
     if (rc == Accepted) {
       if (!diffAmount().isZero()) {
         KSplitCorrectionDlgDecl* corrDlg = new KSplitCorrectionDlgDecl(this);
+        corrDlg->setMainWidget(corrDlg->findChild<QWidget*>("verticalLayout"));
         corrDlg->buttonGroup->setId(corrDlg->continueBtn, 0);
         corrDlg->buttonGroup->setId(corrDlg->changeBtn, 1);
         corrDlg->buttonGroup->setId(corrDlg->distributeBtn, 2);
         corrDlg->buttonGroup->setId(corrDlg->leaveBtn, 3);
 
         corrDlg->setModal(true);
-        // add icons to buttons
-        corrDlg->okBtn->setGuiItem(KStandardGuiItem::ok());
-        corrDlg->cancelBtn->setGuiItem(KStandardGuiItem::cancel());
 
         MyMoneySplit split = m_transaction.splits()[0];
         QString total = (-split.value()).formatMoney("", m_precision);
@@ -368,8 +372,10 @@ void KSplitTransactionDlg::slotSetTransaction(const MyMoneyTransaction& t)
     if ((*it_s) > 1)
       break;
   }
-  mergeBtn->setDisabled(it_s == splits.constEnd());
-  clearZeroBtn->setEnabled(haveZeroSplit);
+  //mergeBtn->setDisabled(it_s == splits.constEnd());
+  enableButton(KDialog::User3, it_s != splits.constEnd());
+  //clearZeroBtn->setEnabled(haveZeroSplit);
+  enableButton(KDialog::User2, haveZeroSplit);
 
   updateSums();
 }

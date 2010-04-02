@@ -22,6 +22,13 @@
     <property name="windowTitle">
       <string>Correct splits</string>
     </property>
+    <widget class="QWidget" name="verticalLayout">
+    <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+      </sizepolicy>
+    </property>
     <layout class="QVBoxLayout">
       <property name="margin">
         <number>11</number>
@@ -146,81 +153,10 @@
           </property>
         </widget>
       </item>
-      <item>
-        <layout class="QHBoxLayout">
-          <item>
-            <spacer name="spacer2">
-              <property name="sizeHint">
-                <size>
-                  <width>61</width>
-                  <height>20</height>
-                </size>
-              </property>
-              <property name="sizeType">
-                <enum>QSizePolicy::Expanding</enum>
-              </property>
-              <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-              </property>
-            </spacer>
-          </item>
-          <item>
-            <widget class="KPushButton" name="okBtn">
-              <property name="sizePolicy">
-                <sizepolicy hsizetype="Maximum" vsizetype="Minimum">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                </sizepolicy>
-              </property>
-              <property name="minimumSize">
-                <size>
-                  <width>80</width>
-                  <height>0</height>
-                </size>
-              </property>
-              <property name="text">
-                <string>OK</string>
-              </property>
-            </widget>
-          </item>
-          <item>
-            <widget class="KPushButton" name="cancelBtn">
-              <property name="sizePolicy">
-                <sizepolicy hsizetype="Maximum" vsizetype="Minimum">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                </sizepolicy>
-              </property>
-              <property name="minimumSize">
-                <size>
-                  <width>80</width>
-                  <height>0</height>
-                </size>
-              </property>
-              <property name="text">
-                <string>Cancel</string>
-              </property>
-            </widget>
-          </item>
-        </layout>
-      </item>
     </layout>
+    </widget>
   </widget>
   <layoutdefault spacing="6" margin="11"/>
-    <connections>
-    <connection>
-      <sender>okBtn</sender>
-      <signal>clicked()</signal>
-      <receiver>KSplitCorrectionDlgDecl</receiver>
-      <slot>accept()</slot>
-    </connection>
-    <connection>
-      <sender>cancelBtn</sender>
-      <signal>clicked()</signal>
-      <receiver>KSplitCorrectionDlgDecl</receiver>
-      <slot>reject()</slot>
-    </connection>
-  </connections>
   <buttongroups>
     <buttongroup name="buttonGroup"/>
   </buttongroups>
