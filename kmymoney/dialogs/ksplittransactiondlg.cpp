@@ -77,7 +77,7 @@ KSplitTransactionDlg::KSplitTransactionDlg(const MyMoneyTransaction& t,
   setButtonsOrientation(Qt::Vertical);
 
   // add icons to buttons
-  setButtonText(User1, i18n("Clear &Zero"));
+  setButtonText(User1, i18n("Clear &All"));
   setButtonToolTip(User1, i18n("Clear all splits"));
   setButtonWhatsThis(User1, i18n("Use this to clear all splits of this transaction"));
   setButtonIcon(User1, KIcon("edit-clear"));
