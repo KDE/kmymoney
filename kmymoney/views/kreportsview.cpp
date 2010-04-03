@@ -21,39 +21,19 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <config-kmymoney.h>
-
 #include "kreportsview.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QLayout>
-#include <QDateTime>
-#include <QRegExp>
-#include <q3dragobject.h>
-#include <QClipboard>
-#include <QApplication>
-#include <QPrinter>
-#include <QPainter>
 #include <QFile>
 #include <QTimer>
-#include <QIcon>
-#include <q3popupmenu.h>
-#include <QPushButton>
-#include <QToolTip>
-#include <QCheckBox>
-//Added by qt3to4:
-#include <QTextStream>
+#include <QClipboard>
 #include <QList>
-#include <QPixmap>
 #include <QVBoxLayout>
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kglobal.h>
-#include <kglobalsettings.h>
-#include <klocale.h>
 #include <kstandarddirs.h>
 #include <khtmlview.h>
 #include <kconfig.h>
@@ -65,13 +45,13 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include <config-kmymoney.h>
 #include <mymoneyfile.h>
 #include <mymoneyreport.h>
 #include <kmymoneyglobalsettings.h>
 #include "querytable.h"
 #include "objectinfotable.h"
 #include "kreportconfigurationfilterdlg.h"
-#include "kmymoneyutils.h"
 
 using namespace reports;
 

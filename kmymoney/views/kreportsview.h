@@ -33,8 +33,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-//#include <q3valuevector.h>
-#include <qwidget.h>
+#include <QWidget>
 #include <QVBoxLayout>
 #include <QList>
 
@@ -43,9 +42,9 @@ class Q3ListViewItem;
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <khtml_part.h>
+#include <KHTMLPart>
 #include <k3listview.h>
-#include <ktabwidget.h>
+#include <KTabWidget>
 
 // ----------------------------------------------------------------------------
 // Project Includes
