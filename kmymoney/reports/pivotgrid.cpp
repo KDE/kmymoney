@@ -20,40 +20,12 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
-#include <QLayout>
-#include <QDateTime>
-#include <QRegExp>
-#include <q3dragobject.h>
-#include <QClipboard>
-#include <QApplication>
-#include <QPrinter>
-#include <QPainter>
-#include <QFile>
-#include <qdom.h>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-// This is just needed for i18n() and weekStartDay().
-// Once I figure out how to handle i18n
-// without using this macro directly, I'll be freed of KDE dependency.  This
-// is a minor problem because we use these terms when rendering to HTML,
-// and a more major problem because we need it to translate account types
-// (e.g. MyMoneyAccount::Checkings) into their text representation.  We also
-// use that text representation in the core data structure of the report. (Ace)
-
-#include <kglobal.h>
-#include <klocale.h>
-#include <kdebug.h>
-#include <kcalendarsystem.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
-
-#include "pivottable.h"
-#include "reportdebug.h"
-#include "kmymoneyglobalsettings.h"
-
-#include <kmymoneyutils.h>
 
 namespace reports
 {
