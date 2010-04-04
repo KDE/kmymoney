@@ -119,7 +119,7 @@ Due to differences in implementation between GnuCash and KMM, it is not always
 possible to provide an absolutely correct conversion. When such a problem
 situation is recognized, a message, along with any relevant variable data, is
 passed to the main class, and used to produce a report when processing
-terminates. The GncMessages and GncMessageArg classes implement this.
+terminates.
 
 Anonymizer
 
@@ -820,34 +820,6 @@ private:
 };
 
 /**
-  * private classes to define messages to be held in list for final report
-  */
-class GncMessageArgs
-{
-protected:
-  friend class MyMoneyGncReader;
-  QString source; // 'type of message
-  unsigned int code; // to identify actual message
-  QList<QString> args; // variable arguments
-};
-
-class GncMessages
-{
-protected:
-  friend class MyMoneyGncReader;
-  static QString text(const QString, const unsigned int);  // returns text of identified message
-  static unsigned int argCount(const QString, const unsigned int);  // returns no. of args required
-private:
-  typedef struct {
-    const QString source;
-    const unsigned int code;
-    QString text;
-  }
-  messText;
-  static messText texts [];
-};
-
-/**
                    MyMoneyGncReader -  Main class for this module
   Controls overall operation of the importer
   */
@@ -1100,8 +1072,7 @@ private:
   /**
     * To hold message data till final report
     */
-  QList<GncMessageArgs*> m_messageList;
-  GncMessages *m_messageTexts;
+  QMap<QString, QStringList> m_messageList;
   /**
     * Internal utility functions
     */

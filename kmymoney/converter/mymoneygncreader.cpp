@@ -1500,7 +1500,9 @@ void MyMoneyGncReader::convertSplit(const GncSplit *gsp)
   MyMoneyMoney splitValue(convBadValue(gsp->value()));
   if (gsp->value() == "-1/0") { // treat gnc invalid value as zero
     // it's not quite a consistency check, but easier to treat it as such
-    postMessage("CC", 4, splitAccount.name().toLatin1(), m_txDatePosted.toString(Qt::ISODate).toLatin1());
+    m_messageList["CC"].append
+    (i18n("Account or Category %1, transaction date %2; split contains invalid value; please check",
+    splitAccount.name(), m_txDatePosted.toString(Qt::ISODate)));
   }
   MyMoneyMoney splitQuantity(convBadValue(gsp->qty()));
   split.setValue(splitValue);
@@ -1731,21 +1733,28 @@ void MyMoneyGncReader::convertTemplateSplit(const QString& schedName, const GncT
       split.setValue(exFormula);
       xactionCount++;
     } else {
-      postMessage("SC", 3, schedName.toLatin1(), slot.key().toLatin1(), slot.type().toLatin1());
+      m_messageList["SC"].append(
+        i18n("Schedule %1 contains unknown action (key = %2, type = %3)",
+          schedName, slot.key(), slot.type()));
       m_suspectSchedule = true;
     }
   }
   // report this as untranslatable tx
   if (xactionCount > 1) {
-    postMessage("SC", 4, schedName.toLatin1());
+    m_messageList["SC"].append(
+      i18n("Schedule %1 contains multiple actions; only one has been imported",
+      schedName));
     m_suspectSchedule = true;
   }
   if (validSlotCount == 0) {
-    postMessage("SC", 5, schedName.toLatin1());
+    m_messageList["SC"].append(
+      i18n("Schedule %1 contains no valid splits", schedName));
     m_suspectSchedule = true;
   }
   if (nonNumericFormula) {
-    postMessage("SC", 6, schedName.toLatin1());
+    m_messageList["SC"].append(
+      i18n("Schedule %1 appears to contain a formula. GnuCash formulae are not convertible",
+      schedName));
     m_suspectSchedule = true;
   }
   // find the kmm account id corresponding to the gnc id
@@ -1876,12 +1885,16 @@ void MyMoneyGncReader::convertSchedule(const GncSchedule *gsc)
     if (frequency == vi[i].gncType) break;
   }
   if (vi[i].gncType == "zzz") {
-    postMessage("SC", 1, sc.name().toLatin1(), frequency.toLatin1());
+    m_messageList["SC"].append(
+      i18n("Schedule %1 has interval of %2 which is not currently available",
+         sc.name(), frequency));
     i = 0; // treat as single occurrence
     m_suspectSchedule = true;
   }
   if (unknownOccurs) {
-    postMessage("SC", 7, sc.name().toLatin1());
+    m_messageList["SC"].append(
+      i18n("Schedule %1 contains unknown interval specification; please check for correct operation",
+           sc.name()));
     m_suspectSchedule = true;
   }
   // set the occurrence interval, weekend option, start date
@@ -1916,7 +1929,9 @@ void MyMoneyGncReader::convertSchedule(const GncSchedule *gsc)
   }
   // Check for sched deferred interval. Don't know how/if we can handle it, or even what it means...
   if (gsc->getSchedDef() != NULL) {
-    postMessage("SC", 8, sc.name().toLatin1());
+    m_messageList["SC"].append(
+    i18n("Schedule %1 contains a deferred interval specification; please check for correct operation",
+         sc.name()));
     m_suspectSchedule = true;
   }
   // payment type, options
@@ -1939,7 +1954,8 @@ void MyMoneyGncReader::convertSchedule(const GncSchedule *gsc)
   sc.setTransaction(tx);
   //tell the storage objects we have a new schedule object.
   if (m_suspectSchedule && m_dropSuspectSchedules) {
-    postMessage("SC", 2, sc.name().toLatin1());
+    m_messageList["SC"].append(
+      i18n("Schedule %1 dropped at user request", sc.name()));
   } else {
     m_storage->addSchedule(sc);
     if (m_suspectSchedule)
@@ -2039,30 +2055,20 @@ void MyMoneyGncReader::terminate()
   }
 
   if (mainCurrency != "") {
-    /* fix for qt3.3.4?. According to Qt docs, this should return the enum id of the button pressed, and
-       indeed it used to do so. However now it seems to return the index of the button. In this case it doesn't matter,
-       since for Yes, the id is 3 and the index is 0, whereas the No button will return 4 or 1. So we test for either Yes case */
-    /* and now it seems to have changed again, returning 259 for a Yes??? so use KMessagebox */
     QString question = i18n("Your main currency seems to be %1 (%2); do you want to set this as your base currency?", mainCurrency, m_storage->currency(mainCurrency.toUtf8()).name());
     if (KMessageBox::questionYesNo(0, question, PACKAGE) == KMessageBox::Yes) {
       m_storage->setValue("kmm-baseCurrency", mainCurrency);
     }
   }
   // now produce the end of job reports - first, work out which ones are required
-  m_ccCount = 0, m_orCount = 0, m_scCount = 0;
-  int si;
-  for (si = 0; si < m_messageList.count(); ++si) {
-    if ((*m_messageList.at(si)).source == "CC") m_ccCount++;
-    if ((*m_messageList.at(si)).source == "OR") m_orCount++;
-    if ((*m_messageList.at(si)).source == "SC") m_scCount++;
-  }
   QList<QString> sectionsToReport; // list of sections needing report
   sectionsToReport.append("MN");  // always build the main section
-  if (m_ccCount > 0) sectionsToReport.append("CC");
-  if (m_orCount > 0) sectionsToReport.append("OR");
-  if (m_scCount > 0) sectionsToReport.append("SC");
-  // produce the sections in message boxes
+  if ((m_ccCount = m_messageList["CC"].count()) > 0) sectionsToReport.append("CC");
+  if ((m_orCount = m_messageList["OR"].count()) > 0) sectionsToReport.append("OR");
+  if ((m_scCount = m_messageList["SC"].count()) > 0) sectionsToReport.append("SC");
+  // produce the sections in separate message boxes
   bool exit = false;
+  int si;
   for (si = 0; (si < sectionsToReport.count()) && !exit; ++si) {
     QString button0Text = i18n("More");
     if (si + 1 == sectionsToReport.count())
@@ -2091,8 +2097,6 @@ void MyMoneyGncReader::terminate()
     switch (KMessageBox::warningYesNo(0, i18n("Problems were encountered in converting schedule '%1'.\nDo you want to review or edit it now?", sc.name()), PACKAGE)) {
     case KMessageBox::Yes:
       s = new KEditScheduleDlg(sc);
-      // FIXME: connect newCategory to something useful, so that we
-      // can create categories from within the dialog
       if (s->exec())
         m_storage->modifySchedule(s->schedule());
       delete s;
@@ -2144,21 +2148,8 @@ QString MyMoneyGncReader::buildReportSection(const QString& source)
       s.append(unsupported);
     }
     if (more) s.append(i18n("\n\nPress More for further information"));
-  } else { // we need to retrieve the posted messages for this source
-    if (gncdebug) qDebug() << "Building messages for source" << source;
-    int i, j;
-    for (i = 0; i < m_messageList.count(); i++) {
-      GncMessageArgs *m = m_messageList[i];
-      if (m->source == source) {
-        if (gncdebug) qDebug() << "build text source" << m->source << "code" << m->code << "argcount" << m->args.count() ;
-        QString ss = GncMessages::text(m->source, m->code);
-        // add variable args. the .arg function seems always to replace the
-        // lowest numbered placeholder it finds, so translating messages
-        // with variables in a different order should still work okay (I think...)
-        for (j = 0; j < m->args.count(); j++) ss = ss.arg(m->args[j]);
-        s.append(ss + "\n");
-      }
-    }
+  } else {
+    s = m_messageList[source].join(QChar('\n'));
   }
   if (gncdebug) qDebug() << s;
   return (static_cast<const QString>(s));
@@ -2220,7 +2211,9 @@ QString MyMoneyGncReader::createOrphanAccount(const QString& gncName)
   m_storage->addAccount(acc);
   // assign the gnucash id as the key into the map to find our id
   m_mapIds[gncName.toUtf8()] = acc.id();
-  postMessage(QString("OR"), 1, acc.name().toLatin1());
+  m_messageList["OR"].append(
+    i18n("One or more transactions contain a reference to an otherwise unknown account\n"
+                 "An asset account with the name %1 has been created to hold the data", acc.name()));
   return (acc.id());
 }
 //****************************** incrDate *********************************************
@@ -2251,17 +2244,23 @@ MyMoneyAccount MyMoneyGncReader::checkConsistency(MyMoneyAccount& parent, MyMone
   // these are a couple I found in my file, no doubt more will be discovered
   if ((child.accountType() == MyMoneyAccount::Investment) &&
       (parent.accountType() != MyMoneyAccount::Asset)) {
-    postMessage("CC", 1, child.name().toLatin1());
+    m_messageList["CC"].append(
+      i18n("An Investment account must be a child of an Asset account\n"
+      "Account %1 will be stored under the main Asset account", child.name()));
     return m_storage->asset();
   }
   if ((child.accountType() == MyMoneyAccount::Income) &&
       (parent.accountType() != MyMoneyAccount::Income)) {
-    postMessage("CC", 2, child.name().toLatin1());
+    m_messageList["CC"].append(
+      i18n("An Income account must be a child of an Income account\n"
+                 "Account %1 will be stored under the main Income account", child.name()));
     return m_storage->income();
   }
   if ((child.accountType() == MyMoneyAccount::Expense) &&
       (parent.accountType() != MyMoneyAccount::Expense)) {
-    postMessage("CC", 3, child.name().toLatin1());
+    m_messageList["CC"].append(
+      i18n("An Expense account must be a child of an Expense account\n"
+                 "Account %1 will be stored under the main Expense account", child.name()));
     return m_storage->expense();
   }
   return (parent);
@@ -2449,96 +2448,5 @@ void MyMoneyGncReader::signalProgress(int current, int total, const QString& msg
   if (m_progressCallback != 0)
     (*m_progressCallback)(current, total, msg);
   return ;
-}
-// error and information reporting
-//***************************** Information and error messages *********************
-void MyMoneyGncReader::postMessage(const QString& source, const unsigned int code, const char* arg1)
-{
-  postMessage(source, code, QStringList(arg1));
-}
-void MyMoneyGncReader::postMessage(const QString& source, const unsigned int code, const char* arg1, const char* arg2)
-{
-  QStringList argList(arg1);
-  argList.append(arg2);
-  postMessage(source, code, argList);
-}
-void MyMoneyGncReader::postMessage(const QString& source, const unsigned int code, const char* arg1, const char* arg2, const char* arg3)
-{
-  QStringList argList(arg1);
-  argList.append(arg2);
-  argList.append(arg3);
-  postMessage(source, code, argList);
-}
-void MyMoneyGncReader::postMessage(const QString& source, const unsigned int code, const QStringList& argList)
-{
-  int i;
-  GncMessageArgs *m = new GncMessageArgs;
-
-  m->source = source;
-  m->code = code;
-  // get the number of args this message requires
-  const int argCount = GncMessages::argCount(source, code);
-  if ((gncdebug) && (argCount != argList.count()))
-    qDebug() << QString("MyMoneyGncReader::postMessage debug: Message %1, code %2, requires %3 arguments, got %4")
-    .arg(source).arg(code).arg(argCount).arg(argList.count());
-  // store the arguments
-  for (i = 0; i < argCount; ++i) {
-    if (i > argList.count()) m->args.append(QString());
-    else m->args.append(argList[i]);  //Adds the next argument to the list
-  }
-  m_messageList.append(m);
-  return ;
-}
-//********************************** Message texts **********************************************
-GncMessages::messText GncMessages::texts [] = {
-  {"CC", 1, i18n("An Investment account must be a child of an Asset account\n"
-    "Account %1 will be stored under the main Asset account")},
-  {"CC", 2, i18n("An Income account must be a child of an Income account\n"
-                 "Account %1 will be stored under the main Income account")},
-  {"CC", 3, i18n("An Expense account must be a child of an Expense account\n"
-                 "Account %1 will be stored under the main Expense account")},
-  {"OR", 1, i18n("One or more transactions contain a reference to an otherwise unknown account\n"
-                 "An asset account with the name %1 has been created to hold the data")},
-  {"SC", 1, i18n("Schedule %1 has interval of %2 which is not currently available")},
-  {"SC", 2, i18n("Schedule %1 dropped at user request")},
-  {"SC", 3, i18n("Schedule %1 contains unknown action (key = %2, type = %3)")},
-  {"SC", 4, i18n("Schedule %1 contains multiple actions; only one has been imported")},
-  {"SC", 5, i18n("Schedule %1 contains no valid splits")},
-  {"SC", 6, i18n("Schedule %1 appears to contain a formula. GnuCash formulae are not convertible")},
-  {"SC", 7, i18n("Schedule %1 contains unknown interval specification; please check for correct operation")},
-  {"SC", 8, i18n("Schedule %1 contains a deferred interval specification; please check for correct operation")},
-  {"CC", 4, i18n("Account or Category %1, transaction date %2; split contains invalid value; please check")},
-  {"ZZ", 0, ""} // stopper
-};
-//
-QString GncMessages::text(const QString source, const unsigned int code)
-{
-  TRY
-  unsigned int i;
-  for (i = 0; texts[i].source != "ZZ"; i++) {
-    if ((source == texts[i].source) && (code == texts[i].code)) break;
-  }
-  if (texts[i].source == "ZZ") {
-    QString mess = QString().sprintf("Internal error - unknown message - source %s, code %i", qPrintable(source), code);
-    throw new MYMONEYEXCEPTION(mess);
-  }
-  return (texts[i].text);
-  PASS
-}
-//
-unsigned int GncMessages::argCount(const QString source, const unsigned int code)
-{
-  TRY
-  unsigned int i;
-  for (i = 0; texts[i].source != "ZZ"; i++) {
-    if ((source == texts[i].source) && (code == texts[i].code)) break;
-  }
-  if (texts[i].source == "ZZ") {
-    QString mess = QString().sprintf("Internal error - unknown message - source %s, code %d", qPrintable(source), code);
-    throw new MYMONEYEXCEPTION(mess);
-  }
-  QRegExp argConst("%\\d");
-  return (texts[i].text.count(argConst));
-  PASS
 }
 #endif // _GNCFILEANON
