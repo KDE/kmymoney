@@ -214,12 +214,6 @@ public:
   unsigned hierarchyDepth(void) const;
 
   /**
-    * Returns whether this account is a liquid asset
-    *
-    */
-  bool isLiquidAsset(void) const;
-
-  /**
    * Returns whether this account is a liquid liability
    *
    */

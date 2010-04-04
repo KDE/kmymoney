@@ -536,6 +536,36 @@ void MyMoneyFileTest::testModifyAccount()
   }
   storage->m_dirty = false;
 
+  // try to change to an account type that is allowed
+  p.setAccountType(MyMoneyAccount::Savings);
+  ft.restart();
+  try {
+    m->modifyAccount(p);
+    ft.commit();
+
+    CPPUNIT_ASSERT(m->dirty() == true);
+    CPPUNIT_ASSERT(m->accountCount() == 7);
+    CPPUNIT_ASSERT(p.accountType() == MyMoneyAccount::Savings);
+    CPPUNIT_ASSERT(p.name() == "New account name");
+
+  } catch (MyMoneyException *e) {
+    delete e;
+    CPPUNIT_FAIL("Unexpected exception!");
+  }
+  storage->m_dirty = false;
+
+  // try to change to an account type that is not allowed
+  p.setAccountType(MyMoneyAccount::CreditCard);
+  ft.restart();
+  try {
+    m->modifyAccount(p);
+    CPPUNIT_FAIL("Expecting exception!");
+  } catch (MyMoneyException *e) {
+    ft.commit();
+    delete e;
+  }
+  storage->m_dirty = false;
+
   // try to fool engine a bit
   p.setParentAccountId("A000001");
   ft.restart();

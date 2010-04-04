@@ -490,9 +490,10 @@ void MyMoneySeqAccessMgr::modifyAccount(const MyMoneyAccount& account, const boo
     // check if the new info is based on the old one.
     // this is the case, when the file and the id
     // as well as the type are equal.
-    if ((((*pos).parentAccountId() == account.parentAccountId())
-         && ((*pos).accountType() == account.accountType()))
-        || (skipCheck == true)) {
+    if (((*pos).parentAccountId() == account.parentAccountId()
+         && ((*pos).accountType() == account.accountType()
+             || ((*pos).isLiquidAsset() && account.isLiquidAsset())))
+        || skipCheck == true) {
       // make sure that all the referenced objects exist
       if (!account.institutionId().isEmpty())
         institution(account.institutionId());

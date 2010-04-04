@@ -270,6 +270,12 @@ bool MyMoneyAccount::isInvest(void) const
   return accountType() == Stock;
 }
 
+bool MyMoneyAccount::isLiquidAsset(void) const
+{
+  return accountType() == Checkings ||
+         accountType() == Savings ||
+         accountType() == Cash;
+}
 
 MyMoneyAccountLoan::MyMoneyAccountLoan(const MyMoneyAccount& acc)
     : MyMoneyAccount(acc)

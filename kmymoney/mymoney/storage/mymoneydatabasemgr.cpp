@@ -545,7 +545,8 @@ void MyMoneyDatabaseMgr::modifyAccount(const MyMoneyAccount& account, const bool
     // this is the case, when the file and the id
     // as well as the type are equal.
     if (((*pos).parentAccountId() == account.parentAccountId()
-         && (*pos).accountType() == account.accountType())
+         && ((*pos).accountType() == account.accountType()
+             || ((*pos).isLiquidAsset() && account.isLiquidAsset())))
         || skipCheck == true) {
       // make sure that all the referenced objects exist
       if (!account.institutionId().isEmpty())

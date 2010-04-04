@@ -539,6 +539,15 @@ public:
   bool isInvest(void) const;
 
   /**
+    * This method returns @a true if the account type is
+    * Checkings, Savings or Cash
+    *
+    * @retval true account is of type Checkings, Savings or Cash
+    * @retval false for all other account types
+    */
+  bool isLiquidAsset(void) const;
+
+  /**
    * This method returns a name that has a brokerage suffix of
    * the current name. It only works on investment accounts and
    * returns the name for all other cases.

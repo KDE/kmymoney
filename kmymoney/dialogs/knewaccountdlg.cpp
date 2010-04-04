@@ -204,64 +204,49 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
       m_minBalanceAbsoluteEdit->hide();
     }
 
-    typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Checkings));
-    typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Savings));
-    typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Cash));
-    typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::CreditCard));
-    typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Loan));
-    typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Investment));
-    typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Asset));
-    typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Liability));
-    typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Stock));
-    /*
-        typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::CertificateDep));
-        typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::MoneyMarket));
-        typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Currency));
-    */
+    QString typeString = KMyMoneyUtils::accountTypeToString(account.accountType());
 
-    // Hardcoded but acceptable
-    switch (account.accountType()) {
-    default:
-    case MyMoneyAccount::Checkings:
-      typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Checkings), false);
-      break;
-    case MyMoneyAccount::Savings:
-      typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Savings), false);
-      break;
-    case MyMoneyAccount::Cash:
-      typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Cash), false);
-      break;
-    case MyMoneyAccount::CreditCard:
-      typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::CreditCard), false);
-      break;
-    case MyMoneyAccount::Loan:
-      typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Loan), false);
-      break;
-    case MyMoneyAccount::Investment:
-      typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Investment), false);
-      break;
-    case MyMoneyAccount::Asset:
-      typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Asset), false);
-      break;
-    case MyMoneyAccount::Liability:
-      typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Liability), false);
-      break;
-    case MyMoneyAccount::Stock:
-      m_institutionBox->hide();
-      typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Stock), false);
-      break;
+    if (m_isEditing) {
+      if (account.isLiquidAsset()) {
+        typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Checkings));
+        typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Savings));
+        typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Cash));
+      } else {
+        typeCombo->addItem(typeString);
+        // Once created, accounts of other account types are not
+        // allowed to be changed.
+        typeCombo->setEnabled(false);
+      }
+      // Once created, a currency cannot be changed if it is referenced.
+      m_currency->setDisabled(MyMoneyFile::instance()->isReferenced(m_account));
+    } else {
+      typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Checkings));
+      typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Savings));
+      typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Cash));
+      typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::CreditCard));
+      typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Loan));
+      typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Investment));
+      typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Asset));
+      typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Liability));
+      typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Stock));
       /*
-            case MyMoneyAccount::CertificateDep:
-              typeCombo->setCurrentItem(5);
-              break;
-            case MyMoneyAccount::MoneyMarket:
-              typeCombo->setCurrentItem(7);
-              break;
-            case MyMoneyAccount::Currency:
-              typeCombo->setCurrentItem(8);
-              break;
+      typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::CertificateDep));
+      typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::MoneyMarket));
+      typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Currency));
       */
+      // Do not create account types that are not supported
+      // by the current engine.
+      if (account.accountType() == MyMoneyAccount::UnknownAccountType ||
+          account.accountType() == MyMoneyAccount::CertificateDep ||
+          account.accountType() == MyMoneyAccount::MoneyMarket ||
+          account.accountType() == MyMoneyAccount::Currency)
+        typeString = KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Checkings);
     }
+
+    typeCombo->setCurrentItem(typeString, false);
+
+    if (account.isInvest())
+      m_institutionBox->hide();
 
     if (!m_account.openingDate().isValid())
       m_account.setOpeningDate(QDate::currentDate());
@@ -282,13 +267,6 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
       m_maxCreditEarlyEdit->setValue(m_maxCreditEarlyEdit->value()*MyMoneyMoney(-1, 1));
     loadKVP("lastNumberUsed", m_lastCheckNumberUsed);
 
-
-    // we do not allow to change the account type once an account
-    // was created. Same applies to currency if it is referenced.
-    if (m_isEditing) {
-      typeCombo->setEnabled(false);
-      m_currency->setDisabled(MyMoneyFile::instance()->isReferenced(m_account));
-    }
     if (m_account.isInvest()) {
       typeCombo->setEnabled(false);
       m_qcheckboxPreferred->hide();

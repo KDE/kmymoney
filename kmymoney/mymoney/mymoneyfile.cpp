@@ -288,7 +288,8 @@ void MyMoneyFile::modifyAccount(const MyMoneyAccount& _account)
       throw new MYMONEYEXCEPTION("Unable to modify the standard account groups");
   }
 
-  if (account.accountType() != acc.accountType())
+  if (account.accountType() != acc.accountType() &&
+      !account.isLiquidAsset() && !acc.isLiquidAsset())
     throw new MYMONEYEXCEPTION("Unable to change account type");
 
   // clear all changed objects from cache
