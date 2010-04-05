@@ -562,9 +562,6 @@ void KHomeView::showPayments(void)
           continue;
         }
 
-        qDebug("nextPayment: %s", qPrintable(KGlobal::locale()->formatDate((*it).nextPayment((*it).nextDueDate()), KLocale::ShortDate)));
-        qDebug("endDate: %s", qPrintable(KGlobal::locale()->formatDate((*it).endDate(), KLocale::ShortDate)));
-
         //if nextPayment returns an invalid date, setNextDueDate will just skip it, resulting in a loop
         //we check the resulting date and erase the schedule if invalid
         if(!((*it).nextPayment((*it).nextDueDate())).isValid()) {
