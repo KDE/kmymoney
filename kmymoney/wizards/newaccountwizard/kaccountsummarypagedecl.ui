@@ -28,7 +28,7 @@
         </widget>
       </item>
       <item>
-        <widget class="K3ListView" name="m_dataList">
+        <widget class="KTextEdit" name="m_dataList">
           <property name="sizePolicy">
             <sizepolicy>
               <hsizetype>7</hsizetype>
@@ -37,40 +37,9 @@
               <verstretch>2</verstretch>
             </sizepolicy>
           </property>
-          <property name="hScrollBarMode">
-            <enum>AlwaysOff</enum>
-          </property>
-          <property name="allColumnsShowFocus">
+          <property name="readOnly">
             <bool>true</bool>
           </property>
-          <property name="resizeMode">
-            <enum>LastColumn</enum>
-          </property>
-          <property name="fullWidth">
-            <bool>false</bool>
-          </property>
-          <column>
-            <property name="text">
-              <string>Item</string>
-            </property>
-            <property name="clickable">
-              <bool>true</bool>
-            </property>
-            <property name="resizable">
-              <bool>true</bool>
-            </property>
-          </column>
-          <column>
-            <property name="text">
-              <string>Value</string>
-            </property>
-            <property name="clickable">
-              <bool>true</bool>
-            </property>
-            <property name="resizable">
-              <bool>true</bool>
-            </property>
-          </column>
         </widget>
       </item>
     </layout>
@@ -81,6 +50,11 @@
       <class>K3ListView</class>
       <extends>Q3ListView</extends>
       <header location="global">k3listview.h</header>
+    </customwidget>
+    <customwidget>
+      <class>KTextEdit</class>
+      <extends>QTextEdit</extends>
+      <header location="global">ktextedit.h</header>
     </customwidget>
   </customwidgets>
 </ui>
