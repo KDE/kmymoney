@@ -433,14 +433,9 @@
                           <verstretch>1</verstretch>
                         </sizepolicy>
                       </property>
-                      <item>
-                        <property name="text">
-                          <string>New Item</string>
-                        </property>
-                        <property name="pixmap">
-                          <pixmap/>
-                        </property>
-                      </item>
+                      <property name="readOnly">
+                        <bool>true</bool>
+                      </property>
                     </widget>
                   </item>
                 </layout>
