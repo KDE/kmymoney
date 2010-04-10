@@ -251,18 +251,22 @@ void kMyMoneyDateInput::keyPressEvent(QKeyEvent * k)
   case Qt::Key_Equal:
   case Qt::Key_Plus:
     slotDateChosen(d->m_date.addDays(1));
+    k->accept();
     break;
 
   case Qt::Key_Minus:
     slotDateChosen(d->m_date.addDays(-1));
+    k->accept();
     break;
 
   default:
     if (today.contains(QKeySequence(k->key())) || k->key() == Qt::Key_T) {
       slotDateChosen(QDate::currentDate());
+      k->accept();
     }
     break;
   }
+  k->ignore(); // signal that the key event was not handled
 }
 
 /**
@@ -280,10 +284,9 @@ bool kMyMoneyDateInput::eventFilter(QObject *, QEvent *e)
     d->m_datePopup->hide();
   else if (e->type() == QEvent::KeyPress) {
     if (QKeyEvent *k = dynamic_cast<QKeyEvent*>(e)) {
-      if (k->key() == Qt::Key_Minus) {
-        keyPressEvent(k);
-        return true;
-      }
+      keyPressEvent(k);
+      if (k->isAccepted())
+        return true; // signal that the key event was handled
     }
   }
 
