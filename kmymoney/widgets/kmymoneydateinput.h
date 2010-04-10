@@ -48,6 +48,10 @@ public:
   explicit KMyMoneyDateEdit(const QDate& date, QWidget *parent = 0) : QDateEdit(date, parent) {}
 
 protected:
+  /** if the date was cleared (a state which is not supported by QDateEdit)
+    * make sure that a date can be entered again 
+    */
+  void keyPressEvent(QKeyEvent* k);
   /** reimplemented for internal reasons */
   bool event(QEvent* e);
 };

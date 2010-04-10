@@ -57,6 +57,19 @@ const int DATE_POPUP_TIMEOUT = 1500;
 const QDate INVALID_DATE = QDate(1800, 1, 1);
 }
 
+void KMyMoneyDateEdit::keyPressEvent(QKeyEvent* k)
+{
+  if (lineEdit()->text().isEmpty() && QChar(k->key()).isDigit())
+  {
+    // the line edit is empty which means that the date was cleared
+    // and a digit character was entered, in this case set the date
+    // to the current date and let the editor do the actual work
+    setDate(QDate::currentDate());
+    setSelectedSection(currentSection());
+  }
+  QDateEdit::keyPressEvent(k);
+}
+
 bool KMyMoneyDateEdit::event(QEvent* e)
 {
   // make sure that we keep the current date setting of a kMyMoneyDateInput object
