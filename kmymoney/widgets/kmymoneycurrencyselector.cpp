@@ -94,6 +94,7 @@ void KMyMoneySecuritySelector::update(const QString& id)
   QPixmap empty(16, 16);
   QBitmap mask(16, 16);
   mask.clear();
+  empty.fill(palette().color(QPalette::Base));
   empty.setMask(mask);
 
   int itemId = 0;
