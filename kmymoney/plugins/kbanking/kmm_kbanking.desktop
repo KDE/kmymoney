@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=KBanking
 Name[da]=KBanking
+Name[de]=KBanking
 Name[en_GB]=KBanking
 Name[es]=KBanking
 Name[et]=KBanking
@@ -14,6 +15,7 @@ Name[uk]=KBanking
 Name[x-test]=xxKBankingxx
 Comment=Add online banking to KMyMoney
 Comment[da]=Føj netbank til KMyMoney
+Comment[de]=Fügt Funktionen für das Online-Banking zu KMyMoney hinzu
 Comment[en_GB]=Add online banking to KMyMoney
 Comment[es]=Añadir banca online a KMyMoney
 Comment[et]=Internetipanganduse lisamine KMyMoneysse

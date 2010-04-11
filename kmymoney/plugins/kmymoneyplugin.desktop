@@ -2,6 +2,7 @@
 Type=ServiceType
 Name=KMyMoney Plugin
 Name[da]=KMyMoney-plugin
+Name[de]=KMyMoney-Modul
 Name[el]=Πρόσθετο KMyMoney
 Name[en_GB]=KMyMoney Plugin
 Name[es]=Complemento de KMyMoney
@@ -22,6 +23,7 @@ Name[zh_TW]=KMyMoney 外掛程式
 X-KDE-ServiceType=KMyMoneyPlugin
 Comment=A KMyMoney plugin
 Comment[da]=Et KMyMoney-plugin
+Comment[de]=Ein KMyMoney-Modul
 Comment[el]=Ένα πρόσθετο για το KMyMoney
 Comment[en_GB]=A KMyMoney plugin
 Comment[es]=Un complemento de KMyMoney

@@ -21,6 +21,7 @@ Name[zh_TW]=KMyMoney 匯入外掛程式
 X-KDE-ServiceType=KMyMoneyImporterPlugin
 Comment=A KMyMoney plugin
 Comment[da]=Et KMyMoney-plugin
+Comment[de]=Ein KMyMoney-Modul
 Comment[el]=Ένα πρόσθετο για το KMyMoney
 Comment[en_GB]=A KMyMoney plugin
 Comment[es]=Un complemento de KMyMoney

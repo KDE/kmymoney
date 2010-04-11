@@ -18,6 +18,7 @@ Name[x-test]=xxKMyMoney OFXxx
 Name[zh_TW]=KMyMoney OFX
 Comment=Add OFX importing to KMyMoney
 Comment[da]=Føj OFX-import til KMyMoney
+Comment[de]=Fügt Funktionen für das Importieren von OFX zu KMyMoney hinzu
 Comment[el]=Προσθήκη του εργαλείου εισαγωγής αρχείων OFX στο KMyMoney
 Comment[en_GB]=Add OFX importing to KMyMoney
 Comment[es]=Añade importación de OFX a KMyMoney
