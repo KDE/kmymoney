@@ -20,6 +20,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QList>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -31,8 +33,6 @@
 #include <mymoneyfile.h>
 #include <mymoneyscheduled.h>
 #include <kmymoneyutils.h>
-//Added by qt3to4:
-#include <QList>
 
 TransactionMatcher::TransactionMatcher(const MyMoneyAccount& acc) :
     m_account(acc),

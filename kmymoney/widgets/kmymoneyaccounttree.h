@@ -18,10 +18,9 @@
 #ifndef KMYMONEYACCOUNTTREE_H
 #define KMYMONEYACCOUNTTREE_H
 
+#include <QList>
 
 #include <kmymoneyaccounttreebase.h>
-//Added by qt3to4:
-#include <QList>
 
 class KMyMoneyAccountTreeItem;
 

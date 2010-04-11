@@ -21,10 +21,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qwidget.h>
-//Added by qt3to4:
+#include <QWidget>
 #include <QResizeEvent>
-// class QListViewItem;
 
 // ----------------------------------------------------------------------------
 // KDE Includes

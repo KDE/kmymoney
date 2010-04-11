@@ -25,14 +25,14 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QList>
+
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "imymoneystorage.h"
 #include "imymoneyserialize.h"
 #include "mymoneymap.h"
-//Added by qt3to4:
-#include <QList>
 
 /**
   * @author Thomas Baumgart

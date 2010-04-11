@@ -29,7 +29,6 @@
 #include <QTableWidget>
 #include <QWidget>
 #include <QPointer>
-//Added by qt3to4:
 #include <QResizeEvent>
 #include <QEvent>
 #include <QMouseEvent>

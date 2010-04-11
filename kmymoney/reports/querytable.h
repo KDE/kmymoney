@@ -29,7 +29,6 @@
 // QT Includes
 
 #include <QStringList>
-//Added by qt3to4:
 #include <QList>
 
 // ----------------------------------------------------------------------------

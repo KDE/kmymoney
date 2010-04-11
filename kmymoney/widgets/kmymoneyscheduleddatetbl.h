@@ -26,6 +26,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QMouseEvent>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -35,8 +37,6 @@
 #include "kmymoneydatetbl.h"
 #include "kmymoneybriefschedule.h"
 #include "mymoneyscheduled.h"
-//Added by qt3to4:
-#include <QMouseEvent>
 
 /**
   * @author Michael Edwardes

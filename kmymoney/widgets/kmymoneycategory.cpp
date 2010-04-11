@@ -25,7 +25,6 @@
 #include <QPalette>
 #include <QLayout>
 #include <QTimer>
-//Added by qt3to4:
 #include <QHBoxLayout>
 #include <QFrame>
 #include <QFocusEvent>

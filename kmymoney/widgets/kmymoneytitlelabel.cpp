@@ -24,7 +24,6 @@
 #include <QVariant>
 #include <QStyle>
 #include <QPainter>
-//Added by qt3to4:
 #include <QResizeEvent>
 #include <QLabel>
 

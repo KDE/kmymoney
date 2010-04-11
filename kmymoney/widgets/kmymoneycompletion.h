@@ -26,17 +26,16 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qwidget.h>
-#include <kvbox.h>
+#include <QWidget>
 #include <QRegExp>
-//Added by qt3to4:
 #include <QEvent>
 class QTreeWidgetItem;
+class QTreeWidget;
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-class QTreeWidget;
+#include <kvbox.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes

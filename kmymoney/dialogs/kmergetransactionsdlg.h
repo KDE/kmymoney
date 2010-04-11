@@ -1,6 +1,3 @@
-//Added by qt3to4:
-#include <QEvent>
-#include <QResizeEvent>
 /***************************************************************************
                           kmergetransactionsdlg.h
                              -------------------
@@ -24,7 +21,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-class QResizeEvent;
+#include <QEvent>
+#include <QResizeEvent>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

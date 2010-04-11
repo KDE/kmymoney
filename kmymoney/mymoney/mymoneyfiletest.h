@@ -22,10 +22,9 @@
 
 #define private public
 #define protected public
+#include <Q3ValueList>
 #include "mymoneyfile.h"
 #include "storage/mymoneyseqaccessmgr.h"
-//Added by qt3to4:
-#include <Q3ValueList>
 #undef private
 #undef protected
 

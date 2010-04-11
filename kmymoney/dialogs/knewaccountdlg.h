@@ -20,6 +20,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QResizeEvent>
+
 // ----------------------------------------------------------------------------
 // KDE Headers
 
@@ -38,9 +40,9 @@
 #include <kmymoneyedit.h>
 
 #include "ui_knewaccountdlgdecl.h"
-//Added by qt3to4:
-#include <QResizeEvent>
+
 class KMyMoneyAccountTreeBaseItem;
+
 namespace reports
 {
 }

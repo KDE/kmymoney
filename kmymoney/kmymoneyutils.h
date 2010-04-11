@@ -27,8 +27,7 @@
 // QT Includes
 
 #include <QColor>
-#include <qfont.h>
-//Added by qt3to4:
+#include <QFont>
 #include <QPixmap>
 
 // ----------------------------------------------------------------------------

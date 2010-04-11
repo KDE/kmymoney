@@ -24,19 +24,18 @@
 
 #include <q3hbox.h>
 #include <QValidator>
-//Added by qt3to4:
 #include <QEvent>
 #include <QKeyEvent>
-#include <KHBox>
-class KVBox;
-class KHBox;
 class QWidget;
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klineedit.h>
+#include <KLineEdit>
+#include <KHBox>
 class KPushButton;
+class KVBox;
+class KHBox;
 
 // ----------------------------------------------------------------------------
 // Project Includes

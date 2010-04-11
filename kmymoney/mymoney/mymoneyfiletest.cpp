@@ -20,8 +20,7 @@
 #include <memory>
 #include <unistd.h>
 #include <QFile>
-#include <qdatastream.h>
-//Added by qt3to4:
+#include <QDataStream>
 #include <Q3ValueList>
 
 MyMoneyFileTest:: MyMoneyFileTest() {}

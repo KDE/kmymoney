@@ -51,7 +51,6 @@
 // QT Includes
 #include <q3frame.h>
 #include <QDateTime>
-//Added by qt3to4:
 #include <QResizeEvent>
 #include <QEvent>
 #include <QLineEdit>

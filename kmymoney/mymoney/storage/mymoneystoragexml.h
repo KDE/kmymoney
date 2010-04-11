@@ -23,8 +23,7 @@
 // QT Includes
 
 #include <qdom.h>
-#include <qdatastream.h>
-//Added by qt3to4:
+#include <QDataStream>
 #include <QList>
 class QIODevice;
 

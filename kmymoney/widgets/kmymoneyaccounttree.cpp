@@ -29,7 +29,6 @@
 #include <QPainter>
 #include <QPixmap>
 #include <QStyle>
-//Added by qt3to4:
 #include <QList>
 
 // ----------------------------------------------------------------------------

@@ -16,6 +16,8 @@
 
 #include "mymoneyscheduletest.h"
 
+#include <Q3ValueList>
+
 // Include internationalization
 #include <klocale.h>
 #include <KHolidays/Holidays>
@@ -24,8 +26,6 @@
 #include "mymoneymoney.h"
 
 #include <iostream>
-//Added by qt3to4:
-#include <Q3ValueList>
 
 MyMoneyScheduleTest::MyMoneyScheduleTest()
 {

@@ -22,7 +22,6 @@
 #include <q3header.h>
 #include <QLabel>
 #include <QTabWidget>
-//Added by qt3to4:
 #include <QList>
 
 // ----------------------------------------------------------------------------

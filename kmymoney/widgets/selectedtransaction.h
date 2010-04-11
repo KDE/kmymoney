@@ -21,6 +21,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QList>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -30,8 +32,6 @@
 #include <mymoneytransaction.h>
 #include <mymoneyscheduled.h>
 #include <mymoneysplit.h>
-//Added by qt3to4:
-#include <QList>
 
 namespace KMyMoneyRegister
 {

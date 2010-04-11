@@ -20,6 +20,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QPixmap>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -31,8 +33,6 @@
 #include <mymoneyutils.h>
 
 #include "ui_kinstitutionsviewdecl.h"
-//Added by qt3to4:
-#include <QPixmap>
 
 /**
   * @author Thomas Baumgart

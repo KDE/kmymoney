@@ -21,6 +21,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QList>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -29,8 +31,6 @@
 // Project Includes
 
 #include <transactioneditor.h>
-//Added by qt3to4:
-#include <QList>
 
 class InvestTransactionEditor : public TransactionEditor
 {

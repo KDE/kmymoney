@@ -22,7 +22,6 @@
 // QT Includes
 
 #include <QTimer>
-//Added by qt3to4:
 #include <QDragMoveEvent>
 #include <QDropEvent>
 #include <QPaintEvent>

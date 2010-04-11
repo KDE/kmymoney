@@ -22,8 +22,7 @@
 // QT Includes
 
 #include <QObject>
-#include <qwidget.h>
-//Added by qt3to4:
+#include <QWidget>
 #include <QList>
 #include <QEvent>
 

@@ -25,6 +25,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QPixmap>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -34,8 +36,7 @@
 #include <mymoneyaccount.h>
 #include <kmymoneyaccounttree.h>
 #include <mymoneyutils.h>
-//Added by qt3to4:
-#include <QPixmap>
+
 class K3ListViewSearchLineWidget;
 
 #include "ui_kcategoriesviewdecl.h"

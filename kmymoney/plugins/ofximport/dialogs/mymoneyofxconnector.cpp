@@ -29,7 +29,6 @@
 
 #include <QDateTime>
 #include <QRegExp>
-//Added by qt3to4:
 #include <QByteArray>
 #include <Q3ValueList>
 

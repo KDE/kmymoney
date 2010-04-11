@@ -28,7 +28,6 @@
 #include <QButtonGroup>
 #include <QRadioButton>
 #include <QLabel>
-//Added by qt3to4:
 #include <QList>
 
 // ----------------------------------------------------------------------------
