@@ -49,7 +49,7 @@ public:
 
 protected:
   /** if the date was cleared (a state which is not supported by QDateEdit)
-    * make sure that a date can be entered again 
+    * make sure that a date can be entered again
     */
   void keyPressEvent(QKeyEvent* k);
   /** reimplemented for internal reasons */

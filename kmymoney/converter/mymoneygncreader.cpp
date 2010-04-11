@@ -1502,7 +1502,7 @@ void MyMoneyGncReader::convertSplit(const GncSplit *gsp)
     // it's not quite a consistency check, but easier to treat it as such
     m_messageList["CC"].append
     (i18n("Account or Category %1, transaction date %2; split contains invalid value; please check",
-    splitAccount.name(), m_txDatePosted.toString(Qt::ISODate)));
+          splitAccount.name(), m_txDatePosted.toString(Qt::ISODate)));
   }
   MyMoneyMoney splitQuantity(convBadValue(gsp->qty()));
   split.setValue(splitValue);
@@ -1735,7 +1735,7 @@ void MyMoneyGncReader::convertTemplateSplit(const QString& schedName, const GncT
     } else {
       m_messageList["SC"].append(
         i18n("Schedule %1 contains unknown action (key = %2, type = %3)",
-          schedName, slot.key(), slot.type()));
+             schedName, slot.key(), slot.type()));
       m_suspectSchedule = true;
     }
   }
@@ -1743,7 +1743,7 @@ void MyMoneyGncReader::convertTemplateSplit(const QString& schedName, const GncT
   if (xactionCount > 1) {
     m_messageList["SC"].append(
       i18n("Schedule %1 contains multiple actions; only one has been imported",
-      schedName));
+           schedName));
     m_suspectSchedule = true;
   }
   if (validSlotCount == 0) {
@@ -1754,7 +1754,7 @@ void MyMoneyGncReader::convertTemplateSplit(const QString& schedName, const GncT
   if (nonNumericFormula) {
     m_messageList["SC"].append(
       i18n("Schedule %1 appears to contain a formula. GnuCash formulae are not convertible",
-      schedName));
+           schedName));
     m_suspectSchedule = true;
   }
   // find the kmm account id corresponding to the gnc id
@@ -1887,7 +1887,7 @@ void MyMoneyGncReader::convertSchedule(const GncSchedule *gsc)
   if (vi[i].gncType == "zzz") {
     m_messageList["SC"].append(
       i18n("Schedule %1 has interval of %2 which is not currently available",
-         sc.name(), frequency));
+           sc.name(), frequency));
     i = 0; // treat as single occurrence
     m_suspectSchedule = true;
   }
@@ -1930,8 +1930,8 @@ void MyMoneyGncReader::convertSchedule(const GncSchedule *gsc)
   // Check for sched deferred interval. Don't know how/if we can handle it, or even what it means...
   if (gsc->getSchedDef() != NULL) {
     m_messageList["SC"].append(
-    i18n("Schedule %1 contains a deferred interval specification; please check for correct operation",
-         sc.name()));
+      i18n("Schedule %1 contains a deferred interval specification; please check for correct operation",
+           sc.name()));
     m_suspectSchedule = true;
   }
   // payment type, options
@@ -2213,7 +2213,7 @@ QString MyMoneyGncReader::createOrphanAccount(const QString& gncName)
   m_mapIds[gncName.toUtf8()] = acc.id();
   m_messageList["OR"].append(
     i18n("One or more transactions contain a reference to an otherwise unknown account\n"
-                 "An asset account with the name %1 has been created to hold the data", acc.name()));
+         "An asset account with the name %1 has been created to hold the data", acc.name()));
   return (acc.id());
 }
 //****************************** incrDate *********************************************
@@ -2246,21 +2246,21 @@ MyMoneyAccount MyMoneyGncReader::checkConsistency(MyMoneyAccount& parent, MyMone
       (parent.accountType() != MyMoneyAccount::Asset)) {
     m_messageList["CC"].append(
       i18n("An Investment account must be a child of an Asset account\n"
-      "Account %1 will be stored under the main Asset account", child.name()));
+           "Account %1 will be stored under the main Asset account", child.name()));
     return m_storage->asset();
   }
   if ((child.accountType() == MyMoneyAccount::Income) &&
       (parent.accountType() != MyMoneyAccount::Income)) {
     m_messageList["CC"].append(
       i18n("An Income account must be a child of an Income account\n"
-                 "Account %1 will be stored under the main Income account", child.name()));
+           "Account %1 will be stored under the main Income account", child.name()));
     return m_storage->income();
   }
   if ((child.accountType() == MyMoneyAccount::Expense) &&
       (parent.accountType() != MyMoneyAccount::Expense)) {
     m_messageList["CC"].append(
       i18n("An Expense account must be a child of an Expense account\n"
-                 "Account %1 will be stored under the main Expense account", child.name()));
+           "Account %1 will be stored under the main Expense account", child.name()));
     return m_storage->expense();
   }
   return (parent);

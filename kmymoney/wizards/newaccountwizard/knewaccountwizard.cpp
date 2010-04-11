@@ -1496,7 +1496,7 @@ HierarchyPage::HierarchyPage(Wizard* wizard) :
   m_parentAccounts->setSortingEnabled(true);
   m_parentAccounts->setModel(m_filterProxyModel);
 
-  connect(m_parentAccounts->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)), this, SLOT(parentAccountChanged()));
+  connect(m_parentAccounts->selectionModel(), SIGNAL(currentChanged(QModelIndex, QModelIndex)), this, SLOT(parentAccountChanged()));
 }
 
 void HierarchyPage::enterPage(void)
@@ -1518,8 +1518,7 @@ const MyMoneyAccount& HierarchyPage::parentAccount(void)
   QVariant data = m_parentAccounts->model()->data(m_parentAccounts->currentIndex(), AccountsModel::AccountRole);
   if (data.isValid()) {
     m_parentAccount = data.value<MyMoneyAccount>();
-  } else
-  {
+  } else {
     m_parentAccount = MyMoneyAccount();
   }
   return m_parentAccount;
