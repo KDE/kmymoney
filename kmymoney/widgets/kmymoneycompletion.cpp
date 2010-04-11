@@ -56,7 +56,7 @@ kMyMoneyCompletion::kMyMoneyCompletion(QWidget *parent) :
   m_selector = new KMyMoneySelector(this);
 
   // to handle the keyboard events received by this widget in the same way as
-  // the keyboard events reveived by the other widgets
+  // the keyboard events received by the other widgets
   installEventFilter(this);
 
   connectSignals(m_selector, m_selector->listView());
