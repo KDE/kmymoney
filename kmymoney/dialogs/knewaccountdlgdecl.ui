@@ -1,909 +1,912 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui version="4.0" stdsetdef="1">
-  <author></author>
-  <comment></comment>
-  <exportmacro></exportmacro>
-  <class>KNewAccountDlgDecl</class>
-  <widget class="QDialog" name="kNewAccountDlgDecl">
-    <property name="geometry">
-      <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>670</width>
-        <height>518</height>
-      </rect>
-    </property>
-    <property name="windowTitle">
-      <string>New Account Dialog</string>
-    </property>
-    <property name="sizeGripEnabled">
-      <bool>true</bool>
-    </property>
-    <layout class="QVBoxLayout">
-      <item>
-        <widget class="KTabWidget" name="m_tab">
-          <widget class="QWidget" name="m_generalTab">
-            <attribute name="title">
-              <string>General</string>
-            </attribute>
-            <layout class="QVBoxLayout">
-              <item>
-                <layout class="QHBoxLayout">
-                  <item>
-                    <widget class="QLabel" name="TextLabel1">
-                      <property name="minimumSize">
-                        <size>
-                          <width>60</width>
-                          <height>0</height>
-                        </size>
-                      </property>
-                      <property name="maximumSize">
-                        <size>
-                          <width>60</width>
-                          <height>32767</height>
-                        </size>
-                      </property>
-                      <property name="text">
-                        <string>Name:</string>
-                      </property>
-                      <property name="wordWrap">
-                        <bool>false</bool>
-                      </property>
-                    </widget>
-                  </item>
-                  <item>
-                    <widget class="KLineEdit" name="accountNameEdit"/>
-                  </item>
-                </layout>
-              </item>
-              <item>
-                <widget class="QGroupBox" name="groupBox4">
-                  <property name="title">
-                    <string>Opening information</string>
-                  </property>
-                  <layout class="QGridLayout">
-                    <property name="margin">
-                      <number>6</number>
-                    </property>
-                    <property name="spacing">
-                      <number>6</number>
-                    </property>
-                    <item row="1" column="1">
-                      <widget class="KMyMoneySecuritySelector" name="m_currency"/>
-                    </item>
-                    <item row="1" column="0">
-                      <widget class="QLabel" name="m_currencyText">
-                        <property name="text">
-                          <string>Currency:</string>
-                        </property>
-                        <property name="wordWrap">
-                          <bool>false</bool>
-                        </property>
-                      </widget>
-                    </item>
-                    <item row="0" column="1">
-                      <widget class="KComboBox" name="typeCombo">
-                        <property name="enabled">
-                          <bool>true</bool>
-                        </property>
-                        <property name="sizePolicy">
-                          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                            <horstretch>1</horstretch>
-                            <verstretch>0</verstretch>
-                          </sizepolicy>
-                        </property>
-                      </widget>
-                    </item>
-                    <item row="0" column="0">
-                      <widget class="QLabel" name="textLabel2">
-                        <property name="text">
-                          <string>Type:</string>
-                        </property>
-                        <property name="wordWrap">
-                          <bool>false</bool>
-                        </property>
-                      </widget>
-                    </item>
-                    <item row="0" column="2">
-                      <widget class="QLabel" name="TextLabel1_2">
-                        <property name="minimumSize">
-                          <size>
-                            <width>0</width>
-                            <height>0</height>
-                          </size>
-                        </property>
-                        <property name="text">
-                          <string>Date:</string>
-                        </property>
-                        <property name="wordWrap">
-                          <bool>false</bool>
-                        </property>
-                      </widget>
-                    </item>
-                    <item row="0" column="3">
-                      <widget class="kMyMoneyDateInput" name="startDateEdit"/>
-                    </item>
-                    <item row="1" column="2">
-                      <widget class="QLabel" name="textLabel1_3">
-                        <property name="text">
-                          <string>Balance:</string>
-                        </property>
-                        <property name="wordWrap">
-                          <bool>false</bool>
-                        </property>
-                      </widget>
-                    </item>
-                    <item row="1" column="3">
-                      <widget class="kMyMoneyEdit" name="m_openingBalanceEdit"/>
-                    </item>
-                  </layout>
-                </widget>
-              </item>
-              <item>
-                <widget class="QGroupBox" name="groupBox6">
-                  <property name="title">
-                    <string>Options</string>
-                  </property>
-                  <layout class="QVBoxLayout">
-                    <item>
-                      <layout class="QGridLayout">
-                        <item row="0" column="1">
-                          <layout class="QHBoxLayout">
-                            <item>
-                              <widget class="KLineEdit" name="m_lastCheckNumberUsed"/>
-                            </item>
-                            <item>
-                              <spacer name="spacer10_2">
-                                <property name="sizeHint">
-                                  <size>
-                                    <width>140</width>
-                                    <height>20</height>
-                                  </size>
-                                </property>
-                                <property name="sizeType">
-                                  <enum>QSizePolicy::Expanding</enum>
-                                </property>
-                                <property name="orientation">
-                                  <enum>Qt::Horizontal</enum>
-                                </property>
-                              </spacer>
-                            </item>
-                          </layout>
-                        </item>
-                        <item row="0" column="0">
-                          <widget class="QLabel" name="textLabel1_2">
-                            <property name="text">
-                              <string>Last check number:</string>
-                            </property>
-                            <property name="wordWrap">
-                              <bool>false</bool>
-                            </property>
-                          </widget>
-                        </item>
-                        <item row="1" column="0">
-                          <widget class="QLabel" name="TextLabel5">
-                            <property name="minimumSize">
-                              <size>
-                                <width>0</width>
-                                <height>0</height>
-                              </size>
-                            </property>
-                            <property name="maximumSize">
-                              <size>
-                                <width>32767</width>
-                                <height>32767</height>
-                              </size>
-                            </property>
-                            <property name="text">
-                              <string>Notes:</string>
-                            </property>
-                            <property name="alignment">
-                              <set>Qt::AlignTop</set>
-                            </property>
-                            <property name="wordWrap">
-                              <bool>false</bool>
-                            </property>
-                          </widget>
-                        </item>
-                        <item row="1" column="1">
-                          <widget class="Q3TextEdit" name="descriptionEdit"/>
-                        </item>
-                      </layout>
-                    </item>
-                    <item>
-                      <layout class="QGridLayout">
-                        <item row="1" column="0">
-                          <widget class="QCheckBox" name="m_qcheckboxNoVat">
-                            <property name="text">
-                              <string>No auto-VAT-assignment</string>
-                            </property>
-                          </widget>
-                        </item>
-                        <item row="0" column="1">
-                          <layout class="QHBoxLayout">
-                            <item>
-                              <widget class="QLabel" name="textLabel1_5">
-                                <property name="text">
-                                  <string>Price entry</string>
-                                </property>
-                                <property name="wordWrap">
-                                  <bool>false</bool>
-                                </property>
-                              </widget>
-                            </item>
-                            <item>
-                              <widget class="KMyMoneyGeneralCombo" name="m_priceMode">
-                                <property name="enabled">
-                                  <bool>false</bool>
-                                </property>
-                                <property name="sizePolicy">
-                                  <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                                    <horstretch>1</horstretch>
-                                    <verstretch>0</verstretch>
-                                  </sizepolicy>
-                                </property>
-                              </widget>
-                            </item>
-                          </layout>
-                        </item>
-                        <item row="0" column="0">
-                          <widget class="QCheckBox" name="m_qcheckboxPreferred">
-                            <property name="text">
-                              <string>Preferred Account</string>
-                            </property>
-                          </widget>
-                        </item>
-                      </layout>
-                    </item>
-                  </layout>
-                </widget>
-              </item>
-              <item>
-                <spacer name="spacer9">
-                  <property name="sizeHint">
-                    <size>
-                      <width>20</width>
-                      <height>16</height>
-                    </size>
-                  </property>
-                  <property name="sizeType">
-                    <enum>QSizePolicy::Expanding</enum>
-                  </property>
-                  <property name="orientation">
-                    <enum>Qt::Vertical</enum>
-                  </property>
-                </spacer>
-              </item>
-            </layout>
-          </widget>
-          <widget class="QWidget" name="m_institutionTab">
-            <attribute name="title">
-              <string>Institution</string>
-            </attribute>
-            <layout class="QVBoxLayout">
-              <item>
-                <widget class="QGroupBox" name="m_institutionBox">
-                  <property name="title">
-                    <string>Institution</string>
-                  </property>
-                  <layout class="QVBoxLayout">
-                    <item>
-                      <layout class="QHBoxLayout">
-                        <property name="margin">
-                          <number>0</number>
-                        </property>
-                        <property name="spacing">
-                          <number>6</number>
-                        </property>
-                        <item>
-                          <widget class="KComboBox" name="m_qcomboboxInstitutions"/>
-                        </item>
-                        <item>
-                          <widget class="QPushButton" name="m_qbuttonNew">
-                            <property name="sizePolicy">
-                              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                                <horstretch>0</horstretch>
-                                <verstretch>0</verstretch>
-                              </sizepolicy>
-                            </property>
-                            <property name="text">
-                              <string>New...</string>
-                            </property>
-                          </widget>
-                        </item>
-                      </layout>
-                    </item>
-                    <item>
-                      <layout class="QGridLayout">
-                        <item row="2" column="1">
-                          <widget class="KLineEdit" name="accountNoEdit"/>
-                        </item>
-                        <item row="2" column="0">
-                          <widget class="QLabel" name="TextLabel2_2">
-                            <property name="minimumSize">
-                              <size>
-                                <width>60</width>
-                                <height>0</height>
-                              </size>
-                            </property>
-                            <property name="maximumSize">
-                              <size>
-                                <width>60</width>
-                                <height>32767</height>
-                              </size>
-                            </property>
-                            <property name="text">
-                              <string>Number:</string>
-                            </property>
-                            <property name="wordWrap">
-                              <bool>false</bool>
-                            </property>
-                          </widget>
-                        </item>
-                        <item row="0" column="0">
-                          <widget class="QLabel" name="textLabel1_4">
-                            <property name="text">
-                              <string>BIC</string>
-                            </property>
-                            <property name="wordWrap">
-                              <bool>false</bool>
-                            </property>
-                          </widget>
-                        </item>
-                        <item row="1" column="1">
-                          <widget class="KLineEdit" name="ibanEdit"/>
-                        </item>
-                        <item row="1" column="0">
-                          <widget class="QLabel" name="textLabel3">
-                            <property name="text">
-                              <string>IBAN</string>
-                            </property>
-                            <property name="wordWrap">
-                              <bool>false</bool>
-                            </property>
-                          </widget>
-                        </item>
-                        <item row="0" column="1">
-                          <widget class="QLabel" name="m_bicValue">
-                            <property name="text">
-                              <string>x</string>
-                            </property>
-                            <property name="wordWrap">
-                              <bool>false</bool>
-                            </property>
-                          </widget>
-                        </item>
-                      </layout>
-                    </item>
-                  </layout>
-                </widget>
-              </item>
-              <item>
-                <spacer name="spacer8_2">
-                  <property name="sizeHint">
-                    <size>
-                      <width>21</width>
-                      <height>30</height>
-                    </size>
-                  </property>
-                  <property name="sizeType">
-                    <enum>QSizePolicy::Expanding</enum>
-                  </property>
-                  <property name="orientation">
-                    <enum>Qt::Vertical</enum>
-                  </property>
-                </spacer>
-              </item>
-            </layout>
-          </widget>
-          <widget class="QWidget" name="m_hiearchyTab">
-            <attribute name="title">
-              <string>Hierarchy</string>
-            </attribute>
-            <layout class="QVBoxLayout">
-              <item>
-                <widget class="QLabel" name="m_subAccountLabel">
-                  <property name="text">
-                    <string>Subaccount</string>
-                  </property>
-                  <property name="wordWrap">
-                    <bool>false</bool>
-                  </property>
-                </widget>
-              </item>
-              <item>
-                <widget class="KMyMoneyAccountTreeBase" name="m_qlistviewParentAccounts"/>
-              </item>
-            </layout>
-          </widget>
-          <widget class="QWidget" name="m_limitsTab">
-            <attribute name="title">
-              <string>Limits</string>
-            </attribute>
-            <layout class="QVBoxLayout">
-              <item>
-                <widget class="QLabel" name="qLabel1">
-                  <property name="text">
-                    <string>This page allows to setup certain limits. KMyMoney will warn you when the account balance reaches a limit.</string>
-                  </property>
-                  <property name="wordWrap">
-                    <bool>true</bool>
-                  </property>
-                </widget>
-              </item>
-              <item>
-                <layout class="QGridLayout">
-                  <item row="0" column="0">
-                    <widget class="QLabel" name="textLabel2_2">
-                      <property name="text">
-                        <string>Type</string>
-                      </property>
-                      <property name="wordWrap">
-                        <bool>false</bool>
-                      </property>
-                    </widget>
-                  </item>
-                  <item row="2" column="2">
-                    <widget class="kMyMoneyEdit" name="m_minBalanceAbsoluteEdit">
-                      <property name="resetButtonVisibility" stdset="0">
-                        <bool>false</bool>
-                      </property>
-                    </widget>
-                  </item>
-                  <item row="0" column="2">
-                    <widget class="QLabel" name="textLabel3_2">
-                      <property name="text">
-                        <string>Absolute limit</string>
-                      </property>
-                      <property name="wordWrap">
-                        <bool>false</bool>
-                      </property>
-                    </widget>
-                  </item>
-                  <item row="3" column="0">
-                    <widget class="QLabel" name="m_maxCreditLabel">
-                      <property name="text">
-                        <string>Maximum credit limit</string>
-                      </property>
-                      <property name="wordWrap">
-                        <bool>false</bool>
-                      </property>
-                    </widget>
-                  </item>
-                  <item row="3" column="1">
-                    <widget class="kMyMoneyEdit" name="m_maxCreditEarlyEdit">
-                      <property name="resetButtonVisibility" stdset="0">
-                        <bool>false</bool>
-                      </property>
-                    </widget>
-                  </item>
-                  <item row="3" column="2">
-                    <widget class="kMyMoneyEdit" name="m_maxCreditAbsoluteEdit">
-                      <property name="resetButtonVisibility" stdset="0">
-                        <bool>false</bool>
-                      </property>
-                    </widget>
-                  </item>
-                  <item row="2" column="1">
-                    <widget class="kMyMoneyEdit" name="m_minBalanceEarlyEdit">
-                      <property name="resetButtonVisibility" stdset="0">
-                        <bool>false</bool>
-                      </property>
-                    </widget>
-                  </item>
-                  <item row="2" column="0">
-                    <widget class="QLabel" name="m_minBalanceLabel">
-                      <property name="text">
-                        <string>Minimum balance</string>
-                      </property>
-                      <property name="wordWrap">
-                        <bool>false</bool>
-                      </property>
-                    </widget>
-                  </item>
-                  <item row="1" column="0" rowspan="1" colspan="3">
-                    <widget class="Line" name="line2">
-                      <property name="frameShape">
-                        <enum>QFrame::HLine</enum>
-                      </property>
-                      <property name="frameShadow">
-                        <enum>QFrame::Sunken</enum>
-                      </property>
-                    </widget>
-                  </item>
-                  <item row="0" column="1">
-                    <widget class="QLabel" name="textLabel4">
-                      <property name="text">
-                        <string>Early warning</string>
-                      </property>
-                      <property name="wordWrap">
-                        <bool>false</bool>
-                      </property>
-                    </widget>
-                  </item>
-                </layout>
-              </item>
-              <item>
-                <spacer name="spacer10_3">
-                  <property name="sizeHint">
-                    <size>
-                      <width>20</width>
-                      <height>30</height>
-                    </size>
-                  </property>
-                  <property name="sizeType">
-                    <enum>QSizePolicy::Expanding</enum>
-                  </property>
-                  <property name="orientation">
-                    <enum>Qt::Vertical</enum>
-                  </property>
-                </spacer>
-              </item>
-            </layout>
-          </widget>
-          <widget class="QWidget" name="m_taxTab">
-            <attribute name="title">
-              <string>Tax</string>
-            </attribute>
-            <layout class="QVBoxLayout">
-              <item>
-                <widget class="QGroupBox" name="groupBox3">
-                  <property name="title">
-                    <string>VAT details</string>
-                  </property>
-                  <layout class="QHBoxLayout">
-                    <item>
-                      <layout class="QVBoxLayout">
-                        <item>
-                          <widget class="QCheckBox" name="m_vatCategory">
-                            <property name="text">
-                              <string>VAT category</string>
-                            </property>
-                          </widget>
-                        </item>
-                        <item>
-                          <widget class="QFrame" name="m_vatCategoryFrame">
-                            <property name="frameShape">
-                              <enum>QFrame::NoFrame</enum>
-                            </property>
-                            <property name="frameShadow">
-                              <enum>QFrame::Plain</enum>
-                            </property>
-                            <layout class="QVBoxLayout">
-                              <property name="margin">
-                                <number>0</number>
-                              </property>
-                              <item>
-                                <widget class="QLabel" name="textLabel1">
-                                  <property name="text">
-                                    <string>VAT percentage</string>
-                                  </property>
-                                  <property name="wordWrap">
-                                    <bool>false</bool>
-                                  </property>
-                                </widget>
-                              </item>
-                              <item>
-                                <layout class="QHBoxLayout">
-                                  <item>
-                                    <widget class="kMyMoneyEdit" name="m_vatRate"/>
-                                  </item>
-                                  <item>
-                                    <spacer name="spacer17">
-                                      <property name="sizeHint">
-                                        <size>
-                                          <width>21</width>
-                                          <height>20</height>
-                                        </size>
-                                      </property>
-                                      <property name="sizeType">
-                                        <enum>QSizePolicy::Expanding</enum>
-                                      </property>
-                                      <property name="orientation">
-                                        <enum>Qt::Horizontal</enum>
-                                      </property>
-                                    </spacer>
-                                  </item>
-                                </layout>
-                              </item>
-                            </layout>
-                          </widget>
-                        </item>
-                        <item>
-                          <spacer name="spacer6">
-                            <property name="sizeHint">
-                              <size>
-                                <width>20</width>
-                                <height>40</height>
-                              </size>
-                            </property>
-                            <property name="sizeType">
-                              <enum>QSizePolicy::Expanding</enum>
-                            </property>
-                            <property name="orientation">
-                              <enum>Qt::Vertical</enum>
-                            </property>
-                          </spacer>
-                        </item>
-                      </layout>
-                    </item>
-                    <item>
-                      <widget class="QFrame" name="m_vatAssignmentFrame">
-                        <property name="frameShape">
-                          <enum>QFrame::NoFrame</enum>
-                        </property>
-                        <property name="frameShadow">
-                          <enum>QFrame::Plain</enum>
-                        </property>
-                        <layout class="QHBoxLayout">
-                          <property name="margin">
-                            <number>0</number>
-                          </property>
-                          <item>
-                            <layout class="QVBoxLayout">
-                              <item>
-                                <widget class="QCheckBox" name="m_vatAssignment">
-                                  <property name="text">
-                                    <string>Enable auto VAT assignment</string>
-                                  </property>
-                                </widget>
-                              </item>
-                              <item>
-                                <widget class="kMyMoneyAccountSelector" name="m_vatAccount"/>
-                              </item>
-                            </layout>
-                          </item>
-                          <item>
-                            <layout class="QVBoxLayout">
-                              <item>
-                                <widget class="QGroupBox" name="m_amountGroupBox">
-                                  <property name="minimumSize">
-                                    <size>
-                                      <width>0</width>
-                                      <height>0</height>
-                                    </size>
-                                  </property>
-                                  <property name="maximumSize">
-                                    <size>
-                                      <width>32767</width>
-                                      <height>32767</height>
-                                    </size>
-                                  </property>
-                                  <property name="title">
-                                    <string>Amount entered</string>
-                                  </property>
-                                  <layout class="QVBoxLayout">
-                                    <item>
-                                      <widget class="QFrame" name="frame">
-                                        <property name="frameShape">
-                                          <enum>QFrame::StyledPanel</enum>
-                                        </property>
-                                        <property name="frameShadow">
-                                          <enum>QFrame::Sunken</enum>
-                                        </property>
-                                        <layout class="QVBoxLayout">
-                                          <item>
-                                            <widget class="QRadioButton" name="m_grossAmount">
-                                              <property name="text">
-                                                <string>Gross amount</string>
-                                              </property>
-                                              <property name="checked">
-                                                <bool>true</bool>
-                                              </property>
-                                              <attribute name="buttonGroup">
-                                                <string>m_amountGroup</string>
-                                              </attribute>
-                                            </widget>
-                                          </item>
-                                          <item>
-                                            <widget class="QRadioButton" name="m_netAmount">
-                                              <property name="text">
-                                                <string>Net amount</string>
-                                              </property>
-                                              <attribute name="buttonGroup">
-                                                <string>m_amountGroup</string>
-                                              </attribute>
-                                            </widget>
-                                          </item>
-                                        </layout>
-                                      </widget>
-                                    </item>
-                                  </layout>
-                                </widget>
-                              </item>
-                              <item>
-                                <spacer name="spacer7">
-                                  <property name="sizeHint">
-                                    <size>
-                                      <width>20</width>
-                                      <height>21</height>
-                                    </size>
-                                  </property>
-                                  <property name="sizeType">
-                                    <enum>QSizePolicy::Expanding</enum>
-                                  </property>
-                                  <property name="orientation">
-                                    <enum>Qt::Vertical</enum>
-                                  </property>
-                                </spacer>
-                              </item>
-                            </layout>
-                          </item>
-                        </layout>
-                      </widget>
-                    </item>
-                  </layout>
-                </widget>
-              </item>
-              <item>
-                <widget class="QCheckBox" name="m_qcheckboxTax">
-                  <property name="text">
-                    <string>Include on Tax Reports</string>
-                  </property>
-                </widget>
-              </item>
-            </layout>
-          </widget>
-        </widget>
-      </item>
-      <item>
-        <widget class="Line" name="line1">
-          <property name="frameShape">
-            <enum>QFrame::HLine</enum>
-          </property>
-          <property name="frameShadow">
-            <enum>QFrame::Sunken</enum>
-          </property>
-        </widget>
-      </item>
-      <item>
+<ui version="4.0">
+ <class>kNewAccountDlgDecl</class>
+ <widget class="QDialog" name="kNewAccountDlgDecl">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>670</width>
+    <height>518</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>New Account Dialog</string>
+  </property>
+  <property name="sizeGripEnabled">
+   <bool>true</bool>
+  </property>
+  <layout class="QVBoxLayout">
+   <item>
+    <widget class="KTabWidget" name="m_tab">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="m_generalTab">
+      <attribute name="title">
+       <string>General</string>
+      </attribute>
+      <layout class="QVBoxLayout">
+       <item>
         <layout class="QHBoxLayout">
+         <item>
+          <widget class="QLabel" name="TextLabel1">
+           <property name="minimumSize">
+            <size>
+             <width>60</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>60</width>
+             <height>32767</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Name:</string>
+           </property>
+           <property name="wordWrap">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="KLineEdit" name="accountNameEdit"/>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox4">
+         <property name="title">
+          <string>Opening information</string>
+         </property>
+         <layout class="QGridLayout">
           <property name="margin">
-            <number>0</number>
+           <number>6</number>
           </property>
           <property name="spacing">
-            <number>6</number>
+           <number>6</number>
           </property>
+          <item row="1" column="1">
+           <widget class="KMyMoneySecuritySelector" name="m_currency"/>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="m_currencyText">
+            <property name="text">
+             <string>Currency:</string>
+            </property>
+            <property name="wordWrap">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="KComboBox" name="typeCombo">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+              <horstretch>1</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="textLabel2">
+            <property name="text">
+             <string>Type:</string>
+            </property>
+            <property name="wordWrap">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QLabel" name="TextLabel1_2">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Date:</string>
+            </property>
+            <property name="wordWrap">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <widget class="kMyMoneyDateInput" name="startDateEdit"/>
+          </item>
+          <item row="1" column="2">
+           <widget class="QLabel" name="textLabel1_3">
+            <property name="text">
+             <string>Balance:</string>
+            </property>
+            <property name="wordWrap">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="3">
+           <widget class="kMyMoneyEdit" name="m_openingBalanceEdit"/>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox6">
+         <property name="title">
+          <string>Options</string>
+         </property>
+         <layout class="QVBoxLayout">
           <item>
-            <spacer name="Spacer1">
-              <property name="sizeHint">
-                <size>
-                  <width>422</width>
-                  <height>0</height>
-                </size>
+           <layout class="QGridLayout">
+            <item row="0" column="1">
+             <layout class="QHBoxLayout">
+              <item>
+               <widget class="KLineEdit" name="m_lastCheckNumberUsed"/>
+              </item>
+              <item>
+               <spacer name="spacer10_2">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeType">
+                 <enum>QSizePolicy::Expanding</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>140</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="textLabel1_2">
+              <property name="text">
+               <string>Last check number:</string>
+              </property>
+              <property name="wordWrap">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="TextLabel5">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>32767</width>
+                <height>32767</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Notes:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignTop</set>
+              </property>
+              <property name="wordWrap">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="Q3TextEdit" name="descriptionEdit"/>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QGridLayout">
+            <item row="1" column="0">
+             <widget class="QCheckBox" name="m_qcheckboxNoVat">
+              <property name="text">
+               <string>No auto-VAT-assignment</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <layout class="QHBoxLayout">
+              <item>
+               <widget class="QLabel" name="textLabel1_5">
+                <property name="text">
+                 <string>Price entry</string>
+                </property>
+                <property name="wordWrap">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="KMyMoneyGeneralCombo" name="m_priceMode">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>1</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="0" column="0">
+             <widget class="QCheckBox" name="m_qcheckboxPreferred">
+              <property name="text">
+               <string>Preferred Account</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="spacer9">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Expanding</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>16</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="m_institutionTab">
+      <attribute name="title">
+       <string>Institution</string>
+      </attribute>
+      <layout class="QVBoxLayout">
+       <item>
+        <widget class="QGroupBox" name="m_institutionBox">
+         <property name="title">
+          <string>Institution</string>
+         </property>
+         <layout class="QVBoxLayout">
+          <item>
+           <layout class="QHBoxLayout">
+            <property name="spacing">
+             <number>6</number>
+            </property>
+            <property name="margin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="KComboBox" name="m_qcomboboxInstitutions"/>
+            </item>
+            <item>
+             <widget class="QPushButton" name="m_qbuttonNew">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>New...</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QGridLayout">
+            <item row="2" column="1">
+             <widget class="KLineEdit" name="accountNoEdit"/>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="TextLabel2_2">
+              <property name="minimumSize">
+               <size>
+                <width>60</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>60</width>
+                <height>32767</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Number:</string>
+              </property>
+              <property name="wordWrap">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="textLabel1_4">
+              <property name="text">
+               <string>BIC</string>
+              </property>
+              <property name="wordWrap">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="KLineEdit" name="ibanEdit"/>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="textLabel3">
+              <property name="text">
+               <string>IBAN</string>
+              </property>
+              <property name="wordWrap">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLabel" name="m_bicValue">
+              <property name="text">
+               <string>x</string>
+              </property>
+              <property name="wordWrap">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="spacer8_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Expanding</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>21</width>
+           <height>30</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="m_hiearchyTab">
+      <attribute name="title">
+       <string>Hierarchy</string>
+      </attribute>
+      <layout class="QVBoxLayout">
+       <item>
+        <widget class="QLabel" name="m_subAccountLabel">
+         <property name="text">
+          <string>Subaccount</string>
+         </property>
+         <property name="wordWrap">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="KMyMoneyAccountTreeView" name="m_parentAccounts"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="m_limitsTab">
+      <attribute name="title">
+       <string>Limits</string>
+      </attribute>
+      <layout class="QVBoxLayout">
+       <item>
+        <widget class="QLabel" name="qLabel1">
+         <property name="text">
+          <string>This page allows to setup certain limits. KMyMoney will warn you when the account balance reaches a limit.</string>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QGridLayout">
+         <item row="0" column="0">
+          <widget class="QLabel" name="textLabel2_2">
+           <property name="text">
+            <string>Type</string>
+           </property>
+           <property name="wordWrap">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="2">
+          <widget class="kMyMoneyEdit" name="m_minBalanceAbsoluteEdit">
+           <property name="resetButtonVisibility" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QLabel" name="textLabel3_2">
+           <property name="text">
+            <string>Absolute limit</string>
+           </property>
+           <property name="wordWrap">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="m_maxCreditLabel">
+           <property name="text">
+            <string>Maximum credit limit</string>
+           </property>
+           <property name="wordWrap">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="kMyMoneyEdit" name="m_maxCreditEarlyEdit">
+           <property name="resetButtonVisibility" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="2">
+          <widget class="kMyMoneyEdit" name="m_maxCreditAbsoluteEdit">
+           <property name="resetButtonVisibility" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="kMyMoneyEdit" name="m_minBalanceEarlyEdit">
+           <property name="resetButtonVisibility" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="m_minBalanceLabel">
+           <property name="text">
+            <string>Minimum balance</string>
+           </property>
+           <property name="wordWrap">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0" colspan="3">
+          <widget class="Line" name="line2">
+           <property name="frameShape">
+            <enum>QFrame::HLine</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Sunken</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLabel" name="textLabel4">
+           <property name="text">
+            <string>Early warning</string>
+           </property>
+           <property name="wordWrap">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer name="spacer10_3">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Expanding</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>30</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="m_taxTab">
+      <attribute name="title">
+       <string>Tax</string>
+      </attribute>
+      <layout class="QVBoxLayout">
+       <item>
+        <widget class="QGroupBox" name="groupBox3">
+         <property name="title">
+          <string>VAT details</string>
+         </property>
+         <layout class="QHBoxLayout">
+          <item>
+           <layout class="QVBoxLayout">
+            <item>
+             <widget class="QCheckBox" name="m_vatCategory">
+              <property name="text">
+               <string>VAT category</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QFrame" name="m_vatCategoryFrame">
+              <property name="frameShape">
+               <enum>QFrame::NoFrame</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Plain</enum>
+              </property>
+              <layout class="QVBoxLayout">
+               <property name="margin">
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="textLabel1">
+                 <property name="text">
+                  <string>VAT percentage</string>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>false</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <layout class="QHBoxLayout">
+                 <item>
+                  <widget class="kMyMoneyEdit" name="m_vatRate"/>
+                 </item>
+                 <item>
+                  <spacer name="spacer17">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeType">
+                    <enum>QSizePolicy::Expanding</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>21</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <spacer name="spacer6">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
               </property>
               <property name="sizeType">
-                <enum>QSizePolicy::Expanding</enum>
+               <enum>QSizePolicy::Expanding</enum>
               </property>
-              <property name="orientation">
-                <enum>Qt::Horizontal</enum>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
               </property>
-            </spacer>
+             </spacer>
+            </item>
+           </layout>
           </item>
           <item>
-            <widget class="KPushButton" name="createButton">
-              <property name="text">
-                <string>OK</string>
-              </property>
-              <property name="autoDefault">
-                <bool>true</bool>
-              </property>
-              <property name="default">
-                <bool>true</bool>
-              </property>
-            </widget>
+           <widget class="QFrame" name="m_vatAssignmentFrame">
+            <property name="frameShape">
+             <enum>QFrame::NoFrame</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Plain</enum>
+            </property>
+            <layout class="QHBoxLayout">
+             <property name="margin">
+              <number>0</number>
+             </property>
+             <item>
+              <layout class="QVBoxLayout">
+               <item>
+                <widget class="QCheckBox" name="m_vatAssignment">
+                 <property name="text">
+                  <string>Enable auto VAT assignment</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="kMyMoneyAccountSelector" name="m_vatAccount" native="true"/>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QVBoxLayout">
+               <item>
+                <widget class="QGroupBox" name="m_amountGroupBox">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>32767</width>
+                   <height>32767</height>
+                  </size>
+                 </property>
+                 <property name="title">
+                  <string>Amount entered</string>
+                 </property>
+                 <layout class="QVBoxLayout">
+                  <item>
+                   <widget class="QFrame" name="frame">
+                    <property name="frameShape">
+                     <enum>QFrame::StyledPanel</enum>
+                    </property>
+                    <property name="frameShadow">
+                     <enum>QFrame::Sunken</enum>
+                    </property>
+                    <layout class="QVBoxLayout">
+                     <item>
+                      <widget class="QRadioButton" name="m_grossAmount">
+                       <property name="text">
+                        <string>Gross amount</string>
+                       </property>
+                       <property name="checked">
+                        <bool>true</bool>
+                       </property>
+                       <attribute name="buttonGroup">
+                        <string>m_amountGroup</string>
+                       </attribute>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QRadioButton" name="m_netAmount">
+                       <property name="text">
+                        <string>Net amount</string>
+                       </property>
+                       <attribute name="buttonGroup">
+                        <string>m_amountGroup</string>
+                       </attribute>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item>
+                <spacer name="spacer7">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Expanding</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>21</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
           </item>
-          <item>
-            <widget class="KPushButton" name="cancelButton">
-              <property name="text">
-                <string>Cancel</string>
-              </property>
-              <property name="autoDefault">
-                <bool>true</bool>
-              </property>
-              <property name="default">
-                <bool>false</bool>
-              </property>
-            </widget>
-          </item>
-        </layout>
-      </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="m_qcheckboxTax">
+         <property name="text">
+          <string>Include on Tax Reports</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <widget class="Line" name="line1">
+     <property name="frameShape">
+      <enum>QFrame::HLine</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Sunken</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout">
+     <property name="spacing">
+      <number>6</number>
+     </property>
+     <property name="margin">
+      <number>0</number>
+     </property>
+     <item>
+      <spacer name="Spacer1">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Expanding</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>422</width>
+         <height>0</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="KPushButton" name="createButton">
+       <property name="text">
+        <string>OK</string>
+       </property>
+       <property name="autoDefault">
+        <bool>true</bool>
+       </property>
+       <property name="default">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="KPushButton" name="cancelButton">
+       <property name="text">
+        <string>Cancel</string>
+       </property>
+       <property name="autoDefault">
+        <bool>true</bool>
+       </property>
+       <property name="default">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
     </layout>
-  </widget>
-  <layoutdefault spacing="6" margin="11"/>
-  <customwidgets>
-    <customwidget>
-      <class>kMyMoneyAccountSelector</class>
-      <extends>QWidget</extends>
-      <header location="global">../widgets/kmymoneyaccountselector.h</header>
-      <sizehint>
-        <width>80</width>
-        <height>80</height>
-      </sizehint>
-      <container>0</container>
-      <sizepolicy>
-        <hordata>5</hordata>
-        <verdata>5</verdata>
-      </sizepolicy>
-      <pixmap>image0</pixmap>
-    </customwidget>
-    <customwidget>
-      <class>kMyMoneyAccountTreeBase</class>
-      <extends>QWidget</extends>
-      <header location="global">../widgets/kmymoneyaccounttreebase.h</header>
-      <sizehint>
-        <width>80</width>
-        <height>80</height>
-      </sizehint>
-      <container>0</container>
-      <sizepolicy>
-        <hordata>5</hordata>
-        <verdata>5</verdata>
-      </sizepolicy>
-      <pixmap>image0</pixmap>
-    </customwidget>
-    <customwidget>
-    <class>KMyMoneyGeneralCombo</class>
-    <extends>QWidget</extends>
-    <header>kmymoneymvccombo.h</header>
-    <container>1</container>
-    </customwidget>
-    <customwidget>
-    <class>KMyMoneySecuritySelector</class>
-    <extends>QWidget</extends>
-    <header>kmymoneycurrencyselector.h</header>
-    <container>1</container>
-    </customwidget>
-    <customwidget>
-      <class>KLineEdit</class>
-      <extends>QLineEdit</extends>
-      <header location="global">klineedit.h</header>
-    </customwidget>
-    <customwidget>
-      <class>KTabWidget</class>
-      <extends>QTabWidget</extends>
-      <header location="global">ktabwidget.h</header>
-    </customwidget>
-    <customwidget>
-      <class>KComboBox</class>
-      <extends>QComboBox</extends>
-      <header location="global">kcombobox.h</header>
-    </customwidget>
-  </customwidgets>
-  <tabstops>
-    <tabstop>m_tab</tabstop>
-    <tabstop>accountNameEdit</tabstop>
-    <tabstop>typeCombo</tabstop>
-    <tabstop>startDateEdit</tabstop>
-    <tabstop>m_currency</tabstop>
-    <tabstop>m_openingBalanceEdit</tabstop>
-    <tabstop>m_lastCheckNumberUsed</tabstop>
-    <tabstop>descriptionEdit</tabstop>
-    <tabstop>m_qcheckboxPreferred</tabstop>
-    <tabstop>m_qcheckboxNoVat</tabstop>
-    <tabstop>m_qcomboboxInstitutions</tabstop>
-    <tabstop>m_qbuttonNew</tabstop>
-    <tabstop>ibanEdit</tabstop>
-    <tabstop>accountNoEdit</tabstop>
-    <tabstop>m_qlistviewParentAccounts</tabstop>
-    <tabstop>m_minBalanceEarlyEdit</tabstop>
-    <tabstop>m_minBalanceAbsoluteEdit</tabstop>
-    <tabstop>m_maxCreditEarlyEdit</tabstop>
-    <tabstop>m_maxCreditAbsoluteEdit</tabstop>
-    <tabstop>m_vatCategory</tabstop>
-    <tabstop>m_vatRate</tabstop>
-    <tabstop>m_vatAssignment</tabstop>
-    <tabstop>m_grossAmount</tabstop>
-    <tabstop>m_qcheckboxTax</tabstop>
-    <tabstop>createButton</tabstop>
-    <tabstop>cancelButton</tabstop>
-  </tabstops>
-  <images>
-    <image name="image0">
-      <data format="PNG" length="1110">89504e470d0a1a0a0000000d4948445200000016000000160806000000c4b46c3b0000041d49444154388d8d95c18b1c4514c67fbb29e5b54ea05b26da1d36b08d09a6c508138cb8c13d647141163de49043bca9f1628eb9294810f24f88c15b728b07617358888785d980427290b4a8d00b19a8821da8228cf42316ac87eed9247ac95c9aeaeef9eaabdffb5ebf85f178ccfcf7f5b79fec07a7280a08a008f25ceb7c29e5da573716e65a0be3f198ef6f5ededff9b9e1b34faf90882092a1ea21428b9220ffbf46054055b19386ba6970ae6665b5e0d2c5eb0b066067bbe1f21757c88f5504eff0c192189081303a5582b16854fccce2fe041f00cdd0a8103b874556405476b62d972ec2c2b90ff3fd8df5cb946549d80b34aea15ccaa94625450e2d0e558b460b7371a734b5e027251a155545678ab62d7eea90b4c504078908c107acb354cb251b1f8f08b1c18631aabbb4d18211404804f22545863561d2f060fb34aa8a18d0086204e72c46a32292e1a796f278c1da7a859d8da9a737506db04d0a24103d8949480b214d3bbee952a05c1d536f9d2684160c744f048311543d459eb1b65ee1754cedae13a64abd5d6127053c9d0281f22d4f75c6a2118a5c09272d7ab740638bf4ef2dd2174032d0d8d04c6fe19c32bedd8bc65e342aa3f785e2784bfd6bc1bd9db24b05505616a4edd67d5a8c1801a03a9962754c504bf34b8986acfb9be91cac7d54315a15541b36b134f74bd2dc53940115a5381e087bc25c6f71be831a8baa234cc1ee3eeb74ed83116beb2b8849d108a3730e8ce27e2bfb82419a7b407ac7c222fd0e6280a8078ce64e47ef54ac9d5be9aaae0162e0de568a44a18d3df90845d919c4f01463406340a44f40efb43a99b371618488e2670d1a2d7ee6f1d3be39342104e937ed85fb86599c33e9ee0be9a004946259d8b858909880d59aa00daa0d3280b5f39e34074c4b3a5434029a76a9e9f5cc0163b5c80024158a1cfc4cb1d3061d5834066cb0a403c008599a70f6bc27b8d03106ea3ae91987278c5b143b015547224ab5e24185cd9b81665273e7b6e7cecd82ddbf8098002de94049737bc09828cf3036f31c3735c8b0e98eb704672f348c7f7c93cd1fb2ae905119ff54e0dff3542b0e9dd983dcea2cc5eea6cf303e74ec687af5c41b6fa38f5e203c7ec8e1238ef85831a214afef21060ea781ec68247b65c6916353cc8b73d1ae79354606af2a930709aa118da1636c274dd7e3774b884a79aa6b5711a538d33cf9c01c1c9b83bc6a1f55c91ccb23b05b1deb43a7decdaffefd2862f61366aa8449c69e33642f012f2bb208fa98eeda1f3346f076c8eeef19475e9be115423364f78f84105a8643d34d90cfbfdcd8cf872589a45dc7f54cf3134a36f4e495c23f9da8db15bccb708d4014f2ca512cb5d4f7c13e84300d5cff6eb39b202bab053bdb9674f0648609427d0f8402ddeac30f4fcd3ced3efc3b422d406c09b340bedc1571e1bfc3d44dc281634c5fe5e758e7395cfbe6d6c130fd17d92372d277c159b70000000049454e44ae426082</data>
-    </image>
-  </images>
-  <buttongroups>
-    <buttongroup name="m_amountGroup"/>
-  </buttongroups>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>kMyMoneyDateInput</class>
+   <extends>QFrame</extends>
+   <header>kmymoneydateinput.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KMyMoneySecuritySelector</class>
+   <extends>KComboBox</extends>
+   <header>kmymoneycurrencyselector.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>kMyMoneyEdit</class>
+   <extends>QFrame</extends>
+   <header>kmymoneyedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KMyMoneyGeneralCombo</class>
+   <extends>KComboBox</extends>
+   <header>kmymoneymvccombo.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>KMyMoneyAccountTreeView</class>
+   <extends>QTreeView</extends>
+   <header>kmymoneyaccounttreeview.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Q3Frame</class>
+   <extends>QFrame</extends>
+   <header>Qt3Support/Q3Frame</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Q3TextEdit</class>
+   <extends>Q3Frame</extends>
+   <header>q3textedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KPushButton</class>
+   <extends>QPushButton</extends>
+   <header>kpushbutton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>klineedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KTabWidget</class>
+   <extends>QTabWidget</extends>
+   <header>ktabwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>kMyMoneyAccountSelector</class>
+   <extends>QWidget</extends>
+   <header location="global">../widgets/kmymoneyaccountselector.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>m_tab</tabstop>
+  <tabstop>accountNameEdit</tabstop>
+  <tabstop>typeCombo</tabstop>
+  <tabstop>startDateEdit</tabstop>
+  <tabstop>m_currency</tabstop>
+  <tabstop>m_openingBalanceEdit</tabstop>
+  <tabstop>m_lastCheckNumberUsed</tabstop>
+  <tabstop>descriptionEdit</tabstop>
+  <tabstop>m_qcheckboxPreferred</tabstop>
+  <tabstop>m_qcheckboxNoVat</tabstop>
+  <tabstop>m_qcomboboxInstitutions</tabstop>
+  <tabstop>m_qbuttonNew</tabstop>
+  <tabstop>ibanEdit</tabstop>
+  <tabstop>accountNoEdit</tabstop>
+  <tabstop>m_minBalanceEarlyEdit</tabstop>
+  <tabstop>m_minBalanceAbsoluteEdit</tabstop>
+  <tabstop>m_maxCreditEarlyEdit</tabstop>
+  <tabstop>m_maxCreditAbsoluteEdit</tabstop>
+  <tabstop>m_vatCategory</tabstop>
+  <tabstop>m_vatRate</tabstop>
+  <tabstop>m_vatAssignment</tabstop>
+  <tabstop>m_grossAmount</tabstop>
+  <tabstop>m_qcheckboxTax</tabstop>
+  <tabstop>createButton</tabstop>
+  <tabstop>cancelButton</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+ <buttongroups>
+  <buttongroup name="m_amountGroup"/>
+ </buttongroups>
 </ui>

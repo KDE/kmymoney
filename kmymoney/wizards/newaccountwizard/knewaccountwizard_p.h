@@ -392,8 +392,6 @@ class HierarchyFilterProxyModel : public AccountsFilterProxyModel
 public:
   HierarchyFilterProxyModel(QObject *parent = 0);
 
-  virtual Qt::ItemFlags flags(const QModelIndex &index) const;
-
 protected:
   bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
   bool filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const;

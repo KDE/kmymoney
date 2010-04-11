@@ -47,17 +47,38 @@ namespace reports
 {
 }
 
+class HierarchyFilterProxyModel : public AccountsFilterProxyModel
+{
+  Q_OBJECT
+
+public:
+  HierarchyFilterProxyModel(QObject *parent = 0);
+
+  virtual Qt::ItemFlags flags(const QModelIndex &index) const;
+
+  void setCurrentAccountId(const QString &selectedAccountId);
+  QModelIndex getSelectedParentAccountIndex() const;
+
+protected:
+  bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
+  bool filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const;
+
+private:
+  QString m_currentAccountId;
+};
+
 /**
   * This dialog lets you create/edit an account.
   */
 
-class KNewAccountDlgDecl : public QDialog, public Ui::KNewAccountDlgDecl
+class KNewAccountDlgDecl : public QDialog, public Ui::kNewAccountDlgDecl
 {
 public:
   KNewAccountDlgDecl(QWidget *parent) : QDialog(parent) {
     setupUi(this);
   }
 };
+
 class KNewAccountDlg : public KNewAccountDlgDecl
 {
   Q_OBJECT
@@ -65,10 +86,8 @@ class KNewAccountDlg : public KNewAccountDlgDecl
 private:
   MyMoneyAccount m_account;
   MyMoneyAccount m_parentAccount;
-  bool m_bSelectedParentAccount;
+  HierarchyFilterProxyModel *m_filterProxyModel;
 
-  KMyMoneyAccountTreeBaseItem *m_parentItem;
-  KMyMoneyAccountTreeBaseItem *m_accountItem;
   bool m_categoryEditor;
   bool m_isEditing;
 
@@ -77,8 +96,6 @@ private:
   int m_idPropMaxCredit;
   int m_idPropMinBalance;
 
-  void initParentWidget(QString parentId, const QString& accountId);
-  void showSubAccounts(QStringList accounts, KMyMoneyAccountTreeBaseItem *parentItem, const QString& parentId, const QString& accountId);
   void loadVatAccounts(void);
   void storeKVP(const QString& key, kMyMoneyEdit* widget);
   void storeKVP(const QString& key, KLineEdit* widget);
@@ -131,13 +148,12 @@ public:
   void addTab(QWidget* w, const QString& name);
 
 protected:
-  void resizeEvent(QResizeEvent* e);
   void displayOnlineBankingStatus(void);
   void adjustEditWidgets(kMyMoneyEdit* dst, kMyMoneyEdit* src, char mode, int corr);
 
 protected slots:
   void okClicked();
-  void slotSelectionChanged(Q3ListViewItem *item);
+  void slotSelectionChanged(const QItemSelection &current, const QItemSelection &previous);
   void slotAccountTypeChanged(const QString& type);
   void slotVatChanged(bool);
   void slotVatAssignmentChanged(bool);
@@ -148,10 +164,6 @@ protected slots:
   void slotAdjustMinBalanceEarlyEdit(const QString&);
   void slotAdjustMaxCreditAbsoluteEdit(const QString&);
   void slotAdjustMaxCreditEarlyEdit(const QString&);
-
-private slots:
-  void timerDone(void);
-
 };
 
 #endif

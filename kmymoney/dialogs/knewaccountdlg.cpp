@@ -56,47 +56,148 @@
 #include <kmymoneydateinput.h>
 #include <mymoneyexception.h>
 #include <mymoneyfile.h>
-#include <kmymoneyaccounttree.h>
 #include <kmymoneyglobalsettings.h>
 #include <mymoneyreport.h>
 #include <kguiutils.h>
 #include "kmymoneycurrencyselector.h"
-#include "kmymoneyaccountselector.h"
 #include "mymoneykeyvaluecontainer.h"
 #include "knewbankdlg.h"
 #include "kmymoneyfile.h"
 #include "kmymoneyutils.h"
+#include "models.h"
+
+Q_DECLARE_METATYPE(MyMoneyAccount)
+
+HierarchyFilterProxyModel::HierarchyFilterProxyModel(QObject *parent)
+    : AccountsFilterProxyModel(parent)
+{
+}
+
+/**
+  * The current account and all it's children are not selectable because the view is used to select a possible parent account.
+  */
+Qt::ItemFlags HierarchyFilterProxyModel::flags(const QModelIndex &index) const
+{
+  Qt::ItemFlags flags = AccountsFilterProxyModel::flags(index);
+  QModelIndex currentIndex = index;
+  while (currentIndex.isValid()) {
+    QVariant accountId = data(currentIndex, AccountsModel::AccountIdRole);
+    if (accountId.isValid() && accountId.toString() == m_currentAccountId) {
+      flags = flags & ~Qt::ItemIsSelectable & ~Qt::ItemIsEnabled;
+    }
+    currentIndex = currentIndex.parent();
+  }
+  return flags;
+}
+
+/**
+  * Set the account for which to select a parent.
+  *
+  * @param currentAccountId The current account.
+  */
+void HierarchyFilterProxyModel::setCurrentAccountId(const QString &currentAccountId)
+{
+  m_currentAccountId = currentAccountId;
+}
+
+/**
+  * Get the index of the selected parent account.
+  *
+  * @return The model index of the selected parent account.
+  */
+QModelIndex HierarchyFilterProxyModel::getSelectedParentAccountIndex() const
+{
+  QModelIndexList list = match(index(0, 0), AccountsModel::AccountIdRole, m_currentAccountId, -1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
+  if (!list.empty()) {
+    return list.front().parent();
+  }
+  return QModelIndex();
+}
+
+/**
+  * Filter the favorites accounts group.
+  */
+bool HierarchyFilterProxyModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
+{
+  if (!source_parent.isValid() && source_row == 0) {
+    QVariant data = sourceModel()->data(sourceModel()->index(source_row, 0, source_parent), AccountsModel::AccountIdRole);
+    if (data.isValid() && data.toString() == AccountsModel::favoritesAccountId)
+      return false;
+  }
+  return AccountsFilterProxyModel::filterAcceptsRow(source_row, source_parent);
+}
+
+/**
+  * Filter all but the first column.
+  */
+bool HierarchyFilterProxyModel::filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const
+{
+  Q_UNUSED(source_parent)
+  if (source_column == 0)
+    return true;
+  return false;
+}
 
 KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bool categoryEditor, QWidget *parent, const QString& title)
     : KNewAccountDlgDecl(parent),
     m_account(account),
-    m_bSelectedParentAccount(false),
     m_categoryEditor(categoryEditor),
     m_isEditing(isEditing)
 {
   QString columnName = ((categoryEditor) ? i18n("Categories") : i18n("Accounts"));
 
+  MyMoneyFile *file = MyMoneyFile::instance();
+
+  // initialize the m_parentAccount member
+  switch (m_account.accountGroup()) {
+  case MyMoneyAccount::Asset:
+    m_parentAccount = file->asset();
+    break;
+  case MyMoneyAccount::Liability:
+    m_parentAccount = file->liability();
+    break;
+  case MyMoneyAccount::Income:
+    m_parentAccount = file->income();
+    break;
+  case MyMoneyAccount::Expense:
+    m_parentAccount = file->expense();
+    break;
+  case MyMoneyAccount::Equity:
+    m_parentAccount = file->equity();
+    break;
+  default:
+    qDebug("Seems we have an account that hasn't been mapped to the top five");
+    if (m_categoryEditor)
+      m_parentAccount = file->income();
+    else
+      m_parentAccount = file->asset();
+  }
+
   m_amountGroup->setId(m_grossAmount, 0);
   m_amountGroup->setId(m_netAmount, 1);
-  m_qlistviewParentAccounts->setRootIsDecorated(true);
-  m_qlistviewParentAccounts->setAllColumnsShowFocus(true);
-  m_qlistviewParentAccounts->setSectionHeader(columnName);
-  m_qlistviewParentAccounts->setMultiSelection(false);
-  m_qlistviewParentAccounts->header()->setResizeEnabled(true);
-  m_qlistviewParentAccounts->setColumnWidthMode(0, Q3ListView::Maximum);
-  m_qlistviewParentAccounts->setEnabled(false);
-  // never show the horizontal scroll bar
-  m_qlistviewParentAccounts->setHScrollBarMode(Q3ScrollView::AlwaysOff);
+
+  // the proxy filter model
+  m_filterProxyModel = new HierarchyFilterProxyModel(this);
+  m_filterProxyModel->setHideClosedAccounts(true);
+  m_filterProxyModel->setHideEquityAccounts(true);
+  m_filterProxyModel->addAccountGroup(m_account.accountGroup());
+  m_filterProxyModel->setCurrentAccountId(m_account.id());
+  m_filterProxyModel->setSourceModel(Models::instance()->accountsModel());
+  m_filterProxyModel->setDynamicSortFilter(true);
+  m_filterProxyModel->sort(0);
+
+  m_parentAccounts->setAlternatingRowColors(true);
+  m_parentAccounts->setIconSize(QSize(22, 22));
+  m_parentAccounts->setSortingEnabled(true);
+  m_parentAccounts->setAllColumnsShowFocus(true);
+  m_parentAccounts->setModel(m_filterProxyModel);
 
   m_subAccountLabel->setText(i18n("Is a sub account"));
-
-  m_qlistviewParentAccounts->header()->setFont(KMyMoneyGlobalSettings::listHeaderFont());
 
   accountNameEdit->setText(account.name());
   descriptionEdit->setText(account.description());
 
   typeCombo->setEnabled(true);
-  MyMoneyFile *file = MyMoneyFile::instance();
 
   // load the price mode combo
   m_priceMode->insertItem(i18nc("default price mode", "<default>"), 0);
@@ -298,9 +399,8 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
     delete e;
   }
 
-  initParentWidget(account.parentAccountId(), account.id());
   if (m_account.isInvest())
-    m_qlistviewParentAccounts->setEnabled(false);
+    m_parentAccounts->setEnabled(false);
 
   if (!categoryEditor)
     slotLoadInstitutions(institutionName);
@@ -316,8 +416,8 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
 
   connect(cancelButton, SIGNAL(clicked()), SLOT(reject()));
   connect(createButton, SIGNAL(clicked()), this, SLOT(okClicked()));
-  connect(m_qlistviewParentAccounts, SIGNAL(selectionChanged(Q3ListViewItem*)),
-          this, SLOT(slotSelectionChanged(Q3ListViewItem*)));
+  connect(m_parentAccounts->selectionModel(), SIGNAL(selectionChanged(QItemSelection, QItemSelection)),
+          this, SLOT(slotSelectionChanged(QItemSelection, QItemSelection)));
   connect(m_qbuttonNew, SIGNAL(clicked()), this, SLOT(slotNewClicked()));
   connect(typeCombo, SIGNAL(activated(const QString&)),
           this, SLOT(slotAccountTypeChanged(const QString&)));
@@ -338,6 +438,11 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
 
   connect(m_qcomboboxInstitutions, SIGNAL(activated(const QString&)), this, SLOT(slotLoadInstitutions(const QString&)));
 
+  QModelIndex parentIndex = m_filterProxyModel->getSelectedParentAccountIndex();
+  m_parentAccounts->expand(parentIndex);
+  m_parentAccounts->selectionModel()->select(parentIndex, QItemSelectionModel::SelectCurrent);
+  m_parentAccounts->scrollTo(parentIndex, QAbstractItemView::PositionAtTop);
+
   m_vatCategory->setChecked(false);
   m_vatAssignment->setChecked(false);
 
@@ -350,14 +455,6 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
     while ((it = m_account.accountList().begin()) != m_account.accountList().end())
       m_account.removeAccountId(*it);
 
-    if (m_parentItem == 0) {
-      // force loading of initial parent
-      m_account.setAccountType(MyMoneyAccount::UnknownAccountType);
-      MyMoneyAccount::_accountTypeE type = account.accountType();
-      if (type == MyMoneyAccount::UnknownAccountType)
-        type = MyMoneyAccount::Checkings;
-      slotAccountTypeChanged(KMyMoneyUtils::accountTypeToString(type));
-    }
   } else {
     if (!m_account.value("VatRate").isEmpty()) {
       m_vatCategory->setChecked(true);
@@ -386,20 +483,6 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
   kMandatoryFieldGroup* requiredFields = new kMandatoryFieldGroup(this);
   requiredFields->setOkButton(createButton); // button to be enabled when all fields present
   requiredFields->add(accountNameEdit);
-
-  // using a timeout is the only way, I got the 'ensureItemVisible'
-  // working when creating the dialog. I assume, this
-  // has something to do with the delayed update of the display somehow.
-  QTimer::singleShot(50, this, SLOT(timerDone()));
-}
-
-void KNewAccountDlg::timerDone(void)
-{
-  if (m_accountItem) m_qlistviewParentAccounts->ensureItemVisible(m_accountItem);
-  if (m_parentItem) m_qlistviewParentAccounts->ensureItemVisible(m_parentItem);
-  // KNewAccountDlgDecl::resizeEvent(0);
-  m_qlistviewParentAccounts->setColumnWidth(m_qlistviewParentAccounts->nameColumn(), m_qlistviewParentAccounts->visibleWidth());
-  m_qlistviewParentAccounts->repaintContents(false);
 }
 
 void KNewAccountDlg::setOpeningBalance(const MyMoneyMoney& balance)
@@ -600,288 +683,18 @@ const MyMoneyAccount& KNewAccountDlg::account(void)
 
 const MyMoneyAccount& KNewAccountDlg::parentAccount(void)
 {
-  if (!m_bSelectedParentAccount) {
-    MyMoneyFile *file = MyMoneyFile::instance();
-
-    switch (m_account.accountGroup()) {
-    case MyMoneyAccount::Asset:
-      m_parentAccount = file->asset();
-      break;
-    case MyMoneyAccount::Liability:
-      m_parentAccount = file->liability();
-      break;
-    case MyMoneyAccount::Income:
-      m_parentAccount = file->income();
-      break;
-    case MyMoneyAccount::Expense:
-      m_parentAccount = file->expense();
-      break;
-    case MyMoneyAccount::Equity:
-      m_parentAccount = file->equity();
-      break;
-    default:
-      qDebug("Seems we have an account that hasn't been mapped to the top five");
-      if (m_categoryEditor)
-        m_parentAccount = file->income();
-      else
-        m_parentAccount = file->asset();
-    }
-  }
   return m_parentAccount;
 }
 
-void KNewAccountDlg::initParentWidget(QString parentId, const QString& accountId)
+void KNewAccountDlg::slotSelectionChanged(const QItemSelection &current, const QItemSelection &previous)
 {
-  MyMoneyFile *file = MyMoneyFile::instance();
-
-  MyMoneyAccount liabilityAccount = file->liability();
-  MyMoneyAccount assetAccount = file->asset();
-  MyMoneyAccount expenseAccount = file->expense();
-  MyMoneyAccount incomeAccount = file->income();
-  MyMoneyAccount equityAccount = file->equity();
-
-  m_parentItem = 0;
-  m_accountItem = 0;
-
-  // Determine the parent account
-  try {
-    m_parentAccount = file->account(parentId);
-  } catch (MyMoneyException *e) {
-    m_bSelectedParentAccount = false;
-    m_parentAccount = MyMoneyAccount();
-    if (m_account.accountType() != MyMoneyAccount::UnknownAccountType) {
-      parentAccount();
-      parentId = m_parentAccount.id();
+  Q_UNUSED(previous)
+  if (!current.indexes().empty()) {
+    QVariant account = m_parentAccounts->model()->data(current.indexes().front(), AccountsModel::AccountRole);
+    if (account.isValid()) {
+      m_parentAccount = account.value<MyMoneyAccount>();
+      m_subAccountLabel->setText(i18n("Is a sub account of %1", m_parentAccount.name()));
     }
-    delete e;
-  }
-  m_bSelectedParentAccount = true;
-
-  // extract the account type from the combo box
-  MyMoneyAccount::accountTypeE type;
-  MyMoneyAccount::accountTypeE groupType;
-  type = KMyMoneyUtils::stringToAccountType(typeCombo->currentText());
-  groupType = MyMoneyAccount::accountGroup(type);
-
-  m_qlistviewParentAccounts->clear();
-
-  // Now scan all 4 account roots to load the list and mark the parent
-  try {
-    if (!m_categoryEditor) {
-      if (groupType == MyMoneyAccount::Asset || type == MyMoneyAccount::Loan) {
-        // Asset
-        KMyMoneyAccountTreeBaseItem *assetTopLevelAccount = new KMyMoneyAccountTreeItem(m_qlistviewParentAccounts, assetAccount);
-
-        if (m_parentAccount.id().isEmpty()) {
-          m_parentAccount = assetAccount;
-          parentId = m_parentAccount.id();
-        }
-
-        if (parentId == assetAccount.id())
-          m_parentItem = assetTopLevelAccount;
-
-        assetTopLevelAccount->setOpen(true);
-
-        for (QStringList::ConstIterator it = assetAccount.accountList().begin();
-             it != assetAccount.accountList().end();
-             ++it) {
-          MyMoneyAccount acc = file->account(*it);
-          if (acc.isClosed())
-            continue;
-
-          KMyMoneyAccountTreeBaseItem *accountItem = new KMyMoneyAccountTreeItem(assetTopLevelAccount, acc);
-
-          if (parentId == acc.id()) {
-            m_parentItem = accountItem;
-          } else if (accountId == acc.id()) {
-            if (m_isEditing)
-              accountItem->setSelectable(false);
-            m_accountItem = accountItem;
-          }
-
-          QStringList subAccounts = acc.accountList();
-          if (subAccounts.count() >= 1) {
-            showSubAccounts(subAccounts, accountItem, parentId, acc.id());
-          }
-        }
-      }
-
-      if (groupType == MyMoneyAccount::Liability) {
-        // Liability
-        KMyMoneyAccountTreeBaseItem *liabilityTopLevelAccount = new KMyMoneyAccountTreeItem(m_qlistviewParentAccounts, liabilityAccount);
-
-        if (m_parentAccount.id().isEmpty()) {
-          m_parentAccount = liabilityAccount;
-          parentId = m_parentAccount.id();
-        }
-
-        if (parentId == liabilityAccount.id())
-          m_parentItem = liabilityTopLevelAccount;
-
-        liabilityTopLevelAccount->setOpen(true);
-
-        for (QStringList::ConstIterator it = liabilityAccount.accountList().begin();
-             it != liabilityAccount.accountList().end();
-             ++it) {
-          MyMoneyAccount acc = file->account(*it);
-          if (acc.isClosed())
-            continue;
-
-          KMyMoneyAccountTreeBaseItem *accountItem = new KMyMoneyAccountTreeItem(liabilityTopLevelAccount, acc);
-
-          if (parentId == acc.id()) {
-            m_parentItem = accountItem;
-          } else if (accountId == acc.id()) {
-            if (m_isEditing)
-              accountItem->setSelectable(false);
-            m_accountItem = accountItem;
-          }
-
-          QStringList subAccounts = acc.accountList();
-          if (subAccounts.count() >= 1) {
-            showSubAccounts(subAccounts, accountItem, parentId, acc.id());
-          }
-        }
-      }
-    } else {
-      if (groupType == MyMoneyAccount::Income) {
-        // Income
-        KMyMoneyAccountTreeBaseItem *incomeTopLevelAccount = new KMyMoneyAccountTreeItem(m_qlistviewParentAccounts,
-            incomeAccount);
-
-        if (m_parentAccount.id().isEmpty()) {
-          m_parentAccount = incomeAccount;
-          parentId = m_parentAccount.id();
-        }
-
-        if (parentId == incomeAccount.id())
-          m_parentItem = incomeTopLevelAccount;
-
-        incomeTopLevelAccount->setOpen(true);
-
-        for (QStringList::ConstIterator it = incomeAccount.accountList().begin();
-             it != incomeAccount.accountList().end();
-             ++it) {
-          KMyMoneyAccountTreeBaseItem *accountItem = new KMyMoneyAccountTreeItem(incomeTopLevelAccount,
-              file->account(*it));
-
-          QString id = file->account(*it).id();
-          if (parentId == id) {
-            m_parentItem = accountItem;
-          } else if (accountId == id) {
-            if (m_isEditing)
-              accountItem->setSelectable(false);
-            m_accountItem = accountItem;
-          }
-
-          QStringList subAccounts = file->account(*it).accountList();
-          if (subAccounts.count() >= 1) {
-            showSubAccounts(subAccounts, accountItem, parentId, accountId);
-          }
-        }
-      }
-
-      if (groupType == MyMoneyAccount::Expense) {
-        // Expense
-        KMyMoneyAccountTreeBaseItem *expenseTopLevelAccount = new KMyMoneyAccountTreeItem(m_qlistviewParentAccounts,
-            expenseAccount);
-
-        if (m_parentAccount.id().isEmpty()) {
-          m_parentAccount = expenseAccount;
-          parentId = m_parentAccount.id();
-        }
-
-        if (parentId == expenseAccount.id())
-          m_parentItem = expenseTopLevelAccount;
-
-        expenseTopLevelAccount->setOpen(true);
-
-        for (QStringList::ConstIterator it = expenseAccount.accountList().begin();
-             it != expenseAccount.accountList().end();
-             ++it) {
-          KMyMoneyAccountTreeBaseItem *accountItem = new KMyMoneyAccountTreeItem(expenseTopLevelAccount,
-              file->account(*it));
-
-          QString id = file->account(*it).id();
-          if (parentId == id) {
-            m_parentItem = accountItem;
-          } else if (accountId == id) {
-            if (m_isEditing)
-              accountItem->setSelectable(false);
-            m_accountItem = accountItem;
-          }
-
-          QStringList subAccounts = file->account(*it).accountList();
-          if (subAccounts.count() >= 1) {
-            showSubAccounts(subAccounts, accountItem, parentId, accountId);
-          }
-        }
-      }
-    }
-  } catch (MyMoneyException *e) {
-    qDebug("Exception in assets account refresh: %s", qPrintable(e->what()));
-    delete e;
-  }
-
-  m_qlistviewParentAccounts->setColumnWidth(0, m_qlistviewParentAccounts->width());
-
-  if (m_parentItem) {
-    m_subAccountLabel->setText(i18n("Is a sub account of %1", m_parentAccount.name()));
-    m_parentItem->setOpen(true);
-    m_qlistviewParentAccounts->setSelected(m_parentItem, true);
-  }
-
-  m_qlistviewParentAccounts->setEnabled(true);
-}
-
-void KNewAccountDlg::showSubAccounts(QStringList accounts, KMyMoneyAccountTreeBaseItem *parentItem,
-                                     const QString& parentId, const QString& accountId)
-{
-  MyMoneyFile *file = MyMoneyFile::instance();
-
-  for (QStringList::ConstIterator it = accounts.constBegin(); it != accounts.constEnd(); ++it) {
-    KMyMoneyAccountTreeBaseItem *accountItem  = new KMyMoneyAccountTreeItem(parentItem,
-        file->account(*it));
-
-    QString id = file->account(*it).id();
-    if (parentId == id) {
-      m_parentItem = accountItem;
-    } else if (accountId == id) {
-      if (m_isEditing)
-        accountItem->setSelectable(false);
-      m_accountItem = accountItem;
-    }
-
-    QStringList subAccounts = file->account(*it).accountList();
-    if (subAccounts.count() >= 1) {
-      showSubAccounts(subAccounts, accountItem, parentId, accountId);
-    }
-  }
-}
-
-void KNewAccountDlg::resizeEvent(QResizeEvent* e)
-{
-  m_qlistviewParentAccounts->setColumnWidth(0, m_qlistviewParentAccounts->width());
-
-  // call base class resizeEvent()
-  KNewAccountDlgDecl::resizeEvent(e);
-}
-
-void KNewAccountDlg::slotSelectionChanged(Q3ListViewItem *item)
-{
-  KMyMoneyAccountTreeBaseItem *accountItem = dynamic_cast<KMyMoneyAccountTreeBaseItem*>(item);
-  try {
-    MyMoneyFile *file = MyMoneyFile::instance();
-
-    //qDebug("Selected account id: %s", accountItem->accountID().data());
-    m_parentAccount = file->account(accountItem->id());
-    m_subAccountLabel->setText(i18n("Is a sub account of %1", m_parentAccount.name()));
-    if (m_qlistviewParentAccounts->isEnabled()) {
-      m_bSelectedParentAccount = true;
-    }
-  } catch (MyMoneyException *e) {
-    qDebug("This shouldn't happen! : %s", qPrintable(e->what()));
-    delete e;
   }
 }
 
@@ -997,7 +810,6 @@ void KNewAccountDlg::slotAccountTypeChanged(const QString& typeStr)
         qWarning("Unknown account group in KNewAccountDlg::slotAccountTypeChanged()");
         break;
       }
-      initParentWidget(parentId, QString());
       m_account.setAccountType(type);
     }
   } catch (MyMoneyException *e) {

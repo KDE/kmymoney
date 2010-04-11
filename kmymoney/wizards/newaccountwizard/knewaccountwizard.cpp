@@ -1448,13 +1448,8 @@ HierarchyFilterProxyModel::HierarchyFilterProxyModel(QObject *parent)
 }
 
 /**
-  * Top items are not selectable because they are not real accounts but are only used for grouping.
+  * Filter the favorites accounts group.
   */
-Qt::ItemFlags HierarchyFilterProxyModel::flags(const QModelIndex &index) const
-{
-  return AccountsFilterProxyModel::flags(index);
-}
-
 bool HierarchyFilterProxyModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
 {
   if (!source_parent.isValid() && source_row == 0) {
