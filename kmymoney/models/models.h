@@ -38,16 +38,16 @@ class AccountsModel;
 
 /**
   * This object is the owner and maintainer of all the core models of KMyMoney.
-  * It's a sigleton so the instance should be accessed in the following way:
+  * It's a singleton so the instance should be accessed in the following way:
   *
   * @code
   * Models *models = Models::instance();
   * AccountsModel *accountsModel = models->accountsModel();
   * @endcode
   *
-  * In order for the data synchronization between the @ref MyMoneyFile dand the
-  * models managed by this object to work the @ref MyMoneyFile::dataChanged signal
-  * must be connected to this object's @ref dataChanged slot.
+  * In order for the data synchronization between the @ref MyMoneyFile and the
+  * models managed by this object to work, the @ref MyMoneyFile::dataChanged
+  * signal must be connected to this object's @ref dataChanged slot.
   *
   * @author Cristian Onet 2010
   *
