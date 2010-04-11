@@ -22,12 +22,12 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qpoint.h>
+#include <QPoint>
 #include <QEvent>
-#include <q3dragobject.h>
+#include <Q3DragObject>
 #include <QTimer>
 #include <QCursor>
-#include <q3header.h>
+#include <Q3Header>
 #include <QPainter>
 #include <QPixmap>
 #include <QStyle>

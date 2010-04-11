@@ -19,8 +19,8 @@
 
 #if 0 // currently, this object is unused
 
-#include <qwidget.h>
-#include <q3listview.h>
+#include <QWidget>
+
 #include "mymoneytransaction.h"
 
 /**

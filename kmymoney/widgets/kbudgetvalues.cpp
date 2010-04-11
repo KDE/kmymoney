@@ -25,7 +25,6 @@
 #include <QTabWidget>
 #include <QLabel>
 #include <QRadioButton>
-#include <q3widgetstack.h>
 #include <QTimer>
 #include <QToolTip>
 #include <QApplication>

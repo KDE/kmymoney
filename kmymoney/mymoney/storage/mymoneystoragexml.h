@@ -22,7 +22,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qdom.h>
 #include <QDataStream>
 #include <QList>
 class QIODevice;

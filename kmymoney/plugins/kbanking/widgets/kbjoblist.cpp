@@ -25,8 +25,8 @@
 
 #include "kbjoblist.h"
 #include <assert.h>
-#include <qstring.h>
-#include <qwidget.h>
+#include <QString>
+#include <QWidget>
 
 
 

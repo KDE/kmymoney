@@ -20,9 +20,10 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
+
 #include <QList>
 #include <QFile>
-#include <q3textstream.h>
+#include <Q3TextStream>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -31,10 +32,10 @@
 
 #include <klocale.h>
 #include <kdebug.h>
-#include <q3tl.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
+
 #include "mymoneyfile.h"
 #include "mymoneyreport.h"
 #include "mymoneyexception.h"

@@ -21,10 +21,10 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <q3table.h>
-#include <q3valuevector.h>
+#include <Q3Table>
+#include <Q3ValueVector>
 #include <QPalette>
-#include <qwidget.h>
+#include <QWidget>
 #include <QMouseEvent>
 #include <QKeyEvent>
 

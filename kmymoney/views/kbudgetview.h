@@ -21,7 +21,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qwidget.h>
+#include <QWidget>
 #include <QResizeEvent>
 #include <QList>
 

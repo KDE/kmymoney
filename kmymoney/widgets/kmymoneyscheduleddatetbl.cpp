@@ -49,7 +49,6 @@ Contains code from the KDateTable class ala kdelibs-3.1.2.  Original license:
 #include <QPen>
 #include <QPainter>
 #include <QDialog>
-#include <qdrawutil.h>
 #include <QCursor>
 #include <QApplication>
 #include <QList>

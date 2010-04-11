@@ -25,7 +25,7 @@
 // QT Includes
 
 #include <QString>
-#include <qmap.h>
+#include <QMap>
 #include <QStringList>
 #include <QPixmap>
 

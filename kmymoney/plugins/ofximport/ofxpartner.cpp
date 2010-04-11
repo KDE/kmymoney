@@ -31,10 +31,10 @@
 #include <QEventLoop>
 #include <QFileInfo>
 #include <QApplication>
-#include <qdom.h>
 #include <QRegExp>
 #include <QDir>
 #include <QTextStream>
+#include <QDomDocument>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

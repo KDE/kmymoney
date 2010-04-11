@@ -29,7 +29,6 @@
 #include <QPrinter>
 #include <QPainter>
 #include <QFile>
-#include <qdom.h>
 #include <QTextStream>
 #include <QList>
 

@@ -26,7 +26,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qwidget.h>
+#include <QWidget>
 #include <QString>
 #include <QResizeEvent>
 #include <QFrame>

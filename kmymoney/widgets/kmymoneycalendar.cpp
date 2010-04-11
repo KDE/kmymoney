@@ -47,14 +47,14 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
+
 #include <QPainter>
-#include <qdrawutil.h>
-#include <q3frame.h>
+#include <Q3Frame>
 #include <QDialog>
 #include <QStyle>
 #include <QToolButton>
 #include <QToolTip>
-#include <qfont.h>
+#include <QFont>
 #include <QValidator>
 #include <QPushButton>
 #include <QResizeEvent>

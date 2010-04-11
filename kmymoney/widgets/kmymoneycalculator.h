@@ -26,11 +26,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qwidget.h>
-#include <q3frame.h>
+#include <QWidget>
 #include <QLayout>
-#include <q3grid.h>
-#include <qlcdnumber.h>
 #include <QLabel>
 #include <QKeyEvent>
 

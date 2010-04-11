@@ -26,17 +26,19 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
+
 #include <QList>
 #include <QFile>
-#include <q3textstream.h>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
+
 #include <klocale.h>
 #include <kdebug.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
+
 #include "mymoneyfile.h"
 #include "mymoneytransaction.h"
 #include "mymoneyreport.h"

@@ -33,8 +33,8 @@
 #include <QString>
 #include <QDateTime>
 #include <QPair>
-#include <qmap.h>
-#include <qdom.h>
+#include <QMap>
+#include <QDomElement>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

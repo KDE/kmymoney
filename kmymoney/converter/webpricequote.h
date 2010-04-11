@@ -25,7 +25,7 @@
 #include <QDateTime>
 #include <QString>
 #include <QStringList>
-#include <qmap.h>
+#include <QMap>
 
 // ----------------------------------------------------------------------------
 // KDE Headers

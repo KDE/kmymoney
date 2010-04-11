@@ -18,7 +18,7 @@
 #ifndef REPORTSTESTCOMMON_H
 #define REPORTSTESTCOMMON_H
 
-#include <q3valuelist.h>
+#include <Q3ValueList>
 class QDomDocument;
 
 #include "mymoneyaccount.h"

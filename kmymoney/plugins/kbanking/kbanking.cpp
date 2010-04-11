@@ -26,16 +26,16 @@
 #include "kbanking.h"
 
 #include <assert.h>
-#include <qstring.h>
-#include <qmessagebox.h>
-#include <qinputdialog.h>
-#include <qapplication.h>
-#include <qdatetime.h>
+#include <QString>
+#include <QMessageBox>
+#include <QInputDialog>
+#include <QApplication>
+#include <QDateTime>
 
 #include <gwenhywfar/debug.h>
 #include <gwenhywfar/text.h>
 
-#include <qwidget.h>
+#include <QWidget>
 
 KBanking::KBanking(const char *appname,
                    const char *cfgDir)

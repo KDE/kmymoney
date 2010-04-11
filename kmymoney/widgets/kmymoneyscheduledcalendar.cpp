@@ -24,11 +24,13 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
+
 #include <QPushButton>
-#include <qkeysequence.h>
+#include <QKeySequence>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
+
 #include <klocale.h>
 #include <kmenu.h>
 #include <kmessagebox.h>

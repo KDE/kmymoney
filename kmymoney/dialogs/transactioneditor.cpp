@@ -24,7 +24,6 @@
 #include <QApplication>
 #include <QEventLoop>
 #include <QRadioButton>
-#include <q3buttongroup.h>
 #include <QKeyEvent>
 #include <QList>
 #include <QEvent>

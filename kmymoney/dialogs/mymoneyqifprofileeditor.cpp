@@ -21,8 +21,8 @@
 // QT Includes
 
 #include <QPushButton>
-#include <q3listbox.h>
-#include <q3listview.h>
+#include <Q3ListBox>
+#include <Q3ListView>
 #include <QCheckBox>
 #include <QTabWidget>
 

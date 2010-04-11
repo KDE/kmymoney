@@ -31,9 +31,9 @@
 #include <gwenhywfar/debug.h>
 
 // QT includes
-#include <qradiobutton.h>
-#include <qlabel.h>
-#include <qdatetime.h>
+#include <QRadioButton>
+#include <QLabel>
+#include <QDateTime>
 
 // KDE includes
 #include <kpushbutton.h>

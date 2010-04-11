@@ -22,8 +22,8 @@
 #define KBPICKSTARTDATE_H
 
 #include <ui_kbpickstartdate.h>
-#include <qdatetime.h>
-#include <qdialog.h>
+#include <QDateTime>
+#include <QDialog>
 
 
 class QBanking;

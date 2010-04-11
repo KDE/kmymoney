@@ -20,7 +20,7 @@
 #ifndef __NUMBERTOWORDS_H__
 #define __NUMBERTOWORDS_H__
 
-#include <qstringlist.h>
+#include <QStringList>
 
 #include <kmymoney/mymoneymoney.h>
 

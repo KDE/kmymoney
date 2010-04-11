@@ -26,9 +26,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qwidget.h>
+#include <QWidget>
 #include <QPair>
-#include <qdatastream.h>
+#include <QDataStream>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

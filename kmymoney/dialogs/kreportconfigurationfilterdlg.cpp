@@ -35,7 +35,7 @@
 #include <QPushButton>
 #include <QRadioButton>
 #include <QLayout>
-#include <qspinbox.h>
+#include <QSpinBox>
 #include <QToolTip>
 #include <QTabWidget>
 #include <QApplication>

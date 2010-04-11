@@ -28,8 +28,8 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QRadioButton>
-#include <qspinbox.h>
-#include <q3datetimeedit.h>
+#include <QSpinBox>
+#include <Q3DateTimeEdit>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

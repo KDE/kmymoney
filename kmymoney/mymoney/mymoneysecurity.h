@@ -31,7 +31,7 @@
 // QT Includes
 
 #include <QDateTime>
-#include <qmap.h>
+#include <QMap>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

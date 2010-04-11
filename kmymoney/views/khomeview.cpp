@@ -24,17 +24,15 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <q3tl.h>
 #include <QLayout>
 #include <QDateTime>
 #include <QApplication>
 #include <QList>
 #include <QPixmap>
-#include <dom/dom_element.h>
-#include <dom/dom_doc.h>
-#include <dom/dom_text.h>
+#include <QDomDocument>
+#include <QDomElement>
+#include <QDomText>
 #include <QFile>
-#include <q3textstream.h>
 #include <QTimer>
 #include <QBuffer>
 
@@ -394,7 +392,7 @@ void KHomeView::showPayments(void)
   if (!overdues.isEmpty()) {
     d->m_html += "<div class=\"gap\">&nbsp;</div>\n";
 
-    qBubbleSort(overdues);
+    qSort(overdues);
     QList<MyMoneySchedule>::Iterator it;
     QList<MyMoneySchedule>::Iterator it_f;
 
@@ -447,7 +445,7 @@ void KHomeView::showPayments(void)
   }
 
   if (!schedule.isEmpty()) {
-    qBubbleSort(schedule);
+    qSort(schedule);
 
     // Extract todays payments if any
     QList<MyMoneySchedule> todays;
@@ -527,7 +525,7 @@ void KHomeView::showPayments(void)
       bool needMoreLess = d->m_showAllSchedules;
 
       QDate lastDate = QDate::currentDate().addMonths(1);
-      qBubbleSort(schedule);
+      qSort(schedule);
       do {
         it = schedule.begin();
         if (it == schedule.end())
@@ -570,7 +568,7 @@ void KHomeView::showPayments(void)
         }
 
         (*it).setNextDueDate((*it).nextPayment((*it).nextDueDate()));
-        qBubbleSort(schedule);
+        qSort(schedule);
       } while (1);
 
       if (needMoreLess) {

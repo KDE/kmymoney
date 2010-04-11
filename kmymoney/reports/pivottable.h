@@ -21,14 +21,16 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
-#include <qmap.h>
-#include <qlist.h>
+
+#include <QMap>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 // ----------------------------------------------------------------------------
 // Project Includes
+
 #include "kreportchartview.h"
 #include "mymoneyfile.h"
 #include "mymoneyreport.h"

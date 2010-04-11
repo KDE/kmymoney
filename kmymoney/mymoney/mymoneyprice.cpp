@@ -24,6 +24,8 @@
   * @author Thomas Baumgart
   */
 
+#include "mymoneyprice.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -33,7 +35,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyprice.h"
 #include "mymoneyexception.h"
 
 MyMoneyPrice::MyMoneyPrice() :

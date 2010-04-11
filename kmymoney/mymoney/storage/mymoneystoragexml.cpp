@@ -24,8 +24,7 @@
 // QT Includes
 
 #include <QFile>
-#include <qdom.h>
-#include <qmap.h>
+#include <QMap>
 #include <QXmlLocator>
 #include <Q3TextStream>
 #include <QList>

@@ -25,7 +25,8 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
-#include <qwidget.h>
+
+#include <QWidget>
 #include <QStringList>
 #include <QList>
 
@@ -34,6 +35,7 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
+
 #include "ui_kschedulebriefwidget.h"
 #include "mymoneyfile.h"
 

@@ -25,9 +25,9 @@
 
 #include "kbjobview.h"
 
-#include <qevent.h>
-#include <qlayout.h>
-#include <qtooltip.h>
+#include <QEvent>
+#include <QLayout>
+#include <QToolTip>
 #include <QHBoxLayout>
 
 #include <kpushbutton.h>

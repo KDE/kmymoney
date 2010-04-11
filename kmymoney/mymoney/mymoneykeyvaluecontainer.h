@@ -31,12 +31,14 @@
 // QT Includes
 
 #include <QString>
-#include <qmap.h>
-#include <qdom.h>
-#include <kmm_mymoney_export.h>
+#include <QMap>
+#include <QDomDocument>
+#include <QDomElement>
 
 // ----------------------------------------------------------------------------
 // Project Includes
+
+#include <kmm_mymoney_export.h>
 
 
 /**

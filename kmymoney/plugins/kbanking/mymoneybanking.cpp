@@ -27,13 +27,13 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qmessagebox.h>
-#include <qlayout.h>
-#include <qradiobutton.h>
-#include <qstringlist.h>
-#include <qregexp.h>
-#include <qcheckbox.h>
-#include <qlabel.h>
+#include <QMessageBox>
+#include <QLayout>
+#include <QRadioButton>
+#include <QStringList>
+#include <QRegExp>
+#include <QCheckBox>
+#include <QLabel>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

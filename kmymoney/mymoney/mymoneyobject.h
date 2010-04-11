@@ -25,8 +25,9 @@
 // QT Includes
 
 #include <QString>
-#include <qdom.h>
 #include <QDateTime>
+#include <QDomDocument>
+#include <QDomElement>
 
 // ----------------------------------------------------------------------------
 // Project Includes

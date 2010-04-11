@@ -19,7 +19,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <q3header.h>
+#include <Q3Header>
 #include <QLabel>
 #include <QTabWidget>
 #include <QList>

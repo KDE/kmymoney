@@ -25,11 +25,11 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <q3header.h>
+#include <Q3Header>
 #include <QCursor>
 #include <QTimer>
 #include <QCheckBox>
-#include <q3groupbox.h>
+#include <Q3GroupBox>
 #include <QResizeEvent>
 
 // ----------------------------------------------------------------------------

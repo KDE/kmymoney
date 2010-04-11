@@ -21,10 +21,10 @@
 #include "kcm_printcheck.h"
 
 // Qt includes
-#include <qcombobox.h>
-#include <qlayout.h>
-#include <qgroupbox.h>
-#include <qframe.h>
+#include <QComboBox>
+#include <QLayout>
+#include <QGroupBox>
+#include <QFrame>
 
 // KDE includes
 #include <khtml_part.h>

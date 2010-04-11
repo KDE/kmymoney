@@ -99,7 +99,7 @@ private:
 #ifdef _CHECK_MEMORY
 
 #include <cstddef>
-#include <qmap.h>
+#include <QMap>
 
 class _CheckMemoryEntry
 {

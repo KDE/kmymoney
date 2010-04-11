@@ -41,7 +41,7 @@
 // So we can save this object
 #include <QChar>
 #include <QString>
-#include <qdatastream.h>
+#include <QDataStream>
 #include <kmm_mymoney_export.h>
 #include <mymoneyexception.h>
 

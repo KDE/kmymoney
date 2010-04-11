@@ -22,13 +22,14 @@
 // No need for QDateEdit, QSpinBox, etc., since these always return values
 
 #include <QCheckBox>
-//#include <q3listbox.h>
 #include <QPushButton>
 #include <QWidget>
 #include <QSpinBox>
 #include <QApplication>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
+
 #include <klistwidget.h>
 #include <kcombobox.h>
 #include <klineedit.h>

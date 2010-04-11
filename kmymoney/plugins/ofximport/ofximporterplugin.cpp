@@ -21,10 +21,10 @@
 // QT Includes
 
 #include <QFile>
-#include <q3textstream.h>
+#include <Q3TextStream>
 #include <QRadioButton>
-#include <qspinbox.h>
-#include <q3datetimeedit.h>
+#include <QSpinBox>
+#include <Q3DateTimeEdit>
 #include <QByteArray>
 
 // ----------------------------------------------------------------------------

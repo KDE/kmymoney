@@ -21,8 +21,8 @@
 #include "kcm_icalendarexport.h"
 
 // Qt includes
-#include <qcombobox.h>
-#include <qboxlayout.h>
+#include <QComboBox>
+#include <QBoxLayout>
 
 // KDE includes
 #include <kgenericfactory.h>

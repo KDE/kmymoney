@@ -27,15 +27,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-// #include <qdom.h>
-// #include <qdatastream.h>
-// class QIODevice;
-
 // ----------------------------------------------------------------------------
 // Project Includes
 
-// #include "imymoneyserialize.h"
-// #include "imymoneystorageformat.h"
 #include "mymoneystoragexml.h"
 
 /**

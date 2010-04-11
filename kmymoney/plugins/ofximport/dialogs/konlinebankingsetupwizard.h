@@ -26,9 +26,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qwidget.h>
-#include <qlist.h>
-#include <q3listview.h>
+#include <QWidget>
+#include <QList>
+#include <Q3ListView>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

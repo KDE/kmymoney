@@ -25,9 +25,9 @@
 #include <QLabel>
 #include <QPixmap>
 #include <QTabWidget>
-#include <q3listbox.h>
+#include <Q3ListBox>
 #include <QCheckBox>
-#include <q3groupbox.h>
+#include <Q3GroupBox>
 #include <QToolTip>
 #include <QList>
 #include <QResizeEvent>

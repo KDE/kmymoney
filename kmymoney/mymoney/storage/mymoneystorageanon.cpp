@@ -29,7 +29,6 @@
 // QT Includes
 
 #include <QFile>
-#include <qdom.h>
 #include <QMap>
 #include <QList>
 

@@ -24,7 +24,7 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
-#include <qmap.h>
+#include <QMap>
 #include <QList>
 #include <QString>
 class QDomElement;

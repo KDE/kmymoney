@@ -25,7 +25,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <q3header.h>
+#include <Q3Header>
 #include <QToolButton>
 #include <QComboBox>
 #include <QTabWidget>

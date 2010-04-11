@@ -21,7 +21,7 @@
 #ifndef KCHOOSEIMPORTEXPORTDLG_H
 #define KCHOOSEIMPORTEXPORTDLG_H
 
-#include <qwidget.h>
+#include <QWidget>
 #include "ui_kchooseimportexportdlgdecl.h"
 
 /**

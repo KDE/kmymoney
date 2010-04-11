@@ -47,7 +47,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <q3gridview.h>
+#include <Q3GridView>
 #include <QDateTime>
 #include <QResizeEvent>
 #include <QWheelEvent>

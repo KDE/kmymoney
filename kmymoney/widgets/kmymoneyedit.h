@@ -22,7 +22,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <q3hbox.h>
 #include <QValidator>
 #include <QEvent>
 #include <QKeyEvent>

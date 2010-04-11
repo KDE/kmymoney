@@ -21,9 +21,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qmap.h>
+#include <QMap>
 #include <QString>
-#include <q3table.h>
+#include <Q3Table>
 class QWidget;
 
 // ----------------------------------------------------------------------------

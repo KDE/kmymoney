@@ -28,10 +28,10 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <q3table.h>
-#include <q3valuevector.h>
-#include <qwidget.h>
-#include <qmap.h>
+#include <Q3Table>
+#include <Q3ValueVector>
+#include <QWidget>
+#include <QMap>
 #include <QPair>
 #include <QEvent>
 #include <QList>

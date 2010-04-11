@@ -23,7 +23,7 @@
 
 #include "ui_kbjobview.h"
 
-#include <qwidget.h>
+#include <QWidget>
 
 
 class KBJobView;

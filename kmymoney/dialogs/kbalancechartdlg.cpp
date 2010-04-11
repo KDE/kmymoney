@@ -21,7 +21,7 @@
 // QT Includes
 
 #include <QLayout>
-#include <qframe.h>
+#include <QFrame>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 

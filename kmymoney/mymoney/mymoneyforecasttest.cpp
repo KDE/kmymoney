@@ -17,7 +17,7 @@
 #include "mymoneyforecasttest.h"
 
 #include <iostream>
-#include <q3valuelist.h>
+#include <Q3ValueList>
 
 #include "mymoneybudget.h"
 

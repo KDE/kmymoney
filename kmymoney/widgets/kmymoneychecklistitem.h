@@ -22,7 +22,7 @@
 // QT Includes
 
 #include <QObject>
-#include <q3listview.h>
+#include <Q3ListView>
 #include <QTreeWidgetItem>
 
 // ----------------------------------------------------------------------------

@@ -26,7 +26,7 @@
 
 #include <QObject>
 #include <QString>
-#include <qmap.h>
+#include <QMap>
 #include <QStringList>
 
 // ----------------------------------------------------------------------------

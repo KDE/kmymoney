@@ -20,12 +20,10 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qpoint.h>
+#include <QPoint>
 #include <QEvent>
-#include <q3dragobject.h>
 #include <QTimer>
 #include <QCursor>
-#include <q3header.h>
 #include <QPainter>
 #include <QPixmap>
 #include <QStyle>

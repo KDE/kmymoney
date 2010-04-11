@@ -23,7 +23,6 @@
 // QT Includes
 
 #include <QString>
-#include <qdom.h>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

@@ -22,7 +22,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <q3textbrowser.h>
 #include <QLabel>
 #include <QLayout>
 #include <QRegExp>

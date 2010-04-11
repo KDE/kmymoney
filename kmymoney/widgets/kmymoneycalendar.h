@@ -49,7 +49,8 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
-#include <q3frame.h>
+
+#include <Q3Frame>
 #include <QDateTime>
 #include <QResizeEvent>
 #include <QEvent>
