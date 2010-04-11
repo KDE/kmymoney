@@ -43,6 +43,7 @@
 #include <kmymoneycurrencyselector.h>
 #include "kmymoney.h"
 #include "kinvestmentlistitem.h"
+#include "models.h"
 
 class KInvestmentView::Private
 {
@@ -51,21 +52,28 @@ public:
       m_needReload(false),
       m_newAccountLoaded(false),
       m_recursion(false),
-      m_precision(2) {}
+      m_precision(2),
+      m_filterProxyModel(0) {}
 
   MyMoneyAccount    m_account;
   bool              m_needReload;
   bool              m_newAccountLoaded;
   bool              m_recursion;
   int               m_precision;
+  AccountNamesFilterProxyModel *m_filterProxyModel;
 };
-
-
 
 KInvestmentView::KInvestmentView(QWidget *parent) :
     KInvestmentViewDecl(parent),
     d(new Private)
 {
+  d->m_filterProxyModel = new AccountNamesFilterProxyModel(this);
+  d->m_filterProxyModel->addAccountType(MyMoneyAccount::Investment);
+  d->m_filterProxyModel->setHideEquityAccounts(false);
+  d->m_filterProxyModel->setSourceModel(Models::instance()->accountsModel());
+  d->m_filterProxyModel->sort(0);
+  m_accountComboBox->setModel(d->m_filterProxyModel);
+
   m_table->setRootIsDecorated(false);
   // m_table->setColumnText(0, i18n("Symbol"));
   m_table->addColumn(i18nc("Investment name", "Name"));
@@ -159,28 +167,34 @@ void KInvestmentView::loadAccounts(void)
     }
   }
 
-  m_accountComboBox->loadList(MyMoneyAccount::Investment);
+  d->m_filterProxyModel->invalidate();
+  m_accountComboBox->expandAll();
 
   if (d->m_account.id().isEmpty()) {
-    QStringList list = m_accountComboBox->accountList();
-    if (list.count()) {
-      QStringList::Iterator it;
-      for (it = list.begin(); it != list.end(); ++it) {
-        MyMoneyAccount a = file->account(*it);
-        if (a.accountType() == MyMoneyAccount::Investment) {
-          if (a.value("PreferredAccount") == "Yes") {
-            d->m_account = a;
-            break;
-          } else if (d->m_account.id().isEmpty()) {
-            d->m_account = a;
-          }
+    // there are no favorite accounts find any account
+    QModelIndexList list = d->m_filterProxyModel->match(d->m_filterProxyModel->index(0, 0),
+                           Qt::DisplayRole,
+                           QVariant(QString("*")),
+                           -1,
+                           Qt::MatchFlags(Qt::MatchWildcard | Qt::MatchRecursive));
+    for (QModelIndexList::ConstIterator it = list.constBegin(); it != list.constEnd(); ++it) {
+      if (!it->parent().isValid())
+        continue; // skip the top level accounts
+      QVariant accountId = d->m_filterProxyModel->data(*it, AccountsModel::AccountIdRole);
+      if (accountId.isValid()) {
+        MyMoneyAccount a = file->account(accountId.toString());
+        if (a.value("PreferredAccount") == "Yes") {
+          d->m_account = a;
+          break;
+        } else if (d->m_account.id().isEmpty()) {
+          d->m_account = a;
         }
       }
     }
   }
 
   if (!d->m_account.id().isEmpty()) {
-    m_accountComboBox->setSelected(d->m_account);
+    m_accountComboBox->setSelected(d->m_account.id());
     try {
       d->m_precision = MyMoneyMoney::denomToPrec(d->m_account.fraction());
     } catch (MyMoneyException *e) {

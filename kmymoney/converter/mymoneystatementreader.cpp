@@ -55,7 +55,8 @@
 #include "transactionmatcher.h"
 #include "kenterscheduledlg.h"
 #include "kmymoney.h"
-#include <kmymoneyaccountcombo.h>
+#include "kmymoneyaccountcombo.h"
+#include "models.h"
 
 class MyMoneyStatementReader::Private
 {
@@ -875,10 +876,18 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           QVBoxLayout *topcontents = new QVBoxLayout(mainWidget);
 
           //add in caption? and account combo here
-          QLabel *label1 = new QLabel(i18n("Please select a default category for payee '%1':", payee.name()));
+          QLabel *label1 = new QLabel(i18n("Please select a default category for payee"));
           topcontents->addWidget(label1);
 
-          QPointer<KMyMoneyAccountCombo> accountCombo = new KMyMoneyAccountCombo(dialog);
+          AccountNamesFilterProxyModel *filterProxyModel = new AccountNamesFilterProxyModel(this);
+          filterProxyModel->addAccountGroup(MyMoneyAccount::Asset);
+          filterProxyModel->addAccountGroup(MyMoneyAccount::Liability);
+          filterProxyModel->addAccountGroup(MyMoneyAccount::Income);
+          filterProxyModel->addAccountGroup(MyMoneyAccount::Expense);
+          filterProxyModel->setSourceModel(Models::instance()->accountsModel());
+          filterProxyModel->sort(0);
+
+          QPointer<KMyMoneyAccountCombo> accountCombo = new KMyMoneyAccountCombo(filterProxyModel, dialog);
           topcontents->addWidget(accountCombo);
           mainWidget->setLayout(topcontents);
           dialog->setMainWidget(mainWidget);
@@ -886,8 +895,8 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           int result = dialog->exec();
 
           QString accountId;
-          if (accountCombo && !accountCombo->selectedAccounts().isEmpty()) {
-            accountId = accountCombo->selectedAccounts().front();
+          if (accountCombo && !accountCombo->getSelected().isEmpty()) {
+            accountId = accountCombo->getSelected();
           }
           if (dialog) {
             delete dialog;

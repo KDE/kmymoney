@@ -266,6 +266,8 @@ private:
    * This signals whether a payee is being edited
    **/
   bool m_payeeInEditing;
+
+  AccountNamesFilterProxyModel *m_filterProxyModel;
 };
 
 #endif

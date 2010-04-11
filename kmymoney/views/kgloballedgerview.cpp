@@ -85,7 +85,7 @@ public:
   AccountNamesFilterProxyModel *m_filterProxyModel;
 
   // widgets
-  KMyMoneyMVCAccountCombo* m_accountComboBox;
+  KMyMoneyAccountCombo* m_accountComboBox;
 };
 
 MousePressFilter::MousePressFilter(QWidget* parent) :
@@ -185,7 +185,7 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name)
   toolbarLayout->setSpacing(0);
 
   // the account selector widget
-  d->m_accountComboBox = new KMyMoneyMVCAccountCombo(d->m_filterProxyModel, m_toolbarFrame);
+  d->m_accountComboBox = new KMyMoneyAccountCombo(d->m_filterProxyModel, m_toolbarFrame);
   toolbarLayout->addWidget(d->m_accountComboBox);
 
   layout()->addWidget(m_toolbarFrame);

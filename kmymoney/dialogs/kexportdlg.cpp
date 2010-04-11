@@ -45,6 +45,7 @@
 #include "mymoneyfile.h"
 #include "kmymoneyaccountcombo.h"
 #include "kmymoneyutils.h"
+#include "models.h"
 
 KExportDlg::KExportDlg(QWidget *parent)
     : KExportDlgDecl(parent)
@@ -88,7 +89,7 @@ KExportDlg::KExportDlg(QWidget *parent)
   connect(m_qcheckboxAccount, SIGNAL(toggled(bool)), this, SLOT(checkData()));
   connect(m_qcheckboxCategories, SIGNAL(toggled(bool)), this, SLOT(checkData()));
   connect(m_accountComboBox, SIGNAL(accountSelected(const QString&)), this, SLOT(checkData(const QString&)));
-  connect(m_profileComboBox, SIGNAL(highlighted(int)), this, SLOT(checkData()));
+  connect(m_profileComboBox, SIGNAL(activated(int)), this, SLOT(checkData()));
   connect(m_kmymoneydateStart, SIGNAL(dateChanged(const QDate&)), this, SLOT(checkData()));
   connect(m_kmymoneydateEnd, SIGNAL(dateChanged(const QDate&)), this, SLOT(checkData()));
 
@@ -208,12 +209,12 @@ void KExportDlg::checkData(const QString& accountId)
         m_kmymoneydateEnd->loadDate((*it).postDate());
       }
       m_lastAccount = accountId;
-      m_accountComboBox->setSelected(account);
+      m_accountComboBox->setSelected(account.id());
     }
   }
 
   if (!m_qlineeditFile->text().isEmpty()
-      && m_accountComboBox->selectedAccounts().count() != 0
+      && !m_accountComboBox->getSelected().isEmpty()
       && !m_profileComboBox->currentText().isEmpty()
       && m_kmymoneydateStart->date() <= m_kmymoneydateEnd->date()
       && (m_qcheckboxAccount->isChecked() || m_qcheckboxCategories->isChecked()))
@@ -224,58 +225,17 @@ void KExportDlg::checkData(const QString& accountId)
 
 void KExportDlg::loadAccounts(void)
 {
-  /*
-    QStringList strList;
-
-    try {
-      MyMoneyFile *file = MyMoneyFile::instance();
-
-      // read all account items from the MyMoneyFile objects and add them to the listbox
-      addCategories(strList, file->liability().id(), QString());
-      addCategories(strList, file->asset().id(), QString());
-
-    } catch (MyMoneyException *e) {
-      qDebug("Exception '%s' thrown in %s, line %ld caught in KExportDlg::loadAccounts:%d",
-        e->what().toLatin1(), e->file().toLatin1(), e->line(), __LINE__);
-      delete e;
-    }
-  */
-  m_accountComboBox->loadList((KMyMoneyUtils::categoryTypeE)(KMyMoneyUtils::asset | KMyMoneyUtils::liability));
-
-  /*
-    m_accountComboBox->setCurrentItem(0);
-    if(strList.contains(current) > 0)
-      m_accountComboBox->setCurrentText(current);
-  */
+  AccountNamesFilterProxyModel *filterProxyModel = new AccountNamesFilterProxyModel(this);
+  filterProxyModel->addAccountGroup(MyMoneyAccount::Asset);
+  filterProxyModel->addAccountGroup(MyMoneyAccount::Liability);
+  filterProxyModel->setSourceModel(Models::instance()->accountsModel());
+  filterProxyModel->sort(0);
+  m_accountComboBox->setModel(filterProxyModel);
 }
 
 QString KExportDlg::accountId() const
 {
   return m_lastAccount;
 }
-
-/*
-void KExportDlg::addCategories(QStringList& strList, const QString& id, const QString& leadIn) const
-{
-  MyMoneyFile *file = MyMoneyFile::instance();
-  QString name;
-
-  MyMoneyAccount account = file->account(id);
-
-  QStringList accList = account.accountList();
-  QStringList::ConstIterator it_a;
-
-  for(it_a = accList.begin(); it_a != accList.end(); ++it_a) {
-    account = file->account(*it_a);
-    strList << leadIn + account.name();
-    addCategories(strList, *it_a, leadIn + account.name() + ":");
-  }
-}
-
-QString KExportDlg::accountId(const QString& account) const
-{
-  return MyMoneyFile::instance()->nameToAccount(account);
-}
-*/
 
 #include "kexportdlg.moc"

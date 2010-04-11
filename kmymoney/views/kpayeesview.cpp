@@ -62,6 +62,7 @@
 #include "kmymoneyaccounttree.h"
 #include "kmymoneyglobalsettings.h"
 #include "kmymoney.h"
+#include "models.h"
 
 /* -------------------------------------------------------------------------------*/
 /*                               KTransactionPtrVector                            */
@@ -115,6 +116,14 @@ KPayeesView::KPayeesView(QWidget *parent) :
     m_inSelection(false),
     m_payeeInEditing(false)
 {
+  m_filterProxyModel = new AccountNamesFilterProxyModel(this);
+  m_filterProxyModel->addAccountGroup(MyMoneyAccount::Asset);
+  m_filterProxyModel->addAccountGroup(MyMoneyAccount::Liability);
+  m_filterProxyModel->addAccountGroup(MyMoneyAccount::Income);
+  m_filterProxyModel->addAccountGroup(MyMoneyAccount::Expense);
+  m_filterProxyModel->setSourceModel(Models::instance()->accountsModel());
+  m_filterProxyModel->sort(0);
+  comboDefaultAccount->setModel(m_filterProxyModel);
 
   m_matchType->setId(radioNoMatch, 0);
   m_matchType->setId(radioNameMatch, 1);
@@ -267,7 +276,7 @@ void KPayeesView::slotChooseDefaultAccount(void)
     }
   }
   QMap<QString, int>::Iterator most_frequent, iter;
-  most_frequent = account_count.end();
+  most_frequent = account_count.begin();
   for (iter = account_count.begin(); iter != account_count.end(); ++iter) {
     if (iter.value() > most_frequent.value()) {
       most_frequent = iter;
@@ -642,10 +651,10 @@ void KPayeesView::slotPayeeDataChanged(void)
       comboDefaultAccount->setEnabled(true);
       labelDefaultAccount->setEnabled(true);
       // this is only going to understand the first in the list of selected accounts
-      if (comboDefaultAccount->selectedAccounts().empty()) {
+      if (comboDefaultAccount->getSelected().isEmpty()) {
         rc |= !m_payee.defaultAccountId().isEmpty();
       } else {
-        QString temp = comboDefaultAccount->selectedAccounts().front();
+        QString temp = comboDefaultAccount->getSelected();
         rc |= (temp.isEmpty() != m_payee.defaultAccountId().isEmpty())
               || (!m_payee.defaultAccountId().isEmpty() && temp != m_payee.defaultAccountId());
       }
@@ -674,8 +683,8 @@ void KPayeesView::slotUpdatePayee(void)
 
       if (checkEnableDefaultAccount->isChecked()) {
         QString temp;
-        if (!comboDefaultAccount->selectedAccounts().empty()) {
-          temp = comboDefaultAccount->selectedAccounts().front();
+        if (!comboDefaultAccount->getSelected().isEmpty()) {
+          temp = comboDefaultAccount->getSelected();
           m_payee.setDefaultAccountId(temp);
         }
       }
@@ -704,10 +713,6 @@ void KPayeesView::readConfig(void)
 
   //m_payeesList->setDefaultRenameAction(
   //KMyMoneyGlobalSettings::focusChangeIsEnter() ? Q3ListView::Accept : Q3ListView::Reject);
-
-  //initialize the account list?
-  comboDefaultAccount->loadList((KMyMoneyUtils::categoryTypeE)(KMyMoneyUtils::asset | KMyMoneyUtils::liability | MyMoneyAccount::Income | MyMoneyAccount::Expense));
-
 }
 
 void KPayeesView::show(void)
@@ -808,6 +813,9 @@ void KPayeesView::loadPayees(void)
   //m_payeesList->setContentsPos(startPoint.x(), startPoint.y());
 
   m_searchWidget->updateSearch(QString());
+
+  m_filterProxyModel->invalidate();
+  comboDefaultAccount->expandAll();
 
   slotSelectPayee();
 

@@ -73,5 +73,20 @@
       <extends>Q3ListView</extends>
       <header location="global">k3listview.h</header>
     </customwidget>
+    <customwidget>
+      <class>KMyMoneyAccountCombo</class>
+      <extends>QWidget</extends>
+      <header location="local">../widgets/kmymoneyaccountcombo.h</header>
+      <sizehint>
+        <width>-1</width>
+        <height>25</height>
+      </sizehint>
+      <container>0</container>
+      <sizepolicy>
+        <hordata>3</hordata>
+        <verdata>5</verdata>
+      </sizepolicy>
+      <pixmap>image1</pixmap>
+    </customwidget>
   </customwidgets>
 </ui>

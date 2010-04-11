@@ -73,14 +73,18 @@ protected:
   *
   * @author Cristian Onet
   */
-class KMyMoneyMVCAccountCombo : public KComboBox
+class KMyMoneyAccountCombo : public KComboBox
 {
   Q_OBJECT
 public:
-  explicit KMyMoneyMVCAccountCombo(AccountNamesFilterProxyModel *model, QWidget *parent = 0);
-  ~KMyMoneyMVCAccountCombo();
+  explicit KMyMoneyAccountCombo(AccountNamesFilterProxyModel *model, QWidget *parent = 0);
+  explicit KMyMoneyAccountCombo(QWidget *parent = 0);
+  ~KMyMoneyAccountCombo();
 
   void setSelected(const QString& id);
+  const QString& getSelected() const;
+
+  void setModel(AccountNamesFilterProxyModel *model);
 
 public slots:
   void expandAll();
@@ -97,77 +101,6 @@ signals:
 private:
   class Private;
   Private* const d;
-};
-
-/**
-  * @author Thomas Baumgart
-  */
-class KMyMoneyAccountCombo : public KComboBox
-{
-  Q_OBJECT
-public:
-  KMyMoneyAccountCombo(QWidget* parent = 0);
-  ~KMyMoneyAccountCombo();
-
-  /**
-    * Method returns how many items are in the account selector list.
-    */
-  int count(void) const;
-
-  /**
-    * This method loads the set of accounts into the widget
-    * as defined by the parameter @p accountIdList. @p accountIdList is
-    * a QValueList of account ids.
-    *
-    * @param baseName QString which should be used as group text
-    * @param accountIdList QValueList of QString account ids
-    *                 which should be loaded into the widget
-    * @param clear if true (default) clears the widget before populating
-    * @return This method returns the number of accounts loaded into the list
-    */
-  int loadList(const QString& baseName, const QList<QString>& accountIdList, const bool clear = true);
-
-  QStringList accountList(const QList<MyMoneyAccount::accountTypeE>& list = QList<MyMoneyAccount::accountTypeE>()) const;
-
-  int loadList(KMyMoneyUtils::categoryTypeE typeMask);
-  int loadList(const QList<int>& list);
-  int loadList(MyMoneyAccount::accountTypeE type);
-
-  void setSelected(const QString& id);
-  void setSelected(const MyMoneyAccount& acc);
-
-  /**
-    * This method returns the list of selected account id's. If
-    * no account is selected, the list is empty.
-    *
-    * @return list of selected accounts
-    */
-  QStringList selectedAccounts(void) const;
-
-  virtual void keyPressEvent(QKeyEvent* e);
-
-public slots:
-  void slotButtonPressed(void);
-  void slotSelected(const QString&);
-
-protected slots:
-
-signals:
-  void accountSelected(const QString&);
-
-  void pressed();
-  void released();
-  void clicked();
-
-protected:
-  void mousePressEvent(QMouseEvent *e);
-  void mouseReleaseEvent(QMouseEvent *e);
-
-  void setText(const QString& txt);
-
-private:
-  kMyMoneyAccountCompletion*    m_completion;
-  bool                          m_mlbDown;
 };
 
 #endif
