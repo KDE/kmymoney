@@ -312,6 +312,10 @@ public:
     */
   MyMoneyMoney m_lastNetWorth;
   /**
+    * Used to emit the @ref profitChanged signal.
+    */
+  MyMoneyMoney m_lastProfit;
+  /**
     * Used to set the reconciliation flag.
     */
   MyMoneyAccount m_reconciledAccount;
@@ -490,6 +494,7 @@ void AccountsModel::load()
     removeRow(index.row(), index.parent());
   }
 
+  // compute the net woth
   QModelIndexList assetList = match(index(0, 0),
                                     AccountsModel::AccountIdRole,
                                     MyMoneyFile::instance()->asset().id(),
@@ -514,6 +519,33 @@ void AccountsModel::load()
   if (d->m_lastNetWorth != netWorth) {
     d->m_lastNetWorth = netWorth;
     emit netWorthChanged(d->m_lastNetWorth);
+  }
+
+  // compute the profit
+  QModelIndexList incomeList = match(index(0, 0),
+                                     AccountsModel::AccountIdRole,
+                                     MyMoneyFile::instance()->income().id(),
+                                     1,
+                                     Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive));
+
+  QModelIndexList expenseList = match(index(0, 0),
+                                      AccountsModel::AccountIdRole,
+                                      MyMoneyFile::instance()->expense().id(),
+                                      1,
+                                      Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive));
+
+  MyMoneyMoney profit(0);
+  if (!incomeList.isEmpty() && !expenseList.isEmpty()) {
+    QVariant incomeValue = data(incomeList.front(), AccountsModel::AccountTotalValueRole);
+    QVariant expenseValue = data(expenseList.front(), AccountsModel::AccountTotalValueRole);
+
+    if (incomeValue.isValid() && expenseValue.isValid()) {
+      profit = incomeValue.value<MyMoneyMoney>() - expenseValue.value<MyMoneyMoney>();
+    }
+  }
+  if (d->m_lastProfit != profit) {
+    d->m_lastProfit = profit;
+    emit profitChanged(d->m_lastProfit);
   }
 }
 

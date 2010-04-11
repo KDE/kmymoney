@@ -34,10 +34,7 @@
 // Project Includes
 
 #include <mymoneyaccount.h>
-#include <kmymoneyaccounttree.h>
 #include <mymoneyutils.h>
-
-class K3ListViewSearchLineWidget;
 
 #include "ui_kcategoriesviewdecl.h"
 
@@ -77,6 +74,8 @@ public:
   KCategoriesView(QWidget *parent = 0);
   virtual ~KCategoriesView();
 
+protected:
+  void loadAccounts();
 
 public slots:
   void slotLoadAccounts(void);
@@ -87,14 +86,10 @@ public slots:
     */
   void showEvent(QShowEvent * event);
 
-protected:
-  void loadAccounts(void);
-  bool loadSubAccounts(KMyMoneyAccountTreeItem* parent, const QStringList& accountList);
-
 protected slots:
-  void slotUpdateProfit(void);
+  void slotProfitChanged(const MyMoneyMoney &);
   void slotExpandCollapse(void);
-
+  void slotUnusedIncomeExpenseAccountHidden(void);
 
 private:
   /**
@@ -133,19 +128,10 @@ signals:
   void reparent(const MyMoneyAccount& acc, const MyMoneyAccount& parent);
 
 private:
-  QMap<QString, MyMoneySecurity>      m_securityMap;
-  QMap<QString, unsigned long>        m_transactionCountMap;
-
-  KMyMoneyAccountTreeItem*            m_incomeItem;
-  KMyMoneyAccountTreeItem*            m_expenseItem;
-
-  /**
-   * Search widget for the list
-   */
-  K3ListViewSearchLineWidget*  m_searchWidget;
-
   /// set if a view needs to be reloaded during showEvent()
-  bool                                m_needReload;
+  bool                     m_needReload;
+  bool                     m_haveUnusedCategories;
+  AccountsFilterProxyModel *m_filterProxyModel;
 };
 
 #endif

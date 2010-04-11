@@ -105,6 +105,11 @@ signals:
     */
   void netWorthChanged(const MyMoneyMoney &);
 
+  /**
+    * Emit this signal when the profit based on the value of the loaded accounts is changed.
+    */
+  void profitChanged(const MyMoneyMoney &);
+
 private:
   AccountsModel(QObject *parent = 0);
 
