@@ -30,7 +30,6 @@
 // KDE Includes
 
 #include <klocale.h>
-#include <k3listbox.h>
 #include <klineedit.h>
 #include <kmessagebox.h>
 #include <knuminput.h>
@@ -38,14 +37,10 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoneyedit.h>
-#include <kmymoneycategory.h>
 #include <kmymoneycurrencyselector.h>
 #include <kmymoneyaccountselector.h>
-#include <kmymoneyaccounttree.h>
+#include <kmymoneyaccountcombo.h>
 #include <mymoneyfinancialcalculator.h>
-#include <kmymoneychecklistitem.h>
-#include <kmymoneylistviewitem.h>
 #include <kcurrencycalculator.h>
 #include <mymoneyaccount.h>
 #include <kmymoneyglobalsettings.h>
@@ -54,6 +49,9 @@
 #include "ksplittransactiondlg.h"
 #include "kequitypriceupdatedlg.h"
 #include "kmymoney.h"
+#include "models.h"
+
+Q_DECLARE_METATYPE(MyMoneyAccount)
 
 using namespace NewAccountWizard;
 
@@ -1444,96 +1442,70 @@ const QString& LoanPayoutPage::payoutAccountId(void) const
   }
 }
 
+HierarchyFilterProxyModel::HierarchyFilterProxyModel(QObject *parent)
+    : AccountsFilterProxyModel(parent)
+{
+}
+
+/**
+  * Top items are not selectable because they are not real accounts but are only used for grouping.
+  */
+Qt::ItemFlags HierarchyFilterProxyModel::flags(const QModelIndex &index) const
+{
+  return AccountsFilterProxyModel::flags(index);
+}
+
+bool HierarchyFilterProxyModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
+{
+  if (!source_parent.isValid() && source_row == 0) {
+    QVariant data = sourceModel()->data(sourceModel()->index(source_row, 0, source_parent), AccountsModel::AccountIdRole);
+    if (data.isValid() && data.toString() == AccountsModel::favoritesAccountId)
+      return false;
+  }
+  return AccountsFilterProxyModel::filterAcceptsRow(source_row, source_parent);
+}
+
+/**
+  * Filter all but the first column.
+  */
+bool HierarchyFilterProxyModel::filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const
+{
+  Q_UNUSED(source_parent)
+  if (source_column == 0)
+    return true;
+  return false;
+}
+
 HierarchyPage::HierarchyPage(Wizard* wizard) :
     KHierarchyPageDecl(wizard),
-    WizardPage<Wizard>(StepParentAccount, this, wizard)
+    WizardPage<Wizard>(StepParentAccount, this, wizard),
+    m_filterProxyModel(0)
 {
-  // the next line causes a warning to be shown in the console output
-  // since at least one of the major groups is selected, and the user
-  // cannot deselect an account, at least one is selected all the time
-  // and we don't need this check
-  // m_mandatoryGroup->add(m_qlistviewParentAccounts);
-  m_qlistviewParentAccounts->setEnabled(true);
-  m_qlistviewParentAccounts->setRootIsDecorated(true);
-  m_qlistviewParentAccounts->setAllColumnsShowFocus(true);
-  m_qlistviewParentAccounts->addColumn("Accounts");
-  m_qlistviewParentAccounts->setMultiSelection(false);
-  m_qlistviewParentAccounts->header()->setResizeEnabled(true);
-  m_qlistviewParentAccounts->setColumnWidthMode(0, Q3ListView::Maximum);
-  // never show the horizontal scroll bar
-  // m_qlistviewParentAccounts->setHScrollBarMode(QScrollView::AlwaysOff);
+  // the proxy filter model
+  m_filterProxyModel = new HierarchyFilterProxyModel(this);
+  m_filterProxyModel->setHideClosedAccounts(true);
+  m_filterProxyModel->setHideEquityAccounts(true);
+  m_filterProxyModel->addAccountGroup(MyMoneyAccount::Asset);
+  m_filterProxyModel->addAccountGroup(MyMoneyAccount::Liability);
+  m_filterProxyModel->setSourceModel(Models::instance()->accountsModel());
+  m_filterProxyModel->setDynamicSortFilter(true);
+  m_filterProxyModel->sort(0);
+
+  m_parentAccounts->setAlternatingRowColors(true);
+  m_parentAccounts->setIconSize(QSize(22, 22));
+  m_parentAccounts->setSortingEnabled(true);
+  m_parentAccounts->setModel(m_filterProxyModel);
+
+  connect(m_parentAccounts->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)), this, SLOT(parentAccountChanged()));
 }
 
 void HierarchyPage::enterPage(void)
 {
   // Ensure that the list reflects the Account Type
-  // - if the type has changed
-  // - - clear the list
-  // - - populate the account list (also occurs first time we come here)
   MyMoneyAccount topAccount = m_wizard->m_accountTypePage->parentAccount();
-
-  // If the list was not populated with this top account we populate it now
-  if (&m_topAccount == NULL || m_topAccount.id() != topAccount.id()) {
-    if (&m_topAccount != NULL) {
-      // If the list has already been populated clear it
-      if ((*m_qlistviewParentAccounts).childCount() > 0)
-        (*m_qlistviewParentAccounts).clear();
-    }
-
-    // Add the Tree for the Top Account
-    KMyMoneyAccountTreeItem *topAccountTree = buildAccountTree(m_qlistviewParentAccounts, topAccount, false);
-    topAccountTree->setOpen(true);
-    // Record the top account used to populate the list
-    m_topAccount = topAccount;
-  }
-}
-
-KMyMoneyAccountTreeItem* HierarchyPage::buildAccountTree
-(KMyMoneyAccountTreeBase* parent
- , const MyMoneyAccount& account
- , bool open) const
-{
-  // Recursively add child accounts to the list
-  if (account.accountType() == MyMoneyAccount::Investment)
-    return NULL;
-  KMyMoneyAccountTreeItem* childItem = new KMyMoneyAccountTreeItem(parent, account);
-  if (open)
-    childItem->setOpen(true);
-  for (QStringList::ConstIterator it = account.accountList().begin();
-       it != account.accountList().end();
-       ++it) {
-    MyMoneyAccount acc = MyMoneyFile::instance()->account(*it);
-    if (acc.isClosed())
-      continue;
-    if (acc.accountType() == MyMoneyAccount::Investment)
-      continue;
-    buildAccountTree(childItem, acc, open);
-  }
-  return childItem;
-}
-
-KMyMoneyAccountTreeItem* HierarchyPage::buildAccountTree
-(KMyMoneyAccountTreeItem* parent
- , const MyMoneyAccount& account
- , bool open) const
-{
-  // Recursively add child accounts to the list
-  if (account.accountType() == MyMoneyAccount::Investment)
-    return NULL;
-  KMyMoneyAccountTreeItem* childItem = new KMyMoneyAccountTreeItem(parent, account);
-  if (open)
-    childItem->setOpen(true);
-  for (QStringList::ConstIterator it = account.accountList().begin();
-       it != account.accountList().end();
-       ++it) {
-    MyMoneyAccount acc = MyMoneyFile::instance()->account(*it);
-    if (acc.isClosed())
-      continue;
-    if (account.accountType() == MyMoneyAccount::Investment)
-      continue;
-    buildAccountTree(childItem, acc, open);
-  }
-  return childItem;
+  m_filterProxyModel->clear();
+  m_filterProxyModel->addAccountGroup(topAccount.accountGroup());
+  m_parentAccounts->expandAll();
 }
 
 KMyMoneyWizardPage* HierarchyPage::nextPage(void) const
@@ -1543,12 +1515,24 @@ KMyMoneyWizardPage* HierarchyPage::nextPage(void) const
 
 const MyMoneyAccount& HierarchyPage::parentAccount(void)
 {
-  // TODO
-  // Instead of returning the Parent Account we can simply
-  // return the account associated with the current item
-  // in the ListView
-  KMyMoneyAccountTreeItem* item = dynamic_cast<KMyMoneyAccountTreeItem*>(m_qlistviewParentAccounts->currentItem());
-  return dynamic_cast<const MyMoneyAccount&>(item->itemObject());
+  QVariant data = m_parentAccounts->model()->data(m_parentAccounts->currentIndex(), AccountsModel::AccountRole);
+  if (data.isValid()) {
+    m_parentAccount = data.value<MyMoneyAccount>();
+  } else
+  {
+    m_parentAccount = MyMoneyAccount();
+  }
+  return m_parentAccount;
+}
+
+bool HierarchyPage::isComplete(void) const
+{
+  return m_parentAccounts->currentIndex().isValid();
+}
+
+void HierarchyPage::parentAccountChanged()
+{
+  completeStateChanged();
 }
 
 AccountSummaryPage::AccountSummaryPage(Wizard* wizard) :

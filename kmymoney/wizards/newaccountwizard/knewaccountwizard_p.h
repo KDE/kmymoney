@@ -22,7 +22,6 @@
 // QT Includes
 
 #include <QCheckBox>
-//Added by qt3to4:
 #include <QList>
 
 // ----------------------------------------------------------------------------
@@ -30,7 +29,6 @@
 
 #include <kcombobox.h>
 #include <klineedit.h>
-#include <k3listview.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -40,8 +38,6 @@
 #include <kmymoneycurrencyselector.h>
 #include <mymoneyaccount.h>
 #include <kmymoneyedit.h>
-#include <kmymoneycategory.h>
-#include <kmymoneyaccounttreebase.h>
 
 #include "ui_kinstitutionpagedecl.h"
 #include "ui_kaccounttypepagedecl.h"
@@ -389,6 +385,19 @@ private slots:
   void slotButtonsToggled(void);
 };
 
+class HierarchyFilterProxyModel : public AccountsFilterProxyModel
+{
+  Q_OBJECT
+
+public:
+  HierarchyFilterProxyModel(QObject *parent = 0);
+
+  virtual Qt::ItemFlags flags(const QModelIndex &index) const;
+
+protected:
+  bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
+  bool filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const;
+};
 
 class KHierarchyPageDecl : public QWidget, public Ui::KHierarchyPageDecl
 {
@@ -401,26 +410,24 @@ public:
 class HierarchyPage : public KHierarchyPageDecl, public WizardPage<Wizard>
 {
   Q_OBJECT
+
 public:
   HierarchyPage(Wizard* parent);
   void enterPage(void);
   KMyMoneyWizardPage* nextPage(void) const;
   QWidget* initialFocusWidget(void) const {
-    return m_qlistviewParentAccounts;
+    return m_parentAccounts;
   }
   const MyMoneyAccount& parentAccount(void);
 
+  bool isComplete(void) const;
+
+protected slots:
+  void parentAccountChanged();
+
 private:
-  KMyMoneyAccountTreeItem* buildAccountTree
-  (KMyMoneyAccountTreeBase* parent
-   , const MyMoneyAccount& account
-   , bool open = false) const;
-  KMyMoneyAccountTreeItem* buildAccountTree
-  (KMyMoneyAccountTreeItem* parent
-   , const MyMoneyAccount& account
-   , bool open = false) const;
-  MyMoneyAccount m_topAccount;    // Last populated top account
-  bool bFirstTime;
+  HierarchyFilterProxyModel *m_filterProxyModel;
+  MyMoneyAccount             m_parentAccount;
 };
 
 
