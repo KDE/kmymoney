@@ -905,10 +905,8 @@ void KPayeesView::slotSelectPayeeAndTransaction(const QString& payeeId, const QS
   }
 }
 
-void KPayeesView::slotOpenContextMenu(const QPoint& p)
+void KPayeesView::slotOpenContextMenu(const QPoint& /*p*/)
 {
-  Q_UNUSED(p);
-
   KPayeeListItem* item = dynamic_cast<KPayeeListItem*>(m_payeesList->currentItem());
   if (item) {
     slotSelectPayee();
