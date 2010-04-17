@@ -195,6 +195,11 @@ MyMoneyStatementReader::~MyMoneyStatementReader()
   delete d;
 }
 
+bool MyMoneyStatementReader::anyTransactionAdded(void) const
+{
+  return (d->transactionsAdded != 0) ? true : false;
+}
+
 void MyMoneyStatementReader::setAutoCreatePayee(bool create)
 {
   m_autoCreatePayee = create;

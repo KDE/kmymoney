@@ -90,6 +90,13 @@ public:
 
   void setProgressCallback(void(*callback)(int, int, const QString&));
 
+  /**
+   * Returns true in case any transaction has been added to the engine
+   * during the import of the statement. Only returns useful result
+   * after import() has been called.
+   */
+  bool anyTransactionAdded(void) const;
+
 private:
   /**
     * This method is used to update the progress information. It
