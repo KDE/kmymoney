@@ -29,7 +29,7 @@
 #include <QToolTip>
 #include <QList>
 #include <QResizeEvent>
- #include <QTreeWidgetItemIterator>
+#include <QTreeWidgetItemIterator>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -265,8 +265,7 @@ void KBudgetView::loadBudgets(void)
 void KBudgetView::ensureBudgetVisible(const QString& id)
 {
   QTreeWidgetItemIterator widgetIt = QTreeWidgetItemIterator(m_budgetList);
-  while(*widgetIt)
-  {
+  while (*widgetIt) {
     KBudgetListItem* p = dynamic_cast<KBudgetListItem*>(*widgetIt);
     if ((p)->budget().id() == id) {
       m_budgetList->scrollToItem((p), QAbstractItemView::PositionAtCenter);
@@ -476,10 +475,9 @@ void KBudgetView::slotSelectBudget(void)
 {
   askSave();
   KBudgetListItem* item;
-  
+
   QTreeWidgetItemIterator widgetIt = QTreeWidgetItemIterator(m_budgetList);
-  if (m_budget.id().isEmpty())
-  {
+  if (m_budget.id().isEmpty()) {
     item = dynamic_cast<KBudgetListItem*>(*widgetIt);
     if (item) {
       m_budgetList->blockSignals(true);

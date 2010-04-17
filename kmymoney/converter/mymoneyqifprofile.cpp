@@ -395,8 +395,8 @@ const QString MyMoneyQifProfile::date(const QDate& datein) const
   int maskLen;
   QChar maskChar;
 
-  while(format != m_dateFormat.end()) {
-    if(*format == '%') {
+  while (format != m_dateFormat.end()) {
+    if (*format == '%') {
       maskLen = 0;
       maskChar = *(++format);
       while ((format != m_dateFormat.end()) && (*format == maskChar)) {
@@ -404,12 +404,12 @@ const QString MyMoneyQifProfile::date(const QDate& datein) const
         ++format;
       }
 
-      if(maskChar == 'd') {
+      if (maskChar == 'd') {
         if (! delim.isNull())
           buffer += delim;
         buffer += QString::number(datein.day()).rightJustified(2, '0');
 
-      } else if(maskChar == 'm') {
+      } else if (maskChar == 'm') {
         if (! delim.isNull())
           buffer += delim;
         if (maskLen == 3)
