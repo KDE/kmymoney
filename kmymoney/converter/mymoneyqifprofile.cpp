@@ -389,40 +389,34 @@ const QString MyMoneyQifProfile::accountDelimiter(void) const
 
 const QString MyMoneyQifProfile::date(const QDate& datein) const
 {
-
-  const char* format = m_dateFormat.toLatin1();
+  QString::const_iterator format = m_dateFormat.begin();;
   QString buffer;
   QChar delim;
   int maskLen;
-  char maskChar;
+  QChar maskChar;
 
-  while (*format) {
-    switch (*format) {
-    case '%':
+  while(format != m_dateFormat.end()) {
+    if(*format == '%') {
       maskLen = 0;
-      maskChar = *++format;
-      while (*format && *format == maskChar) {
+      maskChar = *(++format);
+      while ((format != m_dateFormat.end()) && (*format == maskChar)) {
         ++maskLen;
         ++format;
       }
 
-      switch (maskChar) {
-      case 'd':
+      if(maskChar == 'd') {
         if (! delim.isNull())
           buffer += delim;
         buffer += QString::number(datein.day()).rightJustified(2, '0');
-        break;
 
-      case 'm':
+      } else if(maskChar == 'm') {
         if (! delim.isNull())
           buffer += delim;
         if (maskLen == 3)
           buffer += KGlobal::locale()->calendar()->monthName(datein.month(), datein.year(), KCalendarSystem::ShortName);
         else
           buffer += QString::number(datein.month()).rightJustified(2, '0');
-        break;
-
-      case 'y':
+      } else if (maskChar == 'y') {
         if (maskLen == 2) {
           buffer += twoDigitYear(delim, datein.year());
         } else {
@@ -431,18 +425,14 @@ const QString MyMoneyQifProfile::date(const QDate& datein) const
           buffer += QString::number(datein.year());
         }
         break;
-      default:
+      } else {
         throw new MYMONEYEXCEPTION("Invalid char in QifProfile date field");
-        break;
       }
       delim = 0;
-      break;
-
-    default:
+    } else {
       if (! delim.isNull())
         buffer += delim;
       delim = *format++;
-      break;
     }
   }
   return buffer;
