@@ -38,6 +38,7 @@
 
 #include <mymoneyaccount.h>
 #include <mymoneyinstitution.h>
+#include <mymoneytransaction.h>
 #include <kmm_plugin_export.h>
 class KMyMoneyViewBase;
 namespace KMyMoneyRegister
