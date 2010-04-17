@@ -338,8 +338,13 @@ int KOnlineBankingSetupWizard::ofxAccountCallback(struct OfxAccountData data, vo
   if (item)
     kvps.setValue("bankname", item->text(0));
 
-  if (!kvps.value("bankid").isEmpty()
-      && !kvps.value("uniqueId").isEmpty()) {
+  // I removed the bankid here, because for some users it
+  // was not possible to setup the automatic account matching
+  // because the bankid was left empty here as well during
+  // the statement download. In case we don't have it, we
+  // simply use it blank. (ipwizard 2009-06-21)
+  if (/* !kvps.value("bankid").isEmpty()
+  && */ !kvps.value("uniqueId").isEmpty()) {
 
     kvps.setValue("kmmofx-acc-ref", QString("%1-%2").arg(kvps.value("bankid"), kvps.value("uniqueId")));
   } else {
