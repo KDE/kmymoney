@@ -6609,7 +6609,8 @@ void KMyMoneyApp::slotAccountUpdateOnline(void)
     d->m_statementResults.clear();
     (*it_p)->updateAccount(d->m_selectedAccount);
     d->m_collectingStatements = false;
-    KMessageBox::informationList(this, i18n("The statements have been processed with the following results:"), d->m_statementResults, i18n("Statement stats"));
+    if (!d->m_statementResults.isEmpty())
+      KMessageBox::informationList(this, i18n("The statements have been processed with the following results:"), d->m_statementResults, i18n("Statement stats"));
   }
 }
 
