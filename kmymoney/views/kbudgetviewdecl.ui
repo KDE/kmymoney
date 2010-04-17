@@ -66,18 +66,9 @@
         </layout>
        </item>
        <item>
-        <widget class="K3ListView" name="m_budgetList">
+        <widget class="QTreeWidget" name="m_budgetList">
          <property name="allColumnsShowFocus">
           <bool>true</bool>
-         </property>
-         <property name="showSortIndicator">
-          <bool>true</bool>
-         </property>
-         <property name="fullWidth">
-          <bool>false</bool>
-         </property>
-         <property name="shadeSortColumn">
-          <bool>false</bool>
          </property>
          <column>
           <property name="text">
@@ -272,22 +263,6 @@
    <class>KBudgetValues</class>
    <extends>QWidget</extends>
    <header>kbudgetvalues.h</header>
-  </customwidget>
-  <customwidget>
-   <class>Q3Frame</class>
-   <extends>QFrame</extends>
-   <header>Qt3Support/Q3Frame</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>Q3ListView</class>
-   <extends>Q3Frame</extends>
-   <header>q3listview.h</header>
-  </customwidget>
-  <customwidget>
-   <class>K3ListView</class>
-   <extends>Q3ListView</extends>
-   <header>k3listview.h</header>
   </customwidget>
   <customwidget>
    <class>KPushButton</class>

@@ -25,12 +25,11 @@
 #include <QLabel>
 #include <QPixmap>
 #include <QTabWidget>
-#include <Q3ListBox>
 #include <QCheckBox>
-#include <Q3GroupBox>
 #include <QToolTip>
 #include <QList>
 #include <QResizeEvent>
+ #include <QTreeWidgetItemIterator>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -51,7 +50,6 @@
 // Project Includes
 
 #include <mymoneyfile.h>
-
 #include <kmymoneyglobalsettings.h>
 #include <kmymoneytitlelabel.h>
 #include <kmymoneyedit.h>
@@ -61,22 +59,22 @@
 #include "kmymoney.h"
 
 // *** KBudgetListItem Implementation ***
-KBudgetListItem::KBudgetListItem(K3ListView *parent, const MyMoneyBudget& budget) :
-    K3ListViewItem(parent),
+KBudgetListItem::KBudgetListItem(QTreeWidget *parent, const MyMoneyBudget& budget) :
+    QTreeWidgetItem(parent),
     m_budget(budget)
 {
   setText(0, budget.name());
   setText(1, QString("%1").arg(budget.budgetStart().year()));
 
   // allow in column rename
-  setRenameEnabled(0, true);
+  //setRenameEnabled(0, true);
 }
 
 KBudgetListItem::~KBudgetListItem()
 {
 }
 
-void KBudgetListItem::paintCell(QPainter *p, const QColorGroup & cg, int column, int width, int align)
+/*void KBudgetListItem::paintCell(QPainter *p, const QColorGroup & cg, int column, int width, int align)
 {
   p->setFont(KMyMoneyGlobalSettings::listCellFont());
   QColorGroup cg2(cg);
@@ -87,7 +85,7 @@ void KBudgetListItem::paintCell(QPainter *p, const QColorGroup & cg, int column,
     cg2.setColor(QColorGroup::Base, KMyMoneyGlobalSettings::listBGColor());
 
   Q3ListViewItem::paintCell(p, cg2, column, width, align);
-}
+}*/
 
 
 // *** KBudgetView Implementation ***
@@ -100,7 +98,8 @@ KBudgetView::KBudgetView(QWidget *parent) :
     m_inSelection(false)
 {
   m_accountTree->setSorting(-1);
-  m_budgetList->setSorting(0);
+  //m_budgetList->setSorting(0);
+  m_budgetList->setContextMenuPolicy(Qt::CustomContextMenu);
 
   KGuiItem newButtonItem(QString(""),
                          KIcon("budget-add"),
@@ -137,9 +136,9 @@ KBudgetView::KBudgetView(QWidget *parent) :
   m_resetButton->setGuiItem(resetButtonItem);
   m_resetButton->setToolTip(resetButtonItem.toolTip());
 
-  connect(m_budgetList, SIGNAL(contextMenu(K3ListView*, Q3ListViewItem* , const QPoint&)),
-          this, SLOT(slotOpenContextMenu(K3ListView*, Q3ListViewItem*, const QPoint&)));
-  connect(m_budgetList, SIGNAL(itemRenamed(Q3ListViewItem*, int, const QString&)), this, SLOT(slotRenameBudget(Q3ListViewItem*, int, const QString&)));
+  connect(m_budgetList, SIGNAL(customContextMenuRequested(const QPoint&)),
+          this, SLOT(slotOpenContextMenu(const QPoint&)));
+  connect(m_budgetList, SIGNAL(itemRenamed(QTreeWidgetItem*, int, const QString&)), this, SLOT(slotRenameBudget(QTreeWidgetItem*, int, const QString&)));
   connect(m_budgetList, SIGNAL(selectionChanged()), this, SLOT(slotSelectBudget()));
 
   connect(m_cbBudgetSubaccounts, SIGNAL(clicked()), this, SLOT(cb_includesSubaccounts_clicked()));
@@ -217,12 +216,6 @@ void KBudgetView::loadBudgets(void)
   // remember which item is currently selected
   id = m_budget.id();
 
-  // remember the upper left corner of the viewport
-  QPoint startPoint = m_budgetList->viewportToContents(QPoint(0, 0));
-
-  // turn off updates to avoid flickering during reload
-  //m_budgetList->setUpdatesEnabled(false);
-
   // clear the budget list
   m_budgetList->clear();
   m_budgetValue->clear();
@@ -258,11 +251,6 @@ void KBudgetView::loadBudgets(void)
     m_budgetList->setCurrentItem(currentItem);
   }
 
-  // reposition viewport
-  m_budgetList->setContentsPos(startPoint.x(), startPoint.y());
-
-  // turn updates back on
-  //m_budgetList->setUpdatesEnabled(true);
 
   // reset the status of the buttons
   m_updateButton->setEnabled(false);
@@ -276,18 +264,13 @@ void KBudgetView::loadBudgets(void)
 
 void KBudgetView::ensureBudgetVisible(const QString& id)
 {
-  for (Q3ListViewItem * item = m_budgetList->firstChild(); item; item = item->itemBelow()) {
-    KBudgetListItem* p = dynamic_cast<KBudgetListItem*>(item);
-    if (p && p->budget().id() == id) {
-      if (p->itemAbove())
-        m_budgetList->ensureItemVisible(p->itemAbove());
-      if (p->itemBelow())
-        m_budgetList->ensureItemVisible(p->itemBelow());
-
-      m_budgetList->setCurrentItem(p);      // active item and deselect all others
-      m_budgetList->setSelected(p, true);   // and select it
-      m_budgetList->ensureItemVisible(p);
-      break;
+  QTreeWidgetItemIterator widgetIt = QTreeWidgetItemIterator(m_budgetList);
+  while(*widgetIt)
+  {
+    KBudgetListItem* p = dynamic_cast<KBudgetListItem*>(*widgetIt);
+    if ((p)->budget().id() == id) {
+      m_budgetList->scrollToItem((p), QAbstractItemView::PositionAtCenter);
+      m_budgetList->setCurrentItem(p, 0, QItemSelectionModel::ClearAndSelect);      // active item and deselect all others
     }
   }
 }
@@ -339,9 +322,6 @@ void KBudgetView::loadAccounts(void)
 
   // remember the upper left corner of the viewport
   QPoint startPoint = m_accountTree->viewportToContents(QPoint(0, 0));
-
-  // turn off updates to avoid flickering during reload
-  //m_accountTree->setUpdatesEnabled(false);
 
   // clear the current contents and recreate it
   m_accountTree->clear();
@@ -396,9 +376,6 @@ void KBudgetView::loadAccounts(void)
 
   // reposition viewport
   m_accountTree->setContentsPos(startPoint.x(), startPoint.y());
-
-  // turn updates back on
-  //m_accountTree->setUpdatesEnabled(true);
 
   m_updateButton->setEnabled(!(selectedBudget() == m_budget));
   m_resetButton->setEnabled(!(selectedBudget() == m_budget));
@@ -499,11 +476,14 @@ void KBudgetView::slotSelectBudget(void)
 {
   askSave();
   KBudgetListItem* item;
-  if (m_budget.id().isEmpty()) {
-    item = dynamic_cast<KBudgetListItem*>(m_budgetList->firstChild());
+  
+  QTreeWidgetItemIterator widgetIt = QTreeWidgetItemIterator(m_budgetList);
+  if (m_budget.id().isEmpty())
+  {
+    item = dynamic_cast<KBudgetListItem*>(*widgetIt);
     if (item) {
       m_budgetList->blockSignals(true);
-      m_budgetList->setSelected(item, true); // WRTODO das auch beim NewBudget machen
+      m_budgetList->setCurrentItem(item, QItemSelectionModel::ClearAndSelect);
       m_budgetList->blockSignals(false);
     }
   }
@@ -512,8 +492,8 @@ void KBudgetView::slotSelectBudget(void)
   m_assignmentBox->setEnabled(false);
   m_budget = MyMoneyBudget();
 
-  Q3ListViewItemIterator it_l(m_budgetList, Q3ListViewItemIterator::Selected);
-  item = dynamic_cast<KBudgetListItem*>(it_l.current());
+  QTreeWidgetItemIterator it_l(m_budgetList, QTreeWidgetItemIterator::Selected);
+  item = dynamic_cast<KBudgetListItem*>(*it_l);
   if (item) {
     m_budget = item->budget();
     m_accountTree->setEnabled(true);
@@ -541,8 +521,8 @@ const MyMoneyBudget& KBudgetView::selectedBudget(void) const
 {
   static MyMoneyBudget nullBudget;
 
-  Q3ListViewItemIterator it_l(m_budgetList, Q3ListViewItemIterator::Selected);
-  KBudgetListItem* item = dynamic_cast<KBudgetListItem*>(it_l.current());
+  QTreeWidgetItemIterator it_l(m_budgetList, QTreeWidgetItemIterator::Selected);
+  KBudgetListItem* item = dynamic_cast<KBudgetListItem*>(*it_l);
   if (item) {
     return item->budget();
   }
@@ -557,33 +537,30 @@ KMyMoneyAccountTreeBudgetItem* KBudgetView::selectedAccount(void) const
   return item;
 }
 
-void KBudgetView::slotOpenContextMenu(K3ListView* lv, Q3ListViewItem* i, const QPoint& p)
+void KBudgetView::slotOpenContextMenu(const QPoint& p)
 {
-  Q_UNUSED(lv);
-  Q_UNUSED(p);
 
-  //m_accountTree->setUpdatesEnabled(false);
 
-  KBudgetListItem* item = dynamic_cast<KBudgetListItem*>(i);
+  KBudgetListItem* item = dynamic_cast<KBudgetListItem*>(m_budgetList->itemAt(p));
   if (item)
     emit openContextMenu(item->budget());
   else
     emit openContextMenu(MyMoneyBudget());
 
-  //m_accountTree->setUpdatesEnabled(true);
+
 }
 
 void KBudgetView::slotStartRename(void)
 {
-  Q3ListViewItemIterator it_l(m_budgetList, Q3ListViewItemIterator::Selected);
-  Q3ListViewItem* it_v;
-  if ((it_v = it_l.current()) != 0) {
-    it_v->startRename(0);
+  QTreeWidgetItemIterator it_l(m_budgetList, QTreeWidgetItemIterator::Selected);
+  QTreeWidgetItem* it_v;
+  if ((it_v = *it_l) != 0) {
+    m_budgetList->editItem(it_v, 0);
   }
 }
 
 // This variant is only called when a single budget is selected and renamed.
-void KBudgetView::slotRenameBudget(Q3ListViewItem* p , int /*col*/, const QString& txt)
+void KBudgetView::slotRenameBudget(QTreeWidgetItem* p , int /*col*/, const QString& txt)
 {
   KBudgetListItem *pBudget = dynamic_cast<KBudgetListItem*>(p);
   if (!pBudget)

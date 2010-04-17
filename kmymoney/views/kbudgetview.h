@@ -28,7 +28,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <k3listview.h>
 #include <kmenu.h>
 
 // ----------------------------------------------------------------------------
@@ -46,18 +45,18 @@ class KMyMoneyAccountTreeBudgetItem;
   *
   * This class represents an item in the budgets list view.
   */
-class KBudgetListItem : public K3ListViewItem
+class KBudgetListItem : public QTreeWidgetItem
 {
 public:
   /**
     * Constructor to be used to construct a budget entry object.
     *
-    * @param parent pointer to the K3ListView object this entry should be
+    * @param parent pointer to the QTreeWidget object this entry should be
     *               added to.
     * @param budget const reference to MyMoneyBudget for which
     *               the K3ListView entry is constructed
     */
-  KBudgetListItem(K3ListView *parent, const MyMoneyBudget& budget);
+  KBudgetListItem(QTreeWidget *parent, const MyMoneyBudget& budget);
   ~KBudgetListItem();
 
   /**
@@ -161,7 +160,7 @@ protected slots:
     * @param col The column where the name is located
     * @param txt The text of the new name
     */
-  void slotRenameBudget(Q3ListViewItem *p, int col, const QString& txt);
+  void slotRenameBudget(QTreeWidgetItem *p, int col, const QString& txt);
 
   /**
     * This slot is called when the amount of a budget is changed. It
@@ -194,7 +193,7 @@ private slots:
     * @param i the item on which the cursor resides
     * @param p position of the pointing device
     */
-  void slotOpenContextMenu(K3ListView* lv, Q3ListViewItem* i, const QPoint& p);
+  void slotOpenContextMenu(const QPoint& p);
 
 signals:
   /**
