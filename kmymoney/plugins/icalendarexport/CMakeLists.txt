@@ -16,7 +16,7 @@ KDE4_ADD_PLUGIN(kmm_icalendarexport ${kmm_icalendarexport_PART_SRCS})
 
 TARGET_LINK_LIBRARIES(kmm_icalendarexport
                       ${KDE4_KDEUI_LIBS}
-                      ${KDE4_KDE3SUPPORT_LIBS}
+                      ${KDE4_KIO_LIBS}
                       kmm_mymoney kmm_plugin
                       ${LIBICAL_LIBRARIES}
                       )
@@ -44,7 +44,7 @@ KDE4_ADD_PLUGIN(kcm_kmm_icalendarexport ${kcm_kmm_icalendarexport_PART_SRCS})
 
 TARGET_LINK_LIBRARIES(kcm_kmm_icalendarexport
                       ${KDE4_KDEUI_LIBS}
-                      ${KDE4_KDE3SUPPORT_LIBS}
+                      ${KDE4_KIO_LIBS}
                       )
 
 INSTALL(TARGETS kcm_kmm_icalendarexport

@@ -16,7 +16,6 @@ KDE4_ADD_PLUGIN(kmm_printcheck ${kmm_printcheck_PART_SRCS})
 TARGET_LINK_LIBRARIES(kmm_printcheck
                       ${KDE4_KDEUI_LIBS}
                       ${KDE4_KHTML_LIBS}
-                      ${KDE4_KDE3SUPPORT_LIBS}
                       kmm_mymoney kmm_plugin
                       )
 
@@ -48,7 +47,6 @@ KDE4_ADD_PLUGIN(kcm_kmm_printcheck ${kcm_kmm_printcheck_PART_SRCS})
 TARGET_LINK_LIBRARIES(kcm_kmm_printcheck
                       ${KDE4_KDEUI_LIBS}
                       ${KDE4_KHTML_LIBS}
-                      ${KDE4_KDE3SUPPORT_LIBS}
                       )
 
 INSTALL(TARGETS kcm_kmm_printcheck
