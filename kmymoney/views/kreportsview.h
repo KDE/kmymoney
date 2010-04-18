@@ -45,6 +45,7 @@ class Q3ListViewItem;
 #include <KHTMLPart>
 #include <k3listview.h>
 #include <KTabWidget>
+#include <kfilefiltercombo.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -95,6 +96,11 @@ public:
     bool m_showingChart;
     bool m_needReload;
     reports::ReportTable* m_table;
+
+    /**
+     * Users character set encoding.
+     */
+    QByteArray m_encoding;
 
   public:
     KReportTab(KTabWidget* parent, const MyMoneyReport& report);

@@ -94,6 +94,9 @@ KReportsView::KReportTab::KReportTab(KTabWidget* parent, const MyMoneyReport& re
 
   parent->addTab(this, KIcon("application-vnd.oasis.opendocument.spreadsheet"), report.name());
   parent->setTabEnabled(parent->indexOf(this), true);
+
+  // get users character set encoding
+  m_encoding = KGlobal::locale()->encoding();
 }
 
 KReportsView::KReportTab::~KReportTab()
@@ -119,15 +122,13 @@ void KReportsView::KReportTab::copyToClipboard(void)
 void KReportsView::KReportTab::saveAs(const QString& filename, bool includeCSS)
 {
   QFile file(filename);
-  // get users character set encoding
-  const QByteArray encoding = KGlobal::locale()->encoding();
 
   if (file.open(QIODevice::WriteOnly)) {
     if (QFileInfo(filename).suffix().toLower() == "csv") {
       QTextStream(&file) << m_table->renderCSV();
     } else {
       QTextStream stream(&file);
-      QRegExp exp("(.*)(<link.*css\" href=)\"(.*)\">(<meta.*" + encoding + "\" />)(.*)");
+      QRegExp exp("(.*)(<link.*css\" href=)\"(.*)\">(<meta.*" + m_encoding + "\" />)(.*)");
       QString table = createTable();
       if (exp.indexIn(table) != -1 && includeCSS) {
         QFile cssFile(exp.cap(3));
@@ -278,10 +279,58 @@ void KReportsView::KReportTab::toggleChart(void)
 class KReportsView::Private
 {
 public:
-  Private() :
-      includeCSS(0) {}
 
-  QCheckBox* includeCSS;
+  Private() {
+    fSavProps = new FileSaveProperties();
+  }
+
+  ~Private() {
+    delete fSavProps;
+  }
+
+  class FileSaveProperties
+  {
+  public:
+    FileSaveProperties() {
+      includeCssCheckBox = NULL;
+      cbIsChecked = true;
+      filter = "*.csv";
+      filtCsv = "*.csv|" + i18nc("CSV (Filefilter)", "CSV files");
+      filtHtml = "*.html|" + i18nc("HTML (Filefilter)", "HTML files");
+    }
+
+    /**
+     * 'include css' checkbox for file save dialog.
+     */
+    QCheckBox* includeCssCheckBox;
+
+    /**
+     * Persistent checked-state of includeCssCheckBox.
+     */
+    bool cbIsChecked;
+
+    /**
+     * Current filtername of file save dialog
+     * without description, e.g. @c '*.csv'
+     */
+    QString filter;
+
+    /**
+     * CSV filtername and description.
+     *
+     * @see KFileDialog::KFileDialog
+     */
+    QString filtCsv;
+
+    /**
+     * HTML filtername and description.
+     *
+     * @see KFileDialog::KFileDialog
+     */
+    QString filtHtml;
+  };
+
+  FileSaveProperties* fSavProps;
 };
 
 KReportsView::KReportsView(QWidget *parent, const char *name) :
@@ -543,24 +592,30 @@ void KReportsView::slotSaveView(void)
 {
   KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->currentWidget());
   if (tab) {
-    QWidget* vbox = new QWidget;
-    QVBoxLayout* layout = new QVBoxLayout;
-    d->includeCSS = new QCheckBox(i18n("Include Stylesheet"), vbox);
-    layout->addWidget(d->includeCSS);
+    d->fSavProps->includeCssCheckBox = new QCheckBox(i18n("Include Stylesheet"));
+    // restore checkbox checked state
+    d->fSavProps->includeCssCheckBox->setChecked(d->fSavProps->cbIsChecked);
 
-    // the following code is copied from KFileDialog::getSaveFileName,
-    // adjust to our local needs (filetypes etc.) and
-    // enhanced to show the m_saveEncrypted combo box
-    QPointer<KFileDialog> dlg = new KFileDialog(KUrl(":kmymoney-export"),
-        QString("%1|%2\n").arg("*.csv").arg(i18nc("CSV (Filefilter)", "CSV files")) +
-        QString("%1|%2\n").arg("*.html").arg(i18nc("HTML (Filefilter)", "HTML files")),
-        this);
-    connect(dlg, SIGNAL(filterChanged(const QString&)), this, SLOT(slotSaveFilterChanged(const QString&)));
+    QString filterList = d->fSavProps->filtCsv + "\n" + d->fSavProps->filtHtml;
+    QPointer<KFileDialog> dlg =
+      new KFileDialog(KUrl(":kmymoney-export"), filterList, this,
+                      qobject_cast<QWidget*>(d->fSavProps->includeCssCheckBox));
+
+    connect(dlg, SIGNAL(filterChanged(const QString&)),
+            this, SLOT(slotSaveFilterChanged(const QString&)));
 
     dlg->setOperationMode(KFileDialog::Saving);
     dlg->setCaption(i18n("Export as"));
 
-    slotSaveFilterChanged("*.csv");    // init gui
+    // set current file filter && enable or disable includeCssCheckBox
+    KFileFilterCombo* combo = dlg->filterWidget();
+    if (d->fSavProps->filter == "*.csv") {
+      combo->setCurrentFilter(d->fSavProps->filtCsv);
+      d->fSavProps->includeCssCheckBox->setEnabled(false);
+    } else {
+      combo->setCurrentFilter(d->fSavProps->filtHtml);
+      d->fSavProps->includeCssCheckBox->setEnabled(true);
+    }
 
     if (dlg->exec() == QDialog::Accepted) {
       KUrl newURL = dlg->selectedUrl();
@@ -570,21 +625,32 @@ void KReportsView::slotSaveView(void)
         if (newName.indexOf('.') == -1)
           newName.append(".html");
 
+        // save checkbox checked state
+        d->fSavProps->cbIsChecked = d->fSavProps->includeCssCheckBox->isChecked();
+
         try {
-          tab->saveAs(newName, d->includeCSS->isEnabled() && d->includeCSS->isChecked());
+          tab->saveAs(newName, d->fSavProps->includeCssCheckBox->isEnabled()
+                      && d->fSavProps->includeCssCheckBox->isChecked());
         } catch (MyMoneyException* e) {
           KMessageBox::error(this, i18n("Failed to save: %1", e->what()));
           delete e;
         }
       }
     }
+    delete d->fSavProps->includeCssCheckBox;
     delete dlg;
   }
 }
 
 void KReportsView::slotSaveFilterChanged(const QString& filter)
 {
-  d->includeCSS->setEnabled(filter ==  "*.html");
+  d->fSavProps->filter = filter;
+
+  if (filter ==  "*.html") {
+    d->fSavProps->includeCssCheckBox->setEnabled(true);
+  } else {
+    d->fSavProps->includeCssCheckBox->setEnabled(false);
+  }
 }
 
 void KReportsView::slotConfigure(void)
