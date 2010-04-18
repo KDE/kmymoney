@@ -54,6 +54,7 @@ protected:
   void keyPressEvent(QKeyEvent* k);
   /** reimplemented for internal reasons */
   bool event(QEvent* e);
+  bool focusNextPrevChild(bool next);
 };
 
 /**

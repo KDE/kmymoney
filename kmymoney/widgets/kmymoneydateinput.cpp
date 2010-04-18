@@ -88,6 +88,20 @@ bool KMyMoneyDateEdit::event(QEvent* e)
   return rc;
 }
 
+bool KMyMoneyDateEdit::focusNextPrevChild(bool next)
+{
+  // make sure that TransactionForm::focusNextPrevChild is not called twice
+  // when the date edit has the focus and tab or back tab is pressed
+  if (next) {
+    if (currentSection() != sectionAt(sectionCount() - 1))
+      return QDateEdit::focusNextPrevChild(next);
+  } else {
+    if (currentSection() != sectionAt(0))
+      return QDateEdit::focusNextPrevChild(next);
+  }
+  return true;
+}
+
 struct kMyMoneyDateInput::Private {
   QDateEdit *m_dateEdit;
   KDatePicker *m_datePicker;
