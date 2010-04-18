@@ -29,8 +29,6 @@
 // Project Includes
 #include "mymoneyfile.h"
 
-Q_DECLARE_METATYPE(MyMoneyPayee)
-
 class PayeesModel::Private
 {
 public:

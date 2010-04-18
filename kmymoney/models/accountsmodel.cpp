@@ -37,9 +37,6 @@
 #include "kmymoneyutils.h"
 #include "kmymoneyglobalsettings.h"
 
-Q_DECLARE_METATYPE(MyMoneyAccount)
-Q_DECLARE_METATYPE(MyMoneyMoney)
-
 class AccountsModel::Private
 {
 public:

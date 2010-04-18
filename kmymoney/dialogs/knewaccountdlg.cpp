@@ -66,8 +66,6 @@
 #include "kmymoneyutils.h"
 #include "models.h"
 
-Q_DECLARE_METATYPE(MyMoneyAccount)
-
 HierarchyFilterProxyModel::HierarchyFilterProxyModel(QObject *parent)
     : AccountsFilterProxyModel(parent)
 {

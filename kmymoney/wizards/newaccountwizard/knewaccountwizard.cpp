@@ -51,8 +51,6 @@
 #include "kmymoney.h"
 #include "models.h"
 
-Q_DECLARE_METATYPE(MyMoneyAccount)
-
 using namespace NewAccountWizard;
 
 namespace NewAccountWizard

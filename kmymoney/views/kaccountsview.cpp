@@ -47,9 +47,6 @@
 #include "kmymoneyaccounttreeview.h"
 #include "models.h"
 
-Q_DECLARE_METATYPE(MyMoneyAccount)
-Q_DECLARE_METATYPE(MyMoneyMoney)
-
 QPixmap accountPixmap(const MyMoneyAccount& account, bool reconcileFlag)
 {
   QString pixmap;

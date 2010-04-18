@@ -28,6 +28,7 @@
 #include <QDateTime>
 #include <QStringList>
 #include <QPixmap>
+#include <QMetaType>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -723,6 +724,11 @@ public:
   virtual bool hasReferenceTo(const QString& id) const;
 
 };
+
+/**
+  * Make it possible to hold @ref MyMoneyAccount objects inside @ref QVariant objects.
+  */
+Q_DECLARE_METATYPE(MyMoneyAccount)
 
 #endif
 

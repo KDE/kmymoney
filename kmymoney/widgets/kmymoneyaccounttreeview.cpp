@@ -36,8 +36,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-Q_DECLARE_METATYPE(MyMoneyAccount)
-
 KMyMoneyAccountTreeView::KMyMoneyAccountTreeView(QWidget *parent)
     : QTreeView(parent)
 {

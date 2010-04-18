@@ -26,6 +26,7 @@
 // QT Includes
 
 #include <QString>
+#include <QMetaType>
 class QStringList;
 
 // ----------------------------------------------------------------------------
@@ -246,6 +247,8 @@ inline bool operator==(const MyMoneyPayee& lhs, const QString& rhs)
 {
   return lhs.id() == rhs;
 }
+
+Q_DECLARE_METATYPE(MyMoneyPayee)
 
 #endif
 // vim:cin:si:ai:et:ts=2:sw=2:

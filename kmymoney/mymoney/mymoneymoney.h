@@ -42,6 +42,8 @@
 #include <QChar>
 #include <QString>
 #include <QDataStream>
+#include <QMetaType>
+
 #include <kmm_mymoney_export.h>
 #include <mymoneyexception.h>
 
@@ -650,6 +652,8 @@ inline MyMoneyMoney& MyMoneyMoney::operator/=(const MyMoneyMoney & AmountInPence
   *this = *this / AmountInPence;
   return *this;
 }
+
+Q_DECLARE_METATYPE(MyMoneyMoney)
 
 #endif
 
