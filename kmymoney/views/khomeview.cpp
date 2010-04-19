@@ -1319,6 +1319,7 @@ void KHomeView::showBudget(void)
 
   if (file->countBudgets()) {
     int prec = MyMoneyMoney::denomToPrec(file->baseCurrency().smallestAccountFraction());
+    bool isOverrun = false;
     int i = 0;
 
     //config report just like "Monthly Budgeted vs Actual
@@ -1432,6 +1433,9 @@ void KHomeView::showBudget(void)
             d->m_html += QString("<td align=\"right\">%1</td>").arg(showColoredAmount(actualAmount, actualValue.isNegative()));
             d->m_html += QString("<td align=\"right\">%1</td>").arg(showColoredAmount(budgetDiffAmount, budgetDiffValue.isNegative()));
             d->m_html += "</tr>";
+
+            //set the flag that there are overruns
+            isOverrun = true;
           }
           ++it_row;
         }
@@ -1441,7 +1445,7 @@ void KHomeView::showBudget(void)
     }
 
     //if no negative differences are found, then inform that
-    if (i == 0) {
+    if (!isOverrun) {
       d->m_html += QString("<tr class=\"row-%1\" style=\"font-weight:bold;\">").arg(i++ & 0x01 ? "even" : "odd");
       d->m_html += QString("<td class=\"center\" colspan=\"4\">%1</td>").arg(i18n("No Budget Categories have been overrun"));
       d->m_html += "</tr>";
