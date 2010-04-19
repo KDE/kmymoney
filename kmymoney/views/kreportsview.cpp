@@ -115,7 +115,8 @@ void KReportsView::KReportTab::print(void)
 void KReportsView::KReportTab::copyToClipboard(void)
 {
   QMimeData* pMimeData =  new QMimeData();
-  pMimeData->setHtml(createTable());
+  pMimeData->setHtml(m_table->renderHTML(qobject_cast<QWidget*>(this),
+                                         m_encoding, m_report.name(), true));
   QApplication::clipboard()->setMimeData(pMimeData);
 }
 
@@ -127,26 +128,11 @@ void KReportsView::KReportTab::saveAs(const QString& filename, bool includeCSS)
     if (QFileInfo(filename).suffix().toLower() == "csv") {
       QTextStream(&file) << m_table->renderCSV();
     } else {
+      QString table =
+        m_table->renderHTML(qobject_cast<QWidget*>(this), m_encoding,
+                            m_report.name(), includeCSS);
       QTextStream stream(&file);
-      QRegExp exp("(.*)(<link.*css\" href=)\"(.*)\">(<meta.*" + m_encoding + "\" />)(.*)");
-      QString table = createTable();
-      if (exp.indexIn(table) != -1 && includeCSS) {
-        QFile cssFile(exp.cap(3));
-        if (cssFile.open(QIODevice::ReadOnly)) {
-          QTextStream cssStream(&cssFile);
-          stream << exp.cap(1);
-          stream << exp.cap(4);
-          stream << endl << "<style type=\"text/css\">" << endl << "<!--" << endl;
-          stream << cssStream.readAll();
-          stream << "-->" << endl << "</style>" << endl;
-          stream << exp.cap(5);
-          cssFile.close();
-        } else {
-          stream << table;
-        }
-      } else {
-        stream << table;
-      }
+      stream << table;
     }
     file.close();
   }
@@ -195,7 +181,8 @@ void KReportsView::KReportTab::updateReport(void)
   }
 
   m_part->begin();
-  m_part->write(createTable());
+  m_part->write(m_table->renderHTML(qobject_cast<QWidget*>(this),
+                                    m_encoding, m_report.name()));
   m_part->end();
 
   m_table->drawChart(*m_chartView);
@@ -203,52 +190,6 @@ void KReportsView::KReportTab::updateReport(void)
 
   if (m_report.isChartByDefault() && !m_showingChart)
     toggleChart();
-}
-
-QString KReportsView::KReportTab::createTable(const QString& links)
-{
-  QString filename;
-  if (!MyMoneyFile::instance()->value("reportstylesheet").isEmpty())
-    filename = KGlobal::dirs()->findResource("appdata", QString("html/%1").arg(MyMoneyFile::instance()->value("reportstylesheet")));
-  if (filename.isEmpty())
-    filename = KGlobal::dirs()->findResource("appdata", "html/kmymoney.css");
-  QString header = QString("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\">\n") +
-                   QString("<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"%1\">").arg(filename);
-
-  // get users character set encoding
-  const QByteArray encoding = KGlobal::locale()->encoding();
-
-  header += "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=" + encoding + "\" />";
-  header += KMyMoneyUtils::variableCSS();
-
-  header += "</head><body>\n";
-
-  QString footer = "</body></html>\n";
-
-  QString html;
-  try {
-    html += header;
-    html += links;
-
-    html += m_table->renderHTML();
-
-    html += footer;
-  } catch (MyMoneyException *e) {
-    kDebug(2) << "KReportsView::KReportTab::createTable(): ERROR " << e->what();
-
-    QString error = i18n("There was an error creating your report: \"%1\".\nPlease report this error to the developer's list: kmymoney-devel@kde.org", e->what());
-
-    KMessageBox::error(this, error, i18n("Critical Error"));
-
-    html += header;
-    html += links;
-    html += "<h1>" + i18n("Unable to generate report") + "</h1><p>" + error + "</p>";
-    html += footer;
-
-    delete e;
-  }
-  return html;
-
 }
 
 void KReportsView::KReportTab::toggleChart(void)

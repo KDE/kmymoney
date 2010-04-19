@@ -87,6 +87,7 @@ void Debug::output(const QString& _text)
 }
 
 PivotTable::PivotTable(const MyMoneyReport& _config_f):
+    ReportTable(),
     m_runningSumsCalculated(false),
     m_config_f(_config_f)
 {
@@ -1465,7 +1466,7 @@ QString PivotTable::renderCSV(void) const
   return result;
 }
 
-QString PivotTable::renderHTML(void) const
+QString PivotTable::renderBody(void) const
 {
   DEBUG_ENTER(Q_FUNC_INFO);
 
@@ -1817,7 +1818,7 @@ void PivotTable::dump(const QString& file, const QString& /* context */) const
 {
   QFile g(file);
   g.open(QIODevice::WriteOnly);
-  QTextStream(&g) << renderHTML();
+  QTextStream(&g) << renderBody();
   g.close();
 }
 

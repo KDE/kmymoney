@@ -1012,4 +1012,22 @@ void PivotTableTest::testBudget(void)
   }
 }
 
+void PivotTableTest::testHtmlEncoding(void)
+{
+  MyMoneyReport filter;
+  filter.setRowType(MyMoneyReport::eAssetLiability);
+  filter.setDateFilter(QDate(2004, 1, 1), QDate(2005, 1, 1).addDays(-1));
+  XMLandback(filter);
+  PivotTable networth_f(filter);
+
+  QByteArray encoding = KGlobal::locale()->encoding();
+
+  QString html = networth_f.renderHTML(NULL, encoding, filter.name(), false);
+
+  QRegExp rx("*<meta * charset=" + encoding + "*>*");
+  rx.setPatternSyntax(QRegExp::Wildcard);
+  rx.setCaseSensitivity(Qt::CaseInsensitive);
+  CPPUNIT_ASSERT(rx.exactMatch(html));
+}
+
 // vim:cin:si:ai:et:ts=2:sw=2:

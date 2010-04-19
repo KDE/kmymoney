@@ -159,7 +159,9 @@ bool ListTable::TableRow::operator> (const TableRow& _compare) const
    *
  */
 
-ListTable::ListTable(const MyMoneyReport& _report) : m_config(_report)
+ListTable::ListTable(const MyMoneyReport& _report):
+    ReportTable(),
+    m_config(_report)
 {
 }
 
@@ -585,7 +587,7 @@ void ListTable::render(QString& result, QString& csv) const
   result += "</table>\n";
 }
 
-QString ListTable::renderHTML(void) const
+QString ListTable::renderBody(void) const
 {
   QString html, csv;
   render(html, csv);
@@ -605,9 +607,9 @@ void ListTable::dump(const QString& file, const QString& context) const
   g.open(QIODevice::WriteOnly);
 
   if (! context.isEmpty())
-    Q3TextStream(&g) << context.arg(renderHTML());
+    Q3TextStream(&g) << context.arg(renderBody());
   else
-    Q3TextStream(&g) << renderHTML();
+    Q3TextStream(&g) << renderBody();
   g.close();
 }
 

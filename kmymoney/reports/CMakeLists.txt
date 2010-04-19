@@ -8,6 +8,7 @@ SET (libreports_a_SOURCES
   pivotgrid.cpp
   pivottable.cpp
   querytable.cpp
+  reporttable.cpp
 )
 
 KDE4_ADD_LIBRARY(reports STATIC ${libreports_a_SOURCES})

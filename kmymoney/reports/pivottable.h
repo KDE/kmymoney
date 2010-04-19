@@ -78,11 +78,11 @@ public:
   virtual ~PivotTable() {}
 
   /**
-    * Render the report to an HTML stream.
+    * Render the report body to an HTML stream.
     *
-    * @return QString HTML string representing the report
+    * @return QString HTML string representing the report body
     */
-  QString renderHTML(void) const;
+  QString renderBody(void) const;
   /**
     * Render the report to a comma-separated-values stream.
     *

@@ -129,7 +129,7 @@ void QueryTableTest::testQueryBasics()
     CPPUNIT_ASSERT(rows[11]["category"] == "Solo");
     CPPUNIT_ASSERT(rows[11]["postdate"] == "2005-01-01");
 
-    QString html = qtbl_1.renderHTML();
+    QString html = qtbl_1.renderBody();
     CPPUNIT_ASSERT(searchHTML(html, i18nc("Total balance", "Total") + " Parent") == -(moParent1 + moParent2) * 3);
     CPPUNIT_ASSERT(searchHTML(html, i18nc("Total balance", "Total") + " Parent: Child") == -(moChild) * 3);
     CPPUNIT_ASSERT(searchHTML(html, i18nc("Total balance", "Total") + " Solo") == -(moSolo) * 3);
@@ -157,7 +157,7 @@ void QueryTableTest::testQueryBasics()
     CPPUNIT_ASSERT(rows[11]["topcategory"] == "Solo");
     CPPUNIT_ASSERT(rows[11]["postdate"] == "2005-01-01");
 
-    html = qtbl_2.renderHTML();
+    html = qtbl_2.renderBody();
     CPPUNIT_ASSERT(searchHTML(html, i18nc("Total balance", "Total") + " Parent") == -(moParent1 + moParent2 + moChild) * 3);
     CPPUNIT_ASSERT(searchHTML(html, i18nc("Total balance", "Total") + " Solo") == -(moSolo) * 3);
     CPPUNIT_ASSERT(searchHTML(html, i18nc("Total balance", "Total") + " Expense") == -(moParent1 + moParent2 + moSolo + moChild) * 3);
@@ -192,7 +192,7 @@ void QueryTableTest::testQueryBasics()
     CPPUNIT_ASSERT(rows[11]["postdate"] == "2005-09-01");
 #endif
 
-    html = qtbl_3.renderHTML();
+    html = qtbl_3.renderBody();
     CPPUNIT_ASSERT(searchHTML(html, i18n("Total") + " Checking Account") == -(moSolo) * 3 + moCheckingOpen);
     CPPUNIT_ASSERT(searchHTML(html, i18n("Total") + " Credit Card") == -(moParent1 + moParent2 + moChild) * 3 + moCreditOpen);
     CPPUNIT_ASSERT(searchHTML(html, i18nc("Grand total balance", "Grand Total")) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
@@ -219,7 +219,7 @@ void QueryTableTest::testQueryBasics()
     CPPUNIT_ASSERT(rows[11]["category"] == "Parent");
     CPPUNIT_ASSERT(rows[11]["postdate"] == "2005-09-01");
 
-    html = qtbl_4.renderHTML();
+    html = qtbl_4.renderBody();
     CPPUNIT_ASSERT(searchHTML(html, i18nc("Total balance", "Total") + " Test Payee") == -(moParent1 + moParent2 + moSolo + moChild) * 3);
     CPPUNIT_ASSERT(searchHTML(html, i18nc("Grand total balance", "Grand Total")) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
 
@@ -245,7 +245,7 @@ void QueryTableTest::testQueryBasics()
     CPPUNIT_ASSERT(rows[11]["category"] == "Parent");
     CPPUNIT_ASSERT(rows[11]["postdate"] == "2005-09-01");
 
-    html = qtbl_5.renderHTML();
+    html = qtbl_5.renderBody();
     CPPUNIT_ASSERT(searchHTML(html, i18nc("Total balance", "Total") + " Month of 2004-01-01") == -moSolo);
     CPPUNIT_ASSERT(searchHTML(html, i18nc("Total balance", "Total") + " Month of 2004-11-01") == -(moChild) * 3);
     CPPUNIT_ASSERT(searchHTML(html, i18nc("Total balance", "Total") + " Month of 2004-05-01") == -moParent1 + moCheckingOpen);
@@ -270,7 +270,7 @@ void QueryTableTest::testQueryBasics()
     CPPUNIT_ASSERT(rows[11]["category"] == "Parent");
     CPPUNIT_ASSERT(rows[11]["postdate"] == "2005-09-01");
 
-    html = qtbl_6.renderHTML();
+    html = qtbl_6.renderBody();
     CPPUNIT_ASSERT(searchHTML(html, i18nc("Total balance", "Total") + " Week of 2003-12-29") == -moSolo);
     CPPUNIT_ASSERT(searchHTML(html, i18nc("Total balance", "Total") + " Week of 2004-11-01") == -(moChild) * 3);
     CPPUNIT_ASSERT(searchHTML(html, i18nc("Total balance", "Total") + " Week of 2005-08-29") == -moParent2);
@@ -358,7 +358,7 @@ void QueryTableTest::testAccountQuery()
     CPPUNIT_ASSERT(MyMoneyMoney(rows[1]["value"]) == moCreditOpen);
     CPPUNIT_ASSERT(rows[1]["equitytype"].isEmpty());
 
-    QString html = qtbl_1.renderHTML();
+    QString html = qtbl_1.renderBody();
     CPPUNIT_ASSERT(searchHTML(html, i18nc("Total balance", "Total") + " None") == moCheckingOpen + moCreditOpen);
     CPPUNIT_ASSERT(searchHTML(html, i18nc("Grand total balance", "Grand Total")) == moCheckingOpen + moCreditOpen);
 
@@ -394,7 +394,7 @@ void QueryTableTest::testAccountQuery()
     CPPUNIT_ASSERT(rows[1]["account"] == "Credit Card");
     CPPUNIT_ASSERT(MyMoneyMoney(rows[1]["value"]) == (moCreditOpen - (moParent1 + moParent2 + moChild) * 3));
 
-    html = qtbl_2.renderHTML();
+    html = qtbl_2.renderBody();
     CPPUNIT_ASSERT(searchHTML(html, i18n("Grand Total")) == moCheckingOpen + moCreditOpen - (moParent1 + moParent2 + moSolo + moChild) * 3);
 
     //
@@ -414,7 +414,7 @@ void QueryTableTest::testAccountQuery()
     CPPUNIT_ASSERT(rows[1]["account"] == "Credit Card");
     CPPUNIT_ASSERT(MyMoneyMoney(rows[1]["value"]) == (moCreditOpen - (moParent1 + moParent2 + moChild) * 3));
 
-    html = qtbl_3.renderHTML();
+    html = qtbl_3.renderBody();
     CPPUNIT_ASSERT(searchHTML(html, i18nc("Total balance", "Total") + ' ' + i18n("Checking")) == moCheckingOpen - moSolo*3);
     CPPUNIT_ASSERT(searchHTML(html, i18nc("Total balance", "Total") + ' ' + i18n("Credit Card")) == moCreditOpen - (moParent1 + moParent2 + moChild) * 3);
     CPPUNIT_ASSERT(searchHTML(html, i18nc("Grand total balance", "Grand Total")) == moCheckingOpen + moCreditOpen - (moParent1 + moParent2 + moSolo + moChild) * 3);
@@ -534,7 +534,7 @@ void QueryTableTest::testInvestment(void)
     CPPUNIT_ASSERT(rows[8]["action"] == "Yield");
 #endif
 
-    QString html = invtran.renderHTML();
+    QString html = invtran.renderBody();
 #if 1
     // i think this is the correct amount. different treatment of dividend and yield
     CPPUNIT_ASSERT(searchHTML(html, i18n("Total Stock 1")) == MyMoneyMoney(175000.00));
@@ -575,7 +575,7 @@ void QueryTableTest::testInvestment(void)
     CPPUNIT_ASSERT(MyMoneyMoney(rows[0]["price"]) == MyMoneyMoney(100.00));
     CPPUNIT_ASSERT(MyMoneyMoney(rows[1]["return"]).isZero());
 
-    html = invhold.renderHTML();
+    html = invhold.renderBody();
     CPPUNIT_ASSERT(searchHTML(html, i18n("Grand Total")) == MyMoneyMoney(170000.00));
 
 #if 0
@@ -629,7 +629,7 @@ void QueryTableTest::testBalanceColumn()
 
     writeTabletoHTML(qtbl_3, "Transactions by Account.html");
 
-    QString html = qtbl_3.renderHTML();
+    QString html = qtbl_3.renderBody();
 
     QList<ListTable::TableRow> rows = qtbl_3.rows();
 
@@ -671,7 +671,7 @@ void QueryTableTest::testTaxReport()
 
     QList<ListTable::TableRow> rows = qtbl_3.rows();
 
-    QString html = qtbl_3.renderHTML();
+    QString html = qtbl_3.renderBody();
     CPPUNIT_ASSERT(rows.count() == 1);
   } catch (MyMoneyException *e) {
     CPPUNIT_FAIL(qPrintable(e->what()));

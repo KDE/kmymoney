@@ -22,6 +22,9 @@
 #include "mymoneyfile.h"
 #include "mymoneyseqaccessmgr.h"
 
+#define protected public
+#include "reporttable.h"
+
 class PivotTableTest : public CppUnit::TestFixture
 {
   CPPUNIT_TEST_SUITE(PivotTableTest);
@@ -42,6 +45,7 @@ class PivotTableTest : public CppUnit::TestFixture
   CPPUNIT_TEST(testColumnType);
   CPPUNIT_TEST(testInvestment);
   CPPUNIT_TEST(testBudget);
+  CPPUNIT_TEST(testHtmlEncoding);
   CPPUNIT_TEST_SUITE_END();
 
 private:
@@ -71,6 +75,7 @@ public:
   void testColumnType();
   void testInvestment();
   void testBudget();
+  void testHtmlEncoding();
 };
 
 #endif // PIVOTTABLETEST_H

@@ -318,7 +318,7 @@ void writeTabletoHTML(const PivotTable& table, const QString& _filename)
 
   QFile g(filename);
   g.open(QIODevice::WriteOnly);
-  QTextStream(&g) << table.renderHTML();
+  QTextStream(&g) << table.renderBody();
   g.close();
 
 }
@@ -334,7 +334,7 @@ void writeTabletoHTML(const QueryTable& table, const QString& _filename)
 
   QFile g(filename);
   g.open(QIODevice::WriteOnly);
-  QTextStream(&g) << table.renderHTML();
+  QTextStream(&g) << table.renderBody();
   g.close();
 }
 
