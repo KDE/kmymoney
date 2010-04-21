@@ -98,7 +98,7 @@ KBudgetView::KBudgetView(QWidget *parent) :
     m_inSelection(false)
 {
   m_accountTree->setSorting(-1);
-  //m_budgetList->setSorting(0);
+  m_budgetList->setRootIsDecorated(false);
   m_budgetList->setContextMenuPolicy(Qt::CustomContextMenu);
 
   KGuiItem newButtonItem(QString(""),
@@ -139,7 +139,7 @@ KBudgetView::KBudgetView(QWidget *parent) :
   connect(m_budgetList, SIGNAL(customContextMenuRequested(const QPoint&)),
           this, SLOT(slotOpenContextMenu(const QPoint&)));
   connect(m_budgetList, SIGNAL(itemRenamed(QTreeWidgetItem*, int, const QString&)), this, SLOT(slotRenameBudget(QTreeWidgetItem*, int, const QString&)));
-  connect(m_budgetList, SIGNAL(selectionChanged()), this, SLOT(slotSelectBudget()));
+  connect(m_budgetList->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), this, SLOT(slotSelectBudget()));
 
   connect(m_cbBudgetSubaccounts, SIGNAL(clicked()), this, SLOT(cb_includesSubaccounts_clicked()));
 
