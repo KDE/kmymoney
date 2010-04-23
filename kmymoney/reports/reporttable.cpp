@@ -43,7 +43,7 @@ QString reports::ReportTable::cssFileNameGet(void)
   if (!MyMoneyFile::instance()->value(m_reportStyleSheet).isEmpty()) {
     // try to find the stylesheet specific for this report
     cssfilename = KGlobal::dirs()->
-                  findResource(m_resourceType, m_resourceHtml + "/"
+                  findResource(m_resourceType, m_resourceHtml + '/'
                                + MyMoneyFile::instance()->
                                value(m_reportStyleSheet));
   }
@@ -51,7 +51,7 @@ QString reports::ReportTable::cssFileNameGet(void)
   if (cssfilename.isEmpty()) {
     // if no specific stylesheet was found, try to use a default one
     cssfilename = KGlobal::dirs()->
-                  findResource(m_resourceType, m_resourceHtml + "/"
+                  findResource(m_resourceType, m_resourceHtml + '/'
                                + m_cssFileDefault);
   }
 

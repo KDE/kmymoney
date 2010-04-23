@@ -537,7 +537,7 @@ void KReportsView::slotSaveView(void)
     // restore checkbox checked state
     d->fSavProps->includeCssCheckBox->setChecked(d->fSavProps->cbIsChecked);
 
-    QString filterList = d->fSavProps->filtCsv + "\n" + d->fSavProps->filtHtml;
+    QString filterList = d->fSavProps->filtCsv + '\n' + d->fSavProps->filtHtml;
     QPointer<KFileDialog> dlg =
       new KFileDialog(KUrl(":kmymoney-export"), filterList, this,
                       qobject_cast<QWidget*>(d->fSavProps->includeCssCheckBox));
