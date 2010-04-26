@@ -254,7 +254,7 @@ void kMyMoneyDateInput::toggleDatePicker()
       d->m_dateFrame->setGeometry(tmpPoint.x(), tmpPoint.y(), w, h);
     }
 
-    if (d->m_date.isValid()) {
+    if (d->m_date.isValid() && d->m_date != INVALID_DATE) {
       d->m_datePicker->setDate(d->m_date);
     } else {
       d->m_datePicker->setDate(QDate::currentDate());
