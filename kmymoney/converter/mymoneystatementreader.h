@@ -127,12 +127,6 @@ private:
     */
   bool selectOrCreateAccount(const SelectCreateMode mode, MyMoneyAccount& account);
 
-signals:
-  /**
-    * This signal will be emitted when the import is finished.
-    */
-  void importFinished(void);
-
 private:
   /// \internal d-pointer class.
   class Private;
