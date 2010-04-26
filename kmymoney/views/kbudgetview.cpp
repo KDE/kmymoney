@@ -65,7 +65,7 @@ KBudgetListItem::KBudgetListItem(QTreeWidget *parent, const MyMoneyBudget& budge
 {
   setText(0, budget.name());
   setText(1, QString("%1").arg(budget.budgetStart().year()));
-
+  setFlags(flags() | Qt::ItemIsEditable);
   // allow in column rename
   //setRenameEnabled(0, true);
 }
@@ -96,7 +96,7 @@ KBudgetView::KBudgetView(QWidget *parent) :
   m_newButton->setToolTip(newButtonItem.toolTip());
 
   KGuiItem renameButtonItem(QString(""),
-                            KIcon("edit-rename"),
+                            KIcon("budget-edit"),
                             i18n("Rename the current selected budget"),
                             i18n("Use this to start renaming the selected budget."));
   m_renameButton->setGuiItem(renameButtonItem);
@@ -125,7 +125,7 @@ KBudgetView::KBudgetView(QWidget *parent) :
 
   connect(m_budgetList, SIGNAL(customContextMenuRequested(const QPoint&)),
           this, SLOT(slotOpenContextMenu(const QPoint&)));
-  connect(m_budgetList, SIGNAL(itemChanged(QTreeWidgetItem*)), this, SLOT(slotRenameBudget(QTreeWidgetItem*)));
+  connect(m_budgetList, SIGNAL(itemChanged(QTreeWidgetItem*, int)), this, SLOT(slotRenameBudget(QTreeWidgetItem*)));
   connect(m_budgetList->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), this, SLOT(slotSelectBudget()));
 
   connect(m_cbBudgetSubaccounts, SIGNAL(clicked()), this, SLOT(cb_includesSubaccounts_clicked()));
@@ -226,6 +226,9 @@ void KBudgetView::loadBudgets(void)
     if (m_yearList.indexOf(QString::number((*it).budgetStart().year())) == -1)
       m_yearList += QString::number((*it).budgetStart().year());
 
+    //sort the list by name
+    m_budgetList->sortItems(0, Qt::AscendingOrder);
+    
     if (item->budget().id() == id) {
       m_budget = (*it);
       currentItem = item;
@@ -560,6 +563,7 @@ void KBudgetView::slotRenameBudget(QTreeWidgetItem* p)
   //kDebug() << "[KPayeesView::slotRenamePayee]";
   // create a copy of the new name without appended whitespaces
   QString new_name = p->text(0);
+
   if (pBudget->budget().name() != new_name) {
     MyMoneyFileTransaction ft;
     try {
