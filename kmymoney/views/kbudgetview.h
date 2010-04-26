@@ -157,10 +157,8 @@ protected slots:
     * the budget list view and only a single budget is selected.
     *
     * @param p The listviewitem containing the budget name
-    * @param col The column where the name is located
-    * @param txt The text of the new name
     */
-  void slotRenameBudget(QTreeWidgetItem *p, int col, const QString& txt);
+  void slotRenameBudget(QTreeWidgetItem *p);
 
   /**
     * This slot is called when the amount of a budget is changed. It
@@ -228,6 +226,11 @@ private:
 
   static const int m_iBudgetYearsAhead;
   static const int m_iBudgetYearsBack;
+  
+    /**
+   * This signals whether a budget is being edited
+   **/
+  bool m_budgetInEditing;
 };
 
 #endif

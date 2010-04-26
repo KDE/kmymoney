@@ -74,20 +74,6 @@ KBudgetListItem::~KBudgetListItem()
 {
 }
 
-/*void KBudgetListItem::paintCell(QPainter *p, const QColorGroup & cg, int column, int width, int align)
-{
-  p->setFont(KMyMoneyGlobalSettings::listCellFont());
-  QColorGroup cg2(cg);
-
-  if (isAlternate())
-    cg2.setColor(QColorGroup::Base, KMyMoneyGlobalSettings::listColor());
-  else
-    cg2.setColor(QColorGroup::Base, KMyMoneyGlobalSettings::listBGColor());
-
-  Q3ListViewItem::paintCell(p, cg2, column, width, align);
-}*/
-
-
 // *** KBudgetView Implementation ***
 const int KBudgetView::m_iBudgetYearsAhead = 5;
 const int KBudgetView::m_iBudgetYearsBack = 3;
@@ -95,7 +81,8 @@ const int KBudgetView::m_iBudgetYearsBack = 3;
 KBudgetView::KBudgetView(QWidget *parent) :
     KBudgetViewDecl(parent),
     m_needReload(false),
-    m_inSelection(false)
+    m_inSelection(false),
+    m_budgetInEditing(false)
 {
   m_accountTree->setSorting(-1);
   m_budgetList->setRootIsDecorated(false);
@@ -138,7 +125,7 @@ KBudgetView::KBudgetView(QWidget *parent) :
 
   connect(m_budgetList, SIGNAL(customContextMenuRequested(const QPoint&)),
           this, SLOT(slotOpenContextMenu(const QPoint&)));
-  connect(m_budgetList, SIGNAL(itemRenamed(QTreeWidgetItem*, int, const QString&)), this, SLOT(slotRenameBudget(QTreeWidgetItem*, int, const QString&)));
+  connect(m_budgetList, SIGNAL(itemChanged(QTreeWidgetItem*)), this, SLOT(slotRenameBudget(QTreeWidgetItem*)));
   connect(m_budgetList->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), this, SLOT(slotSelectBudget()));
 
   connect(m_cbBudgetSubaccounts, SIGNAL(clicked()), this, SLOT(cb_includesSubaccounts_clicked()));
@@ -475,6 +462,7 @@ void KBudgetView::slotSelectBudget(void)
 {
   askSave();
   KBudgetListItem* item;
+  m_budgetInEditing = false;
 
   QTreeWidgetItemIterator widgetIt = QTreeWidgetItemIterator(m_budgetList);
   if (m_budget.id().isEmpty()) {
@@ -550,6 +538,7 @@ void KBudgetView::slotOpenContextMenu(const QPoint& p)
 
 void KBudgetView::slotStartRename(void)
 {
+  m_budgetInEditing = true;
   QTreeWidgetItemIterator it_l(m_budgetList, QTreeWidgetItemIterator::Selected);
   QTreeWidgetItem* it_v;
   if ((it_v = *it_l) != 0) {
@@ -558,15 +547,19 @@ void KBudgetView::slotStartRename(void)
 }
 
 // This variant is only called when a single budget is selected and renamed.
-void KBudgetView::slotRenameBudget(QTreeWidgetItem* p , int /*col*/, const QString& txt)
+void KBudgetView::slotRenameBudget(QTreeWidgetItem* p)
 {
   KBudgetListItem *pBudget = dynamic_cast<KBudgetListItem*>(p);
-  if (!pBudget)
-    return;
 
+  //if there is no current item selected, exit
+   if (m_budgetInEditing == false || !m_budgetList->currentItem() || p != m_budgetList->currentItem())
+    return;
+   
+   m_budgetInEditing = false;
+  
   //kDebug() << "[KPayeesView::slotRenamePayee]";
   // create a copy of the new name without appended whitespaces
-  QString new_name = txt.trimmed();
+  QString new_name = p->text(0);
   if (pBudget->budget().name() != new_name) {
     MyMoneyFileTransaction ft;
     try {
