@@ -283,9 +283,9 @@ void KScheduledView::slotReloadView(void)
   }
 }
 
-void KScheduledView::show()
+void KScheduledView::showEvent(QShowEvent* event)
 {
-  KScheduledViewDecl::show();
+  KScheduledViewDecl::showEvent(event);
 
   if (m_needReload)
     slotReloadView();

@@ -122,8 +122,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
 
   m_model = new KPageWidgetModel(parent);
 
-  connect(this, SIGNAL(currentPageChanged(const QModelIndex, const QModelIndex)), this, SLOT(slotRefreshViews()));
-  connect(this, SIGNAL(pageToggled(KPageWidgetItem*, bool)), this, SLOT(slotRefreshViews()));
+  connect(kmymoney, SIGNAL(fileLoaded(const KUrl&)), this, SLOT(slotRefreshViews()));
 
   // let the accounts model know which account is being currently reconciled
   connect(this, SIGNAL(reconciliationStarts(const MyMoneyAccount&, const QDate&, const MyMoneyMoney&)), Models::instance()->accountsModel(), SLOT(slotReconcileAccount(const MyMoneyAccount&, const QDate&, const MyMoneyMoney&)));

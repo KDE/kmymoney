@@ -143,7 +143,7 @@ class KPayeesView : public KPayeesViewDecl
 public:
   KPayeesView(QWidget *parent = 0);
   ~KPayeesView();
-  void show(void);
+  void showEvent(QShowEvent* event);
 
 public slots:
   void slotSelectPayeeAndTransaction(const QString& payeeId, const QString& accountId = QString(), const QString& transactionId = QString());

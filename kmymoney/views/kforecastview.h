@@ -62,7 +62,7 @@ public:
   KForecastView(QWidget *parent = 0);
   virtual ~KForecastView();
 
-  void show(void);
+  void showEvent(QShowEvent* event);
 
 public slots:
   void slotLoadForecast(void);

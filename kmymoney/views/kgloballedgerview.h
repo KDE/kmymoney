@@ -188,7 +188,7 @@ public:
   bool selectEmptyTransaction(void);
 
 public slots:
-  void show(void);
+  void showEvent(QShowEvent* event);
 
   /**
     * This method loads the view with data from the MyMoney engine.

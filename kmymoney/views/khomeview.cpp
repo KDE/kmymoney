@@ -84,7 +84,9 @@ class KHomeView::Private
 public:
   Private() :
       m_showAllSchedules(false),
-      m_needReload(true) {
+      m_needReload(true),
+      m_netWorthGraphLastValidSize(400, 300)
+  {
   }
 
   void addNameIndex(QMap<QString, MyMoneyAccount> &idx, const MyMoneyAccount& account);
@@ -99,6 +101,11 @@ public:
   bool            m_showAllSchedules;
   bool            m_needReload;
   MyMoneyForecast m_forecast;
+  /**
+    * Hold the last valid size of the net worth graph
+    * for the times when the needed size can't be computed.
+    */
+  QSize           m_netWorthGraphLastValidSize;
 
   /**
     * daily forecast balance of accounts
@@ -312,16 +319,13 @@ void KHomeView::showNetWorthGraph(void)
   table.drawChart(*chartWidget);
 
   // Adjust the size
-  int width = KHomeView::width() - 80;
-  int height = KHomeView::height() - 30;
-  if (width > kmymoney->width() || height > kmymoney->height()) {
-    // something must be wrong if the views size is greater than the
-    // application's size (this can happen during the change of the view type)
-    // use the application window size in this situation
-    width = kmymoney->width();
-    height = kmymoney->height();
+  QSize netWorthGraphSize = KHomeView::size();
+  netWorthGraphSize -= QSize(80, 30);
+  // consider the computed size valid only if it's smaller on both axes that the applications size
+  if (netWorthGraphSize.width() < kmymoney->width() || netWorthGraphSize.height() < kmymoney->height()) {
+    d->m_netWorthGraphLastValidSize = netWorthGraphSize;
   }
-  chartWidget->resize(width, height);
+  chartWidget->resize(d->m_netWorthGraphLastValidSize);
 
   //save the chart to an image
   QPixmap pixmap = QPixmap::grabWidget(chartWidget->coordinatePlane()->parent());

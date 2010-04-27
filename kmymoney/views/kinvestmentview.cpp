@@ -320,7 +320,7 @@ void KInvestmentView::loadView(void)
   emit accountSelected(d->m_account);
 }
 
-void KInvestmentView::show(void)
+void KInvestmentView::showEvent(QShowEvent* event)
 {
   if (d->m_needReload) {
     loadView();
@@ -332,7 +332,7 @@ void KInvestmentView::show(void)
   }
 
   // don't forget base class implementation
-  KInvestmentViewDecl::show();
+  KInvestmentViewDecl::showEvent(event);
 }
 
 #include "kinvestmentview.moc"

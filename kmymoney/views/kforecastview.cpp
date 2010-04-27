@@ -116,10 +116,10 @@ void KForecastView::loadForecast(ForecastViewTab tab)
   }
 }
 
-void KForecastView::show(void)
+void KForecastView::showEvent(QShowEvent* event)
 {
   // don't forget base class implementation
-  KForecastViewDecl::show();
+  KForecastViewDecl::showEvent(event);
   slotTabChanged(m_tab->currentWidget());
 }
 

@@ -1287,7 +1287,7 @@ bool KGlobalLedgerView::focusNextPrevChild(bool next)
 }
 
 
-void KGlobalLedgerView::show(void)
+void KGlobalLedgerView::showEvent(QShowEvent* event)
 {
   if (m_needReload) {
     if (!m_inEditMode) {
@@ -1303,7 +1303,7 @@ void KGlobalLedgerView::show(void)
   }
 
   // don't forget base class implementation
-  KMyMoneyViewBase::show();
+  KMyMoneyViewBase::showEvent(event);
 }
 
 bool KGlobalLedgerView::eventFilter(QObject* o, QEvent* e)

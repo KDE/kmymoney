@@ -715,7 +715,7 @@ void KPayeesView::readConfig(void)
   //KMyMoneyGlobalSettings::focusChangeIsEnter() ? Q3ListView::Accept : Q3ListView::Reject);
 }
 
-void KPayeesView::show(void)
+void KPayeesView::showEvent(QShowEvent* event)
 {
   // since we could not construct the connection in our own ctor,
   // we set it up now. The widgets of the K3ListViewSearchLineWidget must exist by now.
@@ -735,7 +735,7 @@ void KPayeesView::show(void)
   QTimer::singleShot(0, this, SLOT(rearrange()));
 
   // don't forget base class implementation
-  KPayeesViewDecl::show();
+  KPayeesViewDecl::showEvent(event);
 
   QList<MyMoneyPayee> list;
   selectedPayees(list);

@@ -95,7 +95,7 @@ public slots:
     */
   bool slotSelectAccount(const MyMoneyObject& acc);
 
-  void show(void);
+  void showEvent(QShowEvent* event);
 
 protected:
   /**

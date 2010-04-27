@@ -80,7 +80,7 @@ public:
   /**
     * Called by KMyMoneyView.
     */
-  void show();
+  void showEvent(QShowEvent* event);
 
 public slots:
   void slotSelectSchedule(const QString& schedule);
