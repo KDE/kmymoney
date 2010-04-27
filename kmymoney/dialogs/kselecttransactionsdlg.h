@@ -56,7 +56,6 @@ public:
    */
   void addTransaction(const MyMoneyTransaction& t);
   int exec(void);
-  void show(void);
 
   MyMoneyTransaction transaction(void) const;
 
@@ -70,6 +69,7 @@ protected slots:
 
 protected:
   void resizeEvent(QResizeEvent* ev);
+  void showEvent(QShowEvent* event);
 
 private:
   /**

@@ -106,11 +106,9 @@ public:
 
   virtual bool eventFilter(QObject *o, QEvent *e);
 
-public slots:
-  void show(void);
-
 protected:
   void resizeEvent(QResizeEvent*);
+  void showEvent(QShowEvent* event);
 
 protected slots:
   virtual void slotReset(void);

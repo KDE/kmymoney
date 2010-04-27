@@ -89,7 +89,7 @@ public slots:
   /**
     * overridden for internal reasons, API not changed
     */
-  virtual void show(void);
+  virtual void showEvent(QShowEvent* event);
 
 protected slots:
   void slotTabCurrentChanged(int id);

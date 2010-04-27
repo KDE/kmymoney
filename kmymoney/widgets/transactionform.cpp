@@ -137,13 +137,13 @@ void TabBar::slotTabCurrentChanged(int id)
     emit tabCurrentChanged(id);
 }
 
-void TabBar::show(void)
+void TabBar::showEvent(QShowEvent* event)
 {
   // make sure we don't emit a signal when simply showing the widget
   if (m_signalType != SignalNormal)
     blockSignals(true);
 
-  KTabWidget::show();
+  KTabWidget::showEvent(event);
 
   if (m_signalType != SignalNormal)
     blockSignals(false);

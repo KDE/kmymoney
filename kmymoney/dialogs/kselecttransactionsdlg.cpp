@@ -121,9 +121,9 @@ void KSelectTransactionsDlg::slotHelp(void)
   // KToolInvocation::invokeHelp("details.ledgers.match");
 }
 
-void KSelectTransactionsDlg::show(void)
+void KSelectTransactionsDlg::showEvent(QShowEvent* event)
 {
-  KSelectTransactionsDlgDecl::show();
+  KSelectTransactionsDlgDecl::showEvent(event);
   m_register->resize(KMyMoneyRegister::DetailColumn);
 }
 

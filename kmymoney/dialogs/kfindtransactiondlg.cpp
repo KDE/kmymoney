@@ -699,13 +699,13 @@ void KFindTransactionDlg::slotRefreshView(void)
   }
 }
 
-void KFindTransactionDlg::show(void)
+void KFindTransactionDlg::showEvent(QShowEvent* event)
 {
   if (m_needReload) {
     loadView();
     m_needReload = false;
   }
-  KFindTransactionDlgDecl::show();
+  KFindTransactionDlgDecl::showEvent(event);
 }
 
 void KFindTransactionDlg::loadView(void)
