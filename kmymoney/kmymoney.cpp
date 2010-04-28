@@ -266,11 +266,8 @@ public:
   QString m_mountpoint;
 
   QProgressBar* m_progressBar;
-
-  QString m_statusMsg;
-
-  int m_progressUpdate;
-  int m_nextUpdate;
+  QString       m_statusMsg;
+  QTime         m_lastUpdate;
 
   MyMoneyQifReader* m_qifReader;
   MyMoneyStatementReader* m_smtReader;
@@ -1871,29 +1868,19 @@ void KMyMoneyApp::slotStatusProgressBar(int current, int total)
   if (total == -1 && current == -1) {     // reset
     d->m_progressBar->reset();
     d->m_progressBar->hide();
-    d->m_nextUpdate = 0;
+    QCoreApplication::processEvents(QEventLoop::ExcludeUserInput, 2);
 
   } else if (total != 0) {                // init
     d->m_progressBar->setMaximum(total);
     d->m_progressBar->show();
 
-    // make sure, we don't waste too much time for updateing the screen.
-    // if we have more than 1000 steps, we update the progress bar
-    // every 100 steps. If we have less, we allow to update
-    // every 10 steps.
-    d->m_progressUpdate = 1;
-    if (total > 100)
-      d->m_progressUpdate = 10;
-    if (total > 1000)
-      d->m_progressUpdate = 100;
-    d->m_nextUpdate = 0;
-
   } else {                                // update
-    if (current > d->m_nextUpdate) {
+    QTime currentTime = QTime::currentTime();
+    // only process painting if last update is at least 250 ms ago
+    if (abs(d->m_lastUpdate.msecsTo(currentTime)) > 250) {
       d->m_progressBar->setValue(current);
-      //QApplication::eventLoop()->processEvents(QEventLoop::ExcludeUserInput, 10);
-      QCoreApplication::processEvents(QEventLoop::ExcludeUserInput, 10);
-      d->m_nextUpdate += d->m_progressUpdate;
+      QCoreApplication::processEvents(QEventLoop::ExcludeUserInput, 2);
+      d->m_lastUpdate = currentTime;
     }
   }
 }
