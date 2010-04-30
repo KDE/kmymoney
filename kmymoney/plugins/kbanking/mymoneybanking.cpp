@@ -126,7 +126,21 @@ KBankingPlugin::KBankingPlugin(QObject *parent, const QStringList&) :
   if (m_kbanking) {
     QBGui *gui;
 
-#if AQB_IS_VERSION(3,9,0,0)
+#if AQB_IS_VERSION(4,99,0,0)
+    if (AB_Banking_HasConf4(m_kbanking->getCInterface())) {
+      qDebug("KBankingPlugin: No AqB4 config found.");
+      if (AB_Banking_HasConf3(m_kbanking->getCInterface())) {
+        qDebug("KBankingPlugin: No AqB3 config found.");
+        if (!AB_Banking_HasConf2(m_kbanking->getCInterface())) {
+          qDebug("KBankingPlugin: AqB2 config found - converting.");
+          AB_Banking_ImportConf2(m_kbanking->getCInterface());
+        }
+      } else {
+        qDebug("KBankingPlugin: AqB3 config found - converting.");
+        AB_Banking_ImportConf3(m_kbanking->getCInterface());
+      }
+    }
+#elif AQB_IS_VERSION(3,9,0,0)
     if (AB_Banking_HasConf4(m_kbanking->getCInterface(), 0)) {
       qDebug("KBankingPlugin: No AqB4 config found.");
       if (AB_Banking_HasConf3(m_kbanking->getCInterface(), 0)) {
@@ -438,7 +452,7 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
       if (acc.onlineBankingSettings().value("kbanking-txn-download") != "no") {
         /* create getTransactions job */
         job = AB_JobGetTransactions_new(ba);
-        rv = AB_Job_CheckAvailability(job, 0);
+        rv = AB_BANKING_JOB_CHECKAVAILABILITY(job);
         if (rv) {
           DBG_ERROR(0, "Job \"GetTransactions\" is not available (%d)", rv);
           QMessageBox::critical(0,
@@ -532,7 +546,7 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
 
       /* create getBalance job */
       job = AB_JobGetBalance_new(ba);
-      rv = AB_Job_CheckAvailability(job, 0);
+      rv = AB_BANKING_JOB_CHECKAVAILABILITY(job);
       if (!rv)
         rv = m_kbanking->enqueueJob(job);
       else

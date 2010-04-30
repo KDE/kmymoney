@@ -33,7 +33,8 @@ if(DEFINED GWENHYWFAR_BASE)
 endif(DEFINED GWENHYWFAR_BASE)
 
 find_path(GWENHYWFAR_INCLUDE_DIR NAMES gwenhywfar/version.h
-  HINTS /usr/include/gwenhywfar3 /usr/local/include/gwenhywfar3 ${gwenhywfar_root}/include/gwenhywfar3 ${_program_FILES_DIR}/gwenhywfar/include
+  HINTS /usr/include/gwenhywfar4 /usr/local/include/gwenhywfar4 ${gwenhywfar_root}/include/gwenhywfar4 ${_program_FILES_DIR}/gwenhywfar/include
+        /usr/include/gwenhywfar3 /usr/local/include/gwenhywfar3 ${gwenhywfar_root}/include/gwenhywfar3
 )
 
 find_library(GWENHYWFAR_LIBRARY NAMES gwenhywfar libgwenhywfar

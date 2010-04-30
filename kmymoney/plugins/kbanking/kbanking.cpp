@@ -159,7 +159,7 @@ int KBanking::executeQueue(AB_IMEXPORTER_CONTEXT *ctx)
   int rv;
   AB_JOB_LIST2 *oldQ;
 
-  rv = QBanking::executeJobs(_jobQueue, ctx, 0);
+  rv = AB_BANKING_QBANKING_EXECUTE_JOBS(_jobQueue, ctx);
   oldQ = _jobQueue;
   _jobQueue = AB_Job_List2_new();
   flagStaff()->queueUpdated();

@@ -38,12 +38,18 @@
 #endif
 
 #ifndef KBANKING_GUIID
-#if AQB_IS_VERSION(3,9,0,0)
-#define onlineInit() onlineInit(0)
-#define onlineFini() onlineFini(0)
-#define AB_BANKING_GETACCOUNTBYALIAS(a, b) AB_Banking_GetAccountByAlias(a, b, 0)
+#if AQB_IS_VERSION(4,99,0,0)
+#  define AB_BANKING_QBANKING_EXECUTE_JOBS(a, b) QBanking::executeJobs(a, b)
+#  define AB_BANKING_JOB_CHECKAVAILABILITY(a) AB_Job_CheckAvailability(a)
+#  define AB_BANKING_GETACCOUNTBYALIAS(a, b) AB_Banking_GetAccountByAlias(a, b)
+#elif AQB_IS_VERSION(3,9,0,0)
+#  define onlineInit() onlineInit(0)
+#  define onlineFini() onlineFini(0)
+#  define AB_BANKING_QBANKING_EXECUTE_JOBS(a, b) QBanking::executeJobs(a, b, 0)
+#  define AB_BANKING_GETACCOUNTBYALIAS(a, b) AB_Banking_GetAccountByAlias(a, b, 0)
+#  define AB_BANKING_JOB_CHECKAVAILABILITY(a) AB_Job_CheckAvailability(a, 0)
 #else
-#define AB_BANKING_GETACCOUNTBYALIAS(a, b) AB_Banking_GetAccountByAlias(a, b)
+#  define AB_BANKING_GETACCOUNTBYALIAS(a, b) AB_Banking_GetAccountByAlias(a, b)
 #endif
 #endif
 
