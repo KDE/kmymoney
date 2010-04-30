@@ -1016,7 +1016,7 @@ void StdTransaction::registerCellText(QString& txt, int& align, int row, int col
 int StdTransaction::registerColWidth(int col, const QFontMetrics& cellFontMetrics)
 {
   QString txt;
-  int firstRow = 0, lastRow = 0;
+  int firstRow = 0, lastRow = numRowsRegister();
 
   int nw = 0;
   for (int i = firstRow; i <= lastRow; ++i) {

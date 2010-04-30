@@ -1218,7 +1218,7 @@ void Register::adjustColumn(int col)
   QHeaderView *topHeader = horizontalHeader();
   QFontMetrics cellFontMetrics(KMyMoneyGlobalSettings::listCellFont());
 
-  int w = topHeader->fontMetrics().width(topHeader->model()->data(topHeader->model()->index(0, col)).toString()) + 10;
+  int w = topHeader->fontMetrics().width(horizontalHeaderItem(col) ? horizontalHeaderItem(col)->text() : QString()) + 10;
   w = qMax(w, 20);
 
   int maxWidth = 0;
@@ -1230,39 +1230,31 @@ void Register::adjustColumn(int col)
     break;
   }
 
-  // check for date column
-  if (col == DateColumn) {
-    QString txt = KGlobal::locale()->formatDate(QDate(6999, 12, 29), KLocale::ShortDate);
-    int nw = cellFontMetrics.width(txt + "  ");
-    w = qMax(w, nw);
-  } else {
-
-    // scan through the transactions
-    for (int i = 0; i < m_items.size(); ++i) {
-      RegisterItem* const item = m_items[i];
-      if (!item)
-        continue;
-      Transaction* t = dynamic_cast<Transaction*>(item);
-      if (t) {
-        int nw = 0;
-        try {
-          nw = t->registerColWidth(col, cellFontMetrics);
-        } catch (MyMoneyException* e) {
-          // This should only be reached if the data in the file disappeared
-          // from under us, such as when the account was deleted from a
-          // different view, then this view is restored. In this case, new
-          // data is about to be loaded into the view anyway, so just remove
-          // the item from the register and swallow the exception.
-          //qDebug("%s", qPrintable(e->what()));
-          delete e;
-          removeItem(t);
-        }
-        w = qMax(w, nw);
-        if (maxWidth) {
-          if (w > maxWidth) {
-            w = maxWidth;
-            break;
-          }
+  // scan through the transactions
+  for (int i = 0; i < m_items.size(); ++i) {
+    RegisterItem* const item = m_items[i];
+    if (!item)
+      continue;
+    Transaction* t = dynamic_cast<Transaction*>(item);
+    if (t) {
+      int nw = 0;
+      try {
+        nw = t->registerColWidth(col, cellFontMetrics);
+      } catch (MyMoneyException* e) {
+        // This should only be reached if the data in the file disappeared
+        // from under us, such as when the account was deleted from a
+        // different view, then this view is restored. In this case, new
+        // data is about to be loaded into the view anyway, so just remove
+        // the item from the register and swallow the exception.
+        //qDebug("%s", qPrintable(e->what()));
+        delete e;
+        removeItem(t);
+      }
+      w = qMax(w, nw);
+      if (maxWidth) {
+        if (w > maxWidth) {
+          w = maxWidth;
+          break;
         }
       }
     }
@@ -1651,7 +1643,7 @@ void Register::slotEnsureItemVisible(void)
   setUpdatesEnabled(false);
   updateRegister();
   setUpdatesEnabled(enabled);
-  scrollTo(model()->index(m_ensureVisibleItem->startRow(), 0));
+  scrollTo(model()->index(m_ensureVisibleItem->startRow(), DetailColumn));
 }
 
 TransactionSortField KMyMoneyRegister::textToSortOrder(const QString& text)
