@@ -64,20 +64,55 @@
       <attribute name="title">
        <string>Icons</string>
       </attribute>
-      <layout class="QVBoxLayout">
-       <item>
-        <widget class="K3IconView" name="m_accountIcons">
-         <property name="maxItemTextLength">
-          <number>30</number>
-         </property>
-         <property name="autoArrange">
-          <bool>true</bool>
-         </property>
-         <property name="wordWrapIconText">
-          <bool>false</bool>
-         </property>
-        </widget>
-       </item>
+      <layout class="QVBoxLayout" name="m_iconGroupLayout">
+        <item>
+          <widget class="QGroupBox" name="m_assetsGroup">
+            <property name="title">
+               <string>Assets</string>
+            </property>
+            <layout class="QVBoxLayout" name="m_assetsListLayout">
+              <item>
+                <widget class="KListWidget" name="m_assetsList">
+                  <property name="viewMode">
+                    <enum>QListView::IconMode</enum>
+                  </property>
+                </widget>
+                </item>
+            </layout>
+          </widget>
+        </item>
+        <item>
+          <widget class="QGroupBox" name="m_liabilitiesGroup">
+            <property name="title">
+               <string>Liabilities</string>
+            </property>
+            <layout class="QVBoxLayout" name="m_liabilitiesListLayout">
+              <item>
+                <widget class="KListWidget" name="m_liabilitiesList">
+                  <property name="viewMode">
+                    <enum>QListView::IconMode</enum>
+                  </property>
+                </widget>
+              </item>
+            </layout>
+          </widget>
+        </item>
+        <item>
+          <widget class="QGroupBox" name="m_equitiesGroup">
+            <property name="title">
+               <string>Equities</string>
+            </property>
+            <layout class="QVBoxLayout" name="m_equitiesListLayout">
+              <item>
+                <widget class="KListWidget" name="m_equitiesList">
+                  <property name="viewMode">
+                    <enum>QListView::IconMode</enum>
+                  </property>
+                </widget>
+              </item>
+            </layout>
+          </widget>
+        </item>
       </layout>
      </widget>
     </widget>
@@ -144,22 +179,6 @@
    <header>kmymoneyaccounttreeview.h</header>
   </customwidget>
   <customwidget>
-   <class>Q3IconView</class>
-   <extends>Q3Frame</extends>
-   <header>q3iconview.h</header>
-  </customwidget>
-  <customwidget>
-   <class>Q3Frame</class>
-   <extends>QFrame</extends>
-   <header>Qt3Support/Q3Frame</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>K3IconView</class>
-   <extends>Q3IconView</extends>
-   <header>k3iconview.h</header>
-  </customwidget>
-  <customwidget>
    <class>KPushButton</class>
    <extends>QPushButton</extends>
    <header>kpushbutton.h</header>
@@ -174,6 +193,11 @@
    <extends>QTabWidget</extends>
    <header>ktabwidget.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>KListWidget</class>
+   <extends>QlistWidget</extends>
+   <header>klistwidget.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

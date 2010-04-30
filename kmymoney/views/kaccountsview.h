@@ -23,7 +23,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <k3iconview.h>
+#include <KListWidget>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -32,55 +32,7 @@
 #include <mymoneyutils.h>
 #include "accountsmodel.h"
 
-class K3ListViewSearchLineWidget;
-
 #include "ui_kaccountsviewdecl.h"
-
-/**
-  * @author Thomas Baumgart
-  */
-
-/**
-  * This class represents an item in the account icon view. It is used
-  * by the KAccountsView to select between the accounts using icons.
-  */
-class KMyMoneyAccountIconItem : public K3IconViewItem
-{
-public:
-  /**
-    * Constructor to be used to construct an account icon object.
-    *
-    * @param parent pointer to the K3IconView object this entry should be
-    *               added to.
-    * @param account const reference to MyMoneyAccount for which
-    *               the K3IconView entry is constructed
-    */
-  KMyMoneyAccountIconItem(Q3IconView *parent, const MyMoneyAccount& account);
-  ~KMyMoneyAccountIconItem();
-
-  /**
-    * This method is loads new information into the item and updates the fields
-    *
-    * @param account the account data for the object to be updated
-    *
-    * @note if account.id() is not equal to the current account id
-    *       then this method returns immediately
-    */
-  void updateAccount(const MyMoneyAccount& account);
-
-  const MyMoneyObject& itemObject(void) const {
-    return m_account;
-  };
-
-  void setReconciliation(bool);
-
-protected:
-
-private:
-  MyMoneyAccount        m_account;
-  bool                  m_reconcileFlag;
-};
-
 
 class KMyMoneyAccountTreeView;
 
@@ -120,9 +72,9 @@ public slots:
     *
     * @param action must be KMyMoneyView::preSave, otherwise this slot is a NOP.
     */
-  void slotUpdateIconPos(unsigned int action);
+  //void slotUpdateIconPos(unsigned int action);
 
-  void slotReconcileAccount(const MyMoneyAccount& acc, const QDate& reconciliationDate, const MyMoneyMoney& endingBalance);
+  //void slotReconcileAccount(const MyMoneyAccount& acc, const QDate& reconciliationDate, const MyMoneyMoney& endingBalance);
 
 protected:
   typedef enum {
@@ -139,13 +91,20 @@ protected:
     */
   void loadAccounts(AccountsViewTab tab);
   void loadListView(void);
-  void loadIconView(void);
+  //void loadIconView(void);
+  void loadIconGroups(void);
+
+  /**
+    * This method loads all the subaccounts recursively of a given root account
+    *
+    */
+  void loadAccountIconsIntoList(const MyMoneyAccount& parentAccount, KListWidget* listWidget);
 
   /**
     * This method returns a pointer to the currently selected
     * account icon or 0 if no icon is selected.
     */
-  KMyMoneyAccountIconItem* selectedIcon(void) const;
+  QListWidgetItem* selectedIcon(void) const;
 
   QPoint point(const QString& str) const;
   QString point(const QPoint& val) const;
@@ -153,9 +112,9 @@ protected:
 protected slots:
   void slotNetWorthChanged(const MyMoneyMoney &);
   void slotTabCurrentChanged(QWidget*);
-  void slotSelectIcon(Q3IconViewItem* item);
-  void slotOpenContext(Q3IconViewItem* item);
-  void slotOpenObject(Q3IconViewItem* item);
+  void slotSelectIcon(QListWidgetItem* item);
+  void slotOpenContext(QListWidgetItem* item);
+  void slotOpenObject(QListWidgetItem* item);
   void slotExpandCollapse(void);
   void slotUnusedIncomeExpenseAccountHidden(void);
 
