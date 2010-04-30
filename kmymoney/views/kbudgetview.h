@@ -226,10 +226,10 @@ private:
 
   static const int m_iBudgetYearsAhead;
   static const int m_iBudgetYearsBack;
-  
-    /**
-   * This signals whether a budget is being edited
-   **/
+
+  /**
+  * This signals whether a budget is being edited
+  **/
   bool m_budgetInEditing;
 };
 

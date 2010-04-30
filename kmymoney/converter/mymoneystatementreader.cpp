@@ -641,7 +641,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       if (!t_in.m_price.isZero()) {
         s1.setPrice(t_in.m_price);
       } else {
-        if(t_in.m_shares.isZero()) {
+        if (t_in.m_shares.isZero()) {
           KMessageBox::information(0, i18n("This imported statement contains investment transactions with no share amount.  These transactions will be ignored."), i18n("No share amount provided"), QString("BlankAmount"));
           return;
         }

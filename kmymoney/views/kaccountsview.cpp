@@ -391,10 +391,10 @@ void KAccountsView::slotNetWorthChanged(const MyMoneyMoney &netWorth)
 
 QListWidgetItem* KAccountsView::selectedIcon(void) const
 {
-  if(m_assetsList->currentItem())
+  if (m_assetsList->currentItem())
     return m_assetsList->currentItem();
-  else if(m_liabilitiesList->currentItem())
-      return m_liabilitiesList->currentItem();
+  else if (m_liabilitiesList->currentItem())
+    return m_liabilitiesList->currentItem();
   else
     return m_equitiesList->currentItem();
 }
@@ -459,24 +459,24 @@ QPoint KAccountsView::point(const QString& val) const
 void KAccountsView::loadIconGroups()
 {
 
-    MyMoneyFile* file = MyMoneyFile::instance();
+  MyMoneyFile* file = MyMoneyFile::instance();
 
-    MyMoneyAccount assetAccount = file->asset();
-    m_assetsList->clear();
+  MyMoneyAccount assetAccount = file->asset();
+  m_assetsList->clear();
 
-    MyMoneyAccount liabilityAccount = file->liability();
-    m_liabilitiesList->clear();
+  MyMoneyAccount liabilityAccount = file->liability();
+  m_liabilitiesList->clear();
 
-    loadAccountIconsIntoList(assetAccount, m_assetsList);
-    loadAccountIconsIntoList(liabilityAccount, m_liabilitiesList);
+  loadAccountIconsIntoList(assetAccount, m_assetsList);
+  loadAccountIconsIntoList(liabilityAccount, m_liabilitiesList);
 
-    if(KMyMoneyGlobalSettings::expertMode()){
-      MyMoneyAccount equityAccount = file->equity();
-      m_equitiesList->clear();
-      loadAccountIconsIntoList(equityAccount, m_equitiesList);
-    } else {
-      m_equitiesGroup->hide();
-    }
+  if (KMyMoneyGlobalSettings::expertMode()) {
+    MyMoneyAccount equityAccount = file->equity();
+    m_equitiesList->clear();
+    loadAccountIconsIntoList(equityAccount, m_equitiesList);
+  } else {
+    m_equitiesGroup->hide();
+  }
 }
 
 void KAccountsView::loadAccountIconsIntoList(const MyMoneyAccount& parentAccount, KListWidget* listWidget)
@@ -489,11 +489,11 @@ void KAccountsView::loadAccountIconsIntoList(const MyMoneyAccount& parentAccount
 
   //go over each subaccount and add it and get subaccounts if it has any
   QStringList::const_iterator it_string;
-  for(it_string = subAccountsId.constBegin(); it_string != subAccountsId.constEnd(); ++it_string) {
+  for (it_string = subAccountsId.constBegin(); it_string != subAccountsId.constEnd(); ++it_string) {
     MyMoneyAccount account = file->account((*it_string));
 
     //if it is already on the list continue with the next one
-    if(subAccountsList.contains(account))
+    if (subAccountsList.contains(account))
       continue;
 
     //add the account to the list and check if it has subaccounts
@@ -501,7 +501,7 @@ void KAccountsView::loadAccountIconsIntoList(const MyMoneyAccount& parentAccount
     QStringList subAccounts = account.accountList();
 
     //if it has subaccounts, add them and then start from scratch
-    if(subAccounts.size() > 0) {
+    if (subAccounts.size() > 0) {
       subAccountsId.append(subAccounts);
       it_string = subAccountsId.constBegin();
     }
@@ -509,7 +509,7 @@ void KAccountsView::loadAccountIconsIntoList(const MyMoneyAccount& parentAccount
 
   //once all accounts are on the list, add them to listWidget
   QList<MyMoneyAccount>::const_iterator it_a;
-  for(it_a = subAccountsList.constBegin(); it_a != subAccountsList.constEnd(); ++it_a) {
+  for (it_a = subAccountsList.constBegin(); it_a != subAccountsList.constEnd(); ++it_a) {
     //do not add investment accounts
     if ((*it_a).isInvest())
       continue;

@@ -85,8 +85,7 @@ public:
   Private() :
       m_showAllSchedules(false),
       m_needReload(true),
-      m_netWorthGraphLastValidSize(400, 300)
-  {
+      m_netWorthGraphLastValidSize(400, 300) {
   }
 
   void addNameIndex(QMap<QString, MyMoneyAccount> &idx, const MyMoneyAccount& account);

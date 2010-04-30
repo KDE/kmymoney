@@ -452,8 +452,7 @@ RegisterItemDelegate::~RegisterItemDelegate()
 void RegisterItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
   RegisterItem* const item = m_register->itemAtRow(index.row());
-  if (item)
-  {
+  if (item) {
     QStyleOptionViewItemV4 opt = option;
     initStyleOption(&opt, index);
     item->paintRegisterCell(painter, opt, index);
@@ -1449,8 +1448,7 @@ void Register::mouseReleaseEvent(QMouseEvent *e)
 
 void Register::contextMenuEvent(QContextMenuEvent *e)
 {
-  if (e->reason() == QContextMenuEvent::Mouse)
-  {
+  if (e->reason() == QContextMenuEvent::Mouse) {
     selectItem(rowAt(e->y()), columnAt(e->x()));
   }
   openContextMenu();

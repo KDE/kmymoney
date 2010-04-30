@@ -126,7 +126,7 @@ KBudgetView::KBudgetView(QWidget *parent) :
   connect(m_budgetList, SIGNAL(customContextMenuRequested(const QPoint&)),
           this, SLOT(slotOpenContextMenu(const QPoint&)));
   connect(m_budgetList, SIGNAL(itemChanged(QTreeWidgetItem*, int)), this, SLOT(slotRenameBudget(QTreeWidgetItem*)));
-  connect(m_budgetList->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), this, SLOT(slotSelectBudget()));
+  connect(m_budgetList->selectionModel(), SIGNAL(selectionChanged(QItemSelection, QItemSelection)), this, SLOT(slotSelectBudget()));
 
   connect(m_cbBudgetSubaccounts, SIGNAL(clicked()), this, SLOT(cb_includesSubaccounts_clicked()));
 
@@ -228,7 +228,7 @@ void KBudgetView::loadBudgets(void)
 
     //sort the list by name
     m_budgetList->sortItems(0, Qt::AscendingOrder);
-    
+
     if (item->budget().id() == id) {
       m_budget = (*it);
       currentItem = item;
@@ -555,11 +555,11 @@ void KBudgetView::slotRenameBudget(QTreeWidgetItem* p)
   KBudgetListItem *pBudget = dynamic_cast<KBudgetListItem*>(p);
 
   //if there is no current item selected, exit
-   if (m_budgetInEditing == false || !m_budgetList->currentItem() || p != m_budgetList->currentItem())
+  if (m_budgetInEditing == false || !m_budgetList->currentItem() || p != m_budgetList->currentItem())
     return;
-   
-   m_budgetInEditing = false;
-  
+
+  m_budgetInEditing = false;
+
   //kDebug() << "[KPayeesView::slotRenamePayee]";
   // create a copy of the new name without appended whitespaces
   QString new_name = p->text(0);

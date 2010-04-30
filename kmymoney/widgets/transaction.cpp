@@ -297,8 +297,7 @@ void Transaction::paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &o
     style->drawItemText(painter, option.rect, align, option.palette, true, txt, m_selected ? QPalette::HighlightedText : QPalette::Text);
 
     // draw the grid if it's needed
-    if (KMyMoneySettings::showGrid())
-    {
+    if (KMyMoneySettings::showGrid()) {
       const int gridHint = style->styleHint(QStyle::SH_Table_GridLineColor, &option, widget);
       const QPen gridPen = QPen(QColor(static_cast<QRgb>(gridHint)), 0);
       QPen old = painter->pen();
