@@ -641,6 +641,10 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       if (!t_in.m_price.isZero()) {
         s1.setPrice(t_in.m_price);
       } else {
+        if(t_in.m_shares.isZero()) {
+          KMessageBox::information(0, i18n("This imported statement contains investment transactions with no share amount.  These transactions will be ignored."), i18n("No share amount provided"), QString("BlankAmount"));
+          return;
+        }
         s1.setPrice(((t_in.m_amount - t_in.m_fees) / t_in.m_shares).convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision())));
       }
 
