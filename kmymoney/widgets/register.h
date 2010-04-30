@@ -580,8 +580,6 @@ protected slots:
   void slotEnsureItemVisible(void);
   void slotDoubleClicked(int row, int);
 
-  void slotAutoColumnSizing(int section);
-
 signals:
   void selectionChanged(void);
   void selectionChanged(const KMyMoneyRegister::SelectedTransactions& list);

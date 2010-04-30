@@ -522,9 +522,6 @@ Register::Register(QWidget *parent) :
 
   connect(this, SIGNAL(cellClicked(int, int)), this, SLOT(selectItem(int, int)));
   connect(this, SIGNAL(cellDoubleClicked(int, int)), this, SLOT(slotDoubleClicked(int, int)));
-
-  // double clicking the header turns on auto column sizing
-  connect(horizontalHeader(), SIGNAL(sectionSizeChanged(int)), this, SLOT(slotAutoColumnSizing(int)));
 }
 
 Register::~Register()
@@ -532,31 +529,6 @@ Register::~Register()
   clear();
   //delete m_tooltip;
   //m_tooltip = 0;
-}
-
-void Register::slotAutoColumnSizing(int section)
-{
-  Q_UNUSED(section)
-#if 0
-  // this is some trial code to make the col sizes adjustable
-  // there are some drawbacks though: what when we have a register
-  // but no account? (ipwizard 2007-11-06)
-  if (isUpdatesEnabled()) {
-    int w = viewport()->width();
-    QString size;
-    for (int i = 0; i < columnCount(); ++i) {
-      if (i)
-        size += ",";
-      if (i == DetailColumn) {
-        size += "0";
-        continue;
-      }
-      size += QString("%1").arg((columnWidth(i) * 100) / w);
-    }
-    qDebug("size = %s", size.data());
-    m_account.setValue("kmm-ledger-column-width", size);
-  }
-#endif
 }
 
 bool Register::eventFilter(QObject* o, QEvent* e)
