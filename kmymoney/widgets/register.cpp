@@ -40,6 +40,8 @@
 #include <QDropEvent>
 #include <QDragMoveEvent>
 #include <QPaintEvent>
+#include <QHeaderView>
+#include <QStyleOptionViewItem>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -235,7 +237,6 @@ bool ItemPtrVector::item_cmp(RegisterItem* i1, RegisterItem* i2)
 GroupMarker::GroupMarker(Register *parent, const QString& txt) :
     RegisterItem(parent),
     m_txt(txt),
-    m_drawCounter(parent->drawCounter() - 1), // make sure we get painted the first time around
     m_showDate(false)
 {
   int h;
@@ -270,41 +271,31 @@ GroupMarker::~GroupMarker()
   }
 }
 
-void GroupMarker::paintRegisterCell(QPainter* painter, int row, int /* col */, const QRect& _r, bool /*selected*/, const QColorGroup& _cg)
+void GroupMarker::paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &option, const QModelIndex &index)
 {
-  // avoid painting the marker twice for the same update round
-  unsigned int drawCounter = m_parent->drawCounter();
-  if (m_drawCounter == drawCounter) {
-    return;
-  }
-  m_drawCounter = drawCounter;
-
-  QRect r(_r);
+  QRect r(option.rect);
   painter->save();
-  painter->translate(-r.x(), -r.y());
 
   // the group marker always uses all cols
-  r.setX(m_parent->columnPos(0));
-  r.setWidth(m_parent->visibleWidth());
+  r.setX(m_parent->horizontalHeader()->sectionPosition(0));
+  r.setWidth(m_parent->viewport()->width());
   painter->translate(r.x(), r.y());
 
   QRect cellRect;
   cellRect.setX(0);
   cellRect.setY(0);
-  cellRect.setWidth(m_parent->visibleWidth());
-  cellRect.setHeight(m_parent->rowHeight(row + m_startRow));
+  cellRect.setWidth(m_parent->viewport()->width());
+  cellRect.setHeight(m_parent->rowHeight(index.row()));
 
-  // clear out cell rectangle
-  QColorGroup cg(_cg);
-  setupColors(cg);
+  option.palette.setColor(QColorGroup::Base, KMyMoneyGlobalSettings::groupMarkerColor());
 
-  QBrush backgroundBrush(cg.base());
+  QBrush backgroundBrush(option.palette.color(QColorGroup::Base));
   painter->fillRect(cellRect, backgroundBrush);
   painter->setPen(KMyMoneyGlobalSettings::listGridColor());
   painter->drawLine(cellRect.x(), cellRect.height() - 1, cellRect.width(), cellRect.height() - 1);
 
   // now write the text
-  painter->setPen(cg.text());
+  painter->setPen(option.palette.color(QColorGroup::Text));
   QFont font = painter->font();
   font.setBold(true);
   painter->setFont(font);
@@ -316,19 +307,16 @@ void GroupMarker::paintRegisterCell(QPainter* painter, int row, int /* col */, c
   // now it's time to draw the background
   painter->drawPixmap(cellRect, *m_bg);
 
-  // translate back
-  painter->translate(-r.x(), -r.y());
-
   // in case we need to show the date, we just paint it in col 1
   if (m_showDate) {
-    r.setX(m_parent->columnPos(1));
+    r.setX(m_parent->horizontalHeader()->sectionPosition(1));
     r.setWidth(m_parent->columnWidth(1));
     painter->translate(r.x(), r.y());
 
     cellRect.setX(0);
     cellRect.setY(0);
     cellRect.setWidth(m_parent->columnWidth(1));
-    cellRect.setHeight(m_parent->rowHeight(row + m_startRow));
+    cellRect.setHeight(m_parent->rowHeight(index.row()));
 
     font.setBold(false);
     painter->setFont(font);
@@ -336,11 +324,6 @@ void GroupMarker::paintRegisterCell(QPainter* painter, int row, int /* col */, c
   }
 
   painter->restore();
-}
-
-void GroupMarker::setupColors(QColorGroup& cg)
-{
-  cg.setColor(QColorGroup::Base, KMyMoneyGlobalSettings::groupMarkerColor());
 }
 
 int GroupMarker::rowHeightHint(void) const
@@ -369,12 +352,6 @@ FiscalYearGroupMarker::FiscalYearGroupMarker(Register* parent, const QDate& date
 {
 }
 
-void FiscalYearGroupMarker::setupColors(QColorGroup& cg)
-{
-  cg.setColor(QColorGroup::Base, KMyMoneyGlobalSettings::groupMarkerColor());
-}
-
-
 SimpleDateGroupMarker::SimpleDateGroupMarker(Register* parent, const QDate& date, const QString& txt) :
     FancyDateGroupMarker(parent, date, txt)
 {
@@ -388,38 +365,23 @@ int SimpleDateGroupMarker::rowHeightHint(void) const
   return RegisterItem::rowHeightHint() / 2;
 }
 
-void SimpleDateGroupMarker::paintRegisterCell(QPainter* painter, int row, int /*col*/, const QRect& _r, bool /*selected*/, const QColorGroup& _cg)
+void SimpleDateGroupMarker::paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &option, const QModelIndex &index)
 {
-  QRect r(_r);
+  QRect cellRect = option.rect;
   painter->save();
-  painter->translate(-r.x(), -r.y());
+  cellRect.setWidth(m_parent->viewport()->width());
+  cellRect.setHeight(m_parent->rowHeight(index.row() + m_startRow));
 
-  // the group marker always uses all cols
-  r.setX(m_parent->columnPos(0));
-  r.setWidth(m_parent->visibleWidth());
-  painter->translate(r.x(), r.y());
-
-  QRect cellRect;
-  cellRect.setX(0);
-  cellRect.setY(0);
-  cellRect.setWidth(m_parent->visibleWidth());
-  cellRect.setHeight(m_parent->rowHeight(row + m_startRow));
-
-  // clear out cell rectangle
-  QColorGroup cg(_cg);
   if (m_alternate)
-    cg.setColor(QColorGroup::Base, KMyMoneyGlobalSettings::listColor());
+    option.palette.setColor(QPalette::Base, KMyMoneyGlobalSettings::listColor());
   else
-    cg.setColor(QColorGroup::Base, KMyMoneyGlobalSettings::listBGColor());
-  QBrush backgroundBrush(cg.base());
-  // backgroundBrush.setStyle(Qt::DiagCrossPattern);
+    option.palette.setColor(QPalette::Base, KMyMoneyGlobalSettings::listBGColor());
+  QBrush backgroundBrush(option.palette.color(QPalette::Base));
   backgroundBrush.setStyle(Qt::Dense5Pattern);
   backgroundBrush.setColor(KMyMoneyGlobalSettings::listGridColor());
   painter->eraseRect(cellRect);
   painter->fillRect(cellRect, backgroundBrush);
   painter->setPen(KMyMoneyGlobalSettings::listGridColor());
-  painter->drawLine(cellRect.x(), cellRect.height() - 1, cellRect.width(), cellRect.height() - 1);
-
   painter->restore();
 }
 
@@ -479,6 +441,25 @@ ReconcileGroupMarker::ReconcileGroupMarker(Register* parent, MyMoneySplit::recon
   }
 }
 
+RegisterItemDelegate::RegisterItemDelegate(Register *parent) : QStyledItemDelegate(parent), m_register(parent)
+{
+}
+
+RegisterItemDelegate::~RegisterItemDelegate()
+{
+}
+
+void RegisterItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
+{
+  RegisterItem* const item = m_register->itemAtRow(index.row());
+  if (item)
+  {
+    QStyleOptionViewItemV4 opt = option;
+    initStyleOption(&opt, index);
+    item->paintRegisterCell(painter, opt, index);
+  }
+}
+
 Register::Register(QWidget *parent) :
     TransactionEditorContainer(parent),
     m_selectAnchor(0),
@@ -487,101 +468,65 @@ Register::Register(QWidget *parent) :
     m_lastItem(0),
     m_firstErronous(0),
     m_lastErronous(0),
-    m_markErronousTransactions(0),
     m_rowHeightHint(0),
     m_ledgerLensForced(false),
-    m_selectionMode(Multi),
+    m_selectionMode(QTableWidget::MultiSelection),
     m_listsDirty(false),
     m_ignoreNextButtonRelease(false),
     m_needInitialColumnResize(false),
-    m_buttonState(Qt::ButtonState(0)),
-    m_drawCounter(0)
+    m_buttonState(Qt::ButtonState(0))
 {
-  setNumCols(MaxColumns);
-  setCurrentCell(0, 1);
-  // we do our own sorting
-  setSorting(false);
+  m_itemDelegate = new RegisterItemDelegate(this);
+
+  setEditTriggers(QAbstractItemView::NoEditTriggers);
+  setColumnCount(MaxColumns);
+  setSelectionBehavior(QAbstractItemView::SelectRows);
+  setAcceptDrops(true);
+  setShowGrid(false);
+  setContextMenuPolicy(Qt::DefaultContextMenu);
+
+  setHorizontalHeaderItem(NumberColumn, new QTableWidgetItem());
+  setHorizontalHeaderItem(DateColumn, new QTableWidgetItem());
+  setHorizontalHeaderItem(AccountColumn, new QTableWidgetItem());
+  setHorizontalHeaderItem(SecurityColumn, new QTableWidgetItem());
+  setHorizontalHeaderItem(DetailColumn, new QTableWidgetItem());
+  setHorizontalHeaderItem(ReconcileFlagColumn, new QTableWidgetItem());
+  setHorizontalHeaderItem(PaymentColumn, new QTableWidgetItem());
+  setHorizontalHeaderItem(DepositColumn, new QTableWidgetItem());
+  setHorizontalHeaderItem(QuantityColumn, new QTableWidgetItem());
+  setHorizontalHeaderItem(PriceColumn, new QTableWidgetItem());
+  setHorizontalHeaderItem(ValueColumn, new QTableWidgetItem());
+  setHorizontalHeaderItem(BalanceColumn, new QTableWidgetItem());
 
   // keep the following list in sync with KMyMoneyRegister::Column in transaction.h
-  horizontalHeader()->setLabel(NumberColumn, i18nc("Cheque Number", "No."));
-  horizontalHeader()->setLabel(DateColumn, i18n("Date"));
-  horizontalHeader()->setLabel(AccountColumn, i18n("Account"));
-  horizontalHeader()->setLabel(SecurityColumn, i18n("Security"));
-  horizontalHeader()->setLabel(DetailColumn, i18n("Details"));
-  horizontalHeader()->setLabel(ReconcileFlagColumn, i18n("C"));
-  horizontalHeader()->setLabel(PaymentColumn, i18n("Payment"));
-  horizontalHeader()->setLabel(DepositColumn, i18n("Deposit"));
-  horizontalHeader()->setLabel(QuantityColumn, i18n("Quantity"));
-  horizontalHeader()->setLabel(PriceColumn, i18n("Price"));
-  horizontalHeader()->setLabel(ValueColumn, i18n("Value"));
-  horizontalHeader()->setLabel(BalanceColumn, i18n("Balance"));
+  horizontalHeaderItem(NumberColumn)->setText(i18nc("Cheque Number", "No."));
+  horizontalHeaderItem(DateColumn)->setText(i18n("Date"));
+  horizontalHeaderItem(AccountColumn)->setText(i18n("Account"));
+  horizontalHeaderItem(SecurityColumn)->setText(i18n("Security"));
+  horizontalHeaderItem(DetailColumn)->setText(i18n("Details"));
+  horizontalHeaderItem(ReconcileFlagColumn)->setText(i18n("C"));
+  horizontalHeaderItem(PaymentColumn)->setText(i18n("Payment"));
+  horizontalHeaderItem(DepositColumn)->setText(i18n("Deposit"));
+  horizontalHeaderItem(QuantityColumn)->setText(i18n("Quantity"));
+  horizontalHeaderItem(PriceColumn)->setText(i18n("Price"));
+  horizontalHeaderItem(ValueColumn)->setText(i18n("Value"));
+  horizontalHeaderItem(BalanceColumn)->setText(i18n("Balance"));
 
-  setLeftMargin(0);
   verticalHeader()->hide();
 
-  for (int i = 0; i < numCols(); ++i)
-    setColumnStretchable(i, false);
-
-  horizontalHeader()->setResizeEnabled(false);
-  horizontalHeader()->setMovingEnabled(false);
-  horizontalHeader()->setClickEnabled(false);
+  horizontalHeader()->setResizeMode(QHeaderView::Fixed);
+  horizontalHeader()->setSortIndicatorShown(false);
+  horizontalHeader()->setMovable(false);
+  horizontalHeader()->setClickable(false);
 
   horizontalHeader()->installEventFilter(this);
 
-  // never show horizontal scroll bars
-  setHScrollBarMode(Q3ScrollView::AlwaysOff);
-
-  connect(this, SIGNAL(clicked(int, int, int, const QPoint&)), this, SLOT(selectItem(int, int, int, const QPoint&)));
-  connect(this, SIGNAL(doubleClicked(int, int, int, const QPoint&)), this, SLOT(slotDoubleClicked(int, int, int, const QPoint&)));
+  connect(this, SIGNAL(cellClicked(int, int)), this, SLOT(selectItem(int, int)));
+  connect(this, SIGNAL(cellDoubleClicked(int, int)), this, SLOT(slotDoubleClicked(int, int)));
 
   // double clicking the header turns on auto column sizing
   connect(horizontalHeader(), SIGNAL(sectionSizeChanged(int)), this, SLOT(slotAutoColumnSizing(int)));
-
-  //DND
-  setAcceptDrops(true);
 }
-
-// DND
-Transaction* Register::dropTransaction(QPoint cPos) const
-{
-  Transaction* t = 0;
-  cPos -= QPoint(verticalHeader()->width(), horizontalHeader()->height());
-  if (cPos.y() >= 0) {
-    cPos += QPoint(contentsX(), contentsY());
-    int row = rowAt(cPos.y());
-    t = dynamic_cast<Transaction*>(itemAtRow(row));
-  }
-  return t;
-}
-
-void Register::dragMoveEvent(QDragMoveEvent* event)
-{
-  if (K3URLDrag::canDecode(event)) {
-    event->ignore();
-    Transaction* t = dropTransaction(event->pos());
-    if (t && !t->isScheduled()) {
-      event->accept();
-    }
-  }
-}
-
-void Register::dropEvent(QDropEvent* event)
-{
-  qDebug("Register::dropEvent");
-  if (K3URLDrag::canDecode(event)) {
-    event->ignore();
-    Transaction* t = dropTransaction(event->pos());
-    if (t && !t->isScheduled()) {
-      qDebug("Drop was ok");
-      KUrl::List urls;
-      K3URLDrag::decode(event, urls);
-      qDebug("List is '%s'", qPrintable(urls.toStringList().join(";")));
-      event->accept();
-    }
-  }
-}
-// DND end
-
 
 Register::~Register()
 {
@@ -598,9 +543,9 @@ void Register::slotAutoColumnSizing(int section)
   // there are some drawbacks though: what when we have a register
   // but no account? (ipwizard 2007-11-06)
   if (isUpdatesEnabled()) {
-    int w = visibleWidth();
+    int w = viewport()->width();
     QString size;
-    for (int i = 0; i < numCols(); ++i) {
+    for (int i = 0; i < columnCount(); ++i) {
       if (i)
         size += ",";
       if (i == DetailColumn) {
@@ -639,7 +584,7 @@ bool Register::eventFilter(QObject* o, QEvent* e)
     }
   }
 
-  return Q3Table::eventFilter(o, e);
+  return QTableWidget::eventFilter(o, e);
 }
 
 void Register::setupRegister(const MyMoneyAccount& account, const QList<Column>& cols)
@@ -675,8 +620,8 @@ void Register::setupRegister(const MyMoneyAccount& account, bool showAccountColu
   for (int i = 0; i < MaxColumns; ++i)
     hideColumn(i);
 
-  horizontalHeader()->setLabel(PaymentColumn, i18nc("Payment made from account", "Payment"));
-  horizontalHeader()->setLabel(DepositColumn, i18nc("Deposit into account", "Deposit"));
+  horizontalHeaderItem(PaymentColumn)->setText(i18nc("Payment made from account", "Payment"));
+  horizontalHeaderItem(DepositColumn)->setText(i18nc("Deposit into account", "Deposit"));
 
   if (account.id().isEmpty()) {
     setUpdatesEnabled(enabled);
@@ -752,23 +697,23 @@ void Register::setupRegister(const MyMoneyAccount& account, bool showAccountColu
   // headings
   switch (account.accountType()) {
   case MyMoneyAccount::CreditCard:
-    horizontalHeader()->setLabel(PaymentColumn, i18nc("Payment made with credit card", "Charge"));
-    horizontalHeader()->setLabel(DepositColumn, i18nc("Payment towards credit card", "Payment"));
+    horizontalHeaderItem(PaymentColumn)->setText(i18nc("Payment made with credit card", "Charge"));
+    horizontalHeaderItem(DepositColumn)->setText(i18nc("Payment towards credit card", "Payment"));
     break;
   case MyMoneyAccount::Asset:
   case MyMoneyAccount::AssetLoan:
-    horizontalHeader()->setLabel(PaymentColumn, i18nc("Decrease of asset/liability value", "Decrease"));
-    horizontalHeader()->setLabel(DepositColumn, i18nc("Increase of asset/liability value", "Increase"));
+    horizontalHeaderItem(PaymentColumn)->setText(i18nc("Decrease of asset/liability value", "Decrease"));
+    horizontalHeaderItem(DepositColumn)->setText(i18nc("Increase of asset/liability value", "Increase"));
     break;
   case MyMoneyAccount::Liability:
   case MyMoneyAccount::Loan:
-    horizontalHeader()->setLabel(PaymentColumn, i18nc("Increase of asset/liability value", "Increase"));
-    horizontalHeader()->setLabel(DepositColumn, i18nc("Decrease of asset/liability value", "Decrease"));
+    horizontalHeaderItem(PaymentColumn)->setText(i18nc("Increase of asset/liability value", "Increase"));
+    horizontalHeaderItem(DepositColumn)->setText(i18nc("Decrease of asset/liability value", "Decrease"));
     break;
   case MyMoneyAccount::Income:
   case MyMoneyAccount::Expense:
-    horizontalHeader()->setLabel(PaymentColumn, i18n("Income"));
-    horizontalHeader()->setLabel(DepositColumn, i18n("Expense"));
+    horizontalHeaderItem(PaymentColumn)->setText(i18n("Income"));
+    horizontalHeaderItem(DepositColumn)->setText(i18n("Expense"));
     break;
 
   default:
@@ -963,6 +908,11 @@ void Register::setupItemIndex(int rowCount)
   m_itemIndex.clear();
   m_itemIndex.reserve(rowCount);
 
+  // setup the item delegate for all the rows
+  for (int i = 0; i < rowCount; ++i) {
+    setItemDelegateForRow(i, m_itemDelegate);
+  }
+
   // fill index array
   rowCount = 0;
   RegisterItem* prev = 0;
@@ -983,21 +933,6 @@ void Register::setupItemIndex(int rowCount)
       m_itemIndex.push_back(item);
     }
   }
-}
-
-void Register::drawContents(QPainter *p, int cx, int cy, int cw, int ch)
-{
-  // the QTable::drawContents() method does not honor the block update flag
-  // so we take care of it here
-  if (testAttribute(Qt::WA_UpdatesDisabled))
-    return;
-
-  if (m_listsDirty) {
-    updateRegister(KMyMoneyGlobalSettings::ledgerLens() | !KMyMoneyGlobalSettings::transactionForm());
-  }
-
-  ++m_drawCounter;
-  Q3Table::drawContents(p, cx, cy, cw, ch);
 }
 
 void Register::updateAlternate(void) const
@@ -1069,12 +1004,12 @@ void Register::updateRegister(bool forceUpdateRowHeight)
     // create item index
     setupItemIndex(rowCount);
 
-    bool needUpdateHeaders = (numRows() != rowCount) | forceUpdateRowHeight;
+    bool needUpdateHeaders = (QTableWidget::rowCount() != rowCount) | forceUpdateRowHeight;
 
     // setup QTable.  Make sure to suppress screen updates for now
     bool enabled = updatesEnabled();
     setUpdatesEnabled(false);
-    setNumRows(rowCount);
+    setRowCount(rowCount);
 
     // if we need to update the headers, we do it now for all rows
     // again we make sure to suppress screen updates
@@ -1095,9 +1030,6 @@ void Register::updateRegister(bool forceUpdateRowHeight)
       verticalHeader()->setUpdatesEnabled(true);
     }
 
-    // add or remove scrollbars as required
-    updateScrollBars();
-
     setUpdatesEnabled(enabled);
 
     // force resizeing of the columns if necessary
@@ -1105,7 +1037,7 @@ void Register::updateRegister(bool forceUpdateRowHeight)
       QTimer::singleShot(0, this, SLOT(resize()));
       m_needInitialColumnResize = false;
     } else {
-      updateContents();
+      update();
 
       // if the number of rows changed, we might need to resize the register
       // to make sure we reflect the current visibility of the scrollbars.
@@ -1126,22 +1058,9 @@ int Register::rowHeightHint(void) const
   return m_rowHeightHint;
 }
 
-void Register::paintCell(QPainter* painter, int row, int col, const QRect& r, bool selected, const QColorGroup& cg)
-{
-  // determine the item that we need to paint in the row and call it's paintRegisterCell() method
-  if ((row < 0) || (row > m_itemIndex.size())) {
-    qDebug("Register::paintCell: row %d out of bounds %d", row, (int)m_itemIndex.size());
-    return;
-  }
-
-  // qDebug("paintCell(%d,%d)", row, col);
-  RegisterItem* const item = m_itemIndex[row];
-  item->paintRegisterCell(painter, row - item->startRow(), col, r, selected, cg);
-}
-
 void Register::focusInEvent(QFocusEvent* ev)
 {
-  Q3Table::focusInEvent(ev);
+  QTableWidget::focusInEvent(ev);
   if (m_focusItem) {
     m_focusItem->setFocus(true, false);
     repaintItems(m_focusItem);
@@ -1153,20 +1072,17 @@ bool Register::event(QEvent* event)
   if (event->type() == QEvent::ToolTip) {
     QHelpEvent *helpEvent = static_cast<QHelpEvent *>(event);
 
-    QPoint cpos(helpEvent->x() + contentsX(), helpEvent->y() + contentsY());
-    int row = rowAt(cpos.y());
-    int col = columnAt(cpos.x());
-    //qDebug("R:%d C:%d (X:%d Y:%d)", row, col, cpos.x(), cpos.y());
+    int row = rowAt(helpEvent->y());
+    int col = columnAt(helpEvent->x());
     RegisterItem* item = itemAtRow(row);
     if (!item)
       return true;
 
-    QPoint relPos(cpos.x() - columnPos(0), cpos.y() - rowPos(item->startRow()));
     row = row - item->startRow();
 
     QString msg;
     QRect rect;
-    if (!item->maybeTip(cpos, row, col, rect, msg))
+    if (!item->maybeTip(helpEvent->pos(), row, col, rect, msg))
       return true;
 
     if (!msg.isEmpty()) {
@@ -1186,7 +1102,7 @@ void Register::focusOutEvent(QFocusEvent* ev)
     m_focusItem->setFocus(false, false);
     repaintItems(m_focusItem);
   }
-  Q3Table::focusOutEvent(ev);
+  QTableWidget::focusOutEvent(ev);
 }
 
 void Register::resize(void)
@@ -1200,7 +1116,7 @@ void Register::resize(int col)
   setUpdatesEnabled(false);
 
   // resize the register
-  int w = visibleWidth();
+  int w = viewport()->width();
 
   // TODO I was playing a bit with manual ledger resizing but could not get
   // a good solution. I just leave the code around, so that maybe others
@@ -1308,7 +1224,7 @@ void Register::resize(int col)
   }
 #endif
 
-  for (int i = 0; i < numCols(); ++i) {
+  for (int i = 0; i < columnCount(); ++i) {
     if (i == col)
       continue;
 
@@ -1317,7 +1233,7 @@ void Register::resize(int col)
   setColumnWidth(col, w);
 
   setUpdatesEnabled(enabled);
-  updateContents();
+  update();
 }
 
 
@@ -1328,12 +1244,10 @@ void Register::adjustColumn(int col)
 #else
   QString msg = "%1 adjusting column %2";
   ::timetrace(qPrintable(msg.arg("Start").arg(col)));
-  Q3Header *topHeader = horizontalHeader();
+  QHeaderView *topHeader = horizontalHeader();
   QFontMetrics cellFontMetrics(KMyMoneyGlobalSettings::listCellFont());
 
-  int w = topHeader->fontMetrics().width(topHeader->label(col)) + 10;
-  if (topHeader->iconSet(col))
-    w += topHeader->iconSet(col)->pixmap().width();
+  int w = topHeader->fontMetrics().width(topHeader->model()->data(topHeader->model()->index(0, col)).toString()) + 10;
   w = qMax(w, 20);
 
   int maxWidth = 0;
@@ -1400,27 +1314,7 @@ void Register::repaintItems(RegisterItem* first, RegisterItem* last)
   if (last == 0)
     last = first;
 
-  // qDebug("repaintItems from row %d to row %d", first->startRow(), last->startRow()+last->numRowsRegister()-1);
-
-  // the following code is based on code I found in
-  // QTable::cellGeometry() and QTable::updateCell()  (ipwizard)
-  QRect cg(0,
-           rowPos(first->startRow()),
-           visibleWidth(),
-           rowPos(last->startRow() + last->numRowsRegister() - 1) - rowPos(first->startRow()) + rowHeight(last->startRow() + last->numRowsRegister() - 1));
-
-  QRect r(contentsToViewport(QPoint(cg.x() - 2, cg.y() - 2)), QSize(cg.width() + 4, cg.height() + 4));
-
-  QRect tmp = m_lastRepaintRect | r;
-  if (abs(tmp.height()) > 3000) {
-    // make sure that the previously triggered repaint has been done before we
-    // trigger the next. Not having this used to cause some trouble when changing
-    // the focus within a 2000 item ledger from the last to the first item.
-    QCoreApplication::processEvents(QEventLoop::ExcludeUserInput, 10);
-  }
-  m_lastRepaintRect = r;
-  QApplication::postEvent(viewport(), new QPaintEvent(r));
-
+  // TODO: port the register - trigger a repaint
 }
 
 void Register::clearSelection(void)
@@ -1542,7 +1436,7 @@ int Register::selectedItemsCount(void) const
   return cnt;
 }
 
-void Register::contentsMouseReleaseEvent(QMouseEvent *e)
+void Register::mouseReleaseEvent(QMouseEvent *e)
 {
   if (m_ignoreNextButtonRelease) {
     m_ignoreNextButtonRelease = false;
@@ -1550,10 +1444,19 @@ void Register::contentsMouseReleaseEvent(QMouseEvent *e)
   }
 
   m_buttonState = e->state();
-  Q3Table::contentsMouseReleaseEvent(e);
+  QTableWidget::mouseReleaseEvent(e);
 }
 
-void Register::selectItem(int row, int col, int button, const QPoint& /* mousePos */)
+void Register::contextMenuEvent(QContextMenuEvent *e)
+{
+  if (e->reason() == QContextMenuEvent::Mouse)
+  {
+    selectItem(rowAt(e->y()), columnAt(e->x()));
+  }
+  openContextMenu();
+}
+
+void Register::selectItem(int row, int col)
 {
   if (row >= 0 && row < m_itemIndex.size()) {
     RegisterItem* item = m_itemIndex[row];
@@ -1571,19 +1474,8 @@ void Register::selectItem(int row, int col, int button, const QPoint& /* mousePo
     Transaction* t = dynamic_cast<Transaction*>(item);
     if (t) {
       if (!id.isEmpty()) {
-        switch (button & Qt::MouseButtonMask) {
-        case Qt::RightButton:
-          emit openContextMenu();
-          break;
-
-        case Qt::LeftButton:
-          if (t && col == ReconcileFlagColumn && selectedItemsCount() == 1 && !t->isScheduled())
-            emit reconcileStateColumnClicked(t);
-          break;
-
-        default:
-          break;
-        }
+        if (t && col == ReconcileFlagColumn && selectedItemsCount() == 1 && !t->isScheduled())
+          emit reconcileStateColumnClicked(t);
       } else {
         emit emptyItemSelected();
       }
@@ -1672,7 +1564,7 @@ void Register::selectItem(RegisterItem* item, bool dontChangeSelections)
           m_selectAnchor = item;
       }
 
-      if (m_selectionMode == Multi) {
+      if (m_selectionMode == MultiSelection) {
         switch (buttonState & (Qt::ShiftModifier | Qt::ControlModifier)) {
         case Qt::ControlModifier:
           okToSelect = sameEntryType;
@@ -1754,7 +1646,7 @@ void Register::ensureItemVisible(RegisterItem* item)
   QTimer::singleShot(0, this, SLOT(slotEnsureItemVisible()));
 }
 
-void Register::slotDoubleClicked(int row, int, int, const QPoint&)
+void Register::slotDoubleClicked(int row, int)
 {
   if (row >= 0 && row < m_itemIndex.size()) {
     RegisterItem* p = m_itemIndex[row];
@@ -1789,46 +1681,7 @@ void Register::slotEnsureItemVisible(void)
   setUpdatesEnabled(false);
   updateRegister();
   setUpdatesEnabled(enabled);
-
-  RegisterItem* item = m_ensureVisibleItem;
-  RegisterItem* prev = item->prevItem();
-  while (prev && !prev->isVisible())
-    prev = prev->prevItem();
-  RegisterItem* next = item->nextItem();
-  while (next && !next->isVisible())
-    next = next->nextItem();
-
-  int rowPrev, rowNext;
-  rowPrev = item->startRow();
-  rowNext = item->startRow() + item->numRowsRegister() - 1;
-
-  if (prev)
-    rowPrev = prev->startRow();
-  if (next)
-    rowNext = next->startRow() + next->numRowsRegister() - 1;
-
-  if (rowPrev < 0)
-    rowPrev = 0;
-  if (rowNext >= numRows())
-    rowNext = numRows() - 1;
-
-  int wt = contentsY();           // window top
-  int wh = visibleHeight();       // window height
-  int lt = rowPos(rowPrev);       // top of line above lens
-  int lb = rowPos(rowNext) + rowHeight(rowNext);     // bottom of line below lens
-
-  // only update widget, if the transaction is not fully visible
-  if (lt < wt || lb >= (wt + wh)) {
-    if (rowPrev >= 0) {
-      ensureCellVisible(rowPrev, 0);
-    }
-
-    ensureCellVisible(item->startRow(), 0);
-
-    if (rowNext < numRows()) {
-      ensureCellVisible(rowNext, 0);
-    }
-  }
+  scrollTo(model()->index(m_ensureVisibleItem->startRow(), 0));
 }
 
 TransactionSortField KMyMoneyRegister::textToSortOrder(const QString& text)
@@ -1851,60 +1704,6 @@ const QString KMyMoneyRegister::sortOrderToText(TransactionSortField idx)
 QString Register::text(int /*row*/, int /*col*/) const
 {
   return QString("a");
-}
-
-QWidget* Register::cellWidget(int row, int col) const
-{
-  // separated here in two if()s, because this method is called for each
-  // event from QTable::eventFilter and in the most cases it is -1, -1
-  if (row < 0 || col < 0)
-    return 0;
-
-  if (row > numRows() - 1 || col > numCols() - 1) {
-    if (numRows() && numCols())
-      qWarning("Register::cellWidget(%d,%d) out of bounds (%d,%d)", row, col, numRows(), numCols());
-    return 0;
-  }
-
-  if (!m_cellWidgets.count())
-    return 0;
-
-  QWidget* w = 0;
-  QPair<int, int> idx = qMakePair(row, col);
-  QMap<QPair<int, int>, QWidget*>::const_iterator it_w;
-
-  it_w = m_cellWidgets.constFind(idx);
-  if (it_w != m_cellWidgets.constEnd())
-    w = *it_w;
-  return w;
-}
-
-void Register::insertWidget(int row, int col, QWidget* w)
-{
-  if (row < 0 || col < 0 || row > numRows() - 1 || col > numCols() - 1) {
-    qWarning("Register::insertWidget(%d,%d) out of bounds", row, col);
-    return;
-  }
-
-  QPair<int, int> idx = qMakePair(row, col);
-  m_cellWidgets[idx] = w;
-}
-
-void Register::clearCellWidget(int row, int col)
-{
-  if (row < 0 || col < 0 || row > numRows() - 1 || col > numCols() - 1) {
-    qWarning("Register::clearCellWidget(%d,%d) out of bounds", row, col);
-    return;
-  }
-
-  QPair<int, int> idx = qMakePair(row, col);
-  QMap<QPair<int, int>, QWidget*>::iterator it_w;
-
-  it_w = m_cellWidgets.find(idx);
-  if (it_w != m_cellWidgets.end()) {
-    (*it_w)->deleteLater();
-    m_cellWidgets.erase(it_w);
-  }
 }
 
 QWidget* Register::createEditor(int /*row*/, int /*col*/, bool /*initFromCell*/) const
@@ -1947,30 +1746,13 @@ void Register::removeEditWidgets(QMap<QString, QWidget*>& editWidgets)
   // now delete the widgets
   KMyMoneyRegister::Transaction* t = dynamic_cast<KMyMoneyRegister::Transaction*>(focusItem());
   for (int row = t->startRow(); row < t->startRow() + t->numRowsRegister(true); ++row) {
-    for (int col = 0; col < numCols(); ++col) {
+    for (int col = 0; col < columnCount(); ++col) {
       if (cellWidget(row, col))
-        clearCellWidget(row, col);
+        setCellWidget(row, col, 0);
     }
     // make sure to reduce the possibly size to what it was before editing started
     setRowHeight(row, t->rowHeightHint());
   }
-}
-
-void Register::slotToggleErronousTransactions(void)
-{
-  // toggle switch
-  m_markErronousTransactions ^= 1;
-
-  // check if anything needs to be redrawn
-  KMyMoneyRegister::RegisterItem* p = m_firstErronous;
-  while (p && p->prevItem() != m_lastErronous) {
-    if (p->isErronous())
-      repaintItems(p);
-    p = p->nextItem();
-  }
-
-  // restart timer
-  QTimer::singleShot(500, this, SLOT(slotToggleErronousTransactions()));
 }
 
 RegisterItem* Register::itemById(const QString& id) const
@@ -1990,7 +1772,7 @@ RegisterItem* Register::itemById(const QString& id) const
 
 void Register::handleItemChange(RegisterItem* old, bool shift, bool control)
 {
-  if (m_selectionMode == Multi) {
+  if (m_selectionMode == MultiSelection) {
     if (shift) {
       selectRange(m_selectAnchor ? m_selectAnchor : old,
                   m_focusItem, false, true, (m_selectAnchor && !control) ? true : false);
@@ -2083,7 +1865,7 @@ void Register::scrollPage(int key, Qt::ButtonState state)
 
   switch (key) {
   case Qt::Key_PageUp:
-    while (height < visibleHeight() && item->prevItem()) {
+    while (height < viewport()->height() && item->prevItem()) {
       do {
         item = item->prevItem();
         if (item->isVisible())
@@ -2092,7 +1874,7 @@ void Register::scrollPage(int key, Qt::ButtonState state)
     }
     break;
   case Qt::Key_PageDown:
-    while (height < visibleHeight() && item->nextItem()) {
+    while (height < viewport()->height() && item->nextItem()) {
       do {
         if (item->isVisible())
           height += item->rowHeightHint();
@@ -2147,7 +1929,7 @@ void Register::scrollPage(int key, Qt::ButtonState state)
     handleItemChange(oldFocusItem, state & Qt::ShiftModifier, state & Qt::ControlModifier);
   }
 
-  if (m_focusItem && !m_focusItem->isSelected() && m_selectionMode == Single)
+  if (m_focusItem && !m_focusItem->isSelected() && m_selectionMode == SingleSelection)
     selectItem(item);
 
 }
@@ -2175,7 +1957,7 @@ void Register::keyPressEvent(QKeyEvent* ev)
     break;
 
   default:
-    Q3Table::keyPressEvent(ev);
+    QTableWidget::keyPressEvent(ev);
     break;
   }
 }

@@ -26,6 +26,8 @@
 #include <QList>
 #include <QPixmap>
 #include <QBoxLayout>
+#include <QHeaderView>
+#include <QApplication>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -205,206 +207,42 @@ void Transaction::setFocus(bool focus, bool updateLens)
   }
 }
 
-void Transaction::markAttachment(QPainter* painter, int /* row */, int /* col */, const QRect& r)
+bool Transaction::paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItemV4 &option, const QModelIndex &index)
 {
-  static QPixmap clip;
+  Q_UNUSED(painter)
 
-  const int m = 2;  // margin
-  int h = m_parent->rowHeightHint() - (2 * m);
-  int lx = r.topRight().x() - h;
-  if (isErronous())
-    lx -= h;
-  QRect cr(QPoint(lx - m, m), QSize(h, h));
-
-  painter->save();
-  if (clip.isNull()) {
-    clip = KIconLoader::global()->loadIcon("attach", KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState);
-    if (clip.height() > h) {
-      clip = clip.copy(0, 0, h, h);
-    }
+  if (m_reducedIntensity) {
+    option.palette.setColor(QPalette::Text, option.palette.color(QPalette::Text).lighter());
   }
-
-  painter->drawPixmap(QPoint(lx - m, m + (h - clip.height()) / 2), clip);
-  painter->restore();
-}
-
-void Transaction::markAsErronous(QPainter* painter, int /* row */, int /* col */, const QRect& r)
-{
-  const int m = 2;  // margin
-  int h = m_parent->rowHeightHint() - (2 * m);
-  QRect cr(QPoint(r.topRight().x() - h - m, m), QSize(h, h));
-
-  painter->save();
-  QPixmap attention;
-  attention.loadFromData(attentionSign, sizeof(attentionSign), 0, 0);
-
-  if (attention.height() > h) {
-    attention = attention.copy(0, 0, h, h);
-  }
-  painter->drawPixmap(QPoint(r.topRight().x() - h - m, m + (h - attention.height()) / 2), attention);
-  painter->restore();
-
-}
-
-bool Transaction::paintRegisterCellSetup(QPainter* painter, int& row, int& col, QRect& cellRect, QRect& textRect, QColorGroup& cg, QBrush& brush)
-{
-  if (m_reducedIntensity)
-    cg = m_parent->palette().disabled();
-
-  if (m_alternate)
-    cg.setColor(QColorGroup::Base, KMyMoneyGlobalSettings::listColor());
-  else
-    cg.setColor(QColorGroup::Base, KMyMoneyGlobalSettings::listBGColor());
-
-  cellRect.setX(0);
-  cellRect.setY(0);
-  cellRect.setWidth(m_parent->columnWidth(col));
-  cellRect.setHeight(m_parent->rowHeight(m_startRow + row));
-
-  textRect = cellRect;
-  textRect.setX(2);
-  textRect.setWidth(textRect.width() - 4);
 
   if (m_selected) {
-    brush = QBrush(cg.highlight());
-    painter->setPen(cg.highlightedText());
+    option.state |= QStyle::State_Selected;
   } else {
-    brush = QBrush(cg.base());
-    painter->setPen(cg.text());
+    option.state &= ~QStyle::State_Selected;
+  }
+
+  if (index.column() == 0) {
+    option.viewItemPosition = QStyleOptionViewItemV4::Beginning;
+  } else if (index.column() == MaxColumns - 1) {
+    option.viewItemPosition = QStyleOptionViewItemV4::End;
+  } else {
+    option.viewItemPosition = QStyleOptionViewItemV4::Middle;
   }
 
   // do we need to switch to the error color?
-  if (m_erronous && m_parent->markErronousTransactions()) {
-    painter->setPen(KMyMoneyGlobalSettings::listErronousTransactionColor());
+  if (m_erronous) {
+    option.palette.setColor(QPalette::Text, KMyMoneyGlobalSettings::listErronousTransactionColor());
   }
 
   // do we need to switch to the negative balance color?
-  if (col == BalanceColumn) {
+  if (index.column() == BalanceColumn) {
     bool showNegative = m_balance.isNegative();
     if (m_account.accountGroup() == MyMoneyAccount::Liability && !m_balance.isZero())
       showNegative = !showNegative;
     if (showNegative)
-      painter->setPen(KMyMoneyGlobalSettings::listNegativeValueColor());
+      option.palette.setColor(QPalette::Text, KMyMoneyGlobalSettings::listErronousTransactionColor());
   }
   return true;
-}
-
-void Transaction::paintRegisterCellFocus(QPainter* painter, int row, int col, const QRect& r, const QColorGroup& cg)
-{
-
-  if (m_focus) {
-    QPen oldPen = painter->pen();
-    QPen newPen = oldPen;
-    newPen.setWidth(0);
-
-    painter->setFont(KMyMoneyGlobalSettings::listCellFont());
-    painter->setPen(newPen);
-    painter->setPen(cg.foreground());
-    painter->setPen(Qt::DotLine);
-    // for the first Row, we need to paint the top
-    QPoint start, end;
-#if 0
-    if (row == 0) {
-      start = QPoint(r.x(), r.y() + 1);
-      end = QPoint(r.x() + r.width(), r.y() + 1);
-      if (col == 0) {
-        start.rx()++;
-      } else if (col == m_parent->lastCol()) {
-        end.rx()--;
-      }
-      // painter->drawLine(start, end);
-      painter->drawWinFocusRect(QRect(start, end));
-    }
-    // for the last Row, we need to paint the bottom
-    if (row == numRows() - 1) {
-      start = QPoint(r.x(), r.y() + r.height() - 1);
-      end = QPoint(r.x() + r.width(), r.y() + r.height() - 1);
-      if (col == 0) {
-        start.rx()++;
-      } else if (col == m_parent->lastCol()) {
-        end.rx()--;
-      }
-      // painter->drawLine(start, end);
-      painter->drawWinFocusRect(QRect(start, end));
-    }
-    // for the first col, we need to paint the left
-    if (col == 0) {
-      start = QPoint(r.x() + 1, r.y());
-      end = QPoint(r.x() + 1, r.y() + r.height());
-      if (row == 0) {
-        start.ry()++;
-      } else if (row == numRows() - 1) {
-        end.ry()--;
-      }
-      //painter->drawLine(start, end);
-      painter->drawWinFocusRect(QRect(start, end));
-    }
-    // for the last col, we need to paint the left
-    if (col == m_parent->lastCol()) {
-      start = QPoint(r.x() + r.width() - 1, r.y());
-      end = QPoint(r.x() + r.width() - 1, r.y() + r.height());
-      if (row == 0) {
-        start.ry()++;
-      } else if (row == numRows() - 1) {
-        end.ry()--;
-      }
-      //painter->drawLine(start, end);
-      painter->drawWinFocusRect(QRect(start, end));
-    }
-#endif
-    if (row == 0) {
-      start = QPoint(r.x(), r.y());
-      end = QPoint(r.x() + r.width(), r.y() + 1);
-      if (col == 0) {
-        start.rx()++;
-      } else if (col == m_parent->lastCol()) {
-        end.rx()--;
-      }
-      // painter->drawLine(start, end);
-//FIXME: Port to KDE4
-      //painter->drawWinFocusRect(QRect(start, end));
-    }
-    // for the last Row, we need to paint the bottom
-    if (row == numRowsRegister() - 1) {
-      start = QPoint(r.x(), r.y() + r.height() - 2);
-      end = QPoint(r.x() + r.width(), r.y() + r.height() - 2);
-      if (col == 0) {
-        start.rx()++;
-      } else if (col == m_parent->lastCol()) {
-        end.rx()--;
-      }
-      // painter->drawLine(start, end);
-//FIXME: Port to KDE4
-      //painter->drawWinFocusRect(QRect(start, end));
-    }
-    // for the first col, we need to paint the left
-    if (col == 0) {
-      start = QPoint(r.x() + 1, r.y());
-      end = QPoint(r.x() + 1, r.y() + r.height());
-      if (row == 0) {
-        start.ry()++;
-      } else if (row == numRowsRegister() - 1) {
-        end.ry()--;
-      }
-      //painter->drawLine(start, end);
-//FIXME: Port to KDE4
-      //painter->drawWinFocusRect(QRect(start, end));
-    }
-    // for the last col, we need to paint the left
-    if (col == m_parent->lastCol()) {
-      start = QPoint(r.x() + r.width() - 1, r.y());
-      end = QPoint(r.x() + r.width() - 1, r.y() + r.height());
-      if (row == 0) {
-        start.ry()++;
-      } else if (row == numRowsRegister() - 1) {
-        end.ry()--;
-      }
-      //painter->drawLine(start, end);
-//FIXME: Port to KDE4
-      //painter->drawWinFocusRect(QRect(start, end));
-    }
-    painter->setPen(oldPen);
-  }
 }
 
 void Transaction::registerCellText(QString& txt, int row, int col)
@@ -413,94 +251,74 @@ void Transaction::registerCellText(QString& txt, int row, int col)
   registerCellText(txt, align, row, col, 0);
 }
 
-void Transaction::paintRegisterCell(QPainter* painter, int row, int col, const QRect& r, bool /* selected */, const QColorGroup& _cg)
+void Transaction::paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &option, const QModelIndex &index)
 {
-  QColorGroup cg(_cg);
-  QRect cellRect(r);
-  QRect textRect;
-  QBrush backgroundBrush;
-
   painter->save();
+  // if this is not the first row of the transaction paint the previous rows
+  // since the selection background is painted from the first row of the transaction
+  for (int i = startRow(); i < index.row(); ++i) {
+    QStyleOptionViewItemV4 optionSibling = option;
+    optionSibling.rect.moveTop(optionSibling.rect.top() - optionSibling.rect.height()*(index.row() - i));
+    paintRegisterCell(painter, optionSibling, index.sibling(i, index.column()));
+  }
+  if (paintRegisterCellSetup(painter, option, index)) {
+    const QStyle *style = option.widget ? option.widget->style() : QApplication::style();
+    const QWidget* widget = option.widget;
 
-  if (paintRegisterCellSetup(painter, row, col, cellRect, textRect, cg, backgroundBrush)) {
+    // clear the mouse ove state before painting the background
+    option.state &= ~QStyle::State_MouseOver;
+    // the background
+    if (option.state & QStyle::State_Selected) {
+      // paint the selection background only from the first row on to the last row at once
+      if (index.row() == startRow()) {
+        if (m_focus) {
+          option.state |= QStyle::State_HasFocus;
+        }
+        QRect old = option.rect;
+        option.rect.setBottom(option.rect.bottom() + (numRowsRegister() - 1)*option.rect.height());
+        style->drawPrimitive(QStyle::PE_PanelItemViewItem, &option, painter, widget);
+        option.rect = old;
+      }
+    } else {
+      if (m_alternate) {
+        painter->fillRect(option.rect, option.palette.alternateBase());
+      } else {
+        painter->fillRect(option.rect, option.palette.base());
+      }
+    }
+
+    // the text
     // construct the text for the cell
     int align = Qt::AlignVCenter;
     QString txt;
     if (m_transaction != MyMoneyTransaction() && !m_inRegisterEdit) {
-      registerCellText(txt, align, row, col, painter);
+      registerCellText(txt, align, index.row() - startRow(), index.column(), painter);
     }
+    style->drawItemText(painter, option.rect, align, option.palette, true, txt, m_selected ? QPalette::HighlightedText : QPalette::Text);
 
-    paintRegisterCellBackground(painter, row, col, cellRect, backgroundBrush);
-
-    // and paint it
-    paintRegisterCellText(painter, row, col, textRect, cg, align, txt);
-
-    // paint the grid
-    paintRegisterGrid(painter, row, col, cellRect, cg);
+    // draw the grid if it's needed
+    if (KMyMoneySettings::showGrid())
+    {
+      const int gridHint = style->styleHint(QStyle::SH_Table_GridLineColor, &option, widget);
+      const QPen gridPen = QPen(QColor(static_cast<QRgb>(gridHint)), 0);
+      QPen old = painter->pen();
+      painter->setPen(gridPen);
+      if (index.row() == startRow())
+        painter->drawLine(option.rect.topLeft(), option.rect.topRight());
+      painter->drawLine(option.rect.topLeft(), option.rect.bottomLeft());
+      painter->setPen(old);
+    }
 
     // possible icons
-    paintRegisterIcons(painter, row, col, cellRect, cg);
-
-    // and the focus
-    paintRegisterCellFocus(painter, row, col, cellRect, cg);
-  }
-
-  painter->restore();
-}
-
-void Transaction::paintRegisterIcons(QPainter* painter, int row, int col, const QRect& /*r*/, const QColorGroup& /*cg*/)
-{
-  if (row == 0 && col == DetailColumn && painter) {
-    if (m_erronous || !m_transaction.value("kmm-attachment").isEmpty()) {
-      QRect cellRect;
-      cellRect.setX(0);
-      cellRect.setY(0);
-      cellRect.setWidth(m_parent->columnWidth(col));
-      cellRect.setHeight(m_parent->rowHeight(m_startRow + row));
+    if (index.row() == startRow() && index.column() == DetailColumn) {
       if (m_erronous) {
-        markAsErronous(painter, row, col, cellRect);
-      }
-      if (!m_transaction.value("kmm-attachment").isEmpty()) {
-        markAttachment(painter, row, col, cellRect);
+        QPixmap attention;
+        attention.loadFromData(attentionSign, sizeof(attentionSign), 0, 0);
+        style->drawItemPixmap(painter, option.rect, Qt::AlignRight, attention);
       }
     }
   }
-}
-void Transaction::paintRegisterCellBackground(QPainter* painter, int row, int col, const QRect& r, const QBrush& backgroundBrush)
-{
-  Q_UNUSED(row);
-  Q_UNUSED(col);
-
-  // fill the background
-  painter->fillRect(r, backgroundBrush);
-}
-
-void Transaction::paintRegisterGrid(QPainter* painter, int row, int col, const QRect& r, const QColorGroup& _cg) const
-{
-  Q_UNUSED(_cg);
-
-  // if a grid is selected, we paint it right away
-  if (KMyMoneyGlobalSettings::showGrid()) {
-    painter->setPen(KMyMoneyGlobalSettings::listGridColor());
-    if (col != 0)
-      painter->drawLine(r.x(), 0, r.x(), r.height() - 1);
-    if (row == numRowsRegister() - 1)
-      painter->drawLine(r.x(), r.height() - 1, r.width(), r.height() - 1);
-  }
-}
-
-void Transaction::paintRegisterCellText(QPainter* painter, int row, int col, const QRect& r, const QColorGroup& _cg, int align, const QString& txt)
-{
-  Q_UNUSED(row);
-  Q_UNUSED(col);
-  Q_UNUSED(r);
-  Q_UNUSED(_cg);
-
-  // make sure, we clear the cell
-  if (txt.isEmpty())
-    painter->drawText(r, align, " ");
-  else
-    painter->drawText(r, align, txt);
+  painter->restore();
 }
 
 int Transaction::formRowHeight(int /*row*/)
@@ -529,13 +347,12 @@ void Transaction::setupForm(TransactionForm* form)
   form->verticalHeader()->setUpdatesEnabled(false);
   form->horizontalHeader()->setUpdatesEnabled(false);
 
-  form->setNumRows(numRowsForm());
-  form->setNumCols(numColsForm());
+  form->setRowCount(numRowsForm());
+  form->setColumnCount(numColsForm());
 
   // Force all cells to have some text (so that paintCell is called for each cell)
   for (int r = 0; r < numRowsForm(); ++r) {
     for (int c = 0; c < numColsForm(); ++c) {
-      form->setText(r, c, "x");
       if (r == 0 && form->columnWidth(c) == 0) {
         form->setColumnWidth(c, 10);
       }
@@ -547,30 +364,27 @@ void Transaction::setupForm(TransactionForm* form)
   loadTab(form);
 }
 
-void Transaction::paintFormCell(QPainter* painter, int row, int col, const QRect& /*r*/, bool /*selected*/, const QColorGroup& _cg)
+void Transaction::paintFormCell(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index)
 {
   if (!m_form)
     return;
 
-  QRect cellRect = m_form->cellRect(row, col);
+  QRect cellRect = option.rect;
 
   QRect textRect(cellRect);
-  textRect.setX(1);
-  textRect.setY(1);
   textRect.setWidth(textRect.width() - 2);
   textRect.setHeight(textRect.height() - 2);
 
-  painter->fillRect(cellRect, _cg.background());
-  painter->setPen(_cg.text());
+  painter->setPen(option.palette.text().color());
 
   QString txt;
   int align = Qt::AlignVCenter;
-  bool editField = formCellText(txt, align, row, col, painter);
+  bool editField = formCellText(txt, align, index.row(), index.column(), painter);
 
   // if we have an editable field and don't currently edit the transaction
   // show the background in a different color
   if (editField && !m_inEdit) {
-    painter->fillRect(textRect, _cg.base());
+    painter->fillRect(textRect, option.palette.alternateBase());
   }
 
   if (!m_inEdit)
@@ -614,7 +428,7 @@ QWidget* Transaction::focusWidget(QWidget* w) const
   return w;
 }
 
-void Transaction::arrangeWidget(Q3Table* tbl, int row, int col, QWidget* w) const
+void Transaction::arrangeWidget(QTableWidget* tbl, int row, int col, QWidget* w) const
 {
   if (w) {
     tbl->setCellWidget(row, col, w);
@@ -664,7 +478,7 @@ bool Transaction::maybeTip(const QPoint& cpos, int row, int col, QRect& r, QStri
   int h = m_parent->rowHeightHint();
 
   // check for detail column in row 0 of the transaction for a possible exclamation mark
-  r = m_parent->cellGeometry(m_startRow + 0, col);
+  r = m_parent->visualItemRect(m_parent->itemAt(m_startRow + 0, col));
   // qDebug("r is %d,%d,%d,%d", r.x(), r.y(), r.width(), r.height());
   r.setBottomLeft(QPoint(r.x() + (r.width() - h), r.y() + h));
   // qDebug("r is %d,%d,%d,%d", r.x(), r.y(), r.width(), r.height());
@@ -680,7 +494,7 @@ bool Transaction::maybeTip(const QPoint& cpos, int row, int col, QRect& r, QStri
   }
 
   // check for detail column in row 1 of the transaction for a possible exclamation mark
-  r = m_parent->cellGeometry(m_startRow + 1, col);
+  r = m_parent->visualItemRect(m_parent->itemAt(m_startRow + 1, col));
   if (row == 1 && r.contains(cpos) && m_transaction.splitCount() > 2) {
     MyMoneyFile* file = MyMoneyFile::instance();
     QList<MyMoneySplit>::const_iterator it_s;
@@ -966,9 +780,7 @@ void StdTransaction::loadTab(TransactionForm* form)
 void StdTransaction::setupForm(TransactionForm* form)
 {
   Transaction::setupForm(form);
-
-  Q3TableItem* memo = form->item(3, ValueColumn1);
-  memo->setSpan(3, 1);
+  form->setSpan(3, ValueColumn1, 3, 1);
 }
 
 bool StdTransaction::showRowInForm(int row) const
@@ -1456,9 +1268,7 @@ InvestTransaction::InvestTransaction(Register *parent, const MyMoneyTransaction&
 void InvestTransaction::setupForm(TransactionForm* form)
 {
   Transaction::setupForm(form);
-
-  Q3TableItem* memo = form->item(5, 1);
-  memo->setSpan(2, 1);
+  form->setSpan(5, 1, 2, 1);
 }
 
 void InvestTransaction::activity(QString& txt, MyMoneySplit::investTransactionTypeE type) const

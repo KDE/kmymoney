@@ -168,13 +168,9 @@ void RegisterSearchLine::updateSearch(const QString& s)
   // if focus item is still visible, then make sure we have
   // it on screen
   if (focusItem && focusItem->isVisible()) {
-    d->reg->updateContents();
+    d->reg->update();
     d->reg->ensureItemVisible(focusItem);
-  } else
-    d->reg->repaintContents();
-
-  d->reg->updateScrollBars();
-
+  }
   // if the scrollbar's visibility changed, we need to resize the contents
   if (scrollBarVisible != d->reg->verticalScrollBar()->isVisible()) {
     d->reg->resize(DetailColumn);
@@ -276,7 +272,7 @@ RegisterSearchLine* RegisterSearchLineWidget::createSearchLine(Register* reg)
 
 void RegisterSearchLineWidget::createWidgets(void)
 {
-  QLabel *label = new QLabel(i18nc("Search widget label", "S&earch:"), this, "kde toolbar widget");
+  QLabel *label = new QLabel(i18nc("Search widget label", "S&earch:"), this);
 
   d->searchLine = createSearchLine(d->reg);
   d->searchLine->show();

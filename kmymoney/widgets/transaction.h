@@ -37,7 +37,7 @@
 #include <selectedtransaction.h>
 #include <mymoneyaccount.h>
 
-class Q3Table;
+class QTableWidget;
 class TransactionEditor;
 class TransactionEditorContainer;
 
@@ -156,58 +156,10 @@ public:
 
   virtual int rowHeightHint(void) const;
 
-  /**
-    * This method sets the general parameters required for the painting of a cell
-    * in the register. These are:
-    *
-    * - background color (alternating)
-    * - background color (imported transaction)
-    * - background color (matched transaction)
-    * - background color (selected transaction)
-    * - cellRect (area covering the cell)
-    * - textRect (area covering the text)
-    * - color of the pen to do the painting of text and lines
-    *
-    * @param painter pointer to the QPainter object
-    * @param row vertical index of cell in register
-    * @param col horizontal index of cell in register
-    * @param cellRect ref to QRect object receiving the area information for the cell
-    * @param textRect ref to QRect object receiving the area information for the text
-    * @param cg ref to QColorGroup object receiving the color information to be used
-    */
-  virtual bool paintRegisterCellSetup(QPainter* painter, int& row, int& col, QRect& cellRect, QRect& textRect, QColorGroup& cg, QBrush& brush);
+  virtual bool paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItemV4 &option, const QModelIndex &index);
+  virtual void paintRegisterCell(QPainter* painter, QStyleOptionViewItemV4& option, const QModelIndex& index);
 
-  /**
-    * paints the focus if the current cell defined by (@a row, @a col) has the focus.
-    *
-    * @param painter pointer to the QPainter object
-    * @param row vertical index of cell in register
-    * @param col horizontal index of cell in register
-    * @param r area covering the cell
-    * @param cg the color definitions to be used
-    */
-  void paintRegisterCellFocus(QPainter* painter, int row, int col, const QRect& r, const QColorGroup& cg);
-
-  /**
-    * paints a cell of the register for the transaction. Uses paintRegisterCellSetup(), paintRegisterCellText()
-    * paintRegisterGrid(), paintRegisterIcons() and paintRegisterCellFocus() to actually do the job.
-    *
-    * @param painter pointer to the QPainter object
-    * @param row vertical index of cell in register
-    * @param col horizontal index of cell in register
-    * @param r area covering the cell
-    * @param selected unused but kept for compatibility
-    * @param cg the color definitions to be used
-    *
-    */
-  virtual void paintRegisterCell(QPainter* painter, int row, int col, const QRect& r, bool selected, const QColorGroup& cg);
-  virtual void paintRegisterCellText(QPainter* painter, int row, int col, const QRect& r, const QColorGroup& cg, int align, const QString& txt);
-  virtual void paintRegisterCellBackground(QPainter* painter, int row, int col, const QRect& r, const QBrush& backgroundBrush);
-  virtual void paintRegisterGrid(QPainter* painter, int row, int col, const QRect& r, const QColorGroup& cg) const;
-  virtual void paintRegisterIcons(QPainter* painter, int row, int col, const QRect& r, const QColorGroup& cg);
-
-  virtual void paintFormCell(QPainter* /* painter */, int /* row */, int /* col */, const QRect& /* r */, bool /* selected */, const QColorGroup& /* cg */);
-
+  virtual void paintFormCell(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index);
   virtual bool formCellText(QString& /* txt */, int& /* align */, int /* row */, int /* col */, QPainter* /* painter */) {
     return false;
   }
@@ -237,7 +189,7 @@ public:
   virtual KMyMoneyRegister::Action actionType(void) const = 0;
 
   QWidget* focusWidget(QWidget*) const;
-  void arrangeWidget(Q3Table* tbl, int row, int col, QWidget* w) const;
+  void arrangeWidget(QTableWidget* tbl, int row, int col, QWidget* w) const;
 
   bool haveNumberField(void) const;
 
@@ -303,9 +255,6 @@ public:
   }
 
 protected:
-  virtual void markAsErronous(QPainter* p, int row, int col, const QRect& r);
-  virtual void markAttachment(QPainter* painter, int row, int col, const QRect& r);
-
   /**
     * This method converts m_split.reconcileFlag() into a readable string
     *
@@ -331,7 +280,7 @@ protected:
   MyMoneySplit            m_split;
   MyMoneyAccount          m_account;
   MyMoneyMoney            m_balance;
-  Q3Table*                 m_form;
+  QTableWidget*           m_form;
   QString                 m_category;
   QString                 m_payee;
   QString                 m_payeeHeader;
@@ -417,8 +366,6 @@ public:
   virtual const char* className(void) {
     return "InvestTransaction";
   }
-
-  // virtual void paintRegisterCell(QPainter* painter, int row, int col, const QRect& r, bool selected, const QColorGroup& cg);
 
   bool formCellText(QString& txt, int& align, int row, int col, QPainter* painter = 0);
   void registerCellText(QString& txt, int& align, int row, int col, QPainter* painter = 0);

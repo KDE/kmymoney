@@ -35,19 +35,16 @@ using namespace KMyMoneyRegister;
 using namespace KMyMoneyTransactionForm;
 
 StdTransactionScheduled::StdTransactionScheduled(Register *parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId) :
-    StdTransaction(parent, transaction, split, uniqueId),
-    m_drawCounter(parent->drawCounter() - 1)
+    StdTransaction(parent, transaction, split, uniqueId)
 {
   // setup initial size
   setNumRowsRegister(numRowsRegister(KMyMoneyGlobalSettings::showRegisterDetailed()));
 }
 
-bool StdTransactionScheduled::paintRegisterCellSetup(QPainter* painter, int& row, int& col, QRect& cellRect, QRect& textRect, QColorGroup& cg, QBrush& brush)
+bool StdTransactionScheduled::paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItemV4 &option, const QModelIndex &index)
 {
-  QRect r(cellRect);
-  cg = m_parent->palette().disabled();
-
-  bool rc = Transaction::paintRegisterCellSetup(painter, row, col, cellRect, textRect, cg, brush);
+  bool rc = Transaction::paintRegisterCellSetup(painter, option, index);
+  option.palette.setCurrentColorGroup(QPalette::Disabled);
   return rc;
 }
 

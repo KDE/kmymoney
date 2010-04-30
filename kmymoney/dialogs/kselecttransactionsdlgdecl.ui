@@ -43,10 +43,10 @@
               <verstretch>3</verstretch>
             </sizepolicy>
           </property>
-          <property name="numRows">
+          <property name="rowCount">
             <number>0</number>
           </property>
-          <property name="numCols">
+          <property name="columnCount">
             <number>12</number>
           </property>
           <column>

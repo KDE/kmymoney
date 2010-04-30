@@ -47,27 +47,7 @@ public:
     return "StdTransactionScheduled";
   }
 
-  /**
-   * This method sets the general parameters required for the painting of a cell
-   * in the register. These are:
-   *
-   * - background color (alternating)
-   * - background color (imported transaction)
-   * - background color (matched transaction)
-   * - background color (selected transaction)
-   * - cellRect (area covering the cell)
-   * - textRect (area covering the text)
-   * - color of the pen to do the painting of text and lines
-   *
-   * @param painter pointer to the QPainter object
-   * @param row vertical index of cell in register
-   * @param col horizontal index of cell in register
-   * @param cellRect ref to QRect object receiving the area information for the cell
-   * @param textRect ref to QRect object receiving the area information for the text
-   * @param cg ref to QColorGroup object receiving the color information to be used
-   * @param brush ref to QBrush object receiveing the brush information to be used
-   */
-  virtual bool paintRegisterCellSetup(QPainter* painter, int& row, int& col, QRect& cellRect, QRect& textRect, QColorGroup& cg, QBrush& brush);
+  virtual bool paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItemV4 &option, const QModelIndex &index);
 
   bool isSelectable(void) const {
     return true;
@@ -86,9 +66,6 @@ public:
 //   virtual void paintRegisterGrid(QPainter* painter, int row, int col, const QRect& r, const QColorGroup& cg) const;
 
 //   void registerCellText(QString& txt, int& align, int row, int col, QPainter* painter = 0);
-
-private:
-  unsigned int         m_drawCounter;
 };
 
 } // namespace

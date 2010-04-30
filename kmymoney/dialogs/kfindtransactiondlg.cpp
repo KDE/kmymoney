@@ -137,7 +137,7 @@ KFindTransactionDlg::KFindTransactionDlg(QWidget *parent) :
   cols << KMyMoneyRegister::PaymentColumn;
   cols << KMyMoneyRegister::DepositColumn;
   m_register->setupRegister(MyMoneyAccount(), cols);
-  m_register->setSelectionMode(Q3Table::Single);
+  m_register->setSelectionMode(QTableWidget::SingleSelection);
 
   connect(m_register, SIGNAL(editTransaction()), this, SLOT(slotSelectTransaction()));
   connect(m_register, SIGNAL(headerClicked()), this, SLOT(slotSortOptions()));
@@ -773,7 +773,7 @@ void KFindTransactionDlg::loadView(void)
 
 void KFindTransactionDlg::slotRightSize(void)
 {
-  m_register->updateContents();
+  m_register->update();
 }
 
 void KFindTransactionDlg::resizeEvent(QResizeEvent* ev)
@@ -793,7 +793,7 @@ void KFindTransactionDlg::resizeEvent(QResizeEvent* ev)
     return;
 
   // resize the register
-  int w = m_register->visibleWidth();
+  int w = m_register->contentsRect().width();
 
   int m_debitWidth = 80;
   int m_creditWidth = 80;
@@ -805,7 +805,7 @@ void KFindTransactionDlg::resizeEvent(QResizeEvent* ev)
   m_register->setColumnWidth(6, m_debitWidth);
   m_register->setColumnWidth(7, m_creditWidth);
 
-  for (int i = 0; i < m_register->numCols(); ++i) {
+  for (int i = 0; i < m_register->columnCount(); ++i) {
     switch (i) {
     case 4:     // skip the one, we want to set
       break;

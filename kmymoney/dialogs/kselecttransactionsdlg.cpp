@@ -54,7 +54,7 @@ KSelectTransactionsDlg::KSelectTransactionsDlg(const MyMoneyAccount& _account, Q
   m_register->clear();
 
   // no selection possible
-  m_register->setSelectionMode(Q3Table::Single);
+  m_register->setSelectionMode(QTableWidget::SingleSelection);
 
   // setup header font
   QFont font = KMyMoneyGlobalSettings::listHeaderFont();
@@ -109,7 +109,7 @@ void KSelectTransactionsDlg::addTransaction(const MyMoneyTransaction& t)
 int KSelectTransactionsDlg::exec(void)
 {
   m_register->updateRegister(true);
-  m_register->updateContents();
+  m_register->update();
 
   m_register->setFocus();
 

@@ -23,7 +23,7 @@
 
 #include <QMap>
 #include <QString>
-#include <Q3Table>
+#include <QTableWidget>
 class QWidget;
 
 // ----------------------------------------------------------------------------
@@ -45,10 +45,10 @@ typedef enum {
   ProtectAll
 } ProtectedAction;
 
-class TransactionEditorContainer : public Q3Table
+class TransactionEditorContainer : public QTableWidget
 {
 public:
-  TransactionEditorContainer(QWidget* parent) : Q3Table(parent) {}
+  TransactionEditorContainer(QWidget* parent) : QTableWidget(parent) {}
 
   virtual void arrangeEditWidgets(QMap<QString, QWidget*>& editWidgets, KMyMoneyRegister::Transaction* t) = 0;
   virtual void removeEditWidgets(QMap<QString, QWidget*>& editWidgets) = 0;

@@ -118,6 +118,22 @@ typedef enum {
   MaxColumns
 } Column;
 
+class TransactionForm;
+class TransactionFormItemDelegate : public QStyledItemDelegate
+{
+  Q_OBJECT
+
+public:
+  explicit TransactionFormItemDelegate(TransactionForm *parent);
+  ~TransactionFormItemDelegate();
+
+   void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
+
+
+private:
+  TransactionForm *m_transactionForm;
+};
+
 /**
   * @author Thomas Baumgart
   */
@@ -133,12 +149,10 @@ public:
     */
   void paintFocus(QPainter* /*p*/, const QRect& /*cr*/) {}
 
-  QSize tableSize(void) const;
-  QSize sizeHint(void) const;
   void adjustColumn(Column col);
   void clear(void);
 
-  void paintCell(QPainter* painter, int row, int col, const QRect& r, bool selected, const QColorGroup& cg);
+  void paintCell(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index);
 
   void resize(int col);
 
@@ -158,10 +172,6 @@ public:
   void enableTabBar(bool b);
 
 protected:
-  /**
-    * reimplemented to support QWidget::WState_BlockUpdates
-    */
-  void drawContents(QPainter *p, int cx, int cy, int cw, int ch);
 
   /**
     * reimplemented to prevent normal mouse press behavior
@@ -225,6 +235,7 @@ protected:
   KMyMoneyRegister::Transaction*       m_transaction;
   QColorGroup                          m_cellColorGroup;
   TabBar*                              m_tabBar;
+  TransactionFormItemDelegate         *m_itemDelegate;
 };
 
 

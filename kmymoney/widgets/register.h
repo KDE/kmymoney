@@ -41,6 +41,7 @@
 #include <QDropEvent>
 #include <QFocusEvent>
 #include <QMouseEvent>
+#include <QStyledItemDelegate>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -146,8 +147,8 @@ public:
     return false;
   }
 
-  void paintRegisterCell(QPainter* painter, int row, int col, const QRect& r, bool selected, const QColorGroup& cg);
-  void paintFormCell(QPainter* /* painter */, int /* row */, int /* col */, const QRect& /* r */, bool /* selected */, const QColorGroup& /* cg */) {}
+  void paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &option, const QModelIndex &index);
+  void paintFormCell(QPainter */*painter*/, const QStyleOptionViewItem &/*option*/, const QModelIndex &/*index*/) {}
 
   int rowHeightHint(void) const;
 
@@ -159,11 +160,7 @@ public:
   }
 
 protected:
-  void setupColors(QColorGroup& cg);
-
-protected:
   QString                  m_txt;
-  unsigned int             m_drawCounter;
   bool                     m_showDate;
 
   static QPixmap*          m_bg;
@@ -207,7 +204,7 @@ class SimpleDateGroupMarker : public FancyDateGroupMarker
 {
 public:
   SimpleDateGroupMarker(Register* parent, const QDate& date, const QString& txt);
-  void paintRegisterCell(QPainter* painter, int row, int col, const QRect& r, bool selected, const QColorGroup& cg);
+  void paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &option, const QModelIndex &index);
   int rowHeightHint(void) const;
   virtual const char* className(void) {
     return "SimpleDateGroupMarker";
@@ -235,9 +232,6 @@ public:
   virtual int sortSamePostDate(void) const {
     return 1;
   }
-
-protected:
-  void setupColors(QColorGroup& cg);
 };
 
 class PayeeGroupMarker : public GroupMarker
@@ -291,6 +285,21 @@ protected:
   static bool item_cmp(RegisterItem* i1, RegisterItem* i2);
 };
 
+class Register;
+class RegisterItemDelegate : public QStyledItemDelegate
+{
+  Q_OBJECT
+
+public:
+  explicit RegisterItemDelegate(Register *parent);
+  ~RegisterItemDelegate();
+
+   void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
+
+
+private:
+  Register *m_register;
+};
 
 class Register : public TransactionEditorContainer
 {
@@ -339,9 +348,7 @@ public:
   QString text(int row, int col) const;
   QWidget* createEditor(int row, int col, bool initFromCell) const;
   void setCellContentFromEditor(int row, int col);
-  QWidget* cellWidget(int row, int col) const;
   void endEdit(int row, int col, bool accept, bool replace);
-  void paintCell(QPainter* painter, int row, int col, const QRect& r, bool selected, const QColorGroup& cg);
 
   void resizeData(int) {}
   Q3TableItem* item(int, int) const {
@@ -349,7 +356,6 @@ public:
   }
   void setItem(int, int, Q3TableItem*) {}
   void clearCell(int, int) {}
-  void clearCellWidget(int, int);
 
   /**
     * Override the QTable member function to avoid display of focus
@@ -470,10 +476,6 @@ public:
 
   void clearSelection(void);
 
-  bool markErronousTransactions(void) const {
-    return (m_markErronousTransactions & 0x01) != 0;
-  }
-
   /**
     * This method creates a specific transaction according to the
     * transaction passed in @a transaction.
@@ -492,10 +494,6 @@ public:
   }
 
   void repaintItems(RegisterItem* first = 0, RegisterItem* last = 0);
-
-  unsigned int drawCounter(void) const {
-    return m_drawCounter;
-  }
 
   /**
     * This method creates group marker items and adds them to the register
@@ -523,9 +521,8 @@ public:
 
 protected:
 
-  void drawContents(QPainter *p, int cx, int cy, int cw, int ch);
-
-  void contentsMouseReleaseEvent(QMouseEvent *e);
+  void mouseReleaseEvent(QMouseEvent *e);
+  void contextMenuEvent(QContextMenuEvent *e);
 
   void unselectItems(int from = -1, int to = -1) {
     doSelectItems(from, to, false);
@@ -565,8 +562,6 @@ protected:
     */
   RegisterItem* itemById(const QString& id) const;
 
-  void insertWidget(int row, int col, QWidget* w);
-
   /**
     * Override logic and use standard QFrame behaviour
     */
@@ -578,19 +573,13 @@ protected:
 
   void selectRange(RegisterItem* from, RegisterItem* to, bool invert, bool includeFirst, bool clearSel);
 
-  // DND
-  void dragMoveEvent(QDragMoveEvent* event);
-  void dropEvent(QDropEvent* event);
-  Transaction* dropTransaction(QPoint cPos) const;
-
 protected slots:
   void resize(void);
 
-  void selectItem(int row, int col, int button, const QPoint & mousePos);
+  void selectItem(int row, int col);
   void slotEnsureItemVisible(void);
-  void slotDoubleClicked(int, int, int, const QPoint&);
+  void slotDoubleClicked(int row, int);
 
-  void slotToggleErronousTransactions(void);
   void slotAutoColumnSizing(int section);
 
 signals:
@@ -667,9 +656,8 @@ private:
   Qt::ButtonState              m_buttonState;
   Column                       m_lastCol;
   QList<TransactionSortField>  m_sortOrder;
-  QMap<QPair<int, int>, QWidget*> m_cellWidgets;
   QRect                        m_lastRepaintRect;
-  unsigned int                 m_drawCounter;
+  RegisterItemDelegate        *m_itemDelegate;
 };
 
 } // namespace

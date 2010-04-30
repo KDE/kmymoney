@@ -24,6 +24,8 @@
 #include <QString>
 #include <QDateTime>
 #include <QPainter>
+#include <QStyleOptionViewItem>
+#include <QModelIndex>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -187,8 +189,8 @@ public:
     m_alternate = alternate;
   }
 
-  virtual void paintRegisterCell(QPainter* painter, int row, int col, const QRect& r, bool selected, const QColorGroup& cg) = 0;
-  virtual void paintFormCell(QPainter* painter, int row, int col, const QRect& r, bool selected, const QColorGroup& cg) = 0;
+  virtual void paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &option, const QModelIndex &index) = 0;
+  virtual void paintFormCell(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) = 0;
 
   virtual const QString& id(void) const {
     return MyMoneyObject::emptyId();

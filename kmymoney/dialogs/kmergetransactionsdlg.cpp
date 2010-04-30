@@ -40,7 +40,7 @@ KMergeTransactionsDlg::KMergeTransactionsDlg(const MyMoneyAccount& account, QWid
   m_description->setText(i18n("Are you sure you wish to merge these transactions?"));
 
   // no selection possible
-  m_register->setSelectionMode(Q3Table::NoSelection);
+  m_register->setSelectionMode(QTableWidget::NoSelection);
 
   // override default and enable ok button right away
   buttonOk->setEnabled(true);

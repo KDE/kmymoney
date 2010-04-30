@@ -27,6 +27,7 @@
 #include <QLayout>
 #include <QPalette>
 #include <QFrame>
+#include <QHeaderView>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -167,43 +168,47 @@ void TabBar::copyTabs(const TabBar* otabbar)
   }
 }
 
+TransactionFormItemDelegate::TransactionFormItemDelegate(TransactionForm *parent) : QStyledItemDelegate(parent), m_transactionForm(parent)
+{
+}
+
+TransactionFormItemDelegate::~TransactionFormItemDelegate()
+{
+}
+
+void TransactionFormItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
+{
+  m_transactionForm->paintCell(painter, option, index);
+}
+
 TransactionForm::TransactionForm(QWidget *parent) :
     TransactionEditorContainer(parent),
     m_transaction(0),
     m_tabBar(0)
 {
-  setFrameShape(Q3Table::NoFrame);
+  m_itemDelegate = new TransactionFormItemDelegate(this);
+  setFrameShape(QTableWidget::NoFrame);
   setShowGrid(false);
-  setSelectionMode(Q3Table::NoSelection);
+  setSelectionMode(QTableWidget::NoSelection);
   verticalHeader()->hide();
   horizontalHeader()->hide();
-  setLeftMargin(0);
-  setTopMargin(0);
-  setReadOnly(true);    // display only
+
+  setEditTriggers(QAbstractItemView::NoEditTriggers);
 
   // make sure, that the table is 'invisible' by setting up the right background
   // keep the original color group for painting the cells though
   QPalette p = palette();
   m_cellColorGroup = QColorGroup(p);
-  p.setBrush(QPalette::Active, QPalette::Base, p.brush(QPalette::Background));
-  p.setBrush(QPalette::Inactive, QPalette::Base, p.brush(QPalette::Background));
-  p.setBrush(QPalette::Disabled, QPalette::Base, p.brush(QPalette::Background));
+  QBrush brush = p.brush(QPalette::Background);
+  QColor color = brush.color();
+  color.setAlpha(0);
+  brush.setColor(color);
+  p.setBrush(QPalette::Active, QPalette::Base, brush);
+  p.setBrush(QPalette::Inactive, QPalette::Base, brush);
+  p.setBrush(QPalette::Disabled, QPalette::Base, brush);
   setPalette(p);
 
-  // never show vertical scroll bars
-  setVScrollBarMode(Q3ScrollView::AlwaysOff);
-
   slotSetTransaction(0);
-}
-
-void TransactionForm::drawContents(QPainter *p, int cx, int cy, int cw, int ch)
-{
-  // the QTable::drawContents() method does not honor the block update flag
-  // so we take care of it here
-  if (testAttribute(Qt::WA_UpdatesDisabled))
-    return;
-
-  Q3Table::drawContents(p, cx, cy, cw, ch);
 }
 
 bool TransactionForm::focusNextPrevChild(bool next)
@@ -230,8 +235,8 @@ void TransactionForm::slotSetTransaction(KMyMoneyRegister::Transaction* transact
     m_transaction->setupForm(this);
 
   } else {
-    setNumRows(5);
-    setNumCols(1);
+    setRowCount(5);
+    setColumnCount(1);
   }
 
   kMyMoneyDateInput dateInput(0);
@@ -240,30 +245,34 @@ void TransactionForm::slotSetTransaction(KMyMoneyRegister::Transaction* transact
   // extract the maximal sizeHint height
   int height = qMax(dateInput.sizeHint().height(), category.sizeHint().height());
 
-  for (int row = 0; row < numRows(); ++row) {
+  for (int row = 0; row < rowCount(); ++row) {
     if (!transaction || transaction->showRowInForm(row)) {
       showRow(row);
-      Q3Table::setRowHeight(row, height);
+      QTableWidget::setRowHeight(row, height);
     } else
       hideRow(row);
   }
 
   // adjust vertical size of form table
-  height *= numRows();
+  height *= rowCount();
   setMaximumHeight(height);
   setMinimumHeight(height);
 
   if (updatesNeedToBeDisabled)
     setUpdatesEnabled(true); // see the call to setUpdatesEnabled(false) above
 
+  for (int i = 0; i < rowCount(); ++i) {
+    setItemDelegateForRow(i, m_itemDelegate);
+  }
+
   // force resizeing of the columns
   QTimer::singleShot(0, this, SLOT(resize()));
 }
 
-void TransactionForm::paintCell(QPainter* painter, int row, int col, const QRect& r, bool selected, const QColorGroup& /* cg */)
+void TransactionForm::paintCell(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index)
 {
   if (m_transaction) {
-    m_transaction->paintFormCell(painter, row, col, r, selected, m_cellColorGroup);
+    m_transaction->paintFormCell(painter, option, index);
   }
 }
 
@@ -360,8 +369,8 @@ void TransactionForm::resize(int col)
     setUpdatesEnabled(false);
 
   // resize the register
-  int w = visibleWidth();
-  int nc = numCols();
+  int w = viewport()->width();
+  int nc = columnCount();
 
   // check which space we need
   if (nc >= LabelColumn1 && columnWidth(LabelColumn1))
@@ -382,21 +391,7 @@ void TransactionForm::resize(int col)
 
   if (updatesNeedToBeDisabled)
     setUpdatesEnabled(true); // see the call to setUpdatesEnabled(false) above
-  updateContents();
-}
-
-// needed to duplicate this here, as the QTable::tableSize method is private :-(
-QSize TransactionForm::tableSize(void) const
-{
-  return QSize(columnPos(numCols() - 1) + columnWidth(numCols() - 1) + 10,
-               rowPos(numRows() - 1) + rowHeight(numRows() - 1) + 10);
-}
-
-QSize TransactionForm::sizeHint(void) const
-{
-  // I've taken this from qtable.cpp, QTable::sizeHint()
-  int vmargin = QApplication::isRightToLeft() ? rightMargin() : leftMargin();
-  return QSize(tableSize().width() + vmargin + 5, tableSize().height() + topMargin() + 10);
+  update();
 }
 
 void TransactionForm::adjustColumn(Column col)
@@ -416,7 +411,7 @@ void TransactionForm::adjustColumn(Column col)
     QFontMetrics fontMetrics(KMyMoneyGlobalSettings::listCellFont());
 
     // scan through the rows
-    for (int i = numRows() - 1; i >= 0; --i) {
+    for (int i = rowCount() - 1; i >= 0; --i) {
       int align;
       m_transaction->formCellText(txt, align, i, static_cast<int>(col), 0);
       QWidget* cw = cellWidget(i, col);
@@ -427,7 +422,7 @@ void TransactionForm::adjustColumn(Column col)
     }
   }
 
-  if (col < numCols())
+  if (col < columnCount())
     setColumnWidth(col, w);
 }
 
@@ -453,10 +448,10 @@ void TransactionForm::removeEditWidgets(QMap<QString, QWidget*>& editWidgets)
       ++it;
   }
 
-  for (int row = 0; row < numRows(); ++row) {
-    for (int col = 0; col < numCols(); ++col) {
+  for (int row = 0; row < rowCount(); ++row) {
+    for (int col = 0; col < columnCount(); ++col) {
       if (cellWidget(row, col))
-        clearCellWidget(row, col);
+        setCellWidget(row, col, 0);
     }
   }
   resize(ValueColumn1);

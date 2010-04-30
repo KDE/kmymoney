@@ -70,7 +70,6 @@ public:
 
   MousePressFilter*    m_mousePressFilter;
   KMyMoneyRegister::RegisterSearchLineWidget* m_registerSearchLine;
-  QPoint               m_startPoint;
   QString              m_reconciliationAccount;
   QDate                m_reconciliationDate;
   MyMoneyMoney         m_endingBalance;
@@ -347,9 +346,6 @@ void KGlobalLedgerView::loadView(void)
   QString focusItemId;
   QString anchorItemId;
 
-  if (!d->m_inLoading)
-    d->m_startPoint = QPoint(-1, -1);
-
   if (!m_newAccountLoaded) {
     // remember the current selected transactions
     KMyMoneyRegister::RegisterItem* item = m_register->firstItem();
@@ -365,13 +361,9 @@ void KGlobalLedgerView::loadView(void)
     if (m_register->anchorItem())
       anchorItemId = m_register->anchorItem()->id();
 
-    // remember the upper left corner of the viewport
-    if (!d->m_inLoading && d->m_showDetails == KMyMoneyGlobalSettings::showRegisterDetailed())
-      d->m_startPoint = QPoint(m_register->contentsX(), m_register->contentsY());
   } else {
     if (d->m_viewPosTimer.isActive())
       d->m_viewPosTimer.stop();
-    d->m_startPoint = QPoint(-1, -1);
     d->m_inLoading = false;
     d->m_registerSearchLine->searchLine()->reset();
   }
@@ -723,14 +715,6 @@ void KGlobalLedgerView::loadView(void)
     clear();
   }
 
-  // (re-)position viewport
-  if (m_newAccountLoaded) {
-    if (focusItem) {
-      d->m_startPoint = QPoint(-1, -1);
-    } else {
-      d->m_startPoint = QPoint(0, 0);
-    }
-  }
   if (!d->m_inLoading) {
     d->m_viewPosTimer.setSingleShot(true);
     d->m_viewPosTimer.start(30);
@@ -813,14 +797,7 @@ void KGlobalLedgerView::updateSummaryLine(const QMap<QString, MyMoneyMoney>& act
 void KGlobalLedgerView::slotUpdateViewPos(void)
 {
   m_register->setUpdatesEnabled(true);
-
-  if (d->m_startPoint == QPoint(-1, -1)) {
-    m_register->ensureItemVisible(m_register->focusItem());
-    m_register->updateContents();
-  } else {
-    m_register->setContentsPos(d->m_startPoint.x(), d->m_startPoint.y());
-    m_register->repaintContents();
-  }
+  m_register->ensureItemVisible(m_register->focusItem());
   d->m_inLoading = false;
 }
 
@@ -1195,7 +1172,7 @@ TransactionEditor* KGlobalLedgerView::startEdit(const KMyMoneyRegister::Selected
       // install event filter in all taborder widgets
       QWidgetList::const_iterator it_w = m_tabOrderWidgets.constBegin();
       for (; it_w != m_tabOrderWidgets.constEnd(); ++it_w) {
-        (*it_w)->installEventFilter(this);
+          (*it_w)->installEventFilter(this);
       }
       // Install a filter that checks if a mouse press happened outside
       // of one of our own widgets.

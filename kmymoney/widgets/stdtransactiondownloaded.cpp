@@ -40,13 +40,14 @@ StdTransactionDownloaded::StdTransactionDownloaded(Register *parent, const MyMon
 {
 }
 
-bool StdTransactionDownloaded::paintRegisterCellSetup(QPainter* painter, int& row, int& col, QRect& cellRect, QRect& textRect, QColorGroup& cg, QBrush& brush)
+bool StdTransactionDownloaded::paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItemV4 &option, const QModelIndex &index)
 
 {
-  bool rc = Transaction::paintRegisterCellSetup(painter, row, col, cellRect, textRect, cg, brush);
+  bool rc = Transaction::paintRegisterCellSetup(painter, option, index);
   // if not selected paint in selected background color
   if (!isSelected()) {
-    brush = KMyMoneyGlobalSettings::importedTransactionColor();
+    option.palette.setColor(QPalette::Base, KMyMoneyGlobalSettings::importedTransactionColor());
+    option.palette.setColor(QPalette::AlternateBase, KMyMoneyGlobalSettings::importedTransactionColor());
   }
   return rc;
 }
@@ -56,13 +57,14 @@ InvestTransactionDownloaded::InvestTransactionDownloaded(Register *parent, const
 {
 }
 
-bool InvestTransactionDownloaded::paintRegisterCellSetup(QPainter* painter, int& row, int& col, QRect& cellRect, QRect& textRect, QColorGroup& cg, QBrush& brush)
+bool InvestTransactionDownloaded::paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItemV4 &option, const QModelIndex &index)
 
 {
-  bool rc = Transaction::paintRegisterCellSetup(painter, row, col, cellRect, textRect, cg, brush);
+  bool rc = Transaction::paintRegisterCellSetup(painter, option, index);
   // if not selected paint in selected background color
   if (!isSelected()) {
-    brush = KMyMoneyGlobalSettings::importedTransactionColor();
+    option.palette.setColor(QPalette::Base, KMyMoneyGlobalSettings::importedTransactionColor());
+    option.palette.setColor(QPalette::AlternateBase, KMyMoneyGlobalSettings::importedTransactionColor());
   }
   return rc;
 }

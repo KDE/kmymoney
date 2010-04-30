@@ -138,10 +138,10 @@
             </item>
             <item>
               <widget class="KMyMoneyRegister::Register" name="m_register">
-                <property name="numRows">
+                <property name="rowCount">
                   <number>0</number>
                 </property>
-                <property name="numCols">
+                <property name="columnCount">
                   <number>12</number>
                 </property>
                 <column>
@@ -193,10 +193,10 @@
             </item>
             <item>
               <widget class="KMyMoneyTransactionForm::TransactionForm" name="m_form">
-                <property name="numRows">
+                <property name="rowCount">
                   <number>5</number>
                 </property>
-                <property name="numCols">
+                <property name="columnCount">
                   <number>1</number>
                 </property>
               </widget>

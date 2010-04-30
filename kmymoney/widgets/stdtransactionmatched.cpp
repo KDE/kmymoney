@@ -21,6 +21,7 @@
 // QT Includes
 
 #include <QList>
+#include <QHeaderView>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -38,50 +39,22 @@ using namespace KMyMoneyRegister;
 using namespace KMyMoneyTransactionForm;
 
 StdTransactionMatched::StdTransactionMatched(Register *parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId) :
-    StdTransaction(parent, transaction, split, uniqueId),
-    m_drawCounter(parent->drawCounter() - 1)
+    StdTransaction(parent, transaction, split, uniqueId)
 {
   // setup initial size
   setNumRowsRegister(numRowsRegister(KMyMoneyGlobalSettings::showRegisterDetailed()));
 }
 
-bool StdTransactionMatched::paintRegisterCellSetup(QPainter* painter, int& row, int& col, QRect& cellRect, QRect& textRect, QColorGroup& cg, QBrush& brush)
+bool StdTransactionMatched::paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItemV4 &option, const QModelIndex &index)
 {
-  QRect r(cellRect);
-
-  bool rc = Transaction::paintRegisterCellSetup(painter, row, col, cellRect, textRect, cg, brush);
+  bool rc = Transaction::paintRegisterCellSetup(painter, option, index);
 
   // if not selected paint in matched background color
   if (!isSelected()) {
-    brush = KMyMoneyGlobalSettings::matchedTransactionColor();
+    option.palette.setColor(QPalette::Base, KMyMoneyGlobalSettings::matchedTransactionColor());
+    option.palette.setColor(QPalette::AlternateBase, KMyMoneyGlobalSettings::matchedTransactionColor());
   }
-
-  // the first line needs to be painted across all columns
-  if (row + m_additionalRows - m_rowsRegister == 0) {
-    // avoid painting the text over multiple columns twice for the same update round
-    unsigned int drawCounter = m_parent->drawCounter();
-    if (m_drawCounter == drawCounter) {
-      return false;
-    }
-
-
-    // the fixed text always uses all cols
-    col = m_parent->columnAt(1);
-    painter->translate(-r.x() + m_parent->columnPos(col), 0);
-#if 0
-    r.setX(m_parent->columnPos(col));
-    r.setWidth(m_parent->visibleWidth());
-    painter->translate(r.x(), r.y());
-#endif
-    cellRect.setX(0);
-    cellRect.setY(0);
-    cellRect.setWidth(m_parent->visibleWidth());
-    cellRect.setHeight(m_parent->rowHeight(row + m_startRow));
-
-    textRect = cellRect;
-    textRect.setX(2);
-    textRect.setWidth(textRect.width() - 4);
-  }
+  //TODO: the first line needs to be painted across all columns
   return rc;
 }
 
@@ -126,7 +99,7 @@ void StdTransactionMatched::registerCellText(QString& txt, int& align, int row, 
     QString memo;
     switch (row) {
     case 0:
-      if (painter)
+      if (painter && col == DetailColumn)
         txt = QString(" ") + i18n("KMyMoney has matched a downloaded transaction with a manually entered one (result above)");
       // return true for the first visible column only
       break;
@@ -201,17 +174,5 @@ void StdTransactionMatched::registerCellText(QString& txt, int& align, int row, 
       }
       break;
     }
-  }
-}
-
-void StdTransactionMatched::paintRegisterGrid(QPainter* painter, int row, int col, const QRect& r, const QColorGroup& _cg) const
-{
-  // the last 3 rows should not show a grid
-  if (row < m_rowsRegister - m_additionalRows) {
-    Transaction::paintRegisterGrid(painter, row, col, r, _cg);
-
-  } else if (row == m_rowsRegister - 1) {
-    painter->setPen(KMyMoneyGlobalSettings::listGridColor());
-    painter->drawLine(r.x(), r.height() - 1, r.width(), r.height() - 1);
   }
 }
