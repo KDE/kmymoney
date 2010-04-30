@@ -249,7 +249,7 @@ const QString MyMoneyMysqlDriver::createDbString(const QString& name) const
 
 const QString MyMoneyPostgresqlDriver:: createDbString(const QString& name) const
 {
-  return MyMoneyDbDriver::createDbString(name) + " WITH ENCODING='UTF8'";
+  return MyMoneyDbDriver::createDbString(name) + " WITH ENCODING='UTF8' LC_CTYPE='C' TEMPLATE=template0";
 }
 
 //*******************************************************
