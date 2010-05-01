@@ -79,6 +79,12 @@ class KMyMoneyApp : public KXmlGuiWindow, public IMyMoneyProcessingCalendar
 {
   Q_OBJECT
 
+private slots:
+  /**
+    * Keep track of objects that are destroyed by external events
+    */
+  void slotObjectDestroyed(QObject* o);
+
 protected slots:
   void slotFileSaveAsFilterChanged(const QString& filter);
 
@@ -1015,7 +1021,11 @@ public slots:
   void slotPluginUnplug(KPluginInfo*);
 
 private:
-  // bool verifyImportedData(const MyMoneyAccount& account);
+  /**
+    * Create the transaction move menu and setup necessary connections.
+    */
+  void createTransactionMoveMenu(void);
+
   /**
     * This method sets the holidayRegion for use by the processing calendar.
     */

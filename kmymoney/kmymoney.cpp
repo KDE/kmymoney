@@ -431,20 +431,35 @@ const KUrl KMyMoneyApp::lastOpenedURL(void)
   return url;
 }
 
+void KMyMoneyApp::slotObjectDestroyed(QObject* o)
+{
+  if(o == d->m_moveToAccountSelector) {
+    d->m_moveToAccountSelector = 0;
+  }
+}
+
+void KMyMoneyApp::createTransactionMoveMenu(void)
+{
+  if (!d->m_moveToAccountSelector) {
+    QWidget* w = factory()->container("transaction_move_menu", this);
+    KMenu *menu = dynamic_cast<KMenu*>(w);
+    if (menu) {
+      QWidgetAction *accountSelectorAction = new QWidgetAction(menu);
+      d->m_moveToAccountSelector = new kMyMoneyAccountSelector(menu, 0, false);
+      d->m_moveToAccountSelector->setObjectName("transaction_move_menu_selector");
+      accountSelectorAction->setDefaultWidget(d->m_moveToAccountSelector);
+      menu->addAction(accountSelectorAction);
+      connect(d->m_moveToAccountSelector, SIGNAL(destroyed(QObject*)), this, SLOT(slotObjectDestroyed(QObject*)));
+      connect(d->m_moveToAccountSelector, SIGNAL(itemSelected(const QString&)), this, SLOT(slotMoveToAccount(const QString&)));
+    }
+  }
+}
+
 void KMyMoneyApp::initDynamicMenus(void)
 {
-  QWidget* w = factory()->container("transaction_move_menu", this);
-  KMenu *menu = dynamic_cast<KMenu*>(w);
-  if (menu) {
-    QWidgetAction *accountSelectorAction = new QWidgetAction(menu);
-    d->m_moveToAccountSelector = new kMyMoneyAccountSelector(menu, 0, false);
-    accountSelectorAction->setDefaultWidget(d->m_moveToAccountSelector);
-    menu->addAction(accountSelectorAction);
-    connect(d->m_moveToAccountSelector, SIGNAL(itemSelected(const QString&)), this, SLOT(slotMoveToAccount(const QString&)));
-    connect(this, SIGNAL(accountSelected(const MyMoneyAccount&)), this, SLOT(slotUpdateMoveToAccountMenu()));
-    connect(this, SIGNAL(transactionsSelected(const KMyMoneyRegister::SelectedTransactions&)), this, SLOT(slotUpdateMoveToAccountMenu()));
-    connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotUpdateMoveToAccountMenu()));
-  }
+  connect(this, SIGNAL(accountSelected(const MyMoneyAccount&)), this, SLOT(slotUpdateMoveToAccountMenu()));
+  connect(this, SIGNAL(transactionsSelected(const KMyMoneyRegister::SelectedTransactions&)), this, SLOT(slotUpdateMoveToAccountMenu()));
+  connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotUpdateMoveToAccountMenu()));
 }
 
 void KMyMoneyApp::initActions(void)
@@ -5292,6 +5307,9 @@ void KMyMoneyApp::Private::moveInvestmentTransaction(const QString& /*fromId*/,
 
 void KMyMoneyApp::slotUpdateMoveToAccountMenu(void)
 {
+  createTransactionMoveMenu();
+  Q_ASSERT(d->m_moveToAccountSelector != 0);
+
   if (!d->m_selectedAccount.id().isEmpty()) {
     AccountSet accountSet;
     if (d->m_selectedAccount.accountType() == MyMoneyAccount::Investment) {
@@ -5416,6 +5434,8 @@ void KMyMoneyApp::showContextMenu(const QString& containerName)
   KMenu *menu = dynamic_cast<KMenu*>(w);
   if (menu)
     menu->exec(QCursor::pos());
+  else
+    qDebug("menu '%s' not found: w = %p, menu = %p", qPrintable(containerName), w, menu);
 }
 
 void KMyMoneyApp::slotShowTransactionContextMenu(void)
