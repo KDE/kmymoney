@@ -97,6 +97,10 @@ KAccountsView::KAccountsView(QWidget *parent) :
   m_liabilitiesGroup->setLayout(m_liabilitiesListLayout);
   m_equitiesGroup->setLayout(m_equitiesListLayout);
 
+  m_assetsList->setContextMenuPolicy(Qt::CustomContextMenu);
+  m_liabilitiesList->setContextMenuPolicy(Qt::CustomContextMenu);
+  m_equitiesList->setContextMenuPolicy(Qt::CustomContextMenu);
+
   connect(m_searchWidget, SIGNAL(textChanged(const QString &)), m_filterProxyModel, SLOT(setFilterFixedString(const QString &)));
 
   // let the model know if the item is expanded or collapsed
@@ -438,21 +442,21 @@ void KAccountsView::slotSelectIcon(QListWidgetItem* item)
 
 void KAccountsView::slotAssetsOpenContextMenu(const QPoint& point)
 {
-QListWidgetItem* item = m_assetsList->itemAt(point);
+  QListWidgetItem* item = m_assetsList->itemAt(point);
   if (item)
     slotOpenContextMenu((item->data(Qt::UserRole)).value<MyMoneyAccount>());
 }
 
 void KAccountsView::slotLiabilitiesOpenContextMenu(const QPoint& point)
 {
-QListWidgetItem* item = m_liabilitiesList->itemAt(point);
+  QListWidgetItem* item = m_liabilitiesList->itemAt(point);
   if (item)
     slotOpenContextMenu((item->data(Qt::UserRole)).value<MyMoneyAccount>());
 }
 
 void KAccountsView::slotEquitiesOpenContextMenu(const QPoint& point)
 {
-QListWidgetItem* item = m_equitiesList->itemAt(point);
+  QListWidgetItem* item = m_equitiesList->itemAt(point);
   if (item)
     slotOpenContextMenu((item->data(Qt::UserRole)).value<MyMoneyAccount>());
 }
