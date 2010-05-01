@@ -206,10 +206,14 @@ const QStringList KWelcomePage::featuresList(void)
 {
   QStringList featuresList;
 
-  featuresList.append(i18n("Port to KDE4"));
+  featuresList.append(i18n("Runs natively on KDE4"));
   featuresList.append(i18n("Documentation and translations have been improved"));
   featuresList.append(i18n("Now works with latest version of AqBanking"));
+  featuresList.append(i18n("Better performance of the user interface"));
+  featuresList.append(i18n("Better date handling when importing QIF files"));
+  featuresList.append(i18n("Improved usability of the online banking features"));
   featuresList.append(i18n("Runs on all operating systems supported by KDE"));
+
 
   return featuresList;
 }
