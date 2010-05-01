@@ -108,9 +108,17 @@ KAccountsView::KAccountsView(QWidget *parent) :
   connect(m_collapseButton, SIGNAL(clicked()), m_accountTree, SLOT(collapseAll()));
   connect(m_expandButton, SIGNAL(clicked()), m_accountTree, SLOT(expandAll()));
 
-  connect(m_assetsList, SIGNAL(selectionChanged(QListWidgetItem*)), this, SLOT(slotSelectIcon(QListWidgetItem*)));
-  connect(m_assetsList, SIGNAL(rightButtonClicked(QListWidgetItem*, const QPoint&)), this, SLOT(slotOpenContext(QListWidgetItem*)));
-  connect(m_assetsList, SIGNAL(executed(QListWidgetItem*)), this, SLOT(slotOpenObject(QListWidgetItem*)));
+  connect(m_assetsList, SIGNAL(itemSelectionChanged()), this, SLOT(slotAssetsSelectIcon()));
+  connect(m_assetsList, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(slotAssetsOpenContextMenu(const QPoint&)));
+  connect(m_assetsList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(slotOpenObject(QListWidgetItem*)));
+
+  connect(m_liabilitiesList, SIGNAL(itemSelectionChanged()), this, SLOT(slotLiabilitiesSelectIcon()));
+  connect(m_liabilitiesList, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(slotLiabilitiesOpenContextMenu(const QPoint&)));
+  connect(m_liabilitiesList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(slotOpenObject(QListWidgetItem*)));
+
+  connect(m_equitiesList, SIGNAL(itemSelectionChanged()), this, SLOT(slotEquitiesSelectIcon()));
+  connect(m_equitiesList, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(slotEquitiesOpenContextMenu(const QPoint&)));
+  connect(m_equitiesList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(slotOpenObject(QListWidgetItem*)));
 
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadAccounts()));
   connect(m_collapseButton, SIGNAL(clicked()), this, SLOT(slotExpandCollapse()));
@@ -399,15 +407,59 @@ QListWidgetItem* KAccountsView::selectedIcon(void) const
     return m_equitiesList->currentItem();
 }
 
-void KAccountsView::slotSelectIcon(QListWidgetItem* item)
+void KAccountsView::slotAssetsSelectIcon()
 {
-  emit selectObject((item->data(Qt::UserRole)).value<MyMoneyAccount>());
+  QList<QListWidgetItem*> selectedItems = m_assetsList->selectedItems();
+  if(selectedItems.at(0)) {
+    slotSelectIcon(selectedItems.at(0));
+  }
 }
 
-void KAccountsView::slotOpenContext(QListWidgetItem* item)
+void KAccountsView::slotLiabilitiesSelectIcon()
 {
+  QList<QListWidgetItem*> selectedItems = m_liabilitiesList->selectedItems();
+  if(selectedItems.at(0)) {
+    slotSelectIcon(selectedItems.at(0));
+  }
+}
+
+void KAccountsView::slotEquitiesSelectIcon()
+{
+  QList<QListWidgetItem*> selectedItems = m_equitiesList->selectedItems();
+  if(selectedItems.at(0)) {
+    slotSelectIcon(selectedItems.at(0));
+  }
+}
+
+void KAccountsView::slotSelectIcon(QListWidgetItem* item)
+{
+ emit selectObject((item->data(Qt::UserRole)).value<MyMoneyAccount>());
+}
+
+void KAccountsView::slotAssetsOpenContextMenu(const QPoint& point)
+{
+QListWidgetItem* item = m_assetsList->itemAt(point);
   if (item)
-    emit openContextMenu((item->data(Qt::UserRole)).value<MyMoneyAccount>());
+    slotOpenContextMenu((item->data(Qt::UserRole)).value<MyMoneyAccount>());
+}
+
+void KAccountsView::slotLiabilitiesOpenContextMenu(const QPoint& point)
+{
+QListWidgetItem* item = m_liabilitiesList->itemAt(point);
+  if (item)
+    slotOpenContextMenu((item->data(Qt::UserRole)).value<MyMoneyAccount>());
+}
+
+void KAccountsView::slotEquitiesOpenContextMenu(const QPoint& point)
+{
+QListWidgetItem* item = m_equitiesList->itemAt(point);
+  if (item)
+    slotOpenContextMenu((item->data(Qt::UserRole)).value<MyMoneyAccount>());
+}
+
+void KAccountsView::slotOpenContextMenu(MyMoneyAccount account)
+{
+  emit openContextMenu(account);
 }
 
 void KAccountsView::slotOpenObject(QListWidgetItem* item)

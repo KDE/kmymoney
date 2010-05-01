@@ -113,7 +113,13 @@ protected slots:
   void slotNetWorthChanged(const MyMoneyMoney &);
   void slotTabCurrentChanged(QWidget*);
   void slotSelectIcon(QListWidgetItem* item);
-  void slotOpenContext(QListWidgetItem* item);
+  void slotOpenContextMenu(MyMoneyAccount account);
+  void slotAssetsSelectIcon(void);
+  void slotAssetsOpenContextMenu(const QPoint& point);
+  void slotLiabilitiesSelectIcon(void);
+  void slotLiabilitiesOpenContextMenu(const QPoint& point);
+  void slotEquitiesSelectIcon(void);
+  void slotEquitiesOpenContextMenu(const QPoint& point);
   void slotOpenObject(QListWidgetItem* item);
   void slotExpandCollapse(void);
   void slotUnusedIncomeExpenseAccountHidden(void);

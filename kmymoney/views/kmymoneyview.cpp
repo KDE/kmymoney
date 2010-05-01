@@ -168,8 +168,8 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   connect(m_accountsView, SIGNAL(openContextMenu(const MyMoneyObject&)), kmymoney, SLOT(slotShowAccountContextMenu(const MyMoneyObject&)));
   connect(m_accountsView, SIGNAL(openObject(const MyMoneyObject&)), kmymoney, SLOT(slotAccountOpen(const MyMoneyObject&)));
   connect(m_accountsView, SIGNAL(reparent(const MyMoneyAccount&, const MyMoneyAccount&)), kmymoney, SLOT(slotReparentAccount(const MyMoneyAccount&, const MyMoneyAccount&)));
-  connect(this, SIGNAL(kmmFilePlugin(unsigned int)), m_accountsView, SLOT(slotUpdateIconPos(unsigned int)));
-  connect(this, SIGNAL(reconciliationStarts(const MyMoneyAccount&, const QDate&, const MyMoneyMoney&)), m_accountsView, SLOT(slotReconcileAccount(const MyMoneyAccount&, const QDate&, const MyMoneyMoney&)));
+  //connect(this, SIGNAL(kmmFilePlugin(unsigned int)), m_accountsView, SLOT(slotUpdateIconPos(unsigned int)));
+  //connect(this, SIGNAL(reconciliationStarts(const MyMoneyAccount&, const QDate&, const MyMoneyMoney&)), m_accountsView, SLOT(slotReconcileAccount(const MyMoneyAccount&, const QDate&, const MyMoneyMoney&)));
 
   // Page 3
   m_scheduledView = new KScheduledView();
