@@ -338,7 +338,12 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
   if (m_includeMovingAverage)
     e.setAttribute("movingaveragedays", m_movingAverageDays);
 
-  e.setAttribute("charttype", kChartTypeText[m_chartType]);
+  if (m_chartType < 0 || m_chartType >= kChartTypeText.size()) {
+    qDebug("m_chartType out of bounds with %d on report of type %d. Default to none.", m_chartType, m_reportType);
+    e.setAttribute("charttype", kChartTypeText[0]);
+  } else {
+   e.setAttribute("charttype", kChartTypeText[m_chartType]);
+  }
   e.setAttribute("chartdatalabels", m_chartDataLabels);
   e.setAttribute("chartgridlines", m_chartGridLines);
   e.setAttribute("chartbydefault", m_chartByDefault);
@@ -603,14 +608,15 @@ bool MyMoneyReport::read(const QDomElement& e)
       m_movingAverageDays = e.attribute("movingaveragedays", "1").toUInt();
 
     //only load chart data if it is a pivot table
+    m_chartType = static_cast<EChartType>(0);
     if (m_reportType == ePivotTable) {
       i = kChartTypeText.indexOf(e.attribute("charttype"));
 
-      if (i != -1)
+      if (i >= 0)
         m_chartType = static_cast<EChartType>(i);
 
-      //if it is invalid, set to first type
-      if (m_chartType == eChartEnd)
+      // if it is invalid, set to first type
+      if (m_chartType >= eChartEnd)
         m_chartType = eChartLine;
 
       m_chartDataLabels = e.attribute("chartdatalabels", "1").toUInt();
@@ -618,7 +624,6 @@ bool MyMoneyReport::read(const QDomElement& e)
       m_chartByDefault = e.attribute("chartbydefault", "0").toUInt();
       m_chartLineWidth = e.attribute("chartlinewidth", "2").toUInt();
     } else {
-      m_chartType = static_cast<EChartType>(0);
       m_chartDataLabels = true;
       m_chartGridLines = true;
       m_chartByDefault = false;
