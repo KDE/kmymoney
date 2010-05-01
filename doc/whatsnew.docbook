@@ -4,8 +4,8 @@
 
 <para>
   We have been working hard to make this release better and easier to use in
-  every way. We have added a lot of new features to this version and have also
-  made quite a few improvements. We are confident you will like what you see.
+  every way. We have also made quite a few improvements. We are confident you 
+  will like what you see.
 </para>
 
 <para>
@@ -15,59 +15,34 @@
 <itemizedlist>
   <listitem>
     <para>
-      <link linkend="firsttime.mainwindow">An improved look and feel - including
-      a new icon set</link>
+      <link linkend="firsttime.mainwindow">Runs natively on KDE4</link>
     </para>
   </listitem> 
-
+  
   <listitem>
     <para>
-      <link linkend="details.reports">Reports</link>
+      Documentation and translations have been improved
+    </para>
+  </listitem> 
+  
+  <listitem>
+    <para>
+      Better performance of the user interface
+    </para>
+  </listitem> 
+  
+  <listitem>
+    <para>
+      <link linkend="details.impexp">Now works with latest version of AqBanking
+      and the usability of the online banking features has been improved</link>
     </para>
   </listitem>
 
   <listitem>
     <para>
-      <link linkend="details.reports.charts">Charts</link>
+      Runs on all operating systems supported by KDE
     </para>
-  </listitem>
-
-  <listitem>
-    <para>
-      <link linkend="details.forecast">Forecast</link>
-    </para>
-  </listitem>
-
-  <listitem>
-    <para>
-      <link linkend="details.budgets">Budgets</link>
-    </para>
-  </listitem>
-
-  <listitem>
-    <para>
-      <link linkend="details.schedules.intro">More flexible schedules</link>
-    </para>
-  </listitem>
-
-  <listitem>
-    <para>
-      <link linkend="details.database.usage">Database support</link>
-    </para>
-  </listitem>
-
-  <listitem>
-    <para>
-      <link linkend="details.impexp">Improved import features</link>
-    </para>
-  </listitem>
-
-  <listitem>
-    <para>
-      <link linkend="details.formats.encrypted">Improved PGP support</link>
-    </para>
-  </listitem>
-</itemizedlist>
+  </listitem> 
 
 </chapter>
 
