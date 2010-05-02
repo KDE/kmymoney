@@ -29,7 +29,7 @@
 // QT Includes
 
 #include <Q3Table>
-#include <Q3ValueVector>
+#include <QVector>
 #include <QWidget>
 #include <QMap>
 #include <QPair>
@@ -271,7 +271,7 @@ private:
 };
 
 
-class ItemPtrVector : public Q3ValueVector<RegisterItem *>
+class ItemPtrVector : public QVector<RegisterItem *>
 {
 public:
   ItemPtrVector() {}
@@ -630,7 +630,7 @@ signals:
 
 protected:
   ItemPtrVector                m_items;
-  Q3ValueVector<RegisterItem*>  m_itemIndex;
+  QVector<RegisterItem*>  m_itemIndex;
   RegisterItem*                m_selectAnchor;
   RegisterItem*                m_focusItem;
   RegisterItem*                m_ensureVisibleItem;

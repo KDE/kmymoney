@@ -18,7 +18,6 @@
 #include "pivottabletest.h"
 
 #include <QList>
-#include <Q3ValueVector>
 #include <QFile>
 
 #include <kdebug.h>

@@ -727,7 +727,7 @@ void Register::sortItems(void)
   RegisterItem* prev = 0;
   RegisterItem* item;
   m_firstItem = m_lastItem = 0;
-  for (Q3ValueVector<RegisterItem*>::size_type i = 0; i < m_items.size(); ++i) {
+  for (QVector<RegisterItem*>::size_type i = 0; i < m_items.size(); ++i) {
     item = m_items[i];
     if (!item)
       continue;
@@ -888,7 +888,7 @@ void Register::setupItemIndex(int rowCount)
   rowCount = 0;
   RegisterItem* prev = 0;
   m_firstItem = m_lastItem = 0;
-  for (Q3ValueVector<RegisterItem*>::size_type i = 0; i < m_items.size(); ++i) {
+  for (QVector<RegisterItem*>::size_type i = 0; i < m_items.size(); ++i) {
     RegisterItem* item = m_items[i];
     if (!item)
       continue;
@@ -909,7 +909,7 @@ void Register::setupItemIndex(int rowCount)
 void Register::updateAlternate(void) const
 {
   bool alternate = false;
-  for (Q3ValueVector<RegisterItem*>::size_type i = 0; i < m_items.size(); ++i) {
+  for (QVector<RegisterItem*>::size_type i = 0; i < m_items.size(); ++i) {
     RegisterItem* item = m_items[i];
     if (!item)
       continue;
@@ -955,7 +955,7 @@ void Register::updateRegister(bool forceUpdateRowHeight)
     int rowCount = 0;
     // determine the number of rows we need to display all items
     // while going through the list, check for erronous transactions
-    for (Q3ValueVector<RegisterItem*>::size_type i = 0; i < m_items.size(); ++i) {
+    for (QVector<RegisterItem*>::size_type i = 0; i < m_items.size(); ++i) {
       RegisterItem* item = m_items[i];
       if (!item)
         continue;
@@ -1722,7 +1722,7 @@ RegisterItem* Register::itemById(const QString& id) const
   if (id.isEmpty())
     return m_lastItem;
 
-  for (Q3ValueVector<RegisterItem*>::size_type i = 0; i < m_items.size(); ++i) {
+  for (QVector<RegisterItem*>::size_type i = 0; i < m_items.size(); ++i) {
     RegisterItem* item = m_items[i];
     if (!item)
       continue;
