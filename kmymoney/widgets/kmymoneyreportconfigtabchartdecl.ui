@@ -76,7 +76,7 @@
             </widget>
           </item>
           <item>
-            <spacer name="spacer2">
+            <spacer name="spacer1">
               <property name="sizeHint">
                 <size>
                   <width>121</width>
