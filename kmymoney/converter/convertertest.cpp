@@ -19,8 +19,6 @@
 
 #include <config-kmymoney.h>
 
-#include <Q3ValueList>
-#include <Q3ValueVector>
 #include <QFile>
 
 #include <kdebug.h>
