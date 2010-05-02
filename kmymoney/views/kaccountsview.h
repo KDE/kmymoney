@@ -159,8 +159,6 @@ signals:
 
 private:
   MyMoneyAccount                      m_reconciliationAccount;
-  QMap<QString, MyMoneySecurity>      m_securityMap;
-  QMap<QString, unsigned long>        m_transactionCountMap;
 
   /// set if a view needs to be reloaded during show()
   bool                                m_needReload[MaxViewTabs];

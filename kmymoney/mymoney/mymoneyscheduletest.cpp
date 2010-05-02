@@ -16,7 +16,7 @@
 
 #include "mymoneyscheduletest.h"
 
-#include <Q3ValueList>
+#include <QList>
 
 // Include internationalization
 #include <klocale.h>
@@ -686,7 +686,7 @@ void MyMoneyScheduleTest::testPaymentDates()
   try {
     sch = MyMoneySchedule(node);
     QDate nextPayment = sch.nextPayment(startDate);
-    Q3ValueList<QDate> list = sch.paymentDates(nextPayment, endDate);
+    QList<QDate> list = sch.paymentDates(nextPayment, endDate);
     CPPUNIT_ASSERT(list.count() == 3);
     CPPUNIT_ASSERT(list[0] == QDate(2006, 2, 28));
     CPPUNIT_ASSERT(list[1] == QDate(2006, 3, 31));
@@ -1324,7 +1324,7 @@ void MyMoneyScheduleTest::testModifyNextDueDate(void)
   s.setNextDueDate(s.startDate().addMonths(1));
   s.setLastPayment(s.startDate());
 
-  Q3ValueList<QDate> dates;
+  QList<QDate> dates;
   dates = s.paymentDates(QDate(2007, 2, 1), QDate(2007, 2, 1));
   CPPUNIT_ASSERT(s.nextDueDate() == QDate(2007, 2, 1));
   CPPUNIT_ASSERT(dates.count() == 1);

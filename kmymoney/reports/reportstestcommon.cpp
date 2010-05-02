@@ -17,8 +17,7 @@
 
 #include "reportstestcommon.h"
 
-#include <Q3ValueList>
-#include <Q3ValueVector>
+#include <QList>
 #include <QFile>
 #include <QTextStream>
 
@@ -395,7 +394,7 @@ void writeRCFtoXML(const MyMoneyReport& filter, const QString& _filename)
   delete doc;
 }
 
-bool readRCFfromXMLDoc(Q3ValueList<MyMoneyReport>& list, QDomDocument* doc)
+bool readRCFfromXMLDoc(QList<MyMoneyReport>& list, QDomDocument* doc)
 {
   bool result = false;
 
@@ -421,7 +420,7 @@ bool readRCFfromXMLDoc(Q3ValueList<MyMoneyReport>& list, QDomDocument* doc)
   return result;
 }
 
-bool readRCFfromXML(Q3ValueList<MyMoneyReport>& list, const QString& filename)
+bool readRCFfromXML(QList<MyMoneyReport>& list, const QString& filename)
 {
   int result = false;
   QFile f(filename);
@@ -447,7 +446,7 @@ void XMLandback(MyMoneyReport& filter)
   Q_CHECK_PTR(doc);
 
   writeRCFtoXMLDoc(filter, doc);
-  Q3ValueList<MyMoneyReport> list;
+  QList<MyMoneyReport> list;
   if (readRCFfromXMLDoc(list, doc) && !list.isEmpty())
     filter = list[0];
   else

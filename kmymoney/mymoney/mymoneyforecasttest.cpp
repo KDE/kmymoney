@@ -17,7 +17,7 @@
 #include "mymoneyforecasttest.h"
 
 #include <iostream>
-#include <Q3ValueList>
+#include <QList>
 
 #include "mymoneybudget.h"
 
@@ -258,7 +258,7 @@ void MyMoneyForecastTest::testGetForecastAccountList()
   MyMoneyForecast a;
   MyMoneyAccount a_checking = file->account(acChecking);
   MyMoneyAccount a_parent = file->account(acParent);
-  Q3ValueList<MyMoneyAccount> b;
+  QList<MyMoneyAccount> b;
 
   b = a.forecastAccountList();
   //check that it contains asset account, but not expense accounts
@@ -674,10 +674,10 @@ void MyMoneyForecastTest::testAccountMinimumBalanceDateList()
   MyMoneyAccount a_cash = file->account(acCash);
 
   //test
-  Q3ValueList<QDate> dateList;
+  QList<QDate> dateList;
   dateList = a.accountMinimumBalanceDateList(a_cash);
 
-  Q3ValueList<QDate>::iterator it = dateList.begin();
+  QList<QDate>::iterator it = dateList.begin();
 
   QDate minDate = *it;
 
@@ -710,10 +710,10 @@ void MyMoneyForecastTest::testAccountMaximumBalanceDateList()
   MyMoneyAccount a_cash = file->account(acCash);
 
   //test
-  Q3ValueList<QDate> dateList;
+  QList<QDate> dateList;
   dateList = a.accountMaximumBalanceDateList(a_cash);
 
-  Q3ValueList<QDate>::iterator it = dateList.begin();
+  QList<QDate>::iterator it = dateList.begin();
 
   QDate maxDate = *it;
 

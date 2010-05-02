@@ -22,7 +22,7 @@
 
 #define private public
 #define protected public
-#include <Q3ValueList>
+#include <QList>
 #include "mymoneyfile.h"
 #include "storage/mymoneyseqaccessmgr.h"
 #undef private
@@ -118,7 +118,7 @@ public:
   void testHasAccount();
   void testAddEquityAccount();
   void testReparentEquity();
-  void testReparentEquity(Q3ValueList<MyMoneyAccount::accountTypeE>& list, MyMoneyAccount& parent);
+  void testReparentEquity(QList<MyMoneyAccount::accountTypeE>& list, MyMoneyAccount& parent);
   void testBaseCurrency();
   void testOpeningBalanceNoBase();
   void testOpeningBalance();

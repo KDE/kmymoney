@@ -21,7 +21,7 @@
 #include <unistd.h>
 #include <QFile>
 #include <QDataStream>
-#include <Q3ValueList>
+#include <QList>
 
 MyMoneyFileTest:: MyMoneyFileTest() {}
 
@@ -237,7 +237,7 @@ void MyMoneyFileTest::testInstitutionRetrieval()
 
 void MyMoneyFileTest::testInstitutionListRetrieval()
 {
-  Q3ValueList<MyMoneyInstitution> list;
+  QList<MyMoneyInstitution> list;
 
   storage->m_dirty = false;
   list = m->institutionList();
@@ -251,7 +251,7 @@ void MyMoneyFileTest::testInstitutionListRetrieval()
   CPPUNIT_ASSERT(m->dirty() == false);
   CPPUNIT_ASSERT(list.count() == 2);
 
-  Q3ValueList<MyMoneyInstitution>::ConstIterator it;
+  QList<MyMoneyInstitution>::ConstIterator it;
   it = list.begin();
 
   CPPUNIT_ASSERT((*it).name() == "institution1");
@@ -1360,7 +1360,7 @@ void MyMoneyFileTest::testAddEquityAccount()
   // make sure, that only equity accounts can be children to it
   MyMoneyAccount a;
   a.setName("Testaccount");
-  Q3ValueList<MyMoneyAccount::accountTypeE> list;
+  QList<MyMoneyAccount::accountTypeE> list;
   list << MyMoneyAccount::Checkings;
   list << MyMoneyAccount::Savings;
   list << MyMoneyAccount::Cash;
@@ -1376,7 +1376,7 @@ void MyMoneyFileTest::testAddEquityAccount()
   list << MyMoneyAccount::Expense;
   list << MyMoneyAccount::AssetLoan;
 
-  Q3ValueList<MyMoneyAccount::accountTypeE>::Iterator it;
+  QList<MyMoneyAccount::accountTypeE>::Iterator it;
   for (it = list.begin(); it != list.end(); ++it) {
     a.setAccountType(*it);
     ft.restart();
@@ -1408,7 +1408,7 @@ void MyMoneyFileTest::testReparentEquity()
   MyMoneyAccount parent;
 
   // check the bad cases
-  Q3ValueList<MyMoneyAccount::accountTypeE> list;
+  QList<MyMoneyAccount::accountTypeE> list;
   list << MyMoneyAccount::Checkings;
   list << MyMoneyAccount::Savings;
   list << MyMoneyAccount::Cash;
@@ -1449,12 +1449,12 @@ void MyMoneyFileTest::testReparentEquity()
   }
 }
 
-void MyMoneyFileTest::testReparentEquity(Q3ValueList<MyMoneyAccount::accountTypeE>& list, MyMoneyAccount& parent)
+void MyMoneyFileTest::testReparentEquity(QList<MyMoneyAccount::accountTypeE>& list, MyMoneyAccount& parent)
 {
   MyMoneyAccount a;
   MyMoneyAccount stock = m->account("A000002");
 
-  Q3ValueList<MyMoneyAccount::accountTypeE>::Iterator it;
+  QList<MyMoneyAccount::accountTypeE>::Iterator it;
   MyMoneyFileTransaction ft;
   for (it = list.begin(); it != list.end(); ++it) {
     a.setName(QString("Testaccount %1").arg(*it));

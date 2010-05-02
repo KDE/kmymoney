@@ -17,7 +17,7 @@
 
 #include "pivottabletest.h"
 
-#include <Q3ValueList>
+#include <QList>
 #include <Q3ValueVector>
 #include <QFile>
 
@@ -603,7 +603,7 @@ void PivotTableTest::testAdvancedFilter()
     TransactionHelper t3(QDate(2004, 3, 1), MyMoneySplit::ActionWithdrawal, moParent2, acCredit, acParent);
     TransactionHelper t4(QDate(2004, 4, 1), MyMoneySplit::ActionWithdrawal, moChild, acCredit, acChild);
 
-    Q3ValueList<MyMoneySplit> splits = t1.splits();
+    QList<MyMoneySplit> splits = t1.splits();
     splits[0].setReconcileFlag(MyMoneySplit::Cleared);
     splits[1].setReconcileFlag(MyMoneySplit::Cleared);
     t1.modifySplit(splits[0]);
@@ -648,7 +648,7 @@ void PivotTableTest::testAdvancedFilter()
     TransactionHelper t3(QDate(2004, 11, 7), MyMoneySplit::ActionWithdrawal, moParent2, acCredit, acParent);
     TransactionHelper t4(QDate(2004, 11, 7), MyMoneySplit::ActionWithdrawal, moChild, acCredit, acChild);
 
-    Q3ValueList<MyMoneySplit> splits = t1.splits();
+    QList<MyMoneySplit> splits = t1.splits();
     splits[0].setNumber("1");
     splits[1].setNumber("1");
     t1.modifySplit(splits[0]);

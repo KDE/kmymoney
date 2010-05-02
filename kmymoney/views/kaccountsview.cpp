@@ -98,8 +98,11 @@ KAccountsView::KAccountsView(QWidget *parent) :
   m_equitiesGroup->setLayout(m_equitiesListLayout);
 
   m_assetsList->setContextMenuPolicy(Qt::CustomContextMenu);
+  m_assetsList->setWordWrap(true);
   m_liabilitiesList->setContextMenuPolicy(Qt::CustomContextMenu);
+  m_liabilitiesList->setWordWrap(true);
   m_equitiesList->setContextMenuPolicy(Qt::CustomContextMenu);
+  m_equitiesList->setWordWrap(true);
 
   connect(m_searchWidget, SIGNAL(textChanged(const QString &)), m_filterProxyModel, SLOT(setFilterFixedString(const QString &)));
 

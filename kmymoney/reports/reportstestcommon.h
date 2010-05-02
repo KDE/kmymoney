@@ -18,7 +18,7 @@
 #ifndef REPORTSTESTCOMMON_H
 #define REPORTSTESTCOMMON_H
 
-#include <Q3ValueList>
+#include <QList>
 class QDomDocument;
 
 #include "mymoneyaccount.h"
@@ -108,7 +108,7 @@ public:
   BudgetEntryHelper(const QDate& _date, const QString& _categoryid, bool _applytosub, const MyMoneyMoney& _amount): m_date(_date), m_categoryid(_categoryid), m_applytosub(_applytosub), m_amount(_amount) {}
 };
 
-class BudgetHelper: public Q3ValueList<BudgetEntryHelper>
+class BudgetHelper: public QList<BudgetEntryHelper>
 {
   MyMoneyMoney budgetAmount(const QDate& _date, const QString& _categoryid, bool& _applytosub);
 };
@@ -123,8 +123,8 @@ extern void writeTabletoHTML(const reports::QueryTable& table, const QString& _f
 extern void writeTabletoCSV(const reports::PivotTable& table, const QString& _filename = QString());
 extern void writeTabletoCSV(const reports::QueryTable& table, const QString& _filename = QString());
 extern void writeRCFtoXML(const MyMoneyReport& filter, const QString& _filename = QString());
-extern bool readRCFfromXMLDoc(Q3ValueList<MyMoneyReport>& list, QDomDocument* doc);
-extern bool readRCFfromXML(Q3ValueList<MyMoneyReport>& list, const QString& filename);
+extern bool readRCFfromXMLDoc(QList<MyMoneyReport>& list, QDomDocument* doc);
+extern bool readRCFfromXML(QList<MyMoneyReport>& list, const QString& filename);
 extern void XMLandback(MyMoneyReport& filter);
 extern MyMoneyMoney searchHTML(const QString& _html, const QString& _search);
 
