@@ -23,7 +23,7 @@
 
 #include <QList>
 #include <QFile>
-#include <Q3TextStream>
+#include <QTextStream>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -604,12 +604,12 @@ QString ListTable::renderCSV(void) const
 void ListTable::dump(const QString& file, const QString& context) const
 {
   QFile g(file);
-  g.open(QIODevice::WriteOnly);
+  g.open(QIODevice::WriteOnly | QIODevice::Text);
 
   if (! context.isEmpty())
-    Q3TextStream(&g) << context.arg(renderBody());
+    QTextStream(&g) << context.arg(renderBody());
   else
-    Q3TextStream(&g) << renderBody();
+    QTextStream(&g) << renderBody();
   g.close();
 }
 

@@ -21,7 +21,7 @@
 // QT Includes
 
 #include <QFile>
-#include <Q3TextStream>
+#include <QTextStream>
 #include <QRadioButton>
 #include <QSpinBox>
 #include <Q3DateTimeEdit>
@@ -111,8 +111,8 @@ bool OfxImporterPlugin::isMyFormat(const QString& filename) const
   bool result = false;
 
   QFile f(filename);
-  if (f.open(QIODevice::ReadOnly)) {
-    Q3TextStream ts(&f);
+  if (f.open(QIODevice::ReadOnly | QIODevice::Text)) {
+    QTextStream ts(&f);
 
     int lineCount = 20;
     while (!ts.atEnd() && !result  && lineCount != 0) {
