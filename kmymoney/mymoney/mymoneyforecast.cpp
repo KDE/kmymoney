@@ -629,7 +629,7 @@ void MyMoneyForecast::addScheduledTransactions(void)
   QList<MyMoneySchedule> schedule;
 
   schedule = file->scheduleList("", MyMoneySchedule::TYPE_ANY, MyMoneySchedule::OCCUR_ANY, MyMoneySchedule::STYPE_ANY,
-                                QDate::currentDate(), forecastEndDate());
+                                QDate(), forecastEndDate());
   if (schedule.count() > 0) {
     QList<MyMoneySchedule>::Iterator it;
     do {
