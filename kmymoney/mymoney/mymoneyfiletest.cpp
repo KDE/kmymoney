@@ -252,13 +252,13 @@ void MyMoneyFileTest::testInstitutionListRetrieval()
   CPPUNIT_ASSERT(list.count() == 2);
 
   QList<MyMoneyInstitution>::ConstIterator it;
-  it = list.begin();
+  it = list.constBegin();
 
   CPPUNIT_ASSERT((*it).name() == "institution1");
   ++it;
   CPPUNIT_ASSERT((*it).name() == "institution2");
   ++it;
-  CPPUNIT_ASSERT(it == list.end());
+  CPPUNIT_ASSERT(it == list.constEnd());
 }
 
 void MyMoneyFileTest::testInstitutionModify()
