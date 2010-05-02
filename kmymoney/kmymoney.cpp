@@ -5529,16 +5529,8 @@ void KMyMoneyApp::updateCaption(bool skipActions)
 #ifdef KMM_DEBUG
   caption += QString(" (%1 x %2)").arg(width()).arg(height());
 #endif
-  if (modified) {
-    caption = KDialog::makeStandardCaption(caption, false, KDialog::ModifiedCaption);
-  } else {
-    caption = KDialog::makeStandardCaption(caption, false, KDialog::NoCaptionFlags);
-  }
 
-  if (caption.length() > 0)
-    caption += " - ";
-  caption += "KMyMoney";
-  setPlainCaption(caption);
+  setCaption(caption, modified);
 
   if (!skipActions) {
     d->m_myMoneyView->enableViews();
