@@ -2135,9 +2135,9 @@ void MyMoneyQifReader::selectOrCreateAccount(const SelectCreateMode mode, MyMone
       int i = 0;
       for (it_e = m_qifEntry.begin(); it_e != m_qifEntry.end(); ++it_e) {
         if (m_extractedLine == i)
-          accountSelect->m_qifEntry->setColor(QColor("red"));
+          accountSelect->m_qifEntry->setTextColor(QColor("red"));
         accountSelect->m_qifEntry->append(*it_e);
-        accountSelect->m_qifEntry->setColor(QColor("black"));
+        accountSelect->m_qifEntry->setTextColor(QColor("black"));
         ++i;
       }
 
