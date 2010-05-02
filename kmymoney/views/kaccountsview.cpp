@@ -231,97 +231,6 @@ void KAccountsView::loadAccounts(AccountsViewTab tab)
   }
 }
 
-/*void KAccountsView::loadIconView(void)
-{
-  ::timetrace("start load accounts icon view");
-
-  // remember the positions of the icons
-  QMap<QString, QPoint> posMap;
-  KMyMoneyAccountIconItem* p = dynamic_cast<KMyMoneyAccountIconItem*>(m_accountIcons->firstItem());
-  for (; p; p = dynamic_cast<KMyMoneyAccountIconItem*>(p->nextItem()))
-    posMap[p->itemObject().id()] = p->pos();
-
-  // turn off updates to avoid flickering during reload
-  m_accountIcons->setAutoArrange(true);
-
-  // clear the current contents and recreate it
-  m_accountIcons->clear();
-  QMap<QString, MyMoneyAccount> accountMap;
-
-  MyMoneyFile* file = MyMoneyFile::instance();
-
-  // get account list and sort by name
-  QList<MyMoneyAccount> alist;
-  file->accountList(alist);
-  QList<MyMoneyAccount>::const_iterator it_a;
-  for (it_a = alist.constBegin(); it_a != alist.constEnd(); ++it_a) {
-    accountMap[QString("%1-%2").arg((*it_a).name()).arg((*it_a).id())] = *it_a;
-  }
-
-  bool showClosedAccounts = kmymoney->toggleAction("view_show_all_accounts")->isChecked()
-                            || !KMyMoneyGlobalSettings::hideClosedAccounts();
-  bool existNewIcons = false;
-
-  // parse list and add all asset and liability accounts
-  QMap<QString, MyMoneyAccount>::const_iterator it;
-  QPoint loc;
-  for (it = accountMap.constBegin(); it != accountMap.constEnd(); ++it) {
-    if ((*it).isClosed() && !showClosedAccounts)
-      continue;
-    const QString& pos = (*it).value("kmm-iconpos");
-    KMyMoneyAccountIconItem* item;
-    switch ((*it).accountGroup()) {
-    case MyMoneyAccount::Equity:
-      if (!KMyMoneyGlobalSettings::expertMode())
-        continue;
-      // tricky fall through here
-
-    case MyMoneyAccount::Asset:
-    case MyMoneyAccount::Liability:
-      // don't show stock accounts
-      if ((*it).isInvest())
-        continue;
-
-      // if we have a position stored with the object and no other
-      // idea of it's current position, then take the one
-      // stored inside the object. Also, turn off auto arrangement
-      if (!pos.isEmpty() && posMap[(*it).id()] == QPoint()) {
-        posMap[(*it).id()] = point(pos);
-      }
-
-      loc = posMap[(*it).id()];
-      if (loc == QPoint()) {
-        existNewIcons = true;
-      } else {
-        m_accountIcons->setAutoArrange(false);
-      }
-
-      item = new KMyMoneyAccountIconItem(m_accountIcons, *it);
-      if ((*it).id() == m_reconciliationAccount.id())
-        item->setReconciliation(true);
-
-      if (loc != QPoint()) {
-        item->move(loc);
-      }
-      break;
-
-    default:
-      break;
-    }
-  }
-
-  // clear the current contents
-  m_securityMap.clear();
-  m_transactionCountMap.clear();
-
-  if (existNewIcons) {
-    m_accountIcons->arrangeItemsInGrid(true);
-  }
-
-  m_accountIcons->setAutoArrange(false);
-  ::timetrace("done load accounts icon view");
-}*/
-
 void KAccountsView::loadListView(void)
 {
   // TODO: check why the invalidate is needed here
@@ -345,6 +254,7 @@ void KAccountsView::loadListView(void)
   if (KMyMoneyGlobalSettings::showAccountsExpanded()) {
     m_accountTree->expandAll();
   }
+  ::timetrace("done load accounts icon view");
 }
 
 /*void KAccountsView::slotReconcileAccount(const MyMoneyAccount& acc, const QDate& reconciliationDate, const MyMoneyMoney& endingBalance)
@@ -514,18 +424,20 @@ QPoint KAccountsView::point(const QString& val) const
 
 void KAccountsView::loadIconGroups()
 {
-
+  ::timetrace("start load accounts icon view");
   MyMoneyFile* file = MyMoneyFile::instance();
 
+  //load list of asset accounts
   MyMoneyAccount assetAccount = file->asset();
   m_assetsList->clear();
+  loadAccountIconsIntoList(assetAccount, m_assetsList);
 
+  //load list of liability accounts
   MyMoneyAccount liabilityAccount = file->liability();
   m_liabilitiesList->clear();
-
-  loadAccountIconsIntoList(assetAccount, m_assetsList);
   loadAccountIconsIntoList(liabilityAccount, m_liabilitiesList);
 
+  //load list of equity accounts only if in expert mode
   if (KMyMoneyGlobalSettings::expertMode()) {
     MyMoneyAccount equityAccount = file->equity();
     m_equitiesList->clear();
@@ -533,11 +445,14 @@ void KAccountsView::loadIconGroups()
   } else {
     m_equitiesGroup->hide();
   }
+  ::timetrace("done load accounts icon view");
 }
 
 void KAccountsView::loadAccountIconsIntoList(const MyMoneyAccount& parentAccount, KListWidget* listWidget)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
+  bool showClosedAccounts = kmymoney->toggleAction("view_show_all_accounts")->isChecked()
+                            || !KMyMoneyGlobalSettings::hideClosedAccounts();
 
   //get the subaccounts
   QStringList subAccountsId = parentAccount.accountList();
@@ -570,13 +485,16 @@ void KAccountsView::loadAccountIconsIntoList(const MyMoneyAccount& parentAccount
     if ((*it_a).isInvest())
       continue;
 
+    //check whether it is a closed account and it should be shown
+    if ((*it_a).isClosed() && !showClosedAccounts)
+      continue;
+
     QListWidgetItem* accountItem = new QListWidgetItem;
     accountItem->setText((*it_a).name());
     accountItem->setData(Qt::UserRole, QVariant::fromValue((*it_a)));
     accountItem->setIcon(QIcon((*it_a).accountPixmap()));
     listWidget->addItem(accountItem);
   }
-
 }
 
 #include "kaccountsview.moc"
