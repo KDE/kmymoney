@@ -1883,7 +1883,6 @@ void KMyMoneyApp::slotStatusProgressBar(int current, int total)
   if (total == -1 && current == -1) {     // reset
     d->m_progressBar->reset();
     d->m_progressBar->hide();
-    QCoreApplication::processEvents(QEventLoop::ExcludeUserInput, 2);
 
   } else if (total != 0) {                // init
     d->m_progressBar->setMaximum(total);
@@ -1894,7 +1893,6 @@ void KMyMoneyApp::slotStatusProgressBar(int current, int total)
     // only process painting if last update is at least 250 ms ago
     if (abs(d->m_lastUpdate.msecsTo(currentTime)) > 250) {
       d->m_progressBar->setValue(current);
-      QCoreApplication::processEvents(QEventLoop::ExcludeUserInput, 2);
       d->m_lastUpdate = currentTime;
     }
   }
