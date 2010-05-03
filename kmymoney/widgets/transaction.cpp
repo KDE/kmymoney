@@ -271,12 +271,13 @@ void Transaction::paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &o
     if (option.state & QStyle::State_Selected) {
       // paint the selection background only from the first row on to the last row at once
       if (index.row() == startRow()) {
-        if (m_focus) {
-          option.state |= QStyle::State_HasFocus;
-        }
         QRect old = option.rect;
         option.rect.setBottom(option.rect.bottom() + (numRowsRegister() - 1)*option.rect.height());
         style->drawPrimitive(QStyle::PE_PanelItemViewItem, &option, painter, widget);
+        if (m_focus && index.column() == DetailColumn) {
+          option.state |= QStyle::State_HasFocus;
+          style->drawPrimitive(QStyle::PE_FrameFocusRect, &option, painter, widget);
+        }
         option.rect = old;
       }
     } else {
