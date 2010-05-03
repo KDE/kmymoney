@@ -1644,6 +1644,7 @@ void Register::slotEnsureItemVisible(void)
   updateRegister();
   setUpdatesEnabled(enabled);
   scrollTo(model()->index(m_ensureVisibleItem->startRow(), DetailColumn));
+  scrollTo(model()->index(m_ensureVisibleItem->startRow() + m_ensureVisibleItem->numRowsRegister(), DetailColumn));
 }
 
 TransactionSortField KMyMoneyRegister::textToSortOrder(const QString& text)
