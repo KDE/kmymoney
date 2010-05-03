@@ -710,8 +710,6 @@ const QString MyMoneyQifReader::extractLine(const QChar& id, int cnt)
     ++m_extractedLine;
     if ((*it)[0] == id) {
       if (cnt-- == 1) {
-        if ((*it).mid(1).isEmpty())
-          return QString(" ");
         return (*it).mid(1);
       }
     }
