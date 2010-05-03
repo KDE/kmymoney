@@ -150,8 +150,8 @@ void StdTransactionMatched::registerCellText(QString& txt, int& align, int row, 
           int pos = memo.lastIndexOf(matchedSplit.memo());
           if (pos != -1) {
             memo = memo.left(pos);
-            if (memo.endsWith('\n'))
-              memo = memo.left(pos - 1);
+            // replace all new line characters because we only have one line available for the displayed data
+            memo.replace('\n', " ");
           }
         }
         txt = QString("%1 %2").arg(postDate.toString(Qt::ISODate)).arg(memo);
