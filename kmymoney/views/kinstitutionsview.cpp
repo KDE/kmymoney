@@ -160,12 +160,17 @@ void KInstitutionsView::loadAccounts(void)
     // hide it, if unused
     noInstitutionItem->setVisible(noInstitutionItem->childCount() != 0);
 
+    bool showClosedAccounts = kmymoney->toggleAction("view_show_all_accounts")->isChecked()
+                              || !KMyMoneyGlobalSettings::hideClosedAccounts();
+
     QList<MyMoneyInstitution> list = file->institutionList();
     QList<MyMoneyInstitution>::const_iterator it_i;
     for (it_i = list.constBegin(); it_i != list.constEnd(); ++it_i) {
       KMyMoneyAccountTreeItem* item = new KMyMoneyAccountTreeItem(m_accountTree, *it_i);
       item->setPixmap(0, none.pixmap());
       loadSubAccounts(item, (*it_i).id());
+      if(!showClosedAccounts)
+        item->setVisible(item->childCount() != 0);
     }
 
   } catch (MyMoneyException *e) {
@@ -198,7 +203,8 @@ void KInstitutionsView::loadAccounts(void)
 
 void KInstitutionsView::loadSubAccounts(KMyMoneyAccountTreeItem* parent)
 {
-  bool showClosedAccounts = kmymoney->toggleAction("view_show_all_accounts")->isChecked();
+  bool showClosedAccounts = kmymoney->toggleAction("view_show_all_accounts")->isChecked()
+                            || !KMyMoneyGlobalSettings::hideClosedAccounts();
   const MyMoneyAccount& account = dynamic_cast<const MyMoneyAccount&>(parent->itemObject());
   QList<QString>::const_iterator it_a;
   MyMoneyFile* file = MyMoneyFile::instance();
@@ -227,7 +233,8 @@ void KInstitutionsView::loadSubAccounts(KMyMoneyAccountTreeItem* parent, const Q
 
   QMap<QString, MyMoneyAccount>::const_iterator it_a;
   MyMoneyMoney  value;
-  bool showClosedAccounts = kmymoney->toggleAction("view_show_all_accounts")->isChecked();
+  bool showClosedAccounts = kmymoney->toggleAction("view_show_all_accounts")->isChecked()
+                            || !KMyMoneyGlobalSettings::hideClosedAccounts();
 
   for (it_a = m_accountMap.constBegin(); it_a != m_accountMap.constEnd(); ++it_a) {
     const MyMoneyAccount& acc = *it_a;
