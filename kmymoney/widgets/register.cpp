@@ -309,16 +309,9 @@ void GroupMarker::paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &o
 
   // in case we need to show the date, we just paint it in col 1
   if (m_showDate) {
-    r.setX(m_parent->horizontalHeader()->sectionPosition(1));
-    r.setWidth(m_parent->columnWidth(1));
-    painter->translate(r.x(), r.y());
-
-    cellRect.setX(0);
-    cellRect.setY(0);
-    cellRect.setWidth(m_parent->columnWidth(1));
-    cellRect.setHeight(m_parent->rowHeight(index.row()));
-
     font.setBold(false);
+    cellRect.setX(m_parent->horizontalHeader()->sectionPosition(DateColumn));
+    cellRect.setWidth(m_parent->horizontalHeader()->sectionSize(DateColumn));
     painter->setFont(font);
     painter->drawText(cellRect, Qt::AlignVCenter | Qt::AlignCenter, KGlobal::locale()->formatDate(sortPostDate(), KLocale::ShortDate));
   }
