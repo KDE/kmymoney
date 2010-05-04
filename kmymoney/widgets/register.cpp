@@ -452,7 +452,7 @@ RegisterItemDelegate::~RegisterItemDelegate()
 void RegisterItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
   RegisterItem* const item = m_register->itemAtRow(index.row());
-  if (item) {
+  if (item && m_register->updatesEnabled()) {
     QStyleOptionViewItemV4 opt = option;
     initStyleOption(&opt, index);
     item->paintRegisterCell(painter, opt, index);
