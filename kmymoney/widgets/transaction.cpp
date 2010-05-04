@@ -475,14 +475,9 @@ bool Transaction::maybeTip(const QPoint& cpos, int row, int col, QRect& r, QStri
   if (!m_erronous && m_transaction.splitCount() < 3)
     return false;
 
-  int h = m_parent->rowHeightHint();
-
   // check for detail column in row 0 of the transaction for a possible exclamation mark
-  r = m_parent->visualItemRect(m_parent->itemAt(m_startRow + 0, col));
-  // qDebug("r is %d,%d,%d,%d", r.x(), r.y(), r.width(), r.height());
-  r.setBottomLeft(QPoint(r.x() + (r.width() - h), r.y() + h));
-  // qDebug("r is %d,%d,%d,%d", r.x(), r.y(), r.width(), r.height());
-  // qDebug("p is in r = %d", r.contains(cpos));
+  r = m_parent->visualRect(m_parent->model()->index(m_startRow + 0, col));
+  r.setBottom(r.bottom() + (numRowsRegister() - 1)*r.height());
   if (r.contains(cpos) && m_erronous) {
     if (m_transaction.splits().count() < 2) {
       msg = QString("<qt>%1</qt>").arg(i18n("Transaction is missing a category assignment."));
@@ -494,7 +489,7 @@ bool Transaction::maybeTip(const QPoint& cpos, int row, int col, QRect& r, QStri
   }
 
   // check for detail column in row 1 of the transaction for a possible exclamation mark
-  r = m_parent->visualItemRect(m_parent->itemAt(m_startRow + 1, col));
+  r = m_parent->visualRect(m_parent->model()->index(m_startRow + 1, col));
   if (row == 1 && r.contains(cpos) && m_transaction.splitCount() > 2) {
     MyMoneyFile* file = MyMoneyFile::instance();
     QList<MyMoneySplit>::const_iterator it_s;
