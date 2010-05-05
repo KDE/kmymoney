@@ -74,7 +74,7 @@ public slots:
     */
   //void slotUpdateIconPos(unsigned int action);
 
-  //void slotReconcileAccount(const MyMoneyAccount& acc, const QDate& reconciliationDate, const MyMoneyMoney& endingBalance);
+  void slotReconcileAccount(const MyMoneyAccount& acc, const QDate& reconciliationDate, const MyMoneyMoney& endingBalance);
 
 protected:
   typedef enum {
@@ -84,6 +84,10 @@ protected:
     MaxViewTabs
   } AccountsViewTab;
 
+  enum accountViewRole {
+    reconcileRole = Qt::UserRole + 1
+  };
+
   /**
     * This method loads the accounts for the respective tab.
     *
@@ -91,7 +95,6 @@ protected:
     */
   void loadAccounts(AccountsViewTab tab);
   void loadListView(void);
-  //void loadIconView(void);
   void loadIconGroups(void);
 
   /**
@@ -105,9 +108,6 @@ protected:
     * account icon or 0 if no icon is selected.
     */
   QListWidgetItem* selectedIcon(void) const;
-
-  QPoint point(const QString& str) const;
-  QString point(const QPoint& val) const;
 
 protected slots:
   void slotNetWorthChanged(const MyMoneyMoney &);
@@ -123,6 +123,7 @@ protected slots:
   void slotOpenObject(QListWidgetItem* item);
   void slotExpandCollapse(void);
   void slotUnusedIncomeExpenseAccountHidden(void);
+  void slotReconcileAccount(KListWidget* list, const MyMoneyAccount& acc);
 
 signals:
   /**

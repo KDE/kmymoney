@@ -260,36 +260,31 @@ void KAccountsView::loadListView(void)
   ::timetrace("done load accounts icon view");
 }
 
-/*void KAccountsView::slotReconcileAccount(const MyMoneyAccount& acc, const QDate& reconciliationDate, const MyMoneyMoney& endingBalance)
+//FIXME: This will be deprecated once the lists use the accounts model
+void KAccountsView::slotReconcileAccount(const MyMoneyAccount& acc, const QDate& /*reconciliationDate*/, const MyMoneyMoney& /*endingBalance*/)
 {
-  Q_UNUSED(reconciliationDate);
-  Q_UNUSED(endingBalance);
-
-  // TODO: scan through the list of accounts and mark all non
-  // expanded and re-select the one that was probably selected before
-
-  // scan trough the icon list and do the same thing
-  KMyMoneyAccountIconItem* icon = dynamic_cast<KMyMoneyAccountIconItem*>(m_accountIcons->firstItem());
-  for (; icon; icon = dynamic_cast<KMyMoneyAccountIconItem*>(icon->nextItem())) {
-    icon->setReconciliation(false);
+  //call all lists
+  slotReconcileAccount(m_assetsList, acc);
+  slotReconcileAccount(m_liabilitiesList, acc);
+  if (KMyMoneyGlobalSettings::expertMode()) {
+    slotReconcileAccount(m_equitiesList, acc);
   }
 
-  m_reconciliationAccount = acc;
+}
 
-  if (!acc.id().isEmpty()) {
-    // TODO: scan through the list of accounts and mark
-    // the one that is currently reconciled
-
-    // scan trough the icon list and do the same thing
-    icon = dynamic_cast<KMyMoneyAccountIconItem*>(m_accountIcons->firstItem());
-    for (; icon; icon = dynamic_cast<KMyMoneyAccountIconItem*>(icon->nextItem())) {
-      if (icon->itemObject().id() == acc.id()) {
-        icon->setReconciliation(true);
-        break;
-      }
-    }
-  }
-}*/
+void KAccountsView::slotReconcileAccount(KListWidget* list, const MyMoneyAccount& acc)
+{
+  //scan all the items in the list and set the flag
+  for(int i = 0; i < list->count(); ++i)
+   {
+     //compare the id of the account to the items and set the reconcile flag accordingly
+     QListWidgetItem* item = list->item(i);
+     MyMoneyAccount itemAccount = (item->data(Qt::UserRole)).value<MyMoneyAccount>();
+     item->setIcon(QIcon(itemAccount.accountPixmap(itemAccount.id() == acc.id())));
+     item->setData(reconcileRole, QVariant(itemAccount.id() == acc.id()));
+   }
+   m_reconciliationAccount = acc;
+}
 
 void KAccountsView::slotNetWorthChanged(const MyMoneyMoney &netWorth)
 {
@@ -385,22 +380,6 @@ void KAccountsView::slotOpenObject(QListWidgetItem* item)
     emit openObject((item->data(Qt::UserRole)).value<MyMoneyAccount>());
 }
 
-QString KAccountsView::point(const QPoint& val) const
-{
-  return QString("%1;%2").arg(val.x()).arg(val.y());
-}
-
-QPoint KAccountsView::point(const QString& val) const
-{
-  QRegExp exp("(\\d+);(\\d+)");
-  int x = 0;
-  int y = 0;
-  if (exp.indexIn(val) != -1) {
-    x = exp.cap(1).toInt();
-    y = exp.cap(2).toInt();
-  }
-  return QPoint(x, y);
-}
 
 /*void KAccountsView::slotUpdateIconPos(unsigned int action)
 {
@@ -496,6 +475,7 @@ void KAccountsView::loadAccountIconsIntoList(const MyMoneyAccount& parentAccount
     accountItem->setText((*it_a).name());
     accountItem->setData(Qt::UserRole, QVariant::fromValue((*it_a)));
     accountItem->setIcon(QIcon((*it_a).accountPixmap()));
+    accountItem->setData(reconcileRole, QVariant(false));
     listWidget->addItem(accountItem);
   }
 }
