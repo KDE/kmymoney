@@ -205,6 +205,12 @@ void KMyMoneyMVCCombo::disconnectNotify(const char* signal)
 
 void KMyMoneyMVCCombo::focusOutEvent(QFocusEvent* e)
 {
+  // when showing m_completion we'll receive a focus out event even if the focus
+  // will still remain at this widget since this widget is the completion's focus proxy
+  // so ignore the focus out event caused by showin a widget of type Qt::Popup
+  if (e->reason() == Qt::PopupFocusReason)
+    return;
+
   if (d->m_inFocusOutEvent) {
     KComboBox::focusOutEvent(e);
     return;
