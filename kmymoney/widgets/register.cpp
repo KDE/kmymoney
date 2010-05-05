@@ -1406,7 +1406,10 @@ void Register::mouseReleaseEvent(QMouseEvent *e)
 void Register::contextMenuEvent(QContextMenuEvent *e)
 {
   if (e->reason() == QContextMenuEvent::Mouse) {
-    selectItem(rowAt(e->y()), columnAt(e->x()));
+    // if a selected item is clicked don't change the selection
+    RegisterItem* item = itemAtRow(rowAt(e->y()));
+    if (item && !item->isSelected())
+      selectItem(rowAt(e->y()), columnAt(e->x()));
   }
   openContextMenu();
 }

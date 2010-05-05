@@ -5353,7 +5353,10 @@ void KMyMoneyApp::slotUpdateMoveToAccountMenu(void)
 
 void KMyMoneyApp::slotTransactionMatch(void)
 {
-  if (action("transaction_match")->text() == i18nc("Button text for match transaction", "Match"))
+  // if the menu action is retrieved it can contain an '&' character for the accelerator causing the comparison to fail if not removed
+  QString transactionActionText = action("transaction_match")->text();
+  transactionActionText.remove('&');
+  if (transactionActionText == i18nc("Button text for match transaction", "Match"))
     transactionMatch();
   else
     transactionUnmatch();
