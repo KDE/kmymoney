@@ -88,12 +88,18 @@ KCategoriesView::KCategoriesView(QWidget *parent) :
   connect(m_accountTree, SIGNAL(selectObject(const MyMoneyObject&)), this, SIGNAL(selectObject(const MyMoneyObject&)));
   connect(m_accountTree, SIGNAL(openContextMenu(const MyMoneyObject&)), this, SIGNAL(openContextMenu(const MyMoneyObject&)));
   connect(m_accountTree, SIGNAL(openObject(const MyMoneyObject&)), this, SIGNAL(openObject(const MyMoneyObject&)));
-  connect(m_collapseButton, SIGNAL(clicked()), m_accountTree, SLOT(collapseAll()));
-  connect(m_expandButton, SIGNAL(clicked()), m_accountTree, SLOT(expandAll()));
 
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadAccounts()));
   connect(m_collapseButton, SIGNAL(clicked()), this, SLOT(slotExpandCollapse()));
   connect(m_expandButton, SIGNAL(clicked()), this, SLOT(slotExpandCollapse()));
+
+  // connect the two buttons to all required slots
+  connect(m_collapseButton, SIGNAL(clicked()), this, SLOT(slotExpandCollapse()));
+  connect(m_collapseButton, SIGNAL(clicked()), m_accountTree, SLOT(collapseAll()));
+  connect(m_collapseButton, SIGNAL(clicked()), m_filterProxyModel, SLOT(collapseAll()));
+  connect(m_expandButton, SIGNAL(clicked()), this, SLOT(slotExpandCollapse()));
+  connect(m_expandButton, SIGNAL(clicked()), m_accountTree, SLOT(expandAll()));
+  connect(m_expandButton, SIGNAL(clicked()), m_filterProxyModel, SLOT(expandAll()));
 }
 
 KCategoriesView::~KCategoriesView()
@@ -141,6 +147,7 @@ void KCategoriesView::loadAccounts(void)
 
   // and in case we need to show things expanded, we'll do so
   if (KMyMoneyGlobalSettings::showAccountsExpanded()) {
+    m_filterProxyModel->expandAll();
     m_accountTree->expandAll();
   }
 

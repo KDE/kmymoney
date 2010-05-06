@@ -165,7 +165,7 @@ private:
   bool                                m_needReload[MaxViewTabs];
   bool                                m_haveUnusedCategories;
 
-  AccountsFilterProxyModel            *m_filterProxyModel;
+  AccountsViewFilterProxyModel        *m_filterProxyModel;
 };
 
 #endif

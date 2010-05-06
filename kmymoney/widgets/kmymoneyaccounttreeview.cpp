@@ -182,4 +182,16 @@ void AccountsViewFilterProxyModel::expanded(const QModelIndex &index)
   }
 }
 
+void AccountsViewFilterProxyModel::expandAll(void)
+{
+#warning Implement AccountsViewFilterProxyModel::expandAll
+  qDebug("Implement AccountsViewFilterProxyModel::expandAll");
+}
+
+void AccountsViewFilterProxyModel::collapseAll(void)
+{
+#warning Implement AccountsViewFilterProxyModel::collapseAll
+  qDebug("Implement AccountsViewFilterProxyModel::collapseAll");
+}
+
 #include "kmymoneyaccounttreeview.moc"

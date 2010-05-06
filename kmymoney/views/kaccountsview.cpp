@@ -109,11 +109,10 @@ KAccountsView::KAccountsView(QWidget *parent) :
   // let the model know if the item is expanded or collapsed
   connect(m_accountTree, SIGNAL(collapsed(const QModelIndex &)), m_filterProxyModel, SLOT(collapsed(const QModelIndex &)));
   connect(m_accountTree, SIGNAL(expanded(const QModelIndex &)), m_filterProxyModel, SLOT(expanded(const QModelIndex &)));
+
   connect(m_accountTree, SIGNAL(selectObject(const MyMoneyObject&)), this, SIGNAL(selectObject(const MyMoneyObject&)));
   connect(m_accountTree, SIGNAL(openContextMenu(const MyMoneyObject&)), this, SIGNAL(openContextMenu(const MyMoneyObject&)));
   connect(m_accountTree, SIGNAL(openObject(const MyMoneyObject&)), this, SIGNAL(openObject(const MyMoneyObject&)));
-  connect(m_collapseButton, SIGNAL(clicked()), m_accountTree, SLOT(collapseAll()));
-  connect(m_expandButton, SIGNAL(clicked()), m_accountTree, SLOT(expandAll()));
 
   connect(m_assetsList, SIGNAL(itemSelectionChanged()), this, SLOT(slotAssetsSelectIcon()));
   connect(m_assetsList, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(slotAssetsOpenContextMenu(const QPoint&)));
@@ -128,8 +127,14 @@ KAccountsView::KAccountsView(QWidget *parent) :
   connect(m_equitiesList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(slotOpenObject(QListWidgetItem*)));
 
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadAccounts()));
+
+  // connect the two buttons to all required slots
   connect(m_collapseButton, SIGNAL(clicked()), this, SLOT(slotExpandCollapse()));
+  connect(m_collapseButton, SIGNAL(clicked()), m_accountTree, SLOT(collapseAll()));
+  connect(m_collapseButton, SIGNAL(clicked()), m_filterProxyModel, SLOT(collapseAll()));
   connect(m_expandButton, SIGNAL(clicked()), this, SLOT(slotExpandCollapse()));
+  connect(m_expandButton, SIGNAL(clicked()), m_accountTree, SLOT(expandAll()));
+  connect(m_expandButton, SIGNAL(clicked()), m_filterProxyModel, SLOT(expandAll()));
 }
 
 KAccountsView::~KAccountsView()
@@ -255,6 +260,7 @@ void KAccountsView::loadListView(void)
 
   // and in case we need to show things expanded, we'll do so
   if (KMyMoneyGlobalSettings::showAccountsExpanded()) {
+    m_filterProxyModel->expandAll();
     m_accountTree->expandAll();
   }
   ::timetrace("done load accounts icon view");

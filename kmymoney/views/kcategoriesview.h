@@ -129,9 +129,9 @@ signals:
 
 private:
   /// set if a view needs to be reloaded during showEvent()
-  bool                     m_needReload;
-  bool                     m_haveUnusedCategories;
-  AccountsFilterProxyModel *m_filterProxyModel;
+  bool                         m_needReload;
+  bool                         m_haveUnusedCategories;
+  AccountsViewFilterProxyModel *m_filterProxyModel;
 };
 
 #endif
