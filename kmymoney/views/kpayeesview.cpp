@@ -898,7 +898,8 @@ void KPayeesView::slotSelectPayeeAndTransaction(const QString& payeeId, const QS
         break;
       }
     }
-
+    //make sure the payee selection is updated and transactions are updated accordingly
+    slotSelectPayee();
   } catch (MyMoneyException *e) {
     qWarning("Unexpected exception in KPayeesView::slotSelectPayeeAndTransaction");
     delete e;
