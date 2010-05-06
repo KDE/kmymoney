@@ -108,6 +108,20 @@ public:
     m_expandedAccountIds.remove(accountId);
   }
 
+  void markAllExpanded(QAbstractItemModel *model) {
+    QModelIndexList list = model->match(model->index(0, 0), AccountsModel::AccountIdRole, "*", -1, Qt::MatchFlags(Qt::MatchWildcard | Qt::MatchRecursive));
+    foreach (const QModelIndex &index, list) {
+      markAccountExpanded(model->data(index, AccountsModel::AccountIdRole).toString());
+    }
+  }
+
+  void markAllCollapsed(QAbstractItemModel *model) {
+    QModelIndexList list = model->match(model->index(0, 0), AccountsModel::AccountIdRole, "*", -1, Qt::MatchFlags(Qt::MatchWildcard | Qt::MatchRecursive));
+    foreach (const QModelIndex &index, list) {
+      markAccountCollapsed(model->data(index, AccountsModel::AccountIdRole).toString());
+    }
+  }
+
   bool isAccountExpanded(const QString &accountId) {
     return m_expandedAccountIds.contains(accountId);
   }
@@ -182,16 +196,22 @@ void AccountsViewFilterProxyModel::expanded(const QModelIndex &index)
   }
 }
 
-void AccountsViewFilterProxyModel::expandAll(void)
+/**
+  * The model is notified that all the items where collapsed (unfortunately we can't use the above
+  * for that since Qt does not emit the appropriate signal when collapsing all the items).
+  */
+void AccountsViewFilterProxyModel::collapseAll()
 {
-#warning Implement AccountsViewFilterProxyModel::expandAll
-  qDebug("Implement AccountsViewFilterProxyModel::expandAll");
+  d->markAllCollapsed(this);
 }
 
-void AccountsViewFilterProxyModel::collapseAll(void)
+/**
+  * The model is notified that all the items where expanded (unfortunately we can't use the above
+  * for that since Qt does not emit the appropriate signal when expanding all the items).
+  */
+void AccountsViewFilterProxyModel::expandAll()
 {
-#warning Implement AccountsViewFilterProxyModel::collapseAll
-  qDebug("Implement AccountsViewFilterProxyModel::collapseAll");
+  d->markAllExpanded(this);
 }
 
 #include "kmymoneyaccounttreeview.moc"
