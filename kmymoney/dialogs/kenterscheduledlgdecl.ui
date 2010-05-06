@@ -184,7 +184,7 @@
                   <sizepolicy>
                     <hsizetype>3</hsizetype>
                     <vsizetype>3</vsizetype>
-                    <horstretch>0</horstretch>
+                    <horstretch>1</horstretch>
                     <verstretch>5</verstretch>
                   </sizepolicy>
                 </property>
