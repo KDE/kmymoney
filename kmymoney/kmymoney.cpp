@@ -820,6 +820,7 @@ void KMyMoneyApp::initActions(void)
 
   KAction *transaction_mark_reconciled = actionCollection()->addAction("transaction_mark_reconciled");
   transaction_mark_reconciled->setText(i18nc("Mark transaction reconciled", "Reconciled"));
+  transaction_mark_reconciled->setShortcut(KShortcut("Ctrl+Shift+Space"));
   connect(transaction_mark_reconciled, SIGNAL(triggered()), this, SLOT(slotMarkTransactionReconciled()));
 
   KAction *transaction_mark_notreconciled = actionCollection()->addAction("transaction_mark_notreconciled");
