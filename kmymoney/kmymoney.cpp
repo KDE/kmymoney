@@ -1344,8 +1344,10 @@ KUrl KMyMoneyApp::selectFile(const QString& /*title*/, const QString& _path, con
   KUrl url;
   QString path(_path);
 
+  // if the path is not specified open the file dialog in the last used directory
+  // 'kmymoney' is the keyword that identifies the last used directory in KFileDialog
   if (path.isEmpty())
-    path = KGlobalSettings::documentPath();
+    path = "kfiledialog:///kmymoney";
 
   QPointer<KFileDialog> dialog = new KFileDialog(KUrl(path), mask, this);
   dialog->setMode(mode);
