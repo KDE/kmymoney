@@ -254,13 +254,6 @@ void Transaction::registerCellText(QString& txt, int row, int col)
 void Transaction::paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &option, const QModelIndex &index)
 {
   painter->save();
-  // if this is not the first row of the transaction paint the previous rows
-  // since the selection background is painted from the first row of the transaction
-  for (int i = startRow(); i < index.row(); ++i) {
-    QStyleOptionViewItemV4 optionSibling = option;
-    optionSibling.rect.moveTop(optionSibling.rect.top() - optionSibling.rect.height()*(index.row() - i));
-    paintRegisterCell(painter, optionSibling, index.sibling(i, index.column()));
-  }
   if (paintRegisterCellSetup(painter, option, index)) {
     const QStyle *style = option.widget ? option.widget->style() : QApplication::style();
     const QWidget* widget = option.widget;
@@ -269,10 +262,31 @@ void Transaction::paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &o
     option.state &= ~QStyle::State_MouseOver;
     // the background
     if (option.state & QStyle::State_Selected) {
+      // if this is not the first row of the transaction paint the previous rows
+      // since the selection background is painted from the first row of the transaction
+      if (index.row() > startRow()) {
+        QStyleOptionViewItemV4 optionSibling = option;
+        QModelIndex previousRowItem = index.sibling(index.row() - 1, index.column());
+        optionSibling.rect = m_parent->visualRect(previousRowItem);
+        paintRegisterCell(painter, optionSibling, previousRowItem);
+      }
       // paint the selection background only from the first row on to the last row at once
       if (index.row() == startRow()) {
         QRect old = option.rect;
-        option.rect.setBottom(option.rect.bottom() + (numRowsRegister() - 1)*option.rect.height());
+        int extraHeight = 0;
+        if (m_inRegisterEdit) {
+          // since, when editing a transaction inside the register (without the transaction form),
+          // row heights can have various sizes (the memo row is larger than the rest) we have
+          // to iterate over all the items of the transaction to compute the size of the selection rectangle
+          // of course we start with the item after this one because it's size is already in the rectangle
+          for (int i = startRow() + 1; i < startRow() + numRowsRegister(); ++i) {
+            extraHeight += m_parent->visualRect(index.sibling(i, index.column())).height();
+          }
+        } else {
+          // we are not editing in the register so all rows have the same sizes just compute the extra height
+          extraHeight = (numRowsRegister() - 1)*option.rect.height();
+        }
+        option.rect.setBottom(option.rect.bottom() + extraHeight);
         style->drawPrimitive(QStyle::PE_PanelItemViewItem, &option, painter, widget);
         if (m_focus && index.column() == DetailColumn) {
           option.state |= QStyle::State_HasFocus;
