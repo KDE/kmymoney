@@ -539,7 +539,7 @@ void KReportsView::slotSaveView(void)
 
     QString filterList = d->fSavProps->filtCsv + '\n' + d->fSavProps->filtHtml;
     QPointer<KFileDialog> dlg =
-      new KFileDialog(KUrl(":kmymoney-export"), filterList, this,
+      new KFileDialog(KUrl("kfiledialog:///kmymoney-export"), filterList, this,
                       qobject_cast<QWidget*>(d->fSavProps->includeCssCheckBox));
 
     connect(dlg, SIGNAL(filterChanged(const QString&)),

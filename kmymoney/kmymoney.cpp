@@ -1347,7 +1347,7 @@ KUrl KMyMoneyApp::selectFile(const QString& /*title*/, const QString& _path, con
   // if the path is not specified open the file dialog in the last used directory
   // 'kmymoney' is the keyword that identifies the last used directory in KFileDialog
   if (path.isEmpty())
-    path = "kfiledialog:///kmymoney";
+    path = "kfiledialog:///kmymoney-import";
 
   QPointer<KFileDialog> dialog = new KFileDialog(KUrl(path), mask, this);
   dialog->setMode(mode);
@@ -1365,7 +1365,7 @@ void KMyMoneyApp::slotFileOpen(void)
 {
   KMSTATUS(i18n("Open a file."));
 
-  QPointer<KFileDialog> dialog = new KFileDialog(KUrl(KGlobalSettings::documentPath()),
+  QPointer<KFileDialog> dialog = new KFileDialog(KUrl("kfiledialog:///kmymoney-open"),
       i18n("*.kmy *.xml|KMyMoney files\n *.*|All files (*.*)"),
       this);
   dialog->setMode(KFile::File | KFile::ExistingOnly);
@@ -2127,7 +2127,7 @@ void KMyMoneyApp::slotGncImport(void)
 
   KMSTATUS(i18n("Importing a Gnucash file."));
 
-  QPointer<KFileDialog> dialog = new KFileDialog(KUrl(KGlobalSettings::documentPath()),
+  QPointer<KFileDialog> dialog = new KFileDialog(KUrl("kfiledialog:///kmymoney-import"),
       i18n(" * |Gnucash files\n * |All files (*.*)"),
       this);
   dialog->setMode(KFile::File | KFile::ExistingOnly);
@@ -2169,7 +2169,7 @@ void KMyMoneyApp::slotStatementImport(void)
   bool result = false;
   KMSTATUS(i18n("Importing an XML Statement."));
 
-  QPointer<KFileDialog> dialog = new KFileDialog(KUrl(KGlobalSettings::documentPath()),
+  QPointer<KFileDialog> dialog = new KFileDialog(KUrl("kfiledialog:///kmymoney-import"),
       i18n("*.xml|XML files\n *.*|All files (*.*)"),
       this);
   dialog->setMode(KFile::File | KFile::ExistingOnly);

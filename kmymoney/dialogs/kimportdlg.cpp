@@ -104,7 +104,7 @@ void KImportDlg::slotBrowse()
   MyMoneyQifProfile tmpprofile;
   tmpprofile.loadProfile("Profile-" + profile());
 
-  QPointer<KFileDialog> dialog = new KFileDialog(KUrl(KGlobalSettings::documentPath()),
+  QPointer<KFileDialog> dialog = new KFileDialog(KUrl("kfiledialog:///kmymoney-import"),
       i18n("%1|Import files\n%2|All files (*.*)", tmpprofile.filterFileType(), "*"),
       this);
   dialog->setCaption(i18n("Import File..."));
