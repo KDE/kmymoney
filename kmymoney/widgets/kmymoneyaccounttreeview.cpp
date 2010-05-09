@@ -116,10 +116,8 @@ public:
   }
 
   void markAllCollapsed(QAbstractItemModel *model) {
-    QModelIndexList list = model->match(model->index(0, 0), AccountsModel::AccountIdRole, "*", -1, Qt::MatchFlags(Qt::MatchWildcard | Qt::MatchRecursive));
-    foreach (const QModelIndex &index, list) {
-      markAccountCollapsed(model->data(index, AccountsModel::AccountIdRole).toString());
-    }
+    Q_UNUSED(model);
+    m_expandedAccountIds.clear();
   }
 
   bool isAccountExpanded(const QString &accountId) {
