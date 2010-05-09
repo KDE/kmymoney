@@ -169,7 +169,7 @@ void KInstitutionsView::loadAccounts(void)
       KMyMoneyAccountTreeItem* item = new KMyMoneyAccountTreeItem(m_accountTree, *it_i);
       item->setPixmap(0, none.pixmap());
       loadSubAccounts(item, (*it_i).id());
-      if(!showClosedAccounts)
+      if (!showClosedAccounts)
         item->setVisible(item->childCount() != 0);
     }
 

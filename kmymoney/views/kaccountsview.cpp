@@ -281,15 +281,14 @@ void KAccountsView::slotReconcileAccount(const MyMoneyAccount& acc, const QDate&
 void KAccountsView::slotReconcileAccount(KListWidget* list, const MyMoneyAccount& acc)
 {
   //scan all the items in the list and set the flag
-  for(int i = 0; i < list->count(); ++i)
-   {
-     //compare the id of the account to the items and set the reconcile flag accordingly
-     QListWidgetItem* item = list->item(i);
-     MyMoneyAccount itemAccount = (item->data(Qt::UserRole)).value<MyMoneyAccount>();
-     item->setIcon(QIcon(itemAccount.accountPixmap(itemAccount.id() == acc.id())));
-     item->setData(reconcileRole, QVariant(itemAccount.id() == acc.id()));
-   }
-   m_reconciliationAccount = acc;
+  for (int i = 0; i < list->count(); ++i) {
+    //compare the id of the account to the items and set the reconcile flag accordingly
+    QListWidgetItem* item = list->item(i);
+    MyMoneyAccount itemAccount = (item->data(Qt::UserRole)).value<MyMoneyAccount>();
+    item->setIcon(QIcon(itemAccount.accountPixmap(itemAccount.id() == acc.id())));
+    item->setData(reconcileRole, QVariant(itemAccount.id() == acc.id()));
+  }
+  m_reconciliationAccount = acc;
 }
 
 void KAccountsView::slotNetWorthChanged(const MyMoneyMoney &netWorth)
@@ -328,7 +327,7 @@ QListWidgetItem* KAccountsView::selectedIcon(void) const
 void KAccountsView::slotAssetsSelectIcon()
 {
   QList<QListWidgetItem*> selectedItems = m_assetsList->selectedItems();
-  if(selectedItems.at(0)) {
+  if (selectedItems.at(0)) {
     slotSelectIcon(selectedItems.at(0));
   }
 }
@@ -336,7 +335,7 @@ void KAccountsView::slotAssetsSelectIcon()
 void KAccountsView::slotLiabilitiesSelectIcon()
 {
   QList<QListWidgetItem*> selectedItems = m_liabilitiesList->selectedItems();
-  if(selectedItems.at(0)) {
+  if (selectedItems.at(0)) {
     slotSelectIcon(selectedItems.at(0));
   }
 }
@@ -344,14 +343,14 @@ void KAccountsView::slotLiabilitiesSelectIcon()
 void KAccountsView::slotEquitiesSelectIcon()
 {
   QList<QListWidgetItem*> selectedItems = m_equitiesList->selectedItems();
-  if(selectedItems.at(0)) {
+  if (selectedItems.at(0)) {
     slotSelectIcon(selectedItems.at(0));
   }
 }
 
 void KAccountsView::slotSelectIcon(QListWidgetItem* item)
 {
- emit selectObject((item->data(Qt::UserRole)).value<MyMoneyAccount>());
+  emit selectObject((item->data(Qt::UserRole)).value<MyMoneyAccount>());
 }
 
 void KAccountsView::slotAssetsOpenContextMenu(const QPoint& point)

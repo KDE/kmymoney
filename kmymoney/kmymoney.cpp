@@ -433,7 +433,7 @@ const KUrl KMyMoneyApp::lastOpenedURL(void)
 
 void KMyMoneyApp::slotObjectDestroyed(QObject* o)
 {
-  if(o == d->m_moveToAccountSelector) {
+  if (o == d->m_moveToAccountSelector) {
     d->m_moveToAccountSelector = 0;
   }
 }

@@ -284,7 +284,7 @@ void Transaction::paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &o
           }
         } else {
           // we are not editing in the register so all rows have the same sizes just compute the extra height
-          extraHeight = (numRowsRegister() - 1)*option.rect.height();
+          extraHeight = (numRowsRegister() - 1) * option.rect.height();
         }
         option.rect.setBottom(option.rect.bottom() + extraHeight);
         style->drawPrimitive(QStyle::PE_PanelItemViewItem, &option, painter, widget);

@@ -342,7 +342,7 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
     qDebug("m_chartType out of bounds with %d on report of type %d. Default to none.", m_chartType, m_reportType);
     e.setAttribute("charttype", kChartTypeText[0]);
   } else {
-   e.setAttribute("charttype", kChartTypeText[m_chartType]);
+    e.setAttribute("charttype", kChartTypeText[m_chartType]);
   }
   e.setAttribute("chartdatalabels", m_chartDataLabels);
   e.setAttribute("chartgridlines", m_chartGridLines);
