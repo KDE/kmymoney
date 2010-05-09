@@ -112,10 +112,9 @@ if ($errcode != 0) {
     # (tried having bid and ask here, but could be undef for some stocks (IBM)
     # and looked pretty unrealistic for others (e.g. RHAT on 15/5/04 was 12.09-38.32!))
     my $price = $qhash {$symbol, "last"};
-    if (!$price) {
-      # try to extract it from the price simbol 
-      $price = $qhash {$symbol, "price"};
-    }
+    # if no price was found, try to extract it from the price symbol
+    # see http://bugs.kde.org/show_bug.cgi?id=234268 for details
+    $price = $qhash {$symbol, "price"} if (!$price);
 
     print "\"$symbol\",\"$yyyymmdd\",\"$price\"";
 }
