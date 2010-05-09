@@ -21,7 +21,6 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
-#include <QLayout>
 #include <QDateTime>
 #include <QRegExp>
 #include <QClipboard>
@@ -771,12 +770,27 @@ void PivotTable::calculateBudgetMapping(void)
   if (file->countBudgets()) {
     // Select a budget
     //
-    // It will choose the first budget in the list for the start year of the report if no budget is select
+    // It will choose the first budget in the list for the start year of the report if no budget is selected
     MyMoneyBudget budget = MyMoneyBudget();
-    //if no budget has been selected
-    if (m_config_f.budget() == "Any") {
-      QList<MyMoneyBudget> budgets = file->budgetList();
+    QList<MyMoneyBudget> budgets = file->budgetList();
+    bool validBudget = false;
 
+    //check that the selected budget is valid
+    if (m_config_f.budget() != "Any") {
+      QList<MyMoneyBudget>::const_iterator budgets_it = budgets.constBegin();
+      while (budgets_it != budgets.constEnd()) {
+        //pick the budget by id
+        if ((*budgets_it).id() == m_config_f.budget()) {
+          budget = file->budget((*budgets_it).id());
+          validBudget = true;
+          break;
+        }
+        ++budgets_it;
+      }
+    }
+
+    //if no valid budget has been selected
+    if (!validBudget) {
       //if the budget list is empty, just return
       if (budgets.count() == 0) {
         return;
@@ -798,9 +812,6 @@ void PivotTable::calculateBudgetMapping(void)
 
       //assign the budget to the report
       m_config_f.setBudget(budget.id(), m_config_f.isIncludingBudgetActuals());
-    } else {
-      //pick the budget selected by the user
-      budget = file->budget(m_config_f.budget());
     }
 
     // Dump the budget
