@@ -96,7 +96,7 @@ $errcode = 0;
 
 if (!%qhash) { $errcode = 1;} # no data from fq (?bad exchange?)
     elsif ($qhash {$symbol, "success"} != 1) {$errcode = 2;} # got data but quote failed (?bad symbol?)
-    elsif (!$qhash{$symbol, "last"}) {$errcode = 3;} # can't find a price (?hmmm?)
+    elsif (!$qhash{$symbol, "last"} and !$qhash{$symbol, "price"} ) {$errcode = 3;} # can't find a price (?hmmm?)
 if ($errcode != 0) {
     print "Error " => "$errcode";
 } else {
@@ -112,6 +112,10 @@ if ($errcode != 0) {
     # (tried having bid and ask here, but could be undef for some stocks (IBM)
     # and looked pretty unrealistic for others (e.g. RHAT on 15/5/04 was 12.09-38.32!))
     my $price = $qhash {$symbol, "last"};
+    if (!$price) {
+      # try to extract it from the price simbol 
+      $price = $qhash {$symbol, "price"};
+    }
 
     print "\"$symbol\",\"$yyyymmdd\",\"$price\"";
 }
