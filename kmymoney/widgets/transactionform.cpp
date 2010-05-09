@@ -375,6 +375,8 @@ void TransactionForm::resize(int col)
   // check which space we need
   if (nc >= LabelColumn1 && columnWidth(LabelColumn1))
     adjustColumn(LabelColumn1);
+  if (nc >= ValueColumn1 && columnWidth(ValueColumn1))
+    adjustColumn(ValueColumn1);
   if (nc >= LabelColumn2 && columnWidth(LabelColumn2))
     adjustColumn(LabelColumn2);
   if (nc >= ValueColumn2 && columnWidth(ValueColumn2))
