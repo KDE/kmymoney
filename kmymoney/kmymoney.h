@@ -730,7 +730,7 @@ public slots:
     */
   void slotFileQuit(void);
 
-  void slotFileConsitencyCheck(void);
+  void slotFileConsistencyCheck(void);
 
   /**
     * fires up the price table editor

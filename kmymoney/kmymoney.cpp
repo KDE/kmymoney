@@ -716,7 +716,7 @@ void KMyMoneyApp::initActions(void)
 
   KAction *tools_consistency_check = actionCollection()->addAction("tools_consistency_check");
   tools_consistency_check->setText(i18n("Consistency Check"));
-  connect(tools_consistency_check, SIGNAL(triggered()), this, SLOT(slotFileConsitencyCheck()));
+  connect(tools_consistency_check, SIGNAL(triggered()), this, SLOT(slotFileConsistencyCheck()));
 
   KAction *tools_performancetest = actionCollection()->addAction("tools_performancetest");
   tools_performancetest->setText(i18n("Performance-Test"));
@@ -6111,7 +6111,7 @@ void KMyMoneyApp::slotPriceDialog(void)
   dlg->exec();
 }
 
-void KMyMoneyApp::slotFileConsitencyCheck(void)
+void KMyMoneyApp::slotFileConsistencyCheck(void)
 {
   KMSTATUS(i18n("Running consistency check..."));
 
