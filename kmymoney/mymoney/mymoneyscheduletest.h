@@ -35,17 +35,9 @@ class MyMoneyScheduleTest : public CppUnit::TestFixture
   CPPUNIT_TEST(testCopyConstructor);
   CPPUNIT_TEST(testAssignmentConstructor);
   // The following tests must be done in this order.
-  CPPUNIT_TEST(testSingleton);
-  CPPUNIT_TEST(testAddSchedule);
-  CPPUNIT_TEST(testAnyScheduled);
   CPPUNIT_TEST(testOverdue);
-  CPPUNIT_TEST(testGetSchedule);
-  CPPUNIT_TEST(testGetScheduled);
-  CPPUNIT_TEST(testGetOverdue);
   CPPUNIT_TEST(testNextPayment);
   CPPUNIT_TEST(testPaymentDates);
-  CPPUNIT_TEST(testReplaceSchedule);
-  CPPUNIT_TEST(testRemoveSchedule);
   CPPUNIT_TEST(testWriteXML);
   CPPUNIT_TEST(testReadXML);
   CPPUNIT_TEST(testHasReferenceTo);
@@ -64,10 +56,6 @@ class MyMoneyScheduleTest : public CppUnit::TestFixture
   CPPUNIT_TEST_SUITE_END();
 
 protected:
-// MyMoneyFile *m_file;
-// MyMoneySeqAccessMgr* storage;
-  //TestObserverSet *observer;
-  //TestObserverSet *hierarchyObserver;
 
 public:
   MyMoneyScheduleTest();
@@ -78,18 +66,10 @@ public:
   void testSetFunctions();
   void testCopyConstructor();
   void testAssignmentConstructor();
-  void testSingleton();
-  void testAddSchedule();
-  void testAnyScheduled();
   void testOverdue();
-  void testGetSchedule();
-  void testGetScheduled();
-  void testGetOverdue();
   void testNextPayment();
   void testAddHalfMonths();
   void testPaymentDates();
-  void testReplaceSchedule();
-  void testRemoveSchedule();
   void testWriteXML();
   void testReadXML();
   void testHasReferenceTo();

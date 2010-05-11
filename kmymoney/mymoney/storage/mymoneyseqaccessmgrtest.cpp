@@ -717,22 +717,6 @@ void MyMoneySeqAccessMgrTest::testModifyTransaction()
     CPPUNIT_ASSERT((*it).id() == "T000000000000000002");
     ++it;
     CPPUNIT_ASSERT(it == list.constEnd());
-
-    /* removed with MyMoneyAccount::Transaction
-      // CPPUNIT_ASSERT(ch.transactionCount() == 2);
-
-      QValueList<MyMoneyAccount::Transaction>::ConstIterator it_l;
-      it_l = ch.transactionList().begin();
-      CPPUNIT_ASSERT((*it_l).transactionID() == "T000000000000000001");
-      CPPUNIT_ASSERT((*it_l).balance() == 100000);
-      ++it_l;
-
-      CPPUNIT_ASSERT((*it_l).transactionID() == "T000000000000000002");
-      CPPUNIT_ASSERT((*it_l).balance() == -12600+100000);
-
-      ++it_l;
-      CPPUNIT_ASSERT(it_l == ch.transactionList().end());
-    */
   } catch (MyMoneyException *e) {
     delete e;
     CPPUNIT_FAIL("Unexpected exception");
