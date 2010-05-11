@@ -546,8 +546,6 @@ public:
     */
   bool okToWriteFile(const KUrl& url);
 
-  // QValueList<MyMoneyAccount> accountList() const;
-
 protected:
   /** save general Options like all bar positions and status as well as the geometry and the recent file list to the configuration
    * file
@@ -1079,7 +1077,7 @@ signals:
   /**
     * This signal is emitted when a payee/list of payees has been selected by
     * the GUI. If no payee is selected or the selection is removed,
-    * @p payees is identical to an empty QValueList. This signal is used
+    * @p payees is identical to an empty QList. This signal is used
     * by plugins to get information about changes.
     */
   void payeesSelected(const QList<MyMoneyPayee>& payees);
@@ -1087,7 +1085,7 @@ signals:
   /**
     * This signal is emitted when a transaction/list of transactions has been selected by
     * the GUI. If no transaction is selected or the selection is removed,
-    * @p transactions is identical to an empty QValueList. This signal is used
+    * @p transactions is identical to an empty QList. This signal is used
     * by plugins to get information about changes.
     */
   void transactionsSelected(const KMyMoneyRegister::SelectedTransactions& transactions);
@@ -1101,7 +1099,7 @@ signals:
   /**
     * This signal is emitted when a list of budgets has been selected by
     * the GUI. If no budget is selected or the selection is removed,
-    * @a budget is identical to an empty QValueList. This signal is used
+    * @a budget is identical to an empty QList. This signal is used
     * by plugins to get information about changes.
     */
   void budgetSelected(const QList<MyMoneyBudget>& budget);
@@ -1158,7 +1156,7 @@ signals:
     * @param date the reconciliation date as provided through the dialog
     * @param startingBalance the starting balance as provided through the dialog
     * @param endingBalance the ending balance as provided through the dialog
-    * @param transactionList reference to QValueList of QPair containing all
+    * @param transactionList reference to QList of QPair containing all
     *        transaction/split pairs processed by the reconciliation.
     */
   void accountReconciled(const MyMoneyAccount& account, const QDate& date, const MyMoneyMoney& startingBalance, const MyMoneyMoney& endingBalance, const QList<QPair<MyMoneyTransaction, MyMoneySplit> >& transactionList);

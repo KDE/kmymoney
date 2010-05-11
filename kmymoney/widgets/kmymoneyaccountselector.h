@@ -70,7 +70,7 @@ public:
     * a list of specific account types only. In this case, pass
     * a list of account types as parameter @p list.
     *
-    * @param list QValueList of account types to be returned. If this
+    * @param list QList of account types to be returned. If this
     *             list is empty (the default), then the ids of all accounts
     *             will be returned.
     * @return QStringList of account ids

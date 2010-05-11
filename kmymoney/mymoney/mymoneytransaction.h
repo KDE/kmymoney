@@ -42,7 +42,7 @@
 /**
   * This class represents a transaction within the MyMoneyEngine. A transaction
   * contains none, one or more splits of type MyMoneySplit. They are stored in
-  * a QValueList<MyMoneySplit> within this object. A transaction containing only
+  * a QList<MyMoneySplit> within this object. A transaction containing only
   * a single split with an amount not equal to 0 is an unbalanced transaction. It
   * is tolerated by the engine, but in general not a good idea as it is financially
   * wrong.

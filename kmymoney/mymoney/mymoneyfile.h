@@ -90,22 +90,22 @@ class MyMoneyTransactionFilter;
   * general account maintenance functions. The method reparentAccount() is
   * available to move an account from one superordinate account to another.
   * account() and accountList() are used to retrieve a single instance or a
-  * QValueList of MyMoneyAccount objects.
+  * QList of MyMoneyAccount objects.
   *
   * The methods addInstitution(), modifyInstitution() and removeInstitution()
   * implement the general institution maintenance functions. institution() and
   * institutionList() are used to retrieve a single instance or a
-  * QValueList of MyMoneyInstitution objects.
+  * QList of MyMoneyInstitution objects.
   *
   * The methods addPayee(), modifyPayee() and removePayee()
   * implement the general institution maintenance functions.
   * payee() and payeeList() are used to retrieve a single instance or a
-  * QValueList of MyMoneyPayee objects.
+  * QList of MyMoneyPayee objects.
   *
   * The methods addTransaction(), modifyTransaction() and removeTransaction()
   * implement the general transaction maintenance functions.
   * transaction() and transactionList() are used to retrieve
-  * a single instance or a QValueList of MyMoneyTransaction objects.
+  * a single instance or a QList of MyMoneyTransaction objects.
   *
   * The methods addSecurity(), modifySecurity() and removeSecurity()
   * implement the general access to equities held in the engine.
@@ -588,7 +588,7 @@ public:
     *
     * @param filter MyMoneyTransactionFilter object with the match criteria
     *
-    * @return set of transactions in form of a QValueList<MyMoneyTransaction>
+    * @return set of transactions in form of a QList<MyMoneyTransaction>
     */
   const QList<MyMoneyTransaction> transactionList(MyMoneyTransactionFilter& filter) const;
 
@@ -692,7 +692,7 @@ public:
     * inside a MyMoneyFile object. This is a convenience method
     * to the one above
     *
-    * @return QValueList containing the institution objects
+    * @return QList containing the institution objects
     */
   const QList<MyMoneyInstitution> institutionList(void) const;
 
@@ -730,7 +730,7 @@ public:
     * the returned list contains all accounts, otherwise only those referenced
     * in the id-list.
     *
-    * @param list reference to QValueList receiving the account objects
+    * @param list reference to QList receiving the account objects
     * @param idlist QStringList of account ids of those accounts that
     *        should be returned. If this list is empty, all accounts
     *        currently known will be returned.
@@ -843,7 +843,7 @@ public:
     * This method returns a list of the payees
     * inside a MyMoneyStorage object
     *
-    * @return QValueList<MyMoneyPayee> containing the payee information
+    * @return QList<MyMoneyPayee> containing the payee information
     */
   const QList<MyMoneyPayee> payeeList(void) const;
 
@@ -944,7 +944,7 @@ public:
     * @param overdue   if true, only those schedules that are overdue are
     *                  searched for. Default is false (all schedules will be returned).
     *
-    * @return const QValueList<MyMoneySchedule> list of schedule objects.
+    * @return const QList<MyMoneySchedule> list of schedule objects.
     */
   const QList<MyMoneySchedule> scheduleList(const QString& accountId = QString(),
       const MyMoneySchedule::typeE type = MyMoneySchedule::TYPE_ANY,
@@ -1093,7 +1093,7 @@ public:
     *
     * An exception will be thrown upon erronous situations.
     *
-    * @return QValueList of all MyMoneySecurity objects.
+    * @return QList of all MyMoneySecurity objects.
     */
   const QList<MyMoneySecurity> currencyList(void) const;
 
@@ -1180,7 +1180,7 @@ public:
     *
     * An exception will be thrown upon erronous situations.
     *
-    * @return QValueList of all MyMoneyReport objects.
+    * @return QList of all MyMoneyReport objects.
     */
   const QList<MyMoneyReport> reportList(void) const;
 
@@ -1241,7 +1241,7 @@ public:
     *
     * An exception will be thrown upon erronous situations.
     *
-    * @return QValueList of all MyMoneyBudget objects.
+    * @return QList of all MyMoneyBudget objects.
     */
   const QList<MyMoneyBudget> budgetList(void) const;
 

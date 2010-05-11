@@ -1242,27 +1242,6 @@ void MyMoneyForecast::calculateAutoLoan(const MyMoneySchedule& schedule, MyMoney
       else
         balance = balances[acc.id()];
 
-      /*
-         QValueList<MyMoneyTransaction> list;
-         QValueList<MyMoneyTransaction>::ConstIterator it;
-         MyMoneySplit split;
-         MyMoneyTransactionFilter filter(acc.id());
-
-         filter.setDateFilter(QDate(), dueDate.addDays(-1));
-         list = MyMoneyFile::instance()->transactionList(filter);
-
-         for(it = list.begin(); it != list.end(); ++it) {
-         try {
-         split = (*it).splitByAccount(acc.id());
-         balance += split.value();
-
-         } catch(MyMoneyException *e) {
-      // account is not referenced within this transaction
-      delete e;
-      }
-      }
-      */
-
       // FIXME: for now, we only support interest calculation at the end of the period
       calc.setBep();
       // FIXME: for now, we only support periodic compounding

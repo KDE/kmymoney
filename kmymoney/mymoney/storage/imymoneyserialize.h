@@ -94,7 +94,7 @@ public:
   /**
     * This method returns a list of accounts inside the storage object.
     *
-    * @param list reference to QValueList receiving the account objects
+    * @param list reference to QList receiving the account objects
     *
     * @note The standard accounts will not be returned
     */
@@ -114,7 +114,7 @@ public:
     * that match the filter passed as argument. If the filter is empty,
     * the whole journal will be returned.
     *
-    * @param list reference to QValueList<MyMoneyTransaction> receiving
+    * @param list reference to QList<MyMoneyTransaction> receiving
     *             the set of transactions
     * @param filter MyMoneyTransactionFilter object with the match criteria
     */
@@ -130,7 +130,7 @@ public:
     * This method returns a list of the payees
     * inside a MyMoneyStorage object
     *
-    * @return QValueList<MyMoneyPayee> containing the payee information
+    * @return QList<MyMoneyPayee> containing the payee information
     */
   virtual const QList<MyMoneyPayee> payeeList(void) const = 0;
 
@@ -327,7 +327,7 @@ public:
     *
     * An exception will be thrown upon erronous situations.
     *
-    * @return QValueList of all MyMoneySecurity objects representing a currency.
+    * @return QList of all MyMoneySecurity objects representing a currency.
     */
   virtual const QList<MyMoneySecurity> currencyList(void) const = 0;
 
@@ -337,7 +337,7 @@ public:
     *
     * An exception will be thrown upon erronous situations.
     *
-    * @return QValueList of all MyMoneyReport objects.
+    * @return QList of all MyMoneyReport objects.
     */
   virtual const QList<MyMoneyReport> reportList(void) const = 0;
 
@@ -347,7 +347,7 @@ public:
     *
     * An exception will be thrown upon erronous situations.
     *
-    * @return QValueList of all MyMoneyBudget objects.
+    * @return QList of all MyMoneyBudget objects.
     */
   virtual const QList<MyMoneyBudget> budgetList(void) const = 0;
 

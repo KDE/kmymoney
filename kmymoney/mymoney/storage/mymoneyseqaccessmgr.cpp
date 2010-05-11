@@ -950,55 +950,6 @@ const MyMoneyMoney MyMoneySeqAccessMgr::totalBalance(const QString& id, const QD
   return result;
 }
 
-/**
-  * this was intended to move all splits from one account
-  * to another. This somehow is strange to undo because many
-  * changes to different objects are made within one single call.
-  * I kept the source here but commented it out. If we ever need
-  * the functionality, we can turn it back on. BTW: the stuff is untested ;-)
-  */
-/*
-const unsigned int MyMoneyFile::moveSplits(const QString& oldAccount, const QString& newAccount)
-{
-  QMap<QString, MyMoneyTransaction>::Iterator it_t;
-  QValueList<MyMoneySplit>::ConstIterator it_s;
-  unsigned int cnt = 0;
-
-  // scan all transactions
-  for(it_t = m_transactionList.begin(); it_t != m_transactionList.end(); ++it_t) {
-    // scan all splits of this transaction
-    for(it_s = (*it_t).splits().begin(); it_s != (*it_t).splits().end(); ++it_s) {
-      // is it a split in our account?
-      if((*it_s).account() == oldAccount) {
-        MyMoneySplit s = *it_s;
-        s.setAccount(newAccount);
-        (*it_t).modifySplit(s);
-        ++cnt;
-      }
-    }
-  }
-
-  if(cnt != 0) {
-    // now update all the accounts that were referenced
-    QMap<QString, MyMoneyAccount>::Iterator acc;
-    acc = m_accountList.find(oldAccount);
-    if(acc != m_accountList.end()) {
-      (*acc).touch();
-      refreshAccountTransactionList(acc);
-    }
-    acc = m_accountList.find(newAccount);
-    if(acc != m_accountList.end()) {
-      (*acc).touch();
-      refreshAccountTransactionList(acc);
-    }
-
-    // mark file as changed
-    m_dirty = true;
-  }
-  return cnt;
-}
-*/
-
 void MyMoneySeqAccessMgr::invalidateBalanceCache(const QString& id)
 {
   if (!id.isEmpty()) {

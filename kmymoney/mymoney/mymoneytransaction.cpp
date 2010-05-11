@@ -118,22 +118,6 @@ void MyMoneyTransaction::addSplit(MyMoneySplit& split)
   if (!split.id().isEmpty())
     throw new MYMONEYEXCEPTION("Cannot add split with assigned id (" + split.id() + ')');
 
-  /*
-    QValueList<MyMoneySplit>::Iterator it;
-
-    // if the account referenced in this split is already
-    // referenced in another split, we add the amount of
-    // this split to the other one. All other data contained
-    // in the new split will be discarded.
-    for(it = m_splits.begin(); it != m_splits.end(); ++it) {
-      if((*it).accountId() == split.accountId()) {
-        (*it).setValue((*it).value()+split.value());
-        split = (*it);
-        return;
-      }
-    }
-  */
-
   if (split.accountId().isEmpty())
     throw new MYMONEYEXCEPTION("Cannot add split that does not contain an account reference");
 
@@ -145,37 +129,6 @@ void MyMoneyTransaction::addSplit(MyMoneySplit& split)
 
 void MyMoneyTransaction::modifySplit(MyMoneySplit& split)
 {
-// This version of the routine allows only a single
-// split to reference one account. If a second split
-// is modified to reference an account already referenced
-// by another split, the values will be added and the
-// duplicate removed.
-  /*
-    QValueList<MyMoneySplit>::Iterator it;
-    QValueList<MyMoneySplit>::Iterator self = m_splits.end();
-    QValueList<MyMoneySplit>::Iterator dup = self;
-    bool duplicateAccount = false;
-
-    for(it = m_splits.begin(); it != m_splits.end(); ++it) {
-      if(split.id() == (*it).id()) {
-        self = it;
-      } else if(split.accountId() == (*it).accountId()) {
-        (*it).setValue((*it).value() + split.value());
-        dup = it;
-        duplicateAccount = true;
-      }
-    }
-
-    if(self == m_splits.end())
-      throw new MYMONEYEXCEPTION("Invalid split id '" + split.id() + "'");
-
-    if(duplicateAccount) {
-      m_splits.remove(self);
-      split = *dup;
-    } else
-      *self = split;
-  */
-
 // This is the other version which allows having more splits referencing
 // the same account.
   if (split.accountId().isEmpty())

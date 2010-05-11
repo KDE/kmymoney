@@ -202,7 +202,7 @@ public:
     * This method returns a list of the payees
     * inside a MyMoneyStorage object
     *
-    * @return QValueList<MyMoneyPayee> containing the payee information
+    * @return QList<MyMoneyPayee> containing the payee information
     */
   virtual const QList<MyMoneyPayee> payeeList(void) const = 0;
 
@@ -339,7 +339,7 @@ public:
     * This method returns a list of the institutions
     * inside a MyMoneyStorage object
     *
-    * @return QValueList<MyMoneyInstitution> containing the
+    * @return QList<MyMoneyInstitution> containing the
     *         institution information
     */
   virtual const QList<MyMoneyInstitution> institutionList(void) const = 0;
@@ -429,7 +429,7 @@ public:
     *
     * @param filter MyMoneyTransactionFilter object with the match criteria
     *
-    * @return set of transactions in form of a QValueList<MyMoneyTransaction>
+    * @return set of transactions in form of a QList<MyMoneyTransaction>
     */
   virtual const QList<MyMoneyTransaction> transactionList(MyMoneyTransactionFilter& filter) const = 0;
 
@@ -490,7 +490,7 @@ public:
   /**
     * This method returns a list of accounts inside the storage object.
     *
-    * @param list reference to QValueList receiving the account objects
+    * @param list reference to QList receiving the account objects
     *
     * @note The standard accounts will not be returned
     */
@@ -572,7 +572,7 @@ public:
     * This method returns a list of the security objects
     * inside a MyMoneyStorage object
     *
-    * @return QValueList<MyMoneySecurity> containing objects
+    * @return QList<MyMoneySecurity> containing objects
     */
   virtual const QList<MyMoneySecurity> securityList(void) const = 0;
 
@@ -654,7 +654,7 @@ public:
     * @param overdue   if true, only those schedules that are overdue are
     *                  searched for. Default is false (all schedules will be returned).
     *
-    * @return const QValueList<MyMoneySchedule> list of schedule objects.
+    * @return const QList<MyMoneySchedule> list of schedule objects.
     */
   virtual const QList<MyMoneySchedule> scheduleList(const QString& accountId = QString(),
       const MyMoneySchedule::typeE type = MyMoneySchedule::TYPE_ANY,
@@ -718,7 +718,7 @@ public:
     *
     * An exception will be thrown upon erronous situations.
     *
-    * @return QValueList of all MyMoneySecurity objects representing a currency.
+    * @return QList of all MyMoneySecurity objects representing a currency.
     */
   virtual const QList<MyMoneySecurity> currencyList(void) const = 0;
 
@@ -728,7 +728,7 @@ public:
     *
     * An exception will be thrown upon erronous situations.
     *
-    * @return QValueList of all MyMoneyReport objects.
+    * @return QList of all MyMoneyReport objects.
     */
   virtual const QList<MyMoneyReport> reportList(void) const = 0;
 
@@ -789,7 +789,7 @@ public:
     *
     * An exception will be thrown upon erronous situations.
     *
-    * @return QValueList of all MyMoneyBudget objects.
+    * @return QList of all MyMoneyBudget objects.
     */
   virtual const QList<MyMoneyBudget> budgetList(void) const = 0;
 

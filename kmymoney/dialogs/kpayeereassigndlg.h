@@ -60,7 +60,7 @@ public:
     * This function sets up the dialog, lets the user select a payee and returns
     * the id of the selected payee in the payeeslist.
     *
-    * @param payeeslist reference to QValueList of MyMoneyPayee objects to be contained in the list
+    * @param payeeslist reference to QList of MyMoneyPayee objects to be contained in the list
     *
     * @return Returns the id of the selected payee in the list or QString() if
     *         the dialog was aborted. QString() is also returned if the payeeslist is empty.

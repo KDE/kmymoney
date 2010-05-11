@@ -364,8 +364,8 @@ void KEditLoanWizard::next()
         //        now and always calculate with the full loan amount.
         MyMoneyMoney balance = m_account.openingBalance();
 
-        QValueList<MyMoneyTransaction> list;
-        QValueList<MyMoneyTransaction>::ConstIterator it;
+        QList<MyMoneyTransaction> list;
+        QList<MyMoneyTransaction>::ConstIterator it;
         MyMoneySplit split;
         MyMoneyTransactionFilter filter(m_account.id());
 

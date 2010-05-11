@@ -457,7 +457,7 @@ public:
     *
     * @param startDate The start date for the range calculations
     * @param endDate The end date for the range calculations.
-    * @return QValueList<QDate> The dates on which the payments are due.
+    * @return QList<QDate> The dates on which the payments are due.
     */
   QList<QDate> paymentDates(const QDate& startDate, const QDate& endDate) const;
 

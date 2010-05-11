@@ -332,7 +332,7 @@ public:
     * This method returns a list of pointers to all selected items
     * in the register
     *
-    * @retval QValueList<RegisterItem*>
+    * @retval QList<RegisterItem*>
     */
   QList<RegisterItem*> selectedItems(void) const;
 
@@ -341,7 +341,7 @@ public:
     * If the current item carrying the focus (see focusItem() ) is selected
     * it will be the first one contained in the list.
     *
-    * @param list reference to QValueList receiving the SelectedTransaction()'s
+    * @param list reference to QList receiving the SelectedTransaction()'s
     */
   void selectedTransactions(SelectedTransactions&  list) const;
 
