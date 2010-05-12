@@ -2229,7 +2229,6 @@ KMyMoneyViewBase* KMyMoneyView::addBasePage(const QString& title, const QString&
 class KMyMoneyViewBase::Private
 {
 public:
-  Q3Frame* m_titleLine;
   KMyMoneyTitleLabel* m_titleLabel;
   QVBoxLayout* m_viewLayout;
 };
@@ -2250,14 +2249,6 @@ KMyMoneyViewBase::KMyMoneyViewBase(QWidget* parent, const QString& name, const Q
   d->m_titleLabel->setText(title);
   d->m_titleLabel->setVisible(KMyMoneyGlobalSettings::showTitleBar());
   d->m_viewLayout->addWidget(d->m_titleLabel);
-
-#if 0
-  d->m_titleLine = new Q3Frame(this, "titleLine");
-  d->m_titleLine->setFrameShape(Q3Frame::HLine);
-  d->m_titleLine->setFrameShadow(Q3Frame::Sunken);
-  d->m_titleLine->setFrameShape(Q3Frame::HLine);
-  d->m_viewLayout->addWidget(d->m_titleLine);
-#endif
 }
 
 KMyMoneyViewBase::~KMyMoneyViewBase()
