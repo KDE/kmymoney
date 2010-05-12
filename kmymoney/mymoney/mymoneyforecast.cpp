@@ -844,8 +844,20 @@ MyMoneyMoney MyMoneyForecast::accountCycleVariation(const MyMoneyAccount& acc)
   MyMoneyMoney cycleVariation;
 
   if (forecastMethod() == eHistoric) {
-    for (int t_day = 1; t_day <= accountsCycle() ; ++t_day) {
-      cycleVariation += m_accountTrendList[acc.id()][t_day];
+    switch(historyMethod()) {
+      case 0:
+      case 1:
+      {
+        for (int t_day = 1; t_day <= accountsCycle() ; ++t_day) {
+          cycleVariation += m_accountTrendList[acc.id()][t_day];
+        }
+      }
+      break;
+      case 2:
+      {
+        cycleVariation = m_accountList[acc.id()][QDate::currentDate().addDays(accountsCycle())] - m_accountList[acc.id()][QDate::currentDate()];
+        break;
+      }
     }
   }
   return cycleVariation;
