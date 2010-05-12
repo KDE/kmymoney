@@ -245,6 +245,8 @@ void KForecastView::loadSummaryView(void)
   loadAccounts(forecast, file->liability(), m_liabilityItem, KMyMoneyAccountTreeForecastItem::eSummary);
 
   //Add comments to the advice list
+  m_adviceText->clear();
+
   //Get all accounts of the right type to calculate forecast
   m_nameIdx.clear();
   accList = forecast.accountList();
