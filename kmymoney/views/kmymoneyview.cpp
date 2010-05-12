@@ -288,6 +288,7 @@ void KMyMoneyView::addTitleBar(QWidget* parent, const QString& title)
   label->setMinimumSize(QSize(100, 30));
   label->setRightImageFile("pics/titlelabel_background.png");
   label->setText(title);
+  label->setVisible(KMyMoneyGlobalSettings::showTitleBar());
   QBoxLayout* pBoxLayout = dynamic_cast<QBoxLayout *>(parent->layout());
   if (pBoxLayout)
     pBoxLayout->insertWidget(0, label);
@@ -297,7 +298,7 @@ void KMyMoneyView::showTitleBar(bool show)
 {
   QList<KMyMoneyTitleLabel *> l = findChildren<KMyMoneyTitleLabel *>("titleLabel");
 
-  for (QList<KMyMoneyTitleLabel *>::iterator it = l.begin(); it != l.end(); ++it)
+  for (QList<KMyMoneyTitleLabel *>::const_iterator it = l.constBegin(); it != l.constEnd(); ++it)
     (*it)->setVisible(show);
 }
 
@@ -2247,6 +2248,7 @@ KMyMoneyViewBase::KMyMoneyViewBase(QWidget* parent, const QString& name, const Q
   d->m_titleLabel->setMinimumSize(QSize(100, 30));
   d->m_titleLabel->setRightImageFile("pics/titlelabel_background.png");
   d->m_titleLabel->setText(title);
+  d->m_titleLabel->setVisible(KMyMoneyGlobalSettings::showTitleBar());
   d->m_viewLayout->addWidget(d->m_titleLabel);
 
 #if 0
