@@ -200,7 +200,7 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name)
   registerFrameLayout->addWidget(m_register);
   m_register->installEventFilter(this);
   connect(m_register, SIGNAL(openContextMenu()), this, SIGNAL(openContextMenu()));
-  connect(m_register, SIGNAL(headerClicked()), this, SLOT(slotSortOptions()));
+  connect(m_register->horizontalHeader(), SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotSortOptions()));
   connect(m_register, SIGNAL(reconcileStateColumnClicked(KMyMoneyRegister::Transaction*)), this, SLOT(slotToggleTransactionMark(KMyMoneyRegister::Transaction*)));
   connect(&d->m_viewPosTimer, SIGNAL(timeout()), this, SLOT(slotUpdateViewPos()));
 

@@ -140,7 +140,7 @@ KFindTransactionDlg::KFindTransactionDlg(QWidget *parent) :
   m_register->setSelectionMode(QTableWidget::SingleSelection);
 
   connect(m_register, SIGNAL(editTransaction()), this, SLOT(slotSelectTransaction()));
-  connect(m_register, SIGNAL(headerClicked()), this, SLOT(slotSortOptions()));
+  connect(m_register->horizontalHeader(), SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotSortOptions()));
 
   slotUpdateSelections();
 

@@ -605,7 +605,6 @@ signals:
   void aboutToSelectItem(KMyMoneyRegister::RegisterItem* item, bool& okToSelect);
 
   void editTransaction(void);
-  void headerClicked(void);
 
   /**
     * This signal is sent out when the user clicks on the ReconcileStateColumn and

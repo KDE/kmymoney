@@ -510,8 +510,7 @@ Register::Register(QWidget *parent) :
   horizontalHeader()->setSortIndicatorShown(false);
   horizontalHeader()->setMovable(false);
   horizontalHeader()->setClickable(false);
-
-  horizontalHeader()->installEventFilter(this);
+  horizontalHeader()->setContextMenuPolicy(Qt::CustomContextMenu);
 
   connect(this, SIGNAL(cellClicked(int, int)), this, SLOT(selectItem(int, int)));
   connect(this, SIGNAL(cellDoubleClicked(int, int)), this, SLOT(slotDoubleClicked(int, int)));
@@ -526,28 +525,13 @@ Register::~Register()
 
 bool Register::eventFilter(QObject* o, QEvent* e)
 {
-  if (o == horizontalHeader() && e->type() == QEvent::MouseButtonPress) {
-    QMouseEvent *me = dynamic_cast<QMouseEvent*>(e);
-    if (me->button() == Qt::RightButton) {
-      emit headerClicked();
-    }
-    // eat up left mouse button press for now
-    return true;
-
-  } else if (o == horizontalHeader() && e->type() == QEvent::Paint) {
-    // always show the header in bold (to suppress cell selection)
-    QFont f(horizontalHeader()->font());
-    f.setBold(true);
-    horizontalHeader()->setFont(f);
-
-  } else if (o == this && e->type() == QEvent::KeyPress) {
+  if (o == this && e->type() == QEvent::KeyPress) {
     QKeyEvent* ke = dynamic_cast<QKeyEvent*>(e);
     if (ke->key() == Qt::Key_Menu) {
       emit openContextMenu();
       return true;
     }
   }
-
   return QTableWidget::eventFilter(o, e);
 }
 
