@@ -212,7 +212,7 @@ bool Transaction::paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem
   Q_UNUSED(painter)
 
   if (m_reducedIntensity) {
-    option.palette.setColor(QPalette::Text, option.palette.color(QPalette::Text).lighter());
+    option.palette.setColor(QPalette::Text, option.palette.color(QPalette::Disabled, QPalette::Text));
   }
 
   if (m_selected) {
