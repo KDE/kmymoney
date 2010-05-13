@@ -74,6 +74,7 @@ public:
   QDate                m_reconciliationDate;
   MyMoneyMoney         m_endingBalance;
   int                  m_precision;
+  int                  m_verticalScrollBarValue;
   bool                 m_inLoading;
   bool                 m_recursion;
   bool                 m_showDetails;
@@ -291,7 +292,9 @@ void KGlobalLedgerView::slotLoadView(void)
   m_needReload = true;
   if (isVisible()) {
     if (!m_inEditMode) {
+      setUpdatesEnabled(false);
       loadView();
+      setUpdatesEnabled(true);
       m_needReload = false;
       // force a new account if the current one is empty
       m_newAccountLoaded = m_account.id().isEmpty();
@@ -346,6 +349,9 @@ void KGlobalLedgerView::loadView(void)
   QString focusItemId;
   QString anchorItemId;
 
+  if (!d->m_inLoading)
+    d->m_verticalScrollBarValue = -1;
+
   if (!m_newAccountLoaded) {
     // remember the current selected transactions
     KMyMoneyRegister::RegisterItem* item = m_register->firstItem();
@@ -361,9 +367,13 @@ void KGlobalLedgerView::loadView(void)
     if (m_register->anchorItem())
       anchorItemId = m_register->anchorItem()->id();
 
+    // remember the upper left corner of the viewport
+    if (!d->m_inLoading && d->m_showDetails == KMyMoneyGlobalSettings::showRegisterDetailed())
+      d->m_verticalScrollBarValue = m_register->verticalScrollBar()->value();
   } else {
     if (d->m_viewPosTimer.isActive())
       d->m_viewPosTimer.stop();
+    d->m_verticalScrollBarValue = -1;
     d->m_inLoading = false;
     d->m_registerSearchLine->searchLine()->reset();
   }
@@ -715,6 +725,14 @@ void KGlobalLedgerView::loadView(void)
     clear();
   }
 
+  // (re-)position viewport
+  if (m_newAccountLoaded) {
+    if (focusItem) {
+      d->m_verticalScrollBarValue = -1;
+    } else {
+      d->m_verticalScrollBarValue = 0;
+    }
+  }
   if (!d->m_inLoading) {
     d->m_viewPosTimer.setSingleShot(true);
     d->m_viewPosTimer.start(30);
@@ -797,7 +815,12 @@ void KGlobalLedgerView::updateSummaryLine(const QMap<QString, MyMoneyMoney>& act
 void KGlobalLedgerView::slotUpdateViewPos(void)
 {
   m_register->setUpdatesEnabled(true);
-  m_register->ensureItemVisible(m_register->focusItem());
+
+  if (d->m_verticalScrollBarValue == -1) {
+    m_register->ensureItemVisible(m_register->focusItem());
+  } else {
+    m_register->verticalScrollBar()->setValue(d->m_verticalScrollBarValue);
+  }
   d->m_inLoading = false;
 }
 
@@ -1268,7 +1291,9 @@ void KGlobalLedgerView::showEvent(QShowEvent* event)
 {
   if (m_needReload) {
     if (!m_inEditMode) {
+      setUpdatesEnabled(false);
       loadView();
+      setUpdatesEnabled(true);
       m_needReload = false;
       m_newAccountLoaded = false;
     }
