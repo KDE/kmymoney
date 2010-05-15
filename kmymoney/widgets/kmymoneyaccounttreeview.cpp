@@ -71,9 +71,9 @@ void KMyMoneyAccountTreeView::mouseDoubleClickEvent(QMouseEvent *event)
 void KMyMoneyAccountTreeView::customContextMenuRequested(const QPoint &pos)
 {
   Q_UNUSED(pos)
-  QModelIndex index = currentIndex();
+  QModelIndex index = model()->index(currentIndex().row(), AccountsModel::Account, currentIndex().parent());
   if (index.isValid()) {
-    QVariant data = model()->data(currentIndex(), AccountsModel::AccountRole);
+    QVariant data = model()->data(index, AccountsModel::AccountRole);
     if (data.isValid()) {
       emit selectObject(data.value<MyMoneyAccount>());
       emit openContextMenu(data.value<MyMoneyAccount>());
