@@ -23,6 +23,7 @@
 #include <QLabel>
 #include <QToolButton>
 #include <QTimer>
+#include <QScrollBar>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

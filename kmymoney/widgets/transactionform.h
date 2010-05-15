@@ -21,7 +21,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <Q3Table>
 #include <QPalette>
 #include <QWidget>
 #include <QMouseEvent>

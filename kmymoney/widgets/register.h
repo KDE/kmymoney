@@ -28,7 +28,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <Q3Table>
 #include <QVector>
 #include <QWidget>
 #include <QMap>
@@ -349,23 +348,6 @@ public:
   QWidget* createEditor(int row, int col, bool initFromCell) const;
   void setCellContentFromEditor(int row, int col);
   void endEdit(int row, int col, bool accept, bool replace);
-
-  void resizeData(int) {}
-  Q3TableItem* item(int, int) const {
-    return 0;
-  }
-  void setItem(int, int, Q3TableItem*) {}
-  void clearCell(int, int) {}
-
-  /**
-    * Override the QTable member function to avoid display of focus
-    */
-  void paintFocus(QPainter*, const QRect&) {}
-
-  /**
-    * Override the QTable member function to avoid functionality
-    */
-  void updateCell(int /* row */, int /* col */) {}
 
   RegisterItem* focusItem(void) const {
     return m_focusItem;
