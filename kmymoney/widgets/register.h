@@ -284,7 +284,6 @@ protected:
   static bool item_cmp(RegisterItem* i1, RegisterItem* i2);
 };
 
-class Register;
 class RegisterItemDelegate : public QStyledItemDelegate
 {
   Q_OBJECT
@@ -629,6 +628,7 @@ protected:
   SelectionMode                m_selectionMode;
 
 private:
+  bool                         m_needResize;
   bool                         m_listsDirty;
   bool                         m_ignoreNextButtonRelease;
   bool                         m_needInitialColumnResize;

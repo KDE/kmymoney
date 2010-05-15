@@ -463,6 +463,7 @@ Register::Register(QWidget *parent) :
     m_rowHeightHint(0),
     m_ledgerLensForced(false),
     m_selectionMode(QTableWidget::MultiSelection),
+    m_needResize(true),
     m_listsDirty(false),
     m_ignoreNextButtonRelease(false),
     m_needInitialColumnResize(false),
@@ -769,6 +770,7 @@ void Register::clear(void)
 #endif
 
   m_needInitialColumnResize = true;
+  m_needResize = true;
 }
 
 void Register::insertItemAfter(RegisterItem*p, RegisterItem* prev)
@@ -796,6 +798,7 @@ void Register::insertItemAfter(RegisterItem*p, RegisterItem* prev)
     m_lastItem = p;
 
   m_listsDirty = true;
+  m_needResize = true;
 }
 
 void Register::addItem(RegisterItem* p)
@@ -812,6 +815,7 @@ void Register::addItem(RegisterItem* p)
     m_firstItem = p;
   m_lastItem = p;
   m_listsDirty = true;
+  m_needResize = true;
 }
 
 void Register::removeItem(RegisterItem* p)
@@ -838,6 +842,7 @@ void Register::removeItem(RegisterItem* p)
     m_items[i] = 0;
   }
   m_listsDirty = true;
+  m_needResize = true;
 }
 
 RegisterItem* Register::firstItem(void) const
@@ -1060,6 +1065,10 @@ void Register::resize(void)
 
 void Register::resize(int col)
 {
+  if(!m_needResize)
+    return;
+
+  m_needResize = false;
   bool enabled = updatesEnabled();
   setUpdatesEnabled(false);
 
