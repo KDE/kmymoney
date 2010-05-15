@@ -602,6 +602,11 @@ AccountsFilterProxyModel::AccountsFilterProxyModel(QObject *parent /*= 0*/)
   setFilterCaseSensitivity(Qt::CaseInsensitive);
 }
 
+AccountsFilterProxyModel::~AccountsFilterProxyModel()
+{
+  delete d;
+}
+
 /**
   * This function was re-implemented so we could have a special display order (favorites first)
   */

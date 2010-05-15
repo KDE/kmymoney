@@ -158,6 +158,7 @@ class AccountsFilterProxyModel : public QSortFilterProxyModel
 
 public:
   AccountsFilterProxyModel(QObject *parent = 0);
+  ~AccountsFilterProxyModel();
 
   void addAccountType(MyMoneyAccount::accountTypeE type);
   void addAccountGroup(MyMoneyAccount::accountTypeE type);
