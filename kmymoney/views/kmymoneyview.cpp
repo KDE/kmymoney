@@ -459,16 +459,27 @@ void KMyMoneyView::enableViews(int state)
   if (state == -1)
     state = m_fileOpen;
 
-  m_accountsViewFrame->setEnabled(state);
-  m_institutionsViewFrame->setEnabled(state);
-  m_scheduleViewFrame->setEnabled(state);
-  m_categoriesViewFrame->setEnabled(state);
-  m_payeesViewFrame->setEnabled(state);
-  m_budgetViewFrame->setEnabled(state);
-  m_ledgerViewFrame->setEnabled(state);
-  m_investmentViewFrame->setEnabled(state);
-  m_reportsViewFrame->setEnabled(state);
-  m_forecastViewFrame->setEnabled(state);
+  // call set enabled only if the state differs to avoid widgets 'bouncing on the screen' while doing this
+  if (m_accountsViewFrame->isEnabled() != state)
+    m_accountsViewFrame->setEnabled(state);
+  if (m_institutionsViewFrame->isEnabled() != state)
+    m_institutionsViewFrame->setEnabled(state);
+  if (m_scheduleViewFrame->isEnabled() != state)
+    m_scheduleViewFrame->setEnabled(state);
+  if (m_categoriesViewFrame->isEnabled() != state)
+    m_categoriesViewFrame->setEnabled(state);
+  if (m_payeesViewFrame->isEnabled() != state)
+    m_payeesViewFrame->setEnabled(state);
+  if (m_budgetViewFrame->isEnabled() != state)
+    m_budgetViewFrame->setEnabled(state);
+  if (m_ledgerViewFrame->isEnabled() != state)
+    m_ledgerViewFrame->setEnabled(state);
+  if (m_investmentViewFrame->isEnabled() != state)
+    m_investmentViewFrame->setEnabled(state);
+  if (m_reportsViewFrame->isEnabled() != state)
+    m_reportsViewFrame->setEnabled(state);
+  if (m_forecastViewFrame->isEnabled() != state)
+    m_forecastViewFrame->setEnabled(state);
 
   emit viewStateChanged(state != 0);
 
