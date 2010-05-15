@@ -169,6 +169,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   planeDiagram->useSubduedColors();
 
   //the legend will be used later
+
   Legend* legend = new Legend(planeDiagram, this);
   legend->setTitleText(i18nc("Chart legend title", "Legend"));
 
@@ -445,7 +446,14 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     replaceLegend(legend);
   } else {
     //if it is over the limit delete the legend
+    takeLegend(legend);
     delete legend;
+    if(legends().size()) {
+      Legend* initialLegend = legends().at(0);
+      takeLegend(initialLegend);
+      delete initialLegend;
+    }
+
   }
 
   //this sets the line width only for line diagrams
