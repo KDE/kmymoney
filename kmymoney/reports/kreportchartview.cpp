@@ -448,7 +448,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     //if it is over the limit delete the legend
     takeLegend(legend);
     delete legend;
-    if(legends().size()) {
+    if (legends().size()) {
       Legend* initialLegend = legends().at(0);
       takeLegend(initialLegend);
       delete initialLegend;

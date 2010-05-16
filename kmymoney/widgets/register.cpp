@@ -1065,7 +1065,7 @@ void Register::resize(void)
 
 void Register::resize(int col)
 {
-  if(!m_needResize)
+  if (!m_needResize)
     return;
 
   m_needResize = false;
