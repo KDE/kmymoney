@@ -212,6 +212,19 @@
                 </widget>
               </item>
               <item>
+                <widget class="QCheckBox" name="kcfg_AutoReconciliation">
+                  <property name="text">
+                    <string>Automatic reconciliation</string>
+                  </property>
+                  <property name="shortcut">
+                    <string/>
+                  </property>
+                  <property name="whatsThis" stdset="0">
+                    <string>After entering the reconciliation data automatically detect the transactions that match that data (in some cases it might be not possible to do that).</string>
+                  </property>
+                </widget>
+              </item>
+              <item>
                 <layout class="QHBoxLayout">
                   <item>
                     <widget class="QLabel" name="textLabel2_2">

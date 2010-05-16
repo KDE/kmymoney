@@ -214,6 +214,10 @@ public:
   void moveInvestmentTransaction(const QString& fromId,
                                  const QString& toId,
                                  const MyMoneyTransaction& t);
+  QList<QPair<MyMoneyTransaction, MyMoneySplit> > automaticReconciliation(const MyMoneyAccount &account,
+      const QList<QPair<MyMoneyTransaction, MyMoneySplit> > &transactions,
+      const MyMoneyMoney &amount);
+
 
   MyMoneyFileTransaction*       m_ft;
   kMyMoneyAccountSelector*      m_moveToAccountSelector;
@@ -3545,6 +3549,118 @@ void KMyMoneyApp::slotAccountEdit(void)
   }
 }
 
+QList<QPair<MyMoneyTransaction, MyMoneySplit> > KMyMoneyApp::Private::automaticReconciliation(const MyMoneyAccount &account,
+    const QList<QPair<MyMoneyTransaction, MyMoneySplit> > &transactions,
+    const MyMoneyMoney &amount)
+{
+  static const int NR_OF_STEPS_LIMIT = 300000;
+  static const int PROGRESSBAR_STEPS = 1000;
+  QList<QPair<MyMoneyTransaction, MyMoneySplit> > result = transactions;
+
+  KMSTATUS(i18n("Running automatic reconciliation"));
+  int progressBarIndex = 0;
+  kmymoney->slotStatusProgressBar(progressBarIndex, NR_OF_STEPS_LIMIT / PROGRESSBAR_STEPS);
+
+  // optimize the most common case - all transactions should be cleared
+  QListIterator<QPair<MyMoneyTransaction, MyMoneySplit> > itTransactionSplitResult(result);
+  MyMoneyMoney transactionsBalance(0);
+  while (itTransactionSplitResult.hasNext()) {
+    const QPair<MyMoneyTransaction, MyMoneySplit> &transactionSplit = itTransactionSplitResult.next();
+    transactionsBalance += transactionSplit.second.shares();
+  }
+  if (amount == transactionsBalance) {
+    result = transactions;
+    return result;
+  }
+  kmymoney->slotStatusProgressBar(progressBarIndex++, 0);
+  // only one transaction is uncleared
+  itTransactionSplitResult.toFront();
+  int index = 0;
+  while (itTransactionSplitResult.hasNext()) {
+    const QPair<MyMoneyTransaction, MyMoneySplit> &transactionSplit = itTransactionSplitResult.next();
+    if (transactionsBalance - transactionSplit.second.shares() == amount) {
+      result.removeAt(index);
+      return result;
+    }
+    index++;
+  }
+  kmymoney->slotStatusProgressBar(progressBarIndex++, 0);
+
+  // more than one transaction is uncleared - apply the algorithm
+  result.clear();
+
+  const MyMoneySecurity &security = MyMoneyFile::instance()->security(account.currencyId());
+  double precision = 0.1 / account.fraction(security);
+
+  QList<MyMoneyMoney> sumList;
+  sumList << MyMoneyMoney(0);
+
+  QMap<MyMoneyMoney, QList<QPair<QString, QString> > > sumToComponentsMap;
+
+  // compute the possible matches
+  QListIterator<QPair<MyMoneyTransaction, MyMoneySplit> > itTransactionSplit(transactions);
+  while (itTransactionSplit.hasNext()) {
+    const QPair<MyMoneyTransaction, MyMoneySplit> &transactionSplit = itTransactionSplit.next();
+    QListIterator<MyMoneyMoney> itSum(sumList);
+    QList<MyMoneyMoney> tempList;
+    while (itSum.hasNext()) {
+      const MyMoneyMoney &sum = itSum.next();
+      QList<QPair<QString, QString> > splitIds;
+      splitIds << qMakePair<QString, QString>(transactionSplit.first.id(), transactionSplit.second.id());
+      if (sumToComponentsMap.contains(sum)) {
+        if (sumToComponentsMap.value(sum).contains(qMakePair<QString, QString>(transactionSplit.first.id(), transactionSplit.second.id()))) {
+          continue;
+        }
+        splitIds.append(sumToComponentsMap.value(sum));
+      }
+      tempList << transactionSplit.second.shares() + sum;
+      sumToComponentsMap[transactionSplit.second.shares() + sum] = splitIds;
+      int size = sumToComponentsMap.size();
+      if (size % PROGRESSBAR_STEPS == 0) {
+        kmymoney->slotStatusProgressBar(progressBarIndex++, 0);
+      }
+      if (size > NR_OF_STEPS_LIMIT) {
+        return result; // it's taking too much resources abort the algorithm
+      }
+    }
+    QList<MyMoneyMoney> unionList;
+    unionList.append(tempList);
+    unionList.append(sumList);
+    qSort(unionList);
+    sumList.clear();
+    MyMoneyMoney smallestSumFromUnion = unionList.first();
+    sumList.append(smallestSumFromUnion);
+    QListIterator<MyMoneyMoney> itUnion(unionList);
+    while (itUnion.hasNext()) {
+      MyMoneyMoney sumFromUnion = itUnion.next();
+      if (smallestSumFromUnion < (1 - precision / transactions.size())*sumFromUnion) {
+        smallestSumFromUnion = sumFromUnion;
+        sumList.append(sumFromUnion);
+      }
+    }
+  }
+
+  kmymoney->slotStatusProgressBar(NR_OF_STEPS_LIMIT / PROGRESSBAR_STEPS, 0);
+  if (sumToComponentsMap.contains(amount)) {
+    QListIterator<QPair<MyMoneyTransaction, MyMoneySplit> > itTransactionSplit(transactions);
+    while (itTransactionSplit.hasNext()) {
+      const QPair<MyMoneyTransaction, MyMoneySplit> &transactionSplit = itTransactionSplit.next();
+      const QList<QPair<QString, QString> > &splitIds = sumToComponentsMap.value(amount);
+      if (splitIds.contains(qMakePair<QString, QString>(transactionSplit.first.id(), transactionSplit.second.id()))) {
+        result.append(transactionSplit);
+      }
+    }
+  }
+
+#ifdef KMM_DEBUG
+  qDebug("For the amount %s a number of %d possible sums where computed from the set of %d transactions: ",
+         qPrintable(amount.formatMoney(security)), sumToComponentsMap.size(), transactions.size());
+#endif
+
+  kmymoney->slotStatusProgressBar(-1, -1);
+  return result;
+}
+
 void KMyMoneyApp::slotAccountReconcileStart(void)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
@@ -3593,6 +3709,45 @@ void KMyMoneyApp::slotAccountReconcileStart(void)
         connect(d->m_endingBalanceDlg, SIGNAL(createCategory(MyMoneyAccount&, const MyMoneyAccount&)), this, SLOT(slotCategoryNew(MyMoneyAccount&, const MyMoneyAccount&)));
 
         if (d->m_endingBalanceDlg->exec() == QDialog::Accepted) {
+          if (KMyMoneyGlobalSettings::autoReconciliation()) {
+            MyMoneyMoney startBalance = d->m_endingBalanceDlg->previousBalance();
+            MyMoneyMoney endBalance = d->m_endingBalanceDlg->endingBalance();
+            QDate starDate = account.lastReconciliationDate();
+            QDate endDate = d->m_endingBalanceDlg->statementDate();
+
+            QList<QPair<MyMoneyTransaction, MyMoneySplit> > transactionList;
+            MyMoneyTransactionFilter filter(account.id());
+            filter.addState(MyMoneyTransactionFilter::cleared);
+            filter.addState(MyMoneyTransactionFilter::notReconciled);
+            filter.setDateFilter(QDate(), endDate);
+            filter.setConsiderCategory(false);
+            filter.setReportAllSplits(true);
+            file->transactionList(transactionList, filter);
+            QList<QPair<MyMoneyTransaction, MyMoneySplit> > result = d->automaticReconciliation(account, transactionList, endBalance - startBalance);
+
+            if (!result.empty()) {
+              QString message = i18n("KMyMoney has detected transactions matching your reconciliation data.\nWould you like KMyMoney to clear these transactions for you?");
+              if (KMessageBox::questionYesNo(this,
+                                             message,
+                                             i18n("Automatic reconciliation"),
+                                             KStandardGuiItem::yes(),
+                                             KStandardGuiItem::no(),
+                                             "AcceptAutomaticReconciliation") == KMessageBox::Yes) {
+                // mark the transactions cleared
+                KMyMoneyRegister::SelectedTransactions oldSelection = d->m_selectedTransactions;
+                d->m_selectedTransactions.clear();
+                QListIterator<QPair<MyMoneyTransaction, MyMoneySplit> > itTransactionSplitResult(result);
+                while (itTransactionSplitResult.hasNext()) {
+                  const QPair<MyMoneyTransaction, MyMoneySplit> &transactionSplit = itTransactionSplitResult.next();
+                  d->m_selectedTransactions.append(KMyMoneyRegister::SelectedTransaction(transactionSplit.first, transactionSplit.second));
+                }
+                // mark all transactions in d->m_selectedTransactions as 'Cleared'
+                markTransaction(MyMoneySplit::Cleared);
+                d->m_selectedTransactions = oldSelection;
+              }
+            }
+          }
+
           if (d->m_myMoneyView->startReconciliation(account, d->m_endingBalanceDlg->statementDate(), d->m_endingBalanceDlg->endingBalance())) {
 
             // check if the user requests us to create interest

@@ -25,6 +25,10 @@
    <label>Autosave file periodically</label>
    <default>false</default>
   </entry>
+  <entry name="AutoReconciliation" type="Bool">
+   <label>Automatically find which transactions match the given reconciliation data</label>
+   <default>false</default>
+  </entry>
   <entry name="AutoSavePeriod" type="Int">
    <label>Autosave interval in minutes</label>
    <default>10</default>
