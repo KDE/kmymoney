@@ -142,30 +142,6 @@
           </item>
          </layout>
         </item>
-        <item>
-         <widget class="QLabel" name="m_description">
-          <property name="text">
-           <string>X</string>
-          </property>
-          <property name="wordWrap">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QTreeWidget" name="m_onlineSourceTable">
-          <column>
-           <property name="text">
-            <string>Currency</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Online Source</string>
-           </property>
-          </column>
-         </widget>
-        </item>
        </layout>
       </widget>
      </item>

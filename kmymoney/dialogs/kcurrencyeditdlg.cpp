@@ -54,11 +54,7 @@ KCurrencyEditDlg::KCurrencyEditDlg(QWidget *parent) :
 {
   m_currencyList->header()->setStretchLastSection(true);
 
-  // FIXME: the online source table currently has no functionality
-  m_onlineSourceTable->hide();
-
   connect(m_currencyList, SIGNAL(itemPressed(QTreeWidgetItem*, int)), this, SLOT(slotItemPressed(QTreeWidgetItem*, int)));
-
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadCurrencies()));
 
   slotLoadCurrencies();
@@ -68,9 +64,6 @@ KCurrencyEditDlg::KCurrencyEditDlg(QWidget *parent) :
 
   // FIXME: currently, no online help available
   buttonHelp->hide();
-
-  // FIXME this is currently unused so we hide it also
-  m_description->hide();
 
   QTimer::singleShot(10, this, SLOT(timerDone()));
 }
@@ -190,7 +183,6 @@ void KCurrencyEditDlg::slotSelectCurrency(QTreeWidgetItem *item)
   updateCurrency();
 
   m_detailGroup->setEnabled(item != 0);
-  m_onlineSourceTable->clear();
   m_idLabel->setText(QString());
   m_symbolEdit->setText(QString());
 
@@ -203,7 +195,6 @@ void KCurrencyEditDlg::slotSelectCurrency(QTreeWidgetItem *item)
     } catch (MyMoneyException *e) {
       delete e;
       m_currency = MyMoneySecurity();
-      m_onlineSourceTable->clear();
       m_idLabel->setText(QString());
       m_symbolEdit->setText(QString());
     }
