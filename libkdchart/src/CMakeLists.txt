@@ -38,7 +38,6 @@ set(kdchart_LIB_SRCS
     KDChartDatasetSelector.cpp
     KDChartDataValueAttributes.cpp
     KDChartDiagramObserver.cpp
-    KDChartEnums.cpp
     KDChartFrameAttributes.cpp
     KDChartGridAttributes.cpp
     KDChartHeaderFooter.cpp
@@ -109,6 +108,8 @@ set(kdchart_LIB_SRCS
 qt4_wrap_ui(kdchart_LIB_SRCS
     KDChartDatasetSelector.ui
 )
+
+qt_wrap_cpp(kdchart kdchart_LIB_SRCS KDChartEnums.h)
 
 kde4_add_library(kmm_kdchart SHARED ${kdchart_LIB_SRCS})
 
