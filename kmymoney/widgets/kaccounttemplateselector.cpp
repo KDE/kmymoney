@@ -212,14 +212,17 @@ void KAccountTemplateSelector::slotLoadTemplateList(void)
   d->m_templates.clear();
   d->it_m = d->countries.begin();
   d->id = 1;
-  QTimer::singleShot(0, this, SLOT(slotLoadCountry()));
+  if (d->it_m != d->countries.end())
+    QTimer::singleShot(0, this, SLOT(slotLoadCountry()));
+  else {
+    d->loadHierarchy();
+  }
 #endif
 }
 
 void KAccountTemplateSelector::slotLoadCountry(void)
 {
 #ifndef KMM_DESIGNER
-
   QTreeWidgetItem *parent = new QTreeWidgetItem(m_groupList);
   parent->setText(0, d->it_m.key());
   parent->setFlags(parent->flags() & ~Qt::ItemIsSelectable);
