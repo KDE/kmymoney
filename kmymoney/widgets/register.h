@@ -441,7 +441,7 @@ public:
   RegisterItem* prevItem(RegisterItem*) const;
   RegisterItem* itemAtRow(int row) const;
 
-  void resize(int col);
+  void resize(int col, bool force = false);
 
   void forceUpdateLists(void) {
     m_listsDirty = true;

@@ -1063,9 +1063,9 @@ void Register::resize(void)
   resize(DetailColumn);
 }
 
-void Register::resize(int col)
+void Register::resize(int col, bool force)
 {
-  if (!m_needResize)
+  if (!m_needResize && !force)
     return;
 
   m_needResize = false;

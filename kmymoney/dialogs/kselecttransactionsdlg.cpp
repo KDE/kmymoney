@@ -124,7 +124,7 @@ void KSelectTransactionsDlg::slotHelp(void)
 void KSelectTransactionsDlg::showEvent(QShowEvent* event)
 {
   KSelectTransactionsDlgDecl::showEvent(event);
-  m_register->resize(KMyMoneyRegister::DetailColumn);
+  m_register->resize(KMyMoneyRegister::DetailColumn, true);
 }
 
 void KSelectTransactionsDlg::resizeEvent(QResizeEvent* ev)
@@ -133,7 +133,7 @@ void KSelectTransactionsDlg::resizeEvent(QResizeEvent* ev)
   KSelectTransactionsDlgDecl::resizeEvent(ev);
 
   // resize the register
-  m_register->resize(KMyMoneyRegister::DetailColumn);
+  m_register->resize(KMyMoneyRegister::DetailColumn, true);
 }
 
 MyMoneyTransaction KSelectTransactionsDlg::transaction(void) const
