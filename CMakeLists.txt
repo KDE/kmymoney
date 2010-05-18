@@ -2,7 +2,7 @@
 PROJECT(KMyMoney)
 
 # The CMake version we require
-CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.6.4)
 
 # cmake 2.6 proposed to add this policy
 if(COMMAND cmake_policy)
