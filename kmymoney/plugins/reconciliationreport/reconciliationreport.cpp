@@ -111,7 +111,7 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
     }
   }
 
-  QString reportName = i18n("Reconcliation report of account %1", account.name());
+  QString reportName = i18n("Reconciliation report of account %1", account.name());
   QString report = QString("<h2 class=\"report\">%1</h2>\n").arg(reportName);
   report += QString("<div class=\"subtitle\">");
   report += QString("%1").arg(KGlobal::locale()->formatDate(date, KLocale::ShortDate));
