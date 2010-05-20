@@ -7,6 +7,11 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.6.4)
 # cmake 2.6 proposed to add this policy
 if(COMMAND cmake_policy)
   cmake_policy(SET CMP0003 NEW)
+  # until the createtarball script generates different custom targets
+  # for the various translations, we need to keep the following setting
+  # http://www.vtkedge.org/Wiki/CMake_Policies#Setting_Policies_Individually
+  # has an explanation of the problem
+  cmake_policy(SET CMP0002 OLD)
 endif(COMMAND cmake_policy)
 
 # Our modules reside in the subdirectory cmake/modules/
