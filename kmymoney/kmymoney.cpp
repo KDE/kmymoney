@@ -106,6 +106,7 @@
 #include "dialogs/settings/ksettingshome.h"
 #include "dialogs/settings/ksettingsforecast.h"
 #include "dialogs/settings/ksettingsplugins.h"
+#include "dialogs/settings/ksettingsreports.h"
 #include "dialogs/kbackupdlg.h"
 #include "dialogs/kexportdlg.h"
 #include "dialogs/kimportdlg.h"
@@ -2325,6 +2326,7 @@ void KMyMoneyApp::slotSettings(void)
   KSettingsOnlineQuotes* onlineQuotesPage = new KSettingsOnlineQuotes();
   KSettingsForecast* forecastPage = new KSettingsForecast();
   KSettingsPlugins* pluginsPage = new KSettingsPlugins();
+  KSettingsReports* reportsPage = new KSettingsReports();
 
   dlg->addPage(generalPage, i18nc("General settings", "General"), "system-run");
   dlg->addPage(registerPage, i18nc("Register view settings", "Register"), "ledger");
@@ -2335,12 +2337,14 @@ void KMyMoneyApp::slotSettings(void)
 #else
   dlg->addPage(schedulesPage, i18n("Scheduled\ntransactions"), "view-pim-calendar");
 #endif
+  dlg->addPage(onlineQuotesPage, i18n("Online Quotes"), "preferences-system-network");
+  dlg->addPage(reportsPage, i18nc("Report settings", "Reports"), "office-chart-tall-pie");
+  dlg->addPage(forecastPage, i18nc("Forecast settings", "Forecast"), "forecast");
   dlg->addPage(encryptionPage, i18n("Encryption"), "kgpg");
   dlg->addPage(colorsPage, i18n("Colors"), "preferences-desktop-color");
   dlg->addPage(fontsPage, i18n("Fonts"), "preferences-desktop-font");
-  dlg->addPage(onlineQuotesPage, i18n("Online Quotes"), "preferences-system-network");
-  dlg->addPage(forecastPage, i18nc("Forecast settings", "Forecast"), "forecast");
   dlg->addPage(pluginsPage, i18n("Plugins"), "network-disconnect");
+
 
   connect(dlg, SIGNAL(settingsChanged(const QString&)), this, SLOT(slotUpdateConfiguration()));
   connect(dlg, SIGNAL(cancelClicked()), schedulesPage, SLOT(slotResetRegion()));

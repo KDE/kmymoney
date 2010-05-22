@@ -379,14 +379,24 @@
   </entry>
  </group>
  <group name="Chart Settings">
-  <entry name="maximumLegendItems" type="Int">
+  <entry name="MaximumLegendItems" type="Int">
    <label>Maximum quantity of legend items to display on charts</label>
    <default>10</default>
    <min>0</min>
   </entry>
+  <entry name="LineWidth" type="Int">
+   <label>line width for diagrams in pixel</label>
+   <default>2</default>
+   <min>0</min>
+   <max>256</max>
+  </entry>
+  <entry name="CssFileDefault" type="String">
+   <label>name of default css file</label>
+   <default>kmymoney.css</default>
+  </entry>
  </group>
 </kcfg>
-<!-- 
+<!--
   <entry name="" type="">
    <label>...</label>
    <default>...</default>

@@ -17,6 +17,7 @@ SET (libsettings_a_SOURCES
 	ksettingsregister.cpp 
 	ksettingsschedules.cpp 
 	ksettingsplugins.cpp
+	ksettingsreports.cpp
 	)
 
 SET (libsettings_a_UI 
@@ -24,6 +25,7 @@ SET (libsettings_a_UI
   ksettingsforecastdecl.ui ksettingsgeneraldecl.ui ksettingsgpgdecl.ui
   ksettingshomedecl.ui ksettingsonlinequotesdecl.ui
   ksettingsregisterdecl.ui ksettingsschedulesdecl.ui
+  ksettingsreportsdecl.ui
   )
 
 kde4_add_ui_files(libsettings_a_SOURCES ${libsettings_a_UI} )

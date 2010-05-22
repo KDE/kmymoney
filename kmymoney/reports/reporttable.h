@@ -34,6 +34,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "kmymoneyglobalsettings.h"
 #include "kmymoneyutils.h"
 #include "mymoneyfile.h"
 #include "mymoneyreport.h"
@@ -52,8 +53,14 @@ class ReportTable
 private:
 
   /**
-   * Tries to find a css for the report.
-   * If there is no report-specific css, tries to find a default one.
+   * Tries to find a css file for the report.
+   *
+   * Search is done in following order:
+   * <ol>
+   *  <li> report specific stylesheet
+   *  <li> configured stylesheet
+   *  <li> installation default of stylesheet
+   * </ol>
    *
    * @retval css-filename  if a css-file was found
    * @retval empty-string  if no css-file was found

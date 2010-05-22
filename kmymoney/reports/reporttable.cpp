@@ -49,7 +49,12 @@ QString reports::ReportTable::cssFileNameGet(void)
   }
 
   if (cssfilename.isEmpty()) {
-    // if no specific stylesheet was found, try to use a default one
+    // if no report specific stylesheet was found, try to use the configured one
+    cssfilename = KMyMoneyGlobalSettings::cssFileDefault();
+  }
+
+  if (cssfilename.isEmpty()) {
+    // if there still is nothing, try to use the installation default
     cssfilename = KGlobal::dirs()->
                   findResource(m_resourceType, m_resourceHtml + '/'
                                + m_cssFileDefault);
