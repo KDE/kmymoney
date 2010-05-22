@@ -85,7 +85,7 @@ public:
     QString out = i18np("There is a problem with file %1","There are problems with file %1", css);
 
     QList<QString>::const_iterator i;
-    for (i = warnings.begin(); i != warnings.end(); ++i) {
+    for (i = warnings.constBegin(); i != warnings.constEnd(); ++i) {
       out += "\n" + *i;
     }
 
