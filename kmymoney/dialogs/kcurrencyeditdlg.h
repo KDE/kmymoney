@@ -9,6 +9,7 @@
                            John C <thetacoturtle@users.sourceforge.net>
                            Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
+                           Alvaro Soliverez <asoliverez@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -26,11 +27,10 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QDialog>
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KDialog>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -40,10 +40,10 @@
 
 class QTreeWidgetItem;
 
-class KCurrencyEditDlgDecl : public QDialog, public Ui::KCurrencyEditDlgDecl
+class KCurrencyEditDlgDecl : public KDialog, public Ui::KCurrencyEditDlgDecl
 {
 public:
-  KCurrencyEditDlgDecl(QWidget *parent) : QDialog(parent) {
+  KCurrencyEditDlgDecl(QWidget *parent) : KDialog(parent) {
     setupUi(this);
   }
 };
@@ -62,16 +62,16 @@ public slots:
   void slotSelectCurrency(const QString& id);
 
 protected:
-  void updateCurrency(void);
+
 
 protected slots:
   void slotSelectCurrency(QTreeWidgetItem *);
-
-  void slotClose(void);
   void slotStartRename(void);
-  void slotItemPressed(QTreeWidgetItem* item, int);
+  void slotStartEditId(void);
+  void slotOpenContextMenu(const QPoint& p);
   void slotRenameCurrency(QTreeWidgetItem* item);
   void slotLoadCurrencies(void);
+  void slotUpdateCurrency(QTreeWidgetItem *item);
 
 private slots:
   void timerDone(void);
@@ -85,6 +85,7 @@ signals:
 
 private:
   MyMoneySecurity      m_currency;
+  bool                 m_currencyInEditing;
 };
 
 #endif

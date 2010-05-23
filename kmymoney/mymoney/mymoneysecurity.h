@@ -183,4 +183,10 @@ protected:
   int                   m_partsPerUnit;
 };
 
+/**
+  * Make it possible to hold @ref MyMoneySecurity objects inside @ref QVariant objects.
+  */
+Q_DECLARE_METATYPE(MyMoneySecurity)
+
+
 #endif
