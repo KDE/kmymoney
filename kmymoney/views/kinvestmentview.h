@@ -37,8 +37,6 @@
 #include "ui_kinvestmentviewdecl.h"
 #include "kinvestmentlistitem.h"
 
-class MyMoneyTransaction;
-class MyMoneyInvestTransaction;
 
 /**
   * @author Kevin Tambascio

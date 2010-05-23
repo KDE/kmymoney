@@ -34,7 +34,6 @@
 
 #include "ui_kaccountsviewdecl.h"
 
-class KMyMoneyAccountTreeView;
 
 /**
   * This class implements the accounts hierarchical and iconic 'view'.

@@ -30,7 +30,6 @@
 #include <QList>
 #include <QVBoxLayout>
 
-class QFile;
 
 // ----------------------------------------------------------------------------
 // KDE Includes
