@@ -1047,7 +1047,7 @@ void KMyMoneyView::saveToLocalFile(const QString& localFile, IMyMoneyStorageForm
     }
 
     if (encryptedOk == true) {
-      QString msg = i18n("<p>You have configured to save your data in encrypted form using GPG. Please be aware, that this is a brand new feature which is yet untested. Make sure, you have the necessary understanding that you might loose all your data if you store it encrypted and cannot decrypt it later on. If unsure, answer <b>No</b>.</p>");
+      QString msg = i18n("<p>You have configured to save your data in encrypted form using GPG. Make sure, you have the necessary understanding that you might loose all your data if you store it encrypted and cannot decrypt it later on. If unsure, answer <b>No</b>.</p>");
 
       if (KMessageBox::questionYesNo(this, msg, i18n("Store GPG encrypted"), KStandardGuiItem::yes(), KStandardGuiItem::no(), "StoreEncrypted") == KMessageBox::No) {
         encryptedOk = false;
