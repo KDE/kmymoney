@@ -32,6 +32,7 @@
 // Project Includes
 
 #include "mymoneyfile.h"
+#include "kmymoneyglobalsettings.h"
 
 const QStringList MyMoneyReport::kRowTypeText = QString("none,assetliability,expenseincome,category,topcategory,account,payee,month,week,topaccount,topaccount-account,equitytype,accounttype,institution,budget,budgetactual,schedule,accountinfo,accountloaninfo,accountreconcile,cashflow").split(',');
 const QStringList MyMoneyReport::kColumnTypeText = QString("none,months,bimonths,quarters,4,5,6,weeks,8,9,10,11,years").split(',');
@@ -69,7 +70,6 @@ MyMoneyReport::MyMoneyReport() :
     m_chartDataLabels(true),
     m_chartGridLines(true),
     m_chartByDefault(false),
-    m_chartLineWidth(2),
     m_includeSchedules(false),
     m_includeTransfers(false),
     m_includeBudgetActuals(false),
@@ -82,6 +82,7 @@ MyMoneyReport::MyMoneyReport() :
     m_mixedTime(false),
     m_currentDateColumn(0)
 {
+  m_chartLineWidth = KMyMoneyGlobalSettings::lineWidth();
 }
 
 MyMoneyReport::MyMoneyReport(const QString& id, const MyMoneyReport& right) :
@@ -110,7 +111,6 @@ MyMoneyReport::MyMoneyReport(ERowType _rt, unsigned _ct, dateOptionE _dl, EDetai
     m_chartDataLabels(true),
     m_chartGridLines(true),
     m_chartByDefault(false),
-    m_chartLineWidth(2),
     m_includeSchedules(false),
     m_includeTransfers(false),
     m_includeBudgetActuals(false),
@@ -123,16 +123,22 @@ MyMoneyReport::MyMoneyReport(ERowType _rt, unsigned _ct, dateOptionE _dl, EDetai
     m_mixedTime(false),
     m_currentDateColumn(0)
 {
+  //set initial values
+  m_chartLineWidth = KMyMoneyGlobalSettings::lineWidth();
+
+  //set report type
   if (m_reportType == ePivotTable)
     m_columnType = static_cast<EColumnType>(_ct);
   if (m_reportType == eQueryTable)
     m_queryColumns = static_cast<EQueryColumns>(_ct);
   setDateFilter(_dl);
 
+  //throw exception if the type is inconsistent
   if ((_rt > static_cast<ERowType>(sizeof(kTypeArray) / sizeof(kTypeArray[0])))
       || (m_reportType == eNoReport))
     throw new MYMONEYEXCEPTION("Invalid report type");
 
+  //add the corresponding account groups
   if (_rt == MyMoneyReport::eAssetLiability) {
     addAccountGroup(MyMoneyAccount::Asset);
     addAccountGroup(MyMoneyAccount::Liability);
@@ -622,7 +628,7 @@ bool MyMoneyReport::read(const QDomElement& e)
       m_chartDataLabels = e.attribute("chartdatalabels", "1").toUInt();
       m_chartGridLines = e.attribute("chartgridlines", "1").toUInt();
       m_chartByDefault = e.attribute("chartbydefault", "0").toUInt();
-      m_chartLineWidth = e.attribute("chartlinewidth", "2").toUInt();
+      m_chartLineWidth = e.attribute("chartlinewidth", QString(m_chartLineWidth = KMyMoneyGlobalSettings::lineWidth())).toUInt();
     } else {
       m_chartDataLabels = true;
       m_chartGridLines = true;

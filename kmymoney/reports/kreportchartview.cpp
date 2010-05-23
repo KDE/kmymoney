@@ -556,13 +556,18 @@ bool KReportChartView::event(QEvent* event)
 
 void KReportChartView::setLineWidth(const int lineWidth)
 {
+  qDebug("line width: %d", lineWidth);
   if (qobject_cast<LineDiagram*>(coordinatePlane()->diagram())) {
     LineDiagram* lineDiagram = qobject_cast<LineDiagram*>(coordinatePlane()->diagram());
     const int currentCols = m_model.columnCount();
+    const int currentRows = m_model.rowCount();
     for (int col = 0; col < currentCols; ++col) {
-      QPen pen = lineDiagram->pen(col);
-      pen.setWidth(lineWidth);
-      lineDiagram->setPen(col, pen);
+        qDebug("column: %d", col);
+        for (int row = 0; row < currentRows; ++row) {
+        QPen pen(lineDiagram->pen(m_model.index(row, col, QModelIndex())));
+        pen.setWidth(lineWidth);
+        lineDiagram->setPen(m_model.index(row, col, QModelIndex()), pen);
+      }
     }
   }
 }
