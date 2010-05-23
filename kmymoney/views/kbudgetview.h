@@ -1,9 +1,10 @@
 /***************************************************************************
                           kbudgetview.h
                           -------------
-    begin                : Thu Jan 24 2002
+    begin                : Thu Jan 10 2006
     copyright            : (C) 2006 by Darren Gould
     email                : darren_gould@gmx.de
+                           Alvaro Soliverez <asoliverez@gmail.com>
 ***************************************************************************/
 
 /***************************************************************************
@@ -41,7 +42,6 @@ class KMyMoneyAccountTreeBudgetItem;
 /**
   * @author Darren Gould
   * @author Thomas Baumgart
-  *
   *
   * This class represents an item in the budgets list view.
   */
@@ -133,7 +133,6 @@ public slots:
    */
   void cb_includesSubaccounts_clicked();
 
-
 protected:
   void resizeEvent(QResizeEvent*);
   void loadAccounts(void);
@@ -209,17 +208,19 @@ private:
   } eTimePeriodColumn;
 
   MyMoneyBudget                       m_budget;
-
   QMap<QString, unsigned long>        m_transactionCountMap;
   QStringList                         m_yearList;
-
   KMyMoneyAccountTreeBudgetItem*      m_incomeItem;
   KMyMoneyAccountTreeBudgetItem*      m_expenseItem;
 
-  /// set if a view needs to be reloaded during showEvent()
+/**
+  * Set if a view needs to be reloaded during showEvent()
+  **/
   bool                                m_needReload;
 
-  // set if we are in the selection of a different budget
+/**
+  * Set if we are in the selection of a different budget
+  **/
   bool                                m_inSelection;
 
   void adaptHideUnusedButton(void);
@@ -227,7 +228,7 @@ private:
   static const int m_iBudgetYearsAhead;
   static const int m_iBudgetYearsBack;
 
-  /**
+/**
   * This signals whether a budget is being edited
   **/
   bool m_budgetInEditing;

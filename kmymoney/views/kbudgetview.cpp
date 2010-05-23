@@ -4,6 +4,7 @@
     begin                : Thu Jan 10 2006
     copyright            : (C) 2006 by Darren Gould
     email                : darren_gould@gmx.de
+                           Alvaro Soliverez <asoliverez@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -75,6 +76,7 @@ KBudgetListItem::~KBudgetListItem()
 }
 
 // *** KBudgetView Implementation ***
+//TODO: This has to go to user settings
 const int KBudgetView::m_iBudgetYearsAhead = 5;
 const int KBudgetView::m_iBudgetYearsBack = 3;
 
@@ -196,12 +198,10 @@ void KBudgetView::slotReloadView(void)
 
 void KBudgetView::loadBudgets(void)
 {
-  QString id;
-
   ::timetrace("Start KBudgetView::loadBudgets");
 
   // remember which item is currently selected
-  id = m_budget.id();
+  QString id = m_budget.id();
 
   // clear the budget list
   m_budgetList->clear();
@@ -240,7 +240,6 @@ void KBudgetView::loadBudgets(void)
   if (currentItem) {
     m_budgetList->setCurrentItem(currentItem);
   }
-
 
   // reset the status of the buttons
   m_updateButton->setEnabled(false);
@@ -322,7 +321,6 @@ void KBudgetView::loadAccounts(void)
   MyMoneyFile* file = MyMoneyFile::instance();
 
   m_transactionCountMap = file->transactionCountMap();
-
   m_accountTree->setBaseCurrency(file->baseCurrency());
 
   bool haveUnusedBudgets = false;
@@ -515,7 +513,6 @@ const MyMoneyBudget& KBudgetView::selectedBudget(void) const
   if (item) {
     return item->budget();
   }
-
   return nullBudget;
 }
 
@@ -528,15 +525,11 @@ KMyMoneyAccountTreeBudgetItem* KBudgetView::selectedAccount(void) const
 
 void KBudgetView::slotOpenContextMenu(const QPoint& p)
 {
-
-
   KBudgetListItem* item = dynamic_cast<KBudgetListItem*>(m_budgetList->itemAt(p));
   if (item)
     emit openContextMenu(item->budget());
   else
     emit openContextMenu(MyMoneyBudget());
-
-
 }
 
 void KBudgetView::slotStartRename(void)
@@ -665,7 +658,6 @@ void KBudgetView::AccountEnter()
     m_accountTree->setOpen(item, true);
   }
 }
-
 
 void KBudgetView::cb_includesSubaccounts_clicked()
 {
