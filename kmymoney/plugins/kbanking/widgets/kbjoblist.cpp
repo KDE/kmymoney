@@ -27,7 +27,7 @@
 #include <assert.h>
 #include <QString>
 #include <QWidget>
-
+#include <KLocale>
 
 
 KBJobListViewItem::KBJobListViewItem(KBJobListView *parent,
@@ -98,19 +98,19 @@ void KBJobListViewItem::_populate()
   // job type
   switch (AB_Job_GetType(_job)) {
   case AB_Job_TypeGetBalance:
-    tmp = QWidget::tr("Get Balance");
+    tmp = i18n("Get Balance");
     break;
   case AB_Job_TypeGetTransactions:
-    tmp = QWidget::tr("Get Transactions");
+    tmp = i18n("Get Transactions");
     break;
   case AB_Job_TypeTransfer:
-    tmp = QWidget::tr("Transfer");
+    tmp = i18n("Transfer");
     break;
   case AB_Job_TypeDebitNote:
-    tmp = QWidget::tr("Debit Note");
+    tmp = i18n("Debit Note");
     break;
   default:
-    tmp = QWidget::tr("(unknown)");
+    tmp = i18n("(unknown)");
     break;
   }
   setText(i++, tmp);
@@ -120,7 +120,7 @@ void KBJobListViewItem::_populate()
   if (tmp.isEmpty())
     tmp = AB_Account_GetBankCode(a);
   if (tmp.isEmpty())
-    tmp = QWidget::tr("(unknown)");
+    tmp = i18n("(unknown)");
   setText(i++, tmp);
 
   // account name
@@ -128,48 +128,48 @@ void KBJobListViewItem::_populate()
   if (tmp.isEmpty())
     tmp = AB_Account_GetAccountNumber(a);
   if (tmp.isEmpty())
-    tmp = QWidget::tr("(unknown)");
+    tmp = i18n("(unknown)");
   setText(i++, tmp);
 
   // status
   switch (AB_Job_GetStatus(_job)) {
   case AB_Job_StatusNew:
-    tmp = QWidget::tr("new");
+    tmp = i18n("new");
     break;
   case AB_Job_StatusUpdated:
-    tmp = QWidget::tr("updated");
+    tmp = i18n("updated");
     break;
   case AB_Job_StatusEnqueued:
-    tmp = QWidget::tr("enqueued");
+    tmp = i18n("enqueued");
     break;
   case AB_Job_StatusSent:
-    tmp = QWidget::tr("sent");
+    tmp = i18n("sent");
     break;
   case AB_Job_StatusPending:
-    tmp = QWidget::tr("pending");
+    tmp = i18n("pending");
     break;
   case AB_Job_StatusFinished:
-    tmp = QWidget::tr("finished");
+    tmp = i18n("finished");
     break;
   case AB_Job_StatusError:
-    tmp = QWidget::tr("error");
+    tmp = i18n("error");
     break;
   default:
-    tmp = QWidget::tr("(unknown)");
+    tmp = i18n("(unknown)");
     break;
   }
   setText(i++, tmp);
 
   p = AB_Provider_GetName(AB_Account_GetProvider(a));
   if (!p)
-    tmp = "(unknown)";
+    tmp = i18n("(unknown)");
   else
     tmp = p;
   setText(i++, tmp);
 
   p = AB_Job_GetCreatedBy(_job);
   if (!p)
-    tmp = "(unknown)";
+    tmp = i18n("(unknown)");
   else
     tmp = p;
   setText(i++, tmp);
@@ -188,13 +188,13 @@ KBJobListView::KBJobListView(QWidget *parent)
 {
   setAllColumnsShowFocus(true);
   setShowSortIndicator(true);
-  addColumn(QWidget::tr("Job Id"), -1);
-  addColumn(QWidget::tr("Job Type"), -1);
-  addColumn(QWidget::tr("Institute"), -1);
-  addColumn(QWidget::tr("Account"), -1);
-  addColumn(QWidget::tr("Status"), -1);
-  addColumn(QWidget::tr("Backend"), -1);
-  addColumn(QWidget::tr("Application"), -1);
+  addColumn(i18n("Job Id"), -1);
+  addColumn(i18n("Job Type"), -1);
+  addColumn(i18n("Institute"), -1);
+  addColumn(i18n("Account"), -1);
+  addColumn(i18n("Status"), -1);
+  addColumn(i18n("Backend"), -1);
+  addColumn(i18n("Application"), -1);
 }
 
 
