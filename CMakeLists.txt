@@ -15,7 +15,7 @@ if(COMMAND cmake_policy)
 endif(COMMAND cmake_policy)
 
 # Our modules reside in the subdirectory cmake/modules/
-SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake/modules)
+SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
 
 ######################### KMyMoney Version ##########################
 
