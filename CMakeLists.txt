@@ -22,7 +22,7 @@ SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/mod
 # The current version of KMyMoney (used for packages and config.h)
 SET(VERSION_MAJOR "3")
 SET(VERSION_MINOR "98")
-SET(VERSION_PATCH "0")
+SET(VERSION_PATCH "2")
 
 # Determince the SVN revision number (if we're based on SVN)
 IF(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/.svn)
