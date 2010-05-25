@@ -15,9 +15,13 @@
   </property>
   <layout class="QVBoxLayout">
    <item>
+    <widget class="QGroupBox" name="groupBox6">
+      <property name="title">
+        <string/>
+      </property>
       <layout class="QGridLayout" name="gridLayout">
        <item row="0" column="0">
-        <widget class="QLabel" name="label_2">
+        <widget class="QLabel" name="label_1">
          <property name="text">
           <string>Maximum number of legend items to display</string>
          </property>
@@ -131,7 +135,8 @@
         </spacer>
        </item>
       </layout>
-    </item>
+    </widget>
+   </item>
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
@@ -154,7 +159,6 @@
   </customwidget>
  </customwidgets>
  <tabstops>
-  <tabstop>tabWidget</tabstop>
   <tabstop>kcfg_MaximumLegendItems</tabstop>
   <tabstop>kcfg_LineWidth</tabstop>
  </tabstops>
