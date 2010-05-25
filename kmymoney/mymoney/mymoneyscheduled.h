@@ -202,6 +202,15 @@ public:
   int transactionsRemaining(void) const;
 
   /**
+    * Simple method that returns the number of transactions remaining
+    * until a given date.
+    *
+    * @param endDate Date to count transactions to.
+    * @return int The number of transactions remaining for the instance.
+    */
+  int transactionsRemainingUntil(const QDate& endDate) const;
+
+  /**
     * Simple get method that returns the schedule end date.
     *
     * @return QDate The end date for the instance.
