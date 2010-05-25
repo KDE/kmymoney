@@ -1,10 +1,19 @@
 [Desktop Entry]
 Name=KMyMoney
+Name[pt]=KMyMoney
+Name[sv]=KMyMoney
+Name[uk]=KMyMoney
 Name[x-test]=xxKMyMoneyxx
 GenericName=Personal Finance Manager
+GenericName[pt]=Gestor de Finanças Pessoais
+GenericName[sv]=Personlig ekonomihantering
+GenericName[uk]=Особисте керування фінансами
 GenericName[x-test]=xxPersonal Finance Managerxx
 Exec=kmymoney %u
 Comment=Personal Finance Manager
+Comment[pt]=Gestor de Finanças Pessoais
+Comment[sv]=Personlig ekonomihantering
+Comment[uk]=Особисте керування фінансами
 Comment[x-test]=xxPersonal Finance Managerxx
 MimeType=application/x-kmymoney;application/vnd.intu.qfx;application/x-ofx;
 Type=Application

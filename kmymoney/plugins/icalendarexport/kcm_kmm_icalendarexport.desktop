@@ -1,5 +1,8 @@
 [Desktop Entry]
 Name=Configure icalendar export plugin
+Name[pt]=Configurar o 'plugin' de  exportação para iCalendar
+Name[sv]=Anpassa iCalendar-exportinsticksprogram
+Name[uk]=Налаштувати додаток експорту до icalendar
 Name[x-test]=xxConfigure icalendar export pluginxx
 Icon=x-office-calendar
 Type=Service
@@ -7,9 +10,15 @@ ServiceTypes=KCModule
 Exec=kcmshell4 kmm_icalendarexport
 Categories=QT;KDE;kmymoney;
 Keywords=icalendar;kmymoney
+Keywords[pt]=icalendar;kmymoney
+Keywords[sv]=icalendar;kmymoney
+Keywords[uk]=icalendar;kmymoney
 Keywords[x-test]=xxicalendar;kmymoneyxx
 X-KDE-Library=kcm_kmm_icalendarexport
 X-KDE-ParentApp=iCalendar
 X-KDE-ParentComponents=iCalendar
 Comment=Permits the configuration of the iCalendar plugin's options
+Comment[pt]=Permite a configuração das opções do 'plugin' do iCalendar
+Comment[sv]=Tillåter inställning av alternativ för iCalendar-insticksprogrammet
+Comment[uk]=Надає змогу налаштовувати параметри додатка iCalendar
 Comment[x-test]=xxPermits the configuration of the iCalendar plugin's optionsxx

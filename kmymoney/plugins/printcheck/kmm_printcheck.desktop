@@ -1,8 +1,14 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Print check
+Name[pt]=Imprimir o cheque
+Name[sv]=Skriv ut check
+Name[uk]=Надрукувати чек
 Name[x-test]=xxPrint checkxx
 Comment=Provides the capability to print checks
+Comment[pt]=Oferece a capacidade de imprimir cheques
+Comment[sv]=Tillhandahåller möjlighet att skriva ut checkar
+Comment[uk]=Надає змогу друкувати чеки
 Comment[x-test]=xxProvides the capability to print checksxx
 Type=Service
 Icon=document-print

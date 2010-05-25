@@ -1,8 +1,14 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=iCalendar
+Name[pt]=iCalendar
+Name[sv]=iCalendar
+Name[uk]=iCalendar
 Name[x-test]=xxiCalendarxx
 Comment=Exports schedules to iCalendar files
+Comment[pt]=Exporta as calendarizações para os ficheiros iCalendar
+Comment[sv]=Exporterar scheman till iCalendar-filer
+Comment[uk]=Експортує розклади до файлів iCalendar
 Comment[x-test]=xxExports schedules to iCalendar filesxx
 Type=Service
 Icon=x-office-calendar
