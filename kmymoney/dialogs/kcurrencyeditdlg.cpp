@@ -58,7 +58,7 @@ KCurrencyEditDlg::KCurrencyEditDlg(QWidget *parent) :
   m_currencyList->setContextMenuPolicy(Qt::CustomContextMenu);
 
   connect(m_currencyList, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(slotOpenContextMenu(const QPoint&)));
-  connect(m_currencyList, SIGNAL(itemActivated(QTreeWidgetItem*,int)), this, SLOT(slotStartEditId()));
+  connect(m_currencyList, SIGNAL(itemActivated(QTreeWidgetItem*, int)), this, SLOT(slotStartEditId()));
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadCurrencies()));
   connect(m_currencyList, SIGNAL(itemChanged(QTreeWidgetItem*, int)), this, SLOT(slotUpdateCurrency(QTreeWidgetItem*)));
 
@@ -155,17 +155,17 @@ void KCurrencyEditDlg::slotUpdateCurrency(QTreeWidgetItem* item)
 {
   //if there is no current item selected, exit
   if (m_currencyInEditing == false || !m_currencyList->currentItem() || item != m_currencyList->currentItem())
-      return;
+    return;
 
   m_currencyInEditing = false;
 
   //verify that the stored currency id is not empty and the edited fields are not empty either
   if (!m_currency.id().isEmpty()
-    && !m_currencyList->currentItem()->text(2).isEmpty()
-    && !m_currencyList->currentItem()->text(0).isEmpty()) {
+      && !m_currencyList->currentItem()->text(2).isEmpty()
+      && !m_currencyList->currentItem()->text(0).isEmpty()) {
     //check that either the name or the id have changed
     if (m_currencyList->currentItem()->text(2) != m_currency.tradingSymbol()
-      || m_currencyList->currentItem()->text(0) != m_currency.name()) {
+        || m_currencyList->currentItem()->text(0) != m_currency.name()) {
       //update the name and the id
       m_currency.setName(m_currencyList->currentItem()->text(0));
       m_currency.setTradingSymbol(m_currencyList->currentItem()->text(2));

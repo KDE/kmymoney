@@ -561,7 +561,7 @@ void KReportChartView::setLineWidth(const int lineWidth)
     const int currentCols = m_model.columnCount();
     const int currentRows = m_model.rowCount();
     for (int col = 0; col < currentCols; ++col) {
-        for (int row = 0; row < currentRows; ++row) {
+      for (int row = 0; row < currentRows; ++row) {
         QPen pen(lineDiagram->pen(m_model.index(row, col, QModelIndex())));
         pen.setWidth(lineWidth);
         lineDiagram->setPen(m_model.index(row, col, QModelIndex()), pen);

@@ -213,14 +213,14 @@ private:
   KMyMoneyAccountTreeBudgetItem*      m_incomeItem;
   KMyMoneyAccountTreeBudgetItem*      m_expenseItem;
 
-/**
-  * Set if a view needs to be reloaded during showEvent()
-  **/
+  /**
+    * Set if a view needs to be reloaded during showEvent()
+    **/
   bool                                m_needReload;
 
-/**
-  * Set if we are in the selection of a different budget
-  **/
+  /**
+    * Set if we are in the selection of a different budget
+    **/
   bool                                m_inSelection;
 
   void adaptHideUnusedButton(void);
@@ -228,9 +228,9 @@ private:
   static const int m_iBudgetYearsAhead;
   static const int m_iBudgetYearsBack;
 
-/**
-  * This signals whether a budget is being edited
-  **/
+  /**
+    * This signals whether a budget is being edited
+    **/
   bool m_budgetInEditing;
 };
 
