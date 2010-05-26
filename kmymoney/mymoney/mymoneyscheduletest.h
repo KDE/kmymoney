@@ -53,6 +53,7 @@ class MyMoneyScheduleTest : public CppUnit::TestFixture
   CPPUNIT_TEST(testSimpleToFromCompoundOccurrence);
   CPPUNIT_TEST(testProcessingDates);
   CPPUNIT_TEST(testPaidEarlyOneTime);
+  CPPUNIT_TEST(testAdjustedNextPayment);
   CPPUNIT_TEST_SUITE_END();
 
 protected:
@@ -84,6 +85,7 @@ public:
   void testSimpleToFromCompoundOccurrence();
   void testProcessingDates();
   void testPaidEarlyOneTime();
+  void testAdjustedNextPayment();
 };
 
 #endif

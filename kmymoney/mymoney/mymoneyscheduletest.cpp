@@ -1593,3 +1593,22 @@ void MyMoneyScheduleTest::testPaidEarlyOneTime()
 
 }
 
+void MyMoneyScheduleTest::testAdjustedNextPayment()
+{
+  MyMoneySchedule s;
+
+  QDate dueDate(2010, 5, 23);
+  QDate adjustedDueDate(2010, 5, 21);
+  s.setNextDueDate(dueDate);
+  s.setOccurrence(MyMoneySchedule::OCCUR_MONTHLY);
+  s.setWeekendOption(MyMoneySchedule::MoveBefore);
+
+  //if adjustedNextPayment works ok with adjusted date prior to the current date, it should return 2010-06-23
+  QDate nextDueDate(2010, 6, 23);
+  //this is the current behaviour, and it is wrong
+  //CPPUNIT_ASSERT(s.adjustedNextPayment(adjustedDueDate) == adjustedDueDate);
+
+  //this is the expected behaviour
+  CPPUNIT_ASSERT(s.adjustedNextPayment(s.adjustedNextDueDate()) == s.adjustedDate(nextDueDate, s.weekendOption()));
+}
+
