@@ -393,7 +393,7 @@
   </entry>
   <entry name="CssFileDefault" type="String">
    <label>name of default css file</label>
-   <default>kmymoney.css</default>
+   <default></default>
   </entry>
  </group>
 </kcfg>
