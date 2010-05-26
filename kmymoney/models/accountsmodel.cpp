@@ -301,7 +301,7 @@ public:
   }
 
   /**
-    * Used to laod the accounts data.
+    * Used to load the accounts data.
     */
   MyMoneyFile *m_file;
   /**
