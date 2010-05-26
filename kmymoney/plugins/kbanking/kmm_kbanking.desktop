@@ -1,10 +1,12 @@
 [Desktop Entry]
 Name=KBanking
+Name[es]=KBanking
 Name[pt]=KBanking
 Name[sv]=Kbank
 Name[uk]=KBanking
 Name[x-test]=xxKBankingxx
 Comment=Add online banking to KMyMoney
+Comment[es]=Añadir banca en línea a KMyMoney
 Comment[pt]=Adicionar a banca 'online' ao KMyMoney
 Comment[sv]=Lägg till Internetbank till Kmymoney
 Comment[uk]=Додає можливість роботи з банками за допомогою мережі до KMyMoney
