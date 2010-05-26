@@ -94,23 +94,23 @@ void KForecastView::loadForecast(ForecastViewTab tab)
 {
   if (m_needReload[tab]) {
     switch (tab) {
-    case ListView:
-      loadListView();
-      break;
-    case SummaryView:
-      loadSummaryView();
-      break;
-    case AdvancedView:
-      loadAdvancedView();
-      break;
-    case BudgetView:
-      loadBudgetView();
-      break;
-    case ChartView:
-      loadChartView();
-      break;
-    default:
-      break;
+      case ListView:
+        loadListView();
+        break;
+      case SummaryView:
+        loadSummaryView();
+        break;
+      case AdvancedView:
+        loadAdvancedView();
+        break;
+      case BudgetView:
+        loadBudgetView();
+        break;
+      case ChartView:
+        loadChartView();
+        break;
+      default:
+        break;
     }
     m_needReload[tab] = false;
   }
@@ -162,19 +162,19 @@ void KForecastView::loadForecastSettings(void)
   m_historyMethod->setId(radioButton13, 2); // linear regression
   m_historyMethod->button(KMyMoneyGlobalSettings::historyMethod())->setChecked(true);
   switch (KMyMoneyGlobalSettings::forecastMethod()) {
-  case 0:
-    m_forecastMethod->setText(i18nc("Scheduled method", "Scheduled"));
-    m_forecastCycles->setDisabled(true);
-    m_historyMethodGroupBox->setDisabled(true);
-    break;
-  case 1:
-    m_forecastMethod->setText(i18nc("History-based method", "History"));
-    m_forecastCycles->setEnabled(true);
-    m_historyMethodGroupBox->setEnabled(true);
-    break;
-  default:
-    m_forecastMethod->setText(i18nc("Unknown forecast method", "Unknown"));
-    break;
+    case 0:
+      m_forecastMethod->setText(i18nc("Scheduled method", "Scheduled"));
+      m_forecastCycles->setDisabled(true);
+      m_historyMethodGroupBox->setDisabled(true);
+      break;
+    case 1:
+      m_forecastMethod->setText(i18nc("History-based method", "History"));
+      m_forecastCycles->setEnabled(true);
+      m_historyMethodGroupBox->setEnabled(true);
+      break;
+    default:
+      m_forecastMethod->setText(i18nc("Unknown forecast method", "Unknown"));
+      break;
   }
 }
 
@@ -293,19 +293,19 @@ void KForecastView::loadSummaryView(void)
         && (dropMinimum < dropZero
             || dropZero == -1)) {
       switch (dropMinimum) {
-      case -1:
-        break;
-      case 0:
-        msg = QString("<font color=\"%1\">").arg(KMyMoneyGlobalSettings::listNegativeValueColor().name());
-        msg += i18n("The balance of %1 is below the minimum balance %2 today.", acc.name(), minBalance.formatMoney(acc, currency));
-        msg += QString("</font>");
-        break;
-      default:
-        msg = QString("<font color=\"%1\">").arg(KMyMoneyGlobalSettings::listNegativeValueColor().name());
-        msg += i18np("The balance of %2 will drop below the minimum balance %3 in %1 day.",
-                     "The balance of %2 will drop below the minimum balance %3 in %1 days.",
-                     dropMinimum - 1, acc.name(), minBalance.formatMoney(acc, currency));
-        msg += QString("</font>");
+        case -1:
+          break;
+        case 0:
+          msg = QString("<font color=\"%1\">").arg(KMyMoneyGlobalSettings::listNegativeValueColor().name());
+          msg += i18n("The balance of %1 is below the minimum balance %2 today.", acc.name(), minBalance.formatMoney(acc, currency));
+          msg += QString("</font>");
+          break;
+        default:
+          msg = QString("<font color=\"%1\">").arg(KMyMoneyGlobalSettings::listNegativeValueColor().name());
+          msg += i18np("The balance of %2 will drop below the minimum balance %3 in %1 day.",
+                       "The balance of %2 will drop below the minimum balance %3 in %1 days.",
+                       dropMinimum - 1, acc.name(), minBalance.formatMoney(acc, currency));
+          msg += QString("</font>");
       }
 
       if (!msg.isEmpty()) {
@@ -316,35 +316,35 @@ void KForecastView::loadSummaryView(void)
     // a drop below zero is always shown
     msg.clear();
     switch (dropZero) {
-    case -1:
-      break;
-    case 0:
-      if (acc.accountGroup() == MyMoneyAccount::Asset) {
-        msg = QString("<font color=\"%1\">").arg(KMyMoneyGlobalSettings::listNegativeValueColor().name());
-        msg += i18n("The balance of %1 is below %2 today.", acc.name(), MyMoneyMoney().formatMoney(acc, currency));
-        msg += QString("</font>");
+      case -1:
         break;
-      }
-      if (acc.accountGroup() == MyMoneyAccount::Liability) {
-        msg = i18n("The balance of %1 is above %2 today.", acc.name(), MyMoneyMoney().formatMoney(acc, currency));
+      case 0:
+        if (acc.accountGroup() == MyMoneyAccount::Asset) {
+          msg = QString("<font color=\"%1\">").arg(KMyMoneyGlobalSettings::listNegativeValueColor().name());
+          msg += i18n("The balance of %1 is below %2 today.", acc.name(), MyMoneyMoney().formatMoney(acc, currency));
+          msg += QString("</font>");
+          break;
+        }
+        if (acc.accountGroup() == MyMoneyAccount::Liability) {
+          msg = i18n("The balance of %1 is above %2 today.", acc.name(), MyMoneyMoney().formatMoney(acc, currency));
+          break;
+        }
         break;
-      }
-      break;
-    default:
-      if (acc.accountGroup() == MyMoneyAccount::Asset) {
-        msg = QString("<font color=\"%1\">").arg(KMyMoneyGlobalSettings::listNegativeValueColor().name());
-        msg += i18np("The balance of %2 will drop below %3 in %1 day.",
-                     "The balance of %2 will drop below %3 in %1 days.",
-                     dropZero, acc.name(), MyMoneyMoney().formatMoney(acc, currency));
-        msg += QString("</font>");
-        break;
-      }
-      if (acc.accountGroup() == MyMoneyAccount::Liability) {
-        msg = i18np("The balance of %2 will raise above %3 in %1 day.",
-                    "The balance of %2 will raise above %3 in %1 days.",
-                    dropZero, acc.name(), MyMoneyMoney().formatMoney(acc, currency));
-        break;
-      }
+      default:
+        if (acc.accountGroup() == MyMoneyAccount::Asset) {
+          msg = QString("<font color=\"%1\">").arg(KMyMoneyGlobalSettings::listNegativeValueColor().name());
+          msg += i18np("The balance of %2 will drop below %3 in %1 day.",
+                       "The balance of %2 will drop below %3 in %1 days.",
+                       dropZero, acc.name(), MyMoneyMoney().formatMoney(acc, currency));
+          msg += QString("</font>");
+          break;
+        }
+        if (acc.accountGroup() == MyMoneyAccount::Liability) {
+          msg = i18np("The balance of %2 will raise above %3 in %1 day.",
+                      "The balance of %2 will raise above %3 in %1 days.",
+                      dropZero, acc.name(), MyMoneyMoney().formatMoney(acc, currency));
+          break;
+        }
     }
     if (!msg.isEmpty()) {
       m_adviceText->append(msg);

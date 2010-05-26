@@ -96,9 +96,15 @@ KBPickStartDate::KBPickStartDate(QBanking *qb,
   }
 
   switch (defaultChoice) {
-  case 2:  lastUpdateButton->setChecked(true); break;
-  case 3:  firstDateButton->setChecked(true); break;
-  default: noDateButton->setChecked(true); break;
+    case 2:
+      lastUpdateButton->setChecked(true);
+      break;
+    case 3:
+      firstDateButton->setChecked(true);
+      break;
+    default:
+      noDateButton->setChecked(true);
+      break;
   }
 
   pickDateEdit->setDate(QDate::currentDate());

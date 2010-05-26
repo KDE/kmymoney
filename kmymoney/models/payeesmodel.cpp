@@ -109,11 +109,11 @@ PayeesModel::PayeesModel(QObject *parent /*= 0*/)
   QStringList headerLabels;
   for (int i = 0; i < LastColumnMarker; ++i) {
     switch (i) {
-    case Payee:
-      headerLabels << i18n("Payee");
-      break;
-    default:
-      headerLabels << QString();
+      case Payee:
+        headerLabels << i18n("Payee");
+        break;
+      default:
+        headerLabels << QString();
     }
   }
   setHorizontalHeaderLabels(headerLabels);

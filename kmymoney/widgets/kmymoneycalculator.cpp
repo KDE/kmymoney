@@ -206,33 +206,33 @@ void kMyMoneyCalculator::calculationClicked(int button)
     }
 
     switch (op) {
-    case PLUS:
-      op2 = op1 + op2;
-      break;
-    case MINUS:
-      op2 = op1 - op2;
-      break;
-    case STAR:
-      op2 = op1 * op2;
-      break;
-    case SLASH:
-      if (op2 == 0.0)
-        error = true;
-      else
-        op2 = op1 / op2;
-      break;
+      case PLUS:
+        op2 = op1 + op2;
+        break;
+      case MINUS:
+        op2 = op1 - op2;
+        break;
+      case STAR:
+        op2 = op1 * op2;
+        break;
+      case SLASH:
+        if (op2 == 0.0)
+          error = true;
+        else
+          op2 = op1 / op2;
+        break;
     }
 
     // if we have a pending addition operation, and the next operation is
     // not multiplication, we calculate the stacked operation
     if (stackedOp && button != STAR && button != SLASH) {
       switch (stackedOp) {
-      case PLUS:
-        op2 = op0 + op2;
-        break;
-      case MINUS:
-        op2 = op0 - op2;
-        break;
+        case PLUS:
+          op2 = op0 + op2;
+          break;
+        case MINUS:
+          op2 = op0 - op2;
+          break;
       }
       stackedOp = 0;
     }
@@ -303,15 +303,15 @@ void kMyMoneyCalculator::percentClicked(void)
   if (op != 0) {
     double op2 = operand.toDouble();
     switch (op) {
-    case PLUS:
-    case MINUS:
-      op2 = (op1 * op2) / 100;
-      break;
+      case PLUS:
+      case MINUS:
+        op2 = (op1 * op2) / 100;
+        break;
 
-    case STAR:
-    case SLASH:
-      op2 /= 100;
-      break;
+      case STAR:
+      case SLASH:
+        op2 /= 100;
+        break;
     }
     operand = normalizeString(op2);
     changeDisplay(operand);
@@ -326,19 +326,19 @@ const QString kMyMoneyCalculator::result(void) const
     txt = txt.mid(1); // get rid of the minus sign
     QString mask;
     switch (KGlobal::locale()->negativeMonetarySignPosition()) {
-    case KLocale::ParensAround:
-      mask = "(%1)";
-      break;
-    case KLocale::AfterQuantityMoney:
-      mask = "%1-";
-      break;
-    case KLocale::AfterMoney:
-    case KLocale::BeforeMoney:
-      mask = "%1 -";
-      break;
-    case KLocale::BeforeQuantityMoney:
-      mask = "-%1";
-      break;
+      case KLocale::ParensAround:
+        mask = "(%1)";
+        break;
+      case KLocale::AfterQuantityMoney:
+        mask = "%1-";
+        break;
+      case KLocale::AfterMoney:
+      case KLocale::BeforeMoney:
+        mask = "%1 -";
+        break;
+      case KLocale::BeforeQuantityMoney:
+        mask = "-%1";
+        break;
     }
     txt = QString(mask).arg(txt);
   }
@@ -357,59 +357,59 @@ void kMyMoneyCalculator::keyPressEvent(QKeyEvent* ev)
   int button = -1;
 
   switch (ev->key()) {
-  case Qt::Key_0:
-  case Qt::Key_1:
-  case Qt::Key_2:
-  case Qt::Key_3:
-  case Qt::Key_4:
-  case Qt::Key_5:
-  case Qt::Key_6:
-  case Qt::Key_7:
-  case Qt::Key_8:
-  case Qt::Key_9:
-    if (m_clearOperandOnDigit) {
-      operand.clear();
-      m_clearOperandOnDigit = false;
-    }
-    button = ev->key() - Qt::Key_0;
-    break;
-  case Qt::Key_Plus:
-    button = PLUS;
-    break;
-  case Qt::Key_Minus:
-    button = MINUS;
-    break;
-  case Qt::Key_Comma:
-  case Qt::Key_Period:
-    if (m_clearOperandOnDigit) {
-      operand.clear();
-      m_clearOperandOnDigit = false;
-    }
-    button = COMMA;
-    break;
-  case Qt::Key_Slash:
-    button = SLASH;
-    break;
-  case Qt::Key_Backspace:
-    button = CLEAR;
-    break;
-  case Qt::Key_Asterisk:
-    button = STAR;
-    break;
-  case Qt::Key_Return:
-  case Qt::Key_Enter:
-  case Qt::Key_Equal:
-    button = EQUAL;
-    break;
-  case Qt::Key_Escape:
-    button = CLEARALL;
-    break;
-  case Qt::Key_Percent:
-    button = PERCENT;
-    break;
-  default:
-    ev->ignore();
-    break;
+    case Qt::Key_0:
+    case Qt::Key_1:
+    case Qt::Key_2:
+    case Qt::Key_3:
+    case Qt::Key_4:
+    case Qt::Key_5:
+    case Qt::Key_6:
+    case Qt::Key_7:
+    case Qt::Key_8:
+    case Qt::Key_9:
+      if (m_clearOperandOnDigit) {
+        operand.clear();
+        m_clearOperandOnDigit = false;
+      }
+      button = ev->key() - Qt::Key_0;
+      break;
+    case Qt::Key_Plus:
+      button = PLUS;
+      break;
+    case Qt::Key_Minus:
+      button = MINUS;
+      break;
+    case Qt::Key_Comma:
+    case Qt::Key_Period:
+      if (m_clearOperandOnDigit) {
+        operand.clear();
+        m_clearOperandOnDigit = false;
+      }
+      button = COMMA;
+      break;
+    case Qt::Key_Slash:
+      button = SLASH;
+      break;
+    case Qt::Key_Backspace:
+      button = CLEAR;
+      break;
+    case Qt::Key_Asterisk:
+      button = STAR;
+      break;
+    case Qt::Key_Return:
+    case Qt::Key_Enter:
+    case Qt::Key_Equal:
+      button = EQUAL;
+      break;
+    case Qt::Key_Escape:
+      button = CLEARALL;
+      break;
+    case Qt::Key_Percent:
+      button = PERCENT;
+      break;
+    default:
+      ev->ignore();
+      break;
   }
   if (button != -1)
     buttons[button]->animateClick();

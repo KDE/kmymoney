@@ -801,62 +801,62 @@ const QDate MyMoneyDateFormat::convertString(const QString& _in, bool _strict, u
   while (it_scanned != scannedParts.constEnd()) {
     // decide upon the first character of the part
     switch ((*it_format).at(0).cell()) {
-    case 'd':
-      // remove any extraneous non-digits (e.g. read "3rd" as 3)
-      ok = false;
-      if (digitrex.indexIn(*it_scanned) != -1)
-        day = digitrex.cap(1).toUInt(&ok);
-      if (!ok || day > 31)
-        throw new MYMONEYEXCEPTION(QString("Invalid day entry: %1").arg(*it_scanned));
-      break;
-    case 'm':
-      month = (*it_scanned).toUInt(&ok);
-      if (!ok) {
-        // maybe it's a textual date
-        unsigned i = 1;
-        while (i <= 12) {
-          if (KGlobal::locale()->calendar()->monthName(i, 2000).toLower() == *it_scanned
-              || KGlobal::locale()->calendar()->monthName(i, 2000, KCalendarSystem::ShortName).toLower() == *it_scanned)
-            month = i;
-          ++i;
+      case 'd':
+        // remove any extraneous non-digits (e.g. read "3rd" as 3)
+        ok = false;
+        if (digitrex.indexIn(*it_scanned) != -1)
+          day = digitrex.cap(1).toUInt(&ok);
+        if (!ok || day > 31)
+          throw new MYMONEYEXCEPTION(QString("Invalid day entry: %1").arg(*it_scanned));
+        break;
+      case 'm':
+        month = (*it_scanned).toUInt(&ok);
+        if (!ok) {
+          // maybe it's a textual date
+          unsigned i = 1;
+          while (i <= 12) {
+            if (KGlobal::locale()->calendar()->monthName(i, 2000).toLower() == *it_scanned
+                || KGlobal::locale()->calendar()->monthName(i, 2000, KCalendarSystem::ShortName).toLower() == *it_scanned)
+              month = i;
+            ++i;
+          }
         }
-      }
 
-      if (month < 1 || month > 12)
-        throw new MYMONEYEXCEPTION(QString("Invalid month entry: %1").arg(*it_scanned));
+        if (month < 1 || month > 12)
+          throw new MYMONEYEXCEPTION(QString("Invalid month entry: %1").arg(*it_scanned));
 
-      break;
-    case 'y':
-      if (_strict && (*it_scanned).length() != (*it_format).length())
-        throw new MYMONEYEXCEPTION(QString("Length of year (%1) does not match expected length (%2).")
-                                   .arg(*it_scanned, *it_format));
+        break;
+      case 'y':
+        if (_strict && (*it_scanned).length() != (*it_format).length())
+          throw new MYMONEYEXCEPTION(QString("Length of year (%1) does not match expected length (%2).")
+                                     .arg(*it_scanned, *it_format));
 
-      year = (*it_scanned).toUInt(&ok);
+        year = (*it_scanned).toUInt(&ok);
 
-      if (!ok)
-        throw new MYMONEYEXCEPTION(QString("Invalid year entry: %1").arg(*it_scanned));
+        if (!ok)
+          throw new MYMONEYEXCEPTION(QString("Invalid year entry: %1").arg(*it_scanned));
 
-      //
-      // 2-digit year case
-      //
-      // this algorithm will pick a year within +/- 50 years of the
-      // centurymidpoint parameter.  i.e. if the midpoint is 2000,
-      // then 0-49 will become 2000-2049, and 50-99 will become 1950-1999
-      if (year < 100) {
-        unsigned centuryend = _centurymidpoint + 50;
-        unsigned centurybegin = _centurymidpoint - 50;
+        //
+        // 2-digit year case
+        //
+        // this algorithm will pick a year within +/- 50 years of the
+        // centurymidpoint parameter.  i.e. if the midpoint is 2000,
+        // then 0-49 will become 2000-2049, and 50-99 will become 1950-1999
+        if (year < 100) {
+          unsigned centuryend = _centurymidpoint + 50;
+          unsigned centurybegin = _centurymidpoint - 50;
 
-        if (year < centuryend % 100)
-          year += 100;
-        year += centurybegin - centurybegin % 100;
-      }
+          if (year < centuryend % 100)
+            year += 100;
+          year += centurybegin - centurybegin % 100;
+        }
 
-      if (year < 1900)
-        throw new MYMONEYEXCEPTION(QString("Invalid year (%1)").arg(year));
+        if (year < 1900)
+          throw new MYMONEYEXCEPTION(QString("Invalid year (%1)").arg(year));
 
-      break;
-    default:
-      throw new MYMONEYEXCEPTION("Invalid format character");
+        break;
+      default:
+        throw new MYMONEYEXCEPTION("Invalid format character");
     }
 
     ++it_scanned;

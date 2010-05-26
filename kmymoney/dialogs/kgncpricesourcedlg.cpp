@@ -74,26 +74,26 @@ void KGncPriceSourceDlg::buttonPressed(int buttonId)
 {
   m_currentButton = buttonId;
   switch (m_currentButton) {
-  case NOSOURCE:
-    m_widget->listKnownSource->clearSelection();
-    m_widget->listKnownSource->setEnabled(false);
-    m_widget->lineUserSource->deselect();
-    m_widget->lineUserSource->setEnabled(false);
-    break;
-  case KMMSOURCE:
-    m_widget->lineUserSource->deselect();
-    m_widget->lineUserSource->setEnabled(false);
-    m_widget->listKnownSource->setEnabled(true);
-    m_widget->listKnownSource->setFocus();
-    m_widget->listKnownSource->setCurrentRow(0);
-    break;
-  case USERSOURCE:
-    m_widget->listKnownSource->clearSelection();
-    m_widget->listKnownSource->setEnabled(false);
-    m_widget->lineUserSource->setEnabled(true);
-    m_widget->lineUserSource->selectAll();
-    m_widget->lineUserSource->setFocus();
-    break;
+    case NOSOURCE:
+      m_widget->listKnownSource->clearSelection();
+      m_widget->listKnownSource->setEnabled(false);
+      m_widget->lineUserSource->deselect();
+      m_widget->lineUserSource->setEnabled(false);
+      break;
+    case KMMSOURCE:
+      m_widget->lineUserSource->deselect();
+      m_widget->lineUserSource->setEnabled(false);
+      m_widget->listKnownSource->setEnabled(true);
+      m_widget->listKnownSource->setFocus();
+      m_widget->listKnownSource->setCurrentRow(0);
+      break;
+    case USERSOURCE:
+      m_widget->listKnownSource->clearSelection();
+      m_widget->listKnownSource->setEnabled(false);
+      m_widget->lineUserSource->setEnabled(true);
+      m_widget->lineUserSource->selectAll();
+      m_widget->lineUserSource->setFocus();
+      break;
   }
 }
 
@@ -101,9 +101,15 @@ QString KGncPriceSourceDlg::selectedSource() const
 {
   QString s;
   switch (m_currentButton) {
-  case NOSOURCE: s = ""; break;
-  case KMMSOURCE: s = m_widget->listKnownSource->currentItem()->text(); break;
-  case USERSOURCE: s = m_widget->lineUserSource->text(); break;
+    case NOSOURCE:
+      s = "";
+      break;
+    case KMMSOURCE:
+      s = m_widget->listKnownSource->currentItem()->text();
+      break;
+    case USERSOURCE:
+      s = m_widget->lineUserSource->text();
+      break;
   }
   return (s);
 }

@@ -496,25 +496,25 @@ const QDate MyMoneyQifProfile::date(const QString& datein) const
       ++i;
     }
     switch (m_dateFormat[i].toLatin1()) {
-    case 'm':
-    case 'd':
-    case 'y':
-      formatParts[part] += m_dateFormat[i];
-      break;
-    case '/':
-    case '-':
-    case '.':
-    case '\'':
-      if (delim == 2) {
-        qWarning("MyMoneyQifProfile::date(const QString& datein) Too many delimiters in date format");
+      case 'm':
+      case 'd':
+      case 'y':
+        formatParts[part] += m_dateFormat[i];
+        break;
+      case '/':
+      case '-':
+      case '.':
+      case '\'':
+        if (delim == 2) {
+          qWarning("MyMoneyQifProfile::date(const QString& datein) Too many delimiters in date format");
+          return QDate();
+        }
+        formatDelim[delim] = m_dateFormat[i];
+        ++delim;
+        break;
+      default:
+        qWarning("MyMoneyQifProfile::date(const QString& datein) Invalid char in date format");
         return QDate();
-      }
-      formatDelim[delim] = m_dateFormat[i];
-      ++delim;
-      break;
-    default:
-      qWarning("MyMoneyQifProfile::date(const QString& datein) Invalid char in date format");
-      return QDate();
     }
   }
 
@@ -524,30 +524,30 @@ const QDate MyMoneyQifProfile::date(const QString& datein) const
   bool prevWasChar = false;
   for (i = 0; i < datein.length(); ++i) {
     switch (datein[i].toLatin1()) {
-    case '/':
-    case '.':
-    case '-':
-    case '\'':
-      if (delim == 2) {
-        qWarning("MyMoneyQifProfile::date(const QString& datein) Too many delimiters in date field");
-        return QDate();
-      }
-      scannedDelim[delim] = datein[i];
-      ++delim;
-      ++part;
-      prevWasChar = false;
-      break;
-
-    default:
-      if (prevWasChar && datein[i].isDigit()) {
+      case '/':
+      case '.':
+      case '-':
+      case '\'':
+        if (delim == 2) {
+          qWarning("MyMoneyQifProfile::date(const QString& datein) Too many delimiters in date field");
+          return QDate();
+        }
+        scannedDelim[delim] = datein[i];
+        ++delim;
         ++part;
         prevWasChar = false;
-      }
-      if (datein[i].isLetter())
-        prevWasChar = true;
-      // replace blank with 0
-      scannedParts[part] += (datein[i] == ' ') ? QChar('0') : datein[i];
-      break;
+        break;
+
+      default:
+        if (prevWasChar && datein[i].isDigit()) {
+          ++part;
+          prevWasChar = false;
+        }
+        if (datein[i].isLetter())
+          prevWasChar = true;
+        // replace blank with 0
+        scannedParts[part] += (datein[i] == ' ') ? QChar('0') : datein[i];
+        break;
     }
   }
 
@@ -567,80 +567,80 @@ const QDate MyMoneyQifProfile::date(const QString& datein) const
   QString msg;
   for (i = 0; i < 3; ++i) {
     switch (formatParts[i][0].toLatin1()) {
-    case 'd':
-      day = scannedParts[i].toUInt(&ok);
-      if (!ok)
-        msg = "Invalid numeric character in day string";
-      break;
-    case 'm':
-      if (formatParts[i].length() != 3) {
-        mon = scannedParts[i].toUInt(&ok);
+      case 'd':
+        day = scannedParts[i].toUInt(&ok);
         if (!ok)
-          msg = "Invalid numeric character in month string";
-      } else {
-        for (j = 1; j <= 12; ++j) {
-          if (KGlobal::locale()->calendar()->monthName(j, 2000, true).toLower() == formatParts[i].toLower()) {
-            mon = j;
-            ok = true;
-            break;
+          msg = "Invalid numeric character in day string";
+        break;
+      case 'm':
+        if (formatParts[i].length() != 3) {
+          mon = scannedParts[i].toUInt(&ok);
+          if (!ok)
+            msg = "Invalid numeric character in month string";
+        } else {
+          for (j = 1; j <= 12; ++j) {
+            if (KGlobal::locale()->calendar()->monthName(j, 2000, true).toLower() == formatParts[i].toLower()) {
+              mon = j;
+              ok = true;
+              break;
+            }
+          }
+          if (j == 13) {
+            msg = "Unknown month '" + scannedParts[i] + "'";
           }
         }
-        if (j == 13) {
-          msg = "Unknown month '" + scannedParts[i] + "'";
-        }
-      }
-      break;
-    case 'y':
-      ok = false;
-      if (scannedParts[i].length() == formatParts[i].length()) {
-        yr = scannedParts[i].toUInt(&ok);
-        if (!ok)
-          msg = "Invalid numeric character in month string";
-        if (yr < 100) {     // two digit year info
-          if (i > 1) {
-            ok = true;
-            if (scannedDelim[i-1] == QChar('\'')) {
-              if (m_apostropheFormat == "1900-1949") {
-                if (yr < 50)
+        break;
+      case 'y':
+        ok = false;
+        if (scannedParts[i].length() == formatParts[i].length()) {
+          yr = scannedParts[i].toUInt(&ok);
+          if (!ok)
+            msg = "Invalid numeric character in month string";
+          if (yr < 100) {     // two digit year info
+            if (i > 1) {
+              ok = true;
+              if (scannedDelim[i-1] == QChar('\'')) {
+                if (m_apostropheFormat == "1900-1949") {
+                  if (yr < 50)
+                    yr += 1900;
+                  else
+                    yr += 2000;
+                } else if (m_apostropheFormat == "1900-1999") {
                   yr += 1900;
-                else
+                } else if (m_apostropheFormat == "2000-2099") {
                   yr += 2000;
-              } else if (m_apostropheFormat == "1900-1999") {
-                yr += 1900;
-              } else if (m_apostropheFormat == "2000-2099") {
-                yr += 2000;
+                } else {
+                  msg = "Unsupported apostropheFormat!";
+                  ok = false;
+                }
               } else {
-                msg = "Unsupported apostropheFormat!";
-                ok = false;
+                if (m_apostropheFormat == "1900-1949") {
+                  if (yr < 50)
+                    yr += 2000;
+                  else
+                    yr += 1900;
+                } else if (m_apostropheFormat == "1900-1999") {
+                  yr += 2000;
+                } else if (m_apostropheFormat == "2000-2099") {
+                  yr += 1900;
+                } else {
+                  msg = "Unsupported apostropheFormat!";
+                  ok = false;
+                }
               }
             } else {
-              if (m_apostropheFormat == "1900-1949") {
-                if (yr < 50)
-                  yr += 2000;
-                else
-                  yr += 1900;
-              } else if (m_apostropheFormat == "1900-1999") {
-                yr += 2000;
-              } else if (m_apostropheFormat == "2000-2099") {
-                yr += 1900;
-              } else {
-                msg = "Unsupported apostropheFormat!";
-                ok = false;
-              }
+              msg = "Year as first parameter is not supported!";
             }
+          } else if (yr < 1900) {
+            msg = "Year not in range < 100 or >= 1900!";
           } else {
-            msg = "Year as first parameter is not supported!";
+            ok = true;
           }
-        } else if (yr < 1900) {
-          msg = "Year not in range < 100 or >= 1900!";
         } else {
-          ok = true;
+          msg = QString("Length of year (%1) does not match expected length (%2).")
+                .arg(scannedParts[i].length()).arg(formatParts[i].length());
         }
-      } else {
-        msg = QString("Length of year (%1) does not match expected length (%2).")
-              .arg(scannedParts[i].length()).arg(formatParts[i].length());
-      }
-      break;
+        break;
     }
     if (!msg.isEmpty()) {
       qWarning("MyMoneyQifProfile::date(const QString& datein) %s", msg.toLatin1());
@@ -844,32 +844,32 @@ void MyMoneyQifProfile::autoDetect(const QStringList& lines)
     }
 
     switch (section) {
-    case 1:
-      if (c == 'B') {
-        scanNumeric((*it).mid(1), m_decimal[c], m_thousands[c]);
-      }
-      break;
-    case 2:
-      if (numericRecords.contains(c)) {
-        scanNumeric((*it).mid(1), m_decimal[c], m_thousands[c]);
-      } else if ((c == 'D') && (m_dateFormat.isEmpty())) {
-        if (d->m_partPos.count() != 3) {
-          scanDate((*it).mid(1));
-          ++datesScanned;
-          if (d->m_partPos.count() == 2) {
-            // if we have detected two parts we can calculate the third and its position
-            d->getThirdPosition();
+      case 1:
+        if (c == 'B') {
+          scanNumeric((*it).mid(1), m_decimal[c], m_thousands[c]);
+        }
+        break;
+      case 2:
+        if (numericRecords.contains(c)) {
+          scanNumeric((*it).mid(1), m_decimal[c], m_thousands[c]);
+        } else if ((c == 'D') && (m_dateFormat.isEmpty())) {
+          if (d->m_partPos.count() != 3) {
+            scanDate((*it).mid(1));
+            ++datesScanned;
+            if (d->m_partPos.count() == 2) {
+              // if we have detected two parts we can calculate the third and its position
+              d->getThirdPosition();
+            }
           }
         }
-      }
-      break;
-    case 3:
-      if (price.indexIn(*it) != -1) {
-        scanNumeric(price.cap(2), m_decimal['P'], m_thousands['P']);
-        scanDate(price.cap(3));
-        ++datesScanned;
-      }
-      break;
+        break;
+      case 3:
+        if (price.indexIn(*it) != -1) {
+          scanNumeric(price.cap(2), m_decimal['P'], m_thousands['P']);
+          scanDate(price.cap(3));
+          ++datesScanned;
+        }
+        break;
     }
   }
 
@@ -905,44 +905,44 @@ void MyMoneyQifProfile::autoDetect(const QStringList& lines)
     QMap<int, int>::const_iterator it_a;
     QMap<int, int>::const_iterator it_b;
     switch (sortedPos.count()) {
-    case 1: // all the same
-      // let the user decide, we can't figure it out
-      break;
+      case 1: // all the same
+        // let the user decide, we can't figure it out
+        break;
 
-    case 2: // two are the same, we treat the largest as the day
-      // if it's 20% larger than the other one and let the
-      // user pick the other two
-    {
-      it_b = sortedPos.constBegin();
-      it_a = it_b;
-      ++it_b;
-      double a = d->m_changeCount[*it_a];
-      double b = d->m_changeCount[*it_b];
-      if (b > (a * 1.2)) {
-        d->m_partPos['d'] = *it_b;
-      }
-    }
-    break;
-
-    case 3: // three different, we check if they are 20% apart each
-      it_b = sortedPos.constBegin();
-      for (int i = 0; i < 2; ++i) {
-        it_a = it_b;
-        ++it_b;
-        double a = d->m_changeCount[*it_a];
-        double b = d->m_changeCount[*it_b];
-        if (b > (a * 1.2)) {
-          switch (i) {
-          case 0:
-            d->m_partPos['y'] = *it_a;
-            break;
-          case 1:
+      case 2: // two are the same, we treat the largest as the day
+        // if it's 20% larger than the other one and let the
+        // user pick the other two
+        {
+          it_b = sortedPos.constBegin();
+          it_a = it_b;
+          ++it_b;
+          double a = d->m_changeCount[*it_a];
+          double b = d->m_changeCount[*it_b];
+          if (b > (a * 1.2)) {
             d->m_partPos['d'] = *it_b;
-            break;
           }
         }
-      }
-      break;
+        break;
+
+      case 3: // three different, we check if they are 20% apart each
+        it_b = sortedPos.constBegin();
+        for (int i = 0; i < 2; ++i) {
+          it_a = it_b;
+          ++it_b;
+          double a = d->m_changeCount[*it_a];
+          double b = d->m_changeCount[*it_b];
+          if (b > (a * 1.2)) {
+            switch (i) {
+              case 0:
+                d->m_partPos['y'] = *it_a;
+                break;
+              case 1:
+                d->m_partPos['d'] = *it_b;
+                break;
+            }
+          }
+        }
+        break;
     }
     // extract the last if necessary and possible date position
     d->getThirdPosition();

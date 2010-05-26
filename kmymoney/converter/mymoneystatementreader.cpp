@@ -243,24 +243,24 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
     m_account.setNumber(s.m_strAccountNumber);
 
     switch (s.m_eType) {
-    case MyMoneyStatement::etCheckings:
-      m_account.setAccountType(MyMoneyAccount::Checkings);
-      break;
-    case MyMoneyStatement::etSavings:
-      m_account.setAccountType(MyMoneyAccount::Savings);
-      break;
-    case MyMoneyStatement::etInvestment:
-      //testing support for investment statements!
-      //m_userAbort = true;
-      //KMessageBox::error(kmymoney, i18n("This is an investment statement.  These are not supported currently."), i18n("Critical Error"));
-      m_account.setAccountType(MyMoneyAccount::Investment);
-      break;
-    case MyMoneyStatement::etCreditCard:
-      m_account.setAccountType(MyMoneyAccount::CreditCard);
-      break;
-    default:
-      m_account.setAccountType(MyMoneyAccount::Checkings);
-      break;
+      case MyMoneyStatement::etCheckings:
+        m_account.setAccountType(MyMoneyAccount::Checkings);
+        break;
+      case MyMoneyStatement::etSavings:
+        m_account.setAccountType(MyMoneyAccount::Savings);
+        break;
+      case MyMoneyStatement::etInvestment:
+        //testing support for investment statements!
+        //m_userAbort = true;
+        //KMessageBox::error(kmymoney, i18n("This is an investment statement.  These are not supported currently."), i18n("Critical Error"));
+        m_account.setAccountType(MyMoneyAccount::Investment);
+        break;
+      case MyMoneyStatement::etCreditCard:
+        m_account.setAccountType(MyMoneyAccount::CreditCard);
+        break;
+      default:
+        m_account.setAccountType(MyMoneyAccount::Checkings);
+        break;
     }
 
 
@@ -797,21 +797,21 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
         QStringList keys;
         QStringList::const_iterator it_s;
         switch ((*it_p).matchData(ignoreCase, keys)) {
-        case MyMoneyPayee::matchDisabled:
-          break;
+          case MyMoneyPayee::matchDisabled:
+            break;
 
-        case MyMoneyPayee::matchName:
-          keys << QString("%1").arg(QRegExp::escape((*it_p).name()));
-          // tricky fall through here
+          case MyMoneyPayee::matchName:
+            keys << QString("%1").arg(QRegExp::escape((*it_p).name()));
+            // tricky fall through here
 
-        case MyMoneyPayee::matchKey:
-          for (it_s = keys.constBegin(); it_s != keys.constEnd(); ++it_s) {
-            QRegExp exp(*it_s, ignoreCase ? Qt::CaseInsensitive : Qt::CaseSensitive);
-            if (exp.indexIn(payeename) != -1) {
-              matchMap[exp.matchedLength()] = (*it_p).id();
+          case MyMoneyPayee::matchKey:
+            for (it_s = keys.constBegin(); it_s != keys.constEnd(); ++it_s) {
+              QRegExp exp(*it_s, ignoreCase ? Qt::CaseInsensitive : Qt::CaseSensitive);
+              if (exp.indexIn(payeename) != -1) {
+                matchMap[exp.matchedLength()] = (*it_p).id();
+              }
             }
-          }
-          break;
+            break;
         }
       }
 
@@ -1111,16 +1111,16 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           // it matched a simple transaction. that's the easy case
           MyMoneyTransaction tm(*(dynamic_cast<const MyMoneyTransaction*>(o)));
           switch (result) {
-          case TransactionMatcher::notMatched:
-          case TransactionMatcher::matchedDuplicate:
-            // no need to do anything here
-            break;
-          case TransactionMatcher::matched:
-          case TransactionMatcher::matchedExact:
-            qDebug("Detected as match to transaction '%s'", qPrintable(tm.id()));
-            matcher.match(tm, matchedSplit, t, s1, true);
-            d->transactionsMatched++;
-            break;
+            case TransactionMatcher::notMatched:
+            case TransactionMatcher::matchedDuplicate:
+              // no need to do anything here
+              break;
+            case TransactionMatcher::matched:
+            case TransactionMatcher::matchedExact:
+              qDebug("Detected as match to transaction '%s'", qPrintable(tm.id()));
+              matcher.match(tm, matchedSplit, t, s1, true);
+              d->transactionsMatched++;
+              break;
           }
 
         } else if (typeid(*o) == typeid(MyMoneySchedule)) {

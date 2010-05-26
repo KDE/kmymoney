@@ -148,27 +148,27 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
 
   // initialize the m_parentAccount member
   switch (m_account.accountGroup()) {
-  case MyMoneyAccount::Asset:
-    m_parentAccount = file->asset();
-    break;
-  case MyMoneyAccount::Liability:
-    m_parentAccount = file->liability();
-    break;
-  case MyMoneyAccount::Income:
-    m_parentAccount = file->income();
-    break;
-  case MyMoneyAccount::Expense:
-    m_parentAccount = file->expense();
-    break;
-  case MyMoneyAccount::Equity:
-    m_parentAccount = file->equity();
-    break;
-  default:
-    qDebug("Seems we have an account that hasn't been mapped to the top five");
-    if (m_categoryEditor)
-      m_parentAccount = file->income();
-    else
+    case MyMoneyAccount::Asset:
       m_parentAccount = file->asset();
+      break;
+    case MyMoneyAccount::Liability:
+      m_parentAccount = file->liability();
+      break;
+    case MyMoneyAccount::Income:
+      m_parentAccount = file->income();
+      break;
+    case MyMoneyAccount::Expense:
+      m_parentAccount = file->expense();
+      break;
+    case MyMoneyAccount::Equity:
+      m_parentAccount = file->equity();
+      break;
+    default:
+      qDebug("Seems we have an account that hasn't been mapped to the top five");
+      if (m_categoryEditor)
+        m_parentAccount = file->income();
+      else
+        m_parentAccount = file->asset();
   }
 
   m_amountGroup->setId(m_grossAmount, 0);
@@ -233,14 +233,14 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
 
     // Hardcoded but acceptable
     switch (account.accountType()) {
-    case MyMoneyAccount::Income:
-      typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Income), false);
-      break;
+      case MyMoneyAccount::Income:
+        typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Income), false);
+        break;
 
-    case MyMoneyAccount::Expense:
-    default:
-      typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Expense), false);
-      break;
+      case MyMoneyAccount::Expense:
+      default:
+        typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Expense), false);
+        break;
     }
     m_currency->setEnabled(true);
     if (m_isEditing) {
@@ -265,29 +265,29 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
     }
 
     switch (m_account.accountType()) {
-    case MyMoneyAccount::Savings:
-    case MyMoneyAccount::Cash:
-      haveMinBalance = true;
-      break;
+      case MyMoneyAccount::Savings:
+      case MyMoneyAccount::Cash:
+        haveMinBalance = true;
+        break;
 
-    case MyMoneyAccount::Checkings:
-      haveMinBalance = true;
-      haveMaxCredit = true;
-      break;
+      case MyMoneyAccount::Checkings:
+        haveMinBalance = true;
+        haveMaxCredit = true;
+        break;
 
-    case MyMoneyAccount::CreditCard:
-      haveMaxCredit = true;
-      break;
+      case MyMoneyAccount::CreditCard:
+        haveMaxCredit = true;
+        break;
 
-    default:
-      // no limit available, so we might get rid of the tab
-      int tab = m_tab->indexOf(m_limitsTab);
-      if (tab != -1)
-        m_tab->removeTab(tab);
-      // don't try to hide the widgets we just wiped
-      // in the next step
-      haveMaxCredit = haveMinBalance = true;
-      break;
+      default:
+        // no limit available, so we might get rid of the tab
+        int tab = m_tab->indexOf(m_limitsTab);
+        if (tab != -1)
+          m_tab->removeTab(tab);
+        // don't try to hide the widgets we just wiped
+        // in the next step
+        haveMaxCredit = haveMinBalance = true;
+        break;
     }
 
     if (!haveMaxCredit) {
@@ -667,13 +667,13 @@ const MyMoneyAccount& KNewAccountDlg::account(void)
 
   // and the price mode
   switch (m_priceMode->currentItem()) {
-  case 0:
-    m_account.deletePair("priceMode");
-    break;
-  case 1:
-  case 2:
-    m_account.setValue("priceMode", QString("%1").arg(m_priceMode->currentItem()));
-    break;
+    case 0:
+      m_account.deletePair("priceMode");
+      break;
+    case 1:
+    case 2:
+      m_account.setValue("priceMode", QString("%1").arg(m_priceMode->currentItem()));
+      break;
   }
 
   return m_account;
@@ -792,21 +792,21 @@ void KNewAccountDlg::slotAccountTypeChanged(const QString& typeStr)
     if (oldType != type) {
       QString parentId;
       switch (MyMoneyAccount::accountGroup(type)) {
-      case MyMoneyAccount::Asset:
-        parentId = file->asset().id();
-        break;
-      case MyMoneyAccount::Liability:
-        parentId = file->liability().id();
-        break;
-      case MyMoneyAccount::Expense:
-        parentId = file->expense().id();
-        break;
-      case MyMoneyAccount::Income:
-        parentId = file->income().id();
-        break;
-      default:
-        qWarning("Unknown account group in KNewAccountDlg::slotAccountTypeChanged()");
-        break;
+        case MyMoneyAccount::Asset:
+          parentId = file->asset().id();
+          break;
+        case MyMoneyAccount::Liability:
+          parentId = file->liability().id();
+          break;
+        case MyMoneyAccount::Expense:
+          parentId = file->expense().id();
+          break;
+        case MyMoneyAccount::Income:
+          parentId = file->income().id();
+          break;
+        default:
+          qWarning("Unknown account group in KNewAccountDlg::slotAccountTypeChanged()");
+          break;
       }
       m_account.setAccountType(type);
     }
@@ -859,15 +859,15 @@ void KNewAccountDlg::adjustEditWidgets(kMyMoneyEdit* dst, kMyMoneyEdit* src, cha
     factor = -factor;
 
   switch (mode) {
-  case '<':
-    if (src->value()*factor < dst->value()*factor)
-      dst->setValue(src->value());
-    break;
+    case '<':
+      if (src->value()*factor < dst->value()*factor)
+        dst->setValue(src->value());
+      break;
 
-  case '>':
-    if (src->value()*factor > dst->value()*factor)
-      dst->setValue(src->value());
-    break;
+    case '>':
+      if (src->value()*factor > dst->value()*factor)
+        dst->setValue(src->value());
+      break;
   }
 }
 

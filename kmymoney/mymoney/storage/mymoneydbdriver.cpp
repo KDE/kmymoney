@@ -321,17 +321,17 @@ const QString MyMoneyDbDriver::intString(const MyMoneyDbIntColumn& c) const
   QString qs = c.name();
 
   switch (c.type()) {
-  case MyMoneyDbIntColumn::TINY:
-  case MyMoneyDbIntColumn::SMALL:
-    qs += " smallint";
-    break;
-  case MyMoneyDbIntColumn::BIG:
-    qs += " bigint";
-    break;
-  case MyMoneyDbIntColumn::MEDIUM:
-  default:
-    qs += " int";
-    break;
+    case MyMoneyDbIntColumn::TINY:
+    case MyMoneyDbIntColumn::SMALL:
+      qs += " smallint";
+      break;
+    case MyMoneyDbIntColumn::BIG:
+      qs += " bigint";
+      break;
+    case MyMoneyDbIntColumn::MEDIUM:
+    default:
+      qs += " int";
+      break;
   }
 
   if (c.isNotNull()) qs += " NOT NULL";
@@ -343,19 +343,19 @@ const QString MyMoneyMysqlDriver::intString(const MyMoneyDbIntColumn& c) const
   QString qs = c.name();
 
   switch (c.type()) {
-  case MyMoneyDbIntColumn::TINY:
-    qs += " tinyint";
-    break;
-  case MyMoneyDbIntColumn::SMALL:
-    qs += " smallint";
-    break;
-  case MyMoneyDbIntColumn::BIG:
-    qs += " bigint";
-    break;
-  case MyMoneyDbIntColumn::MEDIUM:
-  default:
-    qs += " int";
-    break;
+    case MyMoneyDbIntColumn::TINY:
+      qs += " tinyint";
+      break;
+    case MyMoneyDbIntColumn::SMALL:
+      qs += " smallint";
+      break;
+    case MyMoneyDbIntColumn::BIG:
+      qs += " bigint";
+      break;
+    case MyMoneyDbIntColumn::MEDIUM:
+    default:
+      qs += " int";
+      break;
   }
 
   if (! c.isSigned()) qs += " unsigned";
@@ -369,19 +369,19 @@ const QString MyMoneySqlite3Driver::intString(const MyMoneyDbIntColumn& c) const
   QString qs = c.name();
 
   switch (c.type()) {
-  case MyMoneyDbIntColumn::TINY:
-    qs += " tinyint";
-    break;
-  case MyMoneyDbIntColumn::SMALL:
-    qs += " smallint";
-    break;
-  case MyMoneyDbIntColumn::BIG:
-    qs += " bigint";
-    break;
-  case MyMoneyDbIntColumn::MEDIUM:
-  default:
-    qs += " int";
-    break;
+    case MyMoneyDbIntColumn::TINY:
+      qs += " tinyint";
+      break;
+    case MyMoneyDbIntColumn::SMALL:
+      qs += " smallint";
+      break;
+    case MyMoneyDbIntColumn::BIG:
+      qs += " bigint";
+      break;
+    case MyMoneyDbIntColumn::MEDIUM:
+    default:
+      qs += " int";
+      break;
   }
 
   if (! c.isSigned()) qs += " unsigned";
@@ -395,17 +395,17 @@ const QString MyMoneyPostgresqlDriver::intString(const MyMoneyDbIntColumn& c) co
   QString qs = c.name();
 
   switch (c.type()) {
-  case MyMoneyDbIntColumn::TINY:
-  case MyMoneyDbIntColumn::SMALL:
-    qs += " int2";
-    break;
-  case MyMoneyDbIntColumn::BIG:
-    qs += " int8";
-    break;
-  case MyMoneyDbIntColumn::MEDIUM:
-  default:
-    qs += " int4";
-    break;
+    case MyMoneyDbIntColumn::TINY:
+    case MyMoneyDbIntColumn::SMALL:
+      qs += " int2";
+      break;
+    case MyMoneyDbIntColumn::BIG:
+      qs += " int8";
+      break;
+    case MyMoneyDbIntColumn::MEDIUM:
+    default:
+      qs += " int4";
+      break;
   }
 
   if (c.isNotNull()) qs += " NOT NULL";
@@ -420,19 +420,19 @@ const QString MyMoneyOracleDriver::intString(const MyMoneyDbIntColumn& c) const
   QString qs = c.name();
 
   switch (c.type()) {
-  case MyMoneyDbIntColumn::TINY:
-    qs += " number(3)";
-    break;
-  case MyMoneyDbIntColumn::SMALL:
-    qs += " number(5)";
-    break;
-  case MyMoneyDbIntColumn::BIG:
-    qs += " number(20)";
-    break;
-  case MyMoneyDbIntColumn::MEDIUM:
-  default:
-    qs += " number(10)";
-    break;
+    case MyMoneyDbIntColumn::TINY:
+      qs += " number(3)";
+      break;
+    case MyMoneyDbIntColumn::SMALL:
+      qs += " number(5)";
+      break;
+    case MyMoneyDbIntColumn::BIG:
+      qs += " number(20)";
+      break;
+    case MyMoneyDbIntColumn::MEDIUM:
+    default:
+      qs += " number(10)";
+      break;
   }
 
   if (c.isNotNull()) qs += " NOT NULL";
@@ -450,19 +450,19 @@ const QString MyMoneyDbDriver::textString(const MyMoneyDbTextColumn& c) const
   QString qs = c.name();
 
   switch (c.type()) {
-  case MyMoneyDbTextColumn::TINY:
-    qs += " tinytext";
-    break;
-  case MyMoneyDbTextColumn::MEDIUM:
-    qs += " mediumtext";
-    break;
-  case MyMoneyDbTextColumn::LONG:
-    qs += " longtext";
-    break;
-  case MyMoneyDbTextColumn::NORMAL:
-  default:
-    qs += " text";
-    break;
+    case MyMoneyDbTextColumn::TINY:
+      qs += " tinytext";
+      break;
+    case MyMoneyDbTextColumn::MEDIUM:
+      qs += " mediumtext";
+      break;
+    case MyMoneyDbTextColumn::LONG:
+      qs += " longtext";
+      break;
+    case MyMoneyDbTextColumn::NORMAL:
+    default:
+      qs += " text";
+      break;
   }
 
   if (c.isNotNull()) qs += " NOT NULL";
@@ -475,19 +475,19 @@ const QString MyMoneyDb2Driver::textString(const MyMoneyDbTextColumn& c) const
   QString qs = c.name();
 
   switch (c.type()) {
-  case MyMoneyDbTextColumn::TINY:
-    qs += " varchar(255)";
-    break;
-  case MyMoneyDbTextColumn::MEDIUM:
-    qs += " clob(16M)";
-    break;
-  case MyMoneyDbTextColumn::LONG:
-    qs += " clob(2G)";
-    break;
-  case MyMoneyDbTextColumn::NORMAL:
-  default:
-    qs += " clob(64K)";
-    break;
+    case MyMoneyDbTextColumn::TINY:
+      qs += " varchar(255)";
+      break;
+    case MyMoneyDbTextColumn::MEDIUM:
+      qs += " clob(16M)";
+      break;
+    case MyMoneyDbTextColumn::LONG:
+      qs += " clob(2G)";
+      break;
+    case MyMoneyDbTextColumn::NORMAL:
+    default:
+      qs += " clob(64K)";
+      break;
   }
 
   if (c.isNotNull()) qs += " NOT NULL";
@@ -499,15 +499,15 @@ const QString MyMoneyOracleDriver::textString(const MyMoneyDbTextColumn& c) cons
 {
   QString qs = c.name();
   switch (c.type()) {
-  case MyMoneyDbTextColumn::TINY:
-    qs += " varchar2(255)";
-    break;
-  case MyMoneyDbTextColumn::MEDIUM:
-  case MyMoneyDbTextColumn::LONG:
-  case MyMoneyDbTextColumn::NORMAL:
-  default:
-    qs += " clob";
-    break;
+    case MyMoneyDbTextColumn::TINY:
+      qs += " varchar2(255)";
+      break;
+    case MyMoneyDbTextColumn::MEDIUM:
+    case MyMoneyDbTextColumn::LONG:
+    case MyMoneyDbTextColumn::NORMAL:
+    default:
+      qs += " clob";
+      break;
   }
 
   if (c.isNotNull()) qs += " NOT NULL";

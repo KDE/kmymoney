@@ -291,13 +291,13 @@ void KNewInvestmentWizard::createObjects(const QString& parentId)
 
       m_account.setCurrencyId(m_security.id());
       switch (m_priceMode->currentItem()) {
-      case 0:
-        m_account.deletePair("priceMode");
-        break;
-      case 1:
-      case 2:
-        m_account.setValue("priceMode", QString("%1").arg(m_priceMode->currentItem()));
-        break;
+        case 0:
+          m_account.deletePair("priceMode");
+          break;
+        case 1:
+        case 2:
+          m_account.setValue("priceMode", QString("%1").arg(m_priceMode->currentItem()));
+          break;
       }
 
       if (m_account.id().isEmpty()) {

@@ -483,14 +483,14 @@ void KMyMoneyAccountTreeBase::contentsDragMoveEvent(QDragMoveEvent* e)
     }
     if (accepted) {
       switch (e->dropAction()) {
-      case Qt::CopyAction:
-      case Qt::LinkAction:
-        break;
-      case Qt::MoveAction:
-        e->accept();
-        break;
-      default:
-        break;
+        case Qt::CopyAction:
+        case Qt::LinkAction:
+          break;
+        case Qt::MoveAction:
+          e->accept();
+          break;
+        default:
+          break;
       }
     }
   } else {

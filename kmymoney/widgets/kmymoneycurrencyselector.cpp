@@ -102,21 +102,21 @@ void KMyMoneySecuritySelector::update(const QString& id)
   for (it = m_list.constBegin(); it != m_list.constEnd(); ++it) {
     QString display;
     switch (m_displayItem) {
-    default:
-    case FullName:
-      if ((*it).isCurrency()) {
-        display = QString("%2 (%1)").arg((*it).id()).arg((*it).name());
-      } else
-        display = QString("%2 (%1)").arg((*it).tradingSymbol()).arg((*it).name());
-      break;
-      break;
+      default:
+      case FullName:
+        if ((*it).isCurrency()) {
+          display = QString("%2 (%1)").arg((*it).id()).arg((*it).name());
+        } else
+          display = QString("%2 (%1)").arg((*it).tradingSymbol()).arg((*it).name());
+        break;
+        break;
 
-    case Symbol:
-      if ((*it).isCurrency())
-        display = (*it).id();
-      else
-        display = (*it).tradingSymbol();
-      break;
+      case Symbol:
+        if ((*it).isCurrency())
+          display = (*it).id();
+        else
+          display = (*it).tradingSymbol();
+        break;
     }
     if ((*it).id() == baseCurrency) {
       insertItem(itemId, KIcon("account"), display);
@@ -140,12 +140,12 @@ void KMyMoneySecuritySelector::setDisplayOnly(const bool disp)
     return;
 
   switch (disp) {
-  case true:
-    connect(this, SIGNAL(activated(int)), this, SLOT(slotSetInitialCurrency()));
-    break;
-  case false:
-    disconnect(this, SIGNAL(activated(int)), this, SLOT(slotSetInitialCurrency()));
-    break;
+    case true:
+      connect(this, SIGNAL(activated(int)), this, SLOT(slotSetInitialCurrency()));
+      break;
+    case false:
+      disconnect(this, SIGNAL(activated(int)), this, SLOT(slotSetInitialCurrency()));
+      break;
   }
   m_displayOnly = disp;
 }

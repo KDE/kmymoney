@@ -338,24 +338,24 @@ void KMyMoneyReconcileCombo::setState(MyMoneySplit::reconcileFlagE state)
   QString id;
 
   switch (state) {
-  case MyMoneySplit::NotReconciled:
-    id = ' ';
-    break;
-  case MyMoneySplit::Cleared:
-    id = 'C';
-    break;
-  case MyMoneySplit::Reconciled:
-    id = 'R';
-    break;
-  case MyMoneySplit::Frozen:
-    id = 'F';
-    break;
-  case MyMoneySplit::Unknown:
-    id = 'U';
-    break;
-  default:
-    kDebug(2) << "Unknown reconcile state '" << state << "' in KMyMoneyReconcileCombo::setState()\n";
-    break;
+    case MyMoneySplit::NotReconciled:
+      id = ' ';
+      break;
+    case MyMoneySplit::Cleared:
+      id = 'C';
+      break;
+    case MyMoneySplit::Reconciled:
+      id = 'R';
+      break;
+    case MyMoneySplit::Frozen:
+      id = 'F';
+      break;
+    case MyMoneySplit::Unknown:
+      id = 'U';
+      break;
+    default:
+      kDebug(2) << "Unknown reconcile state '" << state << "' in KMyMoneyReconcileCombo::setState()\n";
+      break;
   }
   setSelectedItem(id);
 }

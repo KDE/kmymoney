@@ -157,25 +157,25 @@ bool KSelectTransactionsDlg::eventFilter(QObject* o, QEvent* e)
 
   if (o == m_register) {
     switch (e->type()) {
-    case QEvent::KeyPress:
-      k = dynamic_cast<QKeyEvent*>(e);
-      if ((k->modifiers() & Qt::KeyboardModifierMask) == 0
-          || (k->modifiers() & Qt::KeypadModifier) != 0) {
-        switch (k->key()) {
-        case Qt::Key_Return:
-        case Qt::Key_Enter:
-          if (buttonOk->isEnabled()) {
-            accept();
-            rc = true;
+      case QEvent::KeyPress:
+        k = dynamic_cast<QKeyEvent*>(e);
+        if ((k->modifiers() & Qt::KeyboardModifierMask) == 0
+            || (k->modifiers() & Qt::KeypadModifier) != 0) {
+          switch (k->key()) {
+            case Qt::Key_Return:
+            case Qt::Key_Enter:
+              if (buttonOk->isEnabled()) {
+                accept();
+                rc = true;
+              }
+              // tricky fall through here
+            default:
+              break;
           }
-          // tricky fall through here
-        default:
-          break;
         }
-      }
-      // tricky fall through here
-    default:
-      break;
+        // tricky fall through here
+      default:
+        break;
     }
   }
   return rc;

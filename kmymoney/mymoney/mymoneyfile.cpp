@@ -1376,24 +1376,24 @@ const QStringList MyMoneyFile::consistencyCheck(void)
     }
 
     switch ((*it_a).accountGroup()) {
-    case MyMoneyAccount::Asset:
-      toplevel = asset();
-      break;
-    case MyMoneyAccount::Liability:
-      toplevel = liability();
-      break;
-    case MyMoneyAccount::Expense:
-      toplevel = expense();
-      break;
-    case MyMoneyAccount::Income:
-      toplevel = income();
-      break;
-    case MyMoneyAccount::Equity:
-      toplevel = equity();
-      break;
-    default:
-      qWarning("%s:%d This should never happen!", __FILE__ , __LINE__);
-      break;
+      case MyMoneyAccount::Asset:
+        toplevel = asset();
+        break;
+      case MyMoneyAccount::Liability:
+        toplevel = liability();
+        break;
+      case MyMoneyAccount::Expense:
+        toplevel = expense();
+        break;
+      case MyMoneyAccount::Income:
+        toplevel = income();
+        break;
+      case MyMoneyAccount::Equity:
+        toplevel = equity();
+        break;
+      default:
+        qWarning("%s:%d This should never happen!", __FILE__ , __LINE__);
+        break;
     }
 
     // check for loops in the hierarchy

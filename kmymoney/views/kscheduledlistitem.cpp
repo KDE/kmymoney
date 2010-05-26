@@ -71,36 +71,36 @@ KScheduledListItem::KScheduledListItem(KScheduledListItem *parent, const MyMoney
     MyMoneyAccount acc;
 
     switch (schedule.type()) {
-    case MyMoneySchedule::TYPE_DEPOSIT:
-      if (s1.value().isNegative())
-        split = s2;
-      else
-        split = s1;
-      break;
+      case MyMoneySchedule::TYPE_DEPOSIT:
+        if (s1.value().isNegative())
+          split = s2;
+        else
+          split = s1;
+        break;
 
-    case MyMoneySchedule::TYPE_LOANPAYMENT:
-      for (it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s) {
-        acc = MyMoneyFile::instance()->account((*it_s).accountId());
-        if (acc.accountGroup() == MyMoneyAccount::Asset
-            || acc.accountGroup() == MyMoneyAccount::Liability) {
-          if (acc.accountType() != MyMoneyAccount::Loan
-              && acc.accountType() != MyMoneyAccount::AssetLoan) {
-            split = *it_s;
-            break;
+      case MyMoneySchedule::TYPE_LOANPAYMENT:
+        for (it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s) {
+          acc = MyMoneyFile::instance()->account((*it_s).accountId());
+          if (acc.accountGroup() == MyMoneyAccount::Asset
+              || acc.accountGroup() == MyMoneyAccount::Liability) {
+            if (acc.accountType() != MyMoneyAccount::Loan
+                && acc.accountType() != MyMoneyAccount::AssetLoan) {
+              split = *it_s;
+              break;
+            }
           }
         }
-      }
-      if (it_s == transaction.splits().constEnd()) {
-        qFatal("Split for payment account not found in %s:%d.", __FILE__, __LINE__);
-      }
-      break;
+        if (it_s == transaction.splits().constEnd()) {
+          qFatal("Split for payment account not found in %s:%d.", __FILE__, __LINE__);
+        }
+        break;
 
-    default:
-      if (!s1.value().isPositive())
-        split = s1;
-      else
-        split = s2;
-      break;
+      default:
+        if (!s1.value().isPositive())
+          split = s1;
+        else
+          split = s2;
+        break;
     }
     acc = MyMoneyFile::instance()->account(split.accountId());
 
@@ -196,31 +196,31 @@ int KScheduledListItem::compare(Q3ListViewItem* i, int col, bool ascending) cons
   // in all other cases use the standard sorting
   MyMoneyMoney diff;
   switch (col) {
-  case 0:   // type and name
-    rc = m_sortKey.compare(item->m_sortKey);
-    break;
+    case 0:   // type and name
+      rc = m_sortKey.compare(item->m_sortKey);
+      break;
 
-  case 3:   // amount
-    diff = m_amount - item->m_amount;
-    if (diff.isZero())
-      rc = 0;
-    else if (diff.isPositive())
-      rc = 1;
-    else
-      rc = -1;
-    break;
+    case 3:   // amount
+      diff = m_amount - item->m_amount;
+      if (diff.isZero())
+        rc = 0;
+      else if (diff.isPositive())
+        rc = 1;
+      else
+        rc = -1;
+      break;
 
-  case 4:   // date
-    rc = item->m_schedule.adjustedNextDueDate().daysTo(m_schedule.adjustedNextDueDate());
-    break;
+    case 4:   // date
+      rc = item->m_schedule.adjustedNextDueDate().daysTo(m_schedule.adjustedNextDueDate());
+      break;
 
-  case 5:   // occurrence
-    rc = (m_schedule.occurrence() - item->m_schedule.occurrence());
-    break;
+    case 5:   // occurrence
+      rc = (m_schedule.occurrence() - item->m_schedule.occurrence());
+      break;
 
-  default:
-    rc = K3ListViewItem::compare(i, col, ascending);
-    break;
+    default:
+      rc = K3ListViewItem::compare(i, col, ascending);
+      break;
   }
   // adjust to [-1..1]
   if (rc != 0) {

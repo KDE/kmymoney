@@ -76,12 +76,12 @@ MyMoneyMoney KMyMoneyAccountTreeBudgetItem::balance() const
   if (budgetAccount.id() == m_account.id()) {
     result = budgetAccount.balance();
     switch (budgetAccount.budgetLevel()) {
-    case MyMoneyBudget::AccountGroup::eMonthly:
-      result = result * 12;
-      break;
+      case MyMoneyBudget::AccountGroup::eMonthly:
+        result = result * 12;
+        break;
 
-    default:
-      break;
+      default:
+        break;
     }
   }
   return result;

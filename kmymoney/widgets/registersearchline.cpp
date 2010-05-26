@@ -186,33 +186,33 @@ bool RegisterSearchLine::itemMatches(const RegisterItem* item, const QString& s)
     // in sync with the logic to fill the combo box in
     // RegisterSearchLine::init()
     switch (d->status) {
-    default:
-      break;
-    case 1:    // Imported
-      if (!t->transaction().isImported())
-        return false;
-      break;
-    case 2:    // Matched
-      if (!t->split().isMatched())
-        return false;
-      break;
-    case 3:    // Erroneous
-      if (t->transaction().splitSum().isZero())
-        return false;
-      break;
-    case 4:    // Not marked
-      if (t->split().reconcileFlag() != MyMoneySplit::NotReconciled)
-        return false;
-      break;
-    case 5:    // Not reconciled
-      if (t->split().reconcileFlag() != MyMoneySplit::NotReconciled
-          && t->split().reconcileFlag() != MyMoneySplit::Cleared)
-        return false;
-      break;
-    case 6:    // Cleared
-      if (t->split().reconcileFlag() != MyMoneySplit::Cleared)
-        return false;
-      break;
+      default:
+        break;
+      case 1:    // Imported
+        if (!t->transaction().isImported())
+          return false;
+        break;
+      case 2:    // Matched
+        if (!t->split().isMatched())
+          return false;
+        break;
+      case 3:    // Erroneous
+        if (t->transaction().splitSum().isZero())
+          return false;
+        break;
+      case 4:    // Not marked
+        if (t->split().reconcileFlag() != MyMoneySplit::NotReconciled)
+          return false;
+        break;
+      case 5:    // Not reconciled
+        if (t->split().reconcileFlag() != MyMoneySplit::NotReconciled
+            && t->split().reconcileFlag() != MyMoneySplit::Cleared)
+          return false;
+        break;
+      case 6:    // Cleared
+        if (t->split().reconcileFlag() != MyMoneySplit::Cleared)
+          return false;
+        break;
     }
   }
 

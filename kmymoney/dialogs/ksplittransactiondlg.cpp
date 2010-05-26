@@ -213,22 +213,22 @@ int KSplitTransactionDlg::exec(void)
 
         if ((rc = corrDlg->exec()) == Accepted) {
           switch (corrDlg->buttonGroup->checkedId()) {
-          case 0:       // continue to edit
-            rc = Rejected;
-            break;
+            case 0:       // continue to edit
+              rc = Rejected;
+              break;
 
-          case 1:       // modify total
-            split.setValue(-splitsValue());
-            split.setShares(-splitsValue());
-            m_transaction.modifySplit(split);
-            break;
+            case 1:       // modify total
+              split.setValue(-splitsValue());
+              split.setShares(-splitsValue());
+              m_transaction.modifySplit(split);
+              break;
 
-          case 2:       // distribute difference
-            qDebug("distribution of difference not yet supported in KSplitTransactionDlg::slotFinishClicked()");
-            break;
+            case 2:       // distribute difference
+              qDebug("distribution of difference not yet supported in KSplitTransactionDlg::slotFinishClicked()");
+              break;
 
-          case 3:       // leave unassigned
-            break;
+            case 3:       // leave unassigned
+              break;
           }
         }
         delete corrDlg;

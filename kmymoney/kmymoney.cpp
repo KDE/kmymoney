@@ -2118,15 +2118,15 @@ void KMyMoneyApp::slotGncImport(void)
   if (d->m_myMoneyView->fileOpen()) {
     switch (KMessageBox::questionYesNoCancel(0,
             i18n("You cannot import GnuCash data into an existing file. Do you wish to save this file?"), PACKAGE)) {
-    case KMessageBox::Yes:
-      slotFileSave();
-      break;
-    case KMessageBox::No:
-      d->m_myMoneyView->closeFile();
-      d->m_fileName = KUrl();
-      break;
-    default:
-      return;
+      case KMessageBox::Yes:
+        slotFileSave();
+        break;
+      case KMessageBox::No:
+        d->m_myMoneyView->closeFile();
+        d->m_fileName = KUrl();
+        break;
+      default:
+        return;
     }
   }
 
@@ -2442,127 +2442,127 @@ void KMyMoneyApp::slotFileBackup(void)
 void KMyMoneyApp::slotProcessExited(void)
 {
   switch (d->m_backupState) {
-  case BACKUP_MOUNTING:
+    case BACKUP_MOUNTING:
 
-    if (d->m_proc.exitStatus() == QProcess::NormalExit && d->m_proc.exitCode() == 0) {
-      d->m_proc.clearProgram();
-      QString today;
-      today.sprintf("-%04d-%02d-%02d.kmy",
-                    QDate::currentDate().year(),
-                    QDate::currentDate().month(),
-                    QDate::currentDate().day());
-      QString backupfile = d->m_mountpoint + '/' + d->m_fileName.fileName();
-      KMyMoneyUtils::appendCorrectFileExt(backupfile, today);
+      if (d->m_proc.exitStatus() == QProcess::NormalExit && d->m_proc.exitCode() == 0) {
+        d->m_proc.clearProgram();
+        QString today;
+        today.sprintf("-%04d-%02d-%02d.kmy",
+                      QDate::currentDate().year(),
+                      QDate::currentDate().month(),
+                      QDate::currentDate().day());
+        QString backupfile = d->m_mountpoint + '/' + d->m_fileName.fileName();
+        KMyMoneyUtils::appendCorrectFileExt(backupfile, today);
 
-      // check if file already exists and ask what to do
-      d->m_backupResult = 0;
-      QFile f(backupfile);
-      if (f.exists()) {
-        int answer = KMessageBox::warningContinueCancel(this, i18n("Backup file for today exists on that device.  Replace ?"), i18n("Backup"), KGuiItem(i18n("&Replace")));
-        if (answer == KMessageBox::Cancel) {
-          d->m_backupResult = 1;
+        // check if file already exists and ask what to do
+        d->m_backupResult = 0;
+        QFile f(backupfile);
+        if (f.exists()) {
+          int answer = KMessageBox::warningContinueCancel(this, i18n("Backup file for today exists on that device.  Replace ?"), i18n("Backup"), KGuiItem(i18n("&Replace")));
+          if (answer == KMessageBox::Cancel) {
+            d->m_backupResult = 1;
 
-          if (d->m_backupMount) {
-            progressCallback(250, 0, i18n("Unmounting %1", d->m_mountpoint));
-            d->m_proc.clearProgram();
-            d->m_proc.setProgram("umount");
-            d->m_proc << d->m_mountpoint;
-            d->m_backupState = BACKUP_UNMOUNTING;
-            d->m_proc.start();
-          } else {
-            d->m_backupState = BACKUP_IDLE;
-            progressCallback(-1, -1, QString());
-            ready();
+            if (d->m_backupMount) {
+              progressCallback(250, 0, i18n("Unmounting %1", d->m_mountpoint));
+              d->m_proc.clearProgram();
+              d->m_proc.setProgram("umount");
+              d->m_proc << d->m_mountpoint;
+              d->m_backupState = BACKUP_UNMOUNTING;
+              d->m_proc.start();
+            } else {
+              d->m_backupState = BACKUP_IDLE;
+              progressCallback(-1, -1, QString());
+              ready();
+            }
           }
         }
-      }
 
-      if (d->m_backupResult == 0) {
-        progressCallback(50, 0, i18n("Writing %1", backupfile));
+        if (d->m_backupResult == 0) {
+          progressCallback(50, 0, i18n("Writing %1", backupfile));
 //FIXME: FIX on windows
-        d->m_proc << "cp" << "-f" << d->m_fileName.path(KUrl::LeaveTrailingSlash) << backupfile;
-        d->m_backupState = BACKUP_COPYING;
-        d->m_proc.start();
-      }
-
-    } else {
-      KMessageBox::information(this, i18n("Error mounting device"), i18n("Backup"));
-      d->m_backupResult = 1;
-      if (d->m_backupMount) {
-        progressCallback(250, 0, i18n("Unmounting %1", d->m_mountpoint));
-        d->m_proc.clearProgram();
-        d->m_proc.setProgram("umount");
-        d->m_proc << d->m_mountpoint;
-        d->m_backupState = BACKUP_UNMOUNTING;
-        d->m_proc.start();
+          d->m_proc << "cp" << "-f" << d->m_fileName.path(KUrl::LeaveTrailingSlash) << backupfile;
+          d->m_backupState = BACKUP_COPYING;
+          d->m_proc.start();
+        }
 
       } else {
-        d->m_backupState = BACKUP_IDLE;
-        progressCallback(-1, -1, QString());
-        ready();
+        KMessageBox::information(this, i18n("Error mounting device"), i18n("Backup"));
+        d->m_backupResult = 1;
+        if (d->m_backupMount) {
+          progressCallback(250, 0, i18n("Unmounting %1", d->m_mountpoint));
+          d->m_proc.clearProgram();
+          d->m_proc.setProgram("umount");
+          d->m_proc << d->m_mountpoint;
+          d->m_backupState = BACKUP_UNMOUNTING;
+          d->m_proc.start();
+
+        } else {
+          d->m_backupState = BACKUP_IDLE;
+          progressCallback(-1, -1, QString());
+          ready();
+        }
       }
-    }
-    break;
+      break;
 
-  case BACKUP_COPYING:
-    if (d->m_proc.exitStatus() == QProcess::NormalExit && d->m_proc.exitCode() == 0) {
+    case BACKUP_COPYING:
+      if (d->m_proc.exitStatus() == QProcess::NormalExit && d->m_proc.exitCode() == 0) {
 
-      if (d->m_backupMount) {
-        progressCallback(250, 0, i18n("Unmounting %1", d->m_mountpoint));
-        d->m_proc.clearProgram();
-        d->m_proc.setProgram("umount");
-        d->m_proc << d->m_mountpoint;
-        d->m_backupState = BACKUP_UNMOUNTING;
-        d->m_proc.start();
+        if (d->m_backupMount) {
+          progressCallback(250, 0, i18n("Unmounting %1", d->m_mountpoint));
+          d->m_proc.clearProgram();
+          d->m_proc.setProgram("umount");
+          d->m_proc << d->m_mountpoint;
+          d->m_backupState = BACKUP_UNMOUNTING;
+          d->m_proc.start();
+        } else {
+          progressCallback(300, 0, i18nc("Backup done", "Done"));
+          KMessageBox::information(this, i18n("File successfully backed up"), i18n("Backup"));
+          d->m_backupState = BACKUP_IDLE;
+          progressCallback(-1, -1, QString());
+          ready();
+        }
       } else {
+        qDebug("cp exit code is %d", d->m_proc.exitCode());
+        d->m_backupResult = 1;
+        KMessageBox::information(this, i18n("Error copying file to device"), i18n("Backup"));
+
+        if (d->m_backupMount) {
+          progressCallback(250, 0, i18n("Unmounting %1", d->m_mountpoint));
+          d->m_proc.clearProgram();
+          d->m_proc.setProgram("umount");
+          d->m_proc << d->m_mountpoint;
+          d->m_backupState = BACKUP_UNMOUNTING;
+          d->m_proc.start();
+
+
+        } else {
+          d->m_backupState = BACKUP_IDLE;
+          progressCallback(-1, -1, QString());
+          ready();
+        }
+      }
+      break;
+
+
+    case BACKUP_UNMOUNTING:
+      if (d->m_proc.exitStatus() == QProcess::NormalExit && d->m_proc.exitCode() == 0) {
+
         progressCallback(300, 0, i18nc("Backup done", "Done"));
-        KMessageBox::information(this, i18n("File successfully backed up"), i18n("Backup"));
-        d->m_backupState = BACKUP_IDLE;
-        progressCallback(-1, -1, QString());
-        ready();
-      }
-    } else {
-      qDebug("cp exit code is %d", d->m_proc.exitCode());
-      d->m_backupResult = 1;
-      KMessageBox::information(this, i18n("Error copying file to device"), i18n("Backup"));
-
-      if (d->m_backupMount) {
-        progressCallback(250, 0, i18n("Unmounting %1", d->m_mountpoint));
-        d->m_proc.clearProgram();
-        d->m_proc.setProgram("umount");
-        d->m_proc << d->m_mountpoint;
-        d->m_backupState = BACKUP_UNMOUNTING;
-        d->m_proc.start();
-
-
+        if (d->m_backupResult == 0)
+          KMessageBox::information(this, i18n("File successfully backed up"), i18n("Backup"));
       } else {
-        d->m_backupState = BACKUP_IDLE;
-        progressCallback(-1, -1, QString());
-        ready();
+        KMessageBox::information(this, i18n("Error unmounting device"), i18n("Backup"));
       }
-    }
-    break;
+      d->m_backupState = BACKUP_IDLE;
+      progressCallback(-1, -1, QString());
+      ready();
+      break;
 
-
-  case BACKUP_UNMOUNTING:
-    if (d->m_proc.exitStatus() == QProcess::NormalExit && d->m_proc.exitCode() == 0) {
-
-      progressCallback(300, 0, i18nc("Backup done", "Done"));
-      if (d->m_backupResult == 0)
-        KMessageBox::information(this, i18n("File successfully backed up"), i18n("Backup"));
-    } else {
-      KMessageBox::information(this, i18n("Error unmounting device"), i18n("Backup"));
-    }
-    d->m_backupState = BACKUP_IDLE;
-    progressCallback(-1, -1, QString());
-    ready();
-    break;
-
-  default:
-    qWarning("Unknown state for backup operation!");
-    progressCallback(-1, -1, QString());
-    ready();
-    break;
+    default:
+      qWarning("Unknown state for backup operation!");
+      progressCallback(-1, -1, QString());
+      ready();
+      break;
   }
 }
 
@@ -3192,16 +3192,16 @@ void KMyMoneyApp::slotAccountDelete(void)
 
   // make sure we only allow transactions in a 'category' (income/expense account)
   switch (d->m_selectedAccount.accountType()) {
-  case MyMoneyAccount::Income:
-  case MyMoneyAccount::Expense:
-    break;
+    case MyMoneyAccount::Income:
+    case MyMoneyAccount::Expense:
+      break;
 
-  default:
-    // if the account is still referenced
-    if (hasReference) {
-      return;
-    }
-    break;
+    default:
+      // if the account is still referenced
+      if (hasReference) {
+        return;
+      }
+      break;
   }
 
   // if we get here and still have transactions referencing the account, we
@@ -3298,101 +3298,101 @@ void KMyMoneyApp::slotAccountDelete(void)
   // at this point, we must not have a reference to the account
   // to be deleted anymore
   switch (d->m_selectedAccount.accountGroup()) {
-    // special handling for categories to allow deleting of empty subcategories
-  case MyMoneyAccount::Income:
-  case MyMoneyAccount::Expense: { // open a compound statement here to be able to declare variables
-    // which would otherwise not work within a case label.
+      // special handling for categories to allow deleting of empty subcategories
+    case MyMoneyAccount::Income:
+    case MyMoneyAccount::Expense: { // open a compound statement here to be able to declare variables
+        // which would otherwise not work within a case label.
 
-    // case A - only a single, unused category without subcats selected
-    if (d->m_selectedAccount.accountList().isEmpty()) {
-      if (!needAskUser || (KMessageBox::questionYesNo(this, QString("<qt>") + i18n("Do you really want to delete category <b>%1</b>?", d->m_selectedAccount.name()) + QString("</qt>")) == KMessageBox::Yes)) {
-        try {
-          file->removeAccount(d->m_selectedAccount);
-          d->m_selectedAccount.clearId();
-          slotUpdateActions();
-          ft.commit();
-        } catch (MyMoneyException* e) {
-          KMessageBox::error(this, QString("<qt>") + i18n("Unable to delete category <b>%1</b>. Cause: %2", d->m_selectedAccount.name(), e->what()) + QString("</qt>"));
-          delete e;
+        // case A - only a single, unused category without subcats selected
+        if (d->m_selectedAccount.accountList().isEmpty()) {
+          if (!needAskUser || (KMessageBox::questionYesNo(this, QString("<qt>") + i18n("Do you really want to delete category <b>%1</b>?", d->m_selectedAccount.name()) + QString("</qt>")) == KMessageBox::Yes)) {
+            try {
+              file->removeAccount(d->m_selectedAccount);
+              d->m_selectedAccount.clearId();
+              slotUpdateActions();
+              ft.commit();
+            } catch (MyMoneyException* e) {
+              KMessageBox::error(this, QString("<qt>") + i18n("Unable to delete category <b>%1</b>. Cause: %2", d->m_selectedAccount.name(), e->what()) + QString("</qt>"));
+              delete e;
+            }
+          }
+          return;
         }
-      }
-      return;
-    }
-    // case B - we have some subcategories, maybe the user does not want to
-    //          delete them all, but just the category itself?
-    MyMoneyAccount parentAccount = file->account(d->m_selectedAccount.parentAccountId());
+        // case B - we have some subcategories, maybe the user does not want to
+        //          delete them all, but just the category itself?
+        MyMoneyAccount parentAccount = file->account(d->m_selectedAccount.parentAccountId());
 
-    QStringList accountsToReparent;
-    int result = KMessageBox::questionYesNoCancel(this, QString("<qt>") +
-                 i18n("Do you want to delete category <b>%1</b> with all its sub-categories or only "
-                      "the category itself? If you only delete the category itself, all its sub-categories "
-                      "will be made sub-categories of <b>%2</b>.", d->m_selectedAccount.name(), parentAccount.name()) + QString("</qt>"),
-                 QString(),
-                 KGuiItem(i18n("Delete all")),
-                 KGuiItem(i18n("Just the category")));
-    if (result == KMessageBox::Cancel)
-      return; // cancel pressed? ok, no delete then...
-    // "No" means "Just the category" and that means we need to reparent all subaccounts
-    bool need_confirmation = false;
-    // case C - User only wants to delete the category itself
-    if (result == KMessageBox::No)
-      accountsToReparent = d->m_selectedAccount.accountList();
-    else {
-      // case D - User wants to delete all subcategories, now check all subcats of
-      //          d->m_selectedAccount and remember all that cannot be deleted and
-      //          must be "reparented"
-      for (QStringList::const_iterator it = d->m_selectedAccount.accountList().begin();
-           it != d->m_selectedAccount.accountList().end(); ++it) {
-        // reparent account if a transaction is assigned
-        if (file->transactionCount(*it) != 0)
-          accountsToReparent.push_back(*it);
-        else if (!file->account(*it).accountList().isEmpty()) {
-          // or if we have at least one sub-account that is used for transactions
-          if (!file->hasOnlyUnusedAccounts(file->account(*it).accountList())) {
-            accountsToReparent.push_back(*it);
-            //kDebug() << "subaccount not empty";
+        QStringList accountsToReparent;
+        int result = KMessageBox::questionYesNoCancel(this, QString("<qt>") +
+                     i18n("Do you want to delete category <b>%1</b> with all its sub-categories or only "
+                          "the category itself? If you only delete the category itself, all its sub-categories "
+                          "will be made sub-categories of <b>%2</b>.", d->m_selectedAccount.name(), parentAccount.name()) + QString("</qt>"),
+                     QString(),
+                     KGuiItem(i18n("Delete all")),
+                     KGuiItem(i18n("Just the category")));
+        if (result == KMessageBox::Cancel)
+          return; // cancel pressed? ok, no delete then...
+        // "No" means "Just the category" and that means we need to reparent all subaccounts
+        bool need_confirmation = false;
+        // case C - User only wants to delete the category itself
+        if (result == KMessageBox::No)
+          accountsToReparent = d->m_selectedAccount.accountList();
+        else {
+          // case D - User wants to delete all subcategories, now check all subcats of
+          //          d->m_selectedAccount and remember all that cannot be deleted and
+          //          must be "reparented"
+          for (QStringList::const_iterator it = d->m_selectedAccount.accountList().begin();
+               it != d->m_selectedAccount.accountList().end(); ++it) {
+            // reparent account if a transaction is assigned
+            if (file->transactionCount(*it) != 0)
+              accountsToReparent.push_back(*it);
+            else if (!file->account(*it).accountList().isEmpty()) {
+              // or if we have at least one sub-account that is used for transactions
+              if (!file->hasOnlyUnusedAccounts(file->account(*it).accountList())) {
+                accountsToReparent.push_back(*it);
+                //kDebug() << "subaccount not empty";
+              }
+            }
+          }
+          if (!accountsToReparent.isEmpty())
+            need_confirmation = true;
+        }
+        if (!accountsToReparent.isEmpty() && need_confirmation) {
+          if (KMessageBox::questionYesNo(this, i18n("<p>Some sub-categories of category <b>%1</b> cannot "
+                                         "be deleted, because they are still used. They will be made sub-categories of <b>%2</b>. Proceed?</p>", d->m_selectedAccount.name(), parentAccount.name())) != KMessageBox::Yes) {
+            return; // user gets wet feet...
           }
         }
+        // all good, now first reparent selected sub-categories
+        try {
+          MyMoneyAccount parent = file->account(d->m_selectedAccount.parentAccountId());
+          for (QStringList::const_iterator it = accountsToReparent.constBegin(); it != accountsToReparent.constEnd(); ++it) {
+            MyMoneyAccount child = file->account(*it);
+            file->reparentAccount(child, parent);
+          }
+          // reload the account because the sub-account list might have changed
+          d->m_selectedAccount = file->account(d->m_selectedAccount.id());
+          // now recursively delete remaining sub-categories
+          file->removeAccountList(d->m_selectedAccount.accountList());
+          // don't forget to update d->m_selectedAccount, because we still have a copy of
+          // the old account list, which is no longer valid
+          d->m_selectedAccount = file->account(d->m_selectedAccount.id());
+        } catch (MyMoneyException* e) {
+          KMessageBox::error(this, QString("<qt>") + i18n("Unable to delete a sub-category of category <b>%1</b>. Reason: %2", d->m_selectedAccount.name(), e->what()) + QString("</qt>"));
+          delete e;
+          return;
+        }
       }
-      if (!accountsToReparent.isEmpty())
-        need_confirmation = true;
-    }
-    if (!accountsToReparent.isEmpty() && need_confirmation) {
-      if (KMessageBox::questionYesNo(this, i18n("<p>Some sub-categories of category <b>%1</b> cannot "
-                                     "be deleted, because they are still used. They will be made sub-categories of <b>%2</b>. Proceed?</p>", d->m_selectedAccount.name(), parentAccount.name())) != KMessageBox::Yes) {
-        return; // user gets wet feet...
-      }
-    }
-    // all good, now first reparent selected sub-categories
-    try {
-      MyMoneyAccount parent = file->account(d->m_selectedAccount.parentAccountId());
-      for (QStringList::const_iterator it = accountsToReparent.constBegin(); it != accountsToReparent.constEnd(); ++it) {
-        MyMoneyAccount child = file->account(*it);
-        file->reparentAccount(child, parent);
-      }
-      // reload the account because the sub-account list might have changed
-      d->m_selectedAccount = file->account(d->m_selectedAccount.id());
-      // now recursively delete remaining sub-categories
-      file->removeAccountList(d->m_selectedAccount.accountList());
-      // don't forget to update d->m_selectedAccount, because we still have a copy of
-      // the old account list, which is no longer valid
-      d->m_selectedAccount = file->account(d->m_selectedAccount.id());
-    } catch (MyMoneyException* e) {
-      KMessageBox::error(this, QString("<qt>") + i18n("Unable to delete a sub-category of category <b>%1</b>. Reason: %2", d->m_selectedAccount.name(), e->what()) + QString("</qt>"));
-      delete e;
-      return;
-    }
-  }
-  break; // the category/account is deleted after the switch
+      break; // the category/account is deleted after the switch
 
-  default:
-    if (!d->m_selectedAccount.accountList().isEmpty())
-      return; // can't delete accounts which still have subaccounts
+    default:
+      if (!d->m_selectedAccount.accountList().isEmpty())
+        return; // can't delete accounts which still have subaccounts
 
-    if (KMessageBox::questionYesNo(this, i18n("<p>Do you really want to "
-                                   "delete account <b>%1</b>?<p>", d->m_selectedAccount.name())) != KMessageBox::Yes) {
-      return; // ok, you don't want to? why did you click then, hmm?
-    }
+      if (KMessageBox::questionYesNo(this, i18n("<p>Do you really want to "
+                                     "delete account <b>%1</b>?<p>", d->m_selectedAccount.name())) != KMessageBox::Yes) {
+        return; // ok, you don't want to? why did you click then, hmm?
+      }
   } // switch;
 
   try {
@@ -3416,15 +3416,15 @@ void KMyMoneyApp::slotAccountEdit(void)
         QString caption;
         bool category = false;
         switch (MyMoneyAccount::accountGroup(d->m_selectedAccount.accountType())) {
-        default:
-          caption = i18n("Edit account '%1'", d->m_selectedAccount.name());
-          break;
+          default:
+            caption = i18n("Edit account '%1'", d->m_selectedAccount.name());
+            break;
 
-        case MyMoneyAccount::Expense:
-        case MyMoneyAccount::Income:
-          caption = i18n("Edit category '%1'", d->m_selectedAccount.name());
-          category = true;
-          break;
+          case MyMoneyAccount::Expense:
+          case MyMoneyAccount::Income:
+            caption = i18n("Edit category '%1'", d->m_selectedAccount.name());
+            category = true;
+            break;
         }
         QString tid = file->openingBalanceTransaction(d->m_selectedAccount);
         MyMoneyTransaction t;
@@ -4120,67 +4120,67 @@ void KMyMoneyApp::slotScheduleEdit(void)
 
 
       switch (schedule.type()) {
-      case MyMoneySchedule::TYPE_BILL:
-      case MyMoneySchedule::TYPE_DEPOSIT:
-      case MyMoneySchedule::TYPE_TRANSFER:
-        sched_dlg = new KEditScheduleDlg(schedule, this);
-        d->m_transactionEditor = sched_dlg->startEdit();
-        if (d->m_transactionEditor) {
-          KMyMoneyGlobalSettings::setSubstringSearch(sched_dlg);
-          if (sched_dlg->exec() == QDialog::Accepted) {
+        case MyMoneySchedule::TYPE_BILL:
+        case MyMoneySchedule::TYPE_DEPOSIT:
+        case MyMoneySchedule::TYPE_TRANSFER:
+          sched_dlg = new KEditScheduleDlg(schedule, this);
+          d->m_transactionEditor = sched_dlg->startEdit();
+          if (d->m_transactionEditor) {
+            KMyMoneyGlobalSettings::setSubstringSearch(sched_dlg);
+            if (sched_dlg->exec() == QDialog::Accepted) {
+              MyMoneyFileTransaction ft;
+              try {
+                MyMoneySchedule sched = sched_dlg->schedule();
+                // Check whether the new Schedule Date
+                // is at or before the lastPaymentDate
+                // If it is, ask the user whether to clear the
+                // lastPaymentDate
+                const QDate& next = sched.nextDueDate();
+                const QDate& last = sched.lastPayment();
+                if (next.isValid() && last.isValid() && next <= last) {
+                  // Entered a date effectively no later
+                  // than previous payment.  Date would be
+                  // updated automatically so we probably
+                  // want to clear it.  Let's ask the user.
+                  if (KMessageBox::questionYesNo(this, QString("<qt>") + i18n("You have entered a scheduled transaction date of <b>%1</b>.  Because the scheduled transaction was last paid on <b>%2</b>, KMyMoney will automatically adjust the scheduled transaction date to the next date unless the last payment date is reset.  Do you want to reset the last payment date?", KGlobal::locale()->formatDate(next, KLocale::ShortDate), KGlobal::locale()->formatDate(last, KLocale::ShortDate)) + QString("</qt>"), i18n("Reset Last Payment Date"), KStandardGuiItem::yes(), KStandardGuiItem::no()) == KMessageBox::Yes) {
+                    sched.setLastPayment(QDate());
+                  }
+                }
+                MyMoneyFile::instance()->modifySchedule(sched);
+                // delete the editor before we emit the dataChanged() signal from the
+                // engine. Calling this twice in a row does not hurt.
+                deleteTransactionEditor();
+                ft.commit();
+              } catch (MyMoneyException *e) {
+                KMessageBox::detailedSorry(this, i18n("Unable to modify scheduled transaction '%1'", d->m_selectedSchedule.name()), e->what());
+                delete e;
+              }
+            }
+            deleteTransactionEditor();
+          }
+          delete sched_dlg;
+          break;
+
+        case MyMoneySchedule::TYPE_LOANPAYMENT:
+          loan_wiz = new KEditLoanWizard(schedule.account(2));
+          connect(loan_wiz, SIGNAL(newCategory(MyMoneyAccount&)), this, SLOT(slotCategoryNew(MyMoneyAccount&)));
+          connect(loan_wiz, SIGNAL(createPayee(const QString&, QString&)), this, SLOT(slotPayeeNew(const QString&, QString&)));
+          if (loan_wiz->exec() == QDialog::Accepted) {
             MyMoneyFileTransaction ft;
             try {
-              MyMoneySchedule sched = sched_dlg->schedule();
-              // Check whether the new Schedule Date
-              // is at or before the lastPaymentDate
-              // If it is, ask the user whether to clear the
-              // lastPaymentDate
-              const QDate& next = sched.nextDueDate();
-              const QDate& last = sched.lastPayment();
-              if (next.isValid() && last.isValid() && next <= last) {
-                // Entered a date effectively no later
-                // than previous payment.  Date would be
-                // updated automatically so we probably
-                // want to clear it.  Let's ask the user.
-                if (KMessageBox::questionYesNo(this, QString("<qt>") + i18n("You have entered a scheduled transaction date of <b>%1</b>.  Because the scheduled transaction was last paid on <b>%2</b>, KMyMoney will automatically adjust the scheduled transaction date to the next date unless the last payment date is reset.  Do you want to reset the last payment date?", KGlobal::locale()->formatDate(next, KLocale::ShortDate), KGlobal::locale()->formatDate(last, KLocale::ShortDate)) + QString("</qt>"), i18n("Reset Last Payment Date"), KStandardGuiItem::yes(), KStandardGuiItem::no()) == KMessageBox::Yes) {
-                  sched.setLastPayment(QDate());
-                }
-              }
-              MyMoneyFile::instance()->modifySchedule(sched);
-              // delete the editor before we emit the dataChanged() signal from the
-              // engine. Calling this twice in a row does not hurt.
-              deleteTransactionEditor();
+              MyMoneyFile::instance()->modifySchedule(loan_wiz->schedule());
+              MyMoneyFile::instance()->modifyAccount(loan_wiz->account());
               ft.commit();
             } catch (MyMoneyException *e) {
               KMessageBox::detailedSorry(this, i18n("Unable to modify scheduled transaction '%1'", d->m_selectedSchedule.name()), e->what());
               delete e;
             }
           }
-          deleteTransactionEditor();
-        }
-        delete sched_dlg;
-        break;
+          delete loan_wiz;
+          break;
 
-      case MyMoneySchedule::TYPE_LOANPAYMENT:
-        loan_wiz = new KEditLoanWizard(schedule.account(2));
-        connect(loan_wiz, SIGNAL(newCategory(MyMoneyAccount&)), this, SLOT(slotCategoryNew(MyMoneyAccount&)));
-        connect(loan_wiz, SIGNAL(createPayee(const QString&, QString&)), this, SLOT(slotPayeeNew(const QString&, QString&)));
-        if (loan_wiz->exec() == QDialog::Accepted) {
-          MyMoneyFileTransaction ft;
-          try {
-            MyMoneyFile::instance()->modifySchedule(loan_wiz->schedule());
-            MyMoneyFile::instance()->modifyAccount(loan_wiz->account());
-            ft.commit();
-          } catch (MyMoneyException *e) {
-            KMessageBox::detailedSorry(this, i18n("Unable to modify scheduled transaction '%1'", d->m_selectedSchedule.name()), e->what());
-            delete e;
-          }
-        }
-        delete loan_wiz;
-        break;
-
-      case MyMoneySchedule::TYPE_ANY:
-        break;
+        case MyMoneySchedule::TYPE_ANY:
+          break;
       }
 
     } catch (MyMoneyException *e) {
@@ -4358,21 +4358,21 @@ KMyMoneyUtils::EnterScheduleResultCodeE KMyMoneyApp::enterSchedule(MyMoneySchedu
             MyMoneyTransaction t;
             // add the new transaction
             switch (action) {
-            case KConfirmManualEnterDlg::UseOriginal:
-              // setup widgets with original transaction data
-              d->m_transactionEditor->setTransaction(dlg->transaction(), dlg->transaction().splits().isEmpty() ? MyMoneySplit() : dlg->transaction().splits().front());
-              // and create a transaction based on that data
-              taccepted = MyMoneyTransaction();
-              d->m_transactionEditor->createTransaction(taccepted, dlg->transaction(),
-                  dlg->transaction().splits().isEmpty() ? MyMoneySplit() : dlg->transaction().splits().front(), true);
-              break;
+              case KConfirmManualEnterDlg::UseOriginal:
+                // setup widgets with original transaction data
+                d->m_transactionEditor->setTransaction(dlg->transaction(), dlg->transaction().splits().isEmpty() ? MyMoneySplit() : dlg->transaction().splits().front());
+                // and create a transaction based on that data
+                taccepted = MyMoneyTransaction();
+                d->m_transactionEditor->createTransaction(taccepted, dlg->transaction(),
+                    dlg->transaction().splits().isEmpty() ? MyMoneySplit() : dlg->transaction().splits().front(), true);
+                break;
 
-            case KConfirmManualEnterDlg::ModifyAlways:
-              schedule.setTransaction(taccepted);
-              break;
+              case KConfirmManualEnterDlg::ModifyAlways:
+                schedule.setTransaction(taccepted);
+                break;
 
-            case KConfirmManualEnterDlg::ModifyOnce:
-              break;
+              case KConfirmManualEnterDlg::ModifyOnce:
+                break;
             }
 
             QString newId;
@@ -5145,21 +5145,21 @@ void KMyMoneyApp::slotTransactionsCancelOrEnter(bool& okToSelect)
         }
 
         switch (rc) {
-        case KMessageBox::Yes:
-          slotTransactionsCancel();
-          break;
-        case KMessageBox::No:
-          slotTransactionsEnter();
-          // make sure that we'll see this message the next time no matter
-          // if the user has chosen the 'Don't show again' checkbox
-          KMessageBox::enableMessage(dontShowAgain);
-          break;
-        case KMessageBox::Cancel:
-          // make sure that we'll see this message the next time no matter
-          // if the user has chosen the 'Don't show again' checkbox
-          KMessageBox::enableMessage(dontShowAgain);
-          okToSelect = false;
-          break;
+          case KMessageBox::Yes:
+            slotTransactionsCancel();
+            break;
+          case KMessageBox::No:
+            slotTransactionsEnter();
+            // make sure that we'll see this message the next time no matter
+            // if the user has chosen the 'Don't show again' checkbox
+            KMessageBox::enableMessage(dontShowAgain);
+            break;
+          case KMessageBox::Cancel:
+            // make sure that we'll see this message the next time no matter
+            // if the user has chosen the 'Don't show again' checkbox
+            KMessageBox::enableMessage(dontShowAgain);
+            okToSelect = false;
+            break;
         }
       }
     }
@@ -5209,29 +5209,29 @@ void KMyMoneyApp::markTransaction(MyMoneySplit::reconcileFlagE flag)
           if (d->m_reconciliationAccount.id().isEmpty()) {
             // in normal mode we cycle through all states
             switch (sp.reconcileFlag()) {
-            case MyMoneySplit::NotReconciled:
-              sp.setReconcileFlag(MyMoneySplit::Cleared);
-              break;
-            case MyMoneySplit::Cleared:
-              sp.setReconcileFlag(MyMoneySplit::Reconciled);
-              break;
-            case MyMoneySplit::Reconciled:
-              sp.setReconcileFlag(MyMoneySplit::NotReconciled);
-              break;
-            default:
-              break;
+              case MyMoneySplit::NotReconciled:
+                sp.setReconcileFlag(MyMoneySplit::Cleared);
+                break;
+              case MyMoneySplit::Cleared:
+                sp.setReconcileFlag(MyMoneySplit::Reconciled);
+                break;
+              case MyMoneySplit::Reconciled:
+                sp.setReconcileFlag(MyMoneySplit::NotReconciled);
+                break;
+              default:
+                break;
             }
           } else {
             // in reconciliation mode we skip the reconciled state
             switch (sp.reconcileFlag()) {
-            case MyMoneySplit::NotReconciled:
-              sp.setReconcileFlag(MyMoneySplit::Cleared);
-              break;
-            case MyMoneySplit::Cleared:
-              sp.setReconcileFlag(MyMoneySplit::NotReconciled);
-              break;
-            default:
-              break;
+              case MyMoneySplit::NotReconciled:
+                sp.setReconcileFlag(MyMoneySplit::Cleared);
+                break;
+              case MyMoneySplit::Cleared:
+                sp.setReconcileFlag(MyMoneySplit::NotReconciled);
+                break;
+              default:
+                break;
             }
           }
         } else {
@@ -5950,70 +5950,70 @@ void KMyMoneyApp::slotUpdateActions(void)
   if (!d->m_selectedAccount.id().isEmpty()) {
     if (!file->isStandardAccount(d->m_selectedAccount.id())) {
       switch (d->m_selectedAccount.accountGroup()) {
-      case MyMoneyAccount::Asset:
-      case MyMoneyAccount::Liability:
-      case MyMoneyAccount::Equity:
-        action("account_transaction_report")->setEnabled(true);
-        action("account_edit")->setEnabled(true);
-        action("account_delete")->setEnabled(!file->isReferenced(d->m_selectedAccount));
-        action("account_open")->setEnabled(true);
-        if (d->m_selectedAccount.accountGroup() != MyMoneyAccount::Equity) {
-          if (d->m_reconciliationAccount.id().isEmpty()) {
-            action("account_reconcile")->setEnabled(true);
+        case MyMoneyAccount::Asset:
+        case MyMoneyAccount::Liability:
+        case MyMoneyAccount::Equity:
+          action("account_transaction_report")->setEnabled(true);
+          action("account_edit")->setEnabled(true);
+          action("account_delete")->setEnabled(!file->isReferenced(d->m_selectedAccount));
+          action("account_open")->setEnabled(true);
+          if (d->m_selectedAccount.accountGroup() != MyMoneyAccount::Equity) {
+            if (d->m_reconciliationAccount.id().isEmpty()) {
+              action("account_reconcile")->setEnabled(true);
+            } else {
+              if (!d->m_transactionEditor) {
+                action("account_reconcile_finish")->setEnabled(d->m_selectedAccount.id() == d->m_reconciliationAccount.id());
+                action("account_reconcile_postpone")->setEnabled(d->m_selectedAccount.id() == d->m_reconciliationAccount.id());
+              }
+            }
+          }
+
+          if (d->m_selectedAccount.accountType() == MyMoneyAccount::Investment)
+            action("investment_new")->setEnabled(true);
+
+          if (d->m_selectedAccount.isClosed())
+            action("account_reopen")->setEnabled(true);
+          else if (canCloseAccount(d->m_selectedAccount))
+            action("account_close")->setEnabled(true);
+
+          if (!d->m_selectedAccount.onlineBankingSettings().value("provider").isEmpty()) {
+            action("account_online_unmap")->setEnabled(true);
+            // check if provider is available
+            QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p;
+            it_p = d->m_onlinePlugins.constFind(d->m_selectedAccount.onlineBankingSettings().value("provider"));
+            if (it_p != d->m_onlinePlugins.constEnd()) {
+              QStringList protocols;
+              (*it_p)->protocols(protocols);
+              if (protocols.count() > 0) {
+                action("account_online_update")->setEnabled(true);
+                action("account_online_update_menu")->setEnabled(true);
+              }
+            }
           } else {
-            if (!d->m_transactionEditor) {
-              action("account_reconcile_finish")->setEnabled(d->m_selectedAccount.id() == d->m_reconciliationAccount.id());
-              action("account_reconcile_postpone")->setEnabled(d->m_selectedAccount.id() == d->m_reconciliationAccount.id());
-            }
+            action("account_online_map")->setEnabled(d->m_onlinePlugins.count() > 0);
           }
-        }
 
-        if (d->m_selectedAccount.accountType() == MyMoneyAccount::Investment)
-          action("investment_new")->setEnabled(true);
+          action("account_chart")->setEnabled(true);
+          break;
 
-        if (d->m_selectedAccount.isClosed())
-          action("account_reopen")->setEnabled(true);
-        else if (canCloseAccount(d->m_selectedAccount))
-          action("account_close")->setEnabled(true);
+        case MyMoneyAccount::Income :
+        case MyMoneyAccount::Expense :
+          action("category_edit")->setEnabled(true);
+          // enable delete action, if category/account itself is not referenced
+          // by any object except accounts, because we want to allow
+          // deleting of sub-categories. Also, we allow transactions, schedules and budgets
+          // to be present because we can re-assign them during the delete process
+          skip.fill(false);
+          skip.setBit(IMyMoneyStorage::RefCheckTransaction);
+          skip.setBit(IMyMoneyStorage::RefCheckAccount);
+          skip.setBit(IMyMoneyStorage::RefCheckSchedule);
+          skip.setBit(IMyMoneyStorage::RefCheckBudget);
+          action("category_delete")->setEnabled(!file->isReferenced(d->m_selectedAccount, skip));
+          action("account_open")->setEnabled(true);
+          break;
 
-        if (!d->m_selectedAccount.onlineBankingSettings().value("provider").isEmpty()) {
-          action("account_online_unmap")->setEnabled(true);
-          // check if provider is available
-          QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p;
-          it_p = d->m_onlinePlugins.constFind(d->m_selectedAccount.onlineBankingSettings().value("provider"));
-          if (it_p != d->m_onlinePlugins.constEnd()) {
-            QStringList protocols;
-            (*it_p)->protocols(protocols);
-            if (protocols.count() > 0) {
-              action("account_online_update")->setEnabled(true);
-              action("account_online_update_menu")->setEnabled(true);
-            }
-          }
-        } else {
-          action("account_online_map")->setEnabled(d->m_onlinePlugins.count() > 0);
-        }
-
-        action("account_chart")->setEnabled(true);
-        break;
-
-      case MyMoneyAccount::Income :
-      case MyMoneyAccount::Expense :
-        action("category_edit")->setEnabled(true);
-        // enable delete action, if category/account itself is not referenced
-        // by any object except accounts, because we want to allow
-        // deleting of sub-categories. Also, we allow transactions, schedules and budgets
-        // to be present because we can re-assign them during the delete process
-        skip.fill(false);
-        skip.setBit(IMyMoneyStorage::RefCheckTransaction);
-        skip.setBit(IMyMoneyStorage::RefCheckAccount);
-        skip.setBit(IMyMoneyStorage::RefCheckSchedule);
-        skip.setBit(IMyMoneyStorage::RefCheckBudget);
-        action("category_delete")->setEnabled(!file->isReferenced(d->m_selectedAccount, skip));
-        action("account_open")->setEnabled(true);
-        break;
-
-      default:
-        break;
+        default:
+          break;
       }
     }
   }
@@ -6667,33 +6667,33 @@ void KMyMoneyApp::slotAccountMapOnline(void)
   QString provider;
   QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p;
   switch (d->m_onlinePlugins.count()) {
-  case 0:
-    break;
-  case 1:
-    provider = d->m_onlinePlugins.begin().key();
-    break;
-  default: {
-    QMenu popup(this);
-    popup.setTitle(i18n("Select online banking plugin"));
+    case 0:
+      break;
+    case 1:
+      provider = d->m_onlinePlugins.begin().key();
+      break;
+    default: {
+        QMenu popup(this);
+        popup.setTitle(i18n("Select online banking plugin"));
 
-    // Populate the pick list with all the provider
-    for (it_p = d->m_onlinePlugins.constBegin(); it_p != d->m_onlinePlugins.constEnd(); ++it_p) {
-      popup.addAction(it_p.key())->setData(it_p.key());
-    }
+        // Populate the pick list with all the provider
+        for (it_p = d->m_onlinePlugins.constBegin(); it_p != d->m_onlinePlugins.constEnd(); ++it_p) {
+          popup.addAction(it_p.key())->setData(it_p.key());
+        }
 
-    QAction *item = popup.actions()[0];
-    if (item) {
-      popup.setActiveAction(item);
-    }
+        QAction *item = popup.actions()[0];
+        if (item) {
+          popup.setActiveAction(item);
+        }
 
-    // cancelled
-    if ((item = popup.exec(QCursor::pos(), item)) == 0) {
-      return;
-    }
+        // cancelled
+        if ((item = popup.exec(QCursor::pos(), item)) == 0) {
+          return;
+        }
 
-    provider = item->data().toString();
-  }
-  break;
+        provider = item->data().toString();
+      }
+      break;
   }
 
   if (provider.isEmpty())

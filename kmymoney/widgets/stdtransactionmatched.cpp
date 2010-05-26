@@ -98,81 +98,81 @@ void StdTransactionMatched::registerCellText(QString& txt, int& align, int row, 
     QDate postDate;
     QString memo;
     switch (row) {
-    case 0:
-      if (painter && col == DetailColumn)
-        txt = QString(" ") + i18n("KMyMoney has matched a downloaded transaction with a manually entered one (result above)");
-      // return true for the first visible column only
-      break;
-
-    case 1:
-      switch (col) {
-      case DateColumn:
-        align |= Qt::AlignLeft;
-        txt = i18n("Bank entry:");
+      case 0:
+        if (painter && col == DetailColumn)
+          txt = QString(" ") + i18n("KMyMoney has matched a downloaded transaction with a manually entered one (result above)");
+        // return true for the first visible column only
         break;
 
-      case DetailColumn:
-        align |= Qt::AlignLeft;
-        txt = QString("%1 %2").arg(matchedTransaction.postDate().toString(Qt::ISODate)).arg(matchedTransaction.memo());
-        break;
+      case 1:
+        switch (col) {
+          case DateColumn:
+            align |= Qt::AlignLeft;
+            txt = i18n("Bank entry:");
+            break;
 
-      case PaymentColumn:
-        align |= Qt::AlignRight;
-        if (importedValue.isNegative()) {
-          txt = (-importedValue).formatMoney(m_account.fraction());
+          case DetailColumn:
+            align |= Qt::AlignLeft;
+            txt = QString("%1 %2").arg(matchedTransaction.postDate().toString(Qt::ISODate)).arg(matchedTransaction.memo());
+            break;
+
+          case PaymentColumn:
+            align |= Qt::AlignRight;
+            if (importedValue.isNegative()) {
+              txt = (-importedValue).formatMoney(m_account.fraction());
+            }
+            break;
+
+          case DepositColumn:
+            align |= Qt::AlignRight;
+            if (!importedValue.isNegative()) {
+              txt = importedValue.formatMoney(m_account.fraction());
+            }
+            break;
         }
         break;
 
-      case DepositColumn:
-        align |= Qt::AlignRight;
-        if (!importedValue.isNegative()) {
-          txt = importedValue.formatMoney(m_account.fraction());
+      case 2:
+        switch (col) {
+          case DateColumn:
+            align |= Qt::AlignLeft;
+            txt = i18n("Your entry:");
+            break;
+
+          case DetailColumn:
+            align |= Qt::AlignLeft;
+            postDate = m_transaction.postDate();
+            if (!m_split.value("kmm-orig-postdate").isEmpty()) {
+              postDate = QDate::fromString(m_split.value("kmm-orig-postdate"), Qt::ISODate);
+            }
+            memo = m_split.memo();
+            if (!matchedSplit.memo().isEmpty() && memo != matchedSplit.memo()) {
+              int pos = memo.lastIndexOf(matchedSplit.memo());
+              if (pos != -1) {
+                memo = memo.left(pos);
+                // replace all new line characters because we only have one line available for the displayed data
+                memo.replace('\n', " ");
+              }
+            }
+            txt = QString("%1 %2").arg(postDate.toString(Qt::ISODate)).arg(memo);
+            break;
+
+          case PaymentColumn:
+            align |= Qt::AlignRight;
+            if (m_split.value().isNegative()) {
+              txt = (-m_split.value(m_transaction.commodity(), m_splitCurrencyId)).formatMoney(m_account.fraction());
+            }
+            break;
+
+          case DepositColumn:
+            align |= Qt::AlignRight;
+            if (!m_split.value().isNegative()) {
+              txt = m_split.value(m_transaction.commodity(), m_splitCurrencyId).formatMoney(m_account.fraction());
+            }
+            break;
+
         }
         break;
-      }
-      break;
-
-    case 2:
-      switch (col) {
-      case DateColumn:
-        align |= Qt::AlignLeft;
-        txt = i18n("Your entry:");
-        break;
-
-      case DetailColumn:
-        align |= Qt::AlignLeft;
-        postDate = m_transaction.postDate();
-        if (!m_split.value("kmm-orig-postdate").isEmpty()) {
-          postDate = QDate::fromString(m_split.value("kmm-orig-postdate"), Qt::ISODate);
-        }
-        memo = m_split.memo();
-        if (!matchedSplit.memo().isEmpty() && memo != matchedSplit.memo()) {
-          int pos = memo.lastIndexOf(matchedSplit.memo());
-          if (pos != -1) {
-            memo = memo.left(pos);
-            // replace all new line characters because we only have one line available for the displayed data
-            memo.replace('\n', " ");
-          }
-        }
-        txt = QString("%1 %2").arg(postDate.toString(Qt::ISODate)).arg(memo);
-        break;
-
-      case PaymentColumn:
-        align |= Qt::AlignRight;
-        if (m_split.value().isNegative()) {
-          txt = (-m_split.value(m_transaction.commodity(), m_splitCurrencyId)).formatMoney(m_account.fraction());
-        }
-        break;
-
-      case DepositColumn:
-        align |= Qt::AlignRight;
-        if (!m_split.value().isNegative()) {
-          txt = m_split.value(m_transaction.commodity(), m_splitCurrencyId).formatMoney(m_account.fraction());
-        }
-        break;
-
-      }
-      break;
     }
   }
 }

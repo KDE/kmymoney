@@ -177,42 +177,42 @@ void KAccountsView::slotTabCurrentChanged(QWidget* _tab)
   loadAccounts(tab);
 
   switch (tab) {
-  case ListView:
-    // update the hint if categories are hidden
-    m_hiddenCategories->setVisible(m_haveUnusedCategories);
-    break;
+    case ListView:
+      // update the hint if categories are hidden
+      m_hiddenCategories->setVisible(m_haveUnusedCategories);
+      break;
 
-  case IconView:
-    m_hiddenCategories->hide();
-    break;
+    case IconView:
+      m_hiddenCategories->hide();
+      break;
 
-  default:
-    break;
+    default:
+      break;
   }
 
   QListWidgetItem* iconItem = selectedIcon();
 
   emit selectObject(MyMoneyAccount());
   switch (static_cast<AccountsViewTab>(m_tab->currentIndex())) {
-  case ListView: {
-    QModelIndexList selectedIndexes = m_accountTree->selectionModel()->selectedIndexes();
-    if (!selectedIndexes.empty()) {
-      QVariant data = m_accountTree->model()->data(selectedIndexes.front(), AccountsModel::AccountRole);
-      if (data.isValid()) {
-        emit selectObject(data.value<MyMoneyAccount>());
+    case ListView: {
+        QModelIndexList selectedIndexes = m_accountTree->selectionModel()->selectedIndexes();
+        if (!selectedIndexes.empty()) {
+          QVariant data = m_accountTree->model()->data(selectedIndexes.front(), AccountsModel::AccountRole);
+          if (data.isValid()) {
+            emit selectObject(data.value<MyMoneyAccount>());
+          }
+        }
       }
-    }
-  }
-  break;
+      break;
 
-  case IconView:
-    if (iconItem) {
-      emit selectObject((iconItem->data(Qt::UserRole)).value<MyMoneyAccount>());
-    }
-    break;
+    case IconView:
+      if (iconItem) {
+        emit selectObject((iconItem->data(Qt::UserRole)).value<MyMoneyAccount>());
+      }
+      break;
 
-  default:
-    break;
+    default:
+      break;
   }
 }
 
@@ -226,14 +226,14 @@ void KAccountsView::loadAccounts(AccountsViewTab tab)
 {
   if (m_needReload[tab]) {
     switch (tab) {
-    case ListView:
-      loadListView();
-      break;
-    case IconView:
-      loadIconGroups();
-      break;
-    default:
-      break;
+      case ListView:
+        loadListView();
+        break;
+      case IconView:
+        loadIconGroups();
+        break;
+      default:
+        break;
     }
     m_needReload[tab] = false;
   }

@@ -133,29 +133,29 @@ public:
 
     QPixmap checkMark = QPixmap(KIconLoader::global()->loadIcon("dialog-ok", KIconLoader::Small));
     switch (account.accountType()) {
-    case MyMoneyAccount::Income:
-    case MyMoneyAccount::Expense:
-    case MyMoneyAccount::Asset:
-    case MyMoneyAccount::Liability:
-      if (account.value("Tax").toLower() == "yes") {
-        // Tax
-        newIndex = model->index(index.row(), index.column() + Tax, index.parent());
-        model->setData(newIndex, checkMark, Qt::DecorationRole);
-      }
-      if (!account.value("VatAccount").isEmpty()) {
-        // VAT
-        newIndex = model->index(index.row(), index.column() + VAT, index.parent());
-        model->setData(newIndex, checkMark, Qt::DecorationRole);
-      }
-      if (!account.value("VatRate").isEmpty()) {
-        MyMoneyMoney vatRate = MyMoneyMoney(account.value("VatRate")) * MyMoneyMoney(100, 1);
-        newIndex = model->index(index.row(), index.column() + VAT, index.parent());
-        model->setData(newIndex, QString("%1 %").arg(vatRate.formatMoney("", 1)), Qt::DisplayRole);
-        model->setData(newIndex, Qt::AlignRight, Qt::TextAlignmentRole);
-      }
-      break;
-    default:
-      break;
+      case MyMoneyAccount::Income:
+      case MyMoneyAccount::Expense:
+      case MyMoneyAccount::Asset:
+      case MyMoneyAccount::Liability:
+        if (account.value("Tax").toLower() == "yes") {
+          // Tax
+          newIndex = model->index(index.row(), index.column() + Tax, index.parent());
+          model->setData(newIndex, checkMark, Qt::DecorationRole);
+        }
+        if (!account.value("VatAccount").isEmpty()) {
+          // VAT
+          newIndex = model->index(index.row(), index.column() + VAT, index.parent());
+          model->setData(newIndex, checkMark, Qt::DecorationRole);
+        }
+        if (!account.value("VatRate").isEmpty()) {
+          MyMoneyMoney vatRate = MyMoneyMoney(account.value("VatRate")) * MyMoneyMoney(100, 1);
+          newIndex = model->index(index.row(), index.column() + VAT, index.parent());
+          model->setData(newIndex, QString("%1 %").arg(vatRate.formatMoney("", 1)), Qt::DisplayRole);
+          model->setData(newIndex, Qt::AlignRight, Qt::TextAlignmentRole);
+        }
+        break;
+      default:
+        break;
     }
 
     // Total Balance
@@ -190,14 +190,14 @@ public:
       balance = account.balance();
     // for income and liability accounts, we reverse the sign
     switch (account.accountGroup()) {
-    case MyMoneyAccount::Income:
-    case MyMoneyAccount::Liability:
-    case MyMoneyAccount::Equity:
-      balance = -balance;
-      break;
+      case MyMoneyAccount::Income:
+      case MyMoneyAccount::Liability:
+      case MyMoneyAccount::Equity:
+        balance = -balance;
+        break;
 
-    default:
-      break;
+      default:
+        break;
     }
 
     return balance;
@@ -329,26 +329,26 @@ AccountsModel::AccountsModel(QObject *parent /*= 0*/)
   QStringList headerLabels;
   for (int i = 0; i < LastColumnMarker; ++i) {
     switch (i) {
-    case Account:
-      headerLabels << i18n("Account");
-      break;
-    case Type:
-      headerLabels << i18n("Type");
-      break;
-    case Tax:
-      headerLabels << i18nc("Column heading for category in tax report", "Tax");
-      break;
-    case VAT:
-      headerLabels << i18nc("Column heading for VAT category", "VAT");
-      break;
-    case TotalBalance:
-      headerLabels << i18n("Total Balance");
-      break;
-    case TotalValue:
-      headerLabels << i18n("Total Value");
-      break;
-    default:
-      headerLabels << QString();
+      case Account:
+        headerLabels << i18n("Account");
+        break;
+      case Type:
+        headerLabels << i18n("Type");
+        break;
+      case Tax:
+        headerLabels << i18nc("Column heading for category in tax report", "Tax");
+        break;
+      case VAT:
+        headerLabels << i18nc("Column heading for VAT category", "VAT");
+        break;
+      case TotalBalance:
+        headerLabels << i18n("Total Balance");
+        break;
+      case TotalValue:
+        headerLabels << i18n("Total Value");
+        break;
+      default:
+        headerLabels << QString();
     }
   }
   setHorizontalHeaderLabels(headerLabels);

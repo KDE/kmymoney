@@ -97,21 +97,21 @@ void KBJobListViewItem::_populate()
 
   // job type
   switch (AB_Job_GetType(_job)) {
-  case AB_Job_TypeGetBalance:
-    tmp = i18n("Get Balance");
-    break;
-  case AB_Job_TypeGetTransactions:
-    tmp = i18n("Get Transactions");
-    break;
-  case AB_Job_TypeTransfer:
-    tmp = i18n("Transfer");
-    break;
-  case AB_Job_TypeDebitNote:
-    tmp = i18n("Debit Note");
-    break;
-  default:
-    tmp = i18n("(unknown)");
-    break;
+    case AB_Job_TypeGetBalance:
+      tmp = i18n("Get Balance");
+      break;
+    case AB_Job_TypeGetTransactions:
+      tmp = i18n("Get Transactions");
+      break;
+    case AB_Job_TypeTransfer:
+      tmp = i18n("Transfer");
+      break;
+    case AB_Job_TypeDebitNote:
+      tmp = i18n("Debit Note");
+      break;
+    default:
+      tmp = i18n("(unknown)");
+      break;
   }
   setText(i++, tmp);
 
@@ -133,30 +133,30 @@ void KBJobListViewItem::_populate()
 
   // status
   switch (AB_Job_GetStatus(_job)) {
-  case AB_Job_StatusNew:
-    tmp = i18n("new");
-    break;
-  case AB_Job_StatusUpdated:
-    tmp = i18n("updated");
-    break;
-  case AB_Job_StatusEnqueued:
-    tmp = i18n("enqueued");
-    break;
-  case AB_Job_StatusSent:
-    tmp = i18n("sent");
-    break;
-  case AB_Job_StatusPending:
-    tmp = i18n("pending");
-    break;
-  case AB_Job_StatusFinished:
-    tmp = i18n("finished");
-    break;
-  case AB_Job_StatusError:
-    tmp = i18n("error");
-    break;
-  default:
-    tmp = i18n("(unknown)");
-    break;
+    case AB_Job_StatusNew:
+      tmp = i18n("new");
+      break;
+    case AB_Job_StatusUpdated:
+      tmp = i18n("updated");
+      break;
+    case AB_Job_StatusEnqueued:
+      tmp = i18n("enqueued");
+      break;
+    case AB_Job_StatusSent:
+      tmp = i18n("sent");
+      break;
+    case AB_Job_StatusPending:
+      tmp = i18n("pending");
+      break;
+    case AB_Job_StatusFinished:
+      tmp = i18n("finished");
+      break;
+    case AB_Job_StatusError:
+      tmp = i18n("error");
+      break;
+    default:
+      tmp = i18n("(unknown)");
+      break;
   }
   setText(i++, tmp);
 

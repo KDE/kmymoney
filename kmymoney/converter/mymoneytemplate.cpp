@@ -177,30 +177,30 @@ void MyMoneyTemplate::hierarchy(QMap<QString, QTreeWidgetItem*>& list)
     if (childElement.tagName() == "account"
         && childElement.attribute("name").isEmpty()) {
       switch (childElement.attribute("type").toUInt()) {
-      case MyMoneyAccount::Asset:
-        list[i18n("Asset")] = 0;
-        rc = hierarchy(list, i18n("Asset"), childElement.firstChild());
-        break;
-      case MyMoneyAccount::Liability:
-        list[i18n("Liability")] = 0;
-        rc = hierarchy(list, i18n("Liability"), childElement.firstChild());
-        break;
-      case MyMoneyAccount::Income:
-        list[i18n("Income")] = 0;
-        rc = hierarchy(list, i18n("Income"), childElement.firstChild());
-        break;
-      case MyMoneyAccount::Expense:
-        list[i18n("Expense")] = 0;
-        rc = hierarchy(list, i18n("Expense"), childElement.firstChild());
-        break;
-      case MyMoneyAccount::Equity:
-        list[i18n("Equity")] = 0;
-        rc = hierarchy(list, i18n("Equity"), childElement.firstChild());
-        break;
+        case MyMoneyAccount::Asset:
+          list[i18n("Asset")] = 0;
+          rc = hierarchy(list, i18n("Asset"), childElement.firstChild());
+          break;
+        case MyMoneyAccount::Liability:
+          list[i18n("Liability")] = 0;
+          rc = hierarchy(list, i18n("Liability"), childElement.firstChild());
+          break;
+        case MyMoneyAccount::Income:
+          list[i18n("Income")] = 0;
+          rc = hierarchy(list, i18n("Income"), childElement.firstChild());
+          break;
+        case MyMoneyAccount::Expense:
+          list[i18n("Expense")] = 0;
+          rc = hierarchy(list, i18n("Expense"), childElement.firstChild());
+          break;
+        case MyMoneyAccount::Equity:
+          list[i18n("Equity")] = 0;
+          rc = hierarchy(list, i18n("Equity"), childElement.firstChild());
+          break;
 
-      default:
-        rc = false;
-        break;
+        default:
+          rc = false;
+          break;
       }
     } else {
       rc = false;
@@ -224,25 +224,25 @@ bool MyMoneyTemplate::importTemplate(void(*callback)(int, int, const QString&))
       ++m_accountsRead;
       MyMoneyAccount parent;
       switch (childElement.attribute("type").toUInt()) {
-      case MyMoneyAccount::Asset:
-        parent = file->asset();
-        break;
-      case MyMoneyAccount::Liability:
-        parent = file->liability();
-        break;
-      case MyMoneyAccount::Income:
-        parent = file->income();
-        break;
-      case MyMoneyAccount::Expense:
-        parent = file->expense();
-        break;
-      case MyMoneyAccount::Equity:
-        parent = file->equity();
-        break;
+        case MyMoneyAccount::Asset:
+          parent = file->asset();
+          break;
+        case MyMoneyAccount::Liability:
+          parent = file->liability();
+          break;
+        case MyMoneyAccount::Income:
+          parent = file->income();
+          break;
+        case MyMoneyAccount::Expense:
+          parent = file->expense();
+          break;
+        case MyMoneyAccount::Equity:
+          parent = file->equity();
+          break;
 
-      default:
-        KMessageBox::error(KMyMoneyUtils::mainWindow(), i18n("<p>Invalid top-level account type <b>%1</b> in template file <b>%2</b></p>", childElement.attribute("type"), m_source.prettyUrl()));
-        rc = false;
+        default:
+          KMessageBox::error(KMyMoneyUtils::mainWindow(), i18n("<p>Invalid top-level account type <b>%1</b> in template file <b>%2</b></p>", childElement.attribute("type"), m_source.prettyUrl()));
+          rc = false;
       }
 
       if (rc == true) {

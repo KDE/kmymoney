@@ -599,15 +599,15 @@ void AccountTypePage::setAccount(const MyMoneyAccount& acc)
 const MyMoneyAccount& AccountTypePage::parentAccount(void)
 {
   switch (accountType()) {
-  case MyMoneyAccount::CreditCard:
-  case MyMoneyAccount::Liability:
-  case MyMoneyAccount::Loan: // Can be either but we return liability here
-    return MyMoneyFile::instance()->liability();
-    break;
-  case MyMoneyAccount::Equity:
-    return MyMoneyFile::instance()->equity();
-  default:
-    break;
+    case MyMoneyAccount::CreditCard:
+    case MyMoneyAccount::Liability:
+    case MyMoneyAccount::Loan: // Can be either but we return liability here
+      return MyMoneyFile::instance()->liability();
+      break;
+    case MyMoneyAccount::Equity:
+      return MyMoneyFile::instance()->equity();
+    default:
+      break;
   }
   return MyMoneyFile::instance()->asset();
 }
@@ -868,19 +868,19 @@ void LoanDetailsPage::enterPage(void)
   }
 
   switch (m_wizard->m_generalLoanInfoPage->m_paymentFrequency->currentItem()) {
-  default:
-    m_termUnit->insertItem(i18n("Payments"), MyMoneySchedule::OCCUR_ONCE);
-    m_termUnit->setCurrentItem(MyMoneySchedule::OCCUR_ONCE);
-    break;
-  case MyMoneySchedule::OCCUR_MONTHLY:
-    m_termUnit->insertItem(i18n("Months"), MyMoneySchedule::OCCUR_MONTHLY);
-    m_termUnit->insertItem(i18n("Years"), MyMoneySchedule::OCCUR_YEARLY);
-    m_termUnit->setCurrentItem(MyMoneySchedule::OCCUR_MONTHLY);
-    break;
-  case MyMoneySchedule::OCCUR_YEARLY:
-    m_termUnit->insertItem(i18n("Years"), MyMoneySchedule::OCCUR_YEARLY);
-    m_termUnit->setCurrentItem(MyMoneySchedule::OCCUR_YEARLY);
-    break;
+    default:
+      m_termUnit->insertItem(i18n("Payments"), MyMoneySchedule::OCCUR_ONCE);
+      m_termUnit->setCurrentItem(MyMoneySchedule::OCCUR_ONCE);
+      break;
+    case MyMoneySchedule::OCCUR_MONTHLY:
+      m_termUnit->insertItem(i18n("Months"), MyMoneySchedule::OCCUR_MONTHLY);
+      m_termUnit->insertItem(i18n("Years"), MyMoneySchedule::OCCUR_YEARLY);
+      m_termUnit->setCurrentItem(MyMoneySchedule::OCCUR_MONTHLY);
+      break;
+    case MyMoneySchedule::OCCUR_YEARLY:
+      m_termUnit->insertItem(i18n("Years"), MyMoneySchedule::OCCUR_YEARLY);
+      m_termUnit->setCurrentItem(MyMoneySchedule::OCCUR_YEARLY);
+      break;
   }
 }
 
@@ -1071,25 +1071,25 @@ int LoanDetailsPage::term(void) const
   if (m_termAmount->value() != 0) {
     factor = 1;
     switch (m_termUnit->currentItem()) {
-    case MyMoneySchedule::OCCUR_YEARLY: // years
-      factor = 12;
-      // tricky fall through here
+      case MyMoneySchedule::OCCUR_YEARLY: // years
+        factor = 12;
+        // tricky fall through here
 
-    case MyMoneySchedule::OCCUR_MONTHLY: // months
-      factor *= 30;
-      factor *= m_termAmount->value();
-      // factor now is the duration in days. we divide this by the
-      // payment frequency and get the number of payments
-      factor /= m_wizard->m_generalLoanInfoPage->m_paymentFrequency->daysBetweenEvents();
-      break;
+      case MyMoneySchedule::OCCUR_MONTHLY: // months
+        factor *= 30;
+        factor *= m_termAmount->value();
+        // factor now is the duration in days. we divide this by the
+        // payment frequency and get the number of payments
+        factor /= m_wizard->m_generalLoanInfoPage->m_paymentFrequency->daysBetweenEvents();
+        break;
 
-    default:
-      qDebug("Unknown term unit %d in LoanDetailsPage::term(). Using payments.", m_termUnit->currentItem());
-      // tricky fall through here
+      default:
+        qDebug("Unknown term unit %d in LoanDetailsPage::term(). Using payments.", m_termUnit->currentItem());
+        // tricky fall through here
 
-    case MyMoneySchedule::OCCUR_ONCE: // payments
-      factor = m_termAmount->value();
-      break;
+      case MyMoneySchedule::OCCUR_ONCE: // payments
+        factor = m_termAmount->value();
+        break;
     }
   }
   return factor;
@@ -1109,18 +1109,18 @@ QString LoanDetailsPage::updateTermWidgets(const long double val)
   }
 
   switch (unit) {
-  case MyMoneySchedule::OCCUR_MONTHLY:
-    valString = i18np("one month", "%1 months", vl);
-    m_termUnit->setCurrentItem(MyMoneySchedule::OCCUR_MONTHLY);
-    break;
-  case MyMoneySchedule::OCCUR_YEARLY:
-    valString = i18np("one year", "%1 years", vl);
-    m_termUnit->setCurrentItem(MyMoneySchedule::OCCUR_YEARLY);
-    break;
-  default:
-    valString = i18np("one payment", "%1 payments", vl);
-    m_termUnit->setCurrentItem(MyMoneySchedule::OCCUR_ONCE);
-    break;
+    case MyMoneySchedule::OCCUR_MONTHLY:
+      valString = i18np("one month", "%1 months", vl);
+      m_termUnit->setCurrentItem(MyMoneySchedule::OCCUR_MONTHLY);
+      break;
+    case MyMoneySchedule::OCCUR_YEARLY:
+      valString = i18np("one year", "%1 years", vl);
+      m_termUnit->setCurrentItem(MyMoneySchedule::OCCUR_YEARLY);
+      break;
+    default:
+      valString = i18np("one payment", "%1 payments", vl);
+      m_termUnit->setCurrentItem(MyMoneySchedule::OCCUR_ONCE);
+      break;
   }
   m_termAmount->setValue(vl);
   return valString;

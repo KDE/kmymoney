@@ -43,15 +43,15 @@ void MyMoneyBudget::AccountGroup::convertToMonthly(void)
   MyMoneyBudget::PeriodGroup period;
 
   switch (m_budgetlevel) {
-  case eYearly:
-  case eMonthByMonth:
-    period = *(m_periods.begin());         // make him monthly
-    period.setAmount(balance() / MyMoneyMoney(12, 1));
-    clearPeriods();
-    addPeriod(period.startDate(), period);
-    break;
-  default:
-    break;
+    case eYearly:
+    case eMonthByMonth:
+      period = *(m_periods.begin());         // make him monthly
+      period.setAmount(balance() / MyMoneyMoney(12, 1));
+      clearPeriods();
+      addPeriod(period.startDate(), period);
+      break;
+    default:
+      break;
   }
   m_budgetlevel = eMonthly;
 }
@@ -61,15 +61,15 @@ void MyMoneyBudget::AccountGroup::convertToYearly(void)
   MyMoneyBudget::PeriodGroup period;
 
   switch (m_budgetlevel) {
-  case eMonthByMonth:
-  case eMonthly:
-    period = *(m_periods.begin());         // make him monthly
-    period.setAmount(totalBalance());
-    clearPeriods();
-    addPeriod(period.startDate(), period);
-    break;
-  default:
-    break;
+    case eMonthByMonth:
+    case eMonthly:
+      period = *(m_periods.begin());         // make him monthly
+      period.setAmount(totalBalance());
+      clearPeriods();
+      addPeriod(period.startDate(), period);
+      break;
+    default:
+      break;
   }
   m_budgetlevel = eYearly;
 }
@@ -80,20 +80,20 @@ void MyMoneyBudget::AccountGroup::convertToMonthByMonth(void)
   QDate date;
 
   switch (m_budgetlevel) {
-  case eMonthByMonth:
-  case eMonthly:
-    period = *(m_periods.begin());
-    period.setAmount(totalBalance() / MyMoneyMoney(12, 1));
-    clearPeriods();
-    date = period.startDate();
-    for (int i = 0; i < 12; ++i) {
-      addPeriod(date, period);
-      date = date.addMonths(1);
-      period.setStartDate(date);
-    }
-    break;
-  default:
-    break;
+    case eMonthByMonth:
+    case eMonthly:
+      period = *(m_periods.begin());
+      period.setAmount(totalBalance() / MyMoneyMoney(12, 1));
+      clearPeriods();
+      date = period.startDate();
+      for (int i = 0; i < 12; ++i) {
+        addPeriod(date, period);
+        date = date.addMonths(1);
+        period.setStartDate(date);
+      }
+      break;
+    default:
+      break;
   }
   m_budgetlevel = eYearly;
 }

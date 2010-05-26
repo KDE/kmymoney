@@ -179,17 +179,17 @@ KMyMoneyAccountTreeForecastItem::KMyMoneyAccountTreeForecastItem(KMyMoneyAccount
   //setForecastViewType(forecastViewType);
   updateAccount(true);
   switch (forecastViewType()) {
-  case eSummary:
-    updateSummary();
-    break;
-  case eDetailed:
-    updateDetailed();
-    break;
-  case eBudget:
-    updateBudget();
-    break;
-  default:
-    break;
+    case eSummary:
+      updateSummary();
+      break;
+    case eDetailed:
+      updateDetailed();
+      break;
+    case eBudget:
+      updateBudget();
+      break;
+    default:
+      break;
   }
 }
 

@@ -208,17 +208,17 @@ void KEndingBalanceDlg::slotUpdateBalances(void)
       startBalance -= split.shares() * factor;
     } else {
       switch (split.reconcileFlag()) {
-      case MyMoneySplit::NotReconciled:
-        tracer.printf("Reducing balances by %s because %s/%s(%s) is not reconciled", qPrintable((split.shares() * factor).formatMoney("", 2)), qPrintable((*it).first.id()), qPrintable(split.id()), qPrintable((*it).first.postDate().toString(Qt::ISODate)));
-        endBalance -= split.shares() * factor;
-        startBalance -= split.shares() * factor;
-        break;
-      case MyMoneySplit::Cleared:
-        tracer.printf("Reducing start balance by %s because %s/%s(%s) is cleared", qPrintable((split.shares() * factor).formatMoney("", 2)), qPrintable((*it).first.id()), qPrintable(split.id()), qPrintable((*it).first.postDate().toString(Qt::ISODate)));
-        startBalance -= split.shares() * factor;
-        break;
-      default:
-        break;
+        case MyMoneySplit::NotReconciled:
+          tracer.printf("Reducing balances by %s because %s/%s(%s) is not reconciled", qPrintable((split.shares() * factor).formatMoney("", 2)), qPrintable((*it).first.id()), qPrintable(split.id()), qPrintable((*it).first.postDate().toString(Qt::ISODate)));
+          endBalance -= split.shares() * factor;
+          startBalance -= split.shares() * factor;
+          break;
+        case MyMoneySplit::Cleared:
+          tracer.printf("Reducing start balance by %s because %s/%s(%s) is cleared", qPrintable((split.shares() * factor).formatMoney("", 2)), qPrintable((*it).first.id()), qPrintable(split.id()), qPrintable((*it).first.postDate().toString(Qt::ISODate)));
+          startBalance -= split.shares() * factor;
+          break;
+        default:
+          break;
       }
     }
   }

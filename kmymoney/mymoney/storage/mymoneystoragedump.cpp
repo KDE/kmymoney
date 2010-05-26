@@ -416,21 +416,21 @@ const QString MyMoneyStorageDump::reconcileToString(MyMoneySplit::reconcileFlagE
   QString rc;
 
   switch (flag) {
-  case MyMoneySplit::NotReconciled:
-    rc = i18nc("Reconciliation status 'Not Reconciled'", "not reconciled");
-    break;
-  case MyMoneySplit::Cleared:
-    rc = i18nc("Reconciliation status 'Cleared'", "cleared");
-    break;
-  case MyMoneySplit::Reconciled:
-    rc = i18nc("Reconciliation status 'Reconciled'", "reconciled");
-    break;
-  case MyMoneySplit::Frozen:
-    rc = i18nc("Reconciliation status 'Frozen'", "frozen");
-    break;
-  default:
-    rc = i18nc("Reconciliation status unknown", "unknown");
-    break;
+    case MyMoneySplit::NotReconciled:
+      rc = i18nc("Reconciliation status 'Not Reconciled'", "not reconciled");
+      break;
+    case MyMoneySplit::Cleared:
+      rc = i18nc("Reconciliation status 'Cleared'", "cleared");
+      break;
+    case MyMoneySplit::Reconciled:
+      rc = i18nc("Reconciliation status 'Reconciled'", "reconciled");
+      break;
+    case MyMoneySplit::Frozen:
+      rc = i18nc("Reconciliation status 'Frozen'", "frozen");
+      break;
+    default:
+      rc = i18nc("Reconciliation status unknown", "unknown");
+      break;
   }
   return rc;
 }

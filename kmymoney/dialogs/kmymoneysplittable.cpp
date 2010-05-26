@@ -156,158 +156,158 @@ bool kMyMoneySplitTable::eventFilter(QObject *o, QEvent *e)
   if (e->type() == QEvent::KeyPress && !isEditMode()) {
     rc = true;
     switch (k->key()) {
-    case Qt::Key_Up:
-      if (row)
-        slotSetFocus(model()->index(row - 1, 0));
-      break;
+      case Qt::Key_Up:
+        if (row)
+          slotSetFocus(model()->index(row - 1, 0));
+        break;
 
-    case Qt::Key_Down:
-      if (row < m_transaction.splits().count() - 1)
-        slotSetFocus(model()->index(row + 1, 0));
-      break;
+      case Qt::Key_Down:
+        if (row < m_transaction.splits().count() - 1)
+          slotSetFocus(model()->index(row + 1, 0));
+        break;
 
-    case Qt::Key_Home:
-      slotSetFocus(model()->index(0, 0));
-      break;
+      case Qt::Key_Home:
+        slotSetFocus(model()->index(0, 0));
+        break;
 
-    case Qt::Key_End:
-      slotSetFocus(model()->index(m_transaction.splits().count() - 1, 0));
-      break;
-
-    case Qt::Key_PageUp:
-      if (lines) {
-        while (lines-- > 0 && row)
-          --row;
-        slotSetFocus(model()->index(row, 0));
-      }
-      break;
-
-    case Qt::Key_PageDown:
-      if (row < m_transaction.splits().count() - 1) {
-        while (lines-- > 0 && row < m_transaction.splits().count() - 1)
-          ++row;
-        slotSetFocus(model()->index(row, 0));
-      }
-      break;
-
-    case Qt::Key_Delete:
-      slotDeleteSplit();
-      break;
-
-    case Qt::Key_Return:
-    case Qt::Key_Enter:
-      if (row < m_transaction.splits().count() - 1
-          && KMyMoneyGlobalSettings::enterMovesBetweenFields()) {
-        slotStartEdit();
-      } else
-        emit returnPressed();
-      break;
-
-    case Qt::Key_Escape:
-      emit escapePressed();
-      break;
-
-    case Qt::Key_F2:
-      slotStartEdit();
-      break;
-
-    default:
-      rc = true;
-
-      // duplicate split
-      if (Qt::Key_C == k->key() && Qt::ControlModifier == k->modifiers()) {
-        slotDuplicateSplit();
-
-        // new split
-      } else if (Qt::Key_Insert == k->key() && Qt::ControlModifier == k->modifiers()) {
+      case Qt::Key_End:
         slotSetFocus(model()->index(m_transaction.splits().count() - 1, 0));
-        slotStartEdit();
+        break;
 
-      } else if (k->text()[ 0 ].isPrint()) {
-        w = slotStartEdit();
-        // make sure, the widget receives the key again
-        QApplication::sendEvent(w, e);
-      }
-      break;
+      case Qt::Key_PageUp:
+        if (lines) {
+          while (lines-- > 0 && row)
+            --row;
+          slotSetFocus(model()->index(row, 0));
+        }
+        break;
+
+      case Qt::Key_PageDown:
+        if (row < m_transaction.splits().count() - 1) {
+          while (lines-- > 0 && row < m_transaction.splits().count() - 1)
+            ++row;
+          slotSetFocus(model()->index(row, 0));
+        }
+        break;
+
+      case Qt::Key_Delete:
+        slotDeleteSplit();
+        break;
+
+      case Qt::Key_Return:
+      case Qt::Key_Enter:
+        if (row < m_transaction.splits().count() - 1
+            && KMyMoneyGlobalSettings::enterMovesBetweenFields()) {
+          slotStartEdit();
+        } else
+          emit returnPressed();
+        break;
+
+      case Qt::Key_Escape:
+        emit escapePressed();
+        break;
+
+      case Qt::Key_F2:
+        slotStartEdit();
+        break;
+
+      default:
+        rc = true;
+
+        // duplicate split
+        if (Qt::Key_C == k->key() && Qt::ControlModifier == k->modifiers()) {
+          slotDuplicateSplit();
+
+          // new split
+        } else if (Qt::Key_Insert == k->key() && Qt::ControlModifier == k->modifiers()) {
+          slotSetFocus(model()->index(m_transaction.splits().count() - 1, 0));
+          slotStartEdit();
+
+        } else if (k->text()[ 0 ].isPrint()) {
+          w = slotStartEdit();
+          // make sure, the widget receives the key again
+          QApplication::sendEvent(w, e);
+        }
+        break;
     }
 
   } else if (e->type() == QEvent::KeyPress && isEditMode()) {
     bool terminate = true;
     rc = true;
     switch (k->key()) {
-      // suppress the F2 functionality to start editing in inline edit mode
-    case Qt::Key_F2:
-      // suppress the cursor movement in inline edit mode
-    case Qt::Key_Up:
-    case Qt::Key_Down:
-    case Qt::Key_PageUp:
-    case Qt::Key_PageDown:
-      break;
+        // suppress the F2 functionality to start editing in inline edit mode
+      case Qt::Key_F2:
+        // suppress the cursor movement in inline edit mode
+      case Qt::Key_Up:
+      case Qt::Key_Down:
+      case Qt::Key_PageUp:
+      case Qt::Key_PageDown:
+        break;
 
-    case Qt::Key_Return:
-    case Qt::Key_Enter:
-      // we cannot call the slot directly, as it destroys the caller of
-      // this method :-(  So we let the event handler take care of calling
-      // the respective slot using a timeout. For a KLineEdit derived object
-      // it could be, that at this point the user selected a value from
-      // a completion list. In this case, we close the completion list and
-      // do not end editing of the transaction.
-      if (o->inherits("KLineEdit")) {
-        KLineEdit* le = dynamic_cast<KLineEdit*>(o);
-        KCompletionBox* box = le->completionBox(false);
-        if (box && box->isVisible()) {
-          terminate = false;
-          le->completionBox(false)->hide();
+      case Qt::Key_Return:
+      case Qt::Key_Enter:
+        // we cannot call the slot directly, as it destroys the caller of
+        // this method :-(  So we let the event handler take care of calling
+        // the respective slot using a timeout. For a KLineEdit derived object
+        // it could be, that at this point the user selected a value from
+        // a completion list. In this case, we close the completion list and
+        // do not end editing of the transaction.
+        if (o->inherits("KLineEdit")) {
+          KLineEdit* le = dynamic_cast<KLineEdit*>(o);
+          KCompletionBox* box = le->completionBox(false);
+          if (box && box->isVisible()) {
+            terminate = false;
+            le->completionBox(false)->hide();
+          }
         }
-      }
 
-      // in case we have the 'enter moves focus between fields', we need to simulate
-      // a TAB key when the object 'o' points to the category or memo field.
-      if (KMyMoneyGlobalSettings::enterMovesBetweenFields()) {
-        if (o == m_editCategory->lineEdit() || o == m_editMemo) {
-          terminate = false;
-          QKeyEvent evt(e->type(),
-                        Qt::Key_Tab, k->modifiers(), QString(),
-                        k->isAutoRepeat(), k->count());
+        // in case we have the 'enter moves focus between fields', we need to simulate
+        // a TAB key when the object 'o' points to the category or memo field.
+        if (KMyMoneyGlobalSettings::enterMovesBetweenFields()) {
+          if (o == m_editCategory->lineEdit() || o == m_editMemo) {
+            terminate = false;
+            QKeyEvent evt(e->type(),
+                          Qt::Key_Tab, k->modifiers(), QString(),
+                          k->isAutoRepeat(), k->count());
 
-          QApplication::sendEvent(o, &evt);
+            QApplication::sendEvent(o, &evt);
+          }
         }
-      }
 
-      if (terminate) {
-        QTimer::singleShot(0, this, SLOT(slotEndEditKeyboard()));
-      }
-      break;
+        if (terminate) {
+          QTimer::singleShot(0, this, SLOT(slotEndEditKeyboard()));
+        }
+        break;
 
-    case Qt::Key_Escape:
-      // we cannot call the slot directly, as it destroys the caller of
-      // this method :-(  So we let the event handler take care of calling
-      // the respective slot using a timeout.
-      QTimer::singleShot(0, this, SLOT(slotCancelEdit()));
-      break;
+      case Qt::Key_Escape:
+        // we cannot call the slot directly, as it destroys the caller of
+        // this method :-(  So we let the event handler take care of calling
+        // the respective slot using a timeout.
+        QTimer::singleShot(0, this, SLOT(slotCancelEdit()));
+        break;
 
-    default:
-      rc = false;
-      break;
+      default:
+        rc = false;
+        break;
     }
   } else if (e->type() == QEvent::KeyRelease && !isEditMode()) {
     // for some reason, we only see a KeyRelease event of the Menu key
     // here. In other locations (e.g. Register::eventFilter()) we see
     // a KeyPress event. Strange. (ipwizard - 2008-05-10)
     switch (k->key()) {
-    case Qt::Key_Menu:
-      // if the very last entry is selected, the delete
-      // operation is not available otherwise it is
-      m_contextMenuDelete->setEnabled(
-        row < m_transaction.splits().count() - 1);
-      m_contextMenuDuplicate->setEnabled(
-        row < m_transaction.splits().count() - 1);
+      case Qt::Key_Menu:
+        // if the very last entry is selected, the delete
+        // operation is not available otherwise it is
+        m_contextMenuDelete->setEnabled(
+          row < m_transaction.splits().count() - 1);
+        m_contextMenuDuplicate->setEnabled(
+          row < m_transaction.splits().count() - 1);
 
-      m_contextMenu->exec(QCursor::pos());
-      rc = true;
-      break;
-    default:
-      break;
+        m_contextMenu->exec(QCursor::pos());
+        rc = true;
+        break;
+      default:
+        break;
     }
   }
 
@@ -389,16 +389,16 @@ void kMyMoneySplitTable::mouseDoubleClickEvent(QMouseEvent *e)
 
   KLineEdit* editWidget = 0;
   switch (col) {
-  case 1:
-    editWidget = m_editMemo;
-    break;
+    case 1:
+      editWidget = m_editMemo;
+      break;
 
-  case 2:
-    editWidget = dynamic_cast<KLineEdit*>(m_editAmount->focusWidget());
-    break;
+    case 2:
+      editWidget = dynamic_cast<KLineEdit*>(m_editAmount->focusWidget());
+      break;
 
-  default:
-    break;
+    default:
+      break;
   }
   if (editWidget) {
     editWidget->setFocus();

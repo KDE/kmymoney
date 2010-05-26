@@ -144,52 +144,52 @@ int MyMoneyStorageSql::open(const KUrl& url, int openMode, bool clear)
     setUserName(url.user());
     setPassword(url.pass());
     switch (openMode) {
-    case QIODevice::ReadOnly:    // OpenDatabase menu entry (or open last file)
-    case QIODevice::ReadWrite:   // Save menu entry with database open
-      // this may be a sqlite file opened from the recently used list
-      // but which no longer exists. In that case, open will work but create an empty file.
-      // This is not what the user's after; he may accuse KMM of deleting all his data!
-      if (m_driver->isSqlite3()) {
-        if (!sqliteExists(dbName)) {
-          rc = 1;
-          break;
+      case QIODevice::ReadOnly:    // OpenDatabase menu entry (or open last file)
+      case QIODevice::ReadWrite:   // Save menu entry with database open
+        // this may be a sqlite file opened from the recently used list
+        // but which no longer exists. In that case, open will work but create an empty file.
+        // This is not what the user's after; he may accuse KMM of deleting all his data!
+        if (m_driver->isSqlite3()) {
+          if (!sqliteExists(dbName)) {
+            rc = 1;
+            break;
+          }
         }
-      }
-      if (!QSqlDatabase::open()) {
-        buildError(MyMoneySqlQuery(this), Q_FUNC_INFO, "opening database");
-        rc = 1;
-      } else {
-        rc = createTables(); // check all tables are present, create if not (we may add tables at some time)
-      }
-      break;
-    case QIODevice::WriteOnly:   // SaveAs Database - if exists, must be empty, if not will create
-      // Try to open the database.
-      // If that fails, try to create the database, then try to open it again.
-      m_newDatabase = true;
-      if (!QSqlDatabase::open()) {
-        if (!createDatabase(url)) {
+        if (!QSqlDatabase::open()) {
+          buildError(MyMoneySqlQuery(this), Q_FUNC_INFO, "opening database");
           rc = 1;
         } else {
-          if (!QSqlDatabase::open()) {
-            buildError(MyMoneySqlQuery(this), Q_FUNC_INFO, "opening new database");
+          rc = createTables(); // check all tables are present, create if not (we may add tables at some time)
+        }
+        break;
+      case QIODevice::WriteOnly:   // SaveAs Database - if exists, must be empty, if not will create
+        // Try to open the database.
+        // If that fails, try to create the database, then try to open it again.
+        m_newDatabase = true;
+        if (!QSqlDatabase::open()) {
+          if (!createDatabase(url)) {
             rc = 1;
           } else {
-            rc = createTables();
+            if (!QSqlDatabase::open()) {
+              buildError(MyMoneySqlQuery(this), Q_FUNC_INFO, "opening new database");
+              rc = 1;
+            } else {
+              rc = createTables();
+            }
+          }
+        } else {
+          rc = createTables();
+          if (rc == 0) {
+            if (clear) {
+              clean();
+            } else {
+              rc = isEmpty();
+            }
           }
         }
-      } else {
-        rc = createTables();
-        if (rc == 0) {
-          if (clear) {
-            clean();
-          } else {
-            rc = isEmpty();
-          }
-        }
-      }
-      break;
-    default:
-      qFatal("%s", qPrintable(QString("%1 - unknown open mode %2").arg(Q_FUNC_INFO).arg(openMode)));
+        break;
+      default:
+        qFatal("%s", qPrintable(QString("%1 - unknown open mode %2").arg(Q_FUNC_INFO).arg(openMode)));
     }
     if (rc != 0) return (rc);
     // bypass logon check if we are creating a database
@@ -319,34 +319,34 @@ int MyMoneyStorageSql::upgradeDb()
   int rc = 0;
   while ((m_dbVersion < m_db.currentVersion()) && (rc == 0)) {
     switch (m_dbVersion) {
-    case 0:
-      if ((rc = upgradeToV1()) != 0) return (1);
-      ++m_dbVersion;
-      break;
-    case 1:
-      if ((rc = upgradeToV2()) != 0) return (1);
-      ++m_dbVersion;
-      break;
-    case 2:
-      if ((rc = upgradeToV3()) != 0) return (1);
-      ++m_dbVersion;
-      break;
-    case 3:
-      if ((rc = upgradeToV4()) != 0) return (1);
-      ++m_dbVersion;
-      break;
-    case 4:
-      if ((rc = upgradeToV5()) != 0) return (1);
-      ++m_dbVersion;
-      break;
-    case 5:
-      if ((rc = upgradeToV6()) != 0) return (1);
-      ++m_dbVersion;
-      break;
-    case 6:
-      break;
-    default:
-      qFatal("Unknown version number in database - %d", m_dbVersion);
+      case 0:
+        if ((rc = upgradeToV1()) != 0) return (1);
+        ++m_dbVersion;
+        break;
+      case 1:
+        if ((rc = upgradeToV2()) != 0) return (1);
+        ++m_dbVersion;
+        break;
+      case 2:
+        if ((rc = upgradeToV3()) != 0) return (1);
+        ++m_dbVersion;
+        break;
+      case 3:
+        if ((rc = upgradeToV4()) != 0) return (1);
+        ++m_dbVersion;
+        break;
+      case 4:
+        if ((rc = upgradeToV5()) != 0) return (1);
+        ++m_dbVersion;
+        break;
+      case 5:
+        if ((rc = upgradeToV6()) != 0) return (1);
+        ++m_dbVersion;
+        break;
+      case 6:
+        break;
+      default:
+        qFatal("Unknown version number in database - %d", m_dbVersion);
     }
   }
   // write updated version to DB
@@ -3101,21 +3101,21 @@ int MyMoneyStorageSql::splitState(const MyMoneyTransactionFilter::stateOptionE& 
   int rc = MyMoneySplit::NotReconciled;
 
   switch (state) {
-  default:
-  case MyMoneyTransactionFilter::notReconciled:
-    break;
+    default:
+    case MyMoneyTransactionFilter::notReconciled:
+      break;
 
-  case MyMoneyTransactionFilter::cleared:
-    rc = MyMoneySplit::Cleared;
-    break;
+    case MyMoneyTransactionFilter::cleared:
+      rc = MyMoneySplit::Cleared;
+      break;
 
-  case MyMoneyTransactionFilter::reconciled:
-    rc = MyMoneySplit::Reconciled;
-    break;
+    case MyMoneyTransactionFilter::reconciled:
+      rc = MyMoneySplit::Reconciled;
+      break;
 
-  case MyMoneyTransactionFilter::frozen:
-    rc = MyMoneySplit::Frozen;
-    break;
+    case MyMoneyTransactionFilter::frozen:
+      rc = MyMoneySplit::Frozen;
+      break;
   }
   return rc;
 }

@@ -942,24 +942,24 @@ void MyMoneyScheduleTest::testAdjustedNextDueDate()
 
     s.setWeekendOption(MyMoneySchedule::MoveBefore);
     switch (i) {
-    case 5: // Saturday
-    case 6: // Sunday
-      CPPUNIT_ASSERT(s.adjustedNextDueDate() == QDate(2007, 9, 7));
-      break;
-    default:
-      CPPUNIT_ASSERT(s.adjustedNextDueDate() == dueDate);
-      break;
+      case 5: // Saturday
+      case 6: // Sunday
+        CPPUNIT_ASSERT(s.adjustedNextDueDate() == QDate(2007, 9, 7));
+        break;
+      default:
+        CPPUNIT_ASSERT(s.adjustedNextDueDate() == dueDate);
+        break;
     }
 
     s.setWeekendOption(MyMoneySchedule::MoveAfter);
     switch (i) {
-    case 5: // Saturday
-    case 6: // Sunday
-      CPPUNIT_ASSERT(s.adjustedNextDueDate() == QDate(2007, 9, 10));
-      break;
-    default:
-      CPPUNIT_ASSERT(s.adjustedNextDueDate() == dueDate);
-      break;
+      case 5: // Saturday
+      case 6: // Sunday
+        CPPUNIT_ASSERT(s.adjustedNextDueDate() == QDate(2007, 9, 10));
+        break;
+      default:
+        CPPUNIT_ASSERT(s.adjustedNextDueDate() == dueDate);
+        break;
     }
     dueDate = dueDate.addDays(1);
   }

@@ -91,23 +91,23 @@ int KMyMoneyPriceItem::compare(Q3ListViewItem* i, int col, bool ascending) const
   int rc = 0;
 
   switch (col) {
-  case DATE_COL:   // date
-    if (m_pr.date() > item->m_pr.date())
-      rc = 1;
-    else if (m_pr.date() < item->m_pr.date())
-      rc = -1;
-    break;
+    case DATE_COL:   // date
+      if (m_pr.date() > item->m_pr.date())
+        rc = 1;
+      else if (m_pr.date() < item->m_pr.date())
+        rc = -1;
+      break;
 
-  case PRICE_COL:   // value
-    if (m_pr.rate(QString()) > item->m_pr.rate(QString()))
-      rc = 1;
-    else if (m_pr.rate(QString()) < item->m_pr.rate(QString()))
-      rc = -1;
-    break;
+    case PRICE_COL:   // value
+      if (m_pr.rate(QString()) > item->m_pr.rate(QString()))
+        rc = 1;
+      else if (m_pr.rate(QString()) < item->m_pr.rate(QString()))
+        rc = -1;
+      break;
 
-  default:
-    rc = Q3ListViewItem::compare(i, col, ascending);
-    break;
+    default:
+      rc = Q3ListViewItem::compare(i, col, ascending);
+      break;
   }
   return rc;
 }

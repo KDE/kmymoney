@@ -117,29 +117,29 @@ void InvestTransactionEditor::activityFactory(MyMoneySplit::investTransactionTyp
   if (!d->m_activity || type != d->m_activity->type()) {
     delete d->m_activity;
     switch (type) {
-    default:
-    case MyMoneySplit::BuyShares:
-      d->m_activity = new Buy(this);
-      break;
-    case MyMoneySplit::SellShares:
-      d->m_activity = new Sell(this);
-      break;
-    case MyMoneySplit::Dividend:
-    case MyMoneySplit::Yield:
-      d->m_activity = new Div(this);
-      break;
-    case MyMoneySplit::ReinvestDividend:
-      d->m_activity = new Reinvest(this);
-      break;
-    case MyMoneySplit::AddShares:
-      d->m_activity = new Add(this);
-      break;
-    case MyMoneySplit::RemoveShares:
-      d->m_activity = new Remove(this);
-      break;
-    case MyMoneySplit::SplitShares:
-      d->m_activity = new Split(this);
-      break;
+      default:
+      case MyMoneySplit::BuyShares:
+        d->m_activity = new Buy(this);
+        break;
+      case MyMoneySplit::SellShares:
+        d->m_activity = new Sell(this);
+        break;
+      case MyMoneySplit::Dividend:
+      case MyMoneySplit::Yield:
+        d->m_activity = new Div(this);
+        break;
+      case MyMoneySplit::ReinvestDividend:
+        d->m_activity = new Reinvest(this);
+        break;
+      case MyMoneySplit::AddShares:
+        d->m_activity = new Add(this);
+        break;
+      case MyMoneySplit::RemoveShares:
+        d->m_activity = new Remove(this);
+        break;
+      case MyMoneySplit::SplitShares:
+        d->m_activity = new Split(this);
+        break;
     }
   }
 }
@@ -766,12 +766,12 @@ void InvestTransactionEditor::totalAmount(MyMoneyMoney& amount) const
     MyMoneyMoney fee = feesEdit->value();
     MyMoneyMoney factor(-1, 1);
     switch (activityCombo->activity()) {
-    case MyMoneySplit::BuyShares:
-    case MyMoneySplit::ReinvestDividend:
-      factor = MyMoneyMoney(1, 1);
-      break;
-    default:
-      break;
+      case MyMoneySplit::BuyShares:
+      case MyMoneySplit::ReinvestDividend:
+        factor = MyMoneyMoney(1, 1);
+        break;
+      default:
+        break;
     }
     amount += (fee * factor);
   }
@@ -780,11 +780,11 @@ void InvestTransactionEditor::totalAmount(MyMoneyMoney& amount) const
     MyMoneyMoney interest = interestEdit->value();
     MyMoneyMoney factor(1, 1);
     switch (activityCombo->activity()) {
-    case MyMoneySplit::BuyShares:
-      factor = MyMoneyMoney(-1, 1);
-      break;
-    default:
-      break;
+      case MyMoneySplit::BuyShares:
+        factor = MyMoneyMoney(-1, 1);
+        break;
+      default:
+        break;
     }
     amount += (interest * factor);
   }

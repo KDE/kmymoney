@@ -101,15 +101,15 @@ void KOnlineBankingSetupWizard::next(void)
   bool ok = true;
 
   switch (indexOf(currentPage())) {
-  case 0:
-    ok = finishFiPage();
-    break;
-  case 1:
-    ok = finishLoginPage();
-    break;
-  case 2:
-    m_fDone = ok = finishAccountPage();
-    break;
+    case 0:
+      ok = finishFiPage();
+      break;
+    case 1:
+      ok = finishLoginPage();
+      break;
+    case 2:
+      m_fDone = ok = finishAccountPage();
+      break;
   }
 
   if (ok)
@@ -285,29 +285,29 @@ int KOnlineBankingSetupWizard::ofxAccountCallback(struct OfxAccountData data, vo
   if (data.account_type_valid) {
     QString type;
     switch (data.account_type) {
-    case OfxAccountData::OFX_CHECKING:  /**< A standard checking account */
-      type = "CHECKING";
-      break;
-    case OfxAccountData::OFX_SAVINGS:   /**< A standard savings account */
-      type = "SAVINGS";
-      break;
-    case OfxAccountData::OFX_MONEYMRKT: /**< A money market account */
-      type = "MONEY MARKET";
-      break;
-    case OfxAccountData::OFX_CREDITLINE: /**< A line of credit */
-      type = "CREDIT LINE";
-      break;
-    case OfxAccountData::OFX_CMA:       /**< Cash Management Account */
-      type = "CMA";
-      break;
-    case OfxAccountData::OFX_CREDITCARD: /**< A credit card account */
-      type = "CREDIT CARD";
-      break;
-    case OfxAccountData::OFX_INVESTMENT: /**< An investment account */
-      type = "INVESTMENT";
-      break;
-    default:
-      break;
+      case OfxAccountData::OFX_CHECKING:  /**< A standard checking account */
+        type = "CHECKING";
+        break;
+      case OfxAccountData::OFX_SAVINGS:   /**< A standard savings account */
+        type = "SAVINGS";
+        break;
+      case OfxAccountData::OFX_MONEYMRKT: /**< A money market account */
+        type = "MONEY MARKET";
+        break;
+      case OfxAccountData::OFX_CREDITLINE: /**< A line of credit */
+        type = "CREDIT LINE";
+        break;
+      case OfxAccountData::OFX_CMA:       /**< Cash Management Account */
+        type = "CMA";
+        break;
+      case OfxAccountData::OFX_CREDITCARD: /**< A credit card account */
+        type = "CREDIT CARD";
+        break;
+      case OfxAccountData::OFX_INVESTMENT: /**< An investment account */
+        type = "INVESTMENT";
+        break;
+      default:
+        break;
     }
     kvps.setValue("type", type);
   }
@@ -373,16 +373,16 @@ int KOnlineBankingSetupWizard::ofxStatusCallback(struct OfxStatusData data, void
 
   if (data.severity_valid == true) {
     switch (data.severity) {
-    case OfxStatusData::INFO :
-      break;
-    case OfxStatusData::WARN :
-      KMessageBox::detailedError(pthis, i18n("Your bank returned warnings when signing on"), i18nc("Warning 'message'", "WARNING %1", message));
-      break;
-    case OfxStatusData::ERROR :
-      KMessageBox::detailedError(pthis, i18n("Error signing onto your bank"), i18n("ERROR %1", message));
-      break;
-    default:
-      break;
+      case OfxStatusData::INFO :
+        break;
+      case OfxStatusData::WARN :
+        KMessageBox::detailedError(pthis, i18n("Your bank returned warnings when signing on"), i18nc("Warning 'message'", "WARNING %1", message));
+        break;
+      case OfxStatusData::ERROR :
+        KMessageBox::detailedError(pthis, i18n("Error signing onto your bank"), i18n("ERROR %1", message));
+        break;
+      default:
+        break;
     }
   }
   return 0;

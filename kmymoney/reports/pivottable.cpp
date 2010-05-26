@@ -876,66 +876,66 @@ void PivotTable::calculateBudgetMapping(void)
 
         // based on the kind of budget it is, deal accordingly
         switch ((*it_bacc).budgetLevel()) {
-        case MyMoneyBudget::AccountGroup::eYearly:
-          // divide the single yearly value by 12 and place it in each column
-          value /= MyMoneyMoney(12, 1);
-        case MyMoneyBudget::AccountGroup::eNone:
-        case MyMoneyBudget::AccountGroup::eMax:
-        case MyMoneyBudget::AccountGroup::eMonthly:
-          // place the single monthly value in each column of the report
-          // only add the value if columns are monthly or longer
-          if (m_config_f.columnType() == MyMoneyReport::eBiMonths
-              || m_config_f.columnType() == MyMoneyReport::eMonths
-              || m_config_f.columnType() == MyMoneyReport::eYears
-              || m_config_f.columnType() == MyMoneyReport::eQuarters) {
-            QDate budgetDate = budget.budgetStart();
-            while (column < m_numColumns && budget.budgetStart().addYears(1) > budgetDate) {
-              //only show budget values if the budget year and the column date match
-              //no currency conversion is done here because that is done for all columns later
-              if (budgetDate > columnDate(column)) {
-                ++column;
-              } else {
-                if (budgetDate >= m_beginDate.addDays(-m_beginDate.day() + 1)
-                    && budgetDate <= m_endDate.addDays(m_endDate.daysInMonth() - m_endDate.day())
-                    && budgetDate > (columnDate(column).addMonths(-m_config_f.columnType()))) {
-                  assignCell(outergroup, splitAccount, column, value, true /*budget*/);
+          case MyMoneyBudget::AccountGroup::eYearly:
+            // divide the single yearly value by 12 and place it in each column
+            value /= MyMoneyMoney(12, 1);
+          case MyMoneyBudget::AccountGroup::eNone:
+          case MyMoneyBudget::AccountGroup::eMax:
+          case MyMoneyBudget::AccountGroup::eMonthly:
+            // place the single monthly value in each column of the report
+            // only add the value if columns are monthly or longer
+            if (m_config_f.columnType() == MyMoneyReport::eBiMonths
+                || m_config_f.columnType() == MyMoneyReport::eMonths
+                || m_config_f.columnType() == MyMoneyReport::eYears
+                || m_config_f.columnType() == MyMoneyReport::eQuarters) {
+              QDate budgetDate = budget.budgetStart();
+              while (column < m_numColumns && budget.budgetStart().addYears(1) > budgetDate) {
+                //only show budget values if the budget year and the column date match
+                //no currency conversion is done here because that is done for all columns later
+                if (budgetDate > columnDate(column)) {
+                  ++column;
+                } else {
+                  if (budgetDate >= m_beginDate.addDays(-m_beginDate.day() + 1)
+                      && budgetDate <= m_endDate.addDays(m_endDate.daysInMonth() - m_endDate.day())
+                      && budgetDate > (columnDate(column).addMonths(-m_config_f.columnType()))) {
+                    assignCell(outergroup, splitAccount, column, value, true /*budget*/);
+                  }
+                  budgetDate = budgetDate.addMonths(1);
                 }
-                budgetDate = budgetDate.addMonths(1);
               }
             }
-          }
-          break;
-        case MyMoneyBudget::AccountGroup::eMonthByMonth:
-          // place each value in the appropriate column
-          // budget periods are supposed to come in order just like columns
-        {
-          QMap<QDate, MyMoneyBudget::PeriodGroup>::const_iterator it_period = periods.begin();
-          while (it_period != periods.end() && column < m_numColumns) {
-            if ((*it_period).startDate() > columnDate(column)) {
-              ++column;
-            } else {
-              switch (m_config_f.columnType()) {
-              case MyMoneyReport::eYears:
-              case MyMoneyReport::eBiMonths:
-              case MyMoneyReport::eQuarters:
-              case MyMoneyReport::eMonths: {
-                if ((*it_period).startDate() >= m_beginDate.addDays(-m_beginDate.day() + 1)
-                    && (*it_period).startDate() <= m_endDate.addDays(m_endDate.daysInMonth() - m_endDate.day())
-                    && (*it_period).startDate() > (columnDate(column).addMonths(-m_config_f.columnType()))) {
-                  //no currency conversion is done here because that is done for all columns later
-                  value = (*it_period).amount() * reverse;
-                  assignCell(outergroup, splitAccount, column, value, true /*budget*/);
+            break;
+          case MyMoneyBudget::AccountGroup::eMonthByMonth:
+            // place each value in the appropriate column
+            // budget periods are supposed to come in order just like columns
+            {
+              QMap<QDate, MyMoneyBudget::PeriodGroup>::const_iterator it_period = periods.begin();
+              while (it_period != periods.end() && column < m_numColumns) {
+                if ((*it_period).startDate() > columnDate(column)) {
+                  ++column;
+                } else {
+                  switch (m_config_f.columnType()) {
+                    case MyMoneyReport::eYears:
+                    case MyMoneyReport::eBiMonths:
+                    case MyMoneyReport::eQuarters:
+                    case MyMoneyReport::eMonths: {
+                        if ((*it_period).startDate() >= m_beginDate.addDays(-m_beginDate.day() + 1)
+                            && (*it_period).startDate() <= m_endDate.addDays(m_endDate.daysInMonth() - m_endDate.day())
+                            && (*it_period).startDate() > (columnDate(column).addMonths(-m_config_f.columnType()))) {
+                          //no currency conversion is done here because that is done for all columns later
+                          value = (*it_period).amount() * reverse;
+                          assignCell(outergroup, splitAccount, column, value, true /*budget*/);
+                        }
+                        ++it_period;
+                        break;
+                      }
+                    default:
+                      break;
+                  }
                 }
-                ++it_period;
-                break;
               }
-              default:
-                break;
-              }
+              break;
             }
-          }
-          break;
-        }
         }
       }
       ++it_bacc;
@@ -1862,22 +1862,22 @@ void PivotTable::calculateBudgetDiff(void)
       while (it_row != (*it_innergroup).end()) {
         int column = 1;
         switch (it_row.key().accountGroup()) {
-        case MyMoneyAccount::Income:
-        case MyMoneyAccount::Asset:
-          while (column < m_numColumns) {
-            it_row.value()[eBudgetDiff][column] = it_row.value()[eActual][column] - it_row.value()[eBudget][column];
-            ++column;
-          }
-          break;
-        case MyMoneyAccount::Expense:
-        case MyMoneyAccount::Liability:
-          while (column < m_numColumns) {
-            it_row.value()[eBudgetDiff][column] = it_row.value()[eBudget][column] - it_row.value()[eActual][column];
-            ++column;
-          }
-          break;
-        default:
-          break;
+          case MyMoneyAccount::Income:
+          case MyMoneyAccount::Asset:
+            while (column < m_numColumns) {
+              it_row.value()[eBudgetDiff][column] = it_row.value()[eActual][column] - it_row.value()[eBudget][column];
+              ++column;
+            }
+            break;
+          case MyMoneyAccount::Expense:
+          case MyMoneyAccount::Liability:
+            while (column < m_numColumns) {
+              it_row.value()[eBudgetDiff][column] = it_row.value()[eBudget][column] - it_row.value()[eActual][column];
+              ++column;
+            }
+            break;
+          default:
+            break;
         }
         ++it_row;
       }
@@ -2050,28 +2050,28 @@ void PivotTable::calculateMovingAverage(void)
 
             //set the right start date depending on the column type
             switch (m_config_f.columnType()) {
-            case MyMoneyReport::eYears: {
-              averageStart = QDate(columnDate(column).year(), 1, 1);
-              break;
-            }
-            case MyMoneyReport::eBiMonths: {
-              averageStart = QDate(columnDate(column).year(), columnDate(column).month(), 1).addMonths(-1);
-              break;
-            }
-            case MyMoneyReport::eQuarters: {
-              averageStart = QDate(columnDate(column).year(), columnDate(column).month(), 1).addMonths(-1);
-              break;
-            }
-            case MyMoneyReport::eMonths: {
-              averageStart = QDate(columnDate(column).year(), columnDate(column).month(), 1);
-              break;
-            }
-            case MyMoneyReport::eWeeks: {
-              averageStart = columnDate(column).addDays(-columnDate(column).dayOfWeek() + 1);
-              break;
-            }
-            default:
-              break;
+              case MyMoneyReport::eYears: {
+                  averageStart = QDate(columnDate(column).year(), 1, 1);
+                  break;
+                }
+              case MyMoneyReport::eBiMonths: {
+                  averageStart = QDate(columnDate(column).year(), columnDate(column).month(), 1).addMonths(-1);
+                  break;
+                }
+              case MyMoneyReport::eQuarters: {
+                  averageStart = QDate(columnDate(column).year(), columnDate(column).month(), 1).addMonths(-1);
+                  break;
+                }
+              case MyMoneyReport::eMonths: {
+                  averageStart = QDate(columnDate(column).year(), columnDate(column).month(), 1);
+                  break;
+                }
+              case MyMoneyReport::eWeeks: {
+                  averageStart = columnDate(column).addDays(-columnDate(column).dayOfWeek() + 1);
+                  break;
+                }
+              default:
+                break;
             }
 
             //gather the actual data and calculate the average

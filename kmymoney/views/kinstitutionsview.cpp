@@ -240,39 +240,39 @@ void KInstitutionsView::loadSubAccounts(KMyMoneyAccountTreeItem* parent, const Q
     const MyMoneyAccount& acc = *it_a;
     MyMoneyMoney factor(1, 1);
     switch (acc.accountGroup()) {
-    case MyMoneyAccount::Liability:
-      factor = MyMoneyMoney(-1, 1);
-      // tricky fall through here
+      case MyMoneyAccount::Liability:
+        factor = MyMoneyMoney(-1, 1);
+        // tricky fall through here
 
-    case MyMoneyAccount::Asset:
-      if (acc.institutionId() == institutionId
-          && !acc.isInvest()
-          && (!acc.isClosed() || showClosedAccounts)) {
-        QList<MyMoneyPrice> prices;
-        MyMoneySecurity security = file->baseCurrency();
-        try {
-          if (acc.currencyId() != file->baseCurrency().id()) {
-            security = m_securityMap[acc.currencyId()];
-            prices += file->price(acc.currencyId(), file->baseCurrency().id());
+      case MyMoneyAccount::Asset:
+        if (acc.institutionId() == institutionId
+            && !acc.isInvest()
+            && (!acc.isClosed() || showClosedAccounts)) {
+          QList<MyMoneyPrice> prices;
+          MyMoneySecurity security = file->baseCurrency();
+          try {
+            if (acc.currencyId() != file->baseCurrency().id()) {
+              security = m_securityMap[acc.currencyId()];
+              prices += file->price(acc.currencyId(), file->baseCurrency().id());
+            }
+
+          } catch (MyMoneyException *e) {
+            kDebug(2) << Q_FUNC_INFO << " caught exception while adding " << acc.name() << "[" << acc.id() << "]: " << e->what();
+            delete e;
           }
 
-        } catch (MyMoneyException *e) {
-          kDebug(2) << Q_FUNC_INFO << " caught exception while adding " << acc.name() << "[" << acc.id() << "]: " << e->what();
-          delete e;
+          KMyMoneyAccountTreeItem* item = new KMyMoneyAccountTreeItem(parent, acc, prices, security);
+          if (acc.id() == m_reconciliationAccount.id())
+            item->setReconciliation(true);
+
+          if (acc.accountType() == MyMoneyAccount::Investment)
+            loadSubAccounts(item);
+          value += (item->totalValue() * factor);
         }
+        break;
 
-        KMyMoneyAccountTreeItem* item = new KMyMoneyAccountTreeItem(parent, acc, prices, security);
-        if (acc.id() == m_reconciliationAccount.id())
-          item->setReconciliation(true);
-
-        if (acc.accountType() == MyMoneyAccount::Investment)
-          loadSubAccounts(item);
-        value += (item->totalValue() * factor);
-      }
-      break;
-
-    default:
-      break;
+      default:
+        break;
     }
   }
 

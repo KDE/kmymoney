@@ -149,77 +149,77 @@ bool ItemPtrVector::item_cmp(RegisterItem* i1, RegisterItem* i2)
   for (it = sortOrder.begin(); it != sortOrder.end(); ++it) {
     TransactionSortField sortField = static_cast<TransactionSortField>(abs(*it));
     switch (sortField) {
-    case PostDateSort:
-      rc = i2->sortPostDate().daysTo(i1->sortPostDate());
-      if (rc == 0) {
-        rc = i1->sortSamePostDate() - i2->sortSamePostDate();
-      }
-      break;
+      case PostDateSort:
+        rc = i2->sortPostDate().daysTo(i1->sortPostDate());
+        if (rc == 0) {
+          rc = i1->sortSamePostDate() - i2->sortSamePostDate();
+        }
+        break;
 
-    case EntryDateSort:
-      rc = i2->sortEntryDate().daysTo(i1->sortEntryDate());
-      break;
+      case EntryDateSort:
+        rc = i2->sortEntryDate().daysTo(i1->sortEntryDate());
+        break;
 
-    case PayeeSort:
-      rc = QString::localeAwareCompare(i1->sortPayee(), i2->sortPayee());
-      break;
+      case PayeeSort:
+        rc = QString::localeAwareCompare(i1->sortPayee(), i2->sortPayee());
+        break;
 
-    case ValueSort:
-      tmp = i1->sortValue() - i2->sortValue();
-      if (tmp.isZero())
-        rc = 0;
-      else if (tmp.isNegative())
-        rc = -1;
-      else
-        rc = 1;
-      break;
+      case ValueSort:
+        tmp = i1->sortValue() - i2->sortValue();
+        if (tmp.isZero())
+          rc = 0;
+        else if (tmp.isNegative())
+          rc = -1;
+        else
+          rc = 1;
+        break;
 
-    case NoSort:
-      // convert both values to numbers
-      n1 = i1->sortNumber().toULongLong(&ok1);
-      n2 = i2->sortNumber().toULongLong(&ok2);
-      // the following four cases exist:
-      // a) both are converted correct
-      //    compare them directly
-      // b) n1 is numeric, n2 is not
-      //    numbers come first, so return -1
-      // c) n1 is not numeric, n2 is
-      //    numbers come first, so return 1
-      // d) both are non numbers
-      //    compare using localeAwareCompare
-      if (ok1 && ok2) { // case a)
-        rc = (n1 > n2) ? 1 : ((n1 == n2) ? 0 : -1);
-      } else if (ok1 && !ok2) {
-        rc = -1;
-      } else if (!ok1 && ok2) {
-        rc = 1;
-      } else
-        rc = QString::localeAwareCompare(i1->sortNumber(), i2->sortNumber());
-      break;
+      case NoSort:
+        // convert both values to numbers
+        n1 = i1->sortNumber().toULongLong(&ok1);
+        n2 = i2->sortNumber().toULongLong(&ok2);
+        // the following four cases exist:
+        // a) both are converted correct
+        //    compare them directly
+        // b) n1 is numeric, n2 is not
+        //    numbers come first, so return -1
+        // c) n1 is not numeric, n2 is
+        //    numbers come first, so return 1
+        // d) both are non numbers
+        //    compare using localeAwareCompare
+        if (ok1 && ok2) { // case a)
+          rc = (n1 > n2) ? 1 : ((n1 == n2) ? 0 : -1);
+        } else if (ok1 && !ok2) {
+          rc = -1;
+        } else if (!ok1 && ok2) {
+          rc = 1;
+        } else
+          rc = QString::localeAwareCompare(i1->sortNumber(), i2->sortNumber());
+        break;
 
-    case EntryOrderSort:
-      rc = qstrcmp(i1->sortEntryOrder().toLatin1(), i2->sortEntryOrder().toLatin1());
-      break;
+      case EntryOrderSort:
+        rc = qstrcmp(i1->sortEntryOrder().toLatin1(), i2->sortEntryOrder().toLatin1());
+        break;
 
-    case TypeSort:
-      rc = i1->sortType() - i2->sortType();
-      break;
+      case TypeSort:
+        rc = i1->sortType() - i2->sortType();
+        break;
 
-    case CategorySort:
-      rc = QString::localeAwareCompare(i1->sortCategory(), i2->sortCategory());
-      break;
+      case CategorySort:
+        rc = QString::localeAwareCompare(i1->sortCategory(), i2->sortCategory());
+        break;
 
-    case ReconcileStateSort:
-      rc = static_cast<int>(i1->sortReconcileState()) - static_cast<int>(i2->sortReconcileState());
-      break;
+      case ReconcileStateSort:
+        rc = static_cast<int>(i1->sortReconcileState()) - static_cast<int>(i2->sortReconcileState());
+        break;
 
-    case SecuritySort:
-      rc = QString::localeAwareCompare(i1->sortSecurity(), i2->sortSecurity());
-      break;
+      case SecuritySort:
+        rc = QString::localeAwareCompare(i1->sortSecurity(), i2->sortSecurity());
+        break;
 
-    default:
-      qDebug("Invalid sort key %d", *it);
-      break;
+      default:
+        qDebug("Invalid sort key %d", *it);
+        break;
     }
 
     // the items differ for this sort key so we can return a result
@@ -383,21 +383,21 @@ TypeGroupMarker::TypeGroupMarker(Register* parent, CashFlowDirection dir, MyMone
     m_dir(dir)
 {
   switch (dir) {
-  case Deposit:
-    m_txt = i18nc("Deposits onto account", "Deposits");
-    if (accType == MyMoneyAccount::CreditCard) {
-      m_txt = i18nc("Payments towards credit card", "Payments");
-    }
-    break;
-  case Payment:
-    m_txt = i18nc("Payments made from account", "Payments");
-    if (accType == MyMoneyAccount::CreditCard) {
-      m_txt = i18nc("Payments made with credit card", "Charges");
-    }
-    break;
-  default:
-    qDebug("Unknown CashFlowDirection %d for TypeGroupMarker constructor", dir);
-    break;
+    case Deposit:
+      m_txt = i18nc("Deposits onto account", "Deposits");
+      if (accType == MyMoneyAccount::CreditCard) {
+        m_txt = i18nc("Payments towards credit card", "Payments");
+      }
+      break;
+    case Payment:
+      m_txt = i18nc("Payments made from account", "Payments");
+      if (accType == MyMoneyAccount::CreditCard) {
+        m_txt = i18nc("Payments made with credit card", "Charges");
+      }
+      break;
+    default:
+      qDebug("Unknown CashFlowDirection %d for TypeGroupMarker constructor", dir);
+      break;
   }
 }
 
@@ -416,21 +416,21 @@ ReconcileGroupMarker::ReconcileGroupMarker(Register* parent, MyMoneySplit::recon
     m_state(state)
 {
   switch (state) {
-  case MyMoneySplit::NotReconciled:
-    m_txt = i18nc("Reconcile state 'Not reconciled'", "Not reconciled");
-    break;
-  case MyMoneySplit::Cleared:
-    m_txt = i18nc("Reconcile state 'Cleared'", "Cleared");
-    break;
-  case MyMoneySplit::Reconciled:
-    m_txt = i18nc("Reconcile state 'Reconciled'", "Reconciled");
-    break;
-  case MyMoneySplit::Frozen:
-    m_txt = i18nc("Reconcile state 'Frozen'", "Frozen");
-    break;
-  default:
-    m_txt = i18nc("Unknown reconcile state", "Unknown");
-    break;
+    case MyMoneySplit::NotReconciled:
+      m_txt = i18nc("Reconcile state 'Not reconciled'", "Not reconciled");
+      break;
+    case MyMoneySplit::Cleared:
+      m_txt = i18nc("Reconcile state 'Cleared'", "Cleared");
+      break;
+    case MyMoneySplit::Reconciled:
+      m_txt = i18nc("Reconcile state 'Reconciled'", "Reconciled");
+      break;
+    case MyMoneySplit::Frozen:
+      m_txt = i18nc("Reconcile state 'Frozen'", "Frozen");
+      break;
+    default:
+      m_txt = i18nc("Unknown reconcile state", "Unknown");
+      break;
   }
 }
 
@@ -586,43 +586,43 @@ void Register::setupRegister(const MyMoneyAccount& account, bool showAccountColu
 
   // balance
   switch (account.accountType()) {
-  case MyMoneyAccount::Stock:
-    break;
-  default:
-    showColumn(BalanceColumn);
-    break;
+    case MyMoneyAccount::Stock:
+      break;
+    default:
+      showColumn(BalanceColumn);
+      break;
   }
 
   // Number column
   switch (account.accountType()) {
-  case MyMoneyAccount::Savings:
-  case MyMoneyAccount::Cash:
-  case MyMoneyAccount::Loan:
-  case MyMoneyAccount::AssetLoan:
-  case MyMoneyAccount::Asset:
-  case MyMoneyAccount::Liability:
-  case MyMoneyAccount::Equity:
-    if (KMyMoneyGlobalSettings::alwaysShowNrField())
+    case MyMoneyAccount::Savings:
+    case MyMoneyAccount::Cash:
+    case MyMoneyAccount::Loan:
+    case MyMoneyAccount::AssetLoan:
+    case MyMoneyAccount::Asset:
+    case MyMoneyAccount::Liability:
+    case MyMoneyAccount::Equity:
+      if (KMyMoneyGlobalSettings::alwaysShowNrField())
+        showColumn(NumberColumn);
+      break;
+
+    case MyMoneyAccount::Checkings:
+    case MyMoneyAccount::CreditCard:
       showColumn(NumberColumn);
-    break;
+      break;
 
-  case MyMoneyAccount::Checkings:
-  case MyMoneyAccount::CreditCard:
-    showColumn(NumberColumn);
-    break;
-
-  default:
-    hideColumn(NumberColumn);
-    break;
+    default:
+      hideColumn(NumberColumn);
+      break;
   }
 
   switch (account.accountType()) {
-  case MyMoneyAccount::Income:
-  case MyMoneyAccount::Expense:
-    showAccountColumn = true;
-    break;
-  default:
-    break;
+    case MyMoneyAccount::Income:
+    case MyMoneyAccount::Expense:
+      showAccountColumn = true;
+      break;
+    default:
+      break;
   }
 
   if (showAccountColumn)
@@ -630,49 +630,49 @@ void Register::setupRegister(const MyMoneyAccount& account, bool showAccountColu
 
   // Security, activity, payment, deposit, amount, price and value column
   switch (account.accountType()) {
-  default:
-    showColumn(PaymentColumn);
-    showColumn(DepositColumn);
-    break;
+    default:
+      showColumn(PaymentColumn);
+      showColumn(DepositColumn);
+      break;
 
-  case MyMoneyAccount::Investment:
-    showColumn(SecurityColumn);
-    showColumn(QuantityColumn);
-    showColumn(PriceColumn);
-    showColumn(ValueColumn);
-    break;
+    case MyMoneyAccount::Investment:
+      showColumn(SecurityColumn);
+      showColumn(QuantityColumn);
+      showColumn(PriceColumn);
+      showColumn(ValueColumn);
+      break;
   }
 
   // headings
   switch (account.accountType()) {
-  case MyMoneyAccount::CreditCard:
-    horizontalHeaderItem(PaymentColumn)->setText(i18nc("Payment made with credit card", "Charge"));
-    horizontalHeaderItem(DepositColumn)->setText(i18nc("Payment towards credit card", "Payment"));
-    break;
-  case MyMoneyAccount::Asset:
-  case MyMoneyAccount::AssetLoan:
-    horizontalHeaderItem(PaymentColumn)->setText(i18nc("Decrease of asset/liability value", "Decrease"));
-    horizontalHeaderItem(DepositColumn)->setText(i18nc("Increase of asset/liability value", "Increase"));
-    break;
-  case MyMoneyAccount::Liability:
-  case MyMoneyAccount::Loan:
-    horizontalHeaderItem(PaymentColumn)->setText(i18nc("Increase of asset/liability value", "Increase"));
-    horizontalHeaderItem(DepositColumn)->setText(i18nc("Decrease of asset/liability value", "Decrease"));
-    break;
-  case MyMoneyAccount::Income:
-  case MyMoneyAccount::Expense:
-    horizontalHeaderItem(PaymentColumn)->setText(i18n("Income"));
-    horizontalHeaderItem(DepositColumn)->setText(i18n("Expense"));
-    break;
+    case MyMoneyAccount::CreditCard:
+      horizontalHeaderItem(PaymentColumn)->setText(i18nc("Payment made with credit card", "Charge"));
+      horizontalHeaderItem(DepositColumn)->setText(i18nc("Payment towards credit card", "Payment"));
+      break;
+    case MyMoneyAccount::Asset:
+    case MyMoneyAccount::AssetLoan:
+      horizontalHeaderItem(PaymentColumn)->setText(i18nc("Decrease of asset/liability value", "Decrease"));
+      horizontalHeaderItem(DepositColumn)->setText(i18nc("Increase of asset/liability value", "Increase"));
+      break;
+    case MyMoneyAccount::Liability:
+    case MyMoneyAccount::Loan:
+      horizontalHeaderItem(PaymentColumn)->setText(i18nc("Increase of asset/liability value", "Increase"));
+      horizontalHeaderItem(DepositColumn)->setText(i18nc("Decrease of asset/liability value", "Decrease"));
+      break;
+    case MyMoneyAccount::Income:
+    case MyMoneyAccount::Expense:
+      horizontalHeaderItem(PaymentColumn)->setText(i18n("Income"));
+      horizontalHeaderItem(DepositColumn)->setText(i18n("Expense"));
+      break;
 
-  default:
-    break;
+    default:
+      break;
   }
 
   switch (account.accountType()) {
-  default:
-    m_lastCol = BalanceColumn;
-    break;
+    default:
+      m_lastCol = BalanceColumn;
+      break;
   }
 
   setUpdatesEnabled(enabled);
@@ -1209,11 +1209,11 @@ void Register::adjustColumn(int col)
 
   int maxWidth = 0;
   switch (col) {
-  case NumberColumn:
-    maxWidth = cellFontMetrics.width("0123456789");
-    break;
-  default:
-    break;
+    case NumberColumn:
+      maxWidth = cellFontMetrics.width("0123456789");
+      break;
+    default:
+      break;
   }
 
   // scan through the transactions
@@ -1517,33 +1517,33 @@ void Register::selectItem(RegisterItem* item, bool dontChangeSelections)
 
       if (m_selectionMode == MultiSelection) {
         switch (buttonState & (Qt::ShiftModifier | Qt::ControlModifier)) {
-        case Qt::ControlModifier:
-          okToSelect = sameEntryType;
-          if (typeid(*item) == typeid(StdTransactionScheduled))
-            okToSelect = false;
-          // toggle selection state of current item
-          emit aboutToSelectItem(item, okToSelect);
-          if (okToSelect) {
-            // pointer 'item' might have changed. reconstruct it.
-            item = itemById(id);
-            item->setSelected(!item->isSelected());
-            setFocusItem(item);
-          }
-          break;
+          case Qt::ControlModifier:
+            okToSelect = sameEntryType;
+            if (typeid(*item) == typeid(StdTransactionScheduled))
+              okToSelect = false;
+            // toggle selection state of current item
+            emit aboutToSelectItem(item, okToSelect);
+            if (okToSelect) {
+              // pointer 'item' might have changed. reconstruct it.
+              item = itemById(id);
+              item->setSelected(!item->isSelected());
+              setFocusItem(item);
+            }
+            break;
 
-        case Qt::ShiftModifier:
-          okToSelect = sameEntryType;
-          if (typeid(*item) == typeid(StdTransactionScheduled))
-            okToSelect = false;
-          emit aboutToSelectItem(item, okToSelect);
-          if (okToSelect) {
-            // pointer 'item' might have changed. reconstruct it.
-            item = itemById(id);
-            unselectItems();
-            selectItems(rowToIndex(m_selectAnchor->startRow()), rowToIndex(item->startRow()));
-            setFocusItem(item);
-          }
-          break;
+          case Qt::ShiftModifier:
+            okToSelect = sameEntryType;
+            if (typeid(*item) == typeid(StdTransactionScheduled))
+              okToSelect = false;
+            emit aboutToSelectItem(item, okToSelect);
+            if (okToSelect) {
+              // pointer 'item' might have changed. reconstruct it.
+              item = itemById(id);
+              unselectItems();
+              selectItems(rowToIndex(m_selectAnchor->startRow()), rowToIndex(item->startRow()));
+              setFocusItem(item);
+            }
+            break;
         }
       }
     } else if (buttonState & Qt::RightButton) {
@@ -1816,52 +1816,52 @@ void Register::scrollPage(int key, Qt::ButtonState state)
   int height = 0;
 
   switch (key) {
-  case Qt::Key_PageUp:
-    while (height < viewport()->height() && item->prevItem()) {
-      do {
-        item = item->prevItem();
-        if (item->isVisible())
-          height += item->rowHeightHint();
-      } while ((!item->isSelectable() || !item->isVisible()) && item->prevItem());
-    }
-    break;
-  case Qt::Key_PageDown:
-    while (height < viewport()->height() && item->nextItem()) {
-      do {
-        if (item->isVisible())
-          height += item->rowHeightHint();
+    case Qt::Key_PageUp:
+      while (height < viewport()->height() && item->prevItem()) {
+        do {
+          item = item->prevItem();
+          if (item->isVisible())
+            height += item->rowHeightHint();
+        } while ((!item->isSelectable() || !item->isVisible()) && item->prevItem());
+      }
+      break;
+    case Qt::Key_PageDown:
+      while (height < viewport()->height() && item->nextItem()) {
+        do {
+          if (item->isVisible())
+            height += item->rowHeightHint();
+          item = item->nextItem();
+        } while ((!item->isSelectable() || !item->isVisible()) && item->nextItem());
+      }
+      break;
+
+    case Qt::Key_Up:
+      if (item->prevItem()) {
+        do {
+          item = item->prevItem();
+        } while ((!item->isSelectable() || !item->isVisible()) && item->prevItem());
+      }
+      break;
+
+    case Qt::Key_Down:
+      if (item->nextItem()) {
+        do {
+          item = item->nextItem();
+        } while ((!item->isSelectable() || !item->isVisible()) && item->nextItem());
+      }
+      break;
+
+    case Qt::Key_Home:
+      item = m_firstItem;
+      while ((!item->isSelectable() || !item->isVisible()) && item->nextItem())
         item = item->nextItem();
-      } while ((!item->isSelectable() || !item->isVisible()) && item->nextItem());
-    }
-    break;
+      break;
 
-  case Qt::Key_Up:
-    if (item->prevItem()) {
-      do {
+    case Qt::Key_End:
+      item = m_lastItem;
+      while ((!item->isSelectable() || !item->isVisible()) && item->prevItem())
         item = item->prevItem();
-      } while ((!item->isSelectable() || !item->isVisible()) && item->prevItem());
-    }
-    break;
-
-  case Qt::Key_Down:
-    if (item->nextItem()) {
-      do {
-        item = item->nextItem();
-      } while ((!item->isSelectable() || !item->isVisible()) && item->nextItem());
-    }
-    break;
-
-  case Qt::Key_Home:
-    item = m_firstItem;
-    while ((!item->isSelectable() || !item->isVisible()) && item->nextItem())
-      item = item->nextItem();
-    break;
-
-  case Qt::Key_End:
-    item = m_lastItem;
-    while ((!item->isSelectable() || !item->isVisible()) && item->prevItem())
-      item = item->prevItem();
-    break;
+      break;
   }
 
   // make sure to avoid selecting a possible empty transaction at the end
@@ -1889,28 +1889,28 @@ void Register::scrollPage(int key, Qt::ButtonState state)
 void Register::keyPressEvent(QKeyEvent* ev)
 {
   switch (ev->key()) {
-  case Qt::Key_Space:
-    if (m_selectionMode != NoSelection) {
-      // get the state out of the event ...
-      m_buttonState = ev->state();
-      // ... and pretend that we have pressed the left mouse button ;)
-      m_buttonState = static_cast<Qt::ButtonState>(m_buttonState | Qt::LeftButton);
-      selectItem(m_focusItem);
-    }
-    break;
+    case Qt::Key_Space:
+      if (m_selectionMode != NoSelection) {
+        // get the state out of the event ...
+        m_buttonState = ev->state();
+        // ... and pretend that we have pressed the left mouse button ;)
+        m_buttonState = static_cast<Qt::ButtonState>(m_buttonState | Qt::LeftButton);
+        selectItem(m_focusItem);
+      }
+      break;
 
-  case Qt::Key_PageUp:
-  case Qt::Key_PageDown:
-  case Qt::Key_Home:
-  case Qt::Key_End:
-  case Qt::Key_Down:
-  case Qt::Key_Up:
-    scrollPage(ev->key(), ev->state());
-    break;
+    case Qt::Key_PageUp:
+    case Qt::Key_PageDown:
+    case Qt::Key_Home:
+    case Qt::Key_End:
+    case Qt::Key_Down:
+    case Qt::Key_Up:
+      scrollPage(ev->key(), ev->state());
+      break;
 
-  default:
-    QTableWidget::keyPressEvent(ev);
-    break;
+    default:
+      QTableWidget::keyPressEvent(ev);
+      break;
   }
 }
 
@@ -1925,43 +1925,43 @@ Transaction* Register::transactionFactory(Register *parent, const MyMoneyTransac
   }
 
   switch (parent->account().accountType()) {
-  case MyMoneyAccount::Checkings:
-  case MyMoneyAccount::Savings:
-  case MyMoneyAccount::Cash:
-  case MyMoneyAccount::CreditCard:
-  case MyMoneyAccount::Loan:
-  case MyMoneyAccount::Asset:
-  case MyMoneyAccount::Liability:
-  case MyMoneyAccount::Currency:
-  case MyMoneyAccount::Income:
-  case MyMoneyAccount::Expense:
-  case MyMoneyAccount::AssetLoan:
-  case MyMoneyAccount::Equity:
-    if (s.accountId().isEmpty())
-      s.setAccountId(parent->account().id());
-    if (s.isMatched())
-      t = new KMyMoneyRegister::StdTransactionMatched(parent, transaction, s, uniqueId);
-    else if (transaction.isImported())
-      t = new KMyMoneyRegister::StdTransactionDownloaded(parent, transaction, s, uniqueId);
-    else
-      t = new KMyMoneyRegister::StdTransaction(parent, transaction, s, uniqueId);
-    break;
+    case MyMoneyAccount::Checkings:
+    case MyMoneyAccount::Savings:
+    case MyMoneyAccount::Cash:
+    case MyMoneyAccount::CreditCard:
+    case MyMoneyAccount::Loan:
+    case MyMoneyAccount::Asset:
+    case MyMoneyAccount::Liability:
+    case MyMoneyAccount::Currency:
+    case MyMoneyAccount::Income:
+    case MyMoneyAccount::Expense:
+    case MyMoneyAccount::AssetLoan:
+    case MyMoneyAccount::Equity:
+      if (s.accountId().isEmpty())
+        s.setAccountId(parent->account().id());
+      if (s.isMatched())
+        t = new KMyMoneyRegister::StdTransactionMatched(parent, transaction, s, uniqueId);
+      else if (transaction.isImported())
+        t = new KMyMoneyRegister::StdTransactionDownloaded(parent, transaction, s, uniqueId);
+      else
+        t = new KMyMoneyRegister::StdTransaction(parent, transaction, s, uniqueId);
+      break;
 
-  case MyMoneyAccount::Investment:
-    if (s.isMatched())
-      t = new KMyMoneyRegister::InvestTransaction/* Matched */(parent, transaction, s, uniqueId);
-    else if (transaction.isImported())
-      t = new KMyMoneyRegister::InvestTransactionDownloaded(parent, transaction, s, uniqueId);
-    else
-      t = new KMyMoneyRegister::InvestTransaction(parent, transaction, s, uniqueId);
-    break;
+    case MyMoneyAccount::Investment:
+      if (s.isMatched())
+        t = new KMyMoneyRegister::InvestTransaction/* Matched */(parent, transaction, s, uniqueId);
+      else if (transaction.isImported())
+        t = new KMyMoneyRegister::InvestTransactionDownloaded(parent, transaction, s, uniqueId);
+      else
+        t = new KMyMoneyRegister::InvestTransaction(parent, transaction, s, uniqueId);
+      break;
 
-  case MyMoneyAccount::CertificateDep:
-  case MyMoneyAccount::MoneyMarket:
-  case MyMoneyAccount::Stock:
-  default:
-    qDebug("Register::transactionFactory: invalid accountTypeE %d", parent->account().accountType());
-    break;
+    case MyMoneyAccount::CertificateDep:
+    case MyMoneyAccount::MoneyMarket:
+    case MyMoneyAccount::Stock:
+    default:
+      qDebug("Register::transactionFactory: invalid accountTypeE %d", parent->account().accountType());
+      break;
   }
   return t;
 }
@@ -1980,138 +1980,138 @@ void Register::addGroupMarkers(void)
   int weekStartOfs;
 
   switch (primarySortKey()) {
-  case KMyMoneyRegister::PostDateSort:
-  case KMyMoneyRegister::EntryDateSort:
-    today = QDate::currentDate();
-    thisMonth.setYMD(today.year(), today.month(), 1);
-    lastMonth = thisMonth.addMonths(-1);
-    yesterday = today.addDays(-1);
-    // a = QDate::dayOfWeek()      todays weekday (1 = Monday, 7 = Sunday)
-    // b = KLocale::weekStartDay() first day of week (1 = Monday, 7 = Sunday)
-    weekStartOfs = today.dayOfWeek() - KGlobal::locale()->weekStartDay();
-    if (weekStartOfs < 0) {
-      weekStartOfs = 7 + weekStartOfs;
-    }
-    thisWeek = today.addDays(-weekStartOfs);
-    lastWeek = thisWeek.addDays(-7);
-    thisYear.setYMD(today.year(), 1, 1);
-    if (KMyMoneyGlobalSettings::startDate().date() != QDate(1900, 1, 1))
-      new KMyMoneyRegister::FancyDateGroupMarker(this, KMyMoneyGlobalSettings::startDate().date(), i18n("Prior transactions possibly filtered"));
-
-    if (KMyMoneyGlobalSettings::showFancyMarker()) {
-      if (m_account.lastReconciliationDate().isValid())
-        new KMyMoneyRegister::StatementGroupMarker(this, KMyMoneyRegister::Deposit, m_account.lastReconciliationDate(), i18n("Last reconciliation"));
-
-      if (!m_account.value("lastImportedTransactionDate").isEmpty()
-          && !m_account.value("lastStatementBalance").isEmpty()) {
-        MyMoneyMoney balance(m_account.value("lastStatementBalance"));
-        if (m_account.accountGroup() == MyMoneyAccount::Liability)
-          balance = -balance;
-        QString txt = i18n("Online Statement Balance: %1", balance.formatMoney(m_account.fraction()));
-        new KMyMoneyRegister::StatementGroupMarker(this, KMyMoneyRegister::Deposit, QDate::fromString(m_account.value("lastImportedTransactionDate"), Qt::ISODate), txt);
+    case KMyMoneyRegister::PostDateSort:
+    case KMyMoneyRegister::EntryDateSort:
+      today = QDate::currentDate();
+      thisMonth.setYMD(today.year(), today.month(), 1);
+      lastMonth = thisMonth.addMonths(-1);
+      yesterday = today.addDays(-1);
+      // a = QDate::dayOfWeek()      todays weekday (1 = Monday, 7 = Sunday)
+      // b = KLocale::weekStartDay() first day of week (1 = Monday, 7 = Sunday)
+      weekStartOfs = today.dayOfWeek() - KGlobal::locale()->weekStartDay();
+      if (weekStartOfs < 0) {
+        weekStartOfs = 7 + weekStartOfs;
       }
+      thisWeek = today.addDays(-weekStartOfs);
+      lastWeek = thisWeek.addDays(-7);
+      thisYear.setYMD(today.year(), 1, 1);
+      if (KMyMoneyGlobalSettings::startDate().date() != QDate(1900, 1, 1))
+        new KMyMoneyRegister::FancyDateGroupMarker(this, KMyMoneyGlobalSettings::startDate().date(), i18n("Prior transactions possibly filtered"));
 
-      new KMyMoneyRegister::FancyDateGroupMarker(this, thisYear, i18n("This year"));
-      new KMyMoneyRegister::FancyDateGroupMarker(this, lastMonth, i18n("Last month"));
-      new KMyMoneyRegister::FancyDateGroupMarker(this, thisMonth, i18n("This month"));
-      new KMyMoneyRegister::FancyDateGroupMarker(this, lastWeek, i18n("Last week"));
-      new KMyMoneyRegister::FancyDateGroupMarker(this, thisWeek, i18n("This week"));
-      new KMyMoneyRegister::FancyDateGroupMarker(this, yesterday, i18n("Yesterday"));
-      new KMyMoneyRegister::FancyDateGroupMarker(this, today, i18n("Today"));
-      new KMyMoneyRegister::FancyDateGroupMarker(this, today.addDays(1), i18n("Future transactions"));
-      new KMyMoneyRegister::FancyDateGroupMarker(this, thisWeek.addDays(7), i18n("Next week"));
-      new KMyMoneyRegister::FancyDateGroupMarker(this, thisMonth.addMonths(1), i18n("Next month"));
+      if (KMyMoneyGlobalSettings::showFancyMarker()) {
+        if (m_account.lastReconciliationDate().isValid())
+          new KMyMoneyRegister::StatementGroupMarker(this, KMyMoneyRegister::Deposit, m_account.lastReconciliationDate(), i18n("Last reconciliation"));
 
-    } else {
-      new KMyMoneyRegister::SimpleDateGroupMarker(this, today.addDays(1), i18n("Future transactions"));
-    }
-    if (KMyMoneyGlobalSettings::showFiscalMarker()) {
-      QDate currentFiscalYear(QDate::currentDate().year(), KMyMoneyGlobalSettings::firstFiscalMonth(), KMyMoneyGlobalSettings::firstFiscalDay());
-
-      if (QDate::currentDate() < currentFiscalYear)
-        currentFiscalYear = currentFiscalYear.addYears(-1);
-      QDate previousFiscalYear = currentFiscalYear.addYears(-1);
-      new KMyMoneyRegister::FiscalYearGroupMarker(this, currentFiscalYear, i18n("Current fiscal year"));
-      new KMyMoneyRegister::FiscalYearGroupMarker(this, currentFiscalYear.addYears(-1), i18n("Previous fiscal year"));
-      new KMyMoneyRegister::FiscalYearGroupMarker(this, currentFiscalYear.addYears(1), i18n("Next fiscal year"));
-    }
-    break;
-
-  case KMyMoneyRegister::TypeSort:
-    if (KMyMoneyGlobalSettings::showFancyMarker()) {
-      new KMyMoneyRegister::TypeGroupMarker(this, KMyMoneyRegister::Deposit, m_account.accountType());
-      new KMyMoneyRegister::TypeGroupMarker(this, KMyMoneyRegister::Payment, m_account.accountType());
-    }
-    break;
-
-  case KMyMoneyRegister::ReconcileStateSort:
-    if (KMyMoneyGlobalSettings::showFancyMarker()) {
-      new KMyMoneyRegister::ReconcileGroupMarker(this, MyMoneySplit::NotReconciled);
-      new KMyMoneyRegister::ReconcileGroupMarker(this, MyMoneySplit::Cleared);
-      new KMyMoneyRegister::ReconcileGroupMarker(this, MyMoneySplit::Reconciled);
-      new KMyMoneyRegister::ReconcileGroupMarker(this, MyMoneySplit::Frozen);
-    }
-    break;
-
-  case KMyMoneyRegister::PayeeSort:
-    if (KMyMoneyGlobalSettings::showFancyMarker()) {
-      while (p) {
-        t = dynamic_cast<KMyMoneyRegister::Transaction*>(p);
-        if (t) {
-          list[t->sortPayee()] = 1;
+        if (!m_account.value("lastImportedTransactionDate").isEmpty()
+            && !m_account.value("lastStatementBalance").isEmpty()) {
+          MyMoneyMoney balance(m_account.value("lastStatementBalance"));
+          if (m_account.accountGroup() == MyMoneyAccount::Liability)
+            balance = -balance;
+          QString txt = i18n("Online Statement Balance: %1", balance.formatMoney(m_account.fraction()));
+          new KMyMoneyRegister::StatementGroupMarker(this, KMyMoneyRegister::Deposit, QDate::fromString(m_account.value("lastImportedTransactionDate"), Qt::ISODate), txt);
         }
-        p = p->nextItem();
-      }
-      for (it = list.constBegin(); it != list.constEnd(); ++it) {
-        name = it.key();
-        if (name.isEmpty()) {
-          name = i18nc("Unknown payee", "Unknown");
-        }
-        new KMyMoneyRegister::PayeeGroupMarker(this, name);
-      }
-    }
-    break;
 
-  case KMyMoneyRegister::CategorySort:
-    if (KMyMoneyGlobalSettings::showFancyMarker()) {
-      while (p) {
-        t = dynamic_cast<KMyMoneyRegister::Transaction*>(p);
-        if (t) {
-          list[t->sortCategory()] = 1;
-        }
-        p = p->nextItem();
-      }
-      for (it = list.constBegin(); it != list.constEnd(); ++it) {
-        name = it.key();
-        if (name.isEmpty()) {
-          name = i18nc("Unknown category", "Unknown");
-        }
-        new KMyMoneyRegister::CategoryGroupMarker(this, name);
-      }
-    }
-    break;
+        new KMyMoneyRegister::FancyDateGroupMarker(this, thisYear, i18n("This year"));
+        new KMyMoneyRegister::FancyDateGroupMarker(this, lastMonth, i18n("Last month"));
+        new KMyMoneyRegister::FancyDateGroupMarker(this, thisMonth, i18n("This month"));
+        new KMyMoneyRegister::FancyDateGroupMarker(this, lastWeek, i18n("Last week"));
+        new KMyMoneyRegister::FancyDateGroupMarker(this, thisWeek, i18n("This week"));
+        new KMyMoneyRegister::FancyDateGroupMarker(this, yesterday, i18n("Yesterday"));
+        new KMyMoneyRegister::FancyDateGroupMarker(this, today, i18n("Today"));
+        new KMyMoneyRegister::FancyDateGroupMarker(this, today.addDays(1), i18n("Future transactions"));
+        new KMyMoneyRegister::FancyDateGroupMarker(this, thisWeek.addDays(7), i18n("Next week"));
+        new KMyMoneyRegister::FancyDateGroupMarker(this, thisMonth.addMonths(1), i18n("Next month"));
 
-  case KMyMoneyRegister::SecuritySort:
-    if (KMyMoneyGlobalSettings::showFancyMarker()) {
-      while (p) {
-        t = dynamic_cast<KMyMoneyRegister::InvestTransaction*>(p);
-        if (t) {
-          list[t->sortSecurity()] = 1;
-        }
-        p = p->nextItem();
+      } else {
+        new KMyMoneyRegister::SimpleDateGroupMarker(this, today.addDays(1), i18n("Future transactions"));
       }
-      for (it = list.constBegin(); it != list.constEnd(); ++it) {
-        name = it.key();
-        if (name.isEmpty()) {
-          name = i18nc("Unknown security", "Unknown");
-        }
-        new KMyMoneyRegister::CategoryGroupMarker(this, name);
-      }
-    }
-    break;
+      if (KMyMoneyGlobalSettings::showFiscalMarker()) {
+        QDate currentFiscalYear(QDate::currentDate().year(), KMyMoneyGlobalSettings::firstFiscalMonth(), KMyMoneyGlobalSettings::firstFiscalDay());
 
-  default: // no markers supported
-    break;
+        if (QDate::currentDate() < currentFiscalYear)
+          currentFiscalYear = currentFiscalYear.addYears(-1);
+        QDate previousFiscalYear = currentFiscalYear.addYears(-1);
+        new KMyMoneyRegister::FiscalYearGroupMarker(this, currentFiscalYear, i18n("Current fiscal year"));
+        new KMyMoneyRegister::FiscalYearGroupMarker(this, currentFiscalYear.addYears(-1), i18n("Previous fiscal year"));
+        new KMyMoneyRegister::FiscalYearGroupMarker(this, currentFiscalYear.addYears(1), i18n("Next fiscal year"));
+      }
+      break;
+
+    case KMyMoneyRegister::TypeSort:
+      if (KMyMoneyGlobalSettings::showFancyMarker()) {
+        new KMyMoneyRegister::TypeGroupMarker(this, KMyMoneyRegister::Deposit, m_account.accountType());
+        new KMyMoneyRegister::TypeGroupMarker(this, KMyMoneyRegister::Payment, m_account.accountType());
+      }
+      break;
+
+    case KMyMoneyRegister::ReconcileStateSort:
+      if (KMyMoneyGlobalSettings::showFancyMarker()) {
+        new KMyMoneyRegister::ReconcileGroupMarker(this, MyMoneySplit::NotReconciled);
+        new KMyMoneyRegister::ReconcileGroupMarker(this, MyMoneySplit::Cleared);
+        new KMyMoneyRegister::ReconcileGroupMarker(this, MyMoneySplit::Reconciled);
+        new KMyMoneyRegister::ReconcileGroupMarker(this, MyMoneySplit::Frozen);
+      }
+      break;
+
+    case KMyMoneyRegister::PayeeSort:
+      if (KMyMoneyGlobalSettings::showFancyMarker()) {
+        while (p) {
+          t = dynamic_cast<KMyMoneyRegister::Transaction*>(p);
+          if (t) {
+            list[t->sortPayee()] = 1;
+          }
+          p = p->nextItem();
+        }
+        for (it = list.constBegin(); it != list.constEnd(); ++it) {
+          name = it.key();
+          if (name.isEmpty()) {
+            name = i18nc("Unknown payee", "Unknown");
+          }
+          new KMyMoneyRegister::PayeeGroupMarker(this, name);
+        }
+      }
+      break;
+
+    case KMyMoneyRegister::CategorySort:
+      if (KMyMoneyGlobalSettings::showFancyMarker()) {
+        while (p) {
+          t = dynamic_cast<KMyMoneyRegister::Transaction*>(p);
+          if (t) {
+            list[t->sortCategory()] = 1;
+          }
+          p = p->nextItem();
+        }
+        for (it = list.constBegin(); it != list.constEnd(); ++it) {
+          name = it.key();
+          if (name.isEmpty()) {
+            name = i18nc("Unknown category", "Unknown");
+          }
+          new KMyMoneyRegister::CategoryGroupMarker(this, name);
+        }
+      }
+      break;
+
+    case KMyMoneyRegister::SecuritySort:
+      if (KMyMoneyGlobalSettings::showFancyMarker()) {
+        while (p) {
+          t = dynamic_cast<KMyMoneyRegister::InvestTransaction*>(p);
+          if (t) {
+            list[t->sortSecurity()] = 1;
+          }
+          p = p->nextItem();
+        }
+        for (it = list.constBegin(); it != list.constEnd(); ++it) {
+          name = it.key();
+          if (name.isEmpty()) {
+            name = i18nc("Unknown security", "Unknown");
+          }
+          new KMyMoneyRegister::CategoryGroupMarker(this, name);
+        }
+      }
+      break;
+
+    default: // no markers supported
+      break;
   }
 }
 

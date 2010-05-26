@@ -203,29 +203,29 @@ int KInvestmentListItem::compare(Q3ListViewItem* i, int col, bool ascending) con
   // in all other cases use the standard sorting
   if (item) {
     switch (col) {
-    case COLUMN_VALUE_INDEX:
-    case COLUMN_QUANTITY_INDEX:
-    case COLUMN_PRICE_INDEX: {
-      bool inv1 = text(col) == "---";
-      bool inv2 = item->text(col) == "---";
-      if (!inv1 && !inv2) {
-        MyMoneyMoney result = MyMoneyMoney(text(col)) - MyMoneyMoney(item->text(col));
-        if (result.isNegative())
-          return -1;
-        if (result.isZero())
-          return 0;
-        return 1;
-      } else if (inv1 && inv2) {
-        return 0;
-      } else if (inv1) {
-        return -1;
-      }
-      return 1;
-    }
-    break;
+      case COLUMN_VALUE_INDEX:
+      case COLUMN_QUANTITY_INDEX:
+      case COLUMN_PRICE_INDEX: {
+          bool inv1 = text(col) == "---";
+          bool inv2 = item->text(col) == "---";
+          if (!inv1 && !inv2) {
+            MyMoneyMoney result = MyMoneyMoney(text(col)) - MyMoneyMoney(item->text(col));
+            if (result.isNegative())
+              return -1;
+            if (result.isZero())
+              return 0;
+            return 1;
+          } else if (inv1 && inv2) {
+            return 0;
+          } else if (inv1) {
+            return -1;
+          }
+          return 1;
+        }
+        break;
 
-    default:
-      break;
+      default:
+        break;
     }
   }
 

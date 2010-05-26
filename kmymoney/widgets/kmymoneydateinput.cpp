@@ -274,23 +274,23 @@ void kMyMoneyDateInput::keyPressEvent(QKeyEvent * k)
   KShortcut today(i18nc("Enter todays date into date input widget", "T"));
 
   switch (k->key()) {
-  case Qt::Key_Equal:
-  case Qt::Key_Plus:
-    slotDateChosen(d->m_date.addDays(1));
-    k->accept();
-    break;
-
-  case Qt::Key_Minus:
-    slotDateChosen(d->m_date.addDays(-1));
-    k->accept();
-    break;
-
-  default:
-    if (today.contains(QKeySequence(k->key())) || k->key() == Qt::Key_T) {
-      slotDateChosen(QDate::currentDate());
+    case Qt::Key_Equal:
+    case Qt::Key_Plus:
+      slotDateChosen(d->m_date.addDays(1));
       k->accept();
-    }
-    break;
+      break;
+
+    case Qt::Key_Minus:
+      slotDateChosen(d->m_date.addDays(-1));
+      k->accept();
+      break;
+
+    default:
+      if (today.contains(QKeySequence(k->key())) || k->key() == Qt::Key_T) {
+        slotDateChosen(QDate::currentDate());
+        k->accept();
+      }
+      break;
   }
   k->ignore(); // signal that the key event was not handled
 }

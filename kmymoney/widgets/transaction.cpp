@@ -457,26 +457,26 @@ bool Transaction::haveNumberField(void) const
 {
   bool rc = true;
   switch (m_account.accountType()) {
-  case MyMoneyAccount::Savings:
-  case MyMoneyAccount::Cash:
-  case MyMoneyAccount::Loan:
-  case MyMoneyAccount::AssetLoan:
-  case MyMoneyAccount::Asset:
-  case MyMoneyAccount::Liability:
-  case MyMoneyAccount::Equity:
-    rc = KMyMoneyGlobalSettings::alwaysShowNrField();
-    break;
+    case MyMoneyAccount::Savings:
+    case MyMoneyAccount::Cash:
+    case MyMoneyAccount::Loan:
+    case MyMoneyAccount::AssetLoan:
+    case MyMoneyAccount::Asset:
+    case MyMoneyAccount::Liability:
+    case MyMoneyAccount::Equity:
+      rc = KMyMoneyGlobalSettings::alwaysShowNrField();
+      break;
 
-  case MyMoneyAccount::Checkings:
-  case MyMoneyAccount::CreditCard:
-    // the next case is used for the editor when the account
-    // is unknown (eg. when creating new schedules)
-  case MyMoneyAccount::UnknownAccountType:
-    break;
+    case MyMoneyAccount::Checkings:
+    case MyMoneyAccount::CreditCard:
+      // the next case is used for the editor when the account
+      // is unknown (eg. when creating new schedules)
+    case MyMoneyAccount::UnknownAccountType:
+      break;
 
-  default:
-    rc = false;
-    break;
+    default:
+      rc = false;
+      break;
   }
   return rc;
 }
@@ -685,17 +685,17 @@ StdTransaction::StdTransaction(Register *parent, const MyMoneyTransaction& trans
   try {
     m_categoryHeader = i18n("Category");
     switch (transaction.splitCount()) {
-    default:
-      m_category = i18nc("Split transaction (category replacement)", "Split transaction");
-      break;
+      default:
+        m_category = i18nc("Split transaction (category replacement)", "Split transaction");
+        break;
 
-    case 0: // the empty transaction
-    case 1:
-      break;
+      case 0: // the empty transaction
+      case 1:
+        break;
 
-    case 2:
-      setupFormHeader(m_transaction.splitByAccount(m_split.accountId(), false).accountId());
-      break;
+      case 2:
+        setupFormHeader(m_transaction.splitByAccount(m_split.accountId(), false).accountId());
+        break;
     }
   } catch (MyMoneyException *e) {
     kDebug(2) << "Problem determining the category for transaction '" << m_transaction.id() << "'. Reason: " << e->what()  << "\n";
@@ -735,14 +735,14 @@ void StdTransaction::setupFormHeader(const QString& id)
 {
   m_category = MyMoneyFile::instance()->accountToCategory(id);
   switch (MyMoneyFile::instance()->account(id).accountGroup()) {
-  case MyMoneyAccount::Asset:
-  case MyMoneyAccount::Liability:
-    m_categoryHeader = m_split.shares().isNegative() ? i18n("Transfer to") : i18n("Transfer from");
-    break;
+    case MyMoneyAccount::Asset:
+    case MyMoneyAccount::Liability:
+      m_categoryHeader = m_split.shares().isNegative() ? i18n("Transfer to") : i18n("Transfer from");
+      break;
 
-  default:
-    m_categoryHeader = i18n("Category");
-    break;
+    default:
+      m_categoryHeader = i18n("Category");
+      break;
   }
 }
 
@@ -807,111 +807,111 @@ bool StdTransaction::formCellText(QString& txt, int& align, int row, int col, QP
 {
   // if(m_transaction != MyMoneyTransaction()) {
   switch (row) {
-  case 0:
-    switch (col) {
-    case LabelColumn1:
-      align |= Qt::AlignLeft;
-      txt = i18n("Account");
-      break;
-    }
-    break;
-
-  case 1:
-    switch (col) {
-    case LabelColumn1:
-      align |= Qt::AlignLeft;
-      txt = m_payeeHeader;
-      break;
-
-    case ValueColumn1:
-      align |= Qt::AlignLeft;
-      txt = m_payee;
-      break;
-
-    case LabelColumn2:
-      align |= Qt::AlignLeft;
-      if (haveNumberField())
-        txt = i18n("Number");
-      break;
-
-    case ValueColumn2:
-      align |= Qt::AlignRight;
-      if (haveNumberField())
-        txt = m_split.number();
-      break;
-    }
-    break;
-
-  case 2:
-    switch (col) {
-    case LabelColumn1:
-      align |= Qt::AlignLeft;
-      txt = m_categoryHeader;
-      break;
-
-    case ValueColumn1:
-      align |= Qt::AlignLeft;
-      txt = m_category;
-      if (m_transaction != MyMoneyTransaction()) {
-        if (txt.isEmpty() && !m_split.value().isZero())
-          txt = i18n("*** UNASSIGNED ***");
+    case 0:
+      switch (col) {
+        case LabelColumn1:
+          align |= Qt::AlignLeft;
+          txt = i18n("Account");
+          break;
       }
       break;
 
-    case LabelColumn2:
-      align |= Qt::AlignLeft;
-      txt = i18n("Date");
-      break;
+    case 1:
+      switch (col) {
+        case LabelColumn1:
+          align |= Qt::AlignLeft;
+          txt = m_payeeHeader;
+          break;
 
-    case ValueColumn2:
-      align |= Qt::AlignRight;
-      if (m_transaction != MyMoneyTransaction())
-        txt = KGlobal::locale()->formatDate(m_transaction.postDate(), KLocale::ShortDate);
-      break;
-    }
-    break;
+        case ValueColumn1:
+          align |= Qt::AlignLeft;
+          txt = m_payee;
+          break;
 
-  case 3:
-    switch (col) {
-    case LabelColumn1:
-      align |= Qt::AlignLeft;
-      txt = i18n("Memo");
-      break;
+        case LabelColumn2:
+          align |= Qt::AlignLeft;
+          if (haveNumberField())
+            txt = i18n("Number");
+          break;
 
-    case ValueColumn1:
-      align &= ~Qt::AlignVCenter;
-      align |= Qt::AlignTop;
-      align |= Qt::AlignLeft;
-      if (m_transaction != MyMoneyTransaction())
-        txt = m_split.memo().section('\n', 0, 2);
-      break;
-
-    case LabelColumn2:
-      align |= Qt::AlignLeft;
-      txt = i18n("Amount");
-      break;
-
-    case ValueColumn2:
-      align |= Qt::AlignRight;
-      if (m_transaction != MyMoneyTransaction()) {
-        txt = (m_split.value(m_transaction.commodity(), m_splitCurrencyId).abs()).formatMoney(m_account.fraction());
+        case ValueColumn2:
+          align |= Qt::AlignRight;
+          if (haveNumberField())
+            txt = m_split.number();
+          break;
       }
       break;
-    }
-    break;
 
-  case 5:
-    switch (col) {
-    case LabelColumn2:
-      align |= Qt::AlignLeft;
-      txt = i18n("Status");
+    case 2:
+      switch (col) {
+        case LabelColumn1:
+          align |= Qt::AlignLeft;
+          txt = m_categoryHeader;
+          break;
+
+        case ValueColumn1:
+          align |= Qt::AlignLeft;
+          txt = m_category;
+          if (m_transaction != MyMoneyTransaction()) {
+            if (txt.isEmpty() && !m_split.value().isZero())
+              txt = i18n("*** UNASSIGNED ***");
+          }
+          break;
+
+        case LabelColumn2:
+          align |= Qt::AlignLeft;
+          txt = i18n("Date");
+          break;
+
+        case ValueColumn2:
+          align |= Qt::AlignRight;
+          if (m_transaction != MyMoneyTransaction())
+            txt = KGlobal::locale()->formatDate(m_transaction.postDate(), KLocale::ShortDate);
+          break;
+      }
       break;
 
-    case ValueColumn2:
-      align |= Qt::AlignRight;
-      txt = reconcileState();
+    case 3:
+      switch (col) {
+        case LabelColumn1:
+          align |= Qt::AlignLeft;
+          txt = i18n("Memo");
+          break;
+
+        case ValueColumn1:
+          align &= ~Qt::AlignVCenter;
+          align |= Qt::AlignTop;
+          align |= Qt::AlignLeft;
+          if (m_transaction != MyMoneyTransaction())
+            txt = m_split.memo().section('\n', 0, 2);
+          break;
+
+        case LabelColumn2:
+          align |= Qt::AlignLeft;
+          txt = i18n("Amount");
+          break;
+
+        case ValueColumn2:
+          align |= Qt::AlignRight;
+          if (m_transaction != MyMoneyTransaction()) {
+            txt = (m_split.value(m_transaction.commodity(), m_splitCurrencyId).abs()).formatMoney(m_account.fraction());
+          }
+          break;
+      }
       break;
-    }
+
+    case 5:
+      switch (col) {
+        case LabelColumn2:
+          align |= Qt::AlignLeft;
+          txt = i18n("Status");
+          break;
+
+        case ValueColumn2:
+          align |= Qt::AlignRight;
+          txt = reconcileState();
+          break;
+      }
   }
   // }
   if (col == ValueColumn2 && row == 1) {
@@ -923,103 +923,103 @@ bool StdTransaction::formCellText(QString& txt, int& align, int row, int col, QP
 void StdTransaction::registerCellText(QString& txt, int& align, int row, int col, QPainter* painter)
 {
   switch (row) {
-  case 0:
-    switch (col) {
-    case NumberColumn:
-      align |= Qt::AlignLeft;
-      if (haveNumberField())
-        txt = m_split.number();
-      break;
+    case 0:
+      switch (col) {
+        case NumberColumn:
+          align |= Qt::AlignLeft;
+          if (haveNumberField())
+            txt = m_split.number();
+          break;
 
-    case DateColumn:
-      align |= Qt::AlignLeft;
-      txt = KGlobal::locale()->formatDate(m_transaction.postDate(), KLocale::ShortDate);
-      break;
+        case DateColumn:
+          align |= Qt::AlignLeft;
+          txt = KGlobal::locale()->formatDate(m_transaction.postDate(), KLocale::ShortDate);
+          break;
 
-    case DetailColumn:
-      align |= Qt::AlignLeft;
-      txt = m_payee;
-      if (txt.isEmpty() && m_rowsRegister < 3) {
-        singleLineMemo(txt, m_split);
+        case DetailColumn:
+          align |= Qt::AlignLeft;
+          txt = m_payee;
+          if (txt.isEmpty() && m_rowsRegister < 3) {
+            singleLineMemo(txt, m_split);
+          }
+          if (txt.isEmpty() && m_rowsRegister < 2) {
+            if (m_account.accountType() != MyMoneyAccount::Income
+                && m_account.accountType() != MyMoneyAccount::Expense) {
+              txt = m_category;
+              if (txt.isEmpty() && !m_split.value().isZero()) {
+                txt = i18n("*** UNASSIGNED ***");
+                if (painter)
+                  painter->setPen(KMyMoneyGlobalSettings::listErronousTransactionColor());
+              }
+            }
+          }
+          break;
+
+        case ReconcileFlagColumn:
+          align |= Qt::AlignHCenter;
+          txt = reconcileState(false);
+          break;
+
+        case PaymentColumn:
+          align |= Qt::AlignRight;
+          if (m_split.value().isNegative()) {
+            txt = (-m_split.value(m_transaction.commodity(), m_splitCurrencyId)).formatMoney(m_account.fraction());
+          }
+          break;
+
+        case DepositColumn:
+          align |= Qt::AlignRight;
+          if (!m_split.value().isNegative()) {
+            txt = m_split.value(m_transaction.commodity(), m_splitCurrencyId).formatMoney(m_account.fraction());
+          }
+          break;
+
+        case BalanceColumn:
+          align |= Qt::AlignRight;
+          if (m_showBalance)
+            txt = m_balance.formatMoney(m_account.fraction());
+          else
+            txt = "----";
+          break;
+
+        case AccountColumn:
+          // txt = m_objects->account(m_transaction.splits()[0].accountId()).name();
+          txt = MyMoneyFile::instance()->account(m_split.accountId()).name();
+          break;
+
+        default:
+          break;
       }
-      if (txt.isEmpty() && m_rowsRegister < 2) {
-        if (m_account.accountType() != MyMoneyAccount::Income
-            && m_account.accountType() != MyMoneyAccount::Expense) {
+      break;
+
+    case 1:
+      switch (col) {
+        case DetailColumn:
+          align |= Qt::AlignLeft;
           txt = m_category;
           if (txt.isEmpty() && !m_split.value().isZero()) {
             txt = i18n("*** UNASSIGNED ***");
             if (painter)
               painter->setPen(KMyMoneyGlobalSettings::listErronousTransactionColor());
           }
-        }
+          break;
+
+        default:
+          break;
       }
       break;
 
-    case ReconcileFlagColumn:
-      align |= Qt::AlignHCenter;
-      txt = reconcileState(false);
-      break;
+    case 2:
+      switch (col) {
+        case DetailColumn:
+          align |= Qt::AlignLeft;
+          singleLineMemo(txt, m_split);
+          break;
 
-    case PaymentColumn:
-      align |= Qt::AlignRight;
-      if (m_split.value().isNegative()) {
-        txt = (-m_split.value(m_transaction.commodity(), m_splitCurrencyId)).formatMoney(m_account.fraction());
+        default:
+          break;
       }
       break;
-
-    case DepositColumn:
-      align |= Qt::AlignRight;
-      if (!m_split.value().isNegative()) {
-        txt = m_split.value(m_transaction.commodity(), m_splitCurrencyId).formatMoney(m_account.fraction());
-      }
-      break;
-
-    case BalanceColumn:
-      align |= Qt::AlignRight;
-      if (m_showBalance)
-        txt = m_balance.formatMoney(m_account.fraction());
-      else
-        txt = "----";
-      break;
-
-    case AccountColumn:
-      // txt = m_objects->account(m_transaction.splits()[0].accountId()).name();
-      txt = MyMoneyFile::instance()->account(m_split.accountId()).name();
-      break;
-
-    default:
-      break;
-    }
-    break;
-
-  case 1:
-    switch (col) {
-    case DetailColumn:
-      align |= Qt::AlignLeft;
-      txt = m_category;
-      if (txt.isEmpty() && !m_split.value().isZero()) {
-        txt = i18n("*** UNASSIGNED ***");
-        if (painter)
-          painter->setPen(KMyMoneyGlobalSettings::listErronousTransactionColor());
-      }
-      break;
-
-    default:
-      break;
-    }
-    break;
-
-  case 2:
-    switch (col) {
-    case DetailColumn:
-      align |= Qt::AlignLeft;
-      singleLineMemo(txt, m_split);
-      break;
-
-    default:
-      break;
-    }
-    break;
   }
 }
 
@@ -1240,30 +1240,30 @@ InvestTransaction::InvestTransaction(Register *parent, const MyMoneyTransaction&
 
   // check the count of the fee splits and setup the text
   switch (m_feeSplits.count()) {
-  case 0:
-    break;
+    case 0:
+      break;
 
-  case 1:
-    m_feeCategory = MyMoneyFile::instance()->accountToCategory(m_feeSplits[0].accountId());
-    break;
+    case 1:
+      m_feeCategory = MyMoneyFile::instance()->accountToCategory(m_feeSplits[0].accountId());
+      break;
 
-  default:
-    m_feeCategory = i18nc("Split transaction (category replacement)", "Split transaction");
-    break;
+    default:
+      m_feeCategory = i18nc("Split transaction (category replacement)", "Split transaction");
+      break;
   }
 
   // check the count of the interest splits and setup the text
   switch (m_interestSplits.count()) {
-  case 0:
-    break;
+    case 0:
+      break;
 
-  case 1:
-    m_interestCategory = MyMoneyFile::instance()->accountToCategory(m_interestSplits[0].accountId());
-    break;
+    case 1:
+      m_interestCategory = MyMoneyFile::instance()->accountToCategory(m_interestSplits[0].accountId());
+      break;
 
-  default:
-    m_interestCategory = i18nc("Split transaction (category replacement)", "Split transaction");
-    break;
+    default:
+      m_interestCategory = i18nc("Split transaction (category replacement)", "Split transaction");
+      break;
   }
 
   m_rowsForm = 7;
@@ -1283,33 +1283,33 @@ void InvestTransaction::setupForm(TransactionForm* form)
 void InvestTransaction::activity(QString& txt, MyMoneySplit::investTransactionTypeE type) const
 {
   switch (type) {
-  case MyMoneySplit::AddShares:
-    txt = i18n("Add shares");
-    break;
-  case MyMoneySplit::RemoveShares:
-    txt = i18n("Remove shares");
-    break;
-  case MyMoneySplit::BuyShares:
-    txt = i18n("Buy shares");
-    break;
-  case MyMoneySplit::SellShares:
-    txt = i18n("Sell shares");
-    break;
-  case MyMoneySplit::Dividend:
-    txt = i18n("Dividend");
-    break;
-  case MyMoneySplit::ReinvestDividend:
-    txt = i18n("Reinvest Dividend");
-    break;
-  case MyMoneySplit::Yield:
-    txt = i18n("Yield");
-    break;
-  case MyMoneySplit::SplitShares:
-    txt = i18n("Split shares");
-    break;
-  default:
-    txt = i18nc("Unknown investment activity", "Unknown");
-    break;
+    case MyMoneySplit::AddShares:
+      txt = i18n("Add shares");
+      break;
+    case MyMoneySplit::RemoveShares:
+      txt = i18n("Remove shares");
+      break;
+    case MyMoneySplit::BuyShares:
+      txt = i18n("Buy shares");
+      break;
+    case MyMoneySplit::SellShares:
+      txt = i18n("Sell shares");
+      break;
+    case MyMoneySplit::Dividend:
+      txt = i18n("Dividend");
+      break;
+    case MyMoneySplit::ReinvestDividend:
+      txt = i18n("Reinvest Dividend");
+      break;
+    case MyMoneySplit::Yield:
+      txt = i18n("Yield");
+      break;
+    case MyMoneySplit::SplitShares:
+      txt = i18n("Split shares");
+      break;
+    default:
+      txt = i18nc("Unknown investment activity", "Unknown");
+      break;
   }
 }
 
@@ -1318,204 +1318,204 @@ bool InvestTransaction::formCellText(QString& txt, int& align, int row, int col,
   bool fieldEditable = false;
 
   switch (row) {
-  case 0:
-    switch (col) {
-    case LabelColumn1:
-      align |= Qt::AlignLeft;
-      txt = i18n("Activity");
-      break;
+    case 0:
+      switch (col) {
+        case LabelColumn1:
+          align |= Qt::AlignLeft;
+          txt = i18n("Activity");
+          break;
 
-    case ValueColumn1:
-      align |= Qt::AlignLeft;
-      fieldEditable = true;
-      activity(txt, m_transactionType);
-      break;
+        case ValueColumn1:
+          align |= Qt::AlignLeft;
+          fieldEditable = true;
+          activity(txt, m_transactionType);
+          break;
 
-    case LabelColumn2:
-      align |= Qt::AlignLeft;
-      txt = i18n("Date");
-      break;
+        case LabelColumn2:
+          align |= Qt::AlignLeft;
+          txt = i18n("Date");
+          break;
 
-    case ValueColumn2:
-      align |= Qt::AlignRight;
-      fieldEditable = true;
-      if (m_transaction != MyMoneyTransaction())
-        txt = KGlobal::locale()->formatDate(m_transaction.postDate(), KLocale::ShortDate);
-      break;
-    }
-    break;
-
-  case 1:
-    switch (col) {
-    case LabelColumn1:
-      align |= Qt::AlignLeft;
-      txt = i18n("Security");
-      break;
-
-    case ValueColumn1:
-      align |= Qt::AlignLeft;
-      fieldEditable = true;
-      if (m_account.isInvest())
-        txt = m_security.name();
-      break;
-
-    case LabelColumn2:
-      align |= Qt::AlignLeft;
-      if (haveShares()) {
-        txt = i18n("Shares");
-      } else if (haveSplitRatio()) {
-        txt = i18n("Ratio");
+        case ValueColumn2:
+          align |= Qt::AlignRight;
+          fieldEditable = true;
+          if (m_transaction != MyMoneyTransaction())
+            txt = KGlobal::locale()->formatDate(m_transaction.postDate(), KLocale::ShortDate);
+          break;
       }
       break;
 
-    case ValueColumn2:
-      align |= Qt::AlignRight;
-      if ((fieldEditable = haveShares()) == true) {
-        txt = m_split.shares().abs().formatMoney("", MyMoneyMoney::denomToPrec(m_security.smallestAccountFraction()));
-      } else if (haveSplitRatio()) {
-        txt = QString("1 / %1").arg(m_split.shares().abs().formatMoney("", -1));
-      }
-      break;
-    }
-    break;
+    case 1:
+      switch (col) {
+        case LabelColumn1:
+          align |= Qt::AlignLeft;
+          txt = i18n("Security");
+          break;
 
-  case 2:
-    switch (col) {
-    case LabelColumn1:
-      align |= Qt::AlignLeft;
-      if (haveAssetAccount())
-        txt = i18n("Account");
-      break;
+        case ValueColumn1:
+          align |= Qt::AlignLeft;
+          fieldEditable = true;
+          if (m_account.isInvest())
+            txt = m_security.name();
+          break;
 
-    case ValueColumn1:
-      align |= Qt::AlignLeft;
-      if ((fieldEditable = haveAssetAccount()) == true) {
-        txt = MyMoneyFile::instance()->accountToCategory(m_assetAccountSplit.accountId());
-      }
-      break;
+        case LabelColumn2:
+          align |= Qt::AlignLeft;
+          if (haveShares()) {
+            txt = i18n("Shares");
+          } else if (haveSplitRatio()) {
+            txt = i18n("Ratio");
+          }
+          break;
 
-    case LabelColumn2:
-      align |= Qt::AlignLeft;
-      if (havePrice())
-        txt = i18n("Price/share");
-      break;
-
-    case ValueColumn2:
-      align |= Qt::AlignRight;
-      if ((fieldEditable = havePrice()) == true && !m_split.shares().isZero()) {
-        txt = m_split.price().formatMoney("", KMyMoneyGlobalSettings::pricePrecision());
-      }
-      break;
-    }
-    break;
-
-  case 3:
-    switch (col) {
-    case LabelColumn1:
-      align |= Qt::AlignLeft;
-      if (haveFees())
-        txt = i18n("Fees");
-      break;
-
-    case ValueColumn1:
-      align |= Qt::AlignLeft;
-      if ((fieldEditable = haveFees()) == true) {
-        txt = m_feeCategory;
+        case ValueColumn2:
+          align |= Qt::AlignRight;
+          if ((fieldEditable = haveShares()) == true) {
+            txt = m_split.shares().abs().formatMoney("", MyMoneyMoney::denomToPrec(m_security.smallestAccountFraction()));
+          } else if (haveSplitRatio()) {
+            txt = QString("1 / %1").arg(m_split.shares().abs().formatMoney("", -1));
+          }
+          break;
       }
       break;
 
-    case LabelColumn2:
-      align |= Qt::AlignLeft;
-      if (haveFees() && !m_feeCategory.isEmpty())
-        txt = i18n("Amount");
-      break;
+    case 2:
+      switch (col) {
+        case LabelColumn1:
+          align |= Qt::AlignLeft;
+          if (haveAssetAccount())
+            txt = i18n("Account");
+          break;
 
-    case ValueColumn2:
-      align |= Qt::AlignRight;
-      if (haveFees()) {
-        if ((fieldEditable = !m_feeCategory.isEmpty()) == true) {
-          txt = m_feeAmount.formatMoney(m_currency);
-        }
+        case ValueColumn1:
+          align |= Qt::AlignLeft;
+          if ((fieldEditable = haveAssetAccount()) == true) {
+            txt = MyMoneyFile::instance()->accountToCategory(m_assetAccountSplit.accountId());
+          }
+          break;
+
+        case LabelColumn2:
+          align |= Qt::AlignLeft;
+          if (havePrice())
+            txt = i18n("Price/share");
+          break;
+
+        case ValueColumn2:
+          align |= Qt::AlignRight;
+          if ((fieldEditable = havePrice()) == true && !m_split.shares().isZero()) {
+            txt = m_split.price().formatMoney("", KMyMoneyGlobalSettings::pricePrecision());
+          }
+          break;
       }
       break;
-    }
-    break;
 
-  case 4:
-    switch (col) {
-    case LabelColumn1:
-      align |= Qt::AlignLeft;
-      if (haveInterest())
-        txt = i18n("Interest");
-      break;
+    case 3:
+      switch (col) {
+        case LabelColumn1:
+          align |= Qt::AlignLeft;
+          if (haveFees())
+            txt = i18n("Fees");
+          break;
 
-    case ValueColumn1:
-      align |= Qt::AlignLeft;
-      if ((fieldEditable = haveInterest()) == true) {
-        txt = m_interestCategory;
+        case ValueColumn1:
+          align |= Qt::AlignLeft;
+          if ((fieldEditable = haveFees()) == true) {
+            txt = m_feeCategory;
+          }
+          break;
+
+        case LabelColumn2:
+          align |= Qt::AlignLeft;
+          if (haveFees() && !m_feeCategory.isEmpty())
+            txt = i18n("Amount");
+          break;
+
+        case ValueColumn2:
+          align |= Qt::AlignRight;
+          if (haveFees()) {
+            if ((fieldEditable = !m_feeCategory.isEmpty()) == true) {
+              txt = m_feeAmount.formatMoney(m_currency);
+            }
+          }
+          break;
       }
       break;
 
-    case LabelColumn2:
-      align |= Qt::AlignLeft;
-      if (haveInterest() && !m_interestCategory.isEmpty())
-        txt = i18n("Amount");
-      break;
+    case 4:
+      switch (col) {
+        case LabelColumn1:
+          align |= Qt::AlignLeft;
+          if (haveInterest())
+            txt = i18n("Interest");
+          break;
 
-    case ValueColumn2:
-      align |= Qt::AlignRight;
-      if (haveInterest()) {
-        if ((fieldEditable = !m_interestCategory.isEmpty()) == true) {
-          txt = (-m_interestAmount).formatMoney(m_currency);
-        }
+        case ValueColumn1:
+          align |= Qt::AlignLeft;
+          if ((fieldEditable = haveInterest()) == true) {
+            txt = m_interestCategory;
+          }
+          break;
+
+        case LabelColumn2:
+          align |= Qt::AlignLeft;
+          if (haveInterest() && !m_interestCategory.isEmpty())
+            txt = i18n("Amount");
+          break;
+
+        case ValueColumn2:
+          align |= Qt::AlignRight;
+          if (haveInterest()) {
+            if ((fieldEditable = !m_interestCategory.isEmpty()) == true) {
+              txt = (-m_interestAmount).formatMoney(m_currency);
+            }
+          }
+          break;
       }
       break;
-    }
-    break;
 
-  case 5:
-    switch (col) {
-    case LabelColumn1:
-      align |= Qt::AlignLeft;
-      txt = i18n("Memo");
-      break;
+    case 5:
+      switch (col) {
+        case LabelColumn1:
+          align |= Qt::AlignLeft;
+          txt = i18n("Memo");
+          break;
 
-    case ValueColumn1:
-      align &= ~Qt::AlignVCenter;
-      align |= Qt::AlignTop;
-      align |= Qt::AlignLeft;
-      fieldEditable = true;
-      if (m_transaction != MyMoneyTransaction())
-        txt = m_split.memo().section('\n', 0, 2);
-      break;
+        case ValueColumn1:
+          align &= ~Qt::AlignVCenter;
+          align |= Qt::AlignTop;
+          align |= Qt::AlignLeft;
+          fieldEditable = true;
+          if (m_transaction != MyMoneyTransaction())
+            txt = m_split.memo().section('\n', 0, 2);
+          break;
 
-    case LabelColumn2:
-      align |= Qt::AlignLeft;
-      if (haveAmount())
-        txt = i18nc("Total balance", "Total");
-      break;
+        case LabelColumn2:
+          align |= Qt::AlignLeft;
+          if (haveAmount())
+            txt = i18nc("Total balance", "Total");
+          break;
 
-    case ValueColumn2:
-      align |= Qt::AlignRight;
-      if ((fieldEditable = haveAmount()) == true) {
-        txt = m_assetAccountSplit.value().abs().formatMoney(m_currency);
+        case ValueColumn2:
+          align |= Qt::AlignRight;
+          if ((fieldEditable = haveAmount()) == true) {
+            txt = m_assetAccountSplit.value().abs().formatMoney(m_currency);
+          }
       }
-    }
-    break;
-
-  case 6:
-    switch (col) {
-    case LabelColumn2:
-      align |= Qt::AlignLeft;
-      txt = i18n("Status");
       break;
 
-    case ValueColumn2:
-      align |= Qt::AlignRight;
-      fieldEditable = true;
-      txt = reconcileState();
-      break;
-    }
+    case 6:
+      switch (col) {
+        case LabelColumn2:
+          align |= Qt::AlignLeft;
+          txt = i18n("Status");
+          break;
+
+        case ValueColumn2:
+          align |= Qt::AlignRight;
+          fieldEditable = true;
+          txt = reconcileState();
+          break;
+      }
   }
 
   return fieldEditable;
@@ -1524,163 +1524,163 @@ bool InvestTransaction::formCellText(QString& txt, int& align, int row, int col,
 void InvestTransaction::registerCellText(QString& txt, int& align, int row, int col, QPainter* /* painter */)
 {
   switch (row) {
-  case 0:
-    switch (col) {
-    case DateColumn:
-      align |= Qt::AlignLeft;
-      txt = KGlobal::locale()->formatDate(m_transaction.postDate(), KLocale::ShortDate);
-      break;
+    case 0:
+      switch (col) {
+        case DateColumn:
+          align |= Qt::AlignLeft;
+          txt = KGlobal::locale()->formatDate(m_transaction.postDate(), KLocale::ShortDate);
+          break;
 
-    case DetailColumn:
-      align |= Qt::AlignLeft;
-      activity(txt, m_transactionType);
-      break;
+        case DetailColumn:
+          align |= Qt::AlignLeft;
+          activity(txt, m_transactionType);
+          break;
 
-    case SecurityColumn:
-      align |= Qt::AlignLeft;
-      if (m_account.isInvest())
-        txt = m_security.name();
-      break;
+        case SecurityColumn:
+          align |= Qt::AlignLeft;
+          if (m_account.isInvest())
+            txt = m_security.name();
+          break;
 
-    case ReconcileFlagColumn:
-      align |= Qt::AlignHCenter;
-      txt = reconcileState(false);
-      break;
+        case ReconcileFlagColumn:
+          align |= Qt::AlignHCenter;
+          txt = reconcileState(false);
+          break;
 
-    case QuantityColumn:
-      align |= Qt::AlignRight;
-      if (haveShares())
-        txt = m_split.shares().abs().formatMoney("", MyMoneyMoney::denomToPrec(m_security.smallestAccountFraction()));
-      else if (haveSplitRatio()) {
-        txt = QString("1 / %1").arg(m_split.shares().abs().formatMoney("", -1));
+        case QuantityColumn:
+          align |= Qt::AlignRight;
+          if (haveShares())
+            txt = m_split.shares().abs().formatMoney("", MyMoneyMoney::denomToPrec(m_security.smallestAccountFraction()));
+          else if (haveSplitRatio()) {
+            txt = QString("1 / %1").arg(m_split.shares().abs().formatMoney("", -1));
+          }
+          break;
+
+        case PriceColumn:
+          align |= Qt::AlignRight;
+          if (havePrice() && !m_split.shares().isZero()) {
+            txt = m_split.price().formatMoney(m_currency.tradingSymbol(), KMyMoneyGlobalSettings::pricePrecision());
+          }
+          break;
+
+        case ValueColumn:
+          align |= Qt::AlignRight;
+          if (haveAmount()) {
+            txt = m_assetAccountSplit.value().abs().formatMoney(m_currency);
+
+          } else if (haveInterest()) {
+            txt = (-m_interestAmount).formatMoney(m_currency);
+          }
+          break;
+
+        case BalanceColumn:
+          align |= Qt::AlignRight;
+          if (m_showBalance)
+            txt = m_balance.formatMoney("", MyMoneyMoney::denomToPrec(m_security.smallestAccountFraction()));
+          else
+            txt = "----";
+          break;
+
+        default:
+          break;
       }
       break;
 
-    case PriceColumn:
-      align |= Qt::AlignRight;
-      if (havePrice() && !m_split.shares().isZero()) {
-        txt = m_split.price().formatMoney(m_currency.tradingSymbol(), KMyMoneyGlobalSettings::pricePrecision());
+    case 1:
+      switch (col) {
+        case DetailColumn:
+          align |= Qt::AlignLeft;
+          if (haveAssetAccount() && !m_assetAccountSplit.accountId().isEmpty()) {
+            txt = MyMoneyFile::instance()->accountToCategory(m_assetAccountSplit.accountId());
+          } else if (haveInterest() && m_interestSplits.count()) {
+            txt = m_interestCategory;
+          } else if (haveFees() && m_feeSplits.count()) {
+            txt = m_feeCategory;
+          } else
+            singleLineMemo(txt, m_split);
+          break;
+
+        case QuantityColumn:
+          align |= Qt::AlignRight;
+          if (haveAssetAccount() && !m_assetAccountSplit.accountId().isEmpty()) {
+            // txt = m_interestAmount.abs().formatMoney(m_currency);
+          } else if (haveInterest() && m_interestSplits.count()) {
+            txt = (-m_interestAmount).formatMoney(m_currency);
+          } else if (haveFees() && m_feeSplits.count()) {
+            txt = m_feeAmount.formatMoney(m_currency);
+          }
+          break;
+
+        default:
+          break;
       }
       break;
 
-    case ValueColumn:
-      align |= Qt::AlignRight;
-      if (haveAmount()) {
-        txt = m_assetAccountSplit.value().abs().formatMoney(m_currency);
+    case 2:
+      switch (col) {
+        case DetailColumn:
+          align |= Qt::AlignLeft;
+          if (haveAssetAccount() && !m_assetAccountSplit.accountId().isEmpty()
+              && haveInterest() && m_interestSplits.count()) {
+            txt = m_interestCategory;
+          } else if (haveFees() && m_feeSplits.count()) {
+            txt = m_feeCategory;
+          } else
+            singleLineMemo(txt, m_split);
+          break;
 
-      } else if (haveInterest()) {
-        txt = (-m_interestAmount).formatMoney(m_currency);
+        case QuantityColumn:
+          align |= Qt::AlignRight;
+          if (haveAssetAccount() && !m_assetAccountSplit.accountId().isEmpty()
+              && haveInterest() && m_interestSplits.count()) {
+            txt = (-m_interestAmount).formatMoney(m_currency);
+          } else if (haveFees() && m_feeSplits.count()) {
+            txt = m_feeAmount.formatMoney(m_currency);
+          }
+          break;
+
+        default:
+          break;
       }
       break;
 
-    case BalanceColumn:
-      align |= Qt::AlignRight;
-      if (m_showBalance)
-        txt = m_balance.formatMoney("", MyMoneyMoney::denomToPrec(m_security.smallestAccountFraction()));
-      else
-        txt = "----";
-      break;
+    case 3:
+      switch (col) {
+        case DetailColumn:
+          align |= Qt::AlignLeft;
+          if (haveAssetAccount() && !m_assetAccountSplit.accountId().isEmpty()
+              && haveInterest() && m_interestSplits.count()
+              && haveFees() && m_feeSplits.count()) {
+            txt = m_feeCategory;
+          } else
+            singleLineMemo(txt, m_split);
+          break;
 
-    default:
-      break;
-    }
-    break;
+        case QuantityColumn:
+          align |= Qt::AlignRight;
+          if (haveAssetAccount() && !m_assetAccountSplit.accountId().isEmpty()
+              && haveInterest() && m_interestSplits.count()
+              && haveFees() && m_feeSplits.count()) {
+            txt = m_feeAmount.formatMoney(m_currency);
+          }
+          break;
 
-  case 1:
-    switch (col) {
-    case DetailColumn:
-      align |= Qt::AlignLeft;
-      if (haveAssetAccount() && !m_assetAccountSplit.accountId().isEmpty()) {
-        txt = MyMoneyFile::instance()->accountToCategory(m_assetAccountSplit.accountId());
-      } else if (haveInterest() && m_interestSplits.count()) {
-        txt = m_interestCategory;
-      } else if (haveFees() && m_feeSplits.count()) {
-        txt = m_feeCategory;
-      } else
-        singleLineMemo(txt, m_split);
-      break;
-
-    case QuantityColumn:
-      align |= Qt::AlignRight;
-      if (haveAssetAccount() && !m_assetAccountSplit.accountId().isEmpty()) {
-        // txt = m_interestAmount.abs().formatMoney(m_currency);
-      } else if (haveInterest() && m_interestSplits.count()) {
-        txt = (-m_interestAmount).formatMoney(m_currency);
-      } else if (haveFees() && m_feeSplits.count()) {
-        txt = m_feeAmount.formatMoney(m_currency);
+        default:
+          break;
       }
       break;
 
-    default:
-      break;
-    }
-    break;
+    case 4:
+      switch (col) {
+        case DetailColumn:
+          align |= Qt::AlignLeft;
+          singleLineMemo(txt, m_split);
+          break;
 
-  case 2:
-    switch (col) {
-    case DetailColumn:
-      align |= Qt::AlignLeft;
-      if (haveAssetAccount() && !m_assetAccountSplit.accountId().isEmpty()
-          && haveInterest() && m_interestSplits.count()) {
-        txt = m_interestCategory;
-      } else if (haveFees() && m_feeSplits.count()) {
-        txt = m_feeCategory;
-      } else
-        singleLineMemo(txt, m_split);
-      break;
-
-    case QuantityColumn:
-      align |= Qt::AlignRight;
-      if (haveAssetAccount() && !m_assetAccountSplit.accountId().isEmpty()
-          && haveInterest() && m_interestSplits.count()) {
-        txt = (-m_interestAmount).formatMoney(m_currency);
-      } else if (haveFees() && m_feeSplits.count()) {
-        txt = m_feeAmount.formatMoney(m_currency);
+        default:
+          break;
       }
       break;
-
-    default:
-      break;
-    }
-    break;
-
-  case 3:
-    switch (col) {
-    case DetailColumn:
-      align |= Qt::AlignLeft;
-      if (haveAssetAccount() && !m_assetAccountSplit.accountId().isEmpty()
-          && haveInterest() && m_interestSplits.count()
-          && haveFees() && m_feeSplits.count()) {
-        txt = m_feeCategory;
-      } else
-        singleLineMemo(txt, m_split);
-      break;
-
-    case QuantityColumn:
-      align |= Qt::AlignRight;
-      if (haveAssetAccount() && !m_assetAccountSplit.accountId().isEmpty()
-          && haveInterest() && m_interestSplits.count()
-          && haveFees() && m_feeSplits.count()) {
-        txt = m_feeAmount.formatMoney(m_currency);
-      }
-      break;
-
-    default:
-      break;
-    }
-    break;
-
-  case 4:
-    switch (col) {
-    case DetailColumn:
-      align |= Qt::AlignLeft;
-      singleLineMemo(txt, m_split);
-      break;
-
-    default:
-      break;
-    }
-    break;
   }
 }
 
@@ -1702,15 +1702,15 @@ int InvestTransaction::registerColWidth(int col, const QFontMetrics& cellFontMet
   //      as we do it in StdTransaction::registerColWidth()
 #if 0
   switch (col) {
-  default:
-    break;
+    default:
+      break;
 
-  case PriceColumn:
-    if (havePrice()) {
-      txt = (m_split.value() / m_split.shares()).formatMoney("", KMyMoneyGlobalSettings::pricePrecision());
-      nw = cellFontMetrics.width(txt + "  ");
-    }
-    break;
+    case PriceColumn:
+      if (havePrice()) {
+        txt = (m_split.value() / m_split.shares()).formatMoney("", KMyMoneyGlobalSettings::pricePrecision());
+        nw = cellFontMetrics.width(txt + "  ");
+      }
+      break;
   }
 #endif
   return nw;
@@ -1918,14 +1918,14 @@ bool InvestTransaction::haveShares(void) const
 {
   bool rc = true;
   switch (m_transactionType) {
-  case MyMoneySplit::Dividend:
-  case MyMoneySplit::Yield:
-  case MyMoneySplit::SplitShares:
-    rc = false;
-    break;
+    case MyMoneySplit::Dividend:
+    case MyMoneySplit::Yield:
+    case MyMoneySplit::SplitShares:
+      rc = false;
+      break;
 
-  default:
-    break;
+    default:
+      break;
   }
   return rc;
 }
@@ -1934,14 +1934,14 @@ bool InvestTransaction::haveFees(void) const
 {
   bool rc = true;
   switch (m_transactionType) {
-  case MyMoneySplit::AddShares:
-  case MyMoneySplit::RemoveShares:
-  case MyMoneySplit::SplitShares:
-    rc = false;
-    break;
+    case MyMoneySplit::AddShares:
+    case MyMoneySplit::RemoveShares:
+    case MyMoneySplit::SplitShares:
+      rc = false;
+      break;
 
-  default:
-    break;
+    default:
+      break;
   }
   return rc;
 }
@@ -1950,16 +1950,16 @@ bool InvestTransaction::haveInterest(void) const
 {
   bool rc = false;
   switch (m_transactionType) {
-  case MyMoneySplit::BuyShares:
-  case MyMoneySplit::SellShares:
-  case MyMoneySplit::Dividend:
-  case MyMoneySplit::ReinvestDividend:
-  case MyMoneySplit::Yield:
-    rc = true;
-    break;
+    case MyMoneySplit::BuyShares:
+    case MyMoneySplit::SellShares:
+    case MyMoneySplit::Dividend:
+    case MyMoneySplit::ReinvestDividend:
+    case MyMoneySplit::Yield:
+      rc = true;
+      break;
 
-  default:
-    break;
+    default:
+      break;
   }
   return rc;
 }
@@ -1968,14 +1968,14 @@ bool InvestTransaction::havePrice(void) const
 {
   bool rc = false;
   switch (m_transactionType) {
-  case MyMoneySplit::BuyShares:
-  case MyMoneySplit::SellShares:
-  case MyMoneySplit::ReinvestDividend:
-    rc = true;
-    break;
+    case MyMoneySplit::BuyShares:
+    case MyMoneySplit::SellShares:
+    case MyMoneySplit::ReinvestDividend:
+      rc = true;
+      break;
 
-  default:
-    break;
+    default:
+      break;
   }
   return rc;
 }
@@ -1984,15 +1984,15 @@ bool InvestTransaction::haveAmount(void) const
 {
   bool rc = false;
   switch (m_transactionType) {
-  case MyMoneySplit::BuyShares:
-  case MyMoneySplit::SellShares:
-  case MyMoneySplit::Dividend:
-  case MyMoneySplit::Yield:
-    rc = true;
-    break;
+    case MyMoneySplit::BuyShares:
+    case MyMoneySplit::SellShares:
+    case MyMoneySplit::Dividend:
+    case MyMoneySplit::Yield:
+      rc = true;
+      break;
 
-  default:
-    break;
+    default:
+      break;
   }
   return rc;
 }
@@ -2001,15 +2001,15 @@ bool InvestTransaction::haveAssetAccount(void) const
 {
   bool rc = true;
   switch (m_transactionType) {
-  case MyMoneySplit::AddShares:
-  case MyMoneySplit::RemoveShares:
-  case MyMoneySplit::SplitShares:
-  case MyMoneySplit::ReinvestDividend:
-    rc = false;
-    break;
+    case MyMoneySplit::AddShares:
+    case MyMoneySplit::RemoveShares:
+    case MyMoneySplit::SplitShares:
+    case MyMoneySplit::ReinvestDividend:
+      rc = false;
+      break;
 
-  default:
-    break;
+    default:
+      break;
   }
   return rc;
 }

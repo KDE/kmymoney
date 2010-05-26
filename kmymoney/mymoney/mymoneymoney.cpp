@@ -290,22 +290,22 @@ QString MyMoneyMoney::formatMoney(const QString& currency, const int prec, bool 
   QString sign = bNegative ? "-" : "";
 
   switch (signpos) {
-  case ParensAround:
-    res.prepend('(');
-    res.append(')');
-    break;
-  case BeforeQuantityMoney:
-    res.prepend(sign);
-    break;
-  case AfterQuantityMoney:
-    res.append(sign);
-    break;
-  case BeforeMoney:
-    tmpCurrency.prepend(sign);
-    break;
-  case AfterMoney:
-    tmpCurrency.append(sign);
-    break;
+    case ParensAround:
+      res.prepend('(');
+      res.append(')');
+      break;
+    case BeforeQuantityMoney:
+      res.prepend(sign);
+      break;
+    case AfterQuantityMoney:
+      res.append(sign);
+      break;
+    case BeforeMoney:
+      tmpCurrency.prepend(sign);
+      break;
+    case AfterMoney:
+      tmpCurrency.append(sign);
+      break;
   }
   if (!tmpCurrency.isEmpty()) {
     if (bNegative ? _negativePrefixCurrencySymbol : _positivePrefixCurrencySymbol) {
@@ -355,21 +355,21 @@ QDataStream &operator<<(QDataStream &s, const MyMoneyMoney &_money)
   MyMoneyMoney money = _money.convert(100);
 
   switch (MyMoneyMoney::_fileVersion) {
-  case MyMoneyMoney::FILE_4_BYTE_VALUE:
-    if (money.m_num & 0xffffffff00000000LL)
-      qWarning("Lost data while writing out MyMoneyMoney object using deprecated 4 byte writer");
+    case MyMoneyMoney::FILE_4_BYTE_VALUE:
+      if (money.m_num & 0xffffffff00000000LL)
+        qWarning("Lost data while writing out MyMoneyMoney object using deprecated 4 byte writer");
 
-    s << static_cast<qint32>(money.m_num & 0xffffffff);
-    break;
+      s << static_cast<qint32>(money.m_num & 0xffffffff);
+      break;
 
-  default:
-    qDebug("Unknown file version while writing MyMoneyMoney object! Use FILE_8_BYTE_VALUE");
-    // tricky fall through here
+    default:
+      qDebug("Unknown file version while writing MyMoneyMoney object! Use FILE_8_BYTE_VALUE");
+      // tricky fall through here
 
-  case MyMoneyMoney::FILE_8_BYTE_VALUE:
-    s << static_cast<qint32>(money.m_num >> 32);
-    s << static_cast<qint32>(money.m_num & 0xffffffff);
-    break;
+    case MyMoneyMoney::FILE_8_BYTE_VALUE:
+      s << static_cast<qint32>(money.m_num >> 32);
+      s << static_cast<qint32>(money.m_num & 0xffffffff);
+      break;
   }
   return s;
 }
@@ -378,24 +378,24 @@ QDataStream &operator>>(QDataStream &s, MyMoneyMoney &money)
 {
   qint32 tmp;
   switch (MyMoneyMoney::_fileVersion) {
-  case MyMoneyMoney::FILE_4_BYTE_VALUE:
-    s >> tmp;
-    money.m_num = static_cast<signed64>(tmp);
-    money.m_denom = 100;
-    break;
+    case MyMoneyMoney::FILE_4_BYTE_VALUE:
+      s >> tmp;
+      money.m_num = static_cast<signed64>(tmp);
+      money.m_denom = 100;
+      break;
 
-  default:
-    qDebug("Unknown file version while writing MyMoneyMoney object! FILE_8_BYTE_VALUE assumed");
-    // tricky fall through here
+    default:
+      qDebug("Unknown file version while writing MyMoneyMoney object! FILE_8_BYTE_VALUE assumed");
+      // tricky fall through here
 
-  case MyMoneyMoney::FILE_8_BYTE_VALUE:
-    s >> tmp;
-    money.m_num = static_cast<signed64>(tmp);
-    money.m_num <<= 32;
-    s >> tmp;
-    money.m_num |= static_cast<signed64>(tmp);
-    money.m_denom = 100;
-    break;
+    case MyMoneyMoney::FILE_8_BYTE_VALUE:
+      s >> tmp;
+      money.m_num = static_cast<signed64>(tmp);
+      money.m_num <<= 32;
+      s >> tmp;
+      money.m_num |= static_cast<signed64>(tmp);
+      money.m_denom = 100;
+      break;
   }
   return s;
 }
@@ -657,74 +657,74 @@ const MyMoneyMoney MyMoneyMoney::convert(const signed64 _denom, const roundingMe
 
     if (remainder > 0) {
       switch (how) {
-      case RndFloor:
-        if (sign < 0) {
-          out.m_num = out.m_num + 1;
-        }
-        break;
-
-      case RndCeil:
-        if (sign > 0) {
-          out.m_num = out.m_num + 1;
-        }
-        break;
-
-      case RndTrunc:
-        break;
-
-      case RndPromote:
-        out.m_num = out.m_num + 1;
-        break;
-
-      case RndHalfDown:
-        if (denom_neg) {
-          if ((2 * remainder) > in.m_denom*denom) {
+        case RndFloor:
+          if (sign < 0) {
             out.m_num = out.m_num + 1;
           }
-        } else if ((2 * remainder) > temp.m_denom) {
-          out.m_num = out.m_num + 1;
-        }
-        break;
+          break;
 
-      case RndHalfUp:
-        if (denom_neg) {
-          if ((2 * remainder) >= in.m_denom*denom) {
+        case RndCeil:
+          if (sign > 0) {
             out.m_num = out.m_num + 1;
           }
-        } else if ((2 * remainder) >= temp.m_denom) {
-          out.m_num = out.m_num + 1;
-        }
-        break;
+          break;
 
-      case RndRound:
-        if (denom_neg) {
-          if ((2 * remainder) > in.m_denom*denom) {
-            out.m_num = out.m_num + 1;
-          } else if ((2 * remainder) == in.m_denom*denom) {
-            if (out.m_num % 2) {
+        case RndTrunc:
+          break;
+
+        case RndPromote:
+          out.m_num = out.m_num + 1;
+          break;
+
+        case RndHalfDown:
+          if (denom_neg) {
+            if ((2 * remainder) > in.m_denom*denom) {
               out.m_num = out.m_num + 1;
             }
-          }
-        } else {
-          if ((2 * remainder) > temp.m_denom) {
+          } else if ((2 * remainder) > temp.m_denom) {
             out.m_num = out.m_num + 1;
-          } else if ((2 * remainder) == temp.m_denom) {
-            if (out.m_num % 2) {
+          }
+          break;
+
+        case RndHalfUp:
+          if (denom_neg) {
+            if ((2 * remainder) >= in.m_denom*denom) {
               out.m_num = out.m_num + 1;
             }
+          } else if ((2 * remainder) >= temp.m_denom) {
+            out.m_num = out.m_num + 1;
           }
-        }
-        break;
+          break;
 
-      case RndNever:
+        case RndRound:
+          if (denom_neg) {
+            if ((2 * remainder) > in.m_denom*denom) {
+              out.m_num = out.m_num + 1;
+            } else if ((2 * remainder) == in.m_denom*denom) {
+              if (out.m_num % 2) {
+                out.m_num = out.m_num + 1;
+              }
+            }
+          } else {
+            if ((2 * remainder) > temp.m_denom) {
+              out.m_num = out.m_num + 1;
+            } else if ((2 * remainder) == temp.m_denom) {
+              if (out.m_num % 2) {
+                out.m_num = out.m_num + 1;
+              }
+            }
+          }
+          break;
+
+        case RndNever:
 #if HAVE_LONG_DOUBLE
-        qWarning("MyMoneyMoney: have remainder \"%Ld/%Ld\"->convert(%Ld, %d)",
-                 m_num, m_denom, _denom, how);
+          qWarning("MyMoneyMoney: have remainder \"%Ld/%Ld\"->convert(%Ld, %d)",
+                   m_num, m_denom, _denom, how);
 #else
-        qWarning("MyMoneyMoney: have remainder \"%Ld/%Ld\"->convert(%Ld, %d)",
-                 m_num, m_denom, _denom, how);
+          qWarning("MyMoneyMoney: have remainder \"%Ld/%Ld\"->convert(%Ld, %d)",
+                   m_num, m_denom, _denom, how);
 #endif
-        break;
+          break;
       }
     }
     out.m_num = (sign > 0) ? out.m_num : (-out.m_num);

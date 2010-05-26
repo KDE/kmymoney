@@ -128,15 +128,15 @@ KEditScheduleDlg::KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget *par
   m_paymentMethodEdit->setCurrentItem(method);
 
   switch (d->m_schedule.weekendOption()) {
-  case MyMoneySchedule::MoveNothing:
-    m_weekendOptionEdit->setCurrentIndex(0);
-    break;
-  case MyMoneySchedule::MoveBefore:
-    m_weekendOptionEdit->setCurrentIndex(1);
-    break;
-  case MyMoneySchedule::MoveAfter:
-    m_weekendOptionEdit->setCurrentIndex(2);
-    break;
+    case MyMoneySchedule::MoveNothing:
+      m_weekendOptionEdit->setCurrentIndex(0);
+      break;
+    case MyMoneySchedule::MoveBefore:
+      m_weekendOptionEdit->setCurrentIndex(1);
+      break;
+    case MyMoneySchedule::MoveAfter:
+      m_weekendOptionEdit->setCurrentIndex(2);
+      break;
   }
   m_estimateEdit->setChecked(!d->m_schedule.isFixed());
   m_autoEnterEdit->setChecked(d->m_schedule.autoEnter());
@@ -210,40 +210,40 @@ TransactionEditor* KEditScheduleDlg::startEdit(void)
     d->m_tabOrderWidgets.clear();
     KMyMoneyRegister::Action action = KMyMoneyRegister::ActionWithdrawal;
     switch (d->m_schedule.type()) {
-    case MyMoneySchedule::TYPE_DEPOSIT:
-      action = KMyMoneyRegister::ActionDeposit;
-      break;
-    case MyMoneySchedule::TYPE_BILL:
-      action = KMyMoneyRegister::ActionWithdrawal;
-      break;
-    case MyMoneySchedule::TYPE_TRANSFER:
-      action = KMyMoneyRegister::ActionTransfer;
-      break;
-    default:
-      // if we end up here, we don't have a known schedule type (yet). in this case, we just glimpse
-      // into the transaction and determine the type. in case we don't have a transaction with splits
-      // we stick with the default action already set up
-      if (d->m_schedule.transaction().splits().count() > 0) {
-        QList<MyMoneySplit>::const_iterator it_s;
-        bool isDeposit = false;
-        bool isTransfer = false;
-        for (it_s = d->m_schedule.transaction().splits().begin(); it_s != d->m_schedule.transaction().splits().end(); ++it_s) {
-          if ((*it_s).accountId() == d->m_schedule.account().id()) {
-            isDeposit = !((*it_s).shares().isNegative());
-          } else {
-            MyMoneyAccount acc = MyMoneyFile::instance()->account((*it_s).accountId());
-            if (acc.isAssetLiability() && d->m_schedule.transaction().splits().count() == 2) {
-              isTransfer = true;
+      case MyMoneySchedule::TYPE_DEPOSIT:
+        action = KMyMoneyRegister::ActionDeposit;
+        break;
+      case MyMoneySchedule::TYPE_BILL:
+        action = KMyMoneyRegister::ActionWithdrawal;
+        break;
+      case MyMoneySchedule::TYPE_TRANSFER:
+        action = KMyMoneyRegister::ActionTransfer;
+        break;
+      default:
+        // if we end up here, we don't have a known schedule type (yet). in this case, we just glimpse
+        // into the transaction and determine the type. in case we don't have a transaction with splits
+        // we stick with the default action already set up
+        if (d->m_schedule.transaction().splits().count() > 0) {
+          QList<MyMoneySplit>::const_iterator it_s;
+          bool isDeposit = false;
+          bool isTransfer = false;
+          for (it_s = d->m_schedule.transaction().splits().begin(); it_s != d->m_schedule.transaction().splits().end(); ++it_s) {
+            if ((*it_s).accountId() == d->m_schedule.account().id()) {
+              isDeposit = !((*it_s).shares().isNegative());
+            } else {
+              MyMoneyAccount acc = MyMoneyFile::instance()->account((*it_s).accountId());
+              if (acc.isAssetLiability() && d->m_schedule.transaction().splits().count() == 2) {
+                isTransfer = true;
+              }
             }
           }
-        }
 
-        if (isTransfer)
-          action = KMyMoneyRegister::ActionTransfer;
-        else if (isDeposit)
-          action = KMyMoneyRegister::ActionDeposit;
-      }
-      break;
+          if (isTransfer)
+            action = KMyMoneyRegister::ActionTransfer;
+          else if (isDeposit)
+            action = KMyMoneyRegister::ActionDeposit;
+        }
+        break;
     }
     editor->setup(d->m_tabOrderWidgets, d->m_schedule.account(), action);
 
@@ -339,15 +339,15 @@ const MyMoneySchedule& KEditScheduleDlg::schedule(void) const
     d->m_schedule.setOccurrenceMultiplier(m_frequencyNoEdit->value());
 
     switch (m_weekendOptionEdit->currentIndex())  {
-    case 0:
-      d->m_schedule.setWeekendOption(MyMoneySchedule::MoveNothing);
-      break;
-    case 1:
-      d->m_schedule.setWeekendOption(MyMoneySchedule::MoveBefore);
-      break;
-    case 2:
-      d->m_schedule.setWeekendOption(MyMoneySchedule::MoveAfter);
-      break;
+      case 0:
+        d->m_schedule.setWeekendOption(MyMoneySchedule::MoveNothing);
+        break;
+      case 1:
+        d->m_schedule.setWeekendOption(MyMoneySchedule::MoveBefore);
+        break;
+      case 2:
+        d->m_schedule.setWeekendOption(MyMoneySchedule::MoveAfter);
+        break;
     }
 
     d->m_schedule.setType(MyMoneySchedule::TYPE_BILL);
@@ -355,16 +355,16 @@ const MyMoneySchedule& KEditScheduleDlg::schedule(void) const
     KMyMoneyTransactionForm::TabBar* tabbar = dynamic_cast<KMyMoneyTransactionForm::TabBar*>(d->m_editor->haveWidget("tabbar"));
     if (tabbar) {
       switch (static_cast<KMyMoneyRegister::Action>(tabbar->currentIndex())) {
-      case KMyMoneyRegister::ActionDeposit:
-        d->m_schedule.setType(MyMoneySchedule::TYPE_DEPOSIT);
-        break;
-      default:
-      case KMyMoneyRegister::ActionWithdrawal:
-        d->m_schedule.setType(MyMoneySchedule::TYPE_BILL);
-        break;
-      case KMyMoneyRegister::ActionTransfer:
-        d->m_schedule.setType(MyMoneySchedule::TYPE_TRANSFER);
-        break;
+        case KMyMoneyRegister::ActionDeposit:
+          d->m_schedule.setType(MyMoneySchedule::TYPE_DEPOSIT);
+          break;
+        default:
+        case KMyMoneyRegister::ActionWithdrawal:
+          d->m_schedule.setType(MyMoneySchedule::TYPE_BILL);
+          break;
+        case KMyMoneyRegister::ActionTransfer:
+          d->m_schedule.setType(MyMoneySchedule::TYPE_TRANSFER);
+          break;
       }
     } else {
       qDebug("No tabbar found in KEditScheduleDlg::schedule(). Defaulting type to BILL");
@@ -496,19 +496,19 @@ void KEditScheduleDlg::slotFrequencyChanged(int item)
   if (isEndSeries)
     m_endOptionsFrame->setEnabled(item != MyMoneySchedule::OCCUR_ONCE);
   switch (item) {
-  case MyMoneySchedule::OCCUR_DAILY:
-  case MyMoneySchedule::OCCUR_WEEKLY:
-  case MyMoneySchedule::OCCUR_EVERYHALFMONTH:
-  case MyMoneySchedule::OCCUR_MONTHLY:
-  case MyMoneySchedule::OCCUR_YEARLY:
-    // Supports Frequency Number
-    m_frequencyNoEdit->setEnabled(true);
-    break;
-  default:
-    // Multiplier is always 1
-    m_frequencyNoEdit->setEnabled(false);
-    m_frequencyNoEdit->setValue(1);
-    break;
+    case MyMoneySchedule::OCCUR_DAILY:
+    case MyMoneySchedule::OCCUR_WEEKLY:
+    case MyMoneySchedule::OCCUR_EVERYHALFMONTH:
+    case MyMoneySchedule::OCCUR_MONTHLY:
+    case MyMoneySchedule::OCCUR_YEARLY:
+      // Supports Frequency Number
+      m_frequencyNoEdit->setEnabled(true);
+      break;
+    default:
+      // Multiplier is always 1
+      m_frequencyNoEdit->setEnabled(false);
+      m_frequencyNoEdit->setValue(1);
+      break;
   }
   if (isEndSeries && (item != MyMoneySchedule::OCCUR_ONCE)) {
     // Changing the frequency changes the number

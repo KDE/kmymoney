@@ -388,38 +388,38 @@ QString KMyMoneyUtils::reconcileStateToString(MyMoneySplit::reconcileFlagE flag,
   QString txt;
   if (text) {
     switch (flag) {
-    case MyMoneySplit::NotReconciled:
-      txt = i18nc("Reconcile state 'Not reconciled'", "Not reconciled");
-      break;
-    case MyMoneySplit::Cleared:
-      txt = i18nc("Reconcile state 'Cleared'", "Cleared");
-      break;
-    case MyMoneySplit::Reconciled:
-      txt = i18nc("Reconcile state 'Reconciled'", "Reconciled");
-      break;
-    case MyMoneySplit::Frozen:
-      txt = i18nc("Reconcile state 'Frozen'", "Frozen");
-      break;
-    default:
-      txt = i18nc("Unknown reconciliation state", "Unknown");
-      break;
+      case MyMoneySplit::NotReconciled:
+        txt = i18nc("Reconcile state 'Not reconciled'", "Not reconciled");
+        break;
+      case MyMoneySplit::Cleared:
+        txt = i18nc("Reconcile state 'Cleared'", "Cleared");
+        break;
+      case MyMoneySplit::Reconciled:
+        txt = i18nc("Reconcile state 'Reconciled'", "Reconciled");
+        break;
+      case MyMoneySplit::Frozen:
+        txt = i18nc("Reconcile state 'Frozen'", "Frozen");
+        break;
+      default:
+        txt = i18nc("Unknown reconciliation state", "Unknown");
+        break;
     }
   } else {
     switch (flag) {
-    case MyMoneySplit::NotReconciled:
-      break;
-    case MyMoneySplit::Cleared:
-      txt = i18nc("Reconcile flag C", "C");
-      break;
-    case MyMoneySplit::Reconciled:
-      txt = i18nc("Reconcile flag R", "R");
-      break;
-    case MyMoneySplit::Frozen:
-      txt = i18nc("Reconcile flag F", "F");
-      break;
-    default:
-      txt = i18nc("Flag for unknown reconciliation state", "?");
-      break;
+      case MyMoneySplit::NotReconciled:
+        break;
+      case MyMoneySplit::Cleared:
+        txt = i18nc("Reconcile flag C", "C");
+        break;
+      case MyMoneySplit::Reconciled:
+        txt = i18nc("Reconcile flag R", "R");
+        break;
+      case MyMoneySplit::Frozen:
+        txt = i18nc("Reconcile flag F", "F");
+        break;
+      default:
+        txt = i18nc("Flag for unknown reconciliation state", "?");
+        break;
     }
   }
   return txt;

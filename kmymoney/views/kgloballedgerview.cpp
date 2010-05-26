@@ -538,17 +538,17 @@ void KGlobalLedgerView::loadView(void)
 
     if (isReconciliationAccount()) {
       switch (m_register->primarySortKey()) {
-      case KMyMoneyRegister::PostDateSort:
-        statement = new KMyMoneyRegister::StatementGroupMarker(m_register, KMyMoneyRegister::Deposit, reconciliationDate, i18n("Statement Details"));
-        m_register->sortItems();
-        break;
-      case KMyMoneyRegister::TypeSort:
-        dStatement = new KMyMoneyRegister::StatementGroupMarker(m_register, KMyMoneyRegister::Deposit, reconciliationDate, i18n("Statement Deposit Details"));
-        pStatement = new KMyMoneyRegister::StatementGroupMarker(m_register, KMyMoneyRegister::Payment, reconciliationDate, i18n("Statement Payment Details"));
-        m_register->sortItems();
-        break;
-      default:
-        break;
+        case KMyMoneyRegister::PostDateSort:
+          statement = new KMyMoneyRegister::StatementGroupMarker(m_register, KMyMoneyRegister::Deposit, reconciliationDate, i18n("Statement Details"));
+          m_register->sortItems();
+          break;
+        case KMyMoneyRegister::TypeSort:
+          dStatement = new KMyMoneyRegister::StatementGroupMarker(m_register, KMyMoneyRegister::Deposit, reconciliationDate, i18n("Statement Deposit Details"));
+          pStatement = new KMyMoneyRegister::StatementGroupMarker(m_register, KMyMoneyRegister::Payment, reconciliationDate, i18n("Statement Payment Details"));
+          m_register->sortItems();
+          break;
+        default:
+          break;
       }
     }
 
@@ -1035,11 +1035,11 @@ void KGlobalLedgerView::slotNewTransaction(void)
 void KGlobalLedgerView::setupDefaultAction(void)
 {
   switch (m_account.accountType()) {
-    // TODO if we want a different action for different account types
-    //      we can add cases here
-  default:
-    d->m_action = KMyMoneyRegister::ActionWithdrawal;
-    break;
+      // TODO if we want a different action for different account types
+      //      we can add cases here
+    default:
+      d->m_action = KMyMoneyRegister::ActionWithdrawal;
+      break;
   }
 }
 
@@ -1091,34 +1091,34 @@ TransactionEditor* KGlobalLedgerView::startEdit(const KMyMoneyRegister::Selected
   Q_ASSERT(warnLevel < 2);  // otherwise the edit action should not be enabled
 
   switch (warnLevel) {
-  case 0:
-    break;
+    case 0:
+      break;
 
-  case 1:
-    if (KMessageBox::warningContinueCancel(0,
-                                           i18n(
-                                             "At least one split of the selected transactions has been reconciled. "
-                                             "Do you wish to continue to edit the transactions anyway?"
-                                           ),
-                                           i18n("Transaction already reconciled"), KStandardGuiItem::cont(), KStandardGuiItem::cancel(),
-                                           "EditReconciledTransaction") == KMessageBox::Cancel) {
-      warnLevel = 2;
-    }
-    break;
+    case 1:
+      if (KMessageBox::warningContinueCancel(0,
+                                             i18n(
+                                               "At least one split of the selected transactions has been reconciled. "
+                                               "Do you wish to continue to edit the transactions anyway?"
+                                             ),
+                                             i18n("Transaction already reconciled"), KStandardGuiItem::cont(), KStandardGuiItem::cancel(),
+                                             "EditReconciledTransaction") == KMessageBox::Cancel) {
+        warnLevel = 2;
+      }
+      break;
 
-  case 2:
-    KMessageBox::sorry(0,
-                       i18n("At least one split of the selected transactions has been frozen. "
-                            "Editing the transactions is therefore prohibited."),
-                       i18n("Transaction already frozen"));
-    break;
+    case 2:
+      KMessageBox::sorry(0,
+                         i18n("At least one split of the selected transactions has been frozen. "
+                              "Editing the transactions is therefore prohibited."),
+                         i18n("Transaction already frozen"));
+      break;
 
-  case 3:
-    KMessageBox::sorry(0,
-                       i18n("At least one split of the selected transaction references an account that has been closed. "
-                            "Editing the transactions is therefore prohibited."),
-                       i18n("Account closed"));
-    break;
+    case 3:
+      KMessageBox::sorry(0,
+                         i18n("At least one split of the selected transaction references an account that has been closed. "
+                              "Editing the transactions is therefore prohibited."),
+                         i18n("Account closed"));
+      break;
   }
 
   if (warnLevel > 1)
@@ -1327,11 +1327,11 @@ bool KGlobalLedgerView::eventFilter(QObject* o, QEvent* e)
         if ((k->modifiers() & Qt::KeyboardModifierMask) == 0
             || (k->modifiers() & Qt::KeypadModifier) != 0) {
           switch (k->key()) {
-          case Qt::Key_Return:
-          case Qt::Key_Enter:
-            kmymoney->action("transaction_edit")->trigger();
-            rc = true;
-            break;
+            case Qt::Key_Return:
+            case Qt::Key_Enter:
+              kmymoney->action("transaction_edit")->trigger();
+              rc = true;
+              break;
           }
         }
       }

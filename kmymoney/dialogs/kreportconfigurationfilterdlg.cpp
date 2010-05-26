@@ -283,31 +283,31 @@ void KReportConfigurationFilterDlg::slotReset(void)
 
   if (m_tab2) {
     switch (m_initialState.detailLevel()) {
-    case MyMoneyReport::eDetailNone:
-    case MyMoneyReport::eDetailEnd:
-    case MyMoneyReport::eDetailAll:
-      m_tab2->m_comboDetail->setCurrentItem(i18n("All"), false);
-      break;
-    case MyMoneyReport::eDetailTop:
-      m_tab2->m_comboDetail->setCurrentItem(i18n("Top-Level"), false);
-      break;
-    case MyMoneyReport::eDetailGroup:
-      m_tab2->m_comboDetail->setCurrentItem(i18n("Groups"), false);
-      break;
-    case MyMoneyReport::eDetailTotal:
-      m_tab2->m_comboDetail->setCurrentItem(i18n("Totals"), false);
-      break;
+      case MyMoneyReport::eDetailNone:
+      case MyMoneyReport::eDetailEnd:
+      case MyMoneyReport::eDetailAll:
+        m_tab2->m_comboDetail->setCurrentItem(i18n("All"), false);
+        break;
+      case MyMoneyReport::eDetailTop:
+        m_tab2->m_comboDetail->setCurrentItem(i18n("Top-Level"), false);
+        break;
+      case MyMoneyReport::eDetailGroup:
+        m_tab2->m_comboDetail->setCurrentItem(i18n("Groups"), false);
+        break;
+      case MyMoneyReport::eDetailTotal:
+        m_tab2->m_comboDetail->setCurrentItem(i18n("Totals"), false);
+        break;
     }
 
     switch (m_initialState.rowType()) {
-    case MyMoneyReport::eExpenseIncome:
-    case MyMoneyReport::eBudget:
-    case MyMoneyReport::eBudgetActual:
-      m_tab2->m_comboRows->setCurrentItem(i18n("Income & Expenses"), false); // income / expense
-      break;
-    default:
-      m_tab2->m_comboRows->setCurrentItem(i18n("Assets & Liabilities"), false); // asset / liability
-      break;
+      case MyMoneyReport::eExpenseIncome:
+      case MyMoneyReport::eBudget:
+      case MyMoneyReport::eBudgetActual:
+        m_tab2->m_comboRows->setCurrentItem(i18n("Income & Expenses"), false); // income / expense
+        break;
+      default:
+        m_tab2->m_comboRows->setCurrentItem(i18n("Assets & Liabilities"), false); // asset / liability
+        break;
     }
     m_tab2->m_checkTotalColumn->setChecked(m_initialState.isShowingRowTotals());
 
@@ -315,33 +315,33 @@ void KReportConfigurationFilterDlg::slotReset(void)
 
     if (m_initialState.isColumnsAreDays()) {
       switch (m_initialState.columnType()) {
-      case MyMoneyReport::eNoColumns:
-      case MyMoneyReport::eDays:
-        m_tab2->m_comboColumns->setCurrentItem(i18n("Daily"), false);
-        break;
-      case MyMoneyReport::eWeeks:
-        m_tab2->m_comboColumns->setCurrentItem(i18n("Weekly"), false);
-        break;
-      default:
-        break;
+        case MyMoneyReport::eNoColumns:
+        case MyMoneyReport::eDays:
+          m_tab2->m_comboColumns->setCurrentItem(i18n("Daily"), false);
+          break;
+        case MyMoneyReport::eWeeks:
+          m_tab2->m_comboColumns->setCurrentItem(i18n("Weekly"), false);
+          break;
+        default:
+          break;
       }
     } else {
       switch (m_initialState.columnType()) {
-      case MyMoneyReport::eNoColumns:
-      case MyMoneyReport::eMonths:
-        m_tab2->m_comboColumns->setCurrentItem(i18n("Monthly"), false);
-        break;
-      case MyMoneyReport::eBiMonths:
-        m_tab2->m_comboColumns->setCurrentItem(i18n("Bi-Monthly"), false);
-        break;
-      case MyMoneyReport::eQuarters:
-        m_tab2->m_comboColumns->setCurrentItem(i18n("Quarterly"), false);
-        break;
-      case MyMoneyReport::eYears:
-        m_tab2->m_comboColumns->setCurrentItem(i18n("Yearly"), false);
-        break;
-      default:
-        break;
+        case MyMoneyReport::eNoColumns:
+        case MyMoneyReport::eMonths:
+          m_tab2->m_comboColumns->setCurrentItem(i18n("Monthly"), false);
+          break;
+        case MyMoneyReport::eBiMonths:
+          m_tab2->m_comboColumns->setCurrentItem(i18n("Bi-Monthly"), false);
+          break;
+        case MyMoneyReport::eQuarters:
+          m_tab2->m_comboColumns->setCurrentItem(i18n("Quarterly"), false);
+          break;
+        case MyMoneyReport::eYears:
+          m_tab2->m_comboColumns->setCurrentItem(i18n("Yearly"), false);
+          break;
+        default:
+          break;
       }
     }
 
@@ -372,30 +372,30 @@ void KReportConfigurationFilterDlg::slotReset(void)
     m_tab2->m_checkUnused->setChecked(m_initialState.isIncludingUnusedAccounts());
   } else if (m_tab3) {
     switch (m_initialState.rowType()) {
-    case MyMoneyReport::eNoColumns:
-    case MyMoneyReport::eCategory:
-      m_tab3->m_comboOrganizeBy->setCurrentItem(i18n("Categories"), false);
-      break;
-    case MyMoneyReport::eTopCategory:
-      m_tab3->m_comboOrganizeBy->setCurrentItem(i18n("Top Categories"), false);
-      break;
-    case MyMoneyReport::ePayee:
-      m_tab3->m_comboOrganizeBy->setCurrentItem(i18n("Payees"), false);
-      break;
-    case MyMoneyReport::eAccount:
-      m_tab3->m_comboOrganizeBy->setCurrentItem(i18n("Accounts"), false);
-      break;
-    case MyMoneyReport::eTopAccount:
-      m_tab3->m_comboOrganizeBy->setCurrentItem(i18n("Top Accounts"), false);
-      break;
-    case MyMoneyReport::eMonth:
-      m_tab3->m_comboOrganizeBy->setCurrentItem(i18n("Month"), false);
-      break;
-    case MyMoneyReport::eWeek:
-      m_tab3->m_comboOrganizeBy->setCurrentItem(i18n("Week"), false);
-      break;
-    default:
-      throw new MYMONEYEXCEPTION("KReportConfigurationFilterDlg::slotReset(): QueryTable report has invalid rowtype");
+      case MyMoneyReport::eNoColumns:
+      case MyMoneyReport::eCategory:
+        m_tab3->m_comboOrganizeBy->setCurrentItem(i18n("Categories"), false);
+        break;
+      case MyMoneyReport::eTopCategory:
+        m_tab3->m_comboOrganizeBy->setCurrentItem(i18n("Top Categories"), false);
+        break;
+      case MyMoneyReport::ePayee:
+        m_tab3->m_comboOrganizeBy->setCurrentItem(i18n("Payees"), false);
+        break;
+      case MyMoneyReport::eAccount:
+        m_tab3->m_comboOrganizeBy->setCurrentItem(i18n("Accounts"), false);
+        break;
+      case MyMoneyReport::eTopAccount:
+        m_tab3->m_comboOrganizeBy->setCurrentItem(i18n("Top Accounts"), false);
+        break;
+      case MyMoneyReport::eMonth:
+        m_tab3->m_comboOrganizeBy->setCurrentItem(i18n("Month"), false);
+        break;
+      case MyMoneyReport::eWeek:
+        m_tab3->m_comboOrganizeBy->setCurrentItem(i18n("Week"), false);
+        break;
+      default:
+        throw new MYMONEYEXCEPTION("KReportConfigurationFilterDlg::slotReset(): QueryTable report has invalid rowtype");
     }
 
     unsigned qc = m_initialState.queryColumns();
@@ -420,24 +420,24 @@ void KReportConfigurationFilterDlg::slotReset(void)
 
   if (m_tabChart) {
     switch (m_initialState.chartType()) {
-    case MyMoneyReport::eChartNone:
-    case MyMoneyReport::eChartLine:
-      m_tabChart->m_comboType->setCurrentItem(i18n("Line"), false);
-      break;
-    case MyMoneyReport::eChartBar:
-      m_tabChart->m_comboType->setCurrentItem(i18n("Bar"), false);
-      break;
-    case MyMoneyReport::eChartStackedBar:
-      m_tabChart->m_comboType->setCurrentItem(i18n("Stacked Bar"), false);
-      break;
-    case MyMoneyReport::eChartPie:
-      m_tabChart->m_comboType->setCurrentItem(i18n("Pie"), false);
-      break;
-    case MyMoneyReport::eChartRing:
-      m_tabChart->m_comboType->setCurrentItem(i18n("Ring"), false);
-      break;
-    case MyMoneyReport::eChartEnd:
-      throw new MYMONEYEXCEPTION("KReportConfigurationFilterDlg::slotReset(): Report has invalid charttype");
+      case MyMoneyReport::eChartNone:
+      case MyMoneyReport::eChartLine:
+        m_tabChart->m_comboType->setCurrentItem(i18n("Line"), false);
+        break;
+      case MyMoneyReport::eChartBar:
+        m_tabChart->m_comboType->setCurrentItem(i18n("Bar"), false);
+        break;
+      case MyMoneyReport::eChartStackedBar:
+        m_tabChart->m_comboType->setCurrentItem(i18n("Stacked Bar"), false);
+        break;
+      case MyMoneyReport::eChartPie:
+        m_tabChart->m_comboType->setCurrentItem(i18n("Pie"), false);
+        break;
+      case MyMoneyReport::eChartRing:
+        m_tabChart->m_comboType->setCurrentItem(i18n("Ring"), false);
+        break;
+      case MyMoneyReport::eChartEnd:
+        throw new MYMONEYEXCEPTION("KReportConfigurationFilterDlg::slotReset(): Report has invalid charttype");
     }
     m_tabChart->m_checkGridLines->setChecked(m_initialState.isChartGridLines());
     m_tabChart->m_checkValues->setChecked(m_initialState.isChartDataLabels());

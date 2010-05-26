@@ -411,15 +411,15 @@ void KFindTransactionDlg::setupDatePage(void)
 void KFindTransactionDlg::slotDateRangeChanged(int idx)
 {
   switch (idx) {
-  case MyMoneyTransactionFilter::allDates:
-  case MyMoneyTransactionFilter::userDefined:
-    m_fromDate->loadDate(QDate());
-    m_toDate->loadDate(QDate());
-    break;
-  default:
-    m_fromDate->loadDate(m_startDates[idx]);
-    m_toDate->loadDate(m_endDates[idx]);
-    break;
+    case MyMoneyTransactionFilter::allDates:
+    case MyMoneyTransactionFilter::userDefined:
+      m_fromDate->loadDate(QDate());
+      m_toDate->loadDate(QDate());
+      break;
+    default:
+      m_fromDate->loadDate(m_startDates[idx]);
+      m_toDate->loadDate(m_endDates[idx]);
+      break;
   }
   slotUpdateSelections();
 }
@@ -544,15 +544,15 @@ void KFindTransactionDlg::slotNrRangeSelected(void)
 void KFindTransactionDlg::addItemToFilter(const opTypeE op, const QString& id)
 {
   switch (op) {
-  case addAccountToFilter:
-    m_filter.addAccount(id);
-    break;
-  case addCategoryToFilter:
-    m_filter.addCategory(id);
-    break;
-  case addPayeeToFilter:
-    m_filter.addPayee(id);
-    break;
+    case addAccountToFilter:
+      m_filter.addAccount(id);
+      break;
+    case addCategoryToFilter:
+      m_filter.addCategory(id);
+      break;
+    case addPayeeToFilter:
+      m_filter.addPayee(id);
+      break;
   }
 }
 
@@ -807,11 +807,11 @@ void KFindTransactionDlg::resizeEvent(QResizeEvent* ev)
 
   for (int i = 0; i < m_register->columnCount(); ++i) {
     switch (i) {
-    case 4:     // skip the one, we want to set
-      break;
-    default:
-      w -= m_register->columnWidth(i);
-      break;
+      case 4:     // skip the one, we want to set
+        break;
+      default:
+        w -= m_register->columnWidth(i);
+        break;
     }
   }
 
@@ -841,14 +841,14 @@ bool KFindTransactionDlg::eventFilter(QObject* o, QEvent* e)
       QKeyEvent *k = static_cast<QKeyEvent *>(e);
       if (w == m_register) {
         switch (k->key()) {
-        default:
-          break;
+          default:
+            break;
 
-        case Qt::Key_Return:
-        case Qt::Key_Enter:
-          rc = true;
-          slotSelectTransaction();
-          break;
+          case Qt::Key_Return:
+          case Qt::Key_Enter:
+            rc = true;
+            slotSelectTransaction();
+            break;
         }
       }
     }

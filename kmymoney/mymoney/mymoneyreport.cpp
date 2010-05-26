@@ -278,28 +278,28 @@ bool MyMoneyReport::includes(const MyMoneyAccount& acc) const
 
   if (includesAccountGroup(acc.accountGroup())) {
     switch (acc.accountGroup()) {
-    case MyMoneyAccount::Income:
-    case MyMoneyAccount::Expense:
-      if (isTax())
-        result = (acc.value("Tax") == "Yes") && includesCategory(acc.id());
-      else
-        result = includesCategory(acc.id());
-      break;
-    case MyMoneyAccount::Asset:
-    case MyMoneyAccount::Liability:
-      if (isLoansOnly())
-        result = acc.isLoan() && includesAccount(acc.id());
-      else if (isInvestmentsOnly())
-        result = acc.isInvest() && includesAccount(acc.id());
-      else if (isIncludingTransfers() && m_rowType == MyMoneyReport::eExpenseIncome)
-        // If transfers are included, ONLY include this account if it is NOT
-        // included in the report itself!!
-        result = ! includesAccount(acc.id());
-      else
+      case MyMoneyAccount::Income:
+      case MyMoneyAccount::Expense:
+        if (isTax())
+          result = (acc.value("Tax") == "Yes") && includesCategory(acc.id());
+        else
+          result = includesCategory(acc.id());
+        break;
+      case MyMoneyAccount::Asset:
+      case MyMoneyAccount::Liability:
+        if (isLoansOnly())
+          result = acc.isLoan() && includesAccount(acc.id());
+        else if (isInvestmentsOnly())
+          result = acc.isInvest() && includesAccount(acc.id());
+        else if (isIncludingTransfers() && m_rowType == MyMoneyReport::eExpenseIncome)
+          // If transfers are included, ONLY include this account if it is NOT
+          // included in the report itself!!
+          result = ! includesAccount(acc.id());
+        else
+          result = includesAccount(acc.id());
+        break;
+      default:
         result = includesAccount(acc.id());
-      break;
-    default:
-      result = includesAccount(acc.id());
     }
   }
   return result;

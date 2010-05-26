@@ -91,24 +91,24 @@ public:
       KConfigGroup grp = cfg->group("Proxy Settings");
       int type = grp.readEntry("ProxyType", 0);
       switch (type) {
-      case 0: // no proxy
-        break;
+        case 0: // no proxy
+          break;
 
-      case 1: // manual specified
-        proxy = grp.readEntry("httpsProxy");
-        qDebug("KDE https proxy setting is '%s'", qPrintable(proxy));
-        if (exp.exactMatch(proxy) != -1) {
-          proxy = exp.cap(2);
-          qDebug("Setting GWEN_PROXY to '%s'", qPrintable(proxy));
-          if (setenv("GWEN_PROXY", qPrintable(proxy), 1) == -1) {
-            qDebug("Unable to setup GWEN_PROXY");
+        case 1: // manual specified
+          proxy = grp.readEntry("httpsProxy");
+          qDebug("KDE https proxy setting is '%s'", qPrintable(proxy));
+          if (exp.exactMatch(proxy) != -1) {
+            proxy = exp.cap(2);
+            qDebug("Setting GWEN_PROXY to '%s'", qPrintable(proxy));
+            if (setenv("GWEN_PROXY", qPrintable(proxy), 1) == -1) {
+              qDebug("Unable to setup GWEN_PROXY");
+            }
           }
-        }
-        break;
+          break;
 
-      default: // other currently not supported
-        qDebug("KDE proxy setting of type %d not supported", type);
-        break;
+        default: // other currently not supported
+          qDebug("KDE proxy setting of type %d not supported", type);
+          break;
       }
       delete cfg;
     }
@@ -493,17 +493,17 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
 
           int dateOption = acc.onlineBankingSettings().value("kbanking-statementDate").toInt();
           switch (dateOption) {
-          case 0: // Ask user
-            break;
-          case 1: // No date
-            qd = QDate();
-            break;
-          case 2: // Last download
-            qd = lastUpdate;
-            break;
-          case 3: // First possible
-            // qd is already setup
-            break;
+            case 0: // Ask user
+              break;
+            case 1: // No date
+              qd = QDate();
+              break;
+            case 2: // Last download
+              qd = lastUpdate;
+              break;
+            case 3: // First possible
+              // qd is already setup
+              break;
           }
 
           // the pick start date option dialog is needed in
@@ -585,17 +585,17 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
       KMessageBox::ButtonCode result = KMessageBox::Cancel;
       if (!moreAccounts) {
         switch (acc.onlineBankingSettings().value("kbanking-jobexec").toInt()) {
-        case 1:
-          result = KMessageBox::Yes;
-          break;
-        case 2:
-          result = KMessageBox::No;
-          break;
-        default:
-          result = static_cast<KMessageBox::ButtonCode>(KMessageBox::questionYesNo(0,
-                   i18n("Do you want to execute or queue this job in the outbox?"),
-                   i18n("Execution"), executeButton, queueButton));
-          break;
+          case 1:
+            result = KMessageBox::Yes;
+            break;
+          case 2:
+            result = KMessageBox::No;
+            break;
+          default:
+            result = static_cast<KMessageBox::ButtonCode>(KMessageBox::questionYesNo(0,
+                     i18n("Do you want to execute or queue this job in the outbox?"),
+                     i18n("Execution"), executeButton, queueButton));
+            break;
         }
       } else {
         result = KMessageBox::No;
@@ -911,26 +911,26 @@ bool KMyMoneyBanking::importAccountInfo(AB_IMEXPORTER_ACCOUNTINFO *ai,
 
   // account type
   switch (AB_ImExporterAccountInfo_GetType(ai)) {
-  case AB_AccountType_Bank:
-    ks.m_eType = MyMoneyStatement::etSavings;
-    break;
-  case AB_AccountType_CreditCard:
-    ks.m_eType = MyMoneyStatement::etCreditCard;
-    break;
-  case AB_AccountType_Checking:
-    ks.m_eType = MyMoneyStatement::etCheckings;
-    break;
-  case AB_AccountType_Savings:
-    ks.m_eType = MyMoneyStatement::etSavings;
-    break;
-  case AB_AccountType_Investment:
-    ks.m_eType = MyMoneyStatement::etInvestment;
-    break;
-  case AB_AccountType_Cash:
-    ks.m_eType = MyMoneyStatement::etNone;
-    break;
-  default:
-    ks.m_eType = MyMoneyStatement::etNone;
+    case AB_AccountType_Bank:
+      ks.m_eType = MyMoneyStatement::etSavings;
+      break;
+    case AB_AccountType_CreditCard:
+      ks.m_eType = MyMoneyStatement::etCreditCard;
+      break;
+    case AB_AccountType_Checking:
+      ks.m_eType = MyMoneyStatement::etCheckings;
+      break;
+    case AB_AccountType_Savings:
+      ks.m_eType = MyMoneyStatement::etSavings;
+      break;
+    case AB_AccountType_Investment:
+      ks.m_eType = MyMoneyStatement::etInvestment;
+      break;
+    case AB_AccountType_Cash:
+      ks.m_eType = MyMoneyStatement::etNone;
+      break;
+    default:
+      ks.m_eType = MyMoneyStatement::etNone;
   }
 
   // account status

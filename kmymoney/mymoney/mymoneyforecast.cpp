@@ -91,16 +91,16 @@ void MyMoneyForecast::doForecast()
   setForecastAccountList();
 
   switch (fMethod) {
-  case eScheduled:
-    doFutureScheduledForecast();
-    calculateScheduledDailyBalances();
-    break;
-  case eHistoric:
-    pastTransactions();
-    calculateHistoricDailyBalances();
-    break;
-  default:
-    break;
+    case eScheduled:
+      doFutureScheduledForecast();
+      calculateScheduledDailyBalances();
+      break;
+    case eHistoric:
+      pastTransactions();
+      calculateHistoricDailyBalances();
+      break;
+    default:
+      break;
   }
 
   //flag the forecast as done
@@ -241,36 +241,36 @@ void MyMoneyForecast::calculateAccountTrendList()
     }
 
     switch (historyMethod()) {
-      //moving average
-    case 0: {
-      for (int t_day = 1; t_day <= accountsCycle(); t_day++)
-        m_accountTrendList[acc.id()][t_day] = accountMovingAverage(acc, t_day, auxForecastTerms); //moving average
-      break;
-    }
-    //weighted moving average
-    case 1: {
-      //calculate total weight for moving average
-      if (auxForecastTerms == forecastCycles()) {
-        totalWeight = (auxForecastTerms * (auxForecastTerms + 1)) / 2; //totalWeight is the triangular number of auxForecastTerms
-      } else {
-        //if only taking a few periods, totalWeight is the sum of the weight for most recent periods
-        for (int i = 1, w = forecastCycles(); i <= auxForecastTerms; ++i, --w)
-          totalWeight += w;
-      }
-      for (int t_day = 1; t_day <= accountsCycle(); t_day++)
-        m_accountTrendList[acc.id()][t_day] = accountWeightedMovingAverage(acc, t_day, totalWeight);
-      break;
-    }
-    case 2: {
-      //calculate mean term
-      MyMoneyMoney meanTerms = MyMoneyMoney((auxForecastTerms * (auxForecastTerms + 1)) / 2, 1) / MyMoneyMoney(auxForecastTerms, 1);
+        //moving average
+      case 0: {
+          for (int t_day = 1; t_day <= accountsCycle(); t_day++)
+            m_accountTrendList[acc.id()][t_day] = accountMovingAverage(acc, t_day, auxForecastTerms); //moving average
+          break;
+        }
+        //weighted moving average
+      case 1: {
+          //calculate total weight for moving average
+          if (auxForecastTerms == forecastCycles()) {
+            totalWeight = (auxForecastTerms * (auxForecastTerms + 1)) / 2; //totalWeight is the triangular number of auxForecastTerms
+          } else {
+            //if only taking a few periods, totalWeight is the sum of the weight for most recent periods
+            for (int i = 1, w = forecastCycles(); i <= auxForecastTerms; ++i, --w)
+              totalWeight += w;
+          }
+          for (int t_day = 1; t_day <= accountsCycle(); t_day++)
+            m_accountTrendList[acc.id()][t_day] = accountWeightedMovingAverage(acc, t_day, totalWeight);
+          break;
+        }
+      case 2: {
+          //calculate mean term
+          MyMoneyMoney meanTerms = MyMoneyMoney((auxForecastTerms * (auxForecastTerms + 1)) / 2, 1) / MyMoneyMoney(auxForecastTerms, 1);
 
-      for (int t_day = 1; t_day <= accountsCycle(); t_day++)
-        m_accountTrendList[acc.id()][t_day] = accountLinearRegression(acc, t_day, auxForecastTerms, meanTerms);
-      break;
-    }
-    default:
-      break;
+          for (int t_day = 1; t_day <= accountsCycle(); t_day++)
+            m_accountTrendList[acc.id()][t_day] = accountLinearRegression(acc, t_day, auxForecastTerms, meanTerms);
+          break;
+        }
+      default:
+        break;
     }
   }
 }
@@ -455,38 +455,38 @@ void MyMoneyForecast::calculateHistoricDailyBalances()
     setStartingBalance(acc);
 
     switch (historyMethod()) {
-    case 0:
-    case 1: {
-      for (QDate f_day = forecastStartDate(); f_day <= forecastEndDate();) {
-        for (int t_day = 1; t_day <= accountsCycle(); ++t_day) {
-          MyMoneyMoney balanceDayBefore = m_accountList[acc.id()][(f_day.addDays(-1))];//balance of the day before
-          MyMoneyMoney accountDailyTrend = m_accountTrendList[acc.id()][t_day]; //trend for that day
-          //balance of the day is the balance of the day before multiplied by the trend for the day
-          m_accountList[acc.id()][f_day] = balanceDayBefore;
-          m_accountList[acc.id()][f_day] += accountDailyTrend; //movement trend for that particular day
-          m_accountList[acc.id()][f_day] = m_accountList[acc.id()][f_day].convert(acc.fraction());
-          //m_accountList[acc.id()][f_day] += m_accountListPast[acc.id()][f_day.addDays(-historyDays())];
-          f_day = f_day.addDays(1);
+      case 0:
+      case 1: {
+          for (QDate f_day = forecastStartDate(); f_day <= forecastEndDate();) {
+            for (int t_day = 1; t_day <= accountsCycle(); ++t_day) {
+              MyMoneyMoney balanceDayBefore = m_accountList[acc.id()][(f_day.addDays(-1))];//balance of the day before
+              MyMoneyMoney accountDailyTrend = m_accountTrendList[acc.id()][t_day]; //trend for that day
+              //balance of the day is the balance of the day before multiplied by the trend for the day
+              m_accountList[acc.id()][f_day] = balanceDayBefore;
+              m_accountList[acc.id()][f_day] += accountDailyTrend; //movement trend for that particular day
+              m_accountList[acc.id()][f_day] = m_accountList[acc.id()][f_day].convert(acc.fraction());
+              //m_accountList[acc.id()][f_day] += m_accountListPast[acc.id()][f_day.addDays(-historyDays())];
+              f_day = f_day.addDays(1);
+            }
+          }
         }
-      }
-    }
-    break;
-    case 2: {
-      QDate baseDate = QDate::currentDate().addDays(-accountsCycle());
-      for (int t_day = 1; t_day <= accountsCycle(); ++t_day) {
-        int f_day = 1;
-        QDate fDate = baseDate.addDays(accountsCycle() + 1);
-        while (fDate <= forecastEndDate()) {
+        break;
+      case 2: {
+          QDate baseDate = QDate::currentDate().addDays(-accountsCycle());
+          for (int t_day = 1; t_day <= accountsCycle(); ++t_day) {
+            int f_day = 1;
+            QDate fDate = baseDate.addDays(accountsCycle() + 1);
+            while (fDate <= forecastEndDate()) {
 
-          //the calculation is based on the balance for the last month, that is then multiplied by the trend
-          m_accountList[acc.id()][fDate] = m_accountListPast[acc.id()][baseDate] + (m_accountTrendList[acc.id()][t_day] * MyMoneyMoney(f_day, 1));
-          m_accountList[acc.id()][fDate] = m_accountList[acc.id()][fDate].convert(acc.fraction());
-          ++f_day;
-          fDate = baseDate.addDays(accountsCycle() * f_day);
+              //the calculation is based on the balance for the last month, that is then multiplied by the trend
+              m_accountList[acc.id()][fDate] = m_accountListPast[acc.id()][baseDate] + (m_accountTrendList[acc.id()][t_day] * MyMoneyMoney(f_day, 1));
+              m_accountList[acc.id()][fDate] = m_accountList[acc.id()][fDate].convert(acc.fraction());
+              ++f_day;
+              fDate = baseDate.addDays(accountsCycle() * f_day);
+            }
+            baseDate = baseDate.addDays(1);
+          }
         }
-        baseDate = baseDate.addDays(1);
-      }
-    }
     }
   }
 }
@@ -845,17 +845,17 @@ MyMoneyMoney MyMoneyForecast::accountCycleVariation(const MyMoneyAccount& acc)
 
   if (forecastMethod() == eHistoric) {
     switch (historyMethod()) {
-    case 0:
-    case 1: {
-      for (int t_day = 1; t_day <= accountsCycle() ; ++t_day) {
-        cycleVariation += m_accountTrendList[acc.id()][t_day];
-      }
-    }
-    break;
-    case 2: {
-      cycleVariation = m_accountList[acc.id()][QDate::currentDate().addDays(accountsCycle())] - m_accountList[acc.id()][QDate::currentDate()];
-      break;
-    }
+      case 0:
+      case 1: {
+          for (int t_day = 1; t_day <= accountsCycle() ; ++t_day) {
+            cycleVariation += m_accountTrendList[acc.id()][t_day];
+          }
+        }
+        break;
+      case 2: {
+          cycleVariation = m_accountList[acc.id()][QDate::currentDate().addDays(accountsCycle())] - m_accountList[acc.id()][QDate::currentDate()];
+          break;
+        }
     }
   }
   return cycleVariation;
@@ -1023,17 +1023,17 @@ void MyMoneyForecast::createBudget(MyMoneyBudget& budget, QDate historyStart, QD
 
   //calculate budget according to forecast method
   switch (fMethod) {
-  case eScheduled:
-    doFutureScheduledForecast();
-    calculateScheduledMonthlyBalances();
-    break;
-  case eHistoric:
-    pastTransactions(); //get all transactions for history period
-    calculateAccountTrendList();
-    calculateHistoricMonthlyBalances(); //add all balances of each month and put at the 1st day of each month
-    break;
-  default:
-    break;
+    case eScheduled:
+      doFutureScheduledForecast();
+      calculateScheduledMonthlyBalances();
+      break;
+    case eHistoric:
+      pastTransactions(); //get all transactions for history period
+      calculateAccountTrendList();
+      calculateHistoricMonthlyBalances(); //add all balances of each month and put at the 1st day of each month
+      break;
+    default:
+      break;
   }
 
   //flag the forecast as done

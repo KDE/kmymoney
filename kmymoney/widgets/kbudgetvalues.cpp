@@ -125,15 +125,15 @@ bool KBudgetValues::eventFilter(QObject* o, QEvent* e)
                     Qt::Key_Tab, k->modifiers(), QString(),
                     k->isAutoRepeat(), k->count());
       switch (k->key()) {
-      case Qt::Key_Return:
-      case Qt::Key_Enter:
-        // send out a TAB key event
-        QApplication::sendEvent(o, &evt);
-        // don't process this one any further
-        rc = true;
-        break;
-      default:
-        break;
+        case Qt::Key_Return:
+        case Qt::Key_Enter:
+          // send out a TAB key event
+          QApplication::sendEvent(o, &evt);
+          // don't process this one any further
+          rc = true;
+          break;
+        default:
+          break;
       }
     }
   }
@@ -277,26 +277,26 @@ void KBudgetValues::setBudgetValues(const MyMoneyBudget& budget, const MyMoneyBu
 
   blockSignals(true);
   switch (budgetAccount.budgetLevel()) {
-  case MyMoneyBudget::AccountGroup::eMonthly:
-  default:
-    m_monthlyButton->setChecked(true);
-    slotChangePeriod(m_periodGroup->id(m_monthlyButton));
-    m_amountMonthly->setValue(budgetAccount.period(m_budgetDate).amount());
-    break;
-  case MyMoneyBudget::AccountGroup::eYearly:
-    m_yearlyButton->setChecked(true);
-    slotChangePeriod(m_periodGroup->id(m_yearlyButton));
-    m_amountYearly->setValue(budgetAccount.period(m_budgetDate).amount());
-    break;
-  case MyMoneyBudget::AccountGroup::eMonthByMonth:
-    m_individualButton->setChecked(true);
-    slotChangePeriod(m_periodGroup->id(m_individualButton));
-    date.setYMD(m_budgetDate.year(), 1, 1);
-    for (int i = 0; i < 12; ++i) {
-      m_field[i]->setValue(budgetAccount.period(date).amount());
-      date = date.addMonths(1);
-    }
-    break;
+    case MyMoneyBudget::AccountGroup::eMonthly:
+    default:
+      m_monthlyButton->setChecked(true);
+      slotChangePeriod(m_periodGroup->id(m_monthlyButton));
+      m_amountMonthly->setValue(budgetAccount.period(m_budgetDate).amount());
+      break;
+    case MyMoneyBudget::AccountGroup::eYearly:
+      m_yearlyButton->setChecked(true);
+      slotChangePeriod(m_periodGroup->id(m_yearlyButton));
+      m_amountYearly->setValue(budgetAccount.period(m_budgetDate).amount());
+      break;
+    case MyMoneyBudget::AccountGroup::eMonthByMonth:
+      m_individualButton->setChecked(true);
+      slotChangePeriod(m_periodGroup->id(m_individualButton));
+      date.setYMD(m_budgetDate.year(), 1, 1);
+      for (int i = 0; i < 12; ++i) {
+        m_field[i]->setValue(budgetAccount.period(date).amount());
+        date = date.addMonths(1);
+      }
+      break;
   }
   slotUpdateClearButton();
   blockSignals(false);

@@ -190,25 +190,25 @@ void KScheduledView::refresh(bool full, const QString& schedId)
 
       KScheduledListItem* parent = 0;
       switch (schedData.type()) {
-      case MyMoneySchedule::TYPE_ANY:
-        // Should we display an error ?
-        // We just sort it as bill and fall through here
+        case MyMoneySchedule::TYPE_ANY:
+          // Should we display an error ?
+          // We just sort it as bill and fall through here
 
-      case MyMoneySchedule::TYPE_BILL:
-        parent = itemBills;
-        break;
+        case MyMoneySchedule::TYPE_BILL:
+          parent = itemBills;
+          break;
 
-      case MyMoneySchedule::TYPE_DEPOSIT:
-        parent = itemDeposits;
-        break;
+        case MyMoneySchedule::TYPE_DEPOSIT:
+          parent = itemDeposits;
+          break;
 
-      case MyMoneySchedule::TYPE_TRANSFER:
-        parent = itemTransfers;
-        break;
+        case MyMoneySchedule::TYPE_TRANSFER:
+          parent = itemTransfers;
+          break;
 
-      case MyMoneySchedule::TYPE_LOANPAYMENT:
-        parent = itemLoans;
-        break;
+        case MyMoneySchedule::TYPE_LOANPAYMENT:
+          parent = itemLoans;
+          break;
 
       }
       if (parent) {

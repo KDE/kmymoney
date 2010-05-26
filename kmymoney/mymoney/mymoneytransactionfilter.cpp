@@ -313,36 +313,36 @@ bool MyMoneyTransactionFilter::match(const MyMoneyTransaction& transaction)
       const MyMoneyAccount& acc = file->account(s->accountId());
       if (m_considerCategory) {
         switch (acc.accountGroup()) {
-        case MyMoneyAccount::Income:
-        case MyMoneyAccount::Expense:
-          isTransfer = false;
-          // check if the split references one of the categories in the list
-          if (m_filterSet.singleFilter.categoryFilter) {
-            if (m_categories.count() > 0) {
-              if (m_categories.end() != m_categories.find(s->accountId())) {
-                categoryMatched = true;
-                removeSplit = false;
-              }
-            } else {
-              // we're looking for transactions with 'no' categories
-              return false;
-            }
-          }
-          break;
-
-        default:
-          // check if the split references one of the accounts in the list
-          if (m_filterSet.singleFilter.accountFilter) {
-            if (m_accounts.count() > 0) {
-              if (m_accounts.end() != m_accounts.find(s->accountId())) {
-                accountMatched = true;
-                removeSplit = false;
+          case MyMoneyAccount::Income:
+          case MyMoneyAccount::Expense:
+            isTransfer = false;
+            // check if the split references one of the categories in the list
+            if (m_filterSet.singleFilter.categoryFilter) {
+              if (m_categories.count() > 0) {
+                if (m_categories.end() != m_categories.find(s->accountId())) {
+                  categoryMatched = true;
+                  removeSplit = false;
+                }
+              } else {
+                // we're looking for transactions with 'no' categories
+                return false;
               }
             }
-          } else
-            removeSplit = false;
+            break;
 
-          break;
+          default:
+            // check if the split references one of the accounts in the list
+            if (m_filterSet.singleFilter.accountFilter) {
+              if (m_accounts.count() > 0) {
+                if (m_accounts.end() != m_accounts.find(s->accountId())) {
+                  accountMatched = true;
+                  removeSplit = false;
+                }
+              }
+            } else
+              removeSplit = false;
+
+            break;
         }
 
       } else {
@@ -396,11 +396,11 @@ bool MyMoneyTransactionFilter::match(const MyMoneyTransaction& transaction)
       // Determine if this account is a category or an account
       bool isCategory = false;
       switch (acc.accountGroup()) {
-      case MyMoneyAccount::Income:
-      case MyMoneyAccount::Expense:
-        isCategory = true;
-      default:
-        break;
+        case MyMoneyAccount::Income:
+        case MyMoneyAccount::Expense:
+          isCategory = true;
+        default:
+          break;
       }
 
       if (!isCategory && !removeSplit) {
@@ -469,21 +469,21 @@ int MyMoneyTransactionFilter::splitState(const MyMoneySplit& split) const
   int rc = notReconciled;
 
   switch (split.reconcileFlag()) {
-  default:
-  case MyMoneySplit::NotReconciled:
-    break;;
+    default:
+    case MyMoneySplit::NotReconciled:
+      break;;
 
-  case MyMoneySplit::Cleared:
-    rc = cleared;
-    break;
+    case MyMoneySplit::Cleared:
+      rc = cleared;
+      break;
 
-  case MyMoneySplit::Reconciled:
-    rc = reconciled;
-    break;
+    case MyMoneySplit::Reconciled:
+      rc = reconciled;
+      break;
 
-  case MyMoneySplit::Frozen:
-    rc = frozen;
-    break;
+    case MyMoneySplit::Frozen:
+      rc = frozen;
+      break;
   }
   return rc;
 }
@@ -697,127 +697,127 @@ bool MyMoneyTransactionFilter::translateDateRange(dateOptionE id, QDate& start, 
   QDate tmp;
 
   switch (id) {
-  case MyMoneyTransactionFilter::allDates:
-    start = QDate();
-    end = QDate();
-    break;
-  case MyMoneyTransactionFilter::asOfToday:
-    start = QDate();
-    end =  QDate::currentDate();
-    break;
-  case MyMoneyTransactionFilter::currentMonth:
-    start = QDate(yr, mon, 1);
-    end = QDate(yr, mon, 1).addMonths(1).addDays(-1);
-    break;
-  case MyMoneyTransactionFilter::currentYear:
-    start = QDate(yr, 1, 1);
-    end = QDate(yr, 12, 31);
-    break;
-  case MyMoneyTransactionFilter::monthToDate:
-    start = QDate(yr, mon, 1);
-    end = QDate::currentDate();
-    break;
-  case MyMoneyTransactionFilter::yearToDate:
-    start = QDate(yr, 1, 1);
-    end = QDate::currentDate();
-    break;
-  case MyMoneyTransactionFilter::yearToMonth:
-    start = QDate(yr, 1, 1);
-    end = QDate(yr, mon, 1).addDays(-1);
-    break;
-  case MyMoneyTransactionFilter::lastMonth:
-    start = QDate(yr, mon, 1).addMonths(-1);
-    end = QDate(yr, mon, 1).addDays(-1);
-    break;
-  case MyMoneyTransactionFilter::lastYear:
-    start = QDate(yr, 1, 1).addYears(-1);
-    end = QDate(yr, 12, 31).addYears(-1);
-    break;
-  case MyMoneyTransactionFilter::last7Days:
-    start = QDate::currentDate().addDays(-7);
-    end = QDate::currentDate();
-    break;
-  case MyMoneyTransactionFilter::last30Days:
-    start = QDate::currentDate().addDays(-30);
-    end = QDate::currentDate();
-    break;
-  case MyMoneyTransactionFilter::last3Months:
-    start = QDate::currentDate().addMonths(-3);
-    end = QDate::currentDate();
-    break;
-  case MyMoneyTransactionFilter::last6Months:
-    start = QDate::currentDate().addMonths(-6);
-    end = QDate::currentDate();
-    break;
-  case MyMoneyTransactionFilter::last11Months:
-    start = QDate(yr, mon, 1).addMonths(-12);
-    end = QDate(yr, mon, 1).addDays(-1);
-    break;
-  case MyMoneyTransactionFilter::last12Months:
-    start = QDate::currentDate().addMonths(-12);
-    end = QDate::currentDate();
-    break;
-  case MyMoneyTransactionFilter::next7Days:
-    start = QDate::currentDate();
-    end = QDate::currentDate().addDays(7);
-    break;
-  case MyMoneyTransactionFilter::next30Days:
-    start = QDate::currentDate();
-    end = QDate::currentDate().addDays(30);
-    break;
-  case MyMoneyTransactionFilter::next3Months:
-    start = QDate::currentDate();
-    end = QDate::currentDate().addMonths(3);
-    break;
-  case MyMoneyTransactionFilter::next6Months:
-    start = QDate::currentDate();
-    end = QDate::currentDate().addMonths(6);
-    break;
-  case MyMoneyTransactionFilter::next12Months:
-    start = QDate::currentDate();
-    end = QDate::currentDate().addMonths(12);
-    break;
-  case MyMoneyTransactionFilter::userDefined:
-    start = QDate();
-    end = QDate();
-    break;
-  case MyMoneyTransactionFilter::last3ToNext3Months:
-    start = QDate::currentDate().addMonths(-3);
-    end = QDate::currentDate().addMonths(3);
-    break;
-  case MyMoneyTransactionFilter::currentQuarter:
-    start = QDate(yr, mon - ((mon - 1) % 3), 1);
-    end = start.addMonths(3).addDays(-1);
-    break;
-  case MyMoneyTransactionFilter::lastQuarter:
-    start = QDate(yr, mon - ((mon - 1) % 3), 1).addMonths(-3);
-    end = start.addMonths(3).addDays(-1);
-    break;
-  case MyMoneyTransactionFilter::nextQuarter:
-    start = QDate(yr, mon - ((mon - 1) % 3), 1).addMonths(3);
-    end = start.addMonths(3).addDays(-1);
-    break;
-  case MyMoneyTransactionFilter::currentFiscalYear:
-    start = QDate(QDate::currentDate().year(), fiscalYearStartMonth, fiscalYearStartDay);
-    if (QDate::currentDate() < start)
+    case MyMoneyTransactionFilter::allDates:
+      start = QDate();
+      end = QDate();
+      break;
+    case MyMoneyTransactionFilter::asOfToday:
+      start = QDate();
+      end =  QDate::currentDate();
+      break;
+    case MyMoneyTransactionFilter::currentMonth:
+      start = QDate(yr, mon, 1);
+      end = QDate(yr, mon, 1).addMonths(1).addDays(-1);
+      break;
+    case MyMoneyTransactionFilter::currentYear:
+      start = QDate(yr, 1, 1);
+      end = QDate(yr, 12, 31);
+      break;
+    case MyMoneyTransactionFilter::monthToDate:
+      start = QDate(yr, mon, 1);
+      end = QDate::currentDate();
+      break;
+    case MyMoneyTransactionFilter::yearToDate:
+      start = QDate(yr, 1, 1);
+      end = QDate::currentDate();
+      break;
+    case MyMoneyTransactionFilter::yearToMonth:
+      start = QDate(yr, 1, 1);
+      end = QDate(yr, mon, 1).addDays(-1);
+      break;
+    case MyMoneyTransactionFilter::lastMonth:
+      start = QDate(yr, mon, 1).addMonths(-1);
+      end = QDate(yr, mon, 1).addDays(-1);
+      break;
+    case MyMoneyTransactionFilter::lastYear:
+      start = QDate(yr, 1, 1).addYears(-1);
+      end = QDate(yr, 12, 31).addYears(-1);
+      break;
+    case MyMoneyTransactionFilter::last7Days:
+      start = QDate::currentDate().addDays(-7);
+      end = QDate::currentDate();
+      break;
+    case MyMoneyTransactionFilter::last30Days:
+      start = QDate::currentDate().addDays(-30);
+      end = QDate::currentDate();
+      break;
+    case MyMoneyTransactionFilter::last3Months:
+      start = QDate::currentDate().addMonths(-3);
+      end = QDate::currentDate();
+      break;
+    case MyMoneyTransactionFilter::last6Months:
+      start = QDate::currentDate().addMonths(-6);
+      end = QDate::currentDate();
+      break;
+    case MyMoneyTransactionFilter::last11Months:
+      start = QDate(yr, mon, 1).addMonths(-12);
+      end = QDate(yr, mon, 1).addDays(-1);
+      break;
+    case MyMoneyTransactionFilter::last12Months:
+      start = QDate::currentDate().addMonths(-12);
+      end = QDate::currentDate();
+      break;
+    case MyMoneyTransactionFilter::next7Days:
+      start = QDate::currentDate();
+      end = QDate::currentDate().addDays(7);
+      break;
+    case MyMoneyTransactionFilter::next30Days:
+      start = QDate::currentDate();
+      end = QDate::currentDate().addDays(30);
+      break;
+    case MyMoneyTransactionFilter::next3Months:
+      start = QDate::currentDate();
+      end = QDate::currentDate().addMonths(3);
+      break;
+    case MyMoneyTransactionFilter::next6Months:
+      start = QDate::currentDate();
+      end = QDate::currentDate().addMonths(6);
+      break;
+    case MyMoneyTransactionFilter::next12Months:
+      start = QDate::currentDate();
+      end = QDate::currentDate().addMonths(12);
+      break;
+    case MyMoneyTransactionFilter::userDefined:
+      start = QDate();
+      end = QDate();
+      break;
+    case MyMoneyTransactionFilter::last3ToNext3Months:
+      start = QDate::currentDate().addMonths(-3);
+      end = QDate::currentDate().addMonths(3);
+      break;
+    case MyMoneyTransactionFilter::currentQuarter:
+      start = QDate(yr, mon - ((mon - 1) % 3), 1);
+      end = start.addMonths(3).addDays(-1);
+      break;
+    case MyMoneyTransactionFilter::lastQuarter:
+      start = QDate(yr, mon - ((mon - 1) % 3), 1).addMonths(-3);
+      end = start.addMonths(3).addDays(-1);
+      break;
+    case MyMoneyTransactionFilter::nextQuarter:
+      start = QDate(yr, mon - ((mon - 1) % 3), 1).addMonths(3);
+      end = start.addMonths(3).addDays(-1);
+      break;
+    case MyMoneyTransactionFilter::currentFiscalYear:
+      start = QDate(QDate::currentDate().year(), fiscalYearStartMonth, fiscalYearStartDay);
+      if (QDate::currentDate() < start)
+        start = start.addYears(-1);
+      end = start.addYears(1).addDays(-1);
+      break;
+    case MyMoneyTransactionFilter::lastFiscalYear:
+      start = QDate(QDate::currentDate().year(), fiscalYearStartMonth, fiscalYearStartDay);
+      if (QDate::currentDate() < start)
+        start = start.addYears(-1);
       start = start.addYears(-1);
-    end = start.addYears(1).addDays(-1);
-    break;
-  case MyMoneyTransactionFilter::lastFiscalYear:
-    start = QDate(QDate::currentDate().year(), fiscalYearStartMonth, fiscalYearStartDay);
-    if (QDate::currentDate() < start)
-      start = start.addYears(-1);
-    start = start.addYears(-1);
-    end = start.addYears(1).addDays(-1);
-    break;
-  case MyMoneyTransactionFilter::today:
-    start = QDate::currentDate();
-    end =  QDate::currentDate();
-    break;
-  default:
-    qFatal("Unknown date identifier %d in MyMoneyTransactionFilter::translateDateRange()", id);
-    rc = false;
-    break;
+      end = start.addYears(1).addDays(-1);
+      break;
+    case MyMoneyTransactionFilter::today:
+      start = QDate::currentDate();
+      end =  QDate::currentDate();
+      break;
+    default:
+      qFatal("Unknown date identifier %d in MyMoneyTransactionFilter::translateDateRange()", id);
+      rc = false;
+      break;
   }
   return rc;
 }

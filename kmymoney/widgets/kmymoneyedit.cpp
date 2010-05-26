@@ -410,39 +410,39 @@ bool kMyMoneyEdit::eventFilter(QObject * /* o */ , QEvent *e)
 
     rc = true;
     switch (k->key()) {
-    case Qt::Key_Plus:
-    case Qt::Key_Minus:
-      if (m_edit->hasSelectedText()) {
-        m_edit->cut();
-      }
-      if (m_edit->text().length() == 0) {
-        rc = false;
-        break;
-      }
-      // in case of '-' we do not enter the calculator when
-      // the current position is the beginning and there is
-      // no '-' sign at the first position.
-      if (k->key() == Qt::Key_Minus) {
-        if (m_edit->cursorPosition() == 0 && m_edit->text()[0] != '-') {
+      case Qt::Key_Plus:
+      case Qt::Key_Minus:
+        if (m_edit->hasSelectedText()) {
+          m_edit->cut();
+        }
+        if (m_edit->text().length() == 0) {
           rc = false;
           break;
         }
-      }
-      // otherwise, tricky fall through here!
+        // in case of '-' we do not enter the calculator when
+        // the current position is the beginning and there is
+        // no '-' sign at the first position.
+        if (k->key() == Qt::Key_Minus) {
+          if (m_edit->cursorPosition() == 0 && m_edit->text()[0] != '-') {
+            rc = false;
+            break;
+          }
+        }
+        // otherwise, tricky fall through here!
 
-    case Qt::Key_Slash:
-    case Qt::Key_Asterisk:
-    case Qt::Key_Percent:
-      if (m_edit->hasSelectedText()) {
-        // remove the selected text
-        m_edit->cut();
-      }
-      calculatorOpen(k);
-      break;
+      case Qt::Key_Slash:
+      case Qt::Key_Asterisk:
+      case Qt::Key_Percent:
+        if (m_edit->hasSelectedText()) {
+          // remove the selected text
+          m_edit->cut();
+        }
+        calculatorOpen(k);
+        break;
 
-    default:
-      rc = false;
-      break;
+      default:
+        rc = false;
+        break;
     }
 
   } else if (e->type() == QEvent::FocusOut) {

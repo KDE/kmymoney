@@ -160,11 +160,11 @@ public:
     const MyMoneyMoney totalBalance(void) const {
       MyMoneyMoney bal = balance();
       switch (m_budgetlevel) {
-      default:
-        break;
-      case eMonthly:
-        bal = bal * 12;
-        break;
+        default:
+          break;
+        case eMonthly:
+          bal = bal * 12;
+          break;
       }
       return bal;
     }

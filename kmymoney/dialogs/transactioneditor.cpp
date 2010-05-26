@@ -171,48 +171,48 @@ bool TransactionEditor::eventFilter(QObject* o, QEvent* e)
       bool isFinal = false;
       QList<const QWidget*>::const_iterator it_w;
       switch (k->key()) {
-      case Qt::Key_Return:
-      case Qt::Key_Enter:
-        // we check, if the object is one of the m_finalEditWidgets and if it's
-        // a kMyMoneyEdit object that the value is not 0. If any of that is the
-        // case, it's the final object. In other cases, we convert the enter
-        // key into a TAB key to move between the fields. Of course, we only need
-        // to do this as long as the appropriate option is set. In all other cases,
-        // we treat the return/enter key as such.
-        if (KMyMoneyGlobalSettings::enterMovesBetweenFields()) {
-          for (it_w = m_finalEditWidgets.constBegin(); !isFinal && it_w != m_finalEditWidgets.constEnd(); ++it_w) {
-            if (*it_w == o) {
-              if (dynamic_cast<const kMyMoneyEdit*>(*it_w)) {
-                isFinal = !(dynamic_cast<const kMyMoneyEdit*>(*it_w)->value().isZero());
-              } else
-                isFinal = true;
+        case Qt::Key_Return:
+        case Qt::Key_Enter:
+          // we check, if the object is one of the m_finalEditWidgets and if it's
+          // a kMyMoneyEdit object that the value is not 0. If any of that is the
+          // case, it's the final object. In other cases, we convert the enter
+          // key into a TAB key to move between the fields. Of course, we only need
+          // to do this as long as the appropriate option is set. In all other cases,
+          // we treat the return/enter key as such.
+          if (KMyMoneyGlobalSettings::enterMovesBetweenFields()) {
+            for (it_w = m_finalEditWidgets.constBegin(); !isFinal && it_w != m_finalEditWidgets.constEnd(); ++it_w) {
+              if (*it_w == o) {
+                if (dynamic_cast<const kMyMoneyEdit*>(*it_w)) {
+                  isFinal = !(dynamic_cast<const kMyMoneyEdit*>(*it_w)->value().isZero());
+                } else
+                  isFinal = true;
+              }
             }
-          }
-        } else
-          isFinal = true;
+          } else
+            isFinal = true;
 
-        // for the non-final objects, we treat the return key as a TAB
-        if (!isFinal) {
-          QKeyEvent evt(e->type(),
-                        Qt::Key_Tab, k->modifiers(), QString(),
-                        k->isAutoRepeat(), k->count());
+          // for the non-final objects, we treat the return key as a TAB
+          if (!isFinal) {
+            QKeyEvent evt(e->type(),
+                          Qt::Key_Tab, k->modifiers(), QString(),
+                          k->isAutoRepeat(), k->count());
 
-          QApplication::sendEvent(o, &evt);
-          // in case of a category item and the split button is visible
-          // send a second event so that we get passed the button.
-          if (dynamic_cast<KMyMoneyCategory*>(o) && dynamic_cast<KMyMoneyCategory*>(o)->splitButton())
             QApplication::sendEvent(o, &evt);
+            // in case of a category item and the split button is visible
+            // send a second event so that we get passed the button.
+            if (dynamic_cast<KMyMoneyCategory*>(o) && dynamic_cast<KMyMoneyCategory*>(o)->splitButton())
+              QApplication::sendEvent(o, &evt);
 
-        } else {
-          QTimer::singleShot(0, this, SIGNAL(returnPressed()));
-        }
-        // don't process any further
-        rc = true;
-        break;
+          } else {
+            QTimer::singleShot(0, this, SIGNAL(returnPressed()));
+          }
+          // don't process any further
+          rc = true;
+          break;
 
-      case Qt::Key_Escape:
-        QTimer::singleShot(0, this, SIGNAL(escapePressed()));
-        break;
+        case Qt::Key_Escape:
+          QTimer::singleShot(0, this, SIGNAL(escapePressed()));
+          break;
       }
     }
   }
@@ -278,107 +278,107 @@ bool TransactionEditor::fixTransactionCommodity(const MyMoneyAccount& account)
     if (m_account.currencyId() != (*it_t).transaction().commodity()) {
       MyMoneySecurity osec = file->security((*it_t).transaction().commodity());
       switch ((*it_t).transaction().splitCount()) {
-      case 0:
-        // new transaction, guess nothing's here yet ;)
-        break;
+        case 0:
+          // new transaction, guess nothing's here yet ;)
+          break;
 
-      case 1:
-        try {
-          // make sure, that the value is equal to the shares, don't forget our own copy
-          MyMoneySplit& splitB = (*it_t).split();  // reference usage wanted here
-          if (m_split == splitB)
-            m_split.setValue(splitB.shares());
-          splitB.setValue(splitB.shares());
-          (*it_t).transaction().modifySplit(splitB);
+        case 1:
+          try {
+            // make sure, that the value is equal to the shares, don't forget our own copy
+            MyMoneySplit& splitB = (*it_t).split();  // reference usage wanted here
+            if (m_split == splitB)
+              m_split.setValue(splitB.shares());
+            splitB.setValue(splitB.shares());
+            (*it_t).transaction().modifySplit(splitB);
 
-        } catch (MyMoneyException *e) {
-          qDebug("Unable to update commodity to second splits currency in %s: '%s'", qPrintable((*it_t).transaction().id()), qPrintable(e->what()));
-          delete e;
-        }
-        break;
-
-      case 2:
-        // If we deal with multiple currencies we make sure, that for
-        // transactions with two splits, the transaction's commodity is the
-        // currency of the currently selected account. This saves us from a
-        // lot of grieve later on.  We just have to switch the
-        // transactions commodity. Let's assume the following scenario:
-        // - transactions commodity is CA
-        // - splitB and account's currencyId is CB
-        // - splitA is of course in CA (otherwise we have a real problem)
-        // - Value is V in both splits
-        // - Shares in splitB is SB
-        // - Shares in splitA is SA (and equal to V)
-        //
-        // We do the following:
-        // - change transactions commodity to CB
-        // - set V in both splits to SB
-        // - modify the splits in the transaction
-        try {
-          // retrieve the splits
-          MyMoneySplit& splitB = (*it_t).split();  // reference usage wanted here
-          MyMoneySplit splitA = (*it_t).transaction().splitByAccount(m_account.id(), false);
-
-          // - set V in both splits to SB. Don't forget our own copy
-          if (m_split == splitB) {
-            m_split.setValue(splitB.shares());
+          } catch (MyMoneyException *e) {
+            qDebug("Unable to update commodity to second splits currency in %s: '%s'", qPrintable((*it_t).transaction().id()), qPrintable(e->what()));
+            delete e;
           }
-          splitB.setValue(splitB.shares());
-          splitA.setValue(-splitB.shares());
-          (*it_t).transaction().modifySplit(splitA);
-          (*it_t).transaction().modifySplit(splitB);
+          break;
 
-        } catch (MyMoneyException *e) {
-          qDebug("Unable to update commodity to second splits currency in %s: '%s'", qPrintable((*it_t).transaction().id()), qPrintable(e->what()));
-          delete e;
-        }
-        break;
+        case 2:
+          // If we deal with multiple currencies we make sure, that for
+          // transactions with two splits, the transaction's commodity is the
+          // currency of the currently selected account. This saves us from a
+          // lot of grieve later on.  We just have to switch the
+          // transactions commodity. Let's assume the following scenario:
+          // - transactions commodity is CA
+          // - splitB and account's currencyId is CB
+          // - splitA is of course in CA (otherwise we have a real problem)
+          // - Value is V in both splits
+          // - Shares in splitB is SB
+          // - Shares in splitA is SA (and equal to V)
+          //
+          // We do the following:
+          // - change transactions commodity to CB
+          // - set V in both splits to SB
+          // - modify the splits in the transaction
+          try {
+            // retrieve the splits
+            MyMoneySplit& splitB = (*it_t).split();  // reference usage wanted here
+            MyMoneySplit splitA = (*it_t).transaction().splitByAccount(m_account.id(), false);
 
-      default:
-        // TODO: use new logic by adjusting all splits by the price
-        // extracted from the selected split. Inform the user that
-        // this will happen and allow him to stop the processing (rc = false)
-
-        try {
-          QString msg;
-          if (firstTimeMultiCurrency) {
-            firstTimeMultiCurrency = false;
-            if (!isMultiSelection()) {
-              msg = i18n("This transaction has more than two splits and is originally based on a different currency (%1). Using this account to modify the transaction may result in rounding errors. Do you want to continue?", osec.name());
-            } else {
-              msg = i18n("At least one of the selected transactions has more than two splits and is originally based on a different currency (%1). Using this account to modify the transactions may result in rounding errors. Do you want to continue?", osec.name());
+            // - set V in both splits to SB. Don't forget our own copy
+            if (m_split == splitB) {
+              m_split.setValue(splitB.shares());
             }
+            splitB.setValue(splitB.shares());
+            splitA.setValue(-splitB.shares());
+            (*it_t).transaction().modifySplit(splitA);
+            (*it_t).transaction().modifySplit(splitB);
 
-            if (KMessageBox::warningContinueCancel(0, QString("<qt>%1</qt>").arg(msg)) == KMessageBox::Cancel) {
-              rc = false;
-            }
+          } catch (MyMoneyException *e) {
+            qDebug("Unable to update commodity to second splits currency in %s: '%s'", qPrintable((*it_t).transaction().id()), qPrintable(e->what()));
+            delete e;
           }
+          break;
 
-          if (rc == true) {
-            MyMoneyMoney price;
-            if (!(*it_t).split().shares().isZero() && !(*it_t).split().value().isZero())
-              price = (*it_t).split().shares() / (*it_t).split().value();
-            QList<MyMoneySplit>::iterator it_s;
-            MyMoneySplit& mySplit = (*it_t).split();
-            for (it_s = (*it_t).transaction().splits().begin(); it_s != (*it_t).transaction().splits().end(); ++it_s) {
-              MyMoneySplit s = (*it_s);
-              if (s == mySplit) {
-                s.setValue(s.shares());
-                if (mySplit == m_split) {
-                  m_split = s;
-                }
-                mySplit = s;
+        default:
+          // TODO: use new logic by adjusting all splits by the price
+          // extracted from the selected split. Inform the user that
+          // this will happen and allow him to stop the processing (rc = false)
+
+          try {
+            QString msg;
+            if (firstTimeMultiCurrency) {
+              firstTimeMultiCurrency = false;
+              if (!isMultiSelection()) {
+                msg = i18n("This transaction has more than two splits and is originally based on a different currency (%1). Using this account to modify the transaction may result in rounding errors. Do you want to continue?", osec.name());
               } else {
-                s.setValue((s.value() * price).convert(fract));
+                msg = i18n("At least one of the selected transactions has more than two splits and is originally based on a different currency (%1). Using this account to modify the transactions may result in rounding errors. Do you want to continue?", osec.name());
               }
-              (*it_t).transaction().modifySplit(s);
+
+              if (KMessageBox::warningContinueCancel(0, QString("<qt>%1</qt>").arg(msg)) == KMessageBox::Cancel) {
+                rc = false;
+              }
             }
+
+            if (rc == true) {
+              MyMoneyMoney price;
+              if (!(*it_t).split().shares().isZero() && !(*it_t).split().value().isZero())
+                price = (*it_t).split().shares() / (*it_t).split().value();
+              QList<MyMoneySplit>::iterator it_s;
+              MyMoneySplit& mySplit = (*it_t).split();
+              for (it_s = (*it_t).transaction().splits().begin(); it_s != (*it_t).transaction().splits().end(); ++it_s) {
+                MyMoneySplit s = (*it_s);
+                if (s == mySplit) {
+                  s.setValue(s.shares());
+                  if (mySplit == m_split) {
+                    m_split = s;
+                  }
+                  mySplit = s;
+                } else {
+                  s.setValue((s.value() * price).convert(fract));
+                }
+                (*it_t).transaction().modifySplit(s);
+              }
+            }
+          } catch (MyMoneyException *e) {
+            qDebug("Unable to update commodity of split currency in %s: '%s'", qPrintable((*it_t).transaction().id()), qPrintable(e->what()));
+            delete e;
           }
-        } catch (MyMoneyException *e) {
-          qDebug("Unable to update commodity of split currency in %s: '%s'", qPrintable((*it_t).transaction().id()), qPrintable(e->what()));
-          delete e;
-        }
-        break;
+          break;
       }
 
       // set the transaction's ommodity to this account's currency
@@ -418,33 +418,33 @@ void TransactionEditor::setupCategoryWidget(KMyMoneyCategory* category, const QL
 #endif
 
   switch (splits.count()) {
-  case 0:
-    categoryId.clear();
-    if (!category->currentText().isEmpty()) {
-      category->clearEditText();
-      // make sure, we don't see the selector
-      category->completion()->hide();
-    }
-    category->completion()->setSelected(QString());
-    break;
+    case 0:
+      categoryId.clear();
+      if (!category->currentText().isEmpty()) {
+        category->clearEditText();
+        // make sure, we don't see the selector
+        category->completion()->hide();
+      }
+      category->completion()->setSelected(QString());
+      break;
 
-  case 1:
-    categoryId = splits[0].accountId();
-    category->completion()->setSelected(categoryId);
-    category->slotItemSelected(categoryId);
-    break;
+    case 1:
+      categoryId = splits[0].accountId();
+      category->completion()->setSelected(categoryId);
+      category->slotItemSelected(categoryId);
+      break;
 
-  default:
-    categoryId.clear();
-    category->setSplitTransaction();
-    connect(category, SIGNAL(focusIn()), this, splitEditSlot);
+    default:
+      categoryId.clear();
+      category->setSplitTransaction();
+      connect(category, SIGNAL(focusIn()), this, splitEditSlot);
 #if 0
-    // FIXME must deal with the logic that suppressObjectCreation is
-    // automatically turned off when the createItem() signal is connected
-    if (allowObjectCreation)
-      category->setSuppressObjectCreation(true);
+      // FIXME must deal with the logic that suppressObjectCreation is
+      // automatically turned off when the createItem() signal is connected
+      if (allowObjectCreation)
+        category->setSuppressObjectCreation(true);
 #endif
-    break;
+      break;
   }
 }
 
@@ -703,23 +703,23 @@ void StdTransactionEditor::createEditWidgets(void)
 
   bool showNumberField = true;
   switch (m_account.accountType()) {
-  case MyMoneyAccount::Savings:
-  case MyMoneyAccount::Cash:
-  case MyMoneyAccount::Loan:
-  case MyMoneyAccount::AssetLoan:
-  case MyMoneyAccount::Asset:
-  case MyMoneyAccount::Liability:
-  case MyMoneyAccount::Equity:
-    showNumberField = KMyMoneyGlobalSettings::alwaysShowNrField();
-    break;
+    case MyMoneyAccount::Savings:
+    case MyMoneyAccount::Cash:
+    case MyMoneyAccount::Loan:
+    case MyMoneyAccount::AssetLoan:
+    case MyMoneyAccount::Asset:
+    case MyMoneyAccount::Liability:
+    case MyMoneyAccount::Equity:
+      showNumberField = KMyMoneyGlobalSettings::alwaysShowNrField();
+      break;
 
-  case MyMoneyAccount::Income:
-  case MyMoneyAccount::Expense:
-    showNumberField = false;
-    break;
+    case MyMoneyAccount::Income:
+    case MyMoneyAccount::Expense:
+      showNumberField = false;
+      break;
 
-  default:
-    break;
+    default:
+      break;
   }
 
   if (showNumberField) {
@@ -1325,18 +1325,18 @@ void StdTransactionEditor::slotUpdateAction(int action)
     QLabel* categoryLabel = dynamic_cast<QLabel*>(haveWidget("category-label"));
     KMyMoneyCashFlowCombo* cashflow = dynamic_cast<KMyMoneyCashFlowCombo*>(m_editWidgets["cashflow"]);
     switch (action) {
-    case KMyMoneyRegister::ActionDeposit:
-      categoryLabel->setText(i18n("Category"));
-      cashflow->setDirection(KMyMoneyRegister::Deposit);
-      break;
-    case KMyMoneyRegister::ActionTransfer:
-      categoryLabel->setText(i18n("Transfer from"));
-      slotUpdateCashFlow(cashflow->direction());
-      break;
-    case KMyMoneyRegister::ActionWithdrawal:
-      categoryLabel->setText(i18n("Category"));
-      cashflow->setDirection(KMyMoneyRegister::Payment);
-      break;
+      case KMyMoneyRegister::ActionDeposit:
+        categoryLabel->setText(i18n("Category"));
+        cashflow->setDirection(KMyMoneyRegister::Deposit);
+        break;
+      case KMyMoneyRegister::ActionTransfer:
+        categoryLabel->setText(i18n("Transfer from"));
+        slotUpdateCashFlow(cashflow->direction());
+        break;
+      case KMyMoneyRegister::ActionWithdrawal:
+        categoryLabel->setText(i18n("Category"));
+        cashflow->setDirection(KMyMoneyRegister::Payment);
+        break;
     }
   }
 }

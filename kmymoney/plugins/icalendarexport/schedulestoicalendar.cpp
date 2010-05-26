@@ -44,14 +44,14 @@ int timeUnitsInSeconds(int optionValue)
   static const int day = 2;
 
   switch (optionValue) {
-  case minute:
-    return 60;
-  case hour:
-    return 60*60;
-  case day:
-    return 24*60*60;
-  default:
-    return 1;
+    case minute:
+      return 60;
+    case hour:
+      return 60*60;
+    case day:
+      return 24*60*60;
+    default:
+      return 1;
   }
 }
 
@@ -62,12 +62,12 @@ int beforeAfterToInt(int optionValue)
   static const int after = 1;
 
   switch (optionValue) {
-  case before:
-    return -1;
-  case after:
-    return 1;
-  default:
-    return -1;
+    case before:
+      return -1;
+    case after:
+      return 1;
+    default:
+      return -1;
   }
 }
 
@@ -101,76 +101,76 @@ struct icalrecurrencetype scheduleToRecurenceRule(const MyMoneySchedule& schedul
   int frequencyFactor = 1; // used to translate kmymoney frequency to icalendar frequency
 
   switch (schedule.occurrence()) {
-  case MyMoneySchedule::OCCUR_DAILY:
-    recurrence.freq = ICAL_DAILY_RECURRENCE;
-    break;
-  case MyMoneySchedule::OCCUR_WEEKLY:
-    recurrence.freq = ICAL_WEEKLY_RECURRENCE;
-    break;
-  case MyMoneySchedule::OCCUR_FORTNIGHTLY:
-    recurrence.freq = ICAL_WEEKLY_RECURRENCE;
-    frequencyFactor = 2;
-    break;
-  case MyMoneySchedule::OCCUR_EVERYOTHERWEEK:
-    recurrence.freq = ICAL_WEEKLY_RECURRENCE;
-    frequencyFactor = 2;
-    break;
-  case MyMoneySchedule::OCCUR_EVERYHALFMONTH:
-    recurrence.freq = ICAL_WEEKLY_RECURRENCE;
-    frequencyFactor = 2;
-    break;
-  case MyMoneySchedule::OCCUR_EVERYTHREEWEEKS:
-    recurrence.freq = ICAL_WEEKLY_RECURRENCE;
-    frequencyFactor = 3;
-    break;
-  case MyMoneySchedule::OCCUR_EVERYTHIRTYDAYS:
-    recurrence.freq = ICAL_DAILY_RECURRENCE;
-    frequencyFactor = 30;
-    break;
-  case MyMoneySchedule::OCCUR_MONTHLY:
-    recurrence.freq = ICAL_MONTHLY_RECURRENCE;
-    break;
-  case MyMoneySchedule::OCCUR_EVERYFOURWEEKS:
-    recurrence.freq = ICAL_WEEKLY_RECURRENCE;
-    frequencyFactor = 4;
-    break;
-  case MyMoneySchedule::OCCUR_EVERYEIGHTWEEKS:
-    recurrence.freq = ICAL_WEEKLY_RECURRENCE;
-    frequencyFactor = 8;
-    break;
-  case MyMoneySchedule::OCCUR_EVERYOTHERMONTH:
-    recurrence.freq = ICAL_MONTHLY_RECURRENCE;
-    frequencyFactor = 2;
-    break;
-  case MyMoneySchedule::OCCUR_EVERYTHREEMONTHS:
-    recurrence.freq = ICAL_MONTHLY_RECURRENCE;
-    frequencyFactor = 3;
-    break;
-  case MyMoneySchedule::OCCUR_TWICEYEARLY:
-    recurrence.freq = ICAL_MONTHLY_RECURRENCE;
-    frequencyFactor = 6;
-    break;
-  case MyMoneySchedule::OCCUR_EVERYOTHERYEAR:
-    recurrence.freq = ICAL_YEARLY_RECURRENCE;
-    frequencyFactor = 2;
-    break;
-  case MyMoneySchedule::OCCUR_QUARTERLY:
-    recurrence.freq = ICAL_MONTHLY_RECURRENCE;
-    frequencyFactor = 3;
-    break;
-  case MyMoneySchedule::OCCUR_EVERYFOURMONTHS:
-    recurrence.freq = ICAL_MONTHLY_RECURRENCE;
-    frequencyFactor = 4;
-    break;
-  case MyMoneySchedule::OCCUR_YEARLY:
-    recurrence.freq = ICAL_YEARLY_RECURRENCE;
-    break;
-  case MyMoneySchedule::OCCUR_ONCE:
-  case MyMoneySchedule::OCCUR_ANY:
-  default:
-    kWarning() << "Once, any or unknown recurrence returned recurrence is invalid" << endl;
-    recurrence.freq = ICAL_NO_RECURRENCE;
-    break;
+    case MyMoneySchedule::OCCUR_DAILY:
+      recurrence.freq = ICAL_DAILY_RECURRENCE;
+      break;
+    case MyMoneySchedule::OCCUR_WEEKLY:
+      recurrence.freq = ICAL_WEEKLY_RECURRENCE;
+      break;
+    case MyMoneySchedule::OCCUR_FORTNIGHTLY:
+      recurrence.freq = ICAL_WEEKLY_RECURRENCE;
+      frequencyFactor = 2;
+      break;
+    case MyMoneySchedule::OCCUR_EVERYOTHERWEEK:
+      recurrence.freq = ICAL_WEEKLY_RECURRENCE;
+      frequencyFactor = 2;
+      break;
+    case MyMoneySchedule::OCCUR_EVERYHALFMONTH:
+      recurrence.freq = ICAL_WEEKLY_RECURRENCE;
+      frequencyFactor = 2;
+      break;
+    case MyMoneySchedule::OCCUR_EVERYTHREEWEEKS:
+      recurrence.freq = ICAL_WEEKLY_RECURRENCE;
+      frequencyFactor = 3;
+      break;
+    case MyMoneySchedule::OCCUR_EVERYTHIRTYDAYS:
+      recurrence.freq = ICAL_DAILY_RECURRENCE;
+      frequencyFactor = 30;
+      break;
+    case MyMoneySchedule::OCCUR_MONTHLY:
+      recurrence.freq = ICAL_MONTHLY_RECURRENCE;
+      break;
+    case MyMoneySchedule::OCCUR_EVERYFOURWEEKS:
+      recurrence.freq = ICAL_WEEKLY_RECURRENCE;
+      frequencyFactor = 4;
+      break;
+    case MyMoneySchedule::OCCUR_EVERYEIGHTWEEKS:
+      recurrence.freq = ICAL_WEEKLY_RECURRENCE;
+      frequencyFactor = 8;
+      break;
+    case MyMoneySchedule::OCCUR_EVERYOTHERMONTH:
+      recurrence.freq = ICAL_MONTHLY_RECURRENCE;
+      frequencyFactor = 2;
+      break;
+    case MyMoneySchedule::OCCUR_EVERYTHREEMONTHS:
+      recurrence.freq = ICAL_MONTHLY_RECURRENCE;
+      frequencyFactor = 3;
+      break;
+    case MyMoneySchedule::OCCUR_TWICEYEARLY:
+      recurrence.freq = ICAL_MONTHLY_RECURRENCE;
+      frequencyFactor = 6;
+      break;
+    case MyMoneySchedule::OCCUR_EVERYOTHERYEAR:
+      recurrence.freq = ICAL_YEARLY_RECURRENCE;
+      frequencyFactor = 2;
+      break;
+    case MyMoneySchedule::OCCUR_QUARTERLY:
+      recurrence.freq = ICAL_MONTHLY_RECURRENCE;
+      frequencyFactor = 3;
+      break;
+    case MyMoneySchedule::OCCUR_EVERYFOURMONTHS:
+      recurrence.freq = ICAL_MONTHLY_RECURRENCE;
+      frequencyFactor = 4;
+      break;
+    case MyMoneySchedule::OCCUR_YEARLY:
+      recurrence.freq = ICAL_YEARLY_RECURRENCE;
+      break;
+    case MyMoneySchedule::OCCUR_ONCE:
+    case MyMoneySchedule::OCCUR_ANY:
+    default:
+      kWarning() << "Once, any or unknown recurrence returned recurrence is invalid" << endl;
+      recurrence.freq = ICAL_NO_RECURRENCE;
+      break;
   }
   recurrence.interval = frequencyFactor*schedule.occurrenceMultiplier();
   return recurrence;

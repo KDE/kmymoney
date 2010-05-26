@@ -203,23 +203,23 @@ void MyMoneyAccount::removeAccountId(const QString& account)
 MyMoneyAccount::accountTypeE MyMoneyAccount::accountGroup(MyMoneyAccount::accountTypeE type)
 {
   switch (type) {
-  case MyMoneyAccount::Checkings:
-  case MyMoneyAccount::Savings:
-  case MyMoneyAccount::Cash:
-  case MyMoneyAccount::Currency:
-  case MyMoneyAccount::Investment:
-  case MyMoneyAccount::MoneyMarket:
-  case MyMoneyAccount::CertificateDep:
-  case MyMoneyAccount::AssetLoan:
-  case MyMoneyAccount::Stock:
-    return MyMoneyAccount::Asset;
+    case MyMoneyAccount::Checkings:
+    case MyMoneyAccount::Savings:
+    case MyMoneyAccount::Cash:
+    case MyMoneyAccount::Currency:
+    case MyMoneyAccount::Investment:
+    case MyMoneyAccount::MoneyMarket:
+    case MyMoneyAccount::CertificateDep:
+    case MyMoneyAccount::AssetLoan:
+    case MyMoneyAccount::Stock:
+      return MyMoneyAccount::Asset;
 
-  case MyMoneyAccount::CreditCard:
-  case MyMoneyAccount::Loan:
-    return MyMoneyAccount::Liability;
+    case MyMoneyAccount::CreditCard:
+    case MyMoneyAccount::Loan:
+      return MyMoneyAccount::Liability;
 
-  default:
-    return type;
+    default:
+      return type;
   }
 }
 
@@ -625,55 +625,55 @@ QPixmap MyMoneyAccount::accountPixmap(bool reconcileFlag, int size) const
 {
   QString icon;
   switch (accountType()) {
-  default:
-    if (accountGroup() == MyMoneyAccount::Asset)
+    default:
+      if (accountGroup() == MyMoneyAccount::Asset)
+        icon = "account-types-asset";
+      else
+        icon = "account-types-liability";
+      break;
+
+    case MyMoneyAccount::Investment:
+    case MyMoneyAccount::Stock:
+    case MyMoneyAccount::MoneyMarket:
+    case MyMoneyAccount::CertificateDep:
+      icon = "account-types-investments";
+      break;
+
+    case MyMoneyAccount::Checkings:
+      icon = "account-types-checking";
+      break;
+    case MyMoneyAccount::Savings:
+      icon = "account-types-savings";
+      break;
+
+    case MyMoneyAccount::AssetLoan:
+    case MyMoneyAccount::Loan:
+      icon = "account-types-loan";
+      break;
+
+    case MyMoneyAccount::CreditCard:
+      icon = "account-types-credit-card";
+      break;
+
+    case MyMoneyAccount::Asset:
       icon = "account-types-asset";
-    else
-      icon = "account-types-liability";
-    break;
+      break;
 
-  case MyMoneyAccount::Investment:
-  case MyMoneyAccount::Stock:
-  case MyMoneyAccount::MoneyMarket:
-  case MyMoneyAccount::CertificateDep:
-    icon = "account-types-investments";
-    break;
+    case MyMoneyAccount::Cash:
+      icon = "account-types-cash";
+      break;
 
-  case MyMoneyAccount::Checkings:
-    icon = "account-types-checking";
-    break;
-  case MyMoneyAccount::Savings:
-    icon = "account-types-savings";
-    break;
+    case MyMoneyAccount::Income:
+      icon = "account-types-income";
+      break;
 
-  case MyMoneyAccount::AssetLoan:
-  case MyMoneyAccount::Loan:
-    icon = "account-types-loan";
-    break;
+    case MyMoneyAccount::Expense:
+      icon = "account-types-expense";
+      break;
 
-  case MyMoneyAccount::CreditCard:
-    icon = "account-types-credit-card";
-    break;
-
-  case MyMoneyAccount::Asset:
-    icon = "account-types-asset";
-    break;
-
-  case MyMoneyAccount::Cash:
-    icon = "account-types-cash";
-    break;
-
-  case MyMoneyAccount::Income:
-    icon = "account-types-income";
-    break;
-
-  case MyMoneyAccount::Expense:
-    icon = "account-types-expense";
-    break;
-
-  case MyMoneyAccount::Equity:
-    icon = "account";
-    break;
+    case MyMoneyAccount::Equity:
+      icon = "account";
+      break;
   }
 
   QPixmap result = DesktopIcon(icon, size);
@@ -696,56 +696,56 @@ QString MyMoneyAccount::accountTypeToString(const MyMoneyAccount::accountTypeE a
   QString returnString;
 
   switch (accountType) {
-  case MyMoneyAccount::Checkings:
-    returnString = i18n("Checking");
-    break;
-  case MyMoneyAccount::Savings:
-    returnString = i18n("Savings");
-    break;
-  case MyMoneyAccount::CreditCard:
-    returnString = i18n("Credit Card");
-    break;
-  case MyMoneyAccount::Cash:
-    returnString = i18n("Cash");
-    break;
-  case MyMoneyAccount::Loan:
-    returnString = i18n("Loan");
-    break;
-  case MyMoneyAccount::CertificateDep:
-    returnString = i18n("Certificate of Deposit");
-    break;
-  case MyMoneyAccount::Investment:
-    returnString = i18n("Investment");
-    break;
-  case MyMoneyAccount::MoneyMarket:
-    returnString = i18n("Money Market");
-    break;
-  case MyMoneyAccount::Asset:
-    returnString = i18n("Asset");
-    break;
-  case MyMoneyAccount::Liability:
-    returnString = i18n("Liability");
-    break;
-  case MyMoneyAccount::Currency:
-    returnString = i18n("Currency");
-    break;
-  case MyMoneyAccount::Income:
-    returnString = i18n("Income");
-    break;
-  case MyMoneyAccount::Expense:
-    returnString = i18n("Expense");
-    break;
-  case MyMoneyAccount::AssetLoan:
-    returnString = i18n("Investment Loan");
-    break;
-  case MyMoneyAccount::Stock:
-    returnString = i18n("Stock");
-    break;
-  case MyMoneyAccount::Equity:
-    returnString = i18n("Equity");
-    break;
-  default:
-    returnString = i18nc("Unknown account type", "Unknown");
+    case MyMoneyAccount::Checkings:
+      returnString = i18n("Checking");
+      break;
+    case MyMoneyAccount::Savings:
+      returnString = i18n("Savings");
+      break;
+    case MyMoneyAccount::CreditCard:
+      returnString = i18n("Credit Card");
+      break;
+    case MyMoneyAccount::Cash:
+      returnString = i18n("Cash");
+      break;
+    case MyMoneyAccount::Loan:
+      returnString = i18n("Loan");
+      break;
+    case MyMoneyAccount::CertificateDep:
+      returnString = i18n("Certificate of Deposit");
+      break;
+    case MyMoneyAccount::Investment:
+      returnString = i18n("Investment");
+      break;
+    case MyMoneyAccount::MoneyMarket:
+      returnString = i18n("Money Market");
+      break;
+    case MyMoneyAccount::Asset:
+      returnString = i18n("Asset");
+      break;
+    case MyMoneyAccount::Liability:
+      returnString = i18n("Liability");
+      break;
+    case MyMoneyAccount::Currency:
+      returnString = i18n("Currency");
+      break;
+    case MyMoneyAccount::Income:
+      returnString = i18n("Income");
+      break;
+    case MyMoneyAccount::Expense:
+      returnString = i18n("Expense");
+      break;
+    case MyMoneyAccount::AssetLoan:
+      returnString = i18n("Investment Loan");
+      break;
+    case MyMoneyAccount::Stock:
+      returnString = i18n("Stock");
+      break;
+    case MyMoneyAccount::Equity:
+      returnString = i18n("Equity");
+      break;
+    default:
+      returnString = i18nc("Unknown account type", "Unknown");
   }
 
   return returnString;

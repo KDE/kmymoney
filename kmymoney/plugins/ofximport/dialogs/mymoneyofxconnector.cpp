@@ -199,17 +199,17 @@ OfxAccountData::AccountType MyMoneyOfxConnector::accounttype(void) const
     result = OfxAccountData::OFX_INVESTMENT;
   else {
     switch (m_account.accountType()) {
-    case MyMoneyAccount::Investment:
-      result = OfxAccountData::OFX_INVESTMENT;
-      break;
-    case MyMoneyAccount::CreditCard:
-      result = OfxAccountData::OFX_CREDITCARD;
-      break;
-    case MyMoneyAccount::Savings:
-      result = OfxAccountData::OFX_SAVINGS;
-      break;
-    default:
-      break;
+      case MyMoneyAccount::Investment:
+        result = OfxAccountData::OFX_INVESTMENT;
+        break;
+      case MyMoneyAccount::CreditCard:
+        result = OfxAccountData::OFX_CREDITCARD;
+        break;
+      case MyMoneyAccount::Savings:
+        result = OfxAccountData::OFX_SAVINGS;
+        break;
+      default:
+        break;
     }
   }
 
@@ -239,14 +239,14 @@ AccountType MyMoneyOfxConnector::accounttype(void) const
   AccountType result = OFX_BANK_ACCOUNT;
 
   switch (m_account.accountType()) {
-  case MyMoneyAccount::Investment:
-    result = OFX_INVEST_ACCOUNT;
-    break;
-  case MyMoneyAccount::CreditCard:
-    result = OFX_CREDITCARD_ACCOUNT;
-    break;
-  default:
-    break;
+    case MyMoneyAccount::Investment:
+      result = OFX_INVEST_ACCOUNT;
+      break;
+    case MyMoneyAccount::CreditCard:
+      result = OFX_CREDITCARD_ACCOUNT;
+      break;
+    default:
+      break;
   }
 
   // This is a bit of a personalized hack.  Sometimes we may want to override the

@@ -180,73 +180,33 @@ bool kMyMoneyCompletion::eventFilter(QObject* o, QEvent* e)
         QTreeWidgetItem* item = 0;
         QKeyEvent* ev = static_cast<QKeyEvent*>(e);
         switch (ev->key()) {
-        case Qt::Key_Tab:
-        case Qt::Key_Backtab:
-          slotItemSelected(m_lv->currentItem(), 0);
-          break;
+          case Qt::Key_Tab:
+          case Qt::Key_Backtab:
+            slotItemSelected(m_lv->currentItem(), 0);
+            break;
 
-        case Qt::Key_Down:
-        case Qt::Key_PageDown:
-          item = m_lv->currentItem();
-          while (item) {
-            item = m_lv->itemBelow(item);
-            if (item && selector()->match(m_lastCompletion, item))
-              break;
-          }
-          if (item) {
-            m_lv->setCurrentItem(item);
-            selector()->ensureItemVisible(item);
-          }
-          ev->accept();
-          return true;
-
-        case Qt::Key_Up:
-        case Qt::Key_PageUp:
-          item = m_lv->currentItem();
-          while (item) {
-            item = m_lv->itemAbove(item);
-            if (item && selector()->match(m_lastCompletion, item))
-              break;
-          }
-          if (item) {
-            m_lv->setCurrentItem(item);
-            // make sure, we always see a possible (non-selectable) group item
-            if (m_lv->itemAbove(item))
-              item = m_lv->itemAbove(item);
-            selector()->ensureItemVisible(item);
-          }
-          ev->accept();
-          return true;
-
-        case Qt::Key_Escape:
-          hide();
-          ev->accept();
-          return true;
-
-        case Qt::Key_Enter:
-        case Qt::Key_Return:
-          slotItemSelected(m_lv->currentItem(), 0);
-          ev->accept();
-          return true;
-
-        case Qt::Key_Home:
-        case Qt::Key_End:
-          if (ev->modifiers() & Qt::ControlModifier) {
+          case Qt::Key_Down:
+          case Qt::Key_PageDown:
             item = m_lv->currentItem();
-            if (ev->key() == Qt::Key_Home) {
-              while (item && m_lv->itemAbove(item)) {
-                item = m_lv->itemAbove(item);
-              }
-              while (item && !selector()->match(m_lastCompletion, item)) {
-                item = m_lv->itemBelow(item);
-              }
-            } else {
-              while (item && m_lv->itemBelow(item)) {
-                item = m_lv->itemBelow(item);
-              }
-              while (item && !selector()->match(m_lastCompletion, item)) {
-                item = m_lv->itemAbove(item);
-              }
+            while (item) {
+              item = m_lv->itemBelow(item);
+              if (item && selector()->match(m_lastCompletion, item))
+                break;
+            }
+            if (item) {
+              m_lv->setCurrentItem(item);
+              selector()->ensureItemVisible(item);
+            }
+            ev->accept();
+            return true;
+
+          case Qt::Key_Up:
+          case Qt::Key_PageUp:
+            item = m_lv->currentItem();
+            while (item) {
+              item = m_lv->itemAbove(item);
+              if (item && selector()->match(m_lastCompletion, item))
+                break;
             }
             if (item) {
               m_lv->setCurrentItem(item);
@@ -257,11 +217,51 @@ bool kMyMoneyCompletion::eventFilter(QObject* o, QEvent* e)
             }
             ev->accept();
             return true;
-          }
-          break;
 
-        default:
-          break;
+          case Qt::Key_Escape:
+            hide();
+            ev->accept();
+            return true;
+
+          case Qt::Key_Enter:
+          case Qt::Key_Return:
+            slotItemSelected(m_lv->currentItem(), 0);
+            ev->accept();
+            return true;
+
+          case Qt::Key_Home:
+          case Qt::Key_End:
+            if (ev->modifiers() & Qt::ControlModifier) {
+              item = m_lv->currentItem();
+              if (ev->key() == Qt::Key_Home) {
+                while (item && m_lv->itemAbove(item)) {
+                  item = m_lv->itemAbove(item);
+                }
+                while (item && !selector()->match(m_lastCompletion, item)) {
+                  item = m_lv->itemBelow(item);
+                }
+              } else {
+                while (item && m_lv->itemBelow(item)) {
+                  item = m_lv->itemBelow(item);
+                }
+                while (item && !selector()->match(m_lastCompletion, item)) {
+                  item = m_lv->itemAbove(item);
+                }
+              }
+              if (item) {
+                m_lv->setCurrentItem(item);
+                // make sure, we always see a possible (non-selectable) group item
+                if (m_lv->itemAbove(item))
+                  item = m_lv->itemAbove(item);
+                selector()->ensureItemVisible(item);
+              }
+              ev->accept();
+              return true;
+            }
+            break;
+
+          default:
+            break;
         }
       }
     }

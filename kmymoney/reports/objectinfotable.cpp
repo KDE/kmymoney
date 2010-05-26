@@ -72,57 +72,57 @@ ObjectInfoTable::ObjectInfoTable(const MyMoneyReport& _report): ListTable(_repor
 void ObjectInfoTable::init(void)
 {
   switch (m_config.rowType()) {
-  case MyMoneyReport::eSchedule:
-    constructScheduleTable();
-    m_columns = "nextduedate,name";
-    break;
-  case MyMoneyReport::eAccountInfo:
-    constructAccountTable();
-    m_columns = "institution,type,name";
-    break;
-  case MyMoneyReport::eAccountLoanInfo:
-    constructAccountLoanTable();
-    m_columns = "institution,type,name";
-    break;
-  default:
-    break;
+    case MyMoneyReport::eSchedule:
+      constructScheduleTable();
+      m_columns = "nextduedate,name";
+      break;
+    case MyMoneyReport::eAccountInfo:
+      constructAccountTable();
+      m_columns = "institution,type,name";
+      break;
+    case MyMoneyReport::eAccountLoanInfo:
+      constructAccountLoanTable();
+      m_columns = "institution,type,name";
+      break;
+    default:
+      break;
   }
 
   // Sort the data to match the report definition
   m_subtotal = "value";
 
   switch (m_config.rowType()) {
-  case MyMoneyReport::eSchedule:
-    m_group = "type";
-    m_subtotal = "value";
-    break;
-  case MyMoneyReport::eAccountInfo:
-  case MyMoneyReport::eAccountLoanInfo:
-    m_group = "topcategory,institution";
-    m_subtotal = "currentbalance";
-    break;
-  default:
-    throw new MYMONEYEXCEPTION("ObjectInfoTable::ObjectInfoTable(): unhandled row type");
+    case MyMoneyReport::eSchedule:
+      m_group = "type";
+      m_subtotal = "value";
+      break;
+    case MyMoneyReport::eAccountInfo:
+    case MyMoneyReport::eAccountLoanInfo:
+      m_group = "topcategory,institution";
+      m_subtotal = "currentbalance";
+      break;
+    default:
+      throw new MYMONEYEXCEPTION("ObjectInfoTable::ObjectInfoTable(): unhandled row type");
   }
 
   QString sort = m_group + ',' + m_columns + ",id,rank";
 
   switch (m_config.rowType()) {
-  case MyMoneyReport::eSchedule:
-    if (m_config.detailLevel() == MyMoneyReport::eDetailAll) {
-      m_columns = "name,payee,paymenttype,occurence,nextduedate,category";
-    } else {
-      m_columns = "name,payee,paymenttype,occurence,nextduedate";
-    }
-    break;
-  case MyMoneyReport::eAccountInfo:
-    m_columns = "type,name,number,description,openingdate,currencyname,balancewarning,maxbalancelimit,creditwarning,maxcreditlimit,tax,favorite";
-    break;
-  case MyMoneyReport::eAccountLoanInfo:
-    m_columns = "type,name,number,description,openingdate,currencyname,payee,loanamount,interestrate,nextinterestchange,periodicpayment,finalpayment,favorite";
-    break;
-  default:
-    m_columns = "";
+    case MyMoneyReport::eSchedule:
+      if (m_config.detailLevel() == MyMoneyReport::eDetailAll) {
+        m_columns = "name,payee,paymenttype,occurence,nextduedate,category";
+      } else {
+        m_columns = "name,payee,paymenttype,occurence,nextduedate";
+      }
+      break;
+    case MyMoneyReport::eAccountInfo:
+      m_columns = "type,name,number,description,openingdate,currencyname,balancewarning,maxbalancelimit,creditwarning,maxcreditlimit,tax,favorite";
+      break;
+    case MyMoneyReport::eAccountLoanInfo:
+      m_columns = "type,name,number,description,openingdate,currencyname,payee,loanamount,interestrate,nextinterestchange,periodicpayment,finalpayment,favorite";
+      break;
+    default:
+      m_columns = "";
   }
 
   TableRow::setSortCriteria(sort);

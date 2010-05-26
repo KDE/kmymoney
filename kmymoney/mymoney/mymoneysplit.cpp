@@ -140,28 +140,28 @@ void MyMoneySplit::setPayeeId(const QString& payee)
 void MyMoneySplit::setAction(investTransactionTypeE type)
 {
   switch (type) {
-  case BuyShares:
-  case SellShares:
-    setAction(ActionBuyShares);
-    break;
-  case Dividend:
-    setAction(ActionDividend);
-    break;
-  case Yield:
-    setAction(ActionYield);
-    break;
-  case ReinvestDividend:
-    setAction(ActionReinvestDividend);
-    break;
-  case AddShares:
-  case RemoveShares:
-    setAction(ActionAddShares);
-    break;
-  case MyMoneySplit::SplitShares:
-    setAction(ActionSplitShares);
-    break;
-  case MyMoneySplit::UnknownTransactionType:
-    break;
+    case BuyShares:
+    case SellShares:
+      setAction(ActionBuyShares);
+      break;
+    case Dividend:
+      setAction(ActionDividend);
+      break;
+    case Yield:
+      setAction(ActionYield);
+      break;
+    case ReinvestDividend:
+      setAction(ActionReinvestDividend);
+      break;
+    case AddShares:
+    case RemoveShares:
+      setAction(ActionAddShares);
+      break;
+    case MyMoneySplit::SplitShares:
+      setAction(ActionSplitShares);
+      break;
+    case MyMoneySplit::UnknownTransactionType:
+      break;
   }
 }
 

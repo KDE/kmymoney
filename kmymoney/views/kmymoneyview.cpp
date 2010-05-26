@@ -307,15 +307,15 @@ void KMyMoneyView::updateViewType(void)
   // set the face type
   KPageView::FaceType faceType = KPageView::List;
   switch (KMyMoneySettings::viewType()) {
-  case 0:
-    faceType = KPageView::List;
-    break;
-  case 1:
-    faceType = KPageView::Tree;
-    break;
-  case 2:
-    faceType = KPageView::Tabbed;
-    break;
+    case 0:
+      faceType = KPageView::List;
+      break;
+    case 1:
+      faceType = KPageView::Tree;
+      break;
+    case 2:
+      faceType = KPageView::Tabbed;
+      break;
   }
   setFaceType(faceType);
 }
@@ -491,38 +491,38 @@ void KMyMoneyView::slotLedgerSelected(const QString& _accId, const QString& tran
   QString accId(_accId);
 
   switch (acc.accountType()) {
-  case MyMoneyAccount::Stock:
-    // if a stock account is selected, we show the
-    // the corresponding parent (investment) account
-    acc = MyMoneyFile::instance()->account(acc.parentAccountId());
-    accId = acc.id();
-    // tricky fall through here
+    case MyMoneyAccount::Stock:
+      // if a stock account is selected, we show the
+      // the corresponding parent (investment) account
+      acc = MyMoneyFile::instance()->account(acc.parentAccountId());
+      accId = acc.id();
+      // tricky fall through here
 
-  case MyMoneyAccount::Checkings:
-  case MyMoneyAccount::Savings:
-  case MyMoneyAccount::Cash:
-  case MyMoneyAccount::CreditCard:
-  case MyMoneyAccount::Loan:
-  case MyMoneyAccount::Asset:
-  case MyMoneyAccount::Liability:
-  case MyMoneyAccount::AssetLoan:
-  case MyMoneyAccount::Income:
-  case MyMoneyAccount::Expense:
-  case MyMoneyAccount::Investment:
-  case MyMoneyAccount::Equity:
-    setCurrentPage(m_ledgerViewFrame);
-    m_ledgerView->slotSelectAccount(accId, transaction);
-    break;
+    case MyMoneyAccount::Checkings:
+    case MyMoneyAccount::Savings:
+    case MyMoneyAccount::Cash:
+    case MyMoneyAccount::CreditCard:
+    case MyMoneyAccount::Loan:
+    case MyMoneyAccount::Asset:
+    case MyMoneyAccount::Liability:
+    case MyMoneyAccount::AssetLoan:
+    case MyMoneyAccount::Income:
+    case MyMoneyAccount::Expense:
+    case MyMoneyAccount::Investment:
+    case MyMoneyAccount::Equity:
+      setCurrentPage(m_ledgerViewFrame);
+      m_ledgerView->slotSelectAccount(accId, transaction);
+      break;
 
-  case MyMoneyAccount::CertificateDep:
-  case MyMoneyAccount::MoneyMarket:
-  case MyMoneyAccount::Currency:
-    qDebug("No ledger view available for account type %d", acc.accountType());
-    break;
+    case MyMoneyAccount::CertificateDep:
+    case MyMoneyAccount::MoneyMarket:
+    case MyMoneyAccount::Currency:
+      qDebug("No ledger view available for account type %d", acc.accountType());
+      break;
 
-  default:
-    qDebug("Unknown account type %d in KMyMoneyView::slotLedgerSelected", acc.accountType());
-    break;
+    default:
+      qDebug("Unknown account type %d in KMyMoneyView::slotLedgerSelected", acc.accountType());
+      break;
   }
 }
 
@@ -844,29 +844,29 @@ bool KMyMoneyView::openDatabase(const KUrl& url)
   bool retry = true;
   while (retry) {
     switch (reader->open(dbURL, QIODevice::ReadWrite)) {
-    case 0: // opened okay
-      retry = false;
-      break;
-    case 1: // permanent error
-      KMessageBox::detailedError(this, i18n("Cannot open database %1\n", dbURL.prettyUrl()), reader->lastError());
-      if (pDBMgr) {
-        removeStorage();
-        delete pDBMgr;
-      }
-      return false;
-    case -1: // retryable error
-      if (KMessageBox::warningYesNo(this, reader->lastError(), PACKAGE) == KMessageBox::No) {
+      case 0: // opened okay
+        retry = false;
+        break;
+      case 1: // permanent error
+        KMessageBox::detailedError(this, i18n("Cannot open database %1\n", dbURL.prettyUrl()), reader->lastError());
         if (pDBMgr) {
           removeStorage();
           delete pDBMgr;
         }
         return false;
-      } else {
-        QString options = dbURL.queryItem("options") + ",override";
-        dbURL.removeQueryItem("mode"); // now redundant
-        dbURL.removeQueryItem("options");
-        dbURL.addQueryItem("options", options);
-      }
+      case -1: // retryable error
+        if (KMessageBox::warningYesNo(this, reader->lastError(), PACKAGE) == KMessageBox::No) {
+          if (pDBMgr) {
+            removeStorage();
+            delete pDBMgr;
+          }
+          return false;
+        } else {
+          QString options = dbURL.queryItem("options") + ",override";
+          dbURL.removeQueryItem("mode"); // now redundant
+          dbURL.removeQueryItem("options");
+          dbURL.addQueryItem("options", options);
+        }
     }
   }
   if (pDBMgr) {
@@ -958,25 +958,25 @@ bool KMyMoneyView::initializeStorage()
       while (s->fileFixVersion() < s->currentFixVersion()) {
         qDebug("%s", qPrintable((QString("testing fileFixVersion %1 < %2").arg(s->fileFixVersion()).arg(s->currentFixVersion()))));
         switch (s->fileFixVersion()) {
-        case 0:
-          fixFile_0();
-          s->setFileFixVersion(1);
-          break;
+          case 0:
+            fixFile_0();
+            s->setFileFixVersion(1);
+            break;
 
-        case 1:
-          fixFile_1();
-          s->setFileFixVersion(2);
-          break;
+          case 1:
+            fixFile_1();
+            s->setFileFixVersion(2);
+            break;
 
-        case 2:
-          fixFile_2();
-          s->setFileFixVersion(3);
-          break;
+          case 2:
+            fixFile_2();
+            s->setFileFixVersion(3);
+            break;
 
-          // add new levels above. Don't forget to increase currentFixVersion() for all
-          // the storage backends this fix applies to
-        default:
-          throw new MYMONEYEXCEPTION(i18n("Unknown fix level in input file"));
+            // add new levels above. Don't forget to increase currentFixVersion() for all
+            // the storage backends this fix applies to
+          default:
+            throw new MYMONEYEXCEPTION(i18n("Unknown fix level in input file"));
         }
       }
       ft.commit();
@@ -1214,19 +1214,19 @@ bool KMyMoneyView::saveAsDatabase(const KUrl& url)
   MyMoneyStorageSql *writer = new MyMoneyStorageSql(dynamic_cast<IMyMoneySerialize*>(MyMoneyFile::instance()->storage()), url);
   bool canWrite = false;
   switch (writer->open(url, QIODevice::WriteOnly)) {
-  case 0:
-    canWrite = true;
-    break;
-  case -1: // dbase already has data, see if he wants to clear it out
-    if (KMessageBox::warningContinueCancel(0,
-                                           i18n("Database contains data which must be removed before using Save As.\n"
-                                                "Do you wish to continue?"), "Database not empty") == KMessageBox::Continue) {
-      if (writer->open(url, QIODevice::WriteOnly, true) == 0) canWrite = true;
-    } else {
-      delete writer;
-      return false;
-    }
-    break;
+    case 0:
+      canWrite = true;
+      break;
+    case -1: // dbase already has data, see if he wants to clear it out
+      if (KMessageBox::warningContinueCancel(0,
+                                             i18n("Database contains data which must be removed before using Save As.\n"
+                                                  "Do you wish to continue?"), "Database not empty") == KMessageBox::Continue) {
+        if (writer->open(url, QIODevice::WriteOnly, true) == 0) canWrite = true;
+      } else {
+        delete writer;
+        return false;
+      }
+      break;
   }
   if (canWrite) {
     writer->setProgressCallback(&KMyMoneyView::progressCallback);

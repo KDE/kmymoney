@@ -71,14 +71,14 @@ void KReportDlg::print()
 
     // do the actual painting job
     switch (m_tabWidget->currentIndex()) {
-    case 0:
-      m_summaryHTMLPart->paint(&painter, QRect(0, 0, 800, 600));
-      break;
-    case 1:
-      m_detailsHTMLPart->paint(&painter, QRect(0, 0, 800, 600));
-      break;
-    default:
-      qDebug("KReportDlg::print() current page index not handled correctly");
+      case 0:
+        m_summaryHTMLPart->paint(&painter, QRect(0, 0, 800, 600));
+        break;
+      case 1:
+        m_detailsHTMLPart->paint(&painter, QRect(0, 0, 800, 600));
+        break;
+      default:
+        qDebug("KReportDlg::print() current page index not handled correctly");
     }
   }
   delete dlg;

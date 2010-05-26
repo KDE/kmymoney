@@ -234,41 +234,41 @@ void KHomeView::loadView(void)
       int option = (*it).toInt();
       if (option > 0) {
         switch (option) {
-        case 1:         // payments
-          showPayments();
-          break;
+          case 1:         // payments
+            showPayments();
+            break;
 
-        case 2:         // preferred accounts
-          showAccounts(Preferred, i18n("Preferred Accounts"));
-          break;
+          case 2:         // preferred accounts
+            showAccounts(Preferred, i18n("Preferred Accounts"));
+            break;
 
-        case 3:         // payment accounts
-          // Check if preferred accounts are shown separately
-          if (settings.contains("2")) {
-            showAccounts(static_cast<paymentTypeE>(Payment | Preferred),
-                         i18n("Payment Accounts"));
-          } else {
-            showAccounts(Payment, i18n("Payment Accounts"));
-          }
-          break;
-        case 4:         // favorite reports
-          showFavoriteReports();
-          break;
-        case 5:         // forecast
-          showForecast();
-          break;
-        case 6:         // net worth graph over all accounts
-          showNetWorthGraph();
-          break;
-        case 8:         // assets and liabilities
-          showAssetsLiabilities();
-          break;
-        case 9:         // budget
-          showBudget();
-          break;
-        case 10:         // cash flow summary
-          showCashFlowSummary();
-          break;
+          case 3:         // payment accounts
+            // Check if preferred accounts are shown separately
+            if (settings.contains("2")) {
+              showAccounts(static_cast<paymentTypeE>(Payment | Preferred),
+                           i18n("Payment Accounts"));
+            } else {
+              showAccounts(Payment, i18n("Payment Accounts"));
+            }
+            break;
+          case 4:         // favorite reports
+            showFavoriteReports();
+            break;
+          case 5:         // forecast
+            showForecast();
+            break;
+          case 6:         // net worth graph over all accounts
+            showNetWorthGraph();
+            break;
+          case 8:         // assets and liabilities
+            showAssetsLiabilities();
+            break;
+          case 9:         // budget
+            showBudget();
+            break;
+          case 10:         // cash flow summary
+            showCashFlowSummary();
+            break;
 
 
         }
@@ -665,57 +665,57 @@ void KHomeView::showAccounts(KHomeView::paymentTypeE type, const QString& header
     bool removeAccount = false;
     if (!(*it).isClosed() || showClosedAccounts) {
       switch ((*it).accountType()) {
-      case MyMoneyAccount::Expense:
-      case MyMoneyAccount::Income:
-        // never show a category account
-        // Note: This might be different in a future version when
-        //       the homepage also shows category based information
-        removeAccount = true;
-        break;
-
-        // Asset and Liability accounts are only shown if they
-        // have the preferred flag set
-      case MyMoneyAccount::Asset:
-      case MyMoneyAccount::Liability:
-      case MyMoneyAccount::Investment:
-        // if preferred accounts are requested, then keep in list
-        if ((*it).value("PreferredAccount") != "Yes"
-            || (type & Preferred) == 0) {
+        case MyMoneyAccount::Expense:
+        case MyMoneyAccount::Income:
+          // never show a category account
+          // Note: This might be different in a future version when
+          //       the homepage also shows category based information
           removeAccount = true;
-        }
-        break;
+          break;
 
-        // Check payment accounts. If payment and preferred is selected,
-        // then always show them. If only payment is selected, then
-        // show only if preferred flag is not set.
-      case MyMoneyAccount::Checkings:
-      case MyMoneyAccount::Savings:
-      case MyMoneyAccount::Cash:
-      case MyMoneyAccount::CreditCard:
-        switch (type & (Payment | Preferred)) {
-        case Payment:
-          if ((*it).value("PreferredAccount") == "Yes")
+          // Asset and Liability accounts are only shown if they
+          // have the preferred flag set
+        case MyMoneyAccount::Asset:
+        case MyMoneyAccount::Liability:
+        case MyMoneyAccount::Investment:
+          // if preferred accounts are requested, then keep in list
+          if ((*it).value("PreferredAccount") != "Yes"
+              || (type & Preferred) == 0) {
             removeAccount = true;
+          }
           break;
 
-        case Preferred:
-          if ((*it).value("PreferredAccount") != "Yes")
-            removeAccount = true;
+          // Check payment accounts. If payment and preferred is selected,
+          // then always show them. If only payment is selected, then
+          // show only if preferred flag is not set.
+        case MyMoneyAccount::Checkings:
+        case MyMoneyAccount::Savings:
+        case MyMoneyAccount::Cash:
+        case MyMoneyAccount::CreditCard:
+          switch (type & (Payment | Preferred)) {
+            case Payment:
+              if ((*it).value("PreferredAccount") == "Yes")
+                removeAccount = true;
+              break;
+
+            case Preferred:
+              if ((*it).value("PreferredAccount") != "Yes")
+                removeAccount = true;
+              break;
+
+            case Payment | Preferred:
+              break;
+
+            default:
+              removeAccount = true;
+              break;
+          }
           break;
 
-        case Payment | Preferred:
-          break;
-
+          // filter all accounts that are not used on homepage views
         default:
           removeAccount = true;
           break;
-        }
-        break;
-
-        // filter all accounts that are not used on homepage views
-      default:
-        removeAccount = true;
-        break;
       }
 
     } else if ((*it).isClosed() || (*it).isInvest()) {
@@ -994,18 +994,18 @@ void KHomeView::showForecast(void)
           && (dropMinimum < dropZero
               || dropZero == -1)) {
         switch (dropMinimum) {
-        case -1:
-          break;
-        case 0:
-          msg = i18n("The balance of %1 is below the minimum balance %2 today.", (*it_account).name(), minBalance.formatMoney(*it_account, currency));
-          msg = showColoredAmount(msg, true);
-          break;
-        default:
-          msg = i18np("The balance of %2 will drop below the minimum balance %3 in %1 day.",
-                      "The balance of %2 will drop below the minimum balance %3 in %1 days.",
-                      dropMinimum - 1, (*it_account).name(), minBalance.formatMoney(*it_account, currency));
-          msg = showColoredAmount(msg, true);
-          break;
+          case -1:
+            break;
+          case 0:
+            msg = i18n("The balance of %1 is below the minimum balance %2 today.", (*it_account).name(), minBalance.formatMoney(*it_account, currency));
+            msg = showColoredAmount(msg, true);
+            break;
+          default:
+            msg = i18np("The balance of %2 will drop below the minimum balance %3 in %1 day.",
+                        "The balance of %2 will drop below the minimum balance %3 in %1 days.",
+                        dropMinimum - 1, (*it_account).name(), minBalance.formatMoney(*it_account, currency));
+            msg = showColoredAmount(msg, true);
+            break;
         }
 
         if (!msg.isEmpty()) {
@@ -1015,33 +1015,33 @@ void KHomeView::showForecast(void)
       // a drop below zero is always shown
       msg.clear();
       switch (dropZero) {
-      case -1:
-        break;
-      case 0:
-        if ((*it_account).accountGroup() == MyMoneyAccount::Asset) {
-          msg = i18n("The balance of %1 is below %2 today.", (*it_account).name(), MyMoneyMoney().formatMoney(*it_account, currency));
-          msg = showColoredAmount(msg, true);
+        case -1:
           break;
-        }
-        if ((*it_account).accountGroup() == MyMoneyAccount::Liability) {
-          msg = i18n("The balance of %1 is above %2 today.", (*it_account).name(), MyMoneyMoney().formatMoney(*it_account, currency));
+        case 0:
+          if ((*it_account).accountGroup() == MyMoneyAccount::Asset) {
+            msg = i18n("The balance of %1 is below %2 today.", (*it_account).name(), MyMoneyMoney().formatMoney(*it_account, currency));
+            msg = showColoredAmount(msg, true);
+            break;
+          }
+          if ((*it_account).accountGroup() == MyMoneyAccount::Liability) {
+            msg = i18n("The balance of %1 is above %2 today.", (*it_account).name(), MyMoneyMoney().formatMoney(*it_account, currency));
+            break;
+          }
           break;
-        }
-        break;
-      default:
-        if ((*it_account).accountGroup() == MyMoneyAccount::Asset) {
-          msg = i18np("The balance of %2 will drop below %3 in %1 day.",
-                      "The balance of %2 will drop below %3 in %1 days.",
-                      dropZero, (*it_account).name(), MyMoneyMoney().formatMoney(*it_account, currency));
-          msg = showColoredAmount(msg, true);
-          break;
-        }
-        if ((*it_account).accountGroup() == MyMoneyAccount::Liability) {
-          msg = i18np("The balance of %2 will raise above %3 in %1 day.",
-                      "The balance of %2 will raise above %3 in %1 days.",
-                      dropZero, (*it_account).name(), MyMoneyMoney().formatMoney(*it_account, currency));
-          break;
-        }
+        default:
+          if ((*it_account).accountGroup() == MyMoneyAccount::Asset) {
+            msg = i18np("The balance of %2 will drop below %3 in %1 day.",
+                        "The balance of %2 will drop below %3 in %1 days.",
+                        dropZero, (*it_account).name(), MyMoneyMoney().formatMoney(*it_account, currency));
+            msg = showColoredAmount(msg, true);
+            break;
+          }
+          if ((*it_account).accountGroup() == MyMoneyAccount::Liability) {
+            msg = i18np("The balance of %2 will raise above %3 in %1 day.",
+                        "The balance of %2 will raise above %3 in %1 days.",
+                        dropZero, (*it_account).name(), MyMoneyMoney().formatMoney(*it_account, currency));
+            break;
+          }
       }
       if (!msg.isEmpty()) {
         d->m_html += QString("<tr class=\"warning\"><td colspan=%2 align=\"center\" ><b>%1</b></td></tr>").arg(msg).arg(colspan);
@@ -1161,34 +1161,34 @@ void KHomeView::showAssetsLiabilities(void)
   for (it = accounts.begin(); it != accounts.end();) {
     if (!(*it).isClosed()) {
       switch ((*it).accountType()) {
-        // group all assets into one list but make sure that investment accounts always show up
-      case MyMoneyAccount::Investment:
-        d->addNameIndex(nameAssetsIdx, *it);
-        break;
-
-      case MyMoneyAccount::Checkings:
-      case MyMoneyAccount::Savings:
-      case MyMoneyAccount::Cash:
-      case MyMoneyAccount::Asset:
-      case MyMoneyAccount::AssetLoan:
-        // list account if it's the last in the hierarchy or has transactions in it
-        if ((*it).accountList().isEmpty() || (file->transactionCount((*it).id()) > 0)) {
+          // group all assets into one list but make sure that investment accounts always show up
+        case MyMoneyAccount::Investment:
           d->addNameIndex(nameAssetsIdx, *it);
-        }
-        break;
+          break;
 
-        // group the liabilities into the other
-      case MyMoneyAccount::CreditCard:
-      case MyMoneyAccount::Liability:
-      case MyMoneyAccount::Loan:
-        // list account if it's the last in the hierarchy or has transactions in it
-        if ((*it).accountList().isEmpty() || (file->transactionCount((*it).id()) > 0)) {
-          d->addNameIndex(nameLiabilitiesIdx, *it);
-        }
-        break;
+        case MyMoneyAccount::Checkings:
+        case MyMoneyAccount::Savings:
+        case MyMoneyAccount::Cash:
+        case MyMoneyAccount::Asset:
+        case MyMoneyAccount::AssetLoan:
+          // list account if it's the last in the hierarchy or has transactions in it
+          if ((*it).accountList().isEmpty() || (file->transactionCount((*it).id()) > 0)) {
+            d->addNameIndex(nameAssetsIdx, *it);
+          }
+          break;
 
-      default:
-        break;
+          // group the liabilities into the other
+        case MyMoneyAccount::CreditCard:
+        case MyMoneyAccount::Liability:
+        case MyMoneyAccount::Loan:
+          // list account if it's the last in the hierarchy or has transactions in it
+          if ((*it).accountList().isEmpty() || (file->transactionCount((*it).id()) > 0)) {
+            d->addNameIndex(nameLiabilitiesIdx, *it);
+          }
+          break;
+
+        default:
+          break;
       }
     }
     ++it;
@@ -1687,41 +1687,41 @@ void KHomeView::showCashFlowSummary()
   for (account_it = accounts.constBegin(); account_it != accounts.constEnd();) {
     if (!(*account_it).isClosed()) {
       switch ((*account_it).accountType()) {
-        //group all assets into one list
-      case MyMoneyAccount::Checkings:
-      case MyMoneyAccount::Savings:
-      case MyMoneyAccount::Cash: {
-        MyMoneyMoney value = MyMoneyFile::instance()->balance((*account_it).id(), QDate::currentDate());
-        //calculate balance for foreign currency accounts
-        if ((*account_it).currencyId() != file->baseCurrency().id()) {
-          ReportAccount repAcc = ReportAccount((*account_it).id());
-          MyMoneyMoney curPrice = repAcc.baseCurrencyPrice(QDate::currentDate());
-          MyMoneyMoney baseValue = value * curPrice;
-          liquidAssets += baseValue;
-          liquidAssets = liquidAssets.convert(10000);
-        } else {
-          liquidAssets += value;
-        }
-        break;
-      }
-      //group the liabilities into the other
-      case MyMoneyAccount::CreditCard: {
-        MyMoneyMoney value;
-        value = MyMoneyFile::instance()->balance((*account_it).id(), QDate::currentDate());
-        //calculate balance if foreign currency
-        if ((*account_it).currencyId() != file->baseCurrency().id()) {
-          ReportAccount repAcc = ReportAccount((*account_it).id());
-          MyMoneyMoney curPrice = repAcc.baseCurrencyPrice(QDate::currentDate());
-          MyMoneyMoney baseValue = value * curPrice;
-          liquidLiabilities += baseValue;
-          liquidLiabilities = liquidLiabilities.convert(10000);
-        } else {
-          liquidLiabilities += value;
-        }
-        break;
-      }
-      default:
-        break;
+          //group all assets into one list
+        case MyMoneyAccount::Checkings:
+        case MyMoneyAccount::Savings:
+        case MyMoneyAccount::Cash: {
+            MyMoneyMoney value = MyMoneyFile::instance()->balance((*account_it).id(), QDate::currentDate());
+            //calculate balance for foreign currency accounts
+            if ((*account_it).currencyId() != file->baseCurrency().id()) {
+              ReportAccount repAcc = ReportAccount((*account_it).id());
+              MyMoneyMoney curPrice = repAcc.baseCurrencyPrice(QDate::currentDate());
+              MyMoneyMoney baseValue = value * curPrice;
+              liquidAssets += baseValue;
+              liquidAssets = liquidAssets.convert(10000);
+            } else {
+              liquidAssets += value;
+            }
+            break;
+          }
+          //group the liabilities into the other
+        case MyMoneyAccount::CreditCard: {
+            MyMoneyMoney value;
+            value = MyMoneyFile::instance()->balance((*account_it).id(), QDate::currentDate());
+            //calculate balance if foreign currency
+            if ((*account_it).currencyId() != file->baseCurrency().id()) {
+              ReportAccount repAcc = ReportAccount((*account_it).id());
+              MyMoneyMoney curPrice = repAcc.baseCurrencyPrice(QDate::currentDate());
+              MyMoneyMoney baseValue = value * curPrice;
+              liquidLiabilities += baseValue;
+              liquidLiabilities = liquidLiabilities.convert(10000);
+            } else {
+              liquidLiabilities += value;
+            }
+            break;
+          }
+        default:
+          break;
       }
     }
     ++account_it;

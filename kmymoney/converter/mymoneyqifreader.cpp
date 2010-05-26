@@ -144,23 +144,23 @@ const QString MyMoneyQifReader::Private::accountTypeToQif(MyMoneyAccount::accoun
   QString rc = "Bank";
 
   switch (type) {
-  default:
-    break;
-  case MyMoneyAccount::Cash:
-    rc = "Cash";
-    break;
-  case MyMoneyAccount::CreditCard:
-    rc = "CCard";
-    break;
-  case MyMoneyAccount::Asset:
-    rc = "Oth A";
-    break;
-  case MyMoneyAccount::Liability:
-    rc = "Oth L";
-    break;
-  case MyMoneyAccount::Investment:
-    rc = "Port";
-    break;
+    default:
+      break;
+    case MyMoneyAccount::Cash:
+      rc = "Cash";
+      break;
+    case MyMoneyAccount::CreditCard:
+      rc = "CCard";
+      break;
+    case MyMoneyAccount::Asset:
+      rc = "Oth A";
+      break;
+    case MyMoneyAccount::Liability:
+      rc = "Oth L";
+      break;
+    case MyMoneyAccount::Investment:
+      rc = "Port";
+      break;
   }
   return rc;
 }
@@ -643,53 +643,53 @@ void MyMoneyQifReader::processQifEntry(void)
   //
   try {
     switch (m_entryType) {
-    case EntryCategory:
-      processCategoryEntry();
-      break;
+      case EntryCategory:
+        processCategoryEntry();
+        break;
 
-    case EntryUnknown:
-      kDebug(2) << "Line " << m_linenumber << ": Warning: Found an entry without a type being specified. Checking assumed.";
-      processTransactionEntry();
-      break;
+      case EntryUnknown:
+        kDebug(2) << "Line " << m_linenumber << ": Warning: Found an entry without a type being specified. Checking assumed.";
+        processTransactionEntry();
+        break;
 
-    case EntryTransaction:
-      processTransactionEntry();
-      break;
+      case EntryTransaction:
+        processTransactionEntry();
+        break;
 
-    case EntryInvestmentTransaction:
-      processInvestmentTransactionEntry();
-      break;
+      case EntryInvestmentTransaction:
+        processInvestmentTransactionEntry();
+        break;
 
-    case EntryAccount:
-      processAccountEntry();
-      break;
+      case EntryAccount:
+        processAccountEntry();
+        break;
 
-    case EntrySecurity:
-      processSecurityEntry();
-      break;
+      case EntrySecurity:
+        processSecurityEntry();
+        break;
 
-    case EntryPrice:
-      processPriceEntry();
-      break;
+      case EntryPrice:
+        processPriceEntry();
+        break;
 
-    case EntryPayee:
-      processPayeeEntry();
-      break;
+      case EntryPayee:
+        processPayeeEntry();
+        break;
 
-    case EntryClass:
-      kDebug(2) << "Line " << m_linenumber << ": Classes are not yet supported!";
-      break;
+      case EntryClass:
+        kDebug(2) << "Line " << m_linenumber << ": Classes are not yet supported!";
+        break;
 
-    case EntryMemorizedTransaction:
-      kDebug(2) << "Line " << m_linenumber << ": Memorized transactions are not yet implemented!";
-      break;
+      case EntryMemorizedTransaction:
+        kDebug(2) << "Line " << m_linenumber << ": Memorized transactions are not yet implemented!";
+        break;
 
-    case EntrySkip:
-      break;
+      case EntrySkip:
+        break;
 
-    default:
-      kDebug(2) << "Line " << m_linenumber << ": EntryType " << m_entryType << " not yet implemented!";
-      break;
+      default:
+        kDebug(2) << "Line " << m_linenumber << ": EntryType " << m_entryType << " not yet implemented!";
+        break;
     }
   } catch (MyMoneyException *e) {
     if (e->what() != "USERABORT") {
@@ -1048,13 +1048,13 @@ void MyMoneyQifReader::processTransactionEntry(void)
                   "QIF profile or create a new one.", extractLine('D'), m_qifProfile.inputDateFormat()),
              i18n("Invalid date format"));
     switch (rc) {
-    case KMessageBox::Continue:
-      tr.m_datePosted = (QDate::currentDate());
-      break;
+      case KMessageBox::Continue:
+        tr.m_datePosted = (QDate::currentDate());
+        break;
 
-    case KMessageBox::Cancel:
-      throw new MYMONEYEXCEPTION("USERABORT");
-      break;
+      case KMessageBox::Cancel:
+        throw new MYMONEYEXCEPTION("USERABORT");
+        break;
     }
   }
 
@@ -1281,13 +1281,13 @@ void MyMoneyQifReader::processInvestmentTransactionEntry(void)
                   "QIF profile or create a new one.", extractLine('D'), m_qifProfile.inputDateFormat()),
              i18n("Invalid date format"));
     switch (rc) {
-    case KMessageBox::Continue:
-      tr.m_datePosted = QDate::currentDate();
-      break;
+      case KMessageBox::Continue:
+        tr.m_datePosted = QDate::currentDate();
+        break;
 
-    case KMessageBox::Cancel:
-      throw new MYMONEYEXCEPTION("USERABORT");
-      break;
+      case KMessageBox::Cancel:
+        throw new MYMONEYEXCEPTION("USERABORT");
+        break;
     }
   }
 
@@ -1997,16 +1997,16 @@ const QString MyMoneyQifReader::processAccountEntry(bool resetAccountId)
     } else {
       // setup parent according the type of the account
       switch (account.accountGroup()) {
-      case MyMoneyAccount::Asset:
-      default:
-        parentAccount = file->asset();
-        break;
-      case MyMoneyAccount::Liability:
-        parentAccount = file->liability();
-        break;
-      case MyMoneyAccount::Equity:
-        parentAccount = file->equity();
-        break;
+        case MyMoneyAccount::Asset:
+        default:
+          parentAccount = file->asset();
+          break;
+        case MyMoneyAccount::Liability:
+          parentAccount = file->liability();
+          break;
+        case MyMoneyAccount::Equity:
+          parentAccount = file->equity();
+          break;
       }
     }
 
@@ -2048,21 +2048,21 @@ void MyMoneyQifReader::selectOrCreateAccount(const SelectCreateMode mode, MyMone
 
   type = KMyMoneyUtils::none;
   switch (account.accountGroup()) {
-  default:
-    type = KMyMoneyUtils::asset;
-    type = (KMyMoneyUtils::categoryTypeE)(type | KMyMoneyUtils::liability);
-    typeStr = i18n("account");
-    leadIn = i18n("al");
-    break;
+    default:
+      type = KMyMoneyUtils::asset;
+      type = (KMyMoneyUtils::categoryTypeE)(type | KMyMoneyUtils::liability);
+      typeStr = i18n("account");
+      leadIn = i18n("al");
+      break;
 
-  case MyMoneyAccount::Income:
-  case MyMoneyAccount::Expense:
-    type = KMyMoneyUtils::income;
-    type = (KMyMoneyUtils::categoryTypeE)(type | KMyMoneyUtils::expense);
-    typeStr = i18n("category");
-    leadIn = i18n("ei");
-    msg = i18n("Category selection");
-    break;
+    case MyMoneyAccount::Income:
+    case MyMoneyAccount::Expense:
+      type = KMyMoneyUtils::income;
+      type = (KMyMoneyUtils::categoryTypeE)(type | KMyMoneyUtils::expense);
+      typeStr = i18n("category");
+      leadIn = i18n("ei");
+      msg = i18n("Category selection");
+      break;
   }
 
   QPointer<KAccountSelectDlg> accountSelect = new KAccountSelectDlg(type, "QifImport", kmymoney);
@@ -2103,11 +2103,11 @@ void MyMoneyQifReader::selectOrCreateAccount(const SelectCreateMode mode, MyMone
           switch (KMessageBox::questionYesNo(0,
                                              i18nc("The 'type of object' 'x' does not exist", "The %1 '%2' does not exist. Do you "
                                                    "want to create it?", typeStr, account.name()))) {
-          case KMessageBox::Yes:
-            break;
-          case KMessageBox::No:
-            delete accountSelect;
-            return;
+            case KMessageBox::Yes:
+              break;
+            case KMessageBox::No:
+              delete accountSelect;
+              return;
           }
         }
       } else {

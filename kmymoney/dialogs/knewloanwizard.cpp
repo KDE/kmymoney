@@ -852,18 +852,18 @@ QString KNewLoanWizard::updateTermWidgets(const long double val)
   }
 
   switch (unit) {
-  case MyMoneySchedule::OCCUR_MONTHLY:
-    valString = i18np("one month", "%1 months", vl);
-    m_durationUnitEdit->setCurrentItem(static_cast<int>(MyMoneySchedule::OCCUR_MONTHLY));
-    break;
-  case MyMoneySchedule::OCCUR_YEARLY:
-    valString = i18np("one year", "%1 years", vl);
-    m_durationUnitEdit->setCurrentItem(static_cast<int>(MyMoneySchedule::OCCUR_YEARLY));
-    break;
-  default:
-    valString = i18np("one payment", "%1 payments", vl);
-    m_durationUnitEdit->setCurrentItem(static_cast<int>(MyMoneySchedule::OCCUR_ONCE));
-    break;
+    case MyMoneySchedule::OCCUR_MONTHLY:
+      valString = i18np("one month", "%1 months", vl);
+      m_durationUnitEdit->setCurrentItem(static_cast<int>(MyMoneySchedule::OCCUR_MONTHLY));
+      break;
+    case MyMoneySchedule::OCCUR_YEARLY:
+      valString = i18np("one year", "%1 years", vl);
+      m_durationUnitEdit->setCurrentItem(static_cast<int>(MyMoneySchedule::OCCUR_YEARLY));
+      break;
+    default:
+      valString = i18np("one payment", "%1 payments", vl);
+      m_durationUnitEdit->setCurrentItem(static_cast<int>(MyMoneySchedule::OCCUR_ONCE));
+      break;
   }
   m_durationValueEdit->setValue(vl);
   return valString;
@@ -1058,22 +1058,22 @@ int KNewLoanWizard::term(void) const
   if (m_durationValueEdit->value() != 0) {
     factor = 1;
     switch (m_durationUnitEdit->currentItem()) {
-    case MyMoneySchedule::OCCUR_YEARLY: // years
-      factor = 12;
-      // tricky fall through here
+      case MyMoneySchedule::OCCUR_YEARLY: // years
+        factor = 12;
+        // tricky fall through here
 
-    case MyMoneySchedule::OCCUR_MONTHLY: // months
-      factor *= 30;
-      factor *= m_durationValueEdit->value();
-      // factor now is the duration in days. we divide this by the
-      // payment frequency and get the number of payments
-      factor /= MyMoneySchedule::daysBetweenEvents(MyMoneySchedule::stringToOccurrence(
-                  m_paymentFrequencyUnitEdit->currentText()));
-      break;
+      case MyMoneySchedule::OCCUR_MONTHLY: // months
+        factor *= 30;
+        factor *= m_durationValueEdit->value();
+        // factor now is the duration in days. we divide this by the
+        // payment frequency and get the number of payments
+        factor /= MyMoneySchedule::daysBetweenEvents(MyMoneySchedule::stringToOccurrence(
+                    m_paymentFrequencyUnitEdit->currentText()));
+        break;
 
-    case MyMoneySchedule::OCCUR_ONCE: // payments
-      factor = m_durationValueEdit->value();
-      break;
+      case MyMoneySchedule::OCCUR_ONCE: // payments
+        factor = m_durationValueEdit->value();
+        break;
     }
   }
   return factor;

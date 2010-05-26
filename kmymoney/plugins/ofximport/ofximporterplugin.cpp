@@ -275,65 +275,65 @@ int OfxImporterPlugin::ofxTransactionCallback(struct OfxTransactionData data, vo
 
   if (data.invtransactiontype_valid == true) {
     switch (data.invtransactiontype) {
-    case OFX_BUYDEBT:
-    case OFX_BUYMF:
-    case OFX_BUYOPT:
-    case OFX_BUYOTHER:
-    case OFX_BUYSTOCK:
-      t.m_eAction = MyMoneyStatement::Transaction::eaBuy;
-      break;
-    case OFX_REINVEST:
-      t.m_eAction = MyMoneyStatement::Transaction::eaReinvestDividend;
-      break;
-    case OFX_SELLDEBT:
-    case OFX_SELLMF:
-    case OFX_SELLOPT:
-    case OFX_SELLOTHER:
-    case OFX_SELLSTOCK:
-      t.m_eAction = MyMoneyStatement::Transaction::eaSell;
-      break;
-    case OFX_INCOME:
-      t.m_eAction = MyMoneyStatement::Transaction::eaCashDividend;
-      // NOTE: With CashDividend, the amount of the dividend should
-      // be in data.amount.  Since I've never seen an OFX file with
-      // cash dividends, this is an assumption on my part. (acejones)
-      break;
+      case OFX_BUYDEBT:
+      case OFX_BUYMF:
+      case OFX_BUYOPT:
+      case OFX_BUYOTHER:
+      case OFX_BUYSTOCK:
+        t.m_eAction = MyMoneyStatement::Transaction::eaBuy;
+        break;
+      case OFX_REINVEST:
+        t.m_eAction = MyMoneyStatement::Transaction::eaReinvestDividend;
+        break;
+      case OFX_SELLDEBT:
+      case OFX_SELLMF:
+      case OFX_SELLOPT:
+      case OFX_SELLOTHER:
+      case OFX_SELLSTOCK:
+        t.m_eAction = MyMoneyStatement::Transaction::eaSell;
+        break;
+      case OFX_INCOME:
+        t.m_eAction = MyMoneyStatement::Transaction::eaCashDividend;
+        // NOTE: With CashDividend, the amount of the dividend should
+        // be in data.amount.  Since I've never seen an OFX file with
+        // cash dividends, this is an assumption on my part. (acejones)
+        break;
 
-      //
-      // These types are all not handled.  We will generate a warning for them.
-      //
-    case OFX_CLOSUREOPT:
-      unhandledtype = true;
-      type = "CLOSUREOPT (Close a position for an option)";
-      break;
-    case OFX_INVEXPENSE:
-      unhandledtype = true;
-      type = "INVEXPENSE (Misc investment expense that is associated with a specific security)";
-      break;
-    case OFX_JRNLFUND:
-      unhandledtype = true;
-      type = "JRNLFUND (Journaling cash holdings between subaccounts within the same investment account)";
-      break;
-    case OFX_MARGININTEREST:
-      unhandledtype = true;
-      type = "MARGININTEREST (Margin interest expense)";
-      break;
-    case OFX_RETOFCAP:
-      unhandledtype = true;
-      type = "RETOFCAP (Return of capital)";
-      break;
-    case OFX_SPLIT:
-      unhandledtype = true;
-      type = "SPLIT (Stock or mutial fund split)";
-      break;
-    case OFX_TRANSFER:
-      unhandledtype = true;
-      type = "TRANSFER (Transfer holdings in and out of the investment account)";
-      break;
-    default:
-      unhandledtype = true;
-      type = QString("UNKNOWN %1").arg(data.invtransactiontype);
-      break;
+        //
+        // These types are all not handled.  We will generate a warning for them.
+        //
+      case OFX_CLOSUREOPT:
+        unhandledtype = true;
+        type = "CLOSUREOPT (Close a position for an option)";
+        break;
+      case OFX_INVEXPENSE:
+        unhandledtype = true;
+        type = "INVEXPENSE (Misc investment expense that is associated with a specific security)";
+        break;
+      case OFX_JRNLFUND:
+        unhandledtype = true;
+        type = "JRNLFUND (Journaling cash holdings between subaccounts within the same investment account)";
+        break;
+      case OFX_MARGININTEREST:
+        unhandledtype = true;
+        type = "MARGININTEREST (Margin interest expense)";
+        break;
+      case OFX_RETOFCAP:
+        unhandledtype = true;
+        type = "RETOFCAP (Return of capital)";
+        break;
+      case OFX_SPLIT:
+        unhandledtype = true;
+        type = "SPLIT (Stock or mutial fund split)";
+        break;
+      case OFX_TRANSFER:
+        unhandledtype = true;
+        type = "TRANSFER (Transfer holdings in and out of the investment account)";
+        break;
+      default:
+        unhandledtype = true;
+        type = QString("UNKNOWN %1").arg(data.invtransactiontype);
+        break;
     }
   } else
     t.m_eAction = MyMoneyStatement::Transaction::eaNone;
@@ -431,20 +431,20 @@ int OfxImporterPlugin::ofxAccountCallback(struct OfxAccountData data, void * pv)
 
   if (data.account_type_valid == true) {
     switch (data.account_type) {
-    case OfxAccountData::OFX_CHECKING : s.m_eType = MyMoneyStatement::etCheckings;
-      break;
-    case OfxAccountData::OFX_SAVINGS : s.m_eType = MyMoneyStatement::etSavings;
-      break;
-    case OfxAccountData::OFX_MONEYMRKT : s.m_eType = MyMoneyStatement::etInvestment;
-      break;
-    case OfxAccountData::OFX_CREDITLINE : s.m_eType = MyMoneyStatement::etCreditCard;
-      break;
-    case OfxAccountData::OFX_CMA : s.m_eType = MyMoneyStatement::etCreditCard;
-      break;
-    case OfxAccountData::OFX_CREDITCARD : s.m_eType = MyMoneyStatement::etCreditCard;
-      break;
-    case OfxAccountData::OFX_INVESTMENT : s.m_eType = MyMoneyStatement::etInvestment;
-      break;
+      case OfxAccountData::OFX_CHECKING : s.m_eType = MyMoneyStatement::etCheckings;
+        break;
+      case OfxAccountData::OFX_SAVINGS : s.m_eType = MyMoneyStatement::etSavings;
+        break;
+      case OfxAccountData::OFX_MONEYMRKT : s.m_eType = MyMoneyStatement::etInvestment;
+        break;
+      case OfxAccountData::OFX_CREDITLINE : s.m_eType = MyMoneyStatement::etCreditCard;
+        break;
+      case OfxAccountData::OFX_CMA : s.m_eType = MyMoneyStatement::etCreditCard;
+        break;
+      case OfxAccountData::OFX_CREDITCARD : s.m_eType = MyMoneyStatement::etCreditCard;
+        break;
+      case OfxAccountData::OFX_INVESTMENT : s.m_eType = MyMoneyStatement::etInvestment;
+        break;
     }
   }
 
@@ -504,19 +504,19 @@ int OfxImporterPlugin::ofxStatusCallback(struct OfxStatusData data, void * pv)
 
   if (data.severity_valid == true) {
     switch (data.severity) {
-    case OfxStatusData::INFO:
-      pofx->addInfo(message);
-      break;
-    case OfxStatusData::ERROR:
-      pofx->addError(message);
-      break;
-    case OfxStatusData::WARN:
-      pofx->addWarning(message);
-      break;
-    default:
-      pofx->addWarning(message);
-      pofx->addWarning("Previous message was an unknown type.  'WARNING' was assumed.");
-      break;
+      case OfxStatusData::INFO:
+        pofx->addInfo(message);
+        break;
+      case OfxStatusData::ERROR:
+        pofx->addError(message);
+        break;
+      case OfxStatusData::WARN:
+        pofx->addWarning(message);
+        break;
+      default:
+        pofx->addWarning(message);
+        pofx->addWarning("Previous message was an unknown type.  'WARNING' was assumed.");
+        break;
     }
   }
 

@@ -226,21 +226,21 @@ TransactionEditor* KEnterScheduleDlg::startEdit(void)
     d->m_tabOrderWidgets.clear();
     KMyMoneyRegister::Action action = KMyMoneyRegister::ActionWithdrawal;
     switch (d->m_schedule.type()) {
-    case MyMoneySchedule::TYPE_DEPOSIT:
-      action = KMyMoneyRegister::ActionDeposit;
-      break;
-    case MyMoneySchedule::TYPE_LOANPAYMENT:
-      switch (d->m_schedule.paymentType()) {
-      case MyMoneySchedule::STYPE_DIRECTDEPOSIT:
-      case MyMoneySchedule::STYPE_MANUALDEPOSIT:
+      case MyMoneySchedule::TYPE_DEPOSIT:
         action = KMyMoneyRegister::ActionDeposit;
+        break;
+      case MyMoneySchedule::TYPE_LOANPAYMENT:
+        switch (d->m_schedule.paymentType()) {
+          case MyMoneySchedule::STYPE_DIRECTDEPOSIT:
+          case MyMoneySchedule::STYPE_MANUALDEPOSIT:
+            action = KMyMoneyRegister::ActionDeposit;
+            break;
+          default:
+            break;
+        }
         break;
       default:
         break;
-      }
-      break;
-    default:
-      break;
     }
     editor->setup(d->m_tabOrderWidgets, d->m_schedule.account(), action);
 

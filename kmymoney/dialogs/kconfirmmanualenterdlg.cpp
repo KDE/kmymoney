@@ -95,23 +95,23 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
     } else {
       QString co, cn;
       switch (to.splitCount()) {
-      default:
-        co = i18nc("Split transaction (category replacement)", "Split transaction");
-        break;
-      case 2:
-        co = file->accountToCategory(to.splits()[1].accountId());
-      case 1:
-        break;
+        default:
+          co = i18nc("Split transaction (category replacement)", "Split transaction");
+          break;
+        case 2:
+          co = file->accountToCategory(to.splits()[1].accountId());
+        case 1:
+          break;
       }
 
       switch (tn.splitCount()) {
-      default:
-        cn = i18nc("Split transaction (category replacement)", "Split transaction");
-        break;
-      case 2:
-        cn = file->accountToCategory(tn.splits()[1].accountId());
-      case 1:
-        break;
+        default:
+          cn = i18nc("Split transaction (category replacement)", "Split transaction");
+          break;
+        case 2:
+          cn = file->accountToCategory(tn.splits()[1].accountId());
+        case 1:
+          break;
       }
       if (co != cn) {
         noItemsChanged++;

@@ -310,50 +310,50 @@ void TransactionForm::setupForm(const MyMoneyAccount& acc)
   // change the identifier. Otherwise, addTab() will assign
   // a different value
   switch (acc.accountType()) {
-  default:
-    tab = new QWidget();
-    m_tabBar->insertTab(KMyMoneyRegister::ActionDeposit, tab, i18n("&Deposit"));
-    tab = new QWidget();
-    m_tabBar->insertTab(KMyMoneyRegister::ActionTransfer, tab, i18n("&Transfer"));
-    tab = new QWidget();
-    m_tabBar->insertTab(KMyMoneyRegister::ActionWithdrawal, tab, i18n("&Withdrawal"));
-    break;
+    default:
+      tab = new QWidget();
+      m_tabBar->insertTab(KMyMoneyRegister::ActionDeposit, tab, i18n("&Deposit"));
+      tab = new QWidget();
+      m_tabBar->insertTab(KMyMoneyRegister::ActionTransfer, tab, i18n("&Transfer"));
+      tab = new QWidget();
+      m_tabBar->insertTab(KMyMoneyRegister::ActionWithdrawal, tab, i18n("&Withdrawal"));
+      break;
 
-  case MyMoneyAccount::CreditCard:
-    tab = new QWidget();
-    m_tabBar->insertTab(KMyMoneyRegister::ActionDeposit, tab, i18n("&Payment"));
-    tab = new QWidget();
-    m_tabBar->insertTab(KMyMoneyRegister::ActionTransfer, tab, i18n("&Transfer"));
-    tab = new QWidget();
-    m_tabBar->insertTab(KMyMoneyRegister::ActionWithdrawal, tab, i18n("&Charge"));
-    break;
+    case MyMoneyAccount::CreditCard:
+      tab = new QWidget();
+      m_tabBar->insertTab(KMyMoneyRegister::ActionDeposit, tab, i18n("&Payment"));
+      tab = new QWidget();
+      m_tabBar->insertTab(KMyMoneyRegister::ActionTransfer, tab, i18n("&Transfer"));
+      tab = new QWidget();
+      m_tabBar->insertTab(KMyMoneyRegister::ActionWithdrawal, tab, i18n("&Charge"));
+      break;
 
-  case MyMoneyAccount::Liability:
-  case MyMoneyAccount::Loan:
-    tab = new QWidget();
-    m_tabBar->insertTab(KMyMoneyRegister::ActionDeposit, tab, i18n("&Decrease"));
-    tab = new QWidget();
-    m_tabBar->insertTab(KMyMoneyRegister::ActionTransfer, tab, i18n("&Transfer"));
-    tab = new QWidget();
-    m_tabBar->insertTab(KMyMoneyRegister::ActionWithdrawal, tab, i18n("&Increase"));
-    break;
+    case MyMoneyAccount::Liability:
+    case MyMoneyAccount::Loan:
+      tab = new QWidget();
+      m_tabBar->insertTab(KMyMoneyRegister::ActionDeposit, tab, i18n("&Decrease"));
+      tab = new QWidget();
+      m_tabBar->insertTab(KMyMoneyRegister::ActionTransfer, tab, i18n("&Transfer"));
+      tab = new QWidget();
+      m_tabBar->insertTab(KMyMoneyRegister::ActionWithdrawal, tab, i18n("&Increase"));
+      break;
 
-  case MyMoneyAccount::Asset:
-  case MyMoneyAccount::AssetLoan:
-    tab = new QWidget();
-    m_tabBar->insertTab(KMyMoneyRegister::ActionDeposit, tab, i18n("&Increase"));
-    tab = new QWidget();
-    m_tabBar->insertTab(KMyMoneyRegister::ActionTransfer, tab, i18n("&Transfer"));
-    tab = new QWidget();
-    m_tabBar->insertTab(KMyMoneyRegister::ActionWithdrawal, tab, i18n("&Decrease"));
-    break;
+    case MyMoneyAccount::Asset:
+    case MyMoneyAccount::AssetLoan:
+      tab = new QWidget();
+      m_tabBar->insertTab(KMyMoneyRegister::ActionDeposit, tab, i18n("&Increase"));
+      tab = new QWidget();
+      m_tabBar->insertTab(KMyMoneyRegister::ActionTransfer, tab, i18n("&Transfer"));
+      tab = new QWidget();
+      m_tabBar->insertTab(KMyMoneyRegister::ActionWithdrawal, tab, i18n("&Decrease"));
+      break;
 
-  case MyMoneyAccount::Income:
-  case MyMoneyAccount::Expense:
-  case MyMoneyAccount::Investment:
-  case MyMoneyAccount::Stock:
-    m_tabBar->hide();
-    break;
+    case MyMoneyAccount::Income:
+    case MyMoneyAccount::Expense:
+    case MyMoneyAccount::Investment:
+    case MyMoneyAccount::Stock:
+      m_tabBar->hide();
+      break;
   }
 }
 
