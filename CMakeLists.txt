@@ -24,7 +24,7 @@ SET(VERSION_MAJOR "3")
 SET(VERSION_MINOR "98")
 SET(VERSION_PATCH "2")
 
-# Determince the SVN revision number (if we're based on SVN)
+# Determine the SVN revision number (if we're based on SVN)
 IF(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/.svn)
   # make sure we don't use translated messages here
   SET(LANG $ENV{LANG})
@@ -39,7 +39,6 @@ ENDIF(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/.svn)
 
 ######################### General Requirements ##########################
 FIND_PACKAGE(KDE4 REQUIRED)
-
 
 include( KDE4Defaults )
 include( MacroLibrary )
