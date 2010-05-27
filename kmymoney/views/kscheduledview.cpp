@@ -119,6 +119,11 @@ KScheduledView::~KScheduledView()
   writeConfig();
 }
 
+static bool accountNameLessThan(const MyMoneyAccount& acc1, const MyMoneyAccount& acc2)
+{
+  return acc1.name().toLower() < acc2.name().toLower();
+}
+
 void KScheduledView::refresh(bool full, const QString& schedId)
 {
   m_qlistviewScheduled->header()->setFont(KMyMoneyGlobalSettings::listHeaderFont());
@@ -130,23 +135,27 @@ void KScheduledView::refresh(bool full, const QString& schedId)
   try {
     if (full) {
       try {
-        int accountCount = 0;
-
         m_kaccPopup->clear();
 
         MyMoneyFile* file = MyMoneyFile::instance();
-        MyMoneyAccount acc;
-        QStringList::ConstIterator it_s;
 
-        acc = file->asset();
-        for (it_s = acc.accountList().begin(); it_s != acc.accountList().end(); ++it_s) {
-          QAction* act;
-          MyMoneyAccount a = file->account(*it_s);
-          act = m_kaccPopup->addAction(a.name());
-          act->setCheckable(true);
-          act->setChecked(true);
-          ++accountCount;
+        // extract a list of all accounts under the asset group
+        // and sort them by name
+        QList<MyMoneyAccount> list;
+        QStringList accountList = file->asset().accountList();
+        file->accountList(list, accountList, true);
+        qStableSort(list.begin(), list.end(), accountNameLessThan);
+
+        QList<MyMoneyAccount>::ConstIterator it_a;
+        for (it_a = list.constBegin(); it_a != list.constEnd(); ++it_a) {
+          if (!(*it_a).isClosed()) {
+            QAction* act;
+            act = m_kaccPopup->addAction((*it_a).name());
+            act->setCheckable(true);
+            act->setChecked(true);
+          }
         }
+
       } catch (MyMoneyException *e) {
         KMessageBox::detailedError(this, i18n("Unable to load accounts: "), e->what());
         delete e;
@@ -373,17 +382,25 @@ void KScheduledView::slotAccountActivated(int /*id*/)
   m_filterAccounts.clear();
 
   try {
+
     int accountCount = 0;
     MyMoneyFile* file = MyMoneyFile::instance();
-    MyMoneyAccount acc;
-    QStringList::ConstIterator it_s;
 
-    acc = file->asset();
-    for (it_s = acc.accountList().begin(); it_s != acc.accountList().end(); ++it_s) {
-      if (!m_kaccPopup->actions().value(accountCount)->isChecked()) {
-        m_filterAccounts.append(*it_s);
+    // extract a list of all accounts under the asset group
+    // and sort them by name
+    QList<MyMoneyAccount> list;
+    QStringList accountList = file->asset().accountList();
+    file->accountList(list, accountList, true);
+    qStableSort(list.begin(), list.end(), accountNameLessThan);
+
+    QList<MyMoneyAccount>::ConstIterator it_a;
+    for (it_a = list.constBegin(); it_a != list.constEnd(); ++it_a) {
+      if (!(*it_a).isClosed()) {
+        if (!m_kaccPopup->actions().value(accountCount)->isChecked()) {
+          m_filterAccounts.append((*it_a).id());
+        }
+        ++accountCount;
       }
-      ++accountCount;
     }
 
     m_calendar->setFilterAccounts(m_filterAccounts);
