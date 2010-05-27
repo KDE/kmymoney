@@ -18,6 +18,8 @@
 
 #include "mymoneystoragesql.h"
 
+// ----------------------------------------------------------------------------
+// System Includes
 #include <algorithm>
 #include <numeric>
 
@@ -149,8 +151,8 @@ int MyMoneyStorageSql::open(const KUrl& url, int openMode, bool clear)
         // this may be a sqlite file opened from the recently used list
         // but which no longer exists. In that case, open will work but create an empty file.
         // This is not what the user's after; he may accuse KMM of deleting all his data!
-        if (m_driver->isSqlite3()) {
-          if (!sqliteExists(dbName)) {
+      if (m_driver->requiresExternalFile()) {
+        if (!fileExists(dbName)) {
             rc = 1;
             break;
           }
@@ -230,7 +232,7 @@ void MyMoneyStorageSql::close(bool logoff)
   }
 }
 
-bool MyMoneyStorageSql::sqliteExists(const QString& dbName)
+bool MyMoneyStorageSql::fileExists(const QString& dbName)
 {
   QFile f(dbName);
   if (!f.exists()) {
@@ -244,7 +246,7 @@ bool MyMoneyStorageSql::createDatabase(const KUrl& url)
 {
   DBG("*** Entering MyMoneyStorageSql::createDatabase");
   int rc = true;
-  if (m_driver->isSqlite3()) return(true); // not needed for sqlite
+  if (!m_driver->requiresCreation()) return(true); // not needed for sqlite
   QString dbName = url.path().right(url.path().length() - 1); // remove separator slash
   if (!m_driver->canAutocreate()) {
     m_error = i18n("Automatic database creation for type %1 is not currently implemented.\n"
@@ -316,7 +318,25 @@ int MyMoneyStorageSql::upgradeDb()
     }
     m_storage->setFileFixVersion(q.value(0).toUInt());
   }
+
+  if (m_dbVersion == m_db.currentVersion())
+    return 0;
+
   int rc = 0;
+
+  // Drop VIEWs
+  QStringList lowerTables = tables(QSql::AllTables);
+  for (QStringList::iterator i = lowerTables.begin(); i != lowerTables.end(); ++i) {
+    (*i) = (*i).toLower();
+  }
+
+  for (QMap<QString, MyMoneyDbView>::ConstIterator tt = m_db.viewBegin(); tt != m_db.viewEnd(); ++tt) {
+    if (lowerTables.contains(tt.key().toLower())) {
+      if (!q.exec("DROP VIEW " + tt.value().name() + ';'))
+        throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("dropping view %1").arg(tt.key())));
+    }
+  }
+
   while ((m_dbVersion < m_db.currentVersion()) && (rc == 0)) {
     switch (m_dbVersion) {
       case 0:
@@ -349,6 +369,21 @@ int MyMoneyStorageSql::upgradeDb()
         qFatal("Unknown version number in database - %d", m_dbVersion);
     }
   }
+
+  // restore VIEWs
+  lowerTables = tables(QSql::AllTables);
+  for (QStringList::iterator i = lowerTables.begin(); i != lowerTables.end(); ++i) {
+    (*i) = (*i).toLower();
+  }
+
+  for (QMap<QString, MyMoneyDbView>::ConstIterator tt = m_db.viewBegin(); tt != m_db.viewEnd(); ++tt) {
+    if (!lowerTables.contains(tt.key().toLower())) {
+      if (!q.exec(tt.value().createString()))
+        throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO,
+                                             QString("creating view %1").arg(tt.key())));
+    }
+  }
+
   // write updated version to DB
   //setVersion(QString("%1.%2").arg(m_dbVersion).arg(m_minorVersion))
   q.prepare(QString("UPDATE kmmFileInfo SET version = :version;"));
@@ -360,77 +395,10 @@ int MyMoneyStorageSql::upgradeDb()
   //signalProgress(-1,-1);
   return (0);
 }
-// SF bug 2779291
-// check whether a column appears in a table already; if not, add it
-bool MyMoneyStorageSql::addColumn
-(const QString& table, const QString& col,
- const QString& after)
-{
-  MyMoneyDbTable t = m_db.m_tables[table];
-  MyMoneyDbTable::field_iterator ft;
-  KSharedPtr<MyMoneyDbColumn> c;
-  for (ft = t.begin(); ft != t.end(); ++ft) {
-    c = (*ft);
-    if (c->name() == col)
-      break;
-  }
-  if (ft == t.end()) qFatal("addColumn - get it right");
-  return (addColumn(t, *(c.data()), after));
-}
-
-bool MyMoneyStorageSql::addColumn
-(const MyMoneyDbTable& t, const MyMoneyDbColumn& c,
- const QString& after)
-{
-  if (m_driver->isSqlite3() && (!after.isEmpty()))
-    qFatal("sqlite doesn't support 'AFTER'; use sqliteAlterTable");
-
-  if (record(t.name()).contains(c.name()))
-    return (true);
-
-  MyMoneySqlQuery q(this);
-  QString afterString(';');
-  if (!after.isEmpty())
-    afterString = QString("AFTER %1;").arg(after);
-  if (!q.exec("ALTER TABLE " + t.name() + " ADD COLUMN " +
-              c.generateDDL(m_driver) + afterString)) {
-    buildError(q, Q_FUNC_INFO,
-               QString("Error adding column %1 to table %2").arg(c.name()).arg(t.name()));
-    return (false);
-  }
-  return (true);
-}
-
-// analogous to above
-
-// analogous to above
-bool MyMoneyStorageSql::dropColumn
-(const QString& table, const QString& col)
-{
-  return (dropColumn(m_db.m_tables[table], col));
-}
-
-bool MyMoneyStorageSql::dropColumn
-(const MyMoneyDbTable& t, const QString& col)
-{
-  if (m_driver->isSqlite3())
-    qFatal("sqlite doesn't support 'DROP COLUMN'; use sqliteAlterTable");
-  if (!record(t.name()).contains(col))
-    return (true);
-  MyMoneySqlQuery q(this);
-  if (!q.exec("ALTER TABLE " + t.name() + " DROP COLUMN "
-              + col + ';')) {
-    buildError(q, Q_FUNC_INFO,
-               QString("Error dropping column %1 from table %2").arg(col).arg(t.name()));
-    return (false);
-  }
-  return (true);
-}
 
 int MyMoneyStorageSql::upgradeToV1()
 {
   DBG("*** Entering MyMoneyStorageSql::upgradeToV1");
-  if (m_driver->isSqlite3()) qFatal("SQLite upgrade NYI");
   MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
   MyMoneySqlQuery q(this);
   // change kmmSplits pkey to (transactionId, splitId)
@@ -445,8 +413,7 @@ int MyMoneyStorageSql::upgradeToV1()
     return (1);
   }
   // change kmmSplits add postDate datetime
-  if (!addColumn(m_db.m_tables["kmmSplits"],
-                 MyMoneyDbDatetimeColumn("postDate")))
+  if (!alterTable(m_db.m_tables["kmmSplits"], m_dbVersion))
     return (1);
   // initialize it to same value as transaction (do it the long way round)
   q.prepare("SELECT id, postDate FROM kmmTransactions WHERE txType = 'N';");
@@ -496,25 +463,13 @@ int MyMoneyStorageSql::upgradeToV1()
     buildError(q, Q_FUNC_INFO, "Error updating kmmReportConfig pkey");
     return (1);
   }
-  // change kmmFileInfo add budgets unsigned bigint after kvps
-  if (!addColumn(m_db.m_tables["kmmFileInfo"],
-                 MyMoneyDbIntColumn("budgets", MyMoneyDbIntColumn::BIG, false)))
-    return (1);
-  // change kmmFileInfo add hiBudgetId unsigned bigint after hiReportId
-  if (!addColumn(m_db.m_tables["kmmFileInfo"],
-                 MyMoneyDbIntColumn("hiBudgetId", MyMoneyDbIntColumn::BIG, false)))
-    return (1);
+  // change kmmFileInfo add budgets, hiBudgetId unsigned bigint
   // change kmmFileInfo add logonUser
-  if (!addColumn(m_db.m_tables["kmmFileInfo"],
-                 MyMoneyDbColumn("logonUser", "varchar(255)", false)))
-    return (1);
   // change kmmFileInfo add logonAt datetime
-  if (!addColumn(m_db.m_tables["kmmFileInfo"],
-                 MyMoneyDbDatetimeColumn("logonAt", false)))
+ if (!alterTable(m_db.m_tables["kmmFileInfo"], m_dbVersion))
     return (1);
   // change kmmAccounts add transactionCount unsigned bigint as last field
-  if (!addColumn(m_db.m_tables["kmmAccounts"],
-                 MyMoneyDbIntColumn("transactionCount", MyMoneyDbIntColumn::BIG, false)))
+  if (!alterTable(m_db.m_tables["kmmAccounts"], m_dbVersion))
     return (1);
   // calculate the transaction counts. the application logic defines an account's tx count
   // in such a way as to count multiple splits in a tx which reference the same account as one.
@@ -568,29 +523,16 @@ int MyMoneyStorageSql::upgradeToV1()
   m_kvps = getRecCount("kmmKeyValuePairs");
   m_budgets = getRecCount("kmmBudgetConfig");
   writeFileInfo();
-  /* if sqlite {
-    q.prepare("VACUUM;");
-    if (!q.exec()) {
-      buildError (q, Q_FUNC_INFO, "Error vacuuming database");
-      return(1);
-    }
-  }*/
   return (0);
 }
 
 int MyMoneyStorageSql::upgradeToV2()
 {
   DBG("*** Entering MyMoneyStorageSql::upgradeToV2");
-  //SQLite3 now supports ALTER TABLE...ADD COLUMN, so only die if version < 3
-  //if (m_dbType == Sqlite3) qFatal("SQLite upgrade NYI");
   MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
   MyMoneySqlQuery q(this);
-  // change kmmSplits add price fields
-  if (!addColumn(m_db.m_tables["kmmSplits"],
-                 MyMoneyDbTextColumn("price")))
-    return (1);
-  if (!addColumn(m_db.m_tables["kmmSplits"],
-                 MyMoneyDbTextColumn("priceFormatted")))
+  // change kmmSplits add price, priceFormatted fields
+  if (!alterTable(m_db.m_tables["kmmSplits"], m_dbVersion))
     return (1);
   return (0);
 }
@@ -598,10 +540,9 @@ int MyMoneyStorageSql::upgradeToV2()
 int MyMoneyStorageSql::upgradeToV3()
 {
   DBG("*** Entering MyMoneyStorageSql::upgradeToV3");
-  //SQLite3 now supports ALTER TABLE...ADD COLUMN, so only die if version < 3
-  //if (m_dbType == Sqlite3) qFatal("SQLite upgrade NYI");
   MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
   MyMoneySqlQuery q(this);
+  // kmmSchedules - add occurenceMultiplier
   // The default value is given here to populate the column.
   if (!q.exec("ALTER TABLE kmmSchedules ADD COLUMN " +
               MyMoneyDbIntColumn("occurenceMultiplier",
@@ -620,6 +561,7 @@ int MyMoneyStorageSql::upgradeToV4()
   DBG("*** Entering MyMoneyStorageSql::upgradeToV4");
   MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
   MyMoneySqlQuery q(this);
+  // kmmSplits - add index on transactionId + splitId
   QStringList list;
   list << "transactionId" << "splitId";
   if (!q.exec(MyMoneyDbIndex("kmmSplits", "kmmTx_Split", list, false).generateDDL(m_driver) + ';')) {
@@ -634,35 +576,16 @@ int MyMoneyStorageSql::upgradeToV5()
   DBG("*** Entering MyMoneyStorageSql::upgradeToV5");
   MyMoneyDbTransaction dbtrans(*this, Q_FUNC_INFO);
   MyMoneySqlQuery q(this);
-  if (!addColumn(m_db.m_tables["kmmSplits"],
-                 MyMoneyDbTextColumn("bankId")))
+  // kmmSplits - add bankId
+  if (!alterTable(m_db.m_tables["kmmSplits"], m_dbVersion))
     return (1);
-  if (!addColumn(m_db.m_tables["kmmPayees"],
-                 MyMoneyDbTextColumn("notes", MyMoneyDbTextColumn::LONG)))
+  //kmmPayees - add columns "notes" "defaultAccountId" "matchData" "matchIgnoreCase" "matchKeys";
+  if (!alterTable(m_db.m_tables["kmmPayees"], m_dbVersion))
     return (1);
-  if (!addColumn(m_db.m_tables["kmmPayees"],
-                 MyMoneyDbColumn("defaultAccountId", "varchar(32)")))
+  // kmmReportConfig - drop primary key on name since duplicate names are allowed
+  if (!alterTable(m_db.m_tables["kmmReportConfig"], m_dbVersion))
     return (1);
-  if (!addColumn(m_db.m_tables["kmmPayees"],
-                 MyMoneyDbIntColumn("matchData", MyMoneyDbIntColumn::TINY,
-                                    false)))
-    return (1);
-  if (!addColumn(m_db.m_tables["kmmPayees"],
-                 MyMoneyDbColumn("matchIgnoreCase", "char(1)")))
-    return (1);
-  if (!addColumn(m_db.m_tables["kmmPayees"],
-                 MyMoneyDbTextColumn("matchKeys")))
-    return (1);
-  const MyMoneyDbTable& t = m_db.m_tables["kmmReportConfig"];
-  if (m_driver->isSqlite3()) {
-    if (!q.exec(t.dropPrimaryKeyString(m_driver))) {
-      buildError(q, Q_FUNC_INFO, "Error dropping Report table keys");
-      return (1);
-    }
-  } else {
-    if (!sqliteAlterTable(t))
-      return (1);
-  }
+  //}
   return 0;
 }
 
@@ -671,11 +594,12 @@ int MyMoneyStorageSql::upgradeToV6()
   DBG("*** Entering MyMoneyStorageSql::upgradeToV6");
   startCommitUnit(Q_FUNC_INFO);
   MyMoneySqlQuery q(this);
-  // add separate fix level in file info
-  if (!addColumn("kmmFileInfo", "fixLevel"))
+  // kmmFileInfo - add fixLevel
+  if (!alterTable(m_db.m_tables["kmmFileInfo"], m_dbVersion))
     return (1);
   // upgrade Mysql to InnoDB transaction-safe engine
-  if (m_driver->isMysql()) {
+  // the following is not a good way to test for mysql - think of a better way
+  if (!m_driver->tableOptionString().isEmpty()) {
     for (QMap<QString, MyMoneyDbTable>::ConstIterator tt = m_db.tableBegin(); tt != m_db.tableEnd(); ++tt) {
       if (!q.exec(QString("ALTER TABLE %1 ENGINE = InnoDB;").arg(tt.value().name()))) {
         buildError(q, Q_FUNC_INFO, "Error updating to InnoDB");
@@ -683,22 +607,29 @@ int MyMoneyStorageSql::upgradeToV6()
       }
     }
   }
-  // add unique id to reports table
-  if (!addColumn(m_db.m_tables["kmmReportConfig"],
-                 (MyMoneyDbColumn("id", "varchar(32)", false))))
-    return(1);
+  // kmmReportConfig - add a unique id as primary key
   // read and write reports to get ids inserted
   readFileInfo();
+  // the alterTable function really doesn't work too well
+  // with adding a new column which is also to be primary key
+  // so add the column first
+  if (!q.exec("ALTER TABLE kmmReportConfig ADD COLUMN " +
+              MyMoneyDbColumn("id", "varchar(32)").generateDDL(m_driver) + ';')) {
+    buildError(q, Q_FUNC_INFO, "adding id to report table");
+    return(1);
+  }
   QMap<QString, MyMoneyReport> reportList = fetchReports();
   // the V5 database allowed lots of duplicate reports with no
   // way to distinguish between them. The fetchReports call
   // will have effectively removed all duplicates
   // so we now delete from the db and re-write them
-  q.prepare("DELETE FROM kmmReportConfig;");
-  if (!q.exec()) {
+  if (!q.exec("DELETE FROM kmmReportConfig;")) {
     buildError(q, Q_FUNC_INFO, "Error deleting reports");
     return (1);
   }
+  // add unique id to reports table
+  if (!alterTable(m_db.m_tables["kmmReportConfig"], m_dbVersion))
+    return(1);
   unsigned long long hiReportId = 0;
   QMap<QString, MyMoneyReport>::const_iterator it_r;
   for (it_r = reportList.constBegin(); it_r != reportList.constEnd(); ++it_r) {
@@ -709,42 +640,45 @@ int MyMoneyStorageSql::upgradeToV6()
   }
   m_hiIdReports = hiReportId;
   m_storage->loadReportId(m_hiIdReports);
-  // sqlite3 doesn't support ADD PRIMARY KEY
-  if (m_driver->isSqlite3()) {
-    if (!sqliteAlterTable(m_db.m_tables["kmmReportConfig"])) {
-      return (1);
-    }
-  } else {
-    if (!q.exec("ALTER TABLE kmmReportConfig ADD PRIMARY KEY (id);")) {
-      buildError(q, Q_FUNC_INFO, "Error updating kmmReportConfig pkey");
-      return (1);
-    }
-  }
   endCommitUnit(Q_FUNC_INFO);
   return 0;
 }
 
-/* This function attempts to cater for limitations in the sqlite ALTER TABLE
-   statement. It should enable us to drop a primary key, and drop columns */
-bool MyMoneyStorageSql::sqliteAlterTable(const MyMoneyDbTable& t)
-{
-  DBG("*** Entering MyMoneyStorageSql::sqliteAlterTable");
+bool MyMoneyStorageSql::alterTable(const MyMoneyDbTable& t, int fromVersion) {
+  DBG("*** Entering MyMoneyStorageSql::alterTable");
   QString tempTableName = t.name();
-  tempTableName.replace("kmm", "tmp");
+  tempTableName.replace("kmm", "kmmtmp");
   MyMoneySqlQuery q(this);
-  if (!q.exec(QString("ALTER TABLE " + t.name() + " RENAME TO " + tempTableName + ';'))) {
-    buildError(q, Q_FUNC_INFO, "Error renaming table");
+  // drop primary key if it has one (and driver supports it)
+  if (t.hasPrimaryKey(fromVersion)) {
+    QString dropString = m_driver->dropPrimaryKeyString(t.name());
+    if (!dropString.isEmpty()) {
+      if (!q.exec(dropString)) {
+        buildError (q, __func__, QString("Error dropping old primary key from %1").arg(t.name()));
+        return false;
+      }
+    }
+  }
+  for(MyMoneyDbTable::index_iterator i = t.indexBegin(); i != t.indexEnd(); ++i) {
+    QString indexName = t.name() + '_' + i->name() + "_idx";
+    if (!q.exec(m_driver->dropIndexString(t.name(), indexName))) {
+      buildError (q, __func__, QString("Error dropping index from %1").arg(t.name()));
+      return false;
+    }
+  }
+  if (!q.exec (QString("ALTER TABLE " + t.name() + " RENAME TO " + tempTableName + ';'))) {
+    buildError (q, __func__, QString("Error renaming table %1").arg(t.name()));
     return false;
   }
-  createTable(t);
-  q.prepare(QString("INSERT INTO " + t.name() + " (" + t.columnList() +
-                    ") SELECT " + t.columnList() + " FROM " + tempTableName + ';'));
+  createTable(t, fromVersion + 1);
+  q.prepare (QString("INSERT INTO " + t.name() + " (" + t.columnList(fromVersion) +
+      ") SELECT " + t.columnList(fromVersion) + " FROM " + tempTableName + ';'));
   if (!q.exec()) {
-    buildError(q, Q_FUNC_INFO, "Error inserting into new table");
+    buildError (q, __func__, QString("Error inserting into new table %1").arg(t.name()));
     return false;
   }
-  if (!q.exec(QString("DROP TABLE " + tempTableName + ';'))) {
-    buildError(q, Q_FUNC_INFO, "Error dropping old table");
+  if (!q.exec (QString("DROP TABLE " + tempTableName + ';'))) {
+    buildError (q, __func__, QString("Error dropping old table %1").arg(t.name()));
     return false;
   }
   return true;
@@ -762,7 +696,7 @@ long unsigned MyMoneyStorageSql::getRecCount(const QString& table) const
   return ((unsigned long) q.value(0).toULongLong());
 }
 
-int MyMoneyStorageSql::createTables()
+int MyMoneyStorageSql::createTables(int version)
 {
   DBG("*** Entering MyMoneyStorageSql::createTables");
   // check tables, create if required
@@ -775,7 +709,7 @@ int MyMoneyStorageSql::createTables()
 
   for (QMap<QString, MyMoneyDbTable>::ConstIterator tt = m_db.tableBegin(); tt != m_db.tableEnd(); ++tt) {
     if (!lowerTables.contains(tt.key().toLower())) {
-      createTable(tt.value());
+      createTable(tt.value(), version);
     }
   }
 
@@ -792,11 +726,11 @@ int MyMoneyStorageSql::createTables()
   return (upgradeDb()); // any errors will be caught by exception handling
 }
 
-void MyMoneyStorageSql::createTable(const MyMoneyDbTable& t)
+void MyMoneyStorageSql::createTable(const MyMoneyDbTable& t, int version)
 {
   DBG("*** Entering MyMoneyStorageSql::createTable");
 // create the tables
-  QStringList ql = t.generateCreateSQL(m_driver).split('\n', QString::SkipEmptyParts);
+  QStringList ql = t.generateCreateSQL(m_driver, version).split('\n', QString::SkipEmptyParts);
   MyMoneySqlQuery q(this);
   foreach (const QString& i, ql) {
     if (!q.exec(i)) throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("creating table/index %1").arg(t.name())));
@@ -1631,6 +1565,7 @@ void MyMoneyStorageSql::writeTransaction(const QString& txId, const MyMoneyTrans
   q.bindValue(":entryDate", tx.entryDate().toString(Qt::ISODate));
   q.bindValue(":currencyId", tx.commodity());
   q.bindValue(":bankId", tx.bankID());
+
   if (!q.exec()) throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("writing Transaction")));
 
   m_txPostDate = tx.postDate(); // FIXME: TEMP till Tom puts date in split object

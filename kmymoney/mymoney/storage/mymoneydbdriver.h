@@ -34,17 +34,6 @@
 /**
 @author Tony Bloomfield
  */
-typedef enum databaseTypeE { // database (driver) type
-  Db2 = 0, //
-  Interbase, //
-  Mysql, //
-  Oracle, //
-  ODBC, //
-  Postgresql, //
-  Sqlite, //
-  Sybase, //
-  Sqlite3 //
-} _databaseType;
 
 /**
   * The MyMoneyDbDriver class hierarchy provides a way to implement DBMS
@@ -68,17 +57,6 @@ public:
     *  @return a list ofsupported Qt database driver types, their qt names and useful names
     **/
   static const QMap<QString, QString> driverMap();
-
-  // check database type
-  // These are deprecated because there should be no reliance on the type
-  // of the database. The class hierarchy should handle it automatically.
-  KDE_DEPRECATED inline bool isMysql() const {
-    return (m_dbType == Mysql);
-  };
-  KDE_DEPRECATED inline bool isSqlite3() const {
-    return (m_dbType == Sqlite3);
-  };
-
   /**
    * Has the database been tested by developers?
    *
@@ -120,6 +98,15 @@ public:
    */
   virtual const QString dropPrimaryKeyString(const QString& name) const;
 
+
+  /**
+   * @param tableName The name of the table
+   * @param indexName The name of the index
+   *
+   * @return The SQL string to drop an index from a table
+   */
+  virtual const QString dropIndexString(const QString& tableName, const QString& indexName) const;
+
   /**
    * modifyColumnString will generate the SQL to modify the type of a column,
    * including type, not null, etc. It is not for changing the column name.
@@ -153,9 +140,22 @@ public:
    */
   virtual const QString timestampString(const MyMoneyDbDatetimeColumn& c) const;
 
+  /**
+    * @ return Whether this DBMS requires an external file for storage
+    */
+  virtual bool requiresExternalFile() const;
+  /**
+    * @ return Whether this DBMS requires creation before use
+    */
+  virtual bool requiresCreation() const;
+  /**
+    * Some DBMS require additional options to create-table
+
+      @ return additional option string
+    */
+  virtual const QString tableOptionString() const;
 protected:
   MyMoneyDbDriver(); // only allow create() and derived types to construct
-  databaseTypeE m_dbType; // This goes away with the deprecated functions
 };
 
 #endif // MYMONEYDBDRIVER_H

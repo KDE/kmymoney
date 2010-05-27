@@ -20,6 +20,10 @@
 #define MYMONEYSTORAGESQL_H
 
 // ----------------------------------------------------------------------------
+// System Includes
+#include <limits>
+
+// ----------------------------------------------------------------------------
 // QT Includes
 
 #include <QSqlDatabase>
@@ -105,7 +109,7 @@ private:
 
 /**
   * The MyMoneySqlQuery class is derived from QSqlQuery to provide
-  * a way to adjust some queries based on databaseTypeE and make
+  * a way to adjust some queries based on database type and make
   * debugging easier by providing a place to put debug statements.
   */
 class MyMoneySqlQuery : public QSqlQuery
@@ -301,7 +305,7 @@ public:
 
 private:
   //void init(void);
-  bool sqliteExists(const QString& dbName);
+  bool fileExists(const QString& dbName);
   // a function to build a comprehensive error message
   QString& buildError(const QSqlQuery& q, const QString& function, const QString& message) const;
   QString& buildError(const QSqlQuery& q, const QString& function, const QString& message,
@@ -396,20 +400,9 @@ private:
   int upgradeToV5();
   int upgradeToV6();
 
-  bool sqliteAlterTable(const MyMoneyDbTable& t);
-  bool addColumn(const MyMoneyDbTable& t, const MyMoneyDbColumn& c,
-                 const QString& after = QString());
-  bool addColumn(const QString& table,
-                 const QString& column,
-                 const QString& after = QString());
-  bool dropColumn(const MyMoneyDbTable& t,
-                  const QString& c);
-  bool dropColumn(const QString& table,
-                  const QString& column);
-
-//  long long unsigned getRecCount(const QString& table);
-  int createTables();
-  void createTable(const MyMoneyDbTable& t);
+  int createTables(int version = std::numeric_limits<int>::max());
+  void createTable(const MyMoneyDbTable& t, int version = std::numeric_limits<int>::max());
+  bool alterTable(const MyMoneyDbTable& t, int fromVersion);
   void clean();
   int isEmpty();
   // data
@@ -455,24 +448,6 @@ private:
 
   */
   bool m_displayStatus;
-  /**
-   * On occasions, e.g. after a complex transaction search, or for populating a
-   * payee popup list, it becomes necessary to load all data into memory. The
-   * following flags will be set after such a load, to indicate that further
-   * retrievals are not needed.
-   */
-//  bool m_transactionListRead;
-//  bool m_payeeListRead;
-  /**
-   * This member variable holds a list of those accounts for which all
-   * transactions are in memory, thus saving reading them again
-   */
-//  QList<QString> m_accountsLoaded;
-  /**
-    * This member variable is used when loading transactions to list all
-    * referenced payees, which can then be read into memory (if not already there)
-    */
-//  QList<QString> m_payeeList;
 
   void alert(QString s) const {
     qDebug() << s;

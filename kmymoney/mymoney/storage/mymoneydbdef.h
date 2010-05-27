@@ -20,6 +20,10 @@
 #define MYMONEYDBDEF_H
 
 // ----------------------------------------------------------------------------
+// System Includes
+#include <limits>
+
+// ----------------------------------------------------------------------------
 // QT Includes
 #include <QHash>
 #include <QMap>
@@ -47,7 +51,7 @@ public:
                            const QString& itype = QString(),
                            const bool iprimary = false,
                            const bool inotnull = false,
-                           const QString &initVersion = "0.1"):
+                           const int initVersion = 0):
       m_name(iname),
       m_type(itype),
       m_isPrimary(iprimary),
@@ -83,12 +87,15 @@ public:
   bool isNotNull(void) const {
     return (m_isNotNull);
   }
+  int initVersion(void) const {
+    return (m_initVersion);
+  }
 private:
   QString m_name;
   QString m_type;
   bool m_isPrimary;
   bool m_isNotNull;
-  QString m_initVersion;
+  int m_initVersion;
 };
 
 /**
@@ -100,7 +107,7 @@ public:
   explicit MyMoneyDbDatetimeColumn(const QString& iname,
                                    const bool iprimary = false,
                                    const bool inotnull = false,
-                                   const QString &initVersion = "0.1"):
+                                   const int initVersion = 0):
       MyMoneyDbColumn(iname, "", iprimary, inotnull, initVersion) {}
   virtual ~MyMoneyDbDatetimeColumn() {}
   virtual const QString generateDDL(const KSharedPtr<MyMoneyDbDriver>& driver) const;
@@ -121,7 +128,7 @@ public:
                               const bool isigned = true,
                               const bool iprimary = false,
                               const bool inotnull = false,
-                              const QString &initVersion = "0.1"):
+                              const int initVersion = 0):
       MyMoneyDbColumn(iname, "", iprimary, inotnull, initVersion),
       m_type(type),
       m_isSigned(isigned) {}
@@ -152,7 +159,7 @@ public:
                                const size type = MEDIUM,
                                const bool iprimary = false,
                                const bool inotnull = false,
-                               const QString &initVersion = "0.1"):
+                               const int initVersion = 0):
       MyMoneyDbColumn(iname, "", iprimary, inotnull, initVersion),
       m_type(type) {}
   virtual ~MyMoneyDbTextColumn() {}
@@ -241,7 +248,14 @@ public:
   inline const QString& deleteString(void) const {
     return (m_deleteString);
   };
-
+  /**
+    * This method determines whether the table has a primary key field
+    *
+    * @param int database version which has to be checked
+    *
+    * @return bool table has a priimary key
+    */
+  bool hasPrimaryKey(int version = std::numeric_limits<int>::max()) const;
   /**
     * This method determines the string required to drop the primary key for the table
     * based on the db specific syntax.
@@ -253,10 +267,13 @@ public:
   const QString dropPrimaryKeyString(const KSharedPtr<MyMoneyDbDriver>& driver) const;
   /**
     * This method returns a comma-separated list of all column names in the table
+    * which were present in a given version
     *
-    * @return QString column list.
+    * @param version version of database definition required
+    *
+    * @return QString column list
     */
-  const QString columnList() const;
+  const QString columnList(const int version = std::numeric_limits<int>::max()) const;
   /**
     * This method returns the string for changing a column's definition.  It covers statements
     * like ALTER TABLE..CHANGE COLUMN, MODIFY COLUMN, etc.
@@ -281,7 +298,7 @@ public:
     *
     * @return QString of the DDL.
     */
-  const QString generateCreateSQL(const KSharedPtr<MyMoneyDbDriver>& driver) const;
+  const QString generateCreateSQL(const KSharedPtr<MyMoneyDbDriver>& driver, int version = std::numeric_limits<int>::max()) const;
 
   /**
     * This method creates a MyMoneyDbIndex object and adds it to the list of indices for the table.
@@ -301,12 +318,19 @@ public:
   }
 
   int fieldNumber(const QString& name) const;
+
+  typedef QList<MyMoneyDbIndex>::const_iterator index_iterator;
+  inline index_iterator indexBegin(void) const {
+    return m_indices.constBegin();
+  }
+  inline index_iterator indexEnd(void) const {
+    return m_indices.constEnd();
+  }
 private:
   QString m_name;
   QList<KSharedPtr <MyMoneyDbColumn> > m_fields;
   QHash<QString, int> m_fieldOrder;
 
-  typedef QList<MyMoneyDbIndex>::const_iterator index_iterator;
   QList<MyMoneyDbIndex> m_indices;
   QString m_initVersion;
   QString m_insertString; // string to insert a record

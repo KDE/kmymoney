@@ -190,7 +190,8 @@ void KSelectDatabaseDlg::slotDriverSelected(QListWidgetItem *driver)
     }
   }
 
-  if (dbDriver->isSqlite3()) {
+  if (dbDriver->requiresExternalFile()) {
+    // currently, only sqlite requres an external file
     m_sqliteSelected = true;
     if (m_mode == QIODevice::WriteOnly)
       m_widget->urlSqlite->setMode(KFile::Modes(KFile::Files));

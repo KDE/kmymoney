@@ -210,7 +210,8 @@ void KGenerateSqlDlg::slotdriverSelected()
   }
 
   m_requiredFields = new kMandatoryFieldGroup(this);
-  if (m_dbDriver->isSqlite3()) {
+  // currently, only sqlite need an external file
+  if (m_dbDriver->requiresExternalFile()) {
     m_sqliteSelected = true;
     m_widget->urlSqlite->setMode(KFile::Modes(KFile::File));
     m_widget->urlSqlite->setEnabled(true);

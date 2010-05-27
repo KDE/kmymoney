@@ -35,7 +35,6 @@ class MyMoneyDb2Driver : public MyMoneyDbDriver
 {
 public:
   MyMoneyDb2Driver() {
-    m_dbType = Db2;
   }
 
   virtual const QString textString(const MyMoneyDbTextColumn& c) const;
@@ -45,7 +44,6 @@ class MyMoneyInterbaseDriver : public MyMoneyDbDriver
 {
 public:
   MyMoneyInterbaseDriver() {
-    m_dbType = Interbase;
   }
 };
 
@@ -53,7 +51,6 @@ class MyMoneyMysqlDriver : public MyMoneyDbDriver
 {
 public:
   MyMoneyMysqlDriver() {
-    m_dbType = Mysql;
   }
 
   virtual bool isTested() const;
@@ -61,16 +58,17 @@ public:
   virtual const QString defaultDbName() const;
   virtual const QString createDbString(const QString& name) const;
   virtual const QString dropPrimaryKeyString(const QString& name) const;
+  virtual const QString dropIndexString(const QString& tableName, const QString& indexName) const;
   virtual const QString modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const;
   virtual const QString intString(const MyMoneyDbIntColumn& c) const;
   virtual const QString timestampString(const MyMoneyDbDatetimeColumn& c) const;
+  virtual const QString tableOptionString() const;
 };
 
 class MyMoneyOracleDriver : public MyMoneyDbDriver
 {
 public:
   MyMoneyOracleDriver() {
-    m_dbType = Oracle;
   }
 
   virtual const QString dropPrimaryKeyString(const QString& name) const;
@@ -83,7 +81,6 @@ class MyMoneyODBCDriver : public MyMoneyDbDriver
 {
 public:
   MyMoneyODBCDriver() {
-    m_dbType = ODBC;
   }
 
   virtual const QString timestampString(const MyMoneyDbDatetimeColumn& c) const;
@@ -93,7 +90,6 @@ class MyMoneyPostgresqlDriver : public MyMoneyDbDriver
 {
 public:
   MyMoneyPostgresqlDriver() {
-    m_dbType = Postgresql;
   }
 
   virtual bool isTested() const;
@@ -110,7 +106,6 @@ class MyMoneySybaseDriver : public MyMoneyDbDriver
 {
 public:
   MyMoneySybaseDriver() {
-    m_dbType = Sybase;
   }
 };
 
@@ -118,12 +113,13 @@ class MyMoneySqlite3Driver : public MyMoneyDbDriver
 {
 public:
   MyMoneySqlite3Driver() {
-    m_dbType = Sqlite3;
   }
 
   virtual bool isTested() const;
   virtual const QString forUpdateString() const;
   virtual const QString intString(const MyMoneyDbIntColumn& c) const;
+  virtual bool requiresExternalFile() const;
+  virtual bool requiresCreation() const;
 };
 
 //********************* The driver map *********************
@@ -253,6 +249,32 @@ const QString MyMoneyPostgresqlDriver:: createDbString(const QString& name) cons
 }
 
 //*******************************************************
+// By default, the DBMS does not require an external file
+// At present, only sqlite does
+bool MyMoneyDbDriver::requiresExternalFile() const
+{
+  return false;
+}
+
+bool MyMoneySqlite3Driver::requiresExternalFile() const
+{
+  return true;
+}
+
+//*******************************************************
+// By default, the DBMS requires creating before use
+// At present, only sqlite doesn't AFAIK
+bool MyMoneyDbDriver::requiresCreation() const
+{
+  return true;
+}
+
+bool MyMoneySqlite3Driver::requiresCreation() const
+{
+  return false;
+}
+
+//*******************************************************
 // There is no standard for dropping a primary key.
 // If it is supported, it will have to be implemented for each DBMS
 const QString MyMoneyDbDriver::dropPrimaryKeyString(const QString& name) const
@@ -274,6 +296,20 @@ const QString MyMoneyOracleDriver::dropPrimaryKeyString(const QString& name) con
 const QString MyMoneyPostgresqlDriver::dropPrimaryKeyString(const QString& name) const
 {
   return QString("ALTER TABLE %1 DROP CONSTRAINT %2_pkey;").arg(name).arg(name);
+}
+
+//*******************************************************
+// There is apparently no standard for dropping an index.
+// If it is supported, it will have to be implemented for each DBMS
+const QString MyMoneyDbDriver::dropIndexString(const QString& tableName, const QString& indexName) const
+{
+  Q_UNUSED(tableName);
+  return QString("DROP INDEX %1;").arg(indexName);
+}
+
+const QString MyMoneyMysqlDriver::dropIndexString(const QString& tableName, const QString& indexName) const
+{
+  return QString("DROP INDEX %1 ON %2;").arg(indexName).arg(tableName);
 }
 
 //*******************************************************
@@ -568,3 +604,15 @@ const QString MyMoneySqlite3Driver::forUpdateString() const
   return "";
 }
 
+//***********************************************
+// Define the table option string
+// So far, only mysql requires special handling.
+const QString MyMoneyMysqlDriver::tableOptionString() const
+{
+  return " ENGINE = InnoDB";
+}
+
+const QString MyMoneyDbDriver::tableOptionString() const
+{
+  return "";
+}

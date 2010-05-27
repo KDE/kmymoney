@@ -21,6 +21,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 #include <QDate>
+#include <QtDebug>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -94,12 +95,12 @@ void MyMoneyDbDef::FileInfo(void)
   appendField(MyMoneyDbIntColumn("hiReportId", MyMoneyDbIntColumn::BIG, UNSIGNED));
   appendField(MyMoneyDbColumn("encryptData", "varchar(255)"));
   appendField(MyMoneyDbColumn("updateInProgress", "char(1)"));
-  appendField(MyMoneyDbIntColumn("budgets", MyMoneyDbIntColumn::BIG, UNSIGNED));
-  appendField(MyMoneyDbIntColumn("hiBudgetId", MyMoneyDbIntColumn::BIG, UNSIGNED));
-  appendField(MyMoneyDbColumn("logonUser", "varchar(255)"));
-  appendField(MyMoneyDbDatetimeColumn("logonAt"));
+  appendField(MyMoneyDbIntColumn("budgets", MyMoneyDbIntColumn::BIG, UNSIGNED, false, false, 1));
+  appendField(MyMoneyDbIntColumn("hiBudgetId", MyMoneyDbIntColumn::BIG, UNSIGNED, false, false, 1));
+  appendField(MyMoneyDbColumn("logonUser", "varchar(255)", false, false, 1));
+  appendField(MyMoneyDbDatetimeColumn("logonAt", false, false, 1));
   appendField(MyMoneyDbIntColumn("fixLevel",
-                                 MyMoneyDbIntColumn::MEDIUM, UNSIGNED));
+                                 MyMoneyDbIntColumn::MEDIUM, UNSIGNED, false, false, 6));
   MyMoneyDbTable t("kmmFileInfo", fields);
   t.buildSQLStrings();
   m_tables[t.name()] = t;
@@ -133,11 +134,11 @@ void MyMoneyDbDef::Payees(void)
   appendField(MyMoneyDbTextColumn("addressZipcode"));
   appendField(MyMoneyDbTextColumn("addressState"));
   appendField(MyMoneyDbTextColumn("telephone"));
-  appendField(MyMoneyDbTextColumn("notes", MyMoneyDbTextColumn::LONG));
-  appendField(MyMoneyDbColumn("defaultAccountId", "varchar(32)"));
-  appendField(MyMoneyDbIntColumn("matchData", MyMoneyDbIntColumn::TINY, UNSIGNED));
-  appendField(MyMoneyDbColumn("matchIgnoreCase", "char(1)"));
-  appendField(MyMoneyDbTextColumn("matchKeys"));
+  appendField(MyMoneyDbTextColumn("notes", MyMoneyDbTextColumn::LONG, false, false, 5));
+  appendField(MyMoneyDbColumn("defaultAccountId", "varchar(32)", false, false, 5));
+  appendField(MyMoneyDbIntColumn("matchData", MyMoneyDbIntColumn::TINY, UNSIGNED, false, false, 5));
+  appendField(MyMoneyDbColumn("matchIgnoreCase", "char(1)", false, false, 5));
+  appendField(MyMoneyDbTextColumn("matchKeys", MyMoneyDbTextColumn::MEDIUM, false, false, 5));
   MyMoneyDbTable t("kmmPayees", fields);
   t.buildSQLStrings();
   m_tables[t.name()] = t;
@@ -161,7 +162,7 @@ void MyMoneyDbDef::Accounts(void)
   appendField(MyMoneyDbColumn("currencyId", "varchar(32)"));
   appendField(MyMoneyDbTextColumn("balance"));
   appendField(MyMoneyDbTextColumn("balanceFormatted"));
-  appendField(MyMoneyDbIntColumn("transactionCount", MyMoneyDbIntColumn::BIG, UNSIGNED));
+  appendField(MyMoneyDbIntColumn("transactionCount", MyMoneyDbIntColumn::BIG, UNSIGNED, false, false, 1));
   MyMoneyDbTable t("kmmAccounts", fields);
   t.buildSQLStrings();
   m_tables[t.name()] = t;
@@ -196,13 +197,13 @@ void MyMoneyDbDef::Splits(void)
   appendField(MyMoneyDbColumn("valueFormatted", "text"));
   appendField(MyMoneyDbTextColumn("shares", MyMoneyDbTextColumn::NORMAL, false, NOTNULL));
   appendField(MyMoneyDbTextColumn("sharesFormatted"));
-  appendField(MyMoneyDbTextColumn("price", MyMoneyDbTextColumn::NORMAL, false));
-  appendField(MyMoneyDbTextColumn("priceFormatted"));
+  appendField(MyMoneyDbTextColumn("price", MyMoneyDbTextColumn::NORMAL, false, false, 2));
+  appendField(MyMoneyDbTextColumn("priceFormatted",MyMoneyDbTextColumn::MEDIUM, false, false, 2));
   appendField(MyMoneyDbTextColumn("memo"));
   appendField(MyMoneyDbColumn("accountId", "varchar(32)", false, NOTNULL));
   appendField(MyMoneyDbColumn("checkNumber", "varchar(32)"));
-  appendField(MyMoneyDbDatetimeColumn("postDate"));
-  appendField(MyMoneyDbTextColumn("bankId"));
+  appendField(MyMoneyDbDatetimeColumn("postDate", false, false, 1));
+  appendField(MyMoneyDbTextColumn("bankId", MyMoneyDbTextColumn::MEDIUM, false, false, 5));
   MyMoneyDbTable t("kmmSplits", fields);
   QStringList list;
   list << "accountId" << "txType";
@@ -236,7 +237,7 @@ void MyMoneyDbDef::Schedules(void)
   appendField(MyMoneyDbIntColumn("occurence", MyMoneyDbIntColumn::SMALL, UNSIGNED, false,
                                  NOTNULL));
   appendField(MyMoneyDbIntColumn("occurenceMultiplier", MyMoneyDbIntColumn::SMALL, UNSIGNED,
-                                 false, NOTNULL));
+                                 false, NOTNULL, 3));
   appendField(MyMoneyDbTextColumn("occurenceString"));
   appendField(MyMoneyDbIntColumn("paymentType", MyMoneyDbIntColumn::TINY, UNSIGNED));
   appendField(MyMoneyDbTextColumn("paymentTypeString", MyMoneyDbTextColumn::LONG));
@@ -318,7 +319,7 @@ void MyMoneyDbDef::Reports(void)
   QList<KSharedPtr <MyMoneyDbColumn> > fields;
   appendField(MyMoneyDbColumn("name", "varchar(255)", false, NOTNULL));
   appendField(MyMoneyDbTextColumn("XML", MyMoneyDbTextColumn::LONG));
-  appendField(MyMoneyDbColumn("id", "varchar(32)", PRIMARYKEY, NOTNULL));
+  appendField(MyMoneyDbColumn("id", "varchar(32)", PRIMARYKEY, NOTNULL, 6));
   MyMoneyDbTable t("kmmReportConfig", fields);
   t.buildSQLStrings();
   m_tables[t.name()] = t;
@@ -490,26 +491,29 @@ void MyMoneyDbTable::buildSQLStrings(void)
   }
 }
 
-const QString MyMoneyDbTable::columnList() const
+const QString MyMoneyDbTable::columnList(const int version) const
 {
   field_iterator ft = m_fields.begin();
   QString qs;
   ft = m_fields.begin();
   while (ft != m_fields.end()) {
-    qs += QString("%1, ").arg((*ft)->name());
+     if ((*ft)->initVersion() <= version)
+      qs += QString("%1, ").arg((*ft)->name());
     ++ft;
   }
   return (qs.left(qs.length() - 2));
 }
 
-const QString MyMoneyDbTable::generateCreateSQL(const KSharedPtr<MyMoneyDbDriver>& driver) const
+const QString MyMoneyDbTable::generateCreateSQL(const KSharedPtr<MyMoneyDbDriver>& driver, int version) const
 {
   QString qs = QString("CREATE TABLE %1 (").arg(name());
   QString pkey;
   for (field_iterator it = m_fields.begin(); it != m_fields.end(); ++it) {
-    qs += (*it)->generateDDL(driver) + ", ";
-    if ((*it)->isPrimaryKey())
-      pkey += (*it)->name() + ", ";
+    if ((*it)->initVersion() <= version) {
+      qs += (*it)->generateDDL(driver) + ", ";
+      if ((*it)->isPrimaryKey())
+        pkey += (*it)->name() + ", ";
+    }
   }
 
   if (!pkey.isEmpty()) {
@@ -519,10 +523,8 @@ const QString MyMoneyDbTable::generateCreateSQL(const KSharedPtr<MyMoneyDbDriver
     qs = qs.left(qs.length() - 2) + ')';
   }
 
-  if (driver->isMysql())
-    qs += " ENGINE = InnoDB;\n";
-  else
-    qs += ";\n";
+  qs += driver->tableOptionString();
+  qs += ";\n";
 
   for (index_iterator ii = m_indices.begin(); ii != m_indices.end(); ++ii) {
     qs += (*ii).generateDDL(driver);
@@ -533,6 +535,19 @@ const QString MyMoneyDbTable::generateCreateSQL(const KSharedPtr<MyMoneyDbDriver
 const QString MyMoneyDbTable::dropPrimaryKeyString(const KSharedPtr<MyMoneyDbDriver>& driver) const
 {
   return driver->dropPrimaryKeyString(m_name);
+}
+
+bool MyMoneyDbTable::hasPrimaryKey(int version) const
+{
+  field_iterator ft = m_fields.constBegin();
+  while (ft != m_fields.constEnd()) {
+    if ((*ft)->initVersion() <= version) {
+      if ((*ft)->isPrimaryKey())
+        return (true);
+    }
+    ++ft;
+  }
+  return (false);
 }
 
 const QString MyMoneyDbTable::modifyColumnString(const KSharedPtr<MyMoneyDbDriver>& driver, const QString& columnName, const MyMoneyDbColumn& newDef) const
