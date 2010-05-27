@@ -1058,6 +1058,12 @@ void Register::focusOutEvent(QFocusEvent* ev)
   QTableWidget::focusOutEvent(ev);
 }
 
+void Register::resizeEvent(QResizeEvent* ev)
+{
+  TransactionEditorContainer::resizeEvent(ev);
+  resize(DetailColumn, true);
+}
+
 void Register::resize(void)
 {
   resize(DetailColumn);

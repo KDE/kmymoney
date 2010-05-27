@@ -518,6 +518,7 @@ protected:
   void focusOutEvent(QFocusEvent*);
   void focusInEvent(QFocusEvent*);
   void keyPressEvent(QKeyEvent*);
+  virtual void resizeEvent(QResizeEvent* ev);
 
   int rowToIndex(int row) const;
   void setupItemIndex(int rowCount);
