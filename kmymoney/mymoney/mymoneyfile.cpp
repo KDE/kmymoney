@@ -948,7 +948,7 @@ void MyMoneyFile::accountList(QList<MyMoneyAccount>& list, const QStringList& id
       if (!isStandardAccount((*it).id())) {
         if (idlist.indexOf((*it).id()) != -1) {
           list.append(*it);
-          if (recursive == true) {
+          if (recursive == true && !(*it).accountList().isEmpty()) {
             accountList(list, (*it).accountList(), true);
           }
         }
