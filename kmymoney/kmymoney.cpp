@@ -3390,7 +3390,7 @@ void KMyMoneyApp::slotAccountDelete(void)
         return; // can't delete accounts which still have subaccounts
 
       if (KMessageBox::questionYesNo(this, i18n("<p>Do you really want to "
-                                     "delete account <b>%1</b>?<p>", d->m_selectedAccount.name())) != KMessageBox::Yes) {
+                                     "delete account <b>%1</b>?</p>", d->m_selectedAccount.name())) != KMessageBox::Yes) {
         return; // ok, you don't want to? why did you click then, hmm?
       }
   } // switch;
@@ -4736,7 +4736,7 @@ void KMyMoneyApp::slotBudgetNew(void)
 {
   QDate date = QDate::currentDate();
   date.setYMD(date.year(), 1, 1);
-  QString newname = i18n("Budget <numid>%1</numid>", QString::number(date.year()));
+  QString newname = i18n("Budget <numid>%1</numid>", date.year());
 
   MyMoneyBudget budget;
 
@@ -4746,7 +4746,7 @@ void KMyMoneyApp::slotBudgetNew(void)
     // Exception thrown when the name is not found
     while (1) {
       MyMoneyFile::instance()->budgetByName(newname);
-      newname = i18n("Budget <numid>%1</numid> (<numid>%2</numid>)", QString::number(date.year()), QString::number(i++));
+      newname = i18n("Budget <numid>%1</numid> (<numid>%2</numid>)", date.year(), i++);
     }
   } catch (MyMoneyException *e) {
     // all ok, the name is unique
