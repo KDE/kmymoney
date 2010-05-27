@@ -198,7 +198,7 @@ void MyMoneyDbDef::Splits(void)
   appendField(MyMoneyDbTextColumn("shares", MyMoneyDbTextColumn::NORMAL, false, NOTNULL));
   appendField(MyMoneyDbTextColumn("sharesFormatted"));
   appendField(MyMoneyDbTextColumn("price", MyMoneyDbTextColumn::NORMAL, false, false, 2));
-  appendField(MyMoneyDbTextColumn("priceFormatted",MyMoneyDbTextColumn::MEDIUM, false, false, 2));
+  appendField(MyMoneyDbTextColumn("priceFormatted", MyMoneyDbTextColumn::MEDIUM, false, false, 2));
   appendField(MyMoneyDbTextColumn("memo"));
   appendField(MyMoneyDbColumn("accountId", "varchar(32)", false, NOTNULL));
   appendField(MyMoneyDbColumn("checkNumber", "varchar(32)"));
@@ -497,7 +497,7 @@ const QString MyMoneyDbTable::columnList(const int version) const
   QString qs;
   ft = m_fields.begin();
   while (ft != m_fields.end()) {
-     if ((*ft)->initVersion() <= version)
+    if ((*ft)->initVersion() <= version)
       qs += QString("%1, ").arg((*ft)->name());
     ++ft;
   }

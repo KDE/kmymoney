@@ -151,8 +151,8 @@ int MyMoneyStorageSql::open(const KUrl& url, int openMode, bool clear)
         // this may be a sqlite file opened from the recently used list
         // but which no longer exists. In that case, open will work but create an empty file.
         // This is not what the user's after; he may accuse KMM of deleting all his data!
-      if (m_driver->requiresExternalFile()) {
-        if (!fileExists(dbName)) {
+        if (m_driver->requiresExternalFile()) {
+          if (!fileExists(dbName)) {
             rc = 1;
             break;
           }
@@ -380,7 +380,7 @@ int MyMoneyStorageSql::upgradeDb()
     if (!lowerTables.contains(tt.key().toLower())) {
       if (!q.exec(tt.value().createString()))
         throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO,
-                                             QString("creating view %1").arg(tt.key())));
+                                              QString("creating view %1").arg(tt.key())));
     }
   }
 
@@ -466,7 +466,7 @@ int MyMoneyStorageSql::upgradeToV1()
   // change kmmFileInfo add budgets, hiBudgetId unsigned bigint
   // change kmmFileInfo add logonUser
   // change kmmFileInfo add logonAt datetime
- if (!alterTable(m_db.m_tables["kmmFileInfo"], m_dbVersion))
+  if (!alterTable(m_db.m_tables["kmmFileInfo"], m_dbVersion))
     return (1);
   // change kmmAccounts add transactionCount unsigned bigint as last field
   if (!alterTable(m_db.m_tables["kmmAccounts"], m_dbVersion))
@@ -644,7 +644,8 @@ int MyMoneyStorageSql::upgradeToV6()
   return 0;
 }
 
-bool MyMoneyStorageSql::alterTable(const MyMoneyDbTable& t, int fromVersion) {
+bool MyMoneyStorageSql::alterTable(const MyMoneyDbTable& t, int fromVersion)
+{
   DBG("*** Entering MyMoneyStorageSql::alterTable");
   QString tempTableName = t.name();
   tempTableName.replace("kmm", "kmmtmp");
@@ -654,31 +655,31 @@ bool MyMoneyStorageSql::alterTable(const MyMoneyDbTable& t, int fromVersion) {
     QString dropString = m_driver->dropPrimaryKeyString(t.name());
     if (!dropString.isEmpty()) {
       if (!q.exec(dropString)) {
-        buildError (q, __func__, QString("Error dropping old primary key from %1").arg(t.name()));
+        buildError(q, __func__, QString("Error dropping old primary key from %1").arg(t.name()));
         return false;
       }
     }
   }
-  for(MyMoneyDbTable::index_iterator i = t.indexBegin(); i != t.indexEnd(); ++i) {
+  for (MyMoneyDbTable::index_iterator i = t.indexBegin(); i != t.indexEnd(); ++i) {
     QString indexName = t.name() + '_' + i->name() + "_idx";
     if (!q.exec(m_driver->dropIndexString(t.name(), indexName))) {
-      buildError (q, __func__, QString("Error dropping index from %1").arg(t.name()));
+      buildError(q, __func__, QString("Error dropping index from %1").arg(t.name()));
       return false;
     }
   }
-  if (!q.exec (QString("ALTER TABLE " + t.name() + " RENAME TO " + tempTableName + ';'))) {
-    buildError (q, __func__, QString("Error renaming table %1").arg(t.name()));
+  if (!q.exec(QString("ALTER TABLE " + t.name() + " RENAME TO " + tempTableName + ';'))) {
+    buildError(q, __func__, QString("Error renaming table %1").arg(t.name()));
     return false;
   }
   createTable(t, fromVersion + 1);
-  q.prepare (QString("INSERT INTO " + t.name() + " (" + t.columnList(fromVersion) +
-      ") SELECT " + t.columnList(fromVersion) + " FROM " + tempTableName + ';'));
+  q.prepare(QString("INSERT INTO " + t.name() + " (" + t.columnList(fromVersion) +
+                    ") SELECT " + t.columnList(fromVersion) + " FROM " + tempTableName + ';'));
   if (!q.exec()) {
-    buildError (q, __func__, QString("Error inserting into new table %1").arg(t.name()));
+    buildError(q, __func__, QString("Error inserting into new table %1").arg(t.name()));
     return false;
   }
-  if (!q.exec (QString("DROP TABLE " + tempTableName + ';'))) {
-    buildError (q, __func__, QString("Error dropping old table %1").arg(t.name()));
+  if (!q.exec(QString("DROP TABLE " + tempTableName + ';'))) {
+    buildError(q, __func__, QString("Error dropping old table %1").arg(t.name()));
     return false;
   }
   return true;
