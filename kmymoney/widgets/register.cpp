@@ -1025,7 +1025,13 @@ bool Register::event(QEvent* event)
   if (event->type() == QEvent::ToolTip) {
     QHelpEvent *helpEvent = static_cast<QHelpEvent *>(event);
 
+    // get the row, if it's the header, then we're done
+    // otherwise, adjust the row to be 0 based.
     int row = rowAt(helpEvent->y());
+    if(!row)
+      return true;
+    --row;
+
     int col = columnAt(helpEvent->x());
     RegisterItem* item = itemAtRow(row);
     if (!item)

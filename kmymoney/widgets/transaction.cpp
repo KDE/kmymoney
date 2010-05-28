@@ -489,8 +489,10 @@ bool Transaction::maybeTip(const QPoint& cpos, int row, int col, QRect& r, QStri
   if (!m_erronous && m_transaction.splitCount() < 3)
     return false;
 
-  // check for detail column in row 0 of the transaction for a possible exclamation mark
-  r = m_parent->visualRect(m_parent->model()->index(m_startRow + 0, col));
+  // check for detail column in row 0 of the transaction for a possible
+  // exclamation mark. m_startRow is based 0, whereas the row to obtain
+  // the modelindex is based 1, so we need to add one here
+  r = m_parent->visualRect(m_parent->model()->index(m_startRow + 1, col));
   r.setBottom(r.bottom() + (numRowsRegister() - 1)*r.height());
   if (r.contains(cpos) && m_erronous) {
     if (m_transaction.splits().count() < 2) {
@@ -502,8 +504,8 @@ bool Transaction::maybeTip(const QPoint& cpos, int row, int col, QRect& r, QStri
     return true;
   }
 
-  // check for detail column in row 1 of the transaction for a possible exclamation mark
-  r = m_parent->visualRect(m_parent->model()->index(m_startRow + 1, col));
+  // check if the mouse cursor is located on row 1 of the transaction
+  // and display the details of a split transaction if it is one
   if (row == 1 && r.contains(cpos) && m_transaction.splitCount() > 2) {
     MyMoneyFile* file = MyMoneyFile::instance();
     QList<MyMoneySplit>::const_iterator it_s;
