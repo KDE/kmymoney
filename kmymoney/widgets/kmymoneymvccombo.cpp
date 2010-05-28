@@ -217,7 +217,7 @@ void KMyMoneyMVCCombo::focusOutEvent(QFocusEvent* e)
   }
 
   d->m_inFocusOutEvent = true;
-  if (isEditable() && !currentText().isEmpty()) {
+  if (isEditable() && !currentText().isEmpty() && e->reason() != Qt::ActiveWindowFocusReason) {
     if (d->m_canCreateObjects) {
       if (!contains(currentText())) {
         QString id;
