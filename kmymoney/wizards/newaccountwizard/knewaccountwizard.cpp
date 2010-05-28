@@ -1636,7 +1636,7 @@ void AccountSummaryPage::enterPage(void)
     m_dataList->append(QString(i18nc("Schedule name", "Name") + ": %1").arg(sch.name()));
     if (acc.accountType() == MyMoneyAccount::CreditCard) {
       MyMoneyAccount paymentAccount = MyMoneyFile::instance()->account(m_wizard->m_schedulePage->m_paymentAccount->selectedItem());
-      m_dataList->append(QString(i18nc("Schedule occurrence", "Occurrence") + ": %1").arg(i18n("Monthly")));
+      m_dataList->append(QString(i18nc("Schedule occurrence", "Occurrence") + ": %1").arg(i18nc("Once per month schedule occurrence", "Monthly")));
       m_dataList->append(i18n("Paid from %1", paymentAccount.name()));
       m_dataList->append(i18n("Pay to %1", m_wizard->m_schedulePage->m_payee->currentText()));
       m_dataList->append(QString(i18n("Amount") + ": %1").arg(m_wizard->m_schedulePage->m_amount->value().formatMoney(acc, sec)));

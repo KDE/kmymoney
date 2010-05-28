@@ -193,8 +193,8 @@ void QueryTableTest::testQueryBasics()
 #endif
 
     html = qtbl_3.renderBody();
-    CPPUNIT_ASSERT(searchHTML(html, i18n("Total") + " Checking Account") == -(moSolo) * 3 + moCheckingOpen);
-    CPPUNIT_ASSERT(searchHTML(html, i18n("Total") + " Credit Card") == -(moParent1 + moParent2 + moChild) * 3 + moCreditOpen);
+    CPPUNIT_ASSERT(searchHTML(html, i18nc("Total balance for checking account", "Total") + " Checking Account") == -(moSolo) * 3 + moCheckingOpen);
+    CPPUNIT_ASSERT(searchHTML(html, i18nc("Total balance for credit card", "Total") + " Credit Card") == -(moParent1 + moParent2 + moChild) * 3 + moCreditOpen);
     CPPUNIT_ASSERT(searchHTML(html, i18nc("Grand total balance", "Grand Total")) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
 
     filter.setRowType(MyMoneyReport::ePayee);

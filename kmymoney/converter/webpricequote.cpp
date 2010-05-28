@@ -85,7 +85,7 @@ bool WebPriceQuote::launchNative(const QString& _symbol, const QString& _id, con
   if (quoteSources().contains(sourcename))
     m_source = WebPriceQuoteSource(sourcename);
   else
-    emit error(i18n("Source <%1> does not exist.", sourcename));
+    emit error(i18n("Source <placeholder>%1</placeholder> does not exist.", sourcename));
 
   KUrl url;
 
