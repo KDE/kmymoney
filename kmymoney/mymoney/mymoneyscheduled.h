@@ -460,6 +460,20 @@ public:
   QDate nextPayment(const QDate& refDate = QDate::currentDate()) const;
 
   /**
+    * Calculates the date of the next payment given a next due date.
+    *
+    * @param paymentDate The first possible next due date.
+    * @param refDate The reference date from which the next payment
+    *                date will be calculated (defaults to current date)
+    *
+    * @return QDate The date the next payment is due. This date is
+    *         always past @a refDate.  In case of an error or
+    *         if there is no more payments then an empty/invalid QDate()
+    *         will be returned.
+    */
+  QDate nextPaymentDate(QDate& paymentDate, const QDate& refDate = QDate::currentDate()) const;
+
+  /**
     * Calculates the dates of the payment over a certain period of time.
     *
     * An empty list is returned for no payments or error.
