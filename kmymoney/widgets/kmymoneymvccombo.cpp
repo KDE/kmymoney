@@ -219,6 +219,15 @@ void KMyMoneyMVCCombo::focusOutEvent(QFocusEvent* e)
   d->m_inFocusOutEvent = true;
   if (isEditable() && !currentText().isEmpty() && e->reason() != Qt::ActiveWindowFocusReason) {
     if (d->m_canCreateObjects) {
+      // in case we tab out, we make sure that if the current completion
+      // contains the current text that we set the current text to
+      // the full completion text
+      if(e->reason() != Qt::MouseFocusReason) {
+        if(d->m_completer->currentCompletion().contains(currentText())) {
+          setCurrentText(d->m_completer->currentCompletion());
+        }
+      }
+      
       if (!contains(currentText())) {
         QString id;
         // annouce that we go into a possible dialog to create an object
