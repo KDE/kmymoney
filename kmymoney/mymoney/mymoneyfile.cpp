@@ -1931,8 +1931,11 @@ const MyMoneySecurity& MyMoneyFile::currency(const QString& id) const
     return baseCurrency();
 
   const MyMoneySecurity& curr = d->m_cache.security(id);
-  if (curr.id().isEmpty())
-    throw new MYMONEYEXCEPTION("Currency not found.");
+  if (curr.id().isEmpty()) {
+    QString msg;
+    msg = QString("Currency '%1' not found.").arg(id);
+    throw new MYMONEYEXCEPTION(msg);
+  }
   return curr;
 }
 
