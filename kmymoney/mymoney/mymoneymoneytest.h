@@ -14,8 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef __MYMONEYMONEYTEST_H__
-#define __MYMONEYMONEYTEST_H__
+#ifndef MYMONEYMONEYTEST_H
+#define MYMONEYMONEYTEST_H
 
 // Check for standard definitions
 #ifdef HAVE_STDINT_H

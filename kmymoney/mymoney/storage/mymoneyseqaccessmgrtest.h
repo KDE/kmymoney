@@ -14,8 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef __MYMONEYSEQACCESSMGRTEST_H__
-#define __MYMONEYSEQACCESSMGRTEST_H__
+#ifndef MYMONEYSEQACCESSMGRTEST_H
+#define MYMONEYSEQACCESSMGRTEST_H
 
 #include <cppunit/TestCaller.h>
 #include <cppunit/TestCase.h>

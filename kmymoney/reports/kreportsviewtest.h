@@ -15,8 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef __KREPORTSVIEWTEST_H__
-#define __KREPORTSVIEWTEST_H__
+#ifndef KREPORTSVIEWTEST_H
+#define KREPORTSVIEWTEST_H
 
 #include <cppunit/extensions/HelperMacros.h>
 #include "mymoneyfile.h"

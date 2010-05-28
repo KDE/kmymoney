@@ -14,8 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef __MYMONEYSECURITYTEST_H__
-#define __MYMONEYSECURITYTEST_H__
+#ifndef MYMONEYSECURITYTEST_H
+#define MYMONEYSECURITYTEST_H
 
 #include <cppunit/extensions/HelperMacros.h>
 

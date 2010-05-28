@@ -14,8 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef __MYMONEYMAPTEST_H__
-#define __MYMONEYMAPTEST_H__
+#ifndef MYMONEYMAPTEST_H
+#define MYMONEYMAPTEST_H
 
 #include <cppunit/TestCaller.h>
 #include <cppunit/TestCase.h>

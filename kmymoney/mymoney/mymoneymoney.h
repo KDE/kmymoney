@@ -13,8 +13,8 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-#ifndef _MYMONEYMONEY_H
-#define _MYMONEYMONEY_H
+#ifndef MYMONEYMONEY_H
+#define MYMONEYMONEY_H
 
 #include <stdlib.h>
 

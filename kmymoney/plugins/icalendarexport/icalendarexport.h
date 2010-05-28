@@ -18,8 +18,8 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>  *
  ***************************************************************************/
 
-#ifndef __ICALENDAREXPORT_H__
-#define __ICALENDAREXPORT_H__
+#ifndef ICALENDAREXPORT_H
+#define ICALENDAREXPORT_H
 
 #include "kmymoneyplugin.h"
 #include "mymoneyaccount.h"
@@ -53,5 +53,5 @@ private:
   Private *d;
 };
 
-#endif // __ICALENDAREXPORT_H__
+#endif // ICALENDAREXPORT_H
 

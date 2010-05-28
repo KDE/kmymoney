@@ -14,8 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef __MYMONEYPRICETEST_H__
-#define __MYMONEYPRICETEST_H__
+#ifndef MYMONEYPRICETEST_H
+#define MYMONEYPRICETEST_H
 
 #include <cppunit/extensions/HelperMacros.h>
 

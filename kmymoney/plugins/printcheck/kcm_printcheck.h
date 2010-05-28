@@ -17,8 +17,8 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>  *
  ***************************************************************************/
-#ifndef __KCM_PRINTCHECK_H__
-#define __KCM_PRINTCHECK_H__
+#ifndef KCM_PRINTCHECK_H
+#define KCM_PRINTCHECK_H
 
 #include <kcmodule.h>
 
@@ -32,5 +32,5 @@ public:
   ~KCMPrintCheck();
 };
 
-#endif // __KCM_PRINTCHECK_H__
+#endif // KCM_PRINTCHECK_H
 

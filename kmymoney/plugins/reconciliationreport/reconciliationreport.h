@@ -18,8 +18,8 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>  *
  ***************************************************************************/
 
-#ifndef __RECONCILIATIONREPORT_H__
-#define __RECONCILIATIONREPORT_H__
+#ifndef RECONCILIATIONREPORT_H
+#define RECONCILIATIONREPORT_H
 
 #include "kmymoneyplugin.h"
 #include "mymoneyaccount.h"
@@ -44,5 +44,5 @@ protected slots:
   void slotUnplug(KPluginInfo*);
 };
 
-#endif // __RECONCILIATIONREPORT_H__
+#endif // RECONCILIATIONREPORT_H
 

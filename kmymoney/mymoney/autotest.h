@@ -14,11 +14,11 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef __AUTOTEST_H
-#define __AUTOTEST_H
+#ifndef AUTOTEST_H
+#define AUTOTEST_H
 
 #include "mymoneyexception.h"
 
 void unexpectedException(MyMoneyException *e);
 
-#endif // __AUTOTEST_H
+#endif // AUTOTEST_H

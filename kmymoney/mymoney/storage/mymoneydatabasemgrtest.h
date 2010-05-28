@@ -14,8 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef __MYMONEYDATABASEMGRTEST_H__
-#define __MYMONEYDATABASEMGRTEST_H__
+#ifndef MYMONEYDATABASEMGRTEST_H
+#define MYMONEYDATABASEMGRTEST_H
 
 #include <cppunit/TestCaller.h>
 #include <cppunit/TestCase.h>

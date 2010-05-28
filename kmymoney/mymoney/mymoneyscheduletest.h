@@ -14,8 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef __MYMONEYSCHEDULETEST_H__
-#define __MYMONEYSCHEDULETEST_H__
+#ifndef MYMONEYSCHEDULETEST_H
+#define MYMONEYSCHEDULETEST_H
 
 #include <cppunit/extensions/HelperMacros.h>
 

@@ -14,8 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef __MYMONEYACCOUNTTEST_H__
-#define __MYMONEYACCOUNTTEST_H__
+#ifndef MYMONEYACCOUNTTEST_H
+#define MYMONEYACCOUNTTEST_H
 
 #include <cppunit/extensions/HelperMacros.h>
 

@@ -20,8 +20,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef _MYMONEYUTILS_H_
-#define _MYMONEYUTILS_H_
+#ifndef MYMONEYUTILS_H
+#define MYMONEYUTILS_H
 
 #ifdef HAVE_CONFIG_H
 #include <config-kmymoney.h>

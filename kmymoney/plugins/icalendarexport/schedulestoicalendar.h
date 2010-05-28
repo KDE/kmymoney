@@ -18,8 +18,8 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>  *
  ***************************************************************************/
 
-#ifndef __SCHEDULESTOICALENDAR_H__
-#define __SCHEDULESTOICALENDAR_H__
+#ifndef SCHEDULESTOICALENDAR_H
+#define SCHEDULESTOICALENDAR_H
 
 class QString;
 
@@ -35,4 +35,4 @@ private:
   Private *d;
 };
 
-#endif // __SCHEDULESTOICALENDAR_H__
+#endif // SCHEDULESTOICALENDAR_H

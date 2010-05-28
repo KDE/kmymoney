@@ -14,8 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef __MYMONEYTRANSACTIONTEST_H__
-#define __MYMONEYTRANSACTIONTEST_H__
+#ifndef MYMONEYTRANSACTIONTEST_H
+#define MYMONEYTRANSACTIONTEST_H
 
 /*
 #include <cppunit/TestCaller.h>

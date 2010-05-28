@@ -14,8 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef __MYMONEYFILETEST_H__
-#define __MYMONEYFILETEST_H__
+#ifndef MYMONEYFILETEST_H
+#define MYMONEYFILETEST_H
 
 #include <cppunit/extensions/HelperMacros.h>
 #include "autotest.h"

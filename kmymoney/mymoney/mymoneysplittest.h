@@ -14,8 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef __MYMONEYSPLITTEST_H__
-#define __MYMONEYSPLITTEST_H__
+#ifndef MYMONEYSPLITTEST_H
+#define MYMONEYSPLITTEST_H
 
 #include <cppunit/extensions/HelperMacros.h>
 

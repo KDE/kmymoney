@@ -14,8 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef __MYMONEYKEYVALUECONTAINERTEST_H__
-#define __MYMONEYKEYVALUECONTAINERTEST_H__
+#ifndef MYMONEYKEYVALUECONTAINERTEST_H
+#define MYMONEYKEYVALUECONTAINERTEST_H
 
 #include <cppunit/extensions/HelperMacros.h>
 

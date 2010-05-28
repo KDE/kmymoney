@@ -11,8 +11,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef __MYMONEYPAYEETEST_H__
-#define __MYMONEYPAYEETEST_H__
+#ifndef MYMONEYPAYEETEST_H
+#define MYMONEYPAYEETEST_H
 
 #include <cppunit/extensions/HelperMacros.h>
 #include "autotest.h"

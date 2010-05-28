@@ -14,8 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef __MYMONEYEXCEPTIONTEST_H__
-#define __MYMONEYEXCEPTIONTEST_H__
+#ifndef MYMONEYEXCEPTIONTEST_H
+#define MYMONEYEXCEPTIONTEST_H
 
 #include <cppunit/extensions/HelperMacros.h>
 

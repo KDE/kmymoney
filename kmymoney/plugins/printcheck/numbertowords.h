@@ -17,8 +17,8 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>  *
  ***************************************************************************/
-#ifndef __NUMBERTOWORDS_H__
-#define __NUMBERTOWORDS_H__
+#ifndef NUMBERTOWORDS_H
+#define NUMBERTOWORDS_H
 
 #include <QStringList>
 
@@ -39,4 +39,4 @@ private:
   QStringList m_scaleNumbers;
 };
 
-#endif // __NUMBERTOWORDS_H__
+#endif // NUMBERTOWORDS_H

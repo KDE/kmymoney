@@ -17,8 +17,8 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>  *
  ***************************************************************************/
-#ifndef __PRINTCHECK_H__
-#define __PRINTCHECK_H__
+#ifndef PRINTCHECK_H
+#define PRINTCHECK_H
 
 #include "kmymoneyplugin.h"
 #include "mymoneyaccount.h"
@@ -57,5 +57,5 @@ private:
   Private *d;
 };
 
-#endif // __PRINTCHECK_H__
+#endif // PRINTCHECK_H
 

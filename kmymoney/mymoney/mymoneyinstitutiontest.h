@@ -15,8 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef __MYMONEYINSTITUTIONTEST_H__
-#define __MYMONEYINSTITUTIONTEST_H__
+#ifndef MYMONEYINSTITUTIONTEST_H
+#define MYMONEYINSTITUTIONTEST_H
 
 #include <cppunit/extensions/HelperMacros.h>
 

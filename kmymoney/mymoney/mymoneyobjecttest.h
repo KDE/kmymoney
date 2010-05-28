@@ -14,8 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef __MYMONEYOBJECTTEST_H__
-#define __MYMONEYOBJECTTEST_H__
+#ifndef MYMONEYOBJECTTEST_H
+#define MYMONEYOBJECTTEST_H
 
 #include <cppunit/extensions/HelperMacros.h>
 
