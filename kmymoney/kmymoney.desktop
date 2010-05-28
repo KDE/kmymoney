@@ -1,13 +1,16 @@
 [Desktop Entry]
 Name=KMyMoney
+Name[cs]=KMyMoney
 Name[es]=KMyMoney
 Name[pt]=KMyMoney
+Name[pt_BR]=KMyMoney
 Name[sv]=KMyMoney
 Name[uk]=KMyMoney
 Name[x-test]=xxKMyMoneyxx
 GenericName=Personal Finance Manager
 GenericName[es]=Gestor de finanzas personales
 GenericName[pt]=Gestor de Finanças Pessoais
+GenericName[pt_BR]=Gerenciador financeiro pessoal
 GenericName[sv]=Personlig ekonomihantering
 GenericName[uk]=Особисте керування фінансами
 GenericName[x-test]=xxPersonal Finance Managerxx
@@ -15,6 +18,7 @@ Exec=kmymoney %u
 Comment=Personal Finance Manager
 Comment[es]=Gestor de finanzas personales
 Comment[pt]=Gestor de Finanças Pessoais
+Comment[pt_BR]=Gerenciador financeiro pessoal
 Comment[sv]=Personlig ekonomihantering
 Comment[uk]=Особисте керування фінансами
 Comment[x-test]=xxPersonal Finance Managerxx
