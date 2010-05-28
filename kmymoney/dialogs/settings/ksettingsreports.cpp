@@ -86,7 +86,7 @@ public:
 
     QList<QString>::const_iterator i;
     for (i = warnings.constBegin(); i != warnings.constEnd(); ++i) {
-      out += "\n" + *i;
+      out += '\n' + *i;
     }
 
     KMessageBox::sorry(0, out);
