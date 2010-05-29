@@ -47,6 +47,7 @@
 #include "kmymoneyglobalsettings.h"
 #include "kmymoneyutils.h"
 #include "mymoneyforecast.h"
+#include <mymoneyprice.h>
 
 namespace reports
 {
@@ -2105,7 +2106,13 @@ void PivotTable::calculateMovingAverage(void)
 
 void PivotTable::fillBasePriceUnit(ERowType rowType)
 {
-  //go through the data and add forecast
+  MyMoneyFile* file = MyMoneyFile::instance();
+  QString baseCurrencyId = file->baseCurrency().id();
+
+  //get the first price date for securities
+  QMap<QString, QDate> securityDates = securityFirstPrice();
+
+  //go through the data
   PivotGrid::iterator it_outergroup = m_grid.begin();
   while (it_outergroup != m_grid.end()) {
     PivotOuterGroup::iterator it_innergroup = (*it_outergroup).begin();
@@ -2113,9 +2120,26 @@ void PivotTable::fillBasePriceUnit(ERowType rowType)
       PivotInnerGroup::iterator it_row = (*it_innergroup).begin();
       while (it_row != (*it_innergroup).end()) {
         int column = 1;
+
+        //if it is a base currency fill all the values
+        bool firstPriceExists = false;
+        if(it_row.key().currencyId() == baseCurrencyId) {
+          firstPriceExists = true;
+        }
+
         while (column < m_numColumns) {
-          //insert a unit of currency for each account
-          it_row.value()[rowType][column] = MyMoneyMoney(1, 1);
+          //check whether the date for that column is on or after the first price
+          if(!firstPriceExists
+             && securityDates.contains(it_row.key().currencyId())
+             && columnDate(column) >= securityDates.value(it_row.key().currencyId())) {
+            firstPriceExists = true;
+          }
+
+          //only add the dummy value if there is a price for that date
+          if(firstPriceExists) {
+            //insert a unit of currency for each account
+            it_row.value()[rowType][column] = MyMoneyMoney(1, 1);
+          }
           ++column;
         }
         ++it_row;
@@ -2124,6 +2148,39 @@ void PivotTable::fillBasePriceUnit(ERowType rowType)
     }
     ++it_outergroup;
   }
+}
+
+QMap<QString, QDate> PivotTable::securityFirstPrice()
+{
+  MyMoneyFile* file = MyMoneyFile::instance();
+  MyMoneyPriceList priceList = file->priceList();
+  QMap<QString, QDate> securityPriceDate;
+
+  MyMoneyPriceList::const_iterator prices_it;
+  for(prices_it = priceList.constBegin(); prices_it != priceList.constEnd(); ++prices_it) {
+    MyMoneyPrice firstPrice = (*((*prices_it).constBegin()));
+
+    //check the security in the from field
+    //if it is there, check if it is older
+    if(securityPriceDate.contains(firstPrice.from())) {
+      if(securityPriceDate.value(firstPrice.from()) < firstPrice.date()) {
+        securityPriceDate[firstPrice.from()] = firstPrice.date();
+      }
+    } else {
+      securityPriceDate.insert(firstPrice.from(), firstPrice.date());
+    }
+
+    //check the security in the to field
+    //if it is there, check if it is older
+    if(securityPriceDate.contains(firstPrice.to())) {
+      if(securityPriceDate.value(firstPrice.to()) < firstPrice.date()) {
+        securityPriceDate[firstPrice.to()] = firstPrice.date();
+      }
+    } else {
+      securityPriceDate.insert(firstPrice.to(), firstPrice.date());
+    }
+  }
+  return securityPriceDate;
 }
 
 void PivotTable::includeInvestmentSubAccounts()

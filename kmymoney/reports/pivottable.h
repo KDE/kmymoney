@@ -264,6 +264,11 @@ protected:
   void fillBasePriceUnit(ERowType rowType);
 
   /**
+   * This method collects the first date for which there is a price for every security
+   */
+  QMap<QString, QDate> securityFirstPrice(void);
+
+  /**
     * This method calculates moving average for a report
     */
   void calculateMovingAverage(void);
