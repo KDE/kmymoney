@@ -655,7 +655,7 @@ bool MyMoneyStorageSql::alterTable(const MyMoneyDbTable& t, int fromVersion)
     QString dropString = m_driver->dropPrimaryKeyString(t.name());
     if (!dropString.isEmpty()) {
       if (!q.exec(dropString)) {
-        buildError(q, __func__, QString("Error dropping old primary key from %1").arg(t.name()));
+        buildError(q, Q_FUNC_INFO, QString("Error dropping old primary key from %1").arg(t.name()));
         return false;
       }
     }
@@ -663,23 +663,23 @@ bool MyMoneyStorageSql::alterTable(const MyMoneyDbTable& t, int fromVersion)
   for (MyMoneyDbTable::index_iterator i = t.indexBegin(); i != t.indexEnd(); ++i) {
     QString indexName = t.name() + '_' + i->name() + "_idx";
     if (!q.exec(m_driver->dropIndexString(t.name(), indexName))) {
-      buildError(q, __func__, QString("Error dropping index from %1").arg(t.name()));
+      buildError(q, Q_FUNC_INFO, QString("Error dropping index from %1").arg(t.name()));
       return false;
     }
   }
   if (!q.exec(QString("ALTER TABLE " + t.name() + " RENAME TO " + tempTableName + ';'))) {
-    buildError(q, __func__, QString("Error renaming table %1").arg(t.name()));
+    buildError(q, Q_FUNC_INFO, QString("Error renaming table %1").arg(t.name()));
     return false;
   }
   createTable(t, fromVersion + 1);
   q.prepare(QString("INSERT INTO " + t.name() + " (" + t.columnList(fromVersion) +
                     ") SELECT " + t.columnList(fromVersion) + " FROM " + tempTableName + ';'));
   if (!q.exec()) {
-    buildError(q, __func__, QString("Error inserting into new table %1").arg(t.name()));
+    buildError(q, Q_FUNC_INFO, QString("Error inserting into new table %1").arg(t.name()));
     return false;
   }
   if (!q.exec(QString("DROP TABLE " + tempTableName + ';'))) {
-    buildError(q, __func__, QString("Error dropping old table %1").arg(t.name()));
+    buildError(q, Q_FUNC_INFO, QString("Error dropping old table %1").arg(t.name()));
     return false;
   }
   return true;
