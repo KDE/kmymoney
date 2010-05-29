@@ -1079,24 +1079,20 @@ void KHomeView::slotOpenUrl(const KUrl &url, const KParts::OpenUrlArguments&, co
   } else if (protocol == "mailto") {
     KToolInvocation::invokeMailer(url);
   } else {
+    KXmlGuiWindow* mw = KMyMoneyUtils::mainWindow();
+    Q_CHECK_PTR(mw);
     if (view == VIEW_LEDGER) {
       emit ledgerSelected(id, QString());
 
     } else if (view == VIEW_SCHEDULE) {
       if (mode == "enter") {
         emit scheduleSelected(id);
-        KXmlGuiWindow* mw = KMyMoneyUtils::mainWindow();
-        Q_CHECK_PTR(mw);
         QTimer::singleShot(0, mw->actionCollection()->action("schedule_enter"), SLOT(trigger()));
       } else if (mode == "edit") {
         emit scheduleSelected(id);
-        KXmlGuiWindow* mw = KMyMoneyUtils::mainWindow();
-        Q_CHECK_PTR(mw);
         QTimer::singleShot(0, mw->actionCollection()->action("schedule_edit"), SLOT(trigger()));
       } else if (mode == "skip") {
         emit scheduleSelected(id);
-        KXmlGuiWindow* mw = KMyMoneyUtils::mainWindow();
-        Q_CHECK_PTR(mw);
         QTimer::singleShot(0, mw->actionCollection()->action("schedule_skip"), SLOT(trigger()));
       } else if (mode == "full") {
         d->m_showAllSchedules = true;
@@ -1111,8 +1107,6 @@ void KHomeView::slotOpenUrl(const KUrl &url, const KParts::OpenUrlArguments&, co
       emit reportSelected(id);
 
     } else if (view == VIEW_WELCOME) {
-      KXmlGuiWindow* mw = KMyMoneyUtils::mainWindow();
-      Q_CHECK_PTR(mw);
       if (mode == "whatsnew") {
         d->m_part->begin();
         d->m_part->write(KWelcomePage::whatsNewPage());
@@ -1124,8 +1118,6 @@ void KHomeView::slotOpenUrl(const KUrl &url, const KParts::OpenUrlArguments&, co
       }
 
     } else if (view == "action") {
-      KXmlGuiWindow* mw = KMyMoneyUtils::mainWindow();
-      Q_CHECK_PTR(mw);
       QTimer::singleShot(0, mw->actionCollection()->action(id), SLOT(trigger()));
     } else if (view == VIEW_HOME) {
       QList<MyMoneyAccount> list;
