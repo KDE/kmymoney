@@ -1028,7 +1028,7 @@ bool Register::event(QEvent* event)
     // get the row, if it's the header, then we're done
     // otherwise, adjust the row to be 0 based.
     int row = rowAt(helpEvent->y());
-    if(!row)
+    if (!row)
       return true;
     --row;
 
