@@ -427,14 +427,6 @@ void KHomeView::showPayments(void)
       d->m_html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");
       showPaymentEntry(*it, cnt);
       d->m_html += "</tr>";
-      // make sure to not repeat overdues later again
-      for (it_f = schedule.begin(); it_f != schedule.end();) {
-        if ((*it).id() == (*it_f).id()) {
-          it_f = schedule.erase(it_f);
-          continue;
-        }
-        ++it_f;
-      }
     }
     d->m_html += "</table>";
   }
@@ -450,7 +442,8 @@ void KHomeView::showPayments(void)
         todays.append(*t_it);
         (*t_it).setNextDueDate((*t_it).nextPayment((*t_it).nextDueDate()));
 
-        //if nextDueDate is still currentDate then remove it from scheduled payments
+        // if nextDueDate is still currentDate then remove it from
+        // scheduled payments
         if ((*t_it).nextDueDate() == QDate::currentDate()) {
           t_it = schedule.erase(t_it);
           continue;
@@ -541,22 +534,29 @@ void KHomeView::showPayments(void)
           needMoreLess = true;
           break;
         }
-        if (cnt > 0)
-          --cnt;
 
-        d->m_html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");
-        showPaymentEntry(*it);
-        d->m_html += "</tr>";
+        // in case we've shown the current recurrence as overdue,
+        // we don't show it here again, but keep the schedule
+        // as it might show up later in the list again
+        if (!(*it).isOverdue()) {
+          if (cnt > 0)
+            --cnt;
 
-        // for single occurrence we have reported everything so we
-        // better get out of here.
-        if ((*it).occurrence() == MyMoneySchedule::OCCUR_ONCE) {
-          schedule.erase(it);
-          continue;
+          d->m_html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");
+          showPaymentEntry(*it);
+          d->m_html += "</tr>";
+
+          // for single occurrence we have reported everything so we
+          // better get out of here.
+          if ((*it).occurrence() == MyMoneySchedule::OCCUR_ONCE) {
+            schedule.erase(it);
+            continue;
+          }
         }
 
-        //if nextPayment returns an invalid date, setNextDueDate will just skip it, resulting in a loop
-        //we check the resulting date and erase the schedule if invalid
+        // if nextPayment returns an invalid date, setNextDueDate will
+        // just skip it, resulting in a loop
+        // we check the resulting date and erase the schedule if invalid
         if (!((*it).nextPayment((*it).nextDueDate())).isValid()) {
           schedule.erase(it);
           continue;
