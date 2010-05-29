@@ -2123,20 +2123,20 @@ void PivotTable::fillBasePriceUnit(ERowType rowType)
 
         //if it is a base currency fill all the values
         bool firstPriceExists = false;
-        if(it_row.key().currencyId() == baseCurrencyId) {
+        if (it_row.key().currencyId() == baseCurrencyId) {
           firstPriceExists = true;
         }
 
         while (column < m_numColumns) {
           //check whether the date for that column is on or after the first price
-          if(!firstPriceExists
-             && securityDates.contains(it_row.key().currencyId())
-             && columnDate(column) >= securityDates.value(it_row.key().currencyId())) {
+          if (!firstPriceExists
+              && securityDates.contains(it_row.key().currencyId())
+              && columnDate(column) >= securityDates.value(it_row.key().currencyId())) {
             firstPriceExists = true;
           }
 
           //only add the dummy value if there is a price for that date
-          if(firstPriceExists) {
+          if (firstPriceExists) {
             //insert a unit of currency for each account
             it_row.value()[rowType][column] = MyMoneyMoney(1, 1);
           }
@@ -2157,13 +2157,13 @@ QMap<QString, QDate> PivotTable::securityFirstPrice()
   QMap<QString, QDate> securityPriceDate;
 
   MyMoneyPriceList::const_iterator prices_it;
-  for(prices_it = priceList.constBegin(); prices_it != priceList.constEnd(); ++prices_it) {
+  for (prices_it = priceList.constBegin(); prices_it != priceList.constEnd(); ++prices_it) {
     MyMoneyPrice firstPrice = (*((*prices_it).constBegin()));
 
     //check the security in the from field
     //if it is there, check if it is older
-    if(securityPriceDate.contains(firstPrice.from())) {
-      if(securityPriceDate.value(firstPrice.from()) < firstPrice.date()) {
+    if (securityPriceDate.contains(firstPrice.from())) {
+      if (securityPriceDate.value(firstPrice.from()) < firstPrice.date()) {
         securityPriceDate[firstPrice.from()] = firstPrice.date();
       }
     } else {
@@ -2172,8 +2172,8 @@ QMap<QString, QDate> PivotTable::securityFirstPrice()
 
     //check the security in the to field
     //if it is there, check if it is older
-    if(securityPriceDate.contains(firstPrice.to())) {
-      if(securityPriceDate.value(firstPrice.to()) < firstPrice.date()) {
+    if (securityPriceDate.contains(firstPrice.to())) {
+      if (securityPriceDate.value(firstPrice.to()) < firstPrice.date()) {
         securityPriceDate[firstPrice.to()] = firstPrice.date();
       }
     } else {
