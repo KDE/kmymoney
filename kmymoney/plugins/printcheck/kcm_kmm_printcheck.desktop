@@ -13,6 +13,7 @@ Exec=kcmshell kmm_printcheck
 Categories=QT;KDE;kmymoney;
 Keywords=printcheck;kmymoney
 Keywords[es]=printcheck;kmymoney
+Keywords[km]=printcheck;kmymoney
 Keywords[pt]=printcheck;kmymoney
 Keywords[pt_BR]=printcheck;kmymoney
 Keywords[sv]=checkutskrift;kmymoney
