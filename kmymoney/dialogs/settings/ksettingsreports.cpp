@@ -59,7 +59,7 @@ public:
     QFileInfo* info = new QFileInfo(css);
 
     if (!info->exists()) {
-      KMessageBox::sorry(0, i18n("file %1 does not exist").arg(css));
+      KMessageBox::sorry(0, i18n("file %1 does not exist", css));
       return;
     }
 
