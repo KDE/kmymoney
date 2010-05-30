@@ -75,7 +75,7 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
 
     if (po != pn) {
       noItemsChanged++;
-      messageDetail += i18n("</p>Payee changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b></p>", po, pn);
+      messageDetail += i18n("<p>Payee changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b></p>", po, pn);
     }
 
     if (to.splits().front().accountId() != tn.splits().front().accountId()) {
