@@ -44,7 +44,7 @@
                   </property>
                   <item>
                     <property name="text">
-                      <string>All</string>
+                      <string comment="@item all accounts">All</string>
                     </property>
                   </item>
                   <item>
@@ -112,32 +112,32 @@
                   </property>
                   <item>
                     <property name="text">
-                      <string>Daily</string>
+                      <string comment="@item the columns will display daily data">Daily</string>
                     </property>
                   </item>
                   <item>
                     <property name="text">
-                      <string>Weekly</string>
+                      <string comment="@item the columns will display weekly data">Weekly</string>
                     </property>
                   </item>
                   <item>
                     <property name="text">
-                      <string>Monthly</string>
+                      <string comment="@item the columns will display monthly data">Monthly</string>
                     </property>
                   </item>
                   <item>
                     <property name="text">
-                      <string>Bi-Monthly</string>
+                      <string comment="@item the columns will display bi-monthly data">Bi-Monthly</string>
                     </property>
                   </item>
                   <item>
                     <property name="text">
-                      <string>Quarterly</string>
+                      <string comment="@item the columns will display quarterly data">Quarterly</string>
                     </property>
                   </item>
                   <item>
                     <property name="text">
-                      <string>Yearly</string>
+                      <string comment="@item the columns will display yearly data">Yearly</string>
                     </property>
                   </item>
                 </widget>

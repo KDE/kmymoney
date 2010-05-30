@@ -44,7 +44,7 @@
           </property>
           <column>
             <property name="text">
-              <string>Name</string>
+              <string comment="@title header of the qoute source name column">Name</string>
             </property>
             <property name="clickable">
               <bool>true</bool>
@@ -171,7 +171,7 @@
           <item>
             <widget class="KPushButton" name="m_newButton">
               <property name="text">
-                <string>New</string>
+                <string comment="@action new quote source">New</string>
               </property>
             </widget>
           </item>
@@ -201,7 +201,7 @@
           <item>
             <widget class="KPushButton" name="m_updateButton">
               <property name="text">
-                <string>Update</string>
+                <string comment="@action update quotes from online source">Update</string>
               </property>
             </widget>
           </item>

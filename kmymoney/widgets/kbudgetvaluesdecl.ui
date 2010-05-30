@@ -24,7 +24,7 @@
             <item>
               <widget class="QRadioButton" name="m_monthlyButton">
                 <property name="text">
-                  <string>Monthly</string>
+                  <string comment="@action timeframe of the budget">Monthly</string>
                 </property>
                 <attribute name="buttonGroup">
                   <string>m_periodGroup</string>
@@ -34,7 +34,7 @@
             <item>
               <widget class="QRadioButton" name="m_yearlyButton">
                 <property name="text">
-                  <string>Yearly</string>
+                  <string comment="@action timeframe of the budget">Yearly</string>
                 </property>
                 <attribute name="buttonGroup">
                   <string>m_periodGroup</string>
@@ -44,7 +44,7 @@
             <item>
               <widget class="QRadioButton" name="m_individualButton">
                 <property name="text">
-                  <string>Individual</string>
+                  <string comment="@action timeframe of the budget. month-by-month budget">Individual</string>
                 </property>
                 <attribute name="buttonGroup">
                   <string>m_periodGroup</string>

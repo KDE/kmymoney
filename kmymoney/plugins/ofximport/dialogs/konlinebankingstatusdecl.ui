@@ -223,7 +223,7 @@
                           <item>
                             <widget class="QLabel" name="textLabel2_2">
                               <property name="text">
-                                <string>days</string>
+                                <string comment="@action number of days">days</string>
                               </property>
                               <property name="wordWrap">
                                 <bool>false</bool>

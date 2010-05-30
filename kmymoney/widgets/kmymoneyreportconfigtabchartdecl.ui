@@ -50,22 +50,22 @@
             <widget class="KComboBox" name="m_comboType">
               <item>
                 <property name="text">
-                  <string>Line</string>
+                  <string comment="@item type of chart">Line</string>
                 </property>
               </item>
               <item>
                 <property name="text">
-                  <string>Bar</string>
+                  <string comment="@item type of chart">Bar</string>
                 </property>
               </item>
               <item>
                 <property name="text">
-                  <string>Stacked Bar</string>
+                  <string comment="@item type of chart">Stacked Bar</string>
                 </property>
               </item>
               <item>
                 <property name="text">
-                  <string>Pie</string>
+                  <string comment="@item type of chart">Pie</string>
                 </property>
               </item>
               <item>

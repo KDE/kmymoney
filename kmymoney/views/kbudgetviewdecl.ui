@@ -72,7 +72,7 @@
          </property>
          <column>
           <property name="text">
-           <string>Name</string>
+           <string comment="@title header of the budget name column">Name</string>
           </property>
           <property name="clickable">
            <bool>true</bool>

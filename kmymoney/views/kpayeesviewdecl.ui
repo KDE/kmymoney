@@ -118,7 +118,7 @@
                  </property>
                  <column>
                   <property name="text">
-                   <string>No.</string>
+                   <string comment="@title header of the cheque number column>No.</string>
                   </property>
                   <property name="clickable">
                    <bool>true</bool>

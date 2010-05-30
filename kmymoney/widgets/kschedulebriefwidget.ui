@@ -130,7 +130,7 @@
                       </size>
                     </property>
                     <property name="text">
-                      <string>Name:</string>
+                      <string comment="@label name of the schedule">Name:</string>
                     </property>
                     <property name="wordWrap">
                       <bool>false</bool>

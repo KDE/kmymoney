@@ -64,7 +64,7 @@
             </size>
           </property>
           <property name="text">
-            <string>New</string>
+            <string comment="@action create new report">New</string>
           </property>
           <property name="toolTip" stdset="0">
             <string>Create a new report based on this one</string>

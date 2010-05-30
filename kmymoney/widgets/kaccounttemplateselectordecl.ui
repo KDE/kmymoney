@@ -59,7 +59,7 @@
          <widget class="QTreeWidget" name="m_accountList">
           <column>
            <property name="text">
-            <string>Name</string>
+            <string comment="@title header of the account name column">Name</string>
            </property>
           </column>
          </widget>
