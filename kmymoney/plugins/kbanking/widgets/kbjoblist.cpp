@@ -162,14 +162,14 @@ void KBJobListViewItem::_populate()
 
   p = AB_Provider_GetName(AB_Account_GetProvider(a));
   if (!p)
-    tmp = i18n("Unknown account provider","(unknown)");
+    tmp = i18nc("Unknown account provider","(unknown)");
   else
     tmp = p;
   setText(i++, tmp);
 
   p = AB_Job_GetCreatedBy(_job);
   if (!p)
-    tmp = i18n("Unknown creator of the job","(unknown)");
+    tmp = i18nc("Unknown creator of the job","(unknown)");
   else
     tmp = p;
   setText(i++, tmp);
