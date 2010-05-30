@@ -75,12 +75,12 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
 
     if (po != pn) {
       noItemsChanged++;
-      messageDetail += i18n("Payee changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b><p>", po, pn);
+      messageDetail += i18n("</p>Payee changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b></p>", po, pn);
     }
 
     if (to.splits().front().accountId() != tn.splits().front().accountId()) {
       noItemsChanged++;
-      messageDetail += i18n("Account changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b><p>"
+      messageDetail += i18n("<p>Account changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b></p>"
                             , file->account(to.splits().front().accountId()).name()
                             , file->account(tn.splits().front().accountId()).name());
     }
@@ -88,7 +88,7 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
     if (file->isTransfer(to) && file->isTransfer(tn)) {
       if (to.splits()[1].accountId() != tn.splits()[1].accountId()) {
         noItemsChanged++;
-        messageDetail += i18n("Transfer account changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b><p>"
+        messageDetail += i18n("<p>Transfer account changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b></p>"
                               , file->account(to.splits()[1].accountId()).name()
                               , file->account(tn.splits()[1].accountId()).name());
       }

@@ -30,10 +30,10 @@ MyMoneyMoneyToWordsConverter::MyMoneyMoneyToWordsConverter()
   m_smallNumbers << i18nc("@item the number 0","zero") << i18nc("@item the number 1","one") << i18nc("@item the number 2","two") << i18nc("@item the number 3","three") << i18nc("@item the number 4","four") << i18nc("@item the number 5","five") << i18nc("@item the number 6","six") << i18nc("@item the number 7","seven") << i18nc("@item the number 8","eight") << i18nc("@item the number 9","nine") << i18nc("@item the number 10","ten") << i18nc("@item the number 11","eleven") << i18nc("@item the number 12","twelve") << i18nc("@item the number 13","thirteen") << i18nc("@item the number 14","fourteen") << i18nc("@item the number 15","fifteen") << i18nc("@item the number 16","sixteen") << i18nc("@item the number 17","seventeen") << i18nc("@item the number 18","eighteen") << i18nc("@item the number 19","nineteen");
 
   // Tens number names from twenty upwards
-  m_tens << "" << "" << i18n("twenty") << i18n("thirty") << i18n("forty") << i18n("fifty") << i18n("sixty") << i18n("seventy") << i18n("eighty") << i18n("ninety");
+  m_tens << "" << "" << i18nc("@item the number 20","twenty") << i18nc("@item the number 30","thirty") << i18nc("@item the number 40","forty") << i18nc("@item the number 50","fifty") << i18nc("@item the number 60","sixty") << i18nc("@item the number 70","seventy") << i18nc("@item the number 80","eighty") << i18nc("@item the number 90","ninety");
 
   // Scale number names for use during recombination
-  m_scaleNumbers << "" << i18n("thousand") << i18n("million") << i18n("billion");
+  m_scaleNumbers << "" << i18nc("@item the number 1000","thousand") << i18nc("@item the number 1,000,000","million") << i18nc("@item the number 1,000,000,000","billion");
 }
 
 // Converts a three-digit group into English words
@@ -48,10 +48,10 @@ QString MyMoneyMoneyToWordsConverter::convertTreeDigitGroup(int threeDigitNumber
 
   // Hundreds rules
   if (hundreds != 0) {
-    groupText += m_smallNumbers[hundreds] + i18nc("This comes after the hunder value digit", " hundred");
+    groupText += m_smallNumbers[hundreds] + i18nc("@item This comes after the hundred value digit", " hundred");
 
     if (tensUnits != 0)
-      groupText += i18nc("This comes after the hunder text if the tens unit is different from 0", " and ");
+      groupText += i18nc("@item This comes after the hunder text if the tens unit is different from 0", " and ");
   }
 
   // Determine the tens and units
@@ -62,7 +62,8 @@ QString MyMoneyMoneyToWordsConverter::convertTreeDigitGroup(int threeDigitNumber
   if (tens >= 2) {
     groupText += m_tens[tens];
     if (units != 0)
-      groupText += i18nc("This comes after the tens text if the unit is not 0", " ") + m_smallNumbers[units];
+      //This comes after the tens text if the unit is not 0
+      groupText += QString(" ") + m_smallNumbers[units];
   } else if (tensUnits != 0)
     groupText += m_smallNumbers[tensUnits];
 
@@ -107,7 +108,7 @@ QString MyMoneyMoneyToWordsConverter::convert(const MyMoneyMoney & money)
       // Build the string to add as a prefix
       QString prefix = groupText[i] + ' ' + m_scaleNumbers[i];
       if (!combined.isEmpty())
-        prefix += appendAnd ? i18nc("Appears last as separator", " and ") : i18nc("Separator", ", ");
+        prefix += appendAnd ? i18nc("@item Appears last as separator", " and ") : i18nc("Separator", ", ");
 
       // Opportunity to add 'and' is ended
       appendAnd = false;
@@ -118,7 +119,7 @@ QString MyMoneyMoneyToWordsConverter::convert(const MyMoneyMoney & money)
   }
 
   if (fraction != 0)
-    return i18nc("The first argument is the amount in words, the second is the fractional part and the third is the denominator of the fractional part",
+    return i18nc("@label The first argument is the amount in words, the second is the fractional part and the third is the denominator of the fractional part",
                  "%1 and %2/%3", combined, fraction, MyMoneyMoney::precToDenom(precision));
   else
     return combined;
