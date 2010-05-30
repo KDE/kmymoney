@@ -2212,9 +2212,9 @@ void MyMoneyGncReader::terminate()
     bool exit = false;
     int si;
     for (si = 0; (si < sectionsToReport.count()) && !exit; ++si) {
-      QString button0Text = i18n("More");
+      QString button0Text = i18nc("Button to show more detailed data","More");
       if (si + 1 == sectionsToReport.count())
-        button0Text = i18n("Done"); // last section
+        button0Text = i18nc("Button to close the current dialog","Done"); // last section
       KGuiItem yesItem(button0Text, KIcon(), "", "");
       KGuiItem noItem(i18n("Save Report"), KIcon(), "", "");
 
