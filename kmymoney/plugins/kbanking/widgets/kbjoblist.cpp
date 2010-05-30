@@ -110,7 +110,7 @@ void KBJobListViewItem::_populate()
       tmp = i18n("Debit Note");
       break;
     default:
-      tmp = i18n("(unknown)");
+      tmp = i18nc("Unknown job type", "(unknown)");
       break;
   }
   setText(i++, tmp);
@@ -120,7 +120,7 @@ void KBJobListViewItem::_populate()
   if (tmp.isEmpty())
     tmp = AB_Account_GetBankCode(a);
   if (tmp.isEmpty())
-    tmp = i18n("(unknown)");
+    tmp = i18nc("Unknown bank code","(unknown)");
   setText(i++, tmp);
 
   // account name
@@ -128,48 +128,48 @@ void KBJobListViewItem::_populate()
   if (tmp.isEmpty())
     tmp = AB_Account_GetAccountNumber(a);
   if (tmp.isEmpty())
-    tmp = i18n("(unknown)");
+    tmp = i18nc("Unknown account number","(unknown)");
   setText(i++, tmp);
 
   // status
   switch (AB_Job_GetStatus(_job)) {
     case AB_Job_StatusNew:
-      tmp = i18n("new");
+      tmp = i18nc("Status of the job","new");
       break;
     case AB_Job_StatusUpdated:
-      tmp = i18n("updated");
+      tmp = i18nc("Status of the job","updated");
       break;
     case AB_Job_StatusEnqueued:
-      tmp = i18n("enqueued");
+      tmp = i18nc("Status of the job","enqueued");
       break;
     case AB_Job_StatusSent:
-      tmp = i18n("sent");
+      tmp = i18nc("Status of the job","sent");
       break;
     case AB_Job_StatusPending:
-      tmp = i18n("pending");
+      tmp = i18nc("Status of the job","pending");
       break;
     case AB_Job_StatusFinished:
-      tmp = i18n("finished");
+      tmp = i18nc("Status of the job","finished");
       break;
     case AB_Job_StatusError:
-      tmp = i18n("error");
+      tmp = i18nc("Status of the job","error");
       break;
     default:
-      tmp = i18n("(unknown)");
+      tmp = i18nc("Status of the job","(unknown)");
       break;
   }
   setText(i++, tmp);
 
   p = AB_Provider_GetName(AB_Account_GetProvider(a));
   if (!p)
-    tmp = i18n("(unknown)");
+    tmp = i18n("Unknown account provider","(unknown)");
   else
     tmp = p;
   setText(i++, tmp);
 
   p = AB_Job_GetCreatedBy(_job);
   if (!p)
-    tmp = i18n("(unknown)");
+    tmp = i18n("Unknown creator of the job","(unknown)");
   else
     tmp = p;
   setText(i++, tmp);

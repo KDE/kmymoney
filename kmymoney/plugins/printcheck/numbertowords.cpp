@@ -27,7 +27,7 @@
 MyMoneyMoneyToWordsConverter::MyMoneyMoneyToWordsConverter()
 {
   // Single-digit and small number names
-  m_smallNumbers << i18n("zero") << i18n("one") << i18n("two") << i18n("three") << i18n("four") << i18n("five") << i18n("six") << i18n("seven") << i18n("eight") << i18n("nine") << i18n("ten") << i18n("eleven") << i18n("twelve") << i18n("thirteen") << i18n("fourteen") << i18n("fifteen") << i18n("sixteen") << i18n("seventeen") << i18n("eighteen") << i18n("nineteen");
+  m_smallNumbers << i18nc("@item the number 0","zero") << i18nc("@item the number 1","one") << i18nc("@item the number 2","two") << i18nc("@item the number 3","three") << i18nc("@item the number 4","four") << i18nc("@item the number 5","five") << i18nc("@item the number 6","six") << i18nc("@item the number 7","seven") << i18nc("@item the number 8","eight") << i18nc("@item the number 9","nine") << i18nc("@item the number 10","ten") << i18nc("@item the number 11","eleven") << i18nc("@item the number 12","twelve") << i18nc("@item the number 13","thirteen") << i18nc("@item the number 14","fourteen") << i18nc("@item the number 15","fifteen") << i18nc("@item the number 16","sixteen") << i18nc("@item the number 17","seventeen") << i18nc("@item the number 18","eighteen") << i18nc("@item the number 19","nineteen");
 
   // Tens number names from twenty upwards
   m_tens << "" << "" << i18n("twenty") << i18n("thirty") << i18n("forty") << i18n("fifty") << i18n("sixty") << i18n("seventy") << i18n("eighty") << i18n("ninety");

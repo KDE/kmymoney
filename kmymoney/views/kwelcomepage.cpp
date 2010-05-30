@@ -181,7 +181,8 @@ const QString KWelcomePage::whatsNewPage(void)
   }
   body += QString("</ul>");
 
-  body += QString("<p>" + i18n("Let us know what you think. We hope that you enjoy using this version of KMyMoney.</p> <p>Please let us know about any abnormal behavior in the program by selecting <a href=\"/action?id=help_report_bug\">\"Report bug...\"</a> from the help menu or by sending an e-mail to the developers mailing list."));
+  body += QString("<p>" + i18n("Let us know what you think. We hope that you enjoy using this version of KMyMoney.") +"</p>");
+  body += QString("<p>" + i18n("Please let us know about any abnormal behavior in the program by selecting <a href=\"/action?id=help_report_bug\">\"Report bug...\"</a> from the help menu or by sending an e-mail to the developers mailing list."));
   body += QString("<font color=\"blue\"><a href=\"mailto:kmymoney-devel@kde.org\">kmymoney-devel@kde.org</a></font></p>");
   body += QString("<p><div align=\"right\">");
   body += QString(i18n("The KMyMoney Development Team"));

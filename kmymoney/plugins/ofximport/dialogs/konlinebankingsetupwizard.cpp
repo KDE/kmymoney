@@ -154,8 +154,9 @@ bool KOnlineBankingSetupWizard::finishFiPage(void)
           if (info.billpay)
             message += i18n("Supports bill payment (but not supported by KMyMoney yet)<br/>");
         } else {
-          message += i18n("Does not support online banking</p>");
+          message += i18n("Does not support online banking");
         }
+        message += "</p>";
         m_textDetails->append(message);
 
         ++it_fipid;
