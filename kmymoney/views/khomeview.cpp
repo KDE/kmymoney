@@ -783,6 +783,9 @@ void KHomeView::showAccountEntry(const MyMoneyAccount& acc)
     if (acc.accountType() == MyMoneyAccount::CreditCard ||
         acc.accountType() == MyMoneyAccount::Checkings) {
       QString maximumCredit = acc.value("maxCreditAbsolute");
+      if (maximumCredit.isEmpty()) {
+        maximumCredit = acc.value("minBalanceAbsolute");
+      }
       MyMoneyMoney maxCredit = MyMoneyMoney(maximumCredit);
       showAccountEntry(acc, value, value - maxCredit, showLimit);
     } else {
