@@ -386,7 +386,7 @@
    <max>100</max>
   </entry>
   <entry name="LineWidth" type="Int">
-   <label>line width for diagrams in pixel</label>
+   <label>Line width for diagrams, in pixels</label>
    <default>2</default>
    <min>0</min>
    <max>256</max>

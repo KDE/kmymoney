@@ -80,7 +80,7 @@
          <item>
           <widget class="KIntSpinBox" name="kcfg_LineWidth">
            <property name="toolTip">
-            <string>line width for diagrams in pixel</string>
+            <string>Line width for diagrams, in pixels</string>
            </property>
           </widget>
          </item>
