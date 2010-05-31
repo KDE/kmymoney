@@ -651,7 +651,7 @@ void MyMoneyForecast::addScheduledTransactions(void)
 
       QDate nextDate =
         (*it).adjustedNextPayment((*it).adjustedDate((*it).lastPayment(),
-                                                     (*it).weekendOption()));
+                                  (*it).weekendOption()));
       if (nextDate > forecastEndDate()) {
         // We're done with this schedule, let's move on to the next
         schedule.erase(it);

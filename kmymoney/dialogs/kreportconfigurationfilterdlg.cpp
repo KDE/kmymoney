@@ -261,7 +261,7 @@ void KReportConfigurationFilterDlg::slotRowTypeChanged(int row)
 void KReportConfigurationFilterDlg::slotColumnTypeChanged(int row)
 {
   if (m_tab2->m_comboBudget->isEnabled() && row < 2) {
-    m_tab2->m_comboColumns->setCurrentItem(i18nc("column will show monthly data","Monthly"), false);
+    m_tab2->m_comboColumns->setCurrentItem(i18nc("column will show monthly data", "Monthly"), false);
   }
 }
 
@@ -286,7 +286,7 @@ void KReportConfigurationFilterDlg::slotReset(void)
       case MyMoneyReport::eDetailNone:
       case MyMoneyReport::eDetailEnd:
       case MyMoneyReport::eDetailAll:
-        m_tab2->m_comboDetail->setCurrentItem(i18nc("All accounts","All"), false);
+        m_tab2->m_comboDetail->setCurrentItem(i18nc("All accounts", "All"), false);
         break;
       case MyMoneyReport::eDetailTop:
         m_tab2->m_comboDetail->setCurrentItem(i18n("Top-Level"), false);
@@ -317,10 +317,10 @@ void KReportConfigurationFilterDlg::slotReset(void)
       switch (m_initialState.columnType()) {
         case MyMoneyReport::eNoColumns:
         case MyMoneyReport::eDays:
-          m_tab2->m_comboColumns->setCurrentItem(i18nc("column will show daily data","Daily"), false);
+          m_tab2->m_comboColumns->setCurrentItem(i18nc("column will show daily data", "Daily"), false);
           break;
         case MyMoneyReport::eWeeks:
-          m_tab2->m_comboColumns->setCurrentItem(i18nc("column will show weekly data","Weekly"), false);
+          m_tab2->m_comboColumns->setCurrentItem(i18nc("column will show weekly data", "Weekly"), false);
           break;
         default:
           break;
@@ -329,16 +329,16 @@ void KReportConfigurationFilterDlg::slotReset(void)
       switch (m_initialState.columnType()) {
         case MyMoneyReport::eNoColumns:
         case MyMoneyReport::eMonths:
-          m_tab2->m_comboColumns->setCurrentItem(i18nc("column will show monthly data","Monthly"), false);
+          m_tab2->m_comboColumns->setCurrentItem(i18nc("column will show monthly data", "Monthly"), false);
           break;
         case MyMoneyReport::eBiMonths:
-          m_tab2->m_comboColumns->setCurrentItem(i18nc("column will show bi-monthly data","Bi-Monthly"), false);
+          m_tab2->m_comboColumns->setCurrentItem(i18nc("column will show bi-monthly data", "Bi-Monthly"), false);
           break;
         case MyMoneyReport::eQuarters:
-          m_tab2->m_comboColumns->setCurrentItem(i18nc("column will show quarterly data","Quarterly"), false);
+          m_tab2->m_comboColumns->setCurrentItem(i18nc("column will show quarterly data", "Quarterly"), false);
           break;
         case MyMoneyReport::eYears:
-          m_tab2->m_comboColumns->setCurrentItem(i18nc("column will show yearly data","Yearly"), false);
+          m_tab2->m_comboColumns->setCurrentItem(i18nc("column will show yearly data", "Yearly"), false);
           break;
         default:
           break;
@@ -422,19 +422,19 @@ void KReportConfigurationFilterDlg::slotReset(void)
     switch (m_initialState.chartType()) {
       case MyMoneyReport::eChartNone:
       case MyMoneyReport::eChartLine:
-        m_tabChart->m_comboType->setCurrentItem(i18nc("type of graphic chart","Line"), false);
+        m_tabChart->m_comboType->setCurrentItem(i18nc("type of graphic chart", "Line"), false);
         break;
       case MyMoneyReport::eChartBar:
-        m_tabChart->m_comboType->setCurrentItem(i18nc("type of graphic chart","Bar"), false);
+        m_tabChart->m_comboType->setCurrentItem(i18nc("type of graphic chart", "Bar"), false);
         break;
       case MyMoneyReport::eChartStackedBar:
-        m_tabChart->m_comboType->setCurrentItem(i18nc("type of graphic chart","Stacked Bar"), false);
+        m_tabChart->m_comboType->setCurrentItem(i18nc("type of graphic chart", "Stacked Bar"), false);
         break;
       case MyMoneyReport::eChartPie:
-        m_tabChart->m_comboType->setCurrentItem(i18nc("type of graphic chart","Pie"), false);
+        m_tabChart->m_comboType->setCurrentItem(i18nc("type of graphic chart", "Pie"), false);
         break;
       case MyMoneyReport::eChartRing:
-        m_tabChart->m_comboType->setCurrentItem(i18nc("type of graphic chart","Ring"), false);
+        m_tabChart->m_comboType->setCurrentItem(i18nc("type of graphic chart", "Ring"), false);
         break;
       case MyMoneyReport::eChartEnd:
         throw new MYMONEYEXCEPTION("KReportConfigurationFilterDlg::slotReset(): Report has invalid charttype");

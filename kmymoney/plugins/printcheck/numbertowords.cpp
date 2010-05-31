@@ -27,13 +27,13 @@
 MyMoneyMoneyToWordsConverter::MyMoneyMoneyToWordsConverter()
 {
   // Single-digit and small number names
-  m_smallNumbers << i18nc("@item the number 0","zero") << i18nc("@item the number 1","one") << i18nc("@item the number 2","two") << i18nc("@item the number 3","three") << i18nc("@item the number 4","four") << i18nc("@item the number 5","five") << i18nc("@item the number 6","six") << i18nc("@item the number 7","seven") << i18nc("@item the number 8","eight") << i18nc("@item the number 9","nine") << i18nc("@item the number 10","ten") << i18nc("@item the number 11","eleven") << i18nc("@item the number 12","twelve") << i18nc("@item the number 13","thirteen") << i18nc("@item the number 14","fourteen") << i18nc("@item the number 15","fifteen") << i18nc("@item the number 16","sixteen") << i18nc("@item the number 17","seventeen") << i18nc("@item the number 18","eighteen") << i18nc("@item the number 19","nineteen");
+  m_smallNumbers << i18nc("@item the number 0", "zero") << i18nc("@item the number 1", "one") << i18nc("@item the number 2", "two") << i18nc("@item the number 3", "three") << i18nc("@item the number 4", "four") << i18nc("@item the number 5", "five") << i18nc("@item the number 6", "six") << i18nc("@item the number 7", "seven") << i18nc("@item the number 8", "eight") << i18nc("@item the number 9", "nine") << i18nc("@item the number 10", "ten") << i18nc("@item the number 11", "eleven") << i18nc("@item the number 12", "twelve") << i18nc("@item the number 13", "thirteen") << i18nc("@item the number 14", "fourteen") << i18nc("@item the number 15", "fifteen") << i18nc("@item the number 16", "sixteen") << i18nc("@item the number 17", "seventeen") << i18nc("@item the number 18", "eighteen") << i18nc("@item the number 19", "nineteen");
 
   // Tens number names from twenty upwards
-  m_tens << "" << "" << i18nc("@item the number 20","twenty") << i18nc("@item the number 30","thirty") << i18nc("@item the number 40","forty") << i18nc("@item the number 50","fifty") << i18nc("@item the number 60","sixty") << i18nc("@item the number 70","seventy") << i18nc("@item the number 80","eighty") << i18nc("@item the number 90","ninety");
+  m_tens << "" << "" << i18nc("@item the number 20", "twenty") << i18nc("@item the number 30", "thirty") << i18nc("@item the number 40", "forty") << i18nc("@item the number 50", "fifty") << i18nc("@item the number 60", "sixty") << i18nc("@item the number 70", "seventy") << i18nc("@item the number 80", "eighty") << i18nc("@item the number 90", "ninety");
 
   // Scale number names for use during recombination
-  m_scaleNumbers << "" << i18nc("@item the number 1000","thousand") << i18nc("@item the number 1,000,000","million") << i18nc("@item the number 1,000,000,000","billion");
+  m_scaleNumbers << "" << i18nc("@item the number 1000", "thousand") << i18nc("@item the number 1,000,000", "million") << i18nc("@item the number 1,000,000,000", "billion");
 }
 
 // Converts a three-digit group into English words

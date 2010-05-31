@@ -38,11 +38,11 @@ public:
 
     kcfg_timeUnitInSeconds->addItem(i18n("Minutes"));
     kcfg_timeUnitInSeconds->addItem(i18n("Hours"));
-    kcfg_timeUnitInSeconds->addItem(i18nc("Time unit","Days"));
+    kcfg_timeUnitInSeconds->addItem(i18nc("Time unit", "Days"));
 
     kcfg_intervalBetweenRemindersTimeUnitInSeconds->addItem(i18n("Minutes"));
     kcfg_intervalBetweenRemindersTimeUnitInSeconds->addItem(i18n("Hours"));
-    kcfg_intervalBetweenRemindersTimeUnitInSeconds->addItem(i18nc("Time unit","Days"));
+    kcfg_intervalBetweenRemindersTimeUnitInSeconds->addItem(i18nc("Time unit", "Days"));
 
     kcfg_beforeAfter->addItem(i18n("Before"));
     kcfg_beforeAfter->addItem(i18n("After"));
