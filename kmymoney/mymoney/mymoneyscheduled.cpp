@@ -804,148 +804,148 @@ QString MyMoneySchedule::occurrenceToString() const
 
 QString MyMoneySchedule::occurrenceToString(occurrenceE occurrence)
 {
-  QString occurrenceString = I18N_NOOP("Any");
+  QString occurrenceString = I18N_NOOP2("Frequency of schedule", "Any");
 
   if (occurrence == MyMoneySchedule::OCCUR_ONCE)
-    occurrenceString = I18N_NOOP("Once");
+    occurrenceString = I18N_NOOP2("Frequency of schedule", "Once");
   else if (occurrence == MyMoneySchedule::OCCUR_DAILY)
-    occurrenceString = I18N_NOOP("Daily");
+    occurrenceString = I18N_NOOP2("Frequency of schedule", "Daily");
   else if (occurrence == MyMoneySchedule::OCCUR_WEEKLY)
-    occurrenceString = I18N_NOOP("Weekly");
+    occurrenceString = I18N_NOOP2("Frequency of schedule", "Weekly");
   else if (occurrence == MyMoneySchedule::OCCUR_FORTNIGHTLY)
-    occurrenceString = I18N_NOOP("Fortnightly");
+    occurrenceString = I18N_NOOP2("Frequency of schedule", "Fortnightly");
   else if (occurrence == MyMoneySchedule::OCCUR_EVERYOTHERWEEK)
-    occurrenceString = I18N_NOOP("Every other week");
+    occurrenceString = I18N_NOOP2("Frequency of schedule", "Every other week");
   else if (occurrence == MyMoneySchedule::OCCUR_EVERYHALFMONTH)
-    occurrenceString = I18N_NOOP("Every half month");
+    occurrenceString = I18N_NOOP2("Frequency of schedule", "Every half month");
   else if (occurrence == MyMoneySchedule::OCCUR_EVERYTHREEWEEKS)
-    occurrenceString = I18N_NOOP("Every three weeks");
+    occurrenceString = I18N_NOOP2("Frequency of schedule", "Every three weeks");
   else if (occurrence == MyMoneySchedule::OCCUR_EVERYFOURWEEKS)
-    occurrenceString = I18N_NOOP("Every four weeks");
+    occurrenceString = I18N_NOOP2("Frequency of schedule", "Every four weeks");
   else if (occurrence == MyMoneySchedule::OCCUR_EVERYTHIRTYDAYS)
-    occurrenceString = I18N_NOOP("Every thirty days");
+    occurrenceString = I18N_NOOP2("Frequency of schedule", "Every thirty days");
   else if (occurrence == MyMoneySchedule::OCCUR_MONTHLY)
-    occurrenceString = I18N_NOOP("Monthly");
+    occurrenceString = I18N_NOOP2("Frequency of schedule", "Monthly");
   else if (occurrence == MyMoneySchedule::OCCUR_EVERYEIGHTWEEKS)
-    occurrenceString = I18N_NOOP("Every eight weeks");
+    occurrenceString = I18N_NOOP2("Frequency of schedule", "Every eight weeks");
   else if (occurrence == MyMoneySchedule::OCCUR_EVERYOTHERMONTH)
-    occurrenceString = I18N_NOOP("Every two months");
+    occurrenceString = I18N_NOOP2("Frequency of schedule", "Every two months");
   else if (occurrence == MyMoneySchedule::OCCUR_EVERYTHREEMONTHS)
-    occurrenceString = I18N_NOOP("Every three months");
+    occurrenceString = I18N_NOOP2("Frequency of schedule", "Every three months");
   else if (occurrence == MyMoneySchedule::OCCUR_QUARTERLY)
-    occurrenceString = I18N_NOOP("Quarterly");
+    occurrenceString = I18N_NOOP2("Frequency of schedule", "Quarterly");
   else if (occurrence == MyMoneySchedule::OCCUR_EVERYFOURMONTHS)
-    occurrenceString = I18N_NOOP("Every four months");
+    occurrenceString = I18N_NOOP2("Frequency of schedule", "Every four months");
   else if (occurrence == MyMoneySchedule::OCCUR_TWICEYEARLY)
-    occurrenceString = I18N_NOOP("Twice yearly");
+    occurrenceString = I18N_NOOP2("Frequency of schedule", "Twice yearly");
   else if (occurrence == MyMoneySchedule::OCCUR_YEARLY)
-    occurrenceString = I18N_NOOP("Yearly");
+    occurrenceString = I18N_NOOP2("Frequency of schedule", "Yearly");
   else if (occurrence == MyMoneySchedule::OCCUR_EVERYOTHERYEAR)
-    occurrenceString = I18N_NOOP("Every other year");
+    occurrenceString = I18N_NOOP2("Frequency of schedule", "Every other year");
   return occurrenceString;
 }
 
 QString MyMoneySchedule::occurrenceToString(int mult, occurrenceE type)
 {
-  QString occurrenceString = I18N_NOOP("Any");
+  QString occurrenceString = I18N_NOOP2("Frequency of schedule", "Any");
 
   if (type == MyMoneySchedule::OCCUR_ONCE)
     switch (mult) {
       case 1:
-        occurrenceString = I18N_NOOP("Once");
+        occurrenceString = I18N_NOOP2("Frequency of schedule", "Once");
         break;
       default:
-        occurrenceString = I18N_NOOP(static_cast<QString>("%1 times").arg(mult));
+        occurrenceString = I18N_NOOP2("Frequency of schedule", QString("%1 times").arg(mult));
     }
   else if (type == MyMoneySchedule::OCCUR_DAILY)
     switch (mult) {
       case 1:
-        occurrenceString = I18N_NOOP("Daily");
+        occurrenceString = I18N_NOOP2("Frequency of schedule", "Daily");
         break;
       case 30:
-        occurrenceString = I18N_NOOP("Every thirty days");
+        occurrenceString = I18N_NOOP2("Frequency of schedule", "Every thirty days");
         break;
       default:
-        occurrenceString = I18N_NOOP(static_cast<QString>("Every %1 days").arg(mult));
+        occurrenceString = I18N_NOOP2("Frequency of schedule", QString("Every %1 days").arg(mult));
     }
   else if (type == MyMoneySchedule::OCCUR_WEEKLY)
     switch (mult) {
       case 1:
-        occurrenceString = I18N_NOOP("Weekly");
+        occurrenceString = I18N_NOOP2("Frequency of schedule", "Weekly");
         break;
       case 2:
-        occurrenceString = I18N_NOOP("Every other week");
+        occurrenceString = I18N_NOOP2("Frequency of schedule", "Every other week");
         break;
       case 3:
-        occurrenceString = I18N_NOOP("Every three weeks");
+        occurrenceString = I18N_NOOP2("Frequency of schedule", "Every three weeks");
         break;
       case 4:
-        occurrenceString = I18N_NOOP("Every four weeks");
+        occurrenceString = I18N_NOOP2("Frequency of schedule", "Every four weeks");
         break;
       case 8:
-        occurrenceString = I18N_NOOP("Every eight weeks");
+        occurrenceString = I18N_NOOP2("Frequency of schedule", "Every eight weeks");
         break;
       default:
-        occurrenceString = I18N_NOOP(static_cast<QString>("Every %1 weeks").arg(mult));
+        occurrenceString = I18N_NOOP2("Frequency of schedule", QString("Every %1 weeks").arg(mult));
     }
   else if (type == MyMoneySchedule::OCCUR_EVERYHALFMONTH)
     switch (mult) {
       case 1:
-        occurrenceString = I18N_NOOP("Every half month");
+        occurrenceString = I18N_NOOP2("Frequency of schedule", "Every half month");
         break;
       default:
-        occurrenceString = I18N_NOOP(static_cast<QString>("Every %1 half months").arg(mult));
+        occurrenceString = I18N_NOOP2("Frequency of schedule", QString("Every %1 half months").arg(mult));
     }
   else if (type == MyMoneySchedule::OCCUR_MONTHLY)
     switch (mult) {
       case 1:
-        occurrenceString = I18N_NOOP("Monthly");
+        occurrenceString = I18N_NOOP2("Frequency of schedule", "Monthly");
         break;
       case 2:
-        occurrenceString = I18N_NOOP("Every two months");
+        occurrenceString = I18N_NOOP2("Frequency of schedule", "Every two months");
         break;
       case 3:
-        occurrenceString = I18N_NOOP("Every three months");
+        occurrenceString = I18N_NOOP2("Frequency of schedule", "Every three months");
         break;
       case 4:
-        occurrenceString = I18N_NOOP("Every four months");
+        occurrenceString = I18N_NOOP2("Frequency of schedule", "Every four months");
         break;
       case 6:
-        occurrenceString = I18N_NOOP("Twice yearly");
+        occurrenceString = I18N_NOOP2("Frequency of schedule", "Twice yearly");
         break;
       default:
-        occurrenceString = I18N_NOOP(static_cast<QString>("Every %1 months").arg(mult));
+        occurrenceString = I18N_NOOP2("Frequency of schedule", QString("Every %1 months").arg(mult));
     }
   else if (type == MyMoneySchedule::OCCUR_YEARLY)
     switch (mult) {
       case 1:
-        occurrenceString = I18N_NOOP("Yearly");
+        occurrenceString = I18N_NOOP2("Frequency of schedule", "Yearly");
         break;
       case 2:
-        occurrenceString = I18N_NOOP("Every other year");
+        occurrenceString = I18N_NOOP2("Frequency of schedule", "Every other year");
         break;
       default:
-        occurrenceString = I18N_NOOP(static_cast<QString>("Every %1 years").arg(mult));
+        occurrenceString = I18N_NOOP2("Frequency of schedule", QString("Every %1 years").arg(mult));
     }
   return occurrenceString;
 }
 
 QString MyMoneySchedule::occurrencePeriodToString(MyMoneySchedule::occurrenceE type)
 {
-  QString occurrenceString = I18N_NOOP("Any");
+  QString occurrenceString = I18N_NOOP2("Schedule occurrence period", "Any");
 
   if (type == MyMoneySchedule::OCCUR_ONCE)
-    occurrenceString = I18N_NOOP("Once");
+    occurrenceString = I18N_NOOP2("Schedule occurrence period", "Once");
   else if (type == MyMoneySchedule::OCCUR_DAILY)
-    occurrenceString = I18N_NOOP("Day");
+    occurrenceString = I18N_NOOP2("Schedule occurrence period", "Day");
   else if (type == MyMoneySchedule::OCCUR_WEEKLY)
-    occurrenceString = I18N_NOOP("Week");
+    occurrenceString = I18N_NOOP2("Schedule occurrence period", "Week");
   else if (type == MyMoneySchedule::OCCUR_EVERYHALFMONTH)
-    occurrenceString = I18N_NOOP("Half-month");
+    occurrenceString = I18N_NOOP2("Schedule occurrence period", "Half-month");
   else if (type == MyMoneySchedule::OCCUR_MONTHLY)
-    occurrenceString = I18N_NOOP("Month");
+    occurrenceString = I18N_NOOP2("Schedule occurrence period", "Month");
   else if (type == MyMoneySchedule::OCCUR_YEARLY)
-    occurrenceString = I18N_NOOP("Year");
+    occurrenceString = I18N_NOOP2("Schedule occurrence period", "Year");
   return occurrenceString;
 }
 
@@ -955,20 +955,20 @@ QString MyMoneySchedule::scheduleTypeToString(MyMoneySchedule::typeE type)
 
   switch (type) {
     case MyMoneySchedule::TYPE_BILL:
-      text = I18N_NOOP("Bill");
+      text = I18N_NOOP2("Scheduled transaction type", "Bill");
       break;
     case MyMoneySchedule::TYPE_DEPOSIT:
-      text = I18N_NOOP("Deposit");
+      text = I18N_NOOP2("Scheduled transaction type", "Deposit");
       break;
     case MyMoneySchedule::TYPE_TRANSFER:
-      text = I18N_NOOP("Transfer");
+      text = I18N_NOOP2("Scheduled transaction type", "Transfer");
       break;
     case MyMoneySchedule::TYPE_LOANPAYMENT:
-      text = I18N_NOOP("Loan payment");
+      text = I18N_NOOP2("Scheduled transaction type", "Loan payment");
       break;
     case MyMoneySchedule::TYPE_ANY:
     default:
-      text = I18N_NOOP("Unknown");
+      text = I18N_NOOP2("Scheduled transaction type", "Unknown");
   }
   return text;
 }
@@ -980,28 +980,28 @@ QString MyMoneySchedule::paymentMethodToString(MyMoneySchedule::paymentTypeE pay
 
   switch (paymentType) {
     case MyMoneySchedule::STYPE_DIRECTDEBIT:
-      text = I18N_NOOP("Direct debit");
+      text = I18N_NOOP2("Scheduled Transaction payment type", "Direct debit");
       break;
     case MyMoneySchedule::STYPE_DIRECTDEPOSIT:
-      text = I18N_NOOP("Direct deposit");
+      text = I18N_NOOP2("Scheduled Transaction payment type", "Direct deposit");
       break;
     case MyMoneySchedule::STYPE_MANUALDEPOSIT:
-      text = I18N_NOOP("Manual deposit");
+      text = I18N_NOOP2("Scheduled Transaction payment type", "Manual deposit");
       break;
     case MyMoneySchedule::STYPE_OTHER:
-      text = I18N_NOOP("Other");
+      text = I18N_NOOP2("Scheduled Transaction payment type", "Other");
       break;
     case MyMoneySchedule::STYPE_WRITECHEQUE:
-      text = I18N_NOOP("Write check");
+      text = I18N_NOOP2("Scheduled Transaction payment type", "Write check");
       break;
     case MyMoneySchedule::STYPE_STANDINGORDER:
-      text = I18N_NOOP("Standing order");
+      text = I18N_NOOP2("Scheduled Transaction payment type", "Standing order");
       break;
     case MyMoneySchedule::STYPE_BANKTRANSFER:
-      text = I18N_NOOP("Bank transfer");
+      text = I18N_NOOP2("Scheduled Transaction payment type", "Bank transfer");
       break;
     case MyMoneySchedule::STYPE_ANY:
-      text = I18N_NOOP("Any (Error)");
+      text = I18N_NOOP2("Scheduled Transaction payment type", "Any (Error)");
       break;
   }
   return text;
