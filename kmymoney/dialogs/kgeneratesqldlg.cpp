@@ -52,8 +52,8 @@ KGenerateSqlDlg::KGenerateSqlDlg(QWidget *)
   m_widget = new KGenerateSqlDlgDecl();
   setMainWidget(m_widget);
   setButtons(createTables | saveSQL | Ok | Cancel | Help);
-  button(createTables)->setText("Create Tables");
-  button(saveSQL)->setText("Save SQL");
+  button(createTables)->setText(i18n("Create Tables"));
+  button(saveSQL)->setText(i18n("Save SQL"));
   m_requiredFields = 0;
   initializeForm();
 }
