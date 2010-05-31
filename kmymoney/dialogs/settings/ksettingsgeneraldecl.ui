@@ -21,7 +21,7 @@
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
-       <string>Global</string>
+       <string comment="@title global settings">Global</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
@@ -221,7 +221,7 @@
             </item>
             <item>
              <property name="text">
-              <string>August</string>
+              <string comment="@item the month August">August</string>
              </property>
             </item>
             <item>

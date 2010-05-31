@@ -84,7 +84,7 @@
               <widget class="KComboBox" name="m_holidayRegion">
                 <item>
                   <property name="text">
-                    <string>(None)</string>
+                    <string comment="@item no holiday region selected">(None)</string>
                   </property>
                 </item>
               </widget>

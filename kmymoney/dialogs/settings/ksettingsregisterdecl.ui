@@ -21,7 +21,7 @@
         <widget class="KTabWidget" name="tab">
           <widget class="QWidget" name="tab1">
             <attribute name="title">
-              <string>Display</string>
+              <string comment="@title The way in which items will be displayed">Display</string>
             </attribute>
             <layout class="QVBoxLayout">
               <item>
@@ -248,7 +248,7 @@
                       </item>
                       <item>
                         <property name="text">
-                          <string>Cleared</string>
+                          <string comment="@item reconciliation cleared status">Cleared</string>
                         </property>
                       </item>
                       <item>

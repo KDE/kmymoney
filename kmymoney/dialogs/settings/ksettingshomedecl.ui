@@ -40,14 +40,14 @@
               <item>
                 <widget class="KPushButton" name="m_upButton">
                   <property name="text">
-                    <string>Up</string>
+                    <string comment="@action move item up">Up</string>
                   </property>
                 </widget>
               </item>
               <item>
                 <widget class="KPushButton" name="m_downButton">
                   <property name="text">
-                    <string>Down</string>
+                    <string comment="@action move item down">Down</string>
                   </property>
                 </widget>
               </item>
