@@ -19,17 +19,19 @@ for path in $PATH; do
       1.2[1-2])
         PAD="pad=oper"
         UNPAD="unpad=paren"
+        ONELINE="one-line=keep-statements"
         ;;
       *)
         PAD="pad-oper"
         UNPAD="unpad-paren"
+        ONELINE="keep-one-line-statements"
         ;;
     esac
 
     # run astyle with options on the set of files
     find kmymoney libkgpgfile -type f  \( -name \*.c -or -name \*.cpp -or -name \*.h \) -exec $path/astyle --indent=spaces=2 --brackets=linux \
       --indent-labels --${PAD} --${UNPAD} \
-      --one-line=keep-statements --convert-tabs \
+      --${ONELINE} --convert-tabs \
       --indent-switches --indent-cases \
       --indent-preprocessor {} \;
 
