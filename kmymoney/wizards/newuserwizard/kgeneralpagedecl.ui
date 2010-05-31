@@ -101,7 +101,7 @@ This information will be seen and used only by you. The information is used to p
                         </size>
                       </property>
                       <property name="text">
-                        <string>Email:</string>
+                        <string comment="@label email address">Email:</string>
                       </property>
                       <property name="wordWrap">
                         <bool>false</bool>

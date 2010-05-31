@@ -93,12 +93,12 @@ Note: Payments made to obtain the loan (e.g. Disagio) are not considered as paym
                   </property>
                   <item>
                     <property name="text">
-                      <string>No</string>
+                      <string comment="@item no payments were entered for a loan">No</string>
                     </property>
                   </item>
                   <item>
                     <property name="text">
-                      <string>Yes</string>
+                      <string comment="@item payments were entered for a loan">Yes</string>
                     </property>
                   </item>
                 </widget>
@@ -229,12 +229,12 @@ Enter the due date of the first payment in the current year</string>
                 <widget class="KComboBox" name="m_interestType">
                   <item>
                     <property name="text">
-                      <string>Fixed</string>
+                      <string comment="@item type of interest">Fixed</string>
                     </property>
                   </item>
                   <item>
                     <property name="text">
-                      <string>Variable</string>
+                      <string comment="@item type of interest">Variable</string>
                     </property>
                   </item>
                 </widget>
@@ -265,22 +265,22 @@ Enter the due date of the first payment in the current year</string>
                       </property>
                       <item>
                         <property name="text">
-                          <string>Days</string>
+                          <string comment="@item frequency of interest calculation">Days</string>
                         </property>
                       </item>
                       <item>
                         <property name="text">
-                          <string>Weeks</string>
+                          <string comment="@item frequency of interest calculation">Weeks</string>
                         </property>
                       </item>
                       <item>
                         <property name="text">
-                          <string>Months</string>
+                          <string comment="@item frequency of interest calculation">Months</string>
                         </property>
                       </item>
                       <item>
                         <property name="text">
-                          <string>Years</string>
+                          <string comment="@item frequency of interest calculation">Years</string>
                         </property>
                       </item>
                     </widget>
