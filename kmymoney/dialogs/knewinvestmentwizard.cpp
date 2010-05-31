@@ -96,7 +96,7 @@ KNewInvestmentWizard::KNewInvestmentWizard(const MyMoneySecurity& security, QWid
 
 void KNewInvestmentWizard::init1(void)
 {
-  m_onlineSourceCombo->addItems(WebPriceQuote::quoteSources());
+  slotSourceChanged(false);
 
   m_onlineFactor->setValue(MyMoneyMoney(1, 1));
   m_onlineFactor->setPrecision(4);
@@ -143,13 +143,21 @@ void KNewInvestmentWizard::init2(void)
   m_tradingMarket->setItemText(m_tradingMarket->currentIndex(), m_security.tradingMarket());
   m_fraction->setValue(MyMoneyMoney(m_security.smallestAccountFraction(), 1));
   m_tradingCurrencyEdit->setSecurity(tradingCurrency);
+
+  int idx;
   if (m_security.value("kmm-online-quote-system") == "Finance::Quote") {
     FinanceQuoteProcess p;
     m_useFinanceQuote->setChecked(true);
-    m_onlineSourceCombo->setItemText(m_onlineSourceCombo->currentIndex(), p.niceName(m_security.value("kmm-online-source")));
+    idx = m_onlineSourceCombo->findText(p.niceName(m_security.value("kmm-online-source")));
   } else {
-    m_onlineSourceCombo->setItemText(m_onlineSourceCombo->currentIndex(), m_security.value("kmm-online-source"));
+    idx = m_onlineSourceCombo->findText(m_security.value("kmm-online-source"));
   }
+
+  // in case we did not find the entry, we use the empty one
+  if (idx == -1)
+    idx = m_onlineSourceCombo->findText(QString());
+  m_onlineSourceCombo->setCurrentIndex(idx);
+
   if (!m_security.value("kmm-online-factor").isEmpty())
     m_onlineFactor->setValue(MyMoneyMoney(m_security.value("kmm-online-factor")));
   m_investmentIdentification->setText(m_security.value("kmm-security-id"));
