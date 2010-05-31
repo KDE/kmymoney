@@ -129,6 +129,7 @@ protected slots:
 private slots:
   void slotDateChosenRef(const QDate& date);
   void fixSize(void);
+  void slotSelectDaySection(void);
 
 private:
   struct Private;

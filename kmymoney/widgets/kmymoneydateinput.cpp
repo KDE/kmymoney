@@ -304,8 +304,8 @@ bool kMyMoneyDateInput::eventFilter(QObject *, QEvent *e)
 {
   if (e->type() == QEvent::FocusIn) {
     d->m_datePopup->show(mapToGlobal(QPoint(0, height())));
-    // select the date section
-    d->m_dateEdit->setSelectedSection(QDateTimeEdit::DaySection);
+    // select the date section, but we need to delay it a bit
+    QTimer::singleShot(0, this, SLOT(slotSelectDaySection()));
   } else if (e->type() == QEvent::FocusOut)
     d->m_datePopup->hide();
   else if (e->type() == QEvent::KeyPress) {
@@ -317,6 +317,11 @@ bool kMyMoneyDateInput::eventFilter(QObject *, QEvent *e)
   }
 
   return false; // Don't filter the event
+}
+
+void kMyMoneyDateInput::slotSelectDaySection(void)
+{
+  d->m_dateEdit->setSelectedSection(QDateTimeEdit::DaySection);
 }
 
 void kMyMoneyDateInput::slotDateChosenRef(const QDate& date)
