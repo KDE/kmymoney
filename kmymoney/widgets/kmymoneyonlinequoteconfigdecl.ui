@@ -44,7 +44,7 @@
           </property>
           <column>
             <property name="text">
-              <string comment="@title header of the qoute source name column">Name</string>
+              <string comment="@title header of the quote source name column">Name</string>
             </property>
             <property name="clickable">
               <bool>true</bool>
