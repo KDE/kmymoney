@@ -90,6 +90,7 @@ bool KMyMoneyDateEdit::event(QEvent* e)
 
 bool KMyMoneyDateEdit::focusNextPrevChild(bool next)
 {
+  Q_UNUSED(next)
   return true;
 }
 
