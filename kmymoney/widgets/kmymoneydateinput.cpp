@@ -90,15 +90,6 @@ bool KMyMoneyDateEdit::event(QEvent* e)
 
 bool KMyMoneyDateEdit::focusNextPrevChild(bool next)
 {
-  // make sure that TransactionForm::focusNextPrevChild is not called twice
-  // when the date edit has the focus and tab or back tab is pressed
-  if (next) {
-    if (currentSection() != sectionAt(sectionCount() - 1))
-      return QDateEdit::focusNextPrevChild(next);
-  } else {
-    if (currentSection() != sectionAt(0))
-      return QDateEdit::focusNextPrevChild(next);
-  }
   return true;
 }
 
