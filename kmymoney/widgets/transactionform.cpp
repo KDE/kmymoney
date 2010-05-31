@@ -50,7 +50,7 @@
 using namespace KMyMoneyTransactionForm;
 
 TabBar::TabBar(QWidget* parent) :
-    KTabWidget(parent),
+    KTabBar(parent),
     m_signalType(SignalNormal)
 {
   connect(this, SIGNAL(currentChanged(int)), this, SLOT(slotTabCurrentChanged(int)));
@@ -66,75 +66,54 @@ TabBar::SignalEmissionE TabBar::setSignalEmission(TabBar::SignalEmissionE type)
 int TabBar::currentIndex(void) const
 {
   QMap<int, int>::const_iterator it;
-  it = m_idMap.find(KTabWidget::currentIndex());
-  if (it != m_idMap.end())
-    return *it;
+  int id = KTabBar::currentIndex();
+  for (it = m_idMap.constBegin(); it != m_idMap.constEnd(); ++it) {
+    if (*it == id) {
+      return it.key();
+    }
+  }
   return -1;
 }
 
 void TabBar::setCurrentIndex(int id)
 {
-  if (widget(id)) // there are no tabs in an expense/income ledger
-    if (widget(id)->isEnabled())
-      setCurrentWidget(widget(id));
-}
-
-QWidget* TabBar::widget(int id) const
-{
-  /* if a QAccel calls setCurrentTab, id will be as set by qt.
-  * however if we call it programmatically, id will
-  * be our own id. We do tell QTab about our id but
-  * in qt3.3 I (woro) am not able to make sure that
-  * QAccel also gets it. See registeritem.h: We defined
-  * new values for our own ids which should lie way
-  * outside of the range that qt uses
-  */
-  QWidget* result = KTabWidget::widget(id);
-  QMap<int, int>::const_iterator it;
-  for (it = m_idMap.begin(); it != m_idMap.end(); ++it)
-    if (*it == id)
-      result = KTabWidget::widget(it.key());
-  return result;
-}
-
-
-void TabBar::setCurrentWidget(QWidget* tab)
-{
   if (m_signalType != SignalNormal)
     blockSignals(true);
 
-  KTabWidget::setCurrentWidget(tab);
+  if (m_idMap.contains(id)) {
+    KTabBar::setCurrentIndex(m_idMap[id]);
+  }
 
   if (m_signalType != SignalNormal)
     blockSignals(false);
 
   if (m_signalType == SignalAlways)
-    emit currentChanged(indexOf(tab));
+    emit currentChanged(m_idMap[id]);
 }
 
-void TabBar::insertTab(int id, QWidget* tab, QString title)
+void TabBar::setTabEnabled(int id, bool enable)
 {
-  KTabWidget::insertTab(id, tab, title);
-  setIdentifier(tab, id);
+  if (m_idMap.contains(id)) {
+    KTabBar::setTabEnabled(m_idMap[id], enable);
+  }
 }
 
-void TabBar::setIdentifier(QWidget* tab, int newId)
+void TabBar::insertTab(int id, const QString& title)
 {
-  m_idMap[indexOf(tab)] = newId;
-}
-
-void TransactionForm::enableTabBar(bool b)
-{
-  m_tabBar->setEnabled(b);
+  int newId = KTabBar::insertTab(id, title);
+  m_idMap[id] = newId;
 }
 
 void TabBar::slotTabCurrentChanged(int id)
 {
   QMap<int, int>::const_iterator it;
-  it = m_idMap.constFind(id);
-  if (it != m_idMap.constEnd())
-    emit tabCurrentChanged(*it);
-  else
+  for (it = m_idMap.constBegin(); it != m_idMap.constEnd(); ++it) {
+    if (*it == id) {
+      emit tabCurrentChanged(it.key());
+      break;
+    }
+  }
+  if (it == m_idMap.constEnd())
     emit tabCurrentChanged(id);
 }
 
@@ -144,7 +123,7 @@ void TabBar::showEvent(QShowEvent* event)
   if (m_signalType != SignalNormal)
     blockSignals(true);
 
-  KTabWidget::showEvent(event);
+  KTabBar::showEvent(event);
 
   if (m_signalType != SignalNormal)
     blockSignals(false);
@@ -156,15 +135,37 @@ void TabBar::copyTabs(const TabBar* otabbar)
   while (count()) {
     removeTab(0);
   }
+
   // now create new ones. copy text, icon and identifier
+  m_idMap = otabbar->m_idMap;
+
   for (int i = 0; i < otabbar->count(); ++i) {
-    QWidget* otab = otabbar->widget(i);
-    QWidget* ntab = new QWidget();
-    int nid = KTabWidget::addTab(ntab, otabbar->tabText(i));
-    m_idMap[nid] = otabbar->m_idMap[i];
-    ntab->setEnabled(otab->isEnabled());
-    if (i == otabbar->currentIndex())
-      setCurrentWidget(ntab);
+    KTabBar::insertTab(i, otabbar->tabText(i));
+    if (i == otabbar->KTabBar::currentIndex()) {
+      KTabBar::setCurrentIndex(i);
+    }
+  }
+}
+
+int TabBar::indexAtPos(const QPoint& p) const
+{
+  if (tabRect(KTabBar::currentIndex()).contains(p))
+    return KTabBar::currentIndex();
+  for (int i = 0; i < count(); ++i)
+    if (isTabEnabled(i) && tabRect(i).contains(p))
+      return i;
+  return -1;
+}
+
+void TabBar::mousePressEvent(QMouseEvent *e)
+{
+  KTabBar::mousePressEvent(e);
+
+  // in case we receive a mouse press event on the current
+  // selected tab emit a signal no matter what as the base
+  // class does not do that
+  if (indexAtPos(e->pos()) == KTabBar::currentIndex()) {
+    slotTabCurrentChanged(KTabBar::currentIndex());
   }
 }
 
@@ -219,6 +220,11 @@ bool TransactionForm::focusNextPrevChild(bool next)
 void TransactionForm::clear(void)
 {
   slotSetTransaction(0);
+}
+
+void TransactionForm::enableTabBar(bool b)
+{
+  m_tabBar->setEnabled(b);
 }
 
 void TransactionForm::slotSetTransaction(KMyMoneyRegister::Transaction* transaction)
@@ -299,10 +305,8 @@ void TransactionForm::slotActionSelected(int id)
 void TransactionForm::setupForm(const MyMoneyAccount& acc)
 {
   // remove all tabs from the tabbar
-  QWidget* tab;
-  for (tab = m_tabBar->widget(0); tab; tab = m_tabBar->widget(0)) {
+  while (m_tabBar->count())
     m_tabBar->removeTab(0);
-  }
 
   m_tabBar->show();
 
@@ -311,41 +315,29 @@ void TransactionForm::setupForm(const MyMoneyAccount& acc)
   // a different value
   switch (acc.accountType()) {
     default:
-      tab = new QWidget();
-      m_tabBar->insertTab(KMyMoneyRegister::ActionDeposit, tab, i18n("&Deposit"));
-      tab = new QWidget();
-      m_tabBar->insertTab(KMyMoneyRegister::ActionTransfer, tab, i18n("&Transfer"));
-      tab = new QWidget();
-      m_tabBar->insertTab(KMyMoneyRegister::ActionWithdrawal, tab, i18n("&Withdrawal"));
+      m_tabBar->insertTab(KMyMoneyRegister::ActionDeposit, i18n("&Deposit"));
+      m_tabBar->insertTab(KMyMoneyRegister::ActionTransfer, i18n("&Transfer"));
+      m_tabBar->insertTab(KMyMoneyRegister::ActionWithdrawal, i18n("&Withdrawal"));
       break;
 
     case MyMoneyAccount::CreditCard:
-      tab = new QWidget();
-      m_tabBar->insertTab(KMyMoneyRegister::ActionDeposit, tab, i18n("&Payment"));
-      tab = new QWidget();
-      m_tabBar->insertTab(KMyMoneyRegister::ActionTransfer, tab, i18n("&Transfer"));
-      tab = new QWidget();
-      m_tabBar->insertTab(KMyMoneyRegister::ActionWithdrawal, tab, i18n("&Charge"));
+      m_tabBar->insertTab(KMyMoneyRegister::ActionDeposit, i18n("&Payment"));
+      m_tabBar->insertTab(KMyMoneyRegister::ActionTransfer, i18n("&Transfer"));
+      m_tabBar->insertTab(KMyMoneyRegister::ActionWithdrawal, i18n("&Charge"));
       break;
 
     case MyMoneyAccount::Liability:
     case MyMoneyAccount::Loan:
-      tab = new QWidget();
-      m_tabBar->insertTab(KMyMoneyRegister::ActionDeposit, tab, i18n("&Decrease"));
-      tab = new QWidget();
-      m_tabBar->insertTab(KMyMoneyRegister::ActionTransfer, tab, i18n("&Transfer"));
-      tab = new QWidget();
-      m_tabBar->insertTab(KMyMoneyRegister::ActionWithdrawal, tab, i18n("&Increase"));
+      m_tabBar->insertTab(KMyMoneyRegister::ActionDeposit, i18n("&Decrease"));
+      m_tabBar->insertTab(KMyMoneyRegister::ActionTransfer, i18n("&Transfer"));
+      m_tabBar->insertTab(KMyMoneyRegister::ActionWithdrawal, i18n("&Increase"));
       break;
 
     case MyMoneyAccount::Asset:
     case MyMoneyAccount::AssetLoan:
-      tab = new QWidget();
-      m_tabBar->insertTab(KMyMoneyRegister::ActionDeposit, tab, i18n("&Increase"));
-      tab = new QWidget();
-      m_tabBar->insertTab(KMyMoneyRegister::ActionTransfer, tab, i18n("&Transfer"));
-      tab = new QWidget();
-      m_tabBar->insertTab(KMyMoneyRegister::ActionWithdrawal, tab, i18n("&Decrease"));
+      m_tabBar->insertTab(KMyMoneyRegister::ActionDeposit, i18n("&Increase"));
+      m_tabBar->insertTab(KMyMoneyRegister::ActionTransfer, i18n("&Transfer"));
+      m_tabBar->insertTab(KMyMoneyRegister::ActionWithdrawal, i18n("&Decrease"));
       break;
 
     case MyMoneyAccount::Income:

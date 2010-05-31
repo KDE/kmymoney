@@ -173,6 +173,7 @@ protected:
   virtual void setupFinalWidgets(void) = 0;
   virtual void loadEditWidgets(KMyMoneyRegister::Action action = KMyMoneyRegister::ActionNone) = 0;
   void setupCategoryWidget(KMyMoneyCategory* category, const QList<MyMoneySplit>& splits, QString& categoryId, const char* splitEditSlot, bool allowObjectCreation = true);
+  void resizeForm(void);
 
   /**
    * This method sets the precision of the value widgets to reflect

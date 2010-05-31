@@ -655,6 +655,14 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
   return storeTransactions;
 }
 
+void TransactionEditor::resizeForm(void)
+{
+  // force resizeing of the columns in the form
+  KMyMoneyTransactionForm::TransactionForm* form = dynamic_cast<KMyMoneyTransactionForm::TransactionForm*>(m_regForm);
+  if (form) {
+    QTimer::singleShot(0, form, SLOT(resize()));
+  }
+}
 
 StdTransactionEditor::StdTransactionEditor()
 {
@@ -1338,6 +1346,7 @@ void StdTransactionEditor::slotUpdateAction(int action)
         cashflow->setDirection(KMyMoneyRegister::Payment);
         break;
     }
+    resizeForm();
   }
 }
 
@@ -1355,6 +1364,7 @@ void StdTransactionEditor::slotUpdateCashFlow(KMyMoneyRegister::CashFlowDirectio
       } else {
         categoryLabel->setText(i18n("Transfer to"));
       }
+      resizeForm();
     } else {
       if (dir == KMyMoneyRegister::Deposit)
         tabbar->setCurrentIndex(KMyMoneyRegister::ActionDeposit);
@@ -1381,9 +1391,9 @@ void StdTransactionEditor::slotUpdateCategory(const QString& id)
     }
 
     if (tabbar) {
-      tabbar->widget(KMyMoneyRegister::ActionTransfer)->setEnabled(true);
-      tabbar->widget(KMyMoneyRegister::ActionDeposit)->setEnabled(true);
-      tabbar->widget(KMyMoneyRegister::ActionWithdrawal)->setEnabled(true);
+      tabbar->setTabEnabled(KMyMoneyRegister::ActionTransfer, true);
+      tabbar->setTabEnabled(KMyMoneyRegister::ActionDeposit, true);
+      tabbar->setTabEnabled(KMyMoneyRegister::ActionWithdrawal, true);
     }
 
     if (!id.isEmpty()) {
@@ -1391,8 +1401,8 @@ void StdTransactionEditor::slotUpdateCategory(const QString& id)
       if (acc.isAssetLiability()
           || acc.accountGroup() == MyMoneyAccount::Equity) {
         if (tabbar) {
-          tabbar->widget(KMyMoneyRegister::ActionDeposit)->setEnabled(false);
-          tabbar->widget(KMyMoneyRegister::ActionWithdrawal)->setEnabled(false);
+          tabbar->setTabEnabled(KMyMoneyRegister::ActionDeposit, false);
+          tabbar->setTabEnabled(KMyMoneyRegister::ActionWithdrawal, false);
         }
         if (val.isNegative())
           categoryLabel->setText(i18n("Transfer from"));
@@ -1400,18 +1410,20 @@ void StdTransactionEditor::slotUpdateCategory(const QString& id)
           categoryLabel->setText(i18n("Transfer to"));
       } else {
         if (tabbar)
-          tabbar->widget(KMyMoneyRegister::ActionTransfer)->setEnabled(false);
+          tabbar->setTabEnabled(KMyMoneyRegister::ActionTransfer, false);
         categoryLabel->setText(i18n("Category"));
       }
       updateAmount(val.abs());
     } else {
       KMyMoneyCategory* category = dynamic_cast<KMyMoneyCategory*>(m_editWidgets["category"]);
       if (!category->currentText().isEmpty() && tabbar)
-        tabbar->widget(KMyMoneyRegister::ActionTransfer)->setEnabled(false);
+        tabbar->setTabEnabled(KMyMoneyRegister::ActionTransfer, false);
       categoryLabel->setText(i18n("Category"));
     }
     if (tabbar)
       tabbar->update();
+
+    resizeForm();
   }
   updateVAT(false);
 }

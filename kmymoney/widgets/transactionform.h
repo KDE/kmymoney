@@ -28,7 +28,7 @@
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-#include <ktabwidget.h>
+#include <ktabbar.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -46,7 +46,7 @@ namespace KMyMoneyTransactionForm
 /**
   * @author Thomas Baumgart
   */
-class TabBar : public KTabWidget
+class TabBar : public KTabBar
 {
   Q_OBJECT
 public:
@@ -63,12 +63,11 @@ public:
 
   void copyTabs(const TabBar* otabbar);
 
-  void insertTab(int id, QWidget* tab, QString title = QString());
+  void insertTab(int id, const QString& title = QString());
 
   void setIdentifier(QWidget* tab, int newId);
 
-  QWidget* widget(int id) const;
-
+  void setTabEnabled(int id, bool enabled);
 
   int currentIndex(void) const;
 
@@ -82,12 +81,10 @@ public slots:
   /**
     * overridden for internal reasons, API not changed
     */
-  virtual void setCurrentWidget(QWidget *);
-
-  /**
-    * overridden for internal reasons, API not changed
-    */
   virtual void showEvent(QShowEvent* event);
+
+protected:
+  void mousePressEvent(QMouseEvent* event);
 
 protected slots:
   void slotTabCurrentChanged(int id);
@@ -96,12 +93,19 @@ signals:
   void tabCurrentChanged(int id);
 
 private:
+  /**
+    * returns the Qt index of tab at pos @a p or -1
+    * Derived from QTabBarPrivate
+    */
+  int indexAtPos(const QPoint& p) const;
+
+private:
   SignalEmissionE    m_signalType;
 
   /**
     * maps our internal action ids to those used by
-    * qt3. Since it does not seem possible to tell
-    * qt3 to use our ids everywhere (in QAccel) we
+    * Qt/KDE. Since it does not seem possible to tell
+    * Qt/KDE to use our ids everywhere (in QAccel) we
     * need to know which is which
     */
   QMap<int, int>     m_idMap;
