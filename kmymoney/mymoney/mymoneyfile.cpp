@@ -1767,9 +1767,9 @@ const QStringList MyMoneyFile::consistencyCheck(void)
   QList<MyMoneyAccount> accList;
   accountList(accList);
   QList<MyMoneyAccount>::const_iterator account_it;
-  for(account_it = accList.constBegin(); account_it != accList.constEnd(); ++account_it) {
+  for (account_it = accList.constBegin(); account_it != accList.constEnd(); ++account_it) {
     MyMoneyAccount account = *account_it;
-    if(!currencyList.contains(account.currencyId()) && account.currencyId() != baseCurrency().id()) {
+    if (!currencyList.contains(account.currencyId()) && account.currencyId() != baseCurrency().id()) {
       //add the currency and the account-currency pair
       currencyList.append(account.currencyId());
       accountForeignCurrency.append(account);
@@ -1785,7 +1785,7 @@ const QStringList MyMoneyFile::consistencyCheck(void)
     MyMoneyPrice firstPrice = (*((*prices_it).constBegin()));
 
     //only check the price if the currency is in use
-    if(currencyList.contains(firstPrice.from()) || currencyList.contains(firstPrice.to())) {
+    if (currencyList.contains(firstPrice.from()) || currencyList.contains(firstPrice.to())) {
       //check the security in the from field
       //if it is there, check if it is older
       if (securityPriceDate.contains(firstPrice.from())
@@ -1800,7 +1800,7 @@ const QStringList MyMoneyFile::consistencyCheck(void)
       //check the security in the to field
       //if it is there, check if it is older
       if (securityPriceDate.contains(firstPrice.to())
-        && firstPrice.to() != baseCurrency().id()) {
+          && firstPrice.to() != baseCurrency().id()) {
         if (securityPriceDate.value(firstPrice.to()) > firstPrice.date()) {
           securityPriceDate[firstPrice.to()] = firstPrice.date();
         }
@@ -1812,12 +1812,12 @@ const QStringList MyMoneyFile::consistencyCheck(void)
 
   //compare the dates with the opening dates of the accounts using each currency
   QList<MyMoneyAccount>::const_iterator accForeignList_it;
-  for(accForeignList_it = accountForeignCurrency.constBegin(); accForeignList_it != accountForeignCurrency.constEnd(); ++accForeignList_it) {
+  for (accForeignList_it = accountForeignCurrency.constBegin(); accForeignList_it != accountForeignCurrency.constEnd(); ++accForeignList_it) {
     //compare the first price with the opening date of the account
-    if(securityPriceDate.value((*accForeignList_it).currencyId()) > (*accForeignList_it).openingDate()) {
+    if (securityPriceDate.value((*accForeignList_it).currencyId()) > (*accForeignList_it).openingDate()) {
       QDate openingDate = (*accForeignList_it).openingDate();
       MyMoneySecurity secError = security((*accForeignList_it).currencyId());
-      rc << i18n("The account %1 in currency %2 has no price set for the opening date %3. Please enter a price for the currency on or before the opening date.", (*accForeignList_it).name(), secError.name(), openingDate.toString(Qt::ISODate) );
+      rc << i18n("The account %1 in currency %2 has no price set for the opening date %3. Please enter a price for the currency on or before the opening date.", (*accForeignList_it).name(), secError.name(), openingDate.toString(Qt::ISODate));
       ++unfixedCount;
     }
   }

@@ -289,15 +289,15 @@ void MyMoneyQifProfileEditor::showProfile(void)
 
   // load combo boxes
   int idx = m_editDateFormat->findText(m_profile.outputDateFormat());
-  if(idx == -1)
+  if (idx == -1)
     idx = 0;
   m_editDateFormat->setCurrentIndex(idx);
 
   idx = m_editApostrophe->findText(m_profile.apostropheFormat());
-  if(idx == -1)
+  if (idx == -1)
     idx = 0;
   m_editApostrophe->setCurrentIndex(idx);
-  
+
   m_attemptMatch->setChecked(m_profile.attemptMatchDuplicates());
 
   Q3ListViewItem* item;
