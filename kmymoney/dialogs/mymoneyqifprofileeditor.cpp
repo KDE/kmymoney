@@ -110,7 +110,7 @@ MyMoneyQifProfileEditor::MyMoneyQifProfileEditor(const bool edit, QWidget *paren
   connect(m_editAccountDelimiter, SIGNAL(textChanged(const QString&)), &m_profile, SLOT(setAccountDelimiter(const QString&)));
   connect(m_editVoidMark, SIGNAL(textChanged(const QString&)), &m_profile, SLOT(setVoidMark(const QString&)));
 
-  //connect(m_editDateFormat, SIGNAL(highlighted(const QString&)), &m_profile, SLOT(setDateFormat(const QString&)));
+  connect(m_editDateFormat, SIGNAL(highlighted(const QString&)), &m_profile, SLOT(setOutputDateFormat(const QString&)));
   connect(m_editApostrophe, SIGNAL(highlighted(const QString&)), &m_profile, SLOT(setApostropheFormat(const QString&)));
 
   connect(m_editAmounts, SIGNAL(selectionChanged(Q3ListViewItem*)), this, SLOT(slotAmountTypeSelected(Q3ListViewItem*)));
@@ -287,9 +287,17 @@ void MyMoneyQifProfileEditor::showProfile(void)
   m_editOutputFilterLocation->setUrl(m_profile.filterScriptExport());
   m_editInputFilterFileType->setText(m_profile.filterFileType());
 
-  m_editDateFormat->setItemText(m_editDateFormat->currentIndex(), m_profile.outputDateFormat());
-  m_editApostrophe->setItemText(m_editApostrophe->currentIndex(), m_profile.apostropheFormat());
+  // load combo boxes
+  int idx = m_editDateFormat->findText(m_profile.outputDateFormat());
+  if(idx == -1)
+    idx = 0;
+  m_editDateFormat->setCurrentIndex(idx);
 
+  idx = m_editApostrophe->findText(m_profile.apostropheFormat());
+  if(idx == -1)
+    idx = 0;
+  m_editApostrophe->setCurrentIndex(idx);
+  
   m_attemptMatch->setChecked(m_profile.attemptMatchDuplicates());
 
   Q3ListViewItem* item;
