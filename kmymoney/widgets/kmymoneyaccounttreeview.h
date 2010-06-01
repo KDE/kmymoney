@@ -45,6 +45,8 @@ public:
   KMyMoneyAccountTreeView(QWidget *parent = 0);
   ~KMyMoneyAccountTreeView();
 
+  void setConfigGroupName(const QString& group);
+
 protected:
   void mouseDoubleClickEvent(QMouseEvent *event);
 
@@ -75,6 +77,9 @@ signals:
     *            MyMoneyAccount or MyMoneyInstitution depending on selected item)
     */
   void openObject(const MyMoneyObject& obj);
+
+private:
+  QString m_groupName;
 };
 
 /**

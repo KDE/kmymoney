@@ -39,21 +39,32 @@
 KMyMoneyAccountTreeView::KMyMoneyAccountTreeView(QWidget *parent)
     : QTreeView(parent)
 {
-  // restore the headers
-  KConfigGroup grp = KGlobal::config()->group("KAccountsView");
-  QByteArray columns;
-  columns = grp.readEntry("HeaderState", columns);
-  header()->restoreState(columns);
-
   setContextMenuPolicy(Qt::CustomContextMenu);
   connect(this, SIGNAL(customContextMenuRequested(const QPoint &)), this, SLOT(customContextMenuRequested(const QPoint &)));
 }
 
 KMyMoneyAccountTreeView::~KMyMoneyAccountTreeView()
 {
-  KConfigGroup grp = KGlobal::config()->group("KAccountsView");
-  QByteArray columns = header()->saveState();
-  grp.writeEntry("HeaderState", columns);
+  if (!m_groupName.isEmpty()) {
+    KConfigGroup grp = KGlobal::config()->group(m_groupName);
+    QByteArray columns = header()->saveState();
+    grp.writeEntry("HeaderState", columns);
+  }
+}
+
+/**
+  * Set the name of the configuration group where the view's persistent data is saved to @param group.
+  */
+void KMyMoneyAccountTreeView::setConfigGroupName(const QString& group)
+{
+  if (!group.isEmpty()) {
+    m_groupName = group;
+    // restore the headers
+    KConfigGroup grp = KGlobal::config()->group(m_groupName);
+    QByteArray columns;
+    columns = grp.readEntry("HeaderState", columns);
+    header()->restoreState(columns);
+  }
 }
 
 void KMyMoneyAccountTreeView::mouseDoubleClickEvent(QMouseEvent *event)

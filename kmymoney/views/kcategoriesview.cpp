@@ -75,6 +75,7 @@ KCategoriesView::KCategoriesView(QWidget *parent) :
 
   connect(m_filterProxyModel, SIGNAL(unusedIncomeExpenseAccountHidden()), this, SLOT(slotUnusedIncomeExpenseAccountHidden()));
 
+  m_accountTree->setConfigGroupName("KCategoriesView");
   m_accountTree->setAlternatingRowColors(true);
   m_accountTree->setIconSize(QSize(22, 22));
   m_accountTree->setSortingEnabled(true);
