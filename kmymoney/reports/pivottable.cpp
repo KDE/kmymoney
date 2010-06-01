@@ -2163,7 +2163,7 @@ QMap<QString, QDate> PivotTable::securityFirstPrice()
     //check the security in the from field
     //if it is there, check if it is older
     if (securityPriceDate.contains(firstPrice.from())) {
-      if (securityPriceDate.value(firstPrice.from()) < firstPrice.date()) {
+      if (securityPriceDate.value(firstPrice.from()) > firstPrice.date()) {
         securityPriceDate[firstPrice.from()] = firstPrice.date();
       }
     } else {
@@ -2173,7 +2173,7 @@ QMap<QString, QDate> PivotTable::securityFirstPrice()
     //check the security in the to field
     //if it is there, check if it is older
     if (securityPriceDate.contains(firstPrice.to())) {
-      if (securityPriceDate.value(firstPrice.to()) < firstPrice.date()) {
+      if (securityPriceDate.value(firstPrice.to()) > firstPrice.date()) {
         securityPriceDate[firstPrice.to()] = firstPrice.date();
       }
     } else {
