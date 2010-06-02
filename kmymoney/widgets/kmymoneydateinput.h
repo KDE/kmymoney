@@ -51,10 +51,17 @@ protected:
   /** if the date was cleared (a state which is not supported by QDateEdit)
     * make sure that a date can be entered again
     */
-  void keyPressEvent(QKeyEvent* k);
+  virtual void keyPressEvent(QKeyEvent* k);
+  
   /** reimplemented for internal reasons */
-  bool event(QEvent* e);
-  bool focusNextPrevChild(bool next);
+  virtual bool event(QEvent* e);
+  
+  /** reimplemented for internal reasons */
+  virtual bool focusNextPrevChild(bool next);
+  
+  /** reimplemented for internal reasons */
+  virtual void focusInEvent(QFocusEvent *event);
+
 };
 
 /**
