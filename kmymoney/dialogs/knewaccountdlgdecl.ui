@@ -366,7 +366,7 @@
             <item row="0" column="1">
              <widget class="QLabel" name="m_bicValue">
               <property name="text">
-               <string>x</string>
+               <string></string>
               </property>
               <property name="wordWrap">
                <bool>false</bool>
