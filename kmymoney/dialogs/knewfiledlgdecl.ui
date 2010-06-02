@@ -117,7 +117,7 @@ your KMyMoney file.</string>
                 </size>
               </property>
               <property name="text">
-                <string>Email:</string>
+                <string comment="Email address">Email:</string>
               </property>
               <property name="wordWrap">
                 <bool>false</bool>

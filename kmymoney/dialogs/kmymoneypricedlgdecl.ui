@@ -38,7 +38,7 @@
               <item>
                 <widget class="KPushButton" name="m_newButton">
                   <property name="text">
-                    <string>New</string>
+                    <string comment="@action add new price">New</string>
                   </property>
                 </widget>
               </item>

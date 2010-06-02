@@ -41,7 +41,7 @@
             <item row="0" column="0">
               <widget class="QLabel" name="TextLabel1">
                 <property name="text">
-                  <string>Name:</string>
+                  <string comment="institution name column">Name:</string>
                 </property>
                 <property name="wordWrap">
                   <bool>false</bool>

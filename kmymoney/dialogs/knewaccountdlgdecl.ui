@@ -24,7 +24,7 @@
      </property>
      <widget class="QWidget" name="m_generalTab">
       <attribute name="title">
-       <string>General</string>
+       <string comment="Account general settings">General</string>
       </attribute>
       <layout class="QVBoxLayout">
        <item>
@@ -44,7 +44,7 @@
             </size>
            </property>
            <property name="text">
-            <string>Name:</string>
+            <string comment="account name">Name:</string>
            </property>
            <property name="wordWrap">
             <bool>false</bool>
@@ -307,7 +307,7 @@
                </sizepolicy>
               </property>
               <property name="text">
-               <string>New...</string>
+               <string comment="create new institution">New...</string>
               </property>
              </widget>
             </item>
