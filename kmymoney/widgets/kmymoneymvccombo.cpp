@@ -223,7 +223,7 @@ void KMyMoneyMVCCombo::focusOutEvent(QFocusEvent* e)
       // contains the current text that we set the current text to
       // the full completion text
       if (e->reason() != Qt::MouseFocusReason) {
-        if (d->m_completer->currentCompletion().contains(currentText())) {
+        if (d->m_completer->currentCompletion().contains(currentText(), Qt::CaseInsensitive)) {
           setCurrentText(d->m_completer->currentCompletion());
         }
       }
