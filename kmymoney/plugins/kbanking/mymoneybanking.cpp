@@ -27,7 +27,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QMessageBox>
 #include <QLayout>
 #include <QRadioButton>
 #include <QStringList>
@@ -430,8 +429,7 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
     /* get AqBanking account */
     ba = AB_BANKING_GETACCOUNTBYALIAS(m_kbanking->getCInterface(), acc.id().toUtf8().data());
     if (!ba) {
-      QMessageBox::critical(0,
-                            i18n("Account Not Mapped"),
+      KMessageBox::error(0,
                             i18n("<qt>"
                                  "<p>"
                                  "The given application account <b>%1</b> "
@@ -440,7 +438,7 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
                                  "</p>"
                                  "</qt>",
                                  acc.name()),
-                            QMessageBox::Ok, Qt::NoButton);
+                            i18n("Account Not Mapped"));
       // clear the connection between the KMyMoney account
       // and the AqBanking equivalent
       setupAccountReference(acc, 0);
@@ -455,13 +453,12 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
         rv = AB_BANKING_JOB_CHECKAVAILABILITY(job);
         if (rv) {
           DBG_ERROR(0, "Job \"GetTransactions\" is not available (%d)", rv);
-          QMessageBox::critical(0,
-                                i18n("Job not Available"),
+          KMessageBox::error(0,
                                 i18n("<qt>"
                                      "The update job is not supported by the "
                                      "bank/account/backend.\n"
                                      "</qt>"),
-                                i18n("Dismiss"), QString());
+                                i18n("Job not Available"));
           AB_Job_free(job);
           job = 0;
         }
@@ -534,12 +531,11 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
           AB_Job_free(job);
           if (rv) {
             DBG_ERROR(0, "Error %d", rv);
-            QMessageBox::critical(0,
-                                  i18n("Error"),
+            KMessageBox::error(0,
                                   i18n("<qt>"
                                        "Could not enqueue the job.\n"
                                        "</qt>"),
-                                  i18n("Dismiss"), QString());
+                                  i18n("Error"));
           }
         }
       }
@@ -555,12 +551,11 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
       AB_Job_free(job);
       if (rv) {
         DBG_ERROR(0, "Error %d", rv);
-        QMessageBox::critical(0,
-                              i18n("Error"),
+        KMessageBox::error(0,
                               i18n("<qt>"
                                    "Could not enqueue the job.\n"
                                    "</qt>"),
-                              i18n("Dismiss"), QString());
+                              i18n("Error"));
       }
     }
 
@@ -978,11 +973,9 @@ bool KMyMoneyBanking::importAccountInfo(AB_IMEXPORTER_ACCOUNTINFO *ai,
 
   // import them
   if (!m_parent->importStatement(ks)) {
-    if (QMessageBox::critical(0,
-                              i18n("Critical Error"),
-                              i18n("Error importing statement."),
-                              i18n("Continue"),
-                              i18n("Abort"), 0, 0) != 0) {
+    if (KMessageBox::warningYesNo(0,
+                              i18n("Error importing statement. Do you want to continue?"),
+                              i18n("Critical Error")) == KMessageBox::No) {
       DBG_ERROR(0, "User aborted");
       return false;
     }
