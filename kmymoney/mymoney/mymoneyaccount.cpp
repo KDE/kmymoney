@@ -685,7 +685,7 @@ QPixmap MyMoneyAccount::accountPixmap(bool reconcileFlag, int size) const
     QPixmap ovly = DesktopIcon("account-types-reconciled.png", size);
     pixmapPainter.drawPixmap(0, 0, ovly.width(), ovly.height(), ovly);
   } else if (!onlineBankingSettings().value("provider").isEmpty()) {
-    QPixmap ovly = DesktopIcon("account-types-online.png", size);
+    QPixmap ovly = DesktopIcon("online-banking.png", size);
     pixmapPainter.drawPixmap(0, 0, ovly.width(), ovly.height(), ovly);
   }
   return result;
