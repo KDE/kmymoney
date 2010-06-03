@@ -319,6 +319,10 @@ public:
   // used by the calendar interface for schedules
   KHolidays::HolidayRegion* m_holidayRegion;
   QBitArray             m_processingDays;
+
+
+  // methods
+  void consistencyCheck(bool alwaysDisplayResults);
 };
 
 KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
@@ -1514,6 +1518,8 @@ bool KMyMoneyApp::slotFileSave(void)
   if (d->m_fileName.isEmpty())
     return slotFileSaveAs();
 
+  d->consistencyCheck(false);
+
   /*if (myMoneyView->isDatabase()) {
     rc = myMoneyView->saveDatabase(m_fileName);
     // the 'save' function is no longer relevant for a database*/
@@ -1628,6 +1634,8 @@ bool KMyMoneyApp::slotFileSaveAs(void)
   dlg->setCaption(i18n("Save As"));
 
   if (dlg->exec() == QDialog::Accepted) {
+
+    d->consistencyCheck(false);
 
     KUrl newURL = dlg->selectedUrl();
 
@@ -6272,6 +6280,12 @@ void KMyMoneyApp::slotPriceDialog(void)
 
 void KMyMoneyApp::slotFileConsistencyCheck(void)
 {
+  d->consistencyCheck(true);
+  updateCaption();
+}
+
+void KMyMoneyApp::Private::consistencyCheck(bool alwaysDisplayResult)
+{
   KMSTATUS(i18n("Running consistency check..."));
 
   QStringList msg;
@@ -6284,9 +6298,14 @@ void KMyMoneyApp::slotFileConsistencyCheck(void)
     delete e;
   }
 
-  KMessageBox::warningContinueCancelList(0, "Result", msg, i18n("Consistency check result"));
+  // in case the consistency check was OK, we get a single line as result
+  // in all errneous cases, we get more than one line and force the
+  // display of them.
+  if(msg.size() > 1)
+    alwaysDisplayResult = true;
 
-  updateCaption();
+  if(alwaysDisplayResult)
+    KMessageBox::informationList(0, i18n("The consistency check has found some issues in your data. Details are presented below. Those issues that could not be corrected automatically need to be solved by the user."), msg, i18n("Consistency check result"));
 }
 
 void KMyMoneyApp::slotCheckSchedules(void)
