@@ -254,7 +254,7 @@ As always, please make sure you have adequate backups of your data.</string>
     <item>
      <widget class="QGroupBox" name="groupBox4">
       <property name="title">
-       <string>Username</string>
+       <string comment="@title user name of the database">Username</string>
       </property>
       <widget class="KLineEdit" name="textUserName">
        <property name="geometry">

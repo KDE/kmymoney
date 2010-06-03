@@ -262,7 +262,7 @@ You can cancel the process at any time by clicking on the Cancel button.</string
                 <item>
                   <widget class="QLabel" name="m_qlabelAccount">
                     <property name="text">
-                      <string>Unknown</string>
+                      <string comment="unknown account">Unknown</string>
                     </property>
                     <property name="alignment">
                       <set>Qt::AlignVCenter|Qt::AlignRight</set>

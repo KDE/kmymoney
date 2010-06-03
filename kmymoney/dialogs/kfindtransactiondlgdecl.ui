@@ -490,22 +490,22 @@
                                 <widget class="KComboBox" name="m_stateBox">
                                   <item>
                                     <property name="text">
-                                      <string>All states</string>
+                                      <string comment="@item reconciliation status">All states</string>
                                     </property>
                                   </item>
                                   <item>
                                     <property name="text">
-                                      <string>Not reconciled</string>
+                                      <string comment="@item reconciliation status">Not reconciled</string>
                                     </property>
                                   </item>
                                   <item>
                                     <property name="text">
-                                      <string>Cleared</string>
+                                      <string comment="@item reconciliation status">Cleared</string>
                                     </property>
                                   </item>
                                   <item>
                                     <property name="text">
-                                      <string>Reconciled</string>
+                                      <string comment="@item reconciliation status">Reconciled</string>
                                     </property>
                                   </item>
                                 </widget>
@@ -556,7 +556,7 @@
                               <item row="1" column="0">
                                 <widget class="QLabel" name="TextLabel11">
                                   <property name="text">
-                                    <string>State</string>
+                                    <string comment="@label reconciliation status">State</string>
                                   </property>
                                   <property name="wordWrap">
                                     <bool>false</bool>
@@ -722,7 +722,7 @@
                     </font>
                   </property>
                   <property name="text">
-                    <string>warning</string>
+                    <string></string>
                   </property>
                   <property name="wordWrap">
                     <bool>false</bool>

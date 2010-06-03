@@ -168,7 +168,7 @@ You can choose the file's path, the account and the format of the QIF file (prof
                   <item>
                     <widget class="KPushButton" name="m_profileEditorButton">
                       <property name="text">
-                        <string>New...</string>
+                        <string comment="@action create new export profile">New...</string>
                       </property>
                     </widget>
                   </item>

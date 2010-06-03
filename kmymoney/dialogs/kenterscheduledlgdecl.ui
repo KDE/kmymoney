@@ -46,7 +46,7 @@
                   <font/>
                 </property>
                 <property name="text">
-                  <string>Name:</string>
+                  <string comment="@label schedule name">Name:</string>
                 </property>
                 <property name="wordWrap">
                   <bool>false</bool>

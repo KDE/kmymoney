@@ -585,7 +585,7 @@ Your account is balanced when the Difference is Zero.  Click on the Finish butto
           <item>
             <widget class="QPushButton" name="buttonOk">
               <property name="text">
-                <string>Finish</string>
+                <string comment="@action finish the reconciliation dialog">Finish</string>
               </property>
               <property name="autoDefault">
                 <bool>true</bool>

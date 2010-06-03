@@ -106,7 +106,7 @@ Please enter the path to the QIF file or select it by clicking on the Browse but
       <item row="0" column="2">
        <widget class="KPushButton" name="m_profileEditorButton">
         <property name="text">
-         <string>New...</string>
+         <string comment="@action create new import profile">New...</string>
         </property>
        </widget>
       </item>

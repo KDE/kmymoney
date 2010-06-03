@@ -52,7 +52,7 @@
             <widget class="KTabWidget" name="profileTabs">
               <widget class="QWidget" name="tabGeneral">
                 <attribute name="title">
-                  <string>General</string>
+                  <string comment="@title QIF profile general information">General</string>
                 </attribute>
                 <layout class="QVBoxLayout">
                   <item>
@@ -388,7 +388,7 @@
                       </property>
                       <column>
                         <property name="text">
-                          <string>Field</string>
+                          <string comment="@title header of the QIF field name column">Field</string>
                         </property>
                         <property name="clickable">
                           <bool>false</bool>
@@ -705,7 +705,7 @@
           <item>
             <widget class="KPushButton" name="m_newButton">
               <property name="text">
-                <string>New</string>
+                <string comment="@action create new profile">New</string>
               </property>
             </widget>
           </item>

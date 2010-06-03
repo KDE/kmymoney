@@ -182,7 +182,7 @@
     </rect>
    </property>
    <property name="title">
-    <string>Username</string>
+    <string comment="@label user name of the database">Username</string>
    </property>
    <widget class="KLineEdit" name="textUserName">
     <property name="geometry">

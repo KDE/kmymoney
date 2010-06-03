@@ -58,7 +58,7 @@
           </column>
           <column>
             <property name="text">
-              <string>Feature</string>
+              <string comment="plugin features">Feature</string>
             </property>
             <property name="clickable">
               <bool>true</bool>

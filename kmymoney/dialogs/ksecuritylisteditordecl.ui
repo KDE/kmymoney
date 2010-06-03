@@ -48,7 +48,7 @@
               </column>
               <column>
                 <property name="text">
-                  <string>Name</string>
+                  <string comment="name of the security">Name</string>
                 </property>
                 <property name="clickable">
                   <bool>true</bool>

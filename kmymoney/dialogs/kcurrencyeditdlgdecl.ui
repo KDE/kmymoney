@@ -38,7 +38,7 @@
            </property>
            <column>
             <property name="text">
-             <string>Name</string>
+             <string comment="@title header of the currency name column">Name</string>
             </property>
            </column>
            <column>

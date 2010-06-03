@@ -29,7 +29,7 @@
                   <item>
                     <widget class="QLabel" name="textLabel2">
                       <property name="text">
-                        <string>Name</string>
+                        <string comment="header of the budget name column">Name</string>
                       </property>
                       <property name="wordWrap">
                         <bool>false</bool>

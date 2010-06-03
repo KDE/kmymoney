@@ -795,7 +795,7 @@ How do you want to call this loan? Examples for names are 'car loan', 'school lo
             <item>
               <widget class="QLabel" name="TextLabel5">
                 <property name="text">
-                  <string>Name</string>
+                  <string comment="@label loan name">Name</string>
                 </property>
                 <property name="wordWrap">
                   <bool>false</bool>
@@ -4610,7 +4610,7 @@ This page summarizes the data you entered. If you need to modify anything, pleas
                 <item>
                   <widget class="QGroupBox" name="GroupBox3">
                     <property name="title">
-                      <string>General</string>
+                      <string comment="@title loan general information">General</string>
                     </property>
                     <layout class="QVBoxLayout">
                       <property name="margin">

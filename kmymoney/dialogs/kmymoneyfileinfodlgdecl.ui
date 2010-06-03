@@ -35,7 +35,7 @@
      <item row="0" column="1">
       <widget class="QLabel" name="m_creationDate">
        <property name="text">
-        <string>x</string>
+        <string></string>
        </property>
        <property name="wordWrap">
         <bool>false</bool>
@@ -55,7 +55,7 @@
      <item row="1" column="1">
       <widget class="QLabel" name="m_lastModificationDate">
        <property name="text">
-        <string>x</string>
+        <string></string>
        </property>
        <property name="wordWrap">
         <bool>false</bool>
@@ -75,7 +75,7 @@
      <item row="2" column="1">
       <widget class="QLabel" name="m_baseCurrency">
        <property name="text">
-        <string>x</string>
+        <string></string>
        </property>
        <property name="wordWrap">
         <bool>false</bool>
@@ -95,7 +95,7 @@
      <item row="3" column="1">
       <widget class="QLabel" name="m_payeeCount">
        <property name="text">
-        <string>x</string>
+        <string></string>
        </property>
        <property name="wordWrap">
         <bool>false</bool>
@@ -115,7 +115,7 @@
      <item row="4" column="1">
       <widget class="QLabel" name="m_institutionCount">
        <property name="text">
-        <string>x</string>
+        <string></string>
        </property>
        <property name="wordWrap">
         <bool>false</bool>
@@ -135,7 +135,7 @@
      <item row="5" column="1">
       <widget class="QLabel" name="m_accountCount">
        <property name="text">
-        <string>x</string>
+        <string></string>
        </property>
        <property name="wordWrap">
         <bool>false</bool>
@@ -166,7 +166,7 @@
        </column>
        <column>
         <property name="text">
-         <string>Total</string>
+         <string comment="total quantity of accounts">Total</string>
         </property>
         <property name="clickable">
          <bool>false</bool>
@@ -177,7 +177,7 @@
        </column>
        <column>
         <property name="text">
-         <string>Closed</string>
+         <string comment="closed accounts">Closed</string>
         </property>
         <property name="clickable">
          <bool>false</bool>
@@ -201,7 +201,7 @@
      <item row="7" column="1">
       <widget class="QLabel" name="m_transactionCount">
        <property name="text">
-        <string>x</string>
+        <string></string>
        </property>
        <property name="wordWrap">
         <bool>false</bool>
@@ -221,7 +221,7 @@
      <item row="8" column="1">
       <widget class="QLabel" name="m_splitCount">
        <property name="text">
-        <string>x</string>
+        <string></string>
        </property>
        <property name="wordWrap">
         <bool>false</bool>
@@ -241,7 +241,7 @@
      <item row="9" column="1">
       <widget class="QLabel" name="m_scheduleCount">
        <property name="text">
-        <string>x</string>
+        <string></string>
        </property>
        <property name="wordWrap">
         <bool>false</bool>
@@ -261,7 +261,7 @@
      <item row="10" column="1">
       <widget class="QLabel" name="m_priceCount">
        <property name="text">
-        <string>x</string>
+        <string></string>
        </property>
        <property name="wordWrap">
         <bool>false</bool>

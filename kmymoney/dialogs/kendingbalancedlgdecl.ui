@@ -504,7 +504,7 @@ All information you have entered into this wizard will be shown and all transact
     <item>
      <widget class="QLabel" name="m_enterInformationLabel" native="true">
       <property name="text" stdset="0">
-       <string>x</string>
+       <string></string>
       </property>
       <property name="wordWrap">
         <bool>true</bool>
