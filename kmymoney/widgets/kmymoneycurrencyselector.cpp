@@ -119,7 +119,7 @@ void KMyMoneySecuritySelector::update(const QString& id)
         break;
     }
     if ((*it).id() == baseCurrency) {
-      insertItem(itemId, KIcon("account"), display);
+      insertItem(itemId, KIcon("account"), display); //krazy:exclude=iconnames
     } else {
       insertItem(itemId, QIcon(empty), display);
     }

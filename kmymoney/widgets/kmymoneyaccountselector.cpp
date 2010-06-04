@@ -273,7 +273,7 @@ int AccountSet::load(kMyMoneyAccountSelector* selector)
   // create the favorite section first and sort it to the beginning
   key = QString("A%1").arg(i18n("Favorites"));
   m_favorites = selector->newItem(i18n("Favorites"), key);
-  m_favorites->setIcon(0, QIcon(DesktopIcon("account")));
+  m_favorites->setIcon(0, QIcon(DesktopIcon("account")));  //krazy:exclude=iconnames
 
   for (int mask = 0x01; mask != KMyMoneyUtils::last; mask <<= 1) {
     QTreeWidgetItem* item = 0;

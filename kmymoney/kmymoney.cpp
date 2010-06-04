@@ -603,12 +603,12 @@ void KMyMoneyApp::initActions(void)
   // note : action "category_new" is included in this menu but defined below
   KAction *account_open = actionCollection()->addAction("account_open");
   account_open->setText(i18n("Open ledger"));
-  account_open->setIcon(KIcon("ledger"));
+  account_open->setIcon(KIcon("ledger"));     //krazy:exclude=iconnames
   connect(account_open, SIGNAL(triggered()), this, SLOT(slotAccountOpen()));
 
   KAction *account_reconcile = actionCollection()->addAction("account_reconcile");
   account_reconcile->setText(i18n("Reconcile..."));
-  account_reconcile->setIcon(KIcon("reconcile"));
+  account_reconcile->setIcon(KIcon("reconcile"));     //krazy:exclude=iconnames
   account_reconcile->setShortcut(KShortcut("Ctrl+Shift+R"));
   connect(account_reconcile, SIGNAL(triggered()), this, SLOT(slotAccountReconcileStart()));
 

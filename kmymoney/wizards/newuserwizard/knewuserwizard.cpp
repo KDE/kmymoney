@@ -246,7 +246,7 @@ CurrencyPage::CurrencyPage(Wizard* wizard) :
     QTreeWidgetItem* p = insertCurrency(*it);
     if ((*it).id() == baseCurrency) {
       first = p;
-      QIcon icon = static_cast<QIcon>(KIcon("account"));
+      QIcon icon = static_cast<QIcon>(KIcon("account"));  //krazy:exclude=iconnames
       p->setIcon(0, icon);
     } else {
       p->setIcon(0, QIcon());

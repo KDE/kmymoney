@@ -381,7 +381,7 @@ void AccountsModel::load()
     setData(favoriteAccountsItem->index(), favoritesAccountId, AccountIdRole);
     setData(favoriteAccountsItem->index(), 0, DisplayOrderRole);
     favoriteAccountsItem->setColumnCount(columnCount());
-    favoriteAccountsItem->setIcon(QIcon(DesktopIcon("account")));
+    favoriteAccountsItem->setIcon(QIcon(DesktopIcon("account"))); //krazy:exclude=iconnames
     favoriteAccountsItem->setEditable(false);
   }
   setData(favoriteAccountsItem->index(), false, CleanupRole);

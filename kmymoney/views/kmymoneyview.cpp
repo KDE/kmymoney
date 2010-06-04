@@ -158,7 +158,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   // Page 2
   m_accountsView = new KAccountsView();
   m_accountsViewFrame = m_model->addPage(m_accountsView, i18n("Accounts"));
-  m_accountsViewFrame->setIcon(KIcon("account"));
+  m_accountsViewFrame->setIcon(KIcon("account")); //krazy:exclude=iconnames
   m_accountsViewFrame->setHeader(QString(""));
   addTitleBar(m_accountsView, i18n("Accounts"));
 
@@ -216,7 +216,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   // Page 6
   m_ledgerView = new KGlobalLedgerView();
   m_ledgerViewFrame = m_model->addPage(m_ledgerView, i18n("Ledgers"));
-  m_ledgerViewFrame->setIcon(KIcon("ledger"));
+  m_ledgerViewFrame->setIcon(KIcon("ledger"));  //krazy:exclude=iconnames
   m_ledgerViewFrame->setHeader(QString(""));
   connect(m_ledgerView, SIGNAL(accountSelected(const MyMoneyObject&)), kmymoney, SLOT(slotSelectAccount(const MyMoneyObject&)));
   connect(m_ledgerView, SIGNAL(openContextMenu()), kmymoney, SLOT(slotShowTransactionContextMenu()));
