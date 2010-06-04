@@ -49,7 +49,6 @@
 // QT Includes
 
 #include <QPainter>
-#include <Q3Frame>
 #include <QDialog>
 #include <QStyle>
 #include <QToolButton>
@@ -85,7 +84,7 @@
 
 KDatePickerPrivateYearSelector::KDatePickerPrivateYearSelector(
   const KCalendarSystem *cal, const QDate &currentDate, QWidget* parent)
-    : QLineEdit(parent), val(new QIntValidator(this)), result(0)
+    : KLineEdit(parent), val(new QIntValidator(this)), result(0)
 {
   calendar = cal;
   oldDate = currentDate;
@@ -137,7 +136,7 @@ void KDatePickerPrivateYearSelector::setYear(int year)
 
 KDatePickerPrivateWeekSelector::KDatePickerPrivateWeekSelector(
   const KCalendarSystem *cal, const QDate &currentDate, QWidget* parent)
-    : QLineEdit(parent), val(new QIntValidator(this)), result(0)
+    : KLineEdit(parent), val(new QIntValidator(this)), result(0)
 {
   calendar = cal;
   oldDate = currentDate;
@@ -260,7 +259,7 @@ void kMyMoneyCalendar::init(const QDate &dt)
   monthForward->setIcon(QIcon(BarIcon("arrow-right")));
   monthBackward->setIcon(QIcon(BarIcon("arrow-left")));
   setDate(dt); // set button texts
-  connect(table, SIGNAL(dateChanged(QDate)), SLOT(dateChangedSlot(QDate)));
+  connect(table, SIGNAL(dateChanged(const QDate&)), SLOT(dateChangedSlot(const QDate&)));
   connect(table, SIGNAL(tableClicked()), SLOT(tableClickedSlot()));
   connect(monthForward, SIGNAL(clicked()), SLOT(monthForwardClicked()));
   connect(monthBackward, SIGNAL(clicked()), SLOT(monthBackwardClicked()));
@@ -370,7 +369,7 @@ kMyMoneyCalendar::resizeEvent(QResizeEvent*)
 }
 
 void
-kMyMoneyCalendar::dateChangedSlot(QDate date)
+kMyMoneyCalendar::dateChangedSlot(const QDate& date)
 {
   kDebug() << "kMyMoneyCalendar::dateChangedSlot: date changed (" << date.year() << "/" << date.month() << "/" << date.day() << ").";
   line->setText(KGlobal::locale()->formatDate(date, KLocale::ShortDate));
@@ -695,7 +694,7 @@ bool kMyMoneyCalendar::hasCloseButton() const
   return (d->closeButton != 0L);
 }
 
-int kMyMoneyCalendar::weekOfYear(QDate date)
+int kMyMoneyCalendar::weekOfYear(const QDate& date)
 {
   // Calculate ISO 8601 week number (taken from glibc/Gnumeric)
   int year, week, wday, jan1wday, nextjan1wday;

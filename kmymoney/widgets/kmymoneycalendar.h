@@ -50,16 +50,14 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <Q3Frame>
 #include <QDateTime>
 #include <QResizeEvent>
 #include <QEvent>
-#include <QLineEdit>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-
+#include <KLineEdit>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -178,7 +176,7 @@ public:
   void setUserButton2(bool enable, QPushButton* pb);
 
 protected:
-  /// to catch move keyEvents when QLineEdit has keyFocus
+  /// to catch move keyEvents when KLineEdit has keyFocus
   virtual bool eventFilter(QObject *o, QEvent *e);
   /// the resize event
   virtual void resizeEvent(QResizeEvent*);
@@ -197,7 +195,7 @@ protected:
   /// the button for selecting the year directly
   QToolButton *selectYear;
   /// the line edit to enter the date directly
-  QLineEdit *line;
+  KLineEdit *line;
   /// the validator for the line edit:
   KDateValidator *val;
   /// the date table
@@ -208,7 +206,7 @@ protected:
   QSize maxMonthRect;
 
 protected slots:
-  void dateChangedSlot(QDate);
+  void dateChangedSlot(const QDate&);
   void tableClickedSlot();
   void monthForwardClicked();
   void monthBackwardClicked();
@@ -231,19 +229,19 @@ signals:
    *  selected.
    *  @see dateSelected
    */
-  void dateChanged(QDate);
+  void dateChanged(const QDate&);
   /** This signal is emitted each time a day has been selected by
    *  clicking on the table (hitting a day in the current month). It
    *  has the same meaning as dateSelected() in older versions of
    *  KDatePicker.
    */
-  void dateSelected(QDate);
+  void dateSelected(const QDate&);
   /** This signal is emitted when enter is pressed and a VALID date
    *  has been entered before into the line edit. Connect to both
    *  dateEntered() and dateSelected() to receive all events where the
    *  user really enters a date.
    */
-  void dateEntered(QDate);
+  void dateEntered(const QDate&);
   /** This signal is emitted when the day has been selected by
    *  clicking on it in the table.
    */
@@ -261,13 +259,13 @@ private:
   class kMyMoneyCalendarPrivate;
   kMyMoneyCalendarPrivate* const d;
   // calculate ISO 8601 week number
-  int weekOfYear(QDate);
+  int weekOfYear(const QDate&);
 
 #define MONTH_NAME(a,b,c)  KGlobal::locale()->calendar()->monthName(a,b,c)
 };
 
 //taken from kdatepicker_p.h until kmymoneycalendar is ported to not duplicate KDE code
-class KDatePickerPrivateYearSelector : public QLineEdit
+class KDatePickerPrivateYearSelector : public KLineEdit
 {
   Q_OBJECT
 
@@ -293,7 +291,7 @@ private:
   Q_DISABLE_COPY(KDatePickerPrivateYearSelector)
 };
 
-class KDatePickerPrivateWeekSelector : public QLineEdit
+class KDatePickerPrivateWeekSelector : public KLineEdit
 {
   Q_OBJECT
 
