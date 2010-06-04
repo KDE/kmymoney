@@ -18,7 +18,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QTextBrowser" name="label">
+    <widget class="KTextBrowser" name="label">
      <property name="frameShape">
       <enum>QFrame::Panel</enum>
      </property>
