@@ -12,9 +12,8 @@
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME ""
 
-
-/* define if you have atoll */
-#cmakedefine HAVE_ATOLL 1
+/* define if you have long double */
+#cmakedefine HAVE_SIZEOF_LONG_DOUBLE
 
 /* Define to 1 if you have the <Carbon/Carbon.h> header file. */
 #cmakedefine HAVE_CARBON_CARBON_H
@@ -138,6 +137,9 @@
 
 /* The size of `unsigned long', as computed by sizeof. */
 #cmakedefine SIZEOF_UNSIGNED_LONG @SIZEOF_UNSIGNED_LONG@
+
+/* The size of `long double', as computed by sizeof. */
+#cmakedefine SIZEOF_LONG_DOUBLE @SIZEOF_LONG_DOUBLE@
 
 /* Define to 1 if you have the ANSI C header files. */
 #cmakedefine STDC_HEADERS 1

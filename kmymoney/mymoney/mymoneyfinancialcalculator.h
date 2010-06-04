@@ -39,15 +39,8 @@
 
 #include <kmm_mymoney_export.h>
 
-#ifdef _GLIBCPP_HAVE_MODFL
-#define HAVE_LONG_DOUBLE  1
-#endif
 
-#ifndef HAVE_LONG_DOUBLE
-#define HAVE_LONG_DOUBLE  0
-#endif
-
-#if HAVE_LONG_DOUBLE
+#ifdef SIZEOF_LONG_DOUBLE
 #define FCALC_DOUBLE  long double
 #else
 #define FCALC_DOUBLE  double

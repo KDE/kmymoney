@@ -47,12 +47,12 @@ FCALC_DOUBLE MyMoneyFinancialCalculator::rnd(const FCALC_DOUBLE x) const
   FCALC_DOUBLE r, f;
 
   if (m_prec > 0) {
-#ifdef HAVE_ROUND
+#ifdef HAVE_ROUND               //krazy:exclude=cpp
     f = powl(10.0, m_prec);
     r = roundl(x * f) / f;
 #else
     char  buf[50];
-#if HAVE_LONG_DOUBLE
+#ifdef SIZEOF_LONG_DOUBLE
     sprintf(buf, "%.*Lf", m_prec, x);
     sscanf(buf, "%Lf", &r);
 #else

@@ -717,7 +717,7 @@ const MyMoneyMoney MyMoneyMoney::convert(const signed64 _denom, const roundingMe
           break;
 
         case RndNever:
-#if HAVE_LONG_DOUBLE
+#ifdef SIZEOF_LONG_DOUBLE
           qWarning("MyMoneyMoney: have remainder \"%Ld/%Ld\"->convert(%Ld, %d)",
                    m_num, m_denom, _denom, how);
 #else

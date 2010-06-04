@@ -23,7 +23,7 @@
 /* required for Q_UNUSED( ) */
 #include <qglobal.h>
 
-#ifdef HAVE_LIBCPPUNIT
+#ifdef HAVE_LIBCPPUNIT  //krazy:exclude=cpp
 
 #include <kcmdlineargs.h>
 #include <kapplication.h>
@@ -101,7 +101,7 @@ int main(int testargc, char** testargv)
 {
   int rc = 0;
 
-#ifdef HAVE_LIBCPPUNIT
+#ifdef HAVE_LIBCPPUNIT      //krazy:exclude=cpp
 
   // we seem to need a KApplication object to use KGlobal::locale()
 #ifdef PERFORM_ONLINE_TESTS

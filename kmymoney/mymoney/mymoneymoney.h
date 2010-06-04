@@ -22,21 +22,7 @@
 #include <config-kmymoney.h>
 #endif
 
-#ifndef HAVE_ATOLL
-#  ifdef HAVE_STRTOLL
-#    define atoll(a) strtoll(a, 0, 10)
-#  endif
-#endif
-
 #include <cmath>
-
-#ifdef _GLIBCPP_HAVE_MODFL
-#define HAVE_LONG_DOUBLE  1
-#endif
-
-#ifndef HAVE_LONG_DOUBLE
-#define HAVE_LONG_DOUBLE  0
-#endif
 
 // So we can save this object
 #include <QChar>
@@ -105,7 +91,7 @@ public:
   explicit MyMoneyMoney(const QString& pszAmount);
   explicit MyMoneyMoney(const signed64 Amount, const signed64 denom = 100);
   explicit MyMoneyMoney(const double dAmount, const signed64 denom = 100);
-#if HAVE_LONG_DOUBLE
+#ifdef SIZEOF_LONG_DOUBLE
   explicit MyMoneyMoney(const long double dAmount, const signed64 denom = 100);
 #endif
 
@@ -312,7 +298,7 @@ inline MyMoneyMoney::MyMoneyMoney(const double dAmount, const signed64 denom)
   m_num = (signed64)(dAmount * (double)m_denom + adj);
 }
 
-#if HAVE_LONG_DOUBLE
+#ifdef SIZEOF_LONG_DOUBLE
 ////////////////////////////////////////////////////////////////////////////////
 //      Name: MyMoneyMoney
 //   Purpose: Constructor - constructs object from an amount in a long double value
