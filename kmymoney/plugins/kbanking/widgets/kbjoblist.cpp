@@ -24,14 +24,15 @@
 # include <config-kmymoney.h>
 #endif
 
+#include "kbjoblist.h"
+#include <assert.h>
+
 #include <QString>
 #include <QWidget>
 #include <QHeaderView>
 
 #include <KLocale>
 
-#include "kbjoblist.h"
-#include <assert.h>
 
 
 KBJobListViewItem::KBJobListViewItem(KBJobListView *parent,
