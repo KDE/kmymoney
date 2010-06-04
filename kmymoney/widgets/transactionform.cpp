@@ -305,7 +305,7 @@ void TransactionForm::slotActionSelected(int id)
 void TransactionForm::setupForm(const MyMoneyAccount& acc)
 {
   bool blocked = m_tabBar->blockSignals(true);
-  
+
   // remove all tabs from the tabbar
   while (m_tabBar->count())
     m_tabBar->removeTab(0);

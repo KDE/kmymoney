@@ -52,13 +52,13 @@ protected:
     * make sure that a date can be entered again
     */
   virtual void keyPressEvent(QKeyEvent* k);
-  
+
   /** reimplemented for internal reasons */
   virtual bool event(QEvent* e);
-  
+
   /** reimplemented for internal reasons */
   virtual bool focusNextPrevChild(bool next);
-  
+
   /** reimplemented for internal reasons */
   virtual void focusInEvent(QFocusEvent *event);
 

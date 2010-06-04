@@ -69,7 +69,7 @@ void KMyMoneyDateEdit::keyPressEvent(QKeyEvent* k)
   QDateEdit::keyPressEvent(k);
 }
 
-void KMyMoneyDateEdit::focusInEvent( QFocusEvent * event ) 
+void KMyMoneyDateEdit::focusInEvent(QFocusEvent * event)
 {
   QDateEdit::focusInEvent(event);
   setSelectedSection(QDateTimeEdit::DaySection);
