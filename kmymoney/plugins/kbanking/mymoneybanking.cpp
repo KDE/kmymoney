@@ -37,20 +37,20 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
-#include <kmessagebox.h>
-#include <kgenericfactory.h>
-#include <kaction.h>
-#include <kactioncollection.h>
-#include <kglobal.h>
-#include <kstandarddirs.h>
-#include <kmenu.h>
-#include <kiconloader.h>
-#include <kguiitem.h>
-#include <klineedit.h>
-#include <keditlistbox.h>
-#include <kcombobox.h>
-#include <kconfig.h>
+#include <KLocale>
+#include <KMessageBox>
+#include <KGenericFactory>
+#include <KAction>
+#include <KActionCollection>
+#include <KGlobal>
+#include <KStandardDirs>
+#include <KMenu>
+#include <KIconLoader>
+#include <KGuiItem>
+#include <KLineEdit>
+#include <KEditListBox>
+#include <KComboBox>
+#include <KConfig>
 
 // ----------------------------------------------------------------------------
 // Library Includes
@@ -430,15 +430,13 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
     ba = AB_BANKING_GETACCOUNTBYALIAS(m_kbanking->getCInterface(), acc.id().toUtf8().data());
     if (!ba) {
       KMessageBox::error(0,
-                            i18n("<qt>"
-                                 "<p>"
-                                 "The given application account <b>%1</b> "
-                                 "has not been mapped to an online "
-                                 "account."
-                                 "</p>"
-                                 "</qt>",
-                                 acc.name()),
-                            i18n("Account Not Mapped"));
+                         i18n("<qt>"
+                              "The given application account <b>%1</b> "
+                              "has not been mapped to an online "
+                              "account."
+                              "</qt>",
+                              acc.name()),
+                         i18n("Account Not Mapped"));
       // clear the connection between the KMyMoney account
       // and the AqBanking equivalent
       setupAccountReference(acc, 0);
@@ -454,11 +452,11 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
         if (rv) {
           DBG_ERROR(0, "Job \"GetTransactions\" is not available (%d)", rv);
           KMessageBox::error(0,
-                                i18n("<qt>"
-                                     "The update job is not supported by the "
-                                     "bank/account/backend.\n"
-                                     "</qt>"),
-                                i18n("Job not Available"));
+                             i18n("<qt>"
+                                  "The update job is not supported by the "
+                                  "bank/account/backend.\n"
+                                  "</qt>"),
+                             i18n("Job not Available"));
           AB_Job_free(job);
           job = 0;
         }
@@ -532,10 +530,10 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
           if (rv) {
             DBG_ERROR(0, "Error %d", rv);
             KMessageBox::error(0,
-                                  i18n("<qt>"
-                                       "Could not enqueue the job.\n"
-                                       "</qt>"),
-                                  i18n("Error"));
+                               i18n("<qt>"
+                                    "Could not enqueue the job.\n"
+                                    "</qt>"),
+                               i18n("Error"));
           }
         }
       }
@@ -552,10 +550,10 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
       if (rv) {
         DBG_ERROR(0, "Error %d", rv);
         KMessageBox::error(0,
-                              i18n("<qt>"
-                                   "Could not enqueue the job.\n"
-                                   "</qt>"),
-                              i18n("Error"));
+                           i18n("<qt>"
+                                "Could not enqueue the job.\n"
+                                "</qt>"),
+                           i18n("Error"));
       }
     }
 
@@ -974,8 +972,8 @@ bool KMyMoneyBanking::importAccountInfo(AB_IMEXPORTER_ACCOUNTINFO *ai,
   // import them
   if (!m_parent->importStatement(ks)) {
     if (KMessageBox::warningYesNo(0,
-                              i18n("Error importing statement. Do you want to continue?"),
-                              i18n("Critical Error")) == KMessageBox::No) {
+                                  i18n("Error importing statement. Do you want to continue?"),
+                                  i18n("Critical Error")) == KMessageBox::No) {
       DBG_ERROR(0, "User aborted");
       return false;
     }

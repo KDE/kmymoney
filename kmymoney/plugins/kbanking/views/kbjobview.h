@@ -1,6 +1,7 @@
 /***************************************************************************
  *   Copyright 2009  Cristian Onet onet.cristian@gmail.com                 *
  *   Copyright 2004  Martin Preuss aquamaniac@users.sourceforge.net        *
+ *   Copyright 2010  Thomas Baumgart ipwizard@users.sourceforge.net        *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License as        *
@@ -18,6 +19,7 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>  *
  ***************************************************************************/
+
 #ifndef KBANKING_KBJOBVIEW_H
 #define KBANKING_KBJOBVIEW_H
 
@@ -44,12 +46,9 @@ public:
   bool init();
   bool fini();
 
-protected:
-  //void resizeEvent(QResizeEvent *e);
-
 private:
-  KBanking *_app;
-  KBJobListView *_jobList;
+  KBanking *m_app;
+  KBJobListView *m_jobList;
 
 protected slots:
   void slotQueueUpdated();

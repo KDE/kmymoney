@@ -1,6 +1,7 @@
 /***************************************************************************
  *   Copyright 2009  Cristian Onet onet.cristian@gmail.com                 *
  *   Copyright 2004  Martin Preuss aquamaniac@users.sourceforge.net        *
+ *   Copyright 2010  Thomas Baumgart ipwizard@users.sourceforge.net        *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License as        *
@@ -18,21 +19,24 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>  *
  ***************************************************************************/
+
 #ifdef HAVE_CONFIG_H
 # include <config-kmymoney.h>
 #endif
 
+#include <QString>
+#include <QWidget>
+#include <QHeaderView>
+
+#include <KLocale>
 
 #include "kbjoblist.h"
 #include <assert.h>
-#include <QString>
-#include <QWidget>
-#include <KLocale>
 
 
 KBJobListViewItem::KBJobListViewItem(KBJobListView *parent,
                                      AB_JOB *j)
-    : K3ListViewItem(parent)
+    : QTreeWidgetItem(parent)
     , _job(j)
 {
   assert(j);
@@ -42,7 +46,7 @@ KBJobListViewItem::KBJobListViewItem(KBJobListView *parent,
 
 
 KBJobListViewItem::KBJobListViewItem(const KBJobListViewItem &item)
-    : K3ListViewItem(item)
+    : QTreeWidgetItem(item)
     , _job(0)
 {
 
@@ -50,19 +54,6 @@ KBJobListViewItem::KBJobListViewItem(const KBJobListViewItem &item)
     _job = item._job;
   }
 }
-
-
-KBJobListViewItem::KBJobListViewItem(KBJobListView *parent,
-                                     K3ListViewItem *after,
-                                     AB_JOB *j)
-    : K3ListViewItem(parent, after)
-    , _job(j)
-{
-  assert(j);
-  _populate();
-}
-
-
 
 KBJobListViewItem::~KBJobListViewItem()
 {
@@ -86,8 +77,6 @@ void KBJobListViewItem::_populate()
   assert(_job);
 
   i = 0;
-
-  fprintf(stderr, "Populating...\n");
 
   a = AB_Job_GetAccount(_job);
   assert(a);
@@ -184,17 +173,19 @@ void KBJobListViewItem::_populate()
 
 
 KBJobListView::KBJobListView(QWidget *parent)
-    : K3ListView(parent)
+    : QTreeWidget(parent)
 {
+  setColumnCount(7);
   setAllColumnsShowFocus(true);
-  setShowSortIndicator(true);
-  addColumn(i18n("Job Id"), -1);
-  addColumn(i18n("Job Type"), -1);
-  addColumn(i18n("Institute"), -1);
-  addColumn(i18n("Account"), -1);
-  addColumn(i18n("Status"), -1);
-  addColumn(i18n("Backend"), -1);
-  addColumn(i18n("Application"), -1);
+  setHeaderLabels(QStringList() << i18n("Job Id")
+                  << i18n("Job Type")
+                  << i18n("Institute")
+                  << i18n("Account")
+                  << i18n("Status")
+                  << i18n("Backend")
+                  << i18n("Application"));
+
+  header()->setSortIndicatorShown(true);
 }
 
 
@@ -207,9 +198,7 @@ KBJobListView::~KBJobListView()
 
 void KBJobListView::addJob(AB_JOB *j)
 {
-  KBJobListViewItem *entry;
-
-  entry = new KBJobListViewItem(this, j);
+  new KBJobListViewItem(this, j);
 }
 
 
@@ -218,12 +207,8 @@ void KBJobListView::addJobs(const std::list<AB_JOB*> &js)
 {
   std::list<AB_JOB*>::const_iterator it;
 
-  fprintf(stderr, "Adding jobs...\n");
   for (it = js.begin(); it != js.end(); ++it) {
-    KBJobListViewItem *entry;
-
-    fprintf(stderr, "Adding job...\n");
-    entry = new KBJobListViewItem(this, *it);
+    new KBJobListViewItem(this, *it);
   } /* for */
 }
 
@@ -247,16 +232,13 @@ std::list<AB_JOB*> KBJobListView::getSelectedJobs()
 {
   std::list<AB_JOB*> js;
   KBJobListViewItem *entry;
-
   // Create an iterator and give the listview as argument
-  Q3ListViewItemIterator it(this);
-  // iterate through all items of the listview
-  for (; it.current(); ++it) {
-    if (it.current()->isSelected()) {
-      entry = dynamic_cast<KBJobListViewItem*>(it.current());
-      if (entry)
-        js.push_back(entry->getJob());
-    }
+  QTreeWidgetItemIterator it(this, QTreeWidgetItemIterator::Selected);
+  // iterate through all selected items of the listview
+  for (; *it; ++it) {
+    entry = dynamic_cast<KBJobListViewItem*>(*it);
+    if (entry)
+      js.push_back(entry->getJob());
   } // for
 
   return js;

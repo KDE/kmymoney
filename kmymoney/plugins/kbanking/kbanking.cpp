@@ -31,16 +31,15 @@
 #include <QInputDialog>
 #include <QApplication>
 #include <QDateTime>
+#include <QWidget>
 
 #include <gwenhywfar/debug.h>
 #include <gwenhywfar/text.h>
 
-#include <QWidget>
-
 KBanking::KBanking(const char *appname,
-                   const char *cfgDir)
-    : QBanking(appname, cfgDir)
-    , _jobQueue(NULL)
+                   const char *cfgDir) :
+    QBanking(appname, cfgDir),
+    _jobQueue(NULL)
 {
 }
 
@@ -69,32 +68,6 @@ int KBanking::init()
 
   _jobQueue = AB_Job_List2_new();
 
-#if AQB_IS_VERSION(4,0,0,2)
-  /* since 4.0.0.2 the class QBGui does certificate handling itself */
-#else
-  GWEN_DB_NODE *dbCerts = 0;
-# if AQB_IS_VERSION(3,9,0,0)
-  rv = lockSharedConfig("certs", 0);
-  if (rv < 0) {
-    fprintf(stderr, "Could not lock certificate db (%d).\n", rv);
-  } else {
-    rv = loadSharedConfig("certs", &dbCerts, 0);
-    if (rv < 0) {
-      fprintf(stderr, "Could not load certificates (%d).\n", rv);
-    }
-    rv = unlockSharedConfig("certs", 0);
-    if (rv < 0) {
-      fprintf(stderr, "Could not unlock certificate db (%d).\n", rv);
-    }
-  }
-# else
-  dbCerts = AB_Banking_GetSharedData(getCInterface(), "certs");
-# endif
-
-  if (dbCerts)
-    getGui()->setDbCerts(GWEN_DB_Group_dup(dbCerts));
-#endif
-
   return 0;
 }
 
@@ -108,41 +81,6 @@ int KBanking::fini()
     AB_Job_List2_FreeAll(_jobQueue);
     _jobQueue = NULL;
   }
-
-#if AQB_IS_VERSION(4,0,0,2)
-  /* since 4.0.0.2 the class QBGui does certificate handling itself */
-#else
-  GWEN_DB_NODE *dbCerts = 0;
-  dbCerts = getGui()->getDbCerts();
-# if AQB_IS_VERSION(3,9,0,0)
-  if (dbCerts) {
-    rv = lockSharedConfig("certs", 0);
-    if (rv < 0) {
-      fprintf(stderr, "Could not lock certificate db (%d).\n", rv);
-    } else {
-      rv = saveSharedConfig("certs", dbCerts, 0);
-      if (rv < 0) {
-        fprintf(stderr, "Could not load certificates (%d).\n", rv);
-      }
-      rv = unlockSharedConfig("certs", 0);
-      if (rv < 0) {
-        fprintf(stderr, "Could not unlock certificate db (%d).\n", rv);
-      }
-    }
-  }
-# else
-  GWEN_DB_NODE *db2;
-  db2 = AB_Banking_GetSharedData(getCInterface(), "certs");
-  if (db2) {
-
-    dbCerts = getGui()->getDbCerts();
-    if (dbCerts) {
-      GWEN_DB_ClearGroup(db2, 0);
-      GWEN_DB_AddGroupChildren(db2, dbCerts);
-    }
-  }
-# endif
-#endif
 
   rv = onlineFini();
   if (rv) {

@@ -1,6 +1,7 @@
 /***************************************************************************
  *   Copyright 2009  Cristian Onet onet.cristian@gmail.com                 *
  *   Copyright 2004  Martin Preuss aquamaniac@users.sourceforge.net        *
+ *   Copyright 2010  Thomas Baumgart ipwizard@users.sourceforge.net        *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License as        *
@@ -22,7 +23,7 @@
 #define AQHBCI_KBJOBLIST_H
 
 
-#include <k3listview.h>
+#include <QTreeWidget>
 #include <aqbanking/job.h>
 
 #include <list>
@@ -32,7 +33,7 @@ class KBJobListView;
 class KBJobListViewItem;
 
 
-class KBJobListViewItem: public K3ListViewItem
+class KBJobListViewItem: public QTreeWidgetItem
 {
 private:
   AB_JOB *_job;
@@ -41,9 +42,6 @@ private:
 
 public:
   KBJobListViewItem(KBJobListView *parent, AB_JOB *j);
-  KBJobListViewItem(KBJobListView *parent,
-                    K3ListViewItem *after,
-                    AB_JOB *j);
   KBJobListViewItem(const KBJobListViewItem &item);
 
   virtual ~KBJobListViewItem();
@@ -53,7 +51,7 @@ public:
 
 
 
-class KBJobListView: public K3ListView
+class KBJobListView: public QTreeWidget
 {
 private:
 public:
@@ -65,7 +63,6 @@ public:
 
   AB_JOB *getCurrentJob();
   std::list<AB_JOB*> getSelectedJobs();
-
 };
 
 

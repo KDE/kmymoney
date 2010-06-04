@@ -1,6 +1,7 @@
 /***************************************************************************
- *   Copyright 2009  Cristian Onet onet.cristian@gmail.com                 *
  *   Copyright 2004  Martin Preuss aquamaniac@users.sourceforge.net        *
+ *   Copyright 2009  Cristian Onet onet.cristian@gmail.com                 *
+ *   Copyright 2010  Thomas Baumgart ipwizard@users.sourceforge.net        *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License as        *
@@ -30,12 +31,12 @@
 #include <QToolTip>
 #include <QHBoxLayout>
 
-#include <kpushbutton.h>
-#include <kguiitem.h>
-#include <klocale.h>
-#include <kglobal.h>
-#include <kiconloader.h>
-#include <kmessagebox.h>
+#include <KPushButton>
+#include <KGuiItem>
+#include <KLocale>
+#include <KGlobal>
+#include <KIconLoader>
+#include <KMessageBox>
 
 #include "kbanking.h"
 #include <aqbanking/jobgetbalance.h>
@@ -44,14 +45,12 @@
 #include <gwenhywfar/debug.h>
 
 
-#define BUTTON_WIDTH 110
-
-
 KBJobView::KBJobView(KBanking *kb,
                      QWidget* parent,
                      const char* name,
-                     Qt::WFlags fl)
-    : QWidget(parent, fl), _app(kb)
+                     Qt::WFlags fl) :
+    QWidget(parent, fl),
+    m_app(kb)
 {
   assert(kb);
   setObjectName(name);
@@ -62,16 +61,16 @@ KBJobView::KBJobView(KBanking *kb,
   QBoxLayout *jobBoxLayout = new QHBoxLayout(jobBox);
   jobBoxLayout->setAlignment(Qt::AlignTop);
 
-  _jobList = new KBJobListView(jobBox);
-  jobBoxLayout->addWidget(_jobList);
+  m_jobList = new KBJobListView(jobBox);
+  jobBoxLayout->addWidget(m_jobList);
 
-  QObject::connect(_app->flagStaff(), SIGNAL(signalQueueUpdated()),
+  QObject::connect(m_app->flagStaff(), SIGNAL(signalQueueUpdated()),
                    this, SLOT(slotQueueUpdated()));
   QObject::connect(executeButton, SIGNAL(clicked()),
                    this, SLOT(slotExecute()));
   QObject::connect(dequeueButton, SIGNAL(clicked()),
                    this, SLOT(slotDequeue()));
-  connect(_jobList, SIGNAL(selectionChanged()),
+  connect(m_jobList, SIGNAL(itemSelectionChanged()),
           this, SLOT(slotSelectionChanged()));
 
   // add some icons to the buttons
@@ -89,6 +88,9 @@ KBJobView::KBJobView(KBanking *kb,
   executeButton->setGuiItem(executeItem);
   dequeueButton->setToolTip(dequeueItem.toolTip());
   executeButton->setToolTip(executeItem.toolTip());
+
+  dequeueButton->setEnabled(false);
+  executeButton->setEnabled(false);
 }
 
 
@@ -99,31 +101,14 @@ KBJobView::~KBJobView()
 
 void KBJobView::slotSelectionChanged(void)
 {
-  dequeueButton->setEnabled(_jobList->selectedItem() != 0);
+  dequeueButton->setEnabled(false);
+  if (m_jobList->currentItem())
+    dequeueButton->setEnabled(m_jobList->currentItem()->isSelected() != 0);
 }
 
 bool KBJobView::init()
 {
-#if !AQB_IS_VERSION(3,9,0,0)
-  GWEN_DB_NODE *db;
-  db = _app->getAppData();
-  assert(db);
-  db = GWEN_DB_GetGroup(db, GWEN_PATH_FLAGS_NAMEMUSTEXIST,
-                        "gui/views/jobview");
-  if (db) {
-    int i, j;
-
-    /* found settings */
-    for (i = 0; i < _jobList->columns(); i++) {
-      _jobList->setColumnWidthMode(i, Q3ListView::Manual);
-      j = GWEN_DB_GetIntValue(db, "columns", i, -1);
-      if (j != -1)
-        _jobList->setColumnWidth(i, j);
-    } /* for */
-  } /* if settings */
-#endif
-  _jobList->addJobs(_app->getEnqueuedJobs());
-
+  slotQueueUpdated();
   return true;
 }
 
@@ -131,20 +116,6 @@ bool KBJobView::init()
 
 bool KBJobView::fini()
 {
-#if !AQB_IS_VERSION(3,9,0,0)
-  GWEN_DB_NODE *db;
-  int i, j;
-
-  db = _app->getAppData();
-  assert(db);
-  assert(db);
-  GWEN_DB_ClearGroup(db, "gui/views/jobview");
-  for (i = 0; i < _jobList->columns(); ++i) {
-    j = _jobList->columnWidth(i);
-    GWEN_DB_SetIntValue(db, GWEN_DB_FLAGS_DEFAULT,
-                        "gui/views/jobview/columns", j);
-  } /* for */
-#endif
   return true;
 }
 
@@ -152,56 +123,51 @@ bool KBJobView::fini()
 void KBJobView::slotQueueUpdated()
 {
   DBG_NOTICE(0, "Job queue updated");
-  _jobList->clear();
+  m_jobList->clear();
   std::list<AB_JOB*> jl;
-  jl = _app->getEnqueuedJobs();
-  _jobList->addJobs(jl);
+  jl = m_app->getEnqueuedJobs();
+  m_jobList->addJobs(jl);
   executeButton->setEnabled(jl.size() > 0);
-  if (jl.size() == 0)
-    dequeueButton->setDisabled(true);
+  slotSelectionChanged();
 }
 
 
 
 void KBJobView::slotExecute()
 {
-  std::list<AB_JOB*> jl;
-  int rv;
-  bool updated;
-  AB_IMEXPORTER_CONTEXT *ctx;
-
-  updated = false;
-  jl = _app->getEnqueuedJobs();
-  if (jl.size() == 0) {
+  if (m_app->getEnqueuedJobs().size() == 0) {
     KMessageBox::warningContinueCancel(this,
-                                       tr("No Jobs"),
-                                       tr("There are no jobs in the queue."));
+                                       i18nc("Warning message", "There are no jobs in the queue."),
+                                       i18nc("Message title", "No Jobs"));
     return;
   }
 
   DBG_NOTICE(0, "Executing queue");
+
+  AB_IMEXPORTER_CONTEXT *ctx;
   ctx = AB_ImExporterContext_new();
-  rv = _app->executeQueue(ctx);
-  if (!rv)
-    _app->importContext(ctx, 0);
+
+  int rv = m_app->executeQueue(ctx);
+  if (rv == 0)
+    m_app->importContext(ctx, 0);
   else {
     DBG_ERROR(0, "Error: %d", rv);
   }
   AB_ImExporterContext_free(ctx);
 
   // let App emit signals to inform account views
-  _app->accountsUpdated();
+  m_app->accountsUpdated();
 }
 
 
 
 void KBJobView::slotDequeue()
 {
-  KBJobListViewItem* p = dynamic_cast<KBJobListViewItem*>(_jobList->selectedItem());
-  if (p) {
+  KBJobListViewItem* p = dynamic_cast<KBJobListViewItem*>(m_jobList->currentItem());
+  if (p && p->isSelected()) {
     AB_JOB* job = p->getJob();
     if (job) {
-      _app->dequeueJob(job);
+      m_app->dequeueJob(job);
     }
   }
 }
