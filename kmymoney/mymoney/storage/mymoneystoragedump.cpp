@@ -301,7 +301,7 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storag
       s << "  Enddate   = " << (*it_s).endDate().toString(Qt::ISODate) << "\n";
     else
       s << "  Enddate   = not specified\n";
-    s << "  Occurence = " << (*it_s).occurrenceToString() << "\n";
+    s << "  Occurence = " << (*it_s).occurrenceToString() << "\n"; // krazy:exclude=spelling
     s << "  OccurenceMultiplier = " << (*it_s).occurrenceMultiplier() << "\n";
     s << "  Type = " << MyMoneySchedule::scheduleTypeToString((*it_s).type()) << "\n";
     s << "  Paymenttype = " << MyMoneySchedule::paymentMethodToString((*it_s).paymentType()) << "\n";

@@ -1825,7 +1825,7 @@ void MyMoneyStorageSql::writeSchedule(const MyMoneySchedule& sch, MyMoneySqlQuer
   q.bindValue(":name", sch.name());
   q.bindValue(":type", sch.type());
   q.bindValue(":typeString", MyMoneySchedule::scheduleTypeToString(sch.type()));
-  q.bindValue(":occurence", sch.occurrencePeriod());
+  q.bindValue(":occurence", sch.occurrencePeriod()); // krazy:exclude=spelling
   q.bindValue(":occurenceMultiplier", sch.occurrenceMultiplier());
   q.bindValue(":occurenceString", sch.occurrenceToString());
   q.bindValue(":paymentType", sch.paymentType());
@@ -3353,7 +3353,7 @@ const QMap<QString, MyMoneySchedule> MyMoneyStorageSql::fetchSchedules(const QSt
   int idCol = t.fieldNumber("id");
   int nameCol = t.fieldNumber("name");
   int typeCol = t.fieldNumber("type");
-  int occurenceCol = t.fieldNumber("occurence");
+  int occurenceCol = t.fieldNumber("occurence"); // krazy:exclude=spelling
   int occurenceMultiplierCol = t.fieldNumber("occurenceMultiplier");
   int paymentTypeCol = t.fieldNumber("paymentType");
   int startDateCol = t.fieldNumber("startDate");

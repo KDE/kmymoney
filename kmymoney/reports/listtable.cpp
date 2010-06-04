@@ -243,7 +243,7 @@ void ListTable::render(QString& result, QString& csv) const
   i18nHeaders["type"] = i18n("Type");
   i18nHeaders["name"] = i18nc("Account name", "Name");
   i18nHeaders["nextduedate"] = i18n("Next Due Date");
-  i18nHeaders["occurence"] = i18n("Occurrence");
+  i18nHeaders["occurence"] = i18n("Occurrence"); // krazy:exclude=spelling
   i18nHeaders["paymenttype"] = i18n("Payment Method");
   i18nHeaders["institution"] = i18n("Institution");
   i18nHeaders["description"] = i18n("Description");

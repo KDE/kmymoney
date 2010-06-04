@@ -89,7 +89,7 @@ MyMoneySchedule::MyMoneySchedule(const QDomElement& node) :
   m_type = static_cast<MyMoneySchedule::typeE>(node.attribute("type").toInt());
   m_paymentType = static_cast<MyMoneySchedule::paymentTypeE>(node.attribute("paymentType").toInt());
   m_occurrence = static_cast<MyMoneySchedule::occurrenceE>(node.attribute("occurence").toInt());
-  m_occurrenceMultiplier = node.attribute("occurenceMultiplier", "1").toInt();
+  m_occurrenceMultiplier = node.attribute("occurenceMultiplier", "1").toInt(); // krazy:exclude=spelling
   // Convert to compound occurrence
   simpleToCompoundOccurrence(m_occurrenceMultiplier, m_occurrence);
   m_autoEnter = static_cast<bool>(node.attribute("autoEnter").toInt());
@@ -765,7 +765,7 @@ void MyMoneySchedule::writeXML(QDomDocument& document, QDomElement& parent) cons
 
   el.setAttribute("name", m_name);
   el.setAttribute("type", m_type);
-  el.setAttribute("occurence", m_occurrence);
+  el.setAttribute("occurence", m_occurrence); // krazy:exclude=spelling
   el.setAttribute("occurenceMultiplier", m_occurrenceMultiplier);
   el.setAttribute("paymentType", m_paymentType);
   el.setAttribute("startDate", dateToString(m_startDate));
