@@ -88,7 +88,7 @@ MyMoneySchedule::MyMoneySchedule(const QDomElement& node) :
 
   m_type = static_cast<MyMoneySchedule::typeE>(node.attribute("type").toInt());
   m_paymentType = static_cast<MyMoneySchedule::paymentTypeE>(node.attribute("paymentType").toInt());
-  m_occurrence = static_cast<MyMoneySchedule::occurrenceE>(node.attribute("occurence").toInt());
+  m_occurrence = static_cast<MyMoneySchedule::occurrenceE>(node.attribute("occurence").toInt()); // krazy:exclude=spelling
   m_occurrenceMultiplier = node.attribute("occurenceMultiplier", "1").toInt(); // krazy:exclude=spelling
   // Convert to compound occurrence
   simpleToCompoundOccurrence(m_occurrenceMultiplier, m_occurrence);
