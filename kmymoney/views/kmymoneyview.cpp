@@ -1919,7 +1919,7 @@ void KMyMoneyView::fixLoanAccount_0(MyMoneyAccount acc)
       || acc.value("schedule").isEmpty()
       || acc.value("fixed-interest").isEmpty()) {
     KMessageBox::information(this,
-                             i18n("<p>The account \"%1\" was previously created as loan account but some information is missing.</p><p>The new loan wizard will be started to collect all relevant information.</p><p>Please use a KMyMoney version >= 0.8.7 and < 0.9 to correct the problem.</p>"
+                             i18n("<p>The account \"%1\" was previously created as loan account but some information is missing.</p><p>The new loan wizard will be started to collect all relevant information.</p><p>Please use KMyMoney version 0.8.7 or later and earlier than version 0.9 to correct the problem.</p>"
                                   , acc.name()),
                              i18n("Account problem"));
 

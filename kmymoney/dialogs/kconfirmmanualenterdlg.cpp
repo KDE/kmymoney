@@ -115,7 +115,7 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
       }
       if (co != cn) {
         noItemsChanged++;
-        messageDetail += i18n("Category changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b><p>", co, cn);
+        messageDetail += i18n("<p>Category changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b></p>", co, cn);
       }
     }
 
@@ -128,7 +128,7 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
       mn = QString("<i>") + i18nc("Empty memo", "empty") + QString("</i>");
     if (mo != mn) {
       noItemsChanged++;
-      messageDetail += i18n("Memo changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b><p>", mo, mn);
+      messageDetail += i18n("<p>Memo changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b></p>", mo, mn);
     }
 
     const MyMoneySecurity& sec = MyMoneyFile::instance()->security(to.commodity());
@@ -137,7 +137,7 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
     an = tn.splits().front().value();
     if (ao != an) {
       noItemsChanged++;
-      messageDetail += i18n("Amount changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b><p>", ao.formatMoney(sec.smallestAccountFraction()), an.formatMoney(sec.smallestAccountFraction()));
+      messageDetail += i18n("<p>Amount changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b></p>", ao.formatMoney(sec.smallestAccountFraction()), an.formatMoney(sec.smallestAccountFraction()));
     }
 
     MyMoneySplit::reconcileFlagE fo, fn;
@@ -145,7 +145,7 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
     fn = tn.splits().front().reconcileFlag();
     if (fo != fn) {
       noItemsChanged++;
-      messageDetail += i18n("Reconciliation flag changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b><p>",    KMyMoneyUtils::reconcileStateToString(fo, true), KMyMoneyUtils::reconcileStateToString(fn, true));
+      messageDetail += i18n("<p>Reconciliation flag changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b></p>",    KMyMoneyUtils::reconcileStateToString(fo, true), KMyMoneyUtils::reconcileStateToString(fn, true));
     }
   } catch (MyMoneyException *e) {
     KMessageBox::error(this, i18n("Fatal error in determining data: ") + e->what());

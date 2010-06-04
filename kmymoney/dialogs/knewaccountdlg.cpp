@@ -198,7 +198,7 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
   typeCombo->setEnabled(true);
 
   // load the price mode combo
-  m_priceMode->insertItem(i18nc("default price mode", "<default>"), 0);
+  m_priceMode->insertItem(i18nc("default price mode", "(default)"), 0);
   m_priceMode->insertItem(i18n("Price per share"), 1);
   m_priceMode->insertItem(i18n("Total for all shares"), 2);
 
@@ -512,7 +512,7 @@ void KNewAccountDlg::okClicked()
 
   if (!m_categoryEditor) {
     QString institutionNameText = m_qcomboboxInstitutions->currentText();
-    if (institutionNameText != i18n("<No Institution>")) {
+    if (institutionNameText != i18n("(No Institution)")) {
       try {
         MyMoneyFile *file = MyMoneyFile::instance();
 
@@ -733,7 +733,7 @@ void KNewAccountDlg::slotLoadInstitutions(const QString& name)
   m_qcomboboxInstitutions->clear();
   QString bic;
   // Are we forcing the user to use institutions?
-  m_qcomboboxInstitutions->addItem(i18n("<No Institution>"));
+  m_qcomboboxInstitutions->addItem(i18n("(No Institution)"));
   m_bicValue->setText(" ");
   ibanEdit->setEnabled(false);
   accountNoEdit->setEnabled(false);
