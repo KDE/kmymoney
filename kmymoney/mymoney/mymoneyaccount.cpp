@@ -23,13 +23,13 @@
 #include <QRegExp>
 #include <QPixmap>
 #include <QPainter>
-#include <kstandarddirs.h>
-#include <kiconloader.h>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <klocale.h>
+#include <kstandarddirs.h>
+#include <kiconloader.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
