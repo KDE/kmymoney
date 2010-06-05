@@ -135,7 +135,7 @@ KPayeesView::KPayeesView(QWidget *parent) :
   m_searchWidget->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed));
   m_payeesList->setContextMenuPolicy(Qt::CustomContextMenu);
 
-  m_listLayout->insertWidget(0, m_searchWidget);
+  m_listLayout->insertWidget(1, m_searchWidget);
 
   KGuiItem newButtonItem(QString(""),
                          KIcon("list-add-user"),
