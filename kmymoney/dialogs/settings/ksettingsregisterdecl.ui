@@ -35,6 +35,16 @@
                 </widget>
               </item>
               <item>
+                <widget class="QCheckBox" name="kcfg_ShowRegisterDetailed">
+                  <property name="text">
+                    <string>Show all register entries in full detail</string>
+                  </property>
+                  <property name="shortcut">
+                    <string/>
+                  </property>
+                </widget>
+              </item>
+              <item>
                 <widget class="QCheckBox" name="kcfg_LedgerLens">
                   <property name="text">
                     <string>Use the ledger lens</string>
