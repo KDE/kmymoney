@@ -202,17 +202,11 @@ private slots:
 
   /**
     * This slot receives the signal from the listview control that an item was right-clicked,
-    * If @p item points to a real payee item, emits openContextMenu().
+    * If @p points to a real payee item, emits openContextMenu().
     *
-    * @param lv pointer to the listview sending the signal
-    * @param item the item on which the cursor resides
     * @param p position of the pointer device
     */
   void slotOpenContextMenu(const QPoint& p);
-
-  void slotQueueUpdate(void);
-
-  void slotActivateUpdate(void);
 
   void slotChooseDefaultAccount(void);
 

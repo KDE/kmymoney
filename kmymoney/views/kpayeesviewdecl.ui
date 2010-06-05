@@ -29,7 +29,7 @@
         <property name="title">
          <string>Your payees</string>
         </property>
-        <layout class="QVBoxLayout" name="listLayout">
+        <layout class="QVBoxLayout" name="m_listLayout">
          <item>
           <layout class="QHBoxLayout">
            <item>

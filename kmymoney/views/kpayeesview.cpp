@@ -135,7 +135,7 @@ KPayeesView::KPayeesView(QWidget *parent) :
   m_searchWidget->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed));
   m_payeesList->setContextMenuPolicy(Qt::CustomContextMenu);
 
-  listLayout->insertWidget(0, m_searchWidget);
+  m_listLayout->insertWidget(0, m_searchWidget);
 
   KGuiItem newButtonItem(QString(""),
                          KIcon("list-add-user"),
@@ -180,7 +180,6 @@ KPayeesView::KPayeesView(QWidget *parent) :
   labelDefaultAccount->setEnabled(false);
   comboDefaultAccount->setEnabled(false);
 
-  //connect(m_payeesList, SIGNAL(itemSelectionChanged()), this, SLOT(slotSelectPayee()));
   connect(m_payeesList, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(slotSelectPayee()));
   connect(m_payeesList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(slotStartRename(QListWidgetItem*)));
   connect(m_payeesList, SIGNAL(itemChanged(QListWidgetItem*)), this, SLOT(slotRenamePayee(QListWidgetItem*)));
@@ -235,21 +234,6 @@ KPayeesView::~KPayeesView()
   KConfigGroup grp = KGlobal::config()->group("Last Use Settings");
   grp.writeEntry("KPayeesViewSplitterSize", m_splitter->sizes());
   grp.sync();
-}
-
-void KPayeesView::slotQueueUpdate(void)
-{
-  m_updatesQueued++;
-  // The K3ListViewSearchLineWidget has an internal timer for update purposes
-  // of 200 ms, so we should be safe with 250 ms here
-  QTimer::singleShot(250, this, SLOT(slotActivateUpdate()));
-}
-
-void KPayeesView::slotActivateUpdate(void)
-{
-  --m_updatesQueued;
-  if (m_updatesQueued == 0)
-    slotSelectPayee();
 }
 
 void KPayeesView::slotChooseDefaultAccount(void)
@@ -717,15 +701,6 @@ void KPayeesView::readConfig(void)
 
 void KPayeesView::showEvent(QShowEvent* event)
 {
-  // since we could not construct the connection in our own ctor,
-  // we set it up now. The widgets of the K3ListViewSearchLineWidget must exist by now.
-  // If you want to learn about the details, see the source of K3ListViewSearchLineWidget's
-  // constructor
-  /*if (m_needConnection) {
-     connect(m_searchWidget->searchLine(), SIGNAL(textChanged(const QString&)), this, SLOT(slotQueueUpdate(void)));
-     m_needConnection = false;
-   }*/
-
   if (m_needReload) {
     loadPayees();
     m_needReload = false;
