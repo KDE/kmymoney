@@ -324,19 +324,19 @@ private:
   void writeReports(void);
   void writeBudgets(void);
 
-  void writeInstitutionList(const QList<MyMoneyInstitution>& iList, MyMoneySqlQuery& q);
-  void writePayee(const MyMoneyPayee& p, MyMoneySqlQuery& q, bool isUserInfo = false);
-  void writeAccountList(const QList<MyMoneyAccount>& accList, MyMoneySqlQuery& q);
-  void writeTransaction(const QString& txId, const MyMoneyTransaction& tx, MyMoneySqlQuery& q, const QString& type);
+  void writeInstitutionList(const QList<MyMoneyInstitution>& iList, QSqlQuery& q);
+  void writePayee(const MyMoneyPayee& p, QSqlQuery& q, bool isUserInfo = false);
+  void writeAccountList(const QList<MyMoneyAccount>& accList, QSqlQuery& q);
+  void writeTransaction(const QString& txId, const MyMoneyTransaction& tx, QSqlQuery& q, const QString& type);
   void writeSplits(const QString& txId, const QString& type, const QList<MyMoneySplit>& splitList);
-  void writeSplitList(const QString& txId, const QList<MyMoneySplit>& splitList, const QString& type, const QList<int>& splitIdList, MyMoneySqlQuery& q);
-  void writeSchedule(const MyMoneySchedule& sch, MyMoneySqlQuery& q, bool insert);
-  void writeSecurity(const MyMoneySecurity& security, MyMoneySqlQuery& q);
+  void writeSplitList(const QString& txId, const QList<MyMoneySplit>& splitList, const QString& type, const QList<int>& splitIdList, QSqlQuery& q);
+  void writeSchedule(const MyMoneySchedule& sch, QSqlQuery& q, bool insert);
+  void writeSecurity(const MyMoneySecurity& security, QSqlQuery& q);
   void writePricePair(const MyMoneyPriceEntries& p);
   void writePrice(const MyMoneyPrice& p);
-  void writeCurrency(const MyMoneySecurity& currency, MyMoneySqlQuery& q);
-  void writeReport(const MyMoneyReport& rep, MyMoneySqlQuery& q);
-  void writeBudget(const MyMoneyBudget& bud, MyMoneySqlQuery& q);
+  void writeCurrency(const MyMoneySecurity& currency, QSqlQuery& q);
+  void writeReport(const MyMoneyReport& rep, QSqlQuery& q);
+  void writeBudget(const MyMoneyBudget& bud, QSqlQuery& q);
   void writeKeyValuePairs(const QString& kvpType, const QVariantList& kvpId, const QList<QMap<QString, QString> >& pairs);
 
   // read routines
@@ -348,7 +348,7 @@ private:
   void readTransaction(const QString id);
   void readTransactions(const QString& tidList = QString(), const QString& dateClause = QString());
   void readTransaction(MyMoneyTransaction &tx, const QString& tid);
-  void readSplit(MyMoneySplit& s, const MyMoneySqlQuery& q) const;
+  void readSplit(MyMoneySplit& s, const QSqlQuery& q) const;
   const MyMoneyKeyValueContainer readKeyValuePairs(const QString& kvpType, const QString& kvpId) const;
   const QHash<QString, MyMoneyKeyValueContainer> readKeyValuePairs(const QString& kvpType, const QStringList& kvpIdList) const;
   void readSchedules(void);
