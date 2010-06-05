@@ -31,6 +31,7 @@
 // KDE Includes
 
 #include <KDialog>
+#include <ktreewidgetsearchline.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -86,6 +87,10 @@ signals:
 private:
   MyMoneySecurity      m_currency;
   bool                 m_currencyInEditing;
+  /**
+    * Search widget for the list
+    */
+  KTreeWidgetSearchLine*  m_searchWidget;
 };
 
 #endif

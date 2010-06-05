@@ -52,7 +52,13 @@ KCurrencyEditDlg::KCurrencyEditDlg(QWidget *parent) :
 {
   setButtons(KDialog::Ok);
   setButtonsOrientation(Qt::Horizontal);
-  setMainWidget(layoutWidget);
+  setMainWidget(m_layoutWidget);
+
+  // create the searchline widget
+  // and insert it into the existing layout
+  m_searchWidget = new KTreeWidgetSearchLine(this, m_currencyList);
+  m_searchWidget->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed));
+  m_listLayout->insertWidget(0, m_searchWidget);
 
   m_currencyList->header()->setStretchLastSection(true);
   m_currencyList->setContextMenuPolicy(Qt::CustomContextMenu);

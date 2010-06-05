@@ -16,12 +16,12 @@
       <height>516</height>
      </rect>
   </property>
-  <widget class="QWidget" name="layoutWidget">
+  <widget class="QWidget" name="m_layoutWidget">
     <layout class="QVBoxLayout">
      <item>
       <layout class="QHBoxLayout">
        <item>
-        <layout class="QVBoxLayout">
+        <layout class="QVBoxLayout" name="m_listLayout">
          <item>
           <widget class="QTreeWidget" name="m_currencyList">
           <property name="sizePolicy">
