@@ -592,7 +592,7 @@ bool KMyMoneyView::readFile(const KUrl& url)
   m_fileOpen = false;
   bool isEncrypted = false;
 
-  IMyMoneyStorageFormat* pReader = NULL;
+  IMyMoneyStorageFormat* pReader = 0;
 
   if (!url.isValid()) {
     qDebug("Invalid URL '%s'", qPrintable(url.url()));
@@ -616,7 +616,7 @@ bool KMyMoneyView::readFile(const KUrl& url)
   if (url.isLocalFile()) {
     filename = url.toLocalFile();
   } else {
-    if (!KIO::NetAccess::download(url, filename, NULL)) {
+    if (!KIO::NetAccess::download(url, filename, 0)) {
       KMessageBox::detailedError(this,
                                  i18n("Error while loading file '%1'.", url.url()),
                                  KIO::NetAccess::lastErrorString(),
@@ -1136,7 +1136,7 @@ bool KMyMoneyView::saveFile(const KUrl& url, const QString& keyList)
   }
 
   emit kmmFilePlugin(preSave);
-  IMyMoneyStorageFormat* pWriter = NULL;
+  IMyMoneyStorageFormat* pWriter = 0;
 
   // If this file ends in ".ANON.XML" then this should be written using the
   // anonymous writer.
@@ -1188,7 +1188,7 @@ bool KMyMoneyView::saveFile(const KUrl& url, const QString& keyList)
       KTemporaryFile tmpfile;
       tmpfile.open(); // to obtain the name
       saveToLocalFile(tmpfile.fileName(), pWriter, plaintext, keyList);
-      if (!KIO::NetAccess::upload(tmpfile.fileName(), url, NULL))
+      if (!KIO::NetAccess::upload(tmpfile.fileName(), url, 0))
         throw new MYMONEYEXCEPTION(i18n("Unable to upload to '%1'", url.url()));
       tmpfile.close();
     }

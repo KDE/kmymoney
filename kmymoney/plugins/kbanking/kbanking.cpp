@@ -39,7 +39,7 @@
 KBanking::KBanking(const char *appname,
                    const char *cfgDir) :
     QBanking(appname, cfgDir),
-    _jobQueue(NULL)
+    _jobQueue(0)
 {
 }
 
@@ -79,7 +79,7 @@ int KBanking::fini()
 
   if (_jobQueue) {
     AB_Job_List2_FreeAll(_jobQueue);
-    _jobQueue = NULL;
+    _jobQueue = 0;
   }
 
   rv = onlineFini();

@@ -262,7 +262,7 @@ void MyMoneyQifProfileEditor::slotLoadProfileFromConfig(const QString& profile)
     m_isDirty = true;
   }
 
-  if (m_profileListBox->findItem(profileName, Q3ListView::ExactMatch | Qt::CaseSensitive) == NULL) {
+  if (m_profileListBox->findItem(profileName, Q3ListView::ExactMatch | Qt::CaseSensitive) == 0) {
     profileName = m_profileListBox->text(0);
   }
 

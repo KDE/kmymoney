@@ -432,7 +432,7 @@ void KEquityPriceUpdateDlg::slotQuoteFailed(const QString& _id, const QString& _
 
   // As long as the user doesn't want to cancel, move on!
   if (result != KMessageBox::Cancel) {
-    Q3ListViewItem* next = NULL;
+    Q3ListViewItem* next = 0;
     prgOnlineProgress->setValue(prgOnlineProgress->value() + 1);
     item->listView()->setSelected(item, false);
 
@@ -458,7 +458,7 @@ void KEquityPriceUpdateDlg::slotQuoteFailed(const QString& _id, const QString& _
 void KEquityPriceUpdateDlg::slotReceivedQuote(const QString& _id, const QString& _symbol, const QDate& _date, const double& _price)
 {
   Q3ListViewItem* item = lvEquityList->findItem(_id, ID_COL, Q3ListView::ExactMatch);
-  Q3ListViewItem* next = NULL;
+  Q3ListViewItem* next = 0;
 
   if (item) {
     if (_price > 0.0f && _date.isValid()) {

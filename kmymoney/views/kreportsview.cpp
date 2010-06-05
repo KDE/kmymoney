@@ -233,7 +233,7 @@ public:
   {
   public:
     FileSaveProperties() {
-      includeCssCheckBox = NULL;
+      includeCssCheckBox = 0;
       cbIsChecked = true;
       filter = "*.csv";
       filtCsv = "*.csv|" + i18nc("CSV (Filefilter)", "CSV files");
@@ -432,7 +432,7 @@ void KReportsView::loadView(void)
 
   KReportGroupListItem* favoritenode = new KReportGroupListItem(m_reportListView, pagenumber++, i18n("Favorite Reports"));
   favoritenode->setOpen(isOpen.find(favoritenode->text(0)) != isOpen.end());
-  KReportGroupListItem* orphannode = NULL;
+  KReportGroupListItem* orphannode = 0;
 
   QList<MyMoneyReport> customreports = MyMoneyFile::instance()->reportList();
   QList<MyMoneyReport>::const_iterator it_report = customreports.constBegin();
@@ -688,7 +688,7 @@ void KReportsView::slotDelete(void)
 void KReportsView::slotOpenReport(const QString& id)
 {
   if (! id.isEmpty()) {
-    KReportTab* page = NULL;
+    KReportTab* page = 0;
     int index = 1;
     while (index < m_reportTabWidget->count()) {
       KReportTab* current = dynamic_cast<KReportTab*>(m_reportTabWidget->widget(index));
@@ -714,7 +714,7 @@ void KReportsView::slotOpenReport(Q3ListViewItem* item)
   KReportListItem *reportItem = dynamic_cast<KReportListItem*>(item);
 
   if (reportItem) {
-    KReportTab* page = NULL;
+    KReportTab* page = 0;
 
     // Find the tab which contains the report indicated by this list item
     int index = 1;
@@ -758,7 +758,7 @@ void KReportsView::slotOpenReport(Q3ListViewItem* item)
 void KReportsView::slotOpenReport(const MyMoneyReport& report)
 {
   kDebug(2) << Q_FUNC_INFO << " " << report.name();
-  KReportTab* page = NULL;
+  KReportTab* page = 0;
 
   // Find the tab which contains the report indicated by this list item
   int index = 1;

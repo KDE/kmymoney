@@ -410,7 +410,7 @@ void MyMoneyStorageXML::readFile(QIODevice* pDevice, IMyMoneySerialize* storage)
 
   if (!reader.parse(&xml, false)) {
     delete m_doc;
-    m_doc = NULL;
+    m_doc = 0;
     signalProgress(-1, -1);
     throw new MYMONEYEXCEPTION("File was not parsable!");
   }
@@ -420,12 +420,12 @@ void MyMoneyStorageXML::readFile(QIODevice* pDevice, IMyMoneySerialize* storage)
     m_storage->rebuildAccountBalances();
 
   delete m_doc;
-  m_doc = NULL;
+  m_doc = 0;
 
   // this seems to be nonsense, but it clears the dirty flag
   // as a side-effect.
   m_storage->setLastModificationDate(m_storage->lastModificationDate());
-  m_storage = NULL;
+  m_storage = 0;
 
   //hides the progress bar.
   signalProgress(-1, -1);
@@ -505,7 +505,7 @@ void MyMoneyStorageXML::writeFile(QIODevice* qf, IMyMoneySerialize* storage)
   stream << m_doc->toString();
 
   delete m_doc;
-  m_doc = NULL;
+  m_doc = 0;
 
   //hides the progress bar.
   signalProgress(-1, -1);
@@ -514,7 +514,7 @@ void MyMoneyStorageXML::writeFile(QIODevice* qf, IMyMoneySerialize* storage)
   // as a side-effect.
   m_storage->setLastModificationDate(m_storage->lastModificationDate());
 
-  m_storage = NULL;
+  m_storage = 0;
 }
 
 bool MyMoneyStorageXML::readFileInformation(const QDomElement& fileInfo)
@@ -542,7 +542,7 @@ bool MyMoneyStorageXML::readFileInformation(const QDomElement& fileInfo)
     rc = false;
   }
   QString strVersion = QStringEmpty(temp.attribute("id"));
-  fileVersionRead = strVersion.toUInt(NULL, 16);
+  fileVersionRead = strVersion.toUInt(0, 16);
 
   temp = findChildElement("FIXVERSION", fileInfo);
   if (temp != QDomElement()) {

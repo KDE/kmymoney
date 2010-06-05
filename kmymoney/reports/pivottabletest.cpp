@@ -1021,7 +1021,7 @@ void PivotTableTest::testHtmlEncoding(void)
 
   QByteArray encoding = KGlobal::locale()->encoding();
 
-  QString html = networth_f.renderHTML(NULL, encoding, filter.name(), false);
+  QString html = networth_f.renderHTML(0, encoding, filter.name(), false);
 
   QRegExp rx("*<meta * charset=" + encoding + "*>*");
   rx.setPatternSyntax(QRegExp::Wildcard);

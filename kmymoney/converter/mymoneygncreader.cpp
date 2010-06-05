@@ -519,9 +519,9 @@ GncPrice::GncPrice()
   static const unsigned int anonClasses[] = {ASIS};
   m_anonClassList = anonClasses;
   for (uint i = 0; i < m_dataElementListCount; i++) m_v.append(QString());
-  m_vpCommodity = NULL;
-  m_vpCurrency = NULL;
-  m_vpPriceDate = NULL;
+  m_vpCommodity = 0;
+  m_vpCurrency = 0;
+  m_vpPriceDate = 0;
 }
 
 GncPrice::~GncPrice()
@@ -594,7 +594,7 @@ GncAccount::GncAccount()
   static const unsigned int anonClasses[] = {ASIS, NXTACC, SUPPRESS, ASIS, ASIS};
   m_anonClassList = anonClasses;
   for (uint i = 0; i < m_dataElementListCount; i++) m_v.append(QString());
-  m_vpCommodity = NULL;
+  m_vpCommodity = 0;
 }
 
 GncAccount::~GncAccount()
@@ -663,8 +663,8 @@ GncTransaction::GncTransaction(bool processingTemplates)
   adjustHideFactor();
   m_template = processingTemplates;
   for (uint i = 0; i < m_dataElementListCount; i++) m_v.append(QString());
-  m_vpCurrency = NULL;
-  m_vpDateEntered = m_vpDatePosted = NULL;
+  m_vpCurrency = 0;
+  m_vpDateEntered = m_vpDatePosted = 0;
 }
 
 GncTransaction::~GncTransaction()
@@ -751,7 +751,7 @@ GncSplit::GncSplit()
   static const unsigned int anonClasses[] = {ASIS, SUPPRESS, ASIS, MONEY1, MONEY1, ASIS};
   m_anonClassList = anonClasses;
   for (uint i = 0; i < m_dataElementListCount; i++) m_v.append(QString());
-  m_vpDateReconciled = NULL;
+  m_vpDateReconciled = 0;
 }
 
 GncSplit::~GncSplit()
@@ -843,10 +843,10 @@ GncSchedule::GncSchedule()
   static const unsigned int anonClasses[] = {NXTSCHD, ASIS, ASIS, ASIS, ASIS, ASIS, ASIS, ASIS, ASIS, ASIS, ASIS};
   m_anonClassList = anonClasses;
   for (uint i = 0; i < m_dataElementListCount; i++) m_v.append(QString());
-  m_vpStartDate = m_vpLastDate = m_vpEndDate = NULL;
-  m_vpFreqSpec = NULL;
+  m_vpStartDate = m_vpLastDate = m_vpEndDate = 0;
+  m_vpFreqSpec = 0;
   m_vpRecurrence.clear();
-  m_vpSchedDef = NULL;
+  m_vpSchedDef = 0;
 }
 
 GncSchedule::~GncSchedule()
@@ -1231,7 +1231,7 @@ bool XmlReader::endDocument()
 MyMoneyGncReader::MyMoneyGncReader()
 {
 #ifndef _GNCFILEANON
-  m_storage = NULL;
+  m_storage = 0;
 #endif // _GNCFILEANON
 // to hold gnucash count data (only used for progress bar)
   m_gncCommodityCount = m_gncAccountCount = m_gncTransactionCount = m_gncScheduleCount = 0;
@@ -2012,7 +2012,7 @@ void MyMoneyGncReader::convertSchedule(const GncSchedule *gsc)
     } else {
       // find this interval
       const GncFreqSpec *fs = gsc->getFreqSpec();
-      if (fs == NULL) {
+      if (fs == 0) {
         unknownOccurs = true;
       } else {
         frequency = fs->intervalType();
@@ -2069,7 +2069,7 @@ void MyMoneyGncReader::convertSchedule(const GncSchedule *gsc)
       sc.setEndDate(endDate);
     }
     // Check for sched deferred interval. Don't know how/if we can handle it, or even what it means...
-    if (gsc->getSchedDef() != NULL) {
+    if (gsc->getSchedDef() != 0) {
       m_messageList["SC"].append(
         i18n("Schedule %1 contains a deferred interval specification; please check for correct operation",
              sc.name()));

@@ -55,7 +55,7 @@ _CheckMemoryEntry::_CheckMemoryEntry()
 /////////////////////////////////////////////////////////////////////////////////////////
 _CheckMemory::_CheckMemory()
 {
-  outfunc = (_CheckMemoryOutFunc *)NULL;
+  outfunc = (_CheckMemoryOutFunc *)0;
 }
 
 _CheckMemory::_CheckMemory(_CheckMemoryOutFunc *out)
@@ -155,7 +155,7 @@ void _CheckMemory_End()
 {
   if (enable != false) {
     chkmem.Restart();
-    chkmem.SetOutFunc(NULL);
+    chkmem.SetOutFunc(0);
     enable = false;
   }
 }
@@ -165,7 +165,7 @@ void *operator new(size_t s, const char *file, int line) throw()
 {
   void *p = malloc(s);
 
-  if (p == NULL) throw;
+  if (p == 0) throw;
   if (enable == true) {
     _CheckMemoryEntry entry(p, line, s, file);
     chkmem.table[p] = entry;
@@ -177,7 +177,7 @@ void * operator new [](size_t s, const char *file, int line) throw()
 {
   void *p = malloc(s);
 
-  if (p == NULL) throw;
+  if (p == 0) throw;
   if (enable == true) {
     _CheckMemoryEntry entry(p, line, s, file);
     chkmem.table[p] = entry;

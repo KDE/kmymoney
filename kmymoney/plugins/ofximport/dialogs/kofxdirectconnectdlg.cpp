@@ -57,9 +57,9 @@ public:
 KOfxDirectConnectDlg::KOfxDirectConnectDlg(const MyMoneyAccount& account, QWidget *parent) :
     KOfxDirectConnectDlgDecl(parent),
     d(new Private),
-    m_tmpfile(NULL),
+    m_tmpfile(0),
     m_connector(account),
-    m_job(NULL)
+    m_job(0)
 {
 }
 
@@ -213,7 +213,7 @@ void KOfxDirectConnectDlg::reject(void)
   if (m_tmpfile) {
     m_tmpfile->close();
     delete m_tmpfile;
-    m_tmpfile = NULL;
+    m_tmpfile = 0;
   }
   QDialog::reject();
 }

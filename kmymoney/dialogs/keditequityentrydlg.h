@@ -54,7 +54,7 @@ class KEditEquityEntryDlg : public KEditEquityEntryDecl
 {
   Q_OBJECT
 public:
-  explicit KEditEquityEntryDlg(const MyMoneySecurity& selectedSecurity, QWidget *parent = NULL);
+  explicit KEditEquityEntryDlg(const MyMoneySecurity& selectedSecurity, QWidget *parent = 0);
   ~KEditEquityEntryDlg();
 
   void updatedEquity(MyMoneySecurity& security) {

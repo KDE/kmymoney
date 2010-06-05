@@ -48,7 +48,7 @@ class KNewEquityEntryDlg : public kNewEquityEntryDecl
 {
   Q_OBJECT
 public:
-  KNewEquityEntryDlg(QWidget *parent = NULL);
+  KNewEquityEntryDlg(QWidget *parent = 0);
   virtual ~KNewEquityEntryDlg();
 
   void setSymbolName(const QString& str);

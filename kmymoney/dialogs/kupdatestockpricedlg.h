@@ -64,7 +64,7 @@ class KUpdateStockPriceDlg : public kUpdateStockPriceDecl
   Q_OBJECT
 
 public:
-  KUpdateStockPriceDlg(QWidget* parent = NULL);
+  KUpdateStockPriceDlg(QWidget* parent = 0);
   ~KUpdateStockPriceDlg();
 
   const QDate date() const {

@@ -429,7 +429,7 @@ bool MyMoneyTemplate::saveTemplate(const KUrl& url)
     } else {
       throw new MYMONEYEXCEPTION(i18n("Unable to upload to '%1'", url.url()));
     }
-    if (!KIO::NetAccess::upload(tmpfile.fileName(), url, NULL))
+    if (!KIO::NetAccess::upload(tmpfile.fileName(), url, 0))
       throw new MYMONEYEXCEPTION(i18n("Unable to upload to '%1'", url.url()));
   }
   return true;

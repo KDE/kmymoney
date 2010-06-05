@@ -631,7 +631,7 @@ void KBudgetView::slotBudgetedAmountChanged(void)
     return;
 
   KMyMoneyAccountTreeBudgetItem *account;
-  if ((account = selectedAccount()) == NULL)
+  if ((account = selectedAccount()) == 0)
     return;
 
   MyMoneyBudget::AccountGroup accountGroup = m_budget.account(account->id());
@@ -652,7 +652,7 @@ void KBudgetView::AccountEnter()
     return;
 
   //(ace) kCategoryWidget not currently defined
-  KMyMoneyAccountTreeBudgetItem *item = NULL; //dynamic_cast<KMyMoneyAccountTreeBudgetItem*> (m_accountTree->findItem(m_leAccounts->selectedAccountId()));
+  KMyMoneyAccountTreeBudgetItem *item = 0; //dynamic_cast<KMyMoneyAccountTreeBudgetItem*> (m_accountTree->findItem(m_leAccounts->selectedAccountId()));
   if (item) {
     m_accountTree->setCurrentItem(item);
     m_accountTree->setOpen(item, true);

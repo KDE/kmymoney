@@ -183,7 +183,7 @@ class kMyMoneyCalendar::kMyMoneyCalendarPrivate
 {
 public:
   kMyMoneyCalendarPrivate()
-      : closeButton(0L), selectWeek(0L), userButton1(0), userButton2(0) {}
+      : closeButton(0), selectWeek(0), userButton1(0), userButton2(0) {}
 
   QDate validDateInYearMonth(int year, int month) {
     QDate newDate;
@@ -314,7 +314,7 @@ kMyMoneyCalendar::resizeEvent(QResizeEvent*)
   int x = 0;
   // ----- calculate button row height:
   for (count = 0; count < NoOfButtons; ++count) {
-    if (buttons[count]) {   // closeButton may be 0L
+    if (buttons[count]) {   // closeButton may be 0
       sizes[count] = buttons[count]->sizeHint();
       buttonHeight = qMax(buttonHeight, sizes[count].height());
     } else
@@ -358,7 +358,7 @@ kMyMoneyCalendar::resizeEvent(QResizeEvent*)
 
   // ----- place the line edit for direct input:
   sizes[0] = line->sizeHint();
-  int week_width = d->selectWeek->fontMetrics().width(i18n("Week XX")) + ((d->closeButton != 0L) ? 50 : 20);
+  int week_width = d->selectWeek->fontMetrics().width(i18n("Week XX")) + ((d->closeButton != 0) ? 50 : 20);
   line->setGeometry(0, height() - sizes[0].height(), width() - week_width, sizes[0].height());
   d->selectWeek->setGeometry(width() - week_width, height() - sizes[0].height(), week_width, sizes[0].height());
   // ----- adjust the table:
@@ -672,7 +672,7 @@ kMyMoneyCalendar::setFontSize(int s)
 void
 kMyMoneyCalendar::setCloseButton(bool enable)
 {
-  if (enable == (d->closeButton != 0L))
+  if (enable == (d->closeButton != 0))
     return;
 
   if (enable) {
@@ -683,7 +683,7 @@ kMyMoneyCalendar::setCloseButton(bool enable)
             topLevelWidget(), SLOT(close()));
   } else {
     delete d->closeButton;
-    d->closeButton = 0L;
+    d->closeButton = 0;
   }
 
   updateGeometry();
@@ -691,7 +691,7 @@ kMyMoneyCalendar::setCloseButton(bool enable)
 
 bool kMyMoneyCalendar::hasCloseButton() const
 {
-  return (d->closeButton != 0L);
+  return (d->closeButton != 0);
 }
 
 int kMyMoneyCalendar::weekOfYear(const QDate& date)
@@ -747,14 +747,14 @@ void kMyMoneyCalendar::slotSetStyleQuarterly()
 
 void kMyMoneyCalendar::setUserButton1(bool enable, QPushButton* pb)
 {
-  if (enable == (d->userButton1 != 0L))
+  if (enable == (d->userButton1 != 0))
     return;
 
   if (enable) {
     d->userButton1 = pb;
   } else {
     delete d->userButton1;
-    d->userButton1 = 0L;
+    d->userButton1 = 0;
   }
 
   updateGeometry();
@@ -762,14 +762,14 @@ void kMyMoneyCalendar::setUserButton1(bool enable, QPushButton* pb)
 
 void kMyMoneyCalendar::setUserButton2(bool enable, QPushButton* pb)
 {
-  if (enable == (d->userButton2 != 0L))
+  if (enable == (d->userButton2 != 0))
     return;
 
   if (enable) {
     d->userButton2 = pb;
   } else {
     delete d->userButton2;
-    d->userButton2 = 0L;
+    d->userButton2 = 0;
   }
 
   updateGeometry();

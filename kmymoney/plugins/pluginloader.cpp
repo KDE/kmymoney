@@ -75,7 +75,7 @@ PluginLoader::PluginLoader(QObject* parent)
   KService::List offers = KServiceTypeTrader::self()->query("KMyMoneyPlugin");
   d->m_pluginList = KPluginInfo::fromServices(offers);
 
-  d->m_pluginSelector = new KPluginSelector(NULL);
+  d->m_pluginSelector = new KPluginSelector(0);
   d->m_pluginSelector->addPlugins(d->m_pluginList);
   d->m_pluginSelector->load();
 
@@ -112,7 +112,7 @@ void PluginLoader::loadPlugin(KPluginInfo* info)
       }
     }
   } else {
-    if (getPluginFromInfo(info) != NULL) {
+    if (getPluginFromInfo(info) != 0) {
       // everybody interested should say goodbye to the plugin
       emit PluginLoader::instance()->unplug(info);
       d->m_loadedPlugins.remove(info->name());
@@ -138,7 +138,7 @@ Plugin* PluginLoader::getPluginFromInfo(KPluginInfo* info)
   if (itPlugin != d->m_loadedPlugins.end())
     return *itPlugin;
   else
-    return NULL;
+    return 0;
 }
 
 PluginLoader* PluginLoader::instance()

@@ -504,7 +504,7 @@ void kMyMoneyDateTbl::setType(calendarType type)
   setHScrollBarMode(AlwaysOff);
   setVScrollBarMode(AlwaysOff);
 
-  viewportResizeEvent(NULL);
+  viewportResizeEvent(0);
 }
 
 void kMyMoneyDateTbl::contentsMouseMoveEvent(QMouseEvent* e)

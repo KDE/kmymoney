@@ -118,7 +118,7 @@ void KMMPrintCheckPlugin::slotPrintCheck(void)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
   MyMoneyMoneyToWordsConverter converter;
-  KHTMLPart *htmlPart = new KHTMLPart((QWidget*)NULL);
+  KHTMLPart *htmlPart = new KHTMLPart(static_cast<QWidget*>(0));
   KMyMoneyRegister::SelectedTransactions::const_iterator it;
   for (it = d->m_transactions.constBegin(); it != d->m_transactions.constEnd(); ++it) {
     if (!canBePrinted(*it))

@@ -312,7 +312,7 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
   // end of the table
   detailsReport += "</table>\n";
 
-  KReportDlg dlg(NULL, header + report + footer, header + detailsReport + footer);
+  KReportDlg dlg(0, header + report + footer, header + detailsReport + footer);
   dlg.exec();
 }
 

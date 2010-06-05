@@ -123,7 +123,7 @@ bool WebPriceQuote::launchNative(const QString& _symbol, const QString& _id, con
     emit status(i18n("Fetching URL %1...", url.prettyUrl()));
 
     QString tmpFile;
-    if (KIO::NetAccess::download(url, tmpFile, NULL)) {
+    if (KIO::NetAccess::download(url, tmpFile, 0)) {
       kDebug(2) << "Downloaded " << tmpFile;
       //kDebug(2) << "Downloaded " << tmpFile << " from " << url;
       QFile f(tmpFile);
