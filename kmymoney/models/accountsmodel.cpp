@@ -365,6 +365,8 @@ AccountsModel::~AccountsModel()
   */
 void AccountsModel::load()
 {
+  ::timetrace("Load accounts model");
+
   // mark all rows as candidates for cleaning up
   QModelIndexList list = match(index(0, 0), Qt::DisplayRole, "*", -1, Qt::MatchFlags(Qt::MatchWildcard | Qt::MatchRecursive));
   foreach (const QModelIndex &index, list) {
@@ -544,6 +546,8 @@ void AccountsModel::load()
     d->m_lastProfit = profit;
     emit profitChanged(d->m_lastProfit);
   }
+
+  ::timetrace("Load accounts model (done)");
 }
 
 /**
