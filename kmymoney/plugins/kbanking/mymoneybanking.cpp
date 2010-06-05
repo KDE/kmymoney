@@ -233,8 +233,8 @@ QWidget* KBankingPlugin::accountConfigTab(const MyMoneyAccount& acc, QString& na
     m_accountSettings = new KBAccountSettings(acc, 0);
     m_accountSettings->m_usePayeeAsIsButton->setChecked(true);
     m_accountSettings->m_transactionDownload->setChecked(kvp.value("kbanking-txn-download") != "no");
-    m_accountSettings->m_preferredJobMethod->setCurrentItem(kvp.value("kbanking-jobexec"));
-    m_accountSettings->m_preferredStatementDate->setCurrentItem(kvp.value("kbanking-statementDate"));
+    m_accountSettings->m_preferredJobMethod->setCurrentIndex(kvp.value("kbanking-jobexec").toInt());
+    m_accountSettings->m_preferredStatementDate->setCurrentIndex(kvp.value("kbanking-statementDate").toInt());
     if (!kvp.value("kbanking-payee-regexp").isEmpty()) {
       m_accountSettings->m_extractPayeeButton->setChecked(true);
       m_accountSettings->m_payeeRegExpEdit->setText(kvp.value("kbanking-payee-regexp"));
