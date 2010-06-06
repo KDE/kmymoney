@@ -1,0 +1,34 @@
+[Columns]
+AmountCol=-1
+CreditCol=-1
+DateCol=-1
+DebitCol=-1
+MemoCol=-1
+NumberCol=-1
+PayeeCol=-1
+
+[InvestmentSettings]
+ShrsinParam=Add,Stock Dividend,Divd Reinv,Transfer In,Re-Registration In,Journal Entry
+DivXParam=Dividend,Interest,Reinvestment
+ReinvdivParam=Reinv,Re-inv,ReInv
+BrokerageParam=Bill Payment,Check
+BuyParam=Purchase,Buy,New Inv,Switch In
+SellParam=Sell
+RemoveParam=Remove
+InvDirectory=/home/
+
+[KFileDialog Settings]
+Height 1024=450
+Height 768=450
+Width 1024=700
+Width 1280=700
+
+[MainWindow]
+Height=750
+
+[Profile]
+CsvDirectory=/home/
+DateFormat=0
+Encoding=0
+FieldDelimiter=1
+StartLine=2

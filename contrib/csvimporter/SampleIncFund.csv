@@ -1,0 +1,12 @@
+
+10:48 16/04/2010
+
+Client Name:,Mr Joe Bloggs
+Account,Investment funds
+Holding,An Income Fund Inc
+Total Transactions,3
+
+Account Number,Deal Date,Reference,Gross Transaction Amount,Net Transaction Amount,Initial Charge,Initial Charge As %,Type,Units,Price,Amount,Fund Currency Code,Status
+AQ000191,28/12/09,INCB02601705,54.71,54.710,0.0,0.0,ReInvestorContract Buy         : ReInvested Units,35.3,155.0,54.71,GBP,Completed,
+AQ000191,25/06/09,INCB00131572,46.88,46.880,0.0,0.0,ReInvestorContract Buy         : ReInvested Units,36.34,129.0,46.88,GBP,Completed,
+AQ000191,25/07/05,INCB04700697,0.0,0.000,0.0,0.0,Re-Registration In,1478.64,0.0,0.0,GBP,Completed,
