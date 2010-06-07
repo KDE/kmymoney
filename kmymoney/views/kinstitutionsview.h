@@ -34,6 +34,14 @@
 
 #include "ui_kinstitutionsviewdecl.h"
 
+class KInstitutionsViewDecl : public QWidget, public Ui::KInstitutionsViewDecl
+{
+public:
+  KInstitutionsViewDecl(QWidget *parent) : QWidget(parent) {
+    setupUi(this);
+  }
+};
+
 /**
   * @author Thomas Baumgart
   */
@@ -42,13 +50,6 @@
   * This class implements the institutions hierarchical 'view'.
   */
 
-class KInstitutionsViewDecl : public QWidget, public Ui::KInstitutionsViewDecl
-{
-public:
-  KInstitutionsViewDecl(QWidget *parent) : QWidget(parent) {
-    setupUi(this);
-  }
-};
 class KInstitutionsView : public KInstitutionsViewDecl
 {
   Q_OBJECT
@@ -61,22 +62,15 @@ public:
 public slots:
   void slotLoadAccounts(void);
 
-  void slotReconcileAccount(const MyMoneyAccount& acc, const QDate& reconciliationDate, const MyMoneyMoney& endingBalance);
-
 protected:
   void loadAccounts(void);
-
-  // load accounts that are kept at a specific institution
-  void loadSubAccounts(KMyMoneyAccountTreeItem* parent, const QString& institutionId);
-
-  // load stock accounts under the investment account (parent)
-  void loadSubAccounts(KMyMoneyAccountTreeItem* parent);
 
   // for now it contains the implementation from show()
   virtual void showEvent(QShowEvent * event);
 
 protected slots:
-  void slotUpdateNetWorth(void);
+  void slotNetWorthChanged(const MyMoneyMoney &);
+  void slotExpandCollapse(void);
 
 private:
   /**
@@ -106,23 +100,10 @@ signals:
     */
   void openObject(const MyMoneyObject& obj);
 
-  /**
-    * This signal is emitted, when the user selected to reparent the
-    * account @p acc to be a subordinate account of @p institution.
-    *
-    * @param acc const reference to account to be reparented
-    * @param institution const reference to new institution
-    */
-  void reparent(const MyMoneyAccount& acc, const MyMoneyInstitution& institution);
-
 private:
-  MyMoneyAccount                      m_reconciliationAccount;
-  QMap<QString, MyMoneyAccount>       m_accountMap;
-  QMap<QString, MyMoneySecurity>      m_securityMap;
-  QMap<QString, unsigned long>        m_transactionCountMap;
-
   /// set if a view needs to be reloaded during show()
   bool                                m_needReload;
+  AccountsViewFilterProxyModel        *m_filterProxyModel;
 };
 
 #endif

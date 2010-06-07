@@ -36,6 +36,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include <mymoneyinstitution.h>
+
 KMyMoneyAccountTreeView::KMyMoneyAccountTreeView(QWidget *parent)
     : QTreeView(parent)
 {
@@ -73,7 +75,12 @@ void KMyMoneyAccountTreeView::mouseDoubleClickEvent(QMouseEvent *event)
   if (index.isValid()) {
     QVariant data = model()->data(currentIndex(), AccountsModel::AccountRole);
     if (data.isValid()) {
-      emit openObject(data.value<MyMoneyAccount>());
+      if (data.canConvert<MyMoneyAccount>()) {
+        emit openObject(data.value<MyMoneyAccount>());
+      }
+      if (data.canConvert<MyMoneyInstitution>()) {
+        emit openObject(data.value<MyMoneyInstitution>());
+      }
     }
   }
   event->accept();
@@ -86,8 +93,14 @@ void KMyMoneyAccountTreeView::customContextMenuRequested(const QPoint &pos)
   if (index.isValid()) {
     QVariant data = model()->data(index, AccountsModel::AccountRole);
     if (data.isValid()) {
-      emit selectObject(data.value<MyMoneyAccount>());
-      emit openContextMenu(data.value<MyMoneyAccount>());
+      if (data.canConvert<MyMoneyAccount>()) {
+        emit selectObject(data.value<MyMoneyAccount>());
+        emit openContextMenu(data.value<MyMoneyAccount>());
+      }
+      if (data.canConvert<MyMoneyInstitution>()) {
+        emit selectObject(data.value<MyMoneyInstitution>());
+        emit openContextMenu(data.value<MyMoneyInstitution>());
+      }
     }
   }
 }
@@ -98,7 +111,12 @@ void KMyMoneyAccountTreeView::currentChanged(const QModelIndex &current, const Q
 
   QVariant data = model()->data(current, AccountsModel::AccountRole);
   if (data.isValid()) {
-    emit selectObject(data.value<MyMoneyAccount>());
+    if (data.canConvert<MyMoneyAccount>()) {
+      emit selectObject(data.value<MyMoneyAccount>());
+    }
+    if (data.canConvert<MyMoneyInstitution>()) {
+      emit selectObject(data.value<MyMoneyInstitution>());
+    }
   }
 }
 
@@ -173,7 +191,7 @@ QVariant AccountsViewFilterProxyModel::data(const QModelIndex &index, int role) 
   */
 bool AccountsViewFilterProxyModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
 {
-  if (!source_parent.isValid() && source_row == 0) {
+  if (!source_parent.isValid()) {
     QVariant data = sourceModel()->data(sourceModel()->index(source_row, 0, source_parent), AccountsModel::AccountIdRole);
     if (data.isValid() && data.toString() == AccountsModel::favoritesAccountId)
       return false;

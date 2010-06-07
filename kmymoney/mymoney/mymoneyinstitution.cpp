@@ -24,8 +24,10 @@
 
 // ----------------------------------------------------------------------------
 // KDE Includes
+
 #include <kglobal.h>
 #include <kstandarddirs.h>
+#include <kiconloader.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -180,6 +182,6 @@ bool MyMoneyInstitution::hasReferenceTo(const QString& /* id */) const
 
 QPixmap MyMoneyInstitution::pixmap() const
 {
-  return QPixmap(KGlobal::dirs()->findResource("appdata", QString("icons/hicolor/22x22/actions/%1.png").arg("bank")));
+  return QPixmap(DesktopIcon("institution"));
 }
 

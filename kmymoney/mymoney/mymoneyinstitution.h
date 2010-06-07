@@ -28,6 +28,7 @@
 #include <QMap>
 #include <QStringList>
 #include <QPixmap>
+#include <QMetaType>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -238,5 +239,10 @@ private:
     */
   QStringList m_accountList;
 };
+
+/**
+  * Make it possible to hold @ref MyMoneyInstitution objects inside @ref QVariant objects.
+  */
+Q_DECLARE_METATYPE(MyMoneyInstitution)
 
 #endif

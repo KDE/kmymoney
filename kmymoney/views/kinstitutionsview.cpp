@@ -35,6 +35,7 @@
 // Project Includes
 
 #include <mymoneyfile.h>
+#include "models.h"
 #include "kmymoneyglobalsettings.h"
 #include "kmymoney.h"
 
@@ -42,14 +43,51 @@ KInstitutionsView::KInstitutionsView(QWidget *parent) :
     KInstitutionsViewDecl(parent),
     m_needReload(false)
 {
-  m_accountTree->header()->setLabel(0, i18n("Institution/Account"));
+  // setup icons for collapse and expand button
+  KGuiItem collapseGuiItem("",
+                           KIcon("zoom-out"),
+                           QString(),
+                           QString());
+  KGuiItem expandGuiItem("",
+                         KIcon("zoom-in"),
+                         QString(),
+                         QString());
+  m_collapseButton->setGuiItem(collapseGuiItem);
+  m_expandButton->setGuiItem(expandGuiItem);
 
+  // the proxy filter model
+  m_filterProxyModel = new AccountsViewFilterProxyModel(this);
+  m_filterProxyModel->addAccountGroup(MyMoneyAccount::Asset);
+  m_filterProxyModel->addAccountGroup(MyMoneyAccount::Liability);
+  m_filterProxyModel->addAccountGroup(MyMoneyAccount::Equity);
+  m_filterProxyModel->setHideInstitutions(false);
+  m_filterProxyModel->setSourceModel(Models::instance()->accountsModel());
+  m_filterProxyModel->setFilterKeyColumn(-1);
+
+  m_accountTree->setConfigGroupName("KInstitutionsView");
+  m_accountTree->setAlternatingRowColors(true);
+  m_accountTree->setIconSize(QSize(22, 22));
+  m_accountTree->setSortingEnabled(true);
+  m_accountTree->setModel(m_filterProxyModel);
+
+  // let the model know if the item is expanded or collapsed
+  connect(m_accountTree, SIGNAL(collapsed(const QModelIndex &)), m_filterProxyModel, SLOT(collapsed(const QModelIndex &)));
+  connect(m_accountTree, SIGNAL(expanded(const QModelIndex &)), m_filterProxyModel, SLOT(expanded(const QModelIndex &)));
   connect(m_accountTree, SIGNAL(selectObject(const MyMoneyObject&)), this, SIGNAL(selectObject(const MyMoneyObject&)));
   connect(m_accountTree, SIGNAL(openContextMenu(const MyMoneyObject&)), this, SIGNAL(openContextMenu(const MyMoneyObject&)));
-  connect(m_accountTree, SIGNAL(valueChanged(void)), this, SLOT(slotUpdateNetWorth(void)));
   connect(m_accountTree, SIGNAL(openObject(const MyMoneyObject&)), this, SIGNAL(openObject(const MyMoneyObject&)));
-  connect(m_accountTree, SIGNAL(reparent(const MyMoneyAccount&, const MyMoneyInstitution&)), this, SIGNAL(reparent(const MyMoneyAccount&, const MyMoneyInstitution&)));
 
+  // connect the two buttons to all required slots
+  connect(m_collapseButton, SIGNAL(clicked()), this, SLOT(slotExpandCollapse()));
+  connect(m_collapseButton, SIGNAL(clicked()), m_accountTree, SLOT(collapseAll()));
+  connect(m_collapseButton, SIGNAL(clicked()), m_filterProxyModel, SLOT(collapseAll()));
+  connect(m_expandButton, SIGNAL(clicked()), this, SLOT(slotExpandCollapse()));
+  connect(m_expandButton, SIGNAL(clicked()), m_accountTree, SLOT(expandAll()));
+  connect(m_expandButton, SIGNAL(clicked()), m_filterProxyModel, SLOT(expandAll()));
+
+  connect(m_searchWidget, SIGNAL(textChanged(const QString &)), m_filterProxyModel, SLOT(setFilterFixedString(const QString &)));
+
+  connect(Models::instance()->accountsModel(), SIGNAL(netWorthChanged(const MyMoneyMoney&)), this, SLOT(slotNetWorthChanged(const MyMoneyMoney&)));
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadAccounts()));
 }
 
@@ -64,17 +102,8 @@ void KInstitutionsView::showEvent(QShowEvent * event)
     m_needReload = false;
   }
 
-  m_accountTree->setResizeMode(Q3ListView::LastColumn);
-  m_accountTree->restoreLayout("Institution View Settings");
-
   // don't forget base class implementation
   KInstitutionsViewDecl::showEvent(event);
-
-  // if we have a selected account, let the application know about it
-  KMyMoneyAccountTreeBaseItem *item = m_accountTree->selectedItem();
-  if (item) {
-    emit selectObject(item->itemObject());
-  }
 }
 
 void KInstitutionsView::slotLoadAccounts(void)
@@ -88,219 +117,12 @@ void KInstitutionsView::slotLoadAccounts(void)
 
 void KInstitutionsView::loadAccounts(void)
 {
-  QMap<QString, bool> isOpen;
-
-  ::timetrace("start load institutions view");
-  // remember the id of the current selected item
-  KMyMoneyAccountTreeBaseItem *item = m_accountTree->selectedItem();
-  QString selectedItemId = (item) ? item->id() : QString();
-
-  // keep a map of all 'expanded' accounts
-  Q3ListViewItemIterator it_lvi(m_accountTree);
-  while (it_lvi.current()) {
-    item = dynamic_cast<KMyMoneyAccountTreeItem*>(it_lvi.current());
-    if (item && item->isOpen()) {
-      isOpen[item->id()] = true;
-    }
-    ++it_lvi;
-  }
-
-  // remember the upper left corner of the viewport
-  QPoint startPoint = m_accountTree->viewportToContents(QPoint(0, 0));
-
-  // turn off updates to avoid flickering during reload
-  //m_accountTree->setUpdatesEnabled(false);
-
-  // clear the current contents and recreate it
-  m_accountTree->clear();
-  m_accountMap.clear();
-  m_securityMap.clear();
-  m_transactionCountMap.clear();
-
-  MyMoneyFile* file = MyMoneyFile::instance();
-
-  QList<MyMoneyAccount> alist;
-  file->accountList(alist);
-  QList<MyMoneyAccount>::const_iterator it_a;
-  for (it_a = alist.constBegin(); it_a != alist.constEnd(); ++it_a) {
-    m_accountMap[(*it_a).id()] = *it_a;
-  }
-
-  // we need to make sure we show stock accounts
-  // under the right institution (the one of the parent account)
-  QMap<QString, MyMoneyAccount>::iterator it_am;
-  for (it_am = m_accountMap.begin(); it_am != m_accountMap.end(); ++it_am) {
-    if ((*it_am).isInvest()) {
-      (*it_am).setInstitutionId(m_accountMap[(*it_am).parentAccountId()].institutionId());
-    }
-  }
-
-  QList<MyMoneySecurity> slist = file->currencyList();
-  slist += file->securityList();
-  QList<MyMoneySecurity>::const_iterator it_s;
-  for (it_s = slist.constBegin(); it_s != slist.constEnd(); ++it_s) {
-    m_securityMap[(*it_s).id()] = *it_s;
-  }
-
-  m_transactionCountMap = file->transactionCountMap();
-
-  m_accountTree->setBaseCurrency(file->baseCurrency());
-
-  // create the items
-  try {
-    const MyMoneySecurity& security = file->baseCurrency();
-    m_accountTree->setBaseCurrency(security);
-
-    MyMoneyInstitution none;
-    none.setName(i18n("Accounts with no institution assigned"));
-    KMyMoneyAccountTreeItem* noInstitutionItem = new KMyMoneyAccountTreeItem(m_accountTree, none);
-    noInstitutionItem->setPixmap(0, none.pixmap());
-    loadSubAccounts(noInstitutionItem, QString());
-
-    // hide it, if unused
-    noInstitutionItem->setVisible(noInstitutionItem->childCount() != 0);
-
-    bool showClosedAccounts = kmymoney->toggleAction("view_show_all_accounts")->isChecked()
-                              || !KMyMoneyGlobalSettings::hideClosedAccounts();
-
-    QList<MyMoneyInstitution> list = file->institutionList();
-    QList<MyMoneyInstitution>::const_iterator it_i;
-    for (it_i = list.constBegin(); it_i != list.constEnd(); ++it_i) {
-      KMyMoneyAccountTreeItem* item = new KMyMoneyAccountTreeItem(m_accountTree, *it_i);
-      item->setPixmap(0, none.pixmap());
-      loadSubAccounts(item, (*it_i).id());
-      if (!showClosedAccounts)
-        item->setVisible(item->childCount() != 0);
-    }
-
-  } catch (MyMoneyException *e) {
-    kDebug(2) << "Problem in institutions view: " << e->what();
-    delete e;
-  }
-
-  // scan through the list of accounts and re-expand those that were
-  // expanded and re-select the one that was probably selected before
-  it_lvi = Q3ListViewItemIterator(m_accountTree);
-  while (it_lvi.current()) {
-    item = dynamic_cast<KMyMoneyAccountTreeItem*>(it_lvi.current());
-    if (item) {
-      if (item->id() == selectedItemId)
-        m_accountTree->setSelected(item, true);
-      if (isOpen.find(item->id()) != isOpen.end())
-        item->setOpen(true);
-    }
-    ++it_lvi;
-  }
-
-  // reposition viewport
-  m_accountTree->setContentsPos(startPoint.x(), startPoint.y());
-
-  // turn updates back on
-  //m_accountTree->setUpdatesEnabled(true);
-
-  ::timetrace("done load institutions view");
+  m_filterProxyModel->invalidate();
+  m_filterProxyModel->setHideEquityAccounts(!KMyMoneyGlobalSettings::expertMode());
 }
 
-void KInstitutionsView::loadSubAccounts(KMyMoneyAccountTreeItem* parent)
+void KInstitutionsView::slotNetWorthChanged(const MyMoneyMoney &netWorth)
 {
-  bool showClosedAccounts = kmymoney->toggleAction("view_show_all_accounts")->isChecked()
-                            || !KMyMoneyGlobalSettings::hideClosedAccounts();
-  const MyMoneyAccount& account = dynamic_cast<const MyMoneyAccount&>(parent->itemObject());
-  QList<QString>::const_iterator it_a;
-  MyMoneyFile* file = MyMoneyFile::instance();
-  for (it_a = account.accountList().constBegin(); it_a != account.accountList().constEnd(); ++it_a) {
-    MyMoneyAccount acc = m_accountMap[(*it_a)];
-    if (!acc.isInvest())
-      continue;
-    if (acc.isClosed() && !showClosedAccounts)
-      continue;
-    const MyMoneySecurity& security = m_securityMap[acc.currencyId()];
-    QList<MyMoneyPrice> prices;
-    prices += file->price(acc.currencyId(), security.tradingCurrency());
-    if (security.tradingCurrency() != file->baseCurrency().id()) {
-      MyMoneySecurity sec = m_securityMap[security.tradingCurrency()];
-      prices += file->price(sec.id(), file->baseCurrency().id());
-    }
-    KMyMoneyAccountTreeItem* item = new KMyMoneyAccountTreeItem(parent, acc, prices, security);
-    if (acc.id() == m_reconciliationAccount.id())
-      item->setReconciliation(true);
-  }
-}
-
-void KInstitutionsView::loadSubAccounts(KMyMoneyAccountTreeItem* parent, const QString& institutionId)
-{
-  MyMoneyFile* file = MyMoneyFile::instance();
-
-  QMap<QString, MyMoneyAccount>::const_iterator it_a;
-  MyMoneyMoney  value;
-  bool showClosedAccounts = kmymoney->toggleAction("view_show_all_accounts")->isChecked()
-                            || !KMyMoneyGlobalSettings::hideClosedAccounts();
-
-  for (it_a = m_accountMap.constBegin(); it_a != m_accountMap.constEnd(); ++it_a) {
-    const MyMoneyAccount& acc = *it_a;
-    MyMoneyMoney factor(1, 1);
-    switch (acc.accountGroup()) {
-      case MyMoneyAccount::Liability:
-        factor = MyMoneyMoney(-1, 1);
-        // tricky fall through here
-
-      case MyMoneyAccount::Asset:
-        if (acc.institutionId() == institutionId
-            && !acc.isInvest()
-            && (!acc.isClosed() || showClosedAccounts)) {
-          QList<MyMoneyPrice> prices;
-          MyMoneySecurity security = file->baseCurrency();
-          try {
-            if (acc.currencyId() != file->baseCurrency().id()) {
-              security = m_securityMap[acc.currencyId()];
-              prices += file->price(acc.currencyId(), file->baseCurrency().id());
-            }
-
-          } catch (MyMoneyException *e) {
-            kDebug(2) << Q_FUNC_INFO << " caught exception while adding " << acc.name() << "[" << acc.id() << "]: " << e->what();
-            delete e;
-          }
-
-          KMyMoneyAccountTreeItem* item = new KMyMoneyAccountTreeItem(parent, acc, prices, security);
-          if (acc.id() == m_reconciliationAccount.id())
-            item->setReconciliation(true);
-
-          if (acc.accountType() == MyMoneyAccount::Investment)
-            loadSubAccounts(item);
-          value += (item->totalValue() * factor);
-        }
-        break;
-
-      default:
-        break;
-    }
-  }
-
-  // the calulated value for the institution is not correct as
-  // it does not take the negative sign for liability accounts
-  // into account. So we correct this here with the value we
-  // have calculated while filling the list
-  parent->adjustTotalValue(-parent->totalValue());  // load a 0
-  parent->adjustTotalValue(value);                  // now store the new value
-
-  // we need to call slotUpdateNetWorth() here manually, because
-  // KMyMoneyAccountTreeItem::adjustTotalValue() does not send out
-  // the valueChanged() signal
-  slotUpdateNetWorth();
-}
-
-void KInstitutionsView::slotUpdateNetWorth(void)
-{
-  MyMoneyMoney netWorth;
-
-  // calculate by going through the account trees top items
-  // and summing up the total value shown there
-  KMyMoneyAccountTreeItem* item = dynamic_cast<KMyMoneyAccountTreeItem*>(m_accountTree->firstChild());
-  while (item) {
-    netWorth += item->totalValue();
-    item = dynamic_cast<KMyMoneyAccountTreeItem*>(item->nextSibling());
-  }
-
   QString s(i18n("Net Worth: "));
 
   // FIXME figure out how to deal with the approximate
@@ -322,36 +144,11 @@ void KInstitutionsView::slotUpdateNetWorth(void)
   m_totalProfitsLabel->setText(s);
 }
 
-void KInstitutionsView::slotReconcileAccount(const MyMoneyAccount& acc, const QDate& reconciliationDate, const MyMoneyMoney& endingBalance)
+void KInstitutionsView::slotExpandCollapse(void)
 {
-  Q_UNUSED(reconciliationDate);
-  Q_UNUSED(endingBalance);
-
-  // scan through the list of accounts and mark all non
-  // expanded and re-select the one that was probably selected before
-  Q3ListViewItemIterator it_lvi(m_accountTree);
-  KMyMoneyAccountTreeItem* item;
-  while (it_lvi.current()) {
-    item = dynamic_cast<KMyMoneyAccountTreeItem*>(it_lvi.current());
-    if (item) {
-      item->setReconciliation(false);
-    }
-    ++it_lvi;
-  }
-
-  m_reconciliationAccount = acc;
-  if (!acc.id().isEmpty()) {
-    it_lvi = Q3ListViewItemIterator(m_accountTree);
-    while (it_lvi.current()) {
-      item = dynamic_cast<KMyMoneyAccountTreeItem*>(it_lvi.current());
-      if (item && item->itemObject().id() == acc.id()) {
-        item->setReconciliation(true);
-        break;
-      }
-      ++it_lvi;
-    }
+  if (sender()) {
+    KMyMoneyGlobalSettings::setShowAccountsExpanded(sender() == m_expandButton);
   }
 }
-
 
 #include "kinstitutionsview.moc"

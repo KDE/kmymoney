@@ -175,6 +175,9 @@ public:
   void setHideUnusedIncomeExpenseAccounts(bool hideUnusedIncomeExpenseAccounts);
   bool hideUnusedIncomeExpenseAccounts(void) const;
 
+  void setHideInstitutions(bool hideInstitutions);
+  bool hideInstitutions(void) const;
+
 protected:
   virtual bool lessThan(const QModelIndex &left, const QModelIndex &right) const;
   virtual bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
