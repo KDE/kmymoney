@@ -152,8 +152,6 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   connect(m_institutionsView, SIGNAL(openContextMenu(const MyMoneyObject&)), kmymoney, SLOT(slotShowInstitutionContextMenu(const MyMoneyObject&)));
   connect(m_institutionsView, SIGNAL(openObject(const MyMoneyObject&)), kmymoney, SLOT(slotInstitutionEdit(const MyMoneyObject&)));
   connect(m_institutionsView, SIGNAL(openObject(const MyMoneyObject&)), kmymoney, SLOT(slotAccountOpen(const MyMoneyObject&)));
-  connect(m_institutionsView, SIGNAL(reparent(const MyMoneyAccount&, const MyMoneyInstitution&)), kmymoney, SLOT(slotReparentAccount(const MyMoneyAccount&, const MyMoneyInstitution&)));
-  connect(this, SIGNAL(reconciliationStarts(const MyMoneyAccount&, const QDate&, const MyMoneyMoney&)), m_institutionsView, SLOT(slotReconcileAccount(const MyMoneyAccount&, const QDate&, const MyMoneyMoney&)));
 
   // Page 2
   m_accountsView = new KAccountsView();
@@ -167,8 +165,6 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   connect(m_accountsView, SIGNAL(selectObject(const MyMoneyObject&)), kmymoney, SLOT(slotSelectInvestment(const MyMoneyObject&)));
   connect(m_accountsView, SIGNAL(openContextMenu(const MyMoneyObject&)), kmymoney, SLOT(slotShowAccountContextMenu(const MyMoneyObject&)));
   connect(m_accountsView, SIGNAL(openObject(const MyMoneyObject&)), kmymoney, SLOT(slotAccountOpen(const MyMoneyObject&)));
-  connect(m_accountsView, SIGNAL(reparent(const MyMoneyAccount&, const MyMoneyAccount&)), kmymoney, SLOT(slotReparentAccount(const MyMoneyAccount&, const MyMoneyAccount&)));
-  //connect(this, SIGNAL(kmmFilePlugin(unsigned int)), m_accountsView, SLOT(slotUpdateIconPos(unsigned int)));
   connect(this, SIGNAL(reconciliationStarts(const MyMoneyAccount&, const QDate&, const MyMoneyMoney&)), m_accountsView, SLOT(slotReconcileAccount(const MyMoneyAccount&, const QDate&, const MyMoneyMoney&)));
 
   // Page 3

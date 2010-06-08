@@ -148,15 +148,6 @@ signals:
     */
   void openObject(const MyMoneyObject& obj);
 
-  /**
-    * This signal is emitted, when the user selected to reparent the
-    * account @p acc to be a subordinate account of @p parent.
-    *
-    * @param acc const reference to account to be reparented
-    * @param parent const reference to new parent account
-    */
-  void reparent(const MyMoneyAccount& acc, const MyMoneyAccount& parent);
-
 private:
   MyMoneyAccount                      m_reconciliationAccount;
 
