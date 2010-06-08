@@ -2,48 +2,69 @@
 PROJECT(KMyMoney)
 
 # The CMake version we require
-CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.6.4)
 
 # cmake 2.6 proposed to add this policy
 if(COMMAND cmake_policy)
   cmake_policy(SET CMP0003 NEW)
+  # until the createtarball script generates different custom targets
+  # for the various translations, we need to keep the following setting
+  # http://www.vtkedge.org/Wiki/CMake_Policies#Setting_Policies_Individually
+  # has an explanation of the problem
+  cmake_policy(SET CMP0002 OLD)
 endif(COMMAND cmake_policy)
 
 # Our modules reside in the subdirectory cmake/modules/
-SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake/modules)
+SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
 
 ######################### KMyMoney Version ##########################
 
 # The current version of KMyMoney (used for packages and config.h)
 SET(VERSION_MAJOR "3")
-SET(VERSION_MINOR "95")
-SET(VERSION_PATCH "0")
+SET(VERSION_MINOR "98")
+SET(VERSION_PATCH "2")
 
-# Get the date of the last change from the ChangeLog
-SET(date_format "([0-9][0-9][0-9][0-9])-([0-9][0-9])-([0-9][0-9])")
-FILE(STRINGS ${CMAKE_CURRENT_SOURCE_DIR}/ChangeLog LAST_CHANGE
-  REGEX ${date_format} LIMIT_COUNT 1 LENGTH_MINIMUM 10 LENGTH_MAXIMUM 10)
-STRING(REGEX MATCH ${date_format} _ign "${LAST_CHANGE}")
-SET(VERSION_SUFFIX "svn${CMAKE_MATCH_1}${CMAKE_MATCH_2}${CMAKE_MATCH_3}")
+# Determine the SVN revision number (if we're based on SVN)
+IF(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/.svn)
+  # make sure we don't use translated messages here
+  SET(LANG $ENV{LANG})
+  SET(ENV{LANG} "C")
+  EXECUTE_PROCESS(COMMAND svn info ${CMAKE_CURRENT_SOURCE_DIR} OUTPUT_VARIABLE VERSION_SUFFIX)
+  STRING(REGEX MATCH "Revision: ([0-9]+)" VERSION_SUFFIX "${VERSION_SUFFIX}") 
+  STRING(REPLACE "Revision: " "" VERSION_SUFFIX "${VERSION_SUFFIX}")
+  SET(VERSION_SUFFIX "-svn${VERSION_SUFFIX}")
+  # switch back to the origianl language setting
+  SET(ENV{LANG} ${LANG})
+ENDIF(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/.svn)
 
 ######################### General Requirements ##########################
 FIND_PACKAGE(KDE4 REQUIRED)
 
-
 include( KDE4Defaults )
 include( MacroLibrary )
 include( KMyMoneyMacros )
+# needed by libkgpgfile
+if (WIN32)
+  find_package(Boost "1.33.1")
+else (WIN32)
+  find_package(Boost "1.33.1" COMPONENTS graph)
+endif (WIN32)
+# needed by libkgpgfile
+find_package(QGpgme REQUIRED)
 find_package(KdepimLibs REQUIRED)
 find_package(SharedMimeInfo REQUIRED)
 
-add_definitions( ${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
+add_definitions( ${QT_DEFINITIONS} ${KDE4_DEFINITIONS} ${KDEPIM_DEFINITIONS})
 string(TOLOWER ${CMAKE_BUILD_TYPE} CMAKE_BUILD_TYPE_TOLOWER)
 if(CMAKE_BUILD_TYPE_TOLOWER MATCHES debugfull)
   add_definitions (-DQT_STRICT_ITERATORS)
+  set(KMM_DEBUG 1)
 endif()
 add_definitions (-DQT3_SUPPORT -DQT3_SUPPORT_WARNINGS)
 
-include_directories( ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES} 
+include_directories( ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR}
+	${KDE4_INCLUDES}
+	${KDEPIMLIBS_INCLUDE_DIRS}
 	${CMAKE_CURRENT_BINARY_DIR}/kmymoney/dialogs/
 	${CMAKE_CURRENT_SOURCE_DIR}/kmymoney/widgets/
 	${CMAKE_CURRENT_BINARY_DIR}/kmymoney/widgets/
@@ -60,12 +81,6 @@ include_directories( ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES}
 	${CMAKE_CURRENT_SOURCE_DIR}/kmymoney/wizards/wizardpages/)
 
 set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${KDE4_ENABLE_EXCEPTIONS}" )
-string(TOLOWER ${CMAKE_BUILD_TYPE} CMAKE_BUILD_TYPE_TOLOWER)
-
-if(CMAKE_BUILD_TYPE_TOLOWER MATCHES debugfull)
-  set(KMM_DEBUG 1)
-endif()
-
 
 # check for JPEG
 FIND_PACKAGE(JPEG)
@@ -91,6 +106,18 @@ IF (ZLIB_FOUND)
   SET(HAVE_LIBZ 1)
 ENDIF (ZLIB_FOUND)
 
+# check for Doxygen
+FIND_PACKAGE(Doxygen)
+IF(DOXYGEN_FOUND)
+  SET(APIDOC_DIR ${CMAKE_CURRENT_BINARY_DIR}/apidocs)
+
+  MAKE_DIRECTORY(${APIDOC_DIR})
+
+  CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/kmymoney.doxygen.in ${CMAKE_CURRENT_BINARY_DIR}/kmymoney.doxygen IMMEDIATE)
+
+  ADD_CUSTOM_TARGET(apidoc ${DOXYGEN} ${CMAKE_CURRENT_BINARY_DIR}/kmymoney.doxygen)
+ENDIF(DOXYGEN_FOUND)
+
 # check for PkgConfig
 FIND_PACKAGE(PkgConfig)
 # check for some modules we require
@@ -104,10 +131,8 @@ CHECK_FUNCTION_EXISTS(atoll HAVE_ATOLL)
 CHECK_FUNCTION_EXISTS(vsnprintf HAVE_VSNPRINTF)
 CHECK_FUNCTION_EXISTS(strtoll HAVE_STRTOLL)
 
-IF(NOT WIN32)
-    SET(CMAKE_REQUIRED_FLAGS "-std=c99")
-    SET(CMAKE_REQUIRED_LIBRARIES m)
-ENDIF(NOT WIN32)
+SET(CMAKE_REQUIRED_FLAGS "-std=c99")
+SET(CMAKE_REQUIRED_LIBRARIES m)
 CHECK_FUNCTION_EXISTS(round HAVE_ROUND)
 
 # check for function in header
@@ -121,9 +146,7 @@ CHECK_PROTOTYPE_EXISTS(res_init "sys/types.h;netinet/in.h;arpa/nameser.h;resolv.
 
 # special handling of crypt() check
 # ----------------------- crypt() ---------------------------------
-IF(NOT WIN32)
-    SET(CMAKE_REQUIRED_LIBRARIES crypt) 
-ENDIF(NOT WIN32)
+SET(CMAKE_REQUIRED_LIBRARIES crypt) 
 CHECK_FUNCTION_EXISTS(crypt HAVE_CRYPT)
 # -----------------------------------------------------------------
 
@@ -149,18 +172,12 @@ CHECK_TYPE_SIZE(long SIZEOF_LONG)
 CHECK_TYPE_SIZE(short SIZEOF_SHORT)
 CHECK_TYPE_SIZE(size_t SIZEOF_SIZE_T)
 CHECK_TYPE_SIZE("unsigned long" SIZEOF_UNSIGNED_LONG)
+CHECK_TYPE_SIZE("long double" SIZEOF_LONG_DOUBLE)
 
 MARK_AS_ADVANCED(
   KDE4_KCFGC_EXECUTABLE KDE4_KDECORE_LIBRARY KDECONFIG_EXECUTABLE)
 
 ######################### Special Requirements ##########################
-
-CHECK_INCLUDE_FILE("libofx/libofx.h" HAVE_LIBOFX_H)
-IF(HAVE_LIBOFX_H)
-  OPTION(USE_OFX_DIRECTCONNECT "Enable to compile with ofximport support" ON)
-  # the USE_OFX_DIRECTCONNECT preprocessor definition will be written
-  # to config.h as specified in config.h.cmake
-ENDIF(HAVE_LIBOFX_H)
 
 # This is needed for QtSqlite and QtDesigner
 # (they'll install files to ${QT_INSTALL_DIR}/plugins/)
@@ -169,15 +186,59 @@ GET_FILENAME_COMPONENT(QT_DIR     ${QT_BIN_DIR}        PATH)
 SET(QT_INSTALL_DIR ${QT_DIR} CACHE PATH
   "Qt install prefix defaults to the Qt prefix: ${QT_DIR}")
 
-FIND_PACKAGE(Libical)
-FIND_PACKAGE(Gwenhywfar)
-FIND_PACKAGE(AqBanking)
 
-SET(KBANKING_FOUND FALSE)
-IF (AQBANKING_FOUND AND GWENHYWFAR_FOUND)
-SET(KBANKING_FOUND TRUE)
-ENDIF (AQBANKING_FOUND AND GWENHYWFAR_FOUND)
+# check for optional OFX support
+SET(LIBOFX_DEFAULT "AUTO")
+IF(DEFINED ENABLE_LIBOFX)
+  SET(LIBOFX_DEFAULT ${ENABLE_LIBOFX})
+ENDIF(DEFINED ENABLE_LIBOFX)
+OPTION(ENABLE_LIBOFX "Enable OFX plugin" ON)
+IF(ENABLE_LIBOFX)
+  FIND_PACKAGE(LibOfx)
+  IF(NOT LIBOFX_FOUND)
+    IF(NOT LIBOFX_DEFAULT STREQUAL "AUTO")
+      MESSAGE(FATAL_ERROR "LibOFX not found")
+    ENDIF(NOT LIBOFX_DEFAULT STREQUAL "AUTO")
+    SET(ENABLE_LIBOFX OFF CACHE BOOL "Enable OFX plugin" FORCE)
+  ENDIF(NOT LIBOFX_FOUND)
+ENDIF(ENABLE_LIBOFX)
+
+# check for optional KBanking support
+SET(KBANKING_FOUND "AUTO")
 MARK_AS_ADVANCED(KBANKING_FOUND)
+IF(DEFINED ENABLE_KBANKING)
+  SET(KBANKING_FOUND OFF)
+ENDIF(DEFINED ENABLE_KBANKING)
+OPTION(ENABLE_KBANKING "Enable KBanking plugin" ON)
+IF(ENABLE_KBANKING)
+  FIND_PACKAGE(Gwenhywfar)
+  FIND_PACKAGE(AqBanking)
+  IF (AQBANKING_FOUND AND GWENHYWFAR_FOUND)
+    SET(KBANKING_FOUND ON)
+  ELSE (AQBANKING_FOUND AND GWENHYWFAR_FOUND)
+    IF(NOT KBANKING_FOUND STREQUAL "AUTO")
+      MESSAGE(FATAL_ERROR "KBanking requirements not met")
+    ENDIF(NOT KBANKING_FOUND STREQUAL "AUTO")
+    SET(KBANKING_FOUND OFF)
+    SET(ENABLE_KBANKING OFF CACHE BOOL "Enable KBanking plugin" FORCE)
+  ENDIF (AQBANKING_FOUND AND GWENHYWFAR_FOUND)
+ENDIF(ENABLE_KBANKING)
+
+# check for optional ical support
+SET(LIBICAL_DEFAULT "AUTO")
+IF(DEFINED ENABLE_LIBICAL)
+  SET(LIBICAL_DEFAULT ${ENABLE_LIBICAL})
+ENDIF(DEFINED ENABLE_LIBICAL)
+OPTION(ENABLE_LIBICAL "Enable Calendar plugin" ON)
+IF(ENABLE_LIBICAL)
+  FIND_PACKAGE(Libical)
+  IF(NOT LIBICAL_FOUND)
+    IF(NOT LIBICAL_DEFAULT STREQUAL "AUTO")
+      MESSAGE(FATAL_ERROR "LIBICAL not found")
+    ENDIF(NOT LIBICAL_DEFAULT STREQUAL "AUTO")
+    SET(ENABLE_LIBICAL OFF CACHE BOOL "Enable Calendar plugin" FORCE)
+  ENDIF(NOT LIBICAL_FOUND)
+ENDIF(ENABLE_LIBICAL)
 
 # check for CppUnit to build the tests
 FIND_PACKAGE(CppUnit)
@@ -228,8 +289,12 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${KDE4_ENABLE_EXCEPTIONS}")
 
 # temporarily disable the hidden base class virtual functions warning
 # so we can concetrate on the more important compiler warnings
+# also disable "type qualifiers ignored on function return type"
+#since we can't do anything about KDChart code
 IF(CMAKE_SYSTEM_NAME MATCHES Linux)
-  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-overloaded-virtual")
+  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-overloaded-virtual -Wno-ignored-qualifiers")
+  SET(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -Wl,--as-needed")
+  SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,--as-needed")
 ENDIF(CMAKE_SYSTEM_NAME MATCHES Linux)
 
 IF(NOT WIN32)
@@ -250,7 +315,7 @@ IF(NOT MSVC)
 
   # be pedantic about undefined symbols when linking shared libraries
   IF(CMAKE_SYSTEM_NAME MATCHES Linux)
-    SET(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--no-undefined")
+    SET(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--no-undefined -Wl,--as-needed")
   ELSE(CMAKE_SYSTEM_NAME MATCHES Linux)
     SET(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl")
   ENDIF(CMAKE_SYSTEM_NAME MATCHES Linux)
@@ -265,10 +330,12 @@ endif(USE_LEAK_CHECK)
 OPTION(USE_QT_DESIGNER
   "Install KMyMoney specific widget library for Qt-Designer (default=OFF)" OFF)
 
+OPTION(USE_DEVELOPER_DOC
+  "Install KMyMoney specific developer documentation (default=OFF)" OFF)
+
 IF(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
-  SET(CMAKE_INSTALL_PREFIX "${KDE4PREFIX}" CACHE PATH
-    "KMyMoney install prefix defaults
-    to the KDE4 install prefix: ${KDE4PREFIX}" FORCE)
+  SET(CMAKE_INSTALL_PREFIX "${KDE4_INSTALL_DIR}" CACHE PATH
+    "KMyMoney install prefix defaults to the KDE4 install prefix: ${KDE4_INSTALL_DIR}" FORCE)
 ENDIF(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
 
 # the RPATH to be used when installing
@@ -293,8 +360,9 @@ INCLUDE_DIRECTORIES(
 ADD_SUBDIRECTORY( libkgpgfile )
 ADD_SUBDIRECTORY( libkdchart )
 ADD_SUBDIRECTORY( kmymoney )
-#ADD_SUBDIRECTORY( doc )
-#ADD_SUBDIRECTORY( developer-doc )
+IF (USE_DEVELOPER_DOC)
+  ADD_SUBDIRECTORY( developer-doc )
+ENDIF (USE_DEVELOPER_DOC)
 
 #CONFIGURE_FILE(
 #  "${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in"
@@ -336,6 +404,12 @@ INCLUDE(CPack)
 INCLUDE(UseRPMTools)
 IF(RPMTools_FOUND)
   SET(RPM_VERSION_SUFFIX  ${VERSION_SUFFIX})
+  IF(${RPM_VERSION_SUFFIX} MATCHES "-.*")
+    # remove the leading dash from the version suffix
+    STRING(LENGTH ${RPM_VERSION_SUFFIX} LEN)
+    MATH(EXPR LEN ${LEN}-1)
+    STRING(SUBSTRING ${RPM_VERSION_SUFFIX} 1 ${LEN} RPM_VERSION_SUFFIX) 
+  ENDIF(${RPM_VERSION_SUFFIX} MATCHES "-.*")
 
   # kmymoney conflicts with kmymoney-unstable
   SET(RPM_CONFLICTING kmymoney-unstable)
@@ -350,44 +424,37 @@ ENDIF(RPMTools_FOUND)
 
 # create the config.h file out of the config.h.cmake
 CONFIGURE_FILE  (config-kmymoney.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-kmymoney.h )
+CONFIGURE_FILE  (config-kmymoney-version.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-kmymoney-version.h )
 
 # this macro maps the boolean variable ${_varname} to "yes"/"no"
 # and writes the output to the variable nice_${_varname}
 MACRO(nice_yesno _varname)
-  if(${${_varname}})
+  if(${_varname})
     SET("nice_${_varname}" "yes")
-  else(${${_varname}})
-    if(${_varname})
-      SET("nice_${_varname}" "yes")
-    else(${_varname})
-      SET("nice_${_varname}" "no")
-    endif(${_varname})
-  endif(${${_varname}})
+  else(${_varname})
+    SET("nice_${_varname}" "no")
+  endif(${_varname})
 ENDMACRO(nice_yesno _varname)
 
-nice_yesno("HAVE_LIBOFX_H")
-nice_yesno("USE_OFX_DIRECTCONNECT")
+nice_yesno("LIBOFX_FOUND")
 nice_yesno("KBANKING_FOUND")
 nice_yesno("LIBICAL_FOUND")
-nice_yesno("QT_SQLITE_FOUND")
 nice_yesno("USE_LEAK_CHECK")
 nice_yesno("USE_QT_DESIGNER")
+nice_yesno("USE_DEVELOPER_DOC")
 nice_yesno("HAVE_LIBCPPUNIT")
 nice_yesno("KDE4_BUILD_TESTS")
+nice_yesno("DOXYGEN_FOUND")
 message("
--------- KMyMoney ${CPACK_PACKAGE_VERSION}-${VERSION_SUFFIX} --------
+-------- KMyMoney ${CPACK_PACKAGE_VERSION}${VERSION_SUFFIX} --------
 
 Configure results (user options):
 --------------------------------------------
-OFX plugin:                              ${nice_HAVE_LIBOFX_H}
-
-OFX direct connect:                      ${nice_USE_OFX_DIRECTCONNECT}
+OFX plugin:                              ${nice_LIBOFX_FOUND}
 
 KBanking plugin:                         ${nice_KBANKING_FOUND}
 
 iCalendar export plugin:                 ${nice_LIBICAL_FOUND}
-
-SQLITE3 support:                         ${nice_QT_SQLITE_FOUND}
 --------------------------------------------
 
 
@@ -395,10 +462,12 @@ Configure results (developer options):
 --------------------------------------------
 Qt-Designer library support:             ${nice_USE_QT_DESIGNER}
 
-PDF document generation:                 ?
+Developer documentation generation:      ${nice_USE_DEVELOPER_DOC}
 
 CPPUNIT support:                         ${nice_HAVE_LIBCPPUNIT}
         build tests:                     ${nice_KDE4_BUILD_TESTS}
+
+Doxygen support:                         ${nice_DOXYGEN_FOUND}
 
 Build type: ${CMAKE_BUILD_TYPE}")
 
@@ -409,12 +478,6 @@ endif(USE_LEAK_CHECK)
 
 message("--------------------------------------------
 ")
-
-# Display this message the first time only.
-if(QT_SQLITE_FALLBACK AND QT_SQLITE_FOUND AND NOT Sqlite_FIND_QUIETLY)
-  message("Note: You should run 'make install-qsqlite3' to enable Sqlite3 support.
-  ")
-endif(QT_SQLITE_FALLBACK AND QT_SQLITE_FOUND AND NOT Sqlite_FIND_QUIETLY)
 
 message("Good - your configure finished.
 Now type 'make' to build KMyMoney. For more help, consult README.cmake
