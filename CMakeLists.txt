@@ -131,8 +131,10 @@ CHECK_FUNCTION_EXISTS(atoll HAVE_ATOLL)
 CHECK_FUNCTION_EXISTS(vsnprintf HAVE_VSNPRINTF)
 CHECK_FUNCTION_EXISTS(strtoll HAVE_STRTOLL)
 
-SET(CMAKE_REQUIRED_FLAGS "-std=c99")
-SET(CMAKE_REQUIRED_LIBRARIES m)
+IF(NOT WIN32)
+    SET(CMAKE_REQUIRED_FLAGS "-std=c99")
+    SET(CMAKE_REQUIRED_LIBRARIES m)
+ENDIF(NOT WIN32)
 CHECK_FUNCTION_EXISTS(round HAVE_ROUND)
 
 # check for function in header
@@ -146,7 +148,9 @@ CHECK_PROTOTYPE_EXISTS(res_init "sys/types.h;netinet/in.h;arpa/nameser.h;resolv.
 
 # special handling of crypt() check
 # ----------------------- crypt() ---------------------------------
-SET(CMAKE_REQUIRED_LIBRARIES crypt) 
+IF(NOT WIN32)
+    SET(CMAKE_REQUIRED_LIBRARIES crypt) 
+ENDIF(NOT WIN32)
 CHECK_FUNCTION_EXISTS(crypt HAVE_CRYPT)
 # -----------------------------------------------------------------
 
