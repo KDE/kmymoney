@@ -45,6 +45,17 @@ public:
   KMyMoneyAccountTreeView(QWidget *parent = 0);
   ~KMyMoneyAccountTreeView();
 
+public slots:
+  /**
+    * Overridden for internal reasons. @sa collapsedAll().
+    */
+  void collapseAll(void);
+
+  /**
+    * Overridden for internal reasons. @sa expandedAll().
+    */
+  void expandAll(void);
+
   void setConfigGroupName(const QString& group);
 
 protected:
@@ -77,6 +88,15 @@ signals:
     *            MyMoneyAccount or MyMoneyInstitution depending on selected item)
     */
   void openObject(const MyMoneyObject& obj);
+
+  /**
+    * collapsedAll() and expandedAll() are emitted when the resp.
+    * collapseAll() and expandAll() slots were invoked after the
+    * base functionality of QTreeView::collapseAll()/QTreeView::expandAll()
+    * has been finished.
+    */
+  void collapsedAll(void);
+  void expandedAll(void);
 
 private:
   QString m_groupName;

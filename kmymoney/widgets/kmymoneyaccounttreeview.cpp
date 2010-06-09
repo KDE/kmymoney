@@ -120,6 +120,19 @@ void KMyMoneyAccountTreeView::currentChanged(const QModelIndex &current, const Q
   }
 }
 
+void KMyMoneyAccountTreeView::collapseAll(void)
+{
+  QTreeView::collapseAll();
+  emit collapsedAll();
+}
+
+void KMyMoneyAccountTreeView::expandAll(void)
+{
+  QTreeView::expandAll();
+  emit expandedAll();
+}
+
+
 class AccountsViewFilterProxyModel::Private
 {
 public:
