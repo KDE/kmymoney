@@ -1,21 +1,8 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=iCalendar
-Name[en_GB]=iCalendar
-Name[es]=iCalendar
-Name[km]=iCalendar
-Name[pt]=iCalendar
-Name[pt_BR]=iCalendar
-Name[sv]=iCalendar
-Name[uk]=iCalendar
 Name[x-test]=xxiCalendarxx
 Comment=Exports schedules to iCalendar files
-Comment[en_GB]=Exports schedules to iCalendar files
-Comment[es]=Exporta calendarios a archivos de iCalendar
-Comment[pt]=Exporta as calendarizações para os ficheiros iCalendar
-Comment[pt_BR]=Exporta os agendamentos para os arquivos iCalendar
-Comment[sv]=Exporterar scheman till iCalendar-filer
-Comment[uk]=Експортує розклади до файлів iCalendar
 Comment[x-test]=xxExports schedules to iCalendar filesxx
 Type=Service
 Icon=x-office-calendar
