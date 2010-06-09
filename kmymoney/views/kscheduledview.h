@@ -54,10 +54,10 @@ class KMenu;
   * @short A class to encapsulate recurring transaction operations.
   */
 
-class KScheduledViewDecl : public QDialog, public Ui::KScheduledViewDecl
+class KScheduledViewDecl : public QWidget, public Ui::KScheduledViewDecl
 {
 public:
-  KScheduledViewDecl(QWidget *parent) : QDialog(parent) {
+  KScheduledViewDecl(QWidget *parent) : QWidget(parent) {
     setupUi(this);
   }
 };

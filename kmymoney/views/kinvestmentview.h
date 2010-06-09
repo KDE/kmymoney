@@ -43,10 +43,10 @@
   */
 
 
-class KInvestmentViewDecl : public QDialog, public Ui::KInvestmentViewDecl
+class KInvestmentViewDecl : public QWidget, public Ui::KInvestmentViewDecl
 {
 public:
-  KInvestmentViewDecl(QWidget *parent) : QDialog(parent) {
+  KInvestmentViewDecl(QWidget *parent) : QWidget(parent) {
     setupUi(this);
   }
 };

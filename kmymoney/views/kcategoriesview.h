@@ -59,10 +59,10 @@
   * accessible from either the main menu or the context menu.
   */
 
-class KCategoriesViewDecl : public QDialog, public Ui::KCategoriesViewDecl
+class KCategoriesViewDecl : public QWidget, public Ui::KCategoriesViewDecl
 {
 public:
-  KCategoriesViewDecl(QWidget *parent) : QDialog(parent) {
+  KCategoriesViewDecl(QWidget *parent) : QWidget(parent) {
     setupUi(this);
   }
 };

@@ -82,10 +82,10 @@ private:
   * @author Thomas Baumgart
   */
 
-class KBudgetViewDecl : public QDialog, public Ui::KBudgetViewDecl
+class KBudgetViewDecl : public QWidget, public Ui::KBudgetViewDecl
 {
 public:
-  KBudgetViewDecl(QWidget *parent) : QDialog(parent) {
+  KBudgetViewDecl(QWidget *parent) : QWidget(parent) {
     setupUi(this);
   }
 };
