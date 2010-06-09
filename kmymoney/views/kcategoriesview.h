@@ -59,17 +59,10 @@
   * accessible from either the main menu or the context menu.
   */
 
-class KCategoriesViewDecl : public QWidget, public Ui::KCategoriesViewDecl
-{
-public:
-  KCategoriesViewDecl(QWidget *parent) : QWidget(parent) {
-    setupUi(this);
-  }
-};
-
-class KCategoriesView : public KCategoriesViewDecl
+class KCategoriesView : public QWidget, public Ui::KCategoriesViewDecl
 {
   Q_OBJECT
+
 public:
   KCategoriesView(QWidget *parent = 0);
   virtual ~KCategoriesView();

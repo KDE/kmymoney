@@ -38,19 +38,9 @@
 /**
   * This class implements the accounts hierarchical and iconic 'view'.
   */
-
-class KAccountsViewDecl : public QWidget, public Ui::KAccountsViewDecl
-{
-public:
-  KAccountsViewDecl(QWidget *parent) : QWidget(parent) {
-    setupUi(this);
-  }
-
-};
-class KAccountsView : public KAccountsViewDecl
+class KAccountsView : public QWidget, public Ui::KAccountsViewDecl
 {
   Q_OBJECT
-private:
 
 public:
   KAccountsView(QWidget *parent = 0);

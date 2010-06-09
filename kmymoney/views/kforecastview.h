@@ -40,23 +40,12 @@ using namespace reports;
 
 /**
   * @author Alvaro Soliverez
-  */
-
-/**
+  *
   * This class implements the forecast 'view'.
   */
-
-class KForecastViewDecl : public QWidget, public Ui::KForecastViewDecl
-{
-public:
-  KForecastViewDecl(QWidget *parent) : QWidget(parent) {
-    setupUi(this);
-  }
-};
-class KForecastView : public KForecastViewDecl
+class KForecastView : public QWidget, public Ui::KForecastViewDecl
 {
   Q_OBJECT
-private:
 
 public:
   KForecastView(QWidget *parent = 0);

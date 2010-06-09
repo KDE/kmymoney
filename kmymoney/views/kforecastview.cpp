@@ -45,9 +45,12 @@
 #include "pivotgrid.h"
 
 KForecastView::KForecastView(QWidget *parent) :
-    KForecastViewDecl(parent),
-    m_forecastChart(new KReportChartView(m_tabChart))
+    QWidget(parent)
 {
+  setupUi(this);
+
+  m_forecastChart = new KReportChartView(m_tabChart);
+
   for (int i = 0; i < MaxViewTabs; ++i)
     m_needReload[i] = false;
 
@@ -119,7 +122,7 @@ void KForecastView::loadForecast(ForecastViewTab tab)
 void KForecastView::showEvent(QShowEvent* event)
 {
   // don't forget base class implementation
-  KForecastViewDecl::showEvent(event);
+  QWidget::showEvent(event);
   slotTabChanged(m_tab->currentWidget());
 }
 

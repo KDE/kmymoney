@@ -49,8 +49,10 @@
 #include "models.h"
 
 KAccountsView::KAccountsView(QWidget *parent) :
-    KAccountsViewDecl(parent)
+    QWidget(parent)
 {
+  setupUi(this);
+
   // setup icons for collapse and expand button
   KGuiItem collapseGuiItem("",
                            KIcon("zoom-out"),
@@ -219,7 +221,7 @@ void KAccountsView::slotTabCurrentChanged(QWidget* _tab)
 
 void KAccountsView::showEvent(QShowEvent * event)
 {
-  KAccountsViewDecl::showEvent(event);
+  QWidget::showEvent(event);
   slotTabCurrentChanged(m_tab->currentWidget());
 }
 

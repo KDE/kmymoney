@@ -127,16 +127,7 @@ private:
   QString m_accountId;
 };
 
-
-class KPayeesViewDecl : public QWidget, public Ui::KPayeesViewDecl
-{
-public:
-  KPayeesViewDecl(QWidget *parent) : QWidget(parent) {
-    setupUi(this);
-  }
-};
-
-class KPayeesView : public KPayeesViewDecl
+class KPayeesView : public QWidget, public Ui::KPayeesViewDecl
 {
   Q_OBJECT
 

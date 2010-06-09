@@ -64,9 +64,11 @@ public:
 };
 
 KInvestmentView::KInvestmentView(QWidget *parent) :
-    KInvestmentViewDecl(parent),
+    QWidget(parent),
     d(new Private)
 {
+  setupUi(this);
+
   d->m_filterProxyModel = new AccountNamesFilterProxyModel(this);
   d->m_filterProxyModel->addAccountType(MyMoneyAccount::Investment);
   d->m_filterProxyModel->setHideEquityAccounts(false);
@@ -332,7 +334,7 @@ void KInvestmentView::showEvent(QShowEvent* event)
   }
 
   // don't forget base class implementation
-  KInvestmentViewDecl::showEvent(event);
+  QWidget::showEvent(event);
 }
 
 #include "kinvestmentview.moc"

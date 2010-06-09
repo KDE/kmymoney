@@ -56,12 +56,14 @@
 #include "kmymoney.h"
 
 KScheduledView::KScheduledView(QWidget *parent) :
-    KScheduledViewDecl(parent),
+    QWidget(parent),
     m_openBills(true),
     m_openDeposits(true),
     m_openTransfers(true),
     m_openLoans(true)
 {
+  setupUi(this);
+
   // create the searchline widget
   // and insert it into the existing layout
   m_searchWidget = new K3ListViewSearchLineWidget(m_qlistviewScheduled, m_listTab);
@@ -293,7 +295,7 @@ void KScheduledView::slotReloadView(void)
 
 void KScheduledView::showEvent(QShowEvent* event)
 {
-  KScheduledViewDecl::showEvent(event);
+  QWidget::showEvent(event);
 
   if (m_needReload)
     slotReloadView();

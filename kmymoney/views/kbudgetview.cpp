@@ -81,11 +81,13 @@ const int KBudgetView::m_iBudgetYearsAhead = 5;
 const int KBudgetView::m_iBudgetYearsBack = 3;
 
 KBudgetView::KBudgetView(QWidget *parent) :
-    KBudgetViewDecl(parent),
+    QWidget(parent),
     m_needReload(false),
     m_inSelection(false),
     m_budgetInEditing(false)
 {
+  setupUi(this);
+
   m_accountTree->setSorting(-1);
   m_budgetList->setRootIsDecorated(false);
   m_budgetList->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -175,7 +177,7 @@ void KBudgetView::showEvent(QShowEvent * event)
   if (m_needReload) {
     slotRefreshView();
   }
-  KBudgetViewDecl::showEvent(event);
+  QWidget::showEvent(event);
 }
 
 void KBudgetView::slotRearrange(void)
@@ -186,7 +188,7 @@ void KBudgetView::slotRearrange(void)
 void KBudgetView::resizeEvent(QResizeEvent* ev)
 {
   // resize the register
-  KBudgetViewDecl::resizeEvent(ev);
+  QWidget::resizeEvent(ev);
 }
 
 void KBudgetView::slotReloadView(void)
@@ -711,7 +713,7 @@ void KBudgetView::slotUpdateBudget(void)
 
 void KBudgetView::languageChange(void)
 {
-  KBudgetViewDecl::languageChange();
+  QWidget::languageChange();
 
   m_newButton->setText(QString());
   m_renameButton->setText(QString());

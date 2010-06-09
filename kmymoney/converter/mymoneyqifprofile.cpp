@@ -50,7 +50,7 @@
  *  00..69  ->  2000..2069
  *  70..99  ->  1970..1999
  */
-const int CENTURY_BREAK=70;
+const int CENTURY_BREAK = 70;
 
 class MyMoneyQifProfile::Private
 {

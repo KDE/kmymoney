@@ -41,17 +41,7 @@
 /**
   * @author Kevin Tambascio
   */
-
-
-class KInvestmentViewDecl : public QWidget, public Ui::KInvestmentViewDecl
-{
-public:
-  KInvestmentViewDecl(QWidget *parent) : QWidget(parent) {
-    setupUi(this);
-  }
-};
-
-class KInvestmentView : public KInvestmentViewDecl
+class KInvestmentView : public QWidget, public Ui::KInvestmentViewDecl
 {
   Q_OBJECT
 

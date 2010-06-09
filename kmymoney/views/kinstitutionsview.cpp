@@ -40,9 +40,11 @@
 #include "kmymoney.h"
 
 KInstitutionsView::KInstitutionsView(QWidget *parent) :
-    KInstitutionsViewDecl(parent),
+    QWidget(parent),
     m_needReload(false)
 {
+  setupUi(this);
+
   // setup icons for collapse and expand button
   KGuiItem collapseGuiItem("",
                            KIcon("zoom-out"),
@@ -103,7 +105,7 @@ void KInstitutionsView::showEvent(QShowEvent * event)
   }
 
   // don't forget base class implementation
-  KInstitutionsViewDecl::showEvent(event);
+  QWidget::showEvent(event);
 }
 
 void KInstitutionsView::slotLoadAccounts(void)

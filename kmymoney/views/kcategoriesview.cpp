@@ -48,10 +48,12 @@
 #include "models.h"
 
 KCategoriesView::KCategoriesView(QWidget *parent) :
-    KCategoriesViewDecl(parent),
+    QWidget(parent),
     m_needReload(false),
     m_haveUnusedCategories(false)
 {
+  setupUi(this);
+
   // setup icons for collapse and expand button
   KGuiItem collapseGuiItem("",
                            KIcon("zoom-out"),
@@ -122,7 +124,7 @@ void KCategoriesView::showEvent(QShowEvent * event)
   }
 
   // don't forget base class implementation
-  KCategoriesViewDecl::showEvent(event);
+  QWidget::showEvent(event);
 }
 
 void KCategoriesView::slotLoadAccounts(void)

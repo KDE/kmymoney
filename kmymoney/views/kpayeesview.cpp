@@ -109,13 +109,15 @@ const QColor KTransactionListItem::backgroundColor(void)
 // *** KPayeesView Implementation ***
 
 KPayeesView::KPayeesView(QWidget *parent) :
-    KPayeesViewDecl(parent),
+    QWidget(parent),
     m_needReload(false),
     m_needConnection(true),
     m_updatesQueued(0),
     m_inSelection(false),
     m_payeeInEditing(false)
 {
+  setupUi(this);
+
   m_filterProxyModel = new AccountNamesFilterProxyModel(this);
   m_filterProxyModel->addAccountGroup(MyMoneyAccount::Asset);
   m_filterProxyModel->addAccountGroup(MyMoneyAccount::Liability);
@@ -710,7 +712,7 @@ void KPayeesView::showEvent(QShowEvent* event)
   QTimer::singleShot(0, this, SLOT(rearrange()));
 
   // don't forget base class implementation
-  KPayeesViewDecl::showEvent(event);
+  QWidget::showEvent(event);
 
   QList<MyMoneyPayee> list;
   selectedPayees(list);
@@ -814,7 +816,7 @@ void KPayeesView::resizeEvent(QResizeEvent* ev)
     m_transactionView->visibleWidth(),
     m_transactionView->contentsHeight());
 
-  KPayeesViewDecl::resizeEvent(ev);
+  QWidget::resizeEvent(ev);
 }
 
 void KPayeesView::slotTransactionDoubleClicked(Q3ListViewItem* i)

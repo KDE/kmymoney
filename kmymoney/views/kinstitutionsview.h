@@ -34,14 +34,6 @@
 
 #include "ui_kinstitutionsviewdecl.h"
 
-class KInstitutionsViewDecl : public QWidget, public Ui::KInstitutionsViewDecl
-{
-public:
-  KInstitutionsViewDecl(QWidget *parent) : QWidget(parent) {
-    setupUi(this);
-  }
-};
-
 /**
   * @author Thomas Baumgart
   */
@@ -50,10 +42,9 @@ public:
   * This class implements the institutions hierarchical 'view'.
   */
 
-class KInstitutionsView : public KInstitutionsViewDecl
+class KInstitutionsView : public QWidget, public Ui::KInstitutionsViewDecl
 {
   Q_OBJECT
-private:
 
 public:
   KInstitutionsView(QWidget *parent = 0);

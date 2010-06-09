@@ -81,18 +81,10 @@ private:
   * @author Darren Gould
   * @author Thomas Baumgart
   */
-
-class KBudgetViewDecl : public QWidget, public Ui::KBudgetViewDecl
-{
-public:
-  KBudgetViewDecl(QWidget *parent) : QWidget(parent) {
-    setupUi(this);
-  }
-};
-
-class KBudgetView : public KBudgetViewDecl
+class KBudgetView : public QWidget, public Ui::KBudgetViewDecl
 {
   Q_OBJECT
+
 public:
   KBudgetView(QWidget *parent = 0);
   ~KBudgetView();
