@@ -1,7 +1,22 @@
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}
                     ${CMAKE_CURRENT_BINARY_DIR}
+                    ${KDEPIMLIBS_INCLUDE_DIRS}
+                    ${CMAKE_CURRENT_BINARY_DIR}/dialogs/
+                    ${CMAKE_CURRENT_SOURCE_DIR}/widgets/
+                    ${CMAKE_CURRENT_BINARY_DIR}/widgets/
+                    ${CMAKE_CURRENT_SOURCE_DIR}/mymoney/
+                    ${CMAKE_CURRENT_SOURCE_DIR}/mymoney/storage/
+                    ${CMAKE_CURRENT_SOURCE_DIR}/plugins/
+                    ${CMAKE_CURRENT_SOURCE_DIR}/views/
+                    ${CMAKE_CURRENT_SOURCE_DIR}/dialogs/
+                    ${CMAKE_CURRENT_SOURCE_DIR}/converter/
+                    ${CMAKE_CURRENT_BINARY_DIR}/dialogs/settings/
+                    ${CMAKE_CURRENT_BINARY_DIR}/mymoney/storage/
+                    ${CMAKE_CURRENT_SOURCE_DIR}/reports/
+                    ${CMAKE_CURRENT_SOURCE_DIR}/wizards/wizardpages/
                     ${CMAKE_CURRENT_SOURCE_DIR}/models/
                     ${CMAKE_CURRENT_BINARY_DIR}/models/
+                    ${KMyMoney_SOURCE_DIR}/libkgpgfile/
                     ${KMyMoney_SOURCE_DIR}/libkdchart/include )
 
 ADD_SUBDIRECTORY( mymoney )

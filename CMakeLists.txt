@@ -62,23 +62,7 @@ if(CMAKE_BUILD_TYPE_TOLOWER MATCHES debugfull)
 endif()
 add_definitions (-DQT3_SUPPORT -DQT3_SUPPORT_WARNINGS)
 
-include_directories( ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR}
-	${KDE4_INCLUDES}
-	${KDEPIMLIBS_INCLUDE_DIRS}
-	${CMAKE_CURRENT_BINARY_DIR}/kmymoney/dialogs/
-	${CMAKE_CURRENT_SOURCE_DIR}/kmymoney/widgets/
-	${CMAKE_CURRENT_BINARY_DIR}/kmymoney/widgets/
-	${CMAKE_CURRENT_SOURCE_DIR}/kmymoney/mymoney/
-	${CMAKE_CURRENT_SOURCE_DIR}/kmymoney/mymoney/storage/
-  ${CMAKE_CURRENT_SOURCE_DIR}/libkgpgfile/
-	${CMAKE_CURRENT_SOURCE_DIR}/kmymoney/plugins/
-	${CMAKE_CURRENT_SOURCE_DIR}/kmymoney/views/
-	${CMAKE_CURRENT_SOURCE_DIR}/kmymoney/dialogs/
-	${CMAKE_CURRENT_SOURCE_DIR}/kmymoney/converter/
-	${CMAKE_CURRENT_BINARY_DIR}/kmymoney/dialogs/settings/
-	${CMAKE_CURRENT_BINARY_DIR}/kmymoney/mymoney/storage/
-	${CMAKE_CURRENT_SOURCE_DIR}/kmymoney/reports/
-	${CMAKE_CURRENT_SOURCE_DIR}/kmymoney/wizards/wizardpages/)
+include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES})
 
 set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${KDE4_ENABLE_EXCEPTIONS}" )
 
