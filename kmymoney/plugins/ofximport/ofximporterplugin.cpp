@@ -1,5 +1,5 @@
 /***************************************************************************
-                          ofxiimporterplugin.cpp
+                          ofximporterplugin.cpp
                              -------------------
     begin                : Sat Jan 01 2005
     copyright            : (C) 2005 by Ace Jones
@@ -24,7 +24,6 @@
 #include <QTextStream>
 #include <QRadioButton>
 #include <QSpinBox>
-#include <Q3DateTimeEdit>
 #include <QByteArray>
 
 // ----------------------------------------------------------------------------

@@ -1,5 +1,5 @@
 /***************************************************************************
-                          ofxiimporterplugin.h
+                          ofximporterplugin.h
                              -------------------
     begin                : Sat Jan 01 2005
     copyright            : (C) 2005 by Ace Jones
