@@ -79,6 +79,8 @@ KMyMoneyPriceDlg::KMyMoneyPriceDlg(QWidget* parent) :
                         i18n("Use this to close the dialog and return to the application."));
   m_closeButton->setGuiItem(okButtenItem);
 
+  m_onlineQuoteButton->setIcon(KIcon("investment-update-online"));
+
   connect(m_closeButton, SIGNAL(clicked()), this, SLOT(accept()));
   connect(m_editButton, SIGNAL(clicked()), this, SLOT(slotEditPrice()));
   connect(m_priceList, SIGNAL(editPrice()), this, SLOT(slotEditPrice()));
@@ -89,15 +91,13 @@ KMyMoneyPriceDlg::KMyMoneyPriceDlg(QWidget* parent) :
   connect(m_priceList, SIGNAL(selectionChanged(Q3ListViewItem*)), this, SLOT(slotSelectPrice(Q3ListViewItem*)));
   connect(m_onlineQuoteButton, SIGNAL(clicked()), this, SLOT(slotOnlinePriceUpdate()));
   connect(m_priceList, SIGNAL(onlinePriceUpdate()), this, SLOT(slotOnlinePriceUpdate()));
+  connect(m_priceList, SIGNAL(openContextMenu(MyMoneyPrice)), this, SIGNAL(openContextMenu(MyMoneyPrice)));
 
   connect(m_showAllPrices, SIGNAL(toggled(bool)), this, SLOT(slotLoadWidgets()));
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadWidgets()));
 
   slotLoadWidgets();
   slotSelectPrice(0);
-
-  // FIXME: for now, we don't have the logic to delete all prices in a given date range
-  m_deleteRangeButton->setEnabled(false);
 }
 
 KMyMoneyPriceDlg::~KMyMoneyPriceDlg()
@@ -139,6 +139,7 @@ void KMyMoneyPriceDlg::slotSelectPrice(Q3ListViewItem * item)
       m_editButton->setEnabled(false);
       m_deleteButton->setEnabled(false);
     }
+    emit selectObject(priceitem->price());
   }
 }
 
@@ -232,23 +233,6 @@ void KMyMoneyPriceDlg::slotOnlinePriceUpdate(void)
     delete dlg;
   }
 }
-
-#if 0
-// This function is not needed.  However, removing the KUpdateStockPriceDlg
-// instantiation below causes link failures:
-
-// This seems to be fixed, so I #if 0'ed it out. Let's see, if someone
-// complains and if not, we get rid of this whole block one day. (2007-06-22 ipwizard)
-//
-// kmymonekmymoneypriceview.cpp:179: undefined reference to
-// `KUpdateStockPriceDlg::KUpdateStockPriceDlg[in-charge](QWidget*, char const*)'
-// kmymonekmymoneypriceview.cpp:204: undefined reference to
-// `KUpdateStockPriceDlg::KUpdateStockPriceDlg[in-charge](QDate const&, QString const&, QWidget*, char const*)'
-void KEditEquityEntryDlg_useless(void)
-{
-  delete new KUpdateStockPriceDlg();
-}
-#endif
 
 // Make sure, that these definitions are only used within this file
 // this does not seem to be necessary, but when building RPMs the

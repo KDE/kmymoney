@@ -44,6 +44,7 @@
 #include <kmymoneyplugin.h>
 #include <register.h>
 #include <kmymoneyutils.h>
+#include <mymoneyprice.h>
 
 class QResizeEvent;
 class QTreeWidgetItem;
@@ -913,6 +914,13 @@ public slots:
   void slotShowCurrencyContextMenu(void);
 
   /**
+    * This slot opens the price options menu at the current cursor
+    * position.
+    */
+  void slotShowPriceContextMenu(void);
+
+
+  /**
     * This slot collects information for a new scheduled transaction
     * and saves it in the engine. @sa slotScheduleNew(const MyMoneyTransaction&)
     */
@@ -962,6 +970,8 @@ public slots:
   void slotSelectTransactions(const KMyMoneyRegister::SelectedTransactions& list);
 
   void slotSelectCurrency(const MyMoneySecurity& currency = MyMoneySecurity());
+
+  void slotSelectPrice(const MyMoneyPrice& price = MyMoneyPrice());
 
   void slotTransactionMatch(void);
 
@@ -1138,11 +1148,23 @@ signals:
     */
   void currencySelected(const MyMoneySecurity& currency);
 
+  /**
+    * This signal is emitted when a new price has been selected by
+    * the GUI. If no price is selected or the selection is removed,
+    * @a price is identical to MyMoneyPrice().
+    */
+  void priceSelected(const MyMoneyPrice& price);
+
   void payeeRename(void);
   void payeeCreated(const QString& id);
 
   void currencyRename(void);
   void currencyCreated(const QString& id);
+
+  void priceEdit(void);
+  void priceNew(void);
+  void priceDelete(void);
+  void priceOnlineUpdate(void);
 
   void startMatchTransaction(const MyMoneyTransaction& t);
   void cancelMatchTransaction(void);

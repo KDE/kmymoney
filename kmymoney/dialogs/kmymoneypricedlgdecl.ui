@@ -57,13 +57,6 @@
                 </widget>
               </item>
               <item>
-                <widget class="KPushButton" name="m_deleteRangeButton">
-                  <property name="text">
-                    <string>Delete Range...</string>
-                  </property>
-                </widget>
-              </item>
-              <item>
                 <spacer name="spacer7">
                   <property name="sizeHint">
                     <size>

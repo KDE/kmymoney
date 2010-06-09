@@ -61,6 +61,10 @@ protected slots:
   void slotLoadWidgets(void);
   void slotOnlinePriceUpdate(void);
 
+signals:
+  void openContextMenu(const MyMoneyPrice& price);
+  void selectObject(const MyMoneyPrice& price);
+
 private:
   Q3ListViewItem*    m_currentItem;
 };

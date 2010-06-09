@@ -27,7 +27,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kmenu.h>
 #include <k3listview.h>
 
 // ----------------------------------------------------------------------------
@@ -80,9 +79,9 @@ signals:
   void deletePrice(void);
   void editPrice(void);
   void onlinePriceUpdate(void);
+  void openContextMenu(const MyMoneyPrice& price);
 
 private:
-  KMenu*     m_contextMenu;
   bool            m_showAll;
 };
 

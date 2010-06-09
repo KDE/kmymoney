@@ -286,6 +286,7 @@ public:
   MyMoneyInstitution    m_selectedInstitution;
   MyMoneySchedule       m_selectedSchedule;
   MyMoneySecurity       m_selectedCurrency;
+  MyMoneyPrice          m_selectedPrice;
   QList<MyMoneyPayee>   m_selectedPayees;
   QList<MyMoneyBudget>  m_selectedBudgets;
   KMyMoneyRegister::SelectedTransactions m_selectedTransactions;
@@ -967,9 +968,7 @@ void KMyMoneyApp::initActions(void)
   budget_forecast->setIcon(KIcon("forecast"));
   connect(budget_forecast, SIGNAL(triggered()), this, SLOT(slotBudgetForecast()));
 
-  // ************************
   // Currency actions
-  // ************************
   KAction *currency_new = actionCollection()->addAction("currency_new");
   currency_new->setText(i18n("New currency"));
   currency_new->setIcon(KIcon("document-new"));
@@ -990,6 +989,25 @@ void KMyMoneyApp::initActions(void)
   currency_setbase->setIcon(KIcon("kmymoney"));
   connect(currency_setbase, SIGNAL(triggered()), this, SLOT(slotCurrencySetBase()));
 
+  //price actions
+  KAction *price_new = actionCollection()->addAction("price_new");
+  price_new->setText("New price...");
+  connect(price_new, SIGNAL(triggered()), this, SIGNAL(priceNew()));
+
+  KAction *price_edit = actionCollection()->addAction("price_edit");
+  price_edit->setText("Edit price...");
+  connect(price_edit, SIGNAL(triggered()), this, SIGNAL(priceEdit()));
+
+  KAction *price_update = actionCollection()->addAction("price_update");
+  price_update->setText("Online Price Update...");
+  price_update->setIcon(KIcon("investment-update-online"));
+  connect(price_update, SIGNAL(triggered()), this, SIGNAL(priceOnlineUpdate()));
+
+  KAction *price_delete = actionCollection()->addAction("price_delete");
+  price_delete->setText("Delete price...");
+  connect(price_delete, SIGNAL(triggered()), this, SIGNAL(priceDelete()));
+
+  //debug actions
 #ifdef KMM_DEBUG
   KAction *new_user_wizard = actionCollection()->addAction("new_user_wizard");
   new_user_wizard->setText(i18n("Test new feature"));
@@ -5669,6 +5687,12 @@ void KMyMoneyApp::slotShowCurrencyContextMenu(void)
   showContextMenu("currency_context_menu");
 }
 
+void KMyMoneyApp::slotShowPriceContextMenu(void)
+{
+  showContextMenu("price_context_menu");
+}
+
+
 void KMyMoneyApp::slotPrintView(void)
 {
   d->m_myMoneyView->slotPrintView();
@@ -5825,6 +5849,11 @@ void KMyMoneyApp::slotUpdateActions(void)
   action("currency_rename")->setEnabled(false);
   action("currency_delete")->setEnabled(false);
   action("currency_setbase")->setEnabled(false);
+
+  action("price_new")->setEnabled(fileOpen);
+  action("price_edit")->setEnabled(false);
+  action("price_delete")->setEnabled(false);
+  action("price_update")->setEnabled(false);
 
   w = factory()->container("transaction_move_menu", this);
   if (w)
@@ -6086,6 +6115,16 @@ void KMyMoneyApp::slotUpdateActions(void)
     if (d->m_selectedCurrency.id() != file->baseCurrency().id())
       action("currency_setbase")->setEnabled(true);
   }
+
+  if (!d->m_selectedPrice.from().isEmpty() && d->m_selectedPrice.source() != "KMyMoney") {
+    action("price_edit")->setEnabled(true);
+    action("price_delete")->setEnabled(true);
+
+    //enable online update if it is a currency
+    MyMoneySecurity security;
+    security = MyMoneyFile::instance()->security(d->m_selectedPrice.from());
+    action("price_update")->setEnabled(security.isCurrency());
+  }
 }
 
 void KMyMoneyApp::slotResetSelections(void)
@@ -6106,6 +6145,13 @@ void KMyMoneyApp::slotSelectCurrency(const MyMoneySecurity& currency)
   d->m_selectedCurrency = currency;
   slotUpdateActions();
   emit currencySelected(d->m_selectedCurrency);
+}
+
+void KMyMoneyApp::slotSelectPrice(const MyMoneyPrice& price)
+{
+  d->m_selectedPrice = price;
+  slotUpdateActions();
+  emit priceSelected(d->m_selectedPrice);
 }
 
 void KMyMoneyApp::slotSelectBudget(const QList<MyMoneyBudget>& list)
@@ -6274,6 +6320,12 @@ void KMyMoneyApp::slotCurrencyDialog(void)
 void KMyMoneyApp::slotPriceDialog(void)
 {
   QPointer<KMyMoneyPriceDlg> dlg = new KMyMoneyPriceDlg(this);
+  connect(dlg, SIGNAL(selectObject(const MyMoneyPrice&)), this, SLOT(slotSelectPrice(MyMoneyPrice)));
+  connect(dlg, SIGNAL(openContextMenu(const MyMoneyPrice&)), this, SLOT(slotShowPriceContextMenu()));
+  connect(this, SIGNAL(priceNew()), dlg, SLOT(slotNewPrice()));
+  connect(this, SIGNAL(priceEdit()), dlg, SLOT(slotEditPrice()));
+  connect(this, SIGNAL(priceDelete()), dlg, SLOT(slotDeletePrice()));
+  connect(this, SIGNAL(priceOnlineUpdate()), dlg, SLOT(slotOnlinePriceUpdate()));
   dlg->exec();
 }
 
