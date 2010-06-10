@@ -38,10 +38,10 @@ class Q3ListViewItem;
 #include "mymoneyprice.h"
 
 
-class KMyMoneyPriceDlgDecl : public QDialog, public Ui::KMyMoneyPriceDlgDecl
+class KMyMoneyPriceDlgDecl : public KDialog, public Ui::KMyMoneyPriceDlgDecl
 {
 public:
-  KMyMoneyPriceDlgDecl(QWidget *parent) : QDialog(parent) {
+  KMyMoneyPriceDlgDecl(QWidget *parent) : KDialog(parent) {
     setupUi(this);
   }
 };

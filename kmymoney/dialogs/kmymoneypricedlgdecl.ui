@@ -4,7 +4,7 @@
   <comment></comment>
   <exportmacro></exportmacro>
   <class>KMyMoneyPriceDlgDecl</class>
-  <widget class="QDialog" name="KMyMoneyPriceDlgDecl">
+  <widget class="KDialog" name="KMyMoneyPriceDlgDecl">
     <property name="geometry">
       <rect>
         <x>0</x>
@@ -16,124 +16,94 @@
     <property name="windowTitle">
       <string>Price Editor</string>
     </property>
-    <layout class="QVBoxLayout">
-      <item>
-        <layout class="QHBoxLayout">
-          <item>
-            <layout class="QVBoxLayout">
-              <item>
-                <widget class="KMyMoneyPriceView" name="m_priceList"/>
-              </item>
-              <item>
-                <widget class="QCheckBox" name="m_showAllPrices">
-                  <property name="text">
-                    <string>Show all stored prices</string>
-                  </property>
-                </widget>
-              </item>
-            </layout>
-          </item>
-          <item>
-            <layout class="QVBoxLayout">
-              <item>
-                <widget class="KPushButton" name="m_newButton">
-                  <property name="text">
-                    <string comment="@action add new price">New</string>
-                  </property>
-                </widget>
-              </item>
-              <item>
-                <widget class="KPushButton" name="m_editButton">
-                  <property name="text">
-                    <string>Modify</string>
-                  </property>
-                </widget>
-              </item>
-              <item>
-                <widget class="KPushButton" name="m_deleteButton">
-                  <property name="text">
-                    <string>Delete</string>
-                  </property>
-                </widget>
-              </item>
-              <item>
-                <spacer name="spacer7">
-                  <property name="sizeHint">
-                    <size>
-                      <width>21</width>
-                      <height>150</height>
-                    </size>
-                  </property>
-                  <property name="sizeType">
-                    <enum>QSizePolicy::Expanding</enum>
-                  </property>
-                  <property name="orientation">
-                    <enum>Qt::Vertical</enum>
-                  </property>
-                </spacer>
-              </item>
-              <item>
-                <widget class="KPushButton" name="m_onlineQuoteButton">
-                  <property name="text">
-                    <string>Online Quotes</string>
-                  </property>
-                </widget>
-              </item>
-            </layout>
-          </item>
-        </layout>
-      </item>
-      <item>
-        <widget class="Line" name="line2">
-          <property name="frameShape">
-            <enum>QFrame::HLine</enum>
-          </property>
-          <property name="frameShadow">
-            <enum>QFrame::Sunken</enum>
-          </property>
-        </widget>
-      </item>
-      <item>
-        <layout class="QHBoxLayout">
-          <item>
-            <spacer name="spacer8">
-              <property name="sizeHint">
-                <size>
-                  <width>560</width>
-                  <height>20</height>
-                </size>
-              </property>
-              <property name="sizeType">
-                <enum>QSizePolicy::Expanding</enum>
-              </property>
-              <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-              </property>
-            </spacer>
-          </item>
-          <item>
-            <layout class="QHBoxLayout">
-              <item>
-                <widget class="KPushButton" name="m_closeButton">
-                  <property name="text">
-                    <string>Close</string>
-                  </property>
-                  <property name="autoDefault">
-                    <bool>true</bool>
-                  </property>
-                  <property name="default">
-                    <bool>true</bool>
-                  </property>
-                </widget>
-              </item>
-            </layout>
-          </item>
-        </layout>
-      </item>
-    </layout>
+    <widget class="QWidget" name="m_layoutWidget">
+      <layout class="QVBoxLayout">
+        <item>
+          <layout class="QHBoxLayout">
+            <item>
+              <layout class="QVBoxLayout">
+                <item>
+                  <widget class="KMyMoneyPriceView" name="m_priceList"/>
+                </item>
+                <item>
+                  <widget class="QCheckBox" name="m_showAllPrices">
+                    <property name="text">
+                      <string>Show all stored prices</string>
+                    </property>
+                  </widget>
+                </item>
+              </layout>
+            </item>
+            <item>
+              <layout class="QVBoxLayout">
+                <item>
+                  <widget class="KPushButton" name="m_newButton">
+                    <property name="text">
+                      <string comment="@action add new price">New</string>
+                    </property>
+                  </widget>
+                </item>
+                <item>
+                  <widget class="KPushButton" name="m_editButton">
+                    <property name="text">
+                      <string>Modify</string>
+                    </property>
+                  </widget>
+                </item>
+                <item>
+                  <widget class="KPushButton" name="m_deleteButton">
+                    <property name="text">
+                      <string>Delete</string>
+                    </property>
+                  </widget>
+                </item>
+                <item>
+                  <spacer name="spacer7">
+                    <property name="sizeHint">
+                      <size>
+                        <width>21</width>
+                        <height>150</height>
+                      </size>
+                    </property>
+                    <property name="sizeType">
+                      <enum>QSizePolicy::Expanding</enum>
+                    </property>
+                    <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                    </property>
+                  </spacer>
+                </item>
+                <item>
+                  <widget class="KPushButton" name="m_onlineQuoteButton">
+                    <property name="text">
+                      <string>Online Quotes</string>
+                    </property>
+                  </widget>
+                </item>
+              </layout>
+            </item>
+          </layout>
+        </item>
+        <item>
+          <widget class="Line" name="line2">
+            <property name="frameShape">
+              <enum>QFrame::HLine</enum>
+            </property>
+            <property name="frameShadow">
+              <enum>QFrame::Sunken</enum>
+            </property>
+          </widget>
+        </item>
+      </layout>
+    </widget>
   </widget>
   <layoutdefault spacing="6" margin="11"/>
   <customwidgets>
+    <customwidget>
+     <class>KDialog</class>
+     <extends>QDialog</extends>
+     <header>kdialog.h</header>
+    </customwidget>
     <customwidget>
       <class>KMyMoneyPriceView</class>
       <extends>QWidget</extends>
@@ -155,7 +125,6 @@
     <tabstop>m_editButton</tabstop>
     <tabstop>m_deleteButton</tabstop>
     <tabstop>m_onlineQuoteButton</tabstop>
-    <tabstop>m_closeButton</tabstop>
   </tabstops>
   <images>
     <image name="image0">

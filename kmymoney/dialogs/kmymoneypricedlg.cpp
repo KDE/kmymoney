@@ -55,33 +55,30 @@
 KMyMoneyPriceDlg::KMyMoneyPriceDlg(QWidget* parent) :
     KMyMoneyPriceDlgDecl(parent)
 {
-  KGuiItem removeButtenItem(i18n("&Delete"),
+  setButtons(KDialog::Ok);
+  setButtonsOrientation(Qt::Horizontal);
+  setMainWidget(m_layoutWidget);
+
+  KGuiItem removeButtonItem(i18n("&Delete"),
                             KIcon("edit-delete"),
                             i18n("Delete this entry"),
                             i18n("Remove this price item from the file"));
-  m_deleteButton->setGuiItem(removeButtenItem);
+  m_deleteButton->setGuiItem(removeButtonItem);
 
-  KGuiItem newButtenItem(i18nc("New price entry", "&New"),
+  KGuiItem newButtonItem(i18nc("New price entry", "&New"),
                          KIcon("document-new"),
                          i18n("Add a new entry"),
                          i18n("Create a new price entry."));
-  m_newButton->setGuiItem(newButtenItem);
+  m_newButton->setGuiItem(newButtonItem);
 
-  KGuiItem editButtenItem(i18n("&Edit"),
+  KGuiItem editButtonItem(i18n("&Edit"),
                           KIcon("document-edit"),
                           i18n("Modify the selected entry"),
                           i18n("Change the details of selected price information."));
-  m_editButton->setGuiItem(editButtenItem);
-
-  KGuiItem okButtenItem(i18n("&Close"),
-                        KIcon("dialog-ok"),
-                        i18n("Close the dialog"),
-                        i18n("Use this to close the dialog and return to the application."));
-  m_closeButton->setGuiItem(okButtenItem);
+  m_editButton->setGuiItem(editButtonItem);
 
   m_onlineQuoteButton->setIcon(KIcon("investment-update-online"));
 
-  connect(m_closeButton, SIGNAL(clicked()), this, SLOT(accept()));
   connect(m_editButton, SIGNAL(clicked()), this, SLOT(slotEditPrice()));
   connect(m_priceList, SIGNAL(editPrice()), this, SLOT(slotEditPrice()));
   connect(m_deleteButton, SIGNAL(clicked()), this, SLOT(slotDeletePrice()));
