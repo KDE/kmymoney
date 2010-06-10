@@ -1081,8 +1081,6 @@ void Register::resize(int col, bool force)
     return;
 
   m_needResize = false;
-  bool enabled = updatesEnabled();
-  setUpdatesEnabled(false);
 
   // resize the register
   int w = viewport()->width();
@@ -1200,9 +1198,6 @@ void Register::resize(int col, bool force)
     w -= columnWidth(i);
   }
   setColumnWidth(col, w);
-
-  setUpdatesEnabled(enabled);
-  update();
 }
 
 
