@@ -83,29 +83,6 @@ KPayeeListItem::~KPayeeListItem()
 {
 }
 
-KTransactionListItem::KTransactionListItem(K3ListView* view, KTransactionListItem* parent, const QString& accountId, const QString& transactionId) :
-    K3ListViewItem(view, parent)
-{
-  m_accountId = accountId;
-  m_transactionId = transactionId;
-}
-
-KTransactionListItem::~KTransactionListItem()
-{
-}
-
-void KTransactionListItem::paintCell(QPainter *p, const QColorGroup &cg, int column, int width, int alignment)
-{
-  QColorGroup _cg = cg;
-  _cg.setColor(QColorGroup::Base, backgroundColor());
-  Q3ListViewItem::paintCell(p, _cg, column, width, alignment);
-}
-
-const QColor KTransactionListItem::backgroundColor(void)
-{
-  return isAlternate() ? KMyMoneyGlobalSettings::listBGColor() : KMyMoneyGlobalSettings::listColor();
-}
-
 // *** KPayeesView Implementation ***
 
 KPayeesView::KPayeesView(QWidget *parent) :
@@ -160,13 +137,6 @@ KPayeesView::KPayeesView(QWidget *parent) :
   m_deleteButton->setGuiItem(deleteButtonItem);
   m_deleteButton->setToolTip(deleteButtonItem.toolTip());
 
-  m_transactionView->setSorting(-1);
-  m_transactionView->setColumnWidthMode(2, Q3ListView::Manual);
-  m_transactionView->setColumnAlignment(3, Qt::AlignRight);
-  // never show horizontal scroll bars
-  m_transactionView->setHScrollBarMode(Q3ScrollView::AlwaysOff);
-
-
   KGuiItem updateButtonItem(i18nc("Update payee", "Update"),
                             KIcon("dialog-ok"),
                             i18n("Accepts the entered data and stores it"),
@@ -181,6 +151,17 @@ KPayeesView::KPayeesView(QWidget *parent) :
   checkEnableDefaultAccount->setChecked(false);
   labelDefaultAccount->setEnabled(false);
   comboDefaultAccount->setEnabled(false);
+
+  QList<KMyMoneyRegister::Column> cols;
+  cols << KMyMoneyRegister::DateColumn;
+  cols << KMyMoneyRegister::AccountColumn;
+  cols << KMyMoneyRegister::DetailColumn;
+  cols << KMyMoneyRegister::ReconcileFlagColumn;
+  cols << KMyMoneyRegister::PaymentColumn;
+  cols << KMyMoneyRegister::DepositColumn;
+  m_register->setupRegister(MyMoneyAccount(), cols);
+  m_register->setSelectionMode(QTableWidget::SingleSelection);
+  m_register->setDetailsColumnType(KMyMoneyRegister::AccountFirst);
 
   connect(m_payeesList, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(slotSelectPayee()));
   connect(m_payeesList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(slotStartRename(QListWidgetItem*)));
@@ -211,10 +192,7 @@ KPayeesView::KPayeesView(QWidget *parent) :
 
   connect(m_payeesList, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(slotOpenContextMenu(const QPoint&)));
 
-  connect(m_transactionView, SIGNAL(doubleClicked(Q3ListViewItem*)),
-          this, SLOT(slotTransactionDoubleClicked(Q3ListViewItem*)));
-
-  connect(m_tabWidget, SIGNAL(currentChanged(QWidget*)), this, SLOT(rearrange(void)));
+  connect(m_register, SIGNAL(editTransaction()), this, SLOT(slotSelectTransaction()));
 
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadPayees()));
 
@@ -451,7 +429,7 @@ void KPayeesView::slotSelectPayee(void)
 
   } catch (MyMoneyException *e) {
     qDebug("exception during display of payee: %s at %s:%ld", qPrintable(e->what()), qPrintable(e->file()), e->line());
-    m_transactionView->clear();
+    m_register->clear();
     m_payee = MyMoneyPayee();
     delete e;
   }
@@ -469,12 +447,13 @@ void KPayeesView::clearItemData(void)
 
 void KPayeesView::showTransactions(void)
 {
-  MyMoneyFile* file = MyMoneyFile::instance();
   MyMoneyMoney balance(0);
-  int   i;
 
-  // clear the current transaction listview
-  m_transactionView->clear();
+  // setup sort order
+  m_register->setSortOrder(KMyMoneyGlobalSettings::sortSearchView());
+
+  // clear the register
+  m_register->clear();
 
   if (m_payee.id().isEmpty() || !m_tabWidget->isEnabled()) {
     m_balanceLabel->setText(i18n("Balance: %1", balance.formatMoney(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction())));
@@ -486,96 +465,45 @@ void KPayeesView::showTransactions(void)
   filter.addPayee(m_payee.id());
   filter.setDateFilter(KMyMoneyGlobalSettings::startDate().date(), QDate());
 
-  QList<MyMoneyTransaction> list = file->transactionList(filter);
-  m_transactionList.clear();
+  // retrieve the list from the engine
+  MyMoneyFile::instance()->transactionList( m_transactionList, filter);
 
-  m_transactionPtrVector.clear();
-  m_transactionPtrVector.resize(list.size());
+  // create the elements for the register
+  QList<QPair<MyMoneyTransaction, MyMoneySplit> >::const_iterator it;
+  QMap<QString, int> uniqueMap;
+  MyMoneyMoney deposit, payment;
 
-  QList<MyMoneyTransaction>::ConstIterator it_t;
-  QString lastId;
-  int ofs = 0;
+  int splitCount = 0;
+  for (it = m_transactionList.constBegin(); it != m_transactionList.constEnd(); ++it) {
+    const MyMoneySplit& split = (*it).second;
+    MyMoneyAccount acc = MyMoneyFile::instance()->account(split.accountId());
+    ++splitCount;
+    uniqueMap[(*it).first.id()]++;
 
-  for (i = 0, it_t = list.constBegin(); it_t != list.constEnd(); ++it_t) {
-    KMyMoneyTransaction k(*it_t);
-
-    filter.match(*it_t);
-    if (lastId != (*it_t).id()) {
-      ofs = 0;
-      lastId = (*it_t).id();
-    } else
-      ofs++;
-
-    k.setSplitId(filter.matchingSplits()[ofs].id());
-    MyMoneyAccount acc = MyMoneyFile::instance()->account(filter.matchingSplits()[ofs].accountId());
-    if (acc.accountGroup() == MyMoneyAccount::Asset
-        || acc.accountGroup() == MyMoneyAccount::Liability) {
-      QList<KMyMoneyTransaction>::const_iterator it_k;
-      m_transactionList.append(k);
-      balance += k.splitById(k.splitId()).value();
-      m_transactionPtrVector.insert(i, &(m_transactionList.last()));
-      ++i;
+    KMyMoneyRegister::Register::transactionFactory(m_register, (*it).first, (*it).second, uniqueMap[(*it).first.id()]);
+    if (split.shares().isNegative()) {
+      payment += split.shares().abs();
+    } else {
+      deposit += split.shares().abs();
     }
   }
-  m_transactionPtrVector.resize(i);
+  balance = deposit - payment;
 
+  // add the group markers
+  m_register->addGroupMarkers();
 
-  // and fill the m_transactionView
-  KTransactionListItem *item = 0;
+  // sort the transactions according to the sort setting
+  m_register->sortItems();
 
-  for (i = 0; i < m_transactionPtrVector.size(); ++i) {
-    KMyMoneyTransaction* t = m_transactionPtrVector[i];
-    MyMoneySplit s = t->splitById(t->splitId());
-    const MyMoneyAccount& acc = file->account(s.accountId());
+  // remove trailing and adjacent markers
+  m_register->removeUnwantedGroupMarkers();
 
-    item = new KTransactionListItem(m_transactionView, item, s.accountId(), t->id());
-    item->setText(0, s.number());
-    item->setText(1, KGlobal::locale()->formatDate(t->postDate(), KLocale::ShortDate));
+  m_register->updateRegister(true);
 
-    QString txt;
-    if (s.action() == MyMoneySplit::ActionAmortization) {
-      if (acc.accountType() == MyMoneyAccount::Loan) {
-        if (s.value().isPositive()) {
-          txt = i18n("Amortization of %1", acc.name());
-        } else {
-          txt = i18n("Payment to %1", acc.name());
-        }
-      } else if (acc.accountType() == MyMoneyAccount::AssetLoan) {
-        if (s.value().isNegative()) {
-          txt = i18n("Amortization of %1", acc.name());
-        } else {
-          txt = i18n("Payment to %1", acc.name());
-        }
-      } else {
-        txt = i18n("Loan payment from %1", acc.name());
-      }
-    } else if (file->isTransfer(*t)) {
-      if (!s.value().isNegative()) {
-        txt = i18n("Transfer to %1", acc.name());
-      } else {
-        txt = i18n("Transfer from %1", acc.name());
-      }
-    } else if (t->splitCount() > 2) {
-      txt = i18nc("Split transaction (category replacement)", "Split transaction");
-    } else if (t->splitCount() == 2) {
-      MyMoneySplit s0 = t->splitByAccount(s.accountId(), false);
-      txt = MyMoneyFile::instance()->accountToCategory(s0.accountId());
-    }
-    item->setText(2, txt);
-    item->setText(3, s.value().formatMoney(acc.fraction()));
-  }
-  // sort the transactions
-  qSort(m_transactionPtrVector.begin(), m_transactionPtrVector.end());
+  // we might end up here with updates disabled on the register so make sure that we enable updates here
+  m_register->setUpdatesEnabled(true);
 
   m_balanceLabel->setText(i18n("Balance: %1", balance.formatMoney(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction())));
-
-  // Trick: it seems, that the initial sizing of the view does
-  // not work correctly. At least, the columns do not get displayed
-  // correct. Reason: the return value of m_transactionView->visibleWidth()
-  // is incorrect. If the widget is visible, resizing works correctly.
-  // So, we let the dialog show up and resize it then. It's not really
-  // clean, but the only way I got the damned thing working.
-  QTimer::singleShot(50, this, SLOT(rearrange()));
 }
 
 void KPayeesView::slotKeyListChanged(void)
@@ -686,30 +614,12 @@ void KPayeesView::slotUpdatePayee(void)
   }
 }
 
-void KPayeesView::readConfig(void)
-{
-  m_transactionView->setFont(KMyMoneyGlobalSettings::listCellFont());
-
-  QFontMetrics fm(KMyMoneyGlobalSettings::listHeaderFont());
-  int height = fm.lineSpacing() + 6;
-
-  m_transactionView->header()->setMinimumHeight(height);
-  m_transactionView->header()->setMaximumHeight(height);
-  m_transactionView->header()->setFont(KMyMoneyGlobalSettings::listHeaderFont());
-
-  //m_payeesList->setDefaultRenameAction(
-  //KMyMoneyGlobalSettings::focusChangeIsEnter() ? Q3ListView::Accept : Q3ListView::Reject);
-}
-
 void KPayeesView::showEvent(QShowEvent* event)
 {
   if (m_needReload) {
     loadPayees();
     m_needReload = false;
   }
-
-  // fixup the layout
-  QTimer::singleShot(0, this, SLOT(rearrange()));
 
   // don't forget base class implementation
   QWidget::showEvent(event);
@@ -740,7 +650,6 @@ void KPayeesView::loadPayees(void)
   QString id;
 
   ::timetrace("Start KPayeesView::loadPayees");
-  readConfig();
 
   // remember which items are selected in the list
   QList<QListWidgetItem *> selectedItems = m_payeesList->selectedItems();
@@ -758,15 +667,9 @@ void KPayeesView::loadPayees(void)
   if (currentItem)
     id = currentItem->payee().id();
 
-  // remember the upper left corner of the viewport
-  //QPoint startPoint = m_payeesList->viewportToContents(QPoint(0, 0));
-
-  // turn off updates to avoid flickering during reload
-  //m_payeesList->setUpdatesEnabled(false);
-
   // clear the list
   m_payeesList->clear();
-  m_transactionView->clear();
+  m_register->clear();
   currentItem = 0;
 
   QList<MyMoneyPayee>list = MyMoneyFile::instance()->payeeList();
@@ -786,9 +689,6 @@ void KPayeesView::loadPayees(void)
     m_payeesList->scrollToItem(currentItem);
   }
 
-  // reposition viewport
-  //m_payeesList->setContentsPos(startPoint.x(), startPoint.y());
-
   m_searchWidget->updateSearch(QString());
 
   m_filterProxyModel->invalidate();
@@ -799,31 +699,14 @@ void KPayeesView::loadPayees(void)
   ::timetrace("End KPayeesView::loadPayees");
 }
 
-void KPayeesView::rearrange(void)
+void KPayeesView::slotSelectTransaction(void)
 {
-  resizeEvent(0);
-}
-
-void KPayeesView::resizeEvent(QResizeEvent* ev)
-{
-  // resize the register
-  int w = m_transactionView->visibleWidth();
-  w -= m_transactionView->columnWidth(0);
-  w -= m_transactionView->columnWidth(1);
-  w -= m_transactionView->columnWidth(3);
-  m_transactionView->setColumnWidth(2, w);
-  m_transactionView->resizeContents(
-    m_transactionView->visibleWidth(),
-    m_transactionView->contentsHeight());
-
-  QWidget::resizeEvent(ev);
-}
-
-void KPayeesView::slotTransactionDoubleClicked(Q3ListViewItem* i)
-{
-  KTransactionListItem* item = static_cast<KTransactionListItem *>(i);
-  if (item)
-    emit transactionSelected(item->accountId(), item->transactionId());
+  QList<KMyMoneyRegister::RegisterItem*> list = m_register->selectedItems();
+  if (!list.isEmpty()) {
+    KMyMoneyRegister::Transaction* t = dynamic_cast<KMyMoneyRegister::Transaction*>(list[0]);
+    if (t)
+      emit transactionSelected(t->split().accountId(), t->transaction().id());
+  }
 }
 
 void KPayeesView::slotSelectPayeeAndTransaction(const QString& payeeId, const QString& accountId, const QString& transactionId)
@@ -857,26 +740,25 @@ void KPayeesView::slotSelectPayeeAndTransaction(const QString& payeeId, const QS
         m_payeesList->setCurrentItem(it);     // active item and deselect all others
         m_payeesList->setCurrentRow(i, QItemSelectionModel::ClearAndSelect); // and select it
 
+        //make sure the payee selection is updated and transactions are updated accordingly
+        slotSelectPayee();
 
-        KTransactionListItem* item = dynamic_cast<KTransactionListItem*>(m_transactionView->firstChild());
-        while (item != 0) {
-          if (item->accountId() == accountId && item->transactionId() == transactionId)
-            break;
-          item = dynamic_cast<KTransactionListItem*>(item->nextSibling());
-        }
-        if (!item) {
-          item = dynamic_cast<KTransactionListItem*>(m_transactionView->firstChild());
-        }
-        if (item) {
-          m_transactionView->setSelected(item, true);
-          m_transactionView->ensureItemVisible(item);
+        KMyMoneyRegister::RegisterItem *item = 0;
+        for (int i = 0; i < m_register->rowCount(); ++i) {
+          item = m_register->itemAtRow(i);
+          KMyMoneyRegister::Transaction* t = dynamic_cast<KMyMoneyRegister::Transaction*>(item);
+          if (t) {
+            if (t->transaction().id() == transactionId && t->transaction().accountReferenced(accountId)) {
+              m_register->selectItem(item);
+              m_register->ensureItemVisible(item);
+              break;
+            }
+          }
         }
         // quit out of for() loop
         break;
       }
     }
-    //make sure the payee selection is updated and transactions are updated accordingly
-    slotSelectPayee();
   } catch (MyMoneyException *e) {
     qWarning("Unexpected exception in KPayeesView::slotSelectPayeeAndTransaction");
     delete e;
@@ -903,4 +785,3 @@ void KPayeesView::slotHelp(void)
 }
 
 #include "kpayeesview.moc"
-// vim:cin:si:ai:et:ts=2:sw=2:

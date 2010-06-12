@@ -939,8 +939,15 @@ void StdTransaction::registerCellText(QString& txt, int& align, int row, int col
           break;
 
         case DetailColumn:
+          switch (m_parent->getDetailsColumnType()) {
+            case PayeeFirst:
+              txt = m_payee;
+              break;
+            case AccountFirst:
+              txt = m_category;
+              break;
+          }
           align |= Qt::AlignLeft;
-          txt = m_payee;
           if (txt.isEmpty() && m_rowsRegister < 3) {
             singleLineMemo(txt, m_split);
           }
@@ -997,8 +1004,15 @@ void StdTransaction::registerCellText(QString& txt, int& align, int row, int col
     case 1:
       switch (col) {
         case DetailColumn:
+          switch (m_parent->getDetailsColumnType()) {
+            case PayeeFirst:
+              txt = m_category;
+              break;
+            case AccountFirst:
+              txt = m_payee;
+              break;
+          }
           align |= Qt::AlignLeft;
-          txt = m_category;
           if (txt.isEmpty() && !m_split.value().isZero()) {
             txt = i18n("*** UNASSIGNED ***");
             if (painter)

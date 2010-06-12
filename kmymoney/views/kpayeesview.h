@@ -143,7 +143,6 @@ public slots:
   void slotHelp(void);
 
 protected:
-  void resizeEvent(QResizeEvent*);
   void loadPayees(void);
   void selectedPayees(QList<MyMoneyPayee>& payeesList) const;
   void ensurePayeeVisible(const QString& id);
@@ -182,15 +181,13 @@ protected slots:
     */
   void slotUpdatePayee(void);
 
-  void slotTransactionDoubleClicked(Q3ListViewItem *);
+  void slotSelectTransaction(void);
 
   void slotPayeeNew(void);
 
   void slotRenameButtonCliked(void);
 
 private slots:
-  void rearrange(void);
-
   /**
     * This slot receives the signal from the listview control that an item was right-clicked,
     * If @p points to a real payee item, emits openContextMenu().
@@ -200,9 +197,6 @@ private slots:
   void slotOpenContextMenu(const QPoint& p);
 
   void slotChooseDefaultAccount(void);
-
-private:
-  void readConfig(void);
 
 signals:
   void transactionSelected(const QString& accountId, const QString& transactionId);
@@ -216,7 +210,8 @@ private:
   /**
     * This member holds a list of all transactions
     */
-  QList<KMyMoneyTransaction> m_transactionList;
+  QList<QPair<MyMoneyTransaction, MyMoneySplit> > m_transactionList;
+
 
   /**
     * This member keeps a vector of pointers to all visible (filtered)

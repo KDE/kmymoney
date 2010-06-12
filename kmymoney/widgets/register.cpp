@@ -467,7 +467,8 @@ Register::Register(QWidget *parent) :
     m_listsDirty(false),
     m_ignoreNextButtonRelease(false),
     m_needInitialColumnResize(false),
-    m_buttonState(Qt::ButtonState(0))
+    m_buttonState(Qt::ButtonState(0)),
+    m_detailsColumnType(PayeeFirst)
 {
   m_itemDelegate = new RegisterItemDelegate(this);
 
@@ -2157,6 +2158,13 @@ void Register::removeUnwantedGroupMarkers(void)
   }
 }
 
+DetailsColumnType Register::getDetailsColumnType() const {
+  return m_detailsColumnType;
+}
+
+void Register::setDetailsColumnType(DetailsColumnType detailsColumnType) {
+  m_detailsColumnType = detailsColumnType;
+}
 
 #include "register.moc"
 

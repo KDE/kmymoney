@@ -77,9 +77,14 @@ typedef enum {
 } TransactionSortField;
 
 typedef enum {
-  AscendingOrder = 0,        //< sort in ascending order
-  DescendingOrder            //< sort in descending order
+  AscendingOrder = 0,   //< sort in ascending order
+  DescendingOrder       //< sort in descending order
 } SortDirection;
+
+typedef enum {
+  PayeeFirst = 0,       //< show the payee on the first row of the transaction in the details column and the account on the second
+  AccountFirst          //< show the account on the first row of the transaction in the details column and the payee on the second
+} DetailsColumnType;
 
 class Register;
 class RegisterItem;
@@ -500,6 +505,9 @@ public:
     m_selectionMode = mode;
   }
 
+  DetailsColumnType getDetailsColumnType() const;
+  void setDetailsColumnType(DetailsColumnType detailsColumnType);
+
 protected:
 
   void mouseReleaseEvent(QMouseEvent *e);
@@ -611,7 +619,7 @@ signals:
 
 protected:
   ItemPtrVector                m_items;
-  QVector<RegisterItem*>  m_itemIndex;
+  QVector<RegisterItem*>       m_itemIndex;
   RegisterItem*                m_selectAnchor;
   RegisterItem*                m_focusItem;
   RegisterItem*                m_ensureVisibleItem;
@@ -638,6 +646,7 @@ private:
   QList<TransactionSortField>  m_sortOrder;
   QRect                        m_lastRepaintRect;
   RegisterItemDelegate        *m_itemDelegate;
+  DetailsColumnType            m_detailsColumnType;
 };
 
 } // namespace
