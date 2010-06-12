@@ -96,7 +96,7 @@ IF( KDE4_BUILD_TESTS )
   SET( kmymoneytest_SRCS ${kmymoneytest_SRCS} reports/reportstestcommon.cpp )
 
   KDE4_ADD_EXECUTABLE( kmymoneytest ${kmymoneytest_SRCS} )
-  TARGET_LINK_LIBRARIES( kmymoneytest ${kmymoney_common_LIBS} ${CPPUNIT_LIBRARY} ${KDE4_KDEUI_LIBS} ${KDE4_KDE3SUPPORT_LIBS})
+  TARGET_LINK_LIBRARIES( kmymoneytest ${kmymoney_common_LIBS} ${CPPUNIT_LIBRARY})
 
   ##################
   # The Actual Testing using CTest
