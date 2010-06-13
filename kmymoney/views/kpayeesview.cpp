@@ -466,7 +466,7 @@ void KPayeesView::showTransactions(void)
   filter.setDateFilter(KMyMoneyGlobalSettings::startDate().date(), QDate());
 
   // retrieve the list from the engine
-  MyMoneyFile::instance()->transactionList( m_transactionList, filter);
+  MyMoneyFile::instance()->transactionList(m_transactionList, filter);
 
   // create the elements for the register
   QList<QPair<MyMoneyTransaction, MyMoneySplit> >::const_iterator it;

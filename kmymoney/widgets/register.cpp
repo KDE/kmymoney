@@ -2158,11 +2158,13 @@ void Register::removeUnwantedGroupMarkers(void)
   }
 }
 
-DetailsColumnType Register::getDetailsColumnType() const {
+DetailsColumnType Register::getDetailsColumnType() const
+{
   return m_detailsColumnType;
 }
 
-void Register::setDetailsColumnType(DetailsColumnType detailsColumnType) {
+void Register::setDetailsColumnType(DetailsColumnType detailsColumnType)
+{
   m_detailsColumnType = detailsColumnType;
 }
 
