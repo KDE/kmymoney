@@ -29,7 +29,6 @@ TARGET_LINK_LIBRARIES(kmm_kbanking
                       kmm_widgets
                       kmm_plugin
                       ${KDE4_KDEUI_LIBS}
-                      ${KDE4_KDE3SUPPORT_LIBS}
                       ${GWENHYWFAR_LIBRARIES}
                       ${AQBANKING_LIBRARIES}
                       )

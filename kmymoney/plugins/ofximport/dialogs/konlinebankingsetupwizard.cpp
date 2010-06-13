@@ -39,7 +39,7 @@
 #include <kprogressdialog.h>
 #include <kapplication.h>
 #include <k3listview.h>
-#include <k3listviewsearchline.h>
+#include <klistwidgetsearchline.h>
 #include <kcombobox.h>
 #include <kurlrequester.h>
 
@@ -52,8 +52,10 @@
 class KOnlineBankingSetupWizard::Private
 {
 public:
+  Private() : m_prevPage(-1) {}
   QFile       m_fpTrace;
   QTextStream m_trace;
+  int         m_prevPage;
 };
 
 KOnlineBankingSetupWizard::KOnlineBankingSetupWizard(QWidget *parent):
@@ -78,16 +80,23 @@ KOnlineBankingSetupWizard::KOnlineBankingSetupWizard(QWidget *parent):
   //set password field according to KDE preferences
   m_editPassword->setPasswordMode(true);
 
-  vboxLayout1->insertWidget(0, new K3ListViewSearchLineWidget(m_listFi, autoTab));
+  vboxLayout1->insertWidget(0, new KListWidgetSearchLine(autoTab, m_listFi));
   OfxPartner::setDirectory(KStandardDirs::locateLocal("appdata", ""));
-  QStringList banks = OfxPartner::BankNames();
-  QStringList::const_iterator it_bank = banks.constBegin();
-  while (it_bank != banks.constEnd()) {
-    new K3ListViewItem(m_listFi, (*it_bank));
-    ++it_bank;
-  }
+  m_listFi->addItems(OfxPartner::BankNames());
   m_fInit = true;
   delete dlg;
+
+  checkNextButton();
+  connect(this, SIGNAL(currentIdChanged(int)), this, SLOT(checkNextButton()));
+  connect(this, SIGNAL(currentIdChanged(int)), this, SLOT(newPage(int)));
+  connect(m_listFi, SIGNAL(itemSelectionChanged()), this, SLOT(checkNextButton()));
+  connect(m_listAccount, SIGNAL(itemSelectionChanged()), this, SLOT(checkNextButton()));
+  connect(m_selectionTab, SIGNAL(currentChanged(int)), this, SLOT(checkNextButton()));
+  connect(m_fid, SIGNAL(userTextChanged(const QString&)), this, SLOT(checkNextButton()));
+  connect(m_bankName, SIGNAL(userTextChanged(const QString&)), this, SLOT(checkNextButton()));
+  connect(m_url, SIGNAL(textChanged(const QString&)), this, SLOT(checkNextButton()));
+  connect(m_editUsername, SIGNAL(userTextChanged(const QString&)), this, SLOT(checkNextButton()));
+  connect(m_editPassword, SIGNAL(userTextChanged(const QString&)), this, SLOT(checkNextButton()));
 }
 
 KOnlineBankingSetupWizard::~KOnlineBankingSetupWizard()
@@ -96,26 +105,58 @@ KOnlineBankingSetupWizard::~KOnlineBankingSetupWizard()
   delete d;
 }
 
-void KOnlineBankingSetupWizard::next(void)
+void KOnlineBankingSetupWizard::checkNextButton(void)
 {
-  bool ok = true;
-
-  switch (indexOf(currentPage())) {
+  bool enableButton = false;
+  switch (currentId()) {
     case 0:
-      ok = finishFiPage();
+      if (m_selectionTab->currentIndex() == 0) {
+        enableButton = (m_listFi->currentItem() != 0)
+                       && m_listFi->currentItem()->isSelected();
+      } else {
+        enableButton = !(m_fid->text().isEmpty()
+                         || m_url->url().isEmpty()
+                         || m_bankName->text().isEmpty());
+      }
       break;
+
     case 1:
-      ok = finishLoginPage();
+      enableButton = !(m_editUsername->text().isEmpty()
+                       || m_editPassword->text().isEmpty());
       break;
+
     case 2:
-      m_fDone = ok = finishAccountPage();
+      enableButton = (m_listAccount->currentItem() != 0)
+                     && m_listAccount->currentItem()->isSelected();
       break;
   }
+  button(QWizard::NextButton)->setEnabled(enableButton);
+}
 
+void KOnlineBankingSetupWizard::newPage(int id)
+{
+  bool ok = true;
+  if ((id - d->m_prevPage) == 1) { // one page forward?
+    switch (d->m_prevPage) {
+      case 0:
+        ok = finishFiPage();
+        break;
+      case 1:
+        ok = finishLoginPage();
+        break;
+      case 2:
+        m_fDone = ok = finishAccountPage();
+        break;
+    }
+
+    if (!ok) {
+      // force to go back to prev page
+      back();
+    }
+  }
+  button(QWizard::FinishButton)->setEnabled(m_fDone);
   if (ok)
-    KOnlineBankingSetupDecl::next();
-
-  setFinishEnabled(currentPage(), m_fDone);
+    d->m_prevPage = id;
 }
 
 bool KOnlineBankingSetupWizard::finishFiPage(void)
@@ -128,9 +169,9 @@ bool KOnlineBankingSetupWizard::finishFiPage(void)
   if (m_selectionTab->currentIndex() == 0) {
 
     // Get the fipids for the selected bank
-    Q3ListViewItem* item = m_listFi->currentItem();
-    if (item) {
-      QString bank = item->text(0);
+    QListWidgetItem* item = m_listFi->currentItem();
+    if (item && item->isSelected()) {
+      QString bank = item->text();
       m_textDetails->clear();
       m_textDetails->append(QString("<p>Details for %1:</p>").arg(bank));
       QStringList fipids = OfxPartner::FipidForBank(bank);
@@ -257,7 +298,7 @@ bool KOnlineBankingSetupWizard::finishLoginPage(void)
     ++m_it_info;
   }
 
-  if (! m_listAccount->childCount()) {
+  if (! m_listAccount->topLevelItem(0)) {
     KMessageBox::sorry(this, i18n("No suitable accounts were found at this bank."));
     result = false;
   }
@@ -335,9 +376,9 @@ int KOnlineBankingSetupWizard::ofxAccountCallback(struct OfxAccountData data, vo
   kvps.setValue("fid", (*(pthis->m_it_info)).fid);
   kvps.setValue("org", (*(pthis->m_it_info)).org);
   kvps.setValue("fipid", "");
-  Q3ListViewItem* item = pthis->m_listFi->currentItem();
+  QListWidgetItem* item = pthis->m_listFi->currentItem();
   if (item)
-    kvps.setValue("bankname", item->text(0));
+    kvps.setValue("bankname", item->text());
 
   // I removed the bankid here, because for some users it
   // was not possible to setup the automatic account matching
@@ -394,9 +435,9 @@ bool KOnlineBankingSetupWizard::chosenSettings(MyMoneyKeyValueContainer& setting
   bool result = false;;
 
   if (m_fDone) {
-    Q3ListViewItem* qitem = m_listAccount->currentItem();
+    QTreeWidgetItem* qitem = m_listAccount->currentItem();
     ListViewItem* item = dynamic_cast<ListViewItem*>(qitem);
-    if (item) {
+    if (item && item->isSelected()) {
       settings = *item;
       settings.deletePair("appId");
       settings.deletePair("kmmofx-headerVersion");
@@ -413,8 +454,8 @@ bool KOnlineBankingSetupWizard::chosenSettings(MyMoneyKeyValueContainer& setting
   return result;
 }
 
-KOnlineBankingSetupWizard::ListViewItem::ListViewItem(Q3ListView* parent, const MyMoneyKeyValueContainer& kvps):
-    MyMoneyKeyValueContainer(kvps), Q3ListViewItem(parent)
+KOnlineBankingSetupWizard::ListViewItem::ListViewItem(QTreeWidget* parent, const MyMoneyKeyValueContainer& kvps):
+    MyMoneyKeyValueContainer(kvps), QTreeWidgetItem(parent)
 {
   setText(0, value("accountid"));
   setText(1, value("type"));

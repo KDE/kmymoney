@@ -6,11 +6,11 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>489</width>
-    <height>519</height>
+    <width>561</width>
+    <height>499</height>
    </rect>
   </property>
-  <layout class="QVBoxLayout">
+  <layout class="QVBoxLayout" name="verticalLayout_3">
    <item>
     <widget class="KTabWidget" name="tabWidget2">
      <property name="currentIndex">
@@ -20,13 +20,13 @@
       <attribute name="title">
        <string>Payee</string>
       </attribute>
-      <layout class="QVBoxLayout">
+      <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <widget class="Q3ButtonGroup" name="buttonGroup2">
+        <widget class="QGroupBox" name="groupBox">
          <property name="title">
-          <string>Payee source</string>
+          <string/>
          </property>
-         <layout class="QVBoxLayout">
+         <layout class="QVBoxLayout" name="verticalLayout">
           <item>
            <widget class="QRadioButton" name="m_usePayeeAsIsButton">
             <property name="text">
@@ -47,68 +47,68 @@
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="Q3Frame" name="m_memoFrame">
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="m_memoFrame">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::NoFrame</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Sunken</enum>
+         </property>
+         <layout class="QGridLayout">
+          <item row="1" column="0">
+           <widget class="QLabel" name="textLabel1">
+            <property name="text">
+             <string>Payee</string>
+            </property>
+            <property name="wordWrap">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="textLabel2">
+            <property name="text">
+             <string>Memo</string>
+            </property>
+            <property name="wordWrap">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="KLineEdit" name="m_memoRegExpEdit"/>
+          </item>
+          <item row="1" column="1">
+           <widget class="KLineEdit" name="m_payeeRegExpEdit"/>
+          </item>
+          <item row="4" column="1">
+           <widget class="KEditListBox" name="m_payeeExceptions">
             <property name="enabled">
              <bool>true</bool>
             </property>
-            <property name="frameShape">
-             <enum>QFrame::NoFrame</enum>
+            <property name="title">
+             <string>Exceptions</string>
             </property>
-            <property name="frameShadow">
-             <enum>QFrame::Sunken</enum>
+            <property name="buttons">
+             <set>KEditListBox::All</set>
             </property>
-            <layout class="QGridLayout">
-             <item row="1" column="0">
-              <widget class="QLabel" name="textLabel1">
-               <property name="text">
-                <string>Payee</string>
-               </property>
-               <property name="wordWrap">
-                <bool>false</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="textLabel2">
-               <property name="text">
-                <string>Memo</string>
-               </property>
-               <property name="wordWrap">
-                <bool>false</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QLabel" name="textLabel3">
-               <property name="text">
-                <string>Regular Expression for</string>
-               </property>
-               <property name="wordWrap">
-                <bool>false</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="KLineEdit" name="m_memoRegExpEdit"/>
-             </item>
-             <item row="1" column="1">
-              <widget class="KLineEdit" name="m_payeeRegExpEdit"/>
-             </item>
-             <item row="4" column="1">
-              <widget class="KEditListBox" name="m_payeeExceptions">
-               <property name="enabled">
-                <bool>true</bool>
-               </property>
-               <property name="title">
-                <string>Exceptions</string>
-               </property>
-               <property name="buttons">
-                <set>KEditListBox::All</set>
-               </property>
-              </widget>
-             </item>
-            </layout>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="textLabel3">
+            <property name="text">
+             <string>Regular Expression for</string>
+            </property>
+            <property name="wordWrap">
+             <bool>false</bool>
+            </property>
            </widget>
           </item>
          </layout>
@@ -246,18 +246,6 @@
  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
  <customwidgets>
   <customwidget>
-   <class>Q3Frame</class>
-   <extends>QFrame</extends>
-   <header>Qt3Support/Q3Frame</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>Q3ButtonGroup</class>
-   <extends>Q3GroupBox</extends>
-   <header>Qt3Support/Q3ButtonGroup</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>KEditListBox</class>
    <extends>QGroupBox</extends>
    <header>keditlistbox.h</header>
@@ -280,7 +268,6 @@
   </customwidget>
  </customwidgets>
  <tabstops>
-  <tabstop>m_extractPayeeButton</tabstop>
   <tabstop>m_payeeRegExpEdit</tabstop>
   <tabstop>m_memoRegExpEdit</tabstop>
  </tabstops>

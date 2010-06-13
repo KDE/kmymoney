@@ -28,12 +28,10 @@
 
 #include <QWidget>
 #include <QList>
-#include <Q3ListView>
+#include <QWizard>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-
-#include <k3wizard.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -61,10 +59,10 @@ class OfxHeaderVersion;
   *
   */
 
-class KOnlineBankingSetupDecl : public K3Wizard, public Ui::KOnlineBankingSetupDecl
+class KOnlineBankingSetupDecl : public QWizard, public Ui::KOnlineBankingSetupDecl
 {
 public:
-  KOnlineBankingSetupDecl(QWidget *parent) : K3Wizard(parent) {
+  KOnlineBankingSetupDecl(QWidget *parent) : QWizard(parent) {
     setupUi(this);
   }
 };
@@ -73,10 +71,10 @@ class KOnlineBankingSetupWizard : public KOnlineBankingSetupDecl
 {
   Q_OBJECT
 public:
-  class ListViewItem: public MyMoneyKeyValueContainer, public Q3ListViewItem
+  class ListViewItem: public MyMoneyKeyValueContainer, public QTreeWidgetItem
   {
   public:
-    ListViewItem(Q3ListView* parent, const MyMoneyKeyValueContainer& kvps);
+    ListViewItem(QTreeWidget* parent, const MyMoneyKeyValueContainer& kvps);
     virtual void x(void);
   };
 
@@ -89,8 +87,9 @@ public:
     return m_fInit;
   }
 
-public slots:
-  void next();
+protected slots:
+  void checkNextButton(void);
+  void newPage(int id);
 
 protected:
   bool finishAccountPage(void);

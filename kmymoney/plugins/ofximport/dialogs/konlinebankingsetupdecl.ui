@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>KOnlineBankingSetupDecl</class>
- <widget class="K3Wizard" name="KOnlineBankingSetupDecl">
+ <widget class="QWizard" name="KOnlineBankingSetupDecl">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>595</width>
-    <height>447</height>
+    <height>560</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Online Banking Account Setup</string>
   </property>
-  <widget class="QWidget" name="FIPage">
-   <attribute name="title">
+  <widget class="QWizardPage" name="FIPage">
+   <property name="title">
     <string>Select Financial Institution</string>
-   </attribute>
+   </property>
    <layout class="QHBoxLayout">
     <item>
      <layout class="QVBoxLayout">
@@ -44,22 +44,7 @@
          </attribute>
          <layout class="QVBoxLayout">
           <item>
-           <widget class="K3ListView" name="m_listFi">
-            <property name="allColumnsShowFocus">
-             <bool>true</bool>
-            </property>
-            <column>
-             <property name="text">
-              <string>Financial Institution</string>
-             </property>
-             <property name="clickable">
-              <bool>true</bool>
-             </property>
-             <property name="resizable">
-              <bool>true</bool>
-             </property>
-            </column>
-           </widget>
+           <widget class="KListWidget" name="m_listFi"/>
           </item>
          </layout>
         </widget>
@@ -135,18 +120,10 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="LoginPage">
-   <property name="geometry">
-    <rect>
-     <x>6</x>
-     <y>32</y>
-     <width>583</width>
-     <height>374</height>
-    </rect>
-   </property>
-   <attribute name="title">
+  <widget class="QWizardPage" name="LoginPage">
+   <property name="title">
     <string>Enter Login Details</string>
-   </attribute>
+   </property>
    <layout class="QHBoxLayout">
     <item>
      <layout class="QGridLayout">
@@ -167,15 +144,15 @@
        </spacer>
       </item>
       <item row="0" column="0" colspan="3">
-       <widget class="QLabel" name="qLabel1" native="true">
+       <widget class="QLabel" name="qLabel1">
         <property name="focusPolicy">
          <enum>Qt::NoFocus</enum>
         </property>
-        <property name="text" stdset="0">
+        <property name="text">
          <string>Please enter the username and password you use to log into this bank for online banking.  Please note that many banks require a separate signup, and assign a separate PIN or password just for online banking from home.</string>
         </property>
         <property name="wordWrap">
-          <bool>true</bool>
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -252,18 +229,10 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="AccountPage">
-   <property name="geometry">
-    <rect>
-     <x>6</x>
-     <y>32</y>
-     <width>583</width>
-     <height>374</height>
-    </rect>
-   </property>
-   <attribute name="title">
+  <widget class="QWizardPage" name="AccountPage">
+   <property name="title">
     <string>Select Account</string>
-   </attribute>
+   </property>
    <layout class="QHBoxLayout">
     <item>
      <layout class="QVBoxLayout">
@@ -281,49 +250,25 @@
        </widget>
       </item>
       <item>
-       <widget class="Q3ListView" name="m_listAccount">
+       <widget class="QTreeWidget" name="m_listAccount">
         <column>
          <property name="text">
           <string>Number</string>
-         </property>
-         <property name="clickable">
-          <bool>true</bool>
-         </property>
-         <property name="resizable">
-          <bool>true</bool>
          </property>
         </column>
         <column>
          <property name="text">
           <string>Type</string>
          </property>
-         <property name="clickable">
-          <bool>true</bool>
-         </property>
-         <property name="resizable">
-          <bool>true</bool>
-         </property>
         </column>
         <column>
          <property name="text">
           <string>Bank</string>
          </property>
-         <property name="clickable">
-          <bool>true</bool>
-         </property>
-         <property name="resizable">
-          <bool>true</bool>
-         </property>
         </column>
         <column>
          <property name="text">
           <string>Branch</string>
-         </property>
-         <property name="clickable">
-          <bool>true</bool>
-         </property>
-         <property name="resizable">
-          <bool>true</bool>
          </property>
         </column>
        </widget>
@@ -332,18 +277,10 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="WizardPage">
-   <property name="geometry">
-    <rect>
-     <x>6</x>
-     <y>32</y>
-     <width>583</width>
-     <height>374</height>
-    </rect>
+  <widget class="QWizardPage" name="WizardPage">
+   <property name="title">
+    <string>Finish</string>
    </property>
-   <attribute name="title">
-    <string comment="@title final page of online banking wizard">Finish</string>
-   </attribute>
    <layout class="QHBoxLayout">
     <item>
      <layout class="QVBoxLayout">
@@ -368,31 +305,14 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>Q3Frame</class>
-   <extends>QFrame</extends>
-   <header>Qt3Support/Q3Frame</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>Q3Wizard</class>
-   <extends>QDialog</extends>
-   <header>q3wizard.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>Q3ListView</class>
-   <extends>Q3Frame</extends>
-   <header>q3listview.h</header>
-  </customwidget>
-  <customwidget>
-   <class>K3ListView</class>
-   <extends>Q3ListView</extends>
-   <header>k3listview.h</header>
-  </customwidget>
-  <customwidget>
    <class>KUrlRequester</class>
    <extends>QFrame</extends>
    <header>kurlrequester.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KListWidget</class>
+   <extends>QListWidget</extends>
+   <header>klistwidget.h</header>
   </customwidget>
   <customwidget>
    <class>KLineEdit</class>
@@ -414,11 +334,6 @@
    <class>KTextBrowser</class>
    <extends>QTextBrowser</extends>
    <header>ktextbrowser.h</header>
-  </customwidget>
-  <customwidget>
-   <class>K3Wizard</class>
-   <extends>Q3Wizard</extends>
-   <header>k3wizard.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

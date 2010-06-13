@@ -91,7 +91,7 @@ KOnlineBankingStatus::KOnlineBankingStatus(const MyMoneyAccount& acc, QWidget *p
     m_specificDate->setDate(QDate::fromString(specificDate));
   else
     m_specificDate->setDate(QDate::currentDate());
-  m_specificDate->setMaxValue(QDate::currentDate());
+  m_specificDate->setMaximumDate(QDate::currentDate());
   m_payeeidRB->setChecked(settings.value("kmmofx-preferPayeeid").isEmpty() || settings.value("kmmofx-preferPayeeid").toInt() != 0);
   m_nameRB->setChecked(!settings.value("kmmofx-preferName").isEmpty() && settings.value("kmmofx-preferName").toInt() != 0);
 }
