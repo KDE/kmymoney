@@ -30,7 +30,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoneysettings.h>
+#include "kmymoneysettings.h"
 
 class KMyMoneyGlobalSettings : public KMyMoneySettings
 {
