@@ -70,7 +70,7 @@ KMyMoneyCategory::KMyMoneyCategory(QWidget* parent, bool splitButton) :
     layout->setContentsMargins(0, 0, 0, 0);
 
     // make sure not to use our own overridden version of reparent() here
-    KMyMoneyCombo::setParent(d->frame, windowFlags()  & ~Qt::WType_Mask);
+    KMyMoneyCombo::setParent(d->frame, windowFlags()  & ~Qt::WindowType_Mask);
     KMyMoneyCombo::show();
     if (parent) {
       d->frame->setParent(parent);
