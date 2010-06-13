@@ -93,6 +93,8 @@ public:
     */
   void setDate(QDate date);
 
+  void setMaximumDate(const QDate& max);
+
   /**
     * Setup the widget with @a date. This date is stored internally and
     * can be reloaded using resetDate().
@@ -128,6 +130,7 @@ protected:
 
   /** To intercept events sent to focusWidget() */
   bool eventFilter(QObject *o, QEvent *e);
+
 
 protected slots:
   void slotDateChosen(QDate date);

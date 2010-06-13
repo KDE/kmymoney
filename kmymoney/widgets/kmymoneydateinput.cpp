@@ -367,6 +367,11 @@ void kMyMoneyDateInput::resetDate(void)
   setDate(d->m_prevDate);
 }
 
+void kMyMoneyDateInput::setMaximumDate(const QDate& max)
+{
+  d->m_dateEdit->setMaximumDate(max);
+}
+
 QWidget* kMyMoneyDateInput::focusWidget(void) const
 {
   QWidget* w = d->m_dateEdit;
