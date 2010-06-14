@@ -56,7 +56,7 @@ KCurrencyEditDlg::KCurrencyEditDlg(QWidget *parent) :
 
   // create the searchline widget
   // and insert it into the existing layout
-  m_searchWidget = new KTreeWidgetSearchLine(this, m_currencyList);
+  m_searchWidget = new KTreeWidgetSearchLineWidget(this, m_currencyList);
   m_searchWidget->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed));
   m_listLayout->insertWidget(0, m_searchWidget);
 

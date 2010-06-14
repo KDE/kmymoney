@@ -85,12 +85,12 @@ signals:
   void selectBaseCurrency(const MyMoneySecurity& currency);
 
 private:
-  MyMoneySecurity      m_currency;
-  bool                 m_currencyInEditing;
+  MyMoneySecurity               m_currency;
+  bool                          m_currencyInEditing;
   /**
     * Search widget for the list
     */
-  KTreeWidgetSearchLine*  m_searchWidget;
+  KTreeWidgetSearchLineWidget*  m_searchWidget;
 };
 
 #endif
