@@ -22,7 +22,7 @@
 // QT Includes
 
 #include <QObject>
-#include <Q3Http>
+#include <QHttp>
 #include <QFile>
 
 // ----------------------------------------------------------------------------
@@ -66,7 +66,7 @@ public:
   OfxHttpRequest(const QString& method, const KUrl &url, const QByteArray &postData, const QMap<QString, QString>& metaData, const KUrl& dst, bool showProgressInfo = true);
   virtual ~OfxHttpRequest() {}
 
-  Q3Http::Error error(void) const {
+  QHttp::Error error(void) const {
     return m_error;
   }
 
@@ -74,9 +74,9 @@ protected slots:
   void slotOfxFinished(int, bool);
 
 private:
-  Q3Http*       m_job;
+  QHttp*        m_job;
   KUrl          m_dst;
-  Q3Http::Error  m_error;
+  QHttp::Error  m_error;
 
 };
 
@@ -87,7 +87,7 @@ public:
   OfxHttpsRequest(const QString& method, const KUrl &url, const QByteArray &postData, const QMap<QString, QString>& metaData, const KUrl& dst, bool showProgressInfo = true);
   virtual ~OfxHttpsRequest();
 
-  Q3Http::Error error(void) const {
+  QHttp::Error error(void) const {
     return m_error;
   }
 
@@ -101,7 +101,7 @@ private:
   Private*          d;
   KUrl              m_dst;
   QFile             m_file;
-  Q3Http::Error     m_error;
+  QHttp::Error      m_error;
   KIO::TransferJob* m_job;
 };
 #endif // OFXPARTNER_H

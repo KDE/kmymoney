@@ -8,7 +8,7 @@ SET(kmm_ofximport_dialogs_la_SOURCES
   )
 
 SET(kmm_ofximport_dialogs_UI
-  kofxdirectconnectdlgdecl.ui konlinebankingsetupdecl.ui
+  kofxdirectconnectdlgdecl.ui konlinebankingsetupwizard.ui
   konlinebankingstatusdecl.ui
   )
 

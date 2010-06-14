@@ -59,12 +59,14 @@ public:
 };
 
 KOnlineBankingSetupWizard::KOnlineBankingSetupWizard(QWidget *parent):
-    KOnlineBankingSetupDecl(parent),
+    QWizard(parent),
     d(new Private),
     m_fDone(false),
     m_fInit(false),
     m_appId(0)
 {
+  setupUi(this);
+
   m_appId = new OfxAppVersion(m_applicationCombo, "");
   m_headerVersion = new OfxHeaderVersion(m_headerVersionCombo, "");
 
@@ -463,7 +465,7 @@ KOnlineBankingSetupWizard::ListViewItem::ListViewItem(QTreeWidget* parent, const
   setText(3, value("branchid"));
 }
 
-void KOnlineBankingSetupWizard::ListViewItem::x(void) {}
+// void KOnlineBankingSetupWizard::ListViewItem::x(void) {}
 
 #include "konlinebankingsetupwizard.moc"
 

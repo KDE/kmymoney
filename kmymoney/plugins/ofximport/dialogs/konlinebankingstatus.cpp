@@ -29,7 +29,6 @@
 #include <QPushButton>
 #include <QRadioButton>
 #include <QSpinBox>
-#include <Q3DateTimeEdit>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

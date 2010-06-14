@@ -36,7 +36,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_konlinebankingsetupdecl.h"
+#include "ui_konlinebankingsetupwizard.h"
 #include <mymoneykeyvaluecontainer.h>
 class OfxAppVersion;
 class OfxHeaderVersion;
@@ -59,15 +59,7 @@ class OfxHeaderVersion;
   *
   */
 
-class KOnlineBankingSetupDecl : public QWizard, public Ui::KOnlineBankingSetupDecl
-{
-public:
-  KOnlineBankingSetupDecl(QWidget *parent) : QWizard(parent) {
-    setupUi(this);
-  }
-};
-
-class KOnlineBankingSetupWizard : public KOnlineBankingSetupDecl
+class KOnlineBankingSetupWizard : public QWizard, public Ui::KOnlineBankingSetupWizard
 {
   Q_OBJECT
 public:
@@ -75,7 +67,7 @@ public:
   {
   public:
     ListViewItem(QTreeWidget* parent, const MyMoneyKeyValueContainer& kvps);
-    virtual void x(void);
+    // virtual void x(void);
   };
 
   KOnlineBankingSetupWizard(QWidget *parent = 0);

@@ -281,7 +281,7 @@ bool get(const QString& request, const QMap<QString, QString>& attr, const KUrl&
   QByteArray req;
   OfxHttpRequest job("GET", url, req, attr, filename, true);
 
-  return job.error() == Q3Http::NoError;
+  return job.error() == QHttp::NoError;
 }
 
 bool post(const QString& request, const QMap<QString, QString>& attr, const KUrl& url, const KUrl& filename)
@@ -289,7 +289,7 @@ bool post(const QString& request, const QMap<QString, QString>& attr, const KUrl
   QByteArray req(request.toAscii());
 
   OfxHttpRequest job("POST", url, req, attr, filename, true);
-  return job.error() == Q3Http::NoError;
+  return job.error() == QHttp::NoError;
 }
 
 } // namespace OfxPartner
@@ -403,11 +403,11 @@ OfxHttpRequest::OfxHttpRequest(const QString& type, const KUrl &url, const QByte
   Q_UNUSED(showProgressInfo);
 
   QFile f(dst.path());
-  m_error = Q3Http::NoError;
+  m_error = QHttp::NoError;
   QString errorMsg;
   if (f.open(QIODevice::WriteOnly)) {
-    m_job = new Q3Http(url.host());
-    Q3HttpRequestHeader header(type, url.encodedPathAndQuery());
+    m_job = new QHttp(url.host());
+    QHttpRequestHeader header(type, url.encodedPathAndQuery());
     header.setValue("Host", url.host());
     QMap<QString, QString>::const_iterator it;
     for (it = metaData.begin(); it != metaData.end(); ++it) {
@@ -421,16 +421,16 @@ OfxHttpRequest::OfxHttpRequest(const QString& type, const KUrl &url, const QByte
 
     qApp->enter_loop();
 
-    if (m_error != Q3Http::NoError)
+    if (m_error != QHttp::NoError)
       errorMsg = m_job->errorString();
 
     delete m_job;
   } else {
-    m_error = Q3Http::Aborted;
+    m_error = QHttp::Aborted;
     errorMsg = i18n("Cannot open file %1 for writing", dst.path());
   }
 
-  if (m_error != Q3Http::NoError) {
+  if (m_error != QHttp::NoError) {
     KMessageBox::error(0, errorMsg, i18n("OFX setup error"));
 //FIXME: FIX on windows
     unlink(dst.path().toUtf8().data());
