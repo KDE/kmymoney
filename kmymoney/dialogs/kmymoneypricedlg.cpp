@@ -164,7 +164,7 @@ QTreeWidgetItem* KMyMoneyPriceDlg::loadPriceItem(const MyMoneyPrice& basePrice)
 
 void KMyMoneyPriceDlg::slotSelectPrice()
 {
-  QTreeWidgetItem* item;
+  QTreeWidgetItem* item = 0;
   if(m_priceList->selectedItems().count() > 0) {
     item = m_priceList->selectedItems().at(0);
   }
