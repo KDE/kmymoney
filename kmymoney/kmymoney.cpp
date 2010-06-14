@@ -6134,6 +6134,7 @@ void KMyMoneyApp::slotResetSelections(void)
   slotSelectInvestment();
   slotSelectSchedule();
   slotSelectCurrency();
+  slotSelectPrice();
   slotSelectPayees(QList<MyMoneyPayee>());
   slotSelectBudget(QList<MyMoneyBudget>());
   slotSelectTransactions(KMyMoneyRegister::SelectedTransactions());
