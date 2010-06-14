@@ -165,4 +165,9 @@ typedef QPair<QString, QString> MyMoneySecurityPair;
 typedef QMap<QDate, MyMoneyPrice> MyMoneyPriceEntries;
 typedef QMap<MyMoneySecurityPair, MyMoneyPriceEntries> MyMoneyPriceList;
 
+/**
+  * Make it possible to hold @ref MyMoneyPrice objects inside @ref QVariant objects.
+  */
+Q_DECLARE_METATYPE(MyMoneyPrice)
+
 #endif

@@ -21,9 +21,47 @@
         <item>
           <layout class="QHBoxLayout">
             <item>
-              <layout class="QVBoxLayout">
+              <layout class="QVBoxLayout" name="m_listLayout">
                 <item>
-                  <widget class="KMyMoneyPriceView" name="m_priceList"/>
+                  <widget class="QTreeWidget" name="m_priceList">
+                    <property name="sizePolicy">
+                      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                        <horstretch>1</horstretch>
+                        <verstretch>1</verstretch>
+                      </sizepolicy>
+                    </property>
+                     <property name="rootIsDecorated">
+                      <bool>false</bool>
+                     </property>
+                     <property name="allColumnsShowFocus">
+                      <bool>true</bool>
+                     </property>
+                     <column>
+                      <property name="text">
+                       <string>Commodity</string>
+                      </property>
+                     </column>
+                     <column>
+                      <property name="text">
+                       <string>Currency</string>
+                      </property>
+                     </column>
+                     <column>
+                      <property name="text">
+                       <string>Date</string>
+                      </property>
+                     </column>
+                     <column>
+                      <property name="text">
+                       <string>Price</string>
+                      </property>
+                     </column>
+                     <column>
+                      <property name="text">
+                       <string comment="Price source">Source</string>
+                      </property>
+                     </column>
+                   </widget>
                 </item>
                 <item>
                   <widget class="QCheckBox" name="m_showAllPrices">
@@ -51,6 +89,13 @@
                   </widget>
                 </item>
                 <item>
+                  <widget class="KPushButton" name="m_onlineQuoteButton">
+                    <property name="text">
+                      <string>Online Quotes</string>
+                    </property>
+                  </widget>
+                </item>
+                <item>
                   <widget class="KPushButton" name="m_deleteButton">
                     <property name="text">
                       <string>Delete</string>
@@ -72,13 +117,6 @@
                       <enum>Qt::Vertical</enum>
                     </property>
                   </spacer>
-                </item>
-                <item>
-                  <widget class="KPushButton" name="m_onlineQuoteButton">
-                    <property name="text">
-                      <string>Online Quotes</string>
-                    </property>
-                  </widget>
                 </item>
               </layout>
             </item>
@@ -103,21 +141,6 @@
      <class>KDialog</class>
      <extends>QDialog</extends>
      <header>kdialog.h</header>
-    </customwidget>
-    <customwidget>
-      <class>KMyMoneyPriceView</class>
-      <extends>QWidget</extends>
-      <header location="local">../widgets/kmymoneypriceview.h</header>
-      <sizehint>
-        <width>-1</width>
-        <height>-1</height>
-      </sizehint>
-      <container>0</container>
-      <sizepolicy>
-        <hordata>5</hordata>
-        <verdata>5</verdata>
-      </sizepolicy>
-      <pixmap>image0</pixmap>
     </customwidget>
   </customwidgets>
   <tabstops>

@@ -138,7 +138,6 @@ SET(libwidgets_a_SOURCES
   kmymoneycalendar.cpp
   kmymoneyforecastlistviewitem.cpp
   kmymoneyonlinequoteconfig.cpp
-  kmymoneypriceview.cpp
   kmymoneyscheduledcalendar.cpp
   kmymoneyscheduleddatetbl.cpp
   registersearchline.cpp

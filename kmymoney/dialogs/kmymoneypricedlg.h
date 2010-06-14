@@ -26,16 +26,18 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-class Q3ListViewItem;
+#include <QTreeWidgetItem>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
+
+#include <ktreewidgetsearchline.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "ui_kmymoneypricedlgdecl.h"
-#include "mymoneyprice.h"
+#include <mymoneyprice.h>
 
 
 class KMyMoneyPriceDlgDecl : public KDialog, public Ui::KMyMoneyPriceDlgDecl
@@ -46,6 +48,8 @@ public:
   }
 };
 
+enum ePriceColumns { ePriceCommodity = 0, ePriceCurrency, ePriceDate, ePricePrice, ePriceSource };
+
 class KMyMoneyPriceDlg : public KMyMoneyPriceDlgDecl
 {
   Q_OBJECT
@@ -53,20 +57,29 @@ public:
   KMyMoneyPriceDlg(QWidget* parent);
   ~KMyMoneyPriceDlg();
 
+private:
+  QTreeWidgetItem* loadPriceItem(const MyMoneyPrice& basePrice);
+
 protected slots:
-  void slotSelectPrice(Q3ListViewItem* item);
+  void slotSelectPrice();
   void slotNewPrice(void);
   void slotDeletePrice(void);
   int slotEditPrice(void);
   void slotLoadWidgets(void);
   void slotOnlinePriceUpdate(void);
+  void slotOpenContextMenu(const QPoint& p);
 
 signals:
   void openContextMenu(const MyMoneyPrice& price);
   void selectObject(const MyMoneyPrice& price);
 
 private:
-  Q3ListViewItem*    m_currentItem;
+  QTreeWidgetItem*    m_currentItem;
+  int                 m_pricePrecision;
+  /**
+    * Search widget for the list
+    */
+  KTreeWidgetSearchLineWidget*  m_searchWidget;
 };
 
 #endif // KMYMONEYPRICEDLG_H
