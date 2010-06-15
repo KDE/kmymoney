@@ -172,13 +172,22 @@ void KMyMoneyPriceDlg::slotSelectPrice()
   m_editButton->setEnabled(item != 0);
   m_deleteButton->setEnabled(item != 0);
 
+  //if one of the selected entries is a default, then deleting is disabled
+  QList<QTreeWidgetItem*> itemsList = m_priceList->selectedItems();
+  QList<QTreeWidgetItem*>::const_iterator item_it;
+  bool deleteEnabled = true;
+  for(item_it = itemsList.constBegin(); item_it != itemsList.constEnd(); ++item_it) {
+    MyMoneyPrice price = (*item_it)->data(0, Qt::UserRole).value<MyMoneyPrice>();
+    if (price.source() == "KMyMoney")
+      deleteEnabled = false;
+  }
+  m_deleteButton->setEnabled(deleteEnabled);
+
   // Modification of automatically added entries is not allowed
   if (item) {
     MyMoneyPrice price = item->data(0, Qt::UserRole).value<MyMoneyPrice>();
-    if (price.source() == "KMyMoney") {
+    if (price.source() == "KMyMoney")
       m_editButton->setEnabled(false);
-      m_deleteButton->setEnabled(false);
-    }
     emit selectObject(price);
   }
 }
@@ -243,12 +252,15 @@ int KMyMoneyPriceDlg::slotEditPrice(void)
 
 void KMyMoneyPriceDlg::slotDeletePrice(void)
 {
-  QTreeWidgetItem* item = m_priceList->currentItem();
-  if (item) {
-    if (KMessageBox::questionYesNo(this, i18n("Do you really want to delete the selected price entry?"), i18n("Delete price information"), KStandardGuiItem::yes(), KStandardGuiItem::no(), "DeletePrice") == KMessageBox::Yes) {
+  QList<QTreeWidgetItem*> listItems = m_priceList->selectedItems();
+  if (listItems.count() > 0) {
+    if (KMessageBox::questionYesNo(this, i18np("Do you really want to delete the selected price entry?", "Do you really want to delete the selected price entries?", listItems.count() ), i18n("Delete price information"), KStandardGuiItem::yes(), KStandardGuiItem::no(), "DeletePrice") == KMessageBox::Yes) {
       MyMoneyFileTransaction ft;
       try {
-        MyMoneyFile::instance()->removePrice(item->data(0, Qt::UserRole).value<MyMoneyPrice>());
+        QList<QTreeWidgetItem*>::const_iterator price_it;
+        for(price_it = listItems.constBegin(); price_it != listItems.constEnd(); ++price_it) {
+          MyMoneyFile::instance()->removePrice((*price_it)->data(0, Qt::UserRole).value<MyMoneyPrice>());
+        }
         ft.commit();
       } catch (MyMoneyException *e) {
         qDebug("Cannot delete price");
