@@ -347,7 +347,6 @@ void KMyMoneyView::showPage(KPageWidgetItem* pageItem)
 
 bool KMyMoneyView::canPrint(void)
 {
-
   bool rc = (
               m_reportsViewFrame == currentPage()
               || m_homeViewFrame == currentPage()

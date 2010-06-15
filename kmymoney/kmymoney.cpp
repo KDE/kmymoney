@@ -360,6 +360,8 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   ::timetrace("create view");
   d->m_myMoneyView = new KMyMoneyView(frame);
   layout->addWidget(d->m_myMoneyView, 10);
+  connect(d->m_myMoneyView, SIGNAL(currentPageChanged(KPageWidgetItem *, KPageWidgetItem *)),
+          this, SLOT(slotUpdateActions()));
 
   ///////////////////////////////////////////////////////////////////
   // call inits to invoke all other construction parts
