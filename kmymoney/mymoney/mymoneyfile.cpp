@@ -1817,7 +1817,7 @@ const QStringList MyMoneyFile::consistencyCheck(void)
     if (securityPriceDate.value((*accForeignList_it).currencyId()) > (*accForeignList_it).openingDate()) {
       QDate openingDate = (*accForeignList_it).openingDate();
       MyMoneySecurity secError = security((*accForeignList_it).currencyId());
-      if(!(*accForeignList_it).isInvest()) {
+      if (!(*accForeignList_it).isInvest()) {
         rc << i18n("  * The account '%1' in currency '%2' has no price set for the opening date '%3'.", (*accForeignList_it).name(), secError.name(), openingDate.toString(Qt::ISODate));
         rc << i18n("    Please enter a price for the currency on or before the opening date.");
       } else {

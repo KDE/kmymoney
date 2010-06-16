@@ -165,7 +165,7 @@ QTreeWidgetItem* KMyMoneyPriceDlg::loadPriceItem(const MyMoneyPrice& basePrice)
 void KMyMoneyPriceDlg::slotSelectPrice()
 {
   QTreeWidgetItem* item = 0;
-  if(m_priceList->selectedItems().count() > 0) {
+  if (m_priceList->selectedItems().count() > 0) {
     item = m_priceList->selectedItems().at(0);
   }
   m_currentItem = item;
@@ -175,7 +175,7 @@ void KMyMoneyPriceDlg::slotSelectPrice()
   //if one of the selected entries is a default, then deleting is disabled
   QList<QTreeWidgetItem*> itemsList = m_priceList->selectedItems();
   QList<QTreeWidgetItem*>::const_iterator item_it;
-  for(item_it = itemsList.constBegin(); item_it != itemsList.constEnd(); ++item_it) {
+  for (item_it = itemsList.constBegin(); item_it != itemsList.constEnd(); ++item_it) {
     MyMoneyPrice price = (*item_it)->data(0, Qt::UserRole).value<MyMoneyPrice>();
     if (price.source() == "KMyMoney")
       deleteEnabled = false;
@@ -254,11 +254,11 @@ void KMyMoneyPriceDlg::slotDeletePrice(void)
 {
   QList<QTreeWidgetItem*> listItems = m_priceList->selectedItems();
   if (listItems.count() > 0) {
-    if (KMessageBox::questionYesNo(this, i18np("Do you really want to delete the selected price entry?", "Do you really want to delete the selected price entries?", listItems.count() ), i18n("Delete price information"), KStandardGuiItem::yes(), KStandardGuiItem::no(), "DeletePrice") == KMessageBox::Yes) {
+    if (KMessageBox::questionYesNo(this, i18np("Do you really want to delete the selected price entry?", "Do you really want to delete the selected price entries?", listItems.count()), i18n("Delete price information"), KStandardGuiItem::yes(), KStandardGuiItem::no(), "DeletePrice") == KMessageBox::Yes) {
       MyMoneyFileTransaction ft;
       try {
         QList<QTreeWidgetItem*>::const_iterator price_it;
-        for(price_it = listItems.constBegin(); price_it != listItems.constEnd(); ++price_it) {
+        for (price_it = listItems.constBegin(); price_it != listItems.constEnd(); ++price_it) {
           MyMoneyFile::instance()->removePrice((*price_it)->data(0, Qt::UserRole).value<MyMoneyPrice>());
         }
         ft.commit();
@@ -291,7 +291,7 @@ void KMyMoneyPriceDlg::slotOpenContextMenu(const QPoint& p)
   QTreeWidgetItem* item = m_priceList->itemAt(p);
   if (item)
     m_priceList->setCurrentItem(item, QItemSelectionModel::ClearAndSelect);
-    emit openContextMenu(item->data(0, Qt::UserRole).value<MyMoneyPrice>());
+  emit openContextMenu(item->data(0, Qt::UserRole).value<MyMoneyPrice>());
 }
 
 #include "kmymoneypricedlg.moc"
