@@ -170,12 +170,11 @@ void KMyMoneyPriceDlg::slotSelectPrice()
   }
   m_currentItem = item;
   m_editButton->setEnabled(item != 0);
-  m_deleteButton->setEnabled(item != 0);
+  bool deleteEnabled = (item != 0);
 
   //if one of the selected entries is a default, then deleting is disabled
   QList<QTreeWidgetItem*> itemsList = m_priceList->selectedItems();
   QList<QTreeWidgetItem*>::const_iterator item_it;
-  bool deleteEnabled = true;
   for(item_it = itemsList.constBegin(); item_it != itemsList.constEnd(); ++item_it) {
     MyMoneyPrice price = (*item_it)->data(0, Qt::UserRole).value<MyMoneyPrice>();
     if (price.source() == "KMyMoney")
@@ -184,9 +183,10 @@ void KMyMoneyPriceDlg::slotSelectPrice()
   m_deleteButton->setEnabled(deleteEnabled);
 
   // Modification of automatically added entries is not allowed
+  // Multiple entries cannot be edited at once
   if (item) {
     MyMoneyPrice price = item->data(0, Qt::UserRole).value<MyMoneyPrice>();
-    if (price.source() == "KMyMoney")
+    if (price.source() == "KMyMoney" || itemsList.count() > 1)
       m_editButton->setEnabled(false);
     emit selectObject(price);
   }
@@ -290,6 +290,7 @@ void KMyMoneyPriceDlg::slotOpenContextMenu(const QPoint& p)
 {
   QTreeWidgetItem* item = m_priceList->itemAt(p);
   if (item)
+    m_priceList->setCurrentItem(item, QItemSelectionModel::ClearAndSelect);
     emit openContextMenu(item->data(0, Qt::UserRole).value<MyMoneyPrice>());
 }
 

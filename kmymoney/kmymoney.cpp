@@ -994,10 +994,12 @@ void KMyMoneyApp::initActions(void)
   //price actions
   KAction *price_new = actionCollection()->addAction("price_new");
   price_new->setText("New price...");
+  price_new->setIcon(KIcon("document-new"));
   connect(price_new, SIGNAL(triggered()), this, SIGNAL(priceNew()));
 
   KAction *price_edit = actionCollection()->addAction("price_edit");
   price_edit->setText("Edit price...");
+  price_edit->setIcon(KIcon("document-properties"));
   connect(price_edit, SIGNAL(triggered()), this, SIGNAL(priceEdit()));
 
   KAction *price_update = actionCollection()->addAction("price_update");
@@ -1007,6 +1009,7 @@ void KMyMoneyApp::initActions(void)
 
   KAction *price_delete = actionCollection()->addAction("price_delete");
   price_delete->setText("Delete price...");
+  price_delete->setIcon(KIcon("edit-delete"));
   connect(price_delete, SIGNAL(triggered()), this, SIGNAL(priceDelete()));
 
   //debug actions
