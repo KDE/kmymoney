@@ -159,8 +159,13 @@ KBudgetView::KBudgetView(QWidget *parent) :
 
   KConfigGroup grp = KGlobal::config()->group("Last Use Settings");
   QList<int> sizes = grp.readEntry("KBudgetViewSplitterSize", QList<int>());
-  if (sizes.size() == 2)
+  if (sizes.size() == 2) {
+    if ((sizes[0] == 0) || (sizes[1] == 0)) {
+      sizes[0] = 1;
+      sizes[1] = 3;
+    }
     m_splitter->setSizes(sizes);
+  }
 }
 
 KBudgetView::~KBudgetView()
