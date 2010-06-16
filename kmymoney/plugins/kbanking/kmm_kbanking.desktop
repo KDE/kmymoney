@@ -2,6 +2,7 @@
 Name=KBanking
 Name[cs]=KBanking
 Name[en_GB]=KBanking
+Name[es]=KBanking
 Name[nds]=KBanking
 Name[pt]=KBanking
 Name[pt_BR]=KBanking
@@ -10,6 +11,7 @@ Name[uk]=KBanking
 Name[x-test]=xxKBankingxx
 Comment=Add online banking to KMyMoney
 Comment[en_GB]=Add online banking to KMyMoney
+Comment[es]=Añade banca en línea a KMyMoney
 Comment[pt]=Adiciona a banca 'online' ao KMyMoney
 Comment[pt_BR]=Adiciona banco on-line ao KMyMoney
 Comment[sv]=Lägg till Internetbank till Kmymoney

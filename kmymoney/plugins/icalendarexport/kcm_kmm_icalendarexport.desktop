@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Configure icalendar export plugin
 Name[en_GB]=Configure icalendar export plugin
+Name[es]=Configurar el complemento de exportación de icalendar
 Name[pt]=Configurar o 'plugin' de exportação para iCalendar
 Name[pt_BR]=Configurar o plug-in de exportação para iCalendar
 Name[sv]=Anpassa iCalendar-exportinsticksprogram
@@ -14,6 +15,7 @@ Categories=QT;KDE;kmymoney;
 Keywords=icalendar;kmymoney
 Keywords[cs]=icalendar;kmymoney
 Keywords[en_GB]=icalendar;kmymoney
+Keywords[es]=icalendar;kmymoney
 Keywords[nds]=icalendar;kmymoney
 Keywords[pt]=icalendar;kmymoney
 Keywords[pt_BR]=icalendar;kmymoney
@@ -25,6 +27,7 @@ X-KDE-ParentApp=iCalendar
 X-KDE-ParentComponents=iCalendar
 Comment=Permits the configuration of the iCalendar plugin's options
 Comment[en_GB]=Permits the configuration of the iCalendar plugin's options
+Comment[es]=Permite la configuración de las opciones del complemento de iCalendar
 Comment[pt]=Permite a configuração das opções do 'plugin' de iCalendar
 Comment[pt_BR]=Permite a configuração das opções do plug-in de iCalendar
 Comment[sv]=Möjliggör inställning av alternativ för iCalendar-insticksprogrammet
