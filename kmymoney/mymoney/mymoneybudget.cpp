@@ -302,7 +302,7 @@ void MyMoneyBudget::removeReference(const QString& id)
   }
 }
 
-void MyMoneyBudget::setAccount(const AccountGroup &_account, const QString _id)
+void MyMoneyBudget::setAccount(const AccountGroup &_account, const QString &_id)
 {
   if (_account.isZero()) {
     m_accounts.remove(_id);
@@ -315,7 +315,7 @@ void MyMoneyBudget::setAccount(const AccountGroup &_account, const QString _id)
   }
 }
 
-const MyMoneyBudget::AccountGroup& MyMoneyBudget::account(const QString _id) const
+const MyMoneyBudget::AccountGroup& MyMoneyBudget::account(const QString &_id) const
 {
   static AccountGroup empty;
   QMap<QString, AccountGroup>::ConstIterator it;

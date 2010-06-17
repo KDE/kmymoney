@@ -220,8 +220,8 @@ public:
   QString id(void) const {
     return m_id;
   }
-  const AccountGroup & account(const QString _id) const;
-  bool contains(const QString _id) const {
+  const AccountGroup & account(const QString &_id) const;
+  bool contains(const QString &_id) const {
     return m_accounts.contains(_id);
   }
   QList<AccountGroup> getaccounts(void) const {
@@ -233,7 +233,7 @@ public:
     m_name = _name;
   }
   void setBudgetStart(const QDate& _start);
-  void setAccount(const AccountGroup &_account, const QString _id);
+  void setAccount(const AccountGroup &_account, const QString &_id);
 
   /**
     * This method writes this Budget to the DOM element @p e,
