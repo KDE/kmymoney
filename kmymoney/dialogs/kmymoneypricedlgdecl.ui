@@ -46,6 +46,11 @@
                      </column>
                      <column>
                       <property name="text">
+                       <string>Stock Name</string>
+                      </property>
+                     </column>
+                     <column>
+                      <property name="text">
                        <string>Currency</string>
                       </property>
                      </column>

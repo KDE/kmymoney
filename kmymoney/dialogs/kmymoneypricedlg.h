@@ -48,7 +48,7 @@ public:
   }
 };
 
-enum ePriceColumns { ePriceCommodity = 0, ePriceCurrency, ePriceDate, ePricePrice, ePriceSource };
+enum ePriceColumns { ePriceCommodity = 0, ePriceStockName, ePriceCurrency, ePriceDate, ePricePrice, ePriceSource };
 
 class KMyMoneyPriceDlg : public KMyMoneyPriceDlgDecl
 {
@@ -74,12 +74,13 @@ signals:
   void selectObject(const MyMoneyPrice& price);
 
 private:
-  QTreeWidgetItem*    m_currentItem;
-  int                 m_pricePrecision;
+  QTreeWidgetItem*              m_currentItem;
+  int                           m_pricePrecision;
   /**
     * Search widget for the list
     */
   KTreeWidgetSearchLineWidget*  m_searchWidget;
+  QMap<QString, QString>        m_stockNameMap;
 };
 
 #endif // KMYMONEYPRICEDLG_H

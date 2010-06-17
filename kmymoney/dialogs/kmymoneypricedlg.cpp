@@ -98,6 +98,7 @@ KMyMoneyPriceDlg::KMyMoneyPriceDlg(QWidget* parent) :
   m_pricePrecision = grp.readEntry("PricePrecision", 4);
 
   slotLoadWidgets();
+  slotSelectPrice();
 }
 
 KMyMoneyPriceDlg::~KMyMoneyPriceDlg()
@@ -106,10 +107,29 @@ KMyMoneyPriceDlg::~KMyMoneyPriceDlg()
 
 void KMyMoneyPriceDlg::slotLoadWidgets(void)
 {
-  m_priceList->clear();
-  m_priceList->setSortingEnabled(false);
+  MyMoneyFile* file = MyMoneyFile::instance();
 
-  MyMoneyPriceList list = MyMoneyFile::instance()->priceList();
+  //clear the list and disable the sorting while it loads the widgets, for performance
+  m_priceList->setSortingEnabled(false);
+  m_priceList->clear();
+  m_stockNameMap.clear();
+
+  //load the currencies for investments, which we'll need later
+  QList<MyMoneyAccount> accList;
+  file->accountList(accList);
+  QList<MyMoneyAccount>::const_iterator acc_it;
+  for(acc_it = accList.constBegin(); acc_it != accList.constEnd(); ++acc_it) {
+    if((*acc_it).isInvest()) {
+      if(m_stockNameMap.contains((*acc_it).currencyId())) {
+        m_stockNameMap[(*acc_it).currencyId()] = QString(m_stockNameMap.value((*acc_it).currencyId()) + ", " + (*acc_it).name());
+      } else {
+        m_stockNameMap[(*acc_it).currencyId()] = (*acc_it).name();
+      }
+    }
+  }
+
+  //get the price list
+  MyMoneyPriceList list = file->priceList();
   MyMoneyPriceList::ConstIterator it_allPrices;
   for (it_allPrices = list.constBegin(); it_allPrices != list.constEnd(); ++it_allPrices) {
     MyMoneyPriceEntries::ConstIterator it_priceItem;
@@ -128,6 +148,7 @@ void KMyMoneyPriceDlg::slotLoadWidgets(void)
       }
     }
   }
+  //reenable sorting and sort by the commodity column
   m_priceList->setSortingEnabled(true);
   m_priceList->sortByColumn(ePriceCommodity);
 }
@@ -154,6 +175,8 @@ QTreeWidgetItem* KMyMoneyPriceDlg::loadPriceItem(const MyMoneyPrice& basePrice)
 
     priceTreeItem->setData(ePriceCommodity, Qt::UserRole, QVariant::fromValue(price));
     priceTreeItem->setText(ePriceCommodity, (from.isCurrency()) ? from.id() : from.tradingSymbol());
+    priceTreeItem->setText(ePriceStockName, (from.isCurrency()) ? QString() : m_stockNameMap.value(from.id()));
+    priceTreeItem->setToolTip(ePriceStockName, (from.isCurrency()) ? QString() : m_stockNameMap.value(from.id()));
     priceTreeItem->setText(ePriceCurrency, to.id());
     priceTreeItem->setText(ePriceDate, KGlobal::locale()->formatDate(price.date(), KLocale::ShortDate));
     priceTreeItem->setText(ePricePrice, price.rate(priceBase).formatMoney("", m_pricePrecision));
