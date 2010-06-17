@@ -312,9 +312,10 @@ void KMyMoneyPriceDlg::slotOnlinePriceUpdate(void)
 void KMyMoneyPriceDlg::slotOpenContextMenu(const QPoint& p)
 {
   QTreeWidgetItem* item = m_priceList->itemAt(p);
-  if (item)
+  if (item) {
     m_priceList->setCurrentItem(item, QItemSelectionModel::ClearAndSelect);
-  emit openContextMenu(item->data(0, Qt::UserRole).value<MyMoneyPrice>());
+    emit openContextMenu(item->data(0, Qt::UserRole).value<MyMoneyPrice>());
+  }
 }
 
 #include "kmymoneypricedlg.moc"
