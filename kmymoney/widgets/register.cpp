@@ -25,9 +25,6 @@
 // QT Includes
 
 #include <QString>
-#include <QTimer>
-#include <QApplication>
-#include <QEventLoop>
 #include <QToolTip>
 #include <QImage>
 #include <QPixmap>
