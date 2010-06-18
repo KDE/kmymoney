@@ -39,39 +39,41 @@ INSTALL(TARGETS kmm_widgets ${INSTALL_TARGETS_DEFAULT_ARGS} )
 SET(_uncritial_common_sources
   kbudgetvalues.cpp
   kguiutils.cpp
+  kmymoneyaccountcombo.cpp
   kmymoneyaccountselector.cpp
   kmymoneyaccounttreebudget.cpp
   kmymoneyaccounttree.cpp
-  kmymoneyaccounttreeforecast.cpp
   kmymoneyaccounttreeview.cpp
   kmymoneycalculator.cpp
   kmymoneychecklistitem.cpp
   kmymoneycombo.cpp
-  kmymoneymvccombo.cpp
   kmymoneycompletion.cpp
   kmymoneycurrencyselector.cpp
   kmymoneydatetbl.cpp
   kmymoneyedit.cpp
   kmymoneylineedit.cpp
   kmymoneylistviewitem.cpp
+  kmymoneymvccombo.cpp
+  kmymoneyselector.cpp
   kmymoneytitlelabel.cpp
   kmymoneywizard.cpp
   registeritem.cpp
   scheduledtransaction.cpp
+  selectedtransaction.cpp
   stdtransactiondownloaded.cpp
   stdtransactionmatched.cpp 
   transaction.cpp
   transactionform.cpp
+  transactionsortoptionimpl.cpp
   )
 
 # sources that contain the KMM_DESIGNER flag
 SET (_critial_common_sources
   kaccounttemplateselector.cpp
-  kmymoneyaccountcombo.cpp
   kmymoneyaccountcompletion.cpp
   kmymoneyaccounttreebase.cpp
+  kmymoneyaccounttreeforecast.cpp
   kmymoneycategory.cpp
-  kmymoneyselector.cpp
   register.cpp
   )
 
@@ -106,7 +108,6 @@ IF( USE_QT_DESIGNER )
 
   SET(kmymoneywidgets_PART_SRCS
     ${_critial_common_sources}
-    ${_uncritial_common_sources}
     ${kmymoneywidgets_PART_SRCS})
 
   KDE4_ADD_PLUGIN(kmymoneywidgets ${kmymoneywidgets_PART_SRCS})
@@ -124,7 +125,7 @@ IF( USE_QT_DESIGNER )
     COMPILE_FLAGS "-U_CHECK_MEMORY -DKMM_DESIGNER")
   #####
 
-  TARGET_LINK_LIBRARIES(kmymoneywidgets kmymoney_base kmm_mymoney kmymoney_common dialogs models widgets converter ${KDE4_KDE3SUPPORT_LIBS} ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS})
+  TARGET_LINK_LIBRARIES(kmymoneywidgets kmymoney_base kmm_mymoney kmymoney_common dialogs models converter ${KDE4_KDE3SUPPORT_LIBS} ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS})
 
   INSTALL(TARGETS kmymoneywidgets DESTINATION ${QT_PLUGINS_DIR}/designer )
   INSTALL(FILES kmymoneytitlelabel.png DESTINATION ${DATA_INSTALL_DIR}/kmymoney/pics)
@@ -141,9 +142,7 @@ SET(libwidgets_a_SOURCES
   kmymoneyscheduledcalendar.cpp
   kmymoneyscheduleddatetbl.cpp
   registersearchline.cpp
-  selectedtransaction.cpp
   transactioneditorcontainer.cpp
-  transactionsortoptionimpl.cpp
   kmymoneyreportconfigtabimpl.cpp
   kmymoneyreportcontrolimpl.cpp
   )
@@ -167,7 +166,6 @@ ADD_CUSTOM_TARGET(generate_widgets_ui_srcs DEPENDS ${widgets_ui_srcs})
 KDE4_ADD_LIBRARY(widgets STATIC
   ${libwidgets_a_SOURCES}
   ${widgets_ui_srcs}
-  ${_uncritial_common_sources}
   )
 TARGET_LINK_LIBRARIES(widgets kmymoney_base)
 

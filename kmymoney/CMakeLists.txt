@@ -69,7 +69,7 @@ QT4_ADD_DBUS_ADAPTOR(kmymoney_SRCS org.kde.kmymoney.xml kmymoney.h KMyMoneyApp)
 KDE4_ADD_APP_ICON( kmymoney_SRCS hi*-app-kmymoney.png )
 
 KDE4_ADD_EXECUTABLE( kmymoney ${kmymoney_SRCS} )
-TARGET_LINK_LIBRARIES( kmymoney ${kmymoney_common_LIBS} kmymoney_base )
+TARGET_LINK_LIBRARIES( kmymoney ${kmymoney_common_LIBS} )
 
 ########### kmymoneytest executable ###############
 
