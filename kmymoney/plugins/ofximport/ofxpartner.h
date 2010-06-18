@@ -24,6 +24,7 @@
 #include <QObject>
 #include <QHttp>
 #include <QFile>
+#include <QEventLoop>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -77,7 +78,7 @@ private:
   QHttp*        m_job;
   KUrl          m_dst;
   QHttp::Error  m_error;
-
+  QEventLoop    m_eventLoop;
 };
 
 class OfxHttpsRequest : public QObject
@@ -103,5 +104,6 @@ private:
   QFile             m_file;
   QHttp::Error      m_error;
   KIO::TransferJob* m_job;
+  QEventLoop        m_eventLoop;
 };
 #endif // OFXPARTNER_H

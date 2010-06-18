@@ -302,7 +302,8 @@ public:
 
 OfxHttpsRequest::OfxHttpsRequest(const QString& type, const KUrl &url, const QByteArray &postData, const QMap<QString, QString>& metaData, const KUrl& dst, bool showProgressInfo) :
     d(new Private),
-    m_dst(dst)
+    m_dst(dst),
+    m_eventLoop(qApp->activeWindow())
 {
   Q_UNUSED(type);
   Q_UNUSED(metaData);
@@ -330,7 +331,7 @@ OfxHttpsRequest::OfxHttpsRequest(const QString& type, const KUrl &url, const QBy
   connect(m_job, SIGNAL(data(KIO::Job*, const QByteArray&)), this, SLOT(slotOfxData(KIO::Job*, const QByteArray&)));
   connect(m_job, SIGNAL(connected(KIO::Job*)), this, SLOT(slotOfxConnected(KIO::Job*)));
 
-  qApp->enter_loop();
+  m_eventLoop.exec();
 }
 
 OfxHttpsRequest::~OfxHttpsRequest()
@@ -356,8 +357,6 @@ void OfxHttpsRequest::slotOfxData(KIO::Job*, const QByteArray& _ba)
     if (d->m_fpTrace.isOpen()) {
       d->m_fpTrace.write(_ba, _ba.size());
     }
-
-
   }
 }
 
@@ -393,12 +392,13 @@ void OfxHttpsRequest::slotOfxFinished(KJob* /* e */)
     unlink(m_dst.path().toUtf8().data());
   }
 
-  qApp->exit_loop();
+  m_eventLoop.exit();
 }
 
 
 
-OfxHttpRequest::OfxHttpRequest(const QString& type, const KUrl &url, const QByteArray &postData, const QMap<QString, QString>& metaData, const KUrl& dst, bool showProgressInfo)
+OfxHttpRequest::OfxHttpRequest(const QString& type, const KUrl &url, const QByteArray &postData, const QMap<QString, QString>& metaData, const KUrl& dst, bool showProgressInfo) :
+  m_eventLoop(qApp->activeWindow())
 {
   Q_UNUSED(showProgressInfo);
 
@@ -419,7 +419,7 @@ OfxHttpRequest::OfxHttpRequest(const QString& type, const KUrl &url, const QByte
     connect(m_job, SIGNAL(requestFinished(int, bool)),
             this, SLOT(slotOfxFinished(int, bool)));
 
-    qApp->enter_loop();
+    m_eventLoop.exec();
 
     if (m_error != QHttp::NoError)
       errorMsg = m_job->errorString();
@@ -442,7 +442,7 @@ void OfxHttpRequest::slotOfxFinished(int, bool rc)
   if (rc) {
     m_error = m_job->error();
   }
-  qApp->exit_loop();
+  m_eventLoop.exit();
 }
 
 #include "ofxpartner.moc"
