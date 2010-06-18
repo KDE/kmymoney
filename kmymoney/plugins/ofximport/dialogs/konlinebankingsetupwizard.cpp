@@ -38,7 +38,6 @@
 #include <kstandarddirs.h>
 #include <kprogressdialog.h>
 #include <kapplication.h>
-#include <k3listview.h>
 #include <klistwidgetsearchline.h>
 #include <kcombobox.h>
 #include <kurlrequester.h>
