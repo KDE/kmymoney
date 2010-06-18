@@ -772,6 +772,7 @@ void Register::clear(void)
 
   m_needInitialColumnResize = true;
   m_needResize = true;
+  updateRegister(true);
 }
 
 void Register::insertItemAfter(RegisterItem*p, RegisterItem* prev)
