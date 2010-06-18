@@ -171,10 +171,6 @@ INSTALL(FILES x-kmymoney.xml
 
 UPDATE_XDG_MIMETYPES(${XDG_MIME_INSTALL_DIR})
 
-INSTALL(FILES misc/financequote.pl
-  DESTINATION ${DATA_INSTALL_DIR}/kmymoney/misc
-  )
-
 ########## Application Icons #############
 INSTALL(DIRECTORY icons/oxygen
   DESTINATION ${DATA_INSTALL_DIR}/kmymoney/icons

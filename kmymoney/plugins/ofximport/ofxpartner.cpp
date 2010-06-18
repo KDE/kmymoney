@@ -398,7 +398,7 @@ void OfxHttpsRequest::slotOfxFinished(KJob* /* e */)
 
 
 OfxHttpRequest::OfxHttpRequest(const QString& type, const KUrl &url, const QByteArray &postData, const QMap<QString, QString>& metaData, const KUrl& dst, bool showProgressInfo) :
-  m_eventLoop(qApp->activeWindow())
+    m_eventLoop(qApp->activeWindow())
 {
   Q_UNUSED(showProgressInfo);
 

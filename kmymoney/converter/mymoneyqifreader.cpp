@@ -259,8 +259,7 @@ MyMoneyQifReader::MyMoneyQifReader() :
 
 MyMoneyQifReader::~MyMoneyQifReader()
 {
-  if (m_file)
-    delete m_file;
+  delete m_file;
   delete d;
 }
 

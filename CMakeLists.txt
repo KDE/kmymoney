@@ -33,7 +33,7 @@ IF(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/.svn)
   STRING(REGEX MATCH "Revision: ([0-9]+)" VERSION_SUFFIX "${VERSION_SUFFIX}") 
   STRING(REPLACE "Revision: " "" VERSION_SUFFIX "${VERSION_SUFFIX}")
   SET(VERSION_SUFFIX "-svn${VERSION_SUFFIX}")
-  # switch back to the origianl language setting
+  # switch back to the original language setting
   SET(ENV{LANG} ${LANG})
 ENDIF(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/.svn)
 

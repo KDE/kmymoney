@@ -38,12 +38,12 @@ class MyMoneyCategory
 
 public:
   MyMoneyCategory();
-  MyMoneyCategory(const bool income, const QString name);
-  MyMoneyCategory(const bool income, const QString name, QStringList minors);
+  MyMoneyCategory(const bool income, const QString& name);
+  MyMoneyCategory(const bool income, const QString& name, QStringList minors);
   ~MyMoneyCategory();
 
   // Simple get operations
-  QString name(void) {
+  QString name(void) const {
     return m_name;
   }
   QStringList& minorCategories(void) {
@@ -51,20 +51,20 @@ public:
   }
 
   // Simple set operations
-  bool isIncome(void) {
+  bool isIncome(void) const {
     return m_income;
   }
   void setIncome(const bool val) {
     m_income = val;
   }
-  void setName(const QString val) {
+  void setName(const QString& val) {
     m_name = val;
   }
 
   bool setMinorCategories(QStringList values);
-  bool addMinorCategory(const QString val);
-  bool removeMinorCategory(const QString val);
-  bool renameMinorCategory(const QString oldVal, const QString newVal);
+  bool addMinorCategory(const QString& val);
+  bool removeMinorCategory(const QString& val);
+  bool renameMinorCategory(const QString& oldVal, const QString& newVal);
   bool addMinorCategory(QStringList values);
   bool removeAllMinors(void);
   QString firstMinor(void);

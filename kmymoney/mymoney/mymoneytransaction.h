@@ -51,7 +51,7 @@ class KMM_MYMONEY_EXPORT MyMoneyTransaction : public MyMoneyObject, public MyMon
 {
 public:
   MyMoneyTransaction();
-  MyMoneyTransaction(const QString id,
+  MyMoneyTransaction(const QString& id,
                      const MyMoneyTransaction& transaction);
   /**
     * @param node reference to QDomNode

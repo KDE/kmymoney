@@ -331,7 +331,7 @@ private:
   /**
    * Returns the linear regression for a given @p trendDay
    */
-  MyMoneyMoney accountLinearRegression(const MyMoneyAccount &acc, const int trendDay, const int totalWeight, const MyMoneyMoney meanTerms);
+  MyMoneyMoney accountLinearRegression(const MyMoneyAccount &acc, const int trendDay, const int totalWeight, const MyMoneyMoney& meanTerms);
 
   /**
    * calculate daily forecast trend based on historic transactions

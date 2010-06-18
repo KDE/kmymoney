@@ -1775,12 +1775,10 @@ void Register::selectRange(RegisterItem* from, RegisterItem* to, bool invert, bo
     from = from->nextItem();
   }
 
-  bool changed = false;
   if (clearSel) {
     for (item = firstItem(); item; item = item->nextItem()) {
       if (item->isSelected() && item->isVisible()) {
         item->setSelected(false);
-        changed = true;
       }
     }
   }
@@ -1790,14 +1788,12 @@ void Register::selectRange(RegisterItem* from, RegisterItem* to, bool invert, bo
       if (!invert) {
         if (!item->isSelected() && item->isVisible()) {
           item->setSelected(true);
-          changed = true;
         }
       } else {
         bool sel = !item->isSelected();
         if ((item->isSelected() != sel) && (sel || !sel)) {
           if (item->isVisible()) {
             item->setSelected(sel);
-            changed = true;
           }
         }
       }

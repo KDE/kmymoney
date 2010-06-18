@@ -60,15 +60,14 @@ KGenerateSqlDlg::KGenerateSqlDlg(QWidget *)
 
 KGenerateSqlDlg::~KGenerateSqlDlg()
 {
-  if (m_requiredFields != 0) delete m_requiredFields;
+  delete m_requiredFields;
 }
 
 void KGenerateSqlDlg::initializeForm()
 {
-  if (m_requiredFields != 0) {
-    delete m_requiredFields;
-    m_requiredFields = 0;
-  }
+  delete m_requiredFields;
+  m_requiredFields = 0;
+
   // at this point, we don't know which fields are required, so disable everything but the list
   button(saveSQL)->setEnabled(false);
   button(createTables)->setEnabled(false);
@@ -145,7 +144,6 @@ void KGenerateSqlDlg::slotcreateTables()
       return;
     }
     QSqlQuery q(dbase);
-    bool created = true;
     QString message(i18n("Tables successfully created"));
     QStringList commands = m_widget->textSQL->toPlainText().split('\n');
     QStringList::ConstIterator cit;
@@ -154,7 +152,6 @@ void KGenerateSqlDlg::slotcreateTables()
         //qDebug() << "exec" << *cit;
         q.prepare(*cit);
         if (!q.exec()) {
-          created = false;
           QSqlError e = q.lastError();
           message = i18n("Creation failed executing statement");
           message += QString("\nExecuted: %1").arg(q.executedQuery());

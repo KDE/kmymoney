@@ -2113,14 +2113,11 @@ void KMyMoneyView::fixTransactions_0(void)
     }
 #endif
 
-    bool hasDuplicateAccounts = false;
     // Check for correct assignment of ActionInterest in all splits
     // and check if there are any duplicates in this transactions
     for (it_s = splits.begin(); it_s != splits.end(); ++it_s) {
       MyMoneyAccount splitAccount = file->account((*it_s).accountId());
-      if (accounts.contains((*it_s).accountId())) {
-        hasDuplicateAccounts = true;
-      } else {
+      if (!accounts.contains((*it_s).accountId())) {
         accounts << (*it_s).accountId();
       }
       // if this split references an interest account, the action
@@ -2174,13 +2171,6 @@ void KMyMoneyView::fixTransactions_0(void)
       }
     }
 
-    /*
-        // if there are at least two splits referencing the same account,
-        // we need to combine them into one and get rid of the others
-        if(hasDuplicateAccounts) {
-          fixDuplicateAccounts(*it_t);
-        }
-    */
     ++cnt;
     if (!(cnt % 10))
       kmymoney->slotStatusProgressBar(cnt);

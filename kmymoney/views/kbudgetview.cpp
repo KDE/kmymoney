@@ -330,8 +330,6 @@ void KBudgetView::loadAccounts(void)
   m_transactionCountMap = file->transactionCountMap();
   m_accountTree->setBaseCurrency(file->baseCurrency());
 
-  bool haveUnusedBudgets = false;
-
   // create the items
   try {
     const MyMoneySecurity& security = file->baseCurrency();
@@ -340,13 +338,13 @@ void KBudgetView::loadAccounts(void)
     const MyMoneyAccount& income = file->income();
     QStringList incSubAcctList = income.accountList();
     m_incomeItem = new KMyMoneyAccountTreeBudgetItem(m_accountTree, income, m_budget, security, i18n("Income"));
-    haveUnusedBudgets |= loadSubAccounts(m_incomeItem, incSubAcctList, m_budget);
+    loadSubAccounts(m_incomeItem, incSubAcctList, m_budget);
     m_incomeItem->setSelectable(false);
 
     const MyMoneyAccount& expense = file->expense();
     QStringList expSubAcctList = expense.accountList();
     m_expenseItem = new KMyMoneyAccountTreeBudgetItem(m_accountTree, expense, m_budget, security, i18n("Expense"));
-    haveUnusedBudgets |= loadSubAccounts(m_expenseItem, expSubAcctList, m_budget);
+    loadSubAccounts(m_expenseItem, expSubAcctList, m_budget);
     m_expenseItem->setSelectable(false);
 
   } catch (MyMoneyException *e) {

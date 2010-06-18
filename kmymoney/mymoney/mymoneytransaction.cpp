@@ -32,7 +32,7 @@ MyMoneyTransaction::MyMoneyTransaction() :
   m_postDate = QDate();
 }
 
-MyMoneyTransaction::MyMoneyTransaction(const QString id, const MyMoneyTransaction& transaction) :
+MyMoneyTransaction::MyMoneyTransaction(const QString& id, const MyMoneyTransaction& transaction) :
     MyMoneyObject(id)
 {
   *this = transaction;

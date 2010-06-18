@@ -402,7 +402,7 @@ MyMoneyMoney MyMoneyForecast::accountWeightedMovingAverage(const MyMoneyAccount 
   return (balanceVariation / MyMoneyMoney(totalWeight, 1)).convert(10000);
 }
 
-MyMoneyMoney MyMoneyForecast::accountLinearRegression(const MyMoneyAccount &acc, const int trendDay, const int actualTerms, const MyMoneyMoney meanTerms)
+MyMoneyMoney MyMoneyForecast::accountLinearRegression(const MyMoneyAccount &acc, const int trendDay, const int actualTerms, const MyMoneyMoney& meanTerms)
 {
   MyMoneyMoney meanBalance, totalBalance, totalTerms;
   totalTerms = MyMoneyMoney(actualTerms, 1);

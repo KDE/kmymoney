@@ -60,7 +60,7 @@ KSelectDatabaseDlg::KSelectDatabaseDlg(int openMode, KUrl openURL, QWidget *)
 
 KSelectDatabaseDlg::~KSelectDatabaseDlg()
 {
-  if (m_requiredFields != 0) delete m_requiredFields;
+  delete m_requiredFields;
 }
 
 bool KSelectDatabaseDlg::checkDrivers()

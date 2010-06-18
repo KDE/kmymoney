@@ -100,13 +100,6 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   // an account in a COLUMN, while line/bar prefer it in a ROW.
   setAccountSeries(true);
 
-  //what values should be shown
-  bool showBudget = config.hasBudget();
-  bool showForecast = config.isIncludingForecast();
-  bool showActual = false;
-  if ((config.isIncludingBudgetActuals()) || (!showBudget && !showForecast))
-    showActual = true;
-
   switch (config.chartType()) {
     case MyMoneyReport::eChartNone:
     case MyMoneyReport::eChartEnd:

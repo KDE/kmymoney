@@ -81,13 +81,13 @@ class CashFlowListItem
 public:
   CashFlowListItem(void) {}
   CashFlowListItem(const QDate& _date, const MyMoneyMoney& _value): m_date(_date), m_value(_value) {}
-  bool operator<(const CashFlowListItem _second) const {
+  bool operator<(const CashFlowListItem& _second) const {
     return m_date < _second.m_date;
   }
-  bool operator<=(const CashFlowListItem _second) const {
+  bool operator<=(const CashFlowListItem& _second) const {
     return m_date <= _second.m_date;
   }
-  bool operator>(const CashFlowListItem _second) const {
+  bool operator>(const CashFlowListItem& _second) const {
     return m_date > _second.m_date;
   }
   const QDate& date(void) const {

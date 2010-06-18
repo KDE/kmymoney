@@ -368,6 +368,8 @@ void KMyMoneyAccountTreeForecastItem::setValue(int column, MyMoneyMoney amount, 
     MyMoneyMoney curPrice = repAcc.baseCurrencyPrice(forecastDate);
     MyMoneyMoney baseAmountMM = amount * curPrice;
     m_values[column] = baseAmountMM.convert(listView()->baseCurrency().smallestAccountFraction());
+#else
+    Q_UNUSED(forecastDate);
 #endif
     if (p != 0) {
       p->adjustParentValue(column, m_values[column]);

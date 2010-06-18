@@ -185,7 +185,7 @@ public:
   void setHideClosedAccounts(bool _bool) {
     m_hideClosedAccounts = _bool;
   }
-  bool isHidingClosedAccounts(void) {
+  bool isHidingClosedAccounts(void) const {
     return m_hideClosedAccounts;
   }
 

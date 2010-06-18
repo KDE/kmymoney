@@ -345,9 +345,7 @@ private:
   void readUserInformation(void);
   void readInstitutions(void);
   void readAccounts(void);
-  void readTransaction(const QString id);
   void readTransactions(const QString& tidList = QString(), const QString& dateClause = QString());
-  void readTransaction(MyMoneyTransaction &tx, const QString& tid);
   void readSplit(MyMoneySplit& s, const QSqlQuery& q) const;
   const MyMoneyKeyValueContainer readKeyValuePairs(const QString& kvpType, const QString& kvpId) const;
   const QHash<QString, MyMoneyKeyValueContainer> readKeyValuePairs(const QString& kvpType, const QStringList& kvpIdList) const;

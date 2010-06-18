@@ -907,9 +907,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           if (accountCombo && !accountCombo->getSelected().isEmpty()) {
             accountId = accountCombo->getSelected();
           }
-          if (dialog) {
-            delete dialog;
-          }
+          delete dialog;
           //if they hit yes instead of no, then grab setting of account combo
           if (result == KDialog::Yes) {
             payee.setDefaultAccountId(accountId);

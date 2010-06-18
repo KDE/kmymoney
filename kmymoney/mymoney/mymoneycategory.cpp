@@ -21,13 +21,13 @@ MyMoneyCategory::MyMoneyCategory()
   m_income = true;
 }
 
-MyMoneyCategory::MyMoneyCategory(const bool income, const QString name)
+MyMoneyCategory::MyMoneyCategory(const bool income, const QString& name)
 {
   m_income = income;
   m_name = name;
 }
 
-MyMoneyCategory::MyMoneyCategory(const bool income, const QString name, QStringList minors)
+MyMoneyCategory::MyMoneyCategory(const bool income, const QString& name, QStringList minors)
 {
   m_income = income;
   m_name = name;
@@ -39,7 +39,7 @@ MyMoneyCategory::~MyMoneyCategory()
 }
 
 // Functions use the find method to search the list
-bool MyMoneyCategory::addMinorCategory(const QString val)
+bool MyMoneyCategory::addMinorCategory(const QString& val)
 {
   if (val.isEmpty() || val.isNull())
     return false;
@@ -52,7 +52,7 @@ bool MyMoneyCategory::addMinorCategory(const QString val)
   return false;
 }
 
-bool MyMoneyCategory::removeMinorCategory(const QString val)
+bool MyMoneyCategory::removeMinorCategory(const QString& val)
 {
   if (val.isEmpty() || val.isNull())
     return false;
@@ -65,7 +65,7 @@ bool MyMoneyCategory::removeMinorCategory(const QString val)
   return false;
 }
 
-bool MyMoneyCategory::renameMinorCategory(const QString oldVal, const QString newVal)
+bool MyMoneyCategory::renameMinorCategory(const QString& oldVal, const QString& newVal)
 {
   if (oldVal.isEmpty() || oldVal.isNull() || newVal.isEmpty() || newVal.isNull())
     return false;

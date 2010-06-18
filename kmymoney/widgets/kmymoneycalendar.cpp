@@ -697,11 +697,10 @@ bool kMyMoneyCalendar::hasCloseButton() const
 int kMyMoneyCalendar::weekOfYear(const QDate& date)
 {
   // Calculate ISO 8601 week number (taken from glibc/Gnumeric)
-  int year, week, wday, jan1wday, nextjan1wday;
+  int year, week, jan1wday, nextjan1wday;
   QDate jan1date, nextjan1date;
 
   year = date.year();
-  wday = date.dayOfWeek();
 
   jan1date = QDate(year, 1, 1);
   jan1wday = jan1date.dayOfWeek();
