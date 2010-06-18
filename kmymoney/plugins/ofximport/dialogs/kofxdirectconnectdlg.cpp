@@ -72,11 +72,15 @@ KOfxDirectConnectDlg::~KOfxDirectConnectDlg()
   delete d;
 }
 
-void KOfxDirectConnectDlg::init(void)
+bool KOfxDirectConnectDlg::init(void)
 {
   show();
 
   QByteArray request = m_connector.statementRequest();
+  if (request.isEmpty()) {
+    hide();
+    return false;
+  }
 
   // For debugging, dump out the request
 #if 0
@@ -113,6 +117,7 @@ void KOfxDirectConnectDlg::init(void)
   setStatus(QString("Contacting %1...").arg(m_connector.url()));
   kProgress1->setMaximum(3);
   kProgress1->setValue(1);
+  return true;
 }
 
 void KOfxDirectConnectDlg::setStatus(const QString& _status)

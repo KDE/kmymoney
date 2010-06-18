@@ -556,6 +556,9 @@ MyMoneyKeyValueContainer OfxImporterPlugin::onlineBankingSettings(const MyMoneyK
   if (m_statusDlg) {
     kvp.deletePair("appId");
     kvp.deletePair("kmmofx-headerVersion");
+    kvp.deletePair("password");
+    if (m_statusDlg->m_storePassword->isChecked())
+      kvp.setValue("password", m_statusDlg->m_password->text());
     if (!m_statusDlg->appId().isEmpty())
       kvp.setValue("appId", m_statusDlg->appId());
     kvp.setValue("kmmofx-headerVersion", m_statusDlg->headerVersion());
@@ -600,8 +603,8 @@ bool OfxImporterPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccoun
       connect(dlg, SIGNAL(statementReady(const QString&)),
               this, SLOT(slotImportFile(const QString&)));
 
-      dlg->init();
-      dlg->exec();
+      if (dlg->init())
+        dlg->exec();
       delete dlg;
     }
   } catch (MyMoneyException *e) {

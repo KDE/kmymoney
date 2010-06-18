@@ -62,7 +62,13 @@ public:
   explicit KOfxDirectConnectDlg(const MyMoneyAccount&, QWidget *parent = 0);
   ~KOfxDirectConnectDlg();
 
-  void init(void);
+  /**
+    * Initializes the download of OFX statement data.
+    *
+    * @returns true if download was initialized
+    * @returns false if download was not started
+    */
+  bool init(void);
 
 signals:
   /**

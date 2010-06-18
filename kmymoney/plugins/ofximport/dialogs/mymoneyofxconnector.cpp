@@ -38,6 +38,7 @@
 #include <klocale.h>
 #include <kdebug.h>
 #include <kcombobox.h>
+#include <kpassworddialog.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -154,7 +155,14 @@ QString MyMoneyOfxConnector::username(void) const
 }
 QString MyMoneyOfxConnector::password(void) const
 {
-  return m_fiSettings.value("password");
+  QString pwd = m_fiSettings.value("password");
+  if (pwd.isEmpty()) {
+    KPasswordDialog dlg(0);
+    dlg.setPrompt(i18n("Enter your password"));
+    if (dlg.exec())
+      pwd = dlg.password();
+  }
+  return pwd;
 }
 QString MyMoneyOfxConnector::accountnum(void) const
 {
@@ -329,14 +337,16 @@ const QByteArray MyMoneyOfxConnector::statementRequest(void) const
   account.type = accounttype();
 #endif
 
-  char* szrequest = libofx_request_statement(&fi, &account, QDateTime(statementStartDate()).toTime_t());
-  QString request = szrequest;
-  // remove the trailing zero
-  QByteArray result = request.toUtf8();
-  result.truncate(result.size() - 1);
-  free(szrequest);
+  QByteArray result;
+  if (fi.userpass[0]) {
+    char *szrequest = libofx_request_statement(&fi, &account, QDateTime(statementStartDate()).toTime_t());
+    QString request = szrequest;
+    // remove the trailing zero
+    result = request.toUtf8();
+    result.truncate(result.size() - 1);
+    free(szrequest);
+  }
 
-  QString msg(result);
   return result;
 }
 
