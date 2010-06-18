@@ -118,9 +118,9 @@ void KMyMoneyPriceDlg::slotLoadWidgets(void)
   QList<MyMoneyAccount> accList;
   file->accountList(accList);
   QList<MyMoneyAccount>::const_iterator acc_it;
-  for(acc_it = accList.constBegin(); acc_it != accList.constEnd(); ++acc_it) {
-    if((*acc_it).isInvest()) {
-      if(m_stockNameMap.contains((*acc_it).currencyId())) {
+  for (acc_it = accList.constBegin(); acc_it != accList.constEnd(); ++acc_it) {
+    if ((*acc_it).isInvest()) {
+      if (m_stockNameMap.contains((*acc_it).currencyId())) {
         m_stockNameMap[(*acc_it).currencyId()] = QString(m_stockNameMap.value((*acc_it).currencyId()) + ", " + (*acc_it).name());
       } else {
         m_stockNameMap[(*acc_it).currencyId()] = (*acc_it).name();
