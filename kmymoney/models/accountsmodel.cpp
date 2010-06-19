@@ -162,9 +162,10 @@ public:
     // Total Balance
     newIndex = model->index(index.row(), index.column() + TotalBalance, index.parent());
     // only show the balance, if its a different security/currency
-    if (m_file->security(account.currencyId()) != m_file->baseCurrency())
+    if (m_file->security(account.currencyId()) != m_file->baseCurrency()) {
       model->setData(newIndex, accountBalance.formatMoney(m_file->security(account.currencyId())), Qt::DisplayRole);
-    model->setData(newIndex, accountBalance.formatMoney(m_file->security(account.currencyId())), AccountBalanceDispalyRole);
+      model->setData(newIndex, accountBalance.formatMoney(m_file->security(account.currencyId())), AccountBalanceDisplayRole);
+    }
     model->setData(newIndex, font, Qt::FontRole);
     model->setData(newIndex, QVariant(Qt::AlignRight | Qt::AlignVCenter), Qt::TextAlignmentRole);
 
@@ -643,6 +644,11 @@ void AccountsModel::load()
   }
 }
 
+MyMoneyMoney AccountsModel::accountValue(const MyMoneyAccount &account, const MyMoneyMoney &balance)
+{
+  return d->value(account, balance);
+}
+
 /**
   * This slot should be connected so that the model will be notified which account is being reconciled.
   */
@@ -776,7 +782,7 @@ void AccountsFilterProxyModel::addAccountGroup(MyMoneyAccount::accountTypeE grou
   } else if (group == MyMoneyAccount::Equity) {
     d->m_typeList << MyMoneyAccount::Equity;
   }
-  invalidateFilter();
+  invalidate();
 }
 
 /**
@@ -787,7 +793,7 @@ void AccountsFilterProxyModel::addAccountGroup(MyMoneyAccount::accountTypeE grou
 void AccountsFilterProxyModel::addAccountType(MyMoneyAccount::accountTypeE type)
 {
   d->m_typeList << type;
-  invalidateFilter();
+  invalidate();
 }
 
 /**
@@ -800,7 +806,7 @@ void AccountsFilterProxyModel::removeAccountType(MyMoneyAccount::accountTypeE ty
   int index = d->m_typeList.indexOf(type);
   if (index != -1) {
     d->m_typeList.removeAt(index);
-    invalidateFilter();
+    invalidate();
   }
 }
 
@@ -810,7 +816,7 @@ void AccountsFilterProxyModel::removeAccountType(MyMoneyAccount::accountTypeE ty
 void AccountsFilterProxyModel::clear(void)
 {
   d->m_typeList.clear();
-  invalidateFilter();
+  invalidate();
 }
 
 /**
@@ -874,7 +880,7 @@ void AccountsFilterProxyModel::setHideClosedAccounts(bool hideClosedAccounts)
 {
   if (d->m_hideClosedAccounts != hideClosedAccounts) {
     d->m_hideClosedAccounts = hideClosedAccounts;
-    invalidateFilter();
+    invalidate();
   }
 }
 
@@ -894,7 +900,7 @@ void AccountsFilterProxyModel::setHideEquityAccounts(bool hideEquityAccounts)
 {
   if (d->m_hideEquityAccounts != hideEquityAccounts) {
     d->m_hideEquityAccounts = hideEquityAccounts;
-    invalidateFilter();
+    invalidate();
   }
 }
 
@@ -914,7 +920,7 @@ void AccountsFilterProxyModel::setHideUnusedIncomeExpenseAccounts(bool hideUnuse
 {
   if (d->m_hideUnusedIncomeExpenseAccounts != hideUnusedIncomeExpenseAccounts) {
     d->m_hideUnusedIncomeExpenseAccounts = hideUnusedIncomeExpenseAccounts;
-    invalidateFilter();
+    invalidate();
   }
 }
 
@@ -934,7 +940,7 @@ void AccountsFilterProxyModel::setHideInstitutions(bool hideInstitutions)
 {
   if (d->m_hideInstitutions != hideInstitutions) {
     d->m_hideInstitutions = hideInstitutions;
-    invalidateFilter();
+    invalidate();
   }
 }
 

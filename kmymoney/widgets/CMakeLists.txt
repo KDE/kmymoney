@@ -7,7 +7,7 @@ SET(kmymoney_STAT_HEADERS
   kaccounttemplateselector.h kbudgetvalues.h kguiutils.h
   kmymoneyaccountcombo.h kmymoneyaccountcompletion.h
   kmymoneyaccountselector.h kmymoneyaccounttreebase.h
-  kmymoneyaccounttreebudget.h kmymoneyaccounttreeforecast.h
+  kmymoneyaccounttreeforecast.h
   kmymoneyaccounttree.h kmymoneycategory.h kmymoneychecklistitem.h
   kmymoneycombo.h kmymoneymvccombo.h kmymoneycompletion.h
   kmymoneycurrencyselector.h  kmymoneydateinput.h kmymoneyedit.h
@@ -41,7 +41,6 @@ SET(_uncritial_common_sources
   kguiutils.cpp
   kmymoneyaccountcombo.cpp
   kmymoneyaccountselector.cpp
-  kmymoneyaccounttreebudget.cpp
   kmymoneyaccounttree.cpp
   kmymoneyaccounttreeview.cpp
   kmymoneycalculator.cpp

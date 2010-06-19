@@ -63,7 +63,7 @@ protected:
 
 protected slots:
   void customContextMenuRequested(const QPoint &pos);
-  void currentChanged(const QModelIndex &current, const QModelIndex &previous);
+  void selectionChanged(const QItemSelection &selected, const QItemSelection &deselected);
 
 signals:
   /**

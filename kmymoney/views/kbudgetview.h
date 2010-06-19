@@ -37,45 +37,38 @@
 #include "ui_kbudgetviewdecl.h"
 #include "mymoneybudget.h"
 #include "mymoneysecurity.h"
-class KMyMoneyAccountTreeBudgetItem;
+#include "kmymoneyaccounttreeview.h"
 
 /**
-  * @author Darren Gould
-  * @author Thomas Baumgart
+  * This proxy model implements all the functionality needed by the budgets
+  * account tree based on the @ref AccountsModel. One such functionality is
+  * obtaining the account balance and value base on the budget.
   *
-  * This class represents an item in the budgets list view.
+  * @author Cristin Oneț
   */
-class KBudgetListItem : public QTreeWidgetItem
+class BudgetAccountsProxyModel : public AccountsViewFilterProxyModel
 {
+  Q_OBJECT
+
 public:
-  /**
-    * Constructor to be used to construct a budget entry object.
-    *
-    * @param parent pointer to the QTreeWidget object this entry should be
-    *               added to.
-    * @param budget const reference to MyMoneyBudget for which
-    *               the K3ListView entry is constructed
-    */
-  KBudgetListItem(QTreeWidget *parent, const MyMoneyBudget& budget);
-  ~KBudgetListItem();
+  BudgetAccountsProxyModel(QObject *parent = 0);
 
-  /**
-    * This method is re-implemented from QListViewItem::paintCell().
-    * Besides the standard implementation, the QPainter is set
-    * according to the applications settings.
-    */
-  void paintCell(QPainter *p, const QColorGroup & cg, int column, int width, int align);
+  virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
+  Qt::ItemFlags flags(const QModelIndex &index) const;
 
-  const MyMoneyBudget& budget(void) {
-    return m_budget;
-  };
-  void setBudget(const MyMoneyBudget& budget) {
-    m_budget = budget;
-  }
+  void setBudget(const MyMoneyBudget& budget);
+
+protected:
+  bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
+  bool filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const;
+  MyMoneyMoney accountBalance(const QString &accountId) const;
+  MyMoneyMoney accountValue(const MyMoneyAccount &account, const MyMoneyMoney &balance) const;
+  MyMoneyMoney computeTotalValue(const QModelIndex &source_index) const;
 
 private:
-  MyMoneyBudget  m_budget;
+  MyMoneyBudget m_budget;
 };
+
 
 /**
   * @author Darren Gould
@@ -128,7 +121,6 @@ public slots:
 protected:
   void resizeEvent(QResizeEvent*);
   void loadAccounts(void);
-  bool loadSubAccounts(KMyMoneyAccountTreeBudgetItem* parent, QStringList& accountList, const MyMoneyBudget& budget);
 
   /**
    * This method loads all available budgets into the budget list widget. If a budget is
@@ -137,8 +129,6 @@ protected:
   void loadBudgets(void);
   void ensureBudgetVisible(const QString& id);
   const MyMoneyBudget& selectedBudget(void) const;
-  KMyMoneyAccountTreeBudgetItem* selectedAccount(void) const;
-  void setTimeSpan(KMyMoneyAccountTreeBudgetItem *account, MyMoneyBudget::AccountGroup& accountGroup, int iTimeSpan);
   void askSave(void);
 
 protected slots:
@@ -159,7 +149,9 @@ protected slots:
 
   /**
     */
-  void slotSelectAccount(Q3ListViewItem*);
+  void slotSelectAccount(const MyMoneyObject &);
+
+  void slotExpandCollapse(void);
 
   void AccountEnter();
 
@@ -202,9 +194,8 @@ private:
   MyMoneyBudget                       m_budget;
   QMap<QString, unsigned long>        m_transactionCountMap;
   QStringList                         m_yearList;
-  KMyMoneyAccountTreeBudgetItem*      m_incomeItem;
-  KMyMoneyAccountTreeBudgetItem*      m_expenseItem;
 
+  BudgetAccountsProxyModel            *m_filterProxyModel;
   /**
     * Set if a view needs to be reloaded during showEvent()
     **/

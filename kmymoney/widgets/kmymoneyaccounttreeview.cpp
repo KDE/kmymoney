@@ -90,7 +90,7 @@ void KMyMoneyAccountTreeView::customContextMenuRequested(const QPoint &pos)
 {
   Q_UNUSED(pos)
   QModelIndex index = model()->index(currentIndex().row(), AccountsModel::Account, currentIndex().parent());
-  if (index.isValid()) {
+  if (index.isValid() && (model()->flags(index) & Qt::ItemIsSelectable)) {
     QVariant data = model()->data(index, AccountsModel::AccountRole);
     if (data.isValid()) {
       if (data.canConvert<MyMoneyAccount>()) {
@@ -105,19 +105,28 @@ void KMyMoneyAccountTreeView::customContextMenuRequested(const QPoint &pos)
   }
 }
 
-void KMyMoneyAccountTreeView::currentChanged(const QModelIndex &current, const QModelIndex &previous)
+void KMyMoneyAccountTreeView::selectionChanged(const QItemSelection &selected, const QItemSelection &deselected)
 {
-  QTreeView::currentChanged(current, previous);
-
-  QVariant data = model()->data(current, AccountsModel::AccountRole);
-  if (data.isValid()) {
-    if (data.canConvert<MyMoneyAccount>()) {
-      emit selectObject(data.value<MyMoneyAccount>());
-    }
-    if (data.canConvert<MyMoneyInstitution>()) {
-      emit selectObject(data.value<MyMoneyInstitution>());
+  QTreeView::selectionChanged(selected, deselected);
+  if (!selected.empty()) {
+    QModelIndexList indexes = selected.front().indexes();
+    if (!indexes.empty()) {
+      QVariant data = model()->data(model()->index(indexes.front().row(), AccountsModel::Account, indexes.front().parent()), AccountsModel::AccountRole);
+      if (data.isValid()) {
+        if (data.canConvert<MyMoneyAccount>()) {
+          emit selectObject(data.value<MyMoneyAccount>());
+        }
+        if (data.canConvert<MyMoneyInstitution>()) {
+          emit selectObject(data.value<MyMoneyInstitution>());
+        }
+        // an object was successfully selected
+        return;
+      }
     }
   }
+  // since no object was selected reset the object selection
+  emit selectObject(MyMoneyAccount());
+  emit selectObject(MyMoneyInstitution());
 }
 
 void KMyMoneyAccountTreeView::collapseAll(void)
@@ -185,18 +194,23 @@ AccountsViewFilterProxyModel::~AccountsViewFilterProxyModel()
   */
 QVariant AccountsViewFilterProxyModel::data(const QModelIndex &index, int role) const
 {
-  if (index.isValid() && index.column() == AccountsModel::TotalValue && role == Qt::DisplayRole) {
-    QVariant accountId = sourceModel()->data(mapToSource(AccountsViewFilterProxyModel::index(index.row(), 0, index.parent())), AccountsModel::AccountIdRole);
-    if (d->isAccountExpanded(accountId.toString()) && index.parent().isValid()) {
-      // if an account is not a top-level account and it is expanded display it's value
-      return data(index, AccountsModel::AccountValueDisplayRole);
-    } else {
-      // if an account is a top-level account or it is collapsed display it's total value
-      return data(index, AccountsModel::AccountTotalValueDisplayRole);
+  if (index.isValid() && role == Qt::DisplayRole) {
+    int sourceColumn = mapToSource(index).column();
+    if (sourceColumn == AccountsModel::TotalValue) {
+      QVariant accountId = sourceModel()->data(mapToSource(AccountsViewFilterProxyModel::index(index.row(), 0, index.parent())), AccountsModel::AccountIdRole);
+      if (d->isAccountExpanded(accountId.toString()) && index.parent().isValid()) {
+        // if an account is not a top-level account and it is expanded display it's value
+        return data(index, AccountsModel::AccountValueDisplayRole);
+      } else {
+        // if an account is a top-level account or it is collapsed display it's total value
+        return data(index, AccountsModel::AccountTotalValueDisplayRole);
+      }
     }
-  } else {
-    return AccountsFilterProxyModel::data(index, role);
+    if (sourceColumn == AccountsModel::TotalBalance) {
+      return data(index, AccountsModel::AccountBalanceDisplayRole);
+    }
   }
+  return AccountsFilterProxyModel::data(index, role);
 }
 
 /**

@@ -6,6 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
+    <width>469</width>
+    <height>263</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -17,10 +19,7 @@
   <property name="focusPolicy">
    <enum>Qt::TabFocus</enum>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
-   <property name="margin">
-    <number>0</number>
-   </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
     <widget class="QSplitter" name="m_splitter">
      <property name="orientation">
@@ -74,22 +73,10 @@
           <property name="text">
            <string comment="@title header of the budget name column">Name</string>
           </property>
-          <property name="clickable">
-           <bool>true</bool>
-          </property>
-          <property name="resizable">
-           <bool>true</bool>
-          </property>
          </column>
          <column>
           <property name="text">
            <string>Year</string>
-          </property>
-          <property name="clickable">
-           <bool>true</bool>
-          </property>
-          <property name="resizable">
-           <bool>false</bool>
           </property>
          </column>
         </widget>
@@ -97,53 +84,63 @@
       </layout>
      </widget>
      <widget class="QWidget" name="layoutWidget">
-      <layout class="QVBoxLayout">
+      <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <widget class="KMyMoneyAccountTreeBudget" name="m_accountTree" native="true">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-           <horstretch>5</horstretch>
-           <verstretch>1</verstretch>
-          </sizepolicy>
-         </property>
-        </widget>
+        <widget class="KMyMoneyAccountTreeView" name="m_accountTree"/>
        </item>
        <item>
-        <widget class="QCheckBox" name="m_hideUnusedButton">
-         <property name="text">
-          <string>Hide unused budget categories</string>
-         </property>
-        </widget>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QCheckBox" name="m_hideUnusedButton">
+           <property name="text">
+            <string>Hide unused budget categories</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="KLineEdit" name="m_searchWidget">
+           <property name="showClearButton" stdset="0">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
        <item>
-         <layout class="QHBoxLayout">
-          <item>
-           <widget class="KPushButton" name="m_updateButton">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
-             <property name="text">
-              <string>Upd</string>
-             </property>
-             <property name="shortcut">
-              <string/>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="KPushButton" name="m_resetButton">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
-             <property name="text">
-              <string>Res</string>
-             </property>
-             <property name="shortcut">
-              <string/>
-             </property>
-            </widget>
-           </item>
-         </layout>
+        <layout class="QHBoxLayout">
+         <item>
+          <widget class="KPushButton" name="m_updateButton">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Upd</string>
+           </property>
+           <property name="shortcut">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="KPushButton" name="m_resetButton">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Res</string>
+           </property>
+           <property name="shortcut">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="KPushButton" name="m_collapseButton"/>
+         </item>
+         <item>
+          <widget class="KPushButton" name="m_expandButton"/>
+         </item>
+        </layout>
        </item>
        <item>
         <widget class="QGroupBox" name="m_assignmentBox">
@@ -171,6 +168,9 @@
             </item>
             <item>
              <widget class="KLineEdit" name="m_leAccounts">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
               <property name="sizePolicy">
                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                 <horstretch>1</horstretch>
@@ -179,9 +179,6 @@
               </property>
               <property name="focusPolicy">
                <enum>Qt::NoFocus</enum>
-              </property>
-              <property name="enabled">
-               <bool>false</bool>
               </property>
              </widget>
             </item>
@@ -223,7 +220,7 @@
           <item>
            <layout class="QHBoxLayout">
             <item>
-             <widget class="KBudgetValues" name="m_budgetValue"/>
+             <widget class="KBudgetValues" name="m_budgetValue" native="true"/>
             </item>
             <item>
              <spacer name="spacer2">
@@ -260,9 +257,9 @@
    <header>kmymoneyedit.h</header>
   </customwidget>
   <customwidget>
-   <class>KBudgetValues</class>
-   <extends>QWidget</extends>
-   <header>kbudgetvalues.h</header>
+   <class>KMyMoneyAccountTreeView</class>
+   <extends>QTreeView</extends>
+   <header>kmymoneyaccounttreeview.h</header>
   </customwidget>
   <customwidget>
    <class>KPushButton</class>
@@ -275,9 +272,9 @@
    <header>klineedit.h</header>
   </customwidget>
   <customwidget>
-   <class>KMyMoneyAccountTreeBudget</class>
+   <class>KBudgetValues</class>
    <extends>QWidget</extends>
-   <header>../widgets/kmymoneyaccounttreebudget.h</header>
+   <header>kbudgetvalues.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

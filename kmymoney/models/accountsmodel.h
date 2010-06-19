@@ -65,7 +65,7 @@ public:
     AccountBalanceRole = Qt::UserRole + 3,            /**< The account balance is stored in this role in column 0 as a MyMoneyMoney object.*/
     AccountValueRole = Qt::UserRole + 4,              /**< The account value (the balance converted to base currency) is stored in this role in column 0 as a MyMoneyMoney object.*/
     AccountTotalValueRole = Qt::UserRole + 5,         /**< The account total value (the value of the account and of child accounts) is stored in this role in column 0 as a MyMoneyMoney object.*/
-    AccountBalanceDispalyRole = Qt::UserRole + 6,     /**< The account balance is stored in this role in column TotalBalance as a formatted string for the user.*/
+    AccountBalanceDisplayRole = Qt::UserRole + 6,     /**< The account balance is stored in this role in column TotalBalance as a formatted string for the user.*/
     AccountValueDisplayRole = Qt::UserRole + 7,       /**< The account value (the balance converted to base currency) is stored in this role in column TotalValue as a formated string for the user.*/
     AccountTotalValueDisplayRole = Qt::UserRole + 8,  /**< The account total value is stored in this role in column TotalValue as a formatted string for the user.*/
     DisplayOrderRole = Qt::UserRole + 9,              /**< This role is used by the filtering proxies to order the accounts for displaying.*/
@@ -94,6 +94,17 @@ public:
   ~AccountsModel();
 
   void load();
+
+  /**
+    * Compute the value of the given account using the provided balance.
+    * The value is defined as the balance of the account converted to the base currency.
+    *
+    * @param account The account for which the value is being computed.
+    * @param balance The balance which should be used.
+    *
+    * @TODO Make this a static or a global function since the object's state has nothing to do with this computation
+    */
+  MyMoneyMoney accountValue(const MyMoneyAccount &account, const MyMoneyMoney &balance);
 
 public slots:
 
