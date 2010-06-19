@@ -26,8 +26,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <k3listview.h>
-
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -64,9 +62,12 @@ KMyMoneyFileInfoDlg::KMyMoneyFileInfoDlg(QWidget *parent)
 
   QMap<MyMoneyAccount::accountTypeE, int>::const_iterator it_m;
   for (it_m = accountMap.constBegin(); it_m != accountMap.constEnd(); ++it_m) {
-    new K3ListViewItem(m_accountView, KMyMoneyUtils::accountTypeToString(it_m.key()), QString("%1").arg(*it_m), QString("%1").arg(accountMapClosed[it_m.key()]));
+    QTreeWidgetItem *item = new QTreeWidgetItem();
+    item->setText(0, KMyMoneyUtils::accountTypeToString(it_m.key()));
+    item->setText(1, QString("%1").arg(*it_m));
+    item->setText(2, QString("%1").arg(accountMapClosed[it_m.key()]));
+    m_accountView->invisibleRootItem()->addChild(item);
   }
-
 
   MyMoneyTransactionFilter filter;
   filter.setReportAllSplits(false);
