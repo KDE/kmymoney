@@ -577,7 +577,7 @@ void Transaction::singleLineMemo(QString& txt, const MyMoneySplit& split) const
 
 int Transaction::rowHeightHint(void) const
 {
-  return m_inEdit ? formRowHeight() - 4 : RegisterItem::rowHeightHint();
+  return m_inEdit ? formRowHeight() : RegisterItem::rowHeightHint();
 }
 
 
