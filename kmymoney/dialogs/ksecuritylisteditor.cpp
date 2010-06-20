@@ -42,60 +42,35 @@
 #include "knewinvestmentwizard.h"
 #include "kmymoneyutils.h"
 
-#define ID_COL        0
-#define TYPE_COL      1
-#define NAME_COL      2
-#define SYMBOL_COL    3
-#define MARKET_COL    4
-#define CURR_COL      5
-#define ACCFRACT_COL  6
-#define CASHFRACT_COL 7
-
-#define CURRENCY_MARKET    QString("ISO 4217")
-
 KSecurityListEditor::KSecurityListEditor(QWidget *parent) :
-    KSecurityListEditorDecl(parent)
+    KSecurityListEditorDecl(parent),
+    m_currencyMarket("ISO 4217")
 {
-  m_listView->setColumnWidth(ID_COL, 0);
-  m_listView->setColumnWidthMode(NAME_COL, Q3ListView::Maximum);
-  m_listView->setColumnWidthMode(ID_COL, Q3ListView::Manual);
-  m_listView->setColumnAlignment(CURR_COL, Qt::AlignHCenter);
-  m_listView->setMultiSelection(false);
+  m_listView->setColumnWidth(eIdColumn, 0);
+  m_listView->setSelectionMode(QAbstractItemView::SingleSelection);
   m_listView->setAllColumnsShowFocus(true);
 
-  KGuiItem removeButtenItem(i18n("&Delete"),
+  setButtons(KDialog::Ok);
+  setButtonsOrientation(Qt::Horizontal);
+  setMainWidget(m_layoutWidget);
+
+  KGuiItem removeButtonItem(i18n("&Delete"),
                             KIcon("edit-delete"),
                             i18n("Delete this entry"),
                             i18n("Remove this security item from the file"));
-  m_deleteButton->setGuiItem(removeButtenItem);
+  m_deleteButton->setGuiItem(removeButtonItem);
 
-  KGuiItem addButtenItem(i18n("&Add"),
-                         KIcon("file_new"),
-                         i18n("Add a new entry"),
-                         i18n("Create a new security entry."));
-  m_addButton->setGuiItem(addButtenItem);
-
-  KGuiItem editButtenItem(i18n("&Edit"),
+  KGuiItem editButtonItem(i18n("&Edit"),
                           KIcon("document-edit"),
                           i18n("Modify the selected entry"),
                           i18n("Change the security information of the selected entry."));
-  m_editButton->setGuiItem(editButtenItem);
+  m_editButton->setGuiItem(editButtonItem);
 
-  KGuiItem okButtenItem(i18n("&Close"),
-                        KIcon("dialog-ok"),
-                        i18n("Close the dialog"),
-                        i18n("Use this to close the dialog and return to the application."));
-  m_closeButton->setGuiItem(okButtenItem);
-
-  connect(m_closeButton, SIGNAL(clicked()), this, SLOT(reject()));
   connect(m_showCurrencyButton, SIGNAL(toggled(bool)), this, SLOT(slotLoadList()));
-  connect(m_listView, SIGNAL(selectionChanged()), this, SLOT(slotUpdateButtons()));
+  connect(m_listView, SIGNAL(itemSelectionChanged()), this, SLOT(slotUpdateButtons()));
 
   connect(m_editButton, SIGNAL(clicked()), this, SLOT(slotEditSecurity()));
   connect(m_deleteButton, SIGNAL(clicked()), this, SLOT(slotDeleteSecurity()));
-
-  // FIXME for now, the only way to add a new security is to add a new investment
-  m_addButton->hide();
 
   slotLoadList();
 }
@@ -114,41 +89,43 @@ void KSecurityListEditor::slotLoadList(void)
     list += MyMoneyFile::instance()->currencyList();
   }
   for (it = list.constBegin(); it != list.constEnd(); ++it) {
-    K3ListViewItem* newItem = new K3ListViewItem(m_listView, QString((*it).id()));
+    QTreeWidgetItem* newItem = new QTreeWidgetItem(m_listView);
     fillItem(newItem, *it);
 
   }
   slotUpdateButtons();
 }
 
-void KSecurityListEditor::fillItem(Q3ListViewItem* item, const MyMoneySecurity& security)
+void KSecurityListEditor::fillItem(QTreeWidgetItem* item, const MyMoneySecurity& security)
 {
   QString market = security.tradingMarket();
   MyMoneySecurity tradingCurrency;
   if (security.isCurrency())
-    market = CURRENCY_MARKET;
+    market = m_currencyMarket;
   else
     tradingCurrency = MyMoneyFile::instance()->security(security.tradingCurrency());
 
-  item->setText(TYPE_COL, KMyMoneyUtils::securityTypeToString(security.securityType()));
-  item->setText(NAME_COL, security.name());
-  item->setText(SYMBOL_COL, security.tradingSymbol());
-  item->setText(MARKET_COL, market);
-  item->setText(CURR_COL, tradingCurrency.tradingSymbol());
-  item->setText(ACCFRACT_COL, QString::number(security.smallestAccountFraction()));
+  item->setText(eIdColumn, security.id());
+  item->setText(eTypeColumn, KMyMoneyUtils::securityTypeToString(security.securityType()));
+  item->setText(eNameColumn, security.name());
+  item->setText(eSymbolColumn, security.tradingSymbol());
+  item->setText(eMarketColumn, market);
+  item->setText(eCurrencyColumn, tradingCurrency.tradingSymbol());
+  item->setTextAlignment(eCurrencyColumn, Qt::AlignHCenter);
+  item->setText(eAcctFractionColumn, QString::number(security.smallestAccountFraction()));
 
   // smallestCashFraction is only applicable for currencies
   if (security.isCurrency())
-    item->setText(CASHFRACT_COL, QString::number(security.smallestCashFraction()));
+    item->setText(eCashFractionColumn, QString::number(security.smallestCashFraction()));
 }
 
 void KSecurityListEditor::slotUpdateButtons(void)
 {
-  Q3ListViewItem* item = m_listView->selectedItem();
+  QTreeWidgetItem* item = m_listView->currentItem();
 
   if (item) {
-    MyMoneySecurity security = MyMoneyFile::instance()->security(item->text(ID_COL).toLatin1());
-    m_editButton->setEnabled(item->text(MARKET_COL) != CURRENCY_MARKET);
+    MyMoneySecurity security = MyMoneyFile::instance()->security(item->text(eIdColumn).toLatin1());
+    m_editButton->setEnabled(item->text(eMarketColumn) != m_currencyMarket);
     m_deleteButton->setEnabled(!MyMoneyFile::instance()->isReferenced(security));
 
   } else {
@@ -159,16 +136,16 @@ void KSecurityListEditor::slotUpdateButtons(void)
 
 void KSecurityListEditor::slotEditSecurity(void)
 {
-  Q3ListViewItem* item = m_listView->selectedItem();
+  QTreeWidgetItem* item = m_listView->currentItem();
   if (item) {
-    MyMoneySecurity security = MyMoneyFile::instance()->security(item->text(ID_COL).toLatin1());
+    MyMoneySecurity security = MyMoneyFile::instance()->security(item->text(eIdColumn).toLatin1());
 
     QPointer<KNewInvestmentWizard> dlg = new KNewInvestmentWizard(security, this);
     dlg->setObjectName("KNewInvestmentWizard");
     if (dlg->exec() == QDialog::Accepted) {
       dlg->createObjects(QString());
       try {
-        security = MyMoneyFile::instance()->security(item->text(ID_COL).toLatin1());
+        security = MyMoneyFile::instance()->security(item->text(eIdColumn).toLatin1());
         fillItem(item, security);
       } catch (MyMoneyException* e) {
         KMessageBox::error(this, i18n("Failed to edit security: %1", e->what()));
@@ -181,9 +158,9 @@ void KSecurityListEditor::slotEditSecurity(void)
 
 void KSecurityListEditor::slotDeleteSecurity(void)
 {
-  Q3ListViewItem* item = m_listView->selectedItem();
+  QTreeWidgetItem* item = m_listView->currentItem();
   if (item) {
-    MyMoneySecurity security = MyMoneyFile::instance()->security(item->text(ID_COL).toLatin1());
+    MyMoneySecurity security = MyMoneyFile::instance()->security(item->text(eIdColumn).toLatin1());
     QString msg;
     QString dontAsk;
     if (security.isCurrency()) {
@@ -208,19 +185,5 @@ void KSecurityListEditor::slotDeleteSecurity(void)
     }
   }
 }
-
-// Make sure, that these definitions are only used within this file
-// this does not seem to be necessary, but when building RPMs the
-// build option 'final' is used and all CPP files are concatenated.
-// So it could well be, that in another CPP file these definitions
-// are also used.
-#undef ID_COL
-#undef TYPE_COL
-#undef NAME_COL
-#undef SYMBOL_COL
-#undef MARKET_COL
-#undef CURR_COL
-#undef ACCFRACT_COL
-#undef CASHFRACT_COL
 
 #include "ksecuritylisteditor.moc"

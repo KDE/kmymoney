@@ -21,7 +21,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-class Q3ListViewItem;
+
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -37,13 +37,15 @@ class Q3ListViewItem;
   * @author Thomas Baumgart
   */
 
-class KSecurityListEditorDecl : public QDialog, public Ui::KSecurityListEditorDecl
+class KSecurityListEditorDecl : public KDialog, public Ui::KSecurityListEditorDecl
 {
 public:
-  KSecurityListEditorDecl(QWidget *parent) : QDialog(parent) {
+  KSecurityListEditorDecl(QWidget *parent) : KDialog(parent) {
     setupUi(this);
   }
 };
+
+enum eSecurityColum { eIdColumn, eTypeColumn, eNameColumn, eSymbolColumn, eMarketColumn, eCurrencyColumn, eAcctFractionColumn, eCashFractionColumn };
 
 class KSecurityListEditor : public KSecurityListEditorDecl
 {
@@ -59,7 +61,10 @@ protected slots:
   void slotDeleteSecurity(void);
 
 protected:
-  void fillItem(Q3ListViewItem* item, const MyMoneySecurity& security);
+  void fillItem(QTreeWidgetItem* item, const MyMoneySecurity& security);
+
+private:
+  const QString m_currencyMarket;
 
 };
 
