@@ -561,6 +561,12 @@ void Transaction::leaveEditMode(void)
   KMyMoneyTransactionForm::TransactionForm* form = dynamic_cast<KMyMoneyTransactionForm::TransactionForm*>(m_form);
   form->tabBar()->setVisible(true);
 
+  // make sure we reset the row height of all the transaction's rows because it could have been changed during edit
+  if (m_parent) {
+    for (int i = 0; i < numRowsRegister(); ++i)
+      m_parent->setRowHeight(m_startRow + i, m_parent->rowHeightHint());
+  }
+
   m_inEdit = false;
   m_inRegisterEdit = false;
   setFocus(hasFocus(), true);

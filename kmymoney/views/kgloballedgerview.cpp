@@ -1244,6 +1244,13 @@ void KGlobalLedgerView::slotLeaveEditMode(const KMyMoneyRegister::SelectedTransa
     KMyMoneyRegister::Transaction* t = dynamic_cast<KMyMoneyRegister::Transaction*>(p);
     if (t)
       m_form->slotSetTransaction(t);
+  } else {
+    if (!KMyMoneySettings::transactionForm()) {
+      // update the row height of the transactions because it might differ between viewing/editing mode when not using the transaction form
+      m_register->blockSignals(true);
+      m_register->updateRegister(true);
+      m_register->blockSignals(false);
+    }
   }
 
   if (m_needReload)
