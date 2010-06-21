@@ -221,7 +221,7 @@ bool KOnlineBankingSetupWizard::finishFiPage(void)
     memset(&info, 0, sizeof(OfxFiServiceInfo));
     strncpy(info.fid, m_fid->text().toLatin1(), OFX_FID_LENGTH - 1);
     strncpy(info.org, m_bankName->text().toLatin1(), OFX_ORG_LENGTH - 1);
-    strncpy(info.url, m_url->url().path().toLatin1(), OFX_URL_LENGTH - 1);
+    strncpy(info.url, m_url->url().url().toLatin1(), OFX_URL_LENGTH - 1);
     info.accountlist = 1;
     info.statements = 1;
     info.billpay = 1;
@@ -230,13 +230,14 @@ bool KOnlineBankingSetupWizard::finishFiPage(void)
     m_bankInfo.push_back(info);
 
     QString message;
-    message += QString("URL: %1<br/>Org: %2<br/>Fid: %3<br/>").arg(info.url, info.org, info.fid);
+    message += QString("<p>URL: %1<br/>Org: %2<br/>Fid: %3<br/>").arg(info.url, info.org, info.fid);
     if (info.statements)
       message += i18n("Supports online statements<br/>");
     if (info.investments)
       message += i18n("Supports investments<br/>");
     if (info.billpay)
       message += i18n("Supports bill payment (but not supported by KMyMoney yet)<br/>");
+    message += "</p>";
     m_textDetails->append(message);
     result = true;
   }
