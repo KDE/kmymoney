@@ -81,16 +81,6 @@ protected:
   void paintCell(QPainter * p, const QColorGroup & cg, int column, int width, int align);
 
 private:
-  // FIXME PRICE
-#if 0
-  const QString calculate1WeekGain(const equity_price_history& history);
-  const QString calculate4WeekGain(const equity_price_history& history);
-  const QString calculate3MonthGain(const equity_price_history& history);
-  const QString calculateYTDGain(const equity_price_history& history);
-  const QString calculateGain(const equity_price_history& history, int dayDifference, int monthDifference, bool YTD, bool& bNegative);
-#endif
-
-private:
   K3ListView*        m_listView;
   MyMoneyAccount    m_account;
   MyMoneySecurity   m_tradingCurrency;
