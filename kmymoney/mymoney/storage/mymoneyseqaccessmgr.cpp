@@ -438,12 +438,25 @@ void MyMoneySeqAccessMgr::addTransaction(MyMoneyTransaction& transaction, const 
   // adjust the balance of all affected accounts
   for (it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s) {
     MyMoneyAccount acc = m_accountList[(*it_s).accountId()];
-    acc.adjustBalance(*it_s);
+    adjustBalance(acc, *it_s);
     if (!skipAccountUpdate) {
       acc.touch();
       invalidateBalanceCache(acc.id());
     }
     m_accountList.modify(acc.id(), acc);
+  }
+}
+
+void MyMoneySeqAccessMgr::adjustBalance(MyMoneyAccount& acc, const MyMoneySplit& split, bool reverse)
+{
+  // in case of an investment we can't just add or substract the
+  // amount of the split since we don't know about stock splits.
+  // so in the case of those stocks, we simply recalculate the balance from scratch
+  if (acc.isInvest()) {
+    invalidateBalanceCache(acc.id());
+    acc.setBalance(balance(acc.id()));
+  } else {
+    acc.adjustBalance(split, reverse);
   }
 }
 
@@ -568,22 +581,14 @@ void MyMoneySeqAccessMgr::modifyTransaction(const MyMoneyTransaction& transactio
   if (it_t == m_transactionList.end())
     throw new MYMONEYEXCEPTION("invalid transaction key");
 
-  // adjust account balances
   for (it_s = (*it_t).splits().begin(); it_s != (*it_t).splits().end(); ++it_s) {
     MyMoneyAccount acc = m_accountList[(*it_s).accountId()];
-    acc.adjustBalance(*it_s, true);   // reverse the adjust operation (reverse = true)
+    adjustBalance(acc, *it_s, true);
     acc.touch();
     invalidateBalanceCache(acc.id());
     m_accountList.modify(acc.id(), acc);
   }
-  for (it_s = transaction.splits().begin(); it_s != transaction.splits().end(); ++it_s) {
-    MyMoneyAccount acc = m_accountList[(*it_s).accountId()];
-    acc.adjustBalance(*it_s);
-    acc.touch();
-    invalidateBalanceCache(acc.id());
-    m_accountList.modify(acc.id(), acc);
-  }
-
+  
   // remove old transaction from lists
   m_transactionList.remove(oldKey);
 
@@ -591,6 +596,15 @@ void MyMoneySeqAccessMgr::modifyTransaction(const MyMoneyTransaction& transactio
   QString newKey = transaction.uniqueSortKey();
   m_transactionList.insert(newKey, transaction);
   m_transactionKeys.modify(transaction.id(), newKey);
+  
+  // adjust account balances
+  for (it_s = transaction.splits().begin(); it_s != transaction.splits().end(); ++it_s) {
+    MyMoneyAccount acc = m_accountList[(*it_s).accountId()];
+    adjustBalance(acc, *it_s);
+    acc.touch();
+    invalidateBalanceCache(acc.id());
+    m_accountList.modify(acc.id(), acc);
+  }
 }
 
 void MyMoneySeqAccessMgr::reparentAccount(MyMoneyAccount &account, MyMoneyAccount& parent)
@@ -664,7 +678,7 @@ void MyMoneySeqAccessMgr::removeTransaction(const MyMoneyTransaction& transactio
   // to be updated after the removal of this transaction
   for (it_s = (*it_t).splits().begin(); it_s != (*it_t).splits().end(); ++it_s) {
     MyMoneyAccount acc = m_accountList[(*it_s).accountId()];
-    acc.adjustBalance(*it_s, true);  // reverse = true
+    adjustBalance(acc, *it_s, true);
     acc.touch();
     m_accountList.modify(acc.id(), acc);
     invalidateBalanceCache(acc.id());
@@ -875,14 +889,15 @@ const MyMoneyTransaction MyMoneySeqAccessMgr::transaction(const QString& account
 const MyMoneyMoney MyMoneySeqAccessMgr::balance(const QString& id, const QDate& date) const
 {
   MyMoneyMoney result(0);
-  MyMoneyAccount acc;
+  MyMoneyAccount acc = account(id);
   // if (date != QDate()) qDebug ("request balance for %s at %s", id.data(), date.toString(Qt::ISODate).toLatin1());
-  if (!date.isValid() && account(id).accountType() != MyMoneyAccount::Stock) {
-    if (m_accountList.find(id) != m_accountList.end())
+  if (!date.isValid() && !acc.isInvest()) {
+    if (m_accountList.find(id) != m_accountList.end()) {
       return m_accountList[id].balance();
+    }
     return MyMoneyMoney(0);
   }
-  if (m_balanceCache[id].valid == false || date != m_balanceCacheDate) {
+  if (m_balanceCache[id].valid == false || date != m_balanceCacheDate || acc.isInvest()) {
     QMap<QString, MyMoneyMoney> balances;
     QMap<QString, MyMoneyMoney>::ConstIterator it_b;
     if (date != m_balanceCacheDate) {
