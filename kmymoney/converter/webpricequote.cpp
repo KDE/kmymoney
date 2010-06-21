@@ -185,7 +185,7 @@ void WebPriceQuote::slotParseQuote(const QString& _quotedata)
   bool gotprice = false;
   bool gotdate = false;
 
-//    kDebug(2) << "WebPriceQuote::slotParseQuote( " << _quotedata << " ) ";
+  // kDebug(2) << "WebPriceQuote::slotParseQuote( " << _quotedata << " ) ";
 
   if (! quotedata.isEmpty()) {
     if (!m_source.m_skipStripping) {
@@ -510,11 +510,9 @@ const QStringList WebPriceQuote::quoteSourcesNative()
   while (it_source != defaults.constEnd()) {
     if (! groups.contains((*it_source).m_name)) {
       groups += (*it_source).m_name;
+      (*it_source).write();
+      kconfig->sync();
     }
-
-    (*it_source).write();
-    kconfig->sync();
-
     ++it_source;
   }
 
@@ -559,6 +557,7 @@ WebPriceQuoteSource::WebPriceQuoteSource(const QString& name)
   m_date = grp.readEntry("DateRegex");
   m_dateformat = grp.readEntry("DateFormatRegex", "%m %d %y");
   m_price = grp.readEntry("PriceRegex");
+  qDebug("%s: '%s'", qPrintable(m_name), qPrintable(m_price));
   m_url = grp.readEntry("URL");
   m_skipStripping = grp.readEntry("SkipStripping", false);
 }
