@@ -52,41 +52,67 @@
         </layout>
       </item>
       <item>
-        <widget class="K3ListView" name="m_table">
+        <widget class="QTreeWidget" name="m_table">
           <property name="font">
             <font/>
-          </property>
-          <property name="shadeSortColumn">
-            <bool>false</bool>
           </property>
           <property name="toolTip" stdset="0">
             <string>Summary of the equities contained in this account, showing your holdings and their most recent price.</string>
           </property>
+          <property name="rootIsDecorated">
+           <bool>false</bool>
+          </property>
+          <property name="allColumnsShowFocus">
+           <bool>true</bool>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <column>
+           <property name="text">
+            <string comment="Investment name">Name</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string comment="Symbol name">Symbol</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string comment="Investment value">Value</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string comment="Shares quantity">Quantity</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string comment="Investment price">Price</string>
+           </property>
+          </column>
         </widget>
       </item>
     </layout>
   </widget>
   <layoutdefault spacing="6" margin="11"/>
     <customwidgets>
-    <customwidget>
-      <class>K3ListView</class>
-      <extends>Q3ListView</extends>
-      <header location="global">k3listview.h</header>
-    </customwidget>
-    <customwidget>
-      <class>KMyMoneyAccountCombo</class>
-      <extends>QWidget</extends>
-      <header location="local">../widgets/kmymoneyaccountcombo.h</header>
-      <sizehint>
-        <width>-1</width>
-        <height>25</height>
-      </sizehint>
-      <container>0</container>
-      <sizepolicy>
-        <hordata>3</hordata>
-        <verdata>5</verdata>
-      </sizepolicy>
-      <pixmap>image1</pixmap>
-    </customwidget>
+      <customwidget>
+        <class>KMyMoneyAccountCombo</class>
+        <extends>QWidget</extends>
+        <header location="local">../widgets/kmymoneyaccountcombo.h</header>
+        <sizehint>
+          <width>-1</width>
+          <height>25</height>
+        </sizehint>
+        <container>0</container>
+        <sizepolicy>
+          <hordata>3</hordata>
+          <verdata>5</verdata>
+        </sizepolicy>
+        <pixmap>image1</pixmap>
+      </customwidget>
   </customwidgets>
 </ui>

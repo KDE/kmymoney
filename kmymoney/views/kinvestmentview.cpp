@@ -42,7 +42,6 @@
 #include <kmymoneyaccountcombo.h>
 #include <kmymoneycurrencyselector.h>
 #include "kmymoney.h"
-#include "kinvestmentlistitem.h"
 #include "models.h"
 
 class KInvestmentView::Private
@@ -76,36 +75,19 @@ KInvestmentView::KInvestmentView(QWidget *parent) :
   d->m_filterProxyModel->sort(0);
   m_accountComboBox->setModel(d->m_filterProxyModel);
 
-  m_table->setRootIsDecorated(false);
-  // m_table->setColumnText(0, i18n("Symbol"));
-  m_table->addColumn(i18nc("Investment name", "Name"));
-  m_table->addColumn(i18nc("Investment symbol", "Symbol"));
+  m_table->setContextMenuPolicy(Qt::CustomContextMenu);
+  m_table->setSortingEnabled(true);
+  //KConfigGroup grp = KGlobal::config()->group("Investment Settings");
+  //m_table->restoreLayout(grp);
 
-  int col = m_table->addColumn(i18n("Value"));
-  m_table->setColumnAlignment(col, Qt::AlignRight);
-
-  col = m_table->addColumn(i18n("Quantity"));
-  m_table->setColumnAlignment(col, Qt::AlignRight);
-
-  col = m_table->addColumn(i18n("Price"));
-  m_table->setColumnAlignment(col, Qt::AlignRight);
-
-  m_table->setMultiSelection(false);
-  m_table->setColumnWidthMode(0, Q3ListView::Maximum);
-  m_table->header()->setResizeEnabled(true);
-  m_table->setAllColumnsShowFocus(true);
-  m_table->setShowSortIndicator(true);
-  KConfigGroup grp = KGlobal::config()->group("Investment Settings");
-  m_table->restoreLayout(grp);
-
-  connect(m_table, SIGNAL(contextMenu(K3ListView*, Q3ListViewItem* , const QPoint&)),
-          this, SLOT(slotListContextMenu(K3ListView*, Q3ListViewItem*, const QPoint&)));
-  connect(m_table, SIGNAL(selectionChanged(Q3ListViewItem *)), this, SLOT(slotSelectionChanged(Q3ListViewItem *)));
+  connect(m_table, SIGNAL(customContextMenuRequested(const QPoint&)),
+          this, SLOT(slotListContextMenu(const QPoint&)));
+  connect(m_table, SIGNAL(itemSelectionChanged()), this, SLOT(slotSelectionChanged()));
 
   connect(m_accountComboBox, SIGNAL(accountSelected(const QString&)),
           this, SLOT(slotSelectAccount(const QString&)));
 
-  connect(m_table, SIGNAL(doubleClicked(Q3ListViewItem*, const QPoint&, int)), kmymoney->action("investment_edit"), SLOT(trigger()));
+  connect(m_table, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), kmymoney->action("investment_edit"), SLOT(trigger()));
 
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadView()));
 }
@@ -113,18 +95,18 @@ KInvestmentView::KInvestmentView(QWidget *parent) :
 KInvestmentView::~KInvestmentView()
 {
   KConfigGroup grp = KGlobal::config()->group("Investment Settings");
-  m_table->saveLayout(grp);
+  //m_table->saveLayout(grp);
   delete d;
 }
 
-void KInvestmentView::slotSelectionChanged(Q3ListViewItem *item)
+void KInvestmentView::slotSelectionChanged()
 {
   kmymoney->slotSelectInvestment();
 
-  KInvestmentListItem *pItem = dynamic_cast<KInvestmentListItem*>(item);
-  if (pItem) {
+  QTreeWidgetItem *item = m_table->currentItem();
+  if (item) {
     try {
-      MyMoneyAccount account = MyMoneyFile::instance()->account(pItem->account().id());
+      MyMoneyAccount account = MyMoneyFile::instance()->account(item->data(0, Qt::UserRole).value<MyMoneyAccount>().id());
       kmymoney->slotSelectInvestment(account);
 
     } catch (MyMoneyException *e) {
@@ -133,12 +115,12 @@ void KInvestmentView::slotSelectionChanged(Q3ListViewItem *item)
   }
 }
 
-void KInvestmentView::slotListContextMenu(K3ListView* /* lv */, Q3ListViewItem* /*item*/, const QPoint& /*point*/)
+void KInvestmentView::slotListContextMenu(const QPoint& /*point*/)
 {
   kmymoney->slotSelectInvestment();
-  KInvestmentListItem *pItem = dynamic_cast<KInvestmentListItem*>(m_table->selectedItem());
-  if (pItem) {
-    kmymoney->slotSelectInvestment(MyMoneyFile::instance()->account(pItem->account().id()));
+  QTreeWidgetItem *item = m_table->currentItem();
+  if (item) {
+    kmymoney->slotSelectInvestment(MyMoneyFile::instance()->account(item->data(0, Qt::UserRole).value<MyMoneyAccount>().id()));
   }
   emit investmentRightMouseClick();
 }
@@ -310,7 +292,7 @@ void KInvestmentView::loadView(void)
     for (QStringList::ConstIterator it = securities.constBegin(); it != securities.constEnd(); ++it) {
       MyMoneyAccount acc = file->account(*it);
       if (!acc.isClosed() || showClosedAccounts)
-        new KInvestmentListItem(m_table, acc);
+        loadInvestmentItem(acc);
     }
   } catch (MyMoneyException* e) {
     qDebug("KInvestmentView::loadView() - selected account does not exist anymore");
@@ -320,6 +302,51 @@ void KInvestmentView::loadView(void)
 
   // and tell everyone what's selected
   emit accountSelected(d->m_account);
+}
+
+void KInvestmentView::loadInvestmentItem(const MyMoneyAccount& account)
+{
+  QTreeWidgetItem* item = new QTreeWidgetItem(m_table);
+  MyMoneySecurity security;
+  MyMoneyFile* file = MyMoneyFile::instance();
+
+  security = file->security(account.currencyId());
+  MyMoneySecurity tradingCurrency = file->security(security.tradingCurrency());
+
+  int prec = MyMoneyMoney::denomToPrec(tradingCurrency.smallestAccountFraction());
+
+  //column 0 (COLUMN_NAME_INDEX) is the name of the stock
+  item->setText(eNameColumn, account.name());
+  item->setData(eNameColumn, Qt::UserRole, QVariant::fromValue(account));
+
+  //column 1 (COLUMN_SYMBOL_INDEX) is the ticker symbol
+  item->setText(eSymbolColumn, security.tradingSymbol());
+
+  //column 2 is the net value (price * quantity owned)
+  MyMoneyPrice price = file->price(account.currencyId(), tradingCurrency.id());
+  if (price.isValid()) {
+    item->setText(eValueColumn, (file->balance(account.id()) * price.rate(tradingCurrency.id())).formatMoney(tradingCurrency.tradingSymbol(), prec));
+  } else {
+    item->setText(eValueColumn, "---");
+  }
+  item->setTextAlignment(eValueColumn, Qt::AlignRight);
+
+  //column 3 (COLUMN_QUANTITY_INDEX) is the quantity of shares owned
+  prec = MyMoneyMoney::denomToPrec(security.smallestAccountFraction());
+  item->setText(eQuantityColumn, file->balance(account.id()).formatMoney("", prec));
+  item->setTextAlignment(eQuantityColumn, Qt::AlignRight);
+
+  //column 4 is the current price
+  // Get the price precision from the configuration
+  prec = KMyMoneyGlobalSettings::pricePrecision();
+
+  // prec = MyMoneyMoney::denomToPrec(m_tradingCurrency.smallestAccountFraction());
+  if (price.isValid()) {
+    item->setText(ePriceColumn, price.rate(tradingCurrency.id()).formatMoney(tradingCurrency.tradingSymbol(), prec));
+  } else {
+    item->setText(ePriceColumn, "---");
+  }
+  item->setTextAlignment(ePriceColumn, Qt::AlignRight);
 }
 
 void KInvestmentView::showEvent(QShowEvent* event)

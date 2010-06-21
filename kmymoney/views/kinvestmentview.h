@@ -35,8 +35,8 @@
 #include <mymoneysecurity.h>
 #include <mymoneyaccount.h>
 #include "ui_kinvestmentviewdecl.h"
-#include "kinvestmentlistitem.h"
 
+enum eInvestmentColumn { eNameColumn, eSymbolColumn, eValueColumn, eQuantityColumn, ePriceColumn };
 
 /**
   * @author Kevin Tambascio
@@ -102,14 +102,16 @@ protected:
 
   void loadView(void);
 
+  void loadInvestmentItem(const MyMoneyAccount& account);
+
 protected slots:
   /**
     * This slot receives the signal from the listview @c lv control that the context menu
     * was requested for @c item at @c point.
     */
-  void slotListContextMenu(K3ListView* lv, Q3ListViewItem* item, const QPoint& point);
+  void slotListContextMenu(const QPoint& point);
 
-  void slotSelectionChanged(Q3ListViewItem *item);
+  void slotSelectionChanged();
 
 
 signals:
