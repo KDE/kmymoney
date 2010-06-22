@@ -5160,6 +5160,11 @@ void KMyMoneyApp::slotTransactionsCancelOrEnter(bool& okToSelect)
     if (d->m_transactionEditor) {
       if (KMyMoneyGlobalSettings::focusChangeIsEnter() && kmymoney->action("transaction_enter")->isEnabled()) {
         slotTransactionsEnter();
+        if (d->m_transactionEditor) {
+          // if at this stage the editor is still there that means that entering the transaction was cancelled
+          // for example by pressing cancel on the exchange rate editor so we must stay in edit mode
+          okToSelect = false;
+        }
       } else {
         // okToSelect is preset to true if a cancel of the dialog is useful and false if it is not
         int rc;
@@ -5185,6 +5190,11 @@ void KMyMoneyApp::slotTransactionsCancelOrEnter(bool& okToSelect)
             // make sure that we'll see this message the next time no matter
             // if the user has chosen the 'Don't show again' checkbox
             KMessageBox::enableMessage(dontShowAgain);
+            if (d->m_transactionEditor) {
+              // if at this stage the editor is still there that means that entering the transaction was cancelled
+              // for example by pressing cancel on the exchange rate editor so we must stay in edit mode
+              okToSelect = false;
+            }
             break;
           case KMessageBox::Cancel:
             // make sure that we'll see this message the next time no matter
