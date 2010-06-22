@@ -15,21 +15,21 @@
  ***************************************************************************/
 
 #include "mymoneyinstitutiontest.h"
-#include <mymoneyexception.h>
 
-MyMoneyInstitutionTest::MyMoneyInstitutionTest()
-{
-}
+#include <QtTest/QtTest>
 
+#include "mymoneyexception.h"
 
-void MyMoneyInstitutionTest::setUp()
+QTEST_MAIN(MyMoneyInstitutionTest)
+
+void MyMoneyInstitutionTest::init()
 {
   m = new MyMoneyInstitution();
   n = new MyMoneyInstitution("name", "town", "street", "postcode",
                              "telephone", "manager", "sortcode");
 }
 
-void MyMoneyInstitutionTest::tearDown()
+void MyMoneyInstitutionTest::cleanup()
 {
   delete m;
   delete n;
@@ -37,14 +37,14 @@ void MyMoneyInstitutionTest::tearDown()
 
 void MyMoneyInstitutionTest::testEmptyConstructor()
 {
-  CPPUNIT_ASSERT(m->id().isEmpty());
-  CPPUNIT_ASSERT(m->street().isEmpty());
-  CPPUNIT_ASSERT(m->town().isEmpty());
-  CPPUNIT_ASSERT(m->postcode().isEmpty());
-  CPPUNIT_ASSERT(m->telephone().isEmpty());
-  CPPUNIT_ASSERT(m->manager().isEmpty());
+  QVERIFY(m->id().isEmpty());
+  QVERIFY(m->street().isEmpty());
+  QVERIFY(m->town().isEmpty());
+  QVERIFY(m->postcode().isEmpty());
+  QVERIFY(m->telephone().isEmpty());
+  QVERIFY(m->manager().isEmpty());
 
-  CPPUNIT_ASSERT(m->accountCount() == 0);
+  QVERIFY(m->accountCount() == 0);
 }
 
 void MyMoneyInstitutionTest::testSetFunctions()
@@ -56,25 +56,25 @@ void MyMoneyInstitutionTest::testSetFunctions()
   m->setManager("manager");
   m->setName("name");
 
-  CPPUNIT_ASSERT(m->id().isEmpty());
-  CPPUNIT_ASSERT(m->street() == "street");
-  CPPUNIT_ASSERT(m->town() == "town");
-  CPPUNIT_ASSERT(m->postcode() == "postcode");
-  CPPUNIT_ASSERT(m->telephone() == "telephone");
-  CPPUNIT_ASSERT(m->manager() == "manager");
-  CPPUNIT_ASSERT(m->name() == "name");
+  QVERIFY(m->id().isEmpty());
+  QVERIFY(m->street() == "street");
+  QVERIFY(m->town() == "town");
+  QVERIFY(m->postcode() == "postcode");
+  QVERIFY(m->telephone() == "telephone");
+  QVERIFY(m->manager() == "manager");
+  QVERIFY(m->name() == "name");
 }
 
 void MyMoneyInstitutionTest::testNonemptyConstructor()
 {
-  CPPUNIT_ASSERT(n->id().isEmpty());
-  CPPUNIT_ASSERT(n->street() == "street");
-  CPPUNIT_ASSERT(n->town() == "town");
-  CPPUNIT_ASSERT(n->postcode() == "postcode");
-  CPPUNIT_ASSERT(n->telephone() == "telephone");
-  CPPUNIT_ASSERT(n->manager() == "manager");
-  CPPUNIT_ASSERT(n->name() == "name");
-  CPPUNIT_ASSERT(n->sortcode() == "sortcode");
+  QVERIFY(n->id().isEmpty());
+  QVERIFY(n->street() == "street");
+  QVERIFY(n->town() == "town");
+  QVERIFY(n->postcode() == "postcode");
+  QVERIFY(n->telephone() == "telephone");
+  QVERIFY(n->manager() == "manager");
+  QVERIFY(n->name() == "name");
+  QVERIFY(n->sortcode() == "sortcode");
 }
 
 void MyMoneyInstitutionTest::testCopyConstructor()
@@ -82,7 +82,7 @@ void MyMoneyInstitutionTest::testCopyConstructor()
   MyMoneyInstitution* n1 = new MyMoneyInstitution("GUID1", *n);
   MyMoneyInstitution n2(*n1);
 
-  CPPUNIT_ASSERT(*n1 == n2);
+  QVERIFY(*n1 == n2);
 
   delete n1;
 }
@@ -91,15 +91,15 @@ void MyMoneyInstitutionTest::testMyMoneyFileConstructor()
 {
   MyMoneyInstitution *t = new MyMoneyInstitution("GUID", *n);
 
-  CPPUNIT_ASSERT(t->id() == "GUID");
+  QVERIFY(t->id() == "GUID");
 
-  CPPUNIT_ASSERT(t->street() == "street");
-  CPPUNIT_ASSERT(t->town() == "town");
-  CPPUNIT_ASSERT(t->postcode() == "postcode");
-  CPPUNIT_ASSERT(t->telephone() == "telephone");
-  CPPUNIT_ASSERT(t->manager() == "manager");
-  CPPUNIT_ASSERT(t->name() == "name");
-  CPPUNIT_ASSERT(t->sortcode() == "sortcode");
+  QVERIFY(t->street() == "street");
+  QVERIFY(t->town() == "town");
+  QVERIFY(t->postcode() == "postcode");
+  QVERIFY(t->telephone() == "telephone");
+  QVERIFY(t->manager() == "manager");
+  QVERIFY(t->name() == "name");
+  QVERIFY(t->sortcode() == "sortcode");
 
   delete t;
 }
@@ -109,31 +109,31 @@ void MyMoneyInstitutionTest::testEquality()
   MyMoneyInstitution t("name", "town", "street", "postcode",
                        "telephone", "manager", "sortcode");
 
-  CPPUNIT_ASSERT(t == *n);
+  QVERIFY(t == *n);
   t.setStreet("x");
-  CPPUNIT_ASSERT(!(t == *n));
+  QVERIFY(!(t == *n));
   t.setStreet("street");
-  CPPUNIT_ASSERT(t == *n);
+  QVERIFY(t == *n);
   t.setName("x");
-  CPPUNIT_ASSERT(!(t == *n));
+  QVERIFY(!(t == *n));
   t.setName("name");
-  CPPUNIT_ASSERT(t == *n);
+  QVERIFY(t == *n);
   t.setTown("x");
-  CPPUNIT_ASSERT(!(t == *n));
+  QVERIFY(!(t == *n));
   t.setTown("town");
-  CPPUNIT_ASSERT(t == *n);
+  QVERIFY(t == *n);
   t.setPostcode("x");
-  CPPUNIT_ASSERT(!(t == *n));
+  QVERIFY(!(t == *n));
   t.setPostcode("postcode");
-  CPPUNIT_ASSERT(t == *n);
+  QVERIFY(t == *n);
   t.setTelephone("x");
-  CPPUNIT_ASSERT(!(t == *n));
+  QVERIFY(!(t == *n));
   t.setTelephone("telephone");
-  CPPUNIT_ASSERT(t == *n);
+  QVERIFY(t == *n);
   t.setManager("x");
-  CPPUNIT_ASSERT(!(t == *n));
+  QVERIFY(!(t == *n));
   t.setManager("manager");
-  CPPUNIT_ASSERT(t == *n);
+  QVERIFY(t == *n);
 
   MyMoneyInstitution* n1 = new MyMoneyInstitution("GUID1", *n);
   MyMoneyInstitution* n2 = new MyMoneyInstitution("GUID1", *n);
@@ -141,7 +141,7 @@ void MyMoneyInstitutionTest::testEquality()
   n1->addAccountId("A000001");
   n2->addAccountId("A000001");
 
-  CPPUNIT_ASSERT(*n1 == *n2);
+  QVERIFY(*n1 == *n2);
 
   delete n1;
   delete n2;
@@ -154,13 +154,13 @@ void MyMoneyInstitutionTest::testInequality()
   MyMoneyInstitution* n3 = new MyMoneyInstitution("GUID2", *n);
   MyMoneyInstitution* n4 = new MyMoneyInstitution("GUID2", *n);
 
-  CPPUNIT_ASSERT(!(*n1 == *n2));
-  CPPUNIT_ASSERT(!(*n1 == *n3));
-  CPPUNIT_ASSERT(*n3 == *n4);
+  QVERIFY(!(*n1 == *n2));
+  QVERIFY(!(*n1 == *n3));
+  QVERIFY(*n3 == *n4);
 
   n3->addAccountId("A000001");
   n4->addAccountId("A000002");
-  CPPUNIT_ASSERT(!(*n3 == *n4));
+  QVERIFY(!(*n3 == *n4));
 
   delete n1;
   delete n2;
@@ -176,32 +176,32 @@ void MyMoneyInstitutionTest::testAccountIDList()
 
   // list must be empty
   list = institution.accountList();
-  CPPUNIT_ASSERT(list.count() == 0);
+  QVERIFY(list.count() == 0);
 
   // add one account
   institution.addAccountId("A000002");
   list = institution.accountList();
-  CPPUNIT_ASSERT(list.count() == 1);
-  CPPUNIT_ASSERT(list.contains("A000002") == 1);
+  QVERIFY(list.count() == 1);
+  QVERIFY(list.contains("A000002") == 1);
 
   // adding same account shouldn't make a difference
   institution.addAccountId("A000002");
   list = institution.accountList();
-  CPPUNIT_ASSERT(list.count() == 1);
-  CPPUNIT_ASSERT(list.contains("A000002") == 1);
+  QVERIFY(list.count() == 1);
+  QVERIFY(list.contains("A000002") == 1);
 
   // now add another account
   institution.addAccountId("A000001");
   list = institution.accountList();
-  CPPUNIT_ASSERT(list.count() == 2);
-  CPPUNIT_ASSERT(list.contains("A000002") == 1);
-  CPPUNIT_ASSERT(list.contains("A000001") == 1);
+  QVERIFY(list.count() == 2);
+  QVERIFY(list.contains("A000002") == 1);
+  QVERIFY(list.contains("A000001") == 1);
 
   id = institution.removeAccountId("A000001");
-  CPPUNIT_ASSERT(id == "A000001");
+  QVERIFY(id == "A000001");
   list = institution.accountList();
-  CPPUNIT_ASSERT(list.count() == 1);
-  CPPUNIT_ASSERT(list.contains("A000002") == 1);
+  QVERIFY(list.count() == 1);
+  QVERIFY(list.contains("A000002") == 1);
 
 }
 
@@ -244,7 +244,7 @@ void MyMoneyInstitutionTest::testWriteXML()
   // qDebug("ref = '%s'", qPrintable(ref));
   // qDebug("doc = '%s'", qPrintable(doc.toString()));
 
-  CPPUNIT_ASSERT(doc.toString() == ref);
+  QVERIFY(doc.toString() == ref);
 }
 
 void MyMoneyInstitutionTest::testReadXML()
@@ -284,7 +284,7 @@ void MyMoneyInstitutionTest::testReadXML()
   node = doc.documentElement().firstChild().toElement();
   try {
     i = MyMoneyInstitution(node);
-    CPPUNIT_FAIL("Missing expected exception");
+    QFAIL("Missing expected exception");
   } catch (MyMoneyException *e) {
     delete e;
   }
@@ -298,19 +298,21 @@ void MyMoneyInstitutionTest::testReadXML()
     alist << "A000001" << "A000003";
     i = MyMoneyInstitution(node);
 
-    CPPUNIT_ASSERT(i.sortcode() == "sortcode");
-    CPPUNIT_ASSERT(i.id() == "I00001");
-    CPPUNIT_ASSERT(i.manager() == "manager");
-    CPPUNIT_ASSERT(i.name() == "name");
-    CPPUNIT_ASSERT(i.street() == "street");
-    CPPUNIT_ASSERT(i.postcode() == "postcode");
-    CPPUNIT_ASSERT(i.city() == "town");
-    CPPUNIT_ASSERT(i.telephone() == "telephone");
-    CPPUNIT_ASSERT(i.accountList() == alist);
-    CPPUNIT_ASSERT(i.value(QString("key")) == "value");
+    QVERIFY(i.sortcode() == "sortcode");
+    QVERIFY(i.id() == "I00001");
+    QVERIFY(i.manager() == "manager");
+    QVERIFY(i.name() == "name");
+    QVERIFY(i.street() == "street");
+    QVERIFY(i.postcode() == "postcode");
+    QVERIFY(i.city() == "town");
+    QVERIFY(i.telephone() == "telephone");
+    QVERIFY(i.accountList() == alist);
+    QVERIFY(i.value(QString("key")) == "value");
 
   } catch (MyMoneyException *e) {
     delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    QFAIL("Unexpected exception");
   }
 }
+#include "mymoneyinstitutiontest.moc"
+

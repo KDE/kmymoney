@@ -17,39 +17,23 @@
 #ifndef MYMONEYSPLITTEST_H
 #define MYMONEYSPLITTEST_H
 
-#include <cppunit/extensions/HelperMacros.h>
+#include <QtCore/QObject>
 
 #define private public
 #define protected public
 #include "mymoneysplit.h"
 #undef private
 
-class MyMoneySplitTest : public CppUnit::TestFixture
+class MyMoneySplitTest : public QObject
 {
-  CPPUNIT_TEST_SUITE(MyMoneySplitTest);
-  CPPUNIT_TEST(testEmptyConstructor);
-  CPPUNIT_TEST(testSetFunctions);
-  CPPUNIT_TEST(testCopyConstructor);
-  CPPUNIT_TEST(testAssignmentConstructor);
-  CPPUNIT_TEST(testEquality);
-  CPPUNIT_TEST(testInequality);
-  CPPUNIT_TEST(testAmortization);
-  CPPUNIT_TEST(testValue);
-  CPPUNIT_TEST(testSetValue);
-  CPPUNIT_TEST(testSetAction);
-  CPPUNIT_TEST(testIsAutoCalc);
-  CPPUNIT_TEST(testWriteXML);
-  CPPUNIT_TEST(testReadXML);
-  CPPUNIT_TEST_SUITE_END();
+  Q_OBJECT
 
 protected:
   MyMoneySplit *m;
 
-public:
-  MyMoneySplitTest();
-
-  void setUp();
-  void tearDown();
+private slots:
+  void init();
+  void cleanup();
   void testEmptyConstructor();
   void testSetFunctions();
   void testCopyConstructor();

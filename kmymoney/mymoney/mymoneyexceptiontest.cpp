@@ -17,25 +17,24 @@
 
 #include "mymoneyexceptiontest.h"
 
-MyMoneyExceptionTest::MyMoneyExceptionTest()
+#include <QtTest/QtTest>
+
+QTEST_MAIN(MyMoneyExceptionTest)
+
+void MyMoneyExceptionTest::init()
 {
 }
 
-
-void MyMoneyExceptionTest::setUp()
-{
-}
-
-void MyMoneyExceptionTest::tearDown()
+void MyMoneyExceptionTest::cleanup()
 {
 }
 
 void MyMoneyExceptionTest::testDefaultConstructor()
 {
   MyMoneyException *e = new MYMONEYEXCEPTION("Message");
-  CPPUNIT_ASSERT(e->what() == "Message");
-  CPPUNIT_ASSERT(e->line() == __LINE__ - 2);
-  CPPUNIT_ASSERT(e->file() == __FILE__);
+  QVERIFY(e->what() == "Message");
+  QVERIFY(e->line() == __LINE__ - 2);
+  QVERIFY(e->file() == __FILE__);
   delete e;
 }
 
@@ -43,9 +42,11 @@ void MyMoneyExceptionTest::testConstructor()
 {
   MyMoneyException *e = new MyMoneyException("New message",
       "Joe's file", 1234);
-  CPPUNIT_ASSERT(e->what() == "New message");
-  CPPUNIT_ASSERT(e->line() == 1234);
-  CPPUNIT_ASSERT(e->file() == "Joe's file");
+  QVERIFY(e->what() == "New message");
+  QVERIFY(e->line() == 1234);
+  QVERIFY(e->file() == "Joe's file");
   delete e;
 }
+
+#include "mymoneyexceptiontest.moc"
 

@@ -29,48 +29,21 @@
 #define INT64_MIN LLONG_MIN
 #endif
 
-#include <cppunit/extensions/HelperMacros.h>
+#include <QtCore/QObject>
 
 #define private public
 #include "mymoneymoney.h"
 #undef private
 
-class MyMoneyMoneyTest : public CppUnit::TestFixture
+class MyMoneyMoneyTest : public QObject
 {
-  CPPUNIT_TEST_SUITE(MyMoneyMoneyTest);
-  CPPUNIT_TEST(testEmptyConstructor);
-  CPPUNIT_TEST(testIntConstructor);
-  CPPUNIT_TEST(testStringConstructor);
-  CPPUNIT_TEST(testAssignment);
-  CPPUNIT_TEST(testConvert);
-  CPPUNIT_TEST(testEquality);
-  CPPUNIT_TEST(testInequality);
-  CPPUNIT_TEST(testAddition);
-  CPPUNIT_TEST(testSubtraction);
-  CPPUNIT_TEST(testMultiplication);
-  CPPUNIT_TEST(testDivision);
-  CPPUNIT_TEST(testSetDecimalSeparator);
-  CPPUNIT_TEST(testSetThousandSeparator);
-  CPPUNIT_TEST(testFormatMoney);
-  CPPUNIT_TEST(testRelation);
-  CPPUNIT_TEST(testUnaryMinus);
-  CPPUNIT_TEST(testDoubleConstructor);
-  CPPUNIT_TEST(testAbsoluteFunction);
-  CPPUNIT_TEST(testToString);
-  CPPUNIT_TEST(testNegativeSignPos);
-  CPPUNIT_TEST(testPositiveSignPos);
-  CPPUNIT_TEST(testNegativeStringConstructor);
-  CPPUNIT_TEST(testReduce);
-  CPPUNIT_TEST(testZeroDenominator);
-  CPPUNIT_TEST_SUITE_END();
+  Q_OBJECT
 
 protected:
   MyMoneyMoney *m_0, *m_1, *m_2, *m_3, *m_4, *m_5;
-public:
-  MyMoneyMoneyTest();
-
-  void setUp();
-  void tearDown();
+private slots:
+  void init();
+  void cleanup();
   void testEmptyConstructor();
   void testIntConstructor();
   void testStringConstructor();

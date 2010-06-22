@@ -17,10 +17,7 @@
 #ifndef MYMONEYDATABASEMGRTEST_H
 #define MYMONEYDATABASEMGRTEST_H
 
-#include <cppunit/TestCaller.h>
-#include <cppunit/TestCase.h>
-#include <cppunit/TestSuite.h>
-#include <cppunit/extensions/HelperMacros.h>
+#include <QtCore/QObject>
 
 #include "../autotest.h"
 
@@ -30,56 +27,9 @@
 #include "mymoneydatabasemgr.h"
 #undef private
 
-class MyMoneyDatabaseMgrTest : public CppUnit::TestFixture
+class MyMoneyDatabaseMgrTest : public QObject
 {
-  CPPUNIT_TEST_SUITE(MyMoneyDatabaseMgrTest);
-  CPPUNIT_TEST(testEmptyConstructor);
-  CPPUNIT_TEST(testCreateDb);
-  CPPUNIT_TEST(testAttachDb);
-  CPPUNIT_TEST(testSetFunctions);
-  CPPUNIT_TEST(testSupportFunctions);
-  CPPUNIT_TEST(testIsStandardAccount);
-  CPPUNIT_TEST(testNewAccount);
-  CPPUNIT_TEST(testAddNewAccount);
-  CPPUNIT_TEST(testReparentAccount);
-  CPPUNIT_TEST(testAddInstitution);
-  CPPUNIT_TEST(testInstitution);
-  CPPUNIT_TEST(testAccount2Institution);
-  CPPUNIT_TEST(testModifyAccount);
-  CPPUNIT_TEST(testModifyInstitution);
-  CPPUNIT_TEST(testAddTransactions);
-  CPPUNIT_TEST(testTransactionCount);
-  CPPUNIT_TEST(testBalance);
-  CPPUNIT_TEST(testAddBudget);
-  CPPUNIT_TEST(testCopyBudget);
-  CPPUNIT_TEST(testModifyBudget);
-  CPPUNIT_TEST(testRemoveBudget);
-  CPPUNIT_TEST(testModifyTransaction);
-  CPPUNIT_TEST(testRemoveUnusedAccount);
-  CPPUNIT_TEST(testRemoveUsedAccount);
-  CPPUNIT_TEST(testRemoveInstitution);
-  CPPUNIT_TEST(testRemoveTransaction);
-  CPPUNIT_TEST(testTransactionList);
-  CPPUNIT_TEST(testAddPayee);
-  CPPUNIT_TEST(testSetAccountName);
-  CPPUNIT_TEST(testModifyPayee);
-  CPPUNIT_TEST(testPayeeName);
-  CPPUNIT_TEST(testRemovePayee);
-  CPPUNIT_TEST(testRemoveAccountFromTree);
-  CPPUNIT_TEST(testAssignment);
-  CPPUNIT_TEST(testDuplicate);
-  CPPUNIT_TEST(testAddSchedule);
-  CPPUNIT_TEST(testModifySchedule);
-  CPPUNIT_TEST(testRemoveSchedule);
-  CPPUNIT_TEST(testSchedule);
-  CPPUNIT_TEST(testScheduleList);
-  CPPUNIT_TEST(testAddCurrency);
-  CPPUNIT_TEST(testModifyCurrency);
-  CPPUNIT_TEST(testRemoveCurrency);
-  CPPUNIT_TEST(testCurrency);
-  CPPUNIT_TEST(testCurrencyList);
-  CPPUNIT_TEST(testAccountList);
-  CPPUNIT_TEST_SUITE_END();
+  Q_OBJECT
 
 protected:
   MyMoneyDatabaseMgr *m;
@@ -89,8 +39,9 @@ protected:
 public:
   MyMoneyDatabaseMgrTest();
 
-  void setUp();
-  void tearDown();
+private slots:
+  void init();
+  void cleanup();
   void testEmptyConstructor();
   void testCreateDb();
   void testAttachDb();

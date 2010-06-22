@@ -17,7 +17,7 @@
 #ifndef MYMONEYFORECASTTEST_H
 #define MYMONEYFORECASTTEST_H
 
-#include <cppunit/extensions/HelperMacros.h>
+#include <QtCore/QObject>
 
 #include "mymoneyfile.h"
 #include "mymoneyseqaccessmgr.h"
@@ -26,37 +26,15 @@
 #include "mymoneyforecast.h"
 #undef private
 
-
-class MyMoneyForecastTest : public CppUnit::TestFixture
+class MyMoneyForecastTest : public QObject
 {
-  CPPUNIT_TEST_SUITE(MyMoneyForecastTest);
-  CPPUNIT_TEST(testEmptyConstructor);
-  CPPUNIT_TEST(testDoForecast);
-  CPPUNIT_TEST(testDoForecastInit);
-  CPPUNIT_TEST(testGetForecastAccountList);
-  CPPUNIT_TEST(testCalculateAccountTrend);
-  CPPUNIT_TEST(testGetForecastBalance);
-  CPPUNIT_TEST(testIsForecastAccount);
-  CPPUNIT_TEST(testDoFutureScheduledForecast);
-  CPPUNIT_TEST(testDaysToMinimumBalance);
-  CPPUNIT_TEST(testDaysToZeroBalance);
-  CPPUNIT_TEST(testScheduleForecast);
-  CPPUNIT_TEST(testSkipOpeningDate);
-  CPPUNIT_TEST(testAccountMinimumBalanceDateList);
-  CPPUNIT_TEST(testAccountMaximumBalanceDateList);
-  CPPUNIT_TEST(testAccountAverageBalance);
-  CPPUNIT_TEST(testBeginForecastDate);
-  CPPUNIT_TEST(testHistoryDays);
-  CPPUNIT_TEST(testCreateBudget);
-  CPPUNIT_TEST(testLinearRegression);
-  CPPUNIT_TEST_SUITE_END();
-
-
-
+  Q_OBJECT
 public:
   MyMoneyForecastTest();
-  void setUp();
-  void tearDown();
+
+private slots:
+  void init();
+  void cleanup();
   void testEmptyConstructor();
   void testDoForecast();
   void testDoForecastInit();

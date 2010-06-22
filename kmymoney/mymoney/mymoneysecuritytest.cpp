@@ -16,32 +16,31 @@
 
 #include "mymoneysecuritytest.h"
 
-MyMoneySecurityTest::MyMoneySecurityTest()
-{
-}
+#include <QtTest/QtTest>
 
+QTEST_MAIN(MyMoneySecurityTest)
 
-void MyMoneySecurityTest::setUp()
+void MyMoneySecurityTest::init()
 {
   m = new MyMoneySecurity();
 }
 
-void MyMoneySecurityTest::tearDown()
+void MyMoneySecurityTest::cleanup()
 {
   delete m;
 }
 
 void MyMoneySecurityTest::testEmptyConstructor()
 {
-  CPPUNIT_ASSERT(m->id().isEmpty());
-  CPPUNIT_ASSERT(m->name().isEmpty());
-  CPPUNIT_ASSERT(m->tradingSymbol().isEmpty());
-  CPPUNIT_ASSERT(m->securityType() == MyMoneySecurity::SECURITY_NONE);
-  CPPUNIT_ASSERT(m->tradingMarket().isEmpty());
-  CPPUNIT_ASSERT(m->tradingCurrency().isEmpty());
-  CPPUNIT_ASSERT(m->smallestCashFraction() == 100);
-  CPPUNIT_ASSERT(m->smallestAccountFraction() == 100);
-  CPPUNIT_ASSERT(m->partsPerUnit() == 100);
+  QVERIFY(m->id().isEmpty());
+  QVERIFY(m->name().isEmpty());
+  QVERIFY(m->tradingSymbol().isEmpty());
+  QVERIFY(m->securityType() == MyMoneySecurity::SECURITY_NONE);
+  QVERIFY(m->tradingMarket().isEmpty());
+  QVERIFY(m->tradingCurrency().isEmpty());
+  QVERIFY(m->smallestCashFraction() == 100);
+  QVERIFY(m->smallestAccountFraction() == 100);
+  QVERIFY(m->partsPerUnit() == 100);
 }
 
 void MyMoneySecurityTest::testCopyConstructor()
@@ -49,7 +48,7 @@ void MyMoneySecurityTest::testCopyConstructor()
   MyMoneySecurity* n1 = new MyMoneySecurity("GUID1", *m);
   MyMoneySecurity n2(*n1);
 
-  // CPPUNIT_ASSERT(*n1 == n2);
+  // QVERIFY(*n1 == n2);
 
   delete n1;
 }
@@ -66,10 +65,10 @@ void MyMoneySecurityTest::testNonemptyConstructor()
 
   MyMoneySecurity n("id", *m);
 
-  CPPUNIT_ASSERT(n.id() == QString("id"));
-  CPPUNIT_ASSERT(n.tradingSymbol() == QString("symbol"));
-  CPPUNIT_ASSERT(n.securityType() == MyMoneySecurity::SECURITY_CURRENCY);
-  // CPPUNIT_ASSERT(n.priceHistory().count() == 1);
+  QVERIFY(n.id() == QString("id"));
+  QVERIFY(n.tradingSymbol() == QString("symbol"));
+  QVERIFY(n.securityType() == MyMoneySecurity::SECURITY_CURRENCY);
+  // QVERIFY(n.priceHistory().count() == 1);
 }
 
 
@@ -84,21 +83,21 @@ void MyMoneySecurityTest::testSetFunctions()
   m->setSmallestCashFraction(2);
   m->setPartsPerUnit(30);
 
-  CPPUNIT_ASSERT(m->name() == "Name");
-  CPPUNIT_ASSERT(m->tradingSymbol() == "Symbol");
-  CPPUNIT_ASSERT(m->tradingMarket() == "Market");
-  CPPUNIT_ASSERT(m->tradingCurrency() == "Currency");
-  CPPUNIT_ASSERT(m->securityType() == MyMoneySecurity::SECURITY_STOCK);
-  CPPUNIT_ASSERT(m->smallestAccountFraction() == 50);
-  CPPUNIT_ASSERT(m->smallestCashFraction() == 2);
-  CPPUNIT_ASSERT(m->partsPerUnit() == 30);
+  QVERIFY(m->name() == "Name");
+  QVERIFY(m->tradingSymbol() == "Symbol");
+  QVERIFY(m->tradingMarket() == "Market");
+  QVERIFY(m->tradingCurrency() == "Currency");
+  QVERIFY(m->securityType() == MyMoneySecurity::SECURITY_STOCK);
+  QVERIFY(m->smallestAccountFraction() == 50);
+  QVERIFY(m->smallestCashFraction() == 2);
+  QVERIFY(m->partsPerUnit() == 30);
 }
 
 /*
 void MyMoneySecurityTest::testMyMoneyFileConstructor() {
  MyMoneySecurity *t = new MyMoneySecurity("GUID", *n);
 
- CPPUNIT_ASSERT(t->id() == "GUID");
+ QVERIFY(t->id() == "GUID");
 
  delete t;
 }
@@ -112,33 +111,33 @@ void MyMoneySecurityTest::testEquality()
   MyMoneySecurity n;
   n = *m;
 
-  CPPUNIT_ASSERT(n == *m);
+  QVERIFY(n == *m);
   n.setName("NewName");
-  CPPUNIT_ASSERT(!(n == *m));
+  QVERIFY(!(n == *m));
   n = *m;
   n.setTradingSymbol("NewSymbol");
-  CPPUNIT_ASSERT(!(n == *m));
+  QVERIFY(!(n == *m));
   n = *m;
   n.setTradingMarket("NewMarket");
-  CPPUNIT_ASSERT(!(n == *m));
+  QVERIFY(!(n == *m));
   n = *m;
   n.setTradingCurrency("NewCurrency");
-  CPPUNIT_ASSERT(!(n == *m));
+  QVERIFY(!(n == *m));
   n = *m;
   n.setSecurityType(MyMoneySecurity::SECURITY_CURRENCY);
-  CPPUNIT_ASSERT(!(n == *m));
+  QVERIFY(!(n == *m));
   n = *m;
   n.setSmallestAccountFraction(40);
-  CPPUNIT_ASSERT(!(n == *m));
+  QVERIFY(!(n == *m));
   n = *m;
   n.setSmallestCashFraction(20);
-  CPPUNIT_ASSERT(!(n == *m));
+  QVERIFY(!(n == *m));
   n = *m;
   n.setPartsPerUnit(3);
-  CPPUNIT_ASSERT(!(n == *m));
+  QVERIFY(!(n == *m));
   n = *m;
   n.setValue("Key", "NewValue");
-  CPPUNIT_ASSERT(!(n == *m));
+  QVERIFY(!(n == *m));
 }
 
 void MyMoneySecurityTest::testInequality()
@@ -149,33 +148,33 @@ void MyMoneySecurityTest::testInequality()
   MyMoneySecurity n;
   n = *m;
 
-  CPPUNIT_ASSERT(!(n != *m));
+  QVERIFY(!(n != *m));
   n.setName("NewName");
-  CPPUNIT_ASSERT(n != *m);
+  QVERIFY(n != *m);
   n = *m;
   n.setTradingSymbol("NewSymbol");
-  CPPUNIT_ASSERT(n != *m);
+  QVERIFY(n != *m);
   n = *m;
   n.setTradingMarket("NewMarket");
-  CPPUNIT_ASSERT(n != *m);
+  QVERIFY(n != *m);
   n = *m;
   n.setTradingCurrency("NewCurrency");
-  CPPUNIT_ASSERT(n != *m);
+  QVERIFY(n != *m);
   n = *m;
   n.setSecurityType(MyMoneySecurity::SECURITY_CURRENCY);
-  CPPUNIT_ASSERT(n != *m);
+  QVERIFY(n != *m);
   n = *m;
   n.setSmallestAccountFraction(40);
-  CPPUNIT_ASSERT(n != *m);
+  QVERIFY(n != *m);
   n = *m;
   n.setSmallestCashFraction(20);
-  CPPUNIT_ASSERT(n != *m);
+  QVERIFY(n != *m);
   n = *m;
   n.setPartsPerUnit(3);
-  CPPUNIT_ASSERT(n != *m);
+  QVERIFY(n != *m);
   n = *m;
   n.setValue("Key", "NewValue");
-  CPPUNIT_ASSERT(n != *m);
+  QVERIFY(n != *m);
 }
 
 /*
@@ -186,33 +185,35 @@ void MyMoneySecurityTest::testAccountIDList () {
 
  // list must be empty
  list = institution.accountList();
- CPPUNIT_ASSERT(list.count() == 0);
+ QVERIFY(list.count() == 0);
 
  // add one account
  institution.addAccountId("A000002");
  list = institution.accountList();
- CPPUNIT_ASSERT(list.count() == 1);
- CPPUNIT_ASSERT(list.contains("A000002") == 1);
+ QVERIFY(list.count() == 1);
+ QVERIFY(list.contains("A000002") == 1);
 
  // adding same account shouldn't make a difference
  institution.addAccountId("A000002");
  list = institution.accountList();
- CPPUNIT_ASSERT(list.count() == 1);
- CPPUNIT_ASSERT(list.contains("A000002") == 1);
+ QVERIFY(list.count() == 1);
+ QVERIFY(list.contains("A000002") == 1);
 
  // now add another account
  institution.addAccountId("A000001");
  list = institution.accountList();
- CPPUNIT_ASSERT(list.count() == 2);
- CPPUNIT_ASSERT(list.contains("A000002") == 1);
- CPPUNIT_ASSERT(list.contains("A000001") == 1);
+ QVERIFY(list.count() == 2);
+ QVERIFY(list.contains("A000002") == 1);
+ QVERIFY(list.contains("A000001") == 1);
 
  id = institution.removeAccountId("A000001");
- CPPUNIT_ASSERT(id == "A000001");
+ QVERIFY(id == "A000001");
  list = institution.accountList();
- CPPUNIT_ASSERT(list.count() == 1);
- CPPUNIT_ASSERT(list.contains("A000002") == 1);
+ QVERIFY(list.count() == 1);
+ QVERIFY(list.contains("A000002") == 1);
 
 }
 */
+
+#include "mymoneysecuritytest.moc"
 

@@ -17,28 +17,20 @@
 #ifndef MYMONEYEXCEPTIONTEST_H
 #define MYMONEYEXCEPTIONTEST_H
 
-#include <cppunit/extensions/HelperMacros.h>
+#include <QtCore/QObject>
 
 #define private public
 #include "mymoneyutils.h"
 #include "mymoneyexception.h"
 #undef private
 
-class MyMoneyExceptionTest : public CppUnit::TestFixture
+class MyMoneyExceptionTest : public QObject
 {
-  CPPUNIT_TEST_SUITE(MyMoneyExceptionTest);
-  CPPUNIT_TEST(testDefaultConstructor);
-  CPPUNIT_TEST(testConstructor);
-  CPPUNIT_TEST_SUITE_END();
+  Q_OBJECT
 
-protected:
-public:
-  MyMoneyExceptionTest();
-
-
-  void setUp();
-
-  void tearDown();
+private slots:
+  void init();
+  void cleanup();
 
   void testDefaultConstructor();
 

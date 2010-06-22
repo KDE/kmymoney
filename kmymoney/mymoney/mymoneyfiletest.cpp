@@ -22,18 +22,18 @@
 #include <QFile>
 #include <QDataStream>
 #include <QList>
+#include <QtTest/QtTest>
 
-MyMoneyFileTest:: MyMoneyFileTest() {}
+QTEST_MAIN(MyMoneyFileTest)
 
-
-void MyMoneyFileTest::setUp()
+void MyMoneyFileTest::init()
 {
   storage = new MyMoneySeqAccessMgr;
   m = MyMoneyFile::instance();
   m->attachStorage(storage);
 }
 
-void MyMoneyFileTest::tearDown()
+void MyMoneyFileTest::cleanup()
 {
   m->detachStorage(storage);
   delete storage;
@@ -43,17 +43,17 @@ void MyMoneyFileTest::testEmptyConstructor()
 {
   MyMoneyPayee user = m->user();
 
-  CPPUNIT_ASSERT(user.name().isEmpty());
-  CPPUNIT_ASSERT(user.address().isEmpty());
-  CPPUNIT_ASSERT(user.city().isEmpty());
-  CPPUNIT_ASSERT(user.state().isEmpty());
-  CPPUNIT_ASSERT(user.postcode().isEmpty());
-  CPPUNIT_ASSERT(user.telephone().isEmpty());
-  CPPUNIT_ASSERT(user.email().isEmpty());
+  QVERIFY(user.name().isEmpty());
+  QVERIFY(user.address().isEmpty());
+  QVERIFY(user.city().isEmpty());
+  QVERIFY(user.state().isEmpty());
+  QVERIFY(user.postcode().isEmpty());
+  QVERIFY(user.telephone().isEmpty());
+  QVERIFY(user.email().isEmpty());
 
-  CPPUNIT_ASSERT(m->institutionCount() == 0);
-  CPPUNIT_ASSERT(m->dirty() == false);
-  CPPUNIT_ASSERT(m->accountCount() == 5);
+  QVERIFY(m->institutionCount() == 0);
+  QVERIFY(m->dirty() == false);
+  QVERIFY(m->accountCount() == 5);
 }
 
 void MyMoneyFileTest::testAddOneInstitution()
@@ -75,38 +75,38 @@ void MyMoneyFileTest::testAddOneInstitution()
 
   QString id;
 
-  CPPUNIT_ASSERT(m->institutionCount() == 0);
+  QVERIFY(m->institutionCount() == 0);
   storage->m_dirty = false;
 
   MyMoneyFileTransaction ft;
   try {
     m->addInstitution(institution);
     ft.commit();
-    CPPUNIT_ASSERT(institution.id() == "I000001");
-    CPPUNIT_ASSERT(m->institutionCount() == 1);
-    CPPUNIT_ASSERT(m->dirty() == true);
+    QVERIFY(institution.id() == "I000001");
+    QVERIFY(m->institutionCount() == 1);
+    QVERIFY(m->dirty() == true);
   } catch (MyMoneyException *e) {
-    CPPUNIT_FAIL("Unexpected exception");
+    QFAIL("Unexpected exception");
     delete e;
   }
 
   ft.restart();
   try {
     m->addInstitution(institution_id);
-    CPPUNIT_FAIL("Missing expected exception");
+    QFAIL("Missing expected exception");
   } catch (MyMoneyException *e) {
     ft.commit();
-    CPPUNIT_ASSERT(m->institutionCount() == 1);
+    QVERIFY(m->institutionCount() == 1);
     delete e;
   }
 
   ft.restart();
   try {
     m->addInstitution(institution_noname);
-    CPPUNIT_FAIL("Missing expected exception");
+    QFAIL("Missing expected exception");
   } catch (MyMoneyException *e) {
     ft.commit();
-    CPPUNIT_ASSERT(m->institutionCount() == 1);
+    QVERIFY(m->institutionCount() == 1);
     delete e;
   }
 }
@@ -131,11 +131,11 @@ void MyMoneyFileTest::testAddTwoInstitutions()
     m->addInstitution(institution);
     ft.commit();
 
-    CPPUNIT_ASSERT(institution.id() == "I000002");
-    CPPUNIT_ASSERT(m->institutionCount() == 2);
-    CPPUNIT_ASSERT(m->dirty() == true);
+    QVERIFY(institution.id() == "I000002");
+    QVERIFY(m->institutionCount() == 2);
+    QVERIFY(m->dirty() == true);
   } catch (MyMoneyException *e) {
-    CPPUNIT_FAIL("Unexpected exception");
+    QFAIL("Unexpected exception");
     delete e;
   }
 
@@ -143,16 +143,16 @@ void MyMoneyFileTest::testAddTwoInstitutions()
 
   try {
     institution = m->institution("I000001");
-    CPPUNIT_ASSERT(institution.id() == "I000001");
-    CPPUNIT_ASSERT(m->institutionCount() == 2);
-    CPPUNIT_ASSERT(m->dirty() == false);
+    QVERIFY(institution.id() == "I000001");
+    QVERIFY(m->institutionCount() == 2);
+    QVERIFY(m->dirty() == false);
 
     institution = m->institution("I000002");
-    CPPUNIT_ASSERT(institution.id() == "I000002");
-    CPPUNIT_ASSERT(m->institutionCount() == 2);
-    CPPUNIT_ASSERT(m->dirty() == false);
+    QVERIFY(institution.id() == "I000002");
+    QVERIFY(m->institutionCount() == 2);
+    QVERIFY(m->dirty() == false);
   } catch (MyMoneyException *e) {
-    CPPUNIT_FAIL("Unexpected exception");
+    QFAIL("Unexpected exception");
     delete e;
   }
 }
@@ -163,21 +163,21 @@ void MyMoneyFileTest::testRemoveInstitution()
 
   MyMoneyInstitution i;
 
-  CPPUNIT_ASSERT(m->institutionCount() == 2);
+  QVERIFY(m->institutionCount() == 2);
 
   i = m->institution("I000001");
-  CPPUNIT_ASSERT(i.id() == "I000001");
-  CPPUNIT_ASSERT(i.accountCount() == 0);
+  QVERIFY(i.id() == "I000001");
+  QVERIFY(i.accountCount() == 0);
 
   storage->m_dirty = false;
   MyMoneyFileTransaction ft;
   try {
     m->removeInstitution(i);
     ft.commit();
-    CPPUNIT_ASSERT(m->institutionCount() == 1);
-    CPPUNIT_ASSERT(m->dirty() == true);
+    QVERIFY(m->institutionCount() == 1);
+    QVERIFY(m->dirty() == true);
   } catch (MyMoneyException *e) {
-    CPPUNIT_FAIL("Unexpected exception");
+    QFAIL("Unexpected exception");
     delete e;
   }
 
@@ -185,21 +185,21 @@ void MyMoneyFileTest::testRemoveInstitution()
 
   try {
     m->institution("I000001");
-    CPPUNIT_FAIL("Missing expected exception");
+    QFAIL("Missing expected exception");
   } catch (MyMoneyException *e) {
-    CPPUNIT_ASSERT(m->institutionCount() == 1);
-    CPPUNIT_ASSERT(m->dirty() == false);
+    QVERIFY(m->institutionCount() == 1);
+    QVERIFY(m->dirty() == false);
     delete e;
   }
 
   ft.restart();
   try {
     m->removeInstitution(i);
-    CPPUNIT_FAIL("Missing expected exception");
+    QFAIL("Missing expected exception");
   } catch (MyMoneyException *e) {
     ft.commit();
-    CPPUNIT_ASSERT(m->institutionCount() == 1);
-    CPPUNIT_ASSERT(m->dirty() == false);
+    QVERIFY(m->institutionCount() == 1);
+    QVERIFY(m->dirty() == false);
     delete e;
   }
 }
@@ -213,26 +213,26 @@ void MyMoneyFileTest::testInstitutionRetrieval()
 
   MyMoneyInstitution institution;
 
-  CPPUNIT_ASSERT(m->institutionCount() == 1);
+  QVERIFY(m->institutionCount() == 1);
 
   try {
     institution = m->institution("I000001");
-    CPPUNIT_ASSERT(institution.id() == "I000001");
-    CPPUNIT_ASSERT(m->institutionCount() == 1);
+    QVERIFY(institution.id() == "I000001");
+    QVERIFY(m->institutionCount() == 1);
   } catch (MyMoneyException *e) {
-    CPPUNIT_FAIL("Unexpected exception");
+    QFAIL("Unexpected exception");
     delete e;
   }
 
   try {
     institution = m->institution("I000002");
-    CPPUNIT_FAIL("Missing expected exception");
+    QFAIL("Missing expected exception");
   } catch (MyMoneyException *e) {
-    CPPUNIT_ASSERT(m->institutionCount() == 1);
+    QVERIFY(m->institutionCount() == 1);
     delete e;
   }
 
-  CPPUNIT_ASSERT(m->dirty() == false);
+  QVERIFY(m->dirty() == false);
 }
 
 void MyMoneyFileTest::testInstitutionListRetrieval()
@@ -241,24 +241,24 @@ void MyMoneyFileTest::testInstitutionListRetrieval()
 
   storage->m_dirty = false;
   list = m->institutionList();
-  CPPUNIT_ASSERT(m->dirty() == false);
-  CPPUNIT_ASSERT(list.count() == 0);
+  QVERIFY(m->dirty() == false);
+  QVERIFY(list.count() == 0);
 
   testAddTwoInstitutions();
 
   storage->m_dirty = false;
   list = m->institutionList();
-  CPPUNIT_ASSERT(m->dirty() == false);
-  CPPUNIT_ASSERT(list.count() == 2);
+  QVERIFY(m->dirty() == false);
+  QVERIFY(list.count() == 2);
 
   QList<MyMoneyInstitution>::ConstIterator it;
   it = list.constBegin();
 
-  CPPUNIT_ASSERT((*it).name() == "institution1");
+  QVERIFY((*it).name() == "institution1");
   ++it;
-  CPPUNIT_ASSERT((*it).name() == "institution2");
+  QVERIFY((*it).name() == "institution2");
   ++it;
-  CPPUNIT_ASSERT(it == list.constEnd());
+  QVERIFY(it == list.constEnd());
 }
 
 void MyMoneyFileTest::testInstitutionModify()
@@ -281,25 +281,25 @@ void MyMoneyFileTest::testInstitutionModify()
   try {
     m->modifyInstitution(institution);
     ft.commit();
-    CPPUNIT_ASSERT(institution.id() == "I000001");
-    CPPUNIT_ASSERT(m->institutionCount() == 2);
-    CPPUNIT_ASSERT(m->dirty() == true);
+    QVERIFY(institution.id() == "I000001");
+    QVERIFY(m->institutionCount() == 2);
+    QVERIFY(m->dirty() == true);
   } catch (MyMoneyException *e) {
     delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    QFAIL("Unexpected exception");
   }
 
   MyMoneyInstitution newInstitution;
   newInstitution = m->institution("I000001");
 
-  CPPUNIT_ASSERT(newInstitution.id() == "I000001");
-  CPPUNIT_ASSERT(newInstitution.street() == "new street");
-  CPPUNIT_ASSERT(newInstitution.town() == "new town");
-  CPPUNIT_ASSERT(newInstitution.postcode() == "new postcode");
-  CPPUNIT_ASSERT(newInstitution.telephone() == "new telephone");
-  CPPUNIT_ASSERT(newInstitution.manager() == "new manager");
-  CPPUNIT_ASSERT(newInstitution.name() == "new name");
-  CPPUNIT_ASSERT(newInstitution.sortcode() == "new sortcode");
+  QVERIFY(newInstitution.id() == "I000001");
+  QVERIFY(newInstitution.street() == "new street");
+  QVERIFY(newInstitution.town() == "new town");
+  QVERIFY(newInstitution.postcode() == "new postcode");
+  QVERIFY(newInstitution.telephone() == "new telephone");
+  QVERIFY(newInstitution.manager() == "new manager");
+  QVERIFY(newInstitution.name() == "new name");
+  QVERIFY(newInstitution.sortcode() == "new sortcode");
 
   storage->m_dirty = false;
 
@@ -307,13 +307,13 @@ void MyMoneyFileTest::testInstitutionModify()
   MyMoneyInstitution failInstitution2("I000003", newInstitution);
   try {
     m->modifyInstitution(failInstitution2);
-    CPPUNIT_FAIL("Exception expected");
+    QFAIL("Exception expected");
   } catch (MyMoneyException *e) {
     ft.commit();
     delete e;
-    CPPUNIT_ASSERT(failInstitution2.id() == "I000003");
-    CPPUNIT_ASSERT(m->institutionCount() == 2);
-    CPPUNIT_ASSERT(m->dirty() == false);
+    QVERIFY(failInstitution2.id() == "I000003");
+    QVERIFY(m->institutionCount() == 2);
+    QVERIFY(m->dirty() == false);
   }
 }
 
@@ -321,54 +321,54 @@ void MyMoneyFileTest::testSetFunctions()
 {
   MyMoneyPayee user = m->user();
 
-  CPPUNIT_ASSERT(user.name().isEmpty());
-  CPPUNIT_ASSERT(user.address().isEmpty());
-  CPPUNIT_ASSERT(user.city().isEmpty());
-  CPPUNIT_ASSERT(user.state().isEmpty());
-  CPPUNIT_ASSERT(user.postcode().isEmpty());
-  CPPUNIT_ASSERT(user.telephone().isEmpty());
-  CPPUNIT_ASSERT(user.email().isEmpty());
+  QVERIFY(user.name().isEmpty());
+  QVERIFY(user.address().isEmpty());
+  QVERIFY(user.city().isEmpty());
+  QVERIFY(user.state().isEmpty());
+  QVERIFY(user.postcode().isEmpty());
+  QVERIFY(user.telephone().isEmpty());
+  QVERIFY(user.email().isEmpty());
 
   MyMoneyFileTransaction ft;
   storage->m_dirty = false;
   user.setName("Name");
   m->setUser(user);
-  CPPUNIT_ASSERT(m->dirty() == true);
+  QVERIFY(m->dirty() == true);
   storage->m_dirty = false;
   user.setAddress("Street");
   m->setUser(user);
-  CPPUNIT_ASSERT(m->dirty() == true);
+  QVERIFY(m->dirty() == true);
   storage->m_dirty = false;
   user.setCity("Town");
   m->setUser(user);
-  CPPUNIT_ASSERT(m->dirty() == true);
+  QVERIFY(m->dirty() == true);
   storage->m_dirty = false;
   user.setState("County");
   m->setUser(user);
-  CPPUNIT_ASSERT(m->dirty() == true);
+  QVERIFY(m->dirty() == true);
   storage->m_dirty = false;
   user.setPostcode("Postcode");
   m->setUser(user);
-  CPPUNIT_ASSERT(m->dirty() == true);
+  QVERIFY(m->dirty() == true);
   storage->m_dirty = false;
   user.setTelephone("Telephone");
   m->setUser(user);
-  CPPUNIT_ASSERT(m->dirty() == true);
+  QVERIFY(m->dirty() == true);
   storage->m_dirty = false;
   user.setEmail("Email");
   m->setUser(user);
-  CPPUNIT_ASSERT(m->dirty() == true);
+  QVERIFY(m->dirty() == true);
   storage->m_dirty = false;
 
   ft.commit();
   user = m->user();
-  CPPUNIT_ASSERT(user.name() == "Name");
-  CPPUNIT_ASSERT(user.address() == "Street");
-  CPPUNIT_ASSERT(user.city() == "Town");
-  CPPUNIT_ASSERT(user.state() == "County");
-  CPPUNIT_ASSERT(user.postcode() == "Postcode");
-  CPPUNIT_ASSERT(user.telephone() == "Telephone");
-  CPPUNIT_ASSERT(user.email() == "Email");
+  QVERIFY(user.name() == "Name");
+  QVERIFY(user.address() == "Street");
+  QVERIFY(user.city() == "Town");
+  QVERIFY(user.state() == "County");
+  QVERIFY(user.postcode() == "Postcode");
+  QVERIFY(user.telephone() == "Telephone");
+  QVERIFY(user.email() == "Email");
 }
 
 void MyMoneyFileTest::testAddAccounts()
@@ -382,10 +382,10 @@ void MyMoneyFileTest::testAddAccounts()
 
   storage->m_dirty = false;
 
-  CPPUNIT_ASSERT(m->accountCount() == 5);
+  QVERIFY(m->accountCount() == 5);
 
   institution = m->institution("I000001");
-  CPPUNIT_ASSERT(institution.id() == "I000001");
+  QVERIFY(institution.id() == "I000001");
 
   a.setName("Account1");
   a.setInstitutionId(institution.id());
@@ -395,21 +395,21 @@ void MyMoneyFileTest::testAddAccounts()
     MyMoneyAccount parent = m->asset();
     m->addAccount(a, parent);
     ft.commit();
-    CPPUNIT_ASSERT(m->accountCount() == 6);
-    CPPUNIT_ASSERT(a.parentAccountId() == "AStd::Asset");
-    CPPUNIT_ASSERT(a.id() == "A000001");
-    CPPUNIT_ASSERT(a.institutionId() == "I000001");
-    CPPUNIT_ASSERT(m->dirty() == true);
-    CPPUNIT_ASSERT(m->asset().accountList().count() == 1);
-    CPPUNIT_ASSERT(m->asset().accountList()[0] == "A000001");
+    QVERIFY(m->accountCount() == 6);
+    QVERIFY(a.parentAccountId() == "AStd::Asset");
+    QVERIFY(a.id() == "A000001");
+    QVERIFY(a.institutionId() == "I000001");
+    QVERIFY(m->dirty() == true);
+    QVERIFY(m->asset().accountList().count() == 1);
+    QVERIFY(m->asset().accountList()[0] == "A000001");
 
     institution = m->institution("I000001");
-    CPPUNIT_ASSERT(institution.accountCount() == 1);
-    CPPUNIT_ASSERT(institution.accountList()[0] == "A000001");
+    QVERIFY(institution.accountCount() == 1);
+    QVERIFY(institution.accountList()[0] == "A000001");
 
   } catch (MyMoneyException *e) {
     delete e;
-    CPPUNIT_FAIL("Unexpected exception!");
+    QFAIL("Unexpected exception!");
   }
 
   // try to add this account again, should not work
@@ -417,7 +417,7 @@ void MyMoneyFileTest::testAddAccounts()
   try {
     MyMoneyAccount parent = m->asset();
     m->addAccount(a, parent);
-    CPPUNIT_FAIL("Expecting exception!");
+    QFAIL("Expecting exception!");
   } catch (MyMoneyException *e) {
     ft.commit();
     delete e;
@@ -427,18 +427,18 @@ void MyMoneyFileTest::testAddAccounts()
   // reload it from the file
   a.setName("AccountX");
   a = m->account("A000001");
-  CPPUNIT_ASSERT(a.name() == "Account1");
+  QVERIFY(a.name() == "Account1");
 
   storage->m_dirty = false;
 
   // check if we can get the same info to a different object
   c = m->account("A000001");
-  CPPUNIT_ASSERT(c.accountType() == MyMoneyAccount::Checkings);
-  CPPUNIT_ASSERT(c.id() == "A000001");
-  CPPUNIT_ASSERT(c.name() == "Account1");
-  CPPUNIT_ASSERT(c.institutionId() == "I000001");
+  QVERIFY(c.accountType() == MyMoneyAccount::Checkings);
+  QVERIFY(c.id() == "A000001");
+  QVERIFY(c.name() == "Account1");
+  QVERIFY(c.institutionId() == "I000001");
 
-  CPPUNIT_ASSERT(m->dirty() == false);
+  QVERIFY(m->dirty() == false);
 
   // add a second account
   institution = m->institution("I000002");
@@ -449,35 +449,35 @@ void MyMoneyFileTest::testAddAccounts()
     MyMoneyAccount parent = m->asset();
     m->addAccount(b, parent);
     ft.commit();
-    CPPUNIT_ASSERT(m->dirty() == true);
-    CPPUNIT_ASSERT(b.id() == "A000002");
-    CPPUNIT_ASSERT(b.parentAccountId() == "AStd::Asset");
-    CPPUNIT_ASSERT(m->accountCount() == 7);
+    QVERIFY(m->dirty() == true);
+    QVERIFY(b.id() == "A000002");
+    QVERIFY(b.parentAccountId() == "AStd::Asset");
+    QVERIFY(m->accountCount() == 7);
 
     institution = m->institution("I000001");
-    CPPUNIT_ASSERT(institution.accountCount() == 1);
-    CPPUNIT_ASSERT(institution.accountList()[0] == "A000001");
+    QVERIFY(institution.accountCount() == 1);
+    QVERIFY(institution.accountList()[0] == "A000001");
 
     institution = m->institution("I000002");
-    CPPUNIT_ASSERT(institution.accountCount() == 1);
-    CPPUNIT_ASSERT(institution.accountList()[0] == "A000002");
+    QVERIFY(institution.accountCount() == 1);
+    QVERIFY(institution.accountList()[0] == "A000002");
 
-    CPPUNIT_ASSERT(m->asset().accountList().count() == 2);
-    CPPUNIT_ASSERT(m->asset().accountList()[0] == "A000001");
-    CPPUNIT_ASSERT(m->asset().accountList()[1] == "A000002");
+    QVERIFY(m->asset().accountList().count() == 2);
+    QVERIFY(m->asset().accountList()[0] == "A000001");
+    QVERIFY(m->asset().accountList()[1] == "A000002");
 
   } catch (MyMoneyException *e) {
     delete e;
-    CPPUNIT_FAIL("Unexpected exception!");
+    QFAIL("Unexpected exception!");
   }
 
   MyMoneyAccount p;
 
   p = m->account("A000002");
-  CPPUNIT_ASSERT(p.accountType() == MyMoneyAccount::Checkings);
-  CPPUNIT_ASSERT(p.id() == "A000002");
-  CPPUNIT_ASSERT(p.name() == "Account2");
-  CPPUNIT_ASSERT(p.institutionId() == "I000002");
+  QVERIFY(p.accountType() == MyMoneyAccount::Checkings);
+  QVERIFY(p.id() == "A000002");
+  QVERIFY(p.name() == "Account2");
+  QVERIFY(p.institutionId() == "I000002");
 }
 
 void MyMoneyFileTest::testModifyAccount()
@@ -488,8 +488,8 @@ void MyMoneyFileTest::testModifyAccount()
   MyMoneyAccount p = m->account("A000001");
   MyMoneyInstitution institution;
 
-  CPPUNIT_ASSERT(p.accountType() == MyMoneyAccount::Checkings);
-  CPPUNIT_ASSERT(p.name() == "Account1");
+  QVERIFY(p.accountType() == MyMoneyAccount::Checkings);
+  QVERIFY(p.name() == "Account1");
 
   p.setName("New account name");
   MyMoneyFileTransaction ft;
@@ -497,14 +497,14 @@ void MyMoneyFileTest::testModifyAccount()
     m->modifyAccount(p);
     ft.commit();
 
-    CPPUNIT_ASSERT(m->dirty() == true);
-    CPPUNIT_ASSERT(m->accountCount() == 7);
-    CPPUNIT_ASSERT(p.accountType() == MyMoneyAccount::Checkings);
-    CPPUNIT_ASSERT(p.name() == "New account name");
+    QVERIFY(m->dirty() == true);
+    QVERIFY(m->accountCount() == 7);
+    QVERIFY(p.accountType() == MyMoneyAccount::Checkings);
+    QVERIFY(p.name() == "New account name");
 
   } catch (MyMoneyException *e) {
     delete e;
-    CPPUNIT_FAIL("Unexpected exception!");
+    QFAIL("Unexpected exception!");
   }
   storage->m_dirty = false;
 
@@ -515,23 +515,23 @@ void MyMoneyFileTest::testModifyAccount()
     m->modifyAccount(p);
     ft.commit();
 
-    CPPUNIT_ASSERT(m->dirty() == true);
-    CPPUNIT_ASSERT(m->accountCount() == 7);
-    CPPUNIT_ASSERT(p.accountType() == MyMoneyAccount::Checkings);
-    CPPUNIT_ASSERT(p.name() == "New account name");
-    CPPUNIT_ASSERT(p.institutionId() == "I000002");
+    QVERIFY(m->dirty() == true);
+    QVERIFY(m->accountCount() == 7);
+    QVERIFY(p.accountType() == MyMoneyAccount::Checkings);
+    QVERIFY(p.name() == "New account name");
+    QVERIFY(p.institutionId() == "I000002");
 
     institution = m->institution("I000001");
-    CPPUNIT_ASSERT(institution.accountCount() == 0);
+    QVERIFY(institution.accountCount() == 0);
 
     institution = m->institution("I000002");
-    CPPUNIT_ASSERT(institution.accountCount() == 2);
-    CPPUNIT_ASSERT(institution.accountList()[0] == "A000002");
-    CPPUNIT_ASSERT(institution.accountList()[1] == "A000001");
+    QVERIFY(institution.accountCount() == 2);
+    QVERIFY(institution.accountList()[0] == "A000002");
+    QVERIFY(institution.accountList()[1] == "A000001");
 
   } catch (MyMoneyException *e) {
     delete e;
-    CPPUNIT_FAIL("Unexpected exception!");
+    QFAIL("Unexpected exception!");
   }
   storage->m_dirty = false;
 
@@ -542,14 +542,14 @@ void MyMoneyFileTest::testModifyAccount()
     m->modifyAccount(p);
     ft.commit();
 
-    CPPUNIT_ASSERT(m->dirty() == true);
-    CPPUNIT_ASSERT(m->accountCount() == 7);
-    CPPUNIT_ASSERT(p.accountType() == MyMoneyAccount::Savings);
-    CPPUNIT_ASSERT(p.name() == "New account name");
+    QVERIFY(m->dirty() == true);
+    QVERIFY(m->accountCount() == 7);
+    QVERIFY(p.accountType() == MyMoneyAccount::Savings);
+    QVERIFY(p.name() == "New account name");
 
   } catch (MyMoneyException *e) {
     delete e;
-    CPPUNIT_FAIL("Unexpected exception!");
+    QFAIL("Unexpected exception!");
   }
   storage->m_dirty = false;
 
@@ -558,7 +558,7 @@ void MyMoneyFileTest::testModifyAccount()
   ft.restart();
   try {
     m->modifyAccount(p);
-    CPPUNIT_FAIL("Expecting exception!");
+    QFAIL("Expecting exception!");
   } catch (MyMoneyException *e) {
     ft.commit();
     delete e;
@@ -570,7 +570,7 @@ void MyMoneyFileTest::testModifyAccount()
   ft.restart();
   try {
     m->modifyAccount(p);
-    CPPUNIT_FAIL("Expecting exception!");
+    QFAIL("Expecting exception!");
   } catch (MyMoneyException *e) {
     ft.commit();
     delete e;
@@ -589,23 +589,23 @@ void MyMoneyFileTest::testReparentAccount()
   // make A000001 a child of A000002
   MyMoneyFileTransaction ft;
   try {
-    CPPUNIT_ASSERT(p.parentAccountId() != q.id());
-    CPPUNIT_ASSERT(o.accountCount() == 2);
-    CPPUNIT_ASSERT(q.accountCount() == 0);
+    QVERIFY(p.parentAccountId() != q.id());
+    QVERIFY(o.accountCount() == 2);
+    QVERIFY(q.accountCount() == 0);
     m->reparentAccount(p, q);
     ft.commit();
-    CPPUNIT_ASSERT(m->dirty() == true);
-    CPPUNIT_ASSERT(p.parentAccountId() == q.id());
-    CPPUNIT_ASSERT(q.accountCount() == 1);
-    CPPUNIT_ASSERT(q.id() == "A000002");
-    CPPUNIT_ASSERT(p.id() == "A000001");
-    CPPUNIT_ASSERT(q.accountList()[0] == p.id());
+    QVERIFY(m->dirty() == true);
+    QVERIFY(p.parentAccountId() == q.id());
+    QVERIFY(q.accountCount() == 1);
+    QVERIFY(q.id() == "A000002");
+    QVERIFY(p.id() == "A000001");
+    QVERIFY(q.accountList()[0] == p.id());
 
     o = m->account(o.id());
-    CPPUNIT_ASSERT(o.accountCount() == 1);
+    QVERIFY(o.accountCount() == 1);
   } catch (MyMoneyException *e) {
     delete e;
-    CPPUNIT_FAIL("Unexpected exception!");
+    QFAIL("Unexpected exception!");
   }
 }
 
@@ -616,7 +616,7 @@ void MyMoneyFileTest::testRemoveStdAccount(const MyMoneyAccount& acc)
   MyMoneyFileTransaction ft;
   try {
     m->removeAccount(acc);
-    CPPUNIT_FAIL(qPrintable(txt));
+    QFAIL(qPrintable(txt));
   } catch (MyMoneyException *e) {
     ft.commit();
     delete e;
@@ -628,7 +628,7 @@ void MyMoneyFileTest::testRemoveAccount()
   MyMoneyInstitution institution;
 
   testAddAccounts();
-  CPPUNIT_ASSERT(m->accountCount() == 7);
+  QVERIFY(m->accountCount() == 7);
   storage->m_dirty = false;
 
   QString id;
@@ -638,7 +638,7 @@ void MyMoneyFileTest::testRemoveAccount()
   try {
     MyMoneyAccount q("Ainvalid", p);
     m->removeAccount(q);
-    CPPUNIT_FAIL("Exception expected!");
+    QFAIL("Exception expected!");
   } catch (MyMoneyException *e) {
     ft.commit();
     delete e;
@@ -648,18 +648,18 @@ void MyMoneyFileTest::testRemoveAccount()
   try {
     m->removeAccount(p);
     ft.commit();
-    CPPUNIT_ASSERT(m->dirty() == true);
-    CPPUNIT_ASSERT(m->accountCount() == 6);
+    QVERIFY(m->dirty() == true);
+    QVERIFY(m->accountCount() == 6);
     institution = m->institution("I000001");
-    CPPUNIT_ASSERT(institution.accountCount() == 0);
-    CPPUNIT_ASSERT(m->asset().accountList().count() == 1);
+    QVERIFY(institution.accountCount() == 0);
+    QVERIFY(m->asset().accountList().count() == 1);
 
     institution = m->institution("I000002");
-    CPPUNIT_ASSERT(institution.accountCount() == 1);
+    QVERIFY(institution.accountCount() == 1);
 
   } catch (MyMoneyException *e) {
     delete e;
-    CPPUNIT_FAIL("Unexpected exception!");
+    QFAIL("Unexpected exception!");
   }
 
   // Check that the standard account-groups cannot be removed
@@ -681,14 +681,14 @@ void MyMoneyFileTest::testRemoveAccountTree()
     ft.commit();
   } catch (MyMoneyException *e) {
     delete e;
-    CPPUNIT_FAIL("Unexpected exception!");
+    QFAIL("Unexpected exception!");
   }
-  CPPUNIT_ASSERT(m->accountCount() == 6);
+  QVERIFY(m->accountCount() == 6);
 
   // make sure it's gone
   try {
     m->account("A000002");
-    CPPUNIT_FAIL("Exception expected!");
+    QFAIL("Exception expected!");
   } catch (MyMoneyException *e) {
     delete e;
   }
@@ -696,10 +696,10 @@ void MyMoneyFileTest::testRemoveAccountTree()
   // make sure that children are re-parented to parent account
   try {
     a = m->account("A000001");
-    CPPUNIT_ASSERT(a.parentAccountId() == m->asset().id());
+    QVERIFY(a.parentAccountId() == m->asset().id());
   } catch (MyMoneyException *e) {
     delete e;
-    CPPUNIT_FAIL("Unexpected exception!");
+    QFAIL("Unexpected exception!");
   }
 
 }
@@ -710,19 +710,19 @@ void MyMoneyFileTest::testAccountListRetrieval()
 
   storage->m_dirty = false;
   m->accountList(list);
-  CPPUNIT_ASSERT(m->dirty() == false);
-  CPPUNIT_ASSERT(list.count() == 0);
+  QVERIFY(m->dirty() == false);
+  QVERIFY(list.count() == 0);
 
   testAddAccounts();
 
   storage->m_dirty = false;
   list.clear();
   m->accountList(list);
-  CPPUNIT_ASSERT(m->dirty() == false);
-  CPPUNIT_ASSERT(list.count() == 2);
+  QVERIFY(m->dirty() == false);
+  QVERIFY(list.count() == 2);
 
-  CPPUNIT_ASSERT(list[0].accountType() == MyMoneyAccount::Checkings);
-  CPPUNIT_ASSERT(list[1].accountType() == MyMoneyAccount::Checkings);
+  QVERIFY(list[0].accountType() == MyMoneyAccount::Checkings);
+  QVERIFY(list[1].accountType() == MyMoneyAccount::Checkings);
 }
 
 void MyMoneyFileTest::testAddTransaction()
@@ -745,7 +745,7 @@ void MyMoneyFileTest::testAddTransaction()
     ft.commit();
   } catch (MyMoneyException *e) {
     delete e;
-    CPPUNIT_FAIL("Unexpected exception!");
+    QFAIL("Unexpected exception!");
   }
 
   // fake the last modified flag to check that the
@@ -758,13 +758,13 @@ void MyMoneyFileTest::testAddTransaction()
     ft.commit();
   } catch (MyMoneyException *e) {
     delete e;
-    CPPUNIT_FAIL("Unexpected exception!");
+    QFAIL("Unexpected exception!");
   }
   ft.restart();
 
-  CPPUNIT_ASSERT(m->accountCount() == 9);
+  QVERIFY(m->accountCount() == 9);
   a = m->account("A000001");
-  CPPUNIT_ASSERT(a.lastModified() == QDate(1, 2, 3));
+  QVERIFY(a.lastModified() == QDate(1, 2, 3));
 
   // construct a transaction and add it to the pool
   t.setPostDate(QDate(2002, 2, 1));
@@ -784,7 +784,7 @@ void MyMoneyFileTest::testAddTransaction()
     t.addSplit(split2);
   } catch (MyMoneyException *e) {
     delete e;
-    CPPUNIT_FAIL("Unexpected exception!");
+    QFAIL("Unexpected exception!");
   }
 
   /*
@@ -804,23 +804,23 @@ void MyMoneyFileTest::testAddTransaction()
     ft.commit();
   } catch (MyMoneyException *e) {
     delete e;
-    CPPUNIT_FAIL("Unexpected exception!");
+    QFAIL("Unexpected exception!");
   }
   ft.restart();
 
-  CPPUNIT_ASSERT(t.id() == "T000000000000000001");
-  CPPUNIT_ASSERT(t.postDate() == QDate(2002, 2, 1));
-  CPPUNIT_ASSERT(t.entryDate() == QDate::currentDate());
-  CPPUNIT_ASSERT(m->dirty() == true);
+  QVERIFY(t.id() == "T000000000000000001");
+  QVERIFY(t.postDate() == QDate(2002, 2, 1));
+  QVERIFY(t.entryDate() == QDate::currentDate());
+  QVERIFY(m->dirty() == true);
 
   // check the balance of the accounts
   a = m->account("A000001");
-  CPPUNIT_ASSERT(a.lastModified() == QDate::currentDate());
-  CPPUNIT_ASSERT(a.balance() == MyMoneyMoney(-1000));
+  QVERIFY(a.lastModified() == QDate::currentDate());
+  QVERIFY(a.balance() == MyMoneyMoney(-1000));
 
   MyMoneyAccount b = m->account("A000003");
-  CPPUNIT_ASSERT(b.lastModified() == QDate::currentDate());
-  CPPUNIT_ASSERT(b.balance() == MyMoneyMoney(1000));
+  QVERIFY(b.lastModified() == QDate::currentDate());
+  QVERIFY(b.balance() == MyMoneyMoney(1000));
 
   storage->m_dirty = false;
 
@@ -828,57 +828,57 @@ void MyMoneyFileTest::testAddTransaction()
 
   try {
     p = m->transaction("T000000000000000001");
-    CPPUNIT_ASSERT(p.splitCount() == 2);
-    CPPUNIT_ASSERT(p.memo() == "Memotext");
-    CPPUNIT_ASSERT(p.splits()[0].accountId() == "A000001");
-    CPPUNIT_ASSERT(p.splits()[1].accountId() == "A000003");
+    QVERIFY(p.splitCount() == 2);
+    QVERIFY(p.memo() == "Memotext");
+    QVERIFY(p.splits()[0].accountId() == "A000001");
+    QVERIFY(p.splits()[1].accountId() == "A000003");
   } catch (MyMoneyException *e) {
     delete e;
-    CPPUNIT_FAIL("Unexpected exception!");
+    QFAIL("Unexpected exception!");
   }
 
   // check if it's in the account(s) as well
 
   try {
     p = m->transaction("A000001", 0);
-    CPPUNIT_ASSERT(p.id() == "T000000000000000001");
-    CPPUNIT_ASSERT(p.splitCount() == 2);
-    CPPUNIT_ASSERT(p.memo() == "Memotext");
-    CPPUNIT_ASSERT(p.splits()[0].accountId() == "A000001");
-    CPPUNIT_ASSERT(p.splits()[1].accountId() == "A000003");
+    QVERIFY(p.id() == "T000000000000000001");
+    QVERIFY(p.splitCount() == 2);
+    QVERIFY(p.memo() == "Memotext");
+    QVERIFY(p.splits()[0].accountId() == "A000001");
+    QVERIFY(p.splits()[1].accountId() == "A000003");
   } catch (MyMoneyException *e) {
     delete e;
-    CPPUNIT_FAIL("Unexpected exception!");
+    QFAIL("Unexpected exception!");
   }
 
   try {
     p = m->transaction("A000003", 0);
-    CPPUNIT_ASSERT(p.id() == "T000000000000000001");
-    CPPUNIT_ASSERT(p.splitCount() == 2);
-    CPPUNIT_ASSERT(p.memo() == "Memotext");
-    CPPUNIT_ASSERT(p.splits()[0].accountId() == "A000001");
-    CPPUNIT_ASSERT(p.splits()[1].accountId() == "A000003");
+    QVERIFY(p.id() == "T000000000000000001");
+    QVERIFY(p.splitCount() == 2);
+    QVERIFY(p.memo() == "Memotext");
+    QVERIFY(p.splits()[0].accountId() == "A000001");
+    QVERIFY(p.splits()[1].accountId() == "A000003");
   } catch (MyMoneyException *e) {
     delete e;
-    CPPUNIT_FAIL("Unexpected exception!");
+    QFAIL("Unexpected exception!");
   }
 }
 
 void MyMoneyFileTest::testIsStandardAccount()
 {
-  CPPUNIT_ASSERT(m->isStandardAccount(m->liability().id()) == true);
-  CPPUNIT_ASSERT(m->isStandardAccount(m->asset().id()) == true);
-  CPPUNIT_ASSERT(m->isStandardAccount(m->expense().id()) == true);
-  CPPUNIT_ASSERT(m->isStandardAccount(m->income().id()) == true);
-  CPPUNIT_ASSERT(m->isStandardAccount("A00001") == false);
+  QVERIFY(m->isStandardAccount(m->liability().id()) == true);
+  QVERIFY(m->isStandardAccount(m->asset().id()) == true);
+  QVERIFY(m->isStandardAccount(m->expense().id()) == true);
+  QVERIFY(m->isStandardAccount(m->income().id()) == true);
+  QVERIFY(m->isStandardAccount("A00001") == false);
 }
 
 void MyMoneyFileTest::testHasActiveSplits()
 {
   testAddTransaction();
 
-  CPPUNIT_ASSERT(m->hasActiveSplits("A000001") == true);
-  CPPUNIT_ASSERT(m->hasActiveSplits("A000002") == false);
+  QVERIFY(m->hasActiveSplits("A000001") == true);
+  QVERIFY(m->hasActiveSplits("A000002") == false);
 }
 
 void MyMoneyFileTest::testModifyTransactionSimple()
@@ -896,12 +896,12 @@ void MyMoneyFileTest::testModifyTransactionSimple()
     m->modifyTransaction(t);
     ft.commit();
     t = m->transaction("T000000000000000001");
-    CPPUNIT_ASSERT(t.memo() == "New Memotext");
-    CPPUNIT_ASSERT(m->dirty() == true);
+    QVERIFY(t.memo() == "New Memotext");
+    QVERIFY(m->dirty() == true);
 
   } catch (MyMoneyException *e) {
     delete e;
-    CPPUNIT_FAIL("Unexpected exception!");
+    QFAIL("Unexpected exception!");
   }
 }
 
@@ -920,14 +920,14 @@ void MyMoneyFileTest::testModifyTransactionNewPostDate()
     m->modifyTransaction(t);
     ft.commit();
     t = m->transaction("T000000000000000001");
-    CPPUNIT_ASSERT(t.postDate() == QDate(2004, 2, 1));
+    QVERIFY(t.postDate() == QDate(2004, 2, 1));
     t = m->transaction("A000001", 0);
-    CPPUNIT_ASSERT(t.id() == "T000000000000000001");
-    CPPUNIT_ASSERT(m->dirty() == true);
+    QVERIFY(t.id() == "T000000000000000001");
+    QVERIFY(m->dirty() == true);
 
   } catch (MyMoneyException *e) {
     delete e;
-    CPPUNIT_FAIL("Unexpected exception!");
+    QFAIL("Unexpected exception!");
   }
 }
 
@@ -947,35 +947,35 @@ void MyMoneyFileTest::testModifyTransactionNewAccount()
   MyMoneyFileTransaction ft;
   try {
     /* removed with MyMoneyAccount::Transaction
-                    CPPUNIT_ASSERT(m->account("A000001").transactionCount() == 1);
-                    CPPUNIT_ASSERT(m->account("A000002").transactionCount() == 0);
-                    CPPUNIT_ASSERT(m->account("A000003").transactionCount() == 1);
+                    QVERIFY(m->account("A000001").transactionCount() == 1);
+                    QVERIFY(m->account("A000002").transactionCount() == 0);
+                    QVERIFY(m->account("A000003").transactionCount() == 1);
     */
     MyMoneyTransactionFilter f1("A000001");
     MyMoneyTransactionFilter f2("A000002");
     MyMoneyTransactionFilter f3("A000003");
-    CPPUNIT_ASSERT(m->transactionList(f1).count() == 1);
-    CPPUNIT_ASSERT(m->transactionList(f2).count() == 0);
-    CPPUNIT_ASSERT(m->transactionList(f3).count() == 1);
+    QVERIFY(m->transactionList(f1).count() == 1);
+    QVERIFY(m->transactionList(f2).count() == 0);
+    QVERIFY(m->transactionList(f3).count() == 1);
 
     m->modifyTransaction(t);
     ft.commit();
     t = m->transaction("T000000000000000001");
-    CPPUNIT_ASSERT(t.postDate() == QDate(2002, 2, 1));
+    QVERIFY(t.postDate() == QDate(2002, 2, 1));
     t = m->transaction("A000002", 0);
-    CPPUNIT_ASSERT(m->dirty() == true);
+    QVERIFY(m->dirty() == true);
     /* removed with MyMoneyAccount::Transaction
-                    CPPUNIT_ASSERT(m->account("A000001").transactionCount() == 0);
-                    CPPUNIT_ASSERT(m->account("A000002").transactionCount() == 1);
-                    CPPUNIT_ASSERT(m->account("A000003").transactionCount() == 1);
+                    QVERIFY(m->account("A000001").transactionCount() == 0);
+                    QVERIFY(m->account("A000002").transactionCount() == 1);
+                    QVERIFY(m->account("A000003").transactionCount() == 1);
     */
-    CPPUNIT_ASSERT(m->transactionList(f1).count() == 0);
-    CPPUNIT_ASSERT(m->transactionList(f2).count() == 1);
-    CPPUNIT_ASSERT(m->transactionList(f3).count() == 1);
+    QVERIFY(m->transactionList(f1).count() == 0);
+    QVERIFY(m->transactionList(f2).count() == 1);
+    QVERIFY(m->transactionList(f3).count() == 1);
 
   } catch (MyMoneyException *e) {
     delete e;
-    CPPUNIT_FAIL("Unexpected exception!");
+    QFAIL("Unexpected exception!");
   }
 }
 
@@ -991,23 +991,23 @@ void MyMoneyFileTest::testRemoveTransaction()
   try {
     m->removeTransaction(t);
     ft.commit();
-    CPPUNIT_ASSERT(m->dirty() == true);
-    CPPUNIT_ASSERT(m->transactionCount() == 0);
+    QVERIFY(m->dirty() == true);
+    QVERIFY(m->transactionCount() == 0);
     /* removed with MyMoneyAccount::Transaction
-                    CPPUNIT_ASSERT(m->account("A000001").transactionCount() == 0);
-                    CPPUNIT_ASSERT(m->account("A000002").transactionCount() == 0);
-                    CPPUNIT_ASSERT(m->account("A000003").transactionCount() == 0);
+                    QVERIFY(m->account("A000001").transactionCount() == 0);
+                    QVERIFY(m->account("A000002").transactionCount() == 0);
+                    QVERIFY(m->account("A000003").transactionCount() == 0);
     */
     MyMoneyTransactionFilter f1("A000001");
     MyMoneyTransactionFilter f2("A000002");
     MyMoneyTransactionFilter f3("A000003");
-    CPPUNIT_ASSERT(m->transactionList(f1).count() == 0);
-    CPPUNIT_ASSERT(m->transactionList(f2).count() == 0);
-    CPPUNIT_ASSERT(m->transactionList(f3).count() == 0);
+    QVERIFY(m->transactionList(f1).count() == 0);
+    QVERIFY(m->transactionList(f2).count() == 0);
+    QVERIFY(m->transactionList(f3).count() == 0);
 
   } catch (MyMoneyException *e) {
     delete e;
-    CPPUNIT_FAIL("Unexpected exception!");
+    QFAIL("Unexpected exception!");
   }
 }
 
@@ -1020,18 +1020,18 @@ void MyMoneyFileTest::testRemoveTransaction()
 void testMoveSplits() {
         testModifyTransactionNewPostDate();
 
-        CPPUNIT_ASSERT(m->account("A000001").transactionCount() == 1);
-        CPPUNIT_ASSERT(m->account("A000002").transactionCount() == 0);
-        CPPUNIT_ASSERT(m->account("A000003").transactionCount() == 1);
+        QVERIFY(m->account("A000001").transactionCount() == 1);
+        QVERIFY(m->account("A000002").transactionCount() == 0);
+        QVERIFY(m->account("A000003").transactionCount() == 1);
 
         try {
                 m->moveSplits("A000001", "A000002");
-                CPPUNIT_ASSERT(m->account("A000001").transactionCount() == 0);
-                CPPUNIT_ASSERT(m->account("A000002").transactionCount() == 1);
-                CPPUNIT_ASSERT(m->account("A000003").transactionCount() == 1);
+                QVERIFY(m->account("A000001").transactionCount() == 0);
+                QVERIFY(m->account("A000002").transactionCount() == 1);
+                QVERIFY(m->account("A000003").transactionCount() == 1);
         } catch(MyMoneyException *e) {
                 delete e;
-                CPPUNIT_FAIL("Unexpected exception!");
+                QFAIL("Unexpected exception!");
         }
 }
 */
@@ -1061,19 +1061,19 @@ void MyMoneyFileTest::testBalanceTotal()
     m->addTransaction(t);
     ft.commit();
     ft.restart();
-    CPPUNIT_ASSERT(t.id() == "T000000000000000002");
-    CPPUNIT_ASSERT(m->totalBalance("A000001") == MyMoneyMoney(-1000));
-    CPPUNIT_ASSERT(m->totalBalance("A000002") == MyMoneyMoney(-1000));
+    QVERIFY(t.id() == "T000000000000000002");
+    QVERIFY(m->totalBalance("A000001") == MyMoneyMoney(-1000));
+    QVERIFY(m->totalBalance("A000002") == MyMoneyMoney(-1000));
 
     MyMoneyAccount p = m->account("A000001");
     MyMoneyAccount q = m->account("A000002");
     m->reparentAccount(p, q);
     ft.commit();
-    CPPUNIT_ASSERT(m->totalBalance("A000001") == MyMoneyMoney(-1000));
-    CPPUNIT_ASSERT(m->totalBalance("A000002") == MyMoneyMoney(-2000));
+    QVERIFY(m->totalBalance("A000001") == MyMoneyMoney(-1000));
+    QVERIFY(m->totalBalance("A000002") == MyMoneyMoney(-2000));
   } catch (MyMoneyException *e) {
     delete e;
-    CPPUNIT_FAIL("Unexpected exception!");
+    QFAIL("Unexpected exception!");
   }
 }
 
@@ -1085,7 +1085,7 @@ void MyMoneyFileTest::testSetAccountName()
     ft.commit();
   } catch (MyMoneyException *e) {
     delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    QFAIL("Unexpected exception");
   }
   ft.restart();
   try {
@@ -1093,7 +1093,7 @@ void MyMoneyFileTest::testSetAccountName()
     ft.commit();
   } catch (MyMoneyException *e) {
     delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    QFAIL("Unexpected exception");
   }
   ft.restart();
   try {
@@ -1101,7 +1101,7 @@ void MyMoneyFileTest::testSetAccountName()
     ft.commit();
   } catch (MyMoneyException *e) {
     delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    QFAIL("Unexpected exception");
   }
   ft.restart();
   try {
@@ -1109,19 +1109,19 @@ void MyMoneyFileTest::testSetAccountName()
     ft.commit();
   } catch (MyMoneyException *e) {
     delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    QFAIL("Unexpected exception");
   }
   ft.restart();
 
-  CPPUNIT_ASSERT(m->liability().name() == "Verbindlichkeiten");
-  CPPUNIT_ASSERT(m->asset().name() == "Vermögen");
-  CPPUNIT_ASSERT(m->expense().name() == "Ausgaben");
-  CPPUNIT_ASSERT(m->income().name() == "Einnahmen");
+  QVERIFY(m->liability().name() == "Verbindlichkeiten");
+  QVERIFY(m->asset().name() == "Vermögen");
+  QVERIFY(m->expense().name() == "Ausgaben");
+  QVERIFY(m->income().name() == "Einnahmen");
 
   try {
     m->setAccountName("A000001", "New account name");
     ft.commit();
-    CPPUNIT_FAIL("Exception expected");
+    QFAIL("Exception expected");
   } catch (MyMoneyException *e) {
     delete e;
   }
@@ -1132,17 +1132,17 @@ void MyMoneyFileTest::testAddPayee()
   MyMoneyPayee p;
 
   p.setName("THB");
-  CPPUNIT_ASSERT(m->dirty() == false);
+  QVERIFY(m->dirty() == false);
   MyMoneyFileTransaction ft;
   try {
     m->addPayee(p);
     ft.commit();
-    CPPUNIT_ASSERT(m->dirty() == true);
-    CPPUNIT_ASSERT(p.id() == "P000001");
+    QVERIFY(m->dirty() == true);
+    QVERIFY(p.id() == "P000001");
 
   } catch (MyMoneyException *e) {
     delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    QFAIL("Unexpected exception");
   }
 }
 
@@ -1159,11 +1159,11 @@ void MyMoneyFileTest::testModifyPayee()
     m->modifyPayee(p);
     ft.commit();
     p = m->payee("P000001");
-    CPPUNIT_ASSERT(p.name() == "New name");
+    QVERIFY(p.name() == "New name");
 
   } catch (MyMoneyException *e) {
     delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    QFAIL("Unexpected exception");
   }
 }
 
@@ -1172,18 +1172,18 @@ void MyMoneyFileTest::testRemovePayee()
   MyMoneyPayee p;
 
   testAddPayee();
-  CPPUNIT_ASSERT(m->payeeList().count() == 1);
+  QVERIFY(m->payeeList().count() == 1);
 
   p = m->payee("P000001");
   MyMoneyFileTransaction ft;
   try {
     m->removePayee(p);
     ft.commit();
-    CPPUNIT_ASSERT(m->payeeList().count() == 0);
+    QVERIFY(m->payeeList().count() == 0);
 
   } catch (MyMoneyException *e) {
     delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    QFAIL("Unexpected exception");
   }
 }
 
@@ -1213,7 +1213,7 @@ void MyMoneyFileTest::testAddTransactionStd()
     t.addSplit(split2);
   } catch (MyMoneyException *e) {
     delete e;
-    CPPUNIT_FAIL("Unexpected exception!");
+    QFAIL("Unexpected exception!");
   }
 
   /*
@@ -1231,12 +1231,12 @@ void MyMoneyFileTest::testAddTransactionStd()
   try {
     m->addTransaction(t);
     ft.commit();
-    CPPUNIT_FAIL("Missing expected exception!");
+    QFAIL("Missing expected exception!");
   } catch (MyMoneyException *e) {
     delete e;
   }
 
-  CPPUNIT_ASSERT(m->dirty() == false);
+  QVERIFY(m->dirty() == false);
 }
 
 void MyMoneyFileTest::testAttachStorage()
@@ -1244,35 +1244,35 @@ void MyMoneyFileTest::testAttachStorage()
   IMyMoneyStorage *store = new MyMoneySeqAccessMgr;
   MyMoneyFile *file = new MyMoneyFile;
 
-  CPPUNIT_ASSERT(file->storageAttached() == false);
+  QVERIFY(file->storageAttached() == false);
   try {
     file->attachStorage(store);
-    CPPUNIT_ASSERT(file->storageAttached() == true);
+    QVERIFY(file->storageAttached() == true);
   } catch (MyMoneyException *e) {
     delete e;
-    CPPUNIT_FAIL("Unexpected exception!");
+    QFAIL("Unexpected exception!");
   }
 
   try {
     file->attachStorage(store);
-    CPPUNIT_FAIL("Exception expected!");
+    QFAIL("Exception expected!");
   } catch (MyMoneyException *e) {
     delete e;
   }
 
   try {
     file->attachStorage(0);
-    CPPUNIT_FAIL("Exception expected!");
+    QFAIL("Exception expected!");
   } catch (MyMoneyException *e) {
     delete e;
   }
 
   try {
     file->detachStorage(store);
-    CPPUNIT_ASSERT(file->storageAttached() == false);
+    QVERIFY(file->storageAttached() == false);
   } catch (MyMoneyException *e) {
     delete e;
-    CPPUNIT_FAIL("Unexpected exception!");
+    QFAIL("Unexpected exception!");
   }
 
   delete store;
@@ -1283,8 +1283,8 @@ void MyMoneyFileTest::testAttachStorage()
 void MyMoneyFileTest::testAccount2Category()
 {
   testReparentAccount();
-  CPPUNIT_ASSERT(m->accountToCategory("A000001") == "Account2:Account1");
-  CPPUNIT_ASSERT(m->accountToCategory("A000002") == "Account2");
+  QVERIFY(m->accountToCategory("A000001") == "Account2:Account1");
+  QVERIFY(m->accountToCategory("A000002") == "Account2");
 }
 
 void MyMoneyFileTest::testCategory2Account()
@@ -1297,9 +1297,9 @@ void MyMoneyFileTest::testCategory2Account()
   try {
     m->reparentAccount(b, a);
     ft.commit();
-    CPPUNIT_ASSERT(m->categoryToAccount("Expense1") == "A000003");
-    CPPUNIT_ASSERT(m->categoryToAccount("Expense1:Expense2") == "A000004");
-    CPPUNIT_ASSERT(m->categoryToAccount("Acc2").isEmpty());
+    QVERIFY(m->categoryToAccount("Expense1") == "A000003");
+    QVERIFY(m->categoryToAccount("Expense1:Expense2") == "A000004");
+    QVERIFY(m->categoryToAccount("Acc2").isEmpty());
   } catch (MyMoneyException *e) {
     unexpectedException(e);
   }
@@ -1307,15 +1307,15 @@ void MyMoneyFileTest::testCategory2Account()
 
 void MyMoneyFileTest::testAttachedStorage()
 {
-  CPPUNIT_ASSERT(m->storageAttached() == true);
-  CPPUNIT_ASSERT(m->storage() != 0);
+  QVERIFY(m->storageAttached() == true);
+  QVERIFY(m->storage() != 0);
   IMyMoneyStorage *p = m->storage();
   m->detachStorage(p);
-  CPPUNIT_ASSERT(m->storageAttached() == false);
-  CPPUNIT_ASSERT(m->storage() == 0);
+  QVERIFY(m->storageAttached() == false);
+  QVERIFY(m->storage() == 0);
   m->attachStorage(p);
-  CPPUNIT_ASSERT(m->storageAttached() == true);
-  CPPUNIT_ASSERT(m->storage() != 0);
+  QVERIFY(m->storageAttached() == true);
+  QVERIFY(m->storage() != 0);
 }
 
 void MyMoneyFileTest::testHasAccount()
@@ -1330,11 +1330,11 @@ void MyMoneyFileTest::testHasAccount()
   try {
     m->addAccount(a, b);
     ft.commit();
-    CPPUNIT_ASSERT(m->accountCount() == 8);
-    CPPUNIT_ASSERT(a.parentAccountId() == "A000001");
-    CPPUNIT_ASSERT(m->hasAccount("A000001", "Account3") == true);
-    CPPUNIT_ASSERT(m->hasAccount("A000001", "Account2") == false);
-    CPPUNIT_ASSERT(m->hasAccount("A000002", "Account3") == false);
+    QVERIFY(m->accountCount() == 8);
+    QVERIFY(a.parentAccountId() == "A000001");
+    QVERIFY(m->hasAccount("A000001", "Account3") == true);
+    QVERIFY(m->hasAccount("A000001", "Account2") == false);
+    QVERIFY(m->hasAccount("A000002", "Account3") == false);
   } catch (MyMoneyException *e) {
     unexpectedException(e);
   }
@@ -1384,7 +1384,7 @@ void MyMoneyFileTest::testAddEquityAccount()
       char    msg[100];
       m->addAccount(a, i);
       sprintf(msg, "Can add non-equity type %d to investment", *it);
-      CPPUNIT_FAIL(msg);
+      QFAIL(msg);
     } catch (MyMoneyException *e) {
       ft.commit();
       delete e;
@@ -1464,7 +1464,7 @@ void MyMoneyFileTest::testReparentEquity(QList<MyMoneyAccount::accountTypeE>& li
       char    msg[100];
       m->reparentAccount(stock, a);
       sprintf(msg, "Can reparent stock to non-investment type %d account", *it);
-      CPPUNIT_FAIL(msg);
+      QFAIL(msg);
     } catch (MyMoneyException *e) {
       ft.commit();
       delete e;
@@ -1481,7 +1481,7 @@ void MyMoneyFileTest::testBaseCurrency(void)
   // make sure, no base currency is set
   try {
     ref = m->baseCurrency();
-    CPPUNIT_ASSERT(ref.id().isEmpty());
+    QVERIFY(ref.id().isEmpty());
   } catch (MyMoneyException *e) {
     unexpectedException(e);
   }
@@ -1489,7 +1489,7 @@ void MyMoneyFileTest::testBaseCurrency(void)
   // make sure, we cannot assign an unknown currency
   try {
     m->setBaseCurrency(base);
-    CPPUNIT_FAIL("Missing expected exception");
+    QFAIL("Missing expected exception");
   } catch (MyMoneyException *e) {
     delete e;
   }
@@ -1508,9 +1508,9 @@ void MyMoneyFileTest::testBaseCurrency(void)
   // make sure, the base currency is set
   try {
     ref = m->baseCurrency();
-    CPPUNIT_ASSERT(ref.id() == "EUR");
-    CPPUNIT_ASSERT(ref.name() == "Euro");
-    CPPUNIT_ASSERT(ref.tradingSymbol() == QChar(0x20ac));
+    QVERIFY(ref.id() == "EUR");
+    QVERIFY(ref.name() == "Euro");
+    QVERIFY(ref.tradingSymbol() == QChar(0x20ac));
   } catch (MyMoneyException *e) {
     unexpectedException(e);
   }
@@ -1522,16 +1522,16 @@ void MyMoneyFileTest::testBaseCurrency(void)
   m->attachStorage(newStorage);
 
   ref = m->baseCurrency();
-  CPPUNIT_ASSERT(ref.id().isEmpty());
+  QVERIFY(ref.id().isEmpty());
 
   m->detachStorage(newStorage);
   delete newStorage;
 
   m->attachStorage(storage);
   ref = m->baseCurrency();
-  CPPUNIT_ASSERT(ref.id() == "EUR");
-  CPPUNIT_ASSERT(ref.name() == "Euro");
-  CPPUNIT_ASSERT(ref.tradingSymbol() == QChar(0x20ac));
+  QVERIFY(ref.id() == "EUR");
+  QVERIFY(ref.name() == "Euro");
+  QVERIFY(ref.tradingSymbol() == QChar(0x20ac));
 }
 
 void MyMoneyFileTest::testOpeningBalanceNoBase(void)
@@ -1542,7 +1542,7 @@ void MyMoneyFileTest::testOpeningBalanceNoBase(void)
   try {
     base = m->baseCurrency();
     openingAcc = m->openingBalanceAccount(base);
-    CPPUNIT_FAIL("Missing expected exception");
+    QFAIL("Missing expected exception");
   } catch (MyMoneyException *e) {
     delete e;
   }
@@ -1556,9 +1556,9 @@ void MyMoneyFileTest::testOpeningBalance(void)
 
   try {
     openingAcc = m->openingBalanceAccount(m->baseCurrency());
-    CPPUNIT_ASSERT(openingAcc.parentAccountId() == m->equity().id());
-    CPPUNIT_ASSERT(openingAcc.name() == MyMoneyFile::OpeningBalancesPrefix);
-    CPPUNIT_ASSERT(openingAcc.openingDate() == QDate::currentDate());
+    QVERIFY(openingAcc.parentAccountId() == m->equity().id());
+    QVERIFY(openingAcc.name() == MyMoneyFile::OpeningBalancesPrefix);
+    QVERIFY(openingAcc.openingDate() == QDate::currentDate());
   } catch (MyMoneyException *e) {
     unexpectedException(e);
   }
@@ -1575,9 +1575,9 @@ void MyMoneyFileTest::testOpeningBalance(void)
   QString refName = QString("%1 (%2)").arg(MyMoneyFile::OpeningBalancesPrefix).arg("USD");
   try {
     openingAcc = m->openingBalanceAccount(second);
-    CPPUNIT_ASSERT(openingAcc.parentAccountId() == m->equity().id());
-    CPPUNIT_ASSERT(openingAcc.name() == refName);
-    CPPUNIT_ASSERT(openingAcc.openingDate() == QDate::currentDate());
+    QVERIFY(openingAcc.parentAccountId() == m->equity().id());
+    QVERIFY(openingAcc.name() == refName);
+    QVERIFY(openingAcc.openingDate() == QDate::currentDate());
   } catch (MyMoneyException *e) {
     unexpectedException(e);
   }
@@ -1585,11 +1585,11 @@ void MyMoneyFileTest::testOpeningBalance(void)
 
 void MyMoneyFileTest::testModifyStdAccount()
 {
-  CPPUNIT_ASSERT(m->asset().currencyId().isEmpty());
-  CPPUNIT_ASSERT(m->asset().name() == "Asset");
+  QVERIFY(m->asset().currencyId().isEmpty());
+  QVERIFY(m->asset().name() == "Asset");
   testBaseCurrency();
-  CPPUNIT_ASSERT(m->asset().currencyId().isEmpty());
-  CPPUNIT_ASSERT(!m->baseCurrency().id().isEmpty());
+  QVERIFY(m->asset().currencyId().isEmpty());
+  QVERIFY(!m->baseCurrency().id().isEmpty());
 
   MyMoneyFileTransaction ft;
   try {
@@ -1599,8 +1599,8 @@ void MyMoneyFileTest::testModifyStdAccount()
     m->modifyAccount(acc);
     ft.commit();
 
-    CPPUNIT_ASSERT(m->asset().name() == "Anlagen");
-    CPPUNIT_ASSERT(m->asset().currencyId() == m->baseCurrency().id());
+    QVERIFY(m->asset().name() == "Anlagen");
+    QVERIFY(m->asset().currencyId() == m->baseCurrency().id());
   } catch (MyMoneyException *e) {
     unexpectedException(e);
   }
@@ -1610,10 +1610,13 @@ void MyMoneyFileTest::testModifyStdAccount()
     MyMoneyAccount acc = m->asset();
     acc.setNumber("Test");
     m->modifyAccount(acc);
-    CPPUNIT_FAIL("Missing expected exception");
+    QFAIL("Missing expected exception");
   } catch (MyMoneyException *e) {
     ft.rollback();
     delete e;
   }
 
 }
+
+#include "mymoneyfiletest.moc"
+

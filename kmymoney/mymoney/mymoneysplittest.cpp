@@ -15,34 +15,34 @@
  ***************************************************************************/
 
 #include "mymoneysplittest.h"
-#include <mymoneyexception.h>
 
-MyMoneySplitTest::MyMoneySplitTest()
-{
-}
+#include <QtTest/QtTest>
 
+#include "mymoneyexception.h"
 
-void MyMoneySplitTest::setUp()
+QTEST_MAIN(MyMoneySplitTest)
+
+void MyMoneySplitTest::init()
 {
   m = new MyMoneySplit();
 }
 
-void MyMoneySplitTest::tearDown()
+void MyMoneySplitTest::cleanup()
 {
   delete m;
 }
 
 void MyMoneySplitTest::testEmptyConstructor()
 {
-  CPPUNIT_ASSERT(m->accountId().isEmpty());
-  CPPUNIT_ASSERT(m->id().isEmpty());
-  CPPUNIT_ASSERT(m->memo().isEmpty());
-  CPPUNIT_ASSERT(m->action().isEmpty());
-  CPPUNIT_ASSERT(m->shares().isZero());
-  CPPUNIT_ASSERT(m->value().isZero());
-  CPPUNIT_ASSERT(m->reconcileFlag() == MyMoneySplit::NotReconciled);
-  CPPUNIT_ASSERT(m->reconcileDate() == QDate());
-  CPPUNIT_ASSERT(m->transactionId().isEmpty());
+  QVERIFY(m->accountId().isEmpty());
+  QVERIFY(m->id().isEmpty());
+  QVERIFY(m->memo().isEmpty());
+  QVERIFY(m->action().isEmpty());
+  QVERIFY(m->shares().isZero());
+  QVERIFY(m->value().isZero());
+  QVERIFY(m->reconcileFlag() == MyMoneySplit::NotReconciled);
+  QVERIFY(m->reconcileDate() == QDate());
+  QVERIFY(m->transactionId().isEmpty());
 }
 
 void MyMoneySplitTest::testSetFunctions()
@@ -59,17 +59,17 @@ void MyMoneySplitTest::testSetFunctions()
   m->setTransactionId("TestTransaction");
   m->setValue("Key", "Value");
 
-  CPPUNIT_ASSERT(m->accountId() == "Account");
-  CPPUNIT_ASSERT(m->memo() == "Memo");
-  CPPUNIT_ASSERT(m->reconcileDate() == QDate(1, 2, 3));
-  CPPUNIT_ASSERT(m->reconcileFlag() == MyMoneySplit::Cleared);
-  CPPUNIT_ASSERT(m->shares() == MyMoneyMoney(1234));
-  CPPUNIT_ASSERT(m->value() == MyMoneyMoney(3456));
-  CPPUNIT_ASSERT(m->id() == "MyID");
-  CPPUNIT_ASSERT(m->payeeId() == "Payee");
-  CPPUNIT_ASSERT(m->action() == "Action");
-  CPPUNIT_ASSERT(m->transactionId() == "TestTransaction");
-  CPPUNIT_ASSERT(m->value("Key") == "Value");
+  QVERIFY(m->accountId() == "Account");
+  QVERIFY(m->memo() == "Memo");
+  QVERIFY(m->reconcileDate() == QDate(1, 2, 3));
+  QVERIFY(m->reconcileFlag() == MyMoneySplit::Cleared);
+  QVERIFY(m->shares() == MyMoneyMoney(1234));
+  QVERIFY(m->value() == MyMoneyMoney(3456));
+  QVERIFY(m->id() == "MyID");
+  QVERIFY(m->payeeId() == "Payee");
+  QVERIFY(m->action() == "Action");
+  QVERIFY(m->transactionId() == "TestTransaction");
+  QVERIFY(m->value("Key") == "Value");
 }
 
 
@@ -79,17 +79,17 @@ void MyMoneySplitTest::testCopyConstructor()
 
   MyMoneySplit n(*m);
 
-  CPPUNIT_ASSERT(n.accountId() == "Account");
-  CPPUNIT_ASSERT(n.memo() == "Memo");
-  CPPUNIT_ASSERT(n.reconcileDate() == QDate(1, 2, 3));
-  CPPUNIT_ASSERT(n.reconcileFlag() == MyMoneySplit::Cleared);
-  CPPUNIT_ASSERT(n.shares() == MyMoneyMoney(1234));
-  CPPUNIT_ASSERT(n.value() == MyMoneyMoney(3456));
-  CPPUNIT_ASSERT(n.id() == "MyID");
-  CPPUNIT_ASSERT(n.payeeId() == "Payee");
-  CPPUNIT_ASSERT(n.action() == "Action");
-  CPPUNIT_ASSERT(n.transactionId() == "TestTransaction");
-  CPPUNIT_ASSERT(n.value("Key") == "Value");
+  QVERIFY(n.accountId() == "Account");
+  QVERIFY(n.memo() == "Memo");
+  QVERIFY(n.reconcileDate() == QDate(1, 2, 3));
+  QVERIFY(n.reconcileFlag() == MyMoneySplit::Cleared);
+  QVERIFY(n.shares() == MyMoneyMoney(1234));
+  QVERIFY(n.value() == MyMoneyMoney(3456));
+  QVERIFY(n.id() == "MyID");
+  QVERIFY(n.payeeId() == "Payee");
+  QVERIFY(n.action() == "Action");
+  QVERIFY(n.transactionId() == "TestTransaction");
+  QVERIFY(n.value("Key") == "Value");
 }
 
 void MyMoneySplitTest::testAssignmentConstructor()
@@ -100,17 +100,17 @@ void MyMoneySplitTest::testAssignmentConstructor()
 
   n = *m;
 
-  CPPUNIT_ASSERT(n.accountId() == "Account");
-  CPPUNIT_ASSERT(n.memo() == "Memo");
-  CPPUNIT_ASSERT(n.reconcileDate() == QDate(1, 2, 3));
-  CPPUNIT_ASSERT(n.reconcileFlag() == MyMoneySplit::Cleared);
-  CPPUNIT_ASSERT(n.shares() == MyMoneyMoney(1234));
-  CPPUNIT_ASSERT(n.value() == MyMoneyMoney(3456));
-  CPPUNIT_ASSERT(n.id() == "MyID");
-  CPPUNIT_ASSERT(n.payeeId() == "Payee");
-  CPPUNIT_ASSERT(n.action() == "Action");
-  CPPUNIT_ASSERT(n.transactionId() == "TestTransaction");
-  CPPUNIT_ASSERT(n.value("Key") == "Value");
+  QVERIFY(n.accountId() == "Account");
+  QVERIFY(n.memo() == "Memo");
+  QVERIFY(n.reconcileDate() == QDate(1, 2, 3));
+  QVERIFY(n.reconcileFlag() == MyMoneySplit::Cleared);
+  QVERIFY(n.shares() == MyMoneyMoney(1234));
+  QVERIFY(n.value() == MyMoneyMoney(3456));
+  QVERIFY(n.id() == "MyID");
+  QVERIFY(n.payeeId() == "Payee");
+  QVERIFY(n.action() == "Action");
+  QVERIFY(n.transactionId() == "TestTransaction");
+  QVERIFY(n.value("Key") == "Value");
 }
 
 void MyMoneySplitTest::testEquality()
@@ -119,7 +119,7 @@ void MyMoneySplitTest::testEquality()
 
   MyMoneySplit n(*m);
 
-  CPPUNIT_ASSERT(n == *m);
+  QVERIFY(n == *m);
 }
 
 void MyMoneySplitTest::testInequality()
@@ -129,119 +129,119 @@ void MyMoneySplitTest::testInequality()
   MyMoneySplit n(*m);
 
   n.setShares(MyMoneyMoney(3456));
-  CPPUNIT_ASSERT(!(n == *m));
+  QVERIFY(!(n == *m));
 
   n = *m;
   n.setId("Not My ID");
-  CPPUNIT_ASSERT(!(n == *m));
+  QVERIFY(!(n == *m));
 
   n = *m;
   n.setPayeeId("No payee");
-  CPPUNIT_ASSERT(!(n == *m));
+  QVERIFY(!(n == *m));
 
   n = *m;
   n.setAction("No action");
-  CPPUNIT_ASSERT(!(n == *m));
+  QVERIFY(!(n == *m));
 
   n = *m;
   n.setNumber("No number");
-  CPPUNIT_ASSERT(!(n == *m));
+  QVERIFY(!(n == *m));
 
   n = *m;
   n.setAccountId("No account");
-  CPPUNIT_ASSERT(!(n == *m));
+  QVERIFY(!(n == *m));
 
   n = *m;
   n.setMemo("No memo");
-  CPPUNIT_ASSERT(!(n == *m));
+  QVERIFY(!(n == *m));
 
   n = *m;
   n.setReconcileDate(QDate(3, 4, 5));
-  CPPUNIT_ASSERT(!(n == *m));
+  QVERIFY(!(n == *m));
 
   n = *m;
   n.setReconcileFlag(MyMoneySplit::Frozen);
-  CPPUNIT_ASSERT(!(n == *m));
+  QVERIFY(!(n == *m));
 
   n = *m;
   n.setShares(MyMoneyMoney(4567));
-  CPPUNIT_ASSERT(!(n == *m));
+  QVERIFY(!(n == *m));
 
   n = *m;
   n.setValue(MyMoneyMoney(9876));
-  CPPUNIT_ASSERT(!(n == *m));
+  QVERIFY(!(n == *m));
 
   n = *m;
   n.setTransactionId("NoTransaction");
-  CPPUNIT_ASSERT(!(n == *m));
+  QVERIFY(!(n == *m));
 
   n = *m;
   n.setValue("Key", "NoValue");
-  CPPUNIT_ASSERT(!(n == *m));
+  QVERIFY(!(n == *m));
 }
 
 
 void MyMoneySplitTest::testAmortization()
 {
-  CPPUNIT_ASSERT(m->isAmortizationSplit() == false);
+  QVERIFY(m->isAmortizationSplit() == false);
   testSetFunctions();
-  CPPUNIT_ASSERT(m->isAmortizationSplit() == false);
+  QVERIFY(m->isAmortizationSplit() == false);
   m->setAction(MyMoneySplit::ActionAmortization);
-  CPPUNIT_ASSERT(m->isAmortizationSplit() == true);
+  QVERIFY(m->isAmortizationSplit() == true);
 }
 
 void MyMoneySplitTest::testValue()
 {
   m->setValue(MyMoneyMoney(1));
   m->setShares(MyMoneyMoney(2));
-  CPPUNIT_ASSERT(m->value("EUR", "EUR") == MyMoneyMoney(1));
-  CPPUNIT_ASSERT(m->value("EUR", "USD") == MyMoneyMoney(2));
+  QVERIFY(m->value("EUR", "EUR") == MyMoneyMoney(1));
+  QVERIFY(m->value("EUR", "USD") == MyMoneyMoney(2));
 }
 
 void MyMoneySplitTest::testSetValue()
 {
-  CPPUNIT_ASSERT(m->value().isZero());
-  CPPUNIT_ASSERT(m->shares().isZero());
+  QVERIFY(m->value().isZero());
+  QVERIFY(m->shares().isZero());
   m->setValue(MyMoneyMoney(1), "EUR", "EUR");
-  CPPUNIT_ASSERT(m->value() == MyMoneyMoney(1));
-  CPPUNIT_ASSERT(m->shares().isZero());
+  QVERIFY(m->value() == MyMoneyMoney(1));
+  QVERIFY(m->shares().isZero());
   m->setValue(MyMoneyMoney(3), "EUR", "USD");
-  CPPUNIT_ASSERT(m->value() == MyMoneyMoney(1));
-  CPPUNIT_ASSERT(m->shares() == MyMoneyMoney(3));
+  QVERIFY(m->value() == MyMoneyMoney(1));
+  QVERIFY(m->shares() == MyMoneyMoney(3));
 }
 
 void MyMoneySplitTest::testSetAction()
 {
-  CPPUNIT_ASSERT(m->action().isEmpty());
+  QVERIFY(m->action().isEmpty());
   m->setAction(MyMoneySplit::BuyShares);
-  CPPUNIT_ASSERT(m->action() == MyMoneySplit::ActionBuyShares);
+  QVERIFY(m->action() == MyMoneySplit::ActionBuyShares);
   m->setAction(MyMoneySplit::SellShares);
-  CPPUNIT_ASSERT(m->action() == MyMoneySplit::ActionBuyShares);
+  QVERIFY(m->action() == MyMoneySplit::ActionBuyShares);
   m->setAction(MyMoneySplit::Dividend);
-  CPPUNIT_ASSERT(m->action() == MyMoneySplit::ActionDividend);
+  QVERIFY(m->action() == MyMoneySplit::ActionDividend);
   m->setAction(MyMoneySplit::Yield);
-  CPPUNIT_ASSERT(m->action() == MyMoneySplit::ActionYield);
+  QVERIFY(m->action() == MyMoneySplit::ActionYield);
   m->setAction(MyMoneySplit::ReinvestDividend);
-  CPPUNIT_ASSERT(m->action() == MyMoneySplit::ActionReinvestDividend);
+  QVERIFY(m->action() == MyMoneySplit::ActionReinvestDividend);
   m->setAction(MyMoneySplit::AddShares);
-  CPPUNIT_ASSERT(m->action() == MyMoneySplit::ActionAddShares);
+  QVERIFY(m->action() == MyMoneySplit::ActionAddShares);
   m->setAction(MyMoneySplit::RemoveShares);
-  CPPUNIT_ASSERT(m->action() == MyMoneySplit::ActionAddShares);
+  QVERIFY(m->action() == MyMoneySplit::ActionAddShares);
   m->setAction(MyMoneySplit::SplitShares);
-  CPPUNIT_ASSERT(m->action() == MyMoneySplit::ActionSplitShares);
+  QVERIFY(m->action() == MyMoneySplit::ActionSplitShares);
 }
 
 void MyMoneySplitTest::testIsAutoCalc()
 {
-  CPPUNIT_ASSERT(m->isAutoCalc() == false);
+  QVERIFY(m->isAutoCalc() == false);
   m->setValue(MyMoneyMoney::autoCalc);
-  CPPUNIT_ASSERT(m->isAutoCalc() == true);
+  QVERIFY(m->isAutoCalc() == true);
   m->setShares(MyMoneyMoney::autoCalc);
-  CPPUNIT_ASSERT(m->isAutoCalc() == true);
+  QVERIFY(m->isAutoCalc() == true);
   m->setValue(MyMoneyMoney(0));
-  CPPUNIT_ASSERT(m->isAutoCalc() == true);
+  QVERIFY(m->isAutoCalc() == true);
   m->setShares(MyMoneyMoney(1));
-  CPPUNIT_ASSERT(m->isAutoCalc() == false);
+  QVERIFY(m->isAutoCalc() == false);
 }
 
 void MyMoneySplitTest::testWriteXML()
@@ -276,7 +276,7 @@ void MyMoneySplitTest::testWriteXML()
   //qDebug("ref = '%s'", qPrintable(ref));
   //qDebug("doc = '%s'", qPrintable(doc.toString()));
 
-  CPPUNIT_ASSERT(doc.toString() == ref);
+  QVERIFY(doc.toString() == ref);
 }
 
 void MyMoneySplitTest::testReadXML()
@@ -301,7 +301,7 @@ void MyMoneySplitTest::testReadXML()
 
   try {
     s = MyMoneySplit(node);
-    CPPUNIT_FAIL("Missing expected exception");
+    QFAIL("Missing expected exception");
   } catch (MyMoneyException *e) {
     delete e;
   }
@@ -311,19 +311,22 @@ void MyMoneySplitTest::testReadXML()
 
   try {
     s = MyMoneySplit(node);
-    CPPUNIT_ASSERT(s.id().isEmpty());
-    CPPUNIT_ASSERT(s.payeeId() == "P000001");
-    CPPUNIT_ASSERT(s.reconcileDate() == QDate());
-    CPPUNIT_ASSERT(s.shares() == MyMoneyMoney(96379, 100));
-    CPPUNIT_ASSERT(s.value() == MyMoneyMoney(96379, 1000));
-    CPPUNIT_ASSERT(s.number() == "124");
-    CPPUNIT_ASSERT(s.bankID() == "SPID");
-    CPPUNIT_ASSERT(s.reconcileFlag() == MyMoneySplit::Reconciled);
-    CPPUNIT_ASSERT(s.action() == MyMoneySplit::ActionDeposit);
-    CPPUNIT_ASSERT(s.accountId() == "A000076");
-    CPPUNIT_ASSERT(s.memo() == "MyMemo");
+    QVERIFY(s.id().isEmpty());
+    QVERIFY(s.payeeId() == "P000001");
+    QVERIFY(s.reconcileDate() == QDate());
+    QVERIFY(s.shares() == MyMoneyMoney(96379, 100));
+    QVERIFY(s.value() == MyMoneyMoney(96379, 1000));
+    QVERIFY(s.number() == "124");
+    QVERIFY(s.bankID() == "SPID");
+    QVERIFY(s.reconcileFlag() == MyMoneySplit::Reconciled);
+    QVERIFY(s.action() == MyMoneySplit::ActionDeposit);
+    QVERIFY(s.accountId() == "A000076");
+    QVERIFY(s.memo() == "MyMemo");
   } catch (MyMoneyException *e) {
     delete e;
   }
 
 }
+
+#include "mymoneysplittest.moc"
+

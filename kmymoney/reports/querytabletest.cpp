@@ -19,12 +19,16 @@
 
 #include <QFile>
 
+#include <kaboutdata.h>
+#include <kapplication.h>
+#include <kcmdlineargs.h>
 #include <kdebug.h>
 #include <kdeversion.h>
 #include <kglobal.h>
 #include <kglobalsettings.h>
 #include <klocale.h>
 #include <kstandarddirs.h>
+#include <qtest_kde.h>
 
 #include "reportstestcommon.h"
 
@@ -43,13 +47,10 @@
 using namespace reports;
 using namespace test;
 
-QueryTableTest::QueryTableTest()
-{
-}
+QTEST_KDEMAIN_CORE_WITH_COMPONENTNAME(QueryTableTest, "kmymoney")
 
-void QueryTableTest::setUp()
+void QueryTableTest::init()
 {
-
   storage = new MyMoneySeqAccessMgr;
   file = MyMoneyFile::instance();
   file->attachStorage(storage);
@@ -83,7 +84,7 @@ void QueryTableTest::setUp()
   ft.commit();
 }
 
-void QueryTableTest::tearDown()
+void QueryTableTest::cleanup()
 {
   file->detachStorage(storage);
   delete storage;
@@ -121,20 +122,20 @@ void QueryTableTest::testQueryBasics()
 
     QList<ListTable::TableRow> rows = qtbl_1.rows();
 
-    CPPUNIT_ASSERT(rows.count() == 12);
-    CPPUNIT_ASSERT(rows[0]["categorytype"] == "Expense");
-    CPPUNIT_ASSERT(rows[0]["category"] == "Parent");
-    CPPUNIT_ASSERT(rows[0]["postdate"] == "2004-02-01");
-    CPPUNIT_ASSERT(rows[11]["categorytype"] == "Expense");
-    CPPUNIT_ASSERT(rows[11]["category"] == "Solo");
-    CPPUNIT_ASSERT(rows[11]["postdate"] == "2005-01-01");
+    QVERIFY(rows.count() == 12);
+    QVERIFY(rows[0]["categorytype"] == "Expense");
+    QVERIFY(rows[0]["category"] == "Parent");
+    QVERIFY(rows[0]["postdate"] == "2004-02-01");
+    QVERIFY(rows[11]["categorytype"] == "Expense");
+    QVERIFY(rows[11]["category"] == "Solo");
+    QVERIFY(rows[11]["postdate"] == "2005-01-01");
 
     QString html = qtbl_1.renderBody();
-    CPPUNIT_ASSERT(searchHTML(html, i18nc("Total balance", "Total") + " Parent") == -(moParent1 + moParent2) * 3);
-    CPPUNIT_ASSERT(searchHTML(html, i18nc("Total balance", "Total") + " Parent: Child") == -(moChild) * 3);
-    CPPUNIT_ASSERT(searchHTML(html, i18nc("Total balance", "Total") + " Solo") == -(moSolo) * 3);
-    CPPUNIT_ASSERT(searchHTML(html, i18nc("Total balance", "Total") + " Expense") == -(moParent1 + moParent2 + moSolo + moChild) * 3);
-    CPPUNIT_ASSERT(searchHTML(html, i18nc("Grand total balance", "Grand Total")) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
+    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Parent") == -(moParent1 + moParent2) * 3);
+    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Parent: Child") == -(moChild) * 3);
+    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Solo") == -(moSolo) * 3);
+    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Expense") == -(moParent1 + moParent2 + moSolo + moChild) * 3);
+    QVERIFY(searchHTML(html, i18nc("Grand total balance", "Grand Total")) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
     filter.setRowType(MyMoneyReport::eTopCategory);
     cols = MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCaccount;
     filter.setQueryColumns(static_cast<MyMoneyReport::EQueryColumns>(cols));   //
@@ -146,22 +147,22 @@ void QueryTableTest::testQueryBasics()
 
     rows = qtbl_2.rows();
 
-    CPPUNIT_ASSERT(rows.count() == 12);
-    CPPUNIT_ASSERT(rows[0]["categorytype"] == "Expense");
-    CPPUNIT_ASSERT(rows[0]["topcategory"] == "Parent");
-    CPPUNIT_ASSERT(rows[0]["postdate"] == "2004-02-01");
-    CPPUNIT_ASSERT(rows[8]["categorytype"] == "Expense");
-    CPPUNIT_ASSERT(rows[8]["topcategory"] == "Parent");
-    CPPUNIT_ASSERT(rows[8]["postdate"] == "2005-09-01");
-    CPPUNIT_ASSERT(rows[11]["categorytype"] == "Expense");
-    CPPUNIT_ASSERT(rows[11]["topcategory"] == "Solo");
-    CPPUNIT_ASSERT(rows[11]["postdate"] == "2005-01-01");
+    QVERIFY(rows.count() == 12);
+    QVERIFY(rows[0]["categorytype"] == "Expense");
+    QVERIFY(rows[0]["topcategory"] == "Parent");
+    QVERIFY(rows[0]["postdate"] == "2004-02-01");
+    QVERIFY(rows[8]["categorytype"] == "Expense");
+    QVERIFY(rows[8]["topcategory"] == "Parent");
+    QVERIFY(rows[8]["postdate"] == "2005-09-01");
+    QVERIFY(rows[11]["categorytype"] == "Expense");
+    QVERIFY(rows[11]["topcategory"] == "Solo");
+    QVERIFY(rows[11]["postdate"] == "2005-01-01");
 
     html = qtbl_2.renderBody();
-    CPPUNIT_ASSERT(searchHTML(html, i18nc("Total balance", "Total") + " Parent") == -(moParent1 + moParent2 + moChild) * 3);
-    CPPUNIT_ASSERT(searchHTML(html, i18nc("Total balance", "Total") + " Solo") == -(moSolo) * 3);
-    CPPUNIT_ASSERT(searchHTML(html, i18nc("Total balance", "Total") + " Expense") == -(moParent1 + moParent2 + moSolo + moChild) * 3);
-    CPPUNIT_ASSERT(searchHTML(html, i18nc("Grand total balance", "Grand Total")) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
+    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Parent") == -(moParent1 + moParent2 + moChild) * 3);
+    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Solo") == -(moSolo) * 3);
+    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Expense") == -(moParent1 + moParent2 + moSolo + moChild) * 3);
+    QVERIFY(searchHTML(html, i18nc("Grand total balance", "Grand Total")) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
 
     filter.setRowType(MyMoneyReport::eAccount);
     filter.setName("Transactions by Account");
@@ -175,27 +176,27 @@ void QueryTableTest::testQueryBasics()
     rows = qtbl_3.rows();
 
 #if 1
-    CPPUNIT_ASSERT(rows.count() == 16);
-    CPPUNIT_ASSERT(rows[1]["account"] == "Checking Account");
-    CPPUNIT_ASSERT(rows[1]["category"] == "Solo");
-    CPPUNIT_ASSERT(rows[1]["postdate"] == "2004-01-01");
-    CPPUNIT_ASSERT(rows[14]["account"] == "Credit Card");
-    CPPUNIT_ASSERT(rows[14]["category"] == "Parent");
-    CPPUNIT_ASSERT(rows[14]["postdate"] == "2005-09-01");
+    QVERIFY(rows.count() == 16);
+    QVERIFY(rows[1]["account"] == "Checking Account");
+    QVERIFY(rows[1]["category"] == "Solo");
+    QVERIFY(rows[1]["postdate"] == "2004-01-01");
+    QVERIFY(rows[14]["account"] == "Credit Card");
+    QVERIFY(rows[14]["category"] == "Parent");
+    QVERIFY(rows[14]["postdate"] == "2005-09-01");
 #else
-    CPPUNIT_ASSERT(rows.count() == 12);
-    CPPUNIT_ASSERT(rows[0]["account"] == "Checking Account");
-    CPPUNIT_ASSERT(rows[0]["category"] == "Solo");
-    CPPUNIT_ASSERT(rows[0]["postdate"] == "2004-01-01");
-    CPPUNIT_ASSERT(rows[11]["account"] == "Credit Card");
-    CPPUNIT_ASSERT(rows[11]["category"] == "Parent");
-    CPPUNIT_ASSERT(rows[11]["postdate"] == "2005-09-01");
+    QVERIFY(rows.count() == 12);
+    QVERIFY(rows[0]["account"] == "Checking Account");
+    QVERIFY(rows[0]["category"] == "Solo");
+    QVERIFY(rows[0]["postdate"] == "2004-01-01");
+    QVERIFY(rows[11]["account"] == "Credit Card");
+    QVERIFY(rows[11]["category"] == "Parent");
+    QVERIFY(rows[11]["postdate"] == "2005-09-01");
 #endif
 
     html = qtbl_3.renderBody();
-    CPPUNIT_ASSERT(searchHTML(html, i18nc("Total balance for checking account", "Total") + " Checking Account") == -(moSolo) * 3 + moCheckingOpen);
-    CPPUNIT_ASSERT(searchHTML(html, i18nc("Total balance for credit card", "Total") + " Credit Card") == -(moParent1 + moParent2 + moChild) * 3 + moCreditOpen);
-    CPPUNIT_ASSERT(searchHTML(html, i18nc("Grand total balance", "Grand Total")) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
+    QVERIFY(searchHTML(html, i18nc("Total balance for checking account", "Total") + " Checking Account") == -(moSolo) * 3 + moCheckingOpen);
+    QVERIFY(searchHTML(html, i18nc("Total balance for credit card", "Total") + " Credit Card") == -(moParent1 + moParent2 + moChild) * 3 + moCreditOpen);
+    QVERIFY(searchHTML(html, i18nc("Grand total balance", "Grand Total")) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
 
     filter.setRowType(MyMoneyReport::ePayee);
     filter.setName("Transactions by Payee");
@@ -208,20 +209,20 @@ void QueryTableTest::testQueryBasics()
 
     rows = qtbl_4.rows();
 
-    CPPUNIT_ASSERT(rows.count() == 12);
-    CPPUNIT_ASSERT(rows[0]["payee"] == "Test Payee");
-    CPPUNIT_ASSERT(rows[0]["category"] == "Solo");
-    CPPUNIT_ASSERT(rows[0]["postdate"] == "2004-01-01");
-    CPPUNIT_ASSERT(rows[8]["payee"] == "Test Payee");
-    CPPUNIT_ASSERT(rows[8]["category"] == "Parent: Child");
-    CPPUNIT_ASSERT(rows[8]["postdate"] == "2004-11-07");
-    CPPUNIT_ASSERT(rows[11]["payee"] == "Test Payee");
-    CPPUNIT_ASSERT(rows[11]["category"] == "Parent");
-    CPPUNIT_ASSERT(rows[11]["postdate"] == "2005-09-01");
+    QVERIFY(rows.count() == 12);
+    QVERIFY(rows[0]["payee"] == "Test Payee");
+    QVERIFY(rows[0]["category"] == "Solo");
+    QVERIFY(rows[0]["postdate"] == "2004-01-01");
+    QVERIFY(rows[8]["payee"] == "Test Payee");
+    QVERIFY(rows[8]["category"] == "Parent: Child");
+    QVERIFY(rows[8]["postdate"] == "2004-11-07");
+    QVERIFY(rows[11]["payee"] == "Test Payee");
+    QVERIFY(rows[11]["category"] == "Parent");
+    QVERIFY(rows[11]["postdate"] == "2005-09-01");
 
     html = qtbl_4.renderBody();
-    CPPUNIT_ASSERT(searchHTML(html, i18nc("Total balance", "Total") + " Test Payee") == -(moParent1 + moParent2 + moSolo + moChild) * 3);
-    CPPUNIT_ASSERT(searchHTML(html, i18nc("Grand total balance", "Grand Total")) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
+    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Test Payee") == -(moParent1 + moParent2 + moSolo + moChild) * 3);
+    QVERIFY(searchHTML(html, i18nc("Grand total balance", "Grand Total")) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
 
     filter.setRowType(MyMoneyReport::eMonth);
     filter.setName("Transactions by Month");
@@ -234,22 +235,22 @@ void QueryTableTest::testQueryBasics()
 
     rows = qtbl_5.rows();
 
-    CPPUNIT_ASSERT(rows.count() == 12);
-    CPPUNIT_ASSERT(rows[0]["payee"] == "Test Payee");
-    CPPUNIT_ASSERT(rows[0]["category"] == "Solo");
-    CPPUNIT_ASSERT(rows[0]["postdate"] == "2004-01-01");
-    CPPUNIT_ASSERT(rows[8]["payee"] == "Test Payee");
-    CPPUNIT_ASSERT(rows[8]["category"] == "Parent: Child");
-    CPPUNIT_ASSERT(rows[8]["postdate"] == "2004-11-07");
-    CPPUNIT_ASSERT(rows[11]["payee"] == "Test Payee");
-    CPPUNIT_ASSERT(rows[11]["category"] == "Parent");
-    CPPUNIT_ASSERT(rows[11]["postdate"] == "2005-09-01");
+    QVERIFY(rows.count() == 12);
+    QVERIFY(rows[0]["payee"] == "Test Payee");
+    QVERIFY(rows[0]["category"] == "Solo");
+    QVERIFY(rows[0]["postdate"] == "2004-01-01");
+    QVERIFY(rows[8]["payee"] == "Test Payee");
+    QVERIFY(rows[8]["category"] == "Parent: Child");
+    QVERIFY(rows[8]["postdate"] == "2004-11-07");
+    QVERIFY(rows[11]["payee"] == "Test Payee");
+    QVERIFY(rows[11]["category"] == "Parent");
+    QVERIFY(rows[11]["postdate"] == "2005-09-01");
 
     html = qtbl_5.renderBody();
-    CPPUNIT_ASSERT(searchHTML(html, i18nc("Total balance", "Total") + " Month of 2004-01-01") == -moSolo);
-    CPPUNIT_ASSERT(searchHTML(html, i18nc("Total balance", "Total") + " Month of 2004-11-01") == -(moChild) * 3);
-    CPPUNIT_ASSERT(searchHTML(html, i18nc("Total balance", "Total") + " Month of 2004-05-01") == -moParent1 + moCheckingOpen);
-    CPPUNIT_ASSERT(searchHTML(html, i18nc("Grand total balance", "Grand Total")) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
+    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Month of 2004-01-01") == -moSolo);
+    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Month of 2004-11-01") == -(moChild) * 3);
+    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Month of 2004-05-01") == -moParent1 + moCheckingOpen);
+    QVERIFY(searchHTML(html, i18nc("Grand total balance", "Grand Total")) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
 
     filter.setRowType(MyMoneyReport::eWeek);
     filter.setName("Transactions by Week");
@@ -262,21 +263,21 @@ void QueryTableTest::testQueryBasics()
 
     rows = qtbl_6.rows();
 
-    CPPUNIT_ASSERT(rows.count() == 12);
-    CPPUNIT_ASSERT(rows[0]["payee"] == "Test Payee");
-    CPPUNIT_ASSERT(rows[0]["category"] == "Solo");
-    CPPUNIT_ASSERT(rows[0]["postdate"] == "2004-01-01");
-    CPPUNIT_ASSERT(rows[11]["payee"] == "Test Payee");
-    CPPUNIT_ASSERT(rows[11]["category"] == "Parent");
-    CPPUNIT_ASSERT(rows[11]["postdate"] == "2005-09-01");
+    QVERIFY(rows.count() == 12);
+    QVERIFY(rows[0]["payee"] == "Test Payee");
+    QVERIFY(rows[0]["category"] == "Solo");
+    QVERIFY(rows[0]["postdate"] == "2004-01-01");
+    QVERIFY(rows[11]["payee"] == "Test Payee");
+    QVERIFY(rows[11]["category"] == "Parent");
+    QVERIFY(rows[11]["postdate"] == "2005-09-01");
 
     html = qtbl_6.renderBody();
-    CPPUNIT_ASSERT(searchHTML(html, i18nc("Total balance", "Total") + " Week of 2003-12-29") == -moSolo);
-    CPPUNIT_ASSERT(searchHTML(html, i18nc("Total balance", "Total") + " Week of 2004-11-01") == -(moChild) * 3);
-    CPPUNIT_ASSERT(searchHTML(html, i18nc("Total balance", "Total") + " Week of 2005-08-29") == -moParent2);
-    CPPUNIT_ASSERT(searchHTML(html, i18nc("Grand total balance", "Grand Total")) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
+    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Week of 2003-12-29") == -moSolo);
+    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Week of 2004-11-01") == -(moChild) * 3);
+    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Week of 2005-08-29") == -moParent2);
+    QVERIFY(searchHTML(html, i18nc("Grand total balance", "Grand Total")) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
   } catch (MyMoneyException *e) {
-    CPPUNIT_FAIL(qPrintable(e->what()));
+    QFAIL(qPrintable(e->what()));
     delete e;
   }
 
@@ -293,11 +294,11 @@ void QueryTableTest::testQueryBasics()
   high["third"] = 'B';
 
   QueryTable::TableRow::setSortCriteria("first,second,third");
-  CPPUNIT_ASSERT(low < high);
-  CPPUNIT_ASSERT(low <= high);
-  CPPUNIT_ASSERT(high > low);
-  CPPUNIT_ASSERT(high <= high);
-  CPPUNIT_ASSERT(high == high);
+  QVERIFY(low < high);
+  QVERIFY(low <= high);
+  QVERIFY(high > low);
+  QVERIFY(high <= high);
+  QVERIFY(high == high);
 }
 
 void QueryTableTest::testCashFlowAnalysis()
@@ -321,14 +322,14 @@ void QueryTableTest::testCashFlowAnalysis()
 
   MyMoneyMoney IRR(list.IRR(), 1000);
 
-  CPPUNIT_ASSERT(IRR == MyMoneyMoney(1676, 1000));
+  QVERIFY(IRR == MyMoneyMoney(1676, 1000));
 
   list.pop_back();
   list += CashFlowListItem(QDate(2004, 10, 16), MyMoneyMoney(-1358.0));
 
   IRR = MyMoneyMoney(list.IRR(), 1000);
 
-  CPPUNIT_ASSERT(IRR.isZero());
+  QVERIFY(IRR.isZero());
 }
 
 void QueryTableTest::testAccountQuery()
@@ -350,17 +351,17 @@ void QueryTableTest::testAccountQuery()
 
     QList<ListTable::TableRow> rows = qtbl_1.rows();
 
-    CPPUNIT_ASSERT(rows.count() == 2);
-    CPPUNIT_ASSERT(rows[0]["account"] == "Checking Account");
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[0]["value"]) == moCheckingOpen);
-    CPPUNIT_ASSERT(rows[0]["equitytype"].isEmpty());
-    CPPUNIT_ASSERT(rows[1]["account"] == "Credit Card");
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[1]["value"]) == moCreditOpen);
-    CPPUNIT_ASSERT(rows[1]["equitytype"].isEmpty());
+    QVERIFY(rows.count() == 2);
+    QVERIFY(rows[0]["account"] == "Checking Account");
+    QVERIFY(MyMoneyMoney(rows[0]["value"]) == moCheckingOpen);
+    QVERIFY(rows[0]["equitytype"].isEmpty());
+    QVERIFY(rows[1]["account"] == "Credit Card");
+    QVERIFY(MyMoneyMoney(rows[1]["value"]) == moCreditOpen);
+    QVERIFY(rows[1]["equitytype"].isEmpty());
 
     QString html = qtbl_1.renderBody();
-    CPPUNIT_ASSERT(searchHTML(html, i18nc("Total balance", "Total") + " None") == moCheckingOpen + moCreditOpen);
-    CPPUNIT_ASSERT(searchHTML(html, i18nc("Grand total balance", "Grand Total")) == moCheckingOpen + moCreditOpen);
+    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " None") == moCheckingOpen + moCreditOpen);
+    QVERIFY(searchHTML(html, i18nc("Grand total balance", "Grand Total")) == moCheckingOpen + moCreditOpen);
 
     //
     // Adding in transactions
@@ -388,14 +389,14 @@ void QueryTableTest::testAccountQuery()
 
     rows = qtbl_2.rows();
 
-    CPPUNIT_ASSERT(rows.count() == 2);
-    CPPUNIT_ASSERT(rows[0]["account"] == "Checking Account");
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[0]["value"]) == (moCheckingOpen - moSolo*3));
-    CPPUNIT_ASSERT(rows[1]["account"] == "Credit Card");
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[1]["value"]) == (moCreditOpen - (moParent1 + moParent2 + moChild) * 3));
+    QVERIFY(rows.count() == 2);
+    QVERIFY(rows[0]["account"] == "Checking Account");
+    QVERIFY(MyMoneyMoney(rows[0]["value"]) == (moCheckingOpen - moSolo*3));
+    QVERIFY(rows[1]["account"] == "Credit Card");
+    QVERIFY(MyMoneyMoney(rows[1]["value"]) == (moCreditOpen - (moParent1 + moParent2 + moChild) * 3));
 
     html = qtbl_2.renderBody();
-    CPPUNIT_ASSERT(searchHTML(html, i18n("Grand Total")) == moCheckingOpen + moCreditOpen - (moParent1 + moParent2 + moSolo + moChild) * 3);
+    QVERIFY(searchHTML(html, i18n("Grand Total")) == moCheckingOpen + moCreditOpen - (moParent1 + moParent2 + moSolo + moChild) * 3);
 
     //
     // Account TYPES
@@ -408,18 +409,18 @@ void QueryTableTest::testAccountQuery()
 
     rows = qtbl_3.rows();
 
-    CPPUNIT_ASSERT(rows.count() == 2);
-    CPPUNIT_ASSERT(rows[0]["account"] == "Checking Account");
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[0]["value"]) == (moCheckingOpen - moSolo*3));
-    CPPUNIT_ASSERT(rows[1]["account"] == "Credit Card");
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[1]["value"]) == (moCreditOpen - (moParent1 + moParent2 + moChild) * 3));
+    QVERIFY(rows.count() == 2);
+    QVERIFY(rows[0]["account"] == "Checking Account");
+    QVERIFY(MyMoneyMoney(rows[0]["value"]) == (moCheckingOpen - moSolo*3));
+    QVERIFY(rows[1]["account"] == "Credit Card");
+    QVERIFY(MyMoneyMoney(rows[1]["value"]) == (moCreditOpen - (moParent1 + moParent2 + moChild) * 3));
 
     html = qtbl_3.renderBody();
-    CPPUNIT_ASSERT(searchHTML(html, i18nc("Total balance", "Total") + ' ' + i18n("Checking")) == moCheckingOpen - moSolo*3);
-    CPPUNIT_ASSERT(searchHTML(html, i18nc("Total balance", "Total") + ' ' + i18n("Credit Card")) == moCreditOpen - (moParent1 + moParent2 + moChild) * 3);
-    CPPUNIT_ASSERT(searchHTML(html, i18nc("Grand total balance", "Grand Total")) == moCheckingOpen + moCreditOpen - (moParent1 + moParent2 + moSolo + moChild) * 3);
+    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + ' ' + i18n("Checking")) == moCheckingOpen - moSolo*3);
+    QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + ' ' + i18n("Credit Card")) == moCreditOpen - (moParent1 + moParent2 + moChild) * 3);
+    QVERIFY(searchHTML(html, i18nc("Grand total balance", "Grand Total")) == moCheckingOpen + moCreditOpen - (moParent1 + moParent2 + moSolo + moChild) * 3);
   } catch (MyMoneyException *e) {
-    CPPUNIT_FAIL(qPrintable(e->what()));
+    QFAIL(qPrintable(e->what()));
     delete e;
   }
 }
@@ -474,74 +475,74 @@ void QueryTableTest::testInvestment(void)
 
     QList<ListTable::TableRow> rows = invtran.rows();
 
-    CPPUNIT_ASSERT(rows.count() == 17);
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[1]["value"]) == MyMoneyMoney(100000.00));
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[2]["value"]) == MyMoneyMoney(110000.00));
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[3]["value"]) == MyMoneyMoney(-24000.00));
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[4]["value"]) == MyMoneyMoney(-20000.00));
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[5]["value"]) == MyMoneyMoney(5000.00));
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[6]["value"]) == MyMoneyMoney(4000.00));
+    QVERIFY(rows.count() == 17);
+    QVERIFY(MyMoneyMoney(rows[1]["value"]) == MyMoneyMoney(100000.00));
+    QVERIFY(MyMoneyMoney(rows[2]["value"]) == MyMoneyMoney(110000.00));
+    QVERIFY(MyMoneyMoney(rows[3]["value"]) == MyMoneyMoney(-24000.00));
+    QVERIFY(MyMoneyMoney(rows[4]["value"]) == MyMoneyMoney(-20000.00));
+    QVERIFY(MyMoneyMoney(rows[5]["value"]) == MyMoneyMoney(5000.00));
+    QVERIFY(MyMoneyMoney(rows[6]["value"]) == MyMoneyMoney(4000.00));
     // need to fix these... fundamentally different from the original test
-    //CPPUNIT_ASSERT(MyMoneyMoney(invtran.m_rows[8]["value"])==MyMoneyMoney( -1000.00));
-    //CPPUNIT_ASSERT(MyMoneyMoney(invtran.m_rows[11]["value"])==MyMoneyMoney( -1200.00));
-    //CPPUNIT_ASSERT(MyMoneyMoney(invtran.m_rows[14]["value"])==MyMoneyMoney( -1100.00));
+    //QVERIFY(MyMoneyMoney(invtran.m_rows[8]["value"])==MyMoneyMoney( -1000.00));
+    //QVERIFY(MyMoneyMoney(invtran.m_rows[11]["value"])==MyMoneyMoney( -1200.00));
+    //QVERIFY(MyMoneyMoney(invtran.m_rows[14]["value"])==MyMoneyMoney( -1100.00));
 
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[1]["price"]) == MyMoneyMoney(100.00));
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[3]["price"]) == MyMoneyMoney(120.00));
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[5]["price"]) == MyMoneyMoney(100.00));
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[7]["price"]) == MyMoneyMoney(100.00));
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[10]["price"]) == MyMoneyMoney(120.00));
+    QVERIFY(MyMoneyMoney(rows[1]["price"]) == MyMoneyMoney(100.00));
+    QVERIFY(MyMoneyMoney(rows[3]["price"]) == MyMoneyMoney(120.00));
+    QVERIFY(MyMoneyMoney(rows[5]["price"]) == MyMoneyMoney(100.00));
+    QVERIFY(MyMoneyMoney(rows[7]["price"]) == MyMoneyMoney(100.00));
+    QVERIFY(MyMoneyMoney(rows[10]["price"]) == MyMoneyMoney(120.00));
 
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[2]["shares"]) == MyMoneyMoney(1000.00));
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[4]["shares"]) == MyMoneyMoney(-200.00));
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[6]["shares"]) == MyMoneyMoney(50.00));
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[8]["shares"]) == MyMoneyMoney(0.00));
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[11]["shares"]) == MyMoneyMoney(0.00));
+    QVERIFY(MyMoneyMoney(rows[2]["shares"]) == MyMoneyMoney(1000.00));
+    QVERIFY(MyMoneyMoney(rows[4]["shares"]) == MyMoneyMoney(-200.00));
+    QVERIFY(MyMoneyMoney(rows[6]["shares"]) == MyMoneyMoney(50.00));
+    QVERIFY(MyMoneyMoney(rows[8]["shares"]) == MyMoneyMoney(0.00));
+    QVERIFY(MyMoneyMoney(rows[11]["shares"]) == MyMoneyMoney(0.00));
 
-    CPPUNIT_ASSERT(rows[1]["action"] == "Buy");
-    CPPUNIT_ASSERT(rows[3]["action"] == "Sell");
-    CPPUNIT_ASSERT(rows[5]["action"] == "Reinvest");
-    CPPUNIT_ASSERT(rows[7]["action"] == "Dividend");
-    CPPUNIT_ASSERT(rows[13]["action"] == "Yield");
+    QVERIFY(rows[1]["action"] == "Buy");
+    QVERIFY(rows[3]["action"] == "Sell");
+    QVERIFY(rows[5]["action"] == "Reinvest");
+    QVERIFY(rows[7]["action"] == "Dividend");
+    QVERIFY(rows[13]["action"] == "Yield");
 #else
-    CPPUNIT_ASSERT(rows.count() == 9);
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[0]["value"]) == MyMoneyMoney(100000.00));
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[1]["value"]) == MyMoneyMoney(110000.00));
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[2]["value"]) == MyMoneyMoney(-24000.00));
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[3]["value"]) == MyMoneyMoney(-20000.00));
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[4]["value"]) == MyMoneyMoney(5000.00));
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[5]["value"]) == MyMoneyMoney(4000.00));
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[6]["value"]) == MyMoneyMoney(-1000.00));
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[7]["value"]) == MyMoneyMoney(-1200.00));
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[8]["value"]) == MyMoneyMoney(-1100.00));
+    QVERIFY(rows.count() == 9);
+    QVERIFY(MyMoneyMoney(rows[0]["value"]) == MyMoneyMoney(100000.00));
+    QVERIFY(MyMoneyMoney(rows[1]["value"]) == MyMoneyMoney(110000.00));
+    QVERIFY(MyMoneyMoney(rows[2]["value"]) == MyMoneyMoney(-24000.00));
+    QVERIFY(MyMoneyMoney(rows[3]["value"]) == MyMoneyMoney(-20000.00));
+    QVERIFY(MyMoneyMoney(rows[4]["value"]) == MyMoneyMoney(5000.00));
+    QVERIFY(MyMoneyMoney(rows[5]["value"]) == MyMoneyMoney(4000.00));
+    QVERIFY(MyMoneyMoney(rows[6]["value"]) == MyMoneyMoney(-1000.00));
+    QVERIFY(MyMoneyMoney(rows[7]["value"]) == MyMoneyMoney(-1200.00));
+    QVERIFY(MyMoneyMoney(rows[8]["value"]) == MyMoneyMoney(-1100.00));
 
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[0]["price"]) == MyMoneyMoney(100.00));
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[2]["price"]) == MyMoneyMoney(120.00));
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[4]["price"]) == MyMoneyMoney(100.00));
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[6]["price"]) == MyMoneyMoney(0.00));
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[8]["price"]) == MyMoneyMoney(0.00));
+    QVERIFY(MyMoneyMoney(rows[0]["price"]) == MyMoneyMoney(100.00));
+    QVERIFY(MyMoneyMoney(rows[2]["price"]) == MyMoneyMoney(120.00));
+    QVERIFY(MyMoneyMoney(rows[4]["price"]) == MyMoneyMoney(100.00));
+    QVERIFY(MyMoneyMoney(rows[6]["price"]) == MyMoneyMoney(0.00));
+    QVERIFY(MyMoneyMoney(rows[8]["price"]) == MyMoneyMoney(0.00));
 
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[1]["shares"]) == MyMoneyMoney(1000.00));
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[3]["shares"]) == MyMoneyMoney(-200.00));
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[5]["shares"]) == MyMoneyMoney(50.00));
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[7]["shares"]) == MyMoneyMoney(0.00));
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[8]["shares"]) == MyMoneyMoney(0.00));
+    QVERIFY(MyMoneyMoney(rows[1]["shares"]) == MyMoneyMoney(1000.00));
+    QVERIFY(MyMoneyMoney(rows[3]["shares"]) == MyMoneyMoney(-200.00));
+    QVERIFY(MyMoneyMoney(rows[5]["shares"]) == MyMoneyMoney(50.00));
+    QVERIFY(MyMoneyMoney(rows[7]["shares"]) == MyMoneyMoney(0.00));
+    QVERIFY(MyMoneyMoney(rows[8]["shares"]) == MyMoneyMoney(0.00));
 
-    CPPUNIT_ASSERT(rows[0]["action"] == "Buy");
-    CPPUNIT_ASSERT(rows[2]["action"] == "Sell");
-    CPPUNIT_ASSERT(rows[4]["action"] == "Reinvest");
-    CPPUNIT_ASSERT(rows[6]["action"] == "Dividend");
-    CPPUNIT_ASSERT(rows[8]["action"] == "Yield");
+    QVERIFY(rows[0]["action"] == "Buy");
+    QVERIFY(rows[2]["action"] == "Sell");
+    QVERIFY(rows[4]["action"] == "Reinvest");
+    QVERIFY(rows[6]["action"] == "Dividend");
+    QVERIFY(rows[8]["action"] == "Yield");
 #endif
 
     QString html = invtran.renderBody();
 #if 1
     // i think this is the correct amount. different treatment of dividend and yield
-    CPPUNIT_ASSERT(searchHTML(html, i18n("Total Stock 1")) == MyMoneyMoney(175000.00));
-    CPPUNIT_ASSERT(searchHTML(html, i18n("Grand Total")) == MyMoneyMoney(175000.00));
+    QVERIFY(searchHTML(html, i18n("Total Stock 1")) == MyMoneyMoney(175000.00));
+    QVERIFY(searchHTML(html, i18n("Grand Total")) == MyMoneyMoney(175000.00));
 #else
-    CPPUNIT_ASSERT(searchHTML(html, i18n("Total Stock 1")) == MyMoneyMoney(171700.00));
-    CPPUNIT_ASSERT(searchHTML(html, i18n("Grand Total")) == MyMoneyMoney(171700.00));
+    QVERIFY(searchHTML(html, i18n("Total Stock 1")) == MyMoneyMoney(171700.00));
+    QVERIFY(searchHTML(html, i18n("Grand Total")) == MyMoneyMoney(171700.00));
 #endif
 
     //
@@ -565,18 +566,18 @@ void QueryTableTest::testInvestment(void)
 
     rows = invhold.rows();
 
-    CPPUNIT_ASSERT(rows.count() == 2);
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[0]["return"]) == MyMoneyMoney("669/10000"));
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[0]["buys"]) == MyMoneyMoney(210000.00));
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[0]["sells"]) == MyMoneyMoney(-44000.00));
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[0]["reinvestincome"]) == MyMoneyMoney(9000.00));
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[0]["cashincome"]) == MyMoneyMoney(3300.00));
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[0]["shares"]) == MyMoneyMoney(1700.00));
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[0]["price"]) == MyMoneyMoney(100.00));
-    CPPUNIT_ASSERT(MyMoneyMoney(rows[1]["return"]).isZero());
+    QVERIFY(rows.count() == 2);
+    QVERIFY(MyMoneyMoney(rows[0]["return"]) == MyMoneyMoney("669/10000"));
+    QVERIFY(MyMoneyMoney(rows[0]["buys"]) == MyMoneyMoney(210000.00));
+    QVERIFY(MyMoneyMoney(rows[0]["sells"]) == MyMoneyMoney(-44000.00));
+    QVERIFY(MyMoneyMoney(rows[0]["reinvestincome"]) == MyMoneyMoney(9000.00));
+    QVERIFY(MyMoneyMoney(rows[0]["cashincome"]) == MyMoneyMoney(3300.00));
+    QVERIFY(MyMoneyMoney(rows[0]["shares"]) == MyMoneyMoney(1700.00));
+    QVERIFY(MyMoneyMoney(rows[0]["price"]) == MyMoneyMoney(100.00));
+    QVERIFY(MyMoneyMoney(rows[1]["return"]).isZero());
 
     html = invhold.renderBody();
-    CPPUNIT_ASSERT(searchHTML(html, i18n("Grand Total")) == MyMoneyMoney(170000.00));
+    QVERIFY(searchHTML(html, i18n("Grand Total")) == MyMoneyMoney(170000.00));
 
 #if 0
     // Dump file & reports
@@ -592,7 +593,7 @@ void QueryTableTest::testInvestment(void)
 #endif
 
   } catch (MyMoneyException *e) {
-    CPPUNIT_FAIL(qPrintable(e->what()));
+    QFAIL(qPrintable(e->what()));
     delete e;
   }
 }
@@ -633,17 +634,17 @@ void QueryTableTest::testBalanceColumn()
 
     QList<ListTable::TableRow> rows = qtbl_3.rows();
 
-    CPPUNIT_ASSERT(rows.count() == 16);
+    QVERIFY(rows.count() == 16);
 
     //this is to make sure that the dates of closing and opening balances and the balance numbers are ok
     QString openingDate = KGlobal::locale()->formatDate(QDate(2004, 1, 1), KLocale::ShortDate);
     QString closingDate = KGlobal::locale()->formatDate(QDate(2005, 9, 1), KLocale::ShortDate);
-    CPPUNIT_ASSERT(html.indexOf(openingDate + "</td><td class=\"left\"></td><td class=\"left\">" + i18n("Opening Balance")) > 0);
-    CPPUNIT_ASSERT(html.indexOf(closingDate + "</td><td class=\"left\"></td><td class=\"left\">" + i18n("Closing Balance") + "</td><td class=\"left\"></td><td class=\"value\"></td><td>&nbsp;-702.36</td></tr>") > 0);
-    CPPUNIT_ASSERT(html.indexOf(closingDate + "</td><td class=\"left\"></td><td class=\"left\">" + i18n("Closing Balance") + "</td><td class=\"left\"></td><td class=\"value\"></td><td>&nbsp;-705.69</td></tr>") > 0);
+    QVERIFY(html.indexOf(openingDate + "</td><td class=\"left\"></td><td class=\"left\">" + i18n("Opening Balance")) > 0);
+    QVERIFY(html.indexOf(closingDate + "</td><td class=\"left\"></td><td class=\"left\">" + i18n("Closing Balance") + "</td><td class=\"left\"></td><td class=\"value\"></td><td>&nbsp;-702.36</td></tr>") > 0);
+    QVERIFY(html.indexOf(closingDate + "</td><td class=\"left\"></td><td class=\"left\">" + i18n("Closing Balance") + "</td><td class=\"left\"></td><td class=\"value\"></td><td>&nbsp;-705.69</td></tr>") > 0);
 
   } catch (MyMoneyException *e) {
-    CPPUNIT_FAIL(qPrintable(e->what()));
+    QFAIL(qPrintable(e->what()));
     delete e;
   }
 
@@ -672,11 +673,12 @@ void QueryTableTest::testTaxReport()
     QList<ListTable::TableRow> rows = qtbl_3.rows();
 
     QString html = qtbl_3.renderBody();
-    CPPUNIT_ASSERT(rows.count() == 1);
+    QVERIFY(rows.count() == 1);
   } catch (MyMoneyException *e) {
-    CPPUNIT_FAIL(qPrintable(e->what()));
+    QFAIL(qPrintable(e->what()));
     delete e;
   }
 }
 
+#include "querytabletest.moc"
 // vim:cin:si:ai:et:ts=2:sw=2:

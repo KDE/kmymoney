@@ -17,7 +17,7 @@
 #ifndef MYMONEYFILETEST_H
 #define MYMONEYFILETEST_H
 
-#include <cppunit/extensions/HelperMacros.h>
+#include <QtCore/QObject>
 #include "autotest.h"
 
 #define private public
@@ -28,61 +28,17 @@
 #undef private
 #undef protected
 
-class MyMoneyFileTest : public CppUnit::TestFixture
+class MyMoneyFileTest : public QObject
 {
-  CPPUNIT_TEST_SUITE(MyMoneyFileTest);
-  CPPUNIT_TEST(testEmptyConstructor);
-  CPPUNIT_TEST(testAddOneInstitution);
-  CPPUNIT_TEST(testAddTwoInstitutions);
-  CPPUNIT_TEST(testInstitutionRetrieval);
-  CPPUNIT_TEST(testRemoveInstitution);
-  CPPUNIT_TEST(testInstitutionListRetrieval);
-  CPPUNIT_TEST(testInstitutionModify);
-  CPPUNIT_TEST(testSetFunctions);
-  CPPUNIT_TEST(testAddAccounts);
-  CPPUNIT_TEST(testModifyAccount);
-  CPPUNIT_TEST(testModifyStdAccount);
-  CPPUNIT_TEST(testReparentAccount);
-  CPPUNIT_TEST(testRemoveAccount);
-  CPPUNIT_TEST(testRemoveAccountTree);
-  CPPUNIT_TEST(testAccountListRetrieval);
-  CPPUNIT_TEST(testAddTransaction);
-  CPPUNIT_TEST(testHasActiveSplits);
-  CPPUNIT_TEST(testIsStandardAccount);
-  CPPUNIT_TEST(testModifyTransactionSimple);
-  CPPUNIT_TEST(testModifyTransactionNewPostDate);
-  CPPUNIT_TEST(testModifyTransactionNewAccount);
-  CPPUNIT_TEST(testRemoveTransaction);
-  CPPUNIT_TEST(testBalanceTotal);
-  CPPUNIT_TEST(testSetAccountName);
-  CPPUNIT_TEST(testAddPayee);
-  CPPUNIT_TEST(testModifyPayee);
-  CPPUNIT_TEST(testRemovePayee);
-  CPPUNIT_TEST(testAddTransactionStd);
-  CPPUNIT_TEST(testAttachStorage);
-  CPPUNIT_TEST(testAccount2Category);
-  CPPUNIT_TEST(testCategory2Account);
-  CPPUNIT_TEST(testAttachedStorage);
-  CPPUNIT_TEST(testHasAccount);
-  CPPUNIT_TEST(testAddEquityAccount);
-  CPPUNIT_TEST(testReparentEquity);
-  CPPUNIT_TEST(testBaseCurrency);
-  CPPUNIT_TEST(testOpeningBalanceNoBase);
-  CPPUNIT_TEST(testOpeningBalance);
-#if 0
-  CPPUNIT_TEST(testMoveSplits);
-#endif
-  CPPUNIT_TEST_SUITE_END();
+  Q_OBJECT
 protected:
   MyMoneyFile *m;
   MyMoneySeqAccessMgr* storage;
   MyMoneyAccount  m_inv;
 
-public:
-  MyMoneyFileTest();
-
-  void setUp();
-  void tearDown();
+private slots:
+  void init();
+  void cleanup();
   void testEmptyConstructor();
   void testAddOneInstitution();
   void testAddTwoInstitutions();

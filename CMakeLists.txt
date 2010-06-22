@@ -228,21 +228,6 @@ IF(ENABLE_LIBICAL)
   ENDIF(NOT LIBICAL_FOUND)
 ENDIF(ENABLE_LIBICAL)
 
-# check for CppUnit to build the tests
-FIND_PACKAGE(CppUnit)
-IF( CPPUNIT_FOUND )
-  SET(HAVE_LIBCPPUNIT 1)
-  INCLUDE_DIRECTORIES( ${CPPUNIT_INCLUDE_DIR} )
-ENDIF( CPPUNIT_FOUND )
-
-# check wether the user requests to build the test although it's not possible
-IF( KDE4_BUILD_TESTS AND NOT CPPUNIT_FOUND )
-  message( STATUS
-    "CppUnit has not been found. Tests have been deactivated." )
-  SET( KDE4_BUILD_TESTS OFF )
-  MARK_AS_ADVANCED( FORCE KDE4_BUILD_TESTS )
-ENDIF( KDE4_BUILD_TESTS AND NOT CPPUNIT_FOUND )
-
 # do we build the tests?
 IF( KDE4_BUILD_TESTS )
   # INCLUDE(CTest) # (makes sense only with a ctest online dashboard)
@@ -430,7 +415,6 @@ nice_yesno("LIBICAL_FOUND")
 nice_yesno("USE_LEAK_CHECK")
 nice_yesno("USE_QT_DESIGNER")
 nice_yesno("USE_DEVELOPER_DOC")
-nice_yesno("HAVE_LIBCPPUNIT")
 nice_yesno("KDE4_BUILD_TESTS")
 nice_yesno("DOXYGEN_FOUND")
 message("
@@ -452,8 +436,7 @@ Qt-Designer library support:             ${nice_USE_QT_DESIGNER}
 
 Developer documentation generation:      ${nice_USE_DEVELOPER_DOC}
 
-CPPUNIT support:                         ${nice_HAVE_LIBCPPUNIT}
-        build tests:                     ${nice_KDE4_BUILD_TESTS}
+Build unit tests:                        ${nice_KDE4_BUILD_TESTS}
 
 Doxygen support:                         ${nice_DOXYGEN_FOUND}
 

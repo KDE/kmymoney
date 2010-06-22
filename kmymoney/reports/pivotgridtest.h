@@ -18,28 +18,22 @@
 #ifndef PIVOTGRIDTEST_H
 #define PIVOTGRIDTEST_H
 
-#include <cppunit/extensions/HelperMacros.h>
+#include <QtCore/QObject>
 #include "mymoneyfile.h"
 #include "mymoneyseqaccessmgr.h"
 
-class PivotGridTest : public CppUnit::TestFixture
+class PivotGridTest : public QObject
 {
-  CPPUNIT_TEST_SUITE(PivotGridTest);
-  CPPUNIT_TEST(testCellAddValue);
-  CPPUNIT_TEST(testCellAddCell);
-  CPPUNIT_TEST(testCellRunningSum);
-  CPPUNIT_TEST_SUITE_END();
-
+  Q_OBJECT
 private:
   MyMoneyAccount  *m;
 
   MyMoneySeqAccessMgr* storage;
   MyMoneyFile* file;
 
-public:
-  PivotGridTest();
-  void setUp();
-  void tearDown();
+private slots:
+  void init();
+  void cleanup();
   void testCellAddValue();
   void testCellAddCell();
   void testCellRunningSum();

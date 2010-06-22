@@ -17,6 +17,8 @@
 
 #include "pivotgridtest.h"
 
+#include <QtTest/QtTest>
+
 #include "reportstestcommon.h"
 
 #define private public
@@ -26,11 +28,9 @@
 using namespace reports;
 using namespace test;
 
-PivotGridTest::PivotGridTest()
-{
-}
+QTEST_MAIN(PivotGridTest)
 
-void PivotGridTest::setUp()
+void PivotGridTest::init()
 {
   storage = new MyMoneySeqAccessMgr;
   file = MyMoneyFile::instance();
@@ -69,7 +69,7 @@ void PivotGridTest::setUp()
   ft.commit();
 }
 
-void PivotGridTest::tearDown()
+void PivotGridTest::cleanup()
 {
   file->detachStorage(storage);
   delete storage;
@@ -78,48 +78,48 @@ void PivotGridTest::tearDown()
 void PivotGridTest::testCellAddValue(void)
 {
   PivotCell a;
-  CPPUNIT_ASSERT(a == MyMoneyMoney(0, 1));
-  CPPUNIT_ASSERT(a.m_stockSplit == MyMoneyMoney(1, 1));
-  CPPUNIT_ASSERT(a.m_postSplit == MyMoneyMoney(0, 1));
-  CPPUNIT_ASSERT(a.formatMoney("", 2) == MyMoneyMoney(0, 1).formatMoney("", 2));
+  QVERIFY(a == MyMoneyMoney(0, 1));
+  QVERIFY(a.m_stockSplit == MyMoneyMoney(1, 1));
+  QVERIFY(a.m_postSplit == MyMoneyMoney(0, 1));
+  QVERIFY(a.formatMoney("", 2) == MyMoneyMoney(0, 1).formatMoney("", 2));
 
   PivotCell b(MyMoneyMoney(13, 10));
-  CPPUNIT_ASSERT(b == MyMoneyMoney(13, 10));
-  CPPUNIT_ASSERT(b.m_stockSplit == MyMoneyMoney(1, 1));
-  CPPUNIT_ASSERT(b.m_postSplit == MyMoneyMoney(0, 1));
-  CPPUNIT_ASSERT(b.formatMoney("", 2) == MyMoneyMoney(13, 10).formatMoney("", 2));
+  QVERIFY(b == MyMoneyMoney(13, 10));
+  QVERIFY(b.m_stockSplit == MyMoneyMoney(1, 1));
+  QVERIFY(b.m_postSplit == MyMoneyMoney(0, 1));
+  QVERIFY(b.formatMoney("", 2) == MyMoneyMoney(13, 10).formatMoney("", 2));
 
   PivotCell s(b);
-  CPPUNIT_ASSERT(s == MyMoneyMoney(13, 10));
-  CPPUNIT_ASSERT(s.m_stockSplit == MyMoneyMoney(1, 1));
-  CPPUNIT_ASSERT(s.m_postSplit == MyMoneyMoney(0, 1));
-  CPPUNIT_ASSERT(s.formatMoney("", 2) == MyMoneyMoney(13, 10).formatMoney("", 2));
+  QVERIFY(s == MyMoneyMoney(13, 10));
+  QVERIFY(s.m_stockSplit == MyMoneyMoney(1, 1));
+  QVERIFY(s.m_postSplit == MyMoneyMoney(0, 1));
+  QVERIFY(s.formatMoney("", 2) == MyMoneyMoney(13, 10).formatMoney("", 2));
 
   s = PivotCell::stockSplit(MyMoneyMoney(1, 2));
-  CPPUNIT_ASSERT(s == MyMoneyMoney(0, 1));
-  CPPUNIT_ASSERT(s.m_stockSplit == MyMoneyMoney(1, 2));
-  CPPUNIT_ASSERT(s.m_postSplit == MyMoneyMoney(0, 1));
-  CPPUNIT_ASSERT(s.formatMoney("", 2) == MyMoneyMoney(0, 1).formatMoney("", 2));
+  QVERIFY(s == MyMoneyMoney(0, 1));
+  QVERIFY(s.m_stockSplit == MyMoneyMoney(1, 2));
+  QVERIFY(s.m_postSplit == MyMoneyMoney(0, 1));
+  QVERIFY(s.formatMoney("", 2) == MyMoneyMoney(0, 1).formatMoney("", 2));
 
   a += MyMoneyMoney(1, 1);
   a += MyMoneyMoney(2, 1);
-  CPPUNIT_ASSERT(a == MyMoneyMoney(3, 1));
-  CPPUNIT_ASSERT(a.m_stockSplit == MyMoneyMoney(1, 1));
-  CPPUNIT_ASSERT(a.m_postSplit == MyMoneyMoney(0, 1));
-  CPPUNIT_ASSERT(a.formatMoney("", 2) == MyMoneyMoney(3, 1).formatMoney("", 2));
+  QVERIFY(a == MyMoneyMoney(3, 1));
+  QVERIFY(a.m_stockSplit == MyMoneyMoney(1, 1));
+  QVERIFY(a.m_postSplit == MyMoneyMoney(0, 1));
+  QVERIFY(a.formatMoney("", 2) == MyMoneyMoney(3, 1).formatMoney("", 2));
 
   a += s;
-  CPPUNIT_ASSERT(a == MyMoneyMoney(3, 1));
-  CPPUNIT_ASSERT(a.m_stockSplit == MyMoneyMoney(1, 2));
-  CPPUNIT_ASSERT(a.m_postSplit == MyMoneyMoney(0, 1));
-  CPPUNIT_ASSERT(a.formatMoney("", 2) == MyMoneyMoney(15, 10).formatMoney("", 2));
+  QVERIFY(a == MyMoneyMoney(3, 1));
+  QVERIFY(a.m_stockSplit == MyMoneyMoney(1, 2));
+  QVERIFY(a.m_postSplit == MyMoneyMoney(0, 1));
+  QVERIFY(a.formatMoney("", 2) == MyMoneyMoney(15, 10).formatMoney("", 2));
 
   a += MyMoneyMoney(3, 1);
   a += MyMoneyMoney(3, 1);
-  CPPUNIT_ASSERT(a == MyMoneyMoney(3, 1));
-  CPPUNIT_ASSERT(a.m_stockSplit == MyMoneyMoney(1, 2));
-  CPPUNIT_ASSERT(a.m_postSplit == MyMoneyMoney(6, 1));
-  CPPUNIT_ASSERT(a.formatMoney("", 2) == MyMoneyMoney(75, 10).formatMoney("", 2));
+  QVERIFY(a == MyMoneyMoney(3, 1));
+  QVERIFY(a.m_stockSplit == MyMoneyMoney(1, 2));
+  QVERIFY(a.m_postSplit == MyMoneyMoney(6, 1));
+  QVERIFY(a.formatMoney("", 2) == MyMoneyMoney(75, 10).formatMoney("", 2));
 }
 
 void PivotGridTest::testCellAddCell(void)
@@ -130,26 +130,26 @@ void PivotGridTest::testCellAddCell(void)
   a += PivotCell::stockSplit(MyMoneyMoney(2, 1));
   a += MyMoneyMoney(4, 1);
 
-  CPPUNIT_ASSERT(a == MyMoneyMoney(3, 1));
-  CPPUNIT_ASSERT(a.m_stockSplit == MyMoneyMoney(2, 1));
-  CPPUNIT_ASSERT(a.m_postSplit == MyMoneyMoney(4, 1));
-  CPPUNIT_ASSERT(a.formatMoney("", 2) == MyMoneyMoney(10, 1).formatMoney("", 2));
+  QVERIFY(a == MyMoneyMoney(3, 1));
+  QVERIFY(a.m_stockSplit == MyMoneyMoney(2, 1));
+  QVERIFY(a.m_postSplit == MyMoneyMoney(4, 1));
+  QVERIFY(a.formatMoney("", 2) == MyMoneyMoney(10, 1).formatMoney("", 2));
 
   b += MyMoneyMoney(4, 1);
   b += PivotCell::stockSplit(MyMoneyMoney(4, 1));
   b += MyMoneyMoney(16, 1);
 
-  CPPUNIT_ASSERT(b == MyMoneyMoney(4, 1));
-  CPPUNIT_ASSERT(b.m_stockSplit == MyMoneyMoney(4, 1));
-  CPPUNIT_ASSERT(b.m_postSplit == MyMoneyMoney(16, 1));
-  CPPUNIT_ASSERT(b.formatMoney("", 2) == MyMoneyMoney(32, 1).formatMoney("", 2));
+  QVERIFY(b == MyMoneyMoney(4, 1));
+  QVERIFY(b.m_stockSplit == MyMoneyMoney(4, 1));
+  QVERIFY(b.m_postSplit == MyMoneyMoney(16, 1));
+  QVERIFY(b.formatMoney("", 2) == MyMoneyMoney(32, 1).formatMoney("", 2));
 
   a += b;
 
-  CPPUNIT_ASSERT(a == MyMoneyMoney(3, 1));
-  CPPUNIT_ASSERT(a.m_stockSplit == MyMoneyMoney(8, 1));
-  CPPUNIT_ASSERT(a.m_postSplit == MyMoneyMoney(48, 1));
-  CPPUNIT_ASSERT(a.formatMoney("", 2) == MyMoneyMoney(72, 1).formatMoney("", 2));
+  QVERIFY(a == MyMoneyMoney(3, 1));
+  QVERIFY(a.m_stockSplit == MyMoneyMoney(8, 1));
+  QVERIFY(a.m_postSplit == MyMoneyMoney(48, 1));
+  QVERIFY(a.formatMoney("", 2) == MyMoneyMoney(72, 1).formatMoney("", 2));
 }
 
 void PivotGridTest::testCellRunningSum(void)
@@ -161,15 +161,16 @@ void PivotGridTest::testCellRunningSum(void)
   a += PivotCell::stockSplit(MyMoneyMoney(125, 100));
   a += MyMoneyMoney(134, 10);
 
-  CPPUNIT_ASSERT(a.m_stockSplit != MyMoneyMoney(1, 1));
-  CPPUNIT_ASSERT(a.m_postSplit != MyMoneyMoney(0, 1));
+  QVERIFY(a.m_stockSplit != MyMoneyMoney(1, 1));
+  QVERIFY(a.m_postSplit != MyMoneyMoney(0, 1));
 
   runningSum = a.calculateRunningSum(runningSum);
 
-  CPPUNIT_ASSERT(runningSum == MyMoneyMoney(1865, 100));
-  CPPUNIT_ASSERT(a.formatMoney("", 2) == MyMoneyMoney(1865, 100).formatMoney("", 2));
-  CPPUNIT_ASSERT(a.m_stockSplit == MyMoneyMoney(1, 1));
-  CPPUNIT_ASSERT(a.m_postSplit == MyMoneyMoney(0, 1));
+  QVERIFY(runningSum == MyMoneyMoney(1865, 100));
+  QVERIFY(a.formatMoney("", 2) == MyMoneyMoney(1865, 100).formatMoney("", 2));
+  QVERIFY(a.m_stockSplit == MyMoneyMoney(1, 1));
+  QVERIFY(a.m_postSplit == MyMoneyMoney(0, 1));
 }
 
+#include "pivotgridtest.moc"
 // vim:cin:si:ai:et:ts=2:sw=2:

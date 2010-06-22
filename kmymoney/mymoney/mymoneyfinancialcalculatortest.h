@@ -17,7 +17,7 @@
 #ifndef MYMONEYFINANCIALCALCULATORTEST_H
 #define MYMONEYFINANCIALCALCULATORTEST_H
 
-#include <cppunit/extensions/HelperMacros.h>
+#include <QtCore/QObject>
 #include "autotest.h"
 
 #define private public
@@ -26,33 +26,16 @@
 #undef private
 #undef protected
 
-class MyMoneyFinancialCalculatorTest : public CppUnit::TestFixture
+class MyMoneyFinancialCalculatorTest : public QObject
 {
-  CPPUNIT_TEST_SUITE(MyMoneyFinancialCalculatorTest);
-  CPPUNIT_TEST(testEmptyConstructor);
-  CPPUNIT_TEST(testSetPrec);
-  CPPUNIT_TEST(testSetNpp);
-  CPPUNIT_TEST(testSetPF);
-  CPPUNIT_TEST(testSetCF);
-  CPPUNIT_TEST(testSetBep);
-  CPPUNIT_TEST(testSetDisc);
-  CPPUNIT_TEST(testSetIr);
-  CPPUNIT_TEST(testSetPv);
-  CPPUNIT_TEST(testSetPmt);
-  CPPUNIT_TEST(testSetFv);
-  CPPUNIT_TEST(testCombinedSet);
-  CPPUNIT_TEST(testNumPayments);
-  CPPUNIT_TEST(testUseCase1);
-  CPPUNIT_TEST(testUseCase2);
-  CPPUNIT_TEST_SUITE_END();
+  Q_OBJECT
 protected:
   MyMoneyFinancialCalculator *m;
 
-public:
-  MyMoneyFinancialCalculatorTest();
+private slots:
 
-  void setUp();
-  void tearDown();
+  void init();
+  void cleanup();
   void testEmptyConstructor();
   void testSetPrec();
   void testSetNpp();

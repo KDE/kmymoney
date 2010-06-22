@@ -18,46 +18,25 @@
 #ifndef PIVOTTABLETEST_H
 #define PIVOTTABLETEST_H
 
-#include <cppunit/extensions/HelperMacros.h>
+#include <QtCore/QObject>
 #include "mymoneyfile.h"
 #include "mymoneyseqaccessmgr.h"
 
 #define protected public
 #include "reporttable.h"
 
-class PivotTableTest : public CppUnit::TestFixture
+class PivotTableTest : public QObject
 {
-  CPPUNIT_TEST_SUITE(PivotTableTest);
-  CPPUNIT_TEST(testNetWorthSingle);
-  CPPUNIT_TEST(testNetWorthOfsetting);
-  CPPUNIT_TEST(testNetWorthOpeningPrior);
-  CPPUNIT_TEST(testNetWorthDateFilter);
-  CPPUNIT_TEST(testSpendingEmpty);
-  CPPUNIT_TEST(testSingleTransaction);
-  CPPUNIT_TEST(testSubAccount);
-  CPPUNIT_TEST(testFilterIEvsIE);
-  CPPUNIT_TEST(testFilterALvsAL);
-  CPPUNIT_TEST(testFilterALvsIE);
-  CPPUNIT_TEST(testFilterAllvsIE);
-  CPPUNIT_TEST(testFilterBasics);
-  CPPUNIT_TEST(testMultipleCurrencies);
-  CPPUNIT_TEST(testAdvancedFilter);
-  CPPUNIT_TEST(testColumnType);
-  CPPUNIT_TEST(testInvestment);
-  CPPUNIT_TEST(testBudget);
-  CPPUNIT_TEST(testHtmlEncoding);
-  CPPUNIT_TEST_SUITE_END();
-
+  Q_OBJECT
 private:
   MyMoneyAccount  *m;
 
   MyMoneySeqAccessMgr* storage;
   MyMoneyFile* file;
 
-public:
-  PivotTableTest();
-  void setUp();
-  void tearDown();
+private slots:
+  void init();
+  void cleanup();
   void testNetWorthSingle();
   void testNetWorthOfsetting();
   void testNetWorthOpeningPrior();

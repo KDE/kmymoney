@@ -19,8 +19,11 @@
 
 #include <config-kmymoney.h>
 
+#include <QtTest/QtTest>
 #include <QFile>
 
+#include <kaboutdata.h>
+#include <kcomponentdata.h>
 #include <kdebug.h>
 #include <kdeversion.h>
 #include <kglobal.h>
@@ -28,14 +31,16 @@
 #include <klocale.h>
 #include <kstandarddirs.h>
 
+#include <qtest_kde.h>
+
 // uses helper functions from reports tests
 #include "reportstestcommon.h"
 using namespace test;
 
-#include <mymoneysecurity.h>
-#include <mymoneyprice.h>
-#include <mymoneyreport.h>
-#include <mymoneystatement.h>
+#include "mymoneysecurity.h"
+#include "mymoneyprice.h"
+#include "mymoneyreport.h"
+#include "mymoneystatement.h"
 #include "storage/mymoneystoragexml.h"
 #include "storage/mymoneystoragedump.h"
 
@@ -43,14 +48,12 @@ using namespace test;
 #include "webpricequote.h"
 #undef private
 
-ConverterTest::ConverterTest()
-{ }
+QTEST_KDEMAIN_CORE_WITH_COMPONENTNAME(ConverterTest, "kmymoney")
 
 using namespace convertertest;
 
-void ConverterTest::setUp()
+void ConverterTest::init()
 {
-
   storage = new MyMoneySeqAccessMgr;
   file = MyMoneyFile::instance();
   file->attachStorage(storage);
@@ -85,10 +88,63 @@ void ConverterTest::setUp()
   ft.commit();
 }
 
-void ConverterTest::tearDown()
+void ConverterTest::cleanup()
 {
   file->detachStorage(storage);
   delete storage;
+}
+
+void ConverterTest::testWebQuotes_data()
+{
+  QTest::addColumn<QString>("symbol");
+  QTest::addColumn<QString>("testname");
+  QTest::addColumn<QString>("source");
+
+  QTest::newRow("Yahoo UK") << "VOD.L" << "test Yahoo UK" << "Yahoo UK";
+  QTest::newRow("Yahoo Currency") << "EUR > USD" << "test Yahoo Currency" << "Yahoo Currency";
+  QTest::newRow("Financial Express") << "0585239" << "test Financial Express" << "Financial Express";
+  QTest::newRow("Yahoo France") << "EAD.PA" << "test Yahoo France" << "Yahoo France";
+  QTest::newRow("Globe & Mail") << "50492" << "test Globe-Mail" << "Globe & Mail";
+  QTest::newRow("MSN Canada") << "TDB647" << "test MSN.CA" << "MSN.CA";
+
+//  QTest::newRow("Finanztreff") << "BASF.SE" << "test Finanztreff" << "Finanztreff";
+//  QTest::newRow("boerseonline") << "symbol" << "test boerseonline" << "boerseonline";
+//  QTest::newRow("Wallstreet-Online.DE (Default)") << "symbol" << "test Wallstreet-Online.DE (Default)" << "Wallstreet-Online.DE (Default)";
+//  QTest::newRow("Financial Times UK") << "DZGEAE" << "test Financial Times UK Funds" << "Financial Times UK Funds");
+
+  QTest::newRow("Yahoo Canada") << "UTS.TO" << "test Yahoo Canada" << "Yahoo Canada";
+
+//  QTest::newRow("Wallstreed-Online.DE (Hamburg)") << "TDB647" << "test Wallstreet-Online.DE (Hamburg)" << "Wallstreet-Online.DE (Hamburg)";
+//  QTest::newRow("Gielda Papierow Wartosciowych (GPW)") << "TDB647" << "test Gielda Papierow Wartosciowych (GPW)" << "Gielda Papierow Wartosciowych (GPW)";
+//  QTest::newRow("OMX Baltic") << "TDB647" << "test OMX Baltic funds" << "OMX Baltic funds";
+
+  QTest::newRow("Finance::Quote usa") << "DIS" << "test F::Q usa" << "Finance::Quote usa";
+//UNTESTED: Other F::Q sources, local files, user custom sources
+}
+
+void ConverterTest::testWebQuotesDefault()
+{
+#ifdef PERFORM_ONLINE_TESTS
+  try {
+    WebPriceQuote q;
+    QuoteReceiver qr(&q);
+
+    q.launch("DIS", "test default");
+//    kDebug(2) << "ConverterTest::testWebQuotes(): quote for " << q.m_symbol << " on " << qr.m_date.toString() << " is " << qr.m_price.toString() << " errors(" << qr.m_errors.count() << "): " << qr.m_errors.join(" /// ");
+
+    // No errors allowed
+    QVERIFY(qr.m_errors.count() == 0);
+
+    // Quote date should be within the last week, or something bad is going on.
+    QVERIFY(qr.m_date <= QDate::currentDate());
+    QVERIFY(qr.m_date >= QDate::currentDate().addDays(-7));
+
+    // Quote value should at least be positive
+    QVERIFY(qr.m_price.isPositive());
+  } catch (MyMoneyException* e) {
+    QFAIL(qPrintable(e->what()));
+  }
+#endif
 }
 
 void ConverterTest::testWebQuotes()
@@ -98,114 +154,18 @@ void ConverterTest::testWebQuotes()
     WebPriceQuote q;
     QuoteReceiver qr(&q);
 
-    q.launch("DIS", "test default");
+    QFETCH(QString, symbol);
+    QFETCH(QString, testname);
+    QFETCH(QString, source);
 
-//    kDebug(2) << "ConverterTest::testWebQuotes(): quote for " << q.m_symbol << " on " << qr.m_date.toString() << " is " << qr.m_price.toString() << " errors(" << qr.m_errors.count() << "): " << qr.m_errors.join(" /// ");
+    q.launch(symbol, testname, source);
+    QVERIFY(qr.m_errors.count() == 0);
+    QVERIFY(qr.m_date <= QDate::currentDate().addDays(1));
+    QVERIFY(qr.m_date >= QDate::currentDate().addDays(-7));
+    QVERIFY(qr.m_price.isPositive());
 
-    // No errors allowed
-    CPPUNIT_ASSERT(qr.m_errors.count() == 0);
-
-    // Quote date should be within the last week, or something bad is going on.
-    CPPUNIT_ASSERT(qr.m_date <= QDate::currentDate());
-    CPPUNIT_ASSERT(qr.m_date >= QDate::currentDate().addDays(-7));
-
-    // Quote value should at least be positive
-    CPPUNIT_ASSERT(qr.m_price.isPositive());
-
-    q.launch("VOD.L", "test Yahoo UK", "Yahoo UK");
-    CPPUNIT_ASSERT(qr.m_errors.count() == 0);
-    CPPUNIT_ASSERT(qr.m_date <= QDate::currentDate().addDays(1));
-    CPPUNIT_ASSERT(qr.m_date >= QDate::currentDate().addDays(-7));
-    CPPUNIT_ASSERT(qr.m_price.isPositive());
-
-    q.launch("EUR > USD", "test Yahoo Currency", "Yahoo Currency");
-    CPPUNIT_ASSERT(qr.m_errors.count() == 0);
-    CPPUNIT_ASSERT(qr.m_date <= QDate::currentDate().addDays(1));
-    CPPUNIT_ASSERT(qr.m_date >= QDate::currentDate().addDays(-7));
-    CPPUNIT_ASSERT(qr.m_price.isPositive());
-
-    q.launch("0585239", "test Financial Express", "Financial Express");
-    CPPUNIT_ASSERT(qr.m_errors.count() == 0);
-    CPPUNIT_ASSERT(qr.m_date <= QDate::currentDate().addDays(1));
-    CPPUNIT_ASSERT(qr.m_date >= QDate::currentDate().addDays(-7));
-    CPPUNIT_ASSERT(qr.m_price.isPositive());
-
-    q.launch("EAD.PA", "test Yahoo France", "Yahoo France");
-    CPPUNIT_ASSERT(qr.m_errors.count() == 0);
-    CPPUNIT_ASSERT(qr.m_date <= QDate::currentDate().addDays(1));
-    CPPUNIT_ASSERT(qr.m_date >= QDate::currentDate().addDays(-7));
-    CPPUNIT_ASSERT(qr.m_price.isPositive());
-
-    q.launch("50492", "test Globe-Mail", "Globe & Mail");
-    CPPUNIT_ASSERT(qr.m_errors.count() == 0);
-    CPPUNIT_ASSERT(qr.m_date <= QDate::currentDate().addDays(1));
-    CPPUNIT_ASSERT(qr.m_date >= QDate::currentDate().addDays(-7));
-    CPPUNIT_ASSERT(qr.m_price.isPositive());
-
-    q.launch("TDB647", "test MSN.CA", "MSN.CA");
-    CPPUNIT_ASSERT(qr.m_errors.count() == 0);
-    CPPUNIT_ASSERT(qr.m_date <= QDate::currentDate().addDays(1));
-    CPPUNIT_ASSERT(qr.m_date >= QDate::currentDate().addDays(-7));
-    CPPUNIT_ASSERT(qr.m_price.isPositive());
-
-//    q.launch("BASF.SE", "test Finanztreff", "Finanztreff");
-    CPPUNIT_ASSERT(qr.m_errors.count() == 0);
-    CPPUNIT_ASSERT(qr.m_date <= QDate::currentDate().addDays(1));
-    CPPUNIT_ASSERT(qr.m_date >= QDate::currentDate().addDays(-7));
-    CPPUNIT_ASSERT(qr.m_price.isPositive());
-
-//    q.launch("symbol", "test boerseonline", "boerseonline");
-    CPPUNIT_ASSERT(qr.m_errors.count() == 0);
-    CPPUNIT_ASSERT(qr.m_date <= QDate::currentDate().addDays(1));
-    CPPUNIT_ASSERT(qr.m_date >= QDate::currentDate().addDays(-7));
-    CPPUNIT_ASSERT(qr.m_price.isPositive());
-
-//    q.launch("symbol", "test Wallstreet-Online.DE (Default)", "Wallstreet-Online.DE (Default)");
-    CPPUNIT_ASSERT(qr.m_errors.count() == 0);
-    CPPUNIT_ASSERT(qr.m_date <= QDate::currentDate().addDays(1));
-    CPPUNIT_ASSERT(qr.m_date >= QDate::currentDate().addDays(-7));
-    CPPUNIT_ASSERT(qr.m_price.isPositive());
-
-//    q.launch("DZGEAE", "test Financial Times UK Funds", "Financial Times UK Funds");
-    CPPUNIT_ASSERT(qr.m_errors.count() == 0);
-    CPPUNIT_ASSERT(qr.m_date <= QDate::currentDate().addDays(1));
-    CPPUNIT_ASSERT(qr.m_date >= QDate::currentDate().addDays(-7));
-    CPPUNIT_ASSERT(qr.m_price.isPositive());
-
-    q.launch("UTS.TO", "test Yahoo Canada", "Yahoo Canada");
-    CPPUNIT_ASSERT(qr.m_errors.count() == 0);
-    CPPUNIT_ASSERT(qr.m_date <= QDate::currentDate().addDays(1));
-    CPPUNIT_ASSERT(qr.m_date >= QDate::currentDate().addDays(-7));
-    CPPUNIT_ASSERT(qr.m_price.isPositive());
-
-//    q.launch("TDB647", "test Wallstreet-Online.DE (Hamburg)", "Wallstreet-Online.DE (Hamburg)");
-    CPPUNIT_ASSERT(qr.m_errors.count() == 0);
-    CPPUNIT_ASSERT(qr.m_date <= QDate::currentDate().addDays(1));
-    CPPUNIT_ASSERT(qr.m_date >= QDate::currentDate().addDays(-7));
-    CPPUNIT_ASSERT(qr.m_price.isPositive());
-
-//    q.launch("TDB647", "test Gielda Papierow Wartosciowych (GPW)", "Gielda Papierow Wartosciowych (GPW)");
-    CPPUNIT_ASSERT(qr.m_errors.count() == 0);
-    CPPUNIT_ASSERT(qr.m_date <= QDate::currentDate().addDays(1));
-    CPPUNIT_ASSERT(qr.m_date >= QDate::currentDate().addDays(-7));
-    CPPUNIT_ASSERT(qr.m_price.isPositive());
-
-//    q.launch("TDB647", "test OMX Baltic funds", "OMX Baltic funds");
-    CPPUNIT_ASSERT(qr.m_errors.count() == 0);
-    CPPUNIT_ASSERT(qr.m_date <= QDate::currentDate().addDays(1));
-    CPPUNIT_ASSERT(qr.m_date >= QDate::currentDate().addDays(-7));
-    CPPUNIT_ASSERT(qr.m_price.isPositive());
-
-// TESTING F::Q
-    q.launch("DIS", "test F::Q usa", "Finance::Quote usa");
-    CPPUNIT_ASSERT(qr.m_errors.count() == 0);
-    CPPUNIT_ASSERT(qr.m_date <= QDate::currentDate().addDays(1));
-    CPPUNIT_ASSERT(qr.m_date >= QDate::currentDate().addDays(-7));
-    CPPUNIT_ASSERT(qr.m_price.isPositive());
-
-//UNTESTED: Other F::Q sources, local files, user custom sources
   } catch (MyMoneyException* e) {
-    CPPUNIT_FAIL(qPrintable(e->what()));
+    QFAIL(qPrintable(e->what()));
   }
 #endif
 }
@@ -215,42 +175,44 @@ void ConverterTest::testDateFormat()
   try {
     MyMoneyDateFormat format("%mm-%dd-%yyyy");
 
-    CPPUNIT_ASSERT(format.convertString("1-5-2005") == QDate(2005, 1, 5));
-    CPPUNIT_ASSERT(format.convertString("jan-15-2005") == QDate(2005, 1, 15));
-    CPPUNIT_ASSERT(format.convertString("august-25-2005") == QDate(2005, 8, 25));
+    QVERIFY(format.convertString("1-5-2005") == QDate(2005, 1, 5));
+    QVERIFY(format.convertString("jan-15-2005") == QDate(2005, 1, 15));
+    QVERIFY(format.convertString("august-25-2005") == QDate(2005, 8, 25));
 
     format = MyMoneyDateFormat("%mm/%dd/%yy");
 
-    CPPUNIT_ASSERT(format.convertString("1/5/05") == QDate(2005, 1, 5));
-    CPPUNIT_ASSERT(format.convertString("jan/15/05") == QDate(2005, 1, 15));
-    CPPUNIT_ASSERT(format.convertString("august/25/05") == QDate(2005, 8, 25));
+    QVERIFY(format.convertString("1/5/05") == QDate(2005, 1, 5));
+    QVERIFY(format.convertString("jan/15/05") == QDate(2005, 1, 15));
+    QVERIFY(format.convertString("august/25/05") == QDate(2005, 8, 25));
 
     format = MyMoneyDateFormat("%d\\.%m\\.%yy");
 
-    CPPUNIT_ASSERT(format.convertString("1.5.05") == QDate(2005, 5, 1));
-    CPPUNIT_ASSERT(format.convertString("15.jan.05") == QDate(2005, 1, 15));
-    CPPUNIT_ASSERT(format.convertString("25.august.05") == QDate(2005, 8, 25));
+    QVERIFY(format.convertString("1.5.05") == QDate(2005, 5, 1));
+    QVERIFY(format.convertString("15.jan.05") == QDate(2005, 1, 15));
+    QVERIFY(format.convertString("25.august.05") == QDate(2005, 8, 25));
 
     format = MyMoneyDateFormat("%yyyy\\\\%dddd\\\\%mmmmmmmmmmm");
 
-    CPPUNIT_ASSERT(format.convertString("2005\\31\\12") == QDate(2005, 12, 31));
-    CPPUNIT_ASSERT(format.convertString("2005\\15\\jan") == QDate(2005, 1, 15));
-    CPPUNIT_ASSERT(format.convertString("2005\\25\\august") == QDate(2005, 8, 25));
+    QVERIFY(format.convertString("2005\\31\\12") == QDate(2005, 12, 31));
+    QVERIFY(format.convertString("2005\\15\\jan") == QDate(2005, 1, 15));
+    QVERIFY(format.convertString("2005\\25\\august") == QDate(2005, 8, 25));
 
     format = MyMoneyDateFormat("%m %dd, %yyyy");
 
-    CPPUNIT_ASSERT(format.convertString("jan 15, 2005") == QDate(2005, 1, 15));
-    CPPUNIT_ASSERT(format.convertString("august 25, 2005") == QDate(2005, 8, 25));
-    CPPUNIT_ASSERT(format.convertString("january 1st, 2005") == QDate(2005, 1, 1));
+    QVERIFY(format.convertString("jan 15, 2005") == QDate(2005, 1, 15));
+    QVERIFY(format.convertString("august 25, 2005") == QDate(2005, 8, 25));
+    QVERIFY(format.convertString("january 1st, 2005") == QDate(2005, 1, 1));
 
     format = MyMoneyDateFormat("%m %d %y");
 
-    CPPUNIT_ASSERT(format.convertString("12/31/50", false, 2000) == QDate(1950, 12, 31));
-    CPPUNIT_ASSERT(format.convertString("1/1/90", false, 2000) == QDate(1990, 1, 1));
-    CPPUNIT_ASSERT(format.convertString("december 31st, 5", false) == QDate(2005, 12, 31));
+    QVERIFY(format.convertString("12/31/50", false, 2000) == QDate(1950, 12, 31));
+    QVERIFY(format.convertString("1/1/90", false, 2000) == QDate(1990, 1, 1));
+    QVERIFY(format.convertString("december 31st, 5", false) == QDate(2005, 12, 31));
   } catch (MyMoneyException* e) {
-    CPPUNIT_FAIL(qPrintable(e->what()));
+    QFAIL(qPrintable(e->what()));
   }
 }
+
+#include "convertertest.moc"
 
 // vim:cin:si:ai:et:ts=2:sw=2:

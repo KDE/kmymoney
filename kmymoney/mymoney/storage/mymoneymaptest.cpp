@@ -16,18 +16,16 @@
 
 #include "mymoneymaptest.h"
 #include <iostream>
+#include <QtTest/QtTest>
 
-MyMoneyMapTest::MyMoneyMapTest()
-{
-}
+QTEST_MAIN(MyMoneyMapTest)
 
-
-void MyMoneyMapTest::setUp()
+void MyMoneyMapTest::init()
 {
   m = new MyMoneyMap<QString, QString>;
 }
 
-void MyMoneyMapTest::tearDown()
+void MyMoneyMapTest::cleanup()
 {
   delete m;
 }
@@ -35,4 +33,6 @@ void MyMoneyMapTest::tearDown()
 void MyMoneyMapTest::testArrayOperator()
 {
 }
+
+#include "mymoneymaptest.moc"
 

@@ -18,18 +18,20 @@
 
 #include <iostream>
 #include <QList>
+#include <QtTest/QtTest>
 
 #include "mymoneybudget.h"
 
-#include <mymoneyexception.h>
+#include "mymoneyexception.h"
 
 #include "kmymoneyglobalsettings.h"
 #include "mymoneystoragedump.h"
 #include "mymoneystoragexml.h"
 #include "reportstestcommon.h"
 
-
 using namespace test;
+
+QTEST_MAIN(MyMoneyForecastTest)
 
 MyMoneyForecastTest::MyMoneyForecastTest()
 {
@@ -40,8 +42,7 @@ MyMoneyForecastTest::MyMoneyForecastTest()
   this->moT5 = MyMoneyMoney(104, 1);
 }
 
-
-void MyMoneyForecastTest::setUp()
+void MyMoneyForecastTest::init()
 {
 
   //all this has been taken from pivottabletest.cpp, by Thomas Baumgart and Ace Jones
@@ -89,7 +90,7 @@ void MyMoneyForecastTest::setUp()
 
 }
 
-void MyMoneyForecastTest::tearDown()
+void MyMoneyForecastTest::cleanup()
 {
   file->detachStorage(storage);
   delete storage;
@@ -102,17 +103,17 @@ void MyMoneyForecastTest::testEmptyConstructor()
 
   int f = a.forecastBalance(b, QDate::currentDate());
 
-  CPPUNIT_ASSERT(f == 0);
-  CPPUNIT_ASSERT(!a.isForecastAccount(b));
-  CPPUNIT_ASSERT(a.forecastBalance(b, QDate::currentDate()) == MyMoneyMoney(0, 1));
-  CPPUNIT_ASSERT(a.daysToMinimumBalance(b) == -1);
-  CPPUNIT_ASSERT(a.daysToZeroBalance(b) == -2);
-  CPPUNIT_ASSERT(a.forecastDays() == KMyMoneyGlobalSettings::forecastDays());
-  CPPUNIT_ASSERT(a.accountsCycle() == KMyMoneyGlobalSettings::forecastAccountCycle());
-  CPPUNIT_ASSERT(a.forecastCycles() == KMyMoneyGlobalSettings::forecastCycles());
-  CPPUNIT_ASSERT(a.historyStartDate() == QDate::currentDate().addDays(-KMyMoneyGlobalSettings::forecastCycles()*KMyMoneyGlobalSettings::forecastAccountCycle()));
-  CPPUNIT_ASSERT(a.historyEndDate() == QDate::currentDate().addDays(-1));
-  CPPUNIT_ASSERT(a.historyDays() == KMyMoneyGlobalSettings::forecastAccountCycle() * KMyMoneyGlobalSettings::forecastCycles());
+  QVERIFY(f == 0);
+  QVERIFY(!a.isForecastAccount(b));
+  QVERIFY(a.forecastBalance(b, QDate::currentDate()) == MyMoneyMoney(0, 1));
+  QVERIFY(a.daysToMinimumBalance(b) == -1);
+  QVERIFY(a.daysToZeroBalance(b) == -2);
+  QVERIFY(a.forecastDays() == KMyMoneyGlobalSettings::forecastDays());
+  QVERIFY(a.accountsCycle() == KMyMoneyGlobalSettings::forecastAccountCycle());
+  QVERIFY(a.forecastCycles() == KMyMoneyGlobalSettings::forecastCycles());
+  QVERIFY(a.historyStartDate() == QDate::currentDate().addDays(-KMyMoneyGlobalSettings::forecastCycles()*KMyMoneyGlobalSettings::forecastAccountCycle()));
+  QVERIFY(a.historyEndDate() == QDate::currentDate().addDays(-1));
+  QVERIFY(a.historyDays() == KMyMoneyGlobalSettings::forecastAccountCycle() * KMyMoneyGlobalSettings::forecastCycles());
 }
 
 
@@ -130,7 +131,7 @@ void MyMoneyForecastTest::testDoForecastInit()
   catch (MyMoneyException *e)
   {
     delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    QFAIL("Unexpected exception");
   }
   try {
     KMyMoneyGlobalSettings::setForecastAccountCycle(-20);
@@ -138,7 +139,7 @@ void MyMoneyForecastTest::testDoForecastInit()
     }
     catch (MyMoneyException *e) {
       delete e;
-      CPPUNIT_FAIL("Unexpected exception");
+      QFAIL("Unexpected exception");
   }
   try {
     KMyMoneyGlobalSettings::setForecastCycles(-10);
@@ -146,7 +147,7 @@ void MyMoneyForecastTest::testDoForecastInit()
   }
   catch (MyMoneyException *e) {
     delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    QFAIL("Unexpected exception");
   }
 
   try {
@@ -155,7 +156,7 @@ void MyMoneyForecastTest::testDoForecastInit()
   }
   catch (MyMoneyException *e) {
     delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    QFAIL("Unexpected exception");
   }
   try {
     KMyMoneyGlobalSettings::setForecastDays(0);
@@ -165,7 +166,7 @@ void MyMoneyForecastTest::testDoForecastInit()
   }
   catch (MyMoneyException *e) {
     delete e;
-    CPPUNIT_ASSERT("Unexpected exception");
+    QVERIFY("Unexpected exception");
   }*/
 }
 
@@ -197,25 +198,25 @@ void MyMoneyForecastTest::testDoForecast()
   //checking didn't have balance variations, so the forecast should be equal to the current balance
   MyMoneyMoney b_checking = file->balance(a_checking.id(), QDate::currentDate());
 
-  CPPUNIT_ASSERT(a.forecastBalance(a_checking, QDate::currentDate().addDays(1)) == b_checking);
-  CPPUNIT_ASSERT(a.forecastBalance(a_checking, QDate::currentDate().addDays(2)) == b_checking);
-  CPPUNIT_ASSERT(a.forecastBalance(a_checking, QDate::currentDate().addDays(3)) == b_checking);
-  CPPUNIT_ASSERT(a.forecastBalance(a_checking, QDate::currentDate()) == b_checking);
+  QVERIFY(a.forecastBalance(a_checking, QDate::currentDate().addDays(1)) == b_checking);
+  QVERIFY(a.forecastBalance(a_checking, QDate::currentDate().addDays(2)) == b_checking);
+  QVERIFY(a.forecastBalance(a_checking, QDate::currentDate().addDays(3)) == b_checking);
+  QVERIFY(a.forecastBalance(a_checking, QDate::currentDate()) == b_checking);
   //credit had a variation so the forecast should be different for each day
   MyMoneyMoney b_credit = file->balance(a_credit.id(), QDate::currentDate());
 
-  CPPUNIT_ASSERT(a.forecastBalance(a_credit, 0) == b_credit);
-  CPPUNIT_ASSERT(a.forecastBalance(a_credit, QDate::currentDate().addDays(1)) == (b_credit + (moT2 - moT1)));
-  CPPUNIT_ASSERT(a.forecastBalance(a_credit, QDate::currentDate().addDays(2)) == (b_credit + ((moT2 - moT1)*2)));
-  CPPUNIT_ASSERT(a.forecastBalance(a_credit, QDate::currentDate().addDays(3)) == b_credit + ((moT2 - moT1)*3));
+  QVERIFY(a.forecastBalance(a_credit, 0) == b_credit);
+  QVERIFY(a.forecastBalance(a_credit, QDate::currentDate().addDays(1)) == (b_credit + (moT2 - moT1)));
+  QVERIFY(a.forecastBalance(a_credit, QDate::currentDate().addDays(2)) == (b_credit + ((moT2 - moT1)*2)));
+  QVERIFY(a.forecastBalance(a_credit, QDate::currentDate().addDays(3)) == b_credit + ((moT2 - moT1)*3));
 
   a.setHistoryMethod(1); //weighted moving average
   a.doForecast();
 
-  CPPUNIT_ASSERT(a.forecastBalance(a_credit, 0) == b_credit);
-  CPPUNIT_ASSERT(a.forecastBalance(a_credit, QDate::currentDate().addDays(1)) == (b_credit + (moT2 - moT1)));
-  CPPUNIT_ASSERT(a.forecastBalance(a_credit, QDate::currentDate().addDays(2)) == (b_credit + ((moT2 - moT1)*2)));
-  CPPUNIT_ASSERT(a.forecastBalance(a_credit, QDate::currentDate().addDays(3)) == b_credit + ((moT2 - moT1)*3));
+  QVERIFY(a.forecastBalance(a_credit, 0) == b_credit);
+  QVERIFY(a.forecastBalance(a_credit, QDate::currentDate().addDays(1)) == (b_credit + (moT2 - moT1)));
+  QVERIFY(a.forecastBalance(a_credit, QDate::currentDate().addDays(2)) == (b_credit + ((moT2 - moT1)*2)));
+  QVERIFY(a.forecastBalance(a_credit, QDate::currentDate().addDays(3)) == b_credit + ((moT2 - moT1)*3));
 
   //insert transactions outside the forecast period. The calculation should be the same.
   TransactionHelper t4(QDate::currentDate().addDays(-2), MyMoneySplit::ActionDeposit, -moT2, acCredit, acParent);
@@ -234,10 +235,10 @@ void MyMoneyForecastTest::testDoForecast()
   MyMoneyMoney b_credit_1_exp = (b_credit + ((moT2 - moT1)));
   MyMoneyMoney b_credit_2 = a.forecastBalance(a_credit, QDate::currentDate().addDays(2));
   MyMoneyMoney b_credit_2_exp = (b_credit + ((moT2 - moT1) * 2));
-  CPPUNIT_ASSERT(a.forecastBalance(a_credit, QDate::currentDate()) == file->balance(a_credit.id(), QDate::currentDate()));
-  CPPUNIT_ASSERT(a.forecastBalance(a_credit, QDate::currentDate().addDays(1)) == b_credit + (moT2 - moT1));
-  CPPUNIT_ASSERT(a.forecastBalance(a_credit, QDate::currentDate().addDays(2)) == b_credit + ((moT2 - moT1)*2));
-  CPPUNIT_ASSERT(a.forecastBalance(a_credit, QDate::currentDate().addDays(3)) == b_credit + ((moT2 - moT1)*3));
+  QVERIFY(a.forecastBalance(a_credit, QDate::currentDate()) == file->balance(a_credit.id(), QDate::currentDate()));
+  QVERIFY(a.forecastBalance(a_credit, QDate::currentDate().addDays(1)) == b_credit + (moT2 - moT1));
+  QVERIFY(a.forecastBalance(a_credit, QDate::currentDate().addDays(2)) == b_credit + ((moT2 - moT1)*2));
+  QVERIFY(a.forecastBalance(a_credit, QDate::currentDate().addDays(3)) == b_credit + ((moT2 - moT1)*3));
 
   //test weighted moving average
   a.setForecastMethod(1);
@@ -248,8 +249,8 @@ void MyMoneyForecastTest::testDoForecast()
   a.setHistoryMethod(1);
   a.doForecast();
 
-  CPPUNIT_ASSERT(a.forecastBalance(a_credit, 0) == b_credit);
-  CPPUNIT_ASSERT(a.forecastBalance(a_credit, QDate::currentDate().addDays(1)) == (b_credit + (((moT2 - moT1)*3 + moT2*2 + moT2) / MyMoneyMoney(6, 1))));
+  QVERIFY(a.forecastBalance(a_credit, 0) == b_credit);
+  QVERIFY(a.forecastBalance(a_credit, QDate::currentDate().addDays(1)) == (b_credit + (((moT2 - moT1)*3 + moT2*2 + moT2) / MyMoneyMoney(6, 1))));
 
 }
 
@@ -262,8 +263,8 @@ void MyMoneyForecastTest::testGetForecastAccountList()
 
   b = a.forecastAccountList();
   //check that it contains asset account, but not expense accounts
-  CPPUNIT_ASSERT(b.contains(a_checking));
-  CPPUNIT_ASSERT(!b.contains(a_parent));
+  QVERIFY(b.contains(a_checking));
+  QVERIFY(!b.contains(a_parent));
 
 }
 
@@ -278,30 +279,30 @@ void MyMoneyForecastTest::testCalculateAccountTrend()
   try {
     MyMoneyForecast::calculateAccountTrend(a_checking, 0);
   } catch (MyMoneyException *e) {
-    CPPUNIT_ASSERT(e->what().compare("Illegal arguments when calling calculateAccountTrend. trendDays must be higher than 0") == 0);
+    QVERIFY(e->what().compare("Illegal arguments when calling calculateAccountTrend. trendDays must be higher than 0") == 0);
     delete e;
   }
   try {
     MyMoneyForecast::calculateAccountTrend(a_checking, -10);
   } catch (MyMoneyException *e) {
-    CPPUNIT_ASSERT(e->what().compare("Illegal arguments when calling calculateAccountTrend. trendDays must be higher than 0") == 0);
+    QVERIFY(e->what().compare("Illegal arguments when calling calculateAccountTrend. trendDays must be higher than 0") == 0);
     delete e;
   }
 
   //test that it calculates correctly
-  CPPUNIT_ASSERT(MyMoneyForecast::calculateAccountTrend(a_checking , 3) == moT2 / MyMoneyMoney(3, 1));
+  QVERIFY(MyMoneyForecast::calculateAccountTrend(a_checking , 3) == moT2 / MyMoneyMoney(3, 1));
 
   //test that it works for all kind of accounts
   MyMoneyAccount a_solo = file->account(acSolo);
   MyMoneyMoney soloTrend = MyMoneyForecast::calculateAccountTrend(a_solo, 3);
   MyMoneyMoney soloTrendExp = -moT2 / MyMoneyMoney(3, 1);
-  CPPUNIT_ASSERT(MyMoneyForecast::calculateAccountTrend(a_solo, 3) == -moT2 / MyMoneyMoney(3, 1));
+  QVERIFY(MyMoneyForecast::calculateAccountTrend(a_solo, 3) == -moT2 / MyMoneyMoney(3, 1));
 
   //test that it does not take into account the transactions of the opening date of the account
   MyMoneyAccount a_cash = file->account(acCash);
   TransactionHelper t2(QDate::currentDate().addDays(-2), MyMoneySplit::ActionDeposit, moT2, acCash, acParent);
   TransactionHelper t3(QDate::currentDate().addDays(-1), MyMoneySplit::ActionDeposit, moT1, acCash, acParent);
-  CPPUNIT_ASSERT(MyMoneyForecast::calculateAccountTrend(a_cash, 3) == -moT1);
+  QVERIFY(MyMoneyForecast::calculateAccountTrend(a_cash, 3) == -moT1);
 
 }
 
@@ -325,23 +326,23 @@ void MyMoneyForecastTest::testGetForecastBalance()
   MyMoneyAccount a_credit = file->account(acCredit);
 
   //test invalid arguments
-  CPPUNIT_ASSERT(a.forecastBalance(a_checking, QDate::currentDate().addDays(-1)) == MyMoneyMoney(0, 1));
-  CPPUNIT_ASSERT(a.forecastBalance(a_checking, QDate::currentDate().addDays(-10)) == MyMoneyMoney(0, 1));
-  CPPUNIT_ASSERT(a.forecastBalance(a_checking, -1) == MyMoneyMoney(0, 1));
-  CPPUNIT_ASSERT(a.forecastBalance(a_checking, -100) == MyMoneyMoney(0, 1));
+  QVERIFY(a.forecastBalance(a_checking, QDate::currentDate().addDays(-1)) == MyMoneyMoney(0, 1));
+  QVERIFY(a.forecastBalance(a_checking, QDate::currentDate().addDays(-10)) == MyMoneyMoney(0, 1));
+  QVERIFY(a.forecastBalance(a_checking, -1) == MyMoneyMoney(0, 1));
+  QVERIFY(a.forecastBalance(a_checking, -100) == MyMoneyMoney(0, 1));
 
   //test a date outside the forecast days
-  CPPUNIT_ASSERT(a.forecastBalance(a_checking, QDate::currentDate().addDays(4)) == MyMoneyMoney(0, 1));
-  CPPUNIT_ASSERT(a.forecastBalance(a_checking, 4) == MyMoneyMoney(0, 1));
-  CPPUNIT_ASSERT(a.forecastBalance(a_checking, QDate::currentDate().addDays(10)) == MyMoneyMoney(0, 1));
-  CPPUNIT_ASSERT(a.forecastBalance(a_checking, 10) == MyMoneyMoney(0, 1));
+  QVERIFY(a.forecastBalance(a_checking, QDate::currentDate().addDays(4)) == MyMoneyMoney(0, 1));
+  QVERIFY(a.forecastBalance(a_checking, 4) == MyMoneyMoney(0, 1));
+  QVERIFY(a.forecastBalance(a_checking, QDate::currentDate().addDays(10)) == MyMoneyMoney(0, 1));
+  QVERIFY(a.forecastBalance(a_checking, 10) == MyMoneyMoney(0, 1));
 
   //test it returns valid results
   MyMoneyMoney b_credit = file->balance(a_credit.id(), QDate::currentDate());
-  CPPUNIT_ASSERT(a.forecastBalance(a_credit, QDate::currentDate()) == file->balance(a_credit.id(), QDate::currentDate()));
-  CPPUNIT_ASSERT(a.forecastBalance(a_credit, QDate::currentDate().addDays(1)) == b_credit + (moT2 - moT1));
-  CPPUNIT_ASSERT(a.forecastBalance(a_credit, QDate::currentDate().addDays(2)) == b_credit + ((moT2 - moT1)*2));
-  CPPUNIT_ASSERT(a.forecastBalance(a_credit, QDate::currentDate().addDays(3)) == b_credit + ((moT2 - moT1)*3));
+  QVERIFY(a.forecastBalance(a_credit, QDate::currentDate()) == file->balance(a_credit.id(), QDate::currentDate()));
+  QVERIFY(a.forecastBalance(a_credit, QDate::currentDate().addDays(1)) == b_credit + (moT2 - moT1));
+  QVERIFY(a.forecastBalance(a_credit, QDate::currentDate().addDays(2)) == b_credit + ((moT2 - moT1)*2));
+  QVERIFY(a.forecastBalance(a_credit, QDate::currentDate().addDays(3)) == b_credit + ((moT2 - moT1)*3));
 }
 
 void MyMoneyForecastTest::testIsForecastAccount()
@@ -353,11 +354,11 @@ void MyMoneyForecastTest::testIsForecastAccount()
   MyMoneyAccount a_investment = file->account(acInvestment);
 
   //test an invalid account
-  CPPUNIT_ASSERT(a.isForecastAccount(a_solo) == false);
-  CPPUNIT_ASSERT(a.isForecastAccount(a_investment) == true);
+  QVERIFY(a.isForecastAccount(a_solo) == false);
+  QVERIFY(a.isForecastAccount(a_investment) == true);
 
   //test a valid account
-  CPPUNIT_ASSERT(a.isForecastAccount(a_checking) == true);
+  QVERIFY(a.isForecastAccount(a_checking) == true);
 
 }
 
@@ -381,10 +382,10 @@ void MyMoneyForecastTest::testDoFutureScheduledForecast()
   MyMoneyMoney b_cash = file->balance(a_cash.id(), QDate::currentDate());
 
   //test valid results
-  CPPUNIT_ASSERT(a.forecastBalance(a_cash, QDate::currentDate()) == b_cash);
-  CPPUNIT_ASSERT(a.forecastBalance(a_cash, QDate::currentDate().addDays(1)) == b_cash + moT1);
-  CPPUNIT_ASSERT(a.forecastBalance(a_cash, QDate::currentDate().addDays(2)) == b_cash + moT1 + moT2);
-  CPPUNIT_ASSERT(a.forecastBalance(a_cash, QDate::currentDate().addDays(3)) == b_cash + moT1 + moT2 + moT3);
+  QVERIFY(a.forecastBalance(a_cash, QDate::currentDate()) == b_cash);
+  QVERIFY(a.forecastBalance(a_cash, QDate::currentDate().addDays(1)) == b_cash + moT1);
+  QVERIFY(a.forecastBalance(a_cash, QDate::currentDate().addDays(2)) == b_cash + moT1 + moT2);
+  QVERIFY(a.forecastBalance(a_cash, QDate::currentDate().addDays(3)) == b_cash + moT1 + moT2 + moT3);
 }
 
 void MyMoneyForecastTest::testScheduleForecast()
@@ -542,9 +543,9 @@ void MyMoneyForecastTest::testScheduleForecast()
   MyMoneyMoney b_cash1 = a.forecastBalance(a_cash, QDate::currentDate().addDays(1));
 
   //test valid results
-  CPPUNIT_ASSERT(a.forecastBalance(a_cash, QDate::currentDate()) == b_cash);
-  CPPUNIT_ASSERT(a.forecastBalance(a_cash, QDate::currentDate().addDays(1)) == b_cash - moT2);
-  CPPUNIT_ASSERT(a.forecastBalance(a_cash, QDate::currentDate().addDays(2)) == b_cash - moT2 - moT1);
+  QVERIFY(a.forecastBalance(a_cash, QDate::currentDate()) == b_cash);
+  QVERIFY(a.forecastBalance(a_cash, QDate::currentDate().addDays(1)) == b_cash - moT2);
+  QVERIFY(a.forecastBalance(a_cash, QDate::currentDate().addDays(2)) == b_cash - moT2 - moT1);
 }
 
 
@@ -572,16 +573,16 @@ void MyMoneyForecastTest::testDaysToMinimumBalance()
 
   //test invalid arguments
   MyMoneyAccount nullAcc;
-  CPPUNIT_ASSERT(a.daysToMinimumBalance(nullAcc) == -1);
+  QVERIFY(a.daysToMinimumBalance(nullAcc) == -1);
 
   //test when not a forecast account
-  CPPUNIT_ASSERT(a.daysToMinimumBalance(a_parent) == -1);
+  QVERIFY(a.daysToMinimumBalance(a_parent) == -1);
 
   //test it warns when inside the forecast period
-  CPPUNIT_ASSERT(a.daysToMinimumBalance(a_cash) == 2);
+  QVERIFY(a.daysToMinimumBalance(a_cash) == 2);
 
   //test it does not warn when it will be outside of the forecast period
-  CPPUNIT_ASSERT(a.daysToMinimumBalance(a_credit) == -1);
+  QVERIFY(a.daysToMinimumBalance(a_credit) == -1);
 }
 void MyMoneyForecastTest::testDaysToZeroBalance()
 {
@@ -609,20 +610,20 @@ void MyMoneyForecastTest::testDaysToZeroBalance()
     a.daysToZeroBalance(nullAcc);
   } catch (MyMoneyException *e) {
     delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    QFAIL("Unexpected exception");
   }
 
   //test when not a forecast account
   MyMoneyAccount a_solo = file->account(acSolo);
   int iSolo = a.daysToZeroBalance(a_Solo);
 
-  CPPUNIT_ASSERT(iSolo == -2);
+  QVERIFY(iSolo == -2);
 
   //test it warns when inside the forecast period
 
   MyMoneyMoney fCash = a.forecastBalance(a_Cash, QDate::currentDate().addDays(2));
 
-  CPPUNIT_ASSERT(a.daysToZeroBalance(a_Cash) == 2);
+  QVERIFY(a.daysToZeroBalance(a_Cash) == 2);
 
   //test it does not warn when it will be outside of the forecast period
 
@@ -647,11 +648,11 @@ void MyMoneyForecastTest::testSkipOpeningDate()
 
   //test it has no variation because it skipped the variation of the opening date
   MyMoneyMoney b_cash = file->balance(a_cash.id(), QDate::currentDate());
-  CPPUNIT_ASSERT(a.skipOpeningDate() == true);
-  CPPUNIT_ASSERT(a.forecastBalance(a_cash, QDate::currentDate()) == b_cash);
-  CPPUNIT_ASSERT(a.forecastBalance(a_cash, QDate::currentDate().addDays(1)) == b_cash);
-  CPPUNIT_ASSERT(a.forecastBalance(a_cash, QDate::currentDate().addDays(2)) == b_cash - moT2);
-  CPPUNIT_ASSERT(a.forecastBalance(a_cash, QDate::currentDate().addDays(3)) == b_cash - moT2);
+  QVERIFY(a.skipOpeningDate() == true);
+  QVERIFY(a.forecastBalance(a_cash, QDate::currentDate()) == b_cash);
+  QVERIFY(a.forecastBalance(a_cash, QDate::currentDate().addDays(1)) == b_cash);
+  QVERIFY(a.forecastBalance(a_cash, QDate::currentDate().addDays(2)) == b_cash - moT2);
+  QVERIFY(a.forecastBalance(a_cash, QDate::currentDate().addDays(3)) == b_cash - moT2);
 }
 
 void MyMoneyForecastTest::testAccountMinimumBalanceDateList()
@@ -681,13 +682,13 @@ void MyMoneyForecastTest::testAccountMinimumBalanceDateList()
 
   QDate minDate = *it;
 
-  CPPUNIT_ASSERT(minDate == QDate::currentDate().addDays(2));
+  QVERIFY(minDate == QDate::currentDate().addDays(2));
   it++;
   minDate = *it;
-  CPPUNIT_ASSERT(minDate == QDate::currentDate().addDays(4));
+  QVERIFY(minDate == QDate::currentDate().addDays(4));
   it++;
   minDate = *it;
-  CPPUNIT_ASSERT(minDate == QDate::currentDate().addDays(6));
+  QVERIFY(minDate == QDate::currentDate().addDays(6));
 
 }
 
@@ -717,13 +718,13 @@ void MyMoneyForecastTest::testAccountMaximumBalanceDateList()
 
   QDate maxDate = *it;
 
-  CPPUNIT_ASSERT(maxDate == QDate::currentDate().addDays(1));
+  QVERIFY(maxDate == QDate::currentDate().addDays(1));
   it++;
   maxDate = *it;
-  CPPUNIT_ASSERT(maxDate == QDate::currentDate().addDays(3));
+  QVERIFY(maxDate == QDate::currentDate().addDays(3));
   it++;
   maxDate = *it;
-  CPPUNIT_ASSERT(maxDate == QDate::currentDate().addDays(5));
+  QVERIFY(maxDate == QDate::currentDate().addDays(5));
 
 
 }
@@ -753,7 +754,7 @@ void MyMoneyForecastTest::testAccountAverageBalance()
   MyMoneyMoney average = (b_cash1 + b_cash2 + b_cash3) / MyMoneyMoney(3, 1);
 
 
-  CPPUNIT_ASSERT(a.accountAverageBalance(a_cash) == average);
+  QVERIFY(a.accountAverageBalance(a_cash) == average);
 }
 
 void MyMoneyForecastTest::testBeginForecastDate()
@@ -771,7 +772,7 @@ void MyMoneyForecastTest::testBeginForecastDate()
   a.doForecast();
 
   //test when using old method without begin day
-  CPPUNIT_ASSERT(QDate::currentDate() == a.beginForecastDate());
+  QVERIFY(QDate::currentDate() == a.beginForecastDate());
 
   //setup begin to last day of month
   a.setBeginForecastDay(31);
@@ -785,7 +786,7 @@ void MyMoneyForecastTest::testBeginForecastDate()
 
     beginDate = QDate(QDate::currentDate().year(), QDate::currentDate().month(), beginDay);
 
-    CPPUNIT_ASSERT(beginDate == a.beginForecastDate());
+    QVERIFY(beginDate == a.beginForecastDate());
   }
 
   //setup begin day to same date
@@ -793,7 +794,7 @@ void MyMoneyForecastTest::testBeginForecastDate()
   beginDay = a.beginForecastDay();
   a.doForecast();
 
-  CPPUNIT_ASSERT(QDate::currentDate() == a.beginForecastDate());
+  QVERIFY(QDate::currentDate() == a.beginForecastDate());
 
   //setup to first day of month with small interval
   a.setBeginForecastDay(1);
@@ -803,7 +804,7 @@ void MyMoneyForecastTest::testBeginForecastDate()
 
   //test
   if (QDate::currentDate() == a.beginForecastDate()) {
-    CPPUNIT_ASSERT(QDate::currentDate() == a.beginForecastDate());
+    QVERIFY(QDate::currentDate() == a.beginForecastDate());
   } else {
     beginDay = ((((QDate::currentDate().day() - beginDay) / a.accountsCycle()) + 1) * a.accountsCycle()) + beginDay;
     if (beginDay > QDate::currentDate().daysInMonth())
@@ -812,7 +813,7 @@ void MyMoneyForecastTest::testBeginForecastDate()
     if (QDate::currentDate().day() == QDate::currentDate().daysInMonth()) {
       std::cout << std::endl << "testBeginForecastDate(): test of first day of month with small interval skipped because it is the last day of month" << std::endl;
     } else {
-      CPPUNIT_ASSERT(beginDate == a.beginForecastDate());
+      QVERIFY(beginDate == a.beginForecastDate());
     }
   }
 
@@ -824,7 +825,7 @@ void MyMoneyForecastTest::testBeginForecastDate()
   a.doForecast();
 
   //test
-  CPPUNIT_ASSERT(beginDate == a.beginForecastDate());
+  QVERIFY(beginDate == a.beginForecastDate());
 
   //setup to test when the begin day will be next month
   a.setBeginForecastDay(1);
@@ -835,7 +836,7 @@ void MyMoneyForecastTest::testBeginForecastDate()
 
   //test
   if (QDate::currentDate().day() > 1) {
-    CPPUNIT_ASSERT(beginDate == a.beginForecastDate());
+    QVERIFY(beginDate == a.beginForecastDate());
   } else {
     //test is not valid if today is 1st of month
     std::cout << std::endl << "testBeginForecastDate(): test of first day of month skipped because current day is 1st of month" << std::endl;
@@ -846,9 +847,9 @@ void MyMoneyForecastTest::testHistoryDays(void)
 {
   MyMoneyForecast a;
 
-  CPPUNIT_ASSERT(a.historyStartDate() == QDate::currentDate().addDays(-a.forecastCycles()*a.accountsCycle()));
-  CPPUNIT_ASSERT(a.historyEndDate() == QDate::currentDate().addDays(-1));
-  CPPUNIT_ASSERT(a.historyDays() == a.forecastCycles()*a.accountsCycle());
+  QVERIFY(a.historyStartDate() == QDate::currentDate().addDays(-a.forecastCycles()*a.accountsCycle()));
+  QVERIFY(a.historyEndDate() == QDate::currentDate().addDays(-1));
+  QVERIFY(a.historyDays() == a.forecastCycles()*a.accountsCycle());
 
   a.setForecastMethod(1);
   a.setForecastDays(90);
@@ -857,9 +858,9 @@ void MyMoneyForecastTest::testHistoryDays(void)
   a.setBeginForecastDay(0);
   a.doForecast();
 
-  CPPUNIT_ASSERT(a.historyStartDate() == QDate::currentDate().addDays(-14*3));
-  CPPUNIT_ASSERT(a.historyDays() == (14*3));
-  CPPUNIT_ASSERT(a.historyEndDate() == (QDate::currentDate().addDays(-1)));
+  QVERIFY(a.historyStartDate() == QDate::currentDate().addDays(-14*3));
+  QVERIFY(a.historyDays() == (14*3));
+  QVERIFY(a.historyEndDate() == (QDate::currentDate().addDays(-1)));
 }
 
 void MyMoneyForecastTest::testCreateBudget()
@@ -887,14 +888,14 @@ void MyMoneyForecastTest::testCreateBudget()
   MyMoneyAccount a_parent = file->account(acParent);
 
   //test it has no variation because it skipped the variation of the opening date
-  CPPUNIT_ASSERT(a.forecastBalance(a_solo, QDate(2007, 1, 1)) == ((moT1 + moT3) / MyMoneyMoney(2, 1)));
-  CPPUNIT_ASSERT(a.forecastBalance(a_parent, QDate(2007, 1, 1)) == ((moT2 + moT4) / MyMoneyMoney(2, 1)));
-  CPPUNIT_ASSERT(a.forecastBalance(a_solo, QDate(2007, 4, 1)) == ((moT1) / MyMoneyMoney(2, 1)));
-  CPPUNIT_ASSERT(a.forecastBalance(a_parent, QDate(2007, 5, 1)) == ((moT2) / MyMoneyMoney(2, 1)));
-  CPPUNIT_ASSERT(a.forecastBalance(a_solo, QDate(2007, 8, 1)) == ((moT3) / MyMoneyMoney(2, 1)));
-  CPPUNIT_ASSERT(a.forecastBalance(a_parent, QDate(2007, 9, 1)) == ((moT4) / MyMoneyMoney(2, 1)));
+  QVERIFY(a.forecastBalance(a_solo, QDate(2007, 1, 1)) == ((moT1 + moT3) / MyMoneyMoney(2, 1)));
+  QVERIFY(a.forecastBalance(a_parent, QDate(2007, 1, 1)) == ((moT2 + moT4) / MyMoneyMoney(2, 1)));
+  QVERIFY(a.forecastBalance(a_solo, QDate(2007, 4, 1)) == ((moT1) / MyMoneyMoney(2, 1)));
+  QVERIFY(a.forecastBalance(a_parent, QDate(2007, 5, 1)) == ((moT2) / MyMoneyMoney(2, 1)));
+  QVERIFY(a.forecastBalance(a_solo, QDate(2007, 8, 1)) == ((moT3) / MyMoneyMoney(2, 1)));
+  QVERIFY(a.forecastBalance(a_parent, QDate(2007, 9, 1)) == ((moT4) / MyMoneyMoney(2, 1)));
   //test the budget object returned by the method
-  CPPUNIT_ASSERT(budget.account(a_parent.id()).period(QDate(2007, 9, 1)).amount() == ((moT4) / MyMoneyMoney(2, 1)));
+  QVERIFY(budget.account(a_parent.id()).period(QDate(2007, 9, 1)).amount() == ((moT4) / MyMoneyMoney(2, 1)));
 
   //setup test for a length lower than a year
   b.setForecastMethod(1);
@@ -902,10 +903,10 @@ void MyMoneyForecastTest::testCreateBudget()
   b.createBudget(budget, QDate(2005, 1, 1), QDate(2005, 6, 30), QDate(2007, 1, 1), QDate(2007, 6, 30), true);
 
   //test
-  CPPUNIT_ASSERT(b.forecastBalance(a_solo, QDate(2007, 1, 1)) == (moT1 + moT3));
-  CPPUNIT_ASSERT(b.forecastBalance(a_parent, QDate(2007, 1, 1)) == (moT2));
-  CPPUNIT_ASSERT(b.forecastBalance(a_solo, QDate(2007, 4, 1)) == (moT1));
-  CPPUNIT_ASSERT(b.forecastBalance(a_parent, QDate(2007, 5, 1)) == (MyMoneyMoney(0, 1)));
+  QVERIFY(b.forecastBalance(a_solo, QDate(2007, 1, 1)) == (moT1 + moT3));
+  QVERIFY(b.forecastBalance(a_parent, QDate(2007, 1, 1)) == (moT2));
+  QVERIFY(b.forecastBalance(a_solo, QDate(2007, 4, 1)) == (moT1));
+  QVERIFY(b.forecastBalance(a_parent, QDate(2007, 5, 1)) == (MyMoneyMoney(0, 1)));
 
   //set up schedule environment for testing
   MyMoneyAccount a_cash = file->account(acCash);
@@ -961,7 +962,7 @@ void MyMoneyForecastTest::testCreateBudget()
   MyMoneyMoney c_parent = c.forecastBalance(a_parent, QDate(QDate::currentDate().addMonths(1).year(), QDate::currentDate().addMonths(1).month(), 1));
 
   //test valid results
-  CPPUNIT_ASSERT(c.forecastBalance(a_parent, QDate(QDate::currentDate().addMonths(1).year(), QDate::currentDate().addMonths(1).month(), 1)) == (moT2));
+  QVERIFY(c.forecastBalance(a_parent, QDate(QDate::currentDate().addMonths(1).year(), QDate::currentDate().addMonths(1).month(), 1)) == (moT2));
 }
 
 void MyMoneyForecastTest::testLinearRegression()
@@ -981,3 +982,6 @@ void MyMoneyForecastTest::testLinearRegression()
 
 
 }
+
+#include "mymoneyforecasttest.moc"
+

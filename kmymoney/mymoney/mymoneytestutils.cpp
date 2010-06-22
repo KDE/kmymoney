@@ -1,9 +1,8 @@
 /***************************************************************************
-                          querytabletest.h
-                          -------------------
+                          mymoneytestutils.cpp
+                             -------------------
     copyright            : (C) 2002 by Thomas Baumgart
     email                : ipwizard@users.sourceforge.net
-                           Ace Jones <ace.jones@hotpop.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -15,31 +14,25 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef QUERYTABLETEST_H
-#define QUERYTABLETEST_H
+#include <QtGlobal>
+#include <QtTest/QtTest>
 
-#include <QtCore/QObject>
-#include "mymoneyfile.h"
-#include "mymoneyseqaccessmgr.h"
+#include "mymoneyexception.h"
 
-class QueryTableTest : public QObject
+// There is a real implementation for the actual executable, this is
+// designed to be used in testcases, to avoid a linker error.
+void timetrace(const char *txt)
 {
-  Q_OBJECT
-private:
-  MyMoneyAccount  *m;
+  Q_UNUSED(txt);
+}
 
-  MyMoneySeqAccessMgr* storage;
-  MyMoneyFile* file;
+void unexpectedException(MyMoneyException *e)
+{
+  QString msg = QString("Unexpected exception: %1 thrown in %2:%3")
+                .arg(e->what())
+                .arg(e->file())
+                .arg(e->line());
+  delete e;
+  QFAIL(qPrintable(msg));
+}
 
-private slots:
-  void init();
-  void cleanup();
-  void testQueryBasics();
-  void testCashFlowAnalysis();
-  void testAccountQuery();
-  void testInvestment();
-  void testBalanceColumn();
-  void testTaxReport();
-};
-
-#endif

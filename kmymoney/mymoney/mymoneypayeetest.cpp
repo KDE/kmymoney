@@ -14,19 +14,10 @@
 #include "mymoneypayeetest.h"
 #include <iostream>
 #include <fstream>
+#include <QtTest/QtTest>
 using namespace std;
 
-MyMoneyPayeeTest:: MyMoneyPayeeTest()
-{
-}
-
-void MyMoneyPayeeTest::setUp()
-{
-}
-
-void MyMoneyPayeeTest::tearDown()
-{
-}
+QTEST_MAIN(MyMoneyPayeeTest)
 
 void MyMoneyPayeeTest::testXml()
 {
@@ -45,37 +36,40 @@ void MyMoneyPayeeTest::testXml()
   payee1.setDefaultAccountId();
   payee1.writeXML(doc, parent);
   QDomElement el = parent.firstChild().toElement();
-  CPPUNIT_ASSERT(!el.isNull());
+  QVERIFY(!el.isNull());
   MyMoneyPayee payee2(el);
-  CPPUNIT_ASSERT(!payee2.defaultAccountEnabled());
-  CPPUNIT_ASSERT(payee2.defaultAccountId().isEmpty());
+  QVERIFY(!payee2.defaultAccountEnabled());
+  QVERIFY(payee2.defaultAccountId().isEmpty());
   el = el.nextSibling().toElement();
-  CPPUNIT_ASSERT(!el.isNull());
+  QVERIFY(!el.isNull());
   MyMoneyPayee payee3(el);
-  CPPUNIT_ASSERT(payee3.defaultAccountEnabled());
-  CPPUNIT_ASSERT(payee3.defaultAccountId() == temp1);
+  QVERIFY(payee3.defaultAccountEnabled());
+  QVERIFY(payee3.defaultAccountId() == temp1);
   el = el.nextSibling().toElement();
-  CPPUNIT_ASSERT(!el.isNull());
+  QVERIFY(!el.isNull());
   MyMoneyPayee payee4(el);
-  CPPUNIT_ASSERT(payee4.defaultAccountEnabled());
-  CPPUNIT_ASSERT(payee4.defaultAccountId() == temp2);
+  QVERIFY(payee4.defaultAccountEnabled());
+  QVERIFY(payee4.defaultAccountId() == temp2);
   el = el.nextSibling().toElement();
-  CPPUNIT_ASSERT(!el.isNull());
+  QVERIFY(!el.isNull());
   MyMoneyPayee payee5(el);
-  CPPUNIT_ASSERT(!payee5.defaultAccountEnabled());
-  CPPUNIT_ASSERT(payee5.defaultAccountId().isEmpty());
+  QVERIFY(!payee5.defaultAccountEnabled());
+  QVERIFY(payee5.defaultAccountId().isEmpty());
 }
 
 void MyMoneyPayeeTest::testDefaultAccount()
 {
   MyMoneyPayee payee;
-  CPPUNIT_ASSERT(!payee.defaultAccountEnabled());
-  CPPUNIT_ASSERT(payee.defaultAccountId().isEmpty());
+  QVERIFY(!payee.defaultAccountEnabled());
+  QVERIFY(payee.defaultAccountId().isEmpty());
   QString temp = "Account1";
   payee.setDefaultAccountId(temp);
-  CPPUNIT_ASSERT(payee.defaultAccountEnabled());
-  CPPUNIT_ASSERT(payee.defaultAccountId() == temp);
+  QVERIFY(payee.defaultAccountEnabled());
+  QVERIFY(payee.defaultAccountId() == temp);
   payee.setDefaultAccountId();
-  CPPUNIT_ASSERT(!payee.defaultAccountEnabled());
-  CPPUNIT_ASSERT(payee.defaultAccountId().isEmpty());
+  QVERIFY(!payee.defaultAccountEnabled());
+  QVERIFY(payee.defaultAccountId().isEmpty());
 }
+
+#include "mymoneypayeetest.moc"
+

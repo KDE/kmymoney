@@ -18,35 +18,22 @@
 #ifndef MYMONEYINSTITUTIONTEST_H
 #define MYMONEYINSTITUTIONTEST_H
 
-#include <cppunit/extensions/HelperMacros.h>
+#include <QtCore/QObject>
 
 #define private public
 #include "mymoneyinstitution.h"
 #undef private
 
-class MyMoneyInstitutionTest : public CppUnit::TestFixture
+class MyMoneyInstitutionTest : public QObject
 {
-  CPPUNIT_TEST_SUITE(MyMoneyInstitutionTest);
-  CPPUNIT_TEST(testEmptyConstructor);
-  CPPUNIT_TEST(testSetFunctions);
-  CPPUNIT_TEST(testNonemptyConstructor);
-  CPPUNIT_TEST(testCopyConstructor);
-  CPPUNIT_TEST(testMyMoneyFileConstructor);
-  CPPUNIT_TEST(testEquality);
-  CPPUNIT_TEST(testInequality);
-  CPPUNIT_TEST(testAccountIDList);
-  CPPUNIT_TEST(testWriteXML);
-  CPPUNIT_TEST(testReadXML);
-  CPPUNIT_TEST_SUITE_END();
+  Q_OBJECT
 
 protected:
   MyMoneyInstitution *m, *n;
 
-public:
-  MyMoneyInstitutionTest();
-
-  void setUp();
-  void tearDown();
+private slots:
+  void init();
+  void cleanup();
   void testEmptyConstructor();
   void testSetFunctions();
   void testNonemptyConstructor();

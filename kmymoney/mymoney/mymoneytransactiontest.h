@@ -17,12 +17,7 @@
 #ifndef MYMONEYTRANSACTIONTEST_H
 #define MYMONEYTRANSACTIONTEST_H
 
-/*
-#include <cppunit/TestCaller.h>
-#include <cppunit/TestCase.h>
-#include <cppunit/TestSuite.h>
-*/
-#include <cppunit/extensions/HelperMacros.h>
+#include <QtCore/QObject>
 #include "autotest.h"
 
 #define private public
@@ -30,45 +25,16 @@
 #include "mymoneytransaction.h"
 #undef private
 
-class MyMoneyTransactionTest : public CppUnit::TestFixture
+class MyMoneyTransactionTest : public QObject
 {
-  CPPUNIT_TEST_SUITE(MyMoneyTransactionTest);
-  CPPUNIT_TEST(testEmptyConstructor);
-  CPPUNIT_TEST(testSetFunctions);
-  CPPUNIT_TEST(testConstructor);
-  CPPUNIT_TEST(testCopyConstructor);
-  CPPUNIT_TEST(testAssignmentConstructor);
-  CPPUNIT_TEST(testAddSplits);
-  CPPUNIT_TEST(testModifySplits);
-  CPPUNIT_TEST(testDeleteSplits);
-  CPPUNIT_TEST(testDeleteAllSplits);
-  CPPUNIT_TEST(testEquality);
-  CPPUNIT_TEST(testInequality);
-  CPPUNIT_TEST(testExtractSplit);
-  CPPUNIT_TEST(testSplitSum);
-  CPPUNIT_TEST(testIsLoanPayment);
-  CPPUNIT_TEST(testWriteXML);
-  CPPUNIT_TEST(testReadXML);
-  CPPUNIT_TEST(testReadXMLEx);
-  CPPUNIT_TEST(testAutoCalc);
-  CPPUNIT_TEST(testHasReferenceTo);
-  CPPUNIT_TEST(testIsStockSplit);
-  CPPUNIT_TEST(testAddMissingAccountId);
-  CPPUNIT_TEST(testModifyMissingAccountId);
-#if 0
-  CPPUNIT_TEST(testAddDuplicateAccount);
-  CPPUNIT_TEST(testModifyDuplicateAccount);
-#endif
-  CPPUNIT_TEST_SUITE_END();
+  Q_OBJECT
 
 protected:
   MyMoneyTransaction *m;
 
-public:
-  MyMoneyTransactionTest();
-
-  void setUp();
-  void tearDown();
+private slots:
+  void init();
+  void cleanup();
   void testEmptyConstructor();
   void testSetFunctions();
   void testConstructor();
@@ -83,8 +49,8 @@ public:
   void testDeleteAllSplits();
   void testSplitSum();
   void testIsLoanPayment();
-  void testAddDuplicateAccount();
-  void testModifyDuplicateAccount();
+  //void testAddDuplicateAccount();
+  //void testModifyDuplicateAccount();
   void testWriteXML();
   void testReadXML();
   void testReadXMLEx();

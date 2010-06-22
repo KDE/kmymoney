@@ -18,37 +18,13 @@
 #ifndef KREPORTSVIEWTEST_H
 #define KREPORTSVIEWTEST_H
 
-#include <cppunit/extensions/HelperMacros.h>
+#include <QtCore/QObject>
 #include "mymoneyfile.h"
 #include "mymoneyseqaccessmgr.h"
 
-class KReportsViewTest : public CppUnit::TestFixture
+class KReportsViewTest : public QObject
 {
-  CPPUNIT_TEST_SUITE(KReportsViewTest);
-  CPPUNIT_TEST(testNetWorthSingle);
-  CPPUNIT_TEST(testNetWorthOfsetting);
-  CPPUNIT_TEST(testNetWorthOpeningPrior);
-  CPPUNIT_TEST(testNetWorthDateFilter);
-  CPPUNIT_TEST(testSpendingEmpty);
-  CPPUNIT_TEST(testSingleTransaction);
-  CPPUNIT_TEST(testSubAccount);
-  CPPUNIT_TEST(testFilterIEvsIE);
-  CPPUNIT_TEST(testFilterALvsAL);
-  CPPUNIT_TEST(testFilterALvsIE);
-  CPPUNIT_TEST(testFilterAllvsIE);
-  CPPUNIT_TEST(testFilterBasics);
-  CPPUNIT_TEST(testMultipleCurrencies);
-  CPPUNIT_TEST(testAdvancedFilter);
-  CPPUNIT_TEST(testColumnType);
-  CPPUNIT_TEST(testXMLWrite);
-  CPPUNIT_TEST(testQueryBasics);
-  CPPUNIT_TEST(testCashFlowAnalysis);
-  CPPUNIT_TEST(testAccountQuery);
-  CPPUNIT_TEST(testInvestment);
-  CPPUNIT_TEST(testWebQuotes);
-  CPPUNIT_TEST(testDateFormat);
-  CPPUNIT_TEST(testHasReferenceTo);
-  CPPUNIT_TEST_SUITE_END();
+  Q_OBJECT
 
 private:
   MyMoneyAccount  *m;
@@ -56,10 +32,9 @@ private:
   MyMoneySeqAccessMgr* storage;
   MyMoneyFile* file;
 
-public:
-  KReportsViewTest();
-  void setUp();
-  void tearDown();
+private slots:
+  void init();
+  void cleanup();
   void testNetWorthSingle();
   void testNetWorthOfsetting();
   void testNetWorthOpeningPrior();

@@ -17,35 +17,21 @@
 #ifndef MYMONEYKEYVALUECONTAINERTEST_H
 #define MYMONEYKEYVALUECONTAINERTEST_H
 
-#include <cppunit/extensions/HelperMacros.h>
+#include <QtCore/QObject>
 
 #define private public
 #include "mymoneykeyvaluecontainer.h"
 #undef private
 
-class MyMoneyKeyValueContainerTest : public CppUnit::TestFixture
+class MyMoneyKeyValueContainerTest : public QObject
 {
-  CPPUNIT_TEST_SUITE(MyMoneyKeyValueContainerTest);
-  CPPUNIT_TEST(testEmptyConstructor);
-  CPPUNIT_TEST(testRetrieveValue);
-  CPPUNIT_TEST(testSetValue);
-  CPPUNIT_TEST(testDeletePair);
-  CPPUNIT_TEST(testClear);
-  CPPUNIT_TEST(testRetrieveList);
-  CPPUNIT_TEST(testLoadList);
-  CPPUNIT_TEST(testWriteXML);
-  CPPUNIT_TEST(testReadXML);
-  CPPUNIT_TEST(testArrayRead);
-  CPPUNIT_TEST(testArrayWrite);
-  CPPUNIT_TEST_SUITE_END();
-
+  Q_OBJECT
 protected:
   MyMoneyKeyValueContainer *m;
 
-public:
-  MyMoneyKeyValueContainerTest();
-  void setUp();
-  void tearDown();
+private slots:
+  void init();
+  void cleanup();
   void testEmptyConstructor();
   void testRetrieveValue();
   void testSetValue();

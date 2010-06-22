@@ -15,26 +15,26 @@
  ***************************************************************************/
 
 #include "mymoneykeyvaluecontainertest.h"
-#include <mymoneyexception.h>
 
-MyMoneyKeyValueContainerTest::MyMoneyKeyValueContainerTest()
-{
-}
+#include <QtTest/QtTest>
 
+#include "mymoneyexception.h"
 
-void MyMoneyKeyValueContainerTest::setUp()
+QTEST_MAIN(MyMoneyKeyValueContainerTest)
+
+void MyMoneyKeyValueContainerTest::init()
 {
   m = new MyMoneyKeyValueContainer;
 }
 
-void MyMoneyKeyValueContainerTest::tearDown()
+void MyMoneyKeyValueContainerTest::cleanup()
 {
   delete m;
 }
 
 void MyMoneyKeyValueContainerTest::testEmptyConstructor()
 {
-  CPPUNIT_ASSERT(m->m_kvp.count() == 0);
+  QVERIFY(m->m_kvp.count() == 0);
 }
 
 void MyMoneyKeyValueContainerTest::testRetrieveValue()
@@ -42,38 +42,38 @@ void MyMoneyKeyValueContainerTest::testRetrieveValue()
   // load a value into the container
   m->m_kvp["Key"] = "Value";
   // make sure it's there
-  CPPUNIT_ASSERT(m->m_kvp.count() == 1);
-  CPPUNIT_ASSERT(m->m_kvp["Key"] == "Value");
+  QVERIFY(m->m_kvp.count() == 1);
+  QVERIFY(m->m_kvp["Key"] == "Value");
   // now check that the access function works
-  CPPUNIT_ASSERT(m->value("Key") == "Value");
-  CPPUNIT_ASSERT(m->value("key").isEmpty());
+  QVERIFY(m->value("Key") == "Value");
+  QVERIFY(m->value("key").isEmpty());
 }
 
 void MyMoneyKeyValueContainerTest::testSetValue()
 {
   m->setValue("Key", "Value");
-  CPPUNIT_ASSERT(m->m_kvp.count() == 1);
-  CPPUNIT_ASSERT(m->m_kvp["Key"] == "Value");
+  QVERIFY(m->m_kvp.count() == 1);
+  QVERIFY(m->m_kvp["Key"] == "Value");
 }
 
 void MyMoneyKeyValueContainerTest::testDeletePair()
 {
   m->setValue("Key", "Value");
   m->setValue("key", "value");
-  CPPUNIT_ASSERT(m->m_kvp.count() == 2);
+  QVERIFY(m->m_kvp.count() == 2);
   m->deletePair("Key");
-  CPPUNIT_ASSERT(m->m_kvp.count() == 1);
-  CPPUNIT_ASSERT(m->value("Key").isEmpty());
-  CPPUNIT_ASSERT(m->value("key") == "value");
+  QVERIFY(m->m_kvp.count() == 1);
+  QVERIFY(m->value("Key").isEmpty());
+  QVERIFY(m->value("key") == "value");
 }
 
 void MyMoneyKeyValueContainerTest::testClear()
 {
   m->setValue("Key", "Value");
   m->setValue("key", "value");
-  CPPUNIT_ASSERT(m->m_kvp.count() == 2);
+  QVERIFY(m->m_kvp.count() == 2);
   m->clear();
-  CPPUNIT_ASSERT(m->m_kvp.count() == 0);
+  QVERIFY(m->m_kvp.count() == 0);
 }
 
 void MyMoneyKeyValueContainerTest::testRetrieveList()
@@ -81,13 +81,13 @@ void MyMoneyKeyValueContainerTest::testRetrieveList()
   QMap<QString, QString> copy;
 
   copy = m->pairs();
-  CPPUNIT_ASSERT(copy.count() == 0);
+  QVERIFY(copy.count() == 0);
   m->setValue("Key", "Value");
   m->setValue("key", "value");
   copy = m->pairs();
-  CPPUNIT_ASSERT(copy.count() == 2);
-  CPPUNIT_ASSERT(copy["Key"] == "Value");
-  CPPUNIT_ASSERT(copy["key"] == "value");
+  QVERIFY(copy.count() == 2);
+  QVERIFY(copy["Key"] == "Value");
+  QVERIFY(copy["key"] == "value");
 }
 
 void MyMoneyKeyValueContainerTest::testLoadList()
@@ -95,9 +95,9 @@ void MyMoneyKeyValueContainerTest::testLoadList()
   m->setValue("Key", "Value");
   m->setValue("key", "value");
 
-  CPPUNIT_ASSERT(m->m_kvp.count() == 2);
-  CPPUNIT_ASSERT(m->m_kvp["Key"] == "Value");
-  CPPUNIT_ASSERT(m->m_kvp["key"] == "value");
+  QVERIFY(m->m_kvp.count() == 2);
+  QVERIFY(m->m_kvp["Key"] == "Value");
+  QVERIFY(m->m_kvp["key"] == "value");
 }
 
 void MyMoneyKeyValueContainerTest::testWriteXML()
@@ -124,7 +124,7 @@ void MyMoneyKeyValueContainerTest::testWriteXML()
   ref.replace(QString(" >\n"), QString(">\n"));
 #endif
 
-  CPPUNIT_ASSERT(doc.toString() == ref);
+  QVERIFY(doc.toString() == ref);
 }
 
 void MyMoneyKeyValueContainerTest::testReadXML()
@@ -160,13 +160,13 @@ void MyMoneyKeyValueContainerTest::testReadXML()
   try {
     MyMoneyKeyValueContainer k(QDomNode());
   } catch (MyMoneyException *e) {
-    CPPUNIT_FAIL("Unexpected exception");
+    QFAIL("Unexpected exception");
     delete e;
   }
 
   try {
     MyMoneyKeyValueContainer k(node);
-    CPPUNIT_FAIL("Missing expected exception");
+    QFAIL("Missing expected exception");
   } catch (MyMoneyException *e) {
     delete e;
   }
@@ -175,12 +175,12 @@ void MyMoneyKeyValueContainerTest::testReadXML()
   node = doc.documentElement().firstChild().toElement();
   try {
     MyMoneyKeyValueContainer k(node);
-    CPPUNIT_ASSERT(k.m_kvp.count() == 2);
-    CPPUNIT_ASSERT(k.value("key") == "Value");
-    CPPUNIT_ASSERT(k.value("Key") == "value");
+    QVERIFY(k.m_kvp.count() == 2);
+    QVERIFY(k.value("key") == "Value");
+    QVERIFY(k.value("Key") == "value");
   } catch (MyMoneyException *e) {
     delete e;
-    CPPUNIT_FAIL("Unexpected exception");
+    QFAIL("Unexpected exception");
   }
 }
 
@@ -188,18 +188,20 @@ void MyMoneyKeyValueContainerTest::testArrayRead()
 {
   MyMoneyKeyValueContainer kvp;
   const MyMoneyKeyValueContainer& ckvp = kvp;
-  CPPUNIT_ASSERT(kvp.pairs().count() == 0);
-  CPPUNIT_ASSERT(ckvp["Key"].isEmpty());
-  CPPUNIT_ASSERT(kvp.pairs().count() == 0);
+  QVERIFY(kvp.pairs().count() == 0);
+  QVERIFY(ckvp["Key"].isEmpty());
+  QVERIFY(kvp.pairs().count() == 0);
   kvp.setValue("Key", "Value");
-  CPPUNIT_ASSERT(kvp["Key"] == "Value");
+  QVERIFY(kvp["Key"] == "Value");
 }
 
 void MyMoneyKeyValueContainerTest::testArrayWrite()
 {
   MyMoneyKeyValueContainer kvp;
   kvp["Key"] = "Value";
-  CPPUNIT_ASSERT(kvp.pairs().count() == 1);
-  CPPUNIT_ASSERT(kvp.value("Key") == "Value");
+  QVERIFY(kvp.pairs().count() == 1);
+  QVERIFY(kvp.value("Key") == "Value");
 }
+
+#include "mymoneykeyvaluecontainertest.moc"
 

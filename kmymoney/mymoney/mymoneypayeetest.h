@@ -14,7 +14,7 @@
 #ifndef MYMONEYPAYEETEST_H
 #define MYMONEYPAYEETEST_H
 
-#include <cppunit/extensions/HelperMacros.h>
+#include <QtCore/QObject>
 #include "autotest.h"
 
 #define private public
@@ -23,18 +23,10 @@
 #undef private
 #undef protected
 
-class MyMoneyPayeeTest : public CppUnit::TestFixture
+class MyMoneyPayeeTest : public QObject
 {
-  CPPUNIT_TEST_SUITE(MyMoneyPayeeTest);
-  CPPUNIT_TEST(testXml);
-  CPPUNIT_TEST(testDefaultAccount);
-  CPPUNIT_TEST_SUITE_END();
-
+  Q_OBJECT
 public:
-  MyMoneyPayeeTest();
-
-  void setUp();
-  void tearDown();
   void testXml();
   void testDefaultAccount();
 };

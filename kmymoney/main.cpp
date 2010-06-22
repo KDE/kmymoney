@@ -301,4 +301,5 @@ void timetrace(const char *txt)
     timer.restart();
   }
 }
+
 // vim:cin:si:ai:et:ts=2:sw=2:

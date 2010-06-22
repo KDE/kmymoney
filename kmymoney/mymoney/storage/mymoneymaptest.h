@@ -17,10 +17,7 @@
 #ifndef MYMONEYMAPTEST_H
 #define MYMONEYMAPTEST_H
 
-#include <cppunit/TestCaller.h>
-#include <cppunit/TestCase.h>
-#include <cppunit/TestSuite.h>
-#include <cppunit/extensions/HelperMacros.h>
+#include <QtCore/QObject>
 
 #include "autotest.h"
 
@@ -28,20 +25,15 @@
 #include "mymoneyseqaccessmgr.h"
 #undef private
 
-class MyMoneyMapTest : public CppUnit::TestFixture
+class MyMoneyMapTest : public QObject
 {
-  CPPUNIT_TEST_SUITE(MyMoneyMapTest);
-  CPPUNIT_TEST(testArrayOperator);
-  CPPUNIT_TEST_SUITE_END();
+  Q_OBJECT
 
 protected:
   MyMoneyMap<QString, QString> *m;
-public:
-  MyMoneyMapTest();
-
-
-  void setUp();
-  void tearDown();
+private slots:
+  void init();
+  void cleanup();
   void testArrayOperator(void);
 };
 

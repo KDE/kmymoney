@@ -17,109 +17,110 @@
 #include "mymoneyfinancialcalculatortest.h"
 
 #include <iostream>
-#include <math.h>
+#include <cmath>
+
+#include <QtTest/QtTest>
 
 #include "mymoneymoney.h"
 
-MyMoneyFinancialCalculatorTest::MyMoneyFinancialCalculatorTest() {}
+QTEST_MAIN(MyMoneyFinancialCalculatorTest)
 
-
-void MyMoneyFinancialCalculatorTest::setUp()
+void MyMoneyFinancialCalculatorTest::init()
 {
   m = new MyMoneyFinancialCalculator;
 }
 
-void MyMoneyFinancialCalculatorTest::tearDown()
+void MyMoneyFinancialCalculatorTest::cleanup()
 {
   delete m;
 }
 
 void MyMoneyFinancialCalculatorTest::testEmptyConstructor()
 {
-  CPPUNIT_ASSERT(m->m_ir == 0.0);
-  CPPUNIT_ASSERT(m->m_pv == 0.0);
-  CPPUNIT_ASSERT(m->m_pmt == 0.0);
-  CPPUNIT_ASSERT(m->m_fv == 0.0);
-  CPPUNIT_ASSERT(m->m_npp == 0);
-  CPPUNIT_ASSERT(m->m_CF == 12);
-  CPPUNIT_ASSERT(m->m_PF == 12);
-  CPPUNIT_ASSERT(m->m_prec == 2);
-  CPPUNIT_ASSERT(m->m_bep == false);
-  CPPUNIT_ASSERT(m->m_disc == true);
-  CPPUNIT_ASSERT(m->m_mask == 0);
+  QVERIFY(m->m_ir == 0.0);
+  QVERIFY(m->m_pv == 0.0);
+  QVERIFY(m->m_pmt == 0.0);
+  QVERIFY(m->m_fv == 0.0);
+  QVERIFY(m->m_npp == 0);
+  QVERIFY(m->m_CF == 12);
+  QVERIFY(m->m_PF == 12);
+  QVERIFY(m->m_prec == 2);
+  QVERIFY(m->m_bep == false);
+  QVERIFY(m->m_disc == true);
+  QVERIFY(m->m_mask == 0);
 }
 
 void MyMoneyFinancialCalculatorTest::testSetPrec()
 {
   m->setPrec(3);
-  CPPUNIT_ASSERT(m->m_prec == 3);
+  QVERIFY(m->m_prec == 3);
 }
 
 void MyMoneyFinancialCalculatorTest::testSetNpp()
 {
   m->setNpp(20);
-  CPPUNIT_ASSERT(m->m_npp == 20);
-  CPPUNIT_ASSERT(m->m_mask == NPP_SET);
+  QVERIFY(m->m_npp == 20);
+  QVERIFY(m->m_mask == NPP_SET);
 }
 
 void MyMoneyFinancialCalculatorTest::testSetPF()
 {
   m->setPF(1);
-  CPPUNIT_ASSERT(m->m_PF == 1);
+  QVERIFY(m->m_PF == 1);
   m->setPF();
-  CPPUNIT_ASSERT(m->m_PF == 12);
+  QVERIFY(m->m_PF == 12);
 }
 
 void MyMoneyFinancialCalculatorTest::testSetCF()
 {
   m->setCF(1);
-  CPPUNIT_ASSERT(m->m_CF == 1);
+  QVERIFY(m->m_CF == 1);
   m->setCF();
-  CPPUNIT_ASSERT(m->m_CF == 12);
+  QVERIFY(m->m_CF == 12);
 }
 
 void MyMoneyFinancialCalculatorTest::testSetBep()
 {
   m->setBep(true);
-  CPPUNIT_ASSERT(m->m_bep == true);
+  QVERIFY(m->m_bep == true);
   m->setBep();
-  CPPUNIT_ASSERT(m->m_bep == false);
+  QVERIFY(m->m_bep == false);
 }
 
 void MyMoneyFinancialCalculatorTest::testSetDisc()
 {
   m->setDisc(false);
-  CPPUNIT_ASSERT(m->m_disc == false);
+  QVERIFY(m->m_disc == false);
   m->setDisc();
-  CPPUNIT_ASSERT(m->m_disc == true);
+  QVERIFY(m->m_disc == true);
 }
 
 void MyMoneyFinancialCalculatorTest::testSetIr()
 {
   m->setIr(12.3);
-  CPPUNIT_ASSERT(m->m_ir == 12.3);
-  CPPUNIT_ASSERT(m->m_mask == IR_SET);
+  QVERIFY(m->m_ir == 12.3);
+  QVERIFY(m->m_mask == IR_SET);
 }
 
 void MyMoneyFinancialCalculatorTest::testSetPv()
 {
   m->setPv(23.4);
-  CPPUNIT_ASSERT(m->m_pv == 23.4);
-  CPPUNIT_ASSERT(m->m_mask == PV_SET);
+  QVERIFY(m->m_pv == 23.4);
+  QVERIFY(m->m_mask == PV_SET);
 }
 
 void MyMoneyFinancialCalculatorTest::testSetPmt()
 {
   m->setPmt(34.5);
-  CPPUNIT_ASSERT(m->m_pmt == 34.5);
-  CPPUNIT_ASSERT(m->m_mask == PMT_SET);
+  QVERIFY(m->m_pmt == 34.5);
+  QVERIFY(m->m_mask == PMT_SET);
 }
 
 void MyMoneyFinancialCalculatorTest::testSetFv()
 {
   m->setFv(45.6);
-  CPPUNIT_ASSERT(m->m_fv == 45.6);
-  CPPUNIT_ASSERT(m->m_mask == FV_SET);
+  QVERIFY(m->m_fv == 45.6);
+  QVERIFY(m->m_mask == FV_SET);
 }
 
 void MyMoneyFinancialCalculatorTest::testCombinedSet()
@@ -130,7 +131,7 @@ void MyMoneyFinancialCalculatorTest::testCombinedSet()
   m->setPmt(34.5);
   m->setFv(45.6);
 
-  CPPUNIT_ASSERT(m->m_mask == (NPP_SET | PV_SET | IR_SET | PMT_SET | FV_SET));
+  QVERIFY(m->m_mask == (NPP_SET | PV_SET | IR_SET | PMT_SET | FV_SET));
 }
 
 void MyMoneyFinancialCalculatorTest::testNumPayments()
@@ -139,7 +140,7 @@ void MyMoneyFinancialCalculatorTest::testNumPayments()
   m->setCF(12);
   try {
     m->numPayments();
-    CPPUNIT_FAIL("Missing expected exception");
+    QFAIL("Missing expected exception");
   } catch (MyMoneyException *e) {
     delete e;
   }
@@ -147,7 +148,7 @@ void MyMoneyFinancialCalculatorTest::testNumPayments()
   try {
     m->setPv(-80000.0);
     m->numPayments();
-    CPPUNIT_FAIL("Missing expected exception");
+    QFAIL("Missing expected exception");
   } catch (MyMoneyException *e) {
     delete e;
   }
@@ -155,7 +156,7 @@ void MyMoneyFinancialCalculatorTest::testNumPayments()
   try {
     m->setIr(12.0);
     m->numPayments();
-    CPPUNIT_FAIL("Missing expected exception");
+    QFAIL("Missing expected exception");
   } catch (MyMoneyException *e) {
     delete e;
   }
@@ -163,7 +164,7 @@ void MyMoneyFinancialCalculatorTest::testNumPayments()
   try {
     m->setPmt(7108.0);
     m->numPayments();
-    CPPUNIT_FAIL("Missing expected exception");
+    QFAIL("Missing expected exception");
   } catch (MyMoneyException *e) {
     delete e;
   }
@@ -172,11 +173,11 @@ void MyMoneyFinancialCalculatorTest::testNumPayments()
     m->setFv(0.0);
     m->numPayments();
   } catch (MyMoneyException *e) {
-    CPPUNIT_FAIL("Unexpected exception");
+    QFAIL("Unexpected exception");
     delete e;
   }
 
-  CPPUNIT_ASSERT(roundl(m->m_npp) == 12);
+  QVERIFY(roundl(m->m_npp) == 12);
 }
 
 void MyMoneyFinancialCalculatorTest::testUseCase1()
@@ -187,10 +188,10 @@ void MyMoneyFinancialCalculatorTest::testUseCase1()
   m->setFv(0.0);
   m->setPF(12);
   MyMoneyMoney res(m->payment());
-  CPPUNIT_ASSERT(res == MyMoneyMoney(161046, 100));
+  QVERIFY(res == MyMoneyMoney(161046, 100));
 
   res = MyMoneyMoney(m->futureValue());
-  CPPUNIT_ASSERT(res == MyMoneyMoney(405, 100));
+  QVERIFY(res == MyMoneyMoney(405, 100));
 }
 
 void MyMoneyFinancialCalculatorTest::testUseCase2()
@@ -201,8 +202,10 @@ void MyMoneyFinancialCalculatorTest::testUseCase2()
   m->setFv(0.0);
   m->setPF(12);
   MyMoneyMoney res(m->payment());
-  CPPUNIT_ASSERT(res == MyMoneyMoney(171783, 100));
+  QVERIFY(res == MyMoneyMoney(171783, 100));
 
   res = MyMoneyMoney(m->futureValue());
-  CPPUNIT_ASSERT(res == MyMoneyMoney(-67, 100));
+  QVERIFY(res == MyMoneyMoney(-67, 100));
 }
+
+#include "mymoneyfinancialcalculatortest.moc"

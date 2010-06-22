@@ -18,16 +18,14 @@
 #ifndef CONVERTERTEST_H
 #define CONVERTERTEST_H
 
-#include <cppunit/extensions/HelperMacros.h>
+#include <QtCore/QObject>
+
 #include "mymoneyfile.h"
 #include "storage/mymoneyseqaccessmgr.h"
 
-class ConverterTest : public CppUnit::TestFixture
+class ConverterTest : public QObject
 {
-  CPPUNIT_TEST_SUITE(ConverterTest);
-  CPPUNIT_TEST(testWebQuotes);
-  CPPUNIT_TEST(testDateFormat);
-  CPPUNIT_TEST_SUITE_END();
+  Q_OBJECT
 
 private:
   MyMoneyAccount  *m;
@@ -35,10 +33,11 @@ private:
   MyMoneySeqAccessMgr* storage;
   MyMoneyFile* file;
 
-public:
-  ConverterTest();
-  void setUp();
-  void tearDown();
+private slots:
+  void init();
+  void cleanup();
+  void testWebQuotesDefault();
+  void testWebQuotes_data();
   void testWebQuotes();
   void testDateFormat();
 };

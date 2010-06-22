@@ -24,3 +24,32 @@ KDE4_ADD_LIBRARY( kmm_storage STATIC ${storage_a_SOURCES} )
 
 INSTALL(FILES ${storage_HEADERS} 
 	DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney COMPONENT Devel )
+
+############## tests ####################
+IF( KDE4_BUILD_TESTS )
+
+  # MyMoneyDatabaseMgr
+  set( mymoneydatabasemgrtest_SRCS mymoneydatabasemgrtest.cpp ../mymoneytestutils.cpp )
+
+  kde4_add_unit_test( mymoneydatabasemgrtest TESTNAME kmymoney-mymoneydatabasemgrtest ${mymoneydatabasemgrtest_SRCS} )
+  ADD_DEPENDENCIES( mymoneydatabasemgrtest kmymoney_base kmymoney_common kmm_storage )
+
+  target_link_libraries( mymoneydatabasemgrtest kmymoney_base kmymoney_common kmm_storage ${QT_AND_KDECORE_LIBS} ${QT_QTSQL_LIBRARY} ${QT_QTTEST_LIBRARY} )
+
+  # MyMoneyMap
+  set( mymoneymaptest_SRCS mymoneymaptest.cpp ../mymoneytestutils.cpp )
+
+  kde4_add_unit_test( mymoneymaptest TESTNAME kmymoney-mymoneymaptest ${mymoneymaptest_SRCS} )
+  ADD_DEPENDENCIES( mymoneymaptest kmymoney_base kmymoney_common kmm_storage )
+
+  target_link_libraries( mymoneymaptest kmymoney_base kmymoney_common kmm_storage ${QT_AND_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+
+  # MyMoneySeqAccessMgr
+  set( mymoneyseqaccessmgrtest_SRCS mymoneyseqaccessmgrtest.cpp ../mymoneytestutils.cpp )
+
+  kde4_add_unit_test( mymoneyseqaccessmgrtest TESTNAME kmymoney-mymoneyseqaccessmgrtest ${mymoneyseqaccessmgrtest_SRCS} )
+  ADD_DEPENDENCIES( mymoneyseqaccessmgrtest kmymoney_base kmymoney_common kmm_storage )
+
+  target_link_libraries( mymoneyseqaccessmgrtest kmymoney_base kmymoney_common kmm_storage ${QT_AND_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+
+ENDIF( KDE4_BUILD_TESTS )

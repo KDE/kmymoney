@@ -335,3 +335,4 @@ unsigned long extractId(const QString& txt)
   }
   return rc;
 }
+

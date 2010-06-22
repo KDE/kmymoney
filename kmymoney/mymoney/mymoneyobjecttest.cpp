@@ -15,42 +15,34 @@
  ***************************************************************************/
 
 #include "mymoneyobjecttest.h"
+
+#include <QtTest/QtTest>
+
 #include "mymoneyaccount.h"
 
-MyMoneyObjectTest::MyMoneyObjectTest()
-{
-}
-
-
-void MyMoneyObjectTest::setUp()
-{
-}
-
-void MyMoneyObjectTest::tearDown()
-{
-}
+QTEST_MAIN(MyMoneyObjectTest)
 
 void MyMoneyObjectTest::testEmptyConstructor()
 {
   MyMoneyAccount a;
-  CPPUNIT_ASSERT(a.id().isEmpty());
+  QVERIFY(a.id().isEmpty());
 }
 
 void MyMoneyObjectTest::testConstructor()
 {
   MyMoneyAccount a(QString("thb"), MyMoneyAccount());
 
-  CPPUNIT_ASSERT(!a.id().isEmpty());
-  CPPUNIT_ASSERT(a.id() == QString("thb"));
+  QVERIFY(!a.id().isEmpty());
+  QVERIFY(a.id() == QString("thb"));
 }
 
 void MyMoneyObjectTest::testClearId()
 {
   MyMoneyAccount a(QString("thb"), MyMoneyAccount());
 
-  CPPUNIT_ASSERT(!a.id().isEmpty());
+  QVERIFY(!a.id().isEmpty());
   a.clearId();
-  CPPUNIT_ASSERT(a.id().isEmpty());
+  QVERIFY(a.id().isEmpty());
 }
 
 void MyMoneyObjectTest::testCopyConstructor()
@@ -58,7 +50,7 @@ void MyMoneyObjectTest::testCopyConstructor()
   MyMoneyAccount a(QString("thb"), MyMoneyAccount());
   MyMoneyAccount b(a);
 
-  CPPUNIT_ASSERT(a.MyMoneyObject::operator==(b));
+  QVERIFY(a.MyMoneyObject::operator==(b));
 }
 
 void MyMoneyObjectTest::testAssignmentConstructor()
@@ -66,7 +58,7 @@ void MyMoneyObjectTest::testAssignmentConstructor()
   MyMoneyAccount a(QString("thb"), MyMoneyAccount());
   MyMoneyAccount b = a;
 
-  CPPUNIT_ASSERT(a.MyMoneyObject::operator==(b));
+  QVERIFY(a.MyMoneyObject::operator==(b));
 }
 
 void MyMoneyObjectTest::testEquality()
@@ -75,7 +67,9 @@ void MyMoneyObjectTest::testEquality()
   MyMoneyAccount b(QString("thb"), MyMoneyAccount());
   MyMoneyAccount c(QString("ace"), MyMoneyAccount());
 
-  CPPUNIT_ASSERT(a.MyMoneyObject::operator==(b));
-  CPPUNIT_ASSERT(!(a.MyMoneyObject::operator==(c)));
+  QVERIFY(a.MyMoneyObject::operator==(b));
+  QVERIFY(!(a.MyMoneyObject::operator==(c)));
 }
+
+#include "mymoneyobjecttest.moc"
 

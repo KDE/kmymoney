@@ -17,28 +17,22 @@
 #ifndef MYMONEYPRICETEST_H
 #define MYMONEYPRICETEST_H
 
-#include <cppunit/extensions/HelperMacros.h>
+#include <QtCore/QObject>
 
 #define private public
 #include "mymoneyprice.h"
 #undef private
 
-class MyMoneyPriceTest : public CppUnit::TestFixture
+class MyMoneyPriceTest : public QObject
 {
-  CPPUNIT_TEST_SUITE(MyMoneyPriceTest);
-  CPPUNIT_TEST(testDefaultConstructor);
-  CPPUNIT_TEST(testConstructor);
-  CPPUNIT_TEST(testValidity);
-  CPPUNIT_TEST_SUITE_END();
+  Q_OBJECT
 
 protected:
   MyMoneyPrice* m;
 
 public:
-  MyMoneyPriceTest();
-
-  void setUp();
-  void tearDown();
+  void init();
+  void cleanup();
 
   void testDefaultConstructor();
   void testConstructor();

@@ -19,3 +19,15 @@ ADD_DEPENDENCIES(converter dialogs)
 
 INSTALL(FILES mymoneytemplate.h
   DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney COMPONENT Devel)
+
+############## tests ####################
+IF( KDE4_BUILD_TESTS )
+
+  set( convertertest_SRCS convertertest.cpp ../reports/reportstestcommon.cpp )
+
+  kde4_add_unit_test( convertertest TESTNAME kmymoney-convertertest ${convertertest_SRCS} )
+
+  target_link_libraries( convertertest converter kmymoney_base kmymoney_common kmm_storage ${QT_AND_KDECORE_LIBS} ${KDE4_KIO_LIBS} ${QT_QTTEST_LIBRARY} )
+
+ENDIF( KDE4_BUILD_TESTS )
+
