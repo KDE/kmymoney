@@ -44,7 +44,6 @@ SET(libdialogs_a_SOURCES
   kreconciledlg.cpp
   kreconcilelistitem.cpp 
   kreportconfigurationfilterdlg.cpp
-  ksecuritylisteditor.cpp 
   kselectdatabasedlg.cpp
   kselecttransactionsdlg.cpp 
   ksplittransactiondlg.cpp 
@@ -75,7 +74,7 @@ SET(dialogs_UI
   knewequityentrydecl.ui knewfiledlgdecl.ui
   knewinvestmentwizarddecl.ui knewloanwizarddecl.ui
   konlinequoteconfigurationdecl.ui kpayeereassigndlgdecl.ui
-  kplugindlg.ui kreconciledlgdecl.ui ksecuritylisteditordecl.ui
+  kplugindlg.ui kreconciledlgdecl.ui
   kselectdatabasedlgdecl.ui kselecttransactionsdlgdecl.ui
   ksortoptiondlg.ui ksplitcorrectiondlg.ui ksplittransactiondlgdecl.ui
   kupdatestockpricedlgdecl.ui mymoneyqifprofileeditordecl.ui

@@ -10,7 +10,6 @@ SET(libviews_a_SOURCES
   kwelcomepage.cpp
   khomeview.cpp
   kinstitutionsview.cpp
-  kinvestmentlistitem.cpp
   kinvestmentview.cpp
   kmymoneyfile.cpp
   kmymoneytransaction.cpp

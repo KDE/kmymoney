@@ -15,9 +15,16 @@
       <string>Investment Summary</string>
     </property>
     <layout class="QVBoxLayout">
-      <property name="margin">
-        <number>0</number>
-      </property>
+      <item>
+      <widget class="KTabWidget" name="m_tab">
+       <widget class="QWidget" name="m_equitiesTab">
+        <attribute name="title">
+         <string>Equities</string>
+        </attribute>
+        <layout class="QVBoxLayout">
+        <property name="margin">
+          <number>0</number>
+        </property>
       <item>
         <layout class="QHBoxLayout">
           <item>
@@ -52,53 +59,268 @@
         </layout>
       </item>
       <item>
-        <widget class="QTreeWidget" name="m_table">
-          <property name="font">
-            <font/>
-          </property>
-          <property name="toolTip" stdset="0">
-            <string>Summary of the equities contained in this account, showing your holdings and their most recent price.</string>
-          </property>
-          <property name="rootIsDecorated">
-           <bool>false</bool>
-          </property>
-          <property name="allColumnsShowFocus">
-           <bool>true</bool>
-          </property>
-          <property name="selectionMode">
-           <enum>QAbstractItemView::SingleSelection</enum>
-          </property>
-          <column>
-           <property name="text">
-            <string comment="Investment name">Name</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string comment="Symbol name">Symbol</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string comment="Investment value">Value</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string comment="Shares quantity">Quantity</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string comment="Investment price">Price</string>
-           </property>
-          </column>
+        <layout class="QHBoxLayout">
+          <item>
+            <widget class="QTreeWidget" name="m_investmentsList">
+              <property name="font">
+                <font/>
+              </property>
+              <property name="toolTip" stdset="0">
+                <string>Summary of the equities contained in this account, showing your holdings and their most recent price.</string>
+              </property>
+              <property name="rootIsDecorated">
+               <bool>false</bool>
+              </property>
+              <property name="allColumnsShowFocus">
+               <bool>true</bool>
+              </property>
+              <property name="selectionMode">
+               <enum>QAbstractItemView::SingleSelection</enum>
+              </property>
+              <column>
+               <property name="text">
+                <string comment="Investment name">Name</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string comment="Symbol name">Symbol</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string comment="Investment value">Value</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string comment="Shares quantity">Quantity</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string comment="Investment price">Price</string>
+               </property>
+              </column>
+            </widget>
+          </item>
+          <item>
+            <spacer name="spacer6">
+              <property name="sizeHint">
+                <size>
+                  <width>20</width>
+                  <height>51</height>
+                </size>
+              </property>
+              <property name="sizeType">
+                <enum>QSizePolicy::Expanding</enum>
+              </property>
+              <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+              </property>
+            </spacer>
+          </item>
+        </layout>
+        </item>
+        </layout>
+        </widget>
+        <widget class="QWidget" name="m_securitiesTab">
+          <attribute name="title">
+           <string>Securities</string>
+          </attribute>
+          <layout class="QVBoxLayout">
+            <item>
+              <layout class="QHBoxLayout">
+                <item>
+                  <widget class="QTreeWidget" name="m_securitiesList">
+                    <property name="rootIsDecorated">
+                     <bool>false</bool>
+                    </property>
+                    <property name="allColumnsShowFocus">
+                     <bool>true</bool>
+                    </property>
+                    <property name="selectionMode">
+                     <enum>QAbstractItemView::SingleSelection</enum>
+                    </property>
+                    <column>
+                      <property name="text">
+                        <string>ID</string>
+                      </property>
+                      <property name="clickable">
+                        <bool>true</bool>
+                      </property>
+                      <property name="resizable">
+                        <bool>true</bool>
+                      </property>
+                    </column>
+                    <column>
+                      <property name="text">
+                        <string>Type</string>
+                      </property>
+                      <property name="clickable">
+                        <bool>true</bool>
+                      </property>
+                      <property name="resizable">
+                        <bool>true</bool>
+                      </property>
+                    </column>
+                    <column>
+                      <property name="text">
+                        <string comment="name of the security">Name</string>
+                      </property>
+                      <property name="clickable">
+                        <bool>true</bool>
+                      </property>
+                      <property name="resizable">
+                        <bool>true</bool>
+                      </property>
+                    </column>
+                    <column>
+                      <property name="text">
+                        <string>Symbol</string>
+                      </property>
+                      <property name="clickable">
+                        <bool>true</bool>
+                      </property>
+                      <property name="resizable">
+                        <bool>true</bool>
+                      </property>
+                    </column>
+                    <column>
+                      <property name="text">
+                        <string>Market</string>
+                      </property>
+                      <property name="clickable">
+                        <bool>true</bool>
+                      </property>
+                      <property name="resizable">
+                        <bool>true</bool>
+                      </property>
+                    </column>
+                    <column>
+                      <property name="text">
+                        <string>Currency</string>
+                      </property>
+                      <property name="clickable">
+                        <bool>true</bool>
+                      </property>
+                      <property name="resizable">
+                        <bool>true</bool>
+                      </property>
+                    </column>
+                    <column>
+                      <property name="text">
+                        <string>Fraction</string>
+                      </property>
+                      <property name="clickable">
+                        <bool>true</bool>
+                      </property>
+                      <property name="resizable">
+                        <bool>true</bool>
+                      </property>
+                    </column>
+                    <column>
+                      <property name="text">
+                        <string>Cash Fraction</string>
+                      </property>
+                      <property name="clickable">
+                        <bool>true</bool>
+                      </property>
+                      <property name="resizable">
+                        <bool>true</bool>
+                      </property>
+                    </column>
+                  </widget>
+                </item>
+                <item>
+                  <layout class="QVBoxLayout">
+                    <item>
+                      <widget class="KPushButton" name="m_editSecurityButton">
+                        <property name="text">
+                          <string>Edit...</string>
+                        </property>
+                      </widget>
+                    </item>
+                    <item>
+                      <widget class="KPushButton" name="m_deleteSecurityButton">
+                        <property name="text">
+                          <string>Delete...</string>
+                        </property>
+                      </widget>
+                    </item>
+                    <item>
+                      <spacer name="spacer3">
+                        <property name="sizeHint">
+                          <size>
+                            <width>20</width>
+                            <height>110</height>
+                          </size>
+                        </property>
+                        <property name="sizeType">
+                          <enum>QSizePolicy::Expanding</enum>
+                        </property>
+                        <property name="orientation">
+                          <enum>Qt::Vertical</enum>
+                        </property>
+                      </spacer>
+                    </item>
+                    <item>
+                      <spacer name="spacer6">
+                        <property name="sizeHint">
+                          <size>
+                            <width>20</width>
+                            <height>51</height>
+                          </size>
+                        </property>
+                        <property name="sizeType">
+                          <enum>QSizePolicy::Expanding</enum>
+                        </property>
+                        <property name="orientation">
+                          <enum>Qt::Vertical</enum>
+                        </property>
+                      </spacer>
+                    </item>
+                  </layout>
+                </item>
+                <item>
+                  <spacer name="spacer6">
+                    <property name="sizeHint">
+                      <size>
+                        <width>20</width>
+                        <height>51</height>
+                      </size>
+                    </property>
+                    <property name="sizeType">
+                      <enum>QSizePolicy::Expanding</enum>
+                    </property>
+                    <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                    </property>
+                  </spacer>
+                </item>
+              </layout>
+            </item>
+            <item>
+              <widget class="QCheckBox" name="m_showCurrencyButton">
+                <property name="text">
+                  <string>Show national currencies</string>
+                </property>
+              </widget>
+            </item>
+          </layout>
+        </widget>
         </widget>
       </item>
     </layout>
   </widget>
   <layoutdefault spacing="6" margin="11"/>
     <customwidgets>
+      <customwidget>
+       <class>KTabWidget</class>
+       <extends>QTabWidget</extends>
+       <header>ktabwidget.h</header>
+       <container>1</container>
+      </customwidget>
       <customwidget>
         <class>KMyMoneyAccountCombo</class>
         <extends>QWidget</extends>

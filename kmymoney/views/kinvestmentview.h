@@ -36,7 +36,9 @@
 #include <mymoneyaccount.h>
 #include "ui_kinvestmentviewdecl.h"
 
-enum eInvestmentColumn { eNameColumn, eSymbolColumn, eValueColumn, eQuantityColumn, ePriceColumn };
+enum eInvestmentColumn { eInvestmentNameColumn, eInvestmentSymbolColumn, eValueColumn, eQuantityColumn, ePriceColumn };
+
+enum eSecurityColum { eIdColumn, eTypeColumn, eSecurityNameColumn, eSecuritySymbolColumn, eMarketColumn, eCurrencyColumn, eAcctFractionColumn, eCashFractionColumn };
 
 /**
   * @author Kevin Tambascio
@@ -86,6 +88,21 @@ public slots:
   void showEvent(QShowEvent* event);
 
 protected:
+
+  typedef enum {
+    EquitiesTab = 0,
+    SecuritiesTab,
+    // insert new values above this line
+    MaxViewTabs
+  } InvestmentsViewTab;
+
+  /**
+    * This method loads the investments and securities for the respective tab.
+    *
+    * @param tab which tab should be loaded
+    */
+  void loadView(InvestmentsViewTab tab);
+
   /**
     * This method reloads the account selection combo box of the
     * view with all asset and liability accounts from the engine.
@@ -100,24 +117,33 @@ protected:
     */
   void clear(void);
 
-  void loadView(void);
+  void loadInvestmentTab(void);
 
   void loadInvestmentItem(const MyMoneyAccount& account);
 
+  void loadSecuritiesList(void);
+
+  void loadSecurityItem(QTreeWidgetItem* item, const MyMoneySecurity& security);
+
 protected slots:
+  void slotTabCurrentChanged(QWidget*);
   /**
     * This slot receives the signal from the listview @c lv control that the context menu
     * was requested for @c item at @c point.
     */
-  void slotListContextMenu(const QPoint& point);
+  void slotInvestmentContextMenu(const QPoint& point);
 
-  void slotSelectionChanged();
+  void slotInvestmentSelectionChanged();
+
+  void slotUpdateSecuritiesButtons(void);
+  void slotEditSecurity(void);
+  void slotDeleteSecurity(void);
 
 
 signals:
   /**
     * This signal is emitted, if an account has been selected
-    * which cannot handled by this view.
+    * which cannot be handled by this view.
     */
   void accountSelected(const QString& accountId, const QString& transactionId);
 
@@ -130,6 +156,8 @@ private:
   class Private;
   /// \internal d-pointer instance.
   Private* const d;
+
+  const QString m_currencyMarket;
 };
 
 #endif

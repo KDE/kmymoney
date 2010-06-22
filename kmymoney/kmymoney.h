@@ -198,8 +198,6 @@ protected slots:
 
   void slotShowNextView(void);
 
-  void slotSecurityEditor(void);
-
   /**
     * Brings up a dialog to let the user search for specific transaction(s).  It then
     * opens a results window to display those transactions.

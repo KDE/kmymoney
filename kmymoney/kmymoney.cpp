@@ -116,7 +116,6 @@
 #include "dialogs/kmymoneypricedlg.h"
 #include "dialogs/kcurrencyeditdlg.h"
 #include "dialogs/kequitypriceupdatedlg.h"
-#include "dialogs/ksecuritylisteditor.h"
 #include "dialogs/kmymoneyfileinfodlg.h"
 #include "dialogs/kfindtransactiondlg.h"
 #include "dialogs/knewbankdlg.h"
@@ -707,10 +706,6 @@ void KMyMoneyApp::initActions(void)
   tools_qif_editor->setText(i18n("QIF Profile Editor..."));
   tools_qif_editor->setIcon(KIcon("document-properties"));
   connect(tools_qif_editor, SIGNAL(triggered()), this, SLOT(slotQifProfileEditor()));
-
-  KAction *tools_security_editor = actionCollection()->addAction("tools_security_editor");
-  tools_security_editor->setText(i18n("Securities..."));
-  connect(tools_security_editor, SIGNAL(triggered()), this, SLOT(slotSecurityEditor()));
 
   KAction *tools_currency_editor = actionCollection()->addAction("tools_currency_editor");
   tools_currency_editor->setText(i18n("Currencies..."));
@@ -5773,8 +5768,6 @@ void KMyMoneyApp::slotUpdateActions(void)
   action("file_import_template")->setEnabled(fileOpen && !importRunning);
   action("file_export_template")->setEnabled(fileOpen && !importRunning);
 
-
-  action("tools_security_editor")->setEnabled(fileOpen);
   action("tools_currency_editor")->setEnabled(fileOpen);
   action("tools_price_editor")->setEnabled(fileOpen);
   action("tools_update_prices")->setEnabled(fileOpen);
@@ -6559,12 +6552,6 @@ void KMyMoneyApp::slotEnableMessages(void)
 {
   KMessageBox::enableAllMessages();
   KMessageBox::information(this, i18n("All messages have been enabled."), i18n("All messages"));
-}
-
-void KMyMoneyApp::slotSecurityEditor(void)
-{
-  KSecurityListEditor dlg(this);
-  dlg.exec();
 }
 
 void KMyMoneyApp::createInterfaces(void)

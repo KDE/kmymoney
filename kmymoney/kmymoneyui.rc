@@ -95,7 +95,6 @@
   <Menu name="kmmtools" >
    <Text>T&amp;ools</Text>
    <Action name="tools_qif_editor" />
-   <Action name="tools_security_editor" />
    <Action name="tools_currency_editor" />
    <Action name="tools_price_editor" />
    <Action name="tools_update_prices" />
