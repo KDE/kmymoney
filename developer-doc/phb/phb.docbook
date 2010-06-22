@@ -59,8 +59,6 @@
 
 </authorgroup>
 
-<date>18.09.2005</date>
-
 <copyright>
 <year>2001</year>
 <year>2002</year>
@@ -81,6 +79,9 @@ Texts. A copy of the license is included in the appendix entitled
 <link linkend="licence">"GNU Free Documentation License"</link>.
 </para>
 </legalnotice>
+
+<date>22.06.2010</date>
+<releaseinfo>3.98.1</releaseinfo>
 
 <abstract>
 <para>
@@ -110,6 +111,18 @@ A prerequisite for this document is a basic understanding on the work with
 &cvs; in more detail it is not intended as an introduction to &cvs; in general.
 </para>
 </abstract>
+
+<keywordset>
+<keyword>KDE</keyword>
+<keyword>KMyMoney2</keyword>
+<keyword>KMyMoney</keyword>
+<keyword>kmymoney2</keyword>
+<keyword>kmymoney</keyword>
+<keyword>finance</keyword>
+<keyword>accounts</keyword>
+<keyword>accounting</keyword>
+<keyword>financial</keyword>
+</keywordset>
 
 </bookinfo>
 
