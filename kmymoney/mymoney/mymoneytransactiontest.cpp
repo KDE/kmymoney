@@ -368,27 +368,27 @@ void MyMoneyTransactionTest::testAddDuplicateAccount()
   split2.setValue(MyMoneyMoney(200));
 
   try {
-    CPPUNIT_ASSERT(m->accountReferenced("A000001") == true);
-    CPPUNIT_ASSERT(m->accountReferenced("A000002") == true);
+    QVERIFY(m->accountReferenced("A000001") == true);
+    QVERIFY(m->accountReferenced("A000002") == true);
     m->addSplit(split1);
     m->addSplit(split2);
     qDebug() << "Split count is" << m->splitCount();
-    CPPUNIT_ASSERT(m->splitCount() == 2);
-    CPPUNIT_ASSERT(m->splits()[0].accountId() == "A000001");
-    CPPUNIT_ASSERT(m->splits()[1].accountId() == "A000002");
-    CPPUNIT_ASSERT(m->accountReferenced("A000001") == true);
-    CPPUNIT_ASSERT(m->accountReferenced("A000002") == true);
-    CPPUNIT_ASSERT(m->splits()[0].id() == "S0001");
-    CPPUNIT_ASSERT(m->splits()[1].id() == "S0002");
-    CPPUNIT_ASSERT(split1.id() == "S0001");
-    CPPUNIT_ASSERT(split2.id() == "S0002");
+    QVERIFY(m->splitCount() == 2);
+    QVERIFY(m->splits()[0].accountId() == "A000001");
+    QVERIFY(m->splits()[1].accountId() == "A000002");
+    QVERIFY(m->accountReferenced("A000001") == true);
+    QVERIFY(m->accountReferenced("A000002") == true);
+    QVERIFY(m->splits()[0].id() == "S0001");
+    QVERIFY(m->splits()[1].id() == "S0002");
+    QVERIFY(split1.id() == "S0001");
+    QVERIFY(split2.id() == "S0002");
 
   } catch (MyMoneyException *e) {
     unexpectedException(e);
   }
 
-  CPPUNIT_ASSERT(m->splits()[0].value() == MyMoneyMoney(200));
-  CPPUNIT_ASSERT(m->splits()[1].value() == MyMoneyMoney(400));
+  QVERIFY(m->splits()[0].value() == MyMoneyMoney(200));
+  QVERIFY(m->splits()[1].value() == MyMoneyMoney(400));
 }
 
 void MyMoneyTransactionTest::testModifyDuplicateAccount()

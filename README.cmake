@@ -88,7 +88,7 @@ Quick-start 3: More options
     The default value is: 'RelWithDebInfo'
 
 -D KDE4_BUILD_TESTS=ON
-    To also build the unit tests. This requires CppUnit to be installed.
+    To also build the unit tests.
 
 -----------------------------------------------------
 Quick-start 4: Makefile targets

@@ -39,9 +39,6 @@
 /* Define if you have KDChartListTableData::setProp method */
 #define HAVE_KDCHART_SETPROP 0
 
-/* Define if you have libcppunit */
-#cmakedefine HAVE_LIBCPPUNIT 1
-
 /* Define if you have libjpeg */
 #cmakedefine HAVE_LIBJPEG 1
 
