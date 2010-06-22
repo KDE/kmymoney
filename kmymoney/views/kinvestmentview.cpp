@@ -345,6 +345,12 @@ void KInvestmentView::loadInvestmentTab(void)
     delete e;
   }
 
+  //resize the column width
+  m_investmentsList->resizeColumnToContents(0);
+  m_investmentsList->resizeColumnToContents(1);
+  m_investmentsList->resizeColumnToContents(2);
+  m_investmentsList->resizeColumnToContents(3);
+
   // and tell everyone what's selected
   emit accountSelected(d->m_account);
 }
@@ -425,6 +431,15 @@ void KInvestmentView::loadSecuritiesList(void)
     loadSecurityItem(newItem, *it);
 
   }
+
+  //resize column width
+  m_securitiesList->resizeColumnToContents(1);
+  m_securitiesList->resizeColumnToContents(2);
+  m_securitiesList->resizeColumnToContents(3);
+  m_securitiesList->resizeColumnToContents(4);
+  m_securitiesList->resizeColumnToContents(5);
+  m_securitiesList->resizeColumnToContents(6);
+
   slotUpdateSecuritiesButtons();
 }
 
