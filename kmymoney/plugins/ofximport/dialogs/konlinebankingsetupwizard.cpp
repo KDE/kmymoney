@@ -303,6 +303,11 @@ bool KOnlineBankingSetupWizard::finishLoginPage(void)
   if (! m_listAccount->topLevelItem(0)) {
     KMessageBox::sorry(this, i18n("No suitable accounts were found at this bank."));
     result = false;
+  } else {
+    m_listAccount->resizeColumnToContents(0);
+    m_listAccount->resizeColumnToContents(1);
+    m_listAccount->resizeColumnToContents(2);
+    m_listAccount->resizeColumnToContents(3);
   }
   return result;
 }
@@ -449,6 +454,8 @@ bool KOnlineBankingSetupWizard::chosenSettings(MyMoneyKeyValueContainer& setting
       QString hVer = m_headerVersion->headerVersion();
       if (!hVer.isEmpty())
         settings.setValue("kmmofx-headerVersion", hVer);
+      if (!m_storePassword->isChecked())
+        settings.deletePair("password");
       result = true;
     }
   }
