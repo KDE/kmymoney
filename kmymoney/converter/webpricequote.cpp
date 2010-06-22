@@ -557,7 +557,6 @@ WebPriceQuoteSource::WebPriceQuoteSource(const QString& name)
   m_date = grp.readEntry("DateRegex");
   m_dateformat = grp.readEntry("DateFormatRegex", "%m %d %y");
   m_price = grp.readEntry("PriceRegex");
-  qDebug("%s: '%s'", qPrintable(m_name), qPrintable(m_price));
   m_url = grp.readEntry("URL");
   m_skipStripping = grp.readEntry("SkipStripping", false);
 }
