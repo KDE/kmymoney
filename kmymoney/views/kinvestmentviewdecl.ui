@@ -265,7 +265,7 @@
                       </spacer>
                     </item>
                     <item>
-                      <spacer name="spacer6">
+                      <spacer name="spacer7">
                         <property name="sizeHint">
                           <size>
                             <width>20</width>
@@ -283,7 +283,7 @@
                   </layout>
                 </item>
                 <item>
-                  <spacer name="spacer6">
+                  <spacer name="spacer8">
                     <property name="sizeHint">
                       <size>
                         <width>20</width>
