@@ -134,9 +134,9 @@
           <attribute name="title">
            <string>Securities</string>
           </attribute>
-          <layout class="QVBoxLayout">
+          <layout class="QHBoxLayout">
             <item>
-              <layout class="QHBoxLayout">
+              <layout class="QVBoxLayout" name="m_securitiesLayout">
                 <item>
                   <widget class="QTreeWidget" name="m_securitiesList">
                     <property name="rootIsDecorated">
@@ -245,57 +245,48 @@
                   </widget>
                 </item>
                 <item>
-                  <layout class="QVBoxLayout">
-                    <item>
-                      <widget class="KPushButton" name="m_editSecurityButton">
-                        <property name="text">
-                          <string>Edit...</string>
-                        </property>
-                      </widget>
-                    </item>
-                    <item>
-                      <widget class="KPushButton" name="m_deleteSecurityButton">
-                        <property name="text">
-                          <string>Delete...</string>
-                        </property>
-                      </widget>
-                    </item>
-                    <item>
-                      <spacer name="spacer3">
-                        <property name="sizeHint">
-                          <size>
-                            <width>20</width>
-                            <height>110</height>
-                          </size>
-                        </property>
-                        <property name="sizeType">
-                          <enum>QSizePolicy::Expanding</enum>
-                        </property>
-                        <property name="orientation">
-                          <enum>Qt::Vertical</enum>
-                        </property>
-                      </spacer>
-                    </item>
-                    <item>
-                      <spacer name="spacer7">
-                        <property name="sizeHint">
-                          <size>
-                            <width>20</width>
-                            <height>51</height>
-                          </size>
-                        </property>
-                        <property name="sizeType">
-                          <enum>QSizePolicy::Expanding</enum>
-                        </property>
-                        <property name="orientation">
-                          <enum>Qt::Vertical</enum>
-                        </property>
-                      </spacer>
-                    </item>
-                  </layout>
+                  <widget class="QCheckBox" name="m_showCurrencyButton">
+                    <property name="text">
+                      <string>Show national currencies</string>
+                    </property>
+                  </widget>
+                </item>
+              </layout>
+            </item>
+            <item>
+              <layout class="QVBoxLayout">
+                <item>
+                  <widget class="KPushButton" name="m_editSecurityButton">
+                    <property name="text">
+                      <string>Edit...</string>
+                    </property>
+                  </widget>
                 </item>
                 <item>
-                  <spacer name="spacer8">
+                  <widget class="KPushButton" name="m_deleteSecurityButton">
+                    <property name="text">
+                      <string>Delete...</string>
+                    </property>
+                  </widget>
+                </item>
+                <item>
+                  <spacer name="spacer3">
+                    <property name="sizeHint">
+                      <size>
+                        <width>20</width>
+                        <height>110</height>
+                      </size>
+                    </property>
+                    <property name="sizeType">
+                      <enum>QSizePolicy::Expanding</enum>
+                    </property>
+                    <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                    </property>
+                  </spacer>
+                </item>
+                <item>
+                  <spacer name="spacer7">
                     <property name="sizeHint">
                       <size>
                         <width>20</width>
@@ -306,18 +297,11 @@
                       <enum>QSizePolicy::Expanding</enum>
                     </property>
                     <property name="orientation">
-                      <enum>Qt::Horizontal</enum>
+                      <enum>Qt::Vertical</enum>
                     </property>
                   </spacer>
                 </item>
               </layout>
-            </item>
-            <item>
-              <widget class="QCheckBox" name="m_showCurrencyButton">
-                <property name="text">
-                  <string>Show national currencies</string>
-                </property>
-              </widget>
             </item>
           </layout>
         </widget>

@@ -71,6 +71,7 @@ KInvestmentView::KInvestmentView(QWidget *parent) :
 {
   setupUi(this);
 
+  //first set up everything for the equities tab
   d->m_filterProxyModel = new AccountNamesFilterProxyModel(this);
   d->m_filterProxyModel->addAccountType(MyMoneyAccount::Investment);
   d->m_filterProxyModel->setHideEquityAccounts(false);
@@ -95,6 +96,12 @@ KInvestmentView::KInvestmentView(QWidget *parent) :
           this, SLOT(slotSelectAccount(const QString&)));
   connect(m_investmentsList, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), kmymoney->action("investment_edit"), SLOT(trigger()));
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadView()));
+
+  // create the searchline widget
+  // and insert it into the existing layout
+  m_searchSecuritiesWidget = new KTreeWidgetSearchLineWidget(this, m_securitiesList);
+  m_searchSecuritiesWidget->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed));
+  m_securitiesLayout->insertWidget(0, m_searchSecuritiesWidget);
 
   KGuiItem removeButtonItem(i18n("&Delete"),
                             KIcon("edit-delete"),
@@ -419,6 +426,7 @@ void KInvestmentView::showEvent(QShowEvent* event)
 void KInvestmentView::loadSecuritiesList(void)
 {
   m_securitiesList->setColumnWidth(eIdColumn, 0);
+  m_securitiesList->setSortingEnabled(false);
   m_securitiesList->clear();
 
   QList<MyMoneySecurity> list = MyMoneyFile::instance()->securityList();
@@ -431,6 +439,7 @@ void KInvestmentView::loadSecuritiesList(void)
     loadSecurityItem(newItem, *it);
 
   }
+  m_securitiesList->setSortingEnabled(true);
 
   //resize column width
   m_securitiesList->resizeColumnToContents(1);

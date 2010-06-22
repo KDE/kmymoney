@@ -28,6 +28,7 @@
 
 // ----------------------------------------------------------------------------
 // KDE Includes
+#include <KTreeWidgetSearchLineWidget>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -158,6 +159,10 @@ private:
   Private* const d;
 
   const QString m_currencyMarket;
+  /**
+    * Search widget for the securities list
+    */
+  KTreeWidgetSearchLineWidget*  m_searchSecuritiesWidget;
 };
 
 #endif
