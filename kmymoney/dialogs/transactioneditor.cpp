@@ -128,7 +128,20 @@ void TransactionEditor::setup(QWidgetList& tabOrderWidgets, const MyMoneyAccount
   if (w)
     tabOrderWidgets.append(w);
   loadEditWidgets(action);
+  
+  // remove all unused widgets and don't forget to remove them
+  // from the tab order list as well
   m_editWidgets.removeOrphans();
+  QWidgetList::iterator it_w;
+  const QWidgetList editWidgets(m_editWidgets.values());
+  for(it_w = tabOrderWidgets.begin(); it_w != tabOrderWidgets.end();) {
+    if(editWidgets.contains(*it_w)) {
+      ++it_w;
+    } else {
+      it_w = tabOrderWidgets.erase(it_w);
+    }
+  }
+  
   clearFinalWidgets();
   setupFinalWidgets();
   slotUpdateButtonState();
@@ -681,14 +694,20 @@ StdTransactionEditor::~StdTransactionEditor()
 
 void StdTransactionEditor::createEditWidgets(void)
 {
-  KMyMoneyCategory* account = new KMyMoneyCategory;
-  account->setClickMessage(i18n("Account"));
-  m_editWidgets["account"] = account;
-  connect(account, SIGNAL(textChanged(const QString&)), this, SLOT(slotUpdateButtonState()));
-  connect(account, SIGNAL(itemSelected(const QString&)), this, SLOT(slotUpdateAccount(const QString&)));
-
+  // we only create the account widget in case it is needed
+  // to avoid confusion in the tab order later on.
+  if(m_item->showRowInForm(0)) {
+    KMyMoneyCategory* account = new KMyMoneyCategory;
+    account->setClickMessage(i18n("Account"));
+    account->setObjectName(QLatin1String("Account"));
+    m_editWidgets["account"] = account;
+    connect(account, SIGNAL(textChanged(const QString&)), this, SLOT(slotUpdateButtonState()));
+    connect(account, SIGNAL(itemSelected(const QString&)), this, SLOT(slotUpdateAccount(const QString&)));
+  }
+  
   KMyMoneyPayeeCombo* payee = new KMyMoneyPayeeCombo;
   payee->setClickMessage(i18n("Payer/Receiver"));
+  payee->setObjectName(QLatin1String("Payee"));
   m_editWidgets["payee"] = payee;
   connect(payee, SIGNAL(textChanged(const QString&)), this, SLOT(slotUpdateButtonState()));
   connect(payee, SIGNAL(createItem(const QString&, QString&)), this, SIGNAL(createPayee(const QString&, QString&)));
@@ -697,6 +716,7 @@ void StdTransactionEditor::createEditWidgets(void)
 
   KMyMoneyCategory* category = new KMyMoneyCategory(0, true);
   category->setClickMessage(i18n("Category/Account"));
+  category->setObjectName(QLatin1String("Category/Account"));
   m_editWidgets["category"] = category;
   connect(category, SIGNAL(itemSelected(const QString&)), this, SLOT(slotUpdateCategory(const QString&)));
   connect(category, SIGNAL(textChanged(const QString&)), this, SLOT(slotUpdateButtonState()));
@@ -706,6 +726,7 @@ void StdTransactionEditor::createEditWidgets(void)
   category->splitButton()->setDisabled(true);
 
   KTextEdit* memo = new KTextEdit;
+  memo->setObjectName(QLatin1String("Memo"));
   memo->setTabChangesFocus(true);
   m_editWidgets["memo"] = memo;
 
@@ -733,6 +754,7 @@ void StdTransactionEditor::createEditWidgets(void)
   if (showNumberField) {
     kMyMoneyLineEdit* number = new kMyMoneyLineEdit;
     number->setClickMessage(i18n("Number"));
+    number->setObjectName(QLatin1String("Number"));
     m_editWidgets["number"] = number;
     connect(number, SIGNAL(lineChanged(const QString&)), this, SLOT(slotNumberChanged(const QString&)));
     // number->installEventFilter(this);
@@ -740,34 +762,40 @@ void StdTransactionEditor::createEditWidgets(void)
 
   kMyMoneyDateInput* postDate = new kMyMoneyDateInput;
   m_editWidgets["postdate"] = postDate;
+  postDate->setObjectName(QLatin1String("PostDate"));
   postDate->setDate(QDate());
   connect(postDate, SIGNAL(dateChanged(const QDate&)), this, SLOT(slotUpdateButtonState()));
 
   kMyMoneyEdit* value = new kMyMoneyEdit;
   m_editWidgets["amount"] = value;
+  value->setObjectName(QLatin1String("Amount"));
   value->setResetButtonVisible(false);
   connect(value, SIGNAL(valueChanged(const QString&)), this, SLOT(slotUpdateAmount(const QString&)));
   connect(value, SIGNAL(textChanged(const QString&)), this, SLOT(slotUpdateButtonState()));
 
   value = new kMyMoneyEdit;
   m_editWidgets["payment"] = value;
+  value->setObjectName(QLatin1String("Payment"));
   value->setResetButtonVisible(false);
   connect(value, SIGNAL(valueChanged(const QString&)), this, SLOT(slotUpdatePayment(const QString&)));
   connect(value, SIGNAL(textChanged(const QString&)), this, SLOT(slotUpdateButtonState()));
 
   value = new kMyMoneyEdit;
   m_editWidgets["deposit"] = value;
+  value->setObjectName(QLatin1String("Deposit"));
   value->setResetButtonVisible(false);
   connect(value, SIGNAL(valueChanged(const QString&)), this, SLOT(slotUpdateDeposit(const QString&)));
   connect(value, SIGNAL(textChanged(const QString&)), this, SLOT(slotUpdateButtonState()));
 
   KMyMoneyCashFlowCombo* cashflow = new KMyMoneyCashFlowCombo(0, m_account.accountGroup());
   m_editWidgets["cashflow"] = cashflow;
+  cashflow->setObjectName(QLatin1String("Cashflow"));
   connect(cashflow, SIGNAL(directionSelected(KMyMoneyRegister::CashFlowDirection)), this, SLOT(slotUpdateCashFlow(KMyMoneyRegister::CashFlowDirection)));
   connect(cashflow, SIGNAL(directionSelected(KMyMoneyRegister::CashFlowDirection)), this, SLOT(slotUpdateButtonState()));
 
   KMyMoneyReconcileCombo* reconcile = new KMyMoneyReconcileCombo;
   m_editWidgets["status"] = reconcile;
+  reconcile->setObjectName(QLatin1String("Reconcile"));
   connect(reconcile, SIGNAL(itemSelected(const QString&)), this, SLOT(slotUpdateButtonState()));
 
   KMyMoneyRegister::QWidgetContainer::iterator it_w;
@@ -808,6 +836,7 @@ void StdTransactionEditor::createEditWidgets(void)
   if (form) {
     KMyMoneyTransactionForm::TabBar* tabbar = new KMyMoneyTransactionForm::TabBar;
     m_editWidgets["tabbar"] = tabbar;
+    tabbar->setObjectName(QLatin1String("TabBar"));
     tabbar->copyTabs(form->tabBar());
     connect(tabbar, SIGNAL(tabCurrentChanged(int)), this, SLOT(slotUpdateAction(int)));
   }
@@ -1035,8 +1064,9 @@ void StdTransactionEditor::loadEditWidgets(KMyMoneyRegister::Action action)
 QWidget* StdTransactionEditor::firstWidget(void) const
 {
   QWidget* w = 0;
-  if (m_initialAction != KMyMoneyRegister::ActionNone)
+  if (m_initialAction != KMyMoneyRegister::ActionNone) {
     w = haveWidget("payee");
+  }
   return w;
 }
 

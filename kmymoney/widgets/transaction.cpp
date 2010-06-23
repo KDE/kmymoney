@@ -449,8 +449,7 @@ void Transaction::arrangeWidget(QTableWidget* tbl, int row, int col, QWidget* w)
     // remove the widget from the QTable's eventFilter so that all
     // events will be directed to the edit widget
     w->removeEventFilter(tbl);
-  } else
-    qDebug("No widget for %d,%d", row, col);
+  }
 }
 
 bool Transaction::haveNumberField(void) const
