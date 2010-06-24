@@ -1065,7 +1065,7 @@ private:
     * The amount is added if @a reverse is @c false, subtracted in case it is @c true.
     */
   void adjustBalance(MyMoneyAccount& acc, const MyMoneySplit& split, bool reverse = false);
-  
+
   /**
     * This member variable keeps the User information.
     * @see setUser()

@@ -128,20 +128,20 @@ void TransactionEditor::setup(QWidgetList& tabOrderWidgets, const MyMoneyAccount
   if (w)
     tabOrderWidgets.append(w);
   loadEditWidgets(action);
-  
+
   // remove all unused widgets and don't forget to remove them
   // from the tab order list as well
   m_editWidgets.removeOrphans();
   QWidgetList::iterator it_w;
   const QWidgetList editWidgets(m_editWidgets.values());
-  for(it_w = tabOrderWidgets.begin(); it_w != tabOrderWidgets.end();) {
-    if(editWidgets.contains(*it_w)) {
+  for (it_w = tabOrderWidgets.begin(); it_w != tabOrderWidgets.end();) {
+    if (editWidgets.contains(*it_w)) {
       ++it_w;
     } else {
       it_w = tabOrderWidgets.erase(it_w);
     }
   }
-  
+
   clearFinalWidgets();
   setupFinalWidgets();
   slotUpdateButtonState();
@@ -696,7 +696,7 @@ void StdTransactionEditor::createEditWidgets(void)
 {
   // we only create the account widget in case it is needed
   // to avoid confusion in the tab order later on.
-  if(m_item->showRowInForm(0)) {
+  if (m_item->showRowInForm(0)) {
     KMyMoneyCategory* account = new KMyMoneyCategory;
     account->setClickMessage(i18n("Account"));
     account->setObjectName(QLatin1String("Account"));
@@ -704,7 +704,7 @@ void StdTransactionEditor::createEditWidgets(void)
     connect(account, SIGNAL(textChanged(const QString&)), this, SLOT(slotUpdateButtonState()));
     connect(account, SIGNAL(itemSelected(const QString&)), this, SLOT(slotUpdateAccount(const QString&)));
   }
-  
+
   KMyMoneyPayeeCombo* payee = new KMyMoneyPayeeCombo;
   payee->setClickMessage(i18n("Payer/Receiver"));
   payee->setObjectName(QLatin1String("Payee"));

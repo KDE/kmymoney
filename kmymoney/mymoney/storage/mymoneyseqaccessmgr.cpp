@@ -588,7 +588,7 @@ void MyMoneySeqAccessMgr::modifyTransaction(const MyMoneyTransaction& transactio
     invalidateBalanceCache(acc.id());
     m_accountList.modify(acc.id(), acc);
   }
-  
+
   // remove old transaction from lists
   m_transactionList.remove(oldKey);
 
@@ -596,7 +596,7 @@ void MyMoneySeqAccessMgr::modifyTransaction(const MyMoneyTransaction& transactio
   QString newKey = transaction.uniqueSortKey();
   m_transactionList.insert(newKey, transaction);
   m_transactionKeys.modify(transaction.id(), newKey);
-  
+
   // adjust account balances
   for (it_s = transaction.splits().begin(); it_s != transaction.splits().end(); ++it_s) {
     MyMoneyAccount acc = m_accountList[(*it_s).accountId()];
