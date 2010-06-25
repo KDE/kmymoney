@@ -68,7 +68,7 @@ KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent, const QString& sec
   lvEquityList->setRootIsDecorated(false);
   QStringList headerList;
   headerList << i18n("Symbol") << i18nc("Equity name", "Name")
-             << i18n("Price") << i18n("Date");
+  << i18n("Price") << i18n("Date");
 
   lvEquityList->setColumnWidth(NAME_COL, 125);
 
@@ -451,11 +451,11 @@ void KEquityPriceUpdateDlg::slotQuoteFailed(const QString& _id, const QString& _
 
     // launch the NEXT one ... in case of m_fUpdateAll == false, we
     // need to parse the list to find the next selected one
-    next = lvEquityList->invisibleRootItem()->child(lvEquityList->invisibleRootItem()->indexOfChild(item)+1);
+    next = lvEquityList->invisibleRootItem()->child(lvEquityList->invisibleRootItem()->indexOfChild(item) + 1);
     if (!m_fUpdateAll) {
       while (next && !next->isSelected()) {
         prgOnlineProgress->setValue(prgOnlineProgress->value() + 1);
-        next = lvEquityList->invisibleRootItem()->child(lvEquityList->invisibleRootItem()->indexOfChild(next)+1);
+        next = lvEquityList->invisibleRootItem()->child(lvEquityList->invisibleRootItem()->indexOfChild(next) + 1);
       }
     }
     if (next) {
@@ -526,11 +526,11 @@ void KEquityPriceUpdateDlg::slotReceivedQuote(const QString& _id, const QString&
 
     // launch the NEXT one ... in case of m_fUpdateAll == false, we
     // need to parse the list to find the next selected one
-    next = lvEquityList->invisibleRootItem()->child(lvEquityList->invisibleRootItem()->indexOfChild(item)+1);
+    next = lvEquityList->invisibleRootItem()->child(lvEquityList->invisibleRootItem()->indexOfChild(item) + 1);
     if (!m_fUpdateAll) {
       while (next && !next->isSelected()) {
         prgOnlineProgress->setValue(prgOnlineProgress->value() + 1);
-        next = lvEquityList->invisibleRootItem()->child(lvEquityList->invisibleRootItem()->indexOfChild(next)+1);
+        next = lvEquityList->invisibleRootItem()->child(lvEquityList->invisibleRootItem()->indexOfChild(next) + 1);
       }
     }
   } else {
