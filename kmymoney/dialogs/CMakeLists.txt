@@ -74,7 +74,7 @@ SET(dialogs_UI
   knewequityentrydecl.ui knewfiledlgdecl.ui
   knewinvestmentwizarddecl.ui knewloanwizarddecl.ui
   konlinequoteconfigurationdecl.ui kpayeereassigndlgdecl.ui
-  kplugindlg.ui kreconciledlgdecl.ui
+  kreconciledlgdecl.ui
   kselectdatabasedlgdecl.ui kselecttransactionsdlgdecl.ui
   ksortoptiondlg.ui ksplitcorrectiondlg.ui ksplittransactiondlgdecl.ui
   kupdatestockpricedlgdecl.ui mymoneyqifprofileeditordecl.ui

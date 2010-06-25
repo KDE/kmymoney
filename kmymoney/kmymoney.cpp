@@ -133,7 +133,6 @@
 #include "dialogs/kendingbalancedlg.h"
 #include "dialogs/kbalancechartdlg.h"
 #include "dialogs/kgeneratesqldlg.h"
-#include "ui_kplugindlg.h"
 #include "dialogs/kloadtemplatedlg.h"
 #include "dialogs/kgpgkeyselectiondlg.h"
 #include "dialogs/transactionmatcher.h"
