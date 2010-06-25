@@ -295,7 +295,7 @@
               </widget>
             </item>
             <item>
-              <widget class="Q3Frame" name="m_endOptionsFrame">
+              <widget class="QFrame" name="m_endOptionsFrame">
                 <property name="frameShape">
                   <enum>QFrame::NoFrame</enum>
                 </property>
