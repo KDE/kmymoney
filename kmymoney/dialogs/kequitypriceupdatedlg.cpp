@@ -41,7 +41,6 @@
 #include <kmessagebox.h>
 #include <kpushbutton.h>
 #include <ktextedit.h>
-#include <k3listview.h>
 #include <kdebug.h>
 #include <kprogressdialog.h>
 #include <kglobal.h>
