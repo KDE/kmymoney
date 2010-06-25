@@ -67,20 +67,21 @@ KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent, const QString& sec
     m_fUpdateAll(false)
 {
   lvEquityList->setRootIsDecorated(false);
-  lvEquityList->setColumnText(0, i18n("Symbol"));
-  lvEquityList->addColumn(i18n("Symbol"));
-  lvEquityList->addColumn(i18nc("Equity name", "Name"), 125);
-  lvEquityList->addColumn(i18n("Price"));
-  lvEquityList->addColumn(i18n("Date"));
+  QStringList headerList;
+  headerList << i18n("Symbol") << i18nc("Equity name", "Name")
+             << i18n("Price") << i18n("Date");
+
+  lvEquityList->setColumnWidth(NAME_COL, 125);
 
   // This is a "get it up and running" hack.  Will replace this in the future.
-  lvEquityList->addColumn("ID");
-  lvEquityList->addColumn("Source");
+  headerList << "ID" << "Source";
   lvEquityList->setColumnWidth(ID_COL, 0);
 
-  lvEquityList->setMultiSelection(true);
-  lvEquityList->setColumnWidthMode(SYMBOL_COL, Q3ListView::Maximum);
-  lvEquityList->setColumnWidthMode(ID_COL, Q3ListView::Manual);
+  lvEquityList->setHeaderLabels(headerList);
+
+  lvEquityList->setSelectionMode(QAbstractItemView::MultiSelection);
+  //lvEquityList->setColumnWidthMode(SYMBOL_COL, Q3ListView::Maximum);
+  //lvEquityList->setColumnWidthMode(ID_COL, Q3ListView::Manual);
   lvEquityList->setAllColumnsShowFocus(true);
 
   btnUpdateAll->setEnabled(false);
@@ -126,7 +127,7 @@ KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent, const QString& sec
   }
 
   // if list is empty, add the request price pair
-  if (lvEquityList->firstChild() == 0) {
+  if (lvEquityList->children().empty()) {
     addPricePair(currencyIds, true);
   }
 
@@ -144,7 +145,7 @@ KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent, const QString& sec
   connect(&m_webQuote, SIGNAL(error(const QString&)),
           this, SLOT(logErrorMessage(const QString&)));
 
-  connect(lvEquityList, SIGNAL(selectionChanged()), this, SLOT(slotUpdateSelection()));
+  connect(lvEquityList, SIGNAL(itemSelectionChanged()), this, SLOT(slotUpdateSelection()));
 
   // Not implemented yet.
   btnConfigure->hide();
@@ -181,7 +182,8 @@ void KEquityPriceUpdateDlg::addPricePair(const MyMoneySecurityPair& pair, bool d
 
   QString symbol = QString("%1 > %2").arg(pair.first, pair.second);
   QString id = QString("%1 %2").arg(pair.first, pair.second);
-  if (! lvEquityList->findItem(id, ID_COL, Q3ListView::ExactMatch)) {
+  // Check that the pair does not already exist
+  if (lvEquityList->findItems(id, Qt::MatchExactly, ID_COL).empty()) {
     MyMoneyPrice pr = file->price(pair.first, pair.second);
     if (pr.source() != "KMyMoney") {
       bool keep = true;
@@ -212,15 +214,16 @@ void KEquityPriceUpdateDlg::addPricePair(const MyMoneySecurityPair& pair, bool d
       }
 
       if (keep) {
-        K3ListViewItem* item = new K3ListViewItem(lvEquityList,
-            symbol,
-            i18n("%1 units in %2", pair.first, pair.second));
+        QTreeWidgetItem* item = new QTreeWidgetItem();
+        item->setText(SYMBOL_COL, symbol);
+        item->setText(NAME_COL, i18n("%1 units in %2", pair.first, pair.second));
         if (pr.isValid()) {
           item->setText(PRICE_COL, pr.rate(pair.second).formatMoney(file->currency(pair.second).tradingSymbol(), KMyMoneyGlobalSettings::pricePrecision()));
           item->setText(DATE_COL, pr.date().toString(Qt::ISODate));
         }
         item->setText(ID_COL, id);
         item->setText(SOURCE_COL, "Yahoo Currency");  // This string value should not be localized
+        lvEquityList->invisibleRootItem()->addChild(item);
       }
     }
   }
@@ -232,7 +235,8 @@ void KEquityPriceUpdateDlg::addInvestment(const MyMoneySecurity& inv)
 
   QString symbol = inv.tradingSymbol();
   QString id = inv.id();
-  if (! lvEquityList->findItem(id, ID_COL, Q3ListView::ExactMatch)) {
+  // Check that the pair does not already exist
+  if (lvEquityList->findItems(id, Qt::MatchExactly, ID_COL).empty()) {
     // check that the security is still in use
     QList<MyMoneyAccount>::const_iterator it_a;
     QList<MyMoneyAccount> list;
@@ -245,7 +249,9 @@ void KEquityPriceUpdateDlg::addInvestment(const MyMoneySecurity& inv)
     }
     // if it is in use, it_a is not equal to list.end()
     if (it_a != list.constEnd()) {
-      K3ListViewItem* item = new K3ListViewItem(lvEquityList, symbol, inv.name());
+      QTreeWidgetItem* item = new QTreeWidgetItem();
+      item->setText(SYMBOL_COL, symbol);
+      item->setText(NAME_COL, inv.name());
       MyMoneySecurity currency = file->currency(inv.tradingCurrency());
       MyMoneyPrice pr = file->price(id.toUtf8(), inv.tradingCurrency());
       if (pr.isValid()) {
@@ -257,6 +263,8 @@ void KEquityPriceUpdateDlg::addInvestment(const MyMoneySecurity& inv)
         item->setText(SOURCE_COL, QString("Finance::Quote %1").arg(inv.value("kmm-online-source")));
       else
         item->setText(SOURCE_COL, inv.value("kmm-online-source"));
+
+      lvEquityList->invisibleRootItem()->addChild(item);
 
       // If this investment is denominated in a foreign currency, ensure that
       // the appropriate price pair is also on the list
@@ -281,9 +289,13 @@ void KEquityPriceUpdateDlg::logStatusMessage(const QString& message)
 MyMoneyPrice KEquityPriceUpdateDlg::price(const QString& id) const
 {
   MyMoneyPrice price;
-  Q3ListViewItem* item;
+  QTreeWidgetItem* item = 0;
+  QList<QTreeWidgetItem*> foundItems = lvEquityList->findItems(id, Qt::MatchExactly, ID_COL);
 
-  if ((item = lvEquityList->findItem(id, ID_COL, Q3ListView::ExactMatch)) != 0) {
+  if (! foundItems.empty())
+    item = foundItems.at(0);
+
+  if (item) {
     MyMoneyMoney rate(item->text(PRICE_COL));
     if (!rate.isZero()) {
       QString id = item->text(ID_COL).toUtf8();
@@ -312,13 +324,15 @@ void KEquityPriceUpdateDlg::storePrices(void)
   MyMoneyFile* file = MyMoneyFile::instance();
   QList<MyMoneySecurity> equities = file->securityList();
 
-  Q3ListViewItem* item = lvEquityList->firstChild();
+  QTreeWidgetItem* item = 0;
   MyMoneyFileTransaction ft;
   QString name;
+
   try {
-    while (item) {
+    for (int i = 0; i < lvEquityList->invisibleRootItem()->childCount(); ++i) {
+      item = lvEquityList->invisibleRootItem()->child(i);
       // turn on signals before we modify the last entry in the list
-      MyMoneyFile::instance()->blockSignals(item->nextSibling() != 0);
+      MyMoneyFile::instance()->blockSignals(i < lvEquityList->invisibleRootItem()->childCount() - 1);
 
       MyMoneyMoney rate(item->text(PRICE_COL));
       if (!rate.isZero()) {
@@ -346,7 +360,6 @@ void KEquityPriceUpdateDlg::storePrices(void)
         }
 
       }
-      item = item->nextSibling();
     }
     ft.commit();
 
@@ -358,27 +371,24 @@ void KEquityPriceUpdateDlg::storePrices(void)
 
 void KEquityPriceUpdateDlg::slotUpdateSelection(void)
 {
+  // Only enable the update button if there is a selection
   btnUpdateSelected->setEnabled(false);
 
-  Q3ListViewItem* item = lvEquityList->firstChild();
-  while (item && !item->isSelected())
-    item = item->nextSibling();
-
-  if (item)
+  if (! lvEquityList->selectedItems().empty())
     btnUpdateSelected->setEnabled(true);
 }
 
 void KEquityPriceUpdateDlg::slotUpdateSelectedClicked(void)
 {
-  Q3ListViewItem* item = lvEquityList->firstChild();
+  QTreeWidgetItem* item = lvEquityList->invisibleRootItem()->child(0);
   int skipCnt = 1;
   while (item && !item->isSelected()) {
-    skipCnt++;
-    item = item->nextSibling();
+    item = lvEquityList->invisibleRootItem()->child(skipCnt);
+    ++skipCnt;
   }
 
   if (item) {
-    prgOnlineProgress->setMaximum(1 + lvEquityList->childCount());
+    prgOnlineProgress->setMaximum(1 + lvEquityList->invisibleRootItem()->childCount());
     prgOnlineProgress->setValue(skipCnt);
     m_webQuote.launch(item->text(SYMBOL_COL), item->text(ID_COL), item->text(SOURCE_COL));
   } else
@@ -387,9 +397,9 @@ void KEquityPriceUpdateDlg::slotUpdateSelectedClicked(void)
 
 void KEquityPriceUpdateDlg::slotUpdateAllClicked(void)
 {
-  Q3ListViewItem* item = lvEquityList->firstChild();
+  QTreeWidgetItem* item = lvEquityList->invisibleRootItem()->child(0);
   if (item) {
-    prgOnlineProgress->setMaximum(1 + lvEquityList->childCount());
+    prgOnlineProgress->setMaximum(1 + lvEquityList->invisibleRootItem()->childCount());
     prgOnlineProgress->setValue(1);
     m_fUpdateAll = true;
     m_webQuote.launch(item->text(SYMBOL_COL), item->text(ID_COL), item->text(SOURCE_COL));
@@ -399,7 +409,11 @@ void KEquityPriceUpdateDlg::slotUpdateAllClicked(void)
 
 void KEquityPriceUpdateDlg::slotQuoteFailed(const QString& _id, const QString& _symbol)
 {
-  Q3ListViewItem* item = lvEquityList->findItem(_id, ID_COL, Q3ListView::ExactMatch);
+  QList<QTreeWidgetItem*> foundItems = lvEquityList->findItems(_id, Qt::MatchExactly, ID_COL);
+  QTreeWidgetItem* item = 0;
+
+  if (! foundItems.empty())
+    item = foundItems.at(0);
 
   // Give the user some options
   int result;
@@ -432,17 +446,17 @@ void KEquityPriceUpdateDlg::slotQuoteFailed(const QString& _id, const QString& _
 
   // As long as the user doesn't want to cancel, move on!
   if (result != KMessageBox::Cancel) {
-    Q3ListViewItem* next = 0;
+    QTreeWidgetItem* next = 0;
     prgOnlineProgress->setValue(prgOnlineProgress->value() + 1);
-    item->listView()->setSelected(item, false);
+    item->setSelected(false);
 
     // launch the NEXT one ... in case of m_fUpdateAll == false, we
     // need to parse the list to find the next selected one
-    next = item->nextSibling();
+    next = lvEquityList->invisibleRootItem()->child(lvEquityList->invisibleRootItem()->indexOfChild(item)+1);
     if (!m_fUpdateAll) {
       while (next && !next->isSelected()) {
         prgOnlineProgress->setValue(prgOnlineProgress->value() + 1);
-        next = next->nextSibling();
+        next = lvEquityList->invisibleRootItem()->child(lvEquityList->invisibleRootItem()->indexOfChild(next)+1);
       }
     }
     if (next) {
@@ -457,8 +471,13 @@ void KEquityPriceUpdateDlg::slotQuoteFailed(const QString& _id, const QString& _
 
 void KEquityPriceUpdateDlg::slotReceivedQuote(const QString& _id, const QString& _symbol, const QDate& _date, const double& _price)
 {
-  Q3ListViewItem* item = lvEquityList->findItem(_id, ID_COL, Q3ListView::ExactMatch);
-  Q3ListViewItem* next = 0;
+  QList<QTreeWidgetItem*> foundItems = lvEquityList->findItems(_id, Qt::MatchExactly, ID_COL);
+  QTreeWidgetItem* item = 0;
+
+  if (! foundItems.empty())
+    item = foundItems.at(0);
+
+  QTreeWidgetItem* next = 0;
 
   if (item) {
     if (_price > 0.0f && _date.isValid()) {
@@ -504,15 +523,15 @@ void KEquityPriceUpdateDlg::slotReceivedQuote(const QString& _id, const QString&
     }
 
     prgOnlineProgress->setValue(prgOnlineProgress->value() + 1);
-    item->listView()->setSelected(item, false);
+    item->setSelected(false);
 
     // launch the NEXT one ... in case of m_fUpdateAll == false, we
     // need to parse the list to find the next selected one
-    next = item->nextSibling();
+    next = lvEquityList->invisibleRootItem()->child(lvEquityList->invisibleRootItem()->indexOfChild(item)+1);
     if (!m_fUpdateAll) {
       while (next && !next->isSelected()) {
         prgOnlineProgress->setValue(prgOnlineProgress->value() + 1);
-        next = next->nextSibling();
+        next = lvEquityList->invisibleRootItem()->child(lvEquityList->invisibleRootItem()->indexOfChild(next)+1);
       }
     }
   } else {

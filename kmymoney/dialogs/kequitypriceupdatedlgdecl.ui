@@ -18,7 +18,7 @@
     </property>
     <layout class="QVBoxLayout">
       <item>
-        <widget class="K3ListView" name="lvEquityList">
+        <widget class="QTreeWidget" name="lvEquityList">
           <property name="minimumSize">
             <size>
               <width>350</width>
@@ -34,11 +34,8 @@
           <property name="allColumnsShowFocus">
             <bool>true</bool>
           </property>
-          <property name="showSortIndicator">
+          <property name="sortingEnabled">
             <bool>true</bool>
-          </property>
-          <property name="itemsMovable">
-            <bool>false</bool>
           </property>
           <property name="toolTip" stdset="0">
             <string>List of known Equities, and the date they were last updated on.</string>
