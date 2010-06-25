@@ -135,7 +135,7 @@ void TransactionEditor::setup(QWidgetList& tabOrderWidgets, const MyMoneyAccount
   QWidgetList::iterator it_w;
   const QWidgetList editWidgets(m_editWidgets.values());
   for (it_w = tabOrderWidgets.begin(); it_w != tabOrderWidgets.end();) {
-    if (editWidgets.contains(*it_w)) {
+    if (*it_w) {
       ++it_w;
     } else {
       it_w = tabOrderWidgets.erase(it_w);

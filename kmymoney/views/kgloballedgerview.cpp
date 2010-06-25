@@ -1267,23 +1267,27 @@ bool KGlobalLedgerView::focusNextPrevChild(bool next)
     QWidget *w = 0;
 
     w = qApp->focusWidget();
+    // qDebug("w = %p", w);
     int currentWidgetIndex = m_tabOrderWidgets.indexOf(w);
     while (w && currentWidgetIndex == -1) {
-      // qDebug("'%s' not in list, use parent", w->className());
+      // qDebug("'%s' not in list, use parent", qPrintable(w->objectName()));
       w = w->parentWidget();
       currentWidgetIndex = m_tabOrderWidgets.indexOf(w);
     }
 
     if (currentWidgetIndex != -1) {
-      // if(w) qDebug("tab order is at '%s'", w->className());
-      QWidgetList::const_iterator it = m_tabOrderWidgets.constBegin() + currentWidgetIndex;
-      if (next)
-        w = ((it + 1) != m_tabOrderWidgets.constEnd()) ? *(it + 1) : m_tabOrderWidgets.first();
-      else
-        w = ((it - 1) != m_tabOrderWidgets.constBegin()) ? *(it - 1) : m_tabOrderWidgets.last();
+      // if(w) qDebug("tab order is at '%s'", qPrintable(w->objectName()));
+      currentWidgetIndex += next ? 1 : -1;
+      if (currentWidgetIndex < 0)
+        currentWidgetIndex = m_tabOrderWidgets.size() - 1;
+      else if (currentWidgetIndex >= m_tabOrderWidgets.size())
+        currentWidgetIndex = 0;
+
+      w = m_tabOrderWidgets[currentWidgetIndex];
+      // qDebug("currentWidgetIndex = %d, w = %p", currentWidgetIndex, w);
 
       if (((w->focusPolicy() & Qt::TabFocus) == Qt::TabFocus) && w->isVisible() && w->isEnabled()) {
-        // qDebug("Selecting '%s' as focus", w->className());
+        // qDebug("Selecting '%s' (%p) as focus", qPrintable(w->objectName()), w);
         w->setFocus();
         rc = true;
       }

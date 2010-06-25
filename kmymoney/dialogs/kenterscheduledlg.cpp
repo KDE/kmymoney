@@ -254,6 +254,17 @@ TransactionEditor* KEnterScheduleDlg::startEdit(void)
 
     Q_ASSERT(!d->m_tabOrderWidgets.isEmpty());
 
+    // editor->setup() leaves the tabbar as the last widget in the stack, but we
+    // need it as first here. So we move it around.
+    QWidget* w = editor->haveWidget("tabbar");
+    if (w) {
+      int idx = d->m_tabOrderWidgets.indexOf(w);
+      if (idx != -1) {
+        d->m_tabOrderWidgets.removeAt(idx);
+        d->m_tabOrderWidgets.push_front(w);
+      }
+    }
+
     // don't forget our three buttons
     d->m_tabOrderWidgets.append(buttonOk);
     d->m_tabOrderWidgets.append(buttonCancel);
@@ -298,11 +309,14 @@ bool KEnterScheduleDlg::focusNextPrevChild(bool next)
 
   if (currentWidgetIndex != -1) {
     // if(w) qDebug("tab order is at '%s'", w->className());
-    QWidgetList::const_iterator it = d->m_tabOrderWidgets.constBegin() + currentWidgetIndex;
-    if (next)
-      w = ((it + 1) != d->m_tabOrderWidgets.constEnd()) ? *(it + 1) : d->m_tabOrderWidgets.first();
-    else
-      w = ((it - 1) != d->m_tabOrderWidgets.constBegin()) ? *(it - 1) : d->m_tabOrderWidgets.last();
+    currentWidgetIndex += next ? 1 : -1;
+    if (currentWidgetIndex < 0)
+      currentWidgetIndex = d->m_tabOrderWidgets.size() - 1;
+    else if (currentWidgetIndex >= d->m_tabOrderWidgets.size())
+      currentWidgetIndex = 0;
+
+    w = d->m_tabOrderWidgets[currentWidgetIndex];
+    // qDebug("currentWidgetIndex = %d, w = %p", currentWidgetIndex, w);
 
     if (((w->focusPolicy() & Qt::TabFocus) == Qt::TabFocus) && w->isVisible() && w->isEnabled()) {
       // qDebug("Selecting '%s' as focus", w->className());

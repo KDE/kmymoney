@@ -36,20 +36,23 @@
 #include <kstdguiitem.h>
 #include <klineedit.h>
 #include <knuminput.h>
+#include <knuminput.h>
+#include <klineedit.h>
 #include <KToolInvocation>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <register.h>
-#include <transactionform.h>
-#include <transaction.h>
-#include <transactioneditor.h>
-#include <kmymoneylineedit.h>
-#include <kmymoneydateinput.h>
-#include <kmymoneymvccombo.h>
-#include <kguiutils.h>
-#include <kmymoneyutils.h>
+#include "register.h"
+#include "transactionform.h"
+#include "transaction.h"
+#include "transactioneditor.h"
+#include "kmymoneylineedit.h"
+#include "kmymoneydateinput.h"
+#include "kmymoneymvccombo.h"
+#include "kguiutils.h"
+#include "kmymoneyutils.h"
+#include "kmymoneydateinput.h"
 
 #include "kmymoney.h"
 
@@ -257,7 +260,25 @@ TransactionEditor* KEditScheduleDlg::startEdit(void)
 
     Q_ASSERT(!d->m_tabOrderWidgets.isEmpty());
 
+    d->m_tabOrderWidgets.push_front(m_paymentMethodEdit);
+
+    // editor->setup() leaves the tabbar as the last widget in the stack, but we
+    // need it as first here. So we move it around.
+    QWidget* w = editor->haveWidget("tabbar");
+    if (w) {
+      int idx = d->m_tabOrderWidgets.indexOf(w);
+      if (idx != -1) {
+        d->m_tabOrderWidgets.removeAt(idx);
+        d->m_tabOrderWidgets.push_front(w);
+      }
+    }
+
     // don't forget our three buttons and additional widgets
+    // make sure to use the correct order
+    d->m_tabOrderWidgets.push_front(m_frequencyEdit);
+    d->m_tabOrderWidgets.push_front(m_frequencyNoEdit);
+    d->m_tabOrderWidgets.push_front(m_nameEdit);
+
     d->m_tabOrderWidgets.append(m_weekendOptionEdit);
     d->m_tabOrderWidgets.append(m_estimateEdit);
     d->m_tabOrderWidgets.append(m_variation);
@@ -269,11 +290,6 @@ TransactionEditor* KEditScheduleDlg::startEdit(void)
     d->m_tabOrderWidgets.append(buttonOk);
     d->m_tabOrderWidgets.append(buttonCancel);
     d->m_tabOrderWidgets.append(buttonHelp);
-    d->m_tabOrderWidgets.append(m_nameEdit);
-    d->m_tabOrderWidgets.append(m_frequencyNoEdit);
-    d->m_tabOrderWidgets.append(m_frequencyEdit);
-    d->m_tabOrderWidgets.append(m_paymentMethodEdit);
-    d->m_tabOrderWidgets.append(m_form);
     for (int i = 0; i < d->m_tabOrderWidgets.size(); ++i) {
       QWidget* w = d->m_tabOrderWidgets.at(i);
       if (w) {
@@ -402,24 +418,29 @@ bool KEditScheduleDlg::focusNextPrevChild(bool next)
   w = qApp->focusWidget();
   int currentWidgetIndex = d->m_tabOrderWidgets.indexOf(w);
   while (w && currentWidgetIndex == -1) {
-    // qDebug("'%s' not in list, use parent", w->className());
+    // qDebug("'%s' not in list, use parent", qPrintable(w->objectName()));
     w = w->parentWidget();
     currentWidgetIndex = d->m_tabOrderWidgets.indexOf(w);
   }
 
   if (currentWidgetIndex != -1) {
-    // if(w) qDebug("tab order is at '%s'", w->className());
-    QWidgetList::const_iterator it = d->m_tabOrderWidgets.constBegin() + currentWidgetIndex;
-    if (next)
-      w = ((it + 1) != d->m_tabOrderWidgets.constEnd()) ? *(it + 1) : d->m_tabOrderWidgets.first();
-    else
-      w = ((it - 1) != d->m_tabOrderWidgets.constBegin()) ? *(it - 1) : d->m_tabOrderWidgets.last();
+    do {
+      // if(w) qDebug("tab order is at '%s (%d/%d)'", qPrintable(w->objectName()), currentWidgetIndex, d->m_tabOrderWidgets.size());
+      currentWidgetIndex += next ? 1 : -1;
+      if (currentWidgetIndex < 0)
+        currentWidgetIndex = d->m_tabOrderWidgets.size() - 1;
+      else if (currentWidgetIndex >= d->m_tabOrderWidgets.size())
+        currentWidgetIndex = 0;
 
-    if (((w->focusPolicy() & Qt::TabFocus) == Qt::TabFocus) && w->isVisible() && w->isEnabled()) {
-      // qDebug("Selecting '%s' as focus", w->className());
-      w->setFocus();
-      rc = true;
-    }
+      w = d->m_tabOrderWidgets[currentWidgetIndex];
+      // qDebug("currentWidgetIndex = %d, w = %p", currentWidgetIndex, w);
+
+      if (((w->focusPolicy() & Qt::TabFocus) == Qt::TabFocus) && w->isVisible() && w->isEnabled()) {
+        // qDebug("Selecting '%s' as focus", qPrintable(w->objectName()));
+        w->setFocus();
+        rc = true;
+      }
+    } while (rc == false);
   }
   return rc;
 }
