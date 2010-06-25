@@ -576,7 +576,7 @@ void KNewAccountDlg::okClicked()
   }
   m_account.setAccountType(acctype);
 
-  m_account.setDescription(descriptionEdit->text());
+  m_account.setDescription(descriptionEdit->toPlainText());
 
   if (!m_categoryEditor) {
     m_account.setOpeningDate(startDateEdit->date());
