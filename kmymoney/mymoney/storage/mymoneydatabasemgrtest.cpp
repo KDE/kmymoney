@@ -980,6 +980,59 @@ void MyMoneyDatabaseMgrTest::testModifyTransaction()
   } catch (MyMoneyException *e) {
     unexpectedException(e);
   }
+
+  // Create another transaction
+  MyMoneyTransaction t1;
+  try {
+    s.setId(QString());  // enable re-usage of split variable
+    s.setAccountId("A000006");  // Checkings
+    s.setShares(MyMoneyMoney(10000));
+    s.setValue(MyMoneyMoney(10000));
+    QVERIFY(s.id().isEmpty());
+    t1.addSplit(s);
+
+    s.setId(QString());  // enable re-usage of split variable
+    s.setAccountId("A000005");  // Salary
+    s.setShares(MyMoneyMoney(-10000));
+    s.setValue(MyMoneyMoney(-10000));
+    QVERIFY(s.id().isEmpty());
+    t1.addSplit(s);
+
+    t1.setPostDate(QDate(2002, 5, 10));
+  } catch (MyMoneyException *e) {
+    unexpectedException(e);
+  }
+
+  // Add it to the database
+  m->addTransaction(t1);
+
+  ch = m->account("A000005");
+  QVERIFY(ch.balance() == MyMoneyMoney(-100000 - 10000));
+  QVERIFY(m->balance("A000005", QDate()) == MyMoneyMoney(-100000 - 10000));
+
+  ch = m->account("A000006");
+  QVERIFY(ch.balance() == MyMoneyMoney(100000 - 12600 + 10000));
+  QVERIFY(m->balance("A000006", QDate()) == MyMoneyMoney(100000 - 12600 + 10000));
+
+  // Oops, the income was classified as Salary, but should have been
+  // a refund from the grocery store.
+  t1.splits()[1].setAccountId("A000004");
+
+  m->modifyTransaction(t1);
+
+  // Make sure the account balances got updated correctly.
+  ch = m->account("A000004");
+  QVERIFY(ch.balance() == MyMoneyMoney(11000 - 10000));
+  QVERIFY(m->balance("A000004", QDate()) == MyMoneyMoney(11000 - 10000));
+
+  ch = m->account("A000005");
+  QVERIFY(m->balance("A000005", QDate()) == MyMoneyMoney(-100000));
+  QVERIFY(ch.balance() == MyMoneyMoney(-100000));
+
+  ch = m->account("A000006");
+  QVERIFY(ch.balance() == MyMoneyMoney(100000 - 12600 + 10000));
+  QVERIFY(m->balance("A000006", QDate()) == MyMoneyMoney(100000 - 12600 + 10000));
+
 }
 
 

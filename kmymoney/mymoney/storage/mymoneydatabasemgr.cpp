@@ -641,6 +641,8 @@ void MyMoneyDatabaseMgr::modifyTransaction(const MyMoneyTransaction& transaction
   if (it_t == transactionList.constEnd())
     throw new MYMONEYEXCEPTION("invalid transaction key");
 
+  m_sql->modifyTransaction(transaction);
+
   // mark all accounts referenced in old and new transaction data
   // as modified
   QMap<QString, MyMoneyAccount> accountList = m_sql->fetchAccounts();
@@ -674,9 +676,6 @@ void MyMoneyDatabaseMgr::modifyTransaction(const MyMoneyTransaction& transaction
 // QString newKey = transaction.uniqueSortKey();
 //  m_sql->insertTransaction(newKey, transaction);
   //m_transactionKeys.modify(transaction.id(), newKey);
-
-  // mark file as changed
-  m_sql->modifyTransaction(transaction);
 }
 
 void MyMoneyDatabaseMgr::reparentAccount(MyMoneyAccount &account, MyMoneyAccount& parent)
