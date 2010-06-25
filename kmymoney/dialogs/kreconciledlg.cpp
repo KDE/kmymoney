@@ -56,11 +56,11 @@ void KReconcileDlg::insertTransactions(void)
 {
 }
 
-void KReconcileDlg::slotDebitSelected(Q3ListViewItem* /* item */, const QPoint&/*p*/, int/* col*/)
+void KReconcileDlg::slotDebitSelected(QTreeWidgetItem* /* item */, const QPoint&/*p*/, int/* col*/)
 {
 }
 
-void KReconcileDlg::slotCreditSelected(Q3ListViewItem* /* item */, const QPoint&, int)
+void KReconcileDlg::slotCreditSelected(QTreeWidgetItem* /* item */, const QPoint&, int)
 {
 }
 

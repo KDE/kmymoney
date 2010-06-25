@@ -20,6 +20,7 @@
 #include <QLabel>
 #include <QResizeEvent>
 #include <QPushButton>
+#include <QTreeWidgetItem>
 
 #include "mymoneyfile.h"
 #include "mymoneymoney.h"
@@ -50,8 +51,8 @@ protected:
   void resizeEvent(QResizeEvent*);
 
 protected slots:
-  void slotDebitSelected(Q3ListViewItem*, const QPoint&, int);
-  void slotCreditSelected(Q3ListViewItem*, const QPoint&, int);
+  void slotDebitSelected(QTreeWidgetItem*, const QPoint&, int);
+  void slotCreditSelected(QTreeWidgetItem*, const QPoint&, int);
   void finishClicked();
   void cancelClicked();
   /** No descriptions */

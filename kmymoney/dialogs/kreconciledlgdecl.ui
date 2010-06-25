@@ -114,7 +114,7 @@ Your account is balanced when the Difference is Zero.  Click on the Finish butto
                 </widget>
               </item>
               <item>
-                <widget class="K3ListView" name="debitListView">
+                <widget class="QTreeWidget" name="debitListView">
                   <property name="sizePolicy">
                     <sizepolicy>
                       <hsizetype>5</hsizetype>
@@ -166,7 +166,7 @@ Your account is balanced when the Difference is Zero.  Click on the Finish butto
                 </widget>
               </item>
               <item>
-                <widget class="K3ListView" name="creditListView">
+                <widget class="QTreeWidget" name="creditListView">
                   <property name="sizePolicy">
                     <sizepolicy>
                       <hsizetype>5</hsizetype>
@@ -610,13 +610,6 @@ Your account is balanced when the Difference is Zero.  Click on the Finish butto
     </layout>
   </widget>
   <layoutdefault spacing="6" margin="11"/>
-    <customwidgets>
-    <customwidget>
-      <class>K3ListView</class>
-      <extends>Q3ListView</extends>
-      <header location="global">k3listview.h</header>
-    </customwidget>
-  </customwidgets>
   <connections>
     <connection>
       <sender>buttonOk</sender>
