@@ -35,11 +35,6 @@ KSettingsGeneral::KSettingsGeneral(QWidget* parent) :
 {
   // hide the internally used date field
   kcfg_StartDate->hide();
-  kcfg_hiddenViews->hide();
-
-  // for now, we don't show the widgets for view selection
-  m_viewLabel->hide();
-  m_viewList->hide();
 
   // setup connections, so that the sort optios get loaded once the edit fields are filled
   connect(kcfg_StartDate, SIGNAL(dateChanged(const QDate&)), this, SLOT(slotLoadStartDate(const QDate&)));

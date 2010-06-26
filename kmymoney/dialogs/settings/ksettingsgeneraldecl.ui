@@ -315,36 +315,6 @@
         </widget>
        </item>
        <item>
-        <widget class="KLineEdit" name="kcfg_hiddenViews">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="m_viewLabel">
-         <property name="text">
-          <string>Check the views you want to enable; uncheck those you want to hide because you do not need the functionality.</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignTop</set>
-         </property>
-         <property name="wordWrap">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="K3ListView" name="m_viewList">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-           <horstretch>0</horstretch>
-           <verstretch>2</verstretch>
-          </sizepolicy>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="KButtonGroup" name="kcfg_viewType">
          <property name="title">
           <string>Type of the KMyMoney view</string>
@@ -557,22 +527,6 @@ You can use &lt;b&gt;View/Show all accounts&lt;/b&gt; to temporarily show hidden
    <class>kMyMoneyDateInput</class>
    <extends>QFrame</extends>
    <header>kmymoneydateinput.h</header>
-  </customwidget>
-  <customwidget>
-   <class>Q3Frame</class>
-   <extends>QFrame</extends>
-   <header>Qt3Support/Q3Frame</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>Q3ListView</class>
-   <extends>Q3Frame</extends>
-   <header>q3listview.h</header>
-  </customwidget>
-  <customwidget>
-   <class>K3ListView</class>
-   <extends>Q3ListView</extends>
-   <header>k3listview.h</header>
   </customwidget>
   <customwidget>
    <class>KIntSpinBox</class>
