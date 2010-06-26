@@ -6367,11 +6367,12 @@ void KMyMoneyApp::Private::consistencyCheck(bool alwaysDisplayResult)
   // in case the consistency check was OK, we get a single line as result
   // in all errneous cases, we get more than one line and force the
   // display of them.
-  if (msg.size() > 1)
-    alwaysDisplayResult = true;
 
-  if (alwaysDisplayResult)
+  if(msg.size() > 1) {
     KMessageBox::informationList(0, i18n("The consistency check has found some issues in your data. Details are presented below. Those issues that could not be corrected automatically need to be solved by the user."), msg, i18n("Consistency check result"));
+  } else if (alwaysDisplayResult) {
+    KMessageBox::informationList(0, i18n("The consistency check has found no issues in your data. Details are presented below."), msg, i18n("Consistency check result"));
+  }
 }
 
 void KMyMoneyApp::slotCheckSchedules(void)
