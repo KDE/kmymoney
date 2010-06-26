@@ -24,7 +24,7 @@
     </property>
     <layout class="QVBoxLayout">
       <item>
-        <widget class="K3ListView" name="m_quoteSourceList">
+        <widget class="KListWidget" name="m_quoteSourceList">
           <property name="sizePolicy">
             <sizepolicy>
               <hsizetype>7</hsizetype>
@@ -32,15 +32,6 @@
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
             </sizepolicy>
-          </property>
-          <property name="allColumnsShowFocus">
-            <bool>true</bool>
-          </property>
-          <property name="defaultRenameAction">
-            <enum>Accept</enum>
-          </property>
-          <property name="itemsRenameable">
-            <bool>true</bool>
           </property>
           <column>
             <property name="text">
@@ -220,9 +211,9 @@
   <layoutdefault spacing="6" margin="11"/>
     <customwidgets>
     <customwidget>
-      <class>K3ListView</class>
-      <extends>Q3ListView</extends>
-      <header location="global">k3listview.h</header>
+      <class>KListWidget</class>
+      <extends>QListWidget</extends>
+      <header location="global">klistwidget.h</header>
     </customwidget>
   </customwidgets>
 </ui>

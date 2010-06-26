@@ -54,17 +54,19 @@ public:
 
 protected slots:
   void slotUpdateEntry(void);
-  void slotLoadWidgets(Q3ListViewItem* item);
+  void slotLoadWidgets();
   void slotEntryChanged(void);
   void slotNewEntry(void);
-  void slotEntryRenamed(Q3ListViewItem* item, const QString& text, int col);
+  void slotEntryRenamed(QListWidgetItem* item);
+  void slotStartRename(QListWidgetItem* item);
 
 protected:
   void loadList(const bool updateResetList = false);
 
 private:
   QList<WebPriceQuoteSource>  m_resetList;
-  WebPriceQuoteSource              m_currentItem;
+  WebPriceQuoteSource         m_currentItem;
+  bool                        m_quoteInEditing;
 };
 
 #endif

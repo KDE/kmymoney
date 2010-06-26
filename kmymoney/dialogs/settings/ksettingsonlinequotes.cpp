@@ -38,7 +38,8 @@
 #include "kmymoney/converter/webpricequote.h"
 
 KSettingsOnlineQuotes::KSettingsOnlineQuotes(QWidget *parent)
-    : KSettingsOnlineQuotesDecl(parent)
+    : KSettingsOnlineQuotesDecl(parent),
+    m_quoteInEditing(false)
 {
   QStringList groups = WebPriceQuote::quoteSources();
 
@@ -67,9 +68,9 @@ KSettingsOnlineQuotes::KSettingsOnlineQuotes(QWidget *parent)
   connect(m_updateButton, SIGNAL(clicked()), this, SLOT(slotUpdateEntry()));
   connect(m_newButton, SIGNAL(clicked()), this, SLOT(slotNewEntry()));
 
-  connect(m_quoteSourceList, SIGNAL(selectionChanged(Q3ListViewItem*)), this, SLOT(slotLoadWidgets(Q3ListViewItem*)));
-  connect(m_quoteSourceList, SIGNAL(clicked(Q3ListViewItem*)), this, SLOT(slotLoadWidgets(Q3ListViewItem*)));
-  connect(m_quoteSourceList, SIGNAL(itemRenamed(Q3ListViewItem*, const QString&, int)), this, SLOT(slotEntryRenamed(Q3ListViewItem*, const QString&, int)));
+  connect(m_quoteSourceList, SIGNAL(itemSelectionChanged()), this, SLOT(slotLoadWidgets()));
+  connect(m_quoteSourceList, SIGNAL(itemChanged(QListWidgetItem*)), this, SLOT(slotEntryRenamed(QListWidgetItem*)));
+  connect(m_quoteSourceList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(slotStartRename(QListWidgetItem*)));
 
   connect(m_editURL, SIGNAL(textChanged(const QString&)), this, SLOT(slotEntryChanged()));
   connect(m_editSymbol, SIGNAL(textChanged(const QString&)), this, SLOT(slotEntryChanged()));
@@ -84,6 +85,9 @@ KSettingsOnlineQuotes::KSettingsOnlineQuotes(QWidget *parent)
 
 void KSettingsOnlineQuotes::loadList(const bool updateResetList)
 {
+  //disconnect the slot while items are being loaded and reconnect at the end
+  disconnect(m_quoteSourceList, SIGNAL(itemChanged(QListWidgetItem*)), this, SLOT(slotEntryRenamed(QListWidgetItem*)));
+  m_quoteInEditing = false;
   QStringList groups = WebPriceQuote::quoteSources();
 
   if (updateResetList)
@@ -91,17 +95,20 @@ void KSettingsOnlineQuotes::loadList(const bool updateResetList)
   m_quoteSourceList->clear();
   QStringList::Iterator it;
   for (it = groups.begin(); it != groups.end(); ++it) {
-    new Q3ListViewItem(m_quoteSourceList, *it);
+    QListWidgetItem* item = new QListWidgetItem(*it);
+    item->setFlags(Qt::ItemIsEditable | Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+    m_quoteSourceList->addItem(item);
     if (updateResetList)
       m_resetList += WebPriceQuoteSource(*it);
   }
 
-  Q3ListViewItem* first = m_quoteSourceList->firstChild();
+  QListWidgetItem* first = m_quoteSourceList->item(0);
   if (first)
-    m_quoteSourceList->setSelected(first, true);
-  slotLoadWidgets(first);
+    m_quoteSourceList->setCurrentItem(first);
+  slotLoadWidgets();
 
-  m_newButton->setEnabled(m_quoteSourceList->findItem(i18n("New Quote Source"), 0) == 0);
+  m_newButton->setEnabled((m_quoteSourceList->findItems(i18n("New Quote Source"), Qt::MatchExactly)).count() == 0);
+  connect(m_quoteSourceList, SIGNAL(itemChanged(QListWidgetItem*)), this, SLOT(slotEntryRenamed(QListWidgetItem*)));
 }
 
 void KSettingsOnlineQuotes::resetConfig(void)
@@ -123,8 +130,11 @@ void KSettingsOnlineQuotes::resetConfig(void)
   loadList();
 }
 
-void KSettingsOnlineQuotes::slotLoadWidgets(Q3ListViewItem* item)
+void KSettingsOnlineQuotes::slotLoadWidgets()
 {
+  m_quoteInEditing = false;
+  QListWidgetItem* item = m_quoteSourceList->currentItem();
+
   m_editURL->setEnabled(true);
   m_editSymbol->setEnabled(true);
   m_editPrice->setEnabled(true);
@@ -138,7 +148,7 @@ void KSettingsOnlineQuotes::slotLoadWidgets(Q3ListViewItem* item)
   m_editDateFormat->setText(QString());
 
   if (item) {
-    m_currentItem = WebPriceQuoteSource(item->text(0));
+    m_currentItem = WebPriceQuoteSource(item->text());
     m_editURL->setText(m_currentItem.m_url);
     m_editSymbol->setText(m_currentItem.m_sym);
     m_editPrice->setText(m_currentItem.m_price);
@@ -187,30 +197,40 @@ void KSettingsOnlineQuotes::slotNewEntry(void)
   WebPriceQuoteSource newSource(i18n("New Quote Source"));
   newSource.write();
   loadList();
-  Q3ListViewItem* item = m_quoteSourceList->findItem(i18n("New Quote Source"), 0);
+  QListWidgetItem* item = m_quoteSourceList->findItems(i18n("New Quote Source"), Qt::MatchExactly).at(0);
   if (item) {
-    m_quoteSourceList->setSelected(item, true);
-    slotLoadWidgets(item);
+    m_quoteSourceList->setCurrentItem(item);
+    slotLoadWidgets();
   }
 }
 
-void KSettingsOnlineQuotes::slotEntryRenamed(Q3ListViewItem* item, const QString& text, int /* col */)
+void KSettingsOnlineQuotes::slotStartRename(QListWidgetItem* item)
 {
+  m_quoteInEditing = true;
+  m_quoteSourceList->editItem(item);
+}
+
+void KSettingsOnlineQuotes::slotEntryRenamed(QListWidgetItem* item)
+{
+  //if there is no current item selected, exit
+  if (m_quoteInEditing == false || !m_quoteSourceList->currentItem() || item != m_quoteSourceList->currentItem())
+    return;
+
+  m_quoteInEditing = false;
+  QString text = item->text();
   int nameCount = 0;
-  Q3ListViewItemIterator it(m_quoteSourceList);
-  while (it.current()) {
-    if (it.current()->text(0) == text)
+  for(int i = 0; i < m_quoteSourceList->count(); ++i) {
+    if (m_quoteSourceList->item(i)->text() == text)
       ++nameCount;
-    ++it;
   }
 
   // Make sure we get a non-empty and unique name
   if (text.length() > 0 && nameCount == 1) {
     m_currentItem.rename(text);
   } else {
-    item->setText(0, m_currentItem.m_name);
+    item->setText(m_currentItem.m_name);
   }
-  m_newButton->setEnabled(m_quoteSourceList->findItem(i18n("New Quote Source"), 0) == 0);
+  m_newButton->setEnabled(m_quoteSourceList->findItems(i18n("New Quote Source"), Qt::MatchExactly).count() == 0);
 }
 
 #include "ksettingsonlinequotes.moc"
