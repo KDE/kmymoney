@@ -132,9 +132,6 @@ $ make messages
     to extract and merge translations.
     (Warning: This will change the source files)
 
-$ make message-stats
-    to create the translation status for every language.
-
 $ make developer-doc
     to create the developer handbook. Will also create HTML-version.
 
