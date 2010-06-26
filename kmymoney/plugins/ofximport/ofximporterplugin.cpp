@@ -36,6 +36,7 @@
 #include <kaction.h>
 #include <kmessagebox.h>
 #include <kactioncollection.h>
+#include <KWallet/Wallet>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -47,6 +48,29 @@
 K_EXPORT_COMPONENT_FACTORY(kmm_ofximport,
                            KGenericFactory<OfxImporterPlugin>("kmm_ofximport"))
 
+using KWallet::Wallet;
+
+class OfxImporterPlugin::Private
+{
+public:
+  Private() : m_valid(false), m_preferName(false), m_walletIsOpen(false), m_statusDlg(0), m_wallet(0) {}
+
+  bool m_valid;
+  bool m_preferName;
+  bool m_walletIsOpen;
+  QList<MyMoneyStatement> m_statementlist;
+  QList<MyMoneyStatement::Security> m_securitylist;
+  QString m_fatalerror;
+  QStringList m_infos;
+  QStringList m_warnings;
+  QStringList m_errors;
+  KOnlineBankingStatus* m_statusDlg;
+  Wallet  *m_wallet;
+};
+
+
+
+
 OfxImporterPlugin::OfxImporterPlugin(QObject *parent, const QStringList&) :
     KMyMoneyPlugin::Plugin(parent, "KMyMoney OFX"),
     /*
@@ -55,7 +79,7 @@ OfxImporterPlugin::OfxImporterPlugin(QObject *parent, const QStringList&) :
      * OfxImporterPlugin::onlineBankingSettings()
      */
     KMyMoneyPlugin::ImporterPlugin(),
-    m_valid(false)
+    d(new Private)
 {
   setComponentData(KGenericFactory<OfxImporterPlugin>::componentData());
   setXMLFile("kmm_ofximport.rc");
@@ -67,6 +91,7 @@ OfxImporterPlugin::OfxImporterPlugin(QObject *parent, const QStringList&) :
 
 OfxImporterPlugin::~OfxImporterPlugin()
 {
+  delete d;
 }
 
 void OfxImporterPlugin::createActions(void)
@@ -129,14 +154,14 @@ bool OfxImporterPlugin::isMyFormat(const QString& filename) const
 
 bool OfxImporterPlugin::import(const QString& filename)
 {
-  m_fatalerror = i18n("Unable to parse file");
-  m_valid = false;
-  m_errors.clear();
-  m_warnings.clear();
-  m_infos.clear();
+  d->m_fatalerror = i18n("Unable to parse file");
+  d->m_valid = false;
+  d->m_errors.clear();
+  d->m_warnings.clear();
+  d->m_infos.clear();
 
-  m_statementlist.clear();
-  m_securitylist.clear();
+  d->m_statementlist.clear();
+  d->m_securitylist.clear();
 
   QByteArray filename_deep(filename.toUtf8());
 
@@ -151,18 +176,18 @@ bool OfxImporterPlugin::import(const QString& filename)
   libofx_proc_file(ctx, filename_deep, AUTODETECT);
   libofx_free_context(ctx);
 
-  if (m_valid) {
-    m_fatalerror.clear();
-    m_valid = storeStatements(m_statementlist);
+  if (d->m_valid) {
+    d->m_fatalerror.clear();
+    d->m_valid = storeStatements(d->m_statementlist);
   }
-  return m_valid;
+  return d->m_valid;
 }
 
 QString OfxImporterPlugin::lastError(void) const
 {
-  if (m_errors.count() == 0)
-    return m_fatalerror;
-  return m_errors.join("<p>");
+  if (d->m_errors.count() == 0)
+    return d->m_fatalerror;
+  return d->m_errors.join("<p>");
 }
 
 /* __________________________________________________________________________
@@ -210,7 +235,7 @@ int OfxImporterPlugin::ofxTransactionCallback(struct OfxTransactionData data, vo
     t.m_strBankID = QString("REF ") + data.reference_number;
   }
   // Decide whether to import NAME or PAYEEID if both are present in the download
-  if (pofx->m_preferName) {
+  if (pofx->d->m_preferName) {
     if (data.name_valid == true) {
       t.m_strPayee = data.name;
     } else if (data.payee_id_valid == true) {
@@ -412,7 +437,7 @@ int OfxImporterPlugin::ofxAccountCallback(struct OfxAccountData data, void * pv)
   MyMoneyStatement& s = pofx->back();
 
   // Having any account at all makes an ofx statement valid
-  pofx->m_valid = true;
+  pofx->d->m_valid = true;
 
   if (data.account_id_valid == true) {
     s.m_strAccountName = data.account_name;
@@ -451,7 +476,7 @@ int OfxImporterPlugin::ofxAccountCallback(struct OfxAccountData data, void * pv)
   s.m_accountId = pofx->account("kmmofx-acc-ref", QString("%1-%2").arg(s.m_strRoutingNumber, s.m_strAccountNumber)).id();
 
   // copy over the securities
-  s.m_listSecurities = pofx->m_securitylist;
+  s.m_listSecurities = pofx->d->m_securitylist;
 
 //   kDebug(2) << Q_FUNC_INFO << " return 0";
 
@@ -475,7 +500,7 @@ int OfxImporterPlugin::ofxSecurityCallback(struct OfxSecurityData data, void* pv
     sec.m_strSymbol = data.ticker;
   }
 
-  pofx->m_securitylist += sec;
+  pofx->d->m_securitylist += sec;
 
   return 0;
 }
@@ -490,7 +515,7 @@ int OfxImporterPlugin::ofxStatusCallback(struct OfxStatusData data, void * pv)
   // if we got this far, we know we were able to parse the file.
   // so if it fails after here it can only because there were no actual
   // accounts in the file!
-  pofx->m_fatalerror = "No accounts found.";
+  pofx->d->m_fatalerror = "No accounts found.";
 
   if (data.ofx_element_name_valid == true)
     message.prepend(QString("%1: ").arg(data.ofx_element_name));
@@ -544,8 +569,8 @@ void OfxImporterPlugin::protocols(QStringList& protocolList) const
 QWidget* OfxImporterPlugin::accountConfigTab(const MyMoneyAccount& acc, QString& name)
 {
   name = i18n("Online settings");
-  m_statusDlg = new KOnlineBankingStatus(acc, 0);
-  return m_statusDlg;
+  d->m_statusDlg = new KOnlineBankingStatus(acc, 0);
+  return d->m_statusDlg;
 }
 
 MyMoneyKeyValueContainer OfxImporterPlugin::onlineBankingSettings(const MyMoneyKeyValueContainer& current)
@@ -553,22 +578,35 @@ MyMoneyKeyValueContainer OfxImporterPlugin::onlineBankingSettings(const MyMoneyK
   MyMoneyKeyValueContainer kvp(current);
   // keep the provider name in sync with the one found in kmm_ofximport.desktop
   kvp["provider"] = "KMyMoney OFX";
-  if (m_statusDlg) {
+  if (d->m_statusDlg) {
     kvp.deletePair("appId");
     kvp.deletePair("kmmofx-headerVersion");
     kvp.deletePair("password");
-    if (m_statusDlg->m_storePassword->isChecked())
-      kvp.setValue("password", m_statusDlg->m_password->text());
-    if (!m_statusDlg->appId().isEmpty())
-      kvp.setValue("appId", m_statusDlg->appId());
-    kvp.setValue("kmmofx-headerVersion", m_statusDlg->headerVersion());
-    kvp.setValue("kmmofx-numRequestDays", QString::number(m_statusDlg->m_numdaysSpin->value()));
-    kvp.setValue("kmmofx-todayMinus", QString::number(m_statusDlg->m_todayRB->isChecked()));
-    kvp.setValue("kmmofx-lastUpdate", QString::number(m_statusDlg->m_lastUpdateRB->isChecked()));
-    kvp.setValue("kmmofx-pickDate", QString::number(m_statusDlg->m_pickDateRB->isChecked()));
-    kvp.setValue("kmmofx-specificDate", m_statusDlg->m_specificDate->date().toString());
-    kvp.setValue("kmmofx-preferPayeeid", QString::number(m_statusDlg->m_payeeidRB->isChecked()));
-    kvp.setValue("kmmofx-preferName", QString::number(m_statusDlg->m_nameRB->isChecked()));
+
+    d->m_wallet = Wallet::openWallet(Wallet::NetworkWallet(), d->m_statusDlg->winId(), Wallet::Synchronous);
+    if (d->m_wallet && (d->m_wallet->hasFolder(KWallet::Wallet::PasswordFolder()) ||
+                        d->m_wallet->createFolder(KWallet::Wallet::PasswordFolder())) &&
+        d->m_wallet->setFolder(KWallet::Wallet::PasswordFolder())) {
+      QString key = OFX_PASSWORD_KEY(kvp.value("url"), kvp.value("uniqueId"));
+      if (d->m_statusDlg->m_storePassword->isChecked()) {
+        d->m_wallet->writePassword(key, d->m_statusDlg->m_password->text());
+      } else {
+        if (d->m_wallet->hasEntry(key)) {
+          d->m_wallet->removeEntry(key);
+        }
+      }
+    }
+
+    if (!d->m_statusDlg->appId().isEmpty())
+      kvp.setValue("appId", d->m_statusDlg->appId());
+    kvp.setValue("kmmofx-headerVersion", d->m_statusDlg->headerVersion());
+    kvp.setValue("kmmofx-numRequestDays", QString::number(d->m_statusDlg->m_numdaysSpin->value()));
+    kvp.setValue("kmmofx-todayMinus", QString::number(d->m_statusDlg->m_todayRB->isChecked()));
+    kvp.setValue("kmmofx-lastUpdate", QString::number(d->m_statusDlg->m_lastUpdateRB->isChecked()));
+    kvp.setValue("kmmofx-pickDate", QString::number(d->m_statusDlg->m_pickDateRB->isChecked()));
+    kvp.setValue("kmmofx-specificDate", d->m_statusDlg->m_specificDate->date().toString());
+    kvp.setValue("kmmofx-preferPayeeid", QString::number(d->m_statusDlg->m_payeeidRB->isChecked()));
+    kvp.setValue("kmmofx-preferName", QString::number(d->m_statusDlg->m_nameRB->isChecked()));
   }
   return kvp;
 }
@@ -597,7 +635,7 @@ bool OfxImporterPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccoun
   try {
     if (!acc.id().isEmpty()) {
       // Save the value of preferName to be used by ofxTransactionCallback
-      m_preferName = acc.onlineBankingSettings().value("kmmofx-preferName").toInt() != 0;
+      d->m_preferName = acc.onlineBankingSettings().value("kmmofx-preferName").toInt() != 0;
       QPointer<KOfxDirectConnectDlg> dlg = new KOfxDirectConnectDlg(acc);
 
       connect(dlg, SIGNAL(statementReady(const QString&)),
@@ -654,6 +692,47 @@ bool OfxImporterPlugin::storeStatements(QList<MyMoneyStatement>& statements)
   }
 
   return (!hasstatements || ok);
+}
+
+void OfxImporterPlugin::addnew(void)
+{
+  d->m_statementlist.push_back(MyMoneyStatement());
+}
+MyMoneyStatement& OfxImporterPlugin::back(void)
+{
+  return d->m_statementlist.back();
+}
+bool OfxImporterPlugin::isValid(void) const
+{
+  return d->m_valid;
+}
+void OfxImporterPlugin::setValid(void)
+{
+  d->m_valid = true;
+}
+void OfxImporterPlugin::addInfo(const QString& _msg)
+{
+  d->m_infos += _msg;
+}
+void OfxImporterPlugin::addWarning(const QString& _msg)
+{
+  d->m_warnings += _msg;
+}
+void OfxImporterPlugin::addError(const QString& _msg)
+{
+  d->m_errors += _msg;
+}
+const QStringList& OfxImporterPlugin::infos(void) const          // krazy:exclude=spelling
+{
+  return d->m_infos;
+}
+const QStringList& OfxImporterPlugin::warnings(void) const
+{
+  return d->m_warnings;
+}
+const QStringList& OfxImporterPlugin::errors(void) const
+{
+  return d->m_errors;
 }
 
 #include "ofximporterplugin.moc"

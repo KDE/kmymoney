@@ -1513,6 +1513,18 @@ const QStringList MyMoneyFile::consistencyCheck(void)
         interestAccounts[loan->interestAccountId()] = true;
     }
 
+    // check for clear text online password in the online settings
+    if (!(*it_a).onlineBankingSettings().value("password").isEmpty()) {
+      if (problemAccount != (*it_a).name()) {
+        problemAccount = (*it_a).name();
+        rc << i18n("* Problem with account '%1'", problemAccount);
+      }
+      rc << i18n("  * Older versions of KMyMoney stored an OFX password for this account in cleartext.");
+      rc << i18n("    Please open it in the account editor (Account/Edit account) once and press OK.");
+      rc << i18n("    This will store the password in the KDE wallet and remove the cleartext version.");
+      ++unfixedCount;
+    }
+
     // if the account was modified, we need to update it in the engine
     if (!(m_storage->account((*it_a).id()) == (*it_a))) {
       try {
@@ -1812,9 +1824,14 @@ const QStringList MyMoneyFile::consistencyCheck(void)
 
   //compare the dates with the opening dates of the accounts using each currency
   QList<MyMoneyAccount>::const_iterator accForeignList_it;
+  bool firstInvProblem = true;
   for (accForeignList_it = accountForeignCurrency.constBegin(); accForeignList_it != accountForeignCurrency.constEnd(); ++accForeignList_it) {
     //compare the first price with the opening date of the account
     if (securityPriceDate.value((*accForeignList_it).currencyId()) > (*accForeignList_it).openingDate()) {
+      if (firstInvProblem) {
+        firstInvProblem = false;
+        rc << i18n("* Potential problem with investments/currencies");
+      }
       QDate openingDate = (*accForeignList_it).openingDate();
       MyMoneySecurity secError = security((*accForeignList_it).currencyId());
       if (!(*accForeignList_it).isInvest()) {

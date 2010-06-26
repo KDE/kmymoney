@@ -36,6 +36,7 @@
 #include <klocale.h>
 #include <kled.h>
 #include <kcombobox.h>
+#include <KWallet/Wallet>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -44,6 +45,8 @@
 #include <mymoneyaccount.h>
 #include <libofx/libofx.h>
 #include "mymoneyofxconnector.h"
+
+using KWallet::Wallet;
 
 KOnlineBankingStatus::KOnlineBankingStatus(const MyMoneyAccount& acc, QWidget *parent) :
     KOnlineBankingStatusDecl(parent),
@@ -94,8 +97,22 @@ KOnlineBankingStatus::KOnlineBankingStatus(const MyMoneyAccount& acc, QWidget *p
   m_payeeidRB->setChecked(settings.value("kmmofx-preferPayeeid").isEmpty() || settings.value("kmmofx-preferPayeeid").toInt() != 0);
   m_nameRB->setChecked(!settings.value("kmmofx-preferName").isEmpty() && settings.value("kmmofx-preferName").toInt() != 0);
 
-  m_password->setText(settings.value("password"));
-  m_storePassword->setChecked(!settings.value("password").isEmpty());
+  QString key = OFX_PASSWORD_KEY(settings.value("url"), settings.value("uniqueId"));
+  QString pwd;
+
+  // if we don't find a password in the wallet, we use the old method
+  // and retrieve it from the settings stored in the KMyMoney data storage.
+  if (Wallet::keyDoesNotExist(Wallet::NetworkWallet(), Wallet::PasswordFolder(), key)) {
+    pwd = settings.value("password");
+  } else {
+    Wallet *wallet = Wallet::openWallet(Wallet::NetworkWallet(), winId(), Wallet::Synchronous);
+    if (wallet) {
+      wallet->setFolder(Wallet::PasswordFolder());
+      wallet->readPassword(key, pwd);
+    }
+  }
+  m_password->setText(pwd);
+  m_storePassword->setChecked(!pwd.isEmpty());
 }
 
 KOnlineBankingStatus::~KOnlineBankingStatus()

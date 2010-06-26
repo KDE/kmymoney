@@ -53,6 +53,8 @@ class KComboBox;
 
 class MyMoneyAccount;
 
+#define OFX_PASSWORD_KEY(url, id) QString("KMyMoney-OFX-%1-%2").arg(url, id)
+
 /**
  * @author Thomas Baumgart
  */

@@ -41,6 +41,7 @@
 #include <klistwidgetsearchline.h>
 #include <kcombobox.h>
 #include <kurlrequester.h>
+#include <KWallet/Wallet>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -48,13 +49,17 @@
 #include <../ofxpartner.h>
 #include <mymoneyofxconnector.h>
 
+using KWallet::Wallet;
+
 class KOnlineBankingSetupWizard::Private
 {
 public:
-  Private() : m_prevPage(-1) {}
+  Private() : m_prevPage(-1), m_wallet(0), m_walletIsOpen(false) {}
   QFile       m_fpTrace;
   QTextStream m_trace;
   int         m_prevPage;
+  Wallet      *m_wallet;
+  bool        m_walletIsOpen;
 };
 
 KOnlineBankingSetupWizard::KOnlineBankingSetupWizard(QWidget *parent):
@@ -106,6 +111,18 @@ KOnlineBankingSetupWizard::~KOnlineBankingSetupWizard()
   delete d;
 }
 
+void KOnlineBankingSetupWizard::walletOpened(bool ok)
+{
+  if (ok && (d->m_wallet->hasFolder(KWallet::Wallet::PasswordFolder()) ||
+             d->m_wallet->createFolder(KWallet::Wallet::PasswordFolder())) &&
+      d->m_wallet->setFolder(KWallet::Wallet::PasswordFolder())) {
+    d->m_walletIsOpen = true;
+  } else {
+    qDebug("Wallet was not opened");
+  }
+  m_storePassword->setEnabled(d->m_walletIsOpen);
+}
+
 void KOnlineBankingSetupWizard::checkNextButton(void)
 {
   bool enableButton = false;
@@ -141,6 +158,11 @@ void KOnlineBankingSetupWizard::newPage(int id)
     switch (d->m_prevPage) {
       case 0:
         ok = finishFiPage();
+        // open the KDE wallet if not already opened
+        if (ok && !d->m_wallet) {
+          d->m_wallet = Wallet::openWallet(Wallet::NetworkWallet(), winId(), Wallet::Asynchronous);
+          connect(d->m_wallet, SIGNAL(walletOpened(bool)), SLOT(walletOpened(bool)));
+        }
         break;
       case 1:
         ok = finishLoginPage();
@@ -454,8 +476,14 @@ bool KOnlineBankingSetupWizard::chosenSettings(MyMoneyKeyValueContainer& setting
       QString hVer = m_headerVersion->headerVersion();
       if (!hVer.isEmpty())
         settings.setValue("kmmofx-headerVersion", hVer);
-      if (!m_storePassword->isChecked())
-        settings.deletePair("password");
+      if (m_storePassword->isChecked()) {
+        if (d->m_walletIsOpen) {
+          QString key = OFX_PASSWORD_KEY(settings.value("url"), settings.value("uniqueId"));
+          d->m_wallet->writePassword(key, settings.value("password"));
+        } else
+          m_storePassword->setChecked(false);
+      }
+      settings.deletePair("password");
       result = true;
     }
   }

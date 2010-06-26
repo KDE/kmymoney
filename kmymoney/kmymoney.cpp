@@ -3487,8 +3487,7 @@ void KMyMoneyApp::slotAccountEdit(void)
           it_plugin = d->m_onlinePlugins.constFind(kvp["provider"]);
           if (it_plugin != d->m_onlinePlugins.constEnd()) {
             QString name;
-            QWidget *w = 0;
-            w = (*it_plugin)->accountConfigTab(d->m_selectedAccount, name);
+            QWidget *w = (*it_plugin)->accountConfigTab(d->m_selectedAccount, name);
             dlg->addTab(w, name);
           }
         }

@@ -82,6 +82,7 @@ public:
 protected slots:
   void checkNextButton(void);
   void newPage(int id);
+  void walletOpened(bool ok);
 
 protected:
   bool finishAccountPage(void);

@@ -223,6 +223,9 @@
         <property name="enabled">
          <bool>true</bool>
         </property>
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
+        </property>
        </widget>
       </item>
       <item row="3" column="1">
@@ -344,10 +347,16 @@
   </customwidget>
  </customwidgets>
  <tabstops>
+  <tabstop>m_selectionTab</tabstop>
+  <tabstop>m_listFi</tabstop>
+  <tabstop>m_bankName</tabstop>
+  <tabstop>m_fid</tabstop>
+  <tabstop>m_url</tabstop>
   <tabstop>m_editUsername</tabstop>
   <tabstop>m_editPassword</tabstop>
-  <tabstop>m_textDetails</tabstop>
-  <tabstop>m_listFi</tabstop>
+  <tabstop>m_storePassword</tabstop>
+  <tabstop>m_applicationCombo</tabstop>
+  <tabstop>m_headerVersionCombo</tabstop>
   <tabstop>m_listAccount</tabstop>
  </tabstops>
  <resources/>

@@ -219,7 +219,7 @@ void KSettingsOnlineQuotes::slotEntryRenamed(QListWidgetItem* item)
   m_quoteInEditing = false;
   QString text = item->text();
   int nameCount = 0;
-  for(int i = 0; i < m_quoteSourceList->count(); ++i) {
+  for (int i = 0; i < m_quoteSourceList->count(); ++i) {
     if (m_quoteSourceList->item(i)->text() == text)
       ++nameCount;
   }
