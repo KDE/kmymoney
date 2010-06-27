@@ -2387,6 +2387,9 @@ void KMyMoneyApp::slotUpdateConfiguration(void)
   MyMoneyStorageSql::setPrecision(KMyMoneyGlobalSettings::pricePrecision());
   MyMoneyStorageSql::setStartDate(KMyMoneyGlobalSettings::startDate().date());
 
+  // update the report module settings
+  MyMoneyReport::setLineWidth(KMyMoneyGlobalSettings::lineWidth());
+
   // update the holiday region configuration
   setHolidayRegion(KMyMoneyGlobalSettings::holidayRegion());
 

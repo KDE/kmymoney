@@ -476,6 +476,12 @@ public:
     */
   virtual bool hasReferenceTo(const QString& id) const;
 
+  /**
+    * This method allows to modify the default lineWidth for graphs.
+    * The default is 2.
+    */
+  static void setLineWidth(int width);
+
 private:
   /**
     * The user-assigned name of the report
@@ -641,6 +647,12 @@ private:
    * This value is calculated dinamically and thus it is not saved in the file
    */
   int m_currentDateColumn;
+
+  /**
+    * This member keeps the current setting for line graphs lineWidth.
+    * @sa setLineWidth()
+    */
+  static int m_lineWidth;
 
 };
 

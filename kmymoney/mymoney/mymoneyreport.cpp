@@ -32,7 +32,6 @@
 // Project Includes
 
 #include "mymoneyfile.h"
-#include "kmymoneyglobalsettings.h"
 
 const QStringList MyMoneyReport::kRowTypeText = QString("none,assetliability,expenseincome,category,topcategory,account,payee,month,week,topaccount,topaccount-account,equitytype,accounttype,institution,budget,budgetactual,schedule,accountinfo,accountloaninfo,accountreconcile,cashflow").split(',');
 const QStringList MyMoneyReport::kColumnTypeText = QString("none,months,bimonths,quarters,4,5,6,weeks,8,9,10,11,years").split(',');
@@ -82,7 +81,7 @@ MyMoneyReport::MyMoneyReport() :
     m_mixedTime(false),
     m_currentDateColumn(0)
 {
-  m_chartLineWidth = KMyMoneyGlobalSettings::lineWidth();
+  m_chartLineWidth = m_lineWidth;
 }
 
 MyMoneyReport::MyMoneyReport(const QString& id, const MyMoneyReport& right) :
@@ -124,7 +123,7 @@ MyMoneyReport::MyMoneyReport(ERowType _rt, unsigned _ct, dateOptionE _dl, EDetai
     m_currentDateColumn(0)
 {
   //set initial values
-  m_chartLineWidth = KMyMoneyGlobalSettings::lineWidth();
+  m_chartLineWidth = m_lineWidth;
 
   //set report type
   if (m_reportType == ePivotTable)
@@ -628,7 +627,7 @@ bool MyMoneyReport::read(const QDomElement& e)
       m_chartDataLabels = e.attribute("chartdatalabels", "1").toUInt();
       m_chartGridLines = e.attribute("chartgridlines", "1").toUInt();
       m_chartByDefault = e.attribute("chartbydefault", "0").toUInt();
-      m_chartLineWidth = e.attribute("chartlinewidth", QString(m_chartLineWidth = KMyMoneyGlobalSettings::lineWidth())).toUInt();
+      m_chartLineWidth = e.attribute("chartlinewidth", QString(m_lineWidth)).toUInt();
     } else {
       m_chartDataLabels = true;
       m_chartGridLines = true;
@@ -749,6 +748,13 @@ bool MyMoneyReport::hasReferenceTo(const QString& id) const
   payees(list);
 
   return (list.contains(id) > 0);
+}
+
+int MyMoneyReport::m_lineWidth = 2;
+
+void MyMoneyReport::setLineWidth(int width)
+{
+  m_lineWidth = width;
 }
 
 // vim:cin:si:ai:et:ts=2:sw=2:
