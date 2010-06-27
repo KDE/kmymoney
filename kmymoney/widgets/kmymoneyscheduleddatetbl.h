@@ -47,8 +47,7 @@ class kMyMoneyScheduledDateTbl : public kMyMoneyDateTbl
   Q_OBJECT
 public:
   explicit kMyMoneyScheduledDateTbl(QWidget *parent = 0,
-                                    QDate date = QDate::currentDate(),
-                                    const char* name = 0, Qt::WFlags f = 0);
+                                    QDate date = QDate::currentDate());
 
   ~kMyMoneyScheduledDateTbl();
   void refresh();
@@ -56,7 +55,7 @@ public:
   void filterDeposits(bool enable);
   void filterTransfers(bool enable);
   void setFilterAccounts(const QStringList& list) {
-    m_filterAccounts = list; repaintContents(false);
+    m_filterAccounts = list; update();
   }
 
 signals:
@@ -64,9 +63,9 @@ signals:
   void skipClicked(const MyMoneySchedule&, const QDate&);
 
 protected:
-  void drawCellContents(QPainter *painter, int row, int col, const QDate& theDate);
+  void drawCellContents(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index, const QDate& theDate);
   void addDayPostfix(QString& text);
-  void contentsMouseMoveEvent(QMouseEvent* e);
+  void mouseMoveEvent(QMouseEvent* e);
 
 private:
   bool m_filterBills, m_filterDeposits, m_filterTransfers;

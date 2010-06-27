@@ -47,7 +47,6 @@ Contains code from the KDateTable class ala kdelibs-3.1.2.  Original license:
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <qglobal.h>
 #include <QDateTime>
 #include <QString>
 #include <QPen>
@@ -59,6 +58,7 @@ Contains code from the KDateTable class ala kdelibs-3.1.2.  Original license:
 #include <QMouseEvent>
 #include <QKeyEvent>
 #include <QEvent>
+#include <QHeaderView>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -76,8 +76,112 @@ Contains code from the KDateTable class ala kdelibs-3.1.2.  Original license:
 // ----------------------------------------------------------------------------
 // Project Includes
 
-kMyMoneyDateTbl::kMyMoneyDateTbl(QWidget *parent, QDate date_, const char* name, Qt::WFlags f)
-    : Q3GridView(parent, name, f)
+KMyMoneyDateTbDelegate::KMyMoneyDateTbDelegate(kMyMoneyDateTbl* parent): QStyledItemDelegate(parent), m_parent(parent)
+{
+}
+
+KMyMoneyDateTbDelegate::~KMyMoneyDateTbDelegate()
+{
+}
+
+void KMyMoneyDateTbDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
+{
+  QStyleOptionViewItemV4 opt = option;
+  initStyleOption(&opt, index);
+  const QStyle *style = QApplication::style();
+
+  QFont font = KGlobalSettings::generalFont();
+  font.setPointSize(m_parent->fontsize);
+
+  int firstWeekDay = KGlobal::locale()->weekStartDay();
+
+  if (index.row() == 0) { // we are drawing the headline
+    QStyledItemDelegate::paint(painter, opt, index);
+
+    if (m_parent->m_type == kMyMoneyDateTbl::MONTHLY) {
+      font.setBold(true);
+      painter->setFont(font);
+      bool normalday = true;
+      QString daystr;
+
+      if (index.column() + firstWeekDay < 8)
+        daystr = WEEK_DAY_NAME(index.column() + firstWeekDay, KCalendarSystem::ShortDayName);
+      else
+        daystr = WEEK_DAY_NAME(index.column() + firstWeekDay - 7, KCalendarSystem::ShortDayName);
+
+      if (daystr == i18nc("Sunday", "Sun") || daystr == i18nc("Saturday", "Sat"))
+        normalday = false;
+
+      painter->fillRect(opt.rect, normalday ? QBrush(opt.palette.color(QPalette::Highlight)) : QBrush(opt.palette.color(QPalette::Base)));
+      style->drawItemText(painter, opt.rect, Qt::AlignCenter, opt.palette, true, daystr, normalday ? QPalette::HighlightedText : QPalette::Text);
+    } else if (m_parent->m_type == kMyMoneyDateTbl::WEEKLY) {
+      int year = m_parent->date.year();
+      QString headerText;
+      QString weekStr = QString::number(m_parent->date.weekNumber(&year));
+      QString yearStr = QString::number(year);
+      headerText = i18n("Week %1 for year %2.", weekStr, yearStr);
+      painter->fillRect(opt.rect, QBrush(opt.palette.color(QPalette::Highlight)));
+      style->drawItemText(painter, opt.rect, Qt::AlignCenter, opt.palette, true, headerText, QPalette::HighlightedText);
+    }
+  } else {
+    int pos = 0;
+    QString text;
+    QDate drawDate(m_parent->date);
+
+    if (m_parent->m_type == kMyMoneyDateTbl::MONTHLY) {
+      pos = 7 * (index.row() - 1) + index.column();
+      if (firstWeekDay < 4)
+        pos += firstWeekDay;
+      else
+        pos += firstWeekDay - 7;
+
+      if (pos < m_parent->firstday || (m_parent->firstday + m_parent->numdays <= pos)) { // we are either
+        //  painting a day of the previous month or
+        //  painting a day of the following month
+
+        if (pos < m_parent->firstday) { // previous month
+          drawDate = drawDate.addMonths(-1);
+          text.setNum(m_parent->numDaysPrevMonth + pos - m_parent->firstday + 1);
+          drawDate.setYMD(drawDate.year(), drawDate.month(), text.toInt());
+        } else { // following month
+          drawDate = drawDate.addMonths(1);
+          text.setNum(pos - m_parent->firstday - m_parent->numdays + 1);
+          drawDate.setYMD(drawDate.year(), drawDate.month(), text.toInt());
+        }
+      } else { // paint a day of the current month
+        text.setNum(pos - m_parent->firstday + 1);
+        drawDate.setYMD(drawDate.year(), drawDate.month(), text.toInt());
+      }
+    } else if (m_parent->m_type == kMyMoneyDateTbl::WEEKLY) {
+      // TODO: Handle other start weekdays than Monday
+      text = QDate::shortDayName(index.row());
+      text += ' ';
+
+      int dayOfWeek = m_parent->date.dayOfWeek();
+      int diff;
+
+      if (index.row() < dayOfWeek) {
+        diff = -(dayOfWeek - index.row());
+      } else {
+        diff = index.row() - dayOfWeek;
+      }
+
+      drawDate = m_parent->date.addDays(diff);
+    }
+    if (drawDate == m_parent->date) {
+      opt.state |= QStyle::State_Selected;
+      opt.state |= QStyle::State_HasFocus;
+    } else {
+      opt.state &= ~QStyle::State_Selected;
+      opt.state &= ~QStyle::State_HasFocus;
+    }
+    QStyledItemDelegate::paint(painter, opt, index);
+    m_parent->drawCellContents(painter, opt, index, drawDate);
+  }
+}
+
+kMyMoneyDateTbl::kMyMoneyDateTbl(QWidget *parent, QDate date_)
+    : QTableWidget(parent), m_colCount(0), m_rowCount(0), m_itemDelegate(new KMyMoneyDateTbDelegate(this))
 {
   // call this first to make sure that member variables are initialized
   setType(MONTHLY);
@@ -93,154 +197,14 @@ kMyMoneyDateTbl::kMyMoneyDateTbl(QWidget *parent, QDate date_, const char* name,
   setDate(date_); // this initializes firstday, numdays, numDaysPrevMonth
 
   viewport()->setMouseTracking(true);
+
+  horizontalHeader()->setResizeMode(QHeaderView::Fixed);
+  horizontalHeader()->hide();
+  verticalHeader()->setResizeMode(QHeaderView::Fixed);
+  verticalHeader()->hide();
 }
 
-void
-kMyMoneyDateTbl::paintCell(QPainter *painter, int row, int col)
-{
-  QRect rect;
-  QString text;
-  QPen pen;
-  int w = cellWidth();
-  int h = cellHeight();
-  KColorScheme colorScheme = KColorScheme(QPalette::Active);
-  QFont font = KGlobalSettings::generalFont();
-
-  // -----
-  font.setPointSize(fontsize);
-
-  int firstWeekDay = KGlobal::locale()->weekStartDay();
-
-  if (row == 0) { // we are drawing the headline
-    if (m_type == MONTHLY) {
-      font.setBold(true);
-      painter->setFont(font);
-      bool normalday = true;
-      QString daystr;
-
-      if (col + firstWeekDay < 8)
-        daystr = WEEK_DAY_NAME(col + firstWeekDay, KCalendarSystem::ShortDayName);
-      else
-        daystr = WEEK_DAY_NAME(col + firstWeekDay - 7, KCalendarSystem::ShortDayName);
-
-      if (daystr == i18nc("Sunday", "Sun") || daystr == i18nc("Saturday", "Sat"))
-        normalday = false;
-
-      if (!normalday) {
-        painter->setPen(colorScheme.background(KColorScheme::NormalBackground).color());
-        painter->setBrush(palette().color(QPalette::Base));
-        painter->drawRect(0, 0, w, h);
-        painter->setPen(palette().color(QPalette::Highlight));
-      } else {
-        painter->setPen(colorScheme.foreground(KColorScheme::PositiveText).color());
-        painter->setBrush(palette().color(QPalette::Highlight));
-        painter->drawRect(0, 0, w, h);
-        painter->setPen(palette().color(QPalette::HighlightedText));
-      }
-      painter->drawText(0, 0, w, h - 1, Qt::AlignCenter,
-                        daystr, &rect);
-      painter->setPen(colorScheme.foreground(KColorScheme::NormalText).color());
-
-      QPainterPath path;
-      path.moveTo(0, h - 1);
-      path.lineTo(w - 1, h - 1);
-
-      painter->drawPath(path);
-
-      if (rect.width() > maxCell.width())
-        maxCell.setWidth(rect.width());
-
-      if (rect.height() > maxCell.height())
-        maxCell.setHeight(rect.height());
-    } else if (m_type == WEEKLY) {
-      painter->setPen(colorScheme.foreground(KColorScheme::PositiveText).color());
-      painter->setBrush(palette().color(QPalette::Highlight));
-      painter->drawRect(0, 0, w, h);
-      painter->setPen(palette().color(QPalette::HighlightedText));
-
-      int year = date.year();
-      QString headerText;
-      QString weekStr = QString::number(date.weekNumber(&year));
-      QString yearStr = QString::number(year);
-      headerText = i18n("Week %1 for year %2.", weekStr, yearStr);
-
-      painter->drawText(0, 0, w, h - 1, Qt::AlignCenter, headerText, &rect);
-
-      maxCell.setWidth(width());
-
-      if (rect.height() > maxCell.height())
-        maxCell.setHeight(rect.height());
-    } else if (m_type == QUARTERLY) {
-      int athird = width() / 3;
-
-      painter->setPen(KGlobalSettings::activeTitleColor());
-      painter->setBrush(palette().color(QPalette::Highlight));
-      painter->setPen(palette().color(QPalette::HighlightedText));
-
-      if (col == 0) {
-        painter->drawRect(0, 0, athird, h);
-        painter->drawText(0, 0, athird, h - 1, Qt::AlignCenter, "Month 1", &rect);
-
-        painter->drawRect(athird, 0, athird, h);
-        painter->drawText(athird, 0, athird, h - 1, Qt::AlignCenter, "Month 2", &rect);
-
-        painter->drawRect(athird*2, 0, athird, h);
-        painter->drawText(athird*2, 0, athird, h - 1, Qt::AlignCenter, "Month 3", &rect);
-      }
-    }
-  } else {
-    int pos;
-
-    QDate drawDate(date);
-
-    if (m_type == MONTHLY) {
-      pos = 7 * (row - 1) + col;
-      if (firstWeekDay < 4)
-        pos += firstWeekDay;
-      else
-        pos += firstWeekDay - 7;
-
-      if (pos < firstday || (firstday + numdays <= pos)) { // we are either
-        //  painting a day of the previous month or
-        //  painting a day of the following month
-
-        if (pos < firstday) { // previous month
-          drawDate = drawDate.addMonths(-1);
-          text.setNum(numDaysPrevMonth + pos - firstday + 1);
-          drawDate.setYMD(drawDate.year(), drawDate.month(), text.toInt());
-        } else { // following month
-          drawDate = drawDate.addMonths(1);
-          text.setNum(pos - firstday - numdays + 1);
-          drawDate.setYMD(drawDate.year(), drawDate.month(), text.toInt());
-        }
-      } else { // paint a day of the current month
-        text.setNum(pos - firstday + 1);
-        drawDate.setYMD(drawDate.year(), drawDate.month(), text.toInt());
-      }
-    } else if (m_type == WEEKLY) {
-      // TODO: Handle other start weekdays than Monday
-      text = QDate::shortDayName(row);
-      text += ' ';
-
-      int dayOfWeek = date.dayOfWeek();
-      int diff;
-
-      if (row < dayOfWeek) {
-        diff = -(dayOfWeek - row);
-      } else {
-        diff = row - dayOfWeek;
-      }
-
-      drawDate = date.addDays(diff);
-    } else if (m_type == QUARTERLY) {
-    }
-
-    drawCellContents(painter, row, col, drawDate);
-  }
-}
-
-void
-kMyMoneyDateTbl::keyPressEvent(QKeyEvent *e)
+void kMyMoneyDateTbl::keyPressEvent(QKeyEvent *e)
 {
   if (e->key() == Qt::Key_PageUp) {
     setDate(date.addMonths(-1));
@@ -291,58 +255,36 @@ kMyMoneyDateTbl::keyPressEvent(QKeyEvent *e)
   KNotification::beep();
 }
 
-void
-kMyMoneyDateTbl::viewportResizeEvent(QResizeEvent * e)
+void kMyMoneyDateTbl::resizeEvent(QResizeEvent * e)
 {
   if (e)
-    Q3GridView::viewportResizeEvent(e);
+    QTableWidget::resizeEvent(e);
 
-  setCellWidth(viewport()->width() / m_colCount);
-  setCellHeight(viewport()->height() / m_rowCount);
+  if (m_colCount > 0) {
+    horizontalHeader()->setDefaultSectionSize(viewport()->width() / m_colCount + 1);
+    horizontalHeader()->setStretchLastSection(true);
+  }
+  if (m_rowCount > 0) {
+    verticalHeader()->setDefaultSectionSize(viewport()->height() / m_rowCount + 1);
+    verticalHeader()->setStretchLastSection(true);
+  }
 }
 
-void
-kMyMoneyDateTbl::setFontSize(int size)
+void kMyMoneyDateTbl::setFontSize(int size)
 {
-  int count;
-  QFontMetrics metrics(fontMetrics());
-  QRect rect;
-
-  // ----- store rectangles:
   fontsize = size;
-
-  // ----- find largest day name:
-  maxCell.setWidth(0);
-  maxCell.setHeight(0);
-
-  for (count = 0; count < m_colCount; ++count) {
-    rect = metrics.boundingRect(WEEK_DAY_NAME(count + 1, KCalendarSystem::ShortDayName));
-
-    maxCell.setWidth(qMax(maxCell.width(), rect.width()));
-    maxCell.setHeight(qMax(maxCell.height(), rect.height()));
-  }
-
-  if (m_type == WEEKLY) {
-    // Re-size to width
-    maxCell.setWidth(width());
-  }
-
-  // ----- compare with a real wide number and add some space:
-  rect = metrics.boundingRect(QString::fromLatin1("88"));
-  maxCell.setWidth(qMax(maxCell.width() + 2, rect.width()));
-  maxCell.setHeight(qMax(maxCell.height() + 4, rect.height()));
 }
 
-void
-kMyMoneyDateTbl::wheelEvent(QWheelEvent * e)
+void kMyMoneyDateTbl::wheelEvent(QWheelEvent * e)
 {
   setDate(date.addMonths(-(int)(e->delta() / 120)));
   e->accept();
 }
 
-void
-kMyMoneyDateTbl::contentsMouseReleaseEvent(QMouseEvent *e)
+void kMyMoneyDateTbl::mouseReleaseEvent(QMouseEvent *e)
 {
+  QAbstractItemView::mouseReleaseEvent(e);
+
   if (e->type() != QEvent::MouseButtonRelease) { // the KDatePicker only reacts on mouse press events:
     return;
   }
@@ -390,8 +332,6 @@ kMyMoneyDateTbl::contentsMouseReleaseEvent(QMouseEvent *e)
     temp = firstday + date.day() - dayoff % 7 - 1;
 
     setDate(QDate(date.year(), date.month(), pos - firstday + dayoff % 7));
-
-    updateCell(temp / 7 + 1, temp % 7); // Update the previously selected cell
   } else if (m_type == WEEKLY) {
     int dayOfWeek = date.dayOfWeek();
     int diff;
@@ -403,17 +343,12 @@ kMyMoneyDateTbl::contentsMouseReleaseEvent(QMouseEvent *e)
     }
 
     setDate(date.addDays(diff));
-    updateCell(dayOfWeek, 0);
-  } else if (m_type == QUARTERLY) {
   }
-
-  updateCell(row, col); // Update the selected cell
 
   emit(tableClicked());
 }
 
-bool
-kMyMoneyDateTbl::setDate(const QDate& date_)
+bool kMyMoneyDateTbl::setDate(const QDate& date_)
 {
   bool changed = false;
   QDate temp;
@@ -445,15 +380,14 @@ kMyMoneyDateTbl::setDate(const QDate& date_)
   numDaysPrevMonth = temp.daysInMonth();
 
   if (changed) {
-    repaintContents(false);
+    viewport()->update();
   }
 
   emit(dateChanged(date));
   return true;
 }
 
-const QDate&
-kMyMoneyDateTbl::getDate() const
+const QDate& kMyMoneyDateTbl::getDate() const
 {
   return date;
 }
@@ -462,27 +396,14 @@ kMyMoneyDateTbl::getDate() const
 void kMyMoneyDateTbl::focusInEvent(QFocusEvent *e)
 {
 //    repaintContents(false);
-  Q3GridView::focusInEvent(e);
+  QTableWidget::focusInEvent(e);
 }
 
 void kMyMoneyDateTbl::focusOutEvent(QFocusEvent *e)
 {
 //    repaintContents(false);
-  Q3GridView::focusOutEvent(e);
+  QTableWidget::focusOutEvent(e);
 }
-
-QSize
-kMyMoneyDateTbl::sizeHint() const
-{
-  if (maxCell.height() > 0 && maxCell.width() > 0) {
-    return QSize(maxCell.width()*numCols() + 2*frameWidth(),
-                 (maxCell.height() + 2)*numRows() + 2*frameWidth());
-  } else {
-    kDebug() << "kMyMoneyDateTbl::sizeHint: obscure failure - ";
-    return QSize(-1, -1);
-  }
-}
-
 
 void kMyMoneyDateTbl::setType(calendarType type)
 {
@@ -490,24 +411,25 @@ void kMyMoneyDateTbl::setType(calendarType type)
     m_rowCount = 8;
     m_colCount = 1;
     m_type = WEEKLY;
-  } else if (type == QUARTERLY) {
-    m_rowCount = 7;
-    m_colCount = 21;
-    m_type = QUARTERLY;
   } else { // default to monthly
     m_rowCount = m_colCount = 7;
     m_type = MONTHLY;
   }
 
-  setNumRows(m_rowCount);
-  setNumCols(m_colCount);
-  setHScrollBarMode(AlwaysOff);
-  setVScrollBarMode(AlwaysOff);
+  setRowCount(m_rowCount);
+  setColumnCount(m_colCount);
+  setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-  viewportResizeEvent(0);
+  // setup the item delegate for all the rows
+  for (int i = 0; i < rowCount(); ++i) {
+    setItemDelegateForRow(i, m_itemDelegate);
+  }
+
+  resizeEvent(0);
 }
 
-void kMyMoneyDateTbl::contentsMouseMoveEvent(QMouseEvent* e)
+void kMyMoneyDateTbl::mouseMoveEvent(QMouseEvent* e)
 {
   int row, col, pos;
   QPoint mouseCoord;
@@ -563,7 +485,6 @@ void kMyMoneyDateTbl::contentsMouseMoveEvent(QMouseEvent* e)
     }
 
     drawDate = date.addDays(diff);
-  } else if (m_type == QUARTERLY) {
   }
 
   if (m_drawDateOrig != drawDate) {
@@ -571,7 +492,7 @@ void kMyMoneyDateTbl::contentsMouseMoveEvent(QMouseEvent* e)
     emit hoverDate(drawDate);
   }
 
-  Q3GridView::contentsMouseMoveEvent(e);
+  QTableWidget::mouseMoveEvent(e);
 }
 
 #include "kmymoneydatetbl.moc"

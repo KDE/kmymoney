@@ -68,8 +68,8 @@ Contains code from the KDateTable class ala kdelibs-3.1.2.  Original license:
 
 #include "mymoneyfile.h"
 
-kMyMoneyScheduledDateTbl::kMyMoneyScheduledDateTbl(QWidget *parent, QDate date_, const char* name, Qt::WFlags f)
-    : kMyMoneyDateTbl(parent, date_, name, f),
+kMyMoneyScheduledDateTbl::kMyMoneyScheduledDateTbl(QWidget *parent, QDate date_)
+    : kMyMoneyDateTbl(parent, date_),
     m_filterBills(false), m_filterDeposits(false), m_filterTransfers(false)
 {
   connect(&briefWidget, SIGNAL(enterClicked(const MyMoneySchedule&, const QDate&)), this, SIGNAL(enterClicked(const MyMoneySchedule&, const QDate&)));
@@ -80,20 +80,15 @@ kMyMoneyScheduledDateTbl::~kMyMoneyScheduledDateTbl()
 {
 }
 
-void kMyMoneyScheduledDateTbl::drawCellContents(QPainter *painter, int /*row*/, int /*col*/, const QDate& theDate)
+void kMyMoneyScheduledDateTbl::drawCellContents(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index, const QDate& theDate)
 {
-  QRect rect;
+  Q_UNUSED(index)
   QString text;
-  int w = cellWidth();
-  int h = cellHeight();
   QPen pen;
-  KColorScheme colorScheme = KColorScheme(QPalette::Active);
-  //QBrush brushBlue(KGlobalSettings::activeTitleColor());
-  QBrush brushBlue = colorScheme.background(KColorScheme::PositiveBackground);
-  //QBrush brushLightblue(KGlobalSettings::baseColor());
-  QBrush brushLightblue = colorScheme.background(KColorScheme::NormalBackground);
   QFont font = KGlobalSettings::generalFont();
   MyMoneyFile *file = MyMoneyFile::instance();
+
+  const QStyle *style = QApplication::style();
 
   // -----
   font.setPointSize(fontsize);
@@ -102,45 +97,18 @@ void kMyMoneyScheduledDateTbl::drawCellContents(QPainter *painter, int /*row*/, 
   fontLarge.setPointSize(fontsize*2);
   fontSmall.setPointSize(fontsize - 1);
 
+  painter->save();
+
   painter->setFont(font);
 
-
   if (m_type == MONTHLY) {
-    if (theDate.month() != date.month()) {
-      painter->setFont(fontSmall);
-      pen = QColor(Qt::lightGray);
-    } else {
-      pen = QColor(Qt::gray);
-    }
-
-    if (theDate == date) {
-      if (hasFocus()) { // draw the currently selected date
-        painter->setPen(colorScheme.foreground(KColorScheme::PositiveText).color());
-        painter->setBrush(colorScheme.background(KColorScheme::PositiveBackground));
-        pen = QColor(Qt::white);
-      } else {
-        //painter->setPen(KGlobalSettings::calculateAlternateBackgroundColor(KGlobalSettings::highlightColor()));
-        painter->setPen(colorScheme.foreground(KColorScheme::InactiveText).color());
-        //painter->setBrush(KGlobalSettings::calculateAlternateBackgroundColor(KGlobalSettings::highlightColor()));
-        painter->setBrush(colorScheme.background(KColorScheme::AlternateBackground));
-        pen = QColor(Qt::white);
-      }
-    } else {
-      //painter->setBrush(KGlobalSettings::baseColor());
-      //painter->setPen(KGlobalSettings::baseColor());
-      painter->setBrush(colorScheme.background(KColorScheme::NormalBackground));
-      painter->setPen(colorScheme.foreground(KColorScheme::NormalText).color());
-    }
-    painter->drawRect(0, 0, w, h);
-    painter->setPen(pen);
     text = QString::number(theDate.day());
     addDayPostfix(text);
-    painter->drawText(0, 0, w - 2, h, Qt::AlignRight, text, -1, &rect);
+    style->drawItemText(painter, option.rect, Qt::AlignRight, option.palette, true, text);
 
     MyMoneyFile *file = MyMoneyFile::instance();
     QList<MyMoneySchedule> schedules;
     try {
-
       // Honour the filter.
       int scheduleTypes = 0;
       int scheduleOcurrences = 0;
@@ -189,29 +157,12 @@ void kMyMoneyScheduledDateTbl::drawCellContents(QPainter *painter, int /*row*/, 
         painter->setPen(Qt::darkGray);
 
       painter->setFont(fontLarge);
-      painter->drawText(0, 0, w, h, Qt::AlignCenter, QString::number(schedules.count()),
-                        -1, &rect);
+      style->drawItemText(painter, option.rect, Qt::AlignCenter, option.palette, true, QString::number(schedules.count()));
     }
-
-    painter->setPen(Qt::lightGray);
-    painter->setBrush(Qt::NoBrush);
-    painter->drawRect(0, 0, w, h);
   } else if (m_type == WEEKLY) {
-    // TODO: Handle other start weekdays than Monday
-    if (theDate == date) {
-      painter->setBrush(colorScheme.background(KColorScheme::ActiveBackground));
-    } else {
-      painter->setBrush(colorScheme.background(KColorScheme::NormalBackground));
-      painter->setPen(colorScheme.foreground(KColorScheme::NormalText).color());
-    }
-
-    painter->setPen(QColor(Qt::lightGray));
-    painter->drawRect(0, 0, w, h);
-
     text = QString::number(theDate.day());
     addDayPostfix(text);
-
-    painter->drawText(0, 0, w - 2, h, Qt::AlignRight, QDate::shortDayName(theDate.dayOfWeek()) + ' ' + text, -1, &rect);
+    style->drawItemText(painter, option.rect, Qt::AlignRight, option.palette, true, QDate::shortDayName(theDate.dayOfWeek()) + ' ' + text);
 
     QList<MyMoneySchedule> billSchedules;
     QList<MyMoneySchedule> depositSchedules;
@@ -306,14 +257,10 @@ void kMyMoneyScheduledDateTbl::drawCellContents(QPainter *painter, int /*row*/, 
       painter->setPen(Qt::darkGray);
 
     painter->setFont(fontLarge);
-    painter->drawText(0, 0, w, h, Qt::AlignCenter, text,
-                      -1, &rect);
-  } else if (m_type == QUARTERLY) {
-    painter->setBrush(colorScheme.background(KColorScheme::NormalBackground));
-
-    painter->setPen(QColor(Qt::lightGray));
-    painter->drawRect(0, 0, w, h);
+    style->drawItemText(painter, option.rect, Qt::AlignCenter, option.palette, true, text);
   }
+
+  painter->restore();
 }
 
 void kMyMoneyScheduledDateTbl::addDayPostfix(QString& text)
@@ -331,10 +278,10 @@ void kMyMoneyScheduledDateTbl::addDayPostfix(QString& text)
 
 void kMyMoneyScheduledDateTbl::refresh()
 {
-  repaintContents(false);
+  update();
 }
 
-void kMyMoneyScheduledDateTbl::contentsMouseMoveEvent(QMouseEvent* e)
+void kMyMoneyScheduledDateTbl::mouseMoveEvent(QMouseEvent* e)
 {
   int row, col, pos;
   QPoint mouseCoord;
@@ -391,7 +338,6 @@ void kMyMoneyScheduledDateTbl::contentsMouseMoveEvent(QMouseEvent* e)
       }
 
       drawDate = date.addDays(diff);
-    } else if (m_type == QUARTERLY) {
     }
 
     m_drawDateOrig = drawDate;
@@ -455,17 +401,17 @@ void kMyMoneyScheduledDateTbl::contentsMouseMoveEvent(QMouseEvent* e)
 void kMyMoneyScheduledDateTbl::filterBills(bool enable)
 {
   m_filterBills = enable;
-  repaintContents(false);
+  update();
 }
 
 void kMyMoneyScheduledDateTbl::filterDeposits(bool enable)
 {
   m_filterDeposits = enable;
-  repaintContents(false);
+  update();
 }
 
 void kMyMoneyScheduledDateTbl::filterTransfers(bool enable)
 {
   m_filterTransfers = enable;
-  repaintContents(false);
+  update();
 }

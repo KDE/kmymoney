@@ -47,34 +47,49 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <Q3GridView>
+#include <QTableWidget>
 #include <QDateTime>
 #include <QResizeEvent>
 #include <QWheelEvent>
 #include <QMouseEvent>
 #include <QKeyEvent>
 #include <QFocusEvent>
+#include <QStyledItemDelegate>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-
-
 // ----------------------------------------------------------------------------
 // Project Includes
 
+class kMyMoneyDateTbl;
 
+/**
+  * @author Cristian Onet
+  */
+class KMyMoneyDateTbDelegate : public QStyledItemDelegate
+{
+  Q_OBJECT
+
+public:
+  explicit KMyMoneyDateTbDelegate(kMyMoneyDateTbl *parent = 0);
+  ~KMyMoneyDateTbDelegate();
+
+  void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
+
+private:
+  kMyMoneyDateTbl *m_parent;
+};
 
 /**
   * @author Michael Edwardes
   */
-class kMyMoneyDateTbl : public Q3GridView
+class kMyMoneyDateTbl : public QTableWidget
 {
   Q_OBJECT
 public:
   enum calendarType { WEEKLY,
-                      MONTHLY,
-                      QUARTERLY
+                      MONTHLY
                     };
 
 public:
@@ -82,16 +97,7 @@ public:
    * The constructor.
    */
   explicit kMyMoneyDateTbl(QWidget *parent = 0,
-                           QDate date = QDate::currentDate(),
-                           const char* name = 0, Qt::WFlags f = 0);
-  /**
-   * Returns a recommended size for the widget.
-   * To save some time, the size of the largest used cell content is
-   * calculated in each paintCell() call, since all calculations have
-   * to be done there anyway. The size is stored in maxCell. The
-   * sizeHint() simply returns a multiple of maxCell.
-   */
-  virtual QSize sizeHint() const;
+                           QDate date = QDate::currentDate());
   /**
    * Set the font size of the date table.
    */
@@ -118,31 +124,27 @@ signals:
   void tableClicked();
 
   /**
-    *
-  **/
+    * A date is being howerd over with the mouse.
+    **/
   void hoverDate(QDate);
 
 protected:
   /**
-   * Paint a cell.
-   */
-  virtual void paintCell(QPainter*, int, int);
-  /**
    * Handle the resize events.
    */
-  virtual void viewportResizeEvent(QResizeEvent *);
+  virtual void resizeEvent(QResizeEvent *);
   /**
    * React on mouse clicks that select a date.
    */
-  virtual void contentsMouseReleaseEvent(QMouseEvent *);
+  virtual void mouseReleaseEvent(QMouseEvent *);
   virtual void wheelEvent(QWheelEvent * e);
   virtual void keyPressEvent(QKeyEvent *e);
   virtual void focusInEvent(QFocusEvent *e);
   virtual void focusOutEvent(QFocusEvent *e);
 
-  virtual void drawCellContents(QPainter *painter, int row, int col, const QDate& theDate) = 0;
+  virtual void drawCellContents(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index, const QDate& theDate) = 0;
 
-  virtual void contentsMouseMoveEvent(QMouseEvent* e);
+  virtual void mouseMoveEvent(QMouseEvent* e);
 
   /**
    * The font size of the displayed text.
@@ -164,19 +166,10 @@ protected:
    * The number of days in the previous month.
    */
   int numDaysPrevMonth;
-  /**
-   * unused
-   * ### remove in KDE 4.0
-   */
-  bool unused_hasSelection;
-  /**
-   * Save the size of the largest used cell content.
-   */
-  QRect maxCell;
 
   /**
     * Type related variables
-  **/
+    **/
   calendarType m_type;
   int m_colCount;
   int m_rowCount;
@@ -184,6 +177,8 @@ protected:
   ///
   QDate m_drawDateOrig;
 
+  KMyMoneyDateTbDelegate *m_itemDelegate;
+  friend class KMyMoneyDateTbDelegate;
 private:
 #define WEEK_DAY_NAME(a,b)  KGlobal::locale()->calendar()->weekDayName(a,b)
 };

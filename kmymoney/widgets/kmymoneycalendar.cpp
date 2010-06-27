@@ -209,7 +209,7 @@ public:
 };
 
 kMyMoneyCalendar::kMyMoneyCalendar(QWidget *parent) :
-    Q3Frame(parent),
+    QFrame(parent),
     table(0),
     d(new kMyMoneyCalendarPrivate)
 {
@@ -238,7 +238,6 @@ void kMyMoneyCalendar::init(const QDate &dt)
   KMenu* kpopupmenuNew = new KMenu(this);
   kpopupmenuNew->addAction(i18n("Week"), this, SLOT(slotSetStyleWeekly()));
   kpopupmenuNew->addAction(i18n("Month"), this, SLOT(slotSetStyleMonthly()));
-  /*  kpopupmenuNew->addAction(i18n("3 Months"), this, SLOT(slotSetStyleQuarterly())); */
   styleControl->setMenu(kpopupmenuNew);
 
   styleControl->setToolTip(i18n("Choose Style"));
@@ -288,7 +287,7 @@ kMyMoneyCalendar::eventFilter(QObject *o, QEvent *e)
       return true; // eat event
     }
   }
-  return Q3Frame::eventFilter(o, e);
+  return QFrame::eventFilter(o, e);
 }
 
 void
@@ -737,11 +736,6 @@ void kMyMoneyCalendar::slotSetStyleWeekly()
 void kMyMoneyCalendar::slotSetStyleMonthly()
 {
   setType(kMyMoneyDateTbl::MONTHLY);
-}
-
-void kMyMoneyCalendar::slotSetStyleQuarterly()
-{
-  setType(kMyMoneyDateTbl::QUARTERLY);
 }
 
 void kMyMoneyCalendar::setUserButton1(bool enable, QPushButton* pb)

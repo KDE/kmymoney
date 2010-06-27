@@ -76,7 +76,7 @@ class KCalendarSystem;
   * @author Michael Edwardes 2003
   *
 **/
-class kMyMoneyCalendar : public Q3Frame
+class kMyMoneyCalendar : public QFrame
 {
   Q_OBJECT
 public:
@@ -220,7 +220,6 @@ protected slots:
 
   void slotSetStyleWeekly();
   void slotSetStyleMonthly();
-  void slotSetStyleQuarterly();
 
 signals:
   /** This signal is emitted each time the selected date is changed.
