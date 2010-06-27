@@ -303,6 +303,18 @@ public:
   void loadReportId(const unsigned long& id);
   void loadBudgetId(const unsigned long& id);
 
+  /**
+    * This method allows to modify the precision with which prices
+    * are handled within the object. The default of the precision is 4.
+    */
+  static void setPrecision(int prec);
+
+  /**
+    * This method allows to modify the start date for transaction retrieval
+    * The default of the precision is Jan 1st, 1900.
+    */
+  static void setStartDate(const QDate &startDate);
+
 private:
   //void init(void);
   bool fileExists(const QString& dbName);
@@ -484,5 +496,17 @@ private:
   MyMoneyStorageSql(const MyMoneyStorageSql& rhs);
   MyMoneyStorageSql& operator= (const MyMoneyStorageSql& rhs);
   bool m_newDatabase;
+
+  /**
+    * This member keeps the current precision to be used fro prices.
+    * @sa setPrecision()
+    */
+  static int m_precision;
+
+  /**
+    * This member keeps the current start date used for transaction retrieval.
+    * @sa setStartDate()
+    */
+  static QDate m_startDate;
 };
 #endif // MYMONEYSTORAGESQL_H

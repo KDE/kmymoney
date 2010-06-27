@@ -47,7 +47,6 @@
 // Project Includes
 
 #include "imymoneyserialize.h"
-#include "kmymoneyglobalsettings.h"
 
 
 #define TRY try {
@@ -57,6 +56,8 @@
 #define DBG(a) // qDebug(a)
 //#define TRACE(a) qDebug(a)
 #define TRACE(a) ::timetrace(a)
+
+
 
 // subclass QSqlQuery for performance tracing
 MyMoneySqlQuery::MyMoneySqlQuery(MyMoneyStorageSql*  db)
@@ -1690,7 +1691,7 @@ void MyMoneyStorageSql::writeSplitList
     if (!price.isZero()) {
       priceList << price.toString();
       priceFormattedList << price.formatMoney
-      ("", KMyMoneySettings::pricePrecision(), false)
+      ("", m_precision, false)
       .replace(QChar(','), QChar('.'));
     } else {
       priceList << QString();
@@ -2040,7 +2041,7 @@ void MyMoneyStorageSql::addPrice(const MyMoneyPrice& p)
   q.bindValue(":priceDate", p.date().toString(Qt::ISODate));
   q.bindValue(":price", p.rate(QString()).toString());
   q.bindValue(":priceFormatted",
-              p.rate(QString()).formatMoney("", KMyMoneySettings::pricePrecision()));
+              p.rate(QString()).formatMoney("", m_precision));
   q.bindValue(":priceSource", p.source());
   if (!q.exec()) throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("writing Price"))); // krazy:exclude=crashy
 
@@ -3126,7 +3127,7 @@ const QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(con
   QDate end = filter.toDate();
   // not entirely sure if the following is correct, but at best, saves a lot of reads, at worst
   // it only causes us to read a few more transactions that strictly necessary (I think...)
-  if (start == KMyMoneySettings::startDate().date()) start = QDate();
+  if (start == m_startDate) start = QDate();
   bool txFilterActive = ((start != QDate()) || (end != QDate())); // and this for fields in the transaction table
   if (txFilterActive) accountsOnlyFilter = false;
 
@@ -4123,4 +4124,15 @@ QString& MyMoneyStorageSql::buildError(const QSqlQuery& q, const QString& functi
   return (const_cast <MyMoneyStorageSql*>(this)->m_error);
 }
 
+int MyMoneyStorageSql::m_precision = 4;
+QDate MyMoneyStorageSql::m_startDate = QDate(1900, 1, 1);
 
+void MyMoneyStorageSql::setPrecision(int prec)
+{
+  m_precision = prec;
+}
+
+void MyMoneyStorageSql::setStartDate(const QDate& startDate)
+{
+  m_startDate = startDate;
+}

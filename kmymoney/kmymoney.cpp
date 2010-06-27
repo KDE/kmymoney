@@ -387,8 +387,6 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
 
   d->m_backupState = BACKUP_IDLE;
 
-  setHolidayRegion(KMyMoneyGlobalSettings::holidayRegion());
-
   int weekStart = KGlobal::locale()->workingWeekStartDay();
   int weekEnd = KGlobal::locale()->workingWeekEndDay();
   bool startFirst = (weekStart < weekEnd);
@@ -399,9 +397,6 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
       d->m_processingDays.setBit(i, (i >= weekStart || i <= weekEnd));
   }
 
-  d->m_autoSaveEnabled = KMyMoneyGlobalSettings::autoSaveFile();
-  d->m_autoSavePeriod = KMyMoneyGlobalSettings::autoSavePeriod();
-
   d->m_autoSaveTimer = new QTimer(this);
   connect(d->m_autoSaveTimer, SIGNAL(timeout()), this, SLOT(slotAutoSave()));
 
@@ -410,6 +405,9 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
 
   // make sure we have a balance warning object
   d->m_balanceWarning = new KBalanceWarning(this);
+
+  // setup the initial configuration
+  slotUpdateConfiguration();
 
   // kickstart date change timer
   slotDateChanged();
@@ -2384,6 +2382,10 @@ void KMyMoneyApp::slotUpdateConfiguration(void)
   MyMoneyTransactionFilter::setFiscalYearStart(KMyMoneyGlobalSettings::firstFiscalMonth(), KMyMoneyGlobalSettings::firstFiscalDay());
 
   d->m_myMoneyView->updateViewType();
+
+  // update the sql storage module settings
+  MyMoneyStorageSql::setPrecision(KMyMoneyGlobalSettings::pricePrecision());
+  MyMoneyStorageSql::setStartDate(KMyMoneyGlobalSettings::startDate().date());
 
   // update the holiday region configuration
   setHolidayRegion(KMyMoneyGlobalSettings::holidayRegion());
@@ -6367,7 +6369,7 @@ void KMyMoneyApp::Private::consistencyCheck(bool alwaysDisplayResult)
   // in all errneous cases, we get more than one line and force the
   // display of them.
 
-  if(msg.size() > 1) {
+  if (msg.size() > 1) {
     KMessageBox::informationList(0, i18n("The consistency check has found some issues in your data. Details are presented below. Those issues that could not be corrected automatically need to be solved by the user."), msg, i18n("Consistency check result"));
   } else if (alwaysDisplayResult) {
     KMessageBox::informationList(0, i18n("The consistency check has found no issues in your data. Details are presented below."), msg, i18n("Consistency check result"));
