@@ -183,7 +183,7 @@ void KForecastView::loadForecastSettings(void)
 
 void KForecastView::loadListView(void)
 {
-  MyMoneyForecast forecast;
+  MyMoneyForecast forecast = KMyMoneyGlobalSettings::forecast();
   MyMoneyFile* file = MyMoneyFile::instance();
 
   m_forecastList->setBaseCurrency(file->baseCurrency());
@@ -216,7 +216,7 @@ void KForecastView::loadListView(void)
 
 void KForecastView::loadSummaryView(void)
 {
-  MyMoneyForecast forecast;
+  MyMoneyForecast forecast = KMyMoneyGlobalSettings::forecast();
   QList<MyMoneyAccount> accList;
   int dropMinimum;
   int dropZero;
@@ -375,7 +375,7 @@ void KForecastView::loadAdvancedView(void)
   MyMoneyFile* file = MyMoneyFile::instance();
   QList<MyMoneyAccount> accList;
   MyMoneySecurity baseCurrency = file->baseCurrency();
-  MyMoneyForecast forecast;
+  MyMoneyForecast forecast = KMyMoneyGlobalSettings::forecast();
   int daysToBeginDay;
 
   //get the settings from current page
@@ -491,7 +491,7 @@ void KForecastView::loadAdvancedView(void)
 void KForecastView::loadBudgetView(void)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
-  MyMoneyForecast forecast;
+  MyMoneyForecast forecast = KMyMoneyGlobalSettings::forecast();
 
   m_budgetList->setBaseCurrency(file->baseCurrency());
 

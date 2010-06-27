@@ -1892,9 +1892,7 @@ void PivotTable::calculateBudgetDiff(void)
 void PivotTable::calculateForecast(void)
 {
   //setup forecast
-  MyMoneyForecast forecast;
-
-  //setup forecast settings
+  MyMoneyForecast forecast = KMyMoneyGlobalSettings::forecast();
 
   //since this is a net worth forecast we want to include all account even those that are not in use
   forecast.setIncludeUnusedAccounts(true);

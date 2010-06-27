@@ -31,6 +31,7 @@
 // Project Includes
 
 #include "kmymoneymvccombo.h"
+#include "mymoneyforecast.h"
 
 QFont KMyMoneyGlobalSettings::listCellFont(void)
 {
@@ -110,4 +111,23 @@ void KMyMoneyGlobalSettings::setSubstringSearch(QWidget* w)
       combo->setSubstringSearch(!stringMatchFromStart());
     }
   }
+}
+
+MyMoneyForecast KMyMoneyGlobalSettings::forecast(void)
+{
+  MyMoneyForecast forecast;
+  
+  // override object defaults with those of the application
+  forecast.setForecastCycles(KMyMoneyGlobalSettings::forecastCycles());
+  forecast.setAccountsCycle(KMyMoneyGlobalSettings::forecastAccountCycle());
+  forecast.setHistoryStartDate(QDate::currentDate().addDays(-forecast.forecastCycles()*forecast.accountsCycle()));
+  forecast.setHistoryEndDate(QDate::currentDate().addDays(-1));
+  forecast.setForecastDays(KMyMoneyGlobalSettings::forecastDays());
+  forecast.setBeginForecastDay(KMyMoneyGlobalSettings::beginForecastDay());
+  forecast.setForecastMethod(KMyMoneyGlobalSettings::forecastMethod());
+  forecast.setHistoryMethod(KMyMoneyGlobalSettings::historyMethod());
+  forecast.setIncludeFutureTransactions(KMyMoneyGlobalSettings::includeFutureTransactions());
+  forecast.setIncludeScheduledTransactions(KMyMoneyGlobalSettings::includeScheduledTransactions());
+
+  return forecast;
 }

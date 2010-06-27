@@ -1461,20 +1461,8 @@ void KHomeView::doForecast(void)
   d->m_accountList.clear();
 
   //reinitialize the object
-  d->m_forecast = MyMoneyForecast();
-
-  // override object defaults with those of the application
-  d->m_forecast.setForecastCycles(KMyMoneyGlobalSettings::forecastCycles());
-  d->m_forecast.setAccountsCycle(KMyMoneyGlobalSettings::forecastAccountCycle());
-  d->m_forecast.setHistoryStartDate(QDate::currentDate().addDays(-d->m_forecast.forecastCycles()*d->m_forecast.accountsCycle()));
-  d->m_forecast.setHistoryEndDate(QDate::currentDate().addDays(-1));
-  d->m_forecast.setForecastDays(KMyMoneyGlobalSettings::forecastDays());
-  d->m_forecast.setBeginForecastDay(KMyMoneyGlobalSettings::beginForecastDay());
-  d->m_forecast.setForecastMethod(KMyMoneyGlobalSettings::forecastMethod());
-  d->m_forecast.setHistoryMethod(KMyMoneyGlobalSettings::historyMethod());
-  d->m_forecast.setIncludeFutureTransactions(KMyMoneyGlobalSettings::includeFutureTransactions());
-  d->m_forecast.setIncludeScheduledTransactions(KMyMoneyGlobalSettings::includeScheduledTransactions());
-
+  d->m_forecast = KMyMoneyGlobalSettings::forecast();
+  
   //If forecastDays lower than accountsCycle, adjust to the first cycle
   if (d->m_forecast.accountsCycle() > d->m_forecast.forecastDays())
     d->m_forecast.setForecastDays(d->m_forecast.accountsCycle());
