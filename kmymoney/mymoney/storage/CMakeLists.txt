@@ -14,8 +14,6 @@ SET(storage_a_SOURCES
 
 KMM_CREATE_LINKS(${storage_HEADERS})
 
-KDE4_ADD_KCFG_FILES(storage_a_SOURCES  ../../kmymoneysettings.kcfgc )
-
 # This library is actually not needed. It is built just for
 # convenience, and then linked into kmm_mymoney.
 KDE4_ADD_LIBRARY( kmm_storage STATIC ${storage_a_SOURCES} )

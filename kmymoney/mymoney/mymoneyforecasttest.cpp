@@ -24,7 +24,6 @@
 
 #include "mymoneyexception.h"
 
-#include "kmymoneyglobalsettings.h"
 #include "mymoneystoragedump.h"
 #include "mymoneystoragexml.h"
 #include "reportstestcommon.h"
@@ -108,12 +107,12 @@ void MyMoneyForecastTest::testEmptyConstructor()
   QVERIFY(a.forecastBalance(b, QDate::currentDate()) == MyMoneyMoney(0, 1));
   QVERIFY(a.daysToMinimumBalance(b) == -1);
   QVERIFY(a.daysToZeroBalance(b) == -2);
-  QVERIFY(a.forecastDays() == KMyMoneyGlobalSettings::forecastDays());
-  QVERIFY(a.accountsCycle() == KMyMoneyGlobalSettings::forecastAccountCycle());
-  QVERIFY(a.forecastCycles() == KMyMoneyGlobalSettings::forecastCycles());
-  QVERIFY(a.historyStartDate() == QDate::currentDate().addDays(-KMyMoneyGlobalSettings::forecastCycles()*KMyMoneyGlobalSettings::forecastAccountCycle()));
+  QVERIFY(a.forecastDays() == 90);
+  QVERIFY(a.accountsCycle() == 30);
+  QVERIFY(a.forecastCycles() == 3);
+  QVERIFY(a.historyStartDate() == QDate::currentDate().addDays(-3*30));
   QVERIFY(a.historyEndDate() == QDate::currentDate().addDays(-1));
-  QVERIFY(a.historyDays() == KMyMoneyGlobalSettings::forecastAccountCycle() * KMyMoneyGlobalSettings::forecastCycles());
+  QVERIFY(a.historyDays() == 30 * 3);
 }
 
 

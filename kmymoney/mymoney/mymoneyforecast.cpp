@@ -27,6 +27,7 @@
 #include <QTextStream>
 #include <QList>
 #include <QtAlgorithms>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 #include <kdebug.h>
@@ -34,28 +35,25 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyglobalsettings.h"
 #include "mymoneyfile.h"
 #include "mymoneytransactionfilter.h"
 #include "mymoneyfinancialcalculator.h"
 
 MyMoneyForecast::MyMoneyForecast() :
-    m_forecastMethod(0),
-    m_historyMethod(0),
+    m_accountsCycle(30),
+    m_forecastCycles(3),
+    m_forecastDays(90),
+    m_beginForecastDay(0),
+    m_forecastMethod(eScheduled),
+    m_historyMethod(1),
     m_skipOpeningDate(true),
     m_includeUnusedAccounts(false),
-    m_forecastDone(false)
+    m_forecastDone(false),
+    m_includeFutureTransactions(true),
+    m_includeScheduledTransactions(true)
 {
-  setForecastCycles(KMyMoneyGlobalSettings::forecastCycles());
-  setAccountsCycle(KMyMoneyGlobalSettings::forecastAccountCycle());
   setHistoryStartDate(QDate::currentDate().addDays(-forecastCycles()*accountsCycle()));
   setHistoryEndDate(QDate::currentDate().addDays(-1));
-  setForecastDays(KMyMoneyGlobalSettings::forecastDays());
-  setBeginForecastDay(KMyMoneyGlobalSettings::beginForecastDay());
-  setForecastMethod(KMyMoneyGlobalSettings::forecastMethod());
-  setHistoryMethod(KMyMoneyGlobalSettings::historyMethod());
-  setIncludeFutureTransactions(KMyMoneyGlobalSettings::includeFutureTransactions());
-  setIncludeScheduledTransactions(KMyMoneyGlobalSettings::includeScheduledTransactions());
 }
 
 

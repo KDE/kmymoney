@@ -48,6 +48,18 @@
 class KMM_MYMONEY_EXPORT MyMoneyForecast
 {
 public:
+  /**
+    * The default forecast ctor sets the following defaults:
+    *
+    * - forecastCycles = 3
+    * - accountsCycle = 30
+    * - forecastDays = 90
+    * - beginForecastDay = 0 (today)
+    * - forecastMethod = 0 (scheduled)
+    * - historyMethod = 1
+    * - includeFutureTransactions = true
+    * - includeScheduledTransactions = true
+    */
   MyMoneyForecast();
   ~MyMoneyForecast();
 
@@ -144,7 +156,7 @@ public:
   void setForecastDays(int forecastDays)   {
     m_forecastDays = forecastDays;
   }
-  void setBeginForecastDate(QDate beginForecastDate) {
+  void setBeginForecastDate(const QDate &beginForecastDate) {
     m_beginForecastDate = beginForecastDate;
   }
   void setBeginForecastDay(int beginDay)   {
@@ -153,10 +165,10 @@ public:
   void setForecastMethod(int forecastMethod) {
     m_forecastMethod = forecastMethod;
   }
-  void setHistoryStartDate(QDate historyStartDate) {
+  void setHistoryStartDate(const QDate &historyStartDate) {
     m_historyStartDate = historyStartDate;
   }
-  void setHistoryEndDate(QDate historyEndDate) {
+  void setHistoryEndDate(const QDate &historyEndDate) {
     m_historyEndDate = historyEndDate;
   }
   void setHistoryStartDate(int daysToStartDate) {
@@ -165,10 +177,10 @@ public:
   void setHistoryEndDate(int daysToEndDate) {
     setHistoryEndDate(QDate::currentDate().addDays(-daysToEndDate));
   }
-  void setForecastStartDate(QDate _startDate) {
+  void setForecastStartDate(const QDate &_startDate) {
     m_forecastStartDate = _startDate;
   }
-  void setForecastEndDate(QDate _endDate) {
+  void setForecastEndDate(const QDate &_endDate) {
     m_forecastEndDate = _endDate;
   }
   void setSkipOpeningDate(bool _skip) {
@@ -199,7 +211,7 @@ public:
   int forecastDays(void) const {
     return m_forecastDays;
   }
-  QDate beginForecastDate(void) const   {
+  const QDate& beginForecastDate(void) const   {
     return m_beginForecastDate;
   }
   int beginForecastDay(void) const   {
@@ -208,16 +220,16 @@ public:
   int forecastMethod(void) const   {
     return m_forecastMethod;
   }
-  QDate historyStartDate(void) const {
+  const QDate& historyStartDate(void) const {
     return m_historyStartDate;
   }
-  QDate historyEndDate(void) const {
+  const QDate& historyEndDate(void) const {
     return m_historyEndDate;
   }
-  QDate forecastStartDate(void) const {
+  const QDate& forecastStartDate(void) const {
     return m_forecastStartDate;
   }
-  QDate forecastEndDate(void) const {
+  const QDate& forecastEndDate(void) const {
     return m_forecastEndDate;
   }
   bool skipOpeningDate(void) const {
