@@ -644,4 +644,9 @@ private:
 
 };
 
+/**
+  * Make it possible to hold @ref MyMoneyReport objects inside @ref QVariant objects.
+  */
+Q_DECLARE_METATYPE(MyMoneyReport)
+
 #endif // MYMONEYREPORT_H

@@ -342,4 +342,9 @@ private:
   QString      m_transactionId;
 };
 
+/**
+  * Make it possible to hold @ref MyMoneySplit objects inside @ref QVariant objects.
+  */
+Q_DECLARE_METATYPE(MyMoneySplit)
+
 #endif

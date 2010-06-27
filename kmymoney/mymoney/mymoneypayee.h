@@ -248,6 +248,9 @@ inline bool operator==(const MyMoneyPayee& lhs, const QString& rhs)
   return lhs.id() == rhs;
 }
 
+/**
+  * Make it possible to hold @ref MyMoneyPayee objects inside @ref QVariant objects.
+  */
 Q_DECLARE_METATYPE(MyMoneyPayee)
 
 #endif

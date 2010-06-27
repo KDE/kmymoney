@@ -141,5 +141,10 @@ public:
   KMM_MYMONEY_EXPORT static void writeXMLFile(const MyMoneyStatement&, const QString&);
 };
 
+/**
+  * Make it possible to hold @ref MyMoneyStatement objects inside @ref QVariant objects.
+  */
+Q_DECLARE_METATYPE(MyMoneyStatement)
+
 #endif
 // vim:cin:si:ai:et:ts=2:sw=2:

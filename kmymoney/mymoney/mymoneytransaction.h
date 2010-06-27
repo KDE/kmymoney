@@ -377,4 +377,10 @@ private:
   static const int MONTH_SIZE = 2;
   static const int DAY_SIZE = 2;
 };
+
+/**
+  * Make it possible to hold @ref MyMoneyTransaction objects inside @ref QVariant objects.
+  */
+Q_DECLARE_METATYPE(MyMoneyTransaction)
+
 #endif

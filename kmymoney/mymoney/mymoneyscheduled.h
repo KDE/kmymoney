@@ -773,4 +773,10 @@ private:
   /// The weekend option
   weekendOptionE m_weekendOption;
 };
+
+/**
+  * Make it possible to hold @ref MyMoneySchedule objects inside @ref QVariant objects.
+  */
+Q_DECLARE_METATYPE(MyMoneySchedule)
+
 #endif

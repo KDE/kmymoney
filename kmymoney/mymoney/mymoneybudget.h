@@ -304,5 +304,10 @@ private:
   QMap<QString, AccountGroup> m_accounts;
 };
 
+/**
+  * Make it possible to hold @ref MyMoneyBudget objects inside @ref QVariant objects.
+  */
+Q_DECLARE_METATYPE(MyMoneyBudget)
+
 #endif // MYMONEYBudget_H
 // vim:cin:si:ai:et:ts=2:sw=2:

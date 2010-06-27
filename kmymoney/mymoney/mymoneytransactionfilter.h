@@ -582,4 +582,9 @@ protected:
   QList<MyMoneySplit> m_matchingSplits;
 };
 
+/**
+  * Make it possible to hold @ref MyMoneyTransactionFilter objects inside @ref QVariant objects.
+  */
+Q_DECLARE_METATYPE(MyMoneyTransactionFilter)
+
 #endif

@@ -474,5 +474,10 @@ private:
 
 };
 
+/**
+  * Make it possible to hold @ref MyMoneyForecast objects inside @ref QVariant objects.
+  */
+Q_DECLARE_METATYPE(MyMoneyForecast)
+
 #endif // MYMONEYFORECAST_H
 

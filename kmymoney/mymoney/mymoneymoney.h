@@ -639,6 +639,9 @@ inline MyMoneyMoney& MyMoneyMoney::operator/=(const MyMoneyMoney & AmountInPence
   return *this;
 }
 
+/**
+  * Make it possible to hold @ref MyMoneyMoney objects inside @ref QVariant objects.
+  */
 Q_DECLARE_METATYPE(MyMoneyMoney)
 
 #endif
