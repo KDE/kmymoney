@@ -72,7 +72,6 @@
 #include <libkgpgfile/kgpgfile.h>
 #include "kendingbalancedlg.h"
 #include "kchooseimportexportdlg.h"
-#include "kcsvprogressdlg.h"
 #include "kimportdlg.h"
 #include "kexportdlg.h"
 #include "knewloanwizard.h"

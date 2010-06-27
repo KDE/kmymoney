@@ -12,7 +12,6 @@ SET(libdialogs_a_SOURCES
   kcategoryreassigndlg.cpp
   kchooseimportexportdlg.cpp 
   kconfirmmanualenterdlg.cpp
-  kcsvprogressdlg.cpp 
   kcurrencycalculator.cpp 
   kcurrencyeditdlg.cpp
   keditloanwizard.cpp
@@ -62,7 +61,7 @@ KMM_CREATE_LINKS( ${dialogs_HEADERS} )
 SET(dialogs_UI
   kaccountselectdlgdecl.ui kbackupdlgdecl.ui
   kcategoryreassigndlgdecl.ui kchooseimportexportdlgdecl.ui
-  kconfirmmanualenterdlgdecl.ui kcsvprogressdlgdecl.ui
+  kconfirmmanualenterdlgdecl.ui
   kcurrencycalculatordecl.ui kcurrencyeditdlgdecl.ui
   keditscheduledlgdecl.ui
   kendingbalancedlgdecl.ui kenterscheduledlgdecl.ui
