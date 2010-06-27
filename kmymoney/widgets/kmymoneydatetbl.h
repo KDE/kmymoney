@@ -179,8 +179,6 @@ protected:
 
   KMyMoneyDateTbDelegate *m_itemDelegate;
   friend class KMyMoneyDateTbDelegate;
-private:
-#define WEEK_DAY_NAME(a,b)  KGlobal::locale()->calendar()->weekDayName(a,b)
 };
 
 #endif

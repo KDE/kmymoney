@@ -76,6 +76,8 @@ Contains code from the KDateTable class ala kdelibs-3.1.2.  Original license:
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#define WEEK_DAY_NAME(a,b)  KGlobal::locale()->calendar()->weekDayName(a,b)
+
 KMyMoneyDateTbDelegate::KMyMoneyDateTbDelegate(kMyMoneyDateTbl* parent): QStyledItemDelegate(parent), m_parent(parent)
 {
 }
