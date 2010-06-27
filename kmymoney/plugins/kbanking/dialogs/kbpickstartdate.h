@@ -21,7 +21,7 @@
 #ifndef KBPICKSTARTDATE_H
 #define KBPICKSTARTDATE_H
 
-#include <ui_kbpickstartdate.h>
+#include "ui_kbpickstartdate.h"
 #include <QDateTime>
 #include <QDialog>
 

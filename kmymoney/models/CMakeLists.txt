@@ -4,3 +4,6 @@ SET(libmodels_a_SOURCES
    )
 
 KDE4_ADD_LIBRARY(models STATIC ${libmodels_a_SOURCES})
+
+ADD_DEPENDENCIES(models kmm_settings)
+
