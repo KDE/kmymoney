@@ -38,10 +38,10 @@ SET( _HEADERS kmymoneyutils.h kmymoneyglobalsettings.h )
 # we call a macro that creates symbolic links in kmymoney/
 KMM_CREATE_LINKS( ${_HEADERS} )
 
-########### settings code (kmm_settings) STATIC ###############
-SET( kmm_settings_SRCS kmymoneyglobalsettings.cpp )
-KDE4_ADD_KCFG_FILES( kmm_settings_SRCS kmymoneysettings.kcfgc )
-KDE4_ADD_LIBRARY(kmm_settings STATIC ${kmm_settings_SRCS})
+########### settings code (kmm_config) STATIC ###############
+SET( kmm_config_SRCS kmymoneyglobalsettings.cpp )
+KDE4_ADD_KCFG_FILES( kmm_config_SRCS kmymoneysettings.kcfgc )
+KDE4_ADD_LIBRARY(kmm_config STATIC ${kmm_config_SRCS})
 
 ########### common code (kmymoney_common) STATIC ###############
 # will be linked into kmymoney, kmymoneytest, and libkmymoney.so
@@ -53,12 +53,12 @@ TARGET_LINK_LIBRARIES(kmymoney_common
 
 # must build kmymoney/transactionsortoption.h
 # from transactionsortoption.ui first
-ADD_DEPENDENCIES(kmymoney_common generate_base_ui_srcs kmm_settings)
+ADD_DEPENDENCIES(kmymoney_common generate_base_ui_srcs kmm_config)
 
 SET( kmymoney_common_LIBS
   views reports kmymoney_common
   newuserwizard newaccountwizard wizardpages
-  dialogs widgets settings converter models kmm_settings
+  dialogs widgets settings converter models kmm_config
   kmm_storage kmm_mymoney kgpgfile interfaces kmm_plugin dialogs kmm_kdchart
   ${QT_AND_KDECORE_LIBS} ${QT_QT3SUPPORT_LIBRARY} ${QT_QTSQL_LIBRARY}
   ${KDE4_KHTML_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KABC_LIBS} ${KDE4_KFILE_LIBS} ${KDE4_KDE3SUPPORT_LIBS} ${KDE4_KUTILS_LIBRARY})

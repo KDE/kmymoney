@@ -29,18 +29,18 @@ IF( KDE4_BUILD_TESTS )
 
   kde4_add_unit_test( pivottabletest TESTNAME kmymoney-pivottabletest ${pivottabletest_SRCS} )
 
-  ADD_DEPENDENCIES( pivottabletest dialogs widgets reports settings kmymoney_base kmymoney_common kmm_kdchart kmm_storage )
+  ADD_DEPENDENCIES( pivottabletest dialogs widgets reports settings kmymoney_base kmymoney_common kmm_kdchart kmm_storage kmm_config )
 
   # Q3 support for libwidgets.a (register.cpp)
-  target_link_libraries( pivottabletest reports settings kmymoney_base kmymoney_common dialogs widgets kmm_kdchart kmm_storage ${QT_QT3SUPPORT_LIBRARY} ${QT_AND_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+  target_link_libraries( pivottabletest reports settings kmymoney_base kmymoney_common dialogs widgets kmm_kdchart kmm_storage kmm_config ${QT_QT3SUPPORT_LIBRARY} ${QT_AND_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
 
   # Query Table
   set( querytabletest_SRCS querytabletest.cpp reportstestcommon.cpp ../mymoney/mymoneytestutils.cpp )
 
   kde4_add_unit_test( querytabletest TESTNAME kmymoney-querytabletest ${querytabletest_SRCS} )
-  ADD_DEPENDENCIES( querytabletest dialogs widgets reports settings kmymoney_base kmymoney_common kmm_storage )
+  ADD_DEPENDENCIES( querytabletest dialogs widgets reports settings kmymoney_base kmymoney_common kmm_storage kmm_config )
 
   # Q3 support for libwidgets.a (register.cpp)
-  target_link_libraries( querytabletest reports kmymoney_base kmymoney_common dialogs widgets kmm_storage ${QT_QT3SUPPORT_LIBRARY} ${QT_AND_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+  target_link_libraries( querytabletest reports kmymoney_base kmymoney_common dialogs widgets kmm_storage kmm_config ${QT_QT3SUPPORT_LIBRARY} ${QT_AND_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
 
 ENDIF( KDE4_BUILD_TESTS )
