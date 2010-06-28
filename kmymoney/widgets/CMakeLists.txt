@@ -135,7 +135,6 @@ SET(libwidgets_a_SOURCES
   kmymoneybriefschedule.cpp
   kmymoneycalendar.cpp
   kmymoneyforecastlistviewitem.cpp
-  kmymoneyonlinequoteconfig.cpp
   kmymoneyscheduledcalendar.cpp
   kmymoneyscheduleddatetbl.cpp
   registersearchline.cpp
@@ -148,7 +147,6 @@ SET(libwidgets_a_UI
   kschedulebriefwidget.ui kmymoneyreportcontroldecl.ui
   kmymoneyreportconfigtab1decl.ui kmymoneyreportconfigtab2decl.ui
   kmymoneyreportconfigtab3decl.ui kmymoneyreportconfigtabchartdecl.ui
-  kmymoneyonlinequoteconfigdecl.ui
   )
 
 # using uic on the above UI files DEPENDS on libkmymoney.so. If uic
