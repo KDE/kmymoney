@@ -41,7 +41,6 @@ SET(libdialogs_a_SOURCES
   konlinequoteconfigurationdlg.cpp
   kpayeereassigndlg.cpp 
   kreconciledlg.cpp
-  kreconcilelistitem.cpp 
   kreportconfigurationfilterdlg.cpp
   kselectdatabasedlg.cpp
   kselecttransactionsdlg.cpp 
