@@ -20,8 +20,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-class Q3ListViewItem;
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -50,7 +48,7 @@ public:
 protected slots:
   void slotLoadItems(void);
   void slotUpdateItemList(void);
-  void slotSelectHomePageItem(Q3ListViewItem *);
+  void slotSelectHomePageItem();
   void slotMoveUp(void);
   void slotMoveDown(void);
 

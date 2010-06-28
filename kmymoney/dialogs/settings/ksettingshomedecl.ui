@@ -115,10 +115,9 @@ Use the buttons and checkboxes to customize the layout of the home page.</string
             </widget>
           </item>
           <item row="0" column="1" rowspan="2" colspan="1">
-            <widget class="K3ListView" name="m_homePageList">
-              <property name="fullWidth">
-                <bool>true</bool>
-              </property>
+            <widget class="KListWidget" name="m_homePageList">
+              <column>
+              </column>
             </widget>
           </item>
         </layout>
@@ -197,17 +196,12 @@ Use the buttons and checkboxes to customize the layout of the home page.</string
     </layout>
   </widget>
   <layoutdefault spacing="6" margin="11"/>
-    <customwidgets>
+  <customwidgets>
     <customwidget>
-      <class>K3ListView</class>
-      <extends>Q3ListView</extends>
-      <header location="global">k3listview.h</header>
+     <class>KIntNumInput</class>
+     <extends>QWidget</extends>
+     <header>knuminput.h</header>
+     <container>1</container>
     </customwidget>
-  <customwidget>
-   <class>KIntNumInput</class>
-   <extends>QWidget</extends>
-   <header>knuminput.h</header>
-   <container>1</container>
-  </customwidget>
   </customwidgets>
 </ui>

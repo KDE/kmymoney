@@ -41,10 +41,7 @@ KSettingsHome::KSettingsHome(QWidget* parent) :
     KSettingsHomeDecl(parent),
     m_noNeedToUpdateList(false)
 {
-  m_homePageList->addColumn("");
-  m_homePageList->setSorting(-1);
-  m_homePageList->header()->hide();
-  m_homePageList->setAllColumnsShowFocus(true);
+  m_homePageList->setSortingEnabled(false);
 
   KIconLoader* il = KIconLoader::global();
   KGuiItem upButtonItem(i18nc("Move item up",  "&Up"),
@@ -64,9 +61,9 @@ KSettingsHome::KSettingsHome(QWidget* parent) :
   // connect this, so that the list gets loaded once the edit field is filled
   connect(kcfg_ItemList, SIGNAL(textChanged(const QString&)), this, SLOT(slotLoadItems()));
 
-  connect(m_homePageList, SIGNAL(selectionChanged(Q3ListViewItem*)),
-          this, SLOT(slotSelectHomePageItem(Q3ListViewItem *)));
-  connect(m_homePageList, SIGNAL(pressed(Q3ListViewItem*)), this, SLOT(slotUpdateItemList()));
+  connect(m_homePageList, SIGNAL(itemSelectionChanged()),
+          this, SLOT(slotSelectHomePageItem()));
+  connect(m_homePageList, SIGNAL(clicked(const QModelIndex &)), this, SLOT(slotUpdateItemList()));
 
   connect(m_upButton, SIGNAL(clicked()), this, SLOT(slotMoveUp()));
   connect(m_downButton, SIGNAL(clicked()), this, SLOT(slotMoveDown()));
@@ -86,12 +83,8 @@ void KSettingsHome::slotLoadItems(void)
 
   QStringList list = KMyMoneyGlobalSettings::itemList();
   QStringList::ConstIterator it;
-  int w = 0;
   m_homePageList->clear();
-  Q3CheckListItem *sel = 0;
-
-  QFontMetrics fm(KGlobalSettings::generalFont());
-  Q3CheckListItem* last = 0;
+  QListWidgetItem *sel = 0;
 
   for (it = list.constBegin(); it != list.constEnd(); ++it) {
     int idx = (*it).toInt();
@@ -100,39 +93,45 @@ void KSettingsHome::slotLoadItems(void)
       continue;
     bool enabled = idx > 0;
     if (!enabled) idx = -idx;
-    Q3CheckListItem* item = new Q3CheckListItem(m_homePageList, KMyMoneyUtils::homePageItemToString(idx), Q3CheckListItem::CheckBox);
-    if (last)
-      item->moveItem(last);
+    QListWidgetItem* item = new QListWidgetItem(m_homePageList);
+    item->setText(KMyMoneyUtils::homePageItemToString(idx));
+    item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
 
     // qDebug("Adding %s", item->text(0).toLatin1());
-    item->setOn(enabled);
-    if (item->width(fm, m_homePageList, 0) > w)
-      w = item->width(fm, m_homePageList, 0);
+    if(enabled) {
+      item->setCheckState(Qt::Checked);
+    } else {
+      item->setCheckState(Qt::Unchecked);
+    }
 
     if (sel == 0)
       sel = item;
-    last = item;
   }
 
   if (sel) {
-    m_homePageList->setSelected(sel, true);
-    slotSelectHomePageItem(sel);
+    m_homePageList->setCurrentItem(sel);
+    slotSelectHomePageItem();
   }
 }
 
 void KSettingsHome::slotUpdateItemList(void)
 {
   QString list;
-  Q3ListViewItem *it;
+  QListWidgetItem *it;
 
-  for (it = m_homePageList->firstChild(); it;) {
-    int item = KMyMoneyUtils::stringToHomePageItem(it->text(0));
-    if (!(static_cast<Q3CheckListItem*>(it)->isOn()))
+  for (it = m_homePageList->item(0); it;) {
+    int item = KMyMoneyUtils::stringToHomePageItem(it->text());
+    if (it->checkState() == Qt::Unchecked)
       item = -item;
     list += QString::number(item);
-    it = it->nextSibling();
-    if (it)
-      list += ',';
+    if(m_homePageList->count() > (m_homePageList->row(it) + 1)) {
+      it = m_homePageList->item(m_homePageList->row(it) + 1);
+      if (it) {
+        list += ',';
+      }
+    } else {
+      break;
+    }
   }
 
   // don't update the list
@@ -141,30 +140,37 @@ void KSettingsHome::slotUpdateItemList(void)
   m_noNeedToUpdateList = false;
 }
 
-void KSettingsHome::slotSelectHomePageItem(Q3ListViewItem *item)
+void KSettingsHome::slotSelectHomePageItem()
 {
-  m_upButton->setEnabled(m_homePageList->firstChild() != item);
-  m_downButton->setEnabled(item->nextSibling());
+  QListWidgetItem* item = m_homePageList->currentItem();
+  m_upButton->setEnabled(m_homePageList->item(0) != item);
+  m_downButton->setEnabled(m_homePageList->count() > (m_homePageList->row(item) + 1));
 }
 
 void KSettingsHome::slotMoveUp(void)
 {
-  Q3ListViewItem *item = m_homePageList->currentItem();
-  Q3ListViewItem *prev = item->itemAbove();
+  QListWidgetItem *item = m_homePageList->currentItem();
+  QListWidgetItem *prev = m_homePageList->item(m_homePageList->row(item) - 1);
+  int prevRow = m_homePageList->row(prev);
   if (prev) {
-    prev->moveItem(item);
-    slotSelectHomePageItem(item);
+    m_homePageList->takeItem(m_homePageList->row(item));
+    m_homePageList->insertItem(prevRow, item);
+    m_homePageList->setCurrentRow(m_homePageList->row(item));
+    slotSelectHomePageItem();
     slotUpdateItemList();
   }
 }
 
 void KSettingsHome::slotMoveDown(void)
 {
-  Q3ListViewItem *item = m_homePageList->currentItem();
-  Q3ListViewItem *next = item->nextSibling();
+  QListWidgetItem *item = m_homePageList->currentItem();
+  QListWidgetItem *next = m_homePageList->item(m_homePageList->row(item) + 1);
+  int nextRow = m_homePageList->row(next);
   if (next) {
-    item->moveItem(next);
-    slotSelectHomePageItem(item);
+    m_homePageList->takeItem(m_homePageList->row(item));
+    m_homePageList->insertItem(nextRow, item);
+    m_homePageList->setCurrentRow(m_homePageList->row(item));
+    slotSelectHomePageItem();
     slotUpdateItemList();
   }
 }
