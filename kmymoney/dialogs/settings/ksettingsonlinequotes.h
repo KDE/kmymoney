@@ -1,5 +1,5 @@
 /***************************************************************************
-                          kmymoneyonlinequoteconfig.h  -  description
+                          ksettingsonlinequotes.h
                              -------------------
     begin                : Thu Dec 30 2004
     copyright            : (C) 2004 by Thomas Baumgart
