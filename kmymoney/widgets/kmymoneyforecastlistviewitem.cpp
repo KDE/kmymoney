@@ -1,5 +1,5 @@
 /***************************************************************************
-                          kmymoneylistviewitem  -  description
+                          kmymoneyforecastlistviewitem.cpp
                              -------------------
     begin                : Sun Nov 25 2007
     copyright            : (C) 2007 by Alvaro Soliverez
