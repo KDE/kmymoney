@@ -79,11 +79,6 @@ void kMandatoryFieldGroup::add(QWidget *widget)
               SIGNAL(valueChanged(const QString&)),
               this, SLOT(changed()));
 
-    /* else if (qobject_cast<Q3ListBox*>(widget))
-       connect(qobject_cast<Q3ListBox*>(widget),
-                SIGNAL(selectionChanged()),
-                       this, SLOT(changed()));*/
-
     else if (qobject_cast<KListWidget*>(widget))
       connect(qobject_cast<KListWidget*>(widget),
               SIGNAL(itemSelectionChanged()),
@@ -156,13 +151,6 @@ void kMandatoryFieldGroup::changed(void)
       } else
         continue;
     }
-    /*   if ((qobject_cast<Q3ListBox*>(widget))) {
-         if ((qobject_cast<Q3ListBox*>(widget))->selectedItem() == 0) {
-           enable = false;
-           break;
-         } else
-           continue;
-       }*/
     if ((qobject_cast<KListWidget*>(widget))) {
       if ((qobject_cast<KListWidget*>(widget))->selectedItems().count() == 0) {
         enable = false;
