@@ -723,7 +723,6 @@ void StdTransactionEditor::createEditWidgets(void)
   connect(category, SIGNAL(createItem(const QString&, QString&)), this, SLOT(slotCreateCategory(const QString&, QString&)));
   connect(category, SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
   connect(category->splitButton(), SIGNAL(clicked()), this, SLOT(slotEditSplits()));
-  category->splitButton()->setDisabled(true);
 
   KTextEdit* memo = new KTextEdit;
   memo->setObjectName(QLatin1String("Memo"));

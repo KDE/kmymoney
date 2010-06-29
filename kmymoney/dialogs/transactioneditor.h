@@ -166,7 +166,7 @@ public slots:
     *
     * @param id of the account to be used
     */
-  void slotUpdateAccount(const QString& id);
+  virtual void slotUpdateAccount(const QString& id);
 
 protected:
   virtual void createEditWidgets(void) = 0;
