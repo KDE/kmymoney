@@ -132,6 +132,8 @@ public:
     KMyMoneyCombo::setCurrentText(txt);
   }
 
+  bool eventFilter(QObject *o, QEvent *ev);
+
 protected:
   /**
     * Reimplemented to support protected category text ("split transactions")
@@ -152,8 +154,6 @@ protected:
 
 public slots:
   virtual void slotItemSelected(const QString& id);
-  virtual void setEnabled(bool);
-  virtual void setDisabled(bool);
 
 signals:
   /**

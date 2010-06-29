@@ -85,6 +85,8 @@ KMyMoneyCategory::KMyMoneyCategory(QWidget* parent, bool splitButton) :
 
     layout->addWidget(this, 5);
     layout->addWidget(d->splitButton);
+    
+    installEventFilter(this);
   }
 
   m_completion = new kMyMoneyAccountCompletion(this);
@@ -187,21 +189,15 @@ bool KMyMoneyCategory::isSplitTransaction(void) const
   return d->isSplit;
 }
 
-void KMyMoneyCategory::setEnabled(bool enable)
+bool KMyMoneyCategory::eventFilter(QObject *o, QEvent *ev)
 {
-  if (d->recursive || !d->frame) {
-    KMyMoneyCombo::setEnabled(enable);
-
-  } else if (d->frame) {
-    d->recursive = true;
-    d->frame->setEnabled(enable);
-    d->recursive = false;
+  // forward enable/disable state to split button
+  if(o == this && ev->type() == QEvent::EnabledChange) {
+    if(d->splitButton) {
+      d->splitButton->setEnabled(isEnabled());
+    }
   }
-}
-
-void KMyMoneyCategory::setDisabled(bool disable)
-{
-  setEnabled(!disable);
+  return KMyMoneyCombo::eventFilter(o, ev);
 }
 
 KMyMoneySecurity::KMyMoneySecurity(QWidget* parent) :
