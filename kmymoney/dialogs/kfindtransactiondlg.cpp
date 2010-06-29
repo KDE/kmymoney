@@ -287,29 +287,27 @@ void KFindTransactionDlg::slotUpdateSelections(void)
   m_selectedCriteria->setText(i18n("Current selections: ") + txt);
 }
 
-bool KFindTransactionDlg::allItemsSelected(const Q3ListViewItem *item) const
+bool KFindTransactionDlg::allItemsSelected(const QTreeWidgetItem *item) const
 {
-  Q3ListViewItem* it_v;
+  QTreeWidgetItem* it_v;
 
-  for (it_v = item->firstChild(); it_v != 0; it_v = it_v->nextSibling()) {
-    if (it_v->rtti() == 1) {
-      Q3CheckListItem* it_c = static_cast<Q3CheckListItem*>(it_v);
-      if (!(it_c->isOn() && allItemsSelected(it_v)))
-        return false;
+  for (int i = 0; i < item->childCount(); ++i) {
+    it_v = item->child(i);
+    if (! (it_v->checkState(0) == Qt::Checked && allItemsSelected(it_v))) {
+      return false;
     }
   }
   return true;
 }
 
-bool KFindTransactionDlg::allItemsSelected(const Q3ListView* view) const
+bool KFindTransactionDlg::allItemsSelected(const QTreeWidget* view) const
 {
-  Q3ListViewItem* it_v;
+  QTreeWidgetItem* it_v;
 
-  for (it_v = view->firstChild(); it_v != 0; it_v = it_v->nextSibling()) {
-    if (it_v->rtti() == 1) {
-      Q3CheckListItem* it_c = static_cast<Q3CheckListItem*>(it_v);
-      if (it_c->type() == Q3CheckListItem::CheckBox) {
-        if (!(it_c->isOn() && allItemsSelected(it_v)))
+  for (int i = 0; i < view->invisibleRootItem()->childCount(); ++i) {
+    it_v = view->invisibleRootItem()->child(i);
+    if (it_v->flags() & Qt::ItemIsUserCheckable) {
+      if (! (it_v->checkState(0) == Qt::Checked && allItemsSelected(it_v))) {
           return false;
       } else {
         if (!allItemsSelected(it_v))
@@ -332,29 +330,29 @@ void KFindTransactionDlg::setupAccountsPage(void)
   connect(m_accountsView, SIGNAL(stateChanged()), this, SLOT(slotUpdateSelections()));
 }
 
-void KFindTransactionDlg::selectAllItems(Q3ListView* view, const bool state)
+void KFindTransactionDlg::selectAllItems(QTreeWidget* view, const bool state)
 {
-  Q3ListViewItem* it_v;
+  QTreeWidgetItem* it_v;
 
-  for (it_v = view->firstChild(); it_v != 0; it_v = it_v->nextSibling()) {
-    Q3CheckListItem* it_c = static_cast<Q3CheckListItem*>(it_v);
-    if (it_c->type() == Q3CheckListItem::CheckBox) {
-      it_c->setOn(state);
+  for (int i = 0; i < view->invisibleRootItem()->childCount(); ++i) {
+    it_v = view->invisibleRootItem()->child(i);
+    if (it_v->flags() & Qt::ItemIsUserCheckable) {
+      it_v->setCheckState(0, Qt::Checked);
     }
     selectAllSubItems(it_v, state);
   }
-
   slotUpdateSelections();
 }
 
-void KFindTransactionDlg::selectItems(Q3ListView* view, const QStringList& list, const bool state)
+void KFindTransactionDlg::selectItems(QTreeWidget* view, const QStringList& list, const bool state)
 {
-  Q3ListViewItem* it_v;
+  QTreeWidgetItem* it_v;
 
-  for (it_v = view->firstChild(); it_v != 0; it_v = it_v->nextSibling()) {
+  for (int i = 0; i < view->invisibleRootItem()->childCount(); ++i) {
+    it_v = view->invisibleRootItem()->child(i);
     KMyMoneyCheckListItem* it_c = static_cast<KMyMoneyCheckListItem*>(it_v);
-    if (it_c->type() == Q3CheckListItem::CheckBox && list.contains(it_c->id())) {
-      it_c->setOn(state);
+    if (it_c->flags() & Qt::ItemIsUserCheckable && list.contains(it_c->id())) {
+      it_c->setCheckState(0, state ? Qt::Checked : Qt::Unchecked);
     }
     selectSubItems(it_v, list, state);
   }
@@ -372,24 +370,26 @@ void KFindTransactionDlg::setupCategoriesPage(void)
   connect(m_categoriesView, SIGNAL(stateChanged()), this, SLOT(slotUpdateSelections()));
 }
 
-void KFindTransactionDlg::selectAllSubItems(Q3ListViewItem* item, const bool state)
+void KFindTransactionDlg::selectAllSubItems(QTreeWidgetItem* item, const bool state)
 {
-  Q3ListViewItem* it_v;
+  QTreeWidgetItem* it_v;
 
-  for (it_v = item->firstChild(); it_v != 0; it_v = it_v->nextSibling()) {
-    static_cast<Q3CheckListItem*>(it_v)->setOn(state);
+  for (int i = 0; i < item->childCount(); ++i) {
+    it_v = item->child(i);
+    it_v->setCheckState(0, state ? Qt::Checked : Qt::Unchecked);
     selectAllSubItems(it_v, state);
   }
 }
 
-void KFindTransactionDlg::selectSubItems(Q3ListViewItem* item, const QStringList& list, const bool state)
+void KFindTransactionDlg::selectSubItems(QTreeWidgetItem* item, const QStringList& list, const bool state)
 {
-  Q3ListViewItem* it_v;
+  QTreeWidgetItem* it_v;
 
-  for (it_v = item->firstChild(); it_v != 0; it_v = it_v->nextSibling()) {
+  for (int i = 0; i < item->childCount(); ++i) {
+    it_v = item->child(i);
     KMyMoneyCheckListItem* it_c = static_cast<KMyMoneyCheckListItem*>(it_v);
     if (list.contains(it_c->id()))
-      it_c->setOn(state);
+      it_c->setCheckState(0, state ? Qt::Checked : Qt::Unchecked);
     selectSubItems(it_v, list, state);
   }
 }
@@ -474,11 +474,12 @@ void KFindTransactionDlg::slotAmountRangeSelected(void)
 
 void KFindTransactionDlg::setupPayeesPage(void)
 {
-  m_payeesView->setSelectionMode(Q3ListView::Single);
+  m_payeesView->setSelectionMode(QAbstractItemView::SingleSelection);
   m_payeesView->header()->hide();
+  m_payeesView->setAlternatingRowColors(true);
 
   loadPayees();
-  m_emptyPayeesButton->setChecked(false);
+  m_emptyPayeesButton->setCheckState(Qt::Unchecked);
 
   connect(m_allPayeesButton, SIGNAL(clicked()), this, SLOT(slotSelectAllPayees()));
   connect(m_clearPayeesButton, SIGNAL(clicked()), this, SLOT(slotDeselectAllPayees()));
@@ -496,7 +497,7 @@ void KFindTransactionDlg::loadPayees(void)
   for (it_l = list.begin(); it_l != list.end(); ++it_l) {
     KMyMoneyCheckListItem* item = new KMyMoneyCheckListItem(m_payeesView, (*it_l).name(), QString(), (*it_l).id());
     connect(item, SIGNAL(stateChanged(bool)), this, SLOT(slotUpdateSelections()));
-    item->setOn(true);
+    item->setCheckState(0, Qt::Checked);
   }
 }
 void KFindTransactionDlg::slotSelectAllPayees(void)
@@ -556,15 +557,16 @@ void KFindTransactionDlg::addItemToFilter(const opTypeE op, const QString& id)
   }
 }
 
-void KFindTransactionDlg::scanCheckListItems(const Q3ListViewItem* item, const opTypeE op)
+void KFindTransactionDlg::scanCheckListItems(const QTreeWidgetItem* item, const opTypeE op)
 {
-  Q3ListViewItem* it_v;
+  QTreeWidgetItem* it_v;
 
-  for (it_v = item->firstChild(); it_v != 0; it_v = it_v->nextSibling()) {
-    if (it_v->rtti() == 1) {
-      KMyMoneyCheckListItem* it_c = static_cast<KMyMoneyCheckListItem*>(it_v);
-      if (it_c->type() == Q3CheckListItem::CheckBox) {
-        if (it_c->isOn())
+  for (int i = 0; i < item->childCount(); ++i) {
+    it_v = item->child(i);
+    KMyMoneyCheckListItem* it_c = static_cast<KMyMoneyCheckListItem*>(it_v);
+    if (it_c) {
+      if (it_c->flags() & Qt::ItemIsUserCheckable) {
+        if (it_c->checkState(0) & Qt::Checked)
           addItemToFilter(op, (*it_c).id());
       }
       scanCheckListItems(it_v, op);
@@ -572,15 +574,16 @@ void KFindTransactionDlg::scanCheckListItems(const Q3ListViewItem* item, const o
   }
 }
 
-void KFindTransactionDlg::scanCheckListItems(const Q3ListView* view, const opTypeE op)
+void KFindTransactionDlg::scanCheckListItems(const QTreeWidget* view, const opTypeE op)
 {
-  Q3ListViewItem* it_v;
+  QTreeWidgetItem* it_v;
 
-  for (it_v = view->firstChild(); it_v != 0; it_v = it_v->nextSibling()) {
-    if (it_v->rtti() == 1) {
-      KMyMoneyCheckListItem* it_c = static_cast<KMyMoneyCheckListItem*>(it_v);
-      if (it_c->type() == Q3CheckListItem::CheckBox) {
-        if (it_c->isOn())
+  for (int i = 0; i < view->invisibleRootItem()->childCount(); ++i) {
+    it_v = view->invisibleRootItem()->child(i);
+    KMyMoneyCheckListItem* it_c = static_cast<KMyMoneyCheckListItem*>(it_v);
+    if (it_c) {
+      if (it_c->flags() == Qt::ItemIsUserCheckable) {
+        if (it_c->checkState(0) & Qt::Checked)
           addItemToFilter(op, (*it_c).id());
       }
       scanCheckListItems(it_v, op);

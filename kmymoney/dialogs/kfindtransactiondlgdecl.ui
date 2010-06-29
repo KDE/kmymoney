@@ -392,7 +392,10 @@
                             <number>6</number>
                           </property>
                           <item>
-                            <widget class="K3ListView" name="m_payeesView">
+                            <widget class="QTreeWidget" name="m_payeesView">
+                              <property name="rootIsDecorated">
+                                <bool>false</bool>
+                              </property>
                               <column>
                                 <property name="text">
                                   <string>Payee</string>
@@ -926,11 +929,6 @@
         <verdata>5</verdata>
       </sizepolicy>
       <pixmap>image0</pixmap>
-    </customwidget>
-    <customwidget>
-      <class>K3ListView</class>
-      <extends>Q3ListView</extends>
-      <header location="global">k3listview.h</header>
     </customwidget>
     <customwidget>
       <class>KComboBox</class>

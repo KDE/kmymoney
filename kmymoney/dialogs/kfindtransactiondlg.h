@@ -32,14 +32,14 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneyutils.h>
-#include <mymoneytransactionfilter.h>
+#include "mymoneyutils.h"
+#include "mymoneytransactionfilter.h"
 
 #include "ui_kfindtransactiondlgdecl.h"
 #include "ui_ksortoptiondlg.h"
 
-class Q3ListView;
-class Q3ListViewItem;
+class QTreeWidget;
+class QTreeWidgetItem;
 
 /**
   * @author Thomas Baumgart
@@ -172,10 +172,10 @@ protected:
 
   void setupFilter(void);
 
-  void selectAllItems(Q3ListView* view, const bool state);
-  void selectAllSubItems(Q3ListViewItem* item, const bool state);
-  void selectItems(Q3ListView* view, const QStringList& list, const bool state);
-  void selectSubItems(Q3ListViewItem* item, const QStringList& list, const bool state);
+  void selectAllItems(QTreeWidget* view, const bool state);
+  void selectAllSubItems(QTreeWidgetItem* item, const bool state);
+  void selectItems(QTreeWidget* view, const QStringList& list, const bool state);
+  void selectSubItems(QTreeWidgetItem* item, const QStringList& list, const bool state);
 
   /**
     * This method loads the m_payeesView with the payees name
@@ -199,11 +199,11 @@ protected:
     *
     * @note If the view contains no items the method returns @p true.
     */
-  bool allItemsSelected(const Q3ListView* view) const;
-  bool allItemsSelected(const Q3ListViewItem *item) const;
+  bool allItemsSelected(const QTreeWidget* view) const;
+  bool allItemsSelected(const QTreeWidgetItem *item) const;
 
-  void scanCheckListItems(const Q3ListView* view, const opTypeE op);
-  void scanCheckListItems(const Q3ListViewItem* item, const opTypeE op);
+  void scanCheckListItems(const QTreeWidget* view, const opTypeE op);
+  void scanCheckListItems(const QTreeWidgetItem* item, const opTypeE op);
   void addItemToFilter(const opTypeE op, const QString& id);
 
 protected:

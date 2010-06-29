@@ -11,7 +11,7 @@ SET(kmymoney_STAT_HEADERS
   kmymoneyaccounttree.h kmymoneycategory.h kmymoneychecklistitem.h
   kmymoneycombo.h kmymoneymvccombo.h kmymoneycompletion.h
   kmymoneycurrencyselector.h  kmymoneydateinput.h kmymoneyedit.h
-  kmymoneylineedit.h kmymoneylistviewitem.h kmymoneyselector.h
+  kmymoneylineedit.h kmymoneyselector.h
   kmymoneytitlelabel.h kmymoneywizard.h register.h registeritem.h
   scheduledtransaction.h selectedtransaction.h stdtransactiondownloaded.h
   stdtransactionmatched.h transactioneditorcontainer.h
@@ -51,7 +51,6 @@ SET(_uncritial_common_sources
   kmymoneydatetbl.cpp
   kmymoneyedit.cpp
   kmymoneylineedit.cpp
-  kmymoneylistviewitem.cpp
   kmymoneymvccombo.cpp
   kmymoneyselector.cpp
   kmymoneytitlelabel.cpp
