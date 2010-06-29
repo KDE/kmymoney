@@ -162,8 +162,11 @@ KPayeesView::KPayeesView(QWidget *parent) :
   m_register->setupRegister(MyMoneyAccount(), cols);
   m_register->setSelectionMode(QTableWidget::SingleSelection);
   m_register->setDetailsColumnType(KMyMoneyRegister::AccountFirst);
+  m_register->hide();
+  m_balanceLabel->hide();
 
   connect(m_payeesList, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(slotSelectPayee()));
+  connect(m_payeesList, SIGNAL(itemActivated(QListWidgetItem*)), this, SLOT(slotSelectPayee()));
   connect(m_payeesList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(slotStartRename(QListWidgetItem*)));
   connect(m_payeesList, SIGNAL(itemChanged(QListWidgetItem*)), this, SLOT(slotRenamePayee(QListWidgetItem*)));
 
@@ -374,6 +377,8 @@ void KPayeesView::slotSelectPayee(void)
 
   if (payeesList.isEmpty()) {
     m_tabWidget->setEnabled(false); // disable tab widget
+    m_register->hide();
+    m_balanceLabel->hide();
     clearItemData();
     m_payee = MyMoneyPayee();
     return; // make sure we don't access an undefined payee
@@ -382,6 +387,8 @@ void KPayeesView::slotSelectPayee(void)
   // if we have multiple payees selected, clear and disable the payee information
   if (payeesList.count() > 1) {
     m_tabWidget->setEnabled(false); // disable tab widget
+    m_register->hide();
+    m_balanceLabel->hide();
     clearItemData();
     // disable renaming in all listviewitem
     for (int i = 0; i < m_payeesList->count(); ++i)
@@ -390,6 +397,8 @@ void KPayeesView::slotSelectPayee(void)
   }
   // otherwise we have just one selected, enable payee information widget
   m_tabWidget->setEnabled(true);
+  m_register->show();
+  m_balanceLabel->show();
   // enable renaming in all listviewitem
   for (int i = 0; i < m_payeesList->count(); ++i)
     m_payeesList->item(i)->setFlags(Qt::ItemIsEditable | Qt::ItemIsSelectable | Qt::ItemIsEnabled);
