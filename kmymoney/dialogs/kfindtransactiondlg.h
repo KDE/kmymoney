@@ -46,7 +46,7 @@ class QTreeWidgetItem;
   */
 
 
-class KSortOptionDlg : public QDialog, public Ui::KSortOptionDlg
+class KSortOptionDlg : public KDialog, public Ui::KSortOptionDlg
 {
 public:
   KSortOptionDlg(QWidget *parent);
@@ -58,11 +58,12 @@ public:
 
 
 
-class KFindTransactionDlgDecl : public QDialog, public Ui::KFindTransactionDlgDecl
+class KFindTransactionDlgDecl : public KDialog, public Ui::KFindTransactionDlgDecl
 {
 public:
-  KFindTransactionDlgDecl(QWidget *parent) : QDialog(parent) {
+  KFindTransactionDlgDecl(QWidget *parent) : KDialog(parent) {
     setupUi(this);
+    setMainWidget(m_tabWidget);
   }
 };
 
@@ -151,10 +152,12 @@ signals:
   void transactionSelected(const QString& accountId, const QString& transactionId);
 
   /**
-    * This signal is sent out when no selection has been made. It is
+    * This signal is sent out when a selection has been made. It is
     * used to control the state of the Search button.
+    * The Search button is only active when a selection has been made
+    * (i.e. notEmpty == true)
     */
-  void selectionEmpty(bool);
+  void selectionNotEmpty(bool);
 
 protected:
   enum opTypeE {

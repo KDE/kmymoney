@@ -60,7 +60,7 @@
 
 
 KSortOptionDlg::KSortOptionDlg(QWidget *parent)
-    : QDialog(parent)
+    : KDialog(parent)
 {
   setupUi(this);
   init();
@@ -68,9 +68,7 @@ KSortOptionDlg::KSortOptionDlg(QWidget *parent)
 
 void KSortOptionDlg::init()
 {
-  m_okButton->setGuiItem(KStandardGuiItem::ok());
-  m_cancelButton->setGuiItem(KStandardGuiItem::cancel());
-  m_helpButton->setGuiItem(KStandardGuiItem::help());
+//  setMainWidget(m_tabWidget);
 }
 
 void KSortOptionDlg::setSortOption(const QString& option, const QString& def)
@@ -145,15 +143,17 @@ KFindTransactionDlg::KFindTransactionDlg(QWidget *parent) :
   slotUpdateSelections();
 
   // setup the connections
-  connect(m_searchButton, SIGNAL(clicked()), this, SLOT(slotSearch()));
-  connect(m_resetButton, SIGNAL(clicked()), this, SLOT(slotReset()));
-  connect(m_resetButton, SIGNAL(clicked()), m_accountsView, SLOT(slotSelectAllAccounts()));
-  connect(m_resetButton, SIGNAL(clicked()), m_categoriesView, SLOT(slotSelectAllAccounts()));
-  connect(m_closeButton, SIGNAL(clicked()), this, SLOT(deleteLater()));
-  connect(m_helpButton, SIGNAL(clicked()), this, SLOT(slotShowHelp()));
+  connect(this, SIGNAL(applyClicked()), this, SLOT(slotSearch()));
+  connect(this, SIGNAL(resetClicked()), this, SLOT(slotReset()));
+  connect(this, SIGNAL(resetClicked()), m_accountsView, SLOT(slotSelectAllAccounts()));
+  connect(this, SIGNAL(resetClicked()), m_categoriesView, SLOT(slotSelectAllAccounts()));
+  connect(this, SIGNAL(closeClicked()), this, SLOT(deleteLater()));
+  connect(this, SIGNAL(helpClicked()), this, SLOT(slotShowHelp()));
 
   // only allow searches when a selection has been made
-  connect(this, SIGNAL(selectionEmpty(bool)), m_searchButton, SLOT(setDisabled(bool)));
+  enableButtonApply(false);
+  setButtonText(KDialog::Apply, i18n("&Find"));
+  connect(this, SIGNAL(selectionNotEmpty(bool)), this, SLOT(enableButtonApply(bool)));
 
   // get signal about engine changes
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotRefreshView()));
@@ -279,7 +279,7 @@ void KFindTransactionDlg::slotUpdateSelections(void)
   }
 
   // disable the search button if no selection is made
-  emit selectionEmpty(txt.isEmpty());
+  emit selectionNotEmpty(!txt.isEmpty());
 
   if (txt.isEmpty()) {
     txt = i18nc("No selection", "(None)");

@@ -85,14 +85,9 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
   // Rework the buttons
   //
 
-  // the Ok button is always enabled
-  disconnect(SIGNAL(selectionEmpty(bool)));
-  m_searchButton->setGuiItem(KStandardGuiItem::ok());
-  m_searchButton->setEnabled(true);
-
-  // reconnect the close button
-  m_closeButton->disconnect();
-  connect(m_closeButton, SIGNAL(clicked()), this, SLOT(reject()));
+  // the Apply button is always enabled
+  disconnect(SIGNAL(selectionNotEmpty(bool)));
+  enableButtonApply(true);
 
   //
   // Add new tabs
