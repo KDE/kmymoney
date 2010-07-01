@@ -31,6 +31,7 @@
 #include <QRegExp>
 #include <QByteArray>
 #include <QList>
+#include <QApplication>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -39,6 +40,7 @@
 #include <kdebug.h>
 #include <kcombobox.h>
 #include <kpassworddialog.h>
+#include <KWallet/Wallet>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -48,6 +50,8 @@
 #include <mymoneyinstitution.h>
 #include <mymoneykeyvaluecontainer.h>
 #include <kdeversion.h>
+
+using KWallet::Wallet;
 
 OfxHeaderVersion::OfxHeaderVersion(KComboBox* combo, const QString& headerVersion) :
     m_combo(combo)
@@ -155,7 +159,21 @@ QString MyMoneyOfxConnector::username(void) const
 }
 QString MyMoneyOfxConnector::password(void) const
 {
-  QString pwd = m_fiSettings.value("password");
+  // if we don't find a password in the wallet, we use the old method
+  // and retrieve it from the settings stored in the KMyMoney data storage.
+  // in case we don't have a password on file, we ask the user
+  QString key = OFX_PASSWORD_KEY(m_fiSettings.value("url"), m_fiSettings.value("uniqueId"));
+  QString pwd;
+  if (Wallet::keyDoesNotExist(Wallet::NetworkWallet(), Wallet::PasswordFolder(), key)) {
+    pwd = m_fiSettings.value("password");
+  } else {
+    Wallet *wallet = Wallet::openWallet(Wallet::NetworkWallet(), qApp->activeWindow()->winId(), Wallet::Synchronous);
+    if (wallet) {
+      wallet->setFolder(Wallet::PasswordFolder());
+      wallet->readPassword(key, pwd);
+    }
+  }
+
   if (pwd.isEmpty()) {
     KPasswordDialog dlg(0);
     dlg.setPrompt(i18n("Enter your password"));
