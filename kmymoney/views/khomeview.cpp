@@ -1462,7 +1462,7 @@ void KHomeView::doForecast(void)
 
   //reinitialize the object
   d->m_forecast = KMyMoneyGlobalSettings::forecast();
-  
+
   //If forecastDays lower than accountsCycle, adjust to the first cycle
   if (d->m_forecast.accountsCycle() > d->m_forecast.forecastDays())
     d->m_forecast.setForecastDays(d->m_forecast.accountsCycle());

@@ -85,7 +85,7 @@ KMyMoneyCategory::KMyMoneyCategory(QWidget* parent, bool splitButton) :
 
     layout->addWidget(this, 5);
     layout->addWidget(d->splitButton);
-    
+
     installEventFilter(this);
   }
 
@@ -192,8 +192,8 @@ bool KMyMoneyCategory::isSplitTransaction(void) const
 bool KMyMoneyCategory::eventFilter(QObject *o, QEvent *ev)
 {
   // forward enable/disable state to split button
-  if(o == this && ev->type() == QEvent::EnabledChange) {
-    if(d->splitButton) {
+  if (o == this && ev->type() == QEvent::EnabledChange) {
+    if (d->splitButton) {
       d->splitButton->setEnabled(isEnabled());
     }
   }

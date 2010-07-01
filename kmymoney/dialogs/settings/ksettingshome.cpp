@@ -98,7 +98,7 @@ void KSettingsHome::slotLoadItems(void)
     item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
 
     // qDebug("Adding %s", item->text(0).toLatin1());
-    if(enabled) {
+    if (enabled) {
       item->setCheckState(Qt::Checked);
     } else {
       item->setCheckState(Qt::Unchecked);
@@ -124,7 +124,7 @@ void KSettingsHome::slotUpdateItemList(void)
     if (it->checkState() == Qt::Unchecked)
       item = -item;
     list += QString::number(item);
-    if(m_homePageList->count() > (m_homePageList->row(it) + 1)) {
+    if (m_homePageList->count() > (m_homePageList->row(it) + 1)) {
       it = m_homePageList->item(m_homePageList->row(it) + 1);
       if (it) {
         list += ',';

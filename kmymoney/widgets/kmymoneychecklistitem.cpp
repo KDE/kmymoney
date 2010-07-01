@@ -33,7 +33,7 @@ KMyMoneyCheckListItem::KMyMoneyCheckListItem(QTreeWidget* parent, const QString&
     m_key(key),
     m_id(id)
 {
-  setCheckState(0,Qt::Checked);
+  setCheckState(0, Qt::Checked);
   if (key.isEmpty())
     m_key = txt;
 }
@@ -43,7 +43,7 @@ KMyMoneyCheckListItem::KMyMoneyCheckListItem(QTreeWidgetItem* parent, const QStr
     m_key(key),
     m_id(id)
 {
-  setCheckState(0,Qt::Checked);
+  setCheckState(0, Qt::Checked);
   if (key.isEmpty())
     m_key = txt;
 }

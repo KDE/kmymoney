@@ -293,7 +293,7 @@ bool KFindTransactionDlg::allItemsSelected(const QTreeWidgetItem *item) const
 
   for (int i = 0; i < item->childCount(); ++i) {
     it_v = item->child(i);
-    if (! (it_v->checkState(0) == Qt::Checked && allItemsSelected(it_v))) {
+    if (!(it_v->checkState(0) == Qt::Checked && allItemsSelected(it_v))) {
       return false;
     }
   }
@@ -307,8 +307,8 @@ bool KFindTransactionDlg::allItemsSelected(const QTreeWidget* view) const
   for (int i = 0; i < view->invisibleRootItem()->childCount(); ++i) {
     it_v = view->invisibleRootItem()->child(i);
     if (it_v->flags() & Qt::ItemIsUserCheckable) {
-      if (! (it_v->checkState(0) == Qt::Checked && allItemsSelected(it_v))) {
-          return false;
+      if (!(it_v->checkState(0) == Qt::Checked && allItemsSelected(it_v))) {
+        return false;
       } else {
         if (!allItemsSelected(it_v))
           return false;

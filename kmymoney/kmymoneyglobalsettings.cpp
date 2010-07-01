@@ -116,7 +116,7 @@ void KMyMoneyGlobalSettings::setSubstringSearch(QWidget* w)
 MyMoneyForecast KMyMoneyGlobalSettings::forecast(void)
 {
   MyMoneyForecast forecast;
-  
+
   // override object defaults with those of the application
   forecast.setForecastCycles(KMyMoneyGlobalSettings::forecastCycles());
   forecast.setAccountsCycle(KMyMoneyGlobalSettings::forecastAccountCycle());

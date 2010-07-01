@@ -44,12 +44,12 @@ public:
   static QStringList itemList(void);
   static int firstFiscalMonth(void);
   static int firstFiscalDay(void);
-  
+
   /**
     * Construct a MyMoneyForecast object setup with all KMyMoneySettings
     */
   static MyMoneyForecast forecast(void);
-  
+
   /**
     * Call the setSubstringSearch() method of all children of
     * @p w that are of type KMyMoneyMVCCombo and pass the inverse return
