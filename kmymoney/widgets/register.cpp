@@ -536,7 +536,6 @@ bool Register::eventFilter(QObject* o, QEvent* e)
 void Register::setupRegister(const MyMoneyAccount& account, const QList<Column>& cols)
 {
   m_account = account;
-  bool enabled = updatesEnabled();
   setUpdatesEnabled(false);
 
   for (int i = 0; i < MaxColumns; ++i)
@@ -554,13 +553,12 @@ void Register::setupRegister(const MyMoneyAccount& account, const QList<Column>&
       m_lastCol = *it_c;
   }
 
-  setUpdatesEnabled(enabled);
+  setUpdatesEnabled(true);
 }
 
 void Register::setupRegister(const MyMoneyAccount& account, bool showAccountColumn)
 {
   m_account = account;
-  bool enabled = updatesEnabled();
   setUpdatesEnabled(false);
 
   for (int i = 0; i < MaxColumns; ++i)
@@ -570,7 +568,7 @@ void Register::setupRegister(const MyMoneyAccount& account, bool showAccountColu
   horizontalHeaderItem(DepositColumn)->setText(i18nc("Deposit into account", "Deposit"));
 
   if (account.id().isEmpty()) {
-    setUpdatesEnabled(enabled);
+    setUpdatesEnabled(true);
     return;
   }
 
@@ -672,7 +670,7 @@ void Register::setupRegister(const MyMoneyAccount& account, bool showAccountColu
       break;
   }
 
-  setUpdatesEnabled(enabled);
+  setUpdatesEnabled(true);
 }
 
 bool Register::focusNextPrevChild(bool next)
@@ -958,17 +956,11 @@ void Register::updateRegister(bool forceUpdateRowHeight)
     bool needUpdateHeaders = (QTableWidget::rowCount() != rowCount) | forceUpdateRowHeight;
 
     // setup QTable.  Make sure to suppress screen updates for now
-    bool enabled = updatesEnabled();
-    setUpdatesEnabled(false);
     setRowCount(rowCount);
 
     // if we need to update the headers, we do it now for all rows
     // again we make sure to suppress screen updates
     if (needUpdateHeaders) {
-      // int height = rowHeightHint();
-
-      verticalHeader()->setUpdatesEnabled(false);
-
       for (int i = 0; i < rowCount; ++i) {
         RegisterItem* item = itemAtRow(i);
         if (item->isVisible()) {
@@ -980,8 +972,6 @@ void Register::updateRegister(bool forceUpdateRowHeight)
       }
       verticalHeader()->setUpdatesEnabled(true);
     }
-
-    setUpdatesEnabled(enabled);
 
     // force resizeing of the columns if necessary
     if (m_needInitialColumnResize) {
@@ -1634,10 +1624,9 @@ void Register::slotEnsureItemVisible(void)
     return;
 
   // make sure to catch latest changes
-  bool enabled = updatesEnabled();
   setUpdatesEnabled(false);
   updateRegister();
-  setUpdatesEnabled(enabled);
+  setUpdatesEnabled(true);
   scrollTo(model()->index(m_ensureVisibleItem->startRow(), DetailColumn));
   scrollTo(model()->index(m_ensureVisibleItem->startRow() + m_ensureVisibleItem->numRowsRegister(), DetailColumn));
 }
