@@ -29,6 +29,7 @@
 #include <QPushButton>
 #include <QRadioButton>
 #include <QSpinBox>
+#include <QApplication>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -105,7 +106,7 @@ KOnlineBankingStatus::KOnlineBankingStatus(const MyMoneyAccount& acc, QWidget *p
   if (Wallet::keyDoesNotExist(Wallet::NetworkWallet(), Wallet::PasswordFolder(), key)) {
     pwd = settings.value("password");
   } else {
-    Wallet *wallet = Wallet::openWallet(Wallet::NetworkWallet(), winId(), Wallet::Synchronous);
+    Wallet *wallet = Wallet::openWallet(Wallet::NetworkWallet(), qApp->activeWindow()->winId(), Wallet::Synchronous);
     if (wallet) {
       wallet->setFolder(Wallet::PasswordFolder());
       wallet->readPassword(key, pwd);
