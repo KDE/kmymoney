@@ -537,10 +537,10 @@ protected:
     * The height to scroll is determined by visibleHeight()
     *
     * @param key Qt::Page_Up or Qt::Page_Down depending on the direction to scroll
-    * @param state state of Qt::ShiftModifier, Qt::ControlModifier, Qt::AltModifier and
+    * @param modifiers state of Qt::ShiftModifier, Qt::ControlModifier, Qt::AltModifier and
     *              Qt::MetaModifier.
     */
-  void scrollPage(int key, Qt::ButtonState state);
+  void scrollPage(int key, Qt::KeyboardModifiers modifiers);
 
   /**
     * This method determines the pointer to a RegisterItem
@@ -641,7 +641,8 @@ private:
   bool                         m_listsDirty;
   bool                         m_ignoreNextButtonRelease;
   bool                         m_needInitialColumnResize;
-  Qt::ButtonState              m_buttonState;
+  Qt::MouseButtons             m_mouseButton;
+  Qt::KeyboardModifiers        m_modifiers;
   Column                       m_lastCol;
   QList<TransactionSortField>  m_sortOrder;
   QRect                        m_lastRepaintRect;

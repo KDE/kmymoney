@@ -39,6 +39,7 @@
 #include <QPaintEvent>
 #include <QHeaderView>
 #include <QStyleOptionViewItem>
+#include <QApplication>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -463,7 +464,8 @@ Register::Register(QWidget *parent) :
     m_listsDirty(false),
     m_ignoreNextButtonRelease(false),
     m_needInitialColumnResize(false),
-    m_buttonState(Qt::ButtonState(0)),
+    m_mouseButton(Qt::MouseButtons(Qt::NoButton)),
+    m_modifiers(Qt::KeyboardModifiers(Qt::NoModifier)),
     m_detailsColumnType(PayeeFirst)
 {
   m_itemDelegate = new RegisterItemDelegate(this);
@@ -1386,8 +1388,8 @@ void Register::mouseReleaseEvent(QMouseEvent *e)
     m_ignoreNextButtonRelease = false;
     return;
   }
-
-  m_buttonState = e->state();
+  m_mouseButton = e->button();
+  m_modifiers = QApplication::keyboardModifiers();
   QTableWidget::mouseReleaseEvent(e);
 }
 
@@ -1475,10 +1477,10 @@ void Register::selectItem(RegisterItem* item, bool dontChangeSelections)
   if (!item)
     return;
 
-  // kDebug(2) << "Register::selectItem(" << item << "): type is " << typeid(*item).name();
-
-  Qt::ButtonState buttonState = m_buttonState;
-  m_buttonState = Qt::NoButton;
+  Qt::MouseButtons buttonState = m_mouseButton;
+  Qt::KeyboardModifiers modifiers = m_modifiers;
+  m_mouseButton = Qt::NoButton;
+  m_modifiers = Qt::NoModifier;
 
   if (m_selectionMode == NoSelection)
     return;
@@ -1495,7 +1497,7 @@ void Register::selectItem(RegisterItem* item, bool dontChangeSelections)
     }
 
     if (buttonState & Qt::LeftButton) {
-      if (!(buttonState & (Qt::ShiftModifier | Qt::ControlModifier))
+      if (!(modifiers & (Qt::ShiftModifier | Qt::ControlModifier))
           || (m_selectAnchor == 0)) {
         if ((cnt != 1) || ((cnt == 1) && !item->isSelected())) {
           emit aboutToSelectItem(item, okToSelect);
@@ -1512,7 +1514,7 @@ void Register::selectItem(RegisterItem* item, bool dontChangeSelections)
       }
 
       if (m_selectionMode == MultiSelection) {
-        switch (buttonState & (Qt::ShiftModifier | Qt::ControlModifier)) {
+        switch (modifiers & (Qt::ShiftModifier | Qt::ControlModifier)) {
           case Qt::ControlModifier:
             okToSelect = sameEntryType;
             if (typeid(*item) == typeid(StdTransactionScheduled))
@@ -1549,7 +1551,7 @@ void Register::selectItem(RegisterItem* item, bool dontChangeSelections)
       //
       // a) single transaction is selected
       // b) multiple transactions are selected and the one to be selected is not
-      if (!(buttonState & (Qt::ShiftModifier | Qt::ControlModifier))) {
+      if (!(modifiers & (Qt::ShiftModifier | Qt::ControlModifier))) {
         if ((cnt > 0) && (!item->isSelected())) {
           okToSelect = sameEntryType;
           emit aboutToSelectItem(item, okToSelect);
@@ -1791,7 +1793,7 @@ void Register::selectRange(RegisterItem* from, RegisterItem* to, bool invert, bo
   }
 }
 
-void Register::scrollPage(int key, Qt::ButtonState state)
+void Register::scrollPage(int key, Qt::KeyboardModifiers modifiers)
 {
   RegisterItem* oldFocusItem = m_focusItem;
 
@@ -1863,13 +1865,13 @@ void Register::scrollPage(int key, Qt::ButtonState state)
     }
   }
 
-  if (!(state & Qt::ShiftModifier) || !m_selectAnchor)
+  if (!(modifiers & Qt::ShiftModifier) || !m_selectAnchor)
     m_selectAnchor = item;
 
   setFocusItem(item);
 
   if (item->isSelectable()) {
-    handleItemChange(oldFocusItem, state & Qt::ShiftModifier, state & Qt::ControlModifier);
+    handleItemChange(oldFocusItem, modifiers & Qt::ShiftModifier, modifiers & Qt::ControlModifier);
   }
 
   if (m_focusItem && !m_focusItem->isSelected() && m_selectionMode == SingleSelection)
@@ -1883,9 +1885,9 @@ void Register::keyPressEvent(QKeyEvent* ev)
     case Qt::Key_Space:
       if (m_selectionMode != NoSelection) {
         // get the state out of the event ...
-        m_buttonState = ev->state();
+        m_modifiers = ev->modifiers();
         // ... and pretend that we have pressed the left mouse button ;)
-        m_buttonState = static_cast<Qt::ButtonState>(m_buttonState | Qt::LeftButton);
+        m_mouseButton = Qt::LeftButton;
         selectItem(m_focusItem);
       }
       break;
@@ -1896,7 +1898,7 @@ void Register::keyPressEvent(QKeyEvent* ev)
     case Qt::Key_End:
     case Qt::Key_Down:
     case Qt::Key_Up:
-      scrollPage(ev->key(), ev->state());
+      scrollPage(ev->key(), ev->modifiers());
       break;
 
     default:
