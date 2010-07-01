@@ -46,6 +46,7 @@
 class KMyMoneySecuritySelector : public KComboBox
 {
   Q_OBJECT
+  Q_PROPERTY(MyMoneySecurity security READ security WRITE setSecurity DESIGNABLE false STORED false)
 public:
   enum displayItemE {
     Symbol = 0,
