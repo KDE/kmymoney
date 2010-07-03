@@ -56,7 +56,7 @@ IF( KDE4_BUILD_TESTS )
   kde4_add_unit_test( mymoneyaccounttest TESTNAME kmymoney-mymoneyaccounttest ${mymoneyaccounttest_SRCS} )
   ADD_DEPENDENCIES( mymoneyaccounttest kmm_mymoney )
 
-  target_link_libraries( mymoneyaccounttest kmm_mymoney ${QT_AND_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+  target_link_libraries( mymoneyaccounttest kmm_mymoney ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY} )
 
   # MyMoneyException
   set( mymoneyexceptiontest_SRCS mymoneyexceptiontest.cpp )
@@ -64,7 +64,7 @@ IF( KDE4_BUILD_TESTS )
   kde4_add_unit_test( mymoneyexceptiontest TESTNAME kmymoney-mymoneyexceptiontest ${mymoneyexceptiontest_SRCS} )
   ADD_DEPENDENCIES( mymoneyexceptiontest kmm_mymoney )
 
-  target_link_libraries( mymoneyexceptiontest kmm_mymoney ${QT_AND_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+  target_link_libraries( mymoneyexceptiontest kmm_mymoney ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY} )
 
   # MyMoneyFile
   set( mymoneyfiletest_SRCS mymoneyfiletest.cpp mymoneytestutils.cpp )
@@ -72,7 +72,7 @@ IF( KDE4_BUILD_TESTS )
   kde4_add_unit_test( mymoneyfiletest TESTNAME kmymoney-mymoneyfiletest ${mymoneyfiletest_SRCS} )
   ADD_DEPENDENCIES( mymoneyfiletest kmm_mymoney kmm_storage )
 
-  target_link_libraries( mymoneyfiletest kmm_mymoney kmm_storage ${QT_AND_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+  target_link_libraries( mymoneyfiletest kmm_mymoney kmm_storage ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY} )
 
   # MyMoneyFinancialCalculatorTest
   set( mymoneyfinancialcalculatortest_SRCS mymoneyfinancialcalculatortest.cpp mymoneytestutils.cpp )
@@ -80,7 +80,7 @@ IF( KDE4_BUILD_TESTS )
   kde4_add_unit_test( mymoneyfinancialcalculatortest TESTNAME kmymoney-mymoneyfinancialcalculatortest ${mymoneyfinancialcalculatortest_SRCS} )
   ADD_DEPENDENCIES( mymoneyfinancialcalculatortest kmm_mymoney kmm_storage )
 
-  target_link_libraries( mymoneyfinancialcalculatortest kmm_mymoney kmm_storage ${QT_AND_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+  target_link_libraries( mymoneyfinancialcalculatortest kmm_mymoney kmm_storage ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY} )
 
   # MyMoneyForecast
   set( mymoneyforecasttest_SRCS mymoneyforecasttest.cpp mymoneytestutils.cpp ../reports/reportstestcommon.cpp )
@@ -88,7 +88,7 @@ IF( KDE4_BUILD_TESTS )
   kde4_add_unit_test( mymoneyforecasttest TESTNAME kmymoney-mymoneyforecasttest ${mymoneyforecasttest_SRCS} )
   ADD_DEPENDENCIES( mymoneyforecasttest kmm_mymoney kmm_storage )
 
-  target_link_libraries( mymoneyforecasttest kmm_mymoney kmm_storage ${QT_AND_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+  target_link_libraries( mymoneyforecasttest kmm_mymoney kmm_storage ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY} )
 
   # MyMoneyInstitution
   set( mymoneyinstitutiontest_SRCS mymoneyinstitutiontest.cpp )
@@ -96,7 +96,7 @@ IF( KDE4_BUILD_TESTS )
   kde4_add_unit_test( mymoneyinstitutiontest TESTNAME kmymoney-mymoneyinstitutiontest ${mymoneyinstitutiontest_SRCS} )
   ADD_DEPENDENCIES( mymoneyinstitutiontest kmm_mymoney )
 
-  target_link_libraries( mymoneyinstitutiontest kmm_mymoney ${QT_AND_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+  target_link_libraries( mymoneyinstitutiontest kmm_mymoney ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY} )
 
   # MyMoneyKeyValueContainer
   set( mymoneykeyvaluecontainertest_SRCS mymoneykeyvaluecontainertest.cpp )
@@ -104,7 +104,7 @@ IF( KDE4_BUILD_TESTS )
   kde4_add_unit_test( mymoneykeyvaluecontainertest TESTNAME kmymoney-mymoneykeyvaluecontainertest ${mymoneykeyvaluecontainertest_SRCS} )
   ADD_DEPENDENCIES( mymoneykeyvaluecontainertest kmm_mymoney )
 
-  target_link_libraries( mymoneykeyvaluecontainertest kmm_mymoney ${QT_AND_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+  target_link_libraries( mymoneykeyvaluecontainertest kmm_mymoney ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY} )
 
   # MyMoneyMoney
   set( mymoneymoneytest_SRCS mymoneymoneytest.cpp )
@@ -112,7 +112,7 @@ IF( KDE4_BUILD_TESTS )
   kde4_add_unit_test( mymoneymoneytest TESTNAME kmymoney-mymoneymoneytest ${mymoneymoneytest_SRCS} )
   ADD_DEPENDENCIES( mymoneymoneytest kmm_mymoney )
 
-  target_link_libraries( mymoneymoneytest kmm_mymoney ${QT_AND_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+  target_link_libraries( mymoneymoneytest kmm_mymoney ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY} )
 
   # MyMoneyObject
   set( mymoneyobjecttest_SRCS mymoneyobjecttest.cpp )
@@ -120,7 +120,7 @@ IF( KDE4_BUILD_TESTS )
   kde4_add_unit_test( mymoneyobjecttest TESTNAME kmymoney-mymoneyobjecttest ${mymoneyobjecttest_SRCS} )
   ADD_DEPENDENCIES( mymoneyobjecttest kmm_mymoney )
 
-  target_link_libraries( mymoneyobjecttest kmm_mymoney ${QT_AND_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+  target_link_libraries( mymoneyobjecttest kmm_mymoney ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY} )
 
   # MyMoneyPayee
   set( mymoneypayeetest_SRCS mymoneypayeetest.cpp )
@@ -128,7 +128,7 @@ IF( KDE4_BUILD_TESTS )
   kde4_add_unit_test( mymoneypayeetest TESTNAME kmymoney-mymoneypayeetest ${mymoneypayeetest_SRCS} )
   ADD_DEPENDENCIES( mymoneypayeetest kmm_mymoney )
 
-  target_link_libraries( mymoneypayeetest kmm_mymoney ${QT_AND_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+  target_link_libraries( mymoneypayeetest kmm_mymoney ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY} )
 
   # MyMoneyPrice
   set( mymoneypricetest_SRCS mymoneypricetest.cpp )
@@ -136,7 +136,7 @@ IF( KDE4_BUILD_TESTS )
   kde4_add_unit_test( mymoneypricetest TESTNAME kmymoney-mymoneypricetest ${mymoneypricetest_SRCS} )
   ADD_DEPENDENCIES( mymoneypricetest kmm_mymoney )
 
-  target_link_libraries( mymoneypricetest kmm_mymoney ${QT_AND_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+  target_link_libraries( mymoneypricetest kmm_mymoney ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY} )
 
   # MyMoneySchedule
   set( mymoneyscheduletest_SRCS mymoneyscheduletest.cpp )
@@ -144,7 +144,7 @@ IF( KDE4_BUILD_TESTS )
   kde4_add_unit_test( mymoneyscheduletest TESTNAME kmymoney-mymoneyscheduletest ${mymoneyscheduletest_SRCS} )
   ADD_DEPENDENCIES( mymoneyscheduletest kmm_mymoney )
 
-  target_link_libraries( mymoneyscheduletest kmm_mymoney ${QT_AND_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+  target_link_libraries( mymoneyscheduletest kmm_mymoney ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY} )
 
   # MyMoneySecurity
   set( mymoneysecuritytest_SRCS mymoneysecuritytest.cpp )
@@ -152,7 +152,7 @@ IF( KDE4_BUILD_TESTS )
   kde4_add_unit_test( mymoneysecuritytest TESTNAME kmymoney-mymoneysecuritytest ${mymoneysecuritytest_SRCS} )
   ADD_DEPENDENCIES( mymoneysecuritytest kmm_mymoney )
 
-  target_link_libraries( mymoneysecuritytest kmm_mymoney ${QT_AND_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+  target_link_libraries( mymoneysecuritytest kmm_mymoney ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY} )
 
   # MyMoneySplit
   set( mymoneysplittest_SRCS mymoneysplittest.cpp )
@@ -160,7 +160,7 @@ IF( KDE4_BUILD_TESTS )
   kde4_add_unit_test( mymoneysplittest TESTNAME kmymoney-mymoneysplittest ${mymoneysplittest_SRCS} )
   ADD_DEPENDENCIES( mymoneysplittest kmm_mymoney )
 
-  target_link_libraries( mymoneysplittest kmm_mymoney ${QT_AND_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+  target_link_libraries( mymoneysplittest kmm_mymoney ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY} )
 
   # MyMoneyTransaction
   set( mymoneytransactiontest_SRCS mymoneytransactiontest.cpp mymoneytestutils.cpp )
@@ -168,6 +168,6 @@ IF( KDE4_BUILD_TESTS )
   kde4_add_unit_test( mymoneytransactiontest TESTNAME kmymoney-mymoneytransactiontest ${mymoneytransactiontest_SRCS} )
   ADD_DEPENDENCIES( mymoneytransactiontest kmm_mymoney )
 
-  target_link_libraries( mymoneytransactiontest kmm_mymoney ${QT_AND_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+  target_link_libraries( mymoneytransactiontest kmm_mymoney ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY} )
 
 ENDIF( KDE4_BUILD_TESTS )
