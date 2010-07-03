@@ -28,8 +28,8 @@
 // Project Includes
 
 #include "ui_knewinvestmentwizarddecl.h"
-#include <mymoneyaccount.h>
-#include <mymoneysecurity.h>
+#include "mymoneyaccount.h"
+#include "mymoneysecurity.h"
 
 /**
   * This class contains the implementation of the new investment wizard.
@@ -37,10 +37,10 @@
   * @author Thomas Baumgart
   */
 
-class KNewInvestmentWizardDecl : public Q3Wizard, public Ui::KNewInvestmentWizardDecl
+class KNewInvestmentWizardDecl : public QWizard, public Ui::KNewInvestmentWizardDecl
 {
 public:
-  KNewInvestmentWizardDecl(QWidget *parent) : Q3Wizard(parent) {
+  KNewInvestmentWizardDecl(QWidget *parent) : QWizard(parent) {
     setupUi(this);
   }
 };
@@ -84,11 +84,7 @@ public:
   }
 
 protected slots:
-  void next(void);
-  void slotCheckPage(void);
-  void slotCheckPage(const QString&);
   void slotCheckForExistingSymbol(const QString&);
-  void slotSourceChanged(bool);
   void slotHelp(void);
 
 private:

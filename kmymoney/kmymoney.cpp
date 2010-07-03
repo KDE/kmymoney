@@ -119,7 +119,7 @@
 #include "dialogs/kmymoneyfileinfodlg.h"
 #include "dialogs/kfindtransactiondlg.h"
 #include "dialogs/knewbankdlg.h"
-#include "dialogs/knewinvestmentwizard.h"
+#include "wizards/newinvestmentwizard/knewinvestmentwizard.h"
 #include "dialogs/knewaccountdlg.h"
 #include "dialogs/knewfiledlg.h"
 #include "dialogs/kselectdatabasedlg.h"
@@ -333,6 +333,11 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
     "org.kde.kmymoney", QDBusConnectionInterface::DontQueueService);
 
   ::timetrace("start kmymoneyapp constructor");
+
+  // Register the main engine types used as meta-objects
+  // NOTE: only MyMoneySecurity is used for now, add others as needed
+  qRegisterMetaType<MyMoneySecurity>("MyMoneySecurity");
+
   // preset the pointer because we need it during the course of this constructor
   kmymoney = this;
   d->m_config = KGlobal::config();

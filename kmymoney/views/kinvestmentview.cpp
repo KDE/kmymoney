@@ -501,8 +501,14 @@ void KInvestmentView::slotEditSecurity(void)
     if (dlg->exec() == QDialog::Accepted) {
       dlg->createObjects(QString());
       try {
-        security = MyMoneyFile::instance()->security(item->text(eIdColumn).toLatin1());
-        loadSecurityItem(item, security);
+        // For some reason, the item gets deselected, and the pointer
+        // invalidated. So fix it here before continuing.
+        item = m_securitiesList->findItems(security.id(), Qt::MatchExactly).at(0);
+        m_securitiesList->setCurrentItem(item);
+        if (item) {
+          security = MyMoneyFile::instance()->security(item->text(eIdColumn).toLatin1());
+          loadSecurityItem(item, security);
+        }
       } catch (MyMoneyException* e) {
         KMessageBox::error(this, i18n("Failed to edit security: %1", e->what()));
         delete e;
