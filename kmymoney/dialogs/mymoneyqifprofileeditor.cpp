@@ -21,9 +21,8 @@
 // QT Includes
 
 #include <QPushButton>
-#include <Q3ListBox>
-#include <Q3ListView>
 #include <QCheckBox>
+#include <QListWidget>
 #include <QTabWidget>
 
 // ----------------------------------------------------------------------------
@@ -95,7 +94,7 @@ MyMoneyQifProfileEditor::MyMoneyQifProfileEditor(const bool edit, QWidget *paren
                          i18n("Use this to create a new QIF import/export profile"));
   m_newButton->setGuiItem(newButtenItem);
 
-  connect(m_profileListBox, SIGNAL(highlighted(const QString&)), this, SLOT(slotLoadProfileFromConfig(const QString&)));
+  connect(m_profileListBox, SIGNAL(currentTextChanged(const QString&)), this, SLOT(slotLoadProfileFromConfig(const QString&)));
   connect(m_resetButton, SIGNAL(clicked()), this, SLOT(slotReset()));
   connect(m_okButton, SIGNAL(clicked()), this, SLOT(slotOk()));
   connect(m_renameButton, SIGNAL(clicked()), this, SLOT(slotRename()));
@@ -113,7 +112,7 @@ MyMoneyQifProfileEditor::MyMoneyQifProfileEditor(const bool edit, QWidget *paren
   connect(m_editDateFormat, SIGNAL(highlighted(const QString&)), &m_profile, SLOT(setOutputDateFormat(const QString&)));
   connect(m_editApostrophe, SIGNAL(highlighted(const QString&)), &m_profile, SLOT(setApostropheFormat(const QString&)));
 
-  connect(m_editAmounts, SIGNAL(selectionChanged(Q3ListViewItem*)), this, SLOT(slotAmountTypeSelected(Q3ListViewItem*)));
+  connect(m_editAmounts, SIGNAL(itemSelectionChanged()), this, SLOT(slotAmountTypeSelected()));
   connect(m_decimalBox, SIGNAL(activated(const QString&)), this, SLOT(slotDecimalChanged(const QString&)));
   connect(m_thousandsBox, SIGNAL(activated(const QString&)), this, SLOT(slotThousandsChanged(const QString&)));
 
@@ -173,14 +172,8 @@ void MyMoneyQifProfileEditor::loadWidgets(void)
   m_editApostrophe->addItem("1900-1999");
   m_editApostrophe->addItem("2000-2099");
 
-  m_editAmounts->setColumnAlignment(1, Qt::AlignCenter);
-  m_editAmounts->setColumnAlignment(2, Qt::AlignCenter);
-  m_editAmounts->setColumnAlignment(3, Qt::AlignCenter);
-
-  m_editAmounts->setColumnWidth(4, 0);
-  m_editAmounts->setColumnWidthMode(4, Q3ListView::Manual);
-  m_editAmounts->setSorting(4);
-  m_editAmounts->sort();
+  m_editAmounts->setColumnHidden(4, true);
+  m_editAmounts->sortItems(4, Qt::AscendingOrder);
 
   m_decimalBox->addItem(" ");
   m_decimalBox->addItem(",");
@@ -240,9 +233,9 @@ void MyMoneyQifProfileEditor::loadProfileListFromConfig(void)
 
   list.sort();
 
-  m_profileListBox->insertStringList(list);
+  m_profileListBox->addItems(list);
   if (!list.isEmpty()) {
-    m_profileListBox->setSelected(0, true);
+    m_profileListBox->item(0)->setSelected(true);
     slotLoadProfileFromConfig(list[0]);
   }
   for (int i = 0; i < list.count(); ++i) {
@@ -262,17 +255,18 @@ void MyMoneyQifProfileEditor::slotLoadProfileFromConfig(const QString& profile)
     m_isDirty = true;
   }
 
-  if (m_profileListBox->findItem(profileName, Q3ListView::ExactMatch | Qt::CaseSensitive) == 0) {
-    profileName = m_profileListBox->text(0);
+  if (m_profileListBox->findItems(profileName, Qt::MatchExactly | Qt::MatchCaseSensitive).empty()) {
+    profileName = m_profileListBox->item(0)->text();
   }
 
   m_profile.loadProfile("Profile-" + profileName);
 
-  Q3ListBoxItem *lbi = m_profileListBox->findItem(profileName, Q3ListView::ExactMatch | Qt::CaseSensitive);
-  int idx = m_profileListBox->index(lbi);
+  QList<QListWidgetItem*> lbi = m_profileListBox->findItems(profileName, Qt::MatchExactly | Qt::MatchCaseSensitive);
   showProfile();
-  if (idx >= 0) {
-    m_profileListBox->setSelected(idx, true);
+  if (!lbi.empty()) {
+    foreach (QListWidgetItem* idx, lbi) {
+      idx->setSelected(true);
+    }
   }
 }
 
@@ -300,18 +294,20 @@ void MyMoneyQifProfileEditor::showProfile(void)
 
   m_attemptMatch->setChecked(m_profile.attemptMatchDuplicates());
 
-  Q3ListViewItem* item;
-  Q3ListViewItemIterator it(m_editAmounts);
+  QTreeWidgetItemIterator it(m_editAmounts);
 
-  while ((item = it.current()) != 0) {
-    QChar key = item->text(1)[0];
-    item->setText(2, m_profile.amountDecimal(key));
-    item->setText(3, m_profile.amountThousands(key));
+  while (*it) {
+    QChar key = (*it)->text(1)[0];
+    (*it)->setText(2, m_profile.amountDecimal(key));
+    (*it)->setTextAlignment(2, Qt::AlignCenter);
+    (*it)->setText(3, m_profile.amountThousands(key));
+    (*it)->setTextAlignment(3, Qt::AlignCenter);
     if (m_selectedAmountType == 0 && key == 'T' && m_inEdit) {
-      m_editAmounts->setSelected(item, true);
-      slotAmountTypeSelected(item);
-    } else if (item == m_selectedAmountType) {
-      slotAmountTypeSelected(item);
+      (*it)->setSelected(true);
+      slotAmountTypeSelected();
+    } else if ((*it) == m_selectedAmountType) {
+      (*it)->setSelected(true);
+      slotAmountTypeSelected();
     }
     ++it;
   }
@@ -439,14 +435,14 @@ void MyMoneyQifProfileEditor::slotDelete(void)
   QString profile = m_profile.profileName().mid(8);
 
   if (KMessageBox::questionYesNo(this, i18n("Do you really want to delete profile '%1'?", profile)) == KMessageBox::Yes) {
-    int idx = m_profileListBox->currentItem();
+    QListWidgetItem* idx = m_profileListBox->currentItem();
     m_profile.saveProfile();
     deleteProfile(profile);
     loadProfileListFromConfig();
-    if (idx >= static_cast<int>(m_profileListBox->count()))
-      idx = m_profileListBox->count() - 1;
+    if (!idx)
+      idx = m_profileListBox->item(m_profileListBox->count() - 1);
 
-    slotLoadProfileFromConfig(m_profileListBox->text(idx));
+    slotLoadProfileFromConfig(idx->text());
   }
 }
 
@@ -455,11 +451,15 @@ void MyMoneyQifProfileEditor::slotHelp(void)
   KToolInvocation::invokeHelp("details.impexp.qifimp.profile");
 }
 
-void MyMoneyQifProfileEditor::slotAmountTypeSelected(Q3ListViewItem* item)
+void MyMoneyQifProfileEditor::slotAmountTypeSelected()
 {
-  m_decimalBox->setItemText(m_decimalBox->currentIndex(), item->text(2));
-  m_thousandsBox->setItemText(m_thousandsBox->currentIndex(), item->text(3));
-  m_selectedAmountType = item;
+  QList<QTreeWidgetItem*> selectedItems = m_editAmounts->selectedItems();
+  if (! selectedItems.empty()) {
+    QTreeWidgetItem* item = selectedItems.at(0);
+    m_decimalBox->setItemText(m_decimalBox->currentIndex(), item->text(2));
+    m_thousandsBox->setItemText(m_thousandsBox->currentIndex(), item->text(3));
+    m_selectedAmountType = item;
+  }
 }
 
 void MyMoneyQifProfileEditor::slotDecimalChanged(const QString& val)
@@ -482,7 +482,7 @@ void MyMoneyQifProfileEditor::slotThousandsChanged(const QString& val)
 
 const QString MyMoneyQifProfileEditor::selectedProfile() const
 {
-  return m_profileListBox->currentText();
+  return m_profileListBox->currentItem()->text();
 }
 
 #include "mymoneyqifprofileeditor.moc"

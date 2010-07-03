@@ -29,7 +29,7 @@
       <item>
         <layout class="QHBoxLayout">
           <item>
-            <widget class="Q3ListBox" name="m_profileListBox">
+            <widget class="QListWidget" name="m_profileListBox">
               <property name="sizePolicy">
                 <sizepolicy>
                   <hsizetype>0</hsizetype>
@@ -37,9 +37,6 @@
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                 </sizepolicy>
-              </property>
-              <property name="variableWidth">
-                <bool>true</bool>
               </property>
               <item>
                 <property name="text">
@@ -376,16 +373,19 @@
                 </attribute>
                 <layout class="QVBoxLayout">
                   <item>
-                    <widget class="Q3ListView" name="m_editAmounts">
-                      <property name="hScrollBarMode">
-                        <enum>Q3ScrollView::AlwaysOff</enum>
+                    <widget class="QTreeWidget" name="m_editAmounts">
+                      <property name="horizontalScrollBarPolicy">
+                        <enum>Qt::ScrollBarAlwaysOff</enum>
                       </property>
                       <property name="allColumnsShowFocus">
                         <bool>true</bool>
                       </property>
-                      <property name="defaultRenameAction">
-                        <enum>Q3ListView::Accept</enum>
+                      <property name="selectionMode">
+                        <enum>QAbstractItemView::SingleSelection</enum>
                       </property>
+                      <!--<property name="defaultRenameAction">
+                        <enum>Q3ListView::Accept</enum>
+                      </property>-->
                       <column>
                         <property name="text">
                           <string comment="@title header of the QIF field name column">Field</string>

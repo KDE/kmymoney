@@ -23,7 +23,7 @@
 
 #include <QWidget>
 #include <QValidator>
-class Q3ListViewItem;
+class QTreeWidgetItem;
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -80,7 +80,7 @@ protected slots:
   void slotRename(void);
   void slotDelete(void);
   void slotNew(void);
-  void slotAmountTypeSelected(Q3ListViewItem*);
+  void slotAmountTypeSelected(void);
   void slotDecimalChanged(const QString& val);
   void slotThousandsChanged(const QString& val);
   void slotHelp(void);
@@ -98,7 +98,7 @@ private:
   MyMoneyQifProfile   m_profile;
   bool                m_isDirty;
   bool                m_isAccepted;
-  Q3ListViewItem*      m_selectedAmountType;
+  QTreeWidgetItem*    m_selectedAmountType;
 };
 
 #endif
