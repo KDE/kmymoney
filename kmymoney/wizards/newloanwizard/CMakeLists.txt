@@ -14,4 +14,4 @@ kde4_add_ui_files(libnewloanwizard_a_SOURCES ${libnewloanwizard_a_UI} )
 KDE4_ADD_LIBRARY(newloanwizard STATIC ${libnewloanwizard_a_SOURCES})
 
 # we rely on some dialogs to be generated
-ADD_DEPENDENCIES(newinvestmentwizard dialogs)
+ADD_DEPENDENCIES(newloanwizard dialogs)
