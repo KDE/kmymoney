@@ -14,7 +14,6 @@ SET(libdialogs_a_SOURCES
   kconfirmmanualenterdlg.cpp
   kcurrencycalculator.cpp 
   kcurrencyeditdlg.cpp
-  keditloanwizard.cpp
   keditscheduledlg.cpp
   kendingbalancedlg.cpp 
   kenterscheduledlg.cpp
@@ -36,7 +35,6 @@ SET(libdialogs_a_SOURCES
   knewbudgetdlg.cpp 
   knewequityentrydlg.cpp
   knewfiledlg.cpp 
-  knewloanwizard.cpp 
   konlinequoteconfigurationdlg.cpp
   kpayeereassigndlg.cpp 
   kreconciledlg.cpp
@@ -69,7 +67,6 @@ SET(dialogs_UI
   kmymoneyfileinfodlgdecl.ui kmymoneypricedlgdecl.ui
   knewaccountdlgdecl.ui knewbankdlgdecl.ui knewbudgetdlgdecl.ui
   knewequityentrydecl.ui knewfiledlgdecl.ui
-  knewloanwizarddecl.ui
   konlinequoteconfigurationdecl.ui kpayeereassigndlgdecl.ui
   kreconciledlgdecl.ui
   kselectdatabasedlgdecl.ui kselecttransactionsdlgdecl.ui
