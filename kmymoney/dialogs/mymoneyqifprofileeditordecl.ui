@@ -383,9 +383,6 @@
                       <property name="selectionMode">
                         <enum>QAbstractItemView::SingleSelection</enum>
                       </property>
-                      <!--<property name="defaultRenameAction">
-                        <enum>Q3ListView::Accept</enum>
-                      </property>-->
                       <column>
                         <property name="text">
                           <string comment="@title header of the QIF field name column">Field</string>

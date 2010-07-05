@@ -79,8 +79,6 @@ KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent, const QString& sec
   lvEquityList->setHeaderLabels(headerList);
 
   lvEquityList->setSelectionMode(QAbstractItemView::MultiSelection);
-  //lvEquityList->setColumnWidthMode(SYMBOL_COL, Q3ListView::Maximum);
-  //lvEquityList->setColumnWidthMode(ID_COL, Q3ListView::Manual);
   lvEquityList->setAllColumnsShowFocus(true);
 
   btnUpdateAll->setEnabled(false);
