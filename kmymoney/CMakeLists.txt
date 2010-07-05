@@ -13,6 +13,8 @@ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}
                     ${CMAKE_CURRENT_BINARY_DIR}/dialogs/settings/
                     ${CMAKE_CURRENT_BINARY_DIR}/mymoney/storage/
                     ${CMAKE_CURRENT_SOURCE_DIR}/reports/
+                    ${CMAKE_CURRENT_SOURCE_DIR}/wizards/endingbalancedlg/
+                    ${CMAKE_CURRENT_BINARY_DIR}/wizards/endingbalancedlg/
                     ${CMAKE_CURRENT_SOURCE_DIR}/wizards/newinvestmentwizard/
                     ${CMAKE_CURRENT_BINARY_DIR}/wizards/newinvestmentwizard/
                     ${CMAKE_CURRENT_SOURCE_DIR}/wizards/newloanwizard/
@@ -62,7 +64,7 @@ ADD_DEPENDENCIES(kmymoney_common generate_base_ui_srcs kmm_config)
 SET( kmymoney_common_LIBS
   views reports kmymoney_common
   newuserwizard newaccountwizard newinvestmentwizard newloanwizard
-  wizardpages
+  endingbalancedlg wizardpages
   dialogs widgets settings converter models kmm_config
   kmm_storage kmm_mymoney kgpgfile interfaces kmm_plugin dialogs kmm_kdchart
   ${QT_AND_KDECORE_LIBS} ${QT_QT3SUPPORT_LIBRARY} ${QT_QTSQL_LIBRARY}

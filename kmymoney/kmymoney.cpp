@@ -130,7 +130,7 @@
 #include "dialogs/kpayeereassigndlg.h"
 #include "dialogs/kcategoryreassigndlg.h"
 #include "dialogs/kmergetransactionsdlg.h"
-#include "dialogs/kendingbalancedlg.h"
+#include "wizards/endingbalancedlg/kendingbalancedlg.h"
 #include "dialogs/kbalancechartdlg.h"
 #include "dialogs/kgeneratesqldlg.h"
 #include "dialogs/kloadtemplatedlg.h"

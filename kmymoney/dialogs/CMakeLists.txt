@@ -15,7 +15,6 @@ SET(libdialogs_a_SOURCES
   kcurrencycalculator.cpp 
   kcurrencyeditdlg.cpp
   keditscheduledlg.cpp
-  kendingbalancedlg.cpp 
   kenterscheduledlg.cpp
   kequitypriceupdatedlg.cpp 
   kexportdlg.cpp 
@@ -60,7 +59,7 @@ SET(dialogs_UI
   kconfirmmanualenterdlgdecl.ui
   kcurrencycalculatordecl.ui kcurrencyeditdlgdecl.ui
   keditscheduledlgdecl.ui
-  kendingbalancedlgdecl.ui kenterscheduledlgdecl.ui
+  kenterscheduledlgdecl.ui
   kequitypriceupdatedlgdecl.ui kexportdlgdecl.ui
   kfindtransactiondlgdecl.ui kgeneratesqldlgdecl.ui kgncimportoptionsdlgdecl.ui
   kgncpricesourcedlgdecl.ui kimportdlgdecl.ui kloadtemplatedlgdecl.ui
