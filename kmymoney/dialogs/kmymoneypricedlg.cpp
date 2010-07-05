@@ -295,12 +295,25 @@ void KMyMoneyPriceDlg::slotDeletePrice(void)
 
 void KMyMoneyPriceDlg::slotOnlinePriceUpdate(void)
 {
-  QTreeWidgetItem* item = m_priceList->currentItem();
-  if (item) {
-    QPointer<KEquityPriceUpdateDlg> dlg = new KEquityPriceUpdateDlg(this, (item->text(ePriceCommodity) + ' ' + item->text(ePriceCurrency)).toUtf8());
-    if (dlg->exec() == Accepted)
+  QList<QTreeWidgetItem*> itemList = m_priceList->selectedItems();
+  QTreeWidgetItem* item;
+  if(itemList.count() > 0) {
+    item = itemList.at(0);
+    if (item) {
+      //check whether the price is a currency or not
+      MyMoneyPrice price = item->data(0, Qt::UserRole).value<MyMoneyPrice>();
+      MyMoneySecurity security = MyMoneyFile::instance()->security(price.from());
+
+      //if it is not a currency, send a null String, which will trigger the update for all prices
+      QString stringId;
+      if(security.isCurrency()) {
+        stringId = (item->text(ePriceCommodity) + ' ' + item->text(ePriceCurrency)).toUtf8();
+      }
+      QPointer<KEquityPriceUpdateDlg> dlg = new KEquityPriceUpdateDlg(this, stringId);
+      if (dlg->exec() == Accepted)
       dlg->storePrices();
-    delete dlg;
+      delete dlg;
+    }
   } else {
     QPointer<KEquityPriceUpdateDlg> dlg = new KEquityPriceUpdateDlg(this);
     if (dlg->exec() == Accepted)

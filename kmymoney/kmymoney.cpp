@@ -6144,8 +6144,7 @@ void KMyMoneyApp::slotUpdateActions(void)
     action("price_delete")->setEnabled(true);
 
     //enable online update if it is a currency
-    MyMoneySecurity security;
-    security = MyMoneyFile::instance()->security(d->m_selectedPrice.from());
+    MyMoneySecurity security = MyMoneyFile::instance()->security(d->m_selectedPrice.from());
     action("price_update")->setEnabled(security.isCurrency());
   }
 }
