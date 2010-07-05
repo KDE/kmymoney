@@ -178,7 +178,7 @@ void KBudgetValues::slotChangePeriod(int id)
 
   MyMoneyMoney newValue;
   if (tab == m_monthlyButton) {
-    m_firstItemStack->raiseWidget(m_monthlyPage);
+    m_firstItemStack->setCurrentIndex(m_firstItemStack->indexOf(m_monthlyPage));
     enableMonths(false);
     m_label[0]->setText(" ");
     if (m_amountMonthly->value().isZero()) {
@@ -198,7 +198,7 @@ void KBudgetValues::slotChangePeriod(int id)
     }
 
   } else if (tab == m_yearlyButton) {
-    m_firstItemStack->raiseWidget(m_yearlyPage);
+    m_firstItemStack->setCurrentIndex(m_firstItemStack->indexOf(m_yearlyPage));
     enableMonths(false);
     m_label[0]->setText(" ");
     if (m_amountYearly->value().isZero()) {
@@ -217,7 +217,7 @@ void KBudgetValues::slotChangePeriod(int id)
     }
 
   } else if (tab == m_individualButton) {
-    m_firstItemStack->raiseWidget(m_individualPage);
+    m_firstItemStack->setCurrentIndex(m_firstItemStack->indexOf(m_individualPage));
     enableMonths(true);
     for (int i = 0; i < 12; ++i)
       newValue += m_field[i]->value();

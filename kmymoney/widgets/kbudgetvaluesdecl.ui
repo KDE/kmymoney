@@ -108,7 +108,7 @@
         </widget>
       </item>
       <item row="0" column="3">
-        <widget class="Q3WidgetStack" name="m_firstItemStack">
+        <widget class="QStackedWidget" name="m_firstItemStack">
           <widget class="QWidget" name="m_monthlyPage">
             <attribute name="id">
               <number>0</number>
