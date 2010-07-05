@@ -43,10 +43,7 @@ using namespace test;
 #include "mymoneystatement.h"
 #include "storage/mymoneystoragexml.h"
 #include "storage/mymoneystoragedump.h"
-
-#define private public
 #include "webpricequote.h"
-#undef private
 
 QTEST_KDEMAIN_CORE_WITH_COMPONENTNAME(ConverterTest, "kmymoney")
 

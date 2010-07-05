@@ -19,13 +19,10 @@
 
 #include <QtCore/QObject>
 
-#include "autotest.h"
+#define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneySeqAccessMgrTest;
 
-#define private public
-#define protected public
 #include "mymoneyobject.h"
 #include "mymoneyseqaccessmgr.h"
-#undef private
 
 class MyMoneySeqAccessMgrTest : public QObject
 {

@@ -53,6 +53,8 @@
   */
 class KMM_MYMONEY_EXPORT MyMoneyKeyValueContainer
 {
+  KMM_MYMONEY_UNIT_TESTABLE
+
 public:
   MyMoneyKeyValueContainer();
   MyMoneyKeyValueContainer(const QDomElement& node);

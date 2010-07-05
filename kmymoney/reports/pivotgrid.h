@@ -64,6 +64,8 @@ enum ERowType {eActual, eBudget, eBudgetDiff, eForecast, eAverage, ePrice };
   */
 class PivotCell: public MyMoneyMoney
 {
+  KMM_MYMONEY_UNIT_TESTABLE
+
 public:
   PivotCell() : m_stockSplit(MyMoneyMoney(1, 1)), m_cellUsed(false) {}
   PivotCell(const MyMoneyMoney& value);

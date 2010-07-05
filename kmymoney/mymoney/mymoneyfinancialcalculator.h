@@ -64,6 +64,8 @@
   */
 class KMM_MYMONEY_EXPORT MyMoneyFinancialCalculator
 {
+  KMM_MYMONEY_UNIT_TESTABLE
+
 public:
   MyMoneyFinancialCalculator();
   ~MyMoneyFinancialCalculator();

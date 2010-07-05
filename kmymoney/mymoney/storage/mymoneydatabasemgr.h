@@ -45,6 +45,8 @@
 class MyMoneyDatabaseMgr : public IMyMoneyStorage, public IMyMoneySerialize,
     public MyMoneyKeyValueContainer
 {
+  KMM_MYMONEY_UNIT_TESTABLE
+
 public:
   MyMoneyDatabaseMgr();
   ~MyMoneyDatabaseMgr();

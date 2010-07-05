@@ -31,11 +31,7 @@
 #include <qtest_kde.h>
 
 #include "reportstestcommon.h"
-
-#define private public
 #include "querytable.h"
-#undef private
-
 #include "mymoneyaccount.h"
 #include "mymoneysecurity.h"
 #include "mymoneyprice.h"

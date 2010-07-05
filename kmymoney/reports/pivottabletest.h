@@ -19,11 +19,15 @@
 #define PIVOTTABLETEST_H
 
 #include <QtCore/QObject>
+
+#define KMM_MYMONEY_UNIT_TESTABLE friend class PivotTableTest;
+
 #include "mymoneyfile.h"
 #include "mymoneyseqaccessmgr.h"
-
-#define protected public
 #include "reporttable.h"
+
+namespace reports
+{
 
 class PivotTableTest : public QObject
 {
@@ -57,4 +61,5 @@ private slots:
   void testHtmlEncoding();
 };
 
+}
 #endif // PIVOTTABLETEST_H

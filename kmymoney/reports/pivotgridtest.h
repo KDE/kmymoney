@@ -19,8 +19,14 @@
 #define PIVOTGRIDTEST_H
 
 #include <QtCore/QObject>
+
+#define KMM_MYMONEY_UNIT_TESTABLE friend class PivotGridTest;
+
 #include "mymoneyfile.h"
 #include "mymoneyseqaccessmgr.h"
+
+namespace reports
+{
 
 class PivotGridTest : public QObject
 {
@@ -38,5 +44,7 @@ private slots:
   void testCellAddCell();
   void testCellRunningSum();
 };
+
+}
 
 #endif // PIVOTGRIDTEST_H

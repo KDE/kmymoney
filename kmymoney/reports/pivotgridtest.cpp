@@ -21,9 +21,7 @@
 
 #include "reportstestcommon.h"
 
-#define private public
 #include "pivotgrid.h"
-#undef private
 
 using namespace reports;
 using namespace test;

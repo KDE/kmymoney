@@ -79,6 +79,8 @@ class MyMoneyObjectContainer;
 class KMM_MYMONEY_EXPORT MyMoneyAccount : public MyMoneyObject, public MyMoneyKeyValueContainer
 {
   friend class MyMoneyObjectContainer;
+  KMM_MYMONEY_UNIT_TESTABLE
+
 public:
 
   /**

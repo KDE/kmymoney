@@ -30,10 +30,8 @@
 
 #include "kreportsviewtest.h"
 
-#define private public
 #include "pivottable.h"
 #include "querytable.h"
-#undef private
 using namespace reports;
 
 #include "mymoneysecurity.h"

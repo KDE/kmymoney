@@ -137,6 +137,8 @@ class MyMoneyTransactionFilter;
 class KMM_MYMONEY_EXPORT MyMoneyFile : public QObject
 {
   Q_OBJECT
+  KMM_MYMONEY_UNIT_TESTABLE
+
 public:
 
   class MyMoneyNotifier

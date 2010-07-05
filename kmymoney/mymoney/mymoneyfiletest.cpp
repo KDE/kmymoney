@@ -24,6 +24,8 @@
 #include <QList>
 #include <QtTest/QtTest>
 
+#include "autotest.h"
+
 QTEST_MAIN(MyMoneyFileTest)
 
 void MyMoneyFileTest::init()

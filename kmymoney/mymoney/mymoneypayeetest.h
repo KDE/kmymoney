@@ -15,13 +15,6 @@
 #define MYMONEYPAYEETEST_H
 
 #include <QtCore/QObject>
-#include "autotest.h"
-
-#define private public
-#define protected public
-#include "mymoneypayee.h"
-#undef private
-#undef protected
 
 class MyMoneyPayeeTest : public QObject
 {

@@ -18,12 +18,10 @@
 #define MYMONEYTRANSACTIONTEST_H
 
 #include <QtCore/QObject>
-#include "autotest.h"
 
-#define private public
-#define protected public
+#define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyTransactionTest;
+
 #include "mymoneytransaction.h"
-#undef private
 
 class MyMoneyTransactionTest : public QObject
 {

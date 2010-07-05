@@ -133,6 +133,8 @@ class IMyMoneySerialize;
 class MyMoneyStorageSql : public IMyMoneyStorageFormat, public QSqlDatabase, public KShared
 {
   friend class MyMoneyDbDef;
+  KMM_MYMONEY_UNIT_TESTABLE
+
 public:
   explicit MyMoneyStorageSql(IMyMoneySerialize *storage, const KUrl& = KUrl());
   virtual ~MyMoneyStorageSql() {

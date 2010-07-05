@@ -20,6 +20,8 @@
 
 #include <QtTest/QtTest>
 
+#include "autotest.h"
+
 QTEST_MAIN(MyMoneyTransactionTest)
 
 void MyMoneyTransactionTest::init()

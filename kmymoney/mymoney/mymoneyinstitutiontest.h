@@ -20,9 +20,7 @@
 
 #include <QtCore/QObject>
 
-#define private public
 #include "mymoneyinstitution.h"
-#undef private
 
 class MyMoneyInstitutionTest : public QObject
 {

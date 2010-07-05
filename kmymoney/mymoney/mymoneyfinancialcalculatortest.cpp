@@ -21,7 +21,10 @@
 
 #include <QtTest/QtTest>
 
+#define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyFinancialCalculatorTest;
+
 #include "mymoneymoney.h"
+#include "mymoneyfinancialcalculator.h"
 
 QTEST_MAIN(MyMoneyFinancialCalculatorTest)
 

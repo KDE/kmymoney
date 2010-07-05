@@ -64,6 +64,8 @@ namespace reports
 **/
 class PivotTable : public ReportTable
 {
+  KMM_MYMONEY_UNIT_TESTABLE
+
 public:
   /**
     * Create a Pivot table style report

@@ -47,6 +47,8 @@
 
 class KMM_MYMONEY_EXPORT MyMoneyForecast
 {
+  KMM_MYMONEY_UNIT_TESTABLE
+
 public:
   /**
     * The default forecast ctor sets the following defaults:

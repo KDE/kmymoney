@@ -38,10 +38,7 @@
 #include "mymoneystoragedump.h"
 #include "mymoneystoragexml.h"
 
-#define private public
 #include "pivottable.h"
-#undef private
-
 #include "reportstestcommon.h"
 
 using namespace reports;

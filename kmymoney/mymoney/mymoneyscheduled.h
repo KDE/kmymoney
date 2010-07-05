@@ -55,6 +55,8 @@ class MyMoneyStorageANON;
 class KMM_MYMONEY_EXPORT MyMoneySchedule : public MyMoneyObject
 {
   friend class MyMoneyStorageANON;
+  KMM_MYMONEY_UNIT_TESTABLE
+
 public:
   /**
     * This enum is used to describe all the possible schedule frequencies.

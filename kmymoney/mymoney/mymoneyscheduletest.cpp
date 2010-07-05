@@ -23,8 +23,13 @@
 #include <klocale.h>
 #include <KHolidays/Holidays>
 
+#define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyScheduleTest;
+
 #include "mymoneysplit.h"
 #include "mymoneymoney.h"
+#include "mymoneyscheduled.h"
+#include "mymoneyfile.h"
+#include "storage/mymoneyseqaccessmgr.h"
 
 #include <iostream>
 

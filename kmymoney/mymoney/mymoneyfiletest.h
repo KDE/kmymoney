@@ -18,15 +18,12 @@
 #define MYMONEYFILETEST_H
 
 #include <QtCore/QObject>
-#include "autotest.h"
+#include <QtCore/QList>
 
-#define private public
-#define protected public
-#include <QList>
+#define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyFileTest;
+
 #include "mymoneyfile.h"
 #include "storage/mymoneyseqaccessmgr.h"
-#undef private
-#undef protected
 
 class MyMoneyFileTest : public QObject
 {

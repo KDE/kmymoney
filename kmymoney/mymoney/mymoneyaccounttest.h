@@ -19,10 +19,7 @@
 
 #include <QtCore/QObject>
 
-#define private public
-#define protected public
-#include "mymoneyaccount.h"
-#undef private
+class MyMoneyAccount;
 
 class MyMoneyAccountTest : public QObject
 {

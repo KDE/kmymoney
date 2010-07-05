@@ -17,23 +17,9 @@
 #ifndef MYMONEYMONEYTEST_H
 #define MYMONEYMONEYTEST_H
 
-// Check for standard definitions
-#ifdef HAVE_STDINT_H
-#ifndef __STDC_LIMIT_MACROS
-#define __STDC_LIMIT_MACROS         // force definition of min and max values
-#endif
-#include <stdint.h>
-#else
-#include <limits.h>
-#define INT64_MAX LLONG_MAX
-#define INT64_MIN LLONG_MIN
-#endif
-
 #include <QtCore/QObject>
 
-#define private public
-#include "mymoneymoney.h"
-#undef private
+class MyMoneyMoney;
 
 class MyMoneyMoneyTest : public QObject
 {

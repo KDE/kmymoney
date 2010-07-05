@@ -19,12 +19,12 @@
 
 #include <QtCore/QObject>
 
+#define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyForecastTest;
+
 #include "mymoneyfile.h"
 #include "mymoneyseqaccessmgr.h"
 
-#define private public
 #include "mymoneyforecast.h"
-#undef private
 
 class MyMoneyForecastTest : public QObject
 {

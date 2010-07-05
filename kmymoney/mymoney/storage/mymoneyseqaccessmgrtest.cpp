@@ -19,6 +19,8 @@
 #include <QList>
 #include <QtTest/QtTest>
 
+#include "autotest.h"
+
 QTEST_MAIN(MyMoneySeqAccessMgrTest)
 
 void MyMoneySeqAccessMgrTest::init()

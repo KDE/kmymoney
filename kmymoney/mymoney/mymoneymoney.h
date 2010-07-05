@@ -58,6 +58,8 @@ class MyMoneySecurity;
   */
 class KMM_MYMONEY_EXPORT MyMoneyMoney
 {
+  KMM_MYMONEY_UNIT_TESTABLE
+
 public:
   enum fileVersionE {
     FILE_4_BYTE_VALUE = 0,

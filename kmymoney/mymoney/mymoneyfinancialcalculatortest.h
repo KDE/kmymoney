@@ -18,13 +18,8 @@
 #define MYMONEYFINANCIALCALCULATORTEST_H
 
 #include <QtCore/QObject>
-#include "autotest.h"
 
-#define private public
-#define protected public
-#include "mymoneyfinancialcalculator.h"
-#undef private
-#undef protected
+class MyMoneyFinancialCalculator;
 
 class MyMoneyFinancialCalculatorTest : public QObject
 {

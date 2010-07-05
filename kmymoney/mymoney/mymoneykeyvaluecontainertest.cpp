@@ -18,7 +18,10 @@
 
 #include <QtTest/QtTest>
 
+#define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyKeyValueContainerTest;
+
 #include "mymoneyexception.h"
+#include "mymoneykeyvaluecontainer.h"
 
 QTEST_MAIN(MyMoneyKeyValueContainerTest)
 

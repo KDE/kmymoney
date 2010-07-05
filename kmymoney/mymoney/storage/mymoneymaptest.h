@@ -21,9 +21,7 @@
 
 #include "autotest.h"
 
-#define private public
 #include "mymoneyseqaccessmgr.h"
-#undef private
 
 class MyMoneyMapTest : public QObject
 {

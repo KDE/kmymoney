@@ -19,13 +19,6 @@
 
 #include <QtCore/QObject>
 
-#define private public
-#define protected public
-#include "mymoneyscheduled.h"
-#include "mymoneyfile.h"
-#include "storage/mymoneyseqaccessmgr.h"
-#undef private
-
 class MyMoneyScheduleTest : public QObject
 {
   Q_OBJECT

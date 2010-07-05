@@ -19,10 +19,8 @@
 
 #include <QtCore/QObject>
 
-#define private public
 #include "mymoneyutils.h"
 #include "mymoneyexception.h"
-#undef private
 
 class MyMoneyExceptionTest : public QObject
 {

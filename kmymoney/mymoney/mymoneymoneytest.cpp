@@ -20,11 +20,27 @@
 #endif
 
 #include "mymoneymoneytest.h"
-#include "mymoneyexception.h"
-#include <iostream>
-#include <stdint.h>
 
 #include <QtTest/QtTest>
+
+#define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyMoneyTest;
+
+// Check for standard definitions
+#ifdef HAVE_STDINT_H
+#ifndef __STDC_LIMIT_MACROS
+#define __STDC_LIMIT_MACROS         // force definition of min and max values
+#endif
+#include <stdint.h>
+#else
+#include <limits.h>
+#define INT64_MAX LLONG_MAX
+#define INT64_MIN LLONG_MIN
+#endif
+
+#include "mymoneyexception.h"
+#include "mymoneymoney.h"
+#include <iostream>
+#include <stdint.h>
 
 QTEST_MAIN(MyMoneyMoneyTest)
 

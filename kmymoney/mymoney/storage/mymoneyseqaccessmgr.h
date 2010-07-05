@@ -84,6 +84,8 @@ public:
 class MyMoneySeqAccessMgr : public IMyMoneyStorage, public IMyMoneySerialize,
     public MyMoneyKeyValueContainer
 {
+  KMM_MYMONEY_UNIT_TESTABLE
+
 public:
 
   MyMoneySeqAccessMgr();

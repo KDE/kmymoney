@@ -19,9 +19,7 @@
 
 #include <QtCore/QObject>
 
-#define private public
 #include "mymoneysecurity.h"
-#undef private
 
 class MyMoneySecurityTest : public QObject
 {

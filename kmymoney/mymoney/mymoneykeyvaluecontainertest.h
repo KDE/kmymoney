@@ -19,9 +19,7 @@
 
 #include <QtCore/QObject>
 
-#define private public
-#include "mymoneykeyvaluecontainer.h"
-#undef private
+class MyMoneyKeyValueContainer;
 
 class MyMoneyKeyValueContainerTest : public QObject
 {

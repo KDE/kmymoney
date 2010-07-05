@@ -49,6 +49,8 @@
   */
 class KMM_MYMONEY_EXPORT MyMoneyTransaction : public MyMoneyObject, public MyMoneyKeyValueContainer
 {
+  KMM_MYMONEY_UNIT_TESTABLE
+
 public:
   MyMoneyTransaction();
   MyMoneyTransaction(const QString& id,
