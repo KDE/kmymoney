@@ -20,7 +20,12 @@
 
 #include <QtCore/QObject>
 
-#define KMM_MYMONEY_UNIT_TESTABLE friend class PivotGridTest;
+namespace reports
+{
+class PivotGridTest;
+}
+
+#define KMM_MYMONEY_UNIT_TESTABLE friend class reports::PivotGridTest;
 
 #include "mymoneyfile.h"
 #include "mymoneyseqaccessmgr.h"
