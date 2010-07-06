@@ -33,7 +33,6 @@
 
 class QString;
 class QIODevice;
-class Q3ProgressDialog;
 
 // ----------------------------------------------------------------------------
 // Project Includes
