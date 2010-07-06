@@ -50,7 +50,8 @@ KCurrencyEditDlg::KCurrencyEditDlg(QWidget *parent) :
     KCurrencyEditDlgDecl(parent),
     m_currencyInEditing(false)
 {
-  setButtons(KDialog::Ok);
+  setButtons(KDialog::Close | KDialog::User1);
+  button(KDialog::User1)->setText(i18n("Select as base currency"));
   setButtonsOrientation(Qt::Horizontal);
   setMainWidget(m_layoutWidget);
 
@@ -75,7 +76,7 @@ KCurrencyEditDlg::KCurrencyEditDlg(QWidget *parent) :
   m_currencyList->resizeColumnToContents(1);
   m_currencyList->resizeColumnToContents(2);
 
-  connect(m_baseCurrencyButton, SIGNAL(clicked()), this, SLOT(slotSelectBaseCurrency()));
+  connect(this, SIGNAL(user1Clicked()), this, SLOT(slotSelectBaseCurrency()));
 
   QTimer::singleShot(10, this, SLOT(timerDone()));
 }
@@ -208,12 +209,8 @@ void KCurrencyEditDlg::slotSelectCurrency(const QString& id)
 
 void KCurrencyEditDlg::slotSelectCurrency(QTreeWidgetItem *item)
 {
-  QMap<QDate, MyMoneyMoney> history;
   MyMoneyFile* file = MyMoneyFile::instance();
   m_currencyInEditing = false;
-
-  //updateCurrency();
-
 
   if (item) {
     try {
@@ -223,7 +220,7 @@ void KCurrencyEditDlg::slotSelectCurrency(QTreeWidgetItem *item)
       delete e;
       m_currency = MyMoneySecurity();
     }
-    m_baseCurrencyButton->setDisabled(m_currency.id() == file->baseCurrency().id());
+    button(KDialog::User1)->setDisabled(m_currency.id() == file->baseCurrency().id());
     emit selectObject(m_currency);
   }
 }
