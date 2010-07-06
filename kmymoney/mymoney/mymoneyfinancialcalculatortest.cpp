@@ -16,9 +16,6 @@
 
 #include "mymoneyfinancialcalculatortest.h"
 
-#include <iostream>
-#include <cmath>
-
 #include <QtTest/QtTest>
 
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyFinancialCalculatorTest;
@@ -180,7 +177,7 @@ void MyMoneyFinancialCalculatorTest::testNumPayments()
     delete e;
   }
 
-  QVERIFY(roundl(m->m_npp) == 12);
+  QVERIFY(qRound(m->m_npp) == 12);
 }
 
 void MyMoneyFinancialCalculatorTest::testUseCase1()
