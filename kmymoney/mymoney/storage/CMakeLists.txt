@@ -26,13 +26,15 @@ INSTALL(FILES ${storage_HEADERS}
 ############## tests ####################
 IF( KDE4_BUILD_TESTS )
 
+IF(NOT WIN32)
   # MyMoneyDatabaseMgr
   set( mymoneydatabasemgrtest_SRCS mymoneydatabasemgrtest.cpp ../mymoneytestutils.cpp )
 
   kde4_add_unit_test( mymoneydatabasemgrtest TESTNAME kmymoney-mymoneydatabasemgrtest ${mymoneydatabasemgrtest_SRCS} )
   ADD_DEPENDENCIES( mymoneydatabasemgrtest kmymoney_base kmymoney_common kmm_storage )
 
-  target_link_libraries( mymoneydatabasemgrtest kmymoney_base kmymoney_common kmm_storage ${QT_AND_KDECORE_LIBS} ${QT_QTSQL_LIBRARY} ${QT_QTTEST_LIBRARY} )
+  target_link_libraries( mymoneydatabasemgrtest kmymoney_base kmymoney_common kmm_storage ${QT_QTGUI_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTSQL_LIBRARY} ${QT_QTTEST_LIBRARY} )
+ENDIF(NOT WIN32)
 
   # MyMoneyMap
   set( mymoneymaptest_SRCS mymoneymaptest.cpp ../mymoneytestutils.cpp )
@@ -40,7 +42,7 @@ IF( KDE4_BUILD_TESTS )
   kde4_add_unit_test( mymoneymaptest TESTNAME kmymoney-mymoneymaptest ${mymoneymaptest_SRCS} )
   ADD_DEPENDENCIES( mymoneymaptest kmymoney_base kmymoney_common kmm_storage )
 
-  target_link_libraries( mymoneymaptest kmymoney_base kmymoney_common kmm_storage ${QT_AND_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+  target_link_libraries( mymoneymaptest kmymoney_base kmymoney_common kmm_storage ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY} )
 
   # MyMoneySeqAccessMgr
   set( mymoneyseqaccessmgrtest_SRCS mymoneyseqaccessmgrtest.cpp ../mymoneytestutils.cpp )
@@ -48,6 +50,6 @@ IF( KDE4_BUILD_TESTS )
   kde4_add_unit_test( mymoneyseqaccessmgrtest TESTNAME kmymoney-mymoneyseqaccessmgrtest ${mymoneyseqaccessmgrtest_SRCS} )
   ADD_DEPENDENCIES( mymoneyseqaccessmgrtest kmymoney_base kmymoney_common kmm_storage )
 
-  target_link_libraries( mymoneyseqaccessmgrtest kmymoney_base kmymoney_common kmm_storage ${QT_AND_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+  target_link_libraries( mymoneyseqaccessmgrtest kmymoney_base kmymoney_common kmm_storage ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY} )
 
 ENDIF( KDE4_BUILD_TESTS )
