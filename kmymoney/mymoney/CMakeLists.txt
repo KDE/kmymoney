@@ -144,7 +144,7 @@ IF( KDE4_BUILD_TESTS )
   kde4_add_unit_test( mymoneyscheduletest TESTNAME kmymoney-mymoneyscheduletest ${mymoneyscheduletest_SRCS} )
   ADD_DEPENDENCIES( mymoneyscheduletest kmm_mymoney )
 
-  target_link_libraries( mymoneyscheduletest kmm_mymoney ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY} )
+  target_link_libraries( mymoneyscheduletest kmm_mymoney ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY} ${KDE4_KDECORE_LIBS})
 
   # MyMoneySecurity
   set( mymoneysecuritytest_SRCS mymoneysecuritytest.cpp )

@@ -12,8 +12,7 @@
  ***************************************************************************/
 
 #include "mymoneypayeetest.h"
-#include <iostream>
-#include <fstream>
+
 #include <QtTest/QtTest>
 
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyPayeeTest;
