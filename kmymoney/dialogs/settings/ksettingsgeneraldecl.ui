@@ -159,7 +159,6 @@
           </item>
          </layout>
          <zorder>kcfg_AutoSaveFile</zorder>
-         <zorder>spacer3</zorder>
          <zorder>m_periodFrame</zorder>
         </widget>
        </item>
