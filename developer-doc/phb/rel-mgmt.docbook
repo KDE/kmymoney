@@ -16,16 +16,14 @@ correctly, creating the source tar-ball, tagging the repository etc.
 
 <para>
 Note that in order to perform some of the functions associated with this procedure, you will need to:
-  <para>
-    <orderedlist>
-      <listitem><para>
-      Obtain a userid by registering with Sourceforge; this userid is represented below as &lt;your_sf_userid&gt;
-      </para></listitem>
-      <listitem><para>
-      Be registered as a &kappname; developer; this must be done by a project administrator, the names of which appear on the project home page on Sourceforge.
-      </para></listitem>
-    </orderedlist>
-  </para>
+  <orderedlist>
+    <listitem><para>
+    Obtain a userid by registering with Sourceforge; this userid is represented below as &lt;your_sf_userid&gt;
+    </para></listitem>
+    <listitem><para>
+    Be registered as a &kappname; developer; this must be done by a project administrator, the names of which appear on the project home page on Sourceforge.
+    </para></listitem>
+  </orderedlist>
 </para>
 
 <para>
@@ -142,12 +140,12 @@ For each match, check whether the code or interface of the shared library has be
   </orderedlist>
 </para>
 
-<para>
 <caution>
+<para>
 Make sure to modify the numbers in coordination with changes on the release- and development branch.
 It could well be, that the REVISION must be incremented more than 1 if it has been changed on the other branch as well.
-</caution>
 </para>
+</caution>
 </listitem>
 
 <listitem>
@@ -160,7 +158,7 @@ From the TLD, issue the commands:
 
 <programlisting>
 <prompt>thb: ~&gt; </prompt><userinput>make -f Makefile.dist release</userinput>
-<prompt>thb: ~&gt; </prompt><userinput>./configure <emphasis>&lt;any-options-you-need&gt;</emphasis></userinput>
+<prompt>thb: ~&gt; </prompt><userinput>./configure &lt;any-options-you-need&gt;</userinput>
 <prompt>thb: ~&gt; </prompt><userinput>make</userinput>
 </programlisting>
 <para>
@@ -261,7 +259,7 @@ Update and optimize the size of the tar-ball
 This can be done with the following command from the TLD
 </para>
   <programlisting>
-    <prompt>thb: ~&gt; </prompt><userinput>md5sum <emphasis>name-of-tarball.tar.bz2</emphasis> &gt;/home/me/somewheresafe</userinput>
+    <prompt>thb: ~&gt; </prompt><userinput>md5sum name-of-tarball.tar.bz2 &gt;/home/me/somewheresafe</userinput>
   </programlisting>
 <para>This checksum may be used to verify downloaded files at a later stage, and may be added to sourceforge at some future time.
 </para>
@@ -303,7 +301,7 @@ Using binary mode to transfer files.
 250 Directory successfully changed.
 <prompt>ftp&gt; </prompt><userinput>binary</userinput>
 200 Switching to Binary mode.
-<prompt>ftp&gt; </prompt><userinput>put <emphasis>name-of-tarball.tar.bz2</emphasis></userinput>
+<prompt>ftp&gt; </prompt><userinput>put name-of-tarball.tar.bz2</userinput>
 <prompt>ftp&gt;</prompt><userinput> quit</userinput>
 </programlisting>
 </para>
@@ -381,7 +379,7 @@ From the TLD, issue the commands:
 
 <programlisting>
 <prompt>thb: ~&gt; </prompt><userinput>make -f Makefile.dist</userinput>
-<prompt>thb: ~&gt; </prompt><userinput>./configure <emphasis>&lt;any-options-you-need&gt;</emphasis></userinput>
+<prompt>thb: ~&gt; </prompt><userinput>./configure &lt;any-options-you-need&gt;</userinput>
 <prompt>thb: ~&gt; </prompt><userinput>make</userinput>
 </programlisting>
 <para>
@@ -423,6 +421,7 @@ branch (unstable) in parallel.
 <para>
 When the time has come to create a new stable branch, the following steps
 have to be performed.
+</para>
 
 <orderedlist>
 <listitem>
@@ -538,9 +537,6 @@ the same revision 1.2.
 </programlisting>
 
 </example>
-
-
-</para>
 </sect1>
 
 

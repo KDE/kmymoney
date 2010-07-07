@@ -94,7 +94,7 @@
         <para>to close off the include stoppers.</para>
         <para/>
       </sect2>
-      <sect2 id="dialogs=code-file">
+      <sect2 id="dialogs-code-file">
         <title>Code (.cpp) file</title>
         <para/>
         <para>First, don't forget to have #include directives for Qt headers for any widgets you are going to reference.</para>
