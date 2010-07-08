@@ -1,5 +1,10 @@
 <chapter id="documentation">
 <chapterinfo>
+
+<keywordset>
+  <keyword>documentation</keyword>
+</keywordset>
+
 <authorgroup>
 <author>
         <firstname>Tom</firstname>
@@ -9,17 +14,21 @@
         </affiliation>
 </author>
 </authorgroup>
+
 </chapterinfo>
 
 <title>Documentation</title>
+
 <para>
 Code documentation is discussed in the section "coding."  This section discusses developer and user documentation and generating html and pdf versions of same.  Note that all non-source-code documentation, with two exceptions, must be written in docbook form.
 <note>
+<para>
 The two exceptions are
 <filename>./kmymoney2/html/home.html</filename>
 and
 <filename>./kmymoney2/html/whats_new.html</filename>
 which are used on &kappname;'s internal home page when running the application.
+</para>
 </note>
 </para>
 
@@ -31,17 +40,17 @@ In addition to the KDE guidelines, there are &kappname; guidelines (which take p
 See the following KDE resources:
 </para>
 <orderedlist>
-<listitem><ulink url="http://l10n.kde.org/">http://l10n.kde.org/</ulink></listitem>
-<listitem><ulink url="http://l10n.kde.org/docs/markup/index.html">http://l10n.kde.org/docs/markup/index.html</ulink></listitem>
-<listitem><ulink url="http://l10n.kde.org/docs/tools.php">http://l10n.kde.org/docs/tools.php</ulink></listitem>
-<listitem><ulink url="http://people.fruitsalad.org/phil/kde">http://people.fruitsalad.org/phil/kde</ulink></listitem>
-<listitem><ulink url="http://people.fruitsalad.org/phil/kde/pdf-stuff/pdf-instructions.html">http://people.fruitsalad.org/phil/kde/pdf-stuff/pdf-instructions.html</ulink></listitem>
+<listitem><para><ulink url="http://l10n.kde.org/">http://l10n.kde.org/</ulink></para></listitem>
+<listitem><para><ulink url="http://l10n.kde.org/docs/markup/index.html">http://l10n.kde.org/docs/markup/index.html</ulink></para></listitem>
+<listitem><para><ulink url="http://l10n.kde.org/docs/tools.php">http://l10n.kde.org/docs/tools.php</ulink></para></listitem>
+<listitem><para><ulink url="http://people.fruitsalad.org/phil/kde">http://people.fruitsalad.org/phil/kde</ulink></para></listitem>
+<listitem><para><ulink url="http://people.fruitsalad.org/phil/kde/pdf-stuff/pdf-instructions.html">http://people.fruitsalad.org/phil/kde/pdf-stuff/pdf-instructions.html</ulink></para></listitem>
 
 </orderedlist>
 
 <para>XML entities should be used for commonly used terms and phrases.  There is a &kappname; list at
 <orderedlist>
-<listitem>./developer-doc/phb/kmymoney-entities.docbook</listitem>
+<listitem><para>./developer-doc/phb/kmymoney-entities.docbook</para></listitem>
 </orderedlist>
 </para>
 
@@ -52,22 +61,26 @@ See the following KDE resources:
 <!-- =============================================== -->
 <sect1 id="documentation-entities">
 <title>Style Guide</title>
+<para>
+</para>
 </sect1>
 
 <!-- =============================================== -->
 <sect1 id="documentation-tools">
 <title>Tools</title>
 <orderedlist>
-<listitem>meinproc (used to produce HTML from docbook; part of KDE base)</listitem>
-<listitem>dblatex (used to produce PDF from docbook; add-on from KDE doc team; see resources)</listitem>
-<listitem>??check?? (used to check docbook formatting, etc.; part of KDE base)</listitem>
-<listitem>??check?? (used to check consistency of word and phrase usage;  add-on from KDE doc team; see resources)</listitem>
+<listitem><para>meinproc (used to produce HTML from docbook; part of KDE base)</para></listitem>
+<listitem><para>dblatex (used to produce PDF from docbook; add-on from KDE doc team; see resources)</para></listitem>
+<listitem><para>??check?? (used to check docbook formatting, etc.; part of KDE base)</para></listitem>
+<listitem><para>??check?? (used to check consistency of word and phrase usage;  add-on from KDE doc team; see resources)</para></listitem>
 </orderedlist>
 </sect1>
 
 <!-- =============================================== -->
 <sect1 id="documentation-style-guide">
 <title>Style Guide</title>
+<para>
+</para>
 </sect1>
 
 
@@ -89,10 +102,14 @@ See the following KDE resources:
 
 <sect2 id="documentation-making-pdf">
 <title>PDF</title>
+<para>
+</para>
 </sect2>
 
 <sect2 id="documentation-making-man">
 <title>Man Pages (UNIX only)</title>
+<para>
+</para>
 </sect2>
 
 </sect1>

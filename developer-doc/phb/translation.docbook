@@ -62,7 +62,7 @@ The next step is to create a po file to start the translation.
 <title>No po file for my language available</title>
 <para>
 That's the most simple case: Rename <filename>kmymoney2.pot</filename> to
-<filename><emphasis>lang</emphasis>.po</filename> where <emphasis>lang</emphasis>
+<filename>lang.po</filename> where <emphasis>lang</emphasis>
 is your language code e.g. <emphasis>de</emphasis> for German.
 </para>
 
@@ -96,10 +96,8 @@ and open this file with <application>kbabel</application>.
 <listitem>
 <para>
 In <application>kbabel</application> choose
-<guimenu>
-Tools
+<guimenu>Tools</guimenu>
 <guimenuitem>Rough translation</guimenuitem>
-</guimenu>
 from the menu. A dialog pops up. Choose the following options:
 <itemizedlist>
 <listitem><para>What to translate::Untranslated Entries</para></listitem>
@@ -122,11 +120,13 @@ Don't select anything else.
 </listitem>
 </itemizedlist>
 <caution>
+<para>
 The original po file could have entries marked as "fuzzy", that means that
 the translation might be not very good or even horribly wrong. After you
 did this merger process you lose this information. It might be a good
 idea to translate all fuzzy strings in the old, unmerged po file before
 you do this explained merging process.
+</para>
 </caution>
 </para>
 </sect3>

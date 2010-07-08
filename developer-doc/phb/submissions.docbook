@@ -21,6 +21,9 @@ For the specifics on how to code, translate or write documentation, refer to the
 
 <sect1 id="patch">
 <title>Steps to create a patch</title>
+<para>
+Keep in mind that there are times when all developers have plenty of work, or a patch should be best handled by a specific developer that may not be readily available, so be patient. Also, if you don't receive an acknowledgement after a few days, write to the list asking for the status of your patch. Subscribing to the developer mailing list would be a good idea if you are sending contributions.
+</para>
 
 <sect2 id="prerequisites">
 <title>Prerequisites</title>
@@ -92,8 +95,5 @@ The developer handling the patch should acknowledge that to the list as well, to
 </itemizedlist>
 </sect2>
 
-<para>
-Keep in mind that there are times when all developers have plenty of work, or a patch should be best handled by a specific developer that may not be readily available, so be patient. Also, if you don't receive an acknowledgement after a few days, write to the list asking for the status of your patch. Subscribing to the developer mailing list would be a good idea if you are sending contributions.
-</para>
 </sect1>
 </chapter>

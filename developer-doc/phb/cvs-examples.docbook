@@ -83,7 +83,7 @@ as parameter to the checkout command.
 <title>Filling the sandbox for the first time with a specific version</title>
 <screen>
 
-  <prompt>thb:~&gt; </prompt><userinput>cvs -d &cvs-user;@&cvs-host;:&cvs-dir; co -r <emphasis>version-tag</emphasis> &cvs-module;</userinput>
+  <prompt>thb:~&gt; </prompt><userinput>cvs -d &cvs-user;@&cvs-host;:&cvs-dir; co -r version-tag &cvs-module;</userinput>
 
 
 </screen>
@@ -525,12 +525,9 @@ the repository.
 <screen>
 
   <prompt>thb:~&gt; </prompt><userinput>cd stable</userinput>
-  <prompt>thb:~/stable&gt; </prompt><userinput>cvs -d &cvs-user;@&cvs-host;:&cvs-dir; \ <footnote>
-<para>
+  <prompt>thb:~/stable&gt; </prompt><userinput>cvs -d &cvs-user;@&cvs-host;:&cvs-dir; \
 The back-slash is inserted here to break the line for readability. For real usage, the command has to be entered on a single line. 
-</para>
-</footnote>
-                co -r <emphasis>rel-0-4-branch</emphasis> &cvs-module;</userinput>
+                co -r rel-0-4-branch &cvs-module;</userinput>
   <prompt>thb:~/stable&gt; </prompt>
 
 

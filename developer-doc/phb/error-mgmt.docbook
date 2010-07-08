@@ -25,7 +25,7 @@ comment or an entry in the ChangeLog file). To allow searches for the number,
 a specific format has to be used for these references.
 
 The format is
-<command>#<emphasis>assigned-number</emphasis></command>, e.g. #481229.
+<command>#assigned-number</command>, e.g. #481229.
 </para>
 </sect2>
 </sect1>
