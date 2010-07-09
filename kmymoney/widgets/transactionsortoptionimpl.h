@@ -22,6 +22,19 @@
 
 #include "ui_transactionsortoptiondecl.h"
 
+
+// ----------------------------------------------------------------------------
+// QT Includes
+#include <QListWidgetItem>
+
+// ----------------------------------------------------------------------------
+// KDE Includes
+#include <KListWidget>
+
+// ----------------------------------------------------------------------------
+// Project Includes
+
+
 class TransactionSortOption : public QWidget, public Ui::TransactionSortOptionDecl
 {
   Q_OBJECT
@@ -30,13 +43,14 @@ public:
   QString settings(void) const;
 public slots:
   void setSettings(const QString& settings);
-  void toggleDirection(Q3ListViewItem * item);
+  void toggleDirection(QListWidgetItem * item);
 
 protected:
-  Q3ListViewItem * addEntry(K3ListView * p, Q3ListViewItem * after, int idx);
+  QListWidgetItem * addEntry(KListWidget * p, QListWidgetItem * after, int idx);
+  void setDirectionIcon(QListWidgetItem* item);
 protected slots:
-  void slotAvailableSelected(Q3ListViewItem * item);
-  void slotSelectedSelected(Q3ListViewItem * item);
+  void slotAvailableSelected(void);
+  void slotSelectedSelected(void);
   void slotAddItem(void);
   void slotRemoveItem(void);
   void slotUpItem(void);

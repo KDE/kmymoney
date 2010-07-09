@@ -10,23 +10,14 @@
         <x>0</x>
         <y>0</y>
         <width>486</width>
-        <height>228</height>
+        <height>230</height>
       </rect>
     </property>
     <layout class="QHBoxLayout">
       <item>
         <layout class="QVBoxLayout">
           <item>
-            <widget class="K3ListView" name="m_availableList">
-              <property name="allColumnsShowFocus">
-                <bool>true</bool>
-              </property>
-              <property name="resizeMode">
-                <enum>AllColumns</enum>
-              </property>
-              <property name="itemsMovable">
-                <bool>false</bool>
-              </property>
+            <widget class="KListWidget" name="m_availableList">
               <column>
                 <property name="text">
                   <string>Sort options</string>
@@ -95,16 +86,7 @@
       <item>
         <layout class="QVBoxLayout">
           <item>
-            <widget class="K3ListView" name="m_selectedList">
-              <property name="allColumnsShowFocus">
-                <bool>true</bool>
-              </property>
-              <property name="resizeMode">
-                <enum>AllColumns</enum>
-              </property>
-              <property name="itemsMovable">
-                <bool>false</bool>
-              </property>
+            <widget class="KListWidget" name="m_selectedList">
               <column>
                 <property name="text">
                   <string>Sort order</string>
@@ -173,11 +155,11 @@
     </layout>
   </widget>
   <layoutdefault spacing="6" margin="11"/>
-    <customwidgets>
+  <customwidgets>
     <customwidget>
-      <class>K3ListView</class>
-      <extends>Q3ListView</extends>
-      <header location="global">k3listview.h</header>
+      <class>KListWidget</class>
+      <extends>QListWidget</extends>
+      <header location="global">klistwidget.h</header>
     </customwidget>
   </customwidgets>
   <connections>
@@ -189,9 +171,9 @@
     </connection>
     <connection>
       <sender>m_availableList</sender>
-      <signal>selectionChanged(Q3ListViewItem*)</signal>
+      <signal>itemSelectionChanged()</signal>
       <receiver>TransactionSortOptionDecl</receiver>
-      <slot>slotAvailableSelected(Q3ListViewItem*)</slot>
+      <slot>slotAvailableSelected()</slot>
     </connection>
     <connection>
       <sender>m_downButton</sender>
@@ -207,9 +189,9 @@
     </connection>
     <connection>
       <sender>m_selectedList</sender>
-      <signal>selectionChanged(Q3ListViewItem*)</signal>
+      <signal>itemSelectionChanged()</signal>
       <receiver>TransactionSortOptionDecl</receiver>
-      <slot>slotSelectedSelected(Q3ListViewItem*)</slot>
+      <slot>slotSelectedSelected()</slot>
     </connection>
     <connection>
       <sender>m_upButton</sender>
@@ -219,15 +201,9 @@
     </connection>
     <connection>
       <sender>m_selectedList</sender>
-      <signal>doubleClicked(Q3ListViewItem*)</signal>
+      <signal>itemDoubleClicked(QListWidgetItem*)</signal>
       <receiver>TransactionSortOptionDecl</receiver>
-      <slot>toggleDirection(Q3ListViewItem*)</slot>
-    </connection>
-    <connection>
-      <sender>m_selectedList</sender>
-      <signal>spacePressed(Q3ListViewItem*)</signal>
-      <receiver>TransactionSortOptionDecl</receiver>
-      <slot>toggleDirection(Q3ListViewItem*)</slot>
+      <slot>toggleDirection(QListWidgetItem*)</slot>
     </connection>
   </connections>
 </ui>
