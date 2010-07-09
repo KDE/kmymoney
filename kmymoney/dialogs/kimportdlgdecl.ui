@@ -215,8 +215,6 @@ Please enter the path to the QIF file or select it by clicking on the Browse but
   </layout>
   <zorder>qLabel1</zorder>
   <zorder>Line1</zorder>
-  <zorder>verticalSpacer</zorder>
-  <zorder>Spacer1</zorder>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
