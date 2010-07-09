@@ -13,4 +13,4 @@ kde4_add_ui_files(libendingbalancedlg_a_SOURCES ${libendingbalancedlg_a_UI} )
 KDE4_ADD_LIBRARY(endingbalancedlg STATIC ${libendingbalancedlg_a_SOURCES})
 
 # we rely on some widgets to be generated
-ADD_DEPENDENCIES(endingbalancedlg widgets)
+ADD_DEPENDENCIES(endingbalancedlg widgets dialogs)
