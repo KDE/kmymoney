@@ -40,6 +40,7 @@
 #include <QDropEvent>
 #include <QFocusEvent>
 #include <QMouseEvent>
+#include <QScrollBar>
 #include <QStyledItemDelegate>
 
 // ----------------------------------------------------------------------------
