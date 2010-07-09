@@ -116,7 +116,7 @@ protected slots:
 
 signals:
   /**
-    * This signal serves as proxy for KMyMoneyAccountTree::selectObject()
+    * This signal serves as proxy for KMyMoneyAccountTreeView::selectObject()
     *
     * @param obj const reference to object
     */
@@ -124,7 +124,7 @@ signals:
 
   /**
     * This signal serves as proxy for
-    * KMyMoneyAccountTree::openContextMenu(const MyMoneyObject&)
+    * KMyMoneyAccountTreeView::openContextMenu(const MyMoneyObject&)
     *
     * @param obj const reference to object
     */

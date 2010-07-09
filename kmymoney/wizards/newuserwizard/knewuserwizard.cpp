@@ -54,7 +54,6 @@
 #include <mymoneysecurity.h>
 #include <mymoneyfile.h>
 #include <kguiutils.h>
-#include <kmymoneyaccounttree.h>
 #include <mymoneypayee.h>
 #include <mymoneymoney.h>
 #include <mymoneyinstitution.h>

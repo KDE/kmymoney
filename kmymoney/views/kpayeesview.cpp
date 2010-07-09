@@ -39,6 +39,7 @@
 #include <QList>
 #include <QResizeEvent>
 #include <QtAlgorithms>
+#include <QTimer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -59,7 +60,6 @@
 // Project Includes
 
 #include "mymoneyfile.h"
-#include "kmymoneyaccounttree.h"
 #include "kmymoneyglobalsettings.h"
 #include "kmymoney.h"
 #include "models.h"

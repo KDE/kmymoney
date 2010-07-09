@@ -49,7 +49,7 @@
   * usability and clarity.
   *
   * The main functionality in the categories view is actually implemented
-  * in the KMyMoneyAccountTree. Signals from user actions are connect to
+  * in the KMyMoneyAccountTreeView. Signals from user actions are connect to
   * other signals/slots in KCategoriesView and relayed to KMyMoneyView.
   * A typical example is the selectObject() signal that eventually results
   * in enabling/disabling the user actions for the categories view.
@@ -95,13 +95,13 @@ private:
 
 signals:
   /**
-    * This signal serves as proxy for KMyMoneyAccountTree::selectObject()
+    * This signal serves as proxy for KMyMoneyAccountTreeView::selectObject()
     */
   void selectObject(const MyMoneyObject&);
 
   /**
     * This signal serves as proxy for
-    * KMyMoneyAccountTree::openContextMenu(const MyMoneyObject&)
+    * KMyMoneyAccountTreeView::openContextMenu(const MyMoneyObject&)
     */
   void openContextMenu(const MyMoneyObject& obj);
 

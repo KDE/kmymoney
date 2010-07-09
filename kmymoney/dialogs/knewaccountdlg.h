@@ -41,8 +41,6 @@
 
 #include "ui_knewaccountdlgdecl.h"
 
-class KMyMoneyAccountTreeBaseItem;
-
 namespace reports
 {
 }

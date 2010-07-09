@@ -29,7 +29,6 @@
 // Project Includes
 
 #include <mymoneyinstitution.h>
-#include <kmymoneyaccounttree.h>
 #include <mymoneyutils.h>
 
 #include "ui_kinstitutionsviewdecl.h"
@@ -74,13 +73,13 @@ private:
 
 signals:
   /**
-    * This signal serves as proxy for KMyMoneyAccountTree::selectObject()
+    * This signal serves as proxy for KMyMoneyAccountTreeView::selectObject()
     */
   void selectObject(const MyMoneyObject&);
 
   /**
     * This signal serves as proxy for
-    * KMyMoneyAccountTree::openContextMenu(const MyMoneyObject&)
+    * KMyMoneyAccountTreeView::openContextMenu(const MyMoneyObject&)
     */
   void openContextMenu(const MyMoneyObject& obj);
 
