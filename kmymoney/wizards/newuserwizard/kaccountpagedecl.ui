@@ -244,8 +244,6 @@
     <tabstop>m_institutionNameEdit</tabstop>
     <tabstop>m_institutionNumberEdit</tabstop>
     <tabstop>m_haveCheckingAccountButton</tabstop>
-    <tabstop>kActiveLabel2</tabstop>
-    <tabstop>kActiveLabel1</tabstop>
   </tabstops>
   <connections>
     <connection>

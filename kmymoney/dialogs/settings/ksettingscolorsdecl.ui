@@ -19,7 +19,7 @@
     <layout class="QVBoxLayout">
       <item>
         <widget class="KTabWidget" name="tabWidget2">
-          <widget class="QWidget" name="tab">
+          <widget class="QWidget" name="m_foregroundTab">
             <attribute name="title">
               <string>Foreground</string>
             </attribute>
@@ -155,7 +155,7 @@
               </item>
             </layout>
           </widget>
-          <widget class="QWidget" name="tab">
+          <widget class="QWidget" name="m_backgroundTab">
             <attribute name="title">
               <string comment="@title background colors">Background</string>
             </attribute>

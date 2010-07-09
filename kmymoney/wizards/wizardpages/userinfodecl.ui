@@ -211,6 +211,5 @@
     <tabstop>m_telephoneEdit</tabstop>
     <tabstop>m_emailEdit</tabstop>
     <tabstop>m_loadAddressButton</tabstop>
-    <tabstop>kActiveLabel1</tabstop>
   </tabstops>
 </ui>
