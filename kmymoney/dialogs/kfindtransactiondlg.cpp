@@ -68,7 +68,7 @@ KSortOptionDlg::KSortOptionDlg(QWidget *parent)
 
 void KSortOptionDlg::init()
 {
-//  setMainWidget(m_tabWidget);
+  setButtons(ButtonCodes(KDialog::None));
 }
 
 void KSortOptionDlg::setSortOption(const QString& option, const QString& def)
