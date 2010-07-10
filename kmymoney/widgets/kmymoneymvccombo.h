@@ -48,6 +48,7 @@ class QSortFilterProxyModel;
 class KMyMoneyMVCCombo : public KComboBox
 {
   Q_OBJECT
+  Q_PROPERTY(QString selectedItem READ selectedItem WRITE setSelectedItem STORED false)
 
 public:
   KMyMoneyMVCCombo(QWidget* parent = 0);
@@ -257,6 +258,7 @@ private:
 class KMyMoneyGeneralCombo : public KComboBox
 {
   Q_OBJECT
+  Q_PROPERTY(int currentItem READ currentItem WRITE setCurrentItem STORED false)
 public:
   KMyMoneyGeneralCombo(QWidget* parent = 0);
   virtual ~KMyMoneyGeneralCombo();

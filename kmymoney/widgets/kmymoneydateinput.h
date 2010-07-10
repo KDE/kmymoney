@@ -73,6 +73,7 @@ protected:
 class KMM_WIDGETS_EXPORT kMyMoneyDateInput : public KHBox
 {
   Q_OBJECT
+  Q_PROPERTY(QDate date READ date WRITE setDate STORED false)
 
 public:
   explicit kMyMoneyDateInput(QWidget *parent = 0, Qt::AlignmentFlag flags = Qt::AlignLeft);

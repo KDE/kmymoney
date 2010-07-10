@@ -52,6 +52,7 @@ class QHBoxLayout;
 class KMyMoneySelector : public QWidget
 {
   Q_OBJECT
+  Q_PROPERTY(QStringList selectedItems READ selectedItems DESIGNABLE false STORED false)
 public:
   explicit KMyMoneySelector(QWidget *parent = 0, Qt::WFlags flags = 0);
   virtual ~KMyMoneySelector();
