@@ -35,7 +35,9 @@ Before I can give an answer to this question, I should explain what unit
 testing is about. I do not cover all relevant aspects here nor do I start a
 discussion of the various aspects of unit testing. If you want to read more
 about the details of unit testing, the philosophy behind it and about the
-various tools available, please visit the project pages of JUnit and
+various tools available, please visit the project pages of 
+<ulink url="http://doc.trolltech.com/latest/qtestlib-manual.html/">QtTest</ulink>,
+<ulink url="http://www.junit.org/">JUnit</ulink> and
 <ulink url="http://cppunit.sourceforge.net/">CPPUNIT</ulink>.
 The following explanation describes what unit testing is:
 </para>
@@ -107,6 +109,14 @@ test cases for existing code to get a feeling for what is required.
 </para>
 
 <para>
+When &app; was ported to KDE4 the <ulink url="http://cppunit.sourceforge.net/">CPPUNIT</ulink> 
+test engine was replaced with the
+<ulink url="http://doc.trolltech.com/latest/qtestlib-manual.html/">QtTest</ulink>
+test engine. We did this because &app; is a KDE, thus a Qt, application so it is better
+to use Qt's unit test engine than to have an extra dependency on <ulink url="http://cppunit.sourceforge.net/">CPPUNIT</ulink>.
+</para>
+
+<para>
 I found it annoying to write test cases for code that existed and was
 believed to work (version 0.4 of the project). When the decission was made
 to start with the 0.5 development branch, I started working on the new
@@ -171,77 +181,48 @@ organize test cases and how to setup a test environment.
 
 <para>
 My examples will all be based on the code of the &app; engine found in the
-subdirectory <command>kmymoney2/kmymoney2/mymoney</command> and it's
- subdirectory <command>storage</command>. A
-single executable exists that contains all the test code for the engine.
-It's called <command>autotest</command> and resides in the mymoney
-subdirectory.
-</para>
+subdirectory <command>kmymoney/kmymoney/mymoney</command> and it's
+ subdirectory <command>storage</command>.</para>
 
 <sect2 id="unit-test-integration">
-<title>Integration of CPPUNIT into the &app; project</title>
+<title>Integration of <ulink url="http://doc.trolltech.com/latest/qtestlib-manual.html/">QtTest</ulink> into the &app; project</title>
 <para>
-The information included in the following is based on version 1.8.0 of
-CPPUNIT. The &app; build system has been enhanced to check for it's
-presence. Certain definitions setup by
-<emphasis>automake/configure</emphasis> allow to compile the project
-without unit testing support.
-<caution>
-<para>
-This is not the recommended way for developers!
-</para>
-</caution>
+The &app; build system has been configured to build the unit tests only when the
+<emphasis>KDE4_BUILD_TESTS</emphasis> cmake variable is set to <emphasis>ON</emphasis>.
+To do this pass the -DKDE4_BUILD_TESTS=ON option while configuring the project using cmake.
 </para>
 
 <para>
-If code within test environments is specific to the presence of CPPUNIT it
-can be included in the following #ifdef primitive:
-
-<screen>
-
-#ifdef HAVE_LIBCPPUNIT
-// specific code that should only be compiled,
-// if CPPUNIT >= 1.8.0 is present
-#endif
-
-
-</screen>
 For an example see the
 <link linkend="test-container-example">Unit Test Container Source File
 Example</link>.
 </para>
 
 <para>
-The same applies for directives that are used in
-<command>Makefile.am</command> files. The primitive to be used there is as
-follows:
+In order to add a unit test source file to the build system the following
+cmake macros should be used:
 
 <screen>
 
-if CPPUNIT
+IF( KDE4_BUILD_TESTS )
 
-# include automake-directives here, that should be evaluated
-# only, when CPPUNIT is present
+  # UnitTestName
+  SET(unittestname_SRCS unittestname.cpp)
+  KDE4_ADD_UNIT_TEST(unittestname TESTNAME kmymoney-unittestname ${unittestname_SRCS})
+  ADD_DEPENDENCIES(unittestname make-targets-upon-which-the-unit-test-depends)
+  TARGET_LINK_LIBRARIES(unittestname libraries-upon-which-the-unit-test-depends)
 
-else
-
-# include automake directives here, that should be evaluated
-# only, when CPPUNIT is not present.
-
-endif
-
+ENDIF( KDE4_BUILD_TESTS )
 
 </screen>
-For an example see <command>kmymoney2/mymoney/Makefile.am</command>.
+For an example see <command>kmymoney/mymoney/CmakeLists.txt</command>.
 </para>
 </sect2>
 
 <sect2 id="unit-test-naming">
 <title>Naming conventions</title>
 <para>
-The test containers are also classes. Throughout CPPUNIT, the test
-containers are referred to as <emphasis>test fixtures</emphasis>. In the
-following, I use both terms.
+The test containers are also classes.
 For a given class <emphasis>MyMoneyAbc</emphasis>, which
 resides in the files <command>mymoneyabc.h</command> and
 <command>mymoneyabc.cpp</command>, 
@@ -250,8 +231,8 @@ in the files
 <command>mymoneyabctest.h</command> and
 <command>mymoneyabctest.cpp</command> in the same directory.
 The test container must be derived
-publicaly from <command>CppUnit::TestFixture</command>.
-Each testcase is given a
+publicly from <command>QObject</command> and it mus contain the <command>Q_OBJECT</command> 
+macro. Each testcase is given a
 descriptive name (e.g. EmptyConstructor) and I found it useful to prefix
 this name with the literal 'test' resulting into something like
 testEmptyConstructor.
@@ -261,14 +242,14 @@ testEmptyConstructor.
 <sect2 id="unit-test-includes">
 <title>Necessary include files</title>
 <para>
-In order to use the functionality provided by CPPUNIT, one has to include
-some information provided with CPPUNIT in the test environment. This is
+In order to use the functionality provided by QtTest, one has to include
+some information provided with QtTest in the test environment. This is
 done with the following include primitive as one of the first things in the
 header file of the test case container (e.g. mymoneyabctest.h):
 
 <screen>
 
-#include &lt;cppunit/extensions/HelperMacros.h&gt;
+#include &lt;QtTest/QtTest&gt;
 
 </screen>
 </para>
@@ -285,26 +266,30 @@ and thus accessing the information from the test container is not possible.
 </para>
 
 <para>
-Various mechanism have been developed all with pros and cons. Throughout
-the test containers I wrote, I used the method of redefining the specifier
-<emphasis>private</emphasis> through <emphasis>public</emphasis> but only
-for the time when reading the header file of the object under test. This can
-easily be done by the C++ preprocessor. The following example shows how to
-do this:
+Various mechanism have been developed all with pros and cons. The old method 
+was by redefining the specifier <emphasis>private</emphasis> through 
+<emphasis>public</emphasis> but only for the time when reading the header 
+file of the object under test. This leads to a problem when the linker includes
+the access specifiers in the mangled C++ function name. Because in the library where
+the tested object resided one of it's functions had one name and in the unit test
+it had another (due to the different access specifiers) a link error would occur.
+</para>
+
+<para>
+The current method consists in having the <emphasis>KMM_MYMONEY_UNIT_TESTABLE</emphasis>
+macro placed in the declaration of each class that has a unit test. <emphasis>KMM_MYMONEY_UNIT_TESTABLE</emphasis> 
+is usually expanded to nothing but when the header of an object is included in a unit test
+<emphasis>KMM_MYMONEY_UNIT_TESTABLE</emphasis> is expanded to the following statement
+<emphasis>friend class UnitTestClassName;</emphasis>. This definition allows the
+unit test class to access all members of the tested class and does not cause the 
+linkage error caused by the older method.
 
 <screen>
 
-#define private public
+#define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyAbcTest;
 #include "mymoneyabc.h"
-#undef private
-
 
 </screen>
-
-The same applies to protected members. Just add a line containing
-<emphasis>#define protected public</emphasis> before including the class
-definition and a line containing <emphasis>#undef protected</emphasis>
-right after the inclusion line.
 </para>
 </sect2>
 
