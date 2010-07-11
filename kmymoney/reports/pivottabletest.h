@@ -20,7 +20,8 @@
 
 #include <QtCore/QObject>
 
-namespace reports {
+namespace reports
+{
 class PivotTableTest;
 }
 

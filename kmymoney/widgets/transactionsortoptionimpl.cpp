@@ -138,7 +138,7 @@ void TransactionSortOption::toggleDirection(QListWidgetItem* item)
 
 void TransactionSortOption::setDirectionIcon(QListWidgetItem* item)
 {
-  if(item->data(Qt::UserRole).toInt() > 0) {
+  if (item->data(Qt::UserRole).toInt() > 0) {
     item->setIcon(KIcon("go-up"));
   } else {
     item->setIcon(KIcon("go-down"));
@@ -208,9 +208,9 @@ void TransactionSortOption::slotRemoveItem(void)
 {
   QListWidgetItem* item;
   if ((item = m_selectedList->currentItem()) != 0) {
-    QListWidgetItem* next = m_selectedList->item(m_selectedList->row(item)+1);
+    QListWidgetItem* next = m_selectedList->item(m_selectedList->row(item) + 1);
     if (!next)
-      next = m_selectedList->item(m_selectedList->row(item)+1);
+      next = m_selectedList->item(m_selectedList->row(item) + 1);
     m_selectedList->takeItem(m_selectedList->row(item));
     m_availableList->addItem(item);
     m_removeButton->setEnabled(m_selectedList->count() > 0);
