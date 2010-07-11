@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=KMyMoney developer handbook
+Name[x-test]=xxKMyMoney developer handbookxx
+Icon=kmymoney
+Exec=kmymoney
+Categories=Qt;KDE;Office;ProjectManagement;
+X-DocPath=kmymoney-developer/index.html
+NoDisplay=true
+Terminal=false
+Type=Application
