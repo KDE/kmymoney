@@ -139,9 +139,9 @@ void TransactionSortOption::toggleDirection(QListWidgetItem* item)
 void TransactionSortOption::setDirectionIcon(QListWidgetItem* item)
 {
   if (item->data(Qt::UserRole).toInt() > 0) {
-    item->setIcon(KIcon("go-up"));
+    item->setIcon(KIcon("view-sort-ascending"));
   } else {
-    item->setIcon(KIcon("go-down"));
+    item->setIcon(KIcon("view-sort-descending"));
   }
 }
 
