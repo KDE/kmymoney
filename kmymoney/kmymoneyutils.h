@@ -268,11 +268,6 @@ public:
     */
   static bool appendCorrectFileExt(QString& name, const QString& extension);
 
-  static QPixmap billScheduleIcon(int size);
-  static QPixmap depositScheduleIcon(int size);
-  static QPixmap transferScheduleIcon(int size);
-  static QPixmap scheduleIcon(int size);
-
   /**
     * Check that internal MyMoney engine constants use the same
     * values as the KDE constants.
