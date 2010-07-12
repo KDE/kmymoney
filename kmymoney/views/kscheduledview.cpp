@@ -25,12 +25,14 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QToolButton>
+
 #include <QComboBox>
-#include <QTabWidget>
 #include <QLayout>
-#include <QTimer>
 #include <QList>
+#include <QStandardItemModel>
+#include <QTabWidget>
+#include <QTimer>
+#include <QToolButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -41,9 +43,7 @@
 #include <kmenu.h>
 #include <kiconloader.h>
 #include <kmessagebox.h>
-#include <k3listview.h>
 #include <kpushbutton.h>
-#include <k3listviewsearchline.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -66,24 +66,15 @@ KScheduledView::KScheduledView(QWidget *parent) :
 
   // create the searchline widget
   // and insert it into the existing layout
-  m_searchWidget = new K3ListViewSearchLineWidget(m_qlistviewScheduled, m_listTab);
+  m_searchWidget = new KTreeWidgetSearchLineWidget(m_listTab, m_scheduleTree);
   m_listTabLayout->insertWidget(0, m_searchWidget);
 
-  m_qlistviewScheduled->addColumn(i18n("Type/Name"));
-  m_qlistviewScheduled->addColumn(i18n("Account"));
-  m_qlistviewScheduled->addColumn(i18n("Payee"));
-  m_qlistviewScheduled->addColumn(i18n("Amount"));
-  m_qlistviewScheduled->addColumn(i18n("Next Due Date"));
-  m_qlistviewScheduled->addColumn(i18n("Frequency"));
-  m_qlistviewScheduled->addColumn(i18n("Payment Method"));
-  m_qlistviewScheduled->setColumnAlignment(3, Qt::AlignRight);
+  //enable custom context menu
+  m_scheduleTree->setContextMenuPolicy(Qt::CustomContextMenu);
 
   readConfig();
 
-  m_qlistviewScheduled->setMultiSelection(false);
-  m_qlistviewScheduled->header()->setResizeEnabled(true);
-  if (m_qlistviewScheduled->sortColumn() == -1)
-    m_qlistviewScheduled->setSorting(0);
+  m_scheduleTree->setSelectionMode(QAbstractItemView::SingleSelection);
 
   connect(m_qbuttonNew, SIGNAL(clicked()), kmymoney->action("schedule_new"), SLOT(trigger()));
 
@@ -95,20 +86,19 @@ KScheduledView::KScheduledView(QWidget *parent) :
   m_qbuttonNew->setGuiItem(KMyMoneyUtils::scheduleNewGuiItem());
   m_accountsCombo->setGuiItem(KMyMoneyUtils::accountsFilterGuiItem());
 
-  m_tabWidget->setTabIcon(m_tabWidget->indexOf(m_listTab), KIcon("view-list-details"));
-  m_tabWidget->setTabIcon(m_tabWidget->indexOf(m_calendarTab), KIcon("view-calendar-list"));
+  m_tabWidget->setTabIcon(m_tabWidget->indexOf(m_listTab), KIcon("view-calendar-list"));
+  m_tabWidget->setTabIcon(m_tabWidget->indexOf(m_calendarTab), KIcon("view-calendar-timeline"));
 
-  connect(m_qlistviewScheduled, SIGNAL(contextMenu(K3ListView*, Q3ListViewItem*, const QPoint&)),
-          this, SLOT(slotListViewContextMenu(K3ListView*, Q3ListViewItem*, const QPoint&)));
-  connect(m_qlistviewScheduled, SIGNAL(selectionChanged(Q3ListViewItem*)),
-          this, SLOT(slotSetSelectedItem(Q3ListViewItem*)));
+  connect(m_scheduleTree, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(slotListViewContextMenu(const QPoint&)));
+  connect(m_scheduleTree, SIGNAL(itemSelectionChanged()),
+          this, SLOT(slotSetSelectedItem()));
 
-  connect(m_qlistviewScheduled, SIGNAL(doubleClicked(Q3ListViewItem*, const QPoint&, int)),
-          this, SLOT(slotListItemExecuted(Q3ListViewItem*, const QPoint&, int)));
-  connect(m_qlistviewScheduled, SIGNAL(expanded(Q3ListViewItem*)),
-          this, SLOT(slotListViewExpanded(Q3ListViewItem*)));
-  connect(m_qlistviewScheduled, SIGNAL(collapsed(Q3ListViewItem*)),
-          this, SLOT(slotListViewCollapsed(Q3ListViewItem*)));
+  connect(m_scheduleTree, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)),
+          this, SLOT(slotListItemExecuted(QTreeWidgetItem*, int)));
+  connect(m_scheduleTree, SIGNAL(itemExpanded(QTreeWidgetItem*)),
+          this, SLOT(slotListViewExpanded(QTreeWidgetItem*)));
+  connect(m_scheduleTree, SIGNAL(itemCollapsed(QTreeWidgetItem*)),
+          this, SLOT(slotListViewCollapsed(QTreeWidgetItem*)));
 
   connect(m_calendar, SIGNAL(enterClicked(const MyMoneySchedule&, const QDate&)), this, SLOT(slotBriefEnterClicked(const MyMoneySchedule&, const QDate&)));
   connect(m_calendar, SIGNAL(skipClicked(const MyMoneySchedule&, const QDate&)), this, SLOT(slotBriefSkipClicked(const MyMoneySchedule&, const QDate&)));
@@ -128,11 +118,9 @@ static bool accountNameLessThan(const MyMoneyAccount& acc1, const MyMoneyAccount
 
 void KScheduledView::refresh(bool full, const QString& schedId)
 {
-  m_qlistviewScheduled->header()->setFont(KMyMoneyGlobalSettings::listHeaderFont());
+  m_scheduleTree->header()->setFont(KMyMoneyGlobalSettings::listHeaderFont());
 
-  QPoint startPoint = QPoint(m_qlistviewScheduled->contentsX(), m_qlistviewScheduled->contentsY());
-
-  m_qlistviewScheduled->clear();
+  m_scheduleTree->clear();
 
   try {
     if (full) {
@@ -145,6 +133,7 @@ void KScheduledView::refresh(bool full, const QString& schedId)
         // and sort them by name
         QList<MyMoneyAccount> list;
         QStringList accountList = file->asset().accountList();
+        accountList.append(file->liability().accountList());
         file->accountList(list, accountList, true);
         qStableSort(list.begin(), list.end(), accountNameLessThan);
 
@@ -173,18 +162,44 @@ void KScheduledView::refresh(bool full, const QString& schedId)
     if (scheduledItems.count() == 0)
       return;
 
-    KScheduledListItem *itemBills = new KScheduledListItem(m_qlistviewScheduled, i18n("Bills"), KMyMoneyUtils::billScheduleIcon(KIconLoader::Small), "0");
-    KScheduledListItem *itemDeposits = new KScheduledListItem(m_qlistviewScheduled, i18n("Deposits"), KMyMoneyUtils::depositScheduleIcon(KIconLoader::Small), "1");
-    KScheduledListItem *itemLoans = new KScheduledListItem(m_qlistviewScheduled, i18n("Loans"), KMyMoneyUtils::transferScheduleIcon(KIconLoader::Small), "2");
-    KScheduledListItem *itemTransfers = new KScheduledListItem(m_qlistviewScheduled, i18n("Transfers"), KMyMoneyUtils::transferScheduleIcon(KIconLoader::Small), "3");
+    QTreeWidgetItem *itemBills = new QTreeWidgetItem(m_scheduleTree);
+    itemBills->setIcon(0, KIcon("account-types-expense"));
+    itemBills->setText(0, i18n("Bills"));
+    itemBills->setData(0, OrderRole, QVariant(0));
+    itemBills->setFirstColumnSpanned(true);
+    itemBills->setFlags(Qt::ItemIsEnabled);
+    QFont bold = itemBills->font(0);
+    bold.setBold(true);
+    itemBills->setFont(0, bold);
+    QTreeWidgetItem *itemDeposits = new QTreeWidgetItem(m_scheduleTree);
+    itemDeposits->setIcon(0, KIcon("account-types-income"));
+    itemDeposits->setText(0, i18n("Deposits"));
+    itemDeposits->setData(0, OrderRole, QVariant(1));
+    itemDeposits->setFirstColumnSpanned(true);
+    itemDeposits->setFlags(Qt::ItemIsEnabled);
+    itemDeposits->setFont(0, bold);
+    QTreeWidgetItem *itemLoans = new QTreeWidgetItem(m_scheduleTree);
+    itemLoans->setIcon(0, KIcon("account-types-loan"));
+    itemLoans->setText(0, i18n("Loans"));
+    itemLoans->setData(0, OrderRole, QVariant(2));
+    itemLoans->setFirstColumnSpanned(true);
+    itemLoans->setFlags(Qt::ItemIsEnabled);
+    itemLoans->setFont(0, bold);
+    QTreeWidgetItem *itemTransfers = new QTreeWidgetItem(m_scheduleTree);
+    itemTransfers->setIcon(0, KIcon("transaction"));
+    itemTransfers->setText(0, i18n("Transfers"));
+    itemTransfers->setData(0, OrderRole, QVariant(3));
+    itemTransfers->setFirstColumnSpanned(true);
+    itemTransfers->setFlags(Qt::ItemIsEnabled);
+    itemTransfers->setFont(0, bold);
 
     QList<MyMoneySchedule>::Iterator it;
 
-    KScheduledListItem *openItem = 0;
+    QTreeWidgetItem *openItem = 0;
 
     for (it = scheduledItems.begin(); it != scheduledItems.end(); ++it) {
       MyMoneySchedule schedData = (*it);
-      KScheduledListItem* item = 0;
+      QTreeWidgetItem* item = 0;
 
       bool bContinue = true;
       QStringList::iterator accIt;
@@ -198,7 +213,7 @@ void KScheduledView::refresh(bool full, const QString& schedId)
       if (!bContinue)
         continue;
 
-      KScheduledListItem* parent = 0;
+      QTreeWidgetItem* parent = 0;
       switch (schedData.type()) {
         case MyMoneySchedule::TYPE_ANY:
           // Should we display an error ?
@@ -223,7 +238,7 @@ void KScheduledView::refresh(bool full, const QString& schedId)
       }
       if (parent) {
         if (!KMyMoneyGlobalSettings::hideFinishedSchedules() || !schedData.isFinished()) {
-          item = new KScheduledListItem(parent, schedData);
+          item = addScheduleItem(parent, schedData);
           if (schedData.id() == schedId)
             openItem = item;
         }
@@ -231,52 +246,164 @@ void KScheduledView::refresh(bool full, const QString& schedId)
     }
 
     if (openItem) {
-      m_qlistviewScheduled->setSelected(openItem, true);
+      m_scheduleTree->setCurrentItem(openItem);
     }
     // using a timeout is the only way, I got the 'ensureTransactionVisible'
     // working when coming from hidden form to visible form. I assume, this
     // has something to do with the delayed update of the display somehow.
     resize(width(), height() - 1);
     QTimer::singleShot(10, this, SLOT(slotTimerDone()));
-    m_qlistviewScheduled->update();
+    m_scheduleTree->update();
 
     // force repaint in case the filter is set
     m_searchWidget->searchLine()->updateSearch(QString());
 
     if (m_openBills)
-      itemBills->setOpen(true);
+      itemBills->setExpanded(true);
 
     if (m_openDeposits)
-      itemDeposits->setOpen(true);
+      itemDeposits->setExpanded(true);
 
     if (m_openTransfers)
-      itemTransfers->setOpen(true);
+      itemTransfers->setExpanded(true);
 
     if (m_openLoans)
-      itemLoans->setOpen(true);
-
-    m_qlistviewScheduled->setContentsPos(startPoint.x(), startPoint.y());
+      itemLoans->setExpanded(true);
 
   } catch (MyMoneyException *e) {
     KMessageBox::error(this, e->what());
     delete e;
   }
+
+  for(int i = 0; i < m_scheduleTree->columnCount(); ++i) {
+    m_scheduleTree->resizeColumnToContents(i);
+  }
+}
+
+QTreeWidgetItem* KScheduledView::addScheduleItem(QTreeWidgetItem* parent, MyMoneySchedule& schedule)
+{
+  QTreeWidgetItem* item = new QTreeWidgetItem(parent);
+  item->setData(0, Qt::UserRole, QVariant::fromValue(schedule));
+  item->setData(0, OrderRole, schedule.name());
+  if(!schedule.isFinished()) {
+    if(schedule.isOverdue()) {
+      item->setIcon(0, KIcon("view-calendar-upcoming-events"));
+      QBrush brush = item->foreground(0);
+      brush.setColor(Qt::red);
+      for(int i = 0; i < m_scheduleTree->columnCount(); ++i) {
+        item->setForeground(i, brush);
+      }
+    } else {
+      item->setIcon(0, KIcon("view-calendar-day"));
+    }
+  } else {
+    item->setIcon(0, KIcon("dialog-close"));
+    QBrush brush = item->foreground(0);
+    brush.setColor(Qt::darkGreen);
+    for(int i = 0; i < m_scheduleTree->columnCount(); ++i) {
+      item->setForeground(i, brush);
+    }
+  }
+
+  try {
+    MyMoneyTransaction transaction = schedule.transaction();
+    MyMoneySplit s1 = (transaction.splits().size() < 1) ? MyMoneySplit() : transaction.splits()[0];
+    MyMoneySplit s2 = (transaction.splits().size() < 2) ? MyMoneySplit() : transaction.splits()[1];
+    QList<MyMoneySplit>::ConstIterator it_s;
+    MyMoneySplit split;
+    MyMoneyAccount acc;
+
+    switch (schedule.type()) {
+      case MyMoneySchedule::TYPE_DEPOSIT:
+        if (s1.value().isNegative())
+          split = s2;
+        else
+          split = s1;
+        break;
+
+      case MyMoneySchedule::TYPE_LOANPAYMENT:
+        for (it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s) {
+          acc = MyMoneyFile::instance()->account((*it_s).accountId());
+          if (acc.accountGroup() == MyMoneyAccount::Asset
+              || acc.accountGroup() == MyMoneyAccount::Liability) {
+            if (acc.accountType() != MyMoneyAccount::Loan
+                && acc.accountType() != MyMoneyAccount::AssetLoan) {
+              split = *it_s;
+              break;
+            }
+          }
+        }
+        if (it_s == transaction.splits().constEnd()) {
+          qFatal("Split for payment account not found in %s:%d.", __FILE__, __LINE__);
+        }
+        break;
+
+      default:
+        if (!s1.value().isPositive())
+          split = s1;
+        else
+          split = s2;
+        break;
+    }
+    acc = MyMoneyFile::instance()->account(split.accountId());
+
+    item->setText(0, schedule.name());
+    MyMoneySecurity currency = MyMoneyFile::instance()->currency(acc.currencyId());
+
+    QString accName =  acc.name();
+    item->setText(1, accName);
+    item->setData(1, OrderRole, QVariant(accName));
+
+    QString payeeName;
+    if (!s1.payeeId().isEmpty()) {
+      payeeName = MyMoneyFile::instance()->payee(s1.payeeId()).name();
+      item->setText(2, payeeName);
+    } else {
+      item->setText(2, "---");
+    }
+    item->setData(2, OrderRole, QVariant(payeeName));
+
+    MyMoneyMoney amount = split.shares().abs();
+    item->setData(3, Qt::UserRole, QVariant::fromValue(amount));
+    item->setText(3, QString("%1  ").arg(amount.formatMoney(acc, currency)));
+    item->setTextAlignment(3, Qt::AlignRight);
+    item->setData(3, OrderRole, QVariant::fromValue(amount));
+
+    // Do the real next payment like ms-money etc
+    QDate nextDueDate;
+    if (schedule.isFinished()) {
+      item->setText(4, i18nc("Finished schedule", "Finished"));
+    } else {
+      nextDueDate = schedule.adjustedNextDueDate();
+      item->setText(4, KGlobal::locale()->formatDate(schedule.adjustedNextDueDate(), KLocale::ShortDate));
+    }
+    item->setData(4, OrderRole, QVariant(nextDueDate));
+
+    item->setText(5, i18n(schedule.occurrenceToString().toLatin1()));
+    item->setText(6, KMyMoneyUtils::paymentMethodToString(schedule.paymentType()));
+    item->setData(6, OrderRole, QVariant(KMyMoneyUtils::paymentMethodToString(schedule.paymentType())));
+  } catch (MyMoneyException *e) {
+    item->setText(0, "Error:");
+    item->setText(1, e->what());
+    delete e;
+  }
+  return item;
 }
 
 void KScheduledView::slotTimerDone(void)
 {
-  Q3ListViewItem* item;
+  QTreeWidgetItem* item;
 
-  item = m_qlistviewScheduled->selectedItem();
+  item = m_scheduleTree->currentItem();
   if (item) {
-    m_qlistviewScheduled->ensureItemVisible(item);
+    m_scheduleTree->scrollToItem(item);
   }
 
   // force a repaint of all items to update the branches
-  for (item = m_qlistviewScheduled->firstChild(); item != 0; item = item->itemBelow()) {
-    m_qlistviewScheduled->repaintItem(item);
+  /*for (item = m_scheduleTree->item(0); item != 0; item = m_scheduleTree->item(m_scheduleTree->row(item) + 1)) {
+    m_scheduleTree->repaintItem(item);
   }
-  resize(width(), height() + 1);
+  resize(width(), height() + 1);*/
 }
 
 void KScheduledView::slotReloadView(void)
@@ -316,9 +443,9 @@ void KScheduledView::readConfig(void)
   m_openLoans = grp.readEntry("KScheduleView_openLoans", true);
   m_tabWidget->setCurrentIndex(grp.readEntry("KScheduleView_tab", 0));
 
-  m_qlistviewScheduled->header()->setFont(KMyMoneyGlobalSettings::listHeaderFont());
+  m_scheduleTree->header()->setFont(KMyMoneyGlobalSettings::listHeaderFont());
   grp = config->group("Schedule View Settings");
-  m_qlistviewScheduled->restoreLayout(grp);
+  //m_scheduleTree->restoreLayout(grp);
 
 }
 
@@ -334,21 +461,17 @@ void KScheduledView::writeConfig(void)
   config->sync();
 
   grp = config->group("Schedule View Settings");
-  m_qlistviewScheduled->saveLayout(grp);
+  //m_scheduleTree->saveLayout(grp);
 }
 
-void KScheduledView::slotListViewContextMenu(K3ListView* /* view */, Q3ListViewItem *item, const QPoint& /* pos */)
+void KScheduledView::slotListViewContextMenu(const QPoint& pos)
 {
-  KScheduledListItem *scheduleItem = dynamic_cast<KScheduledListItem *>(item);
-  if (scheduleItem) {
+  QTreeWidgetItem* item = m_scheduleTree->itemAt(pos);
+  if (item) {
     try {
-      QString scheduleId = scheduleItem->scheduleId();
-
-      if (!scheduleId.isEmpty()) { // Top level item
-        MyMoneySchedule schedule = MyMoneyFile::instance()->schedule(scheduleId);
-        emit scheduleSelected(schedule);
-        m_selectedSchedule = schedule.id();
-      }
+      MyMoneySchedule schedule = item->data(0, Qt::UserRole).value<MyMoneySchedule>();
+      emit scheduleSelected(schedule);
+      m_selectedSchedule = schedule.id();
       emit openContextMenu();
     } catch (MyMoneyException *e) {
       KMessageBox::detailedSorry(this, i18n("Error activating context menu"), e->what());
@@ -359,20 +482,15 @@ void KScheduledView::slotListViewContextMenu(K3ListView* /* view */, Q3ListViewI
   }
 }
 
-void KScheduledView::slotListItemExecuted(Q3ListViewItem* item, const QPoint&, int)
+void KScheduledView::slotListItemExecuted(QTreeWidgetItem* item, int)
 {
-  KScheduledListItem* scheduleItem = (KScheduledListItem*)item;
-  if (!scheduleItem)
+  if (!item)
     return;
 
   try {
-    QString scheduleId = scheduleItem->scheduleId();
-
-    if (!scheduleId.isEmpty()) { // Top level item
-      MyMoneySchedule schedule = MyMoneyFile::instance()->schedule(scheduleId);
-      m_selectedSchedule = schedule.id();
-      emit editSchedule();
-    }
+    MyMoneySchedule schedule = item->data(0, Qt::UserRole).value<MyMoneySchedule>();
+    m_selectedSchedule = schedule.id();
+    emit editSchedule();
   } catch (MyMoneyException *e) {
     KMessageBox::detailedSorry(this, i18n("Error executing item"), e->what());
     delete e;
@@ -388,10 +506,11 @@ void KScheduledView::slotAccountActivated(int /*id*/)
     int accountCount = 0;
     MyMoneyFile* file = MyMoneyFile::instance();
 
-    // extract a list of all accounts under the asset group
+    // extract a list of all accounts under the asset and liability groups
     // and sort them by name
     QList<MyMoneyAccount> list;
     QStringList accountList = file->asset().accountList();
+    accountList.append(file->liability().accountList());
     file->accountList(list, accountList, true);
     qStableSort(list.begin(), list.end(), accountNameLessThan);
 
@@ -414,32 +533,30 @@ void KScheduledView::slotAccountActivated(int /*id*/)
   }
 }
 
-void KScheduledView::slotListViewExpanded(Q3ListViewItem* item)
+void KScheduledView::slotListViewExpanded(QTreeWidgetItem* item)
 {
-  KScheduledListItem *scheduleItem = (KScheduledListItem*)item;
-  if (scheduleItem) {
-    if (scheduleItem->text(0) == i18n("Bills"))
+  if (item) {
+    if (item->text(0) == i18n("Bills"))
       m_openBills = true;
-    else if (scheduleItem->text(0) == i18n("Deposits"))
+    else if (item->text(0) == i18n("Deposits"))
       m_openDeposits = true;
-    else if (scheduleItem->text(0) == i18n("Transfers"))
+    else if (item->text(0) == i18n("Transfers"))
       m_openTransfers = true;
-    else if (scheduleItem->text(0) == i18n("Loans"))
+    else if (item->text(0) == i18n("Loans"))
       m_openLoans = true;
   }
 }
 
-void KScheduledView::slotListViewCollapsed(Q3ListViewItem* item)
+void KScheduledView::slotListViewCollapsed(QTreeWidgetItem* item)
 {
-  KScheduledListItem *scheduleItem = (KScheduledListItem*)item;
-  if (scheduleItem) {
-    if (scheduleItem->text(0) == i18n("Bills"))
+  if (item) {
+    if (item->text(0) == i18n("Bills"))
       m_openBills = false;
-    else if (scheduleItem->text(0) == i18n("Deposits"))
+    else if (item->text(0) == i18n("Deposits"))
       m_openDeposits = false;
-    else if (scheduleItem->text(0) == i18n("Transfers"))
+    else if (item->text(0) == i18n("Transfers"))
       m_openTransfers = false;
-    else if (scheduleItem->text(0) == i18n("Loans"))
+    else if (item->text(0) == i18n("Loans"))
       m_openLoans = false;
   }
 }
@@ -465,15 +582,15 @@ void KScheduledView::slotBriefSkipClicked(const MyMoneySchedule& schedule, const
   emit skipSchedule();
 }
 
-void KScheduledView::slotSetSelectedItem(Q3ListViewItem* item)
+void KScheduledView::slotSetSelectedItem()
 {
   emit scheduleSelected(MyMoneySchedule());
-  KScheduledListItem* schedItem = static_cast<KScheduledListItem*>(item);
+  QTreeWidgetItem* item = m_scheduleTree->currentItem();
   if (item) {
     try {
-      MyMoneySchedule schedule = MyMoneyFile::instance()->schedule(schedItem->scheduleId());
+      MyMoneySchedule schedule = item->data(0, Qt::UserRole).value<MyMoneySchedule>();
       emit scheduleSelected(schedule);
-      m_selectedSchedule = schedItem->scheduleId();
+      m_selectedSchedule = schedule.id();
     } catch (MyMoneyException* e) {
       qDebug("KScheduledView::slotSetSelectedItem: %s", qPrintable(e->what()));
       delete e;

@@ -26,12 +26,11 @@
 // QT Includes
 
 #include <QWidget>
-#include <Q3ListView>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-class K3ListViewSearchLineWidget;
+#include <KTreeWidgetSearchLineWidget>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -40,8 +39,6 @@ class K3ListViewSearchLineWidget;
 #include <mymoneyfile.h>
 #include <mymoneyaccount.h>
 #include "kmymoneyscheduledcalendar.h"
-
-class KMenu;
 
 /**
   * Contains all the scheduled transactions be they bills, deposits or transfers.
@@ -73,6 +70,11 @@ public:
     */
   void showEvent(QShowEvent* event);
 
+  enum ScheduleItemDataRole {
+    ScheduleIdRole = Qt::UserRole,
+    OrderRole = Qt::UserRole + 1
+  };
+
 public slots:
   void slotSelectSchedule(const QString& schedule);
   void slotReloadView(void);
@@ -94,25 +96,30 @@ protected slots:
     * @param pos The position to popup
     * @return none
   **/
-  void slotListViewContextMenu(K3ListView* view, Q3ListViewItem* item, const QPoint& pos);
+  void slotListViewContextMenu(const QPoint& pos);
 
-  void slotListItemExecuted(Q3ListViewItem*, const QPoint&, int);
+  void slotListItemExecuted(QTreeWidgetItem*, int);
 
   void slotAccountActivated(int);
 
-  void slotListViewCollapsed(Q3ListViewItem* item);
-  void slotListViewExpanded(Q3ListViewItem* item);
+  void slotListViewCollapsed(QTreeWidgetItem* item);
+  void slotListViewExpanded(QTreeWidgetItem* item);
 
   void slotBriefSkipClicked(const MyMoneySchedule& schedule, const QDate&);
   void slotBriefEnterClicked(const MyMoneySchedule& schedule, const QDate&);
 
   void slotTimerDone(void);
 
-  void slotSetSelectedItem(Q3ListViewItem* item);
+  void slotSetSelectedItem();
 
   void slotRearrange(void);
 
+protected:
+
+  QTreeWidgetItem* addScheduleItem(QTreeWidgetItem* parent, MyMoneySchedule& schedule);
+
 private:
+
   /// The selected schedule id in the list view.
   QString m_selectedSchedule;
 
@@ -143,7 +150,7 @@ private:
   /**
    * Search widget for the list
    */
-  K3ListViewSearchLineWidget*  m_searchWidget;
+  KTreeWidgetSearchLineWidget*  m_searchWidget;
 };
 
 #endif

@@ -70,19 +70,48 @@
                 <number>0</number>
               </property>
               <item>
-                <widget class="K3ListView" name="m_qlistviewScheduled">
+                <widget class="QTreeWidget" name="m_scheduleTree">
                   <property name="allColumnsShowFocus">
-                    <bool>true</bool>
-                  </property>
-                  <property name="showSortIndicator">
                     <bool>true</bool>
                   </property>
                   <property name="rootIsDecorated">
                     <bool>true</bool>
                   </property>
-                  <property name="shadeSortColumn">
-                    <bool>false</bool>
-                  </property>
+                  <column>
+                   <property name="text">
+                    <string>Type/Name</string>
+                   </property>
+                  </column>
+                  <column>
+                   <property name="text">
+                    <string>Account</string>
+                   </property>
+                  </column>
+                  <column>
+                   <property name="text">
+                    <string>Payee</string>
+                   </property>
+                  </column>
+                  <column>
+                   <property name="text">
+                    <string>Amount</string>
+                   </property>
+                  </column>
+                  <column>
+                   <property name="text">
+                    <string>Next Due Date</string>
+                   </property>
+                  </column>
+                  <column>
+                   <property name="text">
+                    <string>Frequency</string>
+                   </property>
+                  </column>
+                  <column>
+                   <property name="text">
+                    <string>Payment Method</string>
+                   </property>
+                  </column>
                 </widget>
               </item>
             </layout>
@@ -117,11 +146,6 @@
         <verdata>5</verdata>
       </sizepolicy>
       <pixmap>image0</pixmap>
-    </customwidget>
-    <customwidget>
-      <class>K3ListView</class>
-      <extends>Q3ListView</extends>
-      <header location="global">k3listview.h</header>
     </customwidget>
     <customwidget>
       <class>KTabWidget</class>

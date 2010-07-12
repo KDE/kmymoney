@@ -16,7 +16,6 @@ SET(libviews_a_SOURCES
   kmymoneyview.cpp
   kpayeesview.cpp
   kreportsview.cpp
-  kscheduledlistitem.cpp
   kscheduledview.cpp
   )
 
