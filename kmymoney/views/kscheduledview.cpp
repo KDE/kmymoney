@@ -48,7 +48,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kscheduledlistitem.h"
 #include "kmymoneyscheduleddatetbl.h"
 #include <kmymoneyutils.h>
 #include <kmymoneyglobalsettings.h>
