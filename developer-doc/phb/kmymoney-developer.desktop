@@ -1,5 +1,9 @@
 [Desktop Entry]
 Name=KMyMoney developer handbook
+Name[pt]=Manual de desenvolvimento do KMyMoney
+Name[pt_BR]=Manual do desenvolvedor do KMyMoney
+Name[sv]=KMyMoney utvecklarhandbok
+Name[uk]=Підручник для розробників KMyMoney
 Name[x-test]=xxKMyMoney developer handbookxx
 Icon=kmymoney
 Exec=kmymoney
