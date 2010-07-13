@@ -77,7 +77,7 @@ public:
     * @param parent pointer to the QTreeWidget object this entry should be
     *               added to.
     * @param budget const reference to MyMoneyBudget for which
-    *               the K3ListView entry is constructed
+    *               the QTreeWidget entry is constructed
     */
   KBudgetListItem(QTreeWidget *parent, const MyMoneyBudget& budget);
   ~KBudgetListItem();

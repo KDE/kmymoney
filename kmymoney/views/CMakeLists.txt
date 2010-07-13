@@ -12,7 +12,6 @@ SET(libviews_a_SOURCES
   kinstitutionsview.cpp
   kinvestmentview.cpp
   kmymoneyfile.cpp
-  kmymoneytransaction.cpp
   kmymoneyview.cpp
   kpayeesview.cpp
   kreportsview.cpp

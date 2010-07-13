@@ -42,7 +42,6 @@
 // Project Includes
 
 #include "ui_kpayeesviewdecl.h"
-#include "kmymoneytransaction.h"
 #include "mymoneypayee.h"
 
 /**
