@@ -17,6 +17,9 @@ SET(libviews_a_SOURCES
   kpayeesview.cpp
   kreportsview.cpp
   kscheduledview.cpp
+  tocitem.cpp
+  tocitemgroup.cpp
+  tocitemreport.cpp
   )
 
 SET(libviews_a_HEADER kmymoneyview.h)

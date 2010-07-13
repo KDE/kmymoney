@@ -23,8 +23,6 @@
 #ifndef KREPORTSVIEW_H
 #define KREPORTSVIEW_H
 
-
-
 // Some STL headers in GCC4.3 contain operator new. Memory checker mangles these
 #ifdef _CHECK_MEMORY
 #undef new
@@ -36,14 +34,14 @@
 #include <QWidget>
 #include <QVBoxLayout>
 #include <QList>
-
-class Q3ListViewItem;
+#include <QTreeWidget>
+#include <QTreeWidgetItem>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <KHTMLPart>
-#include <k3listview.h>
+#include <KListWidget>
 #include <KTabWidget>
 #include <kfilefiltercombo.h>
 
@@ -61,6 +59,10 @@ class Q3ListViewItem;
 #include "../widgets/kmymoneyreportcontrolimpl.h"
 #include "kreportchartview.h"
 #include "kmymoneyview.h"
+
+#include "tocitem.h"
+#include "tocitemgroup.h"
+#include "tocitemreport.h"
 
 class MyMoneyReport;
 
@@ -133,46 +135,6 @@ public:
   /**
     * Helper class for KReportView.
     *
-    * Associates a report id with a list view item.
-    *
-    * @author Ace Jones
-    */
-
-  class KReportListItem: public K3ListViewItem
-  {
-  private:
-    QString m_id;
-    MyMoneyReport m_report;
-
-  public:
-    KReportListItem(K3ListView* parent, const MyMoneyReport& report):
-        K3ListViewItem(parent, report.name(), report.comment()),
-        m_id(report.id()),
-        m_report(report) {}
-    KReportListItem(K3ListViewItem* parent, const MyMoneyReport& report):
-        K3ListViewItem(parent, report.name(), report.comment()),
-        m_id(report.id()),
-        m_report(report) {}
-    const MyMoneyReport& report(void) const {
-      return m_report;
-    }
-  };
-
-  class KReportGroupListItem: public K3ListViewItem
-  {
-  private:
-    int m_nr;
-    QString m_name;
-
-  public:
-    KReportGroupListItem(K3ListView* parent, const int nr, const QString name);
-    virtual QString key(int column, bool ascending) const;
-    void setNr(const int nr);
-  };
-
-  /**
-    * Helper class for KReportView.
-    *
     * This is a named list of reports, which will be one section
     * in the list of default reports
     *
@@ -199,11 +161,19 @@ private:
   class Private;
   /// \internal d-pointer instance.
   Private* const d;
+
+  bool m_needReload;
+
+  KListWidget* m_reportListView;
   KTabWidget* m_reportTabWidget;
-  K3ListView* m_reportListView;
   QWidget* m_listTab;
   QVBoxLayout* m_listTabLayout;
-  bool m_needReload;
+  QTreeWidget* m_tocTreeWidget;
+  QMap<QString, TocItemGroup*> m_allTocItemGroups;
+
+  bool m_columnsAlreadyAdjusted;
+
+  void restoreTocExpandState(QMap<QString, bool>& expandStates);
 
 public:
   /**
@@ -238,6 +208,8 @@ protected:
   void addReportTab(const MyMoneyReport&);
   void loadView(void);
   static void defaultReports(QList<ReportGroup>&);
+  bool columnsAlreadyAdjusted(void);
+  void setColumnsAlreadyAdjusted(bool adjusted);
 
 public slots:
   void slotOpenUrl(const KUrl &url, const KParts::OpenUrlArguments& args, const KParts::BrowserArguments& browArgs);
@@ -249,14 +221,14 @@ public slots:
   void slotConfigure(void);
   void slotDuplicate(void);
   void slotToggleChart(void);
-  void slotOpenReport(Q3ListViewItem*);
+  void slotItemDoubleClicked(QTreeWidgetItem* item, int);
   void slotOpenReport(const QString&);
   void slotOpenReport(const MyMoneyReport&);
   void slotCloseCurrent(void);
   void slotClose(QWidget*);
   void slotCloseAll(void);
   void slotDelete(void);
-  void slotListContextMenu(K3ListView*, Q3ListViewItem*, const QPoint &);
+  void slotListContextMenu(const QPoint &);
   void slotOpenFromList(void);
   void slotConfigureFromList(void);
   void slotNewFromList(void);
