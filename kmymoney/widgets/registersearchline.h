@@ -39,7 +39,7 @@ namespace KMyMoneyRegister
 /**
   * This class makes it easy to add a search line for filtering the items
   * in a register based on simple text.  Inspired by the idea of the kdelibs
-  * class K3ListViewSearchLine.
+  * class KListViewSearchLine.
   *
   * @author Thomas Baumgart
   */
@@ -102,7 +102,7 @@ private:
 
 /**
   * Creates a widget containing a RegisterSearchLine, a label with the text
-  * "Search" and a button to clear the search. Modelled after K3ListViewSearchLineWidget.
+  * "Search" and a button to clear the search. Modelled after KListViewSearchLineWidget.
   *
   * @author Thomas Baumgart
   */

@@ -105,7 +105,7 @@ void kMyMoneyCompletion::adjustSize(const int count)
   resize(w, h);
 
   if (m_parent) {
-    // the code of this basic block is taken from K3CompletionBox::show()
+    // the code of this basic block is taken from KCompletionBox::show()
     // and modified to our local needs
 
     QRect screenSize = QApplication::desktop()->availableGeometry(parentWidget());
