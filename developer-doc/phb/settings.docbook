@@ -18,12 +18,12 @@
 <itemizedlist>
 <listitem>
 <para>
-Create the view using designer, name it XxxDecl and store it in <filename>kmymoney2/dialogs/settings/xxxdecl.ui</filename>. See more information about naming the items further down
+Create the view using designer, name it XxxDecl and store it in <filename>kmymoney/dialogs/settings/xxxdecl.ui</filename>. See more information about naming the items further down
 </para>
 </listitem>
 <listitem>
 <para>
-Create the class that contains the logic for the settings page, name it Xxx and store it in <filename>kmymoney2/dialogs/settings/xxx.[cpp|h]</filename>.
+Create the class that contains the logic for the settings page, name it Xxx and store it in <filename>kmymoney/dialogs/settings/xxx.[cpp|h]</filename>.
 </para>
 <para>
 Don't forget the Q_OBJECT macro at the beginning of the class declaration in the .h file and make the class a public derivative of XxxDecl 
@@ -31,22 +31,22 @@ Don't forget the Q_OBJECT macro at the beginning of the class declaration in the
 </listitem>
 <listitem>
 <para>
-Add the xxxdecl.ui and xxx.cpp filename to the libsettings_a_SOURCES label in <filename>kmymoney2/dialogs/settings/Makefile.am</filename>
+Add the xxxdecl.ui and xxx.cpp filename to the libsettings_a_SOURCES label in <filename>kmymoney/dialogs/settings/Makefile.am</filename>
 </para>
 </listitem>
 <listitem>
 <para>
-Add the xxxdecl.ui filename to the EXTRA_DIST label in <filename>kmymoney2/dialogs/settings/Makefile.am</filename>
+Add the xxxdecl.ui filename to the EXTRA_DIST label in <filename>kmymoney/dialogs/settings/Makefile.am</filename>
 </para>
 </listitem>
 <listitem>
 <para>
-Add the xxxdecl.cpp and xxxdecl.h filename to the DISTCLEANFILES label in <filename>kmymoney2/dialogs/settings/Makefile.am</filename>
+Add the xxxdecl.cpp and xxxdecl.h filename to the DISTCLEANFILES label in <filename>kmymoney/dialogs/settings/Makefile.am</filename>
 </para>
 </listitem>
 <listitem>
 <para>
-Add the xxx.h filename to the noinst_HEADERS label in <filename>kmymoney2/dialogs/settings/Makefile.am</filename>
+Add the xxx.h filename to the noinst_HEADERS label in <filename>kmymoney/dialogs/settings/Makefile.am</filename>
 </para>
 </listitem>
 <listitem>
@@ -63,7 +63,7 @@ where you replace "text" with a short text that shows up under the icon in the s
 </listitem>
 <listitem>
 <para>
-Make sure to include xxx.h in <filename>kmymoney/kmymoney2.cpp</filename>
+Make sure to include xxx.h in <filename>kmymoney/kmymoney.cpp</filename>
 </para>
 </listitem>
 </itemizedlist>
@@ -73,7 +73,7 @@ Make sure to include xxx.h in <filename>kmymoney/kmymoney2.cpp</filename>
 <title>How to add the setting items</title>
 
 <para>
-For auto-generation of setter/getter code of your options, you have to follow certain rules. For each setting item you need an entry in <filename>kmymoney2/kmymoney2.kcfg</filename>. This is an XML formatted file. The contents of the 'name' attribute will be used as method for the C++-code, eg. a name of "AutoSavePeriod" for an integer parameter results in a setter and getter named
+For auto-generation of setter/getter code of your options, you have to follow certain rules. For each setting item you need an entry in <filename>kmymoney/kmymoney.kcfg</filename>. This is an XML formatted file. The contents of the 'name' attribute will be used as method for the C++-code, eg. a name of "AutoSavePeriod" for an integer parameter results in a setter and getter named
 </para>
 <screen>
 void KMyMoneySettings::setAutoSavePeriod(int)
@@ -84,7 +84,7 @@ You should not access those functions directly from within your code but rather 
 </para>
 
 <para>
-When you name the GUI widget that controls the setting for this parameter make sure to name it "kcfg_AutoSavePeriod", that is "kcfg_" prepended with the name used in <filename>kmymoney2/kmymoney2.kcfg</filename>.
+When you name the GUI widget that controls the setting for this parameter make sure to name it "kcfg_AutoSavePeriod", that is "kcfg_" prepended with the name used in <filename>kmymoney/kmymoney.kcfg</filename>.
 </para>
 
 <para>

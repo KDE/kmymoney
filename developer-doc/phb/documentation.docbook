@@ -24,9 +24,9 @@ Code documentation is discussed in the section "coding."  This section discusses
 <note>
 <para>
 The two exceptions are
-<filename>./kmymoney2/html/home.html</filename>
+<filename>./kmymoney/html/home.html</filename>
 and
-<filename>./kmymoney2/html/whats_new.html</filename>
+<filename>./kmymoney/html/whats_new.html</filename>
 which are used on &kappname;'s internal home page when running the application.
 </para>
 </note>

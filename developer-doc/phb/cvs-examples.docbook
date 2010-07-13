@@ -52,7 +52,7 @@ anymore.
 </para>
 
 <para>
-For the &app; project, a directory named <command>kmymoney2</command> is
+For the &app; project, a directory named <command>kmymoney</command> is
 created in your current working directory.
 </para>
 </example>
@@ -97,7 +97,7 @@ be rejected by &cvs;.
 </para>
 
 <para>
-As in the previous example, the directory kmymoney2 is created as the
+As in the previous example, the directory kmymoney is created as the
 sandbox.
 </para>
 </example>
@@ -132,8 +132,8 @@ can be performed by the <command>diff</command> operation supported by
 <title>Promote changes to the repository</title>
 <para>
 For the following example, I assume a single file that has been changed in
-the sandbox (~/kmymoney2/kmymoney2/knewbankdlg.cpp) and that the current
-directory is ~/kmymoney2/kmymoney2. Also, it is assumed, that the file
+the sandbox (~/kmymoney/kmymoney/knewbankdlg.cpp) and that the current
+directory is ~/kmymoney/kmymoney. Also, it is assumed, that the file
 README has been updated by another person in the repository. Since the
 README file has no influence on the compile process, we omit recompiling in
 this example.
@@ -270,7 +270,7 @@ started, which is checking the changes back into the repository.
 
   <prompt>thb:~&gt; </prompt><userinput>cvs -q ci -m "Avoid return in the middle of a function" knewbankdlg.cpp</userinput>
   Checking in knewbankdlg.cpp;
-  kmymoney2/kmymoney2/knewbankdlg.cpp,v  &lt;--  knewbankdlg.cpp
+  kmymoney/kmymoney/knewbankdlg.cpp,v  &lt;--  knewbankdlg.cpp
   new revision: 1.10; previous revision: 1.9
   done
   <prompt>thb:~&gt; </prompt>
@@ -290,7 +290,7 @@ way is meaningful, if the description is longer or covers more than one file.
 
 <para>
 At this point, the changes are stored in the repository. An automatic mail
-is generated and send to the kmymoney2-developer mailing list 
+is generated and send to the kmymoney-developer mailing list 
 <email>kmymoney2-developer@lists.sourceforge.net</email>. This mail
 informs all other developers about your changes and is an indication for
 them to <link linkend="cvs-update">update</link> their sandboxes. The
@@ -304,7 +304,7 @@ contents of the mail looks something like this:
   Date: Sat, 24 Nov 2001 12:23:00 -0800
   Subject: [Kmymoney2-developer] CVS update:
  
-  Update of /cvsroot/kmymoney2/kmymoney2/kmymoney2
+  Update of /cvsroot/kmymoney/kmymoney/kmymoney
   In directory usw-pr-cvs1:/tmp/cvs-serv6662
 
   Modified Files:
@@ -322,10 +322,10 @@ contents of the mail looks something like this:
 
 <para>
 While you checkin your changes, you should maintain the file
-<command>kmymoney2/ChangeLog</command>. You could probably use the same
+<command>kmymoney/ChangeLog</command>. You could probably use the same
 comments that you use for checkin in your changes or a more general note
 for many changes. That depends on your changes. Once all your changes are
-checked in, you also checkin <command>kmymoney2/ChangeLog</command>. 
+checked in, you also checkin <command>kmymoney/ChangeLog</command>. 
 </para>
 </section>
 
@@ -491,13 +491,13 @@ directory so I did it as follows:
 
   <prompt>thb:~&gt; </prompt><userinput>md devel</userinput>
   <prompt>thb:~&gt; </prompt><userinput>md stable</userinput>
-  <prompt>thb:~&gt; </prompt><userinput>mv kmymoney2 devel</userinput>
+  <prompt>thb:~&gt; </prompt><userinput>mv kmymoney devel</userinput>
   <prompt>thb:~&gt; </prompt>
 
 
 </screen>
 </example>
-Now the development sources are found in ~/devel/kmymoney2/. It is
+Now the development sources are found in ~/devel/kmymoney/. It is
 important to move all the CVS directories as well. If you start from
 scratch, then you just follow the instructions on how to checkout the
 project and do that in the <command>devel</command> subdirectory. See the
@@ -596,11 +596,11 @@ is now 1.14.2.2.
 <title>Promoting a change from the release to the development branch</title>
 <screen>
 
-  <prompt>thb:~&gt; </prompt><userinput>cd devel/kmymoney2</userinput>
-  <prompt>thb:~/devel/kmymoney2&gt; </prompt><userinput>cvs -q upd -j 1.14.2.1 -j 1.14.2.2 README</userinput>
-  <prompt>thb:~/devel/kmymoney2&gt; </prompt><userinput>vi README</userinput>
-  <prompt>thb:~/devel/kmymoney2&gt; </prompt><userinput>cvs ci -m "Included fix #493920" README</userinput>
-  <prompt>thb:~/devel/kmymoney2&gt; </prompt>
+  <prompt>thb:~&gt; </prompt><userinput>cd devel/kmymoney</userinput>
+  <prompt>thb:~/devel/kmymoney&gt; </prompt><userinput>cvs -q upd -j 1.14.2.1 -j 1.14.2.2 README</userinput>
+  <prompt>thb:~/devel/kmymoney&gt; </prompt><userinput>vi README</userinput>
+  <prompt>thb:~/devel/kmymoney&gt; </prompt><userinput>cvs ci -m "Included fix #493920" README</userinput>
+  <prompt>thb:~/devel/kmymoney&gt; </prompt>
 
 
 </screen>
@@ -661,15 +661,15 @@ checked into the repository.
 
 <screen>
 
-  <prompt>thb:~&gt; </prompt><userinput>cd devel/kmymoney2</userinput>
-  <prompt>thb:~/devel/kmymoney2&gt; </prompt><userinput>cvs tag rel-0-4-pre1</userinput>
-  <prompt>thb:~/devel/kmymoney2&gt; </prompt><userinput>cvs tag -b rel-0-4-branch</userinput>
+  <prompt>thb:~&gt; </prompt><userinput>cd devel/kmymoney</userinput>
+  <prompt>thb:~/devel/kmymoney&gt; </prompt><userinput>cvs tag rel-0-4-pre1</userinput>
+  <prompt>thb:~/devel/kmymoney&gt; </prompt><userinput>cvs tag -b rel-0-4-branch</userinput>
 
   Now modify the version number in KDevelop to 0.5.0, regenerate the files and
   checkin the changes as usual.
 
-  <prompt>thb:~/devel/kmymoney2&gt; </prompt><userinput>cvs tag rel-0-5-base</userinput>
-  <prompt>thb:~/devel/kmymoney2&gt; </prompt>
+  <prompt>thb:~/devel/kmymoney&gt; </prompt><userinput>cvs tag rel-0-5-base</userinput>
+  <prompt>thb:~/devel/kmymoney&gt; </prompt>
 
 
 </screen>

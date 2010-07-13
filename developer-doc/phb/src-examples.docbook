@@ -48,8 +48,8 @@ This appendix contains an example of a
 
 /**
   * This class is used to manipulate all the settings available for
-  * KMyMoney2. It currently stores the values for the list settings
-  * and whether to show the start dialog when KMyMoney2 starts.
+  * KMyMoney. It currently stores the values for the list settings
+  * and whether to show the start dialog when KMyMoney starts.
   *
   * It uses KDialogBase to implement it's interface.
   *
@@ -61,7 +61,7 @@ This appendix contains an example of a
   * @author Michael Edwardes 2000-2001
   * $Id: src-examples.docbook,v 1.3 2005/05/27 19:05:18 ipwizard Exp $
   *
-  * @short A class to manipulate the settings needed for running KMyMoney2
+  * @short A class to manipulate the settings needed for running KMyMoney
 **/
 class KSettingsDlg : public KDialogBase  {
    Q_OBJECT

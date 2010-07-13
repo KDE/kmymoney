@@ -64,7 +64,7 @@ development branch in CVS are also adjusted. More details below.
 <para>Create a new directory for this release
 </para>
 <para>
-Create a new directory specifically for the release process, something like /home/me/distkmm, which will ensure that the following steps are not contaminated by other, existing versions of &app;. From this directory, check out a copy of the app from the CVS branch which forms the basis of this release, e.g. for 0.8.2, the branch will be rel-0-8-branch. The checkout process will create a sub-directory called kmymoney2. This is referred to subsequently as the TLD (top level directory).
+Create a new directory specifically for the release process, something like /home/me/distkmm, which will ensure that the following steps are not contaminated by other, existing versions of &app;. From this directory, check out a copy of the app from the CVS branch which forms the basis of this release, e.g. for 0.8.2, the branch will be rel-0-8-branch. The checkout process will create a sub-directory called kmymoney. This is referred to subsequently as the TLD (top level directory).
 </para>
 </listitem>
 
@@ -79,7 +79,7 @@ Update the text source file for translations.
 </programlisting>
 </para>
 <para>
-This will create the file kmymoney2.pot in TLD/po, and will merge all new and changed messages into the various translation files in the same directory. These files (kmymoney2.pot and *.po) should be committed to the appropriate branch of CVS. Also, an announcement should be made on the translator's mailing list that these are ready for updating, and mentioning a date a few days before the proposed release date as a deadline for translations to be submitted.
+This will create the file kmymoney.pot in TLD/po, and will merge all new and changed messages into the various translation files in the same directory. These files (kmymoney.pot and *.po) should be committed to the appropriate branch of CVS. Also, an announcement should be made on the translator's mailing list that these are ready for updating, and mentioning a date a few days before the proposed release date as a deadline for translations to be submitted.
 </para>
 <para>
 At this point also, a 'string freeze' for the base release should be declared on the developer's list. From now on until the release is complete, the only changes which should be committed to the CVS branch should be fixes which do not change translatable strings, and updated .po files submitted by translators.
@@ -87,7 +87,7 @@ At this point also, a 'string freeze' for the base release should be declared on
 <para>
 As each .po file is committed, it is desirable to update the translation statistics on the project web site. This can be performed with the command
   <programlisting>
-  make message-stats | ssh &lt;your_sf_userid&gt;@user.sourceforge.net "cat > /home/groups/k/km/kmymoney2/htdocs/translate-stable.xml"
+  make message-stats | ssh &lt;your_sf_userid&gt;@user.sourceforge.net "cat > /home/groups/k/km/kmymoney/htdocs/translate-stable.xml"
   </programlisting>
 You should certainly make sure that this command is run at least once, after all .po files have been committed.
 </para>
@@ -102,7 +102,7 @@ Check that the version number is correct.
 </para>
 <para>
 In the TLD, check file configure.in.in for the correct version number. A line near the top should look like</para>
-  <programlisting>AM_INIT_AUTOMAKE(kmymoney2,0.8.3)</programlisting>
+  <programlisting>AM_INIT_AUTOMAKE(kmymoney,0.8.3)</programlisting>
 <para>If the last digits don't match the release number, then change them and commit your change to the repository with the message 'Bumped to release x.y.z'.
 </para>
 </listitem>
@@ -173,9 +173,9 @@ Check the distribution
 <para>
 Before doing this, check that all desktop files conform to the freedesktop specification. From the TLD, issue the following command:
 <programlisting>
-<prompt>thb: ~&gt; </prompt><userinput>find ./kmymoney2 -name '*.desktop' -exec desktop-file-validate {} \;</userinput>
+<prompt>thb: ~&gt; </prompt><userinput>find ./kmymoney -name '*.desktop' -exec desktop-file-validate {} \;</userinput>
 </programlisting>
-N.B. Any errors in file x-kmymoney2.desktop can be ignored since kde3 does not conform to the specification for this file type.
+N.B. Any errors in file x-kmymoney.desktop can be ignored since kde3 does not conform to the specification for this file type.
 </para>
 <para>
 Note: desktop-file-validate is part of the desktop-file-utils package, which may be installed from your distribution repository, or downloaded from

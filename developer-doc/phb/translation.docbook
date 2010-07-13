@@ -27,7 +27,7 @@ in <literal role="extension">.po</literal>.
 Files ending in <literal role="extension">.pot</literal> are the source
 for the translation.
 They only contain the English texts you need to translate and are generated
-for each release of the project.  The one for &app; is named <filename>kmymoney2.pot</filename>.
+for each release of the project.  The one for &app; is named <filename>kmymoney.pot</filename>.
 The po file contains the English and the translated text, e.g. German.
 There might be two cases: The first case you can't find a po file for your
 language or the second there is already a po file for your language available.
@@ -61,7 +61,7 @@ The next step is to create a po file to start the translation.
 <sect3 id="no-po">
 <title>No po file for my language available</title>
 <para>
-That's the most simple case: Rename <filename>kmymoney2.pot</filename> to
+That's the most simple case: Rename <filename>kmymoney.pot</filename> to
 <filename>lang.po</filename> where <emphasis>lang</emphasis>
 is your language code e.g. <emphasis>de</emphasis> for German.
 </para>
@@ -89,7 +89,7 @@ done using <application>kbabel</application> very easily .
 <itemizedlist>
 <listitem>
 <para>
-Copy <filename>kmymoney2.pot</filename> to <filename>lang-new.po</filename>
+Copy <filename>kmymoney.pot</filename> to <filename>lang-new.po</filename>
 and open this file with <application>kbabel</application>.
 </para>
 </listitem>
@@ -173,7 +173,7 @@ Now run as root the command
 
 <screen>
 
-  <prompt>thb:~&gt; </prompt><userinput><command>msgfmt</command> <option>-vvv</option> <replaceable>lang.po</replaceable> kmymoney2.mo</userinput>
+  <prompt>thb:~&gt; </prompt><userinput><command>msgfmt</command> <option>-vvv</option> <replaceable>lang.po</replaceable> kmymoney.mo</userinput>
 
 </screen>
 
@@ -189,7 +189,7 @@ text. If you can't find the file on your harddrive try either
 
 <screen>
 
-  <prompt>thb:~&gt; </prompt><userinput><command>find</command> / <option>-name</option> kmymoney2.mo</userinput>
+  <prompt>thb:~&gt; </prompt><userinput><command>find</command> / <option>-name</option> kmymoney.mo</userinput>
 
 </screen>
 
@@ -198,7 +198,7 @@ installation you can run
 
 <screen>
 
-  <prompt>thb:~&gt; </prompt><userinput><command>rpm</command> <option>-q kmymoney2</option> <option>--filesbypkg</option></userinput>
+  <prompt>thb:~&gt; </prompt><userinput><command>rpm</command> <option>-q kmymoney</option> <option>--filesbypkg</option></userinput>
 
 </screen>
 
@@ -209,7 +209,7 @@ is the language you want to test) or call it via
 
 <screen>
 
-  <prompt>thb:~&gt; </prompt><userinput>KDE_LANG=de <command>kmymoney2</command></userinput>
+  <prompt>thb:~&gt; </prompt><userinput>KDE_LANG=de <command>kmymoney</command></userinput>
 
 </screen>
 
@@ -231,7 +231,7 @@ First, get the latest pot file. And in the po folder, run this command.
 
 <screen>
 
-  <prompt>thb:~/kmymoney2/po&gt; </prompt><userinput><command>make</command> <option>-f</option> <option>../admin/Makefile.common</option> <option>package-merge</option> <option>POFILES=<replaceable>"de.po"</replaceable></option> <option>PACKAGE=kmymoney2</option></userinput>
+  <prompt>thb:~/kmymoney/po&gt; </prompt><userinput><command>make</command> <option>-f</option> <option>../admin/Makefile.common</option> <option>package-merge</option> <option>POFILES=<replaceable>"de.po"</replaceable></option> <option>PACKAGE=kmymoney</option></userinput>
 
 </screen>
 
@@ -239,7 +239,7 @@ You can merge multiple po files at the same time. Just list them in the POFILES 
 
 <screen>
 
-  <prompt>thb:~/kmymoney2/po&gt; </prompt><userinput><command>make</command> <option>-f</option> <option>../admin/Makefile.common</option> <option>package-merge</option> <option>POFILES=<replaceable>"de.po es.po"</replaceable></option> <option>PACKAGE=kmymoney2</option></userinput>
+  <prompt>thb:~/kmymoney/po&gt; </prompt><userinput><command>make</command> <option>-f</option> <option>../admin/Makefile.common</option> <option>package-merge</option> <option>POFILES=<replaceable>"de.po es.po"</replaceable></option> <option>PACKAGE=kmymoney</option></userinput>
 
 </screen>
 

@@ -187,8 +187,8 @@ ln -s ../common common
 
 #
 #
-%_datadir/applications/kde/kmymoney2.desktop
-%_datadir/mimelnk/application/x-kmymoney2.desktop
+%_datadir/applications/kde/kmymoney.desktop
+%_datadir/mimelnk/application/x-kmymoney.desktop
 %_datadir/servicetypes/*
 
 #
@@ -197,7 +197,7 @@ ln -s ../common common
 
 #
 #
-%doc %_mandir/man1/kmymoney2.1.gz
+%doc %_mandir/man1/kmymoney.1.gz
 
 #
 #
@@ -265,7 +265,7 @@ ln -s ../common common
 - added man page file
 
 * Thu Jan 9 2003 - ipwizard (at) users.sourcforge.net
-- Added missing files home.html and kmymoney2.css
+- Added missing files home.html and kmymoney.css
 
 * Mon Dec 16 2002 - ipwizard (at) users.sourcforge.net
 - Removed make command only required for CVS download

@@ -12,7 +12,7 @@
     <sect1 id="dialogs-naming">
       <title>Naming the dialog</title>
       <para/>
-      <para>First step is to choose a meaningful name for your dialog (and preferably one that's not already in use! - see the kmymoney2/dialogs source directory). In accordance with &kappname; coding conventions, the name should consist of 2 or 3 (or more) 'words', strung together without spaces. To keep names to a manageable length, these 'words' may be abbreviated, e.g. 'sched' for 'schedule'. Each 'word' should be spelt with an initial upper-case letter. Also, the names of dialogs are always preceded by a letter 'K', thus e.g. KEditSchedTrans. This name will be indicated in the rest of this chapter by &lt;KN&gt;. There are nevertheless occasions where all lower case letters are appropriate, specifically source file names; this will be indicated as &lt;kn&gt;.</para>
+      <para>First step is to choose a meaningful name for your dialog (and preferably one that's not already in use! - see the kmymoney/dialogs source directory). In accordance with &kappname; coding conventions, the name should consist of 2 or 3 (or more) 'words', strung together without spaces. To keep names to a manageable length, these 'words' may be abbreviated, e.g. 'sched' for 'schedule'. Each 'word' should be spelt with an initial upper-case letter. Also, the names of dialogs are always preceded by a letter 'K', thus e.g. KEditSchedTrans. This name will be indicated in the rest of this chapter by &lt;KN&gt;. There are nevertheless occasions where all lower case letters are appropriate, specifically source file names; this will be indicated as &lt;kn&gt;.</para>
       <para/>
     </sect1>
     <sect1 id="dialogs-designing">
@@ -41,7 +41,7 @@
       <sect2 id="dialogs-saving-ui">
         <title>Saving the UI</title>
         <para/>
-        <para>When complete, save the form using the Designer default name (&lt;kn&gt;dlgdecl.ui) in the dialogs source code folder (kmymoney2/dialogs).</para>
+        <para>When complete, save the form using the Designer default name (&lt;kn&gt;dlgdecl.ui) in the dialogs source code folder (kmymoney/dialogs).</para>
         <para/>
       </sect2>
     </sect1>

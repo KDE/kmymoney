@@ -38,7 +38,7 @@ translation).
 
 <listitem>
 <para>
-All dialogs should be located in the kmymoney2/dialogs directory.
+All dialogs should be located in the kmymoney/dialogs directory.
 </para>
 </listitem>
 
@@ -144,7 +144,7 @@ and same order:
 <listitem>
 <para>
 Each class should have a kdoc compatable comment header to describe the
-class and it's function within kmymoney2.
+class and it's function within kmymoney.
 </para>
 </listitem>
 
