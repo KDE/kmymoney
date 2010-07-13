@@ -26,7 +26,7 @@
 #include <QFile>
 #include <QMap>
 #include <QXmlLocator>
-#include <Q3TextStream>
+#include <QTextStream>
 #include <QList>
 
 // ----------------------------------------------------------------------------
@@ -500,8 +500,8 @@ void MyMoneyStorageXML::writeFile(QIODevice* qf, IMyMoneySerialize* storage)
   writeBudgets(budgets);
   mainElement.appendChild(budgets);
 
-  Q3TextStream stream(qf);
-  stream.setEncoding(Q3TextStream::UnicodeUTF8);
+  QTextStream stream(qf);
+  stream.setCodec("UTF-8");
   stream << m_doc->toString();
 
   delete m_doc;
