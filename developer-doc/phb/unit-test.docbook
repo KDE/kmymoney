@@ -36,7 +36,7 @@ testing is about. I do not cover all relevant aspects here nor do I start a
 discussion of the various aspects of unit testing. If you want to read more
 about the details of unit testing, the philosophy behind it and about the
 various tools available, please visit the project pages of 
-<ulink url="http://doc.trolltech.com/latest/qtestlib-manual.html/">QtTest</ulink>,
+<ulink url="http://doc.trolltech.com/latest/qtestlib-manual.html">QtTest</ulink>,
 <ulink url="http://www.junit.org/">JUnit</ulink> and
 <ulink url="http://cppunit.sourceforge.net/">CPPUNIT</ulink>.
 The following explanation describes what unit testing is:
@@ -111,7 +111,7 @@ test cases for existing code to get a feeling for what is required.
 <para>
 When &app; was ported to KDE4 the <ulink url="http://cppunit.sourceforge.net/">CPPUNIT</ulink> 
 test engine was replaced with the
-<ulink url="http://doc.trolltech.com/latest/qtestlib-manual.html/">QtTest</ulink>
+<ulink url="http://doc.trolltech.com/latest/qtestlib-manual.html">QtTest</ulink>
 test engine. We did this because &app; is a KDE, thus a Qt, application so it is better
 to use Qt's unit test engine than to have an extra dependency on <ulink url="http://cppunit.sourceforge.net/">CPPUNIT</ulink>.
 </para>
@@ -185,7 +185,7 @@ subdirectory <command>kmymoney/kmymoney/mymoney</command> and it's
  subdirectory <command>storage</command>.</para>
 
 <sect2 id="unit-test-integration">
-<title>Integration of <ulink url="http://doc.trolltech.com/latest/qtestlib-manual.html/">QtTest</ulink> into the &app; project</title>
+<title>Integration of <ulink url="http://doc.trolltech.com/latest/qtestlib-manual.html">QtTest</ulink> into the &app; project</title>
 <para>
 The &app; build system has been configured to build the unit tests only when the
 <emphasis>KDE4_BUILD_TESTS</emphasis> cmake variable is set to <emphasis>ON</emphasis>.
@@ -290,17 +290,16 @@ linkage error caused by the older method.
 <sect2 id="unit-test-methods">
 <title>Standard methods for each testcase</title>
 <para>
-Three methods must exist for each test fixture. These are a default
-constructor, setUp and tearDown. I think, it is not necessary to explain
-the default constructor here. SetUp and tearDown have a special function
-within the test cases. setUp() will be called before the execution of any
-test case in the test fixture. tearDown() will be called after the execution
-of the test case, no matter if the test case passes or fails. Thus setUp()
-is used to perform initialization necessary for each test case in the
-fixture and tearDown() is used to clean things up. setUp() and tearDown()
-should be written in such a way, that all objects created
-through a test case should be removed by tearDown(), i.e. the environment
-is restored exactly to the state it was before the call to setUp().
+
+The init() and initTestCase() slots will be called, if they exist, before 
+the execution of any test case. cleanup() and cleanupTestCase() will be 
+called after the execution of the test case, no matter if the test case 
+passes or fails. Thus init() is used to perform initialization necessary 
+for each test case in the unit test class and cleanup() is used to clean 
+things up. init() and cleanup() should be written in such a way, that 
+all objects created through a test case should be removed by cleanup(), 
+i.e. the environment is restored exactly to the state it was before the 
+call to init().
 
 <note>
 <para>
@@ -313,16 +312,14 @@ e.g. MyMoneyFileTest.
 </para>
 
 <para>
-CPPUNIT comes with a set of macros that help writing testcases. I cover
+QtTest comes with a set of macros that help writing testcases. I cover
 them here briefly. If you wish a more detailed description, please visit
-the
-<ulink url="http://cppunit.sourceforge.net/">CPPUNIT</ulink> project
-homepage.
+the <ulink url="http://doc.trolltech.com/latest/qtestlib-manual.html">QtTest</ulink> page.
 </para>
 </sect2>
 
 <sect2 id="test-macro-assert">
-<title>CPPUNIT_ASSERT</title>
+<title>QVERIFY</title>
 <para>
 This is the macro used at most throughout the test cases. It checks, that a
 given assumption is true. If it is not, the test case fails and a
@@ -330,7 +327,7 @@ respective message will be printed at the end of the testrun.
 </para>
 
 <para>
-CPPUNIT_ASSERT has a single argument which is a boolean expression. The
+QVERIFY has a single argument which is a boolean expression. The
 expression must be true in order to pass the test. If it is false, the test
 case fails and no more code of the test case is executed. The following
 example shows how the macro is used:
@@ -338,9 +335,9 @@ example shows how the macro is used:
 
   int a, b;
   a = 0, b = 1;
-  CPPUNIT_ASSERT(a != b);
+  QVERIFY(a != b);
   a = 1;
-  CPPUNIT_ASSERT(a == b);
+  QVERIFY(a == b);
 
 
 </screen>
@@ -357,7 +354,7 @@ for a demonstration of it's use.
 </sect2>
 
 <sect2 id="test-macro-fail">
-<title>CPPUNIT_FAIL</title>
+<title>QFAIL</title>
 <para>
 This is the macro used when the execution of a test case reaches a point it
 should not. This usually happens, if exceptions are thrown or not thrown.
@@ -371,7 +368,7 @@ displayed.  The following example shows how the macro is used:
   int a = 1, b = 0;
   try {
     a = a / b;
-    CPPUNIT_FAIL("Expected exception missing!");
+    QFAIL("Expected exception missing!");
   } catch (exception *e) {
     delete e;
   }
@@ -380,7 +377,7 @@ displayed.  The following example shows how the macro is used:
     a = a / a;
   } catch (exception *e) {
     delete e;
-    CPPUNIT_FAIL("Unexpected exception!");
+    QFAIL("Unexpected exception!");
   }
   
 
@@ -393,53 +390,16 @@ If either one does not work, the test case fails.
 </sect2>
 
 <sect2 id="test-macro-testsuite-start">
-<title>CPPUNIT_TEST_SUITE</title>
+<title>QTEST_MAIN</title>
 <para>
 This macro is used as the first thing in the declaration of the test fixture.
  A single argument is the name of the class for the test fixture. It starts
-the list of test cases in this fixture defined by the 
-<link linkend="test-macro-testcase">CPPUNIT_TEST</link> macro. The list must be
-terminated using the <link
-linkend="test-macro-testsuite-end">CPPUNIT_TEST_SUITE_END</link> macro.
+the list of test cases defined as slots of the unit test class.
 </para>
 <para>
 See the
 <link linkend="test-header-example">Unit Test Header File Example</link>
 for a demonstration of it's use.
-</para>
-</sect2>
-
-<sect2 id="test-macro-testsuite-end">
-<title>CPPUNIT_TEST_SUITE_END</title>
-<para>
-This macro terminates the list of test cases in a test fixture. It has no
-arguments.
-</para>
-<para>
-See the
-<link linkend="test-header-example">Unit Test Header File Example</link>
-for a demonstration of it's use.
-</para>
-</sect2>
-
-<sect2 id="test-macro-testcase">
-<title>CPPUNIT_TEST</title>
-<para>
-This macro defines a new test case within a test fixture. As argument it
-takes the name of the test case.
-</para>
-<para>
-See the
-<link linkend="test-header-example">Unit Test Header File Example</link>
-for a demonstration of it's use.
-</para>
-</sect2>
-
-<sect2 id="test-macro-registration">
-<title>CPPUNIT_TEST_SUITE_REGISTRATION</title>
-<para>
-This macro registers a test fixture within a test suite. It takes the name
-of the test fixture as argument.
 </para>
 </sect2>
 
