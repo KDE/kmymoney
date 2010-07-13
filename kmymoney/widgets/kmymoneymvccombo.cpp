@@ -183,7 +183,6 @@ void KMyMoneyMVCCombo::editTextChanged(const QString &text)
 {
   if (text.isEmpty()) {
     setCurrentIndex(0);
-    clearEditText();
   } else if (d->m_filterProxyModel && completer()) {
     d->m_filterProxyModel->setFilterFixedString(completer()->completionPrefix());
   }
@@ -224,7 +223,7 @@ void KMyMoneyMVCCombo::focusOutEvent(QFocusEvent* e)
       // the full completion text
       if (e->reason() != Qt::MouseFocusReason) {
         if (d->m_completer->currentCompletion().contains(currentText(), Qt::CaseInsensitive)) {
-          setCurrentText(d->m_completer->currentCompletion());
+          lineEdit()->setText(d->m_completer->currentCompletion());
         }
       }
 
@@ -242,9 +241,6 @@ void KMyMoneyMVCCombo::focusOutEvent(QFocusEvent* e)
         // update the field to a possibly created object
         m_id = id;
         setCurrentTextById(id);
-
-        // make sure the completion does not show through
-        //m_completion->hide();
       }
 
       // else if we cannot create objects, and the current text is not
