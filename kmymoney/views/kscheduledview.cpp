@@ -350,7 +350,11 @@ QTreeWidgetItem* KScheduledView::addScheduleItem(QTreeWidgetItem* parent, MyMone
     MyMoneySecurity currency = MyMoneyFile::instance()->currency(acc.currencyId());
 
     QString accName =  acc.name();
-    item->setText(1, accName);
+    if(!accName.isEmpty()) {
+      item->setText(1, accName);
+    } else {
+      item->setText(1, "---");
+    }
     item->setData(1, OrderRole, QVariant(accName));
 
     QString payeeName;
@@ -364,7 +368,14 @@ QTreeWidgetItem* KScheduledView::addScheduleItem(QTreeWidgetItem* parent, MyMone
 
     MyMoneyMoney amount = split.shares().abs();
     item->setData(3, Qt::UserRole, QVariant::fromValue(amount));
-    item->setText(3, QString("%1  ").arg(amount.formatMoney(acc, currency)));
+    if(!accName.isEmpty()) {
+      item->setText(3, QString("%1  ").arg(amount.formatMoney(acc, currency)));
+    } else {
+      //there are some cases where the schedule does not have an account
+      //in those cases the account will not have a fraction
+      //use base currency instead
+      item->setText(3, QString("%1  ").arg(amount.formatMoney(MyMoneyFile::instance()->baseCurrency())));
+    }
     item->setTextAlignment(3, Qt::AlignRight);
     item->setData(3, OrderRole, QVariant::fromValue(amount));
 
