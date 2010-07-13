@@ -35,7 +35,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <k3listview.h>
 #include <kmenu.h>
 #include <klistwidgetsearchline.h>
 
@@ -51,25 +50,6 @@
   */
 
 /**
-  * This class is used to store a sorted vector of pointers to
-  * the transactions that are visible in a ledger view.
-  */
-class KTransactionPtrVector : public QVector<KMyMoneyTransaction*>
-{
-public:
-
-
-  KTransactionPtrVector() {
-  };
-  ~KTransactionPtrVector() {}
-
-private:
-  QString           m_id;
-};
-
-
-
-/**
   * This class represents an item in the payees list view.
   */
 class KPayeeListItem : public QListWidgetItem
@@ -78,10 +58,10 @@ public:
   /**
     * Constructor to be used to construct a payee entry object.
     *
-    * @param parent pointer to the K3ListView object this entry should be
+    * @param parent pointer to the QListWidget object this entry should be
     *               added to.
     * @param payee const reference to MyMoneyPayee for which
-    *               the K3ListView entry is constructed
+    *               the QListWidget entry is constructed
     */
   KPayeeListItem(QListWidget *parent, const MyMoneyPayee& payee);
   ~KPayeeListItem();
@@ -92,39 +72,6 @@ public:
 
 private:
   MyMoneyPayee  m_payee;
-};
-
-/**
-  * This class represents an item in the transaction list view. It is used
-  * by the KPayeesView to select between transactions.
-  */
-class KTransactionListItem : public K3ListViewItem
-{
-public:
-  KTransactionListItem(K3ListView* view, KTransactionListItem* parent, const QString& accountId, const QString& transaction);
-  ~KTransactionListItem();
-
-  const QString& transactionId(void) const {
-    return m_transactionId;
-  };
-
-  const QString& accountId(void) const {
-    return m_accountId;
-  };
-
-  /**
-    * use my own paint method
-    */
-  void paintCell(QPainter *p, const QColorGroup &cg, int column, int width, int alignment);
-
-  /**
-    * use my own backgroundColor method
-    */
-  const QColor backgroundColor();
-
-private:
-  QString m_transactionId;
-  QString m_accountId;
 };
 
 class KPayeesView : public QWidget, public Ui::KPayeesViewDecl
@@ -212,13 +159,6 @@ private:
     */
   QList<QPair<MyMoneyTransaction, MyMoneySplit> > m_transactionList;
 
-
-  /**
-    * This member keeps a vector of pointers to all visible (filtered)
-    * transaction in m_transactionList in sorted order. Sorting is done
-    * in KTransactionPtrVector::compareItems
-    */
-  KTransactionPtrVector m_transactionPtrVector;
 
   /**
     * This member holds the state of the toggle switch used

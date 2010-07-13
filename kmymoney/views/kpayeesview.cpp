@@ -223,17 +223,19 @@ void KPayeesView::slotChooseDefaultAccount(void)
   MyMoneyFile* file = MyMoneyFile::instance();
   QMap<QString, int> account_count;
 
-  for (int i = 0; i < m_transactionPtrVector.size(); ++i) {
-    KMyMoneyTransaction* t = m_transactionPtrVector[i];
-    MyMoneySplit s = t->splitById(t->splitId());
+  KMyMoneyRegister::RegisterItem* item = m_register->firstItem();
+  while (item) {
+    KMyMoneyRegister::Transaction* t = dynamic_cast<KMyMoneyRegister::Transaction*>(item);
+    item = item->nextItem();
+    MyMoneySplit s = t->transaction().splitByPayee(m_payee.id());
     const MyMoneyAccount& acc = file->account(s.accountId());
 
     QString txt;
     if (s.action() != MyMoneySplit::ActionAmortization
         && acc.accountType() != MyMoneyAccount::AssetLoan
-        && !file->isTransfer(*t)
-        && t->splitCount() == 2) {
-      MyMoneySplit s0 = t->splitByAccount(s.accountId(), false);
+        && !file->isTransfer(t->transaction())
+        && t->transaction().splitCount() == 2) {
+      MyMoneySplit s0 = t->transaction().splitByAccount(s.accountId(), false);
       if (account_count.contains(s0.accountId())) {
         account_count[s0.accountId()]++;
       } else {
@@ -241,6 +243,7 @@ void KPayeesView::slotChooseDefaultAccount(void)
       }
     }
   }
+
   QMap<QString, int>::Iterator most_frequent, iter;
   most_frequent = account_count.begin();
   for (iter = account_count.begin(); iter != account_count.end(); ++iter) {

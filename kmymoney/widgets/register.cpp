@@ -848,6 +848,11 @@ RegisterItem* Register::firstItem(void) const
   return m_firstItem;
 }
 
+RegisterItem* Register::nextItem(RegisterItem* item) const
+{
+  return item->nextItem();
+}
+
 RegisterItem* Register::lastItem(void) const
 {
   return m_lastItem;
